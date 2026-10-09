@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G915, GA15]
+bagimli: [G915, GA15, GB15]
 yazar: [collections/15_Cherry_Blossom/QA_RAPORU.md]
 ---
 

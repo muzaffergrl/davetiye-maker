@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G914, GA14]
+bagimli: [G914, GA14, GB14]
 yazar: [collections/14_Ivory_Lace_Pearl/QA_RAPORU.md]
 ---
 

@@ -1,29 +1,31 @@
 ---
 id: GA01
-baslik: Tasarım 01 Olive & Ivory — animasyon, RSVP formu, yayın, template link
-rol: claude-canva
+baslik: Tasarım 01 Olive & Ivory — video animasyonu + video template link (Canva arayüzü)
+rol: claude-tarayici
 durum: hazir
 alan:
 oncelik: 4
-bagimli: [G004, G301, G601]
+bagimli: [G004, G301]
 yazar: [collections/01_Olive_Ivory/canva/]
 ---
 
 ## Amaç
-Canva API'sinde aracı olmayan işleri G004'te bulunan yolla tasarım 01'e uygulamak.
+Tasarım 01'in video master'ına Canva arayüzünde animasyon/zamanlama eklemek, MP4 ile kontrol etmek ve video template link'i oluşturmak.
 
 ## Girdiler
-- `docs/08_CANVA_UI_BLOKAJ.md`
+- `gorevler/roller/claude-tarayici.md` §3
 - `collections/01_Olive_Ivory/DESIGN_BRIEF.md` (sahne hareketleri)
-- Örnek adımlar: `collections/02_Dusty_Blue/canva/ANIMATION_STEPS.md`
+- Örnek plan: `collections/02_Dusty_Blue/canva/ANIMATION_STEPS.md`
+- `collections/01_Olive_Ivory/canva/DESIGNS.json` (video design ID)
 
 ## Yapılacaklar
-1. `collections/01_Olive_Ivory/canva/ANIMATION_STEPS.md` yaz (sahne/öğe/animasyon/zaman).
-2. Animasyon + website Form + yayın + template link'leri uygula; yapılamayanı blokaj olarak yaz (kullanıcıya iş verme).
-3. MP4 export al ve kontrol et.
+1. `collections/01_Olive_Ivory/canva/ANIMATION_STEPS.md` yoksa brief'ten yaz (sahne/öğe/etki/gecikme/sayfa süresi).
+2. Rehber §3'e göre animasyon + zamanlama + geçiş; MP4 kontrolü.
+3. Video template link → `canva/DESIGNS.json`.
 
 ## Bitti sayılması için
-- [ ] Template link'ler `canva/DESIGNS.json`'da; MP4 export denenmiş
+- [ ] MP4'te öğeler ayrı ve sırayla hareket ediyor
+- [ ] Template link kayıtlı
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_

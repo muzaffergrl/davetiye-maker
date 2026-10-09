@@ -2,7 +2,7 @@
 id: G004
 baslik: Canva UI blokajları için otomasyon yolu araştır
 rol: claude-canva
-durum: inceleme
+durum: bitti
 alan: claude-canva-1
 oncelik: 1
 bagimli: []
@@ -33,8 +33,10 @@ API'si olmayan dört işi (element animasyonu/timeline, website Form/RSVP, websi
 - Karar bekliyor (kullanıcı): A) kullanıcının bilgisayarında Canva oturumlu tarayıcıyı Claude'un sürmesi (önerilen),
   B) animasyon için geçici herkese açık medya adresi, C) RSVP'yi bağlantılı butonla yapmak.
 - Test tasarımları: DAHXhRJIiTQ, DAHXhYgp4e0, DAHXhQPlWPg (satış dışı).
+- **Karar 2026-10-09: A** (hesap Pro). Uygulama: rol `claude-tarayici`, GA02/GANN + GB02/GBNN.
 - Önerilen görev (karar sonrası): A seçilirse GA02 pilotunu kullanıcının bilgisayarındaki oturumla çalıştır.
 
 ## Günlük
 - 2026-10-09 alindi: claude-canva-1
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı

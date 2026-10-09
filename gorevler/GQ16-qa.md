@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G916, GA16]
+bagimli: [G916, GA16, GB16]
 yazar: [collections/16_Sunflower_Rustic/QA_RAPORU.md]
 ---
 

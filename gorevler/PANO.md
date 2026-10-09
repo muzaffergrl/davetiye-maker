@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 314 · alindi 0 · inceleme 1 · blokaj 0 · bitti 1 · toplam 316
+Özet: hazir 334 · alindi 0 · inceleme 0 · blokaj 0 · bitti 2 · toplam 336
 
 ## claude-canva
 
@@ -11,63 +11,23 @@
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (1)**
+**Üzerinde çalışılan / incelemede / blokaj (0)**
 
-- `G004` inceleme · claude-canva-1 — Canva UI blokajları için otomasyon yolu araştır
+- (yok)
 
-Bağımlılık bekleyen: 102 · Biten: 1
+Bağımlılık bekleyen: 82 · Biten: 2
 
-## gpt-gorsel
+## claude-tarayici
 
-**Alınabilir (41)**
+**Alınabilir (1)**
 
-- `G010` p1 — V01 Paket 1 — dokular ve dekor (6 görsel) → `gorevler/G010-v01-paket1-doku-dekor.md`
-- `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
-- `G201` p2 — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1) → `gorevler/G201-gorsel.md`
-- `G203` p2 — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1) → `gorevler/G203-gorsel.md`
-- `G204` p2 — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1) → `gorevler/G204-gorsel.md`
-- `G205` p2 — Tasarım 05 Mediterranean Lemon — GPT görselleri (Paket 1) → `gorevler/G205-gorsel.md`
-- `G206` p2 — Tasarım 06 Art Deco Black-Tie — GPT görselleri (Paket 1) → `gorevler/G206-gorsel.md`
-- `G207` p2 — Tasarım 07 Burgundy Velvet Autumn — GPT görselleri (Paket 1) → `gorevler/G207-gorsel.md`
-- `G208` p2 — Tasarım 08 Winter Evergreen — GPT görselleri (Paket 1) → `gorevler/G208-gorsel.md`
-- `G209` p2 — Tasarım 09 Lavender Provence — GPT görselleri (Paket 1) → `gorevler/G209-gorsel.md`
-- `G210` p2 — Tasarım 10 Tuscan Vineyard — GPT görselleri (Paket 1) → `gorevler/G210-gorsel.md`
-- `G211` p2 — Tasarım 11 Boho Pampas Terracotta — GPT görselleri (Paket 1) → `gorevler/G211-gorsel.md`
-- `G212` p2 — Tasarım 12 Tropical Destination — GPT görselleri (Paket 1) → `gorevler/G212-gorsel.md`
-- `G213` p2 — Tasarım 13 Enchanted Forest Storybook — GPT görselleri (Paket 1) → `gorevler/G213-gorsel.md`
-- `G214` p2 — Tasarım 14 Ivory Lace & Pearls — GPT görselleri (Paket 1) → `gorevler/G214-gorsel.md`
-- `G215` p2 — Tasarım 15 Cherry Blossom Spring — GPT görselleri (Paket 1) → `gorevler/G215-gorsel.md`
-- `G216` p2 — Tasarım 16 Sunflower Rustic Barn — GPT görselleri (Paket 1) → `gorevler/G216-gorsel.md`
-- `G217` p2 — Tasarım 17 Emerald & Gold Estate — GPT görselleri (Paket 1) → `gorevler/G217-gorsel.md`
-- `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — GPT görselleri (Paket 1) → `gorevler/G218-gorsel.md`
-- `G219` p2 — Tasarım 19 Midnight Garden — GPT görselleri (Paket 1) → `gorevler/G219-gorsel.md`
-- `G220` p2 — Tasarım 20 Coastal Seaside — GPT görselleri (Paket 1) → `gorevler/G220-gorsel.md`
-- `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
-- `G801` p4 — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri → `gorevler/G801-mockup.md`
-- `G803` p4 — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri → `gorevler/G803-mockup.md`
-- `G804` p4 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
-- `G805` p4 — Tasarım 05 Mediterranean Lemon — Paket 3 mockup görselleri → `gorevler/G805-mockup.md`
-- `G806` p4 — Tasarım 06 Art Deco Black-Tie — Paket 3 mockup görselleri → `gorevler/G806-mockup.md`
-- `G807` p4 — Tasarım 07 Burgundy Velvet Autumn — Paket 3 mockup görselleri → `gorevler/G807-mockup.md`
-- `G808` p4 — Tasarım 08 Winter Evergreen — Paket 3 mockup görselleri → `gorevler/G808-mockup.md`
-- `G809` p4 — Tasarım 09 Lavender Provence — Paket 3 mockup görselleri → `gorevler/G809-mockup.md`
-- `G810` p4 — Tasarım 10 Tuscan Vineyard — Paket 3 mockup görselleri → `gorevler/G810-mockup.md`
-- `G811` p4 — Tasarım 11 Boho Pampas Terracotta — Paket 3 mockup görselleri → `gorevler/G811-mockup.md`
-- `G812` p4 — Tasarım 12 Tropical Destination — Paket 3 mockup görselleri → `gorevler/G812-mockup.md`
-- `G813` p4 — Tasarım 13 Enchanted Forest Storybook — Paket 3 mockup görselleri → `gorevler/G813-mockup.md`
-- `G814` p4 — Tasarım 14 Ivory Lace & Pearls — Paket 3 mockup görselleri → `gorevler/G814-mockup.md`
-- `G815` p4 — Tasarım 15 Cherry Blossom Spring — Paket 3 mockup görselleri → `gorevler/G815-mockup.md`
-- `G816` p4 — Tasarım 16 Sunflower Rustic Barn — Paket 3 mockup görselleri → `gorevler/G816-mockup.md`
-- `G817` p4 — Tasarım 17 Emerald & Gold Estate — Paket 3 mockup görselleri → `gorevler/G817-mockup.md`
-- `G818` p4 — Tasarım 18 Wildflower Meadow Vellum — Paket 3 mockup görselleri → `gorevler/G818-mockup.md`
-- `G819` p4 — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri → `gorevler/G819-mockup.md`
-- `G820` p4 — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri → `gorevler/G820-mockup.md`
+- `GA02` p1 — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot) → `gorevler/GA02-canva-ui.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (0)**
 
 - (yok)
 
-Bağımlılık bekleyen: 24 · Biten: 0
+Bağımlılık bekleyen: 39 · Biten: 0
 
 ## claude-kod
 
@@ -131,3 +91,55 @@ Bağımlılık bekleyen: 19 · Biten: 0
 - (yok)
 
 Bağımlılık bekleyen: 20 · Biten: 0
+
+## gpt-gorsel
+
+**Alınabilir (41)**
+
+- `G010` p1 — V01 Paket 1 — dokular ve dekor (6 görsel) → `gorevler/G010-v01-paket1-doku-dekor.md`
+- `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
+- `G201` p2 — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1) → `gorevler/G201-gorsel.md`
+- `G203` p2 — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1) → `gorevler/G203-gorsel.md`
+- `G204` p2 — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1) → `gorevler/G204-gorsel.md`
+- `G205` p2 — Tasarım 05 Mediterranean Lemon — GPT görselleri (Paket 1) → `gorevler/G205-gorsel.md`
+- `G206` p2 — Tasarım 06 Art Deco Black-Tie — GPT görselleri (Paket 1) → `gorevler/G206-gorsel.md`
+- `G207` p2 — Tasarım 07 Burgundy Velvet Autumn — GPT görselleri (Paket 1) → `gorevler/G207-gorsel.md`
+- `G208` p2 — Tasarım 08 Winter Evergreen — GPT görselleri (Paket 1) → `gorevler/G208-gorsel.md`
+- `G209` p2 — Tasarım 09 Lavender Provence — GPT görselleri (Paket 1) → `gorevler/G209-gorsel.md`
+- `G210` p2 — Tasarım 10 Tuscan Vineyard — GPT görselleri (Paket 1) → `gorevler/G210-gorsel.md`
+- `G211` p2 — Tasarım 11 Boho Pampas Terracotta — GPT görselleri (Paket 1) → `gorevler/G211-gorsel.md`
+- `G212` p2 — Tasarım 12 Tropical Destination — GPT görselleri (Paket 1) → `gorevler/G212-gorsel.md`
+- `G213` p2 — Tasarım 13 Enchanted Forest Storybook — GPT görselleri (Paket 1) → `gorevler/G213-gorsel.md`
+- `G214` p2 — Tasarım 14 Ivory Lace & Pearls — GPT görselleri (Paket 1) → `gorevler/G214-gorsel.md`
+- `G215` p2 — Tasarım 15 Cherry Blossom Spring — GPT görselleri (Paket 1) → `gorevler/G215-gorsel.md`
+- `G216` p2 — Tasarım 16 Sunflower Rustic Barn — GPT görselleri (Paket 1) → `gorevler/G216-gorsel.md`
+- `G217` p2 — Tasarım 17 Emerald & Gold Estate — GPT görselleri (Paket 1) → `gorevler/G217-gorsel.md`
+- `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — GPT görselleri (Paket 1) → `gorevler/G218-gorsel.md`
+- `G219` p2 — Tasarım 19 Midnight Garden — GPT görselleri (Paket 1) → `gorevler/G219-gorsel.md`
+- `G220` p2 — Tasarım 20 Coastal Seaside — GPT görselleri (Paket 1) → `gorevler/G220-gorsel.md`
+- `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
+- `G801` p4 — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri → `gorevler/G801-mockup.md`
+- `G803` p4 — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri → `gorevler/G803-mockup.md`
+- `G804` p4 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
+- `G805` p4 — Tasarım 05 Mediterranean Lemon — Paket 3 mockup görselleri → `gorevler/G805-mockup.md`
+- `G806` p4 — Tasarım 06 Art Deco Black-Tie — Paket 3 mockup görselleri → `gorevler/G806-mockup.md`
+- `G807` p4 — Tasarım 07 Burgundy Velvet Autumn — Paket 3 mockup görselleri → `gorevler/G807-mockup.md`
+- `G808` p4 — Tasarım 08 Winter Evergreen — Paket 3 mockup görselleri → `gorevler/G808-mockup.md`
+- `G809` p4 — Tasarım 09 Lavender Provence — Paket 3 mockup görselleri → `gorevler/G809-mockup.md`
+- `G810` p4 — Tasarım 10 Tuscan Vineyard — Paket 3 mockup görselleri → `gorevler/G810-mockup.md`
+- `G811` p4 — Tasarım 11 Boho Pampas Terracotta — Paket 3 mockup görselleri → `gorevler/G811-mockup.md`
+- `G812` p4 — Tasarım 12 Tropical Destination — Paket 3 mockup görselleri → `gorevler/G812-mockup.md`
+- `G813` p4 — Tasarım 13 Enchanted Forest Storybook — Paket 3 mockup görselleri → `gorevler/G813-mockup.md`
+- `G814` p4 — Tasarım 14 Ivory Lace & Pearls — Paket 3 mockup görselleri → `gorevler/G814-mockup.md`
+- `G815` p4 — Tasarım 15 Cherry Blossom Spring — Paket 3 mockup görselleri → `gorevler/G815-mockup.md`
+- `G816` p4 — Tasarım 16 Sunflower Rustic Barn — Paket 3 mockup görselleri → `gorevler/G816-mockup.md`
+- `G817` p4 — Tasarım 17 Emerald & Gold Estate — Paket 3 mockup görselleri → `gorevler/G817-mockup.md`
+- `G818` p4 — Tasarım 18 Wildflower Meadow Vellum — Paket 3 mockup görselleri → `gorevler/G818-mockup.md`
+- `G819` p4 — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri → `gorevler/G819-mockup.md`
+- `G820` p4 — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri → `gorevler/G820-mockup.md`
+
+**Üzerinde çalışılan / incelemede / blokaj (0)**
+
+- (yok)
+
+Bağımlılık bekleyen: 24 · Biten: 0

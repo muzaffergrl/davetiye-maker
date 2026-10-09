@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G901, GA01]
+bagimli: [G901, GA01, GB01]
 yazar: [collections/01_Olive_Ivory/QA_RAPORU.md]
 ---
 

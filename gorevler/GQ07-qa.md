@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G907, GA07]
+bagimli: [G907, GA07, GB07]
 yazar: [collections/07_Burgundy_Velvet/QA_RAPORU.md]
 ---
 

@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G911, GA11]
+bagimli: [G911, GA11, GB11]
 yazar: [collections/11_Boho_Pampas/QA_RAPORU.md]
 ---
 

@@ -13,6 +13,7 @@ Kullanıcı elle hiçbir iş yapmaz; ona iş verme, ondan dosya yüklemesi istem
 |---|---|
 | `claude-canva` | Claude Code oturumu (Canva bağlayıcısı var). Aynı zamanda **entegratör** |
 | `gpt-gorsel` | ChatGPT görsel üretimi (imagegen) — bütün görseller |
+| `claude-tarayici` | Claude, kullanıcının bilgisayarında tarayıcıyla (Canva arayüzü işleri) |
 | `claude-kod` | Claude Code oturumu (kod) |
 | `claude-metin` | Claude oturumu (metin) |
 | `claude-qa` | Claude denetçi (salt okunur) |
@@ -33,12 +34,13 @@ Yalnız kendi rolündeki görevi al.
 | G7NN | Tasarım NN — kılavuz + Etsy ilan metni | claude-metin |
 | G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
 | G9NN | Tasarım NN — Etsy ilan kiti montajı | claude-kod |
-| GANN | Tasarım NN — animasyon, RSVP formu, yayın, template link | claude-canva |
+| GANN | Tasarım NN — video animasyonu + video template link | claude-tarayici |
+| GBNN | Tasarım NN — website Form + yayın testi + set template link'leri | claude-tarayici |
 | GQNN | Tasarım NN — QA raporu | claude-qa |
 | GP1NN–GP4NN | Aşama 2: ek 5 palet (prompt, görsel, Canva, ilan) — G090'dan sonra | çeşitli |
 
 NN = tasarım numarası (01–20, `docs/09_TASARIM_KATALOGU.md`). Tasarım 02'nin set görevleri pilot
-numaralarındadır (G013, G020–G027, G902, GA02).
+numaralarındadır (G013, G020–G027, G902, GA02, GB02).
 
 ## 2. Görev dosyası biçimi
 

@@ -12,7 +12,7 @@ Bu dosya Claude Code, Codex (Astra) ve diğer kodlama ajanları içindir. Ayrın
 Bu repoda birden fazla ajan eş zamanlı çalışır. Başlamadan:
 1. `docs/06_FABRIKA_PLANI.md` — ne üretiyoruz (kalıp × kit), roller, aşamalar.
 2. `gorevler/README.md` — görev alma/bitirme protokolü, görev numaraları, çakışma kuralları.
-3. `gorevler/roller/<rolün>.md` — rolüne özel rehber (claude-canva, claude-kod, claude-metin, claude-qa, gpt-gorsel).
+3. `gorevler/roller/<rolün>.md` — rolüne özel rehber (claude-canva, claude-tarayici, claude-kod, claude-metin, claude-qa, gpt-gorsel).
 4. `python3 tools/gorev.py siradaki --rol <rolün>` veya `gorevler/PANO.md` — sana uygun görev.
 
 Yalnız aldığın görevin `yazar:` yollarına yaz. Durum dosyaları (`PROJECT_STATE.json`,

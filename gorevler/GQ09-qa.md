@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G909, GA09]
+bagimli: [G909, GA09, GB09]
 yazar: [collections/09_Lavender_Provence/QA_RAPORU.md]
 ---
 

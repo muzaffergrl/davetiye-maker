@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G913, GA13]
+bagimli: [G913, GA13, GB13]
 yazar: [collections/13_Enchanted_Forest/QA_RAPORU.md]
 ---
 

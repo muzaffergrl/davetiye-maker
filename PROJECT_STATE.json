@@ -520,6 +520,7 @@
     }
   ],
   "blockers": {
-    "canva_ui": "docs/08_CANVA_UI_BLOKAJ.md — template link, animasyon, Form, yayın bu ortamdan yapılamıyor; kullanıcı kararı bekliyor (A önerildi)"
-  }
+    "canva_ui": "Karar A (2026-10-09, hesap Pro): Claude kullanıcının bilgisayarında tarayıcıyla yapar — rol claude-tarayici, GA/GB görevleri. Kanıtlar: docs/08_CANVA_UI_BLOKAJ.md"
+  },
+  "canva_account_plan": "Pro (kullanıcı beyanı 2026-10-09)"
 }

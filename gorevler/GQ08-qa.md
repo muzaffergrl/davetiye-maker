@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G908, GA08]
+bagimli: [G908, GA08, GB08]
 yazar: [collections/08_Winter_Evergreen/QA_RAPORU.md]
 ---
 

@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G920, GA20]
+bagimli: [G920, GA20, GB20]
 yazar: [collections/20_Coastal_Seaside/QA_RAPORU.md]
 ---
 

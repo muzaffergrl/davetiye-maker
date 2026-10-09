@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G918, GA18]
+bagimli: [G918, GA18, GB18]
 yazar: [collections/18_Wildflower_Vellum/QA_RAPORU.md]
 ---
 

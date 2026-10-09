@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G912, GA12]
+bagimli: [G912, GA12, GB12]
 yazar: [collections/12_Tropical_Destination/QA_RAPORU.md]
 ---
 

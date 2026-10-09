@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G919, GA19]
+bagimli: [G919, GA19, GB19]
 yazar: [collections/19_Midnight_Garden/QA_RAPORU.md]
 ---
 

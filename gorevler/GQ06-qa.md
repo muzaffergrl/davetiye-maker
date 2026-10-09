@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G906, GA06]
+bagimli: [G906, GA06, GB06]
 yazar: [collections/06_Art_Deco_Noir/QA_RAPORU.md]
 ---
 

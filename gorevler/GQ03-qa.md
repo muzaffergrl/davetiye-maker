@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G903, GA03]
+bagimli: [G903, GA03, GB03]
 yazar: [collections/03_Blush_Garden_Rose/QA_RAPORU.md]
 ---
 

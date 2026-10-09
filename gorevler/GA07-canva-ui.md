@@ -1,29 +1,31 @@
 ---
 id: GA07
-baslik: Tasarım 07 Burgundy Velvet Autumn — animasyon, RSVP formu, yayın, template link
-rol: claude-canva
+baslik: Tasarım 07 Burgundy Velvet Autumn — video animasyonu + video template link (Canva arayüzü)
+rol: claude-tarayici
 durum: hazir
 alan:
 oncelik: 4
-bagimli: [G004, G307, G607]
+bagimli: [G004, G307]
 yazar: [collections/07_Burgundy_Velvet/canva/]
 ---
 
 ## Amaç
-Canva API'sinde aracı olmayan işleri G004'te bulunan yolla tasarım 07'e uygulamak.
+Tasarım 07'in video master'ına Canva arayüzünde animasyon/zamanlama eklemek, MP4 ile kontrol etmek ve video template link'i oluşturmak.
 
 ## Girdiler
-- `docs/08_CANVA_UI_BLOKAJ.md`
+- `gorevler/roller/claude-tarayici.md` §3
 - `collections/07_Burgundy_Velvet/DESIGN_BRIEF.md` (sahne hareketleri)
-- Örnek adımlar: `collections/02_Dusty_Blue/canva/ANIMATION_STEPS.md`
+- Örnek plan: `collections/02_Dusty_Blue/canva/ANIMATION_STEPS.md`
+- `collections/07_Burgundy_Velvet/canva/DESIGNS.json` (video design ID)
 
 ## Yapılacaklar
-1. `collections/07_Burgundy_Velvet/canva/ANIMATION_STEPS.md` yaz (sahne/öğe/animasyon/zaman).
-2. Animasyon + website Form + yayın + template link'leri uygula; yapılamayanı blokaj olarak yaz (kullanıcıya iş verme).
-3. MP4 export al ve kontrol et.
+1. `collections/07_Burgundy_Velvet/canva/ANIMATION_STEPS.md` yoksa brief'ten yaz (sahne/öğe/etki/gecikme/sayfa süresi).
+2. Rehber §3'e göre animasyon + zamanlama + geçiş; MP4 kontrolü.
+3. Video template link → `canva/DESIGNS.json`.
 
 ## Bitti sayılması için
-- [ ] Template link'ler `canva/DESIGNS.json`'da; MP4 export denenmiş
+- [ ] MP4'te öğeler ayrı ve sırayla hareket ediyor
+- [ ] Template link kayıtlı
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_

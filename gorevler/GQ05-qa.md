@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G905, GA05]
+bagimli: [G905, GA05, GB05]
 yazar: [collections/05_Lemon_Mediterranean/QA_RAPORU.md]
 ---
 

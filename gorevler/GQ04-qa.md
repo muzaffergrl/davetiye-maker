@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G904, GA04]
+bagimli: [G904, GA04, GB04]
 yazar: [collections/04_Vintage_Airmail/QA_RAPORU.md]
 ---
 

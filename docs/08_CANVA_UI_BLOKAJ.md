@@ -3,6 +3,10 @@
 Soru: Canva'da API/MCP aracı olmayan dört işi — **(1) element animasyonu/timeline, (2) website'e Form
 (RSVP), (3) website yayını, (4) template link** — kullanıcıya elle iş vermeden yapabilir miyiz?
 
+> **KARAR (kullanıcı, 2026-10-09): Seçenek A.** Canva hesabı Pro. Claude, kullanıcının bilgisayarında tarayıcıyı/
+> bilgisayarı kullanarak bu işleri yapar — rol `claude-tarayici`, rehber `gorevler/roller/claude-tarayici.md`,
+> görevler GA02/GANN (video) ve GB02/GBNN (website + template link'ler).
+
 **Kısa cevap: bu bulut ortamından, bugünkü araçlarla hayır.** Aşağıda neyin denendiği ve kanıtı var.
 Çözüm için kullanıcıdan bir **karar** gerekiyor (§3); elle iş değil.
 

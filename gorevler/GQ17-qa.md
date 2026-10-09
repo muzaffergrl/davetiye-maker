@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G917, GA17]
+bagimli: [G917, GA17, GB17]
 yazar: [collections/17_Emerald_Gold_Estate/QA_RAPORU.md]
 ---
 

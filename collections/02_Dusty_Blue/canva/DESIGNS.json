@@ -1,0 +1,8 @@
+{
+  "note": "Tasarım 02'nin alıcıya giden Canva tasarımları. template_link alanlarını claude-tarayici doldurur (GA02, GB02). Master edit linkleri alıcıya verilmez.",
+  "video": {"design_id": "DAHXhAaKIhI", "edit_url": "https://www.canva.com/d/Vm8qVW0Y1D4rdcP", "template_link": null, "animated": false, "mp4_checked": null},
+  "website": {"design_id": null, "template_link": null, "form": false, "publish_test": null},
+  "invitation_pdf": {"design_id": null, "template_link": null},
+  "story": {"design_id": null, "template_link": null},
+  "square": {"design_id": null, "template_link": null}
+}

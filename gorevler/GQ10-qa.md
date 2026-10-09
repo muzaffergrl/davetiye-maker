@@ -5,7 +5,7 @@ rol: claude-qa
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G910, GA10]
+bagimli: [G910, GA10, GB10]
 yazar: [collections/10_Tuscan_Vineyard/QA_RAPORU.md]
 ---
 
