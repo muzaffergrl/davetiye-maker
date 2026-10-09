@@ -135,19 +135,36 @@
       "id": "02_Dusty_Blue",
       "working_name": "Dusty Blue & Champagne",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "editable_draft",
       "purpose": "Grafik kalite örneği (kodla çizim); Claude vs GPT görsel üretim kararı için",
       "content_record": "collections/02_Dusty_Blue/content.demo.json",
       "sources": {
         "motion_html": "collections/02_Dusty_Blue/video/invitation_motion.html"
       },
-      "canva_designs": [],
+      "canva_designs": [
+        {
+          "role": "video_master_6_scenes",
+          "design_id": "DAHXgy2GM3s",
+          "edit_url": "https://www.canva.com/d/1TpsKpaHmHzT3Bw",
+          "status": "saved_master",
+          "committed": true,
+          "last_checked": "2026-10-09",
+          "notes": "6 sahne 1080x1920; metinler Canva metni (script YACgEX27qLg, serif YACgEXvxf8Q, italik YACgEUFdPdA, buton YAFdJpU7Kkk); katmanlar canva/ASSET_MAP.json. Animasyonlar henüz yok (canva/ANIMATION_STEPS.md). Görseller HTML katmanları; GPT görselleri gelince update_fill ile değişecek. MP4 export işi Canva'da başarılı döndü; indirme bu ortamda export-download.canva.com engeli yüzünden doğrulanamadı."
+        },
+        {
+          "role": "generator_source_unused",
+          "design_id": "DAHXg03QiQ8",
+          "status": "concept",
+          "notes": "Canva create-design çıktısı (tek sayfa, 5 bant); yalnız fontlu metin kutularının kaynağı olarak kullanıldı."
+        }
+      ],
       "deliverables": {
         "html_motion_render_mp4": "done (HTML render, Canva değil)",
-        "canva_editable_master": "not_started",
+        "canva_editable_master": "saved_master (animasyonsuz)",
         "website": "not_started",
         "guest_pdf": "not_started"
-      }
+      },
+      "canva_account_note": "Bu set claude.ai'ye bağlı Canva hesabında. Olive & Ivory (01) tasarımları bu hesaptan açılamıyor (permission_denied)."
     }
   ]
 }

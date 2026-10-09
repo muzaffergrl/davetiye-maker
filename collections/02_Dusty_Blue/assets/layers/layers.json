@@ -1,0 +1,19 @@
+[
+  { "name": "bg_mist.jpg", "selector": "#bokeh", "full": true },
+  { "name": "botanical_tl.png", "selector": "svg.bot[data-seed='3']" },
+  { "name": "botanical_br.png", "selector": "svg.bot[data-seed='11']" },
+  { "name": "envelope_back.png", "selector": ".env-back", "pad": 70 },
+  { "name": "envelope_liner_open.png", "selector": ".flap-open", "pad": 4 },
+  { "name": "envelope_pocket.png", "selector": ".pocket", "pad": 10 },
+  { "name": "envelope_flap_closed.png", "selector": ".flap-closed", "pad": 14 },
+  { "name": "wax_seal.png", "selector": ".env svg.seal", "pad": 24, "css": "svg.seal text { display: none !important; }" },
+  { "name": "card_small_blank.png", "selector": ".card-in", "pad": 30, "hide": [".card-in .land", ".card-in .script", ".card-in .caps"] },
+  { "name": "photo_placeholder_wide.jpg", "selector": ".card-in .land" },
+  { "name": "polaroid_frame.png", "selector": ".pol", "pad": 50, "hide": [".pol svg", ".pol .cap"] },
+  { "name": "photo_placeholder_1.jpg", "selector": ".pol svg.land[data-pal='1']" },
+  { "name": "photo_placeholder_2.jpg", "selector": ".pol svg.land[data-pal='2']" },
+  { "name": "photo_placeholder_3.jpg", "selector": ".pol svg.land[data-pal='3']" },
+  { "name": "invitation_card_blank.png", "selector": ".card", "pad": 70, "show": [".card .b1", ".card .b2"], "hide": [".card > .center", ".card .bot"] },
+  { "name": "card_botanical_tl.png", "selector": "svg.bot[data-seed='21']" },
+  { "name": "card_botanical_br.png", "selector": "svg.bot[data-seed='34']" }
+]

@@ -1,6 +1,6 @@
 # Koleksiyon 02 — Dusty Blue & Champagne (çalışma adı)
 
-**Durum:** `concept` — grafik kalite örneği. Satış ürünü değil. Son güncelleme: 2026-10-09.
+**Durum:** `editable_draft` — Canva video master kuruldu (animasyonsuz). Satış ürünü değil. Son güncelleme: 2026-10-09.
 
 ## Amaç
 Kullanıcı, grafik üretimin kim tarafından yapılacağına (Claude kodla / GPT görsel modeliyle)
@@ -53,7 +53,7 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 ## Set paketi durumu (`docs/05_SET_PAKETI.md`)
 | # | Parça | Durum |
 |---|---|---|
-| A1 | Canva video (animasyonlu) | başlanmadı — GPT dokuları bekleniyor |
+| A1 | Canva video (animasyonlu) | **kayıtlı master** `DAHXgy2GM3s` (6 sahne, düzenlenebilir metin/foto) · animasyonlar Canva arayüzünde eklenecek (`canva/ANIMATION_STEPS.md`) · görseller HTML katmanı, GPT görselleriyle değişecek |
 | A2 | Canva website + Form RSVP | başlanmadı |
 | A3 | Davetiye PDF | başlanmadı |
 | A4 | Paylaşım görseli (story + kare) | başlanmadı |
@@ -61,4 +61,4 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 | B1–B3 | Etsy ilan görselleri, video, ilan PDF'i | başlanmadı |
 
 GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (Paket 1 dokular/dekor · Paket 2 fotoğraflar · Paket 3 mockup'lar).
-Engel: Canva'ya yerel dosya yükleme bu ortamda `canva.com` ağ izni bekliyor.
+Canva yükleme çalışıyor (canva.com izinli). Export dosyalarını indirmek için `export-download.canva.com` da izinli olmalı.
