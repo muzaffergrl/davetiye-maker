@@ -77,3 +77,7 @@ yayın URL'si, son kontrol tarihi.
    arayüzde denenir.
 5. **Etsy ilan PDF'i:** Her set için ilan görselleri, video ve Etsy'nin istediği tüm alanları içeren
    PDF hazırlanır ve `collections/<koleksiyon>/package/listing/` içine konur.
+6. **Kullanıcı elle hiçbir iş yapmaz (2026-10-09).** Bütün üretimi Claude ve GPT yapar.
+   Kullanıcıya Canva arayüzünde animasyon, Form, yayın, template link veya başka bir elle adım
+   **teklif edilmez, görev olarak verilmez.** API'si olmayan iş açık blokaj olarak kaydedilir ve
+   otomasyon yolu (tarayıcı otomasyonu, alternatif teknik) Claude tarafından aranır.

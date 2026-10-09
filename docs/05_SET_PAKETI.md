@@ -33,16 +33,19 @@ Satış öncesi iki ayrı hesapla A/B testi yapılır; test yapılmadan "working
 
 ## C. Kim neyi yapar? (araç sınırları — dürüst liste)
 
-| İş | Claude | Kullanıcı (Canva arayüzünde) |
+Kural (AGENTS.md, kalıcı talep 6): **kullanıcı elle hiçbir şey yapmaz.** Üretimi Claude ve GPT
+yapar. Aşağıda API'si olmayan işler kullanıcıya verilmez; açık blokaj olarak takip edilir.
+
+| İş | Kim | Durum |
 |---|---|---|
-| Tasarım, yerleşim, metin, katmanlar, görsel yerleştirme | ✅ Canva araçlarıyla | — |
-| GPT görsel prompt'ları | ✅ `assets/gpt/GPT_PROMPTS.md` | GPT'de üretip klasöre koyar |
-| Element animasyonu + timeline zamanlaması | ❌ araç yok | Animate + timeline (adımları Claude yazar) |
-| Website'e Form (RSVP) ekleme | ❌ araç yok | Elements → Form (adımları Claude yazar) |
-| Website yayınlama | ❌ araç yok | Publish |
-| Template link oluşturma | ❌ araç yok | Share → Template link |
-| PDF/PNG/MP4 export | ✅ export aracı | — |
-| Kılavuz PDF ve Etsy PDF içerikleri | ✅ | Ticari bilgileri (marka, fiyat, destek e-postası) verir |
+| Tasarım, yerleşim, metin, katmanlar, görsel yerleştirme | Claude (Canva araçları) | çalışıyor |
+| Doku/dekor/foto/mockup görselleri | GPT (prompt'u Claude yazar) | çalışıyor |
+| PDF/PNG/MP4 export | Claude | çalışıyor |
+| Kılavuz PDF ve Etsy PDF içerikleri | Claude | çalışıyor (ticari alanlar yer tutucu) |
+| Element animasyonu + timeline | — | **blokaj:** Canva API'de yok; otomasyon yolu aranıyor |
+| Website'e Form (RSVP) | — | **blokaj:** Canva API'de yok |
+| Website yayınlama | — | **blokaj:** Canva API'de yok |
+| Template link oluşturma | — | **blokaj:** Canva API'de yok |
 
 Not: Bu tablo araçlar değiştikçe güncellenir. Canva'ya yerel dosya yüklemek için çalışma
 ortamının ağ ayarında `canva.com` izinli olmalı.
