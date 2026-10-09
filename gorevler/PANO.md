@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 327 · alindi 7 · inceleme 0 · blokaj 1 · bitti 4 · toplam 339
+Özet: hazir 327 · alindi 5 · inceleme 2 · blokaj 1 · bitti 4 · toplam 339
 
 ## claude-canva
 
@@ -72,8 +72,8 @@ Bağımlılık bekleyen: 78 · Biten: 2
 
 **Üzerinde çalışılan / incelemede / blokaj (2)**
 
-- `G024` alindi · claude-metin-1 — A5 — START HERE kılavuz metni (İngilizce)
-- `G025` alindi · claude-metin-1 — B3 — Etsy ilan metni
+- `G024` inceleme · claude-metin-1 — A5 — START HERE kılavuz metni (İngilizce)
+- `G025` inceleme · claude-metin-1 — B3 — Etsy ilan metni
 
 Bağımlılık bekleyen: 19 · Biten: 0
 
