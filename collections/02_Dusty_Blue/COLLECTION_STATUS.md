@@ -1,6 +1,6 @@
 # Koleksiyon 02 — Dusty Blue & Champagne (çalışma adı)
 
-**Durum:** `editable_draft` — Canva video master kuruldu (animasyonsuz). Satış ürünü değil. Son güncelleme: 2026-10-09.
+**Durum:** `editable_draft` — Canva video master yeni Canva hesabında yeniden kuruldu (`DAHXhAaKIhI`, animasyonsuz, **taslakta — onay + commit bekliyor**). Satış ürünü değil. Son güncelleme: 2026-10-09.
 
 ## Amaç
 Kullanıcı, grafik üretimin kim tarafından yapılacağına (Claude kodla / GPT görsel modeliyle)
@@ -53,7 +53,7 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 ## Set paketi durumu (`docs/05_SET_PAKETI.md`)
 | # | Parça | Durum |
 |---|---|---|
-| A1 | Canva video (animasyonlu) | **kayıtlı master** `DAHXgy2GM3s` (6 sahne, düzenlenebilir metin/foto) · animasyonlar Canva arayüzünde eklenecek (`canva/ANIMATION_STEPS.md`) · görseller HTML katmanı, GPT görselleriyle değişecek · Canva MP4 export doğrulandı (30 sn, 1080×1920, animasyonsuz: `previews/canva_master_static_export.mp4`) · polaroid eğimi export'ta uygulanmıyor |
+| A1 | Canva video (animasyonlu) | **v2 taslak** `DAHXhAaKIhI` (yeni hesap) · 6 sahne, 17 ayrı görsel katman, tüm metinler Canva metni · transaction `1558763910934449378` **commit edilmedi** (onay bekliyor) · önizleme: `previews/canva_master_v2_draft_6scenes.png` (Canva önizlemesi) · animasyonlar yok: Canva API'de animasyon işlemi yok, PPTX içe aktarma animasyon taşımıyor → `canva/ANIMATION_STEPS.md` arayüzde · eski master `DAHXgy2GM3s` eski hesapta, bu hesaptan açılmıyor |
 | A2 | Canva website + Form RSVP | başlanmadı |
 | A3 | Davetiye PDF | başlanmadı |
 | A4 | Paylaşım görseli (story + kare) | başlanmadı |
@@ -61,4 +61,4 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 | B1–B3 | Etsy ilan görselleri, video, ilan PDF'i | başlanmadı |
 
 GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (Paket 1 dokular/dekor · Paket 2 fotoğraflar · Paket 3 mockup'lar).
-Canva yükleme çalışıyor (canva.com izinli). Export indirme çalışıyor (`export-download.canva.com` izinli).
+Canva yükleme çalışıyor (canva.com izinli). Katman yeniden yükleme/PPTX araçları: `tools/build_canva_pptx.py` (Canva doğrudan PPTX yüklemeyi reddediyor; import-design-from-url herkese açık URL ister). Export indirme çalışıyor (`export-download.canva.com` izinli).

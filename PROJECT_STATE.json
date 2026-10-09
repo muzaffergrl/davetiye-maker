@@ -143,28 +143,45 @@
       },
       "canva_designs": [
         {
-          "role": "video_master_6_scenes",
+          "role": "video_master_6_scenes_v2",
+          "design_id": "DAHXhAaKIhI",
+          "edit_url": "https://www.canva.com/d/5DAk5VEwrO_8-UP",
+          "transaction_id": "1558763910934449378",
+          "status": "review_pending",
+          "committed": false,
+          "last_checked": "2026-10-09",
+          "notes": "Yeni Canva hesabında yeniden kuruldu: 6 sahne 1080x1920, 17 katman ayrı görsel (canva/ASSET_MAP.json media_id), metinler Canva metni (script YAF7Scfb7Ns, serif YAD1aDS1Jq8, buton sans YAFdtQi73Xs). Tüm sahneler taslakta; kullanıcı onayı + commit bekliyor. Animasyon yok: Canva API'de animasyon işlemi yok, PPTX içe aktarma animasyonu korumuyor (Canva Help, 2026-10-09). Sayfa arka planında generator'dan kalan MAHXhCsohDQ görseli var, bg_mist katmanı üstünü tam örtüyor."
+        },
+        {
+          "role": "video_master_6_scenes_old_account",
           "design_id": "DAHXgy2GM3s",
           "edit_url": "https://www.canva.com/d/1TpsKpaHmHzT3Bw",
-          "status": "saved_master",
+          "status": "inaccessible",
           "committed": true,
           "last_checked": "2026-10-09",
-          "notes": "6 sahne 1080x1920; metinler Canva metni (script YACgEX27qLg, serif YACgEXvxf8Q, italik YACgEUFdPdA, buton YAFdJpU7Kkk); katmanlar canva/ASSET_MAP.json. Animasyonlar henüz yok (canva/ANIMATION_STEPS.md). Görseller HTML katmanları; GPT görselleri gelince update_fill ile değişecek. MP4 export işi Canva'da başarılı döndü; indirme bu ortamda export-download.canva.com engeli yüzünden doğrulanamadı."
+          "notes": "Eski Canva hesabında kayıtlı master. 2026-10-09 bağlanan yeni hesaptan read-design permission_denied veriyor; yerine DAHXhAaKIhI kuruldu. 6 sahne 1080x1920; metinler Canva metni (script YACgEX27qLg, serif YACgEXvxf8Q, italik YACgEUFdPdA, buton YAFdJpU7Kkk); katmanlar canva/ASSET_MAP.json. Animasyonlar henüz yok (canva/ANIMATION_STEPS.md). Görseller HTML katmanları; GPT görselleri gelince update_fill ile değişecek. MP4 export işi Canva'da başarılı döndü; indirme bu ortamda export-download.canva.com engeli yüzünden doğrulanamadı."
         },
         {
           "role": "generator_source_unused",
           "design_id": "DAHXg03QiQ8",
           "status": "concept",
           "notes": "Canva create-design çıktısı (tek sayfa, 5 bant); yalnız fontlu metin kutularının kaynağı olarak kullanıldı."
+        },
+        {
+          "role": "generator_base_v2",
+          "design_id": "DAHXhM9mRoE",
+          "status": "concept",
+          "notes": "create-design çıktısı; yalnız fontlu metin kutularının kaynağı (merge ile 6 kopya alındı). Satışa girmez."
         }
       ],
       "deliverables": {
         "html_motion_render_mp4": "done (HTML render, Canva değil)",
-        "canva_editable_master": "saved_master (animasyonsuz)",
+        "canva_editable_master": "review_pending (DAHXhAaKIhI, animasyonsuz, commit bekliyor)",
         "website": "not_started",
-        "guest_pdf": "not_started"
+        "guest_pdf": "not_started",
+        "canva_native_animation": "not_started (API desteklemiyor; Canva arayüzünde eklenecek)"
       },
-      "canva_account_note": "Bu set claude.ai'ye bağlı Canva hesabında. Olive & Ivory (01) tasarımları bu hesaptan açılamıyor (permission_denied)."
+      "canva_account_note": "2026-10-09: claude.ai Canva bağlayıcısı yeni hesaba bağlı. Bu hesapta 01 Olive & Ivory tasarımları açılıyor, eski 02 master DAHXgy2GM3s açılmıyor."
     }
   ]
 }

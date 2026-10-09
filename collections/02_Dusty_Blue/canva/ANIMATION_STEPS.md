@@ -1,8 +1,9 @@
 # Canva'da animasyon kurulumu — Dusty Blue video master
 
-Tasarım: **DAHXgy2GM3s** · https://www.canva.com/d/1TpsKpaHmHzT3Bw (master edit — alıcıya verilmez)
+Tasarım: **DAHXhAaKIhI** · https://www.canva.com/d/5DAk5VEwrO_8-UP (v2 master, yeni hesap — alıcıya verilmez)
+(Eski hesaptaki `DAHXgy2GM3s` bu hesaptan açılmıyor.)
 
-Canva aracı (API) öğe animasyonu ve zaman çizelgesi ayarlayamıyor; bu adımlar Canva
+Canva aracı (API) öğe animasyonu ve zaman çizelgesi ayarlayamıyor; PPTX içe aktarma da animasyon/geçiş taşımıyor (Canva Help Center, 2026-10-09); bu adımlar Canva
 arayüzünde **bir kez** master üzerinde yapılır. Template link ile alıcıya giden kopyalarda
 animasyonlar korunur (satış öncesi bir alıcı kopyasında doğrulanacak).
 
@@ -32,7 +33,7 @@ Toplam ≈ 28 sn.
 - "a letter for you…": Fade, 1.5 sn'den itibaren.
 
 **Sayfa 2**
-- Kart grubu (kart + foto + "We're getting married" + tarih): **Rise** — kart zarfın içinden
+- Kart grubu (kart + foto + "We're getting married" + tarih): önce 4 öğeyi seçip **Group**, sonra **Rise** — kart zarfın içinden
   yükselir. Kart grubu katman sırasında **cebin arkasında** kalmalı (cep önde).
 - Açık astar: Fade (0.0–0.4 sn).
 - "and you are warmly invited": Fade, 1.5 sn.
@@ -42,7 +43,7 @@ Toplam ≈ 28 sn.
 - Üç polaroid grubu: sırayla **Pop/Tumble**, 0.6 sn arayla (1 → 2 → 3).
 
 **Sayfa 4**
-- Kart: Fade. Metinler yukarıdan aşağı sırayla Rise: aileler → Eleanor Grace → & → Theodore James →
+- Kart: Fade. Metinler yukarıdan aşağı sırayla Rise: aileler → isimler (v2'de "Eleanor Grace & Theodore James" tek script kutusu) →
   davet cümlesi → tarih kutusu → mekân (0.3–0.4 sn arayla).
 
 **Sayfa 5**
