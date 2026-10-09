@@ -47,6 +47,8 @@ Görseller yalnız `../assets/layers/` (kodla çizilmiş katmanlar: bg_mist, bot
 - İçerik: `tools/validate_content.py` canonical metinlerinin hepsi (Eleanor & Theo, E&T, Saturday, September 18, 2027, 4:30/5:30/6:30 PM, Rosewood Manor, Charleston, South Carolina, The Garden Lawn/The Veranda/The Grand Hall, August 1, 2027, Black tie optional, tam isimler, host_line) iki dosyada da görünür metinde bulundu.
 - Ekran görüntülerine bakılıp düzeltildi: polaroid foto oranı (height attr), mobilde kart botaniklerinin metne binmesi, mekân/kapanış satırlarının kötü kırılması, masaüstünde isimlerin tek satır olması.
 
+- Sonradan: entegratörün ampersand kuralı (Pinyon `&` → Cormorant italik altın `.amp`) iki dosyaya da uygulandı; önizlemeler yeniden üretildi, kontroller yine geçti.
+
 **Test edilmedi:** Canva'ya import (G021), Canva Form/RSVP veri akışı, website yayını, Canva'da canlı sayaç, gerçek telefon tarayıcıları (yalnız Chromium viewport emülasyonu), erişilebilirlik denetimi.
 
 **Notlar / entegratöre:**

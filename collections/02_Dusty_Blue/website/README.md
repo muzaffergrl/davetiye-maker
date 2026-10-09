@@ -53,6 +53,8 @@ görsel yok). Font dosyası yok.
 4. Dekor görselleri `position:absolute` + bölüm `overflow:hidden` — taşma yatay kaydırma yaratmaz. `body { overflow-x:hidden }`
    güvenlik ağıdır; test `document.documentElement.scrollWidth` ile yapılır.
 5. Metin görsele pişirilmez: mühür monogramı (`E&T`), polaroid başlıkları, tarih kutusu hepsi HTML metnidir.
+6. **Ampersand kuralı** (`print/README.md`, entegratör): Pinyon Script'in `&` glifi "v" gibi okunur. Script başlık/isimlerdeki
+   `&` her zaman `<span class="amp">&amp;</span>` (tablet/masaüstü satır içi: `amp-inline`) = Cormorant Garamond italik, altın, ~0.72em.
 
 ## Geri sayım
 

@@ -35,6 +35,8 @@
   .abs { position: absolute; }
 
   .caps { font-family: var(--sans); font-weight: 500; text-transform: uppercase; letter-spacing: .3em; font-size: 16px; color: var(--deep); }
+  /* Ampersand kuralı: script başlıklarda & = Cormorant Garamond italik, altın, ~0.72em (Pinyon '&' 'v' gibi okunur) */
+  .amp { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--gold); font-size: .72em; }
   .script { font-family: var(--script); font-weight: 400; line-height: 1.1; color: var(--ink); }
   .it { font-style: italic; }
   .title { font-family: var(--script); font-size: 104px; line-height: 1.1; color: var(--ink); }
@@ -58,7 +60,7 @@
   <img class="abs" src="../assets/layers/botanical_br.png" alt="" style="right:-80px;bottom:-80px;width:460px;height:460px">
   <div class="abs" style="left:0;top:120px;width:1366px">
     <p class="caps">We're getting married</p>
-    <h1 class="script" style="font-size:140px;margin-top:26px">Eleanor <span style="color:var(--gold);font-size:90px">&amp;</span> Theo</h1>
+    <h1 class="script" style="font-size:140px;margin-top:26px">Eleanor <span class="amp" style="font-size:80px">&amp;</span> Theo</h1>
     <div class="seal" style="margin-top:28px">
       <img src="../assets/layers/wax_seal.png" alt="">
       <div class="mono">E&amp;T</div>
@@ -88,7 +90,7 @@
   <div class="abs" style="left:333px;top:170px;width:700px">
     <p class="caps">Together with their families</p>
     <h2 class="script" style="font-size:76px;margin-top:30px">Eleanor Grace</h2>
-    <p class="script" style="font-size:54px;color:var(--gold);line-height:1">&amp;</p>
+    <p class="script" style="font-size:54px;line-height:1"><span class="amp">&amp;</span></p>
     <h2 class="script" style="font-size:76px">Theodore James</h2>
     <p class="it" style="font-size:27px;line-height:1.45;margin:28px auto 0;width:520px">request the pleasure of your company at the celebration of their marriage</p>
     <div style="display:flex;align-items:center;justify-content:center;gap:22px;margin-top:36px">
@@ -163,7 +165,7 @@
 <!-- ============ PAGE 5 · TRAVEL & STAY (1366×720) ============ -->
 <section class="page ivory" data-document-role="page" data-section="travel" style="height:720px">
   <div class="abs" style="left:0;top:80px;width:1366px">
-    <h2 class="title">Travel &amp; Stay</h2>
+    <h2 class="title">Travel <span class="amp">&amp;</span> Stay</h2>
     <div class="rule"></div>
   </div>
   <div class="abs card" style="left:263px;top:330px;width:410px;height:320px;padding:34px 34px 0">
