@@ -2,8 +2,8 @@
 id: G024
 baslik: A5 — START HERE kılavuz metni (İngilizce)
 rol: claude-metin
-durum: hazir
-alan:
+durum: alindi
+alan: claude-metin-1
 oncelik: 2
 bagimli: []
 yazar: [collections/02_Dusty_Blue/package/customer/START_HERE.md]
@@ -28,3 +28,6 @@ Alıcının seti açıp düzenlemesi için adım adım İngilizce kılavuz metni
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-metin-1

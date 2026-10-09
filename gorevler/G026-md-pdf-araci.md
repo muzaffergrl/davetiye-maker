@@ -2,8 +2,8 @@
 id: G026
 baslik: tools/md_to_pdf.py — markdown'dan markalı PDF
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-5
 oncelik: 3
 bagimli: []
 yazar: [tools/md_to_pdf.py]
@@ -26,3 +26,6 @@ Kılavuz (A5) ve ilan PDF'i (B3) için palete uyan, tıklanabilir linkli PDF ür
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-5

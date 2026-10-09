@@ -2,8 +2,8 @@
 id: G020
 baslik: A2 — tek sayfa responsive website HTML kaynağı
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-3
 oncelik: 2
 bagimli: []
 yazar: [collections/02_Dusty_Blue/website/]
@@ -32,3 +32,6 @@ Canva Website'a aktarılacak tek uzun landing page'in kaynağını ve mobil test
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-3

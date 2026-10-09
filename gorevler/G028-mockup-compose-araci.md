@@ -2,8 +2,8 @@
 id: G028
 baslik: tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-5
 oncelik: 2
 bagimli: []
 yazar: [tools/mockup_compose.py, tools/listing_templates/, tools/tests/]
@@ -28,3 +28,6 @@ Tasarım export'larını GPT mockup'larının yeşil (#00FF00) alanına yerleşt
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-5

@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 335 · alindi 1 · inceleme 0 · blokaj 0 · bitti 3 · toplam 339
+Özet: hazir 328 · alindi 8 · inceleme 0 · blokaj 0 · bitti 3 · toplam 339
 
 ## claude-canva
 
@@ -31,13 +31,9 @@ Bağımlılık bekleyen: 40 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (23)**
+**Alınabilir (18)**
 
-- `G020` p2 — A2 — tek sayfa responsive website HTML kaynağı → `gorevler/G020-v01-website-kaynak.md`
-- `G022` p2 — A3 + A4 — 5×7 davetiye ve story/kare kaynakları → `gorevler/G022-v01-pdf-story-kaynak.md`
-- `G028` p2 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları → `gorevler/G028-mockup-compose-araci.md`
 - `G101` p2 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar → `gorevler/G101-kaynak.md`
-- `G103` p2 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar → `gorevler/G103-kaynak.md`
 - `G104` p2 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar → `gorevler/G104-kaynak.md`
 - `G105` p2 — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar → `gorevler/G105-kaynak.md`
 - `G106` p2 — Tasarım 06 Art Deco Black-Tie — HTML sahne kaynağı + katmanlar → `gorevler/G106-kaynak.md`
@@ -55,26 +51,29 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G118` p2 — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar → `gorevler/G118-kaynak.md`
 - `G119` p2 — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar → `gorevler/G119-kaynak.md`
 - `G120` p2 — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar → `gorevler/G120-kaynak.md`
-- `G026` p3 — tools/md_to_pdf.py — markdown'dan markalı PDF → `gorevler/G026-md-pdf-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (1)**
+**Üzerinde çalışılan / incelemede / blokaj (6)**
 
 - `G002` alindi · claude-kod-2 — tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel)
+- `G020` alindi · claude-kod-3 — A2 — tek sayfa responsive website HTML kaynağı
+- `G022` alindi · claude-kod-4 — A3 + A4 — 5×7 davetiye ve story/kare kaynakları
+- `G028` alindi · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
+- `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
+- `G026` alindi · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF
 
 Bağımlılık bekleyen: 79 · Biten: 1
 
 ## claude-metin
 
-**Alınabilir (4)**
+**Alınabilir (2)**
 
 - `G005` p1 — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması → `gorevler/G005-canva-ui-web-arastirma.md`
-- `G024` p2 — A5 — START HERE kılavuz metni (İngilizce) → `gorevler/G024-v01-kilavuz-metni.md`
-- `G025` p2 — B3 — Etsy ilan metni → `gorevler/G025-v01-etsy-ilan-metni.md`
 - `G050` p7 — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower) → `gorevler/G050-etkinlik-turu-metinleri.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (2)**
 
-- (yok)
+- `G024` alindi · claude-metin-1 — A5 — START HERE kılavuz metni (İngilizce)
+- `G025` alindi · claude-metin-1 — B3 — Etsy ilan metni
 
 Bağımlılık bekleyen: 19 · Biten: 0
 
