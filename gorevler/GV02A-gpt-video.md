@@ -2,8 +2,8 @@
 id: GV02A
 baslik: Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-video-1
 oncelik: 1
 bagimli: []
 yazar: [collections/02_Dusty_Blue/assets/gpt/video/]
@@ -28,3 +28,6 @@ GPT'nin video üretimini denemek: 6 sahnenin dekor hareketini (zarf, mühür, ka
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: gpt-video-1
