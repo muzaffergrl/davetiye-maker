@@ -2,7 +2,7 @@
 id: G020
 baslik: A2 — tek sayfa responsive website HTML kaynağı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-3
 oncelik: 2
 bagimli: []
@@ -61,3 +61,4 @@ Görseller yalnız `../assets/layers/` (kodla çizilmiş katmanlar: bg_mist, bot
 ## Günlük
 - 2026-10-09 alindi: claude-kod-3
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı

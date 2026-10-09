@@ -3,19 +3,20 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 327 · alindi 3 · inceleme 1 · blokaj 3 · bitti 7 · toplam 341
+Özet: hazir 327 · alindi 3 · inceleme 0 · blokaj 3 · bitti 8 · toplam 341
 
 ## claude-canva
 
-**Alınabilir (1)**
+**Alınabilir (2)**
 
+- `G021` p3 — A2 — Canva Website kurulumu → `gorevler/G021-v01-website-canva.md`
 - `G023` p3 — A3 + A4 — Canva'da kur ve export et → `gorevler/G023-v01-pdf-story-canva.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (1)**
 
 - `GV02C` blokaj · - — Video pilotu · Karşılaştırma ve karar (Canva animasyonu vs GPT hibrit)
 
-Bağımlılık bekleyen: 81 · Biten: 2
+Bağımlılık bekleyen: 80 · Biten: 2
 
 ## claude-tarayici
 
@@ -31,7 +32,7 @@ Bağımlılık bekleyen: 40 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (39)**
+**Alınabilir (58)**
 
 - `G101` p2 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar → `gorevler/G101-kaynak.md`
 - `G104` p2 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar → `gorevler/G104-kaynak.md`
@@ -52,6 +53,25 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G119` p2 — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar → `gorevler/G119-kaynak.md`
 - `G120` p2 — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar → `gorevler/G120-kaynak.md`
 - `G006` p3 — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik) → `gorevler/G006-polaroid-katman-pad.md`
+- `G401` p3 — Tasarım 01 Olive & Ivory — A2 website HTML kaynağı → `gorevler/G401-website-kaynak.md`
+- `G403` p3 — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı → `gorevler/G403-website-kaynak.md`
+- `G404` p3 — Tasarım 04 Vintage Airmail Love Letter — A2 website HTML kaynağı → `gorevler/G404-website-kaynak.md`
+- `G405` p3 — Tasarım 05 Mediterranean Lemon — A2 website HTML kaynağı → `gorevler/G405-website-kaynak.md`
+- `G406` p3 — Tasarım 06 Art Deco Black-Tie — A2 website HTML kaynağı → `gorevler/G406-website-kaynak.md`
+- `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — A2 website HTML kaynağı → `gorevler/G407-website-kaynak.md`
+- `G408` p3 — Tasarım 08 Winter Evergreen — A2 website HTML kaynağı → `gorevler/G408-website-kaynak.md`
+- `G409` p3 — Tasarım 09 Lavender Provence — A2 website HTML kaynağı → `gorevler/G409-website-kaynak.md`
+- `G410` p3 — Tasarım 10 Tuscan Vineyard — A2 website HTML kaynağı → `gorevler/G410-website-kaynak.md`
+- `G411` p3 — Tasarım 11 Boho Pampas Terracotta — A2 website HTML kaynağı → `gorevler/G411-website-kaynak.md`
+- `G412` p3 — Tasarım 12 Tropical Destination — A2 website HTML kaynağı → `gorevler/G412-website-kaynak.md`
+- `G413` p3 — Tasarım 13 Enchanted Forest Storybook — A2 website HTML kaynağı → `gorevler/G413-website-kaynak.md`
+- `G414` p3 — Tasarım 14 Ivory Lace & Pearls — A2 website HTML kaynağı → `gorevler/G414-website-kaynak.md`
+- `G415` p3 — Tasarım 15 Cherry Blossom Spring — A2 website HTML kaynağı → `gorevler/G415-website-kaynak.md`
+- `G416` p3 — Tasarım 16 Sunflower Rustic Barn — A2 website HTML kaynağı → `gorevler/G416-website-kaynak.md`
+- `G417` p3 — Tasarım 17 Emerald & Gold Estate — A2 website HTML kaynağı → `gorevler/G417-website-kaynak.md`
+- `G418` p3 — Tasarım 18 Wildflower Meadow Vellum — A2 website HTML kaynağı → `gorevler/G418-website-kaynak.md`
+- `G419` p3 — Tasarım 19 Midnight Garden — A2 website HTML kaynağı → `gorevler/G419-website-kaynak.md`
+- `G420` p3 — Tasarım 20 Coastal Seaside — A2 website HTML kaynağı → `gorevler/G420-website-kaynak.md`
 - `G501` p3 — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G501-baski-kaynak.md`
 - `G503` p3 — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G503-baski-kaynak.md`
 - `G504` p3 — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G504-baski-kaynak.md`
@@ -73,14 +93,13 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G520` p3 — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G520-baski-kaynak.md`
 - `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (4)**
+**Üzerinde çalışılan / incelemede / blokaj (3)**
 
-- `G020` inceleme · claude-kod-3 — A2 — tek sayfa responsive website HTML kaynağı
 - `G028` alindi · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 - `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 - `G026` alindi · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF
 
-Bağımlılık bekleyen: 59 · Biten: 3
+Bağımlılık bekleyen: 40 · Biten: 4
 
 ## claude-metin
 
