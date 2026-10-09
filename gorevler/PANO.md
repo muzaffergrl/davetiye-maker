@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 328 · alindi 7 · inceleme 1 · blokaj 0 · bitti 3 · toplam 339
+Özet: hazir 327 · alindi 8 · inceleme 1 · blokaj 0 · bitti 3 · toplam 339
 
 ## claude-canva
 
@@ -91,11 +91,10 @@ Bağımlılık bekleyen: 20 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (42)**
+**Alınabilir (41)**
 
 - `G010` p1 — V01 Paket 1 — dokular ve dekor (6 görsel) → `gorevler/G010-v01-paket1-doku-dekor.md`
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
-- `GV02A` p1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız) → `gorevler/GV02A-gpt-video.md`
 - `G201` p2 — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1) → `gorevler/G201-gorsel.md`
 - `G203` p2 — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1) → `gorevler/G203-gorsel.md`
 - `G204` p2 — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1) → `gorevler/G204-gorsel.md`
@@ -136,8 +135,8 @@ Bağımlılık bekleyen: 20 · Biten: 0
 - `G819` p4 — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri → `gorevler/G819-mockup.md`
 - `G820` p4 — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (1)**
 
-- (yok)
+- `GV02A` alindi · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 
 Bağımlılık bekleyen: 24 · Biten: 0
