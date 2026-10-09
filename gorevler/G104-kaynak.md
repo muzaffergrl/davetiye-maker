@@ -2,8 +2,8 @@
 id: G104
 baslik: Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-8
 oncelik: 2
 bagimli: []
 yazar: [collections/04_Vintage_Airmail/video/, collections/04_Vintage_Airmail/assets/layers/, collections/04_Vintage_Airmail/kit_map.json, collections/04_Vintage_Airmail/previews/]
@@ -35,3 +35,6 @@ Tasarım 04'in 6 sahnelik 1080×1920 animasyon kaynağını kodla (HTML/CSS/SVG)
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-8

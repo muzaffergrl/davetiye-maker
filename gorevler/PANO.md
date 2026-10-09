@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 327 · alindi 3 · inceleme 0 · blokaj 3 · bitti 8 · toplam 341
+Özet: hazir 326 · alindi 4 · inceleme 0 · blokaj 3 · bitti 8 · toplam 341
 
 ## claude-canva
 
@@ -32,10 +32,9 @@ Bağımlılık bekleyen: 40 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (58)**
+**Alınabilir (57)**
 
 - `G101` p2 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar → `gorevler/G101-kaynak.md`
-- `G104` p2 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar → `gorevler/G104-kaynak.md`
 - `G105` p2 — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar → `gorevler/G105-kaynak.md`
 - `G106` p2 — Tasarım 06 Art Deco Black-Tie — HTML sahne kaynağı + katmanlar → `gorevler/G106-kaynak.md`
 - `G107` p2 — Tasarım 07 Burgundy Velvet Autumn — HTML sahne kaynağı + katmanlar → `gorevler/G107-kaynak.md`
@@ -93,10 +92,11 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G520` p3 — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G520-baski-kaynak.md`
 - `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (3)**
+**Üzerinde çalışılan / incelemede / blokaj (4)**
 
 - `G028` alindi · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 - `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
+- `G104` alindi · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G026` alindi · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF
 
 Bağımlılık bekleyen: 40 · Biten: 4
