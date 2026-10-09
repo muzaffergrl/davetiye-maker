@@ -147,12 +147,11 @@
         {
           "role": "video_master_6_scenes_v2",
           "design_id": "DAHXhAaKIhI",
-          "edit_url": "https://www.canva.com/d/5DAk5VEwrO_8-UP",
-          "transaction_id": "1558763910934449378",
-          "status": "review_pending",
-          "committed": false,
+          "edit_url": "https://www.canva.com/d/Vm8qVW0Y1D4rdcP",
+          "status": "saved_master",
+          "committed": true,
           "last_checked": "2026-10-09",
-          "notes": "Yeni Canva hesabında yeniden kuruldu: 6 sahne 1080x1920, 17 katman ayrı görsel (canva/ASSET_MAP.json media_id), metinler Canva metni (script YAF7Scfb7Ns, serif YAD1aDS1Jq8, buton sans YAFdtQi73Xs). Tüm sahneler taslakta; kullanıcı onayı + commit bekliyor. Animasyon yok: Canva API'de animasyon işlemi yok, PPTX içe aktarma animasyonu korumuyor (Canva Help, 2026-10-09). Sayfa arka planında generator'dan kalan MAHXhCsohDQ görseli var, bg_mist katmanı üstünü tam örtüyor."
+          "notes": "Yeni Canva hesabında yeniden kuruldu: 6 sahne 1080x1920, 17 katman ayrı görsel (canva/ASSET_MAP.json media_id), metinler Canva metni (script YAF7Scfb7Ns, serif YAD1aDS1Jq8, buton sans YAFdtQi73Xs). Kullanıcı onayıyla commit edildi ve export ile doğrulandı (previews/canva_master_v2_saved_6scenes.jpg); read-design küçük resimleri önbellekten eski görünebilir. Animasyon yok: Canva API'de animasyon işlemi yok, PPTX içe aktarma animasyonu korumuyor (Canva Help, 2026-10-09). Sayfa arka planında generator'dan kalan MAHXhCsohDQ görseli var, bg_mist katmanı üstünü tam örtüyor."
         },
         {
           "role": "video_master_6_scenes_old_account",
@@ -178,7 +177,7 @@
       ],
       "deliverables": {
         "html_motion_render_mp4": "done (HTML render, Canva değil)",
-        "canva_editable_master": "review_pending (DAHXhAaKIhI, animasyonsuz, commit bekliyor)",
+        "canva_editable_master": "saved_master (DAHXhAaKIhI, animasyonsuz)",
         "website": "not_started",
         "guest_pdf": "not_started",
         "canva_native_animation": "not_started (API desteklemiyor; Canva arayüzünde eklenecek)"
@@ -496,10 +495,10 @@
       ]
     }
   ],
-  "task_board": "gorevler/ (tools/gorev.py)",
+  "task_board": "gorevler/ (tools/gorev.py, PANO.md, roller/)",
   "plan": {
     "phase1": "20 farklı tasarım (docs/09_TASARIM_KATALOGU.md)",
-    "phase2": "her tasarım × 5 renk paleti (kapı: G090)",
+    "phase2": "her tasarıma orijinale ek 5 renk paleti → 20 + 100 = 120 ürün (kapı: G090)",
     "doc": "docs/06_FABRIKA_PLANI.md"
   }
 }

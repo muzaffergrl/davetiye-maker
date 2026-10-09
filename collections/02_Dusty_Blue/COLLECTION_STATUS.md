@@ -1,6 +1,6 @@
 # Koleksiyon 02 — Dusty Blue & Champagne (çalışma adı)
 
-**Durum:** `editable_draft` — Canva video master yeni Canva hesabında yeniden kuruldu (`DAHXhAaKIhI`, animasyonsuz, **taslakta — onay + commit bekliyor**). Satış ürünü değil. Son güncelleme: 2026-10-09.
+**Durum:** `editable_draft` — Canva video master yeni Canva hesabında kuruldu ve **kalıcı kaydedildi** (`DAHXhAaKIhI`, animasyonsuz). Satış ürünü değil. Son güncelleme: 2026-10-09.
 
 ## Amaç
 Kullanıcı, grafik üretimin kim tarafından yapılacağına (Claude kodla / GPT görsel modeliyle)
@@ -53,7 +53,7 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 ## Set paketi durumu (`docs/05_SET_PAKETI.md`)
 | # | Parça | Durum |
 |---|---|---|
-| A1 | Canva video (animasyonlu) | **v2 taslak** `DAHXhAaKIhI` (yeni hesap) · 6 sahne, 17 ayrı görsel katman, tüm metinler Canva metni · transaction `1558763910934449378` **commit edilmedi** (onay bekliyor) · önizleme: `previews/canva_master_v2_draft_6scenes.png` (Canva önizlemesi) · animasyonlar yok: Canva API'de animasyon işlemi yok, PPTX içe aktarma animasyon taşımıyor → `canva/ANIMATION_STEPS.md` arayüzde · eski master `DAHXgy2GM3s` eski hesapta, bu hesaptan açılmıyor |
+| A1 | Canva video (animasyonlu) | **kayıtlı master** `DAHXhAaKIhI` (yeni hesap) · https://www.canva.com/d/Vm8qVW0Y1D4rdcP · 6 sahne, 17 ayrı katman, 40 Canva metni · export ile doğrulandı: `previews/canva_master_v2_saved_6scenes.jpg` · animasyon yok → GA02 (G004 yolu) · eski `DAHXgy2GM3s` eski hesapta |
 | A2 | Canva website + Form RSVP | başlanmadı |
 | A3 | Davetiye PDF | başlanmadı |
 | A4 | Paylaşım görseli (story + kare) | başlanmadı |

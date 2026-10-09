@@ -9,6 +9,7 @@ Protokol: gorevler/README.md. Bağımlılık yok (yalnız standart kütüphane).
   python3 tools/gorev.py onayla GXXX           # durum: bitti (entegratör)
   python3 tools/gorev.py blokaj GXXX "neden"
   python3 tools/gorev.py kontrol
+  python3 tools/gorev.py pano                  # gorevler/PANO.md'yi yeniden üretir
 """
 import argparse
 import re
@@ -139,6 +140,30 @@ def cmd_kontrol(a, tasks):
     sys.exit(1 if hata else 0)
 
 
+def cmd_pano(a, tasks):
+    roller = ["claude-canva", "gpt-gorsel", "gpt-kod", "gpt-metin", "claude-qa"]
+    out = ["# Görev panosu (otomatik)", "",
+           "`python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk",
+           "çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.", ""]
+    say = {d: 0 for d in DURUMLAR}
+    for t in tasks.values():
+        say[t["durum"]] += 1
+    out.append("Özet: " + " · ".join(f"{d} {n}" for d, n in say.items()) + f" · toplam {len(tasks)}")
+    for rol in roller:
+        rt = sorted((t for t in tasks.values() if t["rol"] == rol), key=lambda t: (int(t.get("oncelik") or 9), t["id"]))
+        alinabilir = [t for t in rt if t["durum"] == "hazir" and deps_done(t, tasks)]
+        calisan = [t for t in rt if t["durum"] in ("alindi", "inceleme", "blokaj")]
+        bekleyen = [t for t in rt if t["durum"] == "hazir" and not deps_done(t, tasks)]
+        biten = [t for t in rt if t["durum"] == "bitti"]
+        out += ["", f"## {rol}", "", f"**Alınabilir ({len(alinabilir)})**", ""]
+        out += [f"- `{t['id']}` p{t.get('oncelik')} — {t['baslik']} → `{t['_path'].relative_to(ROOT)}`" for t in alinabilir] or ["- (yok)"]
+        out += ["", f"**Üzerinde çalışılan / incelemede / blokaj ({len(calisan)})**", ""]
+        out += [f"- `{t['id']}` {t['durum']} · {t.get('alan') or '-'} — {t['baslik']}" for t in calisan] or ["- (yok)"]
+        out += ["", f"Bağımlılık bekleyen: {len(bekleyen)} · Biten: {len(biten)}"]
+    (DIR / "PANO.md").write_text("\n".join(out) + "\n")
+    print("gorevler/PANO.md yazıldı")
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -149,6 +174,7 @@ def main():
     p = sub.add_parser("onayla"); p.add_argument("id")
     p = sub.add_parser("blokaj"); p.add_argument("id"); p.add_argument("neden")
     sub.add_parser("kontrol")
+    sub.add_parser("pano")
     a = ap.parse_args()
     tasks = load()
     if a.cmd == "liste":
@@ -165,6 +191,8 @@ def main():
         set_durum(tasks, a.id, "blokaj", f"blokaj: {a.neden}")
     elif a.cmd == "kontrol":
         cmd_kontrol(a, tasks)
+    elif a.cmd == "pano":
+        cmd_pano(a, tasks)
 
 
 if __name__ == "__main__":

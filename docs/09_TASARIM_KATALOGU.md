@@ -32,5 +32,5 @@ Stil kuralı: klasik, romantik, zengin, geniş beğeni; ultra-minimal/editoryal 
 Ayrıntı: her koleksiyonun `DESIGN_BRIEF.md` dosyası. 01 ve 02 mevcut koleksiyonlardır; 01 yeni hatta
 (G101/G201/G301) yeniden kurulur, 02'nin hattı `G001`–`G027` görevlerindedir.
 
-**Aşama 2:** her tasarım × 5 renk paleti. Paletler tasarım master'ı kaydedildikten sonra tasarıma uygun seçilir
-(tasarım 02 için V02–V06 hazır: `collections/02_Dusty_Blue/variants/`).
+**Aşama 2:** her tasarıma orijinale **ek** 5 renk paleti → 20 + 100 = **120 ürün**. Paletler tasarıma uygun seçilir
+(GP1NN); tasarım 02 için V02–V06 hazır: `collections/02_Dusty_Blue/variants/`. Kapı: G090.

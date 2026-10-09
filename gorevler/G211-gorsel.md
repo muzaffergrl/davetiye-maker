@@ -1,23 +1,23 @@
 ---
 id: G211
-baslik: Tasarım 11 Boho Pampas Terracotta — GPT görselleri
+baslik: Tasarım 11 Boho Pampas Terracotta — GPT görselleri (Paket 1)
 rol: gpt-gorsel
 durum: hazir
 alan:
 oncelik: 2
 bagimli: []
-yazar: [collections/11_Boho_Pampas/assets/gpt/]
+yazar: [collections/11_Boho_Pampas/assets/gpt/textures/, collections/11_Boho_Pampas/assets/gpt/decor/]
 ---
 
 ## Amaç
-Tasarım 11'in doku ve dekor görsellerini üretmek.
+Tasarım 11'in doku ve dekor görsellerini üretmek (Paket 1; mockup'lar ayrı görev G811).
 
 ## Girdiler
-- `collections/11_Boho_Pampas/assets/gpt/GPT_PROMPTS.md`
+- `collections/11_Boho_Pampas/assets/gpt/GPT_PROMPTS.md` → PAKET 1
 - `collections/11_Boho_Pampas/DESIGN_BRIEF.md`
 
 ## Yapılacaklar
-1. Prompt'ları sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.
+1. PAKET 1 prompt'larını sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.
 2. Şeffaf istenenler gerçek alfa kanallı PNG; yazı/harf/rakam/logo yok.
 3. `python3 tools/kit_check.py collections/11_Boho_Pampas` hazırsa çalıştır (G003).
 

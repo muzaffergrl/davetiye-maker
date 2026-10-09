@@ -21,6 +21,8 @@ katalogu değiştirip yeniden üret). Tasarım özeti: `collections/13_Enchanted
 
 ---
 
+## PAKET 1 — Dokular ve dekor (görev G213)
+
 ### 1. Video arka planı
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/textures/background.png` · 1024×1536
 
@@ -84,3 +86,33 @@ Kontrol: iç kısım boş ve şeffaf; çerçeve kesilmemiş.
 An antique closed storybook seen straight from the front, deep moss-green cloth cover with an embossed gold floral border and an empty oval in the center, no title, no letters, no text, soft warm light, plain light background.
 ```
 Kontrol: yazı/sembol yok.
+
+---
+
+## PAKET 3 — Etsy ilan mockup'ları (görev G813)
+
+Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.
+
+### 3.1 Telefon mockup'ı
+**Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/mockups/phone_flatlay.png` · 1024×1536
+
+```
+Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on a mossy wooden tabletop, surrounded at the edges by ferns, moss, small mushrooms and tiny warm fairy lights. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural light, gentle shadows, no text, no logos, no brand marks on the phone.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.2 Dizüstü mockup'ı
+**Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/mockups/laptop_desk.png` · 1536×1024
+
+```
+Elegant styled scene: an open modern laptop seen straight from the front at eye level, centered, on a mossy wooden tabletop, with ferns, moss, small mushrooms and tiny warm fairy lights beside it. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural light, airy, no text, no logos, no brand marks.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.3 Basılı kart mockup'ı
+**Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/mockups/card_flatlay.png` · 1024×1536
+
+```
+Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on an antique green storybook with an embossed gold border and no title on a mossy wooden tabletop, with ferns, moss, small mushrooms and tiny warm fairy lights at the edges. Soft natural light, gentle shadows, no text, no logos.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.

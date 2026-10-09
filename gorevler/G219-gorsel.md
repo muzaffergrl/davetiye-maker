@@ -1,23 +1,23 @@
 ---
 id: G219
-baslik: Tasarım 19 Midnight Garden — GPT görselleri
+baslik: Tasarım 19 Midnight Garden — GPT görselleri (Paket 1)
 rol: gpt-gorsel
 durum: hazir
 alan:
 oncelik: 2
 bagimli: []
-yazar: [collections/19_Midnight_Garden/assets/gpt/]
+yazar: [collections/19_Midnight_Garden/assets/gpt/textures/, collections/19_Midnight_Garden/assets/gpt/decor/]
 ---
 
 ## Amaç
-Tasarım 19'in doku ve dekor görsellerini üretmek.
+Tasarım 19'in doku ve dekor görsellerini üretmek (Paket 1; mockup'lar ayrı görev G819).
 
 ## Girdiler
-- `collections/19_Midnight_Garden/assets/gpt/GPT_PROMPTS.md`
+- `collections/19_Midnight_Garden/assets/gpt/GPT_PROMPTS.md` → PAKET 1
 - `collections/19_Midnight_Garden/DESIGN_BRIEF.md`
 
 ## Yapılacaklar
-1. Prompt'ları sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.
+1. PAKET 1 prompt'larını sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.
 2. Şeffaf istenenler gerçek alfa kanallı PNG; yazı/harf/rakam/logo yok.
 3. `python3 tools/kit_check.py collections/19_Midnight_Garden` hazırsa çalıştır (G003).
 

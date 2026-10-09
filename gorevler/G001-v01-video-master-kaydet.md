@@ -2,7 +2,7 @@
 id: G001
 baslik: V01 video master taslağını kaydet ve doğrula
 rol: claude-canva
-durum: blokaj
+durum: bitti
 alan:
 oncelik: 1
 bagimli: []
@@ -30,4 +30,11 @@ Canva `DAHXhAaKIhI` üzerindeki 6 sahnelik taslağı kalıcı kaydetmek.
 - [ ] `PROJECT_STATE.json`: `committed: true`, transaction kaldırıldı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kullanıcı onayıyla transaction `1558763910934449378` commit edildi (2026-10-09): `status: committed`.
+- Yeniden okuma: `DAHXhAaKIhI` 6 sayfa 1080×1920; metinler doğru (sayfa 1 ve 6 okundu).
+- Görsel doğrulama: JPG export (6 sayfa) → `collections/02_Dusty_Blue/previews/canva_master_v2_saved_6scenes.jpg`.
+  Not: read-design küçük resimleri Canva önbelleği yüzünden eski temel sayfayı gösteriyor; export doğru.
+- Animasyon yok (GA02). Edit link: https://www.canva.com/d/Vm8qVW0Y1D4rdcP
+
+## Günlük
+- 2026-10-09 entegratör onayladı

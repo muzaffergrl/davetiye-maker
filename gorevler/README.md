@@ -3,7 +3,8 @@
 Bu klasör, Claude ve GPT ajanlarının **aynı repoda aynı anda** çakışmadan çalışması içindir.
 Her görev bir dosyadır: `gorevler/Gxxx-kisa-ad.md`. Plan: `docs/06_FABRIKA_PLANI.md`.
 
-**Önce oku:** `AGENTS.md` → `docs/06_FABRIKA_PLANI.md` → bu dosya → aldığın görev dosyası.
+**Önce oku:** `AGENTS.md` → `docs/06_FABRIKA_PLANI.md` → bu dosya → **`gorevler/roller/<rolün>.md`** → aldığın görev dosyası.
+Hızlı bakış: `gorevler/PANO.md` (rol başına alınabilir görevler; kabuk çalıştıramayan ajanlar için).
 Kullanıcı elle hiçbir iş yapmaz; ona iş verme, ondan dosya yüklemesi isteme.
 
 ## 1. Rolünü bil
@@ -17,6 +18,27 @@ Kullanıcı elle hiçbir iş yapmaz; ona iş verme, ondan dosya yüklemesi istem
 | `claude-qa` | Claude denetçi (salt okunur) |
 
 Yalnız kendi rolündeki görevi al.
+
+## 1b. Görev numaraları
+
+| ID | Ne | Rol |
+|---|---|---|
+| G0xx | Ortak araçlar, tasarım 02 pilot hattı, kapılar (G090) | çeşitli |
+| G1NN | Tasarım NN — HTML sahne kaynağı + katmanlar | gpt-kod |
+| G2NN | Tasarım NN — GPT görselleri Paket 1 | gpt-gorsel |
+| G3NN | Tasarım NN — Canva video master | claude-canva |
+| G4NN | Tasarım NN — website HTML kaynağı | gpt-kod |
+| G5NN | Tasarım NN — 5×7 davetiye + story/kare kaynağı | gpt-kod |
+| G6NN | Tasarım NN — Canva website + PDF + story/kare | claude-canva |
+| G7NN | Tasarım NN — kılavuz + Etsy ilan metni | gpt-metin |
+| G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
+| G9NN | Tasarım NN — Etsy ilan kiti montajı | gpt-kod |
+| GANN | Tasarım NN — animasyon, RSVP formu, yayın, template link | claude-canva |
+| GQNN | Tasarım NN — QA raporu | claude-qa |
+| GP1NN–GP4NN | Aşama 2: ek 5 palet (prompt, görsel, Canva, ilan) — G090'dan sonra | çeşitli |
+
+NN = tasarım numarası (01–20, `docs/09_TASARIM_KATALOGU.md`). Tasarım 02'nin set görevleri pilot
+numaralarındadır (G013, G020–G027, G902, GA02).
 
 ## 2. Görev dosyası biçimi
 
@@ -60,6 +82,9 @@ python3 tools/gorev.py bitir G0xx                      # durum: inceleme
 git pull --rebase origin main && git push
 ```
 
+- **Kabuk yoksa (ör. ChatGPT):** `PANO.md`'den görevi seç; görev dosyasının başlığında `durum: alindi` ve
+  `alan: <adın>` yaz, en alta `## Günlük` altında `- <tarih> alindi: <adın>` ekle, commit + push. Bitirince
+  `durum: inceleme` ve Günlük satırı. `PANO.md`'yi elle düzenleme (entegratör üretir).
 - **Sahiplenme yarışı:** `al` sonrası push reddedilirse `git pull --rebase` yap ve görev
   dosyasına bak. Başka biri almışsa (`alan` dolu) bırak, sıradakine geç.
 - `inceleme` → `bitti` geçişini **entegratör** yapar (çıktıyı kontrol edip durum dosyalarına
@@ -98,4 +123,5 @@ python3 tools/gorev.py al G020 --ajan codex-1
 python3 tools/gorev.py bitir G020
 python3 tools/gorev.py blokaj G020 "neden"
 python3 tools/gorev.py kontrol               # biçim, bağımlılık, yazma alanı çakışması
+python3 tools/gorev.py pano                  # gorevler/PANO.md'yi yeniden üret
 ```

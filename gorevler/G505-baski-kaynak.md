@@ -1,0 +1,27 @@
+---
+id: G505
+baslik: Tasarım 05 Mediterranean Lemon — A3 5×7 davetiye + A4 story/kare kaynakları
+rol: gpt-kod
+durum: hazir
+alan:
+oncelik: 3
+bagimli: [G022]
+yazar: [collections/05_Lemon_Mediterranean/print/]
+---
+
+## Amaç
+Tasarım 05'in baskı/telefon davetiyesi ve paylaşım görsellerinin HTML kaynakları.
+
+## Girdiler
+- `collections/05_Lemon_Mediterranean/DESIGN_BRIEF.md`, `collections/05_Lemon_Mediterranean/content.demo.json`, `collections/05_Lemon_Mediterranean/palette.json`
+- Pilot: `collections/02_Dusty_Blue/print/` (G022 çıktısı)
+
+## Yapılacaklar
+1. `invitation_5x7.html` (1500×2100), `story.html` (1080×1920), `square.html` (1080×1080); `data-document-role="page"`.
+2. RSVP/website linki yer tutucu; PNG önizlemeler `print/previews/`.
+
+## Bitti sayılması için
+- [ ] 3 kaynak + önizlemeler; metin içerik kaydıyla birebir
+
+## Sonuç
+_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_

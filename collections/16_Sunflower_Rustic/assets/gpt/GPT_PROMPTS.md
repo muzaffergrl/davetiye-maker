@@ -21,6 +21,8 @@ katalogu değiştirip yeniden üret). Tasarım özeti: `collections/16_Sunflower
 
 ---
 
+## PAKET 1 — Dokular ve dekor (görev G216)
+
 ### 1. Video arka planı
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/textures/background.png` · 1024×1536
 
@@ -84,3 +86,33 @@ Kontrol: iç kısım boş ve şeffaf; çerçeve kesilmemiş.
 A single natural jute twine line stretched horizontally across the image with a slight sag, realistic fibers, nothing hanging on it. Transparent background PNG, no text.
 ```
 Kontrol: yazı/sembol yok; şeffaf.
+
+---
+
+## PAKET 3 — Etsy ilan mockup'ları (görev G816)
+
+Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.
+
+### 3.1 Telefon mockup'ı
+**Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/mockups/phone_flatlay.png` · 1024×1536
+
+```
+Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on a weathered barn-wood table, surrounded at the edges by sunflowers, wheat stalks, white daisies and a mustard gingham ribbon. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural light, gentle shadows, no text, no logos, no brand marks on the phone.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.2 Dizüstü mockup'ı
+**Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/mockups/laptop_desk.png` · 1536×1024
+
+```
+Elegant styled scene: an open modern laptop seen straight from the front at eye level, centered, on a weathered barn-wood table, with sunflowers, wheat stalks, white daisies and a mustard gingham ribbon beside it. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural light, airy, no text, no logos, no brand marks.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.3 Basılı kart mockup'ı
+**Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/mockups/card_flatlay.png` · 1024×1536
+
+```
+Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a kraft envelope tied with a gingham ribbon on a weathered barn-wood table, with sunflowers, wheat stalks, white daisies and a mustard gingham ribbon at the edges. Soft natural light, gentle shadows, no text, no logos.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.

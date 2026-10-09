@@ -1,23 +1,23 @@
 ---
 id: G208
-baslik: Tasarım 08 Winter Evergreen — GPT görselleri
+baslik: Tasarım 08 Winter Evergreen — GPT görselleri (Paket 1)
 rol: gpt-gorsel
 durum: hazir
 alan:
 oncelik: 2
 bagimli: []
-yazar: [collections/08_Winter_Evergreen/assets/gpt/]
+yazar: [collections/08_Winter_Evergreen/assets/gpt/textures/, collections/08_Winter_Evergreen/assets/gpt/decor/]
 ---
 
 ## Amaç
-Tasarım 08'in doku ve dekor görsellerini üretmek.
+Tasarım 08'in doku ve dekor görsellerini üretmek (Paket 1; mockup'lar ayrı görev G808).
 
 ## Girdiler
-- `collections/08_Winter_Evergreen/assets/gpt/GPT_PROMPTS.md`
+- `collections/08_Winter_Evergreen/assets/gpt/GPT_PROMPTS.md` → PAKET 1
 - `collections/08_Winter_Evergreen/DESIGN_BRIEF.md`
 
 ## Yapılacaklar
-1. Prompt'ları sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.
+1. PAKET 1 prompt'larını sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.
 2. Şeffaf istenenler gerçek alfa kanallı PNG; yazı/harf/rakam/logo yok.
 3. `python3 tools/kit_check.py collections/08_Winter_Evergreen` hazırsa çalıştır (G003).
 

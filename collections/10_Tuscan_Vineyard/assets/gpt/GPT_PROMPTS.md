@@ -21,6 +21,8 @@ katalogu değiştirip yeniden üret). Tasarım özeti: `collections/10_Tuscan_Vi
 
 ---
 
+## PAKET 1 — Dokular ve dekor (görev G210)
+
 ### 1. Video arka planı
 **Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/textures/background.png` · 1024×1536
 
@@ -76,3 +78,33 @@ Kontrol: köşe kompozisyonuyla aynı stil; yatay ve ortalı.
 A single empty photo frame for a wedding invitation, viewed straight on: an elegant blank vintage wine-label shaped frame (rectangle with cut corners) with a fine engraved double border, empty inside. The opening inside the frame is completely empty and transparent (no photo, no fill). The frame is centered, not cropped, with empty space around it. Transparent background PNG, no text.
 ```
 Kontrol: iç kısım boş ve şeffaf; çerçeve kesilmemiş.
+
+---
+
+## PAKET 3 — Etsy ilan mockup'ları (görev G810)
+
+Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.
+
+### 3.1 Telefon mockup'ı
+**Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/mockups/phone_flatlay.png` · 1024×1536
+
+```
+Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on a rustic oak table, surrounded at the edges by grape clusters, vine leaves, olive branches and a cork. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural light, gentle shadows, no text, no logos, no brand marks on the phone.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.2 Dizüstü mockup'ı
+**Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/mockups/laptop_desk.png` · 1536×1024
+
+```
+Elegant styled scene: an open modern laptop seen straight from the front at eye level, centered, on a rustic oak table, with grape clusters, vine leaves, olive branches and a cork beside it. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural light, airy, no text, no logos, no brand marks.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.3 Basılı kart mockup'ı
+**Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/mockups/card_flatlay.png` · 1024×1536
+
+```
+Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a kraft paper envelope tied with jute twine on a rustic oak table, with grape clusters, vine leaves, olive branches and a cork at the edges. Soft natural light, gentle shadows, no text, no logos.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.

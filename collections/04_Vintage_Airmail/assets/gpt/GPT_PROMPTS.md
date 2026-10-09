@@ -21,6 +21,8 @@ katalogu değiştirip yeniden üret). Tasarım özeti: `collections/04_Vintage_A
 
 ---
 
+## PAKET 1 — Dokular ve dekor (görev G204)
+
 ### 1. Video arka planı
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/textures/background.png` · 1024×1536
 
@@ -84,3 +86,33 @@ Kontrol: iç kısım boş ve şeffaf; çerçeve kesilmemiş.
 Three faint inky circular vintage postmark rings and a few wavy cancellation lines, slightly uneven stamped look, dark grey ink, containing absolutely no letters, numbers or symbols. Transparent background PNG.
 ```
 Kontrol: yazı/sembol yok; şeffaf.
+
+---
+
+## PAKET 3 — Etsy ilan mockup'ları (görev G804)
+
+Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.
+
+### 3.1 Telefon mockup'ı
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/phone_flatlay.png` · 1024×1536
+
+```
+Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on an aged wooden writing desk, surrounded at the edges by a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural light, gentle shadows, no text, no logos, no brand marks on the phone.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.2 Dizüstü mockup'ı
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/laptop_desk.png` · 1536×1024
+
+```
+Elegant styled scene: an open modern laptop seen straight from the front at eye level, centered, on an aged wooden writing desk, with a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen beside it. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural light, airy, no text, no logos, no brand marks.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+
+### 3.3 Basılı kart mockup'ı
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/card_flatlay.png` · 1024×1536
+
+```
+Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a red and navy striped airmail envelope on an aged wooden writing desk, with a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen at the edges. Soft natural light, gentle shadows, no text, no logos.
+```
+Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.

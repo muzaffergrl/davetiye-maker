@@ -372,6 +372,28 @@ D = [
                 extras=[])),
 ]
 
+MOCK = {  # Paket 3 mockup sahne öğeleri: (yüzey, kenar süsleri, zarf)
+    1: ("an ivory linen tablecloth", "olive branches, a few green olives and an olive-green silk ribbon", "an ivory envelope with an olive-green wax seal"),
+    3: ("a soft blush linen tablecloth", "blush peonies, cream garden roses and a blush silk ribbon", "a deckle-edged blush pink envelope"),
+    4: ("an aged wooden writing desk", "a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen", "a red and navy striped airmail envelope"),
+    5: ("a white plaster tabletop with blue and white tiles at the edge", "lemon branches with ripe lemons and white blossoms", "a white envelope with a blue tile-pattern liner"),
+    6: ("a dark navy velvet surface", "two crystal champagne coupes, a string of pearls and gold art deco accents", "a deep navy envelope with a gold deco medallion"),
+    7: ("a dark walnut table with a burgundy velvet runner", "burgundy dahlias, deep red roses, blackberries and a burgundy velvet ribbon", "a cream envelope tied with a burgundy velvet ribbon"),
+    8: ("a white wool blanket with a light dusting of snow", "pine branches, red winter berries, small pine cones and a red velvet ribbon", "a forest green envelope sealed with a pine sprig"),
+    9: ("a natural cream linen cloth", "dried lavender bundles tied with twine and small white daisies", "a cream linen pouch tied with jute twine"),
+    10: ("a rustic oak table", "grape clusters, vine leaves, olive branches and a cork", "a kraft paper envelope tied with jute twine"),
+    11: ("a warm sand-colored stucco surface", "pampas grass plumes, dried palm spears and bunny tails", "an arch-shaped terracotta envelope"),
+    12: ("a light rattan tray on white sand", "monstera leaves, pink hibiscus, white plumeria and a few seashells", "a palm-leaf patterned travel wallet"),
+    13: ("a mossy wooden tabletop", "ferns, moss, small mushrooms and tiny warm fairy lights", "an antique green storybook with an embossed gold border and no title"),
+    14: ("an ivory satin cloth", "white garden roses, a strand of pearls and a piece of ivory lace", "an ivory lace-covered gatefold envelope with a pearl clasp"),
+    15: ("a pale grey stone surface", "cherry blossom branches and scattered pink petals", "a pale grey envelope with a cherry blossom liner"),
+    16: ("a weathered barn-wood table", "sunflowers, wheat stalks, white daisies and a mustard gingham ribbon", "a kraft envelope tied with a gingham ribbon"),
+    17: ("a white Carrara marble surface", "emerald velvet ribbon, gold candle holders and eucalyptus", "an emerald green envelope with a gold seal"),
+    18: ("a soft white cotton cloth", "fresh wildflowers — poppies, cornflowers, daisies — and a sheet of translucent vellum", "a translucent vellum wrap with a pressed-flower label"),
+    19: ("a black velvet surface", "dark red and plum roses, berries and a lit taper candle", "a black envelope with a silver wax seal"),
+    20: ("pale beach sand", "seashells, a starfish, sea glass and dune grass", "a sand-colored envelope with a wave-pattern liner"),
+}
+
 STIL = {
     "suluboya": "soft watercolor", "suluboya-guaj": "watercolor-and-gouache", "yağlı boya": "romantic oil painting",
     "vintage baskı": "vintage print", "altın çizgi illüstrasyon": "fine metallic gold line illustration",
@@ -472,12 +494,30 @@ def prompts_md(t):
         f"- Teknik: **{STIL[t['teknik']]}** (bütün dekor parçalarında aynı)",
         f"- Renkler: ink `{r['ink']}` · deep `{r['deep']}` · primary `{r['primary']}` · ivory `{r['ivory']}` · gold `{r['gold']}` · leaf `{r['leaf']}`",
         "- Gerçek bir kişiye, markaya veya başka bir satıcının tasarımına benzemesin.", "", "---", "",
+        f"## PAKET 1 — Dokular ve dekor (görev G2{t['no']:02d})", "",
     ]
     for i, (dosya, olcu, seffaf, baslik, prompt, kontrol) in enumerate(assets(t), 1):
         lines += [f"### {i}. {baslik}",
                   f"**Kaydet:** `{k}/assets/gpt/{dosya}` · {olcu}" + (" · **Şeffaf zemin**" if seffaf else ""), "",
                   "```", prompt, "```", f"Kontrol: {kontrol}.", ""]
+    lines += ["---", "", f"## PAKET 3 — Etsy ilan mockup'ları (görev G8{t['no']:02d})", "",
+              "Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.", ""]
+    for i, (dosya, olcu, baslik, prompt) in enumerate(mockups(t), 1):
+        lines += [f"### 3.{i} {baslik}", f"**Kaydet:** `{k}/assets/gpt/{dosya}` · {olcu}", "", "```", prompt, "```",
+                  "Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.", ""]
     return "\n".join(lines)
+
+
+def mockups(t):
+    yuzey, susler, zarf = MOCK[t["no"]]
+    return [
+        ("mockups/phone_flatlay.png", "1024×1536", "Telefon mockup'ı",
+         f"Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on {yuzey}, surrounded at the edges by {susler}. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural light, gentle shadows, no text, no logos, no brand marks on the phone."),
+        ("mockups/laptop_desk.png", "1536×1024", "Dizüstü mockup'ı",
+         f"Elegant styled scene: an open modern laptop seen straight from the front at eye level, centered, on {yuzey}, with {susler} beside it. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural light, airy, no text, no logos, no brand marks."),
+        ("mockups/card_flatlay.png", "1024×1536", "Basılı kart mockup'ı",
+         f"Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on {zarf} on {yuzey}, with {susler} at the edges. Soft natural light, gentle shadows, no text, no logos."),
+    ]
 
 
 def brief_md(t):
@@ -585,11 +625,11 @@ def tasks(t):
              "Diğer 19 tasarımla karıştırılmayacak kadar farklı olmalı (katalogdaki eksenler)."],
             ["MP4 önizleme oynuyor; 6 sahne var", "Katmanlar ayrı ve şeffaf; metin pişirilmemiş", "kit_map.json geçerli JSON"]),
         f"G2{n}-gorsel": task_md(
-            f"G2{n}", f"Tasarım {n} {t['ad']} — GPT görselleri", "gpt-gorsel", [],
-            [f"{k}/assets/gpt/"],
-            f"Tasarım {n}'in doku ve dekor görsellerini üretmek.",
-            [f"`{k}/assets/gpt/GPT_PROMPTS.md`", f"`{k}/DESIGN_BRIEF.md`"],
-            ["Prompt'ları sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.",
+            f"G2{n}", f"Tasarım {n} {t['ad']} — GPT görselleri (Paket 1)", "gpt-gorsel", [],
+            [f"{k}/assets/gpt/textures/", f"{k}/assets/gpt/decor/"],
+            f"Tasarım {n}'in doku ve dekor görsellerini üretmek (Paket 1; mockup'lar ayrı görev G8{n}).",
+            [f"`{k}/assets/gpt/GPT_PROMPTS.md` → PAKET 1", f"`{k}/DESIGN_BRIEF.md`"],
+            ["PAKET 1 prompt'larını sırayla, aynen kullan; bütün parçalar aynı illüstrasyon tekniğinde olsun.",
              "Şeffaf istenenler gerçek alfa kanallı PNG; yazı/harf/rakam/logo yok.",
              f"`python3 tools/kit_check.py {k}` hazırsa çalıştır (G003)."],
             ["Listelenen bütün dosyalar doğru yolda", "Sonuç'ta reddedilip yeniden üretilen parçalar notu"]),
@@ -602,6 +642,111 @@ def tasks(t):
             ["`kit_build` → katmanları Canva'ya yükle → fontlu temel sayfa → 6 sayfa → yerleşim (taslak).",
              "Önizleme → onay → commit → yeniden oku.", f"`{k}/canva/ASSET_MAP.json` ve `TEXT_SLOTS.json` yaz."],
             ["Kayıtlı master; design ID ve edit link entegratöre bildirildi"], oncelik=3),
+        **set_tasks(t),
+        **faz2_tasks(t),
+    }
+
+
+def set_tasks(t):
+    """Paketin geri kalanı: website, PDF/story, Canva set, metinler, mockup, ilan kiti, UI işleri, QA."""
+    n, k = f"{t['no']:02d}", f"collections/{t['klasor']}"
+    pilot = "tasarım 02 pilot hattı (`collections/02_Dusty_Blue/`)"
+    return {
+        f"G4{n}-website-kaynak": task_md(
+            f"G4{n}", f"Tasarım {n} {t['ad']} — A2 website HTML kaynağı", "gpt-kod", ["G020"], [f"{k}/website/"],
+            f"Tasarım {n}'in tek sayfa responsive website kaynağı (Canva Website'a aktarılacak).",
+            [f"`{k}/DESIGN_BRIEF.md`, `{k}/content.demo.json`, `{k}/palette.json`", f"Pilot: `collections/02_Dusty_Blue/website/` (G020 çıktısı) — aynı bölüm yapısı",
+             f"`{k}/assets/layers/`, varsa `{k}/kit_layers/` ve `{k}/assets/gpt/`"],
+            ["Pilotla aynı bölümler ve aynı dosya düzeni (`index.html`, `canva_import.html`, `previews/`); görsel dil bu tasarımın brief'inden.",
+             "Gerçek URL yok; RSVP bölümü Canva Form yer tutucusu; fontlar Google Fonts link'i.",
+             "Playwright 360/390/430/768/1280 px ekran görüntüleri."],
+            ["Yatay kaydırma yok; içerik kaydıyla birebir", "canva_import.html sayfa işaretli"], oncelik=3),
+        f"G5{n}-baski-kaynak": task_md(
+            f"G5{n}", f"Tasarım {n} {t['ad']} — A3 5×7 davetiye + A4 story/kare kaynakları", "gpt-kod", ["G022"], [f"{k}/print/"],
+            f"Tasarım {n}'in baskı/telefon davetiyesi ve paylaşım görsellerinin HTML kaynakları.",
+            [f"`{k}/DESIGN_BRIEF.md`, `{k}/content.demo.json`, `{k}/palette.json`", "Pilot: `collections/02_Dusty_Blue/print/` (G022 çıktısı)"],
+            ["`invitation_5x7.html` (1500×2100), `story.html` (1080×1920), `square.html` (1080×1080); `data-document-role=\"page\"`.",
+             "RSVP/website linki yer tutucu; PNG önizlemeler `print/previews/`."],
+            ["3 kaynak + önizlemeler; metin içerik kaydıyla birebir"], oncelik=3),
+        f"G6{n}-canva-set": task_md(
+            f"G6{n}", f"Tasarım {n} {t['ad']} — Canva website + PDF + story/kare", "claude-canva", [f"G3{n}", f"G4{n}", f"G5{n}", "G021", "G023"],
+            [f"{k}/canva/", f"{k}/package/customer/"],
+            f"Tasarım {n}'in A2–A4 parçalarını Canva'da düzenlenebilir kurmak ve export etmek.",
+            [f"`{k}/website/`, `{k}/print/`, `{k}/kit_layers/`", f"Yöntem: {pilot} G021/G023"],
+            ["Website, 5×7 PDF davetiye, story ve kare tasarımlarını kur (taslak → önizleme → commit → yeniden oku).",
+             "PDF/PNG export al; link testleri (yer tutucuysa 'test edilmedi').", f"Design ID'leri `{k}/canva/DESIGNS.json`'a yaz."],
+            ["4 Canva tasarımı kayıtlı; export dosyaları `package/customer/`"], oncelik=4),
+        f"G7{n}-metinler": task_md(
+            f"G7{n}", f"Tasarım {n} {t['ad']} — A5 kılavuz + B3 Etsy ilan metni", "gpt-metin", ["G024", "G025"],
+            [f"{k}/package/customer/START_HERE.md", f"{k}/package/listing/listing.md"],
+            f"Tasarım {n} için alıcı kılavuzu ve Etsy ilan metni (İngilizce).",
+            [f"`{k}/DESIGN_BRIEF.md`, `{k}/content.demo.json`", "Pilot metinler: `collections/02_Dusty_Blue/package/customer/START_HERE.md`, `.../listing/listing.md`"],
+            ["Kılavuz: pilotla aynı bölüm yapısı; tasarıma özgü kısımlar (zarf, foto değiştirme) bu tasarıma göre.",
+             "İlan: başlık ≤140, 13 etiket ≤20 karakter, açıklama, SSS, alıcı mesajı; tasarımın kendine özgü sözcükleri (ör. airmail, art deco).",
+             "Ticari alanlar `[PLACEHOLDER]`, doğrulanmamış iddialar `[VERIFY]`."],
+            ["İki dosya da dolu; yer tutucular işaretli"], oncelik=3),
+        f"G8{n}-mockup": task_md(
+            f"G8{n}", f"Tasarım {n} {t['ad']} — Paket 3 mockup görselleri", "gpt-gorsel", [], [f"{k}/assets/gpt/mockups/"],
+            f"Tasarım {n}'in ilan mockup'ları (telefon, laptop, kart; yeşil ekran).",
+            [f"`{k}/assets/gpt/GPT_PROMPTS.md` → PAKET 3"],
+            ["3 prompt'u aynen kullan; yeşil alan düz #00FF00; nesneler eğik değil."],
+            ["3 dosya doğru yolda"], oncelik=4),
+        f"G9{n}-ilan-kiti": task_md(
+            f"G9{n}", f"Tasarım {n} {t['ad']} — B1–B3 Etsy ilan kiti montajı", "gpt-kod", [f"G6{n}", f"G7{n}", f"G8{n}", "G026", "G028"],
+            [f"{k}/package/listing/"],
+            f"Tasarım {n}'in ilan görselleri, ilan videosu ve ilan PDF'ini üretmek.",
+            [f"Export'lar: `{k}/package/customer/`, video önizleme `{k}/previews/`", f"Mockup'lar `{k}/assets/gpt/mockups/`", "`tools/mockup_compose.py` (G028), `tools/md_to_pdf.py` (G026)"],
+            ["B1: kapak + video/website/PDF mockup'ları + What's included + How it works + düzenleme örneği (2000×2000 veya Etsy'nin güncel önerisi; kaynağı yaz).",
+             "B2: kısa sessiz tanıtım klibi (video export'tan; Etsy süre/boyut kuralı yükleme öncesi doğrulanacak — doğrulanmadıysa yaz).",
+             "B3: `listing.md` → `listing.pdf` (md_to_pdf, palette)."],
+            ["`package/listing/` altında görseller, video, PDF"], oncelik=4),
+        f"GA{n}-canva-ui": task_md(
+            f"GA{n}", f"Tasarım {n} {t['ad']} — animasyon, RSVP formu, yayın, template link", "claude-canva", ["G004", f"G3{n}", f"G6{n}"],
+            [f"{k}/canva/"],
+            f"Canva API'sinde aracı olmayan işleri G004'te bulunan yolla tasarım {n}'e uygulamak.",
+            ["`docs/08_CANVA_UI_BLOKAJ.md`", f"`{k}/DESIGN_BRIEF.md` (sahne hareketleri)", "Örnek adımlar: `collections/02_Dusty_Blue/canva/ANIMATION_STEPS.md`"],
+            [f"`{k}/canva/ANIMATION_STEPS.md` yaz (sahne/öğe/animasyon/zaman).", "Animasyon + website Form + yayın + template link'leri uygula; yapılamayanı blokaj olarak yaz (kullanıcıya iş verme).",
+             "MP4 export al ve kontrol et."],
+            ["Template link'ler `canva/DESIGNS.json`'da; MP4 export denenmiş"], oncelik=4),
+        f"GQ{n}-qa": task_md(
+            f"GQ{n}", f"Tasarım {n} {t['ad']} — QA raporu", "claude-qa", [f"G9{n}", f"GA{n}"], [f"{k}/QA_RAPORU.md"],
+            f"Tasarım {n} setinin satış öncesi denetimi (salt okunur).",
+            ["`.claude/agents/qa-kontrol.md`", "`icerik-tutarlilik` skill", "`docs/05_SET_PAKETI.md`"],
+            ["A1–A5 ve B1–B3'ü kontrol listesine göre denetle; bulguları önem sırasıyla yaz; diğer 19 tasarıma benzerlik kontrolü."],
+            ["Rapor var; kritik bulgu yoksa açıkça yazılı"], oncelik=5),
+    }
+
+
+def faz2_tasks(t):
+    """Aşama 2: tasarıma ek 5 renk paleti (G090 kapısından sonra)."""
+    n, k = f"{t['no']:02d}", f"collections/{t['klasor']}"
+    return {
+        f"GP1{n}-palet-prompt": task_md(
+            f"GP1{n}", f"Aşama 2 · Tasarım {n} — 5 ek palet + prompt dosyaları", "claude-canva", ["G090"], [f"{k}/variants/"],
+            f"Tasarım {n} için orijinale ek 5 renk paleti seçmek ve her biri için prompt dosyası yazmak.",
+            [f"`{k}/DESIGN_BRIEF.md`, `{k}/palette.json`, `{k}/assets/gpt/GPT_PROMPTS.md`", "Örnek: `collections/02_Dusty_Blue/variants/`, `tools/variant_prompts.py`"],
+            ["5 palet: tasarımın ruhuna uygun, birbirinden ve orijinalden belirgin farklı; isim + hex token'lar.",
+             f"`{k}/variants/Vxx_<ad>/palette.json` + `assets/gpt/GPT_PROMPTS.md` (Paket 1 + Paket 3, renk sözcükleri değişmiş)."],
+            ["5 varyant klasörü hazır"], oncelik=6),
+        f"GP2{n}-palet-gorsel": task_md(
+            f"GP2{n}", f"Aşama 2 · Tasarım {n} — 5 palet görselleri", "gpt-gorsel", [f"GP1{n}"], [f"{k}/variants/"],
+            f"Tasarım {n}'in 5 ek paletinin doku/dekor/mockup görselleri.",
+            [f"`{k}/variants/*/assets/gpt/GPT_PROMPTS.md`"],
+            ["Her varyantta Paket 1 + Paket 3; stil orijinal tasarımla aynı, yalnız renkler değişir."],
+            ["5 × tüm dosyalar doğru yolda"], oncelik=6),
+        f"GP3{n}-palet-canva": task_md(
+            f"GP3{n}", f"Aşama 2 · Tasarım {n} — 5 palet Canva varyantları", "claude-canva", [f"GP2{n}", "G040"], [f"{k}/variants/"],
+            f"Tasarım {n}'in bütün Canva tasarımlarını (video, website, PDF, story/kare) 5 palete çoğaltmak.",
+            ["`tools/make_variant.py` (G040) → `canva_plan.json`", f"`{k}/canva/DESIGNS.json`"],
+            ["Her palet: copy-design → kit katmanları update_fill → metin renkleri → önizleme → commit → yeniden oku.",
+             "Animasyon/template link G004 yoluyla; kopyada korunup korunmadığını kaydet."],
+            ["5 × 4 Canva tasarımı kayıtlı; ID'ler `variants/*/canva/DESIGNS.json`"], oncelik=6),
+        f"GP4{n}-palet-ilan": task_md(
+            f"GP4{n}", f"Aşama 2 · Tasarım {n} — 5 palet ilan kitleri", "gpt-kod", [f"GP3{n}", "G028"], [f"{k}/variants/"],
+            f"Tasarım {n}'in 5 ek paleti için ilan görselleri ve ilan PDF'leri.",
+            [f"`{k}/package/listing/` (orijinal ilan kiti)", "`tools/mockup_compose.py`, `tools/md_to_pdf.py`"],
+            ["Her palet için B1 görselleri + B3 PDF (metin orijinalden; renk adı eklenir)."],
+            ["5 × `variants/*/package/listing/`"], oncelik=6),
     }
 
 
@@ -625,8 +770,8 @@ Stil kuralı: klasik, romantik, zengin, geniş beğeni; ultra-minimal/editoryal 
 Ayrıntı: her koleksiyonun `DESIGN_BRIEF.md` dosyası. 01 ve 02 mevcut koleksiyonlardır; 01 yeni hatta
 (G101/G201/G301) yeniden kurulur, 02'nin hattı `G001`–`G027` görevlerindedir.
 
-**Aşama 2:** her tasarım × 5 renk paleti. Paletler tasarım master'ı kaydedildikten sonra tasarıma uygun seçilir
-(tasarım 02 için V02–V06 hazır: `collections/02_Dusty_Blue/variants/`).
+**Aşama 2:** her tasarıma orijinale **ek** 5 renk paleti → 20 + 100 = **120 ürün**. Paletler tasarıma uygun seçilir
+(GP1NN); tasarım 02 için V02–V06 hazır: `collections/02_Dusty_Blue/variants/`. Kapı: G090.
 """
 
 
@@ -679,6 +824,8 @@ def main(a):
             yaz(k / "COLLECTION_STATUS.md", status_md(t), zorla)
         for ad, metin in tasks(t).items():
             say += yaz(ROOT / "gorevler" / f"{ad}.md", metin, zorla)
+        (k / "assets/gpt/mockups").mkdir(parents=True, exist_ok=True)
+        (k / "assets/gpt/mockups/.gitkeep").touch()
     print(f"katalog yazıldı; {say} yeni görev dosyası")
 
 

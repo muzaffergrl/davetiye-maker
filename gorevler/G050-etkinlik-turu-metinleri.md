@@ -4,12 +4,14 @@ baslik: Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 rol: gpt-metin
 durum: hazir
 alan:
-oncelik: 3
+oncelik: 7
 bagimli: []
 yazar: [collections/02_Dusty_Blue/event_types/]
 ---
 
 ## Amaç
+> Kullanıcının Aşama 1–2 planında yok; en düşük öncelik. Diğer gpt-metin görevleri bitince alınır.
+
 Aynı kalıbın (T1) farklı etkinlikler için metin setlerini hazırlamak.
 
 ## Girdiler

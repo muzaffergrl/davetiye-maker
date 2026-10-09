@@ -1,0 +1,28 @@
+---
+id: G606
+baslik: Tasarım 06 Art Deco Black-Tie — Canva website + PDF + story/kare
+rol: claude-canva
+durum: hazir
+alan:
+oncelik: 4
+bagimli: [G306, G406, G506, G021, G023]
+yazar: [collections/06_Art_Deco_Noir/canva/, collections/06_Art_Deco_Noir/package/customer/]
+---
+
+## Amaç
+Tasarım 06'in A2–A4 parçalarını Canva'da düzenlenebilir kurmak ve export etmek.
+
+## Girdiler
+- `collections/06_Art_Deco_Noir/website/`, `collections/06_Art_Deco_Noir/print/`, `collections/06_Art_Deco_Noir/kit_layers/`
+- Yöntem: tasarım 02 pilot hattı (`collections/02_Dusty_Blue/`) G021/G023
+
+## Yapılacaklar
+1. Website, 5×7 PDF davetiye, story ve kare tasarımlarını kur (taslak → önizleme → commit → yeniden oku).
+2. PDF/PNG export al; link testleri (yer tutucuysa 'test edilmedi').
+3. Design ID'leri `collections/06_Art_Deco_Noir/canva/DESIGNS.json`'a yaz.
+
+## Bitti sayılması için
+- [ ] 4 Canva tasarımı kayıtlı; export dosyaları `package/customer/`
+
+## Sonuç
+_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_

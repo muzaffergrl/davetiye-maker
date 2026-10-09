@@ -28,20 +28,29 @@ Katalog: `docs/09_TASARIM_KATALOGU.md` (kaynak `tools/katalog.py`). Her tasarım
 (zarf/açılış, foto sunumu, dekor ailesi, teknik, font, ana palet); her çift en az 4 eksende farklı.
 01 Olive & Ivory ve 02 Dusty Blue bu 20'nin içindedir; 03–20 yeni koleksiyonlardır.
 
-**Aşama 2 — her tasarım × 5 renk paleti.** Paletler, tasarımın master'ı kaydedildikten sonra o tasarıma
-uygun seçilir. Kapı görevi: `G090`. Tasarım 02 için 5 palet (V02–V06) hazır ama `G090`'a kilitli.
+**Aşama 2 — her tasarıma orijinale EK 5 renk paleti** (kullanıcı kararı 2026-10-09). Sonuç: 20 orijinal +
+100 renk varyantı = **120 ürün**. Kapı görevi `G090`: 20 tasarımın eksiksiz paketi QA'dan geçince açılır.
+Tasarım 02'nin 5 paleti (V02–V06) prompt'larıyla hazır, kapıya kilitli.
 
-## 3. Üretim hattı (her tasarım için aynı)
+## 3. Üretim hattı (her tasarım için; numaralar `gorevler/README.md` §1b)
 
-| Adım | Görev | Rol | Çıktı |
-|---|---|---|---|
-| 1 | `G1NN` kaynak | gpt-kod | HTML sahne kaynağı (kodla çizilmiş şekiller) + ayrı katmanlar + `kit_map.json` + MP4 önizleme |
-| 2 | `G2NN` görsel | gpt-gorsel | Doku/dekor/kapanış/çerçeve görselleri (`GPT_PROMPTS.md`) |
-| 3 | `G3NN` Canva | claude-canva | `kit_build` → Canva video master (ayrı katman, Canva metni) |
-| 4 | set parçaları | gpt-kod + claude-canva + gpt-metin | website, PDF, story/kare, kılavuz, Etsy kiti — **tasarım 02'de hat kanıtlanınca** (G020–G027) diğer 19 tasarıma görev olarak açılır |
+| Adım | Görev | Rol | Çıktı | Bekler |
+|---|---|---|---|---|
+| 1 | G1NN kaynak | gpt-kod | HTML sahne kaynağı + ayrı katmanlar + `kit_map.json` + MP4 önizleme | — |
+| 2 | G2NN görsel | gpt-gorsel | Paket 1: doku, dekor, kapanış, çerçeve | — |
+| 3 | G3NN Canva video | claude-canva | `kit_build` → Canva video master | 1, 2, G002 |
+| 4 | G4NN website | gpt-kod | website HTML kaynağı | pilot G020 |
+| 5 | G5NN baskı | gpt-kod | 5×7 davetiye + story/kare kaynağı | pilot G022 |
+| 6 | G6NN Canva set | claude-canva | Canva website + PDF + story/kare + export | 3, 4, 5, pilot G021/G023 |
+| 7 | G7NN metin | gpt-metin | kılavuz + Etsy ilan metni | pilot G024/G025 |
+| 8 | G8NN mockup | gpt-gorsel | Paket 3: telefon, laptop, kart | — |
+| 9 | G9NN ilan kiti | gpt-kod | ilan görselleri, video, PDF | 6, 7, 8, G026, G028 |
+| 10 | GANN Canva UI | claude-canva | animasyon, RSVP formu, yayın, template link | G004, 3, 6 |
+| 11 | GQNN QA | claude-qa | QA raporu | 9, 10 |
+| Aşama 2 | GP1NN → GP2NN → GP3NN → GP4NN | claude/gpt | 5 palet: prompt → görsel → Canva → ilan | G090 |
 
-Adım 1 ve 2 birbirini beklemez (aynı anda yürür). Ortak araçlar: `G002` kit_build, `G003` kit_check,
-`G026` md→pdf, `G040` varyant hattı. Tasarım 02 pilot hattır: araçlar önce onda denenir.
+Tasarım 02 pilot hattır (G001–G027, G902, GA02): ortak araçlar ve şablonlar önce onda kurulur, sonra
+diğer tasarımlar aynı düzeni izler. Adım 1, 2, 4, 5, 7, 8 bekleme olmadan paralel yürür.
 
 ## 4. Roller
 
