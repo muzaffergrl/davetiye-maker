@@ -1,5 +1,8 @@
 # Sıradaki İşler
 
+> 2026-10-09: Seri üretim ve çok ajanlı işler **`gorevler/`** panosundan yürür (`docs/06_FABRIKA_PLANI.md`).
+> Bu liste koleksiyon 01 (Olive & Ivory) geçmişi içindir.
+
 Kaynak: `00_ANA_DEVIR.md` §45. Sıra önemlidir; bir iş bitmeden sonrakine "tamam" denmez.
 
 ## 1. Zarf/mühür onarımını kalıcı kaydet — `DAHXfpQhvAo`

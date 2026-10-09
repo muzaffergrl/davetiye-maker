@@ -1,0 +1,322 @@
+{
+  "design_id": "DAHXhAaKIhI",
+  "note": "Kalıp T1 video master metin alanları. locator_id'ler master'a aittir; Canva kopyasında (copy-design) ID'ler değişebilir — kopyada read-design ile yeniden eşle (metin içeriğine göre). Renk adları palette.json anahtarlarıdır. Fontlar: script=YAF7Scfb7Ns, serif=YAD1aDS1Jq8, sans=YAFdtQi73Xs.",
+  "pages": {
+    "1": {
+      "page_id": "PBtSY8RtqSPkZslD",
+      "scene": "closed_envelope",
+      "texts": [
+        {
+          "locator_id": "PBtSY8RtqSPkZslD-LBWNlv5Tb829C4z1",
+          "text": "A LOVE LETTER FROM",
+          "font": "serif",
+          "size": 28,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBtSY8RtqSPkZslD-LB1bG1hnPvQMP6dC",
+          "text": "Eleanor & Theo",
+          "font": "script",
+          "size": 140,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBtSY8RtqSPkZslD-LBMKRccXv8pkqhcF",
+          "text": "E&T",
+          "font": "serif",
+          "size": 60,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBtSY8RtqSPkZslD-LBwlp2kn3zFYkRFZ",
+          "text": "a letter for you, to open with love",
+          "font": "serif-italic",
+          "size": 44,
+          "color": "deep"
+        }
+      ]
+    },
+    "2": {
+      "page_id": "PBfywvNPxXtbKvZt",
+      "scene": "open_envelope_card",
+      "texts": [
+        {
+          "locator_id": "PBfywvNPxXtbKvZt-LBJSWXdSR1S28Pkl",
+          "text": "We're getting married",
+          "size": 84,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBfywvNPxXtbKvZt-LBpr9kW8bkP6mL20",
+          "text": "SEPTEMBER 18, 2027",
+          "size": 26,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBfywvNPxXtbKvZt-LBqvyGY1v04HTNYf",
+          "text": "and you are warmly invited",
+          "size": 44,
+          "italic": true,
+          "color": "deep"
+        }
+      ]
+    },
+    "3": {
+      "page_id": "PB0fTpw6DWZ5WCr0",
+      "scene": "our_story",
+      "texts": [
+        {
+          "locator_id": "PB0fTpw6DWZ5WCr0-LBqQ7R36JWDDKWWp",
+          "text": "Our Story",
+          "size": 130,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PB0fTpw6DWZ5WCr0-LBpGxGktRK06dP1G",
+          "text": "A FEW OF OUR FAVORITE MOMENTS",
+          "size": 26,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PB0fTpw6DWZ5WCr0-LBg8p57444P49mjc",
+          "text": "where it began",
+          "size": 44,
+          "italic": true,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PB0fTpw6DWZ5WCr0-LBpqx0ZJVywKFMHx",
+          "text": "the question",
+          "size": 44,
+          "italic": true,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PB0fTpw6DWZ5WCr0-LBhHSyQYQ3hc5c0W",
+          "text": "forever starts now",
+          "size": 44,
+          "italic": true,
+          "color": "ink"
+        }
+      ]
+    },
+    "4": {
+      "page_id": "PBNN6rMd4YWWPKC1",
+      "scene": "invitation_card",
+      "texts": [
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBVjgtRrC2qTbY9G",
+          "text": "TOGETHER WITH THEIR FAMILIES",
+          "size": 26,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBmkdGq8mPrgc4N5",
+          "text": "Eleanor Grace\n&\nTheodore James",
+          "size": 104,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBW3VcHMgBFpRhgk",
+          "text": "request the pleasure of your company \nat the celebration of their marriage",
+          "size": 40,
+          "italic": true,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBC1KhS80cq7Ln7w",
+          "text": "SEPTEMBER",
+          "size": 24,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBXb3mb8TmBz78Lb",
+          "text": "SATURDAY",
+          "size": 24,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBWZ8rWCC5btV8CR",
+          "text": "18",
+          "size": 110,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBzMsrWJ8tcqkjct",
+          "text": "AT 4:30 PM",
+          "size": 24,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBKLQJcHwq6z0hZt",
+          "text": "2027",
+          "size": 26,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBnk5B60pdSgY5CX",
+          "text": "Rosewood Manor",
+          "size": 54,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBNN6rMd4YWWPKC1-LBZKp3Bc8L7cDdkK",
+          "text": "Charleston, South Carolina",
+          "size": 40,
+          "italic": true,
+          "color": "deep"
+        }
+      ]
+    },
+    "5": {
+      "page_id": "PBG2SmG7BWK8c7jf",
+      "scene": "schedule",
+      "texts": [
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBX0KfQv4Kq583Zb",
+          "text": "The Celebration",
+          "size": 120,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBxPc0LGpShNsG6G",
+          "text": "4:30 PM",
+          "size": 28,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LByTXWs3D3Sj4zjT",
+          "text": "Ceremony",
+          "size": 50,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBWm0Q4C6dcPvGNX",
+          "text": "The Garden Lawn",
+          "size": 36,
+          "italic": true,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBkmsyhz4rMdkYQg",
+          "text": "5:30 PM",
+          "size": 28,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBHym4xl7mXkT9PP",
+          "text": "Cocktail Hour",
+          "size": 50,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBWtXzJn04PxxbqH",
+          "text": "The Veranda",
+          "size": 36,
+          "italic": true,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LB1MWpHFsYSkRXWr",
+          "text": "6:30 PM",
+          "size": 28,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBrCrWfTcs7hTS4b",
+          "text": "Reception",
+          "size": 50,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBb3RjpL7YvXZx26",
+          "text": "The Grand Hall",
+          "size": 36,
+          "italic": true,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LB2gWGNVG81MFdBD",
+          "text": "ATTIRE",
+          "size": 24,
+          "italic": false,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBG2SmG7BWK8c7jf-LBvnH9SLSvbWpJVQ",
+          "text": "Black tie optional",
+          "size": 50,
+          "italic": true,
+          "color": "ink"
+        }
+      ]
+    },
+    "6": {
+      "page_id": "PBp30XPBpV58MJxr",
+      "scene": "rsvp",
+      "texts": [
+        {
+          "locator_id": "PBp30XPBpV58MJxr-LBThWbkxJspkX1C8",
+          "text": "Kindly Reply",
+          "size": 120,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBp30XPBpV58MJxr-LBYZzX6LsGxymTJ7",
+          "text": "by August 1, 2027",
+          "size": 50,
+          "italic": true,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBp30XPBpV58MJxr-LBN98BBBMMMX5VFN",
+          "text": "RSVP ONLINE",
+          "size": 28,
+          "italic": false,
+          "color": "ivory"
+        },
+        {
+          "locator_id": "PBp30XPBpV58MJxr-LBlMfhk5LfQPMG0F",
+          "text": "Details, travel & registry\non our wedding website",
+          "size": 38,
+          "italic": true,
+          "color": "deep"
+        },
+        {
+          "locator_id": "PBp30XPBpV58MJxr-LB1vYlZJPLfkBV2Z",
+          "text": "E&T",
+          "size": 36,
+          "italic": false,
+          "color": "ink"
+        },
+        {
+          "locator_id": "PBp30XPBpV58MJxr-LB83gzGDwsTNrmX3",
+          "text": "We can't wait to\ncelebrate with you",
+          "size": 60,
+          "italic": true,
+          "color": "ink"
+        }
+      ]
+    }
+  }
+}

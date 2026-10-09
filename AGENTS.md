@@ -5,6 +5,17 @@ Bu dosya Claude Code, Codex (Astra) ve diğer kodlama ajanları içindir. Ayrın
 
 **son kullanıcı talebi → güncel canlı Canva kaydı → 00_ANA_DEVIR.md + PROJECT_STATE.json → koleksiyon kaynakları → archive/**
 
+## Çok ajanlı çalışma (Claude + GPT aynı anda)
+
+Bu repoda birden fazla ajan eş zamanlı çalışır. Başlamadan:
+1. `docs/06_FABRIKA_PLANI.md` — ne üretiyoruz (kalıp × kit), roller, aşamalar.
+2. `gorevler/README.md` — görev alma/bitirme protokolü ve çakışma kuralları.
+3. `python3 tools/gorev.py siradaki --rol <rolün>` — sana uygun görev.
+
+Yalnız aldığın görevin `yazar:` yollarına yaz. Durum dosyaları (`PROJECT_STATE.json`,
+`COLLECTION_STATUS.md`, bu dosya) yalnız entegratörde (`claude-canva`). Her push'tan önce
+`git pull --rebase origin main`.
+
 ## İş bir cümlede
 
 Yabancı Etsy alıcılarına; Canva'da isim, tarih, fotoğraf, video ve linklerini kendisi

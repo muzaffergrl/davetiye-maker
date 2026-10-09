@@ -13,17 +13,15 @@ Her prompt'un altında dosyanın **tam kaydedileceği yer ve adı** yazıyor.
 - **Dal (branch):** `main`
 - **Klasörler:** `collections/02_Dusty_Blue/assets/gpt/` altındaki `textures/`, `decor/`, `photos/`, `mockups/`
 - **Commit mesajı:** `GPT görselleri: Paket 1 ve 2`
-- Repoya doğrudan yazılamıyorsa: dosyaları **birebir bu adlarla** indirilebilir ver; kullanıcı GitHub'da
-  ilgili klasöre **Add file → Upload files** ile yükler.
+- Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme işi verilmez (AGENTS.md kalıcı talep 6).
+- Görevler: `gorevler/G010` (Paket 1), `G011` (Paket 2), `G013` (Paket 3). Protokol: `gorevler/README.md`.
 
 ## Nasıl teslim edilir?
 
-1. Prompt'u GPT'ye olduğu gibi yapıştır (İngilizce kalsın).
-2. Çıkan görseli **yeniden adlandırmadan önce** kontrol listesine bak; uymuyorsa GPT'den tekrar iste.
-3. Dosyayı repoda belirtilen klasöre, belirtilen adla koy:
-   - Bilgisayarda: repo klasöründe ilgili yola kopyala → commit → push (`main`).
-   - veya GitHub web: `muzaffergrl/davetiye-maker` → ilgili klasör → **Add file → Upload files**.
-4. Bana "yükledim" yaz. Dosyaları oradan alırım.
+1. Prompt'u olduğu gibi kullan (İngilizce kalsın).
+2. Çıkan görseli kontrol listesine göre denetle; uymuyorsa yeniden üret.
+3. Dosyayı belirtilen klasöre, belirtilen adla koy → commit → `git pull --rebase` → push (`main`).
+4. Görev dosyasının **Sonuç** bölümüne hangi dosyaları koyduğunu yaz.
 
 **Adı ve klasörü değiştirme.** Aynı parçadan birden fazla deneme varsa sonuna `_v2`, `_v3` ekle; en
 beğendiğini sade adla bırak.

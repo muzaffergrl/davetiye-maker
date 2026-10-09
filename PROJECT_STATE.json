@@ -181,7 +181,47 @@
         "guest_pdf": "not_started",
         "canva_native_animation": "not_started (API desteklemiyor; Canva arayüzünde eklenecek)"
       },
-      "canva_account_note": "2026-10-09: claude.ai Canva bağlayıcısı yeni hesaba bağlı. Bu hesapta 01 Olive & Ivory tasarımları açılıyor, eski 02 master DAHXgy2GM3s açılmıyor."
+      "canva_account_note": "2026-10-09: claude.ai Canva bağlayıcısı yeni hesaba bağlı. Bu hesapta 01 Olive & Ivory tasarımları açılıyor, eski 02 master DAHXgy2GM3s açılmıyor.",
+      "template": {
+        "id": "T1",
+        "name": "Envelope Story",
+        "plan": "docs/06_FABRIKA_PLANI.md",
+        "kit_standard": "docs/07_KIT_STANDARDI.md",
+        "text_slots": "collections/02_Dusty_Blue/canva/TEXT_SLOTS.json"
+      },
+      "variants": [
+        {
+          "id": "V01_dusty_blue",
+          "kit_root": "collections/02_Dusty_Blue",
+          "status": "prompts_ready"
+        },
+        {
+          "id": "V02_blush_champagne",
+          "kit_root": "collections/02_Dusty_Blue/variants/V02_blush_champagne",
+          "status": "prompts_ready"
+        },
+        {
+          "id": "V03_terracotta_cream",
+          "kit_root": "collections/02_Dusty_Blue/variants/V03_terracotta_cream",
+          "status": "prompts_ready"
+        },
+        {
+          "id": "V04_navy_gold",
+          "kit_root": "collections/02_Dusty_Blue/variants/V04_navy_gold",
+          "status": "prompts_ready"
+        },
+        {
+          "id": "V05_burgundy_blush",
+          "kit_root": "collections/02_Dusty_Blue/variants/V05_burgundy_blush",
+          "status": "prompts_ready"
+        },
+        {
+          "id": "V06_lavender_silver",
+          "kit_root": "collections/02_Dusty_Blue/variants/V06_lavender_silver",
+          "status": "prompts_ready"
+        }
+      ]
     }
-  ]
+  ],
+  "task_board": "gorevler/ (tools/gorev.py)"
 }

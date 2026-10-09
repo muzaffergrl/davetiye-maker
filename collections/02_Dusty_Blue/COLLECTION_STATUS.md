@@ -62,3 +62,18 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 
 GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (Paket 1 dokular/dekor · Paket 2 fotoğraflar · Paket 3 mockup'lar).
 Canva yükleme çalışıyor (canva.com izinli). Katman yeniden yükleme/PPTX araçları: `tools/build_canva_pptx.py` (Canva doğrudan PPTX yüklemeyi reddediyor; import-design-from-url herkese açık URL ister). Export indirme çalışıyor (`export-download.canva.com` izinli).
+
+## Kalıp T1 ve renk varyantları (2026-10-09)
+Bu koleksiyon **kalıp T1 · Envelope Story**'dir. Plan: `docs/06_FABRIKA_PLANI.md`, kit standardı:
+`docs/07_KIT_STANDARDI.md`, görevler: `gorevler/`.
+
+| Varyant | Kit kökü | Durum |
+|---|---|---|
+| V01 Dusty Blue & Champagne | `collections/02_Dusty_Blue/` | prompt hazır (G010, G011, G013) |
+| V02 Blush & Champagne | `variants/V02_blush_champagne/` | prompt hazır (G030) |
+| V03 Terracotta & Cream | `variants/V03_terracotta_cream/` | prompt hazır (G031) |
+| V04 Navy & Gold | `variants/V04_navy_gold/` | prompt hazır (G032) |
+| V05 Burgundy & Blush | `variants/V05_burgundy_blush/` | prompt hazır (G033) |
+| V06 Lavender & Silver | `variants/V06_lavender_silver/` | prompt hazır (G034) |
+
+`assets/layers/` = dondurulmuş maske kaynağı (üzerine yazılmaz). Canva metin alanları: `canva/TEXT_SLOTS.json`.
