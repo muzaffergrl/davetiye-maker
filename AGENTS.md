@@ -62,3 +62,18 @@ yayın URL'si, son kontrol tarihi.
 - `icerik-tutarlilik` — tek içerik kaydına göre tüm formatların denetimi
 - `qr-kod` — gerçek QR üretimi
 - `yeni-koleksiyon` — yeni koleksiyon/varyant açma
+
+## Kullanıcının kalıcı talepleri (2026-10-09)
+
+1. **Grafik üretimi GPT ile:** Fotoğraf gerçekliği gereken doku, dekor, örnek fotoğraf ve mockup'ları
+   GPT üretir. Her ihtiyaçta prompt'u **İngilizce** yaz, kaydedileceği **tam yolu ve dosya adını**
+   belirt; `collections/<koleksiyon>/assets/gpt/GPT_PROMPTS.md` dosyasına ekle ve sohbette de ver.
+   Klasörler: `assets/gpt/{textures,decor,photos,mockups}/`. Dosyaları oradan çek.
+2. **Her teslimde Canva düzenleme linki:** Kullanıcıya her üretim turunda Canva'da düzenlenebilir
+   tasarımın linkini gönder. Canva'ya ulaşılamıyorsa bunu açıkça söyle; link yerine başka bir şey sunma.
+3. **Her tasarım eksiksiz paket:** video + website (Canva Form ile RSVP) + PDF davetiye + paylaşım
+   görseli + alıcı kullanım kılavuzu PDF'i. Liste ve bitiş şartları: `docs/05_SET_PAKETI.md`.
+4. **Kılavuz PDF'i hatasız olmalı:** Alıcı indirdiğinde sorun yaşamamalı; her link ve adım gerçek
+   arayüzde denenir.
+5. **Etsy ilan PDF'i:** Her set için ilan görselleri, video ve Etsy'nin istediği tüm alanları içeren
+   PDF hazırlanır ve `collections/<koleksiyon>/package/listing/` içine konur.

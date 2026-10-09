@@ -49,3 +49,16 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 - Botanikler vektör çizim; fotogerçekçi dantel/kağıt/mum dokusu değil. Fotogerçekçi doku görsel modelle (ör. GPT) daha iyi üretilir.
 - Bu dosya Canva'da düzenlenebilir proje **değildir**. Canva'ya taşımak için: dekor katmanları ayrı PNG/SVG, metinler Canva metni, animasyonlar Canva'nın kendi animasyonlarıyla yeniden kurulmalı — bu aşama yapılmadı.
 - RSVP butonu ve website metni görseldir; bağlantı yok.
+
+## Set paketi durumu (`docs/05_SET_PAKETI.md`)
+| # | Parça | Durum |
+|---|---|---|
+| A1 | Canva video (animasyonlu) | başlanmadı — GPT dokuları bekleniyor |
+| A2 | Canva website + Form RSVP | başlanmadı |
+| A3 | Davetiye PDF | başlanmadı |
+| A4 | Paylaşım görseli (story + kare) | başlanmadı |
+| A5 | Kullanım kılavuzu PDF | başlanmadı |
+| B1–B3 | Etsy ilan görselleri, video, ilan PDF'i | başlanmadı |
+
+GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (Paket 1 dokular/dekor · Paket 2 fotoğraflar · Paket 3 mockup'lar).
+Engel: Canva'ya yerel dosya yükleme bu ortamda `canva.com` ağ izni bekliyor.
