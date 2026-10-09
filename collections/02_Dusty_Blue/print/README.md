@@ -88,3 +88,8 @@ Playwright (Chromium) ile her dosya açılır, `document.fonts.ready` beklenir, 
    kart, mühür, fotoğraf yer tutucusu). Katman yoksa CSS ile çiz veya gpt-gorsel görevi öner.
 4. Metinleri o tasarımın `content.demo.json`'undan doldur; `data-slot` adlarını koru.
 5. Önizlemeleri üret, taşma listesinin boş olduğunu ve görselde çakışma olmadığını kontrol et.
+
+
+## Ampersand kuralı (entegratör, 2026-10-09)
+Pinyon Script'in `&` glifi "v" gibi okunuyor. Script başlıklardaki `&` her zaman
+`<span class="amp">&amp;</span>` (Cormorant Garamond italik, altın, ~0.72em) ile yazılır. G5NN/G4NN aynı kuralı uygular.

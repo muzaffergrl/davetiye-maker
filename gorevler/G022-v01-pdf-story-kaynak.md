@@ -2,7 +2,7 @@
 id: G022
 baslik: A3 + A4 — 5×7 davetiye ve story/kare kaynakları
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-4
 oncelik: 2
 bagimli: []
@@ -57,6 +57,9 @@ ve PDF'teki link davranışı, gerçek baskı (renk/kesim payı — 5×7'de taş
   büyütüp polaroid_frame.png'yi yeniden üretmek (`tools/export_layers.mjs` / layers.json `pad: 50` → ~80).
 - "Save our date" ve "we're getting married" şablon metinleridir (kişisel veri değil); alıcı değiştirebilir.
 
+- Entegratör (2026-10-09): önizlemeler kontrol edildi; Pinyon `&` sorunu düzeltildi (`.amp` span, README'ye kural eklendi), önizlemeler yeniden üretildi.
+
 ## Günlük
 - 2026-10-09 alindi: claude-kod-4
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı

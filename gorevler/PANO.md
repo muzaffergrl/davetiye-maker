@@ -3,19 +3,19 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 327 · alindi 4 · inceleme 3 · blokaj 1 · bitti 4 · toplam 339
+Özet: hazir 329 · alindi 4 · inceleme 0 · blokaj 1 · bitti 7 · toplam 341
 
 ## claude-canva
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G023` p3 — A3 + A4 — Canva'da kur ve export et → `gorevler/G023-v01-pdf-story-canva.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (0)**
 
 - (yok)
 
-Bağımlılık bekleyen: 83 · Biten: 2
+Bağımlılık bekleyen: 82 · Biten: 2
 
 ## claude-tarayici
 
@@ -27,11 +27,11 @@ Bağımlılık bekleyen: 83 · Biten: 2
 
 - (yok)
 
-Bağımlılık bekleyen: 40 · Biten: 0
+Bağımlılık bekleyen: 41 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (19)**
+**Alınabilir (39)**
 
 - `G101` p2 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar → `gorevler/G101-kaynak.md`
 - `G104` p2 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar → `gorevler/G104-kaynak.md`
@@ -51,31 +51,68 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G118` p2 — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar → `gorevler/G118-kaynak.md`
 - `G119` p2 — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar → `gorevler/G119-kaynak.md`
 - `G120` p2 — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar → `gorevler/G120-kaynak.md`
+- `G006` p3 — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik) → `gorevler/G006-polaroid-katman-pad.md`
+- `G501` p3 — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G501-baski-kaynak.md`
+- `G503` p3 — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G503-baski-kaynak.md`
+- `G504` p3 — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G504-baski-kaynak.md`
+- `G505` p3 — Tasarım 05 Mediterranean Lemon — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G505-baski-kaynak.md`
+- `G506` p3 — Tasarım 06 Art Deco Black-Tie — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G506-baski-kaynak.md`
+- `G507` p3 — Tasarım 07 Burgundy Velvet Autumn — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G507-baski-kaynak.md`
+- `G508` p3 — Tasarım 08 Winter Evergreen — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G508-baski-kaynak.md`
+- `G509` p3 — Tasarım 09 Lavender Provence — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G509-baski-kaynak.md`
+- `G510` p3 — Tasarım 10 Tuscan Vineyard — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G510-baski-kaynak.md`
+- `G511` p3 — Tasarım 11 Boho Pampas Terracotta — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G511-baski-kaynak.md`
+- `G512` p3 — Tasarım 12 Tropical Destination — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G512-baski-kaynak.md`
+- `G513` p3 — Tasarım 13 Enchanted Forest Storybook — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G513-baski-kaynak.md`
+- `G514` p3 — Tasarım 14 Ivory Lace & Pearls — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G514-baski-kaynak.md`
+- `G515` p3 — Tasarım 15 Cherry Blossom Spring — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G515-baski-kaynak.md`
+- `G516` p3 — Tasarım 16 Sunflower Rustic Barn — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G516-baski-kaynak.md`
+- `G517` p3 — Tasarım 17 Emerald & Gold Estate — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G517-baski-kaynak.md`
+- `G518` p3 — Tasarım 18 Wildflower Meadow Vellum — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G518-baski-kaynak.md`
+- `G519` p3 — Tasarım 19 Midnight Garden — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G519-baski-kaynak.md`
+- `G520` p3 — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G520-baski-kaynak.md`
 - `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (5)**
+**Üzerinde çalışılan / incelemede / blokaj (4)**
 
 - `G020` alindi · claude-kod-3 — A2 — tek sayfa responsive website HTML kaynağı
-- `G022` inceleme · claude-kod-4 — A3 + A4 — 5×7 davetiye ve story/kare kaynakları
 - `G028` alindi · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 - `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 - `G026` alindi · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF
 
-Bağımlılık bekleyen: 78 · Biten: 2
+Bağımlılık bekleyen: 59 · Biten: 3
 
 ## claude-metin
 
-**Alınabilir (2)**
+**Alınabilir (21)**
 
 - `G005` p1 — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması → `gorevler/G005-canva-ui-web-arastirma.md`
+- `G701` p3 — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G701-metinler.md`
+- `G703` p3 — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G703-metinler.md`
+- `G704` p3 — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G704-metinler.md`
+- `G705` p3 — Tasarım 05 Mediterranean Lemon — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G705-metinler.md`
+- `G706` p3 — Tasarım 06 Art Deco Black-Tie — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G706-metinler.md`
+- `G707` p3 — Tasarım 07 Burgundy Velvet Autumn — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G707-metinler.md`
+- `G708` p3 — Tasarım 08 Winter Evergreen — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G708-metinler.md`
+- `G709` p3 — Tasarım 09 Lavender Provence — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G709-metinler.md`
+- `G710` p3 — Tasarım 10 Tuscan Vineyard — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G710-metinler.md`
+- `G711` p3 — Tasarım 11 Boho Pampas Terracotta — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G711-metinler.md`
+- `G712` p3 — Tasarım 12 Tropical Destination — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G712-metinler.md`
+- `G713` p3 — Tasarım 13 Enchanted Forest Storybook — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G713-metinler.md`
+- `G714` p3 — Tasarım 14 Ivory Lace & Pearls — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G714-metinler.md`
+- `G715` p3 — Tasarım 15 Cherry Blossom Spring — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G715-metinler.md`
+- `G716` p3 — Tasarım 16 Sunflower Rustic Barn — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G716-metinler.md`
+- `G717` p3 — Tasarım 17 Emerald & Gold Estate — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G717-metinler.md`
+- `G718` p3 — Tasarım 18 Wildflower Meadow Vellum — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G718-metinler.md`
+- `G719` p3 — Tasarım 19 Midnight Garden — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G719-metinler.md`
+- `G720` p3 — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G720-metinler.md`
 - `G050` p7 — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower) → `gorevler/G050-etkinlik-turu-metinleri.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (2)**
+**Üzerinde çalışılan / incelemede / blokaj (0)**
 
-- `G024` inceleme · claude-metin-1 — A5 — START HERE kılavuz metni (İngilizce)
-- `G025` inceleme · claude-metin-1 — B3 — Etsy ilan metni
+- (yok)
 
-Bağımlılık bekleyen: 19 · Biten: 0
+Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-qa
 

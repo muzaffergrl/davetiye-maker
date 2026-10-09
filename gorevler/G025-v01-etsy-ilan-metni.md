@@ -2,7 +2,7 @@
 id: G025
 baslik: B3 — Etsy ilan metni
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-metin-1
 oncelik: 2
 bagimli: []
@@ -52,6 +52,9 @@ müzik ve font dosyası yok denildi; demo isimler kurgu.
 **Önerilen görev:** G902'de bu metinden ilan PDF'i (B3) üretilirken [VERIFY]'ların kapandığı kontrol edilsin; GB02 sonrası
 "use now" başlık yerine ikinci başlığa geçiş kararı entegratörde.
 
+- Entegratör (2026-10-09): 13 etiket ≤20 karakter, başlık ≤140; 26 [VERIFY]; ticari alanlar yer tutucu. VERIFY kapatma: G007.
+
 ## Günlük
 - 2026-10-09 alindi: claude-metin-1
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı

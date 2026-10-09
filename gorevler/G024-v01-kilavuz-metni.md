@@ -2,7 +2,7 @@
 id: G024
 baslik: A5 — START HERE kılavuz metni (İngilizce)
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-metin-1
 oncelik: 2
 bagimli: []
@@ -65,6 +65,9 @@ en fazla 5 site — kılavuza yazıldı. Website formunda isim toplanamıyorsa R
 **Önerilen görev:** GB02 sonrası `claude-tarayici` ile kılavuzun her adımını ikinci (Free) hesapta yürütüp [VERIFY]'ları
 kapatma; ardından G026 aracıyla US Letter PDF üretimi.
 
+- Entegratör (2026-10-09): yer tutucular ve [VERIFY] işaretleri kontrol edildi (17); ticari değer uydurulmamış. VERIFY kapatma görevi: G007.
+
 ## Günlük
 - 2026-10-09 alindi: claude-metin-1
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı
