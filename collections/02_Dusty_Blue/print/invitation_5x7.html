@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1500">
+<title>Dusty Blue 5x7 Invitation</title>
+<!-- Koleksiyon 02 — Dusty Blue & Champagne. 5×7 in davetiye, 1500×2100 px (300 dpi). Düzen: README.md -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@500&family=Pinyon+Script&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B3A4E; --deep: #4E6782; --gold: #B8996A; --gold-light: #D9C49E; --ivory: #FBF7EF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #E4E9EE; }
+  body { padding: 0; }
+  .page { position: relative; width: 1500px; height: 2100px; overflow: hidden; background: var(--ivory);
+          font-family: 'Cormorant Garamond', Georgia, serif; color: var(--ink); }
+  .abs { position: absolute; }
+  .t { position: absolute; left: 0; width: 1500px; text-align: center; }
+  .caps { font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; color: var(--deep); }
+  .script { font-family: 'Pinyon Script', cursive; font-weight: 400; color: var(--ink); line-height: 1.1; }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-variant-numeric: lining-nums; }
+  .it { font-style: italic; }
+  .line { position: absolute; height: 0; border-top: 2px solid var(--gold); }
+  a { color: inherit; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page" data-document-role="page" data-name="Invitation 5x7">
+
+  <!-- çift altın çerçeve (video sahne 4 kartı: .b1/.b2) -->
+  <div class="abs" style="left:52px;top:52px;width:1396px;height:1996px;border:3px solid var(--gold-light)"></div>
+  <div class="abs" style="left:72px;top:72px;width:1356px;height:1956px;border:1.5px solid var(--gold-light)"></div>
+
+  <!-- köşe botanikleri -->
+  <img class="abs" src="../assets/layers/card_botanical_tl.png" alt="" style="left:6px;top:6px;width:400px;height:400px">
+  <img class="abs" src="../assets/layers/card_botanical_br.png" alt="" style="left:1094px;top:1694px;width:400px;height:400px">
+
+  <!-- metin: content.demo.json -->
+  <div class="t caps" data-slot="host_line" style="top:330px;font-size:36px;line-height:44px">Together with their families</div>
+
+  <div class="t script" data-slot="partner_1_full" style="top:440px;font-size:196px;line-height:216px">Eleanor Grace</div>
+  <div class="t script" data-slot="ampersand" style="top:640px;font-size:150px;line-height:150px;color:var(--gold)">&amp;</div>
+  <div class="t script" data-slot="partner_2_full" style="top:780px;font-size:196px;line-height:216px">Theodore James</div>
+
+  <div class="t serif it" data-slot="invite_line" style="top:1068px;font-size:56px;line-height:80px">request the pleasure of your company<br>at the celebration of their marriage</div>
+
+  <!-- tarih kutusu -->
+  <div class="line" style="left:200px;top:1388px;width:390px"></div>
+  <div class="line" style="left:200px;top:1474px;width:390px"></div>
+  <div class="abs caps" data-slot="weekday" style="left:200px;top:1411px;width:390px;text-align:center;font-size:32px;line-height:40px;letter-spacing:.24em">Saturday</div>
+  <div class="line" style="left:910px;top:1388px;width:390px"></div>
+  <div class="line" style="left:910px;top:1474px;width:390px"></div>
+  <div class="abs caps" data-slot="time" style="left:910px;top:1411px;width:390px;text-align:center;font-size:32px;line-height:40px;letter-spacing:.24em">At 4:30 PM</div>
+  <div class="abs caps" data-slot="month" style="left:590px;top:1290px;width:320px;text-align:center;font-size:32px;line-height:40px">September</div>
+  <div class="abs serif" data-slot="day" style="left:590px;top:1336px;width:320px;text-align:center;font-size:200px;line-height:200px;color:var(--ink)">18</div>
+  <div class="abs caps" data-slot="year" style="left:590px;top:1540px;width:320px;text-align:center;font-size:32px;line-height:40px">2027</div>
+
+  <div class="t serif" data-slot="venue_name" style="top:1636px;font-size:76px;line-height:90px;font-weight:600;letter-spacing:.02em">Rosewood Manor</div>
+  <div class="t serif it" data-slot="venue_city" style="top:1730px;font-size:54px;line-height:66px;color:var(--deep)">Charleston, South Carolina</div>
+
+  <!-- RSVP satırı. Link YER TUTUCU: href="#" — alıcı Canva'da kendi RSVP/website adresini bağlar. Gerçek URL yok. -->
+  <div class="t caps" data-slot="rsvp_line" style="top:1872px;font-size:24px;line-height:32px;letter-spacing:.3em">Kindly reply by August 1, 2027</div>
+  <div class="t serif it" data-slot="rsvp_link" style="top:1912px;font-size:40px;line-height:52px;color:var(--deep)"><a href="#" data-placeholder="rsvp_url">RSVP online at our wedding website</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>Dusty Blue Square</title>
+<!-- Koleksiyon 02 — Dusty Blue & Champagne. Kare paylaşım görseli 1080×1080. Düzen: README.md -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@500&family=Pinyon+Script&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B3A4E; --deep: #4E6782; --gold: #B8996A; --gold-light: #D9C49E; --ivory: #FBF7EF; --mist: #DDE5EC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #1d2633; }
+  .page { position: relative; width: 1080px; height: 1080px; overflow: hidden; background: var(--mist);
+          font-family: 'Cormorant Garamond', Georgia, serif; color: var(--ink); }
+  .abs { position: absolute; }
+  .t { position: absolute; left: 0; width: 1080px; text-align: center; }
+  .caps { font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; color: var(--deep); }
+  .script { font-family: 'Pinyon Script', cursive; font-weight: 400; color: var(--ink); line-height: 1.1; }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-variant-numeric: lining-nums; }
+  .it { font-style: italic; }
+  .line { position: absolute; height: 0; border-top: 1.5px solid var(--gold); }
+  .mono { position: absolute; text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
+          color: #E9EEF3; text-shadow: 0 2px 2px rgba(25,38,55,.45); }
+  a { color: inherit; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page" data-document-role="page" data-name="Square 1080x1080">
+
+  <!-- arka plan (9:16 sis görselinin orta kesiti) ve köşe botanikleri -->
+  <img class="abs" src="../assets/layers/bg_mist.jpg" alt="" style="left:0;top:-420px;width:1080px;height:1920px">
+  <img class="abs" src="../assets/layers/botanical_tl.png" alt="" style="left:-45px;top:-45px;width:300px;height:300px">
+  <img class="abs" src="../assets/layers/botanical_br.png" alt="" style="left:780px;top:780px;width:300px;height:300px">
+
+  <!-- fildişi kart (gölgesi görselde) -->
+  <img class="abs" src="../assets/layers/card_small_blank.png" alt="" style="left:130px;top:150px;width:820px;height:600px">
+
+  <div class="t caps" data-slot="kicker" style="top:236px;font-size:22px;line-height:28px">Save our date</div>
+  <div class="t script" data-slot="name_display" style="top:288px;font-size:112px;line-height:132px">Eleanor &amp; Theo</div>
+  <div class="line" style="left:200px;top:479px;width:110px"></div>
+  <div class="t caps" data-slot="date" style="top:464px;font-size:24px;line-height:30px">September 18, 2027</div>
+  <div class="line" style="left:770px;top:479px;width:110px"></div>
+  <div class="t serif" data-slot="venue_name" style="top:530px;font-size:46px;line-height:56px;font-weight:600;letter-spacing:.02em">Rosewood Manor</div>
+  <div class="t serif it" data-slot="venue_city" style="top:588px;font-size:34px;line-height:44px;color:var(--deep)">Charleston, South Carolina</div>
+
+  <!-- mum mühür + monogram (monogram ayrı metin, görsele pişirilmedi) -->
+  <img class="abs" src="../assets/layers/wax_seal.png" alt="" style="left:460px;top:668px;width:160px;height:160px">
+  <div class="mono" data-slot="initials" style="left:460px;top:668px;width:160px;height:160px;font-size:44px;line-height:160px">E&amp;T</div>
+
+  <div class="t serif it" data-slot="rsvp_line" style="top:850px;font-size:38px;line-height:48px">Kindly reply by August 1, 2027</div>
+  <!-- RSVP linki YER TUTUCU: href="#" — alıcı Canva'da kendi RSVP/website adresini bağlar. Gerçek URL yok. -->
+  <div class="t caps" data-slot="rsvp_link" style="top:912px;font-size:20px;line-height:28px"><a href="#" data-placeholder="rsvp_url">RSVP on our wedding website</a></div>
+</div>
+</body>
+</html>
