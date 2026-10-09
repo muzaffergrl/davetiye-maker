@@ -1,5 +1,5 @@
 ---
-id: G032
+id: G072
 baslik: V04_navy_gold — Paket 1 + Paket 3 görselleri
 rol: gpt-gorsel
 durum: hazir

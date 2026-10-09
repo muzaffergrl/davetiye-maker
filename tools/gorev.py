@@ -54,13 +54,23 @@ def dump(meta):
     meta["_path"].write_text("\n".join(lines) + "\n" + meta["_body"])
 
 
+TEKRAR = {}  # aynı id'yi taşıyan birden çok dosya: id -> [dosya adları]
+
+
 def load():
-    return {m["id"]: m for m in (parse(p) for p in sorted(DIR.glob("G*.md")))}
+    tasks = {}
+    for m in (parse(p) for p in sorted(DIR.glob("G*.md"))):
+        if m["id"] in tasks:
+            TEKRAR.setdefault(m["id"], [tasks[m["id"]]["_path"].name]).append(m["_path"].name)
+        tasks[m["id"]] = m
+    return tasks
 
 
 def get(tasks, tid):
     if tid not in tasks:
         sys.exit(f"görev yok: {tid}")
+    if tid in TEKRAR:
+        sys.exit(f"{tid} birden çok dosyada: {', '.join(TEKRAR[tid])} — entegratöre bildir, dosyalara elle dokunma")
     return tasks[tid]
 
 
@@ -116,6 +126,8 @@ def set_durum(tasks, tid, durum, msg):
 
 def cmd_kontrol(a, tasks):
     hata = 0
+    for tid, adlar in TEKRAR.items():
+        print(f"{tid}: aynı id birden çok dosyada: {', '.join(adlar)}"); hata += 1
     for t in tasks.values():
         for k in ALANLAR:
             if k not in t:

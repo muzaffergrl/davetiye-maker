@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 290 · alindi 0 · inceleme 0 · blokaj 40 · bitti 11 · toplam 341
+Özet: hazir 292 · alindi 1 · inceleme 0 · blokaj 40 · bitti 12 · toplam 345
 
 ## claude-canva
 
@@ -16,7 +16,7 @@
 
 - `GV02C` blokaj · - — Video pilotu · Karşılaştırma ve karar (Canva animasyonu vs GPT hibrit)
 
-Bağımlılık bekleyen: 80 · Biten: 2
+Bağımlılık bekleyen: 81 · Biten: 2
 
 ## claude-tarayici
 
@@ -96,7 +96,7 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 
-Bağımlılık bekleyen: 40 · Biten: 7
+Bağımlılık bekleyen: 41 · Biten: 8
 
 ## claude-metin
 
@@ -169,8 +169,9 @@ Bağımlılık bekleyen: 20 · Biten: 0
 - `G819` p4 — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri → `gorevler/G819-mockup.md`
 - `G820` p4 — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (20)**
+**Üzerinde çalışılan / incelemede / blokaj (21)**
 
+- `G030` alindi · gpt-gorsel-1 — Tasarım 03 Blush Garden Rose — GPT tasarım paketi (Paket 4: sahne comp'ları + parçalar) · PİLOT
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)

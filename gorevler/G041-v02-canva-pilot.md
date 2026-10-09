@@ -5,7 +5,7 @@ rol: claude-canva
 durum: hazir
 alan:
 oncelik: 5
-bagimli: [G001, G030, G040, G090]
+bagimli: [G001, G070, G040, G090]
 yazar: [collections/02_Dusty_Blue/variants/V02_blush_champagne/canva/]
 ---
 

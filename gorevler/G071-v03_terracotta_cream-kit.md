@@ -1,5 +1,5 @@
 ---
-id: G031
+id: G071
 baslik: V03_terracotta_cream — Paket 1 + Paket 3 görselleri
 rol: gpt-gorsel
 durum: hazir

@@ -5,7 +5,7 @@ rol: claude-canva
 durum: hazir
 alan:
 oncelik: 6
-bagimli: [G030, G031, G032, G033, G034, G040, G041]
+bagimli: [G070, G071, G072, G073, G074, G040, G041]
 yazar: [collections/02_Dusty_Blue/variants/]
 ---
 

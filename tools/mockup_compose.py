@@ -39,8 +39,10 @@ SABLONLAR = ["whats_included", "how_it_works", "edit_in_canva"]
 # ----------------------------------------------------------------------------- maske
 
 def yesil_maske(rgb: np.ndarray, tol: int = 40) -> np.ndarray:
+    """#00FF00 (±tol) ya da yeşil baskın piksel (G − max(R,B) ≥ 150). GPT'nin "düz yeşili" ≈ (3, 252, 45):
+    B kanalı ±40'ı aşabildiği için baskınlık testi de kabul edilir (parts_prep.yesil_baskin ile aynı eşik)."""
     r, g, b = (rgb[..., i].astype(np.int16) for i in range(3))
-    return (r <= tol) & (g >= 255 - tol) & (b <= tol)
+    return ((r <= tol) & (g >= 255 - tol) & (b <= tol)) | ((g - np.maximum(r, b) >= 150) & (g >= 150))
 
 
 def en_buyuk_bolge(maske: np.ndarray) -> np.ndarray:

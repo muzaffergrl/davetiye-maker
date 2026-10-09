@@ -10,7 +10,7 @@ Kontroller:
   - dosya var mı (sade ad; `_v2` gibi denemeler yalnız uyarı)
   - oran: hedef ölçünün oranına ±%2 (piksel değil oran; GPT çıktısı farklı çözünürlükte olabilir)
   - şeffaf istenenlerde: gerçek alfa kanalı, kenar şeridinin ≥%90'ı şeffaf (nesne kesilmemiş), içerik var
-  - mockup'larda: #00FF00 (±40) bölgesi görselin ≥%5'i ve sınır kutusunun ≥%90'ını dolduruyor (düz, tek parça)
+  - mockup'larda: #00FF00 (±40 ya da yeşil baskın) bölgesi görselin ≥%5'i ve sınır kutusunun ≥%90'ını dolduruyor (düz, tek parça)
   - şeffaf istenmeyen dokularda: alfa varsa tamamen opak
 Yazı/harf denetimi otomatik yapılmaz (OCR yok); görsel kontrol listesinde kalır.
 """
@@ -91,7 +91,8 @@ def denetle(b, kok: Path):
             sorun.append("opak olması gerekirken şeffaf pikseller var")
     if b["mockup"]:
         rgb = np.asarray(im.convert("RGB")).astype(int)
-        yesil = (np.abs(rgb[:, :, 0] - 0) <= 40) & (np.abs(rgb[:, :, 1] - 255) <= 40) & (np.abs(rgb[:, :, 2] - 0) <= 40)
+        yesil = ((np.abs(rgb[:, :, 0] - 0) <= 40) & (np.abs(rgb[:, :, 1] - 255) <= 40) & (np.abs(rgb[:, :, 2] - 0) <= 40)) \
+            | ((rgb[:, :, 1] - np.maximum(rgb[:, :, 0], rgb[:, :, 2]) >= 150) & (rgb[:, :, 1] >= 150))  # GPT yeşili ≈ (3,252,45)
         pay = yesil.mean()
         if pay < 0.05:
             sorun.append(f"#00FF00 alanı çok küçük/yok (%{pay*100:.1f})")

@@ -2,7 +2,7 @@
 id: G032
 baslik: tools/parts_prep.py — GPT parçalarını Canva katmanına hazırla (kırp, yeşil pencere, ön cep)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-9
 oncelik: 1
 bagimli: []
@@ -78,3 +78,4 @@ pencere bulma renk eşiğine bağlı; 2160×3840 bg büyütmedir. Ayrıntı mod�
 ## Günlük
 - 2026-10-09 alindi: claude-kod-9 (not: G032 numarası G032-v04_navy_gold-kit.md ile çakışıyor; gorev.py yanlış dosyayı okuduğu için elle alındı)
 - 2026-10-09 inceleme: claude-kod-9 (elle; gorev.py G032 numarasını V04 dosyasıyla karıştırıyor)
+- 2026-10-09 entegratör onayladı
