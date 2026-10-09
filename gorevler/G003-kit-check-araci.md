@@ -2,7 +2,7 @@
 id: G003
 baslik: tools/kit_check.py — kit doğrulayıcı
 rol: claude-kod
-durum: alindi
+durum: bitti
 alan: claude-kod-1
 oncelik: 1
 bagimli: []
@@ -27,7 +27,15 @@ GPT'nin ürettiği ham kit dosyalarını Canva'ya girmeden önce otomatik denetl
 - [ ] Sahte iyi/kötü örneklerle doğru sonuç
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- `tools/kit_check.py`: beklenen dosyaları her kitin GPT_PROMPTS.md `**Kaydet:**` satırlarından okur (20 tasarım, V01, V02–V06); `--paket 1|2|3`.
+- Kontroller: dosya var mı (`_vN` denemeleri uyarı), oran ±%2, şeffaflık (alfa + kenar şeridi ≥%90 şeffaf + içerik var),
+  opak dokuda şeffaf piksel yok, mockup'ta #00FF00 alanı ≥%5 ve sınır kutusunun ≥%90'ı (tek parça). Çıkış kodu 0/1.
+- Test: `tools/tests/test_kit_check.py` (sahte iyi/kötü kit, repo dışında) — geçti.
+- Boş kitlerde doğru eksik raporu: 02 Paket 1 → 0/6, 03 → 0/10, V02 → 0/9, 04 Paket 3 → 0/3.
+- Test edilmedi: OCR ile yazı denetimi (yok; görsel kontrol listesinde kalıyor).
+- `tools/requirements.txt`: Pillow, numpy eklendi.
 
 ## Günlük
 - 2026-10-09 alindi: claude-kod-1
+- 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı

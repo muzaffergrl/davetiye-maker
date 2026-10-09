@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 334 · alindi 0 · inceleme 0 · blokaj 0 · bitti 2 · toplam 336
+Özet: hazir 333 · alindi 0 · inceleme 0 · blokaj 0 · bitti 3 · toplam 336
 
 ## claude-canva
 
@@ -31,10 +31,9 @@ Bağımlılık bekleyen: 39 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (25)**
+**Alınabilir (24)**
 
 - `G002` p1 — tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel) → `gorevler/G002-kit-build-araci.md`
-- `G003` p1 — tools/kit_check.py — kit doğrulayıcı → `gorevler/G003-kit-check-araci.md`
 - `G020` p2 — A2 — tek sayfa responsive website HTML kaynağı → `gorevler/G020-v01-website-kaynak.md`
 - `G022` p2 — A3 + A4 — 5×7 davetiye ve story/kare kaynakları → `gorevler/G022-v01-pdf-story-kaynak.md`
 - `G028` p2 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları → `gorevler/G028-mockup-compose-araci.md`
@@ -63,7 +62,7 @@ Bağımlılık bekleyen: 39 · Biten: 0
 
 - (yok)
 
-Bağımlılık bekleyen: 79 · Biten: 0
+Bağımlılık bekleyen: 79 · Biten: 1
 
 ## claude-metin
 

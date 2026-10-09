@@ -1,2 +1,4 @@
 jsonschema>=4.21
 segno>=1.6
+Pillow>=10
+numpy>=1.26
