@@ -1,7 +1,7 @@
 ---
 id: G112
 baslik: Tasarım 12 Tropical Destination — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

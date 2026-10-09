@@ -1,7 +1,7 @@
 ---
 id: G706
 baslik: Tasarım 06 Art Deco Black-Tie — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

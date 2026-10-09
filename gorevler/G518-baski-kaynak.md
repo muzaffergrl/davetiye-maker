@@ -1,7 +1,7 @@
 ---
 id: G518
 baslik: Tasarım 18 Wildflower Meadow Vellum — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

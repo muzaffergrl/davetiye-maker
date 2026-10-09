@@ -1,7 +1,7 @@
 ---
 id: G120
 baslik: Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

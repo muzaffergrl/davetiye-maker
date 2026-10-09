@@ -1,7 +1,7 @@
 ---
 id: G113
 baslik: Tasarım 13 Enchanted Forest Storybook — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

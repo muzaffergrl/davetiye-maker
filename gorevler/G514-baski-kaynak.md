@@ -1,7 +1,7 @@
 ---
 id: G514
 baslik: Tasarım 14 Ivory Lace & Pearls — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

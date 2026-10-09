@@ -1,7 +1,7 @@
 ---
 id: G119
 baslik: Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

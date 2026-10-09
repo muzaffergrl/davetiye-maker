@@ -12,9 +12,9 @@ Kullanıcı elle hiçbir iş yapmaz; ona iş verme, ondan dosya yüklemesi istem
 | Rol | Kim |
 |---|---|
 | `claude-canva` | Claude Code oturumu (Canva bağlayıcısı var). Aynı zamanda **entegratör** |
-| `gpt-gorsel` | ChatGPT görsel üretimi |
-| `gpt-kod` | Codex / kod ajanı |
-| `gpt-metin` | GPT metin ajanı |
+| `gpt-gorsel` | ChatGPT görsel üretimi (imagegen) — bütün görseller |
+| `claude-kod` | Claude Code oturumu (kod) |
+| `claude-metin` | Claude oturumu (metin) |
 | `claude-qa` | Claude denetçi (salt okunur) |
 
 Yalnız kendi rolündeki görevi al.
@@ -24,15 +24,15 @@ Yalnız kendi rolündeki görevi al.
 | ID | Ne | Rol |
 |---|---|---|
 | G0xx | Ortak araçlar, tasarım 02 pilot hattı, kapılar (G090) | çeşitli |
-| G1NN | Tasarım NN — HTML sahne kaynağı + katmanlar | gpt-kod |
+| G1NN | Tasarım NN — HTML sahne kaynağı + katmanlar | claude-kod |
 | G2NN | Tasarım NN — GPT görselleri Paket 1 | gpt-gorsel |
 | G3NN | Tasarım NN — Canva video master | claude-canva |
-| G4NN | Tasarım NN — website HTML kaynağı | gpt-kod |
-| G5NN | Tasarım NN — 5×7 davetiye + story/kare kaynağı | gpt-kod |
+| G4NN | Tasarım NN — website HTML kaynağı | claude-kod |
+| G5NN | Tasarım NN — 5×7 davetiye + story/kare kaynağı | claude-kod |
 | G6NN | Tasarım NN — Canva website + PDF + story/kare | claude-canva |
-| G7NN | Tasarım NN — kılavuz + Etsy ilan metni | gpt-metin |
+| G7NN | Tasarım NN — kılavuz + Etsy ilan metni | claude-metin |
 | G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
-| G9NN | Tasarım NN — Etsy ilan kiti montajı | gpt-kod |
+| G9NN | Tasarım NN — Etsy ilan kiti montajı | claude-kod |
 | GANN | Tasarım NN — animasyon, RSVP formu, yayın, template link | claude-canva |
 | GQNN | Tasarım NN — QA raporu | claude-qa |
 | GP1NN–GP4NN | Aşama 2: ek 5 palet (prompt, görsel, Canva, ilan) — G090'dan sonra | çeşitli |
@@ -117,7 +117,7 @@ git pull --rebase origin main && git push
 
 ```
 python3 tools/gorev.py liste                 # tüm görevler, duruma göre
-python3 tools/gorev.py liste --rol gpt-kod
+python3 tools/gorev.py liste --rol claude-kod
 python3 tools/gorev.py siradaki --rol gpt-gorsel
 python3 tools/gorev.py al G020 --ajan codex-1
 python3 tools/gorev.py bitir G020

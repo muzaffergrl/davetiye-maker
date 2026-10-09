@@ -1,7 +1,7 @@
 ---
 id: G719
 baslik: Tasarım 19 Midnight Garden — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

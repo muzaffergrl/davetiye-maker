@@ -1,7 +1,7 @@
 ---
 id: G020
 baslik: A2 — tek sayfa responsive website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

@@ -1,7 +1,7 @@
 ---
 id: G104
 baslik: Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

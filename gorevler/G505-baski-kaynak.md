@@ -1,7 +1,7 @@
 ---
 id: G505
 baslik: Tasarım 05 Mediterranean Lemon — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G908
 baslik: Tasarım 08 Winter Evergreen — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

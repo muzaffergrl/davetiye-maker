@@ -1,7 +1,7 @@
 ---
 id: G416
 baslik: Tasarım 16 Sunflower Rustic Barn — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

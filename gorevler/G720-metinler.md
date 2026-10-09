@@ -1,7 +1,7 @@
 ---
 id: G720
 baslik: Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G118
 baslik: Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

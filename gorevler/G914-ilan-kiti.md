@@ -1,7 +1,7 @@
 ---
 id: G914
 baslik: Tasarım 14 Ivory Lace & Pearls — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

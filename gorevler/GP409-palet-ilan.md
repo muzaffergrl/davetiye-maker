@@ -1,7 +1,7 @@
 ---
 id: GP409
 baslik: Aşama 2 · Tasarım 09 — 5 palet ilan kitleri
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 6

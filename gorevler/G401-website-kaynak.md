@@ -1,7 +1,7 @@
 ---
 id: G401
 baslik: Tasarım 01 Olive & Ivory — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

@@ -69,7 +69,7 @@ Bağımlılık bekleyen: 102 · Biten: 1
 
 Bağımlılık bekleyen: 24 · Biten: 0
 
-## gpt-kod
+## claude-kod
 
 **Alınabilir (25)**
 
@@ -105,11 +105,11 @@ Bağımlılık bekleyen: 24 · Biten: 0
 
 Bağımlılık bekleyen: 79 · Biten: 0
 
-## gpt-metin
+## claude-metin
 
 **Alınabilir (4)**
 
-- `G005` p1 — G004'ün GPT ayağı — Canva UI işleri için web/belge araştırması → `gorevler/G005-canva-ui-web-arastirma.md`
+- `G005` p1 — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması → `gorevler/G005-canva-ui-web-arastirma.md`
 - `G024` p2 — A5 — START HERE kılavuz metni (İngilizce) → `gorevler/G024-v01-kilavuz-metni.md`
 - `G025` p2 — B3 — Etsy ilan metni → `gorevler/G025-v01-etsy-ilan-metni.md`
 - `G050` p7 — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower) → `gorevler/G050-etkinlik-turu-metinleri.md`

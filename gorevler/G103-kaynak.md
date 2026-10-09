@@ -1,7 +1,7 @@
 ---
 id: G103
 baslik: Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

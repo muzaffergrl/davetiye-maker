@@ -1,7 +1,7 @@
 ---
 id: G710
 baslik: Tasarım 10 Tuscan Vineyard — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

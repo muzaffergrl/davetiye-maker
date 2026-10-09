@@ -1,7 +1,7 @@
 ---
 id: G901
 baslik: Tasarım 01 Olive & Ivory — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

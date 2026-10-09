@@ -1,7 +1,7 @@
 ---
 id: GP405
 baslik: Aşama 2 · Tasarım 05 — 5 palet ilan kitleri
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 6

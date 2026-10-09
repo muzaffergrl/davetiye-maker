@@ -1,7 +1,7 @@
 ---
 id: G108
 baslik: Tasarım 08 Winter Evergreen — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

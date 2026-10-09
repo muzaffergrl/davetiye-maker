@@ -1,7 +1,7 @@
 ---
 id: G106
 baslik: Tasarım 06 Art Deco Black-Tie — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

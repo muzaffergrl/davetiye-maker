@@ -1,7 +1,7 @@
 ---
 id: G040
 baslik: tools/make_variant.py — varyant hattı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

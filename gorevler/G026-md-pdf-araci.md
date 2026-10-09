@@ -1,7 +1,7 @@
 ---
 id: G026
 baslik: tools/md_to_pdf.py — markdown'dan markalı PDF
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

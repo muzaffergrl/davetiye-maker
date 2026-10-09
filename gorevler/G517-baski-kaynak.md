@@ -1,7 +1,7 @@
 ---
 id: G517
 baslik: Tasarım 17 Emerald & Gold Estate — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

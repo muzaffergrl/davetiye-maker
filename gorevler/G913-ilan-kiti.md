@@ -1,7 +1,7 @@
 ---
 id: G913
 baslik: Tasarım 13 Enchanted Forest Storybook — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

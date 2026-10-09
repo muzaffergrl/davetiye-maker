@@ -1,7 +1,7 @@
 ---
 id: G005
-baslik: G004'ün GPT ayağı — Canva UI işleri için web/belge araştırması
-rol: gpt-metin
+baslik: G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 1

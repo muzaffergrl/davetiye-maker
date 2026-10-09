@@ -1,7 +1,7 @@
 ---
 id: G420
 baslik: Tasarım 20 Coastal Seaside — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

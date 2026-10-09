@@ -1,7 +1,7 @@
 ---
 id: G413
 baslik: Tasarım 13 Enchanted Forest Storybook — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G714
 baslik: Tasarım 14 Ivory Lace & Pearls — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

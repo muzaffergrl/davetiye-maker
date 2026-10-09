@@ -1,7 +1,7 @@
 ---
 id: G003
 baslik: tools/kit_check.py — kit doğrulayıcı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 1

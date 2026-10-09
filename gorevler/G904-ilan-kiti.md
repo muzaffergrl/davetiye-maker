@@ -1,7 +1,7 @@
 ---
 id: G904
 baslik: Tasarım 04 Vintage Airmail Love Letter — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

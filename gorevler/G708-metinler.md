@@ -1,7 +1,7 @@
 ---
 id: G708
 baslik: Tasarım 08 Winter Evergreen — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G418
 baslik: Tasarım 18 Wildflower Meadow Vellum — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

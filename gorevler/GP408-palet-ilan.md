@@ -1,7 +1,7 @@
 ---
 id: GP408
 baslik: Aşama 2 · Tasarım 08 — 5 palet ilan kitleri
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 6

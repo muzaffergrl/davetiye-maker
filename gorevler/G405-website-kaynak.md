@@ -1,7 +1,7 @@
 ---
 id: G405
 baslik: Tasarım 05 Mediterranean Lemon — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

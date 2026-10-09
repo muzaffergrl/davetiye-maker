@@ -3,8 +3,8 @@
 Son güncelleme: 2026-10-09 · Sahibi: entegratör (`claude-canva`)
 
 Bu belge **ne üreteceğimizi ve hangi sırayla** üreteceğimizi anlatır. **Kimin hangi işi
-nasıl alacağı** ise `gorevler/README.md` dosyasındadır. Bütün ajanlar (Claude, GPT/Codex,
-GPT görsel) önce `AGENTS.md`'yi, sonra bu dosyayı, sonra `gorevler/README.md`'yi okur.
+nasıl alacağı** ise `gorevler/README.md` dosyasındadır. Bütün ajanlar (Claude oturumları ve GPT
+görsel ajanları) önce `AGENTS.md`'yi, sonra bu dosyayı, sonra `gorevler/README.md`'yi okur.
 
 Kalıcı kural: **kullanıcı elle hiçbir iş yapmaz** (AGENTS.md, kalıcı talep 6). Ajanlar
 kullanıcıya iş vermez; yapılamayan iş görev dosyasında `blokaj` olarak işaretlenir.
@@ -36,15 +36,15 @@ Tasarım 02'nin 5 paleti (V02–V06) prompt'larıyla hazır, kapıya kilitli.
 
 | Adım | Görev | Rol | Çıktı | Bekler |
 |---|---|---|---|---|
-| 1 | G1NN kaynak | gpt-kod | HTML sahne kaynağı + ayrı katmanlar + `kit_map.json` + MP4 önizleme | — |
+| 1 | G1NN kaynak | claude-kod | HTML sahne kaynağı + ayrı katmanlar + `kit_map.json` + MP4 önizleme | — |
 | 2 | G2NN görsel | gpt-gorsel | Paket 1: doku, dekor, kapanış, çerçeve | — |
 | 3 | G3NN Canva video | claude-canva | `kit_build` → Canva video master | 1, 2, G002 |
-| 4 | G4NN website | gpt-kod | website HTML kaynağı | pilot G020 |
-| 5 | G5NN baskı | gpt-kod | 5×7 davetiye + story/kare kaynağı | pilot G022 |
+| 4 | G4NN website | claude-kod | website HTML kaynağı | pilot G020 |
+| 5 | G5NN baskı | claude-kod | 5×7 davetiye + story/kare kaynağı | pilot G022 |
 | 6 | G6NN Canva set | claude-canva | Canva website + PDF + story/kare + export | 3, 4, 5, pilot G021/G023 |
-| 7 | G7NN metin | gpt-metin | kılavuz + Etsy ilan metni | pilot G024/G025 |
+| 7 | G7NN metin | claude-metin | kılavuz + Etsy ilan metni | pilot G024/G025 |
 | 8 | G8NN mockup | gpt-gorsel | Paket 3: telefon, laptop, kart | — |
-| 9 | G9NN ilan kiti | gpt-kod | ilan görselleri, video, PDF | 6, 7, 8, G026, G028 |
+| 9 | G9NN ilan kiti | claude-kod | ilan görselleri, video, PDF | 6, 7, 8, G026, G028 |
 | 10 | GANN Canva UI | claude-canva | animasyon, RSVP formu, yayın, template link | G004, 3, 6 |
 | 11 | GQNN QA | claude-qa | QA raporu | 9, 10 |
 | Aşama 2 | GP1NN → GP2NN → GP3NN → GP4NN | claude/gpt | 5 palet: prompt → görsel → Canva → ilan | G090 |
@@ -54,12 +54,15 @@ diğer tasarımlar aynı düzeni izler. Adım 1, 2, 4, 5, 7, 8 bekleme olmadan p
 
 ## 4. Roller
 
+**İş bölümü (kullanıcı kararı 2026-10-09):** kod ve metin işleri **Claude**, bütün görseller **GPT (imagegen)**.
+Claude görsel üretmez; GPT kod/Canva/metin görevi almaz.
+
 | Rol | Kim | Ne yapar | Ne yapmaz |
 |---|---|---|---|
 | `claude-canva` | Claude Code (Canva bağlayıcısı olan oturum) | Bütün Canva işleri; **entegratör**: `PROJECT_STATE.json`, `COLLECTION_STATUS.md`, `AGENTS.md`, `00_ANA_DEVIR.md`, bu belge | Konsept görsel üretmez |
-| `gpt-gorsel` | ChatGPT görsel üretimi | `GPT_PROMPTS.md` dosyalarındaki görselleri üretir, belirtilen yola belirtilen adla koyar | Canva'ya dokunmaz, yazı/logo içeren görsel üretmez |
-| `gpt-kod` | Codex / kod ajanı | `tools/` araçları, website/PDF HTML kaynakları, içerik kayıtları, PDF üreticileri | Canva'ya dokunmaz, entegratör dosyalarını düzenlemez |
-| `gpt-metin` | GPT metin ajanı | İngilizce ilan metni, kılavuz metni, etkinlik türü metin setleri | Test edilmemiş özelliği vaat etmez, ticari alan uydurmaz |
+| `gpt-gorsel` | ChatGPT görsel üretimi (imagegen) — **bütün görseller yalnız GPT'de** | `GPT_PROMPTS.md` dosyalarındaki görselleri üretir, belirtilen yola belirtilen adla koyar | Canva'ya dokunmaz, yazı/logo içeren görsel üretmez |
+| `claude-kod` | Claude Code oturumu (kod) | `tools/` araçları, website/PDF HTML kaynakları, içerik kayıtları, PDF üreticileri | Canva'ya dokunmaz, entegratör dosyalarını düzenlemez |
+| `claude-metin` | Claude oturumu (metin) | İngilizce ilan metni, kılavuz metni, etkinlik türü metin setleri | Test edilmemiş özelliği vaat etmez, ticari alan uydurmaz |
 | `claude-qa` | Claude (qa-kontrol alt ajanı) | Salt okunur denetim raporu | Dosya değiştirmez (yalnız kendi rapor dosyası) |
 
 ## 5. Açık blokajlar (kullanıcıya verilmez)

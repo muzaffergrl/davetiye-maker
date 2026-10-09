@@ -1,7 +1,7 @@
 ---
 id: G002
 baslik: tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel)
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 1

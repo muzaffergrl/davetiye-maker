@@ -1,7 +1,7 @@
 ---
 id: G411
 baslik: Tasarım 11 Boho Pampas Terracotta — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

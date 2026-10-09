@@ -1,7 +1,7 @@
 ---
 id: G406
 baslik: Tasarım 06 Art Deco Black-Tie — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

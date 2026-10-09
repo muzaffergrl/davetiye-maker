@@ -1,7 +1,7 @@
 ---
 id: G911
 baslik: Tasarım 11 Boho Pampas Terracotta — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

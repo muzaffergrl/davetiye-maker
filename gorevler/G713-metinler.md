@@ -1,7 +1,7 @@
 ---
 id: G713
 baslik: Tasarım 13 Enchanted Forest Storybook — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

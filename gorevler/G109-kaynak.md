@@ -1,7 +1,7 @@
 ---
 id: G109
 baslik: Tasarım 09 Lavender Provence — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

@@ -1,7 +1,7 @@
 ---
 id: G716
 baslik: Tasarım 16 Sunflower Rustic Barn — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

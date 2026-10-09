@@ -1,7 +1,7 @@
 ---
 id: G516
 baslik: Tasarım 16 Sunflower Rustic Barn — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G717
 baslik: Tasarım 17 Emerald & Gold Estate — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

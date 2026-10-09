@@ -1,7 +1,7 @@
 ---
 id: G022
 baslik: A3 + A4 — 5×7 davetiye ve story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

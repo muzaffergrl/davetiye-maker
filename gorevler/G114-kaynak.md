@@ -1,7 +1,7 @@
 ---
 id: G114
 baslik: Tasarım 14 Ivory Lace & Pearls — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

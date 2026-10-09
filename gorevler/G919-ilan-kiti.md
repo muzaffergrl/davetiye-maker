@@ -1,7 +1,7 @@
 ---
 id: G919
 baslik: Tasarım 19 Midnight Garden — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

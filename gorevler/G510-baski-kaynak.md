@@ -1,7 +1,7 @@
 ---
 id: G510
 baslik: Tasarım 10 Tuscan Vineyard — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

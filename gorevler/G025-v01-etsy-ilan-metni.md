@@ -1,7 +1,7 @@
 ---
 id: G025
 baslik: B3 — Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 2

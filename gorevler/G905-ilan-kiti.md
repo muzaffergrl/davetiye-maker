@@ -1,7 +1,7 @@
 ---
 id: G905
 baslik: Tasarım 05 Mediterranean Lemon — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

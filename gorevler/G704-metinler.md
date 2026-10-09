@@ -1,7 +1,7 @@
 ---
 id: G704
 baslik: Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

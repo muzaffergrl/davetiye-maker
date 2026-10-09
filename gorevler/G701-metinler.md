@@ -1,7 +1,7 @@
 ---
 id: G701
 baslik: Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

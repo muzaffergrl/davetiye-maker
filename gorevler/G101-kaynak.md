@@ -1,7 +1,7 @@
 ---
 id: G101
 baslik: Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

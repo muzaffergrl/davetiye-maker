@@ -1,7 +1,7 @@
 ---
 id: G415
 baslik: Tasarım 15 Cherry Blossom Spring — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

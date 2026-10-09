@@ -7,7 +7,7 @@ Böylece bir varyant, Canva'da yalnız görsel değiştirerek (`update_fill`) ü
 
 ```
 <kit kökü>/
-  palette.json                 # renk token'ları (entegratör veya gpt-kod yazar)
+  palette.json                 # renk token'ları (entegratör veya claude-kod yazar)
   assets/gpt/GPT_PROMPTS.md    # bu kitin prompt'ları (tek kaynak)
   assets/gpt/textures/         # GPT çıktısı (ham)
   assets/gpt/decor/            # GPT çıktısı (ham, şeffaf PNG)

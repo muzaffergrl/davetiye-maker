@@ -1,7 +1,7 @@
 ---
 id: G915
 baslik: Tasarım 15 Cherry Blossom Spring — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

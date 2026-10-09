@@ -1,7 +1,7 @@
 ---
 id: G404
 baslik: Tasarım 04 Vintage Airmail Love Letter — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

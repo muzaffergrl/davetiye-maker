@@ -1,7 +1,7 @@
 ---
 id: G417
 baslik: Tasarım 17 Emerald & Gold Estate — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

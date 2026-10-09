@@ -1,7 +1,7 @@
 ---
 id: G506
 baslik: Tasarım 06 Art Deco Black-Tie — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

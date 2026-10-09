@@ -1,7 +1,7 @@
 ---
 id: G916
 baslik: Tasarım 16 Sunflower Rustic Barn — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

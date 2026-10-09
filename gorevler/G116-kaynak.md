@@ -1,7 +1,7 @@
 ---
 id: G116
 baslik: Tasarım 16 Sunflower Rustic Barn — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

@@ -1,7 +1,7 @@
 ---
 id: G403
 baslik: Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

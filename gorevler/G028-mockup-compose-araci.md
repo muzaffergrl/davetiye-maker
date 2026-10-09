@@ -1,7 +1,7 @@
 ---
 id: G028
 baslik: tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

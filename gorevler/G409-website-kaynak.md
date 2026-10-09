@@ -1,7 +1,7 @@
 ---
 id: G409
 baslik: Tasarım 09 Lavender Provence — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

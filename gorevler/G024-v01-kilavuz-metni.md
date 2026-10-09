@@ -1,7 +1,7 @@
 ---
 id: G024
 baslik: A5 — START HERE kılavuz metni (İngilizce)
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 2

@@ -1,7 +1,7 @@
 ---
 id: G511
 baslik: Tasarım 11 Boho Pampas Terracotta — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

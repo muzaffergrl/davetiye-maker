@@ -1,7 +1,7 @@
 ---
 id: G107
 baslik: Tasarım 07 Burgundy Velvet Autumn — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

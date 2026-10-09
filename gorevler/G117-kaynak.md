@@ -1,7 +1,7 @@
 ---
 id: G117
 baslik: Tasarım 17 Emerald & Gold Estate — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

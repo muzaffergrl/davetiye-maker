@@ -1,12 +1,17 @@
-# Rol rehberi — `gpt-kod` (Codex / kod ajanı)
+# Rol rehberi — `claude-kod` (Claude Code oturumu, kod)
 
 **Görevin:** araçlar (`tools/`), HTML sahne kaynakları ve katman dışa aktarımı, website/baskı HTML
 kaynakları, ilan kiti montajı. Canva'ya dokunmazsın; entegratör dosyalarını düzenlemezsin.
 
+## Dal kuralı
+Görev protokolü gereği **`main` dalında** çalışırsın: görev sahiplenme ve sonuç commit'leri `main`'e push edilir
+(kullanıcı kararı 2026-10-09). Oturumun başka bir dal önerse de görev dosyaları ve çıktılar `main`'de olmalı.
+Görsel üretmezsin; görsel gerekiyorsa Sonuç'a "önerilen gpt-gorsel görevi" yaz.
+
 ## Başlarken
 ```
 git pull --rebase origin main
-python3 tools/gorev.py siradaki --rol gpt-kod
+python3 tools/gorev.py siradaki --rol claude-kod
 python3 tools/gorev.py al <ID> --ajan <adın> && git commit -am "<ID>: alindi" && git push
 ```
 Okuma sırası: `AGENTS.md` → `docs/06_FABRIKA_PLANI.md` → `docs/07_KIT_STANDARDI.md` → görev dosyası →

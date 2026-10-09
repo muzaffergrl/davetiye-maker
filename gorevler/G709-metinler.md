@@ -1,7 +1,7 @@
 ---
 id: G709
 baslik: Tasarım 09 Lavender Provence — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

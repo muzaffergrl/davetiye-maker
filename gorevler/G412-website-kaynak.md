@@ -1,7 +1,7 @@
 ---
 id: G412
 baslik: Tasarım 12 Tropical Destination — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G407
 baslik: Tasarım 07 Burgundy Velvet Autumn — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

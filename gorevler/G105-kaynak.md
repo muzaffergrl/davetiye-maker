@@ -1,7 +1,7 @@
 ---
 id: G105
 baslik: Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

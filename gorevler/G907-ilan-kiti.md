@@ -1,7 +1,7 @@
 ---
 id: G907
 baslik: Tasarım 07 Burgundy Velvet Autumn — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

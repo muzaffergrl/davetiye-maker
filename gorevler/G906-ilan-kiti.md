@@ -1,7 +1,7 @@
 ---
 id: G906
 baslik: Tasarım 06 Art Deco Black-Tie — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

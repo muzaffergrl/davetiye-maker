@@ -1,7 +1,7 @@
 ---
 id: G903
 baslik: Tasarım 03 Blush Garden Rose — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

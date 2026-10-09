@@ -1,7 +1,7 @@
 ---
 id: G408
 baslik: Tasarım 08 Winter Evergreen — A2 website HTML kaynağı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

@@ -1,7 +1,7 @@
 ---
 id: G909
 baslik: Tasarım 09 Lavender Provence — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 4

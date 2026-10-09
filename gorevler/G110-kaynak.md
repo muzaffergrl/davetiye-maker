@@ -1,7 +1,7 @@
 ---
 id: G110
 baslik: Tasarım 10 Tuscan Vineyard — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

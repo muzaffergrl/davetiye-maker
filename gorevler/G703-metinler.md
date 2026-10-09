@@ -1,7 +1,7 @@
 ---
 id: G703
 baslik: Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

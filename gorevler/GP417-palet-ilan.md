@@ -1,7 +1,7 @@
 ---
 id: GP417
 baslik: Aşama 2 · Tasarım 17 — 5 palet ilan kitleri
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 6

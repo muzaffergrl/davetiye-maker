@@ -611,7 +611,7 @@ def tasks(t):
     prev = f"{k}/previews/html/" if t.get("mevcut") else f"{k}/previews/"
     return {
         f"G1{n}-kaynak": task_md(
-            f"G1{n}", f"Tasarım {n} {t['ad']} — HTML sahne kaynağı + katmanlar", "gpt-kod", [],
+            f"G1{n}", f"Tasarım {n} {t['ad']} — HTML sahne kaynağı + katmanlar", "claude-kod", [],
             [f"{k}/video/", f"{k}/assets/layers/", f"{k}/kit_map.json", prev],
             f"Tasarım {n}'in 6 sahnelik 1080×1920 animasyon kaynağını kodla (HTML/CSS/SVG) kurmak ve Canva'ya gidecek ayrı katmanları çıkarmak. Şekiller koddan, yüzeyler (doku/dekor) GPT görsellerinden gelir.",
             [f"`{k}/DESIGN_BRIEF.md` (zarf, foto sunumu, dekor, sahneler)", f"`{k}/content.demo.json`, `{k}/palette.json`",
@@ -653,7 +653,7 @@ def set_tasks(t):
     pilot = "tasarım 02 pilot hattı (`collections/02_Dusty_Blue/`)"
     return {
         f"G4{n}-website-kaynak": task_md(
-            f"G4{n}", f"Tasarım {n} {t['ad']} — A2 website HTML kaynağı", "gpt-kod", ["G020"], [f"{k}/website/"],
+            f"G4{n}", f"Tasarım {n} {t['ad']} — A2 website HTML kaynağı", "claude-kod", ["G020"], [f"{k}/website/"],
             f"Tasarım {n}'in tek sayfa responsive website kaynağı (Canva Website'a aktarılacak).",
             [f"`{k}/DESIGN_BRIEF.md`, `{k}/content.demo.json`, `{k}/palette.json`", f"Pilot: `collections/02_Dusty_Blue/website/` (G020 çıktısı) — aynı bölüm yapısı",
              f"`{k}/assets/layers/`, varsa `{k}/kit_layers/` ve `{k}/assets/gpt/`"],
@@ -662,7 +662,7 @@ def set_tasks(t):
              "Playwright 360/390/430/768/1280 px ekran görüntüleri."],
             ["Yatay kaydırma yok; içerik kaydıyla birebir", "canva_import.html sayfa işaretli"], oncelik=3),
         f"G5{n}-baski-kaynak": task_md(
-            f"G5{n}", f"Tasarım {n} {t['ad']} — A3 5×7 davetiye + A4 story/kare kaynakları", "gpt-kod", ["G022"], [f"{k}/print/"],
+            f"G5{n}", f"Tasarım {n} {t['ad']} — A3 5×7 davetiye + A4 story/kare kaynakları", "claude-kod", ["G022"], [f"{k}/print/"],
             f"Tasarım {n}'in baskı/telefon davetiyesi ve paylaşım görsellerinin HTML kaynakları.",
             [f"`{k}/DESIGN_BRIEF.md`, `{k}/content.demo.json`, `{k}/palette.json`", "Pilot: `collections/02_Dusty_Blue/print/` (G022 çıktısı)"],
             ["`invitation_5x7.html` (1500×2100), `story.html` (1080×1920), `square.html` (1080×1080); `data-document-role=\"page\"`.",
@@ -677,7 +677,7 @@ def set_tasks(t):
              "PDF/PNG export al; link testleri (yer tutucuysa 'test edilmedi').", f"Design ID'leri `{k}/canva/DESIGNS.json`'a yaz."],
             ["4 Canva tasarımı kayıtlı; export dosyaları `package/customer/`"], oncelik=4),
         f"G7{n}-metinler": task_md(
-            f"G7{n}", f"Tasarım {n} {t['ad']} — A5 kılavuz + B3 Etsy ilan metni", "gpt-metin", ["G024", "G025"],
+            f"G7{n}", f"Tasarım {n} {t['ad']} — A5 kılavuz + B3 Etsy ilan metni", "claude-metin", ["G024", "G025"],
             [f"{k}/package/customer/START_HERE.md", f"{k}/package/listing/listing.md"],
             f"Tasarım {n} için alıcı kılavuzu ve Etsy ilan metni (İngilizce).",
             [f"`{k}/DESIGN_BRIEF.md`, `{k}/content.demo.json`", "Pilot metinler: `collections/02_Dusty_Blue/package/customer/START_HERE.md`, `.../listing/listing.md`"],
@@ -692,7 +692,7 @@ def set_tasks(t):
             ["3 prompt'u aynen kullan; yeşil alan düz #00FF00; nesneler eğik değil."],
             ["3 dosya doğru yolda"], oncelik=4),
         f"G9{n}-ilan-kiti": task_md(
-            f"G9{n}", f"Tasarım {n} {t['ad']} — B1–B3 Etsy ilan kiti montajı", "gpt-kod", [f"G6{n}", f"G7{n}", f"G8{n}", "G026", "G028"],
+            f"G9{n}", f"Tasarım {n} {t['ad']} — B1–B3 Etsy ilan kiti montajı", "claude-kod", [f"G6{n}", f"G7{n}", f"G8{n}", "G026", "G028"],
             [f"{k}/package/listing/"],
             f"Tasarım {n}'in ilan görselleri, ilan videosu ve ilan PDF'ini üretmek.",
             [f"Export'lar: `{k}/package/customer/`, video önizleme `{k}/previews/`", f"Mockup'lar `{k}/assets/gpt/mockups/`", "`tools/mockup_compose.py` (G028), `tools/md_to_pdf.py` (G026)"],
@@ -742,7 +742,7 @@ def faz2_tasks(t):
              "Animasyon/template link G004 yoluyla; kopyada korunup korunmadığını kaydet."],
             ["5 × 4 Canva tasarımı kayıtlı; ID'ler `variants/*/canva/DESIGNS.json`"], oncelik=6),
         f"GP4{n}-palet-ilan": task_md(
-            f"GP4{n}", f"Aşama 2 · Tasarım {n} — 5 palet ilan kitleri", "gpt-kod", [f"GP3{n}", "G028"], [f"{k}/variants/"],
+            f"GP4{n}", f"Aşama 2 · Tasarım {n} — 5 palet ilan kitleri", "claude-kod", [f"GP3{n}", "G028"], [f"{k}/variants/"],
             f"Tasarım {n}'in 5 ek paleti için ilan görselleri ve ilan PDF'leri.",
             [f"`{k}/package/listing/` (orijinal ilan kiti)", "`tools/mockup_compose.py`, `tools/md_to_pdf.py`"],
             ["Her palet için B1 görselleri + B3 PDF (metin orijinalden; renk adı eklenir)."],

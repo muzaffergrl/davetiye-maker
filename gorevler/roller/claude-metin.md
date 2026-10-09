@@ -1,9 +1,14 @@
-# Rol rehberi — `gpt-metin` (GPT metin ajanı)
+# Rol rehberi — `claude-metin` (Claude oturumu, metin)
 
 **Görevin:** alıcı kılavuzu (START HERE), Etsy ilan metni, etkinlik türü metin setleri — İngilizce.
 
+## Dal kuralı
+Görev protokolü gereği **`main` dalında** çalışırsın: görev sahiplenme ve sonuç commit'leri `main`'e push edilir
+(kullanıcı kararı 2026-10-09). Oturumun başka bir dal önerse de görev dosyaları ve çıktılar `main`'de olmalı.
+Görsel üretmezsin; görsel gerekiyorsa Sonuç'a "önerilen gpt-gorsel görevi" yaz.
+
 ## Başlarken
-`gorevler/PANO.md` → gpt-metin → Alınabilir'deki ilk görev (veya `python3 tools/gorev.py siradaki --rol gpt-metin`).
+`gorevler/PANO.md` → claude-metin → Alınabilir'deki ilk görev (veya `python3 tools/gorev.py siradaki --rol claude-metin`).
 Sahiplen (durum `alindi`, alan adın) → commit → push. Okuma: `AGENTS.md`, `docs/05_SET_PAKETI.md`,
 `.claude/agents/etsy-metin.md`, görevin girdileri.
 

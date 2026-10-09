@@ -1,7 +1,7 @@
 ---
 id: G115
 baslik: Tasarım 15 Cherry Blossom Spring — HTML sahne kaynağı + katmanlar
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 2

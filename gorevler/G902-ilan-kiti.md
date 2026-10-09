@@ -1,7 +1,7 @@
 ---
 id: G902
 baslik: Tasarım 02 Dusty Blue — B1–B3 Etsy ilan kiti montajı
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3

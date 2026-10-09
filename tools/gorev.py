@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DIR = ROOT / "gorevler"
-ROLLER = {"claude-canva", "gpt-gorsel", "gpt-kod", "gpt-metin", "claude-qa"}
+ROLLER = {"claude-canva", "gpt-gorsel", "claude-kod", "claude-metin", "claude-qa"}
 DURUMLAR = ["hazir", "alindi", "inceleme", "blokaj", "bitti"]
 ALANLAR = ["id", "baslik", "rol", "durum", "alan", "oncelik", "bagimli", "yazar"]
 
@@ -141,7 +141,7 @@ def cmd_kontrol(a, tasks):
 
 
 def cmd_pano(a, tasks):
-    roller = ["claude-canva", "gpt-gorsel", "gpt-kod", "gpt-metin", "claude-qa"]
+    roller = ["claude-canva", "gpt-gorsel", "claude-kod", "claude-metin", "claude-qa"]
     out = ["# Görev panosu (otomatik)", "",
            "`python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk",
            "çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.", ""]

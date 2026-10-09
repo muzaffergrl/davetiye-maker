@@ -1,7 +1,7 @@
 ---
 id: G707
 baslik: Tasarım 07 Burgundy Velvet Autumn — A5 kılavuz + B3 Etsy ilan metni
-rol: gpt-metin
+rol: claude-metin
 durum: hazir
 alan:
 oncelik: 3

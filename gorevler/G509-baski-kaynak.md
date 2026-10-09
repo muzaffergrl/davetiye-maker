@@ -1,7 +1,7 @@
 ---
 id: G509
 baslik: Tasarım 09 Lavender Provence — A3 5×7 davetiye + A4 story/kare kaynakları
-rol: gpt-kod
+rol: claude-kod
 durum: hazir
 alan:
 oncelik: 3
