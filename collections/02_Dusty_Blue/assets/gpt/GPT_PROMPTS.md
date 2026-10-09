@@ -1,7 +1,20 @@
 # GPT görsel istekleri — Koleksiyon 02 · Dusty Blue & Champagne
 
+> **Instructions for GPT:** Generate every image below, in order (Package 1, then Package 2; Package 3
+> only when asked). Use each English prompt exactly as written, follow its checklist, and save each file
+> with the exact file name and folder shown under "Kaydet". No text, letters, logos or watermarks in any image.
+
 Bu dosya, GPT'ye (ChatGPT görsel üretimi) verilecek prompt'ların **tek kaynağıdır**.
 Her prompt'un altında dosyanın **tam kaydedileceği yer ve adı** yazıyor.
+
+## Nereye yüklenecek?
+
+- **GitHub reposu:** `muzaffergrl/davetiye-maker`
+- **Dal (branch):** `main`
+- **Klasörler:** `collections/02_Dusty_Blue/assets/gpt/` altındaki `textures/`, `decor/`, `photos/`, `mockups/`
+- **Commit mesajı:** `GPT görselleri: Paket 1 ve 2`
+- Repoya doğrudan yazılamıyorsa: dosyaları **birebir bu adlarla** indirilebilir ver; kullanıcı GitHub'da
+  ilgili klasöre **Add file → Upload files** ile yükler.
 
 ## Nasıl teslim edilir?
 
