@@ -62,6 +62,9 @@ python tools/validate_content.py collections/01_Olive_Ivory/content.demo.json
 
 # Gerçek URL'den QR üret (PNG + SVG)
 python tools/make_qr.py "https://ornek-site.com/rsvp" -o collections/01_Olive_Ivory/previews/rsvp_qr
+
+# HTML animasyonu 1080×1920 MP4'e render et (Playwright + ffmpeg gerekir)
+NODE_PATH="$(npm root -g)" node tools/render_motion.mjs collections/02_Dusty_Blue/video/invitation_motion.html out.mp4 26 30 --stills=2,9.8
 ```
 
 ## MCP ve ajan kurulumu

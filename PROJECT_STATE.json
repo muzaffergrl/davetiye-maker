@@ -89,12 +89,29 @@
         "DAHXbJFJt0k": "yatay sunum"
       },
       "clean_assets": {
-        "envelope_base": { "canva_asset_id": "MAHXf4Vxib0", "file": "assets/envelope_base.png" },
-        "envelope_flap": { "canva_asset_id": "MAHXf09VArM", "file": "assets/envelope_flap.png" },
-        "envelope_pocket": { "canva_asset_id": "MAHXfwF0CQY", "file": "assets/envelope_pocket.png" },
-        "wax_seal_clean": { "canva_asset_id": "MAHXf374Qkc", "file": "assets/wax_seal_clean.png" }
+        "envelope_base": {
+          "canva_asset_id": "MAHXf4Vxib0",
+          "file": "assets/envelope_base.png"
+        },
+        "envelope_flap": {
+          "canva_asset_id": "MAHXf09VArM",
+          "file": "assets/envelope_flap.png"
+        },
+        "envelope_pocket": {
+          "canva_asset_id": "MAHXfwF0CQY",
+          "file": "assets/envelope_pocket.png"
+        },
+        "wax_seal_clean": {
+          "canva_asset_id": "MAHXf374Qkc",
+          "file": "assets/wax_seal_clean.png"
+        }
       },
-      "broken_assets_to_replace": ["MAHXfrIvazo", "MAHXflp6S24", "MAHXfj_u8k4", "MAHXfuYJbcU"],
+      "broken_assets_to_replace": [
+        "MAHXfrIvazo",
+        "MAHXflp6S24",
+        "MAHXfj_u8k4",
+        "MAHXfuYJbcU"
+      ],
       "user_edits_to_preserve": [
         "Sahne 2 başlığı 'değiştir' olarak değiştirilmiş",
         "Sahne 2 fotoğrafı MAD9bgyverk"
@@ -112,6 +129,24 @@
         "start_here_pdf": "not_started",
         "canva_free_buyer_test": "not_done",
         "etsy_listing": "not_started"
+      }
+    },
+    {
+      "id": "02_Dusty_Blue",
+      "working_name": "Dusty Blue & Champagne",
+      "is_brand_decision": false,
+      "status": "concept",
+      "purpose": "Grafik kalite örneği (kodla çizim); Claude vs GPT görsel üretim kararı için",
+      "content_record": "collections/02_Dusty_Blue/content.demo.json",
+      "sources": {
+        "motion_html": "collections/02_Dusty_Blue/video/invitation_motion.html"
+      },
+      "canva_designs": [],
+      "deliverables": {
+        "html_motion_render_mp4": "done (HTML render, Canva değil)",
+        "canva_editable_master": "not_started",
+        "website": "not_started",
+        "guest_pdf": "not_started"
       }
     }
   ]
