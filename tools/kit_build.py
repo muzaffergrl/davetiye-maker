@@ -42,6 +42,8 @@ Yöntemler (rotate/flip kaynağa, yöntemden önce uygulanır):
   tint               fit (ya da `"fit_mode": "cover"`) + gri tona çevirip `color` ile çarparak renklendir
   texture_mask_lines (isteğe bağlı) texture_mask + maskedeki renkli çizgi piksellerini (ör. davetiye
                      çerçevesindeki altın çizgiler) `line_color` (vars. palette.gold) ile yeniden boyar
+  Maske yöntemlerinde `color` verilirse doku önce o renge çekilir: doku / doku ortalama luminansı × color
+  (kağıt dokusunun damarları korunur, ortalama ton `color` olur; ör. açık kağıttan pembe zarf).
 
 Güvenlik: `collections/*/assets/layers/` altına ve maske klasörüne hiçbir koşulda yazılmaz.
 Eksik kaynak/maske → katman atlanır, uyarı basılır, devam edilir; özet yazılır.
@@ -247,8 +249,16 @@ def shading(mask: np.ndarray) -> np.ndarray:
     return lum / max(mean, 1e-3)
 
 
-def texture_mask(src, mask, size, scale, shade=True) -> np.ndarray:
+def colorize(tex: np.ndarray, color) -> np.ndarray:
+    """Dokuyu ortalama tonu `color` olacak şekilde renklendir; ışık/damar farkları korunur."""
+    lum = luminance(tex)
+    return lum[..., None] / max(float(lum.mean()), 1e-3) * np.array(color, np.float32)
+
+
+def texture_mask(src, mask, size, scale, shade=True, color=None) -> np.ndarray:
     tex = tile(src, size, scale)
+    if color is not None:
+        tex = colorize(tex, color)
     if shade:
         tex = tex * shading(mask)[..., None]
     out = np.dstack([np.clip(tex, 0, 255), mask[..., 3]])
@@ -307,7 +317,8 @@ def build_layer(L, src_path: Path, mask_path, palette) -> Image.Image:
         im = tint(base, parse_color(L["color"], palette))
     else:
         mask = load_mask(mask_path, size)
-        arr = texture_mask(src, mask, size, float(L.get("tile_scale", 1.0)), shade=(m != "pattern_mask"))
+        arr = texture_mask(src, mask, size, float(L.get("tile_scale", 1.0)), shade=(m != "pattern_mask"),
+                           color=parse_color(L.get("color"), palette))
         if m == "texture_mask_lines":
             arr = recolor_lines(arr, mask, parse_color(L.get("line_color", "palette.gold"), palette))
         im = Image.fromarray(arr.round().astype(np.uint8), "RGBA")

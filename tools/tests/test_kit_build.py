@@ -139,6 +139,20 @@ def main():
         assert cizgi.sum() > 1000
         assert np.all(np.abs(o[cizgi].mean(0) - np.array([0xC9, 0xA9, 0x6E])) < 25), o[cizgi].mean(0)
 
+        # 6b) texture_mask + color: açık kağıttan renkli zarf (ortalama ≈ color, alfa korunur)
+        (kit3 / "palette.json").write_text(json.dumps({"primary": "#E3A9AE"}))
+        h6 = t / "map_color.json"
+        h6.write_text(json.dumps({"masks": str(MASKELER), "out": "renk", "layers": [
+            {"name": "envelope_back.png", "size": [2040, 1480], "source": "assets/gpt/textures/ivory_paper.png",
+             "method": "texture_mask", "mask": "envelope_back.png", "color": "palette.primary"}]}))
+        kod, out = calistir(kit3, h6)
+        assert kod == 0 and "1/1" in out, out
+        o = np.asarray(Image.open(kit3 / "renk/envelope_back.png").convert("RGBA")).astype(float)
+        m = np.asarray(Image.open(MASKELER / "envelope_back.png").convert("RGBA"))
+        assert np.array_equal(o[..., 3], m[..., 3]), "renkli zarfta alfa değişmiş"
+        ort = o[..., :3][o[..., 3] >= 250].mean(0)
+        assert np.all(np.abs(ort / np.array([0xE3, 0xA9, 0xAE]) - 1) < 0.06), ort
+
         # 7) geçersiz harita → 2
         bozuk = t / "bozuk.json"
         bozuk.write_text(json.dumps({"layers": [{"name": "x.png", "size": [10], "source": "a.png", "method": "zoom"}]}))
