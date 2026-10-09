@@ -53,11 +53,9 @@ Tasarım 02'nin 5 paleti (V02–V06) prompt'larıyla hazır, kapıya kilitli.
 Tasarım 02 pilot hattır (G001–G027, G902, GA02): ortak araçlar ve şablonlar önce onda kurulur, sonra
 diğer tasarımlar aynı düzeni izler. Adım 1, 2, 4, 5, 7, 8 bekleme olmadan paralel yürür.
 
-## 3b. Video pilotu (2026-10-09)
-GPT video üretimi denenir: dekor hareketi GPT klibi, isim/tarih/foto Canva katmanı (yazı ve kişi videoya
-pişirilmez). Pilot tasarım 02: GV02A (GPT klipler) → GV02B (Canva'da kopyaya hibrit) → GV02C (Canva-yerel
-animasyon GA02 ile karşılaştırma ve karar, `docs/10_VIDEO_PILOT.md`). Karar çıkana kadar diğer tasarımlarda
-GANN (Canva-yerel animasyon) planı geçerli.
+## 3b. Video pilotu — İPTAL (2026-10-09, K19)
+GPT ajan oturumunda video üretim aracı yok; Higgsfield kullanılmayacak. Animasyon Canva-yerel (GANN,
+claude-tarayici). GV02A/B/C kapatıldı.
 
 ## 4. Roller
 

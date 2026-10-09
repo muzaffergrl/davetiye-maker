@@ -18,6 +18,12 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K12 | Önce mevcut set bitirilir, sonra kontrollü çeşitlendirme ("fabrika gibi") | §2, §45 |
 | K13 | Olive & Ivory = ilk koleksiyonun çalışma adı, marka değil | §37 |
 | K14 | Görsel üretmek ≠ teslim; taslak ≠ kayıt | §14 |
+| K15 | (2026-10-09) Kullanıcı elle hiçbir iş yapmaz; işleri Claude ve GPT yapar | sohbet |
+| K16 | (2026-10-09) Aşama 1: birbirinden tamamen farklı 20 tasarım; Aşama 2: her birine **ek** 5 renk → 120 ürün | sohbet |
+| K17 | (2026-10-09) İş bölümü: kod, Canva, metin, QA → Claude; bütün görseller → GPT (imagegen) | sohbet |
+| K18 | (2026-10-09) Canva hesabı Pro; Canva arayüz işleri için Claude kullanıcının bilgisayarında tarayıcıyı kullanır (seçenek A) | sohbet |
+| K19 | (2026-10-09) Higgsfield ile video üretimi **yok**; GPT video pilotu iptal (ajan oturumunda video aracı yok). Animasyon Canva-yerel | sohbet |
+| K20 | (2026-10-09) İkinci (ücretsiz) Canva test hesabı **açılmaz**; "Canva Free ile çalışır" iddiası test edilmediği için vaat edilmez | sohbet |
 
 ## Geçersizleşenler
 

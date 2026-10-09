@@ -18,7 +18,7 @@ START_HERE ve ilan metnindeki `[VERIFY]` maddelerini Canva ve Etsy'nin gerçek a
 
 ## Yapılacaklar
 1. Her VERIFY maddesini gerçek arayüzde dene; doğruysa işareti kaldır, yanlışsa metni düzelt, denenemiyorsa nedenini yaz.
-2. Canva Free davranışı (alıcının tipik hesabı) için ikinci bir ücretsiz Canva hesabı gerekir. Hesap açmak kullanıcı kararıdır: entegratör onay vermeden hesap açma; o maddeleri 'Free hesapla denenmedi' diye bırak.
+2. **İkinci Canva hesabı açılmaz** (kullanıcı kararı K20). Canva Free'ye özgü maddeler doğrulanamaz: metinden "works with Canva Free" türü vaatleri çıkar; gerekiyorsa tarafsız ifade kullan (ör. "Requires a Canva account"; ücretli öğe kullanılmadığını yalnız kendi tasarımımızı inceleyerek yaz).
 3. Etsy maddeleri: ilan düzenleyicisini yalnız görüntüle; ilan yayınlama/ödeme yok.
 
 ## Bitti sayılması için

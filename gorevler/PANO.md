@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 329 · alindi 3 · inceleme 1 · blokaj 1 · bitti 7 · toplam 341
+Özet: hazir 327 · alindi 3 · inceleme 1 · blokaj 3 · bitti 7 · toplam 341
 
 ## claude-canva
 
@@ -11,11 +11,11 @@
 
 - `G023` p3 — A3 + A4 — Canva'da kur ve export et → `gorevler/G023-v01-pdf-story-canva.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (1)**
 
-- (yok)
+- `GV02C` blokaj · - — Video pilotu · Karşılaştırma ve karar (Canva animasyonu vs GPT hibrit)
 
-Bağımlılık bekleyen: 82 · Biten: 2
+Bağımlılık bekleyen: 81 · Biten: 2
 
 ## claude-tarayici
 
@@ -23,11 +23,11 @@ Bağımlılık bekleyen: 82 · Biten: 2
 
 - `GA02` p1 — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot) → `gorevler/GA02-canva-ui.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (1)**
 
-- (yok)
+- `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 
-Bağımlılık bekleyen: 41 · Biten: 0
+Bağımlılık bekleyen: 40 · Biten: 0
 
 ## claude-kod
 
