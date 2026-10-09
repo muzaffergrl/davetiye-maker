@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 327 · alindi 7 · inceleme 1 · blokaj 1 · bitti 3 · toplam 339
+Özet: hazir 327 · alindi 7 · inceleme 0 · blokaj 1 · bitti 4 · toplam 339
 
 ## claude-canva
 
@@ -31,7 +31,7 @@ Bağımlılık bekleyen: 40 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (18)**
+**Alınabilir (19)**
 
 - `G101` p2 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar → `gorevler/G101-kaynak.md`
 - `G104` p2 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar → `gorevler/G104-kaynak.md`
@@ -51,17 +51,17 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G118` p2 — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar → `gorevler/G118-kaynak.md`
 - `G119` p2 — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar → `gorevler/G119-kaynak.md`
 - `G120` p2 — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar → `gorevler/G120-kaynak.md`
+- `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (6)**
+**Üzerinde çalışılan / incelemede / blokaj (5)**
 
-- `G002` inceleme · claude-kod-2 — tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel)
 - `G020` alindi · claude-kod-3 — A2 — tek sayfa responsive website HTML kaynağı
 - `G022` alindi · claude-kod-4 — A3 + A4 — 5×7 davetiye ve story/kare kaynakları
 - `G028` alindi · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 - `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 - `G026` alindi · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF
 
-Bağımlılık bekleyen: 79 · Biten: 1
+Bağımlılık bekleyen: 78 · Biten: 2
 
 ## claude-metin
 

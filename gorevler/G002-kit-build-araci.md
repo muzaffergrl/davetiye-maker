@@ -2,7 +2,7 @@
 id: G002
 baslik: tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-2
 oncelik: 1
 bagimli: []
@@ -84,3 +84,4 @@ commit'ine (Video pilotu) `git add -A` ile girmiş; içerik aynı, bu commit Son
 ## Günlük
 - 2026-10-09 alindi: claude-kod-2
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı
