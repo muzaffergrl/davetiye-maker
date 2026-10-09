@@ -25,3 +25,6 @@ customer_data/
 # Büyük ara render çıktıları
 renders/
 *.mov
+
+# Paralel ajanların geçici git worktree'leri
+.claude/worktrees/
