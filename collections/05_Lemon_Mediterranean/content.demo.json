@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Isabella",
+      "full_name": "Isabella Marie"
+    },
+    {
+      "display_name": "Marco",
+      "full_name": "Marco Antonio"
+    }
+  ],
+  "name_display": "Isabella & Marco",
+  "initials": "I&M",
+  "host_line": "Together with their families",
+  "date": "2027-06-12",
+  "ceremony_time": "16:00",
+  "timezone": "Europe/Rome",
+  "venue": {
+    "name": "Villa Limonaia",
+    "city": "Sorrento",
+    "region": "Campania",
+    "country": "Italy",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Lemon Grove"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Sea Terrace"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Villa Courtyard"
+    }
+  ],
+  "dress_code": "Summer formal",
+  "rsvp": {
+    "deadline": "2027-05-01",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

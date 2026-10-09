@@ -129,7 +129,9 @@
         "start_here_pdf": "not_started",
         "canva_free_buyer_test": "not_done",
         "etsy_listing": "not_started"
-      }
+      },
+      "phase1_design_no": 1,
+      "phase1_note": "Aşama 1'de yeni hatta (G101/G201/G301) yeniden kurulur; mevcut Canva dosyaları silinmez."
     },
     {
       "id": "02_Dusty_Blue",
@@ -220,8 +222,284 @@
           "kit_root": "collections/02_Dusty_Blue/variants/V06_lavender_silver",
           "status": "prompts_ready"
         }
+      ],
+      "phase1_design_no": 2
+    },
+    {
+      "id": "03_Blush_Garden_Rose",
+      "working_name": "Blush Garden Rose",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 3,
+      "content_record": "collections/03_Blush_Garden_Rose/content.demo.json",
+      "design_brief": "collections/03_Blush_Garden_Rose/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G103",
+        "G203",
+        "G303"
+      ]
+    },
+    {
+      "id": "04_Vintage_Airmail",
+      "working_name": "Vintage Airmail Love Letter",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 4,
+      "content_record": "collections/04_Vintage_Airmail/content.demo.json",
+      "design_brief": "collections/04_Vintage_Airmail/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G104",
+        "G204",
+        "G304"
+      ]
+    },
+    {
+      "id": "05_Lemon_Mediterranean",
+      "working_name": "Mediterranean Lemon",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 5,
+      "content_record": "collections/05_Lemon_Mediterranean/content.demo.json",
+      "design_brief": "collections/05_Lemon_Mediterranean/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G105",
+        "G205",
+        "G305"
+      ]
+    },
+    {
+      "id": "06_Art_Deco_Noir",
+      "working_name": "Art Deco Black-Tie",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 6,
+      "content_record": "collections/06_Art_Deco_Noir/content.demo.json",
+      "design_brief": "collections/06_Art_Deco_Noir/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G106",
+        "G206",
+        "G306"
+      ]
+    },
+    {
+      "id": "07_Burgundy_Velvet",
+      "working_name": "Burgundy Velvet Autumn",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 7,
+      "content_record": "collections/07_Burgundy_Velvet/content.demo.json",
+      "design_brief": "collections/07_Burgundy_Velvet/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G107",
+        "G207",
+        "G307"
+      ]
+    },
+    {
+      "id": "08_Winter_Evergreen",
+      "working_name": "Winter Evergreen",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 8,
+      "content_record": "collections/08_Winter_Evergreen/content.demo.json",
+      "design_brief": "collections/08_Winter_Evergreen/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G108",
+        "G208",
+        "G308"
+      ]
+    },
+    {
+      "id": "09_Lavender_Provence",
+      "working_name": "Lavender Provence",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 9,
+      "content_record": "collections/09_Lavender_Provence/content.demo.json",
+      "design_brief": "collections/09_Lavender_Provence/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G109",
+        "G209",
+        "G309"
+      ]
+    },
+    {
+      "id": "10_Tuscan_Vineyard",
+      "working_name": "Tuscan Vineyard",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 10,
+      "content_record": "collections/10_Tuscan_Vineyard/content.demo.json",
+      "design_brief": "collections/10_Tuscan_Vineyard/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G110",
+        "G210",
+        "G310"
+      ]
+    },
+    {
+      "id": "11_Boho_Pampas",
+      "working_name": "Boho Pampas Terracotta",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 11,
+      "content_record": "collections/11_Boho_Pampas/content.demo.json",
+      "design_brief": "collections/11_Boho_Pampas/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G111",
+        "G211",
+        "G311"
+      ]
+    },
+    {
+      "id": "12_Tropical_Destination",
+      "working_name": "Tropical Destination",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 12,
+      "content_record": "collections/12_Tropical_Destination/content.demo.json",
+      "design_brief": "collections/12_Tropical_Destination/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G112",
+        "G212",
+        "G312"
+      ]
+    },
+    {
+      "id": "13_Enchanted_Forest",
+      "working_name": "Enchanted Forest Storybook",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 13,
+      "content_record": "collections/13_Enchanted_Forest/content.demo.json",
+      "design_brief": "collections/13_Enchanted_Forest/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G113",
+        "G213",
+        "G313"
+      ]
+    },
+    {
+      "id": "14_Ivory_Lace_Pearl",
+      "working_name": "Ivory Lace & Pearls",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 14,
+      "content_record": "collections/14_Ivory_Lace_Pearl/content.demo.json",
+      "design_brief": "collections/14_Ivory_Lace_Pearl/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G114",
+        "G214",
+        "G314"
+      ]
+    },
+    {
+      "id": "15_Cherry_Blossom",
+      "working_name": "Cherry Blossom Spring",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 15,
+      "content_record": "collections/15_Cherry_Blossom/content.demo.json",
+      "design_brief": "collections/15_Cherry_Blossom/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G115",
+        "G215",
+        "G315"
+      ]
+    },
+    {
+      "id": "16_Sunflower_Rustic",
+      "working_name": "Sunflower Rustic Barn",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 16,
+      "content_record": "collections/16_Sunflower_Rustic/content.demo.json",
+      "design_brief": "collections/16_Sunflower_Rustic/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G116",
+        "G216",
+        "G316"
+      ]
+    },
+    {
+      "id": "17_Emerald_Gold_Estate",
+      "working_name": "Emerald & Gold Estate",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 17,
+      "content_record": "collections/17_Emerald_Gold_Estate/content.demo.json",
+      "design_brief": "collections/17_Emerald_Gold_Estate/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G117",
+        "G217",
+        "G317"
+      ]
+    },
+    {
+      "id": "18_Wildflower_Vellum",
+      "working_name": "Wildflower Meadow Vellum",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 18,
+      "content_record": "collections/18_Wildflower_Vellum/content.demo.json",
+      "design_brief": "collections/18_Wildflower_Vellum/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G118",
+        "G218",
+        "G318"
+      ]
+    },
+    {
+      "id": "19_Midnight_Garden",
+      "working_name": "Midnight Garden",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 19,
+      "content_record": "collections/19_Midnight_Garden/content.demo.json",
+      "design_brief": "collections/19_Midnight_Garden/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G119",
+        "G219",
+        "G319"
+      ]
+    },
+    {
+      "id": "20_Coastal_Seaside",
+      "working_name": "Coastal Seaside",
+      "is_brand_decision": false,
+      "status": "concept",
+      "phase1_design_no": 20,
+      "content_record": "collections/20_Coastal_Seaside/content.demo.json",
+      "design_brief": "collections/20_Coastal_Seaside/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "tasks": [
+        "G120",
+        "G220",
+        "G320"
       ]
     }
   ],
-  "task_board": "gorevler/ (tools/gorev.py)"
+  "task_board": "gorevler/ (tools/gorev.py)",
+  "plan": {
+    "phase1": "20 farklı tasarım (docs/09_TASARIM_KATALOGU.md)",
+    "phase2": "her tasarım × 5 renk paleti (kapı: G090)",
+    "doc": "docs/06_FABRIKA_PLANI.md"
+  }
 }

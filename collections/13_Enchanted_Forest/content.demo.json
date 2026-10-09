@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Aurora",
+      "full_name": "Aurora Jane"
+    },
+    {
+      "display_name": "Rowan",
+      "full_name": "Rowan Elias"
+    }
+  ],
+  "name_display": "Aurora & Rowan",
+  "initials": "A&R",
+  "host_line": "Together with their families",
+  "date": "2027-08-14",
+  "ceremony_time": "16:00",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "Fernwood Glen",
+    "city": "Portland",
+    "region": "Oregon",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Mossy Clearing"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Lantern Grove"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Forest Hall"
+    }
+  ],
+  "dress_code": "Garden formal",
+  "rsvp": {
+    "deadline": "2027-07-03",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

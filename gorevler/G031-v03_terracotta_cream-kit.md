@@ -4,8 +4,8 @@ baslik: V03_terracotta_cream — Paket 1 + Paket 3 görselleri
 rol: gpt-gorsel
 durum: hazir
 alan:
-oncelik: 2
-bagimli: []
+oncelik: 5
+bagimli: [G090]
 yazar: [collections/02_Dusty_Blue/variants/V03_terracotta_cream/assets/gpt/]
 ---
 

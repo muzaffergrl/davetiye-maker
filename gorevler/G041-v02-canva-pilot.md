@@ -4,8 +4,8 @@ baslik: V02 Canva varyantı (pilot)
 rol: claude-canva
 durum: hazir
 alan:
-oncelik: 3
-bagimli: [G001, G030, G040]
+oncelik: 5
+bagimli: [G001, G030, G040, G090]
 yazar: [collections/02_Dusty_Blue/variants/V02_blush_champagne/canva/]
 ---
 

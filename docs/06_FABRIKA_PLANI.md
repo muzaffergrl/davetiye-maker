@@ -21,38 +21,27 @@ Her ürünü sıfırdan çizmiyoruz. İki parçalı bir sistem kuruyoruz:
 **Varyant = kalıbın Canva kopyası + kitin katmanları (`update_fill`) + metin renkleri.**
 Bu yüzden kit dosya adları ve ölçüleri **asla** değişmez: `docs/07_KIT_STANDARDI.md`.
 
-## 2. Varyant matrisi
+## 2. Hedef (kullanıcı kararı, 2026-10-09)
 
-Kalıp **T1 — Envelope Story** (`collections/02_Dusty_Blue`, Canva video master `DAHXhAaKIhI`):
-zarf → mühür → kart yükselir → 3 polaroid → davet kartı → program → RSVP.
+**Aşama 1 — birbirinden tamamen farklı 20 tasarım**, her biri eksiksiz paket (`docs/05_SET_PAKETI.md`).
+Katalog: `docs/09_TASARIM_KATALOGU.md` (kaynak `tools/katalog.py`). Her tasarım 6 eksende tanımlı
+(zarf/açılış, foto sunumu, dekor ailesi, teknik, font, ana palet); her çift en az 4 eksende farklı.
+01 Olive & Ivory ve 02 Dusty Blue bu 20'nin içindedir; 03–20 yeni koleksiyonlardır.
 
-| Kod | Renk kiti | Klasör | Durum |
+**Aşama 2 — her tasarım × 5 renk paleti.** Paletler, tasarımın master'ı kaydedildikten sonra o tasarıma
+uygun seçilir. Kapı görevi: `G090`. Tasarım 02 için 5 palet (V02–V06) hazır ama `G090`'a kilitli.
+
+## 3. Üretim hattı (her tasarım için aynı)
+
+| Adım | Görev | Rol | Çıktı |
 |---|---|---|---|
-| V01 | Dusty Blue & Champagne | `collections/02_Dusty_Blue/assets/gpt/` | prompt hazır |
-| V02 | Blush & Champagne | `collections/02_Dusty_Blue/variants/V02_blush_champagne/` | prompt hazır |
-| V03 | Terracotta & Cream | `collections/02_Dusty_Blue/variants/V03_terracotta_cream/` | prompt hazır |
-| V04 | Navy & Gold | `collections/02_Dusty_Blue/variants/V04_navy_gold/` | prompt hazır |
-| V05 | Burgundy & Blush | `collections/02_Dusty_Blue/variants/V05_burgundy_blush/` | prompt hazır |
-| V06 | Lavender & Silver | `collections/02_Dusty_Blue/variants/V06_lavender_silver/` | prompt hazır |
+| 1 | `G1NN` kaynak | gpt-kod | HTML sahne kaynağı (kodla çizilmiş şekiller) + ayrı katmanlar + `kit_map.json` + MP4 önizleme |
+| 2 | `G2NN` görsel | gpt-gorsel | Doku/dekor/kapanış/çerçeve görselleri (`GPT_PROMPTS.md`) |
+| 3 | `G3NN` Canva | claude-canva | `kit_build` → Canva video master (ayrı katman, Canva metni) |
+| 4 | set parçaları | gpt-kod + claude-canva + gpt-metin | website, PDF, story/kare, kılavuz, Etsy kiti — **tasarım 02'de hat kanıtlanınca** (G020–G027) diğer 19 tasarıma görev olarak açılır |
 
-Renk kitlerinden sonra aynı kalıpla **etkinlik türleri**: Save the Date, Engagement,
-Bridal Shower (metin setleri `G050`). Daha sonra kalıp T2, T3 (yeni koleksiyon kararıyla).
-
-Örnek fotoğraflar (çift, anılar, mekân) **bütün varyantlarda ortaktır**: V01 Paket 2.
-
-## 3. Aşamalar
-
-| Aşama | Hedef | Bitiş şartı |
-|---|---|---|
-| **A — Altyapı** | Görev panosu, kit standardı, kit araçları, Canva UI blokaj araştırması | `G002`, `G003`, `G004` bitti |
-| **B — V01 kit** | Fotogerçekçi doku/dekor/foto; Canva master'a takılı | `G012` bitti, önizleme onaylı |
-| **C — V01 tam set** | A1–A5 + B1–B3 (`docs/05_SET_PAKETI.md`) | QA (`G027`) temiz; blokajlar dürüstçe yazılı |
-| **D — Renk varyantları** | V02–V06 kitleri + Canva varyantları | Her varyantta kit kontrolü + QA |
-| **E — Etkinlik türleri** | Save the Date, Engagement, Bridal Shower | Metin seti + Canva varyantı + QA |
-
-Aşamalar **sıralı değil, paraleldir**: GPT görsel ajanları B ve D'nin görsellerini aynı anda
-üretebilir; Codex araçları A'da yazarken Claude Canva'da çalışır. Bağımlılıklar görev
-dosyalarındaki `bagimli:` alanındadır.
+Adım 1 ve 2 birbirini beklemez (aynı anda yürür). Ortak araçlar: `G002` kit_build, `G003` kit_check,
+`G026` md→pdf, `G040` varyant hattı. Tasarım 02 pilot hattır: araçlar önce onda denenir.
 
 ## 4. Roller
 

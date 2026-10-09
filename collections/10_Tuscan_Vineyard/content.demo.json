@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Giulia",
+      "full_name": "Giulia Rosa"
+    },
+    {
+      "display_name": "Matteo",
+      "full_name": "Matteo Luca"
+    }
+  ],
+  "name_display": "Giulia & Matteo",
+  "initials": "G&M",
+  "host_line": "Together with their families",
+  "date": "2027-09-25",
+  "ceremony_time": "16:00",
+  "timezone": "Europe/Rome",
+  "venue": {
+    "name": "Tenuta del Sole",
+    "city": "Montepulciano",
+    "region": "Tuscany",
+    "country": "Italy",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Vineyard Terrace"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Cellar"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Cypress Courtyard"
+    }
+  ],
+  "dress_code": "Garden formal",
+  "rsvp": {
+    "deadline": "2027-08-14",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Luna",
+      "full_name": "Luna Grace"
+    },
+    {
+      "display_name": "River",
+      "full_name": "River James"
+    }
+  ],
+  "name_display": "Luna & River",
+  "initials": "L&R",
+  "host_line": "Together with their families",
+  "date": "2027-04-17",
+  "ceremony_time": "16:00",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "Desert Bloom Ranch",
+    "city": "Joshua Tree",
+    "region": "California",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Desert Garden"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Adobe Patio"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Starlight Pavilion"
+    }
+  ],
+  "dress_code": "Boho chic",
+  "rsvp": {
+    "deadline": "2027-03-06",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Marina",
+      "full_name": "Marina Belle"
+    },
+    {
+      "display_name": "Oliver",
+      "full_name": "Oliver Grant"
+    }
+  ],
+  "name_display": "Marina & Oliver",
+  "initials": "M&O",
+  "host_line": "Together with their families",
+  "date": "2027-07-17",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Seaglass Point",
+    "city": "Chatham",
+    "region": "Massachusetts",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Dune Lawn"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Lighthouse Deck"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Boathouse"
+    }
+  ],
+  "dress_code": "Coastal formal",
+  "rsvp": {
+    "deadline": "2027-06-05",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

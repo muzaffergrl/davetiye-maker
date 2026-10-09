@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Maya",
+      "full_name": "Maya Leilani"
+    },
+    {
+      "display_name": "Kai",
+      "full_name": "Kai Andrew"
+    }
+  ],
+  "name_display": "Maya & Kai",
+  "initials": "M&K",
+  "host_line": "Together with their families",
+  "date": "2027-06-19",
+  "ceremony_time": "16:00",
+  "timezone": "Pacific/Honolulu",
+  "venue": {
+    "name": "Coral Bay Resort",
+    "city": "Wailea",
+    "region": "Hawaii",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Ocean Lawn"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Sunset Deck"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Palm Pavilion"
+    }
+  ],
+  "dress_code": "Beach formal",
+  "rsvp": {
+    "deadline": "2027-05-08",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

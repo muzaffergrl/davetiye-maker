@@ -90,3 +90,40 @@ RSVP butonu dolgusu `deep`, buton yazısı `ivory`.
 `python3 tools/kit_check.py <kit kökü>` (görev `G003`): dosyalar var mı, ölçü/oran doğru mu,
 şeffaf olması gerekenlerde alfa var mı, mockup yeşil alanı düz mü. Hata varsa kit
 `kit_build`'e girmez.
+
+## 6. Genel kalıp: her tasarımın kendi `kit_map.json`'ı (tasarım 01, 03–20)
+
+Yukarıdaki §2–§3 tasarım 02'ye (Envelope Story) özeldir. Her tasarımın katmanları farklı olduğu için
+her koleksiyon kökünde bir `kit_map.json` bulunur (görev G1NN yazar) ve `tools/kit_build.py` onu okur.
+
+Ham GPT dosyaları (tasarım 01, 03–20) — `assets/gpt/GPT_PROMPTS.md`'de tam liste:
+`textures/background.png` (1024×1536) · `textures/paper.png` · `textures/liner.png` ·
+`decor/closure.png` (şeffaf) · `decor/corner.png` (şeffaf) · `decor/divider.png` (1536×1024, şeffaf) ·
+`decor/photo_frame.png` (1024×1536, şeffaf, içi boş) + tasarıma özel parçalar.
+
+```json
+{
+  "masks": "assets/layers",
+  "out": "kit_layers",
+  "layers": [
+    {"name": "bg.jpg", "size": [2160, 3840], "source": "assets/gpt/textures/background.png", "method": "cover"},
+    {"name": "envelope_back.png", "size": [2040, 1480], "source": "assets/gpt/textures/paper.png", "method": "texture_mask", "mask": "envelope_back.png"},
+    {"name": "envelope_liner.png", "size": [1776, 760], "source": "assets/gpt/textures/liner.png", "method": "pattern_mask", "mask": "envelope_liner.png"},
+    {"name": "closure.png", "size": [500, 500], "source": "assets/gpt/decor/closure.png", "method": "fit"},
+    {"name": "corner_tl.png", "size": [800, 800], "source": "assets/gpt/decor/corner.png", "method": "fit"},
+    {"name": "corner_br.png", "size": [800, 800], "source": "assets/gpt/decor/corner.png", "method": "fit", "rotate": 180},
+    {"name": "photo_1.jpg", "size": [792, 832], "source": "../02_Dusty_Blue/assets/gpt/photos/moment_1.jpg", "method": "cover"}
+  ]
+}
+```
+
+| method | Anlamı |
+|---|---|
+| `cover` | hedef orana merkezden kırp + ölçekle |
+| `fit` | oranı koru, şeffaf kenarla hedef boyuta sığdır (kırpma yok) |
+| `texture_mask` | maskenin alfası + doku (tile) × maskenin parlaklık gölgesi |
+| `pattern_mask` | maskenin alfası + desen (tile), gölge yok |
+| `tint` | (ops.) `color` alanındaki hex ile renklendir |
+
+`rotate`, `flip` (h/v) opsiyoneldir. Yollar koleksiyon köküne göredir. `masks` klasöründeki dosyaların
+üzerine hiçbir araç yazmaz.

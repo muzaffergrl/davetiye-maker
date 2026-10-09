@@ -4,7 +4,7 @@ baslik: tools/make_variant.py — varyant hattı
 rol: gpt-kod
 durum: hazir
 alan:
-oncelik: 2
+oncelik: 4
 bagimli: [G002, G003]
 yazar: [tools/make_variant.py]
 ---

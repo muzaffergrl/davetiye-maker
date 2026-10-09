@@ -1,25 +1,25 @@
 ---
 id: G002
-baslik: tools/kit_build.py — kit dokularından 17 Canva katmanı üret
+baslik: tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel)
 rol: gpt-kod
 durum: hazir
 alan:
 oncelik: 1
 bagimli: []
-yazar: [tools/kit_build.py, tools/tests/]
+yazar: [tools/kit_build.py, tools/tests/, collections/02_Dusty_Blue/kit_map.json]
 ---
 
 ## Amaç
-Bir renk kitinin ham GPT görsellerinden (doku/dekor/foto) Canva'ya yüklenecek 17 katmanı otomatik üretmek. Şekiller değişmez, yalnız yüzey değişir.
+Her tasarımın (01–20) ve her renk kitinin ham GPT görsellerinden Canva'ya yüklenecek katmanları `kit_map.json`'a göre otomatik üretmek. Şekiller maskeden (koddan çizilmiş katmanlar) gelir, yüzey GPT'den. Tek araç bütün tasarımlarda çalışır.
 
 ## Girdiler
-- `docs/07_KIT_STANDARDI.md` (§3 tablo = tam şartname)
+- `docs/07_KIT_STANDARDI.md` §6 (genel `kit_map.json` biçimi ve method'lar) ve §3 (tasarım 02 tablosu)
 - Maske kaynağı (salt okunur): `collections/02_Dusty_Blue/assets/layers/*.png|jpg`
 - `collections/02_Dusty_Blue/canva/ASSET_MAP.json`
 - `<kit>/palette.json`
 
 ## Yapılacaklar
-1. CLI: `python3 tools/kit_build.py <kit kökü> [--photos <klasör>]` → `<kit kökü>/kit_layers/` altına 17 dosya, adlar ve piksel ölçüleri §3 ile birebir.
+1. CLI: `python3 tools/kit_build.py <koleksiyon veya kit kökü>` → `kit_map.json`'u okur, `out` klasörüne yazar. Tasarım 02 için `collections/02_Dusty_Blue/kit_map.json`'u da sen yaz (§3 tablosundan; 17 katman). Renk kitleri (`variants/Vxx`) için `--map collections/02_Dusty_Blue/kit_map.json` ile kaynak kökü değiştirilebilsin.
 2. Kağıt yüzeyli katmanlar: maske katmanının alfa kanalı korunur; doku tekrarlanarak (tile) doldurulur; maske katmanının parlaklığından gölge/kıvrım bilgisi çıkarılıp (ör. luminance / ortalama luminance) dokuyla çarpılır.
 3. `invitation_card_blank.png`: çerçeve çizgileri `palette.gold` ile; mümkünse maskedeki altın çizgilerin piksellerini renk kaydırarak yeniden boya.
 4. Botanik katmanlar: `botanical_corner.png` ölçekle; `_br` sürümleri 180° döndür.

@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Daisy",
+      "full_name": "Daisy June"
+    },
+    {
+      "display_name": "Wyatt",
+      "full_name": "Wyatt Cole"
+    }
+  ],
+  "name_display": "Daisy & Wyatt",
+  "initials": "D&W",
+  "host_line": "Together with their families",
+  "date": "2027-08-28",
+  "ceremony_time": "16:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "Golden Field Barn",
+    "city": "Franklin",
+    "region": "Tennessee",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Sunflower Field"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Porch"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Big Red Barn"
+    }
+  ],
+  "dress_code": "Country chic",
+  "rsvp": {
+    "deadline": "2027-07-17",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}

@@ -63,8 +63,8 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (Paket 1 dokular/dekor · Paket 2 fotoğraflar · Paket 3 mockup'lar).
 Canva yükleme çalışıyor (canva.com izinli). Katman yeniden yükleme/PPTX araçları: `tools/build_canva_pptx.py` (Canva doğrudan PPTX yüklemeyi reddediyor; import-design-from-url herkese açık URL ister). Export indirme çalışıyor (`export-download.canva.com` izinli).
 
-## Kalıp T1 ve renk varyantları (2026-10-09)
-Bu koleksiyon **kalıp T1 · Envelope Story**'dir. Plan: `docs/06_FABRIKA_PLANI.md`, kit standardı:
+## Kalıp ve renk varyantları (2026-10-09)
+Bu koleksiyon Aşama 1'in **tasarım 02**'sidir ve hattın pilotudur. Renk varyantları Aşama 2'dir (kapı `G090`). Plan: `docs/06_FABRIKA_PLANI.md`, kit standardı:
 `docs/07_KIT_STANDARDI.md`, görevler: `gorevler/`.
 
 | Varyant | Kit kökü | Durum |

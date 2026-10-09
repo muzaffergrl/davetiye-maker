@@ -1,0 +1,72 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Rosalind",
+      "full_name": "Rosalind Mae"
+    },
+    {
+      "display_name": "Edward",
+      "full_name": "Edward James"
+    }
+  ],
+  "name_display": "Rosalind & Edward",
+  "initials": "R&E",
+  "host_line": "Together with their families",
+  "date": "2027-10-23",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Hawthorne Hall",
+    "city": "Asheville",
+    "region": "North Carolina",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Chapel Lawn"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Hearth Room"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Great Hall"
+    }
+  ],
+  "dress_code": "Formal attire",
+  "rsvp": {
+    "deadline": "2027-09-11",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": false,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  }
+}
