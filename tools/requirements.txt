@@ -1,0 +1,2 @@
+jsonschema>=4.21
+segno>=1.6

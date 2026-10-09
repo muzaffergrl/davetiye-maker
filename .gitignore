@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editör
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Claude Code yerel ayarları
+.claude/settings.local.json
+
+# Gerçek müşteri verisi asla repoya girmez
+**/content.customer*.json
+customer_data/
+
+# Font dosyaları dağıtılmaz
+*.ttf
+*.otf
+*.woff
+*.woff2
+
+# Büyük ara render çıktıları
+renders/
+*.mov

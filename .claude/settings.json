@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "enabledMcpjsonServers": ["canva", "playwright"],
+  "permissions": {
+    "allow": [
+      "Bash(python tools/validate_content.py:*)",
+      "Bash(python3 tools/validate_content.py:*)",
+      "Bash(python tools/make_qr.py:*)",
+      "Bash(python3 tools/make_qr.py:*)",
+      "Bash(pip install -r tools/requirements.txt:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$CLAUDE_CODE_REMOTE\" = \"true\" ]; then pip install -q -r \"$CLAUDE_PROJECT_DIR/tools/requirements.txt\" >/dev/null 2>&1 || echo 'tools/requirements.txt kurulamadı'; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

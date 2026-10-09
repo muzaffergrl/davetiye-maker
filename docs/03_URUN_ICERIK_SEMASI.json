@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "davetiye-maker/content-record",
+  "title": "Event content record (single source of truth per event/demo)",
+  "description": "Video, website, misafir PDF'i ve START HERE dosyasındaki tüm kişisel bilgiler bu kayıttan gelir. Formatlar kendiliğinden senkronize değildir; tools/validate_content.py ve icerik-tutarlilik skill'i ile denetlenir.",
+  "type": "object",
+  "required": ["record_kind", "event_type", "locale", "partners", "initials", "date", "timezone", "venue", "schedule", "rsvp", "urls", "media", "optional_blocks"],
+  "additionalProperties": false,
+  "properties": {
+    "record_kind": { "enum": ["demo", "customer"], "description": "demo = kurgu içerik; customer = gerçek alıcı verisi (repoya konmaz)" },
+    "event_type": { "enum": ["wedding", "engagement", "save_the_date", "bridal_shower", "other"] },
+    "locale": { "enum": ["en-US", "en-GB", "en-CA", "en-AU"] },
+    "partners": {
+      "type": "array", "minItems": 1, "maxItems": 2,
+      "items": {
+        "type": "object", "required": ["display_name"], "additionalProperties": false,
+        "properties": {
+          "display_name": { "type": "string", "minLength": 1 },
+          "full_name": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "name_display": { "type": "string", "description": "Ör. 'Avery & Jordan'" },
+    "initials": { "type": "string", "maxLength": 9, "description": "Monogram, ör. 'A & J'" },
+    "host_line": { "type": ["string", "null"], "description": "Ör. 'Together with our families' — opsiyonel, varsayılmaz" },
+    "date": { "type": "string", "format": "date", "description": "ISO YYYY-MM-DD; gösterim locale'e göre üretilir" },
+    "ceremony_time": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+    "timezone": { "type": "string", "description": "IANA, ör. America/Los_Angeles" },
+    "venue": {
+      "type": "object", "required": ["name", "city"], "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "city": { "type": "string" },
+        "region": { "type": ["string", "null"] },
+        "country": { "type": ["string", "null"] },
+        "address": { "type": ["string", "null"] }
+      }
+    },
+    "schedule": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["label", "time"], "additionalProperties": false,
+        "properties": {
+          "label": { "type": "string" },
+          "time": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+          "location": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "dress_code": { "type": ["string", "null"] },
+    "rsvp": {
+      "type": "object", "required": ["deadline"], "additionalProperties": false,
+      "properties": {
+        "deadline": { "type": "string", "format": "date" },
+        "method": { "enum": ["canva_form", "external_form", "email", "none", null] }
+      }
+    },
+    "urls": {
+      "type": "object", "additionalProperties": false,
+      "description": "Gerçek ve doğrulanmış değilse null. Demo kayıtta hepsi null kalmalı.",
+      "properties": {
+        "website": { "type": ["string", "null"], "format": "uri" },
+        "rsvp_form": { "type": ["string", "null"], "format": "uri" },
+        "map": { "type": ["string", "null"], "format": "uri" },
+        "registry": { "type": ["string", "null"], "format": "uri" },
+        "accommodation": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "media": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "hero_portrait": { "type": ["string", "null"] },
+        "memory_photos": { "type": "array", "items": { "type": "string" }, "maxItems": 4 },
+        "couple_clip": { "type": ["string", "null"] },
+        "venue_image": { "type": ["string", "null"] }
+      }
+    },
+    "optional_blocks": {
+      "type": "object", "additionalProperties": false,
+      "description": "true = gösterilir. Hiçbiri kültürel zorunluluk değildir.",
+      "properties": {
+        "our_story": { "type": "boolean" },
+        "countdown": { "type": "boolean" },
+        "dress_code": { "type": "boolean" },
+        "registry": { "type": "boolean" },
+        "travel_stay": { "type": "boolean" },
+        "faq": { "type": "boolean" },
+        "guest_policy": { "type": "boolean" }
+      }
+    }
+  }
+}

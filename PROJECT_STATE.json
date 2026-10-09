@@ -1,0 +1,118 @@
+{
+  "project": "Dijital Davetiye ve Özel Gün Şablon İşi",
+  "brand_name": null,
+  "user_language": "tr",
+  "product_language": "en",
+  "delivery_platform": "Canva",
+  "sales_channel": "Etsy",
+  "last_updated": "2026-10-09",
+  "status_levels": [
+    "concept",
+    "editable_draft",
+    "review_pending",
+    "saved_master",
+    "functional_pilot",
+    "buyer_tested",
+    "sale_ready"
+  ],
+  "undecided": [
+    "brand_name",
+    "pricing",
+    "subscription_budget",
+    "support_email_and_sla",
+    "revision_scope",
+    "real_domain",
+    "rsvp_account_and_target",
+    "sale_template_links",
+    "commercial_music",
+    "next_product_after_collection_01",
+    "launch_date"
+  ],
+  "collections": [
+    {
+      "id": "01_Olive_Ivory",
+      "working_name": "Olive & Ivory",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "content_record": "collections/01_Olive_Ivory/content.demo.json",
+      "canva_designs": [
+        {
+          "role": "video_master_6_scenes_v1.1",
+          "design_id": "DAHXfpQhvAo",
+          "edit_url": "https://www.canva.com/d/RhXgDCJyAoyksg8",
+          "status": "saved_master",
+          "notes": "Kayıtlı temel dosya; mühür arkasındaki bulanık yama kayıtlı sürümde hâlâ var."
+        },
+        {
+          "role": "video_master_seal_fix_draft",
+          "design_id": "DAHXfpQhvAo",
+          "edit_url": "https://www.canva.com/d/x0H7kfCXy0Ig_k7",
+          "transaction_id": "3792549304798529686",
+          "status": "review_pending",
+          "committed": false,
+          "notes": "16 güncelleme taslakta uygulandı. Önizleme onayı + commit gerekli. Transaction günler sonra geçersiz olabilir; önce canlı oku. Eski transaction 1633073278120497531 iptal edildi."
+        },
+        {
+          "role": "landing_design_master_v2",
+          "design_id": "DAHXf0avKgk",
+          "edit_url": "https://www.canva.com/d/4gb0m6HmIi3n_wZ",
+          "status": "saved_master",
+          "notes": "1080x7800 custom; native website sayılmaz. Zarfı temiz (kullanıcı onayı)."
+        },
+        {
+          "role": "website_import_candidate",
+          "design_id": "DAHXf3AeXXo",
+          "edit_url": "https://www.canva.com/d/wY_0ByZkZjqekdH",
+          "status": "editable_draft",
+          "notes": "intended_design_type=website ile import edildi; dönen tür unknown. Canva UI'da Website türü, mobil önizleme ve yayın doğrulanmalı."
+        },
+        {
+          "role": "guest_card_pdf_draft",
+          "design_id": "DAHXfu1KIdM",
+          "edit_url": "https://www.canva.com/d/qlzOQXWYpCb49oO",
+          "status": "editable_draft",
+          "notes": "image-to-design çıktısı; son PDF export yapılmadı."
+        },
+        {
+          "role": "layered_concept_cover",
+          "design_id": "DAHXflOB3Us",
+          "edit_url": "https://www.canva.com/d/qUvpp0i3gddmEHA",
+          "status": "concept",
+          "notes": "Ayrı kapak örneği; 6 sahneli master'ın yerine geçmez."
+        }
+      ],
+      "deprecated_designs": {
+        "DAHXfp4hrqE": "eski website denemesi; edit aracı içeriği boş döndürdü",
+        "DAHXfu5LxgA": "önceki altı sahne",
+        "DAHXbWczGBY": "reddedilen editoryal pilot",
+        "DAHXbCQZnf8": "ilk Türkçe dikey",
+        "DAHXbJFJt0k": "yatay sunum"
+      },
+      "clean_assets": {
+        "envelope_base": { "canva_asset_id": "MAHXf4Vxib0", "file": "assets/envelope_base.png" },
+        "envelope_flap": { "canva_asset_id": "MAHXf09VArM", "file": "assets/envelope_flap.png" },
+        "envelope_pocket": { "canva_asset_id": "MAHXfwF0CQY", "file": "assets/envelope_pocket.png" },
+        "wax_seal_clean": { "canva_asset_id": "MAHXf374Qkc", "file": "assets/wax_seal_clean.png" }
+      },
+      "broken_assets_to_replace": ["MAHXfrIvazo", "MAHXflp6S24", "MAHXfj_u8k4", "MAHXfuYJbcU"],
+      "user_edits_to_preserve": [
+        "Sahne 2 başlığı 'değiştir' olarak değiştirilmiş",
+        "Sahne 2 fotoğrafı MAD9bgyverk"
+      ],
+      "deliverables": {
+        "video_master_editable": "editable_draft",
+        "native_canva_animation": "not_started",
+        "mp4_export": "not_done",
+        "website_native": "unverified",
+        "website_published_url": null,
+        "rsvp_form_connected": false,
+        "buyer_ab_data_isolation_test": "not_done",
+        "sale_template_links": null,
+        "guest_pdf_export": "not_done",
+        "start_here_pdf": "not_started",
+        "canva_free_buyer_test": "not_done",
+        "etsy_listing": "not_started"
+      }
+    }
+  ]
+}
