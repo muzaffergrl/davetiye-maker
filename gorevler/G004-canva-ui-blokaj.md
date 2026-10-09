@@ -2,8 +2,8 @@
 id: G004
 baslik: Canva UI blokajları için otomasyon yolu araştır
 rol: claude-canva
-durum: hazir
-alan:
+durum: alindi
+alan: claude-canva-1
 oncelik: 1
 bagimli: []
 yazar: [docs/08_CANVA_UI_BLOKAJ.md]
@@ -27,3 +27,6 @@ API'si olmayan dört işi (element animasyonu/timeline, website Form/RSVP, websi
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-canva-1

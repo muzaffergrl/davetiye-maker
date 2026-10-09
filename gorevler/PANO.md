@@ -3,17 +3,17 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 314 · alindi 0 · inceleme 0 · blokaj 0 · bitti 1 · toplam 315
+Özet: hazir 314 · alindi 1 · inceleme 0 · blokaj 0 · bitti 1 · toplam 316
 
 ## claude-canva
 
-**Alınabilir (1)**
-
-- `G004` p1 — Canva UI blokajları için otomasyon yolu araştır → `gorevler/G004-canva-ui-blokaj.md`
-
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Alınabilir (0)**
 
 - (yok)
+
+**Üzerinde çalışılan / incelemede / blokaj (1)**
+
+- `G004` alindi · claude-canva-1 — Canva UI blokajları için otomasyon yolu araştır
 
 Bağımlılık bekleyen: 102 · Biten: 1
 
@@ -107,8 +107,9 @@ Bağımlılık bekleyen: 79 · Biten: 0
 
 ## gpt-metin
 
-**Alınabilir (3)**
+**Alınabilir (4)**
 
+- `G005` p1 — G004'ün GPT ayağı — Canva UI işleri için web/belge araştırması → `gorevler/G005-canva-ui-web-arastirma.md`
 - `G024` p2 — A5 — START HERE kılavuz metni (İngilizce) → `gorevler/G024-v01-kilavuz-metni.md`
 - `G025` p2 — B3 — Etsy ilan metni → `gorevler/G025-v01-etsy-ilan-metni.md`
 - `G050` p7 — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower) → `gorevler/G050-etkinlik-turu-metinleri.md`
