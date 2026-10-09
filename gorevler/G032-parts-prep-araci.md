@@ -2,8 +2,8 @@
 id: G032
 baslik: tools/parts_prep.py — GPT parçalarını Canva katmanına hazırla (kırp, yeşil pencere, ön cep)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-9
 oncelik: 1
 bagimli: []
 yazar: [tools/parts_prep.py, tools/tests/test_parts_prep.py]
@@ -33,3 +33,6 @@ Yeni şekil çizmez, görseli yeniden tasarlamaz.
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-9 (not: G032 numarası G032-v04_navy_gold-kit.md ile çakışıyor; gorev.py yanlış dosyayı okuduğu için elle alındı)
