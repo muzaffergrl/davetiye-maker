@@ -27,6 +27,13 @@ Canva'ya dokunmazsın, kod yazmazsın, kullanıcıdan hiçbir şey istemezsin.
 - Mockup'larda ekran/kart yüzeyi **düz #00FF00**, yansımasız; nesne düz, eğik değil.
 - Yalnız görevin `yazar:` klasörlerine dosya koy.
 
+## Video (GV görevleri)
+- Kaynak: görevde adı geçen `VIDEO_PROMPTS.md`. Prompt'ları aynen kullan.
+- Şartlar: 9:16 **1080×1920** MP4, sessiz, **sabit kamera**, ilk/son 0,5 sn durgun.
+- Videoda **yazı, harf, monogram, kişi, el, yüz yok**; kart yüzleri ve fotoğraf alanları **boş** kalır
+  (metin ve fotoğraflar Canva'da üste konur).
+- Bütün klipler aynı görsel dilde (aynı zarf, mühür, kağıt, ışık); varsa o tasarımın Paket 1 görsellerini referans al.
+
 ## Bitirme
 1. Görev dosyasının **Sonuç** bölümüne: üretilen dosyalar, yeniden üretilenler ve nedeni, emin olmadığın noktalar.
 2. Başlıkta `durum: inceleme`, Günlük'e `- <tarih> bitti, incelemeye gönderildi`.

@@ -1,0 +1,24 @@
+{
+  "note": "Tasarım 02 (Envelope Story) katman haritası — docs/07_KIT_STANDARDI.md §3. Üretici: tools/kit_build.py. source → kit köküne (V01: bu klasör; varyant: variants/Vxx) göre; shared:true → bu klasöre göre (ortak fotoğraflar); mask → assets/layers (dondurulmuş, salt okunur). invitation_card_blank için çerçeve çizgilerini palette.gold ile yeniden boyamak isteğe bağlıdır: method 'texture_mask_lines'.",
+  "masks": "assets/layers",
+  "out": "kit_layers",
+  "layers": [
+    {"name": "bg_mist.jpg",                "size": [2160, 3840], "source": "assets/gpt/textures/background_mist.png", "method": "cover"},
+    {"name": "botanical_tl.png",           "size": [800, 800],   "source": "assets/gpt/decor/botanical_corner.png",   "method": "fit"},
+    {"name": "botanical_br.png",           "size": [820, 820],   "source": "assets/gpt/decor/botanical_corner.png",   "method": "fit", "rotate": 180},
+    {"name": "card_botanical_tl.png",      "size": [500, 500],   "source": "assets/gpt/decor/botanical_corner.png",   "method": "fit"},
+    {"name": "card_botanical_br.png",      "size": [500, 500],   "source": "assets/gpt/decor/botanical_corner.png",   "method": "fit", "rotate": 180},
+    {"name": "envelope_back.png",          "size": [2040, 1480], "source": "assets/gpt/textures/ivory_paper.png",     "method": "texture_mask", "mask": "envelope_back.png"},
+    {"name": "envelope_pocket.png",        "size": [1800, 1240], "source": "assets/gpt/textures/ivory_paper.png",     "method": "texture_mask", "mask": "envelope_pocket.png"},
+    {"name": "envelope_flap_closed.png",   "size": [1816, 816],  "source": "assets/gpt/textures/ivory_paper.png",     "method": "texture_mask", "mask": "envelope_flap_closed.png"},
+    {"name": "envelope_liner_open.png",    "size": [1776, 760],  "source": "assets/gpt/textures/envelope_liner.png",  "method": "pattern_mask", "mask": "envelope_liner_open.png"},
+    {"name": "card_small_blank.png",       "size": [1640, 1200], "source": "assets/gpt/textures/ivory_paper.png",     "method": "texture_mask", "mask": "card_small_blank.png"},
+    {"name": "invitation_card_blank.png",  "size": [2080, 3280], "source": "assets/gpt/textures/ivory_paper.png",     "method": "texture_mask", "mask": "invitation_card_blank.png"},
+    {"name": "polaroid_frame.png",         "size": [1080, 1260], "source": "assets/gpt/textures/ivory_paper.png",     "method": "texture_mask", "mask": "polaroid_frame.png"},
+    {"name": "wax_seal.png",               "size": [496, 496],   "source": "assets/gpt/decor/wax_seal_blank.png",     "method": "fit", "trim": true, "pad": 24},
+    {"name": "photo_placeholder_wide.jpg", "size": [1360, 620],  "source": "assets/gpt/photos/hero_portrait.jpg",     "method": "cover", "shared": true, "anchor": [0.5, 0.35]},
+    {"name": "photo_placeholder_1.jpg",    "size": [792, 832],   "source": "assets/gpt/photos/moment_1.jpg",          "method": "cover", "shared": true},
+    {"name": "photo_placeholder_2.jpg",    "size": [792, 832],   "source": "assets/gpt/photos/moment_2.jpg",          "method": "cover", "shared": true},
+    {"name": "photo_placeholder_3.jpg",    "size": [792, 832],   "source": "assets/gpt/photos/moment_3.jpg",          "method": "cover", "shared": true}
+  ]
+}

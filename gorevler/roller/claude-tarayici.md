@@ -61,6 +61,15 @@ tasarım 02 örneği: `collections/02_Dusty_Blue/canva/ANIMATION_STEPS.md`).
 5. Kaydet: `canva/DESIGNS.json` → `website`, `invitation_pdf`, `story`, `square` girdileri (design_id,
    template_link, form: true, publish_test: "<tarih> ok/hata").
 
+## 6. GPT video katmanı (GV görevleri — hibrit deneme)
+1. Asıl master'a dokunma; görevin söylediği adla **kopya** oluştur.
+2. Klipleri Canva'ya yükle (Uploads → dosya). Her klibi kendi sayfasında tam sayfa arka plan video yap
+   (en alt katman). Sayfa süresini klip süresine eşitle.
+3. Videoda zaten görünen statik dekoru o kopyada gizle/sil; metinleri ve fotoğraf kutularını bırak.
+4. Metin ve fotoğraf kutularını videonun **son karesindeki** kart/çerçeve konumlarına hizala; video bitince
+   görünmeleri için Fade/Rise + gecikme ver.
+5. MP4 export → kontrol. Kaydı `canva/DESIGNS.json` → `video_hybrid_test`.
+
 ## 5. Bitirme
 Sonuç bölümüne: yapılanlar, template link'ler, MP4/yayın test sonucu, Canva'da adı farklı çıkan menüler,
 yapılamayan adım ve nedeni. `bitir` → push. Template link'ler `START_HERE` kılavuzuna entegratör tarafından taşınır.
