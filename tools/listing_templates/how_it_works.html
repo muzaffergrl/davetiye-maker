@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How It Works — {{collection_name}}</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="palette.css">
+<style>
+  .steps { width: 1440px; position: relative; display: flex; flex-direction: column; gap: 46px; }
+  .steps::before { content: ""; position: absolute; left: 79px; top: 80px; bottom: 80px; width: 2px; background: var(--line); }
+  .step { display: flex; align-items: center; gap: 56px; position: relative; }
+  .n { width: 160px; height: 160px; flex: none; border-radius: 50%; border: 3px solid var(--gold);
+    background: var(--mist-top); display: grid; place-items: center;
+    font-family: var(--serif); font-weight: 600; font-size: 92px; color: var(--deep); }
+  .txt { background: var(--card); border: 2px solid var(--line); border-radius: 6px; padding: 36px 48px; flex: 1; }
+  .txt h2 { font-family: var(--serif); font-weight: 600; font-size: 66px; color: var(--deep); line-height: 1.05; }
+  .txt p { font-size: 32px; line-height: 1.45; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="eyebrow">{{collection_name}}</div>
+  <h1>How It Works</h1>
+  <p class="sub">From purchase to your guests' phones</p>
+  <svg class="ornament" viewBox="0 0 360 40" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M0 20H150M210 20H360"/><path d="M180 6l14 14-14 14-14-14z" fill="currentColor"/>
+    <circle cx="160" cy="20" r="3" fill="currentColor"/><circle cx="200" cy="20" r="3" fill="currentColor"/>
+  </svg>
+
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div class="txt">
+      <h2>Download your guide</h2>
+      <p>After purchase, open the START HERE PDF from your Etsy downloads.</p></div></div>
+    <div class="step"><div class="n">2</div><div class="txt">
+      <h2>Open the templates in Canva</h2>
+      <p>Each link creates your own copy of the video, website, invitation and share images.</p></div></div>
+    <div class="step"><div class="n">3</div><div class="txt">
+      <h2>Personalize</h2>
+      <p>Change names, date, venue, photos and wording. The guide shows every step.</p></div></div>
+    <div class="step"><div class="n">4</div><div class="txt">
+      <h2>Share with your guests</h2>
+      <p>Download the video and PDF, publish your website and send the link.</p></div></div>
+  </div>
+
+  <div class="foot">
+    Requires a Canva account<span class="dot">◆</span>Digital download
+    <div class="shop">{{shop_name}}</div>
+  </div>
+</div>
+</body>
+</html>

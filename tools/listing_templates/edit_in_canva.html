@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Edit in Canva — {{collection_name}}</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="palette.css">
+<style>
+  .row { display: flex; gap: 90px; align-items: center; width: 100%; margin-top: 10px; }
+  /* sahte düzenleyici: telefon + kart; demo veriler kurgudur */
+  .phone { width: 580px; height: 1000px; flex: none; border-radius: 70px; border: 16px solid var(--deep);
+    background: var(--ivory); position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.18); }
+  .card { position: absolute; inset: 70px 48px 70px; border: 2px solid var(--gold); outline: 1px solid var(--gold);
+    outline-offset: -14px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: #3a3a3a; padding: 40px; }
+  .card .small { font-size: 20px; letter-spacing: .28em; text-transform: uppercase; color: #6b6b6b; }
+  .card .names { font-family: var(--script); font-size: 84px; color: var(--deep); line-height: 1.1; margin: 84px 0 34px;
+    padding: 6px 26px; position: relative; }
+  .sel { outline: 4px dashed var(--gold); outline-offset: 8px; }
+  .tag { position: absolute; right: -6px; top: -64px; background: var(--gold); color: #fff; font-family: var(--sans);
+    font-size: 22px; letter-spacing: .08em; padding: 8px 18px; border-radius: 4px; white-space: nowrap; }
+  .card .date { font-family: var(--serif); font-size: 46px; color: #333; }
+  .card .venue { font-family: var(--serif); font-style: italic; font-size: 34px; color: #555; margin-top: 18px; }
+  .card .photo { flex: none; width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--gold-light); margin-bottom: 30px;
+    background: radial-gradient(circle at 50% 38%, var(--gold-light) 0 22%, transparent 23%),
+                radial-gradient(ellipse at 50% 100%, var(--primary) 0 45%, transparent 46%), var(--mist-top); }
+  .list { flex: 1; }
+  .list h2 { font-family: var(--serif); font-weight: 600; font-size: 72px; color: var(--deep); margin-bottom: 30px; }
+  .list ul { list-style: none; }
+  .list li { font-size: 38px; line-height: 1.3; padding: 22px 0 22px 70px; border-bottom: 2px solid var(--line); position: relative; }
+  .list li::before { content: ""; position: absolute; left: 6px; top: 50%; width: 26px; height: 26px; margin-top: -13px;
+    transform: rotate(45deg); border: 3px solid var(--gold); }
+  .note { margin-top: 30px; color: var(--deep); font-style: italic; font-family: var(--serif); font-size: 36px; }
+  .foot { padding-top: 30px; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="eyebrow">{{collection_name}}</div>
+  <h1>Personalize in Canva</h1>
+  <p class="sub">Your own editable copy — change the details yourself</p>
+  <svg class="ornament" viewBox="0 0 360 40" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M0 20H150M210 20H360"/><path d="M180 6l14 14-14 14-14-14z" fill="currentColor"/>
+    <circle cx="160" cy="20" r="3" fill="currentColor"/><circle cx="200" cy="20" r="3" fill="currentColor"/>
+  </svg>
+
+  <div class="row">
+    <div class="phone">
+      <div class="card">
+        <div class="photo"></div>
+        <div class="small">Together with their families</div>
+        <div class="names sel">Avery &amp; Jordan<span class="tag">Tap to edit</span></div>
+        <div class="date">September 18, 2027</div>
+        <div class="venue">The Willow Grove Estate</div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>What you can change</h2>
+      <ul>
+        <li>Names, initials and wording</li>
+        <li>Date, time, venue and address</li>
+        <li>Your own photos</li>
+        <li>Event schedule and details</li>
+        <li>RSVP form and website link <span class="verify">[VERIFY]</span></li>
+      </ul>
+      <p class="note">Sample names and details shown.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    Edit in Canva<span class="dot">◆</span>Digital download
+    <div class="shop">{{shop_name}}</div>
+  </div>
+</div>
+</body>
+</html>
