@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 327 · alindi 8 · inceleme 1 · blokaj 0 · bitti 3 · toplam 339
+Özet: hazir 327 · alindi 7 · inceleme 1 · blokaj 1 · bitti 3 · toplam 339
 
 ## claude-canva
 
@@ -137,6 +137,6 @@ Bağımlılık bekleyen: 20 · Biten: 0
 
 **Üzerinde çalışılan / incelemede / blokaj (1)**
 
-- `GV02A` alindi · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
+- `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 
 Bağımlılık bekleyen: 24 · Biten: 0
