@@ -2,8 +2,8 @@
 id: G101
 baslik: Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-7
 oncelik: 2
 bagimli: []
 yazar: [collections/01_Olive_Ivory/video/, collections/01_Olive_Ivory/assets/layers/, collections/01_Olive_Ivory/kit_map.json, collections/01_Olive_Ivory/previews/html/]
@@ -35,3 +35,6 @@ Tasarım 01'in 6 sahnelik 1080×1920 animasyon kaynağını kodla (HTML/CSS/SVG)
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-7
