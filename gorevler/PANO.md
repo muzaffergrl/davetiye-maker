@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 314 · alindi 1 · inceleme 0 · blokaj 0 · bitti 1 · toplam 316
+Özet: hazir 314 · alindi 0 · inceleme 1 · blokaj 0 · bitti 1 · toplam 316
 
 ## claude-canva
 
@@ -13,7 +13,7 @@
 
 **Üzerinde çalışılan / incelemede / blokaj (1)**
 
-- `G004` alindi · claude-canva-1 — Canva UI blokajları için otomasyon yolu araştır
+- `G004` inceleme · claude-canva-1 — Canva UI blokajları için otomasyon yolu araştır
 
 Bağımlılık bekleyen: 102 · Biten: 1
 

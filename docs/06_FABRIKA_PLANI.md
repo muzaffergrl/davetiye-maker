@@ -68,8 +68,8 @@ Claude görsel üretmez; GPT kod/Canva/metin görevi almaz.
 ## 5. Açık blokajlar (kullanıcıya verilmez)
 
 Canva API'sinde şu işlerin aracı yok: **element animasyonu/timeline, website Form (RSVP),
-website yayınlama, template link**. Çözüm araştırması: `G004` → sonuç
-`docs/08_CANVA_UI_BLOKAJ.md`. Bu çözülene kadar A1/A2 `sale_ready` olamaz; diğer işler
+website yayınlama, template link**. Araştırma bitti (`G004`): `docs/08_CANVA_UI_BLOKAJ.md` —
+bu ortamdan yapılamıyor; kullanıcı kararı bekliyor (seçenek A önerildi). Bu çözülene kadar A1/A2 `sale_ready` olamaz; diğer işler
 beklemeden ilerler.
 
 ## 6. Dosya sahipliği (çakışmayı önleyen tek kural)

@@ -500,5 +500,26 @@
     "phase1": "20 farklı tasarım (docs/09_TASARIM_KATALOGU.md)",
     "phase2": "her tasarıma orijinale ek 5 renk paleti → 20 + 100 = 120 ürün (kapı: G090)",
     "doc": "docs/06_FABRIKA_PLANI.md"
+  },
+  "test_designs_not_for_sale": [
+    {
+      "design_id": "DAHXhRJIiTQ",
+      "purpose": "G004: master sayfa 1 kopyası, GIF katman testi"
+    },
+    {
+      "design_id": "DAHXhYgp4e0",
+      "purpose": "G004: üreticiye animasyon testi (animasyon yok)"
+    },
+    {
+      "design_id": "DAHXhQPlWPg",
+      "purpose": "G004: üreticiye website+Form testi (doğrulanamadı)"
+    },
+    {
+      "design_id": "DAHXhM9mRoE",
+      "purpose": "tasarım 02 fontlu temel sayfa (generator)"
+    }
+  ],
+  "blockers": {
+    "canva_ui": "docs/08_CANVA_UI_BLOKAJ.md — template link, animasyon, Form, yayın bu ortamdan yapılamıyor; kullanıcı kararı bekliyor (A önerildi)"
   }
 }
