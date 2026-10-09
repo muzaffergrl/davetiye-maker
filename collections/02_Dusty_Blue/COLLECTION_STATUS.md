@@ -53,7 +53,7 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 ## Set paketi durumu (`docs/05_SET_PAKETI.md`)
 | # | Parça | Durum |
 |---|---|---|
-| A1 | Canva video (animasyonlu) | **kayıtlı master** `DAHXgy2GM3s` (6 sahne, düzenlenebilir metin/foto) · animasyonlar Canva arayüzünde eklenecek (`canva/ANIMATION_STEPS.md`) · görseller HTML katmanı, GPT görselleriyle değişecek |
+| A1 | Canva video (animasyonlu) | **kayıtlı master** `DAHXgy2GM3s` (6 sahne, düzenlenebilir metin/foto) · animasyonlar Canva arayüzünde eklenecek (`canva/ANIMATION_STEPS.md`) · görseller HTML katmanı, GPT görselleriyle değişecek · Canva MP4 export doğrulandı (30 sn, 1080×1920, animasyonsuz: `previews/canva_master_static_export.mp4`) · polaroid eğimi export'ta uygulanmıyor |
 | A2 | Canva website + Form RSVP | başlanmadı |
 | A3 | Davetiye PDF | başlanmadı |
 | A4 | Paylaşım görseli (story + kare) | başlanmadı |
@@ -61,4 +61,4 @@ Pinyon Script (isim/başlık), Cormorant Garamond (bilgi), Montserrat (küçük 
 | B1–B3 | Etsy ilan görselleri, video, ilan PDF'i | başlanmadı |
 
 GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (Paket 1 dokular/dekor · Paket 2 fotoğraflar · Paket 3 mockup'lar).
-Canva yükleme çalışıyor (canva.com izinli). Export dosyalarını indirmek için `export-download.canva.com` da izinli olmalı.
+Canva yükleme çalışıyor (canva.com izinli). Export indirme çalışıyor (`export-download.canva.com` izinli).
