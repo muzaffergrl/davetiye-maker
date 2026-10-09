@@ -91,6 +91,11 @@ bulut ortamından yapılamıyor. **Karar: A** — Claude kullanıcının bilgisa
 (rol `claude-tarayici`, görevler GANN/GBNN). Bu çözülene kadar A1/A2 `sale_ready` olamaz; diğer işler
 beklemeden ilerler.
 
+**Bekleyen fikir (kullanıcı: "pilot beklesin", 2026-10-09):** video için Canva yerine kendi düzenleme
+sayfamız (alıcı linkte isim/tarih/foto girer, MP4'ü tarayıcıda üretip indirir; HyperFrames ile aynı teknik).
+Değişmeyecek şart 1'i video için değiştirir → kullanıcı kararı. GPT tasarım pilotu (G030/G031) görüldükten
+sonra yeniden sorulacak; o zamana kadar görev açılmaz.
+
 ## 6. Dosya sahipliği (çakışmayı önleyen tek kural)
 
 - Bir ajan **yalnız aldığı görevin `yazar:` alanındaki yollara** yazar.
