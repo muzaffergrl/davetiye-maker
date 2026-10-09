@@ -1,6 +1,6 @@
 """GPT parçalarını Canva katmanına hazırlar — yalnız teknik hazırlık (K21): kırpma, yeşil pencere, ön cep.
 
-  python3 tools/parts_prep.py <koleksiyon> [--out kit_layers] [--tol 40] [--pay 8] [--comps] [--strict] [--json]
+  python3 tools/parts_prep.py <koleksiyon> [--out kit_layers] [--esik 150] [--pay 8] [--comps] [--strict] [--json]
 
 Örnek:  python3 tools/parts_prep.py collections/03_Blush_Garden_Rose
 
@@ -18,11 +18,14 @@ Parça listesi koleksiyonun `assets/gpt/GPT_PROMPTS.md` dosyasındaki `**Kaydet:
      (özet bunu uyarı olarak yazar). Opak yatay/kare görsel (ör. `web_hero.png`) kırpılmaz → `<ad>.jpg`.
   2. Şeffaf parça (prompt satırında **Şeffaf zemin**) → alfa kutusuna kırpılır (alfa > 8) + `--pay` px
      pay → `<ad>.png`. Alfa kanalı yoksa uyarı verilir, kırpılmadan PNG yazılır.
-  3. `#00FF00` pencereleri (kanal başına ±`--tol`; şeffaf parçada yalnız alfa ≥ 128 pikseller):
-     bağlı bölgeler en büyükten başlayarak alınır (8-komşuluk, mockup_compose.en_buyuk_bolge), görsel
-     alanının %0,1'inden (en az 256 px) küçük lekeler pencere sayılmaz, uyarıyla kalır. Her bölge küçük
-     bir kapanışla (2 px) iç lekelerden temizlenir. Pencere tam şeffaf yapılır; kenardaki yarı yeşil
-     (anti-alias) pikseller yerel zemin rengine göre ayrıştırılır (piksel = c·yeşil + (1−c)·zemin →
+  3. `#00FF00` pencereleri: yeşil baskınlığı G − max(R, B) ≥ `--esik` (vars. 150) ve G ≥ `--esik` olan
+     pikseller (şeffaf parçada yalnız alfa ≥ 128). Kanal başına ±40 toleransı kullanılmaz: GPT'nin "düz
+     #00FF00"ı gerçekte ≈ (3, 252, 40–46) çıkıyor (tasarım 03 comp'ları); B > 40 pencereyi parçalıyordu.
+     Bağlı bölgeler en büyükten başlayarak alınır (8-komşuluk, mockup_compose.en_buyuk_bolge). Görsel
+     alanının %0,1'inden (en az 256 px) küçük yeşil parçalar bir pencereye kısa kenarın %1'i kadar
+     yakınsa ona katılır (çiçeklerin arasından görünen pencere), uzaktakiler pencere sayılmaz, uyarıyla
+     kalır. Her bölge küçük bir kapanışla (2 px) iç lekelerden temizlenir. Pencere tam şeffaf yapılır;
+     kenardaki yarı yeşil (anti-alias) pikseller yerel zemin rengine göre ayrıştırılır (piksel = c·yeşil + (1−c)·zemin →
      alfa × (1−c), renk = zemin) ve 2 px halkada kalan yeşil baskınlığı G → max(R, B) kırpılarak
      temizlenir (mockup_compose'daki yöntemin genellenmiş hâli). Şeffaf delikteki RGB, Canva ölçeklerken
      yeşil sızmasın diye çerçeve rengine boyanır. Pencere içeren opak görsel JPG yerine PNG yazılır.
@@ -48,7 +51,7 @@ Parça listesi koleksiyonun `assets/gpt/GPT_PROMPTS.md` dosyasındaki `**Kaydet:
 Sınırlar (dürüst):
   - Yeni şekil çizmez, görseli yeniden tasarlamaz; yalnız kırpar, maskeler, keser.
   - Pencere bulma renk eşiğine dayanır: GPT yeşili düz değilse (doku, gölge, gradyan) ya da pencere
-    #00FF00'dan ±tol dışına çıkmışsa bölge eksik kalır; kenarda zayıf yeşil yansıma kalabilir. Sonuç
+    yeşil baskınlığı `--esik`in altına düşmüşse bölge eksik kalır; kenarda zayıf yeşil yansıma kalabilir. Sonuç
     önizlemede gözle kontrol edilmelidir (G031).
   - Cep kesimi sezgiseldir: cep ile zarfın iç yüzü aynı renk/dokudaysa ya da cep kenarı yalnız ince bir
     çizgiyse sınır bulunamaz → geometrik V'ye düşer (uyarılı); geometrik V gerçek cebi tutmayabilir.
@@ -73,7 +76,7 @@ ARACLAR = Path(__file__).resolve().parent
 ROOT = ARACLAR.parent
 sys.path.insert(0, str(ARACLAR))
 from kit_check import KAYDET, beklenenler  # noqa: E402
-from mockup_compose import _kutu_bulanik, en_buyuk_bolge, genislet, yesil_maske  # noqa: E402
+from mockup_compose import _kutu_bulanik, en_buyuk_bolge, genislet  # noqa: E402
 
 VIDEO_OLCULERI = [(1080, 1920), (2160, 3840)]
 JPG_KALITE = 92
@@ -159,14 +162,19 @@ def alfa_kutusu(alfa: np.ndarray, esik: int = 8, pay: int = 8):
 
 # ----------------------------------------------------------------------------- pencereler
 
+def yesil_baskin(rgb: np.ndarray, esik: int = 150) -> np.ndarray:
+    r, g, b = (rgb[..., i].astype(np.int16) for i in range(3))
+    return (g - np.maximum(r, b) >= esik) & (g >= esik)
+
+
 def _asindir(m: np.ndarray, r: int) -> np.ndarray:
     return ~genislet(~m, r) if r > 0 else m
 
 
-def pencereleri_bul(rgb: np.ndarray, alfa=None, tol: int = 40, min_alan=None):
+def pencereleri_bul(rgb: np.ndarray, alfa=None, esik: int = 150, min_alan=None):
     """(bölge maskeleri soldan sağa, pencere sayılmayan yeşil piksel sayısı)."""
     h, w = rgb.shape[:2]
-    ham = yesil_maske(rgb, tol)
+    ham = yesil_baskin(rgb, esik)
     if alfa is not None:
         ham &= alfa >= 128
     if min_alan is None:
@@ -177,9 +185,16 @@ def pencereleri_bul(rgb: np.ndarray, alfa=None, tol: int = 40, min_alan=None):
         if b.sum() < min_alan:
             break
         kalan &= ~b
-        # iç lekeleri kapat (dışbükey kemer/dikdörtgende şekli değiştirmez)
-        b = _asindir(genislet(b, 2), 2) | b
         bolgeler.append(b)
+    # pencereye yakın küçük yeşil parçalar (ince çizgi ya da üstüne binen çiçeklerin arasından görünen
+    # pencere) pencereye katılır; uzaktakiler leke olarak kalır
+    yakinlik = max(6, int(round(0.01 * min(h, w))))
+    for i, b in enumerate(bolgeler):
+        ek = genislet(b, yakinlik) & kalan
+        kalan &= ~ek
+        b = b | ek
+        # iç lekeleri kapat (dışbükey kemer/dikdörtgende şekli değiştirmez)
+        bolgeler[i] = _asindir(genislet(b, 2), 2) | b
     atlanan = int((kalan & ~np.logical_or.reduce(bolgeler)).sum()) if bolgeler else int(kalan.sum())
 
     def anahtar(b):
@@ -262,9 +277,9 @@ def maske_kaydet(kapsama: np.ndarray, k, yol: Path):
     Image.fromarray(out, "RGBA").save(yol)
 
 
-def pencereler_uygula(rgba: np.ndarray, tol: int, katman_ad: str, out: Path, maske_dir: str):
+def pencereler_uygula(rgba: np.ndarray, esik: int, katman_ad: str, out: Path, maske_dir: str):
     """rgba uint8 (h×w×4). (yeni rgba uint8, pencere kayıtları, atlanan yeşil piksel)."""
-    bolgeler, atlanan = pencereleri_bul(rgba[..., :3], rgba[..., 3], tol)
+    bolgeler, atlanan = pencereleri_bul(rgba[..., :3], rgba[..., 3], esik)
     if not bolgeler:
         return rgba, [], atlanan
     f = rgba.astype(np.float64)
@@ -416,7 +431,7 @@ def _rgba(im: Image.Image) -> np.ndarray:
     return np.asarray(im.convert("RGBA")).copy()
 
 
-def parca_isle(b: dict, kaynak: Path, out: Path, tol: int, pay: int, comp=False):
+def parca_isle(b: dict, kaynak: Path, out: Path, esik: int, pay: int, comp=False):
     """Bir parçayı işler. (katman kaydı, pencere kayıtları, cep bilgisi|None, uyarılar)."""
     ad = kaynak.stem
     im = Image.open(kaynak)
@@ -443,7 +458,7 @@ def parca_isle(b: dict, kaynak: Path, out: Path, tol: int, pay: int, comp=False)
                 uyarilar.append(f"{ad}: alfa kutusu neredeyse tüm görsel (nesne kenara değiyor ya da zemin dolu olabilir)")
         kayit["kirpma"] = [kirp[0], kirp[1], kirp[2] - kirp[0], kirp[3] - kirp[1]]
         dosya = f"{ad}.png"
-        rgba, pencereler, atlanan = pencereler_uygula(rgba, tol, dosya, out, "masks")
+        rgba, pencereler, atlanan = pencereler_uygula(rgba, esik, dosya, out, "masks")
         if atlanan:
             uyarilar.append(f"{ad}: pencere sayılmayan {atlanan} küçük yeşil piksel kaldı (lekeler)")
         son = rgba
@@ -482,7 +497,7 @@ def parca_isle(b: dict, kaynak: Path, out: Path, tol: int, pay: int, comp=False)
     for gorsel, stem in hedefler:
         rgba = _rgba(gorsel)
         dosya_png = f"{stem}.png"
-        rgba, pk, atlanan = pencereler_uygula(rgba, tol, dosya_png, out, "masks/comps" if comp else "masks")
+        rgba, pk, atlanan = pencereler_uygula(rgba, esik, dosya_png, out, "masks/comps" if comp else "masks")
         if atlanan:
             uyarilar.append(f"{stem}: pencere sayılmayan {atlanan} küçük yeşil piksel kaldı (lekeler)")
         pencereler += pk
@@ -501,7 +516,7 @@ def parca_isle(b: dict, kaynak: Path, out: Path, tol: int, pay: int, comp=False)
     return kayit, pencereler, cep, uyarilar
 
 
-def calistir(kok: Path, out: Path, tol=40, pay=8, comps=False, strict=False):
+def calistir(kok: Path, out: Path, esik=150, pay=8, comps=False, strict=False):
     """(çıkış kodu, özet sözlüğü)."""
     prompts = kok / "assets/gpt/GPT_PROMPTS.md"
     if not prompts.exists():
@@ -525,7 +540,7 @@ def calistir(kok: Path, out: Path, tol=40, pay=8, comps=False, strict=False):
             continue
         out.mkdir(parents=True, exist_ok=True)
         try:
-            kayit, pencereler, cep, uy = parca_isle(b, kaynak, out, tol, pay, comp)
+            kayit, pencereler, cep, uy = parca_isle(b, kaynak, out, esik, pay, comp)
         except (OSError, ValueError) as e:
             ozet["uyarilar"].append(f"{kaynak.name}: HATA {e}")
             hata = True
@@ -533,7 +548,7 @@ def calistir(kok: Path, out: Path, tol=40, pay=8, comps=False, strict=False):
         ozet["uyarilar"] += uy
         if b["yol"] in bekleyen and not pencereler:
             ozet["uyarilar"].append(f"{kaynak.stem}: prompt'ta #00FF00 pencere isteniyor ama görselde bulunamadı "
-                                    f"(±{tol}); foto alanı kaydı yok")
+                                    f"(eşik {esik}); foto alanı kaydı yok")
             eksik_pencere = True
         if pencereler:
             ozet["comp_pencereleri" if comp else "pencereler"][kaynak.stem] = pencereler
@@ -574,7 +589,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="GPT parçalarını Canva katmanına hazırlar (kırpma, yeşil pencere, ön cep).")
     ap.add_argument("koleksiyon", help="ör. collections/03_Blush_Garden_Rose (repo köküne ya da çalışma klasörüne göre)")
     ap.add_argument("--out", default="kit_layers", help="çıktı klasörü (göreliyse koleksiyon köküne göre)")
-    ap.add_argument("--tol", type=int, default=40, help="#00FF00 toleransı (kanal başına)")
+    ap.add_argument("--esik", type=int, default=150, help="pencere: G − max(R, B) ve G alt sınırı")
     ap.add_argument("--pay", type=int, default=8, help="şeffaf parçada alfa kutusu payı (px)")
     ap.add_argument("--comps", action="store_true", help="comp pencerelerini de 1080×1920 koordinatında ölç")
     ap.add_argument("--strict", action="store_true", help="eksik kaynak ya da geometrik cep → çıkış 1")
@@ -584,7 +599,7 @@ def main(argv=None):
     out = Path(a.out)
     out = out if out.is_absolute() else kok / out
     try:
-        kod, ozet = calistir(kok, out, a.tol, a.pay, a.comps, a.strict)
+        kod, ozet = calistir(kok, out, a.esik, a.pay, a.comps, a.strict)
     except KullanimHatasi as e:
         print(f"HATA: {e}", file=sys.stderr)
         return 2

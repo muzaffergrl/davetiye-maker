@@ -4,7 +4,8 @@
 
 Denenenler: 2:3 opak → 9:16 merkez kırpma (1080×1920, 2160×3840) ve büyütme uyarısı, yatay opak (kırpılmaz),
 şeffaf parçada alfa kutusu + pay, anti-alias kenarlı kemer penceresi (şeffaf, kutu doğru, yeşil kalıntı
-yok, maske PNG), aynı görselde üç pencere + pencere sayılmayan küçük leke, ön cep (renkle bulunan V kenar
+yok, maske PNG), aynı görselde üç pencere (biri GPT gerçek yeşili (4, 251, 44)), pencereye bitişik ince
+yeşil şeridin pencereye katılması ve uzak küçük lekenin pencere sayılmaması, ön cep (renkle bulunan V kenar
 ve düz renkli zarfta geometrik geri düşüş), eksik dosya atlama, --comps (1080×1920 koordinatı), çıkış
 kodları (0/1/2, --strict) ve assets/ korunması.
 """
@@ -27,6 +28,7 @@ GOLD = (200, 164, 110)
 KAGIT = (227, 169, 174)
 ASTAR_KOYU = (155, 93, 102)
 ASTAR_ACIK = (245, 215, 215)
+GPT_YESIL = (4, 251, 44)  # GPT'nin "düz #00FF00"ı gerçekte böyle (B > 40)
 SS = 4  # süper örnekleme (anti-alias kenar)
 
 
@@ -99,13 +101,14 @@ def trio(yol):
     alfa = np.zeros((h, w))
     rgb = np.zeros((h, w, 3)) + GOLD
     kutular = [(180, 300, 380, 760), (620, 220, 900, 760), (1140, 300, 1340, 760)]
-    for x0, y0, x1, y1 in kutular:
+    for (x0, y0, x1, y1), yesil in zip(kutular, ((0, 255, 0), GPT_YESIL, (0, 255, 0))):
         alfa = np.maximum(alfa, kemer_kap(h, w, x0 - 24, y0 - 24, x1 + 24, y1 + 24) * 255)
-        rgb = karis(rgb, (0, 255, 0), kemer_kap(h, w, x0, y0, x1, y1))
+        rgb = karis(rgb, yesil, kemer_kap(h, w, x0, y0, x1, y1))
+    rgb[762:766, 200:360] = GPT_YESIL  # 1. pencerenin 2 px altında ince yeşil şerit: pencereye katılmalı
     alfa[900:960, 700:820] = 255
-    rgb[920:926, 740:746] = (0, 255, 0)  # 36 px leke: pencere değil
+    rgb[920:926, 740:746] = (0, 255, 0)  # 36 px uzak leke: pencere değil
     rgba_kaydet(rgb, alfa, yol)
-    return kutular
+    return [(180, 300, 380, 766)] + kutular[1:]
 
 
 def florals(yol):
