@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 325 · alindi 3 · inceleme 2 · blokaj 3 · bitti 8 · toplam 341
+Özet: hazir 325 · alindi 3 · inceleme 0 · blokaj 3 · bitti 10 · toplam 341
 
 ## claude-canva
 
@@ -91,15 +91,13 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G520` p3 — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G520-baski-kaynak.md`
 - `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (5)**
+**Üzerinde çalışılan / incelemede / blokaj (3)**
 
-- `G028` inceleme · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 - `G101` alindi · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 - `G104` alindi · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
-- `G026` inceleme · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF
 
-Bağımlılık bekleyen: 40 · Biten: 4
+Bağımlılık bekleyen: 40 · Biten: 6
 
 ## claude-metin
 

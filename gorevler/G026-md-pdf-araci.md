@@ -2,7 +2,7 @@
 id: G026
 baslik: tools/md_to_pdf.py — markdown'dan markalı PDF
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-5
 oncelik: 3
 bagimli: []
@@ -48,3 +48,4 @@ Type 3 olarak gömülüyor; metin seçilebilir/aranabilir (ToUnicode var), bask�
 ## Günlük
 - 2026-10-09 alindi: claude-kod-5
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı

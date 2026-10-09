@@ -2,7 +2,7 @@
 id: G028
 baslik: tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-5
 oncelik: 2
 bagimli: []
@@ -60,3 +60,4 @@ görsel olarak kontrol edildi (çıktılar repoya konmadı).
 ## Günlük
 - 2026-10-09 alindi: claude-kod-5
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı
