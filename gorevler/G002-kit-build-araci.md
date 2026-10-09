@@ -2,8 +2,8 @@
 id: G002
 baslik: tools/kit_build.py — kit_map.json'a göre Canva katmanları üret (20 tasarım için genel)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-2
 oncelik: 1
 bagimli: []
 yazar: [tools/kit_build.py, tools/tests/, collections/02_Dusty_Blue/kit_map.json]
@@ -35,3 +35,6 @@ Her tasarımın (01–20) ve her renk kitinin ham GPT görsellerinden Canva'ya y
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-2
