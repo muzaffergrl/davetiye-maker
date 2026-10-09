@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 325 · alindi 3 · inceleme 0 · blokaj 3 · bitti 10 · toplam 341
+Özet: hazir 325 · alindi 2 · inceleme 1 · blokaj 3 · bitti 10 · toplam 341
 
 ## claude-canva
 
@@ -94,7 +94,7 @@ Bağımlılık bekleyen: 40 · Biten: 0
 **Üzerinde çalışılan / incelemede / blokaj (3)**
 
 - `G101` alindi · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
-- `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
+- `G103` inceleme · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 - `G104` alindi · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 
 Bağımlılık bekleyen: 40 · Biten: 6

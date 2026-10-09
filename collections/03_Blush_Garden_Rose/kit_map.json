@@ -1,0 +1,31 @@
+{
+  "note": "Tasarım 03 (Blush Garden Rose) katman haritası — docs/07_KIT_STANDARDI.md §6. Üretici: tools/kit_build.py. Maskeler: assets/layers (G103'te video/invitation_motion.html'den export_layers.mjs ile çıkarıldı; salt okunur). source → kit köküne göre; shared:true → bu klasöre göre (ortak fotoğraflar tasarım 02'de). Zarf parçalarındaki 'color' alanı HEDEF renktir: kit_build.py'nin texture_mask yöntemi şu an rengi uygulamaz (doku paper.png = blush-beyaz olduğundan zarf açık pembe/fildişi çıkar) — önerilen görev: texture_mask'a isteğe bağlı 'color' çarpımı. Fotoğraflar dikdörtgen JPG'dir; Canva'da kemer (arch) çerçeve/mask içine konur, arch_frame.png üstte durur. code_only listesindeki katmanların GPT karşılığı yoktur; HTML'den çıkan hâliyle kullanılır.",
+  "masks": "assets/layers",
+  "out": "kit_layers",
+  "layers": [
+    {"name": "bg.jpg",                    "size": [2160, 3840], "source": "assets/gpt/textures/background.png", "method": "cover"},
+    {"name": "corner_tl.png",             "size": [944, 944],   "source": "assets/gpt/decor/corner.png",      "method": "fit"},
+    {"name": "corner_br.png",             "size": [1024, 1024], "source": "assets/gpt/decor/corner.png",      "method": "fit", "rotate": 180},
+    {"name": "envelope_back.png",         "size": [1760, 1760], "source": "assets/gpt/textures/paper.png",    "method": "texture_mask", "mask": "envelope_back.png", "color": "palette.primary"},
+    {"name": "envelope_pocket.png",       "size": [1520, 1520], "source": "assets/gpt/textures/paper.png",    "method": "texture_mask", "mask": "envelope_pocket.png", "color": "palette.primary"},
+    {"name": "envelope_flap_closed.png",  "size": [1536, 916],  "source": "assets/gpt/textures/paper.png",    "method": "texture_mask", "mask": "envelope_flap_closed.png", "color": "palette.primary"},
+    {"name": "envelope_liner_open.png",   "size": [1504, 864],  "source": "assets/gpt/textures/liner.png",    "method": "pattern_mask", "mask": "envelope_liner_open.png"},
+    {"name": "closure_bow.png",           "size": [816, 696],   "source": "assets/gpt/decor/closure.png",     "method": "fit", "trim": true, "pad": 24},
+    {"name": "card_small_blank.png",      "size": [1320, 1480], "source": "assets/gpt/textures/paper.png",    "method": "texture_mask", "mask": "card_small_blank.png"},
+    {"name": "photo_hero.jpg",            "size": [512, 592],   "source": "../02_Dusty_Blue/assets/gpt/photos/hero_portrait.jpg", "method": "cover", "shared": true, "anchor": [0.5, 0.35]},
+    {"name": "arch_frame.png",            "size": [816, 1256],  "source": "assets/gpt/decor/photo_frame.png", "method": "fit", "trim": true, "pad": 44},
+    {"name": "photo_1.jpg",               "size": [552, 992],   "source": "../02_Dusty_Blue/assets/gpt/photos/moment_1.jpg", "method": "cover", "shared": true},
+    {"name": "photo_2.jpg",               "size": [552, 992],   "source": "../02_Dusty_Blue/assets/gpt/photos/moment_2.jpg", "method": "cover", "shared": true},
+    {"name": "photo_3.jpg",               "size": [552, 992],   "source": "../02_Dusty_Blue/assets/gpt/photos/moment_3.jpg", "method": "cover", "shared": true},
+    {"name": "invitation_card_blank.png", "size": [2080, 3560], "source": "assets/gpt/textures/paper.png",    "method": "texture_mask_lines", "mask": "invitation_card_blank.png", "line_color": "palette.gold_light"},
+    {"name": "card_crown.png",            "size": [952, 400],   "source": "assets/gpt/decor/divider.png",     "method": "fit", "trim": true, "pad": 8},
+    {"name": "card_corner_bl.png",        "size": [564, 564],   "source": "assets/gpt/decor/corner.png",      "method": "fit", "flip": "v"},
+    {"name": "card_corner_br.png",        "size": [564, 564],   "source": "assets/gpt/decor/corner.png",      "method": "fit", "rotate": 180},
+    {"name": "bud_divider.png",           "size": [108, 76],    "source": "assets/gpt/decor/divider.png",     "method": "fit", "trim": true}
+  ],
+  "code_only": [
+    {"name": "ribbon_band.png", "why": "Zarfı saran düz ipek şerit; GPT listesinde karşılığı yok. closure.png rengi farklı gelirse HTML'deki #ribbonG gradyanı ona göre ayarlanıp yeniden dışa aktarılır."},
+    {"name": "petal.png",       "why": "Düşen yaprak (video boyunca); kod çizimi."},
+    {"name": "date_arch.png",   "why": "Tarih bloğunun altın kemer çizgisi; metin değil, çizgi."}
+  ]
+}
