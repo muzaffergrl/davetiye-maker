@@ -2,8 +2,8 @@
 id: G003
 baslik: tools/kit_check.py — kit doğrulayıcı
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-1
 oncelik: 1
 bagimli: []
 yazar: [tools/kit_check.py]
@@ -28,3 +28,6 @@ GPT'nin ürettiği ham kit dosyalarını Canva'ya girmeden önce otomatik denetl
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 alindi: claude-kod-1
