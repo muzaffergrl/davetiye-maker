@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eleanor &amp; Theo — September 18, 2027</title>
+<meta name="description" content="Eleanor &amp; Theo are getting married — September 18, 2027, Rosewood Manor, Charleston, South Carolina.">
+<!--
+  Koleksiyon 02 — Dusty Blue & Champagne · A2 website HTML kaynağı (G020 pilotu).
+  Tüm kişisel metinler content.demo.json (demo, kurgu) kaydından gelir. Gerçek URL yok:
+  her bağlantı href="#" ve data-url="<urls alanı>" ile işaretli (content.demo.json → urls.* = null).
+  Görseller: ../assets/layers/ (kodla çizilmiş katmanlar; AI/stok görsel yok). Font dosyası yok — Google Fonts link'i.
+  Yapı ve G4NN için kopyalama kuralları: README.md
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tasarım token'ları (palette.json → V01_dusty_blue) ---------- */
+  :root {
+    --ink: #2B3A4E;
+    --deep: #4E6782;
+    --primary: #6E88A3;
+    --mist-top: #DDE5EC;
+    --mist-bottom: #B7C6D4;
+    --gold: #B8996A;
+    --gold-light: #D9C49E;
+    --ivory: #FBF7EF;
+    --leaf: #9AAE9F;
+    --paper: #F3ECDF;
+
+    --font-script: 'Pinyon Script', 'Great Vibes', 'Snell Roundhand', cursive;
+    --font-serif: 'Cormorant Garamond', 'Cormorant', Garamond, Georgia, 'Times New Roman', serif;
+    --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+
+    --gutter: 20px;
+    --maxw: 1080px;
+    --section-pad: 72px;
+    --header-h: 56px;
+  }
+
+  /* ---------- Temel ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--ivory); color: var(--ink);
+    font-family: var(--font-serif); font-size: 19px; line-height: 1.55;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3, p { margin: 0; }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+  .caps { font-family: var(--font-sans); font-weight: 500; text-transform: uppercase; letter-spacing: .26em; font-size: 12px; color: var(--deep); }
+  .script { font-family: var(--font-script); font-weight: 400; line-height: 1.1; color: var(--ink); }
+  .it { font-style: italic; }
+  .muted { color: var(--deep); }
+  .center { text-align: center; }
+  .rule { width: 160px; height: 1px; margin: 22px auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); border: 0; }
+
+  .section { position: relative; padding: var(--section-pad) 0; overflow: hidden; }
+  .section-title { font-family: var(--font-script); font-weight: 400; font-size: 52px; line-height: 1.05; text-align: center; color: var(--ink); }
+  .section-kicker { text-align: center; margin-top: 10px; }
+  .tint { background: linear-gradient(180deg, var(--mist-top) 0%, #E8EDF2 100%); }
+  .paper { background: var(--ivory); }
+
+  .btn {
+    display: inline-block; text-decoration: none; text-align: center;
+    font-family: var(--font-sans); font-weight: 500; font-size: 12px; letter-spacing: .26em; text-transform: uppercase;
+    padding: 16px 30px; border-radius: 999px; background: var(--deep); color: #fff;
+    box-shadow: 0 12px 24px -12px rgba(43,58,78,.55); transition: background .2s, transform .2s;
+  }
+  .btn:hover, .btn:focus-visible { background: var(--ink); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--deep); border: 1px solid var(--gold); box-shadow: none; }
+  .btn-ghost:hover, .btn-ghost:focus-visible { background: rgba(184,153,106,.12); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* ---------- Üst menü ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 20; height: var(--header-h);
+    background: rgba(251,247,239,.92); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(184,153,106,.35);
+  }
+  .site-header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .monogram { font-family: var(--font-script); font-size: 30px; text-decoration: none; color: var(--ink); line-height: 1; }
+  .nav { display: none; }
+  .nav a { text-decoration: none; font-family: var(--font-sans); font-weight: 500; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--deep); }
+  .nav a:hover { color: var(--ink); }
+  .header-rsvp { padding: 10px 18px; font-size: 11px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden; text-align: center;
+    padding: 64px 0 76px; min-height: calc(100svh - var(--header-h));
+    display: flex; align-items: center;
+    background: var(--mist-top) url("../assets/layers/bg_mist.jpg") center / cover no-repeat;
+  }
+  .bot { position: absolute; pointer-events: none; user-select: none; }
+  .hero .bot-tl { left: -48px; top: -40px; width: 210px; }
+  .hero .bot-br { right: -48px; bottom: -40px; width: 220px; }
+  .hero-inner { position: relative; z-index: 1; width: 100%; }
+  .hero .kicker { margin-bottom: 18px; }
+  .hero-names { font-family: var(--font-script); font-size: 64px; line-height: 1.05; color: var(--ink); }
+  .hero-names .amp { display: block; color: var(--gold); font-size: .7em; line-height: 1; margin: 2px 0; }
+  .seal { position: relative; width: 112px; height: 112px; margin: 26px auto 22px; filter: drop-shadow(0 8px 10px rgba(30,45,65,.3)); }
+  .seal img { width: 100%; height: 100%; }
+  .seal span {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: 36px; color: #5C7591;
+    text-shadow: -1px -1px 0 rgba(255,255,255,.38), 1px 1px 0 rgba(25,38,55,.45);
+  }
+  .hero-date { font-family: var(--font-sans); font-weight: 500; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: var(--ink); }
+  .hero-venue { font-size: 21px; margin-top: 8px; line-height: 1.35; }
+  .hero-venue span { display: block; }
+  .hero-venue .dot { display: none; }
+
+  /* Geri sayım (canlı; hedef: tarih + saat + saat dilimi) */
+  .countdown { margin: 30px auto 30px; max-width: 360px; }
+  .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .cd-cell { background: rgba(251,247,239,.78); border: 1px solid rgba(184,153,106,.55); border-radius: 6px; padding: 10px 2px 8px; }
+  .cd-num { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 30px; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .cd-lbl { display: block; margin-top: 6px; font-size: 9px; letter-spacing: .2em; }
+  .countdown-done { display: none; font-size: 22px; }
+  .countdown.is-done .countdown-grid { display: none; }
+  .countdown.is-done .countdown-done { display: block; }
+
+  /* ---------- Davet ---------- */
+  .invite-card {
+    position: relative; margin: 0 auto; max-width: 640px; background: var(--ivory);
+    padding: 76px 26px 84px; text-align: center; border-radius: 6px;
+    box-shadow: 0 30px 60px -36px rgba(43,58,78,.55), 0 6px 18px rgba(43,58,78,.08);
+  }
+  .invite-card::before, .invite-card::after { content: ""; position: absolute; pointer-events: none; border: 1.5px solid var(--gold-light); }
+  .invite-card::before { inset: 12px; }
+  .invite-card::after { inset: 18px; border-width: 1px; opacity: .75; }
+  .invite-card .bot { width: 96px; }
+  .invite-card .bot-tl { left: 0; top: 0; }
+  .invite-card .bot-br { right: 0; bottom: 0; }
+  .invite-full { font-family: var(--font-script); font-size: 46px; line-height: 1.1; margin-top: 20px; }
+  .invite-full .amp { display: block; color: var(--gold); font-size: .75em; }
+  .invite-copy { font-style: italic; font-size: 21px; line-height: 1.45; margin: 22px auto 0; max-width: 420px; }
+  .datebox { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 30px auto 0; max-width: 420px; }
+  .datebox .side { white-space: nowrap; font-size: 10px; letter-spacing: .18em; padding: 10px 0; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+  .datebox .day { font-family: var(--font-serif); font-weight: 500; font-size: 64px; line-height: 1; margin: 4px 0 2px; color: var(--ink); }
+  .venue-name { font-weight: 600; font-size: 26px; letter-spacing: .02em; margin-top: 28px; }
+  .venue-city { font-style: italic; font-size: 20px; }
+  .invite-cta { margin-top: 30px; }
+  .invite-cta .note { margin-top: 12px; font-style: italic; font-size: 18px; color: var(--deep); }
+
+  /* ---------- Our Story ---------- */
+  .story-intro { max-width: 560px; margin: 22px auto 0; text-align: center; font-size: 20px; font-style: italic; color: var(--deep); }
+  .polaroids { display: grid; grid-template-columns: 1fr; gap: 34px; justify-items: center; margin-top: 40px; }
+  .polaroid {
+    width: 100%; max-width: 290px; background: #FFFDF9; padding: 14px 14px 0; margin: 0;
+    box-shadow: 0 22px 40px -22px rgba(43,58,78,.55), 0 3px 8px rgba(43,58,78,.1);
+  }
+  .polaroid:nth-child(1) { transform: rotate(-3deg); }
+  .polaroid:nth-child(2) { transform: rotate(2.5deg); }
+  .polaroid:nth-child(3) { transform: rotate(-1.5deg); }
+  .polaroid img { width: 100%; height: auto; aspect-ratio: 396 / 416; object-fit: cover; }
+  .polaroid figcaption { font-family: var(--font-script); font-size: 30px; text-align: center; padding: 10px 0 14px; color: var(--ink); line-height: 1.1; }
+
+  /* ---------- Details ---------- */
+  .schedule { list-style: none; padding: 0; margin: 34px auto 0; max-width: 620px; }
+  .schedule li { display: grid; grid-template-columns: 1fr; gap: 4px; text-align: center; padding: 22px 0; border-bottom: 1px solid rgba(184,153,106,.45); }
+  .schedule li:last-child { border-bottom: 0; }
+  .schedule .time { font-size: 12px; }
+  .schedule .label { font-weight: 600; font-size: 28px; line-height: 1.2; }
+  .schedule .loc { font-style: italic; font-size: 19px; color: var(--deep); }
+  .info-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 40px auto 0; max-width: 820px; }
+  .info-card { background: rgba(251,247,239,.85); border: 1px solid rgba(184,153,106,.45); border-radius: 6px; padding: 26px 22px; text-align: center; }
+  .info-card h3 { font-family: var(--font-sans); font-weight: 500; font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--deep); margin-bottom: 10px; }
+  .info-card .big { font-weight: 600; font-size: 24px; line-height: 1.25; }
+  .info-card .sub { font-style: italic; font-size: 19px; color: var(--deep); }
+  .info-card .btn { margin-top: 18px; }
+
+  /* ---------- Travel & Stay / Registry ---------- */
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 36px auto 0; max-width: 820px; }
+  .text-block p + p { margin-top: 10px; }
+  .registry-copy { max-width: 520px; margin: 22px auto 0; text-align: center; font-size: 20px; }
+  .registry-cta { text-align: center; margin-top: 26px; }
+
+  /* ---------- RSVP ---------- */
+  .rsvp { background: var(--mist-top) url("../assets/layers/bg_mist.jpg") center / cover no-repeat; }
+  .rsvp .bot-tl { left: -44px; top: -36px; width: 170px; }
+  .rsvp .bot-br { right: -44px; bottom: -36px; width: 180px; }
+  .rsvp-deadline { text-align: center; font-style: italic; font-size: 22px; margin-top: 12px; }
+  /* Canva Form yer tutucusu — G021/GB02 bu kutuyu Canva Form öğesiyle değiştirir. Veri göndermez. */
+  .form-slot {
+    position: relative; z-index: 1; margin: 32px auto 0; max-width: 560px; min-height: 300px;
+    border: 2px dashed var(--primary); border-radius: 8px; background: rgba(251,247,239,.82);
+    padding: 30px 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px;
+  }
+  .form-slot .slot-tag { font-size: 11px; letter-spacing: .22em; color: var(--deep); background: rgba(110,136,163,.14); padding: 6px 12px; border-radius: 999px; }
+  .form-slot .slot-title { font-weight: 600; font-size: 24px; }
+  .form-slot ul { list-style: none; padding: 0; margin: 4px 0 0; font-style: italic; color: var(--deep); font-size: 18px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 680px; margin: 34px auto 0; }
+  .faq details { border-bottom: 1px solid rgba(184,153,106,.45); }
+  .faq summary {
+    cursor: pointer; list-style: none; padding: 18px 34px 18px 0; position: relative;
+    font-weight: 600; font-size: 21px; line-height: 1.3;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-family: var(--font-sans); font-weight: 400; font-size: 22px; color: var(--gold); }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details p { padding: 0 0 18px; font-size: 19px; color: var(--deep); }
+
+  /* ---------- Kapanış ---------- */
+  .closing { text-align: center; padding: 64px 0 56px; background: var(--ivory); border-top: 1px solid rgba(184,153,106,.35); }
+  .closing .script { font-size: 40px; }
+  .closing .seal { width: 92px; height: 92px; margin: 0 auto 18px; }
+  .closing .seal span { font-size: 30px; }
+  .closing .caps { margin-top: 14px; line-height: 2; }
+  .nowrap { white-space: nowrap; }
+  .closing .dot { display: none; }
+  .closing .nowrap { display: block; }
+
+  /* ---------- Tablet ---------- */
+  @media (min-width: 640px) {
+    :root { --gutter: 32px; --section-pad: 96px; }
+    .hero-names { font-size: 96px; }
+    .hero .bot-tl { width: 320px; left: -90px; top: -90px; }
+    .hero .bot-br { width: 340px; right: -90px; bottom: -90px; }
+    .section-title { font-size: 76px; }
+    .polaroids { grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start; }
+    .polaroid:nth-child(2) { margin-top: 36px; }
+    .polaroid figcaption { font-size: 26px; }
+    .schedule li { grid-template-columns: 130px 1fr; text-align: left; gap: 20px; align-items: baseline; }
+    .info-grid, .two-col { grid-template-columns: 1fr 1fr; }
+    .invite-card .bot { width: 160px; }
+    .invite-full { font-size: 60px; }
+    .datebox .side { font-size: 11px; letter-spacing: .24em; }
+    .hero-venue span, .hero-venue .dot { display: inline; }
+    .closing .nowrap { display: inline; }
+    .closing .dot { display: inline; }
+    .invite-card { padding: 84px 56px 92px; }
+  }
+
+  /* ---------- Masaüstü ---------- */
+  @media (min-width: 1024px) {
+    .nav { display: flex; gap: 26px; }
+    .hero-names { font-size: 120px; }
+    .hero-names .amp { display: inline; font-size: .62em; margin: 0 .12em; }
+    .hero .bot-tl { width: 420px; }
+    .hero .bot-br { width: 440px; }
+    .hero-date { font-size: 15px; }
+    .hero-venue { font-size: 24px; }
+    .countdown { max-width: 440px; }
+    .cd-num { font-size: 38px; }
+    .section-title { font-size: 88px; }
+    .rsvp .bot-tl { width: 300px; }
+    .rsvp .bot-br { width: 320px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="monogram" href="#top" aria-label="Back to top">E&amp;T</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#story">Our Story</a>
+      <a href="#details">Details</a>
+      <a href="#travel">Travel &amp; Stay</a>
+      <a href="#registry">Registry</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn header-rsvp" href="#rsvp">RSVP</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1 · HERO — isimler, tarih, mekân, geri sayım -->
+  <section class="hero" id="home" data-section="hero">
+    <img class="bot bot-tl" src="../assets/layers/botanical_tl.png" alt="" aria-hidden="true">
+    <img class="bot bot-br" src="../assets/layers/botanical_br.png" alt="" aria-hidden="true">
+    <div class="hero-inner wrap">
+      <p class="caps kicker">We're getting married</p>
+      <h1 class="hero-names" data-field="name_display">Eleanor <span class="amp">&amp;</span> Theo</h1>
+      <div class="seal" aria-hidden="true">
+        <img src="../assets/layers/wax_seal.png" alt="">
+        <span data-field="initials">E&amp;T</span>
+      </div>
+      <p class="hero-date"><span data-field="date_weekday">Saturday</span> · <span data-field="date">September 18, 2027</span></p>
+      <p class="hero-venue it muted"><span data-field="venue.name">Rosewood Manor</span><span class="dot"> · </span><span data-field="venue.city_region">Charleston, South Carolina</span></p>
+
+      <!-- Geri sayım: hedef = date + ceremony_time + timezone (2027-09-18 16:30 America/New_York = 20:30 UTC).
+           JS ile canlı; tarih geçince "countdown-done" mesajı. Canva import'unda canlı çalışmaz (bkz. canva_import.html). -->
+      <div class="countdown" id="countdown" data-optional="countdown"
+           data-target-utc="2027-09-18T20:30:00Z" aria-live="polite">
+        <div class="countdown-grid">
+          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl caps">Days</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl caps">Hours</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl caps">Minutes</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl caps">Seconds</span></div>
+        </div>
+        <p class="countdown-done it">The celebration has begun — thank you for being part of our story.</p>
+      </div>
+
+      <a class="btn" href="#invitation">Open the invitation</a>
+    </div>
+  </section>
+
+  <!-- 2 · DAVET — aileler, tam isimler, tarih kutusu, mekân, RSVP yönlendirmesi -->
+  <section class="section tint" id="invitation" data-section="invitation">
+    <div class="wrap">
+      <div class="invite-card">
+        <img class="bot bot-tl" src="../assets/layers/card_botanical_tl.png" alt="" aria-hidden="true">
+        <img class="bot bot-br" src="../assets/layers/card_botanical_br.png" alt="" aria-hidden="true">
+        <p class="caps" data-field="host_line">Together with their families</p>
+        <h2 class="invite-full"><span data-field="partners.0.full_name">Eleanor Grace</span> <span class="amp">&amp;</span> <span data-field="partners.1.full_name">Theodore James</span></h2>
+        <p class="invite-copy">request the pleasure of your company at the celebration of their marriage</p>
+        <div class="datebox" aria-label="Saturday, September 18, 2027 at 4:30 PM">
+          <div class="side caps">Saturday</div>
+          <div>
+            <div class="caps">September</div>
+            <div class="day">18</div>
+            <div class="caps">2027</div>
+          </div>
+          <div class="side caps">At 4:30 PM</div>
+        </div>
+        <p class="venue-name" data-field="venue.name">Rosewood Manor</p>
+        <p class="venue-city muted" data-field="venue.city_region">Charleston, South Carolina</p>
+        <div class="invite-cta">
+          <a class="btn" href="#rsvp">RSVP</a>
+          <p class="note">Kindly reply by <span data-field="rsvp.deadline">August 1, 2027</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · OUR STORY — 3 fotoğraf (yer tutucu; alıcı kendi fotoğrafını koyar) -->
+  <section class="section paper" id="story" data-section="story" data-optional="our_story">
+    <div class="wrap">
+      <h2 class="section-title">Our Story</h2>
+      <p class="caps section-kicker">A few of our favorite moments</p>
+      <!-- TEMPLATE COPY: alıcı kendi metniyle değiştirir (content kaydında hikâye metni alanı yok). -->
+      <p class="story-intro">From the first hello to the question, every chapter has led us here. We can't wait to celebrate the next one with you.</p>
+      <div class="polaroids">
+        <figure class="polaroid">
+          <img src="../assets/layers/photo_placeholder_1.jpg" alt="Photo placeholder — where it began" width="396" height="416" loading="lazy">
+          <figcaption>where it began</figcaption>
+        </figure>
+        <figure class="polaroid">
+          <img src="../assets/layers/photo_placeholder_2.jpg" alt="Photo placeholder — the question" width="396" height="416" loading="lazy">
+          <figcaption>the question</figcaption>
+        </figure>
+        <figure class="polaroid">
+          <img src="../assets/layers/photo_placeholder_3.jpg" alt="Photo placeholder — forever starts now" width="396" height="416" loading="lazy">
+          <figcaption>forever starts now</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · DETAILS — program (schedule[]) + mekân + kıyafet -->
+  <section class="section tint" id="details" data-section="details">
+    <div class="wrap">
+      <h2 class="section-title">The Celebration</h2>
+      <p class="caps section-kicker"><span data-field="date_weekday">Saturday</span>, <span data-field="date">September 18, 2027</span></p>
+      <ol class="schedule">
+        <li><span class="caps time">4:30 PM</span><div><p class="label">Ceremony</p><p class="loc">The Garden Lawn</p></div></li>
+        <li><span class="caps time">5:30 PM</span><div><p class="label">Cocktail Hour</p><p class="loc">The Veranda</p></div></li>
+        <li><span class="caps time">6:30 PM</span><div><p class="label">Reception</p><p class="loc">The Grand Hall</p></div></li>
+      </ol>
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Venue</h3>
+          <p class="big" data-field="venue.name">Rosewood Manor</p>
+          <p class="sub" data-field="venue.city_region_country">Charleston, South Carolina, USA</p>
+          <!-- URL: urls.map = null (demo). Alıcı gerçek harita linkini ekler. -->
+          <a class="btn btn-ghost" href="#" data-url="map">View Map</a>
+        </div>
+        <div class="info-card" data-optional="dress_code">
+          <h3>Attire</h3>
+          <p class="big" data-field="dress_code">Black tie optional</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · TRAVEL & STAY — content kaydında ayrıntı yok; şablon metni + urls.map / urls.accommodation -->
+  <section class="section paper" id="travel" data-section="travel" data-optional="travel_stay">
+    <div class="wrap">
+      <h2 class="section-title">Travel &amp; Stay</h2>
+      <hr class="rule">
+      <div class="two-col">
+        <div class="info-card text-block">
+          <h3>Getting There</h3>
+          <!-- TEMPLATE COPY -->
+          <p>The celebration takes place at <strong data-field="venue.name">Rosewood Manor</strong> in <span data-field="venue.city_region">Charleston, South Carolina</span>.</p>
+          <p class="sub">Directions and parking details will be shared here.</p>
+          <!-- URL: urls.map = null (demo) -->
+          <a class="btn btn-ghost" href="#" data-url="map">Get Directions</a>
+        </div>
+        <div class="info-card text-block">
+          <h3>Where to Stay</h3>
+          <!-- TEMPLATE COPY -->
+          <p>Hotel suggestions for out-of-town guests will be listed here.</p>
+          <p class="sub">Room block and booking details will be added here.</p>
+          <!-- URL: urls.accommodation = null (demo) -->
+          <a class="btn btn-ghost" href="#" data-url="accommodation">Accommodation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · REGISTRY — urls.registry -->
+  <section class="section tint" id="registry" data-section="registry" data-optional="registry">
+    <div class="wrap">
+      <h2 class="section-title">Registry</h2>
+      <hr class="rule">
+      <!-- TEMPLATE COPY -->
+      <p class="registry-copy">Your presence is the greatest gift of all. For those who wish to honor us with a gift, our registry can be found below.</p>
+      <div class="registry-cta">
+        <!-- URL: urls.registry = null (demo) -->
+        <a class="btn" href="#" data-url="registry">View Registry</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · RSVP — CANVA FORM YER TUTUCUSU (veri göndermez, başarı mesajı yok) -->
+  <section class="section rsvp" id="rsvp" data-section="rsvp">
+    <img class="bot bot-tl" src="../assets/layers/botanical_tl.png" alt="" aria-hidden="true">
+    <img class="bot bot-br" src="../assets/layers/botanical_br.png" alt="" aria-hidden="true">
+    <div class="wrap" style="position:relative;z-index:1">
+      <h2 class="section-title">Kindly Reply</h2>
+      <p class="rsvp-deadline">by <span data-field="rsvp.deadline">August 1, 2027</span></p>
+      <!-- ==== CANVA FORM SLOT ====
+           Bu kutu gerçek form DEĞİLDİR. Canva Website'ta buraya Canva Form öğesi eklenir (GB02).
+           rsvp.method = null, urls.rsvp_form = null (demo). Form alanları önerisi: Name(s), Attending (yes/no),
+           Number of guests, Note. Kayıt başarısızsa başarı mesajı gösterilmez. -->
+      <div class="form-slot" id="rsvp-form-slot" data-placeholder="canva-form" role="note" aria-label="RSVP form placeholder">
+        <span class="slot-tag caps">RSVP form placeholder</span>
+        <p class="slot-title">Canva Form goes here</p>
+        <ul>
+          <li>Name(s)</li>
+          <li>Will you attend? Yes / No</li>
+          <li>Number of guests</li>
+          <li>A note for the couple</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · FAQ — cevaplar yalnız content kaydındaki bilgilerden -->
+  <section class="section paper" id="faq" data-section="faq" data-optional="faq">
+    <div class="wrap">
+      <h2 class="section-title">Questions</h2>
+      <p class="caps section-kicker">Good to know</p>
+      <div class="faq">
+        <details open>
+          <summary>When should I RSVP?</summary>
+          <p>Please reply by <span data-field="rsvp.deadline">August 1, 2027</span> using the form above.</p>
+        </details>
+        <details>
+          <summary>What time should I arrive?</summary>
+          <p>The ceremony begins at 4:30 PM on The Garden Lawn. Please plan to be seated a little before.</p>
+        </details>
+        <details>
+          <summary>What should I wear?</summary>
+          <p>The dress code is <span data-field="dress_code">black tie optional</span>.</p>
+        </details>
+        <details>
+          <summary>Where are the ceremony and reception?</summary>
+          <p>Everything takes place at Rosewood Manor in Charleston, South Carolina: the ceremony on The Garden Lawn, cocktail hour on The Veranda and the reception in The Grand Hall.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 9 · KAPANIŞ -->
+<footer class="closing" data-section="closing">
+  <div class="wrap">
+    <div class="seal" aria-hidden="true">
+      <img src="../assets/layers/wax_seal.png" alt="">
+      <span>E&amp;T</span>
+    </div>
+    <p class="script">We can't wait to celebrate with you</p>
+    <p class="caps"><span class="nowrap">Eleanor &amp; Theo</span> <span class="dot">·</span> <span class="nowrap">September 18, 2027</span></p>
+  </div>
+</footer>
+
+<script>
+  // Canlı geri sayım. Hedef ISO UTC zamanı data-target-utc'de (content: date + ceremony_time + timezone).
+  (function () {
+    var box = document.getElementById('countdown');
+    if (!box) return;
+    var target = Date.parse(box.getAttribute('data-target-utc'));
+    var cells = {};
+    box.querySelectorAll('[data-unit]').forEach(function (el) { cells[el.getAttribute('data-unit')] = el; });
+    var pad = function (n) { return n < 10 ? '0' + n : String(n); };
+    function tick() {
+      var diff = target - Date.now();
+      if (isNaN(target) || diff <= 0) { box.classList.add('is-done'); return false; }
+      var s = Math.floor(diff / 1000);
+      cells.days.textContent = Math.floor(s / 86400);
+      cells.hours.textContent = pad(Math.floor(s % 86400 / 3600));
+      cells.minutes.textContent = pad(Math.floor(s % 3600 / 60));
+      cells.seconds.textContent = pad(s % 60);
+      return true;
+    }
+    if (tick()) { var t = setInterval(function () { if (!tick()) clearInterval(t); }, 1000); }
+  })();
+</script>
+</body>
+</html>

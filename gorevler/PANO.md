@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 329 · alindi 4 · inceleme 0 · blokaj 1 · bitti 7 · toplam 341
+Özet: hazir 329 · alindi 3 · inceleme 1 · blokaj 1 · bitti 7 · toplam 341
 
 ## claude-canva
 
@@ -75,7 +75,7 @@ Bağımlılık bekleyen: 41 · Biten: 0
 
 **Üzerinde çalışılan / incelemede / blokaj (4)**
 
-- `G020` alindi · claude-kod-3 — A2 — tek sayfa responsive website HTML kaynağı
+- `G020` inceleme · claude-kod-3 — A2 — tek sayfa responsive website HTML kaynağı
 - `G028` alindi · claude-kod-5 — tools/mockup_compose.py — yeşil ekran mockup + ilan görseli şablonları
 - `G103` alindi · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 - `G026` alindi · claude-kod-5 — tools/md_to_pdf.py — markdown'dan markalı PDF

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1366">
+<title>Eleanor &amp; Theo — Website (Canva import)</title>
+<!--
+  Koleksiyon 02 — Dusty Blue & Champagne · A2 website — Canva static HTML import sürümü (G020).
+  Kurallar:
+   - Her üst düzey bölüm = 1 sayfa: body'nin doğrudan çocuğu, data-document-role="page", sabit 1366 px genişlik ve sabit yükseklik.
+     Sayfalar iç içe değildir.
+   - JavaScript yok (import'ta çalışmaz). Geri sayım statik yer tutucudur; Canva'da canlı sayaç doğrulanmadan vaat edilmez.
+   - <details>, ::before/::after içeriği, backdrop-filter gibi import'ta kaybolabilecek CSS kullanılmaz; çerçeveler gerçek div'dir.
+   - Tüm metinler gerçek metin (görsele pişirilmemiş); içerik content.demo.json ile birebir (demo, kurgu).
+   - Bağlantılar href="#" + data-url="<urls alanı>" (urls.* = null). Gerçek URL yok.
+   - Görseller ../assets/layers/ göreli yolları. Canva import herkese açık URL istiyorsa görsellerin ayrı yüklenmesi
+     ya da data: URI'ye gömülmesi gerekir (README.md → "Canva import").
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500&family=Pinyon+Script&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B3A4E; --deep: #4E6782; --primary: #6E88A3; --mist-top: #DDE5EC; --mist-bottom: #B7C6D4;
+    --gold: #B8996A; --gold-light: #D9C49E; --ivory: #FBF7EF; --leaf: #9AAE9F;
+    --script: 'Pinyon Script', cursive; --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Montserrat', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #8a96a3; font-family: var(--serif); color: var(--ink); }
+
+  .page { position: relative; width: 1366px; overflow: hidden; margin: 0 auto 40px; text-align: center; }
+  .mist { background: var(--mist-top) url("../assets/layers/bg_mist.jpg") center / cover no-repeat; }
+  .tint { background: #E3E9EF; }
+  .ivory { background: var(--ivory); }
+  .abs { position: absolute; }
+
+  .caps { font-family: var(--sans); font-weight: 500; text-transform: uppercase; letter-spacing: .3em; font-size: 16px; color: var(--deep); }
+  .script { font-family: var(--script); font-weight: 400; line-height: 1.1; color: var(--ink); }
+  .it { font-style: italic; }
+  .title { font-family: var(--script); font-size: 104px; line-height: 1.1; color: var(--ink); }
+  .rule { width: 220px; height: 2px; margin: 26px auto; background: var(--gold); opacity: .7; }
+  .btn { display: inline-block; text-decoration: none; font-family: var(--sans); font-weight: 500; font-size: 16px; letter-spacing: .28em;
+         text-transform: uppercase; padding: 22px 46px; border-radius: 999px; background: var(--deep); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--deep); border: 1.5px solid var(--gold); }
+  .card { background: var(--ivory); border: 1.5px solid var(--gold-light); border-radius: 8px; }
+
+  .seal { position: relative; width: 150px; height: 150px; margin: 0 auto; }
+  .seal img { width: 150px; height: 150px; display: block; }
+  .seal .mono { position: absolute; left: 0; top: 0; width: 150px; height: 150px; line-height: 150px; text-align: center;
+                font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 48px; color: #5C7591; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · HERO (1366×900) ============ -->
+<section class="page mist" data-document-role="page" data-section="hero" style="height:900px">
+  <img class="abs" src="../assets/layers/botanical_tl.png" alt="" style="left:-80px;top:-80px;width:440px;height:440px">
+  <img class="abs" src="../assets/layers/botanical_br.png" alt="" style="right:-80px;bottom:-80px;width:460px;height:460px">
+  <div class="abs" style="left:0;top:120px;width:1366px">
+    <p class="caps">We're getting married</p>
+    <h1 class="script" style="font-size:140px;margin-top:26px">Eleanor <span style="color:var(--gold);font-size:90px">&amp;</span> Theo</h1>
+    <div class="seal" style="margin-top:28px">
+      <img src="../assets/layers/wax_seal.png" alt="">
+      <div class="mono">E&amp;T</div>
+    </div>
+    <p class="caps" style="margin-top:34px;font-size:19px;color:var(--ink)">Saturday · September 18, 2027</p>
+    <p class="it" style="font-size:30px;color:var(--deep);margin-top:12px">Rosewood Manor · Charleston, South Carolina</p>
+    <!-- GERİ SAYIM YER TUTUCUSU: statik. Hedef 2027-09-18 16:30 America/New_York. Canva'da canlı sayaç
+         (uygulama/öğe) doğrulanmazsa bu blok kaldırılır; elle yazılmış sayı canlı sayaç sayılmaz. -->
+    <div data-placeholder="countdown" style="display:flex;justify-content:center;gap:14px;margin-top:34px">
+      <div class="card" style="width:120px;padding:16px 0 12px"><p style="font-size:44px;line-height:1">–</p><p class="caps" style="font-size:11px;margin-top:8px">Days</p></div>
+      <div class="card" style="width:120px;padding:16px 0 12px"><p style="font-size:44px;line-height:1">–</p><p class="caps" style="font-size:11px;margin-top:8px">Hours</p></div>
+      <div class="card" style="width:120px;padding:16px 0 12px"><p style="font-size:44px;line-height:1">–</p><p class="caps" style="font-size:11px;margin-top:8px">Minutes</p></div>
+      <div class="card" style="width:120px;padding:16px 0 12px"><p style="font-size:44px;line-height:1">–</p><p class="caps" style="font-size:11px;margin-top:8px">Seconds</p></div>
+    </div>
+    <!-- Sayfa içi bağlantı: #invitation (Canva'da sayfa bağlantısıyla yeniden kurulur) -->
+    <a class="btn" href="#" data-link="invitation" style="margin-top:36px">Open the invitation</a>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 · INVITATION (1366×1100) ============ -->
+<section class="page tint" data-document-role="page" data-section="invitation" style="height:1100px">
+  <div class="abs card" style="left:333px;top:70px;width:700px;height:960px;border:0;box-shadow:0 30px 60px -30px rgba(43,58,78,.5)"></div>
+  <div class="abs" style="left:347px;top:84px;width:672px;height:932px;border:1.5px solid var(--gold-light)"></div>
+  <div class="abs" style="left:355px;top:92px;width:656px;height:916px;border:1px solid var(--gold-light);opacity:.75"></div>
+  <img class="abs" src="../assets/layers/card_botanical_tl.png" alt="" style="left:333px;top:70px;width:180px;height:180px">
+  <img class="abs" src="../assets/layers/card_botanical_br.png" alt="" style="left:853px;top:850px;width:180px;height:180px">
+  <div class="abs" style="left:333px;top:170px;width:700px">
+    <p class="caps">Together with their families</p>
+    <h2 class="script" style="font-size:76px;margin-top:30px">Eleanor Grace</h2>
+    <p class="script" style="font-size:54px;color:var(--gold);line-height:1">&amp;</p>
+    <h2 class="script" style="font-size:76px">Theodore James</h2>
+    <p class="it" style="font-size:27px;line-height:1.45;margin:28px auto 0;width:520px">request the pleasure of your company at the celebration of their marriage</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:22px;margin-top:36px">
+      <p class="caps" style="width:170px;font-size:14px;padding:14px 0;border-top:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold)">Saturday</p>
+      <div style="width:130px"><p class="caps" style="font-size:14px">September</p><p style="font-size:88px;line-height:1;font-weight:500">18</p><p class="caps" style="font-size:14px">2027</p></div>
+      <p class="caps" style="width:170px;font-size:14px;padding:14px 0;border-top:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold)">At 4:30 PM</p>
+    </div>
+    <p style="font-size:34px;font-weight:600;margin-top:34px">Rosewood Manor</p>
+    <p class="it" style="font-size:26px;color:var(--deep)">Charleston, South Carolina</p>
+    <!-- Sayfa içi bağlantı: #rsvp -->
+    <a class="btn" href="#" data-link="rsvp" style="margin-top:30px">RSVP</a>
+    <p class="it" style="font-size:22px;color:var(--deep);margin-top:14px">Kindly reply by August 1, 2027</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 · OUR STORY (1366×980) ============ -->
+<section class="page ivory" data-document-role="page" data-section="story" style="height:980px">
+  <div class="abs" style="left:0;top:90px;width:1366px">
+    <h2 class="title">Our Story</h2>
+    <p class="caps" style="margin-top:8px">A few of our favorite moments</p>
+    <!-- TEMPLATE COPY: alıcı kendi metniyle değiştirir -->
+    <p class="it" style="font-size:25px;color:var(--deep);width:720px;margin:22px auto 0">From the first hello to the question, every chapter has led us here. We can't wait to celebrate the next one with you.</p>
+  </div>
+  <!-- Polaroid: beyaz çerçeve div + değiştirilebilir fotoğraf + ayrı başlık metni -->
+  <div class="abs" style="left:183px;top:440px;width:300px;height:390px;background:#FFFDF9;box-shadow:0 22px 40px -22px rgba(43,58,78,.55);transform:rotate(-3deg)">
+    <img class="abs" src="../assets/layers/photo_placeholder_1.jpg" alt="Your photo" style="left:16px;top:16px;width:268px;height:282px">
+    <p class="abs script" style="left:0;top:310px;width:300px;font-size:34px">where it began</p>
+  </div>
+  <div class="abs" style="left:533px;top:480px;width:300px;height:390px;background:#FFFDF9;box-shadow:0 22px 40px -22px rgba(43,58,78,.55);transform:rotate(2.5deg)">
+    <img class="abs" src="../assets/layers/photo_placeholder_2.jpg" alt="Your photo" style="left:16px;top:16px;width:268px;height:282px">
+    <p class="abs script" style="left:0;top:310px;width:300px;font-size:34px">the question</p>
+  </div>
+  <div class="abs" style="left:883px;top:440px;width:300px;height:390px;background:#FFFDF9;box-shadow:0 22px 40px -22px rgba(43,58,78,.55);transform:rotate(-1.5deg)">
+    <img class="abs" src="../assets/layers/photo_placeholder_3.jpg" alt="Your photo" style="left:16px;top:16px;width:268px;height:282px">
+    <p class="abs script" style="left:0;top:310px;width:300px;font-size:34px">forever starts now</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 · DETAILS (1366×1060) ============ -->
+<section class="page tint" data-document-role="page" data-section="details" style="height:1060px">
+  <div class="abs" style="left:0;top:80px;width:1366px">
+    <h2 class="title">The Celebration</h2>
+    <p class="caps" style="margin-top:6px">Saturday, September 18, 2027</p>
+  </div>
+  <div class="abs" style="left:383px;top:330px;width:600px;text-align:left">
+    <div style="display:flex;align-items:baseline;gap:30px;padding:22px 0;border-bottom:1px solid rgba(184,153,106,.5)">
+      <p class="caps" style="width:140px">4:30 PM</p>
+      <div><p style="font-size:38px;font-weight:600;line-height:1.2">Ceremony</p><p class="it" style="font-size:25px;color:var(--deep)">The Garden Lawn</p></div>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:30px;padding:22px 0;border-bottom:1px solid rgba(184,153,106,.5)">
+      <p class="caps" style="width:140px">5:30 PM</p>
+      <div><p style="font-size:38px;font-weight:600;line-height:1.2">Cocktail Hour</p><p class="it" style="font-size:25px;color:var(--deep)">The Veranda</p></div>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:30px;padding:22px 0">
+      <p class="caps" style="width:140px">6:30 PM</p>
+      <div><p style="font-size:38px;font-weight:600;line-height:1.2">Reception</p><p class="it" style="font-size:25px;color:var(--deep)">The Grand Hall</p></div>
+    </div>
+  </div>
+  <div class="abs card" style="left:263px;top:760px;width:410px;height:230px;padding-top:34px">
+    <p class="caps" style="font-size:14px">Venue</p>
+    <p style="font-size:32px;font-weight:600;margin-top:10px">Rosewood Manor</p>
+    <p class="it" style="font-size:23px;color:var(--deep)">Charleston, South Carolina, USA</p>
+    <!-- URL: urls.map = null (demo) -->
+    <a class="btn btn-ghost" href="#" data-url="map" style="margin-top:18px;padding:14px 32px;font-size:13px">View Map</a>
+  </div>
+  <div class="abs card" style="left:693px;top:760px;width:410px;height:230px;padding-top:34px">
+    <p class="caps" style="font-size:14px">Attire</p>
+    <p style="font-size:32px;font-weight:600;margin-top:10px">Black tie optional</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 · TRAVEL & STAY (1366×720) ============ -->
+<section class="page ivory" data-document-role="page" data-section="travel" style="height:720px">
+  <div class="abs" style="left:0;top:80px;width:1366px">
+    <h2 class="title">Travel &amp; Stay</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="abs card" style="left:263px;top:330px;width:410px;height:320px;padding:34px 34px 0">
+    <p class="caps" style="font-size:14px">Getting There</p>
+    <!-- TEMPLATE COPY -->
+    <p style="font-size:24px;line-height:1.45;margin-top:14px">The celebration takes place at <b>Rosewood Manor</b> in Charleston, South Carolina.</p>
+    <p class="it" style="font-size:22px;color:var(--deep);margin-top:12px">Directions and parking details will be shared here.</p>
+    <!-- URL: urls.map = null (demo) -->
+    <a class="btn btn-ghost" href="#" data-url="map" style="margin-top:22px;padding:14px 32px;font-size:13px">Get Directions</a>
+  </div>
+  <div class="abs card" style="left:693px;top:330px;width:410px;height:320px;padding:34px 34px 0">
+    <p class="caps" style="font-size:14px">Where to Stay</p>
+    <!-- TEMPLATE COPY -->
+    <p style="font-size:24px;line-height:1.45;margin-top:14px">Hotel suggestions for out-of-town guests will be listed here.</p>
+    <p class="it" style="font-size:22px;color:var(--deep);margin-top:12px">Room block and booking details will be added here.</p>
+    <!-- URL: urls.accommodation = null (demo) -->
+    <a class="btn btn-ghost" href="#" data-url="accommodation" style="margin-top:22px;padding:14px 32px;font-size:13px">Accommodation</a>
+  </div>
+</section>
+
+<!-- ============ PAGE 6 · REGISTRY (1366×540) ============ -->
+<section class="page tint" data-document-role="page" data-section="registry" style="height:540px">
+  <div class="abs" style="left:0;top:90px;width:1366px">
+    <h2 class="title">Registry</h2>
+    <div class="rule"></div>
+    <!-- TEMPLATE COPY -->
+    <p style="font-size:27px;line-height:1.5;width:640px;margin:0 auto">Your presence is the greatest gift of all. For those who wish to honor us with a gift, our registry can be found below.</p>
+    <!-- URL: urls.registry = null (demo) -->
+    <a class="btn" href="#" data-url="registry" style="margin-top:34px">View Registry</a>
+  </div>
+</section>
+
+<!-- ============ PAGE 7 · RSVP — CANVA FORM YERİ (1366×960) ============ -->
+<section class="page mist" data-document-role="page" data-section="rsvp" style="height:960px">
+  <img class="abs" src="../assets/layers/botanical_tl.png" alt="" style="left:-70px;top:-70px;width:340px;height:340px">
+  <img class="abs" src="../assets/layers/botanical_br.png" alt="" style="right:-70px;bottom:-70px;width:360px;height:360px">
+  <div class="abs" style="left:0;top:90px;width:1366px">
+    <h2 class="title">Kindly Reply</h2>
+    <p class="it" style="font-size:30px;margin-top:6px">by August 1, 2027</p>
+  </div>
+  <!-- ==== CANVA FORM SLOT ==== Bu kutu gerçek form değildir. G021/GB02: kutuyu silip yerine Canva Form öğesi ekle.
+       rsvp.method = null, urls.rsvp_form = null. Önerilen alanlar: Name(s), Attending (Yes/No), Number of guests, Note. -->
+  <div class="abs" data-placeholder="canva-form" style="left:383px;top:340px;width:600px;height:480px;border:2.5px dashed var(--primary);border-radius:10px;background:rgba(251,247,239,.85);padding-top:90px">
+    <p class="caps" style="font-size:13px;display:inline-block;background:rgba(110,136,163,.15);padding:8px 16px;border-radius:999px">RSVP form placeholder</p>
+    <p style="font-size:34px;font-weight:600;margin-top:20px">Canva Form goes here</p>
+    <p class="it" style="font-size:24px;line-height:1.6;color:var(--deep);margin-top:16px">Name(s)<br>Will you attend? Yes / No<br>Number of guests<br>A note for the couple</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 8 · FAQ (1366×900) — import'ta açılır-kapanır yok; hepsi açık ============ -->
+<section class="page ivory" data-document-role="page" data-section="faq" style="height:900px">
+  <div class="abs" style="left:0;top:80px;width:1366px">
+    <h2 class="title">Questions</h2>
+    <p class="caps" style="margin-top:6px">Good to know</p>
+  </div>
+  <div class="abs" style="left:333px;top:310px;width:700px;text-align:left">
+    <div style="padding:18px 0;border-bottom:1px solid rgba(184,153,106,.5)">
+      <p style="font-size:27px;font-weight:600">When should I RSVP?</p>
+      <p style="font-size:23px;color:var(--deep);margin-top:4px">Please reply by August 1, 2027 using the form above.</p>
+    </div>
+    <div style="padding:18px 0;border-bottom:1px solid rgba(184,153,106,.5)">
+      <p style="font-size:27px;font-weight:600">What time should I arrive?</p>
+      <p style="font-size:23px;color:var(--deep);margin-top:4px">The ceremony begins at 4:30 PM on The Garden Lawn. Please plan to be seated a little before.</p>
+    </div>
+    <div style="padding:18px 0;border-bottom:1px solid rgba(184,153,106,.5)">
+      <p style="font-size:27px;font-weight:600">What should I wear?</p>
+      <p style="font-size:23px;color:var(--deep);margin-top:4px">The dress code is black tie optional.</p>
+    </div>
+    <div style="padding:18px 0">
+      <p style="font-size:27px;font-weight:600">Where are the ceremony and reception?</p>
+      <p style="font-size:23px;color:var(--deep);margin-top:4px">Everything takes place at Rosewood Manor in Charleston, South Carolina: the ceremony on The Garden Lawn, cocktail hour on The Veranda and the reception in The Grand Hall.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 9 · CLOSING (1366×460) ============ -->
+<section class="page ivory" data-document-role="page" data-section="closing" style="height:460px;border-top:1px solid rgba(184,153,106,.4)">
+  <div class="abs" style="left:0;top:80px;width:1366px">
+    <div class="seal" style="width:120px;height:120px">
+      <img src="../assets/layers/wax_seal.png" alt="" style="width:120px;height:120px">
+      <div class="mono" style="width:120px;height:120px;line-height:120px;font-size:38px">E&amp;T</div>
+    </div>
+    <p class="script" style="font-size:64px;margin-top:26px">We can't wait to celebrate with you</p>
+    <p class="caps" style="margin-top:18px">Eleanor &amp; Theo · September 18, 2027</p>
+  </div>
+</section>
+
+</body>
+</html>
