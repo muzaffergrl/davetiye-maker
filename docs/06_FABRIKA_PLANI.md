@@ -53,6 +53,18 @@ Tasarım 02'nin 5 paleti (V02–V06) prompt'larıyla hazır, kapıya kilitli.
 Tasarım 02 pilot hattır (G001–G027, G902, GA02): ortak araçlar ve şablonlar önce onda kurulur, sonra
 diğer tasarımlar aynı düzeni izler. Adım 1, 2, 4, 5, 7, 8 bekleme olmadan paralel yürür.
 
+## 3a. Tasarım modeli — GPT tasarlar, Claude birleştirir (K21, 2026-10-09)
+Kodla çizilmiş zarf/kart/çerçeve sahneleri (G1NN) kullanıcı tarafından "amatör, basit" bulundu ve durduruldu.
+Yeni hat, her tasarım için:
+1. **GPT — Paket 4 T1:** 6 video sahnesinin bitmiş tasarımı (comp, demo metinli; yalnız referans, satılmaz).
+2. **GPT — Paket 4 T2:** aynı tasarımın parçaları (arka plan, kapalı/açık zarf, kapanış elemanı, kartlar,
+   foto çerçeveleri, çiçek kümeleri, petal, ayırıcı, website hero). Yazı yok; foto pencereleri düz `#00FF00`.
+3. **Claude — `tools/parts_prep.py`:** kırpma, yeşil pencereyi şeffaflaştırma + foto alanı koordinatı, ön cep kesimi.
+4. **Claude — Canva montajı:** comp'a bakarak parçaları yerleştirir; metinler Canva metni, fotoğraflar değiştirilebilir alan.
+5. **claude-tarayici:** animasyon/zamanlama, Form, template link (değişmedi).
+Website, PDF ve paylaşım görselleri de aynı GPT parçalarını kullanır. Claude yeni görsel/şekil tasarlamaz.
+Pilot: tasarım 03 — G030 (GPT) → G032 (araç) → G031 (montaj) → kullanıcıya comp↔Canva karşılaştırması → G033 (20 tasarıma yayılım).
+
 ## 3b. Video pilotu — İPTAL (2026-10-09, K19)
 GPT ajan oturumunda video üretim aracı yok; Higgsfield kullanılmayacak. Animasyon Canva-yerel (GANN,
 claude-tarayici). GV02A/B/C kapatıldı.

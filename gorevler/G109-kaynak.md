@@ -2,7 +2,7 @@
 id: G109
 baslik: Tasarım 09 Lavender Provence — HTML sahne kaynağı + katmanlar
 rol: claude-kod
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 2
 bagimli: []
@@ -35,3 +35,6 @@ Tasarım 09'in 6 sahnelik 1080×1920 animasyon kaynağını kodla (HTML/CSS/SVG)
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 blokaj: K21 (kullanıcı): tasarımı GPT yapar; kodla çizilmiş sahne kaynağı yapılmaz. Pilot G030/G031 sonrası yeniden tanımlanacak

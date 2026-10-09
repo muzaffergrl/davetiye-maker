@@ -2,7 +2,7 @@
 id: G215
 baslik: Tasarım 15 Cherry Blossom Spring — GPT görselleri (Paket 1)
 rol: gpt-gorsel
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 2
 bagimli: []
@@ -27,3 +27,6 @@ Tasarım 15'in doku ve dekor görsellerini üretmek (Paket 1; mockup'lar ayrı g
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek

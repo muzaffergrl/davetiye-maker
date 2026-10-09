@@ -2,7 +2,7 @@
 id: G103
 baslik: Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-6
 oncelik: 2
 bagimli: []
@@ -93,3 +93,5 @@ G1NN kardeşlerine notlar:
 ## Günlük
 - 2026-10-09 alindi: claude-kod-6
 - 2026-10-09 bitti, incelemeye gönderildi
+- 2026-10-09 entegratör onayladı
+- 2026-10-09 not (K21): bu kaynak yalnız sahne sırası/zamanlama iskeleti; görsel tasarım GPT'den gelir (G030), ürün görseli olarak kullanılmaz.

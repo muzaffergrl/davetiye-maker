@@ -2,7 +2,7 @@
 id: G101
 baslik: Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 rol: claude-kod
-durum: alindi
+durum: blokaj
 alan: claude-kod-7
 oncelik: 2
 bagimli: []
@@ -38,3 +38,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-09 alindi: claude-kod-7
+- 2026-10-09 blokaj: K21 (kullanıcı): tasarımı GPT yapar; kodla çizilmiş sahne kaynağı yapılmaz. Pilot G030/G031 sonrası yeniden tanımlanacak

@@ -28,6 +28,7 @@ görevin girdileri (özellikle ilgili `DESIGN_BRIEF.md`).
 | GP4NN | Aşama 2 ilan kitleri | — |
 
 ## Kesin kurallar
+- **K21:** zarf, kart, çerçeve, çiçek gibi görsel şekilleri kodla tasarlama/çizme. Görseller GPT parçalarından gelir (`docs/06_FABRIKA_PLANI.md` §3a); kod yalnız yerleşim, metin, kırpma/maske gibi teknik hazırlık yapar.
 - Yalnız `yazar:` yollarına yaz. `collections/*/assets/layers/` başka tasarımın ise dokunma.
 - HTML kaynaklarında **metin görsele pişirilmez**; fontlar Google Fonts link'i, **font dosyası repoya girmez**.
 - Demo veriler kurgu; URL alanları `null`/`#`. Gerçek domaine istek atma.

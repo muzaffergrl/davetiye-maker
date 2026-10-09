@@ -24,6 +24,7 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K18 | (2026-10-09) Canva hesabı Pro; Canva arayüz işleri için Claude kullanıcının bilgisayarında tarayıcıyı kullanır (seçenek A) | sohbet |
 | K19 | (2026-10-09) Higgsfield ile video üretimi **yok**; GPT video pilotu iptal (ajan oturumunda video aracı yok). Animasyon Canva-yerel | sohbet |
 | K20 | (2026-10-09) İkinci (ücretsiz) Canva test hesabı **açılmaz**; "Canva Free ile çalışır" iddiası test edilmediği için vaat edilmez | sohbet |
+| K21 | (2026-10-09) **Tasarımı GPT yapar.** Kodla çizilmiş sahneler "amatör ve basit" bulundu. GPT her tasarımın sahnelerini bitmiş hâlde tasarlar (comp) ve aynı tasarımı ayrı hareket edecek parçalara böler; Claude yalnız düzenlenebilir metin, foto alanı, Canva montajı ve teknik hazırlık yapar, şekil/dekor çizmez. Pilot: tasarım 03 (G030–G032) | sohbet |
 
 ## Geçersizleşenler
 

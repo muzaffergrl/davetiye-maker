@@ -8,6 +8,8 @@ Bu dosya Claude Code, Codex (Astra) ve diğer kodlama ajanları içindir. Ayrın
 ## Çok ajanlı çalışma (Claude + GPT aynı anda)
 
 İş bölümü: **kod, Canva, metin, QA → Claude oturumları**; **bütün görseller → GPT (imagegen)**.
+**Tasarımı GPT yapar (K21):** sahne tasarımı ve bütün görsel parçalar GPT'den gelir; Claude şekil/dekor
+çizmez, yalnız metin katmanı, foto alanı, Canva montajı ve teknik hazırlık yapar (`docs/06_FABRIKA_PLANI.md` §3a).
 
 Bu repoda birden fazla ajan eş zamanlı çalışır. Başlamadan:
 1. `docs/06_FABRIKA_PLANI.md` — ne üretiyoruz (kalıp × kit), roller, aşamalar.

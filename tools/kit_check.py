@@ -1,6 +1,6 @@
 """Kit doğrulayıcı — GPT'nin ürettiği ham görselleri Canva'ya girmeden önce denetler.
 
-  python3 tools/kit_check.py <kit kökü> [--paket 1|2|3]
+  python3 tools/kit_check.py <kit kökü> [--paket 1|2|3|4]
 
 Beklenen dosyalar, ölçüler ve şeffaflık, kitin `assets/gpt/GPT_PROMPTS.md` dosyasındaki
 `**Kaydet:** `yol` · ölçü · **Şeffaf zemin**` satırlarından okunur (20 tasarım, V01 ve V02–V06 aynı biçim).
@@ -107,7 +107,7 @@ def denetle(b, kok: Path):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("kok", help="kit kökü, ör. collections/03_Blush_Garden_Rose")
-    ap.add_argument("--paket", type=int, choices=[1, 2, 3])
+    ap.add_argument("--paket", type=int, choices=[1, 2, 3, 4])
     a = ap.parse_args()
     kok = (ROOT / a.kok) if not Path(a.kok).is_absolute() else Path(a.kok)
     prompts = kok / "assets/gpt/GPT_PROMPTS.md"

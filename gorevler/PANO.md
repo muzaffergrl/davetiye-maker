@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 325 · alindi 2 · inceleme 1 · blokaj 3 · bitti 10 · toplam 341
+Özet: hazir 290 · alindi 0 · inceleme 0 · blokaj 40 · bitti 11 · toplam 341
 
 ## claude-canva
 
@@ -32,24 +32,8 @@ Bağımlılık bekleyen: 40 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (56)**
+**Alınabilir (40)**
 
-- `G105` p2 — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar → `gorevler/G105-kaynak.md`
-- `G106` p2 — Tasarım 06 Art Deco Black-Tie — HTML sahne kaynağı + katmanlar → `gorevler/G106-kaynak.md`
-- `G107` p2 — Tasarım 07 Burgundy Velvet Autumn — HTML sahne kaynağı + katmanlar → `gorevler/G107-kaynak.md`
-- `G108` p2 — Tasarım 08 Winter Evergreen — HTML sahne kaynağı + katmanlar → `gorevler/G108-kaynak.md`
-- `G109` p2 — Tasarım 09 Lavender Provence — HTML sahne kaynağı + katmanlar → `gorevler/G109-kaynak.md`
-- `G110` p2 — Tasarım 10 Tuscan Vineyard — HTML sahne kaynağı + katmanlar → `gorevler/G110-kaynak.md`
-- `G111` p2 — Tasarım 11 Boho Pampas Terracotta — HTML sahne kaynağı + katmanlar → `gorevler/G111-kaynak.md`
-- `G112` p2 — Tasarım 12 Tropical Destination — HTML sahne kaynağı + katmanlar → `gorevler/G112-kaynak.md`
-- `G113` p2 — Tasarım 13 Enchanted Forest Storybook — HTML sahne kaynağı + katmanlar → `gorevler/G113-kaynak.md`
-- `G114` p2 — Tasarım 14 Ivory Lace & Pearls — HTML sahne kaynağı + katmanlar → `gorevler/G114-kaynak.md`
-- `G115` p2 — Tasarım 15 Cherry Blossom Spring — HTML sahne kaynağı + katmanlar → `gorevler/G115-kaynak.md`
-- `G116` p2 — Tasarım 16 Sunflower Rustic Barn — HTML sahne kaynağı + katmanlar → `gorevler/G116-kaynak.md`
-- `G117` p2 — Tasarım 17 Emerald & Gold Estate — HTML sahne kaynağı + katmanlar → `gorevler/G117-kaynak.md`
-- `G118` p2 — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar → `gorevler/G118-kaynak.md`
-- `G119` p2 — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar → `gorevler/G119-kaynak.md`
-- `G120` p2 — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar → `gorevler/G120-kaynak.md`
 - `G006` p3 — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik) → `gorevler/G006-polaroid-katman-pad.md`
 - `G401` p3 — Tasarım 01 Olive & Ivory — A2 website HTML kaynağı → `gorevler/G401-website-kaynak.md`
 - `G403` p3 — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı → `gorevler/G403-website-kaynak.md`
@@ -91,13 +75,28 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G520` p3 — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G520-baski-kaynak.md`
 - `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (3)**
+**Üzerinde çalışılan / incelemede / blokaj (18)**
 
-- `G101` alindi · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
-- `G103` inceleme · claude-kod-6 — Tasarım 03 Blush Garden Rose — HTML sahne kaynağı + katmanlar
-- `G104` alindi · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
+- `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
+- `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
+- `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
+- `G106` blokaj · - — Tasarım 06 Art Deco Black-Tie — HTML sahne kaynağı + katmanlar
+- `G107` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — HTML sahne kaynağı + katmanlar
+- `G108` blokaj · - — Tasarım 08 Winter Evergreen — HTML sahne kaynağı + katmanlar
+- `G109` blokaj · - — Tasarım 09 Lavender Provence — HTML sahne kaynağı + katmanlar
+- `G110` blokaj · - — Tasarım 10 Tuscan Vineyard — HTML sahne kaynağı + katmanlar
+- `G111` blokaj · - — Tasarım 11 Boho Pampas Terracotta — HTML sahne kaynağı + katmanlar
+- `G112` blokaj · - — Tasarım 12 Tropical Destination — HTML sahne kaynağı + katmanlar
+- `G113` blokaj · - — Tasarım 13 Enchanted Forest Storybook — HTML sahne kaynağı + katmanlar
+- `G114` blokaj · - — Tasarım 14 Ivory Lace & Pearls — HTML sahne kaynağı + katmanlar
+- `G115` blokaj · - — Tasarım 15 Cherry Blossom Spring — HTML sahne kaynağı + katmanlar
+- `G116` blokaj · - — Tasarım 16 Sunflower Rustic Barn — HTML sahne kaynağı + katmanlar
+- `G117` blokaj · - — Tasarım 17 Emerald & Gold Estate — HTML sahne kaynağı + katmanlar
+- `G118` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
+- `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
+- `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 
-Bağımlılık bekleyen: 40 · Biten: 6
+Bağımlılık bekleyen: 40 · Biten: 7
 
 ## claude-metin
 
@@ -145,29 +144,10 @@ Bağımlılık bekleyen: 20 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (41)**
+**Alınabilir (22)**
 
 - `G010` p1 — V01 Paket 1 — dokular ve dekor (6 görsel) → `gorevler/G010-v01-paket1-doku-dekor.md`
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
-- `G201` p2 — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1) → `gorevler/G201-gorsel.md`
-- `G203` p2 — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1) → `gorevler/G203-gorsel.md`
-- `G204` p2 — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1) → `gorevler/G204-gorsel.md`
-- `G205` p2 — Tasarım 05 Mediterranean Lemon — GPT görselleri (Paket 1) → `gorevler/G205-gorsel.md`
-- `G206` p2 — Tasarım 06 Art Deco Black-Tie — GPT görselleri (Paket 1) → `gorevler/G206-gorsel.md`
-- `G207` p2 — Tasarım 07 Burgundy Velvet Autumn — GPT görselleri (Paket 1) → `gorevler/G207-gorsel.md`
-- `G208` p2 — Tasarım 08 Winter Evergreen — GPT görselleri (Paket 1) → `gorevler/G208-gorsel.md`
-- `G209` p2 — Tasarım 09 Lavender Provence — GPT görselleri (Paket 1) → `gorevler/G209-gorsel.md`
-- `G210` p2 — Tasarım 10 Tuscan Vineyard — GPT görselleri (Paket 1) → `gorevler/G210-gorsel.md`
-- `G211` p2 — Tasarım 11 Boho Pampas Terracotta — GPT görselleri (Paket 1) → `gorevler/G211-gorsel.md`
-- `G212` p2 — Tasarım 12 Tropical Destination — GPT görselleri (Paket 1) → `gorevler/G212-gorsel.md`
-- `G213` p2 — Tasarım 13 Enchanted Forest Storybook — GPT görselleri (Paket 1) → `gorevler/G213-gorsel.md`
-- `G214` p2 — Tasarım 14 Ivory Lace & Pearls — GPT görselleri (Paket 1) → `gorevler/G214-gorsel.md`
-- `G215` p2 — Tasarım 15 Cherry Blossom Spring — GPT görselleri (Paket 1) → `gorevler/G215-gorsel.md`
-- `G216` p2 — Tasarım 16 Sunflower Rustic Barn — GPT görselleri (Paket 1) → `gorevler/G216-gorsel.md`
-- `G217` p2 — Tasarım 17 Emerald & Gold Estate — GPT görselleri (Paket 1) → `gorevler/G217-gorsel.md`
-- `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — GPT görselleri (Paket 1) → `gorevler/G218-gorsel.md`
-- `G219` p2 — Tasarım 19 Midnight Garden — GPT görselleri (Paket 1) → `gorevler/G219-gorsel.md`
-- `G220` p2 — Tasarım 20 Coastal Seaside — GPT görselleri (Paket 1) → `gorevler/G220-gorsel.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 - `G801` p4 — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri → `gorevler/G801-mockup.md`
 - `G803` p4 — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri → `gorevler/G803-mockup.md`
@@ -189,8 +169,27 @@ Bağımlılık bekleyen: 20 · Biten: 0
 - `G819` p4 — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri → `gorevler/G819-mockup.md`
 - `G820` p4 — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (1)**
+**Üzerinde çalışılan / incelemede / blokaj (20)**
 
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
+- `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
+- `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
+- `G204` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1)
+- `G205` blokaj · - — Tasarım 05 Mediterranean Lemon — GPT görselleri (Paket 1)
+- `G206` blokaj · - — Tasarım 06 Art Deco Black-Tie — GPT görselleri (Paket 1)
+- `G207` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — GPT görselleri (Paket 1)
+- `G208` blokaj · - — Tasarım 08 Winter Evergreen — GPT görselleri (Paket 1)
+- `G209` blokaj · - — Tasarım 09 Lavender Provence — GPT görselleri (Paket 1)
+- `G210` blokaj · - — Tasarım 10 Tuscan Vineyard — GPT görselleri (Paket 1)
+- `G211` blokaj · - — Tasarım 11 Boho Pampas Terracotta — GPT görselleri (Paket 1)
+- `G212` blokaj · - — Tasarım 12 Tropical Destination — GPT görselleri (Paket 1)
+- `G213` blokaj · - — Tasarım 13 Enchanted Forest Storybook — GPT görselleri (Paket 1)
+- `G214` blokaj · - — Tasarım 14 Ivory Lace & Pearls — GPT görselleri (Paket 1)
+- `G215` blokaj · - — Tasarım 15 Cherry Blossom Spring — GPT görselleri (Paket 1)
+- `G216` blokaj · - — Tasarım 16 Sunflower Rustic Barn — GPT görselleri (Paket 1)
+- `G217` blokaj · - — Tasarım 17 Emerald & Gold Estate — GPT görselleri (Paket 1)
+- `G218` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — GPT görselleri (Paket 1)
+- `G219` blokaj · - — Tasarım 19 Midnight Garden — GPT görselleri (Paket 1)
+- `G220` blokaj · - — Tasarım 20 Coastal Seaside — GPT görselleri (Paket 1)
 
 Bağımlılık bekleyen: 24 · Biten: 0
