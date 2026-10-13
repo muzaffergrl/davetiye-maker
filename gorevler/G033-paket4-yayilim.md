@@ -6,7 +6,7 @@ durum: alindi
 alan: wf-paketw
 oncelik: 2
 bagimli: [G030, G035]
-yazar: [tools/katalog.py, tools/kit_check.py, tools/parts_prep.py, tools/tests/, collections/, docs/09_TASARIM_KATALOGU.md, docs/06_FABRIKA_PLANI.md, gorevler/G2, gorevler/G4, gorevler/G033-paket4-yayilim.md, gorevler/roller/gpt-gorsel.md]
+yazar: [tools/katalog.py, tools/kit_check.py, tools/parts_prep.py, tools/tests/, collections/01_Olive_Ivory/assets/gpt/GPT_PROMPTS.md, collections/02_Dusty_Blue/assets/gpt/GPT_PROMPTS.md, collections/04_Vintage_Airmail/assets/gpt/GPT_PROMPTS.md, collections/05_Lemon_Mediterranean/assets/gpt/GPT_PROMPTS.md, collections/06_Art_Deco_Noir/assets/gpt/GPT_PROMPTS.md, collections/07_Burgundy_Velvet/assets/gpt/GPT_PROMPTS.md, collections/08_Winter_Evergreen/assets/gpt/GPT_PROMPTS.md, collections/09_Lavender_Provence/assets/gpt/GPT_PROMPTS.md, collections/10_Tuscan_Vineyard/assets/gpt/GPT_PROMPTS.md, collections/11_Boho_Pampas/assets/gpt/GPT_PROMPTS.md, collections/12_Tropical_Destination/assets/gpt/GPT_PROMPTS.md, collections/13_Enchanted_Forest/assets/gpt/GPT_PROMPTS.md, collections/14_Ivory_Lace_Pearl/assets/gpt/GPT_PROMPTS.md, collections/15_Cherry_Blossom/assets/gpt/GPT_PROMPTS.md, collections/16_Sunflower_Rustic/assets/gpt/GPT_PROMPTS.md, collections/17_Emerald_Gold_Estate/assets/gpt/GPT_PROMPTS.md, collections/18_Wildflower_Vellum/assets/gpt/GPT_PROMPTS.md, collections/19_Midnight_Garden/assets/gpt/GPT_PROMPTS.md, collections/20_Coastal_Seaside/assets/gpt/GPT_PROMPTS.md, docs/09_TASARIM_KATALOGU.md, docs/06_FABRIKA_PLANI.md, gorevler/G2, gorevler/G4, gorevler/G033-paket4-yayilim.md, gorevler/roller/gpt-gorsel.md]
 ---
 
 ## Amaç
