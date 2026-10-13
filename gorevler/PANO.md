@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 7 · alindi 1 · inceleme 1 · blokaj 332 · bitti 14 · toplam 355
+Özet: hazir 8 · alindi 1 · inceleme 0 · blokaj 332 · bitti 15 · toplam 356
 
 ## claude-canva
 
@@ -159,9 +159,8 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (103)**
+**Üzerinde çalışılan / incelemede / blokaj (102)**
 
-- `G035` inceleme · claude-kod-10 — Tasarım 03 — mobil öncelikli website demosu (GPT parçalarıyla açılış şovu) · PİLOT
 - `G037` alindi · claude-kod-11 — Site platformu iskeleti — Next.js, tema şablon motoru, local veri adaptörü, site rotaları
 - `G033` blokaj · - — Paket 4 (GPT tasarlar) prompt'larını 20 tasarıma yay — katalog.py
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
@@ -265,7 +264,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 5 · Biten: 8
+Bağımlılık bekleyen: 5 · Biten: 9
 
 ## claude-metin
 
@@ -332,9 +331,10 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (2)**
+**Alınabilir (3)**
 
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
+- `G047` p2 — Tasarım 03 — yatay altın çerçeve parçası (mekân fotoğrafı, T2.14) → `gorevler/G047-mekan-cercevesi.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (64)**

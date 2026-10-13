@@ -2,7 +2,7 @@
 id: G035
 baslik: Tasarım 03 — mobil öncelikli website demosu (GPT parçalarıyla açılış şovu) · PİLOT
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-10
 oncelik: 1
 bagimli: [G030, G032]
@@ -106,3 +106,4 @@ claude-qa — gerçek telefon (iOS Safari + Android Chrome) testi.
 ## Günlük
 - 2026-10-13 alindi: claude-kod-10
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 entegratör onayladı

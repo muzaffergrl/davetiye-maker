@@ -62,11 +62,25 @@
   },
   "optional_blocks": {
     "our_story": true,
-    "countdown": false,
+    "countdown": true,
     "dress_code": true,
     "registry": true,
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "A few of the moments that led us to",
+    "items": [
+      {
+        "caption": "First hello"
+      },
+      {
+        "caption": "The proposal"
+      },
+      {
+        "caption": "Forever begins"
+      }
+    ]
   }
 }

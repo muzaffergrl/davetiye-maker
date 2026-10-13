@@ -87,6 +87,23 @@
         "faq": { "type": "boolean" },
         "guest_policy": { "type": "boolean" }
       }
+    },
+    "story": {
+      "type": "object", "additionalProperties": false,
+      "description": "İsteğe bağlı (K24 website): Our Story giriş cümlesi ve fotoğraf başlıkları. Fotoğraflar tema foto alanlarından gelir.",
+      "properties": {
+        "intro": { "type": "string", "maxLength": 200 },
+        "items": {
+          "type": "array", "maxItems": 12,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["caption"],
+            "properties": {
+              "caption": { "type": "string", "maxLength": 60 },
+              "text": { "type": "string", "maxLength": 400 }
+            }
+          }
+        }
+      }
     }
   }
 }

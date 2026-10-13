@@ -211,6 +211,16 @@ Kontrol: orta-üst boş; yazı yok; aynı çiçek ve zarf.
 
 ---
 
+#### T2.14 Yatay altın çerçeve (mekân fotoğrafı için)
+**Kaydet:** `collections/03_Blush_Garden_Rose/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+One ornate antique-gold landscape photo frame matching the arched gold frames of scene 3 (same gold, same bead and leaf ornament, same small painted peonies and rose buds at its lower corners), with a gently arched top edge, front view, perfectly straight, centered and not cropped, about 80% of the image width, with empty space around it. The window inside the frame is flat pure green #00FF00 with a 3:2 landscape proportion. No shadow under the frame, no text. Transparent background PNG.
+```
+Kontrol: tek nesne; pencere düz yeşil ve yatay 3:2; gölge yok; sahne 3 çerçeveleriyle aynı altın; alfa.
+
+---
+
 ## PAKET 2 — Örnek fotoğraflar (görev G036 · website demosu ve ilan için)
 
 Kurgusal çift; alıcı kendi fotoğraflarını koyar. **Aynı sohbette sırayla üret**; 2.1'den sonra her prompt'ta
