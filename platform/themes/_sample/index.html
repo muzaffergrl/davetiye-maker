@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- _sample theme: test scaffolding that exercises every engine marker. Not a design. -->
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-text="{name_display} · {date}">You're invited</title>
+  <meta property="og:title" data-attr-content="name_display" content="">
+  <meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+  <meta property="og:image" content="assets/placeholder.svg">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <main class="page" data-section="envelope">
+    <p class="kicker">You are invited</p>
+    <h1 data-field="name_display" data-format="amp">Names</h1>
+    <p><span data-field="date_weekday">Weekday</span>, <time data-field="date" data-attr-datetime="date">Date</time></p>
+    <span class="slot" data-slot="hero">
+      <img class="photo" data-photo="hero" data-field="media.hero_portrait" src="assets/placeholder.svg" alt="" data-attr-alt="name_display" width="400" height="500">
+    </span>
+    <p><a class="button" href="home.html">Open the invitation</a></p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-field="name_display">Names</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html">Envelope</a> · <a href="home.html">Home</a> · <a href="story.html">Story</a> ·
+    <a href="details.html">Details</a> · <a href="rsvp.html">RSVP</a>
+  </nav>
+  <main class="page" data-section="home">
+    <p class="kicker" data-if="host_line" data-field="host_line">Host line</p>
+    <h1 data-field="name_display" data-format="amp">Names</h1>
+    <p>
+      <span data-field="partners.0.full_name">Partner one</span>
+      <span data-if="partners.1">&amp; <span data-field="partners.1.full_name">Partner two</span></span>
+    </p>
+    <p class="monogram" data-field="initials">AB</p>
+    <p><span data-field="date" data-format="date-long">Long date</span> at <span data-field="ceremony_time">Time</span></p>
+    <p>
+      <span data-field="venue.name">Venue</span><br>
+      <span data-field="venue.city_region_country">City, Region, Country</span>
+      <span data-if="venue.address"><br><span data-field="venue.address">Address</span></span>
+    </p>
+    <section data-optional="countdown" data-section="countdown">
+      <p>Counting down to <time data-field="date" data-attr-datetime="countdown_target_utc">Date</time>:
+        <strong data-countdown>…</strong></p>
+    </section>
+    <p><a href="details.html#schedule">See the schedule</a></p>
+  </main>
+</body>
+</html>

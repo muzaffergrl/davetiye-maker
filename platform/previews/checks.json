@@ -1,0 +1,142 @@
+{
+  "base": "next start (production build)",
+  "viewport": "390x844",
+  "theme": "_sample",
+  "checks": [
+    {
+      "name": "unknown slug -> 404",
+      "ok": true
+    },
+    {
+      "name": "reserved slug /edit -> 404",
+      "ok": true
+    },
+    {
+      "name": "draft site without key -> 404",
+      "ok": true
+    },
+    {
+      "name": "draft site with wrong key -> 404",
+      "ok": true
+    },
+    {
+      "name": "draft site with preview key -> 200",
+      "ok": true
+    },
+    {
+      "name": "edit key is not a preview key -> 404",
+      "ok": true
+    },
+    {
+      "name": "theme template not served -> 404",
+      "ok": true
+    },
+    {
+      "name": "theme css served -> 200",
+      "ok": true
+    },
+    {
+      "name": "undeclared page -> 404",
+      "ok": true
+    },
+    {
+      "name": "index: 200",
+      "ok": true
+    },
+    {
+      "name": "index: no console/CSP errors",
+      "ok": true
+    },
+    {
+      "name": "index: theme site.js ran",
+      "ok": true
+    },
+    {
+      "name": "index: no horizontal overflow at 390px",
+      "ok": true,
+      "detail": "scrollWidth-innerWidth=0"
+    },
+    {
+      "name": "index: inline theme script allowed by CSP hash",
+      "ok": true
+    },
+    {
+      "name": "index: names rendered server side",
+      "ok": true,
+      "detail": "Clara & Julian"
+    },
+    {
+      "name": "index: <title> filled server side",
+      "ok": true,
+      "detail": "Clara & Julian · May 15, 2027"
+    },
+    {
+      "name": "home: 200",
+      "ok": true
+    },
+    {
+      "name": "home: no console/CSP errors",
+      "ok": true
+    },
+    {
+      "name": "home: theme site.js ran",
+      "ok": true
+    },
+    {
+      "name": "home: no horizontal overflow at 390px",
+      "ok": true,
+      "detail": "scrollWidth-innerWidth=0"
+    },
+    {
+      "name": "story: 200",
+      "ok": true
+    },
+    {
+      "name": "story: no console/CSP errors",
+      "ok": true
+    },
+    {
+      "name": "story: theme site.js ran",
+      "ok": true
+    },
+    {
+      "name": "story: no horizontal overflow at 390px",
+      "ok": true,
+      "detail": "scrollWidth-innerWidth=0"
+    },
+    {
+      "name": "details: 200",
+      "ok": true
+    },
+    {
+      "name": "details: no console/CSP errors",
+      "ok": true
+    },
+    {
+      "name": "details: theme site.js ran",
+      "ok": true
+    },
+    {
+      "name": "details: no horizontal overflow at 390px",
+      "ok": true,
+      "detail": "scrollWidth-innerWidth=0"
+    },
+    {
+      "name": "rsvp: 200",
+      "ok": true
+    },
+    {
+      "name": "rsvp: no console/CSP errors",
+      "ok": true
+    },
+    {
+      "name": "rsvp: theme site.js ran",
+      "ok": true
+    },
+    {
+      "name": "rsvp: no horizontal overflow at 390px",
+      "ok": true,
+      "detail": "scrollWidth-innerWidth=0"
+    }
+  ]
+}

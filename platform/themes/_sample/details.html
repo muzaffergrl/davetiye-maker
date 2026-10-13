@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Details</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <nav class="nav"><a href="home.html">Back</a></nav>
+  <main class="page">
+    <section id="schedule" data-section="details">
+      <h2>The Celebration</h2>
+      <p><span data-field="date" data-format="date-long">Long date</span></p>
+      <ul class="schedule">
+        <li data-repeat="schedule">
+          <strong data-field=".time">Time</strong> · <span data-field=".label">Label</span>
+          <span data-if=".location"> · <em data-field=".location">Location</em></span>
+        </li>
+      </ul>
+      <div class="photo-bg" data-photo="venue" role="img" aria-label="Venue"></div>
+      <p><span data-field="venue.name">Venue</span>, <span data-field="venue.city_region">City, Region</span></p>
+      <p><a class="button" href="#" data-field="urls.map" target="_blank">View map</a></p>
+    </section>
+    <section data-optional="dress_code" data-section="dress-code">
+      <h3>Dress code</h3>
+      <p data-field="dress_code">Dress code</p>
+    </section>
+    <section data-optional="travel_stay" data-section="travel">
+      <h3>Travel &amp; stay</h3>
+      <p><a class="button" href="#" data-url="accommodation" target="_blank">Accommodation</a></p>
+    </section>
+    <section data-optional="registry" data-section="registry">
+      <h3>Registry</h3>
+      <p><a class="button" href="#" data-url="registry" target="_blank">View registry</a></p>
+    </section>
+    <section data-optional="faq" data-section="faq">
+      <h3>FAQ</h3>
+      <p>Please reply by <span data-field="rsvp.deadline">Deadline</span>.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "id": "_sample",
+  "name": "Sample (test scaffolding, not a design)",
+  "version": "0.1.0",
+  "internal": true,
+  "pages": {
+    "index": "index.html",
+    "home": "home.html",
+    "story": "story.html",
+    "details": "details.html",
+    "rsvp": "rsvp.html"
+  },
+  "photos": {
+    "hero": { "label": "Hero portrait", "source": "media.hero_portrait", "aspect": "4/5" },
+    "story1": { "label": "Story photo 1", "source": "media.memory_photos.0", "aspect": "3/4" },
+    "story2": { "label": "Story photo 2", "source": "media.memory_photos.1", "aspect": "3/4" },
+    "story3": { "label": "Story photo 3", "source": "media.memory_photos.2", "aspect": "3/4" },
+    "venue": { "label": "Venue photo", "source": "media.venue_image", "aspect": "16/9" }
+  }
+}

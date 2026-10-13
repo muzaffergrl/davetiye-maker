@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-text="Our Story · {name_display}">Our Story</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
+</head>
+<!-- The whole page is off (404) when optional_blocks.our_story is not true. -->
+<body data-optional="our_story">
+  <nav class="nav"><a href="home.html">Back</a></nav>
+  <main class="page" data-section="story">
+    <h2>Our Story</h2>
+    <p data-field="story.intro">Intro</p>
+    <div class="photos">
+      <picture>
+        <source type="image/svg+xml" srcset="assets/placeholder.svg">
+        <img class="photo" data-photo="story1" src="assets/placeholder.svg" alt="Story photo 1" width="300" height="400">
+      </picture>
+      <img class="photo" data-photo="story2" src="assets/placeholder.svg" alt="Story photo 2" width="300" height="400">
+      <img class="photo" data-photo="story3" src="assets/placeholder.svg" alt="Story photo 3" width="300" height="400">
+    </div>
+    <ol class="captions">
+      <li data-repeat="story.items">
+        <strong data-field=".caption">Caption</strong>
+        <span data-if=".text"> — <span data-field=".text">Text</span></span>
+      </li>
+    </ol>
+  </main>
+</body>
+</html>

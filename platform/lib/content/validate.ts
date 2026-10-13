@@ -1,0 +1,202 @@
+// Content record validation — TypeScript mirror of tools/validate_content.py.
+//
+// 1. Schema check against CONTENT_SCHEMA (verbatim copy of docs/03_URUN_ICERIK_SEMASI.json),
+//    using the small JSON-Schema subset that file uses.
+// 2. Business rules (only when the schema check passes, exactly like the Python tool).
+//
+// Deliberate differences from the Python tool (stricter, documented in README):
+//  - `format: date` is enforced as strict YYYY-MM-DD with a real calendar date.
+//  - `format: uri` is enforced as an absolute http(s) URL (the site only links http/https).
+//  - Unknown IANA time zone -> warning (the countdown cannot be computed).
+// Messages are English because the buyer-facing panel shows them. Paths use dots
+// (partners.0.display_name), the same notation as theme `data-field` markers.
+
+import { CONTENT_SCHEMA } from './schema.ts';
+import { isValidTimeZone, parseIsoDate } from './format.ts';
+import { safeHttpUrl } from '../theme/urls.ts';
+
+export type IssueLevel = 'error' | 'warning';
+
+export interface ValidationIssue {
+  level: IssueLevel;
+  code: string;
+  path: string;
+  message: string;
+}
+
+export interface ValidationResult {
+  ok: boolean;
+  errors: ValidationIssue[];
+  warnings: ValidationIssue[];
+}
+
+/** Fictional / third-party targets that appeared in older visuals (same list as the Python tool). */
+export const FORBIDDEN_STRINGS = ['averyandjordan.com', '1234 Celebration Lane'];
+
+type Schema = { readonly [key: string]: unknown };
+
+function jsonType(v: unknown): string {
+  if (v === null) return 'null';
+  if (Array.isArray(v)) return 'array';
+  if (typeof v === 'number') return Number.isInteger(v) ? 'integer' : 'number';
+  return typeof v; // string | boolean | object | undefined | ...
+}
+
+function typeMatches(actual: string, expected: string): boolean {
+  return actual === expected || (expected === 'number' && actual === 'integer');
+}
+
+function isPlainObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null && !Array.isArray(v);
+}
+
+function joinPath(base: string, key: string | number): string {
+  return base ? `${base}.${key}` : String(key);
+}
+
+function checkSchema(schema: Schema, value: unknown, path: string, out: ValidationIssue[]): void {
+  const err = (code: string, message: string) => out.push({ level: 'error', code, path: path || '(root)', message });
+  const actual = jsonType(value);
+
+  const type = schema.type as string | readonly string[] | undefined;
+  if (type !== undefined) {
+    const allowed = Array.isArray(type) ? type : [type as string];
+    if (!allowed.some((t) => typeMatches(actual, t))) {
+      err('schema_type', `Expected ${allowed.join(' or ')}, got ${actual}.`);
+      return;
+    }
+  }
+
+  const enumValues = schema.enum as readonly unknown[] | undefined;
+  if (enumValues && !enumValues.includes(value as never)) {
+    err('schema_enum', `Must be one of: ${enumValues.map((e) => JSON.stringify(e)).join(', ')}.`);
+    return;
+  }
+
+  if (typeof value === 'string') {
+    const length = [...value].length;
+    if (typeof schema.minLength === 'number' && length < schema.minLength) {
+      err('schema_min_length', `Must be at least ${schema.minLength} character(s).`);
+    }
+    if (typeof schema.maxLength === 'number' && length > schema.maxLength) {
+      err('schema_max_length', `Must be at most ${schema.maxLength} characters.`);
+    }
+    if (typeof schema.pattern === 'string' && !new RegExp(schema.pattern, 'u').test(value)) {
+      err('schema_pattern', schema.pattern.includes(':') ? 'Use 24-hour time, e.g. 16:30.' : 'Invalid format.');
+    }
+    if (schema.format === 'date' && !parseIsoDate(value)) {
+      err('schema_date', 'Use a real date in YYYY-MM-DD form.');
+    }
+    if (schema.format === 'uri' && !safeHttpUrl(value)) {
+      err('schema_uri', 'Must be a full web address starting with https:// or http://.');
+    }
+  }
+
+  if (Array.isArray(value)) {
+    if (typeof schema.minItems === 'number' && value.length < schema.minItems) {
+      err('schema_min_items', `Needs at least ${schema.minItems} item(s).`);
+    }
+    if (typeof schema.maxItems === 'number' && value.length > schema.maxItems) {
+      err('schema_max_items', `At most ${schema.maxItems} item(s).`);
+    }
+    const items = schema.items as Schema | undefined;
+    if (items) value.forEach((item, i) => checkSchema(items, item, joinPath(path, i), out));
+  }
+
+  if (isPlainObject(value)) {
+    const props = (schema.properties ?? {}) as Record<string, Schema>;
+    for (const key of (schema.required ?? []) as readonly string[]) {
+      if (!Object.hasOwn(value, key)) {
+        out.push({ level: 'error', code: 'schema_required', path: joinPath(path, key), message: 'This field is required.' });
+      }
+    }
+    for (const [key, v] of Object.entries(value)) {
+      if (Object.hasOwn(props, key)) {
+        checkSchema(props[key], v, joinPath(path, key), out);
+      } else if (schema.additionalProperties === false) {
+        out.push({ level: 'error', code: 'schema_unknown_field', path: joinPath(path, key), message: 'Unknown field.' });
+      }
+    }
+  }
+}
+
+/** Schema-only check (no business rules). */
+export function schemaIssues(record: unknown): ValidationIssue[] {
+  const out: ValidationIssue[] = [];
+  checkSchema(CONTENT_SCHEMA as unknown as Schema, record, '', out);
+  return out;
+}
+
+function ruleIssues(record: Record<string, any>): ValidationIssue[] {
+  const out: ValidationIssue[] = [];
+  const error = (code: string, path: string, message: string) => out.push({ level: 'error', code, path, message });
+  const warning = (code: string, path: string, message: string) => out.push({ level: 'warning', code, path, message });
+
+  const raw = JSON.stringify(record);
+  for (const s of FORBIDDEN_STRINGS) {
+    if (raw.includes(s)) error('forbidden_string', '(root)', `Contains a fictional/third-party target: "${s}".`);
+  }
+
+  const event = parseIsoDate(record.date);
+  const deadline = parseIsoDate(record.rsvp?.deadline);
+  if (!event || !deadline) {
+    error('date_unreadable', event ? 'rsvp.deadline' : 'date', 'Date could not be read.');
+  } else if (record.rsvp.deadline >= record.date) {
+    error('rsvp_deadline_not_before_event', 'rsvp.deadline', 'The RSVP deadline must be before the event date.');
+  }
+
+  const schedule: Array<Record<string, any>> = Array.isArray(record.schedule) ? record.schedule : [];
+  const times = schedule.map((s) => s.time);
+  if (times.some((t, i) => i > 0 && t < times[i - 1])) {
+    warning('schedule_not_chronological', 'schedule', 'Schedule times are not in chronological order.');
+  }
+  if (schedule.length && schedule[0].time !== record.ceremony_time) {
+    warning('schedule_first_not_ceremony', 'schedule.0.time', 'The first schedule time differs from the ceremony time.');
+  }
+
+  const names: string[] = (record.partners ?? []).map((p: { display_name: string }) => p.display_name);
+  const display: string = record.name_display ?? '';
+  for (const n of names) {
+    if (!display.includes(n)) error('name_display_missing_partner', 'name_display', `"${display}" does not contain "${n}".`);
+  }
+  const initials: string = record.initials ?? '';
+  for (const n of names) {
+    if (n && !initials.includes(n[0].toUpperCase())) {
+      warning('initials_missing_letter', 'initials', `Monogram "${initials}" does not contain the initial "${n[0]}".`);
+    }
+  }
+
+  const urls: Record<string, string | null> = record.urls ?? {};
+  if (record.record_kind === 'demo') {
+    const filled = Object.entries(urls).filter(([, v]) => v).map(([k]) => k);
+    if (filled.length) {
+      error('demo_url_not_null', 'urls', `A demo record must keep real URLs null: ${filled.join(', ')}.`);
+    }
+  } else {
+    for (const k of ['website', 'rsvp_form']) {
+      if (!urls[k]) warning('customer_url_missing', `urls.${k}`, `urls.${k} is empty — buttons/QR have no target.`);
+    }
+  }
+
+  const blocks: Record<string, boolean> = record.optional_blocks ?? {};
+  if (blocks.registry && !urls.registry && record.record_kind !== 'demo') {
+    warning('registry_without_url', 'urls.registry', 'The registry section is on but there is no registry link.');
+  }
+  if (blocks.dress_code && !record.dress_code) {
+    warning('dress_code_empty', 'dress_code', 'The dress code section is on but the dress code is empty.');
+  }
+
+  if (!isValidTimeZone(record.timezone)) {
+    warning('timezone_invalid', 'timezone', `Unknown time zone "${record.timezone}" — the countdown cannot be computed.`);
+  }
+  return out;
+}
+
+/** Full validation: schema first; business rules only when the schema passes (as in the Python tool). */
+export function validateContent(record: unknown): ValidationResult {
+  const schema = schemaIssues(record);
+  const issues = schema.length ? schema : ruleIssues(record as Record<string, any>);
+  const errors = issues.filter((i) => i.level === 'error');
+  const warnings = issues.filter((i) => i.level === 'warning');
+  return { ok: errors.length === 0, errors, warnings };
+}
