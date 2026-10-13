@@ -14,6 +14,20 @@ const config: NextConfig = {
     '/\\[slug\\]': themeFiles,
     '/\\[slug\\]/\\[page\\]': themeFiles,
     '/themes/\\[theme\\]/\\[\\.\\.\\.path\\]': themeFiles,
+    // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel).
+    '/edit/\\[slug\\]': themeFiles,
+    '/api/edit/\\[slug\\]': themeFiles,
+    '/api/edit/\\[slug\\]/photo': themeFiles,
+    '/api/edit/\\[slug\\]/publish': themeFiles,
+    '/api/edit/\\[slug\\]/unpublish': themeFiles,
+    '/api/rsvp/\\[slug\\]': themeFiles,
+    '/api/rsvp/\\[slug\\]/export': themeFiles,
+    '/api/rsvp/\\[slug\\]/responses': themeFiles,
+    '/start': themeFiles,
+    '/start/demo/\\[theme\\]': themeFiles,
+    '/start/demo/\\[theme\\]/\\[page\\]': themeFiles,
+    '/api/start': themeFiles,
+    '/api/start/slug': themeFiles,
   },
 };
 
