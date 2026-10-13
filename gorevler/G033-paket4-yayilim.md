@@ -2,7 +2,7 @@
 id: G033
 baslik: Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-paketw
 oncelik: 2
 bagimli: [G030, G035]
@@ -77,3 +77,5 @@ Yazım adımı (wf-paketw, 2026-10-13). Görsel üretilmedi; `platform/` ve `col
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24): video Paket 4 yerine website Paket 5; iş akışı wf-paketw ile yapılıyor (yaz → 4 bağımsız inceleme → düzeltme → son denetim)
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 entegratör onayladı
+- 2026-10-13 entegratör: kapsam dışı içerik düzenlemeleri (countdown true, 06 tarihi, 19 saatleri, 15 bölge, brief'ler, 02 README) kabul edildi; README §1b güncellendi.

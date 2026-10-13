@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 39 · alindi 2 · inceleme 3 · blokaj 297 · bitti 17 · toplam 358
+Özet: hazir 39 · alindi 2 · inceleme 2 · blokaj 297 · bitti 18 · toplam 358
 
 ## claude-canva
 
@@ -159,11 +159,10 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (87)**
+**Üzerinde çalışılan / incelemede / blokaj (86)**
 
 - `G038` alindi · wf-platform — Tasarım 03 Blush Garden Rose'u platform teması yap
 - `G039` inceleme · wf-platform — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla
-- `G033` inceleme · wf-paketw — Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
 - `G042` inceleme · wf-platform — RSVP — misafir formu, kayıt, panelde liste + CSV
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G044` blokaj · - — Vercel önizleme yayını (demo site + panel)
@@ -249,7 +248,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 20 · Biten: 10
+Bağımlılık bekleyen: 20 · Biten: 11
 
 ## claude-metin
 

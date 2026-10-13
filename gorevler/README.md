@@ -24,18 +24,18 @@ Yalnız kendi rolündeki görevi al.
 
 | ID | Ne | Rol |
 |---|---|---|
-| G0xx | Ortak araçlar, tasarım 02 pilot hattı, kapılar (G090) | çeşitli |
-| G1NN | Tasarım NN — HTML sahne kaynağı + katmanlar | claude-kod |
-| G2NN | Tasarım NN — GPT görselleri Paket 1 | gpt-gorsel |
-| G3NN | Tasarım NN — Canva video master | claude-canva |
-| G4NN | Tasarım NN — website HTML kaynağı | claude-kod |
-| G5NN | Tasarım NN — 5×7 davetiye + story/kare kaynağı | claude-kod |
-| G6NN | Tasarım NN — Canva website + PDF + story/kare | claude-canva |
+| G0xx | Ortak araçlar, pilotlar (G030–G047: tasarım 03 + platform), kapılar (G090) | çeşitli |
+| G1NN | (askıda, K21) Tasarım NN — kodla çizilmiş sahne kaynağı | — |
+| G2NN | Tasarım NN — **website tasarım paketi** (Paket 5 comp + parçalar, Paket 2 fotoğraflar) | gpt-gorsel |
+| G3NN | (askıda, K22) Tasarım NN — Canva video master | — |
+| G4NN | Tasarım NN — **platform teması** (`platform/themes/<slug>/`, G2NN parçalarıyla) | claude-kod |
+| G5NN | (askıda, K22) Tasarım NN — 5×7 davetiye + story/kare | — |
+| G6NN | (askıda, K24) Tasarım NN — Canva set | — |
 | G7NN | Tasarım NN — kılavuz + Etsy ilan metni | claude-metin |
 | G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
 | G9NN | Tasarım NN — Etsy ilan kiti montajı | claude-kod |
-| GANN | Tasarım NN — video animasyonu + video template link | claude-tarayici |
-| GBNN | Tasarım NN — website Form + yayın testi + set template link'leri | claude-tarayici |
+| GANN | (askıda, K22) Tasarım NN — video animasyonu | — |
+| GBNN | (askıda, K24) Tasarım NN — Canva website Form/yayın | — |
 | GQNN | Tasarım NN — QA raporu | claude-qa |
 | GP1NN–GP4NN | Aşama 2: ek 5 palet (prompt, görsel, Canva, ilan) — G090'dan sonra | çeşitli |
 
