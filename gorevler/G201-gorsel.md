@@ -2,8 +2,8 @@
 id: G201
 baslik: Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-1
 oncelik: 1
 bagimli: []
 yazar: [collections/01_Olive_Ivory/assets/gpt/comps/, collections/01_Olive_Ivory/assets/gpt/parts/, collections/01_Olive_Ivory/assets/gpt/photos/]
@@ -37,3 +37,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-13 alindi: gpt-gorsel-1
