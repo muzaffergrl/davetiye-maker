@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim, G055 (258 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose ve olive-ivory temaları, takvim, G055, seed (292 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -89,12 +89,15 @@ lib/
                                    verify.ts (Etsy doğrulama arayüzü, kapalı), mailer.ts (e-posta arayüzü, yok), limits.ts, demo/
 themes/_sample/                    yalnız test iskeleti (tasarım DEĞİL); her işareti kullanır
 themes/blush-garden-rose/          ilk gerçek tema (tasarım 03, G038) — aşağıda "Tema: blush-garden-rose"
+themes/olive-ivory/                tasarım 01 Olive & Ivory (G401, docs/11 standardıyla) — ayrıntı: themes/olive-ivory/README.md
 scripts/                           seed.ts, screenshot.cjs, theme-check.cjs, sync-schema.cjs
 tests/                             *.test.ts (node:test)
 previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
                                    g045/ = /start akışı; final/ = son duman testi (tests/final-smoke.ts, blush-garden-rose, 390 px);
                                    g051/ = takvim, SSS, RSVP özel soruları, panel düzenleyicileri (tests/g051-browser.ts, 390 px)
 previews/g038/                     blush-garden-rose: sayfa görüntüleri, G035 karşılaştırması, açılış MP4'ü, checks.json
+previews/g401/                     olive-ivory: sayfa görüntüleri, compare_<sayfa>_390.jpg (W1 comp | tema), açılış MP4'ü,
+                                   checks.json; final/ = final-smoke --theme olive-ivory
 ```
 
 ## Site akışı ve görünürlük
@@ -829,8 +832,9 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
   büyük dosya seçtirmez: G055 öncesinden fazla indirme olmaz). Önizlemede her adayda `?preview=`. `/media` rotası bir türevi, fotoğrafı
   servis ettiği koşulda servis eder (yayında kullanılıyorsa herkese, önizleme anahtarıyla taslakta).
 - Geriye uyum: G055 öncesi yüklemeler (`<hex32>.jpg`) ve sharp'sız saklanan dosyalar tek `src` (srcset yok); `readPhoto` iki adı da
-  okur. `scripts/seed.ts` (bu görevin yazma alanı dışında) fotoğrafları hâlâ tek dosya saklıyor → tohum demo sitesinde ve
-  `theme-check`'in "fotoğraflı ilk görünüm" ölçümünde `srcset` yok (seed `preparePhoto` + `savePhoto({width, variants})` kullanmalı).
+  okur. G056'dan beri `scripts/seed.ts` örnek fotoğrafları panel yüklemesinin yolundan saklar (`preparePhoto` +
+  `savePhoto({width, variants})`; `--photo-max 0` = eski tek dosya hâli) → tohum demo sitesinde ve `theme-check`'in
+  "fotoğraflı ilk görünüm" ölçümünde `srcset` var.
 - **Ölçüm** (`tests/g055-browser.ts`, 03, 390 × 844, DPR 3, `next start`, aktarılan bayt, theme-check yöntemi; fotoğraflar panel
   API'siyle yüklendi):
 
@@ -906,8 +910,7 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir. G055'ten beri tema görselleri yalnız bu rotanın paketinde.
-- G055 açıkları: `scripts/seed.ts` türev üretmiyor (`theme-check`'in uzayan kart denetimi G052 incelemesinden beri piksel testi);
-  03 `theme-check --stress`'te index ve rsvp kalıyor (docs/11 §14 #15); `og:image`/ikon sosyal ağ kazıyıcılarında ve gerçek
+- G055 açıkları (seed türevleri ve 03 `--stress`'te index/rsvp G056 ile kapandı): `og:image`/ikon sosyal ağ kazıyıcılarında ve gerçek
   telefonda denenmedi; yeni bir paylaşım görseli eski önbellekte günlerce kalabilir (URL'de sürüm yok).
 - `local` adaptör tek süreç içindir. RSVP ve `/start` hız sınırları süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
   örnek olacağı için sınırlar örnek başınadır. `blob` sürümünde de kalıcı limiter yok (Blob sayaç için uygun değil: her artış bir

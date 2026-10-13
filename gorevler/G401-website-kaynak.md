@@ -32,7 +32,7 @@ Tasarım 01'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [x] docs/11 §15 kontrol listesi tamam (atlanan madde Sonuç'ta gerekçesiyle: qa-kontrol incelemesi)
 - [x] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-olive-ivory.test.ts` (§13.2)
 - [ ] `theme-check --theme olive-ivory` hatasız; `previews/g401/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
-      — theme-check hatasız (85/85); **qa-kontrol incelemesi yapılmadı** (bu oturumda alt-ajan aracı yoktu; Sonuç'a bak)
+      — theme-check hatasız (ikinci tur 86/86); **qa-kontrol incelemesi yapılmadı** (bu oturumda alt-ajan aracı yoktu; Sonuç'a bak)
 - [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
@@ -220,3 +220,4 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 inceleme düzeltmesi (wf-tema01): 24 bulgu doğrulandı; varış kartı, telefon sahnesi parçalardan, kart yolu, nav, story yelpazesi, home üçlüsü, kapak kesimi; theme-check 86/86, qa-kontrol yapılamadı
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 son denetim (wf-tema01, origin/main c637fcc temiz worktree): npm test 292/292, typecheck, build+trace-check, seed; theme-check --stress olive-ivory 86/86 ve blush-garden-rose 86/86 (MP4 dahil); g051 44/44 + final-smoke 42/42 iki temada; tools/tests 7/7; kit_check 01 p5 23/23 p2 5/5, 03 p4 21/21 p2 5/5; validate_content 20/20; katalog --dene temiz (docs/09 01 satırı eşitlendi); previews/g401 güncel kodla aynı. qa-kontrol incelemesi hâlâ yapılmadı.
