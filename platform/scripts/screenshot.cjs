@@ -64,8 +64,10 @@ async function waitForServer(url, ms = 30000) {
     process.exit(2);
   }
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'platform-shot-'));
-  const pub = seed(dataDir, []);
-  const draft = seed(dataDir, ['--slug', 'draft-demo', '--draft']);
+  // this smoke test covers the _sample scaffold theme (the seed default is blush-garden-rose: scripts/theme-check.cjs)
+  const sample = ['--theme', '_sample', '--no-photos'];
+  const pub = seed(dataDir, sample);
+  const draft = seed(dataDir, ['--slug', 'draft-demo', '--draft', ...sample]);
 
   const server = spawn(process.execPath, [path.join(ROOT, 'node_modules/next/dist/bin/next'), 'start', '-p', String(PORT), '-H', '127.0.0.1'], {
     cwd: ROOT,

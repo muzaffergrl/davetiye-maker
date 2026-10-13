@@ -1,0 +1,145 @@
+{
+ "base": "next start (production build)",
+ "theme": "blush-garden-rose",
+ "errors": [],
+ "warnings": [],
+ "passed": [
+  "index@360: no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "home@360: no overflow, 28 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "story@360: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "details@360: no overflow, 17 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "rsvp@360: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "index@390: no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "home@390: no overflow, 28 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "story@390: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "details@390: no overflow, 17 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "rsvp@390: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "index@430: no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "home@430: no overflow, 28 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "story@430: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "details@430: no overflow, 17 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "rsvp@430: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "index@768: no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "home@768: no overflow, 28 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "story@768: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "details@768: no overflow, 17 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "rsvp@768: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "index@1280: no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "home@1280: no overflow, 28 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "story@1280: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "details@1280: no overflow, 17 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "rsvp@1280: no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "index@390 (no photos): no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots placeholder",
+  "home@390 (no photos): no overflow, 28 fields = content record, title ok, images loaded, card text on paper, photo slots placeholder",
+  "story@390 (no photos): no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots placeholder",
+  "details@390 (no photos): no overflow, 17 fields = content record, title ok, images loaded, card text on paper, photo slots placeholder",
+  "rsvp@390 (no photos): no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots placeholder",
+  "envelope → /clara-and-julian/home in 4451 ms, card transition flag set",
+  "home hero: sequential entrance finished",
+  "countdown target from the platform: 2027-05-15 16:00 America/New_York = 20:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "missing map URL: no navigation, notice \"This link will be added soon.\"",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: \"Send another reply\" reopens the form",
+  "external requests: Google Fonts only",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-05-15T21:00:00Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-05-20T12:00:00Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (308 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 4 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "home@390 (changed content): no overflow, 30 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "story@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "details@390 (changed content): no overflow, 18 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "rsvp@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, card text on paper, photo slots user",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index first view (390×844, DPR 3, placeholders): 1018 KB",
+  "home first view (390×844, DPR 3, placeholders): 706 KB",
+  "recording: previews/g038/opening_390x844.mp4 (2850 KB) — tap → opening → home → story → details"
+ ],
+ "info": {
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (277 KB)",
+   "story_1 → media.memory_photos.0 (281 KB)",
+   "story_2 → media.memory_photos.1 (289 KB)",
+   "story_3 → media.memory_photos.2 (262 KB)",
+   "venue → media.venue_image (461 KB)"
+  ],
+  "envelope_to_home_ms": 4451,
+  "first_view_index_kb_placeholders": 1018,
+  "first_view_index_files": [
+   [
+    "/themes/blush-garden-rose/img/env_body-880.webp",
+    164122
+   ],
+   [
+    "/themes/blush-garden-rose/img/envelope_closed-880.webp",
+    154200
+   ],
+   [
+    "/themes/blush-garden-rose/img/ribbon_bow-960.webp",
+    123658
+   ],
+   [
+    "/themes/blush-garden-rose/img/bg_scene-1024.webp",
+    108562
+   ],
+   [
+    "/themes/blush-garden-rose/img/pocket-880.webp",
+    80616
+   ],
+   [
+    "/themes/blush-garden-rose/img/env_flap-880.webp",
+    61686
+   ],
+   [
+    "/themes/blush-garden-rose/img/env_cflap-880.webp",
+    50818
+   ],
+   [
+    "/themes/blush-garden-rose/img/card_small-640.webp",
+    45210
+   ]
+  ],
+  "first_view_home_kb_placeholders": 706,
+  "first_view_home_files": [
+   [
+    "/themes/blush-garden-rose/img/invitation_card-909.webp",
+    186600
+   ],
+   [
+    "/themes/blush-garden-rose/img/bg_scene-1024.webp",
+    108562
+   ],
+   [
+    "/themes/blush-garden-rose/img/card_small-640.webp",
+    45210
+   ],
+   [
+    "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+    42800
+   ],
+   [
+    "/themes/blush-garden-rose/img/arch_frame-320.webp",
+    40152
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "/themes/blush-garden-rose/site.css",
+    36207
+   ],
+   [
+    "/themes/blush-garden-rose/img/ribbon_bow-480.webp",
+    32572
+   ]
+  ],
+  "video_kb": 2850
+ }
+}

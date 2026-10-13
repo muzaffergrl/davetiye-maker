@@ -7,7 +7,9 @@ Denenenler: 2:3 opak → 9:16 merkez kırpma (1080×1920, 2160×3840) ve büyüt
 yok, maske PNG), aynı görselde üç pencere (biri GPT gerçek yeşili (4, 251, 44)), pencereye bitişik ince
 yeşil şeridin pencereye katılması ve uzak küçük lekenin pencere sayılmaması, ön cep (renkle bulunan V kenar
 ve düz renkli zarfta geometrik geri düşüş), eksik dosya atlama, --comps (1080×1920 koordinatı), çıkış
-kodları (0/1/2, --strict) ve assets/ korunması.
+kodları (0/1/2, --strict) ve assets/ korunması; GPT "bulut lekesi" (pencerede yarı saydam koyu yeşil leke),
+çiçekler arasında kapalı gölgeli yeşil cep ve küçük kirli adanın pencereye katılması, pencereye bilerek konmuş
+büyük süsün korunması (uyarılı), çerçeve/çiçek/kemer dışı zeminin değişmemesi.
 """
 import json
 import subprocess
@@ -345,10 +347,78 @@ def test_cikis_kodlari(t: Path):
     assert kod == 1 and "HATA" in out and "florals_tl" in out, out
 
 
+def bulutlu_cerceve(yol):
+    """GPT'nin gerçek kusuru (tasarım 03 arch_frame, frame_landscape): şeffaflık yeşil pencerenin ortasına sızar →
+    yarı saydam, koyu yeşil "bulut lekesi". Ayrıca: pencerenin altına binen çiçekler (opak pembe daireler)
+    ve aralarında kapalı kalmış, gölgede koyulaşmış yeşil cep; 3×3 kirli piksel; pencereye bilerek konmuş
+    60×60 fildişi süs (korunmalı). Kemer dışındaki şeffaf zemin pencere kutusunun köşelerine girer."""
+    h, w = 1024, 1536
+    rgb = np.zeros((h, w, 3)) + GOLD
+    alfa = kemer_kap(h, w, 300, 150, 1236, 900) * 255
+    rgb = karis(rgb, (0, 255, 0), kemer_kap(h, w, 360, 210, 1176, 840))
+    ys, xs = np.mgrid[0:h, 0:w] + 0.5
+    # bulut: merkezde alfa ≈ 13 ve koyu yeşil (2, 93, 1), kenara doğru düz yeşile ve tam alfaya yumuşak geçiş
+    d = np.sqrt(((xs - 768) / 250) ** 2 + ((ys - 560) / 120) ** 2)
+    p = np.clip(1 - d, 0, 1) ** 0.6
+    alfa = alfa * (1 - 0.95 * p)
+    rgb = karis(rgb, (2, 93, 1), p)
+    # çiçekler pencerenin alt kenarına biner; üçünün arasında kapalı bir cep kalır
+    for cx, cy in ((440, 830), (540, 830), (490, 744)):
+        kap = kapsama(h, w, lambda px, py, cx=cx, cy=cy: (px - cx) ** 2 + (py - cy) ** 2 < 58 ** 2,
+                      (cx - 60, cy - 60, cx + 60, cy + 60))
+        rgb = karis(rgb, KAGIT, kap)
+        alfa = np.maximum(alfa, kap * 255)
+    rgb[((xs - 490) ** 2 + (ys - 802) ** 2 < 7 ** 2)] = (30, 110, 20)  # çiçeklerin arasında gölgedeki pencere yeşili
+    rgb[300:303, 700:703] = (200, 190, 180)  # kirli piksel
+    rgb[400:460, 1000:1060] = IVORY            # bilerek konmuş süs
+    rgba_kaydet(rgb, alfa, yol)
+
+
+def test_bulut_lekesi(t: Path):
+    k = t / "kit_bulut"
+    (k / "assets/gpt/parts").mkdir(parents=True)
+    (k / "assets/gpt/GPT_PROMPTS.md").write_text(
+        "**Kaydet:** `collections/TEST/assets/gpt/parts/bulut.png` · 1536×1024 · **Şeffaf zemin**\n"
+        "Frame window flat pure green #00FF00.\n", encoding="utf-8")
+    bulutlu_cerceve(k / "assets/gpt/parts/bulut.png")
+    kaynak = np.asarray(Image.open(k / "assets/gpt/parts/bulut.png"))
+    kod, out = calistir(k, "--json")
+    assert kod == 0, out
+    j = json.loads(out)
+    p = j["pencereler"]["bulut"]
+    assert len(p) == 1, p
+    assert p[0]["leke_px"] > 20000, p[0]  # bulutun eşik altı kısmı (alfa < 128) pencereye katıldı
+    ox, oy = next(x for x in j["katmanlar"] if x["ad"] == "bulut")["kirpma"][:2]
+    a = np.asarray(Image.open(k / "kit_layers/bulut.png"))
+    al = a[..., 3]
+
+    def A(x, y):
+        return int(al[y - oy, x - ox])
+
+    assert A(768, 560) == 0, "bulut merkezi (alfa 13, koyu yeşil) şeffaf değil"
+    assert A(600, 560) == 0 and A(900, 600) == 0 and A(768, 470) == 0, "bulutun yarı saydam kenarı kaldı"
+    assert A(490, 802) == 0, "çiçeklerin arasındaki gölgeli yeşil cep kaldı"
+    assert A(701, 301) == 0, "pencere içindeki küçük kirli ada kaldı"
+    assert A(1030, 430) == 255, "pencereye bilerek konmuş büyük opak süs silinmiş"
+    assert any("ada korundu" in u for u in j["uyarilar"]), j["uyarilar"]
+    assert A(440, 830) == 255 and A(490, 744) == 255, "pencereye binen çiçek delinmiş"
+    assert A(330, 600) == 255 and A(768, 180) == 255, "çerçeve delinmiş"
+    assert A(320, 170) == 0 == kaynak[170, 320, 3], "kemer dışındaki zemin değişmiş"
+    # pencere kutusu kemer + bulut taşması değil: kaynaktaki pencereyle aynı (±2)
+    yakin(p[0]["kutu"], [360 - ox, 210 - oy, 816, 630], 2, "bulutlu pencere kutusu")
+    # pencere maskesi tam: kemerin içi 255 (bulut ve cep dahil; süs hariç)
+    m = np.asarray(Image.open(k / "kit_layers" / p[0]["maske"]))[..., 3]
+    x0, y0 = p[0]["kutu"][:2]
+    assert m[560 - oy - y0, 768 - ox - x0] == 255 and m[802 - oy - y0, 490 - ox - x0] == 255
+    assert m[430 - oy - y0, 1030 - ox - x0] == 0
+    # görünür yeşil kalıntı yok (çiçek/çerçeve/süs dahil bütün görünür pikseller)
+    assert yesil_kalinti(a) == 0, f"yeşil kalıntı: {yesil_kalinti(a)}"
+
+
 def main():
     with tempfile.TemporaryDirectory() as t:
         t = Path(t)
-        for test in (test_ana_akis, test_geometrik_cep, test_cikis_kodlari):
+        for test in (test_ana_akis, test_geometrik_cep, test_cikis_kodlari, test_bulut_lekesi):
             d = t / test.__name__
             d.mkdir()
             test(d)

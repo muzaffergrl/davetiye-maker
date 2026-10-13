@@ -27,7 +27,11 @@ comp'un kendi piksel koordinatında ölçülür (`koordinat: kaynak`). Kaynak yo
      Bağlı bölgeler en büyükten başlayarak alınır (8-komşuluk, mockup_compose.en_buyuk_bolge). Görsel
      alanının %0,1'inden (en az 256 px) küçük yeşil parçalar bir pencereye kısa kenarın %1'i kadar
      yakınsa ona katılır (çiçeklerin arasından görünen pencere), uzaktakiler pencere sayılmaz, uyarıyla
-     kalır. Her bölge küçük bir kapanışla (2 px) iç lekelerden temizlenir. Pencere tam şeffaf yapılır;
+     kalır. Her bölge küçük bir kapanışla (2 px) iç lekelerden temizlenir. Şeffaf parçada GPT'nin "bulut
+     lekesi" (şeffaflığın pencere ortasına sızması: yarı saydam, koyu yeşil bölge — tasarım 03 arch_frame,
+     frame_landscape) pencereye katılır: pencereye bağlı yarı saydam/yeşilimsi pikseller, pencere kutusundaki
+     yeşil ve gölgede koyulaşmış yeşil cepler, içte kalan delikler (`leke_doldur`, yalnız kutu + 4 px içinde;
+     pencereye bilerek çizilmiş büyük opak ada korunur ve uyarı verilir). Pencere tam şeffaf yapılır;
      kenardaki yarı yeşil (anti-alias) pikseller yerel zemin rengine göre ayrıştırılır (piksel = c·yeşil + (1−c)·zemin →
      alfa × (1−c), renk = zemin) ve 2 px halkada kalan yeşil baskınlığı G → max(R, B) kırpılarak
      temizlenir (mockup_compose'daki yöntemin genellenmiş hâli). Şeffaf delikteki RGB, Canva ölçeklerken
@@ -48,7 +52,7 @@ comp'un kendi piksel koordinatında ölçülür (`koordinat: kaynak`). Kaynak yo
   6. `--comps`: comp'lar (2:3 opak) 9:16 / 1080×1920'ye kırpılmış gibi ölçülür; katman yazılmaz, yalnız
      pencere kutuları + maskeler `windows.json` → `comp_pencereleri` altına (video sayfası koordinatı).
 
-`windows.json`: {"pencereler": {parça: [{katman, katman_olcu, kutu, maske, alan_px, doluluk}]},
+`windows.json`: {"pencereler": {parça: [{katman, katman_olcu, kutu, maske, alan_px, leke_px, doluluk}]},
 "comp_pencereleri": {...}, "katmanlar": [...], "cep": {...}, "uyarilar": [...]}.
 
 Sınırlar (dürüst):
@@ -215,6 +219,105 @@ def kutu(m: np.ndarray):
     return [int(xs.min()), int(ys.min()), int(xs.max() - xs.min() + 1), int(ys.max() - ys.min() + 1)]
 
 
+def _etiketle(maske: np.ndarray, sekiz: bool = True):
+    """Bağlı bileşen etiketleri (satır koşuları + union-find; scipy gerekmez). (etiket int32, bileşen sayısı);
+    0 = maske dışı, bileşenler 1..n. `sekiz`: 8-komşuluk (False: 4-komşuluk)."""
+    h, w = maske.shape
+    kosular, satir_bas = [], []
+    for y in range(h):
+        satir_bas.append(len(kosular))
+        satir = maske[y]
+        if not satir.any():
+            continue
+        d = np.diff(np.concatenate(([0], satir.view(np.int8), [0])))
+        bas, son = np.flatnonzero(d == 1), np.flatnonzero(d == -1)
+        kosular.extend((y, int(a), int(b)) for a, b in zip(bas, son))
+    satir_bas.append(len(kosular))
+    etiket = np.zeros((h, w), np.int32)
+    if not kosular:
+        return etiket, 0
+    ebeveyn = list(range(len(kosular)))
+
+    def bul(i):
+        while ebeveyn[i] != i:
+            ebeveyn[i] = ebeveyn[ebeveyn[i]]
+            i = ebeveyn[i]
+        return i
+
+    ek = 1 if sekiz else 0  # 8-komşulukta çapraz değen koşular da birleşir
+    for y in range(1, h):
+        ust0, ust1 = satir_bas[y - 1], satir_bas[y]
+        j = ust0
+        for i in range(satir_bas[y], satir_bas[y + 1]):
+            _, a0, a1 = kosular[i]
+            while j < ust1 and kosular[j][2] + ek <= a0:
+                j += 1
+            k = j
+            while k < ust1 and kosular[k][1] < a1 + ek:
+                ri, rk = bul(i), bul(k)
+                if ri != rk:
+                    ebeveyn[ri] = rk
+                k += 1
+    kok_no = {}
+    for i, (y, a, b) in enumerate(kosular):
+        etiket[y, a:b] = kok_no.setdefault(bul(i), len(kok_no) + 1)
+    return etiket, len(kok_no)
+
+
+def leke_doldur(bolge: np.ndarray, rgba: np.ndarray, esik: int = 150, pay: int = 4, kucuk_ada: float = 0.005):
+    """Pencereye GPT'nin "bulut lekesi"ni ve iç adacıkları katar. (yeni bölge, eklenen px, bırakılan ada px).
+
+    GPT şeffaf zeminli parçada şeffaflığı yeşil pencerenin ortasına da sızdırabiliyor: pencerede yarı saydam,
+    koyu yeşil/kirli bir leke kalır (tasarım 03 arch_frame, frame_landscape). Bu pikseller yeşil baskınlık
+    eşiğinin ya da alfa ≥ 128 şartının altında kaldığı için pencere sayılmaz ve görünür kalır. Burada:
+      1. pencereye (8-komşulukla) bağlı, yarı saydam (alfa < 128) ya da yarı saydam + yeşilimsi
+         (alfa < 250 ve G − max(R, B) > 20) pikseller pencereye katılır;
+      2. kutudaki bütün yeşil baskın pikseller ve çiçeklerin gölgesinde koyulaşmış pencere yeşili
+         (G − max(R, B) ≥ 40 ve G ≥ 1,5·max(R, B); tasarım 03'ün adaçayı/zeytin yaprakları bu doygunluğa hiç
+         ulaşmıyor — florals_tl/br'de 0 piksel) pencereye katılır: çiçeklerin arasından görünen, pencereye bağlı
+         olmayan küçük yeşil cepler de şeffaflaşır. Pencere kenarına 2 px'ten yakın olanlar alınmaz: kenarın
+         anti-alias pikselleri pencere_isle'de yumuşak ayrıştırılır (sert kesilirse pencere 1 px büyür);
+      3. pencerenin tamamen içinde kalan delikler doldurulur: yeşilimsi/yarı saydam ağırlıklıysa ya da
+         pencere alanının `kucuk_ada` oranından küçükse. Büyük opak ve yeşil olmayan bir ada (pencerenin
+         içine bilerek çizilmiş bir süs) korunur, sayısı döndürülür (uyarı).
+    Hepsi pencere kutusu + `pay` px içinde: kemer dışındaki zemine ya da çiçeklerin yumuşak alfasından dışarıya
+    taşmaz. Opak (alfa 255) yeşilimsi kenar pikselleri buraya alınmaz; onları kenar ayrıştırması yumuşak çözer."""
+    h, w = bolge.shape
+    x, y, bw, bh = kutu(bolge)
+    x0, y0, x1, y1 = max(0, x - pay), max(0, y - pay), min(w, x + bw + pay), min(h, y + bh + pay)
+    b = bolge[y0:y1, x0:x1]
+    al = rgba[y0:y1, x0:x1, 3].astype(np.int16)
+    r, g, bl = (rgba[y0:y1, x0:x1, i].astype(np.int16) for i in range(3))
+    yesilimsi = (g - np.maximum(r, bl)) > 20
+    aday = (al < 128) | ((al < 250) & yesilimsi)
+    et, _ = _etiketle(aday | b)
+    bagli = np.unique(et[b])
+    mx = np.maximum(r, bl)
+    cep = (yesil_baskin(rgba[y0:y1, x0:x1, :3], esik) | (((g - mx) >= 40) & (g * 2 >= 3 * mx))) & (al >= 128)
+    cep &= ~genislet(b, 2)
+    yeni = np.isin(et, bagli[bagli > 0]) | b | cep
+    # delikler: yeni bölgenin dışında kalıp kutu kenarına değmeyen bileşenler (4-komşuluk; bölge 8-komşulu)
+    et2, n2 = _etiketle(~yeni, sekiz=False)
+    kenar = np.unique(np.concatenate([et2[0], et2[-1], et2[:, 0], et2[:, -1]]))
+    birakilan = 0
+    if n2:
+        alan = np.bincount(et2.ravel(), minlength=n2 + 1)
+        yumusak = np.bincount(et2.ravel(), weights=(aday | yesilimsi).ravel().astype(np.float64), minlength=n2 + 1)
+        sinir = kucuk_ada * yeni.sum()
+        doldur = np.zeros(n2 + 1, bool)
+        for e in range(1, n2 + 1):
+            if e in kenar:
+                continue
+            if alan[e] <= sinir or yumusak[e] >= 0.5 * alan[e]:
+                doldur[e] = True
+            else:
+                birakilan += int(alan[e])
+        yeni |= doldur[et2]
+    sonuc = bolge.copy()
+    sonuc[y0:y1, x0:x1] |= yeni
+    return sonuc, int(sonuc.sum() - bolge.sum()), birakilan
+
+
 def pencere_isle(rgba: np.ndarray, bolge: np.ndarray):
     """rgba (float, 0..255, h×w×4) içinde bölgeyi şeffaf yapar, kenar yeşilini temizler.
     (yeni rgba, kapsama 0..1) döndürür. İşlem pencere kutusu + 24 px çevrede yapılır."""
@@ -283,22 +386,32 @@ def maske_kaydet(kapsama: np.ndarray, k, yol: Path):
 
 
 def pencereler_uygula(rgba: np.ndarray, esik: int, katman_ad: str, out: Path, maske_dir: str):
-    """rgba uint8 (h×w×4). (yeni rgba uint8, pencere kayıtları, atlanan yeşil piksel)."""
+    """rgba uint8 (h×w×4). (yeni rgba uint8, pencere kayıtları, atlanan yeşil piksel, uyarılar)."""
     bolgeler, atlanan = pencereleri_bul(rgba[..., :3], rgba[..., 3], esik)
     if not bolgeler:
-        return rgba, [], atlanan
+        return rgba, [], atlanan, []
+    stem = Path(katman_ad).stem
+    uyarilar, lekeler = [], []
+    for i, b in enumerate(bolgeler):
+        bolgeler[i], eklenen, birakilan = leke_doldur(b, rgba, esik)
+        lekeler.append(eklenen)
+        if birakilan:
+            uyarilar.append(f"{stem}: pencere {i + 1} içinde {birakilan} px opak, yeşil olmayan ada korundu "
+                            "(pencereye çizilmiş süs mü, leke mi? önizlemede kontrol et)")
     f = rgba.astype(np.float64)
     kayit = []
-    stem = Path(katman_ad).stem
     for i, b in enumerate(bolgeler, 1):
         f, kap = pencere_isle(f, b)
         k = kutu(b)
         maske = f"{maske_dir}/{stem}_w{i}.png"
         maske_kaydet(kap, k, out / maske)
         kayit.append({"katman": katman_ad, "katman_olcu": [f.shape[1], f.shape[0]], "kutu": k,
-                      "maske": maske, "alan_px": int(b.sum()),
+                      "maske": maske, "alan_px": int(b.sum()), "leke_px": lekeler[i - 1],
                       "doluluk": round(float(b.sum()) / (k[2] * k[3]), 3)})
-    return np.clip(np.rint(f), 0, 255).astype(np.uint8), kayit, atlanan
+    son = np.clip(np.rint(f), 0, 255).astype(np.uint8)
+    # "kaldı" uyarısı çıktıda gerçekten görünen yeşil için: leke dolgusu ve kenar ayrıştırması bir kısmını temizler
+    atlanan = min(atlanan, int((yesil_baskin(son[..., :3], esik) & (son[..., 3] >= 128)).sum()))
+    return son, kayit, atlanan, uyarilar
 
 
 # ----------------------------------------------------------------------------- ön cep
@@ -463,7 +576,8 @@ def parca_isle(b: dict, kaynak: Path, out: Path, esik: int, pay: int, comp=False
                 uyarilar.append(f"{ad}: alfa kutusu neredeyse tüm görsel (nesne kenara değiyor ya da zemin dolu olabilir)")
         kayit["kirpma"] = [kirp[0], kirp[1], kirp[2] - kirp[0], kirp[3] - kirp[1]]
         dosya = f"{ad}.png"
-        rgba, pencereler, atlanan = pencereler_uygula(rgba, esik, dosya, out, "masks")
+        rgba, pencereler, atlanan, pu = pencereler_uygula(rgba, esik, dosya, out, "masks")
+        uyarilar += pu
         if atlanan:
             uyarilar.append(f"{ad}: pencere sayılmayan {atlanan} küçük yeşil piksel kaldı (lekeler)")
         son = rgba
@@ -502,7 +616,8 @@ def parca_isle(b: dict, kaynak: Path, out: Path, esik: int, pay: int, comp=False
     for gorsel, stem in hedefler:
         rgba = _rgba(gorsel)
         dosya_png = f"{stem}.png"
-        rgba, pk, atlanan = pencereler_uygula(rgba, esik, dosya_png, out, "masks/comps" if comp else "masks")
+        rgba, pk, atlanan, pu = pencereler_uygula(rgba, esik, dosya_png, out, "masks/comps" if comp else "masks")
+        uyarilar += pu
         if atlanan:
             uyarilar.append(f"{stem}: pencere sayılmayan {atlanan} küçük yeşil piksel kaldı (lekeler)")
         pencereler += pk

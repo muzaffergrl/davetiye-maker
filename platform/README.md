@@ -13,15 +13,17 @@ Node ≥ 22.18 (TypeScript dosyaları `node` ile doğrudan çalışır; ek araç
 ```bash
 cd platform
 npm ci                 # bağımlılıklar
-npm run seed           # .data/ içine demo site: /clara-and-julian (03 Blush Garden Rose demo içeriği, _sample tema)
+npm run seed           # .data/ içine demo site: /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar, RSVP, panel, /start (135 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar, RSVP, panel, /start, blush-garden-rose teması (147 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack)
-npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller ve previews/*.png
+npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
+node scripts/theme-check.cjs   # build sonrası: blush-garden-rose — 5 genişlik, akış, içerik, previews/g038/ (+ MP4)
 ```
 
-`npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır.
+`npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
+`--no-photos` yer tutucu hâli, `--photos <klasör>` başka örnek fotoğraflar (dosya adı = tema foto anahtarı).
 Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).
 `npm run screenshot` geçici bir veri klasörü kullanır; global Playwright (`/opt/node22/lib/node_modules`) ve
 `/opt/pw-browsers` tarayıcılarıyla çalışır, `playwright install` çalıştırmaz.
@@ -60,10 +62,12 @@ lib/
   claim/                           /start: fields.ts (istemci+sunucu kuralları), claim.ts, api.ts, themes.ts, demo-page.ts,
                                    verify.ts (Etsy doğrulama arayüzü, kapalı), mailer.ts (e-posta arayüzü, yok), limits.ts, demo/
 themes/_sample/                    yalnız test iskeleti (tasarım DEĞİL); her işareti kullanır
-scripts/                           seed.ts, screenshot.cjs, sync-schema.cjs
+themes/blush-garden-rose/          ilk gerçek tema (tasarım 03, G038) — aşağıda "Tema: blush-garden-rose"
+scripts/                           seed.ts, screenshot.cjs, theme-check.cjs, sync-schema.cjs
 tests/                             *.test.ts (node:test)
 previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
                                    g045/ = /start akışı
+previews/g038/                     blush-garden-rose: sayfa görüntüleri, G035 karşılaştırması, açılış MP4'ü, checks.json
 ```
 
 ## Site akışı ve görünürlük
@@ -125,7 +129,11 @@ themes/<id>/…               CSS, JS, görseller (css js mjs png jpg jpeg webp 
 - Tema sayfalarına linkler (`home.html#x`, `index.html?replay=1`) `/<slug>/home#x`, `/<slug>?replay=1` olur.
 - **JS içindeki göreli adresler çevrilmez.** `location.href = 'home.html'`, prefetch ve
   `<script type="speculationrules">` içindeki URL'ler `/<slug>` altında yanlış çözülür; tema JS'i adresleri
-  `site-data` içindeki `pages` nesnesinden almalı (G038 için not).
+  `site-data` içindeki `pages` nesnesinden alır. JS'teki tema görselleri betiğin kendi adresine göre çözülür
+  (`new URL('img/x.webp', document.currentScript.src)`). Speculation rules URL yazmaz, sunucunun çevirdiği linke
+  seçiciyle bakar (`"source":"document","where":{"selector_matches":"a[data-enter]"}`) — betik sabit kalır, CSP hash'i de.
+- `<noscript>` içi ham metindir; içindeki link çevrilmez. JS'siz yedek için `.no-js` sınıfıyla gösterilen normal öğe kullan.
+- `sessionStorage` anahtarları site başına olmalı (bütün siteler aynı origin'de): `…:<slug>` (`site-data.slug`).
 - Satır içi `<script>`'ler izinlidir: motor her sayfanın satır içi betiklerinin SHA-256'sını CSP'ye ekler.
   `onclick=` gibi satır içi olay öznitelikleri **çalışmaz** (CSP). Fontlar yalnız Google Fonts.
 - Kişisel metin şablonda kalmaz: işaretli her öğenin içeriği sunucuda içerikten yazılır (örnek metin ezilir).
@@ -170,7 +178,40 @@ Türetilmiş alanlar (`data-field` ile kullanılabilir): `date_weekday`, `date_l
 `<html>` öğesine `data-theme`, `data-page`, varsa `data-variant`, önizlemede `data-preview="true"` eklenir.
 
 G035 kaynağı (`collections/03_Blush_Garden_Rose/website/*.html`) bu motorla uyarısız işleniyor (test:
-`tests/engine.test.ts`, "G035 source pages"). Taşıma G038'in işi.
+`tests/engine.test.ts`, "G035 source pages"); platform teması hâli `themes/blush-garden-rose/` (G038, aşağıda).
+
+## Tema: blush-garden-rose (G038)
+
+İlk gerçek tema: tasarım 03'ün onaylı G035 demosu (`collections/03_Blush_Garden_Rose/website/`) platforma taşındı.
+Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinçli farklar aşağıda. Ayrıntı: `themes/blush-garden-rose/README.md`.
+
+- **Sayfalar:** `index` (kapalı zarf açılışı) → `home` → `story` (`<body data-optional="our_story">`) · `details` · `rsvp`.
+  Kişisel her değer sunucuda doluyor: `data-field`, başlık/açıklama/OG `data-text`/`data-attr-content`, program satırları
+  `data-repeat="schedule"` (Details kartında her öğe bir satır; ana sayfa tanıtımında ilk 4), boş alanlar `data-if` ile
+  kalkıyor (ör. bölgesiz şehirde virgül kalmaz: `venue.city_region`). Nav'daki Story linki de `data-optional="our_story"`.
+- **Foto alanları** (`theme.json` `photos`, oran = pencere kutusu px): `hero_portrait` 567/595 (kart kemeri; index + home),
+  `story_1..3` 626/868 (altın kemer çerçeve; `media.memory_photos.0..2`), `venue` 1172/681 (GPT yatay altın çerçeve,
+  G047). Şablonda yalnız `data-photo="<anahtar>"`; foto yoksa temanın nötr yer tutucusu (`img/ph_<anahtar>-*.webp`) +
+  "Your photo here" (`[data-photo-state="placeholder"] > .ph-mark`). Yüz kırpımı `object-position` ile (portre %38, kemer %40).
+- **site.js:** `#site-data` varsa kişisel metne dokunmaz; sayfa adresleri `data.pages`, sayaç hedefi
+  `data.derived.countdown_target_utc`, eksik link bildirimi `a[data-url-missing]`. `#site-data` yoksa (tema dosyaları
+  statik sunucuda) `DEV_CONTENT` + küçük bir tarayıcı içi işleyici aynı işaretleri doldurur — yalnız tasarım önizlemesi.
+  Koreografi (`MOTION`), Skip, reduced motion, view transition, geri dönüşte açık zarf + "Replay" G035 ile aynı.
+- **G035'ten farklar:** mekân fotoğrafı GPT yatay çerçevede (CSS kemer kırpma + çiçek kümeleri yerine); kapalı zarfın
+  kapağı ayrı katman (`env_cflap`, tırtıklı kenarı izlenerek kesildi) ve açılışta menteşesinde 3D kalkıyor, sonra açık
+  kapak devralıyor (önceden kapalı zarf açık gövdeye eriyordu); oturum anahtarları site başına; 4+ program satırında
+  kart sıkışık düzene geçiyor (6 satıra kadar boyalı çiçeğe değmediği ölçüldü); RSVP sayfasında G035'in "preview only"
+  düğmesi yerine platform formu (G042 sözleşmesi: `/rsvp/form.js`, `data-rsvp-*`, `method="post"`) — kartın RSVP
+  düğmesi forma kaydırır, teşekkür/kapalı/hata/önizleme panelleri temanın tipografisinde.
+- **Görseller:** `python3 platform/themes/blush-garden-rose/build_images.py` (GPT parçaları → `img/`, önce
+  `tools/parts_prep.py`; pencerelerin tam şeffaflığını ve görünür #00FF00 kalmadığını kendisi denetler).
+- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (12 test: alanlar = içerik kaydı, içerik değişikliği, foto
+  durumları, isteğe bağlı bloklar, linkler, RSVP form sözleşmesi, önizleme anahtarı, site.js sözleşmesi, gerçek rotalar +
+  RSVP API'siyle kayıt) ve
+  `scripts/theme-check.cjs` (Playwright, `next start`: 5 sayfa × 360/390/430/768/1280 taşma/metin/görsel/kart serbest
+  bölgesi, zarf → home → story akışı, geri/replay, Skip, reduced motion, önizleme anahtarı, site başına oturum, sayaç,
+  eksik link hiçbir şey göndermiyor, RSVP yanıtı bu siteye kaydediliyor ve önizlemede hiçbir şey gönderilmiyor, veri
+  değişince sayfa değişiyor, ilk açılış ağırlığı, 390×844 MP4).
 
 ## İçerik doğrulama (`lib/content/validate.ts`)
 
