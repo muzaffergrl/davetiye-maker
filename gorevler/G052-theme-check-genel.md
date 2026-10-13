@@ -2,7 +2,7 @@
 id: G052
 baslik: Tarayıcı denetimlerini her temaya açmak — theme-check / g051-browser / final-smoke `--theme <id>` (G4NN'den önce)
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: wf-hazirlik
 oncelik: 2
 bagimli: [G046, G051]
@@ -36,13 +36,87 @@ bitti tanımını karşılayamaz (G401–G420 `bagimli`'sinde G052 var).
    çalışır ve anlamlı hata/uyarı verir.
 
 ## Bitti sayılması için
-- [ ] Üç betik `--theme` alıyor; 03 sonuçları değişmedi; `_sample` ile koşuldu
-- [ ] docs/11 §13.1'deki komut olduğu gibi çalışıyor; çıktı `previews/<görev>/`
-- [ ] Sonuç dürüst: hangi denetim hâlâ temaya özgü tablo istiyor, G4NN ajanı ne yazmalı
+- [x] Üç betik `--theme` alıyor; 03 sonuçları değişmedi; `_sample` ile koşuldu
+- [x] docs/11 §13.1'deki komut olduğu gibi çalışıyor; çıktı `previews/<görev>/`
+- [x] Sonuç dürüst: hangi denetim hâlâ temaya özgü tablo istiyor, G4NN ajanı ne yazmalı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+**Yapıldı (2026-10-13, wf-hazirlik).** Üç tarayıcı denetimi `--theme <id>` alıyor (varsayılan `blush-garden-rose`; `--theme=<id>`
+biçimi de). Temaya özgü her şey temadan okunuyor; seçiciler docs/11 §3'ün zorunlu işaretlerinden geliyor, 03'e özgü seçici
+(`.invite`, `.info`, `.card`, `.env-head`, `.env-cflap`, `.env-after`, `.hero`, `.invite-sec .cal`, `.faq-item`, `.questions`,
+`.reply-box`, `.closing`, `.rsvp-text`, `.foot`, `#invitation`, `.teasers-sec`, `.venue-photo`) kalmadı.
+
+Dosyalar:
+- `platform/scripts/lib/theme-env.ts` (yeni) — tema ortamı: `theme.json`, `img/manifest.json` (`free_zone`'lu parçalar + isteğe bağlı
+  `checks` tablosu), demo kaydı (`--content` → tema `content.demo.json` → `lib/claim/demo` paketli kopya → koleksiyon kaydı → 03
+  kaydı, not düşülür), PAKET 2 fotoğrafları (`--photos` → `collections/<NN_*>/assets/gpt/photos/<anahtar>.*` → 03 örnekleri, not),
+  koleksiyon (`--collection` ya da `tools/katalog.py` `tema_slug` → `klasor`), W1 comp'ları (yalnız sade adlar), sayfa başlıkları
+  (şablonun `<title data-text>`'i), Google Fonts `<link>` (aile + ağırlık), motordan bağımsız biçimleyici (en-US / en-GB,
+  türetilmiş alanlar `date_weekday`, `date_long`, `venue.city_region(_country)`, `countdown_target_utc`), demo slug'ı.
+- `platform/scripts/lib/browser.ts` (yeni) — Playwright yükleme, `next start`, `markCards` (kart = `free_zone`'lu parçanın `<img>`'i;
+  `<picture>` dahil üst öğesi metni taşır; `checks.cards` verilirse o seçiciler), `overlaps`.
+- `platform/scripts/theme-check.cjs` — `--theme`, `--out` (yoksa `THEME_SHOTS_DIR`, yoksa 03 → `previews/g038`, katalog tasarımı NN →
+  `previews/g4NN/`, diğer → geçici klasör), `--compare w1|g035|none` (varsayılan `w1`: `compare_<sayfa>_390.jpg` = W1 comp | tema; 03'te
+  W1 comp yok → varsayılan `g035`, bugünkü karşılaştırma), `--content`, `--photos`, `--collection`, `--no-video`. Kart metni ↔
+  `free_zone` manifest'ten (otomatik tespit), font listesi sayfanın link'inden, başlıklar `data-text`'ten, foto alanları
+  `theme.json`'dan, geri sayım hedefi ve saat denemeleri içerikten (tarih + tören saati + saat dilimi), "eski içerik kalmadı"
+  denetimi demo kaydının isim/mekân/şehrinden, video yolu kart/link/`[data-slot="venue"]`'dan. Eksik standart öğe zaman aşımı
+  yerine "no .stage — … (docs/11 §3.2)" diye düşer; akışlar birbirinden bağımsız (biri düşerse diğerleri koşar); şablonun yapısal
+  eksiği (font link'i, `.ph-mark`) sayfa başına bir kez yazılır. `checks.json` biçimi aynı (+ `info.setup`, `info.envelope_backdrop`,
+  `info.compare`, `first_view_*_kb_photos`).
+- `platform/tests/g051-browser.ts`, `platform/tests/final-smoke.ts` — aynı genelleştirme (`--theme`, `--out`): takvim `a[data-calendar]`,
+  SSS `details[data-repeat-item^="faq."]` (soru `[data-field$=".q"]`, yanıt `[data-field$=".a"]`), sorular `fieldset[data-rsvp-question]`,
+  form kutusu `[data-rsvp]`; SSS sorusunun erişilebilir adı (CDP `Accessibility.getFullAXTree`) her temada; final-smoke demo sitesi
+  temanın kendi kaydı + fotoğraflarıyla, alıcı yolu tasarım adını `theme.json`'dan alır, `internal` temada atlanır (SKIP).
+
+**Sonuçlar (Node 22, `npm run build` sonrası `next start`, Playwright `/opt/pw-browsers`):**
+- Önce (main, değişiklik yok): theme-check 69/69, g051-browser 44/44, final-smoke 42/42.
+- Sonra, `blush-garden-rose`: **theme-check 74/74, 0 uyarı** (video dahil); **g051-browser 44/44**; **final-smoke 42/42**.
+  Eski 69 denetimin hepsi aynı sonuçla duruyor (kart sayısı da aynı: index 1, home 2, details 1, rsvp 1); 5 yeni satır, hepsi docs/11'den:
+  fontlar (≤ 3 aile, `display=swap`, §3.1/§6), seed (5 foto alanına 5 örnek foto), foto alanı kapsamı (her `theme.json` alanı bir
+  sayfada, §3.2/§9), ilk görünüm **fotoğraflı** index 1289 KB / home 1257 KB (§6 ikinci ölçüm; yer tutuculu 1020 / 710 KB). Kısa
+  telefon satırları artık yatay kaydırma yok + kapalı zarf ve "Tap to open" ekranda (§13.3) da denetliyor (03 geçti). Yeniden
+  adlandırılan iki g051 satırı: "the two buttons do not overlap each other or a painted card" (eski: yan yana — tasarım kararı,
+  standart değil; standart "kart dışında") ve "the question's sign changes when it opens" (eski: `::after` dönüşü — standart
+  `content` ya da `aria-hidden` glif ikisine de izin veriyor).
+- `_sample` (iskelet tema, standartta değil): üçü de çökmeden koşuyor ve nedenli hata veriyor — theme-check 33 geçti / 27 hata /
+  11 uyarı (standart dışı foto anahtarları `hero, story1…`, `<title data-text>` eksik, Google Fonts yok, `.ph-mark` yok, `.stage` /
+  `[data-skip]` / `.replay` yok, kendi demo kaydı / koleksiyonu / W1 comp'u yok, `internal` → /start demo atlandı); g051-browser 4/16
+  (takvim, SSS, sorular, panel bölümleri yok: "the theme has no faq marker (docs/11 §3.5)"); final-smoke 3/4 (`no .stage`), alıcı
+  yolu SKIP.
+- Ek deneme (commit'lenmedi, sonra silindi): 03'ün kopyası geçici `themes/olive-ivory` olarak — koleksiyon 01 katalogdan bulundu,
+  01 demo kaydı (G053 hikâyesiyle) kullanıldı, 01 PAKET 2 foto yok → 03 örnekleri (uyarı), **W1 `compare_*_390.jpg` 5/5 yazıldı**;
+  72/73, tek hata beklenen: tema kendi `content.demo.json`'ı olmadığı için /start'ta yok (404 + nedeni yazılıyor).
+- `npm test` 230/230, `npm run typecheck` temiz, `npm run build` + trace-check geçti.
+- Önizlemeler `--out` ile scratch klasörüne yazıldı; `platform/previews/` bu görevde değişmedi (yazar alanı dışında).
+
+**Denenmedi:** gerçek bir G4NN teması (henüz yok); koyu tasarımda (06, 19) zarf zemini eşikleri; kartı CSS zemini olan tema
+(`checks.cards` yolu); açılmış kapı/kitap düzeni (yalnız oturum anahtarıyla "açık" başlatılan sayfa ölçülüyor); `en-GB` kayıtla
+tam koşu (biçimleyici destekliyor, tarayıcıda denenmedi).
+
+**Hâlâ temaya özgü tablo isteyen yerler — G4NN ajanı ne yazar** (`img/manifest.json` → `"checks"`, `build_images.py` yazar; hepsi
+isteğe bağlı, varsayılanlar `scripts/lib/theme-env.ts` başında):
+1. `cards` `{ "<seçici>": "<manifest anahtarı>" }` — yalnız kart `<img>` değilse (CSS zemini) ya da metin `<img>`'in üst öğesinde
+   değilse. Aksi hâlde hiçbir şey yazma; theme-check bulamadığı `free_zone`'u uyarı/hata olarak söyler.
+2. `particles` — JS parçacık katmanının seçicisi (varsayılan `.petal-layer, .accent-layer`; yeni temada katmana `accent-layer`
+   sınıfı vermek yeter).
+3. `envelope_text` `{closed, opened}` — varsayılan `.stage` dışındaki `h1, p` ve `.replay`.
+4. `backdrop` `{edge_max, dark_max, dark_below, light_above}` — zarf yazısı altındaki zemin ölçümü 03'ün açık zeminine ayarlı; koyu
+   tasarım kendi ölçümünden (`checks.json` → `info.envelope_backdrop`) eşik yazar.
+Bunun dışında tema standart işaretleri taşımalı: `.stage`, `a[data-skip]`, `a[data-enter]`, `.replay`, `nav.site-nav`,
+`[data-slot]` + `img[data-photo]` + `.ph-mark`, `img/ph_<anahtar>-*.webp`, `[data-countdown]` + `.cd-done[data-when]`, `a[href="#reply"]`,
+`[data-rsvp]`, `a[href="index.html?replay=1"]` (home + rsvp), `data-scene`/`data-step`, `html[data-rsvp-replied]`, "Tap to open" metni.
+
+**Önerilen düzeltmeler (yazar alanım dışında, entegratör):**
+- `docs/11_TEMA_STANDARDI.md` §13.1'deki "**`--theme` bugün yok**" paragrafı ve §14 #3 güncellenmeli; §13.3'e `img/manifest.json`
+  `checks` tablosu (yukarıdaki 4 anahtar) ve `--out`/`--compare` eklenmeli.
+- `platform/README.md` "Çalıştırma" satırları (theme-check / final-smoke / g051-browser: `--theme`, `--out`) ve dizin notu
+  (`scripts/lib/`) güncellenmeli.
+- Önerilen görev (claude-kod, küçük): 03'ün `build_images.py`'si manifest'e `checks` yazmıyor — gerekmiyor (otomatik tespit 03'te
+  birebir aynı kartları buluyor); yalnız `particles` için 03 katmanı `.petal-layer` varsayılanda duruyor. 03 bir gün yeniden
+  derlenirse `checks.particles` yazılıp varsayılandan çıkarılabilir.
 
 ## Günlük
 - 2026-10-13 açıldı: G046 incelemesi (docs/11 §14 #3; G4NN bitti tanımı bu araç olmadan karşılanamıyor)
 - 2026-10-13 alindi: wf-hazirlik
+- 2026-10-13 bitti, incelemeye gönderildi
