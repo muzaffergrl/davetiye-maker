@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- RSVP form contract fixture (G042). Plain markup only: a real theme styles these same hooks.
+     Contract: platform/README.md, section "RSVP". -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-text="RSVP · {name_display}">RSVP</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 24px 16px; line-height: 1.5; }
+    main { max-width: 480px; margin: 0 auto; }
+    label, fieldset { display: block; margin: 0 0 16px; }
+    input[type="text"], input[type="email"], input[type="number"], textarea { display: block; width: 100%; box-sizing: border-box; font: inherit; padding: 10px; }
+    fieldset { border: 1px solid #ccc; padding: 8px 12px; }
+    button { font: inherit; padding: 12px 20px; min-height: 44px; }
+    [aria-invalid="true"] { outline: 2px solid #b00; }
+    [data-rsvp-error-for] { color: #b00; margin: -12px 0 16px; }
+    [data-rsvp-error-for]:empty { display: none; }
+    [data-rsvp-status="sending"] button[type="submit"] { opacity: .6; }
+    [hidden] { display: none !important; }
+  </style>
+  <script src="/rsvp/form.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Will you join us?</h1>
+    <p>Kindly reply by <span data-field="rsvp.deadline">Deadline</span></p>
+
+    <div data-rsvp>
+      <form data-rsvp-form method="post">
+        <label>Name
+          <input type="text" name="name" required maxlength="120" autocomplete="name">
+        </label>
+        <p data-rsvp-error-for="name"></p>
+        <label>Email (optional)
+          <input type="email" name="email" maxlength="254" autocomplete="email">
+        </label>
+        <fieldset>
+          <legend>Will you attend?</legend>
+          <label><input type="radio" name="attending" value="yes" required> Joyfully accepts</label>
+          <label><input type="radio" name="attending" value="no"> Regretfully declines</label>
+        </fieldset>
+        <label data-rsvp-if-attending>Number of guests (including you)
+          <input type="number" name="guests" min="1" value="1" inputmode="numeric">
+        </label>
+        <label>Message (optional)
+          <textarea name="message" rows="4" maxlength="500"></textarea>
+        </label>
+        <button type="submit">Send reply</button>
+        <noscript><p>Please turn on JavaScript to send your reply.</p></noscript>
+      </form>
+
+      <div data-rsvp-state="success" hidden>
+        <h2>Thank you!</h2>
+        <p data-rsvp-reply="yes">We can't wait to celebrate with you.</p>
+        <p data-rsvp-reply="no">We'll miss you, and thank you for letting us know.</p>
+        <p><button type="button" data-rsvp-again>Send another reply</button></p>
+      </div>
+      <div data-rsvp-state="closed" hidden>
+        <h2>Replies are closed</h2>
+        <p data-rsvp-message>Please contact the couple directly.</p>
+      </div>
+      <div data-rsvp-state="error" hidden>
+        <p data-rsvp-message>Something went wrong. Please try again.</p>
+      </div>
+      <div data-rsvp-state="preview" hidden>
+        <p data-rsvp-message>Preview only: replies are not sent.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

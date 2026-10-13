@@ -173,6 +173,117 @@ takvim günü olmalı, `format: uri` mutlak http(s) olmalı, bilinmeyen saat dil
 
 Taslak kayıt geçersiz olabilir (panelde yazarken); `publishSite()` geçersiz içeriği yayınlamaz.
 
+## RSVP (G042)
+
+Misafir, temanın RSVP sayfasındaki formu doldurur → platform betiği `/rsvp/form.js` yanıtı
+`POST /api/rsvp/<slug>`'a gönderir → çift yanıtları düzenleme anahtarıyla listeler / CSV indirir.
+Yalnız **yayında** olan site (`publishedContent`) yanıt alır; misafire hiçbir zaman başka misafirin verisi,
+kayıt id'si veya sayılar dönmez.
+
+```
+app/api/rsvp/[slug]/route.ts            GET form durumu · POST misafir yanıtı (herkese açık)
+app/api/rsvp/[slug]/responses/route.ts  GET liste + sayılar (düzenleme anahtarı)
+app/api/rsvp/[slug]/export/route.ts     GET CSV (düzenleme anahtarı)
+lib/rsvp/                               guest.ts (gönderim/durum), couple.ts (liste, sayılar, CSV), validate.ts,
+                                        deadline.ts, rate-limit.ts (RateLimiter arayüzü), config.ts, http.ts
+public/rsvp/form.js                     temalara bırakılan form betiği (bağımlılıksız, CSP uyumlu)
+tests/fixtures/themes/rsvp-fixture/     sözleşmenin test sayfası (tasarım DEĞİL)
+tests/rsvp.test.ts, rsvp-api.test.ts    node:test;  tests/rsvp-browser.ts = Chromium 390 px kontrolü
+```
+
+### Tema form sözleşmesi (G038 ve sonraki temalar)
+
+Tema yalnız işaretli HTML yazar; gönderim, durum ve hata gösterimi platform betiğindedir. Örnek (tam hali
+`tests/fixtures/themes/rsvp-fixture/rsvp.html`):
+
+```html
+<script src="/rsvp/form.js" defer></script>      <!-- kök yolu: motor çevirmez; CSP 'self' izin verir -->
+<div data-rsvp>
+  <form data-rsvp-form method="post">
+    <input name="name" required maxlength="120" autocomplete="name">
+    <p data-rsvp-error-for="name"></p>
+    <input name="email" type="email" maxlength="254" autocomplete="email">
+    <label><input type="radio" name="attending" value="yes" required> Joyfully accepts</label>
+    <label><input type="radio" name="attending" value="no"> Regretfully declines</label>
+    <label data-rsvp-if-attending>Number of guests <input name="guests" type="number" min="1" value="1"></label>
+    <textarea name="message" maxlength="500"></textarea>
+    <button type="submit">Send reply</button>
+  </form>
+  <div data-rsvp-state="success" hidden>
+    <p data-rsvp-reply="yes">…</p> <p data-rsvp-reply="no">…</p>
+    <button type="button" data-rsvp-again>Send another reply</button>
+  </div>
+  <div data-rsvp-state="closed" hidden><p data-rsvp-message>…</p></div>
+  <div data-rsvp-state="error" hidden><p data-rsvp-message>…</p></div>
+  <div data-rsvp-state="preview" hidden><p data-rsvp-message>…</p></div>
+</div>
+```
+
+| İşaret | Anlamı |
+|---|---|
+| `form[data-rsvp-form]` | Yanıt formu. Alanlar **`name` ile**: `name` (zorunlu), `email`, `attending` (`yes`/`no`; radyo, select veya tek checkbox), `guests`, `message`. **`method="post"` yazılır** (JS yüklenmezse veri URL'ye düşmesin; sayfa rotası POST'a 405 verir, hiçbir şey saklanmaz). `action` yazılmaz. |
+| `[data-rsvp-state="success\|closed\|error\|preview"]` | Temanın durum panelleri, `hidden` ile başlar. Betik yalnız geçerli olanı gösterir. `success`/`closed`'da form gizlenir; `error`/`preview`'da form kalır. Durumun paneli yoksa betik formun altına düz bir `<p data-rsvp-fallback>` yazar |
+| `[data-rsvp-message]` | Panel içinde: sunucunun İngilizce mesajı buraya yazılır ("Please enter your name.", "Replies closed on April 3, 2027. …"). Yoksa temanın kendi metni kalır. **`error` ve `closed` panellerine koyun** |
+| `[data-rsvp-error-for="<alan>"]` | O alanın hata metni; alan ayrıca `aria-invalid="true"` alır, yazınca temizlenir. Yoksa tarayıcının kendi doğrulama balonu kullanılır |
+| `[data-rsvp-if-attending]` | Misafir "no" seçince gizlenir, içindeki alanlar devre dışı (ör. guests) |
+| `[data-rsvp-reply="yes\|no"]` | Yalnız misafirin cevabı buysa görünür (success panelinde katılan/katılmayan için ayrı teşekkür) |
+| `[data-rsvp-again]` | Formu sıfırlayıp yeniden açar (aynı aileden ikinci yanıt) |
+| `[data-rsvp]` | İsteğe bağlı kapsayıcı: paneller bunun içinde aranır (yoksa bütün sayfa). Sayfada birden çok form varsa zorunlu |
+| `data-rsvp-status` (betik yazar) | Formda ve `[data-rsvp]`'de: `ready`, `sending`, `success`, `closed`, `error`, `preview` (CSS için). Ayrıca formda `rsvp:state` olayı (`event.detail.state`) — tema animasyonu bağlanabilir |
+
+Betik davranışı:
+- Slug'ı `#site-data`'dan okur; açılışta `GET /api/rsvp/<slug>` ile durumu sorar: kapalıysa `closed` paneli
+  (mesajda tarih), `guests` sayı alanının `max`'ı tema sınırına çekilir.
+- **Honeypot:** formda `name="website"` alanı yoksa betik ekran dışı, `aria-hidden`, `tabindex=-1` bir alan ekler.
+  Temalar kendi alanlarına `website` adını vermez.
+- **Önizleme** (`?preview=<anahtar>`, `data.preview === true`): hiçbir şey gönderilmez, `preview` paneli gösterilir;
+  durum taslak içerikten okunur.
+- Gönderim sırasında submit düğmeleri devre dışı, formda `aria-busy="true"`. Başarıda form sıfırlanır.
+  Panellere `role="status"` (hata: `role="alert"`) eklenir; success/closed'da odak panele taşınır.
+- Satır içi olay özniteliği, `innerHTML`, `eval` yok; yalnız `fetch` (CSP `connect-src 'self'`).
+- Tema 03'ün G035 kaynağındaki "preview only" RSVP düğmesi (`data-field="urls.rsvp_form"`) bu formla değiştirilir.
+
+### API
+
+Misafir tarafı (herkese açık, yalnız JSON):
+
+| İstek | Yanıt |
+|---|---|
+| `GET /api/rsvp/<slug>` (`?preview=<önizleme anahtarı>` taslağı okur) | `200 {ok, open, reason: null\|"deadline"\|"disabled", message, closesAt, deadline: "April 3, 2027", maxGuests, preview}` · `404` |
+| `POST /api/rsvp/<slug>` `Content-Type: application/json`, ≤ 8 KB: `{name, email, attending, guests, message, website}` | `200` success · `400` invalid (+`fields`) · `403` closed · `404` · `413` · `415` · `429` (+`Retry-After`) · `500` |
+
+Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields?}`. Kurallar (`lib/rsvp/`):
+- `name` zorunlu, ≤ 120; `email` isteğe bağlı (biçim kontrolü); `attending` yes/no; `guests` katılıyorsa
+  1..`maxGuests` (boşsa 1), katılmıyorsa **0** saklanır; `message` ≤ 500. Kontrol karakterleri ve bidi işaretleri silinir.
+- `maxGuests`: tema `theme.json` → `"rsvp": {"max_guests": N}` (1..20); yoksa 10. (Fixture: 6.)
+- **Son tarih:** `rsvp.deadline` gününün **sonu**, sitenin `timezone`'unda (ertesi gün 00:00). Saat dilimi geçersizse
+  UTC-12 (kimse erken geri çevrilmez). `rsvp.method: "none"` → form kapalı (`reason: "disabled"`).
+- Honeypot doluysa normal success cevabı döner, **kayıt yapılmaz**.
+- Aynı yanıt 5 dakika içinde yeniden gelirse bir kez saklanır (çift tıklama / yeniden deneme).
+- **Hız sınırı:** IP başına 10 POST / 15 dk (bütün siteler; IPv6 /64 olarak), site başına 200 saklanan yanıt / saat.
+  `RateLimiter` arayüzü (`lib/rsvp/rate-limit.ts`); şimdilik süreç içi bellek (`MemoryRateLimiter`).
+  IP: `x-forwarded-for` ilk değeri, yoksa `x-real-ip` (Vercel bunları kendisi yazar; başka proxy'de aynısı sağlanmalı).
+
+Çift tarafı (düzenleme anahtarı: `Authorization: Bearer <anahtar>` tercih; indirme linki için `?k=<anahtar>`):
+
+| İstek | Yanıt |
+|---|---|
+| `GET /api/rsvp/<slug>/responses` | `200 {ok, site: {slug, status}, window: {open, reason, closesAt, deadlineDisplay}, counts: {responses, attending, notAttending, totalGuests}, responses: [{id, name, email, attending, guests, message, createdAt}]}` — yeniden eskiye |
+| `GET /api/rsvp/<slug>/export` | `text/csv`, `attachment; filename="rsvps-<slug>-<YYYY-MM-DD>.csv"` |
+
+- Yanlış anahtar, önizleme anahtarı, başka sitenin anahtarı ve bilinmeyen slug **aynı** `401` (`This edit link is not valid.`).
+  Bütün RSVP yanıtları `private, no-store`, `noindex`, `no-referrer`.
+- `totalGuests` = katılan yanıtlardaki `guests` toplamı (baş sayısı).
+- CSV: UTF-8 BOM (Excel aksanlı isimler), CRLF, her hücre tırnaklı; `=`, `+`, `-`, `@` (ve sekme/CR) ile başlayan
+  hücrenin başına `'` eklenir (CSV injection). Sütunlar: `Submitted (<timezone>)` ("March 1, 2027 10:05 AM", sitenin
+  saat diliminde), `Name`, `Email`, `Attending` (Yes/No), `Guests`, `Message`; eskiden yeniye.
+- Panel sunucuda doğrudan da çağırabilir: `authorizeEditor`, `rsvpSummary`, `rsvpCounts`, `rsvpCsvForSite` (`lib/rsvp/couple.ts`).
+
+Tarayıcı kontrolü (build gerekir; `npm test`'e dahil değil):
+`npm run build && NODE_PATH=/opt/node22/lib/node_modules node tests/rsvp-browser.ts` — fixture tema, `next start`,
+Chromium 390 px: gönder/teşekkür (yes/no), ikinci yanıt, sunucu hata mesajı, kapalı form, önizlemede gönderim yok,
+CSP/konsol hatası yok. Ekran görüntüleri `$RSVP_SHOTS_DIR`'e (varsayılan geçici klasör).
+
 ## Güvenlik özeti
 
 - İçerik → HTML: yalnız metin düğümü/öznitelik değeri (parse5 serileştirici kaçışlar); `<script>`/`<style>` içine
@@ -188,4 +299,7 @@ Taslak kayıt geçersiz olabilir (panelde yazarken); `publishSite()` geçersiz i
 - Supabase adaptörü, Vercel yayını (kullanıcı onayı), panel, RSVP formu, `/start` → G039–G045.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir.
-- `local` adaptör tek süreç içindir; RSVP hız sınırı (G042) için kalıcı depo gerekecek.
+- `local` adaptör tek süreç içindir. RSVP hız sınırı da süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
+  örnek olacağı için G043 kalıcı bir `RateLimiter` (Supabase tablo/RPC) yazıp `setRsvpRateLimiter()` ile bağlamalı.
+- RSVP: yanıt silme/düzeltme yok (adaptörde `deleteRsvp` yok); çifte e-posta bildirimi yok (sağlayıcı seçilmedi);
+  misafir verisi için gizlilik metni yayından önce gerekli.

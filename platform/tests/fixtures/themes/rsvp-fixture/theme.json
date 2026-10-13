@@ -1,0 +1,12 @@
+{
+  "id": "rsvp-fixture",
+  "name": "RSVP form contract fixture (test scaffolding, not a design)",
+  "version": "0.1.0",
+  "internal": true,
+  "pages": {
+    "index": "index.html",
+    "rsvp": "rsvp.html"
+  },
+  "photos": {},
+  "rsvp": { "max_guests": 6 }
+}

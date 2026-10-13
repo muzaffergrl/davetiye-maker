@@ -1,0 +1,152 @@
+// Guest side of RSVP: form status and reply submission for a PUBLISHED site.
+// Framework-free (returns {status, body, headers}); app/api/rsvp/[slug]/route.ts turns that into a Response.
+//
+// Order of checks for a reply:
+//   1. per-IP rate limit (every POST counts)        -> 429 rate_limited
+//   2. site exists and is published                 -> 404 not_found
+//   3. form open (deadline / rsvp.method "none")    -> 403 closed
+//   4. honeypot filled                              -> 200 success, nothing stored
+//   5. field validation                             -> 400 invalid (+ fields)
+//   6. identical reply in the last few minutes      -> 200 success, stored once
+//   7. per-site rate limit (stored replies count)   -> 429 busy
+//   8. store                                        -> 200 success
+// Responses never contain other guests' data, ids or counts.
+
+import type { DataAdapter, RsvpInput, RsvpRecord } from '../data/types.ts';
+import { canPreview } from '../sites.ts';
+import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
+import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
+import { closedMessage, rsvpWindow } from './deadline.ts';
+import { getRsvpRateLimiter, ipBucket, type RateLimiter } from './rate-limit.ts';
+import { parseSubmission, isHoneypotFilled } from './validate.ts';
+
+export type RsvpState = 'success' | 'closed' | 'error';
+export type RsvpErrorCode = 'not_found' | 'invalid' | 'rate_limited' | 'busy' | 'too_large' | 'unsupported' | 'server';
+
+export interface RsvpResult {
+  status: number;
+  body: Record<string, unknown>;
+  headers?: Record<string, string>;
+}
+
+export interface GuestContext {
+  adapter: DataAdapter;
+  /** Defaults to the shared limiter (getRsvpRateLimiter). */
+  limiter?: RateLimiter;
+  limits?: RsvpLimits;
+  now?: Date;
+  /** Client IP (see clientIp in http.ts); null/empty share one "unknown" bucket. */
+  ip?: string | null;
+}
+
+export const MESSAGES = {
+  success: 'Thank you! Your reply has been sent.',
+  not_found: 'This RSVP form is not available.',
+  rate_limited: 'Too many replies from this connection. Please wait a few minutes and try again.',
+  busy: 'This form is very busy right now. Please try again in a few minutes.',
+  too_large: 'Your reply is too long. Please shorten your message and try again.',
+  unsupported: 'Please send your reply from the RSVP page.',
+  server: 'Something went wrong. Please try again in a moment.',
+} as const;
+
+export function errorResult(status: number, code: RsvpErrorCode, extra: Record<string, unknown> = {}, headers?: Record<string, string>): RsvpResult {
+  return { status, body: { ok: false, state: 'error', code, message: MESSAGES[code as keyof typeof MESSAGES] ?? MESSAGES.server, ...extra }, headers };
+}
+
+const SUCCESS: RsvpResult = { status: 200, body: { ok: true, state: 'success', message: MESSAGES.success } };
+
+function success(): RsvpResult {
+  return structuredClone(SUCCESS);
+}
+
+function retryAfter(ms: number): Record<string, string> {
+  return { 'Retry-After': String(Math.max(1, Math.ceil(ms / 1000))) };
+}
+
+async function publishedSite(adapter: DataAdapter, slug: string) {
+  if (!isValidSlugFormat(slug) || isReservedSlug(slug)) return null;
+  const site = await adapter.getSiteBySlug(slug);
+  if (!site || site.status !== 'published' || !site.publishedContent) return null;
+  return site;
+}
+
+/**
+ * Public form status: is the form open, until when, and the guest cap.
+ * With a valid preview key the DRAFT content is used (so the panel preview shows the right state);
+ * replies are never accepted in preview.
+ */
+export async function getRsvpStatus(ctx: GuestContext, slug: string, previewKey?: string | null): Promise<RsvpResult> {
+  let site = await publishedSite(ctx.adapter, slug);
+  let content = site?.publishedContent ?? null;
+  let preview = false;
+  if (previewKey) {
+    const any = isValidSlugFormat(slug) && !isReservedSlug(slug) ? await ctx.adapter.getSiteBySlug(slug) : null;
+    if (any && canPreview(any, previewKey)) {
+      site = any;
+      content = any.content;
+      preview = true;
+    }
+  }
+  if (!site || !content) return errorResult(404, 'not_found');
+  const w = rsvpWindow(content, ctx.now ?? new Date());
+  return {
+    status: 200,
+    body: {
+      ok: true,
+      open: w.open,
+      reason: w.reason,
+      message: w.open ? null : closedMessage(w),
+      closesAt: w.closesAt,
+      deadline: w.deadlineDisplay,
+      maxGuests: await themeMaxGuests(site.theme),
+      preview,
+    },
+  };
+}
+
+function sameReply(a: RsvpRecord, b: RsvpInput): boolean {
+  return (
+    a.name === b.name &&
+    (a.email ?? null) === (b.email ?? null) &&
+    a.attending === b.attending &&
+    a.guests === b.guests &&
+    (a.message ?? null) === (b.message ?? null)
+  );
+}
+
+/** Handles one guest reply. `body` is the parsed JSON object. */
+export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown): Promise<RsvpResult> {
+  const limiter = ctx.limiter ?? getRsvpRateLimiter();
+  const limits = ctx.limits ?? DEFAULT_RSVP_LIMITS;
+  const now = ctx.now ?? new Date();
+
+  const perIp = await limiter.hit(`rsvp:ip:${ipBucket(ctx.ip ?? '')}`, limits.perIp);
+  if (!perIp.allowed) return errorResult(429, 'rate_limited', {}, retryAfter(perIp.retryAfterMs));
+
+  const site = await publishedSite(ctx.adapter, slug);
+  if (!site) return errorResult(404, 'not_found');
+
+  const w = rsvpWindow(site.publishedContent, now);
+  if (!w.open) {
+    return { status: 403, body: { ok: false, state: 'closed', code: 'closed', reason: w.reason, message: closedMessage(w) } };
+  }
+
+  const fields = body && typeof body === 'object' && !Array.isArray(body) ? (body as Record<string, unknown>) : {};
+  if (isHoneypotFilled(fields)) return success(); // looks the same as a real reply; nothing stored
+
+  const parsed = parseSubmission(fields, await themeMaxGuests(site.theme));
+  if (!parsed.ok) {
+    const first = Object.values(parsed.errors)[0];
+    return { status: 400, body: { ok: false, state: 'error', code: 'invalid', message: first, fields: parsed.errors } };
+  }
+
+  const recent = await ctx.adapter.listRsvps(site.id);
+  const since = now.getTime() - DUPLICATE_WINDOW_MS;
+  if (recent.some((r) => Date.parse(r.createdAt) >= since && sameReply(r, parsed.value))) return success();
+
+  const perSite = await limiter.hit(`rsvp:site:${site.id}`, limits.perSite);
+  if (!perSite.allowed) return errorResult(429, 'busy', {}, retryAfter(perSite.retryAfterMs));
+
+  await ctx.adapter.saveRsvp(site.id, parsed.value);
+  return success();
+}
