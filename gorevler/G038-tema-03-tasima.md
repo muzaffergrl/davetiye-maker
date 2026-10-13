@@ -2,7 +2,7 @@
 id: G038
 baslik: Tasarım 03 Blush Garden Rose'u platform teması yap
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-platform
 oncelik: 1
 bagimli: [G035, G037]
@@ -108,3 +108,4 @@ claude-qa — gerçek telefonda (iOS Safari + Android Chrome) tema + RSVP formu 
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 inceleme bulguları düzeltildi (yer tutucu etiketi, link blokları, RSVP kapalı, kısa telefon, alt, yorumlar) — wf-fix
 - 2026-10-13 son denetim (wf-audit, origin/main edca755): npm ci, npm test 197/197, typecheck, build + trace-check, seed temiz; 390 px duman testi gerçek temayla 42/42 (misafir zarf→home→story→details→RSVP, alıcı /start→panel→foto→yayınla→QR→yanıt panelde; `tests/final-smoke.ts`, `previews/final/`); tools/tests 6/6; gorev.py kontrol temiz. Canlı Vercel yeniden yayını ve gerçek telefon denenmedi.
+- 2026-10-13 entegratör onayladı

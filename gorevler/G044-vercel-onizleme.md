@@ -2,7 +2,7 @@
 id: G044
 baslik: Vercel önizleme yayını (demo site + panel)
 rol: claude-tarayici
-durum: inceleme
+durum: bitti
 alan: claude-local-1
 oncelik: 2
 bagimli: [G048]
@@ -45,3 +45,4 @@ Kullanıcı demo siteyi ve paneli telefonundan açabilsin. Kullanıcı onay verd
 - 2026-10-13 G048 onaylandı; G038 incelemesi sürerken önizleme yayını yapılabilir (bağımlılık yalnız G048)
 - 2026-10-13 alindi: claude-local-1
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 entegratör onayladı

@@ -3,9 +3,9 @@
   "brand_name": null,
   "user_language": "tr",
   "product_language": "en",
-  "delivery_platform": "Canva",
+  "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-09",
+  "last_updated": "2026-10-13",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -522,5 +522,49 @@
   "blockers": {
     "canva_ui": "Karar A (2026-10-09, hesap Pro): Claude kullanıcının bilgisayarında tarayıcıyla yapar — rol claude-tarayici, GA/GB görevleri. Kanıtlar: docs/08_CANVA_UI_BLOKAJ.md"
   },
-  "canva_account_plan": "Pro (kullanıcı beyanı 2026-10-09)"
+  "canva_account_plan": "Pro (kullanıcı beyanı 2026-10-09)",
+  "platform": {
+    "doc": "docs/10_SITE_PLATFORMU.md",
+    "code": "platform/ (Next.js 16)",
+    "hosting": {
+      "provider": "vercel",
+      "team": "daimonflora-gmailcoms-projects",
+      "project": "davetiye-platform",
+      "project_id": "prj_WRKdVHmsou7QU2B5UhgO8uksAobj",
+      "region": "iad1",
+      "production_url": "https://davetiye-platform-five.vercel.app",
+      "git_integration": false,
+      "deployed_commit": "c5f512a (pre-review); review fixes edca755+ NOT yet deployed (G049)"
+    },
+    "data": {
+      "adapter": "blob",
+      "store": "davetiye-platform-data (private)",
+      "supabase": "not used (docs/10 §2c)"
+    },
+    "themes": {
+      "blush-garden-rose": {
+        "design": "03",
+        "status": "functional_pilot",
+        "demo_site": "/clara-and-julian"
+      }
+    },
+    "tests": {
+      "platform_npm_test": "197/197 (2026-10-13)",
+      "live_e2e": "30/30 by claude-local-1 on pre-review build"
+    },
+    "not_tested": [
+      "real iPhone/Android",
+      "multi-instance rate limits",
+      "cost/load"
+    ],
+    "presale_blockers": [
+      "brand name",
+      "support email",
+      "privacy notice (needs shop legal identity)",
+      "hosting duration/renewal policy",
+      "price",
+      "Etsy order verification (order-number squatting)"
+    ],
+    "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)"
+  }
 }

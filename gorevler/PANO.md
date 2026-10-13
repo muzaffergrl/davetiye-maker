@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 1 · inceleme 5 · blokaj 296 · bitti 19 · toplam 359
+Özet: hazir 39 · alindi 1 · inceleme 0 · blokaj 296 · bitti 24 · toplam 360
 
 ## claude-canva
 
@@ -102,15 +102,14 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G049` p1 — Canlıya inceleme düzeltmelerini yayınla + canlı kontrol betiklerini repoya al → `gorevler/G049-yeniden-yayin-canli-kontrol.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (43)**
+**Üzerinde çalışılan / incelemede / blokaj (42)**
 
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
-- `G044` inceleme · claude-local-1 — Vercel önizleme yayını (demo site + panel)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
 - `G007` blokaj · - — Tasarım 02 — kılavuz ve ilandaki [VERIFY] maddelerini gerçek arayüzde kapat
 - `GA01` blokaj · - — Tasarım 01 Olive & Ivory — video animasyonu + video template link (Canva arayüzü)
@@ -152,21 +151,17 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 0 · Biten: 0
+Bağımlılık bekleyen: 0 · Biten: 1
 
 ## claude-kod
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G046` p2 — Tema standardı belgesi + GPT website parça listesi (Paket W) → `gorevler/G046-tema-standardi.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (85)**
+**Üzerinde çalışılan / incelemede / blokaj (81)**
 
-- `G038` inceleme · wf-platform — Tasarım 03 Blush Garden Rose'u platform teması yap
-- `G039` inceleme · wf-platform — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla
-- `G042` inceleme · wf-platform — RSVP — misafir formu, kayıt, panelde liste + CSV
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G045` inceleme · wf-platform — /start sahiplenme akışı — sipariş no + e-posta → taslak site + düzenleme linki
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -248,7 +243,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 20 · Biten: 12
+Bağımlılık bekleyen: 19 · Biten: 16
 
 ## claude-metin
 

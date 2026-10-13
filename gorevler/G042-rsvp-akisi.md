@@ -2,7 +2,7 @@
 id: G042
 baslik: RSVP — misafir formu, kayıt, panelde liste + CSV
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-platform
 oncelik: 2
 bagimli: [G037]
@@ -88,3 +88,4 @@ tablosuna `deleteRsvp`; isteğe bağlı: motor `[data-rsvp-form]` gördüğünde
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 inceleme bulguları düzeltildi (site+IP sınırı, beklemede yanıtlar + silme, DST, form.js erişilebilirlik) — wf-fix
 - 2026-10-13 son denetim (wf-audit, origin/main edca755): npm ci, npm test 197/197, typecheck, build + trace-check, seed temiz; 390 px duman testi gerçek temayla 42/42 (misafir zarf→home→story→details→RSVP, alıcı /start→panel→foto→yayınla→QR→yanıt panelde; `tests/final-smoke.ts`, `previews/final/`); tools/tests 6/6; gorev.py kontrol temiz. Canlı Vercel yeniden yayını ve gerçek telefon denenmedi.
+- 2026-10-13 entegratör onayladı
