@@ -1,0 +1,7 @@
+# G044: never upload local data (seed-keys.json holds plain edit keys), build output, deps or large previews.
+.data
+.next
+node_modules
+previews
+*.tsbuildinfo
+.env*

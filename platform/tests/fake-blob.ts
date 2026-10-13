@@ -9,6 +9,9 @@
 //        ifMatch + allowOverwrite:false -> BlobError (contradictory, checked client-side by the SDK);
 //        addRandomSuffix defaults to false; returns {url, downloadUrl, pathname, contentType, contentDisposition, etag}.
 //  get   null when missing; {statusCode: 200, stream, headers, blob: {…, etag, uploadedAt}}; ifNoneMatch -> 304.
+//        Bodies of `weakEtagMinBytes` or more come back with a WEAK etag (W/"…") while put() and
+//        ifMatch use the strong one — observed on the real private store (G044 smoke test, 2026-10-13:
+//        a ~6 KB site JSON read back as W/"…", a small index file as "…"; ifMatch with W/"…" -> 412).
 //        With `staleCdn` on, reads WITHOUT useCache:false may return the copy cached at the first read
 //        (the documented "up to 60 seconds" lag after an overwrite); useCache:false always reads origin
 //        (the SDK only honours it for private blobs).
@@ -77,6 +80,8 @@ export interface FakeBlobOptions {
   staleCdn?: boolean;
   /** Random 0..n ms delay before and after each operation, so concurrent calls interleave. */
   jitterMs?: number;
+  /** get() returns W/"…" for bodies at least this big (default 1024, like the real store; Infinity = never). */
+  weakEtagMinBytes?: number;
   now?: () => number;
 }
 
@@ -87,6 +92,7 @@ export class FakeBlobStore {
   readonly calls: FakeCall[] = [];
   staleCdn: boolean;
   jitterMs: number;
+  weakEtagMinBytes: number;
   now: () => number;
   /** Runs inside put() before the write is applied (tests use it to inject a concurrent writer). */
   beforePut: ((pathname: string, body: string | Buffer, options: PutCommandOptions) => Promise<void> | void) | null = null;
@@ -100,6 +106,7 @@ export class FakeBlobStore {
     this.access = opts.access ?? 'private';
     this.staleCdn = opts.staleCdn ?? false;
     this.jitterMs = opts.jitterMs ?? 0;
+    this.weakEtagMinBytes = opts.weakEtagMinBytes ?? 1024;
     this.now = opts.now ?? Date.now;
   }
 
@@ -202,7 +209,8 @@ export class FakeBlobStore {
       else if (obj) this.cdn.set(pathname, obj);
     }
     if (!obj) return null;
-    const headers = new Headers({ etag: obj.etag, 'content-type': obj.contentType, 'last-modified': obj.uploadedAt.toUTCString() });
+    const etag = obj.bytes.length >= this.weakEtagMinBytes ? `W/${obj.etag}` : obj.etag;
+    const headers = new Headers({ etag, 'content-type': obj.contentType, 'last-modified': obj.uploadedAt.toUTCString() });
     const base = {
       url: this.url(pathname),
       downloadUrl: `${this.url(pathname)}?download=1`,
@@ -210,9 +218,9 @@ export class FakeBlobStore {
       contentDisposition: `attachment; filename="${pathname.split('/').pop()}"`,
       cacheControl: `public, max-age=${obj.cacheControlMaxAge}`,
       uploadedAt: obj.uploadedAt,
-      etag: obj.etag,
+      etag,
     };
-    if (options.ifNoneMatch && options.ifNoneMatch === obj.etag) {
+    if (options.ifNoneMatch && options.ifNoneMatch.replace(/^W\//, '') === obj.etag) {
       return { statusCode: 304, stream: null, headers, blob: { ...base, contentType: null, size: null } } as unknown as GetBlobResult;
     }
     const bytes = obj.bytes.slice();

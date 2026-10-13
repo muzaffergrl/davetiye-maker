@@ -229,12 +229,16 @@ export class BlobAdapter implements DataAdapter {
     }
   }
 
-  /** Latest version from origin storage (never the CDN copy), or null. */
+  /**
+   * Latest version from origin storage (never the CDN copy), or null.
+   * The store answers larger (compressed) reads with a weak ETag (W/"…") but put/del ifMatch only accept
+   * the strong form, so the W/ prefix is dropped (G044 smoke test on the real private store).
+   */
   private async readJson<T>(pathname: string): Promise<Read<T> | null> {
     const res = await this.#client.get(pathname, { access: ACCESS, token: this.#token, useCache: false });
     if (!res || res.statusCode !== 200) return null;
     const text = new TextDecoder().decode(await readAll(res.stream));
-    return { data: JSON.parse(text) as T, etag: res.blob.etag, uploadedAt: res.blob.uploadedAt };
+    return { data: JSON.parse(text) as T, etag: res.blob.etag.replace(/^W\//, ''), uploadedAt: res.blob.uploadedAt };
   }
 
   private putJson(pathname: string, value: unknown, cond: { allowOverwrite: false } | { ifMatch: string }): Promise<PutBlobResult> {
