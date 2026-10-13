@@ -2,8 +2,8 @@
 id: G401
 baslik: Tasarım 01 Olive & Ivory — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-tema01
 oncelik: 2
 bagimli: [G201, G038, G046, G052]
 yazar: [platform/themes/olive-ivory/, platform/tests/theme-olive-ivory.test.ts, platform/previews/g401/]
@@ -40,3 +40,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-13 alindi: wf-tema01

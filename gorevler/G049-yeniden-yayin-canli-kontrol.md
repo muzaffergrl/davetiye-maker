@@ -18,7 +18,8 @@ düzeltmeleri, 197/197 test) yayınlanmadı. Local oturum yayınlar ve canlıda 
 2. G044'teki canlı uçtan uca ve gerçek Blob duman testi betiklerini `platform/scripts/live-check.mjs` ve `platform/scripts/blob-smoke.mjs`
    olarak repoya al (anahtar/URL değerleri ortam değişkeninden; repoya değer yazılmaz).
 3. `seed.ts`: Windows'ta `python3` yoksa `python`/`py -3` dene.
-4. Production'a yeniden yayın (`vercel deploy --prod`), sonra iki betiği canlıya karşı çalıştır; sonuçları Sonuç'a yaz.
+4. Vercel'de `PLATFORM_PUBLIC_URL=https://davetiye-platform-five.vercel.app` (Production + Preview) ortam değişkenini ekle
+   (og:image ve .ics mutlak adresleri için). Sonra production'a yeniden yayın (`vercel deploy --prod`), sonra iki betiği canlıya karşı çalıştır; sonuçları Sonuç'a yaz.
 5. Demo site `/clara-and-julian` canlıda en güncel temayla açılıyor mu (envelope → home → story → details → RSVP) — telefon boyutunda.
 
 ## Bitti sayılması için
