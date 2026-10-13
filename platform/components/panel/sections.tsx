@@ -4,8 +4,9 @@
 
 import { useEffect, useState } from 'react';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
-import type { Locale } from '../../lib/content/types.ts';
-import { OPTIONAL_BLOCK_LABELS, withPartnerName, type OptionalBlockKey } from '../../lib/panel/model.ts';
+import type { Locale, RsvpQuestion } from '../../lib/content/types.ts';
+import { CONTENT_LIMITS } from '../../lib/content/validate.ts';
+import { newQuestionId, OPTIONAL_BLOCK_LABELS, withPartnerName, type OptionalBlockKey } from '../../lib/panel/model.ts';
 import type { PanelApi } from './api.ts';
 import { DateField, IssueList, moveItem, RowActions, SelectField, Switch, TextField, TimeField, UrlField, usePanelContext } from './fields.tsx';
 import styles from './panel.module.css';
@@ -372,12 +373,188 @@ export function DetailsFields({ optionalBlocks }: { optionalBlocks: readonly Opt
 
 // ---------------------------------------------------------------------------------------------
 
+/** Questions & answers (content faq, G051): add, edit, reorder, remove; shown while optional_blocks.faq is on. */
+export function FaqFields() {
+  const { content, edit, issuesAt, locked } = usePanelContext();
+  const items = content.faq ?? [];
+  const on = content.optional_blocks?.faq === true;
+  return (
+    <>
+      <Switch
+        id="faq-show"
+        label="Show on the website"
+        hint={on ? undefined : 'Turn on to show your questions and answers to guests.'}
+        checked={on}
+        onChange={(v) => edit((c) => void (c.optional_blocks = { ...(c.optional_blocks ?? {}), faq: v }))}
+      />
+      <p className={styles.hint}>
+        Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {CONTENT_LIMITS.faqItems} questions.
+      </p>
+      {items.map((item, i) => (
+        <fieldset key={i} className={styles.group} data-faq-row={i}>
+          <legend className={styles.groupTitle}>Question {i + 1}</legend>
+          <TextField
+            path={`faq.${i}.q`}
+            label="Question"
+            maxLength={CONTENT_LIMITS.faqQuestion}
+            placeholder="Is there parking at the venue?"
+            value={item.q}
+            onChange={(v) => edit((c) => void (c.faq![i].q = v))}
+          />
+          <TextField
+            path={`faq.${i}.a`}
+            label="Answer"
+            multiline
+            rows={3}
+            maxLength={CONTENT_LIMITS.faqAnswer}
+            value={item.a}
+            onChange={(v) => edit((c) => void (c.faq![i].a = v))}
+          />
+          <RowActions
+            index={i}
+            count={items.length}
+            noun="question"
+            onMove={(a, b) => edit((c) => void (c.faq = moveItem(c.faq!, a, b)))}
+            onRemove={(n) => edit((c) => void c.faq!.splice(n, 1))}
+          />
+        </fieldset>
+      ))}
+      <IssueList issues={issuesAt('faq')} />
+      {items.length < CONTENT_LIMITS.faqItems ? (
+        <button
+          type="button"
+          className={styles.secondaryButton}
+          disabled={locked}
+          data-add-faq
+          onClick={() => edit((c) => void (c.faq = [...(c.faq ?? []), { q: '', a: '' }]))}
+        >
+          Add a question
+        </button>
+      ) : (
+        <p className={styles.hint}>This section holds {CONTENT_LIMITS.faqItems} questions at most.</p>
+      )}
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+
+const QUESTION_TYPES = [
+  { value: 'choice', label: 'Guests pick one choice' },
+  { value: 'text', label: 'Guests write a short answer' },
+];
+
+/**
+ * The couple's own questions in the reply form (content rsvp.questions, G051), e.g. a meal choice.
+ * Each question keeps its id for good: answers are stored under it, so editing or reordering
+ * questions never mixes up answers already received.
+ */
+function QuestionFields() {
+  const { content, edit, issuesAt, locked } = usePanelContext();
+  const questions = content.rsvp?.questions ?? [];
+  const off = content.rsvp?.method === 'none';
+  const change = (i: number, fn: (q: RsvpQuestion) => void) => edit((c) => void fn(c.rsvp.questions![i]));
+  const add = () =>
+    edit((c) => {
+      const list = c.rsvp.questions ?? [];
+      c.rsvp = { ...c.rsvp, questions: [...list, { id: newQuestionId(list.map((q) => q.id)), label: '', type: 'choice', options: ['', ''] }] };
+    });
+  return (
+    <div data-rsvp-questions>
+      <h3 className={styles.subTitle}>Questions for your guests</h3>
+      <p className={styles.hint}>
+        Optional, up to {CONTENT_LIMITS.rsvpQuestions}: for example a meal choice. Guests who accept answer them in the reply form; you see the
+        answers with their reply and in the CSV.
+      </p>
+      {off ? <p className={styles.note}>Replies on the website are off, so guests do not see these questions.</p> : null}
+      {questions.map((q, i) => (
+        <fieldset key={q.id || i} className={styles.group} data-question-row={i}>
+          <legend className={styles.groupTitle}>Question {i + 1}</legend>
+          <TextField
+            path={`rsvp.questions.${i}.label`}
+            label="Question"
+            maxLength={CONTENT_LIMITS.questionLabel}
+            placeholder="Meal choice"
+            value={q.label}
+            onChange={(v) => change(i, (x) => void (x.label = v))}
+          />
+          <SelectField
+            path={`rsvp.questions.${i}.type`}
+            label="Answer"
+            value={q.type}
+            options={QUESTION_TYPES}
+            onChange={(v) =>
+              change(i, (x) => {
+                x.type = v === 'text' ? 'text' : 'choice';
+                if (x.type === 'text') delete x.options;
+                else if (!x.options?.length) x.options = ['', ''];
+              })
+            }
+          />
+          {q.type === 'choice'
+            ? (q.options ?? []).map((o, j) => (
+                <div key={j} className={styles.choiceRow}>
+                  <TextField
+                    path={`rsvp.questions.${i}.options.${j}`}
+                    label={`Choice ${j + 1}`}
+                    maxLength={CONTENT_LIMITS.questionOption}
+                    value={o}
+                    onChange={(v) => change(i, (x) => void (x.options![j] = v))}
+                  />
+                  <button
+                    type="button"
+                    className={`${styles.smallButton} ${styles.dangerText}`}
+                    disabled={locked}
+                    aria-label={`Remove choice ${j + 1} of question ${i + 1}`}
+                    onClick={() => change(i, (x) => void x.options!.splice(j, 1))}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))
+            : null}
+          <IssueList issues={[...issuesAt(`rsvp.questions.${i}.options`), ...issuesAt(`rsvp.questions.${i}.id`)]} />
+          {q.type === 'choice' && (q.options?.length ?? 0) < CONTENT_LIMITS.questionOptions ? (
+            <div className={styles.buttonRow}>
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                disabled={locked}
+                onClick={() => change(i, (x) => void (x.options = [...(x.options ?? []), '']))}
+              >
+                Add a choice
+              </button>
+            </div>
+          ) : null}
+          <RowActions
+            index={i}
+            count={questions.length}
+            noun="form question"
+            onMove={(a, b) => edit((c) => void (c.rsvp.questions = moveItem(c.rsvp.questions!, a, b)))}
+            onRemove={(n) => edit((c) => void c.rsvp.questions!.splice(n, 1))}
+          />
+        </fieldset>
+      ))}
+      <IssueList issues={issuesAt('rsvp.questions')} />
+      {questions.length < CONTENT_LIMITS.rsvpQuestions ? (
+        <button type="button" className={styles.secondaryButton} disabled={locked} onClick={add} data-add-question>
+          Add a question
+        </button>
+      ) : null}
+      {questions.length ? <p className={styles.hint}>Changing or removing a question later keeps the answers you already have.</p> : null}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+
 interface ReplyEntry {
   id: string;
   name: string;
   attending: boolean;
   guests: number;
   message: string | null;
+  answers?: Array<{ id: string; question: string; answer: string }>;
   createdAt: string;
   held?: boolean;
 }
@@ -393,6 +570,11 @@ function ReplyLine({ r }: { r: ReplyEntry }) {
   return (
     <>
       <strong>{r.name}</strong> — {r.attending ? `yes, ${r.guests} ${r.guests === 1 ? 'guest' : 'guests'}` : 'no'}
+      {(r.answers ?? []).map((a) => (
+        <span key={a.id} className={styles.replyAnswer} data-reply-answer>
+          {a.question}: <strong>{a.answer}</strong>
+        </span>
+      ))}
       {r.message ? <span className={styles.replyMessage}>“{r.message}”</span> : null}
     </>
   );
@@ -548,7 +730,7 @@ function Replies({ api, published }: { api: PanelApi; published: boolean }) {
 }
 
 export function RsvpFields({ api, published }: { api: PanelApi; published: boolean }) {
-  const { content, edit } = usePanelContext();
+  const { content, edit, fields } = usePanelContext();
   const deadline = content.rsvp?.deadline;
   const long = formatDateLong(deadline, content.locale);
   return (
@@ -568,6 +750,7 @@ export function RsvpFields({ api, published }: { api: PanelApi; published: boole
         checked={content.rsvp?.method !== 'none'}
         onChange={(on) => edit((c) => void (c.rsvp = { ...c.rsvp, method: on ? null : 'none' }))}
       />
+      {fields.rsvpQuestions ? <QuestionFields /> : null}
       <Replies api={api} published={published} />
     </>
   );

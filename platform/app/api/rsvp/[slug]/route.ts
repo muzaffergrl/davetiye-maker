@@ -1,6 +1,6 @@
 // /api/rsvp/<slug> — guest side (public).
 //   GET   form status {open, reason, message, closesAt, deadline, maxGuests, preview}; ?preview=<key> reads the draft
-//   POST  one reply, JSON body {name, email, attending, guests, message, website(honeypot)}
+//   POST  one reply, JSON body {name, email, attending, guests, message, answers?{<question id>: value} (G051), website(honeypot)}
 // Used by /rsvp/form.js (the theme form contract, README "RSVP").
 import { getDataAdapter } from '../../../../lib/data/index.ts';
 import { BODY_MAX_BYTES } from '../../../../lib/rsvp/config.ts';

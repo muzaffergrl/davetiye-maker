@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Blush Garden Rose · page 2 — home (/<slug>/home): hero (the card from the envelope with the hero photo slot, names,
-     date, live countdown), invitation card (comp scene 4), teasers. Works when opened directly.
+     date, live countdown), invitation card (comp scene 4) + add to calendar (G051), teasers. Works when opened directly.
      Personal text: none — [data-field] / [data-text] / [data-repeat] / [data-photo] are filled on the server.
      Lines without a marker are design copy. Visuals: GPT parts in img/. -->
 <html lang="en" class="no-js">
@@ -91,6 +91,11 @@
       <div class="reply" data-step="cta" data-a="rise" data-if="!rsvp.method">
         <p data-if="rsvp.deadline">Kindly reply by <span data-field="rsvp.deadline"></span></p>
         <a class="btn" href="rsvp.html">RSVP</a>
+      </div>
+      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+      <div class="cal" data-step="cal" data-a="rise">
+        <p class="kicker">Add to your calendar</p>
+        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
       </div>
     </div>
   </section>

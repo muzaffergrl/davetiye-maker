@@ -39,15 +39,16 @@ const MOTION = {
   // page entrances: scene → [[step, delay ms], …] — deliberate order, never all at once
   scenes: {
     'home-hero':     [['florals', 0], ['card', 150], ['names', 650], ['date', 1500], ['place', 1700], ['countdown', 1950], ['cue', 2500]],
-    'home-invite':   [['card', 0], ['host', 650], ['name1', 850], ['amp', 1350], ['name2', 1500], ['request', 2050], ['date', 2300], ['venue', 2550], ['cta', 2800]],
+    'home-invite':   [['card', 0], ['host', 650], ['name1', 850], ['amp', 1350], ['name2', 1500], ['request', 2050], ['date', 2300], ['venue', 2550], ['cta', 2800], ['cal', 3050]],
     'home-teasers':  [['title', 0], ['t1', 300], ['t2', 600], ['t3', 900]],
     'home-foot':     [['sign', 0], ['links', 500]],
     'story-head':    [['florals', 0], ['kicker', 350], ['title', 550], ['divider', 1200], ['lede', 1450]],
     'story-frame':   [['frame', 0], ['caption', 650]],
     'story-next':    [['florals', 0], ['link', 300]],
     'details-head':  [['florals', 0], ['kicker', 350], ['title', 550], ['divider', 1200]],
-    'details-card':  [['card', 0], ['title', 600], ['divider', 1100], ['row', 1300], ['dress', 2300]],
+    'details-card':  [['card', 0], ['title', 600], ['divider', 1100], ['row', 1300], ['dress', 2300], ['cal', 2600]],
     'details-block': [['title', 0], ['photo', 250], ['body', 650], ['action', 950]],
+    'details-faq':   [['title', 0], ['divider', 650], ['item', 900]],
     'rsvp-card':     [['florals', 0], ['card', 150], ['title', 750], ['kicker', 1250], ['deadline', 1400], ['button', 1700], ['love', 2050], ['sign', 2200]],
     'rsvp-form':     [['form', 0]],
     'rsvp-closing':  [['bow', 0], ['title', 600], ['line', 1100], ['meta', 1350]]
@@ -501,6 +502,8 @@ const DEV_CONTENT = {
         return;
       }
       if (d.text !== undefined) { el.textContent = fill(d.text, scope); return; }
+      // "Add to calendar" needs the platform (/<slug>/event.ics, Google link): in this preview it only shows the notice
+      if (d.calendar !== undefined) { el.setAttribute('href', '#'); el.dataset.urlMissing = ''; }
       if (d.photo !== undefined) photoState(el, get(PHOTO_SOURCES[d.photo] || ''));
       for (const name of Object.keys(d)) {
         if (!name.startsWith('attr') || name.length < 5) continue;

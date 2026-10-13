@@ -28,6 +28,23 @@ export interface ScheduleItem {
 
 export type UrlKey = 'website' | 'rsvp_form' | 'map' | 'registry' | 'accommodation';
 
+/** A custom question of the guest reply form (G051). `id` is stable: stored answers refer to it. */
+export interface RsvpQuestion {
+  /** [a-z0-9][a-z0-9_-]{0,23} — never shown; answers are stored under it. */
+  id: string;
+  /** The question as guests read it, e.g. "Meal choice". */
+  label: string;
+  /** "choice": pick one of `options` (at least 2); "text": a short written answer (no options). */
+  type: 'choice' | 'text';
+  options?: string[];
+}
+
+/** One question and answer of the FAQ block (G051). */
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
 export interface ContentRecord {
   record_kind: RecordKind;
   event_type: EventType;
@@ -44,7 +61,7 @@ export interface ContentRecord {
   venue: Venue;
   schedule: ScheduleItem[];
   dress_code?: string | null;
-  rsvp: { deadline: string; method?: RsvpMethod };
+  rsvp: { deadline: string; method?: RsvpMethod; questions?: RsvpQuestion[] };
   urls: Partial<Record<UrlKey, string | null>>;
   media: {
     hero_portrait?: string | null;
@@ -60,4 +77,6 @@ export interface ContentRecord {
     intro?: string;
     items?: Array<{ caption: string; text?: string }>;
   };
+  /** Optional questions & answers (shown while optional_blocks.faq is on). */
+  faq?: FaqItem[];
 }

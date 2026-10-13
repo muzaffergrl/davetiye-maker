@@ -24,7 +24,7 @@ import { IssueList, PanelContext, Section, type PanelContextValue } from './fiel
 import { PhotosSection } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
 import { QrCode } from './QrCode.tsx';
-import { CoupleFields, DateFields, DetailsFields, OptionalFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
+import { CoupleFields, DateFields, DetailsFields, FaqFields, OptionalFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
 import { Sheet } from './Sheet.tsx';
 import { usePanel, type SaveState } from './usePanel.ts';
 import styles from './panel.module.css';
@@ -84,7 +84,9 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
   // Not errors, but guests would notice: sample text from the demo, empty photo places, link blocks without a link.
   const notes = useMemo(() => prePublishNotes(content, theme), [content, theme]);
   const samples = useMemo(() => new Set(notes.sample.map((n) => n.path)), [notes]);
-  const noteCount = notes.sample.length + notes.photos.length + notes.links.length;
+  const noteCount = notes.sample.length + notes.photos.length + notes.links.length + notes.empty.length;
+  // Sections the design has a place for (G051: no questions & answers editor for a design without that list).
+  const sectionIds = useMemo(() => SECTION_IDS.filter((id) => id !== 'faq' || theme.fields.faq), [theme.fields.faq]);
   // Preview tabs: only the pages guests can open with this content (e.g. no Story tab while it is off).
   const visiblePages = useMemo(() => theme.pages.filter((p) => pageShown(theme.pageRules[p], content)), [theme, content]);
 
@@ -165,7 +167,13 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
       [content.dress_code ? 'dress code' : '', content.urls?.map ? 'map' : '', content.urls?.accommodation ? 'travel' : '', content.urls?.registry ? 'registry' : '']
         .filter(Boolean)
         .join(', ') || 'Dress code and links',
-    rsvp: content.rsvp?.method === 'none' ? 'Replies off' : `Reply by ${formatDate(content.rsvp?.deadline, content.locale) ?? '…'}`,
+    faq: `${content.faq?.length ?? 0} ${content.faq?.length === 1 ? 'question' : 'questions'}${blocks.faq === true ? '' : ' · off'}`,
+    rsvp:
+      content.rsvp?.method === 'none'
+        ? 'Replies off'
+        : `Reply by ${formatDate(content.rsvp?.deadline, content.locale) ?? '…'}${
+            content.rsvp?.questions?.length ? ` · ${content.rsvp.questions.length} ${content.rsvp.questions.length === 1 ? 'question' : 'questions'}` : ''
+          }`,
     optional: `${theme.optionalBlocks.filter((k) => blocks[k] === true).length} of ${theme.optionalBlocks.length} on`,
     photos: `${theme.photos.filter((s) => photoAt(content, s.source)).length} of ${theme.photos.length} added`,
   };
@@ -184,6 +192,8 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
         return <StoryFields onOpenOptional={() => goTo('optional_blocks')} />;
       case 'details':
         return <DetailsFields optionalBlocks={theme.optionalBlocks} />;
+      case 'faq':
+        return <FaqFields />;
       case 'rsvp':
         return <RsvpFields api={panel.api} published={meta.status === 'published'} />;
       case 'optional':
@@ -260,7 +270,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
             <IssueList issues={generalIssues} />
 
             <div className={styles.sections}>
-              {SECTION_IDS.map((id) => (
+              {sectionIds.map((id) => (
                 <Section
                   key={id}
                   id={id}
@@ -337,6 +347,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
             <NoteList title="Still sample text from the design" notes={notes.sample} onJump={goTo} />
             <NoteList title="Photo places without a photo" notes={notes.photos} onJump={goTo} />
             <NoteList title="Sections without a link" notes={notes.links} onJump={goTo} />
+            <NoteList title="Sections without content" notes={notes.empty} onJump={goTo} />
             <div className={styles.buttonRow}>
               <button type="button" className={styles.primaryButton} disabled={busy} onClick={() => void doPublish()} data-publish-anyway>
                 Publish anyway

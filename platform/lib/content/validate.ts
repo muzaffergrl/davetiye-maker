@@ -45,6 +45,38 @@ export const PLATFORM_PROVIDED_URLS = ['website', 'rsvp_form'] as const;
 /** Fictional / third-party targets that appeared in older visuals (same list as the Python tool). */
 export const FORBIDDEN_STRINGS = ['averyandjordan.com', '1234 Celebration Lane'];
 
+// Limits of the G051 lists, read from the schema (single source; the panel uses them for its inputs).
+const P = CONTENT_SCHEMA.properties;
+const QUESTION = P.rsvp.properties.questions.items.properties;
+export const CONTENT_LIMITS = {
+  faqItems: P.faq.maxItems,
+  faqQuestion: P.faq.items.properties.q.maxLength,
+  faqAnswer: P.faq.items.properties.a.maxLength,
+  rsvpQuestions: P.rsvp.properties.questions.maxItems,
+  questionLabel: QUESTION.label.maxLength,
+  questionOptions: QUESTION.options.maxItems,
+  questionOption: QUESTION.options.items.maxLength,
+} as const;
+
+/** Form of an RSVP question id (business rule, same regex in tools/validate_content.py). */
+export const QUESTION_ID_RE = /^[a-z0-9][a-z0-9_-]{0,23}$/;
+
+// "Blank" = only these characters (written out so the Python tool strips exactly the same set:
+// JS \s and Python str.isspace() differ on a few code points).
+const WS = '\\t\\n\\v\\f\\r \\x1c-\\x1f\\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\\ufeff';
+const BLANK_RE = new RegExp(`^[${WS}]*$`);
+const EDGE_WS_RE = new RegExp(`^[${WS}]+|[${WS}]+$`, 'g');
+
+/** True for a missing value or text made only of whitespace. */
+export function isBlank(value: unknown): boolean {
+  return typeof value !== 'string' || BLANK_RE.test(value);
+}
+
+/** Choice text compared case-insensitively without surrounding whitespace (duplicate check). */
+function choiceKey(value: string): string {
+  return value.replace(EDGE_WS_RE, '').toLowerCase();
+}
+
 type Schema = { readonly [key: string]: unknown };
 
 function jsonType(v: unknown): string {
@@ -197,6 +229,39 @@ function ruleIssues(record: Record<string, any>, opts: ValidateOptions): Validat
   if (blocks.dress_code && !record.dress_code) {
     warning('dress_code_empty', 'dress_code', 'The dress code section is on but the dress code is empty.');
   }
+
+  // FAQ (G051): a blank question or answer would show guests an empty line.
+  const faq: Array<Record<string, unknown>> = Array.isArray(record.faq) ? record.faq : [];
+  faq.forEach((item, i) => {
+    if (isBlank(item.q)) error('faq_question_empty', `faq.${i}.q`, 'Please write the question.');
+    if (isBlank(item.a)) error('faq_answer_empty', `faq.${i}.a`, 'Please write the answer.');
+  });
+  if (blocks.faq && !faq.length) {
+    warning('faq_empty', 'faq', 'The questions & answers section is on but has no questions yet.');
+  }
+
+  // Custom RSVP questions (G051): stable ids (answers are stored under them), a readable question,
+  // "choice" with at least two different choices, "text" without choices.
+  const questions: Array<Record<string, any>> = Array.isArray(record.rsvp?.questions) ? record.rsvp.questions : [];
+  const ids = new Set<string>();
+  questions.forEach((q, i) => {
+    const at = `rsvp.questions.${i}`;
+    if (!QUESTION_ID_RE.test(q.id)) error('rsvp_question_id', `${at}.id`, 'The question id may only use a-z, 0-9, "-" and "_".');
+    else if (ids.has(q.id)) error('rsvp_question_duplicate_id', `${at}.id`, 'Two questions have the same id.');
+    ids.add(q.id);
+    if (isBlank(q.label)) error('rsvp_question_label_empty', `${at}.label`, 'Please write the question.');
+    const options: string[] = Array.isArray(q.options) ? q.options : [];
+    if (q.type === 'choice') {
+      options.forEach((o, j) => {
+        if (isBlank(o)) error('rsvp_question_option_empty', `${at}.options.${j}`, 'Please write this choice or remove it.');
+      });
+      const filled = options.filter((o) => !isBlank(o)).map(choiceKey);
+      if (filled.length < 2) error('rsvp_question_options_missing', `${at}.options`, 'Add at least two choices.');
+      else if (new Set(filled).size !== filled.length) error('rsvp_question_option_duplicate', `${at}.options`, 'Each choice must be different.');
+    } else if (options.length) {
+      error('rsvp_question_text_options', `${at}.options`, 'A short-answer question has no choices.');
+    }
+  });
 
   if (!isValidTimeZone(record.timezone)) {
     warning('timezone_invalid', 'timezone', `Unknown time zone "${record.timezone}" — the countdown cannot be computed.`);

@@ -28,6 +28,7 @@ const ROUTES = [
   'start/page',
   'start/demo/[theme]/route',
   'start/demo/[theme]/[page]/route',
+  'start/demo/[theme]/event.ics/route',
   'api/start/route',
   'api/start/slug/route',
 ];

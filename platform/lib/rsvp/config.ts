@@ -15,6 +15,8 @@ export const MAX_GUESTS_CEILING = 20;
 export const NAME_MAX = 120;
 export const EMAIL_MAX = 254;
 export const MESSAGE_MAX = 500;
+/** Longest answer to a custom "text" question (G051). */
+export const ANSWER_MAX = 300;
 /** Request body cap for a guest submission (JSON). */
 export const BODY_MAX_BYTES = 8 * 1024;
 /** Field name of the honeypot input (must stay empty; bots fill it). */

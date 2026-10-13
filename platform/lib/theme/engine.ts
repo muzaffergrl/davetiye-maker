@@ -13,6 +13,8 @@
 //   data-if="venue.address"        element kept only when the value is non-empty ("!path" negates)
 //   data-repeat="schedule"         element repeated per array item; inner paths start with "." (".time")
 //   data-attr-<name>="path"        attribute <name> = raw value, or a {template} (allow-listed attributes only)
+//   data-calendar="ics|google"     <a> href = /<slug>/event.ics or a Google Calendar link (lib/calendar.ts);
+//                                  removed when the content has no readable date
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.
 // The page also receives <script type="application/json" id="site-data"> for theme JS: only what
 // theme JS needs (slug, page map, derived countdown target …), never the content record itself, so
@@ -22,6 +24,7 @@
 import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 import { Text, hasChildren, isTag, type AnyNode, type Element } from 'domhandler';
+import { calendarEvent, googleCalendarUrl, type CalendarEvent } from '../calendar.ts';
 import { buildView, fieldKind, getPath } from '../content/derive.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
 import type { PageName, ThemeManifest } from './theme.ts';
@@ -55,7 +58,7 @@ const TEXT_FORMATS = new Set(['auto', 'raw', 'date', 'date-long', 'weekday', 'mo
 const KNOWN_BLOCKS = new Set(['our_story', 'countdown', 'dress_code', 'registry', 'travel_stay', 'faq', 'guest_policy']);
 const URL_KEYS = new Set(['website', 'rsvp_form', 'map', 'registry', 'accommodation']);
 const ATTR_ALLOW = new Set(['alt', 'title', 'content', 'aria-label', 'datetime', 'value', 'placeholder']);
-const ENGINE_ATTRS = new Set(['data-field', 'data-format', 'data-text', 'data-photo', 'data-optional', 'data-url', 'data-if', 'data-repeat']);
+const ENGINE_ATTRS = new Set(['data-field', 'data-format', 'data-text', 'data-photo', 'data-optional', 'data-url', 'data-if', 'data-repeat', 'data-calendar']);
 const SRC_ELEMENTS = new Set(['img', 'script', 'source', 'video', 'audio', 'track', 'embed', 'iframe', 'input']);
 const OG_IMAGE = new Set(['og:image', 'og:image:url', 'twitter:image']);
 const DATA_SCRIPT_TYPES = new Set(['application/json', 'application/ld+json', 'text/template', 'text/plain']);
@@ -272,6 +275,37 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     applyLinkValue(el, getPath(view, `urls.${key}`));
   };
 
+  // "Add to calendar" (G051): one event per render, built only when a page asks for it.
+  let calendar: CalendarEvent | null | undefined;
+  const getCalendar = (): CalendarEvent | null => {
+    if (calendar === undefined) {
+      calendar = calendarEvent(opts.content, { siteUrl: opts.origin ? `${opts.origin}${pageRoute(slug, 'index')}` : null });
+    }
+    return calendar;
+  };
+
+  /** href of a data-calendar link; false = remove the element (no date yet, unknown kind, not a link). */
+  const applyCalendar = (el: Element): boolean => {
+    const kind = el.attribs['data-calendar'].trim();
+    if (el.name !== 'a') {
+      warn(`data-calendar is only for <a>, not <${el.name}>`);
+      return false;
+    }
+    if (kind !== 'ics' && kind !== 'google') {
+      warn(`data-calendar="${kind}" is not "ics" or "google"`);
+      return false;
+    }
+    const event = getCalendar();
+    if (!event) return false;
+    if (kind === 'ics') {
+      el.attribs.href = withPreview(`${pageRoute(slug, 'index')}/event.ics`, opts.previewKey);
+    } else {
+      el.attribs.href = googleCalendarUrl(event);
+      if (el.attribs.target) el.attribs.rel = 'noopener noreferrer';
+    }
+    return true;
+  };
+
   const applyAttrs = (el: Element, scope: string | null): void => {
     for (const name of Object.keys(el.attribs)) {
       if (!name.startsWith('data-attr-')) continue;
@@ -331,6 +365,10 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
         $(el).before(clone);
         walk(clone[0] as Element, `${abs}.${i}`);
       });
+      $(el).remove();
+      return;
+    }
+    if ('data-calendar' in a && !applyCalendar(el)) {
       $(el).remove();
       return;
     }

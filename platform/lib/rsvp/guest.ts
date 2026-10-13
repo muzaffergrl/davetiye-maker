@@ -20,7 +20,7 @@ import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
 import { closedMessage, rsvpWindow } from './deadline.ts';
 import { getRsvpRateLimiter, ipBucket, type RateLimiter } from './rate-limit.ts';
-import { parseSubmission, isHoneypotFilled } from './validate.ts';
+import { formQuestions, parseSubmission, isHoneypotFilled } from './validate.ts';
 
 export type RsvpState = 'success' | 'closed' | 'error';
 export type RsvpErrorCode = 'not_found' | 'invalid' | 'rate_limited' | 'busy' | 'too_large' | 'unsupported' | 'server';
@@ -112,7 +112,8 @@ function sameReply(a: RsvpRecord, b: RsvpInput): boolean {
     (a.email ?? null) === (b.email ?? null) &&
     a.attending === b.attending &&
     a.guests === b.guests &&
-    (a.message ?? null) === (b.message ?? null)
+    (a.message ?? null) === (b.message ?? null) &&
+    JSON.stringify(a.answers ?? []) === JSON.stringify(b.answers ?? [])
   );
 }
 
@@ -140,7 +141,7 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   const fields = body && typeof body === 'object' && !Array.isArray(body) ? (body as Record<string, unknown>) : {};
   if (isHoneypotFilled(fields)) return success(); // looks the same as a real reply; nothing stored
 
-  const parsed = parseSubmission(fields, await themeMaxGuests(site.theme));
+  const parsed = parseSubmission(fields, await themeMaxGuests(site.theme), formQuestions(site.publishedContent));
   if (!parsed.ok) {
     const first = Object.values(parsed.errors)[0];
     return { status: 400, body: { ok: false, state: 'error', code: 'invalid', message: first, fields: parsed.errors } };

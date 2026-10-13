@@ -375,6 +375,110 @@ test('guests: placeholder label only in previews, photo alt text from the conten
   }
 });
 
+// ---------------------------------------------------------------- G051: add to calendar, questions & answers, reply-form questions
+
+function g051Content(): ContentRecord {
+  const c = demoContent();
+  c.optional_blocks.faq = true;
+  c.faq = [
+    { q: 'Is there parking at the venue?', a: 'Yes, free parking next to the conservatory.\nThe gate opens at 3:00 PM.' },
+    { q: 'Can we bring our children?', a: 'We love your little ones, but this is an adults-only celebration.' },
+  ];
+  c.rsvp.questions = [
+    { id: 'meal', label: 'Meal choice', type: 'choice', options: ['Chicken', 'Fish', 'Vegetarian'] },
+    { id: 'song', label: 'A song that gets you dancing', type: 'text' },
+  ];
+  return c;
+}
+
+test('G051 add to calendar: home and details carry the .ics link and a Google Calendar link (preview keeps its key)', () => {
+  for (const page of ['home', 'details'] as PageName[]) {
+    const { $, warnings } = render(page, g051Content());
+    assert.deepEqual(warnings, [], page);
+    assert.equal($('.cal a[data-calendar="ics"]').attr('href'), `/${SLUG}/event.ics`, page);
+    const google = new URL($('.cal a[data-calendar="google"]').attr('href')!);
+    assert.equal(google.hostname, 'calendar.google.com', page);
+    assert.equal(google.searchParams.get('dates'), '20270515T200000Z/20270516T003000Z', `${page}: 4 PM EDT to two hours after the reception`);
+    assert.equal($('.cal a[data-calendar="google"]').attr('rel'), 'noopener noreferrer');
+    assert.equal($('.cal .kicker').text(), 'Add to your calendar');
+  }
+  const preview = render('details', g051Content(), { previewKey: 'pk_test_1234567890' }).$;
+  assert.equal(preview('a[data-calendar="ics"]').attr('href'), `/${SLUG}/event.ics?preview=pk_test_1234567890`);
+  const noDate = demoContent();
+  noDate.date = '';
+  assert.equal(render('home', noDate).$('a[data-calendar]').length, 0, 'no date yet: no calendar buttons');
+  // the steps are timed in site.js (MOTION) like every other entrance
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  assert.match(js, /\['cta', 2800\], \['cal', 3050\]/);
+  assert.match(js, /'details-faq':\s+\[\['title', 0\]/);
+});
+
+test('G051 questions & answers: a native accordion on the details page, in order, only while the block is on', () => {
+  const c = g051Content();
+  const { $, warnings } = render('details', c);
+  assert.deepEqual(warnings, []);
+  const items = $('.faq-sec details.faq-item');
+  assert.equal(items.length, 2);
+  assert.deepEqual(items.map((_, el) => $(el).find('summary .faq-q').text()).get(), ['Is there parking at the venue?', 'Can we bring our children?']);
+  assert.equal(items.first().find('.faq-a').text(), c.faq![0].a, 'answer text kept (line breaks shown by CSS pre-line)');
+  assert.deepEqual(items.map((_, el) => $(el).attr('data-repeat-item')).get(), ['faq.0', 'faq.1']);
+  assert.equal(items.filter('[open]').length, 0, 'closed until a guest opens one');
+  assert.equal($('.faq-sec h2').attr('id'), 'faq-title');
+  assert.equal($('.faq-sec').attr('aria-labelledby'), 'faq-title');
+  // reordered in the panel → reordered on the page
+  const swapped = g051Content();
+  swapped.faq!.reverse();
+  assert.equal(render('details', swapped).$('.faq-q').first().text(), 'Can we bring our children?');
+  // off, or on without questions: nothing in the page source
+  const off = g051Content();
+  off.optional_blocks.faq = false;
+  off.faq = [{ q: 'PRIVATE-QUESTION', a: 'PRIVATE-ANSWER' }];
+  const offHtml = render('details', off).html;
+  assert.ok(!offHtml.includes('PRIVATE-'), 'switched-off Q&A is not in the source');
+  assert.equal(cheerio.load(offHtml)('.faq-sec').length, 0);
+  const empty = g051Content();
+  empty.faq = [];
+  assert.equal(render('details', empty).$('.faq-sec').length, 0);
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8');
+  assert.match(css, /\.faq-a \{[^}]*white-space: pre-line/);
+  assert.match(css, /\.faq-item summary::-webkit-details-marker \{ display: none; \}/);
+});
+
+test('G051 reply-form questions: one fieldset per question for guests who accept, choices as radios, text as a box, error slots', () => {
+  const c = g051Content();
+  const { $, warnings } = render('rsvp', c);
+  assert.deepEqual(warnings, []);
+  const form = $('form[data-rsvp-form]');
+  const box = form.find('.questions');
+  assert.equal(box.length, 1);
+  assert.equal(box.attr('data-rsvp-if-attending'), '', 'asked of guests who accept (hidden and not sent for a "no")');
+  const sets = box.find('fieldset[data-rsvp-question]');
+  assert.deepEqual(sets.map((_, el) => $(el).attr('data-rsvp-question')).get(), ['meal', 'song']);
+  const meal = sets.eq(0);
+  assert.equal(meal.find('legend').text(), 'Meal choice');
+  assert.deepEqual(meal.find('input[type="radio"]').map((_, el) => $(el).attr('value')).get(), ['Chicken', 'Fish', 'Vegetarian']);
+  assert.deepEqual(meal.find('label span').map((_, el) => $(el).text()).get(), ['Chicken', 'Fish', 'Vegetarian']);
+  assert.equal(meal.find('textarea').length, 0);
+  assert.equal(meal.find('[data-rsvp-error-for]').attr('data-rsvp-error-for'), 'answer:meal');
+  const song = sets.eq(1);
+  assert.equal(song.find('input').length, 0);
+  assert.equal(song.find('textarea').attr('maxlength'), '300');
+  assert.equal(song.find('textarea').attr('aria-label'), 'A song that gets you dancing');
+  assert.equal(song.find('[data-rsvp-error-for]').attr('data-rsvp-error-for'), 'answer:song');
+  // names are given by /rsvp/form.js ("answer:<id>"); the template never invents one (and never "website")
+  assert.equal(box.find('[name]').length, 0);
+  // no questions: no block at all
+  assert.equal(render('rsvp').$('.questions').length, 0);
+  // question text is text, never markup
+  const sneaky = g051Content();
+  sneaky.rsvp.questions![0].label = '<img src=x onerror=alert(1)>';
+  sneaky.rsvp.questions![0].options = ['<b>Fish</b>', 'Beef'];
+  const s = render('rsvp', sneaky);
+  assert.equal(s.$('fieldset[data-rsvp-question="meal"] img').length, 0);
+  assert.equal(s.$('fieldset[data-rsvp-question="meal"] b').length, 0);
+  assert.equal(s.$('fieldset[data-rsvp-question="meal"] input').first().attr('value'), '<b>Fish</b>');
+});
+
 // ---------------------------------------------------------------- site.js contract (G037 integration notes)
 
 test('site.js reads #site-data, navigates with the page map and never hard-codes a page URL', () => {

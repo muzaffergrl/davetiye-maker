@@ -5,7 +5,7 @@ import path from 'node:path';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 import type { RsvpRecord } from '../lib/data/types.ts';
-import { DEFAULT_MAX_GUESTS, MESSAGE_MAX, NAME_MAX, themeMaxGuests } from '../lib/rsvp/config.ts';
+import { ANSWER_MAX, DEFAULT_MAX_GUESTS, MESSAGE_MAX, NAME_MAX, themeMaxGuests } from '../lib/rsvp/config.ts';
 import { closedMessage, rsvpClosesAt, rsvpWindow } from '../lib/rsvp/deadline.ts';
 import { ipBucket, MemoryRateLimiter } from '../lib/rsvp/rate-limit.ts';
 import { parseSubmission } from '../lib/rsvp/validate.ts';
@@ -205,6 +205,80 @@ test('CSV: header, BOM, CRLF, oldest first, local time in the site zone', () => 
   assert.equal(lines[3], '');
   assert.equal(formatLocalDateTime('2027-03-01T15:05:00.000Z', 'Europe/London', 'en-GB'), '1 March 2027 3:05 pm');
   assert.equal(rsvpCsv([], { bom: false }), '"Submitted (UTC)","Name","Email","Attending","Guests","Message"\r\n');
+});
+
+// ---------------------------------------------------------------- G051: custom questions
+
+const QUESTIONS = [
+  { id: 'meal', label: 'Meal choice', type: 'choice' as const, options: ['Chicken', 'Fish', 'Vegetarian'] },
+  { id: 'song', label: 'A song that gets you dancing', type: 'text' as const },
+];
+
+test('questions: answers of a guest who accepts are checked, cleaned and kept in question order', () => {
+  const r = parseSubmission(
+    { name: 'Ada', attending: 'yes', guests: 2, answers: { song: '  Dancing\u0007 Queen\r\n(ABBA) ', meal: ' Fish ', other: 'ignored' } },
+    10,
+    QUESTIONS,
+  );
+  assert.ok(r.ok);
+  assert.deepEqual(r.value.answers, [
+    { id: 'meal', question: 'Meal choice', answer: 'Fish' },
+    { id: 'song', question: 'A song that gets you dancing', answer: 'Dancing Queen\n(ABBA)' },
+  ]);
+  // not answering is fine (questions are optional); no answers → no field at all (older records look the same)
+  const none = parseSubmission({ name: 'Ada', attending: 'yes', answers: { meal: '', song: '   ' } }, 10, QUESTIONS);
+  assert.ok(none.ok && !('answers' in none.value));
+  const noBody = parseSubmission({ name: 'Ada', attending: 'yes' }, 10, QUESTIONS);
+  assert.ok(noBody.ok && !('answers' in noBody.value));
+  // without questions on the site, answers are ignored
+  const noQuestions = parseSubmission({ name: 'Ada', attending: 'yes', answers: { meal: 'Fish' } }, 10);
+  assert.ok(noQuestions.ok && !('answers' in noQuestions.value));
+});
+
+test('questions: a choice must be one of the options, a text answer at most 300 characters; errors keyed answer:<id>', () => {
+  const bad = parseSubmission({ name: 'Ada', attending: 'yes', answers: { meal: 'Steak', song: 's'.repeat(ANSWER_MAX + 1) } }, 10, QUESTIONS);
+  assert.ok(!bad.ok);
+  assert.deepEqual(bad.ok ? {} : bad.errors, {
+    'answer:meal': 'Please choose one of the options.',
+    'answer:song': `Please keep your answer to ${ANSWER_MAX} characters or fewer.`,
+  });
+  assert.ok(parseSubmission({ name: 'Ada', attending: 'yes', answers: { song: 's'.repeat(ANSWER_MAX) } }, 10, QUESTIONS).ok);
+  // odd shapes do not crash and do not count as answers
+  for (const answers of [['Fish'], 'Fish', 42, null, { meal: ['Fish'] }, { meal: { x: 1 } }]) {
+    const r = parseSubmission({ name: 'Ada', attending: 'yes', answers }, 10, QUESTIONS);
+    assert.ok(r.ok && !('answers' in r.value), JSON.stringify(answers));
+  }
+});
+
+test('questions: a guest who declines stores no answers (questions are for guests who accept)', () => {
+  const r = parseSubmission({ name: 'Ada', attending: 'no', answers: { meal: 'Steak', song: 'x' } }, 10, QUESTIONS);
+  assert.ok(r.ok && !('answers' in r.value) && r.value.guests === 0);
+});
+
+test('CSV: one column per question after Message, removed questions keep theirs, older replies stay valid, cells formula-safe', () => {
+  const csv = rsvpCsv(
+    [
+      rec({ name: 'Old Reply', createdAt: '2027-03-01T10:00:00.000Z' }), // before the questions existed
+      rec({
+        name: 'With Answers',
+        createdAt: '2027-03-02T10:00:00.000Z',
+        answers: [
+          { id: 'meal', question: 'Meal (old wording)', answer: 'Fish' },
+          { id: 'song', question: 'Song', answer: '=HYPERLINK("http://x.example","go")' },
+          { id: 'gone', question: '+Removed question', answer: '@cmd' },
+        ],
+      }),
+      rec({ name: 'Declined', attending: false, guests: 0, createdAt: '2027-03-03T10:00:00.000Z' }),
+    ],
+    { timeZone: 'UTC', bom: false, questions: [{ id: 'meal', label: 'Meal choice' }, { id: 'song', label: '-Song "request"' }] },
+  );
+  const lines = csv.split('\r\n');
+  assert.equal(lines[0], `"Submitted (UTC)","Name","Email","Attending","Guests","Message","Meal choice","'-Song ""request""","'+Removed question"`);
+  assert.equal(lines[1], '"March 1, 2027 10:00 AM","Old Reply","","Yes","1","","","",""');
+  assert.equal(lines[2], `"March 2, 2027 10:00 AM","With Answers","","Yes","1","","Fish","'=HYPERLINK(""http://x.example"",""go"")","'@cmd"`);
+  assert.equal(lines[3], '"March 3, 2027 10:00 AM","Declined","","No","0","","","",""');
+  // a site without questions keeps the original six columns
+  assert.equal(rsvpCsv([rec({})], { bom: false }).split('\r\n')[0], '"Submitted (UTC)","Name","Email","Attending","Guests","Message"');
 });
 
 test('theme guest cap: theme.json rsvp.max_guests, else the platform default', async () => {

@@ -21,6 +21,7 @@ import { prepareDraft, DraftShapeError } from '../lib/panel/draft.ts';
 import { publicOrigin } from '../lib/panel/http.ts';
 import {
   defaultInitials,
+  newQuestionId,
   pageShown,
   panelIssues,
   parseAspect,
@@ -28,11 +29,15 @@ import {
   prePublishNotes,
   previewPhotoUrl,
   sameContent,
+  sampleNotes,
+  SECTION_IDS,
   sectionForPath,
   shapeLabel,
   withPartnerName,
   withPhoto,
+  type OptionalBlockKey,
 } from '../lib/panel/model.ts';
+import { QUESTION_ID_RE } from '../lib/content/validate.ts';
 import { panelTheme, themeFieldUse } from '../lib/panel/state.ts';
 import { draftFromDemo } from '../lib/claim/claim.ts';
 import { readFileSync } from 'node:fs';
@@ -641,10 +646,14 @@ test('panel theme info: page switches, fields the design shows, sample record; h
   try {
     const t = await panelTheme('blush-garden-rose');
     assert.deepEqual(t.pageRules, { story: { optional: 'our_story', if: null }, rsvp: { optional: null, if: '!rsvp.method' } });
-    assert.deepEqual(t.fields, { initials: false, storyText: false, storyItems: 3 }, 'no monogram, no story text, 3 moments');
+    assert.deepEqual(
+      t.fields,
+      { initials: false, storyText: false, storyItems: 3, faq: true, rsvpQuestions: true },
+      'no monogram, no story text, 3 moments; questions & answers and reply-form questions (G051)',
+    );
     assert.equal(t.sample?.venue.name, 'The Rosewater Conservatory');
     const sample = await panelTheme('_sample');
-    assert.deepEqual(sample.fields, { initials: true, storyText: true, storyItems: 12 });
+    assert.deepEqual(sample.fields, { initials: true, storyText: true, storyItems: 12, faq: false, rsvpQuestions: false });
     assert.equal(sample.sample, null, 'internal theme: no demo record to compare with');
   } finally {
     process.env.PLATFORM_THEMES_DIR = themesBefore;
@@ -653,7 +662,15 @@ test('panel theme info: page switches, fields the design shows, sample record; h
     initials: true,
     storyText: false,
     storyItems: 5,
+    faq: false,
+    rsvpQuestions: false,
   });
+  // G051: the FAQ list and reply-form questions are detected from their repeat markers
+  assert.deepEqual(
+    themeFieldUse(['<details data-repeat="faq"><summary data-field=".q"></summary></details><div data-repeat="rsvp.questions"></div>']),
+    { initials: false, storyText: false, storyItems: 0, faq: true, rsvpQuestions: true },
+  );
+  assert.equal(themeFieldUse(['<section data-optional="faq"><h3>FAQ</h3></section>']).faq, false, 'a switch without the list: no editor');
   const c = demoContent();
   assert.equal(pageShown({ optional: 'our_story', if: null }, c), true);
   c.optional_blocks.our_story = false;
@@ -703,4 +720,74 @@ test('prepareDraft: locked fields win, structural problems throw DraftShapeError
   assert.throws(() => prepareDraft(stored, { ...demoContent(), schedule: [{ label: 'x' }] }), DraftShapeError); // time missing
   const unfinished = { ...demoContent(), date: '' };
   assert.equal(prepareDraft(stored, unfinished).date, '');
+});
+
+// ---------------------------------------------------------------------------------------------
+// G051: questions & answers, reply-form questions
+
+test('G051 drafts: a half-written question is stored (it only blocks publishing); a broken list shape is refused', async () => {
+  const draft = demoContent();
+  draft.optional_blocks.faq = true;
+  draft.faq = [{ q: 'Is there parking?', a: '' }];
+  draft.rsvp.questions = [{ id: 'meal', label: '', type: 'choice', options: ['', ''] }];
+  const r = await call(saveRoute, 'panel-site', { key: site.editKey, json: { content: draft } });
+  assert.equal(r.status, 200);
+  const codes = r.data.validation.errors.map((e: { code: string; path: string }) => `${e.code}@${e.path}`);
+  assert.deepEqual(codes.sort(), [
+    'faq_answer_empty@faq.0.a',
+    'rsvp_question_label_empty@rsvp.questions.0.label',
+    'rsvp_question_option_empty@rsvp.questions.0.options.0',
+    'rsvp_question_option_empty@rsvp.questions.0.options.1',
+    'rsvp_question_options_missing@rsvp.questions.0.options',
+  ]);
+  const stored = (await getDataAdapter().getSiteBySlug('panel-site'))!.content;
+  assert.deepEqual(stored.faq, draft.faq);
+  assert.deepEqual(stored.rsvp.questions, draft.rsvp.questions);
+  const pub = await call(publishRoute, 'panel-site', { key: site.editKey, json: {} });
+  assert.equal(pub.status, 422, 'not published while a question is unfinished');
+  // the panel never sends these shapes: refused, nothing stored
+  for (const bad of [
+    { ...demoContent(), faq: Array.from({ length: 13 }, () => ({ q: 'Q', a: 'A' })) },
+    { ...demoContent(), faq: [{ q: 'Only a question' }] },
+    { ...demoContent(), rsvp: { deadline: '2027-04-03', questions: [{ id: 'm', label: 'M', type: 'menu' }] } },
+    { ...demoContent(), rsvp: { deadline: '2027-04-03', questions: Array.from({ length: 4 }, (_, i) => ({ id: `q${i}`, label: 'Q', type: 'text' })) } },
+  ]) {
+    assert.throws(() => prepareDraft(demoContent(), bad), DraftShapeError);
+  }
+  // put the site back as the other tests expect it
+  assert.equal((await call(saveRoute, 'panel-site', { key: site.editKey, json: { content: demoContent() } })).status, 200);
+});
+
+test('G051 panel helpers: section of faq paths, notes for an empty Q&A block and sample text, question ids', () => {
+  assert.equal(sectionForPath('faq.3.a'), 'faq');
+  assert.equal(sectionForPath('faq'), 'faq');
+  assert.equal(sectionForPath('rsvp.questions.0.options.1'), 'rsvp');
+  assert.ok(SECTION_IDS.includes('faq'));
+  const theme = { sample: null, optionalBlocks: ['faq'] as OptionalBlockKey[], photos: [] };
+  const c = demoContent();
+  c.optional_blocks.faq = true;
+  assert.deepEqual(prePublishNotes(c, theme).empty, [{ path: 'faq', message: 'Questions & answers is on but has no questions yet, so guests do not see it.' }]);
+  c.faq = [{ q: 'Q?', a: 'A.' }];
+  assert.deepEqual(prePublishNotes(c, theme).empty, []);
+  assert.deepEqual(prePublishNotes({ ...c, faq: [] }, { ...theme, optionalBlocks: [] }).empty, [], 'a design without the block: no note');
+  // a demo record with sample Q&A and a sample question: still-unchanged entries are flagged
+  const sample = demoContent();
+  sample.faq = [{ q: 'Is there parking?', a: 'Yes, on site.' }];
+  sample.rsvp.questions = [{ id: 'meal', label: 'Meal choice', type: 'choice', options: ['A', 'B'] }];
+  const claimed = structuredClone(sample);
+  claimed.optional_blocks.faq = true;
+  claimed.faq!.push({ q: 'Our own question?', a: 'Our answer.' });
+  const notes = sampleNotes(claimed, sample).map((n) => n.path);
+  assert.ok(notes.includes('faq.0.q') && !notes.includes('faq.1.q'));
+  assert.ok(notes.includes('rsvp.questions.0.label'));
+  claimed.rsvp.method = 'none';
+  claimed.optional_blocks.faq = false;
+  assert.ok(!sampleNotes(claimed, sample).some((n) => n.path.startsWith('faq') || n.path.startsWith('rsvp.questions')), 'hidden parts are not flagged');
+  // ids: "q" + 6 of [a-z0-9], never one that exists
+  let n = 0;
+  const seq = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.99];
+  const id = newQuestionId(['qaaaaaa'], () => seq[n++] ?? 0.5);
+  assert.notEqual(id, 'qaaaaaa');
+  assert.match(id, QUESTION_ID_RE);
+  for (let i = 0; i < 50; i++) assert.match(newQuestionId([]), /^q[a-z0-9]{6}$/);
 });

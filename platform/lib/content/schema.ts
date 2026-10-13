@@ -187,6 +187,45 @@ export const CONTENT_SCHEMA = {
             "none",
             null
           ]
+        },
+        "questions": {
+          "type": "array",
+          "maxItems": 3,
+          "description": "İsteğe bağlı (G051): misafir yanıt formundaki özel sorular (ör. menü seçimi). id kalıcıdır (yanıtlar id ile saklanır); choice = seçenekli (en az 2 seçenek), text = kısa yanıt (seçeneksiz). İş kuralları validate_content.py'de.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "label",
+              "type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 24
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 120
+              },
+              "type": {
+                "enum": [
+                  "choice",
+                  "text"
+                ]
+              },
+              "options": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "maxLength": 60
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -319,6 +358,29 @@ export const CONTENT_SCHEMA = {
                 "maxLength": 400
               }
             }
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "maxItems": 12,
+      "description": "İsteğe bağlı (G051): Sık sorulan sorular — soru (q) ve yanıt (a). optional_blocks.faq açıkken gösterilir. Boş soru/yanıt iş kuralıyla reddedilir.",
+      "items": {
+        "type": "object",
+        "required": [
+          "q",
+          "a"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "q": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "a": {
+            "type": "string",
+            "maxLength": 600
           }
         }
       }

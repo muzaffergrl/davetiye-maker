@@ -9,10 +9,10 @@ Görseller yalnız GPT parçaları (K21); kod yerleşim, tipografi, hareket ve t
 |---|---|
 | `theme.json` | ad, 5 sayfa, foto alanları (anahtar → içerik yolu + pencere oranı) |
 | `index.html` | kapalı zarf + fiyonk → dokun → fiyonk kayar, **kapak menteşesinde kalkar**, açık kapak devralır, kart ön cebin arkasından yükselir, öne geçer → `home` (kart view transition ile hero kartına uçar) |
-| `home.html` | hero (kart + foto, isimler, tarih, mekân, canlı geri sayım), davet kartı, Story / The Day / RSVP tanıtımları |
+| `home.html` | hero (kart + foto, isimler, tarih, mekân, canlı geri sayım), davet kartı + **takvime ekle** (G051), Story / The Day / RSVP tanıtımları |
 | `story.html` | Our Story — 3 altın kemer çerçeve (`story_1..3`), başlıklar `story.items.0..2.caption` |
-| `details.html` | Order of the Day kartı (program satırları `data-repeat`), dress code, mekân (GPT yatay çerçeve + `venue`), harita, Travel & Stay, Registry |
-| `rsvp.html` | RSVP kartı (son tarih, düğme forma kaydırır) + **platform yanıt formu** (G042 sözleşmesi: `/rsvp/form.js`, `data-rsvp-*`; önizlemede gönderilmez) + fiyonklu kapanış |
+| `details.html` | Order of the Day kartı (program satırları `data-repeat`) + **takvime ekle**, dress code, mekân (GPT yatay çerçeve + `venue`), harita, Travel & Stay, Registry, **Questions & Answers** (`faq`, G051) |
+| `rsvp.html` | RSVP kartı (son tarih, düğme forma kaydırır) + **platform yanıt formu** (G042 sözleşmesi: `/rsvp/form.js`, `data-rsvp-*`; önizlemede gönderilmez; G051: çiftin ≤ 3 sorusu, yalnız katılan misafire) + fiyonklu kapanış |
 | `site.css` | palet token'ları, hareket ön ayarları, foto alanı bileşeni, zarf katman yüzdeleri |
 | `site.js` | `MOTION` koreografi + `ENVELOPE_GEOMETRY`; `#site-data` okur; yoksa `DEV_CONTENT` ile önizleme |
 | `img/` | WebP katmanlar, foto yer tutucuları (`ph_*`), pencere maskeleri (`mask_*.png`), `manifest.json` (servis edilmez) |
@@ -58,3 +58,7 @@ tutucuları. Betik pencerenin WebP çıktısında da tam şeffaf kaldığını v
 - Kartın home'a "uçması" cross-document View Transitions ister (Chromium 126+, Safari 18.2+); diğerlerinde solma.
   Gerçek iPhone/Safari ve Android cihazda denenmedi.
 - RSVP misafir sayısı üst sınırı platform varsayılanı (10); tema `theme.json` `rsvp.max_guests` yazmıyor.
+- G051 öğeleri yeni görsel istemedi: takvim düğmeleri `.btn-ghost` hapı (`.btn-sm`), SSS 1 px altın çizgi + "+"/"×" yazı glifi, başlık
+  Great Vibes, ayraç mevcut GPT `divider` parçası. SSS en çok 12 madde (her biri açılır-kapanır; uzun liste sayfayı uzatır, karta girmez).
+  Demo kaydında (`collections/03_…/content.demo.json`) örnek SSS / özel soru yok: tema demosunda bu bloklar görünmez (eklemek içerik
+  kaydının sahibinin işi). Gerçek telefonda `.ics` açılışı denenmedi.

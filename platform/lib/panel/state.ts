@@ -78,10 +78,13 @@ export function themeFieldUse(htmlPages: readonly string[]): ThemeFieldUse {
     .map((p) => /^story\.items\.(\d+)\./.exec(p)?.[1])
     .filter((x): x is string => x !== undefined)
     .map(Number);
+  const uses = (base: string) => paths.some((p) => p === base || p.startsWith(`${base}.`));
   return {
     initials: paths.includes('initials'),
     storyText: paths.some((p) => /^story\.items\.\d+\.text$/.test(p)) || (repeatsStory && relativeText),
     storyItems: repeatsStory ? MAX_STORY_ITEMS : indexes.length ? Math.min(MAX_STORY_ITEMS, Math.max(...indexes) + 1) : 0,
+    faq: uses('faq'),
+    rsvpQuestions: uses('rsvp.questions'),
   };
 }
 

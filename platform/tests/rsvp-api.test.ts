@@ -363,7 +363,8 @@ test('couple API: list (newest first) and counts for one site only', async () =>
     body.responses.map((r: { name: string; guests: number }) => [r.name, r.guests]),
     [['Yes Four', 4], ['No One', 0], ['Yes Two', 2]],
   );
-  assert.deepEqual(Object.keys(body.responses[0]).sort(), ['attending', 'createdAt', 'email', 'guests', 'held', 'id', 'message', 'name']);
+  assert.deepEqual(Object.keys(body.responses[0]).sort(), ['answers', 'attending', 'createdAt', 'email', 'guests', 'held', 'id', 'message', 'name']);
+  assert.deepEqual(body.responses[0].answers, [], 'no custom questions: an empty answers list (G051)');
 });
 
 test('CSV export: attachment, BOM, formula cells escaped, only this site', async () => {
@@ -404,4 +405,77 @@ test('fixture theme: the RSVP page keeps the form contract and allows /rsvp/form
   const data = JSON.parse($('#site-data').text());
   assert.equal(data.slug, 'open-site');
   assert.equal(data.preview, false);
+});
+
+// ---------------------------------------------------------------- G051: custom questions end to end
+
+test('questions: answers stored with the reply, listed for the couple, one CSV column each; old replies and declines stay valid', async () => {
+  const adapter = getDataAdapter();
+  // a reply that arrives before the couple adds questions (backward compatibility)
+  const site = await makeSite('questions-site', 'rsvp-fixture', content(300, 400));
+  assert.equal((await post('questions-site', { name: 'Early Bird', attending: 'yes', guests: 1 })).status, 200);
+
+  const withQuestions = content(300, 400, (c) => {
+    c.rsvp.questions = [
+      { id: 'meal', label: 'Meal choice', type: 'choice', options: ['Chicken', 'Fish', 'Vegetarian'] },
+      { id: 'song', label: 'Song request', type: 'text' },
+    ];
+  });
+  await adapter.updateContent(site.id, withQuestions);
+  await publishSite(adapter, site.id);
+
+  const ok = await post('questions-site', { name: 'Ada Answer', attending: 'yes', guests: 2, answers: { meal: 'Fish', song: '=1+1 by the band' } });
+  assert.equal(ok.status, 200);
+  assert.deepEqual(await ok.json(), SUCCESS_BODY);
+  const declined = await post('questions-site', { name: 'No Thanks', attending: 'no', answers: { meal: 'Steak' } });
+  assert.equal(declined.status, 200, 'a guest who declines is not asked (answers ignored, no error)');
+  const bad = await post('questions-site', { name: 'Wrong Choice', attending: 'yes', guests: 1, answers: { meal: 'Steak' } });
+  assert.equal(bad.status, 400);
+  const badBody = await bad.json();
+  assert.deepEqual(badBody.fields, { 'answer:meal': 'Please choose one of the options.' });
+  assert.equal(badBody.message, 'Please choose one of the options.');
+
+  const list = await adapter.listRsvps(site.id);
+  assert.deepEqual(
+    list.map((r) => [r.name, r.answers ?? null]),
+    [
+      ['Early Bird', null],
+      ['Ada Answer', [{ id: 'meal', question: 'Meal choice', answer: 'Fish' }, { id: 'song', question: 'Song request', answer: '=1+1 by the band' }]],
+      ['No Thanks', null],
+    ],
+  );
+
+  // the same reply again (double tap) is stored once
+  await post('questions-site', { name: 'Ada Answer', attending: 'yes', guests: 2, answers: { meal: 'Fish', song: '=1+1 by the band' } });
+  assert.equal((await adapter.listRsvps(site.id)).length, 3);
+
+  const summary = await (await responses('questions-site', { bearer: site.editKey })).json();
+  const ada = summary.responses.find((r: { name: string }) => r.name === 'Ada Answer');
+  assert.deepEqual(
+    ada.answers.map((a: { question: string; answer: string }) => `${a.question}: ${a.answer}`),
+    ['Meal choice: Fish', 'Song request: =1+1 by the band'],
+  );
+  assert.deepEqual(summary.responses.find((r: { name: string }) => r.name === 'Early Bird').answers, []);
+
+  // the couple renames one question and removes the other: answers keep their place in the CSV
+  const renamed = content(300, 400, (c) => {
+    c.rsvp.questions = [{ id: 'meal', label: 'Dinner', type: 'choice', options: ['Chicken', 'Fish', 'Vegetarian'] }];
+  });
+  await adapter.updateContent(site.id, renamed);
+  await publishSite(adapter, site.id);
+  const res = await csv('questions-site', { bearer: site.editKey });
+  assert.equal(res.status, 200);
+  const lines = new TextDecoder().decode(new Uint8Array(await res.arrayBuffer())).split('\r\n');
+  assert.equal(lines[0], '"Submitted (America/New_York)","Name","Email","Attending","Guests","Message","Dinner","Song request"');
+  assert.ok(lines[1].endsWith(',"Early Bird","","Yes","1","","",""'), lines[1]);
+  assert.ok(lines[2].endsWith(`,"Ada Answer","","Yes","2","","Fish","'=1+1 by the band"`), `guest text is formula-safe: ${lines[2]}`);
+  assert.ok(lines[3].endsWith(',"No Thanks","","No","0","","",""'), lines[3]);
+  assert.equal(lines.length, 5);
+});
+
+test('questions: a reply without answers is still accepted (questions are optional)', async () => {
+  await makeSite('questions-plain', 'rsvp-fixture', content(300, 400, (c) => {
+    c.rsvp.questions = [{ id: 'meal', label: 'Meal choice', type: 'choice', options: ['Chicken', 'Fish'] }];
+  }));
+  assert.equal((await post('questions-plain', { name: 'No Answers', attending: 'yes', guests: 1 })).status, 200);
 });

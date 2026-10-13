@@ -63,12 +63,25 @@ export interface PublishOptions {
   expectedUpdatedAt?: string;
 }
 
+/**
+ * A guest's answer to one of the couple's custom questions (content rsvp.questions, G051).
+ * `question` is the question's text when the guest answered (the CSV still has it after the
+ * couple renames or removes the question).
+ */
+export interface RsvpAnswer {
+  id: string;
+  question: string;
+  answer: string;
+}
+
 export interface RsvpInput {
   name: string;
   email?: string | null;
   attending: boolean;
   guests: number;
   message?: string | null;
+  /** Answers to the custom questions (only answered ones; absent when there are none). */
+  answers?: RsvpAnswer[];
   /** Stored but held back for the couple's review (unusual volume, lib/rsvp/guest.ts). */
   held?: boolean;
 }
@@ -81,6 +94,8 @@ export interface RsvpRecord {
   attending: boolean;
   guests: number;
   message: string | null;
+  /** Answers to custom questions (G051). Absent on replies without answers and on older replies. */
+  answers?: RsvpAnswer[];
   createdAt: string;
   /** True: arrived during unusual volume; not counted, not in the CSV until the couple keeps it. */
   held?: boolean;

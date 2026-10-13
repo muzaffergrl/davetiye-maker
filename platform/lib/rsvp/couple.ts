@@ -8,10 +8,11 @@
 // the CSV until the couple keeps them; "remove" deletes replies for good.
 
 import { formatDate, formatTime, isValidTimeZone } from '../content/format.ts';
-import type { DataAdapter, RsvpRecord, SiteRecord } from '../data/types.ts';
+import type { DataAdapter, RsvpAnswer, RsvpRecord, SiteRecord } from '../data/types.ts';
 import { canEdit } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { rsvpWindow, type RsvpWindow } from './deadline.ts';
+import { formQuestions } from './validate.ts';
 
 export interface RsvpCounts {
   /** Number of replies (held ones not included). */
@@ -34,6 +35,8 @@ export interface RsvpEntry {
   attending: boolean;
   guests: number;
   message: string | null;
+  /** Answers to the couple's custom questions (G051), in the order they were asked; [] when none. */
+  answers: RsvpAnswer[];
   createdAt: string;
   held: boolean;
 }
@@ -80,6 +83,7 @@ function toEntry(r: RsvpRecord): RsvpEntry {
     attending: r.attending,
     guests: r.guests,
     message: r.message,
+    answers: (r.answers ?? []).map((a) => ({ id: a.id, question: a.question, answer: a.answer })),
     createdAt: r.createdAt,
     held: r.held === true,
   };
@@ -145,25 +149,53 @@ export interface CsvOptions {
   locale?: string;
   /** Prepend a UTF-8 BOM so Excel shows accented names correctly (default true). */
   bom?: boolean;
+  /**
+   * The site's custom questions (content rsvp.questions, G051): one column each, after "Message",
+   * headed by the question text. Answers to questions removed since keep a column too (headed by
+   * the text the guest answered).
+   */
+  questions?: ReadonlyArray<{ id: string; label: string }>;
+}
+
+/** Answer columns: current questions in order, then removed ones in the order they first appear. */
+function answerColumns(list: readonly RsvpRecord[], questions: CsvOptions['questions'] = []): Array<{ id: string; header: string }> {
+  const columns = questions.map((q) => ({ id: q.id, header: q.label.trim() || q.id }));
+  const known = new Set(columns.map((c) => c.id));
+  const removed = new Map<string, string>();
+  for (const r of list) {
+    for (const a of r.answers ?? []) if (!known.has(a.id)) removed.set(a.id, a.question || a.id);
+  }
+  for (const [id, header] of removed) columns.push({ id, header });
+  return columns;
 }
 
 /** CSV of replies (held ones left out), oldest first, CRLF line ends. Every cell is quoted and formula-safe. */
 export function rsvpCsv(list: readonly RsvpRecord[], opts: CsvOptions = {}): string {
   const tz = opts.timeZone && isValidTimeZone(opts.timeZone) ? opts.timeZone : 'UTC';
   const locale = opts.locale ?? 'en-US';
-  const rows: unknown[][] = [[`Submitted (${tz})`, 'Name', 'Email', 'Attending', 'Guests', 'Message']];
   const sorted = list.filter((r) => !r.held).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  const columns = answerColumns(sorted, opts.questions);
+  const rows: unknown[][] = [[`Submitted (${tz})`, 'Name', 'Email', 'Attending', 'Guests', 'Message', ...columns.map((c) => c.header)]];
   for (const r of sorted) {
-    rows.push([formatLocalDateTime(r.createdAt, tz, locale), r.name, r.email ?? '', r.attending ? 'Yes' : 'No', r.guests, r.message ?? '']);
+    const answerOf = (id: string) => r.answers?.find((a) => a.id === id)?.answer ?? '';
+    rows.push([
+      formatLocalDateTime(r.createdAt, tz, locale),
+      r.name,
+      r.email ?? '',
+      r.attending ? 'Yes' : 'No',
+      r.guests,
+      r.message ?? '',
+      ...columns.map((c) => answerOf(c.id)),
+    ]);
   }
   const body = rows.map((row) => row.map(csvCell).join(',')).join('\r\n') + '\r\n';
   return (opts.bom ?? true ? '﻿' : '') + body;
 }
 
-/** CSV for a site, using its time zone and locale; plus a download file name. */
+/** CSV for a site, using its time zone, locale and questions; plus a download file name. */
 export async function rsvpCsvForSite(adapter: DataAdapter, site: SiteRecord, now: Date = new Date()): Promise<{ csv: string; filename: string }> {
   const content = (site.publishedContent ?? site.content) as { timezone?: string; locale?: string };
   const list = await adapter.listRsvps(site.id);
-  const csv = rsvpCsv(list, { timeZone: content.timezone, locale: content.locale });
+  const csv = rsvpCsv(list, { timeZone: content.timezone, locale: content.locale, questions: formQuestions(content) });
   return { csv, filename: `rsvps-${site.slug}-${now.toISOString().slice(0, 10)}.csv` };
 }

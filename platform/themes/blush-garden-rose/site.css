@@ -456,6 +456,11 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
   background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgba(155, 93, 102, .35); transition: box-shadow .2s, background-color .2s; }
 .reply-form .choice label:has(input:checked) { background: rgba(255, 249, 246, .98); box-shadow: inset 0 0 0 2px var(--deep); }
 .reply-form .choice input { width: 20px; height: 20px; margin: 0; accent-color: var(--deep); flex: none; }
+/* the couple's own questions (G051): same pills as "Will you attend?"; longer choices wrap inside the pill */
+.reply-form .questions { display: grid; gap: 16px; }
+.reply-form .q-options { display: grid; gap: 10px; }
+.reply-form .question label { padding-block: 8px; line-height: 1.3; overflow-wrap: anywhere; }
+.reply-form .question legend { overflow-wrap: anywhere; }
 .reply-form [aria-invalid="true"] { box-shadow: inset 0 -2px 0 #9B2C3A; }
 .reply-form .choice:has([aria-invalid="true"]) label { box-shadow: inset 0 0 0 1px #9B2C3A; }
 .reply-form .field-error { margin-top: -8px; font-size: 14px; line-height: 1.35; color: #9B2C3A; }
@@ -477,6 +482,35 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .block p + p { margin-top: 6px; }
 .block .note { font-style: italic; color: var(--ink-soft); max-width: 26em; margin-inline: auto; }
 .block .btn { margin-top: 18px; }
+
+/* ---------------------------------------------------------------- add to calendar (G051; home + details)
+   Two small ghost pills; the platform writes the links (data-calendar). UI only, no drawn decor. */
+.btn-sm { min-height: 44px; padding: 0 18px; font-size: 12.5px; letter-spacing: .22em; }
+.cal { margin-top: 26px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.cal .kicker { font-size: 10.5px; }
+.cal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+/* ---------------------------------------------------------------- questions & answers (G051; details)
+   Native <details>: opens without JS. 1 px gold rules and a "+" glyph that turns to "×" — type, not decor. */
+.faq-sec.wrap { width: min(100% - 32px, 640px); padding: 30px 0 8px; text-align: center; }
+.faq-sec h2 { font-size: clamp(40px, 11vw, 56px); }
+.faq-sec .divider { margin-top: 8px; }
+.faq-list { margin-top: 18px; text-align: left; border-top: 1px solid rgba(200, 164, 110, .6); }
+.faq-item { border-bottom: 1px solid rgba(200, 164, 110, .6); }
+.faq-item summary {
+  list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  min-height: 52px; padding: 12px 2px; cursor: pointer;
+  font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.3; color: var(--ink);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; flex: none; width: 24px; text-align: center;
+  font-family: var(--display); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-ink);
+  transition: transform .3s var(--ease-out);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-q { min-width: 0; overflow-wrap: anywhere; }
+.faq-a { padding: 0 2px 18px; font-style: italic; color: var(--ink-soft); white-space: pre-line; overflow-wrap: anywhere; }
 
 /* ---------------------------------------------------------------- closing (rsvp page) */
 .closing { padding: 40px 0 24px; }

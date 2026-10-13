@@ -3,7 +3,8 @@
 Alıcının sitesi bizim platformumuzda yayınlanır ve panelden düzenlenir (`docs/10_SITE_PLATFORMU.md` tek kaynak).
 Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru**, veri adaptörleri (`local`; ilk canlı sürüm için
 Vercel Blob = `blob`, G048), site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042), `/start` sahiplenme akışı (G045)
-ve testler. Supabase (G043) satış hacmi artınca.
+ve testler. Supabase (G043) satış hacmi artınca. G051: takvime ekle (`.ics` + Google Calendar), SSS (soru–yanıt) ve RSVP özel
+soruları (aşağıda "Takvime ekle, SSS, RSVP özel soruları").
 
 Durum: yerelde çalışıyor ve test edildi. G044 ile Vercel'de yayında (`blob` adaptörü, private depo; ayrıntı `docs/10` §2c);
 inceleme düzeltmeleri (edca755) henüz yeniden yayınlanmadı (Git bağlantısı yok, push yayın yapmaz). Supabase projesi yok.
@@ -17,7 +18,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması (197 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim (226 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -25,6 +26,9 @@ node scripts/theme-check.cjs   # build sonrası: blush-garden-rose — 5 genişl
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
 NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts   # build sonrası: son duman testi, 390 px, gerçek tema — misafir (zarf → home →
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
+NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts   # build sonrası: G051, 390 px, gerçek tema — takvim düğmeleri + .ics,
+                       # SSS akordeonu (dokun/klavye), RSVP özel soruları (evet/hayır, hata), CSV sütunları, panel düzenleyicileri (43 kontrol;
+                       # ekran görüntüleri $G051_SHOTS_DIR, varsayılan geçici klasör)
 ```
 
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
@@ -45,12 +49,14 @@ panelin yayın linki ve QR'ı için; yoksa isteğin host'u kullanılır).
 app/
   [slug]/route.ts                  /<slug>                → temanın index sayfası (kapalı zarf)
   [slug]/[page]/route.ts           /<slug>/home|story|details|rsvp
+  [slug]/event.ics/route.ts        /<slug>/event.ics      → takvime ekle dosyası (G051; yayında değilse 404)
   themes/[theme]/[...path]/route.ts  tema CSS/JS/görselleri (html ve theme.json servis edilmez)
   media/[...path]/route.ts         adaptörün yüklediği fotoğraflar (local; blob = private depo)
   layout.tsx, page.tsx             platform sayfaları için kök
   edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039); geçersiz link = genel 404
   api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır
   start/page.tsx, StartForm.tsx    /start?theme=<tema> sahiplenme sayfası (G045); start/demo/[theme]/… = temanın canlı demosu
+                                   (+ start/demo/[theme]/event.ics: demonun takvim dosyası, G051)
   api/start/, api/start/slug/      sahiplenme API'si (POST) ve adres uygunluk ipucu (GET)
 components/panel/                  panelin istemci bileşenleri (Panel, bölümler, kırpma, önizleme, QR) + panel.module.css
 lib/
@@ -63,7 +69,8 @@ lib/
   data/types.ts                    DataAdapter sözleşmesi;  data/local/ = JSON dosya uygulaması;  data/blob/ = Vercel Blob (G048)
   sites.ts                         site oluştur (anahtar + slug + doğrulama), yayınla, erişim kontrolü
   keys.ts, slug.ts, uploads.ts     anahtar hash'i, ayrılmış slug'lar, foto tür/boyut kontrolü
-  site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar
+  site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar;  site/ics.ts = /<slug>/event.ics (G051)
+  calendar.ts                      takvime ekle (G051): etkinlik saatleri (saat dilimi + yaz saati), .ics (RFC 5545), Google Calendar linki
   panel/                           panel: model.ts (istemci+sunucu yardımcıları), api.ts, draft.ts, photos.ts (sharp), state.ts, http.ts
   qr.ts                            gerçek URL'den QR (uqr; tools/make_qr.py ayarları)
   claim/                           /start: fields.ts (istemci+sunucu kuralları), claim.ts, api.ts, themes.ts, demo-page.ts,
@@ -122,7 +129,7 @@ Kurallar: adaptör yalnız depolamadır; anahtar üretimi, slug kuralı ve içer
 Düz anahtar asla saklanmaz. Dönen kayıtlar kopyadır. Supabase şeması (G043) şu alanları taşımalı:
 `sites(id, slug unique, theme, variant, status, content jsonb, published_content jsonb, edit_key_hash,
 preview_key_hash, order_ref, owner_email, created_at, updated_at, published_at)`,
-`rsvps(id, site_id, name, email, attending, guests, message, created_at)`.
+`rsvps(id, site_id, name, email, attending, guests, message, answers jsonb (G051, null olabilir), created_at)`.
 (`docs/10` §2'deki tabloya `published_content`, `preview_key_hash`, `published_at` eklendi.)
 
 `local` uygulaması: `.data/sites/<id>.json`, `.data/slugs/<slug>.json` (O_EXCL ile benzersizlik),
@@ -240,6 +247,7 @@ Yollar noktalıdır: `venue.name`, `schedule.0.time`, `story.items.1.caption`.
 | `data-if="yol"` / `data-if="!yol"` | Değer boş değilse (boşsa) öğe kalır; `<body>` üzerinde sayfa düzeyinde çalışır |
 | `data-repeat="schedule"` | Öğe listedeki her eleman için çoğaltılır; içeride `.time`, `.label`, `data-if=".location"` göreli yollar. Boş listede öğe kalkar. Kopya `data-repeat-item="schedule.2"` alır |
 | `data-attr-<ad>="yol"` | Öznitelik = ham değer (ör. `datetime`); `{…}` içeriyorsa şablon. İzinli adlar: `alt`, `title`, `content`, `aria-label`, `datetime`, `value`, `placeholder`, `data-*` (motor işaretleri hariç). Yer tutucu gösteren foto `<img>`'sinde `data-attr-alt` uygulanmaz (`alt=""`, süs) |
+| `data-calendar="ics\|google"` | (G051) Yalnız `<a>`. `ics` → `href="/<slug>/event.ics"` (önizlemede `?preview=` ile), `google` → Google Calendar şablon linki (`target` varsa `rel="noopener noreferrer"`). İçerikte okunur tarih yoksa öğe **kaldırılır**; bilinmeyen değer ya da `<a>` dışı öğe → uyarı + kaldırılır |
 
 Türetilmiş alanlar (`data-field` ile kullanılabilir): `date_weekday`, `date_long`, `venue.city_region`,
 `venue.city_region_country`, `countdown_target_utc`.
@@ -274,6 +282,12 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
 - **Kısa telefonlar** (360×640, Safari 375×553, panel önizlemesi 390×690): boyalı sahne neredeyse bütün görününce köşe şakayıkları
   ortadaki yazıya değiyordu; en-boy 1/2–9/16 arasında arka plan %115, 9/16–3/4 arasında %135 ortadan büyütülür. "Replay the opening"
   yumuşak bir zemin (`.btn-ghost` gibi) ve 44 px dokunma alanı aldı; Skip ve "Replay the envelope" linkleri de ≥ 44 px.
+- **G051:** "Add to your calendar" — davet kartının altında (home) ve Order of the Day kartının altında (details) iki küçük `.btn-ghost`
+  hap: "Apple / Outlook" (`data-calendar="ics"`) ve "Google" (`data-calendar="google"`, yeni sekme); Details'te mekândan sonra
+  **Questions & Answers** (`data-optional="faq" data-if="faq"`, `<details data-repeat="faq">`: JS'siz açılır-kapanır, 1 px altın çizgiler,
+  "+" → "×" yazı glifi; yanıtta satır sonu korunur); RSVP formunda konuk sayısının altında çiftin soruları (`.questions`,
+  `data-rsvp-if-attending`: "Will you attend?" ile aynı haplar / kısa yanıt kutusu). Yeni görsel yok: başlık Great Vibes, ayraç GPT
+  `divider` parçası; sıralama `MOTION` (`home-invite.cal`, `details-card.cal`, `details-faq`).
 - **RSVP teşekkürü:** yanıt gönderilince alttaki kapanış ("Thank you / We can't wait to celebrate with you.") gizlenir (site.js
   `rsvp:state` → `html[data-rsvp-replied]`): katılmayan misafire çelişen, katılana tekrar eden metin yok.
 - **site.js:** `#site-data` varsa kişisel metne dokunmaz; sayfa adresleri `data.pages`, sayaç hedefi
@@ -288,7 +302,8 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
   düğmesi forma kaydırır, teşekkür/kapalı/hata/önizleme panelleri temanın tipografisinde.
 - **Görseller:** `python3 platform/themes/blush-garden-rose/build_images.py` (GPT parçaları → `img/`, önce
   `tools/parts_prep.py`; pencerelerin tam şeffaflığını ve görünür #00FF00 kalmadığını kendisi denetler).
-- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (15 test; ayrıca: kapalı bölümler hiçbir sayfa kaynağında yok, yanıtlar
+- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (18 test; G051: takvim linkleri, SSS akordeonu + kapalıyken kaynakta yok,
+  özel sorular formda; ayrıca: kapalı bölümler hiçbir sayfa kaynağında yok, yanıtlar
   kapalıyken RSVP yok, önizleme-dışı etiket, alt metin, yorum yok; alanlar = içerik kaydı, içerik değişikliği, foto
   durumları, isteğe bağlı bloklar, linkler, RSVP form sözleşmesi, önizleme anahtarı, site.js sözleşmesi, gerçek rotalar +
   RSVP API'siyle kayıt) ve
@@ -386,6 +401,13 @@ Betik davranışı:
   hatası yok); demo zaten önizleme kipinde.
 - Satır içi olay özniteliği, `innerHTML`, `eval` yok; yalnız `fetch` (CSP `connect-src 'self'`).
 - Tema 03'ün G035 kaynağındaki "preview only" RSVP düğmesi (`data-field="urls.rsvp_form"`) bu formla değiştirilir.
+- **Özel sorular (G051):** her sorunun kabı `data-rsvp-question="<id>"` taşır (tema bunu içerikten yazar:
+  `data-repeat="rsvp.questions"` + `data-attr-data-rsvp-question=".id"`); betik kabın içindeki girişlere `name="answer:<id>"` verir
+  (tema içerikten `name` yazamaz) ve cevapları `answers: {<id>: değer}` olarak gönderir — **yalnız etkin girişlerden**: sorular
+  `[data-rsvp-if-attending]` içindeyse "no" diyen misafirin cevabı gitmez. Hata yeri `data-rsvp-error-for="answer:<id>"`
+  (tema: `data-attr-data-rsvp-error-for="answer:{.id}"`). Seçenekli soru = radyolar (`data-repeat=".options"`, `data-attr-value="."`),
+  kısa yanıt = `<textarea maxlength="300">`; hangisinin görüneceği `data-if=".options"` / `data-if="!.options"` ile (iş kuralı:
+  `choice` ≥ 2 seçenek, `text` seçeneksiz). Örnek: `themes/blush-garden-rose/rsvp.html`.
 
 ### API
 
@@ -394,7 +416,7 @@ Misafir tarafı (herkese açık, yalnız JSON):
 | İstek | Yanıt |
 |---|---|
 | `GET /api/rsvp/<slug>` (`?preview=<önizleme anahtarı>` taslağı okur) | `200 {ok, open, reason: null\|"deadline"\|"disabled", message, closesAt, deadline: "April 3, 2027", maxGuests, preview}` · `404` |
-| `POST /api/rsvp/<slug>` `Content-Type: application/json`, ≤ 8 KB: `{name, email, attending, guests, message, website}` | `200` success · `400` invalid (+`fields`) · `403` closed · `404` · `413` · `415` · `429` (+`Retry-After`) · `500` |
+| `POST /api/rsvp/<slug>` `Content-Type: application/json`, ≤ 8 KB: `{name, email, attending, guests, message, answers?, website}` | `200` success · `400` invalid (+`fields`) · `403` closed · `404` · `413` · `415` · `429` (+`Retry-After`) · `500` |
 
 Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields?}`. Kurallar (`lib/rsvp/`):
 - `name` zorunlu, ≤ 120; `email` isteğe bağlı (biçim kontrolü); `attending` yes/no; `guests` katılıyorsa
@@ -403,6 +425,11 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 - **Son tarih:** `rsvp.deadline` gününün **sonu**, sitenin `timezone`'unda (ertesi gün 00:00; o gece saat 00:00'da ileri alınıyorsa —
   Asia/Beirut, Africa/Cairo — 01:00, hiç erken değil: `zonedTimeToUtc` Temporal "compatible" kuralı). Saat dilimi geçersizse
   UTC-12 (kimse erken geri çevrilmez). `rsvp.method: "none"` → form kapalı (`reason: "disabled"`).
+- **Özel sorular (G051):** `answers` = `{<soru id>: değer}`; sorular yayındaki içeriğin `rsvp.questions`'ı. `choice` → seçeneklerden biri
+  (yoksa `400`, `fields["answer:<id>"]` = "Please choose one of the options."), `text` → ≤ 300 karakter (`ANSWER_MAX`). Cevaplamamak
+  serbest (zorunlu soru yok); bilinmeyen id yok sayılır. Sorular **katılan** misafire: `attending: no` → cevap saklanmaz. Kayıt
+  `answers: [{id, question, answer}]` (soru metni o anki hâliyle; yalnız cevaplananlar; hiç yoksa alan yok → eski kayıtlarla aynı biçim).
+  Çift gönderim kontrolü cevapları da karşılaştırır.
 - Honeypot doluysa normal success cevabı döner, **kayıt yapılmaz**.
 - Aynı yanıt 5 dakika içinde yeniden gelirse bir kez saklanır (çift tıklama / yeniden deneme).
 - **Hız sınırı** (`config.ts`, IPv6 /64 olarak): **site + IP** başına 30 POST / 15 dk (geçersizler dahil; aynı Wi-Fi'dan başka
@@ -418,7 +445,7 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 
 | İstek | Yanıt |
 |---|---|
-| `GET /api/rsvp/<slug>/responses` | `200 {ok, site: {slug, status}, window: {open, reason, closesAt, deadlineDisplay}, counts: {responses, attending, notAttending, totalGuests}, responses: [{id, name, email, attending, guests, message, createdAt}]}` — yeniden eskiye |
+| `GET /api/rsvp/<slug>/responses` | `200 {ok, site: {slug, status}, window: {open, reason, closesAt, deadlineDisplay}, counts: {responses, attending, notAttending, totalGuests}, responses: [{id, name, email, attending, guests, message, answers: [{id, question, answer}], createdAt}]}` — yeniden eskiye |
 | `GET /api/rsvp/<slug>/export` | `text/csv`, `attachment; filename="rsvps-<slug>-<YYYY-MM-DD>.csv"` (bekleyenler hariç) |
 | `POST /api/rsvp/<slug>/responses` `{action: "remove"\|"keep", ids: [...]}` (yalnız `Bearer`) | `200 {ok, changed, …özet}` · `400` · `401` · `413` · `415` — "remove" kalıcı siler, "keep" bekleyeni sayılara alır; başka sitenin yanıtına dokunmaz |
 
@@ -427,7 +454,9 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 - `totalGuests` = katılan yanıtlardaki `guests` toplamı (baş sayısı). `counts.held` = bekleyen yanıt sayısı; listede her yanıt `held` taşır.
 - CSV: UTF-8 BOM (Excel aksanlı isimler), CRLF, her hücre tırnaklı; `=`, `+`, `-`, `@` (ve sekme/CR) ile başlayan
   hücrenin başına `'` eklenir (CSV injection). Sütunlar: `Submitted (<timezone>)` ("March 1, 2027 10:05 AM", sitenin
-  saat diliminde), `Name`, `Email`, `Attending` (Yes/No), `Guests`, `Message`; eskiden yeniye.
+  saat diliminde), `Name`, `Email`, `Attending` (Yes/No), `Guests`, `Message`; eskiden yeniye. **G051:** `Message`'tan sonra her özel soru
+  için bir sütun (başlık = sorunun şimdiki metni, yayındaki içerikten); sonradan silinen sorunun cevapları da kendi sütununda kalır
+  (başlık = misafirin gördüğü metin). Sorusuz sitede CSV eskisiyle aynı (6 sütun). Başlıklar ve cevaplar da formül korumalı.
 - Panel sunucuda doğrudan da çağırabilir: `authorizeEditor`, `rsvpSummary`, `rsvpCounts`, `rsvpCsvForSite` (`lib/rsvp/couple.ts`).
 
 Tarayıcı kontrolü (build gerekir; `npm test`'e dahil değil):
@@ -451,7 +480,10 @@ Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (
   Story (giriş + anlar: başlık ≤ 60, metin ≤ 400; sayı temaya göre) · Details (dress code; map, travel & stay = `urls.accommodation`,
   registry linkleri) · RSVP (son tarih "Replies close at the end of Saturday, April 3, 2027 (America/New York time)",
   "Accept replies on the website" = `rsvp.method` null/`none`, gelen yanıtlar + sayılar + CSV, "Refresh"; yanıt seç → "Remove
-  selected" (bir kez daha sorar); bekleyen yanıtlar ayrı kutuda "Keep"/"Remove"; ilk 20 + "Show all") ·
+  selected" (bir kez daha sorar); bekleyen yanıtlar ayrı kutuda "Keep"/"Remove"; ilk 20 + "Show all"; G051: "Questions for your
+  guests" (≤ 3 özel soru: metin, "Guests pick one choice"/"Guests write a short answer", seçenek ekle/sil (≤ 8), yukarı/aşağı/sil),
+  yanıt listesinde her cevap "Meal choice: Fish") · Questions & answers (G051; yalnız temada `faq` listesi varsa: "Show on the website"
+  anahtarı = `optional_blocks.faq`, soru ≤ 120 / yanıt ≤ 600, ekle/sil/yukarı/aşağı, en çok 12) ·
   Optional sections (yalnız temanın sayfalarında `data-optional` ile geçen bloklar) · Photos (`theme.json` foto alanları; şekil kelimeyle:
   "Tall (portrait)", "Almost square", "Wide (landscape)"; küçük resimler önizleme anahtarıyla).
 - **Temaya göre alanlar** (`lib/panel/state.ts` `themeFieldUse`, şablon işaretlerinden): tema göstermediği alanı panel sormaz —
@@ -538,8 +570,8 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
 - Site başına yükleme kotası / hız sınırı yok (yalnız 256-bit anahtar sahibi yükleyebilir).
 - Vercel fonksiyon gövde sınırı 4.5 MB: tarayıcı çıktısı ≤ 3.5 MB tutulur; sunucudaki 10 MB sınırı Vercel dışında geçerli.
   Supabase'de imzalı doğrudan yükleme (G043/G044) düşünülebilir.
-- Şemada serbest metin "travel" alanı yok: Travel & stay = konaklama linki + `travel_stay` anahtarı. FAQ / guest policy metinleri de
-  şemada yok (yalnız aç/kapa). İkinci isim eklenebilir ama silinemez.
+- Şemada serbest metin "travel" alanı yok: Travel & stay = konaklama linki + `travel_stay` anahtarı. Guest policy metni de şemada yok
+  (yalnız aç/kapa); SSS metinleri G051'den beri var (`faq`). İkinci isim eklenebilir ama silinemez.
 - Düzenleme linki URL'de kalır (yer imi için). Alıcının kendisinin "yeni link üret" düğmesi yok; mağaza/operatör aracı var
   (`scripts/reissue-edit-key.ts`, aşağıda /start).
 - Gerçek telefonda (iOS Safari / Android Chrome) denenmedi; yalnız Chromium mobil emülasyonu. HEIC yalnız onu çözebilen tarayıcıda
@@ -658,6 +690,63 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
   kalem bazlı kontrol gerekir.
 - Etsy doğrulaması kapalıyken biçimi doğru herhangi bir numara bir taslak site açabilir (hız sınırları + honeypot dışında engel yok).
 - Gerçek telefonda (iOS Safari / Android Chrome) ve Vercel'de denenmedi; yalnız Chromium mobil emülasyonu ve `next start`.
+
+## Takvime ekle, SSS, RSVP özel soruları (G051)
+
+Etsy araştırmasında (`docs/13` §7) rakiplerde standart olup lisans/karar gerektirmeyen üç özellik. Müzik çalar **yok** (AGENTS şart 9).
+
+### Takvime ekle (`lib/calendar.ts`, `lib/site/ics.ts`)
+- **Rota** `GET /<slug>/event.ics` (statik segment, `[page]`'den önce gelir): yayındaki sitenin `publishedContent`'i → `text/calendar;
+  charset=utf-8`, `Content-Disposition: attachment; filename="<slug>.ics"`, `public, max-age=0, must-revalidate`, `noindex`.
+  Yayınlanmamış / yayından kaldırılmış site, bilinmeyen ya da ayrılmış slug, okunamayan tarih → **404**. Taslak yalnız geçerli
+  `?preview=<önizleme anahtarı>` ile (`private, no-store`, `no-referrer`); yayındaki dosya yayınlanmamış düzenlemeyi göstermez.
+  `/Clara-And-Julian/event.ics` → 308. Tema demosu: `GET /start/demo/<tema>/event.ics` (demo kaydı; `internal`/bilinmeyen tema 404;
+  `next.config.ts` + `trace-check.cjs` listesinde).
+- **Dosya (RFC 5545):** `VCALENDAR` (`VERSION:2.0`, `PRODID:-//Wedding website//Add to calendar//EN`, `METHOD:PUBLISH`) + tek `VEVENT`:
+  `UID:<slug>@<host>` (sabit: yeniden içe aktarılınca aynı kayıt güncellenir), `DTSTAMP`/`LAST-MODIFIED` = yayın zamanı, `DTSTART`/`DTEND`
+  **UTC** (`…Z`; VTIMEZONE gerekmez), `SUMMARY` ("Clara & Julian’s Wedding"; engagement → "… Engagement Party", bridal_shower →
+  "… Bridal Shower", other → yalnız isimler), `LOCATION` (mekân, adres, şehir/bölge/ülke), `DESCRIPTION` (program "Order of the day
+  (America/New York time):" + satırlar, dress code yalnız bloğu açıksa, "Website: <adres>"), `URL`. TEXT kaçışı (`\\ ; , \n`), satırlar
+  75 oktette katlanır (UTF-8 karakter bölünmez), CRLF.
+- **Saatler** (şemada bitiş saati yok; kural burada): başlangıç = `ceremony_time`, yoksa programın en erken saati; bitiş = başlangıçtan
+  sonraki son program saati **+ 2 saat** (`END_AFTER_LAST_MS`; en az başlangıç + 2 saat). Duvar saati → UTC `zonedTimeToUtc` ile
+  (yaz saati: Temporal "compatible" — olmayan 02:30 → 03:30; akşam saat geri alınırsa gerçek 2 saat). Hiç saat yoksa tüm gün
+  (`VALUE=DATE`, bitiş ertesi gün); geçersiz saat diliminde "floating" yerel saat (Z'siz; doğrulama zaten uyarır).
+- **Google Calendar:** `https://calendar.google.com/calendar/render?action=TEMPLATE&text=…&dates=<başlangıç>Z/<bitiş>Z&details=…&location=…&ctz=<IANA>`
+  (tüm günde `dates=YYYYMMDD/YYYYMMDD`, `ctz` yok). Link sunucuda üretilir (`data-calendar="google"`); sayfa kaynağına giren bilgi
+  zaten sayfada görünen bilgidir (kapalı bloklar girmez).
+- Tema işareti `data-calendar="ics|google"` (yukarıda işaret tablosu). blush-garden-rose: home (davet kartı altı) + details (program kartı altı).
+
+### SSS — soru ve yanıtlar
+- Şema: `faq: [{q, a}]` (en çok 12; `q` ≤ 120, `a` ≤ 600; başka alan yok). İş kuralı: boş/yalnız boşluk soru ya da yanıt **hata**
+  (`faq_question_empty`, `faq_answer_empty`); `optional_blocks.faq` açık ama liste boş → **uyarı** (`faq_empty`). "Boş" karakter kümesi
+  TS ve Python'da aynı yazıldı (JS `\s` ile Python `isspace()` farklı). `tools/validate_content.py` ile geçti/kaldı eşliği testte
+  (`content.test.ts`, 21 G051 vakası + 20 koleksiyon kaydı).
+- Tema: `<details data-repeat="faq"><summary data-field=".q">…<p data-field=".a">` bloğu `data-optional="faq" data-if="faq"` içinde;
+  kapalı blok ya da boş liste sayfa kaynağında hiç yok. Yanıttaki satır sonları CSS `white-space: pre-line` ile.
+- Panel: "Questions & answers" bölümü yalnız tema `faq` listesini gösteriyorsa (`themeFieldUse().faq`); yayın öncesi notlarda
+  "Sections without content" (açık ama sorusuz). Temanın demo kaydında örnek SSS varsa değiştirilmemiş olanlar "Sample" işaretlenir.
+
+### RSVP özel soruları
+- Şema: `rsvp.questions: [{id, label, type: "choice"|"text", options?: string[]}]` (en çok 3; `label` ≤ 120; ≤ 8 seçenek, her biri ≤ 60).
+  İş kuralı: `id` = `[a-z0-9][a-z0-9_-]{0,23}` ve tekil; boş soru metni hata; `choice` en az 2 dolu ve birbirinden farklı (büyük/küçük
+  harf duyarsız) seçenek, boş seçenek hata; `text` seçeneksiz. Panel id'yi kendisi üretir (`q` + 6 karakter, `newQuestionId`) ve
+  hiç değiştirmez: cevaplar id ile saklandığı için soru metnini değiştirmek/sıralamak eski cevapları karıştırmaz.
+- Misafir formu, saklama, API, CSV: yukarıda "RSVP" (`answers`, `answer:<id>`, CSV sütunları). Geriye uyum: eski yanıtlar `answers`
+  alanı olmadan okunur (listede `answers: []`, CSV'de boş hücre); sorusuz sitenin CSV'si değişmedi.
+- Panel: RSVP bölümünde "Questions for your guests" (yalnız tema `rsvp.questions` listesini gösteriyorsa); yanıt listesinde cevaplar.
+
+### Testler
+`tests/calendar.test.ts` (12: saat dilimleri — EST/EDT, BST/GMT, AEST/AEDT, +05:30, yaz saati boşluğu, gece yarısını geçen akşam —,
+tüm gün, floating, başlık, gizlilik, kaçış/katlama, dosya yapısı, Google linki, motor işareti, rota: yayında/taslak/önizleme/yayından
+kaldırılmış/bilinmeyen/ayrılmış/büyük harf, demo rotası) · `content.test.ts` (şema sınırları, kurallar, Python eşliği) · `rsvp.test.ts`
+(cevap doğrulama, "no" cevap saklamaz, CSV sütunları + silinen soru + formül koruması) · `rsvp-api.test.ts` (uçtan uca: eski yanıt,
+cevaplı yanıt, ret, geçersiz seçenek 400, çift gönderim, liste, yeniden adlandırılan/silinen soru CSV'si) · `adapter.test.ts` (local + blob
+`answers` saklama) · `panel.test.ts` (taslak/yayın, yapı reddi, notlar, id) · `theme-blush-garden-rose.test.ts` (3) ·
+**tarayıcı:** `tests/g051-browser.ts` (390 px, 43 kontrol; yukarıda "Çalıştırma").
+
+Denenmedi: gerçek iPhone/Android'de `.ics` açılışı (iOS "Add to Calendar" sayfası, Android'de dosya → takvim uygulaması), Outlook/Apple
+Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), Google Calendar linkinin oturum açık bir hesapta açılışı.
 
 ## Güvenlik özeti
 

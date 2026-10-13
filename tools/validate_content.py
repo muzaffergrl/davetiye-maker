@@ -9,6 +9,7 @@ Kullanım:
 her format bu metinlerle karşılaştırılmalıdır.
 """
 import json
+import re
 import sys
 from datetime import date, time
 from pathlib import Path
@@ -18,6 +19,15 @@ SCHEMA = ROOT / "docs" / "03_URUN_ICERIK_SEMASI.json"
 
 # Önceki görsellerde geçen, bize ait olmayan / kurgu hedefler.
 FORBIDDEN_STRINGS = ["averyandjordan.com", "1234 Celebration Lane"]
+
+# G051: RSVP soru kimliği ve "boş" metin. platform/lib/content/validate.ts ile birebir aynı
+# (JS \s ile Python str.isspace() birkaç karakterde ayrıştığı için küme açıkça yazıldı).
+QUESTION_ID_RE = re.compile(r"[a-z0-9][a-z0-9_-]{0,23}")
+WS = "\t\n\v\f\r \x1c\x1d\x1e\x1f\x85\xa0 " + "".join(chr(c) for c in range(0x2000, 0x200B)) + "    　﻿"
+
+
+def is_blank(value) -> bool:
+    return not isinstance(value, str) or value.strip(WS) == ""
 
 
 def fmt_date(d: date, locale: str) -> str:
@@ -92,6 +102,41 @@ def rule_errors(record: dict) -> tuple[list[str], list[str]]:
         warnings.append("registry bloğu açık ama registry URL yok")
     if blocks.get("dress_code") and not record.get("dress_code"):
         warnings.append("dress_code bloğu açık ama dress_code boş")
+
+    # G051 — SSS: boş soru/yanıt misafire boş satır olarak görünür.
+    faq = record.get("faq") or []
+    for i, item in enumerate(faq):
+        if is_blank(item.get("q")):
+            errors.append(f"faq.{i}.q: soru boş")
+        if is_blank(item.get("a")):
+            errors.append(f"faq.{i}.a: yanıt boş")
+    if blocks.get("faq") and not faq:
+        warnings.append("faq bloğu açık ama hiç soru yok")
+
+    # G051 — RSVP özel soruları: kalıcı id, okunur soru, choice = en az 2 farklı seçenek, text = seçeneksiz.
+    seen = set()
+    for i, q in enumerate((record.get("rsvp") or {}).get("questions") or []):
+        at = f"rsvp.questions.{i}"
+        qid = q.get("id")
+        if not isinstance(qid, str) or not QUESTION_ID_RE.fullmatch(qid):
+            errors.append(f"{at}.id: geçersiz soru kimliği {qid!r}")
+        elif qid in seen:
+            errors.append(f"{at}.id: aynı kimlik iki soruda: {qid!r}")
+        seen.add(qid)
+        if is_blank(q.get("label")):
+            errors.append(f"{at}.label: soru metni boş")
+        options = q.get("options") or []
+        if q.get("type") == "choice":
+            for j, o in enumerate(options):
+                if is_blank(o):
+                    errors.append(f"{at}.options.{j}: boş seçenek")
+            filled = [o.strip(WS).lower() for o in options if not is_blank(o)]
+            if len(filled) < 2:
+                errors.append(f"{at}.options: seçenekli soruda en az 2 seçenek olmalı")
+            elif len(set(filled)) != len(filled):
+                errors.append(f"{at}.options: aynı seçenek iki kez")
+        elif options:
+            errors.append(f"{at}.options: kısa yanıtlı soruda seçenek olmaz")
     return errors, warnings
 
 

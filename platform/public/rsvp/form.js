@@ -4,6 +4,11 @@
  *   <form data-rsvp-form method="post"> inputs by name: name, email, attending, guests, message </form>
  *   <div data-rsvp-state="success" hidden> ... </div>   (also: closed, error, preview)
  *
+ * Custom questions (G051): each question's wrapper carries data-rsvp-question="<id>" (the theme writes it
+ * from content rsvp.questions); this script names its inputs "answer:<id>" and sends the answers as
+ * {answers: {<id>: value}} — only from enabled inputs, so questions inside [data-rsvp-if-attending] are
+ * not sent for a "no". Errors come back keyed "answer:<id>" ([data-rsvp-error-for="answer:<id>"]).
+ *
  * Full contract: platform/README.md, section "RSVP". No dependencies, no inline handlers (CSP).
  * The script reads the slug from the page's #site-data block and talks to /api/rsvp/<slug>.
  * The browser's own validation bubbles are turned off (form.noValidate): the same English messages
@@ -15,6 +20,8 @@
 
   var FIELDS = ['name', 'email', 'attending', 'guests', 'message'];
   var PLAIN_SLUG = /^[a-z0-9-]+$/;
+  var QUESTION_ID = /^[a-z0-9][a-z0-9_-]{0,23}$/;
+  var ANSWER_PREFIX = 'answer:';
   var slotSeq = 0;
   var HONEYPOT = 'website';
   var TEXT = {
@@ -87,6 +94,22 @@
     var root = form.closest('[data-rsvp]');
     var scope = root || document;
     var busy = false;
+    // Custom questions: name their inputs "answer:<id>" (a theme cannot write names from content).
+    var questions = [];
+    each(form.querySelectorAll('[data-rsvp-question]'), function (q) {
+      var id = q.getAttribute('data-rsvp-question') || '';
+      if (!QUESTION_ID.test(id)) return;
+      var name = ANSWER_PREFIX + id;
+      each(q.querySelectorAll('input, select, textarea'), function (c) {
+        if (!c.name) c.name = name;
+      });
+      questions.push({ id: id, name: name });
+    });
+    var fieldNames = FIELDS.concat(
+      questions.map(function (q) {
+        return q.name;
+      })
+    );
 
     function panels() {
       return scope.querySelectorAll('[data-rsvp-state]');
@@ -188,7 +211,7 @@
 
     function clearInvalid(target) {
       var name = target && target.name;
-      if (!name || FIELDS.indexOf(name) === -1) return;
+      if (!name || fieldNames.indexOf(name) === -1) return;
       var f = form.elements.namedItem(name);
       if (!f) return;
       var slots = scope.querySelectorAll('[data-rsvp-error-for="' + name + '"]');
@@ -207,7 +230,7 @@
     /** Field messages from the browser's constraint check, worded like the server's (lib/rsvp/validate.ts). */
     function clientErrors() {
       var out = null;
-      FIELDS.forEach(function (name) {
+      fieldNames.forEach(function (name) {
         var f = form.elements.namedItem(name);
         if (!f) return;
         var list = isRadioList(f) ? Array.prototype.slice.call(f) : [f];
@@ -221,6 +244,7 @@
         else if (name === 'email') msg = 'Please check your email address.';
         else if (name === 'attending') msg = 'Please let us know if you can attend.';
         else if (name === 'guests') msg = 'Please enter a number of guests from ' + (bad.min || 1) + (bad.max ? ' to ' + bad.max : '') + '.';
+        else if (name.indexOf(ANSWER_PREFIX) === 0) msg = v.tooLong ? 'Please keep your answer to ' + bad.maxLength + ' characters or fewer.' : 'Please check your answer.';
         else msg = 'Please keep your message to ' + (bad.maxLength > 0 ? bad.maxLength : 500) + ' characters or fewer.';
         out = out || {};
         out[name] = msg;
@@ -232,7 +256,7 @@
       if (!fields) return;
       var first = null;
       var firstHasSlot = false;
-      FIELDS.forEach(function (name) {
+      fieldNames.forEach(function (name) {
         var msg = fields[name];
         if (!msg) return;
         var f = form.elements.namedItem(name);
@@ -274,6 +298,17 @@
       FIELDS.concat([HONEYPOT]).forEach(function (name) {
         out[name] = fieldValue(form, name);
       });
+      if (questions.length) {
+        var answers = {};
+        questions.forEach(function (q) {
+          var f = form.elements.namedItem(q.name);
+          var c0 = f && firstControl(f);
+          if (!c0 || c0.disabled) return; // e.g. a guest who declines: questions are for those who accept
+          var v = fieldValue(form, q.name);
+          if (v !== '') answers[q.id] = v;
+        });
+        out.answers = answers;
+      }
       return out;
     }
 

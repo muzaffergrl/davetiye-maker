@@ -24,7 +24,7 @@ export const OPTIONAL_BLOCK_LABELS: Record<OptionalBlockKey, { label: string; hi
   dress_code: { label: 'Dress code', hint: 'Shows the dress code from Details.' },
   registry: { label: 'Registry', hint: 'A button to your registry link from Details.' },
   travel_stay: { label: 'Travel & stay', hint: 'A button to your accommodation link from Details.' },
-  faq: { label: 'Questions & answers', hint: 'The short Q&A block of the design.' },
+  faq: { label: 'Questions & answers', hint: 'Your questions and answers for guests (write them under Questions & answers).' },
   guest_policy: { label: 'Guest policy', hint: 'The guest policy note of the design.' },
 };
 
@@ -55,6 +55,10 @@ export interface ThemeFieldUse {
   storyText: boolean;
   /** How many story moments the theme shows (0 = none). */
   storyItems: number;
+  /** The questions & answers list (content faq, G051). */
+  faq: boolean;
+  /** Custom questions in the guest reply form (content rsvp.questions, G051). */
+  rsvpQuestions: boolean;
 }
 
 export interface PanelTheme {
@@ -228,7 +232,7 @@ export function withPartnerName(
 // ---------------------------------------------------------------------------------------------
 // Sections and issues
 
-export const SECTION_IDS = ['couple', 'date', 'venue', 'schedule', 'story', 'details', 'rsvp', 'optional', 'photos'] as const;
+export const SECTION_IDS = ['couple', 'date', 'venue', 'schedule', 'story', 'details', 'faq', 'rsvp', 'optional', 'photos'] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export const SECTION_TITLES: Record<SectionId, string> = {
@@ -238,6 +242,7 @@ export const SECTION_TITLES: Record<SectionId, string> = {
   schedule: 'Schedule',
   story: 'Story',
   details: 'Details',
+  faq: 'Questions & answers',
   rsvp: 'RSVP',
   optional: 'Optional sections',
   photos: 'Photos',
@@ -266,6 +271,8 @@ export function sectionForPath(path: string): SectionId | null {
     case 'dress_code':
     case 'urls':
       return 'details';
+    case 'faq':
+      return 'faq';
     case 'rsvp':
       return 'rsvp';
     case 'optional_blocks':
@@ -380,6 +387,23 @@ export function sampleNotes(content: ContentRecord, sample: ContentRecord | null
       }
     });
   }
+  // G051: a design's demo record may carry sample questions & answers and reply-form questions.
+  if (blocks.faq === true) {
+    const demoFaq = new Set((sample.faq ?? []).flatMap((it) => [it.q, it.a]).map((t) => (t ?? '').trim()).filter(Boolean));
+    (content.faq ?? []).forEach((it, i) => {
+      if ((it.q && demoFaq.has(it.q.trim())) || (it.a && demoFaq.has(it.a.trim()))) {
+        notes.push({ path: `faq.${i}.q`, message: `Questions & answers, question ${i + 1}: still the sample text.` });
+      }
+    });
+  }
+  if (content.rsvp?.method !== 'none') {
+    const demoQuestions = new Set((sample.rsvp?.questions ?? []).map((q) => (q.label ?? '').trim()).filter(Boolean));
+    (content.rsvp?.questions ?? []).forEach((q, i) => {
+      if (q.label && demoQuestions.has(q.label.trim())) {
+        notes.push({ path: `rsvp.questions.${i}.label`, message: `RSVP, question ${i + 1}: still the sample question.` });
+      }
+    });
+  }
   return notes;
 }
 
@@ -401,6 +425,8 @@ export function prePublishNotes(content: ContentRecord, theme: Pick<PanelTheme, 
   sample: PublishNote[];
   photos: PublishNote[];
   links: PublishNote[];
+  /** Sections that are on but have nothing to show yet (G051: questions & answers). */
+  empty: PublishNote[];
 } {
   const blocks = (content.optional_blocks ?? {}) as Record<string, unknown>;
   const storyOn = blocks.our_story === true;
@@ -413,7 +439,23 @@ export function prePublishNotes(content: ContentRecord, theme: Pick<PanelTheme, 
     path: `urls.${l.url}`,
     message: `${l.label} is on but has no link yet, so guests do not see it.`,
   }));
-  return { sample: sampleNotes(content, theme.sample), photos, links };
+  const empty =
+    theme.optionalBlocks.includes('faq') && blocks.faq === true && !(content.faq ?? []).length
+      ? [{ path: 'faq', message: 'Questions & answers is on but has no questions yet, so guests do not see it.' }]
+      : [];
+  return { sample: sampleNotes(content, theme.sample), photos, links, empty };
+}
+
+// ---------------------------------------------------------------------------------------------
+// Custom questions (G051)
+
+/** A new question id ("q" + 6 random a-z0-9) not used by `existing`; matches QUESTION_ID_RE. */
+export function newQuestionId(existing: readonly string[], random: () => number = Math.random): string {
+  for (;;) {
+    let id = 'q';
+    for (let i = 0; i < 6; i++) id += 'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(random() * 36) % 36];
+    if (!existing.includes(id)) return id;
+  }
 }
 
 // ---------------------------------------------------------------------------------------------

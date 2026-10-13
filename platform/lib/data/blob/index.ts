@@ -474,6 +474,7 @@ export class BlobAdapter implements DataAdapter {
       attending: input.attending,
       guests: input.guests,
       message: input.message ?? null,
+      ...(input.answers?.length ? { answers: input.answers.map((a) => ({ id: a.id, question: a.question, answer: a.answer })) } : {}),
       createdAt: new Date(ms).toISOString(),
       ...(input.held ? { held: true } : {}),
     };

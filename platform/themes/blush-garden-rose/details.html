@@ -1,7 +1,8 @@
 <!doctype html>
 <!-- Blush Garden Rose · page 4 — Details (/<slug>/details): Order of the Day on the info card (comp scene 5, one row per
      schedule item), dress code, venue (photo slot "venue" in the GPT landscape gold frame, G047) + map, travel & stay,
-     registry. Missing URLs → the platform sets href="#" + data-url-missing; site.js shows "link will be added soon".
+     registry, add to calendar and questions & answers (G051). Missing URLs → the platform sets href="#" + data-url-missing;
+     site.js shows "link will be added soon".
      Personal text: none — filled on the server. Block intros = design copy. -->
 <html lang="en" class="no-js">
 <head>
@@ -46,6 +47,11 @@
         <p class="dress" data-optional="dress_code" data-if="dress_code" data-step="dress" data-a="fade">Dress code · <em data-field="dress_code"></em></p>
       </div>
     </div>
+    <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+    <div class="cal" data-step="cal" data-a="rise">
+      <p class="kicker">Add to your calendar</p>
+      <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
+    </div>
   </section>
 
   <section class="wrap blocks" aria-label="Venue and travel">
@@ -82,6 +88,18 @@
         <p class="note">Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.</p>
       </div>
       <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.registry" target="_blank">View registry</a></p>
+    </div>
+  </section>
+
+  <!-- QUESTIONS & ANSWERS (content faq, G051) — native details/summary: opens and closes without JS -->
+  <section class="wrap faq-sec" data-scene="details-faq" data-optional="faq" data-if="faq" aria-labelledby="faq-title">
+    <h2 class="script" id="faq-title" data-step="title" data-a="write">Questions <span class="amp">&amp;</span> Answers</h2>
+    <img class="divider" data-step="divider" data-a="unfurl" src="img/divider-300.webp" alt="">
+    <div class="faq-list">
+      <details class="faq-item" data-repeat="faq" data-step="item" data-a="rise">
+        <summary><span class="faq-q" data-field=".q"></span></summary>
+        <p class="faq-a" data-field=".a"></p>
+      </details>
     </div>
   </section>
 

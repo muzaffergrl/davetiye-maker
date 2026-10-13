@@ -6,6 +6,8 @@
 // the RSVP form shows its "preview, replies are not sent" panel and never posts. Same CSP as sites
 // (frame-ancestors 'self': /start embeds it in an iframe). Internal and unknown themes -> 404.
 
+import { calendarEvent } from '../calendar.ts';
+import { icsResponse } from '../site/ics.ts';
 import { siteCsp, isSitePage } from '../site/render.ts';
 import { renderTemplate } from '../theme/engine.ts';
 import { readThemePage } from '../theme/theme.ts';
@@ -74,5 +76,20 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       status: 500,
       headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store' },
     });
+  }
+}
+
+/** GET /start/demo/<theme>/event.ics: "Add to calendar" of the demo's fictional event (G051). */
+export async function handleDemoIcs(req: Request, themeId: string): Promise<Response> {
+  try {
+    const theme = await claimableTheme(themeId);
+    if (!theme) return demoNotFound();
+    const url = new URL(req.url);
+    const event = calendarEvent(theme.demo, { siteUrl: `${url.origin}${demoBase(theme.id)}` });
+    if (!event) return demoNotFound();
+    return icsResponse(event, { uid: `demo-${theme.id}@${url.host}`, filename: `${theme.id}-demo.ics`, preview: false });
+  } catch (e) {
+    console.error(`[claim] demo ${themeId}/event.ics:`, e);
+    return demoNotFound();
   }
 }

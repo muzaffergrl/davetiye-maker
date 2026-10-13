@@ -22,6 +22,7 @@ const THEME_ROUTES = [
   '/start',
   '/start/demo/\\[theme\\]',
   '/start/demo/\\[theme\\]/\\[page\\]',
+  '/start/demo/\\[theme\\]/event\\.ics',
   '/api/start',
   '/api/start/slug',
 ];

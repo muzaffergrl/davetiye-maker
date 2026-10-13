@@ -67,6 +67,18 @@
             <input type="number" name="guests" min="1" value="1" inputmode="numeric">
           </label>
           <p class="field-error" data-rsvp-error-for="guests"></p>
+          <!-- the couple's own questions (content rsvp.questions, G051): asked of guests who accept; form.js names the
+               inputs "answer:<id>". Choice = pills like "Will you attend?", text = a short answer. -->
+          <div class="questions" data-rsvp-if-attending data-if="rsvp.questions">
+            <fieldset class="choice question" data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">
+              <legend class="kicker" data-field=".label"></legend>
+              <div class="q-options" data-if=".options">
+                <label data-repeat=".options"><input type="radio" data-attr-value="."> <span data-field="."></span></label>
+              </div>
+              <textarea data-if="!.options" rows="2" maxlength="300" data-attr-aria-label=".label"></textarea>
+              <p class="field-error" data-attr-data-rsvp-error-for="answer:{.id}"></p>
+            </fieldset>
+          </div>
           <label class="field"><span class="kicker">A note for the couple <span class="opt">(optional)</span></span>
             <textarea name="message" rows="3" maxlength="500"></textarea>
           </label>

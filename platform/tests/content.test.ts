@@ -208,3 +208,143 @@ test('pass/fail parity with tools/validate_content.py', (t) => {
     assert.equal(validateContent(record).ok, pyOk, `case ${name}: TS ok must equal Python ok (${pyOk})`);
   }
 });
+
+// ---------------------------------------------------------------- G051: FAQ and RSVP questions
+
+const withFaqAndQuestions = () => {
+  const c = demoContent();
+  c.optional_blocks.faq = true;
+  c.faq = [
+    { q: 'Is there parking?', a: 'Yes, free parking on site.\nThe gate opens at 3 PM.' },
+    { q: 'Can we bring children?', a: 'We love your little ones, but this is an adults-only celebration.' },
+  ];
+  c.rsvp.questions = [
+    { id: 'meal', label: 'Meal choice', type: 'choice', options: ['Chicken', 'Fish', 'Vegetarian'] },
+    { id: 'q-song_1', label: 'A song that gets you dancing', type: 'text' },
+  ];
+  return c;
+};
+
+test('G051 schema: faq and rsvp.questions are optional, valid with sensible content', () => {
+  const c = withFaqAndQuestions();
+  const r = validateContent(c);
+  assert.deepEqual(r.errors, []);
+  assert.deepEqual(r.warnings, []);
+  const without = demoContent();
+  assert.equal('faq' in without || 'questions' in without.rsvp, false, 'existing records have neither');
+  assert.equal(validateContent(without).ok, true);
+});
+
+test('G051 schema limits: 12 questions & answers, lengths, 3 RSVP questions, 8 choices of 60 characters, closed shapes', () => {
+  const c = withFaqAndQuestions() as any;
+  c.faq = Array.from({ length: 13 }, () => ({ q: 'Q?', a: 'A.' }));
+  c.faq[0] = { q: 'q'.repeat(121), a: 'a'.repeat(601), extra: 1 };
+  c.faq[1] = { q: 'Only a question' };
+  c.rsvp.questions = [
+    { id: 'a', label: 'l'.repeat(121), type: 'menu' },
+    { id: 'b', label: 'B', type: 'choice', options: Array.from({ length: 9 }, (_, i) => `o${i}`) },
+    { id: 'c', label: 'C', type: 'choice', options: ['x'.repeat(61), 'y'] },
+    { id: 'd', label: 'D', type: 'text' },
+  ];
+  const r = validateContent(c);
+  const byPath = Object.fromEntries(r.errors.map((e) => [e.path, e.code]));
+  assert.equal(byPath.faq, 'schema_max_items');
+  assert.equal(byPath['faq.0.q'], 'schema_max_length');
+  assert.equal(byPath['faq.0.a'], 'schema_max_length');
+  assert.equal(byPath['faq.0.extra'], 'schema_unknown_field');
+  assert.equal(byPath['faq.1.a'], 'schema_required');
+  assert.equal(byPath['rsvp.questions'], 'schema_max_items');
+  assert.equal(byPath['rsvp.questions.0.label'], 'schema_max_length');
+  assert.equal(byPath['rsvp.questions.0.type'], 'schema_enum');
+  assert.equal(byPath['rsvp.questions.1.options'], 'schema_max_items');
+  assert.equal(byPath['rsvp.questions.2.options.0'], 'schema_max_length');
+});
+
+test('G051 rules: blank FAQ text, question ids, choices (at least two, different), text without choices', () => {
+  const blank = withFaqAndQuestions();
+  blank.faq![0].q = '   ';
+  blank.faq![1].a = '　﻿';
+  assert.deepEqual(codes(validateContent(blank), 'errors'), ['faq_question_empty', 'faq_answer_empty']);
+
+  const q = withFaqAndQuestions();
+  q.rsvp.questions = [
+    { id: 'Meal', label: 'Meal', type: 'choice', options: ['A', 'B'] },
+    { id: 'song', label: ' ', type: 'text' },
+    { id: 'song', label: 'Song', type: 'text', options: ['x'] },
+  ];
+  assert.deepEqual(
+    validateContent(q).errors.map((e) => [e.code, e.path]),
+    [
+      ['rsvp_question_id', 'rsvp.questions.0.id'],
+      ['rsvp_question_label_empty', 'rsvp.questions.1.label'],
+      ['rsvp_question_duplicate_id', 'rsvp.questions.2.id'],
+      ['rsvp_question_text_options', 'rsvp.questions.2.options'],
+    ],
+  );
+
+  const choices = withFaqAndQuestions();
+  choices.rsvp.questions = [
+    { id: 'one', label: 'One choice', type: 'choice', options: ['Only', ''] },
+    { id: 'dup', label: 'Twice', type: 'choice', options: ['Fish', ' fish '] },
+    { id: 'none', label: 'No choices', type: 'choice' },
+  ];
+  assert.deepEqual(
+    validateContent(choices).errors.map((e) => [e.code, e.path]),
+    [
+      ['rsvp_question_option_empty', 'rsvp.questions.0.options.1'],
+      ['rsvp_question_options_missing', 'rsvp.questions.0.options'],
+      ['rsvp_question_option_duplicate', 'rsvp.questions.1.options'],
+      ['rsvp_question_options_missing', 'rsvp.questions.2.options'],
+    ],
+  );
+
+  const on = demoContent();
+  on.optional_blocks.faq = true;
+  assert.deepEqual(codes(validateContent(on), 'warnings'), ['faq_empty'], 'block on without questions: a warning only');
+  assert.equal(validateContent(on).ok, true);
+});
+
+test('G051 pass/fail parity with tools/validate_content.py (FAQ and RSVP questions)', (t) => {
+  if (!pythonAvailable()) return t.skip('python3 + jsonschema not available');
+  const dir = tmpDir();
+  const cases: Array<[string, unknown]> = [];
+  const add = (name: string, edit: (c: any) => void) => {
+    const c = withFaqAndQuestions() as any;
+    edit(c);
+    cases.push([name, c]);
+  };
+  add('ok', () => {});
+  add('faq-on-empty', (c) => (c.faq = []));
+  add('faq-blank-q', (c) => (c.faq[0].q = ' \t'));
+  add('faq-blank-a-feff', (c) => (c.faq[0].a = '﻿'));
+  add('faq-blank-a-1c', (c) => (c.faq[0].a = '\x1c\x85'));
+  add('faq-zero-width-space', (c) => (c.faq[0].a = '​'));
+  add('faq-long', (c) => (c.faq[0].a = 'a'.repeat(601)));
+  add('faq-13', (c) => (c.faq = Array.from({ length: 13 }, () => ({ q: 'Q', a: 'A' }))));
+  add('faq-missing-a', (c) => delete c.faq[0].a);
+  add('q-4', (c) => c.rsvp.questions.push({ id: 'x', label: 'X', type: 'text' }, { id: 'y', label: 'Y', type: 'text' }));
+  add('q-bad-id', (c) => (c.rsvp.questions[0].id = 'Meal'));
+  add('q-id-newline', (c) => (c.rsvp.questions[0].id = 'meal\n'));
+  add('q-dup-id', (c) => (c.rsvp.questions[1].id = 'meal'));
+  add('q-blank-label', (c) => (c.rsvp.questions[0].label = ' '));
+  add('q-one-option', (c) => (c.rsvp.questions[0].options = ['Fish']));
+  add('q-dup-option', (c) => (c.rsvp.questions[0].options = ['Fish', 'FISH ']));
+  add('q-blank-option', (c) => c.rsvp.questions[0].options.push('  '));
+  add('q-text-options', (c) => (c.rsvp.questions[1].options = ['x']));
+  add('q-type', (c) => (c.rsvp.questions[0].type = 'menu'));
+  add('q-9-options', (c) => (c.rsvp.questions[0].options = Array.from({ length: 9 }, (_, i) => `o${i}`)));
+  add('q-unknown-field', (c) => (c.rsvp.questions[0].required = true));
+  for (const [name, record] of cases) {
+    const file = path.join(dir, `g051-${name}.json`);
+    writeFileSync(file, JSON.stringify(record));
+    let pyOk = true;
+    try {
+      execFileSync('python3', [path.join(REPO_ROOT, 'tools/validate_content.py'), file], { stdio: 'pipe' });
+    } catch {
+      pyOk = false;
+    }
+    assert.equal(validateContent(record).ok, pyOk, `case ${name}: TS ok must equal Python ok (${pyOk})`);
+  }
+  const passing = cases.filter(([, r]) => validateContent(r).ok).map(([n]) => n);
+  assert.deepEqual(passing, ['ok', 'faq-on-empty', 'faq-zero-width-space'], 'both outcomes are exercised');
+});

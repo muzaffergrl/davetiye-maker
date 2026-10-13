@@ -792,6 +792,24 @@
   font-size: 0.92rem;
 }
 
+/* G051: a guest's answers to the couple's questions, one line each */
+.replyAnswer {
+  display: block;
+  font-size: 0.92rem;
+}
+
+/* G051: one choice of a reply-form question + its Remove button */
+.choiceRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.choiceRow > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
 /* ---------------------------------------------------------------- sticky bar */
 
 .bar {

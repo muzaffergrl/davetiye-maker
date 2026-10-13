@@ -157,6 +157,21 @@ for (const { name, make } of BACKENDS) {
     await assert.rejects(a.saveRsvp('00000000-0000-4000-8000-000000000000', { name: 'x', attending: true, guests: 1 }), NotFoundError);
   });
 
+  test(`[${name}] RSVP answers to custom questions (G051) are stored and listed; replies without them have no answers field`, async () => {
+    const { adapter: a } = make();
+    const s = await a.createSite(newSite('answers-site'));
+    const answers = [{ id: 'meal', question: 'Meal choice', answer: 'Fish' }];
+    const saved = await a.saveRsvp(s.id, { name: 'With', attending: true, guests: 1, answers });
+    assert.deepEqual(saved.answers, answers);
+    answers[0].answer = 'changed after saving';
+    await a.saveRsvp(s.id, { name: 'Without', attending: true, guests: 1 });
+    await a.saveRsvp(s.id, { name: 'Empty list', attending: true, guests: 1, answers: [] });
+    const list = await a.listRsvps(s.id);
+    assert.deepEqual(list[0].answers, [{ id: 'meal', question: 'Meal choice', answer: 'Fish' }], 'stored copy, not the caller\'s array');
+    assert.equal('answers' in list[1], false);
+    assert.equal('answers' in list[2], false);
+  });
+
   test(`[${name}] savePhoto stores real images only and readPhoto refuses odd paths`, async () => {
     const { adapter: a, files } = make();
     const site = await a.createSite(newSite());
