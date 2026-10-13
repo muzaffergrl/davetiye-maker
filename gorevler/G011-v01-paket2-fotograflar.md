@@ -2,7 +2,7 @@
 id: G011
 baslik: V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
 rol: gpt-gorsel
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 1
 bagimli: []
@@ -25,3 +25,6 @@ Demo ve ilan için kurgusal çiftin fotoğrafları (alıcı kendi fotoğrafını
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22–K24: eski video dönemi ortak fotoğrafları; her tasarımın kendi Paket 2 fotoğrafları G2NN içinde (02 için G202)
