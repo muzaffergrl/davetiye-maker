@@ -40,7 +40,18 @@ Canva'ya dokunmazsın, kod yazmazsın, kullanıcıdan hiçbir şey istemezsin.
 - **Yazı yok:** W2 parçalarında harf/rakam/monogram yok — mühür, pul, etiket, bavul etiketi, kitap kapağı dahil.
 - **Birbirine oturan parçalar** (`envelope_closed`, `closure`, `envelope_open`): aynı zarf, aynı ölçü, konum ve açı.
   Önce `envelope_closed`'u üret, diğer ikisinde onu referans ver. Kapak, kapı, cep ayrıca çizilmez; Claude tek
-  görselden keser.
+  görselden keser. **Hiza kontrolü:** `envelope_open`'ı (ve zarfı saran kurdele/sicim `closure`'ını) `envelope_closed`'un
+  üstüne yarı saydam koyup bak — zarfın/klasörün/kitabın/kesenin değişmeyen gövdesi aynı yerde, aynı boyda olmalı. Kayma
+  gözle seçiliyorsa yeniden üret (araç imkân veriyorsa `envelope_closed`'u düzenleyerek); kalan farkı Sonuç'a yaz.
+- **Kesilecek kenarlar görünür olsun** (tema standardı `docs/11_TEMA_STANDARDI.md` §7): Claude açılış parçalarını bu
+  kenarlardan keser — kapalı zarfta kapağın serbest kenarı, gatefold'da iki kapının buluştuğu orta dikiş, kitapta kapağın
+  kenarı ve sırtı, kesede ağzın ön kenarı, açık zarfta ön cebin üst kenarı. Bu kenarlar net bir çizgi ya da ton farkıyla
+  okunmalı. Nesnenin **kendi üstündeki** ince temas gölgesi (kapağın ön yüze bindiği yer) serbest ve gerekli; yasak olan
+  zemine düşen gölge (cast/drop shadow). Kenar zemin rengine karışıyorsa yeniden üret.
+- **Işıma/hâle yok:** nesnenin dışına taşan parıltı, hâle, ışın, "glow", sis yok (site kendisi ekler: ateş böceği ışığı, mum
+  ışığı, altın ışık süpürmesi). Yarı saydam hâle başka zeminde kirli kenar bırakır. Nesnenin yüzeyindeki ışık/parlaklık serbest.
+- **`web_hero` aynı zamanda paylaşım görselidir** (link önizlemesi, 1200×630'a kırpılır): kapalı zarf ve kapanışı altında
+  en az %5 boşlukla **tam** görünür; görselin üst %20'sinde yalnız zemin/dekor; isim için ayrılan orta-üst alan boş.
 - Dikey 1024×1536 görsellerde önemli her şey ortadaki **%85 genişlikte** (telefon yanları kırpar).
 - Opak olanlar `bg_page`, `bg_tile` (dikişsiz), `web_hero` ve tasarıma özel zemin ekleri (04 `bg_desk`, 10 `oak_tile`,
   16 `barnwood`); diğer parçalar şeffaf. Belirleyici olan her parçanın Kaydet satırıdır ("Şeffaf zemin").
