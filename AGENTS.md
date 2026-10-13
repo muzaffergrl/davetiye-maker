@@ -41,7 +41,9 @@ ya da markanın adı değildir. Marka adı henüz seçilmedi.
 
 1. Teslim = alıcının açıp düzenlediği **gerçek Canva projesi**. Tek parça PNG/MP4 "editable" diye sunulmaz.
 2. (Askıda, K22) Video baştan **9:16, 1080 × 1920**; yatay düzeni daraltmak kabul edilmez.
-3. Website **tek uzun landing page**, **mobile-first** (önce 360–430 px tasarlanır, sonra genişler). 1080 × 7800 afiş website sayılmaz.
+3. Website **mobile-first** (önce 360–430 px). Yapı (K23): **ilk sayfa kapalı zarf** → tıklayınca zarf sırayla açılır →
+   asıl içerik **yeni sayfada** (ana sayfa); ek sayfalar (hikâye, detaylar, RSVP…) ana sayfadan. Animasyonlar tasarıma göre sıralı.
+   1080 × 7800 afiş website sayılmaz.
 4. Hikâye: zarf açılır → fotoğraflar tek tek çıkar → davet ve bilgiler → RSVP. Nesneler **ayrı** hareket eder; tüm ekranı zoom/fade yetmez. (K22: bu "şov" artık website'in açılışında ve kaydırmasında.)
 5. Stil: klasik, romantik, zengin, geniş beğeni. Ultra-minimal/editoryal ilk ürün için reddedildi.
 6. Özgünlük: rakipten özellik/UX öğrenilir; logo, fotoğraf, çizim, dantel dosyası, rehber **kopyalanmaz**. `references/market_only/` satışa girmez.
