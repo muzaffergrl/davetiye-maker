@@ -272,6 +272,38 @@ try {
   await ctx.close();
   videoPath = video ? await video.path() : null;
 
+  // 2b. Lost answer: the site is created but the phone never hears back -> the form retries with the same claim
+  //     token and still shows a working edit link (not "this order already has a website").
+  {
+    const lc = await browser.newContext(device);
+    const lp = await lc.newPage();
+    const lostProblems: string[] = [];
+    lp.on('pageerror', (e: Error) => lostProblems.push(e.message));
+    let dropped = 0;
+    await lp.route('**/api/start', async (route: any) => {
+      if (route.request().method() === 'POST' && dropped === 0) {
+        dropped++;
+        const res = await route.fetch(); // created on the server…
+        check('lost answer: the server created the site (201)', res.status() === 201, String(res.status()));
+        return route.abort('connectionreset'); // …but the answer is lost
+      }
+      return route.continue();
+    });
+    await lp.goto(`${BASE}/start?theme=${FIXTURE}`, { waitUntil: 'networkidle' });
+    await fillForm(lp, { order: '7712345600', email: 'rowan@example.test', names: ['Rowan', 'Sage'] });
+    await lp.waitForSelector('[data-slug-available]');
+    await lp.click('button[type="submit"]');
+    await lp.waitForSelector('[data-edit-link]', { timeout: 15_000 }).catch(() => null);
+    const lostLink = (await lp.locator('[data-edit-link]').count()) ? await lp.inputValue('[data-edit-link]') : '';
+    check('lost answer: the form retried by itself and shows the edit link', /\/edit\/rowan-and-sage\?k=/.test(lostLink), lostLink.replace(/k=.*/, 'k=…') || (await lp.locator('main').innerText()).slice(0, 120));
+    check('lost answer: still one site for the order', (await adapter.findSitesByOrderRef('7712345600')).length === 1);
+    const lostKey = new URL(lostLink || 'http://x/').searchParams.get('k');
+    const lostSite = await adapter.getSiteBySlug('rowan-and-sage');
+    check('lost answer: the shown link opens the editor', Boolean(lostSite && lostKey && (await fetch(`${BASE}/edit/rowan-and-sage?k=${lostKey}`)).status === 200));
+    check('lost answer: no page errors', lostProblems.length === 0, lostProblems.join(' | '));
+    await lc.close();
+  }
+
   // 3. Desktop: preview next to the form.
   const desk = await browser.newContext({ viewport: { width: 1280, height: 860 } });
   const dp = await desk.newPage();

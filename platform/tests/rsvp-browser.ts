@@ -162,12 +162,34 @@ try {
     const list2 = await adapter.listRsvps(open.site.id);
     check('decline: stored with 0 guests', list2.length === 2 && list2[1].attending === false && list2[1].guests === 0);
 
-    // 3. Server-side validation message (browser validation switched off for this step).
+    // 3a. Client-side check: the theme's error slots (English, styled), not the browser bubble; nothing is sent.
     await page.click('[data-rsvp-again]');
-    await page.evaluate(() => {
+    const posts: string[] = [];
+    page.on('request', (rq: any) => { if (rq.method() === 'POST') posts.push(rq.url()); });
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(300);
+    const client = await page.evaluate(() => {
       const f = document.querySelector('form[data-rsvp-form]') as HTMLFormElement;
-      f.noValidate = true;
+      const name = f.querySelector('input[name="name"]')!;
+      const att = f.querySelector('input[name="attending"]')!;
+      const slot = (n: string) => document.querySelector(`[data-rsvp-error-for="${n}"]`) as HTMLElement;
+      return {
+        noValidate: f.noValidate,
+        name: slot('name').textContent,
+        // the fixture has no slot for "attending": that field falls back to the browser's message (setCustomValidity)
+        attending: (att as HTMLInputElement).validationMessage,
+        attendingInvalid: att.getAttribute('aria-invalid'),
+        linked: (name.getAttribute('aria-describedby') || '').split(' ').includes(slot('name').id),
+        focus: document.activeElement === name,
+        errorPanel: !(document.querySelector('[data-rsvp-state="error"]') as HTMLElement).hidden,
+      };
     });
+    check('client check: messages in the theme slots, linked to the fields, focus on the first', client.noValidate && client.name === 'Please enter your name.' && client.attending === 'Please let us know if you can attend.' && client.attendingInvalid === 'true' && client.linked && client.focus && !client.errorPanel, JSON.stringify(client));
+    check('client check: nothing sent', posts.length === 0, posts.join(', '));
+    await page.screenshot({ path: path.join(shots, 'rsvp_client_errors_390.png'), fullPage: true });
+
+    // 3b. Server-side validation message (a name of spaces passes the browser's check, the server trims it).
+    await page.fill('input[name="name"]', '   ');
     await page.check('input[name="attending"][value="yes"]');
     await page.click('button[type="submit"]');
     await page.waitForSelector('[data-rsvp-state="error"]:not([hidden])', { timeout: 5000 });

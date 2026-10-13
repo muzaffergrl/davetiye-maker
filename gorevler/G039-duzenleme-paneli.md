@@ -79,6 +79,22 @@ Ayrıntı: `platform/README.md` → "Düzenleme paneli (G039)".
 `baseUpdatedAt`; Supabase Storage'a imzalı doğrudan yükleme (Vercel 4.5 MB sınırı); düzenleme linkini yenileme; şemaya isteğe bağlı
 `travel_note`/FAQ metinleri (docs/03 kararı gerekir); G044 sonrası gerçek telefonda panel + QR okutma testi.
 
+### İnceleme düzeltmeleri (2026-10-13, bağımsız inceleme bulguları)
+- Otomatik kayıt: yanıtı kaybolan kendi kaydı artık "başka cihaz" çakışması sayılmıyor (409 → kayıtlı taslak okunur, aynıysa devam);
+  publish/unpublish kayıtlarla aynı sıradan gidiyor (yavaş yayın sırasında yazılan değişiklik sonra, doğru `updatedAt` ile).
+  Yayın atomik: doğrulanan sürüm yayınlanıyor (`publish(id, {expectedUpdatedAt})`, `StaleSiteError` → 409).
+- İlk isim değişince tam ad (davetiye kartı) da izliyor (boşsa / ilk isme eşitse). Demo kaydıyla aynı kalan değerler "Sample" ve
+  "Before you publish" listesi (örnek metin, boş foto yerleri, linksiz bloklar) + "Publish anyway".
+- Tema göstermediği alanı sormuyor (Monogram, "A few words", an sayısı). Önizleme sekmeleri yalnız açılan sayfalar, 44 px, sarıyor;
+  telefonda gerçek modal (odak, `inert`, geri tuşu kapatır). Sabit çubuk odaklanan alanı örtmüyor; çubuk 360 px'te tek satır.
+  Kırpma ekranında "Use this photo" kısa ekranda da görünür. Program/an "Remove" bir kez daha soruyor; taşımada odak satırı izliyor.
+  Sayaçlar artık canlı bölge değil. Şekiller kelimeyle; "1 moment"; yanıtlarda "Show all".
+- Yanıtlar: seç → "Remove selected", bekleyen (yoğunluk) yanıtlar için "Keep / Remove". Fotoğraflar yayına kadar herkese açık değil
+  (küçük resimler önizleme anahtarıyla). `/edit` başlıkları: `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `no-referrer`.
+- Test: `npm ci`, `npm test` (197/197), `npm run typecheck`, `npm run build` (+ yeni postbuild `trace-check`) temiz; `theme-check.cjs` 68/68, `panel-browser.ts` 72/72, `claim-browser.ts` 50/50, `rsvp-browser.ts` 25/25 (hepsi geçici klasöre, kayıtlı previews değişmedi); `tools/tests/*.py` 6/6. Gerçek telefon, gerçek Vercel/Blob ve canlı yayın **denenmedi**.
+- Yapılmadı: `script-src` CSP (Next satır içi betikleri nonce ister); `deletePhoto` / öksüz foto temizliği (G043).
+
 ## Günlük
 - 2026-10-13 alindi: wf-platform
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme bulguları düzeltildi (kayıt sırası, kayıp yanıt, örnek metin uyarısı, tam ad, modal önizleme, erişilebilirlik) — wf-fix

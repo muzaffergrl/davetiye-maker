@@ -21,14 +21,21 @@ import { prepareDraft, DraftShapeError } from '../lib/panel/draft.ts';
 import { publicOrigin } from '../lib/panel/http.ts';
 import {
   defaultInitials,
+  pageShown,
   panelIssues,
   parseAspect,
   photoAt,
+  prePublishNotes,
+  previewPhotoUrl,
   sameContent,
   sectionForPath,
+  shapeLabel,
   withPartnerName,
   withPhoto,
 } from '../lib/panel/model.ts';
+import { panelTheme, themeFieldUse } from '../lib/panel/state.ts';
+import { draftFromDemo } from '../lib/claim/claim.ts';
+import { readFileSync } from 'node:fs';
 import { centreCrop } from '../lib/panel/photos.ts';
 import { qrMatrix, qrSvg, QR_BORDER } from '../lib/qr.ts';
 import { createSiteWithKeys } from '../lib/sites.ts';
@@ -348,8 +355,12 @@ test('upload: a JPEG is re-encoded (EXIF removed), cropped to the slot ratio and
   assert.match(r.data.url, new RegExp(`^/media/${site.id}/[0-9a-f]{32}\\.jpg$`));
   assert.equal(r.data.width / r.data.height, 0.8); // 4/5 slot: 1200x900 -> 720x900
   const segments = r.data.url.replace('/media/', '').split('/');
-  const media = await mediaRoute(new Request(`${BASE}${r.data.url}`), { params: Promise.resolve({ path: segments }) });
+  // Not published yet: only the buyer's own views (preview key) get the photo.
+  const hidden = await mediaRoute(new Request(`${BASE}${r.data.url}`), { params: Promise.resolve({ path: segments }) });
+  assert.equal(hidden.status, 404, 'an unpublished photo is not public');
+  const media = await mediaRoute(new Request(`${BASE}${r.data.url}?preview=${site.previewKey}`), { params: Promise.resolve({ path: segments }) });
   assert.equal(media.status, 200);
+  assert.equal(media.headers.get('cache-control'), 'private, no-store');
   const meta = await sharp(Buffer.from(await media.arrayBuffer())).metadata();
   assert.equal(meta.format, 'jpeg');
   assert.equal(meta.width, 720);
@@ -462,6 +473,20 @@ test('publish refuses invalid content with clear messages; valid content goes li
   assert.equal($('img[data-photo="hero"]').attr('src'), up.data.url);
 });
 
+test('publish: a save that lands after the version the buyer saw is a 409, not an unchecked publish', async () => {
+  const s0 = await state();
+  const before = (await getDataAdapter().getSiteById(site.id))!.publishedContent;
+  const changed = structuredClone(s0.content);
+  changed.host_line = 'Saved from another phone';
+  await getDataAdapter().updateContent(site.id, changed);
+  const r = await call(publishRoute, 'panel-site', { key: site.editKey, json: { baseUpdatedAt: s0.updatedAt } });
+  assert.equal(r.status, 409);
+  assert.equal(r.data.code, 'conflict');
+  assert.deepEqual((await getDataAdapter().getSiteById(site.id))!.publishedContent, before, 'nothing published');
+  // put the draft back as it was for the next tests
+  await getDataAdapter().updateContent(site.id, s0.content);
+});
+
 test('after publishing: draft edits stay private until the next publish; unpublish takes the site offline', async () => {
   let s = await state();
   assert.equal(s.status, 'published');
@@ -554,6 +579,98 @@ test('withPartnerName keeps the automatic names and monogram in step, never a cu
   c = withPartnerName(c, 1, 'full_name', '  ');
   assert.equal(c.partners[1].full_name, null);
   assert.equal(defaultInitials(c.partners, true), 'E & M');
+});
+
+test('withPartnerName: the full name (invitation card) follows the first name until it is changed by hand', () => {
+  // A /start draft: full name = the typed first name.
+  let c = draftFromDemo(demoContent(), ['Mia', 'Theo']);
+  assert.equal(c.partners[0].full_name, 'Mia');
+  c = withPartnerName(c, 0, 'display_name', 'Ava');
+  c = withPartnerName(c, 1, 'display_name', 'Noah');
+  assert.deepEqual(c.partners.map((p) => p.full_name), ['Ava', 'Noah']);
+  assert.equal(c.name_display, 'Ava & Noah');
+  // an empty full name follows too; a full name typed by hand never does
+  c = withPartnerName(c, 0, 'full_name', '');
+  c = withPartnerName(c, 0, 'display_name', 'Avery');
+  assert.equal(c.partners[0].full_name, 'Avery');
+  c = withPartnerName(c, 1, 'full_name', 'Noah James Hart');
+  c = withPartnerName(c, 1, 'display_name', 'Noe');
+  assert.equal(c.partners[1].full_name, 'Noah James Hart');
+  c = withPartnerName(c, 0, 'display_name', '');
+  assert.equal(c.partners[0].full_name, null);
+});
+
+test('before publishing: sample text from the demo, empty photo places and link blocks without links are listed', async () => {
+  const demo = JSON.parse(readFileSync(path.join(PLATFORM_ROOT, 'lib/claim/demo/blush-garden-rose.json'), 'utf8')) as ContentRecord;
+  const theme = {
+    sample: demo,
+    optionalBlocks: ['our_story', 'countdown', 'dress_code', 'registry', 'travel_stay'] as const,
+    photos: [
+      { key: 'hero_portrait', label: 'Portrait', source: 'media.hero_portrait', aspect: '567/595', ratio: 567 / 595 },
+      { key: 'story_1', label: 'Our Story photo 1', source: 'media.memory_photos.0', aspect: null, ratio: null },
+    ],
+  };
+  const claimed = draftFromDemo(demo, ['Mia', 'Theo']);
+  const notes = prePublishNotes(claimed, { ...theme, optionalBlocks: [...theme.optionalBlocks] });
+  const paths = notes.sample.map((n) => n.path);
+  for (const p of ['date', 'ceremony_time', 'venue.name', 'venue.city', 'host_line', 'dress_code', 'story.intro', 'rsvp.deadline', 'schedule.0.location', 'story.items.0.caption']) {
+    assert.ok(paths.includes(p), `${p} flagged as sample`);
+  }
+  assert.ok(!paths.some((p) => p.startsWith('partners') || p === 'name_display'), 'the buyer\'s names are not sample text');
+  assert.deepEqual(notes.photos.map((n) => n.path), ['media.hero_portrait', 'media.memory_photos.0']);
+  assert.deepEqual(notes.links.map((n) => n.path), ['urls.registry', 'urls.accommodation']);
+  // Changed values and switched-off blocks drop out.
+  const edited = structuredClone(claimed);
+  edited.venue.name = 'Maple Hall';
+  edited.date = '2027-08-21';
+  edited.optional_blocks.our_story = false;
+  edited.optional_blocks.registry = false;
+  edited.urls.accommodation = 'https://hotel.example.org/block';
+  const after = prePublishNotes(edited, { ...theme, optionalBlocks: [...theme.optionalBlocks] });
+  const afterPaths = after.sample.map((n) => n.path);
+  for (const p of ['venue.name', 'date', 'story.intro', 'story.items.0.caption']) assert.ok(!afterPaths.includes(p), p);
+  assert.deepEqual(after.photos.map((n) => n.path), ['media.hero_portrait'], 'story photos do not matter while the story is off');
+  assert.deepEqual(after.links, []);
+  // No demo record (internal theme): no sample notes.
+  assert.deepEqual(prePublishNotes(claimed, { ...theme, sample: null, optionalBlocks: [] }).sample, []);
+});
+
+test('panel theme info: page switches, fields the design shows, sample record; helpers', async () => {
+  const themesBefore = process.env.PLATFORM_THEMES_DIR;
+  process.env.PLATFORM_THEMES_DIR = path.join(PLATFORM_ROOT, 'themes');
+  try {
+    const t = await panelTheme('blush-garden-rose');
+    assert.deepEqual(t.pageRules, { story: { optional: 'our_story', if: null }, rsvp: { optional: null, if: '!rsvp.method' } });
+    assert.deepEqual(t.fields, { initials: false, storyText: false, storyItems: 3 }, 'no monogram, no story text, 3 moments');
+    assert.equal(t.sample?.venue.name, 'The Rosewater Conservatory');
+    const sample = await panelTheme('_sample');
+    assert.deepEqual(sample.fields, { initials: true, storyText: true, storyItems: 12 });
+    assert.equal(sample.sample, null, 'internal theme: no demo record to compare with');
+  } finally {
+    process.env.PLATFORM_THEMES_DIR = themesBefore;
+  }
+  assert.deepEqual(themeFieldUse(['<p data-field="story.items.4.caption"></p><p data-text="{initials} · {date}"></p>']), {
+    initials: true,
+    storyText: false,
+    storyItems: 5,
+  });
+  const c = demoContent();
+  assert.equal(pageShown({ optional: 'our_story', if: null }, c), true);
+  c.optional_blocks.our_story = false;
+  assert.equal(pageShown({ optional: 'our_story', if: null }, c), false);
+  assert.equal(pageShown({ optional: null, if: '!rsvp.method' }, c), true);
+  c.rsvp.method = 'none';
+  assert.equal(pageShown({ optional: null, if: '!rsvp.method' }, c), false);
+  assert.equal(pageShown(undefined, c), true);
+  assert.deepEqual([626 / 868, 567 / 595, 1, 1172 / 681, null].map((r) => shapeLabel(r)), [
+    'Tall (portrait)',
+    'Almost square',
+    'Almost square',
+    'Wide (landscape)',
+    'Any shape',
+  ]);
+  assert.equal(previewPhotoUrl('/media/a/b.jpg', 'k1'), '/media/a/b.jpg?preview=k1');
+  assert.equal(previewPhotoUrl('https://cdn.example.org/x.jpg', 'k1'), 'https://cdn.example.org/x.jpg');
 });
 
 test('small helpers: aspect parsing, issue sections, key-order-free comparison, origin, centre crop', () => {

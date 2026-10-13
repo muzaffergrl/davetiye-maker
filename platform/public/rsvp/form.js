@@ -6,11 +6,16 @@
  *
  * Full contract: platform/README.md, section "RSVP". No dependencies, no inline handlers (CSP).
  * The script reads the slug from the page's #site-data block and talks to /api/rsvp/<slug>.
+ * The browser's own validation bubbles are turned off (form.noValidate): the same English messages
+ * as the server go into the theme's [data-rsvp-error-for] slots, linked to their fields with
+ * aria-describedby. A closed form also gets data-rsvp-reason="deadline|disabled" (theme CSS hook).
  */
 (function () {
   'use strict';
 
   var FIELDS = ['name', 'email', 'attending', 'guests', 'message'];
+  var PLAIN_SLUG = /^[a-z0-9-]+$/;
+  var slotSeq = 0;
   var HONEYPOT = 'website';
   var TEXT = {
     success: 'Thank you! Your reply has been sent.',
@@ -87,6 +92,13 @@
       return scope.querySelectorAll('[data-rsvp-state]');
     }
 
+    function setReason(reason) {
+      each(root ? [form, root] : [form], function (el) {
+        if (reason) el.setAttribute('data-rsvp-reason', reason);
+        else el.removeAttribute('data-rsvp-reason');
+      });
+    }
+
     function setStatus(state) {
       form.setAttribute('data-rsvp-status', state);
       if (root) root.setAttribute('data-rsvp-status', state);
@@ -160,18 +172,60 @@
       });
     }
 
+    function describedBy(c, id, on) {
+      var ids = (c.getAttribute('aria-describedby') || '').split(/\s+/).filter(function (x) {
+        return x && x !== id;
+      });
+      if (on) ids.push(id);
+      if (ids.length) c.setAttribute('aria-describedby', ids.join(' '));
+      else c.removeAttribute('aria-describedby');
+    }
+
+    function slotId(el) {
+      if (!el.id) el.id = 'rsvp-error-' + el.getAttribute('data-rsvp-error-for') + '-' + ++slotSeq;
+      return el.id;
+    }
+
     function clearInvalid(target) {
       var name = target && target.name;
       if (!name || FIELDS.indexOf(name) === -1) return;
       var f = form.elements.namedItem(name);
       if (!f) return;
+      var slots = scope.querySelectorAll('[data-rsvp-error-for="' + name + '"]');
       each(isRadioList(f) ? f : [f], function (c) {
         c.removeAttribute('aria-invalid');
         if (c.setCustomValidity) c.setCustomValidity('');
+        each(slots, function (el) {
+          describedBy(c, slotId(el), false);
+        });
       });
-      each(scope.querySelectorAll('[data-rsvp-error-for="' + name + '"]'), function (el) {
+      each(slots, function (el) {
         el.textContent = '';
       });
+    }
+
+    /** Field messages from the browser's constraint check, worded like the server's (lib/rsvp/validate.ts). */
+    function clientErrors() {
+      var out = null;
+      FIELDS.forEach(function (name) {
+        var f = form.elements.namedItem(name);
+        if (!f) return;
+        var list = isRadioList(f) ? Array.prototype.slice.call(f) : [f];
+        var bad = list.filter(function (c) {
+          return c.willValidate && c.validity && !c.validity.valid;
+        })[0];
+        if (!bad) return;
+        var v = bad.validity;
+        var msg;
+        if (name === 'name') msg = v.tooLong ? 'Please keep your name to ' + bad.maxLength + ' characters or fewer.' : 'Please enter your name.';
+        else if (name === 'email') msg = 'Please check your email address.';
+        else if (name === 'attending') msg = 'Please let us know if you can attend.';
+        else if (name === 'guests') msg = 'Please enter a number of guests from ' + (bad.min || 1) + (bad.max ? ' to ' + bad.max : '') + '.';
+        else msg = 'Please keep your message to ' + (bad.maxLength > 0 ? bad.maxLength : 500) + ' characters or fewer.';
+        out = out || {};
+        out[name] = msg;
+      });
+      return out;
     }
 
     function markInvalid(fields) {
@@ -189,6 +243,10 @@
         if (!f) return;
         each(isRadioList(f) ? f : [f], function (c) {
           c.setAttribute('aria-invalid', 'true');
+          // Screen readers read the reason with the field, not only "invalid".
+          each(slots, function (el) {
+            describedBy(c, slotId(el), true);
+          });
         });
         var c0 = firstControl(f);
         // No theme slot for this field: fall back to the browser's own validation bubble.
@@ -222,6 +280,11 @@
     function onSubmit(e) {
       e.preventDefault();
       if (busy) return;
+      var invalid = clientErrors();
+      if (invalid) {
+        markInvalid(invalid);
+        return;
+      }
       if (ctx.preview) {
         show('preview', TEXT.preview, { focus: false });
         return;
@@ -250,6 +313,7 @@
             syncAttending();
             show('success', b.message, { reply: reply, focus: true });
           } else if (b.state === 'closed') {
+            setReason(b.reason || 'deadline');
             show('closed', b.message, { focus: true });
           } else {
             show('error', b.message || TEXT.error);
@@ -271,6 +335,7 @@
       hidePanels();
       form.hidden = false;
       syncAttending();
+      setReason(null);
       setStatus('ready');
       var n = form.elements.namedItem('name');
       if (n && n.focus) n.focus();
@@ -289,7 +354,10 @@
             g.max = String(b.maxGuests);
             if (!g.min) g.min = '1';
           }
-          if (b.open === false) show('closed', b.message, { focus: false });
+          if (b.open === false) {
+            setReason(b.reason || 'deadline');
+            show('closed', b.message, { focus: false });
+          }
         })
         .catch(function () {
           /* the server checks again on submit */
@@ -297,6 +365,8 @@
     }
 
     ensureHoneypot(form);
+    // Styled, English messages in the theme's slots instead of the browser bubble (device language).
+    form.noValidate = true;
     hidePanels();
     each(scope.querySelectorAll('[data-rsvp-reply]'), function (el) {
       el.hidden = true;
@@ -314,7 +384,7 @@
       b.addEventListener('click', again);
     });
     setStatus('ready');
-    checkStatus();
+    if (ctx.statusCheck) checkStatus();
   }
 
   function init() {
@@ -331,7 +401,9 @@
     var ctx = {
       endpoint: '/api/rsvp/' + encodeURIComponent(data.slug),
       preview: Boolean(data.preview),
-      previewKey: data.preview ? previewKey : null
+      previewKey: data.preview ? previewKey : null,
+      // A theme demo (/start/demo/<theme>, slug "start/demo/…") has no site to ask: it only previews.
+      statusCheck: PLAIN_SLUG.test(String(data.slug))
     };
     each(forms, function (form) {
       setup(form, ctx);

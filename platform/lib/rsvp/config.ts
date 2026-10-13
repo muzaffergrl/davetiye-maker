@@ -22,16 +22,32 @@ export const HONEYPOT_FIELD = 'website';
 /** An identical reply within this window is treated as a double submit (stored once). */
 export const DUPLICATE_WINDOW_MS = 5 * 60_000;
 
+/**
+ * Limits for guest replies. A shared connection (venue Wi-Fi, office, mobile carrier NAT) can carry
+ * many real guests, so the per-address rules are per SITE; the cross-site rule is only an abuse
+ * ceiling. Unusual volume never turns real guests away: replies over `perSite` / `perSiteIpStored`
+ * are stored as HELD (not counted, not in the CSV) until the couple keeps or removes them in the
+ * panel. Only when even the held store is full (`heldPerSite`) is a reply refused (429 busy).
+ */
 export interface RsvpLimits {
-  /** Every POST from one client IP (all sites together). */
+  /** Every POST from one client IP, all sites together (abuse ceiling). */
   perIp: RateLimitRule;
-  /** Replies stored for one site (honeypot hits and rejected posts do not count). */
+  /** Every POST from one client IP to one site. */
+  perSiteIp: RateLimitRule;
+  /** Replies stored for one site before new ones are held for review. */
   perSite: RateLimitRule;
+  /** Replies stored from one client IP for one site before new ones are held for review. */
+  perSiteIpStored: RateLimitRule;
+  /** Held replies for one site; beyond it replies are refused (storage ceiling). */
+  heldPerSite: RateLimitRule;
 }
 
 export const DEFAULT_RSVP_LIMITS: Readonly<RsvpLimits> = Object.freeze({
-  perIp: Object.freeze({ limit: 10, windowMs: 15 * 60_000 }),
+  perIp: Object.freeze({ limit: 100, windowMs: 15 * 60_000 }),
+  perSiteIp: Object.freeze({ limit: 30, windowMs: 15 * 60_000 }),
   perSite: Object.freeze({ limit: 200, windowMs: 60 * 60_000 }),
+  perSiteIpStored: Object.freeze({ limit: 10, windowMs: 60 * 60_000 }),
+  heldPerSite: Object.freeze({ limit: 500, windowMs: 24 * 60 * 60_000 }),
 });
 
 const cache = new Map<string, number>();

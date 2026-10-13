@@ -25,7 +25,9 @@ Görseller yalnız GPT parçaları (K21); kod yerleşim, tipografi, hareket ve t
 | `story_1..3` | `media.memory_photos.0..2` | 626/868 | Our Story altın kemer çerçeveleri (story_1 home tanıtımında da) |
 | `venue` | `media.venue_image` | 1172/681 | Details, GPT yatay altın çerçeve (G047) |
 
-Şablonda `<img data-photo="<anahtar>">` + `.ph-mark`; platform `data-photo-state="user|placeholder"` yazar.
+Şablonda `<img data-photo="<anahtar>">` + `.ph-mark`; platform `data-photo-state="user|placeholder"` yazar. "Your photo here"
+(`.ph-mark`) yalnız önizlemede (`html[data-preview="true"]`) görünür; misafir yalnız nötr yer tutucu görseli görür. Alt metin
+`data-attr-alt` ile (portre "Photo of {name_display}", hikâye başlıkları, mekân adı); yer tutucuda `alt=""`.
 Panel kırpımı bu oranlarla yapmalı (G039); kırpılmamış fotoğrafta CSS `object-fit: cover` + yüz için `object-position`.
 
 ## Görselleri yeniden üretmek
@@ -45,7 +47,13 @@ tutucuları. Betik pencerenin WebP çıktısında da tam şeffaf kaldığını v
 
 ## Bilinen sınırlar
 - Program 7+ satırda Details kartına sığmaz (1–6 satır ölçüldü); ana sayfa tanıtımı ilk 4 satırı gösterir.
-- `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve).
+- `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve); anların `text`'i ve monogram (`initials`) bu temada
+  hiç gösterilmez. Panel bunları şablondan okur ve sormaz (Monogram / "A few words" yok, en çok 3 an; `lib/panel/state.ts`).
+- Link blokları yalnız linkleriyle görünür: harita düğmesi `urls.map`, Travel & Stay `urls.accommodation`, Registry `urls.registry`
+  (`data-if`); linksiz açık blok canlı sitede hiç görünmez (panel yayın öncesi uyarır).
+- `rsvp.method` dolu (yanıtlar başka yoldan): RSVP sayfası 404 ve ona giden bütün düğme/linkler kalkar.
+- Kısa telefonlarda (en-boy ≥ 1/2) boyalı arka plan ortadan büyütülür (%115 / 9:16'dan sonra %135) ki köşe çiçekleri zarf
+  yazılarına değmesin; `theme-check.cjs` 360×640, 375×553, 390×690, 390×844'te yazı altındaki zemini ölçer.
 - Paylaşım görseli (`og:image`) yok: ayrı bir GPT paylaşım görseli gerekiyor.
 - Kartın home'a "uçması" cross-document View Transitions ister (Chromium 126+, Safari 18.2+); diğerlerinde solma.
   Gerçek iPhone/Safari ve Android cihazda denenmedi.

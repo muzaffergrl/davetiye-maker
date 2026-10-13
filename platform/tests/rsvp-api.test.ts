@@ -6,7 +6,7 @@ import { cpSync } from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { GET as statusRoute, POST as postRoute } from '../app/api/rsvp/[slug]/route.ts';
-import { GET as responsesRoute } from '../app/api/rsvp/[slug]/responses/route.ts';
+import { GET as responsesRoute, POST as responsesPost } from '../app/api/rsvp/[slug]/responses/route.ts';
 import { GET as exportRoute } from '../app/api/rsvp/[slug]/export/route.ts';
 import { GET as getPage } from '../app/[slug]/[page]/route.ts';
 import type { ContentRecord } from '../lib/content/types.ts';
@@ -135,39 +135,116 @@ test('spam: a filled honeypot gets the normal success answer but is not stored',
   assert.equal((await stored('open')).length, before);
 });
 
-test('rate limit per IP: the 11th post in 15 minutes is 429 with Retry-After; other IPs unaffected', async () => {
+test('rate limit per IP and site: post 31 to one site in 15 minutes is 429; the same address can still reply to another wedding', async () => {
   const ip = '203.0.113.50';
-  for (let i = 0; i < DEFAULT_RSVP_LIMITS.perIp.limit; i++) {
+  for (let i = 0; i < DEFAULT_RSVP_LIMITS.perSiteIp.limit; i++) {
     const res = await post('open-site', { name: `Guest ${i}`, attending: 'no' }, { ip });
     assert.equal(res.status, 200, `post ${i}`);
   }
   const blocked = await post('open-site', { name: 'One more', attending: 'no' }, { ip });
   assert.equal(blocked.status, 429);
   const retry = Number(blocked.headers.get('retry-after'));
-  assert.ok(retry > 0 && retry <= DEFAULT_RSVP_LIMITS.perIp.windowMs / 1000, `Retry-After ${retry}`);
+  assert.ok(retry > 0 && retry <= DEFAULT_RSVP_LIMITS.perSiteIp.windowMs / 1000, `Retry-After ${retry}`);
   const body = await blocked.json();
   assert.equal(body.code, 'rate_limited');
   assert.match(body.message, /Too many replies/);
-  // Rejected and spam posts count too (every POST from the IP).
+  // Rejected and spam posts count too (every POST from the address to this site).
   assert.equal((await post('open-site', { website: 'x' }, { ip })).status, 429);
   assert.equal((await post('open-site', { name: 'Neighbour', attending: 'no' }, { ip: '203.0.113.51' })).status, 200);
+  // Venue / office Wi-Fi: one busy wedding does not lock that address out of every other wedding.
+  assert.equal((await post('other-site', { name: 'Same Wi-Fi', attending: 'no' }, { ip })).status, 200);
 });
 
-test('rate limit per site: stored replies over the site limit get 429 busy', async () => {
+test('rate limit per IP across all sites is only an abuse ceiling', async () => {
   const limiter = new MemoryRateLimiter();
-  const limits = { perIp: { limit: 100, windowMs: 60_000 }, perSite: { limit: 2, windowMs: 60_000 } };
+  const limits = { ...DEFAULT_RSVP_LIMITS, perIp: { limit: 3, windowMs: 60_000 } };
+  const ctx = { adapter: getDataAdapter(), limiter, limits, ip: '192.0.2.77' };
+  for (const slug of ['open-site', 'other-site', 'sample-site']) {
+    assert.equal((await submitRsvp(ctx, slug, { name: `Cross ${slug}`, attending: 'no' })).status, 200, slug);
+  }
+  const res = await submitRsvp(ctx, 'other-site', { name: 'Fourth', attending: 'no' });
+  assert.equal(res.status, 429);
+  assert.equal(res.body.code, 'rate_limited');
+});
+
+test('unusual volume never locks real guests out: extra replies are held (not counted) and the couple keeps or removes them', async () => {
+  const site = await makeSite('busy-site', 'rsvp-fixture', content(300, 400));
+  const limiter = new MemoryRateLimiter();
+  const limits = {
+    ...DEFAULT_RSVP_LIMITS,
+    perSite: { limit: 2, windowMs: 60_000 },
+    perSiteIpStored: { limit: 2, windowMs: 60_000 },
+    heldPerSite: { limit: 3, windowMs: 60_000 },
+  };
   const ctx = { adapter: getDataAdapter(), limiter, limits };
-  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.1' }, 'other-site', { name: 'A', attending: 'no' })).status, 200);
-  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.2' }, 'other-site', { name: 'B', attending: 'no' })).status, 200);
-  // Spam and invalid posts do not use up the site budget...
-  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.3' }, 'other-site', { name: 'S', attending: 'no', website: 'x' })).status, 200);
-  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.3' }, 'other-site', { attending: 'no' })).status, 400);
-  // ...but a third stored reply does.
-  const busy = await submitRsvp({ ...ctx, ip: '192.0.2.4' }, 'other-site', { name: 'C', attending: 'no' });
+  const send = (ip: string, name: string) => submitRsvp({ ...ctx, ip }, 'busy-site', { name, attending: 'yes', guests: 2 });
+  assert.equal((await send('192.0.2.1', 'Real A')).status, 200);
+  assert.equal((await send('192.0.2.2', 'Real B')).status, 200);
+  // Spam and invalid posts do not use up the site budget.
+  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.3' }, 'busy-site', { name: 'S', attending: 'no', website: 'x' })).status, 200);
+  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.3' }, 'busy-site', { attending: 'no' })).status, 400);
+  // Over the site budget: the guest still gets the normal success answer; the reply is held.
+  const third = await send('192.0.2.4', 'Real C');
+  assert.equal(third.status, 200);
+  assert.deepEqual(third.body, SUCCESS_BODY, 'the answer never says a reply was held');
+  assert.equal((await send('192.0.2.5', 'Junk 1')).status, 200);
+  assert.equal((await send('192.0.2.6', 'Junk 2')).status, 200);
+  // Only when the held store is full is a reply refused.
+  const busy = await send('192.0.2.7', 'Junk 3');
   assert.equal(busy.status, 429);
   assert.equal(busy.body.code, 'busy');
   assert.ok(busy.headers?.['Retry-After']);
-  assert.deepEqual((await stored('other')).map((r) => r.name), ['A', 'B']);
+  const all = await getDataAdapter().listRsvps(site.id);
+  assert.deepEqual(all.map((r) => [r.name, Boolean(r.held)]), [['Real A', false], ['Real B', false], ['Real C', true], ['Junk 1', true], ['Junk 2', true]]);
+
+  // The couple: held replies are listed apart, not counted, not in the CSV.
+  const summary = await (await responses('busy-site', { bearer: site.editKey })).json();
+  assert.deepEqual(summary.counts, { responses: 2, attending: 2, notAttending: 0, totalGuests: 4, held: 3 });
+  assert.deepEqual(summary.responses.filter((r: { held: boolean }) => r.held).map((r: { name: string }) => r.name).sort(), ['Junk 1', 'Junk 2', 'Real C']);
+  assert.doesNotMatch(await (await csv('busy-site', { bearer: site.editKey })).text(), /Real C|Junk/);
+  const id = (name: string) => all.find((r) => r.name === name)!.id;
+
+  // Keep the real one, remove the junk (and a stray kept reply); a wrong key or a link (?k=) cannot act.
+  const act = (body: unknown, opts: { bearer?: string; query?: string } = {}) =>
+    responsesPost(
+      new Request(`${BASE}/api/rsvp/busy-site/responses${opts.query ?? ''}`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', ...(opts.bearer ? { authorization: `Bearer ${opts.bearer}` } : {}) },
+        body: JSON.stringify(body),
+      }),
+      { params: Promise.resolve({ slug: 'busy-site' }) },
+    );
+  assert.equal((await act({ action: 'remove', ids: [id('Junk 1')] }, { query: `?k=${site.editKey}` })).status, 401);
+  assert.equal((await act({ action: 'remove', ids: [id('Junk 1')] }, { bearer: sites.other.editKey })).status, 401);
+  assert.equal((await act({ action: 'explode', ids: [id('Junk 1')] }, { bearer: site.editKey })).status, 400);
+  assert.equal((await act({ action: 'remove', ids: [] }, { bearer: site.editKey })).status, 400);
+  const kept = await (await act({ action: 'keep', ids: [id('Real C')] }, { bearer: site.editKey })).json();
+  assert.equal(kept.changed, 1);
+  assert.deepEqual(kept.counts, { responses: 3, attending: 3, notAttending: 0, totalGuests: 6, held: 2 });
+  const removed = await (await act({ action: 'remove', ids: [id('Junk 1'), id('Junk 2'), id('Real B')] }, { bearer: site.editKey })).json();
+  assert.equal(removed.changed, 3);
+  assert.deepEqual(removed.counts, { responses: 2, attending: 2, notAttending: 0, totalGuests: 4, held: 0 });
+  assert.deepEqual((await getDataAdapter().listRsvps(site.id)).map((r) => r.name), ['Real A', 'Real C']);
+  assert.match(await (await csv('busy-site', { bearer: site.editKey })).text(), /Real C/);
+  // Another site's replies cannot be touched with this site's key.
+  const otherReply = (await stored('other'))[0];
+  if (otherReply) {
+    assert.equal((await (await act({ action: 'remove', ids: [otherReply.id] }, { bearer: site.editKey })).json()).changed, 0);
+    assert.ok((await stored('other')).some((r) => r.id === otherReply.id));
+  }
+});
+
+test('one address cannot fill a site: after its own budget its replies are held, other guests stay normal', async () => {
+  const site = await makeSite('one-ip-site', 'rsvp-fixture', content(300, 400));
+  const limiter = new MemoryRateLimiter();
+  const limits = { ...DEFAULT_RSVP_LIMITS, perSiteIpStored: { limit: 2, windowMs: 60_000 } };
+  const ctx = { adapter: getDataAdapter(), limiter, limits };
+  for (const n of ['A', 'B', 'C', 'D']) {
+    assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.200' }, 'one-ip-site', { name: `Flood ${n}`, attending: 'yes', guests: 5 })).status, 200);
+  }
+  assert.equal((await submitRsvp({ ...ctx, ip: '192.0.2.201' }, 'one-ip-site', { name: 'Real Guest', attending: 'yes', guests: 1 })).status, 200);
+  const list = await getDataAdapter().listRsvps(site.id);
+  assert.deepEqual(list.map((r) => [r.name, Boolean(r.held)]), [['Flood A', false], ['Flood B', false], ['Flood C', true], ['Flood D', true], ['Real Guest', false]]);
 });
 
 test('after the deadline: POST is 403 closed with the date, GET status says closed', async () => {
@@ -280,13 +357,13 @@ test('couple API: list (newest first) and counts for one site only', async () =>
   const body = await res.json();
   assert.equal(body.ok, true);
   assert.deepEqual(body.site, { slug: 'count-site', status: 'published' });
-  assert.deepEqual(body.counts, { responses: 3, attending: 2, notAttending: 1, totalGuests: 6 });
+  assert.deepEqual(body.counts, { responses: 3, attending: 2, notAttending: 1, totalGuests: 6, held: 0 });
   assert.equal(body.window.open, true);
   assert.deepEqual(
     body.responses.map((r: { name: string; guests: number }) => [r.name, r.guests]),
     [['Yes Four', 4], ['No One', 0], ['Yes Two', 2]],
   );
-  assert.deepEqual(Object.keys(body.responses[0]).sort(), ['attending', 'createdAt', 'email', 'guests', 'id', 'message', 'name']);
+  assert.deepEqual(Object.keys(body.responses[0]).sort(), ['attending', 'createdAt', 'email', 'guests', 'held', 'id', 'message', 'name']);
 });
 
 test('CSV export: attachment, BOM, formula cells escaped, only this site', async () => {

@@ -1,16 +1,18 @@
 // Guest side of RSVP: form status and reply submission for a PUBLISHED site.
 // Framework-free (returns {status, body, headers}); app/api/rsvp/[slug]/route.ts turns that into a Response.
 //
-// Order of checks for a reply:
-//   1. per-IP rate limit (every POST counts)        -> 429 rate_limited
-//   2. site exists and is published                 -> 404 not_found
-//   3. form open (deadline / rsvp.method "none")    -> 403 closed
-//   4. honeypot filled                              -> 200 success, nothing stored
-//   5. field validation                             -> 400 invalid (+ fields)
-//   6. identical reply in the last few minutes      -> 200 success, stored once
-//   7. per-site rate limit (stored replies count)   -> 429 busy
-//   8. store                                        -> 200 success
-// Responses never contain other guests' data, ids or counts.
+// Order of checks for a reply (limits: config.ts):
+//   1. per-IP ceiling, all sites (every POST counts)       -> 429 rate_limited
+//   2. site exists and is published                        -> 404 not_found
+//   3. per-IP limit for this site (every POST counts)      -> 429 rate_limited
+//   4. form open (deadline / rsvp.method "none")           -> 403 closed
+//   5. honeypot filled                                     -> 200 success, nothing stored
+//   6. field validation                                    -> 400 invalid (+ fields)
+//   7. identical reply in the last few minutes             -> 200 success, stored once
+//   8. unusual volume (site or this IP on this site)       -> stored as HELD for the couple's review
+//      (the guest sees the normal success); held store full -> 429 busy
+//   9. store                                               -> 200 success
+// Responses never contain other guests' data, ids or counts, and never say a reply was held.
 
 import type { DataAdapter, RsvpInput, RsvpRecord } from '../data/types.ts';
 import { canPreview } from '../sites.ts';
@@ -120,11 +122,15 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   const limits = ctx.limits ?? DEFAULT_RSVP_LIMITS;
   const now = ctx.now ?? new Date();
 
-  const perIp = await limiter.hit(`rsvp:ip:${ipBucket(ctx.ip ?? '')}`, limits.perIp);
+  const ip = ipBucket(ctx.ip ?? '');
+  const perIp = await limiter.hit(`rsvp:ip:${ip}`, limits.perIp);
   if (!perIp.allowed) return errorResult(429, 'rate_limited', {}, retryAfter(perIp.retryAfterMs));
 
   const site = await publishedSite(ctx.adapter, slug);
   if (!site) return errorResult(404, 'not_found');
+
+  const perSiteIp = await limiter.hit(`rsvp:site-ip:${site.id}:${ip}`, limits.perSiteIp);
+  if (!perSiteIp.allowed) return errorResult(429, 'rate_limited', {}, retryAfter(perSiteIp.retryAfterMs));
 
   const w = rsvpWindow(site.publishedContent, now);
   if (!w.open) {
@@ -144,9 +150,16 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   const since = now.getTime() - DUPLICATE_WINDOW_MS;
   if (recent.some((r) => Date.parse(r.createdAt) >= since && sameReply(r, parsed.value))) return success();
 
+  // Over either volume rule the reply is still stored, but held: junk cannot inflate the couple's
+  // head count, and real guests are not locked out while it lasts.
   const perSite = await limiter.hit(`rsvp:site:${site.id}`, limits.perSite);
-  if (!perSite.allowed) return errorResult(429, 'busy', {}, retryAfter(perSite.retryAfterMs));
+  const perSiteIpStored = await limiter.hit(`rsvp:site-ip-stored:${site.id}:${ip}`, limits.perSiteIpStored);
+  const held = !perSite.allowed || !perSiteIpStored.allowed;
+  if (held) {
+    const room = await limiter.hit(`rsvp:held:${site.id}`, limits.heldPerSite);
+    if (!room.allowed) return errorResult(429, 'busy', {}, retryAfter(room.retryAfterMs));
+  }
 
-  await ctx.adapter.saveRsvp(site.id, parsed.value);
+  await ctx.adapter.saveRsvp(site.id, held ? { ...parsed.value, held: true } : parsed.value);
   return success();
 }

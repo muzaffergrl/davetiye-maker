@@ -38,6 +38,12 @@
   min-height: 100dvh;
 }
 
+/* The fixed Save/Preview/Publish bar must never hide the field that has focus (Tab, keyboard "next",
+   WCAG 2.4.11): the page scrolls as if the bar's height were not part of the viewport. */
+:global(html):has(.app) {
+  scroll-padding-bottom: calc(132px + env(safe-area-inset-bottom));
+}
+
 .app :focus-visible {
   outline: none;
   box-shadow: var(--focus);
@@ -208,6 +214,8 @@
 
 .sections {
   display: grid;
+  /* minmax(0, …): a long one-line summary (ellipsis) must never widen the column past the phone */
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
 }
 
@@ -272,6 +280,30 @@
   font-weight: 600;
 }
 
+/* Values still holding the design's sample text (before publishing). */
+.sampleBadge {
+  flex: none;
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sampleTag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  vertical-align: 1px;
+}
+
 .chevron {
   flex: none;
   width: 10px;
@@ -321,6 +353,7 @@
 
 .field {
   margin-top: 14px;
+  scroll-margin-bottom: calc(132px + env(safe-area-inset-bottom));
 }
 
 .labelRow {
@@ -730,6 +763,29 @@
   padding-bottom: 8px;
 }
 
+.replyPick {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.replyPick input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+  accent-color: var(--accent);
+}
+
+.heldBox {
+  border: 1px solid #ecd9ae;
+  border-radius: 12px;
+  padding: 4px 12px 12px;
+  margin: 10px 0 14px;
+}
+
 .replyMessage {
   display: block;
   color: var(--muted);
@@ -790,22 +846,27 @@
 }
 
 .barButtons {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
+  display: flex;
   gap: 8px;
 }
 
+/* One line each, also "Publish changes" at 360 px: the main action gets the widest share. */
 .barButton {
+  flex: 1 1 0;
+  min-width: 0;
   min-height: 50px;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
   color: var(--ink);
   font: inherit;
+  font-size: 0.94rem;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
 .barButton:disabled {
@@ -814,6 +875,7 @@
 }
 
 .barPrimary {
+  flex-grow: 1.9;
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
@@ -876,16 +938,16 @@
 
 .previewTabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
   padding: 6px 16px 10px;
-  scrollbar-width: none;
 }
 
+/* All tabs visible (they wrap instead of scrolling off the edge); 44 px touch height. */
 .previewTab {
-  flex: none;
-  min-height: 40px;
-  padding: 6px 14px;
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
@@ -1028,6 +1090,23 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.noteJump {
+  border-color: #ecd9ae;
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+/* Main actions of a tall sheet (photo crop) stay on screen while the sheet scrolls. */
+.stickyActions {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: var(--surface);
+  margin: 12px 0 0;
+  padding: 10px 0 12px;
+  border-top: 1px solid var(--line);
 }
 
 .issueJumpSection {

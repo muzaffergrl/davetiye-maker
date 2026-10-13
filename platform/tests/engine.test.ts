@@ -346,7 +346,8 @@ test('og:image becomes absolute when an origin is given', () => {
 
 test('site-data JSON is injected before the first head script and cannot break out', () => {
   const content = demoContent();
-  content.name_display = '</script><script>alert(1)</script> \u2028 & <!--';
+  // venue.city reaches site-data through derived.venue_city_region
+  content.venue.city = '</script><script>alert(1)</script> \u2028 & <!--';
   content.urls = { map: 'javascript:alert(1)', registry: 'https://registry.example.org/x' };
   content.media.hero_portrait = 'javascript:alert(2)';
   const { $, html } = render('<p>x</p>', content, { head: '<script id="theme-js" src="site.js"></script><script type="application/json" id="site-data">{"stale":true}</script>' });
@@ -356,11 +357,9 @@ test('site-data JSON is injected before the first head script and cannot break o
   assert.ok(!/[<>&\u2028]/.test(raw), 'no raw <, >, & or U+2028 in the JSON block');
   assert.equal(html.match(/<\/script>/g)!.length, $('script').length);
   const data = siteData($);
-  assert.equal(data.content.name_display, content.name_display);
-  assert.equal(data.content.urls.map, null);
-  assert.equal(data.content.urls.registry, 'https://registry.example.org/x');
-  assert.equal(data.content.media.hero_portrait, null);
-  assert.equal(data.photos.hero, null);
+  assert.equal(data.derived.venue_city_region, `${content.venue.city}, Georgia`);
+  // Only what theme JS needs: never the content record or the photo map (sections switched off would leak).
+  assert.deepEqual(Object.keys(data).sort(), ['derived', 'page', 'pages', 'preview', 'slug', 'theme', 'variant']);
   assert.equal(data.slug, 'clara-and-julian');
   assert.equal(data.page, 'home');
   assert.equal(data.derived.countdown_target_utc, '2027-05-15T20:00:00.000Z');

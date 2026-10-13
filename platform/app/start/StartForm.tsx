@@ -4,6 +4,11 @@
 // big, with "Save this link", copy and "email it to myself" (mailto: opens the buyer's own mail app;
 // the platform does not send email yet). The result is kept in sessionStorage so a reload of this
 // tab (e.g. pull to refresh) does not lose the link.
+//
+// Lost answers: the form sends one random claim token with the claim and repeats the SAME token on
+// every retry (kept in sessionStorage until a claim succeeds). If the site was created but the answer
+// never arrived (phone switched networks), the retry gets a fresh edit link instead of "order used"
+// (lib/claim/claim.ts). After a network error the form retries once by itself.
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import {
@@ -45,6 +50,47 @@ type SlugStatus =
 type FormMessage = { tone: 'error' | 'notice'; title?: string; text: string } | null;
 
 const STORE_KEY = 'start:claim-result:v1';
+const TOKEN_KEY = 'start:claim-token:v1';
+const TOKEN_RE = /^[A-Za-z0-9_-]{16,128}$/;
+const NETWORK_RETRY_MS = 1500;
+
+function newToken(): string {
+  try {
+    if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  } catch {
+    /* not a secure context: below */
+  }
+  const bytes = crypto.getRandomValues(new Uint8Array(18));
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** The claim token of this tab: reused on every retry until a claim succeeds. */
+function claimTokenFor(current: string | null): string {
+  if (current) return current;
+  let token: string | null = null;
+  try {
+    token = window.sessionStorage.getItem(TOKEN_KEY);
+  } catch {
+    /* private mode: kept in memory only */
+  }
+  if (!token || !TOKEN_RE.test(token)) {
+    token = newToken();
+    try {
+      window.sessionStorage.setItem(TOKEN_KEY, token);
+    } catch {
+      /* memory only */
+    }
+  }
+  return token;
+}
+
+function forgetClaimToken(): void {
+  try {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+  } catch {
+    /* nothing stored */
+  }
+}
 const FIELD_ORDER: ClaimField[] = ['orderNumber', 'email', 'name1', 'name2', 'slug'];
 const FIELD_IDS: Record<ClaimField, string> = {
   orderNumber: 'start-order',
@@ -167,6 +213,7 @@ function ClaimForm({
   const honeypot = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
   const checkSeq = useRef(0);
+  const tokenRef = useRef<string | null>(null);
 
   const values = { orderNumber, email, names, slug };
   const clientErrors = claimFieldErrors(values, theme.partnerCount);
@@ -253,21 +300,33 @@ function ClaimForm({
       return;
     }
     setBusy(true);
-    try {
-      const res = await fetch('/api/start', {
+    tokenRef.current = claimTokenFor(tokenRef.current);
+    const payload = JSON.stringify({
+      theme: theme.id,
+      orderNumber,
+      email,
+      names,
+      slug: normalizeSlugInput(slug),
+      claimToken: tokenRef.current,
+      website: honeypot.current?.value ?? '',
+    });
+    const send = () =>
+      fetch('/api/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         cache: 'no-store',
-        body: JSON.stringify({
-          theme: theme.id,
-          orderNumber,
-          email,
-          names,
-          slug: normalizeSlugInput(slug),
-          website: honeypot.current?.value ?? '',
-        }),
+        body: payload,
       });
+    try {
+      let res: Response;
+      try {
+        res = await send();
+      } catch {
+        // The site may have been created and only the answer lost: the same token gets the link again.
+        await new Promise((r) => window.setTimeout(r, NETWORK_RETRY_MS));
+        res = await send();
+      }
       let body: Record<string, any> = {};
       try {
         body = (await res.json()) as Record<string, any>;
@@ -275,6 +334,8 @@ function ClaimForm({
         /* handled below */
       }
       if (res.status === 201 && body.ok) {
+        forgetClaimToken();
+        tokenRef.current = null;
         onCreated({
           theme: theme.id,
           slug: String(body.slug),

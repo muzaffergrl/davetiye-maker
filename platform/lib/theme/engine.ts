@@ -14,11 +14,14 @@
 //   data-repeat="schedule"         element repeated per array item; inner paths start with "." (".time")
 //   data-attr-<name>="path"        attribute <name> = raw value, or a {template} (allow-listed attributes only)
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.
-// The page also receives <script type="application/json" id="site-data"> for theme JS.
+// The page also receives <script type="application/json" id="site-data"> for theme JS: only what
+// theme JS needs (slug, page map, derived countdown target …), never the content record itself, so
+// sections the couple switched off do not leak through the page source. HTML comments of the
+// template (internal production notes) are dropped.
 
 import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
-import { Text, isTag, type Element } from 'domhandler';
+import { Text, hasChildren, isTag, type AnyNode, type Element } from 'domhandler';
 import { buildView, fieldKind, getPath } from '../content/derive.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
 import type { PageName, ThemeManifest } from './theme.ts';
@@ -180,8 +183,14 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
 
   /** Puts a content photo on an element: <img> src (placeholder srcset/<source> removed) or --photo CSS variable. */
   const applyPhotoValue = (el: Element, raw: unknown, label: string) => {
-    const src = safePhotoUrl(raw);
-    if (raw && !src) warn(`photo "${label}" has an unsafe URL and was ignored`);
+    const safe = safePhotoUrl(raw);
+    if (raw && !safe) warn(`photo "${label}" has an unsafe URL and was ignored`);
+    // Platform photos (/media/…) are only served for published content, or with the preview key
+    // (lib/site/static.ts): a draft preview passes the key on.
+    const src =
+      safe && opts.previewKey && safe.startsWith('/media/')
+        ? `${safe}${safe.includes('?') ? '&' : '?'}preview=${encodeURIComponent(opts.previewKey)}`
+        : safe;
     if (!src) {
       markPhotoState(el, 'placeholder');
       return;
@@ -331,6 +340,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     if ('data-photo' in a) applyPhoto(el);
     if ('data-url' in a) applyUrl(el);
     applyAttrs(el, scope);
+    // A placeholder image is decoration: a data-attr-alt written for the couple's photo does not apply.
+    if (el.name === 'img' && a['data-photo-state'] === 'placeholder' && 'data-attr-alt' in a) a.alt = '';
     if (replaced) return;
     for (const child of [...el.children]) {
       if (isTag(child)) walk(child, scope);
@@ -431,20 +442,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     scriptHashes.add(`'sha256-${createHash('sha256').update(code, 'utf8').digest('base64')}'`);
   });
 
-  // Data for theme JS (countdown, choreography). Content URLs are re-checked here as well.
-  const payloadContent = structuredClone((opts.content ?? {}) as Record<string, unknown>);
-  if (payloadContent.urls && typeof payloadContent.urls === 'object') {
-    const urls = payloadContent.urls as Record<string, unknown>;
-    for (const k of Object.keys(urls)) urls[k] = safeLinkUrl(urls[k]);
-  }
-  if (payloadContent.media && typeof payloadContent.media === 'object') {
-    const media = payloadContent.media as Record<string, unknown>;
-    for (const k of Object.keys(media)) {
-      media[k] = Array.isArray(media[k])
-        ? (media[k] as unknown[]).map((m) => safePhotoUrl(m)).filter(Boolean)
-        : safePhotoUrl(media[k]);
-    }
-  }
+  // Data for theme JS (countdown, choreography, navigation). Deliberately NOT the content record or
+  // the photo map: theme JS never writes personal text (the server already did), and a record in the
+  // page source would expose sections the couple switched off (story, registry, hotel links …).
   const venue = (view.venue ?? {}) as Record<string, unknown>;
   const rsvp = (view.rsvp ?? {}) as Record<string, unknown>;
   const payload = {
@@ -456,7 +456,6 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     pages: Object.fromEntries(
       Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey)]),
     ),
-    content: payloadContent,
     derived: {
       date_display: formatDate(view.date, locale),
       date_long: view.date_long ?? null,
@@ -467,9 +466,6 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       venue_city_region_country: venue.city_region_country ?? null,
       countdown_target_utc: view.countdown_target_utc ?? null,
     },
-    photos: Object.fromEntries(
-      Object.entries(theme.photos).map(([k, slot]) => [k, safePhotoUrl(getPath(view, slot.source))]),
-    ),
   };
   $('#site-data').remove();
   const dataScript = $('<script type="application/json" id="site-data"></script>');
@@ -477,6 +473,15 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   const firstHeadScript = $('head script').first();
   if (firstHeadScript.length) firstHeadScript.before(dataScript);
   else $('head').append(dataScript);
+
+  // Template comments are notes for theme developers (task ids, build steps), not for guests.
+  const dropComments = (nodes: readonly AnyNode[]) => {
+    for (const n of nodes) {
+      if (n.type === 'comment') $(n).remove();
+      else if (hasChildren(n)) dropComments([...n.children]);
+    }
+  };
+  dropComments([...$.root()[0].children]);
 
   const html = $('html');
   if (!html.attr('lang')) html.attr('lang', 'en');

@@ -53,7 +53,7 @@
       <h2 class="script" data-step="title" data-a="write">The Venue</h2>
       <figure class="venue-photo" data-step="photo" data-a="rise">
         <div class="photo-slot mask-landscape" data-slot="venue">
-          <img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(calc(100vw - 60px), 380px)" alt="" loading="lazy">
+          <img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(calc(100vw - 60px), 380px)" alt="" data-attr-alt="{venue.name}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/petal3-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="vframe" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(calc(100vw - 32px), 460px)" alt="" loading="lazy">
@@ -64,18 +64,19 @@
         <p class="note" data-if="venue.address" data-field="venue.address"></p>
         <p class="note" data-if="ceremony_time">Ceremony at <span data-field="ceremony_time"></span><span data-if="schedule.0.location"> in <span data-field="schedule.0.location"></span></span></p>
       </div>
-      <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
+      <p data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
     </div>
 
-    <div class="block" data-scene="details-block" data-optional="travel_stay">
+    <!-- link blocks are shown only with their link (no dead buttons on a live site) -->
+    <div class="block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation">
       <h2 class="script" data-step="title" data-a="write">Travel <span class="amp">&amp;</span> Stay</h2>
       <div data-step="body" data-a="rise">
-        <p class="note">Hotel suggestions and travel tips for out-of-town guests will be shared here.</p>
+        <p class="note">Where to stay and how to get here: see the link below.</p>
       </div>
       <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank">Where to stay</a></p>
     </div>
 
-    <div class="block" data-scene="details-block" data-optional="registry">
+    <div class="block" data-scene="details-block" data-optional="registry" data-if="urls.registry">
       <h2 class="script" data-step="title" data-a="write">Registry</h2>
       <div data-step="body" data-a="rise">
         <p class="note">Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.</p>
@@ -84,7 +85,7 @@
     </div>
   </section>
 
-  <section class="section next-sec" data-scene="story-next">
+  <section class="section next-sec" data-scene="story-next" data-if="!rsvp.method">
     <a class="btn" href="rsvp.html" data-step="link" data-a="rise">RSVP</a>
   </section>
 </main>
@@ -94,7 +95,7 @@
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
     <li><a href="details.html" aria-current="page"><span>Details</span></a></li>
-    <li><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+    <li data-if="!rsvp.method"><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
   </ul>
 </nav>
 </body>

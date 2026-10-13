@@ -3,12 +3,16 @@
 //
 // Every save sends the `updatedAt` it last saw; the server answers 409 when the site changed
 // elsewhere (another tab or phone). Saving then stops and the panel asks for a reload, so one
-// device never silently overwrites another.
+// device never silently overwrites another. Two cases look like that but are not:
+//  - our own save was stored but its answer was lost (flaky phone network): on 409 the panel reads
+//    the stored draft; if it is exactly what we sent, it takes the new updatedAt and carries on;
+//  - publish / unpublish change updatedAt too: they run in the same one-at-a-time queue as the
+//    saves, so a save typed during a slow publish is sent after it with the new updatedAt.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
-import { panelIssues, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
+import { panelIssues, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
 import { panelApi } from './api.ts';
 
 export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'conflict' | 'unauthorized' | 'refused';
@@ -69,38 +73,55 @@ export function usePanel(initial: PanelState, editKey: string) {
     timer.current = null;
   };
 
+  const scheduleRetry = useCallback(() => {
+    setSaveState('retrying');
+    const delay = retryDelay.current;
+    retryDelay.current = Math.min(delay * 2, RETRY_MAX_MS);
+    clearTimer();
+    timer.current = setTimeout(() => void flushRef.current(), delay);
+  }, []);
+
   // One PUT. Returns true when the version it sent is stored.
   const saveOnce = useCallback(async (): Promise<boolean> => {
     const v = version.current;
+    const sent = contentRef.current;
     setSaveState('saving');
-    const res = await api.saveDraft(contentRef.current, metaRef.current.updatedAt);
-    if (res.ok) {
+    const res = await api.saveDraft(sent, metaRef.current.updatedAt);
+    const stored = (body: Record<string, unknown>) => {
       savedVersion.current = v;
       retryDelay.current = RETRY_MIN_MS;
-      applyMeta(res.body);
+      applyMeta(body);
       setPreviewVersion((n) => n + 1);
       setSaveMessage(null);
       setSaveState(version.current === savedVersion.current ? 'saved' : 'pending');
       return true;
-    }
-    setSaveMessage(res.body.message ?? null);
+    };
+    if (res.ok) return stored(res.body);
     if (res.status === 409) {
+      // Maybe our own earlier attempt was stored and only its answer got lost: compare with what is stored.
+      const check = await api.state();
+      const state = (check.body as { state?: { content?: unknown } & Record<string, unknown> }).state;
+      if (check.ok && state && sameContent(state.content, sent)) return stored(state);
+      if (check.status === 0) {
+        scheduleRetry();
+        return false;
+      }
+      setSaveMessage(res.body.message ?? null);
       stopped.current = true;
       setSaveState('conflict');
-    } else if (res.status === 401) {
+      return false;
+    }
+    setSaveMessage(res.body.message ?? null);
+    if (res.status === 401) {
       stopped.current = true;
       setSaveState('unauthorized');
     } else if (res.status === 400 || res.status === 413 || res.status === 415) {
       setSaveState('refused'); // retried with the next change
     } else {
-      setSaveState('retrying');
-      const delay = retryDelay.current;
-      retryDelay.current = Math.min(delay * 2, RETRY_MAX_MS);
-      clearTimer();
-      timer.current = setTimeout(() => void flushRef.current(), delay);
+      scheduleRetry();
     }
     return false;
-  }, [api, applyMeta]);
+  }, [api, applyMeta, scheduleRetry]);
 
   /** Saves everything typed so far (requests are queued, never parallel). Resolves true when all is stored. */
   const flush = useCallback((): Promise<boolean> => {
@@ -130,11 +151,27 @@ export function usePanel(initial: PanelState, editKey: string) {
     timer.current = setTimeout(() => void flushRef.current(), AUTOSAVE_DELAY_MS);
   }, []);
 
+  /**
+   * Runs a request in the save queue (after any save in flight; saves typed meanwhile wait for it)
+   * and applies the new updatedAt before the next queued save is sent.
+   */
+  const enqueue = useCallback(
+    (send: () => ReturnType<typeof api.publish>): ReturnType<typeof api.publish> => {
+      const run = queue.current.then(async () => {
+        const res = await send();
+        if (res.ok) applyMeta(res.body);
+        return res;
+      });
+      queue.current = run.catch(() => undefined);
+      return run;
+    },
+    [applyMeta],
+  );
+
   const publish = useCallback(async (): Promise<PublishOutcome> => {
     if (!(await flush())) return { ok: false, message: 'Your latest changes are not saved yet. Please try again in a moment.' };
-    const res = await api.publish(metaRef.current.updatedAt);
+    const res = await enqueue(() => api.publish(metaRef.current.updatedAt));
     if (res.ok) {
-      applyMeta(res.body);
       setPreviewVersion((n) => n + 1);
       return { ok: true, url: typeof res.body.url === 'string' ? res.body.url : undefined };
     }
@@ -148,16 +185,17 @@ export function usePanel(initial: PanelState, editKey: string) {
       setSaveState('unauthorized');
     }
     return { ok: false, message: res.body.message, issues: (res.body as { issues?: ValidationIssue[] }).issues };
-  }, [api, applyMeta, flush]);
+  }, [api, enqueue, flush]);
 
   const unpublish = useCallback(async (): Promise<PublishOutcome> => {
-    const res = await api.unpublish();
-    if (res.ok) {
-      applyMeta(res.body);
-      return { ok: true };
+    const res = await enqueue(() => api.unpublish());
+    if (res.ok) return { ok: true };
+    if (res.status === 401) {
+      stopped.current = true;
+      setSaveState('unauthorized');
     }
     return { ok: false, message: res.body.message };
-  }, [api, applyMeta]);
+  }, [api, enqueue]);
 
   const uploadPhoto = useCallback(
     async (slot: PanelPhotoSlot, blob: Blob): Promise<{ ok: boolean; message?: string }> => {

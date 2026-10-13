@@ -34,7 +34,7 @@
     <figure class="frame-fig" data-scene="story-frame">
       <div class="frame" data-step="frame" data-a="rise-lg">
         <div class="photo-slot mask-arch" data-slot="story_1">
-          <img data-photo="story_1" src="img/ph_story_1-300.webp" srcset="img/ph_story_1-300.webp 300w, img/ph_story_1-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="">
+          <img data-photo="story_1" src="img/ph_story_1-300.webp" srcset="img/ph_story_1-300.webp 300w, img/ph_story_1-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" data-attr-alt="{story.items.0.caption}">
           <span class="ph-mark" aria-hidden="true"><img src="img/petal2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="">
@@ -44,7 +44,7 @@
     <figure class="frame-fig" data-scene="story-frame">
       <div class="frame" data-step="frame" data-a="rise-lg">
         <div class="photo-slot mask-arch" data-slot="story_2">
-          <img data-photo="story_2" src="img/ph_story_2-300.webp" srcset="img/ph_story_2-300.webp 300w, img/ph_story_2-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" loading="lazy">
+          <img data-photo="story_2" src="img/ph_story_2-300.webp" srcset="img/ph_story_2-300.webp 300w, img/ph_story_2-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/petal5-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="" loading="lazy">
@@ -54,7 +54,7 @@
     <figure class="frame-fig" data-scene="story-frame">
       <div class="frame" data-step="frame" data-a="rise-lg">
         <div class="photo-slot mask-arch" data-slot="story_3">
-          <img data-photo="story_3" src="img/ph_story_3-300.webp" srcset="img/ph_story_3-300.webp 300w, img/ph_story_3-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" loading="lazy">
+          <img data-photo="story_3" src="img/ph_story_3-300.webp" srcset="img/ph_story_3-300.webp 300w, img/ph_story_3-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/petal6-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="" loading="lazy">
@@ -74,7 +74,7 @@
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>
     <li><a href="details.html"><span>Details</span></a></li>
-    <li><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+    <li data-if="!rsvp.method"><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
   </ul>
 </nav>
 </body>

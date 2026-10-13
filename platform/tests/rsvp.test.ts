@@ -26,6 +26,21 @@ test('deadline: form closes at the end of the deadline day in the site time zone
   assert.equal(rsvpClosesAt(undefined, 'America/New_York'), null);
 });
 
+test('deadline: midnight in a daylight-saving gap is never early (clocks jump at 00:00)', () => {
+  // Asia/Beirut and Africa/Cairo skip 00:00-01:00 on these nights: the form closes at 01:00 local, not 23:00.
+  assert.equal(rsvpClosesAt('2027-03-27', 'Asia/Beirut')?.toISOString(), '2027-03-27T22:00:00.000Z');
+  assert.equal(rsvpClosesAt('2027-04-29', 'Africa/Cairo')?.toISOString(), '2027-04-29T22:00:00.000Z');
+  // West of UTC the same rule (01:00 local after the jump), as before.
+  assert.equal(rsvpClosesAt('2027-09-04', 'America/Santiago')?.toISOString(), '2027-09-05T04:00:00.000Z');
+  assert.equal(rsvpClosesAt('2027-03-13', 'America/Havana')?.toISOString(), '2027-03-14T05:00:00.000Z');
+  // never before the local end of the deadline day
+  for (const [day, tz] of [['2027-03-27', 'Asia/Beirut'], ['2027-04-29', 'Africa/Cairo']]) {
+    const closes = rsvpClosesAt(day, tz)!;
+    const local = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(closes.getTime() - 1));
+    assert.equal(local, day, `${tz}: still the deadline day one millisecond before closing`);
+  }
+});
+
 test('deadline: rsvpWindow open / closed / disabled with a friendly message', () => {
   const c = demoContent(); // deadline 2027-04-03, America/New_York, en-US
   const closes = Date.parse('2027-04-04T04:00:00.000Z');
@@ -147,8 +162,16 @@ test('counts: attending / not attending / total guests', () => {
     rec({ attending: true, guests: 3 }),
     rec({ attending: false, guests: 0 }),
   ];
-  assert.deepEqual(rsvpCounts(list), { responses: 3, attending: 2, notAttending: 1, totalGuests: 5 });
-  assert.deepEqual(rsvpCounts([]), { responses: 0, attending: 0, notAttending: 0, totalGuests: 0 });
+  assert.deepEqual(rsvpCounts(list), { responses: 3, attending: 2, notAttending: 1, totalGuests: 5, held: 0 });
+  assert.deepEqual(rsvpCounts([]), { responses: 0, attending: 0, notAttending: 0, totalGuests: 0, held: 0 });
+  // Held replies (unusual volume) are not counted until the couple keeps them.
+  assert.deepEqual(rsvpCounts([...list, rec({ attending: true, guests: 9, held: true })]), {
+    responses: 3,
+    attending: 2,
+    notAttending: 1,
+    totalGuests: 5,
+    held: 1,
+  });
 });
 
 test('CSV: cells starting with = + - @ (and tab/CR) are neutralised, quotes doubled', () => {

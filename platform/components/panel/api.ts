@@ -39,6 +39,8 @@ export function panelApi(slug: string, editKey: string) {
   });
 
   return {
+    /** The stored panel state (GET /api/edit/<slug>): {state: {content, updatedAt, …}}. */
+    state: () => call<Record<string, unknown>>(base, { headers: auth }),
     saveDraft: (content: ContentRecord, baseUpdatedAt: string) => call<Record<string, unknown>>(base, jsonInit('PUT', { content, baseUpdatedAt })),
     /** Fire-and-forget save while the page is closing (keepalive survives the unload). */
     saveOnUnload(content: ContentRecord, baseUpdatedAt: string): void {
@@ -57,6 +59,9 @@ export function panelApi(slug: string, editKey: string) {
     publish: (baseUpdatedAt: string) => call<Record<string, unknown>>(`${base}/publish`, jsonInit('POST', { baseUpdatedAt })),
     unpublish: () => call<Record<string, unknown>>(`${base}/unpublish`, { method: 'POST', headers: auth }),
     replies: () => call<Record<string, unknown>>(`/api/rsvp/${encodeURIComponent(slug)}/responses`, { headers: auth }),
+    /** "remove" deletes replies for good; "keep" releases replies held for review. Answers with the new summary. */
+    manageReplies: (action: 'remove' | 'keep', ids: string[]) =>
+      call<Record<string, unknown>>(`/api/rsvp/${encodeURIComponent(slug)}/responses`, jsonInit('POST', { action, ids })),
     /** CSV download (a plain link cannot send a header, so this one carries the key; same origin, no-referrer). */
     repliesCsvUrl: () => `/api/rsvp/${encodeURIComponent(slug)}/export?k=${encodeURIComponent(editKey)}`,
   };

@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/trace-check.cjs",
     "start": "next start",
     "test": "node --test --test-reporter=spec \"tests/*.test.ts\"",
     "typecheck": "tsc --noEmit",

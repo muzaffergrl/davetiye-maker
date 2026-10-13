@@ -16,12 +16,16 @@ import { assertImageUpload, IMAGE_TYPES } from '../../uploads.ts';
 import {
   NotFoundError,
   SlugTakenError,
+  StaleSiteError,
+  nextTimestamp,
   type DataAdapter,
   type NewSite,
   type PhotoInput,
+  type PublishOptions,
   type RsvpInput,
   type RsvpRecord,
   type SavedPhoto,
+  type SiteKeyHashes,
   type SiteRecord,
   type StoredFile,
 } from '../types.ts';
@@ -136,6 +140,7 @@ export class LocalAdapter implements DataAdapter {
       createdAt: now,
       updatedAt: now,
       publishedAt: null,
+      ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
     };
     await this.writeJson(this.sitePath(id), site);
     return structuredClone(site);
@@ -146,7 +151,7 @@ export class LocalAdapter implements DataAdapter {
       const site = await this.getSiteById(id);
       if (!site) throw new NotFoundError(`site ${id}`);
       change(site);
-      site.updatedAt = new Date().toISOString();
+      site.updatedAt = nextTimestamp(site.updatedAt);
       await this.writeJson(this.sitePath(id), site);
       return site;
     });
@@ -159,8 +164,12 @@ export class LocalAdapter implements DataAdapter {
     });
   }
 
-  publish(id: string): Promise<SiteRecord> {
+  publish(id: string, opts: PublishOptions = {}): Promise<SiteRecord> {
     return this.mutate(id, (site) => {
+      // Checked under the lock, so the content copied is exactly the version that was validated.
+      if (opts.expectedUpdatedAt !== undefined && site.updatedAt !== opts.expectedUpdatedAt) {
+        throw new StaleSiteError(id, site.updatedAt);
+      }
       site.publishedContent = structuredClone(site.content);
       site.status = 'published';
       site.publishedAt = new Date().toISOString();
@@ -170,6 +179,13 @@ export class LocalAdapter implements DataAdapter {
   unpublish(id: string): Promise<SiteRecord> {
     return this.mutate(id, (site) => {
       site.status = 'draft';
+    });
+  }
+
+  updateKeys(id: string, keys: SiteKeyHashes): Promise<SiteRecord> {
+    return this.mutate(id, (site) => {
+      site.editKeyHash = keys.editKeyHash;
+      site.previewKeyHash = keys.previewKeyHash;
     });
   }
 
@@ -195,6 +211,7 @@ export class LocalAdapter implements DataAdapter {
       guests: input.guests,
       message: input.message ?? null,
       createdAt: new Date().toISOString(),
+      ...(input.held ? { held: true } : {}),
     };
     await this.withLock(`rsvps:${siteId}`, async () => {
       const list = (await this.readJson<RsvpRecord[]>(this.rsvpPath(siteId))) ?? [];
@@ -207,6 +224,39 @@ export class LocalAdapter implements DataAdapter {
   async listRsvps(siteId: string): Promise<RsvpRecord[]> {
     if (!UUID_RE.test(siteId)) return [];
     return (await this.readJson<RsvpRecord[]>(this.rsvpPath(siteId))) ?? [];
+  }
+
+  /** Rewrites the site's reply list with `fn` (under the list's lock). Returns how many replies `fn` changed. */
+  private async editRsvps(siteId: string, fn: (list: RsvpRecord[]) => { list: RsvpRecord[]; changed: number }): Promise<number> {
+    if (!UUID_RE.test(siteId)) return 0;
+    return this.withLock(`rsvps:${siteId}`, async () => {
+      const current = (await this.readJson<RsvpRecord[]>(this.rsvpPath(siteId))) ?? [];
+      const { list, changed } = fn(current);
+      if (changed) await this.writeJson(this.rsvpPath(siteId), list);
+      return changed;
+    });
+  }
+
+  deleteRsvps(siteId: string, ids: readonly string[]): Promise<number> {
+    const drop = new Set(ids);
+    return this.editRsvps(siteId, (all) => {
+      const list = all.filter((r) => !drop.has(r.id));
+      return { list, changed: all.length - list.length };
+    });
+  }
+
+  setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number> {
+    const pick = new Set(ids);
+    return this.editRsvps(siteId, (all) => {
+      let changed = 0;
+      const list = all.map((r) => {
+        if (!pick.has(r.id) || Boolean(r.held) === held) return r;
+        changed += 1;
+        const { held: _old, ...rest } = r;
+        return held ? { ...rest, held: true } : rest;
+      });
+      return { list, changed };
+    });
   }
 
   async savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto> {

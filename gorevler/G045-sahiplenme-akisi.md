@@ -81,6 +81,20 @@ uydurma sipariş numaraları). Ayrıntı: `platform/README.md` → "/start sahip
 seçimi + `EditLinkMailer` uygulaması; Etsy API uygulaması + `EtsyOrderVerifier` (kullanıcı onayı); yönetici "yeni düzenleme linki" aracı;
 G046 tema standardına `content.demo.json` (tema klasöründe demo kaydı) maddesi.
 
+### İnceleme düzeltmeleri (2026-10-13, bağımsız inceleme bulguları)
+- Kayıp yanıt: form tek bir `claimToken` üretip her denemede aynısını gönderiyor, ağ hatasında kendisi bir kez daha deniyor; site
+  oluşmuş ama yanıt gelmemişse (aynı belirteç + e-posta, yayınlanmamış, < 24 sa) anahtarlar yenilenir ve 201 yeni linkle döner.
+- Doğrulayıcı artık "sipariş kullanılmış" kontrolünden önce (doğrulama açıkken numaranın kullanıldığı sızmıyor).
+- Operatör aracı: `scripts/reissue-edit-key.ts --order|--slug --origin` (yeni link, eski link ölür); "message the shop" metni artık
+  bir araca dayanıyor. Destek süreci kullanıcı kararı.
+- Vercel izleme: `/start`, `/start/demo/…`, `/api/start…` (ve panel/RSVP rotaları) `outputFileTracingIncludes`'ta; `npm run build`
+  sonrası `trace-check.cjs` eksikte hata veriyor. `/start` başlıkları: `frame-ancestors 'none'`, `X-Frame-Options: DENY`.
+- Test: `npm ci`, `npm test` (197/197), `npm run typecheck`, `npm run build` (+ yeni postbuild `trace-check`) temiz; `theme-check.cjs` 68/68, `panel-browser.ts` 72/72, `claim-browser.ts` 50/50, `rsvp-browser.ts` 25/25 (hepsi geçici klasöre, kayıtlı previews değişmedi); `tools/tests/*.py` 6/6. Gerçek telefon, gerçek Vercel/Blob ve canlı yayın **denenmedi**.
+- Yapılmadı / karar: doğrulama kapalıyken numara kapma kod ile çözülemez → Etsy doğrulaması (ya da sipariş başına gizli kod) satış
+  öncesi şart; hiç yayınlanmamış taslakların süre sonu silinmesi (zamanlanmış iş gerekir); sonuç ekranı linki `sessionStorage`'da
+  kalmaya devam ediyor (yenilemede kaybolmasın diye; aynı anahtar `/edit` adresinde de var).
+
 ## Günlük
 - 2026-10-13 alindi: wf-platform
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme bulguları düzeltildi (claimToken ile kayıp yanıt, doğrulayıcı sırası, link yenileme aracı, Vercel izleme, başlıklar) — wf-fix

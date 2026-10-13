@@ -21,7 +21,8 @@
 <script src="site.js" defer></script>
 <script src="/rsvp/form.js" defer></script>
 </head>
-<body data-pending="This link will be added soon.">
+<!-- replies collected another way (rsvp.method "none"): the whole page is off (404), like the links to it -->
+<body data-if="!rsvp.method" data-pending="This link will be added soon.">
 
 <main class="site-main">
   <section class="section rsvp-sec" data-scene="rsvp-card" aria-label="RSVP">

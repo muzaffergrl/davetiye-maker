@@ -40,14 +40,39 @@ export interface PanelPhotoSlot {
   ratio: number | null;
 }
 
+/** A whole page switched by content (<html>/<body> data-optional / data-if): off -> the page is 404. */
+export interface PageRule {
+  optional: string | null;
+  /** data-if expression, "path" or "!path". */
+  if: string | null;
+}
+
+/** Which buyer fields the theme actually shows (scanned from its templates, lib/panel/state.ts). */
+export interface ThemeFieldUse {
+  /** content.initials (Monogram). */
+  initials: boolean;
+  /** story.items.*.text ("A few words"). */
+  storyText: boolean;
+  /** How many story moments the theme shows (0 = none). */
+  storyItems: number;
+}
+
 export interface PanelTheme {
   id: string;
   name: string;
   /** Pages the theme declares (index first). */
   pages: string[];
+  /** Page-level switches (pages without one are always shown). */
+  pageRules: Record<string, PageRule>;
   photos: PanelPhotoSlot[];
   /** Optional sections the theme's pages actually use (data-optional markers). */
   optionalBlocks: OptionalBlockKey[];
+  fields: ThemeFieldUse;
+  /**
+   * The theme's fictional demo record (what a site claimed on /start starts from), or null.
+   * Values still equal to it are flagged as sample text before publishing.
+   */
+  sample: ContentRecord | null;
 }
 
 export interface PanelMeta {
@@ -79,6 +104,24 @@ export interface PanelError {
 
 // ---------------------------------------------------------------------------------------------
 // Paths and photos
+
+/** Buyer-facing words for a photo shape (theme.json aspects are pixel ratios such as 626/868). */
+export function shapeLabel(ratio: number | null): string {
+  if (ratio === null) return 'Any shape';
+  if (ratio < 0.9) return 'Tall (portrait)';
+  if (ratio <= 1.15) return 'Almost square';
+  if (ratio <= 1.3) return 'Slightly wide';
+  return 'Wide (landscape)';
+}
+
+/**
+ * Address of a stored photo for the buyer's own views (panel thumbnails): platform photos (/media/…)
+ * are only served to the public once published, or with the preview key (lib/site/static.ts).
+ */
+export function previewPhotoUrl(url: string, previewKey: string): string {
+  if (!url.startsWith('/media/')) return url;
+  return `${url}${url.includes('?') ? '&' : '?'}preview=${encodeURIComponent(previewKey)}`;
+}
 
 /** "4/5", "4:5", "1.5" -> width / height. Null for anything else. */
 export function parseAspect(aspect: unknown): number | null {
@@ -148,8 +191,10 @@ export function defaultInitials(partners: readonly Partner[], spaced = false): s
 }
 
 /**
- * Applies a partner name change and keeps name_display / initials in step while they still
- * hold the automatic value (a value the buyer typed by hand is never overwritten).
+ * Applies a partner name change and keeps name_display / initials / that partner's full name in
+ * step while they still hold the automatic value (a value the buyer typed by hand is never
+ * overwritten). The full name follows the first name while it is empty or equal to it — a site
+ * claimed on /start starts with full name = first name, and the invitation card shows full names.
  */
 export function withPartnerName(
   content: ContentRecord,
@@ -161,8 +206,12 @@ export function withPartnerName(
   const before = structuredClone(next.partners ?? []);
   const partner = next.partners[index];
   if (!partner) return next;
-  if (field === 'display_name') partner.display_name = value;
-  else partner.full_name = value.trim() ? value : null;
+  if (field === 'display_name') {
+    const oldFirst = (before[index]?.display_name ?? '').trim();
+    const oldFull = (before[index]?.full_name ?? '').trim();
+    partner.display_name = value;
+    if (oldFull === '' || oldFull === oldFirst) partner.full_name = value.trim() ? value : null;
+  } else partner.full_name = value.trim() ? value : null;
   if (field === 'display_name') {
     const autoName = defaultNameDisplay(before);
     if (next.name_display === undefined || next.name_display === '' || next.name_display === autoName) {
@@ -257,6 +306,114 @@ export function panelIssues(issues: readonly ValidationIssue[], content: unknown
 /** DOM id of the input that edits `path` (used to jump from an issue to its field). */
 export function fieldId(path: string): string {
   return `f-${path.replace(/[^a-z0-9_]+/gi, '-')}`;
+}
+
+// ---------------------------------------------------------------------------------------------
+// Pages and pre-publish notes
+
+function present(v: unknown): boolean {
+  if (v === null || v === undefined || v === false) return false;
+  if (typeof v === 'string') return v.trim() !== '';
+  if (Array.isArray(v)) return v.length > 0;
+  return true;
+}
+
+/** Same rule as the theme engine: is this page served for this content? */
+export function pageShown(rule: PageRule | undefined, content: unknown): boolean {
+  if (!rule) return true;
+  const blocks = ((content as { optional_blocks?: Record<string, unknown> })?.optional_blocks ?? {}) as Record<string, unknown>;
+  if (rule.optional && blocks[rule.optional] !== true) return false;
+  if (rule.if) {
+    const negate = rule.if.startsWith('!');
+    const path = negate ? rule.if.slice(1) : rule.if;
+    if (present(valueAt(content, path)) === negate) return false;
+  }
+  return true;
+}
+
+export interface PublishNote {
+  /** Content path to jump to (field id via fieldId). */
+  path: string;
+  message: string;
+}
+
+/** Paths (in order) whose value, while still equal to the theme's demo record, is sample text. */
+const SAMPLE_FIELDS: Array<{ path: string; label: string; block?: OptionalBlockKey }> = [
+  { path: 'date', label: 'Wedding date' },
+  { path: 'ceremony_time', label: 'Ceremony time' },
+  { path: 'venue.name', label: 'Venue name' },
+  { path: 'venue.address', label: 'Street address' },
+  { path: 'venue.city', label: 'City' },
+  { path: 'host_line', label: 'Host line' },
+  { path: 'dress_code', label: 'Dress code', block: 'dress_code' },
+  { path: 'story.intro', label: 'Story intro', block: 'our_story' },
+  { path: 'rsvp.deadline', label: 'Reply-by date' },
+];
+
+/**
+ * Values that are still the theme's fictional demo text (a site claimed on /start starts as a copy
+ * of it with only the names changed). Only non-empty values that are switched on count.
+ */
+export function sampleNotes(content: ContentRecord, sample: ContentRecord | null): PublishNote[] {
+  if (!sample) return [];
+  const blocks = (content.optional_blocks ?? {}) as Record<string, unknown>;
+  const notes: PublishNote[] = [];
+  const same = (path: string) => {
+    const v = valueAt(content, path);
+    return present(v) && stableStringify(v) === stableStringify(valueAt(sample, path));
+  };
+  for (const f of SAMPLE_FIELDS) {
+    if (f.block && blocks[f.block] !== true) continue;
+    if (same(f.path)) notes.push({ path: f.path, message: `${f.label}: still the sample text.` });
+  }
+  const demoPlaces = new Set((sample.schedule ?? []).map((r) => (r.location ?? '').trim()).filter(Boolean));
+  (content.schedule ?? []).forEach((row, i) => {
+    if (row.location && demoPlaces.has(row.location.trim())) {
+      notes.push({ path: `schedule.${i}.location`, message: `Schedule, event ${i + 1}: “${row.location}” is a sample place.` });
+    }
+  });
+  if (blocks.our_story === true) {
+    const demoCaptions = new Set((sample.story?.items ?? []).map((it) => (it.caption ?? '').trim()).filter(Boolean));
+    (content.story?.items ?? []).forEach((it, i) => {
+      if (it.caption && demoCaptions.has(it.caption.trim())) {
+        notes.push({ path: `story.items.${i}.caption`, message: `Story, moment ${i + 1}: the caption is sample text.` });
+      }
+    });
+  }
+  return notes;
+}
+
+/** Every content path flagged by sampleNotes (for "Sample" tags next to fields). */
+export function samplePaths(content: ContentRecord, sample: ContentRecord | null): Set<string> {
+  return new Set(sampleNotes(content, sample).map((n) => n.path));
+}
+
+const LINK_BLOCKS: Array<{ block: OptionalBlockKey; url: 'registry' | 'accommodation'; label: string }> = [
+  { block: 'registry', url: 'registry', label: 'Registry' },
+  { block: 'travel_stay', url: 'accommodation', label: 'Travel & stay' },
+];
+
+/**
+ * Things guests will notice that are not errors: sample text, empty photo places, link blocks that
+ * are on without a link. Shown before publishing ("Publish anyway" is always possible).
+ */
+export function prePublishNotes(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>): {
+  sample: PublishNote[];
+  photos: PublishNote[];
+  links: PublishNote[];
+} {
+  const blocks = (content.optional_blocks ?? {}) as Record<string, unknown>;
+  const storyOn = blocks.our_story === true;
+  const photos = theme.photos
+    .filter((s) => !photoAt(content, s.source))
+    // Story photos only matter while the Our Story page is on.
+    .filter((s) => storyOn || !s.source.startsWith('media.memory_photos.'))
+    .map((s) => ({ path: s.source, message: `${s.label}: no photo yet. Guests see a soft placeholder image.` }));
+  const links = LINK_BLOCKS.filter((l) => theme.optionalBlocks.includes(l.block) && blocks[l.block] === true && !content.urls?.[l.url]).map((l) => ({
+    path: `urls.${l.url}`,
+    message: `${l.label} is on but has no link yet, so guests do not see it.`,
+  }));
+  return { sample: sampleNotes(content, theme.sample), photos, links };
 }
 
 // ---------------------------------------------------------------------------------------------

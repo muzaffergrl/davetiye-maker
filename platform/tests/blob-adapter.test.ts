@@ -460,7 +460,7 @@ test('blob: publish -> guest RSVP -> couple summary and CSV', async () => {
   const fresh = (await blob.getSiteById(site.id))!;
   const summary = await rsvpSummary(blob, fresh);
   assert.deepEqual(summary.responses.map((r) => r.name), ['Tom Hale', 'Rosa Bell']);
-  assert.deepEqual(summary.counts, { responses: 2, attending: 1, notAttending: 1, totalGuests: 2 });
+  assert.deepEqual(summary.counts, { responses: 2, attending: 1, notAttending: 1, totalGuests: 2, held: 0 });
   const { csv } = await rsvpCsvForSite(blob, fresh);
   assert.match(csv, /"Rosa Bell"/);
   assert.equal(fake.paths().filter((p) => p.startsWith(`rsvps/${site.id}/`)).length, 2);

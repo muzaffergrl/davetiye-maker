@@ -81,6 +81,14 @@ button { font: inherit; color: inherit; }
 .florals { position: absolute; z-index: 1; pointer-events: none; user-select: none; height: auto; }
 .florals-tl { top: -3%; left: -4%; width: min(46vw, 68vh, 560px); }
 .florals-br { bottom: -3%; right: -4%; width: min(46vw, 68vh, 560px); }
+/* short phones (Safari with its bars, 360×640, the panel preview): the painting shows almost whole, so its
+   corner peonies reach the centred text; zoom in from the middle so the text stays on the plain wash */
+@media (min-aspect-ratio: 1/2) and (max-aspect-ratio: 9/16) {
+  .scene-bg > picture img { transform: scale(1.15); transform-origin: 50% 45%; }
+}
+@media (min-aspect-ratio: 9/16) and (max-aspect-ratio: 3/4) {
+  .scene-bg > picture img { transform: scale(1.35); transform-origin: 50% 45%; }
+}
 /* phones: the painted backdrop already carries its corner florals */
 .land-only { display: none; }
 @media (min-aspect-ratio: 3/4) {
@@ -111,6 +119,9 @@ button { font: inherit; color: inherit; }
   color: var(--deep); text-decoration: none; border-bottom: 1px solid rgba(155, 93, 102, .4); padding-bottom: 2px;
 }
 :focus-visible { outline: 2px solid var(--deep); outline-offset: 3px; }
+/* small text links keep their look but get a 44 px touch area */
+.textlink.replay, .closing .textlink { position: relative; }
+.textlink.replay::after, .closing .textlink::after { content: ""; position: absolute; inset: -14px -8px; }
 
 /* ==========================================================================
    Motion presets — elements carry data-step (order key, timed in site.js MOTION)
@@ -151,7 +162,7 @@ button { font: inherit; color: inherit; }
 }
 .env-head { position: relative; z-index: 1; }
 /* legibility over the painted backdrop: a soft blush glow behind text (no shape) */
-.env-head, .env-hint, .hero-inner > :not(.hero-card) { text-shadow: 0 0 14px rgba(251, 237, 236, .95), 0 0 4px rgba(251, 237, 236, .8); }
+.env-head, .env-hint, .env-after, .hero-inner > :not(.hero-card) { text-shadow: 0 0 14px rgba(251, 237, 236, .95), 0 0 4px rgba(251, 237, 236, .8); }
 .env-head .names { font-size: clamp(46px, 14vw, 78px); margin-top: 4px; }
 .env-head .names .amp { font-size: .62em; padding: 0 .06em; }
 
@@ -192,10 +203,13 @@ button { font: inherit; color: inherit; }
 @media (hover: hover) and (pointer: fine) { .env-hint .tap { display: none; } .env-hint .click { display: inline; } }
 @media (min-aspect-ratio: 3/4) { .env-page { --w: min(84vw, 50svh, 540px); } }
 .env-after { position: relative; z-index: 3; margin-top: 18px; display: none; flex-direction: column; align-items: center; gap: 14px; }
-.env-after .replay { background: none; border: 0; cursor: pointer; }
+/* "Replay" sits low, where the painted bottom florals are on many phones: a soft wash behind it (like .btn-ghost)
+   keeps it readable, and it is a 44 px tap target */
+.env-after .replay { background: rgba(255, 249, 246, .78); border: 0; border-radius: 999px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
 .skip {
   position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); right: 16px;
-  padding: 10px 6px;
+  display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: center;
+  padding: 10px 8px;
   font-family: var(--display); font-weight: 600; font-size: 12.5px; letter-spacing: .26em; text-transform: uppercase;
   color: var(--ink-soft); text-decoration: none;
 }
@@ -252,8 +266,9 @@ button { font: inherit; color: inherit; }
   text-shadow: 0 0 8px rgba(251, 237, 236, .95);
 }
 @container (max-width: 96px) { .ph-mark span { display: none; } }
-/* "Your photo here" only while the slot shows the theme placeholder */
-.photo-slot[data-photo-state="placeholder"] > .ph-mark { display: flex; }
+/* "Your photo here" only while the slot shows the theme placeholder, and only in the couple's preview
+   (panel, ?preview=, theme demo): guests of a published site see the soft placeholder image without the label */
+html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark { display: flex; }
 
 /* venue: the GPT landscape gold frame (frame_landscape, G047); photo window = manifest photo_slots.landscape */
 .venue-photo { position: relative; width: min(100%, 460px); aspect-ratio: 1476 / 960; margin: 14px auto 18px; }
@@ -469,6 +484,9 @@ button { font: inherit; color: inherit; }
 .closing .title { font-size: clamp(54px, 15vw, 84px); margin-top: 4px; }
 .closing .line { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 4px; }
 .closing .kicker { margin-top: 18px; }
+/* after a reply the form's own thank-you answers the guest ("We'll miss you" / "We can't wait…"): the closing
+   below must not repeat it or, for a guest who declined, contradict it (site.js sets data-rsvp-replied) */
+html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
 
 /* ---------------------------------------------------------------- footer */
 .foot { text-align: center; padding: 40px 16px 8px; }

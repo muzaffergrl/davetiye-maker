@@ -2,8 +2,8 @@
  * Ported from the G035 demo (collections/03_Blush_Garden_Rose/website/site.js).
  *
  * Content: the platform writes every personal value into the HTML on the server (engine markers, platform/README.md)
- * and injects <script type="application/json" id="site-data"> = {slug, theme, page, preview, pages, content, derived,
- * photos}. With #site-data present this file NEVER writes personal text; it only reads it (countdown target, the
+ * and injects <script type="application/json" id="site-data"> = {slug, theme, variant, page, preview, pages, derived}
+ * (no content record: personal text is already in the HTML). With #site-data present this file NEVER writes personal text; it only reads it (countdown target, the
  * page map for navigation, the slug for per-site session keys). DEV_CONTENT (below MOTION) is used only when
  * the theme files are opened without the platform (static server): then devRender() fills the same markers.
  *
@@ -109,7 +109,7 @@ const DEV_CONTENT = {
     try { return JSON.parse(el.textContent); } catch (e) { return null; }
   }
   const SITE = readSiteData();
-  const CONTENT = SITE ? (SITE.content || {}) : DEV_CONTENT;
+  const CONTENT = SITE ? {} : DEV_CONTENT;   // the platform never sends the record (site-data has no content)
   const PAGES = (SITE && SITE.pages) || { index: 'index.html', home: 'home.html', story: 'story.html', details: 'details.html', rsvp: 'rsvp.html' };
   const KEY = SITE && SITE.slug ? ':' + SITE.slug : '';
   const OPENED = MOTION.storage.opened + KEY;
@@ -397,7 +397,14 @@ const DEV_CONTENT = {
 
   /* ------------------------------------------------------------------ boot */
   function boot() {
-    if (!SITE) { devRender(CONTENT); devRsvp(); }
+    // the theme files opened without the platform are a design preview: placeholder labels show, as in the panel
+    if (!SITE) { root.dataset.preview = 'true'; devRender(CONTENT); devRsvp(); }
+    // RSVP page: once a reply is sent, the closing section hides its generic thank-you (site.css)
+    document.addEventListener('rsvp:state', (e) => {
+      const st = e.detail && e.detail.state;
+      if (st === 'success') root.setAttribute('data-rsvp-replied', '');
+      else if (st === 'ready') root.removeAttribute('data-rsvp-replied');
+    });
     initEnvelope();
     initScenes();
     initCountdown();

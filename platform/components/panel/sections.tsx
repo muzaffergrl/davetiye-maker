@@ -15,7 +15,7 @@ const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
 // ---------------------------------------------------------------------------------------------
 
 export function CoupleFields() {
-  const { content, edit, locked } = usePanelContext();
+  const { content, edit, locked, fields } = usePanelContext();
   const partners = content.partners ?? [];
   return (
     <>
@@ -34,6 +34,7 @@ export function CoupleFields() {
             path={`partners.${i}.full_name`}
             label="Full name"
             optional
+            hint="Shown on the invitation card. Follows the first name until you change it."
             value={p.full_name}
             onChange={(v) => edit((c) => withPartnerName(c, i, 'full_name', v))}
           />
@@ -51,14 +52,17 @@ export function CoupleFields() {
         value={content.name_display}
         onChange={(v) => edit((c) => void (c.name_display = v))}
       />
-      <TextField
-        path="initials"
-        label="Monogram"
-        hint="Up to 9 characters, e.g. C&J."
-        maxLength={9}
-        value={content.initials}
-        onChange={(v) => edit((c) => void (c.initials = v))}
-      />
+      {/* Only when the design shows a monogram (a field that changes nothing would mislead). */}
+      {fields.initials ? (
+        <TextField
+          path="initials"
+          label="Monogram"
+          hint="Up to 9 characters, e.g. C&J."
+          maxLength={9}
+          value={content.initials}
+          onChange={(v) => edit((c) => void (c.initials = v))}
+        />
+      ) : null}
       <TextField
         path="host_line"
         label="Host line"
@@ -220,11 +224,11 @@ export function ScheduleFields() {
 
 // ---------------------------------------------------------------------------------------------
 
-const MAX_STORY_ITEMS = 12;
-
 export function StoryFields({ onOpenOptional }: { onOpenOptional: () => void }) {
-  const { content, edit, issuesAt, locked } = usePanelContext();
+  const { content, edit, issuesAt, locked, fields } = usePanelContext();
   const items = content.story?.items ?? [];
+  // The design decides how many moments it shows and whether it shows their text.
+  const shown = fields.storyItems;
   const storyOff = content.optional_blocks?.our_story !== true;
   return (
     <>
@@ -253,10 +257,17 @@ export function StoryFields({ onOpenOptional }: { onOpenOptional: () => void }) 
           })
         }
       />
-      <p className={styles.hint}>Each moment has a short caption. The photos for them are under Photos.</p>
+      {shown ? (
+        <p className={styles.hint}>
+          This design shows {shown === 1 ? 'one moment' : `up to ${shown} moments`}, each with a short caption. The photos for them are under Photos.
+        </p>
+      ) : (
+        <p className={styles.hint}>This design does not show story moments.</p>
+      )}
       {items.map((item, i) => (
         <fieldset key={i} className={styles.group}>
           <legend className={styles.groupTitle}>Moment {i + 1}</legend>
+          {i >= shown ? <p className={styles.note}>This design shows only {shown === 1 ? 'one moment' : `${shown} moments`}: guests do not see this one.</p> : null}
           <TextField
             path={`story.items.${i}.caption`}
             label="Caption"
@@ -264,22 +275,24 @@ export function StoryFields({ onOpenOptional }: { onOpenOptional: () => void }) 
             value={item.caption}
             onChange={(v) => edit((c) => void (c.story!.items![i].caption = v))}
           />
-          <TextField
-            path={`story.items.${i}.text`}
-            label="A few words"
-            optional
-            multiline
-            rows={3}
-            maxLength={400}
-            value={item.text}
-            onChange={(v) =>
-              edit((c) => {
-                const it = c.story!.items![i];
-                if (v) it.text = v;
-                else delete it.text;
-              })
-            }
-          />
+          {fields.storyText ? (
+            <TextField
+              path={`story.items.${i}.text`}
+              label="A few words"
+              optional
+              multiline
+              rows={3}
+              maxLength={400}
+              value={item.text}
+              onChange={(v) =>
+                edit((c) => {
+                  const it = c.story!.items![i];
+                  if (v) it.text = v;
+                  else delete it.text;
+                })
+              }
+            />
+          ) : null}
           <RowActions
             index={i}
             count={items.length}
@@ -290,7 +303,7 @@ export function StoryFields({ onOpenOptional }: { onOpenOptional: () => void }) 
         </fieldset>
       ))}
       <IssueList issues={[...issuesAt('story'), ...issuesAt('story.items')]} />
-      {items.length < MAX_STORY_ITEMS ? (
+      {items.length < shown ? (
         <button
           type="button"
           className={styles.secondaryButton}
@@ -359,15 +372,45 @@ export function DetailsFields({ optionalBlocks }: { optionalBlocks: readonly Opt
 
 // ---------------------------------------------------------------------------------------------
 
-interface RepliesSummary {
-  counts: { responses: number; attending: number; notAttending: number; totalGuests: number };
-  responses: Array<{ id: string; name: string; attending: boolean; guests: number; message: string | null; createdAt: string }>;
+interface ReplyEntry {
+  id: string;
+  name: string;
+  attending: boolean;
+  guests: number;
+  message: string | null;
+  createdAt: string;
+  held?: boolean;
 }
 
+interface RepliesSummary {
+  counts: { responses: number; attending: number; notAttending: number; totalGuests: number; held?: number };
+  responses: ReplyEntry[];
+}
+
+const REPLIES_SHOWN = 20;
+
+function ReplyLine({ r }: { r: ReplyEntry }) {
+  return (
+    <>
+      <strong>{r.name}</strong> — {r.attending ? `yes, ${r.guests} ${r.guests === 1 ? 'guest' : 'guests'}` : 'no'}
+      {r.message ? <span className={styles.replyMessage}>“{r.message}”</span> : null}
+    </>
+  );
+}
+
+/**
+ * Replies for the couple: counts, the list (latest first), CSV. Each reply can be removed (spam,
+ * a test, a duplicate); replies that arrived during unusual volume are held apart (not counted)
+ * until the couple keeps or removes them.
+ */
 function Replies({ api, published }: { api: PanelApi; published: boolean }) {
   const [data, setData] = useState<RepliesSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [confirming, setConfirming] = useState(false);
+  const [working, setWorking] = useState(false);
   useEffect(() => {
     let alive = true;
     void api.replies().then((res) => {
@@ -384,6 +427,38 @@ function Replies({ api, published }: { api: PanelApi; published: boolean }) {
   if (error) return <p className={styles.note}>{error}</p>;
   if (!data) return <p className={styles.hint}>Loading replies…</p>;
   const { counts } = data;
+  const held = data.responses.filter((r) => r.held);
+  const kept = data.responses.filter((r) => !r.held);
+  const visible = showAll ? kept : kept.slice(0, REPLIES_SHOWN);
+
+  const act = async (action: 'remove' | 'keep', ids: string[]) => {
+    if (!ids.length) return;
+    setWorking(true);
+    const res = await api.manageReplies(action, ids);
+    setWorking(false);
+    setConfirming(false);
+    if (res.ok) {
+      setData(res.body as unknown as RepliesSummary);
+      setSelected(new Set());
+      setError(null);
+    } else setError(res.body.message ?? 'The replies could not be changed. Please try again.');
+  };
+  const toggle = (id: string) =>
+    setSelected((cur) => {
+      const next = new Set(cur);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const pick = (r: ReplyEntry) => (
+    <label className={styles.replyPick}>
+      <input type="checkbox" checked={selected.has(r.id)} onChange={() => toggle(r.id)} aria-label={`Select the reply from ${r.name}`} />
+      <span>
+        <ReplyLine r={r} />
+      </span>
+    </label>
+  );
+
   return (
     <div className={styles.replies} data-replies>
       <div className={styles.labelRow}>
@@ -392,6 +467,38 @@ function Replies({ api, published }: { api: PanelApi; published: boolean }) {
           Refresh
         </button>
       </div>
+      {held.length ? (
+        <div className={styles.heldBox} data-held-replies>
+          <p className={styles.note}>
+            {held.length} {held.length === 1 ? 'reply arrived' : 'replies arrived'} during an unusual number of replies in a short time, so{' '}
+            {held.length === 1 ? 'it is' : 'they are'} held here and not counted. Keep the real ones and remove the rest.
+          </p>
+          <ul className={styles.replyList}>
+            {held.map((r) => (
+              <li key={r.id}>
+                <ReplyLine r={r} />
+                <span className={styles.rowActions}>
+                  <button type="button" className={styles.smallButton} disabled={working} onClick={() => void act('keep', [r.id])} aria-label={`Keep the reply from ${r.name}`}>
+                    Keep
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.smallButton} ${styles.dangerText}`}
+                    disabled={working}
+                    onClick={() => void act('remove', [r.id])}
+                    aria-label={`Remove the reply from ${r.name}`}
+                  >
+                    Remove
+                  </button>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <button type="button" className={`${styles.secondaryButton} ${styles.dangerText}`} disabled={working} onClick={() => void act('remove', held.map((r) => r.id))}>
+            Remove all held replies
+          </button>
+        </div>
+      ) : null}
       {counts.responses === 0 ? (
         <p className={styles.hint}>{published ? 'No replies yet.' : 'Replies arrive here once your site is published.'}</p>
       ) : (
@@ -401,13 +508,36 @@ function Replies({ api, published }: { api: PanelApi; published: boolean }) {
             {counts.totalGuests === 1 ? 'guest' : 'guests'}) · {counts.notAttending} not attending
           </p>
           <ul className={styles.replyList}>
-            {data.responses.slice(0, 20).map((r) => (
-              <li key={r.id}>
-                <strong>{r.name}</strong> — {r.attending ? `yes, ${r.guests} ${r.guests === 1 ? 'guest' : 'guests'}` : 'no'}
-                {r.message ? <span className={styles.replyMessage}>“{r.message}”</span> : null}
-              </li>
+            {visible.map((r) => (
+              <li key={r.id}>{pick(r)}</li>
             ))}
           </ul>
+          {kept.length > REPLIES_SHOWN ? (
+            <p className={styles.hint}>
+              {showAll ? `Showing all ${kept.length} replies.` : `Showing the latest ${REPLIES_SHOWN} of ${kept.length} replies. The CSV has all of them.`}{' '}
+              <button type="button" className={styles.inlineLink} onClick={() => setShowAll((v) => !v)}>
+                {showAll ? 'Show fewer' : 'Show all'}
+              </button>
+            </p>
+          ) : null}
+          {selected.size ? (
+            <div className={styles.buttonRow}>
+              {confirming ? (
+                <>
+                  <button type="button" className={`${styles.secondaryButton} ${styles.dangerText}`} disabled={working} onClick={() => void act('remove', [...selected])} data-confirm-remove-replies>
+                    Yes, remove {selected.size} {selected.size === 1 ? 'reply' : 'replies'}
+                  </button>
+                  <button type="button" className={styles.secondaryButton} onClick={() => setConfirming(false)}>
+                    Keep them
+                  </button>
+                </>
+              ) : (
+                <button type="button" className={`${styles.secondaryButton} ${styles.dangerText}`} onClick={() => setConfirming(true)} data-remove-replies>
+                  Remove selected ({selected.size})
+                </button>
+              )}
+            </div>
+          ) : null}
           <a className={styles.secondaryButton} href={api.repliesCsvUrl()} download rel="noreferrer">
             Download all replies (CSV)
           </a>

@@ -113,18 +113,25 @@ function zoneOffsetMs(utcMs: number, timeZone: string): number {
 /**
  * Local wall-clock date + time in an IANA zone -> UTC ISO string
  * (e.g. 2027-09-18 16:30 America/New_York -> 2027-09-18T20:30:00.000Z).
- * Used for countdowns. Returns null for unreadable input.
+ * Used for countdowns and the RSVP closing time. Returns null for unreadable input.
+ *
+ * Daylight-saving edges follow Temporal's "compatible" rule: a wall time that happens twice
+ * (clocks go back) is the earlier instant; a wall time that does not exist (clocks jump forward,
+ * e.g. 00:00 on 2027-03-28 in Asia/Beirut) moves forward by the gap (-> 01:00 local), so a
+ * "midnight" deadline never closes early.
  */
 export function zonedTimeToUtc(isoDate: unknown, hhmm: unknown, timeZone: unknown): string | null {
   const d = parseIsoDate(isoDate);
   const t = parseTime(hhmm);
   if (!d || !t || !isValidTimeZone(timeZone)) return null;
+  const tz = timeZone as string;
   const wall = Date.UTC(d.year, d.month - 1, d.day, t.hour, t.minute);
-  let guess = wall;
-  for (let i = 0; i < 3; i++) {
-    const next = wall - zoneOffsetMs(guess, timeZone as string);
-    if (next === guess) break;
-    guess = next;
-  }
-  return new Date(guess).toISOString();
+  const DAY = 86_400_000;
+  // Offsets a day before and a day after: at most one transition lies between them.
+  const before = zoneOffsetMs(wall - DAY, tz);
+  const after = zoneOffsetMs(wall + DAY, tz);
+  const fits = (utc: number) => utc + zoneOffsetMs(utc, tz) === wall;
+  const candidates = [wall - before, wall - after].filter(fits).sort((a, b) => a - b);
+  // Gap: no instant shows this wall time; the pre-transition offset lands just after the jump.
+  return new Date(candidates.length ? candidates[0] : wall - before).toISOString();
 }

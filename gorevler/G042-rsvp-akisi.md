@@ -71,6 +71,19 @@ Hiçbir yere yayınlanmadı; Vercel/Supabase projesi açılmadı. Tüm test veri
 **Önerilen görevler** (entegratör açar): G039'a RSVPs bölümü (yukarıdaki fonksiyonlarla); G043'te kalıcı RateLimiter + `rsvps`
 tablosuna `deleteRsvp`; isteğe bağlı: motor `[data-rsvp-form]` gördüğünde `/rsvp/form.js`'i kendisi eklesin; `_sample` tema sözleşmeyi kullansın.
 
+### İnceleme düzeltmeleri (2026-10-13, bağımsız inceleme bulguları)
+- Hız sınırı site + IP başına (30 POST / 15 dk) + bütün siteler için IP tavanı (100 / 15 dk): aynı Wi-Fi bir düğün yüzünden diğerlerini kilitlemiyor.
+- Yoğunlukta gerçek misafir kilitlenmiyor: site (200/sa) ya da bir IP'nin o sitedeki (10/sa) sınırı aşılınca yanıt **beklemede**
+  saklanıyor (sayılara/CSV'ye girmez); çift panelde "Keep" / "Remove". Adaptörde `deleteRsvps`, `setRsvpsHeld`;
+  `POST /api/rsvp/<slug>/responses` (yalnız Bearer). Yalnız bekleyen deposu (500/gün) dolunca 429.
+- Son tarih: gece yarısı yaz saati boşluğunda (Asia/Beirut, Africa/Cairo) form artık bir saat erken kapanmıyor.
+- `form.js`: tarayıcı balonu yerine temanın hata yerleri (`noValidate`), `aria-describedby` bağlantısı, kapalı formda
+  `data-rsvp-reason`, tema demosunda durum sorgusu yok (404 / konsol hatası yok).
+- Test: `npm ci`, `npm test` (197/197), `npm run typecheck`, `npm run build` (+ yeni postbuild `trace-check`) temiz; `theme-check.cjs` 68/68, `panel-browser.ts` 72/72, `claim-browser.ts` 50/50, `rsvp-browser.ts` 25/25 (hepsi geçici klasöre, kayıtlı previews değişmedi); `tools/tests/*.py` 6/6. Gerçek telefon, gerçek Vercel/Blob ve canlı yayın **denenmedi**.
+- Yapılmadı: kalıcı / paylaşılan `RateLimiter` (Vercel'de sınırlar örnek başına; G043/G048); gizlilik metni (önerilen görev:
+  claude-metin, ticari kimlik kullanıcıdan); yanıt düzeltme.
+
 ## Günlük
 - 2026-10-13 alindi: wf-platform
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme bulguları düzeltildi (site+IP sınırı, beklemede yanıtlar + silme, DST, form.js erişilebilirlik) — wf-fix

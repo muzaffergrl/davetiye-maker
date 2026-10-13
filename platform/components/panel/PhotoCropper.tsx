@@ -202,7 +202,8 @@ export function PhotoCropper({
             <div
               ref={frameRef}
               className={styles.cropFrame}
-              style={{ aspectRatio: String(ratio), width: `min(100%, calc(56dvh * ${ratio}))` }}
+              // Height leaves room for the title, hint, zoom and buttons on short phones (375 × 553 Safari).
+              style={{ aspectRatio: String(ratio), width: `min(100%, calc(max(160px, min(56dvh, 100dvh - 340px)) * ${ratio}))` }}
               tabIndex={0}
               role="group"
               aria-label="Photo framing. Use the arrow keys to move and plus or minus to zoom."
@@ -245,7 +246,8 @@ export function PhotoCropper({
           />
         </>
       )}
-      <div className={styles.buttonRow}>
+      {/* Sticky: on a short screen "Use this photo" stays in reach (the frame swallows swipes). */}
+      <div className={`${styles.buttonRow} ${styles.stickyActions}`}>
         <button type="button" className={styles.primaryButton} disabled={!current || busy || Boolean(error)} onClick={confirm} data-crop-confirm>
           {busy ? 'Preparing…' : 'Use this photo'}
         </button>

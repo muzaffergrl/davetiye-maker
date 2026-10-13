@@ -8,8 +8,13 @@
 //   3. theme exists, is offered and has demo content        -> 404 theme_unavailable
 //   4. field checks (fields.ts, same rules as the browser)  -> 400 invalid (+ fields)
 //   --- serialised per order number (in this process) ---
-//   5. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
-//   6. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
+//   5. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
+//      (before the "used" check: with verification on, a stranger gets the same 403 for used and unused numbers)
+//   6. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
+//      … unless it is a RETRY of the same claim: same claim token (the form sends one random token
+//      and repeats it on every retry), same email, still an unpublished draft, created < 24 h ago.
+//      The first answer was lost on the way (phone changed network), so the buyer never saw the
+//      link: the keys are reissued (the unseen old link stops working) -> 201 with the new link.
 //   7. website address: typed one must be free             -> 409 slug_taken (+ suggestion); otherwise the first free one from the names
 //   8. per-IP and global "sites created" limits             -> 429 rate_limited / busy
 //   9. create the draft (createSiteWithKeys), email stub    -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
@@ -21,10 +26,11 @@
 
 import { randomInt } from 'node:crypto';
 import type { ContentRecord } from '../content/types.ts';
-import { OrderRefTakenError, SlugTakenError, type DataAdapter } from '../data/types.ts';
+import { OrderRefTakenError, SlugTakenError, type DataAdapter, type SiteRecord } from '../data/types.ts';
 import { defaultInitials, defaultNameDisplay } from '../panel/model.ts';
+import { hashKey, verifyKey } from '../keys.ts';
 import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
-import { createSiteWithKeys } from '../sites.ts';
+import { createSiteWithKeys, reissueKeys } from '../sites.ts';
 import {
   claimFieldErrors,
   cleanName,
@@ -53,6 +59,22 @@ export interface ClaimContext {
   limits?: ClaimLimits;
   verifier?: OrderVerifier;
   mailer?: EditLinkMailer;
+  now?: () => number;
+}
+
+/** How long a lost /start answer can be recovered by retrying with the same claim token. */
+export const CLAIM_RETRY_WINDOW_MS = 24 * 60 * 60_000;
+
+/** The form's one-time claim token (crypto.randomUUID()), or null when missing / malformed. */
+export function claimTokenOf(v: unknown): string | null {
+  return typeof v === 'string' && /^[A-Za-z0-9_-]{16,128}$/.test(v) ? v : null;
+}
+
+/** True when `site` was created by an earlier attempt of this same claim and its link was never used to publish. */
+export function isClaimRetry(site: SiteRecord, token: string | null, email: string, now: number): boolean {
+  if (!token || !site.claimTokenHash || !verifyKey(token, site.claimTokenHash)) return false;
+  const age = now - Date.parse(site.createdAt);
+  return (site.ownerEmail ?? '').toLowerCase() === email.toLowerCase() && site.status === 'draft' && site.publishedAt === null && age >= 0 && age < CLAIM_RETRY_WINDOW_MS;
 }
 
 export interface ClaimResult {
@@ -200,7 +222,7 @@ export interface ClaimSuccessBody {
   emailSent: boolean;
 }
 
-/** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, website? (honeypot)}. */
+/** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, website? (honeypot)}. */
 export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>): Promise<ClaimResult> {
   const { adapter } = ctx;
   const limiter = ctx.limiter ?? getClaimRateLimiter();
@@ -224,14 +246,44 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
   const email = normalizeEmail(values.email)!;
   const buyerNames = names.slice(0, theme.partnerCount).map(cleanName);
   const requestedSlug = normalizeSlugInput(values.slug) || null;
+  const claimToken = claimTokenOf(raw.claimToken);
+  const now = ctx.now ?? Date.now;
+
+  const answer = async (slug: string, editKey: string): Promise<ClaimResult> => {
+    const origin = ctx.origin.replace(/\/+$/, '');
+    const editPath = `/edit/${slug}?k=${encodeURIComponent(editKey)}`;
+    const editUrl = `${origin}${editPath}`;
+    const siteUrl = `${origin}/${slug}`;
+    let emailSent = false;
+    const mailer = ctx.mailer ?? getEditLinkMailer();
+    if (mailer.enabled) {
+      try {
+        emailSent = (await mailer.send({ to: email, editUrl, siteUrl, themeName: theme.name, orderNumber })).sent === true;
+      } catch (e) {
+        // Never log the message (it holds the secret link).
+        console.error(`[claim] edit link email for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
+      }
+    }
+    const body: ClaimSuccessBody = { ok: true, slug, status: 'draft', editUrl, editPath, siteUrl, emailSent };
+    return { status: 201, body: body as unknown as Record<string, unknown> };
+  };
+
+  /** "Order used", or the recovered link when this request repeats a claim whose answer was lost. */
+  const usedOrRetry = async (sites: SiteRecord[]): Promise<ClaimResult> => {
+    const mine = sites.find((s) => isClaimRetry(s, claimToken, email, now()));
+    if (!mine) return claimError(409, 'order_used');
+    const reissued = await reissueKeys(adapter, mine.id);
+    return answer(reissued.site.slug, reissued.editKey);
+  };
 
   return withOrderLock(orderNumber, async () => {
-    if ((await adapter.findSitesByOrderRef(orderNumber)).length) return claimError(409, 'order_used');
-
     const verifier = ctx.verifier ?? getOrderVerifier();
     const check = await verifier.check({ orderNumber, email, theme: theme.id });
     if (check.result === 'rejected') return claimError(403, 'order_not_verified');
     if (check.result === 'unavailable') return claimError(503, 'verification_unavailable', {}, { 'Retry-After': '60' });
+
+    const existing = await adapter.findSitesByOrderRef(orderNumber);
+    if (existing.length) return usedOrRetry(existing);
 
     const taken = async (from: string) =>
       claimError(409, 'slug_taken', { fields: { slug: FIELD_MESSAGES.slugTaken }, suggestion: await findFreeSlug(adapter, from) });
@@ -256,9 +308,17 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     let created: Awaited<ReturnType<typeof createSiteWithKeys>> | null = null;
     for (let tries = 0; !created; tries++) {
       try {
-        created = await createSiteWithKeys(adapter, { slug, theme: theme.id, content, orderRef: orderNumber, ownerEmail: email });
+        created = await createSiteWithKeys(adapter, {
+          slug,
+          theme: theme.id,
+          content,
+          orderRef: orderNumber,
+          ownerEmail: email,
+          claimTokenHash: claimToken ? hashKey(claimToken) : null,
+        });
       } catch (e) {
-        if (e instanceof OrderRefTakenError) return claimError(409, 'order_used'); // another server instance won the race
+        // Another server instance won the race (possibly our own earlier attempt of this claim).
+        if (e instanceof OrderRefTakenError) return usedOrRetry(await adapter.findSitesByOrderRef(orderNumber));
         if (!(e instanceof SlugTakenError)) throw e;
         // Someone took the address between the check and the write.
         if (requestedSlug || tries >= 2) return taken(slug);
@@ -268,23 +328,6 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
       }
     }
 
-    const origin = ctx.origin.replace(/\/+$/, '');
-    const editPath = `/edit/${slug}?k=${encodeURIComponent(created.editKey)}`;
-    const editUrl = `${origin}${editPath}`;
-    const siteUrl = `${origin}/${slug}`;
-
-    let emailSent = false;
-    const mailer = ctx.mailer ?? getEditLinkMailer();
-    if (mailer.enabled) {
-      try {
-        emailSent = (await mailer.send({ to: email, editUrl, siteUrl, themeName: theme.name, orderNumber })).sent === true;
-      } catch (e) {
-        // Never log the message (it holds the secret link).
-        console.error(`[claim] edit link email for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
-      }
-    }
-
-    const body: ClaimSuccessBody = { ok: true, slug, status: 'draft', editUrl, editPath, siteUrl, emailSent };
-    return { status: 201, body: body as unknown as Record<string, unknown> };
+    return answer(slug, created.editKey);
   });
 }

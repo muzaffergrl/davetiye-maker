@@ -91,6 +91,19 @@ hero ≈ 277 KB ekler); Vercel/Supabase yayını (proje açılmadı); panelden (
 claude-qa — gerçek telefonda (iOS Safari + Android Chrome) tema + RSVP formu · G046 için: bu tema standardın örneği
 (`themes/blush-garden-rose/README.md`, `scripts/theme-check.cjs` kontrol listesi).
 
+### İnceleme düzeltmeleri (2026-10-13, bağımsız inceleme bulguları)
+- Misafir sitesinde "Your photo here" yok: etiket yalnız önizlemede (`html[data-preview="true"]`); panel yayın öncesi boş foto yerlerini listeler.
+- Link blokları yalnız linkleriyle (`data-if="urls.*"`): ölü "View map / Where to stay / View registry" düğmesi yok; Travel notu
+  artık olmayan "ipuçları"nı vaat etmiyor. `rsvp.method` dolu → RSVP sayfası 404, ona giden düğme/linkler kalkar.
+- Kısa telefonlar (360×640, 375×553, 390×690): arka plan ortadan büyütülür, zarf yazıları çiçeğe değmiyor; "Replay the opening" yumuşak
+  zeminli + 44 px; Skip ve "Replay the envelope" ≥ 44 px. Önce/sonra: `previews/g038/review_short_phones_{before,after}.jpg`;
+  `theme-check.cjs` yazı altındaki zemini ölçer (eski CSS'le başarısız, yenisiyle geçer).
+- RSVP: yanıttan sonra kapanış metni gizlenir (reddeden misafire "We can't wait…" yok). Foto alt metni içerikten. Şablon yorumları
+  çıktıdan siliniyor, `site-data` içerik kaydını taşımıyor (kapalı bölümler kaynakta görünmüyor).
+- Test: `npm ci`, `npm test` (197/197), `npm run typecheck`, `npm run build` (+ yeni postbuild `trace-check`) temiz; `theme-check.cjs` 68/68, `panel-browser.ts` 72/72, `claim-browser.ts` 50/50, `rsvp-browser.ts` 25/25 (hepsi geçici klasöre, kayıtlı previews değişmedi); `tools/tests/*.py` 6/6. Gerçek telefon, gerçek Vercel/Blob ve canlı yayın **denenmedi**.
+- Yapılmadı: gerçek cihazda (iOS Safari çubukları) görsel kontrol; paylaşım görseli hâlâ yok.
+
 ## Günlük
 - 2026-10-13 alindi: wf-platform
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme bulguları düzeltildi (yer tutucu etiketi, link blokları, RSVP kapalı, kısa telefon, alt, yorumlar) — wf-fix

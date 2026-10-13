@@ -100,7 +100,8 @@ const shot = async (page: any, name: string, opts: { fullPage?: boolean; photo?:
   const file = path.join(OUT, `${name}.${opts.photo ? 'jpg' : 'png'}`);
   await page.screenshot({ path: file, fullPage: Boolean(opts.fullPage), ...(opts.photo ? { type: 'jpeg', quality: 82 } : {}) });
 };
-const overflow = (page: any) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+// Against the device width: on a phone (isMobile) wide content widens the layout viewport itself (innerWidth grows too).
+const overflow = (page: any) => page.evaluate(() => Math.max(document.documentElement.scrollWidth, window.innerWidth) - screen.width);
 const saveState = (page: any) => page.getAttribute('[data-save-state]', 'data-save-state');
 async function waitSaved(page: any) {
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') !== 'saved', null, { timeout: 1500 }).catch(() => undefined);
@@ -110,6 +111,18 @@ async function openSection(page: any, id: string) {
   const button = page.locator(`#section-${id}`);
   if ((await button.getAttribute('aria-expanded')) !== 'true') await button.click();
   await button.scrollIntoViewIfNeeded();
+}
+/** Publish; the "Before you publish" notes sheet (sample text, empty photo places, …) is answered with "Publish anyway". */
+async function publishNow(page: any): Promise<string> {
+  await page.click('[data-publish]');
+  await page.waitForSelector('[data-testid="live"], [data-testid="notes"]', { timeout: 15_000 });
+  let notes = '';
+  if (await page.locator('[data-testid="notes"]').count()) {
+    notes = await page.locator('[data-testid="notes"]').innerText();
+    await page.click('[data-publish-anyway]');
+  }
+  await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
+  return notes;
 }
 async function decodeQrFrom(locator: any): Promise<string | null> {
   const png = await locator.screenshot();
@@ -171,6 +184,17 @@ try {
   await page.locator('#f-partners-1-full_name').blur();
   check('couple: names-as-shown follows the first names', (await page.inputValue('#f-name_display')) === 'Elena & Marco');
   check('couple: monogram follows', (await page.inputValue('#f-initials')) === 'E&M');
+  // The fixed bar never hides the field that gets focus by keyboard (WCAG 2.4.11).
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.focus('#f-partners-0-display_name');
+  await page.keyboard.press('Tab');
+  const focusBox = await page.evaluate(() => {
+    const el = document.activeElement as HTMLElement;
+    const b = el.getBoundingClientRect();
+    const bar = document.querySelector('[data-save-state]')!.parentElement!.parentElement!.getBoundingClientRect(); // the fixed bar
+    return { id: el.id, bottom: Math.round(b.bottom), barTop: Math.round(bar.top) };
+  });
+  check('focus: a field reached with Tab is not under the fixed bar', focusBox.id === 'f-partners-0-full_name' && focusBox.bottom <= focusBox.barTop, JSON.stringify(focusBox));
   check('couple: header updates', (await page.locator('h1').innerText()) === 'Elena & Marco');
   await waitSaved(page);
   check('autosave: "All changes saved"', (await page.locator('[data-save-state]').innerText()).includes('All changes saved'));
@@ -196,7 +220,12 @@ try {
   check('schedule: shown as 9:30 PM', (await page.locator(`[data-schedule-row="${before - 1}"]`).innerText()).includes('9:30 PM'));
   await waitSaved(page);
   await shot(page, '04_schedule_390');
+  await page.getByRole('button', { name: `Move event ${before} down` }).click();
+  check('schedule: focus follows the moved row', (await page.evaluate(() => document.activeElement?.getAttribute('aria-label'))) === `Move event ${before + 1} up`);
+  await page.getByRole('button', { name: `Move event ${before + 1} up` }).click();
   await page.getByRole('button', { name: `Remove event ${before}` }).click();
+  check('schedule: Remove asks once more', (await rows()) === before + 1 && (await page.getByRole('button', { name: `Yes, remove event ${before}` }).count()) === 1);
+  await page.getByRole('button', { name: `Yes, remove event ${before}` }).click();
   check('schedule: row removed', (await rows()) === before);
   await waitSaved(page);
 
@@ -216,7 +245,10 @@ try {
   await page.waitForSelector('[data-photo-slot="hero"] img', { timeout: 20_000 });
   await waitSaved(page);
   const heroSrc = await page.getAttribute('[data-photo-slot="hero"] img', 'src');
-  check('photo: uploaded and stored in the draft', /^\/media\/[0-9a-f-]{36}\/[0-9a-f]{32}\.jpg$/.test(heroSrc ?? ''), heroSrc ?? '');
+  // Not published yet: the buyer's own views carry the preview key (the photo is not public).
+  check('photo: uploaded and stored in the draft', /^\/media\/[0-9a-f-]{36}\/[0-9a-f]{32}\.jpg\?preview=[A-Za-z0-9_-]+$/.test(heroSrc ?? ''), heroSrc ?? '');
+  const heroPath = (heroSrc ?? '').split('?')[0];
+  check('photo: not public before publishing', (await fetch(`${BASE}${heroPath}`)).status === 404);
   const heroMeta = await sharp(Buffer.from(await (await fetch(`${BASE}${heroSrc}`)).arrayBuffer())).metadata();
   check('photo: server copy is a 4:5 JPEG without EXIF', heroMeta.format === 'jpeg' && Math.abs(heroMeta.width / heroMeta.height - 0.8) < 0.01 && !heroMeta.exif, `${heroMeta.width}x${heroMeta.height}`);
   check('photos: section summary counts it', (await page.locator('#section-photos').innerText()).includes('1 of 5 added'));
@@ -263,12 +295,18 @@ try {
     { timeout: 10_000 },
   );
   check('preview: shows the uploaded photo', (await pvHero.getAttribute('src')) === heroSrc);
+  check('preview: focus on Close (modal)', (await page.evaluate(() => document.activeElement?.hasAttribute('data-close-preview'))) === true);
+  check('preview: form behind is inert', (await page.evaluate(() => (document.querySelector('[data-panel] main') as HTMLElement).inert)) === true);
   await shot(page, '08_preview_390', { photo: true });
-  await page.getByRole('button', { name: 'Close' }).click();
+  // Android back button / gesture closes the preview and stays in the editor.
+  await page.goBack();
+  await page.waitForTimeout(400);
+  check('preview: Back closes it and stays in the editor', page.url() === EDIT_URL && !(await page.locator('[data-preview] iframe').isVisible()), page.url());
+  check('preview: focus back on the Preview button', (await page.evaluate(() => document.activeElement?.hasAttribute('data-open-preview'))) === true);
 
-  // Publish -> live link + QR from the real URL.
-  await page.click('[data-publish]');
-  await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
+  // Publish -> notes (empty photo places, link blocks without a link) -> "Publish anyway" -> live link + QR.
+  const notes = await publishNow(page);
+  check('publish: notes before publishing (empty photo places, sections without a link)', /Photo places without a photo/.test(notes) && /Sections without a link/.test(notes), notes.replace(/\s+/g, ' ').slice(0, 160));
   check('publish: "Your website is live"', (await page.locator('[data-testid="live"] h2').innerText()) === 'Your website is live');
   check('publish: public link shown', (await page.locator('[data-live-link]').innerText()) === PUBLIC_URL);
   const qr = page.locator('[data-testid="live"] svg[role="img"]');
@@ -289,7 +327,7 @@ try {
     const img = document.querySelector('img[data-photo="hero"]') as HTMLImageElement | null;
     return img ? { src: img.getAttribute('src'), w: img.naturalWidth } : null;
   });
-  check('public page: uploaded photo loads', pubHero?.src === heroSrc && pubHero.w > 0, JSON.stringify(pubHero));
+  check('public page: uploaded photo loads (public once published)', pubHero?.src === heroPath && pubHero.w > 0, JSON.stringify(pubHero));
   check('public page: no horizontal overflow', (await overflow(pub)) <= 0);
   await shot(pub, '10_public_390', { fullPage: true, photo: true });
 
@@ -308,6 +346,12 @@ try {
   check('RSVP section: reply and counts listed', repliesText.includes('Ada Example') && repliesText.includes('1 reply · 1 attending (2 guests)'), repliesText.replace(/\s+/g, ' ').slice(0, 120));
   await page.locator('[data-replies] li').first().scrollIntoViewIfNeeded();
   await shot(page, '10b_replies_390');
+  // A test or spam reply can be removed (asked once more); the counts follow.
+  await page.getByRole('checkbox', { name: 'Select the reply from Ada Example' }).check();
+  await page.click('[data-remove-replies]');
+  await page.click('[data-confirm-remove-replies]');
+  await page.waitForFunction(() => !document.querySelector('[data-replies] li'));
+  check('RSVP section: a reply can be removed', (await page.locator('[data-replies]').innerText()).includes('No replies yet.'));
 
   // Edit after publishing: guests keep the old text until "Publish changes".
   await page.bringToFront();
@@ -318,11 +362,46 @@ try {
   check('bar: "Publish changes" after an edit', (await page.locator('[data-publish]').innerText()) === 'Publish changes');
   await pub.goto(`${PUBLIC_URL}/home`, { waitUntil: 'networkidle' });
   check('public page: unpublished edit not visible', (await pub.locator('.kicker').textContent()) === 'Together with their families');
-  await page.click('[data-publish]');
-  await page.waitForSelector('[data-testid="live"]');
+  await publishNow(page);
   await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();
   await pub.reload({ waitUntil: 'networkidle' });
   check('public page: change visible after "Publish changes"', (await pub.locator('.kicker').textContent()) === 'Together with our families');
+
+  // Flaky phone network: a save is stored but its answer is lost -> the retry must not lock the panel ("another device").
+  let lostOnce = true;
+  await page.route(`**/api/edit/${SLUG}`, async (route: any) => {
+    if (route.request().method() === 'PUT' && lostOnce) {
+      lostOnce = false;
+      await route.fetch(); // the server stores it...
+      return route.abort('connectionreset'); // ...the phone never hears back
+    }
+    return route.continue();
+  });
+  await page.fill('#f-host_line', 'With joy, together with our families');
+  await page.locator('#f-host_line').blur();
+  await page.waitForFunction(() => ['saved', 'conflict'].includes(document.querySelector('[data-save-state]')?.getAttribute('data-save-state') ?? ''), null, { timeout: 30_000 });
+  check('lost save answer: no false conflict, saved', (await saveState(page)) === 'saved' && !lostOnce, String(await saveState(page)));
+  await page.unroute(`**/api/edit/${SLUG}`);
+  // the browser logs the simulated reset and the 409 the panel then resolved; they are not page errors
+  for (let i = problems.length - 1; i >= 0; i--) if (/ERR_CONNECTION_RESET|status of 409/.test(problems[i])) problems.splice(i, 1);
+
+  // Typing while a slow publish is on its way: the edit is saved after it, no false conflict.
+  await page.route(`**/api/edit/${SLUG}/publish`, async (route: any) => {
+    const res = await route.fetch();
+    await new Promise((r) => setTimeout(r, 2500));
+    return route.fulfill({ response: res });
+  });
+  await page.click('[data-publish]');
+  await page.waitForSelector('[data-testid="live"], [data-testid="notes"]', { timeout: 15_000 });
+  if (await page.locator('[data-testid="notes"]').count()) await page.click('[data-publish-anyway]');
+  await page.waitForTimeout(300);
+  await page.fill('#f-host_line', 'Typed during the publish');
+  await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
+  await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();
+  await waitSaved(page);
+  const afterRace = (await adapter.getSiteById(seeded.site.id))!;
+  check('typing during a slow publish: saved after it, no false conflict', (await saveState(page)) === 'saved' && afterRace.content.host_line === 'Typed during the publish', `${await saveState(page)} / ${afterRace.content.host_line}`);
+  await page.unroute(`**/api/edit/${SLUG}/publish`);
 
   // Take offline, then publish again.
   await page.locator('[data-status-card]').scrollIntoViewIfNeeded();
@@ -330,9 +409,9 @@ try {
   await page.click('[data-confirm-offline]');
   await page.waitForFunction(() => document.querySelector('[data-panel]')?.getAttribute('data-status') === 'draft');
   check('offline: public page is 404', (await fetch(PUBLIC_URL)).status === 404);
+  check('offline: the photo is not public any more', (await fetch(`${BASE}${heroPath}`)).status === 404);
   await shot(page, '11_offline_390');
-  await page.click('[data-publish]');
-  await page.waitForSelector('[data-testid="live"]');
+  await publishNow(page);
   check('published again: public page is 200', (await fetch(PUBLIC_URL)).status === 200);
   await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();
 

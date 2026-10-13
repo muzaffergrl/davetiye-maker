@@ -2,7 +2,10 @@
 // The panel (G039) can call these directly on the server, or use the HTTP API:
 //   GET /api/rsvp/<slug>/responses   JSON {site, window, counts, responses}
 //   GET /api/rsvp/<slug>/export      CSV download
-// Both take the edit key as "Authorization: Bearer <key>" (preferred) or ?k=<key>.
+//   POST /api/rsvp/<slug>/responses  {action: "remove" | "keep", ids: [...]}  (Bearer only)
+// GETs take the edit key as "Authorization: Bearer <key>" (preferred) or ?k=<key>.
+// Held replies (unusual volume, guest.ts) are listed with held: true but are not counted and not in
+// the CSV until the couple keeps them; "remove" deletes replies for good.
 
 import { formatDate, formatTime, isValidTimeZone } from '../content/format.ts';
 import type { DataAdapter, RsvpRecord, SiteRecord } from '../data/types.ts';
@@ -11,7 +14,7 @@ import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { rsvpWindow, type RsvpWindow } from './deadline.ts';
 
 export interface RsvpCounts {
-  /** Number of replies. */
+  /** Number of replies (held ones not included). */
   responses: number;
   /** Replies that said yes. */
   attending: number;
@@ -19,6 +22,8 @@ export interface RsvpCounts {
   notAttending: number;
   /** Sum of guests over the "yes" replies (the head count). */
   totalGuests: number;
+  /** Replies held for review (not in the numbers above). */
+  held: number;
 }
 
 /** A reply as shown to the couple (no internal site id). */
@@ -30,6 +35,7 @@ export interface RsvpEntry {
   guests: number;
   message: string | null;
   createdAt: string;
+  held: boolean;
 }
 
 export interface RsvpSummary {
@@ -50,17 +56,43 @@ export async function authorizeEditor(adapter: DataAdapter, slug: string, editKe
 export function rsvpCounts(list: readonly RsvpRecord[]): RsvpCounts {
   let attending = 0;
   let totalGuests = 0;
+  let held = 0;
+  let responses = 0;
   for (const r of list) {
+    if (r.held) {
+      held += 1;
+      continue;
+    }
+    responses += 1;
     if (r.attending) {
       attending += 1;
       totalGuests += r.guests;
     }
   }
-  return { responses: list.length, attending, notAttending: list.length - attending, totalGuests };
+  return { responses, attending, notAttending: responses - attending, totalGuests, held };
 }
 
 function toEntry(r: RsvpRecord): RsvpEntry {
-  return { id: r.id, name: r.name, email: r.email, attending: r.attending, guests: r.guests, message: r.message, createdAt: r.createdAt };
+  return {
+    id: r.id,
+    name: r.name,
+    email: r.email,
+    attending: r.attending,
+    guests: r.guests,
+    message: r.message,
+    createdAt: r.createdAt,
+    held: r.held === true,
+  };
+}
+
+export type RsvpAction = 'remove' | 'keep';
+export const MAX_RSVP_ACTION_IDS = 1000;
+
+/** Couple's action on replies: "remove" deletes them, "keep" releases held ones. Returns how many changed. */
+export async function manageRsvps(adapter: DataAdapter, site: SiteRecord, action: RsvpAction, ids: readonly string[]): Promise<number> {
+  const clean = [...new Set(ids.filter((id) => typeof id === 'string' && /^[0-9a-f-]{36}$/.test(id)))].slice(0, MAX_RSVP_ACTION_IDS);
+  if (!clean.length) return 0;
+  return action === 'remove' ? adapter.deleteRsvps(site.id, clean) : adapter.setRsvpsHeld(site.id, clean, false);
 }
 
 /** Replies (newest first), counts and the form window. Uses the published content when there is one. */
@@ -115,12 +147,12 @@ export interface CsvOptions {
   bom?: boolean;
 }
 
-/** CSV of replies, oldest first, CRLF line ends. Every cell is quoted and formula-safe. */
+/** CSV of replies (held ones left out), oldest first, CRLF line ends. Every cell is quoted and formula-safe. */
 export function rsvpCsv(list: readonly RsvpRecord[], opts: CsvOptions = {}): string {
   const tz = opts.timeZone && isValidTimeZone(opts.timeZone) ? opts.timeZone : 'UTC';
   const locale = opts.locale ?? 'en-US';
   const rows: unknown[][] = [[`Submitted (${tz})`, 'Name', 'Email', 'Attending', 'Guests', 'Message']];
-  const sorted = [...list].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  const sorted = list.filter((r) => !r.held).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   for (const r of sorted) {
     rows.push([formatLocalDateTime(r.createdAt, tz, locale), r.name, r.email ?? '', r.attending ? 'Yes' : 'No', r.guests, r.message ?? '']);
   }

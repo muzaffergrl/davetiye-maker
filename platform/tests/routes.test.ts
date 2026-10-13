@@ -182,7 +182,7 @@ test('theme asset route serves assets only, never templates or traversal', async
 test('media route serves local uploads with nosniff', async () => {
   const saved = await getDataAdapter().savePhoto(published.id, { bytes: tinyPng() });
   const parts = saved.url.replace(/^\/media\//, '').split('/');
-  const res = await getMedia(req(saved.url), { params: Promise.resolve({ path: parts }) });
+  const res = await getMedia(req(`${saved.url}?preview=${published.previewKey}`), { params: Promise.resolve({ path: parts }) });
   assert.equal(res.status, 200);
   assert.equal(res.headers.get('content-type'), 'image/png');
   assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
@@ -190,6 +190,38 @@ test('media route serves local uploads with nosniff', async () => {
   assert.equal(missing.status, 404);
   const traversal = await getMedia(req('/media/..'), { params: Promise.resolve({ path: ['..', 'sites', `${published.id}.json`] }) });
   assert.equal(traversal.status, 404);
+});
+
+test('media route: a photo is public only while the published content uses it; offline / replaced / draft-only -> 404', async () => {
+  const adapter = getDataAdapter();
+  const created = await createSiteWithKeys(adapter, { slug: 'media-gate', theme: '_sample', content: demoContent() });
+  const id = created.site.id;
+  const one = await adapter.savePhoto(id, { bytes: tinyPng() });
+  const two = await adapter.savePhoto(id, { bytes: tinyPng() });
+  const get = (url: string, query = '') =>
+    getMedia(req(`${url}${query}`), { params: Promise.resolve({ path: url.replace(/^\/media\//, '').split('/') }) });
+  const c = demoContent();
+  c.media.hero_portrait = one.url;
+  await adapter.updateContent(id, c);
+  assert.equal((await get(one.url)).status, 404, 'draft only: not public');
+  assert.equal((await get(one.url, `?preview=${created.previewKey}`)).status, 200, 'the couple sees it in the preview');
+  assert.equal((await get(one.url, `?preview=${published.previewKey}`)).status, 404, "another site's preview key does not open it");
+  await publishSite(adapter, id);
+  const live = await get(one.url);
+  assert.equal(live.status, 200);
+  assert.equal(live.headers.get('cache-control'), 'public, max-age=300, s-maxage=300', 'short cache, not immutable for a year');
+  assert.equal((await get(two.url)).status, 404, 'uploaded but never used');
+  // replaced: the old photo stops being public once the change is published
+  c.media.hero_portrait = two.url;
+  await adapter.updateContent(id, c);
+  assert.equal((await get(one.url)).status, 200, 'still what guests see until the next publish');
+  await publishSite(adapter, id);
+  assert.equal((await get(one.url)).status, 404);
+  assert.equal((await get(two.url)).status, 200);
+  // offline: no photo is public any more
+  await adapter.unpublish(id);
+  assert.equal((await get(two.url)).status, 404);
+  assert.equal((await get(two.url, `?preview=${created.previewKey}`)).status, 200);
 });
 
 test('uploaded photo appears on the published page after re-publish', async () => {
@@ -201,5 +233,7 @@ test('uploaded photo appears on the published page after re-publish', async () =
   await publishSite(adapter, published.id);
   const $ = cheerio.load(await (await site('clara-and-julian')).text());
   assert.equal($('img[data-photo="hero"]').attr('src'), saved.url);
+  const parts = saved.url.replace(/^\/media\//, '').split('/');
+  assert.equal((await getMedia(req(saved.url), { params: Promise.resolve({ path: parts }) })).status, 200, 'published photo is public');
   assert.equal($('img[data-photo="hero"]').attr('data-photo-state'), 'user');
 });

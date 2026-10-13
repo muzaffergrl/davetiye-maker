@@ -9,12 +9,15 @@ import { formatDate, formatDateLong, formatTime } from '../../lib/content/format
 import {
   defaultNameDisplay,
   fieldId,
+  pageShown,
   photoAt,
+  prePublishNotes,
   publicSiteUrl,
   SECTION_IDS,
   SECTION_TITLES,
   sectionForPath,
   type PanelState,
+  type PublishNote,
   type SectionId,
 } from '../../lib/panel/model.ts';
 import { IssueList, PanelContext, Section, type PanelContextValue } from './fields.tsx';
@@ -52,6 +55,7 @@ const SAVE_LABELS: Record<SaveState, string> = {
 
 type Dialog =
   | { kind: 'issues'; issues: ValidationIssue[]; message?: string }
+  | { kind: 'notes' }
   | { kind: 'live'; justPublished: boolean }
   | { kind: 'offline' }
   | { kind: 'message'; title: string; text: string };
@@ -77,12 +81,28 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
     return map;
   }, [validation]);
 
+  // Not errors, but guests would notice: sample text from the demo, empty photo places, link blocks without a link.
+  const notes = useMemo(() => prePublishNotes(content, theme), [content, theme]);
+  const samples = useMemo(() => new Set(notes.sample.map((n) => n.path)), [notes]);
+  const noteCount = notes.sample.length + notes.photos.length + notes.links.length;
+  // Preview tabs: only the pages guests can open with this content (e.g. no Story tab while it is off).
+  const visiblePages = useMemo(() => theme.pages.filter((p) => pageShown(theme.pageRules[p], content)), [theme, content]);
+
   const ctx: PanelContextValue = useMemo(
-    () => ({ content, edit: panel.edit, issuesAt: (p: string) => issuesByPath.get(p) ?? [], locked }),
-    [content, panel.edit, issuesByPath, locked],
+    () => ({
+      content,
+      edit: panel.edit,
+      issuesAt: (p: string) => issuesByPath.get(p) ?? [],
+      locked,
+      isSample: (p: string) => samples.has(p),
+      previewKey: initial.previewKey,
+      fields: theme.fields,
+    }),
+    [content, panel.edit, issuesByPath, locked, samples, initial.previewKey, theme.fields],
   );
 
   const errorCount = (id: SectionId) => validation.errors.filter((i) => sectionForPath(i.path) === id).length;
+  const sampleCount = (id: SectionId) => notes.sample.filter((n) => sectionForPath(n.path) === id).length;
   const generalIssues = [...validation.errors, ...validation.warnings].filter((i) => sectionForPath(i.path) === null);
 
   const goTo = useCallback((path: string) => {
@@ -110,15 +130,21 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
   const upToDate = meta.status === 'published' && !meta.hasUnpublishedChanges && saveState === 'saved';
   const publishLabel = meta.status !== 'published' ? 'Publish' : upToDate ? 'Share' : 'Publish changes';
 
-  const onPublish = async () => {
-    if (upToDate) return setDialog({ kind: 'live', justPublished: false });
-    if (validation.errors.length) return setDialog({ kind: 'issues', issues: validation.errors });
+  const doPublish = async () => {
+    setDialog(null);
     setBusy(true);
     const res = await panel.publish();
     setBusy(false);
     if (res.ok) setDialog({ kind: 'live', justPublished: true });
     else if (res.issues?.length) setDialog({ kind: 'issues', issues: res.issues, message: res.message });
     else setDialog({ kind: 'message', title: 'Not published', text: res.message ?? 'The website could not be published. Please try again.' });
+  };
+
+  const onPublish = async () => {
+    if (upToDate) return setDialog({ kind: 'live', justPublished: false });
+    if (validation.errors.length) return setDialog({ kind: 'issues', issues: validation.errors });
+    if (noteCount) return setDialog({ kind: 'notes' });
+    await doPublish();
   };
 
   const onUnpublish = async () => {
@@ -134,7 +160,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
     date: [formatDateLong(content.date, content.locale), formatTime(content.ceremony_time, content.locale)].filter(Boolean).join(' · ') || 'Add the date',
     venue: [content.venue?.name, content.venue?.city].filter(Boolean).join(', ') || 'Add the venue',
     schedule: `${content.schedule?.length ?? 0} ${content.schedule?.length === 1 ? 'event' : 'events'}`,
-    story: `${content.story?.items?.length ?? 0} moments${blocks.our_story === true ? '' : ' · page off'}`,
+    story: `${content.story?.items?.length ?? 0} ${content.story?.items?.length === 1 ? 'moment' : 'moments'}${blocks.our_story === true ? '' : ' · page off'}`,
     details:
       [content.dress_code ? 'dress code' : '', content.urls?.map ? 'map' : '', content.urls?.accommodation ? 'travel' : '', content.urls?.registry ? 'registry' : '']
         .filter(Boolean)
@@ -163,7 +189,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
       case 'optional':
         return <OptionalFields optionalBlocks={theme.optionalBlocks} />;
       case 'photos':
-        return <PhotosSection slots={theme.photos} onUpload={panel.uploadPhoto} onRemove={panel.removePhoto} />;
+        return <PhotosSection slots={theme.photos} previewKey={initial.previewKey} onUpload={panel.uploadPhoto} onRemove={panel.removePhoto} />;
     }
   };
 
@@ -171,7 +197,8 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
     <PanelContext.Provider value={ctx}>
       <div className={styles.app} data-panel data-status={meta.status}>
         <div className={styles.layout}>
-          <main className={styles.main}>
+          {/* While the phone preview covers the screen, the form and bar behind it are out of reach (focus, Tab, screen readers). */}
+          <main className={styles.main} inert={(previewOpen && !wide) || undefined}>
             <header className={styles.header}>
               <p className={styles.eyebrow}>Edit your website</p>
               <h1 className={styles.title}>{content.name_display || 'Your names'}</h1>
@@ -240,6 +267,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
                   title={SECTION_TITLES[id]}
                   summary={summaries[id]}
                   errorCount={errorCount(id)}
+                  sampleCount={sampleCount(id)}
                   open={open === id}
                   onToggle={() => setOpen((cur) => (cur === id ? null : id))}
                 >
@@ -253,7 +281,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
             <PreviewPane
               slug={initial.slug}
               previewKey={initial.previewKey}
-              pages={theme.pages}
+              pages={visiblePages}
               version={panel.previewVersion}
               open={previewOpen}
               wide={wide}
@@ -262,7 +290,7 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
           </aside>
         </div>
 
-        <div className={styles.bar}>
+        <div className={styles.bar} inert={(previewOpen && !wide) || undefined}>
           <div className={styles.barInner}>
             <p className={styles.saveStatus} role="status" aria-live="polite" data-save-state={saveState}>
               <span className={`${styles.dot} ${styles[`dot_${saveState}`] ?? ''}`} aria-hidden="true" />
@@ -300,6 +328,23 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
                 );
               })}
             </ul>
+          </Sheet>
+        ) : null}
+
+        {dialog?.kind === 'notes' ? (
+          <Sheet title="Before you publish" onClose={() => setDialog(null)} closeLabel="Keep editing" testId="notes">
+            <p>Your guests will see these. Check them, or publish anyway and change them later.</p>
+            <NoteList title="Still sample text from the design" notes={notes.sample} onJump={goTo} />
+            <NoteList title="Photo places without a photo" notes={notes.photos} onJump={goTo} />
+            <NoteList title="Sections without a link" notes={notes.links} onJump={goTo} />
+            <div className={styles.buttonRow}>
+              <button type="button" className={styles.primaryButton} disabled={busy} onClick={() => void doPublish()} data-publish-anyway>
+                Publish anyway
+              </button>
+              <button type="button" className={styles.secondaryButton} onClick={() => setDialog(null)}>
+                Keep editing
+              </button>
+            </div>
           </Sheet>
         ) : null}
 
@@ -348,3 +393,25 @@ export default function Panel({ initial, editKey }: { initial: PanelState; editK
   );
 }
 
+
+function NoteList({ title, notes, onJump }: { title: string; notes: PublishNote[]; onJump: (path: string) => void }) {
+  if (!notes.length) return null;
+  return (
+    <>
+      <h3 className={styles.subTitle}>{title}</h3>
+      <ul className={styles.issueJumpList}>
+        {notes.map((n, i) => {
+          const section = sectionForPath(n.path);
+          return (
+            <li key={`${n.path}-${i}`}>
+              <button type="button" className={`${styles.issueJump} ${styles.noteJump}`} onClick={() => onJump(n.path)}>
+                <span className={styles.issueJumpSection}>{section ? SECTION_TITLES[section] : 'General'}</span>
+                <span>{n.message}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </>
+  );
+}

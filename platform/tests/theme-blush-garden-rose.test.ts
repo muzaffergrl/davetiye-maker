@@ -269,19 +269,22 @@ test('optional blocks switch sections, the Story page and its links off', () => 
   const details = render('details', c).$;
   assert.equal(details('.dress').length, 0);
   assert.equal(details('.block').length, 1, 'only the venue block');
-  const on = render('details', demoContent()).$;
+  const withLinks = demoContent();
+  withLinks.record_kind = 'customer';
+  withLinks.urls.registry = 'https://registry.example.org/maren';
+  withLinks.urls.accommodation = 'https://hotel.example.org/block';
+  const on = render('details', withLinks).$;
   assert.equal(on('.block').length, 3);
   assert.equal(on('.dress em').text(), 'Garden formal');
+  // On but without a link: the block stays hidden (no button that only says "link will be added soon").
+  assert.equal(render('details', demoContent()).$('.block').length, 1);
 });
 
-test('links: missing URLs become "#" + data-url-missing (site.js shows a notice); real URLs are set with rel', () => {
+test('links: a missing URL removes its button (no dead buttons for guests); real URLs are set with rel', () => {
   const missing = render('details').$;
-  for (const key of ['map', 'accommodation', 'registry']) {
-    const a = missing(`a[data-field="urls.${key}"]`);
-    assert.equal(a.attr('href'), '#');
-    assert.equal(a.attr('data-url-missing'), '');
-    assert.equal(a.attr('aria-disabled'), 'true');
-  }
+  for (const key of ['map', 'accommodation', 'registry']) assert.equal(missing(`a[data-field="urls.${key}"]`).length, 0, key);
+  assert.equal(missing('a[data-url-missing]').length, 0);
+  assert.doesNotMatch(missing('body').text(), /will be shared here/, 'no promise of travel tips the schema cannot hold');
   const c = demoContent();
   c.record_kind = 'customer';
   c.urls.map = 'https://maps.example.org/?q=larkspur';
@@ -328,6 +331,48 @@ test('preview: every page link keeps ?preview=<key>; site-data pages map carries
     assert.equal(data.pages.home, `/${SLUG}/home?preview=${key}`);
   }
   assert.equal(render('home', demoContent(), { previewKey: key }).$('a.replay').attr('href'), `/${SLUG}?replay=1&preview=${key}`);
+});
+
+test('replies collected another way (rsvp.method "none"): no RSVP page, no reply call anywhere', () => {
+  const c = demoContent();
+  c.rsvp.method = 'none';
+  assert.equal(render('rsvp', c).disabled, true, 'RSVP page → 404');
+  for (const page of ['home', 'story', 'details'] as PageName[]) {
+    const { $ } = render(page, c);
+    assert.equal($(`a[href="/${SLUG}/rsvp"]`).length, 0, `${page}: no link to the RSVP page`);
+    assert.doesNotMatch($('body').text(), /Kindly reply|Reply now|Reply by/, page);
+  }
+  const on = render('home').$;
+  assert.ok(on(`a[href="/${SLUG}/rsvp"]`).length >= 3, 'with replies on: card, teaser and nav link to the RSVP page');
+});
+
+test('guests: placeholder label only in previews, photo alt text from the content, no template comments', () => {
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8');
+  assert.match(css, /html\[data-preview="true"\] \.photo-slot\[data-photo-state="placeholder"\] > \.ph-mark \{ display: flex; \}/);
+  assert.doesNotMatch(css, /^\.photo-slot\[data-photo-state="placeholder"\] > \.ph-mark/m, 'no unscoped rule: guests never read "Your photo here"');
+  assert.equal(render('home').$('html').attr('data-preview'), undefined, 'public page: label hidden');
+  assert.equal(render('home', demoContent(), { previewKey: 'k'.repeat(20) }).$('html').attr('data-preview'), 'true');
+
+  const c = demoContent();
+  c.media.hero_portrait = '/media/0b9f2c1e-0000-4000-8000-000000000000/0123456789abcdef0123456789abcdef.jpg';
+  c.media.memory_photos = ['https://storage.example.org/one.jpg'];
+  c.media.venue_image = 'https://storage.example.org/venue.jpg';
+  const home = render('home', c).$;
+  assert.equal(home('.hero-card img[data-photo="hero_portrait"]').attr('alt'), 'Photo of Clara & Julian');
+  const story = render('story', c).$;
+  assert.equal(story('img[data-photo="story_1"]').attr('alt'), 'First hello');
+  assert.equal(story('img[data-photo="story_2"]').attr('alt'), '', 'placeholder image: decorative');
+  assert.equal(render('details', c).$('img[data-photo="venue"]').attr('alt'), 'The Rosewater Conservatory');
+  assert.equal(render('details').$('img[data-photo="venue"]').attr('alt'), '');
+  // preview: platform photos carry the preview key (they are private until published)
+  assert.equal(
+    render('home', c, { previewKey: 'pk_test_1234567890' }).$('.hero-card img[data-photo="hero_portrait"]').attr('src'),
+    `${c.media.hero_portrait}?preview=pk_test_1234567890`,
+  );
+  for (const page of PAGES) {
+    const { html } = render(page, c);
+    assert.ok(!html.includes('<!--'), `${page}: template comments (task ids, build notes) are not sent to guests`);
+  }
 });
 
 // ---------------------------------------------------------------- site.js contract (G037 integration notes)
@@ -404,5 +449,46 @@ test('routes: a published site on this theme serves 200 pages with CSP hashes an
   for (const p of [['index.html'], ['theme.json'], ['build_images.py'], ['img', 'manifest.json']]) {
     const res = await getAsset(req(`/themes/${ID}/${p.join('/')}`), { params: Promise.resolve({ theme: ID, path: p }) });
     assert.equal(res.status, 404, `${p.join('/')} must not be served`);
+  }
+});
+
+test('privacy: sections the couple switched off leave nothing in any page source (site-data included)', async () => {
+  const { getDataAdapter } = await import('../lib/data/index.ts');
+  const { createSiteWithKeys, publishSite } = await import('../lib/sites.ts');
+  const { GET: getIndex } = await import('../app/[slug]/route.ts');
+  const { GET: getPage } = await import('../app/[slug]/[page]/route.ts');
+  const { GET: getMedia } = await import('../app/media/[...path]/route.ts');
+  const adapter = getDataAdapter();
+  const created = await createSiteWithKeys(adapter, { slug: 'quiet-and-private', theme: ID, content: demoContent() });
+  const photos = await Promise.all([1, 2, 3].map(() => adapter.savePhoto(created.site.id, { bytes: tinyPng() })));
+  const c = demoContent();
+  c.record_kind = 'customer';
+  c.story = { intro: 'PRIVATE-INTRO', items: [{ caption: 'PRIVATE-CAPTION-1' }, { caption: 'PRIVATE-CAPTION-2' }, { caption: 'PRIVATE-CAPTION-3' }] };
+  c.media.memory_photos = photos.map((p) => p.url);
+  c.urls.registry = 'https://registry.example.org/PRIVATE-REGISTRY';
+  c.urls.accommodation = 'https://hotel.example.org/PRIVATE-HOTEL';
+  c.dress_code = 'PRIVATE-DRESS';
+  Object.assign(c.optional_blocks, { our_story: false, registry: false, travel_stay: false, dress_code: false });
+  await adapter.updateContent(created.site.id, c);
+  await publishSite(adapter, created.site.id);
+  const req = (p: string) => new Request(`http://localhost:3000${p}`);
+  const story = await getPage(req('/quiet-and-private/story'), { params: Promise.resolve({ slug: 'quiet-and-private', page: 'story' }) });
+  assert.equal(story.status, 404);
+  const secrets = ['PRIVATE-', ...photos.map((p) => p.path)];
+  const pages: Array<[string, Response]> = [['index', await getIndex(req('/quiet-and-private'), { params: Promise.resolve({ slug: 'quiet-and-private' }) })]];
+  for (const page of ['home', 'details', 'rsvp']) {
+    pages.push([page, await getPage(req(`/quiet-and-private/${page}`), { params: Promise.resolve({ slug: 'quiet-and-private', page }) })]);
+  }
+  for (const [page, res] of pages) {
+    assert.equal(res.status, 200, page);
+    const html = await res.text();
+    for (const secret of secrets) assert.ok(!html.includes(secret), `${page}: "${secret}" is in the page source`);
+  }
+  // the story photos themselves are not served while the story is off (only with the couple's preview key)
+  for (const p of photos) {
+    const res = await getMedia(req(p.url), { params: Promise.resolve({ path: p.path.split('/') }) });
+    assert.equal(res.status, 404, p.path);
+    const own = await getMedia(req(`${p.url}?preview=${created.previewKey}`), { params: Promise.resolve({ path: p.path.split('/') }) });
+    assert.equal(own.status, 200);
   }
 });

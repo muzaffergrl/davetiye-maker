@@ -15,13 +15,16 @@
 //   2 every <img> loaded, no console/CSP error, no failed request
 //   3 every [data-field] / <title> equals the site's content record (formatted here, independently of the engine)
 //   4 card text stays on the plain paper of the GPT card (img/manifest.json free_zone), never over the painted florals
-//   5 photo slots: user photos on the demo site, placeholders + "Your photo here" on the no-photos site
+//   5 photo slots: user photos on the demo site, placeholders on the no-photos site ("Your photo here" only in a preview)
 // Flows (390×844): envelope → home (card transition flag) → story via the nav; back → opened envelope + replay;
 //   skip; reduced motion; per-site session keys; preview key kept through the opening; countdown (target + clock);
 //   missing links send nothing; RSVP: a reply is stored and thanked, in a preview nothing is sent; a content change in
 //   the data shows after reload; first-view weight.
+// Short phones (360×640, 375×553, 390×690, 390×844): the envelope texts (kicker, names, hint; "Replay" when opened)
+//   sit on the plain painted wash, not on the corner florals (measured on the backdrop with the text hidden).
 // Output: previews/g038/<page>_390.png (+ index/home at every width, details_1280), *_placeholder.png,
 //   details_390_changed_content.png, compare_<page>_390.jpg (G035 | G038), opening_390x844.mp4, checks.json.
+//   THEME_SHOTS_DIR=<folder> writes them elsewhere (keeps the committed previews unchanged).
 
 process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
 process.env.PLAYWRIGHT_DISABLE_FORCED_CHROMIUM_PROXIED_LOOPBACK ||= '1';
@@ -49,7 +52,7 @@ const ROOT = path.resolve(__dirname, '..');
 const REPO = path.resolve(ROOT, '..');
 const THEME = 'blush-garden-rose';
 const THEME_DIR = path.join(ROOT, 'themes', THEME);
-const OUT = path.join(ROOT, 'previews', 'g038');
+const OUT = process.env.THEME_SHOTS_DIR || path.join(ROOT, 'previews', 'g038');
 const G035 = path.join(REPO, 'collections/03_Blush_Garden_Rose/website/previews');
 const MANIFEST = JSON.parse(fs.readFileSync(path.join(THEME_DIR, 'img/manifest.json'), 'utf8'));
 const PORT = Number(process.env.PORT || 3312);
@@ -221,7 +224,9 @@ async function pageChecks(page, tag, content, photoMode) {
   }
   for (const s of r.slots) {
     if (photoMode === 'user' && (s.state !== 'user' || !s.src.startsWith('/media/') || s.mark !== 'none')) bad.push(`photo ${s.key}: ${JSON.stringify(s)}`);
-    if (photoMode === 'placeholder' && (s.state !== 'placeholder' || !/\/img\/ph_/.test(s.src) || s.mark !== 'flex')) bad.push(`placeholder ${s.key}: ${JSON.stringify(s)}`);
+    // public page: the neutral placeholder image only; the "Your photo here" label is for the couple's preview
+    const wantMark = photoMode === 'preview-placeholder' ? 'flex' : 'none';
+    if (photoMode.endsWith('placeholder') && (s.state !== 'placeholder' || !/\/img\/ph_/.test(s.src) || s.mark !== wantMark)) bad.push(`placeholder ${s.key}: ${JSON.stringify(s)}`);
     if (!s.loaded) bad.push(`photo ${s.key} not loaded`);
   }
   Object.entries(r.fonts).forEach(([f, v]) => { if (!v) warn(`${tag}: Google font not loaded (${f}) — fallback font shown`); });
@@ -318,6 +323,82 @@ async function waitForServer(url, ms = 30000) {
       await ctx.close();
     }
 
+    // the couple's preview of the same placeholder state shows the "Your photo here" label
+    {
+      const ctx = await mk(390, 844);
+      const page = await ctx.newPage();
+      await page.goto(url(draft.slug, 'home', `?preview=${draft.previewKey}`), { waitUntil: 'load' });
+      await eager(page);
+      await revealAll(page);
+      await pageChecks(page, 'home@390 (draft preview, no photos)', readSite(dataDir, draft.siteId).content, 'preview-placeholder');
+      await ctx.close();
+    }
+
+    // ---------------------------------------------------------------- short phones: envelope text never on the florals
+    {
+      const sharp = require(path.join(ROOT, 'node_modules/sharp'));
+      const busy = async (page, sel) => {
+        const boxes = await page.evaluate((sel) => [...document.querySelectorAll(sel)].map((el) => {
+          const b = el.getBoundingClientRect();
+          return b.width && getComputedStyle(el).display !== 'none' ? { sel: el.className || el.tagName, x: b.left, y: b.top, w: b.width, h: b.height } : null;
+        }).filter(Boolean), sel);
+        // the backdrop alone under each text box: text, envelope and Enter button hidden
+        await page.addStyleTag({ content: '.env-page *, .skip { color: transparent !important; text-shadow: none !important; } .stage, .env-after .btn { visibility: hidden !important; }' });
+        const png = await page.screenshot();
+        const out = [];
+        for (const b of boxes) {
+          const { data, info } = await sharp(png).extract({ left: Math.max(0, Math.round(b.x)), top: Math.max(0, Math.round(b.y)), width: Math.round(b.w), height: Math.round(b.h) })
+            .greyscale().raw().toBuffer({ resolveWithObject: true });
+          let edge = 0, dark = 0;
+          for (let y = 0; y < info.height; y++) for (let x = 1; x < info.width; x++) edge += Math.abs(data[y * info.width + x] - data[y * info.width + x - 1]);
+          for (const v of data) if (v < 170) dark++;
+          out.push({ box: String(b.sel).slice(0, 24), edge: edge / (info.height * (info.width - 1)), dark: dark / data.length });
+        }
+        return out;
+      };
+      for (const [w, h] of [[360, 640], [375, 553], [390, 690], [390, 844]]) {
+        for (const state of ['closed', 'opened']) {
+          const ctx = await mk(w, h);
+          const page = await ctx.newPage();
+          if (state === 'opened') await page.addInitScript((slug) => sessionStorage.setItem('invite:opened:' + slug, '1'), nophoto.slug);
+          await page.goto(url(nophoto.slug, 'index'), { waitUntil: 'load' });
+          await page.evaluate(() => document.fonts.ready);
+          await page.waitForTimeout(900);
+          const sel = state === 'closed' ? '.env-head .kicker, .env-head .names, .env-hint' : '.env-after .replay';
+          // calibrated: plain wash edge ≤ 1.3 / dark ≤ 0.03; over florals edge ≥ 2.7 or dark ≥ 0.06 (before the fix)
+          const hits = (await busy(page, sel)).filter((r) => r.edge > 2.2 || r.dark > 0.05);
+          if (hits.length) err(`envelope ${state} @${w}×${h}: text over the painted florals ${JSON.stringify(hits)}`);
+          else ok(`envelope ${state} @${w}×${h}: ${state === 'closed' ? 'kicker, names and hint' : '"Replay the opening"'} on the plain wash`);
+          await ctx.close();
+        }
+      }
+    }
+
+    // ---------------------------------------------------------------- touch targets of the small links (≥ 44 px)
+    {
+      const ctx = await mk(390, 844);
+      const page = await ctx.newPage();
+      const targets = [];
+      await page.goto(url(nophoto.slug, 'index'), { waitUntil: 'load' });
+      targets.push(['envelope Skip', await page.evaluate(() => { const b = document.querySelector('.skip').getBoundingClientRect(); return [b.width, b.height]; })]);
+      for (const [name, sel] of [['home', '.foot a.textlink'], ['rsvp', '.closing a.textlink']]) {
+        await page.goto(url(nophoto.slug, name), { waitUntil: 'load' });
+        // the hit area (::after) reaches 14 px above and below the text: probe there
+        const hit = await page.evaluate((sel) => {
+          const a = document.querySelector(sel);
+          a.scrollIntoView({ block: 'center', behavior: 'instant' });   // the theme scrolls smoothly otherwise
+          const b = a.getBoundingClientRect();
+          const probe = (y) => document.elementFromPoint(b.left + b.width / 2, y)?.closest('a') === a;
+          return probe(b.top - 10) && probe(b.bottom + 10) ? [b.width, b.height + 28] : [b.width, b.height];
+        }, sel);
+        targets.push([`${name} "Replay the envelope"`, hit]);
+      }
+      const small = targets.filter(([, [w, h]]) => w < 44 || h < 44);
+      if (small.length) err(`touch targets under 44 px: ${JSON.stringify(small)}`);
+      else ok(`touch targets ≥ 44 px: ${targets.map(([n, [w, h]]) => `${n} ${Math.round(w)}×${Math.round(h)}`).join(', ')}`);
+      await ctx.close();
+    }
+
     // ---------------------------------------------------------------- opening flow: envelope → home → story; back; replay
     {
       const ctx = await mk(390, 844);
@@ -352,20 +433,16 @@ async function waitForServer(url, ms = 30000) {
       const replaying = await page.evaluate(() => !document.documentElement.classList.contains('is-opened'));
       if (!replaying) err('replay did not restart the opening'); else ok('replay restarts the opening');
       await page.waitForURL(`${BASE}/${demo.slug}/home`, { timeout: 9000 });
-      // links without a URL and the RSVP placeholder send nothing
+      // links without a URL: their buttons are not on the page at all (no dead "link will be added soon" buttons)
       const reqs = [];
       page.on('request', (rq) => reqs.push(rq.url()));
       await page.goto(url(demo.slug, 'details'), { waitUntil: 'load' });
       await revealAll(page);
       let before = reqs.length;
-      // aria-disabled link: a guest can still tap it (force); centre it first so the fixed bottom nav does not cover it
-      await page.$eval('a[data-field="urls.map"]', (el) => el.scrollIntoView({ block: 'center' }));
-      await page.waitForTimeout(300);
-      await page.click('a[data-field="urls.map"]', { force: true });
-      await page.waitForTimeout(400);
-      const mapToast = await page.evaluate(() => (document.querySelector('.toast') || {}).textContent || '');
-      if (page.url() !== url(demo.slug, 'details') || reqs.length !== before || !/added soon/.test(mapToast)) err(`missing map link: url ${page.url()}, requests ${reqs.slice(before)}, toast "${mapToast}"`);
-      else ok(`missing map URL: no navigation, notice "${mapToast}"`);
+      const dead = await page.evaluate(() => ({ missing: document.querySelectorAll('a[data-url-missing]').length,
+        buttons: [...document.querySelectorAll('.btn')].map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
+      if (dead.missing || dead.buttons.length) err(`details without links: dead buttons ${JSON.stringify(dead)}`);
+      else ok('details without map / hotel / registry links: no dead buttons for guests');
       // RSVP (platform form contract, G042): the card button jumps to the form; a reply is stored for this site
       await page.goto(url(demo.slug, 'rsvp'), { waitUntil: 'load' });
       await page.waitForTimeout(2600);
@@ -378,6 +455,20 @@ async function waitForServer(url, ms = 30000) {
       await page.check('[data-rsvp-form] [name="attending"][value="yes"]');
       await page.fill('[data-rsvp-form] [name="guests"]', '2');
       await page.fill('[data-rsvp-form] [name="message"]', 'So happy for you both!');
+      // empty name: the theme's own error slot (English, styled) instead of the browser bubble; nothing is sent
+      await page.fill('[data-rsvp-form] [name="name"]', '');
+      before = reqs.length;
+      await page.click('[data-rsvp-form] button[type="submit"]');
+      await page.waitForTimeout(300);
+      const empty = await page.evaluate(() => {
+        const n = document.querySelector('[data-rsvp-form] [name="name"]');
+        const slot = document.querySelector('[data-rsvp-error-for="name"]');
+        return { slot: slot.textContent, invalid: n.getAttribute('aria-invalid'), linked: (n.getAttribute('aria-describedby') || '').split(' ').includes(slot.id), focus: document.activeElement === n };
+      });
+      if (empty.slot !== 'Please enter your name.' || empty.invalid !== 'true' || !empty.linked || !empty.focus || reqs.slice(before).some((u) => u.includes('/api/rsvp/')))
+        err(`RSVP empty name: ${JSON.stringify(empty)}`);
+      else ok('RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent');
+      await page.fill('[data-rsvp-form] [name="name"]', 'Ada Fictional');
       before = reqs.length;
       await page.click('[data-rsvp-form] button[type="submit"]');
       await page.waitForSelector('[data-rsvp-state="success"]:not([hidden])', { timeout: 6000 }).catch(() => null);
@@ -388,11 +479,24 @@ async function waitForServer(url, ms = 30000) {
       if (!sent.success || !sent.yes || !sent.formHidden || stored.length !== 1 || stored[0].guests !== 2 || stored[0].attending !== true || posts.length !== 1) {
         err(`RSVP submit: ${JSON.stringify(sent)}, stored ${JSON.stringify(stored)}, posts ${posts.length}`);
       } else ok('RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows');
+      const closing = await page.evaluate(() => ['.closing .title', '.closing .line'].map((q) => getComputedStyle(document.querySelector(q)).display));
+      if (closing.some((d) => d !== 'none')) err(`RSVP: the closing thank-you repeats the reply panel (${closing})`);
+      else ok('RSVP: after a reply the closing section does not repeat or contradict the thank-you');
       await page.evaluate(() => document.querySelectorAll('.petal-layer').forEach((l) => l.remove()));
       await (await page.$('.reply-box')).screenshot({ path: path.join(OUT, 'rsvp_390_reply_sent.png') });
       await page.click('[data-rsvp-again]');
       if (await page.evaluate(() => document.querySelector('[data-rsvp-form]').hidden)) err('RSVP: "Send another reply" does not reopen the form');
       else ok('RSVP: "Send another reply" reopens the form');
+      // the theme demo on /start: its RSVP page asks no status from a site that does not exist (no 404, no console error)
+      {
+        const demoPage = await ctx.newPage();
+        const demoProblems = watch(demoPage);
+        await demoPage.goto(`${BASE}/start/demo/${THEME}/rsvp?preview=demo`, { waitUntil: 'load' });
+        await demoPage.waitForTimeout(800);
+        if (demoProblems.length) err(`theme demo RSVP page: ${demoProblems.join(' | ')}`);
+        else ok('theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error');
+        await demoPage.close();
+      }
       const external = reqs.filter((u) => !u.startsWith(BASE) && !/^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(u) && !u.startsWith('data:'));
       if (external.length) err(`external requests: ${external.join(', ')}`); else ok('external requests: Google Fonts only');
       problems.forEach((p) => err(`opening flow: ${p}`));
@@ -576,7 +680,7 @@ s.thumbnail((900, 4000)); s.save(sys.argv[3], quality=84, optimize=True)
   }
 
   fs.writeFileSync(path.join(OUT, 'checks.json'), JSON.stringify(results, null, 1) + '\n');
-  console.log(`\n${results.passed.length} passed, ${results.errors.length} failed, ${results.warnings.length} warnings → previews/g038/checks.json`);
+  console.log(`\n${results.passed.length} passed, ${results.errors.length} failed, ${results.warnings.length} warnings → ${path.relative(ROOT, path.join(OUT, "checks.json"))}`);
   if (results.errors.length) {
     console.error(`--- server log (tail) ---\n${serverLog.slice(-3000)}`);
     process.exit(1);

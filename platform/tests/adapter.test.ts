@@ -7,10 +7,10 @@ import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { BlobAdapter } from '../lib/data/blob/index.ts';
 import { LocalAdapter } from '../lib/data/local/index.ts';
-import { NotFoundError, SlugTakenError, type DataAdapter, type NewSite } from '../lib/data/types.ts';
+import { NotFoundError, SlugTakenError, StaleSiteError, type DataAdapter, type NewSite } from '../lib/data/types.ts';
 import { hashKey } from '../lib/keys.ts';
 import { UploadRejectedError, MAX_UPLOAD_BYTES } from '../lib/uploads.ts';
-import { ContentInvalidError, createSiteWithKeys, InvalidSlugError, publishSite, UnknownThemeError, canEdit, canPreview } from '../lib/sites.ts';
+import { ContentInvalidError, createSiteWithKeys, InvalidSlugError, publishSite, reissueKeys, UnknownThemeError, canEdit, canPreview } from '../lib/sites.ts';
 import { FakeBlobStore } from './fake-blob.ts';
 import { demoContent, PLATFORM_ROOT, tinyPng, tmpDir } from './helpers.ts';
 
@@ -235,5 +235,63 @@ for (const { name, make } of BACKENDS) {
     assert.equal((await a.getSiteById(site.id))?.status, 'draft');
     await a.updateContent(site.id, demoContent());
     assert.equal((await publishSite(a, site.id)).status, 'published');
+  });
+
+  test(`[${name}] publish copies exactly the validated version: a save in between is never published unchecked`, async () => {
+    const { adapter: a } = make();
+    const { site } = await createSiteWithKeys(a, { slug: 'race-publish', theme: '_sample', content: demoContent() });
+    // adapter level: a stale expected version changes nothing
+    const fresh = (await a.getSiteById(site.id))!;
+    await a.updateContent(site.id, demoContent());
+    await assert.rejects(a.publish(site.id, { expectedUpdatedAt: fresh.updatedAt }), StaleSiteError);
+    assert.equal((await a.getSiteById(site.id))!.status, 'draft');
+    // publishSite racing an autosave of an INVALID draft (empty name): it never publishes the invalid one
+    for (let round = 0; round < 5; round++) {
+      const broken = demoContent();
+      broken.partners[0].display_name = '';
+      const results = await Promise.allSettled([publishSite(a, site.id), a.updateContent(site.id, broken)]);
+      const after = (await a.getSiteById(site.id))!;
+      if (after.publishedContent) assert.notEqual(after.publishedContent.partners[0].display_name, '', `round ${round}: invalid content went live`);
+      if (results[0].status === 'rejected') assert.ok(results[0].reason instanceof ContentInvalidError, String(results[0].reason));
+      await a.updateContent(site.id, demoContent());
+    }
+    // with the version the buyer saw: a newer draft is a conflict
+    const seen = (await a.getSiteById(site.id))!.updatedAt;
+    await a.updateContent(site.id, demoContent());
+    await assert.rejects(publishSite(a, site.id, { expectedUpdatedAt: seen }), StaleSiteError);
+  });
+
+  test(`[${name}] updateKeys / reissueKeys: the old links stop working, the new ones work`, async () => {
+    const { adapter: a, files } = make();
+    const first = await createSiteWithKeys(a, { slug: 'lost-link', theme: '_sample', content: demoContent() });
+    const again = await reissueKeys(a, first.site.id);
+    const stored = (await a.getSiteById(first.site.id))!;
+    assert.ok(!canEdit(stored, first.editKey), 'old edit link is dead');
+    assert.ok(!canPreview(stored, first.previewKey), 'old preview link is dead');
+    assert.ok(canEdit(stored, again.editKey));
+    assert.ok(canPreview(stored, again.previewKey));
+    assert.deepEqual(stored.content, first.site.content, 'content untouched');
+    assert.ok(![...files().values()].some((b) => b.toString('utf8').includes(again.editKey)), 'only the hash is stored');
+    await assert.rejects(reissueKeys(a, '00000000-0000-4000-8000-000000000000'), NotFoundError);
+  });
+
+  test(`[${name}] deleteRsvps / setRsvpsHeld act only on this site's replies`, async () => {
+    const { adapter: a } = make();
+    const s1 = await a.createSite(newSite('site-one'));
+    const s2 = await a.createSite(newSite('site-two'));
+    const keep = await a.saveRsvp(s1.id, { name: 'Real', attending: true, guests: 2 });
+    const junk = await a.saveRsvp(s1.id, { name: 'Junk', attending: true, guests: 9, held: true });
+    const other = await a.saveRsvp(s2.id, { name: 'Other', attending: true, guests: 1 });
+    assert.equal(junk.held, true);
+    assert.deepEqual((await a.listRsvps(s1.id)).map((r) => [r.name, Boolean(r.held)]), [['Real', false], ['Junk', true]]);
+    assert.equal(await a.setRsvpsHeld(s1.id, [junk.id, other.id], false), 1, 'another site\'s reply is not touched');
+    assert.equal((await a.listRsvps(s1.id)).find((r) => r.id === junk.id)!.held, undefined);
+    assert.equal(await a.setRsvpsHeld(s1.id, [junk.id], true), 1);
+    assert.equal(await a.setRsvpsHeld(s1.id, [junk.id], true), 0, 'no change, nothing counted');
+    assert.equal(await a.deleteRsvps(s1.id, [junk.id, other.id, 'nope']), 1);
+    assert.deepEqual((await a.listRsvps(s1.id)).map((r) => r.id), [keep.id]);
+    assert.deepEqual((await a.listRsvps(s2.id)).map((r) => r.id), [other.id]);
+    assert.equal(await a.deleteRsvps(s1.id, []), 0);
+    assert.equal(await a.deleteRsvps('not-a-uuid', [keep.id]), 0);
   });
 }

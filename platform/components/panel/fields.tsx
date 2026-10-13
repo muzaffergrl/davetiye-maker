@@ -6,7 +6,7 @@ import { createContext, useContext, useId, useState, type ReactNode } from 'reac
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDateLong, formatTime } from '../../lib/content/format.ts';
-import { fieldId, type SectionId } from '../../lib/panel/model.ts';
+import { fieldId, type SectionId, type ThemeFieldUse } from '../../lib/panel/model.ts';
 import type { Change } from './usePanel.ts';
 import styles from './panel.module.css';
 
@@ -17,6 +17,12 @@ export interface PanelContextValue {
   issuesAt: (path: string) => ValidationIssue[];
   /** Saving stopped (conflict / invalid link): inputs are read only. */
   locked: boolean;
+  /** True while the value at `path` is still the design's sample text (lib/panel/model.ts sampleNotes). */
+  isSample: (path: string) => boolean;
+  /** For the buyer's own photo views (/media/… needs it until published). */
+  previewKey: string;
+  /** Fields the theme shows (others are hidden in the panel). */
+  fields: ThemeFieldUse;
 }
 
 export const PanelContext = createContext<PanelContextValue | null>(null);
@@ -70,12 +76,18 @@ function FieldFrame({
   issues,
 }: BaseFieldProps & { counter?: ReactNode; children: ReactNode; issues: ValidationIssue[] }) {
   const id = fieldId(path);
+  const { isSample } = usePanelContext();
   return (
     <div className={styles.field}>
       <div className={styles.labelRow}>
         <label htmlFor={id} className={styles.label}>
           {label}
           {optional ? <span className={styles.optional}> (optional)</span> : null}
+          {isSample(path) ? (
+            <span className={styles.sampleTag} data-sample-tag>
+              Sample
+            </span>
+          ) : null}
         </label>
         {counter}
       </div>
@@ -116,7 +128,8 @@ export function TextField(
   const length = [...text].length;
   const counter =
     maxLength !== undefined ? (
-      <span className={length > maxLength ? styles.counterOver : styles.counter} aria-live="polite">
+      // Not a live region: announcing every keystroke is noise; the input's maxlength already limits it.
+      <span className={length > maxLength ? styles.counterOver : styles.counter}>
         {length}/{maxLength}
       </span>
     ) : null;
@@ -316,6 +329,7 @@ export function Section({
   title,
   summary,
   errorCount,
+  sampleCount = 0,
   open,
   onToggle,
   children,
@@ -324,6 +338,8 @@ export function Section({
   title: string;
   summary?: string;
   errorCount: number;
+  /** Fields still holding the design's sample text. */
+  sampleCount?: number;
   open: boolean;
   onToggle: () => void;
   children: ReactNode;
@@ -347,6 +363,10 @@ export function Section({
             <span className={styles.badge}>
               {errorCount} to fix
             </span>
+          ) : sampleCount ? (
+            <span className={styles.sampleBadge} data-sample-badge>
+              Sample text
+            </span>
           ) : null}
           <span className={styles.chevron} aria-hidden="true" />
         </button>
@@ -359,7 +379,11 @@ export function Section({
   );
 }
 
-/** Small row of actions (move up / down / remove) for list items. */
+/**
+ * Small row of actions (move up / down / remove) for list items. Remove asks once more ("Yes, remove"),
+ * like photos: autosave stores a deletion within a second and there is no undo. After a move, focus
+ * follows the moved item (rows are keyed by position, so the pressed button now belongs to another row).
+ */
 export function RowActions({
   index,
   count,
@@ -374,23 +398,58 @@ export function RowActions({
   onRemove: (index: number) => void;
 }) {
   const { locked } = usePanelContext();
+  const [confirming, setConfirming] = useState(false);
+  const move = (to: number, dir: 'up' | 'down') => {
+    onMove(index, to);
+    window.setTimeout(() => {
+      const same = document.querySelector<HTMLButtonElement>(`[aria-label="Move ${noun} ${to + 1} ${dir}"]`);
+      const other = document.querySelector<HTMLButtonElement>(`[aria-label="Move ${noun} ${to + 1} ${dir === 'up' ? 'down' : 'up'}"]`);
+      (same && !same.disabled ? same : other)?.focus();
+    }, 0);
+  };
   return (
     <div className={styles.rowActions}>
-      <button type="button" className={styles.smallButton} disabled={locked || index === 0} onClick={() => onMove(index, index - 1)} aria-label={`Move ${noun} ${index + 1} up`}>
+      <button type="button" className={styles.smallButton} disabled={locked || index === 0} onClick={() => move(index - 1, 'up')} aria-label={`Move ${noun} ${index + 1} up`}>
         Up
       </button>
       <button
         type="button"
         className={styles.smallButton}
         disabled={locked || index === count - 1}
-        onClick={() => onMove(index, index + 1)}
+        onClick={() => move(index + 1, 'down')}
         aria-label={`Move ${noun} ${index + 1} down`}
       >
         Down
       </button>
-      <button type="button" className={`${styles.smallButton} ${styles.dangerText}`} disabled={locked} onClick={() => onRemove(index)} aria-label={`Remove ${noun} ${index + 1}`}>
-        Remove
-      </button>
+      {confirming ? (
+        <>
+          <button
+            type="button"
+            className={`${styles.smallButton} ${styles.dangerText}`}
+            disabled={locked}
+            onClick={() => {
+              setConfirming(false);
+              onRemove(index);
+            }}
+            aria-label={`Yes, remove ${noun} ${index + 1}`}
+          >
+            Yes, remove
+          </button>
+          <button type="button" className={styles.smallButton} onClick={() => setConfirming(false)} aria-label={`Keep ${noun} ${index + 1}`}>
+            Keep
+          </button>
+        </>
+      ) : (
+        <button
+          type="button"
+          className={`${styles.smallButton} ${styles.dangerText}`}
+          disabled={locked}
+          onClick={() => setConfirming(true)}
+          aria-label={`Remove ${noun} ${index + 1}`}
+        >
+          Remove
+        </button>
+      )}
     </div>
   );
 }

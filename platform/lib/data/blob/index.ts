@@ -53,13 +53,17 @@ import {
   NotFoundError,
   OrderRefTakenError,
   SlugTakenError,
+  StaleSiteError,
   WriteConflictError,
+  nextTimestamp,
   type DataAdapter,
   type NewSite,
   type PhotoInput,
+  type PublishOptions,
   type RsvpInput,
   type RsvpRecord,
   type SavedPhoto,
+  type SiteKeyHashes,
   type SiteRecord,
   type StoredFile,
 } from '../types.ts';
@@ -376,6 +380,7 @@ export class BlobAdapter implements DataAdapter {
         createdAt: now,
         updatedAt: now,
         publishedAt: null,
+        ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
         version: 1,
       };
       await this.putJson(this.sitePath(id), doc, { allowOverwrite: false });
@@ -395,7 +400,7 @@ export class BlobAdapter implements DataAdapter {
         if (!current) throw new NotFoundError(`site ${id}`);
         const next = current.data; // freshly parsed: ours to change
         change(next);
-        next.updatedAt = new Date(this.#now()).toISOString();
+        next.updatedAt = nextTimestamp(next.updatedAt, this.#now());
         next.version = (Number.isInteger(next.version) ? next.version : 0) + 1;
         try {
           await this.putJson(this.sitePath(id), next, { ifMatch: current.etag });
@@ -417,8 +422,13 @@ export class BlobAdapter implements DataAdapter {
     });
   }
 
-  publish(id: string): Promise<SiteRecord> {
+  publish(id: string, opts: PublishOptions = {}): Promise<SiteRecord> {
     return this.mutate(id, (site) => {
+      // Runs on the freshly read version that the conditional write (ifMatch) then replaces: if
+      // anything was saved after the caller validated, this throws instead of publishing it.
+      if (opts.expectedUpdatedAt !== undefined && site.updatedAt !== opts.expectedUpdatedAt) {
+        throw new StaleSiteError(id, site.updatedAt);
+      }
       site.publishedContent = structuredClone(site.content);
       site.status = 'published';
       site.publishedAt = new Date(this.#now()).toISOString();
@@ -428,6 +438,13 @@ export class BlobAdapter implements DataAdapter {
   unpublish(id: string): Promise<SiteRecord> {
     return this.mutate(id, (site) => {
       site.status = 'draft';
+    });
+  }
+
+  updateKeys(id: string, keys: SiteKeyHashes): Promise<SiteRecord> {
+    return this.mutate(id, (site) => {
+      site.editKeyHash = keys.editKeyHash;
+      site.previewKeyHash = keys.previewKeyHash;
     });
   }
 
@@ -458,6 +475,7 @@ export class BlobAdapter implements DataAdapter {
       guests: input.guests,
       message: input.message ?? null,
       createdAt: new Date(ms).toISOString(),
+      ...(input.held ? { held: true } : {}),
     };
     // Time first so a listing sorts oldest first; the per-process counter orders same-millisecond replies.
     this.#rsvpSeq = (this.#rsvpSeq + 1) % 1_000_000;
@@ -471,6 +489,40 @@ export class BlobAdapter implements DataAdapter {
     const paths = await this.listAll(this.rsvpPrefix(siteId));
     const records = await mapLimit(paths, READ_CONCURRENCY, async (p) => (await this.readJson<RsvpRecord>(p))?.data ?? null);
     return records.filter((r): r is RsvpRecord => r !== null);
+  }
+
+  /** Pathnames of these replies (the reply id is the last part of the file name). */
+  private async rsvpPathsFor(siteId: string, ids: readonly string[]): Promise<string[]> {
+    if (!UUID_RE.test(siteId) || !ids.length) return [];
+    const want = new Set(ids);
+    return (await this.listAll(this.rsvpPrefix(siteId))).filter((p) => {
+      const m = /-([0-9a-f-]{36})\.json$/.exec(p);
+      return m !== null && want.has(m[1]);
+    });
+  }
+
+  async deleteRsvps(siteId: string, ids: readonly string[]): Promise<number> {
+    const paths = await this.rsvpPathsFor(siteId, ids);
+    for (let i = 0; i < paths.length; i += DELETE_BATCH) await this.del(paths.slice(i, i + DELETE_BATCH));
+    return paths.length;
+  }
+
+  async setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number> {
+    const paths = await this.rsvpPathsFor(siteId, ids);
+    const changed = await mapLimit(paths, READ_CONCURRENCY, async (p): Promise<number> => {
+      const current = await this.readJson<RsvpRecord>(p);
+      if (!current || Boolean(current.data.held) === held) return 0;
+      const { held: _old, ...rest } = current.data;
+      try {
+        // Replies are never edited otherwise; ifMatch only guards against a delete in between.
+        await this.putJson(p, held ? { ...rest, held: true } : rest, { ifMatch: current.etag });
+        return 1;
+      } catch (e) {
+        if (e instanceof BlobPreconditionFailedError) return 0;
+        throw e;
+      }
+    });
+    return changed.reduce((a, b) => a + b, 0);
   }
 
   async savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto> {

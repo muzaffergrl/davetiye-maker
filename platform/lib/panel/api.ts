@@ -11,7 +11,7 @@
 
 import { validateContent } from '../content/validate.ts';
 import { getDataAdapter } from '../data/index.ts';
-import { NotFoundError, type SiteRecord } from '../data/types.ts';
+import { NotFoundError, StaleSiteError, type SiteRecord } from '../data/types.ts';
 import { authorizeEditor } from '../rsvp/couple.ts';
 import { ContentInvalidError, publishSite, unpublishSite } from '../sites.ts';
 import { MAX_UPLOAD_BYTES, UploadRejectedError } from '../uploads.ts';
@@ -146,12 +146,14 @@ export async function publish(req: Request, slug: string): Promise<Response> {
       return fail(409, 'conflict', CONFLICT_MESSAGE, { updatedAt: auth.site.updatedAt });
     }
     try {
-      const site = await publishSite(getDataAdapter(), auth.site.id);
+      // The version checked here is the one published (a save landing in between -> 409, not an unchecked publish).
+      const site = await publishSite(getDataAdapter(), auth.site.id, { expectedUpdatedAt: typeof base === 'string' ? base : auth.site.updatedAt });
       return json(200, { ok: true, ...panelMeta(site), url: publicSiteUrl(requestOrigin(req), site.slug) });
     } catch (e) {
       if (e instanceof ContentInvalidError) {
         return fail(422, 'invalid_content', 'Please fix these before publishing.', { issues: e.issues });
       }
+      if (e instanceof StaleSiteError) return fail(409, 'conflict', CONFLICT_MESSAGE, { updatedAt: e.updatedAt });
       throw e;
     }
   } catch (e) {

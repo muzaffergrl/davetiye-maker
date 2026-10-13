@@ -29,6 +29,12 @@ export interface SiteRecord {
   createdAt: string;
   updatedAt: string;
   publishedAt: string | null;
+  /**
+   * SHA-256 of the one-time token the /start form sent with its claim (G045). Lets a retry of the
+   * same claim (its answer was lost on the way) get a fresh edit link instead of "order used".
+   * Absent on sites made elsewhere (seed, tests) and on records written before it existed.
+   */
+  claimTokenHash?: string | null;
 }
 
 export interface NewSite {
@@ -40,6 +46,21 @@ export interface NewSite {
   previewKeyHash: string;
   orderRef?: string | null;
   ownerEmail?: string | null;
+  claimTokenHash?: string | null;
+}
+
+/** New key hashes for a site (edit link reissued: the old link stops working). */
+export interface SiteKeyHashes {
+  editKeyHash: string;
+  previewKeyHash: string;
+}
+
+export interface PublishOptions {
+  /**
+   * Publish only if the site still has this updatedAt (the version that was validated);
+   * otherwise throw StaleSiteError and change nothing.
+   */
+  expectedUpdatedAt?: string;
 }
 
 export interface RsvpInput {
@@ -48,6 +69,8 @@ export interface RsvpInput {
   attending: boolean;
   guests: number;
   message?: string | null;
+  /** Stored but held back for the couple's review (unusual volume, lib/rsvp/guest.ts). */
+  held?: boolean;
 }
 
 export interface RsvpRecord {
@@ -59,6 +82,8 @@ export interface RsvpRecord {
   guests: number;
   message: string | null;
   createdAt: string;
+  /** True: arrived during unusual volume; not counted, not in the CSV until the couple keeps it. */
+  held?: boolean;
 }
 
 export interface PhotoInput {
@@ -95,20 +120,38 @@ export interface DataAdapter {
   createSite(input: NewSite): Promise<SiteRecord>;
   /** Replaces the draft content (autosave). Does not touch publishedContent. Throws NotFoundError. */
   updateContent(id: string, content: ContentRecord): Promise<SiteRecord>;
-  /** publishedContent := content, status := published. Throws NotFoundError. */
-  publish(id: string): Promise<SiteRecord>;
+  /**
+   * publishedContent := content, status := published. Throws NotFoundError; with
+   * opts.expectedUpdatedAt, throws StaleSiteError (and writes nothing) when the site changed since.
+   */
+  publish(id: string, opts?: PublishOptions): Promise<SiteRecord>;
   /** status := draft (public routes 404; publishedContent is kept). Throws NotFoundError. */
   unpublish(id: string): Promise<SiteRecord>;
+  /** Replaces the key hashes (edit link reissued). Throws NotFoundError. */
+  updateKeys(id: string, keys: SiteKeyHashes): Promise<SiteRecord>;
   /** Removes the site, its RSVPs and its photos. No-op if missing. */
   deleteSite(id: string): Promise<void>;
   /** Throws NotFoundError if the site does not exist. */
   saveRsvp(siteId: string, input: RsvpInput): Promise<RsvpRecord>;
   /** Oldest first. */
   listRsvps(siteId: string): Promise<RsvpRecord[]>;
+  /** Deletes these replies of the site (unknown ids are ignored). Returns how many were deleted. */
+  deleteRsvps(siteId: string, ids: readonly string[]): Promise<number>;
+  /** Sets or clears `held` on these replies of the site. Returns how many changed. */
+  setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number>;
   /** Validates the image (assertImageUpload) and stores it. Throws UploadRejectedError / NotFoundError. */
   savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto>;
   /** Only adapters that serve photos through /media/... implement this (local, blob). */
   readPhoto?(path: string): Promise<StoredFile | null>;
+}
+
+/**
+ * A new updatedAt that is always later than the previous one (two writes in the same millisecond
+ * must still differ: publish / autosave conflict checks compare it).
+ */
+export function nextTimestamp(previous: string | null | undefined, now: number = Date.now()): string {
+  const prev = previous ? Date.parse(previous) : NaN;
+  return new Date(Number.isFinite(prev) && prev >= now ? prev + 1 : now).toISOString();
 }
 
 export class SlugTakenError extends Error {
@@ -130,6 +173,16 @@ export class WriteConflictError extends Error {
   constructor(what: string) {
     super(`${what} was changed concurrently; please retry`);
     this.name = 'WriteConflictError';
+  }
+}
+
+/** publish(…, {expectedUpdatedAt}) found a newer version of the site (it was saved in between). */
+export class StaleSiteError extends Error {
+  readonly updatedAt: string;
+  constructor(id: string, updatedAt: string) {
+    super(`site ${id} changed since it was read`);
+    this.name = 'StaleSiteError';
+    this.updatedAt = updatedAt;
   }
 }
 

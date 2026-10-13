@@ -12,7 +12,9 @@ import { GET as demoIndexRoute } from '../app/start/demo/[theme]/route.ts';
 import { GET as demoPageRoute } from '../app/start/demo/[theme]/[page]/route.ts';
 import { GET as panelStateRoute } from '../app/api/edit/[slug]/route.ts';
 import { GET as siteRoute } from '../app/[slug]/route.ts';
-import { claimSite, draftFromDemo, findFreeSlug, slugAvailability, type ClaimContext } from '../lib/claim/claim.ts';
+import { CLAIM_RETRY_WINDOW_MS, claimSite, draftFromDemo, findFreeSlug, slugAvailability, type ClaimContext } from '../lib/claim/claim.ts';
+import { reissueEditLink } from '../scripts/reissue-edit-key.ts';
+import { publishSite } from '../lib/sites.ts';
 import { BUNDLED_DEMO_CONTENT, DEMO_SOURCES } from '../lib/claim/demo/index.ts';
 import {
   claimFieldErrors,
@@ -303,6 +305,60 @@ test('claim: one website per order number; the second attempt leaks nothing', as
   assert.equal(await getDataAdapter().getSiteBySlug('other-and-pair'), null);
 });
 
+test('claim: a retry with the same claim token recovers a lost answer (new link); anything else stays "order used"', async () => {
+  const order = freshOrder();
+  const token = '0f8e7c6a-1b2c-4d3e-9f00-123456789abc';
+  const first = await postClaim(form({ orderNumber: order, claimToken: token, names: ['Rowan', 'Sage'], email: 'rowan@example.test' }));
+  assert.equal(first.status, 201);
+  // The phone never got that answer and the form sends the same token again (even reworded order number).
+  const retry = await postClaim(form({ orderNumber: `Order #${order}`, claimToken: token, names: ['Rowan', 'Sage'], email: 'Rowan@example.test' }));
+  assert.equal(retry.status, 201, JSON.stringify(retry.body));
+  assert.equal(retry.body.slug, first.body.slug, 'same site, not a second one');
+  assert.notEqual(retry.body.editUrl, first.body.editUrl, 'a fresh link (the old one was never seen)');
+  assert.equal((await getDataAdapter().findSitesByOrderRef(order)).length, 1);
+  const site = (await getDataAdapter().getSiteBySlug(first.body.slug))!;
+  const keyOf = (u: string) => new URL(u).searchParams.get('k');
+  assert.equal(await authorizeEditor(getDataAdapter(), site.slug, keyOf(first.body.editUrl)), null, 'old link no longer works');
+  assert.ok(await authorizeEditor(getDataAdapter(), site.slug, keyOf(retry.body.editUrl)));
+  assert.ok(site.claimTokenHash && !JSON.stringify(site).includes(token), 'only a hash of the token is stored');
+
+  // Not a retry: no token, another token, another email -> 409, nothing revealed.
+  for (const over of [{}, { claimToken: 'ffffffff-1b2c-4d3e-9f00-123456789abc' }, { claimToken: token, email: 'thief@example.test' }]) {
+    const r = await postClaim(form({ orderNumber: order, names: ['Rowan', 'Sage'], ...over }));
+    assert.equal(r.status, 409, JSON.stringify(over));
+    assert.deepEqual(Object.keys(r.body).sort(), ['code', 'message', 'ok']);
+  }
+  // Once published (the buyer clearly has the link) or after the retry window, the token no longer works.
+  await publishSite(getDataAdapter(), site.id);
+  assert.equal((await postClaim(form({ orderNumber: order, claimToken: token, email: 'rowan@example.test' }))).status, 409);
+
+  const late = freshOrder();
+  const lateToken = 'aaaaaaaa-1b2c-4d3e-9f00-123456789abc';
+  const ctx = (now: number): ClaimContext => ({ adapter: getDataAdapter(), origin: BASE, ip: '192.0.2.9', limiter: new MemoryRateLimiter(), now: () => now });
+  const body = form({ orderNumber: late, claimToken: lateToken, names: ['Late', 'Pair'] });
+  assert.equal((await claimSite(ctx(Date.now()), body)).status, 201);
+  assert.equal((await claimSite(ctx(Date.now() + 60_000), body)).status, 201, 'within the window');
+  assert.equal((await claimSite(ctx(Date.now() + CLAIM_RETRY_WINDOW_MS + 60_000), body)).status, 409, 'after the window');
+});
+
+test('reissue tool: the shop gives a buyer who lost the link a new one (by order or address); old link stops working', async () => {
+  const order = freshOrder();
+  const first = await postClaim(form({ orderNumber: order, names: ['Lost', 'Link'] }));
+  assert.equal(first.status, 201);
+  const byOrder = await reissueEditLink(getDataAdapter(), { order: `Order #${order}`, origin: 'https://sites.example.test/' });
+  assert.equal(byOrder.site.slug, first.body.slug);
+  assert.match(byOrder.editUrl, new RegExp(`^https://sites\\.example\\.test/edit/${first.body.slug}\\?k=[A-Za-z0-9_-]{43}$`));
+  const key = new URL(byOrder.editUrl).searchParams.get('k');
+  assert.ok(await authorizeEditor(getDataAdapter(), first.body.slug, key));
+  assert.equal(await authorizeEditor(getDataAdapter(), first.body.slug, new URL(first.body.editUrl).searchParams.get('k')), null);
+  const bySlug = await reissueEditLink(getDataAdapter(), { slug: first.body.slug, origin: 'https://sites.example.test' });
+  assert.equal(await authorizeEditor(getDataAdapter(), first.body.slug, key), null, 'each reissue replaces the previous link');
+  assert.ok(await authorizeEditor(getDataAdapter(), first.body.slug, new URL(bySlug.editUrl).searchParams.get('k')));
+  await assert.rejects(reissueEditLink(getDataAdapter(), { order: freshOrder(), origin: 'https://x.test' }), /No site for order/);
+  await assert.rejects(reissueEditLink(getDataAdapter(), { order: '12', origin: 'https://x.test' }), /not an order number/);
+  await assert.rejects(reissueEditLink(getDataAdapter(), { slug: first.body.slug, origin: 'javascript:alert(1)' }), /--origin/);
+});
+
 test('claim: parallel attempts with one order number create exactly one site', async () => {
   const order = freshOrder();
   const results = await Promise.all(
@@ -444,6 +500,11 @@ test('order verifier: rejected / unavailable stop the claim; verified passes wit
   assert.equal((await getDataAdapter().findSitesByOrderRef(order)).length, 0);
   setOrderVerifier(verifier('verified'));
   assert.equal((await postClaim(form({ orderNumber: order, names: ['Vera', 'Ken'] }))).status, 201);
+  // With verification on, a stranger cannot learn whether an order already has a website: same 403 either way.
+  setOrderVerifier(verifier('rejected'));
+  const used = await postClaim(form({ orderNumber: order }));
+  assert.equal(used.status, 403, 'a used order number is not revealed to a stranger');
+  assert.equal(used.body.code, 'order_not_verified');
 
   // the env switch to the unbuilt Etsy verifier -> 500, nothing created
   setOrderVerifier(null);
@@ -552,7 +613,8 @@ test('demo pages: theme rendered with its demo content, links stay under /start/
   const data = JSON.parse($('#site-data').text());
   assert.equal(data.preview, true, 'RSVP form shows its preview panel and never posts');
   assert.equal(data.pages.home, '/start/demo/sample-design/home?preview=demo');
-  assert.equal(data.content.name_display, 'Clara & Julian');
+  assert.equal(data.content, undefined, 'site-data never carries the content record');
+  assert.match($('title').text(), /^Clara & Julian/);
   assert.equal($('html').attr('data-theme'), 'sample-design');
   assert.ok($('a[href^="/start/demo/sample-design/"]').length > 0, 'page links stay in the demo');
   assert.equal($('a[href^="/clara"]').length, 0);

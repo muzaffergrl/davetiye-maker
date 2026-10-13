@@ -1,8 +1,10 @@
-// Static files: theme assets (/themes/<theme>/<path>) and local-adapter photos (/media/<site>/<file>).
+// Static files: theme assets (/themes/<theme>/<path>) and adapter photos (/media/<site>/<file>).
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { getDataAdapter } from '../data/index.ts';
+import type { SiteRecord } from '../data/types.ts';
+import { canPreview } from '../sites.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
 
 /** Only these theme files are public. Templates (.html), theme.json and anything else are not served. */
@@ -68,12 +70,49 @@ export async function serveThemeAsset(themeId: string, segments: string[] | unde
   }
 }
 
-export async function serveLocalMedia(segments: string[] | undefined): Promise<Response> {
+/**
+ * Every photo URL guests can be shown (media.*: strings and lists of strings). The story photos
+ * (media.memory_photos) only count while the Our Story section is on: switching it off takes them down.
+ */
+function mediaUrls(content: unknown): string[] {
+  const c = content as { media?: Record<string, unknown>; optional_blocks?: Record<string, unknown> } | null;
+  const media = c?.media;
+  if (!media || typeof media !== 'object') return [];
+  const storyOn = c?.optional_blocks?.our_story === true;
+  return Object.entries(media)
+    .filter(([key]) => key !== 'memory_photos' || storyOn)
+    .flatMap(([, v]) => (Array.isArray(v) ? v : [v]))
+    .filter((v): v is string => typeof v === 'string' && v !== '');
+}
+
+/** True when the published content of a published site uses the file `/media/<rel>`. */
+function publiclyUsed(site: SiteRecord, rel: string): boolean {
+  if (site.status !== 'published' || !site.publishedContent) return false;
+  return mediaUrls(site.publishedContent).some((u) => u.split(/[?#]/)[0].endsWith(`/media/${rel}`));
+}
+
+/** Short public cache: a photo taken offline / replaced stops being served within minutes. */
+export const MEDIA_PUBLIC_CACHE = 'public, max-age=300, s-maxage=300';
+
+/**
+ * GET /media/<siteId>/<file>. Served only when
+ *  - the site is published and its published content uses the file (public, short cache), or
+ *  - the request carries the site's preview key (?preview=…: panel and draft preview; private, no-store).
+ * Anything else (site offline, photo replaced or removed, draft-only upload, unknown file) is 404,
+ * so taking a site offline also takes its photos offline.
+ */
+export async function serveLocalMedia(segments: string[] | undefined, req?: Request): Promise<Response> {
   const parts = safeSegments(segments);
-  if (!parts) return notFound();
+  if (!parts || parts.length !== 2) return notFound();
   const adapter = getDataAdapter();
   if (!adapter.readPhoto) return notFound();
-  const file = await adapter.readPhoto(parts.join('/'));
+  const rel = parts.join('/');
+  const site = await adapter.getSiteById(parts[0]);
+  if (!site) return notFound();
+  const previewKey = req ? new URL(req.url).searchParams.get('preview') : null;
+  const preview = previewKey !== null && canPreview(site, previewKey);
+  if (!preview && !publiclyUsed(site, rel)) return notFound();
+  const file = await adapter.readPhoto(rel);
   if (!file) return notFound();
   return new Response(new Uint8Array(file.bytes), {
     status: 200,
@@ -82,7 +121,8 @@ export async function serveLocalMedia(segments: string[] | undefined): Promise<R
       'Content-Length': String(file.bytes.length),
       'X-Content-Type-Options': 'nosniff',
       'Content-Security-Policy': FILE_CSP,
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      'Cache-Control': preview ? 'private, no-store' : MEDIA_PUBLIC_CACHE,
+      ...(preview ? { 'Referrer-Policy': 'no-referrer', 'X-Robots-Tag': 'noindex' } : {}),
     },
   });
 }

@@ -16,11 +16,12 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması (178 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması (197 test)
 npm run typecheck      # tsc --noEmit
-npm run build          # next build (Turbopack)
+npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
-node scripts/theme-check.cjs   # build sonrası: blush-garden-rose — 5 genişlik, akış, içerik, previews/g038/ (+ MP4)
+node scripts/theme-check.cjs   # build sonrası: blush-garden-rose — 5 genişlik, kısa telefonlar, akış, içerik, previews/g038/ (+ MP4; THEME_SHOTS_DIR başka klasör)
+node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
 ```
 
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
@@ -97,10 +98,12 @@ interface DataAdapter {
   getSiteById(id), getSiteBySlug(slug), findSitesByOrderRef(orderRef)
   createSite(NewSite)            // slug benzersiz; yoksa SlugTakenError. Durum "draft".
   updateContent(id, content)     // yalnız taslak; publishedContent'e dokunmaz
-  publish(id)                    // publishedContent := content, status := published
+  publish(id, {expectedUpdatedAt}?)  // publishedContent := content, status := published; updatedAt beklenen değilse StaleSiteError
   unpublish(id)                  // status := draft (publishedContent kalır)
+  updateKeys(id, {editKeyHash, previewKeyHash})   // düzenleme linki yenilendi (eski link ölür)
   deleteSite(id)                 // site + RSVP + fotoğraflar
-  saveRsvp(siteId, input), listRsvps(siteId)
+  saveRsvp(siteId, input), listRsvps(siteId)   // input.held → kayıt "beklemede" (yoğunluk, aşağıda RSVP)
+  deleteRsvps(siteId, ids), setRsvpsHeld(siteId, ids, held)   // yalnız o sitenin yanıtları
   savePhoto(siteId, {bytes})     // assertImageUpload: JPG/PNG/WebP/AVIF, ≤ 10 MB, tür baytlardan
   readPhoto?(path)               // /media/... üzerinden servis eden adaptörler (local, blob)
 }
@@ -108,7 +111,9 @@ interface DataAdapter {
 
 Hatalar: `SlugTakenError`, `NotFoundError`; `OrderRefTakenError` (sipariş no dizini olan adaptör — `blob` — aynı `orderRef`'le
 ikinci siteyi reddeder; `/start` bunu `409 order_used`'a çevirir; `local` kontrol etmez), `WriteConflictError` (`blob`: eşzamanlı
-yazanlar her denemede önde kaldı).
+yazanlar her denemede önde kaldı), `StaleSiteError` (`publish` beklenen sürümü bulamadı: arada kayıt geldi; hiçbir şey yazılmaz).
+`updatedAt` her yazışta kesin artar (`nextTimestamp`; aynı milisaniyede iki yazı da farklı değer alır). Site kaydı isteğe bağlı
+`claimTokenHash` taşır (`/start` yeniden deneme belirteci, yalnız SHA-256).
 
 Kurallar: adaptör yalnız depolamadır; anahtar üretimi, slug kuralı ve içerik doğrulaması `lib/sites.ts`'te.
 Düz anahtar asla saklanmaz. Dönen kayıtlar kopyadır. Supabase şeması (G043) şu alanları taşımalı:
@@ -145,7 +150,7 @@ media/<siteId>/<rastgele32hex>.<uzantı>   fotoğraflar; ziyaretçiye /media/<si
 - **Gizlilik:** site kaydı (anahtar hash'leri, sahip e-postası, taslak) ve RSVP'ler misafir verisi → depo **private olmalı**.
   Depo erişimi (public/private) depo **açılırken** seçilir; tek depoda ikisi birlikte kullanılamadığı varsayıldı (belgeler depo türü
   olarak anlatıyor; karışık kullanım denenmedi). Bu yüzden fotoğrafların doğrudan public Blob URL'si yok: ziyaretçi `/media/...`
-  rotasından alır (`Cache-Control: public, max-age=31536000, immutable`). Bedeli: önbellekte olmayan her foto isteği bir fonksiyon
+  rotasından alır (yalnız yayındaki içeriğin kullandığı fotoğraf, `Cache-Control: public, max-age=300`; aşağıda "Fotoğraflar"). Bedeli: önbellekte olmayan her foto isteği bir fonksiyon
   çağrısı + Blob okuması. Hacim artarsa: ayrı public foto deposu (ikinci token) ya da imzalı URL.
 - **Token** yalnız `lib/data/index.ts`'te ortamdan okunur, adaptörde private alanda durur (`inspect`/`JSON.stringify`'da görünmez),
   hata mesajlarına girmez. Token yoksa `DATA_ADAPTER=blob` açık bir yapılandırma hatası verir (500). Vercel OIDC + `BLOB_STORE_ID`
@@ -204,11 +209,14 @@ Her sayfaya `<script type="application/json" id="site-data">` eklenir (`<`, `>`,
 const data = JSON.parse(document.getElementById('site-data').textContent);
 // data.slug, data.theme, data.variant, data.page, data.preview
 // data.pages      {index: "/clara-and-julian", home: "/clara-and-julian/home", …}  (önizlemede ?preview= ile)
-// data.content    içerik kaydı (URL ve foto alanları güvenlik süzgecinden geçmiş)
 // data.derived    {date_display, date_long, date_weekday, ceremony_time_display, rsvp_deadline_display,
 //                  venue_city_region, venue_city_region_country, countdown_target_utc}
-// data.photos     {<foto anahtarı>: URL | null}
 ```
+
+**İçerik kaydı ve foto haritası bilerek YOK** (önceden `data.content` / `data.photos` vardı): çiftin kapattığı bölümler (hikâye
+fotoğrafları ve metni, registry/otel linki, dress code) sayfa kaynağında görünüyordu. Tema JS'i kişisel metin yazmaz (sunucu yazdı);
+ihtiyaç duyulan her şey `derived`'da. Yeni bir tema JS'te içerik isterse önce `optional_blocks`'a göre süzülmüş alan buraya eklenir.
+Şablondaki HTML yorumları (görev numaraları, üretim notları) çıktıdan silinir.
 
 ## İşaret başvurusu (`lib/theme/engine.ts`)
 
@@ -227,12 +235,13 @@ Yollar noktalıdır: `venue.name`, `schedule.0.time`, `story.items.1.caption`.
 | `data-optional="anahtar"` | `optional_blocks.anahtar === true` değilse öğe **kaldırılır**. `<html>`/`<body>` üzerindeyse sayfa 404 |
 | `data-if="yol"` / `data-if="!yol"` | Değer boş değilse (boşsa) öğe kalır; `<body>` üzerinde sayfa düzeyinde çalışır |
 | `data-repeat="schedule"` | Öğe listedeki her eleman için çoğaltılır; içeride `.time`, `.label`, `data-if=".location"` göreli yollar. Boş listede öğe kalkar. Kopya `data-repeat-item="schedule.2"` alır |
-| `data-attr-<ad>="yol"` | Öznitelik = ham değer (ör. `datetime`); `{…}` içeriyorsa şablon. İzinli adlar: `alt`, `title`, `content`, `aria-label`, `datetime`, `value`, `placeholder`, `data-*` (motor işaretleri hariç) |
+| `data-attr-<ad>="yol"` | Öznitelik = ham değer (ör. `datetime`); `{…}` içeriyorsa şablon. İzinli adlar: `alt`, `title`, `content`, `aria-label`, `datetime`, `value`, `placeholder`, `data-*` (motor işaretleri hariç). Yer tutucu gösteren foto `<img>`'sinde `data-attr-alt` uygulanmaz (`alt=""`, süs) |
 
 Türetilmiş alanlar (`data-field` ile kullanılabilir): `date_weekday`, `date_long`, `venue.city_region`,
 `venue.city_region_country`, `countdown_target_utc`.
 
-Çıktıda `data-field` / `data-if` yolları mutlak yola çevrilir (panel canlı önizlemesi için).
+Çıktıda `data-field` / `data-if` yolları mutlak yola çevrilir (panel canlı önizlemesi için). Önizlemede platform fotoğrafları
+(`/media/…`) `?preview=<anahtar>` alır (yayında olmayan foto herkese açık değil).
 `<html>` öğesine `data-theme`, `data-page`, varsa `data-variant`, önizlemede `data-preview="true"` eklenir.
 
 G035 kaynağı (`collections/03_Blush_Garden_Rose/website/*.html`) bu motorla uyarısız işleniyor (test:
@@ -249,8 +258,20 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
   kalkıyor (ör. bölgesiz şehirde virgül kalmaz: `venue.city_region`). Nav'daki Story linki de `data-optional="our_story"`.
 - **Foto alanları** (`theme.json` `photos`, oran = pencere kutusu px): `hero_portrait` 567/595 (kart kemeri; index + home),
   `story_1..3` 626/868 (altın kemer çerçeve; `media.memory_photos.0..2`), `venue` 1172/681 (GPT yatay altın çerçeve,
-  G047). Şablonda yalnız `data-photo="<anahtar>"`; foto yoksa temanın nötr yer tutucusu (`img/ph_<anahtar>-*.webp`) +
-  "Your photo here" (`[data-photo-state="placeholder"] > .ph-mark`). Yüz kırpımı `object-position` ile (portre %38, kemer %40).
+  G047). Şablonda yalnız `data-photo="<anahtar>"`; foto yoksa temanın nötr yer tutucusu (`img/ph_<anahtar>-*.webp`);
+  "Your photo here" etiketi **yalnız önizlemede** (`html[data-preview="true"]`: panel, `?preview=`, tema demosu) — misafir yazıyı
+  görmez. Alt metin içerikten (`data-attr-alt`: "Photo of {name_display}", hikâye başlıkları, mekân adı). Yüz kırpımı `object-position`
+  ile (portre %38, kemer %40).
+- **Link blokları** (inceleme düzeltmesi): "View map", "Where to stay" (Travel & Stay bloğu) ve "View registry" (Registry bloğu)
+  yalnız linkleriyle görünür (`data-if="urls.*"`); canlı sitede "link will be added soon" diyen ölü düğme yok. Travel notu artık
+  şemanın tutamadığı "ipuçları" vaat etmiyor ("Where to stay and how to get here: see the link below.").
+- **Yanıtlar başka yolla** (`rsvp.method` dolu, panelde "Accept replies on the website" kapalı): RSVP sayfası 404
+  (`<body data-if="!rsvp.method">`), "Kindly reply by"/RSVP düğmeleri, ana sayfa tanıtımı ve nav linki kalkar.
+- **Kısa telefonlar** (360×640, Safari 375×553, panel önizlemesi 390×690): boyalı sahne neredeyse bütün görününce köşe şakayıkları
+  ortadaki yazıya değiyordu; en-boy 1/2–9/16 arasında arka plan %115, 9/16–3/4 arasında %135 ortadan büyütülür. "Replay the opening"
+  yumuşak bir zemin (`.btn-ghost` gibi) ve 44 px dokunma alanı aldı; Skip ve "Replay the envelope" linkleri de ≥ 44 px.
+- **RSVP teşekkürü:** yanıt gönderilince alttaki kapanış ("Thank you / We can't wait to celebrate with you.") gizlenir (site.js
+  `rsvp:state` → `html[data-rsvp-replied]`): katılmayan misafire çelişen, katılana tekrar eden metin yok.
 - **site.js:** `#site-data` varsa kişisel metne dokunmaz; sayfa adresleri `data.pages`, sayaç hedefi
   `data.derived.countdown_target_utc`, eksik link bildirimi `a[data-url-missing]`. `#site-data` yoksa (tema dosyaları
   statik sunucuda) `DEV_CONTENT` + küçük bir tarayıcı içi işleyici aynı işaretleri doldurur — yalnız tasarım önizlemesi.
@@ -263,7 +284,8 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
   düğmesi forma kaydırır, teşekkür/kapalı/hata/önizleme panelleri temanın tipografisinde.
 - **Görseller:** `python3 platform/themes/blush-garden-rose/build_images.py` (GPT parçaları → `img/`, önce
   `tools/parts_prep.py`; pencerelerin tam şeffaflığını ve görünür #00FF00 kalmadığını kendisi denetler).
-- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (12 test: alanlar = içerik kaydı, içerik değişikliği, foto
+- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (15 test; ayrıca: kapalı bölümler hiçbir sayfa kaynağında yok, yanıtlar
+  kapalıyken RSVP yok, önizleme-dışı etiket, alt metin, yorum yok; alanlar = içerik kaydı, içerik değişikliği, foto
   durumları, isteğe bağlı bloklar, linkler, RSVP form sözleşmesi, önizleme anahtarı, site.js sözleşmesi, gerçek rotalar +
   RSVP API'siyle kayıt) ve
   `scripts/theme-check.cjs` (Playwright, `next start`: 5 sayfa × 360/390/430/768/1280 taşma/metin/görsel/kart serbest
@@ -281,7 +303,10 @@ takvim günü olmalı, `format: uri` mutlak http(s) olmalı, bilinmeyen saat dil
 `tests/content.test.ts` 20 demo kaydı ve hatalı örneklerde Python aracıyla geçti/kaldı eşliğini sınar.
 Şema değişince: `node scripts/sync-schema.cjs`.
 
-Taslak kayıt geçersiz olabilir (panelde yazarken); `publishSite()` geçersiz içeriği yayınlamaz.
+Taslak kayıt geçersiz olabilir (panelde yazarken); `publishSite()` geçersiz içeriği yayınlamaz: doğruladığı sürümü
+`adapter.publish(id, {expectedUpdatedAt})` ile yayınlar, arada gelen otomatik kayıt doğrulanmadan yayına giremez (yeniden okur ve
+doğrular; panelden `expectedUpdatedAt` verilirse 409). Test: `adapter.test.ts` yarış testi (eski davranışla 20/20 turda geçersiz
+içerik yayına giriyordu).
 
 ## RSVP (G042)
 
@@ -334,11 +359,12 @@ Tema yalnız işaretli HTML yazar; gönderim, durum ve hata gösterimi platform 
 | `form[data-rsvp-form]` | Yanıt formu. Alanlar **`name` ile**: `name` (zorunlu), `email`, `attending` (`yes`/`no`; radyo, select veya tek checkbox), `guests`, `message`. **`method="post"` yazılır** (JS yüklenmezse veri URL'ye düşmesin; sayfa rotası POST'a 405 verir, hiçbir şey saklanmaz). `action` yazılmaz. |
 | `[data-rsvp-state="success\|closed\|error\|preview"]` | Temanın durum panelleri, `hidden` ile başlar. Betik yalnız geçerli olanı gösterir. `success`/`closed`'da form gizlenir; `error`/`preview`'da form kalır. Durumun paneli yoksa betik formun altına düz bir `<p data-rsvp-fallback>` yazar |
 | `[data-rsvp-message]` | Panel içinde: sunucunun İngilizce mesajı buraya yazılır ("Please enter your name.", "Replies closed on April 3, 2027. …"). Yoksa temanın kendi metni kalır. **`error` ve `closed` panellerine koyun** |
-| `[data-rsvp-error-for="<alan>"]` | O alanın hata metni; alan ayrıca `aria-invalid="true"` alır, yazınca temizlenir. Yoksa tarayıcının kendi doğrulama balonu kullanılır |
+| `[data-rsvp-error-for="<alan>"]` | O alanın hata metni (sunucunun ve tarayıcıdaki ön kontrolün aynı İngilizce mesajı); alan `aria-invalid="true"` ve `aria-describedby` = bu öğe (id yoksa betik verir) alır, yazınca temizlenir. Yoksa tarayıcının kendi doğrulama balonu kullanılır |
 | `[data-rsvp-if-attending]` | Misafir "no" seçince gizlenir, içindeki alanlar devre dışı (ör. guests) |
 | `[data-rsvp-reply="yes\|no"]` | Yalnız misafirin cevabı buysa görünür (success panelinde katılan/katılmayan için ayrı teşekkür) |
 | `[data-rsvp-again]` | Formu sıfırlayıp yeniden açar (aynı aileden ikinci yanıt) |
 | `[data-rsvp]` | İsteğe bağlı kapsayıcı: paneller bunun içinde aranır (yoksa bütün sayfa). Sayfada birden çok form varsa zorunlu |
+| `data-rsvp-reason` (betik yazar) | `closed` durumunda formda ve `[data-rsvp]`'de: `deadline` (son tarih geçti) ya da `disabled` (çift yanıtları başka yoldan topluyor) — tema iki durum için farklı başlık gösterebilir ("Replies are closed" yalnız `deadline` için doğru) |
 | `data-rsvp-status` (betik yazar) | Formda ve `[data-rsvp]`'de: `ready`, `sending`, `success`, `closed`, `error`, `preview` (CSS için). Ayrıca formda `rsvp:state` olayı (`event.detail.state`) — tema animasyonu bağlanabilir |
 
 Betik davranışı:
@@ -350,6 +376,10 @@ Betik davranışı:
   durum taslak içerikten okunur.
 - Gönderim sırasında submit düğmeleri devre dışı, formda `aria-busy="true"`. Başarıda form sıfırlanır.
   Panellere `role="status"` (hata: `role="alert"`) eklenir; success/closed'da odak panele taşınır.
+- Tarayıcının kendi doğrulama balonu kapalı (`form.noValidate`): gönderimde betik alanları kontrol eder, sunucuyla aynı mesajları
+  temanın `[data-rsvp-error-for]` yerlerine yazar, ilk hatalı alana odaklanır, hiçbir şey göndermez (yer yoksa o alan için balon).
+- `site-data.slug` düz bir adres değilse (tema demosu `/start/demo/<tema>`: `start/demo/…`) durum sorgusu yapılmaz (404 ve konsol
+  hatası yok); demo zaten önizleme kipinde.
 - Satır içi olay özniteliği, `innerHTML`, `eval` yok; yalnız `fetch` (CSP `connect-src 'self'`).
 - Tema 03'ün G035 kaynağındaki "preview only" RSVP düğmesi (`data-field="urls.rsvp_form"`) bu formla değiştirilir.
 
@@ -366,12 +396,18 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 - `name` zorunlu, ≤ 120; `email` isteğe bağlı (biçim kontrolü); `attending` yes/no; `guests` katılıyorsa
   1..`maxGuests` (boşsa 1), katılmıyorsa **0** saklanır; `message` ≤ 500. Kontrol karakterleri ve bidi işaretleri silinir.
 - `maxGuests`: tema `theme.json` → `"rsvp": {"max_guests": N}` (1..20); yoksa 10. (Fixture: 6.)
-- **Son tarih:** `rsvp.deadline` gününün **sonu**, sitenin `timezone`'unda (ertesi gün 00:00). Saat dilimi geçersizse
+- **Son tarih:** `rsvp.deadline` gününün **sonu**, sitenin `timezone`'unda (ertesi gün 00:00; o gece saat 00:00'da ileri alınıyorsa —
+  Asia/Beirut, Africa/Cairo — 01:00, hiç erken değil: `zonedTimeToUtc` Temporal "compatible" kuralı). Saat dilimi geçersizse
   UTC-12 (kimse erken geri çevrilmez). `rsvp.method: "none"` → form kapalı (`reason: "disabled"`).
 - Honeypot doluysa normal success cevabı döner, **kayıt yapılmaz**.
 - Aynı yanıt 5 dakika içinde yeniden gelirse bir kez saklanır (çift tıklama / yeniden deneme).
-- **Hız sınırı:** IP başına 10 POST / 15 dk (bütün siteler; IPv6 /64 olarak), site başına 200 saklanan yanıt / saat.
-  `RateLimiter` arayüzü (`lib/rsvp/rate-limit.ts`); şimdilik süreç içi bellek (`MemoryRateLimiter`).
+- **Hız sınırı** (`config.ts`, IPv6 /64 olarak): **site + IP** başına 30 POST / 15 dk (geçersizler dahil; aynı Wi-Fi'dan başka
+  düğüne yanıt etkilenmez), IP başına bütün siteler için 100 POST / 15 dk (kötüye kullanım tavanı) → `429 rate_limited`.
+- **Yoğunluk misafiri kilitlemez:** site başına 200 saklanan yanıt / saat veya bir IP'den o siteye 10 yanıt / saat aşılınca yanıt
+  reddedilmez, **beklemede** (`held: true`) saklanır: misafir normal teşekkürü görür, sayılara ve CSV'ye girmez; çift panelde
+  "Keep" / "Remove" ile karar verir. Yalnız site başına 500 bekleyen / gün dolunca `429 busy`. (Önceden 200 sahte yanıt gerçek
+  misafirleri bir saat kilitliyordu ve sahteler silinemiyordu.)
+  `RateLimiter` arayüzü (`lib/rsvp/rate-limit.ts`); şimdilik süreç içi bellek (`MemoryRateLimiter`) — Vercel'de örnek başına (aşağıda).
   IP: `x-forwarded-for` ilk değeri, yoksa `x-real-ip` (Vercel bunları kendisi yazar; başka proxy'de aynısı sağlanmalı).
 
 Çift tarafı (düzenleme anahtarı: `Authorization: Bearer <anahtar>` tercih; indirme linki için `?k=<anahtar>`):
@@ -379,11 +415,12 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 | İstek | Yanıt |
 |---|---|
 | `GET /api/rsvp/<slug>/responses` | `200 {ok, site: {slug, status}, window: {open, reason, closesAt, deadlineDisplay}, counts: {responses, attending, notAttending, totalGuests}, responses: [{id, name, email, attending, guests, message, createdAt}]}` — yeniden eskiye |
-| `GET /api/rsvp/<slug>/export` | `text/csv`, `attachment; filename="rsvps-<slug>-<YYYY-MM-DD>.csv"` |
+| `GET /api/rsvp/<slug>/export` | `text/csv`, `attachment; filename="rsvps-<slug>-<YYYY-MM-DD>.csv"` (bekleyenler hariç) |
+| `POST /api/rsvp/<slug>/responses` `{action: "remove"\|"keep", ids: [...]}` (yalnız `Bearer`) | `200 {ok, changed, …özet}` · `400` · `401` · `413` · `415` — "remove" kalıcı siler, "keep" bekleyeni sayılara alır; başka sitenin yanıtına dokunmaz |
 
 - Yanlış anahtar, önizleme anahtarı, başka sitenin anahtarı ve bilinmeyen slug **aynı** `401` (`This edit link is not valid.`).
   Bütün RSVP yanıtları `private, no-store`, `noindex`, `no-referrer`.
-- `totalGuests` = katılan yanıtlardaki `guests` toplamı (baş sayısı).
+- `totalGuests` = katılan yanıtlardaki `guests` toplamı (baş sayısı). `counts.held` = bekleyen yanıt sayısı; listede her yanıt `held` taşır.
 - CSV: UTF-8 BOM (Excel aksanlı isimler), CRLF, her hücre tırnaklı; `=`, `+`, `-`, `@` (ve sekme/CR) ile başlayan
   hücrenin başına `'` eklenir (CSV injection). Sütunlar: `Submitted (<timezone>)` ("March 1, 2027 10:05 AM", sitenin
   saat diliminde), `Name`, `Email`, `Attending` (Yes/No), `Guests`, `Message`; eskiden yeniye.
@@ -403,16 +440,30 @@ Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (
 - **Link:** anahtar hash ile doğrulanır (`authorizeEditor`). Yanlış/eksik anahtar, önizleme anahtarı, başka sitenin anahtarı ve
   bilinmeyen slug → **aynı** genel 404 sayfası ("This edit link is not valid"); slug'ın varlığı sızmaz. Sayfa `noindex`,
   `<meta name="referrer" content="no-referrer">` (anahtar URL'de), dinamik (`no-store`).
-- **Bölümler:** Couple (ilk isimler, tam isimler; "Names as shown" ve monogram ilk isimleri izler — elle değiştirilene kadar; host line) ·
+- **Bölümler:** Couple (ilk isimler, tam isimler; "Names as shown", monogram ve o kişinin **tam adı** (davetiye kartında görünür; boşsa
+  ya da ilk isme eşitse) ilk isimleri izler — elle değiştirilene kadar; host line) ·
   Date & time (tarih, tören saati, saat dilimi listesi + "Use this device's time zone", tarih biçimi US/UK/CA/AU) · Venue ·
   Schedule (satır ekle/sil/yukarı/aşağı, "Sort by time"; ilk satır tören saatine eşitse saatle birlikte değişir) ·
-  Story (giriş + anlar: başlık ≤ 60, metin ≤ 400, en çok 12) · Details (dress code; map, travel & stay = `urls.accommodation`,
+  Story (giriş + anlar: başlık ≤ 60, metin ≤ 400; sayı temaya göre) · Details (dress code; map, travel & stay = `urls.accommodation`,
   registry linkleri) · RSVP (son tarih "Replies close at the end of Saturday, April 3, 2027 (America/New York time)",
-  "Accept replies on the website" = `rsvp.method` null/`none`, gelen yanıtlar + sayılar + CSV, "Refresh") ·
-  Optional sections (yalnız temanın sayfalarında `data-optional` ile geçen bloklar) · Photos (`theme.json` foto alanları).
+  "Accept replies on the website" = `rsvp.method` null/`none`, gelen yanıtlar + sayılar + CSV, "Refresh"; yanıt seç → "Remove
+  selected" (bir kez daha sorar); bekleyen yanıtlar ayrı kutuda "Keep"/"Remove"; ilk 20 + "Show all") ·
+  Optional sections (yalnız temanın sayfalarında `data-optional` ile geçen bloklar) · Photos (`theme.json` foto alanları; şekil kelimeyle:
+  "Tall (portrait)", "Almost square", "Wide (landscape)"; küçük resimler önizleme anahtarıyla).
+- **Temaya göre alanlar** (`lib/panel/state.ts` `themeFieldUse`, şablon işaretlerinden): tema göstermediği alanı panel sormaz —
+  Monogram (`initials`), anların "A few words" metni, tema kaç an gösteriyorsa o kadar "Add a moment" (blush-garden-rose: monogram
+  yok, metin yok, 3 an; `_sample`: hepsi, 12). Fazla an varsa "guests do not see this one" notu.
+- **Örnek metin işareti** (`sampleNotes`/`prePublishNotes`, `model.ts`): `/start`'tan gelen taslak temanın kurgu demo kaydının
+  kopyasıdır. Demo kaydıyla hâlâ aynı olan değerler (tarih, saat, mekân adı/adres/şehir, host line, dress code, hikâye girişi ve
+  başlıkları, program yerleri, son tarih) alanın yanında "Sample", bölüm başlığında "Sample text" ile işaretlenir. Publish önce
+  "Before you publish" listesini gösterir: örnek metinler, boş foto yerleri ("guests see a soft placeholder image"), açık ama linksiz
+  bloklar; her madde alana götürür, "Publish anyway" ile yine yayınlanabilir. Demo kaydı olmayan temada (internal) örnek uyarısı yok.
 - **Tarihler** her yerde `formatDate`/`formatDateLong` ile: "Saturday, May 15, 2027", "4:00 PM" (en-GB: "15 May 2027", "4:00 pm").
 - **Otomatik kayıt:** son değişiklikten 800 ms sonra `PUT /api/edit/<slug>`; istekler sıralı (aynı anda tek PUT), her istek son
   bilinen `updatedAt`'i taşır → başka sekme/telefon arada kaydettiyse **409**, kayıt durur ve "Reload" istenir (sessiz üzerine yazma yok).
+  409 gelince panel önce kayıtlı taslağı okur (`GET`): gönderdiği içerikle aynıysa (kendi kaydı saklanmış, yanıtı yolda kaybolmuş)
+  yeni `updatedAt`'i alıp devam eder; yalnız gerçek fark kilitler. Publish/unpublish da kayıtlarla **aynı sıradan** gider: yavaş bir
+  yayın sırasında yazılan değişiklik yayından sonra, yeni `updatedAt` ile kaydedilir (yanlış "başka cihaz" çakışması yok).
   Sekme gizlenince kayıt; kapanırken `keepalive` kaydı ve kaydedilmemiş değişiklikte `beforeunload` uyarısı. Ağ hatasında artan
   aralıkla yeniden dener. Çubukta durum: "All changes saved / Unsaved changes / Saving… / Not saved yet. Trying again…".
 - **Doğrulama:** tarayıcıda aynı TS doğrulayıcı `validateContent(content, { platform: true })`; boş alanlarda daha anlaşılır metin
@@ -424,11 +475,16 @@ Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (
   yanlış JSON türü, eksik zorunlu nesne, enum dışı değer, liste sınırı aşımı → **400** (`invalid_shape`), saklanmaz.
   `record_kind` ve `event_type` panelden değişmez (saklı değer korunur). Taslak ≤ 64 KB.
 - **Önizleme:** iframe `/<slug>?preview=<önizleme anahtarı>` (anahtar düzenleme anahtarından türetilir), 390 px; sayfa sekmeleri
-  (Envelope/Home/Story/Details/RSVP); her başarılı kayıttan sonra yeniden yüklenir. Telefonda tam ekran açılır; iframe ilk açılışta yüklenir.
+  yalnız bu içerikle açılan sayfalar (Story kapalıysa ya da yanıtlar kapalıysa RSVP sekmesi yok; `pageRules` = `<body>` işaretleri),
+  44 px, sığmazsa alt satıra geçer; her başarılı kayıttan sonra yeniden yüklenir. Telefonda tam ekran **modal**: odak Close'a, arkadaki
+  form ve çubuk `inert`, sayfa kaymaz, açılınca geçmişe kayıt eklenir → Android geri tuşu/hareketi önizlemeyi kapatır (editörden
+  çıkmaz); kapanınca odak Preview düğmesine döner. iframe ilk açılışta yüklenir.
 - **Yayın:** `publishSite` (geçersiz içerik → **422** + `issues`), `unpublishSite`. Düğme: "Publish" → yayındayken değişiklik varsa
   "Publish changes", güncelse "Share". Yayından sonra link (kopyala/aç) ve **QR**: `lib/qr.ts`, sabit `uqr@0.1.3` (Nayuki
   kodlayıcısı), `tools/make_qr.py` ile aynı ayarlar (hata düzeltme Q, 4 modül kenar), yalnız http(s), demo alan adları reddedilir;
-  PNG/SVG indirme. "Take the website offline" onaylıdır; içerik ve son yayın kopyası korunur.
+  PNG/SVG indirme. "Take the website offline" onaylıdır; içerik ve son yayın kopyası korunur. Çubuk düğmeleri 360 px'te tek satır
+  ("Publish changes" dahil); sabit çubuk odaklanan alanı örtmez (`scroll-padding-bottom`). Program/an satırında "Remove" bir kez daha
+  sorar ("Yes, remove"), taşımadan sonra odak taşınan satırla gider.
 - **Fotoğraf:** dosya seçimi (`accept="image/*"`, ≤ 30 MB, SVG reddedilir) → tarayıcıda kırpma (alanın oranı; sürükle, pinch,
   kaydırıcı, tekerlek, ok/+/- tuşları) → canvas JPEG (uzun kenar ≤ 2000 px, ≤ 3.5 MB) → `POST /api/edit/<slug>/photo?slot=<anahtar>`
   → `assertImageUpload` (tür baytlardan, ≤ 10 MB) → **sharp ile yeniden kodlama** (`lib/panel/photos.ts`: EXIF yönü uygulanır,
@@ -455,7 +511,7 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
 
 ### Panel testleri
 
-- `tests/panel.test.ts` (node:test, 21 test): anahtar (iyi/yanlış/eksik/başka site/`?k=`/bilinmeyen slug; önizleme anahtarı düzenleyemez),
+- `tests/panel.test.ts` (node:test, 25 test; ayrıca tam ad izleme, yayın öncesi notlar, tema alan/sayfa bilgisi, yayın 409): anahtar (iyi/yanlış/eksik/başka site/`?k=`/bilinmeyen slug; önizleme anahtarı düzenleyemez),
   taslak kaydı (yayın kopyasına dokunmaz, 409 çakışma, kilitli alanlar, yapı reddi, 413/415/400), doğrulama mesajları ve
   `platform` seçeneği, yükleme sınırları (boş, > 10 MB, SVG/GIF/HTML, bozuk JPEG, > 50 MP, bilinmeyen alan, anahtarsız; EXIF silinir,
   oran kırpılır, 2400 px), yayınla/yayından kaldır, QR (bağımsız okuyucu `jsqr` ile geri çözülür), yardımcılar.
@@ -463,7 +519,9 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
   `npm run build && NODE_PATH=/opt/node22/lib/node_modules node tests/panel-browser.ts` — `next start` + Chromium 390 px
   (isMobile, touch): geçersiz linkler → isimleri değiştir → program satırı ekle/taşı/sil → fotoğraf yükle + kırp → hatalı son tarih
   yayını engeller → önizlemede isim ve foto → yayınla → QR ekran görüntüsünden çözülür = genel URL → genel sayfada isim ve foto →
-  misafir yanıtı panelde → "Publish changes" → offline (404) → yeniden yayın → masaüstünde yan yana önizleme. 59 kontrol;
+  misafir yanıtı panelde (+ silme) → "Publish changes" → kayıp kayıt yanıtı / yavaş yayın sırasında yazma (yanlış çakışma yok) →
+  offline (404, foto da 404) → yeniden yayın → masaüstünde yan yana önizleme; önizleme modalı (odak, `inert`, geri tuşu), Tab ile odak
+  çubuğun altında kalmıyor, "Before you publish" notları. 72 kontrol;
   ekran görüntüleri, `panel_flow_390.mp4` ve `checks.json` → `previews/g039/` (`PANEL_SHOTS_DIR`, `PORT` (3313), `PANEL_SLOWMO`).
   Test fotoğrafı: 03'ün kurgu GPT örnek fotoğrafı (`collections/03_Blush_Garden_Rose/assets/gpt/photos/hero_portrait.jpg`).
 
@@ -471,17 +529,20 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
 
 ### Panel açık konuları
 
-- Değiştirilen/silinen fotoğraflar depoda kalır (adaptörde `deletePhoto` yok) → G043'te öksüz dosya temizliği.
+- Değiştirilen/silinen fotoğraflar depoda kalır (adaptörde `deletePhoto` yok) → G043'te öksüz dosya temizliği. Artık herkese
+  servis edilmezler (aşağıda "Fotoğraflar"), yalnız depoda yer tutarlar.
 - Site başına yükleme kotası / hız sınırı yok (yalnız 256-bit anahtar sahibi yükleyebilir).
 - Vercel fonksiyon gövde sınırı 4.5 MB: tarayıcı çıktısı ≤ 3.5 MB tutulur; sunucudaki 10 MB sınırı Vercel dışında geçerli.
   Supabase'de imzalı doğrudan yükleme (G043/G044) düşünülebilir.
 - Şemada serbest metin "travel" alanı yok: Travel & stay = konaklama linki + `travel_stay` anahtarı. FAQ / guest policy metinleri de
   şemada yok (yalnız aç/kapa). İkinci isim eklenebilir ama silinemez.
-- Düzenleme linki URL'de kalır (yer imi için); "yeni düzenleme linki üret" (anahtar yenileme) yok.
+- Düzenleme linki URL'de kalır (yer imi için). Alıcının kendisinin "yeni link üret" düğmesi yok; mağaza/operatör aracı var
+  (`scripts/reissue-edit-key.ts`, aşağıda /start).
 - Gerçek telefonda (iOS Safari / Android Chrome) denenmedi; yalnız Chromium mobil emülasyonu. HEIC yalnız onu çözebilen tarayıcıda
   (Safari) açılır; Chrome'da açık hata mesajı çıkar. QR telefon kamerasıyla okutulmadı (ekran görüntüsünden `jsqr` ile çözüldü).
-- `local` adaptör tek süreçlidir; çakışma kontrolü (`baseUpdatedAt`) oku-karşılaştır-yaz, atomik değil (Supabase'de koşullu UPDATE).
-  `blob` kaydı ETag ile bozulmadan korur, ama panelin `baseUpdatedAt` karşılaştırması ile yazma arasındaki kısa aralık yine atomik değil.
+- `local` adaptör tek süreçlidir; taslak kaydındaki çakışma kontrolü (`baseUpdatedAt`) oku-karşılaştır-yaz, atomik değil (Supabase'de
+  koşullu UPDATE). `blob` kaydı ETag ile bozulmadan korur, ama `baseUpdatedAt` karşılaştırması ile yazma arasındaki kısa aralık yine
+  atomik değil. Yayın (`publish`) ise atomik: beklenen sürüm adaptörün kilidi/ETag'i içinde karşılaştırılır.
 
 ## /start sahiplenme akışı (G045)
 
@@ -499,6 +560,11 @@ panelle aynı sade araç görünümü (dekor çizimi yok, K21).
 4. **Sonuç ekranı:** düzenleme linki büyük (salt okunur kutu), "Save this link" uyarısı, **Copy link**, **Email it to myself**
    (`mailto:` — alıcının kendi posta uygulamasını açar; platform e-posta GÖNDERMEZ), **Open my editor** → `/edit/<slug>?k=…` (G039).
    Sonuç aynı sekmede `sessionStorage`'da tutulur (sayfa yenilenince link kaybolmaz); "Start another website" temizler.
+5. **Kayıp yanıt (inceleme düzeltmesi):** form ilk gönderimde rastgele bir `claimToken` (`crypto.randomUUID()`) üretir, sekmede
+   saklar ve her yeniden denemede **aynısını** gönderir; ağ hatasında 1,5 sn sonra kendisi bir kez daha dener. Site oluşmuş ama yanıt
+   gelmemişse (telefon ağ değiştirdi) tekrar gelen istek: aynı belirteç + aynı e-posta + hâlâ hiç yayınlanmamış taslak + < 24 saat →
+   anahtarlar yenilenir (görülmemiş eski link ölür), `201` yeni linkle. Başka her durum `409 order_used`. Saklanan yalnız
+   `claimTokenHash` (SHA-256).
 
 Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunulabilen tasarımların listesi. `internal` tema
 (`_sample`) sunulmaz.
@@ -522,14 +588,17 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
 
 | İstek | Yanıt |
 |---|---|
-| `POST /api/start` `application/json`, ≤ 4 KB: `{theme, orderNumber, email, names: [a, b], slug?, website?}` | `201 {ok, slug, status:"draft", editUrl, editPath, siteUrl, emailSent}` · `400 invalid (+fields: orderNumber/email/name1/name2/slug)` · `400 bad_json` · `403 order_not_verified` · `404 theme_unavailable` · `409 order_used` · `409 slug_taken (+fields.slug, suggestion)` · `413` · `415` · `429 rate_limited/busy (+Retry-After)` · `503 verification_unavailable` · `500` |
+| `POST /api/start` `application/json`, ≤ 4 KB: `{theme, orderNumber, email, names: [a, b], slug?, claimToken?, website?}` | `201 {ok, slug, status:"draft", editUrl, editPath, siteUrl, emailSent}` · `400 invalid (+fields: orderNumber/email/name1/name2/slug)` · `400 bad_json` · `403 order_not_verified` · `404 theme_unavailable` · `409 order_used` · `409 slug_taken (+fields.slug, suggestion)` · `413` · `415` · `429 rate_limited/busy (+Retry-After)` · `503 verification_unavailable` · `500` |
 | `GET /api/start/slug?value=<adres>` | `200 {ok, value, available, reason: null\|missing\|format\|reserved\|taken, message, suggestion}` · `429` |
 | `GET /start/demo/<tema>[/<sayfa>]` | temanın sayfası demo içerikle (HTML); `internal`/bilinmeyen/demo'suz tema, `index` alt yolu → 404 |
 
 Sıra (`lib/claim/claim.ts`): IP deneme sınırı → honeypot (`website` doluysa 400, kayıt yok) → tema → alan kontrolleri →
-*(sipariş kilidi)* kullanılmış sipariş → doğrulayıcı → adres (yazılan dolu ise 409 + öneri; boşsa isimlerden ilk boş adres) →
+*(sipariş kilidi)* doğrulayıcı → kullanılmış sipariş (yeniden deneme ise yeni link) → adres (yazılan dolu ise 409 + öneri; boşsa isimlerden ilk boş adres) →
 oluşturma sınırları → `createSiteWithKeys` → e-posta arayüzü → 201. Yanıtlar `private, no-store`, `noindex`, `no-referrer`
-(link gövdede). `/start` sayfası `noindex` + `referrer: no-referrer`. Demo sayfaları önizleme kipinde (`previewKey: "demo"`):
+(link gövdede). Doğrulayıcı "kullanılmış" kontrolünden **önce**: doğrulama açıkken yabancı, numaranın kullanılıp kullanılmadığını
+öğrenemez (her ikisinde aynı 403). `/start` ve `/edit/…` sayfaları `noindex` + `Referrer-Policy: no-referrer` + `X-Frame-Options: DENY`
++ CSP `frame-ancestors 'none'` (`next.config.ts` `headers()`; Next'in satır içi betikleri nonce gerektirdiği için `script-src` yok).
+Demo sayfaları önizleme kipinde (`previewKey: "demo"`):
 sayfalar arası linkler `/start/demo/<tema>/…?preview=demo` kalır, RSVP formu "preview" panelini gösterir ve gönderim yapmaz;
 CSP site ile aynı (`frame-ancestors 'self'`).
 
@@ -548,7 +617,7 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
   Gönderim hatası sahiplenmeyi bozmaz (site var, link ekranda) ve link log'a yazılmaz (test).
 
 ### Testler
-- `tests/claim.test.ts` (node:test, 17 test): sipariş no / e-posta / isim / adres kuralları; tema + demo kaynağı (kendi dosyası,
+- `tests/claim.test.ts` (node:test, 19 test; ayrıca `claimToken` ile kayıp yanıtın kurtarılması, link yenileme aracı, doğrulayıcı sırası): sipariş no / e-posta / isim / adres kuralları; tema + demo kaynağı (kendi dosyası,
   paket kopyası, internal/demo'suz/bozuk demo reddi, kopyanın koleksiyonla aynılığı); taslak içerik; 201 akışı (taslak, isimler,
   `orderRef`, e-posta, anahtar yalnız hash — veri klasöründe düz anahtar yok, link panel API'sini açıyor, genel adres 404);
   aynı sipariş → 409 ve sızıntı yok; 6 paralel istek → 1 site; adres (yazılan dolu → 409 + `-2` önerisi, boş → otomatik `-3`,
@@ -568,11 +637,19 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
 - **Birden çok sunucu örneği:** sipariş kilidi süreç içi. `blob` (G048): `orders/<no>.json` dizini "varsa yazma" ile → aynı
   siparişle ikinci site oluşmaz, yarışı kaybeden `409 order_used` alır. G043: `sites(order_ref)` üzerinde benzersiz indeks ve aynı
   çeviri. Kalıcı `RateLimiter` hâlâ yok (aşağıda).
-- **Vercel dosya izleme:** `/start`, `/start/demo/…`, `/api/start` (ve panel rotaları `/edit/[slug]`, `/api/edit/…`) temaları
-  diskten okur; `next.config.ts` `outputFileTracingIncludes` şu an yalnız site rotalarını kapsıyor (G044'te eklenmeli; bu görevin
-  yazma alanı dışında).
-- **Kayıp link:** e-posta yok ve düz anahtar saklanmıyor → alıcı linki kaybederse kendisi kurtaramaz; mağazanın da aracı yok.
-  E-posta sağlayıcısı veya yönetici "yeni düzenleme linki üret" aracı gerekir.
+- **Vercel dosya izleme:** temaları diskten okuyan bütün rotalar (`/[slug]…`, `/edit`, `/api/edit/…`, `/api/rsvp/[slug]`, `/start`,
+  `/start/demo/…`, `/api/start…`) `next.config.ts` `outputFileTracingIncludes`'ta. `npm run build` sonrası `scripts/trace-check.cjs`
+  her rotanın `.nft.json`'unda her temanın `index.html`'ini arar; eksikse build hata verir (yeni bir tema okuyan rota listeye
+  eklenmezse fark edilir). Rotalar G044'te canlıda denendi; `trace-check` yerel build'de koşuyor.
+- **Kayıp link — operatör aracı:** `node scripts/reissue-edit-key.ts --order <no> --origin https://<host>` (ya da `--slug <adres>`):
+  siteyi bulur, yeni düzenleme + önizleme anahtarı üretir (yalnız hash saklanır; eski linkler hemen ölür), yeni linki **bir kez**
+  ekrana yazar; içerik/foto/yanıt/yayın durumuna dokunmaz. `DATA_ADAPTER` deposunda çalışır (blob için token gerekir). Mağaza alıcıyı
+  Etsy'de doğruladıktan sonra linki Etsy mesajıyla iletir. Destek süreci (kim, ne kadar sürede) kullanıcı kararıdır, uydurulmadı.
+  Yerelde test edildi (`claim.test.ts`); canlı depoda denenmedi.
+- **Doğrulama kapalıyken sipariş numarası kapma:** biçimi doğru numarayı ilk gönderen sahiplenir (sonra gelen gerçek alıcı
+  `409`). Kod düzeltmesi değil, **satış öncesi şart**: Etsy sipariş doğrulaması (ya da sipariş başına gizli kod). O zamana kadar
+  çare yukarıdaki operatör aracı (doğrulanmış alıcıya linki yeniden vermek). Hiç yayınlanmamış taslakların süre sonunda silinmesi
+  (adres kapma) zamanlanmış iş + adaptörde site listeleme ister: yapılmadı.
 - **Çok ürünlü Etsy siparişi** (aynı siparişte iki tasarım): kural sipariş başına tek site; ikinci tasarım için Etsy API ile
   kalem bazlı kontrol gerekir.
 - Etsy doğrulaması kapalıyken biçimi doğru herhangi bir numara bir taslak site açabilir (hız sınırları + honeypot dışında engel yok).
@@ -584,7 +661,14 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
   değer yazılmaz. JSON bloğu `<`, `>`, `&`, U+2028/2029 kaçışlı.
 - URL'ler: link http/https/mailto/tel; foto http(s) veya kök göreli `/…` (`//`, `data:`, `javascript:` reddedilir).
 - Başlıklar: CSP (`script-src 'self'` + tema satır içi betik hash'leri, `object-src 'none'`, `base-uri 'none'`,
-  `frame-ancestors 'self'`), `nosniff`, önizlemede `noindex`/`no-store`/`no-referrer`.
+  `frame-ancestors 'self'`), `nosniff`, önizlemede `noindex`/`no-store`/`no-referrer`. Gizli link taşıyan `/edit/…` ve `/start`:
+  `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
+- `site-data` JSON'u içerik kaydını taşımaz (kapalı bölümler kaynakta görünmez); şablon yorumları silinir.
+- **Fotoğraflar** (`/media/<site>/<dosya>`, `lib/site/static.ts`): yalnız site yayındaysa ve yayındaki içerik o dosyayı kullanıyorsa
+  (hikâye fotoğrafları yalnız Our Story açıkken) `public, max-age=300`; ya da isteğin `?preview=` anahtarı o sitenin ise
+  `private, no-store`. Yayından kaldırılan sitenin, değiştirilen/silinen ve hiç kullanılmamış fotoğrafların hepsi 404. (Önceden her
+  dosya bir yıl `immutable` servis ediliyordu.) Bedeli: önbellekte olmayan her foto isteği site kaydını da okur (`blob`: +1 okuma);
+  CDN kopyası yayından kaldırmadan sonra en çok 5 dk kalabilir.
 - Statik rota: tema klasörü dışına çıkış, nokta dosyaları, `.html`/`theme.json` servis edilmez; SVG'ye ayrı CSP.
 - Yüklemeler: tür dosya baytlarından (SVG/HTML reddedilir), 10 MB sınırı, rastgele dosya adı.
 
@@ -597,5 +681,7 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
 - `local` adaptör tek süreç içindir. RSVP ve `/start` hız sınırları süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
   örnek olacağı için sınırlar örnek başınadır. `blob` sürümünde de kalıcı limiter yok (Blob sayaç için uygun değil: her artış bir
   yazma); gerekirse Vercel Firewall hız kuralı ya da G043'te Supabase tablo/RPC → `setRsvpRateLimiter()` / `setClaimRateLimiter()`.
-- RSVP: yanıt silme/düzeltme yok (adaptörde `deleteRsvp` yok); çifte e-posta bildirimi yok (sağlayıcı seçilmedi);
-  misafir verisi için gizlilik metni yayından önce gerekli.
+- RSVP: yanıt düzeltme yok (silme ve "beklemede" var); çifte e-posta bildirimi yok (sağlayıcı seçilmedi); misafir verisi için
+  **gizlilik metni** yok — RSVP formu, `/start` (e-posta) ve panel için kısa bir metin + link gerekli; ticari/hukuki kimlik
+  kullanıcıdan gelmeli (uydurulmaz) → önerilen görev (claude-metin), G044'ün ya da ilk gerçek alıcının önünde blokaj. Google Fonts
+  isteği ziyaretçi IP'sini Google'a gönderir (fontları kendimiz barındırmak düşünülebilir).

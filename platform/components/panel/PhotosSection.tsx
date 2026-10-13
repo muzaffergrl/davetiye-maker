@@ -3,7 +3,7 @@
 // browser -> upload (server checks + re-encodes) -> the URL goes into the content record.
 
 import { useState } from 'react';
-import { photoAt, type PanelPhotoSlot } from '../../lib/panel/model.ts';
+import { photoAt, previewPhotoUrl, shapeLabel, type PanelPhotoSlot } from '../../lib/panel/model.ts';
 import { PhotoCropper } from './PhotoCropper.tsx';
 import { usePanelContext } from './fields.tsx';
 import styles from './panel.module.css';
@@ -27,10 +27,13 @@ type SlotStatus = { busy?: boolean; error?: string; confirmRemove?: boolean };
 
 export function PhotosSection({
   slots,
+  previewKey,
   onUpload,
   onRemove,
 }: {
   slots: PanelPhotoSlot[];
+  /** Photos are private until published; the buyer's thumbnails carry the preview key. */
+  previewKey: string;
   onUpload: (slot: PanelPhotoSlot, blob: Blob) => Promise<{ ok: boolean; message?: string }>;
   onRemove: (slot: PanelPhotoSlot) => void;
 }) {
@@ -58,7 +61,8 @@ export function PhotosSection({
   return (
     <>
       <p className={styles.hint}>
-        Each photo is cropped to the shape the design uses. Until you add one, the design shows its own placeholder.
+        Each photo is cropped to the shape the design uses. Until you add one, the design shows a soft placeholder image, and your
+        guests see it too.
       </p>
       <div className={styles.photoGrid}>
         {slots.map((slot) => {
@@ -68,11 +72,15 @@ export function PhotosSection({
           return (
             <div key={slot.key} className={styles.photoCard} data-photo-slot={slot.key}>
               <div className={styles.photoThumb} style={{ aspectRatio: String(slot.ratio ?? 4 / 3) }}>
-                {url ? <img src={url} alt={`${slot.label}: current photo`} className={styles.photoImg} /> : <span className={styles.photoEmpty}>No photo yet</span>}
+                {url ? (
+                  <img src={previewPhotoUrl(url, previewKey)} alt={`${slot.label}: current photo`} className={styles.photoImg} />
+                ) : (
+                  <span className={styles.photoEmpty}>No photo yet</span>
+                )}
               </div>
               <div className={styles.photoInfo}>
                 <p className={styles.label}>{slot.label}</p>
-                <p className={styles.hint}>{slot.aspect ? `Shape ${slot.aspect.replace('/', ':')}` : 'Any shape'}</p>
+                <p className={styles.hint}>{shapeLabel(slot.ratio)}</p>
                 <div className={styles.buttonRow}>
                   <input
                     id={inputId}
