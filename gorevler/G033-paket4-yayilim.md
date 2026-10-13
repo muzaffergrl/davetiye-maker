@@ -1,12 +1,12 @@
 ---
 id: G033
-baslik: Paket 4 (GPT tasarlar) prompt'larını 20 tasarıma yay — katalog.py
+baslik: Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
 rol: claude-kod
-durum: blokaj
-alan:
+durum: alindi
+alan: wf-paketw
 oncelik: 2
-bagimli: [G031]
-yazar: [tools/katalog.py, collections/, docs/09_TASARIM_KATALOGU.md, gorevler/]
+bagimli: [G030, G035]
+yazar: [tools/katalog.py, tools/kit_check.py, tools/parts_prep.py, tools/tests/, collections/, docs/09_TASARIM_KATALOGU.md, docs/06_FABRIKA_PLANI.md, gorevler/G2, gorevler/G4, gorevler/G033-paket4-yayilim.md, gorevler/roller/gpt-gorsel.md]
 ---
 
 ## Amaç
@@ -32,3 +32,4 @@ _(görevi yapan ajan doldurur)_
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-13 yeniden tanımlandı (K22–K24): video Paket 4 yerine website Paket 5; iş akışı wf-paketw ile yapılıyor (yaz → 4 bağımsız inceleme → düzeltme → son denetim)

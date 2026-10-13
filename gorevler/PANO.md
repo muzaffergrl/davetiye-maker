@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 8 · alindi 1 · inceleme 0 · blokaj 332 · bitti 15 · toplam 356
+Özet: hazir 7 · alindi 3 · inceleme 0 · blokaj 331 · bitti 15 · toplam 356
 
 ## claude-canva
 
@@ -162,7 +162,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 **Üzerinde çalışılan / incelemede / blokaj (102)**
 
 - `G037` alindi · claude-kod-11 — Site platformu iskeleti — Next.js, tema şablon motoru, local veri adaptörü, site rotaları
-- `G033` blokaj · - — Paket 4 (GPT tasarlar) prompt'larını 20 tasarıma yay — katalog.py
+- `G033` alindi · wf-paketw — Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G044` blokaj · - — Vercel önizleme yayını (demo site + panel)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
@@ -331,16 +331,16 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (3)**
+**Alınabilir (2)**
 
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
-- `G047` p2 — Tasarım 03 — yatay altın çerçeve parçası (mekân fotoğrafı, T2.14) → `gorevler/G047-mekan-cercevesi.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (64)**
+**Üzerinde çalışılan / incelemede / blokaj (65)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
+- `G047` alindi · gpt-gorsel-1 — Tasarım 03 — yatay altın çerçeve parçası (mekân fotoğrafı, T2.14)
 - `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G204` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1)
