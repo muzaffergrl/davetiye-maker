@@ -1,0 +1,370 @@
+{
+  "task": "G201",
+  "date": "2026-10-13",
+  "agent": "gpt-gorsel-codex-continue",
+  "status": "review_pending",
+  "strict_visual_acceptance_passed": false,
+  "preexisting_w1_unmodified": true,
+  "prompt_source": "collections/01_Olive_Ivory/assets/gpt/GPT_PROMPTS.md",
+  "prompt_note": "Base English prompts preserved verbatim. Additional technical production instructions were appended in tool calls. Final correction prompts are recorded below.",
+  "imagegen_calls_this_continuation": 26,
+  "canonical_new_files": 22,
+  "checks": {
+    "paket_5": {
+      "passed": 22,
+      "total": 22,
+      "scope": "Names, readable files, canvas ratio, approximate green area and edge alpha; not strict visual acceptance."
+    },
+    "paket_2": {
+      "passed": 5,
+      "total": 5
+    }
+  },
+  "open_issues": [
+    "Exterior halos on envelopes, three cards, two frames and divider.",
+    "Green windows are not pure opaque #00FF00; technical photo masks required.",
+    "Landscape green-window bbox ratio is approximately 1.6368 instead of 1.5.",
+    "Open/closed envelope lower edges differ by 9 pixels; body widths differ slightly.",
+    "Square outputs are 1254x1254 rather than 1024x1024; no resampling performed.",
+    "Seamless tile repetition and website assembly/cropping/animation are unverified."
+  ],
+  "rejected_landscape_v2_center_rgba": [
+    1,
+    37,
+    1,
+    50
+  ],
+  "photo_format_conversion": {
+    "JPEG_quality": 97,
+    "subsampling": 0,
+    "RGB": true,
+    "no_crop_or_resize": true
+  },
+  "selected_files": [
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/bg_page.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-29eeacd0-7c5d-4e12-be05-3a0bcd72ce66.png",
+      "base_prompt": "The page background of the W1 screens alone, as a vertical phone-screen background: soft warm ivory-to-pale-olive gradient (#F1EFE6 to #DCD9C6) with faint linen grain and a few very soft out-of-focus sunlight flecks, with slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no olive envelope, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-2287a117-38e2-4030-99ca-b419e4b991ff.png",
+      "base_prompt": "A seamless tileable square texture for long website pages: soft warm-ivory watercolor paper (#F1EFE6) with faint linen grain and very subtle tonal mottling. Calm, even and very low in contrast; no objects, no flowers, no vignette, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/envelope_closed.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-fe219445-bfbd-4b03-a272-f96c4a54e3df.png",
+      "base_prompt": "The same olive envelope as in the W1 screens, alone and closed, WITHOUT the oval botanical seal: an olive-green (#7D8B5A) textured cotton-paper envelope with soft visible fibers, about 5:4 wider than tall, with a deep pointed V flap whose edge is trimmed with a narrow band of fine ivory lace. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true,
+      "alpha_gt_240_bbox_xyxy": [
+        60,
+        613,
+        965,
+        1286
+      ]
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/closure.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-3d425f90-feb1-47ec-b0d2-eabb90404c15.png",
+      "base_prompt": "Only an oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms, a short olive sprig tucked under it, alone, exactly as it sits on the olive envelope in the W1 screens (pressed onto the tip of the V flap, a little below the envelope's center), drawn large so it fills about 70% of the square (Claude scales it to the olive envelope), with the same perspective, material and light as on the olive envelope and with no olive envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/envelope_open.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-af7ec85f-697f-4aa1-a5e3-d1f112df3341.png",
+      "base_prompt": "The SAME olive envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the lace-edged V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — a warm ivory (#FBF8F0) liner with a fine hand-drawn olive-branch repeat in pale sage (#A8B28A); the front pocket empty. No card, nothing inside, no oval botanical seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true,
+      "alpha_gt_240_bbox_xyxy": [
+        63,
+        133,
+        962,
+        1277
+      ]
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/card_small.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-f7122824-9af8-4ac8-8f0a-5a40bb53878d.png",
+      "base_prompt": "The small card that comes out of the olive envelope in W1.2, alone: a small warm-ivory card with softly rounded corners and a fine antique-gold double border, a rounded-corner portrait photo window in its upper 60% and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the olive envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true,
+      "approx_green_bbox_xyxy": [
+        183,
+        270,
+        842,
+        981
+      ],
+      "approx_green_bbox_ratio": 0.9268635724331927,
+      "central_100x100_exact_rgba_0_255_0_255_count": 0,
+      "central_100x100_most_frequent_rgba": [
+        5,
+        243,
+        1,
+        253
+      ],
+      "strict_green_passed": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/invitation_card.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-255a5cef-f266-4de1-ad7e-cc95fb4d1328.png",
+      "base_prompt": "The large invitation card of this design, alone: a tall warm-ivory cotton card with softly rounded corners and a fine antique-gold double border, a slender watercolor olive branch with silvery leaves and small dark olives arching across the top-left corner and a smaller sprig at the bottom-right. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/info_card.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-5aa72512-6b50-4776-939a-cdaf1d998a60.png",
+      "base_prompt": "The lighter card from W1.4 and W1.5, alone: a tall warm-ivory card with softly rounded corners, a fine antique-gold double border and only one small olive sprig at the top center. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/frame_portrait.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-28374359-6274-4073-8bf4-34e30550b89b.png",
+      "base_prompt": "One photo frame from W1.3, alone and upright: a portrait ivory card frame with softly rounded corners, a fine antique-gold double border and a slim ivory margin, a tiny watercolor olive sprig tucked at its bottom-left corner. The window inside is a portrait window with softly rounded corners (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true,
+      "approx_green_bbox_xyxy": [
+        188,
+        305,
+        837,
+        1185
+      ],
+      "approx_green_bbox_ratio": 0.7375,
+      "central_100x100_exact_rgba_0_255_0_255_count": 0,
+      "central_100x100_most_frequent_rgba": [
+        6,
+        239,
+        1,
+        253
+      ],
+      "strict_green_passed": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/frame_landscape.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1536,
+      "height": 1024,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-443bef33-a1fc-4d21-9c28-908f8bd777ab.png",
+      "base_prompt": "A landscape version of the same rounded-corner ivory card frame with the fine antique-gold double border and a tiny olive sprig at its bottom-left corner, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true,
+      "approx_green_bbox_xyxy": [
+        266,
+        204,
+        1271,
+        818
+      ],
+      "approx_green_bbox_ratio": 1.6368078175895766,
+      "central_100x100_exact_rgba_0_255_0_255_count": 0,
+      "central_100x100_most_frequent_rgba": [
+        3,
+        198,
+        1,
+        250
+      ],
+      "strict_green_passed": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/decor_tl.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-6121995c-2e2d-4d66-8137-ea167b7ffdaa.png",
+      "base_prompt": "ONE cluster of slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/decor_br.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-80ea017c-67a9-4267-bd8e-749262ce796b.png",
+      "base_prompt": "ONE cluster of slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/accent_1.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-2f91ec8c-274f-493a-a4ea-79f59358e151.png",
+      "base_prompt": "Exactly ONE silvery-green olive leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/accent_2.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-43b789b4-4ef5-496f-ab9e-fbf38dab9ef8.png",
+      "base_prompt": "Exactly ONE small ripe dark olive with a short stem and one tiny leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/accent_3.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1254,
+      "height": 1254,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-e1232657-6a83-4f69-8795-e2429f6d626e.png",
+      "base_prompt": "Exactly ONE tiny white jasmine blossom, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/divider.png",
+      "format": "PNG",
+      "mode": "RGBA",
+      "width": 1536,
+      "height": 1024,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "generated_source": "/workspace/generated_images/exec-b7d0610c-a347-417e-bca8-0fb37ac7afba.png",
+      "base_prompt": "A small horizontal divider in the same soft watercolor style: a single slender olive sprig with five leaves and two small olives, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/parts/web_hero.png",
+      "format": "PNG",
+      "mode": "RGB",
+      "width": 1536,
+      "height": 1024,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-f1e9ea97-0289-42e6-afbf-1c724c92f84a.png",
+      "base_prompt": "Wide horizontal version of the same design for the desktop website header: soft warm ivory-to-pale-olive gradient (#F1EFE6 to #DCD9C6) with faint linen grain and a few very soft out-of-focus sunlight flecks, with slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms framing the left and right edges, and the closed olive envelope with its oval botanical seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/photos/hero_portrait.jpg",
+      "format": "JPEG",
+      "mode": "RGB",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-1282e7fe-7fa3-4c90-b424-fd7f7acc8a60.png",
+      "base_prompt": "Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other beneath old silvery olive trees in a sunlit Mediterranean-style garden at golden hour; she wears a flowing ivory chiffon dress, he wears a light sage-grey linen suit with no tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/photos/story_1.jpg",
+      "format": "JPEG",
+      "mode": "RGB",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-5b27c4a8-67a9-4207-9d08-3c20a113bdf6.png",
+      "base_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a rustic outdoor table under an olive tree, two glasses of lemonade and a small bowl of olives, warm afternoon light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/photos/story_2.jpg",
+      "format": "JPEG",
+      "mode": "RGB",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-8c5a9a66-8489-4fa2-ab60-5d8f1bbf0f7c.png",
+      "base_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a gravel path through an olive grove at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/photos/story_3.jpg",
+      "format": "JPEG",
+      "mode": "RGB",
+      "width": 1024,
+      "height": 1536,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-a68b6f4f-0eb9-44bd-9b9b-3735f4d7364c.png",
+      "base_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of olive leaves and white jasmine, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/01_Olive_Ivory/assets/gpt/photos/venue.jpg",
+      "format": "JPEG",
+      "mode": "RGB",
+      "width": 1536,
+      "height": 1024,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "generated_source": "/workspace/generated_images/exec-8b53abd0-4209-4fc7-8c31-afde65ba1762.png",
+      "base_prompt": "A fictional elegant wine-country estate wedding venue at golden hour: a cream stone villa with a terrace, rows of white ceremony chairs on a lawn lined with old olive trees, a simple arch of olive branches and white flowers, soft rolling vineyard hills behind, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.",
+      "transparent_requested": false
+    }
+  ],
+  "final_correction_prompts": {
+    "open_envelope": "Edit reference 1 (the OPEN olive envelope) to align precisely with reference 2 (the CLOSED envelope). KEEP the portrait 1024x1536 canvas, olive cotton paper, ivory lace and pale ivory olive-pattern liner. The lower physical envelope body must match the closed reference's exact box: left x=60, right x=965, body top y=613, bottom y=1286. Shift and adjust ONLY the open envelope's body and connect its fully raised V flap to the body's top edge. The upper tip of the raised flap must have ample transparent top margin. SAME straight angle and same size of body as the closed envelope. Empty pocket, no seal, no card, no words. Remove all exterior shadow/glow/haze, completely transparent exterior pixels. Solid opaque paper inside silhouette. Do not change the stationery design. Target: /workspace/davetiye-maker/collections/01_Olive_Ivory/assets/gpt/parts/envelope_open.png",
+    "landscape_frame_rejected": "Edit this single landscape ivory photo-frame cutout. KEEP the exact thin antique-gold double border, warm ivory cotton paper, rounded corners, bottom-left olive/jasmine decoration, material and light. Keep 1536x1024 landscape canvas. The photo window must be EXACTLY 3:2: an opaque pure-green RGB(0,255,0), alpha 255 rounded rectangle, x=276 to x=1260 (width 984), y=184 to y=840 (height 656). Increase the frame vertically as needed to enclose this window with equal ivory margin; do not make the green panel extra wide. Its CENTER must be UNIFORM FLAT OPAQUE GREEN with NO darker/translucent patch, no shading or paper texture. Only outside the outer frame silhouette is transparent zero-alpha; remove the surrounding glow/haze and shadows. No text, no other objects. Output target: /workspace/davetiye-maker/collections/01_Olive_Ivory/assets/gpt/parts/frame_landscape.png"
+  }
+}
