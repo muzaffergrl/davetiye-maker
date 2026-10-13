@@ -42,7 +42,8 @@ Canva'ya dokunmazsın, kod yazmazsın, kullanıcıdan hiçbir şey istemezsin.
   Önce `envelope_closed`'u üret, diğer ikisinde onu referans ver. Kapak, kapı, cep ayrıca çizilmez; Claude tek
   görselden keser.
 - Dikey 1024×1536 görsellerde önemli her şey ortadaki **%85 genişlikte** (telefon yanları kırpar).
-- Opak olanlar yalnız `bg_page`, `bg_tile` (dikişsiz) ve `web_hero`; diğer parçalar şeffaf.
+- Opak olanlar `bg_page`, `bg_tile` (dikişsiz), `web_hero` ve tasarıma özel zemin ekleri (04 `bg_desk`, 10 `oak_tile`,
+  16 `barnwood`); diğer parçalar şeffaf. Belirleyici olan her parçanın Kaydet satırıdır ("Şeffaf zemin").
 - Kontrol: `python3 tools/kit_check.py collections/<NN_Ad> --paket 5` (pencere isteyen parçada yeşil pencere de
   denetlenir) ve `--paket 2`. Commit: `G2NN: website paketi`.
 

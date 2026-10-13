@@ -2,7 +2,7 @@
 id: G033
 baslik: Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: wf-paketw
 oncelik: 2
 bagimli: [G030, G035]
@@ -24,8 +24,9 @@ PAKET 4'ü `tools/katalog.py` üretecine taşıyıp diğer 19 tasarım için ür
 3. G2NN görev dosyalarını Paket 4'e göre yeniden yaz (G203 hariç: G030 onu karşıladı).
 
 ## Bitti sayılması için
-- [ ] 20 GPT_PROMPTS.md'de Paket 4; kit_check her biri için 19 civarı satır görüyor
-- [ ] `gorev.py kontrol` temiz
+- [x] 19 GPT_PROMPTS.md'de Paket 5 (K22 ile Paket 4'ün yerini aldı; 03 elle yazıldı, dokunulmadı); kit_check `--paket 5`
+  her biri için 22–24 satır, `--paket 2` 5 satır görüyor
+- [x] `gorev.py kontrol` temiz
 
 ## Sonuç
 Yazım adımı (wf-paketw, 2026-10-13). Görsel üretilmedi; `platform/` ve `collections/03_Blush_Garden_Rose/` değişmedi.
@@ -36,7 +37,7 @@ Yazım adımı (wf-paketw, 2026-10-13). Görsel üretilmedi; `platform/` ve `col
   (palette.json, eski GPT_PROMPTS) türetildi. Yeni komutlar: `paket5` (GPT_PROMPTS.md: başlık + PAKET 5 + PAKET 2,
   PAKET 3 aynen korunur; 03'ü reddeder; `--dene`), `gorev5` (G2NN/G4NN; Günlük korunur), `belge` (docs/09);
   `kontrol` artık WEB kayıtlarını da denetler. `yaz` 03'ün dosyasına `--zorla` ile bile dokunmaz.
-- 19 `GPT_PROMPTS.md` üretildi: PAKET 5 = 5 W1 comp + 17 W2 parça (16 ve 18'de +1: `twine_line`, `vellum_overlay`),
+- 19 `GPT_PROMPTS.md` üretildi: PAKET 5 = 5 W1 comp + 17 W2 parça (yazımda 16 ve 18'de +1; gözden geçirmeden sonra ek parçalar aşağıda),
   PAKET 2 = 5 fotoğraf, PAKET 3 = 3 mockup (19/19 bayt bayt korundu). İkinci çalıştırma: 0 değişiklik.
 - `tools/kit_check.py`: `--paket 5`; prompt bloğunda `#00FF00` geçen parça/comp'ta yeşil pencere denetimi
   (mockup_compose yeşil testi + en büyük bölge ≥%0,3). 03'ün gerçek parçalarında doğrulandı (card_small %18,9,
@@ -47,13 +48,32 @@ Yazım adımı (wf-paketw, 2026-10-13). Görsel üretilmedi; `platform/` ve `col
 - Belgeler: `gorevler/roller/gpt-gorsel.md` "Website paketi (Paket 5)", `docs/06_FABRIKA_PLANI.md` §0 paragrafı,
   `docs/09_TASARIM_KATALOGU.md` "Website (K22–K24)" tablosu (`katalog.py belge`).
 - Testler: tools/tests/test_*.py hepsi geçti (yeni `test_parts_prep_paket5.py`, kit_check'e PAKET 5 testi);
-  `gorev.py kontrol` temiz; `katalog.py kontrol` geçti; kit_check `--paket 5`: 04 → 0/22, 16 → 0/23 (dosyalar yok, beklenen).
+  `gorev.py kontrol` temiz; `katalog.py kontrol` geçti; kit_check `--paket 5` (son hâl): 04 → 0/23, 16 → 0/24 (dosyalar yok, beklenen).
 - Test edilmedi: prompt'ların GPT'de gerçek çıktısı; gatefold/kitap/kese/kılıf tiplerinde parts_prep cep kesimi
   (kare V zarf varsayar — G4NN'de tema build adımına not edildi).
-- Entegratöre: `G011` (02 Paket 2, p1) artık G202'nin Paket 2'siyle aynı dosyaları üretir — kapatılması ya da G202'ye
-  katılması önerilir. `gorevler/README.md` §1b'de G2NN/G4NN tanımları (Paket 1 / website HTML) ve `docs/06` §3 tablosu
-  eski; güncellenmesi önerilir (bu görevin yazma alanı dışında).
+- Gözden geçirme (4 bağımsız inceleme, `7e8cc0b`), uygulananlar: 01 kimliği (zeytin yeşili zarf, dantel kenarlı kapak,
+  oval botanik mühür); sarılı kapanışlar (kurdele/sicim) zarfla aynı tuvalde 1:1; dikey cep yerleşimi (11, 12); 04 açık
+  zarf `envelope_closed` düzenlemesi olarak; eksik tasarıma özel parçalar (04 `bg_desk`, 07 `velvet_swag`, 08
+  `frost_overlay`, 10 `oak_tile`, 16 `barnwood`, 20 `wave`); kırağı/yazı/gölge çelişkileri; foto kadrajı ve "same
+  couple" referansı; yeni `katalog.py ozet`, `paket5 --paket3`. Bu turda yazma alanı dışında da değişiklik yapıldı (demo
+  verisi tutarlılığı için): 19 `content.demo.json` (`countdown: true`; 06 tarihi 2027-12-18 / RSVP 2027-11-06; 19 saatleri
+  18:00/19:00/20:30; 15 bölge "D.C."), 01/07/14/17 `DESIGN_BRIEF.md` zarf satırı, `02_Dusty_Blue/website/README.md` notu.
+  `validate_content.py` 20/20 GEÇTİ.
+- Son denetim (2026-10-13): 19 dosyada başlıklar tam olarak PAKET 5 → PAKET 2 → PAKET 3 (eski PAKET 1/4 yok); her birinde
+  5 W1 comp + 17 temel W2 parça (bg_page, bg_tile, envelope_closed, closure, envelope_open, card_small, invitation_card,
+  info_card, frame_portrait, frame_landscape, iki köşe kümesi — çiçekli tasarımlarda 03 gibi `florals_tl/br`, diğerlerinde
+  `decor_tl/br` —, accent_1..3, divider, web_hero) + 5 fotoğraf + 3 mockup; ek parçalar 04, 07, 08, 10, 16 (+2), 18, 20.
+  Şeffaf her parçada gölgesiz/sol üst ışık/gerçek alfa/yazısız cümleleri var; foto pencereli 3 parça ve 3 comp'ta `#00FF00`;
+  parçalarda monogram istenmiyor (mühür merkezleri "EMPTY"). Kalan "shadow" geçişleri yalnız opak zeminlerde doku motifi
+  (05 yaprak, 12 palmiye, 14 dantel gölgesi) — parça gölgesi değil, bırakıldı. `katalog.py paket5`/`gorev5`/`belge` ikinci
+  çalıştırma: 0 fark. 03: `GPT_PROMPTS.md` ve `website/` 3363388'e göre aynı (o tarihten beri 03'teki tek değişiklik
+  G047'nin `parts/frame_landscape.png`'si, bu görev değil). Testler 6/6 geçti. Düzeltilen: `gpt-gorsel.md` opak parça
+  listesi (04/10/16 zemin ekleri), `docs/06` §3 tablosunda G2NN/G4NN satırları.
+- Entegratöre: `G011` (02 Paket 2) G202'nin Paket 2'siyle aynı dosyaları üretiyordu — entegratör onu blokaja aldı (1e5e276).
+  `gorevler/README.md` §1b'de G2NN/G4NN tanımları (Paket 1 / website HTML) hâlâ eski; güncellenmesi önerilir
+  (bu görevin yazma alanı dışında; `docs/06` §3 satırları son denetimde düzeltildi).
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24): video Paket 4 yerine website Paket 5; iş akışı wf-paketw ile yapılıyor (yaz → 4 bağımsız inceleme → düzeltme → son denetim)
+- 2026-10-13 bitti, incelemeye gönderildi

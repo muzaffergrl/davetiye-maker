@@ -37,9 +37,9 @@ Tasarım 02'nin 5 paleti (V02–V06) prompt'larıyla hazır, kapıya kilitli.
 | Adım | Görev | Rol | Çıktı | Bekler |
 |---|---|---|---|---|
 | 1 | G1NN kaynak | claude-kod | HTML sahne kaynağı + ayrı katmanlar + `kit_map.json` + MP4 önizleme | — |
-| 2 | G2NN görsel | gpt-gorsel | Paket 1: doku, dekor, kapanış, çerçeve | — |
+| 2 | G2NN görsel | gpt-gorsel | Paket 5 (website: W1 comp'lar + W2 parçalar) + Paket 2 fotoğraflar (K22–K24, G033; §0) | — |
 | 3 | G3NN Canva video | claude-canva | `kit_build` → Canva video master | 1, 2, G002 |
-| 4 | G4NN website | claude-kod | website HTML kaynağı | pilot G020 |
+| 4 | G4NN website | claude-kod | platform teması `platform/themes/<tema>/` (K24; §0) | 2, G038, G046 |
 | 5 | G5NN baskı | claude-kod | 5×7 davetiye + story/kare kaynağı | pilot G022 |
 | 6 | G6NN Canva set | claude-canva | Canva website + PDF + story/kare + export | 3, 4, 5, pilot G021/G023 |
 | 7 | G7NN metin | claude-metin | kılavuz + Etsy ilan metni | pilot G024/G025 |
