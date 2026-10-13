@@ -2,8 +2,8 @@
 id: G052
 baslik: Tarayıcı denetimlerini her temaya açmak — theme-check / g051-browser / final-smoke `--theme <id>` (G4NN'den önce)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-hazirlik
 oncelik: 2
 bagimli: [G046, G051]
 yazar: [platform/scripts/theme-check.cjs, platform/tests/g051-browser.ts, platform/tests/final-smoke.ts, platform/scripts/lib/]
@@ -45,3 +45,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 açıldı: G046 incelemesi (docs/11 §14 #3; G4NN bitti tanımı bu araç olmadan karşılanamıyor)
+- 2026-10-13 alindi: wf-hazirlik

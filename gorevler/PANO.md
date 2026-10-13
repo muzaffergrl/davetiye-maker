@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 40 · alindi 1 · inceleme 2 · blokaj 296 · bitti 24 · toplam 363
+Özet: hazir 38 · alindi 5 · inceleme 0 · blokaj 296 · bitti 26 · toplam 365
 
 ## claude-canva
 
@@ -159,11 +159,12 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (83)**
+**Üzerinde çalışılan / incelemede / blokaj (84)**
 
+- `G054` alindi · wf-hazirlik — tools/tema_build.py ortak tema yardımcıları + kit_check zarf hiza denetimi (docs/11 §14 #1–#2)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G046` inceleme · wf-tema — Tema standardı belgesi + GPT website parça listesi (Paket W)
-- `G051` inceleme · wf-tema — Platform özellikleri — Takvime ekle, SSS metinleri, RSVP özel sorusu (pazar standardı, docs/13 §7)
+- `G052` alindi · wf-hazirlik — Tarayıcı denetimlerini her temaya açmak — theme-check / g051-browser / final-smoke `--theme <id>` (G4NN'den önce)
+- `G055` alindi · wf-hazirlik — Platform cilası — og:image + favicon, Vercel paket izleme, alıcı fotoğrafı srcset, içerik uzunluk sınırları (docs/11 §14 #6, #7, #9, #10)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -245,7 +246,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 20 · Biten: 16
+Bağımlılık bekleyen: 19 · Biten: 18
 
 ## claude-metin
 
@@ -253,9 +254,10 @@ Bağımlılık bekleyen: 20 · Biten: 16
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (21)**
+**Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
+- `G053` alindi · wf-hazirlik — Demo içerik kayıtları — 01'e tam adlar, 01/02/04–20'ye `story` (intro + 3 başlık)
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
@@ -277,7 +279,7 @@ Bağımlılık bekleyen: 20 · Biten: 16
 - `G720` blokaj · - — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
 - `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
-Bağımlılık bekleyen: 1 · Biten: 2
+Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-qa
 

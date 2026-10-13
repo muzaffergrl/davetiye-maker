@@ -2,8 +2,8 @@
 id: G053
 baslik: Demo içerik kayıtları — 01'e tam adlar, 01/02/04–20'ye `story` (intro + 3 başlık)
 rol: claude-metin
-durum: hazir
-alan:
+durum: alindi
+alan: wf-hazirlik
 oncelik: 2
 bagimli: [G046]
 yazar: [collections/01_Olive_Ivory/content.demo.json, collections/02_Dusty_Blue/content.demo.json, collections/04_Vintage_Airmail/content.demo.json, collections/05_Lemon_Mediterranean/content.demo.json, collections/06_Art_Deco_Noir/content.demo.json, collections/07_Burgundy_Velvet/content.demo.json, collections/08_Winter_Evergreen/content.demo.json, collections/09_Lavender_Provence/content.demo.json, collections/10_Tuscan_Vineyard/content.demo.json, collections/11_Boho_Pampas/content.demo.json, collections/12_Tropical_Destination/content.demo.json, collections/13_Enchanted_Forest/content.demo.json, collections/14_Ivory_Lace_Pearl/content.demo.json, collections/15_Cherry_Blossom/content.demo.json, collections/16_Sunflower_Rustic/content.demo.json, collections/17_Emerald_Gold_Estate/content.demo.json, collections/18_Wildflower_Vellum/content.demo.json, collections/19_Midnight_Garden/content.demo.json, collections/20_Coastal_Seaside/content.demo.json]
@@ -41,3 +41,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 açıldı: G046 incelemesi (01 `full_name` null; docs/11 §14 #5 story)
+- 2026-10-13 alindi: wf-hazirlik

@@ -2,7 +2,7 @@
 id: G046
 baslik: Tema standardı belgesi + GPT website parça listesi (Paket W)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-tema
 oncelik: 2
 bagimli: [G038]
@@ -84,3 +84,4 @@ web_hero, ortak talimat; 19 `GPT_PROMPTS.md` yeniden üretildi)* (`tools/katalog
 - 2026-10-13 alindi: wf-tema
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 inceleme bulguları düzeltildi (wf-fix-tema): docs/11 G051 işaretleri zorunlu (§3.2/§3.3/§3.5, test 18–22, §15), öncelik satırı (görev metni < docs/11, G035 örnek değil), tam ad yedeği, guest_policy yok + mühür monogramı kararı, tipe göre hiza kenarları, sahne kutusu/boyu formülü + kapı/kitap ölçeği, kapanış çapası, kapakla taşınan kapanış, MOTION.accents biçimi, comp öğe haritası + qa kapısı, CSS çerçeve yasağı, 3 dilim/≥38vw, zorlama kaydı, saf yardımcılar, parts_prep cep uyarısı, fotoğraflı ölçüm; katalog: G4NN şablonu (yazar + test/previews, bağımlı G052, img_src/ölü link/03 kopyası kalktı) → 19 görev, 4 prompt düzeltmesi + 01 closure_sprig + 04 kesim kenarı → 19 GPT_PROMPTS.md; açıldı G052 (theme-check --theme), G053 (demo kayıtları); G201'e not. Ürün kararı açık: şema/panel uzunluk sınırları (docs/11 §14 #10).
+- 2026-10-13 entegratör onayladı
