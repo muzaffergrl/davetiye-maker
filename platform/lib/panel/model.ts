@@ -2,7 +2,7 @@
 // No Node imports here; this file is bundled into the client.
 
 import type { ContentRecord, Partner } from '../content/types.ts';
-import type { ValidationIssue } from '../content/validate.ts';
+import { CONTENT_LIMITS, type ValidationIssue } from '../content/validate.ts';
 
 export type SiteStatus = 'draft' | 'published';
 
@@ -301,6 +301,11 @@ function valueAt(content: unknown, path: string): unknown {
 export function panelIssues(issues: readonly ValidationIssue[], content: unknown): ValidationIssue[] {
   return issues.map((issue) => {
     const value = valueAt(content, issue.path);
+    if (issue.code === 'schema_max_items' && issue.path === 'schedule' && Array.isArray(value)) {
+      const max = CONTENT_LIMITS.scheduleItems;
+      const over = value.length - max;
+      return { ...issue, message: `Your website shows up to ${max} events. Please remove ${over} ${over === 1 ? 'event' : 'events'}.` };
+    }
     const empty = value === '' || value === undefined || value === null;
     if (!empty) return issue;
     if (issue.code === 'schema_pattern') return { ...issue, message: 'Please enter a time.' };

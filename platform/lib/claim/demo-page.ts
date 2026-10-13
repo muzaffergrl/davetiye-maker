@@ -7,6 +7,7 @@
 // (frame-ancestors 'self': /start embeds it in an iframe). Internal and unknown themes -> 404.
 
 import { calendarEvent } from '../calendar.ts';
+import { publicOrigin } from '../panel/http.ts';
 import { icsResponse } from '../site/ics.ts';
 import { siteCsp, isSitePage } from '../site/render.ts';
 import { renderTemplate } from '../theme/engine.ts';
@@ -56,7 +57,8 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       slug: demoBase(theme.id).slice(1),
       variant: null,
       previewKey: DEMO_PREVIEW_MARK,
-      origin: new URL(req.url).origin,
+      origin: publicOrigin(req.headers, new URL(req.url).origin),
+      share: theme.loaded.share,
     });
     if (disabled) return demoNotFound();
     return new Response(html, {

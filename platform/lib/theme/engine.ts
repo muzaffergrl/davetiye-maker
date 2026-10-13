@@ -16,6 +16,9 @@
 //   data-calendar="ics|google"     <a> href = /<slug>/event.ics or a Google Calendar link (lib/calendar.ts);
 //                                  removed when the content has no readable date
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.
+// Buyer photos with size variants (lib/photo-variants.ts) get srcset (+ the template's sizes).
+// Share image and tab icon (G055): when the theme has img/og-1200x630.jpg / img/favicon.png
+// (lib/theme/share.ts), the engine writes og:image (absolute URL) + twitter:card and <link rel="icon">.
 // The page also receives <script type="application/json" id="site-data"> for theme JS: only what
 // theme JS needs (slug, page map, derived countdown target …), never the content record itself, so
 // sections the couple switched off do not leak through the page source. HTML comments of the
@@ -27,6 +30,9 @@ import { Text, hasChildren, isTag, type AnyNode, type Element } from 'domhandler
 import { calendarEvent, googleCalendarUrl, type CalendarEvent } from '../calendar.ts';
 import { buildView, fieldKind, getPath } from '../content/derive.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
+import { photoCandidates } from '../photo-variants.ts';
+import type { ThemeShareFiles } from './share.ts';
+import { OG_IMAGE_SIZE } from './share.ts';
 import type { PageName, ThemeManifest } from './theme.ts';
 import { cssUrl, isRelativeReference, safeLinkUrl, safePhotoUrl, splitSuffix, themeAssetUrl } from './urls.ts';
 
@@ -39,8 +45,13 @@ export interface RenderOptions {
   variant?: string | null;
   /** When set, links between theme pages keep ?preview=<key> so draft navigation works. */
   previewKey?: string | null;
-  /** Absolute origin (https://example.com) used for og:image; optional. */
+  /**
+   * Absolute public origin (https://example.com; PLATFORM_PUBLIC_URL or the request's) for og:image and the
+   * calendar's website link. Without it no og:image is written (it must be an absolute URL).
+   */
   origin?: string | null;
+  /** Share image / tab icon of the theme (LoadedTheme.share). Absent: no og:image, no icon tags. */
+  share?: ThemeShareFiles | null;
 }
 
 export interface RenderResult {
@@ -91,6 +102,43 @@ function isPresent(v: unknown): boolean {
   if (typeof v === 'string') return v.trim() !== '';
   if (Array.isArray(v)) return v.length > 0;
   return true;
+}
+
+/**
+ * og:image (+ type, size, twitter:card) and <link rel="icon"> for the theme's share files, after the last
+ * <meta> of <head>. A tag the template already has is left as it is (no duplicates). og:image needs an
+ * absolute URL, so it is written only with an origin; the icon is a root-relative link.
+ */
+function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShareFiles | null, origin: string | null): void {
+  const head = $('head').first();
+  if (!share || !head.length) return;
+  const tags: AnyNode[] = [];
+  const meta = (key: 'property' | 'name', name: string, content: string) => {
+    const el = $('<meta>');
+    el.attr(key, name);
+    el.attr('content', content);
+    tags.push(el[0]);
+  };
+  const ogUrl = share.ogImage ? themeAssetUrl(themeId, share.ogImage) : null;
+  if (ogUrl && origin && !$('meta[property="og:image"], meta[property="og:image:url"]').length) {
+    meta('property', 'og:image', `${origin}${ogUrl}`);
+    meta('property', 'og:image:type', 'image/jpeg');
+    meta('property', 'og:image:width', String(OG_IMAGE_SIZE.width));
+    meta('property', 'og:image:height', String(OG_IMAGE_SIZE.height));
+    if (!$('meta[name="twitter:card"]').length) meta('name', 'twitter:card', 'summary_large_image');
+  }
+  const iconUrl = share.icon ? themeAssetUrl(themeId, share.icon) : null;
+  if (iconUrl && !$('link[rel~="icon"]').length) {
+    const link = $('<link>');
+    link.attr('rel', 'icon');
+    link.attr('type', 'image/png');
+    link.attr('href', iconUrl);
+    tags.push(link[0]);
+  }
+  if (!tags.length) return;
+  const lastMeta = head.children('meta').last();
+  if (lastMeta.length) lastMeta.after(tags);
+  else head.prepend(tags);
 }
 
 export function renderTemplate(opts: RenderOptions): RenderResult {
@@ -184,24 +232,36 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     if (slotEl && slotEl !== el && isTag(slotEl)) slotEl.attribs['data-photo-state'] = state;
   };
 
-  /** Puts a content photo on an element: <img> src (placeholder srcset/<source> removed) or --photo CSS variable. */
+  // Platform photos (/media/…) are only served for published content, or with the preview key
+  // (lib/site/static.ts): a draft preview passes the key on.
+  const withPhotoKey = (url: string): string =>
+    opts.previewKey && url.startsWith('/media/') ? `${url}${url.includes('?') ? '&' : '?'}preview=${encodeURIComponent(opts.previewKey)}` : url;
+
+  /**
+   * Puts a content photo on an element: <img> src (placeholder srcset/<source> removed) or --photo CSS variable.
+   * A photo stored with size variants (G055) gets srcset = variants + photo; sizes = the template's (the slot's
+   * CSS width, written for the placeholder); without one "auto, 100vw" on a lazy image (the browser uses the laid-out
+   * width; one without `auto` support reads 100vw), else "100vw". 100vw never picks a file larger than the photo
+   * itself, so a template without sizes downloads at most what it did before G055.
+   */
   const applyPhotoValue = (el: Element, raw: unknown, label: string) => {
     const safe = safePhotoUrl(raw);
     if (raw && !safe) warn(`photo "${label}" has an unsafe URL and was ignored`);
-    // Platform photos (/media/…) are only served for published content, or with the preview key
-    // (lib/site/static.ts): a draft preview passes the key on.
-    const src =
-      safe && opts.previewKey && safe.startsWith('/media/')
-        ? `${safe}${safe.includes('?') ? '&' : '?'}preview=${encodeURIComponent(opts.previewKey)}`
-        : safe;
+    const src = safe ? withPhotoKey(safe) : null;
     if (!src) {
       markPhotoState(el, 'placeholder');
       return;
     }
     if (el.name === 'img') {
       el.attribs.src = src;
-      delete el.attribs.srcset;
-      delete el.attribs.sizes;
+      const candidates = safe ? photoCandidates(safe) : null;
+      if (candidates && candidates.length > 1) {
+        el.attribs.srcset = candidates.map((c) => `${withPhotoKey(c.url)} ${c.width}w`).join(', ');
+        el.attribs.sizes = el.attribs.sizes?.trim() || (el.attribs.loading === 'lazy' ? 'auto, 100vw' : '100vw');
+      } else {
+        delete el.attribs.srcset;
+        delete el.attribs.sizes;
+      }
       const parent = el.parent;
       if (parent && isTag(parent) && parent.name === 'picture') $(parent).children('source').remove();
     } else {
@@ -468,6 +528,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       setOrDrop(el, 'content', out && opts.origin ? `${opts.origin}${out}` : out);
     }
   });
+
+  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null);
 
   // Theme inline scripts are trusted template code (content can never create a <script>:
   // every inserted value is text). Their hashes go into the page CSP.

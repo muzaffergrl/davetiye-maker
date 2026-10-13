@@ -7,6 +7,12 @@ Kullanım:
 Çıktının sonunda, tüm formatlara (video, website, PDF) birebir kopyalanacak
 "canonical" metinler basılır. Formatlar kendiliğinden senkronize değildir;
 her format bu metinlerle karşılaştırılmalıdır.
+
+Uzunluk/sayı sınırları şemadadır ve jsonschema ile denetlenir (G055: isimler ≤ 40, isim satırı
+name_display ≤ 85, mekân adı ≤ 80, program ≤ 10 satır; SSS ve RSVP soruları G051). Karakter sayısı
+Python len() ile (kod noktası); platform/lib/content/validate.ts aynı sayar (geçti/kaldı eşliği:
+platform/tests/content.test.ts, platform/tests/g055-limits.test.ts). jsonschema kurulu değilse şema —
+ve sınırlar — denetlenmez (uyarı basılır).
 """
 import json
 import re

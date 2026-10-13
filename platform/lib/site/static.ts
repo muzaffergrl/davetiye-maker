@@ -4,6 +4,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { getDataAdapter } from '../data/index.ts';
 import type { SiteRecord } from '../data/types.ts';
+import { photoCandidates } from '../photo-variants.ts';
 import { canPreview } from '../sites.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
 
@@ -85,10 +86,17 @@ function mediaUrls(content: unknown): string[] {
     .filter((v): v is string => typeof v === 'string' && v !== '');
 }
 
-/** True when the published content of a published site uses the file `/media/<rel>`. */
+/**
+ * True when the published content of a published site uses the file `/media/<rel>`: the photo itself or
+ * one of its size variants (G055, lib/photo-variants.ts — a variant is public exactly when its photo is).
+ */
 function publiclyUsed(site: SiteRecord, rel: string): boolean {
   if (site.status !== 'published' || !site.publishedContent) return false;
-  return mediaUrls(site.publishedContent).some((u) => u.split(/[?#]/)[0].endsWith(`/media/${rel}`));
+  const want = `/media/${rel}`;
+  return mediaUrls(site.publishedContent).some((u) => {
+    const url = u.split(/[?#]/)[0];
+    return url.endsWith(want) || Boolean(photoCandidates(url)?.some((c) => c.url === want));
+  });
 }
 
 /** Short public cache: a photo taken offline / replaced stops being served within minutes. */

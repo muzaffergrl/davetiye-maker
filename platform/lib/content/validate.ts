@@ -46,10 +46,17 @@ export const PLATFORM_PROVIDED_URLS = ['website', 'rsvp_form'] as const;
 /** Fictional / third-party targets that appeared in older visuals (same list as the Python tool). */
 export const FORBIDDEN_STRINGS = ['averyandjordan.com', '1234 Celebration Lane'];
 
-// Limits of the G051 lists, read from the schema (single source; the panel uses them for its inputs).
+// Limits read from the schema (single source; the panel and /start use them for their inputs).
+// G055 (docs/11 §14 #10, default decision of the integrator, reversible): names <= 40, the names line <= 85
+// (two names + " & " / " and "), venue name <= 80, schedule <= 10 rows. G051 lists as before.
 const P = CONTENT_SCHEMA.properties;
 const QUESTION = P.rsvp.properties.questions.items.properties;
 export const CONTENT_LIMITS = {
+  name: P.partners.items.properties.display_name.maxLength,
+  fullName: P.partners.items.properties.full_name.maxLength,
+  nameDisplay: P.name_display.maxLength,
+  venueName: P.venue.properties.name.maxLength,
+  scheduleItems: P.schedule.maxItems,
   faqItems: P.faq.maxItems,
   faqQuestion: P.faq.items.properties.q.maxLength,
   faqAnswer: P.faq.items.properties.a.maxLength,

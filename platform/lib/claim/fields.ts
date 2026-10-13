@@ -8,12 +8,14 @@
 // format, change ORDER_NUMBER_MIN/MAX here (tests in tests/claim.test.ts). Verification against
 // Etsy is a separate, optional step (lib/claim/verify.ts, off by default).
 
+import { CONTENT_LIMITS } from '../content/validate.ts';
 import { isReservedSlug, isValidSlugFormat, slugify } from '../slug.ts';
 
 export const ORDER_NUMBER_MIN = 8;
 export const ORDER_NUMBER_MAX = 12;
 export const EMAIL_MAX = 254;
-export const NAME_MAX = 40;
+/** = the content schema's name limit (partners[].display_name / full_name, G055): the draft is valid as made. */
+export const NAME_MAX: number = CONTENT_LIMITS.name;
 /** Used when the names give no usable letters (e.g. only non-Latin script). */
 export const FALLBACK_SLUG = 'our-wedding';
 
@@ -25,7 +27,7 @@ export const FIELD_MESSAGES = {
   emailMissing: 'Please enter your email address.',
   emailFormat: 'Please enter a valid email address, like name@example.com.',
   nameMissing: 'Please enter a first name.',
-  nameTooLong: `Please keep each name under ${NAME_MAX + 1} characters.`,
+  nameTooLong: `Please keep each name to ${NAME_MAX} characters or fewer.`,
   slugMissing: 'Please choose a website address.',
   slugFormat: 'Use 3 to 48 lowercase letters, numbers and single hyphens.',
   slugReserved: 'This address is reserved. Please choose another one.',
@@ -79,7 +81,7 @@ export function cleanName(input: unknown): string {
 export function nameError(input: unknown): string | null {
   const v = cleanName(input);
   if (!v || !/\p{L}/u.test(v)) return FIELD_MESSAGES.nameMissing;
-  if (v.length > NAME_MAX) return FIELD_MESSAGES.nameTooLong;
+  if ([...v].length > NAME_MAX) return FIELD_MESSAGES.nameTooLong; // characters, as the schema counts them
   return null;
 }
 

@@ -105,6 +105,13 @@ export interface PhotoInput {
   bytes: Uint8Array;
   /** Browser-reported type; informational only, the bytes decide. */
   contentType?: string | null;
+  /**
+   * Width of `bytes` in px, when known (re-encoded panel uploads, G055). With it the file is stored as
+   * "<random>-<width>w.<ext>" next to its `variants` (lib/photo-variants.ts); without it as "<random>.<ext>".
+   */
+  width?: number | null;
+  /** Smaller copies of the same photo: exactly variantWidths(width), same image type. Requires `width`. */
+  variants?: ReadonlyArray<{ width: number; bytes: Uint8Array }>;
 }
 
 export interface SavedPhoto {
@@ -114,6 +121,8 @@ export interface SavedPhoto {
   path: string;
   contentType: string;
   size: number;
+  /** Stored variants (ascending width); empty when none were given. */
+  variants: Array<{ width: number; url: string; path: string; size: number }>;
 }
 
 export interface StoredFile {
@@ -154,7 +163,10 @@ export interface DataAdapter {
   deleteRsvps(siteId: string, ids: readonly string[]): Promise<number>;
   /** Sets or clears `held` on these replies of the site. Returns how many changed. */
   setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number>;
-  /** Validates the image (assertImageUpload) and stores it. Throws UploadRejectedError / NotFoundError. */
+  /**
+   * Validates the image and each variant (assertImageUpload, checkPhotoSet) and stores them (variants first,
+   * the photo last). Throws UploadRejectedError / NotFoundError.
+   */
   savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto>;
   /** Only adapters that serve photos through /media/... implement this (local, blob). */
   readPhoto?(path: string): Promise<StoredFile | null>;

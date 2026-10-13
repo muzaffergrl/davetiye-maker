@@ -110,7 +110,13 @@ export async function uploadPhoto(req: Request, slug: string): Promise<Response>
       throw e;
     }
     const photo = await preparePhoto(bytes, slot.ratio);
-    const saved = await getDataAdapter().savePhoto(auth.site.id, { bytes: photo.bytes, contentType: photo.contentType });
+    // With a known width the photo is stored with its 640/1280 px variants (srcset on the site, G055).
+    const saved = await getDataAdapter().savePhoto(
+      auth.site.id,
+      photo.width === null
+        ? { bytes: photo.bytes, contentType: photo.contentType }
+        : { bytes: photo.bytes, contentType: photo.contentType, width: photo.width, variants: photo.variants },
+    );
     return json(200, {
       ok: true,
       slot: slot.key,
@@ -120,6 +126,7 @@ export async function uploadPhoto(req: Request, slug: string): Promise<Response>
       size: saved.size,
       width: photo.width,
       height: photo.height,
+      variants: saved.variants.map((v) => ({ width: v.width, url: v.url, size: v.size })),
     });
   } catch (e) {
     if (e instanceof UploadRejectedError) {

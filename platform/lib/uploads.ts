@@ -2,6 +2,8 @@
 // The type is detected from the file's first bytes; the browser's MIME type is not trusted.
 // SVG, HTML, GIF, HEIC and anything else are rejected.
 
+import { photoFileName, variantWidths } from './photo-variants.ts';
+
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 
 export interface ImageType {
@@ -53,4 +55,44 @@ export function assertImageUpload(bytes: Uint8Array, maxBytes = MAX_UPLOAD_BYTES
   const type = detectImageType(bytes);
   if (!type) throw new UploadRejectedError('unsupported_type', 'Please upload a JPG, PNG, WebP or AVIF photo.');
   return type;
+}
+
+/** One file of a stored photo set (lib/photo-variants.ts names). */
+export interface PhotoSetFile {
+  name: string;
+  bytes: Uint8Array;
+  width: number | null;
+}
+
+/**
+ * Checks a photo with its size variants (G055) and names the files under one random `base`:
+ * with a width: "<base>-<w>w.<ext>" for each variant, then the photo; without: "<base>.<ext>".
+ * Variants must be exactly variantWidths(width), each a supported image of the photo's type.
+ * Returns the photo's type and the files in write order (variants first: the photo's URL only
+ * goes into the content after every file is stored).
+ */
+export function photoSetFiles(
+  photo: { bytes: Uint8Array; width?: number | null; variants?: ReadonlyArray<{ width: number; bytes: Uint8Array }> },
+  base: string,
+): { type: ImageType; files: PhotoSetFile[] } {
+  const type = assertImageUpload(photo.bytes);
+  const variants = photo.variants ?? [];
+  const width = photo.width ?? null;
+  if (width === null) {
+    if (variants.length) throw new Error('photo variants need the width of the photo');
+    return { type, files: [{ name: `${base}.${type.ext}`, bytes: photo.bytes, width: null }] };
+  }
+  if (!Number.isInteger(width) || width < 1 || width > 99_999) throw new Error(`invalid photo width ${width}`);
+  const expected = variantWidths(width);
+  const given = variants.map((v) => v.width);
+  if (given.length !== expected.length || given.some((w, i) => w !== expected[i])) {
+    throw new Error(`a photo ${width} px wide needs variants [${expected.join(', ')}], got [${given.join(', ')}]`);
+  }
+  const files: PhotoSetFile[] = variants.map((v) => {
+    const t = assertImageUpload(v.bytes);
+    if (t.ext !== type.ext) throw new UploadRejectedError('unsupported_type', 'A photo size is not the same image type as the photo.');
+    return { name: photoFileName(base, v.width, type.ext), bytes: v.bytes, width: v.width };
+  });
+  files.push({ name: photoFileName(base, width, type.ext), bytes: photo.bytes, width });
+  return { type, files };
 }

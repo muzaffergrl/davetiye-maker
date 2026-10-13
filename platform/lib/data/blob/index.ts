@@ -6,6 +6,7 @@
 //   orders/<ref>.json                        {"id"}  same rule -> one site per order reference
 //   rsvps/<siteId>/<ms>-<seq>-<rsvpId>.json  one file per RSVP (no read-modify-write, no contention)
 //   media/<siteId>/<random>.<ext>            photos; the app serves them at /media/<siteId>/<file> (readPhoto)
+//                                            (G055: <random>-<width>w.<ext> + its 640/1280 px variants)
 //
 // Consistency:
 //  - Index files (slug, order) are written first with allowOverwrite:false; the SDK refuses the
@@ -48,7 +49,7 @@ import {
   type PutCommandOptions,
 } from '@vercel/blob';
 import type { ContentRecord } from '../../content/types.ts';
-import { assertImageUpload, IMAGE_TYPES } from '../../uploads.ts';
+import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
   OrderRefTakenError,
@@ -124,7 +125,8 @@ const PHOTO_CACHE_SECONDS = 365 * 24 * 60 * 60;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const SLUG_RE = /^[a-z0-9-]{1,64}$/;
 const SIMPLE_REF_RE = /^[A-Za-z0-9_-]{1,64}$/;
-const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32})\.(jpg|png|webp|avif)$/;
+/** <site>/<random>.<ext> (older uploads) or <site>/<random>-<width>w.<ext> (photo and size variants, G055). */
+const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32}(?:-[1-9]\d{1,4}w)?)\.(jpg|png|webp|avif)$/;
 const READ_CONCURRENCY = 8;
 const DELETE_BATCH = 100;
 
@@ -527,20 +529,29 @@ export class BlobAdapter implements DataAdapter {
   }
 
   async savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto> {
-    const type = assertImageUpload(photo.bytes);
+    const { type, files } = photoSetFiles(photo, randomBytes(16).toString('hex'));
     if (!(await this.getSiteById(siteId))) throw new NotFoundError(`site ${siteId}`);
-    const file = `${randomBytes(16).toString('hex')}.${type.ext}`;
-    const bytes = photo.bytes;
-    await this.#client.put(`${this.mediaPrefix(siteId)}${file}`, Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength), {
-      access: ACCESS,
-      token: this.#token,
+    // Variants first, the photo last (its URL is what the content will point to).
+    for (const f of files) {
+      const bytes = f.bytes;
+      await this.#client.put(`${this.mediaPrefix(siteId)}${f.name}`, Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength), {
+        access: ACCESS,
+        token: this.#token,
+        contentType: type.contentType,
+        addRandomSuffix: false,
+        allowOverwrite: false,
+        cacheControlMaxAge: PHOTO_CACHE_SECONDS,
+      });
+    }
+    const stored = files.map((f) => ({ width: f.width, rel: `${siteId}/${f.name}`, size: f.bytes.length }));
+    const main = stored[stored.length - 1];
+    return {
+      url: `${this.mediaBaseUrl}/${main.rel}`,
+      path: main.rel,
       contentType: type.contentType,
-      addRandomSuffix: false,
-      allowOverwrite: false,
-      cacheControlMaxAge: PHOTO_CACHE_SECONDS,
-    });
-    const rel = `${siteId}/${file}`;
-    return { url: `${this.mediaBaseUrl}/${rel}`, path: rel, contentType: type.contentType, size: bytes.length };
+      size: main.size,
+      variants: stored.slice(0, -1).map((v) => ({ width: v.width!, url: `${this.mediaBaseUrl}/${v.rel}`, path: v.rel, size: v.size })),
+    };
   }
 
   async readPhoto(rel: string): Promise<StoredFile | null> {

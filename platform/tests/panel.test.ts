@@ -357,7 +357,9 @@ test('upload: a JPEG is re-encoded (EXIF removed), cropped to the slot ratio and
   assert.equal(r.data.slot, 'hero');
   assert.equal(r.data.source, 'media.hero_portrait');
   assert.equal(r.data.contentType, 'image/jpeg');
-  assert.match(r.data.url, new RegExp(`^/media/${site.id}/[0-9a-f]{32}\\.jpg$`));
+  // G055: the photo's width is in its name, its 640 px variant is stored next to it (720 < 1280: no 1280 variant).
+  assert.match(r.data.url, new RegExp(`^/media/${site.id}/[0-9a-f]{32}-720w\\.jpg$`));
+  assert.deepEqual(r.data.variants.map((v: { width: number; url: string }) => [v.width, v.url]), [[640, r.data.url.replace('-720w.', '-640w.')]]);
   assert.equal(r.data.width / r.data.height, 0.8); // 4/5 slot: 1200x900 -> 720x900
   const segments = r.data.url.replace('/media/', '').split('/');
   // Not published yet: only the buyer's own views (preview key) get the photo.

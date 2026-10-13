@@ -16,6 +16,12 @@ export const MAX_DRAFT_BYTES = 64 * 1024;
 /** Schema issue codes that mean "not shaped like a content record" (refused) rather than "not finished yet". */
 const STRUCTURAL_CODES = new Set(['schema_type', 'schema_unknown_field', 'schema_required', 'schema_enum', 'schema_max_items', 'schema_min_items']);
 
+/**
+ * Buyer-facing list limits (G055): a draft over them is still saved (a site made before the limit, or an
+ * older panel, must not get stuck on "could not be saved"); it is an error that blocks publishing only.
+ */
+const SOFT_LIST_LIMITS = new Set(['schedule']);
+
 /** Paths that keep their stored value whatever the panel sends. */
 const LOCKED_FIELDS = ['record_kind', 'event_type'] as const;
 
@@ -42,7 +48,9 @@ export function prepareDraft(stored: ContentRecord, incoming: unknown): ContentR
   }
   const draft = structuredClone(incoming) as Record<string, unknown>;
   for (const key of LOCKED_FIELDS) draft[key] = (stored as unknown as Record<string, unknown>)[key];
-  const structural = schemaIssues(draft).filter((i) => STRUCTURAL_CODES.has(i.code));
+  const structural = schemaIssues(draft).filter(
+    (i) => STRUCTURAL_CODES.has(i.code) && !(i.code === 'schema_max_items' && SOFT_LIST_LIMITS.has(i.path)),
+  );
   if (structural.length) throw new DraftShapeError(structural);
   return draft as unknown as ContentRecord;
 }

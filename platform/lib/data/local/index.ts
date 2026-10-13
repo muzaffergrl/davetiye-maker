@@ -3,7 +3,7 @@
 //   <dir>/sites/<id>.json        SiteRecord
 //   <dir>/slugs/<slug>.json      {"id": "<id>"}  (created with O_EXCL -> unique slugs)
 //   <dir>/rsvps/<siteId>.json    RsvpRecord[]
-//   <dir>/uploads/<siteId>/<random>.<ext>
+//   <dir>/uploads/<siteId>/<random>.<ext>          (or <random>-<width>w.<ext> + size variants, G055)
 //
 // Writes are atomic (temp file + rename) and serialised per record inside one process.
 // Not meant for multiple server processes sharing one folder.
@@ -12,7 +12,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { randomBytes, randomUUID } from 'node:crypto';
 import type { ContentRecord } from '../../content/types.ts';
-import { assertImageUpload, IMAGE_TYPES } from '../../uploads.ts';
+import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
   SlugTakenError,
@@ -32,7 +32,8 @@ import {
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const SLUG_FILE_RE = /^[a-z0-9-]{1,64}$/;
-const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32})\.(jpg|png|webp|avif)$/;
+/** <site>/<random>.<ext> (older uploads) or <site>/<random>-<width>w.<ext> (photo and size variants, G055). */
+const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32}(?:-[1-9]\d{1,4}w)?)\.(jpg|png|webp|avif)$/;
 
 export class LocalAdapter implements DataAdapter {
   readonly kind = 'local' as const;
@@ -261,14 +262,21 @@ export class LocalAdapter implements DataAdapter {
   }
 
   async savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto> {
-    const type = assertImageUpload(photo.bytes);
+    const { type, files } = photoSetFiles(photo, randomBytes(16).toString('hex'));
     if (!(await this.getSiteById(siteId))) throw new NotFoundError(`site ${siteId}`);
-    const file = `${randomBytes(16).toString('hex')}.${type.ext}`;
     const dir = this.uploadDir(siteId);
     await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(path.join(/*turbopackIgnore: true*/ dir, file), photo.bytes, { flag: 'wx' });
-    const rel = `${siteId}/${file}`;
-    return { url: `${this.mediaBaseUrl}/${rel}`, path: rel, contentType: type.contentType, size: photo.bytes.length };
+    // Variants first, the photo last (its URL is what the content will point to).
+    for (const f of files) await fs.writeFile(path.join(/*turbopackIgnore: true*/ dir, f.name), f.bytes, { flag: 'wx' });
+    const stored = files.map((f) => ({ width: f.width, rel: `${siteId}/${f.name}`, size: f.bytes.length }));
+    const main = stored[stored.length - 1];
+    return {
+      url: `${this.mediaBaseUrl}/${main.rel}`,
+      path: main.rel,
+      contentType: type.contentType,
+      size: main.size,
+      variants: stored.slice(0, -1).map((v) => ({ width: v.width!, url: `${this.mediaBaseUrl}/${v.rel}`, path: v.rel, size: v.size })),
+    };
   }
 
   async readPhoto(rel: string): Promise<StoredFile | null> {

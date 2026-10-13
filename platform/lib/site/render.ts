@@ -3,6 +3,7 @@
 // visible with ?preview=<previewKey>; everything else is a plain 404.
 
 import { getDataAdapter } from '../data/index.ts';
+import { publicOrigin } from '../panel/http.ts';
 import { canPreview } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { renderTemplate } from '../theme/engine.ts';
@@ -105,7 +106,9 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
       slug,
       variant: site.variant,
       previewKey: preview ? previewParam : null,
-      origin: url.origin,
+      // og:image and the calendar link need the public address (PLATFORM_PUBLIC_URL, else the request's host).
+      origin: publicOrigin(req.headers, url.origin),
+      share: theme.share,
     });
     if (warnings.length && process.env.NODE_ENV !== 'production') {
       console.warn(`[theme ${theme.manifest.id}/${page}] ${warnings.join(' | ')}`);

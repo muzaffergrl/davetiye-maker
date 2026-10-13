@@ -4,13 +4,25 @@ import type { NextConfig } from 'next';
 // traced into the serverless bundles explicitly. Keys are picomatch globs over route paths, so
 // the brackets of dynamic segments are escaped. Every route that reads a theme is listed (the
 // automatic tracing finds theme.json files only for some of them); `npm run build` runs
-// scripts/trace-check.cjs afterwards and fails when one of these bundles misses theme pages.
-const themeFiles = ['./themes/**/*'];
+// scripts/trace-check.cjs afterwards and fails when a bundle misses what it needs or carries
+// what it must not.
+//
+// G055 (docs/11 §14 #7): theme IMAGES (and CSS/JS) go only into the theme asset route, the one
+// route that serves them. Every other theme route reads only templates and JSON (theme.json,
+// content.demo.json, img/manifest.json: lib/theme/share.ts decides from it whether a theme has
+// its share image / tab icon), so it traces *.html and *.json only. Before: every theme route
+// carried all theme images (2 themes: ~2.9 MB per function; 20 themes would be ~55 MB).
+const THEME_TEMPLATES = ['./themes/**/*.html', './themes/**/*.json'];
+/** = THEME_ASSET_TYPES of lib/site/static.ts (what /themes/<theme>/<path> serves; trace-check compares them). */
+export const THEME_ASSET_EXTENSIONS = ['css', 'js', 'mjs', 'png', 'jpg', 'jpeg', 'webp', 'avif', 'gif', 'svg', 'ico', 'mp4', 'webm'];
+const THEME_ASSETS = [`./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`];
 
-const THEME_ROUTES = [
+export const THEME_ASSET_ROUTE = '/themes/\\[theme\\]/\\[\\.\\.\\.path\\]';
+
+/** Routes that read theme templates / theme.json (not the asset route). */
+export const THEME_ROUTES = [
   '/\\[slug\\]',
   '/\\[slug\\]/\\[page\\]',
-  '/themes/\\[theme\\]/\\[\\.\\.\\.path\\]',
   '/edit/\\[slug\\]',
   '/api/edit/\\[slug\\]',
   '/api/edit/\\[slug\\]/photo',
@@ -42,8 +54,11 @@ const config: NextConfig = {
   reactStrictMode: true,
   // `next dev` would otherwise write platform/AGENTS.md + CLAUDE.md; the repo keeps its own agent rules at the root.
   agentRules: false,
-  // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel).
-  outputFileTracingIncludes: Object.fromEntries(THEME_ROUTES.map((r) => [r, themeFiles])),
+  // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel). Images: asset route only (G055).
+  outputFileTracingIncludes: {
+    ...Object.fromEntries(THEME_ROUTES.map((r) => [r, THEME_TEMPLATES])),
+    [THEME_ASSET_ROUTE]: THEME_ASSETS,
+  },
   async headers() {
     return [
       { source: '/edit/:path*', headers: SECRET_PAGE_HEADERS },

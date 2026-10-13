@@ -3,6 +3,7 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { findShareFiles, type ThemeShareFiles } from './share.ts';
 
 export const PAGE_NAMES = ['index', 'home', 'story', 'details', 'rsvp'] as const;
 export type PageName = (typeof PAGE_NAMES)[number];
@@ -32,6 +33,8 @@ export interface ThemeManifest {
 export interface LoadedTheme {
   manifest: ThemeManifest;
   dir: string;
+  /** Share image + tab icon the theme has (img/og-1200x630.jpg, img/favicon.png; lib/theme/share.ts). */
+  share: ThemeShareFiles;
 }
 
 export class ThemeError extends Error {
@@ -115,7 +118,7 @@ export async function loadTheme(id: string): Promise<LoadedTheme | null> {
     } catch {
       throw new ThemeError(`${id}: theme.json is not valid JSON`);
     }
-    return { manifest: parseManifest(raw, id), dir };
+    return { manifest: parseManifest(raw, id), dir, share: await findShareFiles(dir) };
   });
 }
 

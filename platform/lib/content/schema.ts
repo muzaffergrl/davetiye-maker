@@ -62,20 +62,23 @@ export const CONTENT_SCHEMA = {
         "properties": {
           "display_name": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 40
           },
           "full_name": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "maxLength": 40
           }
         }
       }
     },
     "name_display": {
       "type": "string",
-      "description": "Ör. 'Avery & Jordan'"
+      "maxLength": 85,
+      "description": "Ör. 'Avery & Jordan'. En çok 85 = iki isim (≤ 40) + ayraç (' & ', ' and ') (G055)"
     },
     "initials": {
       "type": "string",
@@ -111,7 +114,8 @@ export const CONTENT_SCHEMA = {
       "additionalProperties": false,
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 80
         },
         "city": {
           "type": "string"
@@ -138,6 +142,8 @@ export const CONTENT_SCHEMA = {
     },
     "schedule": {
       "type": "array",
+      "maxItems": 10,
+      "description": "Program satırları; en çok 10 (G055 — temalar 10 satırı taşır, docs/11 §12).",
       "items": {
         "type": "object",
         "required": [

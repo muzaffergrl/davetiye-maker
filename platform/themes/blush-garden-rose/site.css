@@ -414,6 +414,28 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .sched-list:has(> .sched-row:nth-child(5)) .sched-row .loc { font-size: max(11px, 3cqw); line-height: 1.25; }
 .info-text:has(.sched-row:nth-child(5)) .title { font-size: 9cqw; }
 .info-text:has(.sched-row:nth-child(5)) .dress { margin-top: 1.8cqw; }
+/* G055 — the Order of the Day card grows with its rows (up to 10, long labels, a dress code): the GPT card is
+   lengthened by the 3-slice cut of docs/11 §9, nothing is drawn. Image rows 0–42 % (arch, top florals, title area)
+   stay the <img>, clipped; rows 66–100 % (bottom florals) are ::after; the plain paper band 42–66 % (manifest free_zone
+   rows 41–67: nothing between the two straight gold lines) is ::before, stretched to fill the height between.
+   The text is in the flow (same place as before), so the card is never shorter than the image: with a short schedule
+   the three slices put the image back together at its own size. 154.71cqw = card image height (1411 / 912 × 100cqw). */
+.info:has(> .info-text .sched-list) { aspect-ratio: auto; }
+.info:has(> .info-text .sched-list) > img { bottom: auto; height: auto; aspect-ratio: 912 / 1411; clip-path: inset(0 0 58% 0); }
+.info:has(> .info-text .sched-list)::before,
+.info:has(> .info-text .sched-list)::after {
+  content: ""; position: absolute; left: 0; right: 0; pointer-events: none;
+  background-image: url("img/info_card-912.webp");
+  background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-912.webp") 2x);
+  background-repeat: no-repeat;
+}
+/* band 42–66 %: 24 % of the image -> background 416.667 % tall, at 42 / (1 - 0.24) = 55.263 % (1 px overlaps) */
+.info:has(> .info-text .sched-list)::before { top: calc(64.98cqw - 1px); bottom: calc(52.6cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
+.info:has(> .info-text .sched-list)::after { bottom: 0; height: 52.6cqw; background-size: 100% auto; background-position: 0 100%; }
+/* text: from 28.9 % of the image (44.71cqw, as before) down to image row 72 % at most (43.32cqw above the bottom: below
+   it the bottom florals reach into the text column), and at least the image's own height in total (66.68cqw) */
+.info:has(> .info-text .sched-list) > .info-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 11.2%;
+  padding: 44.71cqw 0 43.32cqw; min-height: 66.68cqw; box-sizing: content-box; }
 .dress { margin-top: 3cqw; font-family: var(--display); font-weight: 600; font-size: max(9.5px, 2.8cqw); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); }
 .dress em { font-family: var(--body); font-weight: 400; letter-spacing: .02em; text-transform: none; font-size: max(12px, 3.4cqw); color: var(--ink); }
 

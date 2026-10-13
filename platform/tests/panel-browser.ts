@@ -244,10 +244,15 @@ try {
   await page.click('[data-crop-confirm]');
   await page.waitForSelector('[data-photo-slot="hero"] img', { timeout: 20_000 });
   await waitSaved(page);
-  const heroSrc = await page.getAttribute('[data-photo-slot="hero"] img', 'src');
+  const thumbSrc = await page.getAttribute('[data-photo-slot="hero"] img', 'src');
+  // G055: the draft stores "<random>-<width>w.jpg"; the panel thumbnail shows its 640 px variant.
+  const stored = await (await fetch(`${BASE}/api/edit/${SLUG}`, { headers: { authorization: `Bearer ${seeded.editKey}` } })).json();
+  const heroPath: string = stored.state?.content?.media?.hero_portrait ?? '';
   // Not published yet: the buyer's own views carry the preview key (the photo is not public).
-  check('photo: uploaded and stored in the draft', /^\/media\/[0-9a-f-]{36}\/[0-9a-f]{32}\.jpg\?preview=[A-Za-z0-9_-]+$/.test(heroSrc ?? ''), heroSrc ?? '');
-  const heroPath = (heroSrc ?? '').split('?')[0];
+  check('photo: uploaded and stored in the draft', /^\/media\/[0-9a-f-]{36}\/[0-9a-f]{32}-\d+w\.jpg$/.test(heroPath), heroPath);
+  const keyQuery = (thumbSrc ?? '').slice((thumbSrc ?? '').indexOf('?'));
+  check('photo: the thumbnail is the small variant, with the preview key', /^\?preview=[A-Za-z0-9_-]+$/.test(keyQuery) && thumbSrc === `${heroPath.replace(/-\d+w\.jpg$/, '-640w.jpg')}${keyQuery}`, thumbSrc ?? '');
+  const heroSrc = `${heroPath}${keyQuery}`;
   check('photo: not public before publishing', (await fetch(`${BASE}${heroPath}`)).status === 404);
   const heroMeta = await sharp(Buffer.from(await (await fetch(`${BASE}${heroSrc}`)).arrayBuffer())).metadata();
   check('photo: server copy is a 4:5 JPEG without EXIF', heroMeta.format === 'jpeg' && Math.abs(heroMeta.width / heroMeta.height - 0.8) < 0.01 && !heroMeta.exif, `${heroMeta.width}x${heroMeta.height}`);
@@ -325,9 +330,10 @@ try {
   check('public page: names', (await pub.locator('h1').innerText()) === 'Elena & Marco');
   const pubHero = await pub.evaluate(() => {
     const img = document.querySelector('img[data-photo="hero"]') as HTMLImageElement | null;
-    return img ? { src: img.getAttribute('src'), w: img.naturalWidth } : null;
+    return img ? { src: img.getAttribute('src'), w: img.naturalWidth, srcset: img.getAttribute('srcset'), current: img.currentSrc } : null;
   });
   check('public page: uploaded photo loads (public once published)', pubHero?.src === heroPath && pubHero.w > 0, JSON.stringify(pubHero));
+  check('public page: srcset with the 640 px variant (G055), the browser loads one of the files', Boolean(pubHero?.srcset?.startsWith(`${heroPath.replace(/-\d+w\.jpg$/, '-640w.jpg')} 640w`)) && /-\d+w\.jpg$/.test(pubHero?.current ?? ''), pubHero?.current ?? '');
   check('public page: no horizontal overflow', (await overflow(pub)) <= 0);
   await shot(pub, '10_public_390', { fullPage: true, photo: true });
 

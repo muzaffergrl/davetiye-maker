@@ -15,12 +15,12 @@
       "items": {
         "type": "object", "required": ["display_name"], "additionalProperties": false,
         "properties": {
-          "display_name": { "type": "string", "minLength": 1 },
-          "full_name": { "type": ["string", "null"] }
+          "display_name": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "full_name": { "type": ["string", "null"], "maxLength": 40 }
         }
       }
     },
-    "name_display": { "type": "string", "description": "Ör. 'Avery & Jordan'" },
+    "name_display": { "type": "string", "maxLength": 85, "description": "Ör. 'Avery & Jordan'. En çok 85 = iki isim (≤ 40) + ayraç (' & ', ' and ') (G055)" },
     "initials": { "type": "string", "maxLength": 9, "description": "Monogram, ör. 'A & J'" },
     "host_line": { "type": ["string", "null"], "description": "Ör. 'Together with our families' — opsiyonel, varsayılmaz" },
     "date": { "type": "string", "format": "date", "description": "ISO YYYY-MM-DD; gösterim locale'e göre üretilir" },
@@ -29,7 +29,7 @@
     "venue": {
       "type": "object", "required": ["name", "city"], "additionalProperties": false,
       "properties": {
-        "name": { "type": "string" },
+        "name": { "type": "string", "maxLength": 80 },
         "city": { "type": "string" },
         "region": { "type": ["string", "null"] },
         "country": { "type": ["string", "null"] },
@@ -37,7 +37,8 @@
       }
     },
     "schedule": {
-      "type": "array",
+      "type": "array", "maxItems": 10,
+      "description": "Program satırları; en çok 10 (G055 — temalar 10 satırı taşır, docs/11 §12).",
       "items": {
         "type": "object", "required": ["label", "time"], "additionalProperties": false,
         "properties": {

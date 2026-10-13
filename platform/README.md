@@ -4,7 +4,8 @@ Alıcının sitesi bizim platformumuzda yayınlanır ve panelden düzenlenir (`d
 Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru**, veri adaptörleri (`local`; ilk canlı sürüm için
 Vercel Blob = `blob`, G048), site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042), `/start` sahiplenme akışı (G045)
 ve testler. Supabase (G043) satış hacmi artınca. G051: takvime ekle (`.ics` + Google Calendar), SSS (soru–yanıt) ve RSVP özel
-soruları (aşağıda "Takvime ekle, SSS, RSVP özel soruları").
+soruları (aşağıda "Takvime ekle, SSS, RSVP özel soruları"). G055: paylaşım görseli + sekme ikonu, Vercel paket izleme, alıcı
+fotoğrafı türevleri + `srcset`, içerik uzunluk sınırları (aşağıda "Platform cilası (G055)").
 
 Durum: yerelde çalışıyor ve test edildi. G044 ile Vercel'de yayında (`blob` adaptörü, private depo; ayrıntı `docs/10` §2c);
 inceleme düzeltmeleri (edca755) henüz yeniden yayınlanmadı (Git bağlantısı yok, push yayın yapmaz). Supabase projesi yok.
@@ -18,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim (230 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim, G055 (250 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -29,6 +30,9 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts   # build sonra
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts   # build sonrası: G051, 390 px, gerçek tema — takvim düğmeleri + .ics,
                        # SSS akordeonu (dokun/klavye), RSVP özel soruları (evet/hayır, hata), CSV sütunları, panel düzenleyicileri (44 kontrol;
                        # ekran görüntüleri $G051_SHOTS_DIR, varsayılan geçici klasör; repodaki örnekler previews/g051/)
+NODE_PATH=/opt/node22/lib/node_modules node tests/g055-browser.ts   # build sonrası: G055 — og:image/ikon, alıcı fotoğrafı srcset +
+                       # ilk görünüm (DPR 3), Details kartı 3/7/10 satır × 5 genişlik, panel sınırları (73 kontrol; çıktı $G055_SHOTS_DIR,
+                       # varsayılan geçici klasör; boş port kendisi seçer, $PORT ile sabitlenir)
 ```
 
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
@@ -41,7 +45,8 @@ Ortam değişkenleri: `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob,
 `BLOB_READ_WRITE_TOKEN` (yalnız `blob`: **private** Blob deposunun anahtarı; Vercel depo projeye bağlanınca kendisi ekler; repoya
 ve log'a yazılmaz), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`; `blob`'da yalnız seed'in `seed-keys.json`'u),
 `PLATFORM_THEMES_DIR` (varsayılan `platform/themes`), `PLATFORM_PUBLIC_URL` (sitelerin herkese açık kökü, ör. `https://<ad>.vercel.app`;
-panelin yayın linki ve QR'ı için; yoksa isteğin host'u kullanılır).
+panelin yayın linki ve QR'ı, sayfaların mutlak `og:image`'ı ve takvim açıklamasındaki site linki için (G055); yoksa isteğin host'u —
+`x-forwarded-host`/`host` — kullanılır).
 
 ## Klasörler
 
@@ -63,12 +68,14 @@ lib/
   theme/engine.ts                  şablon motoru (işaretler aşağıda)
   theme/theme.ts                   theme.json okuma/doğrulama, sayfa şablonları
   theme/urls.ts                    URL güvenliği (link, foto, tema varlık yolu)
+  theme/share.ts                   temanın paylaşım görseli / sekme ikonu var mı (G055; dosya ya da img/manifest.json)
   content/schema.ts                docs/03_URUN_ICERIK_SEMASI.json'ın birebir kopyası (test farkı yakalar)
   content/validate.ts              tools/validate_content.py'nin TS aynası (şema + iş kuralları)
   content/format.ts, derive.ts     "June 12, 2027", "4:00 PM", türetilmiş alanlar, sayaç UTC'si
   data/types.ts                    DataAdapter sözleşmesi;  data/local/ = JSON dosya uygulaması;  data/blob/ = Vercel Blob (G048)
   sites.ts                         site oluştur (anahtar + slug + doğrulama), yayınla, erişim kontrolü
-  keys.ts, slug.ts, uploads.ts     anahtar hash'i, ayrılmış slug'lar, foto tür/boyut kontrolü
+  keys.ts, slug.ts, uploads.ts     anahtar hash'i, ayrılmış slug'lar, foto tür/boyut kontrolü (+ `photoSetFiles`: foto + türevleri, G055)
+  photo-variants.ts                alıcı fotoğrafı türevleri (640/1280 px) — adlar, `srcset` adayları (G055; tarayıcıda da çalışır)
   site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar;  site/ics.ts = /<slug>/event.ics (G051)
   calendar.ts                      takvime ekle (G051): etkinlik saatleri (saat dilimi + yaz saati), .ics (RFC 5545), Google Calendar linki
   panel/                           panel: model.ts (istemci+sunucu yardımcıları), api.ts, draft.ts, photos.ts (sharp), state.ts, http.ts
@@ -115,7 +122,8 @@ interface DataAdapter {
   deleteSite(id)                 // site + RSVP + fotoğraflar
   saveRsvp(siteId, input), listRsvps(siteId)   // input.held → kayıt "beklemede" (yoğunluk, aşağıda RSVP)
   deleteRsvps(siteId, ids), setRsvpsHeld(siteId, ids, held)   // yalnız o sitenin yanıtları
-  savePhoto(siteId, {bytes})     // assertImageUpload: JPG/PNG/WebP/AVIF, ≤ 10 MB, tür baytlardan
+  savePhoto(siteId, {bytes, width?, variants?})  // assertImageUpload: JPG/PNG/WebP/AVIF, ≤ 10 MB, tür baytlardan;
+                                 // width + variants (G055) → <rastgele>-<W>w.<uzantı> + türevleri (önce türevler); dönüş .variants
   readPhoto?(path)               // /media/... üzerinden servis eden adaptörler (local, blob)
 }
 ```
@@ -134,7 +142,8 @@ preview_key_hash, order_ref, owner_email, created_at, updated_at, published_at)`
 (`docs/10` §2'deki tabloya `published_content`, `preview_key_hash`, `published_at` eklendi.)
 
 `local` uygulaması: `.data/sites/<id>.json`, `.data/slugs/<slug>.json` (O_EXCL ile benzersizlik),
-`.data/rsvps/<siteId>.json`, `.data/uploads/<siteId>/<rastgele>.<uzantı>`. Atomik yazma, süreç içi kilit.
+`.data/rsvps/<siteId>.json`, `.data/uploads/<siteId>/<rastgele>.<uzantı>` (G055: `<rastgele>-<genişlik>w.<uzantı>` + `-640w`/`-1280w`
+türevleri). Atomik yazma, süreç içi kilit.
 Tek sunucu süreci içindir; canlı kullanım için değildir.
 
 ### `blob` adaptörü (G048, `lib/data/blob/`) — ilk canlı sürüm, Supabase'siz
@@ -147,6 +156,7 @@ slugs/<slug>.json                         {"id"}   allowOverwrite:false ile yaz�
 orders/<sipariş no>.json                  {"id"}   aynı kural → sipariş başına tek site (olağan dışı ref → "h-<sha256>")
 rsvps/<siteId>/<ms>-<sıra>-<rsvpId>.json  her RSVP ayrı dosya (oku-değiştir-yaz yok → misafirler birbirini ezmez)
 media/<siteId>/<rastgele32hex>.<uzantı>   fotoğraflar; ziyaretçiye /media/<siteId>/<dosya> rotasından (readPhoto)
+                                          (G055: <rastgele32hex>-<W>w.<uzantı> + -640w / -1280w türevleri)
 ```
 
 - **Benzersizlik:** önce dizin dosyası "varsa yazma" ile yazılır (SDK `allowOverwrite: false`; var olan yol `BlobError` →
@@ -196,6 +206,7 @@ themes/<id>/theme.json      {"id","name","version","internal"?, "pages": {"index
                              "photos": {"<anahtar>": {"label","source": "media.hero_portrait","aspect": "4/5"}}}
 themes/<id>/*.html          sayfa şablonları (index zorunlu; home, story, details, rsvp isteğe bağlı)
 themes/<id>/…               CSS, JS, görseller (css js mjs png jpg jpeg webp avif gif svg ico mp4 webm)
+themes/<id>/img/og-1200x630.jpg, img/favicon.png   paylaşım görseli + sekme ikonu (build_images.py; varsa motor etiketleri yazar, G055)
 ```
 
 - Tema id'si = klasör adı (`[a-z0-9_-]`). `internal: true` olan tema (ör. `_sample`) alıcıya sunulmaz (`listThemes`).
@@ -238,7 +249,7 @@ Yollar noktalıdır: `venue.name`, `schedule.0.time`, `story.items.1.caption`.
 | İşaret | Etki |
 |---|---|
 | `data-field="yol"` | Öğenin içi = değer. ISO tarih alanları (`date`, `rsvp.deadline`) → `May 15, 2027` (en-US) / `15 May 2027`; saat alanları (`ceremony_time`, `schedule.*.time`) → `4:00 PM` / `4:00 pm`. Değer yoksa öğe boşalır ve `data-empty` alır |
-| `data-field` + `<img>` | `src` = foto URL'si (http(s) veya `/media/…`); `srcset`/`sizes` ve `<picture>` içindeki `<source>`'lar kalkar. Foto yoksa tema yer tutucusu kalır. `data-photo-state="user|placeholder"` hem `img`'ye hem en yakın `[data-slot]` atasına yazılır |
+| `data-field` + `<img>` | `src` = foto URL'si (http(s) veya `/media/…`); yer tutucunun `srcset`'i ve `<picture>` içindeki `<source>`'lar kalkar. Türevli alıcı fotoğrafında (G055, `/media/…/<hex>-<W>w.jpg`) `srcset` = 640/1280 türevleri + foto, `sizes` = şablonunki (slotun CSS genişliği), yoksa `loading="lazy"`'de `auto, 100vw`, değilse `100vw`; eski tek dosyalı fotoda `srcset`/`sizes` yok. Foto yoksa tema yer tutucusu kalır. `data-photo-state="user|placeholder"` hem `img`'ye hem en yakın `[data-slot]` atasına yazılır |
 | `data-field="urls.*"` + `<a>` | `href` = URL (yalnız http/https/mailto/tel; `target` varsa `rel="noopener noreferrer"`). Yoksa `href="#"` + `data-url-missing` + `aria-disabled="true"`. Link metni korunur |
 | `data-format="…"` | `date`, `date-long` (Saturday, May 15, 2027), `weekday`, `month`, `day`, `year`, `time`, `raw` (biçimsiz); ayrıca `amp`: her `&` → `<span class="amp">&amp;</span>` (script yazı tipi kuralı) |
 | `data-text="Our Story · {name_display}"` | Öğenin içi = şablon; `{yol}` veya `{yol\|biçim}`. `<title>` için de çalışır |
@@ -298,7 +309,10 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
 - **G035'ten farklar:** mekân fotoğrafı GPT yatay çerçevede (CSS kemer kırpma + çiçek kümeleri yerine); kapalı zarfın
   kapağı ayrı katman (`env_cflap`, tırtıklı kenarı izlenerek kesildi) ve açılışta menteşesinde 3D kalkıyor, sonra açık
   kapak devralıyor (önceden kapalı zarf açık gövdeye eriyordu); oturum anahtarları site başına; 4+ program satırında
-  kart sıkışık düzene geçiyor (6 satıra kadar boyalı çiçeğe değmediği ölçüldü); RSVP sayfasında G035'in "preview only"
+  kart sıkışık düzene geçiyor; **G055:** Order of the Day kartı satırlarla uzuyor (10 satır, uzun etiket/yer, dress code) — GPT
+  kartı docs/11 §9 3 dilim kesimiyle: üst %0–42 `<img>` (kırpılmış), düz kâğıt bandı %42–66 `::before` (dikeyde gerilir), alt
+  %66–100 `::after`; metin akışta, en çok görüntünün %72 satırına iner; kart görüntünün kendi boyundan kısa olmaz (ayrıntı ve
+  ölçüm aşağıda "Platform cilası (G055)"); RSVP sayfasında G035'in "preview only"
   düğmesi yerine platform formu (G042 sözleşmesi: `/rsvp/form.js`, `data-rsvp-*`, `method="post"`) — kartın RSVP
   düğmesi forma kaydırır, teşekkür/kapalı/hata/önizleme panelleri temanın tipografisinde.
 - **Görseller:** `python3 platform/themes/blush-garden-rose/build_images.py` (GPT parçaları → `img/`, önce
@@ -322,6 +336,9 @@ program sırası, monogram, dress code/registry uyarıları). Bilinçli farklar 
 takvim günü olmalı, `format: uri` mutlak http(s) olmalı, bilinmeyen saat dilimi uyarı verir.
 `tests/content.test.ts` 20 demo kaydı ve hatalı örneklerde Python aracıyla geçti/kaldı eşliğini sınar.
 Şema değişince: `node scripts/sync-schema.cjs`.
+Uzunluk sınırları (G055) şemada: isimler (`partners[].display_name`/`full_name`) ≤ 40, isim satırı `name_display` ≤ 85, mekân adı
+≤ 80, program ≤ 10 satır; `CONTENT_LIMITS` (`validate.ts`) bunları şemadan okur — panel ve `/start` de oradan. Karakter sayısı
+kod noktası (`[...s].length`, Python `len`); eşlik `tests/g055-limits.test.ts`'te.
 
 Taslak kayıt geçersiz olabilir (panelde yazarken); `publishSite()` geçersiz içeriği yayınlamaz: doğruladığı sürümü
 `adapter.publish(id, {expectedUpdatedAt})` ile yayınlar, arada gelen otomatik kayıt doğrulanmadan yayına giremez (yeniden okur ve
@@ -474,6 +491,9 @@ Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (
 - **Link:** anahtar hash ile doğrulanır (`authorizeEditor`). Yanlış/eksik anahtar, önizleme anahtarı, başka sitenin anahtarı ve
   bilinmeyen slug → **aynı** genel 404 sayfası ("This edit link is not valid"); slug'ın varlığı sızmaz. Sayfa `noindex`,
   `<meta name="referrer" content="no-referrer">` (anahtar URL'de), dinamik (`no-store`).
+- **Uzunluk sınırları (G055):** ilk isim ve tam ad ≤ 40, "Names as shown" ≤ 85, mekân adı ≤ 80 — alanda `maxlength` + sayaç
+  ("12/40"; eski bir kayıt sınırı aşıyorsa sayaç kırmızı, hata alanın altında, yayın engellenir). Program ≤ 10 olay: ipucu
+  "Up to 10 events.", 10'da "Add an event" kalkar ve "10 of 10 events: the most your website can show." yazar.
 - **Bölümler:** Couple (ilk isimler, tam isimler; "Names as shown", monogram ve o kişinin **tam adı** (davetiye kartında görünür; boşsa
   ya da ilk isme eşitse) ilk isimleri izler — elle değiştirilene kadar; host line) ·
   Date & time (tarih, tören saati, saat dilimi listesi + "Use this device's time zone", tarih biçimi US/UK/CA/AU) · Venue ·
@@ -509,7 +529,9 @@ Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (
   `platform: true` seçeneği yalnız `urls.website` / `urls.rsvp_form` boş uyarılarını (`customer_url_missing`) kapatır (site ve RSVP
   platformun kendisi); hiçbir hatayı değiştirmez (test: `tests/panel.test.ts`).
 - **Taslak kuralları (`lib/panel/draft.ts`):** taslak eksik/geçersiz olabilir (yazarken), ama yapısı bozuk olamaz: bilinmeyen alan,
-  yanlış JSON türü, eksik zorunlu nesne, enum dışı değer, liste sınırı aşımı → **400** (`invalid_shape`), saklanmaz.
+  yanlış JSON türü, eksik zorunlu nesne, enum dışı değer, liste sınırı aşımı → **400** (`invalid_shape`), saklanmaz. İstisna (G055):
+  programın 10 satır sınırı yapı değil içerik kuralıdır — 11+ satırlı taslak (sınırdan önce yapılmış site) kaydedilir, yalnız yayın
+  engellenir ("Your website shows up to 10 events. Please remove 2 events."); uzunluk sınırları da öyle (zaten yapı değildi).
   `record_kind` ve `event_type` panelden değişmez (saklı değer korunur). Taslak ≤ 64 KB.
 - **Önizleme:** iframe `/<slug>?preview=<önizleme anahtarı>` (anahtar düzenleme anahtarından türetilir), 390 px; sayfa sekmeleri
   yalnız bu içerikle açılan sayfalar (Story kapalıysa ya da yanıtlar kapalıysa RSVP sekmesi yok; `pageRules` = `<body>` işaretleri),
@@ -526,7 +548,9 @@ Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (
   kaydırıcı, tekerlek, ok/+/- tuşları) → canvas JPEG (uzun kenar ≤ 2000 px, ≤ 3.5 MB) → `POST /api/edit/<slug>/photo?slot=<anahtar>`
   → `assertImageUpload` (tür baytlardan, ≤ 10 MB) → **sharp ile yeniden kodlama** (`lib/panel/photos.ts`: EXIF yönü uygulanır,
   bütün metadata — GPS dahil — silinir, ≤ 50 MP, uzun kenar ≤ 2400 px, oran %1'den fazla saparsa ortadan kırpma, şeffaflık beyaza,
-  sRGB JPEG q84) → `adapter.savePhoto` → URL taslağa yazılır ve hemen kaydedilir. `memory_photos` şemaya uygun kalır (boşluk `""`,
+  sRGB JPEG q84) + **türevler** (G055: 640 ve 1280 px genişlikte, yalnız fotodan dar olanlar; yüklenen dosyadan ayrı ayrı kodlanır)
+  → `adapter.savePhoto` (`<rastgele>-<W>w.jpg` + `-640w`/`-1280w`) → URL (yalnız fotonun) taslağa yazılır ve hemen kaydedilir.
+  Panel küçük resmi 640'lık türevi gösterir. sharp yoksa türev yok (eski tek dosya adı, `srcset` yok). `memory_photos` şemaya uygun kalır (boşluk `""`,
   sondaki boşlar silinir). sharp yüklenemezse (yerel ikili yoksa) kontrol edilmiş orijinal saklanır ve uyarı loglanır.
   sharp, Next'in zaten kurduğu sürümle (`0.35.5`) doğrudan bağımlılık yapıldı.
 
@@ -558,7 +582,7 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
   yayını engeller → önizlemede isim ve foto → yayınla → QR ekran görüntüsünden çözülür = genel URL → genel sayfada isim ve foto →
   misafir yanıtı panelde (+ silme) → "Publish changes" → kayıp kayıt yanıtı / yavaş yayın sırasında yazma (yanlış çakışma yok) →
   offline (404, foto da 404) → yeniden yayın → masaüstünde yan yana önizleme; önizleme modalı (odak, `inert`, geri tuşu), Tab ile odak
-  çubuğun altında kalmıyor, "Before you publish" notları. 72 kontrol;
+  çubuğun altında kalmıyor, "Before you publish" notları, G055: küçük resim 640 türevi + yayında `srcset`. 74 kontrol;
   ekran görüntüleri, `panel_flow_390.mp4` ve `checks.json` → `previews/g039/` (`PANEL_SHOTS_DIR`, `PORT` (3313), `PANEL_SLOWMO`).
   Test fotoğrafı: 03'ün kurgu GPT örnek fotoğrafı (`collections/03_Blush_Garden_Rose/assets/gpt/photos/hero_portrait.jpg`).
 
@@ -614,7 +638,9 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
   "A website has already been started with this order number. Open it with the edit link you saved … message the shop on Etsy".
   Yanıtta slug, e-posta, link ya da kayıt bilgisi **yok**; düz anahtar zaten saklanmadığı için yeniden gösterilemez.
   Aynı süreçte eşzamanlı denemeler sipariş no başına kilitle sıralanır (test: 6 paralel istek → 1 site).
-- E-posta: basit biçim kontrolü (≤ 254), alan adı küçük harfe. İsim: harf içermeli, ≤ 40; görünmez/bidi karakterleri silinir.
+- E-posta: basit biçim kontrolü (≤ 254), alan adı küçük harfe. İsim: harf içermeli, ≤ 40 karakter (G055: `NAME_MAX` =
+  şemanın isim sınırı, kod noktası sayılır; mesaj "Please keep each name to 40 characters or fewer."); görünmez/bidi karakterleri
+  silinir. İki 40 karakterlik isimle oluşan taslak da geçerli (`name_display` 83 ≤ 85).
 - Adres: `lib/slug.ts` kuralları (3–48, ayrılmış adlar). Adres sonradan değiştirilemez (panelde slug değiştirme yok) — form bunu söyler.
 - **Demo içeriği kaynağı:** önce `themes/<tema>/content.demo.json` (tema kendi demo kaydını taşır; tema varlık rotası `.json`
   servis etmez), yoksa `lib/claim/demo/<tema>.json` (koleksiyon kaydının kopyası; `collections/` platform dışında olduğundan
@@ -675,9 +701,9 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
   siparişle ikinci site oluşmaz, yarışı kaybeden `409 order_used` alır. G043: `sites(order_ref)` üzerinde benzersiz indeks ve aynı
   çeviri. Kalıcı `RateLimiter` hâlâ yok (aşağıda).
 - **Vercel dosya izleme:** temaları diskten okuyan bütün rotalar (`/[slug]…`, `/edit`, `/api/edit/…`, `/api/rsvp/[slug]`, `/start`,
-  `/start/demo/…`, `/api/start…`) `next.config.ts` `outputFileTracingIncludes`'ta. `npm run build` sonrası `scripts/trace-check.cjs`
-  her rotanın `.nft.json`'unda her temanın `index.html`'ini arar; eksikse build hata verir (yeni bir tema okuyan rota listeye
-  eklenmezse fark edilir). Rotalar G044'te canlıda denendi; `trace-check` yerel build'de koşuyor.
+  `/start/demo/…`, `/api/start…`) `next.config.ts` `outputFileTracingIncludes`'ta; G055'ten beri yalnız `themes/**/*.html` ve
+  `*.json` ile. Tema görselleri/CSS/JS yalnız tema varlık rotasına (`/themes/[theme]/[...path]`) izlenir. Ayrıntı ve
+  `trace-check` denetimleri aşağıda "Platform cilası (G055)".
 - **Kayıp link — operatör aracı:** `node scripts/reissue-edit-key.ts --order <no> --origin https://<host>` (ya da `--slug <adres>`):
   siteyi bulur, yeni düzenleme + önizleme anahtarı üretir (yalnız hash saklanır; eski linkler hemen ölür), yeni linki **bir kez**
   ekrana yazar; içerik/foto/yanıt/yayın durumuna dokunmaz. `DATA_ADAPTER` deposunda çalışır (blob için token gerekir). Mağaza alıcıyı
@@ -751,6 +777,84 @@ cevaplı yanıt, ret, geçersiz seçenek 400, çift gönderim, liste, yeniden ad
 Denenmedi: gerçek iPhone/Android'de `.ics` açılışı (iOS "Add to Calendar" sayfası, Android'de dosya → takvim uygulaması), Outlook/Apple
 Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), Google Calendar linkinin oturum açık bir hesapta açılışı.
 
+## Platform cilası (G055)
+
+### Paylaşım görseli ve sekme ikonu (`lib/theme/share.ts`, `lib/theme/engine.ts`)
+- Tema `img/og-1200x630.jpg` (1200 × 630, isimsiz) ve/veya `img/favicon.png` (kare, şeffaf) taşıyorsa motor her sayfaya yazar:
+  `og:image` = **mutlak** URL (`PLATFORM_PUBLIC_URL`, yoksa isteğin host'u: `x-forwarded-host`/`host`) + `og:image:type`
+  (`image/jpeg`), `og:image:width/height` (1200/630), `twitter:card=summary_large_image`; `<link rel="icon" type="image/png"
+  href="/themes/<tema>/img/favicon.png">`. Etiketler `<head>`'deki son `<meta>`'dan sonra. Şablonun kendi `og:image` /
+  `twitter:card` / `icon` etiketi varsa o kalır (çift yazılmaz). Origin verilmezse (`renderTemplate` doğrudan) `og:image` yazılmaz.
+  Site sayfaları, önizleme ve `/start/demo/<tema>` aynı.
+- `apple-touch-icon` **yazılmaz** (karar): `favicon.png` şeffaf; iOS ana ekran ikonunda şeffaf alan siyah görünür. Gerekirse
+  temaya ayrı, zeminli bir `apple-touch-icon.png` (GPT parçasından) eklenir.
+- "Tema dosyaya sahip mi": dosya diskte **ya da** `img/manifest.json` onu adlandırıyor (`"og": {"file": "og-1200x630.jpg"}`,
+  `"favicon": {"file": "favicon.png"}` — `tools/tema_build.py` yazar). İkincisi Vercel için: sayfa rotalarının paketinde tema görseli
+  yok, yalnız `*.html`/`*.json` var (aşağıda). `loadTheme()` sonucu `share` alanında (üretimde önbellekli).
+- 03: G054'ün dosyaları (`og-1200x630.jpg` 1200 × 630 JPEG, `favicon.png` 180 × 180 PNG) — etiketler canlı build'de denendi
+  (`tests/g055-browser.ts`): `og:image` bu sunucunun mutlak adresi, dosya 200 `image/jpeg` 1200 × 630, ikon 200 `image/png`.
+  Sosyal ağ önizlemesi (Facebook/WhatsApp/iMessage kazıyıcıları) ve gerçek tarayıcı sekmesi **denenmedi**.
+
+### Vercel paketleri (`next.config.ts`, `scripts/trace-check.cjs`)
+- Tema okuyan 16 rota (`THEME_ROUTES`) yalnız `./themes/**/*.html` + `./themes/**/*.json` izler; tema varlık rotası
+  (`THEME_ASSET_ROUTE`) yalnız servis edilen türleri (`THEME_ASSET_EXTENSIONS` = `lib/site/static.ts` `THEME_ASSET_TYPES`).
+  Ölçüm (2 tema, yerel build): sayfa/panel/RSVP/`/start` rotası başına tema dosyaları **~2,8 MB → 69 KB**; varlık rotası 57 dosya,
+  2,7 MB. (20 tema × ~2,9 MB ≈ 55 MB her fonksiyona girecekti; şimdi yalnız varlık rotasına.)
+- `npm run build` → `trace-check` (exit 1 + liste): (1) her tema rotası her temanın `index.html`'ini izliyor; (2) bu rotalar
+  `themes/`'ten `*.html`/`*.json` dışında **hiçbir** dosya taşımıyor; (3) varlık rotası her temanın servis edilebilir her dosyasını
+  (nokta dosyaları hariç) izliyor; (4) diskte paylaşım görseli/ikon varsa her tema rotası onu motorun Vercel'deki kuralıyla
+  "görüyor" (dosyanın kendisi ya da onu adlandıran izlenmiş `img/manifest.json`); manifest var olmayan bir dosyayı adlandırıyorsa da
+  hata. `require('./scripts/trace-check.cjs')` listeleri ve `checkTraces()`'i verir (test: sahte `.nft.json`'larla her hata türü,
+  eski "her şey her rotaya" yapılandırması da yakalanıyor; listelerin `next.config.ts` / `static.ts` ile aynılığı).
+- Not (değiştirilmedi): `api/edit/*` paketleri ~49 MB — sharp'ın `linuxmusl-x64` ve `wasm32` ikilileri de izleniyor (Vercel glibc).
+  250 MB sınırının altında; gerekirse `outputFileTracingExcludes` ile çıkarılabilir (Vercel'de denenmeli).
+
+### Alıcı fotoğrafı türevleri ve `srcset` (`lib/photo-variants.ts`, `lib/panel/photos.ts`, `lib/uploads.ts`)
+- Yükleme: foto (≤ 2400 px, alan oranı, JPEG q84) + 640 ve 1280 px genişlikte türevler (yalnız fotodan dar olanlar), hepsi yüklenen
+  dosyadan ayrı ayrı kodlanır (EXIF yok). Dosyalar tek rastgele adla: `<hex32>-<W>w.jpg`, `<hex32>-640w.jpg`, `<hex32>-1280w.jpg`;
+  içerik kaydı yalnız fotonun URL'sini taşır. Adaptör (`local`, `blob`) seti `photoSetFiles` ile denetler (türevler tam olarak
+  `variantWidths(W)`, aynı tür) ve önce türevleri yazar.
+- Motor: URL'den türevleri türetir → `srcset="…-640w.jpg 640w, …-1280w.jpg 1280w, …-<W>w.jpg <W>w"`, `sizes` şablonunki (yer
+  tutucu için yazılmış slot genişliği); şablonda yoksa `loading="lazy"`'de `auto, 100vw`, değilse `100vw` (100vw hiçbir zaman fotodan
+  büyük dosya seçtirmez: G055 öncesinden fazla indirme olmaz). Önizlemede her adayda `?preview=`. `/media` rotası bir türevi, fotoğrafı
+  servis ettiği koşulda servis eder (yayında kullanılıyorsa herkese, önizleme anahtarıyla taslakta).
+- Geriye uyum: G055 öncesi yüklemeler (`<hex32>.jpg`) ve sharp'sız saklanan dosyalar tek `src` (srcset yok); `readPhoto` iki adı da
+  okur. `scripts/seed.ts` (bu görevin yazma alanı dışında) fotoğrafları hâlâ tek dosya saklıyor → tohum demo sitesinde ve
+  `theme-check`'in "fotoğraflı ilk görünüm" ölçümünde `srcset` yok (seed `preparePhoto` + `savePhoto({width, variants})` kullanmalı).
+- **Ölçüm** (`tests/g055-browser.ts`, 03, 390 × 844, DPR 3, `next start`, aktarılan bayt, theme-check yöntemi; fotoğraflar panel
+  API'siyle yüklendi):
+
+  | İlk görünüm | yer tutucu | 03 örnek fotoğrafları (1024 px) — tek dosya → G055 | 3× büyütülmüş örnekler (telefon boyu) — tek dosya → G055 |
+  |---|---|---|---|
+  | index | 1023 KB | 1180 → **1093 KB** | 1545 → **1093 KB** |
+  | home  | 713 KB | 1096 → **890 KB** | 1709 → **888 KB** |
+
+  Tarayıcı index kartındaki portrede (127 px) ve home kartında (149 px) 640'lık türevi, home'daki 60 px hikâye küçük resminde de
+  640'lığı (`sizes=auto`) yükledi. "Telefon boyu" örnekler 03'ün kurgu GPT fotoğraflarının 3× büyütülmüşü (2287 × 2400'e kadar
+  saklandı); gerçek telefon fotoğrafı daha çok ayrıntı taşır, tek dosyalı hâli daha da büyük olur. Gerçek telefon/ağ ölçümü değildir.
+
+### İçerik uzunluk sınırları (entegratörün varsayılan kararı, geri alınabilir)
+- Şema (`docs/03_URUN_ICERIK_SEMASI.json`): `partners[].display_name` ve `full_name` ≤ 40, `name_display` ≤ 85 (iki isim + " & " /
+  " and "; "isimler ≤ 40" kararından türetildi), `venue.name` ≤ 80, `schedule` ≤ 10. SSS ve özel sorular G051 sınırlarıyla.
+- Doğrulayıcılar: Python (`tools/validate_content.py`, jsonschema) ve TS (`validate.ts`) şemadan okur; 20 koleksiyon kaydı, tema
+  kopyaları ve paketli `/start` demoları ikisinde de geçerli; sınırda/bir fazla vakalarında geçti/kaldı eşliği (astral harfli 40
+  karakterlik isim dahil). Panel, taslak kuralı ve `/start` yukarıda.
+- 03 Details kartı (`themes/blush-garden-rose/site.css`, yalnız CSS; görsel çizilmedi): kart 3 dilimle uzuyor (yukarıda). Ölçüm
+  (`tests/g055-browser.ts`): 3 / 7 / 10 satır ve 10 uzun satır ("Champagne toast and speeches" + "The Glasshouse Pavilion by the old
+  lake", dress code ile) × 360/390/430/768/1280 → her metin satırı düz kâğıtta (kart metin gizlenerek yakalanır, satır kutusu
+  altındaki pikseller kâğıt rengi; %0,5'ten fazla boyalı piksel = hata), kart altındaki takvim bloğuna değmiyor, yatay kaydırma
+  yok (40/40). 390 px'te kart: görüntü 554 px; 3 satır 586, 7 satır 599, 10 satır 673, 10 uzun satır 971 px. G055 öncesi
+  düzende 3 uzun satır ve 4 uzun satır zaten çiçeğe biniyordu, 10 satır kartın dışına taşıyordu.
+- **Bilinçli fark:** 03'ün demo kartı (3 satır) da 554 → 586 px (390 px'te, %+5,8) uzadı: metnin alt sınırı artık görüntünün %72
+  satırı (uzun satırlarda alt çiçeklere değmemek için); demo düzeni ve metin konumu aynı, yalnız düz kâğıt bandı 1,28× uzun. Kâğıt
+  dokusu gerilen bantta dikey liflenir (10 uzun satırda ~4×; DPR 3'te yakından bakınca görülür), ek yerleri gözle bakıldığında
+  görünmedi. `theme-check --theme blush-garden-rose` 73/73 geçti; onun kart serbest bölge denetimi kart boyunu görüntüye doğrusal
+  eşlediği için uzamış kartta yaklaşıktır — kesin denetim `g055-browser`'daki piksel testi.
+
+Testler: `tests/g055-share-tracing.test.ts` (8), `tests/g055-photos.test.ts` (6), `tests/g055-limits.test.ts` (6) `npm test`'te;
+`tests/panel.test.ts` (yükleme adı/türevleri), `tests/panel-browser.ts` (küçük resim = 640 türevi, yayındaki sayfada `srcset`);
+tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
+
 ## Güvenlik özeti
 
 - İçerik → HTML: yalnız metin düğümü/öznitelik değeri (parse5 serileştirici kaçışlar); `<script>`/`<style>` içine
@@ -761,7 +865,7 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
   `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
 - `site-data` JSON'u içerik kaydını taşımaz (kapalı bölümler kaynakta görünmez); şablon yorumları silinir.
 - **Fotoğraflar** (`/media/<site>/<dosya>`, `lib/site/static.ts`): yalnız site yayındaysa ve yayındaki içerik o dosyayı kullanıyorsa
-  (hikâye fotoğrafları yalnız Our Story açıkken) `public, max-age=300`; ya da isteğin `?preview=` anahtarı o sitenin ise
+  (bir türev, fotoğrafı kullanılıyorsa — G055) (hikâye fotoğrafları yalnız Our Story açıkken) `public, max-age=300`; ya da isteğin `?preview=` anahtarı o sitenin ise
   `private, no-store`. Yayından kaldırılan sitenin, değiştirilen/silinen ve hiç kullanılmamış fotoğrafların hepsi 404. (Önceden her
   dosya bir yıl `immutable` servis ediliyordu.) Bedeli: önbellekte olmayan her foto isteği site kaydını da okur (`blob`: +1 okuma);
   CDN kopyası yayından kaldırmadan sonra en çok 5 dk kalabilir.
@@ -774,7 +878,10 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
   gerçek depoda denendi). Supabase → G043.
   Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
-  derlemede `public/` altına kopyalamak düşünülebilir.
+  derlemede `public/` altına kopyalamak düşünülebilir. G055'ten beri tema görselleri yalnız bu rotanın paketinde.
+- G055 açıkları: `scripts/seed.ts` türev üretmiyor; `theme-check`'in kart serbest bölge denetimi uzayan kartta yaklaşık;
+  `og:image`/ikon sosyal ağ kazıyıcılarında ve gerçek telefonda denenmedi; yeni bir paylaşım görseli eski önbellekte günlerce kalabilir
+  (URL'de sürüm yok).
 - `local` adaptör tek süreç içindir. RSVP ve `/start` hız sınırları süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
   örnek olacağı için sınırlar örnek başınadır. `blob` sürümünde de kalıcı limiter yok (Blob sayaç için uygun değil: her artış bir
   yazma); gerekirse Vercel Firewall hız kuralı ya da G043'te Supabase tablo/RPC → `setRsvpRateLimiter()` / `setClaimRateLimiter()`.

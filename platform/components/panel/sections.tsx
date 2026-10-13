@@ -27,6 +27,7 @@ export function CoupleFields() {
             path={`partners.${i}.display_name`}
             label="First name"
             hint={i === 0 ? 'As your guests know you, e.g. Clara.' : undefined}
+            maxLength={CONTENT_LIMITS.name}
             value={p.display_name}
             autoComplete="off"
             onChange={(v) => edit((c) => withPartnerName(c, i, 'display_name', v))}
@@ -36,6 +37,7 @@ export function CoupleFields() {
             label="Full name"
             optional
             hint="Shown on the invitation card. Follows the first name until you change it."
+            maxLength={CONTENT_LIMITS.fullName}
             value={p.full_name}
             onChange={(v) => edit((c) => withPartnerName(c, i, 'full_name', v))}
           />
@@ -50,6 +52,7 @@ export function CoupleFields() {
         path="name_display"
         label="Names as shown on the site"
         hint="Follows the first names until you change it yourself."
+        maxLength={CONTENT_LIMITS.nameDisplay}
         value={content.name_display}
         onChange={(v) => edit((c) => void (c.name_display = v))}
       />
@@ -169,7 +172,7 @@ export function VenueFields() {
   const v = content.venue ?? { name: '', city: '' };
   return (
     <>
-      <TextField path="venue.name" label="Venue name" value={v.name} onChange={(x) => edit((c) => void (c.venue.name = x))} />
+      <TextField path="venue.name" label="Venue name" maxLength={CONTENT_LIMITS.venueName} value={v.name} onChange={(x) => edit((c) => void (c.venue.name = x))} />
       <TextField path="venue.address" label="Street address" optional value={v.address} onChange={(x) => edit((c) => void (c.venue.address = nullIfEmpty(x)))} />
       <TextField path="venue.city" label="City" value={v.city} onChange={(x) => edit((c) => void (c.venue.city = x))} />
       <TextField path="venue.region" label="State or region" optional value={v.region} onChange={(x) => edit((c) => void (c.venue.region = nullIfEmpty(x)))} />
@@ -187,7 +190,7 @@ export function ScheduleFields() {
   const unsorted = listIssues.some((i) => i.code === 'schedule_not_chronological');
   return (
     <>
-      <p className={styles.hint}>The order of the day, from the ceremony on.</p>
+      <p className={styles.hint}>The order of the day, from the ceremony on. Up to {CONTENT_LIMITS.scheduleItems} events.</p>
       {schedule.map((row, i) => (
         <fieldset key={i} className={styles.group} data-schedule-row={i}>
           <legend className={styles.groupTitle}>Event {i + 1}</legend>
@@ -204,10 +207,17 @@ export function ScheduleFields() {
         </fieldset>
       ))}
       <IssueList issues={listIssues} />
+      {schedule.length >= CONTENT_LIMITS.scheduleItems ? (
+        <p className={styles.hint} data-schedule-full>
+          {schedule.length} of {CONTENT_LIMITS.scheduleItems} events: the most your website can show.
+        </p>
+      ) : null}
       <div className={styles.buttonRow}>
-        <button type="button" className={styles.secondaryButton} disabled={locked} onClick={() => edit((c) => void c.schedule.push({ label: '', time: '', location: null }))}>
-          Add an event
-        </button>
+        {schedule.length < CONTENT_LIMITS.scheduleItems ? (
+          <button type="button" className={styles.secondaryButton} disabled={locked} onClick={() => edit((c) => void c.schedule.push({ label: '', time: '', location: null }))}>
+            Add an event
+          </button>
+        ) : null}
         {unsorted ? (
           <button
             type="button"

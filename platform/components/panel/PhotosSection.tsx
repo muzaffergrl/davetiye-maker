@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { photoAt, previewPhotoUrl, shapeLabel, type PanelPhotoSlot } from '../../lib/panel/model.ts';
+import { smallestPhotoUrl } from '../../lib/photo-variants.ts';
 import { PhotoCropper } from './PhotoCropper.tsx';
 import { usePanelContext } from './fields.tsx';
 import styles from './panel.module.css';
@@ -73,7 +74,8 @@ export function PhotosSection({
             <div key={slot.key} className={styles.photoCard} data-photo-slot={slot.key}>
               <div className={styles.photoThumb} style={{ aspectRatio: String(slot.ratio ?? 4 / 3) }}>
                 {url ? (
-                  <img src={previewPhotoUrl(url, previewKey)} alt={`${slot.label}: current photo`} className={styles.photoImg} />
+                  // The 640 px variant when the photo has one (G055): a thumbnail does not need the full photo.
+                  <img src={previewPhotoUrl(smallestPhotoUrl(url), previewKey)} alt={`${slot.label}: current photo`} className={styles.photoImg} />
                 ) : (
                   <span className={styles.photoEmpty}>No photo yet</span>
                 )}
