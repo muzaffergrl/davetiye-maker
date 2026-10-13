@@ -18,7 +18,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim (226 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim (230 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -28,7 +28,7 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts   # build sonra
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts   # build sonrası: G051, 390 px, gerçek tema — takvim düğmeleri + .ics,
                        # SSS akordeonu (dokun/klavye), RSVP özel soruları (evet/hayır, hata), CSV sütunları, panel düzenleyicileri (44 kontrol;
-                       # ekran görüntüleri $G051_SHOTS_DIR, varsayılan geçici klasör)
+                       # ekran görüntüleri $G051_SHOTS_DIR, varsayılan geçici klasör; repodaki örnekler previews/g051/)
 ```
 
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
@@ -80,7 +80,8 @@ themes/blush-garden-rose/          ilk gerçek tema (tasarım 03, G038) — aşa
 scripts/                           seed.ts, screenshot.cjs, theme-check.cjs, sync-schema.cjs
 tests/                             *.test.ts (node:test)
 previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
-                                   g045/ = /start akışı; final/ = son duman testi (tests/final-smoke.ts, blush-garden-rose, 390 px)
+                                   g045/ = /start akışı; final/ = son duman testi (tests/final-smoke.ts, blush-garden-rose, 390 px);
+                                   g051/ = takvim, SSS, RSVP özel soruları, panel düzenleyicileri (tests/g051-browser.ts, 390 px)
 previews/g038/                     blush-garden-rose: sayfa görüntüleri, G035 karşılaştırması, açılış MP4'ü, checks.json
 ```
 

@@ -652,7 +652,7 @@ async function waitForServer(url, ms = 30000) {
         '-preset', 'slow', '-crf', '23', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', mp4]);
       fs.rmSync(vdir, { recursive: true, force: true });
       results.info.video_kb = Math.round(fs.statSync(mp4).size / 1024);
-      ok(`recording: previews/g038/opening_390x844.mp4 (${results.info.video_kb} KB) — tap → opening → home → story → details`);
+      ok(`recording: ${path.relative(ROOT, mp4)} (${results.info.video_kb} KB) — tap → opening → home → story → details`);
     }
 
     // ---------------------------------------------------------------- side-by-side with the approved G035 demo (390 px)
