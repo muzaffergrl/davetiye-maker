@@ -1,8 +1,8 @@
 # Rol rehberi — `gpt-gorsel` (ChatGPT görsel üretimi)
 
 **Görevin:** `GPT_PROMPTS.md` dosyalarındaki görselleri üretmek ve repoya doğru ad/yolla koymak.
-**Kullanıcı kararı K21: tasarımcı sensin.** Paket 4'te sahneleri bitmiş tasarım olarak çizersin (T1) ve
-aynı tasarımı parçalara bölersin (T2). Kalite çıtası: lüks, çok satan davetiye — düz vektör/clip-art değil.
+**Kullanıcı kararı K21: tasarımcı sensin.** Paket 4'te (tasarım 03) sahneleri, Paket 5'te (website, diğer 19
+tasarım) telefon ekranlarını bitmiş tasarım olarak çizersin (T1/W1) ve aynı tasarımı parçalara bölersin (T2/W2). Kalite çıtası: lüks, çok satan davetiye — düz vektör/clip-art değil.
 Canva'ya dokunmazsın, kod yazmazsın, kullanıcıdan hiçbir şey istemezsin.
 
 ## Başlarken (her oturumda)
@@ -28,8 +28,26 @@ Canva'ya dokunmazsın, kod yazmazsın, kullanıcıdan hiçbir şey istemezsin.
 - Foto gelecek pencereler **düz #00FF00** (doku/gölge yok).
 - Dikey 1024×1536 görsellerde önemli her şey genişliğin ortadaki %85'inde (video 9:16'ya kırpılır).
 
+## Website paketi (Paket 5)
+Ürün mobil öncelikli düğün websitesi (K22–K24). Her tasarımın `G2NN` görevi = `GPT_PROMPTS.md` → **PAKET 5** (W1 + W2)
++ **PAKET 2** (5 örnek fotoğraf). Model: tasarım 03 (`collections/03_Blush_Garden_Rose/assets/gpt/` ve sitesi).
+- **Sıra, tek sohbet:** W1 = 5 telefon ekranı comp'u (zarf sayfası, home, story, details, rsvp; demo metin serbest,
+  yalnız referans) → W2 parçaları (her birinde W1'i **referans görsel** ver) → PAKET 2 fotoğrafları (aynı kurgusal çift).
+- **Tek görselde tek nesne.** Birkaç nesneli "sheet" yok; süzülen nesneler `accent_1..3` ayrı ayrı görsellerdir.
+- **Gölge yok:** parçalarda düşen/alt gölge (cast/drop shadow) yok; gölgeyi site ekler.
+- **Aynı ışık:** bütün parçalar sol üstten yumuşak ışık; önden, düz, ortalı, kesilmemiş, çevresinde boşluk.
+- **Gerçek alfa** şeffaf PNG; foto pencereleri **düz `#00FF00`** (doku, gölge, gradyan yok).
+- **Yazı yok:** W2 parçalarında harf/rakam/monogram yok — mühür, pul, etiket, bavul etiketi, kitap kapağı dahil.
+- **Birbirine oturan parçalar** (`envelope_closed`, `closure`, `envelope_open`): aynı zarf, aynı ölçü, konum ve açı.
+  Önce `envelope_closed`'u üret, diğer ikisinde onu referans ver. Kapak, kapı, cep ayrıca çizilmez; Claude tek
+  görselden keser.
+- Dikey 1024×1536 görsellerde önemli her şey ortadaki **%85 genişlikte** (telefon yanları kırpar).
+- Opak olanlar yalnız `bg_page`, `bg_tile` (dikişsiz) ve `web_hero`; diğer parçalar şeffaf.
+- Kontrol: `python3 tools/kit_check.py collections/<NN_Ad> --paket 5` (pencere isteyen parçada yeşil pencere de
+  denetlenir) ve `--paket 2`. Commit: `G2NN: website paketi`.
+
 ## Kesin kurallar
-- Görselde **yazı, harf, rakam, monogram, logo, filigran yok** (tek istisna: Paket 4 T1 comp'ları) (posta damgası, etiket, kitap kapağı dahil).
+- Görselde **yazı, harf, rakam, monogram, logo, filigran yok** (tek istisna: Paket 4 T1 ve Paket 5 W1 comp'ları) (posta damgası, etiket, kitap kapağı dahil).
 - "Transparent background" → **gerçek alfa kanallı PNG** (beyaz ya da dama desenli zemin değil).
 - Nesne kenardan kesilmez; etrafında boşluk kalır.
 - Gerçek kişiye, ünlüye, markaya, başka satıcının tasarımına benzemez. Fotoğraflarda eller/parmaklar düzgün.

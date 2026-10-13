@@ -1,83 +1,296 @@
 # GPT görsel istekleri — Tasarım 17 · Emerald & Gold Estate
 
-> **Instructions for GPT:** Generate every image below in order. Use each English prompt exactly as written,
-> follow its checklist, and save each file with the exact file name and folder shown under "Kaydet".
-> No text, letters, numbers, logos or watermarks in any image. Keep ONE consistent illustration style across this file.
+> **Instructions for GPT:** Generate the images of PAKET 5 (website design: first the W1 screens, then the W2
+> parts) and then PAKET 2 (sample photos), in order and in ONE chat; PAKET 3 (mockups) only when its own task asks.
+> Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and
+> folder shown under "Kaydet". No text, letters, numbers, logos or watermarks in any image — except the PAKET 5 W1
+> screens, which are layout references.
 
-Bu dosya bu tasarımın prompt'larının **tek kaynağıdır**. Üretildi: `tools/katalog.py` (elle düzenleme yerine
-katalogu değiştirip yeniden üret). Tasarım özeti: `collections/17_Emerald_Gold_Estate/DESIGN_BRIEF.md`. Görev: `gorevler/G217-*`.
-Örnek fotoğraflar (çift, anılar) ortaktır: `collections/02_Dusty_Blue/assets/gpt/photos/` — burada üretilmez.
+Bu dosya bu tasarımın prompt'larının **tek kaynağıdır**. Üretildi: `python3 tools/katalog.py paket5` (elle düzenleme
+yerine katalogu değiştirip yeniden üret; PAKET 3 olduğu gibi korunur). Tasarım özeti: `collections/17_Emerald_Gold_Estate/DESIGN_BRIEF.md`.
+Görev: `gorevler/G217-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G817-*` (Paket 3). Model: tasarım 03 —
+`collections/03_Blush_Garden_Rose/assets/gpt/` (comps/, parts/, photos/) ve sitesi `collections/03_Blush_Garden_Rose/website/`.
 
 ## Nereye?
 - Repo `muzaffergrl/davetiye-maker`, dal `main`
-- Klasör: `collections/17_Emerald_Gold_Estate/assets/gpt/` altındaki `textures/` ve `decor/`
-- Commit mesajı: `G217: görseller`
+- Klasör: `collections/17_Emerald_Gold_Estate/assets/gpt/` altındaki `comps/` ve `parts/` (Paket 5), `photos/` (Paket 2), `mockups/` (Paket 3)
+- Commit mesajı: `G217: website paketi` (Paket 5 + Paket 2)
 - Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme işi verme.
 
 ## Stil ve renk
 - Teknik: **gold line art** (bütün dekor parçalarında aynı)
-- Renkler: ink `#F3EDDF` · deep `#C8A45A` · primary `#0F4D3A` · ivory `#F3EDDF` · gold `#C8A45A` · leaf `#C8A45A`
+- Renkler: ink `#F3EDDF` · deep `#C8A45A` · primary `#0F4D3A` · mist `#165C46`→`#0B3528` · ivory `#F3EDDF` · gold `#C8A45A` · leaf `#C8A45A`
+- Renk dünyası: deep emerald green, polished gold, white Carrara marble and ivory
 - Gerçek bir kişiye, markaya veya başka bir satıcının tasarımına benzemesin.
 
 ---
 
-## PAKET 1 — Dokular ve dekor (görev G217)
+## PAKET 5 — Website tasarımı (GPT tasarlar)
 
-### 1. Video arka planı
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/textures/background.png` · 1024×1536
+> Görev `G217` (K21–K24). Ürün artık mobil öncelikli düğün websitesi (K22): kapalı zarf sayfası → dokununca zarf
+> bu tasarıma özgü biçimde açılır → home, story, details, rsvp (K23). Kişisel metinler sitede HTML'dir, görsele
+> pişirilmez (K24). Eski Paket 1 (doku/dekor) ve video Paket 4 bu tasarımda iptal. Model: tasarım 03 PAKET 4 + sitesi.
+> Üreten: `python3 tools/katalog.py paket5 --no 17` — değişiklik için `tools/katalog.py` → `WEB[17]`.
 
-```
-Vertical background for a romantic wedding invitation video: deep emerald green velvet texture (#165C46 to #0B3528) with soft sheen and very subtle gold dust at the edges, empty center. Calm and elegant. Completely empty in the middle third — no objects, no flowers, no text. Even soft light.
-```
-Kontrol: ortası boş; nesne/yazı yok.
+**Bu tasarımın website açılışı** (kapaklı zarf; katalog: Zümrüt yeşili zarf, altın mühür; kapak açılınca altın çizgiler çizilerek büyür):
+On tap, the gold seal lifts away with a glint, the emerald flap opens upward, thin gold botanical lines draw themselves across the screen, and the marble card rises from the pocket.
 
-### 2. Kart/zarf kağıt dokusu
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/textures/paper.png` · 1024×1024
+**Instructions for GPT (read fully before starting):**
+- You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
+  wedding stationery** quality: rich detail, real paper and material textures, believable depth, generous
+  breathing room. Classic, romantic and rich — never minimal, never flat clip-art, never generic vector shapes.
+- Work in **one chat** for this whole file: first the five W1 screens, then every W2 part with the W1 images given
+  as **reference images**, then the PAKET 2 photos. Every image shares the same emerald envelope, gold seal,
+  decor, paper, metal and light.
+- Technique for all decor: **gold line art**; paper, fabric and metal look real.
+- Palette: ink `#F3EDDF` · deep `#C8A45A` · primary `#0F4D3A` · mist `#165C46`→`#0B3528` · ivory `#F3EDDF` · gold `#C8A45A` · leaf `#C8A45A` (deep emerald green, polished gold, white Carrara marble and ivory).
+- Typography in the W1 screens: ornate decorative Roman capitals for the names and an elegant old-style serif.
+- W1 screens are 1024×1536 full-bleed phone layouts (no phone hardware, no status bar, no browser bar). They may
+  contain the demo text below — they are layout references only and are never sold.
+- W2 parts contain **NO text, letters, numbers or monograms at all** — not on seals, stamps, labels, tags or covers.
+- **ONE object per image** — never a sheet or set of several objects in one image.
+- **No cast shadow and no drop shadow** on any part (the website adds its own shadows). Light every part the same
+  way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
+- Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
+- Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
+- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+  emerald envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
+  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
+  pieces from one image.
+- Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
+- Must not resemble any real person, brand or another seller's design.
 
-```
-Seamless tileable texture of white and pale grey Carrara-style marble texture with soft thin veins, polished, evenly lit flat top-down scan, no shadows, no vignette, no folds, no objects, no text, square.
-```
-Kontrol: düz ve eşit ışık; tekrarlanabilir.
+### W1 — Telefon ekranı tasarımları (referans; satılmaz)
 
-### 3. Zarf astarı / desen
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/textures/liner.png` · 1024×1024
+Ortak demo metin (W1 ekranlarında bu metni kullan): Evelyn & Alexander · Saturday, May 29, 2027 · 4:00 PM ·
+Emerald Court Estate, Lake Geneva, Wisconsin · Ceremony 4:00 PM The Lakeside Lawn · Cocktail Hour 5:00 PM The Marble Gallery · Reception 6:30 PM The Emerald Ballroom · Black tie ·
+Kindly reply by April 17, 2027.
 
-```
-Seamless tileable pattern: emerald green background with an elegant thin gold line-art pattern of ferns and leaves, seamless. Printed-on-paper look with faint grain, evenly lit, flat top-down, elegant and not busy, no text, no logos, square.
-```
-Kontrol: kesintisiz tekrar; kalabalık değil.
-
-### 4. Kapanış elemanı (mühür/kurdele/toka)
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/decor/closure.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-A round polished gold wax-style seal with a smooth empty center and a fine leaf border, no letters. Viewed straight from above, centered with generous empty space around it, soft natural light from the top-left. Completely free of letters, monograms, symbols or text. Transparent background PNG.
-```
-Kontrol: harf/sembol yok; gerçek şeffaf zemin; kesilmemiş.
-
-### 5. Büyük köşe kompozisyonu
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/decor/corner.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-Gold line art corner arrangement for a classic romantic wedding invitation: elegant thin metallic gold line-art botanical corner of ferns, monstera and eucalyptus outlines, no fill. It grows from the TOP-LEFT corner and fans diagonally toward the center, leaving the bottom-right two thirds of the square empty. Refined, airy, not crowded. Transparent background PNG, no text.
-```
-Kontrol: sol üstten başlıyor; sağ alt boş; şeffaf.
-
-### 6. Küçük yatay ayırıcı
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/decor/divider.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A small horizontal decorative divider in gold line art style: a horizontal thin gold line-art fern sprig, centered, about 70% of the image width, lots of empty space around it. Transparent background PNG, no text.
-```
-Kontrol: köşe kompozisyonuyla aynı stil; yatay ve ortalı.
-
-### 7. Fotoğraf çerçevesi
-**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/decor/photo_frame.png` · 1024×1536 · **Şeffaf zemin**
+#### W1.1 Açılış sayfası — kapalı zarf
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-A single empty photo frame for a wedding invitation, viewed straight on: a slim polished gold picture frame with a fine inner bevel, empty inside. The opening inside the frame is completely empty and transparent (no photo, no fill). The frame is centered, not cropped, with empty space around it. Transparent background PNG, no text.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: deep emerald green velvet texture (#165C46 to #0B3528) with soft sheen and very subtle gold dust at the edges, empty center, with elegant thin metallic gold line-art botanical corner of ferns, monstera and eucalyptus outlines, no fill framing the top-left and bottom-right corners and a few small floating accents (a thin gold line-art fern leaf, a small gold line-art monstera leaf, a tiny flake of gold leaf). Centered slightly below the middle: a deep emerald-green (#0F4D3A) envelope with a soft velvety matte finish, about 5:4 wider than tall, with a pointed V flap edged by a thin polished-gold line, closed, with a round polished-gold wax-style seal with a smooth EMPTY center and a fine leaf border, no letters — pressed onto the tip of the V flap. Above it, typography in ornate decorative Roman capitals for the names and an elegant old-style serif: a small spaced line "YOU ARE INVITED" and the names "Evelyn & Alexander" large; below the emerald envelope a small spaced line "TAP TO OPEN". All decor in gold line art style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
-Kontrol: iç kısım boş ve şeffaf; çerçeve kesilmemiş.
+Kontrol: emerald envelope ve gold seal net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
+
+#### W1.2 Home — kart, isimler, geri sayım
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/comps/web_2_home.png` · 1024×1536
+
+```
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the emerald envelope: a small white Carrara-marble card with soft grey veins, a slim polished-gold frame around a portrait photo window in its upper part and plain marble below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the display lettering and a small spaced line "MAY 29, 2027 · LAKE GENEVA". Under the card: the names "Evelyn & Alexander" large in the display lettering, a small spaced line "SATURDAY · MAY 29, 2027", the venue "Emerald Court Estate" and "Lake Geneva, Wisconsin" in italic serif, four small elegant countdown boxes "228 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a polished-gold pill button with emerald lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
+
+#### W1.3 Story — üç fotoğraf
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/comps/web_3_story.png` · 1024×1536
+
+```
+Same design, page 3 of 5: our story. The title "Our Story" in the display lettering at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: a gallery wall: three slim polished-gold frames of different sizes (one tall, one medium, one small) hung asymmetrically on a white marble wall; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the display lettering underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Galeri duvarı: farklı boylarda ince altın çerçeveler mermer duvara asılır.
+
+#### W1.4 Details — program kartı ve mekân
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/comps/web_4_details.png` · 1024×1536
+
+```
+Same design, page 4 of 5: details. A tall white marble card with the same slim gold border and only one thin gold line-art fern sprig at the top holds the title "Order of the Day" in the display lettering and three schedule rows separated by tiny dividers (a horizontal thin gold line-art fern sprig): "4:00 PM — Ceremony — The Lakeside Lawn", "5:00 PM — Cocktail Hour — The Marble Gallery", "6:30 PM — Reception — The Emerald Ballroom" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape slim polished-gold picture frame with a fine inner bevel, its window filled with flat pure green #00FF00 (the venue photo), under it "Emerald Court Estate" and "Lake Geneva, Wisconsin", then a small line "DRESS CODE · Black tie". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
+
+#### W1.5 RSVP — davet kartı ve buton
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
+
+```
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the display lettering, "Kindly reply by April 17, 2027" in serif, a polished-gold pill button with emerald lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Evelyn & Alexander" in the display lettering at the bottom; a small gold seal — the same one as on the emerald envelope — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
+
+### W2 — Parçalar (website katmanları; YAZI YOK)
+
+W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı emerald envelope, aynı kapanış,
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+
+#### W2.1 Sayfa arka planı (telefon)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_page.png` · 1024×1536
+
+```
+The page background of the W1 screens alone, as a vertical phone-screen background: deep emerald green velvet texture (#165C46 to #0B3528) with soft sheen and very subtle gold dust at the edges, empty center, with elegant thin metallic gold line-art botanical corner of ferns, monstera and eucalyptus outlines, no fill entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no emerald envelope, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.
+```
+Kontrol: orta sakin ve boş; dekor yalnız kenarlarda; yazı yok; W1 ile aynı renk ve ışık.
+
+#### W2.2 Dikişsiz zemin dokusu (uzun sayfalar)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_tile.png` · 1024×1024
+
+```
+A seamless tileable square texture for long website pages: deep emerald-green velvet (#165C46) with a soft even sheen. Calm, even and very low in contrast; no objects, no flowers, no vignette, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.
+```
+Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
+
+#### W2.3 Kapalı zarf — kapanış elemanı OLMADAN
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The same emerald envelope as in the W1 screens, alone and closed, WITHOUT the gold seal: a deep emerald-green (#0F4D3A) envelope with a soft velvety matte finish, about 5:4 wider than tall, with a pointed V flap edged by a thin polished-gold line. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne; gold seal yok; kesilmemiş; gölge yok; gerçek alfa.
+
+#### W2.4 Kapanış elemanı (tek başına)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Only a round polished-gold wax-style seal with a smooth EMPTY center and a fine leaf border, no letters, alone, exactly as it sits on the emerald envelope in the W1 screens (pressed onto the tip of the V flap) and at the same scale as in envelope_closed.png, with no emerald envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: yalnız gold seal; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+
+#### W2.5 Açık zarf — boş
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The SAME emerald envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward, its inner side and the inside of the back showing emerald green background with an elegant thin gold line-art pattern of ferns and leaves, seamless; the front pocket empty. No card, nothing inside, no gold seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
+
+#### W2.6 Zarftan çıkan küçük kart (boş)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The small card that comes out of the emerald envelope in W1.2, alone: a small white Carrara-marble card with soft grey veins, a slim polished-gold frame around a portrait photo window in its upper part and plain marble below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the emerald envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
+
+#### W2.7 Büyük davet kartı (boş)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The large invitation card of this design, alone: a tall white Carrara-marble card with soft thin grey veins and a slim polished-gold border, elegant thin metallic-gold line-art ferns, monstera and eucalyptus growing from the top-left and bottom-right corners. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
+
+#### W2.8 Hafif kart (details/rsvp için, boş)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The lighter card from W1.4 and W1.5, alone: a tall white marble card with the same slim gold border and only one thin gold line-art fern sprig at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
+
+#### W2.9 Dikey foto çerçevesi (story)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+One photo frame from W1.3, alone and upright: a slim polished-gold picture frame with a fine inner bevel. The window inside is a portrait window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
+
+#### W2.10 Yatay foto çerçevesi (mekân fotoğrafı)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A landscape slim polished-gold picture frame with a fine inner bevel, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
+
+#### W2.11 Köşe kümesi — sol üst
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/decor_tl.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+ONE cluster of elegant thin metallic gold line-art botanical corner of ferns, monstera and eucalyptus outlines, no fill, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince boşluk; alfa.
+
+#### W2.12 Köşe kümesi — sağ alt
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/decor_br.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+ONE cluster of elegant thin metallic gold line-art botanical corner of ferns, monstera and eucalyptus outlines, no fill, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince boşluk; alfa.
+
+#### W2.13 Süzülen accent 1
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Exactly ONE thin gold line-art fern leaf, in the same gold line art style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
+
+#### W2.14 Süzülen accent 2
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/accent_2.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Exactly ONE small gold line-art monstera leaf, in the same gold line art style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
+
+#### W2.15 Süzülen accent 3
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Exactly ONE tiny flake of gold leaf, in the same gold line art style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
+
+#### W2.16 Küçük ayırıcı
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/divider.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A small horizontal divider in the same gold line art style: a horizontal thin gold line-art fern sprig, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
+
+#### W2.17 Website hero (masaüstü üst bant)
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/parts/web_hero.png` · 1536×1024
+
+```
+Wide horizontal version of the same design for the desktop website header: deep emerald green velvet texture (#165C46 to #0B3528) with soft sheen and very subtle gold dust at the edges, empty center, with elegant thin metallic gold line-art botanical corner of ferns, monstera and eucalyptus outlines, no fill framing the left and right edges, and the closed emerald envelope with its gold seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+```
+Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
+
+---
+
+## PAKET 2 — Örnek fotoğraflar
+
+Görev `G217`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+birine benzemesin; eller/parmaklar düzgün. Fotoğraflar ince altın çerçevelere (~3:4) girer (galeri duvarı): yüzler ortadaki %70'lik alanda. Renk dünyası: zümrüt yeşili, altın, beyaz mermer, fildişi.
+
+### 2.1 Ana portre
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
+
+```
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on the terrace of a grand lakeside estate at golden hour; she wears an emerald-green satin evening gown, he wears a black tuxedo with an emerald velvet bow tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
+```
+
+### 2.2 Hikâye 1 — "First hello"
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, a candid first-date moment laughing together in a marble gallery hall, each holding a glass of champagne, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+```
+
+### 2.3 Hikâye 2 — "The proposal"
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, the proposal moment in a formal estate garden beside a lake at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+```
+
+### 2.4 Hikâye 3 — "Forever begins"
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, resting on emerald velvet, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+```
+
+### 2.5 Mekân
+**Kaydet:** `collections/17_Emerald_Gold_Estate/assets/gpt/photos/venue.jpg` · Yatay (1536×1024)
+
+```
+A fictional lakeside country estate set for a black-tie wedding: a grand neoclassical house with a marble gallery, a lawn sloping to a lake with rows of white chairs, tall clipped hedges, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.
+```
+
+Kontrol (tüm fotoğraflar): aynı çift tutarlı; yüzler doğal; eller/parmaklar düzgün; yazı/logo/tabela yok; konu ortada.
 
 ---
 

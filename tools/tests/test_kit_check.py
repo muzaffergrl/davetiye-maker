@@ -53,6 +53,69 @@ def calistir(k: Path, *ek):
     return r.returncode, r.stdout
 
 
+PAKET5 = """# test
+## PAKET 5 — Website tasarımı (GPT tasarlar)
+- Where a photo will go, fill the window with flat pure green #00FF00 (talimat: Kaydet satırı yok, sayılmaz).
+#### W2.1 Sayfa arka planı
+**Kaydet:** `{k}/assets/gpt/parts/bg_page.png` · 1024×1536
+
+```
+Calm background, no window.
+```
+#### W2.2 Küçük kart
+**Kaydet:** `{k}/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+A small card, its photo window filled with flat pure green #00FF00.
+```
+#### W2.3 Çerçeve
+**Kaydet:** `{k}/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+A frame, window filled with flat pure green #00FF00.
+```
+## PAKET 2 — Örnek fotoğraflar
+**Kaydet:** `{k}/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
+## PAKET 3 — mockup
+**Kaydet:** `{k}/assets/gpt/mockups/phone.png` · 1024×1536
+"""
+
+
+def kart(yol, yesil):
+    """Şeffaf zeminde fildişi kart; yesil: pencere rengi ya da None (pencere yok)."""
+    a = np.zeros((1536, 1024, 4), np.uint8)
+    a[300:1300, 200:824] = (255, 249, 246, 255)
+    if yesil:
+        a[380:760, 362:662, :3] = yesil
+    Image.fromarray(a, "RGBA").save(yol)
+
+
+def test_paket5(t: Path):
+    """PAKET 5: --paket 5 sayımı, #00FF00 isteyen parçada pencere denetimi (GPT yeşili de), pencere istemeyende yok."""
+    import sys as _s
+    _s.path.insert(0, str(ARAC.parent))
+    from kit_check import beklenenler
+    k = t / "p5"
+    for d in ("parts", "photos", "mockups"):
+        (k / "assets/gpt" / d).mkdir(parents=True)
+    (k / "assets/gpt/GPT_PROMPTS.md").write_text(PAKET5.format(k=k), encoding="utf-8")
+    b = beklenenler(k / "assets/gpt/GPT_PROMPTS.md")
+    assert [x["paket"] for x in b] == [5, 5, 5, 2, 3], b
+    assert [x["pencere"] for x in b] == [False, True, True, False, False], b
+    Image.new("RGB", (1024, 1536), (240, 230, 220)).save(k / "assets/gpt/parts/bg_page.png")
+    kart(k / "assets/gpt/parts/card_small.png", (4, 251, 44))      # GPT'nin gerçek "düz yeşili"
+    kart(k / "assets/gpt/parts/frame_portrait.png", None)          # pencere unutulmuş
+    kod, out = calistir(k, "--paket", "5")
+    assert kod == 1 and out.strip().endswith("2/3 geçti"), out
+    assert "card_small.png  — 1024×1536 şeffaf · pencere" in out, out
+    assert "frame_portrait.png  — #00FF00 foto penceresi yok" in out, out
+    kart(k / "assets/gpt/parts/frame_portrait.png", (0, 255, 0))
+    kod, out = calistir(k, "--paket", "5")
+    assert kod == 0 and out.strip().endswith("3/3 geçti"), out
+    kod, out = calistir(k, "--paket", "2")
+    assert kod == 1 and out.strip().endswith("0/1 geçti") and "hero_portrait.jpg" in out, out
+
+
 def main():
     with tempfile.TemporaryDirectory() as t:
         t = Path(t)
@@ -64,7 +127,8 @@ def main():
         assert "oran" in out and "şeffaf değil" in out and "yeşil alan" in out, out
         kod, out = calistir(t / "iyi", "--paket", "3")
         assert kod == 0 and out.strip().endswith("1/1 geçti"), out
-    print("test_kit_check: tamam")
+        test_paket5(t)
+    print("test_kit_check: tamam (paket 1/3/5, pencere denetimi)")
 
 
 if __name__ == "__main__":

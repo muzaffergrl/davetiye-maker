@@ -58,6 +58,16 @@ Videodan çıkıldı. Ürün: mobil öncelikli tek sayfa düğün websitesi; gö
 (G011, G013 hariç) askıya alındı; yeni website standardı tasarım 03 demosuyla (G035) belirlenecek.
 Teslim biçimi (Canva Website / kendi kodlu site + düzenleme formu) kullanıcı kararını bekliyor.
 
+**Tasarım başına website hattı (G033, 2026-10-13; K22–K24):** 03 dışındaki her tasarım iki görevle tema olur.
+**G2NN** (gpt-gorsel): koleksiyonun `assets/gpt/GPT_PROMPTS.md` → PAKET 5 (W1: 5 telefon ekranı comp'u — kapalı zarf
+sayfası, home, story, details, rsvp; W2: ~17 website parçası — kapalı/açık zarf + kapanış elemanı, kartlar, dikey/yatay
+foto çerçevesi, köşe kümeleri, 3 accent, arka planlar, hero) + PAKET 2 (5 örnek fotoğraf). → **G4NN** (claude-kod):
+`platform/themes/<tema>/` — 03 temasının yapısı, yalnız o tasarımın GPT parçaları, tasarıma özgü zarf açılışı ve
+sıralı sayfa koreografisi (MOTION), foto alanları, 390 px önizlemeler; G2NN + G038 (03 teması) + G046 (tema standardı)
+bitince açılır. **Model tasarım 03'tür** (G030 parçalar, G035 site, G036 fotoğraflar, G038 tema). Prompt'lar
+`python3 tools/katalog.py paket5`, görevler `katalog.py gorev5` ile üretilir; sanat yönetimi (zarf, kapanış, açılış
+hikâyesi, çerçeve, accent'ler) `tools/katalog.py` → `WEB`, özet tablo `docs/09_TASARIM_KATALOGU.md`.
+
 ## 3a. Tasarım modeli — GPT tasarlar, Claude birleştirir (K21, 2026-10-09)
 Kodla çizilmiş zarf/kart/çerçeve sahneleri (G1NN) kullanıcı tarafından "amatör, basit" bulundu ve durduruldu.
 Yeni hat, her tasarım için:

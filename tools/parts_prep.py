@@ -5,15 +5,18 @@
 Örnek:  python3 tools/parts_prep.py collections/03_Blush_Garden_Rose
 
 Parça listesi koleksiyonun `assets/gpt/GPT_PROMPTS.md` dosyasındaki `**Kaydet:**` satırlarından okunur
-(kit_check.beklenenler); yalnız `/parts/` altındakiler işlenir (`--comps` ile `/comps/` pencereleri de
-ölçülür). Kaynak yolu `.../assets/gpt/<alt yol>` ise `<koleksiyon>/assets/gpt/<alt yol>`'dan okunur
+(kit_check.beklenenler); yalnız PAKET 4 (video, tasarım 03) ya da PAKET 5 (website, K22–K24) bölümündeki — ya da
+PAKET başlığı olmayan — `/parts/` satırları işlenir; aynı yol iki pakette varsa sonraki geçerlidir (`--comps` ile
+`/comps/` pencereleri de ölçülür). PAKET 5 parçaları website katmanıdır: opak dikey görsel (ör. `bg_page.png`)
+9:16'ya kırpılmaz, video ölçülerine büyütülmez → `<ad>.jpg` (pencere varsa `.png`); PAKET 5 comp'larının pencereleri
+comp'un kendi piksel koordinatında ölçülür (`koordinat: kaynak`). Kaynak yolu `.../assets/gpt/<alt yol>` ise `<koleksiyon>/assets/gpt/<alt yol>`'dan okunur
 (varyant/test kökleri de çalışsın diye). Eksik kaynak → uyarı, atlanır (GPT görselleri henüz yoksa normal).
 
 Çıktı `<koleksiyon>/<--out>` (vars. `kit_layers/`). `assets/` altındaki bir klasöre hiçbir koşulda yazılmaz
 (GPT ham dosyaları ve dondurulmuş maskeler korunur). Göreli `--out` koleksiyon köküne göredir.
 
 İşlemler:
-  1. Opak dikey görsel (ör. `bg_scene.png`, 2:3) → 9:16 merkez kırpma → `<ad>_1080x1920.jpg` ve
+  1. Opak dikey görsel (ör. `bg_scene.png`, 2:3; yalnız PAKET 4/video) → 9:16 merkez kırpma → `<ad>_1080x1920.jpg` ve
      `<ad>_2160x3840.jpg` (kalite 92). 1024×1536 kaynaktan 2160×3840 ×2,5 BÜYÜTMEDİR, ayrıntı eklemez
      (özet bunu uyarı olarak yazar). Opak yatay/kare görsel (ör. `web_hero.png`) kırpılmaz → `<ad>.jpg`.
   2. Şeffaf parça (prompt satırında **Şeffaf zemin**) → alfa kutusuna kırpılır (alfa > 8) + `--pay` px
@@ -75,7 +78,7 @@ from PIL import Image
 ARACLAR = Path(__file__).resolve().parent
 ROOT = ARACLAR.parent
 sys.path.insert(0, str(ARACLAR))
-from kit_check import KAYDET, beklenenler  # noqa: E402
+from kit_check import beklenenler  # noqa: E402
 from mockup_compose import _kutu_bulanik, en_buyuk_bolge, genislet  # noqa: E402
 
 VIDEO_OLCULERI = [(1080, 1920), (2160, 3840)]
@@ -84,6 +87,8 @@ YESIL = np.array([0.0, 255.0, 0.0])
 CEP_KAYNAK = "envelope_open"
 CEP_CIKTI = "envelope_pocket_front.png"
 MAKS_PENCERE = 16
+PARCA_PAKETLERI = (4, 5, None)  # video tasarım paketi (03) ve website paketi (K22–K24); None = başlıksız dosya
+WEB_PAKETI = 5
 
 
 class KullanimHatasi(Exception):
@@ -124,17 +129,17 @@ def goreli(p: Path) -> str:
 
 def pencere_bekleyenler(prompts: Path) -> set:
     """Prompt bloğunda (Kaydet satırından sonraki başlığa kadar) #00FF00 geçen dosya yolları."""
-    out, cur = set(), None
-    for line in prompts.read_text(encoding="utf-8").splitlines():
-        if line.startswith("#"):
-            cur = None
-            continue
-        m = KAYDET.search(line)
-        if m:
-            cur = m.group(1)
-        elif cur and "#00FF00" in line.upper():
-            out.add(cur)
-    return out
+    return {b["yol"] for b in beklenenler(prompts) if b.get("pencere")}
+
+
+def parca_listesi(liste: list) -> list:
+    """PAKET 4/5 (ya da başlıksız) `/parts/` satırları; aynı yol iki kez geçerse sonraki kazanır, sıra korunur."""
+    secili = {}
+    for b in liste:
+        if "/parts/" in b["yol"] and b.get("paket") in PARCA_PAKETLERI:
+            secili.pop(b["yol"], None)
+            secili[b["yol"]] = b
+    return list(secili.values())
 
 
 # ----------------------------------------------------------------------------- kırpma
@@ -483,7 +488,7 @@ def parca_isle(b: dict, kaynak: Path, out: Path, esik: int, pay: int, comp=False
         a = np.asarray(im.convert("RGBA"))[..., 3]
         if (a < 250).mean() > 0.001:
             uyarilar.append(f"{ad}: opak beklenirken şeffaf pikseller var — beyaz zemine düzleştirilmedi, alfa atıldı")
-    if h > w:
+    if h > w and b.get("paket") != WEB_PAKETI:  # website (PAKET 5) görseli video ölçüsüne kırpılmaz
         kutu916 = merkez_kirp_916(w, h)
         kayit["kirpma"] = [kutu916[0], kutu916[1], kutu916[2] - kutu916[0], kutu916[3] - kutu916[1]]
         olculer = VIDEO_OLCULERI[:1] if comp else VIDEO_OLCULERI
@@ -504,6 +509,7 @@ def parca_isle(b: dict, kaynak: Path, out: Path, esik: int, pay: int, comp=False
         if comp:
             for p in pk:
                 p["katman"] = None
+                p["koordinat"] = "kaynak" if b.get("paket") == WEB_PAKETI else "video_1080x1920"
             continue
         son = rgba
         if pk:
@@ -522,9 +528,9 @@ def calistir(kok: Path, out: Path, esik=150, pay=8, comps=False, strict=False):
     if not prompts.exists():
         raise KullanimHatasi(f"GPT_PROMPTS.md yok: {prompts}")
     liste = beklenenler(prompts)
-    parcalar = [b for b in liste if "/parts/" in b["yol"]]
+    parcalar = parca_listesi(liste)
     if not parcalar:
-        raise KullanimHatasi("GPT_PROMPTS.md içinde parts/ altına **Kaydet:** satırı yok")
+        raise KullanimHatasi("GPT_PROMPTS.md içinde PAKET 4/5 parts/ altına **Kaydet:** satırı yok")
     is_listesi = [(b, False) for b in parcalar]
     if comps:
         is_listesi += [(b, True) for b in liste if "/comps/" in b["yol"]]
@@ -572,7 +578,8 @@ def ozet_yaz(ozet: dict, out: Path):
         print(f"TAMAM  {k['ad']} → {dosyalar}")
     for ad, pl in list(ozet["pencereler"].items()) + [(f"comp:{a}", p) for a, p in ozet["comp_pencereleri"].items()]:
         for p in pl:
-            print(f"PENCERE  {ad} · {p['katman'] or '1080×1920 video koordinatı'} · kutu {p['kutu']} · maske {p['maske']}")
+            yer = p["katman"] or ("comp koordinatı" if p.get("koordinat") == "kaynak" else "1080×1920 video koordinatı")
+            print(f"PENCERE  {ad} · {yer} · kutu {p['kutu']} · maske {p['maske']}")
     if ozet["cep"]:
         c = ozet["cep"]
         print(f"CEP  {c['dosya']} ({c['yontem']}) · kenar {c['kenar_sol_orta_sag']} · {c['zarf_katmani']} ile aynı tuval")

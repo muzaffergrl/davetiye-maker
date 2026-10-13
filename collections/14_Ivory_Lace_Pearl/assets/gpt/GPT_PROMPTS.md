@@ -1,83 +1,296 @@
 # GPT görsel istekleri — Tasarım 14 · Ivory Lace & Pearls
 
-> **Instructions for GPT:** Generate every image below in order. Use each English prompt exactly as written,
-> follow its checklist, and save each file with the exact file name and folder shown under "Kaydet".
-> No text, letters, numbers, logos or watermarks in any image. Keep ONE consistent illustration style across this file.
+> **Instructions for GPT:** Generate the images of PAKET 5 (website design: first the W1 screens, then the W2
+> parts) and then PAKET 2 (sample photos), in order and in ONE chat; PAKET 3 (mockups) only when its own task asks.
+> Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and
+> folder shown under "Kaydet". No text, letters, numbers, logos or watermarks in any image — except the PAKET 5 W1
+> screens, which are layout references.
 
-Bu dosya bu tasarımın prompt'larının **tek kaynağıdır**. Üretildi: `tools/katalog.py` (elle düzenleme yerine
-katalogu değiştirip yeniden üret). Tasarım özeti: `collections/14_Ivory_Lace_Pearl/DESIGN_BRIEF.md`. Görev: `gorevler/G214-*`.
-Örnek fotoğraflar (çift, anılar) ortaktır: `collections/02_Dusty_Blue/assets/gpt/photos/` — burada üretilmez.
+Bu dosya bu tasarımın prompt'larının **tek kaynağıdır**. Üretildi: `python3 tools/katalog.py paket5` (elle düzenleme
+yerine katalogu değiştirip yeniden üret; PAKET 3 olduğu gibi korunur). Tasarım özeti: `collections/14_Ivory_Lace_Pearl/DESIGN_BRIEF.md`.
+Görev: `gorevler/G214-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G814-*` (Paket 3). Model: tasarım 03 —
+`collections/03_Blush_Garden_Rose/assets/gpt/` (comps/, parts/, photos/) ve sitesi `collections/03_Blush_Garden_Rose/website/`.
 
 ## Nereye?
 - Repo `muzaffergrl/davetiye-maker`, dal `main`
-- Klasör: `collections/14_Ivory_Lace_Pearl/assets/gpt/` altındaki `textures/` ve `decor/`
-- Commit mesajı: `G214: görseller`
+- Klasör: `collections/14_Ivory_Lace_Pearl/assets/gpt/` altındaki `comps/` ve `parts/` (Paket 5), `photos/` (Paket 2), `mockups/` (Paket 3)
+- Commit mesajı: `G214: website paketi` (Paket 5 + Paket 2)
 - Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme işi verme.
 
 ## Stil ve renk
 - Teknik: **photorealistic** (bütün dekor parçalarında aynı)
-- Renkler: ink `#3A3530` · deep `#8C7B66` · primary `#E9E2D6` · ivory `#FFFDF8` · gold `#BFA67A` · leaf `#A3A58F`
+- Renkler: ink `#3A3530` · deep `#8C7B66` · primary `#E9E2D6` · mist `#FAF7F2`→`#E7E0D4` · ivory `#FFFDF8` · gold `#BFA67A` · leaf `#A3A58F`
+- Renk dünyası: ivory, champagne, pearl white, soft taupe and antique silver-gold
 - Gerçek bir kişiye, markaya veya başka bir satıcının tasarımına benzemesin.
 
 ---
 
-## PAKET 1 — Dokular ve dekor (görev G214)
+## PAKET 5 — Website tasarımı (GPT tasarlar)
 
-### 1. Video arka planı
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/textures/background.png` · 1024×1536
+> Görev `G214` (K21–K24). Ürün artık mobil öncelikli düğün websitesi (K22): kapalı zarf sayfası → dokununca zarf
+> bu tasarıma özgü biçimde açılır → home, story, details, rsvp (K23). Kişisel metinler sitede HTML'dir, görsele
+> pişirilmez (K24). Eski Paket 1 (doku/dekor) ve video Paket 4 bu tasarımda iptal. Model: tasarım 03 PAKET 4 + sitesi.
+> Üreten: `python3 tools/katalog.py paket5 --no 14` — değişiklik için `tools/katalog.py` → `WEB[14]`.
 
-```
-Vertical background for a romantic wedding invitation video: soft pearly ivory gradient (#FAF7F2 to #E7E0D4) with a subtle satin sheen and very faint lace shadow at the edges, empty center. Calm and elegant. Completely empty in the middle third — no objects, no flowers, no text. Even soft light.
-```
-Kontrol: ortası boş; nesne/yazı yok.
+**Bu tasarımın website açılışı** (gatefold, iki kapı; katalog: Dantel kaplı fildişi gatefold; inci tokalı kopça açılır, dantel kanatlar aralanır):
+On tap, the pearl clasp unhooks and slips away, the lace-covered doors part slowly to the sides like a lifted veil, and the card rises from the satin center while a strand of tiny pearls glints.
 
-### 2. Kart/zarf kağıt dokusu
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/textures/paper.png` · 1024×1024
+**Instructions for GPT (read fully before starting):**
+- You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
+  wedding stationery** quality: rich detail, real paper and material textures, believable depth, generous
+  breathing room. Classic, romantic and rich — never minimal, never flat clip-art, never generic vector shapes.
+- Work in **one chat** for this whole file: first the five W1 screens, then every W2 part with the W1 images given
+  as **reference images**, then the PAKET 2 photos. Every image shares the same lace gatefold folder, pearl clasp,
+  decor, paper, metal and light.
+- Technique for all decor: **photorealistic**; paper, fabric and metal look real.
+- Palette: ink `#3A3530` · deep `#8C7B66` · primary `#E9E2D6` · mist `#FAF7F2`→`#E7E0D4` · ivory `#FFFDF8` · gold `#BFA67A` · leaf `#A3A58F` (ivory, champagne, pearl white, soft taupe and antique silver-gold).
+- Typography in the W1 screens: a refined formal copperplate script for the names and a high-contrast Bodoni-style serif.
+- W1 screens are 1024×1536 full-bleed phone layouts (no phone hardware, no status bar, no browser bar). They may
+  contain the demo text below — they are layout references only and are never sold.
+- W2 parts contain **NO text, letters, numbers or monograms at all** — not on seals, stamps, labels, tags or covers.
+- **ONE object per image** — never a sheet or set of several objects in one image.
+- **No cast shadow and no drop shadow** on any part (the website adds its own shadows). Light every part the same
+  way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
+- Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
+- Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
+- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+  lace gatefold folder at the SAME size, position and angle. Make envelope_closed.png first and give it as the
+  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
+  pieces from one image.
+- Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
+- Must not resemble any real person, brand or another seller's design.
 
-```
-Seamless tileable texture of smooth ivory satin-finish paper (#FFFDF8) with a soft pearlescent sheen, evenly lit flat top-down scan, no shadows, no vignette, no folds, no objects, no text, square.
-```
-Kontrol: düz ve eşit ışık; tekrarlanabilir.
+### W1 — Telefon ekranı tasarımları (referans; satılmaz)
 
-### 3. Zarf astarı / desen
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/textures/liner.png` · 1024×1024
+Ortak demo metin (W1 ekranlarında bu metni kullan): Charlotte & William · Saturday, June 5, 2027 · 4:00 PM ·
+Ashbury Manor, Newport, Rhode Island · Ceremony 4:00 PM St. Mary's Chapel Garden · Cocktail Hour 5:00 PM The Pearl Room · Reception 6:30 PM The Ashbury Ballroom · Black tie optional ·
+Kindly reply by April 24, 2027.
 
-```
-Seamless tileable pattern: original fine ivory lace pattern with small roses and scallops on a pale champagne background, seamless, photorealistic. Printed-on-paper look with faint grain, evenly lit, flat top-down, elegant and not busy, no text, no logos, square.
-```
-Kontrol: kesintisiz tekrar; kalabalık değil.
-
-### 4. Kapanış elemanı (mühür/kurdele/toka)
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/decor/closure.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-An elegant pearl clasp: a cluster of five lustrous white pearls on a small antique silver-gold setting, no letters. Viewed straight from above, centered with generous empty space around it, soft natural light from the top-left. Completely free of letters, monograms, symbols or text. Transparent background PNG.
-```
-Kontrol: harf/sembol yok; gerçek şeffaf zemin; kesilmemiş.
-
-### 5. Büyük köşe kompozisyonu
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/decor/corner.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-Photorealistic corner arrangement for a classic romantic wedding invitation: a corner of delicate original ivory lace with scalloped edges, strands of small pearls and a few white garden roses, photorealistic. It grows from the TOP-LEFT corner and fans diagonally toward the center, leaving the bottom-right two thirds of the square empty. Refined, airy, not crowded. Transparent background PNG, no text.
-```
-Kontrol: sol üstten başlıyor; sağ alt boş; şeffaf.
-
-### 6. Küçük yatay ayırıcı
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/decor/divider.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A small horizontal decorative divider in photorealistic style: a horizontal strand of small white pearls with a tiny lace bow in the center, centered, about 70% of the image width, lots of empty space around it. Transparent background PNG, no text.
-```
-Kontrol: köşe kompozisyonuyla aynı stil; yatay ve ortalı.
-
-### 7. Fotoğraf çerçevesi
-**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/decor/photo_frame.png` · 1024×1536 · **Şeffaf zemin**
+#### W1.1 Açılış sayfası — kapalı zarf
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-A single empty photo frame for a wedding invitation, viewed straight on: an oval cameo-style frame of carved ivory with a fine string of tiny pearls around the edge. The opening inside the frame is completely empty and transparent (no photo, no fill). The frame is centered, not cropped, with empty space around it. Transparent background PNG, no text.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft pearly ivory gradient (#FAF7F2 to #E7E0D4) with a subtle satin sheen and very faint lace shadow at the edges, empty center, with a corner of delicate original ivory lace with scalloped edges, strands of small pearls and a few white garden roses, photorealistic framing the top-left and bottom-right corners and a few small floating accents (a lustrous round white pearl, a white garden rose petal, a tiny ivory satin bow). Centered slightly below the middle: a tall ivory satin-finish gatefold folder (#FFFDF8), portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors covered with a delicate original ivory lace overlay with scalloped edges along the seam, closed, with an elegant pearl clasp: a cluster of five lustrous white pearls on a small antique silver-gold setting with a short loop of tiny pearls, no letters — fastened over the center seam at mid-height. Above it, typography in a refined formal copperplate script for the names and a high-contrast Bodoni-style serif: a small spaced line "YOU ARE INVITED" and the names "Charlotte & William" large; below the lace gatefold folder a small spaced line "TAP TO OPEN". All decor in photorealistic style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
-Kontrol: iç kısım boş ve şeffaf; çerçeve kesilmemiş.
+Kontrol: lace gatefold folder ve pearl clasp net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
+
+#### W1.2 Home — kart, isimler, geri sayım
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/comps/web_2_home.png` · 1024×1536
+
+```
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the lace gatefold folder: a small ivory satin card with a carved-ivory cameo-style upright oval photo window edged by a fine string of tiny pearls in its upper part, plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "JUNE 5, 2027 · NEWPORT". Under the card: the names "Charlotte & William" large in the script, a small spaced line "SATURDAY · JUNE 5, 2027", the venue "Ashbury Manor" and "Newport, Rhode Island" in italic serif, four small elegant countdown boxes "235 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a soft champagne-taupe pill button with ivory lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
+
+#### W1.3 Story — üç fotoğraf
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/comps/web_3_story.png` · 1024×1536
+
+```
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three carved-ivory cameo oval frames, each hanging from a fine strand of pearls, descending to slightly different heights; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Kabartma kamelya (cameo) oval çerçeveler, inci dizisiyle iner.
+
+#### W1.4 Details — program kartı ve mekân
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/comps/web_4_details.png` · 1024×1536
+
+```
+Same design, page 4 of 5: details. A tall ivory satin-finish card with only a narrow scalloped lace edge along the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal strand of small white pearls with a tiny lace bow in the center): "4:00 PM — Ceremony — St. Mary's Chapel Garden", "5:00 PM — Cocktail Hour — The Pearl Room", "6:30 PM — Reception — The Ashbury Ballroom" (time in small spaced serif, event in serif, place in italic). Below the card: a wide landscape oval cameo-style frame of carved ivory with a fine string of tiny pearls around the edge, its window filled with flat pure green #00FF00 (the venue photo), under it "Ashbury Manor" and "Newport, Rhode Island", then a small line "DRESS CODE · Black tie optional". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
+
+#### W1.5 RSVP — davet kartı ve buton
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
+
+```
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by April 24, 2027" in serif, a soft champagne-taupe pill button with ivory lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Charlotte & William" in the script at the bottom; a small pearl clasp — the same one as on the lace gatefold folder — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+```
+Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
+
+### W2 — Parçalar (website katmanları; YAZI YOK)
+
+W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı lace gatefold folder, aynı kapanış,
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+
+#### W2.1 Sayfa arka planı (telefon)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/bg_page.png` · 1024×1536
+
+```
+The page background of the W1 screens alone, as a vertical phone-screen background: soft pearly ivory gradient (#FAF7F2 to #E7E0D4) with a subtle satin sheen and very faint lace shadow at the edges, empty center, with a corner of delicate original ivory lace with scalloped edges, strands of small pearls and a few white garden roses, photorealistic entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no lace gatefold folder, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.
+```
+Kontrol: orta sakin ve boş; dekor yalnız kenarlarda; yazı yok; W1 ile aynı renk ve ışık.
+
+#### W2.2 Dikişsiz zemin dokusu (uzun sayfalar)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/bg_tile.png` · 1024×1024
+
+```
+A seamless tileable square texture for long website pages: soft pearly ivory satin (#FAF7F2) with a very subtle sheen. Calm, even and very low in contrast; no objects, no flowers, no vignette, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.
+```
+Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
+
+#### W2.3 Kapalı zarf (gatefold, iki kapı) — kapanış elemanı OLMADAN
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/envelope_closed.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The same lace gatefold folder as in the W1 screens, alone and closed, WITHOUT the pearl clasp: a tall ivory satin-finish gatefold folder (#FFFDF8), portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors covered with a delicate original ivory lace overlay with scalloped edges along the seam. The folder stands perfectly upright in the exact center of the wide image, its height about 85% of the image height; the empty areas to the left and right are left for the two doors to open into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne; pearl clasp yok; kesilmemiş; gölge yok; gerçek alfa.
+
+#### W2.4 Kapanış elemanı (tek başına)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Only an elegant pearl clasp: a cluster of five lustrous white pearls on a small antique silver-gold setting with a short loop of tiny pearls, no letters, alone, exactly as it sits on the lace gatefold folder in the W1 screens (fastened over the center seam at mid-height) and at the same scale as in envelope_closed.png, with no lace gatefold folder behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: yalnız pearl clasp; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+
+#### W2.5 Açık zarf (gatefold, iki kapı) — boş
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/envelope_open.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The SAME lace gatefold folder as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: both lace-covered doors swung fully open to the left and right and lying flat, the inside of the doors lined with original fine ivory lace pattern with small roses and scallops on a pale champagne background, seamless, photorealistic, the ivory satin center panel with a shallow pocket along its lower edge; the pocket empty. No card, nothing inside, no pearl clasp. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
+
+#### W2.6 Zarftan çıkan küçük kart (boş)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The small card that comes out of the lace gatefold folder in W1.2, alone: a small ivory satin card with a carved-ivory cameo-style upright oval photo window edged by a fine string of tiny pearls in its upper part, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the lace gatefold folder so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
+
+#### W2.7 Büyük davet kartı (boş)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The large invitation card of this design, alone: a tall ivory satin-finish card with scalloped lace borders along the top and bottom edges, a cluster of white garden roses and a draped strand of small pearls at the top-left corner, photorealistic. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
+
+#### W2.8 Hafif kart (details/rsvp için, boş)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The lighter card from W1.4 and W1.5, alone: a tall ivory satin-finish card with only a narrow scalloped lace edge along the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
+
+#### W2.9 Dikey foto çerçevesi (story)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+One photo frame from W1.3, alone and upright: an oval cameo-style frame of carved ivory with a fine string of tiny pearls around the edge. The window inside is an upright oval window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
+
+#### W2.10 Yatay foto çerçevesi (mekân fotoğrafı)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A wide landscape oval cameo-style frame of carved ivory with a fine string of tiny pearls around the edge, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a wide oval window (about 3:2), filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
+
+#### W2.11 Köşe kümesi — sol üst
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/decor_tl.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+ONE cluster of a corner of delicate original ivory lace with scalloped edges, strands of small pearls and a few white garden roses, photorealistic, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince boşluk; alfa.
+
+#### W2.12 Köşe kümesi — sağ alt
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/decor_br.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+ONE cluster of a corner of delicate original ivory lace with scalloped edges, strands of small pearls and a few white garden roses, photorealistic, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince boşluk; alfa.
+
+#### W2.13 Süzülen accent 1
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Exactly ONE lustrous round white pearl, in the same photorealistic style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
+
+#### W2.14 Süzülen accent 2
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/accent_2.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Exactly ONE white garden rose petal, in the same photorealistic style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
+
+#### W2.15 Süzülen accent 3
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Exactly ONE tiny ivory satin bow, in the same photorealistic style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
+
+#### W2.16 Küçük ayırıcı
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/divider.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A small horizontal divider in the same photorealistic style: a horizontal strand of small white pearls with a tiny lace bow in the center, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
+
+#### W2.17 Website hero (masaüstü üst bant)
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/web_hero.png` · 1536×1024
+
+```
+Wide horizontal version of the same design for the desktop website header: soft pearly ivory gradient (#FAF7F2 to #E7E0D4) with a subtle satin sheen and very faint lace shadow at the edges, empty center, with a corner of delicate original ivory lace with scalloped edges, strands of small pearls and a few white garden roses, photorealistic framing the left and right edges, and the closed lace gatefold folder with its pearl clasp resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+```
+Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
+
+---
+
+## PAKET 2 — Örnek fotoğraflar
+
+Görev `G214`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+birine benzemesin; eller/parmaklar düzgün. Fotoğraflar dikey oval kamelya çerçevelere girer: yüzler tam ortada, kenarlarda bol pay kalsın. Renk dünyası: fildişi, şampanya, inci beyazı, yumuşak taupe.
+
+### 2.1 Ana portre
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
+
+```
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on the stone terrace of an elegant manor garden by the sea at golden hour; she wears an ivory satin midi dress with a single strand of pearls, he wears a navy suit with a white pocket square. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
+```
+
+### 2.2 Hikâye 1 — "First hello"
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, a candid first-date moment laughing together at a garden tea table with fine china teacups and white roses, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+```
+
+### 2.3 Hikâye 2 — "The proposal"
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, the proposal moment in a formal rose garden beside a stone fountain at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+```
+
+### 2.4 Hikâye 3 — "Forever begins"
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, resting on ivory lace beside a strand of pearls, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+```
+
+### 2.5 Mekân
+**Kaydet:** `collections/14_Ivory_Lace_Pearl/assets/gpt/photos/venue.jpg` · Yatay (1536×1024)
+
+```
+A fictional Gilded Age seaside mansion wedding venue at golden hour: a white limestone manor with a balustraded terrace, a formal garden with clipped hedges, rows of white chairs facing an arch of white roses, the ocean beyond, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.
+```
+
+Kontrol (tüm fotoğraflar): aynı çift tutarlı; yüzler doğal; eller/parmaklar düzgün; yazı/logo/tabela yok; konu ortada.
 
 ---
 

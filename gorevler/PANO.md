@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 4 · alindi 3 · inceleme 1 · blokaj 331 · bitti 17 · toplam 356
+Özet: hazir 42 · alindi 3 · inceleme 1 · blokaj 295 · bitti 17 · toplam 358
 
 ## claude-canva
 
@@ -159,7 +159,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (104)**
+**Üzerinde çalışılan / incelemede / blokaj (86)**
 
 - `G038` alindi · wf-platform — Tasarım 03 Blush Garden Rose'u platform teması yap
 - `G039` alindi · wf-platform — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla
@@ -186,25 +186,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
-- `G401` blokaj · - — Tasarım 01 Olive & Ivory — A2 website HTML kaynağı
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
-- `G404` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A2 website HTML kaynağı
-- `G405` blokaj · - — Tasarım 05 Mediterranean Lemon — A2 website HTML kaynağı
-- `G406` blokaj · - — Tasarım 06 Art Deco Black-Tie — A2 website HTML kaynağı
-- `G407` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — A2 website HTML kaynağı
-- `G408` blokaj · - — Tasarım 08 Winter Evergreen — A2 website HTML kaynağı
-- `G409` blokaj · - — Tasarım 09 Lavender Provence — A2 website HTML kaynağı
-- `G410` blokaj · - — Tasarım 10 Tuscan Vineyard — A2 website HTML kaynağı
-- `G411` blokaj · - — Tasarım 11 Boho Pampas Terracotta — A2 website HTML kaynağı
-- `G412` blokaj · - — Tasarım 12 Tropical Destination — A2 website HTML kaynağı
-- `G413` blokaj · - — Tasarım 13 Enchanted Forest Storybook — A2 website HTML kaynağı
-- `G414` blokaj · - — Tasarım 14 Ivory Lace & Pearls — A2 website HTML kaynağı
-- `G415` blokaj · - — Tasarım 15 Cherry Blossom Spring — A2 website HTML kaynağı
-- `G416` blokaj · - — Tasarım 16 Sunflower Rustic Barn — A2 website HTML kaynağı
-- `G417` blokaj · - — Tasarım 17 Emerald & Gold Estate — A2 website HTML kaynağı
-- `G418` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — A2 website HTML kaynağı
-- `G419` blokaj · - — Tasarım 19 Midnight Garden — A2 website HTML kaynağı
-- `G420` blokaj · - — Tasarım 20 Coastal Seaside — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G504` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -266,7 +248,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 2 · Biten: 10
+Bağımlılık bekleyen: 21 · Biten: 10
 
 ## claude-metin
 
@@ -333,34 +315,35 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (2)**
+**Alınabilir (21)**
 
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
+- `G201` p1 — Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G201-gorsel.md`
+- `G204` p1 — Tasarım 04 Vintage Airmail Love Letter — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G204-gorsel.md`
+- `G205` p1 — Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G205-gorsel.md`
+- `G202` p2 — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G202-gorsel.md`
+- `G206` p2 — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G206-gorsel.md`
+- `G207` p2 — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G207-gorsel.md`
+- `G208` p2 — Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G208-gorsel.md`
+- `G209` p2 — Tasarım 09 Lavender Provence — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G209-gorsel.md`
+- `G210` p2 — Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G210-gorsel.md`
+- `G211` p2 — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G211-gorsel.md`
+- `G212` p2 — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G212-gorsel.md`
+- `G213` p2 — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G213-gorsel.md`
+- `G214` p2 — Tasarım 14 Ivory Lace & Pearls — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G214-gorsel.md`
+- `G215` p2 — Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G215-gorsel.md`
+- `G216` p2 — Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G216-gorsel.md`
+- `G217` p2 — Tasarım 17 Emerald & Gold Estate — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G217-gorsel.md`
+- `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G218-gorsel.md`
+- `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
+- `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (64)**
+**Üzerinde çalışılan / incelemede / blokaj (46)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
-- `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
-- `G204` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1)
-- `G205` blokaj · - — Tasarım 05 Mediterranean Lemon — GPT görselleri (Paket 1)
-- `G206` blokaj · - — Tasarım 06 Art Deco Black-Tie — GPT görselleri (Paket 1)
-- `G207` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — GPT görselleri (Paket 1)
-- `G208` blokaj · - — Tasarım 08 Winter Evergreen — GPT görselleri (Paket 1)
-- `G209` blokaj · - — Tasarım 09 Lavender Provence — GPT görselleri (Paket 1)
-- `G210` blokaj · - — Tasarım 10 Tuscan Vineyard — GPT görselleri (Paket 1)
-- `G211` blokaj · - — Tasarım 11 Boho Pampas Terracotta — GPT görselleri (Paket 1)
-- `G212` blokaj · - — Tasarım 12 Tropical Destination — GPT görselleri (Paket 1)
-- `G213` blokaj · - — Tasarım 13 Enchanted Forest Storybook — GPT görselleri (Paket 1)
-- `G214` blokaj · - — Tasarım 14 Ivory Lace & Pearls — GPT görselleri (Paket 1)
-- `G215` blokaj · - — Tasarım 15 Cherry Blossom Spring — GPT görselleri (Paket 1)
-- `G216` blokaj · - — Tasarım 16 Sunflower Rustic Barn — GPT görselleri (Paket 1)
-- `G217` blokaj · - — Tasarım 17 Emerald & Gold Estate — GPT görselleri (Paket 1)
-- `G218` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — GPT görselleri (Paket 1)
-- `G219` blokaj · - — Tasarım 19 Midnight Garden — GPT görselleri (Paket 1)
-- `G220` blokaj · - — Tasarım 20 Coastal Seaside — GPT görselleri (Paket 1)
 - `G801` blokaj · - — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri
 - `G803` blokaj · - — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri
 - `G804` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri

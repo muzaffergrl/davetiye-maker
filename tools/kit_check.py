@@ -1,6 +1,6 @@
 """Kit doğrulayıcı — GPT'nin ürettiği ham görselleri Canva'ya girmeden önce denetler.
 
-  python3 tools/kit_check.py <kit kökü> [--paket 1|2|3|4]
+  python3 tools/kit_check.py <kit kökü> [--paket 1|2|3|4|5]
 
 Beklenen dosyalar, ölçüler ve şeffaflık, kitin `assets/gpt/GPT_PROMPTS.md` dosyasındaki
 `**Kaydet:** `yol` · ölçü · **Şeffaf zemin**` satırlarından okunur (20 tasarım, V01 ve V02–V06 aynı biçim).
@@ -11,6 +11,9 @@ Kontroller:
   - oran: hedef ölçünün oranına ±%2 (piksel değil oran; GPT çıktısı farklı çözünürlükte olabilir)
   - şeffaf istenenlerde: gerçek alfa kanalı, kenar şeridinin ≥%90'ı şeffaf (nesne kesilmemiş), içerik var
   - mockup'larda: #00FF00 (±40 ya da yeşil baskın) bölgesi görselin ≥%5'i ve sınır kutusunun ≥%90'ını dolduruyor (düz, tek parça)
+  - prompt bloğunda `#00FF00` geçen diğer görsellerde (foto penceresi isteyen parça ve comp'lar; ör. PAKET 5 card_small,
+    frame_*, W1 ekranları): aynı yeşil testine uyan (şeffaf parçada alfa ≥ 128) en büyük bağlı bölge görselin ≥%0,3'ü
+    (en az 256 px) — pencere var mı; şekli/sayısı denetlenmez (parts_prep.py ölçer)
   - şeffaf istenmeyen dokularda: alfa varsa tamamen opak
 Yazı/harf denetimi otomatik yapılmaz (OCR yok); görsel kontrol listesinde kalır.
 """
@@ -22,21 +25,31 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from mockup_compose import en_buyuk_bolge, yesil_maske  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
+PENCERE_MIN_PAY = 0.003
 KAYDET = re.compile(r"\*\*Kaydet:\*\*\s*`([^`]+)`(.*)")
 OLCU = re.compile(r"(\d{3,5})\s*[×x]\s*(\d{3,5})")
 PAKET = re.compile(r"^##\s+PAKET\s+(\d)", re.I)
 
 
 def beklenenler(prompts: Path):
-    out, paket = [], None
+    """Kaydet satırları: yol, ölçü, şeffaf, mockup, paket ve `pencere` (satırdan sonraki başlığa kadar olan prompt
+    bloğunda `#00FF00` geçiyor mu — foto penceresi isteniyor)."""
+    out, paket, cur = [], None, None
     for line in prompts.read_text(encoding="utf-8").splitlines():
         m = PAKET.match(line)
         if m:
             paket = int(m.group(1))
+        if line.startswith("#"):
+            cur = None
             continue
         m = KAYDET.search(line)
         if not m:
+            if cur is not None and "#00FF00" in line.upper():
+                cur["pencere"] = True
             continue
         yol, kalan = m.group(1), m.group(2)
         o = OLCU.search(kalan)
@@ -46,7 +59,9 @@ def beklenenler(prompts: Path):
             "seffaf": "Şeffaf" in kalan or "seffaf" in kalan.lower(),
             "mockup": "/mockups/" in yol,
             "paket": paket,
+            "pencere": False,
         })
+        cur = out[-1]
     return out
 
 
@@ -89,10 +104,19 @@ def denetle(b, kok: Path):
         a = np.asarray(im.convert("RGBA"))[:, :, 3]
         if (a < 250).mean() > 0.001:
             sorun.append("opak olması gerekirken şeffaf pikseller var")
+    ek = ""
+    if b.get("pencere") and not b["mockup"]:
+        rgba = np.asarray(im.convert("RGBA"))
+        yesil = yesil_maske(rgba[:, :, :3]) & (rgba[:, :, 3] >= 128)  # GPT yeşili ≈ (3,252,45) da sayılır
+        bolge = en_buyuk_bolge(yesil) if yesil.any() else yesil
+        pay = bolge.sum() / yesil.size
+        if pay < PENCERE_MIN_PAY or bolge.sum() < 256:
+            sorun.append(f"#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %{pay*100:.2f})")
+        else:
+            ek = f" · pencere %{pay*100:.1f}"
     if b["mockup"]:
-        rgb = np.asarray(im.convert("RGB")).astype(int)
-        yesil = ((np.abs(rgb[:, :, 0] - 0) <= 40) & (np.abs(rgb[:, :, 1] - 255) <= 40) & (np.abs(rgb[:, :, 2] - 0) <= 40)) \
-            | ((rgb[:, :, 1] - np.maximum(rgb[:, :, 0], rgb[:, :, 2]) >= 150) & (rgb[:, :, 1] >= 150))  # GPT yeşili ≈ (3,252,45)
+        rgb = np.asarray(im.convert("RGB"))
+        yesil = yesil_maske(rgb)  # #00FF00 ±40 ya da yeşil baskın (GPT yeşili ≈ (3,252,45))
         pay = yesil.mean()
         if pay < 0.05:
             sorun.append(f"#00FF00 alanı çok küçük/yok (%{pay*100:.1f})")
@@ -102,13 +126,13 @@ def denetle(b, kok: Path):
             dolu = yesil.sum() / kutu
             if dolu < 0.90:
                 sorun.append(f"yeşil alan düz/tek parça değil (kutunun %{dolu*100:.0f}'i)")
-    return (not sorun), ("; ".join(sorun) if sorun else f"{w}×{h}{' şeffaf' if b['seffaf'] else ''}")
+    return (not sorun), ("; ".join(sorun) if sorun else f"{w}×{h}{' şeffaf' if b['seffaf'] else ''}{ek}")
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("kok", help="kit kökü, ör. collections/03_Blush_Garden_Rose")
-    ap.add_argument("--paket", type=int, choices=[1, 2, 3, 4])
+    ap.add_argument("--paket", type=int, choices=[1, 2, 3, 4, 5])
     a = ap.parse_args()
     kok = (ROOT / a.kok) if not Path(a.kok).is_absolute() else Path(a.kok)
     prompts = kok / "assets/gpt/GPT_PROMPTS.md"
