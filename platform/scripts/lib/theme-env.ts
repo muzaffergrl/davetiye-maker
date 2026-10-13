@@ -2,7 +2,7 @@
 // record and PAKET 2 sample photos, its W1 comps, page titles, Google Fonts and the theme-specific expectations.
 // Used by scripts/theme-check.cjs, tests/g051-browser.ts and tests/final-smoke.ts (`--theme <id>`, default
 // blush-garden-rose). Nothing here is specific to one design: what a check cannot derive from the standard
-// (docs/11_TEMA_STANDARDI.md) comes from the optional `checks` table of the theme's img/manifest.json (below).
+// (docs/11_TEMA_STANDARDI.md) comes from the optional `theme_check` table of the theme's img/manifest.json (below).
 //
 // Sources, in order (each choice is reported in `notes`, and in checks.json):
 //   demo record  --content <file> → themes/<id>/content.demo.json → bundled copy (lib/claim/demo) →
@@ -12,7 +12,8 @@
 //   collection   --collection <dir> → tools/katalog.py (theme slug = tema_slug(design name) → collections/<klasor>)
 //   W1 comps     <collection>/assets/gpt/comps/web_1_envelope.png … web_5_rsvp.png (plain names only; _vN are drafts)
 //
-// Theme-specific table — img/manifest.json "checks" (optional; written by the theme's build_images.py). Every key has
+// Theme-specific table — img/manifest.json "theme_check" (optional; written by the theme's build_images.py; not the
+// build's own "checks" results of G054). Every key has
 // a default derived from the standard, so a theme that follows docs/11 needs none of them:
 //   "cards":     { "<css selector>": "<manifest key with free_zone>" }
 //                default: auto — every <img> of a manifest part that has a `free_zone` (img/<key>-<width>.webp) is a
@@ -58,7 +59,7 @@ export interface CheckProfile {
   envelopeText: { closed: string; opened: string };
   backdrop: { edge_max: number; dark_max: number; dark_below: number; light_above: number };
   /** Where the table came from. */
-  source: 'img/manifest.json checks' | 'defaults';
+  source: 'img/manifest.json theme_check' | 'defaults';
 }
 
 export interface FontFamily {
@@ -203,11 +204,11 @@ function profileFor(images: Record<string, any> | null, notes: string[]): CheckP
   for (const [key, v] of Object.entries(images ?? {})) {
     if (v && typeof v === 'object' && Array.isArray((v as any).free_zone)) freeZones[key] = (v as any).free_zone;
   }
-  const t = (images?.checks ?? null) as Record<string, any> | null;
+  const t = (images?.theme_check ?? null) as Record<string, any> | null;
   const cards = t?.cards && typeof t.cards === 'object' ? (t.cards as Record<string, string>) : null;
   if (cards) {
     for (const [sel, key] of Object.entries(cards)) {
-      if (!freeZones[key]) notes.push(`img/manifest.json checks.cards["${sel}"] = "${key}": that part has no free_zone`);
+      if (!freeZones[key]) notes.push(`img/manifest.json theme_check.cards["${sel}"] = "${key}": that part has no free_zone`);
     }
   }
   return {
@@ -216,7 +217,7 @@ function profileFor(images: Record<string, any> | null, notes: string[]): CheckP
     particles: typeof t?.particles === 'string' ? t.particles : DEFAULT_PROFILE.particles,
     envelopeText: { ...DEFAULT_PROFILE.envelopeText, ...(t?.envelope_text ?? {}) },
     backdrop: { ...DEFAULT_PROFILE.backdrop, ...(t?.backdrop ?? {}) },
-    source: t ? 'img/manifest.json checks' : 'defaults',
+    source: t ? 'img/manifest.json theme_check' : 'defaults',
   };
 }
 

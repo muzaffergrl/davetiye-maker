@@ -6,7 +6,7 @@
 //
 // --theme defaults to blush-garden-rose (design 03). Everything theme-specific is read from the theme (G052,
 // scripts/lib/theme-env.ts): theme.json (pages, photo slots), img/manifest.json (free_zone of the painted cards, the
-// optional "checks" table), the <title data-text> of each template, the page's Google Fonts <link>, the theme's own demo
+// optional "theme_check" table), the <title data-text> of each template, the page's Google Fonts <link>, the theme's own demo
 // record (content.demo.json → bundled copy → collection record) and its PAKET 2 sample photos
 // (collections/<NN_*>/assets/gpt/photos/, found through tools/katalog.py). Selectors come from the standard
 // (docs/11_TEMA_STANDARDI.md §3: .stage, [data-skip], [data-enter], .replay, .site-nav, [data-slot]/.ph-mark,
@@ -45,7 +45,7 @@
 //   compare_<page>_390.jpg: --compare w1 (default) = W1 comp (collections/<NN_*>/assets/gpt/comps/web_<n>_<page>.png,
 //   plain names only) | theme; --compare g035 (default for blush-garden-rose, which has no W1 comps) = the approved
 //   G035 demo | theme.
-// Theme-specific expectations a theme cannot express through the standard markers go into img/manifest.json "checks"
+// Theme-specific expectations a theme cannot express through the standard markers go into img/manifest.json "theme_check"
 // (cards, particles, envelope_text, backdrop) — see scripts/lib/theme-env.ts.
 
 process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
@@ -372,7 +372,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       else ok(`photo slots: every theme.json slot (${keys.join(', ')}) is on a page`);
     }
     const unchecked = freeKeys.filter((k) => !cardsSeen.has(k));
-    if (unchecked.length) (unchecked.length === freeKeys.length ? err : warn)(`free_zone of ${unchecked.join(', ')} never checked: no <img> of ${unchecked.length > 1 ? 'these parts' : 'this part'} found on any page (set img/manifest.json checks.cards if the card is not an <img>)`);
+    if (unchecked.length) (unchecked.length === freeKeys.length ? err : warn)(`free_zone of ${unchecked.join(', ')} never checked: no <img> of ${unchecked.length > 1 ? 'these parts' : 'this part'} found on any page (set img/manifest.json theme_check.cards if the card is not an <img>)`);
 
     // ---------------------------------------------------------------- placeholder state (no photos uploaded)
     {

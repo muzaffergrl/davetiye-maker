@@ -48,13 +48,13 @@ biçimi de). Temaya özgü her şey temadan okunuyor; seçiciler docs/11 §3'ün
 
 Dosyalar:
 - `platform/scripts/lib/theme-env.ts` (yeni) — tema ortamı: `theme.json`, `img/manifest.json` (`free_zone`'lu parçalar + isteğe bağlı
-  `checks` tablosu), demo kaydı (`--content` → tema `content.demo.json` → `lib/claim/demo` paketli kopya → koleksiyon kaydı → 03
+  `theme_check` tablosu), demo kaydı (`--content` → tema `content.demo.json` → `lib/claim/demo` paketli kopya → koleksiyon kaydı → 03
   kaydı, not düşülür), PAKET 2 fotoğrafları (`--photos` → `collections/<NN_*>/assets/gpt/photos/<anahtar>.*` → 03 örnekleri, not),
   koleksiyon (`--collection` ya da `tools/katalog.py` `tema_slug` → `klasor`), W1 comp'ları (yalnız sade adlar), sayfa başlıkları
   (şablonun `<title data-text>`'i), Google Fonts `<link>` (aile + ağırlık), motordan bağımsız biçimleyici (en-US / en-GB,
   türetilmiş alanlar `date_weekday`, `date_long`, `venue.city_region(_country)`, `countdown_target_utc`), demo slug'ı.
 - `platform/scripts/lib/browser.ts` (yeni) — Playwright yükleme, `next start`, `markCards` (kart = `free_zone`'lu parçanın `<img>`'i;
-  `<picture>` dahil üst öğesi metni taşır; `checks.cards` verilirse o seçiciler), `overlaps`.
+  `<picture>` dahil üst öğesi metni taşır; `theme_check.cards` verilirse o seçiciler), `overlaps`.
 - `platform/scripts/theme-check.cjs` — `--theme`, `--out` (yoksa `THEME_SHOTS_DIR`, yoksa 03 → `previews/g038`, katalog tasarımı NN →
   `previews/g4NN/`, diğer → geçici klasör), `--compare w1|g035|none` (varsayılan `w1`: `compare_<sayfa>_390.jpg` = W1 comp | tema; 03'te
   W1 comp yok → varsayılan `g035`, bugünkü karşılaştırma), `--content`, `--photos`, `--collection`, `--no-video`. Kart metni ↔
@@ -88,13 +88,15 @@ Dosyalar:
   01 demo kaydı (G053 hikâyesiyle) kullanıldı, 01 PAKET 2 foto yok → 03 örnekleri (uyarı), **W1 `compare_*_390.jpg` 5/5 yazıldı**;
   72/73, tek hata beklenen: tema kendi `content.demo.json`'ı olmadığı için /start'ta yok (404 + nedeni yazılıyor).
 - `npm test` 230/230, `npm run typecheck` temiz, `npm run build` + trace-check geçti.
+- G053 + G054 `main`'e girdikten sonra rebase edilip hepsi yeniden koşuldu: aynı sayılar (74/74, 44/44, 42/42; `_sample` 33/27/11,
+  4/16, 3/4). G054 `img/manifest.json`'a kendi yapı sonucu için `checks` anahtarını koyduğu için bu görevin tablosu `theme_check` adını aldı.
 - Önizlemeler `--out` ile scratch klasörüne yazıldı; `platform/previews/` bu görevde değişmedi (yazar alanı dışında).
 
 **Denenmedi:** gerçek bir G4NN teması (henüz yok); koyu tasarımda (06, 19) zarf zemini eşikleri; kartı CSS zemini olan tema
-(`checks.cards` yolu); açılmış kapı/kitap düzeni (yalnız oturum anahtarıyla "açık" başlatılan sayfa ölçülüyor); `en-GB` kayıtla
+(`theme_check.cards` yolu); açılmış kapı/kitap düzeni (yalnız oturum anahtarıyla "açık" başlatılan sayfa ölçülüyor); `en-GB` kayıtla
 tam koşu (biçimleyici destekliyor, tarayıcıda denenmedi).
 
-**Hâlâ temaya özgü tablo isteyen yerler — G4NN ajanı ne yazar** (`img/manifest.json` → `"checks"`, `build_images.py` yazar; hepsi
+**Hâlâ temaya özgü tablo isteyen yerler — G4NN ajanı ne yazar** (`img/manifest.json` → `"theme_check"` — G054'ün yapı sonucu `checks` anahtarından ayrı; `build_images.py` yazar; hepsi
 isteğe bağlı, varsayılanlar `scripts/lib/theme-env.ts` başında):
 1. `cards` `{ "<seçici>": "<manifest anahtarı>" }` — yalnız kart `<img>` değilse (CSS zemini) ya da metin `<img>`'in üst öğesinde
    değilse. Aksi hâlde hiçbir şey yazma; theme-check bulamadığı `free_zone`'u uyarı/hata olarak söyler.
@@ -109,12 +111,12 @@ Bunun dışında tema standart işaretleri taşımalı: `.stage`, `a[data-skip]`
 
 **Önerilen düzeltmeler (yazar alanım dışında, entegratör):**
 - `docs/11_TEMA_STANDARDI.md` §13.1'deki "**`--theme` bugün yok**" paragrafı ve §14 #3 güncellenmeli; §13.3'e `img/manifest.json`
-  `checks` tablosu (yukarıdaki 4 anahtar) ve `--out`/`--compare` eklenmeli.
+  `theme_check` tablosu (yukarıdaki 4 anahtar) ve `--out`/`--compare` eklenmeli.
 - `platform/README.md` "Çalıştırma" satırları (theme-check / final-smoke / g051-browser: `--theme`, `--out`) ve dizin notu
   (`scripts/lib/`) güncellenmeli.
-- Önerilen görev (claude-kod, küçük): 03'ün `build_images.py`'si manifest'e `checks` yazmıyor — gerekmiyor (otomatik tespit 03'te
-  birebir aynı kartları buluyor); yalnız `particles` için 03 katmanı `.petal-layer` varsayılanda duruyor. 03 bir gün yeniden
-  derlenirse `checks.particles` yazılıp varsayılandan çıkarılabilir.
+- 03'ün `build_images.py`'si `theme_check` yazmıyor — gerekmiyor (otomatik tespit 03'te birebir aynı kartları buluyor); yalnız
+  03'ün parçacık katmanı `.petal-layer` varsayılan listede duruyor. 03 yeniden derlenirken `theme_check.particles` yazılırsa
+  varsayılandan çıkarılabilir (küçük iş, ayrı görev gerekmez).
 
 ## Günlük
 - 2026-10-13 açıldı: G046 incelemesi (docs/11 §14 #3; G4NN bitti tanımı bu araç olmadan karşılanamıyor)
