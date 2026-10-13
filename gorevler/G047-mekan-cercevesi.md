@@ -2,7 +2,7 @@
 id: G047
 baslik: Tasarım 03 — yatay altın çerçeve parçası (mekân fotoğrafı, T2.14)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-1
 oncelik: 2
 bagimli: []
@@ -72,3 +72,5 @@ site/mobil montaj testi yapılmadı. Kullanıcıya elle işlem verilmedi.
 - 2026-10-13 alindi: gpt-gorsel-1
 - 2026-10-13 üretim: T2.14, iki referans ve dört imagegen çağrısı; son aday tam ad/yola kondu.
 - 2026-10-13 incelemeye gönderildi: gerçek RGBA/1536×1024 doğrulandı; saf yeşil, iç pencere oranı ve gölgesizlik açık kusur, kabul kutusu boş bırakıldı.
+- 2026-10-13 entegratör onayladı
+- 2026-10-13 not: pencerede yarı saydam bulut lekesi var (03'ün arch_frame/card_small'ındaki gibi); parts_prep pencereyi delik doldurarak bütünüyle şeffaflaştırmalı — G038'de kontrol.

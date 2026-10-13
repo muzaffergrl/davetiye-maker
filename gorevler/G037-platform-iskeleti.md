@@ -2,7 +2,7 @@
 id: G037
 baslik: Site platformu iskeleti — Next.js, tema şablon motoru, local veri adaptörü, site rotaları
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-11
 oncelik: 1
 bagimli: []
@@ -78,3 +78,4 @@ adaptör, panel/RSVP/`/start` (G039/G042/G045).
 ## Günlük
 - 2026-10-13 alindi: claude-kod-11
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 entegratör onayladı

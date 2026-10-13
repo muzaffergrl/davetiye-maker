@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 7 · alindi 2 · inceleme 1 · blokaj 331 · bitti 15 · toplam 356
+Özet: hazir 7 · alindi 1 · inceleme 0 · blokaj 331 · bitti 17 · toplam 356
 
 ## claude-canva
 
@@ -155,13 +155,14 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (0)**
+**Alınabilir (3)**
 
-- (yok)
+- `G038` p1 — Tasarım 03 Blush Garden Rose'u platform teması yap → `gorevler/G038-tema-03-tasima.md`
+- `G039` p1 — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla → `gorevler/G039-duzenleme-paneli.md`
+- `G042` p2 — RSVP — misafir formu, kayıt, panelde liste + CSV → `gorevler/G042-rsvp-akisi.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (102)**
+**Üzerinde çalışılan / incelemede / blokaj (101)**
 
-- `G037` inceleme · claude-kod-11 — Site platformu iskeleti — Next.js, tema şablon motoru, local veri adaptörü, site rotaları
 - `G033` alindi · wf-paketw — Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G044` blokaj · - — Vercel önizleme yayını (demo site + panel)
@@ -264,7 +265,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 5 · Biten: 9
+Bağımlılık bekleyen: 2 · Biten: 10
 
 ## claude-metin
 
@@ -336,11 +337,10 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (65)**
+**Üzerinde çalışılan / incelemede / blokaj (64)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
-- `G047` alindi · gpt-gorsel-1 — Tasarım 03 — yatay altın çerçeve parçası (mekân fotoğrafı, T2.14)
 - `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G204` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — GPT görselleri (Paket 1)
@@ -404,4 +404,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 2
+Bağımlılık bekleyen: 0 · Biten: 3

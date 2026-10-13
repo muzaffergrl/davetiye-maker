@@ -20,10 +20,17 @@ düzenler. Bu belge platformun tek kaynağıdır.
 - Koreografi (sıra/süre) temanın `site.js` başındaki ayar nesnesinde; içerikten ayrı.
 - **Veri katmanı adaptörlü:** `local` (geliştirme/test: `platform/.data/` JSON + yerel yükleme klasörü) ve
   `supabase` (canlı: Postgres + Storage). Kod adaptör arayüzüne yazılır.
-- Tablolar: `sites` (id, slug, theme, variant, status draft/published, content jsonb, edit_key_hash,
-  order_ref, owner_email, timestamps), `rsvps` (id, site_id, name, email, attending, guests, message, created_at).
+- Tablolar: `sites` (id, slug, theme, variant, status draft/published, content jsonb (panel taslağı),
+  published_content jsonb (ziyaretçinin gördüğü son yayın), edit_key_hash, preview_key_hash (düzenleme anahtarından HMAC;
+  önizleme linki düzenleme yetkisi vermez), order_ref, owner_email, published_at, timestamps), `rsvps` (id, site_id, name, email, attending, guests, message, created_at).
 - Güvenlik: düzenleme anahtarı yalnız hash olarak saklanır; RSVP'de honeypot + hız sınırı; yüklemelerde
   tür/boyut sınırı; misafir verisi yalnız çiftin panelinde.
+
+## 2b. Uygulanan (G037, 2026-10-13)
+- `platform/`: Next.js 16 + cheerio şablon motoru; işaretler `data-field`, `data-photo`, `data-optional`, `data-url`,
+  ayrıca `data-repeat`, `data-if`, `data-text`, izinli `data-attr-*` (ayrıntı `platform/README.md`). Satır içi tema betikleri CSP hash'li.
+- Doğrulama: platform sitelerinde `urls.website` ve `urls.rsvp_form` boş olabilir (site ve RSVP platformun kendisi) — bu uyarılar
+  platform kayıtları için kapatılır (G039).
 
 ## 3. Açık konular (kullanıcı / sonra)
 - **Barındırma ve maliyet:** bağlı hesaplar Vercel (`daimonflora-gmailcom's projects`) ve Supabase
