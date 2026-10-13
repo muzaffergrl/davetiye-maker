@@ -2,7 +2,7 @@
 id: G057
 baslik: katalog.py — story tablosunu content() üretecine taşı (yaz --zorla story'yi silmesin) (docs/11 §14 #12)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-tema01
 oncelik: 3
 bagimli: [G053]
@@ -81,3 +81,4 @@ ve G056 alanındaki `docs/11` §2.1 / §14 #12 (yukarıdaki not 3). Yapılmadı 
 - 2026-10-13 inceleme düzeltmesi (wf-tema01): katalog.py kapanis_parca yorumu, docs/11 §2.1/§14 #12; belge/README entegratöre
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-tema01): kontrol 0; yaz/paket5/gorev5/ozet --dene 0 değişiklik; docs/09 01 satırı katalog.py belge ile eşitlendi (bulgu 1 kapandı). yaz --zorla --dene hâlâ 302 görev dosyası (bulgu 2, önerilen görev açık).
+- 2026-10-13 entegratör onayladı

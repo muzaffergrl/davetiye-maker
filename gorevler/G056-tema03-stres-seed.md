@@ -2,7 +2,7 @@
 id: G056
 baslik: 03 teması uzun isim stresi + seed foto türevleri + validate_content --help (docs/11 §14 #9, #15)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-tema01
 oncelik: 2
 bagimli: [G055]
@@ -96,3 +96,4 @@ konular" G055 açıkları satırı (seed türevsiz; 03 `--stress`'te index/rsvp 
 - 2026-10-13 inceleme düzeltmesi (wf-tema01): 03 replay'de VT adı yalnız açık zarfta, Skip bfcache durumu, docs/11 güncel
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-tema01): theme-check --stress blush-garden-rose 86/86 (MP4 dahil), g051 44/44, final-smoke 42/42; platform/README.md'deki eski seed/G055 açıkları satırları güncellendi (Entegratöre not kapandı).
+- 2026-10-13 entegratör onayladı
