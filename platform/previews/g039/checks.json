@@ -1,0 +1,258 @@
+{
+  "base": "next start (production build)",
+  "viewport": "390x844 (isMobile, touch)",
+  "theme": "_sample",
+  "checks": [
+    {
+      "name": "bad edit link -> 404 (/edit/clara-and-julian?k=…)",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "name": "bad edit link -> 404 (/edit/clara-and-julian)",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "name": "bad edit link -> 404 (/edit/clara-and-julian?k=…)",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "name": "bad edit link -> 404 (/edit/nobody-here?k=…)",
+      "ok": true,
+      "detail": "404"
+    },
+    {
+      "name": "bad edit links: identical generic message",
+      "ok": true
+    },
+    {
+      "name": "bad edit link page: noindex + no-referrer meta",
+      "ok": true
+    },
+    {
+      "name": "edit link opens the panel (200)",
+      "ok": true
+    },
+    {
+      "name": "panel: response is not cached",
+      "ok": true,
+      "detail": "private, no-cache, no-store, max-age=0, must-revalidate"
+    },
+    {
+      "name": "panel: noindex + no-referrer",
+      "ok": true
+    },
+    {
+      "name": "panel: header shows the names",
+      "ok": true
+    },
+    {
+      "name": "panel: draft status card",
+      "ok": true
+    },
+    {
+      "name": "panel: no horizontal overflow at 390 px",
+      "ok": true
+    },
+    {
+      "name": "panel: sticky Publish button visible at the bottom",
+      "ok": true,
+      "detail": "{\"x\":260,\"y\":784,\"width\":114,\"height\":50}"
+    },
+    {
+      "name": "couple: names-as-shown follows the first names",
+      "ok": true
+    },
+    {
+      "name": "couple: monogram follows",
+      "ok": true
+    },
+    {
+      "name": "couple: header updates",
+      "ok": true
+    },
+    {
+      "name": "autosave: \"All changes saved\"",
+      "ok": true
+    },
+    {
+      "name": "date: shown as \"Saturday, May 15, 2027\" and \"4:00 PM\"",
+      "ok": true
+    },
+    {
+      "name": "date: time zone list filled",
+      "ok": true
+    },
+    {
+      "name": "schedule: row added",
+      "ok": true
+    },
+    {
+      "name": "schedule: row moved up",
+      "ok": true
+    },
+    {
+      "name": "schedule: shown as 9:30 PM",
+      "ok": true
+    },
+    {
+      "name": "schedule: row removed",
+      "ok": true
+    },
+    {
+      "name": "crop: frame has the slot ratio 4:5",
+      "ok": true,
+      "detail": "0.800"
+    },
+    {
+      "name": "photo: uploaded and stored in the draft",
+      "ok": true,
+      "detail": "/media/b8d8bfe9-3910-40e6-9b4e-aa964f11e74c/3707d48ac723e001123e9de86d03073b.jpg"
+    },
+    {
+      "name": "photo: server copy is a 4:5 JPEG without EXIF",
+      "ok": true,
+      "detail": "890x1114"
+    },
+    {
+      "name": "photos: section summary counts it",
+      "ok": true
+    },
+    {
+      "name": "validation: inline error under the field",
+      "ok": true
+    },
+    {
+      "name": "validation: section badge \"1 to fix\"",
+      "ok": true
+    },
+    {
+      "name": "publish blocked: list of issues",
+      "ok": true
+    },
+    {
+      "name": "issue link focuses the field",
+      "ok": true
+    },
+    {
+      "name": "validation: error gone once fixed",
+      "ok": true
+    },
+    {
+      "name": "RSVP deadline shown as a word date",
+      "ok": true
+    },
+    {
+      "name": "preview: 390 px wide",
+      "ok": true,
+      "detail": "390"
+    },
+    {
+      "name": "preview: shows the new names",
+      "ok": true
+    },
+    {
+      "name": "preview: shows the uploaded photo",
+      "ok": true
+    },
+    {
+      "name": "publish: \"Your website is live\"",
+      "ok": true
+    },
+    {
+      "name": "publish: public link shown",
+      "ok": true
+    },
+    {
+      "name": "QR: generated from the public URL",
+      "ok": true
+    },
+    {
+      "name": "QR: screenshot decodes to the public URL",
+      "ok": true
+    },
+    {
+      "name": "status card: live with link",
+      "ok": true
+    },
+    {
+      "name": "bar: button says \"Share\" when up to date",
+      "ok": true
+    },
+    {
+      "name": "public page: 200",
+      "ok": true
+    },
+    {
+      "name": "public page: names",
+      "ok": true
+    },
+    {
+      "name": "public page: uploaded photo loads",
+      "ok": true,
+      "detail": "{\"src\":\"/media/b8d8bfe9-3910-40e6-9b4e-aa964f11e74c/3707d48ac723e001123e9de86d03073b.jpg\",\"w\":890}"
+    },
+    {
+      "name": "public page: no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "guest reply accepted by the RSVP API",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "RSVP section: reply and counts listed",
+      "ok": true,
+      "detail": "Replies Refresh 1 reply · 1 attending (2 guests) · 0 not attending Ada Example — yes, 2 guests “See you there!” Download"
+    },
+    {
+      "name": "bar: \"Publish changes\" after an edit",
+      "ok": true
+    },
+    {
+      "name": "public page: unpublished edit not visible",
+      "ok": true
+    },
+    {
+      "name": "public page: change visible after \"Publish changes\"",
+      "ok": true
+    },
+    {
+      "name": "offline: public page is 404",
+      "ok": true
+    },
+    {
+      "name": "published again: public page is 200",
+      "ok": true
+    },
+    {
+      "name": "panel: no horizontal overflow at the end",
+      "ok": true
+    },
+    {
+      "name": "panel: no console or page errors",
+      "ok": true
+    },
+    {
+      "name": "stored draft is valid and published",
+      "ok": true
+    },
+    {
+      "name": "desktop: preview shown next to the form, 390 px wide",
+      "ok": true,
+      "detail": "{\"x\":775,\"y\":147.015625,\"width\":390,\"height\":600}"
+    },
+    {
+      "name": "desktop: no Preview button",
+      "ok": true
+    },
+    {
+      "name": "video: MP4 written",
+      "ok": true,
+      "detail": "previews/g039/panel_flow_390.mp4"
+    }
+  ]
+}

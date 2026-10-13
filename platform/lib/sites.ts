@@ -85,3 +85,8 @@ export async function publishSite(adapter: DataAdapter, siteId: string): Promise
   if (!result.ok) throw new ContentInvalidError(result.errors);
   return adapter.publish(siteId);
 }
+
+/** Takes the site offline: public routes 404; the draft and the last published copy are kept. */
+export async function unpublishSite(adapter: DataAdapter, siteId: string): Promise<SiteRecord> {
+  return adapter.unpublish(siteId);
+}

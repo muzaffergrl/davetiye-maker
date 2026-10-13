@@ -2,7 +2,7 @@
 
 Alıcının sitesi bizim platformumuzda yayınlanır ve panelden düzenlenir (`docs/10_SITE_PLATFORMU.md` tek kaynak).
 Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru**, veri adaptörü (`local`),
-site rotaları, içerik doğrulama ve testler. Panel (G039), RSVP (G042), Supabase (G043), `/start` (G045) sonraki görevler.
+site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042) ve testler. Supabase (G043), `/start` (G045) sonraki görevler.
 
 Durum: yerelde çalışıyor ve test edildi. **Hiçbir yere yayınlanmadı** (Vercel/Supabase projesi yok).
 
@@ -15,7 +15,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # .data/ içine demo site: /clara-and-julian (03 Blush Garden Rose demo içeriği, _sample tema)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar (67 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar, RSVP, panel (118 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller ve previews/*.png
@@ -27,7 +27,8 @@ Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).
 `/opt/pw-browsers` tarayıcılarıyla çalışır, `playwright install` çalıştırmaz.
 
 Ortam değişkenleri: `DATA_ADAPTER` (`local` varsayılan; `supabase` = G043), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`),
-`PLATFORM_THEMES_DIR` (varsayılan `platform/themes`).
+`PLATFORM_THEMES_DIR` (varsayılan `platform/themes`), `PLATFORM_PUBLIC_URL` (sitelerin herkese açık kökü, ör. `https://<ad>.vercel.app`;
+panelin yayın linki ve QR'ı için; yoksa isteğin host'u kullanılır).
 
 ## Klasörler
 
@@ -37,7 +38,10 @@ app/
   [slug]/[page]/route.ts           /<slug>/home|story|details|rsvp
   themes/[theme]/[...path]/route.ts  tema CSS/JS/görselleri (html ve theme.json servis edilmez)
   media/[...path]/route.ts         local adaptörün yüklediği fotoğraflar
-  layout.tsx, page.tsx             platform sayfaları için kök (panel vb. buraya gelecek)
+  layout.tsx, page.tsx             platform sayfaları için kök
+  edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039); geçersiz link = genel 404
+  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır
+components/panel/                  panelin istemci bileşenleri (Panel, bölümler, kırpma, önizleme, QR) + panel.module.css
 lib/
   theme/engine.ts                  şablon motoru (işaretler aşağıda)
   theme/theme.ts                   theme.json okuma/doğrulama, sayfa şablonları
@@ -49,10 +53,12 @@ lib/
   sites.ts                         site oluştur (anahtar + slug + doğrulama), yayınla, erişim kontrolü
   keys.ts, slug.ts, uploads.ts     anahtar hash'i, ayrılmış slug'lar, foto tür/boyut kontrolü
   site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar
+  panel/                           panel: model.ts (istemci+sunucu yardımcıları), api.ts, draft.ts, photos.ts (sharp), state.ts, http.ts
+  qr.ts                            gerçek URL'den QR (uqr; tools/make_qr.py ayarları)
 themes/_sample/                    yalnız test iskeleti (tasarım DEĞİL); her işareti kullanır
 scripts/                           seed.ts, screenshot.cjs, sync-schema.cjs
 tests/                             *.test.ts (node:test)
-previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json
+previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4)
 ```
 
 ## Site akışı ve görünürlük
@@ -284,6 +290,94 @@ Tarayıcı kontrolü (build gerekir; `npm test`'e dahil değil):
 Chromium 390 px: gönder/teşekkür (yes/no), ikinci yanıt, sunucu hata mesajı, kapalı form, önizlemede gönderim yok,
 CSP/konsol hatası yok. Ekran görüntüleri `$RSVP_SHOTS_DIR`'e (varsayılan geçici klasör).
 
+## Düzenleme paneli (G039)
+
+Alıcı sitesini telefonundan düzenler: `/edit/<slug>?k=<düzenleme anahtarı>`. Panel İngilizce, telefon öncelikli (390 px),
+sade bir araç: büyük dokunma alanları (≥ 44–48 px), akordeon bölümler, altta sabit **Save · Preview · Publish** çubuğu.
+Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (K21); renkler marka-nötr.
+
+- **Link:** anahtar hash ile doğrulanır (`authorizeEditor`). Yanlış/eksik anahtar, önizleme anahtarı, başka sitenin anahtarı ve
+  bilinmeyen slug → **aynı** genel 404 sayfası ("This edit link is not valid"); slug'ın varlığı sızmaz. Sayfa `noindex`,
+  `<meta name="referrer" content="no-referrer">` (anahtar URL'de), dinamik (`no-store`).
+- **Bölümler:** Couple (ilk isimler, tam isimler; "Names as shown" ve monogram ilk isimleri izler — elle değiştirilene kadar; host line) ·
+  Date & time (tarih, tören saati, saat dilimi listesi + "Use this device's time zone", tarih biçimi US/UK/CA/AU) · Venue ·
+  Schedule (satır ekle/sil/yukarı/aşağı, "Sort by time"; ilk satır tören saatine eşitse saatle birlikte değişir) ·
+  Story (giriş + anlar: başlık ≤ 60, metin ≤ 400, en çok 12) · Details (dress code; map, travel & stay = `urls.accommodation`,
+  registry linkleri) · RSVP (son tarih "Replies close at the end of Saturday, April 3, 2027 (America/New York time)",
+  "Accept replies on the website" = `rsvp.method` null/`none`, gelen yanıtlar + sayılar + CSV, "Refresh") ·
+  Optional sections (yalnız temanın sayfalarında `data-optional` ile geçen bloklar) · Photos (`theme.json` foto alanları).
+- **Tarihler** her yerde `formatDate`/`formatDateLong` ile: "Saturday, May 15, 2027", "4:00 PM" (en-GB: "15 May 2027", "4:00 pm").
+- **Otomatik kayıt:** son değişiklikten 800 ms sonra `PUT /api/edit/<slug>`; istekler sıralı (aynı anda tek PUT), her istek son
+  bilinen `updatedAt`'i taşır → başka sekme/telefon arada kaydettiyse **409**, kayıt durur ve "Reload" istenir (sessiz üzerine yazma yok).
+  Sekme gizlenince kayıt; kapanırken `keepalive` kaydı ve kaydedilmemiş değişiklikte `beforeunload` uyarısı. Ağ hatasında artan
+  aralıkla yeniden dener. Çubukta durum: "All changes saved / Unsaved changes / Saving… / Not saved yet. Trying again…".
+- **Doğrulama:** tarayıcıda aynı TS doğrulayıcı `validateContent(content, { platform: true })`; boş alanlarda daha anlaşılır metin
+  (`panelIssues`: "Please enter a time.", "Please choose a date.", "Please enter a name."). Hata alanın altında (yazarken gizli,
+  blur'da görünür), bölüm başlığında "N to fix". Publish hataları listeler; her madde alana götürür ve odaklar.
+  `platform: true` seçeneği yalnız `urls.website` / `urls.rsvp_form` boş uyarılarını (`customer_url_missing`) kapatır (site ve RSVP
+  platformun kendisi); hiçbir hatayı değiştirmez (test: `tests/panel.test.ts`).
+- **Taslak kuralları (`lib/panel/draft.ts`):** taslak eksik/geçersiz olabilir (yazarken), ama yapısı bozuk olamaz: bilinmeyen alan,
+  yanlış JSON türü, eksik zorunlu nesne, enum dışı değer, liste sınırı aşımı → **400** (`invalid_shape`), saklanmaz.
+  `record_kind` ve `event_type` panelden değişmez (saklı değer korunur). Taslak ≤ 64 KB.
+- **Önizleme:** iframe `/<slug>?preview=<önizleme anahtarı>` (anahtar düzenleme anahtarından türetilir), 390 px; sayfa sekmeleri
+  (Envelope/Home/Story/Details/RSVP); her başarılı kayıttan sonra yeniden yüklenir. Telefonda tam ekran açılır; iframe ilk açılışta yüklenir.
+- **Yayın:** `publishSite` (geçersiz içerik → **422** + `issues`), `unpublishSite`. Düğme: "Publish" → yayındayken değişiklik varsa
+  "Publish changes", güncelse "Share". Yayından sonra link (kopyala/aç) ve **QR**: `lib/qr.ts`, sabit `uqr@0.1.3` (Nayuki
+  kodlayıcısı), `tools/make_qr.py` ile aynı ayarlar (hata düzeltme Q, 4 modül kenar), yalnız http(s), demo alan adları reddedilir;
+  PNG/SVG indirme. "Take the website offline" onaylıdır; içerik ve son yayın kopyası korunur.
+- **Fotoğraf:** dosya seçimi (`accept="image/*"`, ≤ 30 MB, SVG reddedilir) → tarayıcıda kırpma (alanın oranı; sürükle, pinch,
+  kaydırıcı, tekerlek, ok/+/- tuşları) → canvas JPEG (uzun kenar ≤ 2000 px, ≤ 3.5 MB) → `POST /api/edit/<slug>/photo?slot=<anahtar>`
+  → `assertImageUpload` (tür baytlardan, ≤ 10 MB) → **sharp ile yeniden kodlama** (`lib/panel/photos.ts`: EXIF yönü uygulanır,
+  bütün metadata — GPS dahil — silinir, ≤ 50 MP, uzun kenar ≤ 2400 px, oran %1'den fazla saparsa ortadan kırpma, şeffaflık beyaza,
+  sRGB JPEG q84) → `adapter.savePhoto` → URL taslağa yazılır ve hemen kaydedilir. `memory_photos` şemaya uygun kalır (boşluk `""`,
+  sondaki boşlar silinir). sharp yüklenemezse (yerel ikili yoksa) kontrol edilmiş orijinal saklanır ve uyarı loglanır.
+  sharp, Next'in zaten kurduğu sürümle (`0.35.5`) doğrudan bağımlılık yapıldı.
+
+### Panel API
+
+Hepsi `Authorization: Bearer <düzenleme anahtarı>` ister (`?k=` kabul edilmez: link ya da başka sitenin formu işlem yapamaz).
+Yanlış anahtar, önizleme anahtarı, başka sitenin anahtarı, bilinmeyen/ayrılmış slug → aynı
+`401 {ok:false, code:"unauthorized", message:"This edit link is not valid."}`. Yanıtlar `private, no-store`, `noindex`, `no-referrer`.
+
+| İstek | Yanıt |
+|---|---|
+| `GET /api/edit/<slug>` | `200 {ok, state: {slug, theme: {id, name, pages, photos[{key,label,source,aspect,ratio}], optionalBlocks}, content, status, updatedAt, publishedAt, hasUnpublishedChanges, previewKey, origin}}` |
+| `PUT /api/edit/<slug>` `{content, baseUpdatedAt?}` (JSON) | `200 {ok, status, updatedAt, publishedAt, hasUnpublishedChanges, validation: {ok, errors, warnings}}` · `400 bad_json / invalid_shape (+issues)` · `409 conflict (+updatedAt)` · `413` · `415` |
+| `POST /api/edit/<slug>/photo?slot=<anahtar>` (ham görsel gövdesi) | `200 {ok, slot, source, url, contentType, size, width, height}` · `400 empty / unknown_slot` · `413 too_large` · `415 unsupported_type` |
+| `POST /api/edit/<slug>/publish` `{baseUpdatedAt?}` | `200 {ok, status:"published", publishedAt, updatedAt, hasUnpublishedChanges, url}` · `409` · `422 invalid_content (+issues)` |
+| `POST /api/edit/<slug>/unpublish` | `200 {ok, status:"draft", …}` |
+
+Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir sonraki kaydıdır (tek yazar: taslak).
+
+### Panel testleri
+
+- `tests/panel.test.ts` (node:test, 21 test): anahtar (iyi/yanlış/eksik/başka site/`?k=`/bilinmeyen slug; önizleme anahtarı düzenleyemez),
+  taslak kaydı (yayın kopyasına dokunmaz, 409 çakışma, kilitli alanlar, yapı reddi, 413/415/400), doğrulama mesajları ve
+  `platform` seçeneği, yükleme sınırları (boş, > 10 MB, SVG/GIF/HTML, bozuk JPEG, > 50 MP, bilinmeyen alan, anahtarsız; EXIF silinir,
+  oran kırpılır, 2400 px), yayınla/yayından kaldır, QR (bağımsız okuyucu `jsqr` ile geri çözülür), yardımcılar.
+- Tarayıcı (build gerekir; `npm test`'e dahil değil):
+  `npm run build && NODE_PATH=/opt/node22/lib/node_modules node tests/panel-browser.ts` — `next start` + Chromium 390 px
+  (isMobile, touch): geçersiz linkler → isimleri değiştir → program satırı ekle/taşı/sil → fotoğraf yükle + kırp → hatalı son tarih
+  yayını engeller → önizlemede isim ve foto → yayınla → QR ekran görüntüsünden çözülür = genel URL → genel sayfada isim ve foto →
+  misafir yanıtı panelde → "Publish changes" → offline (404) → yeniden yayın → masaüstünde yan yana önizleme. 59 kontrol;
+  ekran görüntüleri, `panel_flow_390.mp4` ve `checks.json` → `previews/g039/` (`PANEL_SHOTS_DIR`, `PORT` (3313), `PANEL_SLOWMO`).
+  Test fotoğrafı: 03'ün kurgu GPT örnek fotoğrafı (`collections/03_Blush_Garden_Rose/assets/gpt/photos/hero_portrait.jpg`).
+
+`components/panel/next-types.d.ts`: `next-env.d.ts` (build üretir, repoda yok) yokken `npm run typecheck` CSS modül tiplerini bulsun diye.
+
+### Panel açık konuları
+
+- Değiştirilen/silinen fotoğraflar depoda kalır (adaptörde `deletePhoto` yok) → G043'te öksüz dosya temizliği.
+- Site başına yükleme kotası / hız sınırı yok (yalnız 256-bit anahtar sahibi yükleyebilir).
+- Vercel fonksiyon gövde sınırı 4.5 MB: tarayıcı çıktısı ≤ 3.5 MB tutulur; sunucudaki 10 MB sınırı Vercel dışında geçerli.
+  Supabase'de imzalı doğrudan yükleme (G043/G044) düşünülebilir.
+- Şemada serbest metin "travel" alanı yok: Travel & stay = konaklama linki + `travel_stay` anahtarı. FAQ / guest policy metinleri de
+  şemada yok (yalnız aç/kapa). İkinci isim eklenebilir ama silinemez.
+- Düzenleme linki URL'de kalır (yer imi için); "yeni düzenleme linki üret" (anahtar yenileme) yok.
+- Gerçek telefonda (iOS Safari / Android Chrome) denenmedi; yalnız Chromium mobil emülasyonu. HEIC yalnız onu çözebilen tarayıcıda
+  (Safari) açılır; Chrome'da açık hata mesajı çıkar. QR telefon kamerasıyla okutulmadı (ekran görüntüsünden `jsqr` ile çözüldü).
+- `local` adaptör tek süreçlidir; çakışma kontrolü (`baseUpdatedAt`) oku-karşılaştır-yaz, atomik değil (Supabase'de koşullu UPDATE).
+
 ## Güvenlik özeti
 
 - İçerik → HTML: yalnız metin düğümü/öznitelik değeri (parse5 serileştirici kaçışlar); `<script>`/`<style>` içine
@@ -296,7 +390,7 @@ CSP/konsol hatası yok. Ekran görüntüleri `$RSVP_SHOTS_DIR`'e (varsayılan ge
 
 ## Açık konular
 
-- Supabase adaptörü, Vercel yayını (kullanıcı onayı), panel, RSVP formu, `/start` → G039–G045.
+- Supabase adaptörü, Vercel yayını (kullanıcı onayı), `/start` → G043–G045. Panelin açık konuları yukarıda (G039).
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir.
 - `local` adaptör tek süreç içindir. RSVP hız sınırı da süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok

@@ -30,6 +30,18 @@ export interface ValidationResult {
   warnings: ValidationIssue[];
 }
 
+export interface ValidateOptions {
+  /**
+   * Platform site (K24, G039): the website and its RSVP form are the platform itself, so an empty
+   * urls.website / urls.rsvp_form is expected and the `customer_url_missing` warnings are not raised.
+   * Errors are never affected (a record valid without the option is valid with it, and vice versa).
+   */
+  platform?: boolean;
+}
+
+/** URL fields that the platform itself provides for its sites (no buyer input needed). */
+export const PLATFORM_PROVIDED_URLS = ['website', 'rsvp_form'] as const;
+
 /** Fictional / third-party targets that appeared in older visuals (same list as the Python tool). */
 export const FORBIDDEN_STRINGS = ['averyandjordan.com', '1234 Celebration Lane'];
 
@@ -127,7 +139,7 @@ export function schemaIssues(record: unknown): ValidationIssue[] {
   return out;
 }
 
-function ruleIssues(record: Record<string, any>): ValidationIssue[] {
+function ruleIssues(record: Record<string, any>, opts: ValidateOptions): ValidationIssue[] {
   const out: ValidationIssue[] = [];
   const error = (code: string, path: string, message: string) => out.push({ level: 'error', code, path, message });
   const warning = (code: string, path: string, message: string) => out.push({ level: 'warning', code, path, message });
@@ -172,8 +184,8 @@ function ruleIssues(record: Record<string, any>): ValidationIssue[] {
     if (filled.length) {
       error('demo_url_not_null', 'urls', `A demo record must keep real URLs null: ${filled.join(', ')}.`);
     }
-  } else {
-    for (const k of ['website', 'rsvp_form']) {
+  } else if (!opts.platform) {
+    for (const k of PLATFORM_PROVIDED_URLS) {
       if (!urls[k]) warning('customer_url_missing', `urls.${k}`, `urls.${k} is empty — buttons/QR have no target.`);
     }
   }
@@ -192,10 +204,13 @@ function ruleIssues(record: Record<string, any>): ValidationIssue[] {
   return out;
 }
 
-/** Full validation: schema first; business rules only when the schema passes (as in the Python tool). */
-export function validateContent(record: unknown): ValidationResult {
+/**
+ * Full validation: schema first; business rules only when the schema passes (as in the Python tool).
+ * `opts.platform` (panel, platform sites): see ValidateOptions.
+ */
+export function validateContent(record: unknown, opts: ValidateOptions = {}): ValidationResult {
   const schema = schemaIssues(record);
-  const issues = schema.length ? schema : ruleIssues(record as Record<string, any>);
+  const issues = schema.length ? schema : ruleIssues(record as Record<string, any>, opts);
   const errors = issues.filter((i) => i.level === 'error');
   const warnings = issues.filter((i) => i.level === 'warning');
   return { ok: errors.length === 0, errors, warnings };
