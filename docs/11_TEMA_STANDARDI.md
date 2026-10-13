@@ -832,7 +832,7 @@ sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı ko�
 - [ ] 360 px'te tasarım aralığı (uzun isim, 6 program satırı, uzun mekân, `en-GB`) ve §12 zorlama kaydıyla (`--stress`) taşma yok; story
       pencereleri ≥ 38vw; aksanlı isim fontu (latin-ext) kontrol edildi
 - [ ] `og:image` (isimsiz, 1200×630) + `og:title` kişisel
-- [ ] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-<slug>.test.ts` (§13.2, 22 madde)
+- [ ] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-<slug>.test.ts` (§13.2, 23 madde)
 - [ ] `theme-check --theme <slug> --stress` ve `g051-browser --theme` (G052): 5 genişlik, kısa telefonlar, akışlar, zorlama kaydı,
       G051, ağırlık, MP4 — hatasız
 - [ ] `previews/g4NN/` (W1 karşılaştırması dahil); tema `README.md`

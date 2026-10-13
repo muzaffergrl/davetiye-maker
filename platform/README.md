@@ -906,9 +906,9 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir. G055'ten beri tema görselleri yalnız bu rotanın paketinde.
-- G055 açıkları: `scripts/seed.ts` türev üretmiyor; `theme-check`'in kart serbest bölge denetimi uzayan kartta yaklaşık;
-  `og:image`/ikon sosyal ağ kazıyıcılarında ve gerçek telefonda denenmedi; yeni bir paylaşım görseli eski önbellekte günlerce kalabilir
-  (URL'de sürüm yok).
+- G055 açıkları: `scripts/seed.ts` türev üretmiyor (`theme-check`'in uzayan kart denetimi G052 incelemesinden beri piksel testi);
+  03 `theme-check --stress`'te index ve rsvp kalıyor (docs/11 §14 #15); `og:image`/ikon sosyal ağ kazıyıcılarında ve gerçek
+  telefonda denenmedi; yeni bir paylaşım görseli eski önbellekte günlerce kalabilir (URL'de sürüm yok).
 - `local` adaptör tek süreç içindir. RSVP ve `/start` hız sınırları süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
   örnek olacağı için sınırlar örnek başınadır. `blob` sürümünde de kalıcı limiter yok (Blob sayaç için uygun değil: her artış bir
   yazma); gerekirse Vercel Firewall hız kuralı ya da G043'te Supabase tablo/RPC → `setRsvpRateLimiter()` / `setClaimRateLimiter()`.

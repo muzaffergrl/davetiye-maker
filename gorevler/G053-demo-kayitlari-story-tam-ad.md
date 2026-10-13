@@ -113,3 +113,4 @@ yeni başlıklara eşitle (01'i G201 bitince); W1.3 comp'u henüz üretilmemiş 
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): 8 kaydın hikâye metni çeşitlendi (07, 08, 11, 12, 14, 17, 18, 20); GPT_PROMPTS ve katalog ozet yazma alanı dışında (öneri)
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 son denetim (wf-hazirlik, temiz origin/main worktree): validate_content 20/20 GEÇTİ (0 uyarı); katalog kontrol temiz; ozet --dene 0 değişiklik (story'li kayıtlar atlandı), paket5 --dene 19 dosya (§14 #12/#13 açık) — Sonuç'la tutarlı
