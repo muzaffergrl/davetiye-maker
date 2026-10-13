@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 7 · alindi 1 · inceleme 0 · blokaj 331 · bitti 17 · toplam 356
+Özet: hazir 4 · alindi 4 · inceleme 0 · blokaj 331 · bitti 17 · toplam 356
 
 ## claude-canva
 
@@ -155,15 +155,16 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (3)**
+**Alınabilir (0)**
 
-- `G038` p1 — Tasarım 03 Blush Garden Rose'u platform teması yap → `gorevler/G038-tema-03-tasima.md`
-- `G039` p1 — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla → `gorevler/G039-duzenleme-paneli.md`
-- `G042` p2 — RSVP — misafir formu, kayıt, panelde liste + CSV → `gorevler/G042-rsvp-akisi.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (101)**
+**Üzerinde çalışılan / incelemede / blokaj (104)**
 
+- `G038` alindi · wf-platform — Tasarım 03 Blush Garden Rose'u platform teması yap
+- `G039` alindi · wf-platform — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla
 - `G033` alindi · wf-paketw — Paket 5 (website, GPT tasarlar) prompt'larını 19 tasarıma yay — katalog.py + G2NN/G4NN yeniden tanımı
+- `G042` alindi · wf-platform — RSVP — misafir formu, kayıt, panelde liste + CSV
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G044` blokaj · - — Vercel önizleme yayını (demo site + panel)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar

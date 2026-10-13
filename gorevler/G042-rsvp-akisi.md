@@ -2,8 +2,8 @@
 id: G042
 baslik: RSVP — misafir formu, kayıt, panelde liste + CSV
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-platform
 oncelik: 2
 bagimli: [G037]
 yazar: [platform/app/api/rsvp/, platform/lib/rsvp/, platform/components/rsvp/]
@@ -23,3 +23,6 @@ Misafir yanıtı çifte ulaşsın; başkası görmesin.
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-13 alindi: wf-platform
