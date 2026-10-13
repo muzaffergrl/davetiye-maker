@@ -2,8 +2,8 @@
 id: G044
 baslik: Vercel önizleme yayını (demo site + panel)
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 2
 bagimli: [G048]
 yazar: [platform/vercel.json, docs/10_SITE_PLATFORMU.md]
@@ -19,3 +19,4 @@ _(görevi yapan ajan doldurur)_
 - 2026-10-13 blokaj: Vercel projesi açmak için kullanıcı onayı bekleniyor
 - 2026-10-13 hazir: kullanıcı onayı geldi; local oturuma (claude-tarayici) taşındı, G048'e bağlı
 - 2026-10-13 G048 onaylandı; G038 incelemesi sürerken önizleme yayını yapılabilir (bağımlılık yalnız G048)
+- 2026-10-13 alindi: claude-local-1
