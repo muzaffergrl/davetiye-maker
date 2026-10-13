@@ -24,7 +24,7 @@ Yalnız aldığın görevin `yazar:` yollarına yaz. Durum dosyaları (`PROJECT_
 ## İş bir cümlede
 
 > **K22 (2026-10-13):** videodan çıkıldı; ürün şimdilik **yalnız mobil öncelikli tek sayfa website**. Aşağıdaki
-> video/PDF maddeleri askıda; teslim biçimi (Canva Website mi, kendi kodlu site mi) kullanıcı kararını bekliyor.
+> video/PDF maddeleri askıda. **K24:** teslim = kendi sitemiz + düzenleme paneli (`docs/10_SITE_PLATFORMU.md`).
 
 Yabancı Etsy alıcılarına; Canva'da isim, tarih, fotoğraf, video ve linklerini kendisi
 değiştirebildiği, aynı görsel kimlikte **animasyonlu dikey video + tek sayfa website + sabit
@@ -39,7 +39,8 @@ ya da markanın adı değildir. Marka adı henüz seçilmedi.
 
 ## Değişmeyecek şartlar
 
-1. Teslim = alıcının açıp düzenlediği **gerçek Canva projesi**. Tek parça PNG/MP4 "editable" diye sunulmaz.
+1. (K24) Teslim = alıcının **bizim platformumuzda panelden düzenlediği gerçek website** (`docs/10_SITE_PLATFORMU.md`).
+   Kişisel içerik panelde düzenlenebilir veri; görsele pişirilmez. Canva teslimi bırakıldı.
 2. (Askıda, K22) Video baştan **9:16, 1080 × 1920**; yatay düzeni daraltmak kabul edilmez.
 3. Website **mobile-first** (önce 360–430 px). Yapı (K23): **ilk sayfa kapalı zarf** → tıklayınca zarf sırayla açılır →
    asıl içerik **yeni sayfada** (ana sayfa); ek sayfalar (hikâye, detaylar, RSVP…) ana sayfadan. Animasyonlar tasarıma göre sıralı.

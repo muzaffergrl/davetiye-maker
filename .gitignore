@@ -28,3 +28,6 @@ renders/
 
 # Paralel ajanların geçici git worktree'leri
 .claude/worktrees/
+platform/node_modules/
+platform/.next/
+platform/.data/

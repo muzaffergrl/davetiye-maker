@@ -27,6 +27,7 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K21 | (2026-10-09) **Tasarımı GPT yapar.** Kodla çizilmiş sahneler "amatör ve basit" bulundu. GPT her tasarımın sahnelerini bitmiş hâlde tasarlar (comp) ve aynı tasarımı ayrı hareket edecek parçalara böler; Claude yalnız düzenlenebilir metin, foto alanı, Canva montajı ve teknik hazırlık yapar, şekil/dekor çizmez. Pilot: tasarım 03 (G030–G032) | sohbet |
 | K22 | (2026-10-13) **Videodan çıkıldı; ürün yalnız website.** Mobil görünüm ön planda (mobile-first). Tasarımın belirgin bir çizgisi ve "şov"u olmalı. Görselleri GPT imagegen üretir (K21 sürer). PDF/paylaşım görseli şimdilik ürün dışı (yanlışsa kullanıcı düzeltir) | sohbet |
 | K23 | (2026-10-13) Website yapısı: **her tasarımda ilk sayfa kapalı zarf**; tıklayınca zarf sırayla açılır ve asıl içeriğin olduğu **yeni sayfaya** geçilir. Site **çok sayfalı** (ana sayfa + hikâye, detaylar, RSVP vb.), açılış sayfasından yönlendirilir. Animasyonlar tasarıma göre **sıralı** | sohbet |
+| K24 | (2026-10-13) **Teslim Canva değil: kendi sitemiz + düzenleme paneli.** Alıcı siteyi telefonundan panelde düzenler (isim, tarih, metin, fotoğraf), site kendi linkinde yayınlanır, RSVP yanıtları panelde. Şart 1 bu yönde değişti. Plan: `docs/10_SITE_PLATFORMU.md` | sohbet |
 
 ## Geçersizleşenler
 
