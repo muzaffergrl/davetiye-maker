@@ -3,7 +3,7 @@ id: G201
 baslik: Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
 durum: alindi
-alan: gpt-gorsel-1
+alan: gpt-gorsel-codex-continue
 oncelik: 1
 bagimli: []
 yazar: [collections/01_Olive_Ivory/assets/gpt/comps/, collections/01_Olive_Ivory/assets/gpt/parts/, collections/01_Olive_Ivory/assets/gpt/photos/]
@@ -41,3 +41,4 @@ W2 parçaları ve Paket 2 fotoğrafları sırayla üretilecek; teknik denetimler
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-13 alindi: gpt-gorsel-1
 - 2026-10-13 W1: beş telefon ekranı üretildi; W1.1 ve W1.3 yeniden üretildi, seçilenler sade adla kaydedildi.
+- 2026-10-13 devam: kullanıcının devam talebiyle gpt-gorsel-codex-continue; main'deki beş W1 referansı korunarak W2 ve Paket 2 üretimine devam ediliyor. Yeni açılış adayı yalnız /workspace/generated_images/ altında tutuldu, seçilen W1.1 değiştirilmedi.
