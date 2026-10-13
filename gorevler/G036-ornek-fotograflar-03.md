@@ -2,7 +2,7 @@
 id: G036
 baslik: Tasarım 03 — örnek çift ve mekân fotoğrafları (Paket 2, website demosu)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-1
 oncelik: 1
 bagimli: []
@@ -69,3 +69,4 @@ bitmiş website veya satışa hazır ürün teslimi değildir.
 - 2026-10-13 alindi: gpt-gorsel-1
 - 2026-10-13 üretim: PAKET 2.1–2.5 sırayla üretildi; comp stil referansları ve ana portreyle çift tutarlılığı korundu.
 - 2026-10-13 bitti, incelemeye gönderildi: 5 JPEG; ad/format/ölçü kontrolleri 5/5 geçti, görsel kontroller Sonuç'ta kaydedildi.
+- 2026-10-13 entegratör onayladı

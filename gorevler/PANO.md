@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 7 · alindi 3 · inceleme 0 · blokaj 332 · bitti 13 · toplam 355
+Özet: hazir 7 · alindi 2 · inceleme 0 · blokaj 332 · bitti 14 · toplam 355
 
 ## claude-canva
 
@@ -337,10 +337,9 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (65)**
+**Üzerinde çalışılan / incelemede / blokaj (64)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
-- `G036` alindi · gpt-gorsel-1 — Tasarım 03 — örnek çift ve mekân fotoğrafları (Paket 2, website demosu)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
@@ -405,4 +404,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 1
+Bağımlılık bekleyen: 0 · Biten: 2
