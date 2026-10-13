@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 37 · alindi 3 · inceleme 0 · blokaj 296 · bitti 31 · toplam 367
+Özet: hazir 37 · alindi 2 · inceleme 1 · blokaj 296 · bitti 31 · toplam 367
 
 ## claude-canva
 
@@ -181,7 +181,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `G118` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
-- `G401` alindi · wf-tema01 — Tasarım 01 Olive & Ivory — platform teması
+- `G401` inceleme · wf-tema01 — Tasarım 01 Olive & Ivory — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G057` alindi · wf-tema01 — katalog.py — story tablosunu content() üretecine taşı (yaz --zorla story'yi silmesin) (docs/11 §14 #12)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı

@@ -1,0 +1,550 @@
+/* Olive & Ivory (design 01) — platform theme stylesheet.
+   Layout, hierarchy and type from the W1 comps (collections/01_Olive_Ivory/assets/gpt/comps/web_1..5, plain names);
+   every visual is a GPT part from img/ (build_images.py). CSS here is light and interface only (docs/11 §5.7): soft
+   borderless sunlight, drop shadows on parts, pill buttons, form fields, single 1 px hairlines. Percentages of the
+   envelope stage and the card slices come from img/manifest.json (key noted next to each value). */
+
+/* ------------------------------------------------------------------ tokens (palette.json: olive-ivory) */
+:root {
+  --page: #EDE4D0;             /* manifest page_color: bg_tile toned to the calm, sunlit middle of bg_page */
+  --ivory: #FBF8F0;            /* palette ivory */
+  --ink: #2F3A2B;              /* palette ink */
+  --ink-soft: #434C37;         /* body text on the painted paper: 7.1:1 on #EDE4D0, 8.5:1 on ivory */
+  --olive: #55623E;            /* calligraphy: palette deep #5E6B45 a touch darker for the sunlit wash (5.2:1 on #EDE4D0) */
+  --olive-btn: #5E6B45;        /* palette deep; ivory label 5.4:1 */
+  --leaf: #7D8B5A;             /* palette primary */
+  --gold: #B39A63;             /* palette gold */
+  --gold-light: #D7C79F;       /* palette gold_light */
+  --gold-ink: #6E5A31;         /* gold-toned small text (times, FAQ +): 5.2:1 on #EDE4D0, 6.2:1 on ivory */
+  --seal-ink: #8C7442;         /* monogram pressed into the seal: decorative, hidden from assistive tech (≈2.7:1, like a deboss) */
+  --script: "Great Vibes", "Snell Roundhand", cursive;
+  --serif: "EB Garamond", "Cormorant Garamond", Garamond, Georgia, serif;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-soft: cubic-bezier(.33, 0, .2, 1);
+  --nav-h: 56px;
+}
+
+@view-transition { navigation: auto; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; background: var(--page); scroll-behavior: smooth; }
+body {
+  margin: 0; min-height: 100svh; overflow-x: clip;
+  font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink);
+  background: var(--page) url("img/bg_tile-640.webp") 50% 0 / 640px auto repeat;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+/* soft late-morning light through the olive trees: borderless, low-opacity light (no shapes; docs/11 §5.7) */
+/* (scrolls with the page: the light belongs to the paper's first screen, as in the comps) */
+body { position: relative; }
+body::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: max(100svh, 640px); z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(70% 42% at 88% 4%, rgba(255, 251, 236, .62), rgba(255, 251, 236, 0) 70%),
+    radial-gradient(55% 34% at 6% 62%, rgba(255, 249, 230, .34), rgba(255, 249, 230, 0) 72%);
+}
+img { max-width: 100%; }
+p, h1, h2, h3, figure { margin: 0; }
+a { color: inherit; }
+.nowrap { white-space: nowrap; }
+[data-empty] { display: none; }
+:focus-visible { outline: 2px solid var(--olive); outline-offset: 3px; border-radius: 4px; }
+
+/* ------------------------------------------------------------------ type */
+.script { font-family: var(--script); font-weight: 400; color: var(--olive); line-height: 1.12; letter-spacing: 0; }
+.kicker {
+  font-family: var(--serif); font-weight: 500; font-size: 12.5px; line-height: 1.6; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.amp { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: .62em; color: var(--olive); padding: 0 .06em; }
+.note { font-size: 17px; color: var(--ink-soft); }
+.textlink {
+  position: relative; display: inline-block; padding: 0; border: 0; background: none; cursor: pointer;
+  font: 500 12.5px/1.6 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--olive);
+  text-decoration: underline 1px; text-decoration-color: rgba(179, 154, 99, .9); text-underline-offset: 6px;
+}
+.textlink::after { content: ""; position: absolute; inset: -14px -10px; }   /* ≥ 44 px touch target */
+.wrap { position: relative; width: min(100% - 32px, 460px); margin-inline: auto; }
+.section { position: relative; }
+
+/* ------------------------------------------------------------------ buttons (interface: pill, docs/11 §5.7) */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em; min-height: 50px; min-width: 190px;
+  padding: 12px 40px; border-radius: 999px; border: 1px solid rgba(215, 199, 159, .9);
+  background: var(--olive-btn); color: var(--ivory); text-decoration: none; cursor: pointer;
+  font: 500 15px/1 var(--serif); letter-spacing: .34em; text-indent: .34em; text-transform: uppercase;
+  box-shadow: 0 14px 26px -16px rgba(40, 50, 30, .65), inset 0 1px 0 rgba(255, 255, 255, .16);
+  transition: transform .25s var(--ease), background-color .25s;
+}
+.btn:hover { background: #56623F; }
+.btn:active { transform: scale(.98); }
+.btn-ghost { background: rgba(251, 248, 240, .62); color: var(--olive); border-color: rgba(179, 154, 99, .75); box-shadow: none; }
+.btn-ghost:hover { background: rgba(251, 248, 240, .9); }
+.btn-sm { min-height: 44px; min-width: 0; padding: 10px 20px; font-size: 12px; letter-spacing: .2em; text-indent: .2em; }
+
+/* ------------------------------------------------------------------ navigation (comp: slim bar "HOME · STORY · DETAILS · RSVP") */
+.site-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
+  padding: 0 8px env(safe-area-inset-bottom); background: rgba(240, 233, 216, .88);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1); backdrop-filter: blur(12px) saturate(1.1);
+  border-top: 1px solid rgba(179, 154, 99, .55);
+}
+.site-nav ul { display: flex; justify-content: center; align-items: center; max-width: 560px; margin: 0 auto; padding: 0; list-style: none; }
+.site-nav li { display: flex; align-items: center; }
+.site-nav li + li::before { content: "·"; content: "·" / ""; color: var(--gold); font-size: 16px; }
+.site-nav a {
+  display: flex; align-items: center; min-height: var(--nav-h); padding: 0 11px; text-decoration: none;
+  font: 500 12px/1 var(--serif); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft);
+}
+.site-nav a span { padding: 6px 0 5px; border-bottom: 1px solid transparent; }
+.site-nav a[aria-current="page"] { color: var(--olive); }
+.site-nav a[aria-current="page"] span { border-bottom-color: var(--gold); }
+.site-main { position: relative; z-index: 1; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 8px); }
+
+/* ------------------------------------------------------------------ entrances (data-scene / data-step / data-a; site.js MOTION.scenes)
+   Presets move only GPT parts and text with opacity / transform / clip-path / filter. Without JS everything is visible. */
+.js [data-step] {
+  opacity: 0;
+  transition: opacity var(--dur, 1000ms) var(--ease), transform var(--dur, 1000ms) var(--ease),
+              clip-path var(--dur, 1000ms) var(--ease-soft), filter var(--dur, 1000ms) var(--ease);
+}
+.js [data-step].in { opacity: 1; transform: none; }
+.js [data-a="rise"] { transform: translate3d(0, 18px, 0); --dur: 1000ms; }
+.js [data-a="rise-lg"] { transform: translate3d(0, 34px, 0) scale(.985); --dur: 1350ms; }
+.js [data-a="bloom"] { transform: scale(.88); filter: blur(2px); --dur: 1000ms; }
+.js [data-a="bloom"].in { filter: none; }
+.js [data-a="fade"] { --dur: 1200ms; }
+/* "write": the calligraphy appears left to right (a clip over the type, nothing drawn) */
+.js [data-a="write"] { opacity: 1; clip-path: inset(-35% 100% -35% 0); --dur: 1700ms; }
+.js [data-a="write"].in { clip-path: inset(-35% -12% -35% -12%); }
+/* "unfurl": an olive sprig opens from its centre */
+.js [data-a="unfurl"] { opacity: 1; clip-path: inset(0 50% 0 50%); --dur: 1300ms; }
+.js [data-a="unfurl"].in { clip-path: inset(0 -2% 0 -2%); }
+.js [data-a="write"].done, .js [data-a="unfurl"].done { clip-path: none; }
+/* the corner clusters drift in from their corner */
+.js [data-a="drift-tl"] { transform: translate3d(-22px, -26px, 0) rotate(-3deg); --dur: 2200ms; }
+.js [data-a="drift-br"] { transform: translate3d(22px, 26px, 0) rotate(3deg); --dur: 2200ms; }
+/* "fan" (Our Story, this design): a card starts gathered toward the middle of the hand, upright, and fans out into place */
+.js [data-a="fan"] { transform: translate3d(var(--fx, 0), var(--fy, 34px), 0) rotate(var(--fr, 0deg)) scale(.95); --dur: 1500ms; }
+
+/* ------------------------------------------------------------------ photo slots (docs/11 §5.6, §9) */
+.photo-slot { position: absolute; overflow: hidden; background: #E7DFC9; }
+.photo-slot > img[data-photo] { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
+.mask-card { -webkit-mask: url("img/mask_card.png") center / 100% 100% no-repeat; mask: url("img/mask_card.png") center / 100% 100% no-repeat; }
+.mask-portrait { -webkit-mask: url("img/mask_portrait.png") center / 100% 100% no-repeat; mask: url("img/mask_portrait.png") center / 100% 100% no-repeat; }
+.mask-landscape { -webkit-mask: url("img/mask_landscape.png") center / 100% 100% no-repeat; mask: url("img/mask_landscape.png") center / 100% 100% no-repeat; }
+[data-slot="venue"] > img[data-photo] { object-position: 50% 50%; }
+.ph-mark { display: none; }
+html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark,
+html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  font: 500 11px/1.3 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); text-align: center;
+}
+.ph-mark img { width: 30%; max-width: 46px; opacity: .85; }
+
+/* ------------------------------------------------------------------ the small card (card_small: index stage = home hero card)
+   window = manifest photo_slots.card box_pct [9.634, 7.373, 80.854, 60.593]; copy on the plain paper below
+   (card_small free_zone rows 70–93 %, columns 6–93 %). */
+.card { position: relative; aspect-ratio: 820 / 1180; container-type: inline-size; }
+.card > .photo-slot { left: 9.634%; top: 7.373%; width: 80.854%; height: 60.593%; }
+.card > .card-img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.card-copy {
+  position: absolute; left: 9%; right: 9%; top: 71%; bottom: 7.5%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .6cqw;
+}
+.card-copy .script { font-size: 10.6cqw; line-height: 1.05; white-space: nowrap; }
+.card-copy .kicker { font-size: max(8.5px, 4.3cqw); letter-spacing: .2em; line-height: 1.25; color: var(--ink-soft); overflow-wrap: anywhere; }
+
+/* ------------------------------------------------------------------ painted backdrop (index + home hero) */
+.scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.scene-bg picture, .scene-bg .scene-img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.scene-bg .scene-img { object-fit: cover; object-position: 50% 50%; }
+.land-only { display: none; }
+/* loose accents resting on the paper, as in W1.1/W1.2 (GPT accent parts; a slow breath of air moves them) */
+.float { position: absolute; display: block; height: auto; filter: drop-shadow(0 5px 5px rgba(60, 60, 30, .16)); }
+.f-leaf  { right: 7%; top: 11%; width: clamp(40px, 13vw, 84px); rotate: -28deg; }
+.f-olive { right: 6%; top: 26%; width: clamp(14px, 4.4vw, 28px); rotate: 18deg; }
+.f-bloom { left: 6%; top: 74%; width: clamp(18px, 6vw, 38px); }
+.hero .f-bloom { top: auto; bottom: 19%; left: 5%; }
+.js .float { animation: air 7s ease-in-out infinite alternate; }
+.js .f-olive { animation-duration: 9s; animation-delay: -3s; }
+.js .f-bloom { animation-duration: 8s; animation-delay: -5s; }
+@keyframes air { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-3px, 5px) rotate(4deg); } }
+@media (min-aspect-ratio: 3/4) { .float { display: none; } }
+.corner { position: absolute; display: block; pointer-events: none; filter: drop-shadow(0 6px 10px rgba(60, 60, 30, .10)); }
+.corner-tl { left: 0; top: 0; }
+.corner-br { right: 0; bottom: 0; }
+/* short, wide phones (aspect 9/16 … 3/4): the corner clusters of the painted page would reach the centred text; the page
+   is shown a little larger from its middle so the clusters sit further out (measured by theme-check) */
+@media (min-aspect-ratio: 9/16) and (max-aspect-ratio: 3/4) {
+  .scene-bg .scene-img { transform: scale(1.18); }
+}
+@media (min-aspect-ratio: 3/4) {
+  .land-only { display: block; }
+  .scene-bg .corner-tl, .scene-bg .corner-br { width: min(34vw, 50vh, 520px); height: auto; }
+}
+
+/* ================================================================== page 1 — envelope (W1.1) */
+.page-envelope { overflow-x: clip; }
+.skip {
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
+  font: 500 12px/1 var(--serif); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft);
+}
+.skip span { padding-bottom: 3px; border-bottom: 1px solid rgba(179, 154, 99, .7); }
+.env-page {
+  position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  padding: calc(46px + env(safe-area-inset-top)) 16px calc(26px + env(safe-area-inset-bottom));
+}
+.env-head { position: relative; z-index: 3; width: min(100%, 560px); pointer-events: none; }
+.env-head .kicker { font-size: 13px; letter-spacing: .3em; }
+.names {
+  margin-top: 4px; font-size: calc(clamp(42px, 14vw, 76px) * var(--names-scale, 1)); line-height: 1.04;
+  text-wrap: balance; overflow-wrap: break-word; text-shadow: 0 0 18px rgba(246, 240, 224, .9);
+}
+/* The stage = union of the closed + open envelope, the card's path and the seal (manifest stage.box, ratio .73819).
+   --obj = closed envelope width: min(84vw, 45svh × aspect 1.3442 (stage.closed_obj.aspect), 440px);
+   --w = --obj / .9967 (stage.closed_obj.frac_w). The empty top of the stage (where the flap opens and the card rises;
+   stage.closed_obj.top_frac_of_stage_w = .6099) slides under the names by a negative top margin. */
+.stage {
+  --obj: min(84vw, calc(45svh * 1.3442), 440px);
+  --w: calc(var(--obj) / .9967);
+  position: relative; z-index: 2; width: var(--w); aspect-ratio: .73819; flex: none;
+  margin-top: calc(18px - var(--w) * .6099); cursor: pointer; -webkit-tap-highlight-color: transparent; border-radius: 6px;
+}
+.stage:focus-visible { outline-offset: -4px; }
+.env { position: absolute; inset: 0; }
+.env img, .env-cflap-wrap > img { position: absolute; display: block; }
+/* layers bottom → top (docs/11 §7.2 kapak): env_flap · env_body · card · env_pocket · env_closed · env_cflap + closure;
+   every envelope layer is cut at the stage's full width (left 0, width 100 %), rows from manifest stage.parts */
+.env-flap   { left: 0;      top: 13.026%; width: 100%;    height: 32.483%; transform-origin: 50% 100%; opacity: 0; }   /* stage.parts.env_flap */
+.env-body   { left: 0;      top: 44.778%; width: 100%;    height: 55.222%;  opacity: 0; }                                /* stage.parts.env_body */
+.env-pocket { left: 0;      top: 48.189%; width: 100%;    height: 51.811%; opacity: 0; z-index: 2; }                   /* stage.parts.env_pocket */
+.env-closed { left: 0;      top: 44.941%; width: 100%;    height: 54.897%; z-index: 3;
+              filter: drop-shadow(0 18px 22px rgba(52, 58, 36, .22)) drop-shadow(0 3px 4px rgba(52, 58, 36, .16)); }  /* stage.parts.env_closed */
+.env-body, .env-pocket, .env-flap { filter: drop-shadow(0 16px 20px rgba(52, 58, 36, .18)); }
+.env-pocket { filter: none; }
+/* the card waits inside the envelope: hidden under the closed body, clipped a little above the envelope's bottom edge
+   (stage.body_bottom_pct 99.756 − 1.25: the paper edge is soft) so it never shows below the pocket */
+.card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 1.5% -45%); }
+.env .card { position: absolute; left: 21.041%; top: 49.127%; width: 57.809%; view-transition-name: invite-card; }   /* stage.parts.card */
+.env .card .card-img { filter: drop-shadow(0 10px 16px rgba(52, 58, 36, .18)); }
+/* the flap and the seal ride one hinge: transform-origin = the hinge row (stage.hinge_pct 45.022) */
+.env-cflap-wrap { position: absolute; inset: 0; z-index: 4; transform-origin: 50% 45.022%; backface-visibility: hidden; }
+.env-cflap { left: 0; top: 44.941%; width: 100%; height: 40.767%; }                                           /* stage.parts.env_cflap */
+/* closure.png (seal + tucked olive sprig, one piece): anchored to the lace V tip with the comp's offset and size
+   (manifest closure: center_pct [50.165, 76.963], width_pct 48.734 → stage.parts.closure) */
+.closure { position: absolute; left: 23.239%; top: 57.53%; width: 48.734%; height: 34.116%; container-type: inline-size;
+           filter: drop-shadow(0 6px 7px rgba(52, 46, 20, .28)) drop-shadow(0 1px 1px rgba(52, 46, 20, .25)); }
+.closure > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* monogram pressed into the seal's smooth empty oval (closure.mono_oval_in_crop_pct [44.463, 39.706, 21.575, 34.516]) */
+.seal-mono {
+  position: absolute; left: 44.463%; top: 39.706%; width: 21.575%; height: 34.516%;
+  display: flex; align-items: center; justify-content: center; text-align: center; white-space: nowrap;
+  font-family: var(--script); font-size: 8.4cqw; line-height: 1; color: var(--seal-ink);
+  text-shadow: 0 1px 0 rgba(255, 246, 220, .75), 0 -1px 0 rgba(110, 86, 40, .35);
+}
+.env-hint { position: relative; z-index: 3; margin-top: 14px; font: 500 13px/1.6 var(--serif); letter-spacing: .32em; text-transform: uppercase; color: var(--ink-soft); }
+.env-hint .click { display: none; }
+@media (hover: hover) and (pointer: fine) { .env-hint .tap { display: none; } .env-hint .click { display: inline; } }
+.js .env-hint { animation: hint-breathe 2.8s ease-in-out 1.6s infinite; }
+@keyframes hint-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .8; } }   /* low point still ≈ 4.4:1 */
+.env-after { display: none; }
+.nojs-only { display: none; }
+.no-js .nojs-only { display: block; margin-top: 18px; }
+.no-js .env-hint { display: none; }
+
+/* opened (back from home, or after the opening): the open envelope with the card standing in front */
+.is-opened .env-closed, .is-opened .env-cflap-wrap { opacity: 0; visibility: hidden; }
+.is-opened .env-flap, .is-opened .env-body, .is-opened .env-pocket { opacity: 1; }
+.is-opened .env-page .card-slot { clip-path: none; z-index: 5; }
+.is-opened .env .card { transform: translateY(-12.685%) scale(1.06); }      /* ENVELOPE_GEOMETRY.front (stage.card_path) */
+.is-opened .env-head, .is-opened .env-hint { opacity: 0; }
+.is-opened .env-after {
+  position: relative; z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 18px;
+}
+.is-opened .env-after .replay {
+  min-height: 44px; padding: 10px 20px; border-radius: 999px; background: rgba(251, 248, 240, .7); text-decoration: none;
+}
+.is-opened .env-after .replay::after { display: none; }
+
+/* the JS particle layer (MOTION.accents): GPT accents only */
+.accent-layer { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+.accent-layer img { position: absolute; left: 0; top: 0; display: block; height: auto; will-change: transform, opacity;
+                    filter: drop-shadow(0 6px 6px rgba(50, 60, 30, .14)); }
+
+/* ================================================================== page 2 — home (W1.2) */
+.hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center; }
+.hero .scene-bg { position: absolute; z-index: 0; }
+/* the painted page fades into the paper below the first screen (a mask over the GPT image, nothing drawn) */
+.hero-bg { -webkit-mask-image: linear-gradient(#000 90%, transparent); mask-image: linear-gradient(#000 90%, transparent); }
+.hero-inner {
+  position: relative; z-index: 1; width: min(100% - 32px, 520px); display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: calc(30px + env(safe-area-inset-top)) 0 20px;
+}
+.hero-card { width: min(50vw, calc(37svh * .695), 260px); filter: drop-shadow(0 22px 26px rgba(52, 58, 36, .20)) drop-shadow(0 2px 3px rgba(52, 58, 36, .12)); }
+.hero-card { view-transition-name: invite-card; }
+.hero .names { margin-top: clamp(12px, 3svh, 26px); font-size: calc(clamp(44px, 15vw, 82px) * var(--names-scale, 1)); line-height: 1.04; text-wrap: balance; }
+.hero-date { margin-top: 8px; font-size: 13px; letter-spacing: .28em; }
+.hero-venue { margin-top: 10px; font-style: italic; font-size: clamp(21px, 6vw, 27px); line-height: 1.25; color: var(--ink); letter-spacing: .02em; text-wrap: balance; }
+.hero-city { margin-top: 2px; font-size: 12px; letter-spacing: .3em; }
+/* countdown: plain numerals + labels (W1.2 draws four boxed tiles — K21 deviation, docs/11 §5.7: no CSS boxes) */
+.countdown { margin-top: clamp(14px, 3.4svh, 28px); }
+.cd-row { display: flex; justify-content: center; gap: clamp(16px, 6vw, 34px); }
+.cd-cell { display: flex; flex-direction: column; align-items: center; min-width: 52px; }
+.cd-num { font: 500 clamp(30px, 8.6vw, 40px)/1 var(--serif); color: var(--olive); font-variant-numeric: lining-nums tabular-nums; }
+.cd-lbl { margin-top: 6px; font: 500 10.5px/1 var(--serif); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.cd-done { font-style: italic; font-size: 19px; color: var(--olive); }
+.countdown.is-done .cd-row { display: none; }
+.hero-cta { margin-top: clamp(16px, 3.6svh, 30px); }
+html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
+@keyframes arrive-fade { from { opacity: 0; } }
+
+/* ------------------------------------------------------------------ painted paper card, 3-slice (docs/11 §9)
+   <img class="paper-top"> = the image's top rows (object-fit: cover from the top), ::after = its bottom rows, ::before = the
+   plain paper band between them stretched to the text's height; the text flows. Nothing is drawn: three cuts of one GPT
+   card. --ar = width / height, --t / --b = band start / end (manifest <card>.slices, full-width plain rows). */
+.paper { position: relative; width: 100%; margin-inline: auto; container-type: inline-size; isolation: isolate;
+         --top-h: calc(100cqw * var(--t) / var(--ar)); --bot-h: calc(100cqw * (1 - var(--b)) / var(--ar));
+         filter: drop-shadow(0 22px 26px rgba(52, 58, 36, .17)) drop-shadow(0 2px 3px rgba(52, 58, 36, .10)); }
+.paper > .paper-top { position: absolute; left: 0; top: 0; width: 100%; height: var(--top-h); object-fit: cover; object-position: 50% 0; display: block; z-index: 0; }
+.paper::before, .paper::after { content: ""; position: absolute; left: 0; right: 0; z-index: 0; background-repeat: no-repeat; }
+.paper::before { top: calc(var(--top-h) - 1px); bottom: calc(var(--bot-h) - 1px); }
+.paper::after { bottom: 0; height: var(--bot-h); background-size: 100% auto; background-position: 0 100%; }
+.paper-text { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+/* invitation_card (864×1279): band rows 49–63 % (manifest invitation_card.slices) */
+.invite { --ar: .67553; --t: .49; --b: .63; }
+.invite::before { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-864.webp") 2x);
+                  background-size: 100% 714.286%; background-position: 0 56.977%; }
+.invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-864.webp") 2x); }
+/* info_card (772×1148): band rows 17–91 % (manifest info_card.slices) */
+.info { --ar: .67247; --t: .17; --b: .91; }
+.info::before { background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-772.webp") 2x);
+                background-size: 100% 135.135%; background-position: 0 65.385%; }
+.info::after { background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-772.webp") 2x); }
+
+/* ------------------------------------------------------------------ home: the invitation card (no comp) */
+.invite-sec { padding: 26px 0 30px; }
+/* text column: free_zone of invitation_card — starts under the olive branch (row 29 %, cols 18–82 %), stays left of the
+   lower-right sprig (ends above row 68 % of the image: bottom slice 63–100 %, sprig from row 64 % at col ≥ 84 %) */
+.invite-text { padding: 43cqw 15% 49cqw; min-height: calc(100cqw / .67553); justify-content: center; }
+.invite-text .host { max-width: 60cqw; font-size: max(10.5px, 3.3cqw); letter-spacing: .22em; line-height: 1.55; text-wrap: balance; }
+.invite-text .nm { font-size: 11.2cqw; line-height: 1.12; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.invite-text .host + .nm { margin-top: 3.2cqw; }
+.amp-line { font: italic 400 7.6cqw/1.1 var(--serif); color: var(--olive); margin: .4cqw 0; }
+.invite-text .request { margin-top: 3.4cqw; font-style: italic; font-size: max(15px, 4.6cqw); line-height: 1.4; color: var(--ink-soft); max-width: 60cqw; text-wrap: balance; }
+.dateblock { margin-top: 4.4cqw; display: flex; flex-direction: column; align-items: center; }
+.dateblock .wd { font-size: max(10.5px, 3.3cqw); letter-spacing: .3em; }
+.dmy { display: flex; align-items: center; justify-content: center; gap: 3.4cqw; margin: .6cqw 0 .2cqw; color: var(--olive); }
+.dmy .mon, .dmy .yr { font: 500 max(11px, 3.7cqw)/1 var(--serif); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.dmy .yr { letter-spacing: .2em; }
+.dmy .day { font: 400 13cqw/1 var(--serif); color: var(--olive); min-width: 1.1em; }
+.dateblock .at { font-size: max(10.5px, 3.3cqw); letter-spacing: .26em; }
+.invite-text .venue { margin-top: 3.8cqw; font-style: italic; font-size: max(17px, 5.6cqw); line-height: 1.25; color: var(--ink); text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.invite-text .city { margin-top: .6cqw; font-size: max(10.5px, 3.2cqw); letter-spacing: .28em; }
+.reply { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.cal { margin-top: 26px; text-align: center; }
+.cal .kicker { font-size: 11.5px; }
+.cal-links { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+/* ------------------------------------------------------------------ home: "More about the day" (no comp) */
+.more-sec { padding: 28px 0 20px; }
+.more-title { text-align: center; font-size: 12px; letter-spacing: .32em; }
+.vignette { display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; padding: 18px 0 8px; position: relative; z-index: 1; }
+.v-text { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.v-title { font-size: 46px; line-height: 1.1; }
+.vignette .more { margin-top: 8px; }
+.mini-frame { position: relative; display: block; width: 126px; aspect-ratio: 828 / 1062; margin-bottom: 10px; transform: rotate(-4deg);
+              filter: drop-shadow(0 14px 16px rgba(52, 58, 36, .18)); }
+.mini-frame > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.mini-frame .photo-slot { left: 11.594%; top: 7.533%; width: 78.865%; height: 83.145%; }       /* photo_slots.portrait */
+.mini-frame .ph-mark span { display: none; }
+.sched { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 4px; max-width: 100%; }
+.sched-line { font-size: 17px; color: var(--ink-soft); line-height: 1.4; overflow-wrap: break-word; max-width: 100%; }
+.sched-line .t { font: 500 12px/1 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-ink); margin-right: .4em; white-space: nowrap; }
+.sched-line:nth-child(n+5) { display: none; }
+.mini-seal { display: block; width: 150px; margin-bottom: 4px; filter: drop-shadow(0 8px 8px rgba(52, 46, 20, .22)); }
+.mini-seal img { display: block; width: 100%; height: auto; }
+.sprig { display: block; width: 120px; height: auto; margin: 18px auto 0; }
+/* page ends: the lower-right GPT cluster (decor_br) sits under the last lines, never behind them */
+.foot, .next-sec, .closing { --corner: min(62vw, 360px); }
+.foot { position: relative; z-index: 1; padding: 34px 16px calc(var(--corner) * .8); text-align: center; overflow: hidden; }
+.foot > .page-corner { right: 0; bottom: 0; width: var(--corner); }
+.foot > :not(.page-corner) { position: relative; z-index: 1; }
+.foot .sign { font-size: 40px; margin-top: 2px; overflow-wrap: break-word; }
+.foot .textlink { margin-top: 18px; }
+
+/* ================================================================== long pages: corners + headings */
+.page-long .site-main { padding-top: env(safe-area-inset-top); }
+.page-corner { position: absolute; z-index: 0; display: block; height: auto; pointer-events: none; }
+.page-head, .details-top, .rsvp-top { position: relative; text-align: center; }
+.page-head > .corner-tl, .details-top > .corner-tl, .rsvp-top > .corner-tl { left: 0; top: 0; width: min(46vw, 320px); }
+.page-head { padding: clamp(132px, 38vw, 200px) 16px 8px; }
+.page-head > *:not(.page-corner) { position: relative; z-index: 1; }
+.page-title { font-size: clamp(62px, 19vw, 96px); line-height: 1.02; }
+.page-head .kicker { margin-top: 6px; font-size: 12.5px; letter-spacing: .32em; }
+.lede { width: min(100%, 420px); margin: 18px auto 0; font-style: italic; font-size: 19px; line-height: 1.5; color: var(--ink-soft); text-wrap: pretty; }
+.next-sec { padding: 40px 16px calc(var(--corner) * .8); text-align: center; overflow: hidden; }
+.next-sec > .page-corner { right: 0; bottom: 0; width: var(--corner); }
+.next-sec > :not(.page-corner) { position: relative; z-index: 1; }
+.next-sec .sprig { margin: 0 auto 18px; }
+
+/* ================================================================== page 3 — Our Story (W1.3): the fan of cards */
+.fan { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 16px 0; }
+.fan-card { position: relative; width: min(65vw, 300px); text-align: center; }
+.fan-card + .fan-card { margin-top: 26px; }
+.fan-card .frame { position: relative; aspect-ratio: 828 / 1062; filter: drop-shadow(0 18px 20px rgba(52, 58, 36, .20)) drop-shadow(0 2px 2px rgba(52, 58, 36, .12)); }
+.fan-card .photo-slot { left: 11.594%; top: 7.533%; width: 78.865%; height: 83.145%; }         /* photo_slots.portrait */
+.fan-card .frame-img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.fan-card figcaption { margin-top: 8px; font-size: 32px; line-height: 1.15; text-wrap: balance; overflow-wrap: break-word; padding: 0 4px; }
+/* phones: dealt down the page — alternating sides and tilts, each card fans out from the middle line into place */
+.fc-1 { transform: translateX(-8vw) rotate(-6deg); --fx: 8vw; --fr: 6deg; }
+.fc-2 { transform: translateX(8vw) rotate(5deg); --fx: -8vw; --fr: -5deg; }
+.fc-3 { transform: translateX(-6vw) rotate(-4deg); --fx: 6vw; --fr: 4deg; }
+/* wide screens: the comp's hand of cards — the middle upright and higher, the sides tilted 8° outward and overlapping
+   it only at their outer ivory margins; each caption under its own card */
+@media (min-width: 720px) {
+  .fan { flex-direction: row; justify-content: center; align-items: flex-start; padding-top: 40px; }
+  .fan-card { width: 214px; }
+  .fan-card + .fan-card { margin-top: 0; }
+  .fc-1 { transform: translate(20px, 26px) rotate(-8deg); transform-origin: 50% 100%; z-index: 1; --fx: 110%; --fy: -10px; --fr: 8deg; }
+  .fc-2 { transform: none; z-index: 2; --fx: 0; --fy: 26px; --fr: 0deg; }
+  .fc-3 { transform: translate(-20px, 26px) rotate(8deg); transform-origin: 50% 100%; z-index: 1; --fx: -110%; --fy: -10px; --fr: -8deg; }
+  .fan-card figcaption { font-size: 30px; }
+}
+
+/* ================================================================== page 4 — Details (W1.4) */
+.details-top { padding: clamp(140px, 40vw, 190px) 0 0; }
+.page-kicker { position: relative; z-index: 1; margin-bottom: 14px; font-size: 12.5px; letter-spacing: .3em; }
+.details-top .wrap { z-index: 1; }
+/* Order of the Day: info_card text column inside the gold double border (free_zone rows 18–91 %, cols 6–94 %) */
+.day-card .info-text { padding: calc(var(--top-h) + 1cqw) 10% calc(var(--bot-h) + 7cqw); }
+.card-title { font-size: 13.4cqw; line-height: 1.05; }
+.rsvp-text .card-title { font-size: 9.9cqw; white-space: nowrap; }   /* design copy, one line as in W1.5 */
+.sched-list { list-style: none; margin: 5cqw 0 0; padding: 0; width: 100%; }
+.sched-row { display: grid; grid-template-columns: 30% 1fr; column-gap: 5cqw; align-items: baseline; text-align: left; }
+.sched-row + .sched-row { margin-top: 3.4cqw; }
+/* between rows: a small GPT olive sprig (divider part), as in the comp; from 6 rows only spacing */
+.sched-row + .sched-row::before {
+  content: ""; grid-column: 1 / -1; justify-self: center; width: 19cqw; aspect-ratio: 1303 / 412; margin-bottom: 3cqw;
+  background: url("img/divider-300.webp") center / contain no-repeat;
+}
+.sched-list:has(> .sched-row:nth-child(6)) .sched-row + .sched-row::before { display: none; }
+.sched-list:has(> .sched-row:nth-child(6)) .sched-row + .sched-row { margin-top: 3.2cqw; }
+.sched-row .time { font: 500 max(11px, 3.4cqw)/1.3 var(--serif); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); text-align: right; white-space: nowrap; }
+.sched-row .what { display: flex; flex-direction: column; min-width: 0; }
+.sched-row .label { font: 500 max(12.5px, 4cqw)/1.3 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--ink); overflow-wrap: break-word; }
+.sched-row .loc { font-style: italic; font-size: max(14px, 4.3cqw); line-height: 1.35; color: var(--ink-soft); overflow-wrap: break-word; }
+.venue-sec { padding: 40px 0 0; text-align: center; z-index: 1; }
+.venue-photo { position: relative; width: 100%; aspect-ratio: 1185 / 773; filter: drop-shadow(0 18px 22px rgba(52, 58, 36, .18)); }
+.venue-photo .photo-slot { left: 7.932%; top: 9.832%; width: 85.148%; height: 79.948%; }        /* photo_slots.landscape */
+.venue-photo .vframe { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.venue-text { margin-top: 16px; }
+.venue-name { font-style: italic; font-size: clamp(25px, 7.4vw, 32px); line-height: 1.2; color: var(--ink); text-wrap: balance; overflow-wrap: break-word; }
+.venue-text .kicker { margin-top: 4px; letter-spacing: .3em; }
+.venue-text .note { margin-top: 10px; }
+/* "DRESS CODE · <dress code>" between two single hairlines (comp W1.4; 1 px interface rules) */
+.dress { display: flex; align-items: center; gap: 12px; margin-top: 22px; color: var(--ink); }
+.dress::before, .dress::after { content: ""; flex: 1 1 24px; min-width: 18px; height: 1px; background: rgba(179, 154, 99, .7); }
+.dress .kicker { flex: none; }
+.dress .dot { color: var(--gold); flex: none; }
+.dress em { font-size: 19px; flex: 0 1 auto; overflow-wrap: break-word; min-width: 0; }
+.action { margin-top: 22px; }
+.block { padding-top: 34px; text-align: center; z-index: 1; }
+.block h2, .faq-sec h2 { font-size: 46px; margin-top: 8px; }
+.block .note { margin-top: 6px; }
+.faq-sec { padding-top: 34px; text-align: center; z-index: 1; }
+.faq-list { margin-top: 14px; text-align: left; }
+.faq-item { border-bottom: 1px solid rgba(179, 154, 99, .55); }
+.faq-item:first-child { border-top: 1px solid rgba(179, 154, 99, .55); }
+.faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 52px; padding: 10px 2px;
+  cursor: pointer; list-style: none; font-size: 18px; line-height: 1.35; color: var(--ink);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; content: "+" / ""; flex: none; font-size: 24px; line-height: 1; color: var(--gold-ink); transition: transform .3s var(--ease); }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-a { padding: 0 2px 16px; white-space: pre-line; color: var(--ink-soft); font-size: 17px; }
+
+/* ================================================================== page 5 — RSVP (W1.5) */
+.rsvp-top { padding: clamp(104px, 30vw, 160px) 0 0; }
+.rsvp-top .wrap { z-index: 1; padding-bottom: calc(min(100vw - 32px, 460px) * .19); }   /* room for the seal under the card */
+.rsvp-card { margin-bottom: 0; }
+/* text inside the gold border, under the top sprig; the seal (closure) presses over the bottom edge: room for it */
+.rsvp-text { padding: calc(var(--top-h) + 3cqw) 9% calc(var(--bot-h) + 30cqw); }
+.rsvp-text .kicker { margin-top: 5cqw; font-size: max(11px, 3.4cqw); letter-spacing: .28em; }
+.deadline { margin-top: 1cqw; font: 400 max(18px, 6cqw)/1.2 var(--serif); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.rsvp-text .pill { margin-top: 6cqw; }
+.rsvp-text .wait { margin-top: 6cqw; font-size: max(10px, 3cqw); letter-spacing: .2em; text-wrap: balance; }
+.rsvp-text .love { margin-top: 5cqw; font-size: 10cqw; }
+.rsvp-text .sign { font-size: 10.6cqw; line-height: 1.15; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.card-seal { position: absolute; z-index: 2; left: 50%; bottom: -15cqw; width: 56cqw; aspect-ratio: 1222 / 1159; translate: -50% 0;
+             container-type: inline-size; filter: drop-shadow(0 8px 9px rgba(52, 46, 20, .26)) drop-shadow(0 1px 1px rgba(52, 46, 20, .22)); }
+.card-seal { translate: -55.25% 0; }
+.card-seal > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.reply-sec { padding: 46px 0 10px; }
+.reply-box { position: relative; z-index: 1; padding: 26px 20px 24px; border-radius: 18px; background: rgba(251, 248, 240, .58); text-align: center; }
+.reply-box .sprig { margin: 0 auto; width: 110px; }
+.reply-box h2 { font-size: 46px; margin-top: 2px; }
+.reply-form { margin-top: 14px; text-align: left; }
+.field { display: block; margin-top: 16px; }
+.field .kicker, .choice legend { display: block; margin-bottom: 6px; font-size: 11.5px; letter-spacing: .22em; }
+.opt { text-transform: none; letter-spacing: .04em; font-weight: 400; font-style: italic; }
+.field input, .field textarea, .question textarea {
+  display: block; width: 100%; min-height: 48px; padding: 11px 14px; border: 1px solid rgba(122, 101, 57, .5); border-radius: 10px;
+  background: rgba(255, 253, 247, .92); color: var(--ink); font: 400 18px/1.4 var(--serif);
+}
+.field textarea, .question textarea { resize: vertical; min-height: 84px; }
+.field input:focus, .field textarea:focus, .question textarea:focus { outline: 2px solid var(--olive); outline-offset: 1px; border-color: var(--olive); }
+.choice { margin: 18px 0 0; padding: 0; border: 0; min-width: 0; }
+.choice label, .q-options label {
+  display: flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 8px; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid rgba(122, 101, 57, .45); background: rgba(255, 253, 247, .8); cursor: pointer; font-size: 18px; color: var(--ink);
+}
+.choice label:has(input:checked), .q-options label:has(input:checked) { border-color: var(--olive); background: rgba(125, 139, 90, .14); }
+.choice input[type="radio"], .q-options input[type="radio"] { width: 20px; height: 20px; accent-color: var(--olive-btn); flex: none; margin: 0; }
+.questions { margin-top: 4px; }
+.question legend { margin-top: 0; }
+.field-error { min-height: 0; margin-top: 4px; font-size: 15px; color: #8A3A2A; }
+.field-error:empty { display: none; }
+.field [aria-invalid="true"] { border-color: #8A3A2A; }
+.send { margin-top: 24px; text-align: center; }
+.reply-panel { margin-top: 10px; }
+.reply-panel .script { font-size: 48px; }
+.reply-panel .note { margin-top: 6px; }
+.reply-panel .textlink { margin-top: 18px; }
+.closing { padding: 40px 16px calc(var(--corner) * .8); text-align: center; overflow: hidden; }
+.closing > .page-corner { right: 0; bottom: 0; width: var(--corner); }
+.closing > :not(.page-corner) { position: relative; z-index: 1; }
+.closing .title { font-size: 56px; }
+.closing .line { margin-top: 6px; font-style: italic; font-size: 19px; color: var(--ink-soft); }
+.closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
+.closing .replay-line { margin-top: 22px; }
+/* once a reply is sent the generic thank-you below the form would repeat (or contradict a "no") */
+html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
+.toast {
+  position: fixed; left: 50%; bottom: calc(var(--nav-h) + 18px + env(safe-area-inset-bottom)); z-index: 60; translate: -50% 12px;
+  max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 12px; background: rgba(47, 58, 43, .94); color: var(--ivory);
+  font-size: 16px; opacity: 0; pointer-events: none; transition: opacity .3s, translate .3s;
+}
+.toast.show { opacity: 1; translate: -50% 0; }
+
+/* ================================================================== wider screens */
+@media (min-width: 768px) {
+  .hero-card { width: min(260px, calc(37svh * .695)); }
+  .v-title { font-size: 52px; }
+  .page-head { padding-top: 150px; }
+  .details-top, .rsvp-top { padding-top: 140px; }
+}
+@media (min-width: 1100px) {
+  .page-head > .corner-tl, .details-top > .corner-tl, .rsvp-top > .corner-tl { width: 380px; }
+}
+
+/* ================================================================== reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-step] { opacity: 1 !important; transform: none !important; clip-path: none !important; filter: none !important; transition: none !important; }
+  .js .env-hint, .js .float { animation: none !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
+}

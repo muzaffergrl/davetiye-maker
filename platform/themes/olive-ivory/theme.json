@@ -1,0 +1,19 @@
+{
+  "id": "olive-ivory",
+  "name": "Olive & Ivory",
+  "version": "1.0.0",
+  "pages": {
+    "index": "index.html",
+    "home": "home.html",
+    "story": "story.html",
+    "details": "details.html",
+    "rsvp": "rsvp.html"
+  },
+  "photos": {
+    "hero_portrait": { "label": "Portrait on the invitation card", "source": "media.hero_portrait", "aspect": "663/715" },
+    "story_1": { "label": "Our Story photo 1", "source": "media.memory_photos.0", "aspect": "653/883" },
+    "story_2": { "label": "Our Story photo 2", "source": "media.memory_photos.1", "aspect": "653/883" },
+    "story_3": { "label": "Our Story photo 3", "source": "media.memory_photos.2", "aspect": "653/883" },
+    "venue": { "label": "Venue photo", "source": "media.venue_image", "aspect": "1009/618" }
+  }
+}

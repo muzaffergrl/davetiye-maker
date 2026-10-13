@@ -1,0 +1,59 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    { "display_name": "Avery", "full_name": "Avery Louise" },
+    { "display_name": "Jordan", "full_name": "Jordan Samuel" }
+  ],
+  "name_display": "Avery & Jordan",
+  "initials": "A & J",
+  "host_line": "Together with our families",
+  "date": "2027-06-12",
+  "ceremony_time": "16:00",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "The Willow Grove Estate",
+    "city": "Napa",
+    "region": "California",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    { "label": "Ceremony", "time": "16:00", "location": "The Garden Terrace" },
+    { "label": "Cocktail Hour", "time": "17:00", "location": "The Olive Courtyard" },
+    { "label": "Reception", "time": "18:30", "location": "The Grand Ballroom" }
+  ],
+  "dress_code": "Formal Attire",
+  "rsvp": { "deadline": "2027-05-15", "method": null },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": false,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Slow lunches, golden evenings and one walk through the olive grove led us to",
+    "items": [
+      { "caption": "Our first lunch" },
+      { "caption": "In the olive grove" },
+      { "caption": "Simply forever" }
+    ]
+  }
+}

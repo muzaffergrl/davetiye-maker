@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- Olive & Ivory · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in calligraphy, "MOMENTS WE HOLD DEAR",
+     three rounded-corner gold-bordered portrait cards fanned out like a hand of cards (middle upright and higher, the
+     sides tilted ~8° outward, overlapping only at their outer ivory margins), a caption under each card. On phones the
+     side-by-side fan would leave each photo window ~85 px wide (< 38vw, docs/11 §9): the same three cards are dealt
+     down the page in a gentle cascade (tilts −6° / +5° / −4°, alternating sides, margins overlapping) and fan out into
+     place as they come into view; from 720 px wide the comp's fan stands as drawn. Photo slots story_1..3
+     (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is off (404) when
+     optional_blocks.our_story is false. Kicker / title = design copy. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="Our Story · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="Our Story · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="Our Story · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#EDE4D0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Great+Vibes&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <img class="corner corner-tl page-corner" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(64vw, 380px)" alt="">
+    <h1 class="script page-title" data-step="title" data-a="write">Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="fade">Moments we hold dear</p>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <section class="fan" aria-label="Our photos">
+    <figure class="fan-card fc-1" data-scene="story-card">
+      <div class="frame" data-step="card" data-a="fan">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) 168px, 51vw" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 214px, 65vw" alt="">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+    </figure>
+    <figure class="fan-card fc-2" data-scene="story-card">
+      <div class="frame" data-step="card" data-a="fan">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) 168px, 51vw" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 214px, 65vw" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+    </figure>
+    <figure class="fan-card fc-3" data-scene="story-card">
+      <div class="frame" data-step="card" data-a="fan">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) 168px, 51vw" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 214px, 65vw" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+    </figure>
+  </section>
+
+  <section class="section next-sec" data-scene="story-next">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(62vw, 360px)" alt="" loading="lazy">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span>Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>
+    <li><a href="details.html"><span>Details</span></a></li>
+    <li data-if="!rsvp.method"><a href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

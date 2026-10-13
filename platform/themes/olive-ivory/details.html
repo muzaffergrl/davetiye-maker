@@ -1,0 +1,114 @@
+<!doctype html>
+<!-- Olive & Ivory · page 4 — Details (/<slug>/details). W1.4 comp: the "Order of the Day" card (GPT info_card: one olive
+     sprig at the top centre, fine gold double border) with time · EVENT / place in italic per row and a small olive
+     sprig between rows (GPT divider), the venue photo in the GPT landscape frame, the venue in italic serif, the city in
+     spaced capitals and "DRESS CODE · …" between hairlines. The card grows with the schedule (1–10 rows, docs/11 §9
+     3-slice cut, nothing drawn). Then add to calendar, map, Travel & Stay, Registry (link blocks only with their link),
+     Questions & Answers (G051). Personal text: none — filled on the server. Block intros = design copy. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="The Day · {name_display}">The Day</title>
+<meta name="description" data-attr-content="Schedule, venue and travel · {name_display} · {date|date-long}" content="Schedule, venue and travel">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="The Day · {name_display}" content="The Day">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.name} · {venue.city_region}" content="">
+<meta name="theme-color" content="#EDE4D0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Great+Vibes&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <!-- ORDER OF THE DAY (comp W1.4) — one row per schedule item -->
+  <section class="details-top" data-scene="details-card" aria-labelledby="day-title">
+    <img class="corner corner-tl page-corner" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(64vw, 380px)" alt="">
+    <p class="kicker page-kicker" data-step="kicker" data-a="fade"><span data-field="date" data-format="weekday"></span> · <span class="nowrap" data-field="date"></span></p>
+    <div class="wrap">
+      <div class="paper info day-card" data-step="card" data-a="rise-lg">
+        <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-772.webp 772w" sizes="min(calc(100vw - 32px), 460px)" alt="">
+        <div class="paper-text info-text">
+          <h1 class="script card-title" id="day-title" data-step="title" data-a="write">Order of the Day</h1>
+          <ol class="sched-list">
+            <li class="sched-row" data-repeat="schedule" data-step="row" data-a="rise">
+              <span class="time" data-field=".time"></span>
+              <span class="what"><span class="label" data-field=".label"></span><span class="loc" data-if=".location" data-field=".location"></span></span>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+      <div class="cal" data-step="cal" data-a="rise">
+        <p class="kicker">Add to your calendar</p>
+        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE (comp W1.4) -->
+  <section class="wrap venue-sec" data-scene="details-venue" aria-label="The venue">
+    <figure class="venue-photo" data-step="photo" data-a="rise-lg">
+      <div class="photo-slot mask-landscape" data-slot="venue">
+        <img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(calc(84vw - 27px), 400px)" alt="" data-attr-alt="{venue.name}" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+      </div>
+      <img class="vframe" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(calc(100vw - 32px), 470px)" alt="" loading="lazy">
+    </figure>
+    <div class="venue-text" data-step="body" data-a="rise">
+      <p class="venue-name" data-field="venue.name"></p>
+      <p class="kicker"><span data-field="venue.city_region"></span><span data-if="venue.country"> · <span data-field="venue.country"></span></span></p>
+      <p class="note" data-if="venue.address" data-field="venue.address"></p>
+      <p class="note" data-if="ceremony_time">The ceremony begins at <span class="nowrap" data-field="ceremony_time"></span><span data-if="schedule.0.location"> in <span data-field="schedule.0.location"></span></span>.</p>
+    </div>
+    <p class="dress" data-optional="dress_code" data-if="dress_code" data-step="dress" data-a="fade"><span class="kicker">Dress code</span> <span class="dot" aria-hidden="true">·</span> <em data-field="dress_code"></em></p>
+    <p class="action" data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
+  </section>
+
+  <!-- link blocks are shown only with their link (no dead buttons on a live site) -->
+  <section class="wrap block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation" aria-label="Travel and stay">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy">
+    <h2 class="script" data-step="title" data-a="write">Travel <span class="amp">&amp;</span> Stay</h2>
+    <p class="note" data-step="body" data-a="fade">Where to stay and how to get here: see the link below.</p>
+    <p class="action" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank">Where to stay</a></p>
+  </section>
+
+  <section class="wrap block" data-scene="details-block" data-optional="registry" data-if="urls.registry" aria-label="Registry">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy">
+    <h2 class="script" data-step="title" data-a="write">Registry</h2>
+    <p class="note" data-step="body" data-a="fade">Your presence is the greatest gift. For those who wish to honour us with a gift, our registry is linked below.</p>
+    <p class="action" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.registry" target="_blank">View registry</a></p>
+  </section>
+
+  <!-- QUESTIONS & ANSWERS (content faq, G051) — native details/summary: opens and closes without JS -->
+  <section class="wrap faq-sec" data-scene="details-faq" data-optional="faq" data-if="faq" aria-labelledby="faq-title">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy">
+    <h2 class="script" id="faq-title" data-step="title" data-a="write">Questions <span class="amp">&amp;</span> Answers</h2>
+    <div class="faq-list">
+      <details class="faq-item" data-repeat="faq" data-step="item" data-a="rise">
+        <summary><span class="faq-q" data-field=".q"></span></summary>
+        <p class="faq-a" data-field=".a"></p>
+      </details>
+    </div>
+  </section>
+
+  <section class="section next-sec" data-scene="details-next">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(62vw, 360px)" alt="" loading="lazy">
+    <p data-step="link" data-a="rise" data-if="!rsvp.method"><a class="btn" href="rsvp.html">RSVP</a></p>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span>Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
+    <li><a href="details.html" aria-current="page"><span>Details</span></a></li>
+    <li data-if="!rsvp.method"><a href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
