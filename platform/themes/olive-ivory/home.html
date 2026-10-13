@@ -2,8 +2,8 @@
 <!-- Olive & Ivory · page 2 — home (/<slug>/home). W1.2 comp: the card from the envelope (portrait window, "We're getting
      married", date · place), the names in calligraphy, weekday · date, venue in italic serif, city in spaced capitals,
      the countdown, an olive RSVP pill and the slim navigation. Below the comp (no W1 screen; this design's parts and
-     type, docs/11 §8): the invitation card (GPT invitation_card, 3-slice so long names/venues lengthen it), add to
-     calendar (G051), "More about the day" vignettes and the closing. Personal text: none — filled on the server. -->
+     type, docs/11 §8): the invitation card (GPT invitation_card, 3-slice so long names/venues lengthen it) with the one
+     reply-by line, add to calendar (G051), the three pages as a fanned trio and the closing. Personal text: none. -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -32,10 +32,10 @@
     <div class="scene-bg hero-bg" aria-hidden="true">
       <picture>
         <source media="(min-aspect-ratio: 3/4)" srcset="img/mist-640.webp">
-        <img class="scene-img" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="max(100vw, 66.7svh)" alt="" fetchpriority="high">
+        <img class="scene-img" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="236vw" alt="" fetchpriority="high">
       </picture>
-      <img class="corner corner-tl land-only" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(34vw, 50vh, 520px)" alt="" loading="lazy">
-      <img class="corner corner-br land-only" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(34vw, 50vh, 520px)" alt="" loading="lazy">
+      <img class="corner corner-tl" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(34vw, 50vh, 520px), min(70vw, 34svh, 360px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(34vw, 50vh, 520px), min(74vw, 36svh, 380px)" alt="">
       <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_1-200.webp" alt="">
       <img class="float f-olive" data-step="decor" data-a="fade" src="img/accent_2-156.webp" alt="">
       <img class="float f-bloom" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
@@ -108,40 +108,45 @@
     </div>
   </section>
 
-  <!-- MORE ABOUT THE DAY (no W1 screen): three vignettes down the page, olive sprig dividers between them -->
+  <!-- THE THREE PAGES (no W1 screen): a small fanned trio that echoes the story's hand of cards — the portrait frame with
+       the first story photo, the paper card with the first rows of the day, the wax seal (GPT frame_portrait, info_card,
+       closure); the first three steps of the day are written on the card -->
   <section class="section more-sec" data-scene="home-more" aria-label="More about the day">
-    <div class="wrap">
-      <p class="kicker more-title" data-step="title" data-a="fade">More about the day</p>
-      <a class="vignette v-story" data-optional="our_story" href="story.html" data-step="v1" data-a="rise">
-        <span class="mini-frame" aria-hidden="true">
-          <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" sizes="min(30vw, 130px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span></span>
-          <img src="img/frame_portrait-320.webp" alt="" loading="lazy">
-        </span>
-        <span class="v-text"><span class="script v-title">Our Story</span>
-        <span class="kicker">Moments we hold dear</span>
-        <span class="textlink more">Read our story</span></span>
-      </a>
-      <img class="sprig" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy" data-step="s1" data-a="unfurl">
-      <a class="vignette v-day" href="details.html" data-step="v2" data-a="rise">
-        <span class="v-text"><span class="script v-title">The Day</span>
-        <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="t" data-field=".time"></span> <span class="l" data-field=".label"></span></span></span>
-        <span class="textlink more">Schedule &amp; venue</span></span>
-      </a>
-      <img class="sprig" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy" data-step="s2" data-a="unfurl" data-if="!rsvp.method">
-      <a class="vignette v-rsvp" href="rsvp.html" data-step="v3" data-a="rise" data-if="!rsvp.method">
-        <span class="mini-seal" aria-hidden="true"><img src="img/closure-320.webp" alt="" loading="lazy"></span>
-        <span class="v-text"><span class="script v-title">Will You Join Us?</span>
-        <span class="kicker" data-if="rsvp.deadline">Kindly reply by <span class="nowrap" data-field="rsvp.deadline"></span></span>
-        <span class="textlink more">Reply now</span></span>
-      </a>
+    <div class="wrap trio-wrap">
+      <p class="kicker more-title" data-step="title" data-a="fade">Pull up a chair</p>
+      <div class="trio">
+        <a class="vignette v-story" data-optional="our_story" href="story.html" data-step="side" data-a="fan">
+          <span class="mini-frame" aria-hidden="true">
+            <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(23vw, 140px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span></span>
+            <img src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(29vw, 176px)" alt="" loading="lazy">
+          </span>
+          <span class="script v-title">Our Story</span>
+          <span class="kicker cue">Read</span>
+        </a>
+        <a class="vignette v-day" href="details.html" aria-label="The Day: schedule and venue" data-step="mid" data-a="rise">
+          <span class="paper info day-mini">
+            <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-772.webp 772w" sizes="min(44vw, 264px)" alt="" loading="lazy">
+            <span class="paper-text">
+              <span class="script v-title">The Day</span>
+              <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="t" data-field=".time"></span> <span class="l" data-field=".label"></span></span></span>
+            </span>
+          </span>
+          <span class="kicker cue">Details</span>
+        </a>
+        <a class="vignette v-rsvp" href="rsvp.html" data-if="!rsvp.method" data-step="side" data-a="fan">
+          <span class="mini-seal" aria-hidden="true"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="min(29vw, 176px)" alt="" loading="lazy"><span class="seal-mono" data-field="initials"></span></span>
+          <span class="script v-title">Will You Join Us?</span>
+          <span class="kicker cue">Reply</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <footer class="foot" data-scene="home-foot">
     <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(62vw, 360px)" alt="" loading="lazy">
-    <p class="kicker" data-step="sign" data-a="fade">With love</p>
+    <p class="kicker" data-step="sign" data-a="fade">Until then</p>
     <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
-    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1">Replay the envelope</a></p>
+    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1">Open the envelope again</a></p>
   </footer>
 </main>
 

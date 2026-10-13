@@ -304,7 +304,8 @@ const DEV_CONTENT = {
 
     function go(withCard) {
       store.set(OPENED, '1');
-      if (withCard) store.set(ARRIVE, '1');
+      // the card is named for the view transition only now (site.css: a closed envelope's card has no name)
+      if (withCard) { store.set(ARRIVE, '1'); el.card.style.viewTransitionName = 'invite-card'; }
       else el.card.style.viewTransitionName = 'none';   // skip: no card morph out of a closed envelope
       if (crossDocVT || reduce) { location.href = PAGES.home; return; }
       // fallback: fade the scene into the backdrop, home fades in on arrival
@@ -381,7 +382,8 @@ const DEV_CONTENT = {
     stage.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stage.click(); }
     });
-    document.querySelectorAll('[data-skip]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); reset(); go(false); }));
+    // Skip: 'done' (not 'closed'), so a back/forward-cache return clears the fallback fade
+    document.querySelectorAll('[data-skip]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); reset(); state = 'done'; go(false); }));
     const rep = q('.replay');
     if (rep) rep.addEventListener('click', () => { reset(); requestAnimationFrame(() => play()); });
     const enter = q('[data-enter]');

@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Great+Vibes&amp;display=swap">
 <link rel="stylesheet" href="site.css">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
-(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
 </script>
 <!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
@@ -29,15 +29,15 @@
 </head>
 <body class="page-envelope" data-pending="This link will be added soon.">
 
-<!-- backdrop: the painted page (olive branches + garden roses in two corners, sunlight) on phones; on landscape screens
-     the soft-focus page with the two GPT corner clusters as separate layers -->
+<!-- backdrop (W1.1): sunlit paper + the two GPT garden-rose clusters as separate layers, each wholly on screen (phones: the
+     sunlit flower-free part of bg_page; landscape screens: the soft-focus page) -->
 <div class="scene-bg" aria-hidden="true">
   <picture>
     <source media="(min-aspect-ratio: 3/4)" srcset="img/mist-640.webp">
-    <img class="scene-img" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="max(100vw, 66.7svh)" alt="" fetchpriority="high">
+    <img class="scene-img" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="236vw" alt="" fetchpriority="high">
   </picture>
-  <img class="corner corner-tl land-only" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(34vw, 50vh, 520px)" alt="" loading="lazy">
-  <img class="corner corner-br land-only" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(34vw, 50vh, 520px)" alt="" loading="lazy">
+  <img class="corner corner-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(34vw, 50vh, 520px), min(70vw, 34svh, 360px)" alt="" fetchpriority="high">
+  <img class="corner corner-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(34vw, 50vh, 520px), min(74vw, 36svh, 380px)" alt="">
   <!-- the comp's loose accents resting on the paper (GPT accent parts: a silvery leaf, a ripe olive, a jasmine blossom) -->
   <img class="float f-leaf" src="img/accent_1-200.webp" alt="">
   <img class="float f-olive" src="img/accent_2-156.webp" alt="">

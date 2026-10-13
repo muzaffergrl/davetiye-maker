@@ -77,6 +77,21 @@ fotoğrafları.
 konular" G055 açıkları satırı (seed türevsiz; 03 `--stress`'te index/rsvp kalıyor) artık eski — G056 ile kapandı. `previews/g038/`
 `checks.json` eski sayıları taşıyor (bu daldaki koşu: yukarıda).
 
+**İnceleme düzeltmeleri (wf-tema01, 2026-10-13; G401 incelemesindeki 03'e de uyan bulgular):**
+- "Replay the envelope" (home/rsvp → `index.html?replay=1`): zarf kartı her zaman `view-transition-name: invite-card` taşıyordu;
+  geçiş anlık görüntüsü `.card-slot` `clip-path`'ini yok saydığı için kapalı zarfın üstünde ~0,3–0,6 s kırpılmamış bir kart
+  uçuşuyordu. Şimdi `.env-page .card { view-transition-name: none }`, ad yalnız `.is-opened`'da ve `go(true)`'da
+  (`el.card.style.viewTransitionName = 'invite-card'`); `index.html` `<head>` betiği `?replay=1`'de `is-opened` eklemez (CSP hash'i
+  motor hesaplar). Tarayıcıda denendi: replay'de yalnız kök çapraz geçişi, kart uçuşmuyor; zarf → home kart dönüşümü sürüyor.
+- Skip + Geri (bfcache, VT'siz tarayıcı): Skip `reset()` sonrası durum `closed` kalıyordu, `pageshow` temizlemiyordu → `state = 'done'`
+  (`pageshow` artık solmayı iptal edip açık hâli kurar). Headless Chromium bfcache'ten dönmediği için yalnız kodda doğrulandı.
+- `tests/theme-blush-garden-rose.test.ts`: yeni test (VT adı, varış kartı, Skip durumu, replay `<head>`). `theme-check --theme
+  blush-garden-rose --stress` (yeni "kart görünür karta iner" ve "açık zarfta ipucu yok" denetimleriyle): sonuç G401 Sonuç'ta.
+- `docs/11` (bu görevin yazma alanı): §2.1 ve §14 #12 G057'ye göre, §5.1 / §7.3 / §14 #11 01'in tek parça kapanışına göre
+  güncellendi; G401 incelemesinden genel kurallar eklendi (§5.1 telefon sahnesi, §7.1 kart yolu, §11 varış kartı + VT adı + ipucu).
+
 ## Günlük
 - 2026-10-13 alindi: wf-tema01
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmesi (wf-tema01): 03 replay'de VT adı yalnız açık zarfta, Skip bfcache durumu, docs/11 güncel
 - 2026-10-13 bitti, incelemeye gönderildi

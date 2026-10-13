@@ -14,12 +14,12 @@ adlar); bütün görseller bu tasarımın GPT parçaları (K21). 03 (blush-garde
 | `theme.json` | ad "Olive & Ivory", 5 sayfa, 5 foto alanı (oranlar = `img/manifest.json` `photo_slots.*.box_px`) |
 | `content.demo.json` | `collections/01_Olive_Ivory/content.demo.json`'ın birebir kopyası (`/start?theme=olive-ivory` ve tema demosu bunu kullanır; servis edilmez) |
 | `index.html` | kapalı zarf → dokun → kapak + mühür menteşede birlikte kalkar, açık kapak devralır, kart cepten süzülür, iki zeytin yaprağı ekranı geçer, kart öne gelir → home (view transition) |
-| `home.html` | hero (W1.2: kart + foto, isimler, gün · tarih, mekân, şehir, geri sayım, RSVP hapı), davet kartı (3 dilim), takvime ekle, "More about the day" üç vinyet, kapanış |
-| `story.html` | W1.3: başlık + alt başlık + giriş cümlesi, üç altın çerçeveli kart (telefonda basamaklı, ≥ 720 px'te yelpaze), başlıklar kartların altında |
+| `home.html` | hero (W1.2: kart + foto, isimler, gün · tarih, mekân, şehir, geri sayım, RSVP hapı), davet kartı (3 dilim) + tek "Kindly reply by" satırı, takvime ekle, üç sayfanın yelpaze üçlüsü (story çerçevesi · günün kartı · mühür), kapanış |
+| `story.html` | W1.3: başlık + alt başlık + giriş cümlesi, üç altın çerçeveli kart el yelpazesi gibi (telefonda kaydırılan yelpaze, ≥ 720 px'te comp dizilişi), başlıklar kartların altında |
 | `details.html` | W1.4: Order of the Day kartı (info_card, 3 dilim, program satırları + aralarında GPT dal), takvime ekle, mekân (GPT yatay çerçeve), dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
 | `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim) + kartın alt kenarına basılmış mühür (closure), platform yanıt formu (G042 + G051 soruları), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`fan` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri |
-| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim sığdırma, geri sayım, zarf, `DEV_CONTENT` + `devRender` |
+| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim sığdırma, geri sayım, zarf, story yelpazesi (`initFan`), `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri |
 | `img/` | WebP katmanlar, `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` (servis edilmez) |
 
@@ -27,7 +27,7 @@ adlar); bütün görseller bu tasarımın GPT parçaları (K21). 03 (blush-garde
 | Anahtar | İçerik yolu | Oran (px) | Yer |
 |---|---|---|---|
 | `hero_portrait` | `media.hero_portrait` | 663/715 | card_small penceresi (index kartı = home hero kartı) |
-| `story_1..3` | `media.memory_photos.0..2` | 653/883 | frame_portrait (story; `story_1` home vinyetinde de) |
+| `story_1..3` | `media.memory_photos.0..2` | 653/883 | frame_portrait (story; `story_1` home üçlüsünde de) |
 | `venue` | `media.venue_image` | 1009/618 | frame_landscape (details) |
 
 Foto çerçevenin **altında**, kutusu pencere + 2 px, maske `mask_<şekil>.png` (yuvarlak köşe GPT penceresinden; CSS `border-radius`
@@ -46,7 +46,11 @@ içerikten.
   koyu/yeşil saçak yapıyordu → kaydetmeden önce şeffaf piksellere komşu renk taşınır (`renk_tasir`).
 - **Kapak kesimi** (`env_cflap`): `tema_build.kapak_kes("v")` V doğrularını buluyor ama en güçlü parlaklık düşüşü dantelin delikli
   iç kısmına düştüğü için danteli ortadan bölüyordu (fisto sırası gövdede kalıyordu). Kesim dantelin **dış kenarından**: V bandında
-  fildişi dantel pikselleri (lum > 178, 4 px kapatma) her sütunda en alt satır + 2 px (`method: "renk"`).
+  fildişi dantel pikselleri (lum > 178, 4 px kapatma, **3 px açma**) her sütunda en alt satır + 2 px (`method: "renk"`); arama bandı
+  V'nin 62 px altına kadar. G401 incelemesi: eskiden sol yan kanadın ışıklı katı (2–3 px açık çizgi) danteli 28 sütunda ~80 px aşağı
+  uzatıyor, kapak açılırken dantelin altında zeytin yeşili bir dil sallanıyordu. Şimdi açma ince çizgiyi siler; ayrıca kenarın V'ye
+  göre kayması 101 sütunluk kayan medyandan 22 px'ten fazla saparsa komşulardan doldurulur ve **sert denetim** (çıkış ≠ 0): komşu
+  sütun sıçraması ≤ 24 px, doldurulan sütun ≤ %6 (`manifest.stage.cuts.cflap.continuity`: 0 sütun, en büyük sıçrama 9,1 px).
 - **Ön cep** (`env_pocket`): cep sivri V değil, düz üst kenarlı trapez; `cep_kes("v")` ucu 40 px aşağıda sivri V buluyordu. Kesim
   her sütunda astarın fildişi zemininden aşağı ilk kalıcı cep kâğıdı; sol çapraz, sağ çapraz ve düz orta için aykırısız doğru;
   artık p50 < 1 px.
@@ -63,12 +67,19 @@ içerikten.
 
 ## Açılış ve koreografi (`site.js` `MOTION`)
 - **Açılış:** dokununca balmumu mühür bırakırken hafifçe kalkar (≤ 250 ms ilk hareket), dantel kenarlı kapak **mühür ve dalıyla
-  birlikte** menteşesinde izleyiciye doğru kalkar (tek `.env-cflap-wrap`, tek `rotateX`, 90°'de söner), altında kapalı gövde açık
-  gövdeye (zeytin dallı astar + ön cep) geçer, açık kapak −90°'den yatar, fildişi kart cepten süzülerek yükselirken iki zeytin
-  yaprağı (accent_1 × 2, `across`) ekranı soldan sağa geçer, kart öne gelip home hero kartına uçar (view transition). Dokun → home
-  3,9 s (Skip her an).
-- **Story:** üç kart elden yelpaze gibi açılır — her kart orta çizgiye toplanmış ve dik başlar, kendi eğimine dönerek yerine açılır
-  (`fan` ön ayarı), altına başlığı yazılır.
+  birlikte** menteşesinde izleyiciye doğru soyulur gibi kalkar (tek `.env-cflap-wrap`, tek `rotateX`; 920 ms, yumuşak başlangıç:
+  %30'da 22°, 80°'den sonra sarmalayıcı söner — kenardan ezik mühür şeridi görünmez), altında kapalı gövde açık gövdeye (zeytin
+  dallı astar + ön cep) geçer, açık kapak −90°'den yatar, fildişi kart cepten süzülerek yükselir — iki zeytin yaprağı (accent_1 × 2,
+  `across`) biri kartın üstündeki, biri zarfın altındaki bantta ekranı soldan sağa geçer (fotoğrafın üstünden geçmez) — kart
+  **yukarıda kalır**: alt köşeleri cebin kenarını aştıktan sonra (`out` −87 %) olduğu yerde öne gelir (`front` −84 % × 1,04, büyüyen
+  gölge; z-index takasında köşe atlamaz) ve view transition ile home hero kartına yukarı doğru uçar (yukarı–aşağı–yukarı yok).
+  Home'da hero kartı ilk kareden görünür (`.from-envelope .hero-card[data-step]`), geçiş görünür karta iner. Dokun → home ≈ 4,2 s
+  (Skip her an). Zarf kartı `view-transition-name`'i yalnız açıkken ya da `go(true)`'da alır: "Replay the envelope"da kapalı
+  zarfın üstünde kırpılmamış kart uçuşmaz; `?replay=1` `<head>` betiğinde de kapalı başlar.
+- **Story:** üç kart el yelpazesi gibi açılır — orta kart yükselir, yan kartlar onun arkasında toplanmış ve dik başlayıp 8°
+  eğimlerine dönerek açılır (`fan`), sonra başlıklar yazılır. Telefonda aynı el **kaydırılan bir yelpaze** (scroll-snap): ortadaki
+  kart dik ve biraz yukarıda, komşuları kenarlardan 8° dışa eğik görünür ve fildişi kenarlarından onun altına girer; yalnız ortadaki
+  kartın başlığı görünür; sayfa orta kartla açılır (`initFan`). Kart 64vw, foto penceresi 64 × 0,789 = **50vw** (≥ 38vw).
 - **Parçacıklar:** açılış 2 zeytin yaprağı · home'a varış 3 yasemin çiçeği süzülür · RSVP kapanışı 2 çiçek + 1 yaprak.
 
 ## Comp öğe haritası (docs/11 §8)
@@ -76,13 +87,13 @@ içerikten.
 ### index ← W1.1 `web_1_envelope.png`
 | W1 öğesi | Şablon | Not |
 |---|---|---|
-| köşe dalları + güller (sol üst, sağ alt), güneş lekeleri | `.scene-bg .scene-img` = `bg_page` (telefon); geniş ekranda `mist` + `decor_tl/br` | aynı GPT sahnesi |
+| köşe dalları + güller (sol üst, sağ alt), güneş lekeleri | telefon: `bg_page`'in çiçeksiz güneşli sağ üst kırpımı (kaynak x 590–1024, y 0–940) kâğıt + `decor_tl` / `decor_br` ayrı katman, ikisi de ekranda tam; geniş ekranda `mist` + aynı kümeler | G401 incelemesi: `bg_page` telefonda (en/boy ≈ 0,46) her yandan ~%15 kırpılıyor, iki gül kümesi de kesiliyordu |
 | "YOU ARE INVITED" | `.env-head .kicker` | |
 | isimler (kaligrafi) | `h1.names` (+ `.amp` italik serif) | uzun isimde `site.js` küçültür |
 | zeytin yeşili zarf, dantel V kapak | `.env-closed` + `.env-cflap` | |
 | oval mühür + dal, V'nin ucunda | `.closure` (`.env-cflap-wrap` içinde) | boş ovalde monogram (`initials`) — comp'ta boş |
 | "TAP TO OPEN" | `.env-hint` | |
-| yüzen yaprak / zeytin / yasemin | — (statik değil) | açılışta GPT accent parçacıkları |
+| yüzen yaprak / zeytin / yasemin | `.float` (accent_1/2/3, telefonda statik, yavaş "nefes") | ayrıca açılışta 2 zeytin yaprağı parçacığı |
 | — | `a.skip`, "Enter / Replay the opening" | platform gereği |
 
 ### home ← W1.2 `web_2_home.png`
@@ -93,17 +104,18 @@ içerikten.
 | "SATURDAY · JUNE 12, 2027" | `.hero-date` | |
 | mekân (italik), şehir (büyük harf) | `.hero-venue`, `.hero-city` | |
 | dört kutulu geri sayım | `.countdown` sade rakam + etiket | **sapma:** kutular CSS çerçeve olurdu (K21, §5.7) |
-| olive RSVP düğmesi | `.hero-cta .btn` | hap düğme (arayüz) |
-| alt gezinme | `.site-nav` (sabit alt çubuk, 1 px altın çizgi) | |
-| — (comp yok) | davet kartı (`invitation_card` 3 dilim), takvime ekle, "More about the day" (story_1 mini çerçeve, programın ilk 4 satırı, mühür), "With love" + replay | bu tasarımın parçaları ve tipografisi; 03'ün yan yana tanıtım satırları yerine ortalanmış vinyetler + GPT dal ayraçları |
+| olive RSVP düğmesi | `.hero-cta .btn` | hap düğme (arayüz); telefonda sağ alt küme hapın altında, aradaki boşluk ≥ 16 px |
+| köşe kümeleri | `decor_tl` / `decor_br` (hero `scene-bg`) | ilk ekran nav'ın üstünde biter; yalnız kâğıt aşağıya solar, küme bütün kalır |
+| alt gezinme | `.site-nav`: kâğıt üstünde bir yazı satırı + yazı genişliğinde 1 px altın çizgi, kenarsız yumuşak zemin | opak bant yok: boyalı köşeler altında düz çizgiyle kesilmez |
+| — (comp yok) | davet kartı (`invitation_card` 3 dilim) + tek "Kindly reply by" satırı, takvime ekle, "Pull up a chair" üçlüsü (story_1 çerçevesi −7° · günün kartı `info_card` ilk 4 satır · monogramlı mühür +7°; story yelpazesinin yankısı), "Until then" + isimler + "Open the envelope again" | bu tasarımın parçaları ve dili; 03'ün blok sırası/teaser metinleri kullanılmaz (G401 incelemesi) |
 
 ### story ← W1.3 `web_3_story.png`
 | W1 öğesi | Şablon | Not |
 |---|---|---|
 | "Our Story", "MOMENTS WE HOLD DEAR" | `h1.page-title`, `.page-head .kicker` | |
 | — | `.lede` (story.intro + tarih) | standart zorunlu |
-| yelpaze gibi açılmış 3 kart (orta dik ve yüksek, yanlar ±8°) | `.fan` ≥ 720 px: aynı düzen | |
-| | telefon: basamaklı (−6° sol, +5° sağ, −4° sol) | **sapma:** yan yana pencereler ~85 px olurdu (< 38vw, §9); telefonda pencere 43vw |
+| yelpaze gibi açılmış 3 kart (orta dik ve yüksek, yanlar ±8°) | `.fan` ≥ 720 px: aynı düzen; yanlar merkezleri etrafında ±8° döner, orta karta kartın %6'sı kadar (yalnız fildişi kenar) girer, orta kart %4 yukarıda ve üstte | |
+| | telefon: kaydırılan yelpaze (orta kart dik + %3 yukarıda, komşular ±8° kenarlardan) | **sapma:** yan yana pencereler ~85 px olurdu (< 38vw, §9); telefonda kart 64vw, pencere 50vw; yalnız ortadaki kartın başlığı görünür |
 | kart üstünde başlık | `figcaption` kartın altında | görev metni: "each caption sits under its own card"; 60 karakterlik başlık kart kenar boşluğuna sığmaz |
 | köşe dekoru | `.page-corner` decor_tl (başlık), decor_br (sayfa sonu) | |
 
@@ -132,11 +144,15 @@ içerikten.
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
 
 ## Bilinen sınırlar
-- Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim). Home "The Day" vinyeti ilk 4 satırı gösterir.
+- Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim). Home üçlüsündeki günün kartı ilk 4 satırı gösterir.
+- Details tören cümlesi yalnız saati söyler ("The ceremony begins at 4:00 PM."): programın ilk satırı tören olmayabilir.
+- Genişlik sapmaları (docs/11 §5.1): `closure-320/640` (480/960 değil — mühür CSS'te en çok ~215 px, DPR 3'te 640 yeter),
+  `accent_2-156` (zeytin parçası dik: 200 px yükseklik sınırında genişliği 156 px).
 - `story.items` 3'ten fazlaysa ilk 3 başlık; anların `text`'i gösterilmez (panel sormaz). Monogram (`initials`) mühürde gösterilir.
 - Link blokları yalnız linkleriyle; `rsvp.method` dolu → RSVP sayfası 404, ona giden her link kalkar.
 - `favicon.png` şeffaf; `apple-touch-icon` yazılmaz (docs/11 §3.1).
-- Kontrast (390 px, oluşan sayfada metnin arkasındaki piksellerin medyanı): görünen her metin ≥ 5,1:1 (en düşük: home program
-  saatleri ve "Replay the envelope"). Mühürdeki monogram bilerek kabartma tonunda (≈ 2,7:1) ve yardımcı teknolojiden gizli; zarf
+- Kontrast (390 px, oluşan sayfada metnin arkasındaki piksellerin medyanı): görünen her metin ≥ 5,1:1 (G401 ilk ölçümü; inceleme
+  düzeltmelerinden sonra yeniden ölçülmedi). Mühürdeki monogram (zarf, home üçlüsü, RSVP) bilerek kabartma tonunda (`--seal-ink`
+  #735E2E + basılı gölge; G401 incelemesinde koyulaştırıldı) ve yardımcı teknolojiden gizli; zarf
   içindeki küçük kart metni kapalıyken görünmez, yalnız açılışta bir an görünür ve gizlidir (`aria-hidden`).
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.

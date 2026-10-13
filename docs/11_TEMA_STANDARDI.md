@@ -106,7 +106,8 @@ Başka alan eklenmez (motor okumaz); tasarım verisi `site.css`/`site.js`'te dur
   URL'ler `null` (`tools/validate_content.py` ve `lib/content/validate.ts` geçer). Tema ajanı koleksiyon kaydını değiştirmez.
 - G053 (2026-10-13) 20 kaydın hepsine `story` (intro + 3 başlık) ve 01'e tam adları yazdı. Intro bir cümle **parçasıdır**, sayfada
   tarihle biter ("… brought us to" + " May 15, 2027."): şablon bunu §3.2'deki story satırındaki gibi yazar. Kayıt sonradan
-  değişirse (`tools/katalog.py ozet` story'li kayıtları atlar; `yaz --zorla` story'yi siler — §14 #12) kopya yeniden eşitlenir.
+  değişirse kopya yeniden eşitlenir. G057'den beri story `tools/katalog.py` `content()` üretecinin parçası (`STORY` tablosu):
+  `ozet` story'li kayıtları atlamaz, `yaz --zorla` story'yi silmez (`kontrol` story'yi kayıtlarla karşılaştırır; §14 #12).
 - `site.js` `DEV_CONTENT` = bu dosya (test eşitliği denetler).
 
 ---
@@ -225,7 +226,7 @@ form etiketleri. Şartı: içerikle çelişmez ("Ceremony at …" yalnız `data-
 
 | GPT (`assets/gpt/parts/`) | Tema (`img/`) | Genişlikler (px) | Kullanım |
 |---|---|---|---|
-| `bg_page.png` 1024×1536 opak | `bg_page-640/1024.webp` (q≈78); `mist-640.webp` (bulanık, en-boy ≥ 3/4 ekran); `ph_<anahtar>-*.webp` | 640, 1024 | index/home sahnesi (telefon), yer tutucular |
+| `bg_page.png` 1024×1536 opak | `bg_page-640/1024.webp` (q≈78); `mist-640.webp` (bulanık, en-boy ≥ 3/4 ekran); `ph_<anahtar>-*.webp` | 640, 1024 | index/home sahnesi (telefon), yer tutucular. 2:3 sayfa telefonda (en/boy ≈ 0,46) `cover` ile her yandan ~%15 kırpılır: köşe kümeleri kesiliyorsa sahne parçalardan kurulur — kâğıt (bg_page'in çiçeksiz kırpımı ya da `bg_tile`) + `decor_tl/br` ayrı katman, ekranda bütün (01, G401 incelemesi) |
 | `bg_tile.png` 1024 dikişsiz opak | `bg_tile-640.webp` (`repeat`) | 640 | uzun sayfaların `body` zemini (03'te `mist_tile`) |
 | `envelope_closed.png` şeffaf | tipe göre kesimler (§7) | 440, 880 (zarf ~ ekran genişliği) | index |
 | `closure.png` şeffaf | `closure-480/960.webp`; `favicon.png` (180 px kare, şeffaf; `tema_build.ikon`, önerilir) | 480, 960 | index; rsvp kapanışı; home tanıtımı |
@@ -239,7 +240,7 @@ form etiketleri. Şartı: içerikle çelişmez ("Ceremony at …" yalnız `data-
 | `accent_1..3.png` | `accent_N-200.webp` | 200 | düşen/süzülen parçacıklar (`MOTION.accents`), `.ph-mark` ikonu |
 | `divider.png` | `divider-300.webp` | 300 | başlık altı, satır araları |
 | `web_hero.png` 1536×1024 opak | `og-1200x630.jpg` (q≈82, `tema_build.og_kirp` alt hizalı; isteğe bağlı masaüstü üst bant) | 1200 | `og:image` (isim yok) |
-| `ekler` (01 `closure_sprig`, 04 `bg_desk`, 07 `velvet_swag`, 08 `frost_overlay`, 10 `oak_tile`, 16 `twine_line`+`barnwood`, 18 `vellum_overlay`, 20 `wave`) | adıyla | rolüne göre | tasarıma özel (01: mührün altından kayan dal, `closure` ile aynı tuvalde hizalı) |
+| `ekler` (04 `bg_desk`, 07 `velvet_swag`, 08 `frost_overlay`, 10 `oak_tile`, 16 `twine_line`+`barnwood`, 18 `vellum_overlay`, 20 `wave`) | adıyla | rolüne göre | tasarıma özel (01'in `closure_sprig`'i a177cb4'te kaldırıldı: 01 kapanışı mühür + dal tek parça, kapakla taşınır) |
 
 `comps/web_*.png` (W1) yalnız yerleşim referansıdır: tipografi, hiyerarşi, yerleşim ve kart/çerçeve dizilişi buradan;
 tema dosyalarına girmez, satılmaz. **Yalnız sade ad referanstır** (`web_1_envelope.png`); `_v1`, `_v2`… denemedir, karşılaştırma ve
@@ -250,8 +251,8 @@ glob'u `_v1`'i de alır.
 ihtiyacını karşılıyor; 03'ün kullandığı her görselin PAKET 5 karşılığı var (petal sayfası → tek nesneli `accent_1..3`,
 `mist_tile` → `bg_tile`, `florals_*` → `decor_*`/`florals_*`). **Ama açılış cümlesi ayrı hareket eden bir nesne istiyorsa ve o
 nesne tek görselde başka parçanın altında kalıyorsa ek dosya gerekir** — kesmek gizli kısmı geri getirmez. G046 incelemesinde
-bulunan ilk örnek 01: "the olive sprig slides out from under the oval seal" — `closure.png` artık dalsız mühür, dal tam hâliyle
-`closure_sprig.png` (`WEB[1]["ekler"]`). Her tasarımda `acilis` cümlesi W2 üretiminden **önce** bu gözle okunur; eksik parça
+bulunan ilk örnek 01'di ("the olive sprig slides out from under the oval seal" → dalsız mühür + `closure_sprig.png`); 01'in açılış
+cümlesi sonra "carrying the oval seal and its tucked olive sprig with it" oldu ve kapanış yine tek parça (a177cb4, G401). Her tasarımda `acilis` cümlesi W2 üretiminden **önce** bu gözle okunur; eksik parça
 `tools/katalog.py` `WEB[NN]` `ekler`'ine eklenir (19 dosya elle düzenlenmez). Standardın ortaya çıkardığı diğer eksikler
 **kural**; G046 incelemesinde PAKET 5 prompt'larına işlendi (`tools/katalog.py` ortak metin + `KESIM_KENARI`, 19
 `GPT_PROMPTS.md` yeniden üretildi) ve `gorevler/roller/gpt-gorsel.md`'de:
@@ -452,7 +453,10 @@ uyumlu). Gerçek telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna 
   geçersizdir; ölçü bu bölümdeki çapadan gelir.
 - **Kart:** `card_small` + `hero_portrait` foto alanı + kart kopyası. Kapalı durumda görünmez (kapalı gövde opak örter),
   açılınca ön cebin/gövdenin arkasından yükselir (`card-slot` `clip-path` ile zarfın altına taşmaz), sonra öne geçer
-  (`z-index`, `ENVELOPE_GEOMETRY.front`), home'a VT ile uçar (§11). Cebi olmayan tiplerde (kitap, kılıf) kart sayfadan/kılıftan
+  (`z-index`, `ENVELOPE_GEOMETRY.front`), home'a VT ile uçar (§11). Kart yolu tek yönlü okunur (G401 incelemesi): `out`'ta kartın
+  alt köşeleri cebin kenarını **aşmış** olur (z-index takasında köşe cebin önüne "atlamaz"), `front` onu olduğu yerde öne alır
+  (en çok kart boyunun ~%4'ü aşağı + ölçek + büyüyen gölge); home kartı ekranın üstündeyse kart oraya yukarı uçar — `front`'ta
+  cebin önüne geri inmek yukarı–aşağı–yukarı okunur. Cebi olmayan tiplerde (kitap, kılıf) kart sayfadan/kılıftan
   **kalkar** (ölçek + öteleme + büyüyen gölge).
 - **Parçacıklar** (`accent_1..3`): açılışta `MOTION.accents.open`, home'a varışta `arrive`, rsvp kapanışında `closing`.
 - **Sahne boyu (kapalı nesneye göre):** `--obj: min(84vw, 45svh × objAspect, 440px)` — `objAspect` = kapalı nesnenin alfa
@@ -497,7 +501,8 @@ altın çizgi) cebe dahil, astar dışarıda.
 **Kapanış kapakla taşınıyorsa** (bugün yalnız 01: "carrying the seal with it"): `closure`, `env_cflap` ile ortak bir
 `.env-cflap-wrap` içinde **aynı** `rotateX` ve aynı `transform-origin` (menteşe satırı, sarmalayıcı koordinatında) ile döner; 90°'de
 ikisi birlikte söner (mühür artık kapağın arkasında). Kapanışı ayrı bir animasyonla "kapakla gidiyormuş gibi" taklit etmek
-yasak (iki ayrı perspektif, 1 px kayma). Kapanışın altından çıkan ayrı parça (01 `closure_sprig`) önce kendi hareketini yapar
+yasak (iki ayrı perspektif, 1 px kayma). Kapanışın altından çıkan ayrı bir parça olursa (bugün hiçbir tasarımda yok; 01'in dalı
+mühürle tek parça) önce kendi hareketini yapar
 (dal mührün altından kayar: öteleme + hafif dönme, sonra solma ya da sahnede kalma), sonra kapak kalkar; dal katmanı mührün
 **altında**, kapağın üstünde. 04 şeridi: kapalıdan açığın alfası çıkarılınca şerit kalır;
 `tear`'de `clip-path: inset(0 0 0 X%)` soldan sağa açar, şerit hafifçe kalkıp döner; kart gövdenin arkasından yırtık
@@ -653,7 +658,16 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   `invite:arrive:<slug>` (`<slug>` = `site-data.slug`; statik önizlemede ek yok). Başka anahtar, `localStorage`, çerez yok.
 - index `<head>` betiği `opened` varsa `is-opened` (açık zarf, kart dışarıda, "Enter" + "Replay the opening"); `?replay=1`
   kapalı başlatır. home `<head>` betiği `arrive`'ı okuyup siler → `from-envelope`; çapraz belge VT yoksa `arrive-fade` (solma).
-- `go(withCard)`: `opened` yazar; kartla geçişte `arrive`; Skip'te kartın `view-transition-name = 'none'`.
+- `go(withCard)`: `opened` yazar; kartla geçişte `arrive` ve kartın `view-transition-name = 'invite-card'`; Skip'te `'none'`.
+- **Kart görünür bir karta iner (G401 incelemesi):** home hero kartı sahne girişinin parçasıysa (`.js [data-step]` opaklık 0)
+  `from-envelope`'ta ilk kareden görünür olmalı — `.from-envelope .hero-card[data-step] { opacity: 1; transform: none;
+  transition: none; }` (03 ve 01'de); yoksa geçiş görünmez bir karta iner, home ~1 s boş kalır. `theme-check` home'un ilk
+  karesinde `invite-card` adlı öğenin etkin opaklığını ölçer (< 1 = hata).
+- **Zarf kartının adı yalnız dönüşebilecekken:** kapalı zarfın kartı ad taşırsa "Replay the envelope"da (home → `?replay=1`)
+  view transition kartın `clip-path`'ini yok sayar ve kapalı zarfın üstünde bütün bir kart uçuşur. Kural: index kartı varsayılan
+  `view-transition-name: none`, `.is-opened` hâlinde ve `go(true)`'da `invite-card`; `?replay=1` `<head>` betiğinde de kapalı başlar.
+- Açık hâlde "Tap to open" görünmez: sonsuz bir CSS animasyonu düz `opacity: 0`'ı ezer → `display: none` (ya da `animation: none`).
+  `theme-check` açık zarfta ipucunun görünmediğini denetler.
 - bfcache: `pageshow` (`persisted`) → betik animasyonları iptal, açık durum (kullanıcı tuzağa düşmez).
 - Satır içi betik değişirse CSP hash'ini motor kendisi hesaplar; anahtar adları `MOTION.storage` ile aynı kalmalı (test).
 
@@ -806,8 +820,8 @@ sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı ko�
 | 8 | Aşama 2 varyantları (G090 sonrası) | renkler yalnız `:root` token'larında; `html[data-variant]` kancası hazır; varyant görsel klasörü ayrı karar | — |
 | 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | **yapıldı (G055):** 640/1280 türevleri + motorun `srcset`'i, şablonun `sizes`'ı korunur (§6). **G056:** `scripts/seed.ts` panel yüklemesinin yolundan (`preparePhoto` + türevler) saklıyor; theme-check'in fotoğraflı ölçümü `srcset`'li (03: index 1099, home 895 KB) | — |
 | 10 | Şema/panel program satırını ve metin uzunluklarını sınırlamıyor; 03 kartları taşıyor | **yapıldı (G055, entegratörün geri alınabilir varsayılan kararı):** isimler/tam adlar ≤ 40, `name_display` ≤ 85, mekân ≤ 80, program ≤ 10 (şema, iki doğrulayıcı, panel, `/start`); 03 Details kartı (G055) ve home davet kartı (G055 incelemesi) §9 3 dilimle uzuyor. `name_display` ≤ 85 entegratör onayı bekliyor | — |
-| 11 | 01 `closure_sprig` gibi açılış cümlesinin gerektirdiği gizli parçalar | her G2NN W2'den önce `acilis` cümlesi §5.1'e göre okunur; eksik `ekler` katalogda | entegratör |
-| 12 | `tools/katalog.py ozet` G053'ten beri 04–20 `content.demo.json`'ı "elle eklenmiş alan: story" diye atlıyor (`DESIGN_BRIEF.md`'yi yazmaya devam ediyor → katalog değişikliği kayda yansımaz); `yaz --zorla` story'yi siler | story tablosunu `katalog.py` `content()` üretecine taşı (ya da `ozet` katalogda olmayan anahtarları koruyarak birleştirsin); `ozet --dene` "atlandı"sız 0 değişiklik | claude-kod (katalog) |
+| 11 | Açılış cümlesinin gerektirdiği gizli parçalar (ilk örnek 01 `closure_sprig`; a177cb4'te cümle değişti, 01 kapanışı tek parça) | her G2NN W2'den önce `acilis` cümlesi §5.1'e göre okunur; eksik `ekler` katalogda | entegratör |
+| 12 | `tools/katalog.py ozet` 04–20 `content.demo.json`'ı "elle eklenmiş alan: story" diye atlıyordu; `yaz --zorla` story'yi siliyordu | **yapıldı (G057):** story `STORY` tablosundan `content()` üretecinde; `ozet --dene`, `paket5 --dene`, `gorev5 --dene` 0 değişiklik, `kontrol` story'yi kayıtlarla karşılaştırır. Açık: `yaz --zorla` hâlâ 302 görev dosyasını yeniden yazar (incelemedeki Sonuç/Günlük dahil; `--dene` uyarır) → `yaz` yalnız `durum: hazir` görev dosyalarını yazsın (önerilen claude-kod görevi) | entegratör |
 | 13 | 19 `GPT_PROMPTS.md` W1.3 story comp ve PAKET 2 2.2–2.4 başlıkları G053 öncesi varsayılanlar ("First hello" …) | `python3 tools/katalog.py paket5 --no 02,04,…,20` (01'i G201 bitince); `paket5 --dene` 0 | entegratör |
 | 14 | 03 og görseli: zarf merkez ≈ %65 (kare kırpımda sağı kesilir) | `tema_build.og_kaydet`/`og_kirp`'a yatay odak (zarf kutusu ortalı ~1076×563 pencere) ya da yalnız 1.91:1 çerçeve kabulü; 03 görseli `_v2` adıyla (ikili dosya üzerine yazılmaz) | claude-kod |
 | 15 | 03 `--stress`'te index ve rsvp (§12): 40 karakterlik ilk adlar zarf başlığını uzatıp zarfı ekran altına itiyor; rsvp imzası `nowrap` | **yapıldı (G056):** `data-fit` + `site.js` `fitText()` (CSS `--fit`; zarf `--names-x` kadar küçülür), yatay ekranda isim sütunu çiçeklerin arasında, rsvp kartı §9 3 dilim + imza sarar/küçülür (§12); `theme-check --stress` 03'te 85/85 hatasız | — |

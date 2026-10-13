@@ -224,7 +224,7 @@ button { font: inherit; color: inherit; }
 .is-opened .env-page .env-flap { opacity: 1; transform: none; }
 .is-opened .env-page .env-body, .is-opened .env-page .env-pocket { opacity: 1; }
 .is-opened .env-page .card-slot { clip-path: none; z-index: 5; }
-.is-opened .env-page .card { transform: translateY(-118.8%) scale(1.06); }
+.is-opened .env-page .card { transform: translateY(-118.8%) scale(1.06); view-transition-name: invite-card; }
 .is-opened .env-head { opacity: 0; }
 .is-opened .env-hint { display: none; }
 .is-opened .env-after { display: flex; }
@@ -238,6 +238,9 @@ button { font: inherit; color: inherit; }
    The little arch card (index card ↔ home hero card share it; morphs between pages)
    ========================================================================== */
 .card { aspect-ratio: 804 / 1254; container-type: inline-size; view-transition-name: invite-card; }
+/* the envelope's card is named only when it may morph (opened, or from go() in site.js): a closed envelope's card would
+   float unclipped over the envelope during "Replay the envelope" (the snapshot ignores the slot's clip-path) */
+.env-page .card { view-transition-name: none; }
 .card > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .card .photo-slot { left: 14.677%; top: 9.569%; width: 70.522%; height: 47.448%; }   /* manifest photo_slots.card */
 .card-copy { position: absolute; left: 8%; right: 8%; top: 64%; text-align: center; }

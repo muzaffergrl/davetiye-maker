@@ -591,8 +591,98 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
     assert.doesNotMatch(raw, /<svg|<canvas/i, `${page}: no drawn shapes`);
   }
   assert.doesNotMatch(css, /conic-gradient|repeating-(linear|radial)-gradient/, 'no gradient-drawn pattern');
-  // the only gradients are borderless light (body light, hero fade mask)
-  for (const [, sel, body] of rules) if (/gradient\(/.test(body)) assert.match(sel, /body::before|\.hero-bg/, sel.trim());
+  // the only gradients are borderless light (body light, hero paper fade mask, the nav's soft ground — docs/11 §5.7)
+  for (const [, sel, body] of rules) if (/gradient\(/.test(body)) assert.match(sel, /body::before|\.hero-bg|^\s*\.site-nav\s*$/, sel.trim());
+  // the nav is no opaque slab with a hard edge across painted corners (G401 review): no border-top / backdrop slab on it
+  const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
+  assert.doesNotMatch(nav, /border-top|backdrop-filter/, '.site-nav: no hard band');
+});
+
+// ---------------------------------------------------------------- G401 review: the card lands, the backdrop keeps its roses
+
+test('G401 review: the envelope card morphs into a visible home card; replay has no floating card; opened state hides the hint', () => {
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const rule = (sel: string) => [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter(([, s]) => s.trim() === sel).map(([, , b]) => b).join(';');
+  // arriving from the envelope the hero card is visible at the first frame (the scene entrance must not hide it)
+  assert.match(rule('.from-envelope .hero-card[data-step]'), /opacity:\s*1/);
+  assert.match(rule('.from-envelope .hero-card[data-step]'), /transition:\s*none/);
+  assert.match(rule('.hero-card'), /view-transition-name:\s*invite-card/);
+  // the envelope's card is named only when it may morph: opened, or go(true) in site.js
+  assert.doesNotMatch(rule('.env .card'), /view-transition-name/);
+  assert.match(css, /\.is-opened \.env \.card \{[^}]*view-transition-name: invite-card/);
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  assert.match(js, /if \(withCard\) \{ store\.set\(ARRIVE, '1'\); el\.card\.style\.viewTransitionName = 'invite-card'; \}/);
+  // ?replay=1 starts closed already in the <head> script (the snapshot is taken before site.js runs)
+  assert.match(readFileSync(path.join(DIR, 'index.html'), 'utf8'), /!\/\[\?&\]replay=1\(&\|\$\)\/\.test\(location\.search\)\)r\.classList\.add\('is-opened'\)/);
+  // a running "breathe" animation would beat a plain opacity: 0 — the opened state removes the hint
+  assert.match(rule('.is-opened .env-hint'), /display:\s*none/);
+  // Skip leaves the state 'done' so a back/forward-cache return clears the fallback fade
+  assert.match(js, /reset\(\); state = 'done'; go\(false\);/);
+});
+
+test('G401 review: phone backdrop from parts (both rose clusters whole), corners on index/home, card path keeps the card high', () => {
+  for (const page of ['index', 'home'] as PageName[]) {
+    const { $ } = render(page);
+    const tl = $('.scene-bg img.corner-tl'), br = $('.scene-bg img.corner-br');
+    assert.equal(tl.length, 1, `${page}: decor_tl layer`);
+    assert.equal(br.length, 1, `${page}: decor_br layer`);
+    for (const c of [tl, br]) {
+      assert.equal(c.attr('loading'), undefined, `${page}: the corner is in the first view on phones (no lazy)`);
+      assert.match(c.attr('sizes') ?? '', /min-aspect-ratio: 3\/4/, `${page}: sizes for phones and landscape`);
+    }
+    assert.equal($('.land-only').length, 0, `${page}: no landscape-only layer left`);
+  }
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8');
+  assert.match(css, /\.scene-bg \.scene-img \{ inset: auto; left: -135\.94vw; top: 0; width: 235\.94vw;/, 'phones: the flower-free sunlit crop of bg_page');
+  const st = MANIFEST.stage;
+  // out: the card's bottom corners clear the pocket edge before it comes forward; front: no drop back over the pocket
+  assert.ok(st.card_path.out_translate_pct <= -86, `out ${st.card_path.out_translate_pct}`);
+  assert.ok(st.card_path.front_translate_pct - st.card_path.out_translate_pct <= 4, 'forward settles at most 4 % lower');
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  assert.match(js, new RegExp(`front: 'translateY\\(${st.card_path.front_translate_pct}%\\) scale\\(${st.card_path.front_scale}\\)'`));
+  assert.ok(css.includes(`.is-opened .env .card { transform: translateY(${st.card_path.front_translate_pct}%) scale(${st.card_path.front_scale});`));
+  // the lace-edge flap cut is continuous (no tab of envelope body under the lace)
+  const cont = st.cuts.cflap.continuity;
+  assert.ok(cont.max_step_px <= 24, `flap edge step ${cont.max_step_px} px`);
+  assert.ok(cont.replaced_columns <= 0.06 * (st.cuts.cflap.columns[1] - st.cuts.cflap.columns[0] + 1));
+});
+
+test('G401 review: home copy in this design\'s voice, the reply-by line once, every seal with its monogram, srcset on every part', () => {
+  const home = render('home').$;
+  assert.equal((home('body').text().match(/Kindly reply by/g) ?? []).length, 1, 'the deadline line once on home (invitation block)');
+  assert.equal(home('.trio .vignette').length, 3, 'the fanned trio: story frame, day card, seal');
+  assert.equal(home('.v-rsvp .seal-mono[data-field="initials"]').text(), 'A & J');
+  assert.doesNotMatch(home('body').text(), /More about the day|Moments we hold dear|Read our story|Schedule & venue|Reply now|With love|Replay the envelope/i);
+  const rsvp = render('rsvp').$;
+  assert.notEqual(rsvp('.closing .line').text().trim(), rsvp('.rsvp-text .wait').text().trim().replace(/^./, (c) => c), 'closing ≠ card line');
+  assert.doesNotMatch(rsvp('.closing').text(), /can't wait to celebrate/i);
+  for (const page of PAGES) {
+    const { $ } = render(page);
+    $('img').each((_, el) => {
+      const src = $(el).attr('src') ?? '';
+      const m = /img\/([a-z_]+(?:_\d)?)-\d+\.webp$/.exec(src);
+      if (!m || /^accent_/.test(m[1]) || $(el).attr('data-photo-state') === 'user') return;
+      const files = (MANIFEST[m[1]]?.files ?? []).length;
+      if (files < 2) return;
+      assert.ok($(el).attr('srcset') && $(el).attr('sizes'), `${page}: ${src} has srcset + sizes (docs/11 §5.5)`);
+    });
+  }
+  // details: the ceremony line no longer claims the first programme row is the ceremony's place
+  const c = demo();
+  c.schedule = [{ label: 'Welcome drinks', time: '15:00', location: 'The Bar' }, ...c.schedule];
+  assert.equal(render('details', c).$('p[data-if="ceremony_time"]').text(), 'The ceremony begins at 4:00 PM.');
+});
+
+test('G401 review: the story keeps the hand of cards on phones (swipeable fan, window ≥ 38vw) and overlaps on wide screens', () => {
+  const { $ } = render('story');
+  assert.equal($('.fan[data-scene="story-fan"]').length, 1, 'one scene: the hand opens together');
+  assert.deepEqual($('.fan .frame').map((_, el) => $(el).attr('data-step')).get(), ['side', 'mid', 'side']);
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8');
+  const cw = Number(/\.fan \{ --cw: min\((\d+)vw/.exec(css)![1]);
+  assert.ok(cw * 0.78865 >= 38, `phone photo window ${(cw * 0.78865).toFixed(1)}vw ≥ 38vw (docs/11 §9)`);
+  assert.match(css, /scroll-snap-type: x mandatory/);
+  assert.match(css, /\.fc-1 \{ rotate: -8deg; margin-right: calc\(var\(--cw\) \* -\.06\); \}/, 'wide: side cards tucked under the middle one');
+  assert.match(readFileSync(path.join(DIR, 'site.js'), 'utf8'), /function initFan\(\)/);
 });
 
 // ---------------------------------------------------------------- envelope: build geometry, layers, closure, motion

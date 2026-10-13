@@ -545,6 +545,17 @@ test('G051 reply-form questions: one fieldset per question for guests who accept
 
 // ---------------------------------------------------------------- site.js contract (G037 integration notes)
 
+test('view transition: the envelope card is named only when it may morph (no floating card on replay); Skip clears bfcache state', () => {
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8');
+  assert.match(css, /\.env-page \.card \{ view-transition-name: none; \}/);
+  assert.match(css, /\.is-opened \.env-page \.card \{[^}]*view-transition-name: invite-card/);
+  assert.match(css, /\.from-envelope \.hero-card\[data-step\] \{ opacity: 1;/);
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  assert.match(js, /if \(withCard\) \{ store\.set\(ARRIVE, '1'\); el\.card\.style\.viewTransitionName = 'invite-card'; \}/);
+  assert.match(js, /reset\(\); state = 'done'; go\(false\);/);
+  assert.match(readFileSync(path.join(DIR, 'index.html'), 'utf8'), /replay=1\(&\|\$\)\/\.test\(location\.search\)\)r\.classList\.add\('is-opened'\)/);
+});
+
 test('site.js reads #site-data, navigates with the page map and never hard-codes a page URL', () => {
   const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
   assert.match(js, /getElementById\('site-data'\)/);

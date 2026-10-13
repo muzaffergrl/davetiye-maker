@@ -40,6 +40,80 @@ Tasarım 01'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 Ayrıntı: `platform/themes/olive-ivory/README.md` (dosyalar, foto alanları, görsel hattı + GPT kusur temizliği, açılış/koreografi,
 sayfa başına comp öğe haritası, bilinen sınırlar).
 
+### İnceleme düzeltmeleri (wf-tema01, 2026-10-13, ikinci tur)
+İncelemenin 24 bulgusu tek tek doğrulandı; aşağıdaki sayılar ve önizlemeler bu turun koşusundan (`previews/g401/` yeniden
+üretildi). Görsel çizilmedi, yeni GPT parçası istenmedi: yalnız mevcut parçaların yeri/boyu/kırpımı, CSS ışık/arayüz, JS hareket.
+- **Kart home kartına dönüşmüyordu (yüksek, doğrulandı → düzeltildi):** home hero kartı `.js [data-step]` yüzünden geçiş sırasında
+  opaklık 0'dı. `.from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none }` + geçiş grubu .9 s;
+  ölçüm: hero kartı ilk kareden sonuna kadar opaklık 1. `theme-check` artık **her tema için** home'un ilk karesinde
+  `invite-card` adlı öğenin etkin opaklığını ölçer (< 1 = hata; 03 de geçiyor).
+- **Telefonda güller kesiliyordu (yüksek → düzeltildi):** telefonda sahne parçalardan: `bg_page`'in çiçeksiz güneşli sağ üst
+  kırpımı kâğıt (kaynak x 590–1024, y 0–940; yeni dosya yok, `bg_page-1024` konumlanır) + `decor_tl` / `decor_br` ayrı katman, iki
+  küme de ekranda bütün (index ve home; geniş ekranda `mist` + aynı kümeler). `.land-only` kaldırıldı (bulgu 20: telefonda çift köşe
+  artık yok — köşeler bilerek tek katman). Kısa telefonlarda (en/boy 9/16–3/4) kümeler küçülür ve köşelerine çekilir.
+- **Yukarı–aşağı–yukarı kart yolu (orta → düzeltildi):** `build_images.py` kart yolu: `out` = alt köşeler cep kenarını kartın %4'ü
+  kadar **aşmış** (−87 %; z-index takasında köşe atlamıyor), `front` = olduğu yerde öne (−84 % × 1,04 + büyüyen gölge); sahne kutusu
+  buna göre yeniden ölçüldü (oran ,70776; bütün yüzdeler manifest'ten). Açık hâlde kart artık zarfın üstünde dik duruyor; VT kartı
+  yukarı, home kartına taşıyor. Kısa telefonda sahnenin boş üst kısmı ekranda kalsın diye üst boşluk `w` ile büyüyor; açık hâlde
+  (geri dönüş) isimler kalkar, kısa ekranda zarf küçülür.
+- **Nav bandı çiçekleri kesiyordu (orta → düzeltildi):** opak bant + çizgi yerine kâğıt üstünde yazı satırı, yazı genişliğinde 1 px
+  altın çizgi, kenarsız yumuşak zemin (§5.7); home ilk ekranı nav'ın üstünde biter.
+- **Hero maskesi kümeyi soldurıyordu (orta → düzeltildi):** maske yalnız kâğıtta (`.hero-bg picture`); `decor_br` maskesiz ve
+  telefonda RSVP hapının altında: hap ile yaprak uçları arası 360 px'te ≥ 50 px (ölçüldü), 390 px'te ≥ 31 px.
+- **Story telefonda 03'ün basamaklarına benziyordu (orta → düzeltildi):** telefonda **kaydırılan el yelpazesi** (scroll-snap; ortadaki
+  kart dik + %3 yukarıda, komşular ±8° kenarlardan, fildişi kenarlarından altına giriyor; yalnız ortadaki kartın başlığı; sayfa orta
+  kartla açılır, `initFan`); kart 64vw, pencere **50vw**. ≥ 720 px: yanlar merkez etrafında ±8°, orta karta kartın %6'sı kadar
+  girer (pencereler bütün), orta kart %4 yukarıda ve üstte, aynı gölge. Giriş tek sahne: orta kart, sonra yanlar arkasından açılır.
+- **Home 03'ün iskeletiydi (orta → düzeltildi):** "More about the day" yerine "Pull up a chair" **yelpaze üçlüsü** (story_1 çerçevesi
+  −7° · `info_card` kâğıdında günün ilk 4 satırı · monogramlı mühür +7°); 03 metinleri kalktı ("Moments we hold dear / Read our
+  story", "Schedule & venue", "Reply now", "With love / Replay the envelope" → "Read", "Details", "Reply", "Until then", "Open the
+  envelope again"). "Kindly reply by" home'da tek yerde (davet kartı altı). **Kataloğa not:** 01 ve 03 başlık yazısı ikisi de Great
+  Vibes (katalog seçimi; bu görev değiştirmedi).
+- **Açık zarfta "Tap to open" (orta → düzeltildi):** `.is-opened .env-hint { display: none; animation: none }`; `theme-check` açık
+  zarfta ipucunun görünmediğini denetler.
+- **Details tören cümlesi (orta → düzeltildi):** yer kısmı kalktı ("The ceremony begins at 4:00 PM."), `.note` `text-wrap: pretty`.
+  03'te aynı varsayım duruyor ("Ceremony at … in {schedule.0.location}") — 03 yayında olduğu için dokunulmadı, entegratöre not.
+- **Kapak açılışı geç çevriliyordu (düşük → düzeltildi):** `lift` 920 ms, %30'da 22° yumuşak başlangıç, 80°'den sonra sarmalayıcı
+  söner (10× yavaş karelerle bakıldı: soyulma ~200 ms'den görünür, ezik mühür şeridi yok).
+- **Yaprak fotoğrafın üstünden geçiyordu (düşük → düzeltildi):** `across` yaprakları kartın duracağı yerin üstündeki ve zarfın
+  altındaki bantlarda uçar.
+- **Tekrarlayan çağrılar (düşük → düzeltildi):** son tarih satırı home'da bir kez; RSVP teaser'ı mühür + "Will You Join Us?" +
+  "Reply"; RSVP kapanışı "Thank you / for being part of our story." (kart satırı tekrar edilmiyor).
+- **Mini mühür boş ovaldı (düşük → düzeltildi):** üç mühürde de monogram; `--seal-ink` #8C7442 → #735E2E + basılı gölge, boy
+  8,4 → 8,8cqw (ölçüldü: yazı ovalin genişliğini dolduruyor; sorun boy değil açık tondu).
+- **J kuyruğu tarihe değiyordu (düşük → düzeltildi):** `.hero-date` üst boşluğu isim boyunun %27'si; zarf sayfasında isim–zarf
+  arası `max(20px, isim boyu × ,38)`.
+- **Masaüstü seyrekti (düşük → düzeltildi):** home üçlüsü 640 px'e kadar bir sıra; RSVP ≥ 960 px'te kart (390 px) + form iki sütun,
+  kart ve mühür 1280×900'de ilk görünümde. (Bulgunun "kartı 2:3'e genişlet" önerisi uygulanmadı: kart yazısı `cqw` ile ölçeklendiği
+  için genişlemek kartı da uzatıyordu.)
+- **Kapak kesiminde dil (orta → düzeltildi):** `build_images.py` dantel kenarı: 3 px açma (ince açık kat çizgisi dantel sayılmaz),
+  arama bandı V + 62 px, aykırı sütun dolgusu ve **sert denetim** (sıçrama ≤ 24 px, dolgu ≤ %6; çıkış ≠ 0). Sonuç: 0 sütun dolgu,
+  en büyük sıçrama 9,1 px; `cuts_envelope.jpg` yenilendi (sol dantelin altında dil yok). Yalnız `env_cflap-440/880` ve
+  `manifest.json` değişti; öteki 43 WebP bayt bayt aynı. `compare_closure.jpg` yeniden üretilmedi (kapalı sahne aynı; çapa 1 px).
+- **Replay'de uçuşan kart (orta → düzeltildi, 03'te de):** kart VT adı yalnız açıkken / `go(true)`'da; `?replay=1` `<head>`'de kapalı.
+- **Skip + Geri boş sayfa (düşük → düzeltildi, 03'te de):** Skip durumu `done`; `pageshow` solmayı temizler (yalnız kodda; headless
+  Chromium bfcache'ten dönmüyor).
+- **srcset eksikleri (düşük → düzeltildi):** üçlüdeki çerçeve, mühür ve `ph_story_1` srcset + gerçek `sizes`; yeni test her çok
+  dosyalı parça `<img>`'inde srcset + sizes arar.
+- **README doğruluğu (düşük → düzeltildi):** 43vw → 50vw (yeni düzen), yüzen accent satırı, `closure-320/640` ve `accent_2-156`
+  gerekçeleri, tören cümlesi; comp haritası yeni düzene göre.
+- **Belgeler (düşük, kısmen):** `docs/11` (G056 yazma alanı) §2.1, §5.1, §7.1, §7.3, §11, §14 #11–#12 güncellendi; G401'den genel
+  kurallar eklendi. Yapılmadı (entegratör dosyaları): `katalog.py belge` (docs/09), `platform/README.md` satırları.
+- **qa-kontrol kapısı (orta):** bu oturumda da alt-ajan aracı yok; düzeltmelerden sonra **qa-kontrol incelemesi yapılmadı**, Bitti 3.
+  madde işaretsiz kalıyor. İncelenecekler: `previews/g401/compare_*`, `opening_390x844.mp4` (kart home kartına iniyor), README comp
+  haritası.
+
+**Yazma alanı dışı (inceleme bulgusunun istediği):** `platform/scripts/theme-check.cjs` (G052'nin dosyası, görev bitti): iki yeni
+genel denetim (varış kartı opaklığı, açık zarfta ipucu). `blush-garden-rose` dosyaları ve `docs/11` G056'nın, `tools/katalog.py`
+yorumu G057'nin alanında (ikisi de bu turun bulguları).
+
+**Bu turun sayıları:** `npm test` **292/292** (olive 28 test: §13.2 + zarf + 4 inceleme testi; 03'e 1 test), typecheck temiz,
+build + trace-check temiz; `theme-check --theme olive-ivory --stress` **86/86, 0 uyarı** (zarf → home 4179 ms; ilk görünüm 390×844
+DPR 3: yer tutucuyla index 999 / home 816 KB, örnek fotoğraflarla 1073 / 993 KB — telefonda köşe kümeleri ve `bg_page-1024`
+ilk görünüme girdi, sınır 1,5 MB; ≥ 150 KB tek WebP: `decor_tl-960` 167 KB, DPR 3 telefonda seçiliyor); 03
+`theme-check --stress`: **85/85, 0 uyarı** (`--no-video`, çıktı geçici klasöre — `previews/g038` dokunulmadı; yeni varış kartı ve açık zarf ipucu denetimleri dahil; zarf → home 4361 ms); g051-browser: `g051-browser --theme olive-ivory` 44/44; final-smoke: `final-smoke --theme olive-ivory` 42/42 (`previews/g401/final/` yenilendi). Boyutlar: `site.css` 44,7 KB, `site.js` 34,9 KB
+(≤ 45 / 35 KB; ayraç yorumları kısaltıldı).
+
 - **Tema** `platform/themes/olive-ivory/`: `theme.json` (5 sayfa; foto alanları `hero_portrait` 663/715, `story_1..3` 653/883,
   `venue` 1009/618 = manifest `box_px`), `content.demo.json` (koleksiyon kaydının birebir kopyası → `/start?theme=olive-ivory` ve
   `/start/demo/olive-ivory` çalışıyor; final-smoke'ta "Design: Olive & Ivory"), 5 sayfa, `site.css`, `site.js`, `build_images.py`,
@@ -68,22 +142,26 @@ sayfa başına comp öğe haritası, bilinen sınırlar).
 **Açılış:** dokununca mühür hafifçe kalkar, dantel kenarlı kapak mühür ve zeytin dalıyla birlikte menteşesinde izleyiciye doğru
 kalkıp 90°'de açık kapağa devreder; fildişi kart cepten süzülerek yükselirken iki zeytin yaprağı ekranı soldan sağa geçer, kart
 öne gelir ve view transition ile home'daki hero kartına dönüşür (dokunuştan home'a 4,1 s; Skip her an; reduced motion 0,2 s).
-**Story:** üç yuvarlak köşeli, altın çerçeveli portre kartı elden yelpaze gibi açılır (her kart dik ve ortada başlar, kendi eğimine
-döner), başlığı altına yazılır; ≥ 720 px'te comp'taki yelpaze (orta dik ve yüksek, yanlar ±8°), telefonda basamaklı.
+*(İkinci tur: kart cepten çıkınca yukarıda kalır, olduğu yerde öne gelir ve görünür home kartına yukarı uçar — yukarıdaki blok.)*
+**Story:** üç yuvarlak köşeli, altın çerçeveli portre kartı elden yelpaze gibi açılır (orta kart yükselir, yanlar onun arkasından
+8° eğimlerine açılır), başlıklar altına yazılır; ≥ 720 px'te comp'taki yelpaze (orta dik ve yüksek, yanlar ±8° ve orta kartın
+altına girer), telefonda aynı el kaydırılan bir yelpaze (ikinci tur; ilk turda basamaklıydı).
 **Parçacıklar:** açılışta 2 zeytin yaprağı (`across`), home'a varışta 3 yasemin çiçeği süzülür, RSVP kapanışında 2 çiçek + 1 yaprak.
 
 **Comp sapmaları** (gerekçeleri README'deki comp haritasında):
 - home geri sayımı: comp'taki dört kutu yerine sade rakam + etiket (kutular CSS çerçeve olurdu; K21, §5.7).
-- story telefonda: yan yana yelpazede pencere ~85 px kalıyordu (< 38vw, §9) → basamaklı (−6°, +5°, −4°), pencere 43vw.
+- story telefonda: yan yana yelpazede pencere ~85 px kalıyordu (< 38vw, §9) → kaydırılan yelpaze (kart 64vw, pencere 50vw;
+  ilk turdaki basamaklı düzen ikinci turda kalktı).
 - story başlıkları kartın üstünde değil altında (görev cümlesi; 60 karakterlik başlık kart kenarına sığmaz).
 - details program satırları arasındaki GPT dalın iki yanındaki çizgiler yok; 6+ satırda yalnız boşluk.
 - mühürde monogram var (comp'ta boş oval) — `initials` alanı.
-- comp'u olmayan bölümler (davet kartı, takvime ekle, "More about the day" vinyetleri, yanıt formu, SSS, kapanış) bu tasarımın
+- comp'u olmayan bölümler (davet kartı, takvime ekle, "Pull up a chair" yelpaze üçlüsü, yanıt formu, SSS, kapanış) bu tasarımın
   parçaları ve tipografisiyle.
+- telefon sahnesi: comp'un tek boyalı sayfası yerine kâğıt + iki ayrı gül kümesi (aynı GPT parçaları; 2:3 sayfa telefonda gülleri kesiyordu).
 
 **Test edildi:**
 - `kit_check --paket 5` 23/23, `--paket 2` 5/5.
-- `npm test` **287/287** (origin/main birleştirmesinden sonra; yeni `tests/theme-olive-ivory.test.ts` 24 test: §13.2'nin 23 maddesi + zarf/kapanış geometrisi);
+- *(İlk tur sayıları; ikinci turunkiler yukarıdaki blokta.)* `npm test` **287/287** (origin/main birleştirmesinden sonra; yeni `tests/theme-olive-ivory.test.ts` 24 test: §13.2'nin 23 maddesi + zarf/kapanış geometrisi);
   `npm run typecheck` temiz; `npm run build` + trace-check temiz (16 rota, 3 tema, yalnız html/json).
 - `theme-check --theme olive-ivory --stress` (`next start` + Chromium, MP4 dahil): **85/85, 0 uyarı**. 5 sayfa ×
   360/390/430/768/1280 kayma yok, her alan = kayıt, kart metni düz kâğıtta; fotoğrafsız yer tutucu; taslak önizleme; kısa telefonlar
@@ -112,6 +190,8 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - Gerçek iPhone/Safari ve Android Chrome (yalnız Chromium mobil emülasyonu); view transition'sız tarayıcıda solma yolu yalnız kodda;
   Vercel yayını (bu görevin işi değil); gerçek alıcı fotoğrafları (farklı oran/ışık); yavaş ağ.
 - `platform/README.md`'ye olive-ivory satırları eklenmedi (yazma alanım dışında).
+- İkinci turda yeniden ölçülmedi: kontrast (ilk tur ≥ 5,1:1; nav zemini ve hero kâğıdı değişti — nav yazısı hâleyle), aksanlı isim
+  fontu (font ve aileler aynı).
 
 **Sorunlu GPT parçaları + önerilen prompt düzeltmeleri:**
 - card_small, frame_portrait, frame_landscape: pencere saf #00FF00 değil, frame_landscape'te koyu yarı saydam leke → "the photo
@@ -137,4 +217,6 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-13 alindi: wf-tema01
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmesi (wf-tema01): 24 bulgu doğrulandı; varış kartı, telefon sahnesi parçalardan, kart yolu, nav, story yelpazesi, home üçlüsü, kapak kesimi; theme-check 86/86, qa-kontrol yapılamadı
 - 2026-10-13 bitti, incelemeye gönderildi

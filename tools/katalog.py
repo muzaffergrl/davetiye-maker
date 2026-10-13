@@ -512,7 +512,7 @@ SAHNELER = [
 #   pencere_temiz: (İngilizce ek, Türkçe kontrol) — foto penceresinin üstüne hiçbir şey binmesin (08: kırağı)
 #   foto.kadraj: Paket 2.1–2.4'e eklenen kadraj cümlesi (yuvarlak/oval pencere)
 # İsteğe bağlı (G046 incelemesi):
-#   kapanis_parca: W2 closure.png metni W1'deki `kapanis`tan farklıysa (01: mühür dalsız; dal `ekler` closure_sprig)
+#   kapanis_parca: W2 closure.png metni W1'deki `kapanis`tan farklıysa (ör. mühür dalsız, dal `ekler`'de; bugün kullanılmıyor — 01 kapanışı a177cb4'ten beri tek parça)
 #   kapanis_doluluk: sarılı olmayan kapanışın kareyi doldurma yüzdesi (varsayılan 70) · kapanis_k_ek: Kontrol eki
 #   kesim_kenari / acik_kenari: KESIM_KENARI[tip] yerine (04: yırtma şeridi) — kesilecek kenarın net olması cümlesi
 

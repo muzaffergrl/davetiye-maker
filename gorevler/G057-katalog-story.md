@@ -68,6 +68,15 @@ yazılmadı (bütün kuru çalıştırmalar 0 değişiklik).
    eski; §14 #12 "yapıldı (G057)" olmalı, §2.1'e "story `tools/katalog.py` `STORY`'de; değişince `ozet` + tema kopyası
    yeniden eşitlenir" yazılmalı (entegratör/docs).
 
+**İnceleme düzeltmeleri (wf-tema01, 2026-10-13):** inceleme G057 davranışını doğruladı (kontrol 0, `ozet`/`paket5`/`gorev5
+--dene` 0 değişiklik, gerçek `yaz --zorla` koşusunda 20 kayıt bayt bayt aynı). Yapılan: `tools/katalog.py` `kapanis_parca`
+yorumu (01'in a177cb4'ten beri tek parça kapanışı; artık `closure_sprig` demiyor — yalnız yorum, çıktı değişmez; `kontrol` temiz)
+ve G056 alanındaki `docs/11` §2.1 / §14 #12 (yukarıdaki not 3). Yapılmadı (entegratör): `python3 tools/katalog.py belge`
+(docs/09 01 satırı yeni açılış cümlesi), `platform/README.md` G055 açıkları / seed / olive-ivory satırları, `yaz`'ın
+`durum` ≠ `hazir` görev dosyalarını atlaması için önerilen claude-kod görevi.
+
 ## Günlük
 - 2026-10-13 alindi: wf-tema01
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmesi (wf-tema01): katalog.py kapanis_parca yorumu, docs/11 §2.1/§14 #12; belge/README entegratöre
 - 2026-10-13 bitti, incelemeye gönderildi

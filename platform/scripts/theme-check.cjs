@@ -257,8 +257,10 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     const sb = stage && vis(stage);
     const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el));
     const hb = hint && hint.getBoundingClientRect();
+    // effective opacity (a running CSS animation can keep a hint visible that the opened state means to hide)
+    const alpha = (el) => { let a = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) a *= Number(getComputedStyle(n).opacity); return a; };
     return { hscroll: document.documentElement.scrollWidth - innerWidth, stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
-      hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null };
+      hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null, hintShown: Boolean(hint && alpha(hint) > 0.05) };
   });
 
   async function pageChecks(page, tag, content, photoMode) {
@@ -562,6 +564,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
           if (state === 'closed' && fit.stage === false) err(`envelope closed @${w}×${h}: the closed envelope (.stage) is not entirely on screen`);
           if (state === 'closed' && fit.hint === false) err(`envelope closed @${w}×${h}: "Tap to open" is below the screen`);
           if (state === 'closed' && fit.hint === null && once('hint')) warn('envelope: no visible "Tap to open" / "Click to open" hint found on the index page');
+          if (state === 'opened' && fit.hintShown) err(`envelope opened @${w}×${h}: "Tap to open" still shows under the opened envelope (next to "Enter")`);
           const all = await busy(page, sel);
           measured.push({ at: `${w}x${h}`, state, boxes: all.map((x) => ({ ...x, edge: +x.edge.toFixed(2), dark: +x.dark.toFixed(3) })) });
           // calibrated on 03: plain wash edge ≤ 1.3 / dark ≤ 0.03; over florals edge ≥ 2.7 or dark ≥ 0.06 (before the fix)
@@ -612,12 +615,32 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       await page.goto(url(demo.slug, 'index'), { waitUntil: 'load' });
       await page.waitForTimeout(600);
       await need(page, '.stage', 'the envelope stage (role=button, docs/11 §3.2)');
+      // docs/11 §11: the card must morph into a VISIBLE home card. On the arriving home document, read the element that
+      // carries view-transition-name: invite-card at the first frame (pagereveal; first rAF as a fallback): its effective
+      // opacity must be 1 — a card still hidden by a scene entrance makes the morph land on nothing.
+      await page.addInitScript(() => {
+        if (!/\/home$/.test(location.pathname)) return;
+        const probe = () => {
+          if (window.__vtCard) return;
+          const el = [...document.querySelectorAll('body *')].find((e) => getComputedStyle(e).viewTransitionName === 'invite-card');
+          let a = 1;
+          for (let n = el; n && n.nodeType === 1; n = n.parentElement) a *= Number(getComputedStyle(n).opacity);
+          window.__vtCard = el ? { opacity: +a.toFixed(3), from: document.documentElement.classList.contains('from-envelope') } : { opacity: null };
+        };
+        window.addEventListener('pagereveal', probe, { once: true });
+        requestAnimationFrame(() => requestAnimationFrame(probe));
+      });
       const t0 = Date.now();
       await page.click('.stage');
       await page.waitForURL(`${BASE}/${demo.slug}/home`, { timeout: 9000 });
       results.info.envelope_to_home_ms = Date.now() - t0;
       const arrive = await page.evaluate(() => document.documentElement.classList.contains('from-envelope'));
       if (!arrive) err('envelope → home: no from-envelope flag (card transition)'); else ok(`envelope → /${demo.slug}/home in ${results.info.envelope_to_home_ms} ms, card transition flag set`);
+      const vtCard = await page.evaluate(() => window.__vtCard || null);
+      results.info.home_card_first_frame = vtCard;
+      if (!vtCard || vtCard.opacity === null) err('envelope → home: no element with view-transition-name invite-card on home (docs/11 §11)');
+      else if (vtCard.opacity < 0.99) err(`envelope → home: the home card is ${vtCard.opacity} opaque at the first frame — the envelope card morphs into an invisible card (docs/11 §11; e.g. .from-envelope .hero-card[data-step] { opacity: 1 })`);
+      else ok('envelope → home: the card lands on a visible home card (opacity 1 at the first frame)');
       await page.waitForTimeout(5200);
       // the first scene of home (hero) has entered completely: every step visible (or not shown on this layout)
       const hero = await page.evaluate(() => {

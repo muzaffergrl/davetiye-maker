@@ -199,16 +199,20 @@ def dantel_kapak_kes(ec: Image.Image):
     vy = np.where(xs < tipx, ml * xs + cl, mr * xs + cr)
     parlak = (lum > 178) & (a[..., 3] > 200)
     dantel = ~genislet(~genislet(parlak, 4), 4)
+    # açma (3 px): dantelin dış kenarına değen ince açık çizgiler (yan kanadın ışıklı katı, 2–3 px) dantel sayılmaz
+    dantel = genislet(~genislet(~dantel, 3), 3)
     cols = np.flatnonzero(a[..., 3].max(0) > 200)
     x0, x1 = int(cols.min()), int(cols.max())
     kenar = np.full(W, -1.0)
+    # arama bandı: V doğrusunun 70 px üstü … 62 px altı (dantel şeridi V'nin ~45 px altına iner; daha aşağısı gövdenin yan
+    # kanat katlarıdır — G401 incelemesi: sol kanadın açık kat dikişi 28 sütunda "dantel kenarı" sanılıyordu)
     for x in range(x0, x1 + 1):
-        lo, hi = int(max(0, vy[x] - 70)), int(min(H, vy[x] + 110))
+        lo, hi = int(max(0, vy[x] - 70)), int(min(H, vy[x] + 62))
         r = np.flatnonzero(dantel[lo:hi, x])
         if len(r):
             kenar[x] = lo + r.max() + 2
     bulunan = int((kenar[x0:x1 + 1] >= 0).sum())
-    bilgi = {"method": "renk", "detector": "kapak_kes V + dantel dış kenarı (lum > 178, kapatma 4 px)",
+    bilgi = {"method": "renk", "detector": "kapak_kes V + dantel dış kenarı (lum > 178, kapatma 4 px, açma 3 px, V + 62 px bandı)",
              "hinge_row": int(kb["hinge_row"]), "v_left": [round(ml, 4), round(cl, 2)], "v_right": [round(mr, 4), round(cr, 2)],
              "columns": [x0, x1], "found": bulunan, "warnings": []}
     if bulunan < 0.9 * (x1 - x0 + 1):
@@ -220,6 +224,20 @@ def dantel_kapak_kes(ec: Image.Image):
     for x in range(x0, x1 + 1):
         if kenar[x] < 0:
             kenar[x] = kenar[x - 1] if x > x0 else vy[x]
+    # sürekli kenar: V'ye göre kayma (kenar − vy) geniş kayan medyandan (101 sütun) 22 px'ten fazla sapan sütun aykırıdır
+    # (fisto dalgası medyanın ±16 px'i içinde) → komşu sağlam sütunlardan doğrusal doldurulur. Sert denetim (main): dolgudan
+    # sonra komşu sütunlar arası sıçrama ≤ 24 px ve doldurulan sütun ≤ %6, yoksa çıkış ≠ 0.
+    xr = np.arange(x0, x1 + 1)
+    dd = kenar[x0:x1 + 1] - vy[x0:x1 + 1]
+    pad = np.pad(dd, 50, mode="edge")
+    med = np.array([np.median(pad[i:i + 101]) for i in range(len(dd))])
+    aykiri = np.abs(dd - med) > 22
+    if aykiri.any() and (~aykiri).sum() >= 2:
+        dd[aykiri] = np.interp(xr[aykiri], xr[~aykiri], dd[~aykiri])
+        kenar[x0:x1 + 1] = vy[x0:x1 + 1] + dd
+    # (zarfın yuvarlak köşesindeki 3'er kenar sütunu sıçrama ölçüsüne girmez: orada dantel yok, kenar = gövde hattı)
+    bilgi["continuity"] = {"replaced_columns": int(aykiri.sum()), "max_step_px": round(float(np.abs(np.diff(dd[3:-3])).max()), 1),
+                           "limits": {"replaced_max_frac": 0.06, "max_step_px": 24}}
     yy = np.arange(H)[:, None]
     m = np.clip(kenar[None, :] - yy + 0.5, 0, 1)
     m[:, :x0] = 0
@@ -384,6 +402,9 @@ def main():
 
     flap, kb = dantel_kapak_kes(ec)
     uyar("env_cflap", kb)
+    sur = kb.get("continuity")
+    if sur and (sur["max_step_px"] > 24 or sur["replaced_columns"] > 0.06 * (kb["columns"][1] - kb["columns"][0] + 1)):
+        sys.exit(f"kapak kesimi: dantel kenarı sürekli değil ({sur}) — kesim önizlemesine bak (--onizleme)")
     pocket, cep, cep_kenar = trapez_cep_kes(eo)
     uyar("env_pocket", cep)
     govde_ust = cep["body"][1]
@@ -460,15 +481,18 @@ def main():
     card_x = (env_x0 + env_x1) / 2 - card_w / 2
     hidden_top = govde_ust + 0.075 * (env_y1 - env_y0)                 # astar penceresinde kartın üstü görünür
     kose_kenar = float(min(cep_kenar[int(card_x)], cep_kenar[int(card_x + card_w)]))
-    out_top = kose_kenar + 0.03 * card_h - card_h                       # köşeleri cebin kenarında hâlâ içeride
-    front_top = env_y0 - 0.06 * card_h                                  # öne geçip zarfın üst yarısına iner
+    # G401 incelemesi: kart yukarıda kalır (yukarı → aşağı → yukarı dönüş yok). out = alt köşeleri cebin kenarını kartın
+    # %4'ü kadar aşmış (cep kartın açıklığında en yüksek köşelerde; z-index takası anında köşe "atlamaz"); front = aynı
+    # yerde öne gelir: %3 aşağı + × 1.04 (üst kenar neredeyse yerinde, büyüyen gölge) → home kartına doğru yukarı uçar
+    out_top = kose_kenar - 0.04 * card_h - card_h
+    front_top = out_top + 0.03 * card_h
     card_box_hidden = [card_x, hidden_top, card_x + card_w, hidden_top + card_h]
 
     # ------------------------------------------------------------------ sahne kutusu = birleşim (docs/11 §7.1)
     ob_box = alfa_kutu(eo, esik=1)
     cb_box = alfa_kutu(ec, esik=1)
 
-    scale_front = 1.06
+    scale_front = 1.04
     fr_w, fr_h = card_w * scale_front, card_h * scale_front
     front_box = [card_x - (fr_w - card_w) / 2, front_top - (fr_h - card_h) / 2,
                  card_x + card_w + (fr_w - card_w) / 2, front_top + card_h + (fr_h - card_h) / 2]

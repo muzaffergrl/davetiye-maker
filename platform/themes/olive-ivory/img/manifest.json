@@ -30,28 +30,28 @@
  "env_cflap": {
   "src_size": [
    909,
-   502
+   501
   ],
-  "ratio": 1.81076,
+  "ratio": 1.81437,
   "files": [
    {
     "file": "env_cflap-440.webp",
     "w": 440,
     "h": 243,
-    "bytes": 20628
+    "bytes": 20576
    },
    {
     "file": "env_cflap-880.webp",
     "w": 880,
-    "h": 486,
-    "bytes": 57636
+    "h": 485,
+    "bytes": 57146
    }
   ],
   "canvas_box": [
    58,
    612,
    967,
-   1114
+   1113
   ]
  },
  "env_flap": {
@@ -157,16 +157,16 @@
   ],
   "anchor": "V flap tip (lace outer edge, lowest point)",
   "anchor_px": [
-   514.0,
-   1113.0
+   513.0,
+   1112.0
   ],
   "center_px": [
-   514.0,
-   1006.3
+   513.0,
+   1005.3
   ],
   "center_pct": [
-   50.165,
-   76.963
+   50.055,
+   77.835
   ],
   "width_pct": 48.734,
   "scale": 0.36341,
@@ -200,81 +200,81 @@
   ],
   "box": [
    58,
-   58.6,
+   5.7,
    909,
-   1231.4
+   1284.3
   ],
-  "ratio": 0.73819,
+  "ratio": 0.70776,
   "parts": {
    "env_closed": [
     0.0,
-    44.941,
+    47.21,
     100.0,
-    54.897
+    52.634
    ],
    "env_cflap": [
     0.0,
-    44.941,
+    47.21,
     100.0,
-    40.767
+    39.009
    ],
    "env_flap": [
     0.0,
-    13.026,
+    16.61,
     100.0,
-    32.483
+    31.145
    ],
    "env_body": [
     0.0,
-    44.778,
+    47.054,
     100.0,
-    55.222
+    52.946
    ],
    "env_pocket": [
     0.0,
-    48.189,
+    50.324,
     100.0,
-    51.811
+    49.676
    ],
    "closure": [
-    23.239,
-    57.53,
+    23.129,
+    59.202,
     48.734,
-    34.116
+    32.709
    ],
    "card": [
     21.041,
-    49.127,
+    51.224,
     57.809,
-    61.408
+    58.877
    ]
   },
-  "hinge_pct": 45.022,
-  "body_bottom_pct": 99.756,
-  "open_body_top_pct": 45.022,
+  "hinge_pct": 47.288,
+  "body_bottom_pct": 99.766,
+  "open_body_top_pct": 47.288,
   "closed_obj": {
    "box_pct": [
     0.11,
-    45.022,
+    47.288,
     99.67,
-    54.735
+    52.479
    ],
    "aspect": 1.3442,
    "frac_w": 0.9967,
-   "top_frac_of_stage_w": 0.6099,
+   "top_frac_of_stage_w": 0.66813,
    "bottom_frac_of_stage_w": 0.0033
   },
   "card_path": {
-   "out_translate_pct": -80.001,
-   "front_translate_pct": -12.685,
-   "front_scale": 1.06,
+   "out_translate_pct": -87.001,
+   "front_translate_pct": -84.001,
+   "front_scale": 1.04,
    "pocket_edge_at_card_corners": 792.1,
    "card_w_of_env": 0.58
   },
   "cuts": {
    "cflap": {
     "method": "renk",
-    "detector": "kapak_kes V + dantel dış kenarı (lum > 178, kapatma 4 px)",
+    "detector": "kapak_kes V + dantel dış kenarı (lum > 178, kapatma 4 px, açma 3 px, V + 62 px bandı)",
     "hinge_row": 613,
     "v_left": [
      0.91,
@@ -290,18 +290,26 @@
     ],
     "found": 906,
     "warnings": [],
+    "continuity": {
+     "replaced_columns": 0,
+     "max_step_px": 9.1,
+     "limits": {
+      "replaced_max_frac": 0.06,
+      "max_step_px": 24
+     }
+    },
     "tip": [
-     514.0,
-     1113.0
+     513.0,
+     1112.0
     ],
     "rows": [
      0,
-     1114
+     1113
     ],
     "edge_minus_v_px": [
      14.9,
-     29.4,
-     43.5
+     29.2,
+     41.2
     ]
    },
    "pocket": {
