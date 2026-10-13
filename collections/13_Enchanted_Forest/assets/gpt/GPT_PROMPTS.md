@@ -51,6 +51,10 @@ On tap, the brass clasp unhooks and swings away, the moss-green cover swings ope
 - **ONE object per image** — never a sheet or set of several objects in one image.
 - **No cast shadow and no drop shadow** on any part (the website adds its own shadows). Light every part the same
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
+- **No glow, halo, light rays or haze outside an object's outline** (the website adds light effects); a
+  semi-transparent halo leaves a dirty edge on another background.
+- Edges Claude will cut along (the flap's free edge, a door seam, a book's spine and cover edge, a pouch mouth, a
+  pocket's top edge) are **crisp lines with a slight contact shade on the object itself** — never a cast shadow.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
 - envelope_closed.png and envelope_open.png must fit together exactly: the SAME
@@ -132,15 +136,15 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/envelope_closed.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-The same storybook as in the W1 screens, alone and closed, WITHOUT the brass book clasp: an antique closed storybook seen straight from the front: a deep moss-green cloth cover with an embossed gold floral border of ferns and tiny mushrooms and an empty oval cartouche in the center (no title, no letters), slightly worn corners, the spine on the left. The book's spine sits exactly at the horizontal center of the wide image and the closed cover lies in the right half, its right edge about 6% from the image border and its height about 85% of the image height; the left half stays empty for the cover to swing open into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same storybook as in the W1 screens, alone and closed, WITHOUT the brass book clasp: an antique closed storybook seen straight from the front: a deep moss-green cloth cover with an embossed gold floral border of ferns and tiny mushrooms and an empty oval cartouche in the center (no title, no letters), slightly worn corners, the spine on the left. The book's spine sits exactly at the horizontal center of the wide image and the closed cover lies in the right half, its right edge about 6% from the image border and its height about 85% of the image height; the left half stays empty for the cover to swing open into. The edges where this piece will be cut must read clearly: the cover's outer edge and the spine — a crisp line with a slight contact shade on the object itself (not a cast shadow). Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: tek nesne; brass book clasp yok; kesilmemiş; gölge yok; gerçek alfa.
+Kontrol: tek nesne; brass book clasp yok; kesilmemiş; gölge yok; gerçek alfa; kesilecek kenar net çizgi (nesnenin kendi üstünde ince temas gölgesi).
 
 #### W2.4 Kapanış elemanı (tek başına)
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small antique brass book clasp with a leaf-shaped engraving, no letters, alone, exactly as it sits on the storybook in the W1 screens (hooked over the cover's right edge at mid-height, holding the book shut), drawn large so it fills about 70% of the square (Claude scales it to the storybook), with the same perspective, material and light as on the storybook and with no storybook behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small antique brass book clasp with a leaf-shaped engraving, no letters, alone, exactly as it sits on the storybook in the W1 screens (hooked over the cover's right edge at mid-height, holding the book shut), drawn large so it fills about 70% of the square (Claude scales it to the storybook), with the same perspective, material and light as on the storybook and with no storybook behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: yalnız brass book clasp; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
@@ -148,15 +152,15 @@ Kontrol: yalnız brass book clasp; harf/monogram yok; zarftakiyle aynı görün�
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/envelope_open.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-The SAME storybook as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the cover swung fully open to the left and lying flat, its inside lined with dark moss green (#4A5A3A) background with a storybook-style repeat of tiny ferns, mushrooms and stars in muted gold; the first page on the right is blank aged-cream paper with soft foxing (no text) and sits exactly where the closed cover was. No card, nothing inside, no brass book clasp. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME storybook as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the cover swung fully open to the left and lying flat, its inside lined with dark moss green (#4A5A3A) background with a storybook-style repeat of tiny ferns, mushrooms and stars in muted gold; the first page on the right is blank aged-cream paper with soft foxing (no text) and sits exactly where the closed cover was. The spine line between the open cover and the right page is crisp and clearly visible. No card, nothing inside, no brass book clasp. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
+Kontrol: envelope_closed ile aynı ölçü, konum ve açı — envelope_closed üstüne yarı saydam konunca değişmeyen gövde çakışıyor; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
 #### W2.6 Zarftan çıkan küçük kart (boş)
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the storybook in W1.2, alone: a small aged-cream book-page card with soft foxing and deckled edges, a portrait photo window held by four vintage black photo-corner mounts in its upper part, plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the storybook so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the storybook in W1.2, alone: a small aged-cream book-page card with soft foxing and deckled edges, a portrait photo window held by four vintage black photo-corner mounts in its upper part, plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the storybook so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -164,7 +168,7 @@ Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak geniş
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The large invitation card of this design, alone: a tall aged-cream storybook page with soft foxing, deckled edges and a fine ink rule border, a classic storybook ink-and-watercolor vignette of ferns, moss, ivy and small toadstool mushrooms with a few glowing fireflies along the top and in the bottom corners. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The large invitation card of this design, alone: a tall aged-cream storybook page with soft foxing, deckled edges and a fine ink rule border, a classic storybook ink-and-watercolor vignette of ferns, moss, ivy and small toadstool mushrooms with a few glowing fireflies along the top and in the bottom corners. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 
@@ -172,7 +176,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall aged-cream storybook page with a fine ink rule border and only a small ivy sprig with two tiny mushrooms at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall aged-cream storybook page with a fine ink rule border and only a small ivy sprig with two tiny mushrooms at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -180,7 +184,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: an aged-cream book-page card with soft foxing on which four vintage black photo-corner mounts hold the picture rectangle. The window inside is a portrait window (about 3:4) held by the four photo corners, filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: an aged-cream book-page card with soft foxing on which four vintage black photo-corner mounts hold the picture rectangle. The window inside is a portrait window (about 3:4) held by the four photo corners, filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -188,7 +192,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape aged-cream book-page card on which four vintage black photo-corner mounts hold the picture rectangle, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape aged-cream book-page card on which four vintage black photo-corner mounts hold the picture rectangle, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -196,7 +200,7 @@ Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle ayn�
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/decor_tl.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince boşluk; alfa.
 
@@ -204,7 +208,7 @@ Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince bo
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/decor_br.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince boşluk; alfa.
 
@@ -212,7 +216,7 @@ Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince bo
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE small firefly drawn in fine ink and watercolor with a softly lit pale-gold abdomen (no halo or glow outside its body — the website adds the glow), in the same classic storybook ink-and-watercolor illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small firefly drawn in fine ink and watercolor with a softly lit pale-gold abdomen (no halo or glow outside its body — the website adds the glow), in the same classic storybook ink-and-watercolor illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -220,7 +224,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/accent_2.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE small toadstool mushroom with a muted russet-brown cap, in the same classic storybook ink-and-watercolor illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small toadstool mushroom with a muted russet-brown cap, in the same classic storybook ink-and-watercolor illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -228,7 +232,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE curled young fern frond, in the same classic storybook ink-and-watercolor illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE curled young fern frond, in the same classic storybook ink-and-watercolor illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -236,17 +240,17 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/divider.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A small horizontal divider in the same classic storybook ink-and-watercolor illustration style: a horizontal sprig of ivy with two tiny mushrooms and one small firefly, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A small horizontal divider in the same classic storybook ink-and-watercolor illustration style: a horizontal sprig of ivy with two tiny mushrooms and one small firefly, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Website hero (masaüstü üst bant)
+#### W2.17 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/13_Enchanted_Forest/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
-Wide horizontal version of the same design for the desktop website header: dreamy misty forest green gradient (#EDEFE3 to #BFC7A8) with soft glowing firefly bokeh and faint silhouettes of tall trees at the edges, empty center, with ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish framing the left and right edges, and the closed storybook with its brass book clasp resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+Wide horizontal version of the same design for the desktop website header: dreamy misty forest green gradient (#EDEFE3 to #BFC7A8) with soft glowing firefly bokeh and faint silhouettes of tall trees at the edges, empty center, with ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish framing the left and right edges, and the closed storybook with its brass book clasp resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is also cropped to 1200×630 for link previews: keep the closed storybook with its brass book clasp completely visible with at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, colors and light as the W1 screens. No text, no letters.
 ```
-Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
+Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf; zarf + kapanış altta en az %5 boşlukla tam görünür, üst %20 yalnız zemin/dekor (1200×630 kırpımı).
 
 ---
 

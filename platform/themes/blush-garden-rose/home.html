@@ -74,9 +74,12 @@
         <img src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-909.webp 909w" sizes="min(calc(100vw - 32px), 520px)" alt="" loading="lazy">
         <div class="invite-text">
           <p class="kicker" data-step="host" data-a="fade" data-field="host_line" data-if="host_line"></p>
-          <p class="script nm nm1" data-step="name1" data-a="write" data-field="partners.0.full_name"></p>
+          <!-- full name when given, else the first name (full_name may be null: never an empty name line) -->
+          <p class="script nm nm1" data-step="name1" data-a="write" data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
+          <p class="script nm nm1" data-step="name1" data-a="write" data-if="!partners.0.full_name" data-field="partners.0.display_name"></p>
           <p class="amp" data-step="amp" data-a="bloom" aria-hidden="true">&amp;</p>
-          <p class="script nm" data-step="name2" data-a="write" data-field="partners.1.full_name"></p>
+          <p class="script nm" data-step="name2" data-a="write" data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
+          <p class="script nm" data-step="name2" data-a="write" data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
           <p class="request" data-step="request" data-a="fade">request the pleasure of your company at the celebration of their marriage</p>
           <div class="dateblock" data-step="date" data-a="rise">
             <span class="side" data-field="date" data-format="weekday"></span>

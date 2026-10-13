@@ -11,6 +11,7 @@ her format bu metinlerle karşılaştırılmalıdır.
 import json
 import re
 import sys
+import unicodedata
 from datetime import date, time
 from pathlib import Path
 
@@ -28,6 +29,18 @@ WS = "\t\n\v\f\r \x1c\x1d\x1e\x1f\x85\xa0 " + "".join(chr(c) for c in range(0x
 
 def is_blank(value) -> bool:
     return not isinstance(value, str) or value.strip(WS) == ""
+
+
+# Seçenek tekrar denetimi = RSVP sunucusunun eşleştirme kuralı (platform/lib/content/text.ts normalizeLine:
+# NFC, denetim karakterleri silinir, JS \s boşluk dizileri tek boşluk, kenarlar kırpılır) + küçük harf.
+# "Fish  Pie" ile "Fish Pie" sunucuda aynı cevap olarak saklanır; ikisi birden geçmemeli.
+CONTROL_RE = re.compile("[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f\u202a-\u202e\u2066-\u2069]")
+JS_SPACE_RE = re.compile("[\t\n\v\f\r \xa0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+")
+
+
+def choice_key(value: str) -> str:
+    s = CONTROL_RE.sub("", unicodedata.normalize("NFC", value))
+    return JS_SPACE_RE.sub(" ", s).strip(" ").lower()
 
 
 def fmt_date(d: date, locale: str) -> str:
@@ -130,7 +143,7 @@ def rule_errors(record: dict) -> tuple[list[str], list[str]]:
             for j, o in enumerate(options):
                 if is_blank(o):
                     errors.append(f"{at}.options.{j}: boş seçenek")
-            filled = [o.strip(WS).lower() for o in options if not is_blank(o)]
+            filled = [choice_key(o) for o in options if not is_blank(o)]
             if len(filled) < 2:
                 errors.append(f"{at}.options: seçenekli soruda en az 2 seçenek olmalı")
             elif len(set(filled)) != len(filled):

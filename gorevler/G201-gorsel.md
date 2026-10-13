@@ -41,3 +41,4 @@ W2 parçaları ve Paket 2 fotoğrafları sırayla üretilecek; teknik denetimler
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-13 alindi: gpt-gorsel-1
 - 2026-10-13 W1: beş telefon ekranı üretildi; W1.1 ve W1.3 yeniden üretildi, seçilenler sade adla kaydedildi.
+- 2026-10-13 entegratör notu (G046 incelemesi): `GPT_PROMPTS.md` PAKET 5 W2 yeniden üretildi — W2'ye başlamadan dosyayı yeniden oku. W2.4 `closure.png` artık **dalsız** mühür (kareyi ~%50 doldurur); yeni W2.17 `closure_sprig.png` (mührün altındaki zeytin dalı, mührün örttüğü kısım dahil tam, closure.png ile aynı tuvalde hizalı) → W2 18 parça; W2.3/W2.5 kesim kenarı cümleleri, ortak "hâle/ışıma yok" kuralı, W2.18 `web_hero` 1200×630 kırpım kuralı. W1 comp'ları değişmez.

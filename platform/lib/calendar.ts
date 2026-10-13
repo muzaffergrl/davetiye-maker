@@ -137,9 +137,20 @@ export function calendarEvent(content: unknown, opts: CalendarOptions = {}): Cal
 // ---------------------------------------------------------------------------------------------
 // iCalendar (RFC 5545)
 
-/** TEXT value escaping (RFC 5545 §3.3.11). */
+/**
+ * TEXT value escaping (RFC 5545 §3.3.11). TEXT may not hold control characters (CONTROL = %x00-08 / %x0A-1F / %x7F;
+ * content validation accepts them): line breaks pasted from Word/PowerPoint (U+000B), form feed and the Unicode line/
+ * paragraph separators become newlines, every other control character except tab is dropped.
+ */
 export function icsText(value: string): string {
-  return value.replace(/\r\n?/g, '\n').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  return value
+    .replace(/\r\n?/g, '\n')
+    .replace(/[\u000B\u000C\u2028\u2029]/g, '\n')
+    .replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, '')
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\n/g, '\\n');
 }
 
 /** Folds a content line to at most 75 octets per line (RFC 5545 §3.1), never inside a UTF-8 character. */

@@ -5,6 +5,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { CONTENT_SCHEMA } from '../lib/content/schema.ts';
 import { validateContent } from '../lib/content/validate.ts';
+import { parseSubmission } from '../lib/rsvp/validate.ts';
 import {
   formatDate,
   formatDateLong,
@@ -298,6 +299,21 @@ test('G051 rules: blank FAQ text, question ids, choices (at least two, different
     ],
   );
 
+  // review fix: choices the server would store as one answer are duplicates, choices it keeps apart are not
+  const same = withFaqAndQuestions();
+  same.rsvp.questions = [
+    { id: 'pie', label: 'Pie', type: 'choice', options: ['Fish  Pie', 'Fish Pie'] },
+    { id: 'cafe', label: 'Cafe', type: 'choice', options: ['Café', 'Cafe\u0301'] },
+    { id: 'apart', label: 'Apart', type: 'choice', options: ['Fish Pie', 'FishPie', 'Fish-Pie'] },
+  ];
+  assert.deepEqual(
+    validateContent(same).errors.map((e) => [e.code, e.path]),
+    [
+      ['rsvp_question_option_duplicate', 'rsvp.questions.0.options'],
+      ['rsvp_question_option_duplicate', 'rsvp.questions.1.options'],
+    ],
+  );
+
   const on = demoContent();
   on.optional_blocks.faq = true;
   assert.deepEqual(codes(validateContent(on), 'warnings'), ['faq_empty'], 'block on without questions: a warning only');
@@ -329,6 +345,12 @@ test('G051 pass/fail parity with tools/validate_content.py (FAQ and RSVP questio
   add('q-blank-label', (c) => (c.rsvp.questions[0].label = ' '));
   add('q-one-option', (c) => (c.rsvp.questions[0].options = ['Fish']));
   add('q-dup-option', (c) => (c.rsvp.questions[0].options = ['Fish', 'FISH ']));
+  // review fix: the duplicate key is the RSVP server's matching rule (inner spaces, NFC/NFD, control characters)
+  add('q-dup-option-inner-ws', (c) => (c.rsvp.questions[0].options = ['Fish  Pie', 'Fish Pie']));
+  add('q-dup-option-nbsp', (c) => (c.rsvp.questions[0].options = ['Fish\u00a0Pie', 'Fish Pie']));
+  add('q-dup-option-nfd', (c) => (c.rsvp.questions[0].options = ['Café', 'Cafe\u0301']));
+  add('q-dup-option-control', (c) => (c.rsvp.questions[0].options = ['Fish\u0007', 'Fish']));
+  add('q-dup-option-bidi', (c) => (c.rsvp.questions[0].options = ['Fi\u202esh', 'Fish']));
   add('q-blank-option', (c) => c.rsvp.questions[0].options.push('  '));
   add('q-text-options', (c) => (c.rsvp.questions[1].options = ['x']));
   add('q-type', (c) => (c.rsvp.questions[0].type = 'menu'));
@@ -347,4 +369,25 @@ test('G051 pass/fail parity with tools/validate_content.py (FAQ and RSVP questio
   }
   const passing = cases.filter(([, r]) => validateContent(r).ok).map(([n]) => n);
   assert.deepEqual(passing, ['ok', 'faq-on-empty', 'faq-zero-width-space'], 'both outcomes are exercised');
+});
+
+test('G051 choices that pass validation stay distinct answers on the RSVP server', () => {
+  const pairs: string[][] = [
+    ['Fish  Pie', 'Fish Pie'],
+    ['Café', 'Cafe\u0301'],
+    ['Fish\u0007', 'Fish'],
+    ['Fish\u00a0Pie', 'Fish Pie'],
+    ['Fish Pie', 'FishPie', 'Fish-Pie', 'fish pie!'],
+  ];
+  for (const options of pairs) {
+    const c = withFaqAndQuestions();
+    c.rsvp.questions = [{ id: 'meal', label: 'Meal', type: 'choice', options }];
+    if (!validateContent(c).ok) continue; // rejected as duplicates: nothing reaches the server
+    const stored = options.map((pick) => {
+      const r = parseSubmission({ name: 'Guest', attending: 'yes', answers: { meal: pick } }, 10, c.rsvp.questions!);
+      assert.equal(r.ok, true, `pick ${JSON.stringify(pick)} accepted`);
+      return r.ok ? r.value.answers?.[0]?.answer : null;
+    });
+    assert.equal(new Set(stored).size, options.length, `${JSON.stringify(options)} stored as ${JSON.stringify(stored)}`);
+  }
 });

@@ -17,6 +17,7 @@
 
 import type { RsvpQuestion } from '../content/types.ts';
 import type { RsvpAnswer, RsvpInput } from '../data/types.ts';
+import { CONTROL_RE, normalizeLine } from '../content/text.ts';
 import { ANSWER_MAX, EMAIL_MAX, HONEYPOT_FIELD, MESSAGE_MAX, NAME_MAX } from './config.ts';
 
 export type RsvpField = 'name' | 'email' | 'attending' | 'guests' | 'message' | `answer:${string}`;
@@ -28,8 +29,6 @@ export type ParsedSubmission =
 /** Form field name of a question's answer (also the key of its error). */
 export const answerField = (id: string): `answer:${string}` => `answer:${id}`;
 
-// C0/C1 controls except tab and newline, plus bidi overrides/isolates (text spoofing in lists and CSV).
-const CONTROL_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F‪-‮⁦-⁩]/g;
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:".]{2,}$/;
 
 function text(value: unknown): string | null {
@@ -38,11 +37,11 @@ function text(value: unknown): string | null {
   return value;
 }
 
-/** One-line text: NFC, no control characters, runs of whitespace collapsed, trimmed. */
+/** One-line text: NFC, no control characters, runs of whitespace collapsed, trimmed (lib/content/text.ts). */
 export function cleanLine(value: unknown): string {
   const s = text(value);
   if (s === null) return '';
-  return s.normalize('NFC').replace(CONTROL_RE, '').replace(/\s+/g, ' ').trim();
+  return normalizeLine(s);
 }
 
 /** Multi-line text: NFC, CRLF -> LF, no control characters except tab/newline, trimmed. */

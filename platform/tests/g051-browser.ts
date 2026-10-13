@@ -186,6 +186,13 @@ try {
     check('details: a tap opens the answer', first.open && first.visible, JSON.stringify(first));
     check('details: the answer keeps its line break (two lines)', first.lines >= 2 && first.text.includes('\n'), `${first.lines} lines`);
     check('details: answer text inside 390 px', first.right <= 390, String(first.right));
+    // accessibility tree: the "+" glyph (CSS ::after) must not be read as part of the question
+    const names = await page.evaluate(() => Array.from(document.querySelectorAll('.faq-item summary .faq-q')).map((q) => q.textContent!.trim()));
+    const cdp = await page.context().newCDPSession(page);
+    const { nodes } = await cdp.send('Accessibility.getFullAXTree');
+    const axNames = nodes.filter((n: any) => n.role?.value === 'DisclosureTriangle').map((n: any) => String(n.name?.value ?? '').trim());
+    await cdp.detach();
+    check('details: each question\'s accessible name is the question text only (no "+")', axNames.length === 3 && JSON.stringify(axNames) === JSON.stringify(names), JSON.stringify(axNames));
     const glyph = await page.evaluate(() => getComputedStyle(document.querySelector('.faq-item summary')!, '::after').transform);
     check('details: the "+" turns into "×" when open', glyph !== 'none', glyph);
     await page.locator('.faq-item:nth-child(3) summary').tap();

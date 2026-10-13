@@ -504,7 +504,9 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary::after {
-  content: "+"; flex: none; width: 24px; text-align: center;
+  /* empty alt text: the glyph is not part of the question's accessible name ("Is there parking?", not "… plus");
+     the first declaration is the fallback for browsers without alt text in `content` */
+  content: "+"; content: "+" / ""; flex: none; width: 24px; text-align: center;
   font-family: var(--display); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-ink);
   transition: transform .3s var(--ease-out);
 }

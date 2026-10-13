@@ -51,6 +51,10 @@ On tap, the olive sprig slides out from under the oval seal, the lace-edged flap
 - **ONE object per image** — never a sheet or set of several objects in one image.
 - **No cast shadow and no drop shadow** on any part (the website adds its own shadows). Light every part the same
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
+- **No glow, halo, light rays or haze outside an object's outline** (the website adds light effects); a
+  semi-transparent halo leaves a dirty edge on another background.
+- Edges Claude will cut along (the flap's free edge, a door seam, a book's spine and cover edge, a pouch mouth, a
+  pocket's top edge) are **crisp lines with a slight contact shade on the object itself** — never a cast shadow.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
 - envelope_closed.png and envelope_open.png must fit together exactly: the SAME
@@ -110,7 +114,7 @@ Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı olive envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -132,31 +136,31 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same olive envelope as in the W1 screens, alone and closed, WITHOUT the oval botanical seal: an olive-green (#7D8B5A) textured cotton-paper envelope with soft visible fibers, about 5:4 wider than tall, with a deep pointed V flap whose edge is trimmed with a narrow band of fine ivory lace. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same olive envelope as in the W1 screens, alone and closed, WITHOUT the oval botanical seal: an olive-green (#7D8B5A) textured cotton-paper envelope with soft visible fibers, about 5:4 wider than tall, with a deep pointed V flap whose edge is trimmed with a narrow band of fine ivory lace. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. The edges where this piece will be cut must read clearly: the free edge of the flap — a crisp line with a slight contact shade on the object itself (not a cast shadow). Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: tek nesne; oval botanical seal yok; kesilmemiş; gölge yok; gerçek alfa.
+Kontrol: tek nesne; oval botanical seal yok; kesilmemiş; gölge yok; gerçek alfa; kesilecek kenar net çizgi (nesnenin kendi üstünde ince temas gölgesi).
 
 #### W2.4 Kapanış elemanı (tek başına)
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only an oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms, a short olive sprig tucked under it, alone, exactly as it sits on the olive envelope in the W1 screens (pressed onto the tip of the V flap, a little below the envelope's center), drawn large so it fills about 70% of the square (Claude scales it to the olive envelope), with the same perspective, material and light as on the olive envelope and with no olive envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only the oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms — WITHOUT the olive sprig that is tucked under it in the W1 screens (the sprig is a separate image, closure_sprig.png), alone, exactly as it sits on the olive envelope in the W1 screens (pressed onto the tip of the V flap, a little below the envelope's center), drawn large so it fills about 50% of the square (Claude scales it to the olive envelope), with the same perspective, material and light as on the olive envelope and with no olive envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız oval botanical seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
+Kontrol: yalnız oval botanical seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%50 dolduruyor; gölge yok; alfa; zeytin dalı YOK (ayrı parça: closure_sprig.png); kare kenarlarında dal için boşluk var.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME olive envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the lace-edged V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — a warm ivory (#FBF8F0) liner with a fine hand-drawn olive-branch repeat in pale sage (#A8B28A); the front pocket empty. No card, nothing inside, no oval botanical seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME olive envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the lace-edged V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — a warm ivory (#FBF8F0) liner with a fine hand-drawn olive-branch repeat in pale sage (#A8B28A); the front pocket empty. The top edge of the front pocket is a crisp, clearly visible edge against the liner. No card, nothing inside, no oval botanical seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
+Kontrol: envelope_closed ile aynı ölçü, konum ve açı — envelope_closed üstüne yarı saydam konunca değişmeyen gövde çakışıyor; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
 #### W2.6 Zarftan çıkan küçük kart (boş)
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the olive envelope in W1.2, alone: a small warm-ivory card with softly rounded corners and a fine antique-gold double border, a rounded-corner portrait photo window in its upper 60% and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the olive envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the olive envelope in W1.2, alone: a small warm-ivory card with softly rounded corners and a fine antique-gold double border, a rounded-corner portrait photo window in its upper 60% and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the olive envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -164,7 +168,7 @@ Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak geniş
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The large invitation card of this design, alone: a tall warm-ivory cotton card with softly rounded corners and a fine antique-gold double border, a slender watercolor olive branch with silvery leaves and small dark olives arching across the top-left corner and a smaller sprig at the bottom-right. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The large invitation card of this design, alone: a tall warm-ivory cotton card with softly rounded corners and a fine antique-gold double border, a slender watercolor olive branch with silvery leaves and small dark olives arching across the top-left corner and a smaller sprig at the bottom-right. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 
@@ -172,7 +176,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall warm-ivory card with softly rounded corners, a fine antique-gold double border and only one small olive sprig at the top center. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall warm-ivory card with softly rounded corners, a fine antique-gold double border and only one small olive sprig at the top center. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -180,7 +184,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a portrait ivory card frame with softly rounded corners, a fine antique-gold double border and a slim ivory margin, a tiny watercolor olive sprig tucked at its bottom-left corner. The window inside is a portrait window with softly rounded corners (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a portrait ivory card frame with softly rounded corners, a fine antique-gold double border and a slim ivory margin, a tiny watercolor olive sprig tucked at its bottom-left corner. The window inside is a portrait window with softly rounded corners (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -188,7 +192,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape version of the same rounded-corner ivory card frame with the fine antique-gold double border and a tiny olive sprig at its bottom-left corner, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape version of the same rounded-corner ivory card frame with the fine antique-gold double border and a tiny olive sprig at its bottom-left corner, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -196,7 +200,7 @@ Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle ayn�
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/decor_tl.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince boşluk; alfa.
 
@@ -204,7 +208,7 @@ Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince bo
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/decor_br.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince boşluk; alfa.
 
@@ -212,7 +216,7 @@ Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince bo
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE silvery-green olive leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE silvery-green olive leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -220,7 +224,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/accent_2.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE small ripe dark olive with a short stem and one tiny leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small ripe dark olive with a short stem and one tiny leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -228,7 +232,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE tiny white jasmine blossom, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE tiny white jasmine blossom, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -236,17 +240,25 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/divider.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A small horizontal divider in the same soft watercolor style: a single slender olive sprig with five leaves and two small olives, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A small horizontal divider in the same soft watercolor style: a single slender olive sprig with five leaves and two small olives, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Website hero (masaüstü üst bant)
+#### W2.17 Mührün altındaki zeytin dalı (tek başına, açılışta kayar)
+**Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/closure_sprig.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+The short olive sprig that is tucked under the oval seal on the olive envelope in the W1 screens, alone and COMPLETE — including the part of its stem and leaves that the seal hides there, as if the seal had been lifted off it. The seal itself is NOT drawn. Draw it on a square canvas exactly like closure.png and give closure.png as the reference image: same scale, and placed exactly where the sprig lies under the seal there, so that closure.png laid on top of this image covers the middle of the sprig pixel for pixel. The whole sprig stays inside the square with an empty margin. Same watercolor technique, colors and light as the W1 screens. Front view, perfectly straight, not cropped. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: yalnız dal (mühür yok); mührün altında kalan sap ve yapraklar da çizili; closure.png üstüne konunca mühür dalın ortasını örtüyor; kareden taşmıyor; gölge yok; alfa.
+
+#### W2.18 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
-Wide horizontal version of the same design for the desktop website header: soft warm ivory-to-pale-olive gradient (#F1EFE6 to #DCD9C6) with faint linen grain and a few very soft out-of-focus sunlight flecks, with slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms framing the left and right edges, and the closed olive envelope with its oval botanical seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+Wide horizontal version of the same design for the desktop website header: soft warm ivory-to-pale-olive gradient (#F1EFE6 to #DCD9C6) with faint linen grain and a few very soft out-of-focus sunlight flecks, with slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms framing the left and right edges, and the closed olive envelope with its oval botanical seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is also cropped to 1200×630 for link previews: keep the closed olive envelope with its oval botanical seal completely visible with at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, colors and light as the W1 screens. No text, no letters.
 ```
-Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
+Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf; zarf + kapanış altta en az %5 boşlukla tam görünür, üst %20 yalnız zemin/dekor (1200×630 kırpımı).
 
 ---
 

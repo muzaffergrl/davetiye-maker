@@ -76,3 +76,4 @@ canlı Vercel'de yayın (yayın yapılmadı; push yayın yapmaz).
 ## Günlük
 - 2026-10-13 alindi: wf-tema
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme bulguları düzeltildi (wf-fix-tema): `.ics` metninde denetim karakteri yok (U+000B/000C/2028/2029 → satır sonu, kalanı silinir; calendar.test.ts); seçenek tekrar denetimi sunucunun eşleştirme kuralıyla aynı (`lib/content/text.ts` `normalizeLine` — NFC, iç boşluk, denetim karakteri — TS + Python, eşlik vakaları + 'geçen seçenekler sunucuda ayrı cevap' testi); SSS "+" erişilebilir ada girmiyor (`content: "+" / ""`, g051-browser AX ağacı denetimi); 03 davet kartında tam ad yoksa ilk ad; `.cd-*` CSS çerçeve yok testi; site.js başlığı/tema README G4NN'yi docs/11'e yönlendiriyor. npm test 230/230, typecheck temiz, build + trace-check (17 rota); g051-browser 44/44, theme-check 69/69, final-smoke 42/42 (görüntüler geçici klasöre). Gerçek telefon ve canlı yayın denenmedi.

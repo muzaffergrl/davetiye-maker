@@ -36,14 +36,16 @@ oturması gereken parçalar tek görselden kesilir).
   kenarı, gatefold dikişi, kitap kenarı/sırtı, kese ağzı, ön cep kenarı; nesne üstündeki temas gölgesi serbest), **ışıma/hâle yok**,
   **`web_hero` = paylaşım görseli** (zarf + kapanış altta boşlukla tam, üst %20 sakin).
 - Parça listesi kararı: PAKET 5'in 17 parçası (+ tasarıma özel ekler) her temanın ihtiyacını karşılıyor; 03'ün kullandığı her
-  görselin karşılığı var. **Yeni dosya gerekmiyor; eksikler kural** (yukarıdaki 4 madde).
+  görselin karşılığı var. **Yeni dosya gerekmiyor; eksikler kural** (yukarıdaki 4 madde). *(İnceleme düzeltmesi: genel liste
+  için doğru, ama 01'in açılışı mührün altından kayan dalı ayrı parça olarak istiyor → `closure_sprig.png` eklendi; docs/11 §5.1.)*
 
 **Kontrol edilen / ölçülen:** 03 teması dosya boyları (site.js 28 KB, site.css 38 KB, klasör 2,7 MB, en büyük WebP'ler) ve
 `previews/g038/checks.json` (ilk görünüm index 1018 KB / home 706 KB, açılış 4451 ms) belgeye bu değerlerle girdi. 03'ün
 `web_hero.png`'sine 1.91:1 kırpım çizgileri çizilip gözle bakıldı: alt hizalı kırpımda zarf + fiyonk tam kalıyor (og dosyası
 üretilmedi). Motor davranışları kaynaktan doğrulandı: `og:image` `origin` ile mutlak oluyor, `<link href>` tema yoluna çevriliyor,
 `data-format="amp"` var, `site-data.pages` kapalı sayfaları da içeriyor, `themeFieldUse` an sayısını işaretlerden okuyor.
-19 koleksiyonun hiçbirinde henüz PAKET 5 parçası yok (G2NN bekliyor) → prompt düzeltmeleri şimdi ucuz.
+19 koleksiyonun hiçbirinde henüz PAKET 5 W2 parçası yok → prompt düzeltmeleri şimdi ucuz. *(İnceleme düzeltmesi: 01'de W1
+comp'ları var — G201 `alindi`, 44a30ab; W2 henüz başlamadı.)*
 
 **Denenmedi / sınırlar (dürüst):** belge bir standart; gatefold, kitap, kese ve kılıf açılışları ile genel eğri kapak/kese ağzı
 kesimleri **uygulanmadı, tarayıcıda denenmedi** — `rotateY` yön tablosu CSS dönüşüm matematiğinden çıkarıldı, yalnız kapak
@@ -51,7 +53,8 @@ kesimleri **uygulanmadı, tarayıcıda denenmedi** — `rotateY` yön tablosu CS
 hedeflerdir, başka tasarımda ölçülmedi. Kod değişmedi; yine de `platform/`'da `npm test` (197/197 geçti), `npm run typecheck` (temiz),
 `npm run build` (+ trace-check: 16 rota, 2 tema) koşuldu. Playwright `theme-check` koşulmadı (tema değişmedi).
 
-**Önerilen prompt düzeltmeleri** (`tools/katalog.py` ortak metinleri ya da `ZARF_TIPI`, sonra `python3 tools/katalog.py paket5`;
+**Önerilen prompt düzeltmeleri** — *G046 incelemesinde dördü de uygulandı (`tools/katalog.py` `ISIK`, `KESIM_KENARI`, W2.3/W2.5/
+web_hero, ortak talimat; 19 `GPT_PROMPTS.md` yeniden üretildi)* (`tools/katalog.py` ortak metinleri ya da `ZARF_TIPI`, sonra `python3 tools/katalog.py paket5`;
 19 dosya elle düzenlenmedi):
 1. W2.3 `envelope_closed` (bütün tipler): *"The edges where this piece will be cut must read clearly: the free edge of the flap
    (folder: the center seam where the two doors meet; book: the cover's outer edge and the spine; pouch: the gathered mouth) is a
@@ -80,3 +83,4 @@ hedeflerdir, başka tasarımda ölçülmedi. Kod değişmedi; yine de `platform/
 ## Günlük
 - 2026-10-13 alindi: wf-tema
 - 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme bulguları düzeltildi (wf-fix-tema): docs/11 G051 işaretleri zorunlu (§3.2/§3.3/§3.5, test 18–22, §15), öncelik satırı (görev metni < docs/11, G035 örnek değil), tam ad yedeği, guest_policy yok + mühür monogramı kararı, tipe göre hiza kenarları, sahne kutusu/boyu formülü + kapı/kitap ölçeği, kapanış çapası, kapakla taşınan kapanış, MOTION.accents biçimi, comp öğe haritası + qa kapısı, CSS çerçeve yasağı, 3 dilim/≥38vw, zorlama kaydı, saf yardımcılar, parts_prep cep uyarısı, fotoğraflı ölçüm; katalog: G4NN şablonu (yazar + test/previews, bağımlı G052, img_src/ölü link/03 kopyası kalktı) → 19 görev, 4 prompt düzeltmesi + 01 closure_sprig + 04 kesim kenarı → 19 GPT_PROMPTS.md; açıldı G052 (theme-check --theme), G053 (demo kayıtları); G201'e not. Ürün kararı açık: şema/panel uzunluk sınırları (docs/11 §14 #10).

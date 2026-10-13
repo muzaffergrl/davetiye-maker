@@ -51,6 +51,10 @@ On tap, the wildflower label peels away, the frosted vellum sleeve slides down o
 - **ONE object per image** — never a sheet or set of several objects in one image.
 - **No cast shadow and no drop shadow** on any part (the website adds its own shadows). Light every part the same
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
+- **No glow, halo, light rays or haze outside an object's outline** (the website adds light effects); a
+  semi-transparent halo leaves a dirty edge on another background.
+- Edges Claude will cut along (the flap's free edge, a door seam, a book's spine and cover edge, a pouch mouth, a
+  pocket's top edge) are **crisp lines with a slight contact shade on the object itself** — never a cast shadow.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
 - envelope_closed.png and envelope_open.png must fit together exactly: the SAME
@@ -132,7 +136,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same vellum sleeve as in the W1 screens, alone and closed, WITHOUT the wildflower label: a portrait sleeve of frosted vellum, milky white and evenly semi-opaque, with softly folded side edges and an open top edge, completely EMPTY: no card inside and nothing showing through (the website places card_small.png behind it). If real partial transparency is not possible, render it solid milky white with a soft frosted texture; Claude sets the opacity in CSS. Horizontally centered, its bottom edge at about 90% of the image height and its width about 70% of the image width; the empty upper part is left for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same vellum sleeve as in the W1 screens, alone and closed, WITHOUT the wildflower label: a portrait sleeve of frosted vellum, milky white and evenly semi-opaque, with softly folded side edges and an open top edge, completely EMPTY: no card inside and nothing showing through (the website places card_small.png behind it). If real partial transparency is not possible, render it solid milky white with a soft frosted texture; Claude sets the opacity in CSS. Horizontally centered, its bottom edge at about 90% of the image height and its width about 70% of the image width; the empty upper part is left for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; wildflower label yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -140,7 +144,7 @@ Kontrol: tek nesne; wildflower label yok; kesilmemiş; gölge yok; gerçek alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small round cream paper sticker label with a deckled edge, showing a tiny colored-pencil poppy, cornflower and daisy, no text, alone, exactly as it sits on the vellum sleeve in the W1 screens (centered horizontally on the front of the sleeve, just below its open top edge), drawn large so it fills about 70% of the square (Claude scales it to the vellum sleeve), with the same perspective, material and light as on the vellum sleeve and with no vellum sleeve behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small round cream paper sticker label with a deckled edge, showing a tiny colored-pencil poppy, cornflower and daisy, no text, alone, exactly as it sits on the vellum sleeve in the W1 screens (centered horizontally on the front of the sleeve, just below its open top edge), drawn large so it fills about 70% of the square (Claude scales it to the vellum sleeve), with the same perspective, material and light as on the vellum sleeve and with no vellum sleeve behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: yalnız wildflower label; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
@@ -148,15 +152,15 @@ Kontrol: yalnız wildflower label; harf/monogram yok; zarftakiyle aynı görün�
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME vellum sleeve as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the same empty frosted sleeve, its open top edge gently flared. No card, nothing inside, no wildflower label. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME vellum sleeve as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the same empty frosted sleeve, its open top edge gently flared. No card, nothing inside, no wildflower label. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
+Kontrol: envelope_closed ile aynı ölçü, konum ve açı — envelope_closed üstüne yarı saydam konunca değişmeyen gövde çakışıyor; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
 #### W2.6 Zarftan çıkan küçük kart (boş)
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the vellum sleeve in W1.2, alone: a small soft-white cotton card with a portrait photo window in its upper part and a colorful colored-pencil wildflower border (poppies, cornflowers, daisies) along its lower edge, the area between blank. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the vellum sleeve so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the vellum sleeve in W1.2, alone: a small soft-white cotton card with a portrait photo window in its upper part and a colorful colored-pencil wildflower border (poppies, cornflowers, daisies) along its lower edge, the area between blank. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the vellum sleeve so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -164,7 +168,7 @@ Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak geniş
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The large invitation card of this design, alone: a tall soft-white cotton card with detailed colored-pencil wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — growing up from the bottom edge and a few stems along the top-right. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The large invitation card of this design, alone: a tall soft-white cotton card with detailed colored-pencil wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — growing up from the bottom edge and a few stems along the top-right. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 
@@ -172,7 +176,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall soft-white cotton card with only a small spray of a poppy and a cornflower at the bottom-left. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall soft-white cotton card with only a small spray of a poppy and a cornflower at the bottom-left. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -180,7 +184,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a soft-white cotton photo card with a slim margin around the window and a thin colored-pencil wildflower border along its lower edge. The window inside is a portrait window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a soft-white cotton photo card with a slim margin around the window and a thin colored-pencil wildflower border along its lower edge. The window inside is a portrait window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -188,7 +192,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape soft-white cotton photo card with a slim margin around the window and a thin colored-pencil wildflower border along its lower edge, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape soft-white cotton photo card with a slim margin around the window and a thin colored-pencil wildflower border along its lower edge, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -196,7 +200,7 @@ Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle ayn�
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/florals_tl.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince boşluk; alfa.
 
@@ -204,7 +208,7 @@ Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince bo
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/florals_br.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince boşluk; alfa.
 
@@ -212,7 +216,7 @@ Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince bo
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE red poppy petal, in the same colored-pencil botanical illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE red poppy petal, in the same colored-pencil botanical illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -220,7 +224,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/accent_2.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE small blue cornflower head, in the same colored-pencil botanical illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small blue cornflower head, in the same colored-pencil botanical illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -228,7 +232,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE white field daisy, in the same colored-pencil botanical illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE white field daisy, in the same colored-pencil botanical illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -236,7 +240,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/divider.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A small horizontal divider in the same colored-pencil botanical illustration style: a horizontal spray of a poppy, a cornflower and two grass stems in the same style, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A small horizontal divider in the same colored-pencil botanical illustration style: a horizontal spray of a poppy, a cornflower and two grass stems in the same style, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
@@ -244,17 +248,17 @@ Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/vellum_overlay.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-A single sheet of translucent frosted vellum paper with exactly the size and proportion of the portrait photo card (frame_portrait.png), milky white and mostly opaque (about 80%), soft white wildflower silhouettes printed along its edges, a plain frosted center and straight clean edges. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A single sheet of translucent frosted vellum paper with exactly the size and proportion of the portrait photo card (frame_portrait.png), milky white and mostly opaque (about 80%), soft white wildflower silhouettes printed along its edges, a plain frosted center and straight clean edges. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek yaprak; frame_portrait ile aynı oran; kenarda beyaz çiçek siluetleri; alfa (tam opak çıkarsa Claude CSS ile saydamlık verir).
 
-#### W2.18 Website hero (masaüstü üst bant)
+#### W2.18 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
-Wide horizontal version of the same design for the desktop website header: bright airy cream-to-pale-meadow-green gradient (#FBFAF4 to #E8EBDC) with soft blurred wildflower colors at the very bottom edge, empty center, with colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration framing the left and right edges, and the closed vellum sleeve with its wildflower label resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+Wide horizontal version of the same design for the desktop website header: bright airy cream-to-pale-meadow-green gradient (#FBFAF4 to #E8EBDC) with soft blurred wildflower colors at the very bottom edge, empty center, with colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration framing the left and right edges, and the closed vellum sleeve with its wildflower label resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is also cropped to 1200×630 for link previews: keep the closed vellum sleeve with its wildflower label completely visible with at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, colors and light as the W1 screens. No text, no letters.
 ```
-Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
+Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf; zarf + kapanış altta en az %5 boşlukla tam görünür, üst %20 yalnız zemin/dekor (1200×630 kırpımı).
 
 ---
 

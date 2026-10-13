@@ -27,7 +27,7 @@ node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek
 NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts   # build sonrası: son duman testi, 390 px, gerçek tema — misafir (zarf → home →
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts   # build sonrası: G051, 390 px, gerçek tema — takvim düğmeleri + .ics,
-                       # SSS akordeonu (dokun/klavye), RSVP özel soruları (evet/hayır, hata), CSV sütunları, panel düzenleyicileri (43 kontrol;
+                       # SSS akordeonu (dokun/klavye), RSVP özel soruları (evet/hayır, hata), CSV sütunları, panel düzenleyicileri (44 kontrol;
                        # ekran görüntüleri $G051_SHOTS_DIR, varsayılan geçici klasör)
 ```
 
@@ -285,7 +285,7 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
 - **G051:** "Add to your calendar" — davet kartının altında (home) ve Order of the Day kartının altında (details) iki küçük `.btn-ghost`
   hap: "Apple / Outlook" (`data-calendar="ics"`) ve "Google" (`data-calendar="google"`, yeni sekme); Details'te mekândan sonra
   **Questions & Answers** (`data-optional="faq" data-if="faq"`, `<details data-repeat="faq">`: JS'siz açılır-kapanır, 1 px altın çizgiler,
-  "+" → "×" yazı glifi; yanıtta satır sonu korunur); RSVP formunda konuk sayısının altında çiftin soruları (`.questions`,
+  "+" → "×" yazı glifi — `content: "+" / ""` ile erişilebilir ada girmez; yanıtta satır sonu korunur); RSVP formunda konuk sayısının altında çiftin soruları (`.questions`,
   `data-rsvp-if-attending`: "Will you attend?" ile aynı haplar / kısa yanıt kutusu). Yeni görsel yok: başlık Great Vibes, ayraç GPT
   `divider` parçası; sıralama `MOTION` (`home-invite.cal`, `details-card.cal`, `details-faq`).
 - **RSVP teşekkürü:** yanıt gönderilince alttaki kapanış ("Thank you / We can't wait to celebrate with you.") gizlenir (site.js
@@ -302,11 +302,11 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
   düğmesi forma kaydırır, teşekkür/kapalı/hata/önizleme panelleri temanın tipografisinde.
 - **Görseller:** `python3 platform/themes/blush-garden-rose/build_images.py` (GPT parçaları → `img/`, önce
   `tools/parts_prep.py`; pencerelerin tam şeffaflığını ve görünür #00FF00 kalmadığını kendisi denetler).
-- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (18 test; G051: takvim linkleri, SSS akordeonu + kapalıyken kaynakta yok,
+- **Doğrulama:** `tests/theme-blush-garden-rose.test.ts` (20 test; G051: takvim linkleri, SSS akordeonu + kapalıyken kaynakta yok,
   özel sorular formda; ayrıca: kapalı bölümler hiçbir sayfa kaynağında yok, yanıtlar
   kapalıyken RSVP yok, önizleme-dışı etiket, alt metin, yorum yok; alanlar = içerik kaydı, içerik değişikliği, foto
   durumları, isteğe bağlı bloklar, linkler, RSVP form sözleşmesi, önizleme anahtarı, site.js sözleşmesi, gerçek rotalar +
-  RSVP API'siyle kayıt) ve
+  RSVP API'siyle kayıt; inceleme: tam ad yoksa davet kartında ilk ad, geri sayımda CSS çerçeve yok) ve
   `scripts/theme-check.cjs` (Playwright, `next start`: 5 sayfa × 360/390/430/768/1280 taşma/metin/görsel/kart serbest
   bölgesi, zarf → home → story akışı, geri/replay, Skip, reduced motion, önizleme anahtarı, site başına oturum, sayaç,
   eksik link hiçbir şey göndermiyor, RSVP yanıtı bu siteye kaydediliyor ve önizlemede hiçbir şey gönderilmiyor, veri
@@ -706,7 +706,8 @@ Etsy araştırmasında (`docs/13` §7) rakiplerde standart olup lisans/karar ger
   `UID:<slug>@<host>` (sabit: yeniden içe aktarılınca aynı kayıt güncellenir), `DTSTAMP`/`LAST-MODIFIED` = yayın zamanı, `DTSTART`/`DTEND`
   **UTC** (`…Z`; VTIMEZONE gerekmez), `SUMMARY` ("Clara & Julian’s Wedding"; engagement → "… Engagement Party", bridal_shower →
   "… Bridal Shower", other → yalnız isimler), `LOCATION` (mekân, adres, şehir/bölge/ülke), `DESCRIPTION` (program "Order of the day
-  (America/New York time):" + satırlar, dress code yalnız bloğu açıksa, "Website: <adres>"), `URL`. TEXT kaçışı (`\\ ; , \n`), satırlar
+  (America/New York time):" + satırlar, dress code yalnız bloğu açıksa, "Website: <adres>"), `URL`. TEXT kaçışı (`\\ ; , \n`); denetim karakteri yazılmaz (U+000B/000C/2028/2029 → satır sonu, sekme dışındakiler silinir — Word'den
+  yapıştırılan adres), satırlar
   75 oktette katlanır (UTF-8 karakter bölünmez), CRLF.
 - **Saatler** (şemada bitiş saati yok; kural burada): başlangıç = `ceremony_time`, yoksa programın en erken saati; bitiş = başlangıçtan
   sonraki son program saati **+ 2 saat** (`END_AFTER_LAST_MS`; en az başlangıç + 2 saat). Duvar saati → UTC `zonedTimeToUtc` ile
@@ -729,21 +730,22 @@ Etsy araştırmasında (`docs/13` §7) rakiplerde standart olup lisans/karar ger
 
 ### RSVP özel soruları
 - Şema: `rsvp.questions: [{id, label, type: "choice"|"text", options?: string[]}]` (en çok 3; `label` ≤ 120; ≤ 8 seçenek, her biri ≤ 60).
-  İş kuralı: `id` = `[a-z0-9][a-z0-9_-]{0,23}` ve tekil; boş soru metni hata; `choice` en az 2 dolu ve birbirinden farklı (büyük/küçük
-  harf duyarsız) seçenek, boş seçenek hata; `text` seçeneksiz. Panel id'yi kendisi üretir (`q` + 6 karakter, `newQuestionId`) ve
+  İş kuralı: `id` = `[a-z0-9][a-z0-9_-]{0,23}` ve tekil; boş soru metni hata; `choice` en az 2 dolu ve birbirinden farklı seçenek
+  (fark = sunucunun cevabı eşleştirdiği kural: `lib/content/text.ts` `normalizeLine` — NFC, denetim karakterleri silinir, iç boşluklar
+  teke iner — + büyük/küçük harf duyarsız; "Fish  Pie"/"Fish Pie" ya da NFC/NFD "Café" aynı seçenektir, iki dilde aynı), boş seçenek hata; `text` seçeneksiz. Panel id'yi kendisi üretir (`q` + 6 karakter, `newQuestionId`) ve
   hiç değiştirmez: cevaplar id ile saklandığı için soru metnini değiştirmek/sıralamak eski cevapları karıştırmaz.
 - Misafir formu, saklama, API, CSV: yukarıda "RSVP" (`answers`, `answer:<id>`, CSV sütunları). Geriye uyum: eski yanıtlar `answers`
   alanı olmadan okunur (listede `answers: []`, CSV'de boş hücre); sorusuz sitenin CSV'si değişmedi.
 - Panel: RSVP bölümünde "Questions for your guests" (yalnız tema `rsvp.questions` listesini gösteriyorsa); yanıt listesinde cevaplar.
 
 ### Testler
-`tests/calendar.test.ts` (12: saat dilimleri — EST/EDT, BST/GMT, AEST/AEDT, +05:30, yaz saati boşluğu, gece yarısını geçen akşam —,
-tüm gün, floating, başlık, gizlilik, kaçış/katlama, dosya yapısı, Google linki, motor işareti, rota: yayında/taslak/önizleme/yayından
+`tests/calendar.test.ts` (13: saat dilimleri — EST/EDT, BST/GMT, AEST/AEDT, +05:30, yaz saati boşluğu, gece yarısını geçen akşam —,
+tüm gün, floating, başlık, gizlilik, kaçış/katlama, denetim karakterleri, dosya yapısı, Google linki, motor işareti, rota: yayında/taslak/önizleme/yayından
 kaldırılmış/bilinmeyen/ayrılmış/büyük harf, demo rotası) · `content.test.ts` (şema sınırları, kurallar, Python eşliği) · `rsvp.test.ts`
 (cevap doğrulama, "no" cevap saklamaz, CSV sütunları + silinen soru + formül koruması) · `rsvp-api.test.ts` (uçtan uca: eski yanıt,
 cevaplı yanıt, ret, geçersiz seçenek 400, çift gönderim, liste, yeniden adlandırılan/silinen soru CSV'si) · `adapter.test.ts` (local + blob
 `answers` saklama) · `panel.test.ts` (taslak/yayın, yapı reddi, notlar, id) · `theme-blush-garden-rose.test.ts` (3) ·
-**tarayıcı:** `tests/g051-browser.ts` (390 px, 43 kontrol; yukarıda "Çalıştırma").
+**tarayıcı:** `tests/g051-browser.ts` (390 px, 44 kontrol; yukarıda "Çalıştırma").
 
 Denenmedi: gerçek iPhone/Android'de `.ics` açılışı (iOS "Add to Calendar" sayfası, Android'de dosya → takvim uygulaması), Outlook/Apple
 Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), Google Calendar linkinin oturum açık bir hesapta açılışı.

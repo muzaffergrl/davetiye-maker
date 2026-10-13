@@ -40,13 +40,19 @@ kapak / gövde / ön cep (G035 kesimi), kapalı zarfın kapağı tırtıklı ken
 tutucuları. Betik pencerenin WebP çıktısında da tam şeffaf kaldığını ve hiçbir görselde #00FF00 görünmediğini denetler.
 `site.css`'teki yüzdeler `manifest.json`'dan; görsel değişirse onları da güncelle.
 
-## Yeni tasarıma uyarlarken değişecekler
+## Bu temayı ayarlarken
 - `site.js` başındaki `MOTION` (sıra/süre) ve gerekiyorsa `ENVELOPE_GEOMETRY`; `site.css` zarf katman yüzdeleri.
 - Kart metin kutuları (`.invite-text`, `.info-text`, `.card-copy`): `manifest.json` `free_zone`'a göre;
   `scripts/theme-check.cjs` metnin boyalı çiçeğe değmediğini ölçer.
 
+**Yeni tasarım (G4NN) bu temanın kopyası değildir:** `docs/11_TEMA_STANDARDI.md` geçerlidir — yerleşim o tasarımın W1
+comp'larından (sayfa başına "comp öğe haritası"), zarf tipi ve açılış katalogdaki `acilis` cümlesinden, parçacık ve story dizilişi
+o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP formu, `#site-data`, oturum anahtarları) ve
+`data-scene`/`data-step`/`data-a` kancaları ortaktır; 03'ün aralıkları, süs konumları ve zamanlaması taşınmaz.
+
 ## Bilinen sınırlar
-- Program 7+ satırda Details kartına sığmaz (1–6 satır ölçüldü); ana sayfa tanıtımı ilk 4 satırı gösterir.
+- Program 7+ satırda Details kartına sığmaz (1–6 satır ölçüldü; şema/panel program satırını sınırlamıyor — `docs/11` §12);
+  ana sayfa tanıtımı ilk 4 satırı gösterir.
 - `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve); anların `text`'i ve monogram (`initials`) bu temada
   hiç gösterilmez. Panel bunları şablondan okur ve sormaz (Monogram / "A few words" yok, en çok 3 an; `lib/panel/state.ts`).
 - Link blokları yalnız linkleriyle görünür: harita düğmesi `urls.map`, Travel & Stay `urls.accommodation`, Registry `urls.registry`

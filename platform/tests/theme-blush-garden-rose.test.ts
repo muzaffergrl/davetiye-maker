@@ -223,6 +223,28 @@ test('a content change shows on every page (names, date, venue, schedule rows, s
   assert.deepEqual(story('figcaption').map((_, el) => story(el).text()).get(), ['A shared umbrella', 'Paris', 'Yes!']);
 });
 
+test('K21: the countdown is plain numerals and labels (no CSS frame: border, outline or box-shadow on .cd-*)', () => {
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter(([, sel]) => /\.cd-/.test(sel) && !/:focus/.test(sel));
+  assert.ok(rules.length > 0, 'countdown rules found');
+  for (const [, sel, body] of rules) {
+    assert.doesNotMatch(body, /(^|;|\s)(border(-[a-z]+)*|outline|box-shadow)\s*:/, `${sel.trim()}: a code-drawn frame`);
+  }
+});
+
+test('invitation card: without a full name the first name is shown (never an empty name line)', () => {
+  const c = demoContent();
+  c.partners[0] = { display_name: 'Avery', full_name: null };
+  c.partners[1] = { display_name: 'Jordan', full_name: 'Jordan Ellis' };
+  c.name_display = 'Avery & Jordan';
+  const { $, warnings } = render('home', c);
+  assert.deepEqual(warnings, []);
+  const names = $('.invite-text .nm').map((_, el) => $(el).text()).get();
+  assert.deepEqual(names, ['Avery', 'Jordan Ellis']);
+  assert.equal($('.invite-text .nm[data-empty]').length, 0, 'no empty name line');
+  assert.equal($('.invite-text .nm1').length, 1, 'one line per partner');
+});
+
 // ---------------------------------------------------------------- photos, optional blocks, links
 
 test('photo slots: buyer photo replaces the placeholder (srcset dropped, state "user"); missing photo keeps the placeholder', () => {

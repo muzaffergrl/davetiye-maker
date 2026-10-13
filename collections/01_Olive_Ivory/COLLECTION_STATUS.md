@@ -1,5 +1,9 @@
 # Koleksiyon 01 — Olive & Ivory (çalışma adı)
 
+> **2026-10-13 (G046 incelemesi):** Bu dosya Canva/video dönemi kaydıdır ve K22–K24 (ürün = kendi platformumuzda website) ile
+> website teması için **geçersizdir**. Tema kuralları `docs/11_TEMA_STANDARDI.md`, görevler G201 (GPT) ve G401 (tema); mühür
+> yerleşimi ve monogram docs/11 §7.1'den gelir — aşağıdaki "Mühür yerleşimi (canonical)" x/y ölçüleri kullanılmaz.
+
 **Durum:** `editable_draft` — satışa hazır değil. Son güncelleme: 2026-10-09.
 Makinece okunur kayıt: `PROJECT_STATE.json`.
 

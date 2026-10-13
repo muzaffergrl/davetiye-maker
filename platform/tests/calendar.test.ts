@@ -141,6 +141,24 @@ test('iCalendar text escaping and line folding at 75 octets without splitting a 
   assert.equal(foldLine('SHORT:x'), 'SHORT:x');
 });
 
+test('control characters never reach the .ics: soft line breaks become newlines, the rest is dropped, tab stays', () => {
+  assert.equal(icsText('12 Rose Street\u000bSavannah'), '12 Rose Street\\nSavannah');
+  assert.equal(icsText('a\u000cb\u2028c\u2029d'), 'a\\nb\\nc\\nd');
+  assert.equal(icsText('Ceremony\u0007\u0000\u001b\u007f'), 'Ceremony');
+  assert.equal(icsText('a\tb'), 'a\tb');
+
+  const c = demoContent();
+  c.venue.address = '12 Rose Street\u000bSavannah';
+  c.schedule[0].label = 'Ceremony\u0007';
+  c.dress_code = 'Garden\u0001 formal';
+  c.optional_blocks.dress_code = true;
+  const ics = icsFile(calendarEvent(c, { siteUrl: 'https://sites.example.test/x' })!, { uid: 'x@y' });
+  const controls = [...ics.replace(/\r\n/g, '')].filter((ch) => /[\u0000-\u0008\u000A-\u001F\u007F]/.test(ch));
+  assert.deepEqual(controls, [], 'no control characters other than tab (CRLF line ends aside)');
+  assert.match(icsProp(ics, 'LOCATION')!, /12 Rose Street\\nSavannah/);
+  assert.match(unescapeText(icsProp(ics, 'DESCRIPTION')!), /Ceremony/);
+});
+
 test('.ics file: VCALENDAR/VEVENT with UTC times, stable UID, escaped text, CRLF and folded lines', () => {
   const c = demoContent();
   c.venue.name = 'The Rosewater Conservatory; East Wing';

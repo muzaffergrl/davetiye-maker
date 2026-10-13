@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 1 · inceleme 2 · blokaj 296 · bitti 24 · toplam 361
+Özet: hazir 40 · alindi 1 · inceleme 2 · blokaj 296 · bitti 24 · toplam 363
 
 ## claude-canva
 
@@ -245,7 +245,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 19 · Biten: 16
+Bağımlılık bekleyen: 20 · Biten: 16
 
 ## claude-metin
 
@@ -277,7 +277,7 @@ Bağımlılık bekleyen: 19 · Biten: 16
 - `G720` blokaj · - — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
 - `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
-Bağımlılık bekleyen: 0 · Biten: 2
+Bağımlılık bekleyen: 1 · Biten: 2
 
 ## claude-qa
 

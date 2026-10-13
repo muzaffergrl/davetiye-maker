@@ -7,7 +7,10 @@ olur (görevler **G401–G420**, G403 hariç). Belge **gerçek temadan** çıkar
 `ZARF_TIPI`) ve PAKET 5 prompt'ları (06 gatefold, 09 kese, 13 kitap, 18 kılıf, 04 şerit, 11 kemer cep, 12 cüzdan).
 
 Öncelik: kullanıcı talebi → `AGENTS.md` → bu belge → `platform/README.md` (motor ve platform sözleşmesinin **tek kaynağı**;
-burada özetlenen işaret/RSVP kuralları değişirse README geçerlidir) → örnek tema. "**Zorunlu**" = G4NN bitmiş sayılmaz;
+burada özetlenen işaret/RSVP kuralları değişirse README geçerlidir) → G4NN görev metni → örnek tema. **G4NN görev metni bu
+belgeyle çelişirse bu belge geçerlidir.** G035 kaynağı (`collections/03_Blush_Garden_Rose/website/`, README'si dahil) örnek
+değildir — yalnız build yardımcıları için bakılır (§5.4); 03 temasının `README.md`/`site.js` başlığındaki "yalnız `MOTION`'u
+değiştir" notları 03'ün kendi ayarı içindir, G4NN'ye uygulanmaz (§8). "**Zorunlu**" = G4NN bitmiş sayılmaz;
 "**önerilir**" = gerekçesiyle atlanabilir (Sonuç'a yazılır).
 
 Temel kurallar (değişmez):
@@ -31,7 +34,7 @@ G4NN        platform/themes/<slug>/build_images.py
              ├─ zarf tipine göre kesim (§7), maskeler, serbest bölgeler, yer tutucular, og görseli
              └─ img/*.webp (srcset genişlikleri) + img/mask_*.png + img/manifest.json  (+ denetimler, hata → çıkış ≠ 0)
             şablonlar (5 sayfa, motor işaretleri) + site.css (token, preset, katman yüzdeleri) + site.js (MOTION)
-            tests/theme-<slug>.test.ts (node:test) + theme-check (Playwright) + previews/g4NN/ + Sonuç
+            tests/theme-<slug>.test.ts (node:test) + theme-check --theme (Playwright, G052) + previews/g4NN/ + Sonuç
 ```
 
 ---
@@ -57,8 +60,9 @@ platform/themes/<slug>/
 - `<slug>` = G4NN görevindeki klasör adı (ör. `art-deco-black-tie`), `[a-z0-9_-]`; `theme.json` `id` ile aynı.
 - Tema klasörüne **girmez:** `parts_prep` çıktısı / kaynak PNG'ler (`img_src/` dahil), önizlemeler, font dosyaları, test
   dosyaları, `node_modules`, kullanılmayan görsel. Sebep: `next.config.ts` `./themes/**/*`'ı **her tema rotasının** Vercel
-  fonksiyon paketine kopyalıyor (16 rota). Tema klasörü toplamı **≤ 3 MB** (03: 2,7 MB). G406 vb. görev metnindeki
-  "`--out <tema klasörü>/img_src`" yerine geçici klasör kullanılır (03'ün `build_images.py`'si gibi; `--prep-dir` ile dışarıda).
+  fonksiyon paketine kopyalıyor (17 rota, `next.config.ts` `THEME_ROUTES`). Tema klasörü toplamı **≤ 3 MB** (03: 2,7 MB).
+  `parts_prep` çıktısı geçici klasöre gider (03'ün `build_images.py`'si gibi; `--prep-dir` ile dışarıda); G4NN görev metinleri
+  G046 incelemesinde buna göre düzeltildi.
 - Servis edilen uzantılar: `css js mjs png jpg jpeg webp avif gif svg ico mp4 webm`. `.html` yalnız `theme.json` sayfası
   olarak, `.json`/`.py`/`.md` hiç servis edilmez.
 
@@ -97,10 +101,12 @@ Başka alan eklenmez (motor okumaz); tasarım verisi `site.css`/`site.js`'te dur
 ### 2.1 `content.demo.json`
 - `collections/NN_*/content.demo.json`'ın kopyası; `record_kind: "demo"`, kurgu isimler, bütün URL'ler `null`
   (`tools/validate_content.py` ve `lib/content/validate.ts` geçer).
-- **Bugün yalnız 03'ün kaydında `story` var.** Tema story sayfası boş başlık göstermesin diye tema kopyasına
-  `story: {intro, items: [{caption: "First hello"}, {caption: "The proposal"}, {caption: "Forever begins"}]}` eklenir
-  (PAKET 2 hikâye fotoğraflarıyla aynı başlıklar); kalan alanlar koleksiyon kaydıyla birebir (test, §13). Koleksiyon kaydına
-  `story` eklenmesi önerilen görevdir.
+- **Bugün yalnız 03'ün kaydında `story` var; 01'de `partners[].full_name` `null`** (02–20'de dolu). İkisini koleksiyon
+  kayıtlarına **G053** (claude-metin) ekler; tema ajanı koleksiyon kaydını değiştirmez. G053 bitmeden başlayan tema, kopyasına
+  yalnız `story` ekler: `{intro: "A few of the moments that led us to", items: [{caption: "First hello"}, {caption: "The
+  proposal"}, {caption: "Forever begins"}]}` (03'ün sözü; intro sayfada tarihle biter; başlıklar PAKET 2 hikâye fotoğraflarıyla
+  aynı); kalan alanlar koleksiyon kaydıyla birebir (test, §13). `full_name` `null` kalır — şablon bunu kaldırır (§3.2 tam ad
+  yedeği). G053 bitince kopya koleksiyon kaydıyla tamamen eşitlenir.
 - `site.js` `DEV_CONTENT` = bu dosya (test eşitliği denetler).
 
 ---
@@ -113,6 +119,10 @@ linki), `data-format` (`date`, `date-long`, `weekday`, `month`, `day`, `year`, `
 `data-if="yol"` / `"!yol"`, `data-repeat="schedule"` (içeride `.time`, `.label`, `data-if=".location"`),
 `data-attr-<ad>` (yalnız `alt`, `title`, `content`, `aria-label`, `datetime`, `value`, `placeholder`, `data-*`).
 Bilinen bloklar: `our_story`, `countdown`, `dress_code`, `registry`, `travel_stay`, `faq`, `guest_policy`.
+**`guest_policy` kullanılmaz:** şemada metni yok (yalnız aç/kapa); `data-optional="guest_policy"` panelde alıcının
+düzenleyemediği sabit bir metin için anahtar açar (uydurma, değiştirilemez iddia). Şemaya metin alanı gelene kadar hiçbir tema
+yazmaz. Panel bir bölümü **temanın işaretlerinden** gösterir (`themeFieldUse`: `faq`, `rsvp.questions`, `initials`, hikâye
+alanları): işareti olmayan temada alıcı o özelliği hiç görmez — §3.2'deki zorunlu işaretler bu yüzden atlanamaz.
 
 ### 3.1 Her sayfada (zorunlu)
 - `<html lang="en" class="no-js">`; `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`.
@@ -132,10 +142,10 @@ Bilinen bloklar: `our_story`, `countdown`, `dress_code`, `registry`, `travel_sta
 | Sayfa | Zorunlu işaretler ve öğeler |
 |---|---|
 | **index** | `<h1>` isimler: `data-field="partners.0.display_name"` · `<span class="amp">&amp;</span>` · `partners.1.display_name`; tasarım kopyası ("You are invited"). Sahne `.stage` (`role="button" tabindex="0" aria-label="Open the invitation"`) içinde zarf katmanları (§7) + kart: `.photo-slot[data-slot="hero_portrait"]` > `img[data-photo="hero_portrait"]` + `.ph-mark`, kart kopyası `data-field="date"`, `venue.city_region`. `a[data-skip]` ve `a[data-enter]` → `home.html`; `.replay` düğmesi; JS'siz yedek `p.nojs-only > a[href="home.html"]` (`<noscript>` değil). `<script type="speculationrules">` `selector_matches: "a[data-enter]"` |
-| **home** | Hero: aynı kart (VT adı, §11) + `img[data-photo="hero_portrait"]` (`data-attr-alt="Photo of {name_display}"`), isimler, `date` (`weekday` + tarih), `venue.name`, `venue.city_region`. Geri sayım: `data-optional="countdown" data-if="countdown_target_utc" data-countdown role="timer"`, `[data-unit=days\|hours\|minutes\|seconds]`, `.cd-done[data-when=today\|after]`. Davet kartı: `host_line` (`data-if`), `partners.N.full_name`, tarih bloğu (`weekday`/`month`/`day`/`year`), `ceremony_time`, `venue.name`, `venue.city_region`. Yanıt çağrısı `data-if="!rsvp.method"` (+ `rsvp.deadline` `data-if`). Tanıtımlar: Story (`data-optional="our_story"`, `story_1` küçük çerçeve), The Day (`data-repeat="schedule"` `.label · .time`, CSS ile ilk 4), RSVP (`data-if="!rsvp.method"`). Altbilgi isimler + replay |
+| **home** | Hero: aynı kart (VT adı, §11) + `img[data-photo="hero_portrait"]` (`data-attr-alt="Photo of {name_display}"`), isimler, `date` (`weekday` + tarih), `venue.name`, `venue.city_region`. Geri sayım: `data-optional="countdown" data-if="countdown_target_utc" data-countdown role="timer"`, `[data-unit=days\|hours\|minutes\|seconds]`, `.cd-done[data-when=today\|after]` (sade rakam + etiket; §5.7). Davet kartı: `host_line` (`data-if`), **isimler tam ad yedeğiyle** — her eş için iki öğe: `<p data-if="partners.0.full_name" data-field="partners.0.full_name">` ve `<p data-if="!partners.0.full_name" data-field="partners.0.display_name">` (`full_name` şemada `null` olabilir: 01 demo kaydı, panelde silinen tam ad; yedeksiz kart boş isim satırı gösterir), tarih bloğu (`weekday`/`month`/`day`/`year`), `ceremony_time`, `venue.name`, `venue.city_region`. Yanıt çağrısı `data-if="!rsvp.method"` (+ `rsvp.deadline` `data-if`). **Takvime ekle** (G051) davet kartının altında: `<a data-calendar="ics">` (Apple / Outlook) + `<a data-calendar="google" target="_blank">` (Google) çifti, ≥ 44 px. Tanıtımlar: Story (`data-optional="our_story"`, `story_1` küçük çerçeve), The Day (`data-repeat="schedule"` `.label · .time`, CSS ile ilk 4), RSVP (`data-if="!rsvp.method"`). Altbilgi isimler + replay |
 | **story** | `<body data-optional="our_story">`. Giriş `data-if="story.intro"` (+ `data-field="story.intro"`). 3 çerçeve: `data-slot`/`data-photo` = `story_1..3`, başlık ve alt metin sırayla `story.items.0..2.caption` (`data-field`, `data-attr-alt="{story.items.0.caption}"`). Panel an sayısını bu işaretlerden okur (`themeFieldUse`): 3 başlık → 3 an; `.text` ya da `initials` kullanılırsa panel sorar |
-| **details** | Başlık `date` (`weekday` + tarih). Program kartı: `<li data-repeat="schedule">` `.time`, `.label`, `<span data-if=".location" data-field=".location">` — **1–6 satır** kartın düz kâğıdında kalmalı. Kıyafet `data-optional="dress_code" data-if="dress_code"`. Mekân: `venue` foto alanı (`data-attr-alt="{venue.name}"`), `venue.name`, `venue.city_region`, `venue.country`/`venue.address` (`data-if`), tören cümlesi `data-if="ceremony_time"`. Harita `<p data-if="urls.map"><a data-field="urls.map" target="_blank">`. Travel & Stay `data-optional="travel_stay" data-if="urls.accommodation"`, Registry `data-optional="registry" data-if="urls.registry"` (link bloğu linksiz görünmez). RSVP linki `data-if="!rsvp.method"` |
-| **rsvp** | `<body data-if="!rsvp.method">`. Kart: `rsvp.deadline` (`data-if`), `a.btn[href="#reply"]`, isimler. Form: §3.3. Kapanış: isimler/`name_display` + `date`, replay linki; yanıt sonrası tekrarlayan teşekkür gizlenir (`html[data-rsvp-replied]`, `rsvp:state` olayı) |
+| **details** | Başlık `date` (`weekday` + tarih). Program kartı: `<li data-repeat="schedule">` `.time`, `.label`, `<span data-if=".location" data-field=".location">` — 1–6 satır kartın düz kâğıdında kalır; **7+ satırda düzen bozulmaz** (§12: kart uzar ya da satırlar kartın altında düz kâğıtta sürer). Programın altında **takvime ekle** çifti (`data-calendar="ics"` + `data-calendar="google" target="_blank"`, home ile aynı). Kıyafet `data-optional="dress_code" data-if="dress_code"`. Mekân: `venue` foto alanı (`data-attr-alt="{venue.name}"`), `venue.name`, `venue.city_region`, `venue.country`/`venue.address` (`data-if`), tören cümlesi `data-if="ceremony_time"`. Harita `<p data-if="urls.map"><a data-field="urls.map" target="_blank">`. Travel & Stay `data-optional="travel_stay" data-if="urls.accommodation"`, Registry `data-optional="registry" data-if="urls.registry"` (link bloğu linksiz görünmez). **SSS** (G051): `<section data-optional="faq" data-if="faq">` içinde `<details data-repeat="faq"><summary><span data-field=".q"></span></summary><p data-field=".a"></p></details>` — JS'siz açılır-kapanır, yanıtta `white-space: pre-line`, `summary` ≥ 44 px; "+"/"×" işareti erişilebilir ada girmez (`content: "+" / ""` ya da `aria-hidden` span). RSVP linki `data-if="!rsvp.method"` |
+| **rsvp** | `<body data-if="!rsvp.method">`. Kart: `rsvp.deadline` (`data-if`), `a.btn[href="#reply"]`, isimler. Form: §3.3, **çiftin soruları dahil** (`.questions` bloğu konuk sayısının altında, `[data-rsvp-if-attending]` içinde). Kapanış: isimler/`name_display` + `date`, replay linki; yanıt sonrası tekrarlayan teşekkür gizlenir (`html[data-rsvp-replied]`, `rsvp:state` olayı) |
 
 ### 3.3 RSVP form sözleşmesi (G042; tam metin `platform/README.md` → "Tema form sözleşmesi")
 - `<script src="/rsvp/form.js" defer>` (kök yolu; motor çevirmez). Form `form[data-rsvp-form][method="post"]`, `action` yok.
@@ -144,7 +154,12 @@ Bilinen bloklar: `our_story`, `countdown`, `dress_code`, `registry`, `travel_sta
 - Paneller `[data-rsvp-state="success|closed|error|preview"]` `hidden` ile başlar; `error`/`closed`'da `[data-rsvp-message]`;
   `success`'te `[data-rsvp-reply="yes|no"]` ve `[data-rsvp-again]`; alan hataları `[data-rsvp-error-for="<alan>"]`.
 - Kapsayıcı `[data-rsvp]`. `closed` başlığı `data-rsvp-reason` (`deadline` / `disabled`) ile ayrılabilir.
-- G051 RSVP özel soruları birleşince README'deki ek sözleşme geçerli olur (aşağı bkz.).
+- **Çiftin soruları (G051, zorunlu):** `<div data-rsvp-if-attending data-if="rsvp.questions">` içinde soru başına
+  `<fieldset data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">` + `<legend data-field=".label">`; seçenekli soru
+  `<div data-if=".options"><label data-repeat=".options"><input type="radio" data-attr-value="."> <span data-field="."></span></label></div>`,
+  kısa yanıt `<textarea data-if="!.options" maxlength="300" data-attr-aria-label=".label">`, hata yeri
+  `<p data-attr-data-rsvp-error-for="answer:{.id}">`. Girişlere `name` yazılmaz (`form.js` `answer:<id>` verir). Örnek:
+  `platform/themes/blush-garden-rose/rsvp.html`; tam metin README → "Özel sorular (G051)".
 
 ### 3.4 `#site-data` ve sayfa haritası
 - Motor her sayfaya `<script type="application/json" id="site-data">` ekler: `slug`, `theme`, `variant`, `page`, `preview`,
@@ -157,10 +172,19 @@ Bilinen bloklar: `our_story`, `countdown`, `dress_code`, `registry`, `travel_sta
 - `#site-data` yoksa (tema dosyaları statik sunucuda) `DEV_CONTENT` + `devRender()` aynı işaretleri doldurur — yalnız tasarım
   önizlemesi; platformda asla çalışmaz.
 
-### 3.5 Yolda olan işaretler (G051, `alindi`)
-G051 "Takvime ekle" (`data-calendar`, home/details), SSS (`optional_blocks.faq` + `data-repeat="faq"`, details) ve RSVP
-özel sorusunu (`rsvp.questions`) ekliyor. G051 birleşince G4NN temaları README'deki işaretleri kullanır; birleşmeden
-başlanan tema bu blokları sonradan ekler (Sonuç'a yazılır).
+### 3.5 G051 işaretleri (zorunlu)
+G051 (`main`'de; README → "Takvime ekle, SSS, RSVP özel soruları (G051)") üç işaret getirdi; her G4NN temasında **zorunlu**
+(§3.2'deki yerlerinde):
+- **Takvime ekle:** home (davet kartı altı) ve details (program altı) `<a data-calendar="ics">` + `<a data-calendar="google"
+  target="_blank">`. Motor `ics` → `/<slug>/event.ics` (önizlemede `?preview=`), `google` → Google Calendar linki yazar; okunur
+  tarih yoksa ikisini de kaldırır.
+- **SSS:** details'te `data-optional="faq" data-if="faq"` + `<details data-repeat="faq">` (`.q`/`.a`). Panelin "Questions &
+  answers" bölümü yalnız bu işaret varsa görünür (`themeFieldUse().faq`).
+- **Çiftin soruları:** rsvp formunda §3.3'teki `.questions` bloğu. Panelin "Questions for your guests" bölümü yalnız
+  `rsvp.questions` işareti varsa görünür (`themeFieldUse().rsvpQuestions`).
+
+Bu işaretlerden biri eksik tema alıcıya o özelliği **sessizce** vermez (panel bölümü hiç çıkmaz) — test (§13.2 #18–#20) ve
+`g051-browser --theme` (G052) bunu yakalar.
 
 ---
 
@@ -210,15 +234,22 @@ form etiketleri. Şartı: içerikle çelişmez ("Ceremony at …" yalnız `data-
 | `accent_1..3.png` | `accent_N-200.webp` | 200 | düşen/süzülen parçacıklar (`MOTION.accents`), `.ph-mark` ikonu |
 | `divider.png` | `divider-300.webp` | 300 | başlık altı, satır araları |
 | `web_hero.png` 1536×1024 opak | `og-1200x630.jpg` (q≈82; isteğe bağlı masaüstü üst bant) | 1200 | `og:image` (isim yok) |
-| `ekler` (04 `bg_desk`, 07 `velvet_swag`, 08 `frost_overlay`, 10 `oak_tile`, 16 `twine_line`+`barnwood`, 18 `vellum_overlay`, 20 `wave`) | adıyla | rolüne göre | tasarıma özel |
+| `ekler` (01 `closure_sprig`, 04 `bg_desk`, 07 `velvet_swag`, 08 `frost_overlay`, 10 `oak_tile`, 16 `twine_line`+`barnwood`, 18 `vellum_overlay`, 20 `wave`) | adıyla | rolüne göre | tasarıma özel (01: mührün altından kayan dal, `closure` ile aynı tuvalde hizalı) |
 
 `comps/web_*.png` (W1) yalnız yerleşim referansıdır: tipografi, hiyerarşi, yerleşim ve kart/çerçeve dizilişi buradan;
-tema dosyalarına girmez, satılmaz.
+tema dosyalarına girmez, satılmaz. **Yalnız sade ad referanstır** (`web_1_envelope.png`); `_v1`, `_v2`… denemedir, karşılaştırma ve
+ölçüm onları almaz: tam adlar kullanılır (`web_1_envelope`, `web_2_home`, `web_3_story`, `web_4_details`, `web_5_rsvp`); `web_*`
+glob'u `_v1`'i de alır.
 
-**GPT parça listesi (Paket W = PAKET 5 W2) yeterli mi?** Evet: yukarıdaki 17 parça (+ tasarıma özel ekler) her temanın
+**GPT parça listesi (Paket W = PAKET 5 W2) yeterli mi?** Genel liste evet: yukarıdaki 17 parça her temanın ortak
 ihtiyacını karşılıyor; 03'ün kullandığı her görselin PAKET 5 karşılığı var (petal sayfası → tek nesneli `accent_1..3`,
-`mist_tile` → `bg_tile`, `florals_*` → `decor_*`/`florals_*`). Yeni dosya gerekmiyor. Standardın ortaya çıkardığı eksikler
-dosya değil **kural** (`gorevler/roller/gpt-gorsel.md`'ye eklendi, prompt düzeltmesi önerisi G046 Sonuç'ta):
+`mist_tile` → `bg_tile`, `florals_*` → `decor_*`/`florals_*`). **Ama açılış cümlesi ayrı hareket eden bir nesne istiyorsa ve o
+nesne tek görselde başka parçanın altında kalıyorsa ek dosya gerekir** — kesmek gizli kısmı geri getirmez. G046 incelemesinde
+bulunan ilk örnek 01: "the olive sprig slides out from under the oval seal" — `closure.png` artık dalsız mühür, dal tam hâliyle
+`closure_sprig.png` (`WEB[1]["ekler"]`). Her tasarımda `acilis` cümlesi W2 üretiminden **önce** bu gözle okunur; eksik parça
+`tools/katalog.py` `WEB[NN]` `ekler`'ine eklenir (19 dosya elle düzenlenmez). Standardın ortaya çıkardığı diğer eksikler
+**kural**; G046 incelemesinde PAKET 5 prompt'larına işlendi (`tools/katalog.py` ortak metin + `KESIM_KENARI`, 19
+`GPT_PROMPTS.md` yeniden üretildi) ve `gorevler/roller/gpt-gorsel.md`'de:
 1. Kesilecek kenarlar görünür olmalı (kapalı kapağın serbest kenarı, gatefold dikişi, kitap kapağının kenarı/sırtı, kesenin
    ağız kenarı, açık zarfın ön cep kenarı): nesnenin kendi üstündeki ince temas gölgesi/kenar çizgisi gerekli; yasak olan
    zemine düşen gölge. Yoksa §7 kesimleri bulamaz.
@@ -232,7 +263,8 @@ oturan parçalar tek görselden kesilir" kuralları PAKET 5'te zaten var.
 
 ### 5.2 `kit_check`
 `python3 tools/kit_check.py collections/NN_* --paket 5` ve `--paket 2` geçmeden kesime başlanmaz (geçmiyorsa Sonuç'ta neden).
-`kit_check` bugün oran, alfa, kenar boşluğu ve pencere varlığını denetler; **kapalı/açık zarf hizasını denetlemez** (§14).
+`kit_check` bugün oran (±%2 — piksel ölçüsü farklı olabilir), alfa, kenar boşluğu ve pencere varlığını denetler; **kapalı/açık
+zarf hizasını denetlemez** (§14 #2) — hizayı tema `build_images.py`'si §7.1'deki tipine göre kenar yöntemiyle ölçer.
 
 ### 5.3 `tools/parts_prep.py`
 - `build_images.py` içinden, çıktı **geçici klasöre** (`--prep-dir` verilirse oraya; tema klasörüne ve `assets/`'e asla).
@@ -242,6 +274,9 @@ oturan parçalar tek görselden kesilir" kuralları PAKET 5'te zaten var.
   (`[x, y, w, h]`) — birbirine oturan parçaların hizası buradan geri kurulur (§7.1).
 - Yapmadığı: ön cep kesimi yalnız `envelope_open` için ve **kare gövde + düz/V/ters-V kenar** varsayar (eğri kenar iki doğruyla
   yaklaşık; olmazsa uyarılı geometrik V). Kapak, kapı, kitap, kese kesimi **yok** → tema `build_images.py`'si yapar (§7).
+- `cep_kes` zarf tipine bakmadan **her** `envelope_open`'da koşar: **kapi, kitap, kese, kilif** temalarında çıkan
+  `envelope_pocket_front.png` anlamsızdır ve "geometrik V" uyarısı beklenir → dosya kullanılmaz, uyarı yok sayılır, `--strict`
+  verilmez (kesimler §7.4–§7.7'deki tema kesimleri). Kapak tiplerinde (eğri cepler dahil) uyarı gözle doğrulanır.
 
 ### 5.4 `build_images.py` (temanın; zorunlu sorumluluklar)
 1. `parts_prep`'i geçici klasöre koştur (ya da `--prep-dir`); `windows.json` oku. Kaynak GPT dosyalarına yazma.
@@ -254,13 +289,18 @@ oturan parçalar tek görselden kesilir" kuralları PAKET 5'te zaten var.
 7. `og-1200x630.jpg`: `web_hero`'dan 1.91:1 kırpım (zarf + kapanış tam görünür; kırpım bandı manifest'e). `icon-180.png`
    (önerilir): `closure`'dan kare.
 8. Fon: `bg_page` → `mist-640` (Gaussian blur), `bg_tile` → `bg_tile-640`.
-9. `manifest.json`: her görsel `src_size`, `ratio`, `files[{file, w, h, bytes}]`; `stage` (tuval, parça kutuları `box_pct`,
-   menteşe/dikiş/sırt/kenar geometrisi); `closure` yerleşimi; `photo_slots`; `free_zone`; `og`; toplam bayt.
+9. `manifest.json`: her görsel `src_size`, `ratio`, `files[{file, w, h, bytes}]`; `stage` (tuval, sahne kutusu `box` = alfa kutularının birleşimi, parça kutuları `box_pct`,
+   menteşe/dikiş/sırt/kenar geometrisi, `align` hiza ölçümleri — §7.1); `closure` yerleşimi (çapa, §7.1); `photo_slots`; `free_zone`; `og`; toplam bayt.
    `site.css`'teki her yüzde yanında hangi manifest anahtarından geldiğini yazar (`/* manifest stage.env_cflap */`).
 
 03'ün yardımcıları (`collections/03_Blush_Garden_Rose/website/build_images.py`: `cep_kes`, `pencere_maskesi`,
-`serbest_bolge`, `yer_tutucu`, `petaller`; tema `build_images.py`: `kapak_kes`, `pencere_seffaf_mi`, `yesil_gorunur`) bugün
-oradan içe aktarılıyor; ortak modüle taşınması önerilen görev (§14). WebP: `quality=80, method=6, alpha_quality=90`.
+`serbest_bolge`, `yer_tutucu`; tema `build_images.py`: `kapak_kes`, `pencere_seffaf_mi`, `yesil_gorunur`) bugün oradan içe
+aktarılabilir — **yalnız bu saf fonksiyonlar**. `webp`, `main`, `petaller` ve modül düzeyi `OUT` **asla** kullanılmaz: iki
+modülün `webp()`'si kendi `OUT`'una yazar (03 temasının ya da G035'in `img/`'sini ezer), tema `main()`'i `img/*.webp`'yi siler.
+Yeni temanın `webp()`'si kendi dosyasında, çıktı klasörü parametreyle. Eşikler 03'ün ışığına ayarlıdır (`kapak_kes` parlaklık
+düşüşü > 40 / > 30, `serbest_bolge` renk farkı > 28): yeni tasarımda kesim önizlemesine bakılır, gerekirse eşik parametreyle
+verilir (değer manifest'e). Önerilir: ilk G4NN'den önce ortak `tools/tema_build.py` (§14 #1). WebP: `quality=80, method=6,
+alpha_quality=90`.
 
 ### 5.5 `srcset` / `sizes`
 - GPT parçası gösteren her `<img>`: `src` = küçük dosya, `srcset` = bütün genişlikler (`w` tanımlı), `sizes` = **CSS'teki
@@ -280,7 +320,13 @@ center / 100% 100% no-repeat` (+ `-webkit-mask`). Kemer/oval/yuvarlak/basamaklı
 | Parçaya `filter: drop-shadow` (parçalar gölgesiz gelir, gölgeyi site ekler); ateş böceği gibi parçaya renkli parıltı | Çiçek, yaprak, çerçeve, mühür, kurdele, yıldız/parıltı çizimi (SVG, CSS şekil, emoji) |
 | Kenarsız ışık: yumuşak `radial/linear-gradient` ışık süpürmesi (06 "gold light sweep"), mum ışığı hâlesi (19), `mix-blend-mode`, düşük opaklık | Gradient'le çizilmiş çizgi/desen/doku, süs bordür, CSS ile "altın çizgi" |
 | Okunabilirlik: `text-shadow` hâlesi, buton/nav/form zeminleri, 1 px ayraç çizgisi, odak halkası, geri sayım rakamları, yarı saydam form paneli | Comp'taki süslü kutuyu (geri sayım kutusu, süslü buton) CSS ile taklit — ya sade arayüz ya GPT parçası |
+| Arayüz kutusu: hap düğme, form alanı (kenarlıklı giriş kutusu), tek 1 px ayraç/alt çizgi | İçerik bloklarının (geri sayım, program, mekân, kart metni, SSS) çevresinde CSS `border`, `outline` (odak halkası dışında), `box-shadow` çerçevesi; çift çizgi, köşe süsü |
 | Parçayı kesmek, aynalamak (`scaleX(-1)`), döndürmek, `clip-path` ile açığa çıkarmak ("write", "unfurl", çizgilerin "kendini çizmesi" = GPT çizimine maske) | Yeni şekil çizip boyamak |
+
+Comp'ta çerçeveli öğe varsa (01 W1.2: dört kutulu geri sayım) iki yol var: **sade rakam + etiket** (03 gibi; tema README'sinde
+comp sapması olarak yazılır) ya da tasarımın `ekler`'ine GPT kutu parçası (`countdown_tile.png`, katalog düzeltmesi + G2NN).
+CSS kutusu üçüncü yol değildir. Test (§13.2 #22): `site.css`'te `.cd-*` kurallarında `border`/`outline`/`box-shadow` yok
+(03'te `tests/theme-blush-garden-rose.test.ts` "K21: the countdown is plain numerals…").
 
 ---
 
@@ -297,21 +343,39 @@ center / 100% 100% no-repeat` (+ `-webkit-mask`). Kemer/oval/yuvarlak/basamaklı
 | Betik / stil | `site.js` ≤ 35 KB, `site.css` ≤ 45 KB (sıkıştırmasız), kütüphane yok; harici istek yalnız Google Fonts | 28 KB / 38 KB |
 | Dokun → home | 3,2–5 s (Skip her an) | 4,45 s |
 
-Ölçüm `theme-check`'in "first view" adımıyla (`next start` üzerinde yayınlanmış, fotoğrafsız test sitesi; aktarılan bayt).
-Gerçek telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
+Ölçüm `theme-check`'in "first view" adımıyla (`next start` üzerinde yayınlanmış test sitesi; aktarılan bayt), **iki kez**:
+yer tutucularla (tablodaki sınır) ve tohumlanmış PAKET 2 fotoğraflarıyla (`npm run seed -- --photos`); ikisi de `checks.json`'a ve
+Sonuç'a yazılır. Alıcı fotoğrafı tek URL olarak servis edilir (motor `srcset`/`sizes`'ı kaldırır; panel uzun kenarı ≤ 2400 px,
+JPEG q84 kaydeder) — index kartındaki tek portre 0,5–1 MB olabilir; fotoğraflı ölçüm 1,5 MB'ı aşarsa Sonuç'ta sayıyla yazılır
+(tema sınırı değil, platform işi: yüklemede 640/1280 türevleri + motorun yazdığı `srcset`, §14 #9). Gerçek telefon/ağ ölçümü
+değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
 
 ---
 
 ## 7. Zarf açılışı — tipe göre
 
 ### 7.1 Ortak kurallar
-- **Sahne = kaynak tuval.** PAKET 5'te `envelope_closed`, `envelope_open` (ve sarılı kapanışta `closure`) **aynı tuvalde,
-  aynı konumda** çizilir (`ZARF_TIPI`: kapak/kese/kılıf 1024×1536, kapı/kitap 1536×1024). `.stage` en-boy oranı = tuval;
-  her parça `parts_prep` `kirpma` ofsetinden **tuval yüzdesiyle** konur (`left/top/width/height %`). 03'teki elle ölçülmüş
-  yüzdeler (tuvaller farklıydı) yerine bu.
-- **Hiza denetimi:** kapalı ve açık görselin ortak gövdesi (zarf gövdesi / kapı kenarları / kitap sırtı / kese tabanı) alfa
-  sınır kutusu ±%1,5 içinde çakışmalı. Daha büyük kaymada parçalardan biri ölçülen dönüşümle (ölçek + öteleme) düzeltilir,
-  değer `manifest.stage.align`'a yazılır; %4'ün üstünde GPT'den yeniden üretim istenir (Sonuç'a "önerilen" olarak).
+- **Koordinatlar = kaynak tuval, sahne kutusu = kullanılan alan.** PAKET 5'te `envelope_closed`, `envelope_open` (ve sarılı
+  kapanışta `closure`) **aynı tuvalde, aynı konumda** çizilir (`ZARF_TIPI`: kapak/kese/kılıf 1024×1536, kapı/kitap 1536×1024).
+  Ölçümler tuval pikselinde yapılır (`parts_prep` `kirpma` ofsetleri). Ama `.stage` kutusu tuvalin kendisi **değildir** (GPT'nin
+  boş payları sahneye girer: 01'de kapalı zarfın üstü tuvalin ~%45'inde, altta %12 boş bant): sahne kutusu = kapalı, açık ve
+  kartın yol aldığı (yükselme + `forward`) alanların alfa kutularının **birleşimi** (tuval koordinatında, `manifest.stage.box`).
+  Her parça bu kutuya göre yüzdeyle konur (`left/top/width/height %`, `/* manifest stage.<parça> */`). 03'teki elle ölçülmüş
+  yüzdeler yerine bu.
+- **Hiza denetimi:** önce iki görsel `GPT_PROMPTS.md` "Kaydet" ölçüsüne getirilir (`kit_check` oranı ±%2 kabul eder; piksel
+  ölçüsü farklı olabilir). Sonra **yalnız değişmeyen kenarlar** karşılaştırılır — açık hâl alfa kutusunu bilerek büyütür (kapak
+  yukarı, kapılar yanlara, kitap kapağı sola açılır):
+
+  | Tip | Karşılaştırılan kenarlar (kapalı ↔ açık) |
+  |---|---|
+  | kapak (04 şerit dahil) | alfa kutusunun sol, sağ, alt kenarı |
+  | kapi | üst ve alt alfa kenarı; açık görselde katlanma çizgileri (kapalı `x0`/`x1` ± %3 bandında en koyu/boşluklu dikey sütun, §7.4 dikiş araması gibi) ↔ kapalı sol/sağ kenar |
+  | kitap | kapağın üst, alt ve sağ kenarı ↔ sağ sayfanın üst, alt ve sağ kenarı; sırt sütunu (açık görselde orta oluk, dikiş araması gibi) ↔ kapalı kapağın sol kenarı |
+  | kese, kilif | sol, sağ, alt kenar (ağız/üst kenar açılınca değişir) |
+
+  Her kenar ±%1,5 (tuval ölçüsüne göre) içinde olmalı. Daha büyük kaymada parçalardan biri ölçülen dönüşümle (ölçek + öteleme)
+  düzeltilir; %4'ün üstünde GPT'den yeniden üretim istenir (Sonuç'a "önerilen" olarak). Ölçülen her kenar (kapalı px, açık px, fark
+  %) ve uygulanan düzeltme `manifest.stage.align`'a yazılır.
 - **El değiştirme 90°'de:** dönen bir yüzün arkası gerekiyorsa (kapak, kapı, kitap kapağı) ön yüz kapalı görselden kesilir ve
   menteşesinde 0°→90° döner (kenardan görünür olur), aynı anda iç yüz açık görselden kesilmiş parça olarak 90°→0° devralır
   (03: `env_cflap` → `env_flap`). Dönüş `transform: perspective(800–1100px) rotateX/Y(…)`, `backface-visibility: hidden`,
@@ -323,19 +387,44 @@ Gerçek telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna dayanıla
   | Üstten menteşeli kapak (kapalı) | menteşe satırı `50% <hinge>%` | `rotateX(0 → 90deg)` | açık kapak, origin `50% 100%`: `rotateX(-90deg → 0)` |
   | Sol kapı / kitap kapağı (sol menteşe) | `0% 50%` | `rotateY(0 → -90deg)` | origin `100% 50%`: `rotateY(90deg → 0)` |
   | Sağ kapı (sağ menteşe) | `100% 50%` | `rotateY(0 → 90deg)` | origin `0% 50%`: `rotateY(-90deg → 0)` |
-- **Kapanış elemanı** (`closure.png`): kare tuvalde büyük çizilen → W1.1 comp'taki yerine (`kapanis_yeri`) ölçeklenir, zarf
-  sınır kutusuna göre yüzde `manifest.closure`'a; **sarılı** (07, 09, 10, 16: kurdele/sicim zarfı sarar) → zarfla aynı tuvalde
-  1:1 üst üste. İlk hareket ≤ 250 ms içinde başlar (dokunmaya anında yanıt). Kurdele/sicim zarfın **içinden geçmez**:
+- **Kapanış elemanı** (`closure.png`): **sarılı** (07, 09, 10, 16: kurdele/sicim zarfı sarar) → zarfla aynı tuvalde 1:1 üst
+  üste. Kare tuvalde büyük çizilen → yeri **kesim geometrisine bağlanır** (`kapanis_yeri` İngilizce bir tarif, koordinat değil;
+  comp'taki zarf `envelope_closed`'dan farklı ölçü ve konumda):
+
+  | Tip | Çapa (kapanışın merkezi) |
+  |---|---|
+  | kapak — V/eğri kapak, sarılı olmayan (01, 02, 05, 08, 11, 12, 15, 17, 19, 20) | kapağın ucu: `kapak_kes` `tip` (eğri kapakta kenarın en alt noktası); `kapanis_yeri` "a little below…" diyorsa ölçülen kayma comp'tan |
+  | kapak — yırtma şeridi (04) | şeridin (kapalı − açık alfa) kutu merkezi |
+  | kapi (06, 14) | dikiş sütunu `x`, `kapanis_yeri`'ndeki yükseklikte ("a little above the middle", "mid-height") |
+  | kitap (13) | kapağın sağ kenarı, yarı yükseklik |
+  | kilif (18) | kılıfın üst kenarının ortası, hemen altı |
+
+  Boyut: **kapanış genişliği / zarf genişliği**, W1.1 comp'taki zarf üzerinde bir kez ölçülür. Sonuç
+  `manifest.closure = {anchor, anchor_px, center_pct, width_pct, measured_from: "comps/web_1_envelope.png"}` ve bir karşılaştırma
+  görseli (kapalı sahne | comp'un zarf bölgesi, `previews/g4NN/compare_closure.jpg`) ile gözle doğrulanır. İlk hareket ≤ 250 ms
+  içinde başlar (dokunmaya anında yanıt). Kurdele/sicim zarfın **içinden geçmez**:
   kenar boyunca kayar ya da düğüm noktasından ikiye kesilip (Claude kesimi) iki yana çekilir. "Çatlama" = mührü düz bir
   çizgiyle iki parçaya kesip ayırmak (çatlak çizilmez) ya da düşme + dönme.
+- **Mühür monogramı (karar):** kapanış ortası boş çizilmişse (01, 02, 04, 17, 19: "smooth EMPTY … center") monogram
+  `<span class="seal-mono" data-field="initials">` olarak kapanış sarmalayıcısının **içinde**, mühürle birlikte hareket eder
+  (pişirilmez; panelde Monogram alanını açar — `themeFieldUse().initials`). Önerilir; "boş mühür" seçilirse tema README'sinde
+  gerekçesi yazılır. Canva dönemi `COLLECTION_STATUS.md` mühür yerleşim notları (01 "harfler x=459, y=1174…") K22–K24 ile
+  geçersizdir; ölçü bu bölümdeki çapadan gelir.
 - **Kart:** `card_small` + `hero_portrait` foto alanı + kart kopyası. Kapalı durumda görünmez (kapalı gövde opak örter),
   açılınca ön cebin/gövdenin arkasından yükselir (`card-slot` `clip-path` ile zarfın altına taşmaz), sonra öne geçer
   (`z-index`, `ENVELOPE_GEOMETRY.front`), home'a VT ile uçar (§11). Cebi olmayan tiplerde (kitap, kılıf) kart sayfadan/kılıftan
   **kalkar** (ölçek + öteleme + büyüyen gölge).
 - **Parçacıklar** (`accent_1..3`): açılışta `MOTION.accents.open`, home'a varışta `arrive`, rsvp kapanışında `closing`.
-- **Sahne boyu:** kapalı nesne 390 px telefonda ekran genişliğinin ~%70–84'ü, yüksekliği ≤ ~%45 svh (360×640'ta isimler +
-  "Tap to open" sığmalı). Açık hâli ekrandan taşabilir (kapılar, kitap kapağı): kök `overflow-x: clip` (03) → yatay kaydırma
-  olmaz; ya da açılırken sahne `scale(.8)`/öteleme ile toparlanır. Her iki durumda 360–1280 px yatay kaydırma testi geçer.
+- **Sahne boyu (kapalı nesneye göre):** `--obj: min(84vw, 45svh × objAspect, 440px)` — `objAspect` = kapalı nesnenin alfa
+  kutusu en/boy (dikey nesnelerde — 06 dosya 2:3, 13 kitap ~0,78, 09 kese, 18 kılıf — yükseklik sınırı belirler, genişlik %84'ün
+  altında kalır; bu doğru). Sahne genişliği = `--obj / objFrac` (`objFrac` = kapalı nesne genişliği / sahne kutusu genişliği,
+  manifest'ten). Sahne kutusunun kapalı nesnenin üstünde kalan kısmı (kapağın açılacağı, kartın yükseleceği boşluk) başlığın
+  altına negatif üst boşlukla girer — 03: `.stage { margin-top: calc(18px - var(--w) * .49) }` (`.49` = o boşluğun sahne
+  genişliğine oranı, manifest'ten hesaplanır, yorumla yazılır). 360×640, 375×553, 390×844'te isimler + "Tap to open" + kapalı
+  nesne ekrana sığar.
+- **Açık hâl ekrandan geniş olursa** (kapı, kitap): açılış adımı (`doors` / `cover`) boyunca sahne
+  `scale(min(1, .94 × 100vw / openSpreadPx))` + açık nesneyi ortalayan öteleme ile toparlanır (`openSpreadPx` = açık nesnenin
+  alfa kutusu genişliği × sahne ölçeği); kök `overflow-x: clip` (03) yine kalır. 360–1280 px'te yatay kaydırma yok (test).
 
 ### 7.2 Tip tablosu
 
@@ -361,7 +450,13 @@ Sıra (03): `tug` + `closure` (03'te `bow`: fiyonk sağ alta kayar) → `head` �
 → `rise` (kart cepten yükselir) → `forward` (kart öne, `scale(1.06)`) → `go`. Kapak kesimi: üst kenardan aşağı, her sütunda
 kapak kenarının parlaklık/renk düşüşü; V'de iki doğru + ±14 px iz (03 `kapak_kes`), tırtık/dalga/fisto izlenir, 7 sütun medyanı.
 Eğri kapakta (07/11/12/15/16/17) aynı sütun araması **eğri ön bilgisiyle** (katalogdaki biçim) yapılır, sonra yumuşatılır.
-Menteşe satırı = kapalı zarfın üst kenarı (`hinge_pct_of_flap`). 04 şeridi: kapalıdan açığın alfası çıkarılınca şerit kalır;
+Menteşe satırı = kapalı zarfın üst kenarı (`hinge_pct_of_flap`).
+**Kapanış kapakla taşınıyorsa** (bugün yalnız 01: "carrying the seal with it"): `closure`, `env_cflap` ile ortak bir
+`.env-cflap-wrap` içinde **aynı** `rotateX` ve aynı `transform-origin` (menteşe satırı, sarmalayıcı koordinatında) ile döner; 90°'de
+ikisi birlikte söner (mühür artık kapağın arkasında). Kapanışı ayrı bir animasyonla "kapakla gidiyormuş gibi" taklit etmek
+yasak (iki ayrı perspektif, 1 px kayma). Kapanışın altından çıkan ayrı parça (01 `closure_sprig`) önce kendi hareketini yapar
+(dal mührün altından kayar: öteleme + hafif dönme, sonra solma ya da sahnede kalma), sonra kapak kalkar; dal katmanı mührün
+**altında**, kapağın üstünde. 04 şeridi: kapalıdan açığın alfası çıkarılınca şerit kalır;
 `tear`'de `clip-path: inset(0 0 0 X%)` soldan sağa açar, şerit hafifçe kalkıp döner; kart gövdenin arkasından yırtık
 kenarın üstüne çıkar.
 
@@ -375,8 +470,10 @@ bulunamazsa kutu ortası (uyarı). `center` = açık görselin kapalı sınır k
 kalan alfa. 06 `sweep`: sahne üstünde kenarsız ışık bandı (§5.7), kart yükselirken.
 
 ### 7.5 kitap (13)
-Kapalı kitap tuvalin sağ yarısında (sırt tam ortada): telefonda sahne `translateX(-25%)` ile kapalı kitap ortalanır; kapak
-açılırken sahne kayar (ya da sayfa ortada kalır, kapak içi ekrandan taşar). Sıra: `closure` (kopça menteşe noktasında döner,
+Kapalı kitap tuvalin sağ yarısında (sırt tam ortada). Telefonda kapalıyken sahne, kapalı kapağın merkezi ekran ortasına gelecek
+kadar ötelenir (`translateX` = `50vw` − kapak merkezi × sahne genişliği; 13'te kapak merkezi sahne kutusunun ~%72'si). `cover`
+adımı boyunca bu öteleme, açık çift sayfayı (`cover_in` + `page`, ~sahnenin %88'i) ortalayan ötelemeye ve
+`scale(min(1, .94 × 100vw / openSpreadPx))` ölçeğine geçer (§7.1; 390 px'te ~.62) — tek kural, "ya da" yok. Sıra: `closure` (kopça menteşe noktasında döner,
 düşer) → `cover` (`rotateY(0→-90deg)`, origin sırt `0% 50%`) → `inner` (`cover_in` `rotateY(90deg→0)`, origin `100% 50%`) →
 `page` (isteğe bağlı sayfa çevirme: `page_turn` ön yüzü 0→−90°, arka yüzü = aynalı `page` 90°→0, sol tarafa iner) →
 `lift` (kart sayfanın üstünde düz başlar, ölçek + gölgeyle kalkar) → `forward` → `go`. Ateş böcekleri = `accent_1` +
@@ -399,26 +496,37 @@ kayar + söner) → `lift` (kart yukarı) → `forward` → `go`.
 
 ## 8. `MOTION` ve koreografi
 
-`site.js` başında tek ayar nesnesi; içerikten ayrı. Biçim 03 ile aynı:
+`site.js` başında tek ayar nesnesi; içerikten ayrı. İskelet 03 ile aynı, **değerler ve `accents` biçimi değil** (sayılar
+aşağıda bilerek yer tutucu; 03'ün sayıları kopyalanmaz):
 
 ```js
 const MOTION = {
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },     // + ':<slug>' (§11); <head> betikleri aynı anahtarlar
-  envelope: { hint: [0, 280], tug: [0, 260], closure: [200, 950], /* tipe göre §7.2 */ accents: 1430, go: 4080, fadeOut: 420 },
+  envelope: { hint: [/* başlangıç, süre ms */], tug: [ … ], closure: [ … ], /* tipe göre §7.2 */ accents: /* ms */, go: /* ms */, fadeOut: /* ms */ },
   scenes: {                                                           // sahne → [[adım, gecikme ms], …] — sıralı, asla hepsi birden
-    'home-hero': [['decor', 0], ['card', 150], ['names', 650], ['date', 1500], ['place', 1700], ['countdown', 1950], ['cue', 2500]],
+    'home-hero': [['decor', 0], ['card', /* ms */], ['names', /* ms */], /* … bu tasarımın comp sırası */],
     /* 'home-invite', 'home-teasers', 'home-foot', 'story-head', 'story-frame', 'story-next', 'details-head', 'details-card',
-       'details-block', 'rsvp-card', 'rsvp-form', 'rsvp-closing' */
+       'details-faq', 'rsvp-card', 'rsvp-form', 'rsvp-closing' */
   },
-  stagger: 220, batchGap: 380, arriveDelay: 650,
-  accents: { files: ['img/accent_1-200.webp', 'img/accent_2-200.webp', 'img/accent_3-200.webp'],
-             open: { count: 16, spread: 1700, dur: [3600, 6400], size: [24, 46] }, arrive: { … }, closing: { … } }
+  stagger: /* 150–250 */, batchGap: /* 300–450 */, arriveDelay: /* ms */,
+  accents: {                                                          // an → parçacık grupları; her grup tek tür
+    open:    [{ file: 'img/accent_1-200.webp', count: /* açılış cümlesindeki sayı */, path: 'across', origin: 'left',
+                dur: [/* min, max ms */], size: [/* min, max px */] }],
+    arrive:  [ /* … */ ],
+    closing: [ /* … */ ],
+  },
 };
 const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) scale(1.06)' };   // manifest.stage'ten hesap, yorumlu
 ```
 
-- 03'teki adlar: parçacık ayarı `petals` (6 petal dosyası) ve kapanış anahtarı `envelope.bow`; yeni temalarda `accents`
-  (GPT `accent_1..3`) ve `envelope.closure`, alt anahtarlar ve değer biçimi aynı.
+- 03'teki adlar: parçacık ayarı `petals` (6 petal dosyası, dosyaları sırayla dağıtır, **yalnız düşer**: y −70 → H+140) ve
+  kapanış anahtarı `envelope.bow`; yeni temalarda `envelope.closure` ve yukarıdaki `accents` biçimi: an başına grup listesi,
+  grup = `{file, count, path, origin?, dur, size, spread?}`. `path`: `'fall'` (yukarıdan aşağı, 03), `'rise'` (aşağıdan yukarı;
+  13 "fireflies glow up"), `'across'` (yatay süzülme, hafif dalga; 01 "two olive leaves float across"), `'swirl'` (dönerek
+  yükselip dağılma; 15 "petals swirls up"). `origin`: `'top'`, `'bottom'`, `'left'`, `'right'`, `'card'` (kartın çevresinden),
+  `'stage'`. **Açılış cümlesindeki tür, sayı ve yön bağlayıcıdır** (01 `open`: yalnız `accent_1` × 2, `across`; 02 "a single
+  eucalyptus leaf drifts down": × 1, `fall`); "konfeti" gibi rastgele çoklu yağmur cümlede yoksa yapılmaz. Ateş böceği parıltısı
+  gibi ışık CSS'tir (§5.7), dosya yine GPT accent'idir.
 - İşaretler: `[data-scene="<sayfa>-<blok>"]` (görünüme girince oynar), `[data-step="<anahtar>"]` (gecikme = plan),
   `[data-a="<preset>"]` (giriş biçimi), `[data-i]` (aynı adımda ek sıra); `data-repeat` kopyaları sırasını kendisi alır.
 - Ortak preset'ler (`site.css`): `rise`, `rise-lg`, `bloom`, `write` (soldan sağa açılan yazı), `unfurl`, `drift-tl`,
@@ -427,6 +535,12 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   Preset yalnız `opacity`/`transform`/`clip-path`/`filter` ile GPT parçasını oynatır.
 - Süreler: sahne başına ilk adım ≤ 150 ms, son adım ≤ 3000 ms; tek giriş 600–1800 ms; `batchGap` 300–450; `stagger` 150–250.
   Görünüme birlikte giren sahneler sırayla (`batchGap`). JS'siz her şey görünür (`.js [data-step]` yalnız JS varken gizler).
+- **Comp öğe haritası (zorunlu):** tema `README.md`'sinde sayfa başına tablo: her W1 comp öğesi → şablon öğesi (seçici) ya da
+  **bilinçli sapma + nedeni** (ör. 01 W1.2 dört kutulu geri sayım → sade rakam, §5.7). Comp'u olmayan bölümler (01: home davet kartı,
+  tanıtımlar, RSVP formu, SSS) bu tasarımın parçaları (`invitation_card`, `info_card`, `divider`, `decor_*`) ve tipografisiyle
+  kurulur — 03'ün aralıkları, süs konumları, bölüm sırası ve kart oranları taşınmaz. `compare_<sayfa>_390.jpg` (W1 | tema) G4NN
+  kapanmadan **qa-kontrol** incelemesinden geçer (§13.4); "03'ün yeni renkli kopyası" görünümü ret sebebidir (her tasarım
+  katalogdaki eksenlerde diğerlerinden ayrışmalı — `tools/katalog.py kontrol`).
 - **Her tasarımın koreografisi kendi**: zarf açılışı = katalogdaki `acilis` cümlesi (§7), story dizilişi = katalog `story` /
   `DESIGN_BRIEF.md` "Foto sunumu" + W1.3 comp (ör. 02 anlık baskılar uçarak, 06 basamaklı kemerler ışık süpürmesiyle, 13 tek
   sayfada zikzak, 17 galeri duvarı), parçacık = o tasarımın 3 accent'i. 03'ün zamanlaması kopyalanıp yalnız dosya adı
@@ -451,6 +565,14 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   `aspect` oranında yapar; oran dışı fotoğraf yine `cover` ile dolar.
 - Alt metin: hero `"Photo of {name_display}"`, story başlıkları, mekân `"{venue.name}"`.
 - Tema 0, 1, 2, 3 hikâye fotoğrafıyla ve boş başlıkla düzgün görünür (boş başlık `data-empty` alır; CSS boşluğu kapatır).
+- **Telefonda en küçük foto penceresi:** 390 px'te her story penceresi ≥ **38vw** (~148 px) genişlikte. Comp yan yana dizilişi
+  (06 "three arch frames standing side by side" ≈ 110 px, 13 tek sayfada üç foto ≈ 100 px) buna sığmıyorsa telefonda basamaklı ya
+  da alt alta düzen kurulur ve tema README'sinde comp sapması olarak yazılır; geniş ekranda comp dizilişi kalır.
+- **Uzun kart / uzun sayfa:** GPT kartı (`info_card`, `invitation_card`) 2:3 sabit gelir. Daha uzun bir kâğıt gerekiyorsa (13
+  "single tall storybook page", 7+ program satırı) yalnız **dikey 3 dilim** kesimiyle uzatılır: üst bant + tekrarlanabilir düz kâğıt
+  orta bandı (dekorsuz olduğu `serbest_bolge`/`free_zone` ile doğrulanır) + alt bant; ek yeri önizlemede gözle denetlenir.
+  CSS ile kâğıt, kenarlık ya da çerçeve çizilmez. Orta bant tekrarı ek yeri bırakıyorsa tasarımın `ekler`'ine uzun bir GPT
+  parçası (`story_page.png`) istenir (katalog düzeltmesi + G2NN).
 
 ## 10. Erişilebilirlik ve azaltılmış hareket (zorunlu)
 
@@ -465,6 +587,9 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
 - `prefers-reduced-motion: reduce`: dokununca animasyonsuz doğrudan home (kart uçuşu yok), sahneler anında görünür, parçacık yok,
   sonsuz döngülü animasyon (ipucu nabzı, ok) yok, VT süreleri ~0, `scroll-behavior: smooth` kapalı.
 - Geri sayım `role="timer"` (canlı bölge değil), bitince metin. Ses/otomatik oynatma yok. İçerik yalnız görselde değil.
+- CSS `content` ile eklenen işaretler (SSS "+"/"×", oklar) erişilebilir ada girmez: `content: "+" / ""` (önce yedek olarak
+  `content: "+"`) ya da şablonda `aria-hidden="true"` span. Denetim: SSS sorusunun erişilebilir adı = soru metni (CDP
+  `Accessibility.getFullAXTree`; `tests/g051-browser.ts`).
 
 ## 11. View transition, geri dönüş, oturum anahtarları (zorunlu)
 
@@ -484,9 +609,16 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   `data-format="amp"` ya da elle `<span class="amp">`).
 - Alfabe: isimler aksanlı olabilir (09 demo "Amélie"). Seçilen ailelerin Google Fonts CSS yanıtında `latin-ext` bloğu yoksa
   (yalnız `latin`) aksanlı isim başka fontla karışır → başlık için `latin-ext` destekli eş seçilir ya da Sonuç'a sınır olarak yazılır.
-- Taşma: 360 px'te uzun isimler (`partners` ≥ 14 harf), 6 program satırı, 60 karakterlik mekân adı ve tam İngiliz tarih biçimi
-  (`en-GB`) hiçbir sayfada yatay kaydırma ya da kart dışına taşan metin üretmez; kart metni `free_zone` içinde kalır
-  (`clamp()` + container query birimleri, 4+ satırda sıkışık düzen — 03 `.sched-list:has(...)`).
+- Taşma: alıcının girebildiği her değerde düzen bozulmaz. Şema bugün çoğu alanı **sınırlamıyor** (`schedule` için `maxItems`,
+  `display_name`/`full_name`/`venue.name`/`host_line`/program etiketi-yeri/`dress_code` için `maxLength` yok; panel de sınır
+  koymuyor; yalnız `/start` isimleri ≤ 40). Bu yüzden tema iki düzeyde denenir:
+  1. **Tasarım aralığı** (kart `free_zone` içinde, sıkışık düzen dahil): isimler ≥ 14 harf, 1–6 program satırı, 60 karakterlik
+     mekân, tam İngiliz tarih (`en-GB`) — `clamp()` + container query birimleri, 4+ satırda sıkışık düzen (03 `.sched-list:has(...)`).
+  2. **Zorlama kaydı** (bozulmadan, kart dışına taşmadan; görünüm sade kalabilir): 12 program satırı (60 karakterlik etiket ve yer),
+     40 karakterlik isimler ve tam adlar, 80 karakterlik mekân, host line ve dress code. Kartın sığdıramadığı program satırları
+     kartın **altında düz kâğıtta** sürer (ya da kart §9'daki 3 dilim kesimle uzar); metin boyalı dekorun üstüne binmez, yatay
+     kaydırma yok. 03 bugün bunu karşılamıyor (README "Program 7+ satırda Details kartına sığmaz") → §14 #10.
+  Şemaya/panele üst sınır koymak ürün kararıdır (§14 #10); karar gelene kadar tema 2. düzeyi karşılar.
 - Tarihler yalnız motor biçimiyle (`May 15, 2027` / `15 May 2027`); comp'taki büyük harfli tarih CSS `text-transform` ile.
 
 ---
@@ -501,13 +633,17 @@ python3 platform/themes/<slug>/build_images.py                 # denetimler geç
 # platform/ içinde (Node 22)
 export PATH=/opt/node22/bin:$PATH && cd platform && npm ci
 npm test && npm run typecheck && npm run build                 # build → trace-check yeni temanın index.html'ini de arar
-NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <slug>
-#   ↑ bugün betik yalnız blush-garden-rose'u denetliyor; --theme genelleştirmesi §14 #3 (ilk G4NN'den önce)
+NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <slug>    # G052
+NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts --theme <slug>       # G052 (takvim, SSS, sorular)
 ```
-Yazma alanı: `platform/themes/<slug>/` + `platform/tests/theme-<slug>.test.ts` + `platform/previews/g4NN/` (görev
-dosyalarının `yazar:` alanı bugün yalnız tema klasörü → entegratör genişletir; §14).
+Yazma alanı: `platform/themes/<slug>/` + `platform/tests/theme-<slug>.test.ts` + `platform/previews/g4NN/` (G4NN `yazar:`
+alanında; G046 incelemesinde katalogdan yeniden üretildi).
 
-### 13.2 `tests/theme-<slug>.test.ts` (node:test; `theme-blush-garden-rose.test.ts`'in 15 testinin karşılığı + ekler)
+**`--theme` bugün yok:** `theme-check.cjs` (ve `g051-browser.ts`, `final-smoke.ts`) yalnız `blush-garden-rose`'u denetliyor.
+Genelleştirme **G052**; G401–G420'nin `bagimli`'sinde G052 var — **G052 bitmeden hiçbir G4NN alınmaz** (yoksa ajan ya `yazar`
+dışına yazar ya tarayıcı denetimini atlar).
+
+### 13.2 `tests/theme-<slug>.test.ts` (node:test; `theme-blush-garden-rose.test.ts`'in 20 testinin karşılığı + ekler)
 1. `theme.json`: herkese açık (`listThemes`), 5 sayfa, 5 foto alanı, `aspect` = `manifest.photo_slots` `box_px`.
 2. Sayfaların ve `site.css`'in andığı her tema dosyası var (kırık görsel yok); `og:image` dosyası var.
 3. Beş sayfa motor uyarısız; her `data-field` içerik kaydına eşit (bağımsız `en-US` biçimleyici).
@@ -526,26 +662,42 @@ dosyalarının `yazar:` alanı bugün yalnız tema klasörü → entegratör gen
 15. Gizlilik: kapalı bölümler hiçbir sayfa kaynağında (site-data dahil) iz bırakmaz.
 16. **Ek:** `content.demo.json` geçerli, `record_kind: "demo"`, koleksiyon kaydıyla `story` dışında birebir; `/start` teması
     sunar (`claimableTheme`).
-17. **Ek:** program 1 ve 6 satır, uzun isimler ve `en-GB` kayıtla render uyarısız (görsel taşma §13.3'te).
+17. **Ek:** program 1 ve 6 satır, uzun isimler ve `en-GB` kayıtla render uyarısız; §12 zorlama kaydıyla (12 satır, 40/80
+    karakter) uyarısız (görsel taşma §13.3'te).
+18. **G051 takvim:** home ve details'te `data-calendar="ics"` → `/<slug>/event.ics` ve `google` → Google linki (`target` +
+    `rel`); önizlemede anahtar korunur; tarihsiz kayıtta ikisi de yok.
+19. **G051 SSS:** details'te sırayla `<details>` akordeon, `.q`/`.a` içerikten; blok kapalıyken ya da liste boşken kaynakta yok.
+20. **G051 sorular:** rsvp formunda soru başına `fieldset[data-rsvp-question]`, seçenekler radyo, kısa yanıt kutusu, hata yeri;
+    hepsi `[data-rsvp-if-attending]` içinde. (18–20: `theme-blush-garden-rose.test.ts` G051 testlerinin karşılığı.)
+21. **Tam ad yedeği:** `partners[n].full_name = null` → davet kartında `display_name`; boş isim satırı (`data-empty`) yok.
+22. **K21 statik denetim:** `site.css`'te `.cd-*` (ve tasarımın içerik bloklarında) `border`/`outline`/`box-shadow` yok (§5.7).
 
-### 13.3 Tarayıcı denetimi (`theme-check`, Playwright, `next start`, `/opt/pw-browsers`; `playwright install` yok)
+### 13.3 Tarayıcı denetimi (`theme-check --theme` + `g051-browser --theme`, G052; Playwright, `next start`, `/opt/pw-browsers`; `playwright install` yok)
 - **Genişlikler:** 5 sayfa × 360 / 390 / 430 / 768 / 1280: yatay kaydırma yok, ekran dışı metin yok, kırpılmamış taşan öğe yok,
   bütün görseller yüklü, konsol/CSP hatası yok, her alan = içerik, `<title>` doğru, kart metni `free_zone`'da, foto durumları
   (demo fotoğraflı site `user`; fotoğrafsız site `placeholder`; önizlemede etiket görünür, yayında görünmez), fontlar yüklü.
 - **Kısa telefonlar:** 360×640, 375×553 (Safari çubuklarıyla), 390×690 (panel önizlemesi), 390×844: zarf sayfası yazıları
-  (kicker, isimler, ipucu; açıkken "Replay") boyalı dekorun değil düz zeminin üstünde (yazı gizlenip zemin ölçülür).
+  (kicker, isimler, ipucu; açıkken "Replay") boyalı dekorun değil düz zeminin üstünde (yazı gizlenip zemin ölçülür); kapalı nesne
+  ve "Tap to open" ekranda (§7.1 sahne boyu); açık hâl (kapı/kitap) yatay kaydırma üretmiyor.
+- **G051 (390 px):** takvim düğmeleri ≥ 44 px ve kart dışında; SSS dokun/klavye ile açılır, sorunun erişilebilir adı = soru metni;
+  sorular "yes"te görünür, "no"da gitmez; panelde "Questions & answers" ve "Questions for your guests" bölümleri bu temada görünür.
 - **Akışlar (390×844):** zarf → home (kart geçiş bayrağı, süre) → nav ile story; geri → açık zarf + "Replay the opening";
   replay; Skip → home; reduced motion → animasyonsuz home; site başına oturum (başka slug kapalı zarfla açılır); önizleme
   anahtarı açılış ve sayfalar boyunca korunur; geri sayım hedefi ve bitmiş hâli; linksiz bloklar misafire görünmez; RSVP: boş
   isim hatası yerinde + odak + gönderim yok, yanıt bu siteye kaydedilir + teşekkür, "Send another reply", önizlemede
   gönderim yok, tema demosu (`/start/demo/<slug>/rsvp`) hatasız; dış istek yalnız Google Fonts; veri değişince sayfa değişir.
-- **Ölçüm:** ilk görünüm index ve home (DPR 3, yer tutucu) ≤ 1,5 MB (§6); dokunmatik hedefler ≥ 44 px.
+- **Ölçüm:** ilk görünüm index ve home (DPR 3, yer tutucu) ≤ 1,5 MB, ayrıca tohumlanmış fotoğraflarla (sayı yazılır, §6);
+  dokunmatik hedefler ≥ 44 px.
 - **Kayıt:** 390×844 açılış MP4'ü (dokun → açılış → home → story → details).
 
 ### 13.4 Önizlemeler (`platform/previews/g4NN/`, yayına girmez)
 `<sayfa>_390.png` (5), index ve home her genişlikte, `details_1280.png`, `*_placeholder.png`, `details_390_changed_content.png`,
-`compare_<sayfa>_390.jpg` (**W1 comp | tema** yan yana), `opening_390x844.mp4`, `checks.json` (geçen/uyarı/hata, ilk görünüm
-KB, açılış ms, seed fotoğrafları).
+`compare_<sayfa>_390.jpg` (**W1 comp | tema** yan yana), `compare_closure.jpg` (§7.1), `opening_390x844.mp4`, `checks.json`
+(geçen/uyarı/hata, ilk görünüm KB — yer tutuculu ve fotoğraflı —, açılış ms, seed fotoğrafları).
+
+**Karşılaştırma bir kapıdır:** `compare_*` görselleri ve tema README'sindeki comp öğe haritası (§8) G4NN `inceleme`'ye geçmeden
+**qa-kontrol** alt-ajanına (salt okunur) incelettirilir; ret sebepleri: comp'ta olmayan 03 düzeni/süs konumu, kodla çizilmiş
+çerçeve/dekor (§5.7), comp öğesinin gerekçesiz atlanması. İnceleme sonucu Sonuç'a yazılır.
 
 ### 13.5 Sonuç (dürüst; görev dosyasında)
 - Ne yapıldı (dosyalar), açılışın ve story'nin tek cümlelik tarifi, comp'tan bilinçli sapmalar ve nedeni.
@@ -563,12 +715,15 @@ KB, açılış ms, seed fotoğrafları).
 |---|---|---|---|
 | 1 | Ortak tema yardımcıları 03'ün klasörlerinden içe aktarılıyor | `tools/tema_build.py`: webp/srcset/manifest, pencere maskesi, serbest bölge, yer tutucu, og kırpımı, hiza ölçümü; kesimler: genel eğri kapak kenarı, ön cep (eğri dahil), gatefold dikişi, kitap sırtı, kese ağız yayı, şerit farkı | claude-kod |
 | 2 | `kit_check` kapalı/açık zarf (ve sarılı kapanış) hizasını denetlemiyor | `--paket 5`'e gövde sınır kutusu karşılaştırması (±%1,5 uyarı, > %4 hata) | claude-kod |
-| 3 | `scripts/theme-check.cjs` blush-garden-rose'a bağlı (`THEME`, G035 karşılaştırması, font listesi, kart seçicileri, başlıklar) | `--theme <id>`; font listesi sayfadaki Google Fonts linkinden, kart ↔ `free_zone` eşlemesi `manifest`'ten, başlıklar `data-text`'ten, karşılaştırma W1 comp'larıyla, çıktı `previews/<görev>/` | claude-kod (ilk G4NN'den önce) |
-| 4 | G4NN `yazar:` yalnız tema klasörü | `platform/tests/theme-<slug>.test.ts`, `platform/previews/g4NN/` eklenmeli; G406 vb. 2. adımdaki `img_src` tema klasörü yerine geçici klasör | entegratör |
-| 5 | 01, 02, 04–20 demo kayıtlarında `story` yok | koleksiyon `content.demo.json`'larına intro + 3 başlık (PAKET 2 adları) | claude-metin |
+| 3 | `scripts/theme-check.cjs`, `tests/g051-browser.ts`, `tests/final-smoke.ts` blush-garden-rose'a bağlı | **açıldı: G052** (`--theme <id>`; G401–G420 ona bağlı) | claude-kod (ilk G4NN'den önce) |
+| 4 | G4NN `yazar:` yalnız tema klasörü; görev metni `img_src`, "link will be added soon", "03'ün yapısını kopyala" diyordu | **yapıldı** (G046 incelemesi): `tools/katalog.py` `g4_gorev` düzeltildi, 19 görev dosyası yeniden üretildi | — |
+| 5 | 01, 02, 04–20 demo kayıtlarında `story` yok; 01'de `full_name` `null` | **açıldı: G053** | claude-metin |
 | 6 | blush-garden-rose'ta `og:image` ve favicon yok | `web_hero`'dan `og-1200x630.jpg` (alt hizalı 1.91:1 kırpımda zarf ve fiyonk tam kalıyor — G046'da kırpım çizgileriyle gözle bakıldı, dosya üretilmedi), `ribbon_bow`'dan ikon | claude-kod |
 | 7 | Her tema rotasının Vercel paketine bütün tema görselleri giriyor (20 tema × ~2,7 MB ≈ 55 MB/fonksiyon; Aşama 2 varyantlarıyla 250 MB sınırına yaklaşır) | görselleri yalnız tema varlık rotasına izle (diğer rotalara `*.html`/`*.json`), ya da derlemede `public/`'e kopyala | claude-kod |
 | 8 | Aşama 2 varyantları (G090 sonrası) | renkler yalnız `:root` token'larında; `html[data-variant]` kancası hazır; varyant görsel klasörü ayrı karar | — |
+| 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | yüklemede 640/1280 türevleri + motorun yazdığı `srcset`/`sizes`; o zamana kadar §6 fotoğraflı ölçüm yazılır | claude-kod (platform) |
+| 10 | Şema/panel program satırını ve metin uzunluklarını sınırlamıyor; 03 Details kartı 7+ satırda taşıyor | **ürün kararı:** üst sınır (ör. `schedule` ≤ 8–12, isimler ≤ 40 — `/start` gibi —, mekân ≤ 80; şema + iki doğrulayıcı + panel) ya da yalnız tema tarafı (§12 zorlama kaydı); 03'ün Details kartı §9 3 dilimle uzatılır | kullanıcı kararı → claude-kod |
+| 11 | 01 `closure_sprig` gibi açılış cümlesinin gerektirdiği gizli parçalar | her G2NN W2'den önce `acilis` cümlesi §5.1'e göre okunur; eksik `ekler` katalogda | entegratör |
 
 ## 15. Kontrol listesi (G4NN)
 
@@ -577,21 +732,28 @@ KB, açılış ms, seed fotoğrafları).
 - [ ] `theme.json`: 5 sayfa, 5 sabit foto anahtarı, `aspect` = manifest `box_px`, `internal` yok
 - [ ] `content.demo.json` = koleksiyon kaydı (+ `story`), `DEV_CONTENT` ile aynı
 - [ ] Kişisel her değer işaretli (§3.2, §4); comp demo metni şablonda yok; link blokları `data-if="urls.*"`
+- [ ] Davet kartında tam ad yedeği (`full_name` boşsa `display_name`); `guest_policy` yok
+- [ ] G051: takvim çifti home + details, SSS bloğu details, çiftin soruları rsvp formunda (§3.5); SSS işareti erişilebilir ada girmiyor
 - [ ] RSVP sayfası G042 sözleşmesinde; story `data-optional="our_story"`, rsvp `data-if="!rsvp.method"`; nav kuralları
 - [ ] `build_images.py`: geçici `parts_prep`, tip kesimleri, maskeler, `free_zone`, yer tutucular, og; pencere şeffaflığı ve yeşil
       denetimi geçiyor; `manifest.json` (stage, closure, photo_slots, bayt)
-- [ ] Kapalı/açık hiza ±%1,5 (ya da ölçülen düzeltme manifest'te)
+- [ ] Kapalı/açık hiza tipine göre kenarlarla ±%1,5 (ya da ölçülen düzeltme `manifest.stage.align`'da)
+- [ ] Kapanış kesim geometrisine bağlı (`manifest.closure`, `compare_closure.jpg`); kapakla taşınan kapanış ortak sarmalayıcıda
 - [ ] Zarf açılışı tipine uygun (§7): kapanış, zarf parçaları, kart ayrı hareket; 90° el değiştirme temiz; ≤ 5 s; Skip
 - [ ] Kart home'a VT ile geçiyor; VT adları sayfada tek; VT'siz tarayıcıda solma
-- [ ] `MOTION` tasarıma özel (açılış + story + accent); 03 zamanlaması olduğu gibi kopyalanmadı
-- [ ] Yalnız GPT parçaları; CSS yalnız ışık ve arayüz (§5.7)
-- [ ] Her `<img>` doğru `srcset`/`sizes`; ekran altı `lazy`; ilk görünüm index/home ≤ 1,5 MB (DPR 3)
+- [ ] `MOTION` tasarıma özel (açılış + story + accent); 03 zamanlaması olduğu gibi kopyalanmadı; `accents` açılış cümlesindeki
+      tür/sayı/yönde
+- [ ] Tema README'sinde comp öğe haritası; comp'u olmayan bölümler bu tasarımın parçalarıyla; `compare_*` qa-kontrol'den geçti
+- [ ] Yalnız GPT parçaları; CSS yalnız ışık ve arayüz (§5.7); içerik bloklarında CSS çerçeve yok
+- [ ] Her `<img>` doğru `srcset`/`sizes`; ekran altı `lazy`; ilk görünüm index/home ≤ 1,5 MB (DPR 3, yer tutucu); fotoğraflı
+      ölçüm Sonuç'ta
 - [ ] Foto alanları: maske, `object-position`, yer tutucu, etiket yalnız önizlemede, alt metinler
 - [ ] Erişilebilirlik: tek `h1`, sahne düğmesi + klavye, ≥ 44 px, kontrast ölçüldü, reduced motion
 - [ ] `sessionStorage` anahtarları slug'lı, `<head>` betikleriyle aynı; geri dönüş/replay/bfcache çalışıyor
-- [ ] 360 px'te uzun isim, 6 program satırı, uzun mekân, `en-GB` tarihle taşma yok; aksanlı isim fontu (latin-ext) kontrol edildi
+- [ ] 360 px'te tasarım aralığı (uzun isim, 6 program satırı, uzun mekân, `en-GB`) ve §12 zorlama kaydıyla taşma yok; story
+      pencereleri ≥ 38vw; aksanlı isim fontu (latin-ext) kontrol edildi
 - [ ] `og:image` (isimsiz, 1200×630) + `og:title` kişisel
-- [ ] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-<slug>.test.ts` (§13.2)
-- [ ] `theme-check`: 5 genişlik, kısa telefonlar, akışlar, ağırlık, MP4 — hatasız
+- [ ] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-<slug>.test.ts` (§13.2, 22 madde)
+- [ ] `theme-check --theme` ve `g051-browser --theme` (G052): 5 genişlik, kısa telefonlar, akışlar, G051, ağırlık, MP4 — hatasız
 - [ ] `previews/g4NN/` (W1 karşılaştırması dahil); tema `README.md`
 - [ ] Sonuç dürüst: denenmeyenler, comp sapmaları, sorunlu GPT parçaları + önerilen prompt düzeltmeleri

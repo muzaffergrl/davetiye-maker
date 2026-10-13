@@ -14,6 +14,7 @@
 import { CONTENT_SCHEMA } from './schema.ts';
 import { isValidTimeZone, parseIsoDate } from './format.ts';
 import { safeHttpUrl } from '../theme/urls.ts';
+import { normalizeLine } from './text.ts';
 
 export type IssueLevel = 'error' | 'warning';
 
@@ -65,16 +66,19 @@ export const QUESTION_ID_RE = /^[a-z0-9][a-z0-9_-]{0,23}$/;
 // JS \s and Python str.isspace() differ on a few code points).
 const WS = '\\t\\n\\v\\f\\r \\x1c-\\x1f\\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\\ufeff';
 const BLANK_RE = new RegExp(`^[${WS}]*$`);
-const EDGE_WS_RE = new RegExp(`^[${WS}]+|[${WS}]+$`, 'g');
 
 /** True for a missing value or text made only of whitespace. */
 export function isBlank(value: unknown): boolean {
   return typeof value !== 'string' || BLANK_RE.test(value);
 }
 
-/** Choice text compared case-insensitively without surrounding whitespace (duplicate check). */
+/**
+ * Duplicate check of a question's choices: the RSVP server's own matching rule (normalizeLine: NFC, no control
+ * characters, inner whitespace collapsed, trimmed — lib/rsvp/validate.ts stores a guest's pick as that), compared
+ * case-insensitively. Looser than this, "Fish  Pie" and "Fish Pie" would both pass yet be one stored answer.
+ */
 function choiceKey(value: string): string {
-  return value.replace(EDGE_WS_RE, '').toLowerCase();
+  return normalizeLine(value).toLowerCase();
 }
 
 type Schema = { readonly [key: string]: unknown };

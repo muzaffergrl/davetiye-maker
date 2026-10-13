@@ -7,8 +7,9 @@
  * page map for navigation, the slug for per-site session keys). DEV_CONTENT (below MOTION) is used only when
  * the theme files are opened without the platform (static server): then devRender() fills the same markers.
  *
- * Per design, change only MOTION (order + timings) and, if a design's envelope parts differ, ENVELOPE_GEOMETRY.
- * Markup hooks stay the same in every design:
+ * Tuning THIS theme: MOTION (order + timings) and ENVELOPE_GEOMETRY. A NEW design is not this file with new numbers:
+ * it follows docs/11_TEMA_STANDARDI.md (its own layout from its W1 comps, its own envelope type and opening, its own
+ * accents and story arrangement); only these markup hooks and the platform contract are shared:
  *   [data-scene="name"]  a group that enters when scrolled into view (plan: MOTION.scenes[name])
  *   [data-step="key"]    an element inside a scene; its delay = MOTION.scenes[name][key]
  *   [data-a="preset"]    how it enters (CSS presets in site.css: rise, rise-lg, bloom, write, unfurl, drift-*)

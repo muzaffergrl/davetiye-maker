@@ -457,6 +457,10 @@ SAHNELER = [
 #   ortak: comp'ların ortak kalite/ışık cümlesi (19: karanlık natürmort ışığı)
 #   pencere_temiz: (İngilizce ek, Türkçe kontrol) — foto penceresinin üstüne hiçbir şey binmesin (08: kırağı)
 #   foto.kadraj: Paket 2.1–2.4'e eklenen kadraj cümlesi (yuvarlak/oval pencere)
+# İsteğe bağlı (G046 incelemesi):
+#   kapanis_parca: W2 closure.png metni W1'deki `kapanis`tan farklıysa (01: mühür dalsız; dal `ekler` closure_sprig)
+#   kapanis_doluluk: sarılı olmayan kapanışın kareyi doldurma yüzdesi (varsayılan 70) · kapanis_k_ek: Kontrol eki
+#   kesim_kenari / acik_kenari: KESIM_KENARI[tip] yerine (04: yırtma şeridi) — kesilecek kenarın net olması cümlesi
 
 KADRAJ_DAIRE = ("Compose so that both people fit well inside a centered circle whose diameter is the image width (the "
                 "photo will be cropped to a circle), with space around them — for standing or kneeling poses, "
@@ -499,6 +503,9 @@ WEB = {
         zarf_acik="the lace-edged V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — {liner}; the front pocket empty",
         kapanis="an oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms, a short olive sprig tucked under it",
         kapanis_kisa="oval botanical seal", kapanis_yeri="pressed onto the tip of the V flap, a little below the envelope's center", kapanis_olcu="1024×1024",
+        # W2: the seal WITHOUT its sprig (the sprig slides out on its own in the opening: closure_sprig.png below)
+        kapanis_parca="the oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms — WITHOUT the olive sprig that is tucked under it in the W1 screens (the sprig is a separate image, closure_sprig.png)",
+        kapanis_doluluk=50, kapanis_k_ek="; zeytin dalı YOK (ayrı parça: closure_sprig.png); kare kenarlarında dal için boşluk var",
         acilis="On tap, the olive sprig slides out from under the oval seal, the lace-edged flap peels up on its hinge carrying the seal with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.",
         kart_kucuk="a small warm-ivory card with softly rounded corners and a fine antique-gold double border, a rounded-corner portrait photo window in its upper 60% and plain blank paper below",
         davet_karti="a tall warm-ivory cotton card with softly rounded corners and a fine antique-gold double border, a slender watercolor olive branch with silvery leaves and small dark olives arching across the top-left corner and a smaller sprig at the bottom-right",
@@ -508,6 +515,10 @@ WEB = {
         cerceve_yatay="a landscape version of the same rounded-corner ivory card frame with the fine antique-gold double border and a tiny olive sprig at its bottom-left corner",
         story="three rounded-corner gold-bordered portrait cards fanned out gently like a hand of cards — the middle card upright and slightly higher, the side cards tilted about 8 degrees outward and overlapping it only at their outer ivory margins, so all three green windows stay fully visible and each caption sits under its own card",
         story_ortusme=True,
+        ekler=[("parts/closure_sprig.png", "1024×1024", True, "Mührün altındaki zeytin dalı (tek başına, açılışta kayar)",
+                "The short olive sprig that is tucked under the oval seal on the olive envelope in the W1 screens, alone and COMPLETE — including the part of its stem and leaves that the seal hides there, as if the seal had been lifted off it. The seal itself is NOT drawn. Draw it on a square canvas exactly like closure.png and give closure.png as the reference image: same scale, and placed exactly where the sprig lies under the seal there, so that closure.png laid on top of this image covers the middle of the sprig pixel for pixel. The whole sprig stays inside the square with an empty margin. Same watercolor technique, colors and light as the W1 screens.",
+                "yalnız dal (mühür yok); mührün altında kalan sap ve yapraklar da çizili; closure.png üstüne konunca mühür dalın ortasını örtüyor; kareden taşmıyor; gölge yok; alfa",
+                "Front view, perfectly straight, not cropped.")],
         accent=["silvery-green olive leaf", "small ripe dark olive with a short stem and one tiny leaf", "tiny white jasmine blossom"],
         kume="decor",
         doku="soft warm-ivory watercolor paper (#F1EFE6) with faint linen grain and very subtle tonal mottling",
@@ -562,6 +573,8 @@ WEB = {
         tip="kapak",
         zarf="a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, bordered with diagonal faded-red and navy airmail stripes along its left, right and bottom edges and in a straight band just under the tear strip, two fictional botanical postage stamps in the top-right corner below that band (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words), and a slim plain perforated tear strip running along the whole top edge as a clean separate band",
         zarf_kisa="airmail envelope",
+        kesim_kenari="the perforation line along the lower edge of the tear strip",
+        acik_kenari="The ragged torn top edge is crisp and clearly visible.",
         zarf_acik="exactly the same envelope with ONLY the slim tear strip removed along its perforation line, leaving a slightly ragged torn top edge; the two stamps, the airmail stripes, the paper, the size and the position are unchanged; the inside is not visible",
         acik_duzenle=True,
         kapanis="a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it",
@@ -1240,8 +1253,23 @@ VARSAYILAN_ALTYAZI = ["First hello", "The proposal", "Forever begins"]
 YENIDEN_TANIM = "- 2026-10-13 yeniden tanımlandı (K22–K24, G033)"
 ON = "Front view, perfectly straight, not cropped, with generous empty margin all around."
 ORTALI = "Front view, perfectly straight, centered and not cropped, with generous empty margin all around."
-ISIK = ("Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or "
-        "numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).")
+ISIK = ("Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light "
+        "rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True "
+        "transparent background PNG (real alpha channel — not white, not a checkerboard).")
+
+# G046: edges Claude cuts along (docs/11 §5.1, §7) must read clearly in the GPT image. Per envelope type:
+# (closed image: edge to cut, open image: sentence). A design may override with WEB[n]["kesim_kenari"] / ["acik_kenari"].
+KESIM_KENARI = {
+    "kapak": ("the free edge of the flap",
+              "The top edge of the front pocket is a crisp, clearly visible edge against the liner."),
+    "kapi": ("the center seam where the two doors meet",
+             "The top edge of the center pocket is a crisp, clearly visible edge against the center panel."),
+    "kitap": ("the cover's outer edge and the spine",
+              "The spine line between the open cover and the right page is crisp and clearly visible."),
+    "kese": ("the gathered mouth",
+             "The front rim of the mouth is a crisp, clearly visible edge against the lining."),
+    "kilif": (None, None),  # vellum sleeve: no cut (docs/11 §7.7)
+}
 PAKET_BASLIK = re.compile(r"^##\s+PAKET\s+(\d)\b")
 
 
@@ -1378,16 +1406,23 @@ def w2_parcalar(t, w):
                    f"it wraps the {zk} there, so the two images overlay pixel for pixel. Where it wraps around the edges, "
                    f"its ends stop exactly at the {zk}'s outline. The {zk} itself is NOT drawn. Front view, perfectly "
                    f"straight. {ISIK}")
-        kapanis_k = (f"yalnız {kk}; harf/monogram yok; envelope_closed üstüne 1:1 oturuyor; uçlar zarf kenarında bitiyor; "
-                     "gölge yok; alfa")
+        kapanis_k = (f"yalnız {kk}; harf/monogram yok; envelope_closed üstüne 1:1 oturuyor (yarı saydam üst üste konunca "
+                     "zarfın kenarlarıyla çakışıyor); uçlar zarf kenarında bitiyor; gölge yok; alfa")
     else:
-        kapanis = (f"Only {w['kapanis']}, alone, exactly as it sits on the {zk} in the W1 screens "
-                   f"({w['kapanis_yeri']}), drawn large so it fills about 70% of the square (Claude scales it to the "
+        dolu = w.get("kapanis_doluluk", 70)
+        kapanis = (f"Only {w.get('kapanis_parca', w['kapanis'])}, alone, exactly as it sits on the {zk} in the W1 screens "
+                   f"({w['kapanis_yeri']}), drawn large so it fills about {dolu}% of the square (Claude scales it to the "
                    f"{zk}), with the same perspective, material and light as on the {zk} and with no {zk} behind it. "
                    f"{ORTALI} {ISIK}")
-        kapanis_k = f"yalnız {kk}; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa"
+        kapanis_k = (f"yalnız {kk}; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%{dolu} dolduruyor; gölge yok; alfa"
+                     + w.get("kapanis_k_ek", ""))
     duzenle = ("Make this by EDITING envelope_closed.png (image edit), not as a new drawing — change nothing except what "
                "is described: " if w.get("acik_duzenle") else "")
+    kenar, acik_kenar = KESIM_KENARI[w["tip"]]
+    kenar, acik_kenar = w.get("kesim_kenari", kenar), w.get("acik_kenari", acik_kenar)
+    kenar_cumle = (f" The edges where this piece will be cut must read clearly: {kenar} — a crisp line with a slight "
+                   "contact shade on the object itself (not a cast shadow)." if kenar else "")
+    acik_cumle = f" {acik_kenar}" if acik_kenar else ""
     out = [
         ("parts/bg_page.png", "1024×1536", False, "Sayfa arka planı (telefon)",
          f"The page background of the W1 screens alone, as a vertical phone-screen background: {w['bg']}, with "
@@ -1402,16 +1437,18 @@ def w2_parcalar(t, w):
          "kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok"),
         ("parts/envelope_closed.png", zolcu, True, f"Kapalı zarf{ek_ad} — kapanış elemanı OLMADAN",
          f"The same {zk} as in the W1 screens, alone and closed, WITHOUT the {kk}: {w.get('zarf_parca', w['zarf'])}. "
-         f"{yer} Only this one "
+         f"{yer}{kenar_cumle} Only this one "
          f"object. {ON} {ISIK}",
-         f"tek nesne; {kk} yok; kesilmemiş; gölge yok; gerçek alfa"),
+         f"tek nesne; {kk} yok; kesilmemiş; gölge yok; gerçek alfa" + ("; kesilecek kenar net çizgi (nesnenin kendi "
+                                                                      "üstünde ince temas gölgesi)" if kenar else "")),
         ("parts/closure.png", w["kapanis_olcu"], True, "Kapanış elemanı (tek başına)", kapanis, kapanis_k),
         ("parts/envelope_open.png", zolcu, True, f"Açık zarf{ek_ad} — boş",
          f"{duzenle}The SAME {zk} as envelope_closed.png — same size, same position on the canvas, same angle, same material and "
-         f"light (give envelope_closed.png as the reference image) — now open: {w['zarf_acik']}. No card, nothing inside, "
-         f"no {kk}. {ON} {ISIK}",
+         f"light (give envelope_closed.png as the reference image) — now open: {w['zarf_acik']}.{acik_cumle} No card, "
+         f"nothing inside, no {kk}. {ON} {ISIK}",
          ("envelope_closed'un düzenlemesi: tarif edilen dışında hiçbir şey değişmedi; " if w.get("acik_duzenle") else "")
-         + "envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser)"),
+         + "envelope_closed ile aynı ölçü, konum ve açı — envelope_closed üstüne yarı saydam konunca değişmeyen gövde "
+           "çakışıyor; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser)"),
         ("parts/card_small.png", "1024×1536", True, "Zarftan çıkan küçük kart (boş)",
          f"The small card that comes out of the {zk} in W1.2, alone: {w['kart_kucuk']}. Its photo window is filled with "
          f"flat pure green #00FF00 (no texture, no shading).{temiz} The rest of the card is blank (no text). Slightly "
@@ -1458,12 +1495,15 @@ def w2_parcalar(t, w):
     for dosya, olcu, seffaf, baslik, prompt, kontrol, *duzen in w["ekler"]:
         son = f" {duzen[0] if duzen else ORTALI} {ISIK}" if seffaf else ""
         out.append((dosya, olcu, seffaf, baslik, prompt + son, kontrol))
-    out.append(("parts/web_hero.png", "1536×1024", False, "Website hero (masaüstü üst bant)",
+    out.append(("parts/web_hero.png", "1536×1024", False, "Website hero + paylaşım görseli (og:image kaynağı)",
                 f"Wide horizontal version of the same design for the desktop website header: {w['bg']}, with "
                 f"{w['corner']} framing the left and right edges, and the closed {zk} with its {kk} resting slightly "
-                f"off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, "
+                f"off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is "
+                f"also cropped to 1200×630 for link previews: keep the closed {zk} with its {kk} completely visible with "
+                f"at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, "
                 f"colors and light as the W1 screens. No text, no letters.",
-                "orta-üst boş; yazı yok; aynı dekor ve zarf"))
+                "orta-üst boş; yazı yok; aynı dekor ve zarf; zarf + kapanış altta en az %5 boşlukla tam görünür, üst %20 "
+                "yalnız zemin/dekor (1200×630 kırpımı)"))
     return out
 
 
@@ -1536,6 +1576,10 @@ def paket5_md(t, w=None, d=None):
         "- **ONE object per image** — never a sheet or set of several objects in one image.",
         "- **No cast shadow and no drop shadow** on any part (the website adds its own shadows). Light every part the same",
         "  way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.",
+        "- **No glow, halo, light rays or haze outside an object's outline** (the website adds light effects); a",
+        "  semi-transparent halo leaves a dirty edge on another background.",
+        "- Edges Claude will cut along (the flap's free edge, a door seam, a book's spine and cover edge, a pouch mouth, a",
+        "  pocket's top edge) are **crisp lines with a slight contact shade on the object itself** — never a cast shadow.",
         "- Transparent parts are **true-alpha PNG** (not white, not a checkerboard).",
         "- Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).",
         "- envelope_closed.png and envelope_open.png must fit together exactly: the SAME",
@@ -1748,49 +1792,60 @@ def g2_gorev(t):
 
 
 def g4_gorev(t):
-    """G4NN: platform teması (claude-kod). (dosya adı, metin)"""
+    """G4NN: platform teması (claude-kod). (dosya adı, metin) — kurallar docs/11_TEMA_STANDARDI.md (G046)."""
     n, k = f"{t['no']:02d}", f"collections/{t['klasor']}"
     w = web(t)
     tip_ad = ZARF_TIPI[w["tip"]][0]
     f1, f2 = t["font"]
-    tema = f"platform/themes/{tema_slug(t)}/"
-    kesim = (f"`parts_prep`'in ön cep kesimi kare, V kapaklı zarf varsayar (03'te bile `build_images.py` ile düzeltildi); "
-             f"bu tasarımda ({tip_ad}) kapak/kapı/cep parçaları tema build adımında `envelope_closed`/`envelope_open`'dan "
-             "kesilir ve önizlemede gözle doğrulanır.")
+    slug = tema_slug(t)
+    tema = f"platform/themes/{slug}/"
+    bolum = {"kapak": "§7.3", "kapi": "§7.4", "kitap": "§7.5", "kese": "§7.6", "kilif": "§7.7"}[w["tip"]]
     kapanis = ("`closure.png` zarfla aynı tuvalde çizilir, `envelope_closed` üstüne 1:1 oturur" if w.get("sarili") else
-               "`closure.png` kare tuvalde büyük çizilir; zarftaki yerine ölçeklenir")
+               "`closure.png` kare tuvalde büyük çizilir; yeri kesim geometrisine bağlanır (`manifest.closure`, docs/11 §7.1)")
     ekler = (["Tasarıma özel ek parçalar (comp'taki ilgili öğe bunlardan kurulur, kodla çizilmez — K21): " +
               "; ".join(f"`{e[0].split('/')[-1]}` — {e[3]}" for e in w["ekler"]) + "."] if w["ekler"] else [])
     return f"G4{n}-website-kaynak", task_md(
-        f"G4{n}", f"Tasarım {n} {t['ad']} — platform teması", "claude-kod", [f"G2{n}", "G038", "G046"], [tema],
+        f"G4{n}", f"Tasarım {n} {t['ad']} — platform teması", "claude-kod", [f"G2{n}", "G038", "G046", "G052"],
+        [tema, f"platform/tests/theme-{slug}.test.ts", f"platform/previews/g4{n}/"],
         f"Tasarım {n}'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): kapalı zarf açılış sayfası → "
-        "home → story, details, rsvp; yalnız bu tasarımın GPT parçalarıyla (K21), kişisel metin HTML'de.",
-        ["Örnek tema: `platform/themes/blush-garden-rose/` (G038) ve kaynağı `collections/03_Blush_Garden_Rose/website/` "
-         "(G035; README → \"Yeni tasarım için değişecek yerler\")",
-         "Tema standardı ve GPT parça listesi: `docs/11_TEMA_STANDARDI.md` (G046)",
-         f"GPT çıktıları (G2{n}): `{k}/assets/gpt/comps/` (yerleşim referansı, satılmaz), `parts/` (katmanlar), "
-         "`photos/` (örnek fotoğraflar)",
+        "home → story, details, rsvp; yalnız bu tasarımın GPT parçalarıyla (K21), kişisel metin HTML'de. "
+        "**Kurallar `docs/11_TEMA_STANDARDI.md`'dedir; bu görev metniyle çelişirse docs/11 geçerlidir.**",
+        [f"Tema standardı: `docs/11_TEMA_STANDARDI.md` — bütünü; zarf tipi **{tip_ad}** → §7.1 + {bolum}; bitti tanımı §13, "
+         "kontrol listesi §15",
+         "Platform sözleşmesi: `platform/README.md` (işaretler, RSVP form sözleşmesi, `#site-data`); çalışan örnek "
+         "`platform/themes/blush-garden-rose/` — **yalnız** işaret/RSVP/`#site-data`/oturum anahtarı kullanımı için; yerleşimi, "
+         "aralıkları, süs konumları ve zamanlaması bu temaya taşınmaz (docs/11 §8). G035 kaynağı "
+         "(`collections/03_Blush_Garden_Rose/website/`) örnek değildir",
+         f"GPT çıktıları (G2{n}): `{k}/assets/gpt/comps/` (W1, yerleşim referansı, satılmaz; yalnız sade adlar — `_vN` "
+         "denemedir), `parts/` (katmanlar), `photos/` (örnek fotoğraflar)",
          f"İçerik `{k}/content.demo.json`, renk `{k}/palette.json`, özet {ozet_yolu(t)}",
-         f"Araçlar: `tools/parts_prep.py` (PAKET 5: kırpma, `#00FF00` pencere → foto alanı + maske, `windows.json`), "
-         f"`python3 tools/kit_check.py {k} --paket 5`"],
-        ["03 temasının yapısını kopyala: sayfalar, `data-field` işaretleri, `site.js` başındaki MOTION/CONTENT ayrımı, "
-         "`.photo-slot` foto bileşeni, alt menü. Görsel dil, renkler ve fontlar bu tasarımdan.",
-         f"Parçaları hazırla: `python3 tools/parts_prep.py {k} --out <tema klasörü>/img_src` (mutlak yol) + temanın build "
-         f"adımı (WebP, 1x/2x). Yalnız bu tasarımın GPT parçaları; yeni şekil/dekor çizme (K21). {kesim}",
-         f"Zarf açılışı (MOTION.envelope): {w['acilis']} Katalog: {t['zarf'].rstrip('.')}. Kapanış elemanı, zarf/kapak ve kart ayrı "
+         f"Araçlar: `tools/parts_prep.py` (geçici klasöre; docs/11 §5.3), `python3 tools/kit_check.py {k} --paket 5`, "
+         "`node scripts/theme-check.cjs --theme <slug>` (G052)"],
+        ["`theme.json`, 5 sayfa, `site.css`, `site.js`, `build_images.py`, `README.md` docs/11 §1–§4 düzeninde. 03'ten yalnız "
+         "platform sözleşmesi alınır (motor işaretleri, RSVP formu, `#site-data`, slug'lı oturum anahtarları, "
+         "`data-scene`/`data-step`/`data-a` kancaları); yerleşim, tipografi ve hiyerarşi bu tasarımın W1 comp'larından — tema "
+         "`README.md`'sinde sayfa başına **comp öğe haritası** (her W1 öğesi → şablon öğesi ya da gerekçeli sapma; comp'u olmayan "
+         "bölümler bu tasarımın parçaları ve tipografisiyle, docs/11 §8).",
+         f"Parçalar: `python3 {tema}build_images.py` → `parts_prep` **geçici klasöre** (`--prep-dir`; tema klasörüne, `img_src/`'ye "
+         "ya da `assets/`'e asla — docs/11 §1, §5.3–§5.4), tip kesimleri (§7), maskeler, `free_zone`, yer tutucular, og; "
+         "WebP + srcset genişlikleri (§5.1, §5.5). Yalnız bu tasarımın GPT parçaları; yeni şekil/dekor çizme (K21).",
+         f"Zarf açılışı (`MOTION.envelope`, {tip_ad}, docs/11 §7.1 + {bolum}): {w['acilis']} Katalog: "
+         f"{t['zarf'].rstrip('.')}. Açılış cümlesindeki sıra, sayı ve yön bağlayıcıdır; kapanış elemanı, zarf/kapak ve kart ayrı "
          f"katmanlar; kart home'daki karta dönüşür; {kapanis}.",
-         f"Sayfa koreografisi (MOTION.scenes): her sayfada öğeler sırayla girer. Story: {t['foto'].rstrip('.')} ({w['story']}). "
-         "Details/rsvp: kart, satırlar ve buton sırayla; `accent_1..3` süzülür.",
+         f"Sayfa koreografisi (`MOTION.scenes`): her sayfada öğeler sırayla girer. Story: {t['foto'].rstrip('.')} ({w['story']}); "
+         "telefonda foto penceresi ≥ 38vw (sığmazsa basamaklı/alt alta düzen, comp sapması olarak yazılır — docs/11 §9). "
+         "Parçacıklar `MOTION.accents` (§8: tür başına dosya ve yol). Details/rsvp: kart, satırlar ve buton sırayla.",
          "Foto alanları: `hero_portrait` (card_small penceresi), `story_1..3` (frame_portrait), `venue` (frame_landscape); "
-         "kutu ve maske `windows.json`'dan. PAKET 2 fotoğrafı yoksa yer tutucu.",
+         "kutu ve maske `windows.json`'dan (§5.6, §9). PAKET 2 fotoğrafı yoksa yer tutucu.",
          *ekler,
-         f"Fontlar: {f1} + {f2} (Google Fonts link'i; repoya font dosyası girmez). Tarih US biçimi (`May 15, 2027`); "
-         "URL'ler null → \"link will be added soon\".",
-         "Önizleme: 390 px (index, home, story, details, rsvp) + açılış MP4; 360/430/768/1280 px'te yatay kaydırma denetimi."],
-        ["Tema demo içerikle açılıyor; 5 sayfa; kişisel metin görselde değil HTML'de",
-         "Zarf açılışı bu tasarıma özgü; kapanış, zarf/kapak ve kart ayrı nesneler olarak hareket ediyor",
-         "390 px önizlemeler ve açılış MP4 var; hiçbir genişlikte yatay kaydırma yok",
-         "Sonuç dürüst: test edilmeyenler (gerçek iPhone/Safari, RSVP veri akışı, yayın) açıkça yazılı"],
+         f"Fontlar: {f1} + {f2} (Google Fonts link'i; repoya font dosyası girmez). Tarih motor biçimiyle (`May 15, 2027`). "
+         "Link blokları `data-if=\"urls.*\"` ile linksiz kalkar — \"link will be added soon\" diyen ölü düğme yok (§4).",
+         f"Testler ve önizleme (§13): `platform/tests/theme-{slug}.test.ts`; `theme-check --theme {slug}` (5 genişlik, kısa "
+         f"telefonlar, akışlar, ağırlık, MP4); `platform/previews/g4{n}/` (W1 comp | tema karşılaştırmaları dahil)."],
+        ["docs/11 §15 kontrol listesi tamam (atlanan madde Sonuç'ta gerekçesiyle)",
+         f"`npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-{slug}.test.ts` (§13.2)",
+         f"`theme-check --theme {slug}` hatasız; `previews/g4{n}/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti",
+         "Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları"],
         oncelik=2 if t["no"] in (1, 4, 5) else 3)
 
 
