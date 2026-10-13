@@ -5,7 +5,8 @@ Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru*
 Vercel Blob = `blob`, G048), site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042), `/start` sahiplenme akışı (G045)
 ve testler. Supabase (G043) satış hacmi artınca.
 
-Durum: yerelde çalışıyor ve test edildi. **Hiçbir yere yayınlanmadı** (Vercel/Supabase projesi yok).
+Durum: yerelde çalışıyor ve test edildi. G044 ile Vercel'de yayında (`blob` adaptörü, private depo; ayrıntı `docs/10` §2c);
+inceleme düzeltmeleri (edca755) henüz yeniden yayınlanmadı (Git bağlantısı yok, push yayın yapmaz). Supabase projesi yok.
 
 ## Çalıştırma
 
@@ -22,6 +23,8 @@ npm run build          # next build (Turbopack) + postbuild: scripts/trace-check
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
 node scripts/theme-check.cjs   # build sonrası: blush-garden-rose — 5 genişlik, kısa telefonlar, akış, içerik, previews/g038/ (+ MP4; THEME_SHOTS_DIR başka klasör)
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
+NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts   # build sonrası: son duman testi, 390 px, gerçek tema — misafir (zarf → home →
+                       # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
 ```
 
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
@@ -70,7 +73,7 @@ themes/blush-garden-rose/          ilk gerçek tema (tasarım 03, G038) — aşa
 scripts/                           seed.ts, screenshot.cjs, theme-check.cjs, sync-schema.cjs
 tests/                             *.test.ts (node:test)
 previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
-                                   g045/ = /start akışı
+                                   g045/ = /start akışı; final/ = son duman testi (tests/final-smoke.ts, blush-garden-rose, 390 px)
 previews/g038/                     blush-garden-rose: sayfa görüntüleri, G035 karşılaştırması, açılış MP4'ü, checks.json
 ```
 
@@ -171,11 +174,12 @@ her çağrı private + token'lı, token görünmez; `getDataAdapter` seçimi; `/
 çift özeti/CSV; seed. Sahtenin kasıtlı bozulmalarla (önbellek, üzerine yazma, ETag'siz yazma, sıralama, sayfalama) testleri
 kırdığı kontrol edildi.
 
-**Gerçek Vercel Blob'a karşı denenmedi** (token/depo yok; Vercel proje açamıyor, docs/10 §2c). Doğrulanmamış varsayımlar:
+**Gerçek Vercel Blob'da G044'te denendi** (docs/10 §2c: zayıf ETag hatası bulundu ve düzeltildi; canlı duman testi betikleri repoda
+değil). Aşağıdaki varsayımlar o testlerle kısmen sınandı, bu repodaki testler yalnız bellek içi sahteyle koşuyor:
 `allowOverwrite: false` ve `ifMatch`'in sunucuda atomik olması; var olan yol hatasının metni ("This blob already exists …" —
 adaptör metne değil okumaya güvenir); depo türünün tek erişimli olması; `list`'in yazmadan hemen sonra yeni dosyayı göstermesi
 (göstermezse 5 dk çift yanıt kontrolü kaçırabilir); `del` + `ifMatch`'in yok olan dosyada davranışı. G044'te ilk iş: gerçek
-private depoda bu testlerin kısa bir canlı karşılığını koşmak.
+private depoda bu testlerin kısa bir canlı karşılığını koşmak (G044'te yapıldı, betikler oturumun geçici klasöründe kaldı).
 
 ## Tema biçimi
 
@@ -674,7 +678,8 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
 
 ## Açık konular
 
-- Vercel yayını (kullanıcı onayı) → G044; ilk canlı veri `blob` adaptörüyle (G048, gerçek depoda denenmedi). Supabase → G043.
+- Vercel yayını → G044 (yapıldı; inceleme düzeltmeleri yeniden yayın bekliyor); ilk canlı veri `blob` adaptörüyle (G048, G044'te
+  gerçek depoda denendi). Supabase → G043.
   Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir.

@@ -98,3 +98,4 @@ G046 tema standardına `content.demo.json` (tema klasöründe demo kaydı) madde
 - 2026-10-13 alindi: wf-platform
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 inceleme bulguları düzeltildi (claimToken ile kayıp yanıt, doğrulayıcı sırası, link yenileme aracı, Vercel izleme, başlıklar) — wf-fix
+- 2026-10-13 son denetim (wf-audit, origin/main edca755): npm ci, npm test 197/197, typecheck, build + trace-check, seed temiz; 390 px duman testi gerçek temayla 42/42 (misafir zarf→home→story→details→RSVP, alıcı /start→panel→foto→yayınla→QR→yanıt panelde; `tests/final-smoke.ts`, `previews/final/`); tools/tests 6/6; gorev.py kontrol temiz. Canlı Vercel yeniden yayını ve gerçek telefon denenmedi.

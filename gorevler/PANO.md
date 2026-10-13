@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 2 · inceleme 4 · blokaj 296 · bitti 19 · toplam 359
+Özet: hazir 38 · alindi 1 · inceleme 5 · blokaj 296 · bitti 19 · toplam 359
 
 ## claude-canva
 
@@ -110,7 +110,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
-- `G044` alindi · claude-local-1 — Vercel önizleme yayını (demo site + panel)
+- `G044` inceleme · claude-local-1 — Vercel önizleme yayını (demo site + panel)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
 - `G007` blokaj · - — Tasarım 02 — kılavuz ve ilandaki [VERIFY] maddelerini gerçek arayüzde kapat
 - `GA01` blokaj · - — Tasarım 01 Olive & Ivory — video animasyonu + video template link (Canva arayüzü)
