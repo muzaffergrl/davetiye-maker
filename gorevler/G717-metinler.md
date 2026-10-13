@@ -2,7 +2,7 @@
 id: G717
 baslik: Tasarım 17 Emerald & Gold Estate — A5 kılavuz + B3 Etsy ilan metni
 rol: claude-metin
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 3
 bagimli: [G024, G025]
@@ -26,3 +26,6 @@ Tasarım 17 için alıcı kılavuzu ve Etsy ilan metni (İngilizce).
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

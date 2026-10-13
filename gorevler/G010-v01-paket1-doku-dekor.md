@@ -2,7 +2,7 @@
 id: G010
 baslik: V01 Paket 1 — dokular ve dekor (6 görsel)
 rol: gpt-gorsel
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 1
 bagimli: []
@@ -27,3 +27,6 @@ Dusty Blue kitinin fotogerçekçi doku ve dekor görsellerini üretmek.
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

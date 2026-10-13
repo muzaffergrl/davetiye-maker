@@ -2,7 +2,7 @@
 id: GQ12
 baslik: Tasarım 12 Tropical Destination — QA raporu
 rol: claude-qa
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 5
 bagimli: [G912, GA12, GB12]
@@ -25,3 +25,6 @@ Tasarım 12 setinin satış öncesi denetimi (salt okunur).
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

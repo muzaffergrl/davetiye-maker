@@ -2,7 +2,7 @@
 id: G912
 baslik: Tasarım 12 Tropical Destination — B1–B3 Etsy ilan kiti montajı
 rol: claude-kod
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 4
 bagimli: [G612, G712, G812, G026, G028]
@@ -27,3 +27,6 @@ Tasarım 12'in ilan görselleri, ilan videosu ve ilan PDF'ini üretmek.
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

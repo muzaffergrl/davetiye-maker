@@ -2,7 +2,7 @@
 id: GP404
 baslik: Aşama 2 · Tasarım 04 — 5 palet ilan kitleri
 rol: claude-kod
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 6
 bagimli: [GP304, G028]
@@ -24,3 +24,6 @@ Tasarım 04'in 5 ek paleti için ilan görselleri ve ilan PDF'leri.
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

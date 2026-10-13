@@ -2,7 +2,7 @@
 id: G033
 baslik: Paket 4 (GPT tasarlar) prompt'larını 20 tasarıma yay — katalog.py
 rol: claude-kod
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 2
 bagimli: [G031]
@@ -29,3 +29,6 @@ PAKET 4'ü `tools/katalog.py` üretecine taşıyıp diğer 19 tasarım için ür
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

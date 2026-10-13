@@ -2,7 +2,7 @@
 id: GB02
 baslik: Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
 rol: claude-tarayici
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 3
 bagimli: [G021, G023]
@@ -27,3 +27,6 @@ Pilot website'e Canva Form (RSVP) eklemek, yayın + form + alıcı kopyası ayr�
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

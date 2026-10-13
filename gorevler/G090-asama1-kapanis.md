@@ -2,7 +2,7 @@
 id: G090
 baslik: Aşama 1 kapanışı — 20 tasarımın eksiksiz paketi QA'dan geçti
 rol: claude-canva
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 9
 bagimli: [G027, GQ01, GQ03, GQ04, GQ05, GQ06, GQ07, GQ08, GQ09, GQ10, GQ11, GQ12, GQ13, GQ14, GQ15, GQ16, GQ17, GQ18, GQ19, GQ20]
@@ -26,3 +26,6 @@ bu görevi kapatır; GP görevleri (palet, görsel, Canva, ilan) ancak o zaman a
 
 ## Sonuç
 _(entegratör doldurur)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

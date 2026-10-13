@@ -2,7 +2,7 @@
 id: G620
 baslik: Tasarım 20 Coastal Seaside — Canva website + PDF + story/kare
 rol: claude-canva
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 4
 bagimli: [G320, G420, G520, G021, G023]
@@ -26,3 +26,6 @@ Tasarım 20'in A2–A4 parçalarını Canva'da düzenlenebilir kurmak ve export 
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

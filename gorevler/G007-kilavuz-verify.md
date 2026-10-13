@@ -2,7 +2,7 @@
 id: G007
 baslik: Tasarım 02 — kılavuz ve ilandaki [VERIFY] maddelerini gerçek arayüzde kapat
 rol: claude-tarayici
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 4
 bagimli: [GA02, GB02]
@@ -26,3 +26,6 @@ START_HERE ve ilan metnindeki `[VERIFY]` maddelerini Canva ve Etsy'nin gerçek a
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

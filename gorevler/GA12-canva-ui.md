@@ -2,7 +2,7 @@
 id: GA12
 baslik: Tasarım 12 Tropical Destination — video animasyonu + video template link (Canva arayüzü)
 rol: claude-tarayici
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 4
 bagimli: [G004, G312]
@@ -29,3 +29,6 @@ Tasarım 12'in video master'ına Canva arayüzünde animasyon/zamanlama eklemek,
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

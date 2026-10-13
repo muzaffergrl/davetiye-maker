@@ -2,7 +2,7 @@
 id: G305
 baslik: Tasarım 05 Mediterranean Lemon — Canva video master
 rol: claude-canva
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 3
 bagimli: [G105, G205, G002]
@@ -28,3 +28,6 @@ Tasarım 05'in düzenlenebilir Canva video master'ını kurmak (6 sayfa, ayrı k
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

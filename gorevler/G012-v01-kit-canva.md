@@ -2,7 +2,7 @@
 id: G012
 baslik: V01 kit katmanlarını Canva master'a tak
 rol: claude-canva
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 2
 bagimli: [G001, G002, G003, G010, G011]
@@ -27,3 +27,6 @@ HTML katmanlarını fotogerçekçi V01 kit katmanlarıyla değiştirmek (aynı y
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

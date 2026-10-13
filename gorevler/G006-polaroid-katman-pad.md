@@ -2,7 +2,7 @@
 id: G006
 baslik: Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 rol: claude-kod
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 3
 bagimli: []
@@ -27,3 +27,6 @@ G022'de görüldü: `polaroid_frame.png` gölgesi sağ ve alt kenarda sert dikd�
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

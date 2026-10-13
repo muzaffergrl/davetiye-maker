@@ -3,80 +3,166 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 292 · alindi 1 · inceleme 0 · blokaj 40 · bitti 12 · toplam 345
+Özet: hazir 2 · alindi 1 · inceleme 0 · blokaj 330 · bitti 13 · toplam 346
 
 ## claude-canva
 
-**Alınabilir (2)**
+**Alınabilir (0)**
 
-- `G021` p3 — A2 — Canva Website kurulumu → `gorevler/G021-v01-website-canva.md`
-- `G023` p3 — A3 + A4 — Canva'da kur ve export et → `gorevler/G023-v01-pdf-story-canva.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (1)**
+**Üzerinde çalışılan / incelemede / blokaj (84)**
 
+- `G031` blokaj · - — Tasarım 03 — GPT parçalarından Canva video master'ı kur (metin + foto alanları) · PİLOT
+- `G012` blokaj · - — V01 kit katmanlarını Canva master'a tak
 - `GV02C` blokaj · - — Video pilotu · Karşılaştırma ve karar (Canva animasyonu vs GPT hibrit)
+- `G021` blokaj · - — A2 — Canva Website kurulumu
+- `G023` blokaj · - — A3 + A4 — Canva'da kur ve export et
+- `G301` blokaj · - — Tasarım 01 Olive & Ivory — Canva video master
+- `G303` blokaj · - — Tasarım 03 Blush Garden Rose — Canva video master
+- `G304` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — Canva video master
+- `G305` blokaj · - — Tasarım 05 Mediterranean Lemon — Canva video master
+- `G306` blokaj · - — Tasarım 06 Art Deco Black-Tie — Canva video master
+- `G307` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — Canva video master
+- `G308` blokaj · - — Tasarım 08 Winter Evergreen — Canva video master
+- `G309` blokaj · - — Tasarım 09 Lavender Provence — Canva video master
+- `G310` blokaj · - — Tasarım 10 Tuscan Vineyard — Canva video master
+- `G311` blokaj · - — Tasarım 11 Boho Pampas Terracotta — Canva video master
+- `G312` blokaj · - — Tasarım 12 Tropical Destination — Canva video master
+- `G313` blokaj · - — Tasarım 13 Enchanted Forest Storybook — Canva video master
+- `G314` blokaj · - — Tasarım 14 Ivory Lace & Pearls — Canva video master
+- `G315` blokaj · - — Tasarım 15 Cherry Blossom Spring — Canva video master
+- `G316` blokaj · - — Tasarım 16 Sunflower Rustic Barn — Canva video master
+- `G317` blokaj · - — Tasarım 17 Emerald & Gold Estate — Canva video master
+- `G318` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — Canva video master
+- `G319` blokaj · - — Tasarım 19 Midnight Garden — Canva video master
+- `G320` blokaj · - — Tasarım 20 Coastal Seaside — Canva video master
+- `G601` blokaj · - — Tasarım 01 Olive & Ivory — Canva website + PDF + story/kare
+- `G603` blokaj · - — Tasarım 03 Blush Garden Rose — Canva website + PDF + story/kare
+- `G604` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — Canva website + PDF + story/kare
+- `G605` blokaj · - — Tasarım 05 Mediterranean Lemon — Canva website + PDF + story/kare
+- `G606` blokaj · - — Tasarım 06 Art Deco Black-Tie — Canva website + PDF + story/kare
+- `G607` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — Canva website + PDF + story/kare
+- `G608` blokaj · - — Tasarım 08 Winter Evergreen — Canva website + PDF + story/kare
+- `G609` blokaj · - — Tasarım 09 Lavender Provence — Canva website + PDF + story/kare
+- `G610` blokaj · - — Tasarım 10 Tuscan Vineyard — Canva website + PDF + story/kare
+- `G611` blokaj · - — Tasarım 11 Boho Pampas Terracotta — Canva website + PDF + story/kare
+- `G612` blokaj · - — Tasarım 12 Tropical Destination — Canva website + PDF + story/kare
+- `G613` blokaj · - — Tasarım 13 Enchanted Forest Storybook — Canva website + PDF + story/kare
+- `G614` blokaj · - — Tasarım 14 Ivory Lace & Pearls — Canva website + PDF + story/kare
+- `G615` blokaj · - — Tasarım 15 Cherry Blossom Spring — Canva website + PDF + story/kare
+- `G616` blokaj · - — Tasarım 16 Sunflower Rustic Barn — Canva website + PDF + story/kare
+- `G617` blokaj · - — Tasarım 17 Emerald & Gold Estate — Canva website + PDF + story/kare
+- `G618` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — Canva website + PDF + story/kare
+- `G619` blokaj · - — Tasarım 19 Midnight Garden — Canva website + PDF + story/kare
+- `G620` blokaj · - — Tasarım 20 Coastal Seaside — Canva website + PDF + story/kare
+- `G041` blokaj · - — V02 Canva varyantı (pilot)
+- `GP101` blokaj · - — Aşama 2 · Tasarım 01 — 5 ek palet + prompt dosyaları
+- `GP103` blokaj · - — Aşama 2 · Tasarım 03 — 5 ek palet + prompt dosyaları
+- `GP104` blokaj · - — Aşama 2 · Tasarım 04 — 5 ek palet + prompt dosyaları
+- `GP105` blokaj · - — Aşama 2 · Tasarım 05 — 5 ek palet + prompt dosyaları
+- `GP106` blokaj · - — Aşama 2 · Tasarım 06 — 5 ek palet + prompt dosyaları
+- `GP107` blokaj · - — Aşama 2 · Tasarım 07 — 5 ek palet + prompt dosyaları
+- `GP108` blokaj · - — Aşama 2 · Tasarım 08 — 5 ek palet + prompt dosyaları
+- `GP109` blokaj · - — Aşama 2 · Tasarım 09 — 5 ek palet + prompt dosyaları
+- `GP110` blokaj · - — Aşama 2 · Tasarım 10 — 5 ek palet + prompt dosyaları
+- `GP111` blokaj · - — Aşama 2 · Tasarım 11 — 5 ek palet + prompt dosyaları
+- `GP112` blokaj · - — Aşama 2 · Tasarım 12 — 5 ek palet + prompt dosyaları
+- `GP113` blokaj · - — Aşama 2 · Tasarım 13 — 5 ek palet + prompt dosyaları
+- `GP114` blokaj · - — Aşama 2 · Tasarım 14 — 5 ek palet + prompt dosyaları
+- `GP115` blokaj · - — Aşama 2 · Tasarım 15 — 5 ek palet + prompt dosyaları
+- `GP116` blokaj · - — Aşama 2 · Tasarım 16 — 5 ek palet + prompt dosyaları
+- `GP117` blokaj · - — Aşama 2 · Tasarım 17 — 5 ek palet + prompt dosyaları
+- `GP118` blokaj · - — Aşama 2 · Tasarım 18 — 5 ek palet + prompt dosyaları
+- `GP119` blokaj · - — Aşama 2 · Tasarım 19 — 5 ek palet + prompt dosyaları
+- `GP120` blokaj · - — Aşama 2 · Tasarım 20 — 5 ek palet + prompt dosyaları
+- `GP301` blokaj · - — Aşama 2 · Tasarım 01 — 5 palet Canva varyantları
+- `GP302` blokaj · - — Aşama 2 · Tasarım 02 — 5 palet Canva varyantları (V02–V06)
+- `GP303` blokaj · - — Aşama 2 · Tasarım 03 — 5 palet Canva varyantları
+- `GP304` blokaj · - — Aşama 2 · Tasarım 04 — 5 palet Canva varyantları
+- `GP305` blokaj · - — Aşama 2 · Tasarım 05 — 5 palet Canva varyantları
+- `GP306` blokaj · - — Aşama 2 · Tasarım 06 — 5 palet Canva varyantları
+- `GP307` blokaj · - — Aşama 2 · Tasarım 07 — 5 palet Canva varyantları
+- `GP308` blokaj · - — Aşama 2 · Tasarım 08 — 5 palet Canva varyantları
+- `GP309` blokaj · - — Aşama 2 · Tasarım 09 — 5 palet Canva varyantları
+- `GP310` blokaj · - — Aşama 2 · Tasarım 10 — 5 palet Canva varyantları
+- `GP311` blokaj · - — Aşama 2 · Tasarım 11 — 5 palet Canva varyantları
+- `GP312` blokaj · - — Aşama 2 · Tasarım 12 — 5 palet Canva varyantları
+- `GP313` blokaj · - — Aşama 2 · Tasarım 13 — 5 palet Canva varyantları
+- `GP314` blokaj · - — Aşama 2 · Tasarım 14 — 5 palet Canva varyantları
+- `GP315` blokaj · - — Aşama 2 · Tasarım 15 — 5 palet Canva varyantları
+- `GP316` blokaj · - — Aşama 2 · Tasarım 16 — 5 palet Canva varyantları
+- `GP317` blokaj · - — Aşama 2 · Tasarım 17 — 5 palet Canva varyantları
+- `GP318` blokaj · - — Aşama 2 · Tasarım 18 — 5 palet Canva varyantları
+- `GP319` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet Canva varyantları
+- `GP320` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet Canva varyantları
+- `G090` blokaj · - — Aşama 1 kapanışı — 20 tasarımın eksiksiz paketi QA'dan geçti
 
-Bağımlılık bekleyen: 81 · Biten: 2
+Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `GA02` p1 — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot) → `gorevler/GA02-canva-ui.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (1)**
+**Üzerinde çalışılan / incelemede / blokaj (42)**
 
+- `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
+- `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
+- `G007` blokaj · - — Tasarım 02 — kılavuz ve ilandaki [VERIFY] maddelerini gerçek arayüzde kapat
+- `GA01` blokaj · - — Tasarım 01 Olive & Ivory — video animasyonu + video template link (Canva arayüzü)
+- `GA03` blokaj · - — Tasarım 03 Blush Garden Rose — video animasyonu + video template link (Canva arayüzü)
+- `GA04` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — video animasyonu + video template link (Canva arayüzü)
+- `GA05` blokaj · - — Tasarım 05 Mediterranean Lemon — video animasyonu + video template link (Canva arayüzü)
+- `GA06` blokaj · - — Tasarım 06 Art Deco Black-Tie — video animasyonu + video template link (Canva arayüzü)
+- `GA07` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — video animasyonu + video template link (Canva arayüzü)
+- `GA08` blokaj · - — Tasarım 08 Winter Evergreen — video animasyonu + video template link (Canva arayüzü)
+- `GA09` blokaj · - — Tasarım 09 Lavender Provence — video animasyonu + video template link (Canva arayüzü)
+- `GA10` blokaj · - — Tasarım 10 Tuscan Vineyard — video animasyonu + video template link (Canva arayüzü)
+- `GA11` blokaj · - — Tasarım 11 Boho Pampas Terracotta — video animasyonu + video template link (Canva arayüzü)
+- `GA12` blokaj · - — Tasarım 12 Tropical Destination — video animasyonu + video template link (Canva arayüzü)
+- `GA13` blokaj · - — Tasarım 13 Enchanted Forest Storybook — video animasyonu + video template link (Canva arayüzü)
+- `GA14` blokaj · - — Tasarım 14 Ivory Lace & Pearls — video animasyonu + video template link (Canva arayüzü)
+- `GA15` blokaj · - — Tasarım 15 Cherry Blossom Spring — video animasyonu + video template link (Canva arayüzü)
+- `GA16` blokaj · - — Tasarım 16 Sunflower Rustic Barn — video animasyonu + video template link (Canva arayüzü)
+- `GA17` blokaj · - — Tasarım 17 Emerald & Gold Estate — video animasyonu + video template link (Canva arayüzü)
+- `GA18` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — video animasyonu + video template link (Canva arayüzü)
+- `GA19` blokaj · - — Tasarım 19 Midnight Garden — video animasyonu + video template link (Canva arayüzü)
+- `GA20` blokaj · - — Tasarım 20 Coastal Seaside — video animasyonu + video template link (Canva arayüzü)
+- `GB01` blokaj · - — Tasarım 01 Olive & Ivory — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB03` blokaj · - — Tasarım 03 Blush Garden Rose — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB04` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB05` blokaj · - — Tasarım 05 Mediterranean Lemon — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB06` blokaj · - — Tasarım 06 Art Deco Black-Tie — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB07` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB08` blokaj · - — Tasarım 08 Winter Evergreen — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB09` blokaj · - — Tasarım 09 Lavender Provence — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB10` blokaj · - — Tasarım 10 Tuscan Vineyard — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB11` blokaj · - — Tasarım 11 Boho Pampas Terracotta — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB12` blokaj · - — Tasarım 12 Tropical Destination — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB13` blokaj · - — Tasarım 13 Enchanted Forest Storybook — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB14` blokaj · - — Tasarım 14 Ivory Lace & Pearls — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB15` blokaj · - — Tasarım 15 Cherry Blossom Spring — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB16` blokaj · - — Tasarım 16 Sunflower Rustic Barn — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB17` blokaj · - — Tasarım 17 Emerald & Gold Estate — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB18` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
+- `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 40 · Biten: 0
+Bağımlılık bekleyen: 0 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (40)**
+**Alınabilir (0)**
 
-- `G006` p3 — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik) → `gorevler/G006-polaroid-katman-pad.md`
-- `G401` p3 — Tasarım 01 Olive & Ivory — A2 website HTML kaynağı → `gorevler/G401-website-kaynak.md`
-- `G403` p3 — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı → `gorevler/G403-website-kaynak.md`
-- `G404` p3 — Tasarım 04 Vintage Airmail Love Letter — A2 website HTML kaynağı → `gorevler/G404-website-kaynak.md`
-- `G405` p3 — Tasarım 05 Mediterranean Lemon — A2 website HTML kaynağı → `gorevler/G405-website-kaynak.md`
-- `G406` p3 — Tasarım 06 Art Deco Black-Tie — A2 website HTML kaynağı → `gorevler/G406-website-kaynak.md`
-- `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — A2 website HTML kaynağı → `gorevler/G407-website-kaynak.md`
-- `G408` p3 — Tasarım 08 Winter Evergreen — A2 website HTML kaynağı → `gorevler/G408-website-kaynak.md`
-- `G409` p3 — Tasarım 09 Lavender Provence — A2 website HTML kaynağı → `gorevler/G409-website-kaynak.md`
-- `G410` p3 — Tasarım 10 Tuscan Vineyard — A2 website HTML kaynağı → `gorevler/G410-website-kaynak.md`
-- `G411` p3 — Tasarım 11 Boho Pampas Terracotta — A2 website HTML kaynağı → `gorevler/G411-website-kaynak.md`
-- `G412` p3 — Tasarım 12 Tropical Destination — A2 website HTML kaynağı → `gorevler/G412-website-kaynak.md`
-- `G413` p3 — Tasarım 13 Enchanted Forest Storybook — A2 website HTML kaynağı → `gorevler/G413-website-kaynak.md`
-- `G414` p3 — Tasarım 14 Ivory Lace & Pearls — A2 website HTML kaynağı → `gorevler/G414-website-kaynak.md`
-- `G415` p3 — Tasarım 15 Cherry Blossom Spring — A2 website HTML kaynağı → `gorevler/G415-website-kaynak.md`
-- `G416` p3 — Tasarım 16 Sunflower Rustic Barn — A2 website HTML kaynağı → `gorevler/G416-website-kaynak.md`
-- `G417` p3 — Tasarım 17 Emerald & Gold Estate — A2 website HTML kaynağı → `gorevler/G417-website-kaynak.md`
-- `G418` p3 — Tasarım 18 Wildflower Meadow Vellum — A2 website HTML kaynağı → `gorevler/G418-website-kaynak.md`
-- `G419` p3 — Tasarım 19 Midnight Garden — A2 website HTML kaynağı → `gorevler/G419-website-kaynak.md`
-- `G420` p3 — Tasarım 20 Coastal Seaside — A2 website HTML kaynağı → `gorevler/G420-website-kaynak.md`
-- `G501` p3 — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G501-baski-kaynak.md`
-- `G503` p3 — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G503-baski-kaynak.md`
-- `G504` p3 — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G504-baski-kaynak.md`
-- `G505` p3 — Tasarım 05 Mediterranean Lemon — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G505-baski-kaynak.md`
-- `G506` p3 — Tasarım 06 Art Deco Black-Tie — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G506-baski-kaynak.md`
-- `G507` p3 — Tasarım 07 Burgundy Velvet Autumn — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G507-baski-kaynak.md`
-- `G508` p3 — Tasarım 08 Winter Evergreen — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G508-baski-kaynak.md`
-- `G509` p3 — Tasarım 09 Lavender Provence — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G509-baski-kaynak.md`
-- `G510` p3 — Tasarım 10 Tuscan Vineyard — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G510-baski-kaynak.md`
-- `G511` p3 — Tasarım 11 Boho Pampas Terracotta — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G511-baski-kaynak.md`
-- `G512` p3 — Tasarım 12 Tropical Destination — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G512-baski-kaynak.md`
-- `G513` p3 — Tasarım 13 Enchanted Forest Storybook — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G513-baski-kaynak.md`
-- `G514` p3 — Tasarım 14 Ivory Lace & Pearls — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G514-baski-kaynak.md`
-- `G515` p3 — Tasarım 15 Cherry Blossom Spring — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G515-baski-kaynak.md`
-- `G516` p3 — Tasarım 16 Sunflower Rustic Barn — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G516-baski-kaynak.md`
-- `G517` p3 — Tasarım 17 Emerald & Gold Estate — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G517-baski-kaynak.md`
-- `G518` p3 — Tasarım 18 Wildflower Meadow Vellum — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G518-baski-kaynak.md`
-- `G519` p3 — Tasarım 19 Midnight Garden — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G519-baski-kaynak.md`
-- `G520` p3 — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları → `gorevler/G520-baski-kaynak.md`
-- `G040` p4 — tools/make_variant.py — varyant hattı → `gorevler/G040-make-variant-araci.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (18)**
+**Üzerinde çalışılan / incelemede / blokaj (100)**
 
+- `G035` alindi · claude-kod-10 — Tasarım 03 — mobil öncelikli website demosu (GPT parçalarıyla açılış şovu) · PİLOT
+- `G033` blokaj · - — Paket 4 (GPT tasarlar) prompt'larını 20 tasarıma yay — katalog.py
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -95,38 +181,118 @@ Bağımlılık bekleyen: 40 · Biten: 0
 - `G118` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
+- `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
+- `G401` blokaj · - — Tasarım 01 Olive & Ivory — A2 website HTML kaynağı
+- `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
+- `G404` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A2 website HTML kaynağı
+- `G405` blokaj · - — Tasarım 05 Mediterranean Lemon — A2 website HTML kaynağı
+- `G406` blokaj · - — Tasarım 06 Art Deco Black-Tie — A2 website HTML kaynağı
+- `G407` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — A2 website HTML kaynağı
+- `G408` blokaj · - — Tasarım 08 Winter Evergreen — A2 website HTML kaynağı
+- `G409` blokaj · - — Tasarım 09 Lavender Provence — A2 website HTML kaynağı
+- `G410` blokaj · - — Tasarım 10 Tuscan Vineyard — A2 website HTML kaynağı
+- `G411` blokaj · - — Tasarım 11 Boho Pampas Terracotta — A2 website HTML kaynağı
+- `G412` blokaj · - — Tasarım 12 Tropical Destination — A2 website HTML kaynağı
+- `G413` blokaj · - — Tasarım 13 Enchanted Forest Storybook — A2 website HTML kaynağı
+- `G414` blokaj · - — Tasarım 14 Ivory Lace & Pearls — A2 website HTML kaynağı
+- `G415` blokaj · - — Tasarım 15 Cherry Blossom Spring — A2 website HTML kaynağı
+- `G416` blokaj · - — Tasarım 16 Sunflower Rustic Barn — A2 website HTML kaynağı
+- `G417` blokaj · - — Tasarım 17 Emerald & Gold Estate — A2 website HTML kaynağı
+- `G418` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — A2 website HTML kaynağı
+- `G419` blokaj · - — Tasarım 19 Midnight Garden — A2 website HTML kaynağı
+- `G420` blokaj · - — Tasarım 20 Coastal Seaside — A2 website HTML kaynağı
+- `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G504` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G505` blokaj · - — Tasarım 05 Mediterranean Lemon — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G506` blokaj · - — Tasarım 06 Art Deco Black-Tie — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G507` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G508` blokaj · - — Tasarım 08 Winter Evergreen — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G509` blokaj · - — Tasarım 09 Lavender Provence — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G510` blokaj · - — Tasarım 10 Tuscan Vineyard — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G511` blokaj · - — Tasarım 11 Boho Pampas Terracotta — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G512` blokaj · - — Tasarım 12 Tropical Destination — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G513` blokaj · - — Tasarım 13 Enchanted Forest Storybook — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G514` blokaj · - — Tasarım 14 Ivory Lace & Pearls — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G515` blokaj · - — Tasarım 15 Cherry Blossom Spring — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G516` blokaj · - — Tasarım 16 Sunflower Rustic Barn — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G517` blokaj · - — Tasarım 17 Emerald & Gold Estate — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G518` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G519` blokaj · - — Tasarım 19 Midnight Garden — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G520` blokaj · - — Tasarım 20 Coastal Seaside — A3 5×7 davetiye + A4 story/kare kaynakları
+- `G902` blokaj · - — Tasarım 02 Dusty Blue — B1–B3 Etsy ilan kiti montajı
+- `G040` blokaj · - — tools/make_variant.py — varyant hattı
+- `G901` blokaj · - — Tasarım 01 Olive & Ivory — B1–B3 Etsy ilan kiti montajı
+- `G903` blokaj · - — Tasarım 03 Blush Garden Rose — B1–B3 Etsy ilan kiti montajı
+- `G904` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — B1–B3 Etsy ilan kiti montajı
+- `G905` blokaj · - — Tasarım 05 Mediterranean Lemon — B1–B3 Etsy ilan kiti montajı
+- `G906` blokaj · - — Tasarım 06 Art Deco Black-Tie — B1–B3 Etsy ilan kiti montajı
+- `G907` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — B1–B3 Etsy ilan kiti montajı
+- `G908` blokaj · - — Tasarım 08 Winter Evergreen — B1–B3 Etsy ilan kiti montajı
+- `G909` blokaj · - — Tasarım 09 Lavender Provence — B1–B3 Etsy ilan kiti montajı
+- `G910` blokaj · - — Tasarım 10 Tuscan Vineyard — B1–B3 Etsy ilan kiti montajı
+- `G911` blokaj · - — Tasarım 11 Boho Pampas Terracotta — B1–B3 Etsy ilan kiti montajı
+- `G912` blokaj · - — Tasarım 12 Tropical Destination — B1–B3 Etsy ilan kiti montajı
+- `G913` blokaj · - — Tasarım 13 Enchanted Forest Storybook — B1–B3 Etsy ilan kiti montajı
+- `G914` blokaj · - — Tasarım 14 Ivory Lace & Pearls — B1–B3 Etsy ilan kiti montajı
+- `G915` blokaj · - — Tasarım 15 Cherry Blossom Spring — B1–B3 Etsy ilan kiti montajı
+- `G916` blokaj · - — Tasarım 16 Sunflower Rustic Barn — B1–B3 Etsy ilan kiti montajı
+- `G917` blokaj · - — Tasarım 17 Emerald & Gold Estate — B1–B3 Etsy ilan kiti montajı
+- `G918` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — B1–B3 Etsy ilan kiti montajı
+- `G919` blokaj · - — Tasarım 19 Midnight Garden — B1–B3 Etsy ilan kiti montajı
+- `G920` blokaj · - — Tasarım 20 Coastal Seaside — B1–B3 Etsy ilan kiti montajı
+- `GP401` blokaj · - — Aşama 2 · Tasarım 01 — 5 palet ilan kitleri
+- `GP402` blokaj · - — Aşama 2 · Tasarım 02 — 5 palet ilan kitleri
+- `GP403` blokaj · - — Aşama 2 · Tasarım 03 — 5 palet ilan kitleri
+- `GP404` blokaj · - — Aşama 2 · Tasarım 04 — 5 palet ilan kitleri
+- `GP405` blokaj · - — Aşama 2 · Tasarım 05 — 5 palet ilan kitleri
+- `GP406` blokaj · - — Aşama 2 · Tasarım 06 — 5 palet ilan kitleri
+- `GP407` blokaj · - — Aşama 2 · Tasarım 07 — 5 palet ilan kitleri
+- `GP408` blokaj · - — Aşama 2 · Tasarım 08 — 5 palet ilan kitleri
+- `GP409` blokaj · - — Aşama 2 · Tasarım 09 — 5 palet ilan kitleri
+- `GP410` blokaj · - — Aşama 2 · Tasarım 10 — 5 palet ilan kitleri
+- `GP411` blokaj · - — Aşama 2 · Tasarım 11 — 5 palet ilan kitleri
+- `GP412` blokaj · - — Aşama 2 · Tasarım 12 — 5 palet ilan kitleri
+- `GP413` blokaj · - — Aşama 2 · Tasarım 13 — 5 palet ilan kitleri
+- `GP414` blokaj · - — Aşama 2 · Tasarım 14 — 5 palet ilan kitleri
+- `GP415` blokaj · - — Aşama 2 · Tasarım 15 — 5 palet ilan kitleri
+- `GP416` blokaj · - — Aşama 2 · Tasarım 16 — 5 palet ilan kitleri
+- `GP417` blokaj · - — Aşama 2 · Tasarım 17 — 5 palet ilan kitleri
+- `GP418` blokaj · - — Aşama 2 · Tasarım 18 — 5 palet ilan kitleri
+- `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
+- `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 41 · Biten: 8
+Bağımlılık bekleyen: 0 · Biten: 8
 
 ## claude-metin
 
-**Alınabilir (21)**
-
-- `G005` p1 — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması → `gorevler/G005-canva-ui-web-arastirma.md`
-- `G701` p3 — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G701-metinler.md`
-- `G703` p3 — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G703-metinler.md`
-- `G704` p3 — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G704-metinler.md`
-- `G705` p3 — Tasarım 05 Mediterranean Lemon — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G705-metinler.md`
-- `G706` p3 — Tasarım 06 Art Deco Black-Tie — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G706-metinler.md`
-- `G707` p3 — Tasarım 07 Burgundy Velvet Autumn — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G707-metinler.md`
-- `G708` p3 — Tasarım 08 Winter Evergreen — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G708-metinler.md`
-- `G709` p3 — Tasarım 09 Lavender Provence — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G709-metinler.md`
-- `G710` p3 — Tasarım 10 Tuscan Vineyard — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G710-metinler.md`
-- `G711` p3 — Tasarım 11 Boho Pampas Terracotta — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G711-metinler.md`
-- `G712` p3 — Tasarım 12 Tropical Destination — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G712-metinler.md`
-- `G713` p3 — Tasarım 13 Enchanted Forest Storybook — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G713-metinler.md`
-- `G714` p3 — Tasarım 14 Ivory Lace & Pearls — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G714-metinler.md`
-- `G715` p3 — Tasarım 15 Cherry Blossom Spring — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G715-metinler.md`
-- `G716` p3 — Tasarım 16 Sunflower Rustic Barn — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G716-metinler.md`
-- `G717` p3 — Tasarım 17 Emerald & Gold Estate — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G717-metinler.md`
-- `G718` p3 — Tasarım 18 Wildflower Meadow Vellum — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G718-metinler.md`
-- `G719` p3 — Tasarım 19 Midnight Garden — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G719-metinler.md`
-- `G720` p3 — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni → `gorevler/G720-metinler.md`
-- `G050` p7 — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower) → `gorevler/G050-etkinlik-turu-metinleri.md`
-
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Alınabilir (0)**
 
 - (yok)
+
+**Üzerinde çalışılan / incelemede / blokaj (21)**
+
+- `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
+- `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
+- `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
+- `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
+- `G705` blokaj · - — Tasarım 05 Mediterranean Lemon — A5 kılavuz + B3 Etsy ilan metni
+- `G706` blokaj · - — Tasarım 06 Art Deco Black-Tie — A5 kılavuz + B3 Etsy ilan metni
+- `G707` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — A5 kılavuz + B3 Etsy ilan metni
+- `G708` blokaj · - — Tasarım 08 Winter Evergreen — A5 kılavuz + B3 Etsy ilan metni
+- `G709` blokaj · - — Tasarım 09 Lavender Provence — A5 kılavuz + B3 Etsy ilan metni
+- `G710` blokaj · - — Tasarım 10 Tuscan Vineyard — A5 kılavuz + B3 Etsy ilan metni
+- `G711` blokaj · - — Tasarım 11 Boho Pampas Terracotta — A5 kılavuz + B3 Etsy ilan metni
+- `G712` blokaj · - — Tasarım 12 Tropical Destination — A5 kılavuz + B3 Etsy ilan metni
+- `G713` blokaj · - — Tasarım 13 Enchanted Forest Storybook — A5 kılavuz + B3 Etsy ilan metni
+- `G714` blokaj · - — Tasarım 14 Ivory Lace & Pearls — A5 kılavuz + B3 Etsy ilan metni
+- `G715` blokaj · - — Tasarım 15 Cherry Blossom Spring — A5 kılavuz + B3 Etsy ilan metni
+- `G716` blokaj · - — Tasarım 16 Sunflower Rustic Barn — A5 kılavuz + B3 Etsy ilan metni
+- `G717` blokaj · - — Tasarım 17 Emerald & Gold Estate — A5 kılavuz + B3 Etsy ilan metni
+- `G718` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — A5 kılavuz + B3 Etsy ilan metni
+- `G719` blokaj · - — Tasarım 19 Midnight Garden — A5 kılavuz + B3 Etsy ilan metni
+- `G720` blokaj · - — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
+- `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
 Bağımlılık bekleyen: 0 · Biten: 2
 
@@ -136,42 +302,41 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (20)**
 
-- (yok)
+- `G027` blokaj · - — V01 seti QA raporu
+- `GQ01` blokaj · - — Tasarım 01 Olive & Ivory — QA raporu
+- `GQ03` blokaj · - — Tasarım 03 Blush Garden Rose — QA raporu
+- `GQ04` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — QA raporu
+- `GQ05` blokaj · - — Tasarım 05 Mediterranean Lemon — QA raporu
+- `GQ06` blokaj · - — Tasarım 06 Art Deco Black-Tie — QA raporu
+- `GQ07` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — QA raporu
+- `GQ08` blokaj · - — Tasarım 08 Winter Evergreen — QA raporu
+- `GQ09` blokaj · - — Tasarım 09 Lavender Provence — QA raporu
+- `GQ10` blokaj · - — Tasarım 10 Tuscan Vineyard — QA raporu
+- `GQ11` blokaj · - — Tasarım 11 Boho Pampas Terracotta — QA raporu
+- `GQ12` blokaj · - — Tasarım 12 Tropical Destination — QA raporu
+- `GQ13` blokaj · - — Tasarım 13 Enchanted Forest Storybook — QA raporu
+- `GQ14` blokaj · - — Tasarım 14 Ivory Lace & Pearls — QA raporu
+- `GQ15` blokaj · - — Tasarım 15 Cherry Blossom Spring — QA raporu
+- `GQ16` blokaj · - — Tasarım 16 Sunflower Rustic Barn — QA raporu
+- `GQ17` blokaj · - — Tasarım 17 Emerald & Gold Estate — QA raporu
+- `GQ18` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — QA raporu
+- `GQ19` blokaj · - — Tasarım 19 Midnight Garden — QA raporu
+- `GQ20` blokaj · - — Tasarım 20 Coastal Seaside — QA raporu
 
-Bağımlılık bekleyen: 20 · Biten: 0
+Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (22)**
+**Alınabilir (2)**
 
-- `G010` p1 — V01 Paket 1 — dokular ve dekor (6 görsel) → `gorevler/G010-v01-paket1-doku-dekor.md`
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
-- `G801` p4 — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri → `gorevler/G801-mockup.md`
-- `G803` p4 — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri → `gorevler/G803-mockup.md`
-- `G804` p4 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
-- `G805` p4 — Tasarım 05 Mediterranean Lemon — Paket 3 mockup görselleri → `gorevler/G805-mockup.md`
-- `G806` p4 — Tasarım 06 Art Deco Black-Tie — Paket 3 mockup görselleri → `gorevler/G806-mockup.md`
-- `G807` p4 — Tasarım 07 Burgundy Velvet Autumn — Paket 3 mockup görselleri → `gorevler/G807-mockup.md`
-- `G808` p4 — Tasarım 08 Winter Evergreen — Paket 3 mockup görselleri → `gorevler/G808-mockup.md`
-- `G809` p4 — Tasarım 09 Lavender Provence — Paket 3 mockup görselleri → `gorevler/G809-mockup.md`
-- `G810` p4 — Tasarım 10 Tuscan Vineyard — Paket 3 mockup görselleri → `gorevler/G810-mockup.md`
-- `G811` p4 — Tasarım 11 Boho Pampas Terracotta — Paket 3 mockup görselleri → `gorevler/G811-mockup.md`
-- `G812` p4 — Tasarım 12 Tropical Destination — Paket 3 mockup görselleri → `gorevler/G812-mockup.md`
-- `G813` p4 — Tasarım 13 Enchanted Forest Storybook — Paket 3 mockup görselleri → `gorevler/G813-mockup.md`
-- `G814` p4 — Tasarım 14 Ivory Lace & Pearls — Paket 3 mockup görselleri → `gorevler/G814-mockup.md`
-- `G815` p4 — Tasarım 15 Cherry Blossom Spring — Paket 3 mockup görselleri → `gorevler/G815-mockup.md`
-- `G816` p4 — Tasarım 16 Sunflower Rustic Barn — Paket 3 mockup görselleri → `gorevler/G816-mockup.md`
-- `G817` p4 — Tasarım 17 Emerald & Gold Estate — Paket 3 mockup görselleri → `gorevler/G817-mockup.md`
-- `G818` p4 — Tasarım 18 Wildflower Meadow Vellum — Paket 3 mockup görselleri → `gorevler/G818-mockup.md`
-- `G819` p4 — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri → `gorevler/G819-mockup.md`
-- `G820` p4 — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (21)**
+**Üzerinde çalışılan / incelemede / blokaj (64)**
 
-- `G030` alindi · gpt-gorsel-1 — Tasarım 03 Blush Garden Rose — GPT tasarım paketi (Paket 4: sahne comp'ları + parçalar) · PİLOT
+- `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G201` blokaj · - — Tasarım 01 Olive & Ivory — GPT görselleri (Paket 1)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
@@ -192,5 +357,48 @@ Bağımlılık bekleyen: 20 · Biten: 0
 - `G218` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — GPT görselleri (Paket 1)
 - `G219` blokaj · - — Tasarım 19 Midnight Garden — GPT görselleri (Paket 1)
 - `G220` blokaj · - — Tasarım 20 Coastal Seaside — GPT görselleri (Paket 1)
+- `G801` blokaj · - — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri
+- `G803` blokaj · - — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri
+- `G804` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri
+- `G805` blokaj · - — Tasarım 05 Mediterranean Lemon — Paket 3 mockup görselleri
+- `G806` blokaj · - — Tasarım 06 Art Deco Black-Tie — Paket 3 mockup görselleri
+- `G807` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — Paket 3 mockup görselleri
+- `G808` blokaj · - — Tasarım 08 Winter Evergreen — Paket 3 mockup görselleri
+- `G809` blokaj · - — Tasarım 09 Lavender Provence — Paket 3 mockup görselleri
+- `G810` blokaj · - — Tasarım 10 Tuscan Vineyard — Paket 3 mockup görselleri
+- `G811` blokaj · - — Tasarım 11 Boho Pampas Terracotta — Paket 3 mockup görselleri
+- `G812` blokaj · - — Tasarım 12 Tropical Destination — Paket 3 mockup görselleri
+- `G813` blokaj · - — Tasarım 13 Enchanted Forest Storybook — Paket 3 mockup görselleri
+- `G814` blokaj · - — Tasarım 14 Ivory Lace & Pearls — Paket 3 mockup görselleri
+- `G815` blokaj · - — Tasarım 15 Cherry Blossom Spring — Paket 3 mockup görselleri
+- `G816` blokaj · - — Tasarım 16 Sunflower Rustic Barn — Paket 3 mockup görselleri
+- `G817` blokaj · - — Tasarım 17 Emerald & Gold Estate — Paket 3 mockup görselleri
+- `G818` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — Paket 3 mockup görselleri
+- `G819` blokaj · - — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri
+- `G820` blokaj · - — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri
+- `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
+- `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
+- `G072` blokaj · - — V04_navy_gold — Paket 1 + Paket 3 görselleri
+- `G073` blokaj · - — V05_burgundy_blush — Paket 1 + Paket 3 görselleri
+- `G074` blokaj · - — V06_lavender_silver — Paket 1 + Paket 3 görselleri
+- `GP201` blokaj · - — Aşama 2 · Tasarım 01 — 5 palet görselleri
+- `GP203` blokaj · - — Aşama 2 · Tasarım 03 — 5 palet görselleri
+- `GP204` blokaj · - — Aşama 2 · Tasarım 04 — 5 palet görselleri
+- `GP205` blokaj · - — Aşama 2 · Tasarım 05 — 5 palet görselleri
+- `GP206` blokaj · - — Aşama 2 · Tasarım 06 — 5 palet görselleri
+- `GP207` blokaj · - — Aşama 2 · Tasarım 07 — 5 palet görselleri
+- `GP208` blokaj · - — Aşama 2 · Tasarım 08 — 5 palet görselleri
+- `GP209` blokaj · - — Aşama 2 · Tasarım 09 — 5 palet görselleri
+- `GP210` blokaj · - — Aşama 2 · Tasarım 10 — 5 palet görselleri
+- `GP211` blokaj · - — Aşama 2 · Tasarım 11 — 5 palet görselleri
+- `GP212` blokaj · - — Aşama 2 · Tasarım 12 — 5 palet görselleri
+- `GP213` blokaj · - — Aşama 2 · Tasarım 13 — 5 palet görselleri
+- `GP214` blokaj · - — Aşama 2 · Tasarım 14 — 5 palet görselleri
+- `GP215` blokaj · - — Aşama 2 · Tasarım 15 — 5 palet görselleri
+- `GP216` blokaj · - — Aşama 2 · Tasarım 16 — 5 palet görselleri
+- `GP217` blokaj · - — Aşama 2 · Tasarım 17 — 5 palet görselleri
+- `GP218` blokaj · - — Aşama 2 · Tasarım 18 — 5 palet görselleri
+- `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
+- `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 24 · Biten: 0
+Bağımlılık bekleyen: 0 · Biten: 1

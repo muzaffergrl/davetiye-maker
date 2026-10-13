@@ -2,7 +2,7 @@
 id: G005
 baslik: G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
 rol: claude-metin
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 1
 bagimli: []
@@ -30,3 +30,6 @@ Canva'da API aracı olmayan dört iş için (1) element animasyonu/timeline, (2)
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

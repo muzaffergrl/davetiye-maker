@@ -2,7 +2,7 @@
 id: GP317
 baslik: Aşama 2 · Tasarım 17 — 5 palet Canva varyantları
 rol: claude-canva
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 6
 bagimli: [GP217, G040]
@@ -25,3 +25,6 @@ Tasarım 17'in bütün Canva tasarımlarını (video, website, PDF, story/kare) 
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

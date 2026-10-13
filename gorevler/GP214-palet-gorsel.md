@@ -2,7 +2,7 @@
 id: GP214
 baslik: Aşama 2 · Tasarım 14 — 5 palet görselleri
 rol: gpt-gorsel
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 6
 bagimli: [GP114]
@@ -23,3 +23,6 @@ Tasarım 14'in 5 ek paletinin doku/dekor/mockup görselleri.
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

@@ -2,7 +2,7 @@
 id: G023
 baslik: A3 + A4 — Canva'da kur ve export et
 rol: claude-canva
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 3
 bagimli: [G022]
@@ -23,3 +23,6 @@ PDF davetiye ve paylaşım görsellerini Canva'da düzenlenebilir kurmak, export
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

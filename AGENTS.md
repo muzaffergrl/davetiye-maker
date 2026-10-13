@@ -23,6 +23,9 @@ Yalnız aldığın görevin `yazar:` yollarına yaz. Durum dosyaları (`PROJECT_
 
 ## İş bir cümlede
 
+> **K22 (2026-10-13):** videodan çıkıldı; ürün şimdilik **yalnız mobil öncelikli tek sayfa website**. Aşağıdaki
+> video/PDF maddeleri askıda; teslim biçimi (Canva Website mi, kendi kodlu site mi) kullanıcı kararını bekliyor.
+
 Yabancı Etsy alıcılarına; Canva'da isim, tarih, fotoğraf, video ve linklerini kendisi
 değiştirebildiği, aynı görsel kimlikte **animasyonlu dikey video + tek sayfa website + sabit
 davetiye PDF/görseli** setleri satıyoruz. Olive & Ivory bu işin **ilk koleksiyonudur**, işin
@@ -37,9 +40,9 @@ ya da markanın adı değildir. Marka adı henüz seçilmedi.
 ## Değişmeyecek şartlar
 
 1. Teslim = alıcının açıp düzenlediği **gerçek Canva projesi**. Tek parça PNG/MP4 "editable" diye sunulmaz.
-2. Video baştan **9:16, 1080 × 1920**; yatay düzeni daraltmak kabul edilmez.
-3. Website **tek uzun landing page**, responsive. 1080 × 7800 afiş website sayılmaz.
-4. Hikâye: zarf açılır → fotoğraflar tek tek çıkar → davet ve bilgiler → RSVP. Nesneler **ayrı** hareket eder; tüm ekranı zoom/fade yetmez.
+2. (Askıda, K22) Video baştan **9:16, 1080 × 1920**; yatay düzeni daraltmak kabul edilmez.
+3. Website **tek uzun landing page**, **mobile-first** (önce 360–430 px tasarlanır, sonra genişler). 1080 × 7800 afiş website sayılmaz.
+4. Hikâye: zarf açılır → fotoğraflar tek tek çıkar → davet ve bilgiler → RSVP. Nesneler **ayrı** hareket eder; tüm ekranı zoom/fade yetmez. (K22: bu "şov" artık website'in açılışında ve kaydırmasında.)
 5. Stil: klasik, romantik, zengin, geniş beğeni. Ultra-minimal/editoryal ilk ürün için reddedildi.
 6. Özgünlük: rakipten özellik/UX öğrenilir; logo, fotoğraf, çizim, dantel dosyası, rehber **kopyalanmaz**. `references/market_only/` satışa girmez.
 7. Kişisel alanlar (isim, tarih, monogram, foto, link) görsele **pişirilmez**; ayrı metin/medya katmanıdır.

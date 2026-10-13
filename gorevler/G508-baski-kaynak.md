@@ -2,7 +2,7 @@
 id: G508
 baslik: Tasarım 08 Winter Evergreen — A3 5×7 davetiye + A4 story/kare kaynakları
 rol: claude-kod
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 3
 bagimli: [G022]
@@ -25,3 +25,6 @@ Tasarım 08'in baskı/telefon davetiyesi ve paylaşım görsellerinin HTML kayna
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

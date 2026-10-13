@@ -2,7 +2,7 @@
 id: G073
 baslik: V05_burgundy_blush — Paket 1 + Paket 3 görselleri
 rol: gpt-gorsel
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 5
 bagimli: [G090]
@@ -28,3 +28,6 @@ V05_burgundy_blush renk kitinin doku/dekor (6) ve mockup (3) görsellerini üret
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

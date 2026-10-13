@@ -2,7 +2,7 @@
 id: GB16
 baslik: Tasarım 16 Sunflower Rustic Barn — website Form + yayın testi + set template link'leri (Canva arayüzü)
 rol: claude-tarayici
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 4
 bagimli: [G616]
@@ -27,3 +27,6 @@ Tasarım 16'in website'ine Canva Form (RSVP) eklemek, yayını test etmek ve web
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

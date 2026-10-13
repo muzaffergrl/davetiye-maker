@@ -53,6 +53,11 @@ Tasarım 02'nin 5 paleti (V02–V06) prompt'larıyla hazır, kapıya kilitli.
 Tasarım 02 pilot hattır (G001–G027, G902, GA02): ortak araçlar ve şablonlar önce onda kurulur, sonra
 diğer tasarımlar aynı düzeni izler. Adım 1, 2, 4, 5, 7, 8 bekleme olmadan paralel yürür.
 
+## 0. K22 (2026-10-13): ürün yalnız website
+Videodan çıkıldı. Ürün: mobil öncelikli tek sayfa düğün websitesi; görseller GPT (K21). Bütün açık görevler
+(G011, G013 hariç) askıya alındı; yeni website standardı tasarım 03 demosuyla (G035) belirlenecek.
+Teslim biçimi (Canva Website / kendi kodlu site + düzenleme formu) kullanıcı kararını bekliyor.
+
 ## 3a. Tasarım modeli — GPT tasarlar, Claude birleştirir (K21, 2026-10-09)
 Kodla çizilmiş zarf/kart/çerçeve sahneleri (G1NN) kullanıcı tarafından "amatör, basit" bulundu ve durduruldu.
 Yeni hat, her tasarım için:

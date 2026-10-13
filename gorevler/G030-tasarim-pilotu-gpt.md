@@ -2,7 +2,7 @@
 id: G030
 baslik: Tasarım 03 Blush Garden Rose — GPT tasarım paketi (Paket 4: sahne comp'ları + parçalar) · PİLOT
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-1
 oncelik: 1
 bagimli: []
@@ -113,3 +113,5 @@ bu pilot dosyasında doğrudan yapıldı; eski görev değiştirilmedi.
 - 2026-10-09 T2: 13 parça üretildi; çerçeve, küçük kart ve iki köşe çiçeği yeniden üretildi.
 - 2026-10-09 bitti, incelemeye gönderildi: 19 hedef dosya; paket denetimi 19/19 geçti,
   saf #00FF00/opak pencere kontrolü geçmedi ve Sonuç'ta açık kusur olarak kaydedildi.
+- 2026-10-13 entegratör onayladı
+- 2026-10-13 not: parçalar website demosunda (G035) kullanılacak. Kusur: card_small ve arch_frame yeşil penceresinde yarı saydam leke var (parts_prep pencereyi şeffaflaştırırken kontrol edilecek).

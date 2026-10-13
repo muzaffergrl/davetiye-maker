@@ -2,7 +2,7 @@
 id: G050
 baslik: Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 rol: claude-metin
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 7
 bagimli: []
@@ -28,3 +28,6 @@ Aynı kalıbın (T1) farklı etkinlikler için metin setlerini hazırlamak.
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

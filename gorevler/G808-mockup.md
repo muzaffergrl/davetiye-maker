@@ -2,7 +2,7 @@
 id: G808
 baslik: Tasarım 08 Winter Evergreen — Paket 3 mockup görselleri
 rol: gpt-gorsel
-durum: hazir
+durum: blokaj
 alan:
 oncelik: 4
 bagimli: []
@@ -23,3 +23,6 @@ Tasarım 08'in ilan mockup'ları (telefon, laptop, kart; yeşil ekran).
 
 ## Sonuç
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+
+## Günlük
+- 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
