@@ -5,6 +5,7 @@ olur (görevler **G401–G420**, G403 hariç). Belge **gerçek temadan** çıkar
 (tasarım 03, G038; onaylı, Vercel'de yayında) — `theme.json`, 5 şablon, `site.css`, `site.js` (`MOTION`,
 `ENVELOPE_GEOMETRY`), `build_images.py`, `img/manifest.json`; ayrıca `tools/parts_prep.py`, `tools/katalog.py` (`WEB`,
 `ZARF_TIPI`) ve PAKET 5 prompt'ları (06 gatefold, 09 kese, 13 kitap, 18 kılıf, 04 şerit, 11 kemer cep, 12 cüzdan).
+Ortak görsel hattı (G054): `tools/tema_build.py` (§5.4) ve `tools/kit_check.py` zarf hizası (§5.2, §7.1).
 
 Öncelik: kullanıcı talebi → `AGENTS.md` → bu belge → `platform/README.md` (motor ve platform sözleşmesinin **tek kaynağı**;
 burada özetlenen işaret/RSVP kuralları değişirse README geçerlidir) → G4NN görev metni → örnek tema. **G4NN görev metni bu
@@ -29,10 +30,11 @@ Temel kurallar (değişmez):
 G2NN (GPT)  collections/NN_*/assets/gpt/{comps,parts,photos}/      PAKET 5 W1 (5 comp) + W2 (17–19 parça) + PAKET 2 (5 foto)
    │        python3 tools/kit_check.py collections/NN_* --paket 5   (ve --paket 2)
    ▼
-G4NN        platform/themes/<slug>/build_images.py
+G4NN        platform/themes/<slug>/build_images.py   (yardımcılar: tools/tema_build.py, G054)
              ├─ tools/parts_prep.py → GEÇİCİ klasör (alfa kırpma, #00FF00 pencere → şeffaf + windows.json, kirpma ofsetleri)
-             ├─ zarf tipine göre kesim (§7), maskeler, serbest bölgeler, yer tutucular, og görseli
-             └─ img/*.webp (srcset genişlikleri) + img/mask_*.png + img/manifest.json  (+ denetimler, hata → çıkış ≠ 0)
+             ├─ zarf tipine göre kesim (§7), maskeler, serbest bölgeler, yer tutucular, og görseli + favicon, hiza ölçümü
+             └─ img/*.webp (srcset genişlikleri) + img/mask_*.png + og-1200x630.jpg + favicon.png + img/manifest.json
+                (+ denetimler, hata → çıkış ≠ 0)
             şablonlar (5 sayfa, motor işaretleri) + site.css (token, preset, katman yüzdeleri) + site.js (MOTION)
             tests/theme-<slug>.test.ts (node:test) + theme-check --theme (Playwright, G052) + previews/g4NN/ + Sonuç
 ```
@@ -54,7 +56,7 @@ platform/themes/<slug>/
   site.js              MOTION + zarf geometrisi + DEV_CONTENT; bütün sayfaların ortak davranışı
   build_images.py      GPT parçaları → img/ (servis edilmez)
   README.md            tema notu: dosyalar, foto alanları, zarf kesimi, comp'tan sapmalar, bilinen sınırlar
-  img/                 <parça>-<genişlik>.webp, mask_<şekil>.png, og-1200x630.jpg, icon-180.png, manifest.json
+  img/                 <parça>-<genişlik>.webp, mask_<şekil>.png, og-1200x630.jpg, favicon.png, manifest.json
 ```
 
 - `<slug>` = G4NN görevindeki klasör adı (ör. `art-deco-black-tie`), `[a-z0-9_-]`; `theme.json` `id` ile aynı.
@@ -127,9 +129,11 @@ alanları): işareti olmayan temada alıcı o özelliği hiç görmez — §3.2'
 ### 3.1 Her sayfada (zorunlu)
 - `<html lang="en" class="no-js">`; `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`.
 - `<title data-text="…">` ve `description`, `og:title`, `og:description` → `data-attr-content` şablonu (örnek metin
-  öznitelikte kalabilir, sunucu ezer). `og:image` → `img/og-1200x630.jpg` (göreli; motor `origin` ile mutlak yapar) +
-  `og:image:width/height` + `twitter:card=summary_large_image` (§5.4). `theme-color` = paletin sayfa rengi.
-  Önerilir: `<link rel="icon" href="img/icon-180.png">` ve `apple-touch-icon` (motor `href`'i tema yoluna çevirir).
+  öznitelikte kalabilir, sunucu ezer). `theme-color` = paletin sayfa rengi.
+- Paylaşım görseli ve ikon **dosyaları** temada: `img/og-1200x630.jpg` (zorunlu) ve `img/favicon.png` (önerilir), ikisini
+  de `build_images.py` üretir (§5.4 #7; adlar sabit). `og:image` (+ `og:image:width/height`, `twitter:card`) ve
+  `<link rel="icon">` etiketlerini **motor** dosya varsa kendisi yazar (G055; mutlak URL) — şablona bu etiketler yazılmaz
+  (G055 `main`'e girene kadar sayfada og/ikon etiketi yoktur; 03 dahil).
 - Google Fonts `<link>` (preconnect + `display=swap`), sonra `site.css`, sonra `<script src="site.js" defer>`.
 - Satır içi `<head>` betiği yalnız durum sınıfı için (§11); satır içi olay özniteliği (`onclick=`) **çalışmaz** (CSP).
 - `<body data-pending="This link will be added soon.">` (yedek bildirim; link blokları zaten `data-if` ile kalkar).
@@ -223,7 +227,7 @@ form etiketleri. Şartı: içerikle çelişmez ("Ceremony at …" yalnız `data-
 | `bg_page.png` 1024×1536 opak | `bg_page-640/1024.webp` (q≈78); `mist-640.webp` (bulanık, en-boy ≥ 3/4 ekran); `ph_<anahtar>-*.webp` | 640, 1024 | index/home sahnesi (telefon), yer tutucular |
 | `bg_tile.png` 1024 dikişsiz opak | `bg_tile-640.webp` (`repeat`) | 640 | uzun sayfaların `body` zemini (03'te `mist_tile`) |
 | `envelope_closed.png` şeffaf | tipe göre kesimler (§7) | 440, 880 (zarf ~ ekran genişliği) | index |
-| `closure.png` şeffaf | `closure-480/960.webp`; `icon-180.png` (favicon, önerilir) | 480, 960 | index; rsvp kapanışı; home tanıtımı |
+| `closure.png` şeffaf | `closure-480/960.webp`; `favicon.png` (180 px kare, şeffaf; `tema_build.ikon`, önerilir) | 480, 960 | index; rsvp kapanışı; home tanıtımı |
 | `envelope_open.png` şeffaf | tipe göre kesimler (§7) | 440, 880 | index |
 | `card_small.png` (#00FF00 pencere) | `card_small-320/640.webp` + `mask_card.png` | 320, 640 | index kartı = home hero kartı |
 | `invitation_card.png` | `invitation_card-480/960.webp` + `free_zone` | 480, 960 | home davet kartı |
@@ -233,7 +237,7 @@ form etiketleri. Şartı: içerikle çelişmez ("Ceremony at …" yalnız `data-
 | `decor_tl/br.png` ya da `florals_tl/br.png` (katalog `kume`) | aynı ad `-480/960.webp`, `loading="lazy"` | 480, 960 | geniş ekran kenarları, sayfa başlıkları |
 | `accent_1..3.png` | `accent_N-200.webp` | 200 | düşen/süzülen parçacıklar (`MOTION.accents`), `.ph-mark` ikonu |
 | `divider.png` | `divider-300.webp` | 300 | başlık altı, satır araları |
-| `web_hero.png` 1536×1024 opak | `og-1200x630.jpg` (q≈82; isteğe bağlı masaüstü üst bant) | 1200 | `og:image` (isim yok) |
+| `web_hero.png` 1536×1024 opak | `og-1200x630.jpg` (q≈82, `tema_build.og_kirp` alt hizalı; isteğe bağlı masaüstü üst bant) | 1200 | `og:image` (isim yok) |
 | `ekler` (01 `closure_sprig`, 04 `bg_desk`, 07 `velvet_swag`, 08 `frost_overlay`, 10 `oak_tile`, 16 `twine_line`+`barnwood`, 18 `vellum_overlay`, 20 `wave`) | adıyla | rolüne göre | tasarıma özel (01: mührün altından kayan dal, `closure` ile aynı tuvalde hizalı) |
 
 `comps/web_*.png` (W1) yalnız yerleşim referansıdır: tipografi, hiyerarşi, yerleşim ve kart/çerçeve dizilişi buradan;
@@ -263,8 +267,13 @@ oturan parçalar tek görselden kesilir" kuralları PAKET 5'te zaten var.
 
 ### 5.2 `kit_check`
 `python3 tools/kit_check.py collections/NN_* --paket 5` ve `--paket 2` geçmeden kesime başlanmaz (geçmiyorsa Sonuç'ta neden).
-`kit_check` bugün oran (±%2 — piksel ölçüsü farklı olabilir), alfa, kenar boşluğu ve pencere varlığını denetler; **kapalı/açık
-zarf hizasını denetlemez** (§14 #2) — hizayı tema `build_images.py`'si §7.1'deki tipine göre kenar yöntemiyle ölçer.
+`kit_check` oran (±%2 — piksel ölçüsü farklı olabilir), alfa, kenar boşluğu, pencere varlığını ve (G054) **kapalı/açık zarf
+hizasını** denetler: listede `envelope_closed` + `envelope_open` website parçası varsa ikisi "Kaydet" tuvaline getirilir ve
+§7.1'deki tipine göre değişmeyen kenarları karşılaştırılır (`tools/tema_build.hiza_olc`; sarılı kapanışta `closure.png`
+uçları da). Zarf tipi kapalı zarfın prompt başlığından ("Kapalı zarf (gatefold, iki kapı)" → `kapi`; parantez yok → `kapak`)
+ya da `--zarf-tipi`. Satır: `GEÇTİ` (her kenar ≤ %1,5), `UYARI` (≤ %4; geçti sayılır, tema ölçülen dönüşümle düzeltir),
+`KALDI` (> %4: GPT'den yeniden üretim, çıkış 1), `ATLANDI` (parça yok; sayılmaz). `--hiza` yalnız bu denetimi koşar. 03'ün
+website parçaları PAKET 4'te (G030 pilotu): `kit_check collections/03_Blush_Garden_Rose --paket 4` ya da `--hiza`.
 
 ### 5.3 `tools/parts_prep.py`
 - `build_images.py` içinden, çıktı **geçici klasöre** (`--prep-dir` verilirse oraya; tema klasörüne ve `assets/`'e asla).
@@ -273,7 +282,9 @@ zarf hizasını denetlemez** (§14 #2) — hizayı tema `build_images.py`'si §7
   opak dikey PAKET 5 görselini kırpmaz (`.jpg`); her katmanın **kaynak tuvaldeki kırpma ofseti** `katmanlar[].kirpma`
   (`[x, y, w, h]`) — birbirine oturan parçaların hizası buradan geri kurulur (§7.1).
 - Yapmadığı: ön cep kesimi yalnız `envelope_open` için ve **kare gövde + düz/V/ters-V kenar** varsayar (eğri kenar iki doğruyla
-  yaklaşık; olmazsa uyarılı geometrik V). Kapak, kapı, kitap, kese kesimi **yok** → tema `build_images.py`'si yapar (§7).
+  yaklaşık; olmazsa uyarılı geometrik V). Kapak, kapı, kitap, kese kesimi **yok** → tema `build_images.py`'si
+  `tools/tema_build.py` kesimleriyle yapar (§5.4, §7). `tema_build.cep_kes("v")` önce G035 yöntemini, tutmazsa bu
+  `parts_prep.cep_kes`'i dener (03'te birincisi, 01'in lifli kağıdında ikincisi tuttu), ikisi de tutmazsa uyarılı geometrik V.
 - `cep_kes` zarf tipine bakmadan **her** `envelope_open`'da koşar: **kapi, kitap, kese, kilif** temalarında çıkan
   `envelope_pocket_front.png` anlamsızdır ve "geometrik V" uyarısı beklenir → dosya kullanılmaz, uyarı yok sayılır, `--strict`
   verilmez (kesimler §7.4–§7.7'deki tema kesimleri). Kapak tiplerinde (eğri cepler dahil) uyarı gözle doğrulanır.
@@ -284,23 +295,39 @@ zarf hizasını denetlemez** (§14 #2) — hizayı tema `build_images.py`'si §7
 3. Çerçeve/kart pencerelerinden foto alanı: kutu (`box_pct`, `box_px`, `aspect`) + `mask_<şekil>.png` (pencere +2 px, ≤ 480 px).
 4. **Denetim (hata → çıkış ≠ 0):** her WebP'de pencere tam şeffaf kaldı mı (`pencere_seffaf_mi`), hiçbir görselde görünür
    `#00FF00` yok (`yesil_gorunur`), kesilen parçalar birleşince kaynakla örtüşüyor (alfa farkı ≤ %1, §7.1).
-5. Kartlar için `free_zone` (düz kâğıt bandı haritası; 03: `g035.serbest_bolge`) → metin kutuları ve `theme-check` ölçümü.
-6. Yer tutucular: `bg_page`'den yumuşak, açık tonlanmış kırpım (`g035.yer_tutucu`), pencere oranında; kişi, yazı, düz renk kutu yok.
-7. `og-1200x630.jpg`: `web_hero`'dan 1.91:1 kırpım (zarf + kapanış tam görünür; kırpım bandı manifest'e). `icon-180.png`
-   (önerilir): `closure`'dan kare.
+5. Kartlar için `free_zone` (düz kâğıt bandı haritası; `tema_build.serbest_bolge`) → metin kutuları ve `theme-check` ölçümü.
+6. Yer tutucular: `bg_page`'den yumuşak, açık tonlanmış kırpım (`tema_build.yer_tutucu`, `ton` = paletin açık sayfa rengi),
+   pencere oranında; kişi, yazı, düz renk kutu yok.
+7. `og-1200x630.jpg` (zorunlu): `web_hero`'dan 1.91:1 kırpım — `tema_build.og_kirp(hiza="alt")`: tam genişlik, alttan
+   (zarf + kapanış altta tam görünür, üst %20 düşer; yazı eklenmez), `og_kaydet` q 82; kırpım bandı `manifest.og.crop`.
+   `favicon.png` (önerilir): `tema_build.ikon(closure)` — alfa kutusu ortalanır, şeffafla kareye tamamlanır, 180 px.
+   Kırpım önizlemesine gözle bakılır (zarf ya da kapanış kesilmiş mi).
 8. Fon: `bg_page` → `mist-640` (Gaussian blur), `bg_tile` → `bg_tile-640`.
 9. `manifest.json`: her görsel `src_size`, `ratio`, `files[{file, w, h, bytes}]`; `stage` (tuval, sahne kutusu `box` = alfa kutularının birleşimi, parça kutuları `box_pct`,
-   menteşe/dikiş/sırt/kenar geometrisi, `align` hiza ölçümleri — §7.1); `closure` yerleşimi (çapa, §7.1); `photo_slots`; `free_zone`; `og`; toplam bayt.
+   menteşe/dikiş/sırt/kenar geometrisi, `align` hiza ölçümleri — §7.1); `closure` yerleşimi (çapa, §7.1); `photo_slots`; `free_zone`; `og`; `favicon`; toplam bayt.
+   Her kesimin bilgisi `method` (`renk`/`alfa` = görselden bulundu, `geometrik` = yedek) ve varsa `warnings` taşır.
    `site.css`'teki her yüzde yanında hangi manifest anahtarından geldiğini yazar (`/* manifest stage.env_cflap */`).
+10. Tema klasörü ≤ 3 MB (`tema_build.klasor_boyutu`, `TEMA_BUTCE`; aşarsa çıkış ≠ 0).
 
-03'ün yardımcıları (`collections/03_Blush_Garden_Rose/website/build_images.py`: `cep_kes`, `pencere_maskesi`,
-`serbest_bolge`, `yer_tutucu`; tema `build_images.py`: `kapak_kes`, `pencere_seffaf_mi`, `yesil_gorunur`) bugün oradan içe
-aktarılabilir — **yalnız bu saf fonksiyonlar**. `webp`, `main`, `petaller` ve modül düzeyi `OUT` **asla** kullanılmaz: iki
-modülün `webp()`'si kendi `OUT`'una yazar (03 temasının ya da G035'in `img/`'sini ezer), tema `main()`'i `img/*.webp`'yi siler.
-Yeni temanın `webp()`'si kendi dosyasında, çıktı klasörü parametreyle. Eşikler 03'ün ışığına ayarlıdır (`kapak_kes` parlaklık
-düşüşü > 40 / > 30, `serbest_bolge` renk farkı > 28): yeni tasarımda kesim önizlemesine bakılır, gerekirse eşik parametreyle
-verilir (değer manifest'e). Önerilir: ilk G4NN'den önce ortak `tools/tema_build.py` (§14 #1). WebP: `quality=80, method=6,
-alpha_quality=90`.
+**Ortak modül `tools/tema_build.py` (G054; 03 teması da bunu kullanır).** `sys.path`'e `tools/` eklenip `import tema_build as tb`;
+G035 modülü (`collections/03_…/website/build_images.py`) artık içe aktarılmaz. Fonksiyonlar (tam belge modülün başında):
+
+| Grup | Fonksiyon |
+|---|---|
+| çıktı | `webp(im, ad, genişlikler, q, manifest, out=…)` (çıktı klasörü parametre; WebP `quality=80, method=6, alpha_quality=90`), `manifest_yaz`, `klasor_boyutu` |
+| hazırlık | `prep_hazirla(COL, args.prep_dir, yasak=[THEME])` (parts_prep → geçici klasör; tema klasörü reddedilir), `pencere`, `kaydet_olculeri` |
+| foto alanı | `foto_alani` (pencere kaydı + `mask_<ad>.png` + kaynak/WebP şeffaflık denetimi), `pencere_maskesi`, `serbest_bolge(…, esik=28)`, `kapla`, `yer_tutucu(…, ton, karisim)`, `bulanik_fon`, `bilesenler` (çok nesneli eski sayfa) |
+| paylaşım | `og_kirp`, `og_kaydet`, `ikon` |
+| denetim | `pencere_seffaf_mi`, `yesil_gorunur`, `yesil_denetle`, `ortusme` (kesilen parçalar birleşince kaynak; ≤ 0,01) |
+| hiza | `alfa_kutusu`, `kat_bul` (dikiş/katlanma/oluk sütunu), `hiza_olc`, `kapanis_hiza`, `hiza_ozet` |
+| kesim (§7) | `kapak_kes(bicim="v"\|"egri")`, `cep_kes(bicim="v"\|"duz"\|"egri")`, `dikis_bul` + `kapi_kes`, `kitap_kes`, `kese_kes`, `kilif_serit`, `serit_farki` |
+
+Her kesim kenarı görselin kendi pikselinden bulur; bulamazsa `method: "geometrik"` + `warnings` ile geometrik yedeğe düşer
+(tema betiği uyarıyı basar ve manifest'e yazar; yedek kesim önizlemede gözle denetlenir, Sonuç'a yazılır). Hepsi
+`tools/tests/test_tema_build.py`'de sahte görsellerle hem bulunan hem yedek yoluyla denenir; 03'ün yeniden üretimi bayt bayt
+karşılaştırılır. Eşikler 03'ün ışığına göre varsayılandır (`kapak_kes` parlaklık düşüşü > 40 / > 30, `cep_kes`/`kese_kes` renk
+sapması > 24, `serbest_bolge` renk farkı > 28): yeni tasarımda kesim önizlemesine bakılır, gerekirse eşik parametreyle verilir
+(değer manifest'e).
 
 ### 5.5 `srcset` / `sizes`
 - GPT parçası gösteren her `<img>`: `src` = küçük dosya, `srcset` = bütün genişlikler (`w` tanımlı), `sizes` = **CSS'teki
@@ -375,7 +402,14 @@ değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
 
   Her kenar ±%1,5 (tuval ölçüsüne göre) içinde olmalı. Daha büyük kaymada parçalardan biri ölçülen dönüşümle (ölçek + öteleme)
   düzeltilir; %4'ün üstünde GPT'den yeniden üretim istenir (Sonuç'a "önerilen" olarak). Ölçülen her kenar (kapalı px, açık px, fark
-  %) ve uygulanan düzeltme `manifest.stage.align`'a yazılır.
+  %) ve uygulanan düzeltme `manifest.stage.align`'a yazılır. **Araç (G054):** `tema_build.hiza_olc(kapalı, açık, tip,
+  kapalı_Kaydet, açık_Kaydet, kapanis=…)` — `kit_check --paket 5` (§5.2) ve tema `build_images.py` aynı fonksiyonu kullanır;
+  katlanma çizgisi/oluk `kat_bul` ile (önce iki yanından koyu ince çizgi ya da alfa boşluğu, yoksa iki bölge arasındaki en güçlü
+  renk adımı). **Sarılı kapanış** (`closure.png` Kaydet ölçüsü = zarfınki): sarma ekseni boyunca iki uç, zarfın aynı
+  satırdaki/sütundaki kenarına göre (medyan; + boşluk, − taşma) aynı eşiklerle; ekseni sarmayan fiyonk/dal ucu taşma
+  gösterirse gözle bakılır. **Farklı Kaydet tuvali** (yalnız 03: kapalı 1024×1024, açık 1024×1536 — PAKET 4 pilotu): yöntem
+  `olcekli` — iki gövde eşit genişliğe getirilip alt kenarlar çakıştırılır, kalan gövde yüksekliği (en/boy) farkı ölçülür;
+  prompt üst üste çizim istemediği için en çok `uyari` (03: −%4,55; `site.css` `.env-closed` dikeyde ~%5 basık oturuyor).
 - **El değiştirme 90°'de:** dönen bir yüzün arkası gerekiyorsa (kapak, kapı, kitap kapağı) ön yüz kapalı görselden kesilir ve
   menteşesinde 0°→90° döner (kenardan görünür olur), aynı anda iç yüz açık görselden kesilmiş parça olarak 90°→0° devralır
   (03: `env_cflap` → `env_flap`). Dönüş `transform: perspective(800–1100px) rotateX/Y(…)`, `backface-visibility: hidden`,
@@ -430,15 +464,15 @@ değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
 
 | Tip (`ZARF_TIPI`) | Tasarımlar | GPT parçaları | Claude'un kestiği parçalar | Katman sırası (alttan üste) | `MOTION.envelope` anahtarları | Araç durumu |
 |---|---|---|---|---|---|---|
-| **kapak** — V/tırtıklı/dalgalı/fistolu V | 01, 02, 03, 05, 08, 10, 19, 20 | `envelope_closed`, `envelope_open`, `closure` | kapalı: `env_closed`, `env_cflap` (kapak, serbest kenarı izlenerek); açık: `env_flap` (gövde üstü), `env_body` (astar+arka), `env_pocket` (ön cep) | `env_flap` · `env_body` · kart · `env_pocket` · `env_closed` · `env_cflap` · `closure` | `hint, tug, closure, head, lift, open, flap, rise, forward, accents, go, fadeOut` | V kenar: 03 `kapak_kes` + `cep_kes` (çalışıyor) |
-| **kapak** — düz/yuvarlak/çan/eğri kapak | 07 (dikdörtgen), 15 (yuvarlak), 16 (yuvarlak köşeli kare), 17 (çan/ogee) | aynı | aynı; kapak kenarı **eğri** izlenir | aynı | aynı | `kapak_kes` V varsayar → genel eğri izleme gerekir (§14) |
-| **kapak — kemer cep** | 11 | aynı | kemer kapak (eğri), ön cep (hafif eğri üst kenar) | aynı | aynı (+ yavaş `rise`) | eğri kesim gerekir |
-| **kapak — cüzdan** | 12 | aynı (kayış kapakla bir) | yuvarlak kapak, ön panel = cep | aynı | aynı; `closure` = çıtçıt + sekme (pivot dönüşü) | eğri kesim gerekir |
-| **kapak — yırtma şeridi** | 04 | `envelope_closed`, `envelope_open` (= closed'un şeritsiz düzenlemesi), `closure` | `env_open` (gövde), `env_strip` = kapalı alfa − açık alfa | kart · `env_open` · `env_strip` · `closure` (kapalıyken `env_closed` üstte, `tear` başında takas) | `hint, tug, closure, head, tear, rise, forward, accents, go, fadeOut` | yok (alfa farkı basit) |
-| **kapi** (gatefold) | 06, 14 | aynı üçlü (1536×1024) | kapalı: `door_l`, `door_r` (orta dikişten); açık: `center` (kapalı sınır kutusu içi), `door_l_in`, `door_r_in` (dışı), `pocket` (orta cep, düz üst kenar) | `door_l_in`, `door_r_in` · `center` · kart · `pocket` · `door_l`, `door_r` · `closure` | `hint, tug, closure, head, doors, inner, rise, forward, accents, go, fadeOut` (+ 06 `sweep`) | yok — tema yazar |
-| **kitap** | 13 | aynı üçlü (sırt tuval ortasında, kapak sağ yarıda) | kapalı: `cover`; açık: `cover_in` (sırtın solu), `page` (sağ sayfa); `page_turn` = `page` kopyası, arka yüzü aynalı `page` | `cover_in` · `page` · kart · `page_turn` · `cover` · `closure` | `hint, tug, closure, head, cover, inner, page, lift, forward, accents, go, fadeOut` | yok — tema yazar |
-| **kese** | 09 (sarılı) | aynı üçlü (kapanış 1:1) | kapalı: `pouch_closed`; açık: `pouch_back` (arka duvar + astar), `pouch_front` (ağız ovalinin alt yayından kesilen ön duvar) | `pouch_back` · kart · `pouch_front` · `pouch_closed` · `closure` | `hint, tug, closure, head, loosen, rise, forward, accents, go, fadeOut` | ağız yayı kesimi yok — tema yazar |
-| **kilif** (vellum) | 18 | `envelope_closed` (boş kılıf), `envelope_open` (üstü açılmış kılıf), `closure` (etiket) | kesim yok | kart · `sleeve` · `sleeve_open` · `closure` | `hint, tug, closure, head, flare, slide, lift, forward, accents, go, fadeOut` | — |
+| **kapak** — V/tırtıklı/dalgalı/fistolu V | 01, 02, 03, 05, 08, 10, 19, 20 | `envelope_closed`, `envelope_open`, `closure` | kapalı: `env_closed`, `env_cflap` (kapak, serbest kenarı izlenerek); açık: `env_flap` (gövde üstü), `env_body` (astar+arka), `env_pocket` (ön cep) | `env_flap` · `env_body` · kart · `env_pocket` · `env_closed` · `env_cflap` · `closure` | `hint, tug, closure, head, lift, open, flap, rise, forward, accents, go, fadeOut` | `tema_build.kapak_kes("v")` + `cep_kes("v")` (03'te çalışıyor; 01 parçalarında denendi) |
+| **kapak** — düz/yuvarlak/çan/eğri kapak | 07 (dikdörtgen), 15 (yuvarlak), 16 (yuvarlak köşeli kare), 17 (çan/ogee) | aynı | aynı; kapak kenarı **eğri** izlenir | aynı | aynı | `kapak_kes("egri")` (biçimden bağımsız iz; zarftan dar kapakta kapak dışı = kapak yok) + `cep_kes` (V/`duz`/`egri`) |
+| **kapak — kemer cep** | 11 | aynı | kemer kapak (eğri), ön cep (hafif eğri üst kenar) | aynı | aynı (+ yavaş `rise`) | `kapak_kes("egri")` + `cep_kes("egri")` |
+| **kapak — cüzdan** | 12 | aynı (kayış kapakla bir) | yuvarlak kapak, ön panel = cep | aynı | aynı; `closure` = çıtçıt + sekme (pivot dönüşü) | `kapak_kes("egri")` + `cep_kes("duz"` ya da `"egri")` |
+| **kapak — yırtma şeridi** | 04 | `envelope_closed`, `envelope_open` (= closed'un şeritsiz düzenlemesi), `closure` | `env_open` (gövde), `env_strip` = kapalı alfa − açık alfa | kart · `env_open` · `env_strip` · `closure` (kapalıyken `env_closed` üstte, `tear` başında takas) | `hint, tug, closure, head, tear, rise, forward, accents, go, fadeOut` | `tema_build.serit_farki` |
+| **kapi** (gatefold) | 06, 14 | aynı üçlü (1536×1024) | kapalı: `door_l`, `door_r` (orta dikişten); açık: `center` (kapalı sınır kutusu içi), `door_l_in`, `door_r_in` (dışı), `pocket` (orta cep, düz üst kenar) | `door_l_in`, `door_r_in` · `center` · kart · `pocket` · `door_l`, `door_r` · `closure` | `hint, tug, closure, head, doors, inner, rise, forward, accents, go, fadeOut` (+ 06 `sweep`) | `tema_build.dikis_bul` + `kapi_kes` (dikiş, katlanma çizgileri, orta cep `duz`) |
+| **kitap** | 13 | aynı üçlü (sırt tuval ortasında, kapak sağ yarıda) | kapalı: `cover`; açık: `cover_in` (sırtın solu), `page` (sağ sayfa); `page_turn` = `page` kopyası, arka yüzü aynalı `page` | `cover_in` · `page` · kart · `page_turn` · `cover` · `closure` | `hint, tug, closure, head, cover, inner, page, lift, forward, accents, go, fadeOut` | `tema_build.kitap_kes` (oluk/sırt) |
+| **kese** | 09 (sarılı) | aynı üçlü (kapanış 1:1) | kapalı: `pouch_closed`; açık: `pouch_back` (arka duvar + astar), `pouch_front` (ağız ovalinin alt yayından kesilen ön duvar) | `pouch_back` · kart · `pouch_front` · `pouch_closed` · `closure` | `hint, tug, closure, head, loosen, rise, forward, accents, go, fadeOut` | `tema_build.kese_kes` (ağız yayı) |
+| **kilif** (vellum) | 18 | `envelope_closed` (boş kılıf), `envelope_open` (üstü açılmış kılıf), `closure` (etiket) | önerilir: üst şerit — `sleeve_body` (gövde, tek nesne) + `sleeve_band` ↔ `sleeve_open_band` (yalnız şerit takası) | kart · `sleeve_body` · `sleeve_band` / `sleeve_open_band` · `closure` | `hint, tug, closure, head, flare, slide, lift, forward, accents, go, fadeOut` | `tema_build.kilif_serit` |
 
 Ortak anahtarlar: `hint` (ipucu söner), `tug` (zarf küçük bir basınç), `closure`, `head` ("You are invited" + isimler kalkar),
 `forward`, `accents` (tek sayı: başlangıç ms), `go` (tek sayı: home'a geçiş), `fadeOut` (VT yoksa solma). Değerler
@@ -448,9 +482,12 @@ Ortak anahtarlar: `hint` (ipucu söner), `tug` (zarf küçük bir basınç), `cl
 Sıra (03): `tug` + `closure` (03'te `bow`: fiyonk sağ alta kayar) → `head` → `lift` (`env_cflap` menteşesinde 0→90°) ile aynı anda
 `open` (`env_closed` söner, `env_body` + `env_pocket` belirir — kalkan kapağın altında görünmez) → `flap` (`env_flap` −90°→0)
 → `rise` (kart cepten yükselir) → `forward` (kart öne, `scale(1.06)`) → `go`. Kapak kesimi: üst kenardan aşağı, her sütunda
-kapak kenarının parlaklık/renk düşüşü; V'de iki doğru + ±14 px iz (03 `kapak_kes`), tırtık/dalga/fisto izlenir, 7 sütun medyanı.
-Eğri kapakta (07/11/12/15/16/17) aynı sütun araması **eğri ön bilgisiyle** (katalogdaki biçim) yapılır, sonra yumuşatılır.
-Menteşe satırı = kapalı zarfın üst kenarı (`hinge_pct_of_flap`).
+kapak kenarının parlaklık/renk düşüşü; V'de iki doğru + ±14 px iz (`kapak_kes("v")`, 03), tırtık/dalga/fisto/dantel izlenir,
+7 sütun medyanı. Eğri kapakta (07/11/12/15/16/17) `kapak_kes("egri")`: ilk geçiş noktaları biçimden bağımsız ayıklanır (yerel
+doğru artığı; elips ucu gibi dik yerlerde de), aralarından ön bilgi çizgisi, aynı ±14 px iz + yumuşatma; noktaların x aralığı
+dışında (zarftan dar kapak, 16) kapak yok sayılır. Kenar okunmazsa uyarılı geometrik V / yarım elips. Menteşe satırı = kapalı
+zarfın üst kenarı (`hinge_pct_of_flap`). Ön cep `cep_kes`: V (03/01), `duz`, `egri`; kenar bandı (kesik kenarın açık şeridi,
+altın çizgi) cebe dahil, astar dışarıda.
 **Kapanış kapakla taşınıyorsa** (bugün yalnız 01: "carrying the seal with it"): `closure`, `env_cflap` ile ortak bir
 `.env-cflap-wrap` içinde **aynı** `rotateX` ve aynı `transform-origin` (menteşe satırı, sarmalayıcı koordinatında) ile döner; 90°'de
 ikisi birlikte söner (mühür artık kapağın arkasında). Kapanışı ayrı bir animasyonla "kapakla gidiyormuş gibi" taklit etmek
@@ -465,9 +502,10 @@ kenarın üstüne çıkar.
 ikiye kesilip her yarı kendi kapısıyla gider) → `doors`: `door_l` `rotateY(0→-90deg)` origin `0% 50%`, `door_r`
 `rotateY(0→90deg)` origin `100% 50%` (aynı anda ya da 06'da "balo kapısı" gibi 80–120 ms aralıkla) → `inner`: `door_l_in`
 `rotateY(90deg→0)` origin `100% 50%`, `door_r_in` `rotateY(-90deg→0)` origin `0% 50%` → `rise` (kart orta cepten) →
-`forward` → `go`. Dikiş: kapalı sınır kutusunun ortasına yakın en koyu/boşluklu dikey sütun (14'te bilerek düz boşluk var);
-bulunamazsa kutu ortası (uyarı). `center` = açık görselin kapalı sınır kutusu içindeki kısmı; kapı içleri bunun dışında
-kalan alfa. 06 `sweep`: sahne üstünde kenarsız ışık bandı (§5.7), kart yükselirken.
+`forward` → `go`. Dikiş (`dikis_bul`): kapalı sınır kutusunun ortasına yakın en koyu/boşluklu dikey sütun (14'te bilerek düz
+boşluk var); bulunamazsa kutu ortası (uyarı). `kapi_kes`: `center` = açık görselin katlanma çizgileri (kapalı `x0`/`x1` ± %3;
+çizgi yoksa astar ↔ orta panel renk adımı; o da yoksa kapalı kenar + uyarı) arasındaki kısmı; kapı içleri bunun dışında kalan
+alfa; `pocket` = `center`'ın düz kenarlı ön cebi (06'nın altın kenar çizgisi cepte kalır). 06 `sweep`: sahne üstünde kenarsız ışık bandı (§5.7), kart yükselirken.
 
 ### 7.5 kitap (13)
 Kapalı kitap tuvalin sağ yarısında (sırt tam ortada). Telefonda kapalıyken sahne, kapalı kapağın merkezi ekran ortasına gelecek
@@ -477,20 +515,25 @@ adımı boyunca bu öteleme, açık çift sayfayı (`cover_in` + `page`, ~sahnen
 düşer) → `cover` (`rotateY(0→-90deg)`, origin sırt `0% 50%`) → `inner` (`cover_in` `rotateY(90deg→0)`, origin `100% 50%`) →
 `page` (isteğe bağlı sayfa çevirme: `page_turn` ön yüzü 0→−90°, arka yüzü = aynalı `page` 90°→0, sol tarafa iner) →
 `lift` (kart sayfanın üstünde düz başlar, ölçek + gölgeyle kalkar) → `forward` → `go`. Ateş böcekleri = `accent_1` +
-CSS parıltı (§5.7).
+CSS parıltı (§5.7). `kitap_kes`: oluk = kapalı kapağın sol kenarı ± %4 içinde en koyu/boşluklu sütun (yoksa renk adımı, o da
+yoksa kapalı sol kenar + uyarı); solu `cover_in`, sağı `page`.
 
 ### 7.6 kese (09)
 Menteşe yok; tek kabul edilen çapraz geçiş burada: `closure` (lavanta + sicim, 1:1 tuval) çözülüp aşağı/yana kayar →
 `loosen`: `pouch_closed` söner, `pouch_back` + `pouch_front` belirir; aynı anda küçük bir "gevşeme" (`scaleX 1.03→1`,
 `scaleY .97→1`, alt kenar sabit) — tek başına tam ekran solma değil, kapanış ve kart ayrı hareket eder → `rise` (kart ön
-duvarın arkasından) → `forward` → `accents` (lavanta tomurcukları) → `go`. Ön duvar kesimi: ağız ovalinin alt yayı, her
-sütunda astar (lavanta) ile krem ön kenar arasındaki en güçlü renk geçişi, yumuşatılmış.
+duvarın arkasından) → `forward` → `accents` (lavanta tomurcukları) → `go`. Ön duvar kesimi (`kese_kes`): ağız ovalinin alt
+yayı — her sütunda krem ön duvardan yukarı çıkılıp ilk kalıcı renk sapması (astar ya da ağız kenarı), 2. derece "gülümseme"
+ön bilgisi, ±10 px iz, yumuşatma; ağız kenarı şeridi ön duvarda kalır. `pouch_back` = açık görselin tamamı.
 
 ### 7.7 kilif (18)
 Kart kılıfın **arkasında**, kılıfın sınırı içinde (kapalıyken kartın hiçbir kenarı taşmaz). Kılıf GPT'den opak gelirse CSS
 `opacity: .82–.9` (kart soluk görünür; katalog "mostly opaque ~80%"). Sıra: `closure` (etiket üst kenarından kalkar:
 `rotateX` + öteleme + solma) → `flare` (`sleeve` → `sleeve_open` çapraz geçiş, üst kenar açılır) → `slide` (kılıf aşağı
-kayar + söner) → `lift` (kart yukarı) → `forward` → `go`.
+kayar + söner) → `lift` (kart yukarı) → `forward` → `go`. Önerilir (`kilif_serit`): `flare`'de yalnız üst şerit takas edilir
+(`sleeve_band` → `sleeve_open_band`; sınır = iki alfanın farklı olduğu son satır + 6 px), gövde `sleeve_body` tek nesne kalır
+— yarı saydam aydınger tümüyle çapraz solunca çift kenar (hayalet) görünür. Şerit ve gövde örtüşmez (üst üste binen yarı
+saydam satır koyu çizgi olur).
 
 ---
 
@@ -628,8 +671,9 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
 ### 13.1 Dosyalar ve komutlar
 ```bash
 # repo kökünden
-python3 tools/kit_check.py collections/NN_* --paket 5 && python3 tools/kit_check.py collections/NN_* --paket 2
-python3 platform/themes/<slug>/build_images.py                 # denetimler geçer, img/manifest.json yazılır
+python3 tools/kit_check.py collections/NN_* --paket 5 && python3 tools/kit_check.py collections/NN_* --paket 2   # + zarf hizası
+python3 platform/themes/<slug>/build_images.py                 # tools/tema_build.py; denetimler geçer, img/manifest.json yazılır
+python3 tools/tests/test_tema_build.py --hizli                 # ortak modül değiştiyse (tam hâli 03'ü bayt bayt yeniden üretir)
 # platform/ içinde (Node 22)
 export PATH=/opt/node22/bin:$PATH && cd platform && npm ci
 npm test && npm run typecheck && npm run build                 # build → trace-check yeni temanın index.html'ini de arar
@@ -713,12 +757,12 @@ dışına yazar ya tarayıcı denetimini atlar).
 
 | # | Boşluk | Öneri | Rol |
 |---|---|---|---|
-| 1 | Ortak tema yardımcıları 03'ün klasörlerinden içe aktarılıyor | `tools/tema_build.py`: webp/srcset/manifest, pencere maskesi, serbest bölge, yer tutucu, og kırpımı, hiza ölçümü; kesimler: genel eğri kapak kenarı, ön cep (eğri dahil), gatefold dikişi, kitap sırtı, kese ağız yayı, şerit farkı | claude-kod |
-| 2 | `kit_check` kapalı/açık zarf (ve sarılı kapanış) hizasını denetlemiyor | `--paket 5`'e gövde sınır kutusu karşılaştırması (±%1,5 uyarı, > %4 hata) | claude-kod |
+| 1 | Ortak tema yardımcıları 03'ün klasörlerinden içe aktarılıyor | **yapıldı (G054):** `tools/tema_build.py` (§5.4) — webp/manifest, foto alanı + maske, serbest bölge, yer tutucu, og + favicon, denetimler, hiza; kesimler: V/eğri kapak, V/düz/eğri ön cep, gatefold dikişi + katlar, kitap sırtı, kese ağız yayı, kılıf üst şeridi, şerit farkı (her biri sahte görselle + uyarılı geometrik yedek; `tools/tests/test_tema_build.py`); 03 teması bunu kullanıyor, çıktısı bayt bayt aynı | — |
+| 2 | `kit_check` kapalı/açık zarf (ve sarılı kapanış) hizasını denetlemiyor | **yapıldı (G054):** `--paket 5` (ve 4) tipe göre kenar karşılaştırması (±%1,5 uyarı, > %4 hata), sarılı kapanış uçları, `--hiza`, `--zarf-tipi` (§5.2, §7.1). 03: farklı tuval, ölçekli −%4,55 (uyarı); 01 (birleşmemiş `origin/codex/g201-…` dalındaki W2 parçaları): sol +0,29 · sağ −0,39 · alt −0,65 % (geçti) | — |
 | 3 | `scripts/theme-check.cjs`, `tests/g051-browser.ts`, `tests/final-smoke.ts` blush-garden-rose'a bağlı | **açıldı: G052** (`--theme <id>`; G401–G420 ona bağlı) | claude-kod (ilk G4NN'den önce) |
 | 4 | G4NN `yazar:` yalnız tema klasörü; görev metni `img_src`, "link will be added soon", "03'ün yapısını kopyala" diyordu | **yapıldı** (G046 incelemesi): `tools/katalog.py` `g4_gorev` düzeltildi, 19 görev dosyası yeniden üretildi | — |
 | 5 | 01, 02, 04–20 demo kayıtlarında `story` yok; 01'de `full_name` `null` | **açıldı: G053** | claude-metin |
-| 6 | blush-garden-rose'ta `og:image` ve favicon yok | `web_hero`'dan `og-1200x630.jpg` (alt hizalı 1.91:1 kırpımda zarf ve fiyonk tam kalıyor — G046'da kırpım çizgileriyle gözle bakıldı, dosya üretilmedi), `ribbon_bow`'dan ikon | claude-kod |
+| 6 | blush-garden-rose'ta `og:image` ve favicon yok | **dosyalar yapıldı (G054):** `img/og-1200x630.jpg` (`web_hero` alt hizalı 1.91:1, yazısız; zarf + fiyonk tam) ve `img/favicon.png` (`ribbon_bow`, 180 px şeffaf kare); **etiketler G055** (motor dosya varsa yazar) | claude-kod (G055) |
 | 7 | Her tema rotasının Vercel paketine bütün tema görselleri giriyor (20 tema × ~2,7 MB ≈ 55 MB/fonksiyon; Aşama 2 varyantlarıyla 250 MB sınırına yaklaşır) | görselleri yalnız tema varlık rotasına izle (diğer rotalara `*.html`/`*.json`), ya da derlemede `public/`'e kopyala | claude-kod |
 | 8 | Aşama 2 varyantları (G090 sonrası) | renkler yalnız `:root` token'larında; `html[data-variant]` kancası hazır; varyant görsel klasörü ayrı karar | — |
 | 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | yüklemede 640/1280 türevleri + motorun yazdığı `srcset`/`sizes`; o zamana kadar §6 fotoğraflı ölçüm yazılır | claude-kod (platform) |
@@ -735,7 +779,8 @@ dışına yazar ya tarayıcı denetimini atlar).
 - [ ] Davet kartında tam ad yedeği (`full_name` boşsa `display_name`); `guest_policy` yok
 - [ ] G051: takvim çifti home + details, SSS bloğu details, çiftin soruları rsvp formunda (§3.5); SSS işareti erişilebilir ada girmiyor
 - [ ] RSVP sayfası G042 sözleşmesinde; story `data-optional="our_story"`, rsvp `data-if="!rsvp.method"`; nav kuralları
-- [ ] `build_images.py`: geçici `parts_prep`, tip kesimleri, maskeler, `free_zone`, yer tutucular, og; pencere şeffaflığı ve yeşil
+- [ ] `build_images.py` (`tools/tema_build.py` ile): geçici `parts_prep`, tip kesimleri (geometrik yedek uyarısı varsa önizleme +
+      Sonuç), maskeler, `free_zone`, yer tutucular, `og-1200x630.jpg` + `favicon.png`, klasör ≤ 3 MB; pencere şeffaflığı ve yeşil
       denetimi geçiyor; `manifest.json` (stage, closure, photo_slots, bayt)
 - [ ] Kapalı/açık hiza tipine göre kenarlarla ±%1,5 (ya da ölçülen düzeltme `manifest.stage.align`'da)
 - [ ] Kapanış kesim geometrisine bağlı (`manifest.closure`, `compare_closure.jpg`); kapakla taşınan kapanış ortak sarmalayıcıda

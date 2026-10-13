@@ -15,6 +15,13 @@ Kontroller:
     frame_*, W1 ekranları): aynı yeşil testine uyan (şeffaf parçada alfa ≥ 128) en büyük bağlı bölge görselin ≥%0,3'ü
     (en az 256 px) — pencere var mı; şekli/sayısı denetlenmez (parts_prep.py ölçer)
   - şeffaf istenmeyen dokularda: alfa varsa tamamen opak
+  - zarf hizası (G054, docs/11 §7.1): listede website parçası (PAKET 4/5 `/parts/`) `envelope_closed` + `envelope_open`
+    varsa ikisi "Kaydet" tuvaline getirilip tipe göre değişmeyen kenarları karşılaştırılır (tools/tema_build.hiza_olc):
+    kapak/kese/kılıf sol-sağ-alt, kapı üst-alt + katlanma çizgileri, kitap üst-alt-sağ + sırt. Zarf tipi kapalı zarfın
+    prompt başlığından ("Kapalı zarf (gatefold, iki kapı)" → kapi; parantez yok → kapak) ya da `--zarf-tipi`. Sarılı
+    kapanış (`closure.png` "Kaydet" ölçüsü = kapalı zarfınki) uçları zarfın kenarına göre ölçülür. ≤ %1,5 GEÇTİ,
+    ≤ %4 UYARI (geçti sayılır; tema build'i ölçülen dönüşümle düzeltir), > %4 KALDI (GPT'den yeniden üretim).
+    Farklı Kaydet tuvalleri (03 PAKET 4 pilotu) → "olcekli": yalnız gövde oranı. `--hiza`: yalnız bu denetim.
 Yazı/harf denetimi otomatik yapılmaz (OCR yok); görsel kontrol listesinde kalır.
 """
 import argparse
@@ -27,6 +34,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from mockup_compose import en_buyuk_bolge, yesil_maske  # noqa: E402
+import tema_build as tb  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PENCERE_MIN_PAY = 0.003
@@ -38,13 +46,14 @@ PAKET = re.compile(r"^##\s+PAKET\s+(\d)", re.I)
 def beklenenler(prompts: Path):
     """Kaydet satırları: yol, ölçü, şeffaf, mockup, paket ve `pencere` (satırdan sonraki başlığa kadar olan prompt
     bloğunda `#00FF00` geçiyor mu — foto penceresi isteniyor)."""
-    out, paket, cur = [], None, None
+    out, paket, cur, baslik = [], None, None, None
     for line in prompts.read_text(encoding="utf-8").splitlines():
         m = PAKET.match(line)
         if m:
             paket = int(m.group(1))
         if line.startswith("#"):
             cur = None
+            baslik = line.lstrip("#").strip()
             continue
         m = KAYDET.search(line)
         if not m:
@@ -60,6 +69,7 @@ def beklenenler(prompts: Path):
             "mockup": "/mockups/" in yol,
             "paket": paket,
             "pencere": False,
+            "baslik": baslik,
         })
         cur = out[-1]
     return out
@@ -129,10 +139,59 @@ def denetle(b, kok: Path):
     return (not sorun), ("; ".join(sorun) if sorun else f"{w}×{h}{' şeffaf' if b['seffaf'] else ''}{ek}")
 
 
+HIZA_PAKETLERI = (4, 5, None)  # website parçaları: 03 pilotu PAKET 4, K22–K24 PAKET 5 (parts_prep ile aynı)
+HIZA_DURUM = {"tamam": "GEÇTİ", "uyari": "UYARI", "hata": "KALDI"}
+HIZA_IPUCU = {"uyari": " (±%1,5 aşıldı: tema build'i ölçülen ölçek + ötelemeyle düzeltir, manifest.stage.align)",
+              "hata": " (> %4: GPT'den yeniden üretim iste — Sonuç'a önerilen düzeltme)"}
+
+
+def _yol(b) -> Path:
+    return ROOT / b["yol"] if not Path(b["yol"]).is_absolute() else Path(b["yol"])
+
+
+def hiza_denetle(liste, zarf_tipi=None):
+    """Zarf hizası (docs/11 §7.1). (durum, mesaj, notlar) — durum: GEÇTİ / UYARI / KALDI / ATLANDI; listede
+    envelope_closed + envelope_open website parçası yoksa None."""
+    parcalar = {}
+    for b in liste:
+        if "/parts/" in b["yol"] and b.get("paket") in HIZA_PAKETLERI:
+            parcalar[Path(b["yol"]).stem] = b  # aynı ad iki pakette: sonraki geçerli
+    kb, ab = parcalar.get("envelope_closed"), parcalar.get("envelope_open")
+    if not kb or not ab:
+        return None
+    eksik = [Path(b["yol"]).name for b in (kb, ab) if not _yol(b).exists()]
+    if eksik:
+        return "ATLANDI", f"{' ve '.join(eksik)} yok — hiza ölçülmedi", []
+    tip = zarf_tipi or tb.zarf_tipi_basliktan(kb.get("baslik"))
+    kp = parcalar.get("closure")
+    sarili = bool(kp and kp.get("olcu") and kp["olcu"] == kb.get("olcu"))
+    notlar = []
+    kapanis = None
+    if sarili:
+        if _yol(kp).exists():
+            kapanis = Image.open(_yol(kp))
+        else:
+            notlar.append("sarılı kapanış (closure.png) yok — kapanış uçları ölçülmedi")
+    try:
+        s = tb.hiza_olc(Image.open(_yol(kb)), Image.open(_yol(ab)), tip, kb.get("olcu"), ab.get("olcu"),
+                        kapanis=kapanis, kapanis_tuval=kp.get("olcu") if kapanis is not None else None)
+    except Exception as e:  # noqa: BLE001
+        return "KALDI", f"hiza ölçülemedi: {e}", []
+    notlar = s["uyarilar"] + notlar
+    for e in s["kenarlar"] + s.get("kapanis", {}).get("kenarlar", []):
+        if e.get("not") and (e["fark_pct"] is None or e["durum"] != "tamam"):
+            notlar.append(f"{e['kenar']}: {e['not']}")
+    ad = "envelope_closed ↔ envelope_open" + (" (+ sarılı closure)" if sarili else "")
+    return HIZA_DURUM[s["durum"]], f"{ad} — {tb.hiza_ozet(s)}{HIZA_IPUCU.get(s['durum'], '')}", notlar
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("kok", help="kit kökü, ör. collections/03_Blush_Garden_Rose")
     ap.add_argument("--paket", type=int, choices=[1, 2, 3, 4, 5])
+    ap.add_argument("--hiza", action="store_true", help="yalnız kapalı/açık zarf hizası (dosya denetimleri atlanır)")
+    ap.add_argument("--zarf-tipi", choices=["kapak", "kapi", "kitap", "kese", "kilif"],
+                    help="hiza için zarf tipi (vars. kapalı zarfın prompt başlığından)")
     a = ap.parse_args()
     kok = (ROOT / a.kok) if not Path(a.kok).is_absolute() else Path(a.kok)
     prompts = kok / "assets/gpt/GPT_PROMPTS.md"
@@ -141,13 +200,27 @@ def main():
     liste = [b for b in beklenenler(prompts) if a.paket is None or b["paket"] in (a.paket, None)]
     if not liste:
         sys.exit("GPT_PROMPTS.md içinde **Kaydet:** satırı bulunamadı")
-    gecen = 0
-    for b in liste:
-        ok, msg = denetle(b, kok)
-        gecen += ok
-        print(f"{'GEÇTİ' if ok else 'KALDI'}  {b['yol']}  — {msg}")
-    print(f"\n{gecen}/{len(liste)} geçti")
-    sys.exit(0 if gecen == len(liste) else 1)
+    gecen = toplam = 0
+    if not a.hiza:
+        for b in liste:
+            ok, msg = denetle(b, kok)
+            gecen += ok
+            toplam += 1
+            print(f"{'GEÇTİ' if ok else 'KALDI'}  {b['yol']}  — {msg}")
+    hz = hiza_denetle(liste, a.zarf_tipi)
+    if hz is None and a.hiza:
+        hz = ("KALDI", "listede envelope_closed + envelope_open website parçası yok", [])
+    if hz is not None:
+        durum, msg, notlar = hz
+        if durum != "ATLANDI" or a.hiza:
+            durum = "KALDI" if durum == "ATLANDI" else durum
+            toplam += 1
+            gecen += durum in ("GEÇTİ", "UYARI")
+        print(f"{durum}  hiza  {msg}")
+        for n in notlar:
+            print(f"       not: {n}")
+    print(f"\n{gecen}/{toplam} geçti")
+    sys.exit(0 if gecen == toplam else 1)
 
 
 if __name__ == "__main__":

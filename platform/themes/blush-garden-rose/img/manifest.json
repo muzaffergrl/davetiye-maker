@@ -84,7 +84,8 @@
     1538.38,
     0.94,
     120
-   ]
+   ],
+   "method": "renk"
   }
  },
  "envelope_open": {
@@ -182,6 +183,7 @@
     1061.3,
     233
    ],
+   "method": "renk",
    "height_pct_of_closed": 53.793,
    "hinge_pct_of_flap": 2.015
   }
@@ -2196,5 +2198,88 @@
    }
   ],
   "aspect": 1.721
+ },
+ "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 132378
+ },
+ "favicon": {
+  "src_box": [
+   8,
+   8,
+   1429,
+   864
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "source": "ribbon_bow",
+  "file": "favicon.png",
+  "bytes": 28775
+ },
+ "align": {
+  "tip": "kapak",
+  "yontem": "olcekli",
+  "tuval": [
+   [
+    1024,
+    1024
+   ],
+   [
+    1024,
+    1536
+   ]
+  ],
+  "kenarlar": [
+   {
+    "kenar": "gövde yüksekliği (oran)",
+    "kapali": 788.8,
+    "acik": 742.2,
+    "fark_px": -46.6,
+    "fark_pct": -4.55,
+    "durum": "uyari",
+    "not": "açık gövde kapalının genişliğine ölçeklendi, alt kenarlar çakıştırıldı; fark = gövde en/boy farkı · farklı tuvalde hata eşiği uygulanmaz; tema iki katmanı ayrı ölçekle oturtur (ör. 03 site.css .env-closed dikeyde ~%5 basık)"
+   }
+  ],
+  "uyarilar": [
+   "farklı tuval: kapalı 1024×1024 ↔ açık 1024×1536 — kenarlar ölçek + ötelemeyle eşlendi; tuvalde üst üste oturmuyor (PAKET 5 kuralı: aynı tuval)"
+  ],
+  "esik": [
+   1.5,
+   4.0
+  ],
+  "olcek": 0.9152,
+  "govde": {
+   "kapali_px": [
+    833.7,
+    788.8
+   ],
+   "acik_px_olcekli": [
+    833.7,
+    742.2
+   ]
+  },
+  "durum": "uyari"
+ },
+ "checks": {
+  "envelope_open_overlap_diff": 0.00455,
+  "green_px": 0
  }
 }

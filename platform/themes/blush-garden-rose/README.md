@@ -15,8 +15,8 @@ Görseller yalnız GPT parçaları (K21); kod yerleşim, tipografi, hareket ve t
 | `rsvp.html` | RSVP kartı (son tarih, düğme forma kaydırır) + **platform yanıt formu** (G042 sözleşmesi: `/rsvp/form.js`, `data-rsvp-*`; önizlemede gönderilmez; G051: çiftin ≤ 3 sorusu, yalnız katılan misafire) + fiyonklu kapanış |
 | `site.css` | palet token'ları, hareket ön ayarları, foto alanı bileşeni, zarf katman yüzdeleri |
 | `site.js` | `MOTION` koreografi + `ENVELOPE_GEOMETRY`; `#site-data` okur; yoksa `DEV_CONTENT` ile önizleme |
-| `img/` | WebP katmanlar, foto yer tutucuları (`ph_*`), pencere maskeleri (`mask_*.png`), `manifest.json` (servis edilmez) |
-| `build_images.py` | GPT parçaları → `img/` (servis edilmez) |
+| `img/` | WebP katmanlar, foto yer tutucuları (`ph_*`), pencere maskeleri (`mask_*.png`), paylaşım görseli `og-1200x630.jpg` ve `favicon.png` (G054), `manifest.json` (servis edilmez) |
+| `build_images.py` | GPT parçaları → `img/` (servis edilmez); görsel yardımcıları ortak `tools/tema_build.py`'den (G054) |
 
 ## Foto alanları
 | Anahtar | İçerik yolu | Oran (g/y px) | Yer |
@@ -32,13 +32,23 @@ Panel kırpımı bu oranlarla yapmalı (G039); kırpılmamış fotoğrafta CSS `
 
 ## Görselleri yeniden üretmek
 ```
-python3 platform/themes/blush-garden-rose/build_images.py [--prep-dir DIR] [--q 80]
+python3 platform/themes/blush-garden-rose/build_images.py [--prep-dir DIR] [--q 80] [--out DIR]
 ```
-Önce `tools/parts_prep.py` (alfa kırpma, `#00FF00` pencereleri + GPT "bulut lekesi" tam şeffaf). Sonra: açık zarf →
-kapak / gövde / ön cep (G035 kesimi), kapalı zarfın kapağı tırtıklı kenarı izlenerek ayrı katman (`env_cflap`),
-çerçeveler + pencere maskeleri, kart serbest bölgeleri (`manifest.json` `free_zone`), petaller, zemin, nötr foto yer
-tutucuları. Betik pencerenin WebP çıktısında da tam şeffaf kaldığını ve hiçbir görselde #00FF00 görünmediğini denetler.
+Önce `tools/parts_prep.py` (alfa kırpma, `#00FF00` pencereleri + GPT "bulut lekesi" tam şeffaf; geçici klasöre). Sonra
+`tools/tema_build.py` yardımcılarıyla: açık zarf → kapak / gövde / ön cep (`cep_kes` "v" = G035 kesimi), kapalı zarfın
+kapağı tırtıklı kenarı izlenerek ayrı katman (`kapak_kes` "v" → `env_cflap`), çerçeveler + pencere maskeleri
+(`foto_alani`), kart serbest bölgeleri (`serbest_bolge` → `manifest.json` `free_zone`), petaller (`bilesenler`), zemin, nötr
+foto yer tutucuları (`yer_tutucu`), paylaşım görseli (`og_kirp`: `web_hero` alt hizalı 1.91:1 kırpım → `og-1200x630.jpg`,
+yazısız; zarf + fiyonk tam) ve `favicon.png` (`ikon`: `ribbon_bow` şeffaf kareye, 180 px). Denetimler (hata → çıkış ≠ 0):
+pencere WebP'de tam şeffaf, hiçbir görselde #00FF00 yok, açık zarf katmanları birleşince kaynak (`ortusme`), tema klasörü
+≤ 3 MB. G054 yeniden düzenlemesi çıktıyı değiştirmedi: 47 webp + 3 maske bayt bayt aynı; `manifest.json` yalnız ek anahtar
+aldı (`method`, `og`, `favicon`, `align`, `checks`) — `python3 tools/tests/test_tema_build.py` bunu `--out` ile denetler.
 `site.css`'teki yüzdeler `manifest.json`'dan; görsel değişirse onları da güncelle.
+
+**Zarf hizası (`manifest.align`, `kit_check --paket 4` / `--hiza`):** 03'ün kapalı (1024×1024) ve açık (1024×1536) zarfı
+**farklı tuvalde** çizildi (PAKET 4 pilotu; PAKET 5 kuralından önce). Ölçekli ölçüm: gövdeler eşit genişliğe getirilince açık
+gövde kapalıdan tuvalin %4,55'i kadar kısa (en/boy farkı). `site.css` bunu `.env-closed`'u dikeyde ~%5 basarak (genişlik
+%98,944 / yükseklik %64,503 → ölçek 0,900 / 0,857) oturtmuştu (G038, gözle onaylı); yeni temalarda aynı tuval kuralı var.
 
 ## Bu temayı ayarlarken
 - `site.js` başındaki `MOTION` (sıra/süre) ve gerekiyorsa `ENVELOPE_GEOMETRY`; `site.css` zarf katman yüzdeleri.
@@ -60,7 +70,9 @@ o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP fo
 - `rsvp.method` dolu (yanıtlar başka yoldan): RSVP sayfası 404 ve ona giden bütün düğme/linkler kalkar.
 - Kısa telefonlarda (en-boy ≥ 1/2) boyalı arka plan ortadan büyütülür (%115 / 9:16'dan sonra %135) ki köşe çiçekleri zarf
   yazılarına değmesin; `theme-check.cjs` 360×640, 375×553, 390×690, 390×844'te yazı altındaki zemini ölçer.
-- Paylaşım görseli (`og:image`) yok: ayrı bir GPT paylaşım görseli gerekiyor.
+- Paylaşım görseli ve ikon dosyaları var (`img/og-1200x630.jpg`, `img/favicon.png`, G054); `og:image` / `<link rel="icon">`
+  etiketlerini motor yazar (G055) — G055 `main`'e girene kadar sayfalarda bu etiketler yok. `favicon.png` şeffaf zeminli:
+  iOS ana ekran ikonu olarak kullanılırsa şeffaf alan siyah görünür (G055 kararı).
 - Kartın home'a "uçması" cross-document View Transitions ister (Chromium 126+, Safari 18.2+); diğerlerinde solma.
   Gerçek iPhone/Safari ve Android cihazda denenmedi.
 - RSVP misafir sayısı üst sınırı platform varsayılanı (10); tema `theme.json` `rsvp.max_guests` yazmıyor.

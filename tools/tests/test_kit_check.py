@@ -1,6 +1,8 @@
 """tools/kit_check.py için küçük test — sahte kit üretir (repo dışına), iyi/kötü örnekleri dener.
 
   python3 tools/tests/test_kit_check.py
+
+Zarf hizası (G054): kapak/kapı/sarılı kapanış sahte zarflarıyla GEÇTİ / UYARI / KALDI / ATLANDI, `--hiza`, `--zarf-tipi`.
 """
 import subprocess
 import sys
@@ -116,6 +118,86 @@ def test_paket5(t: Path):
     assert kod == 1 and out.strip().endswith("0/1 geçti") and "hero_portrait.jpg" in out, out
 
 
+HIZA = """# test
+## PAKET 5 — Website tasarımı (GPT tasarlar)
+#### W2.3 Kapalı zarf{tip} — kapanış elemanı OLMADAN
+**Kaydet:** `{k}/assets/gpt/parts/envelope_closed.png` · {olcu} · **Şeffaf zemin**
+#### W2.4 Kapanış elemanı (tek başına)
+**Kaydet:** `{k}/assets/gpt/parts/closure.png` · {kolcu} · **Şeffaf zemin**
+#### W2.5 Açık zarf{tip} — boş
+**Kaydet:** `{k}/assets/gpt/parts/envelope_open.png` · {olcu} · **Şeffaf zemin**
+"""
+
+
+def rgba(w, h, kutular, renk=(226, 196, 192, 255)):
+    a = np.zeros((h, w, 4), np.uint8)
+    for x0, y0, x1, y1 in kutular:
+        a[y0:y1, x0:x1] = renk
+    return Image.fromarray(a, "RGBA")
+
+
+def hiza_kit(t: Path, ad: str, tip="", olcu=(1024, 1536), kolcu=(1024, 1024)) -> Path:
+    k = t / ad
+    (k / "assets/gpt/parts").mkdir(parents=True)
+    (k / "assets/gpt/GPT_PROMPTS.md").write_text(
+        HIZA.format(k=k, tip=tip, olcu=f"{olcu[0]}×{olcu[1]}", kolcu=f"{kolcu[0]}×{kolcu[1]}"), encoding="utf-8")
+    return k
+
+
+def test_hiza(t: Path):
+    """--paket 5 zarf hizası (G054): ±%1,5 GEÇTİ, ≤ %4 UYARI (geçti sayılır), > %4 KALDI; tip başlıktan; --hiza;
+    sarılı kapanış (Kaydet ölçüsü zarfınkiyle aynı); eksik açık zarf → ATLANDI (sayılmaz)."""
+    from kit_check import beklenenler
+    k = hiza_kit(t, "hz_kapak")
+    b = beklenenler(k / "assets/gpt/GPT_PROMPTS.md")
+    assert b[0]["baslik"].startswith("W2.3 Kapalı zarf"), b[0]
+    P = k / "assets/gpt/parts"
+    govde = (100, 500, 924, 1300)
+    rgba(1024, 1536, [govde]).save(P / "envelope_closed.png")
+    rgba(1024, 1024, [(300, 300, 724, 724)]).save(P / "closure.png")
+    rgba(1024, 1536, [govde, (200, 300, 824, 500)]).save(P / "envelope_open.png")  # kapak yukarıda, gövde aynı
+    kod, out = calistir(k, "--paket", "5")
+    assert kod == 0 and "GEÇTİ  hiza  envelope_closed ↔ envelope_open — kapak · tuval · sol +0.00%" in out, out
+    assert out.strip().endswith("4/4 geçti"), out
+    rgba(1024, 1536, [(124, 500, 948, 1300), (224, 300, 848, 500)]).save(P / "envelope_open.png")  # 24 px = %2,34
+    kod, out = calistir(k, "--paket", "5")
+    assert kod == 0 and "UYARI  hiza" in out and "sol +2.34%" in out and "4/4 geçti" in out, out
+    rgba(1024, 1536, [(150, 500, 974, 1300)]).save(P / "envelope_open.png")                     # 50 px = %4,88
+    kod, out = calistir(k, "--hiza")
+    assert kod == 1 and "KALDI  hiza" in out and "GPT'den yeniden" in out and out.strip().endswith("0/1 geçti"), out
+    # GPT farklı piksel ölçüsü (1254×1881 ≈ 2:3): Kaydet tuvaline göre ölçülür
+    rgba(1024, 1536, [govde]).resize((1254, 1881)).save(P / "envelope_open.png")
+    kod, out = calistir(k, "--hiza")
+    assert kod == 0 and "GEÇTİ  hiza" in out, out
+    (P / "envelope_open.png").unlink()
+    kod, out = calistir(k, "--paket", "5")
+    assert kod == 1 and "ATLANDI  hiza  envelope_open.png yok" in out and out.strip().endswith("2/3 geçti"), out
+    # gatefold: tip başlıktan, katlanma çizgileri
+    k = hiza_kit(t, "hz_kapi", " (gatefold, iki kapı)", (1536, 1024))
+    P = k / "assets/gpt/parts"
+    rgba(1536, 1024, [(518, 80, 1018, 940)], (30, 40, 70, 255)).save(P / "envelope_closed.png")
+    a = np.asarray(rgba(1536, 1024, [(98, 80, 1438, 940)], (40, 50, 90, 255))).copy()
+    a[80:940, 518:1018, :3] = (232, 220, 196)
+    a[80:940, 518, :3] = a[80:940, 1017, :3] = (10, 10, 20)
+    Image.fromarray(a, "RGBA").save(P / "envelope_open.png")
+    rgba(1024, 1024, [(400, 400, 624, 624)]).save(P / "closure.png")
+    kod, out = calistir(k, "--hiza")
+    assert kod == 0 and "kapi · tuval · üst +0.00% · alt +0.00% · sol kat +0.03% · sağ kat -0.03%" in out, out
+    kod, out = calistir(k, "--hiza", "--zarf-tipi", "kese")
+    assert "kese · tuval · sol" in out and "KALDI" in out, out   # yanlış tip: açık kapılar sol/sağ kenarı büyütür
+    # sarılı kapanış (closure Kaydet = zarf Kaydet): yatay kurdele uçları zarf kenarında
+    k = hiza_kit(t, "hz_sarili", "", (1024, 1536), (1024, 1536))
+    P = k / "assets/gpt/parts"
+    rgba(1024, 1536, [govde]).save(P / "envelope_closed.png")
+    rgba(1024, 1536, [govde, (200, 300, 824, 500)]).save(P / "envelope_open.png")
+    rgba(1024, 1536, [(100, 850, 924, 950), (450, 800, 574, 1000)], (180, 60, 80, 255)).save(P / "closure.png")
+    kod, out = calistir(k, "--hiza")
+    assert kod == 0 and "(+ sarılı closure)" in out and "kapanış sol uç +0.00%" in out, out
+    rgba(1024, 1536, [(160, 850, 864, 950)], (180, 60, 80, 255)).save(P / "closure.png")      # 60 px kısa: %5,86
+    kod, out = calistir(k, "--hiza")
+    assert kod == 1 and "kapanış sol uç +5.86%" in out, out
+
+
 def main():
     with tempfile.TemporaryDirectory() as t:
         t = Path(t)
@@ -128,7 +210,8 @@ def main():
         kod, out = calistir(t / "iyi", "--paket", "3")
         assert kod == 0 and out.strip().endswith("1/1 geçti"), out
         test_paket5(t)
-    print("test_kit_check: tamam (paket 1/3/5, pencere denetimi)")
+        test_hiza(t)
+    print("test_kit_check: tamam (paket 1/3/5, pencere denetimi, zarf hizası)")
 
 
 if __name__ == "__main__":
