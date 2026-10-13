@@ -152,7 +152,9 @@ button { font: inherit; color: inherit; }
    Page 1 — envelope landing (index.html)
    ========================================================================== */
 .env-page {
-  --w: min(84vw, 44svh, 460px);           /* envelope group width (open envelope canvas 966×1349) */
+  /* envelope group width (open envelope canvas 966×1349); long names (site.js fitText, data-fit): the envelope gives
+     back the names' extra height (--names-x) so names, envelope and hint keep their places on the painted wash */
+  --w: calc(min(84vw, 44svh, 460px) - var(--names-x, 0px));
   position: relative; z-index: 2;
   min-height: 100vh; min-height: 100svh;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -161,9 +163,11 @@ button { font: inherit; color: inherit; }
   overflow: clip;
 }
 .env-head { position: relative; z-index: 1; }
+/* the kicker's box is its text (wrapped long names widen the head to the column; the line stays centred) */
+.env-head > .kicker { width: fit-content; margin-inline: auto; }
 /* legibility over the painted backdrop: a soft blush glow behind text (no shape) */
 .env-head, .env-hint, .env-after, .hero-inner > :not(.hero-card) { text-shadow: 0 0 14px rgba(251, 237, 236, .95), 0 0 4px rgba(251, 237, 236, .8); }
-.env-head .names { font-size: clamp(46px, 14vw, 78px); margin-top: 4px; }
+.env-head .names { font-size: calc(clamp(46px, 14vw, 78px) * var(--fit, 1)); margin-top: 4px; text-wrap: balance; overflow-wrap: anywhere; }
 .env-head .names .amp { font-size: .62em; padding: 0 .06em; }
 
 .stage {
@@ -201,7 +205,7 @@ button { font: inherit; color: inherit; }
 @keyframes hint { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
 .env-hint .click { display: none; }
 @media (hover: hover) and (pointer: fine) { .env-hint .tap { display: none; } .env-hint .click { display: inline; } }
-@media (min-aspect-ratio: 3/4) { .env-page { --w: min(84vw, 50svh, 540px); } }
+@media (min-aspect-ratio: 3/4) { .env-page { --w: calc(min(84vw, 50svh, 540px) - var(--names-x, 0px)); } .env-head { max-width: max(40vw, 420px); } }
 .env-after { position: relative; z-index: 3; margin-top: 18px; display: none; flex-direction: column; align-items: center; gap: 14px; }
 /* "Replay" sits low, where the painted bottom florals are on many phones: a soft wash behind it (like .btn-ghost)
    keeps it readable, and it is a 44 px tap target */
@@ -439,23 +443,26 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
    stay the <img>, clipped; rows 66–100 % (bottom florals) are ::after; the plain paper band 42–66 % (manifest free_zone
    rows 41–67: nothing between the two straight gold lines) is ::before, stretched to fill the height between.
    The text is in the flow (same place as before), so the card is never shorter than the image: with a short schedule
-   the three slices put the image back together at its own size. 154.71cqw = card image height (1411 / 912 × 100cqw). */
-.info:has(> .info-text .sched-list) { aspect-ratio: auto; }
-.info:has(> .info-text .sched-list) > img { bottom: auto; height: auto; aspect-ratio: 912 / 1411; clip-path: inset(0 0 58% 0); }
-.info:has(> .info-text .sched-list)::before,
-.info:has(> .info-text .sched-list)::after {
+   the three slices put the image back together at its own size. 154.71cqw = card image height (1411 / 912 × 100cqw).
+   G056: the RSVP card (long signature) grows the same way: class "tall" on both cards. */
+.info.tall { aspect-ratio: auto; }
+.info.tall > img { bottom: auto; height: auto; aspect-ratio: 912 / 1411; clip-path: inset(0 0 58% 0); }
+.info.tall::before,
+.info.tall::after {
   content: ""; position: absolute; left: 0; right: 0; pointer-events: none;
   background-image: url("img/info_card-912.webp");
   background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-912.webp") 2x);
   background-repeat: no-repeat;
 }
 /* band 42–66 %: 24 % of the image -> background 416.667 % tall, at 42 / (1 - 0.24) = 55.263 % (1 px overlaps) */
-.info:has(> .info-text .sched-list)::before { top: calc(64.98cqw - 1px); bottom: calc(52.6cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
-.info:has(> .info-text .sched-list)::after { bottom: 0; height: 52.6cqw; background-size: 100% auto; background-position: 0 100%; }
+.info.tall::before { top: calc(64.98cqw - 1px); bottom: calc(52.6cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
+.info.tall::after { bottom: 0; height: 52.6cqw; background-size: 100% auto; background-position: 0 100%; }
 /* text: from 28.9 % of the image (44.71cqw, as before) down to image row 72 % at most (43.32cqw above the bottom: below
    it the bottom florals reach into the text column), and at least the image's own height in total (66.68cqw) */
-.info:has(> .info-text .sched-list) > .info-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 11.2%;
+.info.tall > .info-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 11.2%;
   padding: 44.71cqw 0 43.32cqw; min-height: 66.68cqw; box-sizing: content-box; }
+/* RSVP: text from 34 % of the image (52.6cqw) to row 72 % at most */
+.info.tall > .rsvp-text { padding-top: 52.6cqw; min-height: 58.79cqw; }
 .dress { margin-top: 3cqw; font-family: var(--display); font-weight: 600; font-size: max(9.5px, 2.8cqw); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); }
 .dress em { font-family: var(--body); font-weight: 400; letter-spacing: .02em; text-transform: none; font-size: max(12px, 3.4cqw); color: var(--ink); }
 
@@ -468,7 +475,8 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .rsvp-text .btn { margin-top: 3.4cqw; }
 .rsvp-text .love { margin-top: 3.4cqw; font-size: max(9.5px, 2.8cqw); }
 .rsvp-text .title { font-size: 8.6cqw; }
-.rsvp-text .sign { font-size: 8.4cqw; white-space: nowrap; }
+/* long names wrap (balanced) and shrink to 2.5 lines at most (site.js fitText); the card grows (3-slice above) */
+.rsvp-text .sign { font-size: calc(8.4cqw * var(--fit, 1)); max-width: 100%; text-wrap: balance; overflow-wrap: anywhere; }
 
 /* reply form — platform RSVP contract (G042): form.js toggles [hidden], [data-rsvp-status], aria-invalid.
    UI elements only (fields, choice pills, button, 1 px gold rule); no drawn decor. */
@@ -561,7 +569,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .closing .bow { width: min(70vw, 340px); margin: 0 auto; }
 .closing .title { font-size: clamp(54px, 15vw, 84px); margin-top: 4px; }
 .closing .line { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 4px; }
-.closing .kicker { margin-top: 18px; }
+.closing .kicker { margin-top: 18px; overflow-wrap: anywhere; }
 /* after a reply the form's own thank-you answers the guest ("We'll miss you" / "We can't wait…"): the closing
    below must not repeat it or, for a guest who declined, contradict it (site.js sets data-rsvp-replied) */
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }

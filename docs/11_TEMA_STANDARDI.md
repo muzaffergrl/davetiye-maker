@@ -362,13 +362,13 @@ CSS kutusu üçüncü yol değildir. Test (§13.2 #22): `site.css`'te `.cd-*` ku
 
 | Ölçü | Sınır | 03 (ölçülen) |
 |---|---|---|
-| İlk görünüm, index, 390×844 **DPR 3**, yer tutucu fotoğraflarla | **≤ 1,5 MB** (fontlar dahil) | 1026 KB (G055 incelemesi; G038: 1018) |
-| İlk görünüm, home, aynı koşul | **≤ 1,5 MB** | 715 KB (G038: 706) |
+| İlk görünüm, index, 390×844 **DPR 3**, yer tutucu fotoğraflarla | **≤ 1,5 MB** (fontlar dahil) | 1028 KB (G056; G055 incelemesi: 1026; G038: 1018) |
+| İlk görünüm, home, aynı koşul | **≤ 1,5 MB** | 717 KB (G056; G038: 706) |
 | Tek WebP, ilk görünümde | ≤ 200 KB (≥ 150 KB olanı Sonuç'ta gerekçelendir) | en büyük 187 KB (`invitation_card-909`, home) |
 | Tek WebP, yalnız geniş ekran / `lazy` | ≤ 250 KB | en büyük 228 KB (`florals_tl-960`) |
 | Tema klasörü toplamı | ≤ 3 MB | 2,9 MB (G054) |
 | Font | ≤ 3 aile, yalnız kullanılan ağırlıklar, Google Fonts | 3 aile |
-| Betik / stil | `site.js` ≤ 35 KB, `site.css` ≤ 45 KB (sıkıştırmasız), kütüphane yok; harici istek yalnız Google Fonts | 28 KB / 43 KB |
+| Betik / stil | `site.js` ≤ 35 KB, `site.css` ≤ 45 KB (sıkıştırmasız), kütüphane yok; harici istek yalnız Google Fonts | 30 KB / 44 KB (G056) |
 | Dokun → home | 3,2–5 s (Skip her an) | 4,45 s |
 
 Ölçüm `theme-check`'in "first view" adımıyla (`next start` üzerinde yayınlanmış test sitesi; aktarılan bayt), **iki kez**:
@@ -376,10 +376,12 @@ yer tutucularla (tablodaki sınır) ve tohumlanmış PAKET 2 fotoğraflarıyla (
 Sonuç'a yazılır. **Alıcı fotoğrafı (G055):** panel fotoyu (uzun kenar ≤ 2400 px, JPEG q84) ve 640/1280 px türevlerini saklar;
 motor `srcset` = türevler + foto yazar ve **şablonun `sizes`'ını korur** (yoksa `loading="lazy"`'de `auto, 100vw`, değilse
 `100vw`). Bu yüzden her foto alanının `sizes`'ı alanın gerçek CSS genişliği olmalı (§5.5): fazla geniş bir `sizes` artık alıcı
-fotoğrafında da büyük türevi indirtir. Ölçümün fotoğraflı hâli `npm run seed -- --photos` ile yapılır ve `scripts/seed.ts` bugün
-fotoğrafları **türevsiz** (tek dosya) saklar → theme-check'in fotoğraflı sayısı alıcının göreceğinden ağırdır (seed `preparePhoto`
-kullanana kadar; G055 ölçümü panel API'siyle: index 1093 KB, home 890 KB, `platform/README.md` "Platform cilası"). Gerçek
-telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
+fotoğrafında da büyük türevi indirtir. Ölçümün fotoğraflı hâli `npm run seed -- --photos` ile yapılır; **G056'dan beri
+`scripts/seed.ts` örnek fotoğrafları panel yüklemesinin yolundan saklar** (`preparePhoto`: alan oranına orta kırpım, uzun kenar
+≤ 2400, JPEG q84, 640/1280 türevleri → `savePhoto({width, variants})`), yani theme-check'in fotoğraflı sayısı alıcının
+göreceğiyle aynı yoldan gelir (`--photo-max 0` = eski tek dosya hâli). 03 (`theme-check --stress`, G056): fotoğraflı ilk görünüm
+index 1294 → **1099 KB**, home 1261 → **895 KB** (tek dosya → türevli; G055'in panel API'siyle ölçtüğü 1093 / 890 KB ile
+uyumlu). Gerçek telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
 
 ---
 
@@ -672,10 +674,17 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
      kâğıtta** sürer ya da kart §9'daki 3 dilim kesimle uzar; metin boyalı dekorun üstüne binmez, yatay kaydırma yok; zarf
      sayfasında isimler düz zeminde, zarf ve "Tap to open" ekranda (360×640 dahil). Bir sözcük sütundan uzunsa kırılır
      (`overflow-wrap: break-word`), kesilmez.
-  **03 bugün (G055 incelemesi, `theme-check --stress`):** home (davet kartı, tanıtımlar), story ve details geçiyor; **index ve rsvp
-  geçmiyor** — 40 karakterlik ilk adlar zarf sayfasının başlığını 6 satıra çıkarıp zarfı ve "Tap to open"ı ekranın altına itiyor
-  (360×640 ve 390×844, isimler köşe çiçeklerine biniyor), rsvp kartındaki imza (`.rsvp-text .sign`, `nowrap`) ekrandan taşıyor
-  (§14 #15). Varsayılan `theme-check` (demo kaydı) 03'te hatasız; yeni tema `--stress`'i de geçmeli.
+  **03 (G056, `theme-check --stress` hatasız, 85/85):** G055 incelemesinde index ve rsvp kalıyordu (40 karakterlik adlar zarf
+  başlığını 6 satıra çıkarıp zarfı ve "Tap to open"ı ekran altına itiyordu; rsvp imzası `nowrap` taşıyordu). Çözüm örnek
+  olarak (çizim yok, kopyalanacak düzen değil): isim satırı sarar (`text-wrap: balance`, `overflow-wrap: anywhere`) ve
+  `data-fit="n"` işaretliyse `site.js` `fitText()` yazıyı CSS `--fit` ile küçültür — satır kendi CSS boyunun n satırından uzun
+  olmaz (zarf başlığı 1,5, rsvp imzası 2,5); zarf sayfasında fazladan yükseklik `--names-x` olarak zarf genişliğinden (`--w`)
+  düşülür, böylece yazılar ve zarf boyalı zeminin düz bandındaki yerlerinde kalır; yatay ekranda isim sütunu köşe çiçek
+  parçalarının arasında (`max(40vw, 420px)`); rsvp kartı §9 3 dilimle uzar. Font yüklenince (`document.fonts` `loadingdone`) ve
+  genişlik değişince yeniden ölçülür; bulunan boyun %2 altı (alt piksel farkı satır sayısını değiştirmesin). JS'siz hâl CSS
+  boyunda sarar. Ayrıntı `platform/themes/blush-garden-rose/README.md` "Uzun isimler". Not: kutu genişliği de ölçülür — sarılan
+  başlık bloğu sütunu doldurur; kısa bir üst satır (kicker) `width: fit-content` almazsa kutusu köşe çiçeğine uzanır.
+  Yeni tema `--stress`'i de geçmeli.
 - Tarihler yalnız motor biçimiyle (`May 15, 2027` / `15 May 2027`); comp'taki büyük harfli tarih CSS `text-transform` ile.
 
 ---
@@ -795,13 +804,13 @@ sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı ko�
 | 6 | blush-garden-rose'ta `og:image` ve favicon yok | **yapıldı:** dosyalar G054 (`img/og-1200x630.jpg` `web_hero` alt hizalı 1.91:1, yazısız; `img/favicon.png` 180 px şeffaf kare), etiketler G055 (motor; §3.1). Açık: 03'ün og görselinde zarf sağa yakın (merkez ≈ %65) — kare kırpan önizlemeler (WhatsApp küçük kart) sağdan ~%15 keser; `og_kirp`'a yatay odak eklenmedi (§14 #14) | — |
 | 7 | Her tema rotasının Vercel paketine bütün tema görselleri giriyor | **yapıldı (G055):** tema rotaları yalnız `*.html`/`*.json` (rota başına ~2,8 MB → 69 KB), görseller yalnız varlık rotasında; `trace-check` denetler | — |
 | 8 | Aşama 2 varyantları (G090 sonrası) | renkler yalnız `:root` token'larında; `html[data-variant]` kancası hazır; varyant görsel klasörü ayrı karar | — |
-| 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | **yapıldı (G055):** 640/1280 türevleri + motorun `srcset`'i, şablonun `sizes`'ı korunur (§6). Açık: `scripts/seed.ts` türevsiz saklıyor (theme-check'in fotoğraflı ölçümü bu yüzden ağır) | claude-kod (seed) |
+| 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | **yapıldı (G055):** 640/1280 türevleri + motorun `srcset`'i, şablonun `sizes`'ı korunur (§6). **G056:** `scripts/seed.ts` panel yüklemesinin yolundan (`preparePhoto` + türevler) saklıyor; theme-check'in fotoğraflı ölçümü `srcset`'li (03: index 1099, home 895 KB) | — |
 | 10 | Şema/panel program satırını ve metin uzunluklarını sınırlamıyor; 03 kartları taşıyor | **yapıldı (G055, entegratörün geri alınabilir varsayılan kararı):** isimler/tam adlar ≤ 40, `name_display` ≤ 85, mekân ≤ 80, program ≤ 10 (şema, iki doğrulayıcı, panel, `/start`); 03 Details kartı (G055) ve home davet kartı (G055 incelemesi) §9 3 dilimle uzuyor. `name_display` ≤ 85 entegratör onayı bekliyor | — |
 | 11 | 01 `closure_sprig` gibi açılış cümlesinin gerektirdiği gizli parçalar | her G2NN W2'den önce `acilis` cümlesi §5.1'e göre okunur; eksik `ekler` katalogda | entegratör |
 | 12 | `tools/katalog.py ozet` G053'ten beri 04–20 `content.demo.json`'ı "elle eklenmiş alan: story" diye atlıyor (`DESIGN_BRIEF.md`'yi yazmaya devam ediyor → katalog değişikliği kayda yansımaz); `yaz --zorla` story'yi siler | story tablosunu `katalog.py` `content()` üretecine taşı (ya da `ozet` katalogda olmayan anahtarları koruyarak birleştirsin); `ozet --dene` "atlandı"sız 0 değişiklik | claude-kod (katalog) |
 | 13 | 19 `GPT_PROMPTS.md` W1.3 story comp ve PAKET 2 2.2–2.4 başlıkları G053 öncesi varsayılanlar ("First hello" …) | `python3 tools/katalog.py paket5 --no 02,04,…,20` (01'i G201 bitince); `paket5 --dene` 0 | entegratör |
 | 14 | 03 og görseli: zarf merkez ≈ %65 (kare kırpımda sağı kesilir) | `tema_build.og_kaydet`/`og_kirp`'a yatay odak (zarf kutusu ortalı ~1076×563 pencere) ya da yalnız 1.91:1 çerçeve kabulü; 03 görseli `_v2` adıyla (ikili dosya üzerine yazılmaz) | claude-kod |
-| 15 | 03 `--stress`'te index ve rsvp (§12): 40 karakterlik ilk adlar zarf başlığını uzatıp zarfı ekran altına itiyor; rsvp imzası `nowrap` | index başlığına uzun isimde küçülen yazı (ör. `site.js`'te satır sayısı ölçülüp `--names-scale`; JS'siz hâli bugünkü), rsvp kartına §9 3 dilim + imzada sarma; `theme-check --stress` 03'te hatasız | claude-kod (03 teması) |
+| 15 | 03 `--stress`'te index ve rsvp (§12): 40 karakterlik ilk adlar zarf başlığını uzatıp zarfı ekran altına itiyor; rsvp imzası `nowrap` | **yapıldı (G056):** `data-fit` + `site.js` `fitText()` (CSS `--fit`; zarf `--names-x` kadar küçülür), yatay ekranda isim sütunu çiçeklerin arasında, rsvp kartı §9 3 dilim + imza sarar/küçülür (§12); `theme-check --stress` 03'te 85/85 hatasız | — |
 
 ## 15. Kontrol listesi (G4NN)
 

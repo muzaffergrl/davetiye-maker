@@ -2,7 +2,8 @@
 """İçerik kaydını şemaya ve iş kurallarına göre denetler.
 
 Kullanım:
-    python tools/validate_content.py collections/01_Olive_Ivory/content.demo.json
+    python3 tools/validate_content.py collections/03_Blush_Garden_Rose/content.demo.json
+    python3 tools/validate_content.py --help
 
 Çıktının sonunda, tüm formatlara (video, website, PDF) birebir kopyalanacak
 "canonical" metinler basılır. Formatlar kendiliğinden senkronize değildir;
@@ -14,6 +15,7 @@ Python len() ile (kod noktası); platform/lib/content/validate.ts aynı sayar (g
 platform/tests/content.test.ts, platform/tests/g055-limits.test.ts). jsonschema kurulu değilse şema —
 ve sınırlar — denetlenmez (uyarı basılır).
 """
+import argparse
 import json
 import re
 import sys
@@ -181,12 +183,31 @@ def canonical(record: dict) -> list[str]:
     return lines
 
 
-def main() -> int:
-    if len(sys.argv) != 2:
-        print(__doc__)
+def main(argv: list[str] | None = None) -> int:
+    # G056: --help / -h çalışır (önceden "--help" dosya adı sanılıp çöküyordu); okunamayan kayıt iz yığını değil, tek
+    # satır hata. Çıkış kodu: 0 geçti, 1 kayıt hatalı, 2 kullanım hatası ya da kayıt okunamadı.
+    parser = argparse.ArgumentParser(
+        prog="validate_content.py",
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="Çıkış kodu: 0 = geçti, 1 = kayıt hatalı, 2 = kullanım hatası ya da kayıt okunamadı.",
+    )
+    parser.add_argument("record", metavar="KAYIT", help="içerik kaydı (JSON), ör. collections/03_Blush_Garden_Rose/content.demo.json")
+    path = Path(parser.parse_args(argv).record)
+    try:
+        record = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        print(f"HATA: kayıt bulunamadı: {path}", file=sys.stderr)
         return 2
-    path = Path(sys.argv[1])
-    record = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"HATA: kayıt okunamadı: {path}: {e}", file=sys.stderr)
+        return 2
+    except json.JSONDecodeError as e:
+        print(f"HATA: kayıt geçerli JSON değil: {path}: {e}", file=sys.stderr)
+        return 2
+    if not isinstance(record, dict):
+        print(f"HATA: kayıt bir JSON nesnesi olmalı: {path}", file=sys.stderr)
+        return 2
     errors = schema_errors(record)
     if not any(e.startswith("şema:") for e in errors):
         r_err, r_warn = rule_errors(record)

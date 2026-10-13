@@ -6,20 +6,24 @@
 // Default: theme blush-garden-rose (design 03) with collections/03_Blush_Garden_Rose/content.demo.json and the
 // fictional sample photos of collections/03_Blush_Garden_Rose/assets/gpt/photos/.
 //
-// Photos: for every photo slot in the theme's theme.json, <photos>/<slot key>.(jpg|jpeg|png|webp) is uploaded through
-// the data adapter (like a buyer's upload) and its URL is written to the slot's content path (media.hero_portrait,
-// media.memory_photos.0, …). --photo-max (default 1600, 0 = keep the original file) re-encodes each photo with
-// Pillow (python3) to that longest side, as the panel should do on upload (G039); without python3/Pillow the
-// original file is uploaded and a note is printed. --no-photos seeds the placeholder state.
+// Photos (G056): for every photo slot in the theme's theme.json, <photos>/<slot key>.(jpg|jpeg|png|webp) goes the panel
+// upload's way (lib/panel/api.ts uploadPhoto): preparePhoto (sharp: EXIF rotation, metadata dropped, centre crop to the
+// slot's theme.json aspect, long edge <= 2400, JPEG q84, 640/1280 px variants) and the adapter's savePhoto with the width
+// and variants, so the site's photos carry the same srcset as a buyer's (lib/photo-variants.ts). Its URL is written to the
+// slot's content path (media.hero_portrait, media.memory_photos.0, …). --photo-max <px> (default 2400 = the panel's
+// limit) shrinks a larger sample file to that long edge first; --photo-max 0 stores the original file unchanged (one
+// file, no variants: the state of a pre-G055 upload). Without sharp the original file is stored (as the panel's own
+// fallback) and a note is printed. --no-photos seeds the placeholder state.
 // The edit/preview keys are printed and saved to <PLATFORM_DATA_DIR>/seed-keys.json (gitignored, local disk).
 
-import { spawnSync } from 'node:child_process';
 import { existsSync, promises as fs } from 'node:fs';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { getDataAdapter, localDataDir, type DataAdapter } from '../lib/data/index.ts';
 import type { ContentRecord } from '../lib/content/types.ts';
+import { parseAspect } from '../lib/panel/model.ts';
+import { PHOTO_MAX_EDGE, preparePhoto } from '../lib/panel/photos.ts';
 import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { loadTheme } from '../lib/theme/theme.ts';
 
@@ -35,7 +39,7 @@ export interface SeedOptions {
   baseUrl: string;
   /** Folder with <slot key>.(jpg|jpeg|png|webp); null = placeholder state. */
   photosDir?: string | null;
-  /** Longest side for re-encoding (0 = original file). */
+  /** Long edge the sample files are shrunk to before the panel's processing (default 2400; 0 = original file, no variants). */
   photoMax?: number;
 }
 
@@ -70,27 +74,42 @@ function setPath(obj: Record<string, unknown>, dotted: string, value: unknown): 
   });
 }
 
-const PILLOW_RESIZE = `
-import io, sys
-from PIL import Image, ImageOps
-im = ImageOps.exif_transpose(Image.open(sys.argv[1])).convert("RGB")
-m = int(sys.argv[2])
-if max(im.size) > m:
-    im.thumbnail((m, m), Image.LANCZOS)
-buf = io.BytesIO()
-im.save(buf, "JPEG", quality=84, optimize=True, progressive=True)
-sys.stdout.buffer.write(buf.getvalue())
-`;
+type SharpFactory = (input: Uint8Array) => import('sharp').Sharp;
 
-let pillowNote = false;
-async function photoBytes(file: string, maxSide: number): Promise<Uint8Array> {
-  if (maxSide > 0) {
-    const r = spawnSync('python3', ['-c', PILLOW_RESIZE, file, String(maxSide)], { maxBuffer: 64 * 1024 * 1024 });
-    if (r.status === 0 && r.stdout?.length) return new Uint8Array(r.stdout);
-    if (!pillowNote) console.log('  note: python3 + Pillow not available — uploading the original photo files');
-    pillowNote = true;
+/** A sample file larger than `maxSide` (long edge) as a lossless PNG of that size; otherwise the file itself. */
+async function shrinkSample(bytes: Uint8Array, maxSide: number): Promise<Uint8Array> {
+  if (maxSide >= PHOTO_MAX_EDGE) return bytes; // the panel's own limit applies in preparePhoto
+  let sharp: SharpFactory;
+  try {
+    const m = await import('sharp');
+    sharp = (m as unknown as { default?: SharpFactory }).default ?? (m as unknown as SharpFactory);
+  } catch {
+    return bytes; // preparePhoto reports the missing sharp
   }
-  return new Uint8Array(await fs.readFile(file));
+  const meta = await sharp(bytes).metadata();
+  if (!meta.width || !meta.height || Math.max(meta.width, meta.height) <= maxSide) return bytes;
+  const swap = (meta.orientation ?? 1) >= 5; // EXIF orientation 5-8 swaps the sides
+  const wide = swap ? meta.height >= meta.width : meta.width >= meta.height;
+  return new Uint8Array(await sharp(bytes).rotate().resize(wide ? { width: maxSide } : { height: maxSide }).png().toBuffer());
+}
+
+let sharpNote = false;
+/**
+ * One sample photo, stored like a panel upload (lib/panel/api.ts uploadPhoto): preparePhoto with the slot's aspect,
+ * then savePhoto with its width and 640/1280 variants. maxSide 0: the original file as it is (no variants).
+ */
+async function seedPhoto(adapter: DataAdapter, siteId: string, file: string, aspect: string | undefined, maxSide: number) {
+  const original = new Uint8Array(await fs.readFile(file));
+  if (maxSide <= 0) return { saved: await adapter.savePhoto(siteId, { bytes: original }), note: 'original file' };
+  const photo = await preparePhoto(await shrinkSample(original, maxSide), parseAspect(aspect));
+  if (photo.width === null) {
+    if (!sharpNote) console.log('  note: sharp is not available — photos stored as their original files, without variants');
+    sharpNote = true;
+    return { saved: await adapter.savePhoto(siteId, { bytes: photo.bytes, contentType: photo.contentType }), note: 'original file, no sharp' };
+  }
+  const saved = await adapter.savePhoto(siteId, { bytes: photo.bytes, contentType: photo.contentType, width: photo.width, variants: photo.variants });
+  const widths = saved.variants.map((v) => v.width).join('/');
+  return { saved, note: `${photo.width}×${photo.height}${widths ? `, variants ${widths}` : ''}` };
 }
 
 /** Replaces the site at `slug` (if any) with a fresh one; works with any adapter (local, blob). */
@@ -112,14 +131,14 @@ export async function seedSite(adapter: DataAdapter, opts: SeedOptions): Promise
   const uploaded: string[] = [];
   if (opts.photosDir) {
     const dir = path.resolve(opts.photosDir);
-    const maxSide = opts.photoMax ?? 1600;
+    const maxSide = opts.photoMax ?? PHOTO_MAX_EDGE;
     const withPhotos = structuredClone(opts.content) as unknown as Record<string, unknown>;
     for (const [key, slot] of Object.entries(theme.manifest.photos)) {
       const file = ['jpg', 'jpeg', 'png', 'webp'].map((ext) => path.join(dir, `${key}.${ext}`)).find((f) => existsSync(f));
       if (!file) continue;
-      const saved = await adapter.savePhoto(site.id, { bytes: await photoBytes(file, maxSide) });
+      const { saved, note } = await seedPhoto(adapter, site.id, file, slot.aspect, maxSide);
       setPath(withPhotos, slot.source, saved.url);
-      uploaded.push(`${key} → ${slot.source} (${Math.round(saved.size / 1024)} KB)`);
+      uploaded.push(`${key} → ${slot.source} (${Math.round(saved.size / 1024)} KB, ${note})`);
     }
     if (uploaded.length) await adapter.updateContent(site.id, withPhotos as unknown as ContentRecord);
   }
@@ -140,6 +159,14 @@ export async function seedSite(adapter: DataAdapter, opts: SeedOptions): Promise
   };
 }
 
+function photoMaxArg(value: string): number {
+  const n = Number(value);
+  if (!/^\d+$/.test(value.trim()) || !Number.isSafeInteger(n)) {
+    throw new Error(`--photo-max must be a whole number of pixels (0 = the original files), not "${value}"`);
+  }
+  return n;
+}
+
 async function main(): Promise<void> {
   process.chdir(platformRoot); // themes/ and .data/ resolve from platform/
   const { values } = parseArgs({
@@ -149,7 +176,7 @@ async function main(): Promise<void> {
       content: { type: 'string', default: path.join(collection03, 'content.demo.json') },
       photos: { type: 'string', default: path.join(collection03, 'assets/gpt/photos') },
       'no-photos': { type: 'boolean', default: false },
-      'photo-max': { type: 'string', default: '1600' },
+      'photo-max': { type: 'string', default: String(PHOTO_MAX_EDGE) },
       draft: { type: 'boolean', default: false },
     },
   });
@@ -163,7 +190,7 @@ async function main(): Promise<void> {
     draft: values.draft!,
     baseUrl: process.env.SEED_BASE_URL || 'http://localhost:3000',
     photosDir: values['no-photos'] ? null : values.photos!,
-    photoMax: Number(values['photo-max']) || 0,
+    photoMax: photoMaxArg(values['photo-max']!),
   });
 
   const dataDir = localDataDir();

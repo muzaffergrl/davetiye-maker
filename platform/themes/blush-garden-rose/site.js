@@ -397,6 +397,45 @@ const DEV_CONTENT = {
     });
   }
 
+  /* ------------------------------------------------------------------ long names (docs/11 §12, G056)
+     [data-fit="n"]: a line of names that wraps (CSS) and, when it is taller than n lines of its CSS size, shrinks
+     (CSS var --fit, at least data-fit-min) until it is not. Envelope page: .env-page gets the names' extra height
+     (--names-x, site.css --w) so the envelope gives it back and names, envelope and "Tap to open" keep their places on
+     the plain painted wash. Text only — no personal value is written. Without JS: CSS size, wrapping. */
+  let fitWidth = 0;
+  function fitText() {
+    fitWidth = window.innerWidth;
+    document.querySelectorAll('[data-fit]').forEach((el) => {
+      el.style.removeProperty('--fit');
+      const cs = getComputedStyle(el);
+      const line = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.12;
+      const max = line * (parseFloat(el.dataset.fit) || 1) + 1;
+      if (el.offsetHeight > max) {
+        let lo = parseFloat(el.dataset.fitMin) || .4, hi = 1;
+        for (let i = 0; i < 8; i++) {
+          const mid = (lo + hi) / 2;
+          el.style.setProperty('--fit', mid);
+          if (el.offsetHeight > max) hi = mid; else lo = mid;
+        }
+        el.style.setProperty('--fit', Math.floor(lo * 980) / 1000);   // 2 % below the found size: no wrap flip on a sub-pixel
+      }
+      const page = el.closest('.env-page');
+      if (page) page.style.setProperty('--names-x', (Math.max(0, el.offsetHeight - line) * 1.1).toFixed(1) + 'px');
+    });
+  }
+  function initFit() {
+    if (!document.querySelector('[data-fit]')) return;
+    fitText();
+    // web fonts change the wrapping: fit again whenever a font finishes loading (fonts.ready alone can resolve before
+    // the first layout has even requested the script font)
+    if (document.fonts) {
+      if (document.fonts.ready) document.fonts.ready.then(fitText);
+      if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitText);
+    }
+    let raf = 0;   // only a width change can change the wrapping (mobile bars resize the height while scrolling)
+    window.addEventListener('resize', () => { if (window.innerWidth !== fitWidth) { cancelAnimationFrame(raf); raf = requestAnimationFrame(fitText); } });
+  }
+
   /* ------------------------------------------------------------------ boot */
   function boot() {
     // the theme files opened without the platform are a design preview: placeholder labels show, as in the panel
@@ -407,6 +446,7 @@ const DEV_CONTENT = {
       if (st === 'success') root.setAttribute('data-rsvp-replied', '');
       else if (st === 'ready') root.removeAttribute('data-rsvp-replied');
     });
+    initFit();
     initEnvelope();
     initScenes();
     initCountdown();
