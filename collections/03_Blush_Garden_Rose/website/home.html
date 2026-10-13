@@ -1,0 +1,142 @@
+<!doctype html>
+<!-- Page 2 · home — hero (card from the envelope with the hero photo slot, names, date, live countdown),
+     invitation card (comp scene 4), teasers. Works when opened directly (no dependency on the envelope page).
+     Personal text: none in this file — [data-field] elements are filled from CONTENT in site.js (K24).
+     Lines without data-field are design template copy. Visuals: GPT parts in img/. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wedding</title>
+<meta name="description" content="Wedding website">
+<meta name="theme-color" content="#F2D8D7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Lora:ital,wght@0,400;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="img/photos.css">
+<script>/* early state — keys = MOTION.storage in site.js */
+(function(r){r.classList.replace('no-js','js');try{var s=sessionStorage;if(s.getItem('invite:arrive')){s.removeItem('invite:arrive');r.classList.add('from-envelope');if(!('onpageswap' in window&&document.startViewTransition))r.classList.add('arrive-fade');}}catch(e){}})(document.documentElement);
+</script>
+<script src="site.js" defer></script>
+</head>
+<body data-page="home" data-pending="This link will be added soon.">
+
+<main class="site-main">
+
+  <!-- HERO -->
+  <section class="hero" data-scene="home-hero" aria-label="Welcome">
+    <div class="scene-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/mist-640.webp">
+        <img src="img/bg_scene-640.webp" srcset="img/bg_scene-640.webp 640w, img/bg_scene-1024.webp 1024w" sizes="67vh" alt="" fetchpriority="high">
+      </picture>
+      <img class="florals florals-tl land-only" data-step="florals" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(46vw, 68vh, 560px)" alt="" loading="lazy">
+      <img class="florals florals-br land-only" data-step="florals" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-960.webp 960w" sizes="min(46vw, 68vh, 560px)" alt="" loading="lazy">
+    </div>
+    <div class="hero-inner">
+      <div class="card hero-card" data-step="card" data-a="rise-lg">
+        <div class="photo-slot mask-card" data-slot="hero_portrait">
+          <img data-photo="hero_portrait" data-field="media.hero_portrait" src="img/photo_hero_portrait-320.webp" srcset="img/photo_hero_portrait-320.webp 320w, img/photo_hero_portrait-640.webp 640w" sizes="min(38vw, 20vh, 177px)" alt="">
+          <span class="ph-mark" aria-hidden="true"><img src="img/petal2-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(54vw, 28vh, 250px)" alt="">
+        <div class="card-copy">
+          <p class="script">We're getting married</p>
+          <p class="kicker" data-field="date"></p>
+          <p class="kicker"><span data-field="venue.city"></span>, <span data-field="venue.region"></span></p>
+        </div>
+      </div>
+      <h1 class="script names" data-step="names" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+      <p class="kicker hero-date" data-step="date" data-a="rise"><span data-field="date" data-format="weekday"></span> · <span data-field="date"></span></p>
+      <p class="hero-place" data-step="place" data-a="rise"><span data-field="venue.name"></span><br><span data-field="venue.city"></span>, <span data-field="venue.region"></span></p>
+      <!-- live countdown: CONTENT.date + ceremony_time + timezone → UTC in site.js -->
+      <div class="countdown" data-optional="countdown" data-step="countdown" data-a="rise" data-countdown role="timer" aria-label="Countdown to the ceremony">
+        <div class="cd-grid">
+          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl kicker">Days</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl kicker">Hours</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl kicker">Minutes</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl kicker">Seconds</span></div>
+        </div>
+        <p class="cd-done" data-when="today" hidden>Today is the day — we're celebrating!</p>
+        <p class="cd-done" data-when="after" hidden>Thank you for celebrating with us.</p>
+      </div>
+      <a class="cue" href="#invitation" data-step="cue" data-a="fade">Our invitation<span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <!-- INVITATION CARD (comp scene 4) -->
+  <section class="section invite-sec" id="invitation" data-scene="home-invite" aria-label="Invitation">
+    <div class="wrap">
+      <div class="invite" data-step="card" data-a="rise-lg">
+        <img src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-909.webp 909w" sizes="min(calc(100vw - 32px), 520px)" alt="" loading="lazy">
+        <div class="invite-text">
+          <p class="kicker" data-step="host" data-a="fade" data-field="host_line"></p>
+          <p class="script nm nm1" data-step="name1" data-a="write" data-field="partners.0.full_name"></p>
+          <p class="amp" data-step="amp" data-a="bloom" aria-hidden="true">&amp;</p>
+          <p class="script nm" data-step="name2" data-a="write" data-field="partners.1.full_name"></p>
+          <p class="request" data-step="request" data-a="fade">request the pleasure of your company at the celebration of their marriage</p>
+          <div class="dateblock" data-step="date" data-a="rise">
+            <span class="side" data-field="date" data-format="weekday"></span>
+            <span class="mid"><span class="mon" data-field="date" data-format="month"></span><span class="day" data-field="date" data-format="day"></span><span class="yr" data-field="date" data-format="year"></span></span>
+            <span class="side" data-field="ceremony_time"></span>
+          </div>
+          <p class="venue" data-step="venue" data-a="fade" data-field="venue.name"></p>
+          <p class="kicker city" data-step="venue" data-a="fade"><span data-field="venue.city"></span>, <span data-field="venue.region"></span></p>
+        </div>
+      </div>
+      <div class="reply" data-step="cta" data-a="rise">
+        <p>Kindly reply by <span data-field="rsvp.deadline"></span></p>
+        <a class="btn" href="rsvp.html">RSVP</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEASERS -->
+  <section class="section teasers-sec" data-scene="home-teasers" aria-label="More about the day">
+    <img class="florals florals-br" data-step="florals" data-a="drift-br" src="img/florals_br-480.webp" alt="" loading="lazy">
+    <div class="wrap">
+      <p class="kicker" data-step="title" data-a="fade">More about the day</p>
+      <div class="teasers">
+        <a class="teaser" data-optional="our_story" href="story.html" data-step="t1" data-a="rise">
+          <span class="art"><span class="frame mini">
+            <span class="photo-slot mask-arch" data-slot="story_1"><img data-photo="story_1" data-field="media.memory_photos.0" src="img/photo_story_1-300.webp" alt="" loading="lazy"><span class="ph-mark" aria-hidden="true"><img src="img/petal4-200.webp" alt=""><span>Your photo here</span></span></span>
+            <img src="img/arch_frame-320.webp" alt="" loading="lazy">
+          </span></span>
+          <span class="tx"><h3 class="script">Our Story</h3>
+          <span class="kicker">Moments we hold dear</span>
+          <span class="textlink more">Read our story</span></span>
+        </a>
+        <a class="teaser" href="details.html" data-step="t2" data-a="rise">
+          <span class="art"><img class="sprig" src="img/divider-300.webp" alt="" loading="lazy"></span>
+          <span class="tx"><h3 class="script">The Day</h3>
+          <span class="sched"><span class="nowrap"><span data-field="schedule.0.label"></span> · <span data-field="schedule.0.time"></span></span><br><span class="nowrap"><span data-field="schedule.1.label"></span> · <span data-field="schedule.1.time"></span></span><br><span class="nowrap"><span data-field="schedule.2.label"></span> · <span data-field="schedule.2.time"></span></span></span>
+          <span class="textlink more">Schedule &amp; venue</span></span>
+        </a>
+        <a class="teaser" href="rsvp.html" data-step="t3" data-a="rise">
+          <span class="art"><img class="bow" src="img/ribbon_bow-480.webp" alt="" loading="lazy"></span>
+          <span class="tx"><h3 class="script">Will You Join Us?</h3>
+          <span class="kicker">Reply by <span class="nowrap" data-field="rsvp.deadline"></span></span>
+          <span class="textlink more">Reply now</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot" data-scene="home-foot">
+    <p class="kicker" data-step="sign" data-a="fade">With love</p>
+    <p class="script" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1">Replay the envelope</a></p>
+  </footer>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html" aria-current="page"><span>Home</span></a></li>
+    <li><a href="story.html"><span>Story</span></a></li>
+    <li><a href="details.html"><span>Details</span></a></li>
+    <li><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

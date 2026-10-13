@@ -1,0 +1,111 @@
+{
+ "errors": [],
+ "warnings": [],
+ "info": {
+  "envelope_to_home_ms": 4415,
+  "countdown_target_utc": "2027-05-15T20:00:00.000Z",
+  "first_view_index_kb": 1012,
+  "first_view_index_files": [
+   [
+    "img/env_body-880.webp",
+    164153
+   ],
+   [
+    "img/envelope_closed-880.webp",
+    154231
+   ],
+   [
+    "img/ribbon_bow-960.webp",
+    123680
+   ],
+   [
+    "img/bg_scene-1024.webp",
+    108584
+   ],
+   [
+    "img/pocket-880.webp",
+    80638
+   ],
+   [
+    "img/photo_hero_portrait-640.webp",
+    66999
+   ],
+   [
+    "img/env_flap-880.webp",
+    61699
+   ],
+   [
+    "img/card_small-640.webp",
+    45223
+   ],
+   [
+    "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+    42800
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "site.css",
+    30577
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-iNM8.woff2",
+    23924
+   ]
+  ],
+  "first_view_home_kb": 773,
+  "first_view_home_files": [
+   [
+    "img/invitation_card-909.webp",
+    186631
+   ],
+   [
+    "img/bg_scene-1024.webp",
+    108584
+   ],
+   [
+    "img/photo_hero_portrait-640.webp",
+    66999
+   ],
+   [
+    "img/card_small-640.webp",
+    45223
+   ],
+   [
+    "https://fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN9XFiaQ.woff2",
+    42800
+   ],
+   [
+    "img/arch_frame-320.webp",
+    39795
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "img/photo_story_1-300.webp",
+    33963
+   ],
+   [
+    "img/ribbon_bow-480.webp",
+    32585
+   ],
+   [
+    "site.css",
+    30577
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-iNM8.woff2",
+    23924
+   ],
+   [
+    "https://fonts.gstatic.com/s/lora/v37/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-MoFoq92nA.woff2",
+    22756
+   ]
+  ],
+  "video_kb": 1987
+ }
+}

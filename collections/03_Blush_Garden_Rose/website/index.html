@@ -1,0 +1,79 @@
+<!doctype html>
+<!-- Page 1 · envelope landing — same flow in every design: closed envelope + bow → opens → home.html.
+     Personal text: none in this file — [data-field] elements are filled from CONTENT in site.js (K24).
+     "You are invited" / "We're getting married" = design template copy (comp scenes 1–2).
+     Visuals: GPT parts (img/, built by build_images.py). No drawn decor. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You're invited</title>
+<meta name="description" content="Wedding invitation">
+<meta name="theme-color" content="#F2D8D7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Lora:ital,wght@0,400;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="img/photos.css">
+<script>/* early state — keys = MOTION.storage in site.js */
+(function(r){r.classList.replace('no-js','js');try{if(sessionStorage.getItem('invite:opened'))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<script type="speculationrules">{"prefetch":[{"source":"list","urls":["home.html"]}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-envelope" data-title="You're invited">
+
+<!-- backdrop: painted scene on phones; mist + separate floral parts on landscape screens -->
+<div class="scene-bg" aria-hidden="true" style="position:fixed">
+  <picture>
+    <source media="(min-aspect-ratio: 3/4)" srcset="img/mist-640.webp">
+    <img src="img/bg_scene-640.webp" srcset="img/bg_scene-640.webp 640w, img/bg_scene-1024.webp 1024w" sizes="67vh" alt="" fetchpriority="high">
+  </picture>
+  <img class="florals florals-tl land-only" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(46vw, 68vh, 560px)" alt="" loading="lazy">
+  <img class="florals florals-br land-only" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-960.webp 960w" sizes="min(46vw, 68vh, 560px)" alt="" loading="lazy">
+</div>
+
+<a class="skip" href="home.html" data-skip><span>Skip</span></a>
+
+<main class="env-page">
+  <header class="env-head">
+    <p class="kicker">You are invited</p>
+    <h1 class="script names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </header>
+
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation">
+    <div class="env">
+      <img class="env-flap" src="img/env_flap-440.webp" srcset="img/env_flap-440.webp 440w, img/env_flap-880.webp 880w" sizes="min(84vw, 44vh, 460px)" alt="">
+      <img class="env-body" src="img/env_body-440.webp" srcset="img/env_body-440.webp 440w, img/env_body-880.webp 880w" sizes="min(84vw, 44vh, 460px)" alt="">
+      <div class="card-slot">
+        <div class="card" aria-hidden="true">
+          <div class="photo-slot mask-card" data-slot="hero_portrait">
+            <img data-photo="hero_portrait" data-field="media.hero_portrait" src="img/photo_hero_portrait-320.webp" srcset="img/photo_hero_portrait-320.webp 320w, img/photo_hero_portrait-640.webp 640w" sizes="min(36vw, 19vh, 180px)" alt="">
+            <span class="ph-mark" aria-hidden="true"><img src="img/petal2-200.webp" alt=""><span>Your photo here</span></span>
+          </div>
+          <img src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(47vw, 25vh, 255px)" alt="">
+          <div class="card-copy">
+            <p class="script">We're getting married</p>
+            <p class="kicker" data-field="date"></p>
+            <p class="kicker"><span data-field="venue.city"></span>, <span data-field="venue.region"></span></p>
+          </div>
+        </div>
+      </div>
+      <img class="env-pocket" src="img/pocket-440.webp" srcset="img/pocket-440.webp 440w, img/pocket-880.webp 880w" sizes="min(84vw, 44vh, 460px)" alt="">
+      <img class="env-closed" src="img/envelope_closed-440.webp" srcset="img/envelope_closed-440.webp 440w, img/envelope_closed-880.webp 880w" sizes="min(84vw, 44vh, 460px)" alt="">
+      <img class="env-ribbon" src="img/ribbon_bow-480.webp" srcset="img/ribbon_bow-480.webp 480w, img/ribbon_bow-960.webp 960w" sizes="min(84vw, 44vh, 460px)" alt="">
+    </div>
+  </div>
+
+  <p class="env-hint" aria-hidden="true"><span class="tap">Tap to open</span><span class="click">Click to open</span></p>
+
+  <div class="env-after">
+    <a class="btn" href="home.html" data-enter>Enter</a>
+    <button class="replay textlink" type="button">Replay the opening</button>
+  </div>
+
+  <noscript><p style="margin-top:20px"><a class="btn" href="home.html">Open the invitation</a></p></noscript>
+</main>
+
+</body>
+</html>

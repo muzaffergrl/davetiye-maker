@@ -1,0 +1,79 @@
+<!doctype html>
+<!-- Page 3 · Our Story — three antique-gold arch frames (comp scene 3), photo slots story_1..3 (arch window, 0.72:1).
+     Personal text: none in this file — [data-field] filled from CONTENT in site.js (story.* is a proposed content block).
+     Kicker / title = design template copy. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Story</title>
+<meta name="description" content="Our story">
+<meta name="theme-color" content="#F2D8D7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Lora:ital,wght@0,400;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="img/photos.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body data-page="story" data-title="Our Story" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <img class="florals florals-tl" data-step="florals" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 330px)" alt="">
+    <p class="kicker" data-step="kicker" data-a="fade">Moments we hold dear</p>
+    <h1 class="script" data-step="title" data-a="write">Our Story</h1>
+    <img class="divider" data-step="divider" data-a="unfurl" src="img/divider-300.webp" alt="">
+    <p class="lede" data-step="lede" data-a="fade"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <section class="wrap frames" aria-label="Our photos">
+    <figure class="frame-fig" data-scene="story-frame">
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-arch" data-slot="story_1">
+          <img data-photo="story_1" data-field="media.memory_photos.0" src="img/photo_story_1-300.webp" srcset="img/photo_story_1-300.webp 300w, img/photo_story_1-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="">
+          <span class="ph-mark" aria-hidden="true"><img src="img/petal2-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="">
+      </div>
+      <figcaption data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+    </figure>
+    <figure class="frame-fig" data-scene="story-frame">
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-arch" data-slot="story_2">
+          <img data-photo="story_2" data-field="media.memory_photos.1" src="img/photo_story_2-300.webp" srcset="img/photo_story_2-300.webp 300w, img/photo_story_2-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/petal5-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="" loading="lazy">
+      </div>
+      <figcaption data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+    </figure>
+    <figure class="frame-fig" data-scene="story-frame">
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-arch" data-slot="story_3">
+          <img data-photo="story_3" data-field="media.memory_photos.2" src="img/photo_story_3-300.webp" srcset="img/photo_story_3-300.webp 300w, img/photo_story_3-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/petal6-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="" loading="lazy">
+      </div>
+      <figcaption data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+    </figure>
+  </section>
+
+  <section class="section next-sec" data-scene="story-next">
+    <img class="florals florals-br" data-step="florals" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-960.webp 960w" sizes="min(52vw, 320px)" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span>Home</span></a></li>
+    <li><a href="story.html" aria-current="page"><span>Story</span></a></li>
+    <li><a href="details.html"><span>Details</span></a></li>
+    <li><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

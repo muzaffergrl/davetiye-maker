@@ -1,0 +1,107 @@
+<!doctype html>
+<!-- Page 4 · Details — Order of the Day on the info card (comp scene 5), dress code, venue (photo slot "venue", 3:2,
+     framed by the GPT floral clusters) + map, travel & stay, registry.
+     Personal text: none in this file — [data-field] filled from CONTENT in site.js (K24).
+     URLs are null in the demo → links stay href="#" and the guest sees "link will be added soon". Block intros = template copy. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Day</title>
+<meta name="description" content="Schedule, venue and travel">
+<meta name="theme-color" content="#F2D8D7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Lora:ital,wght@0,400;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="img/photos.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body data-page="details" data-title="The Day" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="details-head">
+    <img class="florals florals-tl" data-step="florals" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 330px)" alt="">
+    <p class="kicker" data-step="kicker" data-a="fade"><span data-field="date" data-format="weekday"></span> · <span data-field="date"></span></p>
+    <h1 class="script" data-step="title" data-a="write">The Day</h1>
+    <img class="divider" data-step="divider" data-a="unfurl" src="img/divider-300.webp" alt="">
+  </header>
+
+  <!-- ORDER OF THE DAY (comp scene 5) -->
+  <section class="wrap" data-scene="details-card" aria-label="Order of the day">
+    <div class="info" data-step="card" data-a="rise-lg">
+      <img src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-912.webp 912w" sizes="min(calc(100vw - 32px), 520px)" alt="">
+      <div class="info-text">
+        <h2 class="script title" data-step="title" data-a="write">Order of the Day</h2>
+        <img class="divider" data-step="divider" data-a="unfurl" src="img/divider-300.webp" alt="">
+        <ol class="sched-list">
+          <li class="sched-row" data-step="row" data-i="0" data-a="rise">
+            <span class="time" data-field="schedule.0.time"></span>
+            <span class="what"><span class="label" data-field="schedule.0.label"></span><span class="loc" data-field="schedule.0.location"></span></span>
+          </li>
+          <li class="sched-row" data-step="row" data-i="1" data-a="rise">
+            <span class="time" data-field="schedule.1.time"></span>
+            <span class="what"><span class="label" data-field="schedule.1.label"></span><span class="loc" data-field="schedule.1.location"></span></span>
+          </li>
+          <li class="sched-row" data-step="row" data-i="2" data-a="rise">
+            <span class="time" data-field="schedule.2.time"></span>
+            <span class="what"><span class="label" data-field="schedule.2.label"></span><span class="loc" data-field="schedule.2.location"></span></span>
+          </li>
+        </ol>
+        <p class="dress" data-optional="dress_code" data-step="dress" data-a="fade">Dress code · <em data-field="dress_code"></em></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap blocks" aria-label="Venue and travel">
+    <div class="block" data-scene="details-block">
+      <h2 class="script" data-step="title" data-a="write">The Venue</h2>
+      <figure class="venue-photo" data-step="photo" data-a="rise">
+        <div class="photo-slot" data-slot="venue">
+          <img data-photo="venue" data-field="media.venue_image" src="img/photo_venue-480.webp" srcset="img/photo_venue-480.webp 480w, img/photo_venue-960.webp 960w" sizes="min(calc(100vw - 60px), 440px)" alt="" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/petal3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="florals vf-tl" src="img/florals_tl-480.webp" alt="" loading="lazy">
+        <img class="florals vf-br" src="img/florals_br-480.webp" alt="" loading="lazy">
+      </figure>
+      <div data-step="body" data-a="rise">
+        <p class="big" data-field="venue.name"></p>
+        <p class="kicker"><span data-field="venue.city"></span>, <span data-field="venue.region"></span> · <span data-field="venue.country"></span></p>
+        <p class="note">Ceremony at <span data-field="ceremony_time"></span> in <span data-field="schedule.0.location"></span></p>
+      </div>
+      <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.map">View map</a></p>
+    </div>
+
+    <div class="block" data-scene="details-block" data-optional="travel_stay">
+      <h2 class="script" data-step="title" data-a="write">Travel <span class="amp">&amp;</span> Stay</h2>
+      <div data-step="body" data-a="rise">
+        <p class="note">Hotel suggestions and travel tips for out-of-town guests will be shared here.</p>
+      </div>
+      <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation">Where to stay</a></p>
+    </div>
+
+    <div class="block" data-scene="details-block" data-optional="registry">
+      <h2 class="script" data-step="title" data-a="write">Registry</h2>
+      <div data-step="body" data-a="rise">
+        <p class="note">Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.</p>
+      </div>
+      <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.registry">View registry</a></p>
+    </div>
+  </section>
+
+  <section class="section next-sec" data-scene="story-next">
+    <a class="btn" href="rsvp.html" data-step="link" data-a="rise">RSVP</a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span>Home</span></a></li>
+    <li><a href="story.html"><span>Story</span></a></li>
+    <li><a href="details.html" aria-current="page"><span>Details</span></a></li>
+    <li><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

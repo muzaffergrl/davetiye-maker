@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 7 · alindi 2 · inceleme 0 · blokaj 332 · bitti 14 · toplam 355
+Özet: hazir 7 · alindi 1 · inceleme 1 · blokaj 332 · bitti 14 · toplam 355
 
 ## claude-canva
 
@@ -161,7 +161,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 **Üzerinde çalışılan / incelemede / blokaj (103)**
 
-- `G035` alindi · claude-kod-10 — Tasarım 03 — mobil öncelikli website demosu (GPT parçalarıyla açılış şovu) · PİLOT
+- `G035` inceleme · claude-kod-10 — Tasarım 03 — mobil öncelikli website demosu (GPT parçalarıyla açılış şovu) · PİLOT
 - `G037` alindi · claude-kod-11 — Site platformu iskeleti — Next.js, tema şablon motoru, local veri adaptörü, site rotaları
 - `G033` blokaj · - — Paket 4 (GPT tasarlar) prompt'larını 20 tasarıma yay — katalog.py
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
