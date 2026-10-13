@@ -2,8 +2,8 @@
 id: G048
 baslik: Vercel Blob veri adaptörü — Supabase'siz ilk canlı sürüm (siteler, RSVP, fotoğraflar)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-12
 oncelik: 1
 bagimli: [G037]
 yazar: [platform/lib/data/blob/, platform/tests/]
@@ -23,3 +23,6 @@ Kullanıcı: "Supabase olmasa şimdilik olmaz mı?" — ilk canlı sürüm veriy
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-13 alindi: claude-kod-12

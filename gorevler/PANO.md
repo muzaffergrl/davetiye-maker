@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 39 · alindi 2 · inceleme 3 · blokaj 297 · bitti 18 · toplam 359
+Özet: hazir 39 · alindi 3 · inceleme 3 · blokaj 296 · bitti 18 · toplam 359
 
 ## claude-canva
 
@@ -151,21 +151,21 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 0 · Biten: 0
+Bağımlılık bekleyen: 1 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G048` p1 — Vercel Blob veri adaptörü — Supabase'siz ilk canlı sürüm (siteler, RSVP, fotoğraflar) → `gorevler/G048-blob-adaptoru.md`
+- (yok)
 
 **Üzerinde çalışılan / incelemede / blokaj (86)**
 
 - `G038` alindi · wf-platform — Tasarım 03 Blush Garden Rose'u platform teması yap
 - `G039` inceleme · wf-platform — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla
+- `G048` alindi · claude-kod-12 — Vercel Blob veri adaptörü — Supabase'siz ilk canlı sürüm (siteler, RSVP, fotoğraflar)
 - `G042` inceleme · wf-platform — RSVP — misafir formu, kayıt, panelde liste + CSV
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G044` blokaj · - — Vercel önizleme yayını (demo site + panel)
 - `G045` inceleme · wf-platform — /start sahiplenme akışı — sipariş no + e-posta → taslak site + düzenleme linki
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
