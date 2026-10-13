@@ -47,7 +47,7 @@
   "envelope closed @390×844: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
   "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 193×48, rsvp \"Replay the envelope\" 193×48",
-  "envelope → /avery-and-jordan/home in 4128 ms, card transition flag set",
+  "envelope → /avery-and-jordan/home in 4114 ms, card transition flag set",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-06-12 16:00 America/Los_Angeles = 2027-06-12 23:00 UTC",
   "home → story through the nav (/<slug>/story)",
@@ -64,7 +64,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-13T00:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-17T23:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (173 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (191 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -86,9 +86,9 @@
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
   "index first view (390×844, DPR 3, placeholders): 789 KB",
   "home first view (390×844, DPR 3, placeholders): 692 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 1058 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 1240 KB",
-  "recording: previews/g401/opening_390x844.mp4 (2101 KB) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, seeded sample photos): 863 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 870 KB",
+  "recording: previews/g401/opening_390x844.mp4 (2064 KB) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -111,11 +111,11 @@
    ]
   },
   "seed_photos": [
-   "hero_portrait → media.hero_portrait (271 KB)",
-   "story_1 → media.memory_photos.0 (280 KB)",
-   "story_2 → media.memory_photos.1 (318 KB)",
-   "story_3 → media.memory_photos.2 (175 KB)",
-   "venue → media.venue_image (446 KB)"
+   "hero_portrait → media.hero_portrait (154 KB, 1024×1104, variants 640)",
+   "story_1 → media.memory_photos.0 (215 KB, 1024×1385, variants 640)",
+   "story_2 → media.memory_photos.1 (252 KB, 1024×1385, variants 640)",
+   "story_3 → media.memory_photos.2 (131 KB, 1024×1385, variants 640)",
+   "venue → media.venue_image (373 KB, 1536×941, variants 640/1280)"
   ],
   "envelope_backdrop": [
    {
@@ -247,7 +247,7 @@
     ]
    }
   ],
-  "envelope_to_home_ms": 4128,
+  "envelope_to_home_ms": 4114,
   "stress_record": {
    "slug": "stress-site",
    "pages": [
@@ -332,12 +332,8 @@
     42205
    ]
   ],
-  "first_view_index_kb_photos": 1058,
+  "first_view_index_kb_photos": 863,
   "first_view_index_files_photos": [
-   [
-    "/media/13a810e7-3267-42b1-b40d-bf7ee3a66320/5edb44ab44f7a229a7a29a99e6a1040f.jpg",
-    277492
-   ],
    [
     "/themes/olive-ivory/img/env_closed-880.webp",
     85728
@@ -345,6 +341,10 @@
    [
     "/themes/olive-ivory/img/env_body-880.webp",
     76886
+   ],
+   [
+    "/media/1dde04e5-616f-4d2b-bd8d-7c48410ac95b/2d16e3c191f44edd37c73ec8c3049c35-640w.jpg",
+    76554
    ],
    [
     "/themes/olive-ivory/img/bg_page-1024.webp",
@@ -367,19 +367,19 @@
     53274
    ]
   ],
-  "first_view_home_kb_photos": 1240,
+  "first_view_home_kb_photos": 870,
   "first_view_home_files_photos": [
-   [
-    "/media/13a810e7-3267-42b1-b40d-bf7ee3a66320/e53a3f0987296a0ae6799dfde06a4c30.jpg",
-    286582
-   ],
-   [
-    "/media/13a810e7-3267-42b1-b40d-bf7ee3a66320/5edb44ab44f7a229a7a29a99e6a1040f.jpg",
-    277492
-   ],
    [
     "/themes/olive-ivory/img/decor_br-960.webp",
     149464
+   ],
+   [
+    "/media/1dde04e5-616f-4d2b-bd8d-7c48410ac95b/c2a957ca79ef9fdcfad1ac88aaa90c81-640w.jpg",
+    107652
+   ],
+   [
+    "/media/1dde04e5-616f-4d2b-bd8d-7c48410ac95b/2d16e3c191f44edd37c73ec8c3049c35-640w.jpg",
+    76554
    ],
    [
     "/themes/olive-ivory/img/invitation_card-864.webp",
@@ -402,7 +402,7 @@
     44336
    ]
   ],
-  "video_kb": 2101,
+  "video_kb": 2064,
   "compare": {
    "source": "w1",
    "pages": [

@@ -67,7 +67,7 @@ sayfa başına comp öğe haritası, bilinen sınırlar).
 
 **Açılış:** dokununca mühür hafifçe kalkar, dantel kenarlı kapak mühür ve zeytin dalıyla birlikte menteşesinde izleyiciye doğru
 kalkıp 90°'de açık kapağa devreder; fildişi kart cepten süzülerek yükselirken iki zeytin yaprağı ekranı soldan sağa geçer, kart
-öne gelir ve view transition ile home'daki hero kartına dönüşür (dokunuştan home'a 4,1 s; Skip her an; reduced motion 0,15 s).
+öne gelir ve view transition ile home'daki hero kartına dönüşür (dokunuştan home'a 4,1 s; Skip her an; reduced motion 0,2 s).
 **Story:** üç yuvarlak köşeli, altın çerçeveli portre kartı elden yelpaze gibi açılır (her kart dik ve ortada başlar, kendi eğimine
 döner), başlığı altına yazılır; ≥ 720 px'te comp'taki yelpaze (orta dik ve yüksek, yanlar ±8°), telefonda basamaklı.
 **Parçacıklar:** açılışta 2 zeytin yaprağı (`across`), home'a varışta 3 yasemin çiçeği süzülür, RSVP kapanışında 2 çiçek + 1 yaprak.
@@ -83,14 +83,17 @@ döner), başlığı altına yazılır; ≥ 720 px'te comp'taki yelpaze (orta di
 
 **Test edildi:**
 - `kit_check --paket 5` 23/23, `--paket 2` 5/5.
-- `npm test` **282/282** (yeni `tests/theme-olive-ivory.test.ts` 24 test: §13.2'nin 23 maddesi + zarf/kapanış geometrisi);
+- `npm test` **287/287** (origin/main birleştirmesinden sonra; yeni `tests/theme-olive-ivory.test.ts` 24 test: §13.2'nin 23 maddesi + zarf/kapanış geometrisi);
   `npm run typecheck` temiz; `npm run build` + trace-check temiz (16 rota, 3 tema, yalnız html/json).
 - `theme-check --theme olive-ivory --stress` (`next start` + Chromium, MP4 dahil): **85/85, 0 uyarı**. 5 sayfa ×
   360/390/430/768/1280 kayma yok, her alan = kayıt, kart metni düz kâğıtta; fotoğrafsız yer tutucu; taslak önizleme; kısa telefonlar
-  (360×640, 375×553, 390×690, 390×844) zarf + ipucu ekranda; dokunma hedefleri ≥ 44 px; zarf → home 4105 ms + kart geçiş işareti;
-  geri → açık zarf + Replay; Skip; reduced motion 148 ms; site başına oturum anahtarı; sayaç hedefi + today/after; RSVP boş ad,
+  (360×640, 375×553, 390×690, 390×844) zarf + ipucu ekranda; dokunma hedefleri ≥ 44 px; zarf → home 4114 ms + kart geçiş işareti;
+  geri → açık zarf + Replay; Skip; reduced motion 191 ms; site başına oturum anahtarı; sayaç hedefi + today/after; RSVP boş ad,
   yanıt, teşekkür, tekrar yanıt; içerik değişikliği; zorlama kaydı (§12) 360/390'da taşma yok; ilk görünüm (390×844, DPR 3) yer
-  tutucuyla index 789 KB / home 692 KB, örnek fotoğraflarla 1058 / 1240 KB; dış istek yalnız Google Fonts.
+  tutucuyla index 789 KB / home 692 KB, örnek fotoğraflarla 863 / 870 KB (G056 seed'i türevli saklıyor; birleştirmeden önce tek dosyayla 1058 / 1240 KB);
+  dış istek yalnız Google Fonts. Bu sayılar birleştirmeden sonraki koşudan (önizlemeler de). Ağırlık: `site.js` 33 KB,
+  `site.css` 41 KB; ≥ 150 KB tek WebP yalnız `decor_tl-960` (166 KB; story/details başındaki köşe kümesi, DPR 3 telefonda
+  960'lık seçiliyor; ≤ 200 KB sınırının altında, daha sıkı kalite denenmedi).
 - `g051-browser --theme olive-ivory` 44/44; `final-smoke --theme olive-ivory` 42/42 (misafir + alıcı akışı: `/start`, panel,
   yayın, RSVP panelde) → `previews/g401/final/`.
 - Kontrast (390 px, oluşan sayfada metnin arkasındaki piksellerin medyanı): görünen her metin ≥ 5,1:1. Ölçümle iki düzeltme:
