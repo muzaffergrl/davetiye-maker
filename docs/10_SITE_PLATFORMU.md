@@ -37,10 +37,35 @@ düzenler. Bu belge platformun tek kaynağıdır.
   Site kaydı `sites/<id>.json` + `slugs/<slug>.json` + `orders/<sipariş>.json` dizinleri; her RSVP ayrı dosya
   (`rsvps/<site>/<zaman>-<sıra>-<id>.json`, yazma çakışması yok); fotoğraflar `media/<site>/...`. Düşük hacim için yeterli.
   Depo **private** açılmalı (site kaydı ve misafir verisi); fotoğraflar ziyaretçiye platformun `/media/...` rotasından gider.
-  Adaptör yazıldı ve sahte (bellek içi) Blob ile test edildi; gerçek Vercel Blob'da denenmedi (ayrıntı `platform/README.md`).
+  Adaptör sahte (bellek içi) Blob ile ve **G044'te gerçek private depoda** test edildi (aşağıda).
 - Satış hacmi artınca Supabase/Postgres adaptörü (G043) ile değiştirilir; adaptör arayüzü aynı kalır.
-- Durum (2026-10-13): Supabase projesi açma oturum izin denetiminde reddedildi; Vercel bağlantısı proje açamıyor (403).
-  Vercel çözülmeden canlı yayın yok. Demo tasarım 03, statik önizleme olarak claude.ai sayfasında:
+- **Canlı (G044, 2026-10-13, local oturum `claude-local-1`):**
+  - Vercel ekibi `daimonflora-gmailcoms-projects` (`team_pZ2ioUaryATDt15wOOUcCkQD`), proje **`davetiye-platform`**
+    (`prj_WRKdVHmsou7QU2B5UhgO8uksAobj`), Next.js, fonksiyon bölgesi `iad1` (`platform/vercel.json`).
+    CLI ile `platform/` klasöründen yayınlanıyor (Git bağlantısı yok; proje ayarında kök dizin boş — CLI zaten `platform/`'u yükler).
+    Yükleme dışı: `platform/.vercelignore` (`.data` — düz anahtarlı `seed-keys.json` —, `.next`, `previews`, `.env*`).
+  - Blob deposu **`davetiye-platform-data`** (`store_91tcR2Y0pohygoAO`, iad1, erişim **private**), projeye Production + Preview +
+    Development için bağlı. Ortam değişkeni **adları**: `BLOB_READ_WRITE_TOKEN` (Vercel ekledi), `DATA_ADAPTER=blob` (Production, Preview).
+    `PLATFORM_PUBLIC_URL` tanımlı değil (panel isteğin host'unu kullanır).
+  - Adres: **https://davetiye-platform-five.vercel.app** (production takma adı; herkese açık). Projenin ilk yayını Vercel
+    tarafından otomatik production'a atandı; sonraki `vercel deploy`'lar preview olur. Deployment'a özel URL'ler Vercel girişi ister
+    (Deployment Protection, varsayılan).
+  - Demo: `/clara-and-julian` (blush-garden-rose, 03 demo içeriği, 5 kurgu GPT fotoğrafı 1600 px'e küçültülerek). Düzenleme anahtarı
+    yalnız yerel geçici dosyada; repoda yok.
+  - **Gerçek depoda bulunan hata ve düzeltmesi:** depo büyük (sıkıştırılmış) JSON okumalarında zayıf ETag (`W/"…"`) döndürüyor,
+    `ifMatch` yalnız güçlü ETag kabul ediyor → her site güncellemesi/yayın reddediliyordu. `readJson` artık `W/` önekini atıyor;
+    `tests/fake-blob.ts` bu davranışı taklit ediyor (düzeltmesiz 10 test kırılıyor). Küçük dizin dosyaları güçlü ETag ile geliyor.
+  - Gerçek depo duman testi (slug/sipariş yarışı, sunucunun `allowOverwrite:false` ve bayat `ifMatch` reddi, 2 örnek × 8 eşzamanlı
+    yazma — kayıp yok, 10 eşzamanlı RSVP hemen listeleniyor, foto, token'sız blob URL'si 403, temizlik): düzeltme sonrası 3 koşuda
+    11/11, 11/11 ve 10/11 (ilk koşuda 8 yazmadan 1'i adı alınamayan geçici bir hatayla düştü; sürüm sayımı kayıp yazma olmadığını
+    gösterdi; tekrarlanmadı).
+  - Canlı uçtan uca (yayındaki adrese karşı, 30/30): 5 demo sayfası + CSP, fotoğraflar `/media` (immutable önbellek), tema varlığı,
+    panel sayfası (yanlış anahtar 404), panel API, geçici sitede kaydet → bayat kayıt 409 → foto yükleme (sharp Vercel'de çalışıyor) →
+    yayınla → sayfada değişiklik → misafir RSVP → çift listesi + CSV, `/start` sayfası + canlı demo + sahiplenme 201 + aynı sipariş 409.
+    Geçici siteler silindi.
+  - Denenmedi: gerçek telefon (iOS Safari / Android Chrome), Vercel'de çok örnekli hız sınırı davranışı (sınırlar hâlâ süreç içi),
+    yük/maliyet ölçümü, Git bağlantılı otomatik yayın.
+- Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
 ## 3. Açık konular (kullanıcı / sonra)
