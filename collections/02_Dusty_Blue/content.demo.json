@@ -47,5 +47,13 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Coffee dates, sea breezes and all the quiet moments in between brought us to",
+    "items": [
+      { "caption": "Our first coffee" },
+      { "caption": "Sunset by the sea" },
+      { "caption": "Ever after" }
+    ]
   }
 }

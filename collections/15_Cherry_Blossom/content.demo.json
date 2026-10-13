@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Like the first blossoms of spring, our story unfolded slowly and led us to",
+    "items": [
+      {
+        "caption": "Our first spring"
+      },
+      {
+        "caption": "Under the blossoms"
+      },
+      {
+        "caption": "In full bloom"
+      }
+    ]
   }
 }

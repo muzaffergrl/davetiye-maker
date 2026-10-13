@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Hot cocoa, falling snow and one very happy winter evening led us to",
+    "items": [
+      {
+        "caption": "First snowfall"
+      },
+      {
+        "caption": "Under the pines"
+      },
+      {
+        "caption": "Evergreen love"
+      }
+    ]
   }
 }

@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Every adventure and every island sunset has been bringing us to",
+    "items": [
+      {
+        "caption": "Island time"
+      },
+      {
+        "caption": "End of the pier"
+      },
+      {
+        "caption": "Next stop: forever"
+      }
+    ]
   }
 }

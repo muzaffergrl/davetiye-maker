@@ -3,8 +3,8 @@
   "event_type": "wedding",
   "locale": "en-US",
   "partners": [
-    { "display_name": "Avery", "full_name": null },
-    { "display_name": "Jordan", "full_name": null }
+    { "display_name": "Avery", "full_name": "Avery Louise" },
+    { "display_name": "Jordan", "full_name": "Jordan Samuel" }
   ],
   "name_display": "Avery & Jordan",
   "initials": "A & J",
@@ -47,5 +47,13 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Slow lunches, golden evenings and one walk through the olive grove led us to",
+    "items": [
+      { "caption": "Our first lunch" },
+      { "caption": "In the olive grove" },
+      { "caption": "Simply forever" }
+    ]
   }
 }

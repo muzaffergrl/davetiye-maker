@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Salt air, harbor afternoons and one lighthouse sunset led us to",
+    "items": [
+      {
+        "caption": "Down by the harbor"
+      },
+      {
+        "caption": "By the lighthouse"
+      },
+      {
+        "caption": "Tide after tide"
+      }
+    ]
   }
 }

@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Under the lemon trees, one sunny day at a time, we found our way to",
+    "items": [
+      {
+        "caption": "On the piazza"
+      },
+      {
+        "caption": "Above the sea"
+      },
+      {
+        "caption": "Our sweetest yes"
+      }
+    ]
   }
 }

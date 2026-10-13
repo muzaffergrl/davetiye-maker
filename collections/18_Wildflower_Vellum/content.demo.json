@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Picnics, wildflowers and long summer afternoons brought us to",
+    "items": [
+      {
+        "caption": "Our first picnic"
+      },
+      {
+        "caption": "In the meadow"
+      },
+      {
+        "caption": "Forever in bloom"
+      }
+    ]
   }
 }

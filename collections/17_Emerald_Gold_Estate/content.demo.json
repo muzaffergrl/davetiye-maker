@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "From an evening at the gallery to a sunset by the lake, every moment led us to",
+    "items": [
+      {
+        "caption": "At the gallery"
+      },
+      {
+        "caption": "By the lake"
+      },
+      {
+        "caption": "Set in gold"
+      }
+    ]
   }
 }

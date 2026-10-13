@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "It began with jazz and champagne, and every evening since has led us to",
+    "items": [
+      {
+        "caption": "Jazz night"
+      },
+      {
+        "caption": "On the staircase"
+      },
+      {
+        "caption": "Here's to us"
+      }
+    ]
   }
 }

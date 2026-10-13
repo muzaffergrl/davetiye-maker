@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Some love stories are written one letter at a time. Ours led us to",
+    "items": [
+      {
+        "caption": "A table for two"
+      },
+      {
+        "caption": "Sealed with a yes"
+      },
+      {
+        "caption": "Yours, always"
+      }
+    ]
   }
 }

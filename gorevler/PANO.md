@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 5 · inceleme 0 · blokaj 296 · bitti 26 · toplam 365
+Özet: hazir 38 · alindi 4 · inceleme 1 · blokaj 296 · bitti 26 · toplam 365
 
 ## claude-canva
 
@@ -257,7 +257,7 @@ Bağımlılık bekleyen: 19 · Biten: 18
 **Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
-- `G053` alindi · wf-hazirlik — Demo içerik kayıtları — 01'e tam adlar, 01/02/04–20'ye `story` (intro + 3 başlık)
+- `G053` inceleme · wf-hazirlik — Demo içerik kayıtları — 01'e tam adlar, 01/02/04–20'ye `story` (intro + 3 başlık)
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni

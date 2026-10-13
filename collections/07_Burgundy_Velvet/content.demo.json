@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Cider by the fire, walks through falling leaves and every warm moment since led us to",
+    "items": [
+      {
+        "caption": "By the fire"
+      },
+      {
+        "caption": "Falling leaves"
+      },
+      {
+        "caption": "Hand in hand"
+      }
+    ]
   }
 }

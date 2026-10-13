@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Candlelit evenings and moonlit walks led us, one midnight at a time, to",
+    "items": [
+      {
+        "caption": "By candlelight"
+      },
+      {
+        "caption": "Under the moon"
+      },
+      {
+        "caption": "One red rose"
+      }
+    ]
   }
 }

@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Afternoon tea, a rose garden and a promise made by the fountain led us to",
+    "items": [
+      {
+        "caption": "Afternoon tea"
+      },
+      {
+        "caption": "By the fountain"
+      },
+      {
+        "caption": "Forever and always"
+      }
+    ]
   }
 }

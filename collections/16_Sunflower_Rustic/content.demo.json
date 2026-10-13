@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Back roads, lemonade and one golden sunflower field led us straight to",
+    "items": [
+      {
+        "caption": "Tailgate lemonade"
+      },
+      {
+        "caption": "In the sunflowers"
+      },
+      {
+        "caption": "Sunny days ahead"
+      }
+    ]
   }
 }

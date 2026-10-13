@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Good wine, long tables and golden vineyard sunsets led us to",
+    "items": [
+      {
+        "caption": "First pour"
+      },
+      {
+        "caption": "Among the vines"
+      },
+      {
+        "caption": "A fine vintage"
+      }
+    ]
   }
 }

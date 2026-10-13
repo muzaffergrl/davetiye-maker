@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Long summer evenings and fields of lavender carried us all the way to",
+    "items": [
+      {
+        "caption": "Rosé in the square"
+      },
+      {
+        "caption": "In the lavender"
+      },
+      {
+        "caption": "Tied together"
+      }
+    ]
   }
 }

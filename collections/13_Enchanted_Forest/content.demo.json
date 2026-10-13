@@ -68,5 +68,19 @@
     "travel_stay": true,
     "faq": false,
     "guest_policy": false
+  },
+  "story": {
+    "intro": "Once upon a time, two people met in the woods. Every page since has led us to",
+    "items": [
+      {
+        "caption": "Chapter one"
+      },
+      {
+        "caption": "By lantern light"
+      },
+      {
+        "caption": "Happily ever after"
+      }
+    ]
   }
 }
