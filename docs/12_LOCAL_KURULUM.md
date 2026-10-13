@@ -29,8 +29,10 @@ Güvenlik duvarı izin sorarsa yalnız "özel ağlar"a izin.
 1. `npx vercel@latest login` yerine sabit sürüm kullan (`npx vercel@<güncel kararlı sürüm> login`); tarayıcı açılır, **kullanıcı
    kendi hesabıyla onaylar** (Vercel ekibi: `daimonflora-gmailcom's projects`).
 2. Proje: `davetiye-platform`, kök dizin `platform`, framework Next.js, fonksiyon bölgesi `iad1`.
-3. Depolama: Vercel **Blob** deposu oluştur ve projeye bağla (`BLOB_READ_WRITE_TOKEN` otomatik gelir). Ortam: `DATA_ADAPTER=blob`
-   (adaptör görev G048; main'de değilse önce onu bekle). **Supabase kullanılmaz** (`docs/10` §2c).
+3. Depolama: Vercel **Blob** deposu oluştur — **erişimi PRIVATE olmalı** (anahtar hash'leri, taslaklar, misafir RSVP'leri
+   tutuluyor; fotoğraflar `/media` rotasından sunulur) — ve projeye bağla (`BLOB_READ_WRITE_TOKEN` otomatik gelir).
+   Bağladıktan sonra G048 Sonuç'undaki gerçek depo duman testini çalıştır (slug/sipariş tekilliği, ETag çakışması, RSVP listesi). Ortam: `DATA_ADAPTER=blob`
+   (adaptör G048 main'de ve onaylı). **Supabase kullanılmaz** (`docs/10` §2c).
 4. Önce **preview** yayını; demo siteyi tohumla (seed betiğinin blob hedefi), kullanıcıya site + panel linki.
 5. Ücretli plana geçiş, alan adı satın alma, ekip ayarı **yok** — gerekirse kullanıcıya sor.
 6. Sonuç: proje adı/ID, yayın URL'si, ortam değişkeni adları (değerleri değil) → `gorevler/G044-*.md` Sonuç + `docs/10` §2c.

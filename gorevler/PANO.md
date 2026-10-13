@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 39 · alindi 1 · inceleme 5 · blokaj 296 · bitti 18 · toplam 359
+Özet: hazir 39 · alindi 1 · inceleme 4 · blokaj 296 · bitti 19 · toplam 359
 
 ## claude-canva
 
@@ -102,9 +102,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G044` p2 — Vercel önizleme yayını (demo site + panel) → `gorevler/G044-vercel-onizleme.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (42)**
 
@@ -151,7 +151,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 1 · Biten: 0
+Bağımlılık bekleyen: 0 · Biten: 0
 
 ## claude-kod
 
@@ -159,11 +159,10 @@ Bağımlılık bekleyen: 1 · Biten: 0
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (86)**
+**Üzerinde çalışılan / incelemede / blokaj (85)**
 
 - `G038` inceleme · wf-platform — Tasarım 03 Blush Garden Rose'u platform teması yap
 - `G039` inceleme · wf-platform — Düzenleme paneli — telefonda alan düzenleme, foto yükleme, canlı önizleme, yayınla
-- `G048` inceleme · claude-kod-12 — Vercel Blob veri adaptörü — Supabase'siz ilk canlı sürüm (siteler, RSVP, fotoğraflar)
 - `G042` inceleme · wf-platform — RSVP — misafir formu, kayıt, panelde liste + CSV
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G045` inceleme · wf-platform — /start sahiplenme akışı — sipariş no + e-posta → taslak site + düzenleme linki
@@ -248,7 +247,7 @@ Bağımlılık bekleyen: 1 · Biten: 0
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 20 · Biten: 11
+Bağımlılık bekleyen: 20 · Biten: 12
 
 ## claude-metin
 
