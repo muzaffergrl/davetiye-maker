@@ -59,7 +59,18 @@ gövde kapalıdan tuvalin %4,55'i kadar kısa (en/boy farkı). `site.css` bunu `
   (`.invite`, G055 incelemesi) — üst dilim kırpılmış `<img>`, düz kâğıt bandı %42–66 `::before` (dikey gerilir), alt dilim
   %66–100 `::after`; metin akışta. Davet kartında metin görüntünün %35,2 satırından başlar, sütun en çok %88 (kemer çiçeklerinin
   içinde), mekân + şehir en çok %64 (alt çiçeklerin arasında), son satır görüntünün en çok %81,5 satırında; demo kaydında kart
-  görüntünün kendi boyunda kalır (390 px'te +1 px, 360 px'te +7 px).
+  görüntünün kendi boyunda kalır (390 px'te +1 px, 360 px'te +7 px). **RSVP kartı** (G056, uzun imza) aynı kesimle: iki `.info`
+  kartı `class="info tall"` (önceden `.info:has(> .info-text .sched-list)`); RSVP metni görüntünün %34 satırından (52,6cqw) en çok
+  %72 satırına; demo kaydında kart görüntünün boyunda (360 px'te +4 px, 768 px'te −1 px).
+- **Uzun isimler (G056, docs/11 §12):** isim satırı sarar (`text-wrap: balance`, `overflow-wrap: anywhere` — sütundan uzun sözcük
+  kırılır, kesilmez) ve `data-fit="n"` taşıyorsa `site.js` `fitText()` yazıyı küçültür (CSS `--fit`, en az `data-fit-min`):
+  isim satırı kendi CSS boyunun n satırından uzun olmaz. Zarf sayfası `<h1>`: `data-fit="1.5"` (en az .4); fazladan yükseklik
+  `.env-page`'e `--names-x` (× 1,1) olarak yazılır ve zarf (`--w`) o kadar küçülür → isimler, zarf ve "Tap to open" boyalı
+  zeminin düz bandında, demodaki yerlerinde kalır. Yatay ekranda isim sütunu `max(40vw, 420px)` (köşe çiçek parçalarına binmez;
+  demo isimleri tek satırda 78 px kalır). RSVP imzası `data-fit="2.5"` (en az .5). Yazı tipi yüklenince (`document.fonts`
+  `loadingdone`) ve genişlik değişince yeniden ölçülür; bulunan boyun %2 altı kullanılır (alt piksel farkıyla satır sayısı
+  değişmesin). JS yalnız bu iki CSS değişkenini yazar; kişisel metne dokunmaz. JS'siz: CSS boyunda sarar (zarf aşağı kayabilir).
+  Ölçüm (`theme-check --stress`, 40+40 karakter): 390×844'te 3 satır × 27 px; 360×640'ta 25 px; imza 3 satır × 22 px (390).
 
 **Yeni tasarım (G4NN) bu temanın kopyası değildir:** `docs/11_TEMA_STANDARDI.md` geçerlidir — yerleşim o tasarımın W1
 comp'larından (sayfa başına "comp öğe haritası"), zarf tipi ve açılış katalogdaki `acilis` cümlesinden, parçacık ve story dizilişi
@@ -67,6 +78,9 @@ o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP fo
 `data-scene`/`data-step`/`data-a` kancaları ortaktır; 03'ün aralıkları, süs konumları ve zamanlaması taşınmaz.
 
 ## Bilinen sınırlar
+- Uzun isimde zarf sayfası yazısı küçülür ve zarf biraz küçülür (40+40 karakterde 390×844'te zarf ~328 → ~296 px genişlik); JS kapalıyken
+  isimler tam boyda sarar, zarf ve "Tap to open" kısa ekranlarda aşağı kayabilir (JS'siz zarf zaten açılmaz; "Open the
+  invitation" linki görünür). Ana sayfa hero ve kapanış imzası uzun isimde küçülmez, sarar (`theme-check --stress` geçiyor).
 - Program en çok 10 satır (şema, G055); Details kartı 10 satırı ve 60 karakterlik etiket/yeri taşır (kart uzar). Ana sayfa
   tanıtımı ilk 4 satırı gösterir; uzun etiket kendi altına sarar (asılı girinti, 360 px'te kesilmez).
 - `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve); anların `text`'i ve monogram (`initials`) bu temada

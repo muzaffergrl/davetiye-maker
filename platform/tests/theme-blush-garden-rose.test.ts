@@ -232,6 +232,48 @@ test('K21: the countdown is plain numerals and labels (no CSS frame: border, out
   }
 });
 
+test('G056 long names: envelope names and RSVP signature wrap and shrink to fit (data-fit); the RSVP card grows by the 3-slice cut', async () => {
+  const { stressRecord } = await import('../scripts/lib/theme-env.ts');
+  const stress = stressRecord(demoContent()); // docs/11 §12: two 40-character names
+  const names = `${stress.partners[0].display_name} & ${stress.partners[1].display_name}`;
+  const index = render('index', stress);
+  assert.deepEqual(index.warnings, []);
+  const h1 = index.$('h1.names');
+  assert.equal(h1.text().replace(/\s+/g, ' ').trim(), names);
+  assert.equal(h1.attr('data-fit'), '1.5');
+  const rsvp = render('rsvp', stress);
+  assert.deepEqual(rsvp.warnings, []);
+  const sign = rsvp.$('.rsvp-text .sign');
+  assert.equal(sign.text().replace(/\s+/g, ' ').trim(), names);
+  assert.equal(sign.attr('data-fit'), '2.5');
+  for (const el of [h1, sign]) {
+    const min = Number(el.attr('data-fit-min'));
+    assert.ok(min >= 0.4 && min < 1, `data-fit-min ${min}`);
+  }
+  // both GPT info cards (Order of the Day, RSVP) lengthen with the docs/11 §9 3-slice cut
+  assert.ok(rsvp.$('.rsvp-sec .info').hasClass('tall'));
+  assert.ok(render('details').$('.info').hasClass('tall'));
+
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const rule = (sel: string) => [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter(([, s]) => s.trim() === sel).map(([, , body]) => body).join(';');
+  for (const sel of ['.env-head .names', '.rsvp-text .sign']) {
+    const body = rule(sel);
+    assert.match(body, /font-size:\s*calc\([^;]*var\(--fit, 1\)/, `${sel}: size follows --fit`);
+    assert.match(body, /overflow-wrap:\s*anywhere/, `${sel}: a word longer than the column breaks, never cut`);
+    assert.doesNotMatch(body, /white-space:\s*nowrap/, `${sel}: wraps`);
+  }
+  assert.match(rule('.env-page'), /--w:\s*calc\(min\(84vw, 44svh, 460px\) - var\(--names-x, 0px\)\)/, 'the envelope gives back the names\' extra height');
+  assert.match(rule('.info.tall > .rsvp-text'), /padding-top:\s*52\.6cqw/);
+
+  // site.js only sets the two custom properties: no personal text is written, nothing else is styled
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  const fit = js.slice(js.indexOf('function fitText()'), js.indexOf('function initFit()'));
+  assert.ok(fit.length > 100, 'fitText found');
+  assert.doesNotMatch(fit, /textContent|innerHTML|innerText|\.style\.(?!setProperty|removeProperty)/);
+  assert.deepEqual([...new Set([...fit.matchAll(/(?:set|remove)Property\('([^']+)'/g)].map((m) => m[1]))].sort(), ['--fit', '--names-x']);
+  assert.match(js, /initFit\(\);\s*\n\s*initEnvelope\(\);/);
+});
+
 test('invitation card: without a full name the first name is shown (never an empty name line)', () => {
   const c = demoContent();
   c.partners[0] = { display_name: 'Avery', full_name: null };

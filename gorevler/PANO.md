@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 37 · alindi 2 · inceleme 1 · blokaj 296 · bitti 31 · toplam 367
+Özet: hazir 37 · alindi 0 · inceleme 3 · blokaj 296 · bitti 31 · toplam 367
 
 ## claude-canva
 
@@ -162,7 +162,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 **Üzerinde çalışılan / incelemede / blokaj (84)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G056` alindi · wf-tema01 — 03 teması uzun isim stresi + seed foto türevleri + validate_content --help (docs/11 §14 #9, #15)
+- `G056` inceleme · wf-tema01 — 03 teması uzun isim stresi + seed foto türevleri + validate_content --help (docs/11 §14 #9, #15)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -183,7 +183,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G401` inceleme · wf-tema01 — Tasarım 01 Olive & Ivory — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
-- `G057` alindi · wf-tema01 — katalog.py — story tablosunu content() üretecine taşı (yaz --zorla story'yi silmesin) (docs/11 §14 #12)
+- `G057` inceleme · wf-tema01 — katalog.py — story tablosunu content() üretecine taşı (yaz --zorla story'yi silmesin) (docs/11 §14 #12)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları

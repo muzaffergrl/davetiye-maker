@@ -1,13 +1,15 @@
 """Aşama 1 tasarım kataloğu — 20 birbirinden farklı tasarımın tek kaynağı.
 
-  python3 tools/katalog.py yaz      # katalog belgesi + yeni koleksiyon iskeletleri + görevler
+  python3 tools/katalog.py yaz [--zorla] [--dene]   # katalog belgesi + yeni koleksiyon iskeletleri + görevler
   python3 tools/katalog.py kontrol  # ayırt edicilik (her çift ≥4 eksende farklı) + WEB (website) kayıtları tam mı
+                                    # + STORY: content.demo.json `story` blokları katalogla aynı mı
   python3 tools/katalog.py paket5 [--no 04[,05]] [--paket3] [--dene]   # GPT_PROMPTS.md: başlık + PAKET 5 + PAKET 2
   python3 tools/katalog.py gorev5 [--no 04[,05]] [--dene]   # G2NN (GPT website paketi) + G4NN (platform teması) görevleri
   python3 tools/katalog.py ozet [--no 04[,05]] [--dene]     # DESIGN_BRIEF.md + content.demo.json (katalog değişince)
   python3 tools/katalog.py belge    # yalnız docs/09_TASARIM_KATALOGU.md
 
-`yaz` üretilenleri (var olan dosyaların üzerine yazmaz; --zorla ile yazar):
+`yaz` üretilenleri (var olan dosyaların üzerine yazmaz; --zorla ile yazar; --dene: yazmaz, içeriği değişecek dosyaları
+listeler, varsa çıkış 1):
   docs/09_TASARIM_KATALOGU.md
   collections/NN_<Ad>/DESIGN_BRIEF.md, palette.json, content.demo.json,
                       COLLECTION_STATUS.md (yalnız yeni koleksiyonda), assets/gpt/GPT_PROMPTS.md
@@ -21,8 +23,11 @@ sözlüğünde, demo metin koleksiyonun `content.demo.json`'ında. Tasarım 03'e
 dokunmaz; content.demo.json, DESIGN_BRIEF.md, palette.json yalnız okunur. İki kez çalıştırmak aynı dosyayı verir.
 `--dene`: yazmaz, değişecek dosya varsa çıkış 1. `--paket3`: PAKET 3 korunmaz, `MOCK`'tan yeniden üretilir
 (mockups/ klasöründe üretilmiş görsel varsa o tasarımda yine korunur).
-`ozet`: katalog (`D`) değişince DESIGN_BRIEF.md (01, 04–20) ve content.demo.json'ı (yalnız katalogdan açılmış 04–20;
-elle alan eklenmişse dokunmaz) yeniden yazar. 02 ve 03 elle yazıldı, atlanır.
+`ozet`: katalog (`D`, `STORY`) değişince DESIGN_BRIEF.md (01, 04–20) ve content.demo.json'ı (katalogdan açılmış 04–20,
+`story` dahil; elle alan eklenmişse dokunmaz) yeniden yazar. 01 ve 02'nin content.demo.json'ı elle yazıldı: yalnız `story`
+eşitlenir (aynıysa dosyaya dokunulmaz). 02'nin brief'i ve 03 elle yazıldı, atlanır.
+`STORY` (G057): demo kaydının Our Story bloğunun (intro + 3 başlık) tek kaynağı; `content()` onu kayda yazar, böylece
+`ozet` ve `yaz --zorla` story'yi korur. Story değişikliği STORY'de yapılır, content.demo.json'da değil.
 `gorev5`: G2NN/G4NN görev dosyalarını yeniden yazar (durum hazir; Günlük satırları korunur, bir kez
 "yeniden tanımlandı" satırı eklenir). Alınmış/incelemede/bitmiş görevi atlar. 03 (G203/G403) hariç.
 """
@@ -389,6 +394,55 @@ D = [
                 frame="a round brass ship porthole frame with small rivets, aged patina, empty glass center",
                 extras=[])),
 ]
+
+# Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
+# no → (intro, (başlık 1, başlık 2, başlık 3)). Intro bir cümle parçasıdır, sayfada tarihle biter ("… led us to" +
+# " May 15, 2027."). Başlıklar PAKET 2 story_1..3 sahneleri: ilk buluşma, evlilik teklifi, eller + yüzük; kısa tutulur
+# (yan yana dizilişlerde dar çerçeve altına sığsın). `content()` 03–20 kaydına yazar; 01 ve 02 elle yazıldı, `ozet`
+# onlarda yalnız `story`'yi eşitler. `kontrol` kayıtların bununla aynı olduğunu denetler.
+STORY = {
+    1: ("Slow lunches, golden evenings and one walk through the olive grove led us to",
+        ("Our first lunch", "In the olive grove", "Simply forever")),
+    2: ("Coffee dates, sea breezes and all the quiet moments in between brought us to",
+        ("Our first coffee", "Sunset by the sea", "Ever after")),
+    3: ("A few of the moments that led us to",
+        ("First hello", "The proposal", "Forever begins")),
+    4: ("Some love stories are written one letter at a time. Ours led us to",
+        ("A table for two", "Sealed with a yes", "Yours, always")),
+    5: ("Under the lemon trees, one sunny day at a time, we found our way to",
+        ("On the piazza", "Above the sea", "Our sweetest yes")),
+    6: ("It began with jazz and champagne, and every evening since has led us to",
+        ("Jazz night", "On the staircase", "Here's to us")),
+    7: ("Warm cider, long autumn walks and many cozy evenings in between brought us to",
+        ("By the fire", "Falling leaves", "Hand in hand")),
+    8: ("Hot cocoa, falling snow and one very happy winter evening brought us to",
+        ("First snowfall", "Under the pines", "Evergreen love")),
+    9: ("Long summer evenings and fields of lavender carried us all the way to",
+        ("Rosé in the square", "In the lavender", "Tied together")),
+    10: ("Good wine, long tables and golden vineyard sunsets led us to",
+         ("First pour", "Among the vines", "A fine vintage")),
+    11: ("Wide skies, open roads and a few wild-hearted adventures carried us to",
+         ("Where it began", "Desert sunset", "Wild hearts")),
+    12: ("Every adventure and every island sunset has brought us closer to",
+         ("Island time", "End of the pier", "Next stop: forever")),
+    13: ("Once upon a time, two people met in the woods. Every page since has led us to",
+         ("Chapter one", "By lantern light", "Happily ever after")),
+    14: ("Tea for two, a rose garden and one promise we will always keep brought us to",
+         ("Afternoon tea", "By the fountain", "Pearls & promises")),
+    15: ("Like the first blossoms of spring, our story unfolded slowly and led us to",
+         ("Our first spring", "Under the blossoms", "In full bloom")),
+    16: ("Back roads, lemonade and one golden sunflower field led us straight to",
+         ("Tailgate lemonade", "In the sunflowers", "Sunny days ahead")),
+    17: ("From our first toast among the paintings, every moment has been leading us to",
+         ("At the gallery", "By the lake", "Set in gold")),
+    18: ("Picnics, wildflowers and long summer afternoons brought us to",
+         ("Our first picnic", "In the meadow", "Picked for keeps")),
+    19: ("Candlelit evenings and moonlit walks led us, one midnight at a time, to",
+         ("By candlelight", "Under the moon", "One red rose")),
+    20: ("Salt air, long walks on the shore and one golden evening carried us to",
+         ("Down by the harbor", "By the lighthouse", "Tide after tide")),
+}
+STORY_INTRO_EN_COK, STORY_BASLIK_EN_COK = 200, 60  # docs/03_URUN_ICERIK_SEMASI.json (story.intro, items[].caption)
 
 MOCK = {  # Paket 3 mockup sahne öğeleri: (yüzey, kenar süsleri, zarf)
     1: ("an ivory linen tablecloth", "olive branches, a few green olives and an olive-green silk ribbon", "an olive-green textured envelope with an ivory lace edge and an oval botanical seal"),
@@ -1131,6 +1185,14 @@ def cumartesi(iso):
     return d + timedelta(days=(5 - d.weekday()) % 7)
 
 
+def story(t):
+    """Kaydın `story` bloğu (`STORY` tablosundan)."""
+    if t["no"] not in STORY:
+        raise KeyError(f"tasarım {t['no']:02d} için STORY kaydı yok")
+    intro, basliklar = STORY[t["no"]]
+    return {"intro": intro, "items": [{"caption": c} for c in basliklar]}
+
+
 def content(t):
     a, af, b, bf = t["cift"]
     mekan, sehir, bolge, tz = t["mekan"]
@@ -1151,6 +1213,7 @@ def content(t):
         "media": {"hero_portrait": None, "memory_photos": [], "couple_clip": None, "venue_image": None},
         "optional_blocks": {"our_story": True, "countdown": True, "dress_code": True, "registry": True,
                             "travel_stay": True, "faq": False, "guest_policy": False},
+        "story": story(t),
     }
 
 
@@ -2085,6 +2148,33 @@ def web_kontrol():
     return sorun
 
 
+def story_kontrol():
+    """`STORY`: her tasarımda var, şema sınırlarında, ve her koleksiyonun content.demo.json `story`'si bununla aynı."""
+    sorun = []
+    for no in sorted(set(STORY) - {t["no"] for t in D}):
+        sorun.append(f"STORY: katalogda olmayan tasarım {no:02d}")
+    for t in D:
+        n = f"{t['no']:02d}"
+        if t["no"] not in STORY:
+            sorun.append(f"{n}: STORY kaydı yok")
+            continue
+        intro, basliklar = STORY[t["no"]]
+        if not isinstance(intro, str) or not intro.strip() or len(intro) > STORY_INTRO_EN_COK:
+            sorun.append(f"{n}: story intro boş ya da {STORY_INTRO_EN_COK} karakterden uzun")
+        elif intro != intro.strip() or intro[-1] in ".,;:!?":
+            sorun.append(f"{n}: story intro tarihle birleşen bir cümle parçasıdır (boşluk/noktalamayla bitmez)")
+        if (not isinstance(basliklar, tuple) or len(basliklar) != 3 or len(set(basliklar)) != 3
+                or not all(isinstance(c, str) and c.strip() and len(c) <= STORY_BASLIK_EN_COK for c in basliklar)):
+            sorun.append(f"{n}: story tam 3 farklı, boş olmayan, ≤ {STORY_BASLIK_EN_COK} karakter başlık olmalı")
+        yol = ROOT / "collections" / t["klasor"] / "content.demo.json"
+        if yol.exists():
+            var = json.loads(yol.read_text(encoding="utf-8")).get("story")
+            if var != story(t):
+                sorun.append(f"{n}: content.demo.json story katalogla (STORY) aynı değil — "
+                             f"`python3 tools/katalog.py ozet --no {n}`" + (" (03: elle eşitlenir)" if t["no"] == 3 else ""))
+    return sorun
+
+
 def ayirt():
     sorun = []
     for a, b in combinations(D, 2):
@@ -2100,11 +2190,16 @@ def ayirt():
     return sorun
 
 
-def yaz(p, metin, zorla):
+def yaz(p, metin, zorla, dene=False, degisen=None):
+    """Var olan dosyanın üzerine yalnız `zorla` ile yazar; yazdıysa (`dene`: yazacaktıysa) True. İçeriği gerçekten
+    değişen (ya da yeni) dosyalar `degisen` listesine eklenir. `dene`: hiçbir şey yazılmaz."""
     if p.exists() and not zorla:
         return False
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(metin)
+    if degisen is not None and (not p.exists() or p.read_text(encoding="utf-8") != metin):
+        degisen.append(p)
+    if not dene:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(metin, encoding="utf-8")
     return True
 
 
@@ -2162,18 +2257,30 @@ def cmd_paket5(a):
     sys.exit(1 if dene and degisen else 0)
 
 
+def mevcut_story_metni(yol, t):
+    """01/02 (elle yazılmış kayıt): `story` katalogla aynıysa dosya metni aynen; değilse yalnız `story` değişmiş kayıt
+    (öteki alanlar ve sıraları korunur; dosya `json.dumps(indent=2)` biçimine geçer)."""
+    eski = yol.read_text(encoding="utf-8")
+    var = json.loads(eski)
+    if var.get("story") == story(t):
+        return eski
+    return json.dumps({**var, "story": story(t)}, indent=2, ensure_ascii=False) + "\n"
+
+
 def cmd_ozet(a):
-    """DESIGN_BRIEF.md (01, 04–20) ve content.demo.json (yalnız katalogdan açılmış 04–20) katalogdan yeniden yazılır.
-    02 (elle, G001–G027) ve 03 (elle) atlanır; elle genişletilmiş content.demo.json (katalogda olmayan anahtar) korunur."""
+    """DESIGN_BRIEF.md (01, 04–20) ve content.demo.json (katalogdan açılmış 04–20) katalogdan yeniden yazılır; 01 ve 02'nin
+    elle yazılmış content.demo.json'ında yalnız `story` (`STORY`) eşitlenir. 02'nin brief'i (elle, G001–G027) ve 03 (elle)
+    atlanır; elle genişletilmiş content.demo.json (katalogda olmayan anahtar) korunur."""
     dene, degisen = "--dene" in a, 0
     for t in hedefler(a):
-        if t["no"] == 2:
-            continue
         k = ROOT / "collections" / t["klasor"]
-        isler = [(k / "DESIGN_BRIEF.md", brief_md(t))]
-        if not t.get("mevcut"):
+        yol = k / "content.demo.json"
+        isler = [] if t["no"] == 2 else [(k / "DESIGN_BRIEF.md", brief_md(t))]
+        if t.get("mevcut"):
+            if yol.exists():
+                isler.append((yol, mevcut_story_metni(yol, t)))
+        else:
             c = content(t)
-            yol = k / "content.demo.json"
             var = json.loads(yol.read_text(encoding="utf-8")) if yol.exists() else {}
             fazla = sorted(set(var) - set(c))
             if fazla:
@@ -2233,7 +2340,9 @@ def main(a):
         print("\n".join(s) if s else f"ayırt edicilik: {len(D)} tasarım, her çift ≥4 eksende farklı")
         w = web_kontrol()
         print("\n".join(w) if w else f"website (WEB): {len(WEB)} tasarım tam (03 elle yazıldı)")
-        sys.exit(1 if s or w else 0)
+        h = story_kontrol()
+        print("\n".join(h) if h else f"story (STORY): {len(STORY)} tasarım; content.demo.json kayıtlarıyla aynı")
+        sys.exit(1 if s or w or h else 0)
     if a and a[0] == "paket5":
         return cmd_paket5(a[1:])
     if a and a[0] == "gorev5":
@@ -2249,29 +2358,39 @@ def main(a):
     s = ayirt()
     if s:
         sys.exit("ayırt edicilik sorunu:\n" + "\n".join(s))
-    yaz(ROOT / "docs/09_TASARIM_KATALOGU.md", katalog_md(), True)
+    dene, degisen = "--dene" in a, []
+
+    def y(p, metin, z=zorla):
+        return yaz(p, metin, z, dene, degisen)
+
+    y(ROOT / "docs/09_TASARIM_KATALOGU.md", katalog_md(), True)
     say = 0
     for t in D:
         if t["no"] == 2:
             continue
         k = ROOT / "collections" / t["klasor"]
-        yaz(k / "DESIGN_BRIEF.md", brief_md(t), zorla)
-        yaz(k / "palette.json", json.dumps({"id": t["palet_adi"], "name": t["ad"], **t["renk"]}, indent=2, ensure_ascii=False) + "\n", zorla)
+        y(k / "DESIGN_BRIEF.md", brief_md(t))
+        y(k / "palette.json", json.dumps({"id": t["palet_adi"], "name": t["ad"], **t["renk"]}, indent=2, ensure_ascii=False) + "\n")
         if not t.get("mevcut"):
-            yaz(k / "content.demo.json", json.dumps(content(t), indent=2, ensure_ascii=False) + "\n", zorla)
-            yaz(k / "COLLECTION_STATUS.md", status_md(t), zorla)
+            y(k / "content.demo.json", json.dumps(content(t), indent=2, ensure_ascii=False) + "\n")  # story dahil (STORY)
+            y(k / "COLLECTION_STATUS.md", status_md(t))
         gp = k / "assets/gpt/GPT_PROMPTS.md"
         if t["no"] != 3:  # 03 elle yazıldı (G030/G035/G036); --zorla bile dokunmaz
-            yaz(gp, gpt_prompts_md(t, gp.read_text(encoding="utf-8") if gp.exists() else "") if t["no"] in WEB
-                else prompts_md(t), zorla)
-        for sub in ("textures", "decor"):
+            y(gp, gpt_prompts_md(t, gp.read_text(encoding="utf-8") if gp.exists() else "") if t["no"] in WEB
+              else prompts_md(t))
+        for ad, metin in tasks(t).items():
+            say += y(ROOT / "gorevler" / f"{ad}.md", metin)
+        if dene:
+            continue
+        for sub in ("textures", "decor", "mockups"):
             (k / "assets/gpt" / sub).mkdir(parents=True, exist_ok=True)
             (k / "assets/gpt" / sub / ".gitkeep").touch()
-        for ad, metin in tasks(t).items():
-            say += yaz(ROOT / "gorevler" / f"{ad}.md", metin, zorla)
-        (k / "assets/gpt/mockups").mkdir(parents=True, exist_ok=True)
-        (k / "assets/gpt/mockups/.gitkeep").touch()
-    print(f"katalog yazıldı; {say} yeni görev dosyası")
+    for p in degisen:
+        print(f"{'yazılacak' if dene else 'yazıldı':<9} {p.relative_to(ROOT)}")
+    if dene:
+        print(f"\n{len(degisen)} dosya değişecek" + ("" if zorla else " (var olan dosyalar --zorla olmadan atlanır)"))
+        sys.exit(1 if degisen else 0)
+    print(f"katalog yazıldı; {say} görev dosyası yazıldı, {len(degisen)} dosyanın içeriği değişti")
 
 
 if __name__ == "__main__":
