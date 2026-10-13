@@ -1,0 +1,638 @@
+'use client';
+// /start form and result (G045). Phone first (390 px), plain tool styling (no decorative drawings, K21).
+// Same field rules as the server (lib/claim/fields.ts). On success the edit link is shown once,
+// big, with "Save this link", copy and "email it to myself" (mailto: opens the buyer's own mail app;
+// the platform does not send email yet). The result is kept in sessionStorage so a reload of this
+// tab (e.g. pull to refresh) does not lose the link.
+
+import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import {
+  claimFieldErrors,
+  normalizeSlugInput,
+  sanitizeSlugTyping,
+  slugProblem,
+  suggestSlugBase,
+  type ClaimField,
+} from '../../lib/claim/fields.ts';
+import styles from './start.module.css';
+
+export interface StartTheme {
+  id: string;
+  name: string;
+  /** 1 or 2 name fields (from the theme's demo content). */
+  partnerCount: number;
+  /** /start/demo/<theme> */
+  demoUrl: string;
+}
+
+interface ClaimResultView {
+  theme: string;
+  slug: string;
+  editUrl: string;
+  editPath: string;
+  siteUrl: string;
+  emailSent: boolean;
+  email: string;
+}
+
+type SlugStatus =
+  | { kind: 'idle' }
+  | { kind: 'checking' }
+  | { kind: 'available' }
+  | { kind: 'unavailable'; message: string; suggestion: string | null }
+  | { kind: 'unknown' };
+
+type FormMessage = { tone: 'error' | 'notice'; title?: string; text: string } | null;
+
+const STORE_KEY = 'start:claim-result:v1';
+const FIELD_ORDER: ClaimField[] = ['orderNumber', 'email', 'name1', 'name2', 'slug'];
+const FIELD_IDS: Record<ClaimField, string> = {
+  orderNumber: 'start-order',
+  email: 'start-email',
+  name1: 'start-name1',
+  name2: 'start-name2',
+  slug: 'start-slug',
+};
+
+function loadStored(themeId: string): ClaimResultView | null {
+  try {
+    const raw = window.sessionStorage.getItem(STORE_KEY);
+    if (!raw) return null;
+    const v = JSON.parse(raw) as ClaimResultView;
+    return v && v.theme === themeId && typeof v.editUrl === 'string' && typeof v.editPath === 'string' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function store(value: ClaimResultView | null): void {
+  try {
+    if (value) window.sessionStorage.setItem(STORE_KEY, JSON.stringify(value));
+    else window.sessionStorage.removeItem(STORE_KEY);
+  } catch {
+    /* private mode: the link is still on screen */
+  }
+}
+
+export default function StartForm({ theme, origin, emailEnabled }: { theme: StartTheme; origin: string; emailEnabled: boolean }) {
+  const [result, setResult] = useState<ClaimResultView | null>(null);
+  const [lastEmail, setLastEmail] = useState('');
+
+  useEffect(() => {
+    const stored = loadStored(theme.id);
+    if (stored) {
+      setResult(stored);
+      setLastEmail(stored.email);
+    }
+  }, [theme.id]);
+
+  const onCreated = useCallback((r: ClaimResultView) => {
+    store(r);
+    setResult(r);
+    setLastEmail(r.email);
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  const startOver = useCallback(() => {
+    store(null);
+    setResult(null);
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  return (
+    <main className={styles.page}>
+      {result ? (
+        <ResultView result={result} themeName={theme.name} onStartOver={startOver} />
+      ) : (
+        <div className={styles.layout}>
+          <header className={styles.header}>
+            <p className={styles.eyebrow}>Your wedding website</p>
+            <h1 className={styles.title}>Start your website</h1>
+            <p className={styles.lead}>
+              Design: <strong>{theme.name}</strong>
+            </p>
+          </header>
+          <DemoPreview theme={theme} />
+          <ClaimForm theme={theme} origin={origin} emailEnabled={emailEnabled} initialEmail={lastEmail} onCreated={onCreated} />
+        </div>
+      )}
+    </main>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+
+function DemoPreview({ theme }: { theme: StartTheme }) {
+  return (
+    <section className={styles.preview} aria-label={`${theme.name} demo`}>
+      <div className={styles.frameBox}>
+        <iframe className={styles.frame} src={theme.demoUrl} title={`${theme.name} demo website`} referrerPolicy="no-referrer" />
+      </div>
+      <p className={styles.previewNote}>Sample names, dates and placeholder photos. You will add your own in the editor.</p>
+      <a className={styles.textLink} href={theme.demoUrl} target="_blank" rel="noopener">
+        Open the full demo
+      </a>
+    </section>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------
+
+function ClaimForm({
+  theme,
+  origin,
+  emailEnabled,
+  initialEmail,
+  onCreated,
+}: {
+  theme: StartTheme;
+  origin: string;
+  emailEnabled: boolean;
+  initialEmail: string;
+  onCreated: (r: ClaimResultView) => void;
+}) {
+  const twoNames = theme.partnerCount >= 2;
+  const [orderNumber, setOrderNumber] = useState('');
+  const [email, setEmail] = useState(initialEmail);
+  const [names, setNames] = useState<string[]>(twoNames ? ['', ''] : ['']);
+  const [slug, setSlug] = useState('');
+  const [slugAuto, setSlugAuto] = useState(true);
+  const [slugStatus, setSlugStatus] = useState<SlugStatus>({ kind: 'idle' });
+  const [adjusted, setAdjusted] = useState<{ from: string; to: string } | null>(null);
+  const [touched, setTouched] = useState<Partial<Record<ClaimField, boolean>>>({});
+  const [submitted, setSubmitted] = useState(false);
+  const [serverErrors, setServerErrors] = useState<Partial<Record<ClaimField, string>>>({});
+  const [message, setMessage] = useState<FormMessage>(null);
+  const [busy, setBusy] = useState(false);
+  const honeypot = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLDivElement>(null);
+  const checkSeq = useRef(0);
+
+  const values = { orderNumber, email, names, slug };
+  const clientErrors = claimFieldErrors(values, theme.partnerCount);
+  const errorFor = (f: ClaimField): string | null => serverErrors[f] ?? (touched[f] || submitted ? (clientErrors[f] ?? null) : null);
+
+  const clearServer = (f: ClaimField) =>
+    setServerErrors((prev) => {
+      if (!(f in prev)) return prev;
+      const next = { ...prev };
+      delete next[f];
+      return next;
+    });
+
+  // The address follows the names until the buyer edits it.
+  const namesKey = names.join('\u0000');
+  useEffect(() => {
+    if (!slugAuto) return;
+    setSlug(names.some((n) => n.trim()) ? suggestSlugBase(names) : '');
+  }, [namesKey, slugAuto]); // names is read through namesKey
+
+  // Live availability hint (the server checks again on submit).
+  useEffect(() => {
+    const value = normalizeSlugInput(slug);
+    const seq = ++checkSeq.current;
+    if (!value || slugProblem(value)) {
+      setSlugStatus({ kind: 'idle' });
+      return;
+    }
+    setSlugStatus({ kind: 'checking' });
+    const ctrl = new AbortController();
+    const timer = window.setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/start/slug?value=${encodeURIComponent(value)}`, {
+          cache: 'no-store',
+          credentials: 'same-origin',
+          signal: ctrl.signal,
+        });
+        const body = (await res.json()) as { ok?: boolean; available?: boolean; message?: string; suggestion?: string | null };
+        if (seq !== checkSeq.current) return;
+        if (!res.ok || !body.ok) {
+          setSlugStatus({ kind: 'unknown' });
+        } else if (body.available) {
+          setSlugStatus({ kind: 'available' });
+        } else if (slugAuto && body.suggestion && body.suggestion !== value) {
+          // Taken: an automatic address moves to the first free variant (checked again by the next run).
+          setAdjusted({ from: value, to: body.suggestion });
+          setSlug(body.suggestion);
+        } else {
+          setSlugStatus({ kind: 'unavailable', message: body.message ?? 'This address is not available.', suggestion: body.suggestion ?? null });
+        }
+      } catch {
+        if (seq === checkSeq.current && !ctrl.signal.aborted) setSlugStatus({ kind: 'unknown' });
+      }
+    }, 450);
+    return () => {
+      window.clearTimeout(timer);
+      ctrl.abort();
+    };
+  }, [slug]); // slugAuto is read at check time on purpose
+
+  const focusField = (f: ClaimField) => {
+    const el = document.getElementById(FIELD_IDS[f]);
+    if (el) {
+      el.focus();
+      el.scrollIntoView({ block: 'center' });
+    }
+  };
+
+  const showMessage = (m: FormMessage) => {
+    setMessage(m);
+    if (m) window.setTimeout(() => messageRef.current?.focus(), 0);
+  };
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (busy) return;
+    setSubmitted(true);
+    setMessage(null);
+    const errors = claimFieldErrors(values, theme.partnerCount);
+    const first = FIELD_ORDER.find((f) => errors[f]);
+    if (first) {
+      setServerErrors({});
+      focusField(first);
+      return;
+    }
+    setBusy(true);
+    try {
+      const res = await fetch('/api/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        cache: 'no-store',
+        body: JSON.stringify({
+          theme: theme.id,
+          orderNumber,
+          email,
+          names,
+          slug: normalizeSlugInput(slug),
+          website: honeypot.current?.value ?? '',
+        }),
+      });
+      let body: Record<string, any> = {};
+      try {
+        body = (await res.json()) as Record<string, any>;
+      } catch {
+        /* handled below */
+      }
+      if (res.status === 201 && body.ok) {
+        onCreated({
+          theme: theme.id,
+          slug: String(body.slug),
+          editUrl: String(body.editUrl),
+          editPath: String(body.editPath),
+          siteUrl: String(body.siteUrl),
+          emailSent: body.emailSent === true,
+          email: email.trim(),
+        });
+        return;
+      }
+      const fields = (body.fields ?? {}) as Partial<Record<ClaimField, string>>;
+      switch (body.code) {
+        case 'invalid': {
+          setServerErrors(fields);
+          const f = FIELD_ORDER.find((k) => fields[k]);
+          if (f) focusField(f);
+          else showMessage({ tone: 'error', text: body.message ?? 'Please check the form and try again.' });
+          break;
+        }
+        case 'order_used':
+          setServerErrors({ orderNumber: 'This order number already has a website.' });
+          showMessage({ tone: 'notice', title: 'This order already has a website', text: String(body.message) });
+          break;
+        case 'slug_taken':
+          setSlugAuto(false);
+          setServerErrors({ slug: fields.slug ?? 'This address is already taken.' });
+          setSlugStatus({ kind: 'unavailable', message: fields.slug ?? 'This address is already taken.', suggestion: body.suggestion ?? null });
+          focusField('slug');
+          break;
+        default:
+          showMessage({ tone: 'error', text: body.message ?? 'Something went wrong. Please try again in a moment.' });
+      }
+    } catch {
+      showMessage({ tone: 'error', text: 'No connection. Please check your internet connection and try again.' });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const fieldProps = (f: ClaimField, hintId?: string) => {
+    const err = errorFor(f);
+    return {
+      id: FIELD_IDS[f],
+      'aria-invalid': err ? true : undefined,
+      'aria-describedby': [hintId, err ? `${FIELD_IDS[f]}-error` : null].filter(Boolean).join(' ') || undefined,
+      onBlur: () => setTouched((t) => ({ ...t, [f]: true })),
+    };
+  };
+
+  const errorText = (f: ClaimField) => {
+    const err = errorFor(f);
+    return err ? (
+      <p className={styles.error} id={`${FIELD_IDS[f]}-error`}>
+        {err}
+      </p>
+    ) : null;
+  };
+
+  const host = origin.replace(/^https?:\/\//, '');
+  const shownSlug = normalizeSlugInput(slug);
+
+  return (
+    <form className={styles.card} onSubmit={onSubmit} noValidate aria-busy={busy || undefined}>
+      <h2 className={styles.cardTitle}>Your details</h2>
+
+      {message ? (
+        <div
+          ref={messageRef}
+          tabIndex={-1}
+          role={message.tone === 'error' ? 'alert' : 'status'}
+          className={message.tone === 'error' ? styles.alert : styles.notice}
+        >
+          {message.title ? <p className={styles.alertTitle}>{message.title}</p> : null}
+          <p>{message.text}</p>
+        </div>
+      ) : null}
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor={FIELD_IDS.orderNumber}>
+          Etsy order number
+        </label>
+        <input
+          className={styles.input}
+          {...fieldProps('orderNumber', 'start-order-hint')}
+          inputMode="numeric"
+          autoComplete="off"
+          maxLength={40}
+          value={orderNumber}
+          onChange={(e) => {
+            setOrderNumber(e.target.value);
+            clearServer('orderNumber');
+            if (message?.tone === 'notice') setMessage(null);
+          }}
+        />
+        <p className={styles.hint} id="start-order-hint">
+          Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website per order.
+        </p>
+        {errorText('orderNumber')}
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor={FIELD_IDS.email}>
+          Email address
+        </label>
+        <input
+          className={styles.input}
+          {...fieldProps('email', 'start-email-hint')}
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          maxLength={254}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            clearServer('email');
+          }}
+        />
+        <p className={styles.hint} id="start-email-hint">
+          {emailEnabled
+            ? 'We will email your edit link to this address and keep it with your website.'
+            : 'We keep it with your website. We do not send emails yet, so you will save your edit link on the next screen.'}
+        </p>
+        {errorText('email')}
+      </div>
+
+      <fieldset className={styles.fieldset}>
+        <legend className={styles.label}>{twoNames ? 'Your first names' : 'First name'}</legend>
+        <div className={twoNames ? styles.nameRow : undefined}>
+          {names.map((value, i) => {
+            const f: ClaimField = i === 0 ? 'name1' : 'name2';
+            return (
+              <div key={f} className={styles.nameCell}>
+                <label className={styles.subLabel} htmlFor={FIELD_IDS[f]}>
+                  {twoNames ? (i === 0 ? 'Your first name' : "Your partner's first name") : 'First name'}
+                </label>
+                <input
+                  className={styles.input}
+                  {...fieldProps(f, 'start-names-hint')}
+                  autoComplete={i === 0 ? 'given-name' : 'off'}
+                  autoCapitalize="words"
+                  maxLength={60}
+                  value={value}
+                  onChange={(e) => {
+                    const next = [...names];
+                    next[i] = e.target.value;
+                    setNames(next);
+                    clearServer(f);
+                  }}
+                />
+                {errorText(f)}
+              </div>
+            );
+          })}
+        </div>
+        <p className={styles.hint} id="start-names-hint">
+          Shown on your draft and used for your website address. You can change names later in the editor.
+        </p>
+      </fieldset>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor={FIELD_IDS.slug}>
+          Website address
+        </label>
+        <input
+          className={styles.input}
+          {...fieldProps('slug', 'start-slug-status')}
+          autoComplete="off"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          maxLength={60}
+          value={slug}
+          onChange={(e) => {
+            setSlugAuto(false);
+            setSlug(sanitizeSlugTyping(e.target.value));
+            clearServer('slug');
+          }}
+        />
+        <div className={styles.slugStatus} id="start-slug-status" aria-live="polite">
+          <p className={styles.address}>
+            {host}/<strong>{shownSlug || '…'}</strong>
+          </p>
+          <SlugHint
+            status={slugStatus}
+            adjustedFrom={slugAuto && adjusted && adjusted.to === shownSlug ? adjusted.from : null}
+            hasError={Boolean(errorFor('slug'))}
+            onUse={(s) => {
+              setSlugAuto(false);
+              setSlug(s);
+              clearServer('slug');
+            }}
+          />
+          <p className={styles.hint}>The address cannot be changed later.</p>
+        </div>
+        {errorText('slug')}
+      </div>
+
+      {/* Honeypot: hidden from people and screen readers; bots that fill every field are refused. */}
+      <div className={styles.honeypot} aria-hidden="true">
+        <label>
+          Website
+          <input ref={honeypot} type="text" name="website" tabIndex={-1} autoComplete="off" defaultValue="" />
+        </label>
+      </div>
+
+      <button className={styles.primary} type="submit" disabled={busy}>
+        {busy ? 'Creating your website…' : 'Create my website'}
+      </button>
+      <p className={styles.small}>Your website starts as a private draft. Nobody can see it until you press Publish in the editor.</p>
+    </form>
+  );
+}
+
+function SlugHint({
+  status,
+  adjustedFrom,
+  hasError,
+  onUse,
+}: {
+  status: SlugStatus;
+  adjustedFrom: string | null;
+  hasError: boolean;
+  onUse: (slug: string) => void;
+}) {
+  switch (status.kind) {
+    case 'checking':
+      return <p className={styles.hint}>Checking…</p>;
+    case 'available':
+      return (
+        <p className={styles.ok} data-slug-available="">
+          {adjustedFrom ? `Available. "${adjustedFrom}" is taken, so we added a number.` : 'Available'}
+        </p>
+      );
+    case 'unavailable':
+      return (
+        <div>
+          {hasError ? null : <p className={styles.error}>{status.message}</p>}
+          {status.suggestion ? (
+            <button type="button" className={styles.suggestion} onClick={() => onUse(status.suggestion!)}>
+              Use {status.suggestion}
+            </button>
+          ) : null}
+        </div>
+      );
+    case 'unknown':
+      return <p className={styles.hint}>We will check this address when you create your website.</p>;
+    default:
+      return null;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+
+function ResultView({ result, themeName, onStartOver }: { result: ClaimResultView; themeName: string; onStartOver: () => void }) {
+  const heading = useRef<HTMLHeadingElement>(null);
+  const linkBox = useRef<HTMLTextAreaElement>(null);
+  const [copy, setCopy] = useState<'idle' | 'copied' | 'failed'>('idle');
+
+  useEffect(() => {
+    heading.current?.focus();
+  }, []);
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(result.editUrl);
+      setCopy('copied');
+      return;
+    } catch {
+      /* older browsers: select and copy */
+    }
+    const box = linkBox.current;
+    if (box) {
+      box.focus();
+      box.select();
+      let ok = false;
+      try {
+        ok = document.execCommand('copy');
+      } catch {
+        ok = false;
+      }
+      setCopy(ok ? 'copied' : 'failed');
+    } else {
+      setCopy('failed');
+    }
+  }
+
+  const mailto =
+    `mailto:${encodeURIComponent(result.email).replace(/%40/g, '@')}` +
+    `?subject=${encodeURIComponent('My wedding website edit link')}` +
+    `&body=${encodeURIComponent(
+      `Edit link (keep it private, anyone with it can edit the website):\n${result.editUrl}\n\n` +
+        `Website address (visible after publishing):\n${result.siteUrl}\n`,
+    )}`;
+
+  return (
+    <div className={styles.resultWrap}>
+      <section className={styles.result} aria-labelledby="start-result-title">
+        <p className={styles.eyebrow}>Your wedding website</p>
+        <h1 id="start-result-title" ref={heading} tabIndex={-1} className={styles.title}>
+          Your website is ready to edit
+        </h1>
+        <p className={styles.lead}>
+          Design: <strong>{themeName}</strong>
+        </p>
+
+        <div className={styles.saveBox}>
+          <h2 className={styles.saveTitle}>Save this link</h2>
+          <p>
+            It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.
+          </p>
+          {result.emailSent ? (
+            <p>We have also emailed it to {result.email}.</p>
+          ) : (
+            <p>
+              <strong>We cannot email it to you yet.</strong> Copy it somewhere safe now, for example your notes app or an email to
+              yourself.
+            </p>
+          )}
+          <label className={styles.visuallyHidden} htmlFor="start-edit-link">
+            Your edit link
+          </label>
+          <textarea
+            id="start-edit-link"
+            ref={linkBox}
+            className={styles.linkBox}
+            readOnly
+            rows={4}
+            value={result.editUrl}
+            onFocus={(e) => e.currentTarget.select()}
+            data-edit-link=""
+          />
+          <div className={styles.actions}>
+            <button type="button" className={styles.secondary} onClick={copyLink} data-copy-link="">
+              {copy === 'copied' ? 'Copied' : 'Copy link'}
+            </button>
+            {result.email ? (
+              <a className={styles.secondary} href={mailto}>
+                Email it to myself
+              </a>
+            ) : null}
+          </div>
+          <p className={styles.copyStatus} aria-live="polite">
+            {copy === 'copied' ? 'The link is copied. Paste it somewhere safe.' : copy === 'failed' ? 'Copying did not work. Select the link above and copy it.' : ''}
+          </p>
+        </div>
+
+        <a className={styles.primary} href={result.editPath} data-open-editor="">
+          Open my editor
+        </a>
+        <p className={styles.small}>
+          Your website address will be <strong className={styles.breakAll}>{result.siteUrl}</strong>. It stays a private draft until you
+          press Publish in the editor.
+        </p>
+        <button type="button" className={styles.linkButton} onClick={onStartOver}>
+          Start another website
+        </button>
+      </section>
+    </div>
+  );
+}

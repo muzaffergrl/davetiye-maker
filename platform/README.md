@@ -2,7 +2,7 @@
 
 Alıcının sitesi bizim platformumuzda yayınlanır ve panelden düzenlenir (`docs/10_SITE_PLATFORMU.md` tek kaynak).
 Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru**, veri adaptörü (`local`),
-site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042) ve testler. Supabase (G043), `/start` (G045) sonraki görevler.
+site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042), `/start` sahiplenme akışı (G045) ve testler. Supabase (G043) sonraki görev.
 
 Durum: yerelde çalışıyor ve test edildi. **Hiçbir yere yayınlanmadı** (Vercel/Supabase projesi yok).
 
@@ -15,7 +15,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # .data/ içine demo site: /clara-and-julian (03 Blush Garden Rose demo içeriği, _sample tema)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar, RSVP, panel (118 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar, RSVP, panel, /start (135 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller ve previews/*.png
@@ -41,6 +41,8 @@ app/
   layout.tsx, page.tsx             platform sayfaları için kök
   edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039); geçersiz link = genel 404
   api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır
+  start/page.tsx, StartForm.tsx    /start?theme=<tema> sahiplenme sayfası (G045); start/demo/[theme]/… = temanın canlı demosu
+  api/start/, api/start/slug/      sahiplenme API'si (POST) ve adres uygunluk ipucu (GET)
 components/panel/                  panelin istemci bileşenleri (Panel, bölümler, kırpma, önizleme, QR) + panel.module.css
 lib/
   theme/engine.ts                  şablon motoru (işaretler aşağıda)
@@ -55,10 +57,13 @@ lib/
   site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar
   panel/                           panel: model.ts (istemci+sunucu yardımcıları), api.ts, draft.ts, photos.ts (sharp), state.ts, http.ts
   qr.ts                            gerçek URL'den QR (uqr; tools/make_qr.py ayarları)
+  claim/                           /start: fields.ts (istemci+sunucu kuralları), claim.ts, api.ts, themes.ts, demo-page.ts,
+                                   verify.ts (Etsy doğrulama arayüzü, kapalı), mailer.ts (e-posta arayüzü, yok), limits.ts, demo/
 themes/_sample/                    yalnız test iskeleti (tasarım DEĞİL); her işareti kullanır
 scripts/                           seed.ts, screenshot.cjs, sync-schema.cjs
 tests/                             *.test.ts (node:test)
-previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4)
+previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
+                                   g045/ = /start akışı
 ```
 
 ## Site akışı ve görünürlük
@@ -378,6 +383,100 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
   (Safari) açılır; Chrome'da açık hata mesajı çıkar. QR telefon kamerasıyla okutulmadı (ekran görüntüsünden `jsqr` ile çözüldü).
 - `local` adaptör tek süreçlidir; çakışma kontrolü (`baseUpdatedAt`) oku-karşılaştır-yaz, atomik değil (Supabase'de koşullu UPDATE).
 
+## /start sahiplenme akışı (G045)
+
+Etsy alıcısı indirdiği PDF'teki başlat linkini açar: `/start?theme=<tema>`. Sayfa İngilizce, telefon öncelikli (390 px),
+panelle aynı sade araç görünümü (dekor çizimi yok, K21).
+
+1. **Tema önizlemesi:** küçültülmüş canlı iframe (`/start/demo/<tema>`, 390 × 760 px içerik ölçeklenir) + "Open the full demo".
+   Demo = temanın kendi şablonları + demo içeriği; ekran görüntüsü gerekmez, tema değişince önizleme de değişir.
+2. **Form:** Etsy sipariş numarası, e-posta, ilk isimler (demo kaydında kaç isim varsa: 1 ya da 2), web adresi (isimlerden
+   önerilir: "Avery" + "Jordan" → `avery-and-jordan`; dolu ise `-2` …; elle değiştirilebilir, canlı "Available" ipucu).
+   Kurallar tarayıcıda ve sunucuda aynı (`lib/claim/fields.ts`).
+3. **Oluştur:** taslak site = temanın demo içeriği, `record_kind: "customer"`, alıcının isimleri (`display_name` + `full_name`,
+   `name_display`, monogram); diğer alanlar demo olarak kalır, alıcı panelde değiştirir. `orderRef` = sipariş no (yalnız rakam),
+   `ownerEmail` = e-posta. Durum `draft`: genel adres yayına kadar 404.
+4. **Sonuç ekranı:** düzenleme linki büyük (salt okunur kutu), "Save this link" uyarısı, **Copy link**, **Email it to myself**
+   (`mailto:` — alıcının kendi posta uygulamasını açar; platform e-posta GÖNDERMEZ), **Open my editor** → `/edit/<slug>?k=…` (G039).
+   Sonuç aynı sekmede `sessionStorage`'da tutulur (sayfa yenilenince link kaybolmaz); "Start another website" temizler.
+
+Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunulabilen tasarımların listesi. `internal` tema
+(`_sample`) sunulmaz.
+
+### Varsayımlar ve kurallar
+- **Sipariş numarası biçimi (VARSAYIM, Etsy API ile doğrulanmadı):** Etsy'de "Order #1234567890" (makbuz numarası), yalnız
+  rakam. Boşluk, `-`, `.`, baştaki `#` ve "Order"/"Order number:" atılır; kalan **8–12 ASCII rakam** olmalı (bugünkü numaralar
+  10 hane; aralık iki yöne pay bırakır). Değiştirmek: `ORDER_NUMBER_MIN/MAX` (`fields.ts`).
+- **Sipariş başına bir site:** aynı numara (biçimi farklı yazılsa da) ikinci kez → `409 order_used`, dostça mesaj:
+  "A website has already been started with this order number. Open it with the edit link you saved … message the shop on Etsy".
+  Yanıtta slug, e-posta, link ya da kayıt bilgisi **yok**; düz anahtar zaten saklanmadığı için yeniden gösterilemez.
+  Aynı süreçte eşzamanlı denemeler sipariş no başına kilitle sıralanır (test: 6 paralel istek → 1 site).
+- E-posta: basit biçim kontrolü (≤ 254), alan adı küçük harfe. İsim: harf içermeli, ≤ 40; görünmez/bidi karakterleri silinir.
+- Adres: `lib/slug.ts` kuralları (3–48, ayrılmış adlar). Adres sonradan değiştirilemez (panelde slug değiştirme yok) — form bunu söyler.
+- **Demo içeriği kaynağı:** önce `themes/<tema>/content.demo.json` (tema kendi demo kaydını taşır; tema varlık rotası `.json`
+  servis etmez), yoksa `lib/claim/demo/<tema>.json` (koleksiyon kaydının kopyası; `collections/` platform dışında olduğundan
+  statik `import` ile pakete girer). Şimdilik `blush-garden-rose` → `collections/03_Blush_Garden_Rose/content.demo.json`.
+  Kopya kaynağından saparsa test kırılır. Demo kaydı geçerli olmalı ve `record_kind: "demo"` taşımalı; değilse tema sunulmaz (log).
+
+### API
+
+| İstek | Yanıt |
+|---|---|
+| `POST /api/start` `application/json`, ≤ 4 KB: `{theme, orderNumber, email, names: [a, b], slug?, website?}` | `201 {ok, slug, status:"draft", editUrl, editPath, siteUrl, emailSent}` · `400 invalid (+fields: orderNumber/email/name1/name2/slug)` · `400 bad_json` · `403 order_not_verified` · `404 theme_unavailable` · `409 order_used` · `409 slug_taken (+fields.slug, suggestion)` · `413` · `415` · `429 rate_limited/busy (+Retry-After)` · `503 verification_unavailable` · `500` |
+| `GET /api/start/slug?value=<adres>` | `200 {ok, value, available, reason: null\|missing\|format\|reserved\|taken, message, suggestion}` · `429` |
+| `GET /start/demo/<tema>[/<sayfa>]` | temanın sayfası demo içerikle (HTML); `internal`/bilinmeyen/demo'suz tema, `index` alt yolu → 404 |
+
+Sıra (`lib/claim/claim.ts`): IP deneme sınırı → honeypot (`website` doluysa 400, kayıt yok) → tema → alan kontrolleri →
+*(sipariş kilidi)* kullanılmış sipariş → doğrulayıcı → adres (yazılan dolu ise 409 + öneri; boşsa isimlerden ilk boş adres) →
+oluşturma sınırları → `createSiteWithKeys` → e-posta arayüzü → 201. Yanıtlar `private, no-store`, `noindex`, `no-referrer`
+(link gövdede). `/start` sayfası `noindex` + `referrer: no-referrer`. Demo sayfaları önizleme kipinde (`previewKey: "demo"`):
+sayfalar arası linkler `/start/demo/<tema>/…?preview=demo` kalır, RSVP formu "preview" panelini gösterir ve gönderim yapmaz;
+CSP site ile aynı (`frame-ancestors 'self'`).
+
+**Hız sınırları** (`limits.ts`, `RateLimiter` arayüzü RSVP ile ortak; şimdilik süreç içi bellek): IP başına 10 deneme / 15 dk
+(yanlış numaralar da sayılır → tahmin yavaşlar), IP başına 5 site / 24 sa, toplam 300 site / sa (Etsy doğrulaması kapalıyken
+kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı limiter'ı `setClaimRateLimiter()` ile bağlamalı.
+
+### Arayüz noktaları (kapalı / yok)
+- **Etsy sipariş doğrulaması** (`verify.ts`): `OrderVerifier.check({orderNumber, email, theme})` →
+  `not_checked | verified | rejected(reason) | unavailable`. Varsayılan `FormatOnlyVerifier` (dış kontrol yok).
+  `CLAIM_ORDER_VERIFICATION=etsy` **uygulanmadı**: bilinçli olarak hata verir (sessizce atlamak yerine 500). Uygularken
+  doğrulanacaklar dosyanın başında (mağazanın makbuzu, ödenmiş mi, alıcı e-postası erişilebilir mi, ilan → tema eşlemesi,
+  çok ürünlü sipariş). Kodda `setOrderVerifier()` ile takılır.
+- **Düzenleme linkini e-postayla gönderme** (`mailer.ts`, `docs/10` §3): `EditLinkMailer` + `DisabledMailer` (varsayılan,
+  `enabled: false`). Sağlayıcı seçilince `setEditLinkMailer()`; arayüz "We will email your edit link" metnine kendiliğinden geçer.
+  Gönderim hatası sahiplenmeyi bozmaz (site var, link ekranda) ve link log'a yazılmaz (test).
+
+### Testler
+- `tests/claim.test.ts` (node:test, 17 test): sipariş no / e-posta / isim / adres kuralları; tema + demo kaynağı (kendi dosyası,
+  paket kopyası, internal/demo'suz/bozuk demo reddi, kopyanın koleksiyonla aynılığı); taslak içerik; 201 akışı (taslak, isimler,
+  `orderRef`, e-posta, anahtar yalnız hash — veri klasöründe düz anahtar yok, link panel API'sini açıyor, genel adres 404);
+  aynı sipariş → 409 ve sızıntı yok; 6 paralel istek → 1 site; adres (yazılan dolu → 409 + `-2` önerisi, boş → otomatik `-3`,
+  ayrılmış/biçimsiz); alan/tema/honeypot reddinde dosya yazılmıyor; 415/413/400; hız sınırları; doğrulayıcı (kapalı varsayılan,
+  `etsy` → hata, rejected 403 / unavailable 503 / verified 201); e-posta arayüzü (kapalı, sahte gönderici linki alır, hata 201'i
+  bozmaz ve link log'a girmez); adres ipucu API'si; demo sayfaları.
+- Tarayıcı (build gerekir; `npm test`'e dahil değil):
+  `npm run build && NODE_PATH=/opt/node22/lib/node_modules node tests/claim-browser.ts` — `next start` + Chromium 390 px
+  (isMobile, touch), fixture tema `sample-design` (= `_sample` kopyası + 03 demo kaydı): temasız/geçersiz link → canlı demo →
+  boş gönderimde alan hataları → doldur (adres isimleri izler, "Available") → oluştur → büyük link + "Save this link" + kopyala
+  (pano = link) → yenile (link duruyor) → **Open my editor → panel açılıyor** (isimler "Avery & Jordan", taslak) → aynı sipariş →
+  dostça mesaj, sızıntı yok → dolu adres `-2`'ye kayıyor / "Use …" önerisi → masaüstü yan yana. Ekran görüntüleri,
+  `start_flow_390.mp4` ve `checks.json` → `previews/g045/` (`CLAIM_SHOTS_DIR`, `PORT` (3314), `CLAIM_SLOWMO`).
+  `platform/themes/blush-garden-rose` (G038) dalda varsa onun başlat sayfası ve paneli de çekilir; yoksa `checks.json`'da not.
+
+### Açık konular
+- **Birden çok sunucu örneği:** sipariş kilidi süreç içi. G043: `sites(order_ref)` üzerinde benzersiz indeks (sipariş numaraları
+  için; seed'in `DEMO-SEED`'i hariç tutulabilir) ve ihlalin `order_used`'a çevrilmesi; kalıcı `RateLimiter`.
+- **Vercel dosya izleme:** `/start`, `/start/demo/…`, `/api/start` (ve panel rotaları `/edit/[slug]`, `/api/edit/…`) temaları
+  diskten okur; `next.config.ts` `outputFileTracingIncludes` şu an yalnız site rotalarını kapsıyor (G044'te eklenmeli; bu görevin
+  yazma alanı dışında).
+- **Kayıp link:** e-posta yok ve düz anahtar saklanmıyor → alıcı linki kaybederse kendisi kurtaramaz; mağazanın da aracı yok.
+  E-posta sağlayıcısı veya yönetici "yeni düzenleme linki üret" aracı gerekir.
+- **Çok ürünlü Etsy siparişi** (aynı siparişte iki tasarım): kural sipariş başına tek site; ikinci tasarım için Etsy API ile
+  kalem bazlı kontrol gerekir.
+- Etsy doğrulaması kapalıyken biçimi doğru herhangi bir numara bir taslak site açabilir (hız sınırları + honeypot dışında engel yok).
+- Gerçek telefonda (iOS Safari / Android Chrome) ve Vercel'de denenmedi; yalnız Chromium mobil emülasyonu ve `next start`.
+
 ## Güvenlik özeti
 
 - İçerik → HTML: yalnız metin düğümü/öznitelik değeri (parse5 serileştirici kaçışlar); `<script>`/`<style>` içine
@@ -390,7 +489,7 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
 
 ## Açık konular
 
-- Supabase adaptörü, Vercel yayını (kullanıcı onayı), `/start` → G043–G045. Panelin açık konuları yukarıda (G039).
+- Supabase adaptörü, Vercel yayını (kullanıcı onayı) → G043–G044. Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir.
 - `local` adaptör tek süreç içindir. RSVP hız sınırı da süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok

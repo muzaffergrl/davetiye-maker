@@ -1,0 +1,193 @@
+{
+  "base": "next start (production build)",
+  "viewport": "390x844 (isMobile, touch); desktop 1280x860",
+  "theme": "sample-design",
+  "notes": [
+    "platform/themes/blush-garden-rose is not on this branch yet (G038): only the fixture theme was used."
+  ],
+  "checks": [
+    {
+      "name": "/start without theme: 200 + design list",
+      "ok": true
+    },
+    {
+      "name": "/start without theme: internal _sample not offered",
+      "ok": true
+    },
+    {
+      "name": "/start?theme=_sample (internal): \"not valid\" page",
+      "ok": true
+    },
+    {
+      "name": "/start?theme=nope: \"not valid\" page",
+      "ok": true
+    },
+    {
+      "name": "start page: title",
+      "ok": true
+    },
+    {
+      "name": "start page: design name shown",
+      "ok": true
+    },
+    {
+      "name": "demo preview: live iframe shows the demo content",
+      "ok": true,
+      "detail": "YOU ARE INVITED\n\nClara & Julian\n\nSaturday, May 15, 2027\n\nOpen the invitation"
+    },
+    {
+      "name": "demo preview: iframe is /start/demo/<theme>",
+      "ok": true,
+      "detail": "/start/demo/sample-design"
+    },
+    {
+      "name": "demo preview: scaled mini iframe fits the phone",
+      "ok": true,
+      "detail": "{\"x\":86.796875,\"y\":129.078125,\"width\":218.39999389648438,\"height\":425.5999755859375}"
+    },
+    {
+      "name": "start page: no horizontal overflow at 390 px",
+      "ok": true
+    },
+    {
+      "name": "empty submit: 4 fields marked invalid, nothing sent",
+      "ok": true,
+      "detail": "4"
+    },
+    {
+      "name": "empty submit: focus moves to the order number",
+      "ok": true
+    },
+    {
+      "name": "order number format error shown",
+      "ok": true,
+      "detail": "Your Etsy order number has 8 to 12 digits, for example 1234567890."
+    },
+    {
+      "name": "address follows the names",
+      "ok": true
+    },
+    {
+      "name": "address hint: available",
+      "ok": true
+    },
+    {
+      "name": "no field errors once filled",
+      "ok": true
+    },
+    {
+      "name": "result: edit link shown",
+      "ok": true,
+      "detail": "http://127.0.0.1:3314/edit/avery-and-jordan?k=…"
+    },
+    {
+      "name": "result: \"Save this link\" warning",
+      "ok": true
+    },
+    {
+      "name": "result: says email is not sent yet",
+      "ok": true
+    },
+    {
+      "name": "result: focus on the heading",
+      "ok": true
+    },
+    {
+      "name": "result: link shown big (>= 16 px)",
+      "ok": true,
+      "detail": "16.8px"
+    },
+    {
+      "name": "result: no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "copy button: clipboard holds the edit link",
+      "ok": true
+    },
+    {
+      "name": "stored: draft site from the demo with the buyer names",
+      "ok": true
+    },
+    {
+      "name": "stored: order number as digits, owner email",
+      "ok": true
+    },
+    {
+      "name": "stored: edit key only as a hash",
+      "ok": true
+    },
+    {
+      "name": "public address is not live before Publish",
+      "ok": true
+    },
+    {
+      "name": "reload: edit link still shown",
+      "ok": true
+    },
+    {
+      "name": "editor opens with the edit link (panel, G039)",
+      "ok": true,
+      "detail": "Avery & Jordan"
+    },
+    {
+      "name": "editor: draft status",
+      "ok": true
+    },
+    {
+      "name": "back on /start: the saved link is shown again",
+      "ok": true
+    },
+    {
+      "name": "start another: form again, email kept",
+      "ok": true
+    },
+    {
+      "name": "second claim with the same order: friendly message",
+      "ok": true
+    },
+    {
+      "name": "second claim: no link or first address leaked",
+      "ok": true
+    },
+    {
+      "name": "second claim: no new site",
+      "ok": true
+    },
+    {
+      "name": "taken address: automatic one moves to -2",
+      "ok": true,
+      "detail": "Available. \"avery-and-jordan\" is taken, so we added a number."
+    },
+    {
+      "name": "typed taken address: \"already taken\" + suggestion button",
+      "ok": true
+    },
+    {
+      "name": "suggestion button fills the address",
+      "ok": true
+    },
+    {
+      "name": "second order: created at avery-and-jordan-2",
+      "ok": true
+    },
+    {
+      "name": "no console or page errors",
+      "ok": true
+    },
+    {
+      "name": "no horizontal overflow at the end",
+      "ok": true
+    },
+    {
+      "name": "desktop: preview left of the form",
+      "ok": true,
+      "detail": "{\"fBox\":{\"x\":189.203125,\"y\":49,\"width\":327.5999755859375,\"height\":638.3999633789062},\"formBox\":{\"x\":578,\"y\":160.078125,\"width\":520,\"height\":811.09375}}"
+    },
+    {
+      "name": "video: MP4 written",
+      "ok": true,
+      "detail": "previews/g045/start_flow_390.mp4"
+    }
+  ]
+}
