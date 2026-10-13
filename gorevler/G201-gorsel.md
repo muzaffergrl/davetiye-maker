@@ -131,7 +131,8 @@ testi bu görsel görevde yapılmadı. Entegratör durum dosyaları değiştiril
 **Kayıt yolu:** Main'e doğrudan push otomatik onay denetiminde açık kullanıcı
 izni bulunmadığı gerekçesiyle reddedildi. Çalışma
 `codex/g201-olive-ivory-website-assets` dalında taslak PR ile incelemeye
-sunulacak; main'e kaydedilmiş veya entegratörce onaylanmış sayılmaz.
+sunuldu: [Taslak PR #1](https://github.com/muzaffergrl/davetiye-maker/pull/1).
+Main'e kaydedilmiş veya entegratörce onaylanmış sayılmaz.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
