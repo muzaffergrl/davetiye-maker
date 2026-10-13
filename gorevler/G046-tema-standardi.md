@@ -2,8 +2,8 @@
 id: G046
 baslik: Tema standardı belgesi + GPT website parça listesi (Paket W)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-tema
 oncelik: 2
 bagimli: [G038]
 yazar: [docs/11_TEMA_STANDARDI.md, gorevler/roller/gpt-gorsel.md]
@@ -16,3 +16,6 @@ oturması gereken parçalar tek görselden kesilir).
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-13 alindi: wf-tema

@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 39 · alindi 1 · inceleme 0 · blokaj 296 · bitti 24 · toplam 360
+Özet: hazir 38 · alindi 3 · inceleme 0 · blokaj 296 · bitti 24 · toplam 361
 
 ## claude-canva
 
@@ -155,13 +155,15 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 ## claude-kod
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G046` p2 — Tema standardı belgesi + GPT website parça listesi (Paket W) → `gorevler/G046-tema-standardi.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (81)**
+**Üzerinde çalışılan / incelemede / blokaj (83)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
+- `G046` alindi · wf-tema — Tema standardı belgesi + GPT website parça listesi (Paket W)
+- `G051` alindi · wf-tema — Platform özellikleri — Takvime ekle, SSS metinleri, RSVP özel sorusu (pazar standardı, docs/13 §7)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
