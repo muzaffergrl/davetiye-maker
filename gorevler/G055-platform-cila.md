@@ -2,7 +2,7 @@
 id: G055
 baslik: Platform cilası — og:image + favicon, Vercel paket izleme, alıcı fotoğrafı srcset, içerik uzunluk sınırları (docs/11 §14 #6, #7, #9, #10)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-hazirlik
 oncelik: 2
 bagimli: [G046, G051]
@@ -139,3 +139,5 @@ blush-garden-rose` 73/73 (çıktı geçici klasöre; previews/g038 değişmedi),
 - 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): .ics public origin, x-forwarded-host son girdi, limits.ts, 8 px foto, panel notu + alan adlı uzunluk hataları, /start 40, og:image:alt, intro ipucu; g055-browser 138, g055-review 8
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-hazirlik, temiz origin/main worktree): npm ci, npm test 258/258, typecheck, build + trace-check (16 rota, ≤ 69 KB, varlık rotası 57 dosya), seed, g055-browser 138/138 — Sonuç'la tutarlı; README 'Açık konular' bayat satırı (uzayan kart denetimi) düzeltildi
+- 2026-10-13 entegratör onayladı
+- 2026-10-13 entegratör: name_display ≤ 85 sınırı onaylandı.

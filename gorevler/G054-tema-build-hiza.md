@@ -2,7 +2,7 @@
 id: G054
 baslik: tools/tema_build.py ortak tema yardımcıları + kit_check zarf hiza denetimi (docs/11 §14 #1–#2)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-hazirlik
 oncelik: 1
 bagimli: [G046]
@@ -130,3 +130,4 @@ koşturulsun (`closure_sprig.png` eksik — gpt-gorsel).
 - 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): tema_build cep_kes eğik/yapraklı/RGB parçada çökmüyor (uyarı), 03 davet kartı 3 dilim, tanıtım satırı sarıyor, docs/11 G052–G055'e göre güncel
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-hazirlik, temiz origin/main worktree): tools/tests 7/7 (test_tema_build: 03 yeniden üretimi 53 dosya bayt bayt aynı, 2,91 MB); kit_check 03 --paket 4 21/21 + hiza UYARI −4,55 % (olcekli), 03 --paket 5 'Kaydet satırı yok' (beklenen), 01 --paket 5 5/23 (W2 parçaları main'de yok) — Sonuç'la tutarlı; docs/11 §15 '22 madde' → 23
+- 2026-10-13 entegratör onayladı

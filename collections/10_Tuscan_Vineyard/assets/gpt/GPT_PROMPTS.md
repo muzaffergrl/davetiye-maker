@@ -91,7 +91,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three wine-label shaped frames lined up side by side on a rustic oak table, not overlapping, a few grapes and a silvery olive leaf resting beside them; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three wine-label shaped frames lined up side by side on a rustic oak table, not overlapping, a few grapes and a silvery olive leaf resting beside them; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First pour", "Among the vines", "A fine vintage". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Eski şarap etiketi biçimli (adsız) kartlar, ahşap masaya dizilir.
 
@@ -275,21 +275,21 @@ birine benzemesin; eller/parmaklar düzgün. Fotoğraflar köşeleri kesik şara
 Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other between vineyard rows on a sunny hillside at golden hour, cypress trees in the distance; she wears a flowing ivory silk slip dress, he wears a light tan linen suit with no tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
 ```
 
-### 2.2 Hikâye 1 — "First hello"
+### 2.2 Hikâye 1 — "First pour"
 **Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a rustic wooden table in a vineyard, two glasses of red wine and a loaf of bread, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
-### 2.3 Hikâye 2 — "The proposal"
+### 2.3 Hikâye 2 — "Among the vines"
 **Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment in a vineyard row under heavy grape vines at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
-### 2.4 Hikâye 3 — "Forever begins"
+### 2.4 Hikâye 3 — "A fine vintage"
 **Kaydet:** `collections/10_Tuscan_Vineyard/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```

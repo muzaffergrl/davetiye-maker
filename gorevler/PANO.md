@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 1 · inceleme 4 · blokaj 296 · bitti 26 · toplam 365
+Özet: hazir 38 · alindi 0 · inceleme 0 · blokaj 296 · bitti 31 · toplam 365
 
 ## claude-canva
 
@@ -155,16 +155,13 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 ## claude-kod
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G401` p2 — Tasarım 01 Olive & Ivory — platform teması → `gorevler/G401-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (84)**
+**Üzerinde çalışılan / incelemede / blokaj (81)**
 
-- `G054` inceleme · wf-hazirlik — tools/tema_build.py ortak tema yardımcıları + kit_check zarf hiza denetimi (docs/11 §14 #1–#2)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G052` inceleme · wf-hazirlik — Tarayıcı denetimlerini her temaya açmak — theme-check / g051-browser / final-smoke `--theme <id>` (G4NN'den önce)
-- `G055` inceleme · wf-hazirlik — Platform cilası — og:image + favicon, Vercel paket izleme, alıcı fotoğrafı srcset, içerik uzunluk sınırları (docs/11 §14 #6, #7, #9, #10)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -246,7 +243,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 19 · Biten: 18
+Bağımlılık bekleyen: 18 · Biten: 21
 
 ## claude-metin
 
@@ -254,10 +251,9 @@ Bağımlılık bekleyen: 19 · Biten: 18
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (22)**
+**Üzerinde çalışılan / incelemede / blokaj (21)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
-- `G053` inceleme · wf-hazirlik — Demo içerik kayıtları — 01'e tam adlar, 01/02/04–20'ye `story` (intro + 3 başlık)
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
@@ -279,7 +275,7 @@ Bağımlılık bekleyen: 19 · Biten: 18
 - `G720` blokaj · - — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
 - `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
-Bağımlılık bekleyen: 0 · Biten: 2
+Bağımlılık bekleyen: 0 · Biten: 3
 
 ## claude-qa
 
@@ -335,11 +331,10 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (49)**
+**Üzerinde çalışılan / incelemede / blokaj (48)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
-- `G201` alindi · gpt-gorsel-1 — Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
@@ -387,4 +382,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 3
+Bağımlılık bekleyen: 0 · Biten: 4

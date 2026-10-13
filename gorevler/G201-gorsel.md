@@ -2,7 +2,7 @@
 id: G201
 baslik: Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-codex-continue
 oncelik: 1
 bagimli: []
@@ -143,3 +143,5 @@ Main'e kaydedilmiş veya entegratörce onaylanmış sayılmaz.
 - 2026-10-13 devam: kullanıcının devam talebiyle gpt-gorsel-codex-continue; main'deki beş W1 referansı korunarak W2 ve Paket 2 üretimine devam ediliyor. Yeni açılış adayı yalnız /workspace/generated_images/ altında tutuldu, seçilen W1.1 değiştirilmedi.
 - 2026-10-13 W2 + Paket 2: 17 parça ve 5 JPEG üretildi; kapalı/açık zarf ve yatay çerçeve için üç düzeltme çağrısı yapıldı. Kit denetimleri 22/22 ve 5/5 geçti; saf yeşil, dış hale, foto oranı ve zarf hizası Sonuç'ta açık kusur olarak kaydedildi.
 - 2026-10-13 inceleme: dosyalar ve sonuç kaydı ayrı inceleme dalında; entegratör onayı/website montajı bekliyor.
+- 2026-10-13 entegratör onayladı
+- 2026-10-13 entegratör: teslim kabul edildi. closure.png mühür + zeytin dalı tek parça olarak kabul edildi (katalog WEB[1] buna göre düzeltildi, closure_sprig kaldırıldı; açılışta mühür ve dal kapakla birlikte kalkar). Yeşil pencere lekeleri ve dış hâle tema_build/parts_prep ile temizlenecek (G401).

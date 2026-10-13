@@ -91,7 +91,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three frosted wooden window frames in a row like the windows of a snowy mountain lodge, frost still clinging to their corners as if just wiped clear, a little snow on each sill; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three frosted wooden window frames in a row like the windows of a snowy mountain lodge, frost still clinging to their corners as if just wiped clear, a little snow on each sill; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First snowfall", "Under the pines", "Evergreen love". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Buğulu pencere camı çerçeveleri, buğu silinerek görünür.
 
@@ -275,21 +275,21 @@ birine benzemesin; eller/parmaklar düzgün. Fotoğraflar tek camlı ahşap penc
 Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other in a snowy pine forest at golden hour with gentle snowfall; she wears a long ivory wool coat over an elegant ivory dress, he wears a charcoal wool overcoat with a deep red scarf. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
 ```
 
-### 2.2 Hikâye 1 — "First hello"
+### 2.2 Hikâye 1 — "First snowfall"
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together with mugs of hot cocoa by a lodge window, snow falling outside, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
-### 2.3 Hikâye 2 — "The proposal"
+### 2.3 Hikâye 2 — "Under the pines"
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a snowy forest path under tall pines at dusk with soft falling snow: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
-### 2.4 Hikâye 3 — "Forever begins"
+### 2.4 Hikâye 3 — "Evergreen love"
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```

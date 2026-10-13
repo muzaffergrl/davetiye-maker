@@ -33,7 +33,7 @@ Görev: `gorevler/G201-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G801-*` (Pak
 > Üreten: `python3 tools/katalog.py paket5 --no 01` — değişiklik için `tools/katalog.py` → `WEB[1]`.
 
 **Bu tasarımın website açılışı** (kapaklı zarf; katalog: Zeytin yeşili dokulu kağıt zarf, fildişi dantel kenarlı V kapak, botanik oval mühür; kapak mühürle birlikte kalkar, kart yükselir):
-On tap, the olive sprig slides out from under the oval seal, the lace-edged flap peels up on its hinge carrying the seal with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.
+On tap, the lace-edged flap peels up on its hinge carrying the oval seal and its tucked olive sprig with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.
 
 **Instructions for GPT (read fully before starting):**
 - You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
@@ -91,7 +91,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three rounded-corner gold-bordered portrait cards fanned out gently like a hand of cards — the middle card upright and slightly higher, the side cards tilted about 8 degrees outward and overlapping it only at their outer ivory margins, so all three green windows stay fully visible and each caption sits under its own card; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three rounded-corner gold-bordered portrait cards fanned out gently like a hand of cards — the middle card upright and slightly higher, the side cards tilted about 8 degrees outward and overlapping it only at their outer ivory margins, so all three green windows stay fully visible and each caption sits under its own card; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "Our first lunch", "In the olive grove", "Simply forever". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler yalnız kenar paylarında üst üste; üç yeşil pencere tam görünür; diziliş: Yuvarlak köşeli ince altın çerçeveli kartlar, yelpaze gibi açılır.
 
@@ -114,7 +114,7 @@ Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı olive envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -144,9 +144,9 @@ Kontrol: tek nesne; oval botanical seal yok; kesilmemiş; gölge yok; gerçek al
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only the oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms — WITHOUT the olive sprig that is tucked under it in the W1 screens (the sprig is a separate image, closure_sprig.png), alone, exactly as it sits on the olive envelope in the W1 screens (pressed onto the tip of the V flap, a little below the envelope's center), drawn large so it fills about 50% of the square (Claude scales it to the olive envelope), with the same perspective, material and light as on the olive envelope and with no olive envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only an oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms, a short olive sprig tucked under it, alone, exactly as it sits on the olive envelope in the W1 screens (pressed onto the tip of the V flap, a little below the envelope's center), drawn large so it fills about 70% of the square (Claude scales it to the olive envelope), with the same perspective, material and light as on the olive envelope and with no olive envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız oval botanical seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%50 dolduruyor; gölge yok; alfa; zeytin dalı YOK (ayrı parça: closure_sprig.png); kare kenarlarında dal için boşluk var.
+Kontrol: yalnız oval botanical seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
@@ -244,15 +244,7 @@ A small horizontal divider in the same soft watercolor style: a single slender o
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Mührün altındaki zeytin dalı (tek başına, açılışta kayar)
-**Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/closure_sprig.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-The short olive sprig that is tucked under the oval seal on the olive envelope in the W1 screens, alone and COMPLETE — including the part of its stem and leaves that the seal hides there, as if the seal had been lifted off it. The seal itself is NOT drawn. Draw it on a square canvas exactly like closure.png and give closure.png as the reference image: same scale, and placed exactly where the sprig lies under the seal there, so that closure.png laid on top of this image covers the middle of the sprig pixel for pixel. The whole sprig stays inside the square with an empty margin. Same watercolor technique, colors and light as the W1 screens. Front view, perfectly straight, not cropped. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: yalnız dal (mühür yok); mührün altında kalan sap ve yapraklar da çizili; closure.png üstüne konunca mühür dalın ortasını örtüyor; kareden taşmıyor; gölge yok; alfa.
-
-#### W2.18 Website hero + paylaşım görseli (og:image kaynağı)
+#### W2.17 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
@@ -275,21 +267,21 @@ birine benzemesin; eller/parmaklar düzgün. Fotoğraflar yuvarlak köşeli dike
 Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other beneath old silvery olive trees in a sunlit Mediterranean-style garden at golden hour; she wears a flowing ivory chiffon dress, he wears a light sage-grey linen suit with no tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
 ```
 
-### 2.2 Hikâye 1 — "First hello"
+### 2.2 Hikâye 1 — "Our first lunch"
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a rustic outdoor table under an olive tree, two glasses of lemonade and a small bowl of olives, warm afternoon light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
-### 2.3 Hikâye 2 — "The proposal"
+### 2.3 Hikâye 2 — "In the olive grove"
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a gravel path through an olive grove at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
-### 2.4 Hikâye 3 — "Forever begins"
+### 2.4 Hikâye 3 — "Simply forever"
 **Kaydet:** `collections/01_Olive_Ivory/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```

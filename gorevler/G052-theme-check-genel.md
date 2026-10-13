@@ -2,7 +2,7 @@
 id: G052
 baslik: Tarayıcı denetimlerini her temaya açmak — theme-check / g051-browser / final-smoke `--theme <id>` (G4NN'den önce)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-hazirlik
 oncelik: 2
 bagimli: [G046, G051]
@@ -155,3 +155,4 @@ Bunun dışında tema standart işaretleri taşımalı: `.stage`, `a[data-skip]`
 - 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): uzayan kart piksel testi + kutu dışı satır hata, kırpılan metin denetimi, --stress (§12 zorlama kaydı), port doluysa durur; 03 74/74
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-hazirlik, temiz origin/main worktree): theme-check --theme blush-garden-rose 74/74 (video dahil), --stress --no-video 79/20 (03 index + rsvp, §14 #15), _sample 33/28/11 (video açık: +1 recording hata), g051-browser 44/44, final-smoke 42/42 — Sonuç'la tutarlı
+- 2026-10-13 entegratör onayladı

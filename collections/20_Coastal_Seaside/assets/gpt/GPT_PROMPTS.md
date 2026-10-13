@@ -91,7 +91,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three round brass portholes stacked down the page in a gentle zig-zag (left, right, left) on the soft sea-mist page, a few shells and sea glass between them; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three round brass portholes stacked down the page in a gentle zig-zag (left, right, left) on the soft sea-mist page, a few shells and sea glass between them; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "Down by the harbor", "By the lighthouse", "Tide after tide". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Yuvarlak gemi lombozu (porthole) çerçeveler, kenardan kayar.
 
@@ -275,21 +275,21 @@ birine benzemesin; eller/parmaklar düzgün. Fotoğraflar yuvarlak lomboz çerç
 Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on a sandy dune path beside a weathered split-rail fence and blue hydrangeas at golden hour, the ocean behind; she wears a flowing white chiffon dress, he wears a light blue linen suit with no tie, sleeves rolled. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
-### 2.2 Hikâye 1 — "First hello"
+### 2.2 Hikâye 1 — "Down by the harbor"
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a weathered picnic table on a harbor dock, two iced teas and a paper basket of fried clams, sailboats softly blurred behind, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
-### 2.3 Hikâye 2 — "The proposal"
+### 2.3 Hikâye 2 — "By the lighthouse"
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on the beach near a white lighthouse at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
-### 2.4 Hikâye 3 — "Forever begins"
+### 2.4 Hikâye 3 — "Tide after tide"
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```

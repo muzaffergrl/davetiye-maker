@@ -503,10 +503,8 @@ WEB = {
         zarf_acik="the lace-edged V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — {liner}; the front pocket empty",
         kapanis="an oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms, a short olive sprig tucked under it",
         kapanis_kisa="oval botanical seal", kapanis_yeri="pressed onto the tip of the V flap, a little below the envelope's center", kapanis_olcu="1024×1024",
-        # W2: the seal WITHOUT its sprig (the sprig slides out on its own in the opening: closure_sprig.png below)
-        kapanis_parca="the oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms — WITHOUT the olive sprig that is tucked under it in the W1 screens (the sprig is a separate image, closure_sprig.png)",
-        kapanis_doluluk=50, kapanis_k_ek="; zeytin dalı YOK (ayrı parça: closure_sprig.png); kare kenarlarında dal için boşluk var",
-        acilis="On tap, the olive sprig slides out from under the oval seal, the lace-edged flap peels up on its hinge carrying the seal with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.",
+        # W2 (G201 teslimi, entegratör 2026-10-13): mühür ve altındaki zeytin dalı TEK parça; açılışta birlikte kalkar
+        acilis="On tap, the lace-edged flap peels up on its hinge carrying the oval seal and its tucked olive sprig with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.",
         kart_kucuk="a small warm-ivory card with softly rounded corners and a fine antique-gold double border, a rounded-corner portrait photo window in its upper 60% and plain blank paper below",
         davet_karti="a tall warm-ivory cotton card with softly rounded corners and a fine antique-gold double border, a slender watercolor olive branch with silvery leaves and small dark olives arching across the top-left corner and a smaller sprig at the bottom-right",
         bilgi_karti="a tall warm-ivory card with softly rounded corners, a fine antique-gold double border and only one small olive sprig at the top center",
@@ -515,10 +513,6 @@ WEB = {
         cerceve_yatay="a landscape version of the same rounded-corner ivory card frame with the fine antique-gold double border and a tiny olive sprig at its bottom-left corner",
         story="three rounded-corner gold-bordered portrait cards fanned out gently like a hand of cards — the middle card upright and slightly higher, the side cards tilted about 8 degrees outward and overlapping it only at their outer ivory margins, so all three green windows stay fully visible and each caption sits under its own card",
         story_ortusme=True,
-        ekler=[("parts/closure_sprig.png", "1024×1024", True, "Mührün altındaki zeytin dalı (tek başına, açılışta kayar)",
-                "The short olive sprig that is tucked under the oval seal on the olive envelope in the W1 screens, alone and COMPLETE — including the part of its stem and leaves that the seal hides there, as if the seal had been lifted off it. The seal itself is NOT drawn. Draw it on a square canvas exactly like closure.png and give closure.png as the reference image: same scale, and placed exactly where the sprig lies under the seal there, so that closure.png laid on top of this image covers the middle of the sprig pixel for pixel. The whole sprig stays inside the square with an empty margin. Same watercolor technique, colors and light as the W1 screens.",
-                "yalnız dal (mühür yok); mührün altında kalan sap ve yapraklar da çizili; closure.png üstüne konunca mühür dalın ortasını örtüyor; kareden taşmıyor; gölge yok; alfa",
-                "Front view, perfectly straight, not cropped.")],
         accent=["silvery-green olive leaf", "small ripe dark olive with a short stem and one tiny leaf", "tiny white jasmine blossom"],
         kume="decor",
         doku="soft warm-ivory watercolor paper (#F1EFE6) with faint linen grain and very subtle tonal mottling",

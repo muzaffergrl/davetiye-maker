@@ -91,7 +91,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three oval gold-leaf frames tied at different points along one long burgundy velvet ribbon swag that drapes in a gentle curve across a warm candlelit wall like a garland, each frame swaying slightly; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three oval gold-leaf frames tied at different points along one long burgundy velvet ribbon swag that drapes in a gentle curve across a warm candlelit wall like a garland, each frame swaying slightly; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "By the fire", "Falling leaves", "Hand in hand". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Varak altın oval çerçeveler tek bir kadife kurdele girlandına bağlı, sallanır.
 
@@ -275,21 +275,21 @@ birine benzemesin; eller/parmaklar düzgün. Fotoğraflar dikey oval çerçevele
 Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other in an autumn garden under copper and gold trees at golden hour; she wears a deep burgundy velvet long-sleeve gown, he wears a charcoal three-piece suit with a burgundy tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
-### 2.2 Hikâye 1 — "First hello"
+### 2.2 Hikâye 1 — "By the fire"
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together by a crackling stone fireplace in a cozy inn, two mugs of hot cider, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
-### 2.3 Hikâye 2 — "The proposal"
+### 2.3 Hikâye 2 — "Falling leaves"
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
 Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a path covered in fallen autumn leaves under copper trees at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
-### 2.4 Hikâye 3 — "Forever begins"
+### 2.4 Hikâye 3 — "Hand in hand"
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
