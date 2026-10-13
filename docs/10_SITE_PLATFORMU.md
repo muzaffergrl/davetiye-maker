@@ -32,6 +32,15 @@ düzenler. Bu belge platformun tek kaynağıdır.
 - Doğrulama: platform sitelerinde `urls.website` ve `urls.rsvp_form` boş olabilir (site ve RSVP platformun kendisi) — bu uyarılar
   platform kayıtları için kapatılır (G039).
 
+## 2c. Canlı veri — ilk sürüm (kullanıcı, 2026-10-13: "Supabase olmasa şimdilik olmaz mı?")
+- İlk sürüm **Supabase'siz**: veri ve fotoğraflar Vercel'in kendi depolamasında (Vercel Blob) — `blob` adaptörü (G048).
+  Site kaydı `sites/<id>.json` + `slugs/<slug>.json` + `orders/<sipariş>.json` dizinleri; her RSVP ayrı dosya
+  (`rsvps/<site>/<id>.json`, yazma çakışması yok); fotoğraflar `media/<site>/...`. Düşük hacim için yeterli.
+- Satış hacmi artınca Supabase/Postgres adaptörü (G043) ile değiştirilir; adaptör arayüzü aynı kalır.
+- Durum (2026-10-13): Supabase projesi açma oturum izin denetiminde reddedildi; Vercel bağlantısı proje açamıyor (403).
+  Vercel çözülmeden canlı yayın yok. Demo tasarım 03, statik önizleme olarak claude.ai sayfasında:
+  https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
+
 ## 3. Açık konular (kullanıcı / sonra)
 - **Barındırma ve maliyet:** bağlı hesaplar Vercel (`daimonflora-gmailcom's projects`) ve Supabase
   (`dflora27's Org`, içinde ilgisiz 2 proje var — dokunulmaz). Yeni Supabase projesi / Vercel projesi açmak

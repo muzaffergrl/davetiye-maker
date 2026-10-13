@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 39 · alindi 1 · inceleme 3 · blokaj 297 · bitti 18 · toplam 358
+Özet: hazir 39 · alindi 2 · inceleme 3 · blokaj 297 · bitti 18 · toplam 359
 
 ## claude-canva
 
@@ -155,9 +155,9 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## claude-kod
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G048` p1 — Vercel Blob veri adaptörü — Supabase'siz ilk canlı sürüm (siteler, RSVP, fotoğraflar) → `gorevler/G048-blob-adaptoru.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (86)**
 
@@ -315,9 +315,8 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (19)**
+**Alınabilir (18)**
 
-- `G201` p1 — Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G201-gorsel.md`
 - `G204` p1 — Tasarım 04 Vintage Airmail Love Letter — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G204-gorsel.md`
 - `G205` p1 — Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G205-gorsel.md`
 - `G202` p2 — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G202-gorsel.md`
@@ -337,10 +336,11 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (48)**
+**Üzerinde çalışılan / incelemede / blokaj (49)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
+- `G201` alindi · gpt-gorsel-1 — Tasarım 01 Olive & Ivory — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
