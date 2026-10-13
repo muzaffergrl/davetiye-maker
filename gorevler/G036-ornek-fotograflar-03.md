@@ -2,8 +2,8 @@
 id: G036
 baslik: Tasarım 03 — örnek çift ve mekân fotoğrafları (Paket 2, website demosu)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-1
 oncelik: 1
 bagimli: []
 yazar: [collections/03_Blush_Garden_Rose/assets/gpt/photos/]
@@ -26,3 +26,6 @@ kendi fotoğraflarını koyar; bunlar demo ve Etsy ilanı içindir.
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-13 alindi: gpt-gorsel-1
