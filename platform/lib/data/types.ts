@@ -1,5 +1,6 @@
 // Data adapter contract. Application code talks to this interface only;
-// `local` (lib/data/local) is for development/tests, `supabase` (G043) for production.
+// `local` (lib/data/local) is for development/tests, `blob` (lib/data/blob, Vercel Blob, G048)
+// for the first live version, `supabase` (G043) later.
 // Adapters are storage only: key generation, slug rules and content validation
 // happen before the adapter is called (lib/sites.ts). Adapters MUST:
 //  - keep slugs unique (createSite throws SlugTakenError),
@@ -81,12 +82,16 @@ export interface StoredFile {
 }
 
 export interface DataAdapter {
-  readonly kind: 'local' | 'supabase';
+  readonly kind: 'local' | 'blob' | 'supabase';
   getSiteById(id: string): Promise<SiteRecord | null>;
   getSiteBySlug(slug: string): Promise<SiteRecord | null>;
   /** Sites claimed with an Etsy order reference (for the one-site-per-order rule, G045). */
   findSitesByOrderRef(orderRef: string): Promise<SiteRecord[]>;
-  /** Throws SlugTakenError if the slug exists. Status starts as "draft". */
+  /**
+   * Throws SlugTakenError if the slug exists. Status starts as "draft".
+   * Adapters with an order index (blob) also throw OrderRefTakenError when another site already
+   * has this orderRef; `local` does not check (lib/claim serialises claims per order in-process).
+   */
   createSite(input: NewSite): Promise<SiteRecord>;
   /** Replaces the draft content (autosave). Does not touch publishedContent. Throws NotFoundError. */
   updateContent(id: string, content: ContentRecord): Promise<SiteRecord>;
@@ -102,7 +107,7 @@ export interface DataAdapter {
   listRsvps(siteId: string): Promise<RsvpRecord[]>;
   /** Validates the image (assertImageUpload) and stores it. Throws UploadRejectedError / NotFoundError. */
   savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto>;
-  /** Only adapters that serve photos through /media/... implement this (local). */
+  /** Only adapters that serve photos through /media/... implement this (local, blob). */
   readPhoto?(path: string): Promise<StoredFile | null>;
 }
 
@@ -110,6 +115,21 @@ export class SlugTakenError extends Error {
   constructor(slug: string) {
     super(`Slug "${slug}" is already taken`);
     this.name = 'SlugTakenError';
+  }
+}
+
+export class OrderRefTakenError extends Error {
+  constructor(orderRef: string) {
+    super(`Order reference "${orderRef}" already has a site`);
+    this.name = 'OrderRefTakenError';
+  }
+}
+
+/** A conditional write kept losing to concurrent writers (blob: ETag mismatch on every retry). */
+export class WriteConflictError extends Error {
+  constructor(what: string) {
+    super(`${what} was changed concurrently; please retry`);
+    this.name = 'WriteConflictError';
   }
 }
 

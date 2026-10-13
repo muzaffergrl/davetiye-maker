@@ -15,12 +15,13 @@
 //   9. create the draft (createSiteWithKeys), email stub    -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
 //
 // One website per order number is enforced here with findSitesByOrderRef + an in-process lock.
-// Several server instances (Vercel) need a database guarantee as well: G043 should add a unique
-// index on sites(order_ref) for order numbers and map its violation to "order_used".
+// Several server instances (Vercel) need a storage guarantee as well: the blob adapter (G048) keeps
+// an orders/<number>.json index created only if absent and throws OrderRefTakenError, mapped to
+// "order_used" below; G043 (Supabase) should do the same with a unique index on sites(order_ref).
 
 import { randomInt } from 'node:crypto';
 import type { ContentRecord } from '../content/types.ts';
-import { SlugTakenError, type DataAdapter } from '../data/types.ts';
+import { OrderRefTakenError, SlugTakenError, type DataAdapter } from '../data/types.ts';
 import { defaultInitials, defaultNameDisplay } from '../panel/model.ts';
 import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
 import { createSiteWithKeys } from '../sites.ts';
@@ -257,6 +258,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
       try {
         created = await createSiteWithKeys(adapter, { slug, theme: theme.id, content, orderRef: orderNumber, ownerEmail: email });
       } catch (e) {
+        if (e instanceof OrderRefTakenError) return claimError(409, 'order_used'); // another server instance won the race
         if (!(e instanceof SlugTakenError)) throw e;
         // Someone took the address between the check and the write.
         if (requestedSlug || tries >= 2) return taken(slug);

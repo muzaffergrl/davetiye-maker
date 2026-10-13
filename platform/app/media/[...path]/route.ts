@@ -1,4 +1,4 @@
-// /media/<siteId>/<file> — photos stored by the local adapter (production storage serves its own URLs).
+// /media/<siteId>/<file> — photos of adapters that implement readPhoto (local; blob = private Vercel Blob store).
 import { serveLocalMedia } from '../../../lib/site/static.ts';
 
 export const dynamic = 'force-dynamic';

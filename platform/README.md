@@ -1,8 +1,9 @@
 # platform/ — düğün sitesi platformu (K24, G037 iskeleti)
 
 Alıcının sitesi bizim platformumuzda yayınlanır ve panelden düzenlenir (`docs/10_SITE_PLATFORMU.md` tek kaynak).
-Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru**, veri adaptörü (`local`),
-site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042), `/start` sahiplenme akışı (G045) ve testler. Supabase (G043) sonraki görev.
+Bu klasör: Next.js (App Router, TypeScript) uygulaması, **tema şablon motoru**, veri adaptörleri (`local`; ilk canlı sürüm için
+Vercel Blob = `blob`, G048), site rotaları, içerik doğrulama, düzenleme paneli (G039), RSVP (G042), `/start` sahiplenme akışı (G045)
+ve testler. Supabase (G043) satış hacmi artınca.
 
 Durum: yerelde çalışıyor ve test edildi. **Hiçbir yere yayınlanmadı** (Vercel/Supabase projesi yok).
 
@@ -13,9 +14,9 @@ Node ≥ 22.18 (TypeScript dosyaları `node` ile doğrudan çalışır; ek araç
 ```bash
 cd platform
 npm ci                 # bağımlılıklar
-npm run seed           # .data/ içine demo site: /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar)
+npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör, rotalar, RSVP, panel, /start, blush-garden-rose teması (147 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması (178 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -28,7 +29,9 @@ Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).
 `npm run screenshot` geçici bir veri klasörü kullanır; global Playwright (`/opt/node22/lib/node_modules`) ve
 `/opt/pw-browsers` tarayıcılarıyla çalışır, `playwright install` çalıştırmaz.
 
-Ortam değişkenleri: `DATA_ADAPTER` (`local` varsayılan; `supabase` = G043), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`),
+Ortam değişkenleri: `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob, aşağıda; `supabase` = G043, yok),
+`BLOB_READ_WRITE_TOKEN` (yalnız `blob`: **private** Blob deposunun anahtarı; Vercel depo projeye bağlanınca kendisi ekler; repoya
+ve log'a yazılmaz), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`; `blob`'da yalnız seed'in `seed-keys.json`'u),
 `PLATFORM_THEMES_DIR` (varsayılan `platform/themes`), `PLATFORM_PUBLIC_URL` (sitelerin herkese açık kökü, ör. `https://<ad>.vercel.app`;
 panelin yayın linki ve QR'ı için; yoksa isteğin host'u kullanılır).
 
@@ -39,7 +42,7 @@ app/
   [slug]/route.ts                  /<slug>                → temanın index sayfası (kapalı zarf)
   [slug]/[page]/route.ts           /<slug>/home|story|details|rsvp
   themes/[theme]/[...path]/route.ts  tema CSS/JS/görselleri (html ve theme.json servis edilmez)
-  media/[...path]/route.ts         local adaptörün yüklediği fotoğraflar
+  media/[...path]/route.ts         adaptörün yüklediği fotoğraflar (local; blob = private depo)
   layout.tsx, page.tsx             platform sayfaları için kök
   edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039); geçersiz link = genel 404
   api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır
@@ -53,7 +56,7 @@ lib/
   content/schema.ts                docs/03_URUN_ICERIK_SEMASI.json'ın birebir kopyası (test farkı yakalar)
   content/validate.ts              tools/validate_content.py'nin TS aynası (şema + iş kuralları)
   content/format.ts, derive.ts     "June 12, 2027", "4:00 PM", türetilmiş alanlar, sayaç UTC'si
-  data/types.ts                    DataAdapter sözleşmesi;  data/local/ = JSON dosya uygulaması
+  data/types.ts                    DataAdapter sözleşmesi;  data/local/ = JSON dosya uygulaması;  data/blob/ = Vercel Blob (G048)
   sites.ts                         site oluştur (anahtar + slug + doğrulama), yayınla, erişim kontrolü
   keys.ts, slug.ts, uploads.ts     anahtar hash'i, ayrılmış slug'lar, foto tür/boyut kontrolü
   site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar
@@ -99,9 +102,13 @@ interface DataAdapter {
   deleteSite(id)                 // site + RSVP + fotoğraflar
   saveRsvp(siteId, input), listRsvps(siteId)
   savePhoto(siteId, {bytes})     // assertImageUpload: JPG/PNG/WebP/AVIF, ≤ 10 MB, tür baytlardan
-  readPhoto?(path)               // yalnız /media/... üzerinden servis eden adaptör (local)
+  readPhoto?(path)               // /media/... üzerinden servis eden adaptörler (local, blob)
 }
 ```
+
+Hatalar: `SlugTakenError`, `NotFoundError`; `OrderRefTakenError` (sipariş no dizini olan adaptör — `blob` — aynı `orderRef`'le
+ikinci siteyi reddeder; `/start` bunu `409 order_used`'a çevirir; `local` kontrol etmez), `WriteConflictError` (`blob`: eşzamanlı
+yazanlar her denemede önde kaldı).
 
 Kurallar: adaptör yalnız depolamadır; anahtar üretimi, slug kuralı ve içerik doğrulaması `lib/sites.ts`'te.
 Düz anahtar asla saklanmaz. Dönen kayıtlar kopyadır. Supabase şeması (G043) şu alanları taşımalı:
@@ -113,6 +120,57 @@ preview_key_hash, order_ref, owner_email, created_at, updated_at, published_at)`
 `local` uygulaması: `.data/sites/<id>.json`, `.data/slugs/<slug>.json` (O_EXCL ile benzersizlik),
 `.data/rsvps/<siteId>.json`, `.data/uploads/<siteId>/<rastgele>.<uzantı>`. Atomik yazma, süreç içi kilit.
 Tek sunucu süreci içindir; canlı kullanım için değildir.
+
+### `blob` adaptörü (G048, `lib/data/blob/`) — ilk canlı sürüm, Supabase'siz
+
+`DATA_ADAPTER=blob` + `BLOB_READ_WRITE_TOKEN`. `@vercel/blob` **2.8.0** (sabit). Bütün veri **tek, private** bir Vercel Blob deposunda:
+
+```
+sites/<id>.json                           SiteRecord + "version" (her yazışta +1)
+slugs/<slug>.json                         {"id"}   allowOverwrite:false ile yazılır → slug benzersiz
+orders/<sipariş no>.json                  {"id"}   aynı kural → sipariş başına tek site (olağan dışı ref → "h-<sha256>")
+rsvps/<siteId>/<ms>-<sıra>-<rsvpId>.json  her RSVP ayrı dosya (oku-değiştir-yaz yok → misafirler birbirini ezmez)
+media/<siteId>/<rastgele32hex>.<uzantı>   fotoğraflar; ziyaretçiye /media/<siteId>/<dosya> rotasından (readPhoto)
+```
+
+- **Benzersizlik:** önce dizin dosyası "varsa yazma" ile yazılır (SDK `allowOverwrite: false`; var olan yol `BlobError` →
+  dosya okunup doğrulanır → "alınmış"), sonra site. Site yazılamazsa dizinler `ifMatch` ile geri silinir. Çöken bir örneğin
+  bıraktığı, sitesi olmayan dizin 15 dk sonra geri alınır (bir Vercel fonksiyonunun en uzun çalışma süresinden fazla: hâlâ
+  süren bir oluşturmanın dizini elinden alınmaz). SDK'nın kendi yeniden denemesinde kendi dizinimiz "alınmış" sayılmaz.
+- **Sürüm / iyimser kilit:** güncelleme = oku (ETag) → değiştir → `put(ifMatch: ETag)`. Arada başkası yazdıysa
+  `BlobPreconditionFailedError` → taze veriyle yeniden (en çok 6 deneme, artan bekleme) → yine olmazsa `WriteConflictError`.
+  Aynı süreçte aynı siteye yazılar ayrıca sıraya girer. Silinmiş site yanlışlıkla geri yazılmaz (ETag tutmaz → `NotFoundError`).
+- **Önbellek:** JSON okumaları `useCache: false` (CDN kopyası üzerine yazmadan sonra 60 sn'ye kadar eski kalabilir; private
+  depoda doğrudan kaynaktan okunur). Fotoğraflar değişmez (rastgele ad) → CDN'den okunabilir.
+- **Gizlilik:** site kaydı (anahtar hash'leri, sahip e-postası, taslak) ve RSVP'ler misafir verisi → depo **private olmalı**.
+  Depo erişimi (public/private) depo **açılırken** seçilir; tek depoda ikisi birlikte kullanılamadığı varsayıldı (belgeler depo türü
+  olarak anlatıyor; karışık kullanım denenmedi). Bu yüzden fotoğrafların doğrudan public Blob URL'si yok: ziyaretçi `/media/...`
+  rotasından alır (`Cache-Control: public, max-age=31536000, immutable`). Bedeli: önbellekte olmayan her foto isteği bir fonksiyon
+  çağrısı + Blob okuması. Hacim artarsa: ayrı public foto deposu (ikinci token) ya da imzalı URL.
+- **Token** yalnız `lib/data/index.ts`'te ortamdan okunur, adaptörde private alanda durur (`inspect`/`JSON.stringify`'da görünmez),
+  hata mesajlarına girmez. Token yoksa `DATA_ADAPTER=blob` açık bir yapılandırma hatası verir (500). Vercel OIDC + `BLOB_STORE_ID`
+  SDK üzerinden çalışır (denenmedi).
+- **Maliyet / hız (düşük hacim için yeterli):** sayfa görüntüleme = 2 kaynak okuması (slug + site); RSVP listesi = 1 `list` + RSVP
+  başına 1 okuma (8'li paralel); misafir yanıtı = liste (çift gönderim kontrolü) + 1 yazma. `list` "gelişmiş işlem" olarak
+  ücretlenir. Satış hacmi artınca G043 (Postgres).
+- **Seed:** `DATA_ADAPTER=blob BLOB_READ_WRITE_TOKEN=… npm run seed` aynı depoya yazar; anahtarlar yerel `.data/seed-keys.json`'a.
+  Seed sitelerinin sipariş referansı `DEMO-SEED-<slug>` (blob sipariş referansını tekil tutar).
+
+Testler: `tests/adapter.test.ts` sözleşme testleri **iki adaptörde de** koşar (local = geçici klasör, blob = `tests/fake-blob.ts`
+bellek içi SDK sahtesi). `tests/blob-adapter.test.ts` (21 test): sahtenin istemci tarafı hatalarının gerçek SDK 2.8.0 ile birebir
+aynı olduğu, üzerine yazma/ETag/kimlik/list sayfalama davranışı; birden çok sunucu örneğinde slug ve sipariş yarışı (tek kazanan,
+artık dizin yok), başarısız yazmada dizinlerin geri alınması, öksüz dizin, kayıp yanıt; sürüm çakışması (eşzamanlı yazanlar,
+araya giren yazma, sürekli çakışma → `WriteConflictError`, silinmiş site); `useCache:false` (gecikmeli CDN kopyası servis edilmez);
+RSVP (her biri ayrı dosya, 3 örnekten eşzamanlı 30 yanıt, sayfalı liste, aynı milisaniye sırası); foto (private, `media/`, okuma);
+her çağrı private + token'lı, token görünmez; `getDataAdapter` seçimi; `/start` yarışı → `409 order_used`; yayın → misafir RSVP →
+çift özeti/CSV; seed. Sahtenin kasıtlı bozulmalarla (önbellek, üzerine yazma, ETag'siz yazma, sıralama, sayfalama) testleri
+kırdığı kontrol edildi.
+
+**Gerçek Vercel Blob'a karşı denenmedi** (token/depo yok; Vercel proje açamıyor, docs/10 §2c). Doğrulanmamış varsayımlar:
+`allowOverwrite: false` ve `ifMatch`'in sunucuda atomik olması; var olan yol hatasının metni ("This blob already exists …" —
+adaptör metne değil okumaya güvenir); depo türünün tek erişimli olması; `list`'in yazmadan hemen sonra yeni dosyayı göstermesi
+(göstermezse 5 dk çift yanıt kontrolü kaçırabilir); `del` + `ifMatch`'in yok olan dosyada davranışı. G044'te ilk iş: gerçek
+private depoda bu testlerin kısa bir canlı karşılığını koşmak.
 
 ## Tema biçimi
 
@@ -423,6 +481,7 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
 - Gerçek telefonda (iOS Safari / Android Chrome) denenmedi; yalnız Chromium mobil emülasyonu. HEIC yalnız onu çözebilen tarayıcıda
   (Safari) açılır; Chrome'da açık hata mesajı çıkar. QR telefon kamerasıyla okutulmadı (ekran görüntüsünden `jsqr` ile çözüldü).
 - `local` adaptör tek süreçlidir; çakışma kontrolü (`baseUpdatedAt`) oku-karşılaştır-yaz, atomik değil (Supabase'de koşullu UPDATE).
+  `blob` kaydı ETag ile bozulmadan korur, ama panelin `baseUpdatedAt` karşılaştırması ile yazma arasındaki kısa aralık yine atomik değil.
 
 ## /start sahiplenme akışı (G045)
 
@@ -506,8 +565,9 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
   `platform/themes/blush-garden-rose` (G038) dalda varsa onun başlat sayfası ve paneli de çekilir; yoksa `checks.json`'da not.
 
 ### Açık konular
-- **Birden çok sunucu örneği:** sipariş kilidi süreç içi. G043: `sites(order_ref)` üzerinde benzersiz indeks (sipariş numaraları
-  için; seed'in `DEMO-SEED`'i hariç tutulabilir) ve ihlalin `order_used`'a çevrilmesi; kalıcı `RateLimiter`.
+- **Birden çok sunucu örneği:** sipariş kilidi süreç içi. `blob` (G048): `orders/<no>.json` dizini "varsa yazma" ile → aynı
+  siparişle ikinci site oluşmaz, yarışı kaybeden `409 order_used` alır. G043: `sites(order_ref)` üzerinde benzersiz indeks ve aynı
+  çeviri. Kalıcı `RateLimiter` hâlâ yok (aşağıda).
 - **Vercel dosya izleme:** `/start`, `/start/demo/…`, `/api/start` (ve panel rotaları `/edit/[slug]`, `/api/edit/…`) temaları
   diskten okur; `next.config.ts` `outputFileTracingIncludes` şu an yalnız site rotalarını kapsıyor (G044'te eklenmeli; bu görevin
   yazma alanı dışında).
@@ -530,10 +590,12 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı 
 
 ## Açık konular
 
-- Supabase adaptörü, Vercel yayını (kullanıcı onayı) → G043–G044. Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
+- Vercel yayını (kullanıcı onayı) → G044; ilk canlı veri `blob` adaptörüyle (G048, gerçek depoda denenmedi). Supabase → G043.
+  Panelin (G039) ve `/start`'ın (G045) açık konuları yukarıda.
 - Tema varlıkları şimdilik fonksiyon üzerinden servis ediliyor (CDN önbelleği `s-maxage`); trafik artarsa
   derlemede `public/` altına kopyalamak düşünülebilir.
-- `local` adaptör tek süreç içindir. RSVP hız sınırı da süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
-  örnek olacağı için G043 kalıcı bir `RateLimiter` (Supabase tablo/RPC) yazıp `setRsvpRateLimiter()` ile bağlamalı.
+- `local` adaptör tek süreç içindir. RSVP ve `/start` hız sınırları süreç içi bellekte (`MemoryRateLimiter`); Vercel'de birden çok
+  örnek olacağı için sınırlar örnek başınadır. `blob` sürümünde de kalıcı limiter yok (Blob sayaç için uygun değil: her artış bir
+  yazma); gerekirse Vercel Firewall hız kuralı ya da G043'te Supabase tablo/RPC → `setRsvpRateLimiter()` / `setClaimRateLimiter()`.
 - RSVP: yanıt silme/düzeltme yok (adaptörde `deleteRsvp` yok); çifte e-posta bildirimi yok (sağlayıcı seçilmedi);
   misafir verisi için gizlilik metni yayından önce gerekli.
