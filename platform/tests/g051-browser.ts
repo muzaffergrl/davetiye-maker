@@ -127,7 +127,7 @@ const CAL = 'a[data-calendar]';
 
 let browser: any;
 try {
-  await waitForServer(`${BASE}/`);
+  await waitForServer(`${BASE}/`, 30_000, server);
   browser = await chromium.launch();
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
   context.setDefaultTimeout(8000);

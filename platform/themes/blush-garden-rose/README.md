@@ -53,7 +53,13 @@ gövde kapalıdan tuvalin %4,55'i kadar kısa (en/boy farkı). `site.css` bunu `
 ## Bu temayı ayarlarken
 - `site.js` başındaki `MOTION` (sıra/süre) ve gerekiyorsa `ENVELOPE_GEOMETRY`; `site.css` zarf katman yüzdeleri.
 - Kart metin kutuları (`.invite-text`, `.info-text`, `.card-copy`): `manifest.json` `free_zone`'a göre;
-  `scripts/theme-check.cjs` metnin boyalı çiçeğe değmediğini ölçer.
+  `scripts/theme-check.cjs` metnin boyalı çiçeğe değmediğini ölçer (görüntüsünden uzun kartta piksel testiyle, `--stress` ile §12
+  zorlama kaydında da).
+- Uzayan kartlar (docs/11 §9 3 dilim; çizim yok): **Order of the Day** (`.info` + program, G055) ve **home davet kartı**
+  (`.invite`, G055 incelemesi) — üst dilim kırpılmış `<img>`, düz kâğıt bandı %42–66 `::before` (dikey gerilir), alt dilim
+  %66–100 `::after`; metin akışta. Davet kartında metin görüntünün %35,2 satırından başlar, sütun en çok %88 (kemer çiçeklerinin
+  içinde), mekân + şehir en çok %64 (alt çiçeklerin arasında), son satır görüntünün en çok %81,5 satırında; demo kaydında kart
+  görüntünün kendi boyunda kalır (390 px'te +1 px, 360 px'te +7 px).
 
 **Yeni tasarım (G4NN) bu temanın kopyası değildir:** `docs/11_TEMA_STANDARDI.md` geçerlidir — yerleşim o tasarımın W1
 comp'larından (sayfa başına "comp öğe haritası"), zarf tipi ve açılış katalogdaki `acilis` cümlesinden, parçacık ve story dizilişi
@@ -61,8 +67,8 @@ o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP fo
 `data-scene`/`data-step`/`data-a` kancaları ortaktır; 03'ün aralıkları, süs konumları ve zamanlaması taşınmaz.
 
 ## Bilinen sınırlar
-- Program 7+ satırda Details kartına sığmaz (1–6 satır ölçüldü; şema/panel program satırını sınırlamıyor — `docs/11` §12);
-  ana sayfa tanıtımı ilk 4 satırı gösterir.
+- Program en çok 10 satır (şema, G055); Details kartı 10 satırı ve 60 karakterlik etiket/yeri taşır (kart uzar). Ana sayfa
+  tanıtımı ilk 4 satırı gösterir; uzun etiket kendi altına sarar (asılı girinti, 360 px'te kesilmez).
 - `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve); anların `text`'i ve monogram (`initials`) bu temada
   hiç gösterilmez. Panel bunları şablondan okur ve sormaz (Monogram / "A few words" yok, en çok 3 an; `lib/panel/state.ts`).
 - Link blokları yalnız linkleriyle görünür: harita düğmesi `urls.map`, Travel & Stay `urls.accommodation`, Registry `urls.registry`
@@ -70,9 +76,10 @@ o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP fo
 - `rsvp.method` dolu (yanıtlar başka yoldan): RSVP sayfası 404 ve ona giden bütün düğme/linkler kalkar.
 - Kısa telefonlarda (en-boy ≥ 1/2) boyalı arka plan ortadan büyütülür (%115 / 9:16'dan sonra %135) ki köşe çiçekleri zarf
   yazılarına değmesin; `theme-check.cjs` 360×640, 375×553, 390×690, 390×844'te yazı altındaki zemini ölçer.
-- Paylaşım görseli ve ikon dosyaları var (`img/og-1200x630.jpg`, `img/favicon.png`, G054); `og:image` / `<link rel="icon">`
-  etiketlerini motor yazar (G055) — G055 `main`'e girene kadar sayfalarda bu etiketler yok. `favicon.png` şeffaf zeminli:
-  iOS ana ekran ikonu olarak kullanılırsa şeffaf alan siyah görünür (G055 kararı).
+- Paylaşım görseli ve ikon dosyaları var (`img/og-1200x630.jpg`, `img/favicon.png`, G054); `og:image` (+ `og:image:alt`) /
+  `<link rel="icon">` etiketlerini motor yazar (G055). `favicon.png` şeffaf zeminli: iOS ana ekran ikonu olarak kullanılırsa şeffaf
+  alan siyah görünür (G055 kararı: `apple-touch-icon` yok). og görselinde zarf sağa yakın (merkez ≈ %65): kare kırpan önizlemeler
+  (WhatsApp/Telegram küçük kart) zarfın sağından ~%15 keser (docs/11 §14 #14).
 - Kartın home'a "uçması" cross-document View Transitions ister (Chromium 126+, Safari 18.2+); diğerlerinde solma.
   Gerçek iPhone/Safari ve Android cihazda denenmedi.
 - RSVP misafir sayısı üst sınırı platform varsayılanı (10); tema `theme.json` `rsvp.max_guests` yazmıyor.

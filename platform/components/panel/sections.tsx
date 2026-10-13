@@ -5,7 +5,7 @@
 import { useEffect, useState } from 'react';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
 import type { Locale, RsvpQuestion } from '../../lib/content/types.ts';
-import { CONTENT_LIMITS } from '../../lib/content/validate.ts';
+import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { newQuestionId, OPTIONAL_BLOCK_LABELS, withPartnerName, type OptionalBlockKey } from '../../lib/panel/model.ts';
 import type { PanelApi } from './api.ts';
 import { DateField, IssueList, moveItem, RowActions, SelectField, Switch, TextField, TimeField, UrlField, usePanelContext } from './fields.tsx';
@@ -207,7 +207,8 @@ export function ScheduleFields() {
         </fieldset>
       ))}
       <IssueList issues={listIssues} />
-      {schedule.length >= CONTENT_LIMITS.scheduleItems ? (
+      {/* exactly at the limit; over it (a site saved before the limit) the error above says what to do */}
+      {schedule.length === CONTENT_LIMITS.scheduleItems ? (
         <p className={styles.hint} data-schedule-full>
           {schedule.length} of {CONTENT_LIMITS.scheduleItems} events: the most your website can show.
         </p>
@@ -255,6 +256,7 @@ export function StoryFields({ onOpenOptional }: { onOpenOptional: () => void }) 
       <TextField
         path="story.intro"
         label="Intro line"
+        hint="Your wedding date follows this line on the Our Story page, e.g. “… led us to May 15, 2027.”"
         optional
         multiline
         rows={2}

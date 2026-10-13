@@ -86,6 +86,46 @@ kesimler eklenir, kapalı/açık zarf hizası GPT çıktısında denetlenir.
 **Önerilen (entegratör):** G055 etiketleri bu yollardan yazsın; 01 W2 parçaları birleşince `kit_check --paket 5` yeniden
 koşturulsun (`closure_sprig.png` eksik — gpt-gorsel).
 
+**İnceleme düzeltmeleri (2026-10-13, wf-hazirlik; G052–G055 incelemesinin bulguları)**
+- **`tema_build.cep_kes` çökmesi (orta, doğrulandı):** 2°+ eğik gövdede ya da gövdenin yanında ayrı bir yaprak varken hiçbir satır
+  sütun açıklığının %97'sine ulaşmıyor → `IndexError` (3° eğik ve yapraklı sahte görselde yeniden üretildi; 2°'de tutuyordu). Şimdi
+  gövde = en büyük opak bölge, üst = %97 satırı ya da `_govde` medyanı + **uyarı** ("gövde üstü sütun açıklığından bulunamadı …");
+  kesim yine renk/yedek yollarından. `kapak_kes`, `cep_kes`, `bilesenler` girdiyi RGBA'ya çeviriyor (RGB parça artık
+  `IndexError` vermiyor). `tara` tuvalin üstüne taşan pencerede boş dilim okumuyor. Test `test_saglam`: 2/3° eğik gövde (v/duz/egri),
+  20 px solunda yaprak (kenar yine doğru), RGB girdi (cep, kapak), 3° eğik açık gatefold (`kapi_kes`), RGB `bilesenler`.
+  `test_tema_build.py` tam koşu: **03 yeniden üretimi 53 dosya bayt bayt aynı**, tema klasörü 2,91 MB.
+- **03 home davet kartı (yüksek, doğrulandı):** 20+ karakterlik tam ad (`.nm` `cqw`'de, her genişlikte) tarihi/mekânı alt çiçeklere,
+  35 karakterlik ad kartın dışına itiyordu; 78 karakterlik mekân demo isimleriyle de çiçeğe biniyordu (piksel testiyle 360–768'de
+  ölçüldü). `site.css`: `.invite` Details kartı gibi docs/11 §9 3 dilim (üst %0–42 kırpılmış `<img>`, düz bant %42–66 `::before`
+  gerilir, alt %66–100 `::after`; çizim yok), metin akışta %35,2'den, sütun en çok %88, mekân + şehir en çok %64, son satır
+  görüntünün en çok %81,5 satırı, `overflow-wrap: break-word`. Demo kaydında kart görüntünün kendi boyunda (390 px'te 570/569,
+  360 px'te 528/521 px). `g055-browser`: 24/35/40 karakter tam ad, 78/80 karakter mekân, uzun host line, demo × 5 genişlik → her
+  satır düz kâğıtta.
+- **03 home tanıtımı (orta, doğrulandı):** `.teaser .sched-line` `nowrap` 360 px'te etiketi ve "Will You Join Us?"u sağdan
+  kesiyordu. Satır artık kendi altına sarar (asılı girinti; ≥ 768 px'te girintisiz), `.tx` `min-width: 0`. Demo düzeni aynı (360 px
+  ekran görüntüsüyle karşılaştırıldı).
+- **docs/11 (orta, doğrulandı):** §1 (Vercel izleme G055 sonrası, 03 2,9 MB), §2.1 (kopya birebir, story dahil; intro + tarih),
+  §3.1 (motorun yazdığı etiketler: og:image mutlak + type/size + **og:image:alt/twitter:image:alt**, ikon; "dosyaya sahip" kuralı;
+  apple-touch-icon yok), §3.2 story satırı (`<span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.`
+  **zorunlu**), details (program ≤ 10), §6/§9 (türevli `srcset` + şablonun `sizes`'ı korunur → yanlış `sizes` alıcı fotoğrafında da
+  büyük türevi indirtir; seed türevsiz), §9 uzun kart (03'ün iki kartı örnek; uzayan kart piksel testiyle), §12 (şema sınırları,
+  zorlama kaydı = `theme-check --stress`, 03'ün durumu), §13.1 (`--theme/--out/--compare/--stress`, port), §13.2 #6/#16/#17 + yeni
+  #23 (story girişi + tarih), §13.3 (kırpılan metin, kart piksel testi, zorlama kaydı, `theme_check` tablosu), §14 (#3/#5/#6/#7/#9/#10
+  yapıldı; yeni #12 katalog ozet, #13 GPT_PROMPTS, #14 og odak, #15 03 stres), §15. Tema `README.md`: uzayan kartlar, program ≤ 10,
+  og notu.
+- **Yapılmadı:** og görselinin yatay odağı (`og_kirp`, düşük): 03'ün `og-1200x630.jpg`'sini yeniden üretmek ikili dosyanın üzerine
+  yazmak olurdu; docs/11 §14 #14'e öneri. `og:image:alt` motor tarafında yapıldı (G055).
+- **03 `--stress` (yeni ölçüm, düzeltilmedi):** home/story/details geçiyor; index (40 karakterlik ilk adlar zarf başlığını uzatıp
+  zarfı ve "Tap to open"ı ekran altına itiyor, isimler köşe çiçeklerinde) ve rsvp (`.rsvp-text .sign` `nowrap` ekrandan taşıyor)
+  geçmiyor → docs/11 §12, §14 #15 (önerilen görev, claude-kod: 03 teması).
+- **Komutlar:** `python3 tools/tests/test_tema_build.py` (tam, 03 yeniden üretimi dahil) geçti; `test_kit_check`, `test_parts_prep`,
+  `test_parts_prep_paket5` geçti. `platform/`: `npm test` 258/258, typecheck, build; `theme-check --theme blush-garden-rose` 74/74
+  (video dahil, çıktı geçici klasöre — `previews/g038` değişmedi), `g055-browser` 138/138, `final-smoke` 42/42, `g051-browser`
+  44/44. `site.css` 43 KB (≤ 45), tema klasörü 2,91 MB. Denenmedi: gerçek telefon/Safari; uzayan davet kartının gerilen kâğıt
+  dokusu DPR 3'te yakından (Details kartındaki gibi dikey liflenme beklenir; 1× ve 2× ekran görüntülerinde ek yeri görünmedi).
+
 ## Günlük
 - 2026-10-13 alindi: wf-hazirlik
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): tema_build cep_kes eğik/yapraklı/RGB parçada çökmüyor (uyarı), 03 davet kartı 3 dilim, tanıtım satırı sarıyor, docs/11 G052–G055'e göre güncel
 - 2026-10-13 bitti, incelemeye gönderildi

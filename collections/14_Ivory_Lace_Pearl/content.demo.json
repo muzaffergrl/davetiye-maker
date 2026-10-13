@@ -70,7 +70,7 @@
     "guest_policy": false
   },
   "story": {
-    "intro": "Afternoon tea, a rose garden and a promise made by the fountain led us to",
+    "intro": "Tea for two, a rose garden and one promise we will always keep brought us to",
     "items": [
       {
         "caption": "Afternoon tea"
@@ -79,7 +79,7 @@
         "caption": "By the fountain"
       },
       {
-        "caption": "Forever and always"
+        "caption": "Pearls & promises"
       }
     ]
   }

@@ -25,17 +25,37 @@ export function loadChromium(): any {
   process.exit(2);
 }
 
-export async function waitForServer(url: string, ms = 30_000): Promise<void> {
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Waits until the server answers at `url`. With `server` (from startNext) it first waits for THAT process to say it
+ * listens ("Ready") and aborts with its log when it exits: a port that is already taken (another `next start`, an
+ * orphaned server of an old checkout) makes next exit with EADDRINUSE, and every check would otherwise run against
+ * the other server and blame the theme.
+ */
+export async function waitForServer(url: string, ms = 30_000, server?: NextServer): Promise<void> {
   const end = Date.now() + ms;
   while (Date.now() < end) {
+    if (server) {
+      const { exitCode, signalCode } = server.proc;
+      if (exitCode !== null || signalCode !== null) {
+        const log = server.log();
+        const busy = /EADDRINUSE/.test(log) ? ` — port in use: another server listens there (stop it or set PORT)` : '';
+        throw new Error(`next start exited (${exitCode ?? signalCode}) before it answered at ${url}${busy}\n${log.slice(-1500)}`);
+      }
+      if (!/\bReady\b|started server on/i.test(server.log())) {
+        await sleep(200);
+        continue;
+      }
+    }
     try {
       await fetch(url);
       return;
     } catch {
-      await new Promise((r) => setTimeout(r, 300));
+      await sleep(300);
     }
   }
-  throw new Error(`server did not start at ${url}`);
+  throw new Error(`server did not start at ${url}${server ? `\n${server.log().slice(-1500)}` : ''}`);
 }
 
 export interface NextServer {

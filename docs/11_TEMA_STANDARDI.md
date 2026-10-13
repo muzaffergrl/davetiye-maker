@@ -61,8 +61,9 @@ platform/themes/<slug>/
 
 - `<slug>` = G4NN görevindeki klasör adı (ör. `art-deco-black-tie`), `[a-z0-9_-]`; `theme.json` `id` ile aynı.
 - Tema klasörüne **girmez:** `parts_prep` çıktısı / kaynak PNG'ler (`img_src/` dahil), önizlemeler, font dosyaları, test
-  dosyaları, `node_modules`, kullanılmayan görsel. Sebep: `next.config.ts` `./themes/**/*`'ı **her tema rotasının** Vercel
-  fonksiyon paketine kopyalıyor (17 rota, `next.config.ts` `THEME_ROUTES`). Tema klasörü toplamı **≤ 3 MB** (03: 2,7 MB).
+  dosyaları, `node_modules`, kullanılmayan görsel. Sebep: tema varlık rotasının Vercel paketi bütün temaların servis edilen
+  her dosyasını taşır (G055'ten beri sayfa/panel rotaları yalnız `themes/**/*.html` + `*.json`; `next.config.ts`
+  `THEME_ROUTES` / `THEME_ASSET_ROUTE`, `npm run build` → `trace-check`). Tema klasörü toplamı **≤ 3 MB** (03: 2,9 MB).
   `parts_prep` çıktısı geçici klasöre gider (03'ün `build_images.py`'si gibi; `--prep-dir` ile dışarıda); G4NN görev metinleri
   G046 incelemesinde buna göre düzeltildi.
 - Servis edilen uzantılar: `css js mjs png jpg jpeg webp avif gif svg ico mp4 webm`. `.html` yalnız `theme.json` sayfası
@@ -101,14 +102,11 @@ platform/themes/<slug>/
 Başka alan eklenmez (motor okumaz); tasarım verisi `site.css`/`site.js`'te durur.
 
 ### 2.1 `content.demo.json`
-- `collections/NN_*/content.demo.json`'ın kopyası; `record_kind: "demo"`, kurgu isimler, bütün URL'ler `null`
-  (`tools/validate_content.py` ve `lib/content/validate.ts` geçer).
-- **Bugün yalnız 03'ün kaydında `story` var; 01'de `partners[].full_name` `null`** (02–20'de dolu). İkisini koleksiyon
-  kayıtlarına **G053** (claude-metin) ekler; tema ajanı koleksiyon kaydını değiştirmez. G053 bitmeden başlayan tema, kopyasına
-  yalnız `story` ekler: `{intro: "A few of the moments that led us to", items: [{caption: "First hello"}, {caption: "The
-  proposal"}, {caption: "Forever begins"}]}` (03'ün sözü; intro sayfada tarihle biter; başlıklar PAKET 2 hikâye fotoğraflarıyla
-  aynı); kalan alanlar koleksiyon kaydıyla birebir (test, §13). `full_name` `null` kalır — şablon bunu kaldırır (§3.2 tam ad
-  yedeği). G053 bitince kopya koleksiyon kaydıyla tamamen eşitlenir.
+- `collections/NN_*/content.demo.json`'ın **birebir** kopyası (`story` dahil); `record_kind: "demo"`, kurgu isimler, bütün
+  URL'ler `null` (`tools/validate_content.py` ve `lib/content/validate.ts` geçer). Tema ajanı koleksiyon kaydını değiştirmez.
+- G053 (2026-10-13) 20 kaydın hepsine `story` (intro + 3 başlık) ve 01'e tam adları yazdı. Intro bir cümle **parçasıdır**, sayfada
+  tarihle biter ("… brought us to" + " May 15, 2027."): şablon bunu §3.2'deki story satırındaki gibi yazar. Kayıt sonradan
+  değişirse (`tools/katalog.py ozet` story'li kayıtları atlar; `yaz --zorla` story'yi siler — §14 #12) kopya yeniden eşitlenir.
 - `site.js` `DEV_CONTENT` = bu dosya (test eşitliği denetler).
 
 ---
@@ -131,9 +129,12 @@ alanları): işareti olmayan temada alıcı o özelliği hiç görmez — §3.2'
 - `<title data-text="…">` ve `description`, `og:title`, `og:description` → `data-attr-content` şablonu (örnek metin
   öznitelikte kalabilir, sunucu ezer). `theme-color` = paletin sayfa rengi.
 - Paylaşım görseli ve ikon **dosyaları** temada: `img/og-1200x630.jpg` (zorunlu) ve `img/favicon.png` (önerilir), ikisini
-  de `build_images.py` üretir (§5.4 #7; adlar sabit). `og:image` (+ `og:image:width/height`, `twitter:card`) ve
-  `<link rel="icon">` etiketlerini **motor** dosya varsa kendisi yazar (G055; mutlak URL) — şablona bu etiketler yazılmaz
-  (G055 `main`'e girene kadar sayfada og/ikon etiketi yoktur; 03 dahil).
+  de `build_images.py` üretir (§5.4 #7; adlar sabit). Etiketleri **motor** yazar (G055) — şablona yazılmaz: `og:image`
+  (**mutlak** URL: `PLATFORM_PUBLIC_URL`, yoksa isteğin host'u), `og:image:type`, `og:image:width/height` (1200/630),
+  `og:image:alt` + `twitter:image:alt` ("{name_display} wedding invitation", içerikten; görselde yazı yok), `twitter:card`
+  (`summary_large_image`) ve `<link rel="icon" type="image/png">`. "Tema dosyaya sahip" = dosya diskte **ya da**
+  `img/manifest.json` onu `og.file` / `favicon.file` ile adlandırıyor (Vercel'de sayfa rotasının paketinde görsel yok).
+  `apple-touch-icon` yazılmaz (`favicon.png` şeffaf; iOS'ta siyah zemin). Şablonun kendi etiketi varsa motor çift yazmaz.
 - Google Fonts `<link>` (preconnect + `display=swap`), sonra `site.css`, sonra `<script src="site.js" defer>`.
 - Satır içi `<head>` betiği yalnız durum sınıfı için (§11); satır içi olay özniteliği (`onclick=`) **çalışmaz** (CSP).
 - `<body data-pending="This link will be added soon.">` (yedek bildirim; link blokları zaten `data-if` ile kalkar).
@@ -147,8 +148,8 @@ alanları): işareti olmayan temada alıcı o özelliği hiç görmez — §3.2'
 |---|---|
 | **index** | `<h1>` isimler: `data-field="partners.0.display_name"` · `<span class="amp">&amp;</span>` · `partners.1.display_name`; tasarım kopyası ("You are invited"). Sahne `.stage` (`role="button" tabindex="0" aria-label="Open the invitation"`) içinde zarf katmanları (§7) + kart: `.photo-slot[data-slot="hero_portrait"]` > `img[data-photo="hero_portrait"]` + `.ph-mark`, kart kopyası `data-field="date"`, `venue.city_region`. `a[data-skip]` ve `a[data-enter]` → `home.html`; `.replay` düğmesi; JS'siz yedek `p.nojs-only > a[href="home.html"]` (`<noscript>` değil). `<script type="speculationrules">` `selector_matches: "a[data-enter]"` |
 | **home** | Hero: aynı kart (VT adı, §11) + `img[data-photo="hero_portrait"]` (`data-attr-alt="Photo of {name_display}"`), isimler, `date` (`weekday` + tarih), `venue.name`, `venue.city_region`. Geri sayım: `data-optional="countdown" data-if="countdown_target_utc" data-countdown role="timer"`, `[data-unit=days\|hours\|minutes\|seconds]`, `.cd-done[data-when=today\|after]` (sade rakam + etiket; §5.7). Davet kartı: `host_line` (`data-if`), **isimler tam ad yedeğiyle** — her eş için iki öğe: `<p data-if="partners.0.full_name" data-field="partners.0.full_name">` ve `<p data-if="!partners.0.full_name" data-field="partners.0.display_name">` (`full_name` şemada `null` olabilir: 01 demo kaydı, panelde silinen tam ad; yedeksiz kart boş isim satırı gösterir), tarih bloğu (`weekday`/`month`/`day`/`year`), `ceremony_time`, `venue.name`, `venue.city_region`. Yanıt çağrısı `data-if="!rsvp.method"` (+ `rsvp.deadline` `data-if`). **Takvime ekle** (G051) davet kartının altında: `<a data-calendar="ics">` (Apple / Outlook) + `<a data-calendar="google" target="_blank">` (Google) çifti, ≥ 44 px. Tanıtımlar: Story (`data-optional="our_story"`, `story_1` küçük çerçeve), The Day (`data-repeat="schedule"` `.label · .time`, CSS ile ilk 4), RSVP (`data-if="!rsvp.method"`). Altbilgi isimler + replay |
-| **story** | `<body data-optional="our_story">`. Giriş `data-if="story.intro"` (+ `data-field="story.intro"`). 3 çerçeve: `data-slot`/`data-photo` = `story_1..3`, başlık ve alt metin sırayla `story.items.0..2.caption` (`data-field`, `data-attr-alt="{story.items.0.caption}"`). Panel an sayısını bu işaretlerden okur (`themeFieldUse`): 3 başlık → 3 an; `.text` ya da `initials` kullanılırsa panel sorar |
-| **details** | Başlık `date` (`weekday` + tarih). Program kartı: `<li data-repeat="schedule">` `.time`, `.label`, `<span data-if=".location" data-field=".location">` — 1–6 satır kartın düz kâğıdında kalır; **7+ satırda düzen bozulmaz** (§12: kart uzar ya da satırlar kartın altında düz kâğıtta sürer). Programın altında **takvime ekle** çifti (`data-calendar="ics"` + `data-calendar="google" target="_blank"`, home ile aynı). Kıyafet `data-optional="dress_code" data-if="dress_code"`. Mekân: `venue` foto alanı (`data-attr-alt="{venue.name}"`), `venue.name`, `venue.city_region`, `venue.country`/`venue.address` (`data-if`), tören cümlesi `data-if="ceremony_time"`. Harita `<p data-if="urls.map"><a data-field="urls.map" target="_blank">`. Travel & Stay `data-optional="travel_stay" data-if="urls.accommodation"`, Registry `data-optional="registry" data-if="urls.registry"` (link bloğu linksiz görünmez). **SSS** (G051): `<section data-optional="faq" data-if="faq">` içinde `<details data-repeat="faq"><summary><span data-field=".q"></span></summary><p data-field=".a"></p></details>` — JS'siz açılır-kapanır, yanıtta `white-space: pre-line`, `summary` ≥ 44 px; "+"/"×" işareti erişilebilir ada girmez (`content: "+" / ""` ya da `aria-hidden` span). RSVP linki `data-if="!rsvp.method"` |
+| **story** | `<body data-optional="our_story">`. Giriş paragrafı `data-if="story.intro"` ve içinde **tam olarak** `<span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.` — intro bir cümle parçasıdır ("A few of the moments that led us to"), sayfada tarihle biter: "… led us to May 15, 2027." (bütün demo kayıtları böyle yazıldı; panelin "Intro line" alanı alıcıya bunu söyler). Tarihsiz yazılan tema 19 kayıtta yarım cümle gösterir. 3 çerçeve: `data-slot`/`data-photo` = `story_1..3`, başlık ve alt metin sırayla `story.items.0..2.caption` (`data-field`, `data-attr-alt="{story.items.0.caption}"`). Panel an sayısını bu işaretlerden okur (`themeFieldUse`): 3 başlık → 3 an; `.text` ya da `initials` kullanılırsa panel sorar |
+| **details** | Başlık `date` (`weekday` + tarih). Program kartı: `<li data-repeat="schedule">` `.time`, `.label`, `<span data-if=".location" data-field=".location">` — şema en çok **10** satıra izin verir (G055); 1–10 satır ve §12 zorlama kaydı kartın düz kâğıdında kalır (kart §9 3 dilim kesimiyle uzar — 03'ün Order of the Day kartı gibi — ya da satırlar kartın altında düz kâğıtta sürer). Programın altında **takvime ekle** çifti (`data-calendar="ics"` + `data-calendar="google" target="_blank"`, home ile aynı). Kıyafet `data-optional="dress_code" data-if="dress_code"`. Mekân: `venue` foto alanı (`data-attr-alt="{venue.name}"`), `venue.name`, `venue.city_region`, `venue.country`/`venue.address` (`data-if`), tören cümlesi `data-if="ceremony_time"`. Harita `<p data-if="urls.map"><a data-field="urls.map" target="_blank">`. Travel & Stay `data-optional="travel_stay" data-if="urls.accommodation"`, Registry `data-optional="registry" data-if="urls.registry"` (link bloğu linksiz görünmez). **SSS** (G051): `<section data-optional="faq" data-if="faq">` içinde `<details data-repeat="faq"><summary><span data-field=".q"></span></summary><p data-field=".a"></p></details>` — JS'siz açılır-kapanır, yanıtta `white-space: pre-line`, `summary` ≥ 44 px; "+"/"×" işareti erişilebilir ada girmez (`content: "+" / ""` ya da `aria-hidden` span). RSVP linki `data-if="!rsvp.method"` |
 | **rsvp** | `<body data-if="!rsvp.method">`. Kart: `rsvp.deadline` (`data-if`), `a.btn[href="#reply"]`, isimler. Form: §3.3, **çiftin soruları dahil** (`.questions` bloğu konuk sayısının altında, `[data-rsvp-if-attending]` içinde). Kapanış: isimler/`name_display` + `date`, replay linki; yanıt sonrası tekrarlayan teşekkür gizlenir (`html[data-rsvp-replied]`, `rsvp:state` olayı) |
 
 ### 3.3 RSVP form sözleşmesi (G042; tam metin `platform/README.md` → "Tema form sözleşmesi")
@@ -361,21 +362,24 @@ CSS kutusu üçüncü yol değildir. Test (§13.2 #22): `site.css`'te `.cd-*` ku
 
 | Ölçü | Sınır | 03 (ölçülen) |
 |---|---|---|
-| İlk görünüm, index, 390×844 **DPR 3**, yer tutucu fotoğraflarla | **≤ 1,5 MB** (fontlar dahil) | 1018 KB |
-| İlk görünüm, home, aynı koşul | **≤ 1,5 MB** | 706 KB |
+| İlk görünüm, index, 390×844 **DPR 3**, yer tutucu fotoğraflarla | **≤ 1,5 MB** (fontlar dahil) | 1026 KB (G055 incelemesi; G038: 1018) |
+| İlk görünüm, home, aynı koşul | **≤ 1,5 MB** | 715 KB (G038: 706) |
 | Tek WebP, ilk görünümde | ≤ 200 KB (≥ 150 KB olanı Sonuç'ta gerekçelendir) | en büyük 187 KB (`invitation_card-909`, home) |
 | Tek WebP, yalnız geniş ekran / `lazy` | ≤ 250 KB | en büyük 228 KB (`florals_tl-960`) |
-| Tema klasörü toplamı | ≤ 3 MB | 2,7 MB |
+| Tema klasörü toplamı | ≤ 3 MB | 2,9 MB (G054) |
 | Font | ≤ 3 aile, yalnız kullanılan ağırlıklar, Google Fonts | 3 aile |
-| Betik / stil | `site.js` ≤ 35 KB, `site.css` ≤ 45 KB (sıkıştırmasız), kütüphane yok; harici istek yalnız Google Fonts | 28 KB / 38 KB |
+| Betik / stil | `site.js` ≤ 35 KB, `site.css` ≤ 45 KB (sıkıştırmasız), kütüphane yok; harici istek yalnız Google Fonts | 28 KB / 43 KB |
 | Dokun → home | 3,2–5 s (Skip her an) | 4,45 s |
 
 Ölçüm `theme-check`'in "first view" adımıyla (`next start` üzerinde yayınlanmış test sitesi; aktarılan bayt), **iki kez**:
 yer tutucularla (tablodaki sınır) ve tohumlanmış PAKET 2 fotoğraflarıyla (`npm run seed -- --photos`); ikisi de `checks.json`'a ve
-Sonuç'a yazılır. Alıcı fotoğrafı tek URL olarak servis edilir (motor `srcset`/`sizes`'ı kaldırır; panel uzun kenarı ≤ 2400 px,
-JPEG q84 kaydeder) — index kartındaki tek portre 0,5–1 MB olabilir; fotoğraflı ölçüm 1,5 MB'ı aşarsa Sonuç'ta sayıyla yazılır
-(tema sınırı değil, platform işi: yüklemede 640/1280 türevleri + motorun yazdığı `srcset`, §14 #9). Gerçek telefon/ağ ölçümü
-değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
+Sonuç'a yazılır. **Alıcı fotoğrafı (G055):** panel fotoyu (uzun kenar ≤ 2400 px, JPEG q84) ve 640/1280 px türevlerini saklar;
+motor `srcset` = türevler + foto yazar ve **şablonun `sizes`'ını korur** (yoksa `loading="lazy"`'de `auto, 100vw`, değilse
+`100vw`). Bu yüzden her foto alanının `sizes`'ı alanın gerçek CSS genişliği olmalı (§5.5): fazla geniş bir `sizes` artık alıcı
+fotoğrafında da büyük türevi indirtir. Ölçümün fotoğraflı hâli `npm run seed -- --photos` ile yapılır ve `scripts/seed.ts` bugün
+fotoğrafları **türevsiz** (tek dosya) saklar → theme-check'in fotoğraflı sayısı alıcının göreceğinden ağırdır (seed `preparePhoto`
+kullanana kadar; G055 ölçümü panel API'siyle: index 1093 KB, home 890 KB, `platform/README.md` "Platform cilası"). Gerçek
+telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
 
 ---
 
@@ -600,8 +604,9 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
 <img src="img/frame_portrait-320.webp" srcset="…" sizes="…" alt="">        <!-- çerçeve fotoğrafın ÜSTÜNDE -->
 ```
 
-- Motor: foto varsa `src` = `/media/…`, `srcset`/`sizes` kalkar, `data-photo-state="user"` hem `img`'ye hem `[data-slot]`'a;
-  yoksa yer tutucu kalır, `placeholder`. Yer tutucuda `data-attr-alt` uygulanmaz (`alt=""`).
+- Motor: foto varsa `src` = `/media/…`, `srcset` = 640/1280 türevleri + foto (G055; eski tek dosyalı fotoda `srcset` kalkar),
+  `sizes` = **şablonunki** (bu yüzden yer tutucunun `sizes`'ı alanın CSS genişliği olmalı, §6), `data-photo-state="user"` hem
+  `img`'ye hem `[data-slot]`'a; yoksa yer tutucu kalır, `placeholder`. Yer tutucuda `data-attr-alt` uygulanmaz (`alt=""`).
 - "Your photo here" (`.ph-mark`) **yalnız önizlemede**: `html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark`.
   Misafir yalnız nötr yer tutucuyu görür.
 - `object-fit: cover`; yüz için `object-position` (portre `50% 38%`, kemer `50% 40%`; daire/oval `50% 45%`). Panel kırpımı
@@ -615,7 +620,11 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   "single tall storybook page", 7+ program satırı) yalnız **dikey 3 dilim** kesimiyle uzatılır: üst bant + tekrarlanabilir düz kâğıt
   orta bandı (dekorsuz olduğu `serbest_bolge`/`free_zone` ile doğrulanır) + alt bant; ek yeri önizlemede gözle denetlenir.
   CSS ile kâğıt, kenarlık ya da çerçeve çizilmez. Orta bant tekrarı ek yeri bırakıyorsa tasarımın `ekler`'ine uzun bir GPT
-  parçası (`story_page.png`) istenir (katalog düzeltmesi + G2NN).
+  parçası (`story_page.png`) istenir (katalog düzeltmesi + G2NN). Örnek: 03 `site.css` — Order of the Day kartı (G055) ve home
+  davet kartı (G055 incelemesi): üst dilim kırpılmış `<img>` (`clip-path`), orta bant `::before` (dikey gerilir), alt dilim
+  `::after` (kartın altına yapışır), metin akışta; kart görüntünün kendi boyundan kısa olmaz, kısa içerikte üç dilim görüntüyü
+  kendi boyunda yeniden kurar. Uzayan kartta metin–dekor denetimi doğrusal eşlemeyle yapılamaz: `theme-check` bu kartları
+  piksel testiyle ölçer (§13.3).
 
 ## 10. Erişilebilirlik ve azaltılmış hareket (zorunlu)
 
@@ -652,16 +661,21 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   `data-format="amp"` ya da elle `<span class="amp">`).
 - Alfabe: isimler aksanlı olabilir (09 demo "Amélie"). Seçilen ailelerin Google Fonts CSS yanıtında `latin-ext` bloğu yoksa
   (yalnız `latin`) aksanlı isim başka fontla karışır → başlık için `latin-ext` destekli eş seçilir ya da Sonuç'a sınır olarak yazılır.
-- Taşma: alıcının girebildiği her değerde düzen bozulmaz. Şema bugün çoğu alanı **sınırlamıyor** (`schedule` için `maxItems`,
-  `display_name`/`full_name`/`venue.name`/`host_line`/program etiketi-yeri/`dress_code` için `maxLength` yok; panel de sınır
-  koymuyor; yalnız `/start` isimleri ≤ 40). Bu yüzden tema iki düzeyde denenir:
+- Taşma: alıcının girebildiği her değerde düzen bozulmaz. Şema sınırları (G055; panel ve `/start` aynı sınırda durur):
+  `display_name` / `full_name` ≤ 40, `name_display` ≤ 85, `venue.name` ≤ 80, `schedule` ≤ 10 satır; `host_line`, program
+  etiketi/yeri ve `dress_code` sınırsız. Tema iki düzeyde denenir:
   1. **Tasarım aralığı** (kart `free_zone` içinde, sıkışık düzen dahil): isimler ≥ 14 harf, 1–6 program satırı, 60 karakterlik
      mekân, tam İngiliz tarih (`en-GB`) — `clamp()` + container query birimleri, 4+ satırda sıkışık düzen (03 `.sched-list:has(...)`).
-  2. **Zorlama kaydı** (bozulmadan, kart dışına taşmadan; görünüm sade kalabilir): 12 program satırı (60 karakterlik etiket ve yer),
-     40 karakterlik isimler ve tam adlar, 80 karakterlik mekân, host line ve dress code. Kartın sığdıramadığı program satırları
-     kartın **altında düz kâğıtta** sürer (ya da kart §9'daki 3 dilim kesimle uzar); metin boyalı dekorun üstüne binmez, yatay
-     kaydırma yok. 03 bugün bunu karşılamıyor (README "Program 7+ satırda Details kartına sığmaz") → §14 #10.
-  Şemaya/panele üst sınır koymak ürün kararıdır (§14 #10); karar gelene kadar tema 2. düzeyi karşılar.
+  2. **Zorlama kaydı** (`theme-check --stress`, `scripts/lib/theme-env.ts` `stressRecord`; bozulmadan, kart dışına taşmadan,
+     kırpılmadan; görünüm sade kalabilir): 10 program satırı (60 karakterlik etiket ve yer), 40 karakterlik isimler ve tam adlar
+     (isim satırı 83), 80 karakterlik mekân, uzun host line ve dress code. Kartın sığdıramadığı metin kartın **altında düz
+     kâğıtta** sürer ya da kart §9'daki 3 dilim kesimle uzar; metin boyalı dekorun üstüne binmez, yatay kaydırma yok; zarf
+     sayfasında isimler düz zeminde, zarf ve "Tap to open" ekranda (360×640 dahil). Bir sözcük sütundan uzunsa kırılır
+     (`overflow-wrap: break-word`), kesilmez.
+  **03 bugün (G055 incelemesi, `theme-check --stress`):** home (davet kartı, tanıtımlar), story ve details geçiyor; **index ve rsvp
+  geçmiyor** — 40 karakterlik ilk adlar zarf sayfasının başlığını 6 satıra çıkarıp zarfı ve "Tap to open"ı ekranın altına itiyor
+  (360×640 ve 390×844, isimler köşe çiçeklerine biniyor), rsvp kartındaki imza (`.rsvp-text .sign`, `nowrap`) ekrandan taşıyor
+  (§14 #15). Varsayılan `theme-check` (demo kaydı) 03'te hatasız; yeni tema `--stress`'i de geçmeli.
 - Tarihler yalnız motor biçimiyle (`May 15, 2027` / `15 May 2027`); comp'taki büyük harfli tarih CSS `text-transform` ile.
 
 ---
@@ -677,15 +691,17 @@ python3 tools/tests/test_tema_build.py --hizli                 # ortak modül de
 # platform/ içinde (Node 22)
 export PATH=/opt/node22/bin:$PATH && cd platform && npm ci
 npm test && npm run typecheck && npm run build                 # build → trace-check yeni temanın index.html'ini de arar
-NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <slug>    # G052
+NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <slug> --stress   # G052 + §12 zorlama kaydı
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts --theme <slug>       # G052 (takvim, SSS, sorular)
 ```
 Yazma alanı: `platform/themes/<slug>/` + `platform/tests/theme-<slug>.test.ts` + `platform/previews/g4NN/` (G4NN `yazar:`
 alanında; G046 incelemesinde katalogdan yeniden üretildi).
 
-**`--theme` bugün yok:** `theme-check.cjs` (ve `g051-browser.ts`, `final-smoke.ts`) yalnız `blush-garden-rose`'u denetliyor.
-Genelleştirme **G052**; G401–G420'nin `bagimli`'sinde G052 var — **G052 bitmeden hiçbir G4NN alınmaz** (yoksa ajan ya `yazar`
-dışına yazar ya tarayıcı denetimini atlar).
+Üç tarayıcı denetimi (`theme-check.cjs`, `g051-browser.ts`, `final-smoke.ts`) `--theme <slug>` alır (G052; varsayılan
+`blush-garden-rose`). `theme-check`: `--out <klasör>` (yoksa `THEME_SHOTS_DIR`, yoksa `previews/g4NN/`), `--compare w1|g035|none`
+(W1 comp | tema), `--no-video`, `--stress` (§12 zorlama kaydı; G4NN için **zorunlu**), `--content` / `--photos` / `--collection`.
+Sunucu `PORT`'ta (theme-check 3312, final-smoke 3321, g051 3316) başlar; port doluysa (başka bir `next start`) denetim kendi
+sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı koşmaz.
 
 ### 13.2 `tests/theme-<slug>.test.ts` (node:test; `theme-blush-garden-rose.test.ts`'in 20 testinin karşılığı + ekler)
 1. `theme.json`: herkese açık (`listThemes`), 5 sayfa, 5 foto alanı, `aspect` = `manifest.photo_slots` `box_px`.
@@ -693,7 +709,8 @@ dışına yazar ya tarayıcı denetimini atlar).
 3. Beş sayfa motor uyarısız; her `data-field` içerik kaydına eşit (bağımsız `en-US` biçimleyici).
 4. Şablonlarda kişisel metin yok (demo isim/mekân/tarih/saat dizgileri kaynakta geçmez; başka kayıtla render'da eskisi yok).
 5. İçerik değişimi her sayfada görünür (isim, tarih, mekân, program satırları, hikâye, son tarih).
-6. Foto alanları: alıcı fotoğrafı yer tutucuyu değiştirir (`srcset` kalkar, `user`); yoksa yer tutucu (`placeholder`).
+6. Foto alanları: alıcı fotoğrafı yer tutucuyu değiştirir (`user`; türevli fotoda `srcset` = 640/1280 türevleri + foto ve
+   şablonun `sizes`'ı, eski tek dosyalı fotoda `srcset` yok); yoksa yer tutucu (`placeholder`).
 7. İsteğe bağlı bloklar: bölümler, Story sayfası (404) ve ona giden linkler kalkar.
 8. Linkler: eksik URL düğmesi kaldırır; gerçek URL `rel="noopener noreferrer"` alır.
 9. RSVP sözleşmesi: `name` alanları, `method="post"`, `action` yok, 4 durum paneli, `/rsvp/form.js`.
@@ -704,10 +721,10 @@ dışına yazar ya tarayıcı denetimini atlar).
     `<head>` betikleriyle aynı, `DEV_CONTENT` = `content.demo.json`, `devRender` foto haritası = `theme.json`.
 14. Gerçek rotalar: yayındaki site 200, CSP hash'leri, yüklenen foto `/media/…`.
 15. Gizlilik: kapalı bölümler hiçbir sayfa kaynağında (site-data dahil) iz bırakmaz.
-16. **Ek:** `content.demo.json` geçerli, `record_kind: "demo"`, koleksiyon kaydıyla `story` dışında birebir; `/start` teması
+16. **Ek:** `content.demo.json` geçerli, `record_kind: "demo"`, koleksiyon kaydıyla birebir (`story` dahil); `/start` teması
     sunar (`claimableTheme`).
-17. **Ek:** program 1 ve 6 satır, uzun isimler ve `en-GB` kayıtla render uyarısız; §12 zorlama kaydıyla (12 satır, 40/80
-    karakter) uyarısız (görsel taşma §13.3'te).
+17. **Ek:** program 1 ve 6 satır, uzun isimler ve `en-GB` kayıtla render uyarısız; §12 zorlama kaydıyla (10 satır × 60
+    karakter etiket/yer, 40/80 karakter; `scripts/lib/theme-env.ts` `stressRecord`) uyarısız (görsel taşma §13.3'te).
 18. **G051 takvim:** home ve details'te `data-calendar="ics"` → `/<slug>/event.ics` ve `google` → Google linki (`target` +
     `rel`); önizlemede anahtar korunur; tarihsiz kayıtta ikisi de yok.
 19. **G051 SSS:** details'te sırayla `<details>` akordeon, `.q`/`.a` içerikten; blok kapalıyken ya da liste boşken kaynakta yok.
@@ -715,11 +732,24 @@ dışına yazar ya tarayıcı denetimini atlar).
     hepsi `[data-rsvp-if-attending]` içinde. (18–20: `theme-blush-garden-rose.test.ts` G051 testlerinin karşılığı.)
 21. **Tam ad yedeği:** `partners[n].full_name = null` → davet kartında `display_name`; boş isim satırı (`data-empty`) yok.
 22. **K21 statik denetim:** `site.css`'te `.cd-*` (ve tasarımın içerik bloklarında) `border`/`outline`/`box-shadow` yok (§5.7).
+23. **Story girişi:** story sayfasının giriş paragrafı = `story.intro` + " " + biçimli tarih + "." (ör. "… led us to May 15,
+    2027."); `story.intro` boşken paragraf yok (§3.2).
 
 ### 13.3 Tarayıcı denetimi (`theme-check --theme` + `g051-browser --theme`, G052; Playwright, `next start`, `/opt/pw-browsers`; `playwright install` yok)
 - **Genişlikler:** 5 sayfa × 360 / 390 / 430 / 768 / 1280: yatay kaydırma yok, ekran dışı metin yok, kırpılmamış taşan öğe yok,
-  bütün görseller yüklü, konsol/CSP hatası yok, her alan = içerik, `<title>` doğru, kart metni `free_zone`'da, foto durumları
-  (demo fotoğraflı site `user`; fotoğrafsız site `placeholder`; önizlemede etiket görünür, yayında görünmez), fontlar yüklü.
+  kırpılan metin yok (metin kutusu onu kırpan — `overflow` ≠ visible, `clip-path` — hiçbir atanın dışına taşmaz), bütün görseller
+  yüklü, konsol/CSP hatası yok, her alan = içerik, `<title>` doğru, kart metni düz kâğıtta, foto durumları (demo fotoğraflı site
+  `user`; fotoğrafsız site `placeholder`; önizlemede etiket görünür, yayında görünmez), fontlar yüklü.
+- **Kart metni:** görüntüsünün boyundaki kartta her satır kutusu `free_zone`'a doğrusal eşlenir; görüntüsünden uzun kart (§9 3
+  dilim) **piksel testiyle** ölçülür: kart görüntüsü ve kendi `::before`/`::after` dilimleri dışında her şey gizlenir, boyalı kart
+  yakalanır, her satır kutusunun (mürekkep: satır yüksekliğinin %18'i üstten/alttan düşülür) altındaki pikseller kartın ortasındaki
+  kâğıt rengiyle karşılaştırılır (%0,5'ten fazlası RGB uzaklığı > 45 = hata). Ölçülen kutunun dışındaki satır her iki yolda hata.
+- **Zorlama kaydı (`--stress`, §12):** `stressRecord` ile 5 sayfa × 360 / 390 yukarıdaki denetimlerle (`stress_<sayfa>_<w>.png`)
+  ve zarf sayfası 360×640 / 390×844 (yazılar düz zeminde, zarf + "Tap to open" ekranda).
+- **Tema tablosu** (`img/manifest.json` → `theme_check`, isteğe bağlı; varsayılanlar `scripts/lib/theme-env.ts` başında): `cards`
+  (`{seçici: manifest anahtarı}`, kart `<img>` değilse), `particles` (JS parçacık katmanı seçicisi), `envelope_text`
+  (`{closed, opened}`), `backdrop` (`{edge_max, dark_max, dark_below, light_above}` — koyu tasarım kendi ölçümünden,
+  `checks.json` → `info.envelope_backdrop`). G054'ün yapı sonucu `checks` anahtarıdır, bu tablo değil.
 - **Kısa telefonlar:** 360×640, 375×553 (Safari çubuklarıyla), 390×690 (panel önizlemesi), 390×844: zarf sayfası yazıları
   (kicker, isimler, ipucu; açıkken "Replay") boyalı dekorun değil düz zeminin üstünde (yazı gizlenip zemin ölçülür); kapalı nesne
   ve "Tap to open" ekranda (§7.1 sahne boyu); açık hâl (kapı/kitap) yatay kaydırma üretmiyor.
@@ -759,22 +789,26 @@ dışına yazar ya tarayıcı denetimini atlar).
 |---|---|---|---|
 | 1 | Ortak tema yardımcıları 03'ün klasörlerinden içe aktarılıyor | **yapıldı (G054):** `tools/tema_build.py` (§5.4) — webp/manifest, foto alanı + maske, serbest bölge, yer tutucu, og + favicon, denetimler, hiza; kesimler: V/eğri kapak, V/düz/eğri ön cep, gatefold dikişi + katlar, kitap sırtı, kese ağız yayı, kılıf üst şeridi, şerit farkı (her biri sahte görselle + uyarılı geometrik yedek; `tools/tests/test_tema_build.py`); 03 teması bunu kullanıyor, çıktısı bayt bayt aynı | — |
 | 2 | `kit_check` kapalı/açık zarf (ve sarılı kapanış) hizasını denetlemiyor | **yapıldı (G054):** `--paket 5` (ve 4) tipe göre kenar karşılaştırması (±%1,5 uyarı, > %4 hata), sarılı kapanış uçları, `--hiza`, `--zarf-tipi` (§5.2, §7.1). 03: farklı tuval, ölçekli −%4,55 (uyarı); 01 (birleşmemiş `origin/codex/g201-…` dalındaki W2 parçaları): sol +0,29 · sağ −0,39 · alt −0,65 % (geçti) | — |
-| 3 | `scripts/theme-check.cjs`, `tests/g051-browser.ts`, `tests/final-smoke.ts` blush-garden-rose'a bağlı | **açıldı: G052** (`--theme <id>`; G401–G420 ona bağlı) | claude-kod (ilk G4NN'den önce) |
+| 3 | `scripts/theme-check.cjs`, `tests/g051-browser.ts`, `tests/final-smoke.ts` blush-garden-rose'a bağlı | **yapıldı (G052):** `--theme <id>`, `--out`, `--compare`, `theme_check` tablosu; G055 incelemesi: uzayan kart piksel testi, kırpılan metin, `--stress` (§13.3) | — |
 | 4 | G4NN `yazar:` yalnız tema klasörü; görev metni `img_src`, "link will be added soon", "03'ün yapısını kopyala" diyordu | **yapıldı** (G046 incelemesi): `tools/katalog.py` `g4_gorev` düzeltildi, 19 görev dosyası yeniden üretildi | — |
-| 5 | 01, 02, 04–20 demo kayıtlarında `story` yok; 01'de `full_name` `null` | **açıldı: G053** | claude-metin |
-| 6 | blush-garden-rose'ta `og:image` ve favicon yok | **dosyalar yapıldı (G054):** `img/og-1200x630.jpg` (`web_hero` alt hizalı 1.91:1, yazısız; zarf + fiyonk tam) ve `img/favicon.png` (`ribbon_bow`, 180 px şeffaf kare); **etiketler G055** (motor dosya varsa yazar) | claude-kod (G055) |
-| 7 | Her tema rotasının Vercel paketine bütün tema görselleri giriyor (20 tema × ~2,7 MB ≈ 55 MB/fonksiyon; Aşama 2 varyantlarıyla 250 MB sınırına yaklaşır) | görselleri yalnız tema varlık rotasına izle (diğer rotalara `*.html`/`*.json`), ya da derlemede `public/`'e kopyala | claude-kod |
+| 5 | 01, 02, 04–20 demo kayıtlarında `story` yok; 01'de `full_name` `null` | **yapıldı (G053):** 20 kayıtta `story`, 01'de tam adlar | — |
+| 6 | blush-garden-rose'ta `og:image` ve favicon yok | **yapıldı:** dosyalar G054 (`img/og-1200x630.jpg` `web_hero` alt hizalı 1.91:1, yazısız; `img/favicon.png` 180 px şeffaf kare), etiketler G055 (motor; §3.1). Açık: 03'ün og görselinde zarf sağa yakın (merkez ≈ %65) — kare kırpan önizlemeler (WhatsApp küçük kart) sağdan ~%15 keser; `og_kirp`'a yatay odak eklenmedi (§14 #14) | — |
+| 7 | Her tema rotasının Vercel paketine bütün tema görselleri giriyor | **yapıldı (G055):** tema rotaları yalnız `*.html`/`*.json` (rota başına ~2,8 MB → 69 KB), görseller yalnız varlık rotasında; `trace-check` denetler | — |
 | 8 | Aşama 2 varyantları (G090 sonrası) | renkler yalnız `:root` token'larında; `html[data-variant]` kancası hazır; varyant görsel klasörü ayrı karar | — |
-| 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | yüklemede 640/1280 türevleri + motorun yazdığı `srcset`/`sizes`; o zamana kadar §6 fotoğraflı ölçüm yazılır | claude-kod (platform) |
-| 10 | Şema/panel program satırını ve metin uzunluklarını sınırlamıyor; 03 Details kartı 7+ satırda taşıyor | **ürün kararı:** üst sınır (ör. `schedule` ≤ 8–12, isimler ≤ 40 — `/start` gibi —, mekân ≤ 80; şema + iki doğrulayıcı + panel) ya da yalnız tema tarafı (§12 zorlama kaydı); 03'ün Details kartı §9 3 dilimle uzatılır | kullanıcı kararı → claude-kod |
+| 9 | Alıcı fotoğrafı tek büyük dosya (≤ 2400 px q84, `srcset` yok) → fotoğraflı ilk görünüm ölçülmemişti | **yapıldı (G055):** 640/1280 türevleri + motorun `srcset`'i, şablonun `sizes`'ı korunur (§6). Açık: `scripts/seed.ts` türevsiz saklıyor (theme-check'in fotoğraflı ölçümü bu yüzden ağır) | claude-kod (seed) |
+| 10 | Şema/panel program satırını ve metin uzunluklarını sınırlamıyor; 03 kartları taşıyor | **yapıldı (G055, entegratörün geri alınabilir varsayılan kararı):** isimler/tam adlar ≤ 40, `name_display` ≤ 85, mekân ≤ 80, program ≤ 10 (şema, iki doğrulayıcı, panel, `/start`); 03 Details kartı (G055) ve home davet kartı (G055 incelemesi) §9 3 dilimle uzuyor. `name_display` ≤ 85 entegratör onayı bekliyor | — |
 | 11 | 01 `closure_sprig` gibi açılış cümlesinin gerektirdiği gizli parçalar | her G2NN W2'den önce `acilis` cümlesi §5.1'e göre okunur; eksik `ekler` katalogda | entegratör |
+| 12 | `tools/katalog.py ozet` G053'ten beri 04–20 `content.demo.json`'ı "elle eklenmiş alan: story" diye atlıyor (`DESIGN_BRIEF.md`'yi yazmaya devam ediyor → katalog değişikliği kayda yansımaz); `yaz --zorla` story'yi siler | story tablosunu `katalog.py` `content()` üretecine taşı (ya da `ozet` katalogda olmayan anahtarları koruyarak birleştirsin); `ozet --dene` "atlandı"sız 0 değişiklik | claude-kod (katalog) |
+| 13 | 19 `GPT_PROMPTS.md` W1.3 story comp ve PAKET 2 2.2–2.4 başlıkları G053 öncesi varsayılanlar ("First hello" …) | `python3 tools/katalog.py paket5 --no 02,04,…,20` (01'i G201 bitince); `paket5 --dene` 0 | entegratör |
+| 14 | 03 og görseli: zarf merkez ≈ %65 (kare kırpımda sağı kesilir) | `tema_build.og_kaydet`/`og_kirp`'a yatay odak (zarf kutusu ortalı ~1076×563 pencere) ya da yalnız 1.91:1 çerçeve kabulü; 03 görseli `_v2` adıyla (ikili dosya üzerine yazılmaz) | claude-kod |
+| 15 | 03 `--stress`'te index ve rsvp (§12): 40 karakterlik ilk adlar zarf başlığını uzatıp zarfı ekran altına itiyor; rsvp imzası `nowrap` | index başlığına uzun isimde küçülen yazı (ör. `site.js`'te satır sayısı ölçülüp `--names-scale`; JS'siz hâli bugünkü), rsvp kartına §9 3 dilim + imzada sarma; `theme-check --stress` 03'te hatasız | claude-kod (03 teması) |
 
 ## 15. Kontrol listesi (G4NN)
 
 - [ ] `kit_check --paket 5` ve `--paket 2` geçti (ya da Sonuç'ta neden)
 - [ ] Klasör §1 düzeninde; kaynak PNG / `img_src` / önizleme tema klasöründe yok; klasör ≤ 3 MB
 - [ ] `theme.json`: 5 sayfa, 5 sabit foto anahtarı, `aspect` = manifest `box_px`, `internal` yok
-- [ ] `content.demo.json` = koleksiyon kaydı (+ `story`), `DEV_CONTENT` ile aynı
+- [ ] `content.demo.json` = koleksiyon kaydı (birebir, `story` dahil), `DEV_CONTENT` ile aynı; story girişi + tarih (§3.2)
 - [ ] Kişisel her değer işaretli (§3.2, §4); comp demo metni şablonda yok; link blokları `data-if="urls.*"`
 - [ ] Davet kartında tam ad yedeği (`full_name` boşsa `display_name`); `guest_policy` yok
 - [ ] G051: takvim çifti home + details, SSS bloğu details, çiftin soruları rsvp formunda (§3.5); SSS işareti erişilebilir ada girmiyor
@@ -795,10 +829,11 @@ dışına yazar ya tarayıcı denetimini atlar).
 - [ ] Foto alanları: maske, `object-position`, yer tutucu, etiket yalnız önizlemede, alt metinler
 - [ ] Erişilebilirlik: tek `h1`, sahne düğmesi + klavye, ≥ 44 px, kontrast ölçüldü, reduced motion
 - [ ] `sessionStorage` anahtarları slug'lı, `<head>` betikleriyle aynı; geri dönüş/replay/bfcache çalışıyor
-- [ ] 360 px'te tasarım aralığı (uzun isim, 6 program satırı, uzun mekân, `en-GB`) ve §12 zorlama kaydıyla taşma yok; story
+- [ ] 360 px'te tasarım aralığı (uzun isim, 6 program satırı, uzun mekân, `en-GB`) ve §12 zorlama kaydıyla (`--stress`) taşma yok; story
       pencereleri ≥ 38vw; aksanlı isim fontu (latin-ext) kontrol edildi
 - [ ] `og:image` (isimsiz, 1200×630) + `og:title` kişisel
 - [ ] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-<slug>.test.ts` (§13.2, 22 madde)
-- [ ] `theme-check --theme` ve `g051-browser --theme` (G052): 5 genişlik, kısa telefonlar, akışlar, G051, ağırlık, MP4 — hatasız
+- [ ] `theme-check --theme <slug> --stress` ve `g051-browser --theme` (G052): 5 genişlik, kısa telefonlar, akışlar, zorlama kaydı,
+      G051, ağırlık, MP4 — hatasız
 - [ ] `previews/g4NN/` (W1 karşılaştırması dahil); tema `README.md`
 - [ ] Sonuç dürüst: denenmeyenler, comp sapmaları, sorunlu GPT parçaları + önerilen prompt düzeltmeleri

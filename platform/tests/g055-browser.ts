@@ -10,7 +10,12 @@
 // 3. Details card with 3, 7, 10 and 10 long schedule rows at 360/390/430/768/1280: every text line sits on plain card
 //    paper (pixel test: the card is captured with the text hidden; no line box may cover painted decor), the card does not
 //    run into the block below, no horizontal scroll.
-// 4. Panel: counters on names (40) and venue name (80), "Add an event" gone at 10 events.
+//    The same pixel test for the home invitation card (G055 review): full names of 24, 35 and 40 characters, a 78/80
+//    character venue and a long host line; the demo record keeps the card at the image's own size.
+// 3b. Home teasers at 360/390 with long schedule labels (28 and 60 characters): nothing cut off at the right edge.
+// 4. Panel: counters on names (40) and venue name (80), "Add an event" gone at 10 events; a site saved before the
+//    limits (12 events, a 41-character name, an 87-character venue): no "12 of 10" note, the errors name their field,
+//    the values survive a reload, publishing is refused.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Data in a temp folder. Screenshots +
 // checks.json -> $G055_SHOTS_DIR (default: a new temporary folder, printed at the end). Exit code 1 on a failed check.
 
@@ -110,6 +115,34 @@ for (const [slug, n, long] of SCHEDULES) {
     c.ceremony_time = c.schedule[0].time;
   });
 }
+// G055 review: the invitation card (home) with long names / venue / host line (all valid under the schema).
+const FORTY_A = 'Charlotte-Elizabeth Anne Montgomery Hale'; // 40
+const FORTY_B = 'Alexander James Fitzwilliam-Reid Junior.'; // 40
+const VENUE_80 = 'The Grand Rosewater Conservatory and Botanical Gardens at Forsyth Park, Savannah'.slice(0, 80);
+const INVITES: Array<[string, (c: ContentRecord) => void]> = [
+  ['inv-names-24', (c) => { c.partners[0].full_name = 'Charlotte Anne Whitfield'; c.partners[1].full_name = 'Alexander James Reid'; }],
+  ['inv-names-35', (c) => { c.partners[0].full_name = 'Charlotte Elizabeth Montgomery-Hale'; c.partners[1].full_name = 'Alexander James Fitzwilliam-Reid'; }],
+  ['inv-venue-78', (c) => { c.venue.name = VENUE_80.slice(0, 78); }],
+  // docs/11 §12 stress record: 40-character names and full names, 80-character venue, long host line, 10 schedule
+  // rows with 60-character labels and places, long dress code
+  ['inv-stress', (c) => {
+    c.partners[0].display_name = FORTY_A;
+    c.partners[1].display_name = FORTY_B;
+    c.partners[0].full_name = FORTY_A;
+    c.partners[1].full_name = FORTY_B;
+    c.name_display = `${FORTY_A} & ${FORTY_B}`; // 83 (limit 85)
+    c.venue.name = VENUE_80;
+    c.host_line = 'Together with their families, Mr. and Mrs. Whitfield and Mr. and Mrs. Reid';
+    c.schedule = Array.from({ length: 10 }, (_, i) => ({
+      time: `${String(14 + Math.floor(i * 0.9)).padStart(2, '0')}:${i % 2 ? '30' : '00'}`,
+      label: 'Champagne toast, speeches and the first dance of the evening'.slice(0, 60),
+      location: 'The Glasshouse Pavilion by the old lake and the rose garden'.slice(0, 60),
+    }));
+    c.ceremony_time = c.schedule[0].time;
+    c.dress_code = 'Garden formal: light colours, flat shoes for the lawn, a shawl for later';
+  }],
+];
+for (const [slug, edit] of INVITES) await site(slug, edit);
 await site('no-photos');
 const photoSite = await site('with-photos', () => undefined, false); // photos go through the panel API below
 const oldSite = await site('one-file-photos', () => undefined, false);
@@ -119,6 +152,19 @@ const panelSite = await site('panel-limits', (c) => {
   c.schedule = schedule(10, false);
   c.ceremony_time = c.schedule[0].time;
 }, false);
+// A site saved and published before the G055 limits: 12 events, a 41-character first name, an 87-character venue
+// (written through the adapter, as the platform stored it then).
+const legacySite = await site('old-site', () => undefined, false);
+const legacy = structuredClone(demo);
+legacy.partners[0].display_name = 'Maximilianna-Josephine Alexandra Rosalie!'; // 41
+legacy.venue.name = 'The Grand Rosewater Conservatory and Botanical Gardens at Forsyth Park, Savannah GA'; // 83
+legacy.venue.name += ' USA'; // 87
+legacy.schedule = schedule(12, false).map((r, i) => ({ ...r, label: r.label ?? `Event ${i + 1}` }));
+legacy.schedule[10].label = 'Fireworks';
+legacy.schedule[11].label = 'Carriages';
+legacy.ceremony_time = legacy.schedule[0].time;
+await adapter.updateContent(legacySite.site.id, legacy);
+await adapter.publish(legacySite.site.id);
 
 // ------------------------------------------------------------------------------------------------- server
 
@@ -267,8 +313,68 @@ async function main() {
     }
     info.first_view_dpr3 = measures;
 
-    // --------------------------------------------------------------------------------------------- 3. details card
+    // --------------------------------------------------------------------------------------------- 3. cards (pixel test)
     const zoneCss = '.site-nav { display: none !important; }';
+    /**
+     * Every text line of the card sits on plain card paper: the card is captured with its text hidden and each line box
+     * (the glyphs' ink: 18 % of the line height off top and bottom, as theme-check) is compared with the paper colour
+     * sampled at the card's centre. A line outside the captured card counts as over decor.
+     */
+    const cardOnPaper = async (p: any, cardSel: string, textSel: string, ratio: number, nextSel: string) => {
+      const geo = await p.evaluate(([cardSel, textSel, ratio, nextSel]: [string, string, number, string]) => {
+        const card = document.querySelector(cardSel)!;
+        const cb = card.getBoundingClientRect();
+        const lines: Array<{ t: string; x: number; y: number; w: number; h: number }> = [];
+        const walker = document.createTreeWalker(card.querySelector(textSel)!, NodeFilter.SHOW_TEXT);
+        let n: Node | null;
+        while ((n = walker.nextNode())) {
+          if (!n.textContent!.trim()) continue;
+          const rg = document.createRange();
+          rg.selectNodeContents(n);
+          for (const lb of rg.getClientRects()) {
+            if (lb.width < 1) continue;
+            const pad = lb.height * 0.18; // the glyphs' ink, not the line's leading (theme-check uses the same pad)
+            lines.push({ t: n.textContent!.trim().slice(0, 24), x: lb.left - cb.left + 1, y: lb.top - cb.top + pad, w: lb.width - 2, h: lb.height - 2 * pad });
+          }
+        }
+        const next = document.querySelector(nextSel)?.getBoundingClientRect();
+        return {
+          x: cb.left + scrollX, y: cb.top + scrollY, w: cb.width, h: cb.height,
+          natural: cb.width * ratio, lines,
+          rows: document.querySelectorAll('.sched-row').length,
+          nextGap: next ? next.top - cb.bottom : null,
+          hscroll: document.documentElement.scrollWidth - innerWidth,
+        };
+      }, [cardSel, textSel, ratio, nextSel]);
+      await p.addStyleTag({ content: `${textSel} { visibility: hidden !important; }` });
+      const png = await p.screenshot({ fullPage: true, clip: { x: geo.x, y: geo.y, width: geo.w, height: geo.h } });
+      await p.addStyleTag({ content: `${textSel} { visibility: visible !important; }` });
+      const { data, info: im } = await sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+      const px = (x: number, y: number) => {
+        const i = (Math.round(y) * im.width + Math.round(x)) * 3;
+        return [data[i], data[i + 1], data[i + 2]];
+      };
+      const ref: number[][] = [];
+      for (let yy = 0; yy < 20; yy++) for (let xx = 0; xx < 40; xx++) ref.push(px(geo.w * 0.5 - 20 + xx, geo.h * 0.5 - 10 + yy));
+      const paper = [0, 1, 2].map((c) => ref.map((q) => q[c]).sort((a, b) => a - b)[ref.length >> 1]);
+      const over: string[] = [];
+      for (const l of geo.lines) {
+        let total = 0;
+        let off = 0;
+        for (let y = Math.max(0, l.y); y < Math.min(im.height - 1, l.y + l.h); y++) {
+          for (let x = Math.max(0, l.x); x < Math.min(im.width - 1, l.x + l.w); x++) {
+            const q = px(x, y);
+            total++;
+            if (Math.hypot(q[0] - paper[0], q[1] - paper[1], q[2] - paper[2]) > 45) off++;
+          }
+        }
+        // Outside the card counts as decor too (the box runs past the captured card).
+        if (l.y + l.h > im.height || l.x + l.w > im.width || l.y < 0 || l.x < 0) off = total || 1;
+        if (!total || off / total > 0.005) over.push(`"${l.t}" y${Math.round(l.y)} ${total ? ((100 * off) / total).toFixed(1) : 100}%`);
+      }
+      return { ...geo, over };
+    };
+
     const cards: Record<string, unknown> = {};
     info.details_cards = cards;
     for (const width of [360, 390, 430, 768, 1280]) {
@@ -278,67 +384,74 @@ async function main() {
         await p.goto(`${BASE}/${slug}/details`, { waitUntil: 'load' });
         await p.addStyleTag({ content: zoneCss });
         await p.waitForTimeout(400);
-        const geo = await p.evaluate(() => {
-          const card = document.querySelector('.info')!;
-          const cb = card.getBoundingClientRect();
-          const lines: Array<{ t: string; x: number; y: number; w: number; h: number }> = [];
-          const walker = document.createTreeWalker(card.querySelector('.info-text')!, NodeFilter.SHOW_TEXT);
-          let n: Node | null;
-          while ((n = walker.nextNode())) {
-            if (!n.textContent!.trim()) continue;
-            const rg = document.createRange();
-            rg.selectNodeContents(n);
-            for (const lb of rg.getClientRects()) {
-              if (lb.width < 1) continue;
-              const pad = lb.height * 0.18; // the glyphs' ink, not the line's leading (theme-check uses the same pad)
-              lines.push({ t: n.textContent!.trim().slice(0, 24), x: lb.left - cb.left + 1, y: lb.top - cb.top + pad, w: lb.width - 2, h: lb.height - 2 * pad });
-            }
-          }
-          const cal = document.querySelector('.cal')?.getBoundingClientRect();
-          return {
-            x: cb.left + scrollX, y: cb.top + scrollY, w: cb.width, h: cb.height,
-            natural: (cb.width * 1411) / 912, lines,
-            rows: document.querySelectorAll('.sched-row').length,
-            calGap: cal ? cal.top - cb.bottom : null,
-            hscroll: document.documentElement.scrollWidth - innerWidth,
-          };
-        });
-        await p.addStyleTag({ content: '.info-text { visibility: hidden !important; }' });
-        const png = await p.screenshot({ fullPage: true, clip: { x: geo.x, y: geo.y, width: geo.w, height: geo.h } });
-        const { data, info: im } = await sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-        const px = (x: number, y: number) => {
-          const i = (Math.round(y) * im.width + Math.round(x)) * 3;
-          return [data[i], data[i + 1], data[i + 2]];
-        };
-        const ref: number[][] = [];
-        for (let yy = 0; yy < 20; yy++) for (let xx = 0; xx < 40; xx++) ref.push(px(geo.w * 0.5 - 20 + xx, geo.h * 0.5 - 10 + yy));
-        const paper = [0, 1, 2].map((c) => ref.map((q) => q[c]).sort((a, b) => a - b)[ref.length >> 1]);
-        const over: string[] = [];
-        for (const l of geo.lines) {
-          let total = 0;
-          let off = 0;
-          for (let y = Math.max(0, l.y); y < Math.min(im.height - 1, l.y + l.h); y++) {
-            for (let x = Math.max(0, l.x); x < Math.min(im.width - 1, l.x + l.w); x++) {
-              const q = px(x, y);
-              total++;
-              if (Math.hypot(q[0] - paper[0], q[1] - paper[1], q[2] - paper[2]) > 45) off++;
-            }
-          }
-          // Outside the card counts as decor too (the box runs past the captured card).
-          if (l.y + l.h > im.height || l.x + l.w > im.width) off = total || 1;
-          if (!total || off / total > 0.005) over.push(`"${l.t}" y${Math.round(l.y)} ${total ? ((100 * off) / total).toFixed(1) : 100}%`);
-        }
+        const geo = await cardOnPaper(p, '.info', '.info-text', 1411 / 912, '.cal');
         const name = `details card ${slug} @${width}`;
         check(
           `${name}: ${geo.rows} rows, ${geo.lines.length} text lines on plain paper (card ${Math.round(geo.h)} px, image ${Math.round(geo.natural)} px)`,
-          !over.length && geo.rows === SCHEDULES.find((s) => s[0] === slug)![1],
-          over.slice(0, 4).join(' | '),
+          !geo.over.length && geo.rows === SCHEDULES.find((s) => s[0] === slug)![1],
+          geo.over.slice(0, 4).join(' | '),
         );
-        check(`${name}: card ends before the calendar block, no horizontal scroll`, geo.calGap !== null && geo.calGap >= 0 && geo.hscroll <= 0, `gap ${geo.calGap?.toFixed(1)} px, scroll ${geo.hscroll}`);
+        check(`${name}: card ends before the calendar block, no horizontal scroll`, geo.nextGap !== null && geo.nextGap >= 0 && geo.hscroll <= 0, `gap ${geo.nextGap?.toFixed(1)} px, scroll ${geo.hscroll}`);
         cards[`${slug}@${width}`] = { card_px: Math.round(geo.h), image_px: Math.round(geo.natural), lines: geo.lines.length };
         if (width === 390 || (width === 1280 && slug === 'rows-10')) {
-          await p.addStyleTag({ content: '.info-text { visibility: visible !important; }' });
           await p.screenshot({ path: path.join(OUT, `details_card_${slug}_${width}.png`), fullPage: true, clip: { x: Math.max(0, geo.x - 12), y: geo.y - 12, width: Math.min(width - Math.max(0, geo.x - 12), geo.w + 24), height: geo.h + 24 } });
+        }
+        await p.close();
+      }
+      await ctx.close();
+    }
+
+    // G055 review: the home invitation card, same pixel test; the demo record keeps the image's own size.
+    const invites: Record<string, unknown> = {};
+    info.invitation_cards = invites;
+    for (const width of [360, 390, 430, 768, 1280]) {
+      const ctx = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+      for (const slug of ['no-photos', ...INVITES.map(([s]) => s)]) {
+        const p = await ctx.newPage();
+        await p.goto(`${BASE}/${slug}/home`, { waitUntil: 'load' });
+        await p.addStyleTag({ content: zoneCss });
+        await p.waitForTimeout(400);
+        const geo = await cardOnPaper(p, '.invite', '.invite-text', 1445 / 909, '.invite ~ *');
+        const name = `invitation card ${slug === 'no-photos' ? 'demo record' : slug} @${width}`;
+        check(
+          `${name}: ${geo.lines.length} text lines on plain paper (card ${Math.round(geo.h)} px, image ${Math.round(geo.natural)} px)`,
+          !geo.over.length && geo.lines.length >= 10,
+          geo.over.slice(0, 4).join(' | '),
+        );
+        check(`${name}: card ends before the block below, no horizontal scroll`, geo.nextGap !== null && geo.nextGap >= 0 && geo.hscroll <= 0, `gap ${geo.nextGap?.toFixed(1)} px, scroll ${geo.hscroll}`);
+        if (slug === 'no-photos' && width >= 390) {
+          check(`${name}: the demo card keeps the image's size (±1 %)`, Math.abs(geo.h - geo.natural) <= geo.natural * 0.01, `${geo.h.toFixed(1)} vs ${geo.natural.toFixed(1)} px`);
+        }
+        invites[`${slug}@${width}`] = { card_px: Math.round(geo.h), image_px: Math.round(geo.natural), lines: geo.lines.length };
+        if (width === 360 || width === 390) {
+          await p.screenshot({ path: path.join(OUT, `invitation_card_${slug}_${width}.png`), fullPage: true, clip: { x: Math.max(0, geo.x - 12), y: geo.y - 12, width: Math.min(width - Math.max(0, geo.x - 12), geo.w + 24), height: geo.h + 24 } });
+        }
+        await p.close();
+      }
+      await ctx.close();
+    }
+
+    // 3b. Home teasers with long schedule labels: no text runs past the right edge or is cut by its box.
+    for (const width of [360, 390]) {
+      const ctx = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1, reducedMotion: 'reduce' });
+      for (const slug of ['no-photos', 'rows-10-long', 'inv-stress']) {
+        const p = await ctx.newPage();
+        await p.goto(`${BASE}/${slug}/home`, { waitUntil: 'load' });
+        await p.waitForTimeout(300);
+        const r = await p.evaluate(() => {
+          const bad: string[] = [];
+          for (const el of document.querySelectorAll<HTMLElement>('.teasers h3, .teasers .kicker, .teasers .sched-line, .teasers .tx, .teasers .more')) {
+            const b = el.getBoundingClientRect();
+            if (!b.width) continue;
+            if (b.right > innerWidth + 0.5 || el.scrollWidth > el.clientWidth + 1) bad.push(`${(el.textContent || '').trim().slice(0, 32)} [${Math.round(b.left)}..${Math.round(b.right)}]`);
+          }
+          const lines = [...document.querySelectorAll<HTMLElement>('.teasers .sched-line')].filter((e) => e.getBoundingClientRect().height > 0).length;
+          return { bad, lines, hscroll: document.documentElement.scrollWidth - innerWidth };
+        });
+        check(`home teasers ${slug === 'no-photos' ? 'demo record' : slug} @${width}: no text cut off at the right edge (${r.lines} schedule lines shown)`, !r.bad.length && r.hscroll <= 0 && r.lines >= 3, r.bad.slice(0, 3).join(' | '));
+        if (slug !== 'no-photos' && width === 360) {
+          const box = await p.locator('.teasers').boundingBox();
+          if (box) await p.screenshot({ path: path.join(OUT, `home_teasers_${slug}_${width}.png`), fullPage: true, clip: { x: 0, y: box.y, width, height: box.height } });
         }
         await p.close();
       }
@@ -366,6 +479,55 @@ async function main() {
       check('panel: 10 events -> no "Add an event", a note instead', (await p.getByRole('button', { name: 'Add an event' }).count()) === 0 && body.includes('10 of 10 events') && body.includes('Up to 10 events'), body.slice(-160).replace(/\s+/g, ' '));
       await p.locator('[data-schedule-full]').scrollIntoViewIfNeeded();
       await p.screenshot({ path: path.join(OUT, 'panel_schedule_10_390.png') });
+      await ctx.close();
+    }
+    // G055 review: a site saved and published before the limits (12 events, 41-character name, 87-character venue).
+    {
+      const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+      const p = await ctx.newPage();
+      await p.goto(`${BASE}/edit/old-site?k=${legacySite.editKey}`, { waitUntil: 'networkidle' });
+      const open = async (id: string) => {
+        const b = p.locator(`#section-${id}`);
+        if ((await b.getAttribute('aria-expanded')) !== 'true') await b.click();
+        await b.scrollIntoViewIfNeeded();
+      };
+      await open('schedule');
+      const body = (await p.locator('#section-schedule-body').innerText()).replace(/\s+/g, ' ');
+      check(
+        'panel, site saved before the limits: 12 events -> the error, no "12 of 10 events" note, no "Add an event"',
+        body.includes('Your website shows up to 10 events. Please remove 2 events.') && !/\d+ of 10 events/.test(body) && (await p.locator('[data-schedule-full]').count()) === 0 && (await p.getByRole('button', { name: 'Add an event' }).count()) === 0,
+        body.slice(-200),
+      );
+      await p.screenshot({ path: path.join(OUT, 'panel_old_site_schedule_390.png') });
+      await open('couple');
+      const couple = (await p.locator('#section-couple-body').innerText()).replace(/\s+/g, ' ');
+      check('panel, old site: the name error says which field and how long', couple.includes('First name (first partner) is 41 characters. Please shorten it to 40.'), couple.slice(0, 200));
+      // An unrelated edit autosaves (the site is published and up to date, so "Publish" needs a change to publish).
+      await open('venue');
+      await p.locator('#f-venue-city').fill('Charleston');
+      await p.getByText('All changes saved').first().waitFor({ timeout: 15_000 });
+      await p.locator('[data-publish]').click();
+      await p.waitForSelector('[data-testid="issues"]', { timeout: 15_000 });
+      const sheet = (await p.locator('[data-testid="issues"]').innerText()).replace(/\s+/g, ' ');
+      check(
+        'panel, old site: "Before you publish" lists each over-long field by name, not twice the same line',
+        sheet.includes('First name (first partner) is 41 characters') && sheet.includes('Venue name is 87 characters. Please shorten it to 80.') && sheet.includes('Please remove 2 events'),
+        sheet.slice(0, 300),
+      );
+      await p.screenshot({ path: path.join(OUT, 'panel_old_site_publish_390.png') });
+      await p.keyboard.press('Escape');
+      // After a reload the over-limit values are still there (nothing cut) and the city change was saved.
+      await p.reload({ waitUntil: 'networkidle' });
+      await open('venue');
+      const venue = await p.locator('#f-venue-name').inputValue();
+      const city = await p.locator('#f-venue-city').inputValue();
+      await open('couple');
+      const first = await p.locator('#f-partners-0-display_name').inputValue();
+      await open('schedule');
+      const rowsLeft = await p.locator('[data-schedule-row]').count();
+      check('panel, old site: values kept after an unrelated autosave + reload (41 / 87 characters, 12 events)', [...first].length === 41 && [...venue].length === 87 && city === 'Charleston' && rowsLeft === 12, `${[...first].length} / ${[...venue].length} / ${rowsLeft} / ${city}`);
+      const pub = await (await fetch(`${BASE}/old-site/details`)).text();
+      check('panel, old site: the public site keeps its published 12 events (publishing the over-limit draft is refused)', (pub.match(/class="sched-row"/g) ?? []).length === 12 && !pub.includes('Charleston'));
       await ctx.close();
     }
   } finally {

@@ -2,7 +2,7 @@
 // Browser checks + previews of a platform theme on the real platform (production build, `next start`) — G038, G052.
 //
 //   npm run build && NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs [--theme <id>] [--out <dir>]
-//       [--compare w1|g035|none] [--content <record.json>] [--photos <dir>] [--collection <dir>] [--no-video]
+//       [--compare w1|g035|none] [--content <record.json>] [--photos <dir>] [--collection <dir>] [--no-video] [--stress]
 //
 // --theme defaults to blush-garden-rose (design 03). Everything theme-specific is read from the theme (G052,
 // scripts/lib/theme-env.ts): theme.json (pages, photo slots), img/manifest.json (free_zone of the painted cards, the
@@ -26,7 +26,11 @@
 //   1 no horizontal scroll, no text outside the viewport, no element past the edge that nothing clips
 //   2 every <img> loaded, no console/CSP error, no failed request
 //   3 every [data-field] / <title> equals the site's content record (formatted here, independently of the engine)
-//   4 card text stays on the plain paper of the GPT card (img/manifest.json free_zone), never over painted decor
+//   4 card text stays on the plain paper of the GPT card, never over painted decor: a card at its image's size maps each
+//     line box onto img/manifest.json free_zone; a card taller than its image (docs/11 §9 3-slice cut) is measured on the
+//     painted card itself (pixel test: everything but the card image hidden, the paint under each line box compared with
+//     the paper at the card's centre); a line outside the measured box is an error
+//   4b no text cut off by an ancestor that clips (overflow / clip-path)
 //   5 photo slots: user photos on the demo site, placeholders on the no-photos site ("Your photo here" only in a preview);
 //     every theme.json slot is on some page
 //   6 the Google Fonts families of the page's <link> loaded (warning otherwise)
@@ -35,6 +39,10 @@
 //   missing links send nothing; RSVP: a reply is stored and thanked, in a preview nothing is sent; the /start theme
 //   demo (not for internal themes); a content change in the data shows after reload; first-view weight (DPR 3) with
 //   placeholders (≤ 1.5 MB, error) and with the seeded sample photos (≤ 1.5 MB, else a warning: platform matter, docs/11 §6).
+// --stress: the docs/11 §12 stress record (scripts/lib/theme-env.ts stressRecord: 40-character names and full names,
+//   80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code) on every page at
+//   360/390 with checks 1–4b, and the envelope page at 360×640 / 390×844 (texts on the plain ground, envelope + hint on
+//   screen); screenshots stress_<page>_<w>.png. Required for G4NN (docs/11 §13.1).
 // Short phones (360×640, 375×553, 390×690, 390×844): the envelope texts (h1 + p outside the .stage; "Replay" when
 //   opened) sit on the plain painted ground, not on painted decor (measured on the backdrop with the text hidden);
 //   no horizontal scroll closed or opened; the closed envelope (.stage) and its "Tap to open" hint on screen.
@@ -116,9 +124,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), `platform-theme-check-`));
   const contentFile = path.join(dataDir, 'demo-content.json');
   fs.writeFileSync(contentFile, JSON.stringify(DEMO_CONTENT));
-  function seed(extra) {
+  function seed(extra, file = contentFile) {
     const photos = env.photosDir && !extra.includes('--no-photos') ? ['--photos', env.photosDir] : [];
-    execFileSync(process.execPath, [path.join(ROOT, 'scripts/seed.ts'), '--theme', THEME, '--content', contentFile, ...photos, ...extra], {
+    execFileSync(process.execPath, [path.join(ROOT, 'scripts/seed.ts'), '--theme', THEME, '--content', file, ...photos, ...extra], {
       cwd: ROOT, env: { ...process.env, PLATFORM_DATA_DIR: dataDir, SEED_BASE_URL: BASE }, stdio: 'pipe',
     });
     return JSON.parse(fs.readFileSync(path.join(dataDir, 'seed-keys.json'), 'utf8'));
@@ -178,6 +186,81 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     await page.waitForTimeout(250);
   }
 
+  /**
+   * Pixel test of a card that is taller than its image (docs/11 §9 3-slice cut): everything inside the card but the card
+   * image is hidden (text, inner decor, photos), the painted card is captured (site nav and particle layers hidden too)
+   * and each line box (the glyphs' ink: 18 % of the line height off top and bottom) is compared with the paper colour
+   * sampled at the card's centre — > 0.5 % of the pixels further than 45 (RGB distance) from it = over painted decor
+   * (the same test as tests/g055-browser.ts).
+   */
+  async function stretchedCardOver(page, card) {
+    const sharp = require(path.join(ROOT, 'node_modules/sharp'));
+    // only the painted card stays: its text, inner decor (dividers, sprigs) and photos are hidden like the free_zone method
+    // ignores them; the card image, its <picture> and the card's own ::before/::after slices remain
+    const hide = await page.addStyleTag({ content: `[data-qa-pixel="${card.no}"] :not([data-qa-card-img]):not(:has([data-qa-card-img])) { visibility: hidden !important; } .site-nav${PROFILE.particles ? `, ${PROFILE.particles}` : ''} { visibility: hidden !important; }` });
+    const png = await page.screenshot({ fullPage: true, clip: { x: card.x, y: card.y, width: card.w, height: card.h } });
+    await hide.evaluate((el) => el.remove());
+    const { data, info: im } = await sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    const px = (x, y) => { const i = (Math.round(y) * im.width + Math.round(x)) * 3; return [data[i], data[i + 1], data[i + 2]]; };
+    const ref = [];
+    for (let yy = 0; yy < 20; yy++) for (let xx = 0; xx < 40; xx++) ref.push(px(im.width * 0.5 - 20 + xx, im.height * 0.5 - 10 + yy));
+    const paper = [0, 1, 2].map((c) => ref.map((q) => q[c]).sort((a, b) => a - b)[ref.length >> 1]);
+    const over = [];
+    for (const l of card.lines) {
+      let total = 0, off = 0;
+      for (let y = Math.max(0, l.y); y < Math.min(im.height - 1, l.y + l.h); y++) {
+        for (let x = Math.max(0, l.x); x < Math.min(im.width - 1, l.x + l.w); x++) {
+          const q = px(x, y);
+          total++;
+          if (Math.hypot(q[0] - paper[0], q[1] - paper[1], q[2] - paper[2]) > 45) off++;
+        }
+      }
+      if (!total || off / total > 0.005) over.push(`"${l.t}" y${Math.round(l.y)} px ${total ? ((100 * off) / total).toFixed(1) : 100}%`);
+    }
+    return over;
+  }
+
+  /**
+   * The painted ground under each text box of `sel` (outside the .stage): the texts, the envelope and the Enter button are
+   * made transparent, the screen is captured and each box measured — mean horizontal edge strength and the share of
+   * pixels darker than dark_below / lighter than light_above (img/manifest.json theme_check.backdrop; calibrated on 03).
+   */
+  async function backdropBusy(page, sel) {
+    const sharp = require(path.join(ROOT, 'node_modules/sharp'));
+    const { dark_below: BELOW, light_above: ABOVE = 256 } = PROFILE.backdrop;
+    const boxes = await page.evaluate((sel) => [...document.querySelectorAll(sel)].filter((el) => !el.closest('.stage, [data-skip], .nojs-only, [hidden]')).map((el) => {
+      const b = el.getBoundingClientRect();
+      return b.width && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden' ? { sel: el.className || el.tagName, x: b.left, y: b.top, w: b.width, h: b.height } : null;
+    }).filter(Boolean), sel);
+    // the backdrop alone under each text box: text, envelope and Enter button hidden
+    await page.addStyleTag({ content: 'body * { color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; } .stage, [data-enter] { visibility: hidden !important; }' });
+    const png = await page.screenshot();
+    const out = [];
+    for (const b of boxes) {
+      const left = Math.max(0, Math.round(b.x)), top = Math.max(0, Math.round(b.y));
+      const meta = await sharp(png).metadata();
+      const width = Math.min(Math.round(b.w), meta.width - left), height = Math.min(Math.round(b.h), meta.height - top);
+      if (width < 2 || height < 1) continue;
+      const { data, info } = await sharp(png).extract({ left, top, width, height }).greyscale().raw().toBuffer({ resolveWithObject: true });
+      let edge = 0, dark = 0;
+      for (let y = 0; y < info.height; y++) for (let x = 1; x < info.width; x++) edge += Math.abs(data[y * info.width + x] - data[y * info.width + x - 1]);
+      for (const v of data) if (v < BELOW || v > ABOVE) dark++;
+      out.push({ box: String(b.sel).slice(0, 24), edge: edge / (info.height * (info.width - 1)), dark: dark / data.length });
+    }
+    return out;
+  }
+
+  /** docs/11 §13.3: horizontal scroll, the closed envelope (.stage) and its "Tap to open" hint on screen. */
+  const envelopeFit = (page) => page.evaluate(() => {
+    const vis = (el) => { const cs = getComputedStyle(el); const b = el.getBoundingClientRect(); return b.width > 0 && cs.display !== 'none' && cs.visibility !== 'hidden' ? b : null; };
+    const stage = document.querySelector('.stage');
+    const sb = stage && vis(stage);
+    const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el));
+    const hb = hint && hint.getBoundingClientRect();
+    return { hscroll: document.documentElement.scrollWidth - innerWidth, stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
+      hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null };
+  });
+
   async function pageChecks(page, tag, content, photoMode) {
     await markCards(page, PROFILE);
     const r = await page.evaluate(({ FZ, PARTICLES }) => {
@@ -217,33 +300,82 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       });
       out.siteData = !!document.getElementById('site-data');
       out.js = document.documentElement.dataset.js;
-      // text on painted cards must stay inside the plain-paper zone of the GPT image (cards marked by markCards)
+      // text on painted cards must stay inside the plain-paper zone of the GPT image (cards marked by markCards).
+      // A card at the image's own size: each line box is mapped onto the image (img/manifest.json free_zone). A card
+      // that is taller or wider than its image (docs/11 §9 3-slice cut: the band is stretched, the bottom slice follows
+      // the card's bottom) cannot be mapped linearly: its lines are measured on the painted card itself instead
+      // (pixel test in Node, below). A line outside the measured box is an error, never skipped.
       out.cards = 0;
       out.cardKeys = [];
+      out.pixelCards = [];
+      document.querySelectorAll('[data-qa-pixel]').forEach((e) => e.removeAttribute('data-qa-pixel'));
+      let cardNo = 0;
       for (const card of document.querySelectorAll('[data-qa-card]')) {
         const key = card.getAttribute('data-qa-card');
         const img = [...card.querySelectorAll('[data-qa-card-img]')][0];
         const cb = (img || card).getBoundingClientRect();
+        const hb = card.getBoundingClientRect();
         if (!cb.width || !FZ[key]) continue;
         out.cards++;
         out.cardKeys.push(key);
+        const stretched = Boolean(img) && (hb.height > cb.height + 1.5 || hb.width > cb.width + 1.5);
+        const box = stretched ? hb : cb;
+        const pixel = stretched ? { key, no: ++cardNo, x: hb.left + scrollX, y: hb.top + scrollY, w: hb.width, h: hb.height, image_h: cb.height, lines: [] } : null;
         const walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT);
         let n;
         while ((n = walker.nextNode())) {
           if (!n.textContent.trim() || n.parentElement.closest('.photo-slot, [data-slot]')) continue;
+          const pcs = getComputedStyle(n.parentElement);
+          if (pcs.visibility === 'hidden' || n.parentElement.closest('[hidden]')) continue;
           const rg = document.createRange(); rg.selectNodeContents(n);
           for (const lb of rg.getClientRects()) {
             if (lb.width < 1) continue;
-            const x0 = (lb.left - cb.left) / cb.width * 100, x1 = (lb.right - cb.left) / cb.width * 100;
+            const t = n.textContent.trim().slice(0, 24);
             const pad = lb.height * 0.18;
-            const y0 = (lb.top + pad - cb.top) / cb.height * 100, y1 = (lb.bottom - pad - cb.top) / cb.height * 100;
+            const x0 = (lb.left - box.left) / box.width * 100, x1 = (lb.right - box.left) / box.width * 100;
+            const y0 = (lb.top + pad - box.top) / box.height * 100, y1 = (lb.bottom - pad - box.top) / box.height * 100;
+            if (y0 < -0.5 || y1 > 100.5 || x0 < -0.5 || x1 > 100.5) {
+              out.zone.push(`${key} "${t}" y${y0.toFixed(1)}–${y1.toFixed(1)}% x${x0.toFixed(1)}–${x1.toFixed(1)}% outside the ${stretched ? 'card' : 'card image'} box`);
+              continue;
+            }
+            if (pixel) {
+              card.setAttribute('data-qa-pixel', String(pixel.no));
+              pixel.lines.push({ t, x: lb.left - hb.left + 1, y: lb.top - hb.top + pad, w: lb.width - 2, h: lb.height - 2 * pad });
+              continue;
+            }
             for (const [y, L, R] of FZ[key]) {
               if (y + 1 <= y0 || y >= y1) continue;
               if (L === null || x0 < L - 0.6 || x1 > R + 0.6) {
-                out.zone.push(`${key} "${n.textContent.trim().slice(0, 24)}" y${y0.toFixed(1)}–${y1.toFixed(1)}% x${x0.toFixed(1)}–${x1.toFixed(1)}% vs band ${y}% [${L}..${R}]`);
+                out.zone.push(`${key} "${t}" y${y0.toFixed(1)}–${y1.toFixed(1)}% x${x0.toFixed(1)}–${x1.toFixed(1)}% vs band ${y}% [${L}..${R}]`);
                 break;
               }
             }
+          }
+        }
+        if (pixel) out.pixelCards.push(pixel);
+      }
+      // text cut off: a text's own box (Range) must lie inside every ancestor that clips (overflow ≠ visible, clip-path)
+      out.clipped = [];
+      for (const el of document.querySelectorAll('body *')) {
+        const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.textContent.trim());
+        if (!own.length || el.closest('[hidden], .nojs-only, [data-rsvp-honeypot], .sr-only, .visually-hidden')) continue;
+        const cs = getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden' || cs.position === 'fixed') continue;
+        const rg = document.createRange();
+        rg.setStartBefore(own[0]); rg.setEndAfter(own[own.length - 1]);
+        const tb = rg.getBoundingClientRect();
+        if (tb.width < 1) continue;
+        for (let a = el; a && a !== document.body; a = a.parentElement) {
+          const acs = getComputedStyle(a);
+          if (acs.overflowX === 'visible' && acs.overflowY === 'visible' && acs.clipPath === 'none') continue;
+          if (acs.clipPath !== 'none' && a.matches('[data-step]:not(.in)')) continue;   // an entrance not played yet
+          const ab = a.getBoundingClientRect();
+          const xClip = acs.overflowX !== 'visible' || acs.clipPath !== 'none';
+          const yClip = acs.overflowY !== 'visible' || acs.clipPath !== 'none';
+          const cut = (xClip && (tb.left < ab.left - 1 || tb.right > ab.right + 1)) || (yClip && acs.clipPath === 'none' && (tb.top < ab.top - 1 || tb.bottom > ab.bottom + 1) && acs.overflowY !== 'auto' && acs.overflowY !== 'scroll');
+          if (cut) {
+            out.clipped.push(`${el.tagName.toLowerCase()}.${String(el.className).slice(0, 24)} "${el.textContent.trim().slice(0, 28)}" [${Math.round(tb.left)}..${Math.round(tb.right)}] cut by ${a.tagName.toLowerCase()}.${String(a.className).slice(0, 24)} [${Math.round(ab.left)}..${Math.round(ab.right)}]`);
+            break;
           }
         }
       }
@@ -262,6 +394,11 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     r.bleed.slice(0, 6).forEach((x) => bad.push(`element past the edge ${x}`));
     r.broken.forEach((x) => bad.push(`image not loaded ${x}`));
     r.zone.forEach((x) => bad.push(`card text over painted decor ${x}`));
+    r.clipped.forEach((x) => bad.push(`text cut off ${x}`));
+    for (const card of r.pixelCards) {
+      const over = await stretchedCardOver(page, card);
+      over.forEach((x) => bad.push(`card text over painted decor ${card.key} (card ${Math.round(card.h)} px > image ${Math.round(card.image_h)} px, pixel test) ${x}`));
+    }
     if (!r.siteData) bad.push('no #site-data');
     if (env.jsReadyFlag && r.js !== 'ready') bad.push('site.js did not finish (data-js != ready)');
     if (!r.fontLink && once(`${name}:font`)) bad.push('no Google Fonts <link> (docs/11 §3.1; reported once per page)');
@@ -316,7 +453,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
 
   let browser;
   try {
-    await waitForServer(`${BASE}/`);
+    await waitForServer(`${BASE}/`, 30_000, server);
     const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
     browser = await chromium.launch(proxy ? { proxy: { server: proxy, bypass: '127.0.0.1,localhost' } } : {});
     const mk = (w, h, extra = {}) => browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, hasTouch: w < 960, isMobile: w < 768, ...extra });
@@ -406,29 +543,8 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     // ---------------------------------------------------------------- short phones: envelope text never on painted decor
     await flow('short phones', async () => {
       const sharp = require(path.join(ROOT, 'node_modules/sharp'));
-      const { edge_max: EDGE, dark_max: DARK, dark_below: BELOW, light_above: ABOVE = 256 } = PROFILE.backdrop;
-      const busy = async (page, sel) => {
-        const boxes = await page.evaluate((sel) => [...document.querySelectorAll(sel)].filter((el) => !el.closest('.stage, [data-skip], .nojs-only, [hidden]')).map((el) => {
-          const b = el.getBoundingClientRect();
-          return b.width && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden' ? { sel: el.className || el.tagName, x: b.left, y: b.top, w: b.width, h: b.height } : null;
-        }).filter(Boolean), sel);
-        // the backdrop alone under each text box: text, envelope and Enter button hidden
-        await page.addStyleTag({ content: 'body * { color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; } .stage, [data-enter] { visibility: hidden !important; }' });
-        const png = await page.screenshot();
-        const out = [];
-        for (const b of boxes) {
-          const left = Math.max(0, Math.round(b.x)), top = Math.max(0, Math.round(b.y));
-          const meta = await sharp(png).metadata();
-          const width = Math.min(Math.round(b.w), meta.width - left), height = Math.min(Math.round(b.h), meta.height - top);
-          if (width < 2 || height < 1) continue;
-          const { data, info } = await sharp(png).extract({ left, top, width, height }).greyscale().raw().toBuffer({ resolveWithObject: true });
-          let edge = 0, dark = 0;
-          for (let y = 0; y < info.height; y++) for (let x = 1; x < info.width; x++) edge += Math.abs(data[y * info.width + x] - data[y * info.width + x - 1]);
-          for (const v of data) if (v < BELOW || v > ABOVE) dark++;
-          out.push({ box: String(b.sel).slice(0, 24), edge: edge / (info.height * (info.width - 1)), dark: dark / data.length });
-        }
-        return out;
-      };
+      const { edge_max: EDGE, dark_max: DARK } = PROFILE.backdrop;
+      const busy = backdropBusy;
       const measured = [];
       for (const [w, h] of [[360, 640], [375, 553], [390, 690], [390, 844]]) {
         for (const state of ['closed', 'opened']) {
@@ -441,15 +557,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
           const sel = state === 'closed' ? PROFILE.envelopeText.closed : PROFILE.envelopeText.opened;
           // docs/11 §13.3: no horizontal scroll (an opened gatefold/book must not widen the page); closed: the envelope
           // and its "Tap to open" hint on screen
-          const fit = await page.evaluate(() => {
-            const vis = (el) => { const cs = getComputedStyle(el); const b = el.getBoundingClientRect(); return b.width > 0 && cs.display !== 'none' && cs.visibility !== 'hidden' ? b : null; };
-            const stage = document.querySelector('.stage');
-            const sb = stage && vis(stage);
-            const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el));
-            const hb = hint && hint.getBoundingClientRect();
-            return { hscroll: document.documentElement.scrollWidth - innerWidth, stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
-              hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null };
-          });
+          const fit = await envelopeFit(page);
           if (fit.hscroll > 0) err(`envelope ${state} @${w}×${h}: horizontal scroll ${fit.hscroll}px`);
           if (state === 'closed' && fit.stage === false) err(`envelope closed @${w}×${h}: the closed envelope (.stage) is not entirely on screen`);
           if (state === 'closed' && fit.hint === false) err(`envelope closed @${w}×${h}: "Tap to open" is below the screen`);
@@ -747,6 +855,52 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       }
       if (results.errors.length === errorsBefore) ok('content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload');
       await ctx.close();
+    });
+
+    // ---------------------------------------------------------------- docs/11 §12 stress record (--stress)
+    if (args.stress) await flow('stress record', async () => {
+      const errorsBefore = results.errors.length;
+      const stressFile = path.join(dataDir, 'stress-content.json');
+      fs.writeFileSync(stressFile, JSON.stringify(lib.stressRecord(DEMO_CONTENT)));
+      const stress = seed(['--slug', 'stress-site', '--no-photos'], stressFile);
+      const content = readSite(stress.siteId).publishedContent;
+      const pages = PAGES.filter((n) => !(n === 'story' && !hasStory) && !(n === 'rsvp' && !rsvpOn));
+      for (const w of [360, 390]) {
+        const ctx = await mk(w, 844);
+        for (const name of pages) {
+          const page = await ctx.newPage();
+          const problems = watch(page);
+          await page.goto(url(stress.slug, name), { waitUntil: 'load' });
+          await page.evaluate(() => document.fonts.ready);
+          await eager(page);
+          if (name === 'index') await page.waitForTimeout(900); else await revealAll(page);
+          await pageChecks(page, `${name}@${w} (stress record)`, content, 'placeholder');
+          problems.forEach((p) => err(`${name}@${w} (stress record): ${p}`));
+          await flattenNav(page);
+          await page.screenshot({ path: path.join(OUT, `stress_${name}_${w}.png`), fullPage: name !== 'index' });
+          await page.close();
+        }
+        await ctx.close();
+      }
+      // the envelope page with the longest names: texts on the plain painted ground, envelope and hint on screen
+      const { edge_max: EDGE, dark_max: DARK } = PROFILE.backdrop;
+      for (const [w, h] of [[360, 640], [390, 844]]) {
+        const ctx = await mk(w, h);
+        const page = await ctx.newPage();
+        await page.goto(url(stress.slug, 'index'), { waitUntil: 'load' });
+        await page.evaluate(() => document.fonts.ready);
+        await page.waitForTimeout(900);
+        const fit = await envelopeFit(page);
+        if (fit.hscroll > 0) err(`envelope closed @${w}×${h} (stress record): horizontal scroll ${fit.hscroll}px`);
+        if (fit.stage === false) err(`envelope closed @${w}×${h} (stress record): the closed envelope (.stage) is not entirely on screen`);
+        if (fit.hint === false) err(`envelope closed @${w}×${h} (stress record): "Tap to open" is below the screen`);
+        const all = await backdropBusy(page, PROFILE.envelopeText.closed);
+        const hits = all.filter((r) => r.edge > EDGE || r.dark > DARK);
+        if (hits.length) err(`envelope closed @${w}×${h} (stress record): text over painted decor ${JSON.stringify(hits.map((x) => ({ ...x, edge: +x.edge.toFixed(2), dark: +x.dark.toFixed(3) })))}`);
+        await ctx.close();
+      }
+      if (results.errors.length === errorsBefore) ok('stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen');
+      results.info.stress_record = { slug: stress.slug, pages, widths: [360, 390] };
     });
 
     // ---------------------------------------------------------------- first-view transfer (390×844, DPR 3): placeholders, then sample photos

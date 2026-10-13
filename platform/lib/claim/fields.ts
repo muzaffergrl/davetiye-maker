@@ -8,7 +8,7 @@
 // format, change ORDER_NUMBER_MIN/MAX here (tests in tests/claim.test.ts). Verification against
 // Etsy is a separate, optional step (lib/claim/verify.ts, off by default).
 
-import { CONTENT_LIMITS } from '../content/validate.ts';
+import { CONTENT_LIMITS } from '../content/limits.ts';
 import { isReservedSlug, isValidSlugFormat, slugify } from '../slug.ts';
 
 export const ORDER_NUMBER_MIN = 8;

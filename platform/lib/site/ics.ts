@@ -4,6 +4,7 @@
 
 import { calendarEvent, icsFile, type CalendarEvent } from '../calendar.ts';
 import { getDataAdapter } from '../data/index.ts';
+import { publicOrigin } from '../panel/http.ts';
 import { canPreview } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { notFound } from './render.ts';
@@ -38,12 +39,15 @@ export async function handleIcsRequest(req: Request, slugParam: string): Promise
     const preview = previewParam !== null && canPreview(site, previewParam);
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
-    const event = calendarEvent(content, { siteUrl: `${url.origin}/${slug}` });
+    // the public origin, like the pages (og:image, the Google Calendar link): both "Add to calendar" buttons give the
+    // same site link, and the UID stays the same whichever host served the file (re-importing updates the entry)
+    const origin = publicOrigin(req.headers, url.origin);
+    const event = calendarEvent(content, { siteUrl: `${origin}/${slug}` });
     if (!event) return notFound();
     const stampIso = preview ? null : site.publishedAt ?? site.updatedAt;
     return icsResponse(event, {
-      // stable per site and host: importing the file again updates the same calendar entry
-      uid: `${slug}@${url.host}`,
+      // stable per site and public host: importing the file again updates the same calendar entry
+      uid: `${slug}@${new URL(origin).host}`,
       stamp: stampIso ? new Date(stampIso) : new Date(),
       filename: `${slug}.ics`,
       preview,

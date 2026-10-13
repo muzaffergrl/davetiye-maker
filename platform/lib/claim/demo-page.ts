@@ -86,10 +86,10 @@ export async function handleDemoIcs(req: Request, themeId: string): Promise<Resp
   try {
     const theme = await claimableTheme(themeId);
     if (!theme) return demoNotFound();
-    const url = new URL(req.url);
-    const event = calendarEvent(theme.demo, { siteUrl: `${url.origin}${demoBase(theme.id)}` });
+    const origin = publicOrigin(req.headers, new URL(req.url).origin); // same origin as the demo page's links
+    const event = calendarEvent(theme.demo, { siteUrl: `${origin}${demoBase(theme.id)}` });
     if (!event) return demoNotFound();
-    return icsResponse(event, { uid: `demo-${theme.id}@${url.host}`, filename: `${theme.id}-demo.ics`, preview: false });
+    return icsResponse(event, { uid: `demo-${theme.id}@${new URL(origin).host}`, filename: `${theme.id}-demo.ics`, preview: false });
   } catch (e) {
     console.error(`[claim] demo ${themeId}/event.ics:`, e);
     return demoNotFound();

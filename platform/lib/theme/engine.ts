@@ -109,7 +109,7 @@ function isPresent(v: unknown): boolean {
  * <meta> of <head>. A tag the template already has is left as it is (no duplicates). og:image needs an
  * absolute URL, so it is written only with an origin; the icon is a root-relative link.
  */
-function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShareFiles | null, origin: string | null): void {
+function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShareFiles | null, origin: string | null, alt: string): void {
   const head = $('head').first();
   if (!share || !head.length) return;
   const tags: AnyNode[] = [];
@@ -125,7 +125,10 @@ function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShar
     meta('property', 'og:image:type', 'image/jpeg');
     meta('property', 'og:image:width', String(OG_IMAGE_SIZE.width));
     meta('property', 'og:image:height', String(OG_IMAGE_SIZE.height));
+    // the image carries no text (names are never baked in, K24): its description comes from the content
+    if (!$('meta[property="og:image:alt"]').length) meta('property', 'og:image:alt', alt);
     if (!$('meta[name="twitter:card"]').length) meta('name', 'twitter:card', 'summary_large_image');
+    if (!$('meta[name="twitter:image:alt"]').length) meta('name', 'twitter:image:alt', alt);
   }
   const iconUrl = share.icon ? themeAssetUrl(themeId, share.icon) : null;
   if (iconUrl && !$('link[rel~="icon"]').length) {
@@ -529,7 +532,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     }
   });
 
-  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null);
+  const names = typeof view.name_display === 'string' ? view.name_display.trim() : '';
+  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? `${names} wedding invitation` : 'Wedding invitation');
 
   // Theme inline scripts are trusted template code (content can never create a <script>:
   // every inserted value is text). Their hashes go into the page CSP.

@@ -163,7 +163,7 @@ async function journey(label: string, fn: () => Promise<void>) {
 
 let browser: any;
 try {
-  await waitForServer(`${BASE}/`);
+  await waitForServer(`${BASE}/`, 30_000, server);
   browser = await chromium.launch();
   const device = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
   const hasStory = demo.optional_blocks?.our_story === true;

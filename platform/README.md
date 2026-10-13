@@ -19,19 +19,23 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim, G055 (250 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose teması, takvim, G055 (258 test)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
-node scripts/theme-check.cjs   # build sonrası: blush-garden-rose — 5 genişlik, kısa telefonlar, akış, içerik, previews/g038/ (+ MP4; THEME_SHOTS_DIR başka klasör)
+NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id> [--stress] [--out <klasör>] [--compare w1|g035|none] [--no-video]
+                       # build sonrası (G052): her tema — 5 genişlik, kısa telefonlar, akış, içerik, kart metni (uzayan kart piksel
+                       # testiyle), kırpılan metin; --stress = docs/11 §12 zorlama kaydı; varsayılan tema blush-garden-rose → previews/g038/
+                       # (+ MP4); G4NN → previews/g4NN/. Port $PORT (3312); port doluysa "Ready"siz durur, başka sunucuya karşı koşmaz
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
-NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts   # build sonrası: son duman testi, 390 px, gerçek tema — misafir (zarf → home →
+NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts [--theme <id>]   # build sonrası: son duman testi, 390 px — misafir (zarf → home →
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
-NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts   # build sonrası: G051, 390 px, gerçek tema — takvim düğmeleri + .ics,
+NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts [--theme <id>]   # build sonrası: G051, 390 px — takvim düğmeleri + .ics,
                        # SSS akordeonu (dokun/klavye), RSVP özel soruları (evet/hayır, hata), CSV sütunları, panel düzenleyicileri (44 kontrol;
                        # ekran görüntüleri $G051_SHOTS_DIR, varsayılan geçici klasör; repodaki örnekler previews/g051/)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g055-browser.ts   # build sonrası: G055 — og:image/ikon, alıcı fotoğrafı srcset +
-                       # ilk görünüm (DPR 3), Details kartı 3/7/10 satır × 5 genişlik, panel sınırları (73 kontrol; çıktı $G055_SHOTS_DIR,
+                       # ilk görünüm (DPR 3), Details kartı 3/7/10 satır ve home davet kartı (uzun isim/mekân, §12 zorlama) × 5
+                       # genişlik, home tanıtımları 360/390, panel sınırları + sınırdan önce kaydedilmiş site (138 kontrol; çıktı $G055_SHOTS_DIR,
                        # varsayılan geçici klasör; boş port kendisi seçer, $PORT ile sabitlenir)
 ```
 
@@ -46,7 +50,8 @@ Ortam değişkenleri: `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob,
 ve log'a yazılmaz), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`; `blob`'da yalnız seed'in `seed-keys.json`'u),
 `PLATFORM_THEMES_DIR` (varsayılan `platform/themes`), `PLATFORM_PUBLIC_URL` (sitelerin herkese açık kökü, ör. `https://<ad>.vercel.app`;
 panelin yayın linki ve QR'ı, sayfaların mutlak `og:image`'ı ve takvim açıklamasındaki site linki için (G055); yoksa isteğin host'u —
-`x-forwarded-host`/`host` — kullanılır).
+`x-forwarded-host`'un **son** girdisi — proxy'nin yazdığı; istemci yalnız başa ekleyebilir — ya da `host`; `/<slug>/event.ics` site linki ve
+UID'i de, G055 incelemesi). Üretimde tanımlanmalı: yoksa sunucu bir kez uyarı yazar.
 
 ## Klasörler
 
@@ -309,7 +314,8 @@ Görünüm G035 ile aynı (yan yana: `previews/g038/compare_*_390.jpg`); bilinç
 - **G035'ten farklar:** mekân fotoğrafı GPT yatay çerçevede (CSS kemer kırpma + çiçek kümeleri yerine); kapalı zarfın
   kapağı ayrı katman (`env_cflap`, tırtıklı kenarı izlenerek kesildi) ve açılışta menteşesinde 3D kalkıyor, sonra açık
   kapak devralıyor (önceden kapalı zarf açık gövdeye eriyordu); oturum anahtarları site başına; 4+ program satırında
-  kart sıkışık düzene geçiyor; **G055:** Order of the Day kartı satırlarla uzuyor (10 satır, uzun etiket/yer, dress code) — GPT
+  kart sıkışık düzene geçiyor; **G055:** Order of the Day kartı (ve G055 incelemesiyle home davet kartı: uzun tam ad, host line,
+  mekân) içerikle uzuyor (10 satır, uzun etiket/yer, dress code) — GPT
   kartı docs/11 §9 3 dilim kesimiyle: üst %0–42 `<img>` (kırpılmış), düz kâğıt bandı %42–66 `::before` (dikeyde gerilir), alt
   %66–100 `::after`; metin akışta, en çok görüntünün %72 satırına iner; kart görüntünün kendi boyundan kısa olmaz (ayrıntı ve
   ölçüm aşağıda "Platform cilası (G055)"); RSVP sayfasında G035'in "preview only"
@@ -337,7 +343,9 @@ takvim günü olmalı, `format: uri` mutlak http(s) olmalı, bilinmeyen saat dil
 `tests/content.test.ts` 20 demo kaydı ve hatalı örneklerde Python aracıyla geçti/kaldı eşliğini sınar.
 Şema değişince: `node scripts/sync-schema.cjs`.
 Uzunluk sınırları (G055) şemada: isimler (`partners[].display_name`/`full_name`) ≤ 40, isim satırı `name_display` ≤ 85, mekân adı
-≤ 80, program ≤ 10 satır; `CONTENT_LIMITS` (`validate.ts`) bunları şemadan okur — panel ve `/start` de oradan. Karakter sayısı
+≤ 80, program ≤ 10 satır; `CONTENT_LIMITS` (`lib/content/limits.ts`: düz sayılar — `/start`'ın tarayıcı paketine şema ve doğrulayıcı
+girmesin diye) panel ve `/start` içindir; `validate.ts` aynı sınırları şemadan `SCHEMA_LIMITS` olarak okur, `tests/g055-review.test.ts`
+ikisinin eşitliğini sınar (şema değişip `limits.ts` değişmezse `npm test` kırılır). Karakter sayısı
 kod noktası (`[...s].length`, Python `len`); eşlik `tests/g055-limits.test.ts`'te.
 
 Taslak kayıt geçersiz olabilir (panelde yazarken); `publishSite()` geçersiz içeriği yayınlamaz: doğruladığı sürümü
@@ -639,7 +647,8 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
   Yanıtta slug, e-posta, link ya da kayıt bilgisi **yok**; düz anahtar zaten saklanmadığı için yeniden gösterilemez.
   Aynı süreçte eşzamanlı denemeler sipariş no başına kilitle sıralanır (test: 6 paralel istek → 1 site).
 - E-posta: basit biçim kontrolü (≤ 254), alan adı küçük harfe. İsim: harf içermeli, ≤ 40 karakter (G055: `NAME_MAX` =
-  şemanın isim sınırı, kod noktası sayılır; mesaj "Please keep each name to 40 characters or fewer."); görünmez/bidi karakterleri
+  şemanın isim sınırı, kod noktası sayılır; mesaj "Please keep each name to 40 characters or fewer."; G055 incelemesi: isim
+  kutuları paneldeki gibi `maxlength={NAME_MAX}` — 40'ta durur, eskiden 60'a kadar yazdırıp sonra uyarıyordu); görünmez/bidi karakterleri
   silinir. İki 40 karakterlik isimle oluşan taslak da geçerli (`name_display` 83 ≤ 85).
 - Adres: `lib/slug.ts` kuralları (3–48, ayrılmış adlar). Adres sonradan değiştirilemez (panelde slug değiştirme yok) — form bunu söyler.
 - **Demo içeriği kaynağı:** önce `themes/<tema>/content.demo.json` (tema kendi demo kaydını taşır; tema varlık rotası `.json`
@@ -785,6 +794,7 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
   (`image/jpeg`), `og:image:width/height` (1200/630), `twitter:card=summary_large_image`; `<link rel="icon" type="image/png"
   href="/themes/<tema>/img/favicon.png">`. Etiketler `<head>`'deki son `<meta>`'dan sonra. Şablonun kendi `og:image` /
   `twitter:card` / `icon` etiketi varsa o kalır (çift yazılmaz). Origin verilmezse (`renderTemplate` doğrudan) `og:image` yazılmaz.
+  G055 incelemesi: `og:image:alt` + `twitter:image:alt` = "{name_display} wedding invitation" (görselde yazı yok; içerikten).
   Site sayfaları, önizleme ve `/start/demo/<tema>` aynı.
 - `apple-touch-icon` **yazılmaz** (karar): `favicon.png` şeffaf; iOS ana ekran ikonunda şeffaf alan siyah görünür. Gerekirse
   temaya ayrı, zeminli bir `apple-touch-icon.png` (GPT parçasından) eklenir.
@@ -848,8 +858,25 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
 - **Bilinçli fark:** 03'ün demo kartı (3 satır) da 554 → 586 px (390 px'te, %+5,8) uzadı: metnin alt sınırı artık görüntünün %72
   satırı (uzun satırlarda alt çiçeklere değmemek için); demo düzeni ve metin konumu aynı, yalnız düz kâğıt bandı 1,28× uzun. Kâğıt
   dokusu gerilen bantta dikey liflenir (10 uzun satırda ~4×; DPR 3'te yakından bakınca görülür), ek yerleri gözle bakıldığında
-  görünmedi. `theme-check --theme blush-garden-rose` 73/73 geçti; onun kart serbest bölge denetimi kart boyunu görüntüye doğrusal
-  eşlediği için uzamış kartta yaklaşıktır — kesin denetim `g055-browser`'daki piksel testi.
+  görünmedi. (G055 incelemesi: `theme-check` artık görüntüsünden uzun kartı doğrusal eşlemiyor, aynı piksel testiyle ölçüyor.)
+
+### G055 incelemesi (2026-10-13)
+- **03 home davet kartı** (`site.css`): Details kartı gibi 3 dilimle uzuyor (davet kartının düz kâğıt bandı %42–66; metin
+  görüntünün %35,2 satırından başlar, sütun en çok %88, mekân + şehir en çok %64, son satır görüntünün en çok %81,5 satırında).
+  Önce 20+ karakterlik bir tam ad (`.nm` `cqw` ile ölçeklendiği için her genişlikte) tarihi ve mekânı alt çiçeklerin üstüne,
+  35 karakterlik ad kartın dışına itiyordu; 78 karakterlik mekân demo isimleriyle de çiçeğe biniyordu. Şimdi 24/35/40
+  karakterlik tam ad, 78/80 karakterlik mekân, uzun host line × 360/390/430/768/1280 düz kâğıtta (`g055-browser` piksel testi);
+  demo kaydında kart görüntünün kendi boyunda (390 px'te +1 px, 360 px'te +7 px).
+- **03 home tanıtımı:** program satırı `nowrap` değil, kendi altına sarar (asılı girinti); 360 px'te uzun etiket ve "Will You
+  Join Us?" artık sağdan kesilmiyor.
+- **Takvim dosyası:** `/<slug>/event.ics` (ve tema demosunun) site linki + UID'i `publicOrigin` — sayfalardaki Google linki ile aynı.
+- **`publicOrigin`:** virgüllü `x-forwarded-host` / `-proto`'nun son girdisi; `PLATFORM_PUBLIC_URL` yoksa üretimde bir kez uyarı.
+- **Küçük foto:** `-<W>w` adları tek haneli genişliği de okur (8 px genişlikte bir foto saklanıp 404 veriyordu).
+- **Panel:** program tam 10 satırken not; 10'u aşan eski sitede yalnız hata ("12 of 10" çelişkisi yok). Uzunluk hataları alanı ve
+  uzunluğu söyler: "First name (first partner) is 41 characters. Please shorten it to 40." (`fieldLabel`, `panelIssues`). Hikâye
+  "Intro line" alanında ipucu: tarih bu satırın arkasına eklenir.
+- `/start` isim kutuları 40'ta durur (yukarıda); `lib/content/limits.ts` (yukarıda).
+- Testler: `tests/g055-review.test.ts` (8; `npm test`'te), `tests/g055-browser.ts` 138 kontrol.
 
 Testler: `tests/g055-share-tracing.test.ts` (8), `tests/g055-photos.test.ts` (6), `tests/g055-limits.test.ts` (6) `npm test`'te;
 `tests/panel.test.ts` (yükleme adı/türevleri), `tests/panel-browser.ts` (küçük resim = 640 türevi, yayındaki sayfada `srcset`);

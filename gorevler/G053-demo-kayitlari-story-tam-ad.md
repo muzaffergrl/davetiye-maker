@@ -55,22 +55,22 @@ değişmedi (`name_display`, `initials`, tarih, mekân, program aynı). Hepsi ku
 | 04 | Some love stories are written one letter at a time. Ours led us to | A table for two | Sealed with a yes | Yours, always |
 | 05 | Under the lemon trees, one sunny day at a time, we found our way to | On the piazza | Above the sea | Our sweetest yes |
 | 06 | It began with jazz and champagne, and every evening since has led us to | Jazz night | On the staircase | Here's to us |
-| 07 | Cider by the fire, walks through falling leaves and every warm moment since led us to | By the fire | Falling leaves | Hand in hand |
-| 08 | Hot cocoa, falling snow and one very happy winter evening led us to | First snowfall | Under the pines | Evergreen love |
+| 07 | Warm cider, long autumn walks and many cozy evenings in between brought us to | By the fire | Falling leaves | Hand in hand |
+| 08 | Hot cocoa, falling snow and one very happy winter evening brought us to | First snowfall | Under the pines | Evergreen love |
 | 09 | Long summer evenings and fields of lavender carried us all the way to | Rosé in the square | In the lavender | Tied together |
 | 10 | Good wine, long tables and golden vineyard sunsets led us to | First pour | Among the vines | A fine vintage |
-| 11 | Wide skies, desert sunsets and a few wild-hearted adventures led us to | Where it began | Desert sunset | Wild hearts |
-| 12 | Every adventure and every island sunset has been bringing us to | Island time | End of the pier | Next stop: forever |
+| 11 | Wide skies, open roads and a few wild-hearted adventures carried us to | Where it began | Desert sunset | Wild hearts |
+| 12 | Every adventure and every island sunset has brought us closer to | Island time | End of the pier | Next stop: forever |
 | 13 | Once upon a time, two people met in the woods. Every page since has led us to | Chapter one | By lantern light | Happily ever after |
-| 14 | Afternoon tea, a rose garden and a promise made by the fountain led us to | Afternoon tea | By the fountain | Forever and always |
+| 14 | Tea for two, a rose garden and one promise we will always keep brought us to | Afternoon tea | By the fountain | Pearls & promises |
 | 15 | Like the first blossoms of spring, our story unfolded slowly and led us to | Our first spring | Under the blossoms | In full bloom |
 | 16 | Back roads, lemonade and one golden sunflower field led us straight to | Tailgate lemonade | In the sunflowers | Sunny days ahead |
-| 17 | From an evening at the gallery to a sunset by the lake, every moment led us to | At the gallery | By the lake | Set in gold |
-| 18 | Picnics, wildflowers and long summer afternoons brought us to | Our first picnic | In the meadow | Forever in bloom |
+| 17 | From our first toast among the paintings, every moment has been leading us to | At the gallery | By the lake | Set in gold |
+| 18 | Picnics, wildflowers and long summer afternoons brought us to | Our first picnic | In the meadow | Picked for keeps |
 | 19 | Candlelit evenings and moonlit walks led us, one midnight at a time, to | By candlelight | Under the moon | One red rose |
-| 20 | Salt air, harbor afternoons and one lighthouse sunset led us to | Down by the harbor | By the lighthouse | Tide after tide |
+| 20 | Salt air, long walks on the shore and one golden evening carried us to | Down by the harbor | By the lighthouse | Tide after tide |
 
-Intro 60–85 karakter (sınır 200), başlıklar ≤ 18 (sınır 60).
+Intro 60–85 karakter (sınır 200), başlıklar ≤ 18 (sınır 60). (Tablo inceleme düzeltmesiyle güncel: 07, 08, 11, 12, 14, 17, 18, 20.)
 
 **Test edildi:**
 - `python3 tools/validate_content.py` — 20 kaydın 20'si GEÇTİ (01–20, 03 dahil).
@@ -92,7 +92,24 @@ sitede başlıklar HTML'dir.
 **Önerilen yeni görev (entegratör / claude-kod):** `python3 tools/katalog.py paket5 --no 02,04,05,…,20` ile GPT_PROMPTS.md'leri
 yeni başlıklara eşitle (01'i G201 bitince); W1.3 comp'u henüz üretilmemiş tasarımlarda GPT doğru başlıkları görür.
 
+**İnceleme düzeltmeleri (2026-10-13, wf-hazirlik)**
+- **Hikâye metni (düşük):** kalıp tekrarları ve giriş↔başlık tekrarları azaltıldı (8 kayıt; "+ tarih" yapısı aynı, hepsi kurgu):
+  07 "Warm cider, long autumn walks and many cozy evenings in between brought us to" ("since" dayanaksızdı; "By the fire" /
+  "Falling leaves" başlıklarını tekrar etmiyor) · 08 "… brought us to" · 11 "Wide skies, open roads and a few wild-hearted adventures
+  carried us to" ("Desert sunset" tekrarı yok) · 12 "Every adventure and every island sunset has brought us closer to" (zaman
+  uyumu) · 14 "Tea for two, a rose garden and one promise we will always keep brought us to" + başlık 3 "Pearls & promises"
+  ("Afternoon tea" / "By the fountain" tekrarı yok) · 17 "From our first toast among the paintings, every moment has been leading us
+  to" ("By the lake" tekrarı yok) · 18 başlık 3 "Picked for keeps" (15 "In full bloom" ile neredeyse aynıydı) · 20 "Salt air, long
+  walks on the shore and one golden evening carried us to" ("harbor"/"lighthouse" başlık tekrarı yok). "led us to" 13 → 7 kayıtta (03 dahil).
+  `validate_content.py` 20/20 GEÇTİ; intro'ların hiçbiri nokta ile bitmiyor (`tests/g055-review.test.ts`).
+- **Yapılmadı (yazma alanı dışında):** (a) 19 `GPT_PROMPTS.md`'nin W1.3/PAKET 2 başlıkları hâlâ eski varsayılanlar — entegratör
+  `python3 tools/katalog.py paket5 --no 02,04,05,…,20` koşmalı (14 ve 18'in yeni başlıkları da girer; 01'i G201 bitince), docs/11
+  §14 #13. (b) `tools/katalog.py ozet` story'li kayıtları atlıyor, `yaz --zorla` story'yi siler — story tablosu `content()`
+  üretecine taşınmalı (claude-kod), docs/11 §14 #12.
+
 ## Günlük
 - 2026-10-13 açıldı: G046 incelemesi (01 `full_name` null; docs/11 §14 #5 story)
 - 2026-10-13 alindi: wf-hazirlik
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): 8 kaydın hikâye metni çeşitlendi (07, 08, 11, 12, 14, 17, 18, 20); GPT_PROMPTS ve katalog ozet yazma alanı dışında (öneri)
 - 2026-10-13 bitti, incelemeye gönderildi

@@ -17,6 +17,7 @@ import {
   sanitizeSlugTyping,
   slugProblem,
   suggestSlugBase,
+  NAME_MAX,
   type ClaimField,
 } from '../../lib/claim/fields.ts';
 import styles from './start.module.css';
@@ -477,7 +478,7 @@ function ClaimForm({
                   {...fieldProps(f, 'start-names-hint')}
                   autoComplete={i === 0 ? 'given-name' : 'off'}
                   autoCapitalize="words"
-                  maxLength={60}
+                  maxLength={NAME_MAX /* same hard stop as the panel's name fields (G055 limit) */}
                   value={value}
                   onChange={(e) => {
                     const next = [...names];

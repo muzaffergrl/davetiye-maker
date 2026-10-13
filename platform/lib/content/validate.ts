@@ -12,6 +12,7 @@
 // (partners.0.display_name), the same notation as theme `data-field` markers.
 
 import { CONTENT_SCHEMA } from './schema.ts';
+import { CONTENT_LIMITS } from './limits.ts';
 import { isValidTimeZone, parseIsoDate } from './format.ts';
 import { safeHttpUrl } from '../theme/urls.ts';
 import { normalizeLine } from './text.ts';
@@ -46,12 +47,13 @@ export const PLATFORM_PROVIDED_URLS = ['website', 'rsvp_form'] as const;
 /** Fictional / third-party targets that appeared in older visuals (same list as the Python tool). */
 export const FORBIDDEN_STRINGS = ['averyandjordan.com', '1234 Celebration Lane'];
 
-// Limits read from the schema (single source; the panel and /start use them for their inputs).
+// Limits read from the schema (single source). The panel and /start use CONTENT_LIMITS (lib/content/limits.ts: plain
+// numbers, small enough for the browser bundle); tests assert CONTENT_LIMITS deep-equals SCHEMA_LIMITS.
 // G055 (docs/11 §14 #10, default decision of the integrator, reversible): names <= 40, the names line <= 85
 // (two names + " & " / " and "), venue name <= 80, schedule <= 10 rows. G051 lists as before.
 const P = CONTENT_SCHEMA.properties;
 const QUESTION = P.rsvp.properties.questions.items.properties;
-export const CONTENT_LIMITS = {
+export const SCHEMA_LIMITS = {
   name: P.partners.items.properties.display_name.maxLength,
   fullName: P.partners.items.properties.full_name.maxLength,
   nameDisplay: P.name_display.maxLength,
@@ -65,6 +67,8 @@ export const CONTENT_LIMITS = {
   questionOptions: QUESTION.options.maxItems,
   questionOption: QUESTION.options.items.maxLength,
 } as const;
+
+export { CONTENT_LIMITS };
 
 /** Form of an RSVP question id (business rule, same regex in tools/validate_content.py). */
 export const QUESTION_ID_RE = /^[a-z0-9][a-z0-9_-]{0,23}$/;

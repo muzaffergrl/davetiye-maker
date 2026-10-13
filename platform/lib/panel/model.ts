@@ -2,7 +2,8 @@
 // No Node imports here; this file is bundled into the client.
 
 import type { ContentRecord, Partner } from '../content/types.ts';
-import { CONTENT_LIMITS, type ValidationIssue } from '../content/validate.ts';
+import { CONTENT_LIMITS } from '../content/limits.ts';
+import type { ValidationIssue } from '../content/validate.ts';
 
 export type SiteStatus = 'draft' | 'published';
 
@@ -294,8 +295,30 @@ function valueAt(content: unknown, path: string): unknown {
 }
 
 /**
+ * The field's name as the panel shows it, for messages that are also listed away from the field ("Before you
+ * publish"): two over-long names must not read as the same "Must be at most 40 characters.".
+ */
+export function fieldLabel(path: string): string {
+  const n = (s: string) => Number(s) + 1;
+  let m: RegExpExecArray | null;
+  if ((m = /^partners\.([01])\.(display_name|full_name)$/.exec(path))) {
+    return `${m[2] === 'full_name' ? 'Full name' : 'First name'} (${m[1] === '0' ? 'first' : 'second'} partner)`;
+  }
+  if (path === 'name_display') return 'Names as shown on the site';
+  if (path === 'initials') return 'Monogram';
+  if (path === 'venue.name') return 'Venue name';
+  if (path === 'story.intro') return 'Story intro line';
+  if ((m = /^story\.items\.(\d+)\.(caption|text)$/.exec(path))) return `Story, moment ${n(m[1])}: ${m[2] === 'caption' ? 'caption' : 'text'}`;
+  if ((m = /^faq\.(\d+)\.(q|a)$/.exec(path))) return `Questions & answers, question ${n(m[1])}: ${m[2] === 'q' ? 'question' : 'answer'}`;
+  if ((m = /^rsvp\.questions\.(\d+)\.label$/.exec(path))) return `RSVP, question ${n(m[1])}`;
+  if ((m = /^rsvp\.questions\.(\d+)\.options\.(\d+)$/.exec(path))) return `RSVP, question ${n(m[1])}: choice ${n(m[2])}`;
+  return 'This text';
+}
+
+/**
  * Validator issues reworded for the panel where the input is simply empty
- * ("Please enter a time." instead of "Use 24-hour time, e.g. 16:30." for a time picker).
+ * ("Please enter a time." instead of "Use 24-hour time, e.g. 16:30." for a time picker), the schedule is longer than
+ * the website shows, or a text is too long (which field, how long now, the limit).
  * Codes, paths and levels are unchanged.
  */
 export function panelIssues(issues: readonly ValidationIssue[], content: unknown): ValidationIssue[] {
@@ -305,6 +328,11 @@ export function panelIssues(issues: readonly ValidationIssue[], content: unknown
       const max = CONTENT_LIMITS.scheduleItems;
       const over = value.length - max;
       return { ...issue, message: `Your website shows up to ${max} events. Please remove ${over} ${over === 1 ? 'event' : 'events'}.` };
+    }
+    if (issue.code === 'schema_max_length' && typeof value === 'string') {
+      const max = Number(/at most (\d+)/.exec(issue.message)?.[1]);
+      const length = [...value].length; // characters, as the validator counts them
+      if (max > 0) return { ...issue, message: `${fieldLabel(issue.path)} is ${length} characters. Please shorten it to ${max}.` };
     }
     const empty = value === '' || value === undefined || value === null;
     if (!empty) return issue;

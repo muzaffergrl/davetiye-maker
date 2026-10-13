@@ -14,17 +14,32 @@ export function bearerKey(req: Request): string | null {
 
 const HOST_RE = /^[a-z0-9.-]+(:\d{1,5})?$|^\[[0-9a-f:.]+\](:\d{1,5})?$/i;
 
+/** Last entry of a comma-separated forwarding header: the value the nearest proxy wrote (a client can only prepend). */
+function lastForwarded(value: string | null): string {
+  const parts = (value ?? '').split(',');
+  return parts[parts.length - 1].trim();
+}
+
+let warnedNoPublicUrl = false;
+
 /**
- * Public origin of the platform, for the site link and its QR code.
+ * Public origin of the platform, for the site link and its QR code, og:image and the calendar site link.
  * PLATFORM_PUBLIC_URL (e.g. https://<name>.vercel.app) wins; otherwise the request's host
  * (x-forwarded-host / host, as set by Vercel or `next start`), otherwise `fallback`.
+ * Of a comma-separated x-forwarded-host / x-forwarded-proto the LAST entry is used: a proxy that appends instead of
+ * overwriting keeps whatever the client sent in front ("evil.example, real.host"). Set PLATFORM_PUBLIC_URL in
+ * production (a one-time warning is logged when it is missing).
  */
 export function publicOrigin(headers: Headers, fallback = 'http://localhost:3000'): string {
   const configured = safeHttpUrl(process.env.PLATFORM_PUBLIC_URL ?? '');
   if (configured) return new URL(configured).origin;
-  const host = (headers.get('x-forwarded-host') ?? headers.get('host') ?? '').split(',')[0].trim();
+  if (process.env.NODE_ENV === 'production' && !warnedNoPublicUrl) {
+    warnedNoPublicUrl = true;
+    console.warn('[platform] PLATFORM_PUBLIC_URL is not set: public links use the request host');
+  }
+  const host = lastForwarded(headers.get('x-forwarded-host')) || (headers.get('host') ?? '').trim();
   if (host && HOST_RE.test(host)) {
-    const proto = (headers.get('x-forwarded-proto') ?? '').split(',')[0].trim().toLowerCase();
+    const proto = lastForwarded(headers.get('x-forwarded-proto')).toLowerCase();
     return `${proto === 'https' ? 'https' : 'http'}://${host.toLowerCase()}`;
   }
   return fallback;

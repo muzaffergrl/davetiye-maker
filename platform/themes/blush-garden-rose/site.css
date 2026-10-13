@@ -337,6 +337,25 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .dateblock .day { display: block; font-family: var(--display); font-weight: 500; font-size: 8.8cqw; line-height: 1.02; color: var(--deep); }
 .invite-text .venue { margin-top: 2.4cqw; font-family: var(--body); font-style: italic; font-size: max(11.5px, 3.2cqw); color: var(--ink); }
 .invite-text .city { margin-top: .3cqw; font-size: max(9px, 2.5cqw); letter-spacing: .22em; }
+/* Long names/host line/venue: the card grows (docs/11 §9 3-slice, as .info below; nothing drawn). <img> = rows 0–42 %,
+   ::before = plain band 42–66 % stretched (free_zone 41–68), ::after = 66–100 %. Image height 158.966cqw. Text from row
+   35.2 %; column ≤ 88 % (inside the arch florals), venue + city ≤ 64 % (between the bottom florals); last line ≤ row 81.5 %
+   (29.409cqw above the bottom); never shorter than the image, so the demo card keeps its size. README: "Uzayan kartlar". */
+.invite { aspect-ratio: auto; }
+.invite > img { bottom: auto; height: auto; aspect-ratio: 909 / 1445; clip-path: inset(0 0 58% 0); }
+.invite::before, .invite::after {
+  content: ""; position: absolute; left: 0; right: 0; pointer-events: none;
+  background-image: url("img/invitation_card-909.webp");
+  background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-909.webp") 2x);
+  background-repeat: no-repeat;
+}
+/* band: background 416.667 % tall at 55.263 % (same numbers as .info below) */
+.invite::before { top: calc(66.766cqw - 1px); bottom: calc(54.048cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
+.invite::after { bottom: 0; height: 54.048cqw; background-size: 100% auto; background-position: 0 100%; }
+.invite > .invite-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 12.7%;
+  padding: 55.956cqw 0 29.409cqw; min-height: 73.601cqw; box-sizing: content-box; overflow-wrap: break-word; }
+.invite-text > * { max-width: 88%; }
+.invite-text > :is(.venue, .city) { max-width: 64%; }
 .reply { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .reply p { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-soft); }
 
@@ -350,11 +369,12 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .teaser .frame.mini { height: 120px; width: auto; }
 .teaser .art > .sprig { width: 112px; }
 .teaser .art > .bow { width: 112px; }
-.teaser .tx { display: block; }
+.teaser .tx { display: block; min-width: 0; overflow-wrap: break-word; }
 .teaser h3 { font-size: 38px; line-height: 1.05; }
 .teaser .kicker { display: block; font-size: 10.5px; letter-spacing: .2em; margin-top: 4px; }
 .teaser .sched { display: block; margin-top: 4px; font-family: var(--display); font-style: italic; font-size: 16.5px; line-height: 1.35; color: var(--ink-soft); }
-.teaser .sched-line { display: block; white-space: nowrap; }
+/* one item per line; a long label wraps under itself (hanging indent) */
+.teaser .sched-line { display: block; padding-left: .9em; text-indent: -.9em; }
 .teaser .sched-line:nth-child(n+5) { display: none; }   /* teaser: first four items; all of them on the Details page */
 .teaser .more { display: inline-block; margin-top: 10px; font-size: 11.5px; }
 
@@ -593,6 +613,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .teaser .frame.mini { height: 150px; }
   .teaser .art > .sprig { width: 150px; }
   .teaser .art > .bow { width: 190px; }
+  .teaser .sched-line { padding-left: 0; text-indent: 0; }
   .frames { grid-template-columns: 1fr 1.14fr 1fr; align-items: end; gap: 26px; width: min(100%, 940px); margin-inline: auto; padding-top: 12px; }
   .frame-fig, .frame-fig:nth-child(n) { width: 100%; margin: 0; justify-self: stretch; }
   .frame-fig:nth-child(2) { margin-bottom: 44px; }

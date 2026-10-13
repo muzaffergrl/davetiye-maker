@@ -108,16 +108,25 @@ export interface ThemeArgs {
   out?: string;
   compare?: string;
   video: boolean;
+  /** --stress: also render the docs/11 §12 stress record (stressRecord) and check it. */
+  stress: boolean;
 }
 
-/** --theme <id> (or --theme=<id>), --content, --photos, --collection, --out, --compare, --no-video. Unknown flags are ignored. */
+/**
+ * --theme <id> (or --theme=<id>), --content, --photos, --collection, --out, --compare, --no-video, --stress.
+ * Unknown flags are ignored.
+ */
 export function themeArgs(argv: string[] = process.argv.slice(2)): ThemeArgs {
-  const out: ThemeArgs = { theme: DEFAULT_THEME, video: true };
+  const out: ThemeArgs = { theme: DEFAULT_THEME, video: true, stress: false };
   const keys = ['theme', 'content', 'photos', 'collection', 'out', 'compare'] as const;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--no-video') {
       out.video = false;
+      continue;
+    }
+    if (a === '--stress') {
+      out.stress = true;
       continue;
     }
     const m = /^--([a-z]+)(?:=(.*))?$/.exec(a);
@@ -338,6 +347,35 @@ export function loadThemeEnv(args: Partial<ThemeArgs> & { theme: string }): Them
 }
 
 /** Slug from the demo names ("Clara", "Julian" → clara-and-julian), like /start suggests it. */
+/**
+ * docs/11 §12 "zorlama kaydı" (stress record), built on the theme's demo record: 40-character first names and full names,
+ * the names line at 83 of 85, an 80-character venue, a long host line, 10 schedule rows with 60-character labels and
+ * places, a long dress code (the dress code block switched on). Every value is valid under the schema (G055 limits).
+ */
+export function stressRecord(demo: ContentRecord): ContentRecord {
+  const c = structuredClone(demo) as ContentRecord;
+  const a = 'Charlotte-Elizabeth Anne Montgomery Hale'; // 40
+  const b = 'Maximilian Alexander Fitzwilliam-Reid Jr'; // 40
+  c.partners[0].display_name = a;
+  c.partners[0].full_name = a;
+  c.partners[1].display_name = b;
+  c.partners[1].full_name = b;
+  c.name_display = `${a} & ${b}`; // 83
+  c.host_line = 'Together with their families, Mr. and Mrs. Whitfield and Mr. and Mrs. Montgomery-Reid';
+  c.venue = { ...c.venue, name: 'The Grand Rosewater Conservatory and Botanical Gardens at Forsyth Park, Savannah' }; // 80
+  const label = 'Champagne toast, speeches and the first dance of the evening'; // 60
+  const place = 'The Glasshouse Pavilion by the old lake and the rose garden.'; // 60
+  c.schedule = Array.from({ length: 10 }, (_, i) => ({
+    time: `${String(14 + Math.floor(i * 0.9)).padStart(2, '0')}:${i % 2 ? '30' : '00'}`,
+    label,
+    location: place,
+  }));
+  c.ceremony_time = c.schedule[0].time;
+  c.dress_code = 'Garden formal: light colours, flat shoes for the lawn and a shawl for the cooler evening by the lake';
+  c.optional_blocks = { ...c.optional_blocks, dress_code: true };
+  return c;
+}
+
 export function demoSlug(content: ContentRecord, fallback = 'demo-site'): string {
   const names = (content.partners ?? []).map((p) => p.display_name).filter(Boolean);
   const s = names.join(' and ').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');

@@ -118,7 +118,39 @@ Bunun dışında tema standart işaretleri taşımalı: `.stage`, `a[data-skip]`
   03'ün parçacık katmanı `.petal-layer` varsayılan listede duruyor. 03 yeniden derlenirken `theme_check.particles` yazılırsa
   varsayılandan çıkarılabilir (küçük iş, ayrı görev gerekmez).
 
+**İnceleme düzeltmeleri (2026-10-13, wf-hazirlik; G052–G055 incelemesinin bulguları)**
+- **Uzayan kartın serbest bölge denetimi (orta, doğrulandı):** satırlar kart `<img>` kutusuna doğrusal eşleniyordu → G055'in 3
+  dilimli kartında (03 Details, şimdi home davet kartı da) gerilen banttaki satırlar alt çiçek satırlarıyla karşılaştırılıp yanlış
+  FAIL veriyor, `<img>` kutusunun altındaki satırlar hiç denetlenmiyordu. Şimdi: kart görüntüsünün boyundaysa eskisi gibi
+  `free_zone` eşlemesi; görüntüsünden uzunsa (**piksel testi**, `g055-browser` yöntemi temaya bağımsız) kart görüntüsü ve kendi
+  `::before/::after` dilimleri dışında her şey (metin, iç süs, foto, site nav, parçacıklar) gizlenip boyalı kart yakalanır, her satır
+  kutusunun altı kartın ortasındaki kâğıt rengiyle karşılaştırılır; ölçülen kutunun dışındaki satır her iki yolda **hata**
+  (eskiden atlanıyordu). Manifest'e dilim tablosu gerekmedi.
+- **Kırpılan metin (yeni denetim):** metnin kutusu onu kırpan (`overflow` ≠ visible, `clip-path`) bir atanın dışına taşarsa hata
+  (03'ün varsayılan koşusunda 0).
+- **`--stress` (düşük, doğrulandı):** docs/11 §12 zorlama kaydı (`scripts/lib/theme-env.ts` `stressRecord`: 40 karakterlik ilk ad
+  ve tam adlar, 83 karakterlik isim satırı, 80 karakterlik mekân, 10 × 60 karakterlik etiket/yer, uzun host line ve dress code;
+  şemada geçerli) 5 sayfa × 360/390 bütün sayfa denetimleriyle + zarf sayfası 360×640/390×844 (yazılar düz zeminde, zarf ve "Tap to
+  open" ekranda); `stress_<sayfa>_<w>.png`. docs/11 §13.1'de G4NN için zorunlu. Ortak yardımcılar fonksiyona alındı
+  (`backdropBusy`, `envelopeFit`).
+- **Port (düşük, doğrulandı):** `waitForServer` yalnız "bir şey cevap veriyor mu"ya bakıyordu. Şimdi `startNext`'in süreci "Ready"
+  demeden fetch etmez, süreç ölürse günlüğüyle durur ("port in use: another server listens there"). Sahte HTTP sunucusu 3591'de
+  açıkken `PORT=3591 g051-browser`: tek satır `FAIL run (next start exited (1) … port in use …)`, başka sunucuya karşı hiçbir denetim
+  koşmadı. `theme-check`, `final-smoke`, `g051-browser` sunucuyu veriyor.
+- **Sonuçlar (03, bu düzeltmelerden sonra):** `theme-check --theme blush-garden-rose` (video dahil) **74/74, 0 uyarı**
+  (G052'deki sayı; yeni denetimler mevcut satırların içinde: kart piksel testi Details ve home davet kartında, kırpılan metin her
+  sayfada; ilk görünüm yer tutucu 1026 / 715 KB, fotoğraflı 1295 / 1262 KB). İlk koşuda piksel testi details@768/1280'de "Order of
+  the Day"ı yanlış FAIL verdi (başlık altındaki GPT `divider` görseli gizlenmemişti) → yalnız kart görüntüsü bırakılarak düzeltildi.
+  `--stress` ile 79 geçti / 20 hata — hepsi 03'ün index ve rsvp sayfası (docs/11 §12, §14 #15; home/story/details geçiyor).
+  `g051-browser` 44/44, `final-smoke` 42/42 (sunucu beklemesi değişti, sonuçlar aynı).
+- `_sample --stress` çökmeden koştu: 41 geçti / 29 hata / 11 uyarı = G052'deki 33/27/11 + zorlama kaydının 8 sayfası geçti, 2 hata
+  (index'te standart dışı `hero` foto alanı — varsayılan koşudaki yapısal hatanın aynısı).
+- **Denenmedi:** gerçek bir G4NN teması (yok); `--stress` ve piksel testi koyu tasarımda (kâğıt rengi kartın ortasından okunuyor;
+  ortası süslü bir kartta referans yanlış olur — o tema `theme_check.cards`/kart düzeniyle ele alınmalı).
+
 ## Günlük
 - 2026-10-13 açıldı: G046 incelemesi (docs/11 §14 #3; G4NN bitti tanımı bu araç olmadan karşılanamıyor)
 - 2026-10-13 alindi: wf-hazirlik
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): uzayan kart piksel testi + kutu dışı satır hata, kırpılan metin denetimi, --stress (§12 zorlama kaydı), port doluysa durur; 03 74/74
 - 2026-10-13 bitti, incelemeye gönderildi

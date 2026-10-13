@@ -12,7 +12,7 @@
 /** Widths of the stored variants (px). A variant exists only when it is smaller than the photo. */
 export const PHOTO_VARIANT_WIDTHS = [640, 1280] as const;
 
-const MEDIA_RE = /^(\/media\/[0-9a-f-]{36}\/[0-9a-f]{32})-([1-9]\d{1,4})w\.(jpg|png|webp|avif)$/;
+const MEDIA_RE = /^(\/media\/[0-9a-f-]{36}\/[0-9a-f]{32})-([1-9]\d{0,4})w\.(jpg|png|webp|avif)$/;
 
 /** Variant widths that go with a photo `width` px wide (ascending). */
 export function variantWidths(width: number): number[] {

@@ -231,6 +231,7 @@ def bilesenler(im: Image.Image, n: int = 6, min_px: int = 500, pad: int = 6, alf
     """Tek görselde birden çok nesne (03 petals.png) → alfa bileşenlerine göre en büyük `n` parça (her biri yalnız
     kendi bileşeni + 3 px; komşunun ucu girmez), satır (`satir` px bant) sonra x sırasıyla. PAKET 5'te accent_1..3 zaten
     tek nesnedir; bu yalnız çok nesneli eski sayfalar için."""
+    im = im.convert("RGBA")
     a = np.asarray(im)
     m = a[..., 3] > alfa_esik
     out = []
@@ -729,6 +730,7 @@ def kapak_kes(ec: Image.Image, bicim: str = "v", esik=(40, 30), ara: int = 14, k
     Yedek: yeterli nokta yoksa / uyum zayıfsa geometrik kenar (V: köşelerden ortadaki uca, derinlik = gövde
     yüksekliğinin `yedek_derinlik`'i; eğri: aynı derinlikte yarım elips) + UYARI (`bilgi["yontem"] = "geometrik"`).
     Menteşe satırı = kapalı zarfın üst kenarı (sütun medyanı)."""
+    ec = ec.convert("RGBA")  # RGB/P/LA girdi de çalışsın (alfa kanalı a[..., 3])
     a = np.asarray(ec).astype(np.float64)
     al = a[..., 3]
     h, w = al.shape
@@ -889,19 +891,37 @@ def cep_kes(im: Image.Image, bicim: str = "v", esik: float = 24, yedek=None, der
     ayrılır (`_bant_ofseti`: kenar boyunca ortalama renk profili) ve cebe dahil edilir — 1 px'lik altın çizgi de cepte
     kalır, astar saçağı girmez. Alfa < 200 pikseller (gölge, kenar yumuşaması) cebe alınmaz — arka katmanda zaten var.
     Yedek: nokta < %40 sütun, artık büyük ya da kenar gövde dışında → geometrik kenar `yedek` = (uçlarda, ortada) gövde
-    yüksekliği oranı (vars. v (0.10, 0.62), duz (0.65, 0.65), egri (0.45, 0.42)) + UYARI."""
+    yüksekliği oranı (vars. v (0.10, 0.62), duz (0.65, 0.65), egri (0.45, 0.42)) + UYARI.
+    Gövde üstü bulunamazsa (hiçbir satır %97'ye ulaşmıyor: gövde ≥ ~2° eğik ya da yanında ayrı bir yaprak/parça var)
+    gövde = en büyük opak bölge, üst = `_govde` medyanı + UYARI (çökme yok; kesim yine yukarıdaki yollardan)."""
+    im = im.convert("RGBA")  # RGB/P/LA girdi de çalışsın (alfa kanalı a[..., 3])
     a = np.asarray(im).astype(np.float64)
     al = a[..., 3]
     h, w = al.shape
-    cols = np.flatnonzero(al.max(0) > 200)
+    op = al > 200
+    cols = np.flatnonzero(op.any(0))
     if not len(cols):
         raise ValueError("cep_kes: opak piksel yok")
     x0, x1 = int(cols.min()), int(cols.max())
-    full = (x1 - x0) * 0.97
-    widths = (al > 200).sum(1)
-    body_top = int(np.flatnonzero(widths >= full)[0])
-    body_bot = int(np.flatnonzero(al.max(1) > 200).max())
-    Bh = body_bot - body_top
+    widths = op.sum(1)
+    satirlar = np.flatnonzero(widths >= (x1 - x0) * 0.97)
+    govde_uyari = []
+    if len(satirlar):
+        body_top = int(satirlar[0])
+        body_bot = int(np.flatnonzero(op.any(1)).max())
+    else:
+        # gövdeye değmeyen parça (yaprak, dal) sütun açıklığını genişletir; eğik gövdede satırlar köşeden köşeye ulaşmaz
+        gov = en_buyuk_bolge(op)
+        gc, gr = np.flatnonzero(gov.any(0)), np.flatnonzero(gov.any(1))
+        x0, x1 = int(gc.min()), int(gc.max())
+        satirlar = np.flatnonzero(gov.sum(1) >= (x1 - x0) * 0.97)
+        g = _govde(gov.astype(np.uint8) * 255)
+        body_top = int(satirlar[0]) if len(satirlar) else int(g["top"])
+        body_bot = int(gr.max())
+        govde_uyari.append(
+            f"ön cep: gövde üstü sütun açıklığından bulunamadı (hiçbir satır %97'ye ulaşmıyor — gövde eğik ya da yanında "
+            f"ayrı parça var) → en büyük opak bölge, gövde {x0}–{x1} × {body_top}–{body_bot}; önizlemede gözle kontrol et")
+    Bh = max(body_bot - body_top, 1)
     xm = (x0 + x1) / 2
     rgb = a[..., :3]
     yedek = yedek or {"v": (0.10, 0.62), "duz": (0.65, 0.65), "egri": (0.45, 0.42)}[bicim]
@@ -912,7 +932,7 @@ def cep_kes(im: Image.Image, bicim: str = "v", esik: float = 24, yedek=None, der
             return None
         ref = np.median(rgb[y_start - 24:y_start, max(0, x - 3):x + 4].reshape(-1, 3), 0)
         d = np.sqrt(((rgb[:, x] - ref) ** 2).sum(-1))
-        for y in range(y_start - 24, y_stop, -1):
+        for y in range(y_start - 24, max(y_stop, 3), -1):  # y − 3 ≥ 0 (tuvalin üstüne taşan pencere boş dilim olmasın)
             if d[y - 3:y + 1].mean() > esik:
                 return y
         return None
@@ -966,6 +986,8 @@ def cep_kes(im: Image.Image, bicim: str = "v", esik: float = 24, yedek=None, der
                         "detector": "parts_prep.cep_kes",
                         "edge_left_mid_right": pp_bilgi["kenar_sol_orta_sag"], "residual_mad": pp_bilgi["artik_mad_px"],
                         "first_detector": f"G035 V: {len(pts['L'])}+{len(pts['R'])} nokta, uyum zayıf"}
+                if govde_uyari:
+                    info["warnings"] = govde_uyari
                 return Image.fromarray(pp_cep, "RGBA"), info
             yu, yo = body_top + yedek[0] * Bh, body_top + yedek[1] * Bh
             mL = (yo - yu) / max(xm - x0, 1)
@@ -1039,8 +1061,8 @@ def cep_kes(im: Image.Image, bicim: str = "v", esik: float = 24, yedek=None, der
     if bicim != "v" or yontem != "renk":
         info.setdefault("shape", bicim)
     info["method"] = yontem
-    if uyarilar:
-        info["warnings"] = uyarilar
+    if govde_uyari or uyarilar:
+        info["warnings"] = govde_uyari + uyarilar
     return Image.fromarray(out, "RGBA"), info
 
 

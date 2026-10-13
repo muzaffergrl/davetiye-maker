@@ -152,6 +152,37 @@ def test_cep():
     print("  cep_kes: V + düz + eğri, yedek")
 
 
+def test_saglam():
+    """Gerçek GPT parçasına yakın bozukluklar çökme değil, uyarı vermeli: ≥ 2° eğik gövde (hiçbir satır sütun açıklığının
+    %97'sine ulaşmaz), gövdenin yanında ayrı bir yaprak, RGB (alfasız) girdi."""
+    for bicim in ("v", "duz", "egri"):
+        im, p = acik_zarf(bicim)
+        for aci in (2.0, 3.0):
+            cep, b = tb.cep_kes(im.rotate(aci, resample=Image.BICUBIC), bicim)
+            assert b["method"] in ("renk", "geometrik") and np.asarray(cep)[..., 3].sum() > 0, (bicim, aci, b)
+            if aci == 3.0:
+                assert any("gövde üstü" in u for u in b["warnings"]), (bicim, b)
+        a = np.asarray(im).copy()
+        a[600:660, 0:40] = [200, 100, 120, 255]  # gövdenin 20 px solunda ayrı yaprak
+        cep, b = tb.cep_kes(Image.fromarray(a, "RGBA"), bicim)
+        assert any("gövde üstü" in u for u in b["warnings"]), (bicim, b)
+        assert b["body"][0] == 60 and b["body"][2] == 579, (bicim, b["body"])
+        ca = np.asarray(cep)[..., 3]
+        px = int(round(p[320]))
+        assert ca[px + 4, 320] == 255 and ca[px - 5, 320] == 0, (bicim, "yaprak kenar bulmayı bozmamalı")
+        cep, b = tb.cep_kes(im.convert("RGB"), bicim)
+        assert cep.mode == "RGBA" and b["method"] in ("renk", "geometrik"), (bicim, b)
+    k, o = gatefold()
+    parcalar, b = tb.kapi_kes(k, o.rotate(3.0, resample=Image.BICUBIC))
+    assert set(parcalar) >= {"door_l", "door_r", "center", "pocket"} and b["method"] in ("renk", "geometrik"), b
+    for bicim in ("v", "egri"):
+        im, _ = kapali_zarf(bicim)
+        flap, b = tb.kapak_kes(im.convert("RGB"), bicim)
+        assert flap.mode == "RGBA" and b["method"] in ("renk", "geometrik"), b
+    assert len(tb.bilesenler(Image.new("RGB", (60, 40), (200, 120, 130)), n=2, min_px=10)) == 1
+    print("  sağlamlık: 2–3° eğik gövde, yanında yaprak, RGB girdi → uyarı, çökme yok")
+
+
 # ----------------------------------------------------------------------------- gatefold
 
 def gatefold(dikis_var=True, kat_var=True):
@@ -440,6 +471,7 @@ def test_03_yeniden():
 def main():
     test_kapak()
     test_cep()
+    test_saglam()
     test_kapi()
     test_kitap()
     test_kese()

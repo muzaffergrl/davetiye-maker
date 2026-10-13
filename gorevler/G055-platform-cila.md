@@ -98,6 +98,43 @@ blush-garden-rose` 73/73 (çıktı geçici klasöre; previews/g038 değişmedi),
   serbest bölge denetimini piksel yöntemine ya da uzayan kart eşlemesine çevir (claude-kod, G052 devamı); (c) yeniden yayın (G049)
   sonrası canlıda `og:image` ve ikon, gerçek telefonda fotoğraflı ilk görünüm; (d) `name_display` ≤ 85 kararının onayı.
 
+**İnceleme düzeltmeleri (2026-10-13, wf-hazirlik; G052–G055 incelemesinin bulguları)**
+- **Takvim dosyası (düşük, doğrulandı):** `/<slug>/event.ics` ve tema demosunun `.ics`'i site linki + UID için isteğin origin'ini
+  kullanıyordu → `PLATFORM_PUBLIC_URL` başka host'ken iki "Add to calendar" düğmesi farklı site linki veriyordu. `lib/site/ics.ts`,
+  `lib/claim/demo-page.ts` artık `publicOrigin()` (UID = `<slug>@<public host>`).
+- **`publicOrigin` (düşük, doğrulandı):** virgüllü `x-forwarded-host`/`-proto`'nun **son** girdisi (istemci yalnız başa ekleyebilir);
+  `PLATFORM_PUBLIC_URL` yoksa üretimde bir kez `console.warn`. (Vercel'de başlığı kenar yazdığı için orada açık yoktu.)
+- **`/start` paketi (düşük, doğrulandı):** `lib/claim/fields.ts` `CONTENT_LIMITS` için `validate.ts`'i (şema + doğrulayıcı + yasak
+  listeler) tarayıcıya taşıyordu. Yeni `lib/content/limits.ts` (düz sayılar); `validate.ts` aynı değerleri şemadan `SCHEMA_LIMITS`
+  olarak okur, test ikisinin eşitliğini ve `fields.ts`'in içe aktarma grafiğinde `validate.ts`/`schema.ts` olmadığını sınar.
+  `fields.ts`, `panel/model.ts`, `components/panel/sections.tsx` `limits.ts`'ten okur. (Build sonrası parça içeriği yeniden
+  ölçülmedi; grafik testi kaynakta.)
+- **Küçük foto (düşük, doğrulandı):** `-<W>w` adı tek haneli genişliği okumuyordu (8 px'lik foto saklanıp 404). `local`, `blob`
+  `PHOTO_PATH_RE` ve `photo-variants.ts` `MEDIA_RE`: `[1-9]\d{0,4}`.
+- **Panel programı (orta, doğrulandı):** 10'u aşan eski sitede "12 of 10 events" notu hatanın yanında çıkıyordu → not yalnız
+  `=== 10`'da. **Uzunluk hataları (orta, doğrulandı):** `panelIssues` + `fieldLabel`: "First name (first partner) is 41 characters.
+  Please shorten it to 40." (iki isim artık aynı satırı göstermiyor; alanın altında ve "Before you publish"ta).
+- **Hikâye girişi (orta):** panelde "Intro line" ipucu: "Your wedding date follows this line on the Our Story page, e.g. “… led us
+  to May 15, 2027.”" (standart docs/11 §3.2'de, G054).
+- **`/start` isim kutuları (düşük):** `maxLength={60}` → `NAME_MAX` (panel gibi 40'ta durur).
+- **Paylaşım görseli (düşük, kısmen):** motor `og:image:alt` + `twitter:image:alt` = "{name_display} wedding invitation" yazar.
+  og görselinin yatay odağı yapılmadı (G054 Sonuç, docs/11 §14 #14).
+- **Testler:** `tests/g055-review.test.ts` (8: .ics public origin + demo, `publicOrigin` son girdi, limits eşitliği + `/start` içe
+  aktarma grafiği + `maxLength`, 8 px foto, alan adlı uzunluk hatası, og alt, story girişi + tarih (03) ve 20 kaydın intro'su nokta
+  ile bitmiyor). `tests/g055-browser.ts` 73 → **138** kontrol: kart piksel testi fonksiyona alındı; home davet kartı (demo + 24/35
+  karakter tam ad + 78 karakter mekân + §12 zorlama) × 360/390/430/768/1280; home tanıtımları 360/390 (demo, 28 ve 60 karakterlik
+  etiket); sınırdan önce kaydedilmiş site (12 satır, 41 karakter ad, 87 karakter mekân): "12 of 10" yok, hata alan adlı, "Before
+  you publish" üç ayrı satır, ilgisiz düzenleme otomatik kaydedilip yenilemede değerler kesilmeden duruyor, yayındaki site 12 satırı
+  koruyor. `platform/README.md`: "Çalıştırma" (`theme-check --theme/--stress/--out`, final-smoke/g051 `--theme`, g055 138),
+  `PLATFORM_PUBLIC_URL`, `limits.ts`, `/start` isim, "G055 incelemesi" alt bölümü.
+- **Komutlar (Node 22, `npm run build` sonrası `next start`, ayrı portlar):** `npm ci`; `npm test` **258/258**; `npm run typecheck`
+  temiz; `npm run build` + trace-check (16 rota, 2 tema, rota başına ≤ 69 KB). `g055-browser` **138/138**, `theme-check --theme
+  blush-garden-rose` 74/74 (video dahil; çıktı geçici klasöre, `previews/` değişmedi), `g051-browser` 44/44, `final-smoke` 42/42,
+  `panel-browser` 74/74, `claim-browser` 50/50, `rsvp-browser` 25/25. `validate_content.py` 20/20. Denenmedi: Vercel'de yayın,
+  sosyal ağ kazıyıcıları, gerçek telefon.
+
 ## Günlük
 - 2026-10-13 alindi: wf-hazirlik
+- 2026-10-13 bitti, incelemeye gönderildi
+- 2026-10-13 inceleme düzeltmeleri (wf-hazirlik): .ics public origin, x-forwarded-host son girdi, limits.ts, 8 px foto, panel notu + alan adlı uzunluk hataları, /start 40, og:image:alt, intro ipucu; g055-browser 138, g055-review 8
 - 2026-10-13 bitti, incelemeye gönderildi
