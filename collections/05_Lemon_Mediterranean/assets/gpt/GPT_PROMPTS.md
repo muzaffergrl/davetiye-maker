@@ -53,10 +53,11 @@ On tap, the lemon tie slips loose and rolls away, the white flap opens upward to
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   white envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the white envelope. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by May 1, 2027.
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: sunlit warm white plaster wall texture fading to a soft sky blue at the bottom (#F7F4EC to #DCE6F2), gentle dappled leaf shadows at the edges, empty center, with lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor framing the top-left and bottom-right corners and a few small floating accents (a whole ripe lemon with one glossy leaf, a white lemon blossom, a glossy green lemon leaf). Centered slightly below the middle: a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap edged by a thin hand-painted cobalt blue line, closed, with a small bunch of two glossy ripe lemons with three leaves, tied with a thin cobalt blue ribbon in a little bow — tucked onto the tip of the V flap. Above it, typography in a breezy flowing script for the names and an elegant high-contrast Didone serif: a small spaced line "YOU ARE INVITED" and the names "Isabella & Marco" large; below the white envelope a small spaced line "TAP TO OPEN". All decor in soft watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: sunlit warm white plaster wall texture fading to a soft sky blue at the bottom (#F7F4EC to #DCE6F2), gentle dappled leaf shadows at the edges, empty center, with lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor framing the top-left and bottom-right corners and a few small floating accents (a whole ripe lemon with one glossy leaf, a white lemon blossom, a glossy green lemon leaf). Centered slightly below the middle: a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap whose edge is gently scalloped and traced with a thin hand-painted cobalt blue line, closed, with a single small glossy lemon with two leaves and a short sprig of white lemon blossom, tied together with a thin cobalt blue ribbon in a little bow — tucked onto the tip of the V flap. Above it, typography in a breezy flowing script for the names and an elegant high-contrast Didone serif: a small spaced line "YOU ARE INVITED" and the names "Isabella & Marco" large; below the white envelope a small spaced line "TAP TO OPEN". All decor in soft watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: white envelope ve lemon tie net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -86,7 +87,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three scalloped tile-framed portraits in a row, the middle one slightly larger and higher, as if each had just turned around like a painted tile panel; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three scalloped tile-framed portraits standing perfectly straight in a gentle staggered column down the page (left, right, left) like painted tile panels set into a sunlit white plaster wall, not overlapping; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Fiyonk dilimli (scalloped) kenarlı çerçeveler, çini panolar gibi döner.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall bright-white scalloped card with the same thin cobalt border and only one small lemon sprig at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a single short lemon sprig with one small lemon and two blossoms): "4:00 PM — Ceremony — The Lemon Grove", "5:00 PM — Cocktail Hour — The Sea Terrace", "6:30 PM — Reception — The Villa Courtyard" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles, a tiny lemon sprig at one corner, its window filled with flat pure green #00FF00 (the venue photo), under it "Villa Limonaia" and "Sorrento, Italy", then a small line "DRESS CODE · Summer formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall bright-white scalloped card with a thin cobalt blue painted border and only one small lemon sprig at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a single short lemon sprig with one small lemon and two blossoms): "4:00 PM — Ceremony — The Lemon Grove", "5:00 PM — Cocktail Hour — The Sea Terrace", "6:30 PM — Reception — The Villa Courtyard" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles, a tiny lemon sprig at one corner, its window filled with flat pure green #00FF00 (the venue photo), under it "Villa Limonaia" and "Sorrento, Italy", then a small line "DRESS CODE · Summer formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same white envelope as in the W1 screens, alone and closed, WITHOUT the lemon tie: a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap edged by a thin hand-painted cobalt blue line. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same white envelope as in the W1 screens, alone and closed, WITHOUT the lemon tie: a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap whose edge is gently scalloped and traced with a thin hand-painted cobalt blue line. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; lemon tie yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,15 +140,15 @@ Kontrol: tek nesne; lemon tie yok; kesilmemiş; gölge yok; gerçek alfa.
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small bunch of two glossy ripe lemons with three leaves, tied with a thin cobalt blue ribbon in a little bow, alone, exactly as it sits on the white envelope in the W1 screens (tucked onto the tip of the V flap) and at the same scale as in envelope_closed.png, with no white envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a single small glossy lemon with two leaves and a short sprig of white lemon blossom, tied together with a thin cobalt blue ribbon in a little bow, alone, exactly as it sits on the white envelope in the W1 screens (tucked onto the tip of the V flap), drawn large so it fills about 70% of the square (Claude scales it to the white envelope), with the same perspective, material and light as on the white envelope and with no white envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız lemon tie; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız lemon tie; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME white envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward, its inner side and the inside of the back showing original hand-painted blue and white majolica-style tile pattern (cobalt #2A5DA8 on white) with small lemon and leaf motifs, seamless square tiles; the front pocket empty. No card, nothing inside, no lemon tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME white envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the scalloped V flap folded fully upward, its inner side and the inside of the back showing original hand-painted blue and white majolica-style tile pattern (cobalt #2A5DA8 on white) with small lemon and leaf motifs, seamless square tiles; the front pocket empty. No card, nothing inside, no lemon tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the white envelope in W1.2, alone: a small bright-white card with a gently scalloped edge, a portrait photo window framed by a single row of tiny hand-painted cobalt-and-white tiles in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the white envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the white envelope in W1.2, alone: a small bright-white card with a gently scalloped edge, a portrait photo window framed by a single row of tiny hand-painted cobalt-and-white tiles in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the white envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall bright-white scalloped card with the same thin cobalt border and only one small lemon sprig at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall bright-white scalloped card with a thin cobalt blue painted border and only one small lemon sprig at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -252,7 +253,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G205`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar dilimli kenarlı çini çerçevelere (~3:4) girer: yüzler ortadaki %70'lik alanda. Renk dünyası: limon sarısı, kobalt mavisi, beyaz, taze yaprak yeşili, Akdeniz güneşi.
 
 ### 2.1 Ana portre
@@ -266,21 +267,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a small café table on a sunny piazza, two glasses of lemonade and a little vase of lemon blossoms, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a small café table on a sunny piazza, two glasses of lemonade and a little vase of lemon blossoms, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on a whitewashed terrace overlooking the sea at sunset, lemon trees around them: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a whitewashed terrace overlooking the sea at sunset, lemon trees around them: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/05_Lemon_Mediterranean/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of lemon blossoms and leaves, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of lemon blossoms and leaves, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

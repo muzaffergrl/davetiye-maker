@@ -112,19 +112,19 @@ def test_calistir(k: Path):
 
 
 def test_gercek_dosya():
-    """Üretilmiş bir PAKET 5 dosyası (varsa): parts_prep 17 parça görür, 3 parça ve 3 comp pencere bekler."""
+    """Üretilmiş bir PAKET 5 dosyası (varsa): parts_prep 18 parça görür (17 ortak + bg_desk), 3 parça ve 3 comp pencere bekler."""
     yol = ROOT / "collections/04_Vintage_Airmail/assets/gpt/GPT_PROMPTS.md"
     if not yol.exists() or "## PAKET 5" not in yol.read_text(encoding="utf-8"):
         print("  test_gercek_dosya: atlandı (04'te PAKET 5 yok)")
         return
     liste = beklenenler(yol)
     secili = pp.parca_listesi(liste)
-    assert len(secili) == 17 and all(b["paket"] == 5 for b in secili), len(secili)
+    assert len(secili) == 18 and all(b["paket"] == 5 for b in secili), len(secili)
     pencere = sorted(Path(b["yol"]).name for b in secili if b["pencere"])
     assert pencere == ["card_small.png", "frame_landscape.png", "frame_portrait.png"], pencere
     comps = [b for b in liste if "/comps/" in b["yol"]]
     assert len(comps) == 5 and sum(b["pencere"] for b in comps) == 3, comps
-    print("  test_gercek_dosya: tamam (04: 17 parça, 3 pencereli parça, 3 pencereli comp)")
+    print("  test_gercek_dosya: tamam (04: 18 parça, 3 pencereli parça, 3 pencereli comp)")
 
 
 def main():

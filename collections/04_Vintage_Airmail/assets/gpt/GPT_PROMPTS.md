@@ -33,7 +33,7 @@ Görev: `gorevler/G204-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G804-*` (Pak
 > Üreten: `python3 tools/katalog.py paket5 --no 04` — değişiklik için `tools/katalog.py` → `WEB[4]`.
 
 **Bu tasarımın website açılışı** (kapaklı zarf; katalog: Kenarları kırmızı-lacivert çizgili hava postası zarfı; şerit yırtılarak açılır, mektup kayar):
-On tap, the little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and the folded cream love letter slides up out of the envelope and settles open while a pressed flower flutters down.
+On tap, the little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and the cream letter card slides up out of the envelope while a pressed flower flutters down.
 
 **Instructions for GPT (read fully before starting):**
 - You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
@@ -53,10 +53,11 @@ On tap, the little wax seal pops off, the perforated tear strip rips away along 
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   airmail envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the airmail envelope. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by August 21, 2027.
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: aged warm parchment gradient (#F2EADB to #DCCDB2) with subtle paper stains, faint vintage map contour lines without any labels, with dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style framing the top-left and bottom-right corners and a few small floating accents (a fictional botanical postage stamp, a pressed dried forget-me-not sprig, a faint inky circular postmark ring). Centered slightly below the middle: a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, its edges bordered with diagonal faded-red and navy airmail stripes, two fictional botanical postage stamps in the top-right corner (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words) and a slim perforated tear strip running along the top edge, closed, with a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it — on the middle of the tear strip at the top edge. Above it, typography in a handwritten fountain-pen script for the names and a vintage typewriter-style serif for the small details: a small spaced line "YOU ARE INVITED" and the names "Margot & Henry" large; below the airmail envelope a small spaced line "TAP TO OPEN". All decor in vintage print style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: aged warm parchment gradient (#F2EADB to #DCCDB2) with subtle paper stains, faint vintage map contour lines without any labels, with dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style framing the top-left and bottom-right corners and a few small floating accents (a fictional botanical postage stamp, a pressed dried forget-me-not sprig, a faint inky circular postmark ring). Centered slightly below the middle: a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, bordered with diagonal faded-red and navy airmail stripes along its left, right and bottom edges and in a straight band just under the tear strip, two fictional botanical postage stamps in the top-right corner below that band (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words), and a slim plain perforated tear strip running along the whole top edge as a clean separate band, closed, with a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it — on the middle of the tear strip at the top edge. Above it, typography in a handwritten fountain-pen script for the names and a vintage typewriter-style serif for the small details: a small spaced line "YOU ARE INVITED" and the names "Margot & Henry" large; below the airmail envelope a small spaced line "TAP TO OPEN". All decor in vintage print style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: airmail envelope ve burgundy wax seal net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -78,7 +79,7 @@ Kontrol: airmail envelope ve burgundy wax seal net ve tam; metin yalnız üstte 
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/comps/web_2_home.png` · 1024×1536
 
 ```
-Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the airmail envelope: a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "OCTOBER 2, 2027 · HUDSON". Under the card: the names "Margot & Henry" large in the script, a small spaced line "SATURDAY · OCTOBER 2, 2027", the venue "The Old Post House" and "Hudson, New York" in italic serif, four small elegant countdown boxes "354 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a navy blue pill button with a thin cream inner line labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the airmail envelope: a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "OCTOBER 2, 2027 · HUDSON". Under the card: the names "Margot & Henry" large in the script, a small spaced line "SATURDAY · OCTOBER 2, 2027", the venue "The Old Post House" and "Hudson, New York" in typewriter-style serif, four small elegant countdown boxes "354 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a navy blue pill button with a thin cream inner line labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall aged-cream laid-paper letter sheet with a thinner airmail-stripe border and only one small pressed flower at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a short twine string with a small dried flower tied on it): "4:00 PM — Ceremony — The Orchard Lawn", "5:00 PM — Cocktail Hour — The Library Bar", "6:30 PM — Reception — The Post Hall" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape vintage picture-postcard card with softly worn corners, an aged cream border and a thin red-and-navy airmail-stripe edge, its window filled with flat pure green #00FF00 (the venue photo), under it "The Old Post House" and "Hudson, New York", then a small line "DRESS CODE · Cocktail attire". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall aged-cream laid-paper letter sheet with a thinner airmail-stripe border and only one small pressed flower at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a short twine string with a small dried flower tied on it): "4:00 PM — Ceremony — The Orchard Lawn", "5:00 PM — Cocktail Hour — The Library Bar", "6:30 PM — Reception — The Post Hall" (time in small spaced typewriter-style serif, event in typewriter-style serif, place in typewriter-style serif). Below the card: a landscape version of the same large blank perforated postage-stamp frame in aged cream paper with the same fine engraved inner border line, no denomination or lettering, its window filled with flat pure green #00FF00 (the venue photo), under it "The Old Post House" and "Hudson, New York", then a small line "DRESS CODE · Cocktail attire". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -102,14 +103,14 @@ Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıy
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
 
 ```
-Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by August 21, 2027" in serif, a navy blue pill button with a thin cream inner line labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Margot & Henry" in the script at the bottom; a small burgundy wax seal — the same one as on the airmail envelope — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by August 21, 2027" in typewriter-style serif, a navy blue pill button with a thin cream inner line labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Margot & Henry" in the script at the bottom; a small burgundy wax seal — the same one as on the airmail envelope — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı airmail envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same airmail envelope as in the W1 screens, alone and closed, WITHOUT the burgundy wax seal: a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, its edges bordered with diagonal faded-red and navy airmail stripes, two fictional botanical postage stamps in the top-right corner (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words) and a slim perforated tear strip running along the top edge. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same airmail envelope as in the W1 screens, alone and closed, WITHOUT the burgundy wax seal: a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, bordered with diagonal faded-red and navy airmail stripes along its left, right and bottom edges and in a straight band just under the tear strip, two fictional botanical postage stamps in the top-right corner below that band (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words), and a slim plain perforated tear strip running along the whole top edge as a clean separate band. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; burgundy wax seal yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,23 +140,23 @@ Kontrol: tek nesne; burgundy wax seal yok; kesilmemiş; gölge yok; gerçek alfa
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it, alone, exactly as it sits on the airmail envelope in the W1 screens (on the middle of the tear strip at the top edge) and at the same scale as in envelope_closed.png, with no airmail envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it, alone, exactly as it sits on the airmail envelope in the W1 screens (on the middle of the tear strip at the top edge), drawn large so it fills about 70% of the square (Claude scales it to the airmail envelope), with the same perspective, material and light as on the airmail envelope and with no airmail envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız burgundy wax seal; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız burgundy wax seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME airmail envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: its tear strip torn away, leaving a slightly ragged open top edge, the inside of the back panel visible with fine navy (#3D4F7A) and faded red (#B5483E) diagonal airmail stripe pattern on cream, like a vintage airmail envelope border, no text; the envelope empty. No card, nothing inside, no burgundy wax seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Make this by EDITING envelope_closed.png (image edit), not as a new drawing — change nothing except what is described: The SAME airmail envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: exactly the same envelope with ONLY the slim tear strip removed along its perforation line, leaving a slightly ragged torn top edge; the two stamps, the airmail stripes, the paper, the size and the position are unchanged; the inside is not visible. No card, nothing inside, no burgundy wax seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
+Kontrol: envelope_closed'un düzenlemesi: tarif edilen dışında hiçbir şey değişmedi; envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
 #### W2.6 Zarftan çıkan küçük kart (boş)
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the airmail envelope in W1.2, alone: a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the airmail envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the airmail envelope in W1.2, alone: a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the airmail envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -179,7 +180,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a large vintage postage-stamp shaped frame with perforated scalloped edges in aged cream paper and a fine engraved inner border line. The window inside is a portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a large blank vintage postage-stamp shaped frame with perforated scalloped edges in aged cream paper and a fine engraved inner border line — no denomination, no country name, no numbers or lettering anywhere. The window inside is a portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -187,7 +188,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape vintage picture-postcard card with softly worn corners, an aged cream border and a thin red-and-navy airmail-stripe edge, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape version of the same large blank perforated postage-stamp frame in aged cream paper with the same fine engraved inner border line, no denomination or lettering, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -239,7 +240,15 @@ A small horizontal divider in the same vintage print style: a short twine string
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Website hero (masaüstü üst bant)
+#### W2.17 Story sayfası zemini — eski yazı masası
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/bg_desk.png` · 1024×1536
+
+```
+A vertical phone-screen background of an old warm walnut writing-desk top seen from directly above, fine wood grain, soft light from the top-left, calm and even, slightly darker toward the left and right edges, nothing on it (no papers, no objects, no text); the top and bottom edges match so it can repeat vertically without a seam; everything important inside the central 85% of the width.
+```
+Kontrol: üstten düz; nesne/yazı yok; sakin; dikeyde dikişsiz.
+
+#### W2.18 Website hero (masaüstü üst bant)
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
@@ -252,35 +261,35 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G204`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar tırtıklı pul çerçevelere (~4:5) girer: yüzler ortada, kenarlarda pay kalsın. Renk dünyası: eski kâğıt kreması, soluk posta kırmızısı, lacivert, sonbahar ışığı.
 
 ### 2.1 Ana portre
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
 
 ```
-Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on the platform of a small old countryside train station in autumn, a vintage leather suitcase at their feet, soft golden light; she wears a vintage-inspired tea-length cream lace dress, he wears a navy wool suit with a knit tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on the platform of a small old countryside train station in autumn, a vintage leather suitcase at their feet, soft golden light, no station signs, no timetables, no posters; she wears a vintage-inspired tea-length cream lace dress, he wears a navy wool suit with a knit tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
 ```
 
 ### 2.2 Hikâye 1 — "First hello"
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid moment writing letters together at a small wooden table in a cozy old library café, an old fountain pen and a stack of envelopes on the table (no visible writing), relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together over two cups of tea at a small wooden table by the window of a cozy old café, a vintage fountain pen and a few blank cream envelopes on the table, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment in an apple orchard in autumn at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment in an apple orchard in autumn at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, resting on a bundle of old letters tied with twine (no visible writing), soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, resting on a bundle of old letters tied with twine (no visible writing), soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

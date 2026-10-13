@@ -22,11 +22,12 @@ Tasarım 08'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 ## Yapılacaklar
 1. 03 temasının yapısını kopyala: sayfalar, `data-field` işaretleri, `site.js` başındaki MOTION/CONTENT ayrımı, `.photo-slot` foto bileşeni, alt menü. Görsel dil, renkler ve fontlar bu tasarımdan.
 2. Parçaları hazırla: `python3 tools/parts_prep.py collections/08_Winter_Evergreen --out <tema klasörü>/img_src` (mutlak yol) + temanın build adımı (WebP, 1x/2x). Yalnız bu tasarımın GPT parçaları; yeni şekil/dekor çizme (K21). `parts_prep`'in ön cep kesimi kare, V kapaklı zarf varsayar (03'te bile `build_images.py` ile düzeltildi); bu tasarımda (kapaklı zarf) kapak/kapı/cep parçaları tema build adımında `envelope_closed`/`envelope_open`'dan kesilir ve önizlemede gözle doğrulanır.
-3. Zarf açılışı (MOTION.envelope): On tap, soft snow begins to fall, the pine-and-berry bundle loosens and slides away, the green flap opens upward, and the snowy white card rises as snowflakes drift across the screen. Katalog: Orman yeşili zarf, çam dalı ve kırmızı kurdeleyle mühürlü; kar yağarken açılır. Kapanış elemanı, zarf/kapak ve kart ayrı katmanlar; kart home'daki karta dönüşür.
+3. Zarf açılışı (MOTION.envelope): On tap, soft snow begins to fall, the pine-and-berry bundle loosens and slides away, the green flap opens upward, and the snowy white card rises as snowflakes drift across the screen. Katalog: Orman yeşili zarf, çam dalı ve kırmızı kurdeleyle mühürlü; kar yağarken açılır. Kapanış elemanı, zarf/kapak ve kart ayrı katmanlar; kart home'daki karta dönüşür; `closure.png` kare tuvalde büyük çizilir; zarftaki yerine ölçeklenir.
 4. Sayfa koreografisi (MOTION.scenes): her sayfada öğeler sırayla girer. Story: Buğulu pencere camı çerçeveleri, buğu silinerek görünür (three frosted wooden window frames in a row like the windows of a snowy mountain lodge, frost still clinging to their corners as if just wiped clear, a little snow on each sill). Details/rsvp: kart, satırlar ve buton sırayla; `accent_1..3` süzülür.
 5. Foto alanları: `hero_portrait` (card_small penceresi), `story_1..3` (frame_portrait), `venue` (frame_landscape); kutu ve maske `windows.json`'dan. PAKET 2 fotoğrafı yoksa yer tutucu.
-6. Fontlar: Parisienne + Libre Baskerville (Google Fonts link'i; repoya font dosyası girmez). Tarih US biçimi (`May 15, 2027`); URL'ler null → "link will be added soon".
-7. Önizleme: 390 px (index, home, story, details, rsvp) + açılış MP4; 360/430/768/1280 px'te yatay kaydırma denetimi.
+6. Tasarıma özel ek parçalar (comp'taki ilgili öğe bunlardan kurulur, kodla çizilmez — K21): `frost_overlay.png` — Buğu katmanı (story fotoğraflarının üstü, silinerek açılır).
+7. Fontlar: Parisienne + Libre Baskerville (Google Fonts link'i; repoya font dosyası girmez). Tarih US biçimi (`May 15, 2027`); URL'ler null → "link will be added soon".
+8. Önizleme: 390 px (index, home, story, details, rsvp) + açılış MP4; 360/430/768/1280 px'te yatay kaydırma denetimi.
 
 ## Bitti sayılması için
 - [ ] Tema demo içerikle açılıyor; 5 sayfa; kişisel metin görselde değil HTML'de

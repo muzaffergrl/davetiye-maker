@@ -7,7 +7,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 | Eksen | Bu tasarım |
 |---|---|
 | Zarf / açılış | Zümrüt yeşili zarf, altın mühür; kapak açılınca altın çizgiler çizilerek büyür. |
-| Fotoğraf sunumu | Galeri duvarı: farklı boylarda ince altın çerçeveler mermer duvara asılır. |
+| Fotoğraf sunumu | Galeri duvarı: farklı boylarda ince altın çerçeveler zümrüt kadife duvara asılır. |
 | Dekor ailesi | Altın çizgi monstera/eğrelti, mermer |
 | Teknik | mermer + altın varak çizgi (gold line art) |
 | Font hedefi | Cinzel Decorative (script) + Cormorant Infant (bilgi) — Canva'da bulunabilirliği doğrulanacak; bulunamazsa en yakın Canva fontu kaydedilir |
@@ -18,7 +18,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 |---|---|---|
 | 1 | Kapalı zarf / kapak | Zümrüt yeşili zarf, altın mühür; kapak açılınca altın çizgiler çizilerek büyür. |
 | 2 | Açılış, kart yükselir | Kapanış elemanı (mühür/kurdele/toka) ayrı katman olarak çözülür; kart ayrı katman. |
-| 3 | Our Story — 3 fotoğraf | Galeri duvarı: farklı boylarda ince altın çerçeveler mermer duvara asılır. |
+| 3 | Our Story — 3 fotoğraf | Galeri duvarı: farklı boylarda ince altın çerçeveler zümrüt kadife duvara asılır. |
 | 4 | Davet kartı | Aileler, isimler, davet cümlesi, tarih bloğu, mekân. Dekor: Altın çizgi monstera/eğrelti, mermer. |
 | 5 | Program | Ceremony / Cocktail Hour / Reception + kıyafet. |
 | 6 | RSVP | Son tarih, buton, kapanış cümlesi, kapanış elemanının küçük tekrarı. |

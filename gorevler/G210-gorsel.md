@@ -10,7 +10,7 @@ yazar: [collections/10_Tuscan_Vineyard/assets/gpt/comps/, collections/10_Tuscan_
 ---
 
 ## Amaç
-Tasarım 10'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ekranı comp'u (W1, yalnız referans), aynı tasarımın website parçaları (W2, 17 dosya) ve 5 örnek fotoğraf (Paket 2). Model: tasarım 03 (G030 parçaları + G036 fotoğrafları). Bu tasarımın açılışı: On tap, the jute twine unwinds and slides off with its olive leaves, the kraft flap opens to reveal the wine-colored grape liner, and the card rises as a vine tendril curls in from the corner.
+Tasarım 10'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ekranı comp'u (W1, yalnız referans), aynı tasarımın website parçaları (W2, 18 dosya) ve 5 örnek fotoğraf (Paket 2). Model: tasarım 03 (G030 parçaları + G036 fotoğrafları). Bu tasarımın açılışı: On tap, the twine unwinds upward off the flap tip with its cork and olive leaves, the kraft flap opens to reveal the wine-colored grape liner, and the card rises as a vine tendril curls in from the corner.
 
 ## Girdiler
 - `collections/10_Tuscan_Vineyard/assets/gpt/GPT_PROMPTS.md` → **PAKET 5** (W1 + W2) ve **PAKET 2**
@@ -27,7 +27,7 @@ Tasarım 10'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/10_Tuscan_Vineyard --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [ ] PAKET 5: 5 comp + 18 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
 - [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 

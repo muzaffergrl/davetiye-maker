@@ -33,14 +33,14 @@ Görev: `gorevler/G218-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G818-*` (Pak
 > Üreten: `python3 tools/katalog.py paket5 --no 18` — değişiklik için `tools/katalog.py` → `WEB[18]`.
 
 **Bu tasarımın website açılışı** (vellum kılıf; katalog: Yarı saydam vellum sargı, kır çiçeği etiketiyle; vellum kayarak çıkar, kart görünür):
-On tap, the pressed-flower label peels away, the frosted vellum sleeve slides down off the card and fades, and the card lifts up as a few colored-pencil petals flutter across the screen.
+On tap, the wildflower label peels away, the frosted vellum sleeve slides down off the card and fades, and the card lifts up as a few colored-pencil petals flutter across the screen.
 
 **Instructions for GPT (read fully before starting):**
 - You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
   wedding stationery** quality: rich detail, real paper and material textures, believable depth, generous
   breathing room. Classic, romantic and rich — never minimal, never flat clip-art, never generic vector shapes.
 - Work in **one chat** for this whole file: first the five W1 screens, then every W2 part with the W1 images given
-  as **reference images**, then the PAKET 2 photos. Every image shares the same vellum sleeve, pressed-flower label,
+  as **reference images**, then the PAKET 2 photos. Every image shares the same vellum sleeve, wildflower label,
   decor, paper, metal and light.
 - Technique for all decor: **colored-pencil botanical illustration**; paper, fabric and metal look real.
 - Palette: ink `#2E3140` · deep `#4A6FA5` · primary `#E07A5F` · mist `#FBFAF4`→`#E8EBDC` · ivory `#FFFEF8` · gold `#C2A15E` · leaf `#6A8A4E` (poppy red, cornflower blue, daisy white, meadow green and soft cream).
@@ -53,10 +53,11 @@ On tap, the pressed-flower label peels away, the frosted vellum sleeve slides do
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   vellum sleeve at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the vellum sleeve. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,9 +71,9 @@ Kindly reply by May 15, 2027.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: bright airy cream-to-pale-meadow-green gradient (#FBFAF4 to #E8EBDC) with soft blurred wildflower colors at the very bottom edge, empty center, with colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration framing the top-left and bottom-right corners and a few small floating accents (a red poppy petal, a small blue cornflower head, a white field daisy). Centered slightly below the middle: a portrait sleeve of translucent frosted vellum, milky white and mostly opaque (about 80%), slightly larger than the soft-white cotton card inside it, the card's colorful colored-pencil wildflower border showing faintly through the vellum, closed, with a small round pressed-wildflower sticker label made of real pressed flowers (a tiny poppy, a cornflower and a daisy) under a clear glossy film, no text — on the front of the sleeve at its center, a little below the top edge. Above it, typography in a casual flowing script for the names and a graceful book serif: a small spaced line "YOU ARE INVITED" and the names "Willow & Finn" large; below the vellum sleeve a small spaced line "TAP TO OPEN". All decor in colored-pencil botanical illustration style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: bright airy cream-to-pale-meadow-green gradient (#FBFAF4 to #E8EBDC) with soft blurred wildflower colors at the very bottom edge, empty center, with colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration framing the top-left and bottom-right corners and a few small floating accents (a red poppy petal, a small blue cornflower head, a white field daisy). Centered slightly below the middle: a portrait sleeve of translucent frosted vellum, milky white and mostly opaque (about 80%), slightly larger than the soft-white cotton card inside it, the card's colorful colored-pencil wildflower border showing faintly through the vellum, closed, with a small round cream paper sticker label with a deckled edge, showing a tiny colored-pencil poppy, cornflower and daisy, no text — centered horizontally on the front of the sleeve, just below its open top edge. Above it, typography in a casual flowing script for the names and a graceful book serif: a small spaced line "YOU ARE INVITED" and the names "Willow & Finn" large; below the vellum sleeve a small spaced line "TAP TO OPEN". All decor in colored-pencil botanical illustration style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
-Kontrol: vellum sleeve ve pressed-flower label net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
+Kontrol: vellum sleeve ve wildflower label net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
 #### W1.2 Home — kart, isimler, geri sayım
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/comps/web_2_home.png` · 1024×1536
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall soft-white cotton card with only a small spray of a poppy and a cornflower at the bottom-left holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of a poppy, a cornflower and two grass stems in the same style): "4:00 PM — Ceremony — The Wildflower Meadow", "5:00 PM — Cocktail Hour — The Garden Barn", "6:30 PM — Reception — The Meadow Tent" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape soft-white cotton photo card with a slim margin around the window and a thin colored-pencil wildflower border along its lower edge, its window filled with flat pure green #00FF00 (the venue photo), under it "Meadowlark Farm" and "Lancaster, Pennsylvania", then a small line "DRESS CODE · Garden party". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall soft-white cotton card with only a small spray of a poppy and a cornflower at the bottom-left holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of a poppy, a cornflower and two grass stems in the same style): "4:00 PM — Ceremony — The Wildflower Meadow", "5:00 PM — Cocktail Hour — The Garden Barn", "6:30 PM — Reception — The Meadow Tent" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape soft-white cotton photo card with a slim margin around the window and a thin colored-pencil wildflower border along its lower edge, its window filled with flat pure green #00FF00 (the venue photo), under it "Meadowlark Farm" and "Lancaster, Pennsylvania", then a small line "DRESS CODE · Garden party". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -102,7 +103,7 @@ Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıy
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
 
 ```
-Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by May 15, 2027" in serif, a cornflower-blue pill button with white lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Willow & Finn" in the script at the bottom; a small pressed-flower label — the same one as on the vellum sleeve — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by May 15, 2027" in serif, a cornflower-blue pill button with white lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Willow & Finn" in the script at the bottom; a small wildflower label — the same one as on the vellum sleeve — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 
@@ -131,23 +132,23 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same vellum sleeve as in the W1 screens, alone and closed, WITHOUT the pressed-flower label: a portrait sleeve of translucent frosted vellum, milky white and mostly opaque (about 80%), slightly larger than the soft-white cotton card inside it, the card's colorful colored-pencil wildflower border showing faintly through the vellum. Horizontally centered, its bottom edge at about 90% of the image height and its width about 70% of the image width; the empty upper part is left for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same vellum sleeve as in the W1 screens, alone and closed, WITHOUT the wildflower label: a portrait sleeve of frosted vellum, milky white and evenly semi-opaque, with softly folded side edges and an open top edge, completely EMPTY: no card inside and nothing showing through (the website places card_small.png behind it). If real partial transparency is not possible, render it solid milky white with a soft frosted texture; Claude sets the opacity in CSS. Horizontally centered, its bottom edge at about 90% of the image height and its width about 70% of the image width; the empty upper part is left for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: tek nesne; pressed-flower label yok; kesilmemiş; gölge yok; gerçek alfa.
+Kontrol: tek nesne; wildflower label yok; kesilmemiş; gölge yok; gerçek alfa.
 
 #### W2.4 Kapanış elemanı (tek başına)
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small round pressed-wildflower sticker label made of real pressed flowers (a tiny poppy, a cornflower and a daisy) under a clear glossy film, no text, alone, exactly as it sits on the vellum sleeve in the W1 screens (on the front of the sleeve at its center, a little below the top edge) and at the same scale as in envelope_closed.png, with no vellum sleeve behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small round cream paper sticker label with a deckled edge, showing a tiny colored-pencil poppy, cornflower and daisy, no text, alone, exactly as it sits on the vellum sleeve in the W1 screens (centered horizontally on the front of the sleeve, just below its open top edge), drawn large so it fills about 70% of the square (Claude scales it to the vellum sleeve), with the same perspective, material and light as on the vellum sleeve and with no vellum sleeve behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız pressed-flower label; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız wildflower label; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf (vellum kılıf) — boş
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME vellum sleeve as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the same frosted vellum sleeve with nothing inside it — just the milky vellum with its soft folded edges and its top opening slightly flared. No card, nothing inside, no pressed-flower label. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME vellum sleeve as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the same empty frosted sleeve, its open top edge gently flared. No card, nothing inside, no wildflower label. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the vellum sleeve in W1.2, alone: a small soft-white cotton card with a portrait photo window in its upper part and a colorful colored-pencil wildflower border (poppies, cornflowers, daisies) along its lower edge, the area between blank. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the vellum sleeve so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the vellum sleeve in W1.2, alone: a small soft-white cotton card with a portrait photo window in its upper part and a colorful colored-pencil wildflower border (poppies, cornflowers, daisies) along its lower edge, the area between blank. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the vellum sleeve so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -251,7 +252,7 @@ Kontrol: tek yaprak; frame_portrait ile aynı oran; kenarda beyaz çiçek siluet
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
-Wide horizontal version of the same design for the desktop website header: bright airy cream-to-pale-meadow-green gradient (#FBFAF4 to #E8EBDC) with soft blurred wildflower colors at the very bottom edge, empty center, with colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration framing the left and right edges, and the closed vellum sleeve with its pressed-flower label resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+Wide horizontal version of the same design for the desktop website header: bright airy cream-to-pale-meadow-green gradient (#FBFAF4 to #E8EBDC) with soft blurred wildflower colors at the very bottom edge, empty center, with colorful wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — detailed colored-pencil botanical illustration framing the left and right edges, and the closed vellum sleeve with its wildflower label resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
 ```
 Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 
@@ -260,7 +261,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G218`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar dikey kartlara (~3:4) girer, üstündeki vellum kalkar: yüzler ortadaki %70'lik alanda. Renk dünyası: gelincik kırmızısı, peygamber çiçeği mavisi, papatya beyazı, çayır yeşili.
 
 ### 2.1 Ana portre
@@ -274,21 +275,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together on a picnic blanket in a meadow, a basket of strawberries and a jar of wildflowers, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together on a picnic blanket in a meadow, a basket of strawberries and a jar of wildflowers, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment in a wildflower meadow at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment in a wildflower meadow at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a loose bouquet of poppies, cornflowers and daisies, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a loose bouquet of poppies, cornflowers and daisies, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân
@@ -326,6 +327,6 @@ Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yo
 **Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/mockups/card_flatlay.png` · 1024×1536
 
 ```
-Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a translucent vellum wrap with a pressed-flower label on a soft white cotton cloth, with fresh wildflowers — poppies, cornflowers, daisies — and a sheet of translucent vellum at the edges. Soft natural light, gentle shadows, no text, no logos.
+Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a translucent vellum sleeve with a small round wildflower label on a soft white cotton cloth, with fresh wildflowers — poppies, cornflowers, daisies — and a sheet of translucent vellum at the edges. Soft natural light, gentle shadows, no text, no logos.
 ```
 Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.

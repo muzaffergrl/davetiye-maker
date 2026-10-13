@@ -53,10 +53,11 @@ On tap, the pampas-and-palm tie slips off, the arch flap folds upward, and the c
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   terracotta arch pocket at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the terracotta arch pocket. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by March 6, 2027.
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: warm sandy cream gradient (#F6EDE3 to #E5CDB5) with very soft sun haze and fine grain, a few faint layered arch shapes at the bottom edge, with fluffy cream pampas grass, dried palm spears, bunny tails and a few dried terracotta roses, flat gouache illustration with soft texture framing the top-left and bottom-right corners and a few small floating accents (a fluffy cream pampas plume, a dried palm spear, a small dried terracotta rose). Centered slightly below the middle: a portrait arch-shaped terracotta (#C9785B) paper pocket with a matte speckled texture: a tall arch-topped back panel and a rounded arch flap folded down over the front, closed, with a small dried palm spear and a fluffy pampas plume crossed and tied with a thin cream ribbon — tucked at the center of the arch flap's edge. Above it, typography in a relaxed flowing brush script for the names and a warm slab serif in spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Luna & River" large; below the terracotta arch pocket a small spaced line "TAP TO OPEN". All decor in flat gouache illustration style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: warm sandy cream gradient (#F6EDE3 to #E5CDB5) with very soft sun haze and fine grain, a few faint layered arch shapes at the bottom edge, with fluffy cream pampas grass, dried palm spears, bunny tails and a few dried terracotta roses, flat gouache illustration with soft texture framing the top-left and bottom-right corners and a few small floating accents (a fluffy cream pampas plume, a dried palm spear, a small dried terracotta rose). Centered slightly below the middle: a portrait arch-shaped terracotta (#C9785B) paper pocket with a matte speckled texture, about 3:4: a tall arch-topped back panel, a front pocket covering its lower 55% with a gently curved top edge, and a rounded arch flap folded down from the top of the back panel over the front pocket, closed, with a small dried palm spear and a fluffy pampas plume crossed and tied with a thin cream ribbon — tucked at the center of the arch flap's edge. Above it, typography in a relaxed flowing brush script for the names and a warm slab serif in spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Luna & River" large; below the terracotta arch pocket a small spaced line "TAP TO OPEN". All decor in flat gouache illustration style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: terracotta arch pocket ve pampas-and-palm tie net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -78,7 +79,7 @@ Kontrol: terracotta arch pocket ve pampas-and-palm tie net ve tam; metin yalnız
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/comps/web_2_home.png` · 1024×1536
 
 ```
-Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the terracotta arch pocket: a small warm-sand speckled card with a tall arch-topped photo window outlined by a thin terracotta arch and a second nested sand-colored arch, plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "APRIL 17, 2027 · JOSHUA TREE". Under the card: the names "Luna & River" large in the script, a small spaced line "SATURDAY · APRIL 17, 2027", the venue "Desert Bloom Ranch" and "Joshua Tree, California" in italic serif, four small elegant countdown boxes "186 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a terracotta pill button with cream lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the terracotta arch pocket: a small warm-sand speckled card with a tall arch-topped photo window outlined by a thin terracotta arch and a second nested sand-colored arch, a tiny pampas sprig at the arch's lower left, plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "APRIL 17, 2027 · JOSHUA TREE". Under the card: the names "Luna & River" large in the script, a small spaced line "SATURDAY · APRIL 17, 2027", the venue "Desert Bloom Ranch" and "Joshua Tree, California" in italic slab serif, four small elegant countdown boxes "186 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a terracotta pill button with cream lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
 
@@ -86,7 +87,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three tall nested-arch frames unfolding one after another like a layered rainbow, the middle one tallest, a soft sun circle behind them; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three separate tall arch frames standing side by side with clear space between them, the middle one tallest and slightly in front; each frame is made of two nested bands like a small boho rainbow and has its own photo window; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Terrakota ve kum renkli üst üste kemer şekilleri içinde, gökkuşağı gibi açılır.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall arch-topped sand card with a single nested terracotta arch outline and only one small pampas plume at the bottom holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of a pampas plume and two bunny tails, flat gouache): "4:00 PM — Ceremony — The Desert Garden", "5:00 PM — Cocktail Hour — The Adobe Patio", "6:30 PM — Reception — The Starlight Pavilion" (time in small spaced serif, event in serif, place in italic). Below the card: a wide landscape frame with a gently arched top made of two nested bands in terracotta and sand, flat gouache, its window filled with flat pure green #00FF00 (the venue photo), under it "Desert Bloom Ranch" and "Joshua Tree, California", then a small line "DRESS CODE · Boho chic". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall arch-topped sand card with a single nested terracotta arch outline and only one small pampas plume at the bottom holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of a pampas plume and two bunny tails, flat gouache): "4:00 PM — Ceremony — The Desert Garden", "5:00 PM — Cocktail Hour — The Adobe Patio", "6:30 PM — Reception — The Starlight Pavilion" (time in small spaced slab serif, event in slab serif, place in italic slab serif). Below the card: a wide landscape frame with a gently arched top of the same two nested hand-painted gouache bands (an outer terracotta band with a fine cream stitched-dot edge and an inner warm-sand band), visible brush texture and a small spray of cream pampas, a bunny tail and a dried terracotta rose at both lower corners, its window filled with flat pure green #00FF00 (the venue photo), under it "Desert Bloom Ranch" and "Joshua Tree, California", then a small line "DRESS CODE · Boho chic". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -102,7 +103,7 @@ Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıy
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
 
 ```
-Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by March 6, 2027" in serif, a terracotta pill button with cream lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Luna & River" in the script at the bottom; a small pampas-and-palm tie — the same one as on the terracotta arch pocket — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by March 6, 2027" in slab serif, a terracotta pill button with cream lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Luna & River" in the script at the bottom; a small pampas-and-palm tie — the same one as on the terracotta arch pocket — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same terracotta arch pocket as in the W1 screens, alone and closed, WITHOUT the pampas-and-palm tie: a portrait arch-shaped terracotta (#C9785B) paper pocket with a matte speckled texture: a tall arch-topped back panel and a rounded arch flap folded down over the front. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same terracotta arch pocket as in the W1 screens, alone and closed, WITHOUT the pampas-and-palm tie: a portrait arch-shaped terracotta (#C9785B) paper pocket with a matte speckled texture, about 3:4: a tall arch-topped back panel, a front pocket covering its lower 55% with a gently curved top edge, and a rounded arch flap folded down from the top of the back panel over the front pocket. Place it exactly where it will sit in envelope_open.png: horizontally centered, the pocket about 3:4 (taller than wide), its bottom edge at about 94% of the image height and its width about 52% of the image width; the empty upper part is left for the arch flap to lift fully into (inside the canvas, with margin) and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pampas-and-palm tie yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,15 +140,15 @@ Kontrol: tek nesne; pampas-and-palm tie yok; kesilmemiş; gölge yok; gerçek al
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small dried palm spear and a fluffy pampas plume crossed and tied with a thin cream ribbon, alone, exactly as it sits on the terracotta arch pocket in the W1 screens (tucked at the center of the arch flap's edge) and at the same scale as in envelope_closed.png, with no terracotta arch pocket behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small dried palm spear and a fluffy pampas plume crossed and tied with a thin cream ribbon, alone, exactly as it sits on the terracotta arch pocket in the W1 screens (tucked at the center of the arch flap's edge), drawn large so it fills about 70% of the square (Claude scales it to the terracotta arch pocket), with the same perspective, material and light as on the terracotta arch pocket and with no terracotta arch pocket behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız pampas-and-palm tie; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız pampas-and-palm tie; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME terracotta arch pocket as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the rounded arch flap lifted fully upward, its inner side and the inside of the back showing terracotta (#C9785B) background with a simple repeat of small cream arches and dots, flat gouache style; the front pocket empty. No card, nothing inside, no pampas-and-palm tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME terracotta arch pocket as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the rounded arch flap lifted fully upward above the back panel, its inner side and the inside of the back panel showing a warm sand-cream (#F6EDE3) lining with a hand-painted repeat of small terracotta and rust arches and dots, flat gouache style; the front pocket (lower 55%, gently curved top edge) empty. No card, nothing inside, no pampas-and-palm tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the terracotta arch pocket in W1.2, alone: a small warm-sand speckled card with a tall arch-topped photo window outlined by a thin terracotta arch and a second nested sand-colored arch, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the terracotta arch pocket so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the terracotta arch pocket in W1.2, alone: a small warm-sand speckled card with a tall arch-topped photo window outlined by a thin terracotta arch and a second nested sand-colored arch, a tiny pampas sprig at the arch's lower left, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the terracotta arch pocket so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -179,7 +180,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a tall arch-shaped frame made of two nested arches in terracotta and sand, flat gouache. The window inside is a tall arch-topped window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a tall arch frame of two nested hand-painted gouache bands — an outer terracotta band with a fine cream stitched-dot edge and an inner warm-sand band — with visible brush texture and a small spray of cream pampas, a bunny tail and a dried terracotta rose tucked at its lower left. The window inside is a tall arch-topped window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -187,7 +188,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A wide landscape frame with a gently arched top made of two nested bands in terracotta and sand, flat gouache, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A wide landscape frame with a gently arched top of the same two nested hand-painted gouache bands (an outer terracotta band with a fine cream stitched-dot edge and an inner warm-sand band), visible brush texture and a small spray of cream pampas, a bunny tail and a dried terracotta rose at both lower corners, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -252,7 +253,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G211`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar uzun kemer çerçevelere (~3:4) girer: yüzler ortada, başın üstünde pay kalsın (kemer tepesi kırpar). Renk dünyası: terrakota, kum, krem, pampas, sıcak çöl ışığı.
 
 ### 2.1 Ana portre
@@ -266,21 +267,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a small outdoor table of an adobe café, two iced drinks and a jar of dried flowers, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a small outdoor table of an adobe café, two iced drinks and a jar of dried flowers, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment among desert boulders at sunset, pampas grass around them: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment among desert boulders at sunset, pampas grass around them: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/11_Boho_Pampas/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of pampas, dried palm and terracotta roses, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of pampas, dried palm and terracotta roses, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

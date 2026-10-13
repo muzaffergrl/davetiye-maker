@@ -10,7 +10,7 @@ yazar: [collections/04_Vintage_Airmail/assets/gpt/comps/, collections/04_Vintage
 ---
 
 ## Amaç
-Tasarım 04'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ekranı comp'u (W1, yalnız referans), aynı tasarımın website parçaları (W2, 17 dosya) ve 5 örnek fotoğraf (Paket 2). Model: tasarım 03 (G030 parçaları + G036 fotoğrafları). Bu tasarımın açılışı: On tap, the little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and the folded cream love letter slides up out of the envelope and settles open while a pressed flower flutters down.
+Tasarım 04'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ekranı comp'u (W1, yalnız referans), aynı tasarımın website parçaları (W2, 18 dosya) ve 5 örnek fotoğraf (Paket 2). Model: tasarım 03 (G030 parçaları + G036 fotoğrafları). Bu tasarımın açılışı: On tap, the little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and the cream letter card slides up out of the envelope while a pressed flower flutters down.
 
 ## Girdiler
 - `collections/04_Vintage_Airmail/assets/gpt/GPT_PROMPTS.md` → **PAKET 5** (W1 + W2) ve **PAKET 2**
@@ -27,7 +27,7 @@ Tasarım 04'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/04_Vintage_Airmail --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [ ] PAKET 5: 5 comp + 18 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
 - [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 

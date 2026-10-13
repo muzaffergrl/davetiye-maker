@@ -38,9 +38,10 @@ görsel yok). Font dosyası yok.
 - `data-url="map|registry|accommodation"` = `urls.*` alanı. Demo kayıtta hepsi `null` → `href="#"` ve HTML yorumu.
 - `<!-- TEMPLATE COPY -->` = content kaydında karşılığı olmayan, alıcının değiştireceği genel şablon metni
   (Our Story paragrafı, Travel & Stay ve Registry metinleri). Uydurma olgu (otel adı, havalimanı, adres) içermez.
-- `data-optional` = content kaydındaki `optional_blocks` anahtarı. Demo kayıtta `countdown: false` ve `faq: false`
-  olmasına rağmen pilot **tüm blokları** gösterir (şablonun yeteneğini göstermek için). Satış/alıcı sürümünde
-  kaydı izlemek entegratörün kararıdır (G021); gerekiyorsa `optional_blocks` güncellenir.
+- `data-optional` = content kaydındaki `optional_blocks` anahtarı. Demo kayıtta `faq: false` olmasına rağmen pilot
+  **tüm blokları** gösterir (şablonun yeteneğini göstermek için). `countdown` 2026-10-13'te `true` yapıldı (Paket 5
+  W1.2 comp'u ve platform temasının home sayfası geri sayımı gösterir). Satış/alıcı sürümünde kaydı izlemek
+  entegratörün kararıdır (G021); gerekiyorsa `optional_blocks` güncellenir.
 
 ## Tasarım kuralları (kopyalarken değiştirilecek yerler)
 

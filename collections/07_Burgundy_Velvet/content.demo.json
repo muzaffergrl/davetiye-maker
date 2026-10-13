@@ -62,7 +62,7 @@
   },
   "optional_blocks": {
     "our_story": true,
-    "countdown": false,
+    "countdown": true,
     "dress_code": true,
     "registry": true,
     "travel_stay": true,

@@ -2,8 +2,9 @@
 
   python3 tools/katalog.py yaz      # katalog belgesi + yeni koleksiyon iskeletleri + görevler
   python3 tools/katalog.py kontrol  # ayırt edicilik (her çift ≥4 eksende farklı) + WEB (website) kayıtları tam mı
-  python3 tools/katalog.py paket5 [--no 04[,05]] [--dene]   # GPT_PROMPTS.md: başlık + PAKET 5 + PAKET 2 (PAKET 3 korunur)
+  python3 tools/katalog.py paket5 [--no 04[,05]] [--paket3] [--dene]   # GPT_PROMPTS.md: başlık + PAKET 5 + PAKET 2
   python3 tools/katalog.py gorev5 [--no 04[,05]] [--dene]   # G2NN (GPT website paketi) + G4NN (platform teması) görevleri
+  python3 tools/katalog.py ozet [--no 04[,05]] [--dene]     # DESIGN_BRIEF.md + content.demo.json (katalog değişince)
   python3 tools/katalog.py belge    # yalnız docs/09_TASARIM_KATALOGU.md
 
 `yaz` üretilenleri (var olan dosyaların üzerine yazmaz; --zorla ile yazar):
@@ -18,7 +19,10 @@ tasarımı (GPT tasarlar)" (W1 telefon ekranı comp'ları + W2 website parçalar
 yeniden yazar; eski PAKET 1 ve PAKET 2 düşer, var olan PAKET 3 (mockup) bölümü aynen korunur. Sanat yönetimi `WEB`
 sözlüğünde, demo metin koleksiyonun `content.demo.json`'ında. Tasarım 03'e (elle yazıldı: G030/G035/G036) asla
 dokunmaz; content.demo.json, DESIGN_BRIEF.md, palette.json yalnız okunur. İki kez çalıştırmak aynı dosyayı verir.
-`--dene`: yazmaz, değişecek dosya varsa çıkış 1.
+`--dene`: yazmaz, değişecek dosya varsa çıkış 1. `--paket3`: PAKET 3 korunmaz, `MOCK`'tan yeniden üretilir
+(mockups/ klasöründe üretilmiş görsel varsa o tasarımda yine korunur).
+`ozet`: katalog (`D`) değişince DESIGN_BRIEF.md (01, 04–20) ve content.demo.json'ı (yalnız katalogdan açılmış 04–20;
+elle alan eklenmişse dokunmaz) yeniden yazar. 02 ve 03 elle yazıldı, atlanır.
 `gorev5`: G2NN/G4NN görev dosyalarını yeniden yazar (durum hazir; Günlük satırları korunur, bir kez
 "yeniden tanımlandı" satırı eklenir). Alınmış/incelemede/bitmiş görevi atlar. 03 (G203/G403) hariç.
 """
@@ -37,7 +41,7 @@ EKSENLER = ["zarf", "foto", "dekor", "teknik", "font", "palet"]
 D = [
     dict(no=1, klasor="01_Olive_Ivory", ad="Olive & Ivory", mevcut=True,
          ruh="Akdeniz bahçesi sadeliğinde, zeytin dallı klasik fildişi davet.",
-         zarf="Fildişi V kapaklı zarf, zeytin yeşili mum mühür; kapak yukarı açılır, kart yükselir.",
+         zarf="Zeytin yeşili dokulu kağıt zarf, fildişi dantel kenarlı V kapak, botanik oval mühür; kapak mühürle birlikte kalkar, kart yükselir.",
          foto="Yuvarlak köşeli ince altın çerçeveli kartlar, yelpaze gibi açılır.",
          dekor="Zeytin dalları ve küçük zeytinler", teknik="suluboya",
          font=("Great Vibes", "EB Garamond"), palet_adi="olive-ivory",
@@ -55,7 +59,7 @@ D = [
     dict(no=2, klasor="02_Dusty_Blue", ad="Dusty Blue & Champagne", mevcut=True,
          ruh="Pudra mavisi okaliptüs ve şampanya altını; mum mühürlü aşk mektubu.",
          zarf="Fildişi V kapaklı zarf, pudra mavisi mum mühür; desenli astar görünür, kart cebin arkasından yükselir.",
-         foto="Üç polaroid sırayla uçarak yerleşir.",
+         foto="Üç anlık baskı (instant print) sırayla uçarak yerleşir.",
          dekor="Okaliptüs, beyaz çiçek, altın eğrelti", teknik="suluboya-guaj",
          font=("Pinyon Script", "Cormorant Garamond"), palet_adi="dusty-blue",
          renk=None, cift=None, p=None),
@@ -121,7 +125,7 @@ D = [
          font=("Italiana", "Josefin Sans"), palet_adi="navy-deco-gold",
          renk=dict(ink="#F5EEDC", deep="#C9A55C", primary="#14213D", mist_top="#1B2A4A", mist_bottom="#0E1626",
                    gold="#C9A55C", gold_light="#E6CF8F", ivory="#F5EEDC", leaf="#C9A55C"),
-         cift=("Vivian", "Vivian Grace", "Charles", "Charles Edward"), mekan=("The Grand Lumière Hotel", "Chicago", "Illinois", "America/Chicago"), tarih="2027-12-31",
+         cift=("Vivian", "Vivian Grace", "Charles", "Charles Edward"), mekan=("The Grand Lumière Hotel", "Chicago", "Illinois", "America/Chicago"), tarih="2027-12-18",
          yerler=("The Mirror Ballroom", "The Gold Bar", "The Grand Salon"), kiyafet="Black tie",
          p=dict(bg="deep midnight navy (#1B2A4A to #0E1626) with a very subtle art deco sunburst of thin gold lines radiating from the top center, fine velvet grain, empty center",
                 paper="smooth deep navy card stock (#14213D) with a faint fine linen texture",
@@ -134,7 +138,7 @@ D = [
     dict(no=7, klasor="07_Burgundy_Velvet", ad="Burgundy Velvet Autumn",
          ruh="Sonbahar akşamı: bordo dalya, kadife kurdele, mum ışığı sıcaklığı.",
          zarf="Bordo kadife kurdeleyle bağlı krem zarf; kurdele çözülüp kayar, kapak açılır.",
-         foto="Varak altın oval çerçeveler, sallanarak asılır.",
+         foto="Varak altın oval çerçeveler tek bir kadife kurdele girlandına bağlı, sallanır.",
          dekor="Dalya, bordo gül, sonbahar yaprakları, böğürtlen", teknik="yağlı boya",
          font=("Pinyon Script", "Cinzel"), palet_adi="burgundy-velvet",
          renk=dict(ink="#3B1A20", deep="#6E1F2E", primary="#8C2A3C", mist_top="#F4E7E1", mist_bottom="#D9B9AE",
@@ -253,14 +257,14 @@ D = [
                 paper="aged cream book page paper (#F8F4E6) with subtle foxing and soft edges",
                 liner="dark moss green (#4A5A3A) background with a storybook-style repeat of tiny ferns, mushrooms and stars in muted gold",
                 closure="A small brass antique book clasp with a leaf-shaped engraving, no letters.",
-                decor_main="ferns, moss, small toadstool mushrooms, ivy and tiny glowing fireflies, classic children's storybook illustration with fine ink lines and soft watercolor",
-                decor_small="a horizontal sprig of ivy with two tiny mushrooms and a firefly glow",
+                decor_main="ferns, moss, small toadstool mushrooms, ivy and tiny fireflies in antique golden-age fairy-tale illustration style — fine sepia ink lines and muted soft watercolor washes, elegant and grown-up, never cartoonish",
+                decor_small="a horizontal sprig of ivy with two tiny mushrooms and one small firefly",
                 frame="four vintage black photo corner mounts placed as a rectangle on an aged book page, the rectangle inside is empty",
                 extras=[("decor/storybook_cover.png", "1024×1536", False, "An antique closed storybook seen straight from the front, deep moss-green cloth cover with an embossed gold floral border and an empty oval in the center, no title, no letters, no text, soft warm light, plain light background.")])),
     dict(no=14, klasor="14_Ivory_Lace_Pearl", ad="Ivory Lace & Pearls",
          ruh="Kraliyet zarafeti: fildişi dantel, inci, saten; klasik kilise düğünü.",
          zarf="Dantel kaplı fildişi gatefold; inci tokalı kopça açılır, dantel kanatlar aralanır.",
-         foto="Kabartma kamelya (cameo) oval çerçeveler, inci dizisiyle iner.",
+         foto="Oyma fildişi oval çerçeveler, inci dizisiyle iner.",
          dekor="Dantel bordür, inci dizisi, beyaz gül", teknik="fotogerçekçi doku",
          font=("Mrs Saint Delafield", "Bodoni Moda"), palet_adi="ivory-pearl",
          renk=dict(ink="#3A3530", deep="#8C7B66", primary="#E9E2D6", mist_top="#FAF7F2", mist_bottom="#E7E0D4",
@@ -283,7 +287,7 @@ D = [
          font=("Petit Formal Script", "Noto Serif Display"), palet_adi="sakura",
          renk=dict(ink="#3A3438", deep="#8A6B76", primary="#F2C4CE", mist_top="#FBF5F6", mist_bottom="#E9E1E6",
                    gold="#B9A07A", gold_light="#DCCAA9", ivory="#FFFCFB", leaf="#6E5E55"),
-         cift=("Hana", "Hana Grace", "Ethan", "Ethan Michael"), mekan=("Blossom Hill Gardens", "Washington", "District of Columbia", "America/New_York"), tarih="2027-04-03",
+         cift=("Hana", "Hana Grace", "Ethan", "Ethan Michael"), mekan=("Blossom Hill Gardens", "Washington", "D.C.", "America/New_York"), tarih="2027-04-03",
          yerler=("The Blossom Walk", "The Pavilion Terrace", "The Garden Hall"), kiyafet="Spring formal",
          p=dict(bg="very soft pale pink-to-dove-grey gradient (#FBF5F6 to #E9E1E6) with a few blurred drifting cherry petals at the edges, empty center",
                 paper="soft white mulberry-style paper (#FFFCFB) with fine fibers",
@@ -314,7 +318,7 @@ D = [
     dict(no=17, klasor="17_Emerald_Gold_Estate", ad="Emerald & Gold Estate",
          ruh="Malikâne gala gecesi: zümrüt yeşili kadife, altın botanik çizgi, mermer.",
          zarf="Zümrüt yeşili zarf, altın mühür; kapak açılınca altın çizgiler çizilerek büyür.",
-         foto="Galeri duvarı: farklı boylarda ince altın çerçeveler mermer duvara asılır.",
+         foto="Galeri duvarı: farklı boylarda ince altın çerçeveler zümrüt kadife duvara asılır.",
          dekor="Altın çizgi monstera/eğrelti, mermer", teknik="mermer + altın varak çizgi",
          font=("Cinzel Decorative", "Cormorant Infant"), palet_adi="emerald-gold",
          renk=dict(ink="#F3EDDF", deep="#C8A45A", primary="#0F4D3A", mist_top="#165C46", mist_bottom="#0B3528",
@@ -356,6 +360,7 @@ D = [
          renk=dict(ink="#EFE6DA", deep="#C9A46A", primary="#141217", mist_top="#1C1A21", mist_bottom="#0B0A0D",
                    gold="#C9A46A", gold_light="#E3C99A", ivory="#EFE6DA", leaf="#5B6B4E"),
          cift=("Celeste", "Celeste Marie", "Damien", "Damien Alexander"), mekan=("The Midnight Conservatory", "New Orleans", "Louisiana", "America/Chicago"), tarih="2027-11-06",
+         saatler=("18:00", "19:00", "20:30"),  # gece bahçesi: tören karanlıkta
          yerler=("The Moonlit Garden", "The Velvet Lounge", "The Glasshouse"), kiyafet="Black tie",
          p=dict(bg="near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center",
                 paper="smooth matte black paper with a subtle fine texture",
@@ -386,7 +391,7 @@ D = [
 ]
 
 MOCK = {  # Paket 3 mockup sahne öğeleri: (yüzey, kenar süsleri, zarf)
-    1: ("an ivory linen tablecloth", "olive branches, a few green olives and an olive-green silk ribbon", "an ivory envelope with an olive-green wax seal"),
+    1: ("an ivory linen tablecloth", "olive branches, a few green olives and an olive-green silk ribbon", "an olive-green textured envelope with an ivory lace edge and an oval botanical seal"),
     3: ("a soft blush linen tablecloth", "blush peonies, cream garden roses and a blush silk ribbon", "a deckle-edged blush pink envelope"),
     4: ("an aged wooden writing desk", "a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen", "a red and navy striped airmail envelope"),
     5: ("a white plaster tabletop with blue and white tiles at the edge", "lemon branches with ripe lemons and white blossoms", "a white envelope with a blue tile-pattern liner"),
@@ -396,13 +401,13 @@ MOCK = {  # Paket 3 mockup sahne öğeleri: (yüzey, kenar süsleri, zarf)
     9: ("a natural cream linen cloth", "dried lavender bundles tied with twine and small white daisies", "a cream linen pouch tied with jute twine"),
     10: ("a rustic oak table", "grape clusters, vine leaves, olive branches and a cork", "a kraft paper envelope tied with jute twine"),
     11: ("a warm sand-colored stucco surface", "pampas grass plumes, dried palm spears and bunny tails", "an arch-shaped terracotta envelope"),
-    12: ("a light rattan tray on white sand", "monstera leaves, pink hibiscus, white plumeria and a few seashells", "a palm-leaf patterned travel wallet"),
+    12: ("a light rattan tray on white sand", "monstera leaves, pink hibiscus, white plumeria and a few seashells", "a bright white travel wallet with a slim tan leather strap, its palm-leaf liner peeking out"),
     13: ("a mossy wooden tabletop", "ferns, moss, small mushrooms and tiny warm fairy lights", "an antique green storybook with an embossed gold border and no title"),
     14: ("an ivory satin cloth", "white garden roses, a strand of pearls and a piece of ivory lace", "an ivory lace-covered gatefold envelope with a pearl clasp"),
     15: ("a pale grey stone surface", "cherry blossom branches and scattered pink petals", "a pale grey envelope with a cherry blossom liner"),
     16: ("a weathered barn-wood table", "sunflowers, wheat stalks, white daisies and a mustard gingham ribbon", "a kraft envelope tied with a gingham ribbon"),
     17: ("a white Carrara marble surface", "emerald velvet ribbon, gold candle holders and eucalyptus", "an emerald green envelope with a gold seal"),
-    18: ("a soft white cotton cloth", "fresh wildflowers — poppies, cornflowers, daisies — and a sheet of translucent vellum", "a translucent vellum wrap with a pressed-flower label"),
+    18: ("a soft white cotton cloth", "fresh wildflowers — poppies, cornflowers, daisies — and a sheet of translucent vellum", "a translucent vellum sleeve with a small round wildflower label"),
     19: ("a black velvet surface", "dark red and plum roses, berries and a lit taper candle", "a black envelope with a silver wax seal"),
     20: ("pale beach sand", "seashells, a starfish, sea glass and dune grass", "a sand-colored envelope with a wave-pattern liner"),
 }
@@ -439,7 +444,28 @@ SAHNELER = [
 #   cerceve / pencere / cerceve_yatay / pencere_yatay: foto çerçevesi (foto eksenine göre) · story: story ekranı dizilişi
 #   accent: tek başına süzülen 3 nesne (artikelsiz) · kume: florals | decor (köşe kümesi dosya adı)
 #   doku: bg_tile · buton · yazi: comp tipografisi · renk_sozu · foto: Paket 2 (kıyafet, sahneler, mekân, not)
-#   ekler: tasarıma özel ek parçalar [(dosya, ölçü, şeffaf, başlık, prompt, kontrol)]
+#   ekler: tasarıma özel ek parçalar [(dosya, ölçü, şeffaf, başlık, prompt, kontrol[, düzen])] — düzen: ORTALI yerine
+#          (ör. EGRI: eğri/sarkık nesnede "perfectly straight" demez)
+# İsteğe bağlı (2026-10-13 gözden geçirme):
+#   yer: ZARF_TIPI yerleşimi yerine (dikey cep/cüzdan: kapak tuvalin içinde açılabilsin)
+#   zarf_parca: envelope_closed.png için zarf metni (W1'deki `zarf`tan farklıysa; 18: kılıf boş çizilir)
+#   acik_duzenle: envelope_open.png yeni çizim değil, envelope_closed.png'nin düzenlemesi (04: yalnız şerit kalkar)
+#   sarili: kapanış zarfı saran kurdele/sicim → closure.png zarfla aynı tuvalde, üst üste 1:1 oturur
+#           (kapanis_olcu = zarf tuvali); değilse kapanış kareyi ~%70 doldurur, Claude ölçekler
+#   story_ortusme: story çerçeveleri yalnız kenar paylarında üst üste biner (W1.3 kontrolü buna göre)
+#   yazi_bilgi / yazi_vurgu: comp'larda bilgi satırlarının yazısı (varsayılan "serif" / "italic serif")
+#   ortak: comp'ların ortak kalite/ışık cümlesi (19: karanlık natürmort ışığı)
+#   pencere_temiz: (İngilizce ek, Türkçe kontrol) — foto penceresinin üstüne hiçbir şey binmesin (08: kırağı)
+#   foto.kadraj: Paket 2.1–2.4'e eklenen kadraj cümlesi (yuvarlak/oval pencere)
+
+KADRAJ_DAIRE = ("Compose so that both people fit well inside a centered circle whose diameter is the image width (the "
+                "photo will be cropped to a circle), with space around them — for standing or kneeling poses, "
+                "photograph from a slightly greater distance.")
+KADRAJ_OVAL = ("Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo "
+               "will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a "
+               "slightly greater distance.")
+EGRI = ("Seen straight-on (not tilted, no perspective), centered and not cropped, with generous empty margin all around; "
+        "the object keeps its natural curve.")
 
 ZARF_TIPI = {
     "kapak": ("kapaklı zarf", "1024×1536",
@@ -450,9 +476,9 @@ ZARF_TIPI = {
              "The folder stands perfectly upright in the exact center of the wide image, its height about 85% of the image "
              "height; the empty areas to the left and right are left for the two doors to open into."),
     "kitap": ("kitap kapağı", "1536×1024",
-              "The book's spine sits exactly at the horizontal center of the wide image and the closed cover fills the "
-              "right half, its height about 85% of the image height; the left half stays empty for the cover to swing "
-              "open into."),
+              "The book's spine sits exactly at the horizontal center of the wide image and the closed cover lies in the "
+              "right half, its right edge about 6% from the image border and its height about 85% of the image height; "
+              "the left half stays empty for the cover to swing open into."),
     "kese": ("keten kese", "1024×1536",
              "Horizontally centered, its bottom edge at about 90% of the image height and its width about 60% of the "
              "image width; the empty upper part is left for the card to rise into."),
@@ -466,19 +492,22 @@ WEB = {
         renk_sozu="olive green, sage, warm ivory and soft antique gold",
         yazi="a flowing calligraphy script for the names and a refined classic Garamond-style serif in small spaced capitals",
         tip="kapak",
-        zarf="a classic warm-ivory cotton-paper envelope, about 5:4 wider than tall, with a deep pointed V flap, crisp clean edges and fine natural paper fibers",
-        zarf_kisa="ivory envelope",
-        zarf_acik="the V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — {liner}; the front pocket empty",
-        kapanis="a realistic olive-green wax seal (#7D8B5A with deeper #5E6B45 shadows) with an irregular poured edge, a smooth EMPTY pressed center inside a thin raised ring and a tiny embossed olive-leaf wreath, a short sprig of two real olive leaves tucked under its edge",
-        kapanis_kisa="olive wax seal", kapanis_yeri="pressed onto the tip of the V flap, a little below the envelope's center", kapanis_olcu="1024×1024",
-        acilis="On tap, the olive wax seal lifts off and drifts away with its sprig, the V flap swings up on its hinge, and the ivory card glides up out of the pocket while two olive leaves float across the screen.",
+        zarf="an olive-green (#7D8B5A) textured cotton-paper envelope with soft visible fibers, about 5:4 wider than tall, with a deep pointed V flap whose edge is trimmed with a narrow band of fine ivory lace",
+        zarf_kisa="olive envelope",
+        liner="a warm ivory (#FBF8F0) liner with a fine hand-drawn olive-branch repeat in pale sage (#A8B28A)",
+        corner="slender olive branches with silvery-green leaves and small dark olives, a few white garden roses and small white blossoms",
+        zarf_acik="the lace-edged V flap folded fully upward above the envelope, its inner side and the inside of the back showing the liner — {liner}; the front pocket empty",
+        kapanis="an oval botanical wax seal in warm antique gold-ivory (#D7C79F, deepening to #B39A63 in its pressed recesses) with an irregular poured edge, a smooth EMPTY oval center inside a thin raised rim and a tiny embossed wreath of olive leaves and small blossoms, a short olive sprig tucked under it",
+        kapanis_kisa="oval botanical seal", kapanis_yeri="pressed onto the tip of the V flap, a little below the envelope's center", kapanis_olcu="1024×1024",
+        acilis="On tap, the olive sprig slides out from under the oval seal, the lace-edged flap peels up on its hinge carrying the seal with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.",
         kart_kucuk="a small warm-ivory card with softly rounded corners and a fine antique-gold double border, a rounded-corner portrait photo window in its upper 60% and plain blank paper below",
         davet_karti="a tall warm-ivory cotton card with softly rounded corners and a fine antique-gold double border, a slender watercolor olive branch with silvery leaves and small dark olives arching across the top-left corner and a smaller sprig at the bottom-right",
-        bilgi_karti="a tall warm-ivory card with softly rounded corners, the same fine antique-gold double border and only one small olive sprig at the top center",
+        bilgi_karti="a tall warm-ivory card with softly rounded corners, a fine antique-gold double border and only one small olive sprig at the top center",
         cerceve="a portrait ivory card frame with softly rounded corners, a fine antique-gold double border and a slim ivory margin, a tiny watercolor olive sprig tucked at its bottom-left corner",
         pencere="a portrait window with softly rounded corners (about 3:4)",
         cerceve_yatay="a landscape version of the same rounded-corner ivory card frame with the fine antique-gold double border and a tiny olive sprig at its bottom-left corner",
-        story="three rounded-corner gold-bordered portrait cards fanned out like a hand of cards from one point at the bottom — the middle card upright and slightly higher, the side cards tilted about 12 degrees outward",
+        story="three rounded-corner gold-bordered portrait cards fanned out gently like a hand of cards — the middle card upright and slightly higher, the side cards tilted about 8 degrees outward and overlapping it only at their outer ivory margins, so all three green windows stay fully visible and each caption sits under its own card",
+        story_ortusme=True,
         accent=["silvery-green olive leaf", "small ripe dark olive with a short stem and one tiny leaf", "tiny white jasmine blossom"],
         kume="decor",
         doku="soft warm-ivory watercolor paper (#F1EFE6) with faint linen grain and very subtle tonal mottling",
@@ -502,16 +531,17 @@ WEB = {
         zarf="a classic ivory cotton-paper envelope, about 5:4 wider than tall, with a deep pointed V flap edged by a hair-thin champagne-gold line, crisp edges and soft natural fibers",
         zarf_kisa="ivory envelope",
         zarf_acik="the V flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
-        kapanis="a realistic dusty blue wax seal (#6E88A3 with deeper #4E6782 shadows) with an organic irregular poured edge, a smooth EMPTY circular pressed center inside a thin raised ring and a tiny embossed eucalyptus-leaf wreath, a short sprig of silver-dollar eucalyptus tucked under it",
+        kapanis="a realistic dusty blue wax seal (#6E88A3, deepening to #4E6782 in the pressed recesses) with an organic irregular poured edge, a smooth EMPTY circular pressed center inside a thin raised ring and a tiny embossed eucalyptus-leaf wreath, a short sprig of silver-dollar eucalyptus tucked under it",
         kapanis_kisa="dusty blue wax seal", kapanis_yeri="pressed onto the tip of the V flap", kapanis_olcu="1024×1024",
         acilis="On tap, the dusty blue wax seal breaks free and falls away, the V flap opens upward to reveal the gold damask liner, and the card rises from behind the front pocket while a single eucalyptus leaf drifts down.",
         kart_kucuk="a small ivory card with straight edges and a thin champagne-gold inner border, a portrait photo window in its upper 60% and plain blank paper below",
         davet_karti="a tall ivory cotton card with a thin champagne-gold inner border, a watercolor-and-gouache spray of silver-dollar eucalyptus, white garden roses and champagne-gold fern across the top-left corner and a smaller spray at the bottom-right",
-        bilgi_karti="a tall ivory card with the same thin champagne-gold inner border and only one small eucalyptus sprig at the top center",
-        cerceve="a classic instant-photo print with a bright white card border that is wider at the bottom and a short strip of dusty blue washi tape at its top edge",
+        bilgi_karti="a tall ivory card with a thin champagne-gold inner border and only one small eucalyptus sprig at the top center",
+        cerceve="a classic instant-photo print in heavy ivory cotton paper with a deeper bottom margin, its outer edge finished with a hair-thin champagne-gold foil line and a tiny sprig of silver-dollar eucalyptus tucked behind its top-left corner",
         pencere="a slightly portrait window (about 4:5)",
-        cerceve_yatay="a landscape instant-photo print with a white border that is wider at the bottom and a short strip of dusty blue washi tape at its top edge",
-        story="three instant-photo prints scattered across the page at gentle angles and slightly overlapping, as if each had just flown in and settled one after another",
+        cerceve_yatay="a landscape version of the same ivory instant-photo print with the hair-thin champagne-gold foil edge and a tiny eucalyptus sprig behind its top-left corner",
+        story="three instant-photo prints scattered across the page at gentle angles, touching only at their white borders so every green window stays fully visible, as if each had just flown in and settled one after another",
+        story_ortusme=True,
         accent=["silver-dollar eucalyptus leaf", "small white five-petal blossom", "delicate champagne-gold fern frond"],
         kume="florals",
         doku="soft misty dusty blue watercolor wash (#DDE5EC) with a fine paper grain",
@@ -520,57 +550,62 @@ WEB = {
                   portre="in a garden at golden hour, with a soft creamy background of greenery and white roses",
                   s1="a candid moment laughing together at a small outdoor café table with two coffee cups, warm afternoon light",
                   s2="the proposal moment on a quiet seaside cliff path at sunset under a soft pastel sky",
-                  s3="close-up of their hands intertwined showing a delicate engagement ring, resting on a linen tablecloth with a few white blossoms and eucalyptus leaves, soft natural window light",
+                  s3="close-up of their hands intertwined showing a delicate engagement ring, resting on a linen tablecloth with a few white blossoms and eucalyptus leaves",
                   mekan="A fictional elegant Southern manor wedding venue at golden hour: a white two-story house with columns and a wide veranda, a lawn with rows of white ceremony chairs and a simple floral arch of white roses and eucalyptus, large oak trees",
                   dunya="pudra mavisi, fildişi, okaliptüs yeşili, şampanya altını",
                   notu="Fotoğraflar anlık baskı (instant print) karelerine girer — pencere ~4:5: yüzler ortada, üstte ve altta pay kalsın.")),
     4: dict(
         renk_sozu="faded airmail red, navy blue, aged cream parchment and muted brass",
         yazi="a handwritten fountain-pen script for the names and a vintage typewriter-style serif for the small details",
+        yazi_bilgi="typewriter-style serif", yazi_vurgu="typewriter-style serif",
         corner="dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style",
         tip="kapak",
-        zarf="a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, its edges bordered with diagonal faded-red and navy airmail stripes, two fictional botanical postage stamps in the top-right corner (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words) and a slim perforated tear strip running along the top edge",
+        zarf="a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, bordered with diagonal faded-red and navy airmail stripes along its left, right and bottom edges and in a straight band just under the tear strip, two fictional botanical postage stamps in the top-right corner below that band (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words), and a slim plain perforated tear strip running along the whole top edge as a clean separate band",
         zarf_kisa="airmail envelope",
-        zarf_acik="its tear strip torn away, leaving a slightly ragged open top edge, the inside of the back panel visible with {liner}; the envelope empty",
+        zarf_acik="exactly the same envelope with ONLY the slim tear strip removed along its perforation line, leaving a slightly ragged torn top edge; the two stamps, the airmail stripes, the paper, the size and the position are unchanged; the inside is not visible",
+        acik_duzenle=True,
         kapanis="a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it",
         kapanis_kisa="burgundy wax seal", kapanis_yeri="on the middle of the tear strip at the top edge", kapanis_olcu="1024×1024",
-        acilis="On tap, the little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and the folded cream love letter slides up out of the envelope and settles open while a pressed flower flutters down.",
+        acilis="On tap, the little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and the cream letter card slides up out of the envelope while a pressed flower flutters down.",
         kart_kucuk="a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below",
         davet_karti="a tall aged-cream laid-paper letter sheet with a border of diagonal faded-red and navy airmail stripes, pressed dried wildflowers and one fictional botanical postage stamp (tiny flower illustration only, no text) tucked at the top-left corner, and faint inky postmark rings with wavy cancellation lines (no letters or numbers) at the bottom-right",
         bilgi_karti="a tall aged-cream laid-paper letter sheet with a thinner airmail-stripe border and only one small pressed flower at the top",
-        cerceve="a large vintage postage-stamp shaped frame with perforated scalloped edges in aged cream paper and a fine engraved inner border line",
+        cerceve="a large blank vintage postage-stamp shaped frame with perforated scalloped edges in aged cream paper and a fine engraved inner border line — no denomination, no country name, no numbers or lettering anywhere",
         pencere="a portrait window (about 4:5)",
-        cerceve_yatay="a landscape vintage picture-postcard card with softly worn corners, an aged cream border and a thin red-and-navy airmail-stripe edge",
+        cerceve_yatay="a landscape version of the same large blank perforated postage-stamp frame in aged cream paper with the same fine engraved inner border line, no denomination or lettering",
         story="three large perforated postage-stamp frames scattered at slight angles across an old wooden writing desk, as if dropped one by one, a faint inky postmark ring (no letters or numbers) overlapping one corner",
         accent=["fictional botanical postage stamp with perforated edges showing only a tiny pressed-flower illustration (no numbers, no words)", "pressed dried forget-me-not sprig", "faint inky circular postmark ring with wavy cancellation lines, containing no letters, numbers or symbols"],
         kume="decor",
         doku="aged warm-cream parchment (#F2EADB) with very subtle stains and fibers",
         buton="a navy blue pill button with a thin cream inner line",
         foto=dict(kiz="a vintage-inspired tea-length cream lace dress", erkek="a navy wool suit with a knit tie",
-                  portre="on the platform of a small old countryside train station in autumn, a vintage leather suitcase at their feet, soft golden light",
-                  s1="a candid moment writing letters together at a small wooden table in a cozy old library café, an old fountain pen and a stack of envelopes on the table (no visible writing)",
+                  portre="on the platform of a small old countryside train station in autumn, a vintage leather suitcase at their feet, soft golden light, no station signs, no timetables, no posters",
+                  s1="a candid first-date moment laughing together over two cups of tea at a small wooden table by the window of a cozy old café, a vintage fountain pen and a few blank cream envelopes on the table",
                   s2="the proposal moment in an apple orchard in autumn at sunset",
                   s3="close-up of their hands intertwined showing a delicate engagement ring, resting on a bundle of old letters tied with twine (no visible writing)",
                   mekan="A fictional historic red-brick former post office converted into a wedding venue in a river-valley town in autumn: tall arched windows, an orchard lawn with rows of wooden ceremony chairs and a simple arch of dried flowers, warm golden light",
                   dunya="eski kâğıt kreması, soluk posta kırmızısı, lacivert, sonbahar ışığı",
-                  notu="Fotoğraflar tırtıklı pul çerçevelere (~4:5) girer: yüzler ortada, kenarlarda pay kalsın.")),
+                  notu="Fotoğraflar tırtıklı pul çerçevelere (~4:5) girer: yüzler ortada, kenarlarda pay kalsın."),
+        ekler=[("parts/bg_desk.png", "1024×1536", False, "Story sayfası zemini — eski yazı masası",
+                "A vertical phone-screen background of an old warm walnut writing-desk top seen from directly above, fine wood grain, soft light from the top-left, calm and even, slightly darker toward the left and right edges, nothing on it (no papers, no objects, no text); the top and bottom edges match so it can repeat vertically without a seam; everything important inside the central 85% of the width.",
+                "üstten düz; nesne/yazı yok; sakin; dikeyde dikişsiz")]),
     5: dict(
         renk_sozu="sunny lemon yellow, cobalt blue, bright white and fresh leaf green",
         yazi="a breezy flowing script for the names and an elegant high-contrast Didone serif",
         tip="kapak",
-        zarf="a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap edged by a thin hand-painted cobalt blue line",
+        zarf="a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap whose edge is gently scalloped and traced with a thin hand-painted cobalt blue line",
         zarf_kisa="white envelope",
-        zarf_acik="the V flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
-        kapanis="a small bunch of two glossy ripe lemons with three leaves, tied with a thin cobalt blue ribbon in a little bow",
+        zarf_acik="the scalloped V flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
+        kapanis="a single small glossy lemon with two leaves and a short sprig of white lemon blossom, tied together with a thin cobalt blue ribbon in a little bow",
         kapanis_kisa="lemon tie", kapanis_yeri="tucked onto the tip of the V flap", kapanis_olcu="1024×1024",
         acilis="On tap, the lemon tie slips loose and rolls away, the white flap opens upward to reveal the blue-and-white tile liner, and the card rises while a lemon branch sways in from the top corner and a blossom drifts down.",
         kart_kucuk="a small bright-white card with a gently scalloped edge, a portrait photo window framed by a single row of tiny hand-painted cobalt-and-white tiles in its upper part and plain blank paper below",
         davet_karti="a tall bright-white card with a gently scalloped outer edge and a thin cobalt blue painted border, a watercolor lemon branch with ripe lemons, white blossoms and glossy leaves across the top, and a narrow band of blue-and-white majolica tile pattern along the bottom edge",
-        bilgi_karti="a tall bright-white scalloped card with the same thin cobalt border and only one small lemon sprig at the top",
+        bilgi_karti="a tall bright-white scalloped card with a thin cobalt blue painted border and only one small lemon sprig at the top",
         cerceve="a scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles",
         pencere="a portrait rectangular window (about 3:4)",
         cerceve_yatay="a landscape scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles, a tiny lemon sprig at one corner",
-        story="three scalloped tile-framed portraits in a row, the middle one slightly larger and higher, as if each had just turned around like a painted tile panel",
+        story="three scalloped tile-framed portraits standing perfectly straight in a gentle staggered column down the page (left, right, left) like painted tile panels set into a sunlit white plaster wall, not overlapping",
         accent=["whole ripe lemon with one glossy leaf", "white lemon blossom", "glossy green lemon leaf"],
         kume="decor",
         doku="sunlit warm-white plaster (#F7F4EC) with a very soft trowel texture",
@@ -586,21 +621,22 @@ WEB = {
     6: dict(
         renk_sozu="deep midnight navy, polished metallic gold, champagne and pearl",
         yazi="tall slender art deco display capitals for the names and a clean geometric sans-serif in widely spaced capitals",
+        yazi_bilgi="geometric sans-serif", yazi_vurgu="geometric sans-serif in spaced capitals",
         tip="kapi",
-        zarf="a tall deep-navy (#14213D) linen card-stock gatefold folder, portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors edged with fine metallic-gold art deco lines that form a stepped sunburst where they meet",
+        zarf="a tall deep-navy (#14213D) linen card-stock gatefold folder, portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors edged with fine metallic-gold art deco lines that form a stepped sunburst where they meet, the two doors' top edges together forming a stepped art deco ziggurat arch silhouette",
         zarf_kisa="navy gatefold folder",
-        zarf_acik="both doors swung fully open to the left and right and lying flat, the inside of the doors lined with {liner}, the deep navy center panel with a shallow pocket along its lower edge; the pocket empty",
+        zarf_acik="both doors swung fully open to the left and right and lying flat, the inside of the doors lined with {liner}, the center panel faced in champagne-ivory card with a shallow deep-navy pocket across its lower third whose straight top edge is a crisp fine metallic-gold line; the pocket empty",
         kapanis="an ornate round art deco medallion clasp in polished gold with stepped geometric rays and a small pearl in the middle, no letters",
         kapanis_kisa="gold medallion clasp", kapanis_yeri="fastened over the center seam, a little above the middle", kapanis_olcu="1024×1024",
         acilis="On tap, the gold medallion clasp turns and lifts away, the two navy doors swing open to the sides like ballroom doors, and the card rises from the center pocket as a thin band of gold light sweeps across the screen.",
         kart_kucuk="a small champagne-ivory card with a fine gold-line border and a stepped art deco arch-shaped photo window outlined in fine gold lines in its upper part, plain blank card below",
         davet_karti="a tall deep-navy card with a fine metallic-gold art deco double border and stepped corners, a gold fan ornament with tiny pearls crowning the top and a smaller fan at the bottom center",
-        bilgi_karti="a tall deep-navy card with the same fine gold deco double border and only small gold fans in the corners",
+        bilgi_karti="a tall deep-navy card with a fine metallic-gold art deco double border and only small gold fans in the corners",
         cerceve="a stepped art deco arch frame in fine metallic gold lines with small corner fans",
         pencere="a tall stepped-arch window (about 3:4)",
         cerceve_yatay="a landscape stepped art deco frame in fine metallic gold lines with small fan ornaments at the four corners",
         story="three stepped gold art deco arch frames standing side by side like ballroom doorways, the middle one taller, a faint diagonal sweep of gold light crossing them",
-        accent=["lustrous round white pearl", "small gold art deco fan medallion", "tiny gold-and-crystal starburst sparkle"],
+        accent=["tiny gold-rimmed crystal champagne coupe drawn in fine gold line", "small gold art deco fan medallion", "tiny gold-and-crystal starburst sparkle"],
         kume="decor",
         doku="deep midnight navy velvet (#1B2A4A) with a fine even grain",
         buton="a navy pill button with a fine gold outline and champagne lettering",
@@ -620,16 +656,17 @@ WEB = {
         zarf_kisa="cream envelope",
         zarf_acik="the rectangular flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
         kapanis="a long burgundy velvet ribbon crossing the envelope both horizontally and vertically, tied in a soft bow at the crossing with a small antique-gold leaf charm hanging from the knot, plush velvet texture",
-        kapanis_kisa="velvet ribbon", kapanis_yeri="wrapped around the envelope with the bow a little above the center", kapanis_olcu="1024×1024",
+        kapanis_kisa="velvet ribbon", kapanis_yeri="wrapped around the envelope with the bow a little above the center", kapanis_olcu="1024×1536",
+        sarili=True,
         acilis="On tap, the velvet bow unties and the ribbon slides off the envelope's sides, the rectangular flap lifts, and the card rises in warm candlelight while a single copper leaf drifts down.",
         kart_kucuk="a small heavy-cream card with an upright oval photo window framed in antique gold leaf in its upper part and plain blank paper below",
         davet_karti="a tall heavy-cream card with a thin antique-gold leaf border, a lush oil-painted cascade of burgundy dahlias, deep red roses, blackberries and copper autumn leaves across the top and a smaller cluster at the bottom-right",
-        bilgi_karti="a tall heavy-cream card with the same thin gold-leaf border and only a small sprig of burgundy buds and berries at the top",
+        bilgi_karti="a tall heavy-cream card with a thin antique-gold leaf border and only a small sprig of burgundy buds and berries at the top",
         cerceve="an oval frame in antique gold leaf with a delicate carved bead border, hanging from a short burgundy velvet ribbon with a small bow at the top",
         pencere="an upright oval window (about 3:4)",
         cerceve_yatay="a wide landscape oval frame in antique gold leaf with a carved bead border, hanging from a short burgundy velvet ribbon bow at the top",
         pencere_yatay="a wide oval window (about 3:2)",
-        story="three oval gold-leaf frames hanging on burgundy velvet ribbons at slightly different heights against a warm candlelit wall, as if gently swaying",
+        story="three oval gold-leaf frames tied at different points along one long burgundy velvet ribbon swag that drapes in a gentle curve across a warm candlelit wall like a garland, each frame swaying slightly",
         accent=["copper-orange autumn maple leaf", "deep burgundy dahlia petal", "small blackberry cluster with one leaf"],
         kume="florals",
         doku="warm candlelit cream (#F4E7E1) painted-canvas texture with very soft tonal variation",
@@ -641,9 +678,14 @@ WEB = {
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of burgundy dahlias and blackberries",
                   mekan="A fictional ivy-covered stone manor hall in the mountains in autumn: a chapel lawn with rows of wooden chairs, an arch of burgundy dahlias and autumn leaves, copper trees and misty hills, warm golden light",
                   dunya="bordo, şarap kırmızısı, krem, bakır, mum ışığı",
-                  notu="Fotoğraflar dikey oval çerçevelere girer: yüzler tam ortada; köşeler kırpılır — kenarlarda bol pay kalsın.")),
+                  notu="Fotoğraflar dikey oval çerçevelere girer: yüzler tam ortada; köşeler kırpılır — kenarlarda bol pay kalsın.",
+                  kadraj=KADRAJ_OVAL),
+        ekler=[("parts/velvet_swag.png", "1536×1024", True, "Story kurdele girlandı",
+                "A single long burgundy velvet ribbon draped across about 85% of the image width in one gentle swag curve, lowest at the center, both ends finished with small soft bows, plush velvet texture, nothing hanging on it, ends not touching the image edges.",
+                "tek kurdele; üstünde çerçeve yok; uçlar kenara değmiyor; gölge yok; alfa", EGRI)]),
     8: dict(
         renk_sozu="deep forest green, snowy white, winter-berry red and soft antique gold",
+        liner="a snowy white (#FAFAF6) lining with a fine watercolor repeat of small forest-green pine sprigs, red winter berries and tiny antique-gold snowflakes",
         yazi="a graceful French-style script for the names and a classic Baskerville-style serif",
         tip="kapak",
         zarf="a deep forest-green (#2F5240) textured paper envelope, about 5:4 wider than tall, with a pointed V flap finished in a fine snowy-white deckled edge",
@@ -652,12 +694,13 @@ WEB = {
         kapanis="a small bundle of a fresh pine sprig, a cedar twig and three red winter berries tied with a thin red velvet ribbon in a small bow",
         kapanis_kisa="pine-and-berry bundle", kapanis_yeri="tucked onto the tip of the V flap", kapanis_olcu="1024×1024",
         acilis="On tap, soft snow begins to fall, the pine-and-berry bundle loosens and slides away, the green flap opens upward, and the snowy white card rises as snowflakes drift across the screen.",
-        kart_kucuk="a small snowy-white card with a single-pane wooden window frame painted white around a portrait photo window in its upper part, a little frost at the window corners, plain blank paper below",
+        kart_kucuk="a small snowy-white card with a single-pane wooden window frame painted white around a portrait photo window in its upper part, a little frost on the wooden frame's corners (not over the window), plain blank paper below",
         davet_karti="a tall snowy-white cotton card with a thin antique-gold border, a watercolor garland of pine and fir branches, juniper with blue berries, red winter berries and a small pine cone with a light dusting of snow across the top, and a smaller sprig at the bottom-left",
-        bilgi_karti="a tall snowy-white card with the same thin gold border and only a small pine sprig with two red berries at the top",
-        cerceve="a single-pane window frame of white-painted wood with soft frost crystals creeping in at its inner corners and a little snow resting on the bottom sill",
+        bilgi_karti="a tall snowy-white card with a thin antique-gold border and only a small pine sprig with two red berries at the top",
+        cerceve="a single-pane window frame of white-painted wood with soft frost crystals on the wood of its inner corners (the frost stays on the wooden frame and never covers the window opening) and a little snow resting on the bottom sill",
         pencere="a portrait window (about 3:4)",
-        cerceve_yatay="a landscape single-pane window frame of white-painted wood with frost at its inner corners and a little snow on the bottom sill",
+        cerceve_yatay="a landscape single-pane window frame of white-painted wood with soft frost crystals on the wood of its inner corners (the frost stays on the wooden frame and never covers the window opening) and a little snow on the bottom sill",
+        pencere_temiz=("no frost, snow, fog or reflection", "yeşil pencere köşelerinde kırağı/buğu yok"),
         story="three frosted wooden window frames in a row like the windows of a snowy mountain lodge, frost still clinging to their corners as if just wiped clear, a little snow on each sill",
         accent=["delicate white snowflake crystal", "small brown pine cone", "sprig of three red winter berries with one small leaf"],
         kume="decor",
@@ -670,17 +713,22 @@ WEB = {
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of pine and red winter berries",
                   mekan="A fictional timber-and-stone mountain lodge in winter: glowing windows, snow-covered pines, a snowy clearing with rows of white chairs and an arch of evergreens and red berries, soft blue-hour light",
                   dunya="orman yeşili, kar beyazı, kırmızı kış meyvesi, sıcak dağ evi ışığı",
-                  notu="Fotoğraflar tek camlı ahşap pencere çerçevelerine (~3:4) girer: yüzler ortada; köşelerde buğu kalır — kenarlarda pay.")),
+                  notu="Fotoğraflar tek camlı ahşap pencere çerçevelerine (~3:4) girer: yüzler ortada; köşelerde buğu kalır — kenarlarda pay."),
+        ekler=[("parts/frost_overlay.png", "1024×1536", True, "Buğu katmanı (story fotoğraflarının üstü, silinerek açılır)",
+                "A single sheet of fogged window-glass condensation with exactly the proportion of the portrait window of frame_portrait.png (about 3:4), filling most of the canvas: soft milky-white fog, denser toward the edges and corners with delicate feathery frost crystals, lighter and semi-transparent in the middle, straight clean edges. Only the frost itself — no wood, no frame, no green.",
+                "tek katman; pencereyle aynı oran; yeşil yok; alfa (tam opak çıkarsa Claude CSS ile saydamlık verir)")]),
     9: dict(
         renk_sozu="soft lavender, dusty purple, natural linen cream and sage",
         yazi="a light airy brush script for the names and a delicate Garamond-style serif",
         corner="real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat",
+        bg="soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center",
         tip="kese",
         zarf="a small natural cream linen drawstring pouch (#FAF8F3, fine visible weave), portrait-shaped, its mouth gathered closed at the top",
         zarf_kisa="linen pouch",
-        zarf_acik="its gathered mouth loosened and opened wide, the rim folded down a little to show {liner} as the lining; the pouch empty",
+        zarf_acik="its gathered mouth loosened and opened wide into an oval, seen very slightly from above so the inside of the back wall shows {liner} as the lining; the front rim stays plain cream linen (not folded over); the pouch empty",
         kapanis="a small bundle of dried lavender stems tied with natural jute twine in a simple bow",
-        kapanis_kisa="lavender-and-twine tie", kapanis_yeri="tied around the gathered neck of the pouch", kapanis_olcu="1024×1024",
+        kapanis_kisa="lavender-and-twine tie", kapanis_yeri="tied around the gathered neck of the pouch", kapanis_olcu="1024×1536",
+        sarili=True,
         acilis="On tap, the jute twine with its lavender bundle unties and slips away, the linen pouch loosens and opens, and the card slides up out of it while dried lavender buds scatter on a summer breeze.",
         kart_kucuk="a small cream deckle-edged cotton card with a thin border of tiny pressed lavender florets around a portrait photo window in its upper part and plain blank paper below",
         davet_karti="a tall cream deckle-edged handmade cotton card with real pressed lavender stems, small white daisies and golden wheat ears laid along the left edge and across the top, pressed completely flat",
@@ -688,8 +736,8 @@ WEB = {
         cerceve="a cream deckle-edged card with a thin border of tiny pressed lavender florets around the window",
         pencere="a portrait window (about 3:4)",
         cerceve_yatay="a landscape cream deckle-edged card with a thin border of tiny pressed lavender florets around the window",
-        story="three pressed-flower cards tumbling in at loose angles as if carried by a summer breeze, one slightly overlapping another's corner",
-        accent=["pressed dried lavender stem", "pressed white daisy", "golden wheat ear"],
+        story="three pressed-flower cards tumbling in at loose angles as if carried by a summer breeze, not overlapping",
+        accent=["pressed dried lavender stem", "pressed white daisy", "small pressed sprig of wild thyme with tiny pink-purple flowers"],
         kume="florals",
         doku="natural undyed cream linen weave (#FAF8F3), evenly lit",
         buton="a soft dusty-purple pill button with cream lettering",
@@ -705,19 +753,20 @@ WEB = {
         renk_sozu="deep wine, grape purple, kraft brown, olive green and warm sand",
         yazi="a flowing Italian chancery script for the names and classic Roman inscription capitals",
         tip="kapak",
-        zarf="a natural kraft-brown paper envelope with visible fibers, about 5:4 wider than tall, with a pointed V flap and a fine engraved double rule pressed along the flap edge",
+        zarf="a natural kraft-brown paper envelope with visible fibers, about 5:4 wider than tall, with a deep pointed V flap whose edge is printed with a fine wine-red (#5B2C3A) engraved vine border",
         zarf_kisa="kraft envelope",
         zarf_acik="the V flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
-        kapanis="natural jute twine wrapped twice around the envelope and tied in a bow, two dried olive leaves tucked under the knot",
-        kapanis_kisa="jute twine", kapanis_yeri="wrapped horizontally around the envelope with the bow at the center", kapanis_olcu="1536×1024",
-        acilis="On tap, the jute twine unwinds and slides off with its olive leaves, the kraft flap opens to reveal the wine-colored grape liner, and the card rises as a vine tendril curls in from the corner.",
-        kart_kucuk="a small cream card with a portrait photo window shaped like a vintage wine label (rectangle with cut corners) bordered by a fine engraved double line in its upper part, plain blank paper below",
-        davet_karti="a tall cream card shaped like an elegant vintage wine label (rectangle with cut corners) with a fine engraved double border, vintage-engraving grape clusters, vine leaves and tendrils with a soft watercolor wash across the top and a small olive branch at the bottom",
-        bilgi_karti="a tall cream cut-corner label card with the same engraved double border and only one small vine sprig at the top",
-        cerceve="an elegant vintage wine-label shaped frame (rectangle with cut corners) in cream with a fine engraved double border",
+        kapanis="natural jute twine wrapped twice VERTICALLY around the envelope and knotted over the tip of the V flap around a small plain natural cork disc (no branding), two dried olive leaves tucked under the knot",
+        kapanis_kisa="twine-and-cork tie", kapanis_yeri="wrapped vertically around the envelope, knotted at the tip of the V flap", kapanis_olcu="1024×1536",
+        sarili=True,
+        acilis="On tap, the twine unwinds upward off the flap tip with its cork and olive leaves, the kraft flap opens to reveal the wine-colored grape liner, and the card rises as a vine tendril curls in from the corner.",
+        kart_kucuk="a small cream card with a portrait photo window shaped like a vintage wine label (rectangle with cut corners) bordered by a fine engraved double line in its upper part, plain blank paper below — a nameless label design: no winery name, no vintage year, no crest or medallion",
+        davet_karti="a tall cream card shaped like an elegant vintage wine label (rectangle with cut corners) with a fine engraved double border, vintage-engraving grape clusters, vine leaves and tendrils with a soft watercolor wash across the top and a small olive branch at the bottom — a blank, nameless label: no winery name, no vintage year, no crest or medallion, no lettering of any kind",
+        bilgi_karti="a tall cream cut-corner label card with a fine engraved double border and only one small vine sprig at the top — a nameless label design: no winery name, no vintage year, no crest or medallion",
+        cerceve="an elegant vintage wine-label shaped frame (rectangle with cut corners) in cream with a fine engraved double border — a blank, nameless label: no winery name, no vintage year, no crest or medallion, no lettering of any kind",
         pencere="a portrait window with cut corners (about 3:4)",
-        cerceve_yatay="a landscape vintage wine-label shaped frame (rectangle with cut corners) in cream with a fine engraved double border",
-        story="three wine-label shaped frames lined up side by side on a rustic oak table, slightly overlapping, a few grapes and a cork resting beside them",
+        cerceve_yatay="a landscape vintage wine-label shaped frame (rectangle with cut corners) in cream with a fine engraved double border — a blank, nameless label: no winery name, no vintage year, no crest or medallion, no lettering of any kind",
+        story="three wine-label shaped frames lined up side by side on a rustic oak table, not overlapping, a few grapes and a silvery olive leaf resting beside them",
         accent=["small cluster of deep purple grapes", "green vine leaf with a curling tendril", "silvery olive leaf"],
         kume="decor",
         doku="warm cream-sand paper (#F4ECE2) with a soft watercolor wash and faint fibers",
@@ -729,24 +778,33 @@ WEB = {
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small cluster of grapes and an olive sprig",
                   mekan="A fictional Tuscan wine estate at golden hour: a stone farmhouse with a terracotta roof, a terrace overlooking vineyard hills with rows of wooden chairs, cypress trees and a pergola heavy with grape vines",
                   dunya="şarap kırmızısı, kraft, zeytin yeşili, Toskana gün batımı",
-                  notu="Fotoğraflar köşeleri kesik şarap etiketi biçimli çerçevelere (~3:4) girer: yüzler ortadaki %70'lik alanda.")),
+                  notu="Fotoğraflar köşeleri kesik şarap etiketi biçimli çerçevelere (~3:4) girer: yüzler ortadaki %70'lik alanda."),
+        ekler=[("parts/oak_tile.png", "1024×1024", False, "Story masası dokusu (meşe, dikişsiz)",
+                "A seamless tileable square texture of a rustic honey-brown oak tabletop seen from directly above, planks running horizontally, soft even light from the top-left, low contrast, no objects, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.",
+                "dikişsiz; düşük kontrast; nesne/yazı yok")]),
     11: dict(
         renk_sozu="terracotta, rust, warm sand, cream and muted ochre-sage",
         yazi="a relaxed flowing brush script for the names and a warm slab serif in spaced capitals",
+        yazi_bilgi="slab serif", yazi_vurgu="italic slab serif",
         tip="kapak",
-        zarf="a portrait arch-shaped terracotta (#C9785B) paper pocket with a matte speckled texture: a tall arch-topped back panel and a rounded arch flap folded down over the front",
+        yer=("Place it exactly where it will sit in envelope_open.png: horizontally centered, the pocket about 3:4 (taller "
+             "than wide), its bottom edge at about 94% of the image height and its width about 52% of the image width; the "
+             "empty upper part is left for the arch flap to lift fully into (inside the canvas, with margin) and for the "
+             "card to rise into."),
+        liner="a warm sand-cream (#F6EDE3) lining with a hand-painted repeat of small terracotta and rust arches and dots, flat gouache style",
+        zarf="a portrait arch-shaped terracotta (#C9785B) paper pocket with a matte speckled texture, about 3:4: a tall arch-topped back panel, a front pocket covering its lower 55% with a gently curved top edge, and a rounded arch flap folded down from the top of the back panel over the front pocket",
         zarf_kisa="terracotta arch pocket",
-        zarf_acik="the rounded arch flap lifted fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
+        zarf_acik="the rounded arch flap lifted fully upward above the back panel, its inner side and the inside of the back panel showing {liner}; the front pocket (lower 55%, gently curved top edge) empty",
         kapanis="a small dried palm spear and a fluffy pampas plume crossed and tied with a thin cream ribbon",
         kapanis_kisa="pampas-and-palm tie", kapanis_yeri="tucked at the center of the arch flap's edge", kapanis_olcu="1024×1024",
         acilis="On tap, the pampas-and-palm tie slips off, the arch flap folds upward, and the card slides slowly up out of the arch like a rising sun while a pampas plume sways in from the side.",
-        kart_kucuk="a small warm-sand speckled card with a tall arch-topped photo window outlined by a thin terracotta arch and a second nested sand-colored arch, plain blank card below",
+        kart_kucuk="a small warm-sand speckled card with a tall arch-topped photo window outlined by a thin terracotta arch and a second nested sand-colored arch, a tiny pampas sprig at the arch's lower left, plain blank card below",
         davet_karti="a tall warm-sand speckled card with an arched top, two nested arch outlines in terracotta and rust, fluffy cream pampas grass, dried palm spears and bunny tails in flat gouache growing from the bottom-left and top-right",
         bilgi_karti="a tall arch-topped sand card with a single nested terracotta arch outline and only one small pampas plume at the bottom",
-        cerceve="a tall arch-shaped frame made of two nested arches in terracotta and sand, flat gouache",
+        cerceve="a tall arch frame of two nested hand-painted gouache bands — an outer terracotta band with a fine cream stitched-dot edge and an inner warm-sand band — with visible brush texture and a small spray of cream pampas, a bunny tail and a dried terracotta rose tucked at its lower left",
         pencere="a tall arch-topped window (about 3:4)",
-        cerceve_yatay="a wide landscape frame with a gently arched top made of two nested bands in terracotta and sand, flat gouache",
-        story="three tall nested-arch frames unfolding one after another like a layered rainbow, the middle one tallest, a soft sun circle behind them",
+        cerceve_yatay="a wide landscape frame with a gently arched top of the same two nested hand-painted gouache bands (an outer terracotta band with a fine cream stitched-dot edge and an inner warm-sand band), visible brush texture and a small spray of cream pampas, a bunny tail and a dried terracotta rose at both lower corners",
+        story="three separate tall arch frames standing side by side with clear space between them, the middle one tallest and slightly in front; each frame is made of two nested bands like a small boho rainbow and has its own photo window",
         accent=["fluffy cream pampas plume", "dried palm spear", "small dried terracotta rose"],
         kume="decor",
         doku="warm sandy-cream speckled paper (#F6EDE3) with a fine grain",
@@ -762,17 +820,21 @@ WEB = {
     12: dict(
         renk_sozu="lagoon teal, seafoam aqua, palm green, hibiscus pink and sunny gold",
         yazi="a lively flowing script for the names and a light elegant sans-serif in spaced capitals",
+        yazi_bilgi="light sans-serif", yazi_vurgu="italic light sans-serif",
         tip="kapak",
-        zarf="a portrait travel wallet of bright white textured watercolor paper with a rounded top flap folded down over the front and a slim tan leather strap across the flap",
+        yer=("Place it exactly where it will sit in envelope_open.png: horizontally centered, about 55% of the image width "
+             "and about 55% of the image height (a 2:3 portrait wallet), its bottom edge at about 92% of the image height; "
+             "the empty upper ~40% of the image is left for the rounded flap to lift into and for the card to rise into."),
+        zarf="a portrait travel wallet of bright white textured watercolor paper with a rounded top flap folded down over the front and a slim tan leather strap running vertically down the middle of the flap, its rounded end reaching just past the flap's edge onto the front panel",
         zarf_kisa="travel wallet",
-        zarf_acik="the rounded flap lifted fully upward, its inner side and the inside of the back showing {liner}; the inner pocket empty",
-        kapanis="a small polished brass snap tab on a short loop of natural twine with a single fresh white plumeria flower tucked into the loop",
-        kapanis_kisa="brass snap with plumeria", kapanis_yeri="fastened at the end of the leather strap, at the center of the flap's edge", kapanis_olcu="1024×1024",
-        acilis="On tap, the brass snap pops open and the plumeria tab swings away, the wallet flap flips up to reveal the palm-leaf liner, and a luggage-tag card slides up while a palm-leaf shadow sweeps across the screen.",
+        zarf_acik="the rounded flap, with its leather strap, lifted fully upward, its inner side and the inside of the back panel showing {liner}; the front panel forms an empty pocket",
+        kapanis="a small round polished brass press-snap button with a short loop of natural twine wound around it and a single fresh white plumeria flower tucked into the twine",
+        kapanis_kisa="brass snap with plumeria", kapanis_yeri="pressed onto the rounded end of the vertical leather strap, just below the center of the flap's edge", kapanis_olcu="1024×1024",
+        acilis="On tap, the brass snap pops open and the plumeria tab swings away, the wallet flap flips up to reveal the palm-leaf liner, and a luggage-tag card slides up while a monstera leaf and a white plumeria drift across the screen.",
         kart_kucuk="a small bright-white card shaped like a large luggage tag (cut top corners, a reinforced eyelet hole with a short twine loop at the top), a portrait photo window in its upper part and plain blank card below",
         davet_karti="a tall bright-white watercolor card with a softly rounded top, vibrant watercolor monstera leaves, palm fronds, pink hibiscus and white plumeria spilling over the top-right and bottom-left corners",
         bilgi_karti="a tall bright-white card with a softly rounded top and only a small spray of one palm leaf and two plumeria at the top",
-        cerceve="a blank vintage kraft luggage tag with cut top corners, a reinforced eyelet hole and a short twine string, completely free of printed text",
+        cerceve="a blank vintage kraft luggage tag with cut top corners and a reinforced eyelet hole, a twine string looped through the eyelet and rising straight up about half the tag's height, completely free of printed text",
         pencere="a portrait window (about 3:4) on the tag",
         cerceve_yatay="a landscape kraft luggage tag with cut corners at its left end and a reinforced eyelet hole with a short twine string there, completely free of printed text",
         story="three kraft luggage tags hanging from their twine strings in a row at slightly different heights, gently swinging, palm leaves peeking in from the edges",
@@ -781,11 +843,11 @@ WEB = {
         doku="bright airy seafoam watercolor wash (#F2FAF8) with a fine paper grain",
         buton="a lagoon-teal pill button with white lettering",
         foto=dict(kiz="a flowing coral-pink chiffon maxi dress with a white plumeria in her hair", erkek="a white linen shirt and light sand trousers",
-                  portre="on a tropical beach with palm trees at golden hour, turquoise water behind",
+                  portre="beneath leaning coconut palms on a white-sand lagoon beach with lush green volcanic mountains behind, at golden hour",
                   s1="a candid first-date moment laughing together at a beach-shack table, two coconut drinks and a pink hibiscus flower",
-                  s2="the proposal moment on the sand by the water's edge at sunset",
+                  s2="the proposal moment at the end of a weathered wooden pier over a turquoise lagoon at sunset",
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of white plumeria and pink hibiscus",
-                  mekan="A fictional oceanfront resort lawn set for a wedding at sunset: rows of white chairs on green grass facing the ocean, a bamboo arch with monstera leaves and white orchids, tall palm trees",
+                  mekan="A fictional tropical resort garden set for a wedding at sunset: an open-air white pavilion with a thatched roof framed by blooming plumeria trees and tall coconut palms, rows of white chairs on a lawn, a bamboo arch with monstera leaves and white orchids, the ocean far beyond",
                   dunya="lagün turkuazı, köpük yeşili, palmiye yeşili, hibiskus pembesi, gün batımı",
                   notu="Fotoğraflar bavul etiketi biçimli çerçevelere (~3:4) girer: yüzler ortada, üstte ve altta pay kalsın.")),
     13: dict(
@@ -800,16 +862,16 @@ WEB = {
         acilis="On tap, the brass clasp unhooks and swings away, the moss-green cover swings open to the left like a storybook, the first page turns, and the card rises from the page while tiny fireflies glow up around it.",
         kart_kucuk="a small aged-cream book-page card with soft foxing and deckled edges, a portrait photo window held by four vintage black photo-corner mounts in its upper part, plain blank paper below",
         davet_karti="a tall aged-cream storybook page with soft foxing, deckled edges and a fine ink rule border, a classic storybook ink-and-watercolor vignette of ferns, moss, ivy and small toadstool mushrooms with a few glowing fireflies along the top and in the bottom corners",
-        bilgi_karti="a tall aged-cream storybook page with the same fine ink rule border and only a small ivy sprig with two tiny mushrooms at the top",
+        bilgi_karti="a tall aged-cream storybook page with a fine ink rule border and only a small ivy sprig with two tiny mushrooms at the top",
         cerceve="an aged-cream book-page card with soft foxing on which four vintage black photo-corner mounts hold the picture rectangle",
         pencere="a portrait window (about 3:4) held by the four photo corners",
         cerceve_yatay="a landscape aged-cream book-page card on which four vintage black photo-corner mounts hold the picture rectangle",
-        story="an open storybook spread with three photo-cornered pictures mounted on its pages — one on the left page and two on the right — as if just revealed by a turning page",
-        accent=["tiny glowing firefly with a soft warm halo", "small red-capped toadstool mushroom", "curled young fern frond"],
+        story="a single tall aged-cream storybook page (the same page as the details card) with three photo-cornered pictures mounted down it in a gentle zigzag — left, right, left — a tiny ivy sprig beside each, as if just revealed by a turning page",
+        accent=["small firefly drawn in fine ink and watercolor with a softly lit pale-gold abdomen (no halo or glow outside its body — the website adds the glow)", "small toadstool mushroom with a muted russet-brown cap", "curled young fern frond"],
         kume="decor",
         doku="dreamy misty pale moss-green watercolor wash (#EDEFE3) with a faint paper grain",
         buton="a moss-green pill button with a thin gold line and cream lettering",
-        foto=dict(kiz="a flowing sage-green tulle gown with a crown of tiny white flowers", erkek="a moss-green tweed suit with a cream shirt",
+        foto=dict(kiz="a flowing cream tulle gown with a crown of tiny white flowers", erkek="a moss-green tweed suit with a cream shirt",
                   portre="in a misty old-growth forest among ferns and moss at golden hour, soft rays of light",
                   s1="a candid first-date moment laughing together while reading an old book on a moss-covered log in the forest (no visible text)",
                   s2="the proposal moment in a forest clearing ringed with glowing lanterns and ferns at dusk",
@@ -821,50 +883,51 @@ WEB = {
         renk_sozu="ivory, champagne, pearl white, soft taupe and antique silver-gold",
         yazi="a refined formal copperplate script for the names and a high-contrast Bodoni-style serif",
         tip="kapi",
-        zarf="a tall ivory satin-finish gatefold folder (#FFFDF8), portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors covered with a delicate original ivory lace overlay with scalloped edges along the seam",
+        zarf="a tall ivory satin-finish gatefold folder (#FFFDF8), portrait-shaped (about 2:3), closed, its two doors meeting in a vertical center seam, each door edged with a hair-thin antique silver-gold line, both doors covered with a delicate original ivory lace overlay whose scalloped edge stops just short of the seam, leaving a hair-thin straight plain-ivory gap exactly on the vertical center line",
         zarf_kisa="lace gatefold folder",
         zarf_acik="both lace-covered doors swung fully open to the left and right and lying flat, the inside of the doors lined with {liner}, the ivory satin center panel with a shallow pocket along its lower edge; the pocket empty",
         kapanis="an elegant pearl clasp: a cluster of five lustrous white pearls on a small antique silver-gold setting with a short loop of tiny pearls, no letters",
         kapanis_kisa="pearl clasp", kapanis_yeri="fastened over the center seam at mid-height", kapanis_olcu="1024×1024",
         acilis="On tap, the pearl clasp unhooks and slips away, the lace-covered doors part slowly to the sides like a lifted veil, and the card rises from the satin center while a strand of tiny pearls glints.",
-        kart_kucuk="a small ivory satin card with a carved-ivory cameo-style upright oval photo window edged by a fine string of tiny pearls in its upper part, plain blank card below",
-        davet_karti="a tall ivory satin-finish card with scalloped lace borders along the top and bottom edges, a cluster of white garden roses and a draped strand of small pearls at the top-left corner, photorealistic",
-        bilgi_karti="a tall ivory satin-finish card with only a narrow scalloped lace edge along the top",
-        cerceve="an oval cameo-style frame of carved ivory with a fine string of tiny pearls around the edge",
+        kart_kucuk="a small ivory satin card with an upright oval photo window in carved ivory-white relief (tiny roses and scrolls only, no faces or figures) edged by a fine string of tiny pearls in its upper part, plain blank card below",
+        davet_karti="a tall ivory satin-finish card with a hair-thin antique silver-gold edge, scalloped lace borders along the top and bottom edges, a cluster of white garden roses and a draped strand of small pearls at the top-left corner, photorealistic",
+        bilgi_karti="a tall ivory satin-finish card with a hair-thin antique silver-gold edge and only a narrow scalloped lace edge along the top",
+        cerceve="an upright oval frame of carved ivory-white relief (tiny roses and scrolls only — no faces, figures or profile silhouettes) with a fine string of tiny pearls around the edge, hanging from a single fine strand of tiny pearls that rises straight up from the top of the frame to the top margin of the image",
         pencere="an upright oval window (about 3:4)",
-        cerceve_yatay="a wide landscape oval cameo-style frame of carved ivory with a fine string of tiny pearls around the edge",
+        cerceve_yatay="a wide landscape oval frame of carved ivory-white relief (tiny roses and scrolls only — no faces, figures or profile silhouettes) with a fine string of tiny pearls around the edge",
         pencere_yatay="a wide oval window (about 3:2)",
-        story="three carved-ivory cameo oval frames, each hanging from a fine strand of pearls, descending to slightly different heights",
-        accent=["lustrous round white pearl", "white garden rose petal", "tiny ivory satin bow"],
+        story="three carved ivory-white oval frames, each hanging from a fine strand of pearls, descending to slightly different heights",
+        accent=["single lustrous teardrop pearl drop on a tiny antique silver-gold cap", "white garden rose petal", "tiny ivory satin bow"],
         kume="decor",
         doku="soft pearly ivory satin (#FAF7F2) with a very subtle sheen",
         buton="a soft champagne-taupe pill button with ivory lettering",
         foto=dict(kiz="an ivory satin midi dress with a single strand of pearls", erkek="a navy suit with a white pocket square",
-                  portre="on the stone terrace of an elegant manor garden by the sea at golden hour",
+                  portre="in a walled white-rose garden beside a small white stone chapel at golden hour",
                   s1="a candid first-date moment laughing together at a garden tea table with fine china teacups and white roses",
                   s2="the proposal moment in a formal rose garden beside a stone fountain at sunset",
                   s3="close-up of their hands intertwined showing a delicate engagement ring, resting on ivory lace beside a strand of pearls",
-                  mekan="A fictional Gilded Age seaside mansion wedding venue at golden hour: a white limestone manor with a balustraded terrace, a formal garden with clipped hedges, rows of white chairs facing an arch of white roses, the ocean beyond",
+                  mekan="A fictional small white stone chapel with a tall arched wooden door and a round rose window, a garden aisle lined with white garden roses and rows of white chairs leading to the door, soft golden light (not resembling any real building)",
                   dunya="fildişi, şampanya, inci beyazı, yumuşak taupe",
-                  notu="Fotoğraflar dikey oval kamelya çerçevelere girer: yüzler tam ortada, kenarlarda bol pay kalsın.")),
+                  notu="Fotoğraflar dikey oval oyma fildişi çerçevelere girer: yüzler tam ortada, kenarlarda bol pay kalsın.",
+                  kadraj=KADRAJ_OVAL)),
     15: dict(
         renk_sozu="soft blossom pink, dove grey, warm white and dark twig brown",
         yazi="a delicate formal script for the names and a refined high-contrast display serif",
         tip="kapak",
-        zarf="a pale dove-grey mulberry-paper envelope with fine fibers, about 5:4 wider than tall, with a softly curved (rounded) flap",
+        zarf="a soft dove-grey (#BDB5BA) mulberry-paper envelope with fine fibers, about 5:4 wider than tall, with a softly curved (rounded) flap finished in a fine deckled white edge",
         zarf_kisa="dove-grey envelope",
         zarf_acik="the rounded flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
         kapanis="a small cluster of three pink cherry blossoms on a short dark brown twig",
         kapanis_kisa="cherry blossom twig", kapanis_yeri="tucked onto the edge of the curved flap at its center", kapanis_olcu="1024×1024",
         acilis="On tap, the blossom twig loosens and drifts off, the curved grey flap lifts, and the card rises as a gentle flurry of cherry petals swirls up and floats across the screen.",
-        kart_kucuk="a small warm-white mulberry-paper card with a perfectly round photo window ringed by a thin brushed-gold circle with a few tiny cherry blossoms at its top, plain blank paper below",
-        davet_karti="a tall warm-white mulberry-paper card with a thin brushed-gold border, a fine ink-and-watercolor cherry blossom branch arching from the top-left across the top edge and a few loose petals falling toward the bottom-right",
-        bilgi_karti="a tall warm-white mulberry-paper card with the same thin brushed-gold border and only a short blossom twig at the top-left corner",
-        cerceve="a round frame of a thin brushed-gold ring with a few tiny cherry blossoms at its top",
+        kart_kucuk="a small warm-white mulberry-paper card with a perfectly round photo window ringed by a slender dark-brown cherry branch bent into a full circle, blossoming with pale pink flowers and buds over its upper third, with a hair-thin brushed-gold inner ring, plain blank paper below",
+        davet_karti="a tall warm-white mulberry-paper card with a thin brushed-gold border and softly deckled edges, a lush fine ink-and-watercolor cherry blossom branch heavy with blossoms and buds arching from the top-left across the whole top edge and down the right side, a smaller blossoming branch rising from the bottom-left, a few loose petals",
+        bilgi_karti="a tall warm-white mulberry-paper card with a thin brushed-gold border and only a short blossom twig at the top-left corner",
+        cerceve="a round frame made of a slender dark-brown cherry branch bent into a full circle, blossoming with pale pink flowers and buds over its upper third, with a hair-thin brushed-gold inner ring",
         pencere="a perfectly round window",
-        cerceve_yatay="a wide oval frame of a thin brushed-gold ring with a few tiny cherry blossoms at its top",
+        cerceve_yatay="a wide oval version of the same blossoming cherry-branch frame with the hair-thin brushed-gold inner ring",
         pencere_yatay="a wide oval window (about 3:2)",
-        story="three round brushed-gold frames of different sizes drifting down the page in a gentle diagonal like falling petals",
+        story="three round blossoming cherry-branch frames of different sizes drifting down the page in a gentle diagonal like falling petals",
         accent=["pale pink cherry blossom petal", "five-petal pink cherry blossom", "small pink cherry bud on a tiny twig"],
         kume="florals",
         doku="very soft pale blush-white mulberry paper (#FBF5F6) with fine fibers",
@@ -874,59 +937,66 @@ WEB = {
                   s1="a candid first-date moment laughing together at a small café table in spring, two cups of tea and a sprig of cherry blossoms",
                   s2="the proposal moment on a path under an arch of blooming cherry trees with petals falling",
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small cherry blossom branch",
-                  mekan="A fictional spring garden wedding venue: a white garden pavilion beside a reflecting pond, a walk lined with blooming cherry trees, rows of white chairs, soft daylight",
+                  mekan="A fictional spring garden wedding venue: a small open white garden pavilion with a simple pitched roof (not a real landmark, no domed monument) beside a reflecting pond, a walk lined with blooming cherry trees, rows of white chairs, soft daylight",
                   dunya="kiraz çiçeği pembesi, güvercin grisi, sıcak beyaz",
-                  notu="Fotoğraflar yuvarlak çerçevelere girer: yüzler tam ortadaki dairede, kenarlarda bol pay kalsın.")),
+                  notu="Fotoğraflar yuvarlak çerçevelere girer: yüzler tam ortadaki dairede, kenarlarda bol pay kalsın.",
+                  kadraj=KADRAJ_DAIRE)),
     16: dict(
         renk_sozu="sunflower yellow, mustard, warm kraft brown, barn-wood brown and leaf green",
         yazi="a bold friendly brush script for the names and a sturdy classic serif",
         tip="kapak",
-        zarf="a natural kraft-brown paper envelope with visible fibers, about 5:4 wider than tall, with a straight square-cut flap",
+        zarf="a rustic kraft-brown paper envelope with visible fibers and softly torn deckled edges, about 5:4 wider than tall, with a square-cut flap with rounded corners",
         zarf_kisa="kraft envelope",
-        zarf_acik="the square-cut flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
-        kapanis="a mustard-yellow gingham ribbon wrapped around the envelope and tied in a simple bow with a small sunflower head tucked into the knot",
-        kapanis_kisa="gingham ribbon", kapanis_yeri="wrapped horizontally around the envelope with the bow at the center", kapanis_olcu="1536×1024",
-        acilis="On tap, the gingham bow tugs loose and the ribbon slides off with its little sunflower, the kraft flap flips open, and the card slides out onto a weathered wooden tabletop while a few sunflower petals tumble.",
+        zarf_acik="the rounded-corner square flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
+        kapanis="a wide mustard-yellow gingham fabric ribbon wrapped horizontally around the envelope and finished in a big soft bow at the center, with a small sunflower head tucked into the knot",
+        kapanis_kisa="gingham ribbon", kapanis_yeri="wrapped horizontally around the envelope with the bow at the center", kapanis_olcu="1024×1536",
+        sarili=True,
+        acilis="On tap, the gingham bow tugs loose and the ribbon slides off with its little sunflower, the kraft flap flips open, and the card slides out onto the weathered barn-wood tabletop (barnwood.png) while a few sunflower petals tumble.",
         kart_kucuk="a small cream cotton card with a portrait photo window edged by a thin mustard gingham ribbon trim in its upper part, plain blank paper below",
         davet_karti="a tall cream cotton card with a thin mustard gingham ribbon band across the top edge, a realistic watercolor spray of sunflowers, wheat stalks and white field daisies along the bottom-left and a single sunflower at the top-right",
-        bilgi_karti="a tall cream cotton card with the same gingham band and only a small sunflower-and-wheat sprig at the top",
-        cerceve="a white-bordered instant-style photo print hanging from a small natural wooden clothespin at its top center",
+        bilgi_karti="a tall cream cotton card with a thin mustard gingham ribbon band across the top edge and only a small sunflower-and-wheat sprig at the top",
+        cerceve="a vintage deckle-edged photo print with a narrow cream scalloped border, warm-toned like an old farmhouse snapshot, hanging from a small natural wooden clothespin at its top center",
         pencere="a nearly square portrait window (about 4:5)",
-        cerceve_yatay="a landscape white-bordered instant-style photo print hanging from a small natural wooden clothespin at its top center",
-        story="three instant-style photo prints pegged one by one with small wooden clothespins onto a gently sagging jute twine line against a weathered barn-wood wall",
+        cerceve_yatay="a landscape vintage deckle-edged photo print with a narrow cream scalloped border, held at its top center by a small wooden clothespin clipped to a short length of jute twine",
+        story="three vintage deckle-edged photo prints pegged one by one with small wooden clothespins onto a gently sagging jute twine line against a weathered barn-wood wall",
         accent=["bright yellow sunflower petal", "small sunflower head without a stem", "golden wheat ear"],
         kume="florals",
         doku="warm golden-cream watercolor paper (#FBF5E8) with a faint grain",
         buton="a mustard-yellow pill button with dark brown lettering",
         foto=dict(kiz="a white cotton eyelet sundress with tan boots", erkek="a light blue chambray shirt with tan suspenders",
                   portre="in a blooming sunflower field at golden hour",
-                  s1="a candid first-date moment laughing together on the tailgate of an old farm truck, two glass bottles of lemonade",
-                  s2="the proposal moment in the middle of a sunflower field at sunset",
+                  s1="a candid first-date moment laughing together on the tailgate of an old farm truck, two glass bottles of lemonade, no license plate, no badges or logos on the truck",
+                  s2="the proposal moment on a mown grass path between tall rows of a sunflower field at sunset, both fully visible",
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of sunflowers and wheat",
                   mekan="A fictional big red barn wedding venue in the countryside at golden hour: a red barn with open doors and string lights, rows of wooden benches on the grass beside a sunflower field, a few hay bales",
                   dunya="ayçiçeği sarısı, hardal, kraft, ahşap kahvesi, altın saat",
-                  notu="Fotoğraflar beyaz kenarlı anlık baskılara (~4:5) girer: yüzler ortada."),
+                  notu="Fotoğraflar tırtıklı kenarlı eski baskılara (~4:5) girer: yüzler ortada."),
         ekler=[("parts/twine_line.png", "1536×1024", True, "Story ipi (fotoğraflar mandalla asılır)",
-                "A single natural jute twine line stretched horizontally across about 85% of the image width with a gentle sag, realistic fibers, nothing hanging on it, both ends neatly finished and not touching the image edges.",
-                "tek ip; üstünde bir şey yok; uçlar kenara değmiyor; gölge yok; alfa")]),
+                "A single natural jute twine line stretched horizontally across about 85% of the image width with a gentle sag, realistic fibers, nothing hanging on it, both ends neatly finished and not touching the image edges (the twine hangs in a shallow curve, lowest at the center).",
+                "tek ip; üstünde bir şey yok; uçlar kenara değmiyor; gölge yok; alfa", EGRI),
+               ("parts/barnwood.png", "1024×1536", False, "Ahşap masa/duvar (açılış + story)",
+                "A weathered pale barn-wood surface seen straight on: wide sun-bleached planks running horizontally with soft grain and a few nail holes, warm golden-hour light from the top-left, calm and low in contrast, seamless from top to bottom so it can repeat vertically, no objects, no flowers, no text.",
+                "yatay tahtalar; dikeyde dikişsiz; düşük kontrast; nesne/yazı yok")]),
     17: dict(
         renk_sozu="deep emerald green, polished gold, white Carrara marble and ivory",
+        liner="a softly polished gold-foil liner with a fine emerald-green line-art pattern of ferns and leaves",
+        corner="thin metallic-gold line-art ferns, monstera leaves and eucalyptus sprigs drawn as fine outlines without fill",
         yazi="ornate decorative Roman capitals for the names and an elegant old-style serif",
         tip="kapak",
-        zarf="a deep emerald-green (#0F4D3A) envelope with a soft velvety matte finish, about 5:4 wider than tall, with a pointed V flap edged by a thin polished-gold line",
+        zarf="a deep jewel-emerald (#0F4D3A) envelope with a velvet sheen, about 5:4 wider than tall, with a long curved bell-shaped (ogee) flap reaching just below the center, the flap edge, the pocket's top edges and all four outer edges traced with a thin polished-gold line",
         zarf_kisa="emerald envelope",
-        zarf_acik="the V flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
+        zarf_acik="the bell-shaped flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty, its top edges traced with a thin polished-gold line",
         kapanis="a round polished-gold wax-style seal with a smooth EMPTY center and a fine leaf border, no letters",
-        kapanis_kisa="gold seal", kapanis_yeri="pressed onto the tip of the V flap", kapanis_olcu="1024×1024",
+        kapanis_kisa="gold seal", kapanis_yeri="pressed onto the lowest point of the bell-shaped flap", kapanis_olcu="1024×1024",
         acilis="On tap, the gold seal lifts away with a glint, the emerald flap opens upward, thin gold botanical lines draw themselves across the screen, and the marble card rises from the pocket.",
-        kart_kucuk="a small white Carrara-marble card with soft grey veins, a slim polished-gold frame around a portrait photo window in its upper part and plain marble below",
-        davet_karti="a tall white Carrara-marble card with soft thin grey veins and a slim polished-gold border, elegant thin metallic-gold line-art ferns, monstera and eucalyptus growing from the top-left and bottom-right corners",
-        bilgi_karti="a tall white marble card with the same slim gold border and only one thin gold line-art fern sprig at the top",
+        kart_kucuk="a small white Carrara-marble-printed card (thin card stock, no stone thickness) with soft grey veins, a slim polished-gold frame around a portrait photo window in its upper part and plain marble below",
+        davet_karti="a tall white Carrara-marble-printed card (thin card stock, no stone thickness) with soft thin grey veins and a slim polished-gold border, elegant thin metallic-gold line-art ferns, monstera and eucalyptus growing from the top-left and bottom-right corners",
+        bilgi_karti="a tall white Carrara-marble-printed card (thin card stock, no stone thickness) with a slim polished-gold border and only one thin gold line-art fern sprig at the top",
         cerceve="a slim polished-gold picture frame with a fine inner bevel",
         pencere="a portrait window (about 3:4)",
         cerceve_yatay="a landscape slim polished-gold picture frame with a fine inner bevel",
-        story="a gallery wall: three slim polished-gold frames of different sizes (one tall, one medium, one small) hung asymmetrically on a white marble wall",
-        accent=["thin gold line-art fern leaf", "small gold line-art monstera leaf", "tiny flake of gold leaf"],
+        story="a gallery wall: three slim polished-gold frames of the same 3:4 shape in three sizes (large, medium, small) hung asymmetrically on the emerald velvet page",
+        accent=["thin gold line-art fern leaf", "small gold line-art monstera leaf", "small gold line-art eucalyptus sprig"],
         kume="decor",
         doku="deep emerald-green velvet (#165C46) with a soft even sheen",
         buton="a polished-gold pill button with emerald lettering",
@@ -943,11 +1013,15 @@ WEB = {
         yazi="a casual flowing script for the names and a graceful book serif",
         tip="kilif",
         zarf="a portrait sleeve of translucent frosted vellum, milky white and mostly opaque (about 80%), slightly larger than the soft-white cotton card inside it, the card's colorful colored-pencil wildflower border showing faintly through the vellum",
+        zarf_parca=("a portrait sleeve of frosted vellum, milky white and evenly semi-opaque, with softly folded side edges and an "
+                    "open top edge, completely EMPTY: no card inside and nothing showing through (the website places "
+                    "card_small.png behind it). If real partial transparency is not possible, render it solid milky white "
+                    "with a soft frosted texture; Claude sets the opacity in CSS"),
         zarf_kisa="vellum sleeve",
-        zarf_acik="the same frosted vellum sleeve with nothing inside it — just the milky vellum with its soft folded edges and its top opening slightly flared",
-        kapanis="a small round pressed-wildflower sticker label made of real pressed flowers (a tiny poppy, a cornflower and a daisy) under a clear glossy film, no text",
-        kapanis_kisa="pressed-flower label", kapanis_yeri="on the front of the sleeve at its center, a little below the top edge", kapanis_olcu="1024×1024",
-        acilis="On tap, the pressed-flower label peels away, the frosted vellum sleeve slides down off the card and fades, and the card lifts up as a few colored-pencil petals flutter across the screen.",
+        zarf_acik="the same empty frosted sleeve, its open top edge gently flared",
+        kapanis="a small round cream paper sticker label with a deckled edge, showing a tiny colored-pencil poppy, cornflower and daisy, no text",
+        kapanis_kisa="wildflower label", kapanis_yeri="centered horizontally on the front of the sleeve, just below its open top edge", kapanis_olcu="1024×1024",
+        acilis="On tap, the wildflower label peels away, the frosted vellum sleeve slides down off the card and fades, and the card lifts up as a few colored-pencil petals flutter across the screen.",
         kart_kucuk="a small soft-white cotton card with a portrait photo window in its upper part and a colorful colored-pencil wildflower border (poppies, cornflowers, daisies) along its lower edge, the area between blank",
         davet_karti="a tall soft-white cotton card with detailed colored-pencil wildflowers — red poppies, blue cornflowers, white daisies, purple lupines and grasses — growing up from the bottom edge and a few stems along the top-right",
         bilgi_karti="a tall soft-white cotton card with only a small spray of a poppy and a cornflower at the bottom-left",
@@ -973,22 +1047,25 @@ WEB = {
     19: dict(
         renk_sozu="near-black, deep burgundy, plum, antique gold and candlelight amber",
         yazi="elegant high-contrast small capitals for the names and a refined classical small-capital serif",
-        corner="dark moody florals — deep red and burgundy roses, plum peonies, dark berries and dusky leaves — in a Dutch still-life oil painting style",
+        corner="dark jewel-toned florals — deep crimson and garnet roses, plum and aubergine peonies, a few midnight-blue delphiniums, dark berries and dusky leaves — in a Dutch still-life oil painting style",
+        liner="a deep plum-burgundy (#4A2335) liner with a painterly pattern of dark red roses and dusky leaves",
+        ortak=("Premium luxury wedding stationery quality, real paper and material textures, dramatic chiaroscuro light from "
+               "the upper left as in a Dutch still life, rich, moody and intimate."),
         tip="kapak",
-        zarf="a smooth matte black paper envelope with a subtle fine texture, about 5:4 wider than tall, with a pointed V flap",
+        zarf="a smooth matte black paper envelope with a subtle fine texture, about 5:4 wider than tall, with a pointed V flap, the flap and the pocket's diagonal edges finished with a hair-thin antique-silver edge that catches the light",
         zarf_kisa="black envelope",
         zarf_acik="the V flap folded fully upward, its inner side and the inside of the back showing {liner}, a soft warm golden sheen painted on the inside of the empty pocket",
         kapanis="a realistic antique silver wax seal with a smooth EMPTY center and a thin raised ring, no letters",
         kapanis_kisa="silver wax seal", kapanis_yeri="pressed onto the tip of the V flap", kapanis_olcu="1024×1024",
         acilis="On tap, the silver seal cracks and falls away, the black flap opens slowly, warm golden candlelight spills out from inside, and the card rises out of the darkness into the glow.",
         kart_kucuk="a small matte black card with a fine antique-gold inner line and a portrait photo window framed by a slim carved gilded baroque border in its upper part, plain black below",
-        davet_karti="a tall matte black card with a fine antique-gold inner border, dark moody oil-painted deep red and burgundy roses, plum peonies, dark berries and dusky leaves spilling over the top-left and bottom-right corners, lit as if by candlelight",
-        bilgi_karti="a tall matte black card with the same fine gold border and only a small sprig of one dark red rose bud and berries at the top",
+        davet_karti="a tall matte black card with a fine antique-gold inner border, dark moody oil-painted deep red and burgundy roses, plum peonies, dark berries and dusky leaves spilling over the top-left and bottom-right corners, glowing richly against the black as in a Dutch still life lit from the upper left",
+        bilgi_karti="a tall matte black card with a fine antique-gold inner border and only a small sprig of one dark red rose bud and berries at the top",
         cerceve="an ornate carved gilded baroque picture frame in antique gold",
         pencere="a portrait window (about 3:4)",
         cerceve_yatay="a landscape ornate carved gilded baroque picture frame in antique gold",
-        story="three ornate gilded baroque frames emerging from the darkness on a black wall, each lit by a warm pool of candlelight from below, hung in a staggered salon arrangement",
-        accent=["deep red rose petal", "small dark plum with one leaf", "small dusky-brown night moth with soft wings"],
+        story="three ornate gilded baroque frames on a black wall in a staggered salon arrangement, a soft warm candle glow on the wall behind each frame (the frames themselves lit from the upper left)",
+        accent=["deep red rose petal", "small dark plum with one leaf", "small dark velvet-plum butterfly with antique-gold wing edges"],
         kume="florals",
         doku="near-black matte painted texture (#1C1A21) with very subtle variation",
         buton="an antique-gold pill button with black lettering",
@@ -1004,12 +1081,12 @@ WEB = {
         renk_sozu="ocean blue, sea-glass aqua, warm sand, white foam and soft brass",
         yazi="a breezy handwritten script for the names and a classic book serif",
         tip="kapak",
-        zarf="a soft sand-colored textured paper envelope with tiny speckles, about 5:4 wider than tall, with a gently wavy-edged flap",
+        zarf="a soft sand-colored textured paper envelope with tiny speckles, about 5:4 wider than tall, with a pointed V flap whose two edges are cut in a gentle wave like a shoreline",
         zarf_kisa="sand envelope",
-        zarf_acik="the wavy flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
+        zarf_acik="the wave-edged V flap folded fully upward, its inner side and the inside of the back showing {liner}; the front pocket empty",
         kapanis="a small pale-pink scallop seashell resting on a short loop of natural twine",
-        kapanis_kisa="scallop shell", kapanis_yeri="resting on the tip of the wavy flap", kapanis_olcu="1024×1024",
-        acilis="On tap, a soft watercolor wave washes across the screen and carries the seashell and twine away, the wavy flap lifts, and the card rises like the incoming tide.",
+        kapanis_kisa="scallop shell", kapanis_yeri="resting on the point of the wave-edged V flap", kapanis_olcu="1024×1024",
+        acilis="On tap, the watercolor wave (wave.png) sweeps across the screen and carries the seashell and twine away, the wave-edged flap lifts, and the card rises like the incoming tide.",
         kart_kucuk="a small sand-colored speckled card with a perfectly round porthole-style photo window ringed in aged brass with small rivets in its upper part, plain blank card below",
         davet_karti="a tall soft-white textured card with a gently wavy top edge, ocean-watercolor waves with thin white foam lines along the bottom, seashells, a starfish and pieces of sea glass at the bottom-right and a small tuft of dune grass at the top-left",
         bilgi_karti="a tall soft-white textured card with a gently wavy top edge and only a narrow watercolor wave along the bottom",
@@ -1017,19 +1094,23 @@ WEB = {
         pencere="a perfectly round window",
         cerceve_yatay="a wide oval brass porthole-style frame with small rivets and an aged patina",
         pencere_yatay="a wide oval window (about 3:2)",
-        story="three round brass portholes in a row along a weathered whitewashed boat-plank wall, sliding in from the right one after another",
-        accent=["small pale-pink scallop seashell", "piece of frosted aqua sea glass", "small sand-colored starfish"],
+        story="three round brass portholes stacked down the page in a gentle zig-zag (left, right, left) on the soft sea-mist page, a few shells and sea glass between them",
+        accent=["small white spiral moon-snail shell", "piece of frosted aqua sea glass", "small sand-colored starfish"],
         kume="decor",
         doku="soft sea-mist watercolor wash (#F4F8F9) with a fine sand grain",
         buton="an ocean-blue pill button with white lettering",
         foto=dict(kiz="a flowing white chiffon dress", erkek="a light blue linen suit with no tie, sleeves rolled",
-                  portre="on a sandy beach among dune grass at golden hour, the ocean behind",
-                  s1="a candid first-date moment laughing together at a seaside picnic table, two lemonades and a little bucket of shells",
+                  portre="on a sandy dune path beside a weathered split-rail fence and blue hydrangeas at golden hour, the ocean behind",
+                  s1="a candid first-date moment laughing together at a weathered picnic table on a harbor dock, two iced teas and a paper basket of fried clams, sailboats softly blurred behind",
                   s2="the proposal moment on the beach near a white lighthouse at sunset",
                   s3="close-up of their hands intertwined showing a delicate engagement ring, holding a small scallop shell and a piece of sea glass",
                   mekan="A fictional seaside wedding venue at golden hour: a weathered shingle boathouse, a dune lawn with rows of white chairs facing the ocean, a white lighthouse in the distance and a driftwood arch with white flowers",
                   dunya="okyanus mavisi, deniz camı, kum, köpük beyazı",
-                  notu="Fotoğraflar yuvarlak lomboz çerçevelere girer: yüzler tam ortadaki dairede, kenarlarda bol pay kalsın.")),
+                  notu="Fotoğraflar yuvarlak lomboz çerçevelere girer: yüzler tam ortadaki dairede, kenarlarda bol pay kalsın.",
+                  kadraj=KADRAJ_DAIRE),
+        ekler=[("parts/wave.png", "1536×1024", True, "Açılış dalgası",
+                "A single soft ocean-watercolor wave seen from the side: a wide band of translucent aqua and ocean-blue water whose top edge curls into a crest of white foam lace, spanning about 90% of the image width, its lower edge softly feathered. Only this one wave, no shells, no sand, no sky.",
+                "tek dalga; köpük üst kenarda; alt kenar yumuşak; gölge yok; alfa", EGRI)]),
 }
 
 WEB_ALANLAR = ["renk_sozu", "yazi", "tip", "zarf", "zarf_kisa", "zarf_acik", "kapanis", "kapanis_kisa", "kapanis_yeri",
@@ -1047,7 +1128,7 @@ def content(t):
     a, af, b, bf = t["cift"]
     mekan, sehir, bolge, tz = t["mekan"]
     d = cumartesi(t["tarih"])
-    tz_saat = ["16:00", "17:00", "18:30"]
+    tz_saat = list(t.get("saatler") or ("16:00", "17:00", "18:30"))
     return {
         "record_kind": "demo", "event_type": "wedding", "locale": "en-US",
         "partners": [{"display_name": a, "full_name": af}, {"display_name": b, "full_name": bf}],
@@ -1061,7 +1142,7 @@ def content(t):
         "rsvp": {"deadline": (d - timedelta(days=42)).isoformat(), "method": None},
         "urls": {k: None for k in ["website", "rsvp_form", "map", "registry", "accommodation"]},
         "media": {"hero_portrait": None, "memory_photos": [], "couple_clip": None, "venue_image": None},
-        "optional_blocks": {"our_story": True, "countdown": False, "dress_code": True, "registry": True,
+        "optional_blocks": {"our_story": True, "countdown": True, "dress_code": True, "registry": True,
                             "travel_stay": True, "faq": False, "guest_policy": False},
     }
 
@@ -1203,6 +1284,10 @@ def web(t):
     w.setdefault("ayirici", p.get("decor_small"))
     w.setdefault("pencere_yatay", "a 3:2 landscape window")
     w.setdefault("ekler", [])
+    w.setdefault("yazi_bilgi", "serif")
+    w.setdefault("yazi_vurgu", "italic serif")
+    w.setdefault("ortak", "Premium luxury wedding stationery quality, real paper and material textures, soft natural "
+                          "light from the top-left, refined, rich and airy.")
     w["zarf_acik"] = w["zarf_acik"].format(liner=w["liner"])
     w["renk"] = t["renk"] or json.loads((ROOT / "collections" / t["klasor"] / "palette.json").read_text(encoding="utf-8"))
     w["stil"] = STIL[t["teknik"]]
@@ -1228,8 +1313,9 @@ def demo(t):
 def w1_ekranlar(t, w, d):
     """(dosya, başlık, prompt, kontrol) — 5 telefon ekranı comp'u (referans; demo metin serbest)."""
     a1, a2, a3 = (ein(kisa_ad(x)) for x in w["accent"])
-    ortak = ("Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the "
-             "top-left, refined, rich and airy.")
+    ortak, yb, yv = w["ortak"], w["yazi_bilgi"], w["yazi_vurgu"]
+    ortusme = ("çerçeveler yalnız kenar paylarında üst üste; üç yeşil pencere tam görünür" if w.get("story_ortusme")
+               else "çerçeveler birbirini kesmiyor")
     nav = 'A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP".'
     (t1, e1, l1), (t2, e2, l2), (t3, e3, l3) = d["program"]
     c1, c2, c3 = d["altyazi"]
@@ -1249,7 +1335,7 @@ def w1_ekranlar(t, w, d):
          f"below the window the line \"We're getting married\" in {ya} and a small spaced line "
          f"\"{d['tarih'].upper()} · {d['sehir'].upper()}\". Under the card: the names \"{d['a']} & {d['b']}\" large in "
          f"{ya}, a small spaced line \"{d['gun'].upper()} · {d['tarih'].upper()}\", the venue \"{d['mekan']}\" and "
-         f"\"{d['sehir']}, {d['yer']}\" in italic serif, four small elegant countdown boxes \"{d['kalan']} DAYS · 09 HOURS "
+         f"\"{d['sehir']}, {d['yer']}\" in {yv}, four small elegant countdown boxes \"{d['kalan']} DAYS · 09 HOURS "
          f"· 05 MINUTES · 05 SECONDS\", and {w['buton']} labelled \"RSVP\". {nav} One or two floating accents. {ortak}",
          "kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var"),
         ("comps/web_3_story.png", "W1.3 Story — üç fotoğraf",
@@ -1257,18 +1343,18 @@ def w1_ekranlar(t, w, d):
          f"subtitle \"MOMENTS WE HOLD DEAR\". Below: {w['story']}; every photo window is filled with flat pure green "
          f"#00FF00 and each frame has a small caption in {ya} underneath: \"{c1}\", \"{c2}\", \"{c3}\". Small touches of "
          f"the same decor between the frames. {nav} {ortak}",
-         f"üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: {t['foto'].rstrip('.')}"),
+         f"üç çerçeve, pencereler düz yeşil; başlık üstte; {ortusme}; diziliş: {t['foto'].rstrip('.')}"),
         ("comps/web_4_details.png", "W1.4 Details — program kartı ve mekân",
          f"Same design, page 4 of 5: details. {bas(w['bilgi_karti'])} holds the title \"Order of the Day\" in {ya} "
          f"and three schedule rows separated by tiny dividers ({w['ayirici']}): \"{t1} — {e1} — {l1}\", "
-         f"\"{t2} — {e2} — {l2}\", \"{t3} — {e3} — {l3}\" (time in small spaced serif, event in serif, place in italic). "
+         f"\"{t2} — {e2} — {l2}\", \"{t3} — {e3} — {l3}\" (time in small spaced {yb}, event in {yb}, place in {yv}). "
          f"Below the card: {w['cerceve_yatay']}, its window filled with flat pure green #00FF00 (the venue photo), under "
          f"it \"{d['mekan']}\" and \"{d['sehir']}, {d['yer']}\", then a small line \"DRESS CODE · {d['kiyafet']}\". "
          f"{nav} {ortak}",
          "üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var"),
         ("comps/web_5_rsvp.png", "W1.5 RSVP — davet kartı ve buton",
          f"Same design, page 5 of 5: RSVP. The same card as page 4 with the title \"Will You Join Us?\" in {ya}, "
-         f"\"Kindly reply by {d['son']}\" in serif, {w['buton']} labelled \"RSVP\", the line \"We can't wait to "
+         f"\"Kindly reply by {d['son']}\" in {yb}, {w['buton']} labelled \"RSVP\", the line \"We can't wait to "
          f"celebrate with you\" and \"With love, {d['a']} & {d['b']}\" in {ya} at the bottom; a small "
          f"{w['kapanis_kisa']} — the same one as on the {w['zarf_kisa']} — rests at the base of the card. {nav} {ortak}",
          "buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı"),
@@ -1278,8 +1364,30 @@ def w1_ekranlar(t, w, d):
 def w2_parcalar(t, w):
     """(dosya, ölçü, şeffaf, başlık, prompt, kontrol) — website katmanları; yazı yok."""
     tip_ad, zolcu, yer = ZARF_TIPI[w["tip"]]
+    yer = w.get("yer", yer)
     zk, kk, kume = w["zarf_kisa"], w["kapanis_kisa"], w["kume"]
     ek_ad = "" if w["tip"] == "kapak" else f" ({tip_ad})"
+    temiz, temiz_k = "", ""
+    if w.get("pencere_temiz"):
+        temiz = f" The green window is perfectly clean edge to edge — {w['pencere_temiz'][0]} over it."
+        temiz_k = f"; {w['pencere_temiz'][1]}"
+    if w.get("sarili"):  # zarfı saran kurdele/sicim: zarfla aynı tuvalde, üst üste 1:1
+        kapanis = (f"Only {w['kapanis']}, alone, exactly as it sits on the {zk} in the W1 screens "
+                   f"({w['kapanis_yeri']}), with no {zk} behind it. Draw it on a canvas of exactly the same size as "
+                   f"envelope_closed.png and give envelope_closed.png as the reference image: the {kk} sits exactly where "
+                   f"it wraps the {zk} there, so the two images overlay pixel for pixel. Where it wraps around the edges, "
+                   f"its ends stop exactly at the {zk}'s outline. The {zk} itself is NOT drawn. Front view, perfectly "
+                   f"straight. {ISIK}")
+        kapanis_k = (f"yalnız {kk}; harf/monogram yok; envelope_closed üstüne 1:1 oturuyor; uçlar zarf kenarında bitiyor; "
+                     "gölge yok; alfa")
+    else:
+        kapanis = (f"Only {w['kapanis']}, alone, exactly as it sits on the {zk} in the W1 screens "
+                   f"({w['kapanis_yeri']}), drawn large so it fills about 70% of the square (Claude scales it to the "
+                   f"{zk}), with the same perspective, material and light as on the {zk} and with no {zk} behind it. "
+                   f"{ORTALI} {ISIK}")
+        kapanis_k = f"yalnız {kk}; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa"
+    duzenle = ("Make this by EDITING envelope_closed.png (image edit), not as a new drawing — change nothing except what "
+               "is described: " if w.get("acik_duzenle") else "")
     out = [
         ("parts/bg_page.png", "1024×1536", False, "Sayfa arka planı (telefon)",
          f"The page background of the W1 screens alone, as a vertical phone-screen background: {w['bg']}, with "
@@ -1293,23 +1401,22 @@ def w2_parcalar(t, w):
          f"it repeats without visible seams.",
          "kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok"),
         ("parts/envelope_closed.png", zolcu, True, f"Kapalı zarf{ek_ad} — kapanış elemanı OLMADAN",
-         f"The same {zk} as in the W1 screens, alone and closed, WITHOUT the {kk}: {w['zarf']}. {yer} Only this one "
+         f"The same {zk} as in the W1 screens, alone and closed, WITHOUT the {kk}: {w.get('zarf_parca', w['zarf'])}. "
+         f"{yer} Only this one "
          f"object. {ON} {ISIK}",
          f"tek nesne; {kk} yok; kesilmemiş; gölge yok; gerçek alfa"),
-        ("parts/closure.png", w["kapanis_olcu"], True, "Kapanış elemanı (tek başına)",
-         f"Only {w['kapanis']}, alone, exactly as it sits on the {zk} in the W1 screens ({w['kapanis_yeri']}) and at the "
-         f"same scale as in envelope_closed.png, with no {zk} behind it. {ORTALI} {ISIK}",
-         f"yalnız {kk}; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa"),
+        ("parts/closure.png", w["kapanis_olcu"], True, "Kapanış elemanı (tek başına)", kapanis, kapanis_k),
         ("parts/envelope_open.png", zolcu, True, f"Açık zarf{ek_ad} — boş",
-         f"The SAME {zk} as envelope_closed.png — same size, same position on the canvas, same angle, same material and "
+         f"{duzenle}The SAME {zk} as envelope_closed.png — same size, same position on the canvas, same angle, same material and "
          f"light (give envelope_closed.png as the reference image) — now open: {w['zarf_acik']}. No card, nothing inside, "
          f"no {kk}. {ON} {ISIK}",
-         "envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser)"),
+         ("envelope_closed'un düzenlemesi: tarif edilen dışında hiçbir şey değişmedi; " if w.get("acik_duzenle") else "")
+         + "envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser)"),
         ("parts/card_small.png", "1024×1536", True, "Zarftan çıkan küçük kart (boş)",
          f"The small card that comes out of the {zk} in W1.2, alone: {w['kart_kucuk']}. Its photo window is filled with "
-         f"flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower "
-         f"than the {zk} so it fits inside it. {ORTALI} {ISIK}",
-         "pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa"),
+         f"flat pure green #00FF00 (no texture, no shading).{temiz} The rest of the card is blank (no text). Slightly "
+         f"narrower than the {zk} so it fits inside it. {ORTALI} {ISIK}",
+         f"pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa{temiz_k}"),
         ("parts/invitation_card.png", "1024×1536", True, "Büyük davet kartı (boş)",
          f"The large invitation card of this design, alone: {w['davet_karti']}. The card face is completely blank (no "
          f"text at all) with a large calm area in the middle for the invitation wording. {ORTALI} {ISIK}",
@@ -1320,13 +1427,13 @@ def w2_parcalar(t, w):
          "boş yüz; davet kartından daha sade; gölge yok; alfa"),
         ("parts/frame_portrait.png", "1024×1536", True, "Dikey foto çerçevesi (story)",
          f"One photo frame from W1.3, alone and upright: {w['cerceve']}. The window inside is {w['pencere']}, filled with "
-         f"flat pure green #00FF00. No caption, no text. {ORTALI} {ISIK}",
-         "tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa"),
+         f"flat pure green #00FF00.{temiz} No caption, no text. {ORTALI} {ISIK}",
+         f"tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa{temiz_k}"),
         ("parts/frame_landscape.png", "1536×1024", True, "Yatay foto çerçevesi (mekân fotoğrafı)",
          f"{bas(w['cerceve_yatay'])}, matching frame_portrait.png exactly in material and ornament, about 80% of the image "
-         f"width. The window inside is {w['pencere_yatay']}, filled with flat pure green #00FF00, for the venue photo. "
-         f"{ORTALI} {ISIK}",
-         "tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa"),
+         f"width. The window inside is {w['pencere_yatay']}, filled with flat pure green #00FF00, for the venue photo."
+         f"{temiz} {ORTALI} {ISIK}",
+         f"tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa{temiz_k}"),
         (f"parts/{kume}_tl.png", "1024×1024", True, "Köşe kümesi — sol üst",
          f"ONE cluster of {w['corner']}, isolated, as at the top-left corner of the W1 screens: it fans from the top-left "
          f"toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the "
@@ -1348,8 +1455,9 @@ def w2_parcalar(t, w):
                 f"A small horizontal divider in the same {w['stil']} style: {w['ayirici']}, lying horizontally and centered, "
                 f"about 60% of the image width, lots of empty space around it. {ORTALI} {ISIK}",
                 "küçük, yatay ve ortalı; gölge yok; alfa"))
-    for dosya, olcu, seffaf, baslik, prompt, kontrol in w["ekler"]:
-        out.append((dosya, olcu, seffaf, baslik, prompt + (f" {ORTALI} {ISIK}" if seffaf else ""), kontrol))
+    for dosya, olcu, seffaf, baslik, prompt, kontrol, *duzen in w["ekler"]:
+        son = f" {duzen[0] if duzen else ORTALI} {ISIK}" if seffaf else ""
+        out.append((dosya, olcu, seffaf, baslik, prompt + son, kontrol))
     out.append(("parts/web_hero.png", "1536×1024", False, "Website hero (masaüstü üst bant)",
                 f"Wide horizontal version of the same design for the desktop website header: {w['bg']}, with "
                 f"{w['corner']} framing the left and right edges, and the closed {zk} with its {kk} resting slightly "
@@ -1430,10 +1538,14 @@ def paket5_md(t, w=None, d=None):
         "  way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.",
         "- Transparent parts are **true-alpha PNG** (not white, not a checkerboard).",
         "- Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).",
-        "- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME",
+        "- envelope_closed.png and envelope_open.png must fit together exactly: the SAME",
         f"  {w['zarf_kisa']} at the SAME size, position and angle. Make envelope_closed.png first and give it as the",
-        "  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking",
-        "  pieces from one image.",
+        "  reference for closure.png and envelope_open.png. " + (
+            "closure.png is drawn on a canvas of the same size so it overlays" if w.get("sarili") else
+            "closure.png is drawn large on its own square; Claude scales it"),
+        ("  envelope_closed.png pixel for pixel. " if w.get("sarili") else f"  onto the {w['zarf_kisa']}. ") +
+        "Do not draw separate flap, door, pocket or cover pieces — Claude cuts",
+        "  interlocking pieces from one image.",
         "- Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).",
         "- Must not resemble any real person, brand or another seller's design.", "",
         "### W1 — Telefon ekranı tasarımları (referans; satılmaz)", "",
@@ -1458,28 +1570,30 @@ def paket2_md(t, w=None, d=None):
     w, d = w or web(t), d or demo(t)
     n, k, f = f"{t['no']:02d}", f"collections/{t['klasor']}", w["foto"]
     c1, c2, c3 = d["altyazi"]
+    ayni = "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), "
+    kd = f" {f['kadraj']}" if f.get("kadraj") else ""  # yuvarlak/oval pencere: kadraj notu
     fotolar = [
         ("2.1 Ana portre", "hero_portrait.jpg", "Dikey (1024×1536)",
          f"Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real "
          f"person), standing close and smiling at each other {f['portre']}; she wears {f['kiz']}, he wears {f['erkek']}. "
          f"Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area "
-         f"of the frame with generous space around them. Vertical photo, no text, no watermark."),
+         f"of the frame with generous space around them. Vertical photo, no text, no watermark.{kd}"),
         (f"2.2 Hikâye 1 — \"{c1}\"", "story_1.jpg", "Dikey (1024×1536)",
-         f"Same couple as in the first image, {f['s1']}, relaxed and natural, true-to-life colors, soft film look, "
-         f"subjects centered, vertical photo, no text, no signage, no watermark."),
+         f"{ayni}{f['s1']}, relaxed and natural, true-to-life colors, soft film look, "
+         f"subjects centered, vertical photo, no text, no signage, no watermark.{kd}"),
         (f"2.3 Hikâye 2 — \"{c2}\"", "story_2.jpg", "Dikey (1024×1536)",
-         f"Same couple as in the first image, {f['s2']}: he kneels holding a small open ring box, she covers her mouth in "
+         f"{ayni}{f['s2']}: he kneels holding a small open ring box, she covers her mouth in "
          f"happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft "
-         f"film look, vertical photo, no text, no watermark."),
+         f"film look, vertical photo, no text, no watermark.{kd}"),
         (f"2.4 Hikâye 3 — \"{c3}\"", "story_3.jpg", "Dikey (1024×1536)",
-         f"Same couple as in the first image, {f['s3']}, soft natural light, shallow depth of field, centered "
-         f"composition, true-to-life colors, vertical photo, no text, no watermark."),
+         f"{ayni}{f['s3']}, soft natural light, shallow depth of field, centered "
+         f"composition, true-to-life colors, vertical photo, no text, no watermark.{kd}"),
         ("2.5 Mekân", "venue.jpg", "Yatay (1536×1024)",
          f"{f['mekan']}, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark."),
     ]
     L = ["## PAKET 2 — Örnek fotoğraflar", "",
          f"Görev `G2{n}`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi",
-         "fotoğraflarını koyar. 2.1'den sonra her prompt'ta \"same couple as in the first image\" korunur. Gerçek veya ünlü",
+         "fotoğraflarını koyar. 2.1'den sonra her prompt'ta \"same couple as in hero_portrait.jpg\" korunur. Gerçek veya ünlü",
          f"birine benzemesin; eller/parmaklar düzgün. {f['notu']} Renk dünyası: {f['dunya']}.", ""]
     for baslik, dosya, olcu, prompt in fotolar:
         L += [f"### {baslik}", f"**Kaydet:** `{k}/assets/gpt/photos/{dosya}` · {olcu}", "", "```", prompt, "```", ""]
@@ -1500,12 +1614,13 @@ def paket3_bolumu(metin):
     return "\n".join(blok)
 
 
-def gpt_prompts_md(t, eski=""):
-    """Başlık + PAKET 5 + PAKET 2 + (eski dosyadan aynen) PAKET 3. Aynı girdiyle iki kez çalışınca aynı çıktı."""
+def gpt_prompts_md(t, eski="", paket3_yenile=False):
+    """Başlık + PAKET 5 + PAKET 2 + (eski dosyadan aynen) PAKET 3. Aynı girdiyle iki kez çalışınca aynı çıktı.
+    `paket3_yenile`: PAKET 3 eski dosyadan alınmaz, `MOCK`'tan yeniden üretilir."""
     if t["no"] == 3:
         raise ValueError("tasarım 03'ün GPT_PROMPTS.md dosyası elle yazıldı (G030/G035/G036); üreteç ona dokunmaz")
     w, d = web(t), demo(t)
-    p3 = paket3_bolumu(eski) if eski else None
+    p3 = paket3_bolumu(eski) if eski and not paket3_yenile else None
     if p3 is None and t["no"] in MOCK:
         p3 = paket3_md(t)
     L = baslik_md(t, w) + paket5_md(t, w, d) + ["---", ""] + paket2_md(t, w, d)
@@ -1642,6 +1757,10 @@ def g4_gorev(t):
     kesim = (f"`parts_prep`'in ön cep kesimi kare, V kapaklı zarf varsayar (03'te bile `build_images.py` ile düzeltildi); "
              f"bu tasarımda ({tip_ad}) kapak/kapı/cep parçaları tema build adımında `envelope_closed`/`envelope_open`'dan "
              "kesilir ve önizlemede gözle doğrulanır.")
+    kapanis = ("`closure.png` zarfla aynı tuvalde çizilir, `envelope_closed` üstüne 1:1 oturur" if w.get("sarili") else
+               "`closure.png` kare tuvalde büyük çizilir; zarftaki yerine ölçeklenir")
+    ekler = (["Tasarıma özel ek parçalar (comp'taki ilgili öğe bunlardan kurulur, kodla çizilmez — K21): " +
+              "; ".join(f"`{e[0].split('/')[-1]}` — {e[3]}" for e in w["ekler"]) + "."] if w["ekler"] else [])
     return f"G4{n}-website-kaynak", task_md(
         f"G4{n}", f"Tasarım {n} {t['ad']} — platform teması", "claude-kod", [f"G2{n}", "G038", "G046"], [tema],
         f"Tasarım {n}'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): kapalı zarf açılış sayfası → "
@@ -1659,11 +1778,12 @@ def g4_gorev(t):
          f"Parçaları hazırla: `python3 tools/parts_prep.py {k} --out <tema klasörü>/img_src` (mutlak yol) + temanın build "
          f"adımı (WebP, 1x/2x). Yalnız bu tasarımın GPT parçaları; yeni şekil/dekor çizme (K21). {kesim}",
          f"Zarf açılışı (MOTION.envelope): {w['acilis']} Katalog: {t['zarf'].rstrip('.')}. Kapanış elemanı, zarf/kapak ve kart ayrı "
-         "katmanlar; kart home'daki karta dönüşür.",
+         f"katmanlar; kart home'daki karta dönüşür; {kapanis}.",
          f"Sayfa koreografisi (MOTION.scenes): her sayfada öğeler sırayla girer. Story: {t['foto'].rstrip('.')} ({w['story']}). "
          "Details/rsvp: kart, satırlar ve buton sırayla; `accent_1..3` süzülür.",
          "Foto alanları: `hero_portrait` (card_small penceresi), `story_1..3` (frame_portrait), `venue` (frame_landscape); "
          "kutu ve maske `windows.json`'dan. PAKET 2 fotoğrafı yoksa yer tutucu.",
+         *ekler,
          f"Fontlar: {f1} + {f2} (Google Fonts link'i; repoya font dosyası girmez). Tarih US biçimi (`May 15, 2027`); "
          "URL'ler null → \"link will be added soon\".",
          "Önizleme: 390 px (index, home, story, details, rsvp) + açılış MP4; 360/430/768/1280 px'te yatay kaydırma denetimi."],
@@ -1894,6 +2014,18 @@ def web_kontrol():
             sorun.append(f"{n}: kume florals ya da decor olmalı")
         if not re.fullmatch(r"\d{3,5}×\d{3,5}", w["kapanis_olcu"]):
             sorun.append(f"{n}: kapanis_olcu biçimi (ör. 1024×1024)")
+        elif w["tip"] in ZARF_TIPI:
+            zolcu = ZARF_TIPI[w["tip"]][1]
+            if w.get("sarili") and w["kapanis_olcu"] != zolcu:
+                sorun.append(f"{n}: sarili kapanış zarfla aynı tuvalde olmalı (kapanis_olcu {zolcu})")
+            if not w.get("sarili") and w["kapanis_olcu"] != "1024×1024":
+                sorun.append(f"{n}: sarılı olmayan kapanış kare çizilir (kapanis_olcu 1024×1024)")
+        for e in w.get("ekler", []):
+            if len(e) not in (6, 7) or not re.fullmatch(r"parts/[a-z0-9_]+\.png", e[0]):
+                sorun.append(f"{n}: ekler kaydı (dosya, ölçü, şeffaf, başlık, prompt, kontrol[, düzen]) — {e[0]}")
+        pt = w.get("pencere_temiz")
+        if pt is not None and (len(pt) != 2 or not all(pt)):
+            sorun.append(f"{n}: pencere_temiz (İngilizce ek, Türkçe kontrol) olmalı")
         if w["acilis"] in acilislar:
             sorun.append(f"{n}: açılış cümlesi {acilislar[w['acilis']]} ile aynı")
         acilislar[w["acilis"]] = n
@@ -1955,7 +2087,15 @@ def cmd_paket5(a):
     for t in hedefler(a):
         yol = ROOT / "collections" / t["klasor"] / "assets/gpt/GPT_PROMPTS.md"
         eski = yol.read_text(encoding="utf-8") if yol.exists() else ""
-        yeni = gpt_prompts_md(t, eski)
+        p3_yenile = "--paket3" in a and t["no"] in MOCK
+        if p3_yenile:
+            mock_dir = yol.parent / "mockups"
+            uretilmis = [x.name for x in mock_dir.glob("*") if x.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp")] \
+                if mock_dir.exists() else []
+            if uretilmis:
+                print(f"PAKET 3 korunur: {mock_dir.relative_to(ROOT)} içinde üretilmiş mockup var ({', '.join(uretilmis)})")
+                p3_yenile = False
+        yeni = gpt_prompts_md(t, eski, p3_yenile)
         with tempfile.TemporaryDirectory() as g:
             gy = Path(g) / "GPT_PROMPTS.md"
             gy.write_text(yeni, encoding="utf-8")
@@ -1969,6 +2109,35 @@ def cmd_paket5(a):
                 yol.write_text(yeni, encoding="utf-8")
         print(f"{durum:<9} {yol.relative_to(ROOT)} · PAKET 5: {say.get(5, 0)} · PAKET 2: {say.get(2, 0)} · "
               f"PAKET 3: {say.get(3, 0)}")
+    print(f"\n{degisen} dosya {'değişecek' if dene else 'değişti'}")
+    sys.exit(1 if dene and degisen else 0)
+
+
+def cmd_ozet(a):
+    """DESIGN_BRIEF.md (01, 04–20) ve content.demo.json (yalnız katalogdan açılmış 04–20) katalogdan yeniden yazılır.
+    02 (elle, G001–G027) ve 03 (elle) atlanır; elle genişletilmiş content.demo.json (katalogda olmayan anahtar) korunur."""
+    dene, degisen = "--dene" in a, 0
+    for t in hedefler(a):
+        if t["no"] == 2:
+            continue
+        k = ROOT / "collections" / t["klasor"]
+        isler = [(k / "DESIGN_BRIEF.md", brief_md(t))]
+        if not t.get("mevcut"):
+            c = content(t)
+            yol = k / "content.demo.json"
+            var = json.loads(yol.read_text(encoding="utf-8")) if yol.exists() else {}
+            fazla = sorted(set(var) - set(c))
+            if fazla:
+                print(f"atlandı   {yol.relative_to(ROOT)} (elle eklenmiş alan: {', '.join(fazla)})")
+            else:
+                isler.append((yol, json.dumps(c, indent=2, ensure_ascii=False) + "\n"))
+        for yol, yeni in isler:
+            eski = yol.read_text(encoding="utf-8") if yol.exists() else ""
+            if yeni != eski:
+                degisen += 1
+                if not dene:
+                    yol.write_text(yeni, encoding="utf-8")
+            print(f"{'aynı' if yeni == eski else ('yazılacak' if dene else 'yazıldı'):<9} {yol.relative_to(ROOT)}")
     print(f"\n{degisen} dosya {'değişecek' if dene else 'değişti'}")
     sys.exit(1 if dene and degisen else 0)
 
@@ -2020,6 +2189,8 @@ def main(a):
         return cmd_paket5(a[1:])
     if a and a[0] == "gorev5":
         return cmd_gorev5(a[1:])
+    if a and a[0] == "ozet":
+        return cmd_ozet(a[1:])
     if a and a[0] == "belge":
         yaz(ROOT / "docs/09_TASARIM_KATALOGU.md", katalog_md(), True)
         print("docs/09_TASARIM_KATALOGU.md yazıldı")

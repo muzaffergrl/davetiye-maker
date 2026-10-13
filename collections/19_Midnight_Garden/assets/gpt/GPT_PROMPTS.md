@@ -53,24 +53,25 @@ On tap, the silver seal cracks and falls away, the black flap opens slowly, warm
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   black envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the black envelope. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
 ### W1 — Telefon ekranı tasarımları (referans; satılmaz)
 
-Ortak demo metin (W1 ekranlarında bu metni kullan): Celeste & Damien · Saturday, November 6, 2027 · 4:00 PM ·
-The Midnight Conservatory, New Orleans, Louisiana · Ceremony 4:00 PM The Moonlit Garden · Cocktail Hour 5:00 PM The Velvet Lounge · Reception 6:30 PM The Glasshouse · Black tie ·
+Ortak demo metin (W1 ekranlarında bu metni kullan): Celeste & Damien · Saturday, November 6, 2027 · 6:00 PM ·
+The Midnight Conservatory, New Orleans, Louisiana · Ceremony 6:00 PM The Moonlit Garden · Cocktail Hour 7:00 PM The Velvet Lounge · Reception 8:30 PM The Glasshouse · Black tie ·
 Kindly reply by September 25, 2027.
 
 #### W1.1 Açılış sayfası — kapalı zarf
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center, with dark moody florals — deep red and burgundy roses, plum peonies, dark berries and dusky leaves — in a Dutch still-life oil painting style framing the top-left and bottom-right corners and a few small floating accents (a deep red rose petal, a small dark plum with one leaf, a small dusky-brown night moth). Centered slightly below the middle: a smooth matte black paper envelope with a subtle fine texture, about 5:4 wider than tall, with a pointed V flap, closed, with a realistic antique silver wax seal with a smooth EMPTY center and a thin raised ring, no letters — pressed onto the tip of the V flap. Above it, typography in elegant high-contrast small capitals for the names and a refined classical small-capital serif: a small spaced line "YOU ARE INVITED" and the names "Celeste & Damien" large; below the black envelope a small spaced line "TAP TO OPEN". All decor in dark Dutch still-life oil painting style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center, with dark jewel-toned florals — deep crimson and garnet roses, plum and aubergine peonies, a few midnight-blue delphiniums, dark berries and dusky leaves — in a Dutch still-life oil painting style framing the top-left and bottom-right corners and a few small floating accents (a deep red rose petal, a small dark plum with one leaf, a small dark velvet-plum butterfly). Centered slightly below the middle: a smooth matte black paper envelope with a subtle fine texture, about 5:4 wider than tall, with a pointed V flap, the flap and the pocket's diagonal edges finished with a hair-thin antique-silver edge that catches the light, closed, with a realistic antique silver wax seal with a smooth EMPTY center and a thin raised ring, no letters — pressed onto the tip of the V flap. Above it, typography in elegant high-contrast small capitals for the names and a refined classical small-capital serif: a small spaced line "YOU ARE INVITED" and the names "Celeste & Damien" large; below the black envelope a small spaced line "TAP TO OPEN". All decor in dark Dutch still-life oil painting style. Premium luxury wedding stationery quality, real paper and material textures, dramatic chiaroscuro light from the upper left as in a Dutch still life, rich, moody and intimate.
 ```
 Kontrol: black envelope ve silver wax seal net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -78,7 +79,7 @@ Kontrol: black envelope ve silver wax seal net ve tam; metin yalnız üstte ve a
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/comps/web_2_home.png` · 1024×1536
 
 ```
-Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the black envelope: a small matte black card with a fine antique-gold inner line and a portrait photo window framed by a slim carved gilded baroque border in its upper part, plain black below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the display lettering and a small spaced line "NOVEMBER 6, 2027 · NEW ORLEANS". Under the card: the names "Celeste & Damien" large in the display lettering, a small spaced line "SATURDAY · NOVEMBER 6, 2027", the venue "The Midnight Conservatory" and "New Orleans, Louisiana" in italic serif, four small elegant countdown boxes "389 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and an antique-gold pill button with black lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the black envelope: a small matte black card with a fine antique-gold inner line and a portrait photo window framed by a slim carved gilded baroque border in its upper part, plain black below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the display lettering and a small spaced line "NOVEMBER 6, 2027 · NEW ORLEANS". Under the card: the names "Celeste & Damien" large in the display lettering, a small spaced line "SATURDAY · NOVEMBER 6, 2027", the venue "The Midnight Conservatory" and "New Orleans, Louisiana" in italic serif, four small elegant countdown boxes "389 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and an antique-gold pill button with black lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, dramatic chiaroscuro light from the upper left as in a Dutch still life, rich, moody and intimate.
 ```
 Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
 
@@ -86,7 +87,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the display lettering at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three ornate gilded baroque frames emerging from the darkness on a black wall, each lit by a warm pool of candlelight from below, hung in a staggered salon arrangement; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the display lettering underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the display lettering at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three ornate gilded baroque frames on a black wall in a staggered salon arrangement, a soft warm candle glow on the wall behind each frame (the frames themselves lit from the upper left); every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the display lettering underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, dramatic chiaroscuro light from the upper left as in a Dutch still life, rich, moody and intimate.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Oymalı yaldızlı barok çerçeveler, karanlıktan mum ışığıyla aydınlanır.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall matte black card with the same fine gold border and only a small sprig of one dark red rose bud and berries at the top holds the title "Order of the Day" in the display lettering and three schedule rows separated by tiny dividers (a horizontal sprig of one dark red rose bud, berries and two dark leaves in the same style): "4:00 PM — Ceremony — The Moonlit Garden", "5:00 PM — Cocktail Hour — The Velvet Lounge", "6:30 PM — Reception — The Glasshouse" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape ornate carved gilded baroque picture frame in antique gold, its window filled with flat pure green #00FF00 (the venue photo), under it "The Midnight Conservatory" and "New Orleans, Louisiana", then a small line "DRESS CODE · Black tie". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall matte black card with a fine antique-gold inner border and only a small sprig of one dark red rose bud and berries at the top holds the title "Order of the Day" in the display lettering and three schedule rows separated by tiny dividers (a horizontal sprig of one dark red rose bud, berries and two dark leaves in the same style): "6:00 PM — Ceremony — The Moonlit Garden", "7:00 PM — Cocktail Hour — The Velvet Lounge", "8:30 PM — Reception — The Glasshouse" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape ornate carved gilded baroque picture frame in antique gold, its window filled with flat pure green #00FF00 (the venue photo), under it "The Midnight Conservatory" and "New Orleans, Louisiana", then a small line "DRESS CODE · Black tie". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, dramatic chiaroscuro light from the upper left as in a Dutch still life, rich, moody and intimate.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -102,7 +103,7 @@ Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıy
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
 
 ```
-Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the display lettering, "Kindly reply by September 25, 2027" in serif, an antique-gold pill button with black lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Celeste & Damien" in the display lettering at the bottom; a small silver wax seal — the same one as on the black envelope — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the display lettering, "Kindly reply by September 25, 2027" in serif, an antique-gold pill button with black lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Celeste & Damien" in the display lettering at the bottom; a small silver wax seal — the same one as on the black envelope — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, dramatic chiaroscuro light from the upper left as in a Dutch still life, rich, moody and intimate.
 ```
 Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 
@@ -115,7 +116,7 @@ aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üst
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/bg_page.png` · 1024×1536
 
 ```
-The page background of the W1 screens alone, as a vertical phone-screen background: near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center, with dark moody florals — deep red and burgundy roses, plum peonies, dark berries and dusky leaves — in a Dutch still-life oil painting style entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no black envelope, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.
+The page background of the W1 screens alone, as a vertical phone-screen background: near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center, with dark jewel-toned florals — deep crimson and garnet roses, plum and aubergine peonies, a few midnight-blue delphiniums, dark berries and dusky leaves — in a Dutch still-life oil painting style entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no black envelope, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.
 ```
 Kontrol: orta sakin ve boş; dekor yalnız kenarlarda; yazı yok; W1 ile aynı renk ve ışık.
 
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same black envelope as in the W1 screens, alone and closed, WITHOUT the silver wax seal: a smooth matte black paper envelope with a subtle fine texture, about 5:4 wider than tall, with a pointed V flap. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same black envelope as in the W1 screens, alone and closed, WITHOUT the silver wax seal: a smooth matte black paper envelope with a subtle fine texture, about 5:4 wider than tall, with a pointed V flap, the flap and the pocket's diagonal edges finished with a hair-thin antique-silver edge that catches the light. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; silver wax seal yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,15 +140,15 @@ Kontrol: tek nesne; silver wax seal yok; kesilmemiş; gölge yok; gerçek alfa.
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a realistic antique silver wax seal with a smooth EMPTY center and a thin raised ring, no letters, alone, exactly as it sits on the black envelope in the W1 screens (pressed onto the tip of the V flap) and at the same scale as in envelope_closed.png, with no black envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a realistic antique silver wax seal with a smooth EMPTY center and a thin raised ring, no letters, alone, exactly as it sits on the black envelope in the W1 screens (pressed onto the tip of the V flap), drawn large so it fills about 70% of the square (Claude scales it to the black envelope), with the same perspective, material and light as on the black envelope and with no black envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız silver wax seal; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız silver wax seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME black envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward, its inner side and the inside of the back showing dark moody floral pattern of deep red and plum roses with dark green leaves on black, painterly, a soft warm golden sheen painted on the inside of the empty pocket. No card, nothing inside, no silver wax seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME black envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward, its inner side and the inside of the back showing a deep plum-burgundy (#4A2335) liner with a painterly pattern of dark red roses and dusky leaves, a soft warm golden sheen painted on the inside of the empty pocket. No card, nothing inside, no silver wax seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the black envelope in W1.2, alone: a small matte black card with a fine antique-gold inner line and a portrait photo window framed by a slim carved gilded baroque border in its upper part, plain black below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the black envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the black envelope in W1.2, alone: a small matte black card with a fine antique-gold inner line and a portrait photo window framed by a slim carved gilded baroque border in its upper part, plain black below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the black envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -163,7 +164,7 @@ Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak geniş
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The large invitation card of this design, alone: a tall matte black card with a fine antique-gold inner border, dark moody oil-painted deep red and burgundy roses, plum peonies, dark berries and dusky leaves spilling over the top-left and bottom-right corners, lit as if by candlelight. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The large invitation card of this design, alone: a tall matte black card with a fine antique-gold inner border, dark moody oil-painted deep red and burgundy roses, plum peonies, dark berries and dusky leaves spilling over the top-left and bottom-right corners, glowing richly against the black as in a Dutch still life lit from the upper left. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall matte black card with the same fine gold border and only a small sprig of one dark red rose bud and berries at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall matte black card with a fine antique-gold inner border and only a small sprig of one dark red rose bud and berries at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -195,7 +196,7 @@ Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle ayn�
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/florals_tl.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of dark moody florals — deep red and burgundy roses, plum peonies, dark berries and dusky leaves — in a Dutch still-life oil painting style, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of dark jewel-toned florals — deep crimson and garnet roses, plum and aubergine peonies, a few midnight-blue delphiniums, dark berries and dusky leaves — in a Dutch still-life oil painting style, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince boşluk; alfa.
 
@@ -203,7 +204,7 @@ Kontrol: tek küme; sol üstten başlıyor; sağ alt yarı boş; kenarda ince bo
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/florals_br.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-ONE cluster of dark moody florals — deep red and burgundy roses, plum peonies, dark berries and dusky leaves — in a Dutch still-life oil painting style, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+ONE cluster of dark jewel-toned florals — deep crimson and garnet roses, plum and aubergine peonies, a few midnight-blue delphiniums, dark berries and dusky leaves — in a Dutch still-life oil painting style, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince boşluk; alfa.
 
@@ -227,7 +228,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE small dusky-brown night moth with soft wings, in the same dark Dutch still-life oil painting style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small dark velvet-plum butterfly with antique-gold wing edges, in the same dark Dutch still-life oil painting style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -243,7 +244,7 @@ Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
-Wide horizontal version of the same design for the desktop website header: near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center, with dark moody florals — deep red and burgundy roses, plum peonies, dark berries and dusky leaves — in a Dutch still-life oil painting style framing the left and right edges, and the closed black envelope with its silver wax seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+Wide horizontal version of the same design for the desktop website header: near-black moody background (#1C1A21 to #0B0A0D) with very soft warm candlelight glow at the bottom and faint dark leaf silhouettes at the edges, empty center, with dark jewel-toned florals — deep crimson and garnet roses, plum and aubergine peonies, a few midnight-blue delphiniums, dark berries and dusky leaves — in a Dutch still-life oil painting style framing the left and right edges, and the closed black envelope with its silver wax seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
 ```
 Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 
@@ -252,7 +253,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G219`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar barok yaldızlı çerçevelere (~3:4) girer: yüzler ortadaki %70'lik alanda; tonlar sıcak ve karanlık. Renk dünyası: gece siyahı, bordo, erik moru, antik altın, mum ışığı.
 
 ### 2.1 Ana portre
@@ -266,21 +267,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a candlelit table in a moody wine bar, two glasses of red wine and dark roses, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a candlelit table in a moody wine bar, two glasses of red wine and dark roses, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on a moonlit garden path lined with candles in glass lanterns: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a moonlit garden path lined with candles in glass lanterns: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/19_Midnight_Garden/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a single dark red rose, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a single dark red rose, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

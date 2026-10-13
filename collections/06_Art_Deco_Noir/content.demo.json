@@ -15,7 +15,7 @@
   "name_display": "Vivian & Charles",
   "initials": "V&C",
   "host_line": "Together with their families",
-  "date": "2028-01-01",
+  "date": "2027-12-18",
   "ceremony_time": "16:00",
   "timezone": "America/Chicago",
   "venue": {
@@ -44,7 +44,7 @@
   ],
   "dress_code": "Black tie",
   "rsvp": {
-    "deadline": "2027-11-20",
+    "deadline": "2027-11-06",
     "method": null
   },
   "urls": {
@@ -62,7 +62,7 @@
   },
   "optional_blocks": {
     "our_story": true,
-    "countdown": false,
+    "countdown": true,
     "dress_code": true,
     "registry": true,
     "travel_stay": true,

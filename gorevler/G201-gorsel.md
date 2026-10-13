@@ -10,7 +10,7 @@ yazar: [collections/01_Olive_Ivory/assets/gpt/comps/, collections/01_Olive_Ivory
 ---
 
 ## Amaç
-Tasarım 01'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ekranı comp'u (W1, yalnız referans), aynı tasarımın website parçaları (W2, 17 dosya) ve 5 örnek fotoğraf (Paket 2). Model: tasarım 03 (G030 parçaları + G036 fotoğrafları). Bu tasarımın açılışı: On tap, the olive wax seal lifts off and drifts away with its sprig, the V flap swings up on its hinge, and the ivory card glides up out of the pocket while two olive leaves float across the screen.
+Tasarım 01'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ekranı comp'u (W1, yalnız referans), aynı tasarımın website parçaları (W2, 17 dosya) ve 5 örnek fotoğraf (Paket 2). Model: tasarım 03 (G030 parçaları + G036 fotoğrafları). Bu tasarımın açılışı: On tap, the olive sprig slides out from under the oval seal, the lace-edged flap peels up on its hinge carrying the seal with it, and the ivory card glides up out of the pocket while two olive leaves float across the screen.
 
 ## Girdiler
 - `collections/01_Olive_Ivory/assets/gpt/GPT_PROMPTS.md` → **PAKET 5** (W1 + W2) ve **PAKET 2**

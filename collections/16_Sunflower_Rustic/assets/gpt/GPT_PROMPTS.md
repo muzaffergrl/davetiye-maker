@@ -33,7 +33,7 @@ Görev: `gorevler/G216-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G816-*` (Pak
 > Üreten: `python3 tools/katalog.py paket5 --no 16` — değişiklik için `tools/katalog.py` → `WEB[16]`.
 
 **Bu tasarımın website açılışı** (kapaklı zarf; katalog: Kraft zarf; kareli kurdele çözülür, kart ahşap masaya kayar):
-On tap, the gingham bow tugs loose and the ribbon slides off with its little sunflower, the kraft flap flips open, and the card slides out onto a weathered wooden tabletop while a few sunflower petals tumble.
+On tap, the gingham bow tugs loose and the ribbon slides off with its little sunflower, the kraft flap flips open, and the card slides out onto the weathered barn-wood tabletop (barnwood.png) while a few sunflower petals tumble.
 
 **Instructions for GPT (read fully before starting):**
 - You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
@@ -53,10 +53,11 @@ On tap, the gingham bow tugs loose and the ribbon slides off with its little sun
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   kraft envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn on a canvas of the same size so it overlays
+  envelope_closed.png pixel for pixel. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by July 17, 2027.
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: warm golden-hour cream gradient (#FBF5E8 to #E9D6B2) with soft sun flare and very faint weathered wood grain at the bottom edge, empty center, with sunflowers, wheat stalks, white field daisies and green leaves, realistic watercolor framing the top-left and bottom-right corners and a few small floating accents (a bright yellow sunflower petal, a small sunflower head without a stem, a golden wheat ear). Centered slightly below the middle: a natural kraft-brown paper envelope with visible fibers, about 5:4 wider than tall, with a straight square-cut flap, closed, with a mustard-yellow gingham ribbon wrapped around the envelope and tied in a simple bow with a small sunflower head tucked into the knot — wrapped horizontally around the envelope with the bow at the center. Above it, typography in a bold friendly brush script for the names and a sturdy classic serif: a small spaced line "YOU ARE INVITED" and the names "Daisy & Wyatt" large; below the kraft envelope a small spaced line "TAP TO OPEN". All decor in realistic watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: warm golden-hour cream gradient (#FBF5E8 to #E9D6B2) with soft sun flare and very faint weathered wood grain at the bottom edge, empty center, with sunflowers, wheat stalks, white field daisies and green leaves, realistic watercolor framing the top-left and bottom-right corners and a few small floating accents (a bright yellow sunflower petal, a small sunflower head without a stem, a golden wheat ear). Centered slightly below the middle: a rustic kraft-brown paper envelope with visible fibers and softly torn deckled edges, about 5:4 wider than tall, with a square-cut flap with rounded corners, closed, with a wide mustard-yellow gingham fabric ribbon wrapped horizontally around the envelope and finished in a big soft bow at the center, with a small sunflower head tucked into the knot — wrapped horizontally around the envelope with the bow at the center. Above it, typography in a bold friendly brush script for the names and a sturdy classic serif: a small spaced line "YOU ARE INVITED" and the names "Daisy & Wyatt" large; below the kraft envelope a small spaced line "TAP TO OPEN". All decor in realistic watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: kraft envelope ve gingham ribbon net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -86,7 +87,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three instant-style photo prints pegged one by one with small wooden clothespins onto a gently sagging jute twine line against a weathered barn-wood wall; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three vintage deckle-edged photo prints pegged one by one with small wooden clothespins onto a gently sagging jute twine line against a weathered barn-wood wall; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: İpe mandalla asılmış fotoğraflar, tek tek mandallanır.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall cream cotton card with the same gingham band and only a small sunflower-and-wheat sprig at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of one small sunflower, two wheat stalks and a daisy): "4:00 PM — Ceremony — The Sunflower Field", "5:00 PM — Cocktail Hour — The Porch", "6:30 PM — Reception — The Big Red Barn" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape white-bordered instant-style photo print hanging from a small natural wooden clothespin at its top center, its window filled with flat pure green #00FF00 (the venue photo), under it "Golden Field Barn" and "Franklin, Tennessee", then a small line "DRESS CODE · Country chic". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall cream cotton card with a thin mustard gingham ribbon band across the top edge and only a small sunflower-and-wheat sprig at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of one small sunflower, two wheat stalks and a daisy): "4:00 PM — Ceremony — The Sunflower Field", "5:00 PM — Cocktail Hour — The Porch", "6:30 PM — Reception — The Big Red Barn" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape vintage deckle-edged photo print with a narrow cream scalloped border, held at its top center by a small wooden clothespin clipped to a short length of jute twine, its window filled with flat pure green #00FF00 (the venue photo), under it "Golden Field Barn" and "Franklin, Tennessee", then a small line "DRESS CODE · Country chic". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -109,7 +110,7 @@ Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı kraft envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 19 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -131,23 +132,23 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same kraft envelope as in the W1 screens, alone and closed, WITHOUT the gingham ribbon: a natural kraft-brown paper envelope with visible fibers, about 5:4 wider than tall, with a straight square-cut flap. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same kraft envelope as in the W1 screens, alone and closed, WITHOUT the gingham ribbon: a rustic kraft-brown paper envelope with visible fibers and softly torn deckled edges, about 5:4 wider than tall, with a square-cut flap with rounded corners. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; gingham ribbon yok; kesilmemiş; gölge yok; gerçek alfa.
 
 #### W2.4 Kapanış elemanı (tek başına)
-**Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/closure.png` · 1536×1024 · **Şeffaf zemin**
+**Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/closure.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-Only a mustard-yellow gingham ribbon wrapped around the envelope and tied in a simple bow with a small sunflower head tucked into the knot, alone, exactly as it sits on the kraft envelope in the W1 screens (wrapped horizontally around the envelope with the bow at the center) and at the same scale as in envelope_closed.png, with no kraft envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a wide mustard-yellow gingham fabric ribbon wrapped horizontally around the envelope and finished in a big soft bow at the center, with a small sunflower head tucked into the knot, alone, exactly as it sits on the kraft envelope in the W1 screens (wrapped horizontally around the envelope with the bow at the center), with no kraft envelope behind it. Draw it on a canvas of exactly the same size as envelope_closed.png and give envelope_closed.png as the reference image: the gingham ribbon sits exactly where it wraps the kraft envelope there, so the two images overlay pixel for pixel. Where it wraps around the edges, its ends stop exactly at the kraft envelope's outline. The kraft envelope itself is NOT drawn. Front view, perfectly straight. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız gingham ribbon; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız gingham ribbon; harf/monogram yok; envelope_closed üstüne 1:1 oturuyor; uçlar zarf kenarında bitiyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME kraft envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the square-cut flap folded fully upward, its inner side and the inside of the back showing soft mustard and cream gingham check pattern, fabric texture; the front pocket empty. No card, nothing inside, no gingham ribbon. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME kraft envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the rounded-corner square flap folded fully upward, its inner side and the inside of the back showing soft mustard and cream gingham check pattern, fabric texture; the front pocket empty. No card, nothing inside, no gingham ribbon. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the kraft envelope in W1.2, alone: a small cream cotton card with a portrait photo window edged by a thin mustard gingham ribbon trim in its upper part, plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the kraft envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the kraft envelope in W1.2, alone: a small cream cotton card with a portrait photo window edged by a thin mustard gingham ribbon trim in its upper part, plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the kraft envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall cream cotton card with the same gingham band and only a small sunflower-and-wheat sprig at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall cream cotton card with a thin mustard gingham ribbon band across the top edge and only a small sunflower-and-wheat sprig at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -179,7 +180,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a white-bordered instant-style photo print hanging from a small natural wooden clothespin at its top center. The window inside is a nearly square portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a vintage deckle-edged photo print with a narrow cream scalloped border, warm-toned like an old farmhouse snapshot, hanging from a small natural wooden clothespin at its top center. The window inside is a nearly square portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -187,7 +188,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape white-bordered instant-style photo print hanging from a small natural wooden clothespin at its top center, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape vintage deckle-edged photo print with a narrow cream scalloped border, held at its top center by a small wooden clothespin clipped to a short length of jute twine, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -243,11 +244,19 @@ Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/twine_line.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A single natural jute twine line stretched horizontally across about 85% of the image width with a gentle sag, realistic fibers, nothing hanging on it, both ends neatly finished and not touching the image edges. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A single natural jute twine line stretched horizontally across about 85% of the image width with a gentle sag, realistic fibers, nothing hanging on it, both ends neatly finished and not touching the image edges (the twine hangs in a shallow curve, lowest at the center). Seen straight-on (not tilted, no perspective), centered and not cropped, with generous empty margin all around; the object keeps its natural curve. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek ip; üstünde bir şey yok; uçlar kenara değmiyor; gölge yok; alfa.
 
-#### W2.18 Website hero (masaüstü üst bant)
+#### W2.18 Ahşap masa/duvar (açılış + story)
+**Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/barnwood.png` · 1024×1536
+
+```
+A weathered pale barn-wood surface seen straight on: wide sun-bleached planks running horizontally with soft grain and a few nail holes, warm golden-hour light from the top-left, calm and low in contrast, seamless from top to bottom so it can repeat vertically, no objects, no flowers, no text.
+```
+Kontrol: yatay tahtalar; dikeyde dikişsiz; düşük kontrast; nesne/yazı yok.
+
+#### W2.19 Website hero (masaüstü üst bant)
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
@@ -260,8 +269,8 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G216`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
-birine benzemesin; eller/parmaklar düzgün. Fotoğraflar beyaz kenarlı anlık baskılara (~4:5) girer: yüzler ortada. Renk dünyası: ayçiçeği sarısı, hardal, kraft, ahşap kahvesi, altın saat.
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
+birine benzemesin; eller/parmaklar düzgün. Fotoğraflar tırtıklı kenarlı eski baskılara (~4:5) girer: yüzler ortada. Renk dünyası: ayçiçeği sarısı, hardal, kraft, ahşap kahvesi, altın saat.
 
 ### 2.1 Ana portre
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
@@ -274,21 +283,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together on the tailgate of an old farm truck, two glass bottles of lemonade, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together on the tailgate of an old farm truck, two glass bottles of lemonade, no license plate, no badges or logos on the truck, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment in the middle of a sunflower field at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a mown grass path between tall rows of a sunflower field at sunset, both fully visible: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/16_Sunflower_Rustic/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of sunflowers and wheat, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of sunflowers and wheat, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

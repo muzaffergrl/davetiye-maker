@@ -53,10 +53,11 @@ On tap, the dusty blue wax seal breaks free and falls away, the V flap opens upw
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   ivory envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the ivory envelope. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by August 1, 2027.
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft misty dusty blue gradient (#DDE5EC at the top to #B7C6D4 at the bottom) with very gentle out-of-focus bokeh and a faint fine paper grain, calm empty center, with silver-dollar eucalyptus in dusty blue-green, a few soft white garden roses, small white blossoms and delicate champagne-gold fern sprigs framing the top-left and bottom-right corners and a few small floating accents (a silver-dollar eucalyptus leaf, a small white five-petal blossom, a delicate champagne-gold fern frond). Centered slightly below the middle: a classic ivory cotton-paper envelope, about 5:4 wider than tall, with a deep pointed V flap edged by a hair-thin champagne-gold line, crisp edges and soft natural fibers, closed, with a realistic dusty blue wax seal (#6E88A3 with deeper #4E6782 shadows) with an organic irregular poured edge, a smooth EMPTY circular pressed center inside a thin raised ring and a tiny embossed eucalyptus-leaf wreath, a short sprig of silver-dollar eucalyptus tucked under it — pressed onto the tip of the V flap. Above it, typography in an elegant copperplate script for the names and a graceful Garamond-style serif in small spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Eleanor & Theo" large; below the ivory envelope a small spaced line "TAP TO OPEN". All decor in watercolor-and-gouache style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft misty dusty blue gradient (#DDE5EC at the top to #B7C6D4 at the bottom) with very gentle out-of-focus bokeh and a faint fine paper grain, calm empty center, with silver-dollar eucalyptus in dusty blue-green, a few soft white garden roses, small white blossoms and delicate champagne-gold fern sprigs framing the top-left and bottom-right corners and a few small floating accents (a silver-dollar eucalyptus leaf, a small white five-petal blossom, a delicate champagne-gold fern frond). Centered slightly below the middle: a classic ivory cotton-paper envelope, about 5:4 wider than tall, with a deep pointed V flap edged by a hair-thin champagne-gold line, crisp edges and soft natural fibers, closed, with a realistic dusty blue wax seal (#6E88A3, deepening to #4E6782 in the pressed recesses) with an organic irregular poured edge, a smooth EMPTY circular pressed center inside a thin raised ring and a tiny embossed eucalyptus-leaf wreath, a short sprig of silver-dollar eucalyptus tucked under it — pressed onto the tip of the V flap. Above it, typography in an elegant copperplate script for the names and a graceful Garamond-style serif in small spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Eleanor & Theo" large; below the ivory envelope a small spaced line "TAP TO OPEN". All decor in watercolor-and-gouache style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: ivory envelope ve dusty blue wax seal net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -86,15 +87,15 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three instant-photo prints scattered across the page at gentle angles and slightly overlapping, as if each had just flown in and settled one after another; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three instant-photo prints scattered across the page at gentle angles, touching only at their white borders so every green window stays fully visible, as if each had just flown in and settled one after another; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
-Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Üç polaroid sırayla uçarak yerleşir.
+Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler yalnız kenar paylarında üst üste; üç yeşil pencere tam görünür; diziliş: Üç anlık baskı (instant print) sırayla uçarak yerleşir.
 
 #### W1.4 Details — program kartı ve mekân
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall ivory card with the same thin champagne-gold inner border and only one small eucalyptus sprig at the top center holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (one slender eucalyptus branch with dusty blue-green leaves, two tiny white blossoms and a champagne-gold fern sprig): "4:30 PM — Ceremony — The Garden Lawn", "5:30 PM — Cocktail Hour — The Veranda", "6:30 PM — Reception — The Grand Hall" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape instant-photo print with a white border that is wider at the bottom and a short strip of dusty blue washi tape at its top edge, its window filled with flat pure green #00FF00 (the venue photo), under it "Rosewood Manor" and "Charleston, South Carolina", then a small line "DRESS CODE · Black tie optional". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall ivory card with a thin champagne-gold inner border and only one small eucalyptus sprig at the top center holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (one slender eucalyptus branch with dusty blue-green leaves, two tiny white blossoms and a champagne-gold fern sprig): "4:30 PM — Ceremony — The Garden Lawn", "5:30 PM — Cocktail Hour — The Veranda", "6:30 PM — Reception — The Grand Hall" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape version of the same ivory instant-photo print with the hair-thin champagne-gold foil edge and a tiny eucalyptus sprig behind its top-left corner, its window filled with flat pure green #00FF00 (the venue photo), under it "Rosewood Manor" and "Charleston, South Carolina", then a small line "DRESS CODE · Black tie optional". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -139,9 +140,9 @@ Kontrol: tek nesne; dusty blue wax seal yok; kesilmemiş; gölge yok; gerçek al
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a realistic dusty blue wax seal (#6E88A3 with deeper #4E6782 shadows) with an organic irregular poured edge, a smooth EMPTY circular pressed center inside a thin raised ring and a tiny embossed eucalyptus-leaf wreath, a short sprig of silver-dollar eucalyptus tucked under it, alone, exactly as it sits on the ivory envelope in the W1 screens (pressed onto the tip of the V flap) and at the same scale as in envelope_closed.png, with no ivory envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a realistic dusty blue wax seal (#6E88A3, deepening to #4E6782 in the pressed recesses) with an organic irregular poured edge, a smooth EMPTY circular pressed center inside a thin raised ring and a tiny embossed eucalyptus-leaf wreath, a short sprig of silver-dollar eucalyptus tucked under it, alone, exactly as it sits on the ivory envelope in the W1 screens (pressed onto the tip of the V flap), drawn large so it fills about 70% of the square (Claude scales it to the ivory envelope), with the same perspective, material and light as on the ivory envelope and with no ivory envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız dusty blue wax seal; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız dusty blue wax seal; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the ivory envelope in W1.2, alone: a small ivory card with straight edges and a thin champagne-gold inner border, a portrait photo window in its upper 60% and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the ivory envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the ivory envelope in W1.2, alone: a small ivory card with straight edges and a thin champagne-gold inner border, a portrait photo window in its upper 60% and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the ivory envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall ivory card with the same thin champagne-gold inner border and only one small eucalyptus sprig at the top center. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall ivory card with a thin champagne-gold inner border and only one small eucalyptus sprig at the top center. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -179,7 +180,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a classic instant-photo print with a bright white card border that is wider at the bottom and a short strip of dusty blue washi tape at its top edge. The window inside is a slightly portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a classic instant-photo print in heavy ivory cotton paper with a deeper bottom margin, its outer edge finished with a hair-thin champagne-gold foil line and a tiny sprig of silver-dollar eucalyptus tucked behind its top-left corner. The window inside is a slightly portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -187,7 +188,7 @@ Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape instant-photo print with a white border that is wider at the bottom and a short strip of dusty blue washi tape at its top edge, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape version of the same ivory instant-photo print with the hair-thin champagne-gold foil edge and a tiny eucalyptus sprig behind its top-left corner, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
 
@@ -252,7 +253,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G202`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar anlık baskı (instant print) karelerine girer — pencere ~4:5: yüzler ortada, üstte ve altta pay kalsın. Renk dünyası: pudra mavisi, fildişi, okaliptüs yeşili, şampanya altını.
 
 ### 2.1 Ana portre
@@ -266,21 +267,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid moment laughing together at a small outdoor café table with two coffee cups, warm afternoon light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid moment laughing together at a small outdoor café table with two coffee cups, warm afternoon light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on a quiet seaside cliff path at sunset under a soft pastel sky: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a quiet seaside cliff path at sunset under a soft pastel sky: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/02_Dusty_Blue/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, resting on a linen tablecloth with a few white blossoms and eucalyptus leaves, soft natural window light, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, resting on a linen tablecloth with a few white blossoms and eucalyptus leaves, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

@@ -53,10 +53,11 @@ On tap, soft snow begins to fall, the pine-and-berry bundle loosens and slides a
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   forest green envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the forest green envelope. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -78,7 +79,7 @@ Kontrol: forest green envelope ve pine-and-berry bundle net ve tam; metin yalnı
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/comps/web_2_home.png` · 1024×1536
 
 ```
-Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the forest green envelope: a small snowy-white card with a single-pane wooden window frame painted white around a portrait photo window in its upper part, a little frost at the window corners, plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "DECEMBER 11, 2027 · ASPEN". Under the card: the names "Noelle & James" large in the script, a small spaced line "SATURDAY · DECEMBER 11, 2027", the venue "Pinecrest Lodge" and "Aspen, Colorado" in italic serif, four small elegant countdown boxes "424 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a forest green pill button with snowy white lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the forest green envelope: a small snowy-white card with a single-pane wooden window frame painted white around a portrait photo window in its upper part, a little frost on the wooden frame's corners (not over the window), plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "DECEMBER 11, 2027 · ASPEN". Under the card: the names "Noelle & James" large in the script, a small spaced line "SATURDAY · DECEMBER 11, 2027", the venue "Pinecrest Lodge" and "Aspen, Colorado" in italic serif, four small elegant countdown boxes "424 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a forest green pill button with snowy white lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall snowy-white card with the same thin gold border and only a small pine sprig with two red berries at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a single short pine sprig with two red berries and a little snow): "4:00 PM — Ceremony — The Snow Chapel", "5:00 PM — Cocktail Hour — The Fireside Lounge", "6:30 PM — Reception — The Timber Hall" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape single-pane window frame of white-painted wood with frost at its inner corners and a little snow on the bottom sill, its window filled with flat pure green #00FF00 (the venue photo), under it "Pinecrest Lodge" and "Aspen, Colorado", then a small line "DRESS CODE · Winter formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall snowy-white card with a thin antique-gold border and only a small pine sprig with two red berries at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a single short pine sprig with two red berries and a little snow): "4:00 PM — Ceremony — The Snow Chapel", "5:00 PM — Cocktail Hour — The Fireside Lounge", "6:30 PM — Reception — The Timber Hall" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape single-pane window frame of white-painted wood with soft frost crystals on the wood of its inner corners (the frost stays on the wooden frame and never covers the window opening) and a little snow on the bottom sill, its window filled with flat pure green #00FF00 (the venue photo), under it "Pinecrest Lodge" and "Aspen, Colorado", then a small line "DRESS CODE · Winter formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -109,7 +110,7 @@ Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı forest green envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -139,15 +140,15 @@ Kontrol: tek nesne; pine-and-berry bundle yok; kesilmemiş; gölge yok; gerçek 
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small bundle of a fresh pine sprig, a cedar twig and three red winter berries tied with a thin red velvet ribbon in a small bow, alone, exactly as it sits on the forest green envelope in the W1 screens (tucked onto the tip of the V flap) and at the same scale as in envelope_closed.png, with no forest green envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small bundle of a fresh pine sprig, a cedar twig and three red winter berries tied with a thin red velvet ribbon in a small bow, alone, exactly as it sits on the forest green envelope in the W1 screens (tucked onto the tip of the V flap), drawn large so it fills about 70% of the square (Claude scales it to the forest green envelope), with the same perspective, material and light as on the forest green envelope and with no forest green envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız pine-and-berry bundle; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız pine-and-berry bundle; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME forest green envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward, its inner side and the inside of the back showing deep forest green (#2F5240) background with a fine repeat of small white snowflakes and tiny pine sprigs; the front pocket empty. No card, nothing inside, no pine-and-berry bundle. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME forest green envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward, its inner side and the inside of the back showing a snowy white (#FAFAF6) lining with a fine watercolor repeat of small forest-green pine sprigs, red winter berries and tiny antique-gold snowflakes; the front pocket empty. No card, nothing inside, no pine-and-berry bundle. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,9 +156,9 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the forest green envelope in W1.2, alone: a small snowy-white card with a single-pane wooden window frame painted white around a portrait photo window in its upper part, a little frost at the window corners, plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the forest green envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the forest green envelope in W1.2, alone: a small snowy-white card with a single-pane wooden window frame painted white around a portrait photo window in its upper part, a little frost on the wooden frame's corners (not over the window), plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The green window is perfectly clean edge to edge — no frost, snow, fog or reflection over it. The rest of the card is blank (no text). Slightly narrower than the forest green envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
+Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa; yeşil pencere köşelerinde kırağı/buğu yok.
 
 #### W2.7 Büyük davet kartı (boş)
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/invitation_card.png` · 1024×1536 · **Şeffaf zemin**
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall snowy-white card with the same thin gold border and only a small pine sprig with two red berries at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall snowy-white card with a thin antique-gold border and only a small pine sprig with two red berries at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -179,17 +180,17 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a single-pane window frame of white-painted wood with soft frost crystals creeping in at its inner corners and a little snow resting on the bottom sill. The window inside is a portrait window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a single-pane window frame of white-painted wood with soft frost crystals on the wood of its inner corners (the frost stays on the wooden frame and never covers the window opening) and a little snow resting on the bottom sill. The window inside is a portrait window (about 3:4), filled with flat pure green #00FF00. The green window is perfectly clean edge to edge — no frost, snow, fog or reflection over it. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
+Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa; yeşil pencere köşelerinde kırağı/buğu yok.
 
 #### W2.10 Yatay foto çerçevesi (mekân fotoğrafı)
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-A landscape single-pane window frame of white-painted wood with frost at its inner corners and a little snow on the bottom sill, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A landscape single-pane window frame of white-painted wood with soft frost crystals on the wood of its inner corners (the frost stays on the wooden frame and never covers the window opening) and a little snow on the bottom sill, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. The green window is perfectly clean edge to edge — no frost, snow, fog or reflection over it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa.
+Kontrol: tek nesne; pencere düz yeşil ve yatay (~3:2); dikey çerçeveyle aynı malzeme; gölge yok; alfa; yeşil pencere köşelerinde kırağı/buğu yok.
 
 #### W2.11 Köşe kümesi — sol üst
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/decor_tl.png` · 1024×1024 · **Şeffaf zemin**
@@ -239,7 +240,15 @@ A small horizontal divider in the same soft watercolor style: a single short pin
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Website hero (masaüstü üst bant)
+#### W2.17 Buğu katmanı (story fotoğraflarının üstü, silinerek açılır)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/frost_overlay.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+A single sheet of fogged window-glass condensation with exactly the proportion of the portrait window of frame_portrait.png (about 3:4), filling most of the canvas: soft milky-white fog, denser toward the edges and corners with delicate feathery frost crystals, lighter and semi-transparent in the middle, straight clean edges. Only the frost itself — no wood, no frame, no green. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek katman; pencereyle aynı oran; yeşil yok; alfa (tam opak çıkarsa Claude CSS ile saydamlık verir).
+
+#### W2.18 Website hero (masaüstü üst bant)
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
@@ -252,7 +261,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G208`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar tek camlı ahşap pencere çerçevelerine (~3:4) girer: yüzler ortada; köşelerde buğu kalır — kenarlarda pay. Renk dünyası: orman yeşili, kar beyazı, kırmızı kış meyvesi, sıcak dağ evi ışığı.
 
 ### 2.1 Ana portre
@@ -266,21 +275,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together with mugs of hot cocoa by a lodge window, snow falling outside, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together with mugs of hot cocoa by a lodge window, snow falling outside, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on a snowy forest path under tall pines at dusk with soft falling snow: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a snowy forest path under tall pines at dusk with soft falling snow: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of pine and red winter berries, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of pine and red winter berries, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

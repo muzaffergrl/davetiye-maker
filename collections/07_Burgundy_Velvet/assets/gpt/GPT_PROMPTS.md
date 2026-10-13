@@ -53,10 +53,11 @@ On tap, the velvet bow unties and the ribbon slides off the envelope's sides, th
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   cream envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn on a canvas of the same size so it overlays
+  envelope_closed.png pixel for pixel. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -86,15 +87,15 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three oval gold-leaf frames hanging on burgundy velvet ribbons at slightly different heights against a warm candlelit wall, as if gently swaying; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three oval gold-leaf frames tied at different points along one long burgundy velvet ribbon swag that drapes in a gentle curve across a warm candlelit wall like a garland, each frame swaying slightly; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
-Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Varak altın oval çerçeveler, sallanarak asılır.
+Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Varak altın oval çerçeveler tek bir kadife kurdele girlandına bağlı, sallanır.
 
 #### W1.4 Details — program kartı ve mekân
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall heavy-cream card with the same thin gold-leaf border and only a small sprig of burgundy buds and berries at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal sprig of two small burgundy buds, a few berries and copper leaves in the same oil style): "4:00 PM — Ceremony — The Chapel Lawn", "5:00 PM — Cocktail Hour — The Hearth Room", "6:30 PM — Reception — The Great Hall" (time in small spaced serif, event in serif, place in italic). Below the card: a wide landscape oval frame in antique gold leaf with a carved bead border, hanging from a short burgundy velvet ribbon bow at the top, its window filled with flat pure green #00FF00 (the venue photo), under it "Hawthorne Hall" and "Asheville, North Carolina", then a small line "DRESS CODE · Formal attire". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall heavy-cream card with a thin antique-gold leaf border and only a small sprig of burgundy buds and berries at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal sprig of two small burgundy buds, a few berries and copper leaves in the same oil style): "4:00 PM — Ceremony — The Chapel Lawn", "5:00 PM — Cocktail Hour — The Hearth Room", "6:30 PM — Reception — The Great Hall" (time in small spaced serif, event in serif, place in italic serif). Below the card: a wide landscape oval frame in antique gold leaf with a carved bead border, hanging from a short burgundy velvet ribbon bow at the top, its window filled with flat pure green #00FF00 (the venue photo), under it "Hawthorne Hall" and "Asheville, North Carolina", then a small line "DRESS CODE · Formal attire". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -109,7 +110,7 @@ Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı cream envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -136,12 +137,12 @@ The same cream envelope as in the W1 screens, alone and closed, WITHOUT the velv
 Kontrol: tek nesne; velvet ribbon yok; kesilmemiş; gölge yok; gerçek alfa.
 
 #### W2.4 Kapanış elemanı (tek başına)
-**Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
+**Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/closure.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-Only a long burgundy velvet ribbon crossing the envelope both horizontally and vertically, tied in a soft bow at the crossing with a small antique-gold leaf charm hanging from the knot, plush velvet texture, alone, exactly as it sits on the cream envelope in the W1 screens (wrapped around the envelope with the bow a little above the center) and at the same scale as in envelope_closed.png, with no cream envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a long burgundy velvet ribbon crossing the envelope both horizontally and vertically, tied in a soft bow at the crossing with a small antique-gold leaf charm hanging from the knot, plush velvet texture, alone, exactly as it sits on the cream envelope in the W1 screens (wrapped around the envelope with the bow a little above the center), with no cream envelope behind it. Draw it on a canvas of exactly the same size as envelope_closed.png and give envelope_closed.png as the reference image: the velvet ribbon sits exactly where it wraps the cream envelope there, so the two images overlay pixel for pixel. Where it wraps around the edges, its ends stop exactly at the cream envelope's outline. The cream envelope itself is NOT drawn. Front view, perfectly straight. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız velvet ribbon; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız velvet ribbon; harf/monogram yok; envelope_closed üstüne 1:1 oturuyor; uçlar zarf kenarında bitiyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the cream envelope in W1.2, alone: a small heavy-cream card with an upright oval photo window framed in antique gold leaf in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the cream envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the cream envelope in W1.2, alone: a small heavy-cream card with an upright oval photo window framed in antique gold leaf in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the cream envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall heavy-cream card with the same thin gold-leaf border and only a small sprig of burgundy buds and berries at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall heavy-cream card with a thin antique-gold leaf border and only a small sprig of burgundy buds and berries at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -239,7 +240,15 @@ A small horizontal divider in the same romantic oil painting style: a horizontal
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Website hero (masaüstü üst bant)
+#### W2.17 Story kurdele girlandı
+**Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/velvet_swag.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A single long burgundy velvet ribbon draped across about 85% of the image width in one gentle swag curve, lowest at the center, both ends finished with small soft bows, plush velvet texture, nothing hanging on it, ends not touching the image edges. Seen straight-on (not tilted, no perspective), centered and not cropped, with generous empty margin all around; the object keeps its natural curve. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek kurdele; üstünde çerçeve yok; uçlar kenara değmiyor; gölge yok; alfa.
+
+#### W2.18 Website hero (masaüstü üst bant)
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
@@ -252,35 +261,35 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G207`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar dikey oval çerçevelere girer: yüzler tam ortada; köşeler kırpılır — kenarlarda bol pay kalsın. Renk dünyası: bordo, şarap kırmızısı, krem, bakır, mum ışığı.
 
 ### 2.1 Ana portre
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
 
 ```
-Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other in an autumn garden under copper and gold trees at golden hour; she wears a deep burgundy velvet long-sleeve gown, he wears a charcoal three-piece suit with a burgundy tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other in an autumn garden under copper and gold trees at golden hour; she wears a deep burgundy velvet long-sleeve gown, he wears a charcoal three-piece suit with a burgundy tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.2 Hikâye 1 — "First hello"
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together by a crackling stone fireplace in a cozy inn, two mugs of hot cider, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together by a crackling stone fireplace in a cozy inn, two mugs of hot cider, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on a path covered in fallen autumn leaves under copper trees at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a path covered in fallen autumn leaves under copper trees at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/07_Burgundy_Velvet/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of burgundy dahlias and blackberries, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of burgundy dahlias and blackberries, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark. Compose so that both people fit well inside a centered upright oval about as wide as the image (the photo will be cropped to an oval), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.5 Mekân

@@ -53,24 +53,25 @@ On tap, the gold medallion clasp turns and lifts away, the two navy doors swing 
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   navy gatefold folder at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the navy gatefold folder. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
 ### W1 — Telefon ekranı tasarımları (referans; satılmaz)
 
-Ortak demo metin (W1 ekranlarında bu metni kullan): Vivian & Charles · Saturday, January 1, 2028 · 4:00 PM ·
+Ortak demo metin (W1 ekranlarında bu metni kullan): Vivian & Charles · Saturday, December 18, 2027 · 4:00 PM ·
 The Grand Lumière Hotel, Chicago, Illinois · Ceremony 4:00 PM The Mirror Ballroom · Cocktail Hour 5:00 PM The Gold Bar · Reception 6:30 PM The Grand Salon · Black tie ·
-Kindly reply by November 20, 2027.
+Kindly reply by November 6, 2027.
 
 #### W1.1 Açılış sayfası — kapalı zarf
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: deep midnight navy (#1B2A4A to #0E1626) with a very subtle art deco sunburst of thin gold lines radiating from the top center, fine velvet grain, empty center, with art deco geometric corner ornament of fine metallic gold lines, stepped fans and a few small pearls (no flowers) framing the top-left and bottom-right corners and a few small floating accents (a lustrous round white pearl, a small gold art deco fan medallion, a tiny gold-and-crystal starburst sparkle). Centered slightly below the middle: a tall deep-navy (#14213D) linen card-stock gatefold folder, portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors edged with fine metallic-gold art deco lines that form a stepped sunburst where they meet, closed, with an ornate round art deco medallion clasp in polished gold with stepped geometric rays and a small pearl in the middle, no letters — fastened over the center seam, a little above the middle. Above it, typography in tall slender art deco display capitals for the names and a clean geometric sans-serif in widely spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Vivian & Charles" large; below the navy gatefold folder a small spaced line "TAP TO OPEN". All decor in fine metallic gold line illustration style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: deep midnight navy (#1B2A4A to #0E1626) with a very subtle art deco sunburst of thin gold lines radiating from the top center, fine velvet grain, empty center, with art deco geometric corner ornament of fine metallic gold lines, stepped fans and a few small pearls (no flowers) framing the top-left and bottom-right corners and a few small floating accents (a tiny gold-rimmed crystal champagne coupe drawn in fine gold line, a small gold art deco fan medallion, a tiny gold-and-crystal starburst sparkle). Centered slightly below the middle: a tall deep-navy (#14213D) linen card-stock gatefold folder, portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors edged with fine metallic-gold art deco lines that form a stepped sunburst where they meet, the two doors' top edges together forming a stepped art deco ziggurat arch silhouette, closed, with an ornate round art deco medallion clasp in polished gold with stepped geometric rays and a small pearl in the middle, no letters — fastened over the center seam, a little above the middle. Above it, typography in tall slender art deco display capitals for the names and a clean geometric sans-serif in widely spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Vivian & Charles" large; below the navy gatefold folder a small spaced line "TAP TO OPEN". All decor in fine metallic gold line illustration style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: navy gatefold folder ve gold medallion clasp net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -78,7 +79,7 @@ Kontrol: navy gatefold folder ve gold medallion clasp net ve tam; metin yalnız 
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/comps/web_2_home.png` · 1024×1536
 
 ```
-Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the navy gatefold folder: a small champagne-ivory card with a fine gold-line border and a stepped art deco arch-shaped photo window outlined in fine gold lines in its upper part, plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the display lettering and a small spaced line "JANUARY 1, 2028 · CHICAGO". Under the card: the names "Vivian & Charles" large in the display lettering, a small spaced line "SATURDAY · JANUARY 1, 2028", the venue "The Grand Lumière Hotel" and "Chicago, Illinois" in italic serif, four small elegant countdown boxes "445 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a navy pill button with a fine gold outline and champagne lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the navy gatefold folder: a small champagne-ivory card with a fine gold-line border and a stepped art deco arch-shaped photo window outlined in fine gold lines in its upper part, plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the display lettering and a small spaced line "DECEMBER 18, 2027 · CHICAGO". Under the card: the names "Vivian & Charles" large in the display lettering, a small spaced line "SATURDAY · DECEMBER 18, 2027", the venue "The Grand Lumière Hotel" and "Chicago, Illinois" in geometric sans-serif in spaced capitals, four small elegant countdown boxes "431 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a navy pill button with a fine gold outline and champagne lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall deep-navy card with the same fine gold deco double border and only small gold fans in the corners holds the title "Order of the Day" in the display lettering and three schedule rows separated by tiny dividers (a horizontal art deco divider of fine gold lines with a small central diamond and pearl): "4:00 PM — Ceremony — The Mirror Ballroom", "5:00 PM — Cocktail Hour — The Gold Bar", "6:30 PM — Reception — The Grand Salon" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape stepped art deco frame in fine metallic gold lines with small fan ornaments at the four corners, its window filled with flat pure green #00FF00 (the venue photo), under it "The Grand Lumière Hotel" and "Chicago, Illinois", then a small line "DRESS CODE · Black tie". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall deep-navy card with a fine metallic-gold art deco double border and only small gold fans in the corners holds the title "Order of the Day" in the display lettering and three schedule rows separated by tiny dividers (a horizontal art deco divider of fine gold lines with a small central diamond and pearl): "4:00 PM — Ceremony — The Mirror Ballroom", "5:00 PM — Cocktail Hour — The Gold Bar", "6:30 PM — Reception — The Grand Salon" (time in small spaced geometric sans-serif, event in geometric sans-serif, place in geometric sans-serif in spaced capitals). Below the card: a landscape stepped art deco frame in fine metallic gold lines with small fan ornaments at the four corners, its window filled with flat pure green #00FF00 (the venue photo), under it "The Grand Lumière Hotel" and "Chicago, Illinois", then a small line "DRESS CODE · Black tie". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -102,7 +103,7 @@ Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıy
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
 
 ```
-Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the display lettering, "Kindly reply by November 20, 2027" in serif, a navy pill button with a fine gold outline and champagne lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Vivian & Charles" in the display lettering at the bottom; a small gold medallion clasp — the same one as on the navy gatefold folder — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the display lettering, "Kindly reply by November 6, 2027" in geometric sans-serif, a navy pill button with a fine gold outline and champagne lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Vivian & Charles" in the display lettering at the bottom; a small gold medallion clasp — the same one as on the navy gatefold folder — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/parts/envelope_closed.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-The same navy gatefold folder as in the W1 screens, alone and closed, WITHOUT the gold medallion clasp: a tall deep-navy (#14213D) linen card-stock gatefold folder, portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors edged with fine metallic-gold art deco lines that form a stepped sunburst where they meet. The folder stands perfectly upright in the exact center of the wide image, its height about 85% of the image height; the empty areas to the left and right are left for the two doors to open into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same navy gatefold folder as in the W1 screens, alone and closed, WITHOUT the gold medallion clasp: a tall deep-navy (#14213D) linen card-stock gatefold folder, portrait-shaped (about 2:3), closed, its two doors meeting exactly in a vertical center seam, both doors edged with fine metallic-gold art deco lines that form a stepped sunburst where they meet, the two doors' top edges together forming a stepped art deco ziggurat arch silhouette. The folder stands perfectly upright in the exact center of the wide image, its height about 85% of the image height; the empty areas to the left and right are left for the two doors to open into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; gold medallion clasp yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,15 +140,15 @@ Kontrol: tek nesne; gold medallion clasp yok; kesilmemiş; gölge yok; gerçek a
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only an ornate round art deco medallion clasp in polished gold with stepped geometric rays and a small pearl in the middle, no letters, alone, exactly as it sits on the navy gatefold folder in the W1 screens (fastened over the center seam, a little above the middle) and at the same scale as in envelope_closed.png, with no navy gatefold folder behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only an ornate round art deco medallion clasp in polished gold with stepped geometric rays and a small pearl in the middle, no letters, alone, exactly as it sits on the navy gatefold folder in the W1 screens (fastened over the center seam, a little above the middle), drawn large so it fills about 70% of the square (Claude scales it to the navy gatefold folder), with the same perspective, material and light as on the navy gatefold folder and with no navy gatefold folder behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız gold medallion clasp; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız gold medallion clasp; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf (gatefold, iki kapı) — boş
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/parts/envelope_open.png` · 1536×1024 · **Şeffaf zemin**
 
 ```
-The SAME navy gatefold folder as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: both doors swung fully open to the left and right and lying flat, the inside of the doors lined with original art deco fan and arch geometric pattern in thin metallic gold lines on deep navy, seamless, the deep navy center panel with a shallow pocket along its lower edge; the pocket empty. No card, nothing inside, no gold medallion clasp. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME navy gatefold folder as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: both doors swung fully open to the left and right and lying flat, the inside of the doors lined with original art deco fan and arch geometric pattern in thin metallic gold lines on deep navy, seamless, the center panel faced in champagne-ivory card with a shallow deep-navy pocket across its lower third whose straight top edge is a crisp fine metallic-gold line; the pocket empty. No card, nothing inside, no gold medallion clasp. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the navy gatefold folder in W1.2, alone: a small champagne-ivory card with a fine gold-line border and a stepped art deco arch-shaped photo window outlined in fine gold lines in its upper part, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the navy gatefold folder so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the navy gatefold folder in W1.2, alone: a small champagne-ivory card with a fine gold-line border and a stepped art deco arch-shaped photo window outlined in fine gold lines in its upper part, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the navy gatefold folder so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -171,7 +172,7 @@ Kontrol: kart yüzü tamamen boş; dekor tasarıma özgü; gölge yok; alfa.
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/parts/info_card.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The lighter card from W1.4 and W1.5, alone: a tall deep-navy card with the same fine gold deco double border and only small gold fans in the corners. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The lighter card from W1.4 and W1.5, alone: a tall deep-navy card with a fine metallic-gold art deco double border and only small gold fans in the corners. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 
@@ -211,7 +212,7 @@ Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince bo
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE lustrous round white pearl, in the same fine metallic gold line illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE tiny gold-rimmed crystal champagne coupe drawn in fine gold line, in the same fine metallic gold line illustration style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -252,7 +253,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G206`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar basamaklı deco kemer çerçevelere (~3:4) girer: yüzler ortada, başın üstünde pay kalsın (kemer tepesi kırpar). Renk dünyası: gece laciverti, altın, şampanya, inci; sıcak akşam ışığı.
 
 ### 2.1 Ana portre
@@ -266,21 +267,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a small round table in a vintage jazz lounge, two champagne coupes, warm amber light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a small round table in a vintage jazz lounge, two champagne coupes, warm amber light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on a grand marble staircase with brass railings in the evening: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a grand marble staircase with brass railings in the evening: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/06_Art_Deco_Noir/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands showing a delicate engagement ring as they clink two crystal champagne coupes, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands showing a delicate engagement ring as they clink two crystal champagne coupes, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

@@ -7,7 +7,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 | Eksen | Bu tasarım |
 |---|---|
 | Zarf / açılış | Bordo kadife kurdeleyle bağlı krem zarf; kurdele çözülüp kayar, kapak açılır. |
-| Fotoğraf sunumu | Varak altın oval çerçeveler, sallanarak asılır. |
+| Fotoğraf sunumu | Varak altın oval çerçeveler tek bir kadife kurdele girlandına bağlı, sallanır. |
 | Dekor ailesi | Dalya, bordo gül, sonbahar yaprakları, böğürtlen |
 | Teknik | yağlı boya (romantic oil painting) |
 | Font hedefi | Pinyon Script (script) + Cinzel (bilgi) — Canva'da bulunabilirliği doğrulanacak; bulunamazsa en yakın Canva fontu kaydedilir |
@@ -18,7 +18,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 |---|---|---|
 | 1 | Kapalı zarf / kapak | Bordo kadife kurdeleyle bağlı krem zarf; kurdele çözülüp kayar, kapak açılır. |
 | 2 | Açılış, kart yükselir | Kapanış elemanı (mühür/kurdele/toka) ayrı katman olarak çözülür; kart ayrı katman. |
-| 3 | Our Story — 3 fotoğraf | Varak altın oval çerçeveler, sallanarak asılır. |
+| 3 | Our Story — 3 fotoğraf | Varak altın oval çerçeveler tek bir kadife kurdele girlandına bağlı, sallanır. |
 | 4 | Davet kartı | Aileler, isimler, davet cümlesi, tarih bloğu, mekân. Dekor: Dalya, bordo gül, sonbahar yaprakları, böğürtlen. |
 | 5 | Program | Ceremony / Cocktail Hour / Reception + kıyafet. |
 | 6 | RSVP | Son tarih, buton, kapanış cümlesi, kapanış elemanının küçük tekrarı. |

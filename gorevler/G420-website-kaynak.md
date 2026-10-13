@@ -22,11 +22,12 @@ Tasarım 20'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 ## Yapılacaklar
 1. 03 temasının yapısını kopyala: sayfalar, `data-field` işaretleri, `site.js` başındaki MOTION/CONTENT ayrımı, `.photo-slot` foto bileşeni, alt menü. Görsel dil, renkler ve fontlar bu tasarımdan.
 2. Parçaları hazırla: `python3 tools/parts_prep.py collections/20_Coastal_Seaside --out <tema klasörü>/img_src` (mutlak yol) + temanın build adımı (WebP, 1x/2x). Yalnız bu tasarımın GPT parçaları; yeni şekil/dekor çizme (K21). `parts_prep`'in ön cep kesimi kare, V kapaklı zarf varsayar (03'te bile `build_images.py` ile düzeltildi); bu tasarımda (kapaklı zarf) kapak/kapı/cep parçaları tema build adımında `envelope_closed`/`envelope_open`'dan kesilir ve önizlemede gözle doğrulanır.
-3. Zarf açılışı (MOTION.envelope): On tap, a soft watercolor wave washes across the screen and carries the seashell and twine away, the wavy flap lifts, and the card rises like the incoming tide. Katalog: Dalga desenli astarlı kum rengi zarf, deniz kabuğu süslü; dalga geçince açılır. Kapanış elemanı, zarf/kapak ve kart ayrı katmanlar; kart home'daki karta dönüşür.
-4. Sayfa koreografisi (MOTION.scenes): her sayfada öğeler sırayla girer. Story: Yuvarlak gemi lombozu (porthole) çerçeveler, kenardan kayar (three round brass portholes in a row along a weathered whitewashed boat-plank wall, sliding in from the right one after another). Details/rsvp: kart, satırlar ve buton sırayla; `accent_1..3` süzülür.
+3. Zarf açılışı (MOTION.envelope): On tap, the watercolor wave (wave.png) sweeps across the screen and carries the seashell and twine away, the wave-edged flap lifts, and the card rises like the incoming tide. Katalog: Dalga desenli astarlı kum rengi zarf, deniz kabuğu süslü; dalga geçince açılır. Kapanış elemanı, zarf/kapak ve kart ayrı katmanlar; kart home'daki karta dönüşür; `closure.png` kare tuvalde büyük çizilir; zarftaki yerine ölçeklenir.
+4. Sayfa koreografisi (MOTION.scenes): her sayfada öğeler sırayla girer. Story: Yuvarlak gemi lombozu (porthole) çerçeveler, kenardan kayar (three round brass portholes stacked down the page in a gentle zig-zag (left, right, left) on the soft sea-mist page, a few shells and sea glass between them). Details/rsvp: kart, satırlar ve buton sırayla; `accent_1..3` süzülür.
 5. Foto alanları: `hero_portrait` (card_small penceresi), `story_1..3` (frame_portrait), `venue` (frame_landscape); kutu ve maske `windows.json`'dan. PAKET 2 fotoğrafı yoksa yer tutucu.
-6. Fontlar: Allison + Lora (Google Fonts link'i; repoya font dosyası girmez). Tarih US biçimi (`May 15, 2027`); URL'ler null → "link will be added soon".
-7. Önizleme: 390 px (index, home, story, details, rsvp) + açılış MP4; 360/430/768/1280 px'te yatay kaydırma denetimi.
+6. Tasarıma özel ek parçalar (comp'taki ilgili öğe bunlardan kurulur, kodla çizilmez — K21): `wave.png` — Açılış dalgası.
+7. Fontlar: Allison + Lora (Google Fonts link'i; repoya font dosyası girmez). Tarih US biçimi (`May 15, 2027`); URL'ler null → "link will be added soon".
+8. Önizleme: 390 px (index, home, story, details, rsvp) + açılış MP4; 360/430/768/1280 px'te yatay kaydırma denetimi.
 
 ## Bitti sayılması için
 - [ ] Tema demo içerikle açılıyor; 5 sayfa; kişisel metin görselde değil HTML'de

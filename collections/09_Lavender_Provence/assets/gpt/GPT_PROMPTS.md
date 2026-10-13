@@ -53,10 +53,11 @@ On tap, the jute twine with its lavender bundle unties and slips away, the linen
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   linen pouch at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn on a canvas of the same size so it overlays
+  envelope_closed.png pixel for pixel. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by May 22, 2027.
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft hazy lavender-to-cream gradient (#F3F0F7 to #D9D2E8) with a very blurred distant lavender field at the bottom edge, empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat framing the top-left and bottom-right corners and a few small floating accents (a pressed dried lavender stem, a pressed white daisy, a golden wheat ear). Centered slightly below the middle: a small natural cream linen drawstring pouch (#FAF8F3, fine visible weave), portrait-shaped, its mouth gathered closed at the top, closed, with a small bundle of dried lavender stems tied with natural jute twine in a simple bow — tied around the gathered neck of the pouch. Above it, typography in a light airy brush script for the names and a delicate Garamond-style serif: a small spaced line "YOU ARE INVITED" and the names "Amélie & Louis" large; below the linen pouch a small spaced line "TAP TO OPEN". All decor in pressed flower flat-lay photograph style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat framing the top-left and bottom-right corners and a few small floating accents (a pressed dried lavender stem, a pressed white daisy, a small pressed sprig of wild thyme). Centered slightly below the middle: a small natural cream linen drawstring pouch (#FAF8F3, fine visible weave), portrait-shaped, its mouth gathered closed at the top, closed, with a small bundle of dried lavender stems tied with natural jute twine in a simple bow — tied around the gathered neck of the pouch. Above it, typography in a light airy brush script for the names and a delicate Garamond-style serif: a small spaced line "YOU ARE INVITED" and the names "Amélie & Louis" large; below the linen pouch a small spaced line "TAP TO OPEN". All decor in pressed flower flat-lay photograph style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: linen pouch ve lavender-and-twine tie net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -86,7 +87,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three pressed-flower cards tumbling in at loose angles as if carried by a summer breeze, one slightly overlapping another's corner; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three pressed-flower cards tumbling in at loose angles as if carried by a summer breeze, not overlapping; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Kurutulmuş çiçek basılmış (pressed flower) kartlar, rüzgârla savrulur gibi gelir.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall cream deckle-edged card with only one pressed lavender stem laid along the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a single pressed lavender stem with one small white daisy lying horizontally, flat-lay photo): "4:00 PM — Ceremony — The Lavender Field", "5:00 PM — Cocktail Hour — The Stone Terrace", "6:30 PM — Reception — The Old Barn" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape cream deckle-edged card with a thin border of tiny pressed lavender florets around the window, its window filled with flat pure green #00FF00 (the venue photo), under it "Les Jardins de Lavande" and "Gordes, France", then a small line "DRESS CODE · Summer chic". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall cream deckle-edged card with only one pressed lavender stem laid along the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a single pressed lavender stem with one small white daisy lying horizontally, flat-lay photo): "4:00 PM — Ceremony — The Lavender Field", "5:00 PM — Cocktail Hour — The Stone Terrace", "6:30 PM — Reception — The Old Barn" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape cream deckle-edged card with a thin border of tiny pressed lavender florets around the window, its window filled with flat pure green #00FF00 (the venue photo), under it "Les Jardins de Lavande" and "Gordes, France", then a small line "DRESS CODE · Summer chic". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -115,7 +116,7 @@ aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üst
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/bg_page.png` · 1024×1536
 
 ```
-The page background of the W1 screens alone, as a vertical phone-screen background: soft hazy lavender-to-cream gradient (#F3F0F7 to #D9D2E8) with a very blurred distant lavender field at the bottom edge, empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no linen pouch, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.
+The page background of the W1 screens alone, as a vertical phone-screen background: soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no linen pouch, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.
 ```
 Kontrol: orta sakin ve boş; dekor yalnız kenarlarda; yazı yok; W1 ile aynı renk ve ışık.
 
@@ -136,18 +137,18 @@ The same linen pouch as in the W1 screens, alone and closed, WITHOUT the lavende
 Kontrol: tek nesne; lavender-and-twine tie yok; kesilmemiş; gölge yok; gerçek alfa.
 
 #### W2.4 Kapanış elemanı (tek başına)
-**Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
+**Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/closure.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-Only a small bundle of dried lavender stems tied with natural jute twine in a simple bow, alone, exactly as it sits on the linen pouch in the W1 screens (tied around the gathered neck of the pouch) and at the same scale as in envelope_closed.png, with no linen pouch behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small bundle of dried lavender stems tied with natural jute twine in a simple bow, alone, exactly as it sits on the linen pouch in the W1 screens (tied around the gathered neck of the pouch), with no linen pouch behind it. Draw it on a canvas of exactly the same size as envelope_closed.png and give envelope_closed.png as the reference image: the lavender-and-twine tie sits exactly where it wraps the linen pouch there, so the two images overlay pixel for pixel. Where it wraps around the edges, its ends stop exactly at the linen pouch's outline. The linen pouch itself is NOT drawn. Front view, perfectly straight. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız lavender-and-twine tie; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız lavender-and-twine tie; harf/monogram yok; envelope_closed üstüne 1:1 oturuyor; uçlar zarf kenarında bitiyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf (keten kese) — boş
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME linen pouch as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: its gathered mouth loosened and opened wide, the rim folded down a little to show soft lavender (#9C8FC4) linen with a delicate block-printed sprig pattern in cream as the lining; the pouch empty. No card, nothing inside, no lavender-and-twine tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME linen pouch as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: its gathered mouth loosened and opened wide into an oval, seen very slightly from above so the inside of the back wall shows soft lavender (#9C8FC4) linen with a delicate block-printed sprig pattern in cream as the lining; the front rim stays plain cream linen (not folded over); the pouch empty. No card, nothing inside, no lavender-and-twine tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the linen pouch in W1.2, alone: a small cream deckle-edged cotton card with a thin border of tiny pressed lavender florets around a portrait photo window in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the linen pouch so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the linen pouch in W1.2, alone: a small cream deckle-edged cotton card with a thin border of tiny pressed lavender florets around a portrait photo window in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the linen pouch so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -227,7 +228,7 @@ Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/accent_3.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE golden wheat ear, in the same pressed flower flat-lay photograph style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small pressed sprig of wild thyme with tiny pink-purple flowers, in the same pressed flower flat-lay photograph style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -243,7 +244,7 @@ Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
-Wide horizontal version of the same design for the desktop website header: soft hazy lavender-to-cream gradient (#F3F0F7 to #D9D2E8) with a very blurred distant lavender field at the bottom edge, empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat framing the left and right edges, and the closed linen pouch with its lavender-and-twine tie resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
+Wide horizontal version of the same design for the desktop website header: soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat framing the left and right edges, and the closed linen pouch with its lavender-and-twine tie resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. Same technique, colors and light as the W1 screens. No text, no letters.
 ```
 Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 
@@ -252,7 +253,7 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G209`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar presli çiçek bordürlü dikey kartlara (~3:4) girer: yüzler ortadaki %70'lik alanda. Renk dünyası: lavanta, krem keten, adaçayı, yaz akşamı ışığı.
 
 ### 2.1 Ana portre
@@ -266,21 +267,21 @@ Romantic editorial engagement photo of a fictional couple in their late twenties
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a small bistro table in a sunny stone village square, two glasses of rosé and a bunch of lavender, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a small bistro table in a sunny stone village square, two glasses of rosé and a bunch of lavender, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment between the rows of a lavender field at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment between the rows of a lavender field at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/09_Lavender_Provence/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small bundle of lavender tied with twine, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small bundle of lavender tied with twine, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân

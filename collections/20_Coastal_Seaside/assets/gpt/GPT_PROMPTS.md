@@ -33,7 +33,7 @@ Görev: `gorevler/G220-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G820-*` (Pak
 > Üreten: `python3 tools/katalog.py paket5 --no 20` — değişiklik için `tools/katalog.py` → `WEB[20]`.
 
 **Bu tasarımın website açılışı** (kapaklı zarf; katalog: Dalga desenli astarlı kum rengi zarf, deniz kabuğu süslü; dalga geçince açılır):
-On tap, a soft watercolor wave washes across the screen and carries the seashell and twine away, the wavy flap lifts, and the card rises like the incoming tide.
+On tap, the watercolor wave (wave.png) sweeps across the screen and carries the seashell and twine away, the wave-edged flap lifts, and the card rises like the incoming tide.
 
 **Instructions for GPT (read fully before starting):**
 - You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
@@ -53,10 +53,11 @@ On tap, a soft watercolor wave washes across the screen and carries the seashell
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   sand envelope at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the sand envelope. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by June 5, 2027.
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft sea-mist gradient (#F4F8F9 to #D5E5EB) with a faint watercolor shoreline wave at the bottom edge and fine sand grain, empty center, with seashells, a starfish, pieces of sea glass in aqua and white, and dune grass, soft ocean watercolor framing the top-left and bottom-right corners and a few small floating accents (a small pale-pink scallop seashell, a piece of frosted aqua sea glass, a small sand-colored starfish). Centered slightly below the middle: a soft sand-colored textured paper envelope with tiny speckles, about 5:4 wider than tall, with a gently wavy-edged flap, closed, with a small pale-pink scallop seashell resting on a short loop of natural twine — resting on the tip of the wavy flap. Above it, typography in a breezy handwritten script for the names and a classic book serif: a small spaced line "YOU ARE INVITED" and the names "Marina & Oliver" large; below the sand envelope a small spaced line "TAP TO OPEN". All decor in ocean watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft sea-mist gradient (#F4F8F9 to #D5E5EB) with a faint watercolor shoreline wave at the bottom edge and fine sand grain, empty center, with seashells, a starfish, pieces of sea glass in aqua and white, and dune grass, soft ocean watercolor framing the top-left and bottom-right corners and a few small floating accents (a small white spiral moon-snail shell, a piece of frosted aqua sea glass, a small sand-colored starfish). Centered slightly below the middle: a soft sand-colored textured paper envelope with tiny speckles, about 5:4 wider than tall, with a pointed V flap whose two edges are cut in a gentle wave like a shoreline, closed, with a small pale-pink scallop seashell resting on a short loop of natural twine — resting on the point of the wave-edged V flap. Above it, typography in a breezy handwritten script for the names and a classic book serif: a small spaced line "YOU ARE INVITED" and the names "Marina & Oliver" large; below the sand envelope a small spaced line "TAP TO OPEN". All decor in ocean watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: sand envelope ve scallop shell net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -86,7 +87,7 @@ Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutus
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/comps/web_3_story.png` · 1024×1536
 
 ```
-Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three round brass portholes in a row along a weathered whitewashed boat-plank wall, sliding in from the right one after another; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 3 of 5: our story. The title "Our Story" in the script at the top with a small spaced subtitle "MOMENTS WE HOLD DEAR". Below: three round brass portholes stacked down the page in a gentle zig-zag (left, right, left) on the soft sea-mist page, a few shells and sea glass between them; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: "First hello", "The proposal", "Forever begins". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler birbirini kesmiyor; diziliş: Yuvarlak gemi lombozu (porthole) çerçeveler, kenardan kayar.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall soft-white textured card with a gently wavy top edge and only a narrow watercolor wave along the bottom holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal row of three small seashells and a piece of sea glass): "4:00 PM — Ceremony — The Dune Lawn", "5:00 PM — Cocktail Hour — The Lighthouse Deck", "6:30 PM — Reception — The Boathouse" (time in small spaced serif, event in serif, place in italic). Below the card: a wide oval brass porthole-style frame with small rivets and an aged patina, its window filled with flat pure green #00FF00 (the venue photo), under it "Seaglass Point" and "Chatham, Massachusetts", then a small line "DRESS CODE · Coastal formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall soft-white textured card with a gently wavy top edge and only a narrow watercolor wave along the bottom holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal row of three small seashells and a piece of sea glass): "4:00 PM — Ceremony — The Dune Lawn", "5:00 PM — Cocktail Hour — The Lighthouse Deck", "6:30 PM — Reception — The Boathouse" (time in small spaced serif, event in serif, place in italic serif). Below the card: a wide oval brass porthole-style frame with small rivets and an aged patina, its window filled with flat pure green #00FF00 (the venue photo), under it "Seaglass Point" and "Chatham, Massachusetts", then a small line "DRESS CODE · Coastal formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -109,7 +110,7 @@ Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 ### W2 — Parçalar (website katmanları; YAZI YOK)
 
 W1 görsellerini referans ver; her parça W1'dekiyle **aynı** görünmeli (aynı sand envelope, aynı kapanış,
-aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 17 parça.
+aynı çerçeve ve dekor). Tek görselde tek nesne, gölge yok, ışık sol üstten, şeffaflar gerçek alfa. 18 parça.
 
 #### W2.1 Sayfa arka planı (telefon)
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/bg_page.png` · 1024×1536
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same sand envelope as in the W1 screens, alone and closed, WITHOUT the scallop shell: a soft sand-colored textured paper envelope with tiny speckles, about 5:4 wider than tall, with a gently wavy-edged flap. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same sand envelope as in the W1 screens, alone and closed, WITHOUT the scallop shell: a soft sand-colored textured paper envelope with tiny speckles, about 5:4 wider than tall, with a pointed V flap whose two edges are cut in a gentle wave like a shoreline. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; scallop shell yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,15 +140,15 @@ Kontrol: tek nesne; scallop shell yok; kesilmemiş; gölge yok; gerçek alfa.
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small pale-pink scallop seashell resting on a short loop of natural twine, alone, exactly as it sits on the sand envelope in the W1 screens (resting on the tip of the wavy flap) and at the same scale as in envelope_closed.png, with no sand envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small pale-pink scallop seashell resting on a short loop of natural twine, alone, exactly as it sits on the sand envelope in the W1 screens (resting on the point of the wave-edged V flap), drawn large so it fills about 70% of the square (Claude scales it to the sand envelope), with the same perspective, material and light as on the sand envelope and with no sand envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız scallop shell; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız scallop shell; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME sand envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the wavy flap folded fully upward, its inner side and the inside of the back showing soft ocean-blue watercolor wave pattern with thin white foam lines, seamless; the front pocket empty. No card, nothing inside, no scallop shell. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME sand envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the wave-edged V flap folded fully upward, its inner side and the inside of the back showing soft ocean-blue watercolor wave pattern with thin white foam lines, seamless; the front pocket empty. No card, nothing inside, no scallop shell. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the sand envelope in W1.2, alone: a small sand-colored speckled card with a perfectly round porthole-style photo window ringed in aged brass with small rivets in its upper part, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the sand envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the sand envelope in W1.2, alone: a small sand-colored speckled card with a perfectly round porthole-style photo window ringed in aged brass with small rivets in its upper part, plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the sand envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -211,7 +212,7 @@ Kontrol: tek küme; sağ alttan başlıyor; sol üst yarı boş; kenarda ince bo
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Exactly ONE small pale-pink scallop seashell, in the same ocean watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Exactly ONE small white spiral moon-snail shell, in the same ocean watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne (birden fazla değil); küçük ve ortalı; gölge yok; alfa.
 
@@ -239,7 +240,15 @@ A small horizontal divider in the same ocean watercolor style: a horizontal row 
 ```
 Kontrol: küçük, yatay ve ortalı; gölge yok; alfa.
 
-#### W2.17 Website hero (masaüstü üst bant)
+#### W2.17 Açılış dalgası
+**Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/wave.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A single soft ocean-watercolor wave seen from the side: a wide band of translucent aqua and ocean-blue water whose top edge curls into a crest of white foam lace, spanning about 90% of the image width, its lower edge softly feathered. Only this one wave, no shells, no sand, no sky. Seen straight-on (not tilted, no perspective), centered and not cropped, with generous empty margin all around; the object keeps its natural curve. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: tek dalga; köpük üst kenarda; alt kenar yumuşak; gölge yok; alfa.
+
+#### W2.18 Website hero (masaüstü üst bant)
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/parts/web_hero.png` · 1536×1024
 
 ```
@@ -252,35 +261,35 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G220`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar yuvarlak lomboz çerçevelere girer: yüzler tam ortadaki dairede, kenarlarda bol pay kalsın. Renk dünyası: okyanus mavisi, deniz camı, kum, köpük beyazı.
 
 ### 2.1 Ana portre
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
 
 ```
-Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on a sandy beach among dune grass at golden hour, the ocean behind; she wears a flowing white chiffon dress, he wears a light blue linen suit with no tie, sleeves rolled. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on a sandy dune path beside a weathered split-rail fence and blue hydrangeas at golden hour, the ocean behind; she wears a flowing white chiffon dress, he wears a light blue linen suit with no tie, sleeves rolled. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.2 Hikâye 1 — "First hello"
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a seaside picnic table, two lemonades and a little bucket of shells, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a weathered picnic table on a harbor dock, two iced teas and a paper basket of fried clams, sailboats softly blurred behind, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on the beach near a white lighthouse at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on the beach near a white lighthouse at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/20_Coastal_Seaside/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small scallop shell and a piece of sea glass, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small scallop shell and a piece of sea glass, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark. Compose so that both people fit well inside a centered circle whose diameter is the image width (the photo will be cropped to a circle), with space around them — for standing or kneeling poses, photograph from a slightly greater distance.
 ```
 
 ### 2.5 Mekân

@@ -7,7 +7,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 | Eksen | Bu tasarım |
 |---|---|
 | Zarf / açılış | Dantel kaplı fildişi gatefold; inci tokalı kopça açılır, dantel kanatlar aralanır. |
-| Fotoğraf sunumu | Kabartma kamelya (cameo) oval çerçeveler, inci dizisiyle iner. |
+| Fotoğraf sunumu | Oyma fildişi oval çerçeveler, inci dizisiyle iner. |
 | Dekor ailesi | Dantel bordür, inci dizisi, beyaz gül |
 | Teknik | fotogerçekçi doku (photorealistic) |
 | Font hedefi | Mrs Saint Delafield (script) + Bodoni Moda (bilgi) — Canva'da bulunabilirliği doğrulanacak; bulunamazsa en yakın Canva fontu kaydedilir |
@@ -18,7 +18,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 |---|---|---|
 | 1 | Kapalı zarf / kapak | Dantel kaplı fildişi gatefold; inci tokalı kopça açılır, dantel kanatlar aralanır. |
 | 2 | Açılış, kart yükselir | Kapanış elemanı (mühür/kurdele/toka) ayrı katman olarak çözülür; kart ayrı katman. |
-| 3 | Our Story — 3 fotoğraf | Kabartma kamelya (cameo) oval çerçeveler, inci dizisiyle iner. |
+| 3 | Our Story — 3 fotoğraf | Oyma fildişi oval çerçeveler, inci dizisiyle iner. |
 | 4 | Davet kartı | Aileler, isimler, davet cümlesi, tarih bloğu, mekân. Dekor: Dantel bordür, inci dizisi, beyaz gül. |
 | 5 | Program | Ceremony / Cocktail Hour / Reception + kıyafet. |
 | 6 | RSVP | Son tarih, buton, kapanış cümlesi, kapanış elemanının küçük tekrarı. |

@@ -33,7 +33,7 @@ Görev: `gorevler/G212-*` (Paket 5 + Paket 2); mockup'lar `gorevler/G812-*` (Pak
 > Üreten: `python3 tools/katalog.py paket5 --no 12` — değişiklik için `tools/katalog.py` → `WEB[12]`.
 
 **Bu tasarımın website açılışı** (kapaklı zarf; katalog: Palmiye desenli astarlı seyahat cüzdanı; çıtçıt açılır, bavul etiketi kartlar kayar):
-On tap, the brass snap pops open and the plumeria tab swings away, the wallet flap flips up to reveal the palm-leaf liner, and a luggage-tag card slides up while a palm-leaf shadow sweeps across the screen.
+On tap, the brass snap pops open and the plumeria tab swings away, the wallet flap flips up to reveal the palm-leaf liner, and a luggage-tag card slides up while a monstera leaf and a white plumeria drift across the screen.
 
 **Instructions for GPT (read fully before starting):**
 - You are the **art director and illustrator** of this design's wedding website. Aim for **high-end luxury
@@ -53,10 +53,11 @@ On tap, the brass snap pops open and the plumeria tab swings away, the wallet fl
   way: soft light from the top-left. Front view, straight, centered, not cropped, empty margin around it.
 - Transparent parts are **true-alpha PNG** (not white, not a checkerboard).
 - Where a photo will go, fill the window with **flat pure green #00FF00** (no texture, no shading, no gradient).
-- envelope_closed.png, closure.png and envelope_open.png must fit together exactly: the SAME
+- envelope_closed.png and envelope_open.png must fit together exactly: the SAME
   travel wallet at the SAME size, position and angle. Make envelope_closed.png first and give it as the
-  reference for the other two. Do not draw separate flap, door, pocket or cover pieces — Claude cuts interlocking
-  pieces from one image.
+  reference for closure.png and envelope_open.png. closure.png is drawn large on its own square; Claude scales it
+  onto the travel wallet. Do not draw separate flap, door, pocket or cover pieces — Claude cuts
+  interlocking pieces from one image.
 - Vertical 1024×1536 images: keep everything important inside the **central 85% of the width** (phones crop the sides).
 - Must not resemble any real person, brand or another seller's design.
 
@@ -70,7 +71,7 @@ Kindly reply by May 8, 2027.
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/comps/web_1_envelope.png` · 1024×1536
 
 ```
-Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: bright airy seafoam-to-aqua gradient (#F2FAF8 to #CDEBE6) with soft sunlight flares and faint palm leaf shadows at the edges, empty center, with monstera leaves, palm fronds, pink hibiscus and white plumeria flowers in vibrant fresh watercolor framing the top-left and bottom-right corners and a few small floating accents (a white plumeria flower, a small glossy monstera leaf, a pink hibiscus flower). Centered slightly below the middle: a portrait travel wallet of bright white textured watercolor paper with a rounded top flap folded down over the front and a slim tan leather strap across the flap, closed, with a small polished brass snap tab on a short loop of natural twine with a single fresh white plumeria flower tucked into the loop — fastened at the end of the leather strap, at the center of the flap's edge. Above it, typography in a lively flowing script for the names and a light elegant sans-serif in spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Maya & Kai" large; below the travel wallet a small spaced line "TAP TO OPEN". All decor in vibrant watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: bright airy seafoam-to-aqua gradient (#F2FAF8 to #CDEBE6) with soft sunlight flares and faint palm leaf shadows at the edges, empty center, with monstera leaves, palm fronds, pink hibiscus and white plumeria flowers in vibrant fresh watercolor framing the top-left and bottom-right corners and a few small floating accents (a white plumeria flower, a small glossy monstera leaf, a pink hibiscus flower). Centered slightly below the middle: a portrait travel wallet of bright white textured watercolor paper with a rounded top flap folded down over the front and a slim tan leather strap running vertically down the middle of the flap, its rounded end reaching just past the flap's edge onto the front panel, closed, with a small round polished brass press-snap button with a short loop of natural twine wound around it and a single fresh white plumeria flower tucked into the twine — pressed onto the rounded end of the vertical leather strap, just below the center of the flap's edge. Above it, typography in a lively flowing script for the names and a light elegant sans-serif in spaced capitals: a small spaced line "YOU ARE INVITED" and the names "Maya & Kai" large; below the travel wallet a small spaced line "TAP TO OPEN". All decor in vibrant watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: travel wallet ve brass snap with plumeria net ve tam; metin yalnız üstte ve altta; telefon donanımı/durum çubuğu yok; lüks görünüm.
 
@@ -78,7 +79,7 @@ Kontrol: travel wallet ve brass snap with plumeria net ve tam; metin yalnız üs
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/comps/web_2_home.png` · 1024×1536
 
 ```
-Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the travel wallet: a small bright-white card shaped like a large luggage tag (cut top corners, a reinforced eyelet hole with a short twine loop at the top), a portrait photo window in its upper part and plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "JUNE 19, 2027 · WAILEA". Under the card: the names "Maya & Kai" large in the script, a small spaced line "SATURDAY · JUNE 19, 2027", the venue "Coral Bay Resort" and "Wailea, Hawaii" in italic serif, four small elegant countdown boxes "249 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a lagoon-teal pill button with white lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the travel wallet: a small bright-white card shaped like a large luggage tag (cut top corners, a reinforced eyelet hole with a short twine loop at the top), a portrait photo window in its upper part and plain blank card below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line "We're getting married" in the script and a small spaced line "JUNE 19, 2027 · WAILEA". Under the card: the names "Maya & Kai" large in the script, a small spaced line "SATURDAY · JUNE 19, 2027", the venue "Coral Bay Resort" and "Wailea, Hawaii" in italic light sans-serif, four small elegant countdown boxes "249 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS", and a lagoon-teal pill button with white lettering labelled "RSVP". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: kart penceresi düz yeşil; isimler, tarih, mekân, 4 geri sayım kutusu ve buton görünür; alt menü var.
 
@@ -94,7 +95,7 @@ Kontrol: üç çerçeve, pencereler düz yeşil; başlık üstte; çerçeveler b
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/comps/web_4_details.png` · 1024×1536
 
 ```
-Same design, page 4 of 5: details. A tall bright-white card with a softly rounded top and only a small spray of one palm leaf and two plumeria at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of one small palm leaf and two plumeria flowers): "4:00 PM — Ceremony — The Ocean Lawn", "5:00 PM — Cocktail Hour — The Sunset Deck", "6:30 PM — Reception — The Palm Pavilion" (time in small spaced serif, event in serif, place in italic). Below the card: a landscape kraft luggage tag with cut corners at its left end and a reinforced eyelet hole with a short twine string there, completely free of printed text, its window filled with flat pure green #00FF00 (the venue photo), under it "Coral Bay Resort" and "Wailea, Hawaii", then a small line "DRESS CODE · Beach formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 4 of 5: details. A tall bright-white card with a softly rounded top and only a small spray of one palm leaf and two plumeria at the top holds the title "Order of the Day" in the script and three schedule rows separated by tiny dividers (a horizontal spray of one small palm leaf and two plumeria flowers): "4:00 PM — Ceremony — The Ocean Lawn", "5:00 PM — Cocktail Hour — The Sunset Deck", "6:30 PM — Reception — The Palm Pavilion" (time in small spaced light sans-serif, event in light sans-serif, place in italic light sans-serif). Below the card: a landscape kraft luggage tag with cut corners at its left end and a reinforced eyelet hole with a short twine string there, completely free of printed text, its window filled with flat pure green #00FF00 (the venue photo), under it "Coral Bay Resort" and "Wailea, Hawaii", then a small line "DRESS CODE · Beach formal". A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıyafet satırı var.
 
@@ -102,7 +103,7 @@ Kontrol: üç satır net ve hizalı; mekân penceresi düz yeşil ve yatay; kıy
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/comps/web_5_rsvp.png` · 1024×1536
 
 ```
-Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by May 8, 2027" in serif, a lagoon-teal pill button with white lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Maya & Kai" in the script at the bottom; a small brass snap with plumeria — the same one as on the travel wallet — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
+Same design, page 5 of 5: RSVP. The same card as page 4 with the title "Will You Join Us?" in the script, "Kindly reply by May 8, 2027" in light sans-serif, a lagoon-teal pill button with white lettering labelled "RSVP", the line "We can't wait to celebrate with you" and "With love, Maya & Kai" in the script at the bottom; a small brass snap with plumeria — the same one as on the travel wallet — rests at the base of the card. A slim elegant bottom navigation bar reads "HOME · STORY · DETAILS · RSVP". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.
 ```
 Kontrol: buton ve metin kartın içinde; kapanış elemanı zarftakiyle aynı.
 
@@ -131,7 +132,7 @@ Kontrol: kenarlar dikişsiz birleşiyor; düşük kontrast; nesne/yazı yok.
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The same travel wallet as in the W1 screens, alone and closed, WITHOUT the brass snap with plumeria: a portrait travel wallet of bright white textured watercolor paper with a rounded top flap folded down over the front and a slim tan leather strap across the flap. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The same travel wallet as in the W1 screens, alone and closed, WITHOUT the brass snap with plumeria: a portrait travel wallet of bright white textured watercolor paper with a rounded top flap folded down over the front and a slim tan leather strap running vertically down the middle of the flap, its rounded end reaching just past the flap's edge onto the front panel. Place it exactly where it will sit in envelope_open.png: horizontally centered, about 55% of the image width and about 55% of the image height (a 2:3 portrait wallet), its bottom edge at about 92% of the image height; the empty upper ~40% of the image is left for the rounded flap to lift into and for the card to rise into. Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek nesne; brass snap with plumeria yok; kesilmemiş; gölge yok; gerçek alfa.
 
@@ -139,15 +140,15 @@ Kontrol: tek nesne; brass snap with plumeria yok; kesilmemiş; gölge yok; gerç
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
 
 ```
-Only a small polished brass snap tab on a short loop of natural twine with a single fresh white plumeria flower tucked into the loop, alone, exactly as it sits on the travel wallet in the W1 screens (fastened at the end of the leather strap, at the center of the flap's edge) and at the same scale as in envelope_closed.png, with no travel wallet behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+Only a small round polished brass press-snap button with a short loop of natural twine wound around it and a single fresh white plumeria flower tucked into the twine, alone, exactly as it sits on the travel wallet in the W1 screens (pressed onto the rounded end of the vertical leather strap, just below the center of the flap's edge), drawn large so it fills about 70% of the square (Claude scales it to the travel wallet), with the same perspective, material and light as on the travel wallet and with no travel wallet behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
-Kontrol: yalnız brass snap with plumeria; harf/monogram yok; zarfla aynı ölçek; gölge yok; alfa.
+Kontrol: yalnız brass snap with plumeria; harf/monogram yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
 
 #### W2.5 Açık zarf — boş
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The SAME travel wallet as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the rounded flap lifted fully upward, its inner side and the inside of the back showing lush tropical leaf pattern with monstera and palm leaves in deep green on a soft aqua background, seamless; the inner pocket empty. No card, nothing inside, no brass snap with plumeria. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The SAME travel wallet as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the rounded flap, with its leather strap, lifted fully upward, its inner side and the inside of the back panel showing lush tropical leaf pattern with monstera and palm leaves in deep green on a soft aqua background, seamless; the front panel forms an empty pocket. No card, nothing inside, no brass snap with plumeria. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yok; alfa (kapak/kapı/cep parçalarını Claude bu görselden keser).
 
@@ -155,7 +156,7 @@ Kontrol: envelope_closed ile aynı ölçü, konum ve açı; içi boş; gölge yo
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-The small card that comes out of the travel wallet in W1.2, alone: a small bright-white card shaped like a large luggage tag (cut top corners, a reinforced eyelet hole with a short twine loop at the top), a portrait photo window in its upper part and plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading); the rest of the card is blank (no text). Slightly narrower than the travel wallet so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The small card that comes out of the travel wallet in W1.2, alone: a small bright-white card shaped like a large luggage tag (cut top corners, a reinforced eyelet hole with a short twine loop at the top), a portrait photo window in its upper part and plain blank card below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the travel wallet so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: pencere düz #00FF00; kartın geri kalanı boş; zarfa sığacak genişlikte; alfa.
 
@@ -179,7 +180,7 @@ Kontrol: boş yüz; davet kartından daha sade; gölge yok; alfa.
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/parts/frame_portrait.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-One photo frame from W1.3, alone and upright: a blank vintage kraft luggage tag with cut top corners, a reinforced eyelet hole and a short twine string, completely free of printed text. The window inside is a portrait window (about 3:4) on the tag, filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+One photo frame from W1.3, alone and upright: a blank vintage kraft luggage tag with cut top corners and a reinforced eyelet hole, a twine string looped through the eyelet and rising straight up about half the tag's height, completely free of printed text. The window inside is a portrait window (about 3:4) on the tag, filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: tek çerçeve; pencere düz #00FF00; yazı yok; gölge yok; alfa.
 
@@ -252,42 +253,42 @@ Kontrol: orta-üst boş; yazı yok; aynı dekor ve zarf.
 ## PAKET 2 — Örnek fotoğraflar
 
 Görev `G212`, Paket 5'ten sonra **aynı sohbette**; website demosu ve ilan için. Kurgusal çift; alıcı kendi
-fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in the first image" korunur. Gerçek veya ünlü
+fotoğraflarını koyar. 2.1'den sonra her prompt'ta "same couple as in hero_portrait.jpg" korunur. Gerçek veya ünlü
 birine benzemesin; eller/parmaklar düzgün. Fotoğraflar bavul etiketi biçimli çerçevelere (~3:4) girer: yüzler ortada, üstte ve altta pay kalsın. Renk dünyası: lagün turkuazı, köpük yeşili, palmiye yeşili, hibiskus pembesi, gün batımı.
 
 ### 2.1 Ana portre
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
 
 ```
-Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on a tropical beach with palm trees at golden hour, turquoise water behind; she wears a flowing coral-pink chiffon maxi dress with a white plumeria in her hair, he wears a white linen shirt and light sand trousers. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other beneath leaning coconut palms on a white-sand lagoon beach with lush green volcanic mountains behind, at golden hour; she wears a flowing coral-pink chiffon maxi dress with a white plumeria in her hair, he wears a white linen shirt and light sand trousers. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.
 ```
 
 ### 2.2 Hikâye 1 — "First hello"
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, a candid first-date moment laughing together at a beach-shack table, two coconut drinks and a pink hibiscus flower, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a beach-shack table, two coconut drinks and a pink hibiscus flower, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
 ```
 
 ### 2.3 Hikâye 2 — "The proposal"
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, the proposal moment on the sand by the water's edge at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment at the end of a weathered wooden pier over a turquoise lagoon at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.
 ```
 
 ### 2.4 Hikâye 3 — "Forever begins"
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
 
 ```
-Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of white plumeria and pink hibiscus, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of white plumeria and pink hibiscus, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
 ```
 
 ### 2.5 Mekân
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/photos/venue.jpg` · Yatay (1536×1024)
 
 ```
-A fictional oceanfront resort lawn set for a wedding at sunset: rows of white chairs on green grass facing the ocean, a bamboo arch with monstera leaves and white orchids, tall palm trees, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.
+A fictional tropical resort garden set for a wedding at sunset: an open-air white pavilion with a thatched roof framed by blooming plumeria trees and tall coconut palms, rows of white chairs on a lawn, a bamboo arch with monstera leaves and white orchids, the ocean far beyond, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.
 ```
 
 Kontrol (tüm fotoğraflar): aynı çift tutarlı; yüzler doğal; eller/parmaklar düzgün; yazı/logo/tabela yok; konu ortada.
@@ -318,6 +319,6 @@ Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yo
 **Kaydet:** `collections/12_Tropical_Destination/assets/gpt/mockups/card_flatlay.png` · 1024×1536
 
 ```
-Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a palm-leaf patterned travel wallet on a light rattan tray on white sand, with monstera leaves, pink hibiscus, white plumeria and a few seashells at the edges. Soft natural light, gentle shadows, no text, no logos.
+Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a bright white travel wallet with a slim tan leather strap, its palm-leaf liner peeking out on a light rattan tray on white sand, with monstera leaves, pink hibiscus, white plumeria and a few seashells at the edges. Soft natural light, gentle shadows, no text, no logos.
 ```
 Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.

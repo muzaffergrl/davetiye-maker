@@ -6,7 +6,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 
 | Eksen | Bu tasarım |
 |---|---|
-| Zarf / açılış | Fildişi V kapaklı zarf, zeytin yeşili mum mühür; kapak yukarı açılır, kart yükselir. |
+| Zarf / açılış | Zeytin yeşili dokulu kağıt zarf, fildişi dantel kenarlı V kapak, botanik oval mühür; kapak mühürle birlikte kalkar, kart yükselir. |
 | Fotoğraf sunumu | Yuvarlak köşeli ince altın çerçeveli kartlar, yelpaze gibi açılır. |
 | Dekor ailesi | Zeytin dalları ve küçük zeytinler |
 | Teknik | suluboya (soft watercolor) |
@@ -16,7 +16,7 @@ Kaynak: `tools/katalog.py` (Aşama 1 kataloğu, `docs/09_TASARIM_KATALOGU.md`). 
 ## Sahneler (9:16, 1080×1920 — hikâye sırası AGENTS.md şart 4)
 | # | Sahne | Bu tasarımda |
 |---|---|---|
-| 1 | Kapalı zarf / kapak | Fildişi V kapaklı zarf, zeytin yeşili mum mühür; kapak yukarı açılır, kart yükselir. |
+| 1 | Kapalı zarf / kapak | Zeytin yeşili dokulu kağıt zarf, fildişi dantel kenarlı V kapak, botanik oval mühür; kapak mühürle birlikte kalkar, kart yükselir. |
 | 2 | Açılış, kart yükselir | Kapanış elemanı (mühür/kurdele/toka) ayrı katman olarak çözülür; kart ayrı katman. |
 | 3 | Our Story — 3 fotoğraf | Yuvarlak köşeli ince altın çerçeveli kartlar, yelpaze gibi açılır. |
 | 4 | Davet kartı | Aileler, isimler, davet cümlesi, tarih bloğu, mekân. Dekor: Zeytin dalları ve küçük zeytinler. |

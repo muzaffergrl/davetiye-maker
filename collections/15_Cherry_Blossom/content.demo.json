@@ -21,7 +21,7 @@
   "venue": {
     "name": "Blossom Hill Gardens",
     "city": "Washington",
-    "region": "District of Columbia",
+    "region": "D.C.",
     "country": "USA",
     "address": null
   },
@@ -62,7 +62,7 @@
   },
   "optional_blocks": {
     "our_story": true,
-    "countdown": false,
+    "countdown": true,
     "dress_code": true,
     "registry": true,
     "travel_stay": true,
