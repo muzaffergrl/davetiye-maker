@@ -2,11 +2,11 @@
 id: G045
 baslik: /start sahiplenme akışı — sipariş no + e-posta → taslak site + düzenleme linki
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-platform
 oncelik: 2
 bagimli: [G039]
-yazar: [platform/app/start/, platform/lib/claim/]
+yazar: [platform/app/start/, platform/app/api/start/, platform/lib/claim/, platform/tests/claim.test.ts, platform/tests/claim-browser.ts, platform/previews/g045/]
 ---
 
 ## Amaç
@@ -19,3 +19,6 @@ Etsy alıcısı satın aldıktan sonra kendi sitesini başlatır.
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-13 alindi: wf-platform
