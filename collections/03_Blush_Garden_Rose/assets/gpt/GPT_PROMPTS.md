@@ -211,6 +211,52 @@ Kontrol: orta-üst boş; yazı yok; aynı çiçek ve zarf.
 
 ---
 
+## PAKET 2 — Örnek fotoğraflar (görev G036 · website demosu ve ilan için)
+
+Kurgusal çift; alıcı kendi fotoğraflarını koyar. **Aynı sohbette sırayla üret**; 2.1'den sonra her prompt'ta
+"same couple as in the first image" korunur. Gerçek veya ünlü birine benzemesin; eller/parmaklar düzgün.
+Fotoğraflar kemerli (üstü yuvarlak) çerçevelere girecek: **yüzler ve önemli kısım ortadaki %70'lik alanda**,
+başın üstünde boşluk kalsın (kemerin tepesi kırpar). Renk dünyası: blush, krem, adaçayı yeşili, sıcak altın ışık.
+
+### 2.1 Ana portre
+**Kaydet:** `collections/03_Blush_Garden_Rose/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1536)
+
+```
+Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other beneath a climbing-rose arch in a lush garden at golden hour; she wears a flowing blush-pink chiffon dress, he wears a light sand-beige suit with no tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field with creamy blush and green bokeh. Both faces in the central area of the frame with generous space above their heads. Vertical photo, no text, no watermark.
+```
+
+### 2.2 Hikâye 1 — "First hello"
+**Kaydet:** `collections/03_Blush_Garden_Rose/assets/gpt/photos/story_1.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, a candid first-date moment laughing together at a small round café table in a sunlit garden courtyard with two teacups and a little vase of pink roses, warm afternoon light, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.
+```
+
+### 2.3 Hikâye 2 — "The proposal"
+**Kaydet:** `collections/03_Blush_Garden_Rose/assets/gpt/photos/story_2.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, the proposal moment in a rose garden path lined with blush peonies at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, soft golden light, true-to-life colors, soft film look, vertical photo, no text, no watermark.
+```
+
+### 2.4 Hikâye 3 — "Forever begins"
+**Kaydet:** `collections/03_Blush_Garden_Rose/assets/gpt/photos/story_3.jpg` · Dikey (1024×1536)
+
+```
+Same couple as in the first image, close-up of their hands intertwined showing a delicate engagement ring, holding a small bouquet of blush peonies and cream garden roses, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.
+```
+
+### 2.5 Mekân
+**Kaydet:** `collections/03_Blush_Garden_Rose/assets/gpt/photos/venue.jpg` · Yatay (1536×1024)
+
+```
+A fictional elegant Victorian glass conservatory wedding venue in a Southern garden at golden hour: white iron-and-glass greenhouse with arched windows, climbing roses and potted palms, rows of white ceremony chairs leading to a floral arch of blush peonies and cream roses, warm soft light, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.
+```
+
+Kontrol (tüm fotoğraflar): aynı çift tutarlı; yüzler doğal; eller/parmaklar düzgün; yazı/logo yok; konu ortada.
+
+---
+
 ## PAKET 3 — Etsy ilan mockup'ları (görev G803)
 
 Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.

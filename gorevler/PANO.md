@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 2 · alindi 1 · inceleme 0 · blokaj 330 · bitti 13 · toplam 346
+Özet: hazir 3 · alindi 1 · inceleme 0 · blokaj 330 · bitti 13 · toplam 347
 
 ## claude-canva
 
@@ -329,9 +329,10 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (2)**
+**Alınabilir (3)**
 
 - `G011` p1 — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak) → `gorevler/G011-v01-paket2-fotograflar.md`
+- `G036` p1 — Tasarım 03 — örnek çift ve mekân fotoğrafları (Paket 2, website demosu) → `gorevler/G036-ornek-fotograflar-03.md`
 - `G013` p3 — V01 Paket 3 — Etsy mockup'ları (3 görsel) → `gorevler/G013-v01-paket3-mockup.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (64)**
