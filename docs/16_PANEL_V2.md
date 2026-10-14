@@ -419,6 +419,14 @@ Panel durumu sunucuda üretilir (anında). Önizleme iframe'i ilk açılışta y
 
 ## 11. Düzenleme hakkı modeli (anti-abuse)
 
+> **G060-fix (2026-10-14, inceleme bulguları — uygulanan kural bu belgenin aşağıdaki ilk tasarımından farklı):** tarih karakterle
+> değil **günle** ölçülür (çapadan ±7 gün ücretsiz; §11.3 tablosundaki "2027-06-12 → 2027-06-21 typo" artık 1 değişiklik);
+> **soyadı ekleme/çıkarma** (ilk isim aynı) ücretsiz; son sayılan değişikliğin **geri alınması** yayından önce ya da 10 dk içinde
+> ücretsiz ve hakkı iade eder; örnek tarihle yayınlanmış sitede gerçek tarih bir kez ücretsiz, ilk yayın örnek tarihte onay ister;
+> arşiv sayılan tarihten hesaplanır; panel önizlemesi kısa ömürlü jetonla, kalıcı önizleme anahtarında "Preview — not published"
+> şeridi ve arşivde/18 aylık yayınlanmamış taslakta 410 (§11.11 "önizlemeyi site gibi kullanmak" satırı kapandı). Ayrıntı:
+> `platform/README.md` "G060-fix".
+
 ### 11.1 Kurallar (görev metni, aynen)
 1. **Tek sipariş = tek site** (var: `/start` + `orders/<no>` dizini, G045/G048).
 2. **Kimlik alanları = çift isimleri + düğün tarihi.** İlk yayından **sonra** bunlar için **3 değişiklik hakkı** (varsayılan).
@@ -567,6 +575,12 @@ interface Identity { names: { display: string; full: string }[]; shown: string; 
 | Serbest metinlere başka isim yazmak (story, host line) | zarf, başlık, `og:title`, davet kartı kimlikten gelir | kabul |
 | Tarihi kaydırıp süresiz barındırma | arşiv tarihi + tavan önerisi | — |
 | Düzenleme linkini paylaşmak | engellenemez; Share'de uyarı | — |
+| **Şifreli site (G076):** şifresiz görmek — sayfa, doğrudan `/media/<id>`, `.ics`, RSVP POST/durum | her misafir rotası siteye özel çerez ister: sayfa = şifre sayfası, foto 401, `.ics` 303 → şifre sayfası, RSVP 401 (saklanmaz); arşiv 410 ve yayında olmayan 404 önce | şifre açılmadan önce CDN'deki foto ≤ 5 dk |
+| G076: başka sitenin çerezi, sahte/uzatılmış çerez, şifre değişince eski misafir | `__Host-` çerez = HMAC(site sırrı; site id + sürüm + süre), 90 gün; şifre değişince sürüm +1 → eski çerezler geçersiz | — |
+| G076: kaba kuvvet / zamanlama | yalnız yanlışlar sayılır: IP+site 10/15 dk, IP 30/15 dk, doluyken doğru şifre de 429; paylaşımlı sayaç (blob); SHA-256 + `timingSafeEqual` | kısa şifre + çok IP (öneri ~830 bin olasılık) |
+| G076: CDN'in korumalı yanıtı başkasına vermesi | `private, no-store` + `Vary: Cookie` (foto `private, max-age=300`) | — |
+| G076: açık yönlendirme / başka sitenin denemeleri harcaması | form aynı adrese, `Location` denetlenmiş slug'dan göreli, `next` yok; `Sec-Fetch-Site: cross-site` → 403, SameSite=Lax | başlık göndermeyen eski tarayıcı |
+| G076: bağlantı önizlemesi / arama motoru | şifre sayfası ve açık sayfalarda meta = isimler + "You're invited"; `noindex`; site haritasında çift sitesi yok | — |
 
 ---
 
@@ -701,7 +715,7 @@ adımlarına göre), ilan metni (hak ve arşiv cümleleri §11.7'den, aynen).
 | 3 | Barındırma tavanı (`firstPublishedAt + 48 ay`) | kabul |
 | 4 | Destek kanalı ve hak ekleme politikası | `[SUPPORT EMAIL]` açılınca; ertelemede 1 hak |
 | 5 | Panel dışı önizlemede "Preview — not published" şeridi | kabul |
-| 6 | Şifreli site (misafir parolası) — rakiplerde var | v2 dışında; ayrı görev adayı |
+| 6 | Şifreli site (misafir parolası) — rakiplerde var | K28 → G076'da yapıldı (isteğe bağlı, varsayılan kapalı; `platform/README.md` "Site şifresi") |
 | 7 | Karanlık mod | v2 dışında |
 | 8 | Adres (slug) ilk yayından önce bir kez değiştirilebilsin mi? | v2 dışında (adaptör + `/start` değişikliği) |
 

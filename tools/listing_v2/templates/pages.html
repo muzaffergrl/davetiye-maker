@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LC2 pages</title>
+<style>{{fonts_css}}</style>
+<style>{{base_css}}</style>
+<style>
+  /* GM03 lc2_pages: iki satırlık başlık, telefonlar bir sırada, her birinin altında sayfa adı (hap), logo altta ortada.
+     GPT sahnesinde 3 telefon var: 3 sayfa gösterilir ve yalnız gösterilenler yazılır. */
+  .h1 { top: {{h1_top}}px; font-size: 186px; }
+  .cap { position: absolute; top: {{cap_top}}px; transform: translateX(-50%); height: 96px; padding: 0 52px; font-size: 48px; }
+  .logo { left: 50%; transform: translateX(-50%); bottom: 86px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <img class="bg" src="{{bg}}" alt="">
+  <div class="h1 center-x" data-kutu="baslik" data-fit="1500">Every page<br>your guests need</div>
+  {{captions}}
+  <div class="logo chip" data-kutu="logo">{{logo}}</div>
+</div>
+<script>{{fit_js}}</script>
+</body>
+</html>

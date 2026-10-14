@@ -30,7 +30,9 @@ import {
   prePublishNotes,
   previewPhotoUrl,
   sameContent,
+  sampleDateLeft,
   sampleNotes,
+  sampleSummaries,
   SECTION_IDS,
   sectionForPath,
   shapeLabel,
@@ -138,7 +140,7 @@ async function exifJpeg(width: number, height: number): Promise<Uint8Array> {
 // ---------------------------------------------------------------------------------------------
 // Keys
 
-test('edit key: good key opens the panel state; preview key is derived from it', async () => {
+test('edit key: good key opens the panel state with a short-lived preview token (never the long-lived preview key)', async () => {
   const r = await call(stateRoute, 'panel-site', { key: site.editKey });
   assert.equal(r.status, 200);
   assert.equal(r.headers.get('cache-control'), 'private, no-store');
@@ -146,8 +148,12 @@ test('edit key: good key opens the panel state; preview key is derived from it',
   const s = r.data.state;
   assert.equal(s.slug, 'panel-site');
   assert.equal(s.status, 'draft');
-  assert.equal(s.previewKey, site.previewKey);
-  assert.equal(s.previewKey, derivePreviewKey(site.editKey));
+  assert.equal(s.previewKey, undefined, 'G060-fix: the long-lived preview key is not sent to the panel');
+  assert.ok(!JSON.stringify(r.data).includes(site.previewKey));
+  assert.equal(site.previewKey, derivePreviewKey(site.editKey));
+  assert.match(s.previewToken, /^\d{10}\.[A-Za-z0-9_-]{43}$/);
+  const exp = Number(s.previewToken.split('.')[0]) * 1000;
+  assert.ok(exp - Date.now() > 10.9 * 3600_000 && exp - Date.now() <= 12 * 3600_000, 'valid for 11 to 12 hours');
   assert.equal(s.origin, BASE);
   assert.equal(s.content.name_display, 'Clara & Julian');
   assert.deepEqual(s.theme.pages, ['index', 'home', 'story', 'details', 'rsvp']);
@@ -602,16 +608,16 @@ test('withPartnerName keeps the automatic names and monogram in step, never a cu
   assert.equal(defaultInitials(c.partners, true), 'E & M');
 });
 
-test('withPartnerName: the full name (invitation card) follows the first name until it is changed by hand', () => {
-  // A /start draft: full name = the typed first name.
+test('withPartnerName: an empty full name stays empty (the design shows the first name); a copy of the first name follows it', () => {
+  // A /start draft (G060-fix): full names empty, so a surname added later is never counted as a new name.
   let c = draftFromDemo(demoContent(), ['Mia', 'Theo']);
-  assert.equal(c.partners[0].full_name, 'Mia');
+  assert.deepEqual(c.partners.map((p) => p.full_name), [null, null]);
   c = withPartnerName(c, 0, 'display_name', 'Ava');
   c = withPartnerName(c, 1, 'display_name', 'Noah');
-  assert.deepEqual(c.partners.map((p) => p.full_name), ['Ava', 'Noah']);
+  assert.deepEqual(c.partners.map((p) => p.full_name), [null, null]);
   assert.equal(c.name_display, 'Ava & Noah');
-  // an empty full name follows too; a full name typed by hand never does
-  c = withPartnerName(c, 0, 'full_name', '');
+  // a draft from before G060-fix (full name = first name) keeps following; a full name typed by hand never does
+  c = withPartnerName(c, 0, 'full_name', 'Ava');
   c = withPartnerName(c, 0, 'display_name', 'Avery');
   assert.equal(c.partners[0].full_name, 'Avery');
   c = withPartnerName(c, 1, 'full_name', 'Noah James Hart');
@@ -808,4 +814,29 @@ test('G051 panel helpers: section of faq paths, notes for an empty Q&A block and
   assert.notEqual(id, 'qaaaaaa');
   assert.match(id, QUESTION_ID_RE);
   for (let i = 0; i < 50; i++) assert.match(newQuestionId([]), /^q[a-z0-9]{6}$/);
+});
+
+test('G060-fix: time zone sample note, sample date, short sample lines per section, host line under Details', () => {
+  const demo = JSON.parse(readFileSync(path.join(PLATFORM_ROOT, 'lib/claim/demo/blush-garden-rose.json'), 'utf8')) as ContentRecord;
+  const theme = { sample: demo, optionalBlocks: ['our_story', 'dress_code'] as OptionalBlockKey[], photos: [] };
+  const claimed = draftFromDemo(demo, ['Mia', 'Theo']);
+  // The design's time zone is flagged, unless this phone is in that very zone (no false alarm for a New York couple).
+  assert.ok(prePublishNotes(claimed, theme).sample.some((n) => n.path === 'timezone' && /Time zone: still the design/.test(n.message)));
+  assert.ok(prePublishNotes(claimed, theme, { deviceZone: 'Europe/London' }).sample.some((n) => n.path === 'timezone'));
+  assert.ok(!prePublishNotes(claimed, theme, { deviceZone: demo.timezone }).sample.some((n) => n.path === 'timezone'));
+  // The first publish is held while the date is still the sample date.
+  assert.equal(sampleDateLeft(claimed, demo), true);
+  assert.equal(sampleDateLeft({ ...claimed, date: '2027-09-26' }, demo), false);
+  assert.equal(sampleDateLeft(claimed, null), false);
+  // One short line per section instead of the raw messages joined together.
+  const lines = sampleSummaries(prePublishNotes(claimed, theme).sample);
+  const story = lines.find((l) => l.section === 'story')!;
+  assert.match(story.what, /^story intro and \d+ captions$/);
+  const schedule = lines.find((l) => l.section === 'schedule')!;
+  assert.match(schedule.what, /^\d+ event places?$/);
+  assert.ok(!lines.some((l) => /sample text\.|is a sample place/.test(l.what)), JSON.stringify(lines));
+  // The host line is free text (Details), not part of the names.
+  assert.equal(sectionForPath('host_line'), 'details');
+  assert.ok(lines.find((l) => l.section === 'details')?.what.includes('host line'));
+  assert.ok(!lines.some((l) => l.section === 'names'), 'Names has no sample text once the names are typed');
 });

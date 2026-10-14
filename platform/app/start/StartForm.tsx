@@ -38,6 +38,8 @@ interface ClaimResultView {
   editPath: string;
   siteUrl: string;
   emailSent: boolean;
+  /** The shop confirms the order before the site can be published (manual checks, G060-fix). */
+  orderPending: boolean;
   email: string;
 }
 
@@ -344,6 +346,7 @@ function ClaimForm({
           editPath: String(body.editPath),
           siteUrl: String(body.siteUrl),
           emailSent: body.emailSent === true,
+          orderPending: body.orderPending === true,
           email: email.trim(),
         });
         return;
@@ -692,6 +695,11 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
           Your website address will be <strong className={styles.breakAll}>{result.siteUrl}</strong>. It stays a private draft until you
           press Publish in the editor.
         </p>
+        {result.orderPending ? (
+          <p className={styles.small} data-order-pending="">
+            We are confirming your Etsy order. You can set up everything now; Publish opens as soon as the order is confirmed.
+          </p>
+        ) : null}
         <button type="button" className={styles.linkButton} onClick={onStartOver}>
           Start another website
         </button>

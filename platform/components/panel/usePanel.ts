@@ -18,8 +18,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
-import { panelIssues, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
+import { panelIssues, previewTokenExpiry, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
 import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
+import { NO_GUEST_ACCESS, type GuestAccessView } from '../../lib/panel/guest-access.ts';
 import { panelApi } from './api.ts';
 
 export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'offline' | 'conflict' | 'unauthorized' | 'refused';
@@ -44,10 +45,19 @@ export interface IdentityOutcome {
   ok: boolean;
   status: number;
   code?: string;
-  result?: 'unchanged' | 'free' | 'typo' | 'change';
+  result?: 'unchanged' | 'free' | 'typo' | 'undo' | 'sample_date' | 'change';
   message?: string;
   remaining?: number;
   issues?: ValidationIssue[];
+}
+
+export interface AccessOutcome {
+  ok: boolean;
+  status: number;
+  code?: string;
+  message?: string;
+  /** A new password: guests who entered the old one are asked again (G076). */
+  signedOut?: boolean;
 }
 
 export interface LocalBackup {
@@ -63,8 +73,22 @@ function metaFrom(body: Record<string, unknown>, fallback: PanelMeta): PanelMeta
     publishedAt: typeof body.publishedAt === 'string' || body.publishedAt === null ? (body.publishedAt as string | null) : fallback.publishedAt,
     hasUnpublishedChanges: typeof body.hasUnpublishedChanges === 'boolean' ? body.hasUnpublishedChanges : fallback.hasUnpublishedChanges,
     rights: body.rights && typeof body.rights === 'object' ? (body.rights as RightsView) : fallback.rights,
+    // Same value for a whole hour (lib/keys.ts), so the preview frame keeps its address between saves.
+    previewToken: typeof body.previewToken === 'string' && body.previewToken ? body.previewToken : fallback.previewToken,
+    orderPending: typeof body.orderPending === 'boolean' ? body.orderPending : fallback.orderPending,
+    guestAccess: guestAccessFrom(body.guestAccess) ?? fallback.guestAccess,
   };
 }
+
+function guestAccessFrom(value: unknown): GuestAccessView | null {
+  if (!value || typeof value !== 'object') return null;
+  const v = value as Record<string, unknown>;
+  if (typeof v.enabled !== 'boolean') return null;
+  return { enabled: v.enabled, password: typeof v.password === 'string' && v.password ? v.password : null };
+}
+
+/** Renew the preview token this long before it runs out (an idle tab, the phone asleep). */
+const TOKEN_RENEW_MS = 60 * 60_000;
 
 const backupKey = (slug: string) => `draft:${slug}`;
 
@@ -103,6 +127,9 @@ export function usePanel(initial: PanelState, editKey: string) {
     publishedAt: initial.publishedAt,
     hasUnpublishedChanges: initial.hasUnpublishedChanges,
     rights: initial.rights,
+    previewToken: initial.previewToken,
+    orderPending: initial.orderPending,
+    guestAccess: initial.guestAccess ?? NO_GUEST_ACCESS,
   });
   const [saveState, setSaveState] = useState<SaveState>('saved');
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -300,7 +327,8 @@ export function usePanel(initial: PanelState, editKey: string) {
         if (body.identity && typeof body.identity === 'object') replaceContent(withIdentity(contentRef.current, body.identity as Identity));
         setPreviewVersion((n) => n + 1);
         keepBackup();
-        return { ok: true, status: res.status, result: body.result as IdentityOutcome['result'] };
+        const rights = body.rights as RightsView | undefined;
+        return { ok: true, status: res.status, result: body.result as IdentityOutcome['result'], remaining: rights?.remaining };
       }
       stopOn(res.status, body);
       return {
@@ -313,6 +341,26 @@ export function usePanel(initial: PanelState, editKey: string) {
       };
     },
     [api, enqueue, flush, keepBackup, replaceContent],
+  );
+
+  /**
+   * Guest password on/off or a new one (G076, POST /access). Runs in the save queue: it changes updatedAt, so a save typed
+   * meanwhile is sent after it with the new version. Applies to the live website at once (no publish).
+   */
+  const setGuestAccess = useCallback(
+    async (enabled: boolean, password?: string): Promise<AccessOutcome> => {
+      const res = await enqueue(() => api.access(enabled, password));
+      const body = res.body as Record<string, unknown> & { code?: string; message?: string };
+      if (res.ok) return { ok: true, status: res.status, signedOut: body.signedOut === true };
+      stopOn(res.status, body);
+      return {
+        ok: false,
+        status: res.status,
+        code: body.code,
+        message: res.status === 0 ? 'No connection. Please try again when you are back online.' : body.message,
+      };
+    },
+    [api, enqueue],
   );
 
   const uploadPhoto = useCallback(
@@ -406,6 +454,29 @@ export function usePanel(initial: PanelState, editKey: string) {
 
   useEffect(() => () => clearTimer(), []);
 
+  // The preview token is short-lived (G060-fix): every answer renews it; a tab left open (or a phone asleep) asks for a
+  // fresh one before it runs out, when it is shown again and every 15 minutes.
+  useEffect(() => {
+    const renew = () => {
+      const exp = previewTokenExpiry(metaRef.current.previewToken);
+      if (document.visibilityState === 'hidden' || (exp !== null && exp - Date.now() > TOKEN_RENEW_MS)) return;
+      void api.state().then((res) => {
+        const state = (res.body as { state?: Record<string, unknown> }).state;
+        if (res.ok && state && typeof state.previewToken === 'string') {
+          const next = { ...metaRef.current, previewToken: state.previewToken };
+          metaRef.current = next;
+          setMeta(next);
+        }
+      });
+    };
+    const timer = window.setInterval(renew, 15 * 60_000);
+    document.addEventListener('visibilitychange', renew);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', renew);
+    };
+  }, [api]);
+
   const validation = useMemo(() => {
     const result = validateContent(content, { platform: true });
     const errors = panelIssues(result.errors, content);
@@ -436,6 +507,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     publish,
     unpublish,
     changeIdentity,
+    setGuestAccess,
     uploadPhoto,
     removePhoto,
     restoreBackup,

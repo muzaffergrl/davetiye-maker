@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LC1 cover</title>
+<style>{{fonts_css}}</style>
+<style>{{base_css}}</style>
+<style>
+  /* GM03 lc1_cover: büyük başlık, ince alt satır, üç hap; telefon altta ortada; logo sağ altta */
+  .h1 { top: {{h1_top}}px; font-size: 214px; }
+  .sub { top: {{sub_top}}px; font-size: 100px; }
+  .pills { top: {{pills_top}}px; }
+  .logo { right: 84px; bottom: 84px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <img class="bg" src="{{bg}}" alt="">
+  <div class="h1 center-x" data-kutu="baslik" data-fit="1780">Wedding Website</div>
+  <div class="sub center-x" data-kutu="alt_satir" data-fit="1500">Opens like a real invitation</div>
+  <div class="pills center-x" data-kutu="haplar">
+    <span class="pill" data-kutu="hap">Edit on your phone</span>
+    <span class="pill" data-kutu="hap">Online RSVP</span>
+    <span class="pill" data-kutu="hap">Instant access</span>
+  </div>
+  <div class="logo chip" data-kutu="logo">{{logo}}</div>
+</div>
+<script>{{fit_js}}</script>
+</body>
+</html>

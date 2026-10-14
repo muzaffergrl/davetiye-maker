@@ -14,7 +14,11 @@ import { GET as panelStateRoute } from '../app/api/edit/[slug]/route.ts';
 import { GET as siteRoute } from '../app/[slug]/route.ts';
 import { CLAIM_RETRY_WINDOW_MS, claimSite, draftFromDemo, findFreeSlug, slugAvailability, type ClaimContext } from '../lib/claim/claim.ts';
 import { reissueEditLink } from '../scripts/reissue-edit-key.ts';
-import { publishSite } from '../lib/sites.ts';
+import { confirmOrder, publishSite } from '../lib/sites.ts';
+import { POST as publishRoute } from '../app/api/edit/[slug]/publish/route.ts';
+import { describeOrder } from '../scripts/verify-order.ts';
+import { BlobAdapter } from '../lib/data/blob/index.ts';
+import { FakeBlobStore } from './fake-blob.ts';
 import { BUNDLED_DEMO_CONTENT, DEMO_SOURCES } from '../lib/claim/demo/index.ts';
 import {
   claimFieldErrors,
@@ -29,7 +33,7 @@ import {
   slugWithSuffix,
   suggestSlugBase,
 } from '../lib/claim/fields.ts';
-import { DEFAULT_CLAIM_LIMITS, setClaimRateLimiter } from '../lib/claim/limits.ts';
+import { AdapterRateLimiter, DEFAULT_CLAIM_LIMITS, setClaimRateLimiter } from '../lib/claim/limits.ts';
 import { DisabledMailer, getEditLinkMailer, setEditLinkMailer, type EditLinkMessage } from '../lib/claim/mailer.ts';
 import { claimableTheme, claimableThemes } from '../lib/claim/themes.ts';
 import { FormatOnlyVerifier, getOrderVerifier, setOrderVerifier, VerifierConfigError, type OrderCheckInput } from '../lib/claim/verify.ts';
@@ -223,9 +227,10 @@ test('draftFromDemo: customer record with the buyer names, demo left untouched',
   const demo = demoContent();
   const draft = draftFromDemo(demo, ['Avery', 'Jordan']);
   assert.equal(draft.record_kind, 'customer');
+  // G060-fix: full names stay empty (the designs show the first name; a surname added later is free)
   assert.deepEqual(draft.partners, [
-    { display_name: 'Avery', full_name: 'Avery' },
-    { display_name: 'Jordan', full_name: 'Jordan' },
+    { display_name: 'Avery', full_name: null },
+    { display_name: 'Jordan', full_name: null },
   ]);
   assert.equal(draft.name_display, 'Avery & Jordan');
   assert.equal(draft.initials, 'A&J');
@@ -638,4 +643,68 @@ test('demo pages: theme rendered with its demo content, links stay under /start/
       : await demoIndexRoute(new Request(`${BASE}/start/demo/${theme}`), { params: Promise.resolve({ theme }) });
     assert.equal(res.status, 404, `${theme}/${page}`);
   }
+});
+
+// ---------------------------------------------------------------------------------------------
+// G060-fix: manual order checks, shared limiter
+
+test('G060-fix: CLAIM_ORDER_VERIFICATION=manual — draft at once, no publishing / shared preview until the shop confirms the order', async () => {
+  process.env.CLAIM_ORDER_VERIFICATION = 'manual';
+  try {
+    assert.equal(getOrderVerifier().kind, 'manual');
+    const order = freshOrder();
+    const r = await postClaim(form({ orderNumber: order, names: ['Ida', 'Ben'] }));
+    assert.equal(r.status, 201);
+    assert.equal(r.body.orderPending, true);
+    const site = (await getDataAdapter().findSitesByOrderRef(order))[0];
+    assert.equal(site.orderCheck?.status, 'pending');
+    // the panel says so; publishing is refused
+    const editKey = new URL(r.body.editUrl).searchParams.get('k')!;
+    const auth = { headers: { authorization: `Bearer ${editKey}` } };
+    const state = await (await panelStateRoute(new Request(`${BASE}/api/edit/${site.slug}`, auth), { params: Promise.resolve({ slug: site.slug }) })).json();
+    assert.equal(state.state.orderPending, true);
+    const pub = await publishRoute(new Request(`${BASE}/api/edit/${site.slug}/publish`, { method: 'POST', ...auth }), { params: Promise.resolve({ slug: site.slug }) });
+    assert.equal(pub.status, 403);
+    assert.equal(((await pub.json()) as Json).code, 'order_pending');
+    // only the panel's own preview works meanwhile (the long-lived preview key opens nothing)
+    const keys = (await import('../lib/keys.ts')) as typeof import('../lib/keys.ts');
+    const previewKey = keys.derivePreviewKey(editKey);
+    assert.equal((await siteRoute(new Request(`${BASE}/${site.slug}?preview=${previewKey}`), { params: Promise.resolve({ slug: site.slug }) })).status, 404);
+    const token = state.state.previewToken as string;
+    assert.equal((await siteRoute(new Request(`${BASE}/${site.slug}?preview=${encodeURIComponent(token)}`), { params: Promise.resolve({ slug: site.slug }) })).status, 200);
+    // the shop confirms it (operator tool) -> publishing works
+    await assert.rejects(confirmOrder(getDataAdapter(), site.id, '  '), /reason/);
+    const confirmed = await confirmOrder(getDataAdapter(), site.id, 'Etsy receipt paid, Blush listing');
+    assert.equal(confirmed.orderCheck?.status, 'verified');
+    assert.match(describeOrder(confirmed), /confirmed .* by support/);
+    const pub2 = await publishRoute(new Request(`${BASE}/api/edit/${site.slug}/publish`, { method: 'POST', ...auth }), { params: Promise.resolve({ slug: site.slug }) });
+    assert.equal(pub2.status, 200);
+  } finally {
+    delete process.env.CLAIM_ORDER_VERIFICATION;
+  }
+  // checks off (the default): no order check is recorded, publishing is not held
+  const off = await postClaim(form());
+  assert.equal(off.body.orderPending, false);
+});
+
+test('G060-fix: the /start limits are shared by every server instance when the storage has a shared counter', async () => {
+  const fake = new FakeBlobStore();
+  const [one, two] = [0, 1].map(() => new BlobAdapter({ token: fake.token, client: fake.client(), retryDelayMs: () => 1 }));
+  const rule = { limit: 5, windowMs: 60_000 };
+  const a = new AdapterRateLimiter(one);
+  const b = new AdapterRateLimiter(two);
+  const results = [];
+  for (let i = 0; i < 6; i++) results.push(await (i % 2 ? b : a).hit('claim:sites:203.0.113.9', rule));
+  assert.deepEqual(results.map((r) => r.allowed), [true, true, true, true, true, false], 'the 6th is refused whichever instance answers');
+  // parallel hits on two instances are all counted (conditional writes)
+  const parallel = await Promise.all([0, 1, 2, 3].map((i) => (i % 2 ? b : a).hit('claim:attempt:x', { limit: 100, windowMs: 60_000 })));
+  assert.deepEqual(parallel.map((r) => 100 - r.remaining).sort(), [1, 2, 3, 4]);
+  // a new window starts after the old one ends
+  let now = 1_000_000;
+  const clock = new BlobAdapter({ token: fake.token, client: fake.client(), retryDelayMs: () => 1, now: () => now });
+  const c = new AdapterRateLimiter(clock, () => now);
+  assert.equal((await c.hit('w', { limit: 1, windowMs: 1000 })).allowed, true);
+  assert.equal((await c.hit('w', { limit: 1, windowMs: 1000 })).allowed, false);
+  now += 1001;
+  assert.equal((await c.hit('w', { limit: 1, windowMs: 1000 })).allowed, true);
 });

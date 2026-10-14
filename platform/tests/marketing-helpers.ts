@@ -14,7 +14,7 @@ export function readyConfig(over: Partial<MarketingConfig> = {}): MarketingConfi
     support: { email: 'hello@example.com', responseTime: '24 hours' },
     etsy: { shopUrl: 'https://www.etsy.com/shop/ExampleShop', shopName: 'ExampleShop' },
     policies: { refund: 'Refund text', lostLink: 'Lost link text', extension: 'Extension text', deletion: 'Deletion text', retention: 'Retention text' },
-    verified: { editRights: true, archive: true, realDevices: false, privacyText: true },
+    verified: { editRights: true, archive: true, realDevices: false, privacyText: true, orderCheck: true },
     designs: base.designs.map((d) => ({ ...d, price: '29.40', etsyListingUrl: `https://www.etsy.com/listing/1234567890/${d.id}?ref=share` })),
     ...over,
   };

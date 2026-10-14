@@ -62,6 +62,9 @@ export function panelApi(slug: string, editKey: string) {
     identity: (identity: Identity, intent: 'fix' | 'change', baseUpdatedAt: string) =>
       call<Record<string, unknown>>(`${base}/identity`, jsonInit('POST', { identity, intent, baseUpdatedAt })),
     unpublish: () => call<Record<string, unknown>>(`${base}/unpublish`, { method: 'POST', headers: auth }),
+    /** Guest password (G076): on/off, or a new password. */
+    access: (enabled: boolean, password?: string) =>
+      call<Record<string, unknown>>(`${base}/access`, jsonInit('POST', password === undefined ? { enabled } : { enabled, password })),
     replies: () => call<Record<string, unknown>>(`/api/rsvp/${encodeURIComponent(slug)}/responses`, { headers: auth }),
     /** "remove" deletes replies for good; "keep" releases replies held for review. Answers with the new summary. */
     manageReplies: (action: 'remove' | 'keep', ids: string[]) =>

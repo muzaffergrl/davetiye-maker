@@ -38,6 +38,7 @@ import { isPlaceholder, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import {
   photoAt,
   publicSiteUrl,
+  sampleSummaries,
   SECTION_GROUPS,
   SECTION_TITLES,
   sectionForPath,
@@ -46,12 +47,13 @@ import {
   type PublishNote,
   type SectionId,
 } from '../../lib/panel/model.ts';
-import { ARCHIVE_AFTER_MONTHS, IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE } from '../../lib/panel/rights.ts';
-import { SIGN_IN_UNAVAILABLE } from '../../lib/panel/signin.ts';
+import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { rsvpClosesAt } from '../../lib/rsvp/deadline.ts';
 import type { PanelApi } from './api.ts';
+import type { AccessOutcome } from './usePanel.ts';
 import { StatusBadges } from './fields.tsx';
 import { QrCode } from './QrCode.tsx';
+import { GuestPasswordCard } from './GuestPassword.tsx';
 import { zoneCity } from './sections.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, EmptyState, OverflowMenu, RightsMeter, useSnackbar } from './ui.tsx';
@@ -164,17 +166,9 @@ export function nextSteps(
   for (const [s, list] of bySection) {
     out.push({ key: `err-${s}`, tone: 'danger', path: list[0].path, text: `${SECTION_TITLES[s]}: ${list.length === 1 ? list[0].message : `${list.length} things to fix`}` });
   }
-  const sampleBySection = new Map<SectionId, PublishNote[]>();
-  for (const n of notes.sample) {
-    const s = sectionForPath(n.path) ?? 'names';
-    if (!sampleBySection.has(s)) sampleBySection.set(s, []);
-    sampleBySection.get(s)!.push(n);
-  }
-  for (const [s, list] of sampleBySection) {
-    // "Replace the sample venue name and city" — names the fields, so the buyer knows what to look for.
-    const fields = list.map((n) => sampleLabel(n)).filter((v, i, a) => a.indexOf(v) === i);
-    const what = fields.length <= 2 ? fields.join(' and ') : `${fields.slice(0, 2).join(', ')} and ${fields.length - 2} more`;
-    out.push({ key: `sample-${s}`, tone: 'warning', path: list[0].path, text: `${SECTION_TITLES[s]}: replace the sample ${what}` });
+  for (const s of sampleSummaries(notes.sample)) {
+    // "Venue: replace the sample venue name and city" — names the fields, so the buyer knows what to look for.
+    out.push({ key: `sample-${s.section}`, tone: 'warning', path: s.path, text: `${SECTION_TITLES[s.section]}: replace the sample ${s.what}` });
   }
   if (notes.photos.length) {
     out.push({ key: 'photos', tone: 'info', path: notes.photos[0].path, text: `Add your photos (${notes.photos.length} still empty)` });
@@ -188,16 +182,6 @@ export function nextSteps(
     }
   }
   return out.slice(0, 5);
-}
-
-/** "Wedding date: still the sample text." -> "wedding date"; list notes -> "event places", "captions", "questions". */
-export function sampleLabel(n: PublishNote): string {
-  if (/^schedule\./.test(n.path)) return 'event places';
-  if (/^story\.items\./.test(n.path)) return 'captions';
-  if (/^faq\./.test(n.path)) return 'questions';
-  if (/^rsvp\.questions\./.test(n.path)) return 'form questions';
-  const label = n.message.split(':')[0].trim();
-  return label.charAt(0).toLowerCase() + label.slice(1);
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -247,8 +231,8 @@ export function HomeView({
 
       {r.archiveSoon && r.archiveAt ? (
         <Banner tone="warning" icon={Hourglass}>
-          Your website goes into archive on {formatDateLong(r.archiveAt.slice(0, 10), content.locale) ?? r.archiveAt.slice(0, 10)}. Download your replies before
-          then if you want a copy.
+          Your website is online until {r.onlineUntil ? (formatDateLong(r.onlineUntil, content.locale) ?? r.onlineUntil) : 'its archive date'}. {ARCHIVE_TEXT} Download your
+          replies before then if you want a copy on your phone.
         </Banner>
       ) : null}
 
@@ -309,10 +293,7 @@ export function HomeView({
         {r.archived ? (
           <p className={styles.cardText}>Your website is archived: names and date can no longer be changed.</p>
         ) : r.phase === 'before_publish' ? (
-          <p className={styles.cardText}>
-            You can change these freely until you publish. After that, you can change your names or wedding date {IDENTITY_CHANGE_LIMIT} times — fixing a small typo
-            is free.
-          </p>
+          <p className={styles.cardText}>{beforePublishText(IDENTITY_CHANGE_LIMIT)}</p>
         ) : (
           <div className={styles.rightsRow}>
             <Lock size={18} strokeWidth={1.75} aria-hidden="true" />
@@ -377,7 +358,7 @@ function StatusCard({
   let action: { label: string; run: () => void; variant: 'primary' | 'secondary'; icon?: LucideIcon } | null;
   if (r.archived) {
     badge = { tone: 'neutral', text: 'Archived', icon: Archive };
-    text = 'Your website is a read-only archive now. You can still look at your content and download your replies.';
+    text = 'Your website is closed for guests now. You can still see your content and download your replies.';
     action = null;
   } else if (meta.status === 'published' && meta.hasUnpublishedChanges) {
     badge = { tone: 'warning', text: 'Unpublished changes' };
@@ -482,7 +463,8 @@ export function EditListView({
             <ul className={styles.list}>
               {ids.map((id) => {
                 const Icon = SECTION_ICONS[id];
-                const identity = (id === 'names' || id === 'date') && r.phase !== 'before_publish';
+                // One budget for names and date: shown once, on Names, in words that say so (G060-fix).
+                const identity = id === 'names' && r.phase !== 'before_publish';
                 return (
                   <li key={id}>
                     <a href={`#edit/${id}`} id={`section-${id}`} className={styles.row} onClick={(e) => (e.preventDefault(), onOpen(id))} data-section-row={id}>
@@ -496,7 +478,7 @@ export function EditListView({
                           <StatusBadges errors={errorCount(id)} samples={sampleCount(id)} off={offSections.has(id)} />
                           {identity ? (
                             <Badge tone={r.remaining ? 'neutral' : 'warning'} icon={Lock}>
-                              {r.remaining} {r.remaining === 1 ? 'change' : 'changes'} left
+                              {r.remaining} name &amp; date {r.remaining === 1 ? 'change' : 'changes'} left
                             </Badge>
                           ) : null}
                         </span>
@@ -761,6 +743,7 @@ export function ShareView({
   onPublish,
   onOffline,
   onCopy,
+  onGuestAccess,
 }: {
   url: string;
   slug: string;
@@ -771,6 +754,8 @@ export function ShareView({
   onPublish: () => void;
   onOffline: () => void;
   onCopy: (text: string, what: string) => void;
+  /** Guest password on/off or a new one (G076). */
+  onGuestAccess: (enabled: boolean, password?: string) => Promise<AccessOutcome>;
 }) {
   const live = meta.status === 'published';
   const archived = meta.rights.archived;
@@ -817,6 +802,8 @@ export function ShareView({
         </Card>
       ) : null}
 
+      {!archived ? <GuestPasswordCard access={meta.guestAccess} online={online} onSave={onGuestAccess} onCopy={onCopy} /> : null}
+
       <Card title="Your edit link" titleId="share-edit">
         <p className={styles.cardText}>
           <KeyRound size={18} strokeWidth={1.75} aria-hidden="true" className={styles.inlineIcon} />
@@ -829,10 +816,6 @@ export function ShareView({
         </div>
         <p className={styles.hint}>Tip: add this page to your Home Screen to find your editor quickly.</p>
         {orderRef ? <p className={styles.hint}>Your Etsy order number: {orderRef}</p> : null}
-      </Card>
-
-      <Card title="Sign in by email" titleId="share-signin" action={<Badge>Not available yet</Badge>}>
-        <p className={styles.cardText}>{SIGN_IN_UNAVAILABLE}</p>
       </Card>
 
       {live && !archived ? (
@@ -860,11 +843,10 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
       <div className={styles.help}>
         <section data-autofocus={topic === 'changes' || undefined} tabIndex={-1}>
           <h3 className={styles.subTitle}>How do name and date changes work?</h3>
-          <p>
-            Until you publish, you can change everything freely. After you publish, you can change your names and wedding date {total} times. Fixing a small
-            typo (up to {TYPO_MAX_DISTANCE} letters or digits) is free. Everything else — time, venue, schedule, story, photos, details and replies — you can
-            change as often as you like.
-          </p>
+          <p>Until you publish, you can change everything freely. {changesRuleText(total)}</p>
+          <p>{FREE_CHANGES_TEXT}</p>
+          <p>{UNDO_TEXT}</p>
+          <p>Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.</p>
           {r.phase !== 'before_publish' ? (
             <p>
               <strong>
@@ -876,8 +858,7 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
         <section>
           <h3 className={styles.subTitle}>How long does my website stay online?</h3>
           <p>
-            Until {ARCHIVE_AFTER_MONTHS} months after your wedding{until ? ` (${until})` : ''}. Then it becomes a read-only archive: guests can no longer open it, and you can still
-            look at your content and download your replies.
+            Until {ARCHIVE_AFTER_MONTHS} months after your wedding{until ? ` (${until})` : ''}. {ARCHIVE_TEXT}
           </p>
         </section>
         <section>

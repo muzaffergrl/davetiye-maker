@@ -2,7 +2,7 @@
 id: GM03
 baslik: BKE Studio ortak Etsy ilan şablonu — 7 yerleşim/tipografi comp'u + 8 özellik ikonu (GPT tasarlar)
 rol: gpt-gorsel
-durum: alindi
+durum: bitti
 alan: gpt-marka
 oncelik: 1
 bagimli: [GM01]
@@ -27,7 +27,7 @@ Tasarıma özel fotoğraf sahneleri G8NN'de (PAKET 3). Claude bu comp'lara göre
 
 ## Bitti sayılması için
 - [ ] 7 comp `brand/listing/comps/`, 8 ikon `brand/listing/icons/` (gerçek alfa, tek renk)
-- [ ] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
+- [x] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
 
 ## Sonuç
 - Kısım 1: LC1–LC7 üretildi ve Kaydet yollarına kondu: `brand/listing/comps/lc1_cover.png`, `lc2_pages.png`, `lc3_how.png`, `lc4_editor.png`, `lc5_rsvp.png`, `lc6_included.png`, `lc7_demo.png`. LS0 önce düz mesaj olarak paylaşıldı; marka panosu, yatay logo, cover_hand ve three_phones sohbete referans olarak yüklendi. Her üretimde marka panosu referans verildi.
@@ -35,8 +35,11 @@ Tasarıma özel fotoğraf sahneleri G8NN'de (PAKET 3). Claude bu comp'lara göre
 - Yeniden üretimler: LC1 `_v2`, `_v3` (ölçü/saf renk denemeleri; sade ad ilk Olive & Ivory sahnesi); LC2 `_v2`, `_v3` (kamera adalarını kaldırma; `_v3` sade ada seçildi); LC4 `_v2`, `_v3` (bağlantı uçlarını ekran dışındaki telefon çerçevesine taşıma; `_v3` sade ada seçildi). Ana LC prompt'ları aynen kullanıldı; teknik düzeltme denemelerine ortak brief'in ekran/ölçü koşulları ayrıca eklendi.
 - Açık teknik kabul sınırı: imagegen, açık 1024×1024 ve RGB (0,255,0) taleplerine rağmen 1254×1254 RGB PNG ve #00FF00'a yakın, piksel düzeyinde değişken yeşil verdi. Yedi sade dosyanın ölçüsü ve beş ekranlı comp'un piksel değerleri salt okunur kontrol edildi; 1024×1024 ve saf #00FF00 koşulları sağlanmadı. Kullanıcı yalnız imagegen kullanılmasını seçti; Python/Pillow veya başka araçla görsel değişikliği yapılmadı. Bu nedenle comp üretimi tamamlandı, teknik kabul tamamlanmadı.
 - Kısım 1 oturumunda LI ikonları üretilmedi. Ek önizleme, metrik veya rapor dosyası oluşturulmadı; yazılan repo yolları yalnız `brand/listing/` ve bu görev dosyası. Durum kullanıcı talebiyle `alindi` kaldı.
-- Kısım 2 ara kayıt: LI1–LI4 (`envelope_open.png`, `phone_edit.png`, `rsvp.png`, `calendar.png`) doğru `brand/listing/icons/` yollarına kaydedildi. Her üretimde LC6 ve marka panosu referans verildi; ortak LI prompt'unda yalnız SUBJECT değiştirildi, kullanıcı rengini/ölçüyü açıklayan teknik koşullar ayrıca verildi. LI1 tek düz renk denemesi `envelope_open_v2.png` olarak saklandı; sade ad LC6'ya ve hedef renge daha yakın ilk sürümdür.
-- İlk dört ikonun PNG'leri salt okunur kontrol edildi: RGBA, alfa aralığı 0–255, dört köşe alfa 0, geniş tamamen şeffaf zemin. Beyaz/dama desenli opak zemin yok; yazı, harf, rakam yok. Teknik sınır: imagegen 1024×1024 ve tek #2B1526 taleplerine rağmen 1254×1254 ve çizgi içinde hedef renge yakın farklı RGB/alpha değerleri üretiyor. Gerçek alfa koşulu geçti; ölçü ve piksel düzeyinde tek renk kabul koşulları açık. Görseller yalnız imagegen ile üretildi/değiştirildi.
+- Kısım 2: LI1–LI8 Kaydet yollarına kondu: `brand/listing/icons/envelope_open.png`, `phone_edit.png`, `rsvp.png`, `calendar.png`, `share.png`, `photos.png`, `questions.png`, `schedule.png`. Her üretimde LC6 ve marka panosu referans verildi; ortak LI prompt'unda yalnız SUBJECT değiştirildi, kullanıcı rengini/ölçüyü açıklayan teknik koşullar ayrıca verildi. Çizgi dili için LI1 de referans verildi.
+- Sekiz seçili ikonun gerçek alfa kontrolü salt okunur yapıldı: dosyalar PNG olarak sorunsuz açıldı, hepsi RGBA, alfa aralığı 0–255; dört kenarın her pikseli alfa 0 ve geniş tamamen şeffaf boş alan var. Beyaz/dama desenli opak zemin yok. Gerçek alfa koşulu sekizinde de geçti. Görsel kontrolde yazı, harf ve rakam yok; LI7'deki soru işareti ikonun parçası. LI8'de tam üç liste çizgisi ve rakamsız saat var.
+- Kısım 2 yeniden üretimler: `envelope_open_v2.png` tek düz renk/saydamlık denemesi (ilk sürüm hedef renge ve LC6'ya daha yakın olduğu için sade ad ilk sürüm); `questions_v2.png` daha kalın çıkan çizgiyi diğer ikonlarla eşlemek için (seçildi ve sade ada kopyalandı); `schedule_v2.png` fazla geniş ilk sürümü yaklaşık %60'a indirip ortalamak için (seçildi ve sade ada kopyalandı).
+- Emin olunmayan/sağlanmayan teknik koşullar: imagegen açık 1024×1024 ve tek #2B1526 taleplerine rağmen sekizinde de 1254×1254 çıktı verdi; çizgi içinde hedef renge yakın farklı RGB/alpha değerleri var. Bu nedenle piksel düzeyinde tek düz #2B1526, tam opak çizgi ve 1024×1024 kabulü geçmedi. Yuvarlak köşeli çizgi stili görsel olarak uyumlu; çizgi kalınlıkları piksel düzeyinde özdeş değil. Alfa >=128 görünür sınırına göre ikonların en büyük boyutu tuvalin yaklaşık %59–68'i, seçili LI8 %60,2. Bu farklar incelemeye açık; birleşik bitiş kutusu tek renk koşulu nedeniyle işaretlenmedi.
+- Kısım 2 yalnız imagegen ile üretildi/değiştirildi; Python/Pillow yalnız salt okunur alfa/ölçü/renk kontrolünde kullanıldı. Ek önizleme, metrik veya rapor dosyası yok. Repo yazma alanı yalnız `brand/listing/` ve bu görev dosyası; ayrı dal/PR yok. LI 4/8 ve LI 8/8 ara kayıtları main'e push edildi. Kullanıcı talebiyle görev `inceleme` durumuna gönderildi; teknik kabul sınırları yukarıda korundu ve başka göreve geçilmedi.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği, ilan görselleri GPT tasarımı
@@ -46,3 +49,6 @@ Tasarıma özel fotoğraf sahneleri G8NN'de (PAKET 3). Claude bu comp'lara göre
 - 2026-10-14 gpt-marka: kısım 1 bitti, LI ikonları kaldı — yedi comp'un üretimi ve kayıtları tamamlandı; yukarıdaki ölçü/saf renk teknik kabul sınırı devam ediyor. Durum alindi; bu oturum durduruldu.
 - 2026-10-14 devam: gpt-marka (kısım 2, LI ikonları)
 - 2026-10-14 ara kayıt: gpt-marka — LI 4/8 kaydedildi; dört ikon gerçek alfa kontrolünden geçti, ölçü/tek renk teknik sınırı Sonuç'a yazıldı.
+- 2026-10-14 ara kayıt: gpt-marka — LI 8/8 kaydedildi; LI7 çizgi kalınlığı ve LI8 yaklaşık %60 yerleşim için `_v2` yeniden üretildi, bu sürümler sade adlara seçildi. Sekiz ikonun son alfa/renk kontrolü yapılacak.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-marka — LI 8/8 gerçek alfa kontrolünden geçti; yeniden üretimler ve ölçü/tek renk teknik kabul sınırları Sonuç'a yazıldı. Kısım 2 son kaydı; bu oturum durduruldu.
+- 2026-10-14 entegratör onayladı

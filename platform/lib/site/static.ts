@@ -6,7 +6,8 @@ import { getDataAdapter } from '../data/index.ts';
 import type { SiteRecord } from '../data/types.ts';
 import { photoCandidates } from '../photo-variants.ts';
 import { isArchived } from '../panel/rights.ts';
-import { canPreview } from '../sites.ts';
+import { previewAccess } from '../sites.ts';
+import { guestMayEnter, isProtected } from './access.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
 
 /** Only these theme files are public. Templates (.html), theme.json and anything else are not served. */
@@ -102,13 +103,19 @@ function publiclyUsed(site: SiteRecord, rel: string): boolean {
 
 /** Short public cache: a photo taken offline / replaced stops being served within minutes. */
 export const MEDIA_PUBLIC_CACHE = 'public, max-age=300, s-maxage=300';
+/**
+ * Photos of a password-protected website (G076): the guest's own browser may keep them for the same few minutes, a shared
+ * cache (Vercel's CDN, a proxy) never — another visitor with the URL must not get them from there.
+ */
+export const MEDIA_GUEST_CACHE = 'private, max-age=300';
 
 /**
  * GET /media/<siteId>/<file>. Served only when
  *  - the site is published and its published content uses the file (public, short cache), or
  *  - the request carries the site's preview key (?preview=…: panel and draft preview; private, no-store).
  * Anything else (site offline, photo replaced or removed, draft-only upload, unknown file) is 404,
- * so taking a site offline also takes its photos offline.
+ * so taking a site offline also takes its photos offline. A password-protected site (G076) serves its photos only with
+ * the site's guest cookie (or the panel's preview token): 401 otherwise, never stored by a shared cache.
  */
 export async function serveLocalMedia(segments: string[] | undefined, req?: Request): Promise<Response> {
   const parts = safeSegments(segments);
@@ -118,11 +125,22 @@ export async function serveLocalMedia(segments: string[] | undefined, req?: Requ
   const rel = parts.join('/');
   const site = await adapter.getSiteById(parts[0]);
   if (!site) return notFound();
-  const previewKey = req ? new URL(req.url).searchParams.get('preview') : null;
-  const preview = previewKey !== null && canPreview(site, previewKey);
-  if (!preview && !publiclyUsed(site, rel)) return notFound();
-  // An archived site's photos are gone for the public (G060); the couple still sees them with the preview key.
-  if (!preview && isArchived(site)) return new Response('Gone', { status: 410, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'public, max-age=300' } });
+  const access = previewAccess(site, req ? new URL(req.url).searchParams.get('preview') : null);
+  const preview = access === 'panel' || access === 'shared';
+  if (!preview && access !== 'gone' && !publiclyUsed(site, rel)) return notFound();
+  // An archived site's photos are gone for the public (G060) and for the long-lived preview key (G060-fix); the
+  // couple still sees them in the panel (short-lived token).
+  if (access === 'gone' || (!preview && isArchived(site))) {
+    return new Response('Gone', { status: 410, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store' } });
+  }
+  // G076: photos of a password-protected website need the guest cookie of that site (the panel's preview token does not).
+  const guestOnly = access !== 'panel' && isProtected(site);
+  if (guestOnly && !guestMayEnter(site, req?.headers.get('cookie'))) {
+    return new Response('This photo belongs to a password-protected website.', {
+      status: 401,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store', Vary: 'Cookie', 'X-Robots-Tag': 'noindex' },
+    });
+  }
   const file = await adapter.readPhoto(rel);
   if (!file) return notFound();
   return new Response(new Uint8Array(file.bytes), {
@@ -132,8 +150,9 @@ export async function serveLocalMedia(segments: string[] | undefined, req?: Requ
       'Content-Length': String(file.bytes.length),
       'X-Content-Type-Options': 'nosniff',
       'Content-Security-Policy': FILE_CSP,
-      'Cache-Control': preview ? 'private, no-store' : MEDIA_PUBLIC_CACHE,
+      'Cache-Control': preview ? 'private, no-store' : guestOnly ? MEDIA_GUEST_CACHE : MEDIA_PUBLIC_CACHE,
       ...(preview ? { 'Referrer-Policy': 'no-referrer', 'X-Robots-Tag': 'noindex' } : {}),
+      ...(guestOnly ? { Vary: 'Cookie', 'X-Robots-Tag': 'noindex' } : {}),
     },
   });
 }

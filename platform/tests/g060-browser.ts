@@ -85,7 +85,9 @@ async function block(name: string, fn: () => Promise<void>) {
   }
 }
 
-const PHONE = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
+// A couple in the design's own time zone (New York) by default; the recorded journey is a UK couple (London, en-GB).
+const PHONE = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, timezoneId: 'America/New_York', locale: 'en-US' };
+const UK_PHONE = { ...PHONE, timezoneId: 'Europe/London', locale: 'en-GB' };
 /** PNG for UI screens; JPEG (q 82) for screens dominated by the design's preview or a photo (keeps previews/ small). */
 const shot = async (page: any, name: string, opts: { full?: boolean; jpeg?: boolean } = {}) => {
   await page.waitForTimeout(350);
@@ -104,6 +106,17 @@ async function decodeQr(locator: any): Promise<string | null> {
   return jsQR(new Uint8ClampedArray(data), info.width, info.height)?.data ?? null;
 }
 const overflow = (page: any) => page.evaluate(() => Math.max(document.documentElement.scrollWidth, window.innerWidth) - screen.width);
+/** Controls of the fixed bars (header / footer) that stick out of the screen: a fixed bar never widens the page, so `overflow` misses them (G060-fix). */
+const outOfScreen = (page: any, selector: string) =>
+  page.evaluate((sel: string) => {
+    const out: string[] = [];
+    for (const el of document.querySelectorAll<HTMLElement>(`${sel} button, ${sel} a[href], ${sel} [data-save-state]`)) {
+      const r = el.getBoundingClientRect();
+      if (!r.width || getComputedStyle(el).visibility === 'hidden') continue;
+      if (r.left < -0.5 || r.right > window.innerWidth + 0.5) out.push(`${(el.getAttribute('aria-label') ?? el.textContent ?? '').trim().slice(0, 24)} ${Math.round(r.left)}–${Math.round(r.right)} / ${window.innerWidth}`);
+    }
+    return out;
+  }, selector);
 
 /** axe-core: serious + critical violations of the current view (docs/16 §14 #34). */
 const axeResults: Record<string, string[]> = {};
@@ -147,14 +160,15 @@ try {
 
   // =========================================================================== 1. recorded journey
   await block('journey', async () => {
-    const ctx = await browser.newContext({ ...PHONE, recordVideo: { dir: videoDir, size: { width: 390, height: 844 } } });
+    const ctx = await browser.newContext({ ...UK_PHONE, recordVideo: { dir: videoDir, size: { width: 390, height: 844 } } });
     await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE });
     const page = await ctx.newPage();
     const pause = (ms = 700) => page.waitForTimeout(ms);
     await page.goto(`${J}#setup/1`);
     await page.waitForSelector('[data-setup="1"]');
     check('setup 1: opens at "#setup/1" with the names from /start', (await h1(page)).includes('Your names') && (await page.inputValue('#f-partners-0-display_name')) === 'Elena' && (await page.inputValue('#f-partners-1-display_name')) === 'Marco');
-    check('setup 1: rights rule shown before publishing', (await page.locator('main').innerText()).includes('After that, you can change your names or wedding date 3 times'));
+    check('setup 1: rights rule shown before publishing', (await page.locator('main').innerText()).includes('After that you have 3 name and date changes in total'));
+    check('setup 1: no character counters on short names (G060-fix)', !(await page.locator('main').innerText()).includes('/40'));
     check('setup: no bottom navigation in the wizard', (await page.locator('nav[aria-label="Editor"]').count()) === 0);
     check('setup: no horizontal scroll at 390 px', (await overflow(page)) <= 0, String(await overflow(page)));
     await shot(page, '01_setup1_names');
@@ -167,12 +181,16 @@ try {
     await page.click('[data-setup-next]');
     await page.waitForSelector('[data-setup="2"]');
     check('setup 2: "When is the wedding?", focus on the heading', (await h1(page)).includes('When is the wedding?') && (await focusedIsH1(page)));
-    check('setup 2: sample-details note while the demo date is in', (await page.locator('main').innerText()).includes('These are still the sample details from the design.'));
+    const s2 = await page.locator('main').innerText();
+    check('setup 2: no banners above the date (sample tags on the fields instead; the rule is shown on step 1 and 6)', !s2.includes('These are still the sample details') && !s2.includes('name and date changes in total') && (await page.locator('[data-sample-tag]').count()) >= 1, s2.slice(0, 200));
+    await page.waitForSelector('[data-zone-from-phone]');
+    check('setup 2: the time zone follows the phone ("We\u2019ll use London time, from your phone")', (await page.locator('[data-zone-from-phone]').innerText()).includes('London'));
+    check('setup 2: date style from the phone (en-GB), no country list in the setup', (await page.locator('#f-locale').count()) === 0);
     await shot(page, '02_setup2_date');
     await page.fill('#f-date', '2027-09-18');
     await page.fill('#f-ceremony_time', '16:30');
     await waitSaved(page);
-    check('setup 2: date written out', (await page.locator('main').innerText()).includes('Saturday, September 18, 2027'));
+    check('setup 2: date written out (day first, from the phone)', (await page.locator('main').innerText()).includes('Saturday, 18 September 2027'));
     await pause();
     await page.click('[data-setup-next]');
     await page.waitForSelector('[data-setup="3"]');
@@ -217,8 +235,10 @@ try {
     await page.waitForSelector('[data-setup="5"]');
     await page.frameLocator('[data-setup="5"] iframe').locator('body').waitFor();
     await page.waitForTimeout(1500);
-    const sampleItems = page.locator('[data-setup="5"] main li button');
+    const sampleItems = page.locator('[data-setup="5"] [data-sample-line]');
+    const sampleText = (await sampleItems.allInnerTexts()).join(' | ');
     check('setup 5: preview + "Still sample text" list', (await page.locator('[data-setup="5"] iframe').count()) === 1 && (await sampleItems.count()) > 0, String(await sampleItems.count()));
+    check('setup 5: one short line per section ("Our Story: story intro and 3 captions")', !/sample text\.|is a sample place|moment \d/.test(sampleText) && /Our Story: story intro and \d+ captions/.test(sampleText), sampleText);
     await shot(page, '06_setup5_check', { jpeg: true });
     // A sample item opens its section above the wizard; "Done" comes back.
     await sampleItems.first().click();
@@ -244,8 +264,10 @@ try {
     await page.waitForSelector('[data-setup="6"]');
     check('setup 6: a sample item opens its section and "Done" comes back to step 6', page.url().endsWith('#setup/6'));
     const rules = await page.locator('[data-rules]').innerText();
-    check('setup 6: rules box (3 changes, typo free, online until)', rules.includes('3 times') && rules.includes('up to 2 letters or digits') && rules.includes('September 18, 2028'), rules.replace(/\s+/g, ' '));
-    check('setup 6: summary shows names, date and address', (await page.locator('[data-publish-summary]').innerText()).includes('Elena & Marco'));
+    check('setup 6: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)', rules.includes('3 changes in total') && rules.includes('moving your date by up to 7 days') && rules.includes('Undo it right away') && rules.includes('18 September 2028') && rules.includes('closes for guests'), rules.replace(/\s+/g, ' '));
+    const summary = await page.locator('[data-publish-summary]').innerText();
+    check('setup 6: summary shows names, the invitation-card names, date and address', summary.includes('Elena & Marco') && summary.includes('On the invitation card: Elena Rossi & Marco Bianchi'), summary);
+    check('setup 6: no sample-date gate once the real date is set', (await page.locator('[data-sample-date-gate]').count()) === 0 && !(await page.locator('[data-setup-publish]').isDisabled()));
     await shot(page, '08_setup6_publish');
     await axe(page, 'setup 6');
     await pause(900);
@@ -288,7 +310,8 @@ try {
     // Edit -> Names: locked, "3 changes left".
     await page.click('[data-nav="edit"]');
     await page.waitForSelector('[data-section-row="names"]');
-    check('edit: Names row shows the lock + "3 changes left"', (await page.locator('[data-section-row="names"]').innerText()).includes('3 changes left'));
+    check('edit: one badge for the shared budget ("3 name & date changes left" on Names, none on Date)', (await page.locator('[data-section-row="names"]').innerText()).includes('3 name & date changes left') && !(await page.locator('[data-section-row="date"]').innerText()).includes('changes left'));
+    check('edit: Names has no "Sample text" badge once the names are set (host line lives under Details)', !(await page.locator('[data-section-row="names"]').innerText()).includes('Sample'));
     check('edit: no separate "Optional sections"', !(await page.locator('main').innerText()).includes('Optional sections'));
     await shot(page, '11_edit_list', { full: true });
     await axe(page, 'edit');
@@ -303,7 +326,7 @@ try {
     const firstInput = page.locator('[data-testid="identity"] input').first();
     await firstInput.fill('Elina');
     await page.waitForTimeout(200);
-    check('identity sheet: a 1-letter change is a free typo ("Save fix")', (await page.getAttribute('[data-identity-class]', 'data-identity-class')) === 'typo' && (await page.locator('[data-identity-submit]').innerText()).includes('Save fix'));
+    check('identity sheet: a 1-letter change is a free typo ("Save — free")', (await page.getAttribute('[data-identity-class]', 'data-identity-class')) === 'typo' && (await page.locator('[data-identity-submit]').innerText()).includes('free'));
     await shot(page, '13_identity_typo');
     await pause();
     await firstInput.fill('Sofia');
@@ -317,9 +340,24 @@ try {
     await page.click('[data-identity-submit]');
     await page.waitForSelector('[data-testid="identity"]', { state: 'detached' });
     await page.waitForSelector('[data-snackbar]');
-    check('identity: snackbar "… 2 changes left" with Publish', (await page.locator('[data-snackbar]').innerText()).includes('2 changes left'));
+    check('identity: snackbar "… 2 name & date changes left" with Undo and Publish', (await page.locator('[data-snackbar]').innerText()).includes('2 name & date changes left') && (await page.locator('[data-snack-action="Undo"]').count()) === 1 && (await page.locator('[data-snack-action="Publish"]').count()) === 1);
     check('names: meter now "2 of 3 changes left"', (await page.locator('[data-locked-identity="names"]').innerText()).includes('2 of 3 changes left'));
     await shot(page, '15_names_after_change');
+    // Forgiving (G060-fix): Undo right away gives the change back.
+    await pause(700);
+    await page.click('[data-snack-action="Undo"]');
+    await page.waitForFunction(() => document.querySelector('[data-locked-identity="names"]')?.textContent?.includes('3 of 3 changes left'), null, { timeout: 15_000 });
+    check('undo: the change is given back (3 of 3) and the names are as before', (await page.locator('[data-locked-identity="names"]').innerText()).includes('Elena'));
+    await shot(page, '15b_names_after_undo');
+    await pause(700);
+    await page.click('[data-change-identity="names"]');
+    await page.waitForSelector('[data-testid="identity"]');
+    await page.locator('[data-testid="identity"] input').first().fill('Sofia');
+    await page.locator('[data-testid="identity"] input').nth(1).fill('Sofia Rossi');
+    await page.click('[data-identity-submit]');
+    await page.waitForSelector('[data-testid="identity"]', { state: 'detached' });
+    await page.waitForFunction(() => document.querySelector('[data-locked-identity="names"]')?.textContent?.includes('2 of 3 changes left'), null, { timeout: 15_000 });
+    check('change again after the undo: 2 of 3 left', true);
     await pause(900);
     await page.click('[data-nav="home"]');
     await page.waitForSelector('[data-rights-card]');
@@ -351,6 +389,42 @@ try {
     await page.goto(N);
     await page.waitForSelector('[data-setup]');
     check('resume: a fresh device opens the first unfinished step (2: the date is still sample)', (await page.getAttribute('[data-setup]', 'data-setup')) === '2');
+    check('setup 2 (phone in the design\'s own zone): the zone stays New York, shown as the phone\'s', (await page.locator('[data-zone-from-phone]').innerText()).includes('New York'));
+    // Step 6 with the design's sample date: blocked until the date is set or confirmed (G060-fix).
+    await page.goto(`${N}#setup/6`);
+    await page.waitForSelector('[data-setup="6"] [data-sample-date-gate]');
+    const gate = await page.locator('[data-sample-date-gate]').innerText();
+    check('setup 6: "Your wedding date is still the design\u2019s sample" above Publish, Publish disabled', gate.includes('still the design') && (await page.locator('[data-setup-publish]').isDisabled()), gate.replace(/\s+/g, ' '));
+    await shot(page, '08b_setup6_sample_date');
+    await axe(page, 'setup 6 with sample date');
+    for (const width of [320, 360, 390]) {
+      await page.setViewportSize({ width, height: 700 });
+      await page.waitForTimeout(300);
+      const out = await outOfScreen(page, '[data-setup]');
+      check(`setup 6 at ${width} px: every control of the fixed bars stays on screen`, !out.length, out.join(' ; '));
+      if (width === 360) await shot(page, '08c_setup6_360');
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.click('[data-confirm-sample-date]');
+    check('setup 6: "… really is our wedding date" unlocks Publish', !(await page.locator('[data-setup-publish]').isDisabled()));
+    await page.click('[data-confirm-sample-date]');
+    await page.click('[data-fix-date]');
+    await page.waitForSelector('[data-setup="2"]');
+    check('setup 6: "Set our date" goes to the date step', page.url().endsWith('#setup/2'));
+    // 360 × 640: the date and the ceremony time are above the fixed bar (no banners on step 2).
+    await page.setViewportSize({ width: 360, height: 640 });
+    await page.waitForTimeout(300);
+    const fit = await page.evaluate(() => {
+      const bar = document.querySelector('footer')!.getBoundingClientRect().top;
+      const time = document.getElementById('f-ceremony_time')!.getBoundingClientRect();
+      const date = document.getElementById('f-date')!.getBoundingClientRect();
+      return { bar, date: date.top, time: time.bottom };
+    });
+    check('setup 2 at 360 × 640: the date field starts well above the bar (no banners)', fit.date < 360, JSON.stringify(fit));
+    await shot(page, '02b_setup2_360x640');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(N);
+    await page.waitForSelector('[data-setup="2"]');
     await page.click('[data-setup-skip]');
     await page.waitForSelector('[data-setup="3"]');
     await page.reload();
@@ -368,7 +442,10 @@ try {
     await page.click('[data-publish]');
     await page.waitForSelector('[data-testid="notes"]');
     const sheet = await page.locator('[data-testid="notes"]').innerText();
-    check('first publish from the editor: rules box shown', sheet.includes('Good to know before you publish') && sheet.includes('3 times'), sheet.slice(0, 200));
+    check('first publish from the editor: rules box shown', sheet.includes('Good to know before you publish') && sheet.includes('3 changes in total'), sheet.slice(0, 200));
+    check('first publish from the editor: the sample date blocks "Publish my website" until confirmed', (await page.locator('[data-testid="notes"] [data-sample-date-gate]').count()) === 1 && (await page.locator('[data-publish-anyway]').isDisabled()));
+    await page.click('[data-testid="notes"] [data-confirm-sample-date]');
+    check('first publish from the editor: confirming the date unlocks it', !(await page.locator('[data-publish-anyway]').isDisabled()));
     await shot(page, '18_first_publish_rules');
     await axe(page, 'first publish sheet');
     await page.locator('[data-testid="notes"]').getByRole('button', { name: 'Keep editing' }).last().click();
@@ -405,13 +482,42 @@ try {
     check('switches: Details has the dress code / travel / registry switches next to their fields', (await page.locator('[data-section="details"] [role="switch"]').count()) >= 3);
     await shot(page, '20_details', { full: true });
     await axe(page, 'section: details');
-    // 320 px: no horizontal scroll.
+    // 320 px: no horizontal scroll; the fixed bars keep every control on screen (320 / 360).
     await page.setViewportSize({ width: 320, height: 700 });
     for (const view of ['#home', '#edit', '#edit/date', '#share']) {
       await page.goto(`${N}${view}`);
       await page.waitForTimeout(400);
       check(`320 px: no horizontal scroll on ${view}`, (await overflow(page)) <= 0, String(await overflow(page)));
     }
+    for (const width of [320, 360]) {
+      await page.setViewportSize({ width, height: 700 });
+      for (const view of ['#setup/1', '#setup/4', '#edit/venue', '#home']) {
+        await page.goto(`${N}${view}`);
+        await page.waitForTimeout(400);
+        const out = [...(await outOfScreen(page, 'header')), ...(await outOfScreen(page, 'footer'))];
+        check(`${width} px: header / footer controls on screen on ${view}`, !out.length, out.join(' ; '));
+      }
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await ctx.close();
+  });
+
+  // =========================================================================== 2b. crop sheet on a short phone (360 × 640)
+  await block('crop 360x640', async () => {
+    const ctx = await browser.newContext({ ...PHONE, viewport: { width: 360, height: 640 } });
+    const page = await ctx.newPage();
+    await page.goto(editUrl('nora-and-sam', other.editKey, '#edit/photos'));
+    await page.waitForSelector('input[data-slot="hero_portrait"]', { state: 'attached' });
+    await page.setInputFiles('input[data-slot="hero_portrait"]', PHOTO);
+    await page.waitForSelector('[data-testid="cropper"] img');
+    await page.waitForTimeout(400);
+    const hit = await page.evaluate(() => {
+      const r = document.getElementById('crop-zoom')!.getBoundingClientRect();
+      const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      return { id: el?.id ?? el?.tagName, top: Math.round(r.top), bottom: Math.round(r.bottom) };
+    });
+    check('crop at 360 × 640: the zoom slider is not under "Use this photo"', hit.id === 'crop-zoom', JSON.stringify(hit));
+    await shot(page, '05b_crop_360x640', { jpeg: true });
     await ctx.close();
   });
 
@@ -447,7 +553,7 @@ try {
     await page.click('[data-nav="share"]');
     await page.waitForSelector('[data-share-url]');
     const share = await page.locator('main').innerText();
-    check('share: link, edit-link warning, sign-in "Not available yet"', share.includes('Anyone with this link can edit your website') && share.includes('Not available yet') && share.includes("Email sign-in isn't available yet"));
+    check('share: link + edit-link warning and tip; no "Sign in by email" card for a feature that does not exist', share.includes('Anyone with this link can edit your website') && share.includes('add this page to your Home Screen') && !share.includes('Sign in by email') && !share.includes('Not available yet'));
     const urlBox = await page.locator('[data-share-url]').boundingBox();
     check('share: the address does not break inside "clara-and-julian"', (await page.locator('[data-share-url]').innerText()).includes('clara-and-julian') && urlBox!.height < 60, String(urlBox?.height));
     await shot(page, '22_share', { full: true });
@@ -465,8 +571,27 @@ try {
     check('share: "Publish again" brings it back', (await page.getAttribute('[data-panel]', 'data-status')) === 'published');
 
     // Rights 0: the sheet says so (with the support placeholders); a typo stays free.
+    // Dates move by days (G060-fix): a few days is free and says so; a month uses a change and says why.
+    // (This site was published with the design's sample date, whose first replacement is free: give it a real one first.)
+    const pre = (await adapter.getSiteById(live.site.id))!;
+    await adapter.patchSite(pre.id, { content: { ...pre.content, date: '2027-06-12' }, identity: { ...pre.identity!, anchor: { ...pre.identity!.anchor, date: '2027-06-12' } } });
+    await page.goto(`${L}#edit/date`);
+    await page.reload();
+    await page.waitForSelector('[data-change-identity="date"]');
+    await page.click('[data-change-identity="date"]');
+    await page.waitForSelector('[data-testid="identity"]');
+    const dateInput = page.locator('[data-testid="identity"] input[type="date"]');
+    await dateInput.fill('2027-06-15');
+    const near = await page.locator('[data-identity-class]').innerText();
+    check('date: 3 days later is free ("Moving your date by up to 7 days is free.")', (await page.getAttribute('[data-identity-class]', 'data-identity-class')) === 'typo' && near.includes('Moving your date by up to 7 days is free'), near);
+    await shot(page, '22b_date_moved_free');
+    await dateInput.fill('2027-07-20');
+    const far = await page.locator('[data-identity-class]').innerText();
+    check('date: a month later uses a change and says only a week is free', (await page.getAttribute('[data-identity-class]', 'data-identity-class')) !== 'typo' && far.includes('Only date moves of up to 7 days are free'), far);
+    await page.locator('[data-testid="identity"]').getByRole('button', { name: 'Undo my edits' }).click();
+    await page.locator('[data-testid="identity"]').getByRole('button', { name: 'Cancel' }).click();
     const site = (await adapter.getSiteById(live.site.id))!;
-    await adapter.patchSite(site.id, { identity: { ...site.identity!, used: 3 } });
+    await adapter.patchSite(site.id, { identity: { ...site.identity!, used: 3, undo: null } });
     await page.goto(`${L}#edit/names`);
     await page.reload();
     await page.waitForSelector('[data-locked-identity="names"]');
@@ -479,13 +604,13 @@ try {
     check('rights 0: the change button is disabled', await page.locator('[data-identity-submit]').isDisabled());
     await shot(page, '23_identity_no_rights');
     await first.fill('Clare');
-    check('rights 0: a typo is still free ("Save fix")', (await page.locator('[data-identity-submit]').innerText()).includes('Save fix') && !(await page.locator('[data-identity-submit]').isDisabled()));
+    check('rights 0: a typo is still free ("Save — free")', (await page.locator('[data-identity-submit]').innerText()).includes('free') && !(await page.locator('[data-identity-submit]').isDisabled()));
     await page.click('[data-identity-submit]');
     await page.waitForSelector('[data-testid="identity"]', { state: 'detached' });
     check('rights 0: typo saved', (await page.locator('[data-locked-identity="names"]').innerText()).includes('Clare'));
 
     // Offline: banner, publish disabled, the edit is kept on the phone and saved when back online.
-    await page.goto(`${L}#edit/names`);
+    await page.goto(`${L}#edit/details`);
     await page.waitForSelector('#f-host_line');
     await ctx.setOffline(true);
     await page.waitForSelector('[data-offline-banner]');
@@ -493,7 +618,7 @@ try {
     await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'offline', null, { timeout: 10_000 });
     check('offline: banner + "Offline" save state', (await page.locator('[data-offline-banner]').innerText()).includes('offline'));
     check('offline: the draft is kept on this phone', await page.evaluate(() => Boolean(localStorage.getItem('draft:clara-and-julian'))));
-    check('offline: Change names and Publish are disabled', (await page.locator('[data-change-identity="names"]').isDisabled()) && (await page.locator('[data-publish]').isDisabled()));
+    check('offline: Publish is disabled', await page.locator('[data-publish]').isDisabled());
     await shot(page, '24_offline');
     await ctx.setOffline(false);
     await waitSaved(page);
@@ -509,7 +634,7 @@ try {
     );
     await page.close();
     const again = await ctx.newPage();
-    await again.goto(`${L}#edit/names`);
+    await again.goto(`${L}#edit/details`);
     await again.waitForSelector('[data-backup-banner]');
     check('local copy: "You have unsaved changes from this phone." with Restore', (await again.locator('[data-backup-banner]').innerText()).includes('You have unsaved changes from this phone.'));
     await shot(again, '25_restore_backup');
@@ -525,7 +650,7 @@ try {
 
     // Conflict: another tab saved meanwhile.
     const tabB = await ctx.newPage();
-    await tabB.goto(`${L}#edit/names`);
+    await tabB.goto(`${L}#edit/details`);
     await tabB.waitForSelector('#f-host_line');
     await again.fill('#f-host_line', 'Saved in tab A');
     await waitSaved(again);
@@ -542,14 +667,14 @@ try {
     const page = await ctx.newPage();
     await page.goto(editUrl('old-wedding', archivedSite.editKey, '#home'));
     await page.waitForSelector('[data-status-card]');
-    check('archive: Home says it is a read-only archive', (await page.locator('[data-status-card]').innerText()).includes('read-only archive'));
+    check('archive: Home says the website is closed for guests', (await page.locator('[data-status-card]').innerText()).includes('closed for guests'));
     check('archive: no Publish button, "Archived" badge', (await page.locator('[data-publish]').count()) === 0 && (await page.locator('header').innerText()).includes('Archived'));
     check('archive: rights card says names and date can no longer be changed', (await page.locator('[data-rights-card]').innerText()).includes('can no longer be changed'));
     await shot(page, '27_archived');
     await axe(page, 'archived home');
     await page.goto(editUrl('old-wedding', archivedSite.editKey, '#edit/venue'));
     await page.waitForSelector('#f-venue-name');
-    check('archive: banner "Your website was archived on …" in the editor', (await page.locator('[data-archived-banner]').innerText()).includes('Your website was archived on'));
+    check('archive: banner "Your website closed for guests on …" in the editor', (await page.locator('[data-archived-banner]').innerText()).includes('Your website closed for guests on'));
     check('archive: fields are read only', (await page.getAttribute('#f-venue-name', 'readonly')) !== null);
     const res = await page.request.get(`${BASE}/old-wedding`);
     check('archive: the public address answers 410', res.status() === 410);
@@ -560,7 +685,7 @@ try {
     const ctx = await browser.newContext(PHONE);
     const page = await ctx.newPage();
     const fresh = await createSiteWithKeys(adapter, { slug: 'lost-link', theme: THEME, content: draftFromDemo(demo, ['Mia', 'Tom']) });
-    await page.goto(editUrl('lost-link', fresh.editKey, '#edit/names'));
+    await page.goto(editUrl('lost-link', fresh.editKey, '#edit/details'));
     await page.waitForSelector('#f-host_line');
     await reissueKeys(adapter, fresh.site.id);
     await page.fill('#f-host_line', 'after the link changed');
@@ -601,6 +726,21 @@ try {
     await ctx.close();
   });
 
+  await block('shared preview', async () => {
+    const ctx = await browser.newContext(PHONE);
+    const page = await ctx.newPage();
+    // The long-lived preview key (never shown in the panel any more) opens the draft only under a bar (G060-fix).
+    await page.goto(`${BASE}/nora-and-sam?preview=${other.previewKey}`);
+    await page.waitForSelector('[data-platform-preview-bar]');
+    const bar = await page.locator('[data-platform-preview-bar]').boundingBox();
+    check('shared preview: "Preview — this website is not published" bar at the top', (await page.locator('[data-platform-preview-bar]').innerText()).includes('not published') && bar && bar.y <= 1 && bar.width >= 380, JSON.stringify(bar));
+    await page.waitForTimeout(800);
+    await shot(page, '31_shared_preview_bar', { jpeg: true });
+    const panelHtml = await (await page.request.get(`${BASE}/clara-and-julian`)).text();
+    check('public page: no preview bar for guests', !panelHtml.includes('data-platform-preview-bar'));
+    await ctx.close();
+  });
+
   await block('desktop', async () => {
     const L = editUrl('clara-and-julian', live.editKey);
     const desk = await browser.newContext({ viewport: { width: 1280, height: 860 } });
@@ -614,8 +754,23 @@ try {
     check('1280: three columns (rail, content, sticky preview)', nav && main && pv && nav.x < 30 && nav.width >= 200 && main.x > nav.x + nav.width - 1 && pv.x > main.x + main.width - 40, JSON.stringify({ nav, main, pv }));
     check('1280: no phone Preview button', (await d.locator('[data-open-preview]').count()) === 0);
     await d.screenshot({ path: path.join(OUT, '28_desktop_1280_home.jpg'), type: 'jpeg', quality: 82 });
-    await d.goto(`${L}#edit/venue`);
+    await d.goto(`${L}#edit/schedule`);
     await d.waitForTimeout(1200);
+    check('1280: the preview follows the open section (Schedule -> Details tab)', (await d.locator('[data-preview] [role="tab"][aria-selected="true"]').innerText()) === 'Details');
+    await d.goto(`${L}#edit/venue`);
+    await d.waitForTimeout(1500);
+    // Typing slowly reloads the preview once, after saving has settled (not after every autosave).
+    await d.evaluate(() => {
+      (window as any).__loads = 0;
+      document.querySelector('[data-preview] iframe')!.addEventListener('load', () => ((window as any).__loads += 1));
+    });
+    for (const ch of ' Hall') {
+      await d.locator('#f-venue-name').press(ch === ' ' ? 'Space' : ch);
+      await d.waitForTimeout(900);
+    }
+    await d.waitForTimeout(4500);
+    const loads = await d.evaluate(() => (window as any).__loads);
+    check('1280: 5 slow keystrokes reload the preview once (settled), not 5 times', loads === 1, String(loads));
     await d.screenshot({ path: path.join(OUT, '29_desktop_1280_venue.jpg'), type: 'jpeg', quality: 82 });
     await axe(d, 'desktop 1280 section');
     await desk.close();

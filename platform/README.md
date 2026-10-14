@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), seed (348 test, 2026-10-14; Windows dahil)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), seed (477 test, 2026-10-14 G076; Windows dahil — bkz. "Windows notları")
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -30,6 +30,8 @@ NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id>
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
 node scripts/grant-identity-change.ts --order <no> (--add <n> | --archive-on <YYYY-MM-DD|clear>) --reason "<neden>"   # destek (G060): isim/tarih
                        # hakkı ekle ya da arşiv tarihini taşı; --show durumu yazar (aşağıda "Panel v2 ve düzenleme hakkı")
+NODE_PATH=/opt/node22/lib/node_modules node tests/g076-browser.ts   # build sonrası: site şifresi (G076) 390 × 844 — Share'de aç, misafir şifre
+                       # sayfası, yanlış/doğru, şifre değişince yeniden sorma, iki tema (51 kontrol; previews/g076/ ya da $G076_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts   # build sonrası: panel v2 yolculuğu 390 × 844 + MP4, hak/arşiv/çevrimdışı/
                        # axe-core/1280 (104 kontrol; çıktı previews/g060/ ya da $G060_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts [--theme <id>]   # build sonrası: son duman testi, 390 px — misafir (zarf → home →
@@ -68,7 +70,8 @@ app/
   media/[...path]/route.ts         adaptörün yüklediği fotoğraflar (local; blob = private depo)
   layout.tsx, page.tsx             platform sayfaları için kök
   edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039, v2 G060); geçersiz link = genel 404 + "Lost your edit link?"
-  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır, identity (isim/tarih, G060)
+  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır, identity (isim/tarih, G060),
+                                   access (misafir şifresi, G076)
   signin/page.tsx, api/signin/     e-posta ile giriş (G060): sağlayıcı yok → kapalı, dürüst metin, API 503
   start/page.tsx, StartForm.tsx    /start?theme=<tema> sahiplenme sayfası (G045); start/demo/[theme]/… = temanın canlı demosu
                                    (+ start/demo/[theme]/event.ics: demonun takvim dosyası, G051)
@@ -113,8 +116,10 @@ previews/g401/                     olive-ivory: sayfa görüntüleri, compare_<s
 
 - Site kaydında iki içerik vardır: `content` (panelin taslağı, otomatik kayıt) ve `publishedContent`
   (son **Yayınla** anındaki kopya). Ziyaretçi yalnız `publishedContent`'i görür.
-- Taslak / yayınlanmamış düzenleme: `?preview=<önizleme anahtarı>` ile görünür. Önizleme yanıtı
-  `noindex`, `no-store`, `no-referrer`; sayfalar arası linkler anahtarı taşır.
+- Taslak / yayınlanmamış düzenleme: `?preview=` ile görünür — panelin kısa ömürlü jetonu ya da kalıcı önizleme anahtarı
+  (G060-fix: kalıcı anahtarla sayfanın başında "Preview — not published" şeridi; arşivlenmiş sitede ve 18 ay hiç yayınlanmamış
+  taslakta 410; `lib/sites.ts` `previewAccess`). Önizleme yanıtı `noindex`, `no-store`, `no-referrer`; sayfalar arası linkler
+  değeri taşır.
 - Yayında olmayan site, bilinmeyen slug, ayrılmış slug (`edit`, `start`, `api`, `_next`, `themes`, `media` … `lib/slug.ts`),
   temanın tanımlamadığı sayfa ve `<body data-optional>` ile kapanan sayfa → **404**.
 - `/Clara-And-Julian` → 308 ile küçük harfli adrese.
@@ -123,7 +128,9 @@ previews/g401/                     olive-ivory: sayfa görüntüleri, compare_<s
 - **Düzenleme anahtarı:** 32 rastgele bayt, base64url (43 karakter). Alıcıya bir kez gösterilir
   (`/edit/<slug>?k=<anahtar>`); yalnız SHA-256 hash'i saklanır.
 - **Önizleme anahtarı:** `HMAC-SHA256(düzenleme anahtarı, "preview:v1")`. Panel bunu düzenleme anahtarından türetir;
-  önizleme linki paylaşılsa bile düzenleme yetkisi vermez. Bu da yalnız hash olarak saklanır.
+  önizleme linki paylaşılsa bile düzenleme yetkisi vermez. Bu da yalnız hash olarak saklanır. G060-fix'ten beri panele
+  gönderilmez; panel **kısa ömürlü önizleme jetonu** kullanır: `<exp>.<HMAC-SHA256(previewKeyHash, "panel-preview:v1:<site>:<exp>")>`,
+  11–12 saat geçerli, anahtarlar yenilenince geçersiz (`panelPreviewToken`, `verifyPanelPreviewToken`).
 - Karşılaştırma `crypto.timingSafeEqual` ile, sabit zamanlı.
 
 ## Veri adaptörü sözleşmesi (`lib/data/types.ts`)
@@ -237,6 +244,11 @@ node --env-file=.env.local scripts/blob-smoke.mjs                               
   makineden art arda çok koşturmak 429 verebilir.
 - `blob-smoke`: yukarıdaki gerçek-depo doğrulamaları; yalnız `smoke-<zaman>-*` / `SMOKE<zaman>` yollarına yazar ve siler.
 - Çıkış kodu 0 = hepsi geçti. Windows'ta çalışır (Node 22, `.env.local`).
+- Windows notları (G077): `npm test`'teki `tools/validate_content.py` karşılaştırması (g055-limits, `astral-name-40`) Python UTF-8 kipi
+  kapalıyken kalıyor → `PYTHONUTF8=1` ile koşturun. Eski bir yerel `.next/` (silinmiş bir rotanın `.next/types/validator.ts`'i) `npm run
+  typecheck`'i kırar → `.next`'i silip typecheck/build. Tohumlama: `DATA_ADAPTER=blob PLATFORM_DATA_DIR=<yerel geçici klasör> node
+  --env-file=.env.local scripts/seed.ts --theme <id> --slug <slug> --content ../collections/<NN>/content.demo.json --photos
+  ../collections/<NN>/assets/gpt/photos` (anahtarlar o klasöre yazılır, ekrana basılanları log'a koymayın).
 
 ## Tema biçimi
 
@@ -609,16 +621,16 @@ Yanlış anahtar, önizleme anahtarı, başka sitenin anahtarı, bilinmeyen/ayr�
 
 | İstek | Yanıt |
 |---|---|
-| `GET /api/edit/<slug>` | `200 {ok, state: {slug, theme: {id, name, pages, photos[{key,label,source,aspect,ratio}], optionalBlocks}, content, status, updatedAt, publishedAt, hasUnpublishedChanges, rights, previewKey, origin, orderRef}}` (arşivde de okunur) |
+| `GET /api/edit/<slug>` | `200 {ok, state: {slug, theme: {id, name, pages, photos[{key,label,source,aspect,ratio}], optionalBlocks}, content, status, updatedAt, publishedAt, hasUnpublishedChanges, rights, previewToken, orderPending, origin, orderRef}}` (arşivde de okunur; `previewToken` ve `orderPending` her yanıtta da gelir) |
 | `PUT /api/edit/<slug>` `{content, baseUpdatedAt?}` (JSON) | `200 {ok, status, updatedAt, publishedAt, hasUnpublishedChanges, rights, validation: {ok, errors, warnings}, identityKept?, identity?}` · `400 bad_json / invalid_shape (+issues)` · `403 archived` · `409 conflict (+updatedAt)` · `413` · `415` |
-| `POST /api/edit/<slug>/photo?slot=<anahtar>` (ham görsel gövdesi) | `200 {ok, slot, source, url, contentType, size, width, height}` · `400 empty / unknown_slot` · `403 archived` · `413 too_large` · `415 unsupported_type` |
-| `POST /api/edit/<slug>/publish` `{baseUpdatedAt?}` | `200 {ok, status:"published", publishedAt, updatedAt, hasUnpublishedChanges, rights, url}` · `403 archived` · `409 conflict / identity_mismatch` · `422 invalid_content (+issues)` |
+| `POST /api/edit/<slug>/photo?slot=<anahtar>` (ham görsel gövdesi) | `200 {ok, slot, source, url, contentType, size, width, height}` · `400 empty / unknown_slot` · `403 archived` · `413 too_large` · `415 unsupported_type` · `429 upload_limit (+Retry-After) / photo_limit` |
+| `POST /api/edit/<slug>/publish` `{baseUpdatedAt?}` | `200 {ok, status:"published", publishedAt, updatedAt, hasUnpublishedChanges, rights, url}` · `403 archived / order_pending` · `409 conflict / identity_mismatch` · `422 invalid_content (+issues)` |
 | `POST /api/edit/<slug>/unpublish` | `200 {ok, status:"draft", …}` · `403 archived` |
-| `POST /api/edit/<slug>/identity` `{identity: {names[{display, full}], shown, initials, date}, intent?: "fix"\|"change", baseUpdatedAt?}` (G060) | `200 {ok, result: "unchanged"\|"free"\|"typo"\|"change", identity, rights, …}` · `400 invalid_shape` · `403 archived / no_changes_left (+remaining, limit)` · `409 conflict / confirm_required (+kind, remaining, limit)` · `422 invalid_identity / date_archives_site (+issues)` |
+| `POST /api/edit/<slug>/identity` `{identity: {names[{display, full}], shown, initials, date}, intent?: "fix"\|"change", baseUpdatedAt?}` (G060) | `200 {ok, result: "unchanged"\|"free"\|"typo"\|"undo"\|"sample_date"\|"change", identity, rights, …}` · `400 invalid_shape` · `403 archived / no_changes_left (+remaining, limit)` · `409 conflict / confirm_required (+kind, remaining, limit)` · `422 invalid_identity / date_archives_site (+issues)` |
 
 Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir sonraki kaydıdır (tek yazar: taslak).
 `rights` = `rightsView` (`lib/panel/rights.ts`): `{phase, limit, granted, used, remaining, anchor, firstPublishedAt, onlineUntil,
-archiveAt, archived, archiveSoon}`.
+archiveAt, archived, archiveSoon, undo}` (`undo` = `{from, until}`: son sayılan değişiklik ücretsiz geri alınabilirken).
 
 ### Panel testleri
 
@@ -644,7 +656,8 @@ archiveAt, archived, archiveSoon}`.
 
 - Değiştirilen/silinen fotoğraflar depoda kalır (adaptörde `deletePhoto` yok) → G043'te öksüz dosya temizliği. Artık herkese
   servis edilmezler (aşağıda "Fotoğraflar"), yalnız depoda yer tutarlar.
-- Site başına yükleme kotası / hız sınırı yok (yalnız 256-bit anahtar sahibi yükleyebilir).
+- Site başına yükleme sınırı (G060-fix): günde 60 yükleme (paylaşılan sayaç), toplam 450 dosya (foto + türevleri). Değiştirilen
+  fotoğrafların temizliği hâlâ yok (sınır depoyu sınırlar, boşaltmaz).
 - Vercel fonksiyon gövde sınırı 4.5 MB: tarayıcı çıktısı ≤ 3.5 MB tutulur; sunucudaki 10 MB sınırı Vercel dışında geçerli.
   Supabase'de imzalı doğrudan yükleme (G043/G044) düşünülebilir.
 - Şemada serbest metin "travel" alanı yok: Travel & stay = konaklama linki + `travel_stay` anahtarı. Guest policy metni de şemada yok
@@ -703,9 +716,10 @@ hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; i
 - **İlk yayına kadar** her şey serbest. İlk yayın `firstPublishedAt` ve `identity = {anchor, limit, granted:0, used:0, log}` yazar
   (`publishSite`).
 - **Yayından sonra:** `PUT` kimlik alanlarını **saklı değerde tutar** (`keepStoredIdentity`, yanıtta `identityKept`); kimlik yalnız
-  `POST /identity` ile değişir. Sınıflandırma çapaya (son sayılan kimlik) göre: alan başına ≤ 2 düzenleme (Damerau–Levenshtein OSA,
-  kod noktası; NFC, görünmez karakterler ve boşluklar normalize; "Names as shown"da `&`/`and`/`+` farkı yok) = **yazım düzeltmesi,
-  ücretsiz**, çapa yerinde kalır (ücretsiz düzeltmeler birikip başka çift olamaz); fazlası = **değişiklik**: `intent:"change"`
+  `POST /identity` ile değişir. Sınıflandırma çapaya (son sayılan kimlik) göre: isim alanı başına ≤ 2 düzenleme (Damerau–Levenshtein
+  OSA, kod noktası; NFC, görünmez karakterler ve boşluklar normalize; "Names as shown"da `&`/`and`/`+` farkı yok), soyadı ekleme/çıkarma
+  ve tarihi ≤ 7 gün kaydırma (G060-fix) = **ücretsiz**, çapa yerinde kalır (ücretsiz düzeltmeler birikip başka çift olamaz);
+  fazlası = **değişiklik**: `intent:"change"`
   olmadan `409 confirm_required`, onaylanırsa 1 hak harcanır ve çapa yeni kimlik olur. Hak 0 → `403 no_changes_left` (yazım
   düzeltmesi yine serbest). Varsayılan 3 hak, ≤ 2 karakter, 12 ay: `lib/marketing/config.ts` `editRights`/`hosting` (satış sitesi
   ve sunucu aynı sayıyı okur).
@@ -725,15 +739,17 @@ hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; i
   sonsuz barındırmayı önler). Destek `archiveOverrideAt` ile taşıyabilir. Hiç yayınlanmamış site arşivlenmez.
 - Arşivde: genel sayfalar, fotoğraflar ve `.ics` **410** ("This wedding website has been archived", `noindex`, çift bilgisi yok);
   misafir RSVP formu yok (site yayında değilmiş gibi: gönderim kabul edilmez); panel `GET`, yanıt listesi ve CSV çalışır; panelin
-  yazan uçları ve çiftin yanıt sil/tut ucu (`POST /api/rsvp/<slug>/responses`) `403 archived`. Önizleme anahtarıyla önizleme açılır.
+  yazan uçları ve çiftin yanıt sil/tut ucu (`POST /api/rsvp/<slug>/responses`) `403 archived`. Çift içeriği panelde (kısa ömürlü
+  jetonla) görür; kalıcı önizleme anahtarı arşivde 410 (G060-fix: önizleme linki arşivi atlatamaz).
 - Tarih, siteyi hemen arşivleyecek kadar eskiyse ilk yayın ve `/identity` reddedilir (`date_archives_site`).
 - Arşivden sonra verinin **silinmesi yok** (henüz yapılmadı; gizlilik metniyle birlikte karar).
 
 ### Testler
 
-- `tests/g060-rights.test.ts` (7): mesafe, normalizasyon, sınıflandırma, çapa, arşiv tarihleri (saat dilimi, ay sonu, tavan,
-  override), `rightsView`.
-- `tests/g060-api.test.ts` (12): yayından önce serbest, ilk yayın kaydı, `identityKept`, yazım/değişiklik/onay/hak bitti, **iki sekme
+- `tests/g060-rights.test.ts` (13): mesafe, normalizasyon, sınıflandırma, çapa, arşiv tarihleri (saat dilimi, ay sonu, tavan,
+  override), `rightsView`; G060-fix: tarih günle (±7), soyadı, sayılan tarih, undo penceresi, örnek tarih bir kez, taslak saati.
+- `tests/g060-api.test.ts` (20; G060-fix: paylaşılan önizleme şeridi / jeton / arşiv + kalıcı anahtar 410, gün kuralı ve arşiv,
+  soyadı, Undo, örnek tarih, foto sınırları): yayından önce serbest, ilk yayın kaydı, `identityKept`, yazım/değişiklik/onay/hak bitti, **iki sekme
   yarışı** (`local`) ve **iki Blob sunucu örneği** (sahte Blob deposu, ETag), destek hakkı, arşivleyen tarih, arşiv kapıları
   (sayfalar/foto/.ics 410, RSVP kapalı, CSV açık), eski kayıt göçü, 401 eşitliği, yayın savunması.
 - Tarayıcı (build gerekir): `NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts` — `next start` + Chromium
@@ -744,12 +760,119 @@ hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; i
   azaltılmış hareket. **104 kontrol**; ekran görüntüleri, `g060_journey_390.mp4` ve `checks.json` → `previews/g060/`
   (`G060_SHOTS_DIR`, `PORT` (3341)). Eski tarayıcı testleri (panel-browser, final-smoke, g051, g055, claim) v2'ye uyarlandı.
 
+### G060-fix (2026-10-14, panel / hak / sahiplenme incelemesi)
+
+İnceleme bulguları koda uygulandı (satış sitesi bulguları G061'de). Kısaca ne değişti:
+
+- **Tarih günle ölçülür** (`classifyIdentityChange`): isim alanları karakterle (≤ 2 = yazım düzeltmesi), tarih **gün** ile:
+  çapadan ±7 gün (`editRights.dateFreeDays`) ücretsiz, fazlası 1 hak. Eskiden "2 karakter" kuralı 2027→2029'u bedava sayıyordu,
+  Sep 28→Oct 5'i saymıyordu. Arşiv tarihi `countedDate` ile: taslak tarihi çapadan ≤ 7 gün uzaksa o, değilse çapanın tarihi
+  (bedava düzenleme barındırmayı uzatamaz). 48 ay tavanı (karar bekliyor) sayılan değişikliklerle tarihi yıllarca ileri atmaya karşı
+  duruyor; panelin "online until" tarihi onu zaten hesaba katar.
+- **Soyadı ücretsiz** (`surnameOnly`): ilk isim aynıyken tam ada soyadı eklemek/çıkarmak (ya da ilk ismi kelime olarak içeren tam ad,
+  henüz tam ad sayılmamışken) hak harcamaz. `/start` taslağı artık `full_name: null` (temalar ilk isme düşer); eski taslaklarda
+  "tam ad = ilk isim" ilk ismi izlemeye devam eder.
+- **Geri al (Undo):** sayılan değişiklikten sonra snackbar'da **Undo** (+ Publish). Sunucu `identity.undo = {at, from}` tutar;
+  önceki çapaya (yazım farkı içinde) dönüş yayınlanmadan önce ya da yayından sonra 10 dk içinde ücretsizdir ve hak geri verilir
+  (`used − 1`, günlükte `undo`). Hak 0 iken de çalışır.
+- **Örnek tarih:** ilk yayın, tarih hâlâ tasarımın örnek tarihiyken engellenir (sihirbaz 6. adımın başında ve editörün ilk yayın
+  sheet'inde "Your wedding date is still the design's sample" + "Set our date" + "… really is our wedding date" onayı). Sunucu
+  tarafında güvenlik ağı: örnek tarihle yayınlanmış sitede gerçek tarihi girmek **bir kez** ücretsiz (`sample_date`, çapanın
+  tarihi taşınır).
+- **Önizleme jetonu** (`lib/keys.ts` `panelPreviewToken`): panel kendi önizlemesini (iframe, küçük resimler) kısa ömürlü
+  `<exp>.<HMAC(previewKeyHash, …)>` jetonuyla açar (11–12 saat, saat başına aynı değer, her yanıtla yenilenir; anahtar yenilenince
+  ölür). Kalıcı önizleme anahtarı panele **gönderilmez** (`PanelState.previewKey` kalktı → `previewToken`). `previewAccess`:
+  `panel` (jeton; arşivde de açılır) · `shared` (kalıcı anahtar; sunucu `<body>`'nin başına kaldırılamaz "Preview — not published"
+  şeridi basar, `withPreviewBar`) · `gone` (kalıcı anahtar + arşivlenmiş site ya da 18 ay geçmiş hiç yayınlanmamış taslak → 410).
+  Sayfalar, `.ics`, fotoğraflar ve RSVP durumu aynı kuralı kullanır.
+- **Sipariş kontrolü:** `CLAIM_ORDER_VERIFICATION=manual` (ara çözüm, Etsy API yokken): taslak hemen açılır, site
+  `orderCheck: {status: "pending"}` ile saklanır; yayın `403 order_pending`, paylaşılan önizleme 404 (panel önizlemesi çalışır),
+  panelde ve `/start` sonucunda açık not. Dükkân siparişi Etsy'de kontrol edip `node scripts/verify-order.ts (--order <no> | --slug
+  <adres>) --reason "…"` (`--show`) ile onaylar. Satış sitesi kapısı: `MARKETING.verified.orderCheck` false iken `launched: true`
+  reddedilir. Gerçek `EtsyOrderVerifier` yapılmadı (mağazanın Etsy API uygulaması + onay gerekir).
+- **Paylaşılan sayaç:** blob adaptörü `hitCounter` (`limits/<sha256>.json`, ETag'li koşullu yazım) → `/start` ve yükleme limitleri
+  bütün Vercel örneklerinde aynı pencereyi sayar (`AdapterRateLimiter`); `local` süreç içi bellekte kalır. **Foto sınırları:** site
+  başına günde 60 yükleme (`429 upload_limit`), toplam 450 dosya (`countPhotos`, `429 photo_limit`).
+- **Panel:** sihirbaz 2. adımda banner yok (alan "Sample" etiketleri yeter), hak kuralı yalnız 1. ve 6. adımda; saat dilimi ve tarih
+  biçimi ilk kurulumda telefondan gelir ("We'll use London time, from your phone · Change"), tasarımın saat dilimi örnek olarak
+  işaretlenir (telefon aynı bölgedeyse işaretlenmez); tarih biçimi editörde iki seçenek (Month first / Day first); sayaçlar yalnız
+  sınıra yakınken (%80); 6. adım alt çubuğu 320–419 px'te sarılır (Back yalnız ok, "Publish my website" tam satır), çubuk opak;
+  6. adım özeti davetiye kartındaki isimleri gösterir; 5. adım ve "Next steps" bölüm başına tek kısa satır ("Our Story: story intro
+  and 3 captions", `sampleSummaries`); kurallar kutusu/yardım düz cümleler (`changesRuleText`, `FREE_CHANGES_TEXT`, `UNDO_TEXT`,
+  `ARCHIVE_TEXT`: "closes for guests"); kimlik sheet'i ücretsiz nedenleri söyler ("Moving your date by up to 7 days is free.",
+  "Adding a surname is free.", "Save — free") ve snackbar "Date moved — free"; Host line Details'e taşındı (Names'te "Sample"
+  rozeti kalmaz); Edit listesinde tek rozet "3 name & date changes left" (Names satırında); 380 px altında bölüm başlığı üst
+  çubukta gizli (sayfa başlığı görünürken); Share'deki "Sign in by email — Not available yet" kartı kaldırıldı; geniş ekranda
+  önizleme açık bölümün sayfasını gösterir; önizleme her otomatik kayıtta değil, kayıt 2,5 sn durulunca bir kez yenilenir
+  (`useSettledVersion`); kırpma sheet'i 360 × 640'ta zoom çubuğu düğmelerin altında kalmaz.
+
 ### Bilinen eksikler (G060)
 
 - Magic link akışı (gönderme, tek kullanımlık token, oturum) yok — sağlayıcı yok; yalnız kapalı arayüz.
 - Gerçek telefonda denenmedi (Chromium mobil emülasyonu). Saat dilimi seçimi yerel `<select>` (aranabilir liste yok).
-- Önizleme hash'i (`#preview/<sayfa>`) ve önizlemede "Preview — not published" şeridi yok; yardım üst çubuk menüsünde değil, Home'da.
+- Önizleme hash'i (`#preview/<sayfa>`) yok; yardım üst çubuk menüsünde değil, Home'da. ("Preview — not published" şeridi
+  G060-fix'te geldi: paylaşılan kalıcı önizleme anahtarında.)
 - Arşivden sonra veri silme yok; 48 ay tavanı karar bekliyor.
+
+## Site şifresi (G076, K28)
+
+Çift isterse sitesini **tek bir misafir şifresiyle** korur; **varsayılan kapalı**. Şifre paylaşılmak için vardır (davetiye
+mesajına yazılır): çift panelde görür ve kopyalar; genel sayfalara hiç gönderilmez.
+
+- **Panel (Share → "Guest password"):** "Password protect your website" anahtarı. Açınca öneri gelir (iki kelime + sayı, ör.
+  `RainSaffron60`; "Suggest a password" yenisini verir); 4–40 karakter (kod noktası), büyük/küçük harf ve uçtaki boşluklar
+  önemsiz. "Copy password", "Add the password to your invitation message …" ipucu. Değişiklik **hemen** geçerli (yayın gerekmez;
+  `POST /api/edit/<slug>/access {enabled, password?}`, Bearer). Kapatınca şifre saklı kalır (tekrar açınca aynısı, kimse
+  çıkmaz); **şifre değişince** misafirler yeniden sorulur (snackbar ve uyarı satırı bunu söyler). Arşivde kart yok, uç `403 archived`.
+- **Saklama:** site kaydında `guestAccess = {enabled, password, version, secret, updatedAt}` (özel depo; içerik kaydında
+  **değil** → yayınlanan içerikle, önizlemeyle, `site-data`'yla hiçbir yere gitmez; şema değişmedi). Panel yalnız
+  `{enabled, password}` görür (`PanelMeta.guestAccess`); `secret` ve `version` sunucuda kalır. `version` şifre her
+  değiştiğinde +1.
+- **Misafir çerezi:** `__Host-guest-<site id>` = `<version>.<exp>.<HMAC-SHA256(secret, "guest-access:v1:<site id>:<version>:<exp>")>`,
+  `HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=90 gün`. İmza site kimliğini ve şifre sürümünü bağlar: başka sitenin
+  çerezi (adı değiştirilse de) geçmez, şifre değişince eski çerezler düşer. Şifre ve imza karşılaştırmaları sabit zamanlı
+  (`timingSafeEqual`; şifre SHA-256 özetleriyle, uzunluk sızmaz).
+- **Sıra (her misafir rotasında):** geçersiz/bilinmeyen adres, yayında olmayan site → **404** (şifreden söz edilmez) ·
+  arşiv → **410** (isimsiz) · panelin kısa ömürlü önizleme jetonu → her zaman açık · şifre açık + geçerli çerez yok
+  (kalıcı önizleme linki dahil) → sayfalar: **şifre sayfası** (200; bağlantı önizlemeleri yalnız 200'de etiket okur),
+  `/event.ics` → **303 `/<slug>`**, `/media/...` → **401** (görsel yok), `GET/POST /api/rsvp/<slug>` → **401
+  `password_required`** (hiçbir şey saklanmaz) · sonra sayfa. İleride teşekkür modu (G075) çiftin içeriğidir: şifreden **sonra**.
+- **Şifre sayfası** (`lib/site/gate.ts`): platformun sayfası, tema şablonu değil; temanın **kendi** stil dosyalarını
+  (`index.html` `<head>`'indeki Google Fonts + `site.css`: zemin dokusu, `--page/--ink/--ink-soft/--ivory/--script`
+  tokenları, gövde fontu) ve `theme-color`'ını kullanır; yalnız isimler + "You're invited" + şifre kutusu (tarih, mekân,
+  foto, yeni dekor yok — K21). "Show" düğmesi küçük, hash'li satır içi betik (CSP `default-src 'none'`, `form-action
+  'self'`). Meta: `og:title`/`<title>` = isimler, `description`/`og:description` = "You're invited", `og:image` = temanın
+  isimsiz paylaşım görseli, `robots noindex`. Başlıklar: `private, no-store`, `Vary: Cookie`, `noindex, nofollow`,
+  `no-referrer` (Google Fonts'a adres gitmez). Temanın sayfa geçişi (`@view-transition`) burada kapalı.
+- **Form:** aynı adrese `POST` (`site_access=1&password=…`, `application/x-www-form-urlencoded`, ≤ 4 KB) → doğru: çerez +
+  **303 aynı adres** (göreli `Location`, denetlenmiş slug'dan kurulur: açık yönlendirme yok; `next` parametresi yok) ·
+  yanlış: **401** + hata metni · çok deneme: **429** + `Retry-After` · `site_access` yoksa **405** (temanın JS'siz RSVP
+  formu eskisi gibi) · `Sec-Fetch-Site: cross-site` → **403** (başka site misafirin denemelerini harcayamaz).
+- **Hız sınırı** (`ACCESS_LIMITS`): yalnız **yanlış** şifreler sayılır — IP (+ IPv6 /64) + site başına 10 / 15 dk, IP başına
+  bütün siteler 30 / 15 dk; pencere doluyken **doğru şifre de** reddedilir (tahmin sürmez). Doğrular sayılmaz (aynı Wi-Fi'daki
+  aile/mekân). Sayaç paylaşımlı: `blob`'da `AdapterRateLimiter` (`hitCounter` + yeni `readCounter` = artırmadan okuma), bütün
+  Vercel örnekleri aynı pencereyi görür; `local`'da süreç içi bellek. `RateLimiter.peek` eklendi (bellek + adaptör).
+- **Korumalı sitede açık sayfalar:** `Cache-Control: private, no-store` + `Vary: Cookie` (Vercel CDN/proxy saklamaz); meta
+  etiketler yine yalnız isimler + "You're invited" (sekme başlığı dahil); `noindex, nofollow`. Fotoğraflar `private,
+  max-age=300` (tarayıcı kısa süre tutar, paylaşılan önbellek asla), `.ics` `private, no-store`. Şifre kapatılınca eski
+  başlıklar döner.
+- **Panel ve önizleme:** panel (düzenleme anahtarı) ve panelin önizleme jetonu şifresiz çalışır (çiftin kendi sitesi);
+  **kalıcı önizleme linki** misafir gibi şifre ister (dolaşan bir linktir).
+- **Site haritası / satış sitesi:** çift siteleri zaten hiçbir site haritasında ve örnek listesinde yok (satış sitesi yalnız
+  tema demolarını `/start/demo/<tema>` gösterir); test bunu korumalı site için de denetler. Çift siteleri `noindex`.
+
+Testler: `tests/g076-access.test.ts` (19, `npm test`'te): kurallar (sınırlar, temizleme, öneri), sabit zamanlı karşılaştırma,
+çerez (bayraklar, 90 gün, imza/sürüm/süre/başka site), panel ucu (açma/kapama/değiştirme, sürüm, 401/422/403), çerezsiz
+**her rota kapalı** (5 sayfa, `.ics`, foto, RSVP durum + gönderim), şifre sayfası içeriği/CSP, doğru/yanlış, açık
+yönlendirme yok, 405/403/413, hız sınırı (site+IP, IP, IPv6 /64, doğru şifre sayılmaz), blob'da iki sunucu örneği aynı sayaç,
+şifre değişince çıkış, başka sitenin çerezi, panel/önizleme, sıra (404/410), gizlilik (şifre hiçbir genel yanıtta yok,
+site haritası). Tarayıcı: `tests/g076-browser.ts` (51 kontrol, 390 × 844; ekranlar `previews/g076/`: `01_share_password_on`,
+`02_guest_password_blush-garden-rose`, `03_guest_wrong_password`, `04_guest_password_olive-ivory`, `checks.json`).
+
+Bilinen sınırlar: kısa şifre (ör. 4 rakam) kararlı bir saldırgana karşı zayıftır — sınır yavaşlatır, durdurmaz (öneri ~830 bin
+olasılık); şifre açılmadan önce paylaşılan bir fotoğraf URL'si Vercel CDN'de en çok 5 dk daha servis edilebilir (eski
+`public, s-maxage=300`); gerçek telefonda (iOS Safari / Android Chrome) ve gerçek Vercel Blob deposunda denenmedi;
+bağlantı önizlemesi (WhatsApp/iMessage) kazıyıcılarıyla denenmedi.
 
 ## /start sahiplenme akışı (G045)
 
@@ -812,13 +935,17 @@ Demo sayfaları önizleme kipinde (`previewKey: "demo"`):
 sayfalar arası linkler `/start/demo/<tema>/…?preview=demo` kalır, RSVP formu "preview" panelini gösterir ve gönderim yapmaz;
 CSP site ile aynı (`frame-ancestors 'self'`).
 
-**Hız sınırları** (`limits.ts`, `RateLimiter` arayüzü RSVP ile ortak; şimdilik süreç içi bellek): IP başına 10 deneme / 15 dk
+**Hız sınırları** (`limits.ts`, `RateLimiter` arayüzü RSVP ile ortak): IP başına 10 deneme / 15 dk
 (yanlış numaralar da sayılır → tahmin yavaşlar), IP başına 5 site / 24 sa, toplam 300 site / sa (Etsy doğrulaması kapalıyken
-kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G043 kalıcı limiter'ı `setClaimRateLimiter()` ile bağlamalı.
+kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob adaptöründe sayaç paylaşılır (`hitCounter`,
+`AdapterRateLimiter`: her Vercel örneği aynı pencereyi sayar); `local`'de süreç içi bellek. RSVP limiter'ı hâlâ süreç içi.
 
 ### Arayüz noktaları (kapalı / yok)
 - **Etsy sipariş doğrulaması** (`verify.ts`): `OrderVerifier.check({orderNumber, email, theme})` →
-  `not_checked | verified | rejected(reason) | unavailable`. Varsayılan `FormatOnlyVerifier` (dış kontrol yok).
+  `not_checked | verified | pending | rejected(reason) | unavailable`. Varsayılan `FormatOnlyVerifier` (dış kontrol yok).
+  `CLAIM_ORDER_VERIFICATION=manual` (G060-fix, `ManualOrderVerifier`): taslak açılır, `orderCheck.status = "pending"`; yayın
+  `403 order_pending` ve paylaşılan önizleme kapalı, ta ki dükkân `node scripts/verify-order.ts --order <no> --reason "…"` ile
+  onaylayana kadar (`confirmOrder`). Satış sitesi kapısı `MARKETING.verified.orderCheck` ister.
   `CLAIM_ORDER_VERIFICATION=etsy` **uygulanmadı**: bilinçli olarak hata verir (sessizce atlamak yerine 500). Uygularken
   doğrulanacaklar dosyanın başında (mağazanın makbuzu, ödenmiş mi, alıcı e-postası erişilebilir mi, ilan → tema eşlemesi,
   çok ürünlü sipariş). Kodda `setOrderVerifier()` ile takılır.
@@ -1031,6 +1158,8 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   `X-Robots-Tag: noindex` (docs/14 §5.5, karar 4 gelene kadar; eğitim botlarını robots.txt kapatır). Gizli link taşıyan `/edit/…` ve `/start`:
   `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
 - `site-data` JSON'u içerik kaydını taşımaz (kapalı bölümler kaynakta görünmez); şablon yorumları silinir.
+- **Site şifresi (G076):** isteğe bağlı; korumalı sitede her misafir rotası imzalı, siteye özel `__Host-` çerezi ister
+  (yukarıda "Site şifresi"); yanıtlar `private, no-store`, şifre yalnız özel site kaydında.
 - **Fotoğraflar** (`/media/<site>/<dosya>`, `lib/site/static.ts`): yalnız site yayındaysa ve yayındaki içerik o dosyayı kullanıyorsa
   (bir türev, fotoğrafı kullanılıyorsa — G055) (hikâye fotoğrafları yalnız Our Story açıkken) `public, max-age=300`; ya da isteğin `?preview=` anahtarı o sitenin ise
   `private, no-store`. Yayından kaldırılan sitenin, değiştirilen/silinen ve hiç kullanılmamış fotoğrafların hepsi 404. (Önceden her

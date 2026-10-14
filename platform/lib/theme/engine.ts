@@ -52,6 +52,11 @@ export interface RenderOptions {
   origin?: string | null;
   /** Share image / tab icon of the theme (LoadedTheme.share). Absent: no og:image, no icon tags. */
   share?: ThemeShareFiles | null;
+  /**
+   * Password-protected website (G076): <title>, description, og:/twitter: title and description carry only the couple's
+   * names and "You're invited" (no date, venue or place), and a robots noindex meta is added.
+   */
+  guestOnlyMeta?: boolean;
 }
 
 export interface RenderResult {
@@ -142,6 +147,38 @@ function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShar
   const lastMeta = head.children('meta').last();
   if (lastMeta.length) lastMeta.after(tags);
   else head.prepend(tags);
+}
+
+/** "You're invited" — the only words besides the names a protected website shows to link previews (G076). */
+const INVITED = "You're invited";
+
+/**
+ * Meta tags of a password-protected website (G076): names + "You're invited" only, whatever the template wrote
+ * (its description and og:description name the date and the place). Adds <meta name="robots" content="noindex, nofollow">.
+ */
+function guestOnlyMeta($: cheerio.CheerioAPI, names: string): void {
+  const head = $('head').first();
+  if (!head.length) return;
+  const set = (attr: 'name' | 'property', key: string, value: string) => {
+    const found = head.find(`meta[${attr}="${key}"]`);
+    if (found.length) found.attr('content', value);
+    else {
+      const el = $('<meta>');
+      el.attr(attr, key);
+      el.attr('content', value);
+      head.append(el);
+    }
+  };
+  const title = head.find('title').first();
+  if (title.length) title.text(names);
+  else head.prepend($('<title></title>').text(names));
+  set('name', 'description', INVITED);
+  set('property', 'og:title', names);
+  set('property', 'og:description', INVITED);
+  head.find('meta[name="twitter:title"]').attr('content', names);
+  head.find('meta[name="twitter:description"]').attr('content', INVITED);
+  head.find('meta[property="og:url"], meta[name="keywords"]').remove();
+  set('name', 'robots', 'noindex, nofollow');
 }
 
 export function renderTemplate(opts: RenderOptions): RenderResult {
@@ -534,6 +571,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
 
   const names = typeof view.name_display === 'string' ? view.name_display.trim() : '';
   writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? `${names} wedding invitation` : 'Wedding invitation');
+  if (opts.guestOnlyMeta) guestOnlyMeta($, names || 'Our wedding');
 
   // Theme inline scripts are trusted template code (content can never create a <script>:
   // every inserted value is text). Their hashes go into the page CSP.

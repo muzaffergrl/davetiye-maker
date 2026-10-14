@@ -41,3 +41,38 @@ export function newSiteKeys(): { editKey: string; previewKey: string; editKeyHas
   const previewKey = derivePreviewKey(editKey);
   return { editKey, previewKey, editKeyHash: hashKey(editKey), previewKeyHash: hashKey(previewKey) };
 }
+
+// ---------------------------------------------------------------------------------------------
+// Panel preview token (G060-fix, docs/16 §11.11)
+//
+// The panel's own preview (iframe, photo thumbnails) uses a SHORT-LIVED token instead of the long-lived preview
+// key: "<exp>.<HMAC-SHA256(previewKeyHash, 'panel-preview:v1:<siteId>:<exp>')>" (exp in Unix seconds). It is valid
+// for PANEL_PREVIEW_TTL_MS, cannot be turned into edit access, stops working when the keys are reissued (the stored
+// hash changes) and needs no extra server secret. The expiry is rounded to the hour, so every panel request in the
+// same hour gets the same token (the preview frame is not sent to a new address on every save).
+
+export const PANEL_PREVIEW_TTL_MS = 12 * 60 * 60_000;
+const TOKEN_BUCKET_MS = 60 * 60_000;
+const TOKEN_RE = /^(\d{9,11})\.([A-Za-z0-9_-]{43})$/;
+
+function tokenSignature(siteId: string, previewKeyHash: string, expSeconds: number): string {
+  return createHmac('sha256', previewKeyHash).update(`panel-preview:v1:${siteId}:${expSeconds}`).digest('base64url');
+}
+
+/** A panel preview token for this site, valid for 11 to 12 hours from `now`. */
+export function panelPreviewToken(siteId: string, previewKeyHash: string, now: number = Date.now()): string {
+  const exp = Math.floor((Math.floor(now / TOKEN_BUCKET_MS) * TOKEN_BUCKET_MS + PANEL_PREVIEW_TTL_MS) / 1000);
+  return `${exp}.${tokenSignature(siteId, previewKeyHash, exp)}`;
+}
+
+/** Constant-time check of a panel preview token. Never throws. */
+export function verifyPanelPreviewToken(token: unknown, siteId: string, previewKeyHash: unknown, now: number = Date.now()): boolean {
+  if (typeof token !== 'string' || typeof previewKeyHash !== 'string' || !HASH_RE.test(previewKeyHash)) return false;
+  const m = TOKEN_RE.exec(token);
+  if (!m) return false;
+  const exp = Number(m[1]);
+  if (!(exp * 1000 > now) || exp * 1000 - now > PANEL_PREVIEW_TTL_MS + TOKEN_BUCKET_MS) return false;
+  const a = Buffer.from(m[2], 'utf8');
+  const b = Buffer.from(tokenSignature(siteId, previewKeyHash, exp), 'utf8');
+  return a.length === b.length && timingSafeEqual(a, b);
+}
