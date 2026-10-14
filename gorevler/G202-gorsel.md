@@ -2,7 +2,7 @@
 id: G202
 baslik: Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -67,3 +67,4 @@ Tasarım 02'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 alindi: gpt-gorsel-A
 - 2026-10-14 W1 (5), W2 (17) ve Paket 2 (5) üretildi; yeniden üretimler ve oran sapmaları Sonuç'a kaydedildi. Paket 5 23/23, Paket 2 5/5 geçti.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A
+- 2026-10-14 entegratör onayladı

@@ -19,6 +19,8 @@ Tasarım 06'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - İçerik `collections/06_Art_Deco_Noir/content.demo.json`, renk `collections/06_Art_Deco_Noir/palette.json`, özet `collections/06_Art_Deco_Noir/DESIGN_BRIEF.md`
 - Araçlar: `tools/parts_prep.py` (geçici klasöre; docs/11 §5.3), `python3 tools/kit_check.py collections/06_Art_Deco_Noir --paket 5`, `node scripts/theme-check.cjs --theme <slug>` (G052)
 
+- **G206 açık kusurları:** iki çerçevenin yeşil penceresinde yarı saydam/koyu lekeler → pencere kodla tam maske (parts_prep `leke_doldur`); zarf (kapı) hizası UYARI (sol kat +1,43%, sağ kat -1,60%) → manifest.stage.align ile düzelt.
+
 ## Yapılacaklar
 1. `theme.json`, 5 sayfa, `site.css`, `site.js`, `build_images.py`, `README.md` docs/11 §1–§4 düzeninde. 03'ten yalnız platform sözleşmesi alınır (motor işaretleri, RSVP formu, `#site-data`, slug'lı oturum anahtarları, `data-scene`/`data-step`/`data-a` kancaları); yerleşim, tipografi ve hiyerarşi bu tasarımın W1 comp'larından — tema `README.md`'sinde sayfa başına **comp öğe haritası** (her W1 öğesi → şablon öğesi ya da gerekçeli sapma; comp'u olmayan bölümler bu tasarımın parçaları ve tipografisiyle, docs/11 §8).
 2. Parçalar: `python3 platform/themes/art-deco-black-tie/build_images.py` → `parts_prep` **geçici klasöre** (`--prep-dir`; tema klasörüne, `img_src/`'ye ya da `assets/`'e asla — docs/11 §1, §5.3–§5.4), tip kesimleri (§7), maskeler, `free_zone`, yer tutucular, og; WebP + srcset genişlikleri (§5.1, §5.5). Yalnız bu tasarımın GPT parçaları; yeni şekil/dekor çizme (K21).
