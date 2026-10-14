@@ -59,3 +59,4 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 2, 8/8: info_card, frame_portrait, frame_landscape, decor_tl eklendi; sekiz parça ve zarf hizası denetlendi. Durum alindi.
 - 2026-10-14 kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero + PAKET 2
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-M) 5/5 geçti. Kısım 2 geçti ama closure.png 1024×1536 zarf tuvalinde küçük mühür (entegratör talimatı hatalıydı); Kaydet'e göre 1024×1024 kare, mühür karenin ~%70'i → kısım 3'te yeniden üretilecek.
+- 2026-10-14 devam: gpt-gorsel-I (kısım 3)
