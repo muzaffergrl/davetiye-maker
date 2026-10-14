@@ -2,7 +2,7 @@
 id: G204
 baslik: Tasarım 04 Vintage Airmail Love Letter — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: codex-gpt-gorsel
 oncelik: 1
 bagimli: []
@@ -47,3 +47,5 @@ Tasarım 04'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: codex-gpt-gorsel
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
+- 2026-10-14 entegratör: teslim kabul edildi (kit_check 24/24 + 5/5; hiza +1.56% uyarı → tema build ölçek/öteleme ile düzeltir; çerçeve pencerelerinde yarı saydam leke → parts_prep/tema_build doldurur).
