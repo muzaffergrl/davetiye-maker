@@ -2,7 +2,7 @@
 id: G077
 baslik: Canlıya güncel main — panel v2, satış sitesi, yeni temalar; canlı kontrol + kullanıcı için test linkleri
 rol: claude-tarayici
-durum: inceleme
+durum: bitti
 alan: claude-local-1
 oncelik: 1
 bagimli: []
@@ -74,3 +74,4 @@ build (trace-check: 5 tema) — hepsi yeşil. Canlıda `live-check` **40/40** (y
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği
 - 2026-10-14 alindi: claude-local-1
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı

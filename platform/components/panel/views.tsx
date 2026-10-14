@@ -50,8 +50,10 @@ import {
 import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { rsvpClosesAt } from '../../lib/rsvp/deadline.ts';
 import type { PanelApi } from './api.ts';
+import type { AccessOutcome } from './usePanel.ts';
 import { StatusBadges } from './fields.tsx';
 import { QrCode } from './QrCode.tsx';
+import { GuestPasswordCard } from './GuestPassword.tsx';
 import { zoneCity } from './sections.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, EmptyState, OverflowMenu, RightsMeter, useSnackbar } from './ui.tsx';
@@ -741,6 +743,7 @@ export function ShareView({
   onPublish,
   onOffline,
   onCopy,
+  onGuestAccess,
 }: {
   url: string;
   slug: string;
@@ -751,6 +754,8 @@ export function ShareView({
   onPublish: () => void;
   onOffline: () => void;
   onCopy: (text: string, what: string) => void;
+  /** Guest password on/off or a new one (G076). */
+  onGuestAccess: (enabled: boolean, password?: string) => Promise<AccessOutcome>;
 }) {
   const live = meta.status === 'published';
   const archived = meta.rights.archived;
@@ -796,6 +801,8 @@ export function ShareView({
           <p className={styles.hint}>Scan it once with your phone camera before you print it.</p>
         </Card>
       ) : null}
+
+      {!archived ? <GuestPasswordCard access={meta.guestAccess} online={online} onSave={onGuestAccess} onCopy={onCopy} /> : null}
 
       <Card title="Your edit link" titleId="share-edit">
         <p className={styles.cardText}>

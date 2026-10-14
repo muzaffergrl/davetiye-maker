@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 31 · alindi 5 · inceleme 5 · blokaj 277 · bitti 70 · toplam 388
+Özet: hazir 18 · alindi 10 · inceleme 4 · blokaj 277 · bitti 79 · toplam 388
 
 ## claude-canva
 
@@ -106,10 +106,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (44)**
+**Üzerinde çalışılan / incelemede / blokaj (43)**
 
 - `G063` inceleme · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
-- `G077` inceleme · claude-local-1 — Canlıya güncel main — panel v2, satış sitesi, yeni temalar; canlı kontrol + kullanıcı için test linkleri
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -153,11 +152,11 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 0 · Biten: 2
+Bağımlılık bekleyen: 0 · Biten: 3
 
 ## claude-kod
 
-**Alınabilir (9)**
+**Alınabilir (10)**
 
 - `G068` p1 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla) → `gorevler/G068-duzenlenebilir-metinler.md`
 - `G075` p1 — Düğün sonrası teşekkür modu — site düğünden sonra "Thank you" hâline geçer (otomatik, çift kapatabilir) → `gorevler/G075-tesekkur-modu.md`
@@ -168,12 +167,12 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `G409` p3 — Tasarım 09 Lavender Provence — platform teması → `gorevler/G409-website-kaynak.md`
 - `G410` p3 — Tasarım 10 Tuscan Vineyard — platform teması → `gorevler/G410-website-kaynak.md`
 - `G411` p3 — Tasarım 11 Boho Pampas Terracotta — platform teması → `gorevler/G411-website-kaynak.md`
+- `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (87)**
+**Üzerinde çalışılan / incelemede / blokaj (86)**
 
 - `G066` alindi · claude-G066 — Satış sitesi + panel BKE Studio marka tasarımına geçer (GM04/GM05 comp'ları, ad, logo, favicon, renk/yazı)
 - `G069` alindi · claude-G069 — RSVP yanıtları çift için düzenli ve şık — özetler, soru cevap dökümü, yeni yanıt işareti, misafir isimleri, yazdırılabilir liste
-- `G076` alindi · claude-G076 — İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
@@ -259,7 +258,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 9 · Biten: 30
+Bağımlılık bekleyen: 8 · Biten: 31
 
 ## claude-metin
 
@@ -326,30 +325,24 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (13)**
+**Alınabilir (0)**
 
-- `G214` p2 — Tasarım 14 Ivory Lace & Pearls — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G214-gorsel.md`
-- `G215` p2 — Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G215-gorsel.md`
-- `G216` p2 — Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G216-gorsel.md`
-- `G217` p2 — Tasarım 17 Emerald & Gold Estate — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G217-gorsel.md`
-- `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G218-gorsel.md`
-- `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
-- `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
-- `G815` p2 — Tasarım 15 Cherry Blossom Spring — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G815-mockup.md`
-- `G816` p2 — Tasarım 16 Sunflower Rustic Barn — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G816-mockup.md`
-- `G817` p2 — Tasarım 17 Emerald & Gold Estate — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G817-mockup.md`
-- `G818` p2 — Tasarım 18 Wildflower Meadow Vellum — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G818-mockup.md`
-- `G819` p2 — Tasarım 19 Midnight Garden — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G819-mockup.md`
-- `G820` p2 — Tasarım 20 Coastal Seaside — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G820-mockup.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (31)**
+**Üzerinde çalışılan / incelemede / blokaj (37)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
-- `G212` alindi · gpt-gorsel-D — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G213` alindi · gpt-gorsel-C — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G214` alindi · gpt-gorsel-E — Tasarım 14 Ivory Lace & Pearls — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G215` alindi · gpt-gorsel-G — Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G216` alindi · gpt-gorsel-H — Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G217` alindi · gpt-gorsel-I — Tasarım 17 Emerald & Gold Estate — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G218` alindi · gpt-gorsel-J — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G219` alindi · gpt-gorsel-K — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G220` alindi · gpt-gorsel-F — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
 - `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
 - `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
@@ -376,4 +369,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 31
+Bağımlılık bekleyen: 0 · Biten: 38

@@ -37,8 +37,8 @@
         <source media="(min-aspect-ratio: 3/4)" srcset="img/wall_wide-640.webp">
         <img class="scene-img" src="img/wall-540.webp" alt="" fetchpriority="high">
       </picture>
-      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 500px), min(54vw, 28svh, 300px)" alt="">
-      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 500px), min(52vw, 26svh, 300px)" alt="">
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 500px), min(54vw, 28svh, 300px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 500px), min(52vw, 26svh, 300px)" alt="">
       <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
       <img class="float f-bloom" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
       <img class="float f-bloom2" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
@@ -132,12 +132,14 @@
           <img class="frame-img" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(72vw, 340px)" alt="" loading="lazy">
         </span>
         <span class="pl-text"><span class="script pl-title">The Day</span><span class="kicker cue">Details</span></span>
+        <!-- the first four schedule rows (docs/11 §3.2; site.css shows four) -->
+        <span class="pl-sched"><span class="pl-row" data-repeat="schedule"><span data-field=".label"></span> · <span class="nowrap" data-field=".time"></span></span></span>
       </a>
     </div>
   </section>
 
   <footer class="foot wash-end" data-scene="home-foot">
-    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
     <p class="kicker" data-step="sign" data-a="fade">With love</p>
     <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
     <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1">Open the envelope again</a></p>
@@ -145,6 +147,7 @@
 </main>
 
 <nav class="site-nav" aria-label="Wedding pages">
+  <span class="orn" aria-hidden="true"><img src="img/tile_flower-73.webp" alt=""></span>
   <ul>
     <li><a href="home.html" aria-current="page"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>

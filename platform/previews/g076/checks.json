@@ -1,0 +1,222 @@
+{
+  "when": "2026-10-14",
+  "passed": 51,
+  "total": 51,
+  "checks": [
+    {
+      "name": "before: the website is open (no password by default)",
+      "ok": true
+    },
+    {
+      "name": "Share: the password card is there, off by default",
+      "ok": true
+    },
+    {
+      "name": "switching on suggests a password (two words + number)",
+      "ok": true,
+      "detail": "RibbonClover65"
+    },
+    {
+      "name": "\"Suggest a password\" gives another one",
+      "ok": true,
+      "detail": "RibbonClover65 → SunSummer79"
+    },
+    {
+      "name": "hint: add the password to your invitation message",
+      "ok": true
+    },
+    {
+      "name": "a 3-character password is refused with a clear message",
+      "ok": true
+    },
+    {
+      "name": "still off on the server after the refusal",
+      "ok": true
+    },
+    {
+      "name": "turned on: snackbar says guests need it",
+      "ok": true
+    },
+    {
+      "name": "the couple sees their password (to share it)",
+      "ok": true
+    },
+    {
+      "name": "\"Copy password\" copies it",
+      "ok": true,
+      "detail": "SunSummer79"
+    },
+    {
+      "name": "Share: no horizontal scroll at 390 px",
+      "ok": true
+    },
+    {
+      "name": "Share password card: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): Share with the password on has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "guest (already on the site) is asked for the password on the next page",
+      "ok": true
+    },
+    {
+      "name": "guest: the password page answers 200, private, no-store",
+      "ok": true
+    },
+    {
+      "name": "guest: password page instead of the envelope",
+      "ok": true
+    },
+    {
+      "name": "password page: the names, \"You’re invited\", no date / venue",
+      "ok": true,
+      "detail": "YOU’RE INVITED\n\nClara & Julian\n\nThis website is private. Please enter the password from your invitation.\n\nPassword\nShow\nOpen the invitation\n\nYou only need to enter it once on this device."
+    },
+    {
+      "name": "password page: no photos",
+      "ok": true
+    },
+    {
+      "name": "password page: the theme’s own page colour (--page #F2D8D7)",
+      "ok": true,
+      "detail": "rgb(242, 216, 215)"
+    },
+    {
+      "name": "password page: the names in the theme’s script font",
+      "ok": true,
+      "detail": "\"Great Vibes\", \"Pinyon Script\", \"Snell Roundhand\", \"Apple Chancery\", cursive"
+    },
+    {
+      "name": "password page: no horizontal scroll at 390 px",
+      "ok": true
+    },
+    {
+      "name": "password page: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "no console errors on the password page (CSP: theme CSS, fonts, the one hashed script)",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): password page (blush-garden-rose) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "\"Show\" reveals the typed password (progressive script under the CSP)",
+      "ok": true
+    },
+    {
+      "name": "wrong password: the page again with the message",
+      "ok": true
+    },
+    {
+      "name": "wrong password: the field is marked invalid and focused",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): password page, wrong password has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "right password (any case, extra spaces): the envelope opens at the same address",
+      "ok": true
+    },
+    {
+      "name": "cookie: __Host-, HttpOnly, Secure, SameSite=Lax, ~90 days",
+      "ok": true,
+      "detail": "{\"name\":\"__Host-guest-347aff141b9f461dbb51df525e201504\",\"value\":\"1.1799752672.5G6TT2pCbhDHOHSRn9EBSiyuvKucb716u_sFxGQj_TY\",\"domain\":\"127.0.0.1\",\"path\":\"/\",\"expires\":1799752672.019061,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"}"
+    },
+    {
+      "name": "cookie: not readable by page scripts",
+      "ok": true
+    },
+    {
+      "name": "home opens with the cookie",
+      "ok": true
+    },
+    {
+      "name": "the couple’s photos load with the cookie",
+      "ok": true,
+      "detail": "[{\"src\":\"http://127.0.0.1:3376/media/347aff14-1b9f-461d-bb51-df525e201504/5808a3175132d79190338cd07394e168-640w.jpg\",\"ok\":true,\"lazy\":false},{\"src\":\"http://127.0.0.1:3376/media/347aff14-1b9f-461d-bb51-df525e201504/e4478f9580ca95993518c3d3e0e3eeb3-640w.jpg\",\"ok\":true,\"lazy\":true}]"
+    },
+    {
+      "name": ".ics with the cookie: the calendar file, private",
+      "ok": true,
+      "detail": "200 private, no-store"
+    },
+    {
+      "name": "RSVP status with the cookie: 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "the same photo URL without the cookie: 401, no image",
+      "ok": true
+    },
+    {
+      "name": ".ics without the cookie: 303 to the password page",
+      "ok": true
+    },
+    {
+      "name": "RSVP POST without the cookie: 401 password_required",
+      "ok": true
+    },
+    {
+      "name": "panel preview token: the page, no password (couple has no guest cookie)",
+      "ok": true
+    },
+    {
+      "name": "changing it warns that guests will be asked again",
+      "ok": true
+    },
+    {
+      "name": "new password saved: snackbar \"Guests will be asked for it again\"",
+      "ok": true
+    },
+    {
+      "name": "guest: asked for the password again after the change",
+      "ok": true
+    },
+    {
+      "name": "guest: the old password no longer works",
+      "ok": true
+    },
+    {
+      "name": "guest: the new password opens the page they were on",
+      "ok": true
+    },
+    {
+      "name": "olive-ivory: protected through the panel API",
+      "ok": true
+    },
+    {
+      "name": "olive-ivory: password page (the cookie of the other website does not count)",
+      "ok": true
+    },
+    {
+      "name": "olive-ivory: the theme’s page colour (#EDE4D0)",
+      "ok": true,
+      "detail": "rgb(237, 228, 208)"
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): password page (olive-ivory) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "password page: no horizontal scroll at 320 px",
+      "ok": true
+    },
+    {
+      "name": "mediterranean-lemon: password page",
+      "ok": true
+    },
+    {
+      "name": "vintage-airmail-love-letter: password page",
+      "ok": true
+    }
+  ]
+}

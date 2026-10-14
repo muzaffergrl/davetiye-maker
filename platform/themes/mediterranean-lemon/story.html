@@ -29,7 +29,17 @@
 
 <main class="site-main">
   <header class="page-head" data-scene="story-head">
-    <img class="corner corner-tl page-corner" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(50vw, 360px)" alt="">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/wall_wide-640.webp">
+        <img class="scene-img" src="img/wall-540.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(30vw, 48vh, 400px), min(50vw, 360px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 460px), min(54vw, 30svh, 340px)" alt="">
+      <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+      <img class="float f-bloom" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-bloom2" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+    </div>
     <h1 class="script page-title" data-step="title" data-a="write">Our Story</h1>
     <p class="kicker" data-step="kicker" data-a="fade">Moments we hold dear</p>
     <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
@@ -37,52 +47,59 @@
 
   <!-- the tile panels: one scene each, so each one turns in as it comes into view (left, right, left) -->
   <section class="tiles" aria-label="Our photos">
-    <figure class="tile t-1" data-scene="story-tile">
+    <figure class="tile t-1" data-scene="story-tile" data-fold>
       <div class="frame" data-step="panel" data-a="turn-l">
         <div class="photo-slot mask-portrait" data-slot="story_1">
           <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) 145px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.0.caption}">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 240px, min(64vw, 330px)" alt="">
-        <img class="sprig-tuck" src="img/accent_1-174.webp" alt="">
+        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 720px) 145px, min(38vw, 192px)" alt="">
+        <img class="tuck-bloom" src="img/accent_2-200.webp" alt="">
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
       <img class="wall-piece wp-leaf" data-step="caption" data-a="fade" src="img/accent_3-200.webp" alt="">
+      <img class="wall-piece wp-bloom" data-step="caption" data-a="fade" src="img/accent_2-200.webp" alt="">
     </figure>
-    <figure class="tile t-2" data-scene="story-tile">
+    <figure class="tile t-2" data-scene="story-tile" data-fold>
       <div class="frame" data-step="panel" data-a="turn-r">
         <div class="photo-slot mask-portrait" data-slot="story_2">
           <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) 145px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 240px, min(64vw, 330px)" alt="" loading="lazy">
-        <img class="sprig-tuck" src="img/accent_1-174.webp" alt="" loading="lazy">
+        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 720px) 145px, min(38vw, 192px)" alt="" loading="lazy">
+        <img class="tuck-bloom" src="img/accent_2-200.webp" alt="" loading="lazy">
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
       <img class="wall-piece wp-bloom" data-step="caption" data-a="fade" src="img/accent_2-200.webp" alt="" loading="lazy">
+      <img class="wall-piece wp-leaf" data-step="caption" data-a="fade" src="img/accent_3-200.webp" alt="" loading="lazy">
     </figure>
-    <figure class="tile t-3" data-scene="story-tile">
+    <figure class="tile t-3" data-scene="story-tile" data-fold>
       <div class="frame" data-step="panel" data-a="turn-l">
         <div class="photo-slot mask-portrait" data-slot="story_3">
           <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) 145px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 240px, min(64vw, 330px)" alt="" loading="lazy">
-        <img class="sprig-tuck" src="img/accent_1-174.webp" alt="" loading="lazy">
+        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 720px) 145px, min(38vw, 192px)" alt="" loading="lazy">
+        <img class="tuck-bloom" src="img/accent_2-200.webp" alt="" loading="lazy">
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
       <img class="wall-piece wp-leaf" data-step="caption" data-a="fade" src="img/accent_3-200.webp" alt="" loading="lazy">
+      <img class="wall-piece wp-bloom" data-step="caption" data-a="fade" src="img/accent_2-200.webp" alt="" loading="lazy">
     </figure>
   </section>
 
   <section class="section next-sec wash-end" data-scene="story-next">
-    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
     <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
     <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
   </section>
 </main>
 
 <nav class="site-nav" aria-label="Wedding pages">
+  <span class="orn" aria-hidden="true"><img src="img/tile_flower-73.webp" alt=""></span>
   <ul>
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>

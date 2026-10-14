@@ -27,7 +27,17 @@
 <main class="site-main">
   <!-- ORDER OF THE DAY (comp W1.4) — one row per schedule item -->
   <section class="details-top" data-scene="details-card" aria-labelledby="day-title">
-    <img class="corner corner-tl page-corner" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(50vw, 360px)" alt="">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/wall_wide-640.webp">
+        <img class="scene-img" src="img/wall-540.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(30vw, 48vh, 400px), min(50vw, 360px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 460px), min(54vw, 30svh, 340px)" alt="">
+      <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+      <img class="float f-bloom" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-bloom2" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+    </div>
     <p class="kicker page-kicker" data-step="kicker" data-a="fade"><span data-field="date" data-format="weekday"></span> · <span class="nowrap" data-field="date"></span></p>
     <div class="wrap">
       <div class="paper info day-card" data-step="card" data-a="set">
@@ -44,7 +54,7 @@
         </div>
       </div>
       <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
-      <div class="cal" data-step="cal" data-a="rise">
+      <div class="cal" data-step="cal" data-a="rise" data-fold>
         <p class="kicker">Add to your calendar</p>
         <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
       </div>
@@ -66,7 +76,10 @@
       <p class="note" data-if="venue.address" data-field="venue.address"></p>
       <p class="note" data-if="ceremony_time">The ceremony begins at <span class="nowrap" data-field="ceremony_time"></span>.</p>
     </div>
-    <p class="dress" data-optional="dress_code" data-if="dress_code" data-step="dress" data-a="fade"><span class="kicker">Dress code</span> <span class="dot" aria-hidden="true">·</span> <em data-field="dress_code"></em></p>
+    <div class="dress" data-optional="dress_code" data-if="dress_code" data-step="dress" data-a="fade">
+      <span class="orn" aria-hidden="true"><img src="img/tile_flower-73.webp" alt="" loading="lazy"></span>
+      <p><span class="kicker">Dress code</span> <span class="dot" aria-hidden="true">·</span> <em data-field="dress_code"></em></p>
+    </div>
     <p class="action" data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
   </section>
 
@@ -98,12 +111,13 @@
   </section>
 
   <section class="section next-sec wash-end" data-scene="details-next">
-    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
     <p data-step="link" data-a="rise" data-if="!rsvp.method"><a class="btn" href="rsvp.html">RSVP</a></p>
   </section>
 </main>
 
 <nav class="site-nav" aria-label="Wedding pages">
+  <span class="orn" aria-hidden="true"><img src="img/tile_flower-73.webp" alt=""></span>
   <ul>
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>

@@ -1,6 +1,7 @@
 // Panel model (G039): types and pure helpers shared by the server routes and the browser panel.
 // No Node imports here; this file is bundled into the client.
 
+import type { GuestAccessView } from './guest-access.ts';
 import type { ContentRecord, Partner } from '../content/types.ts';
 import { CONTENT_LIMITS } from '../content/limits.ts';
 import type { ValidationIssue } from '../content/validate.ts';
@@ -96,6 +97,8 @@ export interface PanelMeta {
   previewToken: string;
   /** The shop has not confirmed the Etsy order yet (manual order checks): editing works, publishing waits (G060-fix). */
   orderPending: boolean;
+  /** Optional guest password (G076): on/off and the password itself (the couple shares it with guests). */
+  guestAccess: GuestAccessView;
 }
 
 export interface PanelState extends PanelMeta {

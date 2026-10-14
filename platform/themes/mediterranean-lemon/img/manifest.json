@@ -235,7 +235,7 @@
    ],
    "card": [
     22.276,
-    54.0,
+    60.755,
     55.56,
     62.098
    ]
@@ -256,11 +256,13 @@
    "bottom_frac_of_stage_w": 0.00112
   },
   "card_path": {
-   "out_translate_pct": -86.959,
-   "front_translate_pct": -83.959,
+   "out_translate_pct": -97.838,
+   "front_translate_pct": -94.838,
    "front_scale": 1.04,
    "pocket_edge_at_card_corners": 899.8,
-   "card_w_of_env": 0.56
+   "card_w_of_env": 0.56,
+   "pocket_flat_edge": 978.3,
+   "photo_above_pocket": 0.06
   },
   "cuts": {
    "cflap": {
@@ -2089,6 +2091,12 @@
     "bytes": 59826
    },
    {
+    "file": "decor_tl-720.webp",
+    "w": 720,
+    "h": 743,
+    "bytes": 113712
+   },
+   {
     "file": "decor_tl-960.webp",
     "w": 960,
     "h": 991,
@@ -2108,6 +2116,12 @@
     "w": 480,
     "h": 487,
     "bytes": 62102
+   },
+   {
+    "file": "decor_br-720.webp",
+    "w": 720,
+    "h": 731,
+    "bytes": 120594
    },
    {
     "file": "decor_br-960.webp",
@@ -2181,6 +2195,33 @@
     "h": 94,
     "bytes": 6160
    }
+  ]
+ },
+ "tile_flower": {
+  "src_size": [
+   73,
+   65
+  ],
+  "ratio": 1.12308,
+  "files": [
+   {
+    "file": "tile_flower-73.webp",
+    "w": 73,
+    "h": 65,
+    "bytes": 2180
+   }
+  ],
+  "source": "frame_portrait",
+  "tile_box_px": [
+   466,
+   284,
+   564,
+   368
+  ],
+  "petals_px": 2890,
+  "centre_in_tile": [
+   48.1,
+   41.8
   ]
  },
  "wall": {
@@ -2570,8 +2611,10 @@
     "closure-320.webp": 417,
     "closure-640.webp": 1499,
     "decor_br-480.webp": 349,
+    "decor_br-720.webp": 1183,
     "decor_br-960.webp": 1864,
     "decor_tl-480.webp": 283,
+    "decor_tl-720.webp": 850,
     "decor_tl-960.webp": 1623,
     "divider-300.webp": 372,
     "divider-600.webp": 2140,
