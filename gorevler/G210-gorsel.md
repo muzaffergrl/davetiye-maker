@@ -2,8 +2,8 @@
 id: G210
 baslik: Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-F
 oncelik: 2
 bagimli: []
 yazar: [collections/10_Tuscan_Vineyard/assets/gpt/comps/, collections/10_Tuscan_Vineyard/assets/gpt/parts/, collections/10_Tuscan_Vineyard/assets/gpt/photos/]
@@ -37,3 +37,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: gpt-gorsel-F
