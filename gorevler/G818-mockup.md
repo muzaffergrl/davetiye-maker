@@ -38,3 +38,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 alindi: gpt-ui-site
 - 2026-10-14 ara kayıt (3.1–3.2): kapak ve üç telefon sahnesi kaydedildi; kapakta telefon ve çiçekler aşağı alındı (cover_hand_v2 seçildi); iki sahnenin oran/ekran kontrolleri geçti.
 - 2026-10-14 ara kayıt (3.3–3.4): laptop + telefon ve masa üstü sahnesi kaydedildi; laptop tuşlarındaki yazılar kaldırıldı (laptop_phone_v2 seçildi); iki sahnenin oran/ekran kontrolleri geçti.
+- 2026-10-14 ara kayıt (3.1–3.2 yeniden üretim): kullanıcının yalnız imagegen talebiyle saf renk talimatı güçlendirilerek cover_hand_v3 ve three_phones_v2 üretildi; oran/ekran kontrolleri geçti. Piksel rengi son kontrolde ayrıca doğrulanacak.
