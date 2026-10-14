@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Margot",
+      "full_name": "Margot Elise"
+    },
+    {
+      "display_name": "Henry",
+      "full_name": "Henry Arthur"
+    }
+  ],
+  "name_display": "Margot & Henry",
+  "initials": "M&H",
+  "host_line": "Together with their families",
+  "date": "2027-10-02",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "The Old Post House",
+    "city": "Hudson",
+    "region": "New York",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Orchard Lawn"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Library Bar"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Post Hall"
+    }
+  ],
+  "dress_code": "Cocktail attire",
+  "rsvp": {
+    "deadline": "2027-08-21",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Some love stories are written one letter at a time. Ours led us to",
+    "items": [
+      {
+        "caption": "A table for two"
+      },
+      {
+        "caption": "Sealed with a yes"
+      },
+      {
+        "caption": "Yours, always"
+      }
+    ]
+  }
+}
