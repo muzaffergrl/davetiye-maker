@@ -38,3 +38,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-H; bu oturum yalnız kısım 1: W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
+- 2026-10-14 ara kayıt (W1): gpt-gorsel-H; comps/web_1_envelope.png, web_2_home.png, web_3_story.png, web_4_details.png, web_5_rsvp.png üretildi (5/8); beşi de 1024×1536, görsel Kontrol satırları incelendi. Kalan bu oturum: bg_page, bg_tile, envelope_closed.
