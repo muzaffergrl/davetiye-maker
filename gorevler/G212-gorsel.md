@@ -2,7 +2,7 @@
 id: G212
 baslik: Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: bitti
 alan: gpt-gorsel-D
 oncelik: 2
 bagimli: []
@@ -28,10 +28,18 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 
 ## Bitti sayılması için
 - [x] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
-- [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
-- [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
+- [x] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
+- [x] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
+- Nihai birleşik sonuç (gpt-gorsel-D, dört oturum, 2026-10-14): **27 görsel hazır** — PAKET 5'te 5 W1 comp + 17 W2 parça, PAKET 2'de 5 örnek fotoğraf. Kısım 1'de 8, kısım 2'de 8, kısım 3'te 6 ve son oturumda 5 görsel tamamlandı. Aşağıdaki kısım 1–3 kayıtları o oturumların tarihsel sonuçlarıdır; eksik listeleri son oturumla kapandı. Görev incelemeye gönderildi.
+- Son oturum (PAKET 2, 5/5): `collections/12_Tropical_Destination/assets/gpt/photos/hero_portrait.jpg`, `story_1.jpg`, `story_2.jpg`, `story_3.jpg`, `venue.jpg` bu sırayla üretildi. İlk dört dosya 1024×1536, venue 1536×1024; hepsi gerçek RGB JPEG (kalite 95). Prompt'lar `GPT_PROMPTS.md` içindeki PAKET 2 bloklarından kelimesi kelimesine kullanıldı. Üretim sonrası yalnız JPEG biçimine dönüştürüldü; kırpma, yeniden boyutlandırma veya rötuş yapılmadı.
+- Son oturum referansları: mevcut `web_2_home.png` ve `web_3_story.png` renk/hava için sohbete yüklendi. Ana portre önce üretildi; story_1–3 ve venue çağrılarında kaydedilen hero_portrait.jpg referans verildi. Venue prompt'u aynen korunduğu için insansız; hero burada ortam/renk referansıdır. Hero/story_1/story_2'de çiftin yüzleri, saçları ve kıyafetleri tutarlı; story_3'te kıyafet/ten, görünen eller, yüzük ve buket kontrol edildi. Fotoğraflarda yazı/logo/tabela/filigran görülmedi; gerçek kişi veya ünlü fotoğrafı referans olarak kullanılmadı. Bu oturumda yeniden üretim yok.
+- Nihai doğrulama: `python3 tools/kit_check.py collections/12_Tropical_Destination --paket 5` **23/23 GEÇTİ**, çıkış kodu 0 (22 görsel + zarf hizası); `--paket 2` **5/5 GEÇTİ**, çıkış kodu 0. Ayrıca beş JPEG'in biçimi, RGB modu, tam ölçüleri ve açılabilirliği doğrulandı. PAKET 5 dosyalarının son oturum başlangıcına göre Git farkı yok; mevcut comp/parçalar değiştirilmedi. Zarf hizası sol/sağ +%0,20, alt %0.
+- Açık kusurlar / inceleme sınırları: card_small, frame_portrait ve frame_landscape pencereleri tam düz saf #00FF00 değil; özellikle landscape'te gradyan kalıyor. Önceki seçimler ve üçer yeşil denemesi korundu; kit_check yalnız yeterli yeşil bölgenin varlığını doğrular. Önceki ölçümlerde portrait pencere oranı 0,762 (3:4 hedefi 0,75), landscape 1,625 (3:2 hedefi 1,5); yatay pencerenin oran farkı açık. Kare W2 çıktılarının bir kısmı hedef 1024 yerine doğal 1254×1254; oran kontrolünden geçiyor. Önceki web_hero merkez kırpım kontrolü alt boşluğu yaklaşık %6,47 buldu; bu oturumda yeni kırpım dosyası oluşturulmadı.
+- Doğrulamanın kapsamı: otomatik kontroller oran, dosya, alfa/opaklık, pencere varlığı ve zarf hizasını kapsar; fotoğraf kimliği, anatomi ve yazısızlık görsel incelemeyle değerlendirildi. Website montajı, yayın, animasyon, gerçek foto değiştirme ve RSVP akışı bu görsel görevi kapsamında test edilmedi. Pencere kusurlarının tema entegrasyonunda değerlendirilmesi önerilir; mevcut PAKET 5'e bu oturumda müdahale edilmedi.
+- Kayıt: devam satırı üretimden önce commit + push edildi; PAKET 2 için 3/5 ve 5/5 ara kayıtları main'e push edildi. Ek rapor/önizleme dosyası üretilmedi; son oturumun repo yazıları yalnız photos/ ve bu görev dosyasıdır. Önceki yeniden üretim gerekçeleri aşağıda korunmuştur.
+
 - Kısım 1 (gpt-gorsel-D, 8/8): W1'in beş ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` yollarına kaydedildi (1024×1536 PNG). Ekranlar aynı tropik suluboya dekoru, kâğıt, ışık ve tipografi referanslarıyla üretildi.
 - Yeniden üretim: W1.1'de ilk cüzdan fazla kareydi; dikey cüzdan ve kısa deri şerit ucu düzeltildi. W1.2'de ilk foto penceresi kare ve iç gölgeliydi; dikey, düz yeşil pencere için yeniden üretildi.
 - W1'in beş dosyası `kit_check.denetle` ile ölçü/oran, opaklık ve gereken yeşil pencereler açısından geçti; ekran kontrol satırları görsel olarak incelendi. Tam Paket 5 + Paket 2 henüz tamamlanmadı.
@@ -65,3 +73,8 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 3, 3/6); florals_br, accent_1, accent_2 kaydedildi. Üç parça gerçek alfa ve oran kontrolünden geçti; florals_br, mevcut florals_tl ile aynı çiçekler ve suluboya tekniğinde üretildi. Mevcut dosyalar korundu; durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 3, 6/6); accent_3, divider, web_hero kaydedildi. Üç parça oran ve gereken alfa/opaklık kontrolünden geçti. web_hero'nun 1200×630 merkez kırpımında cüzdan ve kapanış tam, alt boşluk yaklaşık %6,47. Ek rapor/önizleme dosyası üretilmedi; durum alindi.
 - 2026-10-14 kısım 3 bitti; kalan: PAKET 2 fotoğrafları
+- 2026-10-14 devam: gpt-gorsel-D (PAKET 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-D (PAKET 2, 3/5); hero_portrait.jpg, story_1.jpg ve story_2.jpg prompt'ları kelimesi kelimesine, sırayla üretildi ve 1024×1536 RGB JPEG olarak Kaydet yollarına kondu. Home/story comp'ları sohbete yüklendi; story_1 ve story_2'de hero_portrait.jpg referans verildi. Çift, yüzler, görünen eller/parmaklar ve yazısız yüzeyler görsel olarak kontrol edildi; durum alindi.
+- 2026-10-14 ara kayıt: gpt-gorsel-D (PAKET 2, 5/5); story_3.jpg (1024×1536) ve venue.jpg (1536×1024) sırayla, prompt'lar aynen ve hero_portrait.jpg referansıyla üretildi; beş dosya Kaydet yollarında RGB JPEG. Story_3'te eller/yüzük/buket, venue'da insansız mekân ve yazı/logo/tabela bulunmaması görsel olarak kontrol edildi. Yeniden üretim ve ek rapor/önizleme dosyası yok; PAKET 5 değiştirilmedi, durum alindi.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-D; dört oturumun toplamı 5 comp + 17 parça + 5 fotoğraf. Son kit_check PAKET 5 23/23 ve PAKET 2 5/5 geçti; açık yeşil pencere renk/gradyan ve yatay oran kusurları Sonuç'ta korundu. Kullanıcı talebi gereği bu görevden sonra duruldu.
+- 2026-10-14 entegratör onayladı

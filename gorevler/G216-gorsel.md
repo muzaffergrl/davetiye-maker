@@ -2,8 +2,8 @@
 id: G216
 baslik: Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-H
 oncelik: 2
 bagimli: []
 yazar: [collections/16_Sunflower_Rustic/assets/gpt/comps/, collections/16_Sunflower_Rustic/assets/gpt/parts/, collections/16_Sunflower_Rustic/assets/gpt/photos/]
@@ -32,8 +32,20 @@ Tasarım 16'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+Kısım 1 — gpt-gorsel-H, 2026-10-14 (8/8; görevin tamamı bitmedi, durum `alindi`):
+
+- W1: `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png`; beşi de 1024×1536. Kontrol satırları görsel olarak incelendi; fotoğraf pencereleri, program, geri sayım, RSVP ve alt menüler mevcut. W1 yeniden üretilmedi.
+- W2: `assets/gpt/parts/bg_page.png` (1024×1536, opak), `bg_tile.png` (1254×1254, opak; kare oran kontrolü geçti), `envelope_closed.png` (1024×1536, gerçek RGBA). Üçünde de W1 görselleri referans verildi; parçalar yazısız. Kapalı zarfta kurdele, çiçek, mühür veya başka kapanış elemanı yok; kapak kenarı okunuyor, dışarıya düşen gölge yok. Alfa ölçümünde nesnenin uzağında en yüksek alfa 1/255; görünür dış gölge/hâle bulunmadı.
+- Yeniden üretim: `envelope_closed` için ilk çıktının tuval oranı hatalıydı; sonraki düzenlemeler boyut/alt konumu yaklaştırmak içindi. Beşinci çıktı seçildi; repoda yalnız sade adlı seçilmiş PNG bulunuyor.
+- Yaklaşık geometri notu: seçilen zarfın opak gövdesi `(58, 737)–(968, 1321)`, genişliği tuvalin %88,9'u, alt kenarı yüksekliğin %86,0'ı; gövde oranı yaklaşık 1,56:1. Prompt'taki yaklaşık %80 genişlik / %88 alt kenar / 5:4 oran tam yakalanmadı. Kısım 2'de `closure` ve `envelope_open` için bu seçilmiş `envelope_closed.png` doğrudan referans olmalı; üçlü hiza henüz test edilmedi.
+- `bg_tile`: karşı kenar RGB ortalamaları yakın; kenar piksel farkları ortalama 3,11/255 (sol–sağ), 3,69/255 (üst–alt), düşük kontrast. Website üzerinde tekrarlı render yapılmadı.
+- Doğrulama: `kit_check.py collections/16_Sunflower_Rustic --paket 5` → bu oturumun 8 dosyası GEÇTİ, toplam 8/24; kalan 16 W2 parçası kapsam gereği yok. `--paket 2` → 0/5; fotoğraflar bu oturumun dışında. Eksikler nedeniyle iki tam paket komutu da çıkış kodu 1; tam paket geçti denmiyor. Ek rapor/önizleme dosyası üretilmedi.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: gpt-gorsel-H; bu oturum yalnız kısım 1: W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
+- 2026-10-14 ara kayıt (W1): gpt-gorsel-H; comps/web_1_envelope.png, web_2_home.png, web_3_story.png, web_4_details.png, web_5_rsvp.png üretildi (5/8); beşi de 1024×1536, görsel Kontrol satırları incelendi. Kalan bu oturum: bg_page, bg_tile, envelope_closed.
+- 2026-10-14 ara kayıt (kısım 1, 8/8): gpt-gorsel-H; W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed doğru Kaydet yollarında. Bu sekiz dosya kit_check kontrolünden geçti; zarfın yaklaşık geometri farkı Sonuç'ta kayıtlı.
+- 2026-10-14 gpt-gorsel-H: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
+- 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi. envelope_closed 1,56:1 (prompt 5:4) kabul; closure ve envelope_open bu dosyaya hizalanacak. Kısım 2 verildi.
