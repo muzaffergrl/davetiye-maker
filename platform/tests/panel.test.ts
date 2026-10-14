@@ -667,15 +667,20 @@ test('panel theme info: page switches, fields the design shows, sample record; h
   process.env.PLATFORM_THEMES_DIR = path.join(PLATFORM_ROOT, 'themes');
   try {
     const t = await panelTheme('blush-garden-rose');
-    assert.deepEqual(t.pageRules, { story: { optional: 'our_story', if: null }, rsvp: { optional: null, if: '!rsvp.method' } });
+    // G075: the Details page is off when the couple hides it after the wedding
+    assert.deepEqual(t.pageRules, {
+      story: { optional: 'our_story', if: null },
+      details: { optional: null, if: '!thank_you_hides_details' },
+      rsvp: { optional: null, if: '!rsvp.method' },
+    });
     assert.deepEqual(
       t.fields,
-      { initials: false, storyText: false, storyItems: 3, faq: true, rsvpQuestions: true },
-      'no monogram, no story text, 3 moments; questions & answers and reply-form questions (G051)',
+      { initials: false, storyText: false, storyItems: 3, faq: true, rsvpQuestions: true, thankYou: true },
+      'no monogram, no story text, 3 moments; questions & answers and reply-form questions (G051); thank-you version (G075)',
     );
     assert.equal(t.sample?.venue.name, 'The Rosewater Conservatory');
     const sample = await panelTheme('_sample');
-    assert.deepEqual(sample.fields, { initials: true, storyText: true, storyItems: 12, faq: false, rsvpQuestions: false });
+    assert.deepEqual(sample.fields, { initials: true, storyText: true, storyItems: 12, faq: false, rsvpQuestions: false, thankYou: false });
     assert.equal(sample.sample, null, 'internal theme: no demo record to compare with');
   } finally {
     process.env.PLATFORM_THEMES_DIR = themesBefore;
@@ -686,11 +691,12 @@ test('panel theme info: page switches, fields the design shows, sample record; h
     storyItems: 5,
     faq: false,
     rsvpQuestions: false,
+    thankYou: false,
   });
   // G051: the FAQ list and reply-form questions are detected from their repeat markers
   assert.deepEqual(
     themeFieldUse(['<details data-repeat="faq"><summary data-field=".q"></summary></details><div data-repeat="rsvp.questions"></div>']),
-    { initials: false, storyText: false, storyItems: 0, faq: true, rsvpQuestions: true },
+    { initials: false, storyText: false, storyItems: 0, faq: true, rsvpQuestions: true, thankYou: false },
   );
   assert.equal(themeFieldUse(['<section data-optional="faq"><h3>FAQ</h3></section>']).faq, false, 'a switch without the list: no editor');
   const c = demoContent();

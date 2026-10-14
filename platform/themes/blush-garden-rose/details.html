@@ -3,7 +3,10 @@
      schedule item), dress code, venue (photo slot "venue" in the GPT landscape gold frame, G047) + map, travel & stay,
      registry, add to calendar and questions & answers (G051). Missing URLs → the platform sets href="#" + data-url-missing;
      site.js shows "link will be added soon".
-     Personal text: none — filled on the server. Block intros = design copy. -->
+     Personal text: none — filled on the server. Block intros = design copy.
+     Thank-you mode (G075): the page stays as "The Day" (order of the day, venue, map, registry) without what only matters
+     before the wedding (calendar, dress code, travel, questions, RSVP); the couple can hide it (thank_you.details "hide":
+     the page is off, 404, like the links to it). -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -21,7 +24,7 @@
 <script>document.documentElement.classList.replace('no-js','js');</script>
 <script src="site.js" defer></script>
 </head>
-<body data-pending="This link will be added soon.">
+<body data-if="!thank_you_hides_details" data-pending="This link will be added soon.">
 
 <main class="site-main">
   <header class="page-head" data-scene="details-head">
@@ -44,11 +47,11 @@
             <span class="what"><span class="label" data-field=".label"></span><span class="loc" data-if=".location" data-field=".location"></span></span>
           </li>
         </ol>
-        <p class="dress" data-optional="dress_code" data-if="dress_code" data-step="dress" data-a="fade">Dress code · <em data-field="dress_code"></em></p>
+        <p class="dress" data-optional="dress_code" data-if="dress_code !thank_you_on" data-step="dress" data-a="fade">Dress code · <em data-field="dress_code"></em></p>
       </div>
     </div>
     <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
-    <div class="cal" data-step="cal" data-a="rise">
+    <div class="cal" data-step="cal" data-a="rise" data-if="!thank_you_on">
       <p class="kicker">Add to your calendar</p>
       <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
     </div>
@@ -68,13 +71,14 @@
         <p class="big" data-field="venue.name"></p>
         <p class="kicker"><span data-field="venue.city_region"></span><span data-if="venue.country"> · <span data-field="venue.country"></span></span></p>
         <p class="note" data-if="venue.address" data-field="venue.address"></p>
-        <p class="note" data-if="ceremony_time">Ceremony at <span data-field="ceremony_time"></span><span data-if="schedule.0.location"> in <span data-field="schedule.0.location"></span></span></p>
+        <p class="note" data-if="ceremony_time !thank_you_on">Ceremony at <span data-field="ceremony_time"></span><span data-if="schedule.0.location"> in <span data-field="schedule.0.location"></span></span></p>
+        <p class="note" data-if="ceremony_time thank_you_on">The ceremony began at <span data-field="ceremony_time"></span><span data-if="schedule.0.location"> in <span data-field="schedule.0.location"></span></span>.</p>
       </div>
       <p data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
     </div>
 
     <!-- link blocks are shown only with their link (no dead buttons on a live site) -->
-    <div class="block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation">
+    <div class="block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation !thank_you_on">
       <h2 class="script" data-step="title" data-a="write">Travel <span class="amp">&amp;</span> Stay</h2>
       <div data-step="body" data-a="rise">
         <p class="note">Where to stay and how to get here: see the link below.</p>
@@ -92,7 +96,7 @@
   </section>
 
   <!-- QUESTIONS & ANSWERS (content faq, G051) — native details/summary: opens and closes without JS -->
-  <section class="wrap faq-sec" data-scene="details-faq" data-optional="faq" data-if="faq" aria-labelledby="faq-title">
+  <section class="wrap faq-sec" data-scene="details-faq" data-optional="faq" data-if="faq !thank_you_on" aria-labelledby="faq-title">
     <h2 class="script" id="faq-title" data-step="title" data-a="write">Questions <span class="amp">&amp;</span> Answers</h2>
     <img class="divider" data-step="divider" data-a="unfurl" src="img/divider-300.webp" alt="">
     <div class="faq-list">
@@ -103,7 +107,7 @@
     </div>
   </section>
 
-  <section class="section next-sec" data-scene="story-next" data-if="!rsvp.method">
+  <section class="section next-sec" data-scene="story-next" data-if="!rsvp.method !thank_you_on">
     <a class="btn" href="rsvp.html" data-step="link" data-a="rise">RSVP</a>
   </section>
 </main>
@@ -112,8 +116,8 @@
   <ul>
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
-    <li><a href="details.html" aria-current="page"><span>Details</span></a></li>
-    <li data-if="!rsvp.method"><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+    <li><a href="details.html" aria-current="page"><span data-if="!thank_you_on">Details</span><span data-if="thank_you_on">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
   </ul>
 </nav>
 </body>

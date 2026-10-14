@@ -65,7 +65,9 @@
 
   <section class="section next-sec" data-scene="story-next">
     <img class="florals florals-br" data-step="florals" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-960.webp 960w" sizes="min(52vw, 320px)" alt="" loading="lazy">
-    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details">The Day <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Details page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details">Home <span aria-hidden="true">→</span></a>
   </section>
 </main>
 
@@ -73,8 +75,8 @@
   <ul>
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>
-    <li><a href="details.html"><span>Details</span></a></li>
-    <li data-if="!rsvp.method"><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on">Details</span><span data-if="thank_you_on">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a class="nav-rsvp" href="rsvp.html"><span>RSVP</span></a></li>
   </ul>
 </nav>
 </body>

@@ -164,7 +164,9 @@ export async function uploadPhoto(req: Request, slug: string): Promise<Response>
     if (!auth) return unauthorized();
     if (isArchived(auth.site)) return archived();
     const slotKey = new URL(req.url).searchParams.get('slot') ?? '';
-    const slot = (await panelTheme(auth.site.theme)).photos.find((s) => s.key === slotKey);
+    const theme = await panelTheme(auth.site.theme);
+    // G075: the thank-you photo is a place of its own (theme.thankYou.photo), only on a design with a thank-you version.
+    const slot = [...theme.photos, ...(theme.thankYou ? [theme.thankYou.photo] : [])].find((s) => s.key === slotKey);
     if (!slot) return fail(400, 'unknown_slot', 'This photo place does not exist in the design.');
     // Per-site upload caps (G060-fix): replaced photos stay stored, so storage per site is bounded.
     const adapter = getDataAdapter();

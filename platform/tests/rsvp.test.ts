@@ -64,6 +64,8 @@ test('deadline: rsvpWindow open / closed / disabled with a friendly message', ()
 
   const noDeadline = demoContent() as unknown as { rsvp: Record<string, unknown> };
   delete noDeadline.rsvp.deadline;
+  // G075: long after the wedding the automatic thank-you mode closes the form; with it off, no deadline = open
+  (noDeadline as Record<string, unknown>).thank_you = { mode: 'off' };
   assert.equal(rsvpWindow(noDeadline, new Date('2099-01-01')).open, true);
 });
 
