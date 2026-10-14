@@ -18,20 +18,42 @@ export const SEARCH_BOTS = [
 ] as const;
 /** Bots that collect data for model training (docs/14 §13.4 decision 6). */
 export const TRAINING_BOTS = ['GPTBot', 'ClaudeBot', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'meta-externalagent'] as const;
+/** Folders of our own artwork and screenshots: theme files (design pages' og:image) and the marketing images. */
+const MARKETING_ASSET_DIRS = ['/themes/', '/marketing/'] as const;
+/** Files of the marketing site at the root. */
+const MARKETING_FILES = ['/robots.txt', '/llms.txt', '/llms-full.txt', '/sitemap.xml'] as const;
+
+/**
+ * The only paths a model-training bot may read when decision 6 is "allow": the marketing pages and our own artwork.
+ * Couple websites share the root (/<names>), so the group ends with "Disallow: /" and lists every marketing path
+ * exactly: "/pricing$" + "/pricing/" never match a couple slug such as /pricing-and-paul (a bare "/pricing" would).
+ */
+export function trainingAllowPaths(cfg: MarketingConfig = MARKETING): string[] {
+  const out: string[] = [];
+  for (const p of corePages(cfg).map((x) => x.path)) {
+    if (p === '/') out.push('/$');
+    else out.push(`${p}$`, `${p}/`); // "/designs/<id>", "/guides/<slug>"
+  }
+  for (const f of MARKETING_FILES) out.push(`${f}$`);
+  out.push(...MARKETING_ASSET_DIRS);
+  return out;
+}
 
 export function robotsTxt(cfg: MarketingConfig = MARKETING): string {
   const rules = ['Allow: /', ...ROBOTS_DISALLOW.map((p) => `Disallow: ${p}`)];
   const lines: string[] = [];
   lines.push('# Marketing pages are open; the editor, API, buyer start page and couple photos are not for crawlers.');
-  lines.push('# Couple websites (/<names>) carry their own robots headers.');
+  lines.push('# Couple websites (/<names>) send "X-Robots-Tag: noindex": search engines may read them but are asked not to list them.');
+  lines.push('# Model-training bots may read the marketing pages and our artwork only, never couple websites.');
   if (!cfg.launched) lines.push('# Not launched yet: every marketing page also says noindex until the brand and domain are decided.');
   lines.push('User-agent: *', ...rules, '');
   lines.push('# Search and assistant bots (visibility): open');
   for (const bot of SEARCH_BOTS) lines.push(`User-agent: ${bot}`);
   lines.push(...rules, '');
-  lines.push(`# Model training bots: ${cfg.aiTrainingBots === 'allow' ? 'open (decision 6, docs/14 §13.4)' : 'closed'}`);
+  lines.push(`# Model training bots: ${cfg.aiTrainingBots === 'allow' ? 'marketing pages only (decision 6, docs/14 §13.4)' : 'closed'}`);
   for (const bot of TRAINING_BOTS) lines.push(`User-agent: ${bot}`);
-  lines.push(...(cfg.aiTrainingBots === 'allow' ? rules : ['Disallow: /']), '');
+  if (cfg.aiTrainingBots === 'allow') lines.push(...trainingAllowPaths(cfg).map((p) => `Allow: ${p}`));
+  lines.push('Disallow: /', '');
   if (cfg.launched) lines.push(`Sitemap: ${absUrl('/sitemap.xml', cfg)}`);
   return lines.join('\n').trim() + '\n';
 }

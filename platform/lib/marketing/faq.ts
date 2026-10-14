@@ -44,6 +44,13 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
           a: `No. You pay once on Etsy and there is nothing to renew, no monthly fee and no per-guest fee. Your website stays online until ${m} months after your wedding date. After that: ${cfg.policies.extension}. There are no upgrades to buy inside the panel. [See pricing](/pricing).`,
         },
         {
+          // docs/14 §2.2 #18 and docs/15: the most likely objection. Free builders are not belittled, and nothing is
+          // claimed about any named competitor (only what we checked about our own product).
+          id: 'why-pay',
+          q: 'Why pay for a design when free wedding websites exist?',
+          a: `Free wedding website builders are a good choice for many couples, especially if you want registry and planning tools in the same place. What you pay for here is the design: artwork that opens from a sealed envelope into your own pages. You buy it once on Etsy, with no subscription and no account to create, and you edit it from your phone. [Try a live demo](/designs).`,
+        },
+        {
           id: 'refund',
           q: 'Can I get a refund?',
           a: `Our refund policy: ${cfg.policies.refund}. Because a design is a digital download, Etsy shows its own rules for digital items on the listing. Please try the live demo of a design on your phone before you buy, so you know exactly how it looks and opens. [Contact us](/contact) with any question first.`,
@@ -165,7 +172,8 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'google',
           q: 'Will our website show up on Google?',
-          a: `Your website is meant for your guests, who open it from your link. Whether couple websites are hidden from search engines by default is being decided; this answer will say exactly how it works before launch. Avoid putting a home address or private details on any public page. [Read our privacy notice](/privacy).`,
+          // = COUPLE_SITE_ROBOTS in lib/site/render.ts (tests/marketing-content.test.ts keeps them in step).
+          a: `Not by default. Every couple website asks search engines not to list it, so guests reach yours through your link or QR code. Anyone who has the link can still open it, so keep a home address and other private details off the pages you publish. [Read our privacy notice](/privacy).`,
         },
         {
           id: 'take-offline',

@@ -1027,7 +1027,8 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   değer yazılmaz. JSON bloğu `<`, `>`, `&`, U+2028/2029 kaçışlı.
 - URL'ler: link http/https/mailto/tel; foto http(s) veya kök göreli `/…` (`//`, `data:`, `javascript:` reddedilir).
 - Başlıklar: CSP (`script-src 'self'` + tema satır içi betik hash'leri, `object-src 'none'`, `base-uri 'none'`,
-  `frame-ancestors 'self'`), `nosniff`, önizlemede `noindex`/`no-store`/`no-referrer`. Gizli link taşıyan `/edit/…` ve `/start`:
+  `frame-ancestors 'self'`), `nosniff`, önizlemede `noindex`/`no-store`/`no-referrer`; yayındaki çift sayfaları
+  `X-Robots-Tag: noindex` (docs/14 §5.5, karar 4 gelene kadar; eğitim botlarını robots.txt kapatır). Gizli link taşıyan `/edit/…` ve `/start`:
   `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
 - `site-data` JSON'u içerik kaydını taşımaz (kapalı bölümler kaynakta görünmez); şablon yorumları silinir.
 - **Fotoğraflar** (`/media/<site>/<dosya>`, `lib/site/static.ts`): yalnız site yayındaysa ve yayındaki içerik o dosyayı kullanıyorsa

@@ -10,6 +10,7 @@ import { faqGroups, faqItems, HOME_FAQ_IDS, plainAnswer, wordCount } from '../li
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { blockLinks } from '../lib/marketing/markdown.ts';
 import { corePages, designPage } from '../lib/marketing/site.ts';
+import { COUPLE_SITE_ROBOTS } from '../lib/site/render.ts';
 import { PLATFORM_ROOT } from './helpers.ts';
 import { readyConfig } from './marketing-helpers.ts';
 
@@ -51,6 +52,22 @@ test('FAQ: every answer opens with a short direct sentence and is 40–80 words;
     const words = wordCount(plainAnswer(it.a));
     assert.ok(words >= 35 && words <= 85, `${it.id} (decided config): ${words} words`);
   }
+});
+
+test('FAQ "Will our website show up on Google?" says what couple pages really send (lib/site/render.ts)', () => {
+  const google = faqItems().find((it) => it.id === 'google')!;
+  assert.ok(google, 'google question present');
+  assert.match(COUPLE_SITE_ROBOTS, /noindex/, 'if couple sites become indexable, rewrite this FAQ answer too');
+  assert.match(plainAnswer(google.a), /^Not by default\. Every couple website asks search engines not to list it/);
+});
+
+test('home page targets the docs/14 §2.1 cluster: envelope, digital, wedding invitation website', () => {
+  const home = corePages().find((p) => p.path === '/')!;
+  assert.match(home.title, /envelope/i);
+  assert.match(home.title, /digital/i);
+  assert.match(home.title, /wedding invitation website/i);
+  assert.match(home.h1, /^envelope wedding websites/i);
+  assert.match(home.description, /digital wedding invitation website with RSVP/i);
 });
 
 test('facts: numbers come from the content limits; "not included" is explicit', () => {

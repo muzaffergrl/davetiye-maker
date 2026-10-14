@@ -32,6 +32,14 @@ export function siteCsp(scriptHashes: readonly string[] = []): string {
   ].join('; ');
 }
 
+/**
+ * Published couple websites ask search engines not to list them (docs/14 §5.5): they are for guests who have the link,
+ * and they carry names, the date, the venue and photos. The owner's decision 4 (docs/14 §13.4) is still open; until it
+ * is made the default is noindex. Model-training bots are kept off couple websites by robots.txt
+ * (lib/marketing/crawl.ts), because they follow robots.txt rather than noindex.
+ */
+export const COUPLE_SITE_ROBOTS = 'noindex';
+
 function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: readonly string[] }): Headers {
   const h = new Headers({
     'Content-Type': 'text/html; charset=utf-8',
@@ -40,7 +48,7 @@ function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: re
     'Referrer-Policy': opts.preview ? 'no-referrer' : 'strict-origin-when-cross-origin',
     'Cache-Control': opts.preview || opts.status !== 200 ? 'private, no-store' : 'public, max-age=0, must-revalidate',
   });
-  if (opts.preview || opts.status !== 200) h.set('X-Robots-Tag', 'noindex, nofollow');
+  h.set('X-Robots-Tag', opts.preview || opts.status !== 200 ? 'noindex, nofollow' : COUPLE_SITE_ROBOTS);
   return h;
 }
 

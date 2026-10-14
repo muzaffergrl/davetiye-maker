@@ -63,7 +63,8 @@ test('published site: index and declared pages are 200 HTML with security header
     assert.equal(res.headers.get('content-type'), 'text/html; charset=utf-8');
     assert.match(res.headers.get('content-security-policy')!, /script-src 'self'/);
     assert.equal(res.headers.get('x-content-type-options'), 'nosniff');
-    assert.equal(res.headers.get('x-robots-tag'), null);
+    // docs/14 §5.5: published couple pages ask search engines not to list them (decision 4 still open).
+    assert.equal(res.headers.get('x-robots-tag'), 'noindex');
   }
   const $ = cheerio.load(await (await site('clara-and-julian')).text());
   assert.equal($('h1').text(), 'Clara & Julian'); // published snapshot, not the draft edit
