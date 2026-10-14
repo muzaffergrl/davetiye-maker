@@ -75,9 +75,12 @@ test('facts: numbers come from the content limits; "not included" is explicit', 
   assert.equal(LIMITS.scheduleRows, 10);
   assert.equal(LIMITS.faqItems, 12);
   assert.ok(included().some((x) => x.includes('12 months')));
-  for (const must of ['custom domain', 'Music', 'colors, fonts', 'Password', 'email', 'Printed']) {
+  for (const must of ['custom domain', 'Music', 'colors, fonts', 'email', 'Printed']) {
     assert.ok(NOT_INCLUDED.some((x) => x.toLowerCase().includes(must.toLowerCase())), must);
   }
+  // G076 guest password and G075 thank-you mode exist: listed as included, never as "not included"
+  assert.ok(!NOT_INCLUDED.some((x) => /password/i.test(x)), 'password is a feature now (G076)');
+  assert.ok(included().some((x) => /guest password/i.test(x)) && included().some((x) => /thank-you page/i.test(x)));
   assert.ok(EDITABLE.length >= 6);
   assert.ok(canvaComparison().every((r) => !/canva\.com|\bzola\b|\bknot\b|\bjoy\b|greenvelope|paperless/i.test(r.ours + r.canva)));
   assert.ok(definition().short.length <= 160);

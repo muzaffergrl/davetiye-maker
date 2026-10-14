@@ -2,7 +2,7 @@
 id: G080
 baslik: Marka ve panel sonrası kalanlar — /start ve signin BKE görünümü, onaysız temaların /start'tan kapatılması, metin/README/görsel kaynakları
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G080
 oncelik: 2
 bagimli: [G066]
@@ -106,3 +106,5 @@ satırı (151 kontrol), /start bölümüne görünüm + "Tasarım onayı (G080)"
 - 2026-10-14 alindi: claude-G080
 - 2026-10-14 claude-G080: /start + signin BKE, onay kapısı (satış listesi tek kaynak), Download list, marketing-assets panel çekimi, README; npm test 530/530, g080 92/92, claim 50, panel 77, g060 151, marketing 283
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
+- 2026-10-14 entegratör: onaylandı; facts.ts NOT_INCLUDED'daki 'Password protection' kaldırıldı (G076 ile var), included()'a misafir şifresi ve teşekkür modu eklendi, marketing-content testi buna göre
