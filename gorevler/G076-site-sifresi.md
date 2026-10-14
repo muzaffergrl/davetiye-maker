@@ -2,7 +2,7 @@
 id: G076
 baslik: İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G076
 oncelik: 1
 bagimli: [G060]
@@ -63,3 +63,4 @@ Yapıldı (2026-10-14, claude-G076). Ayrıntı: `platform/README.md` "Site şifr
 - 2026-10-14 açıldı (entegratör): K28
 - 2026-10-14 alindi: claude-G076
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
