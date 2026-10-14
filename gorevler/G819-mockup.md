@@ -2,7 +2,7 @@
 id: G819
 baslik: Tasarım 19 Midnight Garden — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: alindi
+durum: inceleme
 alan: gpt-ui-panel
 oncelik: 2
 bagimli: []
@@ -34,7 +34,7 @@ Pilot: 01/03 (G801/G803).
 - gpt-ui-panel, PAKET 3 talimat bloğunu ve 3.1–3.5 promptlarını aynı sohbette sırasıyla kullanarak beş fotoğraf sahnesi üretti. Çıktılar `collections/19_Midnight_Garden/assets/gpt/mockups/` altında: `cover_hand.png`, `three_phones.png`, `laptop_phone.png`, `flatlay_phone.png`, `hand_phone_edit.png`.
 - Yeniden üretimler: `cover_hand_v2.png` telefonun alt bölüme alınması ve mumun üstteki başlık alanından çıkarılması için; `three_phones_v2.png` soldaki ekrana taşan küçük meyve dalını kaldırmak için. Seçilen v2'ler sade adlara da kopyalandı.
 - Kontrol: `python3 tools/kit_check.py collections/19_Midnight_Garden --paket 3` → **5/5 geçti**. Ekran sayıları sırasıyla **1 / 3 / 2 / 1 / 1**; oran ve ekran geometrisi geçti. Ekranlar opak; görsel kontrolde dört köşeleri açık, parmak/dekor ekranın üstünde değil, ekran yansıması/parlama ve yazı/logo görünmüyor. Kapakta üst bölüm sakin; flatlay'de sol üçte bir boş.
-- Açık renk farkı: kit_check yeşili toleranslı algılar. Ham üretimlerin yeşil ekran pikselleri tam RGB(0,255,0) değil; saf #00FF00 şartı henüz karşılanmadı. Görsel aracı talimatı kodla düzenleme için açık kullanıcı isteği gerektirdiğinden yalnız ekranlara otomatik renk sabitlemesi için kullanıcıya soruldu; yanıt bekleniyor.
+- Teslimde kalan renk farkı: kit_check yeşili toleranslı algılar. Ham üretimlerin yeşil ekran pikselleri tam RGB(0,255,0) değil. Bu fark kullanıcıya açıklandı; kullanıcı **"Hayır, mevcut görselleri teslim et"** dedi. Bu son talimata göre ekranlara kodla renk sabitlemesi yapılmadı, mevcut görseller teslim edildi.
 - Ek önizleme, metrik veya rapor dosyası üretilmedi. Website ekranı yerleştirme ve ilan metni/montajı bu görevin kapsamında değil; test edilmedi.
 
 ## Günlük
@@ -44,3 +44,5 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 ara kayıt: gpt-ui-panel — 3.1 ve 3.2 üretildi; cover_hand_v2 başlık alanı için, three_phones_v2 ekranın üstüne taşan meyve dalını kaldırmak için seçildi. İki sahnenin ekran sayısı ve geometrisi denetimden geçti.
 - 2026-10-14 ara kayıt: gpt-ui-panel — 3.3 laptop_phone ve 3.4 flatlay_phone üretildi; ekran sayısı ve geometrisi denetimden geçti. İlk dört sahne hazır.
 - 2026-10-14 ara kayıt: gpt-ui-panel — 3.5 hand_phone_edit üretildi; PAKET 3 5/5 geçti. Ham yeşildeki RGB farkını tam #00FF00'a sabitlemek için açık kullanıcı isteği bekleniyor.
+- 2026-10-14 kullanıcı kararı: "Hayır, mevcut görselleri teslim et" — mevcut yeşil ekranlar korundu; renk farkı Sonuç'a kaydedildi.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-ui-panel — 5 sahne, PAKET 3 kontrolü 5/5 geçti; yalnız mockups klasörü ve bu görev dosyası değiştirildi.
