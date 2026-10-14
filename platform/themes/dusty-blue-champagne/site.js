@@ -557,12 +557,10 @@ function devRsvp() {
 /* dev fallback = lib/theme/engine.ts */
 function devRender(content) {
   const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0', story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' }; // theme.json
-  const view = JSON.parse(JSON.stringify(content));
-  if (view.venue) {
-    const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
-    view.venue.city_region = join([view.venue.city, view.venue.region]);
-    view.venue.city_region_country = join([view.venue.city, view.venue.region, view.venue.country]);
-  }
+  const view = JSON.parse(JSON.stringify(content)), vn = view.venue, j = (a) => a.filter((x) => x?.trim?.()).join(', ');
+  if (vn) { vn.city_region = j([vn.city, vn.region]); vn.city_region_country = j([vn.city, vn.region, vn.country]); }
+  view.copy = {}; // {copy.<key>} = the page's [data-copy] text (G068)
+  $$('[data-copy]').forEach((e) => { view.copy[e.dataset.copy] ??= e.textContent.trim(); });
   try { view.countdown_target_utc = new Date(zonedToUtc(view.date, view.ceremony_time, view.timezone)).toISOString(); } catch { /* none */ }
   const get = (path) => path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), view);
   const present = (v) => !(v == null || v === false || (typeof v === 'string' && !v.trim()) || (Array.isArray(v) && !v.length));
@@ -590,10 +588,7 @@ function devRender(content) {
   function walk(el, scope) {
     const d = el.dataset;
     if (d.optional !== undefined && !(view.optional_blocks && view.optional_blocks[d.optional] === true)) { el.remove(); return; }
-    if (d.if !== undefined) {
-      const neg = d.if.startsWith('!');
-      if (present(get(abs(d.if.replace(/^!/, ''), scope))) === neg) { el.remove(); return; }
-    }
+    if (d.if?.split(' ').some((c) => present(get(abs(c.replace('!', ''), scope))) === (c[0] === '!'))) return el.remove(); // all hold (G075)
     if (d.repeat !== undefined) {
       const path = abs(d.repeat, scope), list = get(path);
       (Array.isArray(list) ? list : []).forEach((_, i) => {

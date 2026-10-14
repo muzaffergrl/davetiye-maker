@@ -6,15 +6,16 @@
      the comp's 2 + 1 layout would leave each photo window ~120 px wide (< 38vw, docs/11 §9): the same prints are laid in a
      cascade (each print 66vw, photo window 50vw); from 760 px wide the comp's layout stands as drawn. Photo slots
      story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is off (404) when
-     optional_blocks.our_story is false. Title / kicker = design copy. -->
+     optional_blocks.our_story is false. Title / kicker = design copy (data-copy, G068). Thank-you mode (G075): unchanged;
+     with the Day page hidden by the couple the closing link leads home. -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-text="Our Story · {name_display}">Our Story</title>
-<meta name="description" data-attr-content="Our Story · {name_display} · {date|date-long}" content="Our story">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
 <meta property="og:type" content="website">
-<meta property="og:title" data-attr-content="Our Story · {name_display}" content="Our Story">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
 <meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
 <meta name="theme-color" content="#CCDCEC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,8 +34,8 @@
     <img class="page-corner corner-tl" data-step="decor" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 400px)" alt="">
     <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_1-149.webp" alt="">
     <img class="float f-fern" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
-    <h1 class="script page-title" data-fold data-step="title" data-a="write">Our Story</h1>
-    <p class="kicker" data-fold="join" data-step="kicker" data-a="fade">Moments we hold dear</p>
+    <h1 class="script page-title" data-fold data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
+    <p class="kicker" data-fold="join" data-step="kicker" data-a="fade" data-copy="story_kicker">Moments we hold dear</p>
     <p class="lede" data-fold data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
 
@@ -76,16 +77,18 @@
   <section class="section next-sec" data-scene="story-next">
     <img class="page-corner corner-br" data-step="decor" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-875.webp 875w" sizes="min(62vw, 360px)" alt="" loading="lazy">
     <img class="sprig" data-fold data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
-    <a class="btn btn-ghost" href="details.html" data-fold="join" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="details.html" data-fold="join" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Day page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-fold="join" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
   </section>
 </main>
 
 <nav class="site-nav" aria-label="Wedding pages">
   <ul>
-    <li><a href="home.html"><span>Home</span></a></li>
-    <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>
-    <li><a href="details.html"><span>Details</span></a></li>
-    <li data-if="!rsvp.method"><a href="rsvp.html"><span>RSVP</span></a></li>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
 </body>

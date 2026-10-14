@@ -1,11 +1,11 @@
 // G075 (K28): post-wedding thank-you mode — the rule (end of the wedding day in the site's time zone, DST included),
-// Automatic / On now / Off, the engine's multi-condition data-if, the two themes (01 olive-ivory, 03 blush-garden-rose)
-// in thank-you mode, the RSVP API's 403 closed (reason thank_you), the thank-you photo route, the panel API (schema,
+// Automatic / On now / Off, the engine's multi-condition data-if, the themes with a thank-you version (01 olive-ivory,
+// 03 blush-garden-rose; G081: 02 dusty-blue-champagne, 05 mediterranean-lemon) in thank-you mode, the RSVP API's 403 closed (reason thank_you), the thank-you photo route, the panel API (schema,
 // limits, the thank-you photo place), panel helpers (sections, Review, readiness) and the theme-check rule for themes
 // without a thank-you version. The browser journey and previews: tests/g075-browser.ts.
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpSync, readdirSync, readFileSync } from 'node:fs';
+import { cpSync, existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { GET as stateRoute, PUT as saveRoute } from '../app/api/edit/[slug]/route.ts';
@@ -46,8 +46,13 @@ import { changedPages, changedSections, PAGE_SECTIONS, parseEditTarget, readines
 import { PLATFORM_ROOT, REPO_ROOT, tinyPng, tmpDir } from './helpers.ts';
 
 const BASE = 'https://wedding.example';
-const THEMES = ['olive-ivory', 'blush-garden-rose'] as const;
-const COLLECTION: Record<(typeof THEMES)[number], string> = { 'olive-ivory': '01_Olive_Ivory', 'blush-garden-rose': '03_Blush_Garden_Rose' };
+const THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon'] as const;
+const COLLECTION: Record<(typeof THEMES)[number], string> = {
+  'olive-ivory': '01_Olive_Ivory',
+  'blush-garden-rose': '03_Blush_Garden_Rose',
+  'dusty-blue-champagne': '02_Dusty_Blue',
+  'mediterranean-lemon': '05_Lemon_Mediterranean',
+};
 const DAY = 86_400_000;
 
 const record = (theme: (typeof THEMES)[number] = 'blush-garden-rose'): ContentRecord =>
@@ -217,13 +222,14 @@ test('RSVP rule: thank-you mode closes the form (reason thank_you) before the de
   assert.equal(rsvpWindow(auto, new Date('2027-01-01')).reason, 'disabled', 'replies off stays "disabled"');
 });
 
-// ---------------------------------------------------------------------------------------------- the two themes
+// ---------------------------------------------------------------------------------------------- the themes
 
 const SLUG = 'ty-test';
+// the default "now" is after every demo wedding (02's is September 18, 2027): Automatic is on
 async function renderPage(themeId: string, page: PageName, content: unknown, opts: { now?: Date; previewKey?: string; thankYouPreview?: boolean } = {}) {
   const theme = (await loadTheme(themeId))!;
   const html = (await readThemePage(theme, page))!;
-  const r = renderTemplate({ html, content, theme: theme.manifest, page, slug: SLUG, now: opts.now ?? new Date('2027-08-01'), ...opts });
+  const r = renderTemplate({ html, content, theme: theme.manifest, page, slug: SLUG, now: opts.now ?? new Date('2027-10-01'), ...opts });
   assert.deepEqual(r.warnings, [], `${themeId}/${page}: engine warnings`);
   return { ...r, $: cheerio.load(r.html) };
 }
@@ -311,8 +317,21 @@ for (const themeId of THEMES) {
     assert.equal(rsvp.$(`a[href="/${SLUG}/home"]`).length >= 1, true);
     assert.deepEqual(navLabels(rsvp.$), ['Home', 'Story', 'The Day']);
 
-    // the thank-you stylesheet only in thank-you mode
+    // the thank-you stylesheet only in thank-you mode; every theme file the thank-you pages and thank-you.css name exists
     assert.equal(idx.$(`link[href$="/thank-you.css"]`).length, 1);
+    const dir = path.join(PLATFORM_ROOT, 'themes', themeId);
+    const refs = new Set<string>();
+    for (const r of [idx, idx2, home, det, rsvp]) {
+      r.$('[src], [href], [srcset]').each((_, el) => {
+        const a = (el as unknown as { attribs: Record<string, string> }).attribs;
+        for (const v of [a.src, a.href, ...(a.srcset ? a.srcset.split(',').map((x) => x.trim().split(/\s+/)[0]) : [])]) {
+          if (v && v.startsWith(`/themes/${themeId}/`)) refs.add(v.slice(`/themes/${themeId}/`.length));
+        }
+      });
+    }
+    for (const m of readFileSync(path.join(dir, 'thank-you.css'), 'utf8').matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) refs.add(m[1]);
+    for (const f of refs) assert.ok(existsSync(path.join(dir, f)), `${themeId}: missing theme file ${f}`);
+    assert.ok([...refs].includes('thank-you.css'));
     const inv = await renderPage(themeId, 'index', record(themeId), { now: new Date('2027-01-01') });
     assert.equal(inv.$(`link[href$="/thank-you.css"]`).length, 0);
   });
@@ -372,7 +391,7 @@ async function call(handler: Handler, url: string, params: Record<string, unknow
 let n = 0;
 /** A published site whose wedding was `daysAgo` days ago (negative: in the future); deadline a week before it. */
 async function site(theme: string, daysAgo: number, thankYou?: ContentRecord['thank_you']) {
-  const c = record(theme === 'olive-ivory' ? 'olive-ivory' : 'blush-garden-rose');
+  const c = record((THEMES as readonly string[]).includes(theme) ? (theme as (typeof THEMES)[number]) : 'blush-garden-rose');
   c.timezone = 'UTC';
   c.date = isoDay(Date.now() - daysAgo * DAY);
   c.rsvp = { ...c.rsvp, deadline: isoDay(Date.now() - (daysAgo + 7) * DAY) };
@@ -539,7 +558,7 @@ test('panel: After the wedding sits in Day & place (no 7th page); Review names i
   assert.equal((await panelTheme('_sample')).thankYou, null);
 });
 
-test('theme-check rule (docs/11 §3.6): 01 and 03 complete; every other theme is reported (a warning), never half-done silently', async () => {
+test('theme-check rule (docs/11 §3.6): 01, 02, 03 and 05 complete; every other theme is reported (a warning), never half-done silently', async () => {
   // every theme of the repo (also those other tasks are building now), not the test copy
   const dir = path.join(PLATFORM_ROOT, 'themes');
   for (const id of readdirSync(dir).filter((d) => !d.startsWith('.')).sort()) {
