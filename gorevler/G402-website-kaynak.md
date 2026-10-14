@@ -128,15 +128,18 @@ kâğıt (masaüstü zemini için ≥ 1200 px temiz alan); (c) story için dalı
 1. **[ÖNEMLİ] İç sayfalarda ilk ekran–nav kuralı** (story baskıları, details mekân fotoğrafı / "6:30 PM" satırı / yatayda kart
    başlığı, RSVP mührü ve imza, yatayda "Our Story" ve "Will You Join Us?" nav çizgisinde kesiliyordu): `site.js` `foldAll` —
    `[data-fold]` işaretli parça nav bandının 8 px üstünü geçerse ya da ilk ekranda nav'ın arkasında kalırsa ilk ekranın 12 px
-   altından başlar; `data-fold="join"` öncekiyle birlikte taşınır (kart başlığı + tarih, "Kindly reply by" + tarih, "With love,"
+   (final QA'dan beri 2 px) altından başlar; `data-fold="join"` öncekiyle birlikte taşınır (kart başlığı + tarih, "Kindly reply by" + tarih, "With love,"
    + isimler + mühür, kapanış başlığı + satırları); kartın son parçası kartın alt kenarını taşır; boşalan yer gruptaki üst
    aralıklara dağılır (≤ 28 px; üsttekiler nav'ın üstünde kalır), story'de (`"center"`) kalanın yarısı başlığın üstüne →
-   küçük telefonda ortalı kapak, uzun kartta ilk ekran satır sınırında biter. Gruplar: story `main`, details `main`, rsvp'de
+   küçük telefonda ortalı kapak, uzun kartta ilk ekran satır sınırında biter (final QA düzeltmesi: ama kartın içinde itilen
+   parçanın üstünde 200–400 px boş kâğıt kalıyordu — aşağıda "Final QA"). Gruplar: story `main`, details `main`, rsvp'de
    kart / form / kapanış ayrı. Home'da hero'dan sonraki "Together with their families" satırı da (QA [KÜÇÜK]: nav'ın arkasında
    başlıyordu). Ölçüm `offsetTop` (giriş dönüşümleri sayılmaz) + baskı açısı, 2 px yuvarlama payı; yazı tipleri, `load`, boyut
    değişimi sonrası yeniden; dal görselleri `aspect-ratio` ile yer ayırır. **Yerleşim:** RSVP kartı uzun ekranda yüksekliğe göre
-   daralır (kart + mühür 390×844, 430×932, 768×1024, masaüstünde ilk ekranda tam); ≥ 960 px kısa form (ad | e-posta, iki cevap
-   yan yana; kart + form 1280×800'de tam); yatay telefonda iç sayfa başı küçük köşe kümesinin yanında, üst boşluk 14 px (QA:
+   daralır (~~kart + mühür 390×844, 430×932, 768×1024, masaüstünde ilk ekranda tam~~ — **yanlıştı**, final QA: yalnız demo
+   kaydının telefonlarında doğruydu; demo 1024×768 / 1280×800 ve tasarım aralığı / stres 390×844 … 1920×1080'de imza + mühür
+   itiliyor, kartta 198–397 px boş kâğıt kalıyordu); ≥ 960 px kısa form (ad | e-posta, iki cevap yan yana; ~~kart + form
+   1280×800'de tam~~ — form tamdı, kartın imzası değil; final QA'dan sonra üçü de tam, ölçüldü); yatay telefonda iç sayfa başı küçük köşe kümesinin yanında, üst boşluk 14 px (QA:
    "yalnız bir küme ve kesik başlık" → artık başlık, tarih ve ilk satır / RSVP hapı ilk ekranda); masaüstünde story başlığı + iki
    baskı (`--pw` yüksekliğe göre) ve details kartı tam (QA'nın 1024×768 / 1280×800 başlık kesikleri). Ekran dışından uçan
    baskılar 140 px aşağıdan başlar (görünmez başlangıç kutusu ilk ekranın altında). **Ölçüm** (kendi `next start` + Chromium,
@@ -177,6 +180,58 @@ ortalama 202,207,210) · `g051-browser --theme` 44/44 · `final-smoke --theme` 4
 `qa_inner_phones.jpg`, `qa_inner_landscape.jpg`, `qa_inner_desktop.jpg`, `qa_particles.jpg`. **Denenmedi:** gerçek iPhone/Safari
 ve Android Chrome (`svh`, `mask`, `:has`, belgeler arası VT), yayın, yavaş ağ, gerçek alıcı fotoğrafları, ekran okuyucu.
 
+**Final QA (bağımsız, 2. tur): 2 zorunlu bulgu — yapıldı (2026-10-14).** Ölçüm: bu oturumun koşum düzeneği (motorla render +
+tema klasöründen servis, Chromium, Google Fonts proxy'den, hareket azaltılmış) QA'nın sayılarını birebir yeniden üretti (önce
+sütunları), sonra aynı betikle; boyutlar Finding 1'in 16 boyutu (320×568, 360×640, 375×667, 390×844, 412×915, 430×932, 768×1024,
+667×375, 844×390, 1024×768, 1280×650, 1280×800, 1366×768, 1440×900, 1536×753, 1920×1080) × demo / tasarım aralığı ("Alexandrina
+Rose & Maximilian James") / §12 stres.
+1. **RSVP kartının ortasında boş kâğıt bandı:** kök neden: yükseklik ≥ 740 px'te kart genişliği `(100svh − nav − üst − 26px) / 2,12`
+   tahmininden geliyordu; nav gerçekte 70 px (54 değil), iki satırlık isimler kartı uzatıyordu → "With love," + isimler + mühür
+   birimi ilk ekranın altına itiliyor, kartın içine 198–397 px boşluk giriyordu. Önceki Sonuç'taki "kart + mühür 390×844, 430×932,
+   768×1024, masaüstünde ilk ekranda tam" ve "kart + form 1280×800'de tam" cümleleri yanlıştı (yukarıda işaretlendi; README
+   düzeltildi). **Yapılan** (`site.js` `fitCard`, `site.css` `--sg`): kart `foldAll`'ın başında, eski katlama payları silinip
+   ölçülür; mührün altı nav çizgisinin (nav bandının 8 px üstü) üstünde bitene kadar sırayla kart daralır (≥ 296 px), `--sg` 1 →
+   0,72 (kart içi aralıklar, "With love," + kıl çizgisi, isimler, mühür ve mühür payı birlikte; isimler ≥ 19 px, "&" ≥ 11 px),
+   kartın üstündeki boşluk ≥ 64 px'e iner, kart ≥ 240 px'e daralır; yine sığmazsa tam boya döner ve katlanır. `foldAll`'da
+   itilen parça artık ilk ekranın 2 px altından başlar (12 değil). 2,12 kuralı kaldırıldı. **Kartın içine eklenen en büyük
+   boşluk (önce → sonra):**
+   - demo: 1024×768 213 → 0 · 1366×768 213 → 0 · 1280×800 244 → 0 · 1536×753 198 → 0 · 1280×650 73 → 0 · 360×640 78 → 0 ·
+     375×667 77 → 0 · 320×568 80 → 70 · 667×375 / 844×390 63 → 53 · 390×844, 412×915, 430×932, 768×1024, 1440×900, 1920×1080 0 → 0
+   - aralık: 390×844 249 → 0 · 412×915 283 → 0 · 430×932 289 → 0 · 768×1024 329 → 0 · 1024×768 / 1366×768 213 → 0 · 1280×800 244 → 0 ·
+     1440×900 297 → 0 · 1536×753 198 → 0 · 1920×1080 397 → 0 · 1280×650 73 → 0 · 360×640 78 → 0 · 375×667 77 → 0 · 320×568 80 → 70 ·
+     667×375 / 844×390 63 → 53
+   - stres: aralıkla aynı, şunlar dışında: 1920×1080 0 → 0 · 360×640 78 → 68 · 375×667 77 → 67 · 1280×650 73 → 63
+   - Toplam: 48 durumun 36'sında 0 px (önce 7), kart + mühür nav çizgisinin üstünde; kart 240–420 px, isimler 19–46 px (390×844:
+     demo 32,6 · aralık 30 · stres 20,1). **Açık nokta (sınır tutturulamadı):** 12 durumda (320×568 ve yatay telefon her kayıtta;
+     stres 360×640 / 375×667 / 1280×650) kart 240 px + `--sg` 0,72 ile de sığmıyor; kart tam boyda, ilk ekranda başlık + tarih +
+     hap (yatay) ya da "We can't wait" satırına kadar, tek katlama 53–70 px. Kart içinde bir katlama nav bandı (70 + 8 + 2 px)
+     eksi parçanın kendi üst aralığından küçük olamaz, yani "≤ ~40 px" kat içinde imkânsız; bütün kartı ilk ekranın altına
+     itmek ilk ekranda yalnız köşe kümesini bırakırdı (önceki QA turunun yatayda reddettiği "yalnız bir küme") — yapılmadı,
+     QA/entegratör kararı. Önizleme çubuğu açıkken ek olarak aralık 360×640 / 375×667 / 1280×650 yedeğe düşer (61–87 px).
+   - Nav kuralı korunuyor: QA'nın parça tanımıyla (`qa_nav`) home/story/details/rsvp × 3 kayıt × 16 boyut = 192 yükleme 0 ihlal,
+     yazı ≥ 11 px, isimler ≥ 36 px, yatay kaydırma yok; önizleme çubuğuyla da 192/192. Boyut değişimi (844×390 → 390×844,
+     320×568 → 430×932, 1280×650 → 1280×800) taze yüklemeyle aynı sonucu verir. 1280×800'de kart + mühür + form ilk ekranda tam.
+2. **Home hero: sayaç ve RSVP hapı `florals_br` kümesinin üstünde:** **yapılan** (`site.js` `decor()`, `fold`/`foldAll`'dan sonra):
+   iki küme `florals_tl/br-480`'in alfasından çıkarılmış 16 × 16 doluluk haritasıyla hero yazısının satır kutularıyla (isimler,
+   tarih, mekân, şehir, sayaç rakamı + etiketi, sayaç sonu cümlesi, hap) karşılaştırılır; dolu hücre yazıya değerse küme kendi
+   köşesine doğru küçülür (× 0,94 … 0,52, `right`/`bottom` sabit → düz çizgiyle kesilmez, nav bandının 8 px üstünde biter),
+   gerekirse gizlenir (hiç gerekmedi); yazıya değen `.float` gizlenir (1024×768 / 1280×650 aralıkta "&"ın üstündeki yaprak da
+   bulundu). Yalnız konum/ölçek (K21). 390×844 aralıkta alt küme 195 → 113 px. **Yazı-süs ölçümü** (süs gösterilip gizlenerek tam
+   sayfa farkı, her yazı kutusunda RGB > 40 piksel payı, sayaç durdurulmuş; önce → sonra): aralık 390×844 %61,7 → %0 · 412×915
+   %47,8 → %0 · 430×932 %49,8 → %0 · 768×1024 %25,6 → %0 · 667×375 %6,6 → %0 · 1280×650 %12,1 → %0 · 1024×768 %4,8 → %0 · 360×640
+   %1,6 → %0 · 375×667 %1,2 → %0; stres 390×844 %65,7 → %0 · 412×915 %48,9 → %0 · 430×932 %50,7 → %0 · 667×375 %7,9 → %0 · 320×568
+   %6,0 → %0; demo 320×568 %2,1 → %0 · 390×844 %1,0 → %0 · 430×932 %0,7 → %0. Home 48 yüklemenin 45'i %0,0; kalanlar %0,6 (stres
+   1536×753 isimler, önce de %0,6 — ışıltı/kenar yumuşatma), %0,2, %0,1. Story / details / rsvp 144 yüklemede en çok %0,4 (değişmedi).
+3. **Testler:** `tests/theme-dusty-blue-champagne.test.ts` 33 test (31 → 33): iki tarayıcı testi (G405 gibi Playwright + motorla
+   render, Playwright yoksa atlanır) — RSVP: 14 durumda (aralık 390×844 … 1920×1080, demo 360×640 / 1024×768 / 1280×800 /
+   1536×753, stres 390×844) kartın içine eklenen boşluk 0, mühür nav çizgisinin üstünde, isimler ≥ 19 px; 320×568 ve 844×390
+   yedeğinde tek katlama ≤ 72 px ve kart ilk ekranda başlıyor. Home: 8 durumda (aralık 390×844, 430×932, 768×1024, 667×375,
+   1280×650; stres 320×568, 390×844; demo 390×844) her hero yazı kutusunda süs farkı ≤ %2. İkisi de eski `site.js`/`site.css` ile
+   düşüyor (denendi). Statik testler: `fitCard` adımları, `--sg` kuralları, 2,12 kuralının yokluğu, `foldAll` sırası.
+4. **Bütçe:** `site.js` 35 775 B (KiB sınırı 35 840; yer açmak için yorumlar kısaldı, sayaç saat dilimi yardımcısı tek işlev,
+   `fitLines`/`fitInvite` ortak `shrink`, devRender ve küçük yerler sıkıştı — davranış aynı, bütün testler/ölçümler yeniden
+   koşuldu), `site.css` 45 925 B (sınır 46 080). Pay çok az (65 / 155 B).
+
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: wf-tema02
@@ -191,3 +246,7 @@ ve Android Chrome (`svh`, `mask`, `:has`, belgeler arası VT), yayın, yavaş a�
   kartı yüksekliğe göre, kısa masaüstü formu, yatay iç sayfa başı, masaüstü story/details) ve parçacıklar bölümün içinde yazının
   arkasında; 192 yükleme × (normal + önizleme) 0 ihlal, parçacık örtüşmesi 0; [KÜÇÜK]: varış çiçekleri, önizleme çubuğu, zarf
   isimleri, figcaption, bütçe (KiB okuması). Durum `inceleme` kaldı; QA yeniden ölçmeli.
+- 2026-10-14 final QA'nın 2 zorunlu bulgusu: RSVP kartı + mühür `fitCard` ile ilk ekranda (kart içi boşluk 48 durumun 36'sında
+  0 px, önce 198–397 px; 320×568 / yatay / 3 stres durumunda tek katlama 53–70 px, önce 63–80 — açık nokta), hero kümesi / yaprak
+  hero yazısının altından çekiliyor (`decor`, yazı-süs %65,7 → ≤ %0,6); nav kuralı 192/192; 2 tarayıcı testi; yanlış README/Sonuç
+  cümleleri düzeltildi. Durum `inceleme`.
