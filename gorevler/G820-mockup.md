@@ -2,7 +2,7 @@
 id: G820
 baslik: Tasarım 20 Coastal Seaside — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-F
 oncelik: 2
 bagimli: []
@@ -46,3 +46,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 ara kayıt: gpt-gorsel-F — 3.1–3.2 ve kapak denemeleri commit + push.
 - 2026-10-14 ara kayıt: gpt-gorsel-F — 3.3–3.4 ve dizüstü v2 commit + push.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-F — 5 sahne, kit_check 5/5; piksel düzeyinde saf yeşil açık noktası Sonuç'ta.
+- 2026-10-14 entegratör onayladı
