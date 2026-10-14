@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 9 · inceleme 5 · blokaj 277 · bitti 79 · toplam 388
+Özet: hazir 18 · alindi 9 · inceleme 4 · blokaj 277 · bitti 80 · toplam 388
 
 ## claude-canva
 
@@ -169,10 +169,9 @@ Bağımlılık bekleyen: 0 · Biten: 3
 - `G411` p3 — Tasarım 11 Boho Pampas Terracotta — platform teması → `gorevler/G411-website-kaynak.md`
 - `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (86)**
+**Üzerinde çalışılan / incelemede / blokaj (85)**
 
 - `G066` alindi · claude-G066 — Satış sitesi + panel BKE Studio marka tasarımına geçer (GM04/GM05 comp'ları, ad, logo, favicon, renk/yazı)
-- `G069` inceleme · claude-G069 — RSVP yanıtları çift için düzenli ve şık — özetler, soru cevap dökümü, yeni yanıt işareti, misafir isimleri, yazdırılabilir liste
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
@@ -258,7 +257,7 @@ Bağımlılık bekleyen: 0 · Biten: 3
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 8 · Biten: 31
+Bağımlılık bekleyen: 8 · Biten: 32
 
 ## claude-metin
 

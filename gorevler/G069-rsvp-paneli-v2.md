@@ -2,7 +2,7 @@
 id: G069
 baslik: RSVP yanıtları çift için düzenli ve şık — özetler, soru cevap dökümü, yeni yanıt işareti, misafir isimleri, yazdırılabilir liste
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G069
 oncelik: 1
 bagimli: [G060]
@@ -100,3 +100,4 @@ Kullanıcı (2026-10-14): "RSVP talepleri müşterilere görünmeli, düzenli, h
 - 2026-10-14 alindi: claude-G069
 - 2026-10-14 claude-G069: RSVP paneli v2 kodlandı, testler geçti (Sonuç); incelemeye
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
