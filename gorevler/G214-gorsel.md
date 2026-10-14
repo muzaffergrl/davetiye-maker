@@ -32,9 +32,12 @@ Tasarım 14'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kısım 1, W1 tamamlandı: `comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` (her biri 1024×1536). Aynı sohbette, ilk ekran ve ilgili önceki ekranlar referans verilerek üretildi.
+- Yeniden üretim: W1.5 RSVP'nin ilk kopçası yatay inci dizisine dönüştüğü için yeniden üretildi; seçilen ekran W1.1'deki beş incili kopçayı ve kısa inci halkasını kullanıyor. Repoya yalnız seçilen ekran kaydedildi.
+- W1'in beş dosyası `tools/kit_check.py` içindeki `denetle` ile ölçü/oran, opaklık ve istenen yeşil fotoğraf pencereleri açısından GEÇTİ; ekranların kontrol satırları görsel olarak incelendi. W2 ve PAKET 2 henüz tamamlanmadı.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-E; bu oturumun kapsamı kısım 1 (W1 5 ekran + W2 bg_page, bg_tile, envelope_closed; 8 görsel).
+- 2026-10-14 ara kayıt: gpt-gorsel-E; W1 5/5 tamamlandı ve kontrol edildi; durum alindi.
