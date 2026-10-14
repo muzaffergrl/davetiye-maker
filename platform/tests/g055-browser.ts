@@ -471,7 +471,11 @@ async function main() {
       };
       await open('couple');
       const first = p.locator('#f-partners-0-display_name');
-      check('panel: first name limited to 40 with a counter', (await first.getAttribute('maxlength')) === '40' && (await p.locator('#section-names-body').innerText()).includes(`${demo.partners[0].display_name.length}/40`));
+      // G060-fix: the counter shows only near the limit (from 80 %, 32 of 40), not "5/40" next to every short name.
+      const shortName = !(await p.locator('#section-names-body').innerText()).includes(`${demo.partners[0].display_name.length}/40`);
+      await first.fill('Alexandria Wilhelmina Montgomery');
+      check('panel: first name limited to 40, a counter only near the limit', (await first.getAttribute('maxlength')) === '40' && shortName && (await p.locator('#section-names-body').innerText()).includes('32/40'));
+      await first.fill(demo.partners[0].display_name);
       check('panel: full name 40, names line 85', (await p.getAttribute('#f-partners-0-full_name', 'maxlength')) === '40' && (await p.getAttribute('#f-name_display', 'maxlength')) === '85');
       await open('venue');
       check('panel: venue name limited to 80', (await p.getAttribute('#f-venue-name', 'maxlength')) === '80');

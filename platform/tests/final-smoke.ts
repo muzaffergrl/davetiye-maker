@@ -321,6 +321,12 @@ try {
       const box = await anyway.boundingBox();
       check('buyer: "Publish anyway" reachable on the phone (sheet scrolls)', box && box.y >= 0 && box.y + box.height <= 844 && box.height >= 44, JSON.stringify(box));
       await shot(page, '11b_buyer_publish_notes_end_390', { png: true });
+      // G060-fix: with the design's sample date still in, the first publish waits for an explicit confirmation.
+      const confirmDate = page.locator('[data-testid="notes"] [data-confirm-sample-date]');
+      if (await confirmDate.count()) {
+        check('buyer: the sample date holds the first publish until confirmed', await anyway.isDisabled());
+        await confirmDate.click();
+      }
       await anyway.click();
     }
     await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });

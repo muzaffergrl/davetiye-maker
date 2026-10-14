@@ -124,6 +124,8 @@ async function publishNow(page: any): Promise<string> {
   let notes = '';
   if (await page.locator('[data-testid="notes"]').count()) {
     notes = await page.locator('[data-testid="notes"]').innerText();
+    // G060-fix: the first publish with the design's sample date waits for "… really is our wedding date".
+    if (await page.locator('[data-testid="notes"] [data-confirm-sample-date]').count()) await page.click('[data-testid="notes"] [data-confirm-sample-date]');
     await page.click('[data-publish-anyway]');
   }
   await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
@@ -267,7 +269,7 @@ try {
   // Not published yet: the buyer's own views carry the preview key (the photo is not public).
   check('photo: uploaded and stored in the draft', /^\/media\/[0-9a-f-]{36}\/[0-9a-f]{32}-\d+w\.jpg$/.test(heroPath), heroPath);
   const keyQuery = (thumbSrc ?? '').slice((thumbSrc ?? '').indexOf('?'));
-  check('photo: the thumbnail is the small variant, with the preview key', /^\?preview=[A-Za-z0-9_-]+$/.test(keyQuery) && thumbSrc === `${heroPath.replace(/-\d+w\.jpg$/, '-640w.jpg')}${keyQuery}`, thumbSrc ?? '');
+  check('photo: the thumbnail is the small variant, with the preview key', /^\?preview=[A-Za-z0-9_.-]+$/.test(keyQuery) && thumbSrc === `${heroPath.replace(/-\d+w\.jpg$/, '-640w.jpg')}${keyQuery}`, thumbSrc ?? '');
   const heroSrc = `${heroPath}${keyQuery}`;
   check('photo: not public before publishing', (await fetch(`${BASE}${heroPath}`)).status === 404);
   const heroMeta = await sharp(Buffer.from(await (await fetch(`${BASE}${heroSrc}`)).arrayBuffer())).metadata();
@@ -377,9 +379,9 @@ try {
   await page.waitForFunction(() => !document.querySelector('[data-reply]'));
   check('Guests: a reply can be removed', (await page.locator('main').innerText()).includes('No replies yet.'));
 
-  // Edit after publishing: guests keep the old text until "Publish changes".
+  // Edit after publishing: guests keep the old text until "Publish changes". (The host line lives under Details since G060-fix.)
   await page.bringToFront();
-  await openSection(page, 'couple');
+  await openSection(page, 'details');
   await page.fill('#f-host_line', 'Together with our families');
   await page.locator('#f-host_line').blur();
   await waitSaved(page);

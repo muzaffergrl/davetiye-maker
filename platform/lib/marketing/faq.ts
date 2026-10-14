@@ -82,7 +82,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'date-moves',
           q: 'What if our wedding date moves?',
-          a: `Change the date in your panel; a new date uses one of your name and date changes. If you have used all of them, [contact us](/contact) at ${cfg.support.email} with your Etsy order number and tell us what happened, so we can look at it with you.`,
+          a: `Change the date in your panel. Moving it by up to ${cfg.editRights.dateFreeDays} days is free; a bigger move uses one of your name and date changes. If you have used all of them, [contact us](/contact) at ${cfg.support.email} with your Etsy order number and tell us what happened, so we can look at it with you.`,
         },
         {
           id: 'lost-link',

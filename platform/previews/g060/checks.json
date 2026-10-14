@@ -9,6 +9,7 @@
     "edit": [],
     "section: names": [],
     "identity sheet": [],
+    "setup 6 with sample date": [],
     "first publish sheet": [],
     "section: story": [],
     "section: details": [],
@@ -24,6 +25,10 @@
     },
     {
       "name": "setup 1: rights rule shown before publishing",
+      "ok": true
+    },
+    {
+      "name": "setup 1: no character counters on short names (G060-fix)",
       "ok": true
     },
     {
@@ -44,11 +49,20 @@
       "ok": true
     },
     {
-      "name": "setup 2: sample-details note while the demo date is in",
+      "name": "setup 2: no banners above the date (sample tags on the fields instead; the rule is shown on step 1 and 6)",
+      "ok": true,
+      "detail": "Step 2 of 6:\nWhen is the wedding?\n\nThe date, the ceremony time and your time zone.\n\nWedding date\nSample\n\nSaturday, 15 May 2027\n\nCeremony time\nSample\n\nTime zone of the wedding\n\nWe’ll use London time, f"
+    },
+    {
+      "name": "setup 2: the time zone follows the phone (\"We’ll use London time, from your phone\")",
       "ok": true
     },
     {
-      "name": "setup 2: date written out",
+      "name": "setup 2: date style from the phone (en-GB), no country list in the setup",
+      "ok": true
+    },
+    {
+      "name": "setup 2: date written out (day first, from the phone)",
       "ok": true
     },
     {
@@ -74,7 +88,12 @@
     {
       "name": "setup 5: preview + \"Still sample text\" list",
       "ok": true,
-      "detail": "5"
+      "detail": "4"
+    },
+    {
+      "name": "setup 5: one short line per section (\"Our Story: story intro and 3 captions\")",
+      "ok": true,
+      "detail": "Details: host line and dress code | Our Story: story intro and 3 captions | RSVP settings: reply-by date | Schedule: 3 event places"
     },
     {
       "name": "setup 5: sample item opens its section with \"Done\"",
@@ -85,12 +104,17 @@
       "ok": true
     },
     {
-      "name": "setup 6: rules box (3 changes, typo free, online until)",
+      "name": "setup 6: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)",
       "ok": true,
-      "detail": "Good to know before you publish After you publish, you can change your names and wedding date 3 times. Fixing a small typo (up to 2 letters or digits) is free. Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like. Your website stays online until September 18, 2028, 12 months after your wedding. Then it becomes a read-only archive."
+      "detail": "Good to know before you publish After you publish, you have 3 changes in total for your names, monogram and wedding date (changing several in one go counts once). Always free: fixing a small typo (up to 2 letters in a name), adding a surname, and moving your date by up to 7 days. Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back. Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like. Your website stays online until 18 September 2028, 12 months after your wedding. Then your website closes for guests; you can still see your content and download your replies."
     },
     {
-      "name": "setup 6: summary shows names, date and address",
+      "name": "setup 6: summary shows names, the invitation-card names, date and address",
+      "ok": true,
+      "detail": "Elena & Marco\n\nOn the invitation card: Elena Rossi & Marco Bianchi\n\nSaturday, 18 September 2027\n\nVilla Aurelia, Rome\n\n127.0.0.1:3341/elena-and-marco"
+    },
+    {
+      "name": "setup 6: no sample-date gate once the real date is set",
       "ok": true
     },
     {
@@ -132,7 +156,11 @@
       "ok": true
     },
     {
-      "name": "edit: Names row shows the lock + \"3 changes left\"",
+      "name": "edit: one badge for the shared budget (\"3 name & date changes left\" on Names, none on Date)",
+      "ok": true
+    },
+    {
+      "name": "edit: Names has no \"Sample text\" badge once the names are set (host line lives under Details)",
       "ok": true
     },
     {
@@ -152,7 +180,7 @@
       "ok": true
     },
     {
-      "name": "identity sheet: a 1-letter change is a free typo (\"Save fix\")",
+      "name": "identity sheet: a 1-letter change is a free typo (\"Save — free\")",
       "ok": true
     },
     {
@@ -165,11 +193,19 @@
       "ok": true
     },
     {
-      "name": "identity: snackbar \"… 2 changes left\" with Publish",
+      "name": "identity: snackbar \"… 2 name & date changes left\" with Undo and Publish",
       "ok": true
     },
     {
       "name": "names: meter now \"2 of 3 changes left\"",
+      "ok": true
+    },
+    {
+      "name": "undo: the change is given back (3 of 3) and the names are as before",
+      "ok": true
+    },
+    {
+      "name": "change again after the undo: 2 of 3 left",
       "ok": true
     },
     {
@@ -193,6 +229,44 @@
       "ok": true
     },
     {
+      "name": "setup 2 (phone in the design's own zone): the zone stays New York, shown as the phone's",
+      "ok": true
+    },
+    {
+      "name": "setup 6: \"Your wedding date is still the design’s sample\" above Publish, Publish disabled",
+      "ok": true,
+      "detail": "Your wedding date is still the design’s sample Guests would see Saturday, May 15, 2027. Set your real date before you publish. Set our date Saturday, May 15, 2027 really is our wedding date"
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): setup 6 with sample date has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "setup 6 at 320 px: every control of the fixed bars stays on screen",
+      "ok": true
+    },
+    {
+      "name": "setup 6 at 360 px: every control of the fixed bars stays on screen",
+      "ok": true
+    },
+    {
+      "name": "setup 6 at 390 px: every control of the fixed bars stays on screen",
+      "ok": true
+    },
+    {
+      "name": "setup 6: \"… really is our wedding date\" unlocks Publish",
+      "ok": true
+    },
+    {
+      "name": "setup 6: \"Set our date\" goes to the date step",
+      "ok": true
+    },
+    {
+      "name": "setup 2 at 360 × 640: the date field starts well above the bar (no banners)",
+      "ok": true,
+      "detail": "{\"bar\":523,\"date\":228,\"time\":401}"
+    },
+    {
       "name": "resume: reload returns to the step on this phone (3)",
       "ok": true
     },
@@ -207,7 +281,15 @@
     {
       "name": "first publish from the editor: rules box shown",
       "ok": true,
-      "detail": "Before you publish\nGood to know before you publish\nAfter you publish, you can change your names and wedding date 3 times. Fixing a small typo (up to 2 letters or digits) is free.\nEverything else — tim"
+      "detail": "Before you publish\n\nYour wedding date is still the design’s sample\n\nGuests would see Saturday, May 15, 2027. Set your real date before you publish.\n\nSet our date\nSaturday, May 15, 2027 really is our w"
+    },
+    {
+      "name": "first publish from the editor: the sample date blocks \"Publish my website\" until confirmed",
+      "ok": true
+    },
+    {
+      "name": "first publish from the editor: confirming the date unlocks it",
+      "ok": true
     },
     {
       "name": "a11y (axe-core 4.13.0): first publish sheet has no serious/critical violations",
@@ -270,6 +352,43 @@
       "detail": "0"
     },
     {
+      "name": "320 px: header / footer controls on screen on #setup/1",
+      "ok": true
+    },
+    {
+      "name": "320 px: header / footer controls on screen on #setup/4",
+      "ok": true
+    },
+    {
+      "name": "320 px: header / footer controls on screen on #edit/venue",
+      "ok": true
+    },
+    {
+      "name": "320 px: header / footer controls on screen on #home",
+      "ok": true
+    },
+    {
+      "name": "360 px: header / footer controls on screen on #setup/1",
+      "ok": true
+    },
+    {
+      "name": "360 px: header / footer controls on screen on #setup/4",
+      "ok": true
+    },
+    {
+      "name": "360 px: header / footer controls on screen on #edit/venue",
+      "ok": true
+    },
+    {
+      "name": "360 px: header / footer controls on screen on #home",
+      "ok": true
+    },
+    {
+      "name": "crop at 360 × 640: the zoom slider is not under \"Use this photo\"",
+      "ok": true,
+      "detail": "{\"id\":\"crop-zoom\",\"top\":481,\"bottom\":525}"
+    },
+    {
       "name": "guests: numbers (11 guests coming, 2 not coming, 8 replies)",
       "ok": true,
       "detail": "Guests 11 Guests coming 2 Not coming 8 Replies Replies close at the end of Saturday, April 3, 2027 (New York time). All Coming Not coming Search replies by na"
@@ -307,7 +426,7 @@
       "ok": true
     },
     {
-      "name": "share: link, edit-link warning, sign-in \"Not available yet\"",
+      "name": "share: link + edit-link warning and tip; no \"Sign in by email\" card for a feature that does not exist",
       "ok": true
     },
     {
@@ -328,16 +447,26 @@
       "ok": true
     },
     {
+      "name": "date: 3 days later is free (\"Moving your date by up to 7 days is free.\")",
+      "ok": true,
+      "detail": "Moving your date by up to 7 days is free. You still have 3 changes left."
+    },
+    {
+      "name": "date: a month later uses a change and says only a week is free",
+      "ok": true,
+      "detail": "This uses 1 of your 3 changes. You'll have 2 left. (Only date moves of up to 7 days are free.)"
+    },
+    {
       "name": "rights 0: §11.8 text with [SUPPORT EMAIL] and [SHOP NAME]",
       "ok": true,
-      "detail": "You've used all 3 name and date changes. Small typo fixes (up to 2 letters or digits) are still free. If your wedding moved or something else needs to change, contact us at [SUPPORT EMAIL] or message [SHOP NAME] on Etsy with your order number."
+      "detail": "You've used all 3 name and date changes. Small typo fixes, surnames and moving your date by up to 7 days are still free. If your wedding moved further or something else needs to change, contact us at [SUPPORT EMAIL] or message [SHOP NAME] on Etsy with your order number."
     },
     {
       "name": "rights 0: the change button is disabled",
       "ok": true
     },
     {
-      "name": "rights 0: a typo is still free (\"Save fix\")",
+      "name": "rights 0: a typo is still free (\"Save — free\")",
       "ok": true
     },
     {
@@ -353,7 +482,7 @@
       "ok": true
     },
     {
-      "name": "offline: Change names and Publish are disabled",
+      "name": "offline: Publish is disabled",
       "ok": true
     },
     {
@@ -377,7 +506,7 @@
       "ok": true
     },
     {
-      "name": "archive: Home says it is a read-only archive",
+      "name": "archive: Home says the website is closed for guests",
       "ok": true
     },
     {
@@ -393,7 +522,7 @@
       "ok": true
     },
     {
-      "name": "archive: banner \"Your website was archived on …\" in the editor",
+      "name": "archive: banner \"Your website closed for guests on …\" in the editor",
       "ok": true
     },
     {
@@ -430,6 +559,15 @@
       "detail": "0.001s"
     },
     {
+      "name": "shared preview: \"Preview — this website is not published\" bar at the top",
+      "ok": true,
+      "detail": "{\"x\":0,\"y\":0,\"width\":390,\"height\":56}"
+    },
+    {
+      "name": "public page: no preview bar for guests",
+      "ok": true
+    },
+    {
       "name": "1280: three columns (rail, content, sticky preview)",
       "ok": true,
       "detail": "{\"nav\":{\"x\":0,\"y\":57,\"width\":240,\"height\":804},\"main\":{\"x\":240,\"y\":57,\"width\":560,\"height\":1280},\"pv\":{\"x\":837.5,\"y\":204.5,\"width\":390,\"height\":630.5}}"
@@ -437,6 +575,15 @@
     {
       "name": "1280: no phone Preview button",
       "ok": true
+    },
+    {
+      "name": "1280: the preview follows the open section (Schedule -> Details tab)",
+      "ok": true
+    },
+    {
+      "name": "1280: 5 slow keystrokes reload the preview once (settled), not 5 times",
+      "ok": true,
+      "detail": "1"
     },
     {
       "name": "a11y (axe-core 4.13.0): desktop 1280 section has no serious/critical violations",

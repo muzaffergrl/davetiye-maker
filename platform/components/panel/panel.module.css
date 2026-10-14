@@ -2805,6 +2805,11 @@
 }
 
 /* Setup bar: every control stays inside the screen at 320–400 px (the bar is fixed, so it never widens the page). */
+.setupBar {
+  /* Opaque: text scrolling under a taller (wrapped) bar must not show through its hint line. */
+  background: var(--c-surface);
+}
+
 .setupBarRow {
   flex-wrap: wrap;
 }

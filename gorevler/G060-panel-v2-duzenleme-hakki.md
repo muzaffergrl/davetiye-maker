@@ -97,3 +97,4 @@ bir satın alma ile başka çiftlere site yapılamamalı ("sadece birkaç kez d�
 ## Günlük
 - 2026-10-14 alindi: wf-hiz
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 G060-fix: inceleme bulguları uygulandı — tarih günle (±7 gün ücretsiz), soyadı ücretsiz, Undo (10 dk / yayından önce, hak geri), örnek tarihle ilk yayın engeli + sunucuda bir kez ücretsiz, panel önizleme jetonu (kalıcı anahtar panele gitmez) + paylaşılan önizlemede "Preview" şeridi + arşivde/18 ay taslakta 410, manuel sipariş onayı (CLAIM_ORDER_VERIFICATION=manual, scripts/verify-order.ts, satış kapısı verified.orderCheck), blob üzerinde paylaşılan hız sayacı, foto sınırları (60/gün, 450 dosya), panel UX (telefon saat dilimi, 6. adım çubuğu 320–419 px, kırpma 360×640, sade kural metinleri, tek hak rozeti, sign-in kartı kalktı, önizleme 2,5 sn durulunca). Etsy API doğrulaması, satış sitesi bulguları (G061) ve gerçek cihaz testi yapılmadı.
