@@ -18,8 +18,8 @@ export const SEARCH_BOTS = [
 ] as const;
 /** Bots that collect data for model training (docs/14 §13.4 decision 6). */
 export const TRAINING_BOTS = ['GPTBot', 'ClaudeBot', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'meta-externalagent'] as const;
-/** Folders of our own artwork and screenshots: theme files (design pages' og:image) and the marketing images. */
-const MARKETING_ASSET_DIRS = ['/themes/', '/marketing/'] as const;
+/** Folders of our own artwork and screenshots: theme files (design pages' og:image), marketing images, brand kit. */
+const MARKETING_ASSET_DIRS = ['/themes/', '/marketing/', '/brand/'] as const;
 /** Files of the marketing site at the root. */
 const MARKETING_FILES = ['/robots.txt', '/llms.txt', '/llms-full.txt', '/sitemap.xml'] as const;
 
