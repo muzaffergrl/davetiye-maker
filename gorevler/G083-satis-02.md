@@ -70,7 +70,7 @@ her şey yerel production build ile denendi.
 - sayfa listesinde iki tasarım sayfası.
 
 **5. Testler** (yerel production build; port 42010–42017)
-- `npm test` **560/560** (önce 553). Yeni: `tests/g083-designs.test.ts`, 7 test:
+- `npm test` **560/560** (önce 553; origin/main birleştirmesinden — G404 — sonra **561/561**, typecheck ve build yeniden temiz). Yeni: `tests/g083-designs.test.ts`, 7 test:
   - liste ve sıra;
   - ≤ 60 karakter başlık kuralı;
   - metin ↔ tema (demo çift, fontlar, palet token'ları, README kelimeleri, 01/03/05 kelimesi yok);
