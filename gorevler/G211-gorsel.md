@@ -35,7 +35,12 @@ Tasarım 11'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
 
 ## Günlük
+- 2026-10-14 devam: gpt-gorsel-E (kısım 1)
+- 2026-10-14 ara kayıt: W2 1/4; bg_page, bg_tile, envelope_closed ve closure eklendi (gpt-gorsel-E).
+- 2026-10-14 ara kayıt: W1 tamamlandı; 5 telefon ekranı Kaydet yollarına eklendi (gpt-gorsel-E).
+- 2026-10-14 devam: gpt-gorsel-E
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-E
 - 2026-10-14 not (entegratör): ajan sohbeti yarıda koptu, repoda dosya yok (kit_check 0/23, 0/5); devam ajanı rol rehberindeki 'Ara kayıt ve devam' kuralıyla sürdürür
+- 2026-10-14 not (entegratör): ikinci oturum da koptu; main'de W1 (5) + bg_page, bg_tile, envelope_closed, closure var. Kalan 13 parça + 5 fotoğraf oturum başına en çok 8 görselle sürdürülür

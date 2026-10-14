@@ -53,6 +53,14 @@ yazı menü harflerinin arasından okunuyor. 03'teki gibi okunur, sakin bir men�
   `node` ile koşuldu; `npx tsx tests/g051-browser.ts` `__name is not defined` (tsx dönüşümünün `page.evaluate`'e eklediği yardımcı)
   ile 2 kontrolde düşüyor — CSS ile ilgisiz, araç sorunu.
 - `npm test` 299/299, `npm run build` + trace-check geçti.
+- origin/main ile birleştirdikten sonra (G061 + G060 geldi) yeniden: `npm run build` geçti, `npm test` 348/348, g051 44/44,
+  final-smoke 44/44. **theme-check --stress: 107 geçti, 1 hata — "content change"**: kontrol, yayınlanmış demo sitenin isim ve
+  tarihini değiştirip yeniden yayınlıyor; G060'ın düzenleme hakları artık bunu `IdentityMismatchError` ("the draft's names or date
+  need a confirmed change before publishing") ile reddediyor (aynı adımlar `lib/sites.ts publishSite` ile ayrıca denendi, aynı hata).
+  CSS ile ilgisiz, her temayı etkiler; `scripts/theme-check.cjs` yazma alanımda değil.
+
+**Önerilen görev (entegratör):** `scripts/theme-check.cjs editAndPublish` G060'a uysun — isim/tarih değişikliğinden önce
+`grantIdentityChanges` (destek aracı) ya da yeni bir (yayınlanmamış) site; sonra theme-check iki temada yeniden koşulsun.
 
 **Test edilmeyen**
 - Gerçek iPhone Safari / Android Chrome (alt araç çubuğu, `safe-area`, kaydırırken görünüm) — yalnız masaüstü Chromium'da
