@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 27 · alindi 7 · inceleme 3 · blokaj 293 · bitti 48 · toplam 378
+Özet: hazir 27 · alindi 6 · inceleme 4 · blokaj 293 · bitti 48 · toplam 378
 
 ## claude-canva
 
@@ -168,7 +168,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `G060` inceleme · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
 - `G061` inceleme · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
 - `G064` inceleme · wf-g064 — Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
-- `GM02` alindi · claude-marka — BKE Studio marka kiti — vektör logo, renk/yazı token'ları, favicon seti, Etsy ikon/banner, "Made with" rozeti
+- `GM02` inceleme · claude-marka — BKE Studio marka kiti — vektör logo, renk/yazı token'ları, favicon seti, Etsy ikon/banner, "Made with" rozeti
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
