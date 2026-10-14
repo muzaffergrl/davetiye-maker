@@ -1,0 +1,156 @@
+<!doctype html>
+<!-- Mediterranean Lemon · page 2 — home (/<slug>/home). W1.2 comp: the tile-framed card from the envelope (portrait
+     window, "We're getting married", date · town), the names in a breezy script, weekday · date in spaced capitals, the
+     venue and its place in Didone italic, the countdown, a cobalt RSVP pill, the slim navigation; lemon branches in two
+     corners on the sunlit plaster fading to sky blue. Below the comp (no W1 screen; this design's parts and type,
+     docs/11 §8): the invitation card (GPT invitation_card: lemon garland on top, a band of majolica tiles at the foot;
+     3-slice so long names and venues lengthen it) with a stacked Didone date, the one reply-by line, add to calendar
+     (G051), two tile panels set into the wall (the first story photo, the venue) leading to Our Story and The Day, and the
+     closing. Personal text: none. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{name_display} · {date}">Wedding</title>
+<meta name="description" data-attr-content="{name_display} · {date|date-long} · {venue.city_region}" content="Wedding website">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.name} · {venue.city_region}" content="">
+<meta name="theme-color" content="#F6F1E9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Playfair+Display:ital,wght@0,400;0,500;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'',s=sessionStorage;if(s.getItem('invite:arrive'+k)){s.removeItem('invite:arrive'+k);r.classList.add('from-envelope');if(!('onpageswap' in window&&document.startViewTransition))r.classList.add('arrive-fade');}}catch(e){}})(document.documentElement);
+</script>
+<script src="site.js" defer></script>
+</head>
+<body data-pending="This link will be added soon.">
+
+<main class="site-main">
+
+  <!-- HERO (comp W1.2) -->
+  <section class="hero" data-scene="home-hero" aria-label="Welcome">
+    <div class="scene-bg hero-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/wall_wide-640.webp">
+        <img class="scene-img" src="img/wall-540.webp" alt="" fetchpriority="high">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 500px), min(54vw, 28svh, 300px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 500px), min(52vw, 26svh, 300px)" alt="">
+      <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+      <img class="float f-bloom" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-bloom2" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-leaf2" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    </div>
+    <div class="hero-inner">
+      <div class="card hero-card" data-step="card" data-a="rise-lg">
+        <div class="photo-slot mask-card" data-slot="hero_portrait">
+          <img data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(29vw, 23svh, 152px)" alt="" data-attr-alt="Photo of {name_display}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(48vw, 37svh, 250px)" alt="">
+        <div class="card-copy">
+          <p class="script">We're getting married</p>
+          <p class="kicker"><span class="nowrap" data-field="date"></span><span class="sep" aria-hidden="true"> · </span><span class="cc-city" data-field="venue.city"></span></p>
+        </div>
+      </div>
+      <h1 class="script names" data-step="names" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+      <p class="kicker hero-date" data-step="date" data-a="rise"><span data-field="date" data-format="weekday"></span> · <span class="nowrap" data-field="date"></span></p>
+      <p class="hero-venue" data-step="venue" data-a="rise" data-field="venue.name"></p>
+      <p class="hero-city" data-step="venue" data-a="rise" data-field="venue.city_region_country"></p>
+      <!-- live countdown: the platform computes the UTC target (date + ceremony_time + timezone) → site.js -->
+      <div class="countdown" data-optional="countdown" data-if="countdown_target_utc" data-step="countdown" data-a="rise" data-countdown role="timer" aria-label="Countdown to the ceremony">
+        <div class="cd-row">
+          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl">Days</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl">Hours</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl">Minutes</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl">Seconds</span></div>
+        </div>
+        <p class="cd-done" data-when="today" hidden>Today is the day — we're celebrating!</p>
+        <p class="cd-done" data-when="after" hidden>Thank you for celebrating with us.</p>
+      </div>
+      <p class="hero-cta" data-step="cta" data-a="bloom" data-if="!rsvp.method"><a class="btn" href="rsvp.html">RSVP</a></p>
+    </div>
+  </section>
+
+  <!-- INVITATION CARD (no W1 screen — this design's invitation_card part and type) -->
+  <section class="section invite-sec" id="invitation" data-scene="home-invite" aria-label="Invitation">
+    <div class="wrap">
+      <div class="paper invite" data-step="card" data-a="set">
+        <img class="paper-top" src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-944.webp 944w" sizes="min(calc(100vw - 40px), 440px)" alt="" loading="lazy">
+        <div class="paper-text invite-text">
+          <p class="kicker host" data-step="host" data-a="fade" data-field="host_line" data-if="host_line"></p>
+          <!-- full name when given, else the first name (full_name may be null: never an empty name line) -->
+          <p class="script nm" data-step="name1" data-a="write" data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
+          <p class="script nm" data-step="name1" data-a="write" data-if="!partners.0.full_name" data-field="partners.0.display_name"></p>
+          <p class="amp-line" data-step="amp" data-a="bloom" aria-hidden="true">&amp;</p>
+          <p class="script nm" data-step="name2" data-a="write" data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
+          <p class="script nm" data-step="name2" data-a="write" data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
+          <p class="request" data-step="request" data-a="fade">invite you to celebrate their wedding</p>
+          <!-- the date stacked as on a Didone letterpress card: weekday, month, the day numeral, year -->
+          <div class="dateblock" data-step="date" data-a="rise">
+            <p class="kicker wd" data-field="date" data-format="weekday"></p>
+            <p class="kicker mon" data-field="date" data-format="month"></p>
+            <p class="day" data-field="date" data-format="day"></p>
+            <p class="kicker yr" data-field="date" data-format="year"></p>
+            <p class="at" data-if="ceremony_time">at <span class="nowrap" data-field="ceremony_time"></span></p>
+          </div>
+          <p class="venue" data-step="venue" data-a="fade" data-field="venue.name"></p>
+          <p class="kicker city" data-step="venue" data-a="fade" data-field="venue.city_region"></p>
+        </div>
+      </div>
+      <!-- replies collected another way (rsvp.method "none"): no reply call, no RSVP page -->
+      <div class="reply" data-step="cta" data-a="rise" data-if="!rsvp.method">
+        <p class="kicker" data-if="rsvp.deadline">Kindly reply by <span class="nowrap" data-field="rsvp.deadline"></span></p>
+        <a class="btn" href="rsvp.html">RSVP</a>
+      </div>
+      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+      <div class="cal" data-step="cal" data-a="rise">
+        <p class="kicker">Add to your calendar</p>
+        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO TILE PANELS IN THE WALL (no W1 screen): the first story photo in the portrait tile frame and the venue in the
+       landscape tile frame, staggered like the story page's panels (GPT frame_portrait, frame_landscape) -->
+  <section class="section panels-sec" data-scene="home-panels" aria-label="More about the day">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <div class="wrap panels">
+      <a class="panel-link pl-story" data-optional="our_story" href="story.html" data-step="panel" data-a="turn-l">
+        <span class="tile-frame tf-portrait" aria-hidden="true">
+          <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(29vw, 134px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span></span>
+          <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(48vw, 220px)" alt="" loading="lazy">
+        </span>
+        <span class="pl-text"><span class="script pl-title">Our Story</span><span class="kicker cue">Read</span></span>
+      </a>
+      <a class="panel-link pl-day" href="details.html" data-step="panel" data-i="1" data-a="turn-r">
+        <span class="tile-frame tf-landscape" aria-hidden="true">
+          <span class="photo-slot mask-landscape" data-slot="venue"><img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(51vw, 240px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span></span>
+          <img class="frame-img" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(72vw, 340px)" alt="" loading="lazy">
+        </span>
+        <span class="pl-text"><span class="script pl-title">The Day</span><span class="kicker cue">Details</span></span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="foot wash-end" data-scene="home-foot">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
+    <p class="kicker" data-step="sign" data-a="fade">With love</p>
+    <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1">Open the envelope again</a></p>
+  </footer>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html" aria-current="page"><span>Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
+    <li><a href="details.html"><span>Details</span></a></li>
+    <li data-if="!rsvp.method"><a href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

@@ -589,7 +589,8 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
               go({ view: 'home' });
             }}
             onOpenSection={(id, path) => {
-              setReturnTo('#setup/5');
+              // Steps 5 (check) and 6 (publish) list the sample text; "Done" comes back to the same step.
+              setReturnTo(`#setup/${route.step}`);
               goTo(path ?? `#edit/${id}`);
             }}
             onPublished={() => go({ view: 'home' }, true)}
@@ -781,6 +782,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
                 theme={theme}
                 url={url}
                 steps={steps}
+                sampleCount={notes.sample.length}
                 setupStep={setupStep}
                 replies={replies}
                 onGo={goTo}

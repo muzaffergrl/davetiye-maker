@@ -57,7 +57,11 @@ export interface MarketingConfig {
   checkout: { mode: 'etsy' | 'etsy+direct' };
   analytics: { provider: 'none' | 'vercel' };
   social: { pinterest: string | null; instagram: string | null; tiktok: string | null };
-  /** docs/14 §13.4 decision 6 (recommendation: allow). Search and user-request bots are always allowed. */
+  /**
+   * docs/14 §13.4 decision 6 (recommendation: allow). 'allow' opens the MARKETING pages and our artwork to model-training
+   * bots; couple websites (/<names>) stay closed to them either way (lib/marketing/crawl.ts). Search and user-request
+   * bots are always allowed.
+   */
   aiTrainingBots: 'allow' | 'disallow';
   /** Date the marketing copy (pages other than guides) was last reviewed, YYYY-MM-DD ("Last updated"). */
   copyUpdated: string;

@@ -3,12 +3,25 @@
 // One topic per screen, a 6-part progress bar, Back never loses anything (it is all autosaved), every step
 // can be skipped, and the step to resume is worked out from the content (another phone finds it too).
 
-import { ArrowLeft, CalendarDays, CircleCheckBig, Copy, Hourglass, Share2, Sparkles, TriangleAlert } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Check, CircleCheckBig, Copy, ExternalLink, Hourglass, Pencil, Share2, Sparkles, TriangleAlert } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
-import { fieldId, pageShown, photoAt, prePublishNotes, sampleDateLeft, sampleSummaries, SECTION_TITLES, type PanelState, type PanelTheme, type SectionId } from '../../lib/panel/model.ts';
+import {
+  fieldId,
+  pageShown,
+  photoAt,
+  prePublishNotes,
+  sampleDateLeft,
+  sampleSummaries,
+  SECTION_TITLES,
+  sectionForPath,
+  type PanelState,
+  type PanelTheme,
+  type PublishNote,
+  type SectionId,
+} from '../../lib/panel/model.ts';
 import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
 import { useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
@@ -118,9 +131,14 @@ export function Setup({
   const [published, setPublished] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [canShare, setCanShare] = useState(false);
+  // Copy feedback stays on this screen (button says "Copied" + a status line): the panel's snackbar would sit on top
+  // of "Go to my editor" here, where there is no bottom navigation, and catch taps on it for 6 s.
+  const [copyState, setCopyState] = useState<'copied' | 'failed' | null>(null);
+  const copied = copyState === 'copied';
   const def = SETUP_STEPS[step - 1];
   const deviceZone = useDeviceZone();
   const notes = prePublishNotes(content, theme, { deviceZone });
+  const sampleCount = notes.sample.length;
   // The first publish waits while the date is still the design's sample (G060-fix), unless the couple confirms it.
   const [dateConfirmed, setDateConfirmed] = useState(false);
   const dateBlocked = sampleDateLeft(content, theme.sample) && !dateConfirmed;
@@ -132,6 +150,11 @@ export function Setup({
     document.title = `Step ${step} of 6 · ${def.title}`;
   }, [step, initial.slug, def.title]);
   useEffect(() => setCanShare(typeof navigator !== 'undefined' && typeof navigator.share === 'function'), []);
+  useEffect(() => {
+    if (!copied) return;
+    const t = window.setTimeout(() => setCopyState(null), 2000);
+    return () => window.clearTimeout(t);
+  }, [copied]);
 
   const stepIssues = validation.errors.filter((i) => def.paths.some((p) => i.path === p || i.path.startsWith(`${p}.`)));
 
@@ -162,10 +185,16 @@ export function Setup({
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(url);
-      setError(null);
+      setCopyState('copied');
     } catch {
-      /* the link is visible to copy by hand */
+      setCopyState('failed');
     }
+  };
+
+  /** Opens the first sample item's section above the wizard ("Done" comes back to this step). */
+  const fixFirstSample = () => {
+    const first = notes.sample[0];
+    if (first) onOpenSection(sectionForPath(first.path) ?? 'names', first.path);
   };
 
   if (published) {
@@ -180,19 +209,28 @@ export function Setup({
               Your website is live
             </h1>
             <p className={styles.setupHelp}>Guests can open it now. Share the link or print the QR code.</p>
-            <p className={styles.bigUrl} data-live-link>
-              <UrlText url={url} />
+            <p>
+              <a href={url} target="_blank" rel="noopener noreferrer" className={styles.bigUrl} data-live-link>
+                <UrlText url={url} />
+              </a>
             </p>
             <div className={styles.buttonRow}>
-              <Button icon={Copy} onClick={() => void copy()}>
-                Copy link
+              <Button icon={copied ? Check : Copy} onClick={() => void copy()} data-copy-link>
+                {copied ? 'Copied' : 'Copy link'}
               </Button>
+              <a href={url} target="_blank" rel="noopener noreferrer" className={cx(styles.btn, styles.btn_secondary)} data-open-site>
+                <ExternalLink size={18} strokeWidth={1.75} aria-hidden="true" />
+                <span>Open website</span>
+              </a>
               {canShare ? (
                 <Button icon={Share2} onClick={() => void navigator.share({ url }).catch(() => undefined)}>
                   Share
                 </Button>
               ) : null}
             </div>
+            <p role="status" className={copyState === 'failed' ? styles.hint : styles.visuallyHidden} data-copy-status>
+              {copyState === 'copied' ? 'Link copied' : copyState === 'failed' ? 'Could not copy. Press and hold the link above to copy it.' : ''}
+            </p>
             <QrCode url={url} fileBase={initial.slug} />
             <Button variant="primary" block onClick={onPublished} data-go-editor>
               Go to my editor
@@ -249,22 +287,8 @@ export function Setup({
             <div className={styles.setupPreview}>
               <PreviewPane slug={initial.slug} previewToken={panel.meta.previewToken} pages={visiblePages} version={panel.previewVersion} open wide onClose={() => undefined} />
             </div>
-            {notes.sample.length ? (
-              <div className={styles.stack}>
-                <h2 className={styles.subTitle}>Still sample text</h2>
-                <ul className={styles.checklist}>
-                  {sampleSummaries(notes.sample).map((s) => (
-                    <li key={s.section}>
-                      <button type="button" className={cx(styles.checkItem, styles.check_warning)} onClick={() => onOpenSection(s.section, s.path)} data-sample-line>
-                        <span className={styles.checkDot} aria-hidden="true" />
-                        <span className={styles.checkText}>
-                          <strong>{SECTION_TITLES[s.section]}:</strong> {s.what}
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {sampleCount ? (
+              <SampleChecklist notes={notes.sample} onOpen={onOpenSection} />
             ) : (
               <p className={styles.allSet}>
                 <CircleCheckBig size={20} strokeWidth={1.75} aria-hidden="true" />
@@ -296,6 +320,15 @@ export function Setup({
                 — now or later; adding a surname is always free.
               </p>
             ) : null}
+            {sampleCount ? (
+              <>
+                <Banner tone="warning">
+                  {sampleCount === 1 ? 'One thing on your website is' : `${sampleCount} things on your website are`} still sample text from the design. Your
+                  guests will see {sampleCount === 1 ? 'it' : 'them'} as written. Tap one to change it, or publish now and change {sampleCount === 1 ? 'it' : 'them'} later.
+                </Banner>
+                <SampleChecklist notes={notes.sample} onOpen={onOpenSection} />
+              </>
+            ) : null}
             <RulesBox rights={meta.rights} locale={content.locale} />
             {validation.errors.length ? (
               <Banner tone="danger">
@@ -315,6 +348,11 @@ export function Setup({
             Skip for now
           </button>
         ) : null}
+        {step === 5 && sampleCount ? (
+          <button type="button" className={styles.skip} onClick={() => onStep(6)} data-setup-anyway>
+            Publish anyway
+          </button>
+        ) : null}
         <div className={styles.setupBarRow}>
           <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
           <div className={styles.setupButtons}>
@@ -323,7 +361,11 @@ export function Setup({
                 <span className={styles.backLabel}>Back</span>
               </Button>
             ) : null}
-            {step < 6 ? (
+            {step === 5 && sampleCount ? (
+              <Button variant="primary" icon={Pencil} onClick={fixFirstSample} data-setup-fix>
+                {sampleCount === 1 ? 'Fix 1 item' : `Fix ${sampleCount} items`}
+              </Button>
+            ) : step < 6 ? (
               <Button variant="primary" onClick={next} data-setup-next>
                 {step === 5 ? 'Looks good' : 'Continue'}
               </Button>
@@ -349,6 +391,31 @@ export function Setup({
           </p>
         ) : null}
       </footer>
+    </div>
+  );
+}
+
+/**
+ * "Still sample text from the design (N)" (G061 review): one short line per section ("Our Story: story intro and 3
+ * captions", G060-fix sampleSummaries). Steps 5 and 6 (the publish moment) both show it; a tap opens the section and
+ * "Done" comes back to the step.
+ */
+function SampleChecklist({ notes, onOpen }: { notes: PublishNote[]; onOpen: (id: SectionId, path?: string) => void }) {
+  return (
+    <div className={styles.stack} data-sample-list={notes.length}>
+      <h2 className={styles.subTitle}>Still sample text from the design ({notes.length})</h2>
+      <ul className={styles.checklist}>
+        {sampleSummaries(notes).map((s) => (
+          <li key={s.section}>
+            <button type="button" className={cx(styles.checkItem, styles.check_warning)} onClick={() => onOpen(s.section, s.path)} data-sample-line>
+              <span className={styles.checkDot} aria-hidden="true" />
+              <span className={styles.checkText}>
+                <strong>{SECTION_TITLES[s.section]}:</strong> {s.what}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

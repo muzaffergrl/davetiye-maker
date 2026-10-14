@@ -1,0 +1,91 @@
+<!doctype html>
+<!-- Vintage Airmail Love Letter · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in fountain-pen script,
+     "MOMENTS WE HOLD DEAR" typed, on an old wooden writing desk (GPT bg_desk); three large perforated postage-stamp frames
+     (GPT frame_portrait) scattered at slight angles, dropped onto the desk one by one, a faint inky postmark ring (GPT
+     accent_3) struck over the first frame's corner, a caption with each, small stamps and a pressed forget-me-not between
+     them, dried flowers at the corners (GPT decor_tl / decor_br). Phones: the frames stay large (window 56vw ≥ 38vw,
+     docs/11 §9) and fall in a zigzag one under the other, each as it scrolls into view; from 720 px the comp's scatter.
+     Photo slots story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is
+     off (404) when optional_blocks.our_story is false. Title / kicker = design copy. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="Our Story · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="Our Story · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="Our Story · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#4A2E1C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Homemade+Apple&amp;family=Special+Elite&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long page-desk" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head desk-head" data-scene="story-head">
+    <img class="corner corner-tl page-corner" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-760.webp 760w" sizes="min(52vw, 340px)" alt="">
+    <h1 class="script page-title" data-step="title" data-a="write">Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="type">Moments we hold dear</p>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the desk: each frame is its own scene — it drops onto the desk when it scrolls into view, then its caption is
+       written; the postmark is struck over the first frame after it lands -->
+  <section class="desk" aria-label="Our photos">
+    <figure class="stamp st-1" data-scene="story-stamp">
+      <div class="frame" data-step="drop" data-a="drop">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) 230px, min(57vw, 300px)" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 292px, min(72vw, 380px)" alt="">
+        <img class="postmark" data-step="mark" data-a="strike" src="img/accent_3-240.webp" srcset="img/accent_3-240.webp 240w, img/accent_3-480.webp 480w" sizes="(min-width: 720px) 170px, min(42vw, 220px)" alt="">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+    </figure>
+    <figure class="stamp st-2" data-scene="story-stamp">
+      <img class="desk-acc acc-stamp" data-step="acc" data-a="drop" src="img/accent_1-200.webp" srcset="img/accent_1-200.webp 200w, img/accent_1-400.webp 400w" sizes="min(17vw, 84px)" alt="" loading="lazy">
+      <div class="frame" data-step="drop" data-a="drop">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) 230px, min(57vw, 300px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 292px, min(72vw, 380px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+    </figure>
+    <figure class="stamp st-3" data-scene="story-stamp">
+      <img class="desk-acc acc-flower" data-step="acc" data-a="drop" src="img/accent_2-200.webp" srcset="img/accent_2-200.webp 200w, img/accent_2-386.webp 386w" sizes="min(16vw, 76px)" alt="" loading="lazy">
+      <div class="frame" data-step="drop" data-a="drop">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) 230px, min(57vw, 300px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 292px, min(72vw, 380px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+    </figure>
+  </section>
+
+  <section class="section next-sec" data-scene="story-next">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-760.webp 760w" sizes="min(58vw, 340px)" alt="" loading="lazy">
+    <img class="twine" data-step="twine" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span>Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>
+    <li><a href="details.html"><span>Details</span></a></li>
+    <li data-if="!rsvp.method"><a href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

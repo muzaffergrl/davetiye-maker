@@ -10,7 +10,9 @@ import { llmsFullTxt, llmsTxt, robotsTxt, SEARCH_BOTS, sitemapEntries, sitemapXm
 import { liveDesigns } from '../lib/marketing/designs.ts';
 import { faqItems } from '../lib/marketing/faq.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
-import { corePages } from '../lib/marketing/site.ts';
+import { corePages, MARKETING_SEGMENTS } from '../lib/marketing/site.ts';
+import { COUPLE_SITE_ROBOTS } from '../lib/site/render.ts';
+import { isReservedSlug, isValidSlugFormat } from '../lib/slug.ts';
 import { readyConfig } from './marketing-helpers.ts';
 
 /** Google-style robots matching for one user agent group: longest match wins, Allow wins ties; * and $ supported. */
@@ -47,8 +49,13 @@ function allowed(robots: string, agent: string, urlPath: string): boolean {
 test('robots: marketing pages and couple sites open; editor, API, buyer start, demos and photos closed — for every bot group', () => {
   const robots = robotsTxt(MARKETING);
   for (const agent of ['*', ...SEARCH_BOTS, ...TRAINING_BOTS]) {
-    for (const ok of ['/', '/designs', '/designs/olive-ivory', '/guides/how-to-make-a-wedding-website', '/faq', '/llms.txt', '/starlight-and-sam', '/clara-and-julian', '/themes/olive-ivory/img/og-1200x630.jpg', '/marketing/designs/olive-ivory/envelope-640.webp']) {
+    for (const ok of ['/', '/designs', '/designs/olive-ivory', '/guides/how-to-make-a-wedding-website', '/faq', '/llms.txt', '/themes/olive-ivory/img/og-1200x630.jpg', '/marketing/designs/olive-ivory/envelope-640.webp']) {
       assert.ok(allowed(robots, agent, ok), `${agent} should be allowed ${ok}`);
+    }
+    // Couple websites share the root: search engines may read them (they send X-Robots-Tag: noindex), training bots not.
+    for (const couple of ['/starlight-and-sam', '/clara-and-julian', '/clara-and-julian/home', '/clara-and-julian/rsvp']) {
+      const training = (TRAINING_BOTS as readonly string[]).includes(agent);
+      assert.equal(allowed(robots, agent, couple), !training, `${agent} ${training ? 'must not' : 'should'} read ${couple}`);
     }
     for (const no of ['/api/rsvp/x', '/edit/clara-and-julian?k=secret', '/start', '/start?theme=olive-ivory', '/start/demo/olive-ivory', '/media/abc.jpg']) {
       assert.ok(!allowed(robots, agent, no), `${agent} should be blocked from ${no}`);
@@ -56,6 +63,26 @@ test('robots: marketing pages and couple sites open; editor, API, buyer start, d
   }
   assert.ok(!/^Disallow: \/start\s*$/m.test(robots), 'a bare /start prefix would also block couple slugs like /starlight-and-sam');
   assert.ok(!/Sitemap:/.test(robots), 'no sitemap line before launch');
+});
+
+test('robots: training bots read every marketing URL, but no couple slug — not even one that starts like a marketing page', () => {
+  const cfg = readyConfig();
+  const robots = robotsTxt(cfg);
+  const guides = loadGuides();
+  const marketing = [
+    ...sitemapEntries(guides, cfg).map((e) => new URL(e.loc).pathname),
+    ...MARKETING_SEGMENTS.filter((s) => /\.(txt|xml)$/.test(s)).map((s) => `/${s}`),
+  ];
+  const couples = ['/pricing-and-paul', '/faqir-and-lena', '/about-time-we-wed', '/designs-by-ann', '/guidesandgrooms', '/contact-jo-and-li', '/marketingmay', '/themesong-and-sam'];
+  for (const c of couples) assert.ok(isValidSlugFormat(c.slice(1)) && !isReservedSlug(c.slice(1)), `${c} is a slug a couple can choose`);
+  for (const bot of TRAINING_BOTS) {
+    for (const p of marketing) assert.ok(allowed(robots, bot, p), `${bot} should read ${p}`);
+    for (const c of couples) assert.ok(!allowed(robots, bot, c), `${bot} must not read the couple website ${c}`);
+    for (const p of ['/start', '/start/demo/olive-ivory', '/edit/x', '/api/rsvp/x', '/media/a.jpg']) assert.ok(!allowed(robots, bot, p), `${bot}: ${p}`);
+  }
+  for (const c of couples) assert.ok(allowed(robots, 'Googlebot', c), `search engines still read ${c} (and see its noindex header)`);
+  assert.match(robots, /^# Couple websites \(\/<names>\) send "X-Robots-Tag: noindex"/m, 'the comment says what couple pages really send');
+  assert.equal(COUPLE_SITE_ROBOTS, 'noindex');
 });
 
 test('robots: decisions in config — training bots can be closed; sitemap line after launch', () => {

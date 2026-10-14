@@ -161,6 +161,7 @@ try {
   // =========================================================================== 1. recorded journey
   await block('journey', async () => {
     const ctx = await browser.newContext({ ...UK_PHONE, recordVideo: { dir: videoDir, size: { width: 390, height: 844 } } });
+    await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE });
     const page = await ctx.newPage();
     const pause = (ms = 700) => page.waitForTimeout(ms);
     await page.goto(`${J}#setup/1`);
@@ -247,9 +248,21 @@ try {
     await page.click('[data-section-done]');
     await page.waitForSelector('[data-setup="5"]');
     check('setup 5: "Done" returns to the check step', page.url().endsWith('#setup/5'));
+    // G061 review: with sample text left, the primary action is "Fix N items"; "Publish anyway" is the quieter one.
+    const sampleN = Number(await page.getAttribute('[data-setup="5"] [data-sample-list]', 'data-sample-list'));
+    const fixLabel = (await page.locator('[data-setup-fix]').innerText()).trim();
+    check('setup 5: sample text left -> primary "Fix N items", "Publish anyway" secondary, no "Looks good"', sampleN > 0 && fixLabel === (sampleN === 1 ? 'Fix 1 item' : `Fix ${sampleN} items`) && (await page.locator('[data-setup-anyway]').count()) === 1 && (await page.locator('[data-setup-next]').count()) === 0, `${sampleN} / ${fixLabel}`);
+    check('setup 5: no horizontal scroll with the extra button', (await overflow(page)) <= 0, String(await overflow(page)));
     await pause();
-    await page.click('[data-setup-next]');
+    await page.click('[data-setup-anyway]');
     await page.waitForSelector('[data-setup="6"]');
+    const sample6 = await page.locator('[data-setup="6"] main').innerText();
+    check('setup 6: the publish step lists the sample text with its count', (await page.getAttribute('[data-setup="6"] [data-sample-list]', 'data-sample-list')) === String(sampleN) && sample6.includes(`Still sample text from the design (${sampleN})`) && sample6.includes('still sample text from the design'), sample6.slice(0, 300).replace(/\s+/g, ' '));
+    await page.locator('[data-setup="6"] [data-sample-list] li button').first().click();
+    await page.waitForSelector('[data-section-done]');
+    await page.click('[data-section-done]');
+    await page.waitForSelector('[data-setup="6"]');
+    check('setup 6: a sample item opens its section and "Done" comes back to step 6', page.url().endsWith('#setup/6'));
     const rules = await page.locator('[data-rules]').innerText();
     check('setup 6: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)', rules.includes('3 changes in total') && rules.includes('moving your date by up to 7 days') && rules.includes('Undo it right away') && rules.includes('18 September 2028') && rules.includes('closes for guests'), rules.replace(/\s+/g, ' '));
     const summary = await page.locator('[data-publish-summary]').innerText();
@@ -264,11 +277,21 @@ try {
     const qrText = await page.locator('[data-setup-done] svg[role="img"]').getAttribute('data-qr-text');
     const decoded = await decodeQr(page.locator('[data-setup-done] svg[role="img"]'));
     check('publish: QR made from the public URL and decodes to it', qrText === PUBLIC && decoded === PUBLIC, `${qrText} / ${decoded}`);
+    check('publish: the address is a link, with an "Open website" button', (await page.getAttribute('[data-setup-done] [data-live-link]', 'href')) === PUBLIC && (await page.getAttribute('[data-setup-done] [data-open-site]', 'href')) === PUBLIC);
+    await page.click('[data-copy-link]');
+    await page.waitForFunction(() => document.querySelector('[data-copy-status]')?.textContent === 'Link copied', null, { timeout: 3000 });
+    const clip = await page.evaluate(() => navigator.clipboard.readText()).catch(() => null);
+    check('publish: "Copy link" -> button says "Copied", status "Link copied" (announced), clipboard holds the URL', (await page.locator('[data-copy-link]').innerText()).includes('Copied') && (await page.getAttribute('[data-copy-status]', 'role')) === 'status' && clip === PUBLIC, String(clip));
+    check('publish: no snackbar over "Go to my editor" (there is no bottom navigation here)', (await page.locator('[data-snackbar]').count()) === 0);
+    await page.waitForTimeout(2300);
+    check('publish: the button says "Copy link" again after 2 s', (await page.locator('[data-copy-link]').innerText()).includes('Copy link'));
     await shot(page, '09_published');
     await pause(1200);
     await page.click('[data-go-editor]');
     await page.waitForSelector('[data-status-card]');
     check('editor: Home after publishing, status Live', (await page.locator('[data-status-card]').innerText()).includes('Live') && page.url().endsWith('#home'));
+    const statusText = await page.locator('[data-status-card]').innerText();
+    check('editor: Live status names the sample text left instead of "up to date"', statusText.includes('still sample text from the design') && !statusText.includes('up to date'), statusText.replace(/\s+/g, ' ').slice(0, 160));
     check('editor: rights card "3 of 3 changes left"', (await page.locator('[data-rights-card]').innerText()).includes('3 of 3 changes left'));
     check('editor: no Home-screen setup prompt after publish (setup never reopens)', !(await page.locator('[data-status-card]').innerText()).includes('Continue setup'));
     await shot(page, '10_home_live');

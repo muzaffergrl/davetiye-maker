@@ -104,6 +104,25 @@
       "ok": true
     },
     {
+      "name": "setup 5: sample text left -> primary \"Fix N items\", \"Publish anyway\" secondary, no \"Looks good\"",
+      "ok": true,
+      "detail": "10 / Fix 10 items"
+    },
+    {
+      "name": "setup 5: no horizontal scroll with the extra button",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "setup 6: the publish step lists the sample text with its count",
+      "ok": true,
+      "detail": "Step 6 of 6: Publish your website You can keep editing after you publish. Elena & Marco On the invitation card: Elena Rossi & Marco Bianchi Saturday, 18 September 2027 Villa Aurelia, Rome 127.0.0.1:3341/elena-and-marco 10 things on your website are still sample text from the design. Your gues"
+    },
+    {
+      "name": "setup 6: a sample item opens its section and \"Done\" comes back to step 6",
+      "ok": true
+    },
+    {
       "name": "setup 6: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)",
       "ok": true,
       "detail": "Good to know before you publish After you publish, you have 3 changes in total for your names, monogram and wedding date (changing several in one go counts once). Always free: fixing a small typo (up to 2 letters in a name), adding a surname, and moving your date by up to 7 days. Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back. Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like. Your website stays online until 18 September 2028, 12 months after your wedding. Then your website closes for guests; you can still see your content and download your replies."
@@ -131,8 +150,30 @@
       "detail": "http://127.0.0.1:3341/elena-and-marco / http://127.0.0.1:3341/elena-and-marco"
     },
     {
+      "name": "publish: the address is a link, with an \"Open website\" button",
+      "ok": true
+    },
+    {
+      "name": "publish: \"Copy link\" -> button says \"Copied\", status \"Link copied\" (announced), clipboard holds the URL",
+      "ok": true,
+      "detail": "http://127.0.0.1:3341/elena-and-marco"
+    },
+    {
+      "name": "publish: no snackbar over \"Go to my editor\" (there is no bottom navigation here)",
+      "ok": true
+    },
+    {
+      "name": "publish: the button says \"Copy link\" again after 2 s",
+      "ok": true
+    },
+    {
       "name": "editor: Home after publishing, status Live",
       "ok": true
+    },
+    {
+      "name": "editor: Live status names the sample text left instead of \"up to date\"",
+      "ok": true,
+      "detail": "Live Your website is live — 10 things are still sample text from the design. 127.0.0.1:3341/elena-and-marco Copy Share"
     },
     {
       "name": "editor: rights card \"3 of 3 changes left\"",
