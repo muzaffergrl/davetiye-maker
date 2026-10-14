@@ -35,6 +35,7 @@ girdikten sonra; aynı bileşenlere dokundukları için). Aynı görev, iki ayr�
 
 ## Bitti sayılması için
 - [x] Satış sitesinde ad, logo ve favicon BKE Studio; testler ve build geçti; önizleme görüntüleri (Kısım A)
+- [x] Panel BKE Studio görünümünde ve K29 ile sadeleşti; testler, build ve panel tarayıcı testleri geçti; önizleme (Kısım B)
 
 ## Sonuç
 
@@ -103,7 +104,86 @@ girdikten sonra; aynı bileşenlere dokundukları için). Aynı görev, iki ayr�
 - Panel tarayıcı testleri (g060-browser vb.) koşulmadı; kök layout'a yalnız ikon, manifest ve başlık eklendi.
 - Gerçek telefonda deneme yok.
 
+### B — panel (2026-10-14, claude-G066)
+
+**Durum:** panel (`/edit/<slug>`) BKE Studio görünümünde (GM05 comp'ları `brand/ui/panel/u2_*`) ve K29 kararıyla sadeleşti.
+Yerelde production build ile test edildi. **Yayınlanmadı** (deploy entegratörde). Sunucu, içerik şeması, doğrulama, yayın anlamı
+ve düzenleme hakkı kuralları değişmedi; değişen yalnız panelin görünümü ve bilgi mimarisi.
+
+**1. Marka giydirmesi** (`components/panel/`, ilk commit)
+- Token'lar `panel.module.css`'in başında: patlıcan #2B1526 (başlık, birincil düğme, tek vurgu), kâğıt #FAF7F0 / #EDE5D7 zemin,
+  ink #202020 metin, ikincil metin #5C5560 (her zeminde ≥ 5,7:1), kontrol çerçevesi #8C7F8A (≥ 3:1). Altın ve lavanta yalnız
+  logoda; açık zeminde metin rengi olarak hiç yok.
+- Yazı: Archivo 800 başlık, Montserrat 300 geniş etiket, DM Sans gövde — `components/panel/fonts.ts` (`next/font/google`,
+  repoya font dosyası yok); sheet, bildirim ve 404 de aynı sınıfı alır.
+- Logo: `components/panel/Brand.tsx` → `/brand/bke-logo-horizontal-anchor.svg` (dar ekranda ve değişiklik çubuğu varken
+  monogram `public/brand/bke-monogram-small-anchor.svg`, `brand/svg/`'den aynen kopya). Logo `<img>`, fontla çizilmedi.
+- Kartlar çerçevesiz, yumuşak gölge; alt menü kâğıt şerit + aktif sekmede patlıcan alt çizgi; rozetler sadeleşti ("New" koyu,
+  Coming/Not coming nokta); ≥ 960 px iki sütun.
+
+**2. K29 sadeleştirme** (ayrıntı `docs/16_PANEL_V2.md` §0b; saf mantık `components/panel/pages.ts` +
+`tests/g066-panel-pages.test.ts`)
+- Kurulum 3 adım: isimler + tarih (tam adlar isteğe bağlı açılır bölümde; hak kuralı isimlerin altında bir kez) → fotoğraf
+  (kapak yeri; diğerleri "More photos" açılır bölümünde, isteğe bağlı) → yayınla. Son adımda örnek metin listesi/sayısı yok,
+  tek sakin satır. Eski `#setup/4…6` adresleri 2/3'e düşer.
+- Edit 6 sayfa: Us · Day & place · Photos · Our Story · Details · RSVP. Satırlarda örnek/kilit rozeti yok, yalnız hata sayısı.
+  Eski bölüm adresleri (`#edit/venue`, `#edit/faq` …) ilgili sayfayı açıp o bölüme kaydırır. İsim/tarih hakkı yalnız Us ve
+  Day & place editörlerinde (`data-rights-card`); Home'daki hak kartı kalktı. Alan içindeki "Sample" işareti sessiz griye döndü.
+- Yayımlanmamış değişiklik varken yapışkan çubuk "Unpublished changes: n · Review · Publish"; Review yayındaki kopya ile
+  taslağı karşılaştırıp değişen sayfaları listeler (`app/edit/[slug]/page.tsx` artık `site.publishedContent`'i panele verir).
+  İlk yayın eskisi gibi kurallar + notlar sheet'iyle; sonrakiler doğrudan.
+- Home: "Your website is N% ready" + ilerleme çubuğu + yalnız sıradaki 3 iş (tek dokunuşla doğru editöre); örnek metin
+  hatırlatmaları burada.
+- Share: önce link + QR (gerçek `QrCode`); "Guest password" (G076, varsayılan Off) ve "Your private edit link" açılır bölüm.
+- Guests (G069) yalnız görsel dil. Masaüstü: solda düzenleme, sağda sabit canlı önizleme (≥ 1280'de ray kalktı).
+- İşlev kaybı yok: haklar ve sunucu zorlaması, arşiv kapıları, önizleme token'ı, misafir şifresi, RSVP v2, CSV/yazdırma,
+  fotoğraf kırpma, çevrimdışı yedek aynen; ilgili tarayıcı testleri yeni akışta koşuyor.
+
+**3. Satış sitesindeki panel ekranları** (entegratör notu)
+- `public/marketing/panel/` yeniden çekildi: `panel`, `crop`, `preview`, `share`, `replies`, `questions` (G059 çekimiyle aynı
+  ayar: 390 × 844, DPR 3, kurgusal Elena & Marco / Clara & Julian verisi, QR bulanık; 320/480/640 WebP, `assets.json`'daki
+  640 × 1385 ölçüsü aynı, `node scripts/marketing-assets.ts --check` ok). Artık BKE Studio panelini ve G069 Guests ekranını
+  gösteriyorlar.
+- Demo toplamları değişti: Guests ekranı "9 Guests coming · 1 Not coming · 5 Replies" → `lib/marketing/facts.ts`
+  `DEMO_REPLY_TOTALS = { coming: 9, notComing: 1, replies: 5 }` (eskisi 4/1/5, yanıt sayısıydı) ve yorumu.
+- `start` ve `editLink` (/start ve kayıt sonrası ekran) çekilmedi: panel değil, kodları bu görevde değişmedi (hâlâ eski yeşil
+  görünüm; aşağıda açık iş).
+- `tests/marketing-browser.ts` 283/283; pazarlama birim testleri `npm test` içinde geçti.
+
+**Testler** (yerel production build, son kod)
+- `npm test` 500/500 (yeni `tests/g066-panel-pages.test.ts` 5 test dahil, atlanan yok); `npm run typecheck`; `npm run build`
+  + trace-check temiz.
+- Tarayıcı (hepsi son build'de, 0 hata): panel-browser 77/77, g060 151/151, g069 60/60, g076 51/51, final-smoke olive-ivory
+  45/45 ve blush-garden-rose 45/45, g051 44/44, g055 138/138, claim 50/50, rsvp 25/25, marketing 283/283.
+- Test uyarlamaları kontrol azaltmadı: g060 yeni akışı baştan sona yürüyor (3 adım, açılır bölümler, sakin satır, hazırlık
+  kartı, 6 sayfa, hak yeri, değişiklik çubuğu + Review, eski `#setup/6` adresi, Share açılır bölümleri, arşivde hak, iki sütun);
+  panel-browser (değişiklik çubuğu + Review, yavaş yayında "Publishing…"), g076 (şifre bölümü kapalı başlar, Off → On), g051
+  (sorular Details sayfasında), g055 (reload öncesi sheet'in kapanmasını bekler).
+- 320 / 360 px'te yatay taşma yok (ayrı ölçüm); kontrast değerleri hesapla kontrol edildi (bkz. 1).
+
+**Önizleme:** `platform/previews/g066/panel/` — `before_*` (main, K29 öncesi panel) ve `after_*`, 390 ve 1280 px: kurulum
+adımları (önce 6, sonra 3), home, edit listesi, bir editör (Day & place), değişiklik çubuğu + Review (`after_changes_review_*`),
+share kapalı ve açık (`after_share_open_*`), guests.
+
+**Açık / yapılmayanlar**
+- Gerçek telefonda deneme yok; ekran okuyucu ile elle deneme yok (yalnız aria yapısı ve otomatik kontroller).
+- GPT comp'u olmayan ekranları aynı dilde ben tasarladım: değişiklik çubuğu + Review sheet'i, Home hazırlık kartı, Day & place'in
+  üç bölümlü sayfası, Share açılır bölümleri, sihirbazın 3. adımı. İstenirse GM05'e ek comp turu.
+- Kurulum 3. adımı hâlâ uzun (örnek tarih kapısı + önizleme + kurallar kutusu); işlev gereği kaldı, comp'la kısaltılabilir.
+- `platform/README.md`'deki panel font/bilgi mimarisi notları ve `app/signin` (panel CSS'ini kullanıyor, marka font sınıfı yok;
+  sistem fontuna düşüyor) yazar dışı, güncellenmedi.
+- **Pazarlama görsellerinin kaynağı:** `scripts/marketing-assets.ts` panel WebP'lerini
+  `collections/03_Blush_Garden_Rose/package/shots/{b04_panel_top,b06_panel_crop,b08_panel_preview,b10_live_qr,p01_panel_replies,p03_panel_questions}.jpg`'den
+  üretiyor; bu JPG'ler yazar dışı, güncellenmedi. Betik tam koşulursa eski panel ekranları geri gelir — önce G059 çekimi
+  (`tools/listing_templates/capture.ts`) yenilenmeli ya da bu çekimin JPG'leri oraya konmalı (entegratör).
+- Satış sitesindeki alt metinler yazar dışı: ana sayfa "a Download all replies (CSV) button" diyor, düğme artık
+  "Download list" (CSV indirir) ve 390 × 844 karede alttaki yapışkan çubukta. /start ve kayıt sonrası ekran (`app/start`)
+  hâlâ eski yeşil görünümde; ne üründe ne görselde değişti.
+- `tests/g055-browser.ts`'teki `page.reload` yarışı main'de de vardı (ERR_ABORTED); test sheet'in kapanmasını bekleyecek
+  şekilde düzeltildi, kontrol azaltılmadı.
+
 ## Günlük
 - 2026-10-14 açıldı (entegratör): GM02 onayı sonrası; G061 düzeltme turu bitince başlar
 - 2026-10-14 alindi: claude-G066
 - 2026-10-14 Kısım A (satış sitesi) bitti (claude-G066): BKE Studio giydirmesi, testler 458/458 + tarayıcı 283/283; durum alindi (Kısım B panel bekliyor)
+- 2026-10-14 Kısım B (panel) bitti (claude-G066): BKE Studio giydirmesi + K29 sadeleştirme, npm test 500/500, tarayıcı 769/769 (11 paket), satış sitesi panel görselleri yeniden çekildi; durum alindi (bitir entegratörde)
