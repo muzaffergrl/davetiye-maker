@@ -2,7 +2,7 @@
 id: G819
 baslik: Tasarım 19 Midnight Garden — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-ui-panel
 oncelik: 2
 bagimli: []
@@ -46,3 +46,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 ara kayıt: gpt-ui-panel — 3.5 hand_phone_edit üretildi; PAKET 3 5/5 geçti. Ham yeşildeki RGB farkını tam #00FF00'a sabitlemek için açık kullanıcı isteği bekleniyor.
 - 2026-10-14 kullanıcı kararı: "Hayır, mevcut görselleri teslim et" — mevcut yeşil ekranlar korundu; renk farkı Sonuç'a kaydedildi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-ui-panel — 5 sahne, PAKET 3 kontrolü 5/5 geçti; yalnız mockups klasörü ve bu görev dosyası değiştirildi.
+- 2026-10-14 entegratör onayladı
