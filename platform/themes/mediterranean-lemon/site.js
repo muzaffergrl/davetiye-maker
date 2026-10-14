@@ -1,96 +1,87 @@
-/* site.js — Mediterranean Lemon (05, G405): motion, envelope, name fit, countdown. The platform writes the HTML and
- * #site-data (no content record); DEV_CONTENT + devRender() only without it. Hooks, reasons: README.md. */
+/* site.js — Mediterranean Lemon (05, G405). The platform writes the HTML + #site-data; DEV_CONTENT only without it. README.md */
 const MOTION = {
-  // sessionStorage keys (+ ":<slug>"), shared with the inline <head> scripts
+  // sessionStorage keys (+ ":<slug>") = the <head> scripts
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },
 
-  // opening (docs/11 §7.3, catalogue: "the lemon tie slips loose and rolls away, the white flap opens upward to reveal
-  // the blue-and-white tile liner, and the card rises while a lemon branch sways in from the top corner and a blossom
-  // drifts down"): [start ms after the tap, duration ms]
+  // opening (docs/11 §7.3; catalogue sentence, README): [start ms after the tap, duration ms]
   envelope: {
-    hint:    [0, 300],      // "Tap to open" fades
-    tug:     [0, 300],      // the envelope gives under the finger
-    closure: [0, 1300],     // the lemon tie slips loose (first motion < 250 ms), drops off the tip and rolls away
-    head:    [180, 620],    // "You are invited" + names rise away
-    lift:    [560, 880],    // the white scalloped flap lifts toward the viewer on its hinge, 0° → 90°
-    open:    [600, 420],    // closed body → open body (tile lining + pocket), under the lifting flap
-    flap:    [1420, 780],   // the open flap with its tile liner stands up from −90° (opens upward)
-    rise:    [1800, 1420],  // the card rises out of the pocket
-    sway:    [1800, 1900],  // the top-left lemon branch sways in (design key)
-    accents: 1950,          // one blossom drifts down beside the card, gone before `go`
-    forward: [3220, 640],   // the card comes forward where it is (× 1.04)
-    go:      4120,          // to home (the card flies into the hero card)
-    fadeOut: 420            // fade without cross-document view transitions
+    hint: [0, 300],
+    tug: [0, 300],  // the envelope gives
+    closure: [0, 1400],  // the tie: slips loose, drops, rolls right ≤ 150°, rolls off screen
+    head: [180, 620],  // heading rises away
+    lift: [680, 860],  // the flap lifts 0° → 90° (the tie is clear)
+    open: [720, 420],  // closed → open body (tile liner + pocket)
+    flap: [1520, 760],  // the open flap (tile liner) stands up from −90°
+    rise: [1800, 1420],  // the card rises
+    sway: [1800, 1800],  // the top-left branch sways in
+    accents: 1950,  // one blossom down the liner
+    forward: [3220, 640],  // the card comes forward (× 1.04)
+    go: 4120,  // to home
+    fadeOut: 420  // without cross-document VT
   },
 
-  // entrances: scene → [[step, delay ms], …], never all at once
+  // entrances: scene → [[step, delay ms], …]
   scenes: {
-    'home-hero':      [['decor', 0], ['card', 100], ['names', 620], ['date', 1380], ['venue', 1600], ['countdown', 1860], ['cta', 2140]],
-    'home-invite':    [['card', 0], ['host', 560], ['name1', 760], ['amp', 1280], ['name2', 1420], ['request', 1980], ['date', 2240], ['venue', 2560], ['cta', 2820], ['cal', 3040]],
-    'home-panels':    [['sprig', 0], ['panel', 260]],              // the two tile panels turn in, one after the other
-    'home-foot':      [['decor', 0], ['sign', 160], ['links', 760]],
-    'story-head':     [['decor', 0], ['title', 120], ['kicker', 1000], ['lede', 1280]],
-    'story-tile':     [['panel', 0], ['caption', 900]],              // each panel turns in as it comes into view, then its caption
-    'story-next':     [['decor', 0], ['sprig', 200], ['link', 600]],
-    'details-card':   [['decor', 0], ['kicker', 120], ['card', 320], ['title', 860], ['row', 1440], ['cal', 2420]],
-    'details-venue':  [['photo', 0], ['body', 640], ['dress', 1000], ['action', 1220]],
-    'details-block':  [['sprig', 0], ['title', 300], ['body', 900], ['action', 1150]],
-    'details-faq':    [['sprig', 0], ['title', 300], ['item', 950]],
-    'details-next':   [['decor', 0], ['link', 300]],
-    'rsvp-card':      [['decor', 0], ['card', 120], ['title', 720], ['kicker', 1420], ['deadline', 1580], ['button', 1860], ['wait', 2140], ['love', 2380], ['sign', 2660], ['tie', 2920]],
-    'rsvp-form':      [['form', 0]],
-    'rsvp-closing':   [['decor', 0], ['title', 220], ['line', 900], ['meta', 1150]]
+    'home-hero': [['decor', 0], ['card', 100], ['names', 620], ['date', 1380], ['venue', 1600], ['countdown', 1860], ['cta', 2140]],
+    'home-invite': [['card', 0], ['host', 520], ['name1', 700], ['amp', 1180], ['name2', 1320], ['request', 1840], ['date', 2100], ['venue', 2400], ['cta', 2640], ['cal', 2860]],
+    'home-panels': [['sprig', 0], ['panel', 260]],
+    'home-foot': [['decor', 0], ['sign', 160], ['links', 760]],
+    'story-head': [['decor', 0], ['title', 120], ['kicker', 1000], ['lede', 1280]],
+    'story-tile': [['panel', 0], ['caption', 900]],
+    'story-next': [['decor', 0], ['sprig', 200], ['link', 600]],
+    'details-card': [['decor', 0], ['kicker', 120], ['card', 320], ['title', 860], ['row', 1440], ['cal', 2420]],
+    'details-venue': [['photo', 0], ['body', 640], ['dress', 1000], ['action', 1220]],
+    'details-block': [['sprig', 0], ['title', 300], ['body', 900], ['action', 1150]],
+    'details-faq': [['sprig', 0], ['title', 300], ['item', 950]],
+    'details-next': [['decor', 0], ['link', 300]],
+    'rsvp-card': [['decor', 0], ['card', 120], ['title', 720], ['kicker', 1420], ['deadline', 1580], ['button', 1860], ['wait', 2140], ['love', 2380], ['sign', 2660], ['tie', 2920]],
+    'rsvp-form': [['form', 0]],
+    'rsvp-closing': [['decor', 0], ['title', 220], ['line', 900], ['meta', 1150]]
   },
-  stagger: 200,          // data-i / repeated rows spacing inside one step
-  batchGap: 380,         // scenes entering together play in sequence
-  arriveDelay: 0,        // from the envelope: the names start as the card morph (.9 s) lands
+  stagger: 200,  // data-i / repeated rows
+  batchGap: 380,  // scenes entering together
+  arriveDelay: 0,
 
-  // particles (GPT accents): moment → groups, one kind each (docs/11 §8); 'drift' = a slow fall with sway that fades
-  // out before the bottom; `avoid` keeps a lane beside a photo (never over it)
+  // particles (docs/11 §8): `avoid` = lanes beside these; 'liner' = the open envelope's tile liner; `host` = behind its text
   accents: {
-    open:    [{ file: 'img/accent_2-200.webp', count: 1, path: 'drift', origin: 'top', dur: [2100, 2100], size: [30, 36], spread: 0, avoid: '.env .card' }],
-    arrive:  [{ file: 'img/accent_2-200.webp', count: 2, path: 'drift', origin: 'top', dur: [6000, 7400], size: [22, 28], spread: 1400, avoid: '.hero [data-slot]' }],
-    closing: [{ file: 'img/accent_2-200.webp', count: 3, path: 'drift', origin: 'top', dur: [6400, 8200], size: [20, 28], spread: 1800 },
-              { file: 'img/accent_3-200.webp', count: 1, path: 'across', origin: 'right', dur: [5600, 5600], size: [60, 60], spread: 600 }]
+    open: [{ file: 'img/accent_2-200.webp', count: 1, path: 'drift', origin: 'liner', dur: [2100, 2100], size: [46, 54], spread: 0, avoid: '.env .card' }],
+    arrive: [{ file: 'img/accent_2-200.webp', count: 2, path: 'drift', origin: 'top', dur: [6000, 7400], size: [22, 28], spread: 1400, avoid: '.hero-inner > *', host: '.hero' }],
+    closing: [{ file: 'img/accent_2-200.webp', count: 3, path: 'drift', origin: 'top', dur: [6400, 8200], size: [20, 28], spread: 1800, avoid: '.closing > p, .closing > h2', host: '.closing' },
+              { file: 'img/accent_3-200.webp', count: 1, path: 'across', origin: 'right', dur: [5600, 5600], size: [60, 60], spread: 600, avoid: '.closing > p, .closing > h2', host: '.closing' }]
   }
 };
 
-/* card path (% of its height, manifest stage.card_path) */
-const ENVELOPE_GEOMETRY = { out: 'translateY(-86.959%)', front: 'translateY(-83.959%) scale(1.04)' };
+/* manifest stage.card_path */
+const ENVELOPE_GEOMETRY = { out: 'translateY(-97.838%)', front: 'translateY(-94.838%) scale(1.04)' };
 
-/* DEV_CONTENT (no #site-data only) = content.demo.json */
+/* = content.demo.json */
 const DEV_CONTENT = {
   record_kind: 'demo', event_type: 'wedding', locale: 'en-US',
   partners: [{ display_name: 'Isabella', full_name: 'Isabella Marie' }, { display_name: 'Marco', full_name: 'Marco Antonio' }],
   name_display: 'Isabella & Marco', initials: 'I&M', host_line: 'Together with their families',
   date: '2027-06-12', ceremony_time: '16:00', timezone: 'Europe/Rome',
   venue: { name: 'Villa Limonaia', city: 'Sorrento', region: 'Campania', country: 'Italy', address: null },
-  schedule: [
-    { label: 'Ceremony', time: '16:00', location: 'The Lemon Grove' },
-    { label: 'Cocktail Hour', time: '17:00', location: 'The Sea Terrace' },
-    { label: 'Reception', time: '18:30', location: 'The Villa Courtyard' }
-  ],
+  schedule: [{ label: 'Ceremony', time: '16:00', location: 'The Lemon Grove' }, { label: 'Cocktail Hour', time: '17:00', location: 'The Sea Terrace' },
+    { label: 'Reception', time: '18:30', location: 'The Villa Courtyard' }],
   dress_code: 'Summer formal',
   rsvp: { deadline: '2027-05-01', method: null },
   urls: { website: null, rsvp_form: null, map: null, registry: null, accommodation: null },
   media: { hero_portrait: null, memory_photos: [], couple_clip: null, venue_image: null },
   optional_blocks: { our_story: true, countdown: true, dress_code: true, registry: true, travel_stay: true, faq: false, guest_policy: false },
-  story: {
-    intro: 'Under the lemon trees, one sunny day at a time, we found our way to',
-    items: [{ caption: 'On the piazza' }, { caption: 'Above the sea' }, { caption: 'Our sweetest yes' }]
-  }
+  story: { intro: 'Under the lemon trees, one sunny day at a time, we found our way to',
+    items: [{ caption: 'On the piazza' }, { caption: 'Above the sea' }, { caption: 'Our sweetest yes' }] }
 };
 
 (function () {
   'use strict';
+  const $ = (q) => document.querySelector(q), $$ = (q) => document.querySelectorAll(q);
   const root = document.documentElement;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const crossDocVT = 'onpageswap' in window && typeof document.startViewTransition === 'function';
-  // theme assets resolve against this file, not the page URL
   const BASE = (document.currentScript && document.currentScript.src) || document.baseURI;
   const asset = (p) => new URL(p, BASE).href;
 
-  /* -- data: platform (#site-data) or dev fallback */
+  /* -- data */
   function readSiteData() {
     const el = document.getElementById('site-data');
     if (!el) return null;
@@ -103,78 +94,68 @@ const DEV_CONTENT = {
   const OPENED = MOTION.storage.opened + KEY;
   const ARRIVE = MOTION.storage.arrive + KEY;
 
-  const store = {
-    get(k) { try { return window.sessionStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) { /* private mode: no memory */ } },
-    del(k) { try { window.sessionStorage.removeItem(k); } catch (e) { /* ignore */ } }
-  };
+  const store = { set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } } };
   const rand = (a, b) => a + Math.random() * (b - a);
 
-  /* -- accents (GPT accent parts, MOTION.accents) */
-  function flightPath(path, origin, W, H, s, i, avoid) {
-    const kf = [];
-    const N = 12;
-    if (path === 'across') {
-      // a leaf glides across the lower part of the screen, below the text
-      const ltr = origin !== 'right';
-      const y0 = H * (0.62 + 0.1 * i + rand(-0.03, 0.03));
-      const lift = rand(-0.12, -0.06) * H;
-      const amp = rand(14, 24), ph = rand(0, 6.28);
-      const r0 = rand(-24, -6), spin = rand(40, 80) * (ltr ? 1 : -1);
+  /* -- accents */
+  const rects = (sel) => [...$$(sel)].filter((e) => e.offsetParent).map((e) => e.getBoundingClientRect()).filter((r) => r.width);
+  function flightPath(g, R, s, i) {
+    const F = (v) => v.toFixed(1), kf = [], N = 12, ph = rand(0, 6.28), av = g.avoid ? rects(g.avoid) : [], ab = Math.max(0, ...av.map((r) => r.bottom - R.top));
+    if (g.path === 'across') {
+      const y0 = Math.max(R.height * rand(.6, .68), ab + 12);
+      if (y0 > R.height - s) return null;
+      const lift = rand(-.1, -.05) * R.height, amp = rand(10, 18), r0 = rand(-24, -6), spin = rand(-80, -40);
       for (let k = 0; k <= N; k++) {
-        const t = k / N;
-        const x = ltr ? -s * 1.3 + (W + s * 2.6) * t : W + s * 0.3 - (W + s * 2.6) * t;
-        const y = y0 + lift * t + Math.sin(t * 6.28 * 1.1 + ph) * amp;
-        kf.push({ transform: `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${(r0 + spin * t + Math.sin(t * 7 + ph) * 10).toFixed(1)}deg) rotateY(${(Math.sin(t * 9.4 + ph) * 48).toFixed(1)}deg)`,
-          opacity: k === 0 ? 0 : (k === N ? 0 : 0.96), offset: t });
+        const t = k / N, x = R.width + s * .3 - (R.width + s * 2.6) * t, y = y0 + lift * t + Math.sin(t * 6.9 + ph) * amp;
+        kf.push({ transform: `translate3d(${F(x)}px, ${F(y)}px, 0) rotate(${F(r0 + spin * t + Math.sin(t * 7 + ph) * 10)}deg) rotateY(${F(Math.sin(t * 9.4 + ph) * 48)}deg)`,
+          opacity: k && k < N ? .96 : 0, offset: t });
       }
       return kf;
     }
-    // drift (a blossom floating down, fading out before the bottom) / fall; `avoid` (a photo's box): a lane beside it
-    const drift = path === 'drift';
-    const sway = rand(12, 26), ph = rand(0, 6.28);
-    let x0 = rand(0.06, 0.94) * W, dx = rand(-0.14, 0.14) * W;
-    if (avoid) {
-      const lanes = [[sway, avoid.left - s - sway], [avoid.right + sway, W - s - sway]].filter(([a, b]) => b > a);
-      if (!lanes.length) return null;
-      const [a, b] = lanes[(i + (Math.random() < 0.5 ? 0 : 1)) % lanes.length];
-      x0 = rand(a, b); dx = 0;
+    let y0 = -s - 10, y1 = R.height * rand(.72, .86), ln = [[0, R.width - s]];
+    if (g.origin === 'liner') {
+      const st = rects('.stage')[0], cd = av[0];
+      if (!st || !cd) return null;
+      ln = [[cd.right + cd.width * .03 - R.left, st.right - st.width * .03 - s - R.left]];
+      y0 = st.top + st.height * .3 - R.top; y1 = st.top + st.height * .62 - R.top;   // liner 36–55 %
+    } else if (av.length) {
+      const l = Math.min(...av.map((r) => r.left)) - R.left - 8, r = Math.max(...av.map((r) => r.right)) - R.left + 8;
+      ln = [[0, l - s], [r, R.width - s]].filter(([a, b]) => b - a > 2);
+      if (!ln.length && g.host) { y0 = ab + 8; ln = [[0, R.width - s]]; if (y1 < y0 + 80) y1 = R.height - s; }
     }
-    const yEnd = drift ? H * rand(0.72, 0.86) : H + s + 10;
+    ln = ln.filter(([a, b]) => b - a > 2);
+    if (!ln.length || y1 < y0 + 60) return null;
+    const [a, b] = ln[i % ln.length], sway = Math.min(rand(12, 24), (b - a) / 2), x0 = rand(a + sway, b - sway);
     const r0 = rand(0, 360), r1 = r0 + rand(-160, 160);
     for (let k = 0; k <= N; k++) {
       const t = k / N;
-      const x = x0 + dx * t + Math.sin(t * 6.28 + ph) * sway;
-      const y = -s - 10 + (yEnd + s + 10) * t;
-      kf.push({ transform: `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${(r0 + (r1 - r0) * t).toFixed(1)}deg) rotateX(${(Math.sin(t * 8 + ph) * 40).toFixed(1)}deg)`,
-        opacity: k === 0 ? 0 : (drift ? (t > 0.8 ? Math.max(0, (1 - t) / 0.2) * 0.95 : 0.95) : (k === N ? 0.6 : 0.95)), offset: t });
+      kf.push({ transform: `translate3d(${F(x0 + Math.sin(t * 6.28 + ph) * sway)}px, ${F(y0 + (y1 - y0) * t)}px, 0) rotate(${F(r0 + (r1 - r0) * t)}deg) rotateX(${F(Math.sin(t * 8 + ph) * 40)}deg)`,
+        opacity: .95 * Math.min(1, t / .12, (1 - t) / .2), offset: t });
     }
     return kf;
   }
   function accents(moment, until) {
     const groups = MOTION.accents[moment];
     if (reduce || !groups || !Element.prototype.animate) return;
-    let layer = document.querySelector('.accent-layer');
-    if (!layer) {
-      layer = document.createElement('div');
-      layer.className = 'accent-layer';
-      layer.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(layer);
-    }
-    const W = window.innerWidth, H = window.innerHeight;
     groups.forEach((g) => {
-      const av = g.avoid && document.querySelector(g.avoid);
+      const host = g.host && $(g.host);
+      if (g.host && !host) return;
+      const box = host || document.body;
+      let layer = box.querySelector(':scope > .accent-layer');
+      if (!layer) {
+        layer = Object.assign(document.createElement('div'), { className: 'accent-layer' + (host ? ' in-host' : '') });
+        layer.setAttribute('aria-hidden', 'true');
+        const first = host && host.querySelector(':scope > .scene-bg, :scope > .page-corner');
+        if (first) first.after(layer); else box.append(layer);
+      }
+      const R = host ? host.getBoundingClientRect() : { left: 0, top: 0, width: innerWidth, height: innerHeight };
       for (let i = 0; i < g.count; i++) {
-        const s = rand(g.size[0], g.size[1]);
-        const kf = flightPath(g.path, g.origin, W, H, s, i, av && av.getBoundingClientRect());
+        const s = rand(g.size[0], g.size[1]), kf = flightPath(g, R, s, i);
         if (!kf) continue;
-        const img = new Image();
-        img.src = asset(g.file);
-        img.alt = '';
-        img.decoding = 'async';
+        const img = Object.assign(new Image(), { src: asset(g.file), alt: '', decoding: 'async' });
         img.style.width = s.toFixed(1) + 'px';
-        layer.appendChild(img);
-        // `until` ms: off screen before home
+        layer.append(img);
+        // `until` ms: gone before home
         const delay = i * (g.gap || 520) + rand(0, g.spread || 0);
         const a = img.animate(kf, { duration: Math.max(600, Math.min(rand(g.dur[0], g.dur[1]), (until || 1e9) - delay)), delay, easing: 'linear', fill: 'both' });
         a.onfinish = () => img.remove();
@@ -182,12 +163,9 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- scenes (sequential entrances) */
-  function stepIndex(n) {
-    if (n.dataset.i !== undefined) return Number(n.dataset.i) || 0;
-    const item = n.dataset.repeatItem;   // "schedule.2" (data-repeat)
-    return item ? Number(item.split('.').pop()) || 0 : 0;
-  }
+  /* -- scenes */
+  // data-i, else the data-repeat index ("schedule.2")
+  const stepIndex = (n) => Number(n.dataset.i !== undefined ? n.dataset.i : (n.dataset.repeatItem || '').split('.').pop()) || 0;
   function reveal(scene, base, instant) {
     const plan = new Map(MOTION.scenes[scene.dataset.scene] || []);
     scene.querySelectorAll('[data-step]').forEach((n) => {
@@ -203,14 +181,13 @@ const DEV_CONTENT = {
     });
   }
   function initScenes() {
-    const scenes = Array.from(document.querySelectorAll('[data-scene]'));
+    const scenes = [...$$('[data-scene]')];
     if (!scenes.length) return;
     if (reduce || !('IntersectionObserver' in window)) { scenes.forEach((s) => reveal(s, 0, true)); return; }
     const arrived = root.classList.contains('from-envelope');
     const io = new IntersectionObserver((entries) => {
-      const vis = entries.filter((e) => e.isIntersecting).map((e) => e.target)
-        .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
-      vis.forEach((s, i) => {
+      entries.filter((e) => e.isIntersecting).map((e) => e.target)
+        .sort((a, b) => (a.compareDocumentPosition(b) & 4 ? -1 : 1)).forEach((s, i) => {
         io.unobserve(s);
         let base = i * MOTION.batchGap;
         if (arrived && s.dataset.scene === 'home-hero') base += MOTION.arriveDelay;
@@ -221,44 +198,30 @@ const DEV_CONTENT = {
   }
 
   /* -- countdown */
-  function zoneOffset(ts, tz) {
-    const f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit',
-      day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    const p = {};
-    f.formatToParts(new Date(ts)).forEach((x) => { p[x.type] = x.value; });
-    return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second) - ts;
-  }
   function zonedToUtc(date, time, tz) {
-    const [y, m, d] = date.split('-').map(Number);
-    const [hh, mm] = time.split(':').map(Number);
-    const wall = Date.UTC(y, m - 1, d, hh, mm);
+    const f = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const off = (ts) => { const p = {}; f.formatToParts(new Date(ts)).forEach((x) => { p[x.type] = +x.value; }); return Date.UTC(p.year, p.month - 1, p.day, p.hour % 24, p.minute, p.second) - ts; };
+    const [y, m, d] = date.split('-').map(Number), [hh, mm] = time.split(':').map(Number), wall = Date.UTC(y, m - 1, d, hh, mm);
     let t = wall;
-    for (let i = 0; i < 3; i++) t = wall - zoneOffset(t, tz);
+    for (let i = 0; i < 3; i++) t = wall - off(t);
     return t;
   }
   function countdownTarget() {
-    // platform: computed on the server
-    if (SITE) {
-      const t = SITE.derived && Date.parse(SITE.derived.countdown_target_utc);
-      return Number.isFinite(t) ? t : null;
-    }
-    try { return zonedToUtc(CONTENT.date, CONTENT.ceremony_time, CONTENT.timezone); }
-    catch (e) { return Date.parse(CONTENT.date + 'T' + CONTENT.ceremony_time); }   // no Intl zone support: device time
+    if (SITE) { const t = SITE.derived && Date.parse(SITE.derived.countdown_target_utc); return Number.isFinite(t) ? t : null; }
+    try { return zonedToUtc(CONTENT.date, CONTENT.ceremony_time, CONTENT.timezone); } catch (e) { return Date.parse(CONTENT.date + 'T' + CONTENT.ceremony_time); }
   }
   function initCountdown() {
-    document.querySelectorAll('[data-countdown]').forEach((box) => {
+    $$('[data-countdown]').forEach((box) => {
       const target = countdownTarget();
       if (target === null) { box.hidden = true; return; }
       box.dataset.targetUtc = new Date(target).toISOString();
-      const cells = {};
+      const cells = {}, pad = (n) => String(n).padStart(2, '0');
       box.querySelectorAll('[data-unit]').forEach((el) => { cells[el.dataset.unit] = el; });
-      const pad = (n) => (n < 10 ? '0' + n : String(n));
-      const dayLen = 86400000;
-      function tick() {
+      const tick = () => {
         const diff = target - Date.now();
         if (diff <= 0) {
           box.classList.add('is-done');
-          const today = -diff < dayLen / 2;   // ceremony started less than 12 h ago
+          const today = -diff < 43200000;   // started < 12 h ago
           box.querySelectorAll('.cd-done').forEach((p) => { p.hidden = (p.dataset.when === 'today') !== today; });
           return false;
         }
@@ -268,48 +231,43 @@ const DEV_CONTENT = {
         cells.minutes.textContent = pad(Math.floor((s % 3600) / 60));
         cells.seconds.textContent = pad(s % 60);
         return true;
-      }
+      };
       if (tick()) { const h = setInterval(() => { if (!tick()) clearInterval(h); }, 1000); }
     });
   }
 
-  /* -- links without a URL yet (preview only) */
-  function toast(msg) {
-    let t = document.querySelector('.toast');
-    if (!t) {
-      t = document.createElement('div');
-      t.className = 'toast';
-      t.setAttribute('role', 'status');
-      document.body.appendChild(t);
-    }
-    t.textContent = msg;
-    t.classList.add('show');
-    clearTimeout(t._h);
-    t._h = setTimeout(() => t.classList.remove('show'), 2800);
-  }
+  /* -- links without a URL (preview) */
   function initPlaceholders() {
     document.addEventListener('click', (e) => {
       const a = e.target.closest('a[data-url-missing]');
       if (!a) return;
       e.preventDefault();
-      toast(a.dataset.pending || document.body.dataset.pending || '');
+      let t = $('.toast');
+      if (!t) { t = Object.assign(document.createElement('div'), { className: 'toast' }); t.setAttribute('role', 'status'); document.body.append(t); }
+      t.textContent = a.dataset.pending || document.body.dataset.pending || '';
+      t.classList.add('show');
+      clearTimeout(t._h);
+      t._h = setTimeout(() => t.classList.remove('show'), 2800);
     });
   }
 
-  /* -- long names, the hero's first screen, card copy (README "Home first screen") */
+  /* -- long names, first screens, card copy, decor vs text (README) */
+  let refit = () => {};
   function fitNames() {
     const targets = [['.env-head .names', 2.15, 0.22, 0], ['.hero .names', 3.2, 0.3, 36]]
-      .map(([sel, ...a]) => [document.querySelector(sel), ...a]).filter(([el]) => el);
-    const inner = document.querySelector('.hero-inner'), nav = document.querySelector('.site-nav');
-    // layout boxes (no entrance transforms)
-    const bottom = (el) => { let y = el.offsetHeight; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
-    // the first screen = the small viewport (svh): collapsing toolbars move nothing
+      .map(([sel, ...a]) => [$(sel), ...a]).filter(([el]) => el);
+    const inner = $('.hero-inner'), nav = $('.site-nav');
+    const lay = (el) => { let x = 0, y = 0; for (let e = el; e; e = e.offsetParent) { x += e.offsetLeft; y += e.offsetTop; } return { x, y, w: el.offsetWidth, h: el.offsetHeight }; };
+    const bottom = (el) => { const b = lay(el); return b.y + b.h; };
+    const top = (el) => lay(el).y;
+    // the first screen = svh
     const sv = () => { const p = document.createElement('i'); p.style.cssText = 'position:fixed;height:100svh'; document.body.append(p); const h = p.offsetHeight; p.remove(); return h || innerHeight; };
+    const navH = () => (nav ? nav.offsetHeight : 0);
     const low = (h1) => {
       const hero = h1.closest('.hero');
       if (!hero || !inner || !nav) return false;
       const long = hero.classList.contains('is-long');
-      return Math.max(...[...inner.children].filter((c) => !(long && c.matches('.countdown'))).map(bottom)) > sv() - nav.offsetHeight - 8;
+      return Math.max(...[...inner.children].filter((c) => !(long && c.matches('.countdown'))).map(bottom)) > sv() - navH() - 8;
     };
     const fit = (h1, maxLines, maxShare, minPx, navFloor) => {
       h1.style.setProperty('--names-scale', '1');
@@ -320,23 +278,21 @@ const DEV_CONTENT = {
         if (s <= min || (lines <= maxLines && h <= innerHeight * maxShare && (s <= navFloor || !low(h1)))) break;
       }
     };
-    // card copy ≥ 11 px: date · town on one line, else two lines, else no town, else no script, else nothing
+    // card copy ≥ 11 px: one line, two, no town, no script
     const fits = (c) => {
       const k = [...c.children].filter((p) => p.offsetParent);
       return !k.length || (Math.max(...k.map((p) => p.offsetTop + p.offsetHeight)) - Math.min(...k.map((p) => p.offsetTop)) <= c.clientHeight + 1
         && k.every((p) => p.scrollWidth <= c.clientWidth + 1));
     };
     const oneLine = (c) => { const k = c.querySelector('.kicker'); return !k || k.offsetHeight <= parseFloat(getComputedStyle(k).lineHeight) * 1.5; };
-    const fitCopy = () => document.querySelectorAll('.card-copy').forEach((c) => {
+    const fitCopy = () => $$('.card-copy').forEach((c) => {
       for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c s']]) {
         c.toggleAttribute('data-wrap', wrap);
         c.dataset.drop = d;
         if (fits(c) && (wrap || oneLine(c))) break;
       }
     });
-    // fold: a hero piece not ending above the nav starts below the first screen, never half under it; a pill left above
-    // keeps the backdrop (--fold: scene-bg ends after it)
-    const top = (el) => bottom(el) - el.offsetHeight;
+    // fold: a piece crossing the nav line starts below the first screen; a pill above keeps the wall (--fold)
     const pieces = () => [...inner.children].filter((c) => c.offsetParent && !c.matches('.hero-card'));
     const unfold = (hero) => {
       pieces().forEach((c) => c.style.removeProperty('margin-top'));
@@ -344,7 +300,7 @@ const DEV_CONTENT = {
       hero.style.removeProperty('--fold');
     };
     const fold = (hero) => {
-      const v = sv(), limit = v - nav.offsetHeight - 8, below = v + 12, cs = getComputedStyle(hero);
+      const v = sv(), limit = v - navH() - 8, below = v + 12, cs = getComputedStyle(hero);
       const cut = () => pieces().filter((c) => bottom(c) > limit).sort((a, b) => top(a) - top(b))[0];
       let c = cut();
       if (!c || top(c) >= below - 0.5) return;
@@ -354,12 +310,70 @@ const DEV_CONTENT = {
       for (let i = 0; i < 4 && c && top(c) < below - 0.5; i++, c = cut()) c.style.marginTop = `${parseFloat(getComputedStyle(c).marginTop) + below - top(c)}px`;
       if (keep) hero.style.setProperty('--fold', `${Math.max(0, hero.offsetHeight - end)}px`);
     };
-    // hero: names ≤ 30 %; tight + names ≥ 36 px; countdown after the pill; else it scrolls; then fold
+    // [data-fold]: the same
+    const folds = () => $$('[data-fold]').forEach((el) => {
+      el.style.removeProperty('margin-top');
+      const v = sv(), t = top(el);
+      if (t < v && t + el.offsetHeight > v - navH() - 8) el.style.marginTop = `${parseFloat(getComputedStyle(el).marginTop) + v + 12 - t}px`;
+    });
+    // envelope: --pt = the measured heading; --ok shrinks the stage until the hint is on screen
+    const envFit = (h1) => {
+      const pg = h1.closest('.env-page'), st = pg.querySelector('.stage'), hint = pg.querySelector('.env-hint'), head = h1.parentElement;
+      pg.style.removeProperty('--ok'); pg.style.removeProperty('--pt');
+      for (let k = 1; ; k -= .05) {
+        pg.style.setProperty('--ok', k.toFixed(2));
+        fit(h1, 2.15, 0.22, 0, 0);
+        if (root.classList.contains('is-opened')) return;
+        const e = st.offsetWidth * .63776, g = parseFloat(getComputedStyle(st).marginTop) + e;
+        pg.style.setProperty('--pt', `${(e - head.offsetHeight - g).toFixed(1)}px`);
+        if (k < .6 || (top(st) >= -0.5 && bottom(hint) <= sv() - 6)) return;
+      }
+    };
+    // decor: a cluster never under wall text (16 × 16 leaf map: shrinks, else hides); a loose piece on text/cards hides
+    const MAP = { tl: '1ffefffffffffffffffcfff0ffe0ffe0ff80fc00fe00fe00f000f000e0006000', br: '001f000e003f003f007f00ff01ff0fff0fff0fff7fffffffffff7fff7dff61fe' };
+    const textBox = (el) => {
+      const rg = document.createRange();
+      rg.selectNodeContents(el);
+      const rs = [...rg.getClientRects()].filter((r) => r.width && r.height), b = el.getBoundingClientRect(), L = lay(el);
+      if (!rs.length) return null;
+      const dx = L.x - b.left, dy = L.y - b.top, x = Math.min(...rs.map((r) => r.left)) + dx, y = Math.min(...rs.map((r) => r.top)) + dy;
+      return { x: x - 4, y: y - 4, w: Math.max(...rs.map((r) => r.right)) + dx - x + 8, h: Math.max(...rs.map((r) => r.bottom)) + dy - y + 8 };
+    };
+    const meet = (c, t) => [Math.max(c.x, t.x), Math.max(c.y, t.y), Math.min(c.x + c.w, t.x + t.w), Math.min(c.y + c.h, t.y + t.h)];
+    const under = (c, t, m) => {
+      const [x0, y0, x1, y1] = meet(c, t), f = (v, o, s) => Math.max(0, Math.min(16, (v - o) / s * 16));
+      for (let j = Math.floor(f(y0, c.y, c.h)); j < f(y1, c.y, c.h); j++) {
+        for (let i = Math.floor(f(x0, c.x, c.w)); i < f(x1, c.x, c.w); i++) if (parseInt(m.substr(j * 4, 4), 16) >> (15 - i) & 1) return true;
+      }
+      return false;
+    };
+    const decor = () => $$('.scene-bg, .page-bg').forEach((bg) => {
+      const scope = bg.closest('.hero') || bg.closest('main') || document.body;
+      const ts = [...scope.querySelectorAll('h1, h2, p, figcaption, .cd-cell, .btn')]
+        .filter((t) => t.offsetParent && !t.closest('.card, .paper, .reply-box, .site-nav, .scene-bg, .page-bg') && !t.querySelector('p, .cd-cell'))
+        .map(textBox).filter(Boolean);
+      const solid = ts.concat([...scope.querySelectorAll('.card, .paper, .frame, .tile-frame, .venue-photo, .stage')].map(lay));
+      bg.querySelectorAll('.corner').forEach((c) => {
+        const br = c.classList.contains('corner-br'), m = MAP[br ? 'br' : 'tl'];
+        c.style.removeProperty('--cw'); c.style.removeProperty('bottom'); c.style.visibility = '';
+        if (br && bg.matches('.hero .scene-bg')) c.style.bottom = `${Math.max(22, top(bg) + bg.offsetHeight - sv() + navH() + 2)}px`;
+        const w0 = c.offsetWidth;
+        for (let k = .94; ts.some((t) => under(lay(c), t, m)); k -= .06) {
+          if (k < .55) { c.style.visibility = 'hidden'; break; }
+          c.style.setProperty('--cw', `${(w0 * k).toFixed(1)}px`);
+        }
+      });
+      bg.querySelectorAll('.float').forEach((f) => {
+        f.style.visibility = '';
+        if (solid.some((t) => { const [x0, y0, x1, y1] = meet(lay(f), t); return x0 < x1 && y0 < y1; })) f.style.visibility = 'hidden';
+      });
+    });
+    // hero: names ≤ 30 %, tight, ≥ 36 px, countdown last, else it scrolls; fold
     const run = () => {
       fitCopy();
       targets.forEach(([h1, maxLines, maxShare, minPx]) => {
         const hero = h1.closest('.hero');
-        if (!hero) return fit(h1, maxLines, maxShare, minPx, 0);
+        if (!hero) return envFit(h1);
         if (inner && nav) unfold(hero);
         for (const [cls, navFloor] of [[[], 0.76], [['is-tight'], 0], [['is-tight', 'is-long'], 0], [[], 1]]) {
           hero.classList.remove('is-tight', 'is-long');
@@ -369,24 +383,28 @@ const DEV_CONTENT = {
         }
         if (inner && nav) fold(hero);
       });
+      folds();
+      decor();
     };
+    refit = run;
     run();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
-    if (window.ResizeObserver) { const ro = new ResizeObserver(fitCopy); document.querySelectorAll('.card-copy').forEach((c) => ro.observe(c)); }
+    addEventListener('load', run);
+    if (window.ResizeObserver) { const ro = new ResizeObserver(fitCopy); $$('.card-copy').forEach((c) => ro.observe(c)); }
     let rt;
-    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(run, 150); });
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(run, 150); });
   }
 
   /* -- envelope (index page) */
   function initEnvelope() {
-    const page = document.querySelector('.env-page');
+    const page = $('.env-page');
     if (!page) return;
     const q = (s) => page.querySelector(s);
     const stage = q('.stage');
     const el = {
       env: q('.env'), cflap: q('.env-cflap'), closure: q('.closure'), closed: q('.env-closed'), flap: q('.env-flap'),
       body: q('.env-body'), pocket: q('.env-pocket'), slot: q('.card-slot'), card: q('.card'), head: q('.env-head'), hint: q('.env-hint'),
-      branch: document.querySelector('.scene-bg .corner-tl')
+      branch: $('.scene-bg .corner-tl')
     };
     const E = MOTION.envelope;
     const replay = /[?&]replay=1(&|$)/.test(location.search);
@@ -395,22 +413,20 @@ const DEV_CONTENT = {
     const timers = [];
 
     function prefetchHome() {
-      if (document.querySelector('link[data-prefetch]')) return;
-      const l = document.createElement('link');
-      l.rel = 'prefetch'; l.href = PAGES.home; l.dataset.prefetch = '1';
-      document.head.appendChild(l);
+      if ($('link[data-prefetch]')) return;
+      const l = Object.assign(document.createElement('link'), { rel: 'prefetch', href: PAGES.home });
+      l.dataset.prefetch = '1';
+      document.head.append(l);
     }
     if ('requestIdleCallback' in window) requestIdleCallback(prefetchHome, { timeout: 2500 }); else setTimeout(prefetchHome, 1500);
 
     function go(withCard) {
       store.set(OPENED, '1');
-      // named for the view transition only now (a closed envelope's card has none)
       if (withCard) { store.set(ARRIVE, '1'); el.card.style.viewTransitionName = 'invite-card'; }
-      else el.card.style.viewTransitionName = 'none';   // skip: no card morph out of a closed envelope
+      else el.card.style.viewTransitionName = 'none';
       if (crossDocVT || reduce) { location.href = PAGES.home; return; }
-      // fallback: fade the scene into the backdrop, home fades in on arrival
       page.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
-      const layer = document.querySelector('.accent-layer');
+      const layer = $('.accent-layer');
       if (layer) layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
       setTimeout(() => { location.href = PAGES.home; }, E.fadeOut);
     }
@@ -425,33 +441,32 @@ const DEV_CONTENT = {
       if (reduce || !Element.prototype.animate) { go(false); return; }
       A(el.hint, [{ opacity: 1 }, { opacity: 0 }], E.hint, 'ease-out', 'forwards');
       A(el.env, [{ transform: 'scale(1)' }, { transform: 'scale(.988)', offset: .4 }, { transform: 'scale(1)' }], E.tug, 'ease-out', 'none');
-      // the lemon tie slips loose (ribbon gives, the lemon lifts a hair), drops off the tip and rolls away to the right,
-      // turning about the lemon (site.css transform-origin = the lemon's centre)
+      // the tie: slips, drops onto the bottom edge, rolls right 140° (2.44 rad × radius; lemon = .192 envelope), off screen
+      const SW = stage.offsetWidth, SH = stage.offsetHeight, r = SW * .0952, cr = el.closure.getBoundingClientRect();
+      const dy = SH * (.99911 - .61052 - .29179 * .72495) - r, d1 = r * 2.44, out = innerWidth - cr.left + cr.height * .6;
+      const T = (x, y, a, o) => Object.assign({ transform: `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${a}deg)` }, o);
       A(el.closure, [
-        { transform: 'translate(0, 0) rotate(0deg)', opacity: 1, easing: 'cubic-bezier(.3,.7,.4,1)' },
-        { transform: 'translate(-1.5%, -3%) rotate(-6deg)', opacity: 1, offset: .13, easing: 'cubic-bezier(.5,0,.8,.6)' },
-        { transform: 'translate(5%, 7%) rotate(14deg)', opacity: 1, offset: .3, easing: 'cubic-bezier(.4,0,.9,.7)' },
-        { transform: 'translate(118%, 20%) rotate(190deg)', opacity: 1, offset: .82, easing: 'linear' },
-        { transform: 'translate(190%, 24%) rotate(300deg)', opacity: 0 }
+        T(0, 0, 0, { easing: 'cubic-bezier(.3,.6,.4,1)' }),
+        T(SW * .004, dy * .2, 5, { offset: .25, easing: 'cubic-bezier(.5,0,1,.6)' }),
+        T(SW * .012, dy, 14, { offset: .4, easing: 'ease-out' }),
+        T(SW * .02, dy, 20, { offset: .48, easing: 'cubic-bezier(.45,0,.55,1)' }),
+        T(SW * .02 + d1, dy, 160, { offset: .8, easing: 'cubic-bezier(.55,0,1,1)' }),
+        T(out, dy, 330)
       ], E.closure, 'linear', 'forwards');
       A(el.head, [{ opacity: 1, transform: 'translate3d(0,0,0)' }, { opacity: 0, transform: 'translate3d(0,-18px,0)' }], E.head, 'ease-in', 'forwards');
-      // the white flap lifts toward the viewer on its hinge, fading from 82° (no 1 px strip at 90°)
+      // the flap lifts, fading from 82°
+      const X = (a, b, o, p = 1000) => ({ opacity: o, transform: `perspective(${p}px) rotateX(${a}deg)`, filter: `brightness(${b})` });
       A(el.cflap, [
-        { opacity: 1, transform: 'perspective(1000px) rotateX(0deg)', filter: 'brightness(1)', easing: 'cubic-bezier(.33,.1,.35,1)' },
-        { opacity: 1, transform: 'perspective(1000px) rotateX(24deg)', filter: 'brightness(1.01)', offset: .3, easing: 'cubic-bezier(.4,0,.7,.7)' },
-        { opacity: 1, transform: 'perspective(1000px) rotateX(82deg)', filter: 'brightness(.9)', offset: .9 },
-        { opacity: 0, transform: 'perspective(1000px) rotateX(90deg)', filter: 'brightness(.86)' }
+        { ...X(0, 1, 1), easing: 'cubic-bezier(.33,.1,.35,1)' },
+        { ...X(24, 1.01, 1), offset: .3, easing: 'cubic-bezier(.4,0,.7,.7)' },
+        { ...X(82, .9, 1), offset: .9 },
+        X(90, .86, 0)
       ], E.lift, 'linear');
-      // closed body → open body (tile lining) + pocket, under the lifting flap
       A(el.body, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
       A(el.pocket, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
       A(el.closed, [{ opacity: 1 }, { opacity: 0 }], E.open, 'ease-in-out');
-      // the open flap (its tile liner) takes over at −90° and stands up
-      A(el.flap, [
-        { opacity: 1, transform: 'perspective(1100px) rotateX(-90deg)', filter: 'brightness(.88)' },
-        { opacity: 1, transform: 'perspective(1100px) rotateX(0deg)', filter: 'brightness(1)' }
-      ], E.flap, 'cubic-bezier(.2,.7,.3,1)');
-      // the lemon branch sways in from the top corner and stays a little further in
+      // the open flap takes over at −90°
+      A(el.flap, [X(-90, .88, 1, 1100), X(0, 1, 1, 1100)], E.flap, 'cubic-bezier(.2,.7,.3,1)');
       A(el.branch, [
         { transform: 'translate(0, 0) rotate(0deg)' },
         { transform: 'translate(-1.5%, -1.5%) rotate(-2.5deg)', offset: .22 },
@@ -461,19 +476,15 @@ const DEV_CONTENT = {
       timers.push(setTimeout(() => accents('open', E.go - E.accents - 60), E.accents));
       A(el.card, [{ transform: 'translateY(0)' }, { transform: ENVELOPE_GEOMETRY.out }], E.rise, 'cubic-bezier(.42,0,.18,1)');
       timers.push(setTimeout(() => {
-        // out of the pocket: in front of the envelope
         el.slot.style.clipPath = 'none';
         el.slot.style.zIndex = '6';
-        A(el.card, [{ transform: ENVELOPE_GEOMETRY.out }, { transform: ENVELOPE_GEOMETRY.front }], [0, E.forward[1]], 'cubic-bezier(.45,0,.2,1)', 'forwards');
-        A(el.card, [{ filter: 'drop-shadow(0 6px 8px rgba(30,50,85,.14))' }, { filter: 'drop-shadow(0 22px 26px rgba(30,50,85,.24))' }], [0, E.forward[1]], 'ease-out', 'forwards');
+        A(el.card, [{ transform: ENVELOPE_GEOMETRY.out, filter: 'drop-shadow(0 6px 8px rgba(30,50,85,.14))' }, { transform: ENVELOPE_GEOMETRY.front, filter: 'drop-shadow(0 22px 26px rgba(30,50,85,.24))' }], [0, E.forward[1]], 'cubic-bezier(.45,0,.2,1)', 'forwards');
       }, E.forward[0]));
       timers.push(setTimeout(() => { state = 'done'; go(true); }, E.go));
     }
 
-    // cancel the opening's script animations, not CSS ones
     function cancelScripted() {
-      const nodes = [page, el.branch].filter(Boolean);
-      nodes.forEach((n) => n.getAnimations({ subtree: true }).concat(n.getAnimations())
+      [page, el.branch].filter(Boolean).forEach((n) => n.getAnimations({ subtree: true }).concat(n.getAnimations())
         .filter((a) => !(window.CSSAnimation && a instanceof CSSAnimation))
         .forEach((a) => a.cancel()));
     }
@@ -482,28 +493,27 @@ const DEV_CONTENT = {
       cancelScripted();
       el.slot.style.clipPath = ''; el.slot.style.zIndex = '';
       el.card.style.viewTransitionName = '';
-      const layer = document.querySelector('.accent-layer');
+      const layer = $('.accent-layer');
       if (layer) layer.remove();
     }
     function reset() {
       clearOpening();
       root.classList.remove('is-opened');
       state = 'closed';
+      refit();
     }
 
     stage.addEventListener('click', () => { if (state === 'closed') play(); else if (state === 'opened') go(true); });
     stage.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stage.click(); }
     });
-    // Skip: 'done', so a bfcache return clears the fallback fade
-    document.querySelectorAll('[data-skip]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); reset(); state = 'done'; go(false); }));
+    $$('[data-skip]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); reset(); state = 'done'; go(false); }));
     const rep = q('.replay');
     if (rep) rep.addEventListener('click', () => { reset(); requestAnimationFrame(() => play()); });
     const enter = q('[data-enter]');
     if (enter) enter.addEventListener('click', (e) => { e.preventDefault(); go(true); });
 
-    // back/forward cache: card out as left — offer replay
-    window.addEventListener('pageshow', (e) => {
+    addEventListener('pageshow', (e) => {
       if (e.persisted && state !== 'closed') {
         clearOpening();
         root.classList.add('is-opened');
@@ -514,21 +524,15 @@ const DEV_CONTENT = {
 
   /* -- boot */
   function boot() {
-    // without the platform: a design preview (placeholder labels, as in the panel)
     if (!SITE) { root.dataset.preview = 'true'; devRender(CONTENT); devRsvp(); }
-    // RSVP: after a reply the closing hides its generic thank-you
-    document.addEventListener('rsvp:state', (e) => {
-      const st = e.detail && e.detail.state;
-      if (st === 'success') root.setAttribute('data-rsvp-replied', '');
-      else if (st === 'ready') root.removeAttribute('data-rsvp-replied');
-    });
+    document.addEventListener('rsvp:state', (e) => { const st = e.detail && e.detail.state; if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success'); });
     fitNames();
     initEnvelope();
     initScenes();
     initCountdown();
     initPlaceholders();
     if (root.classList.contains('from-envelope')) setTimeout(() => accents('arrive'), 300);
-    const closing = document.querySelector('[data-accents="closing"]');
+    const closing = $('[data-accents="closing"]');
     if (closing && 'IntersectionObserver' in window) {
       const io = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { io.disconnect(); accents('closing'); } }, { threshold: .35 });
       io.observe(closing);
@@ -537,25 +541,21 @@ const DEV_CONTENT = {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 
-  /* dev fallback for the RSVP form: nothing is posted */
+  /* dev: nothing is posted */
   function devRsvp() {
-    document.querySelectorAll('form[data-rsvp-form]').forEach((form) => form.addEventListener('submit', (e) => {
+    $$('form[data-rsvp-form]').forEach((form) => form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const scope = form.closest('[data-rsvp]') || document;
-      scope.querySelectorAll('[data-rsvp-state]').forEach((p) => { p.hidden = p.dataset.rsvpState !== 'preview'; });
+      (form.closest('[data-rsvp]') || document).querySelectorAll('[data-rsvp-state]').forEach((p) => { p.hidden = p.dataset.rsvpState !== 'preview'; });
     }));
   }
 
-  /* == dev fallback: fills the markers like lib/theme/engine.ts (text / attributes only) */
+  /* == dev fallback (as lib/theme/engine.ts) */
   function devRender(content) {
     const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
       story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json
-    const view = JSON.parse(JSON.stringify(content));
-    if (view.venue) {
-      const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
-      view.venue.city_region = join([view.venue.city, view.venue.region]);
-      view.venue.city_region_country = join([view.venue.city, view.venue.region, view.venue.country]);
-    }
+    const view = JSON.parse(JSON.stringify(content)), vn = view.venue;
+    const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
+    if (vn) { vn.city_region = join([vn.city, vn.region]); vn.city_region_country = join([vn.city, vn.region, vn.country]); }
     try { view.countdown_target_utc = new Date(zonedToUtc(view.date, view.ceremony_time, view.timezone)).toISOString(); } catch (e) { /* none */ }
     const get = (path) => path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), view);
     const present = (v) => !(v == null || v === false || (typeof v === 'string' && !v.trim()) || (Array.isArray(v) && !v.length));
@@ -563,27 +563,21 @@ const DEV_CONTENT = {
     const fmt = (v, f, path) => {
       if (v == null || typeof v === 'object') return '';
       v = String(v);
-      const generic = path.replace(/\.\d+(?=\.|$)/g, '.*');
-      if (!f) f = ['date', 'rsvp.deadline'].includes(generic) ? 'date' : ['ceremony_time', 'schedule.*.time'].includes(generic) ? 'time' : 'raw';
+      const g = path.replace(/\.\d+(?=\.|$)/g, '.*'), L = 'long', N = 'numeric';
+      f = f || (['date', 'rsvp.deadline'].includes(g) ? 'date' : ['ceremony_time', 'schedule.*.time'].includes(g) ? 'time' : 'raw');
       if (/^\d{4}-\d{2}-\d{2}$/.test(v) && f !== 'raw' && f !== 'time') {
-        const d = new Date(v + 'T12:00:00Z');
-        const o = { weekday: { weekday: 'long' }, month: { month: 'long' }, day: { day: 'numeric' }, year: { year: 'numeric' },
-          'date-long': { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' } }[f] || { month: 'long', day: 'numeric', year: 'numeric' };
-        return d.toLocaleDateString('en-US', Object.assign({ timeZone: 'UTC' }, o));
+        const o = { weekday: { weekday: L }, month: { month: L }, day: { day: N }, year: { year: N }, 'date-long': { weekday: L, month: L, day: N, year: N } }[f];
+        return new Date(v + 'T12:00:00Z').toLocaleDateString('en-US', { timeZone: 'UTC', ...(o || { month: L, day: N, year: N }) });
       }
-      if (/^\d{2}:\d{2}$/.test(v) && f === 'time') {
-        const [h, m] = v.split(':').map(Number);
-        return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
-      }
+      if (/^\d{2}:\d{2}$/.test(v) && f === 'time') { const [h, m] = v.split(':').map(Number); return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; }
       return v;
     };
     const fill = (tpl, scope) => tpl.replace(/\{\s*([^{}|\s]+)\s*(?:\|\s*([a-z-]+)\s*)?\}/g, (_m, p, f) => fmt(get(abs(p, scope)), f, abs(p, scope)));
     const photoState = (img, url) => {
-      const state = url ? 'user' : 'placeholder';
       if (url) { img.removeAttribute('srcset'); img.src = url; }
-      img.dataset.photoState = state;
       const slot = img.closest('[data-slot]');
-      if (slot) slot.dataset.photoState = state;
+      img.dataset.photoState = url ? 'user' : 'placeholder';
+      if (slot) slot.dataset.photoState = img.dataset.photoState;
     };
     function walk(el, scope) {
       const d = el.dataset;
@@ -598,9 +592,8 @@ const DEV_CONTENT = {
         (Array.isArray(list) ? list : []).forEach((_, i) => {
           const c = el.cloneNode(true);
           delete c.dataset.repeat;
-          c.dataset.repeatItem = `${path}.${i}`;
           el.before(c);
-          walk(c, `${path}.${i}`);
+          walk(c, c.dataset.repeatItem = `${path}.${i}`);
         });
         el.remove();
         return;
@@ -615,7 +608,6 @@ const DEV_CONTENT = {
         return;
       }
       if (d.text !== undefined) { el.textContent = fill(d.text, scope); return; }
-      // "Add to calendar" needs the platform: here only the notice
       if (d.calendar !== undefined) { el.setAttribute('href', '#'); el.dataset.urlMissing = ''; }
       if (d.photo !== undefined) photoState(el, get(PHOTO_SOURCES[d.photo] || ''));
       for (const name of Object.keys(d)) {
