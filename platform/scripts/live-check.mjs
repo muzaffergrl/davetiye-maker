@@ -131,8 +131,12 @@ try {
     const phj = await json(ph);
     check('photo upload (sharp in the function)', ph.status === 200 && phj.ok === true, `HTTP ${ph.status} ${phj.width ?? '?'}×${phj.height ?? '?'}`);
     if (phj.url) {
-      const pr = await get(phj.url);
-      check('uploaded photo is served from the private store', pr.status === 200, `HTTP ${pr.status}`);
+      // lib/site/static.ts: a photo not in the published content is served only with the site's ?preview= key
+      const hidden = await get(phj.url);
+      check('unpublished photo is hidden without the preview key', hidden.status === 404, `HTTP ${hidden.status}`);
+      const pr = await get(`${phj.url}?preview=${encodeURIComponent(seeded.previewKey)}`);
+      check('unpublished photo loads with the preview key (private, no-store)', pr.status === 200 && (pr.headers.get('cache-control') ?? '').includes('no-store'),
+        `HTTP ${pr.status} ${pr.headers.get('cache-control')}`);
     }
     const pub = await get(`/api/edit/${slug}/publish`, { method: 'POST', headers: jsonHeaders(key), body: '{}' });
     const pubj = await json(pub);

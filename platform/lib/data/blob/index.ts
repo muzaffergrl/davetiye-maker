@@ -14,12 +14,13 @@
 //    If the site write then fails, the indexes are released (deleted with ifMatch). An index left
 //    behind by a crashed instance (points to a site that does not exist) is reclaimed after
 //    orphanGraceMs (15 min).
-//    ASSUMED, not verified against the real service: the server checks allowOverwrite:false and
-//    ifMatch atomically (the SDK documents both for this purpose).
+//    The real private store refuses allowOverwrite:false on an existing pathname and a stale ifMatch
+//    (scripts/blob-smoke.mjs, G044/G049); atomicity under true simultaneity is the service's promise.
 //  - Site updates are optimistic: read (with ETag) -> change -> put with ifMatch=ETag. A stale
-//    write fails with BlobPreconditionFailedError and is retried on fresh data; after
-//    maxWriteAttempts it throws WriteConflictError. Inside one process writes to a site are also
-//    queued (fewer wasted round trips).
+//    write fails with BlobPreconditionFailedError — or, when two conditional writes overlap on the
+//    real store, with a plain BlobError "… conflicting operation …" — and is retried on fresh data;
+//    after maxWriteAttempts it throws WriteConflictError. Inside one process writes to a site are
+//    also queued (fewer wasted round trips).
 //  - JSON is read with useCache:false (origin, not the CDN copy that can lag up to 60 s after an
 //    overwrite). Photos are immutable (random names) and may come from the CDN cache.
 //
@@ -178,6 +179,15 @@ function looksLikeAlreadyExists(e: unknown): boolean {
   return e instanceof BlobError && /already exists/i.test(e.message);
 }
 
+/**
+ * "The conditional request cannot succeed due to a conflicting operation against this resource." — the real store's
+ * answer when two conditional writes to one pathname overlap (G049 smoke test: 1 of 8 concurrent updates); the SDK
+ * passes it on as a plain BlobError, not BlobPreconditionFailedError. It is a lost race, so it is retried like one.
+ */
+function looksLikeConcurrentWrite(e: unknown): boolean {
+  return e instanceof BlobError && /conflicting operation/i.test(e.message);
+}
+
 export class BlobAdapter implements DataAdapter {
   readonly kind = 'blob' as const;
   readonly mediaBaseUrl: string;
@@ -300,7 +310,8 @@ export class BlobAdapter implements DataAdapter {
         // The SDK reports an existing pathname as a plain BlobError; confirm by reading it.
         const current = await this.readJson<Partial<IndexEntry>>(pathname);
         if (!current) {
-          if (looksLikeAlreadyExists(e)) continue; // released in between: try again
+          // released in between, or a concurrent claim not visible yet: try again
+          if (looksLikeAlreadyExists(e) || looksLikeConcurrentWrite(e)) continue;
           throw e; // a real failure (token, store, network …), not a conflict
         }
         if (current.data.id === id) return { etag: current.etag };
@@ -408,8 +419,8 @@ export class BlobAdapter implements DataAdapter {
           await this.putJson(this.sitePath(id), next, { ifMatch: current.etag });
           return toRecord(next);
         } catch (e) {
-          if (!(e instanceof BlobPreconditionFailedError)) throw e;
-          // Someone else wrote (or deleted) the site since we read it.
+          if (!(e instanceof BlobPreconditionFailedError) && !looksLikeConcurrentWrite(e)) throw e;
+          // Someone else wrote (or deleted) the site since we read it, or is writing it right now.
           if (attempt >= this.#maxWriteAttempts) throw new WriteConflictError(`site ${id}`);
           await sleep(this.#retryDelayMs(attempt));
         }
