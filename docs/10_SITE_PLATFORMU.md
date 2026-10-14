@@ -109,6 +109,11 @@ düzenler. Bu belge platformun tek kaynağıdır.
   `/clara-and-julian` (03), `/avery-and-jordan` (01), `/margot-and-henry` (04, onaysız), `/isabella-and-marco` (05, onaysız).
   `live-check` 40/40 + dört temalı salt-okuma 36/36, `blob-smoke` 12/12. Kullanıcı için test sitesi `/lily-and-theo` (blush, kurgu,
   3 RSVP). Ekran görüntüleri (390 px): `docs/10_canli_test/`.
+- **Canlı güncelleme (G078, 2026-10-14, `claude-local-1`):** production = main `2dc812b` (platform ağacı `cbebd425efc9`; BKE Studio satış
+  sitesi G066-A, RSVP v2 G069, isteğe bağlı site şifresi G076, tema 02 Dusty Blue), `dpl_CrRsWGBkUZNrtQW6LkQpZEJhRukG`. Önce `npm test`
+  493/493 (+2 build sonrası 2/2), typecheck, build yeşil. Demolara `/eleanor-and-theo` (02, onaysız) eklendi; hepsi yeni kodla tohumlandı.
+  `live-check` 40/40 + beş temalı salt-okuma 41/41, `blob-smoke` 12/12. Site şifresi ayrı geçici sitede denendi (çalışıyor), site silindi.
+  Ekran görüntüleri: `docs/10_canli_test/g078/`.
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 

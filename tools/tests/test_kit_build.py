@@ -119,9 +119,12 @@ def main():
         kod, out = calistir(kit2, HARITA, "--photos", str(t / "photos2"))
         assert kod == 0, out
         assert "10/17 katman üretildi, 7 atlandı" in out and out.count("ATLANDI") == 7, out
-        # --photos olmadan: ortak fotoğraflar haritanın koleksiyon kökünden (repo; boş) → 4 atlanır, çıkış 0
+        # --photos olmadan: ortak fotoğraflar haritanın koleksiyon kökünden (repo) gelir; repoda olmayanlar atlanır, çıkış 0.
+        # 02'nin repodaki fotoğrafları zamanla gelir (G202: hero_portrait var, moment_* yok) → beklenen sayı repodan hesaplanır.
+        ortak = [k for k in json.loads(HARITA.read_text())["layers"] if k.get("shared")]
+        yok = [k["source"] for k in ortak if not (HARITA.parent / k["source"]).exists()]
         kod, out = calistir(kit2, HARITA)
-        assert kod == 0 and "6/17" in out and "hero_portrait.jpg" in out, out
+        assert kod == 0 and f"{10 - len(yok)}/17" in out and all(Path(s).name in out for s in yok), out
 
         # 6) isteğe bağlı texture_mask_lines: altın çizgiler palette.gold ile boyanır
         kit3 = t / "V97_lines"

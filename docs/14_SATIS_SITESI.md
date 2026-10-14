@@ -1604,6 +1604,13 @@ Sayfalar: `/`, `/designs`, `/designs/blush-garden-rose`, `/designs/olive-ivory`,
   - Etsy'ye erişim olmadığı için link biçimi yalnız kuralla denetlendi.
   - Dış kaynak linklerinin (Emily Post, Canva) açıldığı bu ortamdan doğrulanamadı. Adresler arama sonuçlarından alındı.
 
+### 14.3b BKE Studio giydirmesi (G066-A, 2026-10-14)
+
+- Ad **BKE Studio** (K26), logo `public/brand/bke-logo-horizontal-*.svg`, favicon/manifest kök `app/layout.tsx`'ten bütün platforma. Yol ve renkler `lib/marketing/brand.ts`; renkler `brand/tokens.json`. Alan adı, fiyat, destek e-postası yer tutucu; `launched: false`.
+- **§9.6 font kararı değişti:** Cormorant/sistem yerine marka yazıları Archivo 800 (başlık), Montserrat 300 (etiket), DM Sans (gövde); `next/font`, repoda font dosyası yok. §9.8'deki "2 aile, ≤4 dosya" bütçesi marka kararıyla 3 aile / 3 Latin dosyaya çıktı.
+- Ölçüm (yerel prod build, `previews/g066/perf_before_after.json`): LCP ana sayfa 1800→1516 ms, CLS 0, aktarılan 300→357 KB (bütçe 600). Lighthouse performans 97→90 (ana sayfa), rehber 98→87; düşüşün kaynağı Lighthouse'un ölçtüğü ilk boyama (~1,2 s), Playwright'ta yeniden üretilemedi — açık iş.
+- `public/marketing/panel/` ekranları panel giydirmesi (G066-B) bitince `scripts/marketing-assets.ts` ile yeniden çekilir.
+
 ### 14.4 Yayına geçiş listesi (sırayla)
 
 1. Kararları `config.ts`'e işle (§13.4):

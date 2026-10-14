@@ -2,7 +2,7 @@
 id: G213
 baslik: Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: inceleme
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -27,9 +27,9 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/13_Enchanted_Forest --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
-- [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
-- [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
+- [x] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [x] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
+- [x] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
 - Kısım 1 (gpt-gorsel-C, 2026-10-14): W1'in beş referans ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` üretildi; hepsi 1024×1536.
@@ -37,6 +37,17 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - W2'nin bu oturuma ait üç parçası W1 ekranları referans verilerek üretildi: `assets/gpt/parts/bg_page.png` (1024×1536), `bg_tile.png` (1254×1254; aracın doğal kare çıktısı, kit kontrolü oranı kabul ediyor), `envelope_closed.png` (1536×1024, gerçek RGBA alfa). Kitap tokasız ve yazısız, sağ yarıda; sol yarı açılma için boş. Kenar şeridi %100 şeffaf; zemine düşen gölge/hâle alfa kanalında yok.
 - W2.1 yeniden üretildi: ilk arka planda alt sol yoğun dekor vardı; seçilende sol üst ve sağ alt köşe düzeni var. W2.2 yeniden üretildi: ilk doku sarıydı ve kenar farkları daha yüksekti; seçilen düşük kontrastlı açık yosun dokusunda RGB standart sapmaları 3,10/2,99/3,17; karşı kenarların ortalama kanal farkı sol-sağ 2,37, üst-alt 2,70 (0–255). Kenarlar piksel piksel aynı değil; döşenmiş website testi yapılmadı.
 - Bu oturumun sekiz dosyası `kit_check.denetle` ile kontrol edildi: 8/8 GEÇTİ (oran, opaklık/alfa ve gereken yeşil pencere alanı). Metin, nesne ve yerleşim kontrolleri görsel olarak yapıldı. `python3 tools/kit_check.py collections/13_Enchanted_Forest --paket 5`: 8/22 geçti; kalan 14 W2 dosyası kapsam dışında. `--paket 2`: 0/5, fotoğraflar kapsam dışında. Açık kitap/kapanış üretilmediği için hiza testi atlandı. Seçilen sekiz PNG dışında rapor/önizleme/deneme dosyası eklenmedi.
+
+- Kısım 2 (gpt-gorsel-A, 2026-10-14): mevcut beş W1 ekranı ve `envelope_closed.png` aynı sohbete referans olarak yüklendi. Sırayla yalnız `parts/closure.png`, `envelope_open.png`, `card_small.png`, `invitation_card.png`, `info_card.png`, `frame_portrait.png`, `frame_landscape.png`, `decor_tl.png` üretildi; önceki dosyalar korundu. Seçilen sekiz PNG dışında repoya rapor, önizleme veya deneme dosyası eklenmedi.
+- Kısım 2 yeniden üretimler: `envelope_open` sırt hizası için; `card_small` pencere gölgelenmesi/kısmi alfa için; `frame_landscape` pencere oranı ve merkez solması için; `decor_tl` ateş böceği hâlesi için düzeltildi. Yatay pencere opak ara üretimden sonra imagegen ile dış zemin kaldırılarak hazırlandı. Yalnız yeşil tonu nedeniyle yeniden üretim ve kodla piksel boyama yapılmadı. Pencere RGB/alfa değerleri imagegen çıktısında piksel piksel sabit değil; seçilenler kit_check yeşil maske kontrolünü geçti.
+- Kısım 2 kontrolü: `kit_check.denetle` 8/8 GEÇTİ (gerçek RGBA alfa, oran, kenar boşluğu ve gereken yeşil pencere). `closure` ve `decor_tl` aracın doğal kare çıktısı 1254×1254; `envelope_open` kapalı dosyayla aynı 1536×1024 tuvalde; diğerleri Kaydet ölçülerinde. Dikey/yatay pencere sınır kutusu oranları 0,761 (~3:4) / 1,553 (~3:2). Kitap hiza kontrolü GEÇTİ: sırt +%0,23, üst −%0,10, alt +%0,29, sağ +%0,20. Paket 5 genel kontrolü 17/23 geçti (16 dosya + hiza); yalnız kapsam dışındaki altı parça eksik. Mevcut Paket 2 fotoğrafları salt okunur kontrol edildi: 5/5 GEÇTİ.
+
+- Kısım 3 (gpt-gorsel-A, 2026-10-14): `git pull` sonrası mevcut beş W1 comp'u ve `parts/decor_tl.png` sohbete referans olarak yüklendi. Sırayla yalnız `parts/decor_br.png`, `accent_1.png`, `accent_2.png`, `accent_3.png`, `divider.png`, `web_hero.png` üretildi. Sağ alt küme sol üst kümenin aynı sepya çizgi/suluboya, eğrelti-sarmaşık-mantar ve krem çiçek dilinde karşı köşesidir. Üç accent ayrı tek nesnedir: ateş böceği, mantar, kıvrılmış genç eğrelti. Ayırıcı tek yatay süs, iki mantar ve bir ateş böceği içerir. Hero'da mevcut kapalı kitap ve pirinç toka ayrıca referans verildi; orta üst alan yazısız ve boş kaldı.
+- Kısım 3 yeniden üretimler: `decor_br` kenara değen yaprak/kenar boşluğu ve dış ışık için iki imagegen düzeltmesi; `accent_1` tuvaldeki küçük accent ölçeği için bir düzeltme; `divider` alfa/dış ışık kontrolü ve genişlik için iki düzeltme; `web_hero` 1200×630 kırpımındaki alt boşluk ve kitabın yosunlu zemine oturması için iki düzeltme. `accent_2` ve `accent_3` ilk çıktıları seçildi. Önceki kısımlardaki dosyalar ve fotoğraflar yeniden üretilmedi. Kodla piksel boyama, alfa temizleme veya üretim görselini yeniden boyutlandırma yapılmadı.
+- Kısım 3 dosyaları: `decor_br` ve `accent_1–3` aracın doğal kare çıktısı 1254×1254, gerçek RGBA; `divider` 1536×1024, gerçek RGBA; `web_hero` 1536×1024, opak RGB. Oranlar kit kontrolünü geçti. Accent alfa sınır kutuları tuval genişliğinin sırasıyla %39,31 / %33,73 / %32,93'ü; ayırıcı %68,03 (prompt yaklaşık %60). Bunlar tam piksel ölçeği değil, seçilen ham imagegen ölçüleridir. Köşe ve ayırıcı dış kenarlarındaki en yüksek alfa 1/255, accent'lerde 0; görünür nesneler kesilmedi. Alfa ile açık zeminde köşe/ayırıcı görsel kontrolü yapıldı; şeffaf piksellerin RGB'sinde görünen renkler görünür hâle oluşturmuyor. Hero'nun merkezden 1200×630 kırpımı bellekte kontrol edildi: kitap ve toka tam, alt boşluk %5'in üzerinde; önizleme dosyası kaydedilmedi.
+- Fotoğraflar (önceki oturumdan korundu): `photos/hero_portrait.jpg`, `story_1.jpg`, `story_2.jpg`, `story_3.jpg` dört dikey 1024×1536; `venue.jpg` yatay 1536×1024. Portre, kitapla hikâye ve fenerli teklif sahnelerinde aynı kurgusal çiftin yüz/saç/kıyafet tutarlılığı görsel olarak kontrol edildi. Yüzük/eller yakın planı aynı krem elbise ve yosun yeşili takım elbiseyle uyumlu; görünen ellerde belirgin anatomik hata seçilmedi. Mekân insan ve yazı içermiyor. Bu oturumda fotoğraf dosyalarına yazılmadı.
+- Üç kısmın toplam teslimi: 5 W1 comp + 17 W2 parça + 5 örnek fotoğraf. Son kontrol: `python3 tools/kit_check.py collections/13_Enchanted_Forest --paket 5` **23/23 GEÇTİ** (22 dosya + kitap hizası); `--paket 2` **5/5 GEÇTİ**. Hiza sırt +%0,23, üst −%0,10, alt +%0,29, sağ +%0,20; UYARI/KALDI yok. Kısım 3'te 3/6 ve 6/6 ara kayıtları commit + push edildi. Repoya yalnız seçilen altı PNG ve bu görev kaydı yazıldı; rapor, önizleme, deneme dosyası, ayrı dal veya PR eklenmedi.
+- Emin olunmayan / sınırı olan noktalar: kare çıktılar Kaydet'teki 1024 yerine doğal 1254 pikseldir; kit_check oranı denetler. Accent ve ayırıcı ölçekleri yaklaşık olup yukarıdaki ham alfa ölçüleri geçerlidir. Önceki `bg_tile` dikişi ve yeşil foto pencerelerinin piksel düzeyindeki farkları önceki kısım notlarında korunmuştur. Yazı/gölge/hâle ve fotoğraf anatomisi görsel denetimdir; OCR/anatomi otomasyonu kullanılmadı. Canlı website montajı, mobil tarayıcı ve gerçek paylaşım servisinin kendi kırpımı bu görsel görevinin içinde test edilmedi.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
@@ -47,3 +58,11 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 gpt-gorsel-C: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-A) 5/5 kit_check geçti, görsel olarak iyi. Kısım 2 (gpt-gorsel-C) repoya hiç gelmedi; kısım 2 gpt-gorsel-A'ya yeniden verildi.
 - 2026-10-14 devam: gpt-gorsel-A (kısım 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card kaydedildi; dört dosya kit_check.denetle kontrolünü geçti. Açık kitap hiza kontrolü GEÇTİ (en büyük kenar farkı %0,29); durum alindi.
+- 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 2, 8/8: info_card, frame_portrait, frame_landscape, decor_tl de kaydedildi; sekiz dosya ve kitap hizası kontrolü GEÇTİ; durum alindi.
+- 2026-10-14 gpt-gorsel-A: kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero
+- 2026-10-14 entegratör ara kontrol: kısım 2 (gpt-gorsel-A) 8 parça geçti (kitap kapağı + açık kitap, pirinç kopça büyük kare). Kısım 3 verildi.
+- 2026-10-14 devam: gpt-gorsel-A (kısım 3)
+- 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 3, 3/6: decor_br, accent_1, accent_2 kaydedildi; üç dosya kit_check.denetle kontrolünü geçti. decor_br kenar boşluğu ve ateş böceği hâlesi için iki kez, accent_1 küçük accent ölçeği için bir kez yeniden üretildi; yalnız seçilen dosyalar repoya eklendi. Durum alindi.
+- 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 3, 6/6: accent_3, divider, web_hero de kaydedildi. Paket 5 genel kontrolü 23/23 GEÇTİ (22 dosya + kitap hizası); Paket 2 5/5 GEÇTİ. divider alfa/ölçek, web_hero sosyal kırpım ve zemine oturma için düzeltildi; durum alindi.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A (kısım 3); üç kısım ve fotoğrafların Sonuç özeti tamamlandı; Paket 5 23/23, Paket 2 5/5 GEÇTİ. Son push sonrası duruldu.

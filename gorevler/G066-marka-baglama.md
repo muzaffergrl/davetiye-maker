@@ -29,6 +29,9 @@ kullanılır (alan adı yok — `bkestudio.com` yalnız comp'ta; link `config`'t
 5. "Made with BKE Studio" rozeti misafir sayfalarına **bu görevde eklenmez** (hedef link kararı yok; docs/15 P1).
 6. Testler, build, satış sitesi 390/1280 önizlemesi (`platform/previews/g066/`).
 
+## Kapsam genişledi — K29 sadeleştirme (2026-10-14)
+Kullanıcı: panel "çok daha basit" olsun. B kısmı yalnız giydirme değil: sihirbaz 3 adım; Edit 6 büyük bölüm, satır rozeti/kilidi yok, isim/tarih hakkı tek yerde; tek yayınlanmamış değişiklik şeridi (+ gözden geçir); Home ilerleme yüzdesi + sıradaki 3 iş; Share'de link+QR üstte, şifre/düzenleme linki açılır bölümde (şifre varsayılan kapalı); Guests korunur; masaüstü iki sütun (düzenleme | sabit önizleme). İşlev kaybı yok, sunucu kuralları (haklar, yayın, arşiv) aynı. Ayrıntı: docs/01 K29. Yeni ekranlar GM05 diliyle; GPT comp'u yalnız gerekirse.
+
 ## Sıra (2026-10-14, entegratör)
 İki aşama: **A — satış sitesi** (hemen; panel koduna dokunmaz) → **B — panel** (G069 RSVP v2 ve G076 site şifresi main'e
 girdikten sonra; aynı bileşenlere dokundukları için). Aynı görev, iki ayrı ajan turu; Sonuç'a iki bölüm.
@@ -186,4 +189,6 @@ share kapalı ve açık (`after_share_open_*`), guests.
 - 2026-10-14 açıldı (entegratör): GM02 onayı sonrası; G061 düzeltme turu bitince başlar
 - 2026-10-14 alindi: claude-G066
 - 2026-10-14 Kısım A (satış sitesi) bitti (claude-G066): BKE Studio giydirmesi, testler 458/458 + tarayıcı 283/283; durum alindi (Kısım B panel bekliyor)
+- 2026-10-14 entegratör: kısım A incelendi ve kabul edildi (önizlemeler, 495/495, marketing-browser 283/283); docs/14 §14.3b yazıldı. Lighthouse düşüşü açık iş. Kısım B (panel) başladı.
+- 2026-10-14 kapsam: K29 sadeleştirme B kısmına eklendi (çalışan ajana iletildi)
 - 2026-10-14 Kısım B (panel) bitti (claude-G066): BKE Studio giydirmesi + K29 sadeleştirme, npm test 500/500, tarayıcı 769/769 (11 paket), satış sitesi panel görselleri yeniden çekildi; durum alindi (bitir entegratörde)

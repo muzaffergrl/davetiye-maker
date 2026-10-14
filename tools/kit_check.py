@@ -63,6 +63,8 @@ def beklenenler(prompts: Path):
         if not m:
             if cur is not None and "#00FF00" in line.upper():
                 cur["pencere"] = True
+            if cur is not None and "wrap" in line.lower():
+                cur["sarma"] = True
             continue
         yol, kalan = m.group(1), m.group(2)
         o = OLCU.search(kalan)
@@ -75,6 +77,7 @@ def beklenenler(prompts: Path):
             "ekran": int(e.group(1)) if e else None,
             "paket": paket,
             "pencere": False,
+            "sarma": False,
             "baslik": baslik,
         })
         cur = out[-1]
@@ -191,7 +194,9 @@ def hiza_denetle(liste, zarf_tipi=None):
         return "ATLANDI", f"{' ve '.join(eksik)} yok — hiza ölçülmedi", []
     tip = zarf_tipi or tb.zarf_tipi_basliktan(kb.get("baslik"))
     kp = parcalar.get("closure")
-    sarili = bool(kp and kp.get("olcu") and kp["olcu"] == kb.get("olcu"))
+    # Sarılı kapanış = zarfla aynı tuvalde ve prompt'u zarfı saran bir şey tarif ediyor (kurdele, bant). Aynı tuvalde ama sarmayan
+    # (18'in yuvarlak etiketi) kapanışın uçları zarf kenarına gitmez; o zaman uç ölçümü yapılmaz.
+    sarili = bool(kp and kp.get("olcu") and kp["olcu"] == kb.get("olcu") and kp.get("sarma", True))
     notlar = []
     kapanis = None
     if sarili:

@@ -141,7 +141,11 @@ The same vellum sleeve as in the W1 screens, alone and closed, WITHOUT the wildf
 Kontrol: tek nesne; wildflower label yok; kesilmemiş; gölge yok; gerçek alfa.
 
 #### W2.4 Kapanış elemanı (tek başına)
-**Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
+**Kaydet:** `collections/18_Wildflower_Vellum/assets/gpt/parts/closure.png` · 1024×1536 · **Şeffaf zemin**
+
+> Kısım 2 kullanıcı talebi (2026-10-14): aşağıdaki kare/%70 ölçek yönergesinin yerine mevcut
+> `envelope_closed.png` ile aynı 1024×1536 tuval kullanılır. Yalnız W1'deki yuvarlak etiket,
+> kılıfın ön üst kenarına doğrudan oturacak ölçü ve konumda çizilir; kılıf çizilmez.
 
 ```
 Only a small round cream paper sticker label with a deckled edge, showing a tiny colored-pencil poppy, cornflower and daisy, no text, alone, exactly as it sits on the vellum sleeve in the W1 screens (centered horizontally on the front of the sleeve, just below its open top edge), drawn large so it fills about 70% of the square (Claude scales it to the vellum sleeve), with the same perspective, material and light as on the vellum sleeve and with no vellum sleeve behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).

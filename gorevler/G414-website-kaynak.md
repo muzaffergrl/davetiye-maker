@@ -40,3 +40,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 entegratör notu (G214 onayı): frame_landscape ve frame_portrait yeşil pencerelerinde saydam/pembe leke var → build'de pencere doldurma (parts_prep) şart; closed↔open hiza UYARI (kapı kanatları ±2,5%) → manifest.stage.align ile düzelt. envelope_closed iki kanatlı kapı (kapi tipi), closure inci broş 1254 kare.
