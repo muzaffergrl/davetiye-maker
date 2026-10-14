@@ -55,7 +55,7 @@ yapım aşamasında. Bu oturumdan canlı adrese erişilemedi (proxy reddi), canl
 8. **GPT görselleri:** 17 prompt, 4 paralel ajana bölündü (§12): telefon çerçevesi, sahneler, dokular, küçük nesne
    görselleri, rehber kapakları. Ürünün kendisi her yerde gerçek tema ekranlarıyla gösterilir.
 9. **Diğer belgelerle uyum** (aynı gün yazıldılar):
-   - **docs/15 (G062):** marka önerisi *Seal & Story* (karar değil); fiyat Strateji A önerisi (liste $49 → satış $29.40);
+   - **docs/15 (G062):** marka önerisi *Seal & Story* (karar değil); fiyat önerisi **düz $29.40** (lansman $24.50; kalıcı üstü çizili indirim yok, yalnız gerçek süreli kampanya — docs/15 risk 7 ve §0); K26: ad **BKE Studio** (çalışma adı, kesin onay bekliyor);
      Etsy düğmeleri **Share & Save** linki; her misafir sayfasında "Made with [BRAND]"; doğrudan satış için Stripe yerine
      MoR (Paddle/Gumroad), Faz 2.
    - **docs/16 (G060):** yayından sonra isim ve tarih için **3 değişiklik**, ≤ 2 karakterlik yazım düzeltmesi bedava; site
@@ -1295,7 +1295,7 @@ export const MARKETING = {
 
 Alan anlamları:
 - `price` = Etsy'de **o an görünen satış fiyatı**. `compareAtPrice` = Etsy'nin üstü çizili liste fiyatı. docs/15 önerisi
-  (karar değil): liste $49 → satış $29.40, lansmanda $24.50.
+  (karar değil): düz $29.40, lansmanda düz $24.50; `compareAtPrice` varsayılan `null` — yalnız Etsy'de gerçek süreli kampanya varken dolar.
 - `etsyListingUrl` = ilanın **Share & Save** linki (§7.2).
 
 Kurallar:

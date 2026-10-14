@@ -1,14 +1,11 @@
 {{head}}
 <style>
-  :root { --pw: 356px; --gap: 18px; --corner: 450px; }
-  .row { top: 540px; }
-  .cap { width: var(--pw); }
-  .col:nth-child(even) { margin-top: 80px; }
-  .cap { margin-top: 30px; }
+  :root { --pw: 356px; --gap: 18px; --corner: 420px; }
+  .row { top: 520px; }
+  .cap { width: calc(var(--pw) + 14px); }
   .cap .n { font-size: 60px; }
-  .cap h2 { font-size: 54px; }
-  .cap p { font-size: 28px; }
-  .note { bottom: 150px; left: 200px; right: 520px; font-size: 32px; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; }
+  .cap h2 { font-size: 56px; }
+  .note { top: 1690px; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 46px; }
 </style>
 </head>
 <body>
@@ -17,14 +14,14 @@
 <header class="head">
   <p class="eyebrow">{{theme_name}} · For your guests</p>
   <h1 class="serif">Five pages, one invitation</h1>
-  <p class="sub">It opens like a real envelope, then guests find everything they need</p>
+  <p class="sub">{{tagline}}</p>
 </header>
 <div class="row">
-  <div class="col"><img class="phone" src="{{shot.g01_envelope}}" alt=""><div class="cap"><div class="n">1</div><h2>The envelope</h2><p>Tap to open</p></div></div>
-  <div class="col"><img class="phone" src="{{shot.g02_home_top}}" alt=""><div class="cap"><div class="n">2</div><h2>Home</h2><p>Names, date, countdown</p></div></div>
-  <div class="col"><img class="phone" src="{{shot.g05_story}}" alt=""><div class="cap"><div class="n">3</div><h2>Our Story</h2><p>Your photos and moments</p></div></div>
-  <div class="col"><img class="phone" src="{{shot.g07_details_schedule}}" alt=""><div class="cap"><div class="n">4</div><h2>Details</h2><p>Schedule, venue, travel</p></div></div>
-  <div class="col"><img class="phone" src="{{shot.g09_rsvp_top}}" alt=""><div class="cap"><div class="n">5</div><h2>RSVP</h2><p>Guests reply online</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.g01_envelope}}" alt=""></div><div class="cap"><div class="n">1</div><h2>Envelope</h2><p>Tap to open</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.g04_home_calendar}}" alt=""></div><div class="cap"><div class="n">2</div><h2>Home</h2><p>Invitation, countdown</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.g05_story}}" alt=""></div><div class="cap"><div class="n">3</div><h2>Our Story</h2><p>Your photos</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.g06_details_top}}" alt=""></div><div class="cap"><div class="n">4</div><h2>Details</h2><p>Schedule, venue</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.g09_rsvp_top}}" alt=""></div><div class="cap"><div class="n">5</div><h2>RSVP</h2><p>Guests reply online</p></div></div>
 </div>
 <p class="note">Guests need no app and no account: just the link</p>
 </body>

@@ -10,7 +10,8 @@ Kontroller:
   - dosya var mı (sade ad; `_v2` gibi denemeler yalnız uyarı)
   - oran: hedef ölçünün oranına ±%2 (piksel değil oran; GPT çıktısı farklı çözünürlükte olabilir)
   - şeffaf istenenlerde: gerçek alfa kanalı, kenar şeridinin ≥%90'ı şeffaf (nesne kesilmemiş), içerik var
-  - mockup'larda: #00FF00 (±40 ya da yeşil baskın) bölgesi görselin ≥%5'i ve sınır kutusunun ≥%90'ını dolduruyor (düz, tek parça)
+  - mockup'larda: #00FF00 (±40 ya da yeşil baskın) bölgesi görselin ≥%5'i ve sınır kutusunun ≥%90'ını dolduruyor (düz, tek parça);
+    Kaydet satırında `N ekran` varsa (ilan sahneleri): tam N ayrı yeşil ekran, her biri ≥%1 ve dört köşe dörtgeninin ≈%90–108'i (eğik olabilir)
   - prompt bloğunda `#00FF00` geçen diğer görsellerde (foto penceresi isteyen parça ve comp'lar; ör. PAKET 5 card_small,
     frame_*, W1 ekranları): aynı yeşil testine uyan (şeffaf parçada alfa ≥ 128) en büyük bağlı bölge görselin ≥%0,3'ü
     (en az 256 px) — pencere var mı; şekli/sayısı denetlenmez (parts_prep.py ölçer)
@@ -33,7 +34,7 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from mockup_compose import en_buyuk_bolge, yesil_maske  # noqa: E402
+from mockup_compose import _alan, _gövde, dort_kose, en_buyuk_bolge, sinir_noktalari, yesil_maske  # noqa: E402
 import tema_build as tb  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -41,6 +42,9 @@ PENCERE_MIN_PAY = 0.003
 KAYDET = re.compile(r"\*\*Kaydet:\*\*\s*`([^`]+)`(.*)")
 OLCU = re.compile(r"(\d{3,5})\s*[×x]\s*(\d{3,5})")
 PAKET = re.compile(r"^##\s+PAKET\s+(\d)", re.I)
+EKRAN = re.compile(r"(\d+)\s*ekran", re.I)  # mockup Kaydet satırı: "· 3 ekran" = beklenen yeşil ekran sayısı
+EKRAN_MIN_PAY = 0.01  # her yeşil ekran görselin ≥%1'i
+EKRAN_DISBUKEY = 0.985  # bölge / dışbükey gövde; yuvarlak köşeli düz ekran ≈ 0.995+
 
 
 def beklenenler(prompts: Path):
@@ -62,11 +66,13 @@ def beklenenler(prompts: Path):
             continue
         yol, kalan = m.group(1), m.group(2)
         o = OLCU.search(kalan)
+        e = EKRAN.search(kalan)
         out.append({
             "yol": yol,
             "olcu": (int(o.group(1)), int(o.group(2))) if o else None,
             "seffaf": "Şeffaf" in kalan or "seffaf" in kalan.lower(),
             "mockup": "/mockups/" in yol,
+            "ekran": int(e.group(1)) if e else None,
             "paket": paket,
             "pencere": False,
             "baslik": baslik,
@@ -124,7 +130,28 @@ def denetle(b, kok: Path):
             sorun.append(f"#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %{pay*100:.2f})")
         else:
             ek = f" · pencere %{pay*100:.1f}"
-    if b["mockup"]:
+    if b["mockup"] and b.get("ekran"):
+        # ilan sahneleri (2026-10-14): eğik/çok ekran. Her ekran ayrı, düz, tek parça bir dörtgen: bölge alanı / dört köşe
+        # dörtgeninin alanı ≈ 1 (yuvarlak köşe payı); sayı Kaydet satırındaki "N ekran" ile aynı.
+        yesil = yesil_maske(np.asarray(im.convert("RGB")))
+        bolgeler, kalan = [], yesil.copy()
+        while kalan.any() and len(bolgeler) <= b["ekran"] + 2:
+            bol = en_buyuk_bolge(kalan)
+            if bol.sum() < EKRAN_MIN_PAY * yesil.size:
+                break
+            bolgeler.append(bol)
+            kalan &= ~bol
+        if len(bolgeler) != b["ekran"]:
+            sorun.append(f"{b['ekran']} yeşil ekran bekleniyordu, {len(bolgeler)} bulundu (her biri ≥%{EKRAN_MIN_PAY*100:.0f})")
+        for i, bol in enumerate(bolgeler, 1):
+            dolu = bol.sum() / max(_alan(dort_kose(bol)), 1.0)  # yuvarlak köşeli düz ekran ≈ %100–102
+            som = bol.sum() / max(_alan(_gövde(sinir_noktalari(bol))), 1.0)  # dışbükeylik: kenara binen parmak/süs çentiği
+            if not 0.90 <= dolu <= 1.08 or som < EKRAN_DISBUKEY:
+                sorun.append(f"ekran {i} düz/tek parça dörtgen değil (dörtgenin %{dolu*100:.0f}'i, dışbükeylik %{som*100:.1f};"
+                             " parmak/süs üstünde ya da yansıma)")
+        if bolgeler and not sorun:
+            ek = f" · {len(bolgeler)} ekran"
+    elif b["mockup"]:
         rgb = np.asarray(im.convert("RGB"))
         yesil = yesil_maske(rgb)  # #00FF00 ±40 ya da yeşil baskın (GPT yeşili ≈ (3,252,45))
         pay = yesil.mean()

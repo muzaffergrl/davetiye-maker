@@ -1,0 +1,462 @@
+{
+  "task": "G202",
+  "agent": "gpt-gorsel-A",
+  "date": "2026-10-14",
+  "required_file_count": 27,
+  "all_sizes_exact": true,
+  "all_detected_chroma_windows_pure_opaque": true,
+  "envelope_alignment_percent": {
+    "left": -0.2,
+    "right": 0.29,
+    "bottom": 0.07
+  },
+  "files": [
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/comps/web_1_envelope.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "f33ca02d5d1d4f4549d08c0366066591611f69161a459ad183f7a44a0e7f6487"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/comps/web_2_home.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "8bf8983214cd4c18070f70981bdcda917c723370f106d274d5fbdee8f067a947",
+      "windows": [
+        {
+          "bbox": [
+            334,
+            275,
+            690,
+            604
+          ],
+          "pixels": 116873,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.082066869300912
+        }
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/comps/web_3_story.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "877bc99757b3a85238de4c83fb9b5c72d88c91a7aafeb3cfca6e4dc2bf6a3785",
+      "windows": [
+        {
+          "bbox": [
+            141,
+            471,
+            494,
+            799
+          ],
+          "pixels": 90559,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.076219512195122
+        },
+        {
+          "bbox": [
+            554,
+            510,
+            918,
+            845
+          ],
+          "pixels": 95491,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.0865671641791044
+        },
+        {
+          "bbox": [
+            307,
+            901,
+            677,
+            1228
+          ],
+          "pixels": 93811,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.1314984709480123
+        }
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/comps/web_4_details.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "7b9ef717e5ecd01f3122a143ef8fb48ea2a1b1356444bc0a7db764c27c2f6eec",
+      "windows": [
+        {
+          "bbox": [
+            272,
+            874,
+            752,
+            1173
+          ],
+          "pixels": 120776,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.605351170568562
+        }
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/comps/web_5_rsvp.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "af977913be231c529972fc21de9c6a2c1f8f82ed91610bfd55eeb9fb83c29d67"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/bg_page.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "199051e19d61e86239c3f0f6b843473acf4c8a73f2cdd60806b683fa4a3ac469"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/bg_tile.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "61e782f6b08b1975dbab05ae69162f07b5d86f258013a7061140db1c56c670e9"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/envelope_closed.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "63a6f96e89991f3c69709127e557bb87f287b7837f6d0f085a3fb39a0c420df2",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/closure.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "9529ea1d486e022a879a6dcd2a02d4121a1b24878dab543f9e09c0cb1cc10ba2",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/envelope_open.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "b5899f88d494b17ef72d0d043bef74986d1c4f8335d84fc1d33bbcf70749bb3c",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/card_small.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "901a2fe98f25e3faa3acf607841d0a499b57fdbb51146e90dcd032dcdb6efb98",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "windows": [
+        {
+          "bbox": [
+            248,
+            383,
+            777,
+            912
+          ],
+          "pixels": 279834,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.0
+        }
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/invitation_card.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "68e3cb54205c29c4693544341686aedb91b94e1d696f9bf66d3d4264171b4b8a",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/info_card.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "0b3b4451852d5991cc390b2552f344e21cf356e5581f031ae51ba4cb2a277bd3",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/frame_portrait.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "sha256": "1992ad6bac0b75dff836936d6d0c29dbcca40381a73b74a25c9e1116e987307a",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "windows": [
+        {
+          "bbox": [
+            203,
+            364,
+            856,
+            1109
+          ],
+          "pixels": 486485,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 0.876510067114094
+        }
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/frame_landscape.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "57ea64e815979891ec536ed05ebfdd84d0006559c32af47074989f661b3a4ba9",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "windows": [
+        {
+          "bbox": [
+            373,
+            298,
+            1163,
+            752
+          ],
+          "pixels": 358256,
+          "rgba": [
+            0,
+            255,
+            0,
+            255
+          ],
+          "pure_fraction": 1.0,
+          "bbox_ratio": 1.7400881057268722
+        }
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/florals_tl.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "5e5a5b31a852ee5a71fcd76272235a06e8c4cdb2264bbf2d14ecd393eea0b2a3",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/florals_br.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "4944bf5774748e629a4f69c405fd131686ca7608a7e765881543b56ee12250f5",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/accent_1.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "97ba2f1c95cd79910e6a1cd6d198eb3e4a16457dd56299b3eb81166315fc3fd5",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/accent_2.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "43d292d752db993a1589e1e4126d07c01e23dd1c9c119cc871bca3e748d99b0f",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/accent_3.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "ebeec31c9ca800fe6453193956f481f516e8ec2305a9e3c9543843c09887dbf2",
+      "alpha_range": [
+        0,
+        253
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/divider.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "e08300e5523545fc63926496c8a2106a39b7eb30ea665f49db2336e38c5f0bf1",
+      "alpha_range": [
+        0,
+        254
+      ]
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/parts/web_hero.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "sha256": "1c7546168eda828995127ca296a2a91c32bb9b8e3ba7392ee109fb74da10c1b5"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/photos/hero_portrait.jpg",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "sha256": "b8733c0e121b56318c023f9ec88b646e244ef526e128e7ebefdfb28a18b7756a"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/photos/story_1.jpg",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "sha256": "cce82219f9246d3475b0eabd1136d9d78147912ba4481edff3b945e8ce0673eb"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/photos/story_2.jpg",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "sha256": "c687b7c9a316acce987ec238328856121c5c6141148d5d2a0bc4bd4303e50ae3"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/photos/story_3.jpg",
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "sha256": "b9dc2c03d6db835c02d788333926c99b842bbe17955e6330db66d0f66b8b5cdf"
+    },
+    {
+      "file": "collections/02_Dusty_Blue/assets/gpt/photos/venue.jpg",
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "JPEG",
+      "sha256": "11f3c7c9ea36d2046af9579bc4f24a5498d2279e1f7bee9f546e09e5056198e6"
+    }
+  ]
+}

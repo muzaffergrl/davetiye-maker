@@ -2,11 +2,14 @@
 
   python3 tools/tests/test_listing_kit.py
 
-Covered: listing.md field parsing and Etsy title/tag rules (also on the real 01 and 03 listings), the real QR of a start
-link (re-encoded and compared module by module; demo/placeholder hosts and http refused), template filling (every
-placeholder of every template has a value, unknown placeholders fail, text is escaped), guide strips (same size for 1–3
-screens), video rule checks, and — when the kit has been built — the full `check` of both themes (images, video, PDF link,
-QR). One template is rendered with Playwright when node + Playwright are available (skipped otherwise).
+Covered: listing.md field parsing and Etsy title/tag rules (also on the real 01 and 03 listings, plus the honesty rules
+of the G059 review: no "personal start link", no "all text", no trademark tag, US spelling), the real QR of a start link
+(re-encoded and compared module by module; demo/placeholder hosts and http refused), template filling (every placeholder
+of every template has a value, unknown placeholders fail, text is escaped), guide strips (1–2 screens, same width, parts
+of a screen), the guide's HTML (cover, captioned figures, heading kept with its picture), the PDF link check (a PDF with
+no link fails), open-marker detection, `--prepublish` (offline: a fake fetch), the vercel.app warning, video rule checks,
+and — when the kit has been built — the full `check` of both themes. One template is rendered with Playwright when node +
+Playwright are available (skipped otherwise).
 """
 import re
 import sys
@@ -73,6 +76,17 @@ def test_real_listings():
             assert f"img/{name}.jpg" in guide, (t.id, name)
         # the guide is buyer-facing: no internal markers
         assert "[VERIFY" not in guide and "TODO" not in guide, t.id
+        # G059 review: honest product statements
+        for text, where in ((md, "listing.md"), (guide, "START_HERE.md")):
+            low = text.lower()
+            assert "personal start link" not in low and "your start link is inside" not in low, (t.id, where)
+            assert "all text" not in low and "all the text" not in low, (t.id, where)
+            assert "colour" not in low and "personalis" not in low, (t.id, where, "US spelling")
+            assert "only in safari" not in low and "20 to 30 minutes" not in low, (t.id, where)
+            assert "headings" in low and "english" in low, (t.id, where)
+        assert "evite" not in " ".join(f["tags"]), t.id  # Evite is a trademark
+        assert f["title"].count("Wedding") <= 1, (t.id, f["title"])
+        assert "registry links" not in guide and "**QR code**" in guide, t.id
 
 
 def test_qr(tmp: Path):
@@ -124,13 +138,64 @@ def test_strip(tmp: Path):
         p = tmp / f"s{i}.jpg"
         Image.new("RGB", (1170, 2532), c).save(p)
         shots.append(p)
-    a = lk.make_strip(shots[:1], tmp / "a.jpg")
-    b = lk.make_strip(shots, tmp / "b.jpg")
+    a = lk.make_strip([(shots[0], None)], tmp / "a.jpg")
+    b = lk.make_strip([(shots[0], None), (shots[1], None)], tmp / "b.jpg")
     ia, ib = Image.open(a), Image.open(b)
-    assert ia.size == ib.size, (ia.size, ib.size)
+    assert ia.size == ib.size, (ia.size, ib.size)  # always two slots wide: every screen the same size in the PDF
     assert ia.getpixel((5, 5)) == (255, 255, 255) or sum(ia.getpixel((5, 5))) > 750  # white margin
     mid = ia.getpixel((ia.width // 2, ia.height // 2))
     assert abs(mid[0] - 200) < 8, mid  # the single screen sits in the middle
+    # each screen ≥ 42 % of the text width (the PDF shows the picture at 93.5 % of the text width, GUIDE_CSS)
+    assert "width: 93.5%" in lk.GUIDE_CSS
+    assert lk.STRIP["w"] / ib.width * 0.935 >= 0.42, ib.width
+    try:
+        lk.make_strip([(s, None) for s in shots], tmp / "c.jpg")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("three screens accepted")
+    # a part of a screen: CSS px of the 390 px wide screen (here DPR 3)
+    part = lk.screen_part(shots[0], (0, 300))
+    assert part.size == (1170, 900), part.size
+    assert lk.screen_part(shots[0], (0, 2000)).height == 2532  # clamped to the screen
+    # a bottom sheet: the plain rows above it are dropped
+    sheet = Image.new("RGB", (1170, 2532), (246, 243, 238))
+    sheet.paste((255, 255, 255), (0, 600, 1170, 2532))
+    sp = tmp / "sheet.jpg"
+    sheet.save(sp, quality=95)
+    top = lk.screen_part(sp, "sheet")
+    assert 2532 - 600 <= top.height <= 2532 - 600 + 12, top.height
+
+
+def test_guide_html():
+    t = lk.THEMES["blush-garden-rose"]
+    doc = ("<html><head><title>x</title></head><body><h1 id=\"s\">Start Here: Your Blush Garden Rose Wedding Website</h1>"
+           "<p>Intro</p><p><img src=\"file:///q/start_qr_page.png\" alt=\"QR code\"></p>"
+           "<h2 id=\"link\">Your start link</h2><p>No picture here</p>"
+           "<h2 id=\"step-1\">Step 1: Start</h2>\n<p><img src=\"file:///s/step1.jpg\" alt=\"Step 1: the start page\"></p><p>Text</p>"
+           "</body></html>")
+    out = lk.guide_html(t, doc, {"heading": "Cormorant Garamond", "body": "Montserrat"})
+    assert 'class="cover"' in out and "Start Here" in out and "Your Blush Garden Rose Wedding Website" in out
+    assert "<h1 id" not in out  # the # title became the cover
+    assert t.corner_tl.split("/")[-1] in out and "g01_envelope.jpg" in out
+    assert "<figcaption>Step 1: the start page</figcaption>" in out
+    assert '<div class="keep"><h2 id="step-1">' in out  # heading kept with its picture
+    assert '<div class="keep"><h2 id="link">' not in out  # … and only its own heading
+    assert 'class="qr"' in out and "<figcaption>QR code</figcaption>" not in out
+    assert "/q/start_qr.png" in out  # the code itself, not the 4× wide strip
+    assert "break-inside: avoid" in out
+
+
+def test_pdf_checks(tmp: Path):
+    blank = tmp / "nolink.pdf"
+    Image.new("RGB", (612, 792), "white").save(blank)
+    url = lk.start_url(lk.THEMES["olive-ivory"])
+    probs = lk.pdf_link_problems(blank, url)
+    assert probs and "no clickable" in probs[0], probs  # G059 review: a PDF without any link must fail
+    assert lk.open_markers("x [VERIFY: a] [SHOP NAME] [AUTO RENEW: yes/no] [PRICE] y [VERIFY: b\n c]") == \
+        ["[VERIFY: a]", "[VERIFY: b c]", "[AUTO RENEW: yes/no]", "[PRICE]", "[SHOP NAME]"]  # VERIFY first
+    assert lk.open_markers("[https://a.b](https://a.b) - [ ] task - [x] done [Step 1] (x)") == []
+    assert lk.host_warnings("https://davetiye-platform-five.vercel.app") and not lk.host_warnings("https://example.org")
 
 
 def test_video_rules():
@@ -173,6 +238,18 @@ def test_built_kits():
         assert problems == [], (t.id, problems)
         uris = lk.pdf_uris(t.package / "customer" / "START_HERE.pdf")
         assert lk.start_url(t) in uris, (t.id, uris)
+        # --prepublish, offline: a fake live site that answers with the theme's name → only the open markers remain
+        live = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (200, f"<title>{t.name}</title>"))
+        assert not any(x.startswith("live ") for x in live), live
+        assert not any("demo_qr" in x for x in live), live  # image 8's QR encodes the demo link
+        assert any("[SHOP NAME]" in x for x in live) and any("[VERIFY" in x for x in live), live
+        down = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (0, "URLError: proxy"))
+        assert sum("could not connect" in x for x in down) == 2, down
+        md_open = next(x for x in live if x.startswith("customer/START_HERE.md"))
+        pdf_open = next(x for x in live if x.startswith("START_HERE.pdf"))
+        assert md_open.split(":")[1].split()[0] == pdf_open.split(":")[1].split()[0], (md_open, pdf_open)  # same count
+        wrong = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (200, "<title>Other</title>"))
+        assert sum("does not name" in x for x in wrong) == 2, wrong
 
 
 def main():
@@ -182,9 +259,11 @@ def main():
     print("  test_real_listings: ok")
     test_video_rules()
     print("  test_video_rules: ok")
+    test_guide_html()
+    print("  test_guide_html: ok")
     with tempfile.TemporaryDirectory() as d:
         d = Path(d)
-        for test in (test_qr, test_templates, test_strip, test_render):
+        for test in (test_qr, test_templates, test_strip, test_pdf_checks, test_render):
             test(d)
             print(f"  {test.__name__}: ok")
     test_built_kits()

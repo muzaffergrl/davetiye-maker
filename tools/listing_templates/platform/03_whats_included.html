@@ -1,15 +1,16 @@
 {{head}}
 <style>
-  :root { --head-top: 110px; --corner: 440px; }
-  .list { position: absolute; left: 150px; top: 520px; width: 1100px; padding: 54px 64px 50px; z-index: 1; }
+  :root { --head-top: 110px; --corner: 400px; }
+  .left { position: absolute; left: 140px; top: 470px; width: 1120px; z-index: 1; }
+  .list { padding: 40px 60px 34px; }
   .list ol { list-style: none; counter-reset: i; }
-  .list li { counter-increment: i; display: grid; grid-template-columns: 74px 1fr; column-gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--gold-light); }
+  .list li { counter-increment: i; display: grid; grid-template-columns: 70px 1fr; column-gap: 16px; padding: 16px 0 18px; border-bottom: 1px solid var(--gold-light); }
   .list li:last-child { border-bottom: 0; }
   .list li::before { content: counter(i); grid-row: span 2; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 60px; line-height: 1; color: var(--gold); }
-  .list b { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 46px; line-height: 1.08; color: var(--deep); }
-  .list span { font-size: 27px; line-height: 1.38; }
-  .ph { position: absolute; right: 150px; top: 560px; --pw: 520px; z-index: 1; }
-  .note { bottom: 64px; left: 150px; right: 560px; line-height: 1.45; }
+  .list b { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 52px; line-height: 1.05; color: var(--deep); }
+  .list span { font-size: 36px; line-height: 1.3; margin-top: 4px; }
+  .left .note { position: static; text-align: left; margin-top: 34px; padding-left: 8px; }
+  .ph { position: absolute; right: 140px; top: 520px; --pw: 520px; z-index: 1; }
 </style>
 </head>
 <body>
@@ -19,19 +20,20 @@
   <p class="eyebrow">{{theme_name}}</p>
   <h1 class="serif">What's included</h1>
 </header>
-<div class="list card">
-  <ol>
-    <li><b>Your wedding website</b><span>Envelope opening, Home, Our Story, Details and RSVP pages</span></li>
-    <li><b>An online editor</b><span>Names, date, venue, schedule, story and photos. Changes save by themselves</span></li>
-    <li><b>Online RSVP</b><span>Replies, head count and a spreadsheet (CSV) download in your editor</span></li>
-    <li><b>Your own questions</b><span>Up to 3 RSVP questions, for example a meal choice</span></li>
-    <li><b>Add to calendar</b><span>Apple / Outlook (.ics) and Google Calendar buttons</span></li>
-    <li><b>Questions &amp; answers</b><span>Up to 12, on your Details page</span></li>
-    <li><b>Countdown and QR code</b><span>Download a QR code of your website for printed cards</span></li>
-    <li><b>START HERE guide (PDF)</b><span>Your personal start link and every step, with pictures</span></li>
-  </ol>
+<div class="left">
+  <div class="list card">
+    <ol>
+      <li><b>Your wedding website</b><span>Envelope, Home, Story, Details, RSVP</span></li>
+      <li><b>An online editor</b><span>Your details and photos, saved as you go</span></li>
+      <li><b>Online RSVP</b><span>Up to 3 questions, head count, CSV file</span></li>
+      <li><b>Add to calendar</b><span>Apple / Outlook and Google buttons</span></li>
+      <li><b>Questions &amp; answers</b><span>Up to 12, on your Details page</span></li>
+      <li><b>QR code</b><span>Download it for printed cards and signs</span></li>
+      <li><b>START HERE guide (PDF)</b><span>Your start link and every step in pictures</span></li>
+    </ol>
+  </div>
+  <p class="note">Digital product: nothing is printed or shipped.<br>Sample names and photos are not included.</p>
 </div>
 <img class="phone ph" src="{{shot.g03_home_invitation}}" alt="">
-<p class="note">Digital product: nothing is printed or shipped.<br>Sample names and photos are not included.</p>
 </body>
 </html>

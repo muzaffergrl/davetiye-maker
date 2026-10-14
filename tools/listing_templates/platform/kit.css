@@ -39,11 +39,14 @@ body {
 }
 .row { position: absolute; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-start; gap: var(--gap, 60px); z-index: 1; }
 .col { display: flex; flex-direction: column; align-items: center; }
-.cap { margin-top: 34px; text-align: center; width: calc(var(--pw, 520px) + 40px); }
+/* a screen slot of a full phone screen's height: a screen cut shorter (capture.ts clearEdges) keeps the captions of a
+   row on one line */
+.slot { height: calc(var(--pw, 520px) * 844 / 390); display: flex; align-items: flex-start; }
+/* Text sizes are for a phone: Etsy shows the 2000 px image about 390 px wide (scale ≈ 0.2), so 40 px here ≈ 8 px there. */
+.cap { margin-top: 30px; text-align: center; width: calc(var(--pw, 520px) + 40px); }
 .cap .n { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 64px; color: var(--gold); line-height: 1; }
-.cap h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 58px; color: var(--deep); line-height: 1.05; margin-top: 6px; }
-.cap p { font-size: 29px; line-height: 1.42; margin-top: 12px; color: var(--ink); }
-.cap .label { font-weight: 600; font-size: 28px; letter-spacing: .2em; text-transform: uppercase; color: var(--deep); }
+.cap h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 60px; color: var(--deep); line-height: 1.05; margin-top: 6px; }
+.cap p { font-size: 40px; line-height: 1.3; margin-top: 10px; color: var(--ink); }
 
 .band {
   position: absolute; left: 0; right: 0; bottom: var(--band-bottom, 92px); z-index: 2;
@@ -51,7 +54,7 @@ body {
   font-weight: 600; font-size: 32px; letter-spacing: .18em; text-transform: uppercase; color: var(--deep);
 }
 .band i { font-style: normal; color: var(--gold); font-size: 26px; letter-spacing: 0; }
-.note { position: absolute; left: 0; right: 0; text-align: center; z-index: 2; font-size: 30px; color: var(--ink); letter-spacing: .02em; }
+.note { position: absolute; left: 0; right: 0; text-align: center; z-index: 2; font-size: 38px; line-height: 1.35; color: var(--ink); letter-spacing: .01em; }
 
 /* plain card behind text (layout surface, palette colours) */
 .card {
