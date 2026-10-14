@@ -2,7 +2,7 @@
 id: G803
 baslik: Tasarım 03 Blush Garden Rose — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-B
 oncelik: 1
 bagimli: []
@@ -45,3 +45,4 @@ düzenleme. Ekranlar düz `#00FF00`; Claude gerçek site ekranlarını perspekti
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (kullanıcı: daha etkileyici, GPT tasarlasın)
 - 2026-10-14 alindi: gpt-gorsel-B
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 5/5 kontrol geçti, tam #00FF00 piksel eşitliği sınırlaması Sonuç'a kaydedildi.
+- 2026-10-14 entegratör onayladı

@@ -2,7 +2,7 @@
 id: G208
 baslik: Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-D
 oncelik: 2
 bagimli: []
@@ -78,3 +78,4 @@ Tekrarlı imagegen düzeltmelerine rağmen yatay çerçevede yeşil iç alanın 
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-D
 - 2026-10-14 üretim turu tamamlandı, incelemeye gönderildi: gpt-gorsel-D; 28 ana görsel, Paket 5 24/24 ve Paket 2 5/5 geçti; saf/opak foto penceresi ve pencere oranı sapmaları Sonuç'ta açık bırakıldı.
+- 2026-10-14 entegratör onayladı
