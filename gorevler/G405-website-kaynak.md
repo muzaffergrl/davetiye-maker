@@ -96,8 +96,8 @@ comp'u olmayan bölümler (davet kartı, takvim, iki çini pano, kapanış) bu t
 - Aksanlı isimler: "Zoë Łucja Ağır & Matías Søren Çelik" Allura + Playfair Display latin-ext alt kümeleriyle çiziliyor (elle
   denendi; theme-check kayıtlarında aksanlı ad yok).
 
-- **origin/main ile birleştirme sonrası (G060 panel v2, G061 pazarlama dahil):** `npm ci`, `npm test` 378/378, `npm run typecheck`
-  temiz, `npm run build` + trace-check (4 tema; bu tema dahil) geçti; `g051-browser` 44/44, `final-smoke` 44/44 (`previews/g405/final/`
+- **origin/main ile birleştirme sonrası (G060 panel v2, G061 pazarlama dahil):** `npm ci`, `npm test` 378/378 (G404 de
+  birleşince 408/408), `npm run typecheck` temiz, `npm run build` + trace-check (5 tema; bu tema dahil) geçti; `g051-browser` 44/44, `final-smoke` 44/44 (`previews/g405/final/`
   yeni panel ekranlarıyla yenilendi). `theme-check --stress --no-video` (çıktı geçici klasöre): 107 geçti, **1 hata "content
   change"** — G064 Sonuç'ta belgelenen ortak sorun: kontrol yayınlanmış demo sitenin isim ve tarihini değiştirip yeniden yayınlıyor,
   G060'ın kimlik koruması `publishSite`'ta `IdentityMismatchError` ile reddediyor (temadan bağımsız; `scripts/theme-check.cjs`
