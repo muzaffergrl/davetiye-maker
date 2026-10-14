@@ -2,7 +2,7 @@
 id: G211
 baslik: Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-E
 oncelik: 2
 bagimli: []
@@ -69,3 +69,4 @@ Açık kusurlar ve inceleme notları: card_small ile frame_portrait/frame_landsc
 - 2026-10-14 alindi: gpt-gorsel-E
 - 2026-10-14 not (entegratör): ajan sohbeti yarıda koptu, repoda dosya yok (kit_check 0/23, 0/5); devam ajanı rol rehberindeki 'Ara kayıt ve devam' kuralıyla sürdürür
 - 2026-10-14 not (entegratör): ikinci oturum da koptu; main'de W1 (5) + bg_page, bg_tile, envelope_closed, closure var. Kalan 13 parça + 5 fotoğraf oturum başına en çok 8 görselle sürdürülür
+- 2026-10-14 entegratör onayladı
