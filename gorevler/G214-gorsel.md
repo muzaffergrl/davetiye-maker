@@ -2,7 +2,7 @@
 id: G214
 baslik: Tasarım 14 Ivory Lace & Pearls — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-E
 oncelik: 2
 bagimli: []
@@ -68,3 +68,4 @@ Tasarım 14'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-E; kısım 3, 3/6: decor_br, accent_1, accent_2 PAKET 5 prompt'larıyla sırayla üretildi ve tam parts/ yollarına kaydedildi (1254×1254, gerçek RGBA alfa). W1 referanslı; decor_br ayrıca decor_tl referanslı sağ-alt eş köşedir. Üç dosyanın oran/alfa kontrolleri GEÇTİ; tek küme/nesne, yazısız, dış gölgesiz ve kesilmemiş oldukları görsel olarak kontrol edildi. Durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-E; kısım 3, 6/6: accent_3 (1254×1254, RGBA), divider (1536×1024, RGBA), web_hero (1536×1024, opak RGB) de tam parts/ yollarına kaydedildi. Paket 5 23/23 GEÇTİ (22 dosya + kabul edilen hiza UYARI), Paket 2 5/5 GEÇTİ; KALDI yok. Divider iki, hero dört denemeden seçildi; hero'nun 1200×630 merkez kırpımı yalnız bellekte kontrol edildi, zarf ve kopça tam görünür ve altında yaklaşık %10 boşluk var. Mevcut dosyalar korundu; ek rapor/önizleme/deneme dosyası repoya yazılmadı. Durum alindi; Sonuç kaydı sıradaki adım.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-E (kısım 3); üç kısmın özeti, yeniden üretimler ve belirsizlikler Sonuç'a işlendi. Paket 5 23/23, Paket 2 5/5 geçti; hiza UYARI kabul edildi. Bu görevde duruldu.
+- 2026-10-14 entegratör onayladı

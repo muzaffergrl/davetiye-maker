@@ -61,3 +61,5 @@ Görev `alindi`, sahibi `gpt-gorsel-F` kalır. Kalan: W2.12–W2.18 (`decor_br`,
 - 2026-10-14 ara kayıt: gpt-gorsel-F; kısım 2, 4/8 (closure, envelope_open, card_small, invitation_card); kullanıcı talebindeki 1024×1536 closure tuvaliyle dört parça kit_check işlevinden geçti, zarf hizası GEÇTİ.
 - 2026-10-14 ara kayıt: gpt-gorsel-F; kısım 2, 8/8 (eklenen son dört parça: info_card, frame_portrait, frame_landscape, decor_tl); kullanıcı talebindeki closure tuvaliyle sekiz dosya denetimi GEÇTİ, standart zarf hiza kontrolü GEÇTİ.
 - 2026-10-14 gpt-gorsel-F: kısım 2 bitti; kalan: W2'nin diğer parçaları + PAKET 2
+- 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-M) 5/5 geçti. Kısım 2 geçti ama closure.png 1024×1536 tuvalde küçük kabuk (talimat hatası); Kaydet 1024×1024, ~%70 → kısım 3'te yeniden.
+- 2026-10-14 devam: gpt-gorsel-F (kısım 3)
