@@ -582,22 +582,26 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   const css = cssText().replace(/\/\*[\s\S]*?\*\//g, '');
   assert.doesNotMatch(css, /conic-gradient|repeating-(linear|radial)-gradient/, 'no gradient-drawn pattern');
   // gradients only as borderless light / fade masks / the interface pill (docs/11 §5.7): sunlight on the wall, the wall's
-  // fade below the first screen, the sky wash fading in at the foot, the nav's soft ground, the corner fade, the button
+  // fade below the first screen, the sky wash fading in at the foot, the nav's soft ground, the button
   for (const [, sel, body] of rules) {
     if (!/gradient\(/.test(body)) continue;
-    if (/corner-br/.test(sel)) {
-      assert.match(body, /^\s*-webkit-mask: linear-gradient\(to top, transparent, #000 \d+%\); mask: linear-gradient\(to top, transparent, #000 \d+%\);\s*$/, `${sel.trim()}: only a fade mask`);
-      continue;
-    }
     assert.match(sel, /body::before|\.hero-bg picture|\.wash-end::before|^\s*\.site-nav\s*$|^\s*\.btn\s*$/, sel.trim());
   }
-  // the nav is no opaque slab with a hard edge (G401 review): no border-top / backdrop slab on it
+  // the corner clusters are whole GPT parts: no mask / clip on them (G405 review: a fade mask hid the cut, not fixed it)
+  for (const [, sel, body] of rules) if (/corner|page-corner/.test(sel)) assert.doesNotMatch(body, /mask|clip-path/, sel.trim());
+  // the nav: no hard top edge (G401 review: it fades in over 12 px) and an opaque label row nothing ghosts through
+  // (G405 review: .74–.9 let the content scroll visibly behind the labels)
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
-  assert.doesNotMatch(nav, /border-top|backdrop-filter/, '.site-nav: no hard band');
-  // the only lines are 1 px interface dividers (nav underline, dress code, the RSVP card's two hairlines, FAQ rules)
+  assert.doesNotMatch(nav, /border-top/, '.site-nav: no hard band');
+  assert.match(nav, /mask: linear-gradient\(transparent, #000 \d+px\)/, 'the top edge fades');
+  const alphas = [...nav.matchAll(/rgba\(246, 241, 233, (\.\d+)\) \d+px, rgba\(246, 241, 233, (\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+  assert.ok(alphas.length === 2 && alphas.every((a) => a >= 0.96), `label row ≥ .96 (${alphas})`);
+  assert.match(nav, /backdrop-filter: blur\(\d+px\)/);
+  // the only lines are 1 px interface dividers (the tile-flower hairline of nav and dress code, the RSVP card's two
+  // hairlines, FAQ rules)
   for (const [, sel, body] of rules) {
     const h = /height: 1px/.test(body);
-    if (h) assert.match(sel, /\.dress::before|\.hairs span/, sel.trim());
+    if (h) assert.match(sel, /\.orn::before|\.hairs span/, sel.trim());
   }
 });
 
@@ -641,11 +645,26 @@ test('envelope (kapak): layers from the build, the lemon tie on the scalloped ti
   assert.ok(E.rise[0] > E.lift[0] && E.sway[0] >= E.rise[0] - 100 && E.sway[0] <= E.rise[0] + 300, 'the branch sways in as the card rises');
   assert.ok(E.go >= 3200 && E.go <= 5000, `tap → home ${E.go} ms (docs/11 §6)`);
   assert.match(js, /A\(el\.closure, \[/, 'the tie moves on its own');
-  assert.match(js, /translate\(190%, 24%\) rotate\(300deg\)/, 'it rolls away to the side (turning about the lemon)');
+  // G405 review: slip (≤ 350 ms) → drop onto the bottom edge → roll right ≤ 150° (angle = distance / lemon radius) → off the
+  // screen's right edge; no fade on the envelope
+  const tie = /A\(el\.closure, \[([\s\S]*?)\], E\.closure/.exec(js)![1];
+  assert.match(tie, /T\(SW \* \.004, dy \* \.2, 5, \{ offset: \.25/, 'slips loose by 350 ms');
+  const roll = [...tie.matchAll(/T\(SW \* \.02( \+ d1)?, dy, (\d+), \{ offset: (\.\d+)/g)];
+  assert.equal(roll.length, 2);
+  assert.ok(Number(roll[1][2]) - Number(roll[0][2]) <= 150, 'rolls ≤ 150° on the envelope');
+  assert.match(js, /d1 = r \* 2\.44/, '140° = 2.44 rad × the lemon radius');
+  assert.match(tie, /T\(out, dy, \d+\)\s*$/, 'ends off the screen');
+  assert.match(js, /out = innerWidth - cr\.left \+ cr\.height \* \.6/, 'past the right edge, leaves included');
+  assert.doesNotMatch(tie, /opacity/, 'never fades on the envelope');
+  assert.ok(E.lift[0] >= 650, `the flap lifts after the tie has dropped clear (${E.lift[0]} ms)`);
+  // the card waits low in the pocket: the tile header and ≤ 10 % of the photo above the pocket edge (faces never cut)
+  assert.ok(st.card_path.photo_above_pocket <= 0.1);
+  assert.ok(css.includes(`.env .card { position: absolute; left: ${st.parts.card[0]}%; top: ${st.parts.card[1]}%;`), 'card top from the manifest');
   assert.match(js, /A\(el\.cflap, \[/, 'the flap lifts on its own');
   assert.match(js, /A\(el\.branch, \[/, 'the top-corner lemon branch sways in');
-  // "… and a blossom drifts down": accent_2 (the blossom) × 1, drifting, beside the card, gone before go
-  assert.match(js, /open:\s+\[\{ file: 'img\/accent_2-200\.webp', count: 1, path: 'drift'[^\n]*avoid: '\.env \.card'/);
+  // "… and a blossom drifts down": accent_2 (the blossom) × 1, drifting, beside the card, gone before go; 46–56 px, down
+  // the cobalt tile liner between the card and the envelope's edge (white on white plaster was invisible, G405 review)
+  assert.match(js, /open:\s+\[\{ file: 'img\/accent_2-200\.webp', count: 1, path: 'drift', origin: 'liner'[^\n]*size: \[(4[6-9]|5\d), (4[6-9]|5[0-6])\][^\n]*avoid: '\.env \.card'/);
   const dur = /open: +\[\{[^\n]*dur: \[(\d+), (\d+)\]/.exec(js)!;
   assert.ok(E.accents + Number(dur[1]) <= E.go, 'the blossom has settled before go');
   assert.match(js, new RegExp(`out: 'translateY\\(${st.card_path.out_translate_pct}%\\)'`), 'card path from the manifest');
@@ -708,9 +727,73 @@ test('story: three tile panels in a staggered column (left, right, left), straig
   assert.match(rule('.t-2'), /margin-left: auto/, 'the middle panel on the right');
   assert.doesNotMatch(css.replace(/\/\*[\s\S]*?\*\//g, ''), /\.tile[^{]*\{[^}]*(rotate:|rotate\()/, 'panels stand perfectly straight');
   assert.doesNotMatch(css, /scroll-snap|overflow-x: auto/, 'a vertical column: no sideways scroll, so no swipe hint needed');
-  // the little lemons tucked on the frames and the loose wall pieces are GPT accents; never over a photo window
-  assert.equal($('.tiles .sprig-tuck').length, 3);
-  assert.match(rule('.sprig-tuck'), /bottom: -4%; left: -6%/);
+  // W1.3 corner bouquets: the GPT divider (lemon, blossoms, leaves) across the outer lower corner + a blossom, off the
+  // photo window (G405 review: a lone accent lemon read as a sticker); two loose pieces beside each panel
+  assert.equal($('.tiles .frame img.sprig-tuck[src$="divider-300.webp"]').length, 3);
+  assert.equal($('.tiles .frame img.tuck-bloom').length, 3);
+  assert.match(rule('.sprig-tuck'), /width: 5\d%;[^;]*; left: -\d+%; bottom: \d+%; rotate: \d+deg;/);
+  // the bouquets run off the screen edge: .tiles (full width) clips sideways, so only the viewport edge cuts them
+  assert.match(rule('.tiles'), /overflow-x: clip/);
+  for (const t of [1, 2, 3]) assert.equal($(`.tiles .t-${t} > .wall-piece`).length, 2, `panel ${t}: two pieces on the wall`);
+  // a panel crossing the nav line starts below the first screen (never half under the nav)
+  assert.equal($('.tiles .tile[data-fold]').length, 3);
+});
+
+test('inner pages (story, details, rsvp): the sunlit wall of W1.3–W1.5 behind the first screen — wall crop, both clusters whole, loose pieces', () => {
+  for (const page of ['story', 'details', 'rsvp'] as PageName[]) {
+    const { $ } = render(page);
+    const bg = $('.page-bg');
+    assert.equal(bg.length, 1, page);
+    assert.equal(bg.attr('aria-hidden'), 'true');
+    assert.equal(bg.find('img.scene-img').attr('src'), `/themes/${ID}/img/wall-${MANIFEST.wall.files[0].w}.webp`);
+    assert.equal(bg.find('source').attr('srcset'), `/themes/${ID}/img/wall_wide-${MANIFEST.wall_wide.files[0].w}.webp`);
+    for (const c of ['corner-tl', 'corner-br']) {
+      const img = bg.find(`img.${c}`);
+      assert.equal(img.length, 1, `${page}: ${c}`);
+      assert.equal(img.attr('loading'), undefined, `${page}: ${c} in the first view`);
+      assert.match(img.attr('srcset') ?? '', /-720\.webp 720w/, `${page}: ${c} 720 px variant`);
+    }
+    assert.ok(bg.find('img.float').length >= 2, `${page}: loose pieces on the wall`);
+    assert.equal($('.page-corner.corner-tl').length, 0, `${page}: the old lone corner is gone`);
+  }
+  const css = cssText();
+  assert.match(rule('.page-bg'), /height: 100svh/);
+  // the bottom-right cluster ends above the nav on the first screen
+  assert.match(rule('.page-bg .corner-br'), /bottom: calc\(var\(--nav-h\) \+ \d+px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(css, /\.hero-bg picture, \.page-bg picture \{ -webkit-mask-image: linear-gradient\(#000 \d+%, transparent\)/, 'the wall fades out, no edge');
+  // the hero's cluster sits whole inside the hero (no negative bottom, no mask); site.js lifts it above the first screen's nav
+  assert.match(rule('.hero .scene-bg .corner-br'), /bottom: 22px/);
+  const js = jsText();
+  assert.match(js, /c\.style\.bottom = `\$\{Math\.max\(22, top\(bg\) \+ bg\.offsetHeight - sv\(\) \+ navH\(\) \+ 2\)\}px`/);
+  // decor never under wall text: the 16 × 16 leaf maps are the WebP alpha of decor_tl / decor_br
+  const map = /const MAP = \{ tl: '([0-9a-f]{64})', br: '([0-9a-f]{64})' \}/.exec(js);
+  assert.ok(map, 'leaf maps');
+  // the details calendar pair folds below the first screen when it would cross the nav line
+  assert.equal(render('details').$('.cal[data-fold]').length, 1);
+});
+
+test('nav and dress code: the GPT tile flower (frame_portrait crop) on a hairline (W1.2, W1.4)', () => {
+  assert.equal(MANIFEST.tile_flower.source, 'frame_portrait');
+  assert.ok(MANIFEST.tile_flower.files.length === 1 && MANIFEST.tile_flower.files[0].bytes < 10_000);
+  for (const page of ['home', 'story', 'details', 'rsvp'] as PageName[]) {
+    const { $ } = render(page);
+    assert.equal($('nav.site-nav > .orn[aria-hidden="true"] > img[src$="tile_flower-73.webp"]').length, 1, page);
+  }
+  const d = render('details').$;
+  assert.equal(d('.dress > .orn > img[src$="tile_flower-73.webp"]').length, 1);
+  assert.equal(d('.dress em[data-field="dress_code"]').text(), 'Summer formal');
+});
+
+test('home: The Day teaser lists the first four schedule rows (docs/11 §3.2: label · time)', () => {
+  const c = demo();
+  c.schedule = Array.from({ length: 6 }, (_, i) => ({ label: `Event ${i + 1}`, time: `${12 + i}:00`, location: null })) as ContentRecord['schedule'];
+  const { $, warnings } = render('home', c);
+  assert.deepEqual(warnings, []);
+  const rows = $('.pl-day .pl-sched .pl-row');
+  assert.equal(rows.length, 6, 'every row in the source; CSS shows the first four');
+  assert.equal(rows.first().text(), 'Event 1 · 12:00 PM');
+  assert.match(cssText(), /\.pl-row:nth-child\(n\+5\) \{ display: none; \}/);
+  assert.deepEqual(render('home').$('.pl-day .pl-row').map((_, el) => render('home').$(el).text()).get(), ['Ceremony · 4:00 PM', 'Cocktail Hour · 5:00 PM', 'Reception · 6:30 PM']);
 });
 
 test('home: the comp hero, a stacked Didone date on the invitation card, two tile panels in the wall, the reply-by line once', () => {
@@ -742,7 +825,7 @@ test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 36 p
   assert.deepEqual(MANIFEST.theme_check.first_screen, { landscape: true, names_min_px: Number(floor![1]) });
   assert.match(js, /for \(const \[cls, navFloor\] of \[\[\[\], 0\.76\], \[\['is-tight'\], 0\], \[\['is-tight', 'is-long'\], 0\], \[\[\], 1\]\]\)/);
   assert.match(js, /p\.style\.cssText = 'position:fixed;height:100svh'/);
-  assert.match(js, /const v = sv\(\), limit = v - nav\.offsetHeight - 8, below = v \+ 12/);
+  assert.match(js, /const v = sv\(\), limit = v - navH\(\) - 8, below = v \+ 12/);
   assert.match(css, /\.hero \.scene-bg \{ position: absolute; z-index: 0; bottom: var\(--fold, 0px\); \}/);
   const land = /@media \(min-aspect-ratio: 1\/1\) and \(max-height: 620px\) \{([\s\S]*?)\n\}/.exec(css);
   assert.ok(land, 'short-landscape block');
@@ -759,9 +842,24 @@ test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 36 p
   // card copy: date · town on one line, else two, else lines drop; refitted when the card resizes
   assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c s'\]\]\)/);
   assert.match(js, /new ResizeObserver\(fitCopy\)/);
-  // motion: no empty wait after the card lands; the arrival blossoms keep out of the hero photo
+  // motion: no empty wait after the card lands; the arrival / closing blossoms fly inside their section, behind its text,
+  // in lanes beside the photo and the text column (G405 review: blossoms crossed the names, the closing line, the form)
   assert.ok(Number(/arriveDelay: (\d+)/.exec(js)![1]) <= 400);
-  assert.match(js, /arrive: +\[\{ file: 'img\/accent_2-200\.webp'[^\n]*avoid: '\.hero \[data-slot\]'/);
+  assert.match(js, /arrive: +\[\{ file: 'img\/accent_2-200\.webp'[^\n]*avoid: '\.hero-inner > \*', host: '\.hero'/);
+  for (const m of js.matchAll(/\{ file: 'img\/accent_\d-200\.webp'[^}]*\}/g)) {
+    if (/origin: 'liner'/.test(m[0])) continue;
+    assert.match(m[0], /avoid: '[^']+', host: '\.(hero|closing)'/, m[0]);
+  }
+  assert.match(cssText(), /\.accent-layer\.in-host \{ position: absolute; z-index: 0; \}/);
+  // docs/11 §8: last step of a scene ≤ 3000 ms; one entrance 600–1800 ms
+  for (const [, steps] of js.matchAll(/\n    '[a-z-]+': +(\[\[[^\n]*\]\])/g)) {
+    const t = JSON.parse(steps.replace(/'/g, '"')) as [string, number][];
+    assert.ok(t[0][1] <= 150 && t[t.length - 1][1] <= 3000, steps);
+  }
+  for (const [, d] of cssText().matchAll(/--dur: (\d+)ms/g)) assert.ok(Number(d) >= 600 && Number(d) <= 1800, `--dur ${d}`);
+  // text floors: the ampersand never below 11 px; no lone separator when the town is empty
+  assert.match(rule('.amp'), /font-size: max\(11px, \.5em\)/);
+  assert.match(cssText(), /\.card-copy \.kicker:has\(\.cc-city\[data-empty\]\) \.sep/);
   // docs/11 §6: site.js ≤ 35 KB, site.css ≤ 45 KB
   assert.ok(statSync(path.join(DIR, 'site.js')).size <= 35 * 1024, `site.js ${statSync(path.join(DIR, 'site.js')).size} B`);
   assert.ok(statSync(path.join(DIR, 'site.css')).size <= 45 * 1024, `site.css ${statSync(path.join(DIR, 'site.css')).size} B`);
@@ -779,11 +877,21 @@ test('design range (docs/11 §12 level 1) renders every field', () => {
 
 // ---------------------------------------------------------------- 13: site.js contract
 
+test('smooth scrolling only for the RSVP page\'s #reply jump, never with reduced motion (a scripted scroll is never eased)', () => {
+  const css = cssText().replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.equal((css.match(/scroll-behavior: smooth/g) || []).length, 1);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{ html:has\(#reply\) \{ scroll-behavior: smooth; \} \}/);
+  const { $ } = render('rsvp');
+  assert.equal($('#reply').length, 1, 'the RSVP page has the #reply target');
+  assert.equal($('a[href="#reply"]').length, 1);
+  for (const page of ['index', 'home', 'story', 'details'] as const) assert.equal(render(page).$('#reply').length, 0, `${page}: no #reply, no smooth scroll`);
+});
+
 test('13 site.js: reads #site-data, navigates with the page map, per-site session keys = <head> scripts, DEV_CONTENT = demo', () => {
   const js = jsText();
   assert.match(js, /getElementById\('site-data'\)/);
   assert.match(js, /location\.href = PAGES\.home/);
-  assert.match(js, /l\.href = PAGES\.home/, 'prefetch uses the page map');
+  assert.match(js, /rel: 'prefetch', href: PAGES\.home/, 'prefetch uses the page map');
   assert.doesNotMatch(js, /location\.href\s*=\s*['"]/, 'no literal navigation target');
   assert.doesNotMatch(js, /innerHTML|eval\(|new Function/);
   assert.match(js, /a\[data-url-missing\]/);

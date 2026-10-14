@@ -29,7 +29,17 @@
 
 <main class="site-main">
   <section class="rsvp-top" data-scene="rsvp-card" aria-label="RSVP">
-    <img class="corner corner-tl page-corner" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(50vw, 360px)" alt="">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/wall_wide-640.webp">
+        <img class="scene-img" src="img/wall-540.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(30vw, 48vh, 400px), min(50vw, 360px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 52vh, 460px), min(54vw, 30svh, 340px)" alt="">
+      <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+      <img class="float f-bloom" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-bloom2" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+    </div>
     <div class="wrap">
       <div class="paper info rsvp-card" data-step="card" data-a="set">
         <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-870.webp 870w" sizes="min(calc(100vw - 40px), 420px)" alt="">
@@ -115,7 +125,7 @@
   </section>
 
   <section class="section closing wash-end" data-scene="rsvp-closing" data-accents="closing" aria-label="Thank you">
-    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
     <h2 class="script title" data-step="title" data-a="write">Thank you</h2>
     <p class="line" data-step="line" data-a="fade">for being part of our story.</p>
     <p class="kicker" data-step="meta" data-a="fade"><span data-field="name_display"></span> · <span class="nowrap" data-field="date"></span></p>
@@ -124,6 +134,7 @@
 </main>
 
 <nav class="site-nav" aria-label="Wedding pages">
+  <span class="orn" aria-hidden="true"><img src="img/tile_flower-73.webp" alt=""></span>
   <ul>
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
