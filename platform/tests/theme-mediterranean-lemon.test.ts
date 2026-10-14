@@ -6,6 +6,7 @@
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import type { ContentRecord } from '../lib/content/types.ts';
@@ -797,25 +798,143 @@ test('inner pages: nothing half under the nav on the first screen — fold units
   const s = render('story').$;
   assert.equal(s('.page-head > .kicker[data-fold]').length, 1);
   assert.equal(s('.page-head > .lede[data-fold]').length, 1);
+  // the story's next section folds too: on desktop the row now ends just above the nav, "The Day →" would sit under it
+  assert.equal(s('section.next-sec[data-fold]').length, 1);
   const js = jsText();
   // a unit (+ its .card-tie) crossing the nav line starts 6 px below the first screen; the first crossing one may lift the
   // whole first section instead (the element after .page-bg, ≤ 40 px and ≤ 34 % of the top padding)
-  assert.match(js, /const f = \$\('\.page-bg \+ \*'\), u = \[\.\.\.\$\$\('\[data-fold\]'\)\]/);
+  assert.match(js, /const f = \$\('\.page-bg \+ \*'\), a = \[\.\.\.\$\$\('\[data-fold\], \.tiles'\)\]/);
   assert.match(js, /Math\.min\(40, parseFloat\(getComputedStyle\(f\.parentElement\)\.paddingTop\) \* \.34\)/);
   assert.match(js, /querySelectorAll\('\.card-tie'\)\]\.map\(bottom\)\) - v \+ navH\(\) \+ 8/);
   assert.match(js, /d <= lift \? \[f, -d\] : \[el, v \+ 6 - t\]/);
   const css = cssText().replace(/\/\*[\s\S]*?\*\//g, '');
   assert.doesNotMatch(css, /\.page-rsvp \.site-main \{ display: grid/, 'no side-by-side form: it would always run under the nav');
-  assert.match(css, /\.card-tie \{ position: absolute; z-index: 2; left: 50%; top: calc\(100% \+ 10\.72cqw\);/);
-  // desktop story (QA: half the first screen was an empty wall): three panels in one staggered row, sized to end above the
-  // nav (site.js tiles shrinks them, ≥ 190 px)
+  // desktop story (QA: half the first screen was an empty wall; final QA: at 650–760 px all three panels, or two of them,
+  // were pushed below the first screen and a lone panel stood under the title): the three panels are ONE fold unit — in the
+  // 3-column row site.js folds .tiles as a whole, never a panel alone; the panels shrink (≥ 140 px) until the row ends above
+  // the nav; the head shrinks with the height (its padding beats the ≥ 768 px 150 px rule) and the panels do not stretch to
+  // the row (a stretched panel's box ran to the row's end and folded on its own)
   const desk = /@media \(min-width: 1024px\) and \(min-aspect-ratio: 5\/4\) and \(min-height: 621px\) \{([\s\S]*?)\n\}/.exec(css);
   assert.ok(desk, 'desktop story block');
   assert.match(desk![1], /grid-template-columns: repeat\(3, var\(--tw\)\)/);
   assert.match(desk![1], /\.tile\.t-2 \{ margin-top: calc\(var\(--tw\) \* \.\d+\); \}/, 'the middle panel lower');
-  assert.match(js, /w > 190 && Math\.max\(\.\.\.\[\.\.\.g\.children\]\.map\(bottom\)\) > sv\(\) - navH\(\) - 8/);
+  assert.match(desk![1], /\.tile\.tile \{ grid-row: 1; margin: 0; align-self: start; \}/);
+  assert.match(desk![1], /\.page-head\.page-head \{ padding-top: clamp\(\d+px, [\d.]+svh - \d+px, \d+px\); \}/);
+  assert.match(desk![1], /\.page-title \{ font-size: clamp\(\d+px, [\d.]+svh - \d+px, \d+px\); \}/);
+  const later = css.slice(css.indexOf(desk![0]) + desk![0].length);
+  assert.match(later, /\.page-head \{ padding-top: 150px; \}/, 'the later ≥ 768 px rule the doubled selector has to beat');
+  assert.match(js, /w > 140 && bottom\(g\) > sv\(\) - navH\(\) - 8;\) g\.style\.setProperty\('--tw'/);
+  assert.match(js, /const g = tiles\(\), u = a\.filter\(\(e\) => e\.matches\(g \? ':not\(\.tile\)' : '\[data-fold\]'\)\)/, 'the row folds whole');
   // two columns (720–1023 px): the middle panel is offset by a margin, so a fold push moves it fully (align-self: center halved it)
   assert.match(css, /\.t-2 \{ grid-column: 2; grid-row: 1 \/ span 2; align-self: start; margin: calc\(var\(--tw\) \* \.\d+\) 0 0; \}/);
+  // RSVP (final QA: with two-word names the signature folded and left up to 349 px of blank card): before it folds, the
+  // signature unit shrinks — --sg from 1 down to .72: "With love,", the names (tighter lines), the tie and the room it
+  // rests in; it folds (at full size) only when that is not enough
+  assert.match(js, /for \(let k = 1; d > lift && k > \.73 && el\.matches\('\.sig-unit'\); d = D\(\)\) el\.style\.setProperty\('--sg', k -= \.04\);/);
+  assert.match(js, /if \(d > lift\) el\.style\.removeProperty\('--sg'\);/);
+  assert.match(rule('.sig-unit'), /--sg: 1; position: relative; padding-bottom: calc\(22cqw \* var\(--sg\)\)/);
+  assert.match(rule('.rsvp-text .sign'), /font-size: calc\(11\.2cqw \* var\(--sg\)\); line-height: calc\(\.72 \+ \.4 \* var\(--sg\)\)/);
+  assert.match(rule('.rsvp-text .love'), /margin-top: calc\(5\.4cqw \* var\(--sg\)\); font-size: calc\(10\.6cqw \* var\(--sg\)\)/);
+  // the tie keeps its place on the card's edge (bot-h + 22cqw · sg below the names), 15cqw · sg past it at full size
+  assert.match(css, /\.card-tie \{ position: absolute; z-index: 2; left: 50%; top: calc\(100% - 11\.28cqw \* var\(--sg\)\); width: calc\(38cqw \* var\(--sg\)\);/);
+  assert.match(rule('.rsvp-text'), /padding: calc\(var\(--top-h\) \+ 2cqw\) 11% var\(--bot-h\)/);
+});
+
+// ---------------------------------------------------------------- the two first-screen rules, measured in a browser
+// Playwright from the global install (docs/11 §13.3; never `playwright install`): the pages are rendered here with the
+// engine and served from the theme folder, so the layout code (site.css + site.js folds/tiles) runs for real. Skipped when
+// Playwright or its browsers are not installed. Google Fonts load through the proxy when there is one (else the fallback
+// fonts: the rules must hold either way, site.js measures).
+async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number) => Promise<any>) => Promise<void>) {
+  process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
+  process.env.PLAYWRIGHT_DISABLE_FORCED_CHROMIUM_PROXIED_LOOPBACK ||= '1';
+  const req = createRequire(import.meta.url);
+  let chromium: any = null;
+  for (const id of ['playwright', '/opt/node22/lib/node_modules/playwright']) {
+    try { chromium = req(id).chromium; break; } catch { /* next */ }
+  }
+  if (!chromium) return t.skip('playwright not installed');
+  const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
+  let browser: any;
+  try {
+    browser = await chromium.launch(proxy ? { proxy: { server: proxy, bypass: 'theme.test' } } : {});
+  } catch (e) {
+    return t.skip(`no browser: ${String(e).slice(0, 80)}`);
+  }
+  const types: Record<string, string> = { '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
+  try {
+    await fn(async (page, content, w, h) => {
+      const html = render(page, content).html;
+      const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
+      const p = await ctx.newPage();
+      await p.route('**/*', (route: any) => {
+        const u = new URL(route.request().url());
+        if (u.hostname === 'theme.test') {
+          const rel = u.pathname.startsWith(`/themes/${ID}/`) ? decodeURIComponent(u.pathname.slice(ID.length + 9)) : null;
+          if (rel && existsSync(path.join(DIR, rel))) return route.fulfill({ body: readFileSync(path.join(DIR, rel)), contentType: types[path.extname(rel)] ?? 'application/octet-stream' });
+          if (u.pathname === `/${SLUG}/${page}`) return route.fulfill({ body: html, contentType: 'text/html' });
+          return route.fulfill({ status: u.pathname === '/rsvp/form.js' ? 200 : 404, body: '', contentType: 'text/javascript' });
+        }
+        return /^fonts\.(googleapis|gstatic)\.com$/.test(u.hostname) ? route.continue() : route.abort();
+      });
+      await p.goto(`http://theme.test/${SLUG}/${page}`, { waitUntil: 'load' });
+      await p.evaluate(() => Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))]));
+      await p.waitForTimeout(400); // site.js runs again on fonts.ready and load
+      const m = await p.evaluate(MEASURE);
+      await ctx.close();
+      return m;
+    });
+  } finally {
+    await browser.close();
+  }
+}
+// in the page: the nav line, the story panels (frame + caption) and the RSVP signature (names + tie), viewport px
+const MEASURE = `(() => {
+  const r = (e) => e.getBoundingClientRect(), nav = r(document.querySelector('.site-nav')).top;
+  const tiles = [...document.querySelectorAll('.tiles .tile')].map((t) => ({ top: r(t.querySelector('.frame')).top, bottom: Math.max(r(t.querySelector('.frame')).bottom, r(t.querySelector('figcaption')).bottom) }));
+  const sig = document.querySelector('.sig-unit'), units = [...document.querySelectorAll('.rsvp-text > [data-fold]:not(.sig-unit)')].map(r);
+  const s = sig && { top: r(sig).top, ink: Math.max(r(sig.querySelector('.sign')).bottom, r(sig.querySelector('.card-tie')).bottom), card: r(document.querySelector('.rsvp-card')).bottom,
+    above: Math.max(...units.filter((u) => u.top < innerHeight).map((u) => u.bottom)) };
+  return { vh: innerHeight, nav, tiles, sig: s, sw: document.documentElement.scrollWidth };
+})()`;
+
+test('browser: the story row is one unit on desktop 650–800 px (never a lone panel) and ends above the nav; the RSVP signature + tie on the first screen at 390×844 (final QA)', async (t) => {
+  await withBrowser(t, async (open) => {
+    // story (final QA: at 1366×657, 1280×650, 1280×720 all three panels were pushed below the first screen — 247–308 px of
+    // empty wall; at 1024×768, 1366×768, 1280×760, 1536×753 the left panel stood alone): demo, design range, stress
+    for (const [w, h] of [[1280, 650], [1366, 657], [1280, 720], [1536, 753], [1280, 760], [1024, 768], [1366, 768], [1280, 800]]) {
+      for (const [name, rec] of [['demo', demo()], ['range', rangeRecord(demo())], ['stress', stressRecord(demo())]] as const) {
+        const m = await open('story', rec, w, h);
+        const at = `story ${w}×${h} ${name}`;
+        const on = m.tiles.filter((x: { top: number }) => x.top < m.vh).length;
+        assert.equal(m.tiles.length, 3, at);
+        assert.ok(on === 0 || on === 3, `${at}: ${on} of 3 panels on the first screen (never one or two alone)`);
+        assert.equal(on, 3, `${at}: the three panels are on the first screen`);
+        const end = Math.max(...m.tiles.map((x: { bottom: number }) => x.bottom));
+        assert.ok(end <= m.nav, `${at}: the row ends above the nav (${Math.round(end)} > ${Math.round(m.nav)})`);
+        assert.ok(m.nav - end <= 0.12 * m.vh, `${at}: ${Math.round(m.nav - end)} px of empty wall under the row (≤ 12 %)`);
+        assert.ok(m.sw <= w, `${at}: no sideways scroll`);
+      }
+    }
+    // RSVP 390×844 (the reference phone) and 430×932, 1280×800 with the design-range names ("Alexandrina Rose & Maximilian
+    // James", final QA: unit pushed 349 px, 267 px of blank card): "With love," + the names + the tie end above the nav
+    for (const [w, h] of [[390, 844], [430, 932], [1280, 800]]) {
+      for (const [name, rec] of [['demo', demo()], ['range', rangeRecord(demo())]] as const) {
+        const m = await open('rsvp', rec, w, h);
+        const at = `rsvp ${w}×${h} ${name}`;
+        assert.ok(m.sig.top < m.vh && m.sig.ink <= m.nav, `${at}: the signature unit on the first screen (top ${Math.round(m.sig.top)}, names + tie end ${Math.round(m.sig.ink)}, nav ${Math.round(m.nav)})`);
+        assert.ok(m.sw <= w, `${at}: no sideways scroll`);
+      }
+    }
+    // when it cannot fit (360×640: ~190 px needed, ~90 px + a ≤ 37 px lift left) it folds whole; the blank card above the
+    // nav is then the space under the wait line, ≤ 110 px (was 97 / 107 px at 360×640 / 375×667 before, unchanged)
+    for (const [w, h] of [[360, 640], [375, 667]]) {
+      const m = await open('rsvp', rangeRecord(demo()), w, h);
+      const at = `rsvp ${w}×${h} range`;
+      if (m.sig.top >= m.vh) assert.ok(Math.min(m.sig.card, m.nav) - m.sig.above <= 110, `${at}: ${Math.round(Math.min(m.sig.card, m.nav) - m.sig.above)} px of blank card`);
+      else assert.ok(m.sig.ink <= m.nav, `${at}: on the first screen, above the nav`);
+    }
+  });
 });
 
 test('nav and dress code: the GPT tile flower (frame_portrait crop) on a hairline (W1.2, W1.4)', () => {
