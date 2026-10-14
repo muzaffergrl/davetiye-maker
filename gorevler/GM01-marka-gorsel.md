@@ -2,8 +2,8 @@
 id: GM01
 baslik: BKE Studio marka kimliği — 3 yön panosu + seçilen yönün logo/sembol/mühür/desen/ikon/sahne dosyaları
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-marka
 oncelik: 1
 bagimli: []
 yazar: [brand/assets/gpt/boards/, brand/assets/gpt/final/]
@@ -36,3 +36,4 @@ marka kimliği istedi. Tasarımı GPT yapar (K21). Claude sonra vektöre çeviri
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): K26 marka kimliği
+- 2026-10-14 alindi: gpt-marka
