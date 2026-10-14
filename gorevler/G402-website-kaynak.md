@@ -166,7 +166,7 @@ divider var) bu turda ele alınmadı — tasarım kararı, kullanıcı/entegrat�
 metin/form denetimi eklemek entegratör işi (G402 yazma alanı dışında; ölçüm betikleri bu oturumun geçici klasöründe).
 
 **Komutlar (QA düzeltmelerinden ve origin/main birleştirmelerinden — G075, G080 — sonra, Node 22):** `npm ci` · `npm test`
-**531/531** (tema testi 31: iç sayfa işaretleri, `foldAll`, dal oranları, RSVP kart sınırı, yatay baş, kısa form, parçacık
+**532/532** (tema testi 31: iç sayfa işaretleri, `foldAll`, dal oranları, RSVP kart sınırı, yatay baş, kısa form, parçacık
 `host`ları; birleştirme öncesi 502/502) · `npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme
 dusty-blue-champagne --stress` **116 geçti / 0 hata / 1 uyarı** (uyarı: G075 teşekkür modu bu temada yok — G075'in kapsamı 01 ve
 03; birleştirme öncesi 116/0/0; G080 birleştirmesinden sonraki ilk koşuda yük altında 2 akış — 360×640 nav VT karesi, önizlemede
