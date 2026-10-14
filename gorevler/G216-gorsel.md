@@ -50,3 +50,4 @@ Kısım 1 — gpt-gorsel-H, 2026-10-14 (8/8; görevin tamamı bitmedi, durum `al
 - 2026-10-14 gpt-gorsel-H: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi. envelope_closed 1,56:1 (prompt 5:4) kabul; closure ve envelope_open bu dosyaya hizalanacak. Kısım 2 verildi.
 - 2026-10-14 devam: gpt-gorsel-H (kısım 2)
+- 2026-10-14 ara kayıt (kısım 2, 4/8): gpt-gorsel-H; closure, envelope_open, card_small, invitation_card Kaydet yollarında; dört dosya oran/alfa/pencere kontrolünden geçti. Zarf hizası GEÇTİ: sol +0.10%, sağ -0.20%, alt +1.43% (22 px); kapanış uçları -0.39% / -0.10%. Küçük kartta üç denemeden en temiz ilk çıktı seçildi; yeşilde hafif ton/doku değişimi kalıyor.
