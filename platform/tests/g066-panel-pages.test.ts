@@ -30,7 +30,7 @@ test('every section is on exactly one page, in the K29 order', () => {
   const seen = PAGE_IDS.flatMap((p) => PAGE_SECTIONS[p]);
   assert.deepEqual([...seen].sort(), [...SECTION_IDS].sort());
   assert.equal(new Set(seen).size, seen.length);
-  assert.deepEqual(PAGE_SECTIONS.day, ['date', 'venue', 'schedule']);
+  assert.deepEqual(PAGE_SECTIONS.day, ['date', 'venue', 'schedule', 'thankyou'], 'G075: After the wedding at the end of Day & place');
   assert.deepEqual(PAGE_SECTIONS.details, ['details', 'faq']);
   for (const s of SECTION_IDS) assert.ok(PAGE_SECTIONS[pageOf(s)].includes(s), s);
 });

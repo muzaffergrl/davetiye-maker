@@ -18,6 +18,9 @@ export const CONTENT_LIMITS = {
   questionLabel: 120,
   questionOptions: 8,
   questionOption: 60,
+  // G075: thank-you mode (title in the design's script type on a small card; message ≤ 400 like a story text)
+  thankYouTitle: 60,
+  thankYouMessage: 400,
 } as const;
 
 export type ContentLimit = keyof typeof CONTENT_LIMITS;

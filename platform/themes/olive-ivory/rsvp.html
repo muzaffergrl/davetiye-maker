@@ -5,7 +5,9 @@
      same piece as on the envelope) pressed over the card's bottom edge. The card grows with long names (docs/11 §9
      3-slice). Below: the platform reply form (G042 contract: /rsvp/form.js sends to /api/rsvp/<slug>, exactly one
      [data-rsvp-state] panel shows; nothing is sent in a preview) with the couple's own questions (G051), and a quiet
-     closing. Personal text: none — filled on the server. -->
+     closing. Personal text: none — filled on the server.
+     Thank-you mode (G075): the page stays for old links, honestly closed — the card says "Replies are closed" with the
+     thank-you title and a way home; no form (the platform also refuses replies: 403 closed, reason thank_you). -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -20,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Great+Vibes&amp;display=swap">
 <link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 <script src="site.js" defer></script>
 <script src="/rsvp/form.js" defer></script>
@@ -34,11 +37,14 @@
       <div class="paper info rsvp-card" data-step="card" data-a="rise-lg">
         <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-772.webp 772w" sizes="min(calc(100vw - 32px), 440px)" alt="">
         <div class="paper-text rsvp-text">
-          <h1 class="script card-title" data-step="title" data-a="write">Will You Join Us?</h1>
-          <p class="kicker" data-step="kicker" data-a="fade" data-if="rsvp.deadline">Kindly reply by</p>
-          <p class="deadline" data-step="deadline" data-a="fade" data-if="rsvp.deadline" data-field="rsvp.deadline"></p>
-          <p class="pill" data-step="button" data-a="bloom"><a class="btn" href="#reply">RSVP</a></p>
-          <p class="kicker wait" data-step="wait" data-a="fade">We can't wait to celebrate with you</p>
+          <h1 class="script card-title" data-step="title" data-a="write" data-if="!thank_you_on">Will You Join Us?</h1>
+          <h1 class="script card-title" data-step="title" data-a="write" data-if="thank_you_on">Replies are closed</h1>
+          <p class="kicker" data-step="kicker" data-a="fade" data-if="rsvp.deadline !thank_you_on">Kindly reply by</p>
+          <p class="deadline" data-step="deadline" data-a="fade" data-if="rsvp.deadline !thank_you_on" data-field="rsvp.deadline"></p>
+          <p class="kicker" data-step="kicker" data-a="fade" data-if="thank_you_on" data-field="thank_you_title"></p>
+          <p class="pill" data-step="button" data-a="bloom" data-if="!thank_you_on"><a class="btn" href="#reply">RSVP</a></p>
+          <p class="pill" data-step="button" data-a="bloom" data-if="thank_you_on"><a class="btn" href="home.html">Home</a></p>
+          <p class="kicker wait" data-step="wait" data-a="fade" data-if="!thank_you_on">We can't wait to celebrate with you</p>
           <p class="script love" data-step="love" data-a="write">With love,</p>
           <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
         </div>
@@ -51,7 +57,7 @@
   </section>
 
   <!-- REPLY FORM — platform contract (G042). Field names, data-rsvp-* hooks and method="post" are required; no action. -->
-  <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply">
+  <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply" data-if="!thank_you_on">
     <div class="wrap">
       <div class="reply-box" data-rsvp data-step="form" data-a="rise">
         <img class="sprig" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="120px" alt="" loading="lazy">
@@ -136,8 +142,8 @@
   <ul>
     <li><a href="home.html"><span>Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
-    <li><a href="details.html"><span>Details</span></a></li>
-    <li><a href="rsvp.html" aria-current="page"><span>RSVP</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on">Details</span><span data-if="thank_you_on">The Day</span></a></li>
+    <li data-if="!thank_you_on"><a href="rsvp.html" aria-current="page"><span>RSVP</span></a></li>
   </ul>
 </nav>
 </body>

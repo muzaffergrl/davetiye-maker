@@ -128,6 +128,17 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   };
   console.log(`theme ${THEME} · demo record ${env.demoSource} · photos ${env.photosSource || 'none'} · out ${path.relative(process.cwd(), OUT) || OUT}`);
   env.notes.forEach((n) => warn(`setup: ${n}`));
+  // G075 (docs/11 §3.6): the thank-you version — a warning, not a failure (without it guests keep the invitation after
+  // the wedding; the platform still closes replies)
+  {
+    const { thankYouSupport } = await import('../lib/theme/thank-you-support.ts');
+    const dir = path.join(process.env.PLATFORM_THEMES_DIR || path.join(ROOT, 'themes'), THEME);
+    const read = (f) => (fs.existsSync(path.join(dir, f)) ? fs.readFileSync(path.join(dir, f), 'utf8') : '');
+    const ty = thankYouSupport(Object.fromEntries(Object.entries(env.manifest.pages).map(([p, f]) => [p, read(f)])));
+    results.info.thank_you = ty.complete ? 'complete' : ty.partial ? `partial (${ty.missing.length} missing)` : 'none';
+    if (ty.complete) ok('thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)');
+    else warn(`thank-you mode (G075, docs/11 §3.6): ${ty.partial ? 'incomplete' : 'not in this theme'} — guests keep the invitation after the wedding. Missing: ${ty.missing.join('; ')}`);
+  }
 
   if (!fs.existsSync(path.join(ROOT, '.next', 'BUILD_ID'))) {
     console.error('No production build: run `npm run build` first.');

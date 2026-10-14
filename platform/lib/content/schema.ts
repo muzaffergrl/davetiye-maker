@@ -368,6 +368,46 @@ export const CONTENT_SCHEMA = {
         }
       }
     },
+    "thank_you": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "İsteğe bağlı (G075, K28): düğün sonrası teşekkür modu. mode: auto = düğün günü bitince (site saat diliminde ertesi gün 00:00) kendiliğinden, on = hemen, off = hiç (yoksa auto). title boşsa 'Thank you for celebrating with us'; message ≤ 400; photo yoksa temanın süsü (yer tutucu değil); details: keep = Details sayfası 'The Day' olarak kalır, hide = gizlenir. Teşekkür modunda RSVP kapalıdır.",
+      "properties": {
+        "mode": {
+          "enum": [
+            "auto",
+            "on",
+            "off"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 60
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 400
+        },
+        "photo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "details": {
+          "enum": [
+            "keep",
+            "hide"
+          ]
+        }
+      }
+    },
     "faq": {
       "type": "array",
       "maxItems": 12,

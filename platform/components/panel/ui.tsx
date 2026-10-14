@@ -403,6 +403,7 @@ export function Segmented<T extends string>({
   onChange,
   disabled,
   id,
+  stacked,
 }: {
   label: string;
   value: T;
@@ -410,12 +411,14 @@ export function Segmented<T extends string>({
   onChange: (v: T) => void;
   disabled?: boolean;
   id?: string;
+  /** One option per row (three or more options with hints, e.g. thank-you mode, G075). */
+  stacked?: boolean;
 }) {
   const name = useId();
   return (
     <fieldset className={styles.segmented} id={id} disabled={disabled}>
       <legend className={styles.label}>{label}</legend>
-      <div className={styles.segmentedOptions}>
+      <div className={cx(styles.segmentedOptions, stacked && styles.segmentedStacked)}>
         {options.map((o) => (
           <label key={o.value} className={cx(styles.segment, o.value === value && styles.segmentOn)}>
             <input type="radio" name={name} value={o.value} checked={o.value === value} onChange={() => onChange(o.value)} className={styles.segmentInput} />
