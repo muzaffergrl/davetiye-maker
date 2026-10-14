@@ -9,6 +9,7 @@
 //   4. field checks (fields.ts, same rules as the browser)  -> 400 invalid (+ fields)
 //   --- serialised per order number (in this process) ---
 //   5. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
+//      ("manual": accepted, the site is stored with orderCheck "pending": no publishing until the shop confirms it)
 //      (before the "used" check: with verification on, a stranger gets the same 403 for used and unused numbers)
 //   6. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
 //      … unless it is a RETRY of the same claim: same claim token (the form sends one random token
@@ -30,7 +31,7 @@ import { OrderRefTakenError, SlugTakenError, type DataAdapter, type SiteRecord }
 import { defaultInitials, defaultNameDisplay } from '../panel/model.ts';
 import { hashKey, verifyKey } from '../keys.ts';
 import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
-import { createSiteWithKeys, reissueKeys } from '../sites.ts';
+import { createSiteWithKeys, orderPending, reissueKeys } from '../sites.ts';
 import {
   claimFieldErrors,
   cleanName,
@@ -134,8 +135,10 @@ const text = (v: unknown): string => (typeof v === 'string' ? v : '');
 
 /**
  * The buyer's first draft: the theme's demo record, marked as customer data, with the buyer's
- * names (display and full name; the panel lets them complete full names). Everything else stays
- * demo content until they edit it. Demo URLs are null, photos empty (theme placeholders).
+ * first names. The full names stay empty (null): the designs show the first name until a full name
+ * is typed, and a surname added later is never counted as a name change (G060-fix; a full name that
+ * started as a copy of the first name made the first surname look like a new name). Everything else
+ * stays demo content until they edit it. Demo URLs are null, photos empty (theme placeholders).
  */
 export function draftFromDemo(demo: ContentRecord, names: readonly string[]): ContentRecord {
   const content = structuredClone(demo);
@@ -147,7 +150,7 @@ export function draftFromDemo(demo: ContentRecord, names: readonly string[]): Co
     const partner = content.partners[i];
     if (name && partner) {
       partner.display_name = name;
-      partner.full_name = name;
+      partner.full_name = null;
     }
   });
   content.name_display = defaultNameDisplay(content.partners);
@@ -220,6 +223,8 @@ export interface ClaimSuccessBody {
   siteUrl: string;
   /** False while no email provider is configured (mailer.ts). */
   emailSent: boolean;
+  /** True when the shop still has to confirm the order before the site can be published (manual checks, G060-fix). */
+  orderPending: boolean;
 }
 
 /** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, website? (honeypot)}. */
@@ -249,7 +254,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
   const claimToken = claimTokenOf(raw.claimToken);
   const now = ctx.now ?? Date.now;
 
-  const answer = async (slug: string, editKey: string): Promise<ClaimResult> => {
+  const answer = async (slug: string, editKey: string, pending: boolean): Promise<ClaimResult> => {
     const origin = ctx.origin.replace(/\/+$/, '');
     const editPath = `/edit/${slug}?k=${encodeURIComponent(editKey)}`;
     const editUrl = `${origin}${editPath}`;
@@ -264,7 +269,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
         console.error(`[claim] edit link email for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
       }
     }
-    const body: ClaimSuccessBody = { ok: true, slug, status: 'draft', editUrl, editPath, siteUrl, emailSent };
+    const body: ClaimSuccessBody = { ok: true, slug, status: 'draft', editUrl, editPath, siteUrl, emailSent, orderPending: pending };
     return { status: 201, body: body as unknown as Record<string, unknown> };
   };
 
@@ -273,7 +278,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     const mine = sites.find((s) => isClaimRetry(s, claimToken, email, now()));
     if (!mine) return claimError(409, 'order_used');
     const reissued = await reissueKeys(adapter, mine.id);
-    return answer(reissued.site.slug, reissued.editKey);
+    return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
   };
 
   return withOrderLock(orderNumber, async () => {
@@ -305,6 +310,14 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     if (!global.allowed) return claimError(429, 'busy', {}, retryAfter(global.retryAfterMs));
 
     const content = draftFromDemo(theme.demo, buyerNames);
+    // Manual order checks (G060-fix): the draft is made now, publishing waits for the shop (scripts/verify-order.ts).
+    const at = new Date(now()).toISOString();
+    const orderCheck =
+      check.result === 'pending'
+        ? { status: 'pending' as const, at, by: 'claim' as const }
+        : check.result === 'verified'
+          ? { status: 'verified' as const, at, by: 'etsy' as const }
+          : null;
     let created: Awaited<ReturnType<typeof createSiteWithKeys>> | null = null;
     for (let tries = 0; !created; tries++) {
       try {
@@ -315,6 +328,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
           orderRef: orderNumber,
           ownerEmail: email,
           claimTokenHash: claimToken ? hashKey(claimToken) : null,
+          orderCheck,
         });
       } catch (e) {
         // Another server instance won the race (possibly our own earlier attempt of this claim).
@@ -328,6 +342,6 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
       }
     }
 
-    return answer(slug, created.editKey);
+    return answer(slug, created.editKey, orderPending(created.site));
   });
 }

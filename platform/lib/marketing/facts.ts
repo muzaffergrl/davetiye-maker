@@ -79,12 +79,15 @@ export const FIXED: readonly string[] = ['The artwork', 'Colors and fonts', 'Pag
 
 /** docs/16 §11.7 wording, from config. */
 export function editRightsText(cfg: MarketingConfig = MARKETING): { short: string; long: string; rest: string } {
+  // G060-fix: the same rule the server enforces (lib/panel/rights.ts): n changes IN TOTAL (several fields in one save
+  // count once); typo fixes in a name, surnames and date moves of up to dateFreeDays are free.
   const n = cfg.editRights.identityChangesAfterPublish;
   const chars = cfg.editRights.typoFreeChars;
-  const times = n === 1 ? 'once' : n === 2 ? 'twice' : `${n} times`;
+  const days = cfg.editRights.dateFreeDays;
+  const changes = n === 1 ? '1 change' : `${n} changes`;
   return {
-    short: `After publishing, names and date can be changed ${times}; small typo fixes are free.`,
-    long: `After you publish, you can change your names and wedding date ${times}. Fixing a small typo (up to ${chars} letters or digits) is free.`,
+    short: `After publishing: ${n === 1 ? '1 name and date change' : `${n} name and date changes`} in total; typo fixes and moving the date by up to ${days} days are free.`,
+    long: `After you publish, you get ${changes} in total to your names, monogram and date; several at once count as one. Free any time: small typo fixes (up to ${chars} letters in a name), adding a surname, and moving the date up to ${days} days.`,
     rest: 'Everything else (time, venue, schedule, story, photos, details and replies) you can change as often as you like.',
   };
 }

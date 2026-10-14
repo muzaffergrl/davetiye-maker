@@ -1,19 +1,27 @@
 ---
 id: G066
-baslik: BKE Studio markasını satış sitesine ve platforma bağla (ad, logo, favicon, "Made with" rozeti)
+baslik: Satış sitesi + panel BKE Studio marka tasarımına geçer (GM04/GM05 comp'ları, ad, logo, favicon, renk/yazı)
 rol: claude-kod
 durum: hazir
 alan:
 oncelik: 1
-bagimli: [GM02, G061]
-yazar: [platform/lib/marketing/config.ts, platform/components/marketing/, platform/app/(marketing)/layout.tsx, platform/app/layout.tsx, platform/public/brand/, platform/tests/]
+bagimli: [GM02, GM04, GM05, G060, G061]
+yazar: [platform/lib/marketing/, platform/components/marketing/, platform/components/panel/, platform/app/(marketing)/, platform/app/layout.tsx, platform/app/edit/, platform/public/brand/, platform/tests/, platform/previews/g066/, docs/16_PANEL_V2.md]
 ---
 
 ## Amaç
 K26/K27: ad **BKE Studio**, kimlik GM01 yön C. GM02 kiti hazır (`brand/`, `platform/public/brand/`). Satış sitesi (G061) ve
 platform hâlâ `[BRAND]` yer tutucusu ve geçici favicon kullanıyor.
 
-## Yapılacaklar (GM02 Sonuç'undaki bağlama listesi)
+## Kapsam genişledi (2026-10-14)
+Kullanıcı: "BKE Studio'yu da ekleyelim; logo, isim, marka tasarımına uygun bir website ve panel tasarımı yapalım." GPT comp'ları:
+satış sitesi `brand/ui/site/` (GM04), panel `brand/ui/panel/` (GM05). Bu görev ikisini de comp'lara göre yeniden giydirir:
+renk/yazı token'ları (`brand/tokens.json`; Archivo / Montserrat / DM Sans, Google Fonts — repoya font yok), başlık hiyerarşisi,
+kartlar, düğmeler, çipler, alt menü, masaüstü düzeni. **İşlev kaybı yok:** bütün mevcut testler (panel, g060, claim, rsvp, final-smoke,
+satış sitesi) geçer; erişilebilirlik (kontrast ≥ 4.5:1, dokunma ≥ 44 px) korunur. Comp'taki metin değil, ürünün gerçek metni/linki
+kullanılır (alan adı yok — `bkestudio.com` yalnız comp'ta; link `config`'ten). Önizleme: 390 + 1280 px önce/sonra.
+
+## Yapılacaklar (GM02 Sonuç'undaki bağlama listesi + giydirme)
 1. `platform/lib/marketing/config.ts`: `brand.name = 'BKE Studio'`, logo yolu. Alan adı, fiyat, destek e-postası **yer tutucu kalır**.
 2. `components/marketing/Shell.tsx`: başlıkta `bke-logo-horizontal-anchor.svg`, altbilgide `-reverse` (SVG'leri `public/brand/`'a kopyala).
 3. `app/(marketing)/layout.tsx` ve kök `app/layout.tsx`: `/brand/icon.svg`, `/brand/favicon.ico`, `/brand/apple-touch-icon.png`; istenirse manifest (192/512).

@@ -2,7 +2,8 @@
 
 import { claimableTheme } from '../claim/themes.ts';
 import type { SiteRecord } from '../data/types.ts';
-import { derivePreviewKey } from '../keys.ts';
+import { panelPreviewToken } from '../keys.ts';
+import { orderPending } from '../sites.ts';
 import { loadTheme, PAGE_NAMES, readThemePage, type LoadedTheme, type PageName } from '../theme/theme.ts';
 import {
   isEditablePhotoSource,
@@ -120,16 +121,18 @@ export function panelMeta(site: SiteRecord, now: Date = new Date()): PanelMeta {
     publishedAt: site.publishedAt,
     hasUnpublishedChanges: site.status === 'published' && !sameContent(site.content, site.publishedContent),
     rights: rightsView(site, now),
+    // Short-lived (lib/keys.ts): every answer renews it, so an open panel keeps a working preview.
+    previewToken: panelPreviewToken(site.id, site.previewKeyHash, now.getTime()),
+    orderPending: orderPending(site),
   };
 }
 
-/** Full panel state. `editKey` must already be verified (the preview key is derived from it). */
-export async function panelState(site: SiteRecord, editKey: string, origin: string): Promise<PanelState> {
+/** Full panel state. Only for a verified edit key (authorizeEditor). The long-lived preview key is never sent. */
+export async function panelState(site: SiteRecord, origin: string): Promise<PanelState> {
   return {
     slug: site.slug,
     theme: await panelTheme(site.theme),
     content: site.content,
-    previewKey: derivePreviewKey(editKey),
     origin,
     orderRef: site.orderRef ?? null,
     ...panelMeta(site),

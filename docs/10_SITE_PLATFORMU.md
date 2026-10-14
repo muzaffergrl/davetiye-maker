@@ -11,10 +11,18 @@ düzenler. Bu belge platformun tek kaynağıdır.
    6 adımlı **kurulum sihirbazı** (isimler → tarih/saat → mekân → fotoğraflar (kırpma) → kontrol → yayınla), sonra
    **Home · Edit · Guests · Share** görünümleri: bölüm bölüm düzenleme (isimler, tarih, mekân, program, hikâye, detaylar,
    SSS, RSVP, fotoğraflar), canlı önizleme, otomatik kayıt göstergesi, çevrimdışı yerel yedek. **Yayınla.**
-   - **Düzenleme hakkı (G060, sunucuda zorlanır):** ilk yayından sonra **isimler ve tarih** (kimlik alanları) yalnız
-     sınırlı sayıda değişir (varsayılan 3; panelde "2 of 3 changes left"); alan başına ≤ 2 karakterlik yazım düzeltmesi ücretsiz;
-     diğer her şey sınırsız. Hak bitince panel destek mesajı gösterir; destek `scripts/grant-identity-change.ts` ile hak
-     ekleyebilir (kayıt site günlüğünde). Sayılar tek yapılandırmadan gelir (`lib/marketing/config.ts`).
+   - **Düzenleme hakkı (G060, sunucuda zorlanır):** ilk yayından sonra **isimler ve tarih** (kimlik alanları) toplamda
+     sınırlı sayıda değişir (varsayılan 3, bir kayıtta birlikte değişenler 1 sayılır; panelde "2 of 3 changes left"). Ücretsiz
+     (G060-fix): isim alanında ≤ 2 karakterlik yazım düzeltmesi, **tarihi en çok 7 gün kaydırmak** (tarih karakterle değil günle
+     ölçülür), **soyadı eklemek/çıkarmak** (ilk isim aynıyken), son değişikliği hemen **geri almak** (yayınlanmadan önce ya da
+     10 dk içinde; hak geri verilir), tasarımın örnek tarihiyle yayınlanmış sitede gerçek tarihi bir kez girmek. İlk yayın, tarih
+     hâlâ örnek tarihken onay ister. Diğer her şey sınırsız. Hak bitince panel destek mesajı gösterir; destek
+     `scripts/grant-identity-change.ts` ile hak ekleyebilir (kayıt site günlüğünde). Sayılar tek yapılandırmadan gelir
+     (`lib/marketing/config.ts` `editRights`: 3 / 2 karakter / 7 gün).
+   - **Önizleme (G060-fix):** panel kendi önizlemesini kısa ömürlü imzalı jetonla açar (~12 saat, panel yeniler); kalıcı
+     önizleme anahtarı panele hiç gönderilmez. Kalıcı anahtarla açılan önizlemede sunucu "Preview — not published" şeridi
+     basar; arşivlenmiş sitede ve hiç yayınlanmamış taslakta oluşturulmasından 18 ay sonra 410. Önizleme linki gerçek sitenin
+     yerine (süresiz, sınırsız isim değişikliğiyle) kullanılamaz.
    - **Arşiv (K25):** site düğün tarihinden **12 ay** sonra (site saat diliminde ertesi gün 00:00) salt okunur arşive geçer:
      misafir sayfaları 410, RSVP kapalı, panel okunur, yanıtlar CSV olarak indirilebilir. Öneri (karar bekliyor, docs/16 §15):
      en geç ilk yayından 48 ay sonra. Arşivde verinin silinmesi henüz yok.
@@ -103,7 +111,10 @@ düzenler. Bu belge platformun tek kaynağıdır.
   **kullanıcı onayı** ister. Ticari kullanımda ücretli plan gerekebilir (Vercel Hobby ticari değil;
   Supabase ücretsiz projeler hareketsizlikte duraklar) — satışa çıkmadan karar.
 - **Alan adı / marka:** marka seçilmedi; ilk sürüm `*.vercel.app`.
-- **Etsy sipariş doğrulama:** ilk sürüm biçim kontrolü + kayıt; Etsy API doğrulaması sonra.
+- **Etsy sipariş doğrulama:** ilk sürüm biçim kontrolü + kayıt; Etsy API doğrulaması sonra (mağazanın Etsy API uygulaması +
+  kullanıcı onayı gerekir). Ara çözüm (G060-fix): `CLAIM_ORDER_VERIFICATION=manual` — taslak hemen açılır, ama sipariş dükkân
+  tarafından Etsy'de kontrol edilip `node scripts/verify-order.ts --order <no> --reason "…"` ile onaylanana kadar yayın ve
+  paylaşılan önizleme kapalı. Satış sitesinin yayın kapısı `verified.orderCheck` true olmadan `launched: true` kabul etmez.
 - **E-posta gönderimi** (düzenleme linki, RSVP bildirimi): sağlayıcı seçimi sonra.
 - **Gizlilik metni** (misafir verisi): yayından önce.
 

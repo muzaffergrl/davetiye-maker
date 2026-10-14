@@ -419,6 +419,14 @@ Panel durumu sunucuda üretilir (anında). Önizleme iframe'i ilk açılışta y
 
 ## 11. Düzenleme hakkı modeli (anti-abuse)
 
+> **G060-fix (2026-10-14, inceleme bulguları — uygulanan kural bu belgenin aşağıdaki ilk tasarımından farklı):** tarih karakterle
+> değil **günle** ölçülür (çapadan ±7 gün ücretsiz; §11.3 tablosundaki "2027-06-12 → 2027-06-21 typo" artık 1 değişiklik);
+> **soyadı ekleme/çıkarma** (ilk isim aynı) ücretsiz; son sayılan değişikliğin **geri alınması** yayından önce ya da 10 dk içinde
+> ücretsiz ve hakkı iade eder; örnek tarihle yayınlanmış sitede gerçek tarih bir kez ücretsiz, ilk yayın örnek tarihte onay ister;
+> arşiv sayılan tarihten hesaplanır; panel önizlemesi kısa ömürlü jetonla, kalıcı önizleme anahtarında "Preview — not published"
+> şeridi ve arşivde/18 aylık yayınlanmamış taslakta 410 (§11.11 "önizlemeyi site gibi kullanmak" satırı kapandı). Ayrıntı:
+> `platform/README.md` "G060-fix".
+
 ### 11.1 Kurallar (görev metni, aynen)
 1. **Tek sipariş = tek site** (var: `/start` + `orders/<no>` dizini, G045/G048).
 2. **Kimlik alanları = çift isimleri + düğün tarihi.** İlk yayından **sonra** bunlar için **3 değişiklik hakkı** (varsayılan).

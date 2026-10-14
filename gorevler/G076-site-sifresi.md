@@ -2,8 +2,8 @@
 id: G076
 baslik: İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G076
 oncelik: 1
 bagimli: [G060]
 yazar: [platform/lib/, platform/app/, platform/components/panel/, platform/middleware.ts, platform/tests/, docs/03_URUN_ICERIK_SEMASI.json, platform/README.md, platform/previews/g076/]
@@ -32,3 +32,4 @@ K28. Çift isterse sitesini bir misafir şifresiyle korur. Varsayılan kapalı.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): K28
+- 2026-10-14 alindi: claude-G076

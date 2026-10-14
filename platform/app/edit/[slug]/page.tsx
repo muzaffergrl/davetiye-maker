@@ -30,6 +30,6 @@ export default async function EditPage({ params, searchParams }: Props) {
   const key = typeof k === 'string' ? k : null;
   const site = key ? await authorizeEditor(getDataAdapter(), slug, key) : null;
   if (!site || !key) notFound();
-  const state = await panelState(site, key, publicOrigin(await headers()));
+  const state = await panelState(site, publicOrigin(await headers()));
   return <Panel initial={state} editKey={key} />;
 }

@@ -397,6 +397,7 @@ export class BlobAdapter implements DataAdapter {
         updatedAt: now,
         publishedAt: null,
         ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
+        ...(input.orderCheck ? { orderCheck: structuredClone(input.orderCheck) } : {}),
         version: 1,
       };
       await this.putJson(this.sitePath(id), doc, { allowOverwrite: false });
@@ -578,6 +579,37 @@ export class BlobAdapter implements DataAdapter {
       size: main.size,
       variants: stored.slice(0, -1).map((v) => ({ width: v.width!, url: `${this.mediaBaseUrl}/${v.rel}`, path: v.rel, size: v.size })),
     };
+  }
+
+  async countPhotos(siteId: string): Promise<number> {
+    if (!UUID_RE.test(siteId)) return 0;
+    return (await this.listAll(this.mediaPrefix(siteId))).length;
+  }
+
+  /**
+   * Shared fixed-window counter (G060-fix): limits/<sha256(key)>.json = {count, resetAt}, changed with a conditional
+   * write (ifMatch / allowOverwrite:false) and retried on a concurrent write, so every server instance counts the
+   * same window. One read + one write per hit. Old windows are overwritten in place (one small file per key).
+   */
+  async hitCounter(key: string, windowMs: number): Promise<{ count: number; resetAt: number }> {
+    const pathname = `limits/${createHash('sha256').update(key).digest('hex')}.json`;
+    for (let attempt = 1; ; attempt++) {
+      const now = this.#now();
+      const current = await this.readJson<{ count?: unknown; resetAt?: unknown }>(pathname);
+      const live = current && typeof current.data.resetAt === 'number' && current.data.resetAt > now && typeof current.data.count === 'number';
+      const next = live ? { count: (current!.data.count as number) + 1, resetAt: current!.data.resetAt as number } : { count: 1, resetAt: now + windowMs };
+      try {
+        await this.putJson(pathname, next, current ? { ifMatch: current.etag } : { allowOverwrite: false });
+        return next;
+      } catch (e) {
+        let conflict = e instanceof BlobPreconditionFailedError || looksLikeConcurrentWrite(e) || looksLikeAlreadyExists(e);
+        // The SDK reports an existing pathname as a plain BlobError: a counter that exists now was made in between.
+        if (!conflict && !current && e instanceof BlobError) conflict = Boolean(await this.readJson(pathname));
+        if (!conflict) throw e;
+        if (attempt >= this.#maxWriteAttempts) throw new WriteConflictError(`counter ${pathname}`);
+        await sleep(this.#retryDelayMs(attempt));
+      }
+    }
   }
 
   async readPhoto(rel: string): Promise<StoredFile | null> {

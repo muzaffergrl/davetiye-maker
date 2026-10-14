@@ -31,7 +31,7 @@ export function checkChosenFile(file: { size: number; type: string; name: string
 type SlotStatus = { busy?: boolean; error?: string };
 
 export function PhotoSlots({ slots: only, intro = false, compact = false }: { slots?: PanelPhotoSlot[]; intro?: boolean | 'count'; compact?: boolean }) {
-  const { content, edit, locked, online, previewKey, photoSlots, uploadPhoto, removePhoto } = usePanelContext();
+  const { content, edit, locked, online, previewToken, photoSlots, uploadPhoto, removePhoto } = usePanelContext();
   const slots = only ?? photoSlots;
   const snack = useSnackbar();
   const [cropping, setCropping] = useState<{ slot: PanelPhotoSlot; file: File } | null>(null);
@@ -90,7 +90,7 @@ export function PhotoSlots({ slots: only, intro = false, compact = false }: { sl
               <div className={cx(styles.photoThumb, !url && styles.photoThumbEmpty)} style={{ aspectRatio: String(slot.ratio ?? 4 / 3) }}>
                 {url ? (
                   // The 640 px variant when the photo has one (G055): a thumbnail does not need the full photo.
-                  <img src={previewPhotoUrl(smallestPhotoUrl(url), previewKey)} alt={`${slot.label}: current photo`} className={styles.photoImg} />
+                  <img src={previewPhotoUrl(smallestPhotoUrl(url), previewToken)} alt={`${slot.label}: current photo`} className={styles.photoImg} />
                 ) : (
                   <span className={styles.photoEmpty}>
                     <ImagePlus size={24} strokeWidth={1.5} aria-hidden="true" />
