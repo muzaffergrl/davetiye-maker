@@ -32,6 +32,9 @@ function clean<T extends JsonLdNode>(node: T): T {
 export function organization(cfg: MarketingConfig = MARKETING): JsonLdNode {
   const email = real(cfg.support.email);
   const name = real(cfg.brand.name);
+  // Entity matching: the Etsy shop name is the brand without spaces ("BKEStudio" for "BKE Studio"), so it is named as
+  // an alternate name of the same organization (only when real and different from the brand name).
+  const shopName = real(cfg.etsy.shopName);
   const sameAs = [cfg.etsy.shopUrl, cfg.social.pinterest, cfg.social.instagram, cfg.social.tiktok]
     .map((u) => (u ? real(u) : null))
     .filter((u): u is string => !!u);
@@ -39,6 +42,7 @@ export function organization(cfg: MarketingConfig = MARKETING): JsonLdNode {
     '@type': 'Organization',
     '@id': orgId(cfg),
     name,
+    alternateName: name && shopName && shopName !== name ? shopName : null,
     url: absUrl('/', cfg),
     description: real(cfg.brand.shortDescription),
     email,

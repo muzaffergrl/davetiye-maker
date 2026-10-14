@@ -16,6 +16,8 @@ export const RESERVED_SLUGS: ReadonlySet<string> = new Set([
   'checkout', 'buy', 'cart', 'order', 'orders', 'gift', 'search', 'feed', 'rss', 'sitemap', 'llms', 'llms.txt',
   'llms-full.txt', 'opengraph-image', 'twitter-image', 'icon', 'apple-icon', 'save-the-date', 'wedding-websites',
   'refund', 'refunds', 'cookies', 'accessibility', 'marketing', 'not-found',
+  // brand kit served from public/brand/ (GM02: favicons, app icons)
+  'brand',
 ]);
 
 /** 3-48 chars, lowercase letters, digits and single hyphens; no leading/trailing hyphen. */

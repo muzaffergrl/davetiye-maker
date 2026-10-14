@@ -51,6 +51,20 @@ test('decided config: Organization has name, email, contactPoint, sameAs; Produc
     assert.deepEqual(validateJsonLd(graph(p, videoObject(d, cfg))), []);
   }
   assert.deepEqual(validateJsonLd(graph(organization(cfg), website(cfg))), []);
+  // Entity matching with the Etsy shop: the shop name is an alternateName (only when it differs from the brand name).
+  assert.equal(org.alternateName, 'ExampleShop');
+  assert.equal(organization(readyConfig({ etsy: { shopUrl: 'https://www.etsy.com/shop/TestBrand', shopName: 'Test Brand' } })).alternateName, undefined);
+  assert.equal(organization().alternateName, undefined, 'no alternateName while the shop name is a placeholder');
+});
+
+test('FAQPage JSON-LD answers the "why pay when free websites exist" objection without naming competitors', () => {
+  const entities = faqEntities(faqItems(readyConfig()));
+  const q = entities.find((e) => /free wedding websites/i.test(String(e.name)));
+  assert.ok(q, 'question present in FAQPage');
+  const text = (q.acceptedAnswer as { text: string }).text;
+  assert.match(text, /good choice/);
+  assert.doesNotMatch(text, /\bzola\b|the knot|\bjoy\b|minted|squarespace|greenvelope|paperless/i);
+  assert.ok(faqEntities(faqItems()).some((e) => e.name === q.name), 'no placeholder in it, so it is in the JSON-LD today too');
 });
 
 test('VideoObject, Article, Breadcrumb, ItemList and FAQ entities carry their required fields', () => {

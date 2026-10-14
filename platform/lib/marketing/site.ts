@@ -50,10 +50,11 @@ export function corePages(cfg: MarketingConfig = MARKETING): PageEntry[] {
     {
       path: '/',
       label: 'Home',
-      title: withBrand('Wedding Websites That Open Like an Invitation', cfg),
-      h1: 'Wedding websites that open like a real invitation',
+      // docs/14 §2.1: home targets "envelope wedding website", "wedding invitation website" and "digital wedding invitation".
+      title: withBrand('Digital Envelope Wedding Invitation Websites', cfg),
+      h1: 'Envelope wedding websites that open like a real invitation',
       description:
-        'Envelope-opening wedding websites you edit from your phone. RSVP built in, add to calendar for guests, no Canva needed. Try the live demo first.',
+        'A digital wedding invitation website with RSVP that opens from a sealed envelope. Edit it on your phone, no Canva needed. Try the live demo first.',
       kind: 'WebPage',
       updated: u,
     },

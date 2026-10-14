@@ -191,7 +191,7 @@ export function nextSteps(
 }
 
 /** "Wedding date: still the sample text." -> "wedding date"; list notes -> "event places", "captions", "questions". */
-function sampleLabel(n: PublishNote): string {
+export function sampleLabel(n: PublishNote): string {
   if (/^schedule\./.test(n.path)) return 'event places';
   if (/^story\.items\./.test(n.path)) return 'captions';
   if (/^faq\./.test(n.path)) return 'questions';
@@ -209,6 +209,7 @@ export function HomeView({
   theme,
   url,
   steps,
+  sampleCount = 0,
   setupStep,
   replies,
   onGo,
@@ -224,6 +225,8 @@ export function HomeView({
   theme: PanelTheme;
   url: string;
   steps: NextStep[];
+  /** Fields that are still the design's sample text (prePublishNotes().sample). */
+  sampleCount?: number;
   setupStep: number | null;
   replies: Replies;
   onGo: (path: string) => void;
@@ -240,7 +243,7 @@ export function HomeView({
   const filled = theme.photos.filter((s) => photoAt(content, s.source)).length;
   return (
     <div className={styles.stack}>
-      <StatusCard meta={meta} url={url} setupStep={setupStep} onPublish={onPublish} onShare={onShare} onContinueSetup={onContinueSetup} onCopy={onCopy} />
+      <StatusCard meta={meta} url={url} sampleCount={sampleCount} setupStep={setupStep} onPublish={onPublish} onShare={onShare} onContinueSetup={onContinueSetup} onCopy={onCopy} />
 
       {r.archiveSoon && r.archiveAt ? (
         <Banner tone="warning" icon={Hourglass}>
@@ -352,6 +355,7 @@ export function HomeView({
 function StatusCard({
   meta,
   url,
+  sampleCount,
   setupStep,
   onPublish,
   onShare,
@@ -360,6 +364,7 @@ function StatusCard({
 }: {
   meta: PanelMeta;
   url: string;
+  sampleCount: number;
   setupStep: number | null;
   onPublish: () => void;
   onShare: () => void;
@@ -380,7 +385,10 @@ function StatusCard({
     action = { label: 'Publish changes', run: onPublish, variant: 'primary', icon: Send };
   } else if (meta.status === 'published') {
     badge = { tone: 'success', text: 'Live', icon: CircleCheckBig };
-    text = 'Your website is live and up to date.';
+    // "Up to date" only when nothing is left from the design's sample text (guests see whatever is published).
+    text = sampleCount
+      ? `Your website is live — ${sampleCount === 1 ? '1 thing is' : `${sampleCount} things are`} still sample text from the design.`
+      : 'Your website is live and up to date.';
     action = { label: 'Share', run: onShare, variant: 'secondary', icon: Share2 };
   } else if (meta.publishedAt) {
     badge = { tone: 'neutral', text: 'Offline' };
