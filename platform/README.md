@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose ve olive-ivory temaları, takvim, G055, seed (292 test)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose ve olive-ivory temaları, takvim, G055, seed (298 test; Windows dahil)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -174,6 +174,9 @@ media/<siteId>/<rastgele32hex>.<uzantı>   fotoğraflar; ziyaretçiye /media/<si
 - **Sürüm / iyimser kilit:** güncelleme = oku (ETag) → değiştir → `put(ifMatch: ETag)`. Arada başkası yazdıysa
   `BlobPreconditionFailedError` → taze veriyle yeniden (en çok 6 deneme, artan bekleme) → yine olmazsa `WriteConflictError`.
   Aynı süreçte aynı siteye yazılar ayrıca sıraya girer. Silinmiş site yanlışlıkla geri yazılmaz (ETag tutmaz → `NotFoundError`).
+  Gerçek depoda görülen iki ayrıntı (testlerde taklit edilir): büyük (sıkıştırılan) JSON okumaları **zayıf ETag** (`W/"…"`) döner,
+  `ifMatch` güçlü biçimi ister → `readJson` `W/`'yi atar (G044); aynı dosyaya iki koşullu yazma üst üste binince servis 412 yerine
+  düz `BlobError("… conflicting operation …")` döner → `mutate` ve `claimIndex` bunu da kaybedilmiş yarış sayıp yeniden dener (G049).
 - **Önbellek:** JSON okumaları `useCache: false` (CDN kopyası üzerine yazmadan sonra 60 sn'ye kadar eski kalabilir; private
   depoda doğrudan kaynaktan okunur). Fotoğraflar değişmez (rastgele ad) → CDN'den okunabilir.
 - **Gizlilik:** site kaydı (anahtar hash'leri, sahip e-postası, taslak) ve RSVP'ler misafir verisi → depo **private olmalı**.
@@ -191,7 +194,7 @@ media/<siteId>/<rastgele32hex>.<uzantı>   fotoğraflar; ziyaretçiye /media/<si
   Seed sitelerinin sipariş referansı `DEMO-SEED-<slug>` (blob sipariş referansını tekil tutar).
 
 Testler: `tests/adapter.test.ts` sözleşme testleri **iki adaptörde de** koşar (local = geçici klasör, blob = `tests/fake-blob.ts`
-bellek içi SDK sahtesi). `tests/blob-adapter.test.ts` (21 test): sahtenin istemci tarafı hatalarının gerçek SDK 2.8.0 ile birebir
+bellek içi SDK sahtesi). `tests/blob-adapter.test.ts` (23 test): sahtenin istemci tarafı hatalarının gerçek SDK 2.8.0 ile birebir
 aynı olduğu, üzerine yazma/ETag/kimlik/list sayfalama davranışı; birden çok sunucu örneğinde slug ve sipariş yarışı (tek kazanan,
 artık dizin yok), başarısız yazmada dizinlerin geri alınması, öksüz dizin, kayıp yanıt; sürüm çakışması (eşzamanlı yazanlar,
 araya giren yazma, sürekli çakışma → `WriteConflictError`, silinmiş site); `useCache:false` (gecikmeli CDN kopyası servis edilmez);
@@ -200,12 +203,31 @@ her çağrı private + token'lı, token görünmez; `getDataAdapter` seçimi; `/
 çift özeti/CSV; seed. Sahtenin kasıtlı bozulmalarla (önbellek, üzerine yazma, ETag'siz yazma, sıralama, sayfalama) testleri
 kırdığı kontrol edildi.
 
-**Gerçek Vercel Blob'da G044'te denendi** (docs/10 §2c: zayıf ETag hatası bulundu ve düzeltildi; canlı duman testi betikleri repoda
-değil). Aşağıdaki varsayımlar o testlerle kısmen sınandı, bu repodaki testler yalnız bellek içi sahteyle koşuyor:
-`allowOverwrite: false` ve `ifMatch`'in sunucuda atomik olması; var olan yol hatasının metni ("This blob already exists …" —
-adaptör metne değil okumaya güvenir); depo türünün tek erişimli olması; `list`'in yazmadan hemen sonra yeni dosyayı göstermesi
-(göstermezse 5 dk çift yanıt kontrolü kaçırabilir); `del` + `ifMatch`'in yok olan dosyada davranışı. G044'te ilk iş: gerçek
-private depoda bu testlerin kısa bir canlı karşılığını koşmak (G044'te yapıldı, betikler oturumun geçici klasöründe kaldı).
+**Gerçek Vercel Blob'da denendi (G044, G049)** — `npm test` yalnız bellek içi sahteyle koşar; gerçek depo için iki betik var
+(aşağıda "Canlı kontroller"). Gerçek depoda doğrulanan: sunucu var olan dizinin üzerine yazmayı (`allowOverwrite: false`) ve bayat
+`ifMatch`'i reddediyor; iki örnekten eşzamanlı slug/sipariş yarışında tek kazanan; 2 örnek × 8 eşzamanlı güncellemede kayıp yazma yok
+(sürüm = 1 + başarılı yazma); 10 eşzamanlı RSVP yazmadan hemen sonra `list`'te; token'sız blob URL'si 403 (depo private).
+Hâlâ varsayım: atomikliğin gerçek eşzamanlılıkta her zaman tutması (servisin sözü), `del` + `ifMatch`'in yok olan dosyada davranışı.
+
+### Canlı kontroller (`scripts/live-check.mjs`, `scripts/blob-smoke.mjs`; G049)
+
+Yayından sonra, `platform/`'dan (`vercel link` sonrası `.env.local`'da `BLOB_READ_WRITE_TOKEN` olur; değerler hiçbir yere yazdırılmaz):
+
+```bash
+node --env-file=.env.local scripts/live-check.mjs --base https://<canlı adres>   # okuma + geçici sitede yazma yolu
+node --env-file=.env.local scripts/blob-smoke.mjs                                # gerçek private depoda adaptör varsayımları
+```
+
+- `live-check`: demo sitenin 5 sayfası + CSP, `og:image` (mutlak, bu sitede), `/event.ics`, `/media` fotoğrafları, tema varlığı,
+  RSVP durumu, yanlış anahtarlı panel 404; `DEMO_EDIT_KEY` verilirse panel sayfası (`X-Frame-Options: DENY`, `no-referrer`) ve panel
+  API'si; `LIVE_THEMES` (varsayılan `blush-garden-rose,olive-ivory`) için `/start?theme=` + `/start/demo/<tema>` sayfaları ve `.ics`.
+  Token varsa (ve `--no-write` yoksa) geçici bir taslak sitede: taslak 404 → panel kaydı → bayat kayıt 409 → foto yükleme (yayınlanmamış
+  foto önizleme anahtarı olmadan 404, anahtarla 200 `no-store`) → yayın → sayfada değişiklik → misafir RSVP → çift listesi + CSV →
+  `/start` sahiplenme 201 + aynı sipariş 409; geçici siteler `finally`'de silinir. Ortam: `LIVE_BASE_URL`/`PLATFORM_PUBLIC_URL`
+  (ya da `--base`), `DEMO_SLUG`, `DEMO_EDIT_KEY`, `LIVE_THEMES`. Not: `/start` IP başına günde 5 site sınırı (süreç içi) var; aynı
+  makineden art arda çok koşturmak 429 verebilir.
+- `blob-smoke`: yukarıdaki gerçek-depo doğrulamaları; yalnız `smoke-<zaman>-*` / `SMOKE<zaman>` yollarına yazar ve siler.
+- Çıkış kodu 0 = hepsi geçti. Windows'ta çalışır (Node 22, `.env.local`).
 
 ## Tema biçimi
 

@@ -10,7 +10,7 @@
 // Never prints the token. Exit code 0 = every check passed.
 
 import { readFileSync } from 'node:fs';
-import { get, list, put } from '@vercel/blob';
+import { BlobError, BlobPreconditionFailedError, del, get, list, put } from '@vercel/blob';
 import sharp from 'sharp';
 import { BlobAdapter } from '../lib/data/blob/index.ts';
 
@@ -27,6 +27,8 @@ const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'OK  ' : 'FAIL'} ${name}${detail ? ` — ${detail}` : ''}`);
 };
 const errName = (e) => e?.constructor?.name ?? e?.name ?? 'Error';
+/** Error text without the token (a rejected header value can end up in an undici message). */
+const redact = (text) => String(text ?? '').split(token).join('<hidden>').replace(/Bearer\s+\S+/gi, 'Bearer <hidden>').replace(/vercel_blob_rw_\w+/g, '<hidden>').slice(0, 200);
 // Two instances = two serverless instances (separate in-process locks).
 const a = new BlobAdapter({ token });
 const b = new BlobAdapter({ token });
@@ -48,8 +50,12 @@ try {
   for (const r of won2) created.push(r.value.id);
   const lost2 = r2.filter((r) => r.status === 'rejected' && r.reason?.name === 'OrderRefTakenError').length;
   check('order race: 1 winner, 2 OrderRefTakenError', won2.length === 1 && lost2 === 2, `won=${won2.length} orderTaken=${lost2}`);
-  const freed = await Promise.all([0, 1, 2].map((i) => a.getSiteBySlug(`smoke-${ts}-o${i}`)));
-  check('order race: losing slugs released', freed.filter(Boolean).length === 1);
+  // the raw index files, not getSiteBySlug (an orphan index without a site would read as "no site")
+  const slugIndexes = await list({ prefix: `slugs/smoke-${ts}-o`, token });
+  const kept = slugIndexes.blobs.length === 1 ? (await get(slugIndexes.blobs[0].pathname, { access: 'private', token, useCache: false })) : null;
+  const keptId = kept ? JSON.parse(await new Response(kept.stream).text()).id : null;
+  check('order race: losing slugs released (1 slug index left: the winner)', slugIndexes.blobs.length === 1 && won2.length === 1 && keptId === won2[0].value.id,
+    `${slugIndexes.blobs.length} slug index(es)`);
 
   const siteId = created[0];
 
@@ -58,7 +64,9 @@ try {
     await put(`slugs/${slug}.json`, '{"id":"x"}', { access: 'private', token, addRandomSuffix: false, allowOverwrite: false, contentType: 'application/json' });
     check('server refuses overwriting an existing index (allowOverwrite:false)', false, 'put succeeded');
   } catch (e) {
-    check('server refuses overwriting an existing index (allowOverwrite:false)', true, errName(e));
+    // the "already exists" refusal itself (a plain BlobError), not any failure
+    const refused = e instanceof BlobError && !(e instanceof BlobPreconditionFailedError) && /already exists/i.test(e.message);
+    check('server refuses overwriting an existing index (allowOverwrite:false)', refused, `${errName(e)}${refused ? '' : `: ${redact(e?.message)}`}`);
   }
   try {
     await put(`sites/${siteId}.json`, '{}', { access: 'private', token, addRandomSuffix: false, ifMatch: '"stale-etag"', contentType: 'application/json' });
@@ -80,7 +88,7 @@ try {
   const okW = r4.filter((r) => r.status === 'fulfilled').length;
   const conflicts = r4.filter((r) => r.status === 'rejected' && r.reason?.name === 'WriteConflictError').length;
   const other = r4.filter((r) => r.status === 'rejected' && r.reason?.name !== 'WriteConflictError');
-  for (const o of other) console.log(`     other error: ${errName(o.reason)}: ${String(o.reason?.message).slice(0, 160)}`);
+  for (const o of other) console.log(`     other error: ${errName(o.reason)}: ${redact(o.reason?.message)}`);
   const raw = await get(`sites/${siteId}.json`, { access: 'private', token, useCache: false });
   const doc = raw ? JSON.parse(await new Response(raw.stream).text()) : null;
   check('ETag lock: version = 1 + successful writes (no lost update)', doc?.version === 1 + okW && other.length === 0,
@@ -103,15 +111,23 @@ try {
   const direct = blobs.blobs[0] ? await fetch(blobs.blobs[0].url) : null;
   check('store is private: blob URL without token refused', !!direct && !direct.ok, `HTTP ${direct?.status}`);
 } catch (e) {
-  check('unexpected error', false, `${errName(e)}: ${e?.message}`);
+  check('unexpected error', false, `${errName(e)}: ${redact(e?.message)}`);
 } finally {
   // 7. cleanup: every smoke site, index and file is gone
-  for (const id of created) await a.deleteSite(id).catch((e) => console.log(`     cleanup error: ${errName(e)}`));
-  const leftovers = [];
-  for (const prefix of [`slugs/smoke-${ts}`, `orders/SMOKE${ts}`, ...created.flatMap((id) => [`sites/${id}`, `rsvps/${id}/`, `media/${id}/`])]) {
-    leftovers.push(...(await list({ prefix, token })).blobs.map((x) => x.pathname));
+  for (const id of created) await a.deleteSite(id).catch((e) => console.log(`     cleanup error: ${errName(e)}: ${redact(e?.message)}`));
+  const prefixes = [`slugs/smoke-${ts}`, `orders/SMOKE${ts}`, ...created.flatMap((id) => [`sites/${id}`, `rsvps/${id}/`, `media/${id}/`])];
+  const listLeft = async () => (await Promise.all(prefixes.map((prefix) => list({ prefix, token })))).flatMap((page) => page.blobs.map((x) => x.pathname));
+  try {
+    const leftovers = await listLeft();
+    if (leftovers.length) {
+      await del(leftovers, { token }); // whatever deleteSite could not reach
+      console.log(`INFO cleanup removed ${leftovers.length} leftover file(s): ${leftovers.slice(0, 4).join(', ')}`);
+    }
+    const still = await listLeft();
+    check('cleanup: no smoke files left', still.length === 0, still.slice(0, 5).join(', '));
+  } catch (e) {
+    check('cleanup: no smoke files left', false, `${errName(e)}: ${redact(e?.message)}`);
   }
-  check('cleanup: no smoke files left', leftovers.length === 0, leftovers.slice(0, 5).join(', '));
   const failed = results.filter((r) => !r.ok).length;
   console.log(`\n${results.length - failed}/${results.length} passed`);
   process.exitCode = failed ? 1 : 0;

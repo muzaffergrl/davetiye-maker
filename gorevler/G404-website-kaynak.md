@@ -2,8 +2,8 @@
 id: G404
 baslik: Tasarım 04 Vintage Airmail Love Letter — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-tema04
 oncelik: 2
 bagimli: [G204, G038, G046, G052]
 yazar: [platform/themes/vintage-airmail-love-letter/, platform/tests/theme-vintage-airmail-love-letter.test.ts, platform/previews/g404/]
@@ -41,3 +41,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: wf-tema04

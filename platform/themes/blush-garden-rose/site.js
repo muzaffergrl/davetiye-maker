@@ -441,16 +441,21 @@ const DEV_CONTENT = {
   /* ------------------------------------------------------------------ home hero: the first screen (qa-kontrol 2026-10-14)
      A hero piece after the names (date, place, countdown, cue) that does not end 4 px above the bottom nav starts below
      the first screen (top ≥ the small viewport + 12 px) — never half under the nav: a long record (docs/11 §12) scrolls.
-     The card and the names stay where they are. The first screen is the small viewport (svh), so toolbars collapsing
-     while scrolling move nothing; layout boxes, so the entrance transforms do not count. Again when a font loads (the
-     names wrap) and when the width changes. */
+     The card stays where it is. G058: the names end 8 px above the nav, counting their inline boxes (the script's tails
+     reach below the line box: "James" touched the nav at 320×568); a long pair shrinks for that (CSS --fit), never below
+     36 px. The first screen is the small viewport (svh), so toolbars collapsing while scrolling move nothing; layout
+     boxes, so the entrance transforms do not count (the names enter by clip-path). Again when a font loads (the names
+     wrap) and when the width changes. */
+  const NAMES_MIN = 36;
   let foldWidth = 0;
   function foldHero() {
     const inner = document.querySelector('.hero-inner'), nav = document.querySelector('.site-nav');
     if (!inner || !nav) return;
     foldWidth = window.innerWidth;
+    const names = inner.querySelector('.names');
     const kids = Array.from(inner.children).filter((c) => !c.matches('.hero-card, .names'));
     kids.forEach((c) => c.style.removeProperty('margin-top'));
+    if (names) names.style.removeProperty('--fit');
     if (nav.getBoundingClientRect().top < window.innerHeight / 2) return;   // wide screens: the nav is on top
     const probe = document.createElement('i');
     probe.style.cssText = 'position:fixed;height:100svh';
@@ -458,6 +463,19 @@ const DEV_CONTENT = {
     const sv = probe.offsetHeight || window.innerHeight;
     probe.remove();
     const limit = sv - nav.offsetHeight - 4, below = sv + 12;
+    if (names) {
+      const end = () => window.scrollY + Math.max(...Array.from(names.querySelectorAll('*'), (s) => s.getBoundingClientRect().bottom), names.getBoundingClientRect().bottom);
+      if (end() > limit - 4) {
+        const min = Math.min(1, NAMES_MIN / parseFloat(getComputedStyle(names).fontSize));
+        let lo = min, hi = 1;
+        for (let i = 0; i < 8; i++) {
+          const mid = (lo + hi) / 2;
+          names.style.setProperty('--fit', mid);
+          if (end() > limit - 4) hi = mid; else lo = mid;
+        }
+        names.style.setProperty('--fit', Math.max(min, Math.floor(lo * 1000) / 1000));
+      }
+    }
     const top = (el) => { let y = 0; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
     for (let i = 0; i < 4; i++) {
       const cut = kids.filter((k) => k.offsetParent && top(k) + k.offsetHeight > limit).sort((a, b) => top(a) - top(b))[0];

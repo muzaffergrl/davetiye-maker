@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 35 · alindi 3 · inceleme 1 · blokaj 296 · bitti 34 · toplam 369
+Özet: hazir 33 · alindi 3 · inceleme 1 · blokaj 296 · bitti 36 · toplam 369
 
 ## claude-canva
 
@@ -163,7 +163,6 @@ Bağımlılık bekleyen: 0 · Biten: 1
 **Üzerinde çalışılan / incelemede / blokaj (82)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G058` alindi · claude-kod-13 — 03 blush-garden-rose — yatay telefon düzeni ve isim aralığı kaydıyla ilk ekran (01'deki kurala eşit)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -182,6 +181,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `G118` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
+- `G404` alindi · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -245,7 +245,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 18 · Biten: 24
+Bağımlılık bekleyen: 17 · Biten: 25
 
 ## claude-metin
 
@@ -313,9 +313,8 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (17)**
+**Alınabilir (16)**
 
-- `G205` p1 — Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G205-gorsel.md`
 - `G202` p2 — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G202-gorsel.md`
 - `G206` p2 — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G206-gorsel.md`
 - `G207` p2 — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G207-gorsel.md`
@@ -337,7 +336,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
-- `G204` alindi · codex-gpt-gorsel — Tasarım 04 Vintage Airmail Love Letter — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G205` alindi · codex-gpt-gorsel — Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
@@ -385,4 +384,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 4
+Bağımlılık bekleyen: 0 · Biten: 5

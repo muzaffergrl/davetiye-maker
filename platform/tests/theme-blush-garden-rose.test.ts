@@ -4,7 +4,7 @@
 
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import type { ContentRecord } from '../lib/content/types.ts';
@@ -285,11 +285,61 @@ test('qa-kontrol 2026-10-14 (G401 third round): a home hero piece after the name
   const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
   const fold = js.slice(js.indexOf('function foldHero()'), js.indexOf('function initFold()'));
   assert.ok(fold.length > 100, 'foldHero found');
-  assert.doesNotMatch(fold, /textContent|innerHTML|innerText|setProperty/);
+  assert.doesNotMatch(fold, /textContent|innerHTML|innerText/);
+  // G058: besides the margins it only sets the names' --fit (no personal text, nothing else styled)
+  assert.deepEqual([...new Set([...fold.matchAll(/(?:set|remove)Property\('([^']+)'/g)].map((m) => m[1]))].sort(), ['--fit', 'margin-top']);
   assert.match(fold, /!c\.matches\('\.hero-card, \.names'\)/);
   assert.match(fold, /'position:fixed;height:100svh'/);
   assert.match(fold, /limit = sv - nav\.offsetHeight - 4, below = sv \+ 12/);
   assert.match(js, /initCountdown\(\);\s*\n\s*initFold\(\);/);
+});
+
+test('G058 short landscape phones: home card beside the names, envelope by the height, names ≥ 36 px and never under the nav', () => {
+  // theme-check holds 03 to the home first-screen rule at 844×390 / 667×375 too (img/manifest.json, written by build_images.py)
+  const images = JSON.parse(readFileSync(path.join(DIR, 'img/manifest.json'), 'utf8'));
+  assert.deepEqual(images.theme_check, { first_screen: { landscape: true, names_min_px: 36 } });
+  assert.match(readFileSync(path.join(DIR, 'build_images.py'), 'utf8'), /manifest\["theme_check"\] = \{"first_screen": \{"landscape": True, "names_min_px": 36\}\}/);
+
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const q = '@media (min-aspect-ratio: 1/1) and (max-height: 620px) and (max-width: 959px) {';
+  assert.equal(css.split(q).length, 2, 'one short-landscape block (bottom-nav widths only; ≥ 960 px keeps its top nav layout)');
+  const block = css.slice(css.indexOf(q) + q.length, css.indexOf('\n}', css.indexOf(q)));
+  const rule = (src: string, sel: string) => [...src.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter(([, s]) => s.trim() === sel).map(([, , body]) => body).join(';');
+  assert.match(rule(block, ':root'), /--nav-h:\s*48px/);
+  assert.match(rule(block, '.hero-inner'), /display:\s*grid/);
+  assert.match(rule(block, '.hero-card'), /grid-area:\s*1 \/ 1 \/ -1;\s*align-self:\s*start/, 'the card on the left, from the top (a folded piece never pulls it down)');
+  assert.match(rule(block, '.hero'), /--cw:\s*clamp\(150px, \(100svh - var\(--nav-h\) - var\(--safe-b\) - 24px\) \* \.62, 250px\)/, 'card ≥ 150 px, by the height');
+  assert.match(rule(block, '.hero .names'), /font-size:\s*calc\(clamp\(36px, [^;]*var\(--fit, 1\)\)/);
+  assert.match(rule(css, '.hero .names'), /font-size:\s*calc\(clamp\(50px, 15vw, 92px\) \* var\(--fit, 1\)\)/, 'portrait size unchanged, --fit only for a long pair');
+  assert.match(rule(block, '.hero .florals-br'), /display:\s*none/, 'the lower corner florals would reach the countdown');
+  assert.match(rule(block, '.env-page'), /--w:\s*calc\(min\(84vw, \(100svh - 116px - var\(--nm\) \* 1\.12\) \* 1\.1, 45\.6svh \+ var\(--nm\) \* \.51 - 6px, 460px\) - var\(--names-x, 0px\)\)/);
+  assert.match(rule(block, '.env-head .names'), /font-size:\s*calc\(var\(--nm\) \* var\(--fit, 1\)\)/);
+  assert.match(rule(block, '.is-opened .env-page'), /flex-direction:\s*row/, 'opened: Enter / Replay beside the envelope, on screen');
+  // the head leaves the row but stays laid out: fitText measures it for the replay (display: none would measure 0)
+  assert.match(rule(block, '.is-opened .env-head'), /position:\s*absolute;\s*visibility:\s*hidden/);
+  assert.doesNotMatch(block, /border|outline|box-shadow|gradient|url\(/, 'K21: layout only, nothing drawn');
+
+  // site.js: names end 8 px above the nav (inline boxes: the script's tails), shrink to 36 px at most (= names_min_px)
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  assert.match(js, /const NAMES_MIN = 36;/);
+  const fold = js.slice(js.indexOf('function foldHero()'), js.indexOf('function initFold()'));
+  assert.match(fold, /names\.querySelectorAll\('\*'\)/);
+  assert.match(fold, /end\(\) > limit - 4/);
+  assert.match(fold, /Math\.max\(min, Math\.floor\(lo \* 1000\) \/ 1000\)/, 'never below the floor by rounding');
+
+  // home: lazy corner florals have a size before they load (a 0 px tall lazy image above a clipping box never loaded);
+  // the hero card / photo sizes know the landscape card
+  const home = render('home');
+  for (const sel of ['.hero .florals-tl', '.hero .florals-br']) {
+    const img = home.$(sel);
+    assert.equal(img.attr('loading'), 'lazy');
+    assert.ok(Number(img.attr('width')) > 0 && Number(img.attr('height')) > 0, `${sel} width/height`);
+  }
+  assert.match(home.$('.hero-card > img').attr('sizes') ?? '', /^\(min-aspect-ratio: 1\/1\) and \(max-height: 620px\) and \(max-width: 959px\) /);
+
+  // docs/11 §6 budget
+  assert.ok(statSync(path.join(DIR, 'site.js')).size <= 35 * 1024, `site.js ${statSync(path.join(DIR, 'site.js')).size} B`);
+  assert.ok(statSync(path.join(DIR, 'site.css')).size <= 45 * 1024, `site.css ${statSync(path.join(DIR, 'site.css')).size} B`);
 });
 
 test('invitation card: without a full name the first name is shown (never an empty name line)', () => {
