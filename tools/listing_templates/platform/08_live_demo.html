@@ -1,0 +1,28 @@
+{{head}}
+<style>
+  :root { --corner: 480px; }
+  .qr { position: absolute; left: 230px; top: 560px; width: 860px; padding: 64px 70px 56px; text-align: center; z-index: 1; }
+  .qr img { width: 600px; height: 600px; display: block; margin: 0 auto; image-rendering: pixelated; }
+  .qr .scan { font-weight: 600; font-size: 34px; letter-spacing: .2em; text-transform: uppercase; color: var(--deep); margin-top: 36px; }
+  .qr .url { font-size: 30px; line-height: 1.4; margin-top: 16px; color: var(--ink); }
+  .ph { position: absolute; right: 230px; top: 520px; --pw: 560px; z-index: 1; transform: rotate(2deg); }
+  .note { bottom: 70px; left: 200px; right: 560px; line-height: 1.45; }
+</style>
+</head>
+<body>
+<img class="corner tl" src="{{part.corner_tl}}" alt="">
+<img class="corner br" src="{{part.corner_br}}" alt="">
+<header class="head">
+  <p class="eyebrow">{{theme_name}}</p>
+  <h1 class="serif">Try the live demo</h1>
+  <p class="sub">Open it on your phone before you buy</p>
+</header>
+<div class="qr card">
+  <img src="{{qr.demo}}" alt="QR code of the demo">
+  <p class="scan">Scan with your phone camera</p>
+  <p class="url">{{demo_host}}<br>{{demo_path}}</p>
+</div>
+<img class="phone ph" src="{{shot.d01_demo_home}}" alt="">
+<p class="note">The demo shows sample names and placeholder photos.<br>You add your own after purchase.</p>
+</body>
+</html>

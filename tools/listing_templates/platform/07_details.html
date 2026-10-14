@@ -1,0 +1,23 @@
+{{head}}
+<style>
+  :root { --pw: 470px; --gap: 80px; --corner: 430px; --corner-br: 360px; }
+  .row { top: 560px; }
+  .col:nth-child(2) { margin-top: -40px; }
+  .cap { width: 520px; }
+</style>
+</head>
+<body>
+<img class="corner tl" src="{{part.corner_tl}}" alt="">
+<img class="corner br" src="{{part.corner_br}}" alt="">
+<header class="head">
+  <p class="eyebrow">{{theme_name}} · Details</p>
+  <h1 class="serif">Everything guests ask</h1>
+  <p class="sub">Schedule, venue, map, travel &amp; stay and registry links</p>
+</header>
+<div class="row">
+  <div class="col"><img class="phone" src="{{shot.g07_details_schedule}}" alt=""><div class="cap"><h2>Order of the day</h2><p>Up to 10 events, with times and places</p></div></div>
+  <div class="col"><img class="phone" src="{{shot.g04_home_calendar}}" alt=""><div class="cap"><h2>Add to calendar</h2><p>Apple / Outlook and Google buttons</p></div></div>
+  <div class="col"><img class="phone" src="{{shot.g08_details_faq}}" alt=""><div class="cap"><h2>Questions &amp; answers</h2><p>Parking, children, rain plan: you write them</p></div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+/* Etsy listing images for the platform model (G059) — 2000 × 2000, filled by tools/listing_kit.py.
+   Layout and typography only (K21): the painted pieces (paper, florals) are the theme's own GPT parts, the phone
+   screens are real screenshots of the platform (tools/listing_templates/capture.ts). No drawn decoration.
+   Colours come from the collection's palette.json (--ink, --deep, --gold, …), set by listing_kit.py in :root. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: var(--w, 2000px); height: var(--h, 2000px); overflow: hidden; }
+body {
+  position: relative;
+  color: var(--ink);
+  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--mist-top);
+  background-image: var(--bg-image), radial-gradient(ellipse at 50% 38%, var(--ivory) 0%, var(--mist-top) 58%, var(--mist-bottom) 130%);
+  background-size: cover;
+  background-position: center;
+  -webkit-font-smoothing: antialiased;
+}
+.serif { font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif; }
+.script { font-family: "Great Vibes", "Snell Roundhand", cursive; font-weight: 400; }
+
+/* the theme's own painted corner clusters (GPT parts, cleaned for the website by the theme build) */
+.corner { position: absolute; width: var(--corner, 560px); height: auto; pointer-events: none; z-index: 0; }
+.corner.tl { top: -24px; left: -24px; }
+.corner.br { bottom: -24px; right: -24px; width: var(--corner-br, var(--corner, 560px)); }
+
+.head { position: absolute; left: 0; right: 0; top: var(--head-top, 120px); text-align: center; z-index: 2; padding: 0 300px; }
+.eyebrow {
+  font-weight: 600; font-size: 34px; letter-spacing: .3em; text-transform: uppercase; color: var(--deep);
+}
+.head h1 { font-size: 132px; line-height: 1.02; color: var(--deep); margin: 22px 0 14px; font-weight: 600; }
+.head h1.script { font-size: 190px; font-weight: 400; margin: 6px 0 4px; line-height: 1.1; }
+.sub { font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 54px; line-height: 1.25; color: var(--ink); }
+
+/* a real screen of the platform: frameless, rounded, soft shadow (a GPT phone mockup can replace this later) */
+.phone {
+  display: block; width: var(--pw, 520px); height: auto; border-radius: calc(var(--pw, 520px) * .085);
+  box-shadow: 0 26px 60px rgba(40, 30, 20, .22), 0 4px 14px rgba(40, 30, 20, .12);
+  outline: 3px solid rgba(255, 255, 255, .75); outline-offset: -1px;
+  background: var(--ivory);
+}
+.row { position: absolute; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-start; gap: var(--gap, 60px); z-index: 1; }
+.col { display: flex; flex-direction: column; align-items: center; }
+.cap { margin-top: 34px; text-align: center; width: calc(var(--pw, 520px) + 40px); }
+.cap .n { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 64px; color: var(--gold); line-height: 1; }
+.cap h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 58px; color: var(--deep); line-height: 1.05; margin-top: 6px; }
+.cap p { font-size: 29px; line-height: 1.42; margin-top: 12px; color: var(--ink); }
+.cap .label { font-weight: 600; font-size: 28px; letter-spacing: .2em; text-transform: uppercase; color: var(--deep); }
+
+.band {
+  position: absolute; left: 0; right: 0; bottom: var(--band-bottom, 92px); z-index: 2;
+  display: flex; justify-content: center; align-items: center; gap: 30px;
+  font-weight: 600; font-size: 32px; letter-spacing: .18em; text-transform: uppercase; color: var(--deep);
+}
+.band i { font-style: normal; color: var(--gold); font-size: 26px; letter-spacing: 0; }
+.note { position: absolute; left: 0; right: 0; text-align: center; z-index: 2; font-size: 30px; color: var(--ink); letter-spacing: .02em; }
+
+/* plain card behind text (layout surface, palette colours) */
+.card {
+  background: color-mix(in srgb, var(--ivory) 92%, transparent); border: 2px solid var(--gold-light); border-radius: 28px;
+  box-shadow: 0 18px 50px rgba(40, 30, 20, .12);
+}

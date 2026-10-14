@@ -1,0 +1,23 @@
+{{head}}
+<style>
+  :root { --head-top: 104px; --corner: 440px; }
+  .head h1.script { font-size: {{title_px}}px; margin: 22px 0 8px; }
+  .p1, .p2 { position: absolute; --pw: 600px; z-index: 1; }
+  .p1 { left: 330px; top: 560px; transform: rotate(-3deg); }
+  .p2 { left: 1070px; top: 520px; transform: rotate(3deg); }
+  .band { bottom: 58px; left: 300px; right: 300px; }
+</style>
+</head>
+<body>
+<img class="corner tl" src="{{part.corner_tl}}" alt="">
+<img class="corner br" src="{{part.corner_br}}" alt="">
+<header class="head">
+  <p class="eyebrow">Wedding website with RSVP</p>
+  <h1 class="script">{{theme_name}}</h1>
+  <p class="sub">{{tagline}}</p>
+</header>
+<img class="phone p1" src="{{shot.g01_envelope}}" alt="">
+<img class="phone p2" src="{{shot.g02_home_top}}" alt="">
+<div class="band"><span>Tap to open</span><i>◆</i><span>Edit online</span><i>◆</i><span>Online RSVP</span></div>
+</body>
+</html>
