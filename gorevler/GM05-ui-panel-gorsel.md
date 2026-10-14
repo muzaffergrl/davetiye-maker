@@ -30,3 +30,4 @@ GPT Düzenleme paneli'nin görsel tasarımını yapar (K21); Claude aynı görü
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği (marka tasarımına uygun site ve panel)
 - 2026-10-14 alindi: gpt-ui-panel
+- 2026-10-14 ara kayıt (3/6): U2.1 kurulum, U2.2 Home ve U2.3 Edit üretildi; U2.1 yeşil alan, U2.3 Preview yerleşimi için _v2 denemeleri kaydedildi. Metinler görsel olarak harf harf kontrol edildi.
