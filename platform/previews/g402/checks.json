@@ -2,7 +2,9 @@
  "base": "next start (production build)",
  "theme": "dusty-blue-champagne",
  "errors": [
-  "content change: Command failed: /opt/node22/bin/node --input-type=module -e "
+  "index: old content still visible after the change (\"Theo\")",
+  "home: old content still visible after the change (\"Theo\")",
+  "rsvp: old content still visible after the change (\"Theo\")"
  ],
  "warnings": [],
  "passed": [
@@ -77,7 +79,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 488, nav top 313)",
   "home@667×375 (stress record): no overflow, 43 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 236×48, rsvp \"Replay the envelope\" 193×48",
-  "envelope → /eleanor-and-theo/home in 4406 ms, card transition flag set",
+  "envelope → /eleanor-and-theo/home in 4458 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (14 steps)",
   "countdown target from the platform: 2027-09-18 16:30 America/New_York = 2027-09-18 20:30 UTC",
@@ -91,13 +93,20 @@
   "RSVP: \"Send another reply\" reopens the form",
   "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
   "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
   "Skip → home",
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-09-18T21:30:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-09-23T20:30:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (390 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (196 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390 (changed content): no overflow, 31 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 18 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 6 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "index@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "home@360 (stress record): no overflow, 43 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots placeholder",
   "story@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
@@ -113,7 +122,7 @@
   "home first view (390×844, DPR 3, placeholders): 1010 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 977 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1145 KB",
-  "recording: previews/g402/opening_390x844.mp4 (2150 KB, lead-in 0.68 s cut, first frame mean 201,206,208) — tap → opening → home → story → details"
+  "recording: previews/g402/opening_390x844.mp4 (2420 KB, lead-in 0.53 s cut, first frame mean 202,206,209) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -456,11 +465,11 @@
     "bad": [
      "span.cd-num \"350\" bottom 589",
      "span.cd-lbl \"Days\" bottom 604",
-     "span.cd-num \"07\" bottom 589",
+     "span.cd-num \"06\" bottom 589",
      "span.cd-lbl \"Hours\" bottom 604",
-     "span.cd-num \"12\" bottom 589",
+     "span.cd-num \"53\" bottom 589",
      "span.cd-lbl \"Minutes\" bottom 604",
-     "span.cd-num \"25\" bottom 589",
+     "span.cd-num \"35\" bottom 589",
      "span.cd-lbl \"Seconds\" bottom 604"
     ],
     "partly": [],
@@ -525,11 +534,11 @@
     "bad": [
      "span.cd-num \"339\" bottom 676",
      "span.cd-lbl \"Days\" bottom 691",
-     "span.cd-num \"07\" bottom 676",
-     "span.cd-lbl \"Hours\" bottom 691",
-     "span.cd-num \"12\" bottom 676",
-     "span.cd-lbl \"Minutes\" bottom 691",
      "span.cd-num \"06\" bottom 676",
+     "span.cd-lbl \"Hours\" bottom 691",
+     "span.cd-num \"53\" bottom 676",
+     "span.cd-lbl \"Minutes\" bottom 691",
+     "span.cd-num \"17\" bottom 676",
      "span.cd-lbl \"Seconds\" bottom 691"
     ],
     "partly": [],
@@ -555,11 +564,11 @@
      "p.hero-city.in.done \"Charleston, South Caroli\" bottom 590",
      "span.cd-num \"339\" bottom 626",
      "span.cd-lbl \"Days\" bottom 641",
-     "span.cd-num \"07\" bottom 626",
+     "span.cd-num \"06\" bottom 626",
      "span.cd-lbl \"Hours\" bottom 641",
-     "span.cd-num \"11\" bottom 626",
+     "span.cd-num \"53\" bottom 626",
      "span.cd-lbl \"Minutes\" bottom 641",
-     "span.cd-num \"59\" bottom 626",
+     "span.cd-num \"11\" bottom 626",
      "span.cd-lbl \"Seconds\" bottom 641",
      "a.btn \"RSVP\" bottom 695"
     ],
@@ -585,11 +594,11 @@
     "bad": [
      "span.cd-num \"339\" bottom 426",
      "span.cd-lbl \"Days\" bottom 443",
-     "span.cd-num \"07\" bottom 426",
+     "span.cd-num \"06\" bottom 426",
      "span.cd-lbl \"Hours\" bottom 443",
-     "span.cd-num \"11\" bottom 426",
-     "span.cd-lbl \"Minutes\" bottom 443",
      "span.cd-num \"53\" bottom 426",
+     "span.cd-lbl \"Minutes\" bottom 443",
+     "span.cd-num \"05\" bottom 426",
      "span.cd-lbl \"Seconds\" bottom 443"
     ],
     "partly": [],
@@ -614,11 +623,11 @@
     "bad": [
      "span.cd-num \"339\" bottom 414",
      "span.cd-lbl \"Days\" bottom 431",
-     "span.cd-num \"07\" bottom 414",
+     "span.cd-num \"06\" bottom 414",
      "span.cd-lbl \"Hours\" bottom 431",
-     "span.cd-num \"11\" bottom 414",
+     "span.cd-num \"52\" bottom 414",
      "span.cd-lbl \"Minutes\" bottom 431",
-     "span.cd-num \"46\" bottom 414",
+     "span.cd-num \"59\" bottom 414",
      "span.cd-lbl \"Seconds\" bottom 431",
      "a.btn \"RSVP\" bottom 488"
     ],
@@ -626,10 +635,40 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4406,
+  "envelope_to_home_ms": 4458,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
   },
   "stress_record": {
    "slug": "stress-site",
@@ -669,7 +708,7 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    45664
+    45792
    ],
    [
     "/themes/dusty-blue-champagne/img/env_closed-857.webp",
@@ -704,7 +743,7 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    45664
+    45792
    ],
    [
     "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
@@ -730,7 +769,7 @@
     85622
    ],
    [
-    "/media/fddb68e1-1056-4d3a-836c-14749cbe8c7d/504d89fbf334800c5ca05dab40208b8b-640w.jpg",
+    "/media/526e8c5d-3bde-4c64-be16-cc6e7434d507/cbfdd3733998dc6435608f898326a07b-640w.jpg",
     63994
    ],
    [
@@ -743,7 +782,7 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    45664
+    45792
    ],
    [
     "/themes/dusty-blue-champagne/img/env_closed-857.webp",
@@ -769,11 +808,11 @@
     85622
    ],
    [
-    "/media/fddb68e1-1056-4d3a-836c-14749cbe8c7d/e4b37319c9be6aef53d29d7d0648ba83-640w.jpg",
+    "/media/526e8c5d-3bde-4c64-be16-cc6e7434d507/31d91c339708696e712ca7b8c370178f-640w.jpg",
     77836
    ],
    [
-    "/media/fddb68e1-1056-4d3a-836c-14749cbe8c7d/504d89fbf334800c5ca05dab40208b8b-640w.jpg",
+    "/media/526e8c5d-3bde-4c64-be16-cc6e7434d507/cbfdd3733998dc6435608f898326a07b-640w.jpg",
     63994
    ],
    [
@@ -782,18 +821,18 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    45664
+    45792
    ]
   ],
-  "video_kb": 2150,
+  "video_kb": 2420,
   "video_first_frame": {
-   "lead_in_s": 0.68,
+   "lead_in_s": 0.53,
    "mean_rgb": [
-    201,
+    202,
     206,
-    208
+    209
    ],
-   "stdev": 45
+   "stdev": 43
   },
   "compare": {
    "source": "w1",

@@ -90,7 +90,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
   padding: 16px 0 env(safe-area-inset-bottom);
-  background: linear-gradient(rgba(204, 220, 236, 0), rgba(214, 226, 238, .86) 16px, rgba(218, 229, 240, .95));
+  background: linear-gradient(#c8d8e900, #c8d8e966 6px, #c8d8e9cc 11px, #c8d8e9f7 15px, #c8d8e9 18px);   /* opaque under the row (G064) */
 }
 .site-nav ul { display: flex; justify-content: center; align-items: center; margin: 0 auto; padding: 0 8px; list-style: none; max-width: 640px; }
 .site-nav ul::before, .site-nav ul::after { content: ""; flex: 1 1 0; min-width: 8px; max-width: 72px; height: 1px; background: var(--gold); opacity: .9; }
@@ -288,6 +288,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
 ::view-transition-group(invite-card) { animation-duration: .9s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .55s; }
+::view-transition-new(site-nav):only-child { animation: none; }   /* the nav arrives whole (G064) */
 .hero .names { margin-top: clamp(10px, 2.4svh, 24px); font-size: calc(var(--hn) * var(--names-scale, 1)); line-height: 1.08; text-wrap: balance; overflow-wrap: anywhere; }
 .hero-date { margin-top: calc(var(--hn) * .14); font-size: 13px; letter-spacing: .3em; }
 .hero-venue { margin-top: 8px; font-style: italic; font-weight: 500; font-size: clamp(22px, 6.4vw, 30px); line-height: 1.2; color: var(--blue-ink); text-wrap: balance; overflow-wrap: anywhere; }

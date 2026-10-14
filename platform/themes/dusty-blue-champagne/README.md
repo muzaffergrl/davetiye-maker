@@ -82,7 +82,7 @@ Alt metinler içerikten.
   yükselir (1 820 ms'den, 1 420 ms) — bu sırada **tek okaliptüs yaprağı** (accent_1 × 1, `fall`) kartın yanındaki şeritten
   süzülür (kartın fotoğrafının üstünden geçmez: `avoid: '.env .card'`; `go`dan önce ekrandan çıkar). Kart alt köşeleri cebin
   kenarını aştıktan sonra (`out` −92 %) olduğu yerde öne gelir (`front` −89 % × 1,04) ve view transition ile home hero kartına
-  uçar (yukarı–aşağı–yukarı yok). Dokun → home 4,2 s (`go`; theme-check ölçümü sayfa geçişiyle 4,5 s; Skip her an); `arriveDelay` 0: home'da isimler kart inerken yazılır,
+  uçar (yukarı–aşağı–yukarı yok). Dokun → home 4,2 s (`go`; theme-check ölçümü sayfa geçişiyle 4,4–4,9 s; Skip her an); `arriveDelay` 0: home'da isimler kart inerken yazılır,
   uzun boş bekleme yok. "Replay"de kapalı zarfın üstünde kırpılmamış kart uçuşmaz; `?replay=1` `<head>` betiğinde de kapalı.
 - **Story:** üç anlık baskı **sırayla** (her baskı kendi `data-scene`'i, `batchGap` 420 ms) yandan/alttan uçar, döner ve hafif
   taşmalı (`--settle`) −4,5° / +4° / −2,5° açılarla oturur; başlık baskının alt kenar boşluğuna 1,05 s sonra yazılır. Baskılar
@@ -145,7 +145,7 @@ names_min_px: 36}`):
 | mekân (italik), şehir + eyalet | `.hero-venue`, `.hero-city` | |
 | dört kutulu geri sayım | `.countdown` sade rakam + etiket | **sapma:** kutular CSS çerçeve olurdu (K21, §5.7); < 380 px'te iki nokta ayıracı gizli |
 | tozlu mavi RSVP hapı | `.hero-cta .btn` | hap düğme (arayüz) |
-| alt gezinme "HOME · STORY · DETAILS · RSVP" iki altın kıl çizgi arasında | `.site-nav` | 1 px ayraçlar (arayüz) |
+| alt gezinme "HOME · STORY · DETAILS · RSVP" iki altın kıl çizgi arasında | `.site-nav` | 1 px ayraçlar (arayüz); yumuşak üst geçiş (0 → .97, 15 px) + satırın altında kâğıt tonunda opak zemin #C8D8E9 (G064 dersi: kayarken arkadaki yazı/foto harflerin arasından okunmaz); zarf → home geçişinde nav ilk karede tam gelir (`::view-transition-new(site-nav):only-child`) |
 | — (comp yok) | çiçekli davet kartı (`invitation_card` 3 dilim; isimler güllerin arasındaki düz kâğıtta, `fitInvite`) + "Together with their families", davet cümlesi, tarih satırı, dal, mekân, takvime ekle; üç bölüm (story_1 baskısı · günün kartı ilk 4 satır · mühür + tek "Kindly reply by"); kapanış ("With love," + isimler + "Open the envelope again") | bu tasarımın parçaları ve dili. **Not:** ev sahibi satırı kartın altında (kartın düz kâğıdı yalnız isimlere yetiyor; uzun ev sahibi satırı güllere değerdi) |
 
 ### story ← W1.3 `web_3_story.png`
@@ -190,22 +190,21 @@ names_min_px: 36}`):
 - `story.items` 3'ten fazlaysa ilk 3 başlık; anların `text`'i gösterilmez. Monogram (`initials`) mühürde gösterilir.
 - Link blokları yalnız linkleriyle; `rsvp.method` dolu → RSVP sayfası 404, ona giden her link kalkar.
 - `favicon.png` şeffaf; `apple-touch-icon` yazılmaz (docs/11 §3.1).
-- Kontrast (oluşan sayfada metnin arkasındaki piksellerin medyanı, metin saydam yapılıp ölçüldü; 390×844 tüm sayfalar,
-  360×640 ve 844×390 home ilk ekranı, 844×390 zarf, 1280 home/rsvp, stres kaydı): küçük metin en düşük **4,60:1** (stres
-  kaydı home; demo kaydında 4,81: home, nav; details/rsvp 4,84), büyük metin (≥ 24 px) en düşük 4,27:1 (≥ 3 gerekir). Davet kartı / gün kartı / RSVP kartındaki
-  altın el yazısı `--gold-card` #85642F (fildişi kâğıtta 4,76:1; ilk ölçümde #8A6831 stres kaydının 22,9 px kart isimlerinde
-  4,48'di). Mühürdeki monogram (zarf, home bölümü, RSVP kartı) bilerek kabartma tonunda (`--seal-ink` #EEF2F6 mavi mumda ≈ 3,6:1)
-  ve süs: yardımcı teknolojiden gizli (`aria-hidden`), isimler sayfada metin olarak var.
+- Kontrast (oluşan sayfada metnin arkasındaki piksellerin medyanı, metin saydam yapılıp ölçüldü; tam sayfa ölçümünde sabit
+  nav gizlenir, nav ilk ekran ölçümünde; 390×844 beş sayfa, 360×640 ve 844×390 home ilk ekranı, 844×390 zarf, 1280
+  home/rsvp, stres kaydı): küçük metin en düşük **4,60:1** (stres kaydı, davet kartındaki 22,9 px isim; demo kaydında 4,81:
+  hero kartındaki "We're getting married"), büyük metin (≥ 24 px) en düşük 4,38:1 (≥ 3 gerekir), nav 7,95:1. Kartlardaki
+  altın el yazısı `--gold-card` #85642F (fildişi kâğıtta 4,76:1; ilk ölçümde #8A6831 stres kaydında 4,48'di). Mühürdeki
+  monogram (zarf, home bölümü, RSVP kartı) bilerek kabartma tonunda (`--seal-ink` #EEF2F6 mavi mumda ≈ 3,6:1) ve süs:
+  yardımcı teknolojiden gizli (`aria-hidden`), isimler sayfada metin olarak var.
 - Yazı tabanı: görünen her metin ≥ 11 px (kart kopyası `fitCopy`, baskı başlıkları `fitLines` — tabanlar yukarı yuvarlanır,
   10,99 px olmaz); mühür monogramı `max(11px, 12.5cqw)`. Android'de dokunma dikdörtgeni yok (`-webkit-tap-highlight-color`).
 - Köşe kümeleri hiçbir yerde düz çizgiyle kesilmez: sayfa sonu bölümleri sayfanın altına kadar iner (küme nav'ın altında sayfa
   kenarında biter); üst köşeler ekran kenarında kırpılır (`overflow-x: clip`), geniş RSVP'de (≥ 960 px) sayfanın kenarında.
 - Açılış giriş durumları ekran dışına taşmaz: home bölümlerindeki baskı/kart yukarı doğru dönerek oturur (`fly-up-l/r`), yalnız
   story baskıları ve mekân baskısı yandan uçar (bölüm `overflow-x: clip`).
-- `theme-check` "content change" adımı bu temada geçmiyor, tema dışı iki sebeple: (1) denetimin yaması 2. ismi "Theo" yapıyor
-  (01/03 demolarına göre yazılmış), bu demonun 2. ismi de "Theo" → 3 yanlış alarm "old content still visible ("Theo")";
-  (2) G060 haklarından sonra `publishSite` yayındaki sitede isim değişikliğini `IdentityMismatchError` ile reddediyor, adım
-  her temada çöküyor. Aynı değişiklik "Maren & Jonah" ile ayrı tohumlanmış sitede elle denendi: beş sayfada eski demo sözcüğü
-  (Eleanor, Theo, Rosewood, Charleston, E&T) yok.
+- `theme-check` "content change" adımı bu temada 3 **yanlış alarm** verir: denetimin yaması 2. ismi "Theo" yapıyor (01/03
+  demolarına göre yazılmış), bu demonun 2. ismi de "Theo" → "old content still visible ("Theo")". Aynı değişiklik "Maren &
+  Jonah" ile ayrı tohumlanmış sitede elle denendi: beş sayfada eski demo sözcüğü (Eleanor, Theo, Rosewood, Charleston, E&T) yok.
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (Safari'nin yatay araç çubukları, `svh`, `mask`, `ResizeObserver`,
   `overflow: clip`), Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
