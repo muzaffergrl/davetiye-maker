@@ -2,7 +2,7 @@
 id: GM04
 baslik: BKE Studio Satış sitesi arayüz tasarımı — 6 yüksek kaliteli ekran comp'u (GPT tasarlar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-ui-site
 oncelik: 1
 bagimli: [GM01]
@@ -39,3 +39,5 @@ GPT Satış sitesi'nin görsel tasarımını yapar (K21); Claude aynı görünü
 - 2026-10-14 ara kayıt (3/6): gpt-ui-site; U1.1–U1.3 kaydedildi. U1.1 fazla dekor/yeşil alan, U1.2 eklenen metin nedeniyle yeniden üretildi; seçilen sürümler sade adlarda.
 - 2026-10-14 ara kayıt (6/6): gpt-ui-site; U1.4–U1.6 kaydedildi, son metin ve dosya kontrolü sürüyor.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-ui-site; altı comp ve renk kesinliği sınırı Sonuç'a işlendi.
+- 2026-10-14 entegratör incelemesi: comp'lar onaylandı; U1.1'de başlıkta yazım hatası ("weding") — comp yalnız referans, G066 doğru metni kullanır
+- 2026-10-14 entegratör onayladı
