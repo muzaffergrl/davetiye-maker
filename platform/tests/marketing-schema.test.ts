@@ -7,19 +7,26 @@ import { liveDesigns } from '../lib/marketing/designs.ts';
 import { faqItems, plainAnswer } from '../lib/marketing/faq.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { article, breadcrumbs, faqEntities, graph, itemList, jsonLdString, organization, product, videoObject, webPage, website } from '../lib/marketing/schema.ts';
+import { isPlaceholder } from '../lib/marketing/placeholders.ts';
 import { corePages } from '../lib/marketing/site.ts';
 import { readyConfig, validateJsonLd } from './marketing-helpers.ts';
 
-test('today (placeholders): organization/website/product leave the undecided fields out instead of writing [BRAND]', () => {
+test('today: the brand name is decided (K27), the undecided fields (email, price, Etsy link) stay out of JSON-LD', () => {
   const org = organization();
-  assert.equal(org.name, undefined);
-  assert.equal(org.email, undefined);
-  assert.equal(org.contactPoint, undefined);
-  assert.equal(website().name, undefined);
+  const brand = isPlaceholder(MARKETING.brand.name) ? undefined : MARKETING.brand.name;
+  assert.equal(org.name, brand);
+  assert.equal(website().name, brand);
+  if (brand) assert.match(String(org.logo), /^https?:\/\/[^/]+\/brand\/icon-512\.png$/, 'square brand logo for Organization');
+  if (isPlaceholder(MARKETING.support.email)) {
+    assert.equal(org.email, undefined);
+    assert.equal(org.contactPoint, undefined);
+  }
   for (const d of liveDesigns()) {
     const p = product(d);
-    assert.equal(p.offers, undefined, `${d.id}: no Offer while the price / Etsy link is a placeholder`);
-    assert.equal(p.brand, undefined);
+    if (isPlaceholder(d.price) || isPlaceholder(d.etsyListingUrl)) {
+      assert.equal(p.offers, undefined, `${d.id}: no Offer while the price / Etsy link is a placeholder`);
+    }
+    assert.deepEqual(p.brand, brand ? { '@id': org['@id'] } : undefined);
     assert.ok((p.image as string[]).length >= 3);
   }
   const all = graph(

@@ -1,0 +1,1839 @@
+{
+  "tool": "tests/marketing-browser.ts (G061, G066)",
+  "date": "2026-10-14",
+  "server": "next start (local production build), temp data folder",
+  "throttling": "perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2",
+  "passed": 283,
+  "failed": 0,
+  "metrics": {
+    "/": {
+      "lcp": 1516,
+      "lcpElement": "IMG http://127.0.0.1:45469/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1240,
+      "loadMs": 5392,
+      "transferredKB": 357,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 125
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1528,
+      "lcpElement": "IMG http://127.0.0.1:45469/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0.0003,
+      "fcp": 1040,
+      "loadMs": 5427,
+      "transferredKB": 389,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 159
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 1216,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 1216,
+      "loadMs": 4759,
+      "transferredKB": 234,
+      "scriptKB": 139,
+      "fontKB": 67,
+      "imageKB": 3
+    }
+  },
+  "checks": [
+    {
+      "name": "/ @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/ @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/ @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/ @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/ @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/ @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/how-it-works @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/how-it-works @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/how-it-works @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/how-it-works @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/how-it-works @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/how-it-works @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/features @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/features @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/features @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/features @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/features @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/features @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/pricing @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/pricing @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/pricing @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/pricing @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/pricing @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/pricing @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/faq @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/faq @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/faq @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/faq @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/faq @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/faq @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/about @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/about @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/about @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/about @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/about @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/about @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/contact @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/contact @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/contact @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/contact @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/contact @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/contact @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/privacy @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/privacy @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/privacy @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/privacy @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/privacy @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/privacy @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/blush-garden-rose @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/blush-garden-rose @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/blush-garden-rose @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/blush-garden-rose @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/blush-garden-rose @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/blush-garden-rose @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/olive-ivory @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/olive-ivory @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/olive-ivory @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/olive-ivory @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/olive-ivory @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/olive-ivory @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/wedding-website-wording @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/wedding-website-wording @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/wedding-website-wording @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/wedding-website-wording @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/wedding-website-wording @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/wedding-website-wording @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/ @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/ @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/ @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/ @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/how-it-works @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/how-it-works @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/how-it-works @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/how-it-works @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/features @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/features @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/features @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/features @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/pricing @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/pricing @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/pricing @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/pricing @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/faq @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/faq @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/faq @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/faq @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/about @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/about @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/about @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/about @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/contact @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/contact @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/contact @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/contact @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/privacy @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/privacy @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/privacy @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/privacy @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/blush-garden-rose @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/blush-garden-rose @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/blush-garden-rose @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/blush-garden-rose @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/olive-ivory @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/olive-ivory @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/olive-ivory @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/olive-ivory @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/wedding-website-wording @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/wedding-website-wording @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/wedding-website-wording @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/wedding-website-wording @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/ @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/ @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/ @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/ @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/how-it-works @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/how-it-works @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/how-it-works @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/how-it-works @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/features @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/features @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/features @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/features @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/pricing @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/pricing @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/pricing @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/pricing @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/faq @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/faq @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/faq @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/faq @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/about @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/about @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/about @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/about @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/contact @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/contact @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/contact @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/contact @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/privacy @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/privacy @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/privacy @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/privacy @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/blush-garden-rose @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/blush-garden-rose @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/blush-garden-rose @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/blush-garden-rose @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/olive-ivory @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/olive-ivory @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/olive-ivory @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/olive-ivory @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/how-to-make-a-wedding-website @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/what-to-put-on-your-wedding-website @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/when-to-send-your-wedding-website @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/wedding-website-wording @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/wedding-website-wording @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/wedding-website-wording @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/wedding-website-wording @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/digital-wedding-invitation-etiquette @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/guides/canva-wedding-website-template-vs-hosted-website @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "brand: header logo is the anchor SVG, footer logo the reverse SVG, both load",
+      "ok": true,
+      "detail": {
+        "header": {
+          "src": "/brand/bke-logo-horizontal-anchor.svg",
+          "alt": "BKE Studio home",
+          "ok": true
+        },
+        "footer": {
+          "src": "/brand/bke-logo-horizontal-reverse.svg",
+          "alt": "BKE Studio",
+          "ok": true
+        },
+        "icons": [
+          "manifest /brand/site.webmanifest",
+          "icon /brand/favicon.ico",
+          "icon /brand/icon.svg",
+          "apple-touch-icon /brand/apple-touch-icon.png"
+        ]
+      }
+    },
+    {
+      "name": "brand: favicon, SVG icon, apple-touch-icon and manifest in <head>",
+      "ok": true,
+      "detail": [
+        "manifest /brand/site.webmanifest",
+        "icon /brand/favicon.ico",
+        "icon /brand/icon.svg",
+        "apple-touch-icon /brand/apple-touch-icon.png"
+      ]
+    },
+    {
+      "name": "brand: icon, manifest and pattern files answer 200",
+      "ok": true,
+      "detail": {
+        "/brand/favicon.ico": "200 image/x-icon",
+        "/brand/icon.svg": "200 image/svg+xml",
+        "/brand/apple-touch-icon.png": "200 image/png",
+        "/brand/icon-192.png": "200 image/png",
+        "/brand/icon-512.png": "200 image/png",
+        "/brand/site.webmanifest": "200 application/manifest+json",
+        "/brand/pattern_tile.png": "200 image/png"
+      }
+    },
+    {
+      "name": "brand: manifest names BKE Studio with 192 and 512 px icons",
+      "ok": true,
+      "detail": {
+        "name": "BKE Studio",
+        "short_name": "BKE Studio",
+        "description": "Wedding websites that open like a real invitation.",
+        "start_url": "/",
+        "display": "browser",
+        "background_color": "#FAF7F0",
+        "theme_color": "#2B1526",
+        "icons": [
+          {
+            "src": "/brand/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
+            "src": "/brand/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
+            "src": "/brand/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+          }
+        ]
+      }
+    },
+    {
+      "name": "brand: platform pages (/start) carry the brand tab icon too",
+      "ok": true,
+      "detail": [
+        "/brand/favicon.ico",
+        "/brand/icon.svg"
+      ]
+    },
+    {
+      "name": "demo: no theme or demo request before a tap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "demo: no iframe before a tap",
+      "ok": true
+    },
+    {
+      "name": "demo (phone): opens a modal dialog with the theme demo",
+      "ok": true,
+      "detail": "/start/demo/blush-garden-rose"
+    },
+    {
+      "name": "demo (phone): the theme loads inside the dialog",
+      "ok": true,
+      "detail": 16
+    },
+    {
+      "name": "demo (phone): the demo fills the screen width",
+      "ok": true,
+      "detail": {
+        "w": 390,
+        "h": 714
+      }
+    },
+    {
+      "name": "demo (phone): Esc closes the dialog",
+      "ok": true
+    },
+    {
+      "name": "demo (phone): focus returns to the button",
+      "ok": true,
+      "detail": "Open the invitation"
+    },
+    {
+      "name": "demo: demo_open event fired",
+      "ok": true,
+      "detail": [
+        {
+          "name": "demo_open",
+          "data": {
+            "design": "blush-garden-rose",
+            "placement": "home-hero-button"
+          }
+        },
+        {
+          "name": "demo_open",
+          "data": {
+            "design": "olive-ivory",
+            "placement": "home-strip"
+          }
+        }
+      ]
+    },
+    {
+      "name": "demo: a design chip switches the poster",
+      "ok": true,
+      "detail": "/marketing/designs/olive-ivory/envelope-640.webp"
+    },
+    {
+      "name": "demo: a card \"Open live demo\" opens its design",
+      "ok": true
+    },
+    {
+      "name": "demo: the close button closes it",
+      "ok": true
+    },
+    {
+      "name": "mobile menu opens",
+      "ok": true
+    },
+    {
+      "name": "FAQ answer opens",
+      "ok": true
+    },
+    {
+      "name": "design page (phone): sticky Live demo / Etsy bar at the bottom",
+      "ok": true,
+      "detail": {
+        "bottom": 844,
+        "vh": 844,
+        "visible": true
+      }
+    },
+    {
+      "name": "demo (wide): loads in place, no dialog",
+      "ok": true
+    },
+    {
+      "name": "demo (wide): 390 × 844 demo scaled into the hero screen",
+      "ok": true,
+      "detail": {
+        "w": 272,
+        "h": 589,
+        "t": "scale(0.697436)"
+      }
+    },
+    {
+      "name": "demo (wide): Close demo returns to the poster",
+      "ok": true
+    },
+    {
+      "name": "perf /: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1516,
+        "lcpElement": "IMG http://127.0.0.1:45469/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "cls": 0,
+        "fcp": 1240,
+        "loadMs": 5392,
+        "transferredKB": 357,
+        "scriptKB": 140,
+        "fontKB": 67,
+        "imageKB": 125
+      }
+    },
+    {
+      "name": "perf /: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": 357
+    },
+    {
+      "name": "perf /designs/olive-ivory: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1528,
+        "lcpElement": "IMG http://127.0.0.1:45469/marketing/designs/olive-ivory/envelope-480.webp",
+        "cls": 0.0003,
+        "fcp": 1040,
+        "loadMs": 5427,
+        "transferredKB": 389,
+        "scriptKB": 140,
+        "fontKB": 67,
+        "imageKB": 159
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0.0003
+    },
+    {
+      "name": "perf /designs/olive-ivory: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": 389
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1216,
+        "lcpElement": "P",
+        "cls": 0,
+        "fcp": 1216,
+        "loadMs": 4759,
+        "transferredKB": 234,
+        "scriptKB": 139,
+        "fontKB": 67,
+        "imageKB": 3
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": 234
+    }
+  ]
+}

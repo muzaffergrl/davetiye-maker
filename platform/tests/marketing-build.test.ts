@@ -56,7 +56,10 @@ function otherTargetOk(href: string): boolean {
   const demo = /^\/start\/demo\/([a-z0-9-]+)$/.exec(u.pathname);
   if (demo) return live.has(demo[1]);
   if (u.pathname.startsWith('/themes/')) return existsSync(path.join(PLATFORM_ROOT, decodeURIComponent(u.pathname)));
-  if (u.pathname.startsWith('/marketing/')) return existsSync(path.join(PLATFORM_ROOT, 'public', decodeURIComponent(u.pathname)));
+  // G066: the brand kit (logos, icons, manifest) is served from public/brand/.
+  if (u.pathname.startsWith('/marketing/') || u.pathname.startsWith('/brand/')) {
+    return existsSync(path.join(PLATFORM_ROOT, 'public', decodeURIComponent(u.pathname)));
+  }
   return ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt'].includes(u.pathname);
 }
 

@@ -1,0 +1,276 @@
+{
+  "what": "G066 before/after performance. \"before\" = main 72183a4 (G061 design), \"after\" = G066 BKE Studio design; same machine, same session, both local production builds (next start).",
+  "lab_cdp": {
+    "tool": "tests/marketing-browser.ts (docs/14 §9.8): CDP CPU 4x, 150 ms RTT, 1.6 Mbps, 390x844 DPR 2, cache off",
+    "before": {
+      "/": {
+        "lcp": 1800,
+        "lcpElement": "IMG http://127.0.0.1:46455/marketing/designs/blush-garden-rose/envelope-640.webp",
+        "cls": 0,
+        "fcp": 920,
+        "loadMs": 5189,
+        "transferredKB": 300,
+        "scriptKB": 140,
+        "fontKB": 37,
+        "imageKB": 100
+      },
+      "/designs/olive-ivory": {
+        "lcp": 1760,
+        "lcpElement": "IMG http://127.0.0.1:46455/marketing/designs/olive-ivory/envelope-640.webp",
+        "cls": 0,
+        "fcp": 848,
+        "loadMs": 5131,
+        "transferredKB": 300,
+        "scriptKB": 140,
+        "fontKB": 37,
+        "imageKB": 102
+      },
+      "/guides/how-to-make-a-wedding-website": {
+        "lcp": 1088,
+        "lcpElement": "P",
+        "cls": 0,
+        "fcp": 1088,
+        "loadMs": 4610,
+        "transferredKB": 198,
+        "scriptKB": 138,
+        "fontKB": 37,
+        "imageKB": 0
+      }
+    },
+    "after": {
+      "/": {
+        "lcp": 1516,
+        "lcpElement": "IMG http://127.0.0.1:45469/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "cls": 0,
+        "fcp": 1240,
+        "loadMs": 5392,
+        "transferredKB": 357,
+        "scriptKB": 140,
+        "fontKB": 67,
+        "imageKB": 125
+      },
+      "/designs/olive-ivory": {
+        "lcp": 1528,
+        "lcpElement": "IMG http://127.0.0.1:45469/marketing/designs/olive-ivory/envelope-480.webp",
+        "cls": 0.0003,
+        "fcp": 1040,
+        "loadMs": 5427,
+        "transferredKB": 389,
+        "scriptKB": 140,
+        "fontKB": 67,
+        "imageKB": 159
+      },
+      "/guides/how-to-make-a-wedding-website": {
+        "lcp": 1216,
+        "lcpElement": "P",
+        "cls": 0,
+        "fcp": 1216,
+        "loadMs": 4759,
+        "transferredKB": 234,
+        "scriptKB": 139,
+        "fontKB": 67,
+        "imageKB": 3
+      }
+    }
+  },
+  "lighthouse": {
+    "tool": "lighthouse@13.5.0 (pinned, temporary install outside the repo), default mobile config (simulated slow 4G, CPU 4x), 2 runs per page",
+    "note": "Scores move by several points between runs on this shared machine.",
+    "before": {
+      "/": [
+        {
+          "performance": 98,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.2 s",
+          "tbt": "110 ms",
+          "cls": "0",
+          "bytes": "Total size was 278 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 97,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.3 s",
+          "tbt": "140 ms",
+          "cls": "0",
+          "bytes": "Total size was 278 KiB",
+          "a11yFails": []
+        }
+      ],
+      "/designs/olive-ivory": [
+        {
+          "performance": 91,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "3.0 s",
+          "tbt": "210 ms",
+          "cls": "0",
+          "bytes": "Total size was 277 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 96,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.0 s",
+          "tbt": "200 ms",
+          "cls": "0",
+          "bytes": "Total size was 277 KiB",
+          "a11yFails": []
+        }
+      ],
+      "/guides/how-to-make-a-wedding-website": [
+        {
+          "performance": 98,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "lcp": "1.9 s",
+          "tbt": "140 ms",
+          "cls": "0",
+          "bytes": "Total size was 199 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 98,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "lcp": "2.0 s",
+          "tbt": "150 ms",
+          "cls": "0",
+          "bytes": "Total size was 199 KiB",
+          "a11yFails": []
+        }
+      ],
+      "/faq": [
+        {
+          "performance": 97,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "lcp": "2.3 s",
+          "tbt": "100 ms",
+          "cls": "0",
+          "bytes": "Total size was 200 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 98,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 66,
+          "lcp": "2.3 s",
+          "tbt": "110 ms",
+          "cls": "0",
+          "bytes": "Total size was 200 KiB",
+          "a11yFails": []
+        }
+      ]
+    },
+    "after": {
+      "/": [
+        {
+          "performance": 90,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.5 s",
+          "tbt": "330 ms",
+          "cls": "0",
+          "bytes": "Total size was 361 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 90,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "3.4 s",
+          "tbt": "80 ms",
+          "cls": "0",
+          "bytes": "Total size was 361 KiB",
+          "a11yFails": []
+        }
+      ],
+      "/designs/olive-ivory": [
+        {
+          "performance": 97,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.5 s",
+          "tbt": "100 ms",
+          "cls": "0",
+          "bytes": "Total size was 394 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 88,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "3.7 s",
+          "tbt": "120 ms",
+          "cls": "0",
+          "bytes": "Total size was 394 KiB",
+          "a11yFails": []
+        }
+      ],
+      "/guides/how-to-make-a-wedding-website": [
+        {
+          "performance": 88,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.9 s",
+          "tbt": "310 ms",
+          "cls": "0",
+          "bytes": "Total size was 238 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 87,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.8 s",
+          "tbt": "370 ms",
+          "cls": "0",
+          "bytes": "Total size was 238 KiB",
+          "a11yFails": []
+        }
+      ],
+      "/faq": [
+        {
+          "performance": 93,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.9 s",
+          "tbt": "170 ms",
+          "cls": "0",
+          "bytes": "Total size was 239 KiB",
+          "a11yFails": []
+        },
+        {
+          "performance": 93,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 69,
+          "lcp": "2.8 s",
+          "tbt": "190 ms",
+          "cls": "0",
+          "bytes": "Total size was 239 KiB",
+          "a11yFails": []
+        }
+      ]
+    }
+  }
+}

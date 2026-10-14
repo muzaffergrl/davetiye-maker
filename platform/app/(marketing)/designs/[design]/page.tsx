@@ -1,4 +1,5 @@
-// /designs/<id> — one design (docs/14 §6.3). Static for every live design; anything else is a 404.
+// /designs/<id> — one design (docs/14 §6.3; G066 comp u1_design_detail_390). Static for every live design; anything
+// else is a 404.
 import { Play } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { HeroDemo } from '../../../../components/marketing/Demo.tsx';
@@ -100,7 +101,8 @@ export default async function DesignPage({ params }: Props) {
           <HeroDemo
             designs={demo}
             placement="design-hero"
-            primaryLabel="Open live demo"
+            primaryLabel="Open the live demo"
+            className={s.heroStickyActions}
             secondary={<EtsyButton design={d} placement="design-hero" variant="secondary" withPrice={price ? displayPrice(price) : null} />}
             footnote={
               <p className={s.small}>
@@ -110,65 +112,45 @@ export default async function DesignPage({ params }: Props) {
               </p>
             }
           >
-            <Eyebrow>Envelope wedding website</Eyebrow>
             <h1 className={s.h1}>{page.h1}</h1>
             <p className={s.lead}>{d.copy.intro}</p>
           </HeroDemo>
         </Container>
       </Section>
 
-      <Section band labelledBy="opening">
+      <Section labelledBy="pages" className={s.pagesSection}>
         <Container>
-          <div className={s.split}>
-            <div className={s.splitMedia}>
-              {video ? (
-                <div className={s.videoFrame}>
-                  <LoopVideo src={video.file} poster={video.poster} width={video.width} height={video.height} label={`Screen recording: the ${d.name} envelope opens`} />
-                </div>
-              ) : null}
-            </div>
-            <div className={s.splitText}>
-              <Eyebrow>The opening</Eyebrow>
-              <h2 id="opening" className={s.h2}>
-                How {d.name} opens
-              </h2>
-              <p className={s.lead}>{d.copy.opening}</p>
-              <p className={s.muted}>
-                This is a real screen recording of the design with demo content ({d.copy.demoCouple} are fictional). Guests can
-                skip the animation, and on a phone set to reduce motion a tap goes straight to the home page.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      <Section labelledBy="pages">
-        <Container>
-          <Eyebrow>The pages</Eyebrow>
           <h2 id="pages" className={s.h2}>
             What your guests see after the envelope
           </h2>
-          <ul className={s.screenRow}>
+          <ul className={s.thumbRow}>
             {SITE_PAGES.map((p) => {
               const file = designScreen(d.id, p.key);
               return (
-                <li key={p.key} className={s.screenItem}>
-                  {file ? <Screen file={file} alt={`${d.name}: ${p.name} page with demo content`} sizes="(min-width: 1024px) 240px, 62vw" /> : null}
-                  <h3 className={s.h3}>{p.name}</h3>
-                  <p className={s.small}>{d.copy.pages[p.key]}</p>
+                <li key={p.key}>
+                  {file ? <Screen file={file} alt={`${d.name}: ${p.name} page with demo content`} sizes="(min-width: 1024px) 220px, 22vw" className={s.thumb} /> : null}
+                  <p className={s.thumbLabel}>{p.name}</p>
                 </li>
               );
             })}
           </ul>
+          <dl className={s.pageNotes}>
+            {SITE_PAGES.map((p) => (
+              <div key={p.key}>
+                <dt>{p.name}</dt>
+                <dd>{d.copy.pages[p.key]}</dd>
+              </div>
+            ))}
+          </dl>
         </Container>
       </Section>
 
-      <Section band labelledBy="change">
+      <Section labelledBy="change">
         <Container>
           <div className={s.twoCol}>
             <div>
               <h2 id="change" className={s.h2}>
-                What you can change
+                What you can edit
               </h2>
               <CheckList items={EDITABLE} />
             </div>
@@ -209,6 +191,31 @@ export default async function DesignPage({ params }: Props) {
         </Container>
       </Section>
 
+      <Section labelledBy="opening">
+        <Container>
+          <div className={s.split}>
+            <div className={s.splitMedia}>
+              {video ? (
+                <div className={s.videoFrame}>
+                  <LoopVideo src={video.file} poster={video.poster} width={video.width} height={video.height} label={`Screen recording: the ${d.name} envelope opens`} />
+                </div>
+              ) : null}
+            </div>
+            <div className={s.splitText}>
+              <Eyebrow>The opening</Eyebrow>
+              <h2 id="opening" className={s.h2}>
+                How {d.name} opens
+              </h2>
+              <p className={s.lead}>{d.copy.opening}</p>
+              <p className={s.muted}>
+                This is a real screen recording of the design with demo content ({d.copy.demoCouple} are fictional). Guests can
+                skip the animation, and on a phone set to reduce motion a tap goes straight to the home page.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
       <Section labelledBy="included">
         <Container>
           <div className={s.twoCol}>
@@ -228,7 +235,7 @@ export default async function DesignPage({ params }: Props) {
         </Container>
       </Section>
 
-      <Section band labelledBy="design-faq">
+      <Section labelledBy="design-faq">
         <Container narrow>
           <h2 id="design-faq" className={s.h2}>
             Questions about {d.name}
@@ -263,11 +270,11 @@ export default async function DesignPage({ params }: Props) {
       </Section>
 
       <div className={s.stickyBar}>
-        <a className={`${s.btn} ${s.btnSecondary}`} href={demoPath(d.id)} data-demo={d.id} data-demo-placement="design-sticky">
-          <Play aria-hidden size={16} strokeWidth={1.75} />
+        <a className={s.btn} href={demoPath(d.id)} data-demo={d.id} data-demo-placement="design-sticky">
+          <Play aria-hidden size={16} strokeWidth={2} />
           Live demo
         </a>
-        <EtsyButton design={d} placement="design-sticky" />
+        <EtsyButton design={d} placement="design-sticky" variant="secondary" />
       </div>
 
       <JsonLd

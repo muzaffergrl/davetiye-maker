@@ -1,6 +1,8 @@
-// Header and footer of the marketing site (docs/14 §5.2). Server components; the mobile menu is a <details>
-// element (works without JavaScript).
-import { ArrowRight, Menu } from 'lucide-react';
+// Header and footer of the marketing site (docs/14 §5.2; G066: BKE Studio comps brand/ui/site/). Server components;
+// the mobile menu is a <details> element (works without JavaScript). Logos are the brand SVGs from public/brand/
+// (header: anchor on paper, footer: reverse on aubergine) — never the name typeset in a font.
+import { ArrowRight, Menu, X } from 'lucide-react';
+import { BRAND_FILES, logoWidth } from '../../lib/marketing/brand.ts';
 import { MARKETING } from '../../lib/marketing/config.ts';
 import { liveDesigns, startPath } from '../../lib/marketing/designs.ts';
 import type { Guide } from '../../lib/marketing/guides.ts';
@@ -8,12 +10,21 @@ import { real } from '../../lib/marketing/placeholders.ts';
 import { NAV } from '../../lib/marketing/site.ts';
 import s from './marketing.module.css';
 
+const HEADER_LOGO_H = 36;
+
 export function Header() {
   return (
     <header className={s.header}>
       <div className={s.headerInner}>
-        <a href="/" className={s.wordmark} aria-label={`${MARKETING.brand.name} home`}>
-          {MARKETING.brand.name}
+        <a href="/" className={s.logoLink}>
+          <img
+            className={s.logo}
+            src={BRAND_FILES.logo}
+            width={logoWidth(HEADER_LOGO_H)}
+            height={HEADER_LOGO_H}
+            alt={`${MARKETING.brand.name} home`}
+            decoding="async"
+          />
         </a>
         <nav aria-label="Main" className={s.nav}>
           <ul>
@@ -29,8 +40,9 @@ export function Header() {
         </a>
         <details className={s.mobileMenu}>
           <summary className={s.menuButton}>
-            <Menu aria-hidden size={22} strokeWidth={1.75} />
-            <span>Menu</span>
+            <Menu aria-hidden size={28} strokeWidth={1.75} className={s.menuOpenIcon} />
+            <X aria-hidden size={28} strokeWidth={1.75} className={s.menuCloseIcon} />
+            <span className={s.visuallyHidden}>Menu</span>
           </summary>
           <nav aria-label="Main (mobile)" className={s.mobileNav}>
             <ul>
@@ -38,14 +50,14 @@ export function Header() {
                 <li key={n.href}>
                   <a href={n.href}>
                     {n.label}
-                    <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
+                    <ArrowRight aria-hidden size={20} strokeWidth={1.75} />
                   </a>
                 </li>
               ))}
               <li>
                 <a href={startPath()} data-track="start_click">
                   Already bought a design? Start your website
-                  <ArrowRight aria-hidden size={18} strokeWidth={1.5} />
+                  <ArrowRight aria-hidden size={20} strokeWidth={1.75} />
                 </a>
               </li>
             </ul>
@@ -65,7 +77,15 @@ export function Footer({ guides }: { guides: Guide[] }) {
     <footer className={s.footer}>
       <div className={s.footerInner}>
         <div className={s.footerBrand}>
-          <p className={s.wordmark}>{cfg.brand.name}</p>
+          <img
+            className={s.footerLogo}
+            src={BRAND_FILES.logoReverse}
+            width={logoWidth(34)}
+            height={34}
+            alt={cfg.brand.name}
+            loading="lazy"
+            decoding="async"
+          />
           <p className={s.footerNote}>{cfg.brand.shortDescription}</p>
         </div>
         <nav aria-label="Footer" className={s.footerCols}>
@@ -135,7 +155,7 @@ export function Footer({ guides }: { guides: Guide[] }) {
                 </li>
               ) : (
                 <li>
-                  <span className={s.muted}>Etsy shop: {cfg.etsy.shopUrl}</span>
+                  <span className={s.footerMuted}>Etsy shop: {cfg.etsy.shopUrl}</span>
                 </li>
               )}
               {social.map(([k, v]) => (
