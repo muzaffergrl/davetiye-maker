@@ -37,3 +37,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 hazir: ilan kiti için telefon + dizüstü mockup'ı (K25, paralel GPT)
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
 - 2026-10-14 alindi: gpt-gorsel-C
+- 2026-10-14 ara kayıt: gpt-gorsel-C; 3/5 sahne hazır (cover_hand, three_phones, laptop_phone); her biri _v2 ile temizlendi.
