@@ -2,22 +2,42 @@
 // "Change names or date" after the first publish (G060, docs/16 §11.6). Names and date are edited together;
 // the line under the fields says, while typing, what the change will cost (same pure rule the server uses),
 // and the main button's text is the confirmation ("Save fix" / "Use 1 change" / "Use my last change").
+// G060-fix: free cases are named in plain words (date moved by up to a week, surname, small fix), going back to
+// before the last change is "Undo" (free, the change is given back), and the design's sample date is replaced free once.
 
-import { CircleCheckBig, Info, Lock, TriangleAlert, type LucideIcon } from 'lucide-react';
+import { CircleCheckBig, Info, Lock, TriangleAlert, Undo2, type LucideIcon } from 'lucide-react';
 import { useId, useMemo, useState } from 'react';
 import { formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { PANEL_BRAND } from '../../lib/panel/brand.ts';
 import { withPartnerName } from '../../lib/panel/model.ts';
-import { classifyIdentityChange, identityOf, sameIdentity, TYPO_MAX_DISTANCE, type Identity } from '../../lib/panel/rights.ts';
+import {
+  classifyIdentityChange,
+  DATE_FREE_DAYS,
+  identityOf,
+  isSampleDateReplacement,
+  isUndo,
+  sameIdentity,
+  type FreeReason,
+  type Identity,
+} from '../../lib/panel/rights.ts';
 import { Sheet } from './Sheet.tsx';
 import { Button, cx } from './ui.tsx';
 import type { IdentityOutcome } from './usePanel.ts';
 import styles from './panel.module.css';
 
 export function noChangesLeftText(total: number): string {
-  return `You've used all ${total} name and date changes. Small typo fixes (up to ${TYPO_MAX_DISTANCE} letters or digits) are still free. If your wedding moved or something else needs to change, contact us at ${PANEL_BRAND.supportEmail} or message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+  return `You've used all ${total} name and date changes. Small typo fixes, surnames and moving your date by up to ${DATE_FREE_DAYS} days are still free. If your wedding moved further or something else needs to change, contact us at ${PANEL_BRAND.supportEmail} or message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+}
+
+/** "Moving your date by up to 7 days is free." / "Adding a surname is free." / "Free: date moved, surname, small fix." */
+export function freeText(free: readonly FreeReason[]): string {
+  if (free.length === 1 && free[0] === 'date') return `Moving your date by up to ${DATE_FREE_DAYS} days is free.`;
+  if (free.length === 1 && free[0] === 'surname') return 'Adding a surname is free.';
+  if (free.length === 1) return 'Small fix — free.';
+  const words: Record<FreeReason, string> = { date: 'date moved by a few days', surname: 'surname', typo: 'small fix' };
+  return `Free: ${free.map((f) => words[f]).join(', ')}.`;
 }
 
 type Draft = Pick<ContentRecord, 'partners' | 'name_display' | 'initials' | 'date'>;
@@ -33,6 +53,8 @@ export function IdentitySheet({
   total,
   showInitials,
   focus,
+  sampleDate = null,
+  undo = null,
   onClose,
   onSubmit,
 }: {
@@ -42,6 +64,10 @@ export function IdentitySheet({
   total: number;
   showInitials: boolean;
   focus: 'names' | 'date';
+  /** The design's sample date: the first move away from it is free when the site was published with it. */
+  sampleDate?: string | null;
+  /** The last counted change while it can still be taken back for free (rights.undo). */
+  undo?: { from: Identity; until: string | null } | null;
   onClose: () => void;
   onSubmit: (identity: Identity, intent: 'fix' | 'change') => Promise<IdentityOutcome>;
 }) {
@@ -53,8 +79,17 @@ export function IdentitySheet({
   const [left, setLeft] = useState(remaining);
   const next = identityOf(draft);
   const dirty = !sameIdentity(next, current);
-  const { kind } = classifyIdentityChange(anchor, next);
-  const cls: 'unchanged' | 'typo' | 'change' = !dirty ? 'unchanged' : kind === 'change' ? 'change' : 'typo';
+  const { kind, free } = classifyIdentityChange(anchor, next);
+  const cls: 'unchanged' | 'typo' | 'undo' | 'sample' | 'change' = !dirty
+    ? 'unchanged'
+    : kind !== 'change'
+      ? 'typo'
+      : undo && isUndo(undo, next) && (!undo.until || Date.parse(undo.until) > Date.now())
+        ? 'undo'
+        : isSampleDateReplacement(anchor, next, sampleDate)
+          ? 'sample'
+          : 'change';
+  const dateMovedFar = cls === 'change' && next.date !== anchor.date;
 
   const set = (fn: (d: Draft) => void) => {
     setError(null);
@@ -79,10 +114,20 @@ export function IdentitySheet({
     info = { icon: Info, tone: styles.costNeutral, text: 'Make your change above.' };
     primary = 'Save';
   } else if (cls === 'typo') {
-    info = { icon: CircleCheckBig, tone: styles.costFree, text: `Small fix — free. You still have ${left} ${left === 1 ? 'change' : 'changes'} left.` };
-    primary = 'Save fix';
+    info = { icon: CircleCheckBig, tone: styles.costFree, text: `${freeText(free)} You still have ${left} ${left === 1 ? 'change' : 'changes'} left.` };
+    primary = 'Save — free';
+  } else if (cls === 'undo') {
+    info = { icon: Undo2, tone: styles.costUndo, text: `Back to how it was before your last change — free, and you get that change back.` };
+    primary = 'Undo my last change';
+  } else if (cls === 'sample') {
+    info = { icon: CircleCheckBig, tone: styles.costFree, text: 'Replacing the design’s sample date with your real date is free (once).' };
+    primary = 'Save my date — free';
   } else if (left >= 2) {
-    info = { icon: Info, tone: styles.costInfo, text: `This uses 1 of your ${total} changes. You'll have ${left - 1} left.` };
+    info = {
+      icon: Info,
+      tone: styles.costInfo,
+      text: `This uses 1 of your ${total} changes. You'll have ${left - 1} left.${dateMovedFar ? ` (Only date moves of up to ${DATE_FREE_DAYS} days are free.)` : ''}`,
+    };
     primary = 'Use 1 change';
   } else if (left === 1) {
     info = { icon: TriangleAlert, tone: styles.costWarn, text: 'This is your last change. After this, only small typo fixes are possible.' };

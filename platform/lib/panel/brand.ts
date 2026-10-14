@@ -11,6 +11,9 @@ export const PANEL_BRAND = {
   supportEmail: MARKETING.support.email,
 } as const;
 
+/** Publishing while the shop has not confirmed the Etsy order yet (CLAIM_ORDER_VERIFICATION=manual, G060-fix). */
+export const ORDER_PENDING_TEXT = `We are still confirming your Etsy order. Your changes are saved; you can publish as soon as the order is confirmed. Questions? Message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+
 /** True while a value is still a "[PLACEHOLDER]" (then it is shown as text, never as a mailto: link). */
 export function isPlaceholder(value: string): boolean {
   return /^\[[^\]]+\]$/.test(value);

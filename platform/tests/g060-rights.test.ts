@@ -4,6 +4,17 @@ import assert from 'node:assert/strict';
 import type { Identity } from '../lib/data/types.ts';
 import {
   addMonthsClamped,
+  countedDate,
+  DATE_FREE_DAYS,
+  daysBetween,
+  draftPreviewExpired,
+  DRAFT_PREVIEW_MAX_MONTHS,
+  isSampleDateReplacement,
+  isUndo,
+  siteArchiveDates,
+  surnameOnly,
+  undoState,
+  UNDO_WINDOW_MS,
   ARCHIVE_MAX_AFTER_FIRST_PUBLISH_MONTHS,
   archiveDates,
   classifyIdentityChange,
@@ -47,9 +58,10 @@ test('§11.3 table: every row gives the expected class', () => {
   assert.equal(kind(base, firstName('Klaire')), 'change', 'Clara -> Klaire (3)');
   assert.equal(kind(base, edit((i) => void (i.shown = 'Clara and Julian'))), 'unchanged', 'separator & / and');
   assert.equal(kind(base, edit((i) => void (i.shown = 'Clara + Julian'))), 'unchanged', 'separator +');
-  assert.equal(kind(base, edit((i) => void (i.date = '2027-06-21'))), 'typo', 'date swap');
+  // G060-fix: the date is measured in days (free within DATE_FREE_DAYS = 7), not in characters
   assert.equal(kind(base, edit((i) => void (i.date = '2027-06-13'))), 'typo', 'date +1 day');
-  assert.equal(kind(base, edit((i) => void (i.date = '2027-09-30'))), 'change', 'date 3 digits');
+  assert.equal(kind(base, edit((i) => void (i.date = '2027-06-21'))), 'change', 'date +9 days (was a 2-character "typo")');
+  assert.equal(kind(base, edit((i) => void (i.date = '2027-09-30'))), 'change', 'date 3 months');
   const one: Identity = { names: [{ display: 'Clara', full: '' }], shown: 'Clara', initials: 'C', date: '2027-06-12' };
   assert.equal(kind(one, edit((i) => void i.names.push({ display: 'Julian', full: '' }), one)), 'change', '1 name -> 2 names');
   // names and date together are ONE change
@@ -163,4 +175,101 @@ test('rights view and migration of records from before G060', () => {
   assert.equal(v1.phase, 'counting');
   assert.equal(v1.remaining, 3);
   assert.equal(remainingChanges({ limit: 3, granted: 1, used: 5 }), 0, 'never negative');
+});
+
+test('G060-fix: dates move by days — up to a week either way is free, anything more is a change', () => {
+  assert.equal(DATE_FREE_DAYS, 7);
+  const at = (date: string, from = base) => classifyIdentityChange(from, { ...from, date });
+  assert.deepEqual([at('2027-06-19').kind, at('2027-06-19').free, at('2027-06-19').dateDays], ['typo', ['date'], 7], '+7 days');
+  assert.equal(at('2027-06-05').kind, 'typo', '-7 days');
+  assert.equal(at('2027-06-20').kind, 'change', '+8 days');
+  // the review's measurements: what used to be a free "typo" by characters is now judged by distance in days
+  const sep18 = { ...base, date: '2027-09-18' };
+  assert.equal(at('2027-09-30', sep18).kind, 'change', 'Sep 18 -> Sep 30 (12 days)');
+  assert.equal(at('2027-10-18', sep18).kind, 'change', 'Sep 18 -> Oct 18');
+  assert.equal(at('2028-09-18', sep18).kind, 'change', '2027 -> 2028');
+  assert.equal(at('2029-09-18', sep18).kind, 'change', '2027 -> 2029 (one character)');
+  assert.equal(at('2027-10-05', { ...base, date: '2027-09-28' }).kind, 'typo', 'Sep 28 -> Oct 5 (one week) is free');
+  assert.equal(at('2027-09-26', { ...base, date: '2027-05-15' }).kind, 'change', 'sample date -> real date is a change by the rule');
+  assert.equal(at('not-a-date').kind, 'change', 'an unreadable date is never free');
+  assert.equal(daysBetween('2027-12-31', '2028-01-01'), 1);
+  assert.equal(daysBetween('2028-03-01', '2028-02-28'), -2, 'leap year');
+  // a free date move and a name typo together are still free; with a name change it is one change
+  const both = classifyIdentityChange(base, { ...base, date: '2027-06-14', names: [{ display: 'Clare', full: 'Clare Rose' }, base.names[1]] });
+  assert.deepEqual([both.kind, [...both.free].sort()], ['typo', ['date', 'typo']]);
+});
+
+test('G060-fix: adding or removing a surname (first name unchanged) is free', () => {
+  const ada = (full: string, display = 'Ada') => ({ display, full });
+  assert.equal(surnameOnly(ada(''), ada('Ada Lovelace')), true, 'no full name yet -> with surname');
+  assert.equal(surnameOnly(ada('Ada'), ada('Ada Lovelace')), true, 'full name = first name (old /start drafts)');
+  assert.equal(surnameOnly(ada('Ada Lovelace'), ada('Ada Lovelace-Byron')), true, 'double-barrelled');
+  assert.equal(surnameOnly(ada('Ada Lovelace'), ada('Ada')), true, 'removed again');
+  assert.equal(surnameOnly(ada(''), ada('Augusta Ada King')), true, 'a full name that keeps the first name as a word');
+  assert.equal(surnameOnly(ada('Ada Lovelace'), ada('Ada Byron')), false, 'swapping a counted surname is measured');
+  assert.equal(surnameOnly(ada(''), ada('Zoe Smith')), false, 'a full name without the first name is not a surname');
+  assert.equal(surnameOnly(ada(''), ada('Adam Smith')), false, 'whole words only');
+  assert.equal(surnameOnly(ada('Ada'), ada('Eva Smith', 'Eva')), false, 'the first name changed');
+  // in the rule: the review's case (full name = first name from /start, then surnames typed after publishing)
+  const fromStart: Identity = { names: [ada('Ada'), { display: 'Grace', full: 'Grace' }], shown: 'Ada & Grace', initials: 'A&G', date: '2027-06-12' };
+  const one = edit((i) => void (i.names[0].full = 'Ada Lovelace'), fromStart);
+  assert.deepEqual([kind(fromStart, one), classifyIdentityChange(fromStart, one).free], ['typo', ['surname']]);
+  const two = edit((i) => void (i.names[1].full = 'Grace Hopper'), one);
+  assert.equal(kind(fromStart, two), 'typo', 'the second surname is free too (measured from the same anchor)');
+  assert.equal(kind(fromStart, edit((i) => void (i.names[0].full = ''), fromStart)), 'unchanged', 'an empty full name means the first name');
+});
+
+test('G060-fix: archive is counted from the counted date (a free edit cannot extend hosting)', () => {
+  const anchor = { ...base, date: '2027-05-15' };
+  const site = (date: string) => ({
+    content: { ...demoContent(), date, timezone: 'UTC' },
+    publishedContent: null,
+    publishedAt: '2027-01-01T00:00:00.000Z',
+    firstPublishedAt: '2027-01-01T00:00:00.000Z',
+    identity: { anchor, limit: 3, granted: 0, used: 0, log: [] },
+  });
+  assert.equal(countedDate(site('2027-05-20'), site('2027-05-20').identity), '2027-05-20', 'a free move counts');
+  assert.equal(countedDate(site('2029-05-15'), site('2029-05-15').identity), '2027-05-15', 'a stored legacy "typo" does not');
+  assert.equal(siteArchiveDates(site('2029-05-15'))!.onlineUntil, '2028-05-15');
+  assert.equal(siteArchiveDates(site('2027-05-20'))!.onlineUntil, '2028-05-20');
+});
+
+test('G060-fix: undo of the last counted change — before publishing it, or within 10 minutes', () => {
+  assert.equal(UNDO_WINDOW_MS, 600_000);
+  const from = base;
+  const rights = { undo: { at: '2027-01-01T10:00:00.000Z', from } };
+  const now = (iso: string) => new Date(iso);
+  // not published since the change: any time
+  assert.ok(undoState(rights, { publishedAt: '2026-12-01T00:00:00.000Z' }, now('2027-03-01T00:00:00Z')));
+  assert.equal(undoState(rights, { publishedAt: '2026-12-01T00:00:00.000Z' }, now('2027-03-01T00:00:00Z'))!.until, null);
+  // published after it: 10 minutes
+  const pub = { publishedAt: '2027-01-01T10:01:00.000Z' };
+  assert.equal(undoState(rights, pub, now('2027-01-01T10:09:59Z'))!.until, '2027-01-01T10:10:00.000Z');
+  assert.equal(undoState(rights, pub, now('2027-01-01T10:10:01Z')), null);
+  assert.equal(undoState({ undo: null }, pub), null);
+  const changed = edit((i) => void (i.names[0].display = 'Maria'));
+  assert.equal(isUndo({ from }, from), true);
+  assert.equal(isUndo({ from }, edit((i) => void (i.names[0].display = 'Clare'))), true, 'within a typo of the old anchor');
+  assert.equal(isUndo({ from }, changed), false);
+});
+
+test('G060-fix: the design sample date can be replaced once for free', () => {
+  const sample = '2027-05-15';
+  const anchor = { ...base, date: sample };
+  assert.equal(isSampleDateReplacement(anchor, { ...anchor, date: '2027-09-26' }, sample), true);
+  assert.equal(isSampleDateReplacement(anchor, { ...anchor, date: '2027-09-26' }, '2027-06-12'), false, 'not the sample');
+  assert.equal(isSampleDateReplacement(anchor, { ...anchor, date: '2027-09-26' }, null), false, 'no sample known');
+  const renamedToo = edit((i) => {
+    i.names[0].display = 'Maria';
+    i.date = '2027-09-26';
+  }, anchor);
+  assert.equal(isSampleDateReplacement(anchor, renamedToo, sample), false, 'a name change is still counted');
+});
+
+test('G060-fix: a never-published draft has its own clock for its shared preview link', () => {
+  assert.equal(DRAFT_PREVIEW_MAX_MONTHS, 18);
+  const draft = { content: demoContent(), publishedContent: null, publishedAt: null, createdAt: '2027-01-10T08:00:00.000Z' };
+  assert.equal(draftPreviewExpired(draft, new Date('2028-07-10T07:59:59Z')), false);
+  assert.equal(draftPreviewExpired(draft, new Date('2028-07-10T08:00:00Z')), true);
+  assert.equal(draftPreviewExpired({ ...draft, publishedAt: '2027-02-01T00:00:00.000Z' }, new Date('2040-01-01')), false, 'published sites follow the archive');
 });

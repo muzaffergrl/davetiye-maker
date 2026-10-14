@@ -24,7 +24,9 @@ import type { DataAdapter, SiteRecord } from '../lib/data/types.ts';
 import { identityChangeFor } from '../lib/panel/api.ts';
 import { identityOf, withIdentity, type Identity } from '../lib/panel/rights.ts';
 import { MemoryRateLimiter, setRsvpRateLimiter } from '../lib/rsvp/rate-limit.ts';
-import { createSiteWithKeys, grantIdentityChanges, publishSite, setArchiveOverride } from '../lib/sites.ts';
+import { createSiteWithKeys, grantIdentityChanges, previewAccess, publishSite, reissueKeys, setArchiveOverride } from '../lib/sites.ts';
+import { panelPreviewToken } from '../lib/keys.ts';
+import { setClaimRateLimiter, UPLOAD_LIMITS } from '../lib/claim/limits.ts';
 import { FakeBlobStore } from './fake-blob.ts';
 import { demoContent, PLATFORM_ROOT, tinyPng, tmpDir } from './helpers.ts';
 
@@ -34,6 +36,8 @@ type Keys = { id: string; slug: string; editKey: string; previewKey: string };
 before(() => {
   const themes = tmpDir('g060-themes-');
   cpSync(path.join(PLATFORM_ROOT, 'themes/_sample'), path.join(themes, '_sample'), { recursive: true });
+  // a real design with a sample record (the once-only free sample-date replacement)
+  cpSync(path.join(PLATFORM_ROOT, 'themes/blush-garden-rose'), path.join(themes, 'blush-garden-rose'), { recursive: true });
   process.env.PLATFORM_THEMES_DIR = themes;
   process.env.PLATFORM_DATA_DIR = tmpDir('g060-data-');
   delete process.env.PLATFORM_PUBLIC_URL;
@@ -335,7 +339,20 @@ test('14: archived site — writes 403, panel state readable, CSV ok, public pag
   assert.equal((await call(pageRoute, `/${k.slug}/details`, { slug: k.slug, page: 'details' })).status, 410);
   assert.equal((await call(icsRoute, `/${k.slug}/event.ics`, { slug: k.slug })).status, 410);
   assert.equal((await call(mediaRoute, up.data.url, { path: mediaPath })).status, 410);
-  assert.equal((await call(siteRoute, `/${k.slug}?preview=${k.previewKey}`, { slug: k.slug })).status, 200, 'the couple still sees it');
+  // G060-fix: the couple still sees it in the panel (short-lived token); the long-lived preview key is gone too
+  const token = s.previewToken as string;
+  assert.equal((await call(siteRoute, `/${k.slug}?preview=${token}`, { slug: k.slug })).status, 200, 'the couple still sees it in the panel');
+  assert.equal((await call(mediaRoute, `${up.data.url}?preview=${token}`, { path: mediaPath })).status, 200);
+  for (const [name, res] of [
+    ['index', await call(siteRoute, `/${k.slug}?preview=${k.previewKey}`, { slug: k.slug })],
+    ['home', await call(pageRoute, `/${k.slug}/home?preview=${k.previewKey}`, { slug: k.slug, page: 'home' })],
+    ['details', await call(pageRoute, `/${k.slug}/details?preview=${k.previewKey}`, { slug: k.slug, page: 'details' })],
+    ['photo', await call(mediaRoute, `${up.data.url}?preview=${k.previewKey}`, { path: mediaPath })],
+    ['ics', await call(icsRoute, `/${k.slug}/event.ics?preview=${k.previewKey}`, { slug: k.slug })],
+  ] as const) {
+    assert.equal(res.status, 410, `archived + long-lived preview key: ${name}`);
+    assert.doesNotMatch(String(res.data), /Clara/, name);
+  }
   assert.equal((await call(rsvpStatusRoute, `/api/rsvp/${k.slug}`, { slug: k.slug })).status, 404);
   const reply = await call(rsvpPostRoute, `/api/rsvp/${k.slug}`, { slug: k.slug }, { method: 'POST', json: { name: 'Ada', attending: true, guests: 1 } });
   assert.equal(reply.status, 404);
@@ -396,4 +413,210 @@ test('publish defense: a draft whose identity is a change from the anchor is ref
   const r = await publish(k);
   assert.equal(r.status, 409);
   assert.equal(r.data.code, 'identity_mismatch');
+});
+
+// ---------------------------------------------------------------------------------------------
+// G060-fix (review findings): preview access, date / surname rules, undo, sample date
+
+test('G060-fix: never-published draft — the shared preview key shows a "not published" bar; the panel token does not', async () => {
+  const k = await newSite();
+  const s = await getState(k);
+  // the names and date changed with a plain autosave (free before the first publish)
+  const c = structuredClone(s.content) as ContentRecord;
+  c.partners[0].display_name = 'Zoe';
+  c.partners[1].display_name = 'Xavier';
+  c.name_display = 'Zoe & Xavier';
+  c.date = '2027-08-01';
+  assert.equal((await put(k, c, s.updatedAt)).status, 200);
+  assert.equal((await call(siteRoute, `/${k.slug}`, { slug: k.slug })).status, 404, 'not public');
+  for (const [name, res] of [
+    ['index', await call(siteRoute, `/${k.slug}?preview=${k.previewKey}`, { slug: k.slug })],
+    ['home', await call(pageRoute, `/${k.slug}/home?preview=${k.previewKey}`, { slug: k.slug, page: 'home' })],
+    ['details', await call(pageRoute, `/${k.slug}/details?preview=${k.previewKey}`, { slug: k.slug, page: 'details' })],
+  ] as const) {
+    assert.equal(res.status, 200, name);
+    assert.match(res.data, /data-platform-preview-bar[^>]*>Preview — this website is not published/, `${name}: bar`);
+    assert.equal(res.headers.get('x-robots-tag'), 'noindex, nofollow');
+  }
+  const token = (await getState(k)).previewToken as string;
+  const panel = await call(siteRoute, `/${k.slug}?preview=${encodeURIComponent(token)}`, { slug: k.slug });
+  assert.equal(panel.status, 200);
+  assert.doesNotMatch(panel.data, /data-platform-preview-bar/, 'the panel preview has no bar');
+  assert.match(panel.data, /Zoe/);
+  // links inside the panel preview keep the token (navigation between pages works)
+  assert.match(panel.data, new RegExp(`/${k.slug}/home\\?preview=${token.replace('.', '\\.')}`));
+  const ics = await call(icsRoute, `/${k.slug}/event.ics?preview=${encodeURIComponent(token)}`, { slug: k.slug });
+  assert.equal(ics.status, 200);
+  // the draft clock: 18 months after the site was made, the long-lived key stops (410); the panel token does not
+  const site = await stored(k);
+  const later = new Date(Date.parse(site.createdAt) + 19 * 31 * 86_400_000);
+  assert.equal(previewAccess(site, k.previewKey, later), 'gone');
+  assert.equal(previewAccess(site, k.previewKey), 'shared');
+  assert.equal(previewAccess(site, panelPreviewToken(site.id, site.previewKeyHash, later.getTime()), later), 'panel');
+});
+
+test('G060-fix: the panel preview token is short-lived, per site, and dies when the keys are reissued', async () => {
+  const k = await newSite();
+  const other = await newSite();
+  const site = await stored(k);
+  const now = Date.now();
+  const token = panelPreviewToken(site.id, site.previewKeyHash, now);
+  assert.equal(previewAccess(site, token), 'panel');
+  assert.equal(previewAccess(site, token, new Date(now + 12 * 3600_000 + 1)), null, 'expired');
+  assert.equal(previewAccess(await stored(other), token), null, "another site's token");
+  assert.equal(previewAccess(site, `${token.slice(0, -1)}${token.endsWith('A') ? 'B' : 'A'}`), null, 'tampered');
+  assert.equal(previewAccess(site, `${Math.floor(now / 1000) + 400 * 86400}.${token.split('.')[1]}`), null, 'expiry moved');
+  assert.equal(previewAccess(site, k.editKey), null, 'the edit key is not a preview');
+  assert.equal((await call(siteRoute, `/${k.slug}?preview=${encodeURIComponent(token)}`, { slug: k.slug })).status, 200);
+  await reissueKeys(getDataAdapter(), site.id);
+  assert.equal((await call(siteRoute, `/${k.slug}?preview=${encodeURIComponent(token)}`, { slug: k.slug })).status, 404, 'reissued keys end old tokens');
+});
+
+test('G060-fix: published site — shared preview shows the draft under a bar; archive ends it (410) but not the panel token', async () => {
+  const k = await newSite();
+  await publish(k);
+  const res = await call(siteRoute, `/${k.slug}?preview=${k.previewKey}`, { slug: k.slug });
+  assert.equal(res.status, 200);
+  assert.match(res.data, /Preview of unpublished changes/);
+  assert.doesNotMatch((await call(siteRoute, `/${k.slug}`, { slug: k.slug })).data, /data-platform-preview-bar/, 'guests never see the bar');
+  await setArchiveOverride(getDataAdapter(), k.id, '2020-01-01', 'test');
+  assert.equal((await call(siteRoute, `/${k.slug}?preview=${k.previewKey}`, { slug: k.slug })).status, 410);
+  const token = (await getState(k)).previewToken as string;
+  assert.equal((await call(siteRoute, `/${k.slug}?preview=${encodeURIComponent(token)}`, { slug: k.slug })).status, 200);
+});
+
+test('G060-fix: dates by days — a week is free (and does not move the archive by more), more needs a change', async () => {
+  const k = await newSite();
+  await publish(k);
+  let s = await getState(k);
+  const id = identityOf(s.content); // 2027-05-15
+  let r = await identityCall(k, { ...id, date: '2027-05-20' }, 'fix', s.updatedAt);
+  assert.equal(r.status, 200);
+  assert.equal(r.data.result, 'typo');
+  assert.equal(r.data.rights.used, 0);
+  assert.equal(r.data.rights.onlineUntil, '2028-05-20', 'the archive follows a free move');
+  // a 1-character edit of the year is 2 years: confirm required (it used to be a free "typo")
+  s = await getState(k);
+  r = await identityCall(k, { ...identityOf(s.content), date: '2029-05-20' }, 'fix', s.updatedAt);
+  assert.equal(r.status, 409);
+  assert.equal(r.data.code, 'confirm_required');
+  // even stored directly (an old record), a far-away draft date does not extend hosting
+  const site = await stored(k);
+  await getDataAdapter().patchSite(site.id, { content: { ...site.content, date: '2029-05-15' } });
+  assert.equal((await getState(k)).rights.onlineUntil, '2028-05-15', 'counted from the anchor date');
+});
+
+test('G060-fix: surnames typed after publishing are free; a different person is not', async () => {
+  const k = await newSite((c) => {
+    c.partners[0].full_name = 'Clara';
+    c.partners[1].full_name = null;
+  });
+  await publish(k);
+  let s = await getState(k);
+  let id = identityOf(s.content);
+  let r = await identityCall(k, { ...id, names: [{ display: 'Clara', full: 'Clara Rose' }, id.names[1]] }, 'fix', s.updatedAt);
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  assert.equal(r.data.result, 'typo');
+  s = await getState(k);
+  id = identityOf(s.content);
+  r = await identityCall(k, { ...id, names: [id.names[0], { display: 'Julian', full: 'Julian Thomas' }] }, 'fix', s.updatedAt);
+  assert.equal(r.data.result, 'typo');
+  assert.equal(r.data.rights.used, 0, 'both surnames cost nothing');
+  s = await getState(k);
+  id = identityOf(s.content);
+  r = await identityCall(k, { ...id, names: [{ display: 'Clara', full: 'Maria Lopez' }, id.names[1]] }, 'fix', s.updatedAt);
+  assert.equal(r.status, 409, 'a full name without the first name is measured (and costs a change)');
+});
+
+test('G060-fix: Undo — the last change taken back is free and the change is given back (before publishing / 10 minutes)', async () => {
+  const k = await newSite();
+  await publish(k);
+  let s = await getState(k);
+  const before = identityOf(s.content);
+  let r = await identityCall(k, renamed(before, 'Maria'), 'change', s.updatedAt);
+  assert.equal(r.data.result, 'change');
+  assert.equal(r.data.rights.used, 1);
+  assert.deepEqual(r.data.rights.undo.from, before);
+  assert.equal(r.data.rights.undo.until, null, 'not published yet: until it is published');
+  // back to what it was: free, the change is given back, the anchor is the old one again
+  r = await identityCall(k, before, 'fix', r.data.updatedAt);
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  assert.equal(r.data.result, 'undo');
+  assert.equal(r.data.rights.used, 0);
+  assert.equal(r.data.rights.undo, null);
+  let site = await stored(k);
+  assert.deepEqual(site.identity!.anchor, before);
+  assert.deepEqual(identityOf(site.content), before);
+  assert.deepEqual(site.identity!.log.map((e) => e.kind), ['first_publish', 'change', 'undo']);
+  // a change that was published: undo within 10 minutes only
+  const t0 = new Date();
+  site = await stored(k);
+  const changed = await identityChangeFor(getDataAdapter(), site, { identity: renamed(before, 'Sofia'), intent: 'change' }, t0);
+  assert.equal(changed.status, 200);
+  assert.equal((await publish(k)).status, 200);
+  site = await stored(k);
+  const late = await identityChangeFor(getDataAdapter(), site, { identity: before, intent: 'fix' }, new Date(Date.parse(site.publishedAt!) + 11 * 60_000));
+  assert.equal(late.status, 409, 'published more than 10 minutes ago: going back is a new change');
+  const soon = await identityChangeFor(getDataAdapter(), site, { identity: before, intent: 'fix' }, new Date(t0.getTime() + 5 * 60_000));
+  assert.equal(soon.status, 200);
+  assert.equal(((await soon.json()) as { result: string }).result, 'undo');
+  // the last change used up every change: taking it back still works (it gives one back)
+  site = await stored(k);
+  await getDataAdapter().patchSite(site.id, { identity: { ...site.identity!, used: 2 } });
+  s = await getState(k);
+  const last = identityOf(s.content);
+  r = await identityCall(k, renamed(last, 'Hannah'), 'change', s.updatedAt);
+  assert.equal(r.data.rights.remaining, 0);
+  r = await identityCall(k, renamed(last, 'Olivia'), 'change', r.data.updatedAt);
+  assert.equal(r.status, 403, 'none left');
+  r = await identityCall(k, last, 'fix');
+  assert.equal(r.data.result, 'undo');
+  assert.equal(r.data.rights.remaining, 1);
+});
+
+test('G060-fix: a site first published with the design sample date sets its real date for free, once', async () => {
+  const c = demoContent();
+  const created = await createSiteWithKeys(getDataAdapter(), { slug: `g060-sample-${++counter}`, theme: 'blush-garden-rose', content: c });
+  const k: Keys = { id: created.site.id, slug: created.site.slug, editKey: created.editKey, previewKey: created.previewKey };
+  assert.equal(c.date, '2027-05-15', 'the Blush sample date');
+  await publish(k);
+  let s = await getState(k);
+  let r = await identityCall(k, { ...identityOf(s.content), date: '2027-09-26' }, 'fix', s.updatedAt);
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  assert.equal(r.data.result, 'sample_date');
+  assert.equal(r.data.rights.used, 0);
+  assert.equal((await stored(k)).identity!.anchor.date, '2027-09-26', 'the anchor moves to the real date');
+  s = await getState(k);
+  r = await identityCall(k, { ...identityOf(s.content), date: '2027-12-01' }, 'fix', s.updatedAt);
+  assert.equal(r.status, 409, 'only once: the next date change is counted');
+});
+
+test('G060-fix: per-site photo caps — uploads per day (shared limiter) and stored files in total', async () => {
+  const k = await newSite();
+  const limiter = new MemoryRateLimiter();
+  setClaimRateLimiter(limiter);
+  try {
+    const upload = () => call(photoRoute, `/api/edit/${k.slug}/photo?slot=hero`, { slug: k.slug }, { method: 'POST', key: k.editKey, body: Buffer.from(tinyPng()), type: 'image/png' });
+    assert.equal((await upload()).status, 200);
+    for (let i = 1; i < UPLOAD_LIMITS.perSitePerDay.limit; i++) await limiter.hit(`upload:site:${k.id}`, UPLOAD_LIMITS.perSitePerDay);
+    const day = await upload();
+    assert.equal(day.status, 429);
+    assert.equal(day.data.code, 'upload_limit');
+    assert.ok(Number(day.headers.get('retry-after')) > 0);
+    setClaimRateLimiter(new MemoryRateLimiter());
+    const adapter = getDataAdapter();
+    assert.ok((await adapter.countPhotos!(k.id)) >= 1, 'the local adapter counts stored files');
+    const original = adapter.countPhotos;
+    adapter.countPhotos = async () => UPLOAD_LIMITS.maxFilesPerSite;
+    try {
+      const full = await upload();
+      assert.equal(full.status, 429);
+      assert.equal(full.data.code, 'photo_limit');
+    } finally {
+      adapter.countPhotos = original;
+    }
+    assert.equal((await upload()).status, 200);
+  } finally {
+    setClaimRateLimiter(null);
+  }
 });

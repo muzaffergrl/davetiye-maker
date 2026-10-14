@@ -6,7 +6,7 @@ durum: inceleme
 alan: wf-g064
 oncelik: 1
 bagimli: []
-yazar: [platform/themes/olive-ivory/site.css, platform/previews/g064/]
+yazar: [platform/themes/olive-ivory/site.css, platform/themes/olive-ivory/README.md, platform/scripts/theme-check.cjs, platform/previews/g064/]
 ---
 
 ## Amaç
@@ -70,7 +70,68 @@ yazı menü harflerinin arasından okunuyor. 03'teki gibi okunur, sakin bir men�
 - `platform/themes/olive-ivory/README.md` "alt gezinme" satırı ("kenarsız yumuşak zemin · opak bant yok") yazma alanımda değil:
   "yumuşak üst geçiş + çizgiden aşağı opak kâğıt (G064)" diye güncellenmeli; test yorumu (`.site-nav: no hard band`) hâlâ doğru.
 
+### İkinci tur — QA düzeltmeleri (2026-10-14, wf-g064)
+QA bulguları (1 orta, 4 düşük) üzerine. Yazma alanı bu turda `platform/scripts/theme-check.cjs` ve tema README'si ile genişletildi
+(orta bulgu theme-check'teydi; o yolları alan açık görev yok, `gorev.py kontrol` yeni çakışma göstermiyor).
+
+**Ne değişti**
+- **(orta) theme-check 'content change' yeniden yeşil.** `editAndPublish` isim/tarihi artık panelin yolundan değiştiriyor:
+  `identityChangeFor(…, {intent: 'change'})` (G060 `/identity` kuralı, yayından sonraki sayılan değişikliklerden biri), kalanı taslağa,
+  sonra `publishSite`. Düz taslak düzenlemesi G060'tan beri `IdentityMismatchError` alıyordu. Alt süreç hatalarına (seed, editAndPublish)
+  stderr'in son satırları ekleniyor (`run()`); mesaj artık "Command failed: … -e" diye kesilmiyor.
+- **(düşük) zarf → home geçişinde nav ilk karede opak:** `::view-transition-new(site-nav):only-child { animation: none; }`. Önceden
+  varsayılan .25 s açılışta zarf sayfasının sağ alt buketi etiketlerin arasından görünüyordu (390×844'te 120 ms karesinde etiket
+  satırının %10'u, 0 ms'de nav hiç yok). home → story geçişi değişmedi (iki taraf da opak, varsayılan çapraz geçiş).
+- **theme-check'e yeni akış** "nav in the envelope → home transition" (390×844, 360×640): `pagereveal` → `ready`'de görünüm geçişi
+  animasyonları durdurulur; 0 ve 120 ms'de nav'ın etiket satırı (çizginin 6 px altından aşağısı) yerleşmiş nav ile karşılaştırılır.
+  Yalnız etiket satırı opak olan nav'da hata (nav tek başına macenta zeminde = yerleşmiş nav ise opak sayılır); 03 gibi bilerek
+  saydam/bulanık nav'da yalnız etiketler ilk karede yoksa uyarı. Ayrım sınandı: eski CSS'in kareleriyle 0 ms %53 / %26, 120 ms %10 / %4
+  piksel farkı (eşik %0,5) → hata; yeni CSS'le her karede %0.
+- **(düşük, ucuz kısmı) story ‹ 2 / 3 › dokunma alanı:** 390×844 ilk ekranında düğmeler 748–792, nav üstü 769 — kutunun alt 23 px'i nav
+  öğesinin altında kalıyor, oraya dokunuş nav'a gidiyordu. `.site-nav { pointer-events: none }` + `ul` ve `.site-nav::before`
+  (çizgiden aşağı tam genişlik, `z-index: -1`) `pointer-events: auto`: yumuşak üst geçiş dokunuşu sayfaya geçirir, opak etiket satırı
+  her dokunuşu tutar (altında gizli bir şey tıklanmaz). `elementFromPoint` ile doğrulandı (story 390×844, details 360×640 / 844×390).
+  Görünüm aynı; glifler zaten çizginin üstündeydi.
+- **(düşük) README:** `themes/olive-ivory/README.md` "alt gezinme" satırı güncel zemini anlatıyor (opak kâğıt rengi, görünür bant yok,
+  geçiş ve dokunma notu).
+- **CSS bütçesi:** `site.css` 45 983 B / 45 KB (46 080 B) — 97 B kaldı (ilk turdan sonra 4 B kalmıştı). Yer açmak için nav yorumları
+  kısaltıldı ve degrade aynı renklerle hex yazıldı (`#ede4d0` + alfa 00/66/cc/f7); nav şeridi pikselleri birebir aynı.
+
+**Kanıt** (`platform/previews/g064/`)
+- `after_<sayfa>_<boyut>_v2.png` (16): ilk turun kaydırma konumları sayfa döşemelerinden geri bulundu (eski CSS'le yeniden çekilen
+  görüntü `before_*` ile birebir: ortalama fark 0–0,4, yalnız hareketli yaprak/sayaç), sonra yeni CSS'le çekildi; konumlar
+  `after_positions_v2.json`. Nav şeridi ilk turun `after_*`'ıyla piksel piksel aynı (kalıcı görünüm değişmedi). Hepsine bakıldı:
+  etiketlerin arasından metin/foto okunmuyor.
+- `vt_compare_390x844.jpg`, `vt_compare_360x640.jpg`: zarf → home geçişi 0 / 120 / 250 ms ve yerleşmiş hâl, önce | sonra.
+  844×390'da da ölçüldü (0/60/120/250 ms, etiket satırı farkı %0); görüntüsü klasörde yok.
+
+**Kontroller** (origin/main birleştirildikten sonra, `npm run build` yeniden)
+- `node scripts/theme-check.cjs --theme olive-ivory --stress` (çıktı geçici klasöre): **116 geçti, 0 hata, 0 uyarı** (114 + 2 yeni
+  geçiş kontrolü; content change dahil sayfa başına içerik-değişikliği kontrolleri yeniden koşuyor).
+- `tests/g051-browser.ts --theme olive-ivory`: 44/44 · `tests/final-smoke.ts --theme olive-ivory`: 44/44 (ikisi README'deki gibi
+  `node` ile; çıktılar geçici klasöre).
+- `npm test`: 412/412 (ilk koşuda `site.css` 45 KB sınırını 682 B aştığı için 1 hata; yorumlar kısaltılıp düzeldi). `npm run build` +
+  trace-check geçti.
+- theme-check ortak dosya olduğu için 03'te de koşuldu (`--theme blush-garden-rose --stress --no-video`, geçici klasör): 113 geçti,
+  0 hata, 2 uyarı — ikisi de yeni geçiş akışından (aşağıda); content change 03'te de yeniden geçiyor.
+
+**Yapılmayan / kapsam dışı**
+- Gerçek iPhone Safari / Android Chrome yok (alt araç çubuğu, safe-area, dinamik viewport, gerçek dokunuş); yalnız masaüstü
+  Chromium'da telefon boyutları. Görünüm geçişi yalnız Chromium'da (cross-document view transition) ölçüldü.
+- **QA 3 (yatay/kısa ekranda ilk ekranın son satırının çizgide yarım kalması) yapılmadı:** 844×390'da details "Order of the Day"
+  (295–360, nav üstü 323) ve story giriş cümlesi, 667×375'te rsvp "Will You Join Us?", 1280×800'de story foto yazıları nav çizgisini
+  kesiyor (ölçüm: sayfaların ilk ekranı, demo kaydı). Home dışında `fold` kuralı yok; sayfa kaydığı için bir satırın çizgiye denk gelmesi
+  olağan, düzeltme içerik uzunluğuna bağlı ve G064 dışı. **Önerilen görev (entegratör):** ya docs/11'e "home dışındaki sayfalarda ilk
+  ekranın son satırı yumuşak geçişte kesilebilir" diye kabul yazılsın, ya da `min-aspect-ratio:1/1 and max-height:620px` sorgusunda
+  `.page-head/.details-top/.rsvp-top` üst boşluğu (şimdi ≥ 768 px genişlikte 140–150 px, 390 px yükseklikte çok) kısalsın + theme-check'e
+  sayfa başına "nav çizgisinde yarım metin satırı" uyarısı eklensin.
+- **Önerilen (entegratör):** docs/11 §13 akış listesine yeni theme-check akışı ("nav in the envelope → home transition") eklensin;
+  03'ün (ve G402/G405 temalarının) nav'ı için aynı `only-child` kuralı düşünülsün (03'te yeni akış uyarı veriyor: 390×844 / 360×640'ta nav saydam+bulanık, etiketler ilk karede yok — %78 / %99 etiket pikseli farklı,
+  .25 s'de beliriyor; 03'ün `site.css`'ine dokunulmadı).
+
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G059 bulgusu
 - 2026-10-14 alindi: wf-g064
+- 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 QA ikinci tur (wf-g064): content change (G060 /identity yolu) + stderr, geçişte opak nav + theme-check akışı, nav dokunma alanı, README; yazar: theme-check.cjs ve tema README eklendi
 - 2026-10-14 bitti, incelemeye gönderildi

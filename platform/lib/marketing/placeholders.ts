@@ -85,6 +85,9 @@ export function launchProblems(cfg: MarketingConfig): string[] {
   if (!cfg.verified.editRights) out.push('verified.editRights is false: the 3 name/date changes rule is not live yet (G060)');
   if (!cfg.verified.archive) out.push('verified.archive is false: "online until 12 months after the wedding" is not live yet (G060)');
   if (!cfg.verified.privacyText) out.push('verified.privacyText is false: the privacy notice is still a draft');
+  if (!cfg.verified.orderCheck) {
+    out.push('verified.orderCheck is false: /start accepts any order number (set CLAIM_ORDER_VERIFICATION=manual or build the Etsy check, G060-fix)');
+  }
   const live = cfg.designs.filter((d) => d.status === 'live');
   if (!live.length) out.push('no live design');
   for (const d of live) out.push(...designLaunchProblems(d));

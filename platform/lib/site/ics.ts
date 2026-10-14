@@ -6,9 +6,9 @@ import { calendarEvent, icsFile, type CalendarEvent } from '../calendar.ts';
 import { getDataAdapter } from '../data/index.ts';
 import { publicOrigin } from '../panel/http.ts';
 import { isArchived } from '../panel/rights.ts';
-import { canPreview } from '../sites.ts';
+import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
-import { archivedPage, notFound } from './render.ts';
+import { archivedPage, notFound, previewExpiredPage } from './render.ts';
 
 /** The .ics response for an event (also used by the theme demo, lib/claim/demo-page.ts). */
 export function icsResponse(event: CalendarEvent, opts: { uid: string; stamp?: Date; filename: string; preview: boolean }): Response {
@@ -36,8 +36,9 @@ export async function handleIcsRequest(req: Request, slugParam: string): Promise
   try {
     const site = await getDataAdapter().getSiteBySlug(slug);
     if (!site) return notFound();
-    const previewParam = url.searchParams.get('preview');
-    const preview = previewParam !== null && canPreview(site, previewParam);
+    const access = previewAccess(site, url.searchParams.get('preview'));
+    if (access === 'gone') return isArchived(site) ? archivedPage() : previewExpiredPage();
+    const preview = access !== null;
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
     if (!preview && isArchived(site)) return archivedPage();

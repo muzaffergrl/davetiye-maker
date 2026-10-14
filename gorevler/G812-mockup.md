@@ -2,8 +2,8 @@
 id: G812
 baslik: Tasarım 12 Tropical Destination — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: inceleme
+alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
 yazar: [collections/12_Tropical_Destination/assets/gpt/mockups/]
@@ -27,11 +27,23 @@ Pilot: 01/03 (G801/G803).
 4. Ara kayıt: 3 sahnede bir commit + push. Kontrol: `python3 tools/kit_check.py collections/12_Tropical_Destination --paket 3`.
 
 ## Bitti sayılması için
-- [ ] 5 sahne doğru yolda; `kit_check --paket 3` 5/5 geçti
-- [ ] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
+- [x] 5 sahne doğru yolda; `kit_check --paket 3` 5/5 geçti
+- [x] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
 
 ## Sonuç
 
+- gpt-gorsel-B, PAKET 3 talimat bloğunu ve 3.1–3.5 İngilizce prompt'larını aynı sohbette, sırayla ve kelimesi kelimesine imagegen'e iletti.
+- Seçilen sahneler `collections/12_Tropical_Destination/assets/gpt/mockups/` altında: `cover_hand.png`, `three_phones.png`, `laptop_phone.png`, `flatlay_phone.png`, `hand_phone_edit.png`.
+- Kapak yeniden üretildi: `cover_hand_v2.png` telefonu alt yarıya almak ve üst başlık alanını genişletmek için; `cover_hand_v3.png` ekranın yeşil rengini düzeltmek için. Seçilen v3, sade `cover_hand.png` adına da kaydedildi. Diğer dört sahne ilk üretimden seçildi.
+- Görsel kontrolde ekranların dört köşesi açık; telefonlar birbirine binmiyor; parmak, yaprak, çiçek, kabuk ve kum ekrana taşmıyor. Yazı/logo görünmüyor; laptop tuşları boş. Kapakta üst bölüm sakin; flatlay'in sol üçte biri boş.
+- `python3 tools/kit_check.py collections/12_Tropical_Destination --paket 3`: **5/5 geçti**. Ekran sayıları sırayla 1, 3, 2, 1, 1; tüm dosyalar opak. Yataylar 1536×1024, kareler imagegen'in doğal çıktısı olan 1254×1254; hedef oranları sağlıyor.
+- İnceleme notu: imagegen, saf `#00FF00` talimatına ve kapaktaki ek renk düzeltmesine rağmen ekran içlerinde küçük RGB değişimleri üretti. Kit kontrolü yeşili toleransla kabul ediyor; **5/5 sonucu, her ekran pikselinin tam (0,255,0) olduğu anlamına gelmiyor**. Örneğin üç telefonun orta ekranında baskın renk (3,250,3), kapak v3'ün merkezinde (5,250,39). Piksel düzeyinde tam saf ve tek renk yeşil şartı karşılanmadı; bu fark incelemede dikkate alınmalı.
+- İki sahnede bir ara kayıt commit + push yapıldı (3.1–3.2, 3.3–3.4); her push öncesi `git pull --rebase origin main` çalıştırıldı. Ek önizleme, metrik veya rapor dosyası oluşturulmadı.
+
 ## Günlük
+- 2026-10-14 alindi: gpt-gorsel-B
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
+- 2026-10-14 ara kayıt: gpt-gorsel-B, 3.1–3.2 sahneleri commit + push edildi.
+- 2026-10-14 ara kayıt: gpt-gorsel-B, 3.3–3.4 sahneleri commit + push edildi.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 5/5 kit kontrolü geçti, tam saf #00FF00 piksel şartındaki sapma Sonuç'a kaydedildi.
