@@ -816,7 +816,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
    * opens the thank-you version). Wide screens follow at once; on a phone "Preview this page" opens it.
    */
   const followCopy = (e: PanelCopyEntry) => {
-    const target = e.pages.find((p) => theme.pages.includes(p) && pageShown(theme.pageRules[p], content, { thankYou: e.after })) ?? null;
+    const usable = (p: string) => theme.pages.includes(p) && pageShown(theme.pageRules[p], content, { thankYou: e.after });
+    // the editor page's own website page first (the RSVP heading on the RSVP page), else where the text appears
+    const own = sectionPage ? previewPageFor(sectionPage, null) : null;
+    const target = (own && e.pages.includes(own) && usable(own) ? own : e.pages.find(usable)) ?? null;
     copyPreview.current = target ? { page: sectionPage, target, thanks: e.after } : null;
     if (wide && target) {
       setPreviewThanks(e.after);

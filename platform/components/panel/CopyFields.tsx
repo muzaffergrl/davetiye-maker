@@ -81,7 +81,8 @@ export function CopyFields({
           multiline={e.multiline}
           rows={e.multiline ? 3 : undefined}
           value={typeof raw === 'string' ? raw : ''}
-          onChange={(v) => edit((c) => withCopy(c, e.key, v.trim() ? v : null, e))}
+          // (typing the design's very words keeps them in the box: no reset under the finger)
+          onChange={(v) => edit((c) => withCopy(c, e.key, v.trim() ? v : null))}
         />
         {own ? (
           <p className={styles.copyDefault}>

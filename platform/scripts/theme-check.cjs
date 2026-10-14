@@ -44,9 +44,16 @@
 //   the data shows after reload (names / date through the panel's /identity rules, G060); first-view weight (DPR 3) with
 //   placeholders (≤ 1.5 MB, error) and with the seeded sample photos (≤ 1.5 MB, else a warning: platform matter, docs/11 §6).
 // --stress: the docs/11 §12 stress record (scripts/lib/theme-env.ts stressRecord: 40-character names and full names,
-//   80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code) on every page at
-//   360/390 with checks 1–4b, and the envelope page at 360×640 / 390×844 (texts on the plain ground, envelope + hint on
-//   screen); screenshots stress_<page>_<w>.png. Required for G4NN (docs/11 §13.1).
+//   80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code) — and, G068,
+//   every editable design text (theme.json "copy") filled to its max — on every page at 360/390 with checks 1–4b, the same in
+//   thank-you mode (index, home, details, rsvp; 60-character title, 400-character message), and the envelope page at
+//   360×640 / 390×844 (texts on the plain ground, envelope + hint on screen); screenshots stress_<page>_<w>.png,
+//   stress_ty_<page>_<w>.png. Required for G4NN (docs/11 §13.1).
+// G068 (docs/11 §3.7): editable design texts — theme.json "copy" = the templates (scripts/copy-manifest.ts), and no visible
+//   fixed text without data-copy (allow list in lib/theme/copy-scan.ts): an error for a theme with a "copy" manifest, a
+//   warning for one without; every [data-copy] on a page shows the record's text (else the design's).
+//   The nav leaving the envelope page: back from home to the envelope (?replay=1), the old nav's image must not show over
+//   the envelope page at 0 / 120 ms (reverse of the G064 check; an opaque nav: error, a see-through one: warning).
 // Short phones (360×640, 375×553, 390×690, 390×844): the envelope texts (h1 + p outside the .stage; "Replay" when
 //   opened) sit on the plain painted ground, not on painted decor (measured on the backdrop with the text hidden);
 //   no horizontal scroll closed or opened; the closed envelope (img/manifest.json stage.closed_obj.box_pct of the .stage,
@@ -139,6 +146,33 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     if (ty.complete) ok('thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)');
     else warn(`thank-you mode (G075, docs/11 §3.6): ${ty.partial ? 'incomplete' : 'not in this theme'} — guests keep the invitation after the wedding. Missing: ${ty.missing.join('; ')}`);
   }
+
+  // G068 (docs/11 §3.7): every visible fixed text carries a copy key; theme.json "copy" = the templates
+  const { resolveCopy, stressCopy, stressText } = await import('../lib/theme/copy.ts');
+  {
+    const { scanCopy, manifestProblems } = await import('../lib/theme/copy-scan.ts');
+    const dir = path.join(process.env.PLATFORM_THEMES_DIR || path.join(ROOT, 'themes'), THEME);
+    const read = (f) => (fs.existsSync(path.join(dir, f)) ? fs.readFileSync(path.join(dir, f), 'utf8') : '');
+    const scan = scanCopy(Object.fromEntries(Object.entries(env.manifest.pages).map(([p, f]) => [p, read(f)])));
+    const keys = Object.keys(env.manifest.copy);
+    const unmarked = scan.unmarked.map((u) => `${u.page} ${u.where} "${u.text}"`);
+    const problems = manifestProblems(env.manifest.copy, scan);
+    results.info.copy = { keys: keys.length, unmarked: unmarked.length, problems: problems.length };
+    if (keys.length) {
+      problems.forEach((x) => err(`editable texts (G068, docs/11 §3.7): ${x}`));
+      unmarked.forEach((x) => err(`editable texts (G068, docs/11 §3.7): visible fixed text without data-copy — ${x}`));
+      if (!problems.length && !unmarked.length) ok(`editable texts (G068): ${keys.length} copy keys = theme.json "copy", no unmarked visible text`);
+    } else {
+      problems.forEach((x) => err(`editable texts (G068, docs/11 §3.7): ${x}`));
+      warn(`editable texts (G068, docs/11 §3.7): no theme.json "copy" — ${unmarked.length} fixed texts cannot be changed from the panel (e.g. ${unmarked.slice(0, 3).join('; ')})`);
+    }
+  }
+  /** The record as the page shows it: design texts resolved (the couple's, else theme.json's) and the thank-you title. */
+  const shown = (c) => ({
+    ...c,
+    copy: resolveCopy(c, env.manifest.copy),
+    thank_you_title: (c.thank_you && typeof c.thank_you.title === 'string' && c.thank_you.title.trim()) || 'Thank you for celebrating with us',
+  });
 
   if (!fs.existsSync(path.join(ROOT, '.next', 'BUILD_ID'))) {
     console.error('No production build: run `npm run build` first.');
@@ -349,6 +383,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   }
 
   async function pageChecks(page, tag, content, photoMode) {
+    content = shown(content);
     await markCards(page, PROFILE);
     const r = await page.evaluate(({ FZ, PARTICLES }) => {
       const out = { hscroll: document.documentElement.scrollWidth - window.innerWidth, offscreen: [], bleed: [], zone: [] };
@@ -378,6 +413,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       out.fields = [...document.querySelectorAll('[data-field]')].map((el) => ({ field: el.dataset.field, format: el.dataset.format || '',
         tag: el.tagName, text: el.textContent.replace(/\s+/g, ' ').trim(), href: el.getAttribute('href'), missing: el.hasAttribute('data-url-missing') }));
       out.title = document.title;
+      out.copies = [...document.querySelectorAll('[data-copy]')].map((el) => ({ key: el.dataset.copy, text: el.textContent.replace(/\s+/g, ' ').trim() }));
       out.slots = [...document.querySelectorAll('[data-slot]')].map((s) => {
         const img = s.matches('img[data-photo]') ? s : s.querySelector('img[data-photo]');
         const mark = s.querySelector('.ph-mark');
@@ -493,6 +529,10 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     const wantTitle = lib.expectedTitle(env.titles[name], content);
     if (r.title !== wantTitle) bad.push(`title "${r.title}" ≠ "${wantTitle}"`);
     let n = 0;
+    for (const c of r.copies || []) {
+      const want = content.copy[c.key];
+      if (want !== undefined && c.text !== want) bad.push(`copy ${c.key}: "${c.text}" ≠ "${want}"`);
+    }
     for (const f of r.fields) {
       if (f.tag === 'IMG') continue;
       if (f.field.startsWith('urls.')) {
@@ -517,7 +557,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     r.cardKeys.forEach((k) => cardsSeen.add(k));
     r.slots.forEach((s) => slotsSeen.add(s.key));
     if (bad.length) bad.forEach((b) => err(`${tag}: ${b}`));
-    else ok(`${tag}: no overflow, ${n} fields = content record, title ok, images loaded, ${r.cards ? `text on ${r.cards} card${r.cards > 1 ? 's' : ''} on paper` : 'no painted card'}, ${r.slots.length ? `${r.slots.length} photo slot${r.slots.length > 1 ? 's' : ''} ${photoMode}` : 'no photo slot'}`);
+    else ok(`${tag}: no overflow, ${n} fields = content record, ${(r.copies || []).length} design texts, title ok, images loaded, ${r.cards ? `text on ${r.cards} card${r.cards > 1 ? 's' : ''} on paper` : 'no painted card'}, ${r.slots.length ? `${r.slots.length} photo slot${r.slots.length > 1 ? 's' : ''} ${photoMode}` : 'no photo slot'}`);
     return r;
   }
   const cardsSeen = new Set();
@@ -1052,6 +1092,85 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       }
     });
 
+    // G068 (G064 qa follow-up): back to the envelope (home → index?replay=1) the envelope page has no nav, so the old nav's
+    // image is an only child and by default fades out over it (.25 s): the envelope page read through its labels. The view
+    // transition is paused on arrival at 0 and 120 ms and the nav band is shot as it is and with the nav's group hidden:
+    // the two must match (the old nav is not drawn).
+    await flow('nav leaving: home → envelope view transition', async () => {
+      const sharp = require(path.join(ROOT, 'node_modules/sharp'));
+      const raw = async (png) => (await sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true }));
+      const far = (a, b) => {
+        let f = 0, n = 0;
+        for (let i = 0; i < a.data.length; i += 3, n++) if (Math.max(Math.abs(a.data[i] - b.data[i]), Math.abs(a.data[i + 1] - b.data[i + 1]), Math.abs(a.data[i + 2] - b.data[i + 2])) > 24) f++;
+        return n ? f / n : 0;
+      };
+      const pct = (x) => `${(x * 100).toFixed(2)} %`;
+      for (const [w, h] of [[390, 844], [360, 640]]) {
+        const tag = `nav leaving the envelope page ${w}×${h}`;
+        const ctx = await mk(w, h);
+        const page = await ctx.newPage();
+        page.setDefaultTimeout(10000);
+        await page.addInitScript(() => {
+          if (!/[?&]replay=1/.test(location.search)) return;
+          window.addEventListener('pagereveal', (e) => {
+            const vt = e.viewTransition;
+            window.__backVT = { vt: Boolean(vt) };
+            if (!vt) return;
+            vt.ready.then(() => {
+              const anims = document.getAnimations().filter((a) => a.effect && String(a.effect.pseudoElement || '').startsWith('::view-transition'));
+              anims.forEach((a) => a.pause());
+              window.__backAnims = anims;
+              window.__backVT.paused = true;
+              window.__backVT.nav = anims.filter((a) => /\(site-nav\)/.test(a.effect.pseudoElement)).map((a) => `${a.effect.pseudoElement} ${a.animationName || ''}`.trim());
+            }, () => { window.__backVT.skipped = true; });
+            vt.finished.then(() => { window.__backVT.finished = true; }, () => { window.__backVT.finished = true; });
+          }, { once: true });
+        });
+        await page.goto(url(demo.slug, 'home'), { waitUntil: 'load' });
+        await page.waitForTimeout(600);
+        const back = page.locator('main a[href*="replay=1"]').last();
+        if (!(await back.count())) { warn(`${tag}: no link back to the envelope (?replay=1) on home — not checked`); await ctx.close(); continue; }
+        await back.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(400);
+        const box = await page.evaluate(() => {
+          const n = document.querySelector('.site-nav');
+          if (!n) return null;
+          const r = n.getBoundingClientRect();
+          const top = Math.max(0, Math.ceil(r.top)), bottom = Math.floor(Math.min(r.bottom, innerHeight));
+          return { x: 0, y: top, width: Math.floor(innerWidth), height: bottom - top };
+        });
+        if (!box || box.height < 8) { ok(`${tag}: no .site-nav on home — not checked`); await ctx.close(); continue; }
+        const navOpaque = (results.info[`nav_vt_${w}x${h}`] || {}).opaque_label_row;
+        await back.click();
+        await page.waitForURL(/[?&]replay=1/, { timeout: 9000 });
+        await page.waitForFunction(() => window.__backVT && (window.__backVT.paused || window.__backVT.skipped || !window.__backVT.vt), null, { timeout: 5000 }).catch(() => null);
+        const st = await page.evaluate(() => window.__backVT || null);
+        if (!st || !st.vt || !st.paused) {
+          warn(`${tag}: no view transition on the way back (${st ? JSON.stringify(st) : 'no pagereveal'}) — not checked`);
+          await ctx.close();
+          continue;
+        }
+        const seen = [];
+        for (const t of [0, 120]) {
+          await page.evaluate((t) => window.__backAnims.forEach((a) => { a.currentTime = t; }), t);
+          await page.waitForTimeout(100);
+          const as = await raw(await page.screenshot({ clip: box }));
+          const hide = await page.addStyleTag({ content: '::view-transition-group(site-nav) { display: none !important; }' });
+          await page.waitForTimeout(80);
+          const without = await raw(await page.screenshot({ clip: box }));
+          await hide.evaluate((el) => el.remove());
+          seen.push({ t, far: far(as, without) });
+        }
+        await page.evaluate(() => window.__backAnims.forEach((a) => a.play()));
+        results.info[`nav_back_vt_${w}x${h}`] = { nav_animations: st.nav, frames: seen.map((s) => ({ t: s.t, nav_drawn: pct(s.far) })) };
+        const bad = seen.filter((s) => s.far > 0.005);
+        if (!bad.length) ok(`${tag}: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)`);
+        else if (navOpaque === false) warn(`${tag}: see-through nav fades out over the envelope page (${bad.map((b) => `${b.t} ms: ${pct(b.far)}`).join(', ')})`);
+        else err(`${tag}: the old nav still shows over the envelope page at ${bad.map((b) => `${b.t} ms (${pct(b.far)} of the band)`).join(', ')} — ::view-transition-old(site-nav):only-child { animation: none; opacity: 0; } (nav animations: ${st.nav.join(', ') || 'none'})`);
+        await ctx.close();
+      }
+    });
+
     await flow('skip / session keys / countdown clock', async () => {
       const ctx = await mk(390, 844);
       const page = await ctx.newPage();
@@ -1170,7 +1289,8 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     if (args.stress) await flow('stress record', async () => {
       const errorsBefore = results.errors.length;
       const stressFile = path.join(dataDir, 'stress-content.json');
-      fs.writeFileSync(stressFile, JSON.stringify(lib.stressRecord(DEMO_CONTENT)));
+      // G068: every editable design text at the longest the design promises (theme.json copy max)
+      fs.writeFileSync(stressFile, JSON.stringify({ ...lib.stressRecord(DEMO_CONTENT), copy: stressCopy(env.manifest.copy) }));
       const stress = seed(['--slug', 'stress-site', '--no-photos'], stressFile);
       const content = readSite(stress.siteId).publishedContent;
       const pages = PAGES.filter((n) => !(n === 'story' && !hasStory) && !(n === 'rsvp' && !rsvpOn));
@@ -1208,8 +1328,35 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
         if (hits.length) err(`envelope closed @${w}×${h} (stress record): text over painted decor ${JSON.stringify(hits.map((x) => ({ ...x, edge: +x.edge.toFixed(2), dark: +x.dark.toFixed(3) })))}`);
         await ctx.close();
       }
-      if (results.errors.length === errorsBefore) ok('stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen');
-      results.info.stress_record = { slug: stress.slug, pages, widths: [360, 390] };
+      // the thank-you version with the same record (G075 texts + the after-the-wedding copy keys at their max)
+      const ty = Object.keys(env.manifest.copy).length && fs.existsSync(path.join(process.env.PLATFORM_THEMES_DIR || path.join(ROOT, 'themes'), THEME, 'thank-you.css'));
+      if (ty) {
+        const tyFile = path.join(dataDir, 'stress-ty-content.json');
+        const tyRecord = { ...lib.stressRecord(DEMO_CONTENT), copy: stressCopy(env.manifest.copy) };
+        tyRecord.thank_you = { mode: 'on', title: stressText(60), message: stressText(400), details: 'keep' };
+        fs.writeFileSync(tyFile, JSON.stringify(tyRecord));
+        const tySite = seed(['--slug', 'stress-ty-site', '--no-photos'], tyFile);
+        const tyContent = readSite(tySite.siteId).publishedContent;
+        for (const w of [360, 390]) {
+          const ctx = await mk(w, 844);
+          for (const name of ['index', 'home', 'details', 'rsvp'].filter((n) => !(n === 'rsvp' && !rsvpOn))) {
+            const page = await ctx.newPage();
+            const problems = watch(page);
+            await page.goto(url(tySite.slug, name), { waitUntil: 'load' });
+            await page.evaluate(() => document.fonts.ready);
+            await eager(page);
+            if (name === 'index') await page.waitForTimeout(900); else await revealAll(page);
+            await pageChecks(page, `${name}@${w} (stress record, thank-you mode)`, tyContent, 'placeholder');
+            problems.forEach((p) => err(`${name}@${w} (stress record, thank-you mode): ${p}`));
+            await flattenNav(page);
+            await page.screenshot({ path: path.join(OUT, `stress_ty_${name}_${w}.png`), fullPage: name !== 'index' });
+            await page.close();
+          }
+          await ctx.close();
+        }
+      }
+      if (results.errors.length === errorsBefore) ok(`stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: ${Object.keys(env.manifest.copy).length} design texts at their max): every page at 360/390${ty ? ' (and in thank-you mode)' : ''} without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen`);
+      results.info.stress_record = { slug: stress.slug, pages, widths: [360, 390], copy_keys_at_max: Object.keys(env.manifest.copy).length, thank_you: Boolean(ty) };
     });
 
     // ---------------------------------------------------------------- first-view transfer (390×844, DPR 3): placeholders, then sample photos

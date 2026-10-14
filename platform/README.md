@@ -987,6 +987,65 @@ adresi bir render geride kalıyordu → kapanışta "çerçeve gezinmiş" sayıl
 Review) kapanışındaki geri adımı bu kayda düşüyor, sayfa yeniden yükleniyor, "Review → Publish changes" sonrası "Your website is live"
 görünmüyordu. Artık kapanışta çerçevenin o anki istenen adresiyle karşılaştırılıyor (yüklenmemiş çerçeve = gezinmemiş).
 
+## Düzenlenebilir tasarım metinleri (G068, K28)
+
+Kullanıcı (2026-10-14): "neredeyse her metin panelden değişsin". Temanın sabit başlık, etiket, düğme, gezinme, form ve teşekkür
+hâli metinleri artık **copy anahtarı** taşır; çiftin sözü `content.copy.<anahtar>`'da, boşsa tasarımın metni. Görev:
+`gorevler/G068-duzenlenebilir-metinler.md`; tema kuralı `docs/11` §3.7 (bu bölüm "İşaret başvurusu"nu genişletir).
+
+- **İşaretler** (`lib/theme/engine.ts`): `data-copy="<anahtar>"` — öğenin şablondaki metni varsayılandır; çiftin metni varsa onu
+  yazar: **metin olarak** (kaçışlı, hiçbir zaman etiket), tek satır (`normalizeLine`: NFC, denetim/bidi karakteri yok, boşluklar
+  teke), anahtarın `max`'ında kesilir (son savunma; panel o sınırda yazdırmaz). Script `&`'ı olan başlıkta (`.amp`) çiftin `&`'ı da
+  `.amp` olur. `data-copy-attr="aria-label:<anahtar>"` öznitelikler için (`alt`, `title`, `content`, `aria-label`, `placeholder`).
+  `{copy.<anahtar>}` `data-text` / `data-attr-*` şablonlarında (sekme başlığı, `og:title`, paylaşım cümlesi): çiftin metni, yoksa
+  `theme.json` varsayılanı. `data-field="urls.*"` + `data-copy` = link adresi alandan, yazısı copy'den. `<template>` içi de işlenir
+  (RSVP formunun konuk satırı). Bilinmeyen içerik anahtarı yok sayılır; şablonda manifestte olmayan anahtar uyarı verir. Manifesti
+  olmayan temada (02/04/05) `data-copy` öğeleri şablon metniyle kalır. İçerik `data-attr-data-copy` ile işaret üretemez.
+- **Manifest** (`theme.json` → `copy`, `lib/theme/copy.ts` `parseCopyManifest`): `{"<anahtar>": {"default", "max", "pages"}}`,
+  şablonlardan `node scripts/copy-manifest.ts --theme <id>` ile yazılır (`--check`: fark ve işaretsiz metin → çıkış 1). Anahtarlar
+  standart (`STANDARD_COPY`: panel sayfası, satır etiketi, sıra, önerilen `max`); 01 olive-ivory 75, 03 blush-garden-rose 79 anahtar,
+  ikisinde de işaretsiz görünür metin yok (`lib/theme/copy-scan.ts` `unmarkedText`; izin listesi: `.ph-mark`, `[data-rsvp-message]`,
+  `[data-copy-fixed]` — tek örnek "Please turn on JavaScript to send your reply.").
+- **Şema + doğrulama:** `docs/03` `copy`: nesne, anahtar `^[a-z][a-z0-9_]{0,47}$`, değer metin ya da `null`, ≤ 300, en çok 200
+  anahtar (Python `tools/validate_content.py` jsonschema ile aynı; TS alt kümesine `propertyNames`, şema değerli
+  `additionalProperties`, `maxProperties` eklendi). Temaya bağlı kurallar (`copyIssues`): tasarımın `max`'ından uzun metin **hata**
+  (yazarken kaydedilir, yayını engeller: `publishSite` 422), tasarımda olmayan anahtar **uyarı** (site yok sayar). Panel kaydı
+  (`PUT`) **yeni** bilinmeyen anahtarı `400 invalid_shape` ile reddeder; taslakta zaten olan (temanın eski sürümünden kalan)
+  anahtar korunur, kayıt kilitlenmez.
+- **Panel (K29: 7. sayfa yok):** altı editör sayfasının her birinin sonunda açılır bölüm **"Headings & labels on this page"**
+  (`components/panel/CopyFields.tsx`; başlıkta "n changed"): satır başına ne/nerede etiketi, kutu (boş = tasarımın metni gri
+  ipucu olarak), değişmişse altında "Design text: “…”" + **Reset to design text**. Sıra: en çok değişenler üstte (davet ve RSVP
+  başlıkları), yalnız düğünden sonra görünenler en altta "After the wedding" alt başlığıyla. Sayfa dağılımı: zarf, kart, davet
+  cümlesi, imzalar, paylaşım cümlesi → **Us**; Day sayfası, program/mekân başlıkları, takvim, sayaç, teşekkür hâli metinleri → **Day &
+  place**; hikâye → **Our Story**; bloklar, ana sayfa bağlantı başlığı, **gezinme etiketleri** → **Details**; RSVP kartı, form, yanıt
+  sonrası, kapanış → **RSVP**; Photos'ta yok. Us'ta isteğe bağlı **"Suggested wording"** çipleri (Wedding · Vow renewal ·
+  Elopement party · Commitment ceremony): yalnız Us'taki iki satırı (küçük kart, davet cümlesi) doldurur, snackbar'da Undo; Wedding =
+  tasarımın metni. Kurulum sihirbazına eklenmedi (3 adım sade kalsın; metinler yayından önce de sonra da editörde). Satıra
+  odaklanınca geniş ekranda önizleme o metnin göründüğü sayfaya geçer (önce editör sayfasının kendi sayfası; "after" metinlerinde
+  teşekkür önizlemesi); telefonda "Preview this page" aynısını açar. Her düzenleme otomatik kaydedilir, **"Unpublished changes: n"**
+  şeridine sayfa olarak girer, Review'da **"<Sayfa> · Headings & labels"** yazar (`changedCopyPages`, `COPY_TITLE`); hata satırın
+  altında ve Edit listesinde "N to fix". **Kimlik hakkı harcamaz** (`rights.ts` yalnız isim/tarih; test: yayından sonra copy kaydı
+  ve yayını `used: 0`).
+- **`thank_you.title` (G075) aynen kalır:** çiftin kendi başlığıdır (içerik alanı, platform varsayılanı "Thank you for celebrating
+  with us", şifreli sitenin paylaşım cümlesi ondan bağımsız; G075 kayıtları bozulmaz). Teşekkür hâlinin tasarım metinleri ("With
+  love and thanks", "Replies are closed", "Look back with us", "The ceremony began at" …) ise copy anahtarı.
+- **Bilerek sabit kalanlar:** iç sayfaların `description` meta cümleleri ("Schedule, venue and travel · …"; görünmez), bölge
+  `aria-label`'ları (Welcome, Invitation …; görünmez landmark adları), platformun mesajları (`/rsvp/form.js` hata metinleri,
+  `[data-rsvp-message]`), "Your photo here" (yalnız önizleme), önizleme bildirimi (`data-pending`). Boş bırakılan kutu metni
+  gizlemez, tasarımın metnine döner (bir metni tamamen kaldırma yok). Bilinen sınır: copy serbest metindir; çift bir başlığa
+  başka bir çiftin adını yazabilir — büyük isimler, tarih ve sekme başlığındaki isimler yine kimlik alanlarından gelir (G060).
+- **01 düzeltmesi (G064 qa'dan):** zarfa geri dönüşte (`index?replay=1`) eski nav'ın görüntüsü artık çizilmez
+  (`::view-transition-old(site-nav):only-child { animation: none; opacity: 0; }`); `theme-check` ters yönü de ölçer. Yatay/kısa
+  ekranda iç sayfaların ilk ekranındaki son satırın nav altına girmesi `docs/11` §11'de kabul edilen davranış olarak yazıldı.
+- **Testler:** `tests/g068-copy.test.ts` (13; motor: kaçış, tek satır, sınır, varsayılan, `.amp`, öznitelik, `{copy.…}`, `<template>`,
+  bilinmeyen anahtar, manifestsiz tema; şema + Python eşliği; manifest = şablon, işaretsiz metin yok (01/03); API: kayıt, şerit,
+  hak harcamaz, bilinmeyen anahtar 400, uzun metin yayını 422, misafir sayfaları; iki temada her anahtar `max`'ta uyarısız (teşekkür
+  hâli dahil); panel yardımcıları ve öneriler). Tarayıcı: `NODE_PATH=/opt/node22/lib/node_modules node tests/g068-browser.ts`
+  (build sonrası; 390 × 844 panel yolculuğu: bölüm, öneri + Undo, RSVP başlığı, önizleme, Review, yayın, misafir sayfası, hak 0,
+  sıfırla; axe-core + dokunma hedefleri; 1280 önizleme takibi; iki temada değişmiş başlıklarla misafir sayfaları) → `previews/g068/`
+  (`G068_SHOTS_DIR`, `PORT` 3368). `scripts/theme-check.cjs`: işaretsiz metin/manifest farkı (manifestli temada hata, yoksa uyarı),
+  her `[data-copy]` = kayıt, `--stress` her anahtarı `max`'ta (teşekkür hâli dahil) dener, nav'ın zarf sayfasına dönüşü.
+
 ## /start sahiplenme akışı (G045)
 
 Etsy alıcısı indirdiği PDF'teki başlat linkini açar: `/start?theme=<tema>`. Sayfa İngilizce, telefon öncelikli (390 px),

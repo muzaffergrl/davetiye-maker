@@ -359,7 +359,8 @@ export interface CopyPreset {
   values: Readonly<Record<string, string | null>>;
 }
 
-const PRESET_KEYS = ['card_line', 'invite_request', 'cd_today'] as const;
+// the texts that name the occasion, both listed on Us (the countdown's "we're celebrating!" fits every occasion)
+const PRESET_KEYS = ['card_line', 'invite_request'] as const;
 
 export const COPY_PRESETS: readonly CopyPreset[] = [
   { id: 'wedding', label: 'Wedding', values: Object.fromEntries(PRESET_KEYS.map((k) => [k, null])) },
@@ -369,7 +370,6 @@ export const COPY_PRESETS: readonly CopyPreset[] = [
     values: {
       card_line: 'We’re renewing our vows',
       invite_request: 'invite you to celebrate the renewal of their vows',
-      cd_today: 'Today is the day — we’re renewing our vows!',
     },
   },
   {
@@ -378,7 +378,6 @@ export const COPY_PRESETS: readonly CopyPreset[] = [
     values: {
       card_line: 'We eloped!',
       invite_request: 'invite you to celebrate their elopement',
-      cd_today: 'Today is the day — let’s celebrate!',
     },
   },
   {
@@ -387,7 +386,6 @@ export const COPY_PRESETS: readonly CopyPreset[] = [
     values: {
       card_line: 'We’re making it official',
       invite_request: 'invite you to celebrate their commitment ceremony',
-      cd_today: 'Today is the day — we’re celebrating!',
     },
   },
 ];

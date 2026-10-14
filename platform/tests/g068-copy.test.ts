@@ -424,7 +424,8 @@ test('panel helpers: changes by page ("Headings & labels"), entries, jumps, sugg
   // suggestions: fill the keys the design has, Wedding = back to the design's text, never longer than max
   const vow = COPY_PRESETS.find((p) => p.id === 'vow_renewal')!;
   const applied = applyCopyPreset(record(), vow, theme.manifest.copy);
-  assert.deepEqual(applied.changed.sort(), ['card_line', 'cd_today', 'invite_request']);
+  assert.deepEqual(applied.changed.sort(), ['card_line', 'invite_request']);
+  assert.ok(applied.changed.every((k) => STANDARD_COPY[k].panel === 'us'), 'a suggestion only touches texts listed next to it (Us)');
   assert.equal(applied.content.copy!.card_line, 'We’re renewing our vows');
   assert.equal(currentPreset(applied.content, theme.manifest.copy), 'vow_renewal');
   assert.equal(currentPreset(record(), theme.manifest.copy), 'wedding');
