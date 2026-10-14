@@ -37,3 +37,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
 - 2026-10-14 alindi: gpt-gorsel-D
 - 2026-10-14 ara kayıt: 3.1–3.2 üretildi; cover_hand_v2 (daha geniş üst boşluk) ve three_phones_v2 (ekrana taşan buğday uçları kaldırıldı) seçildi.
+- 2026-10-14 ara kayıt: 3.3–3.4 üretildi; laptop klavyesi yazısız, ekranlar engelsiz; masa üstü sahnesinde sol metin alanı boş.
