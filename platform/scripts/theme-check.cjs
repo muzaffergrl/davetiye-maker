@@ -545,6 +545,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       if (f.text !== want) bad.push(`${f.field}${f.format ? '/' + f.format : ''}: "${f.text}" ≠ "${want}"`);
     }
     for (const s of r.slots) {
+      // thank-you mode (G075, docs/11 §3.6): the hero window holds the thank-you photo or the design's decoration, not the
+      // portrait's img[data-photo] / "Your photo here" — the slot's other checks do not apply there
+      if (photoMode === 'thank-you' && !s.src) continue;
       if (s.mark === 'missing' && once(`${name}:${s.key}:mark`)) bad.push(`photo slot ${s.key}: no .ph-mark ("Your photo here" label, docs/11 §9; reported once per page)`);
       if (!s.src) { if (once(`${name}:${s.key}:img`)) bad.push(`photo slot ${s.key}: no img[data-photo] inside (docs/11 §9)`); continue; }
       if (photoMode === 'user' && (s.state !== 'user' || !s.src.startsWith('/media/') || s.mark === 'shown')) bad.push(`photo ${s.key}: ${JSON.stringify(s)}`);
@@ -1346,7 +1349,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
             await page.evaluate(() => document.fonts.ready);
             await eager(page);
             if (name === 'index') await page.waitForTimeout(900); else await revealAll(page);
-            await pageChecks(page, `${name}@${w} (stress record, thank-you mode)`, tyContent, 'placeholder');
+            await pageChecks(page, `${name}@${w} (stress record, thank-you mode)`, tyContent, 'thank-you');
             problems.forEach((p) => err(`${name}@${w} (stress record, thank-you mode): ${p}`));
             await flattenNav(page);
             await page.screenshot({ path: path.join(OUT, `stress_ty_${name}_${w}.png`), fullPage: name !== 'index' });

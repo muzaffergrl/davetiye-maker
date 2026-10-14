@@ -1005,7 +1005,9 @@ hâli metinleri artık **copy anahtarı** taşır; çiftin sözü `content.copy.
   şablonlardan `node scripts/copy-manifest.ts --theme <id>` ile yazılır (`--check`: fark ve işaretsiz metin → çıkış 1). Anahtarlar
   standart (`STANDARD_COPY`: panel sayfası, satır etiketi, sıra, önerilen `max`); 01 olive-ivory 75, 03 blush-garden-rose 79 anahtar,
   ikisinde de işaretsiz görünür metin yok (`lib/theme/copy-scan.ts` `unmarkedText`; izin listesi: `.ph-mark`, `[data-rsvp-message]`,
-  `[data-copy-fixed]` — tek örnek "Please turn on JavaScript to send your reply.").
+  `[data-copy-fixed]` — tek örnek "Please turn on JavaScript to send your reply."). `max`'lar `theme-check --stress` ile 360/390'da
+  ölçülüp daraltıldı; en dar sıralar gezinme (01: 6/6/7/6, 03: 8), sayaç etiketleri (01: 7, 03: 8), 01'in ana sayfa üçlüsündeki yan
+  kart (hikâye adı 13, bağlantı yazıları 10) ve 03'ün zarf üst satırı (28). Ayrıntı ve gerekçe tema README'lerinde.
 - **Şema + doğrulama:** `docs/03` `copy`: nesne, anahtar `^[a-z][a-z0-9_]{0,47}$`, değer metin ya da `null`, ≤ 300, en çok 200
   anahtar (Python `tools/validate_content.py` jsonschema ile aynı; TS alt kümesine `propertyNames`, şema değerli
   `additionalProperties`, `maxProperties` eklendi). Temaya bağlı kurallar (`copyIssues`): tasarımın `max`'ından uzun metin **hata**

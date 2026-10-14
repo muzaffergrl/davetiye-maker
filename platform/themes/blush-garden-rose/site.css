@@ -403,7 +403,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
         filter: drop-shadow(0 26px 30px rgba(63, 42, 46, .16)); }
 .info > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .info-text { position: absolute; left: 11.2%; width: 76%; top: 28.9%; display: flex; flex-direction: column; align-items: center; }
-.info-text .title { font-size: 10.4cqw; line-height: 1.1; white-space: nowrap; }
+.info-text .title { font-size: 10.4cqw; line-height: 1.1; text-wrap: balance; text-align: center; }
 .info-text .divider { width: 15cqw; margin-top: .8cqw; }
 .sched-list { list-style: none; margin: 2.6cqw 0 0; padding: 0; width: 100%; }
 .sched-row { display: grid; grid-template-columns: 31% 1fr; align-items: center; text-align: left; }

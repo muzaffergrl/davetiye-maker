@@ -114,6 +114,17 @@ comp'larından (sayfa başına "comp öğe haritası"), zarf tipi ve açılış 
 o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP formu, `#site-data`, oturum anahtarları) ve
 `data-scene`/`data-step`/`data-a` kancaları ortaktır; 03'ün aralıkları, süs konumları ve zamanlaması taşınmaz.
 
+## Düzenlenebilir metinler (G068)
+
+Görünür her sabit metin `data-copy` taşır (79 anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
+`platform/README.md` "Düzenlenebilir tasarım metinleri"). Manifest şablonlardan yazılır: `node scripts/copy-manifest.ts --theme
+blush-garden-rose` (`--check` ile denetim). `max` değerleri 360/390'da ölçüldü (`theme-check --stress`, her anahtar `max`'ta,
+teşekkür hâli dahil): gezinme 8 (teşekkür hâlinde `nav_day` 10), sayaç etiketleri 8, zarf üst satırı 28 (`envelope_kicker`,
+`ty_kicker`: 32 harfte satır sol üst köşedeki şakayıklara biniyor, 390×844 ve 375×553). Info kartlarının başlığı (Order of the Day,
+Will You Join Us?) artık tek satıra zorlanmıyor (`white-space: nowrap` → `text-wrap: balance`): tasarımın kendi metni sütuna
+sığdığı için (ör. 390 px'te 206 / 272 px) görünüm aynı, uzun başlık iki dengeli satıra iner ve kart 3 dilimle uzar. Detay
+sayfasında "Ceremony at … in …" bağlacı da anahtar (`ceremony_in`).
+
 ## Bilinen sınırlar
 - Uzun isimde zarf sayfası yazısı küçülür ve zarf biraz küçülür (40+40 karakterde 390×844'te zarf ~328 → ~296 px genişlik); JS kapalıyken
   isimler tam boyda sarar, zarf ve "Tap to open" kısa ekranlarda aşağı kayabilir (JS'siz zarf zaten açılmaz; "Open the
