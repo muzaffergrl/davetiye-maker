@@ -45,9 +45,9 @@ You are the photographer and set stylist for the Etsy listing photos of a digita
 **Kaydet:** `{k}cover_hand.png` · 1024×1024 · 1 ekran
 
 ```
-A woman's elegant hand with natural manicured nails and a delicate gold ring holds a smartphone upright in the lower center of the frame, the phone turned very slightly (about 10 degrees) toward the viewer, its screen facing the camera. Fingers hold only the sides and back of the phone. Behind it, softly out of focus, a styled table with {d['surface']} and {d['props']}. The upper 30% of the image is calm, soft, out-of-focus background with no objects, kept free for a headline. {c}
+A woman's elegant hand with natural manicured nails and a delicate gold ring holds a smartphone upright in the lower half of the frame (the top of the phone no higher than 40% from the top edge), the phone turned very slightly (about 10 degrees) toward the viewer, its screen facing the camera. Fingers hold only the sides and back of the phone. Behind it, softly out of focus, a styled table with {d['surface']} and {d['props']}. The upper 35% of the image is calm, soft, out-of-focus background with no objects, kept free for a headline. {c}
 ```
-Kontrol: tek yeşil ekran; dört köşe görünüyor, parmak ekranda değil; üst %30 sakin ve boş; yazı/logo yok.
+Kontrol: tek yeşil ekran; dört köşe görünüyor, parmak ekranda değil; telefon alt yarıda, üst %35 sakin ve boş; yazı/logo yok.
 
 ### 3.2 Üç telefon — sayfalar
 **Kaydet:** `{k}three_phones.png` · 1536×1024 · 3 ekran
