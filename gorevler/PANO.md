@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 31 · alindi 4 · inceleme 5 · blokaj 277 · bitti 71 · toplam 388
+Özet: hazir 31 · alindi 4 · inceleme 4 · blokaj 277 · bitti 72 · toplam 388
 
 ## claude-canva
 
@@ -106,10 +106,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (44)**
+**Üzerinde çalışılan / incelemede / blokaj (43)**
 
 - `G063` inceleme · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
-- `G077` inceleme · claude-local-1 — Canlıya güncel main — panel v2, satış sitesi, yeni temalar; canlı kontrol + kullanıcı için test linkleri
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -153,7 +152,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 0 · Biten: 2
+Bağımlılık bekleyen: 0 · Biten: 3
 
 ## claude-kod
 
