@@ -64,14 +64,16 @@ birebir, 5 sayfa, site.css 45 664 B (≤ 45 KiB), site.js 35 558 B (≤ 35 KiB),
   bekleme yok (`arriveDelay` 0); yana kaydırma yok; MP4 ilk karesi beyaz değil (ortalama 202,206,209); kontrast ölçüldü (küçük
   metin en düşük 4,60, büyük 4,27; mühürdeki monogram süs, 3,6, `aria-hidden`); dar ekranda "Saturday ·" asılı nokta yok.
 
-**Komutlar:** `npm test` 328/328 · `npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 4 tema) ·
-`theme-check --theme dusty-blue-champagne --stress` 113 geçti / 0 uyarı / 3 hata — üçü **yanlış alarm**: denetimin "content
-change" yaması 2. ismi "Theo" yapıyor, bu demonun 2. ismi de "Theo" (aynı değişiklik "Jonah" ile kendi koşumda denendi: beş
-sayfada eski demo sözcüğü yok) · `g051-browser --theme` 44/44 · `final-smoke --theme` 42/42 · `kit_check --paket 5` 23/23,
-`--paket 2` 5/5, hiza tamam (sol −0,20 · sağ +0,29 · alt +0,07 %) · `test_tema_build --hizli`, `test_kit_check`,
-`test_parts_prep` tamam. İlk görünüm (390×844, DPR 3): index 916 KB / home 1010 KB yer tutucuyla, 977 / 1145 KB örnek
-fotoğraflarla (≤ 1,5 MB). Önizlemeler `previews/g402/` (compare_<sayfa>_390, compare_closure, cuts_envelope, kısa/yatay/aralık/
-stres, opening_390x844.mp4, checks.json, final/).
+**Komutlar** (origin/main birleştirildikten sonra yeniden koşuldu): `npm ci` · `npm test` 441/441 (birleştirme öncesi 328/328) ·
+`npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme dusty-blue-champagne
+--stress` 108 geçti / 0 uyarı / 1 hata: "content change" adımı çöküyor — G060 hakları (`publishSite`) yayındaki sitede isim
+değişikliğini `IdentityMismatchError` ile reddediyor; denetimin yaması isimleri değiştiriyor (her temada aynı; tema dışı).
+Birleştirme öncesi koşu 113 geçti / 3 hata: üçü **yanlış alarm** (yamanın yeni 2. ismi "Theo" = bu demonun 2. ismi). Aynı
+değişiklik "Maren & Jonah" ile ayrı tohumlanmış sitede elle denendi: beş sayfada eski demo sözcüğü yok · `g051-browser --theme`
+44/44 · `final-smoke --theme` 44/44 · `kit_check --paket 5` 23/23, `--paket 2` 5/5, hiza tamam (sol −0,20 · sağ +0,29 · alt
++0,07 %) · `test_tema_build --hizli`, `test_kit_check`, `test_parts_prep` tamam. İlk görünüm (390×844, DPR 3): index 916 KB /
+home 1010 KB yer tutucuyla, 977 / 1145 KB örnek fotoğraflarla (≤ 1,5 MB); dokun → home 4,4–4,6 s. Önizlemeler `previews/g402/`
+(compare_<sayfa>_390, compare_closure, cuts_envelope, kısa/yatay/aralık/stres, opening_390x844.mp4, checks.json, final/).
 
 **Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `overflow: clip`, VT), Vercel yayını, gerçek alıcı
 fotoğrafları, yavaş ağ. **qa-kontrol incelemesi yapılmadı:** bu oturumda alt-ajan aracı yoktu; `compare_*` görselleri ve README
@@ -81,8 +83,8 @@ haritası yalnız kendi gözümle karşılaştırıldı — §13.4 kapısı ince
 "crisp alpha edge; no glow, haze, soft shadow or coloured fringe outside the object; fully transparent beyond 2 px of the
 edge"; (2) pencereler: "window exactly #00FF00 with a hard edge, no anti-aliased coloured ring"; (3) envelope_open: "the open
 flap's fold line on exactly the same row as the closed envelope's top edge" (GPT ~23 px yukarıda çizdi); (4) bg_tile:
-"seamless: left/right and top/bottom edges continue each other". **Önerilen görev:** theme-check "content change" yamasında
-demolarda olmayan isim (ör. "Jonah") — G402'nin 3 yanlış alarmı.
+"seamless: left/right and top/bottom edges continue each other". **Önerilen görev:** theme-check "content change" adımı — kimlik değişikliğini
+platformun yoluyla onaylasın (G060 `IdentityMismatchError`) ve demolarda olmayan isim kullansın (ör. "Jonah").
 
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)

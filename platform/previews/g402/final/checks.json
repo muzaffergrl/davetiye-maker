@@ -107,7 +107,7 @@
       "ok": true
     },
     {
-      "name": "buyer: panel opens with the names",
+      "name": "buyer: the editor opens the setup at step 1 with the names (G060)",
       "ok": true
     },
     {
@@ -115,27 +115,35 @@
       "ok": true
     },
     {
+      "name": "buyer: setup has no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "buyer: Home shows the names",
+      "ok": true
+    },
+    {
       "name": "buyer: panel has no horizontal overflow",
       "ok": true
     },
     {
-      "name": "buyer: Publish button in the fixed bar, >= 44 px",
+      "name": "buyer: Publish button in the top bar, >= 44 px",
       "ok": true,
-      "detail": "{\"x\":215.6875,\"y\":784,\"width\":158.3125,\"height\":50}"
+      "detail": "{\"x\":298.0625,\"y\":6,\"width\":79.9375,\"height\":44}"
     },
     {
-      "name": "buyer: photo uploaded (1 of 5 added)",
+      "name": "buyer: photo uploaded (1 of 5 photos)",
       "ok": true
     },
     {
       "name": "buyer: \"Before you publish\" notes (sample text from the demo, empty photo places)",
       "ok": true,
-      "detail": "Before you publish Keep editing Your guests will see these. Check them, or publish anyway and change them later. Still sample text from the design DATE & TIME Wedding date: still the sample text. DATE"
+      "detail": "Before you publish Good to know before you publish After you publish, you can change your names and wedding date 3 times. Fixing a small typo (up to 2 letters or digits) is free. Everything else — tim"
     },
     {
       "name": "buyer: \"Publish anyway\" reachable on the phone (sheet scrolls)",
       "ok": true,
-      "detail": "{\"x\":16,\"y\":775.84375,\"width\":158.953125,\"height\":48}"
+      "detail": "{\"x\":16,\"y\":784,\"width\":203.921875,\"height\":48}"
     },
     {
       "name": "buyer: \"Your website is live\"",
@@ -160,7 +168,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/56658324-bd7e-4332-a6e7-d9c972c4001f/26b3cc08d89fa0372933470a58f8d8b1-1024w.jpg"
+      "detail": "/media/69749567-e2da-46f3-ab74-70da38da9ed4/057db31ff65bfd3fb0249061c3d5905b-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
@@ -177,7 +185,7 @@
     {
       "name": "buyer: the reply shows in the panel",
       "ok": true,
-      "detail": "Replies Refresh 1 reply · 0 attending (0 guests) · 1 not attending Ben Fictional — no Download all replies (CSV)"
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close at the end of Sunday, August 1, 2027 (New York time). All Coming No"
     },
     {
       "name": "buyer: panel has no overflow at the end",

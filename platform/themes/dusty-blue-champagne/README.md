@@ -202,8 +202,10 @@ names_min_px: 36}`):
   kenarında biter); üst köşeler ekran kenarında kırpılır (`overflow-x: clip`), geniş RSVP'de (≥ 960 px) sayfanın kenarında.
 - Açılış giriş durumları ekran dışına taşmaz: home bölümlerindeki baskı/kart yukarı doğru dönerek oturur (`fly-up-l/r`), yalnız
   story baskıları ve mekân baskısı yandan uçar (bölüm `overflow-x: clip`).
-- `theme-check` "content change" adımı bu temada 3 **yanlış alarm** verir: denetimin değişiklik yaması 2. ismi "Theo" yapıyor
-  (01/03 demolarına göre yazılmış), bu demonun 2. ismi de "Theo" → "old content still visible ("Theo")". Aynı değişiklik
-  "Jonah" ile kendi koşumda denendi: beş sayfada eski demo sözcüğü (Eleanor, Theo, Rosewood, Charleston, E&T) yok.
+- `theme-check` "content change" adımı bu temada geçmiyor, tema dışı iki sebeple: (1) denetimin yaması 2. ismi "Theo" yapıyor
+  (01/03 demolarına göre yazılmış), bu demonun 2. ismi de "Theo" → 3 yanlış alarm "old content still visible ("Theo")";
+  (2) G060 haklarından sonra `publishSite` yayındaki sitede isim değişikliğini `IdentityMismatchError` ile reddediyor, adım
+  her temada çöküyor. Aynı değişiklik "Maren & Jonah" ile ayrı tohumlanmış sitede elle denendi: beş sayfada eski demo sözcüğü
+  (Eleanor, Theo, Rosewood, Charleston, E&T) yok.
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (Safari'nin yatay araç çubukları, `svh`, `mask`, `ResizeObserver`,
   `overflow: clip`), Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
