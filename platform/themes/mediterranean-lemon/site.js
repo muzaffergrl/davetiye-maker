@@ -1,23 +1,23 @@
-/* Mediterranean Lemon (05, G405); DEV_CONTENT only without #site-data. README.md */
+/* Mediterranean Lemon (05, G405); README.md */
 const MOTION = {
-  // sessionStorage keys (+ ":<slug>") = the <head> scripts
+  // sessionStorage keys (+ ":<slug>") = <head> scripts
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },
 
-  // opening (docs/11 §7.3; catalogue sentence, README): [start ms after the tap, duration ms]
+  // opening (docs/11 §7.3, README): [ms after the tap, duration ms]
   envelope: {
     hint: [0, 300],
-    tug: [0, 300],  // the envelope gives
-    closure: [0, 1400],  // the tie: slips loose, drops, rolls right ≤ 150°, rolls off screen
-    head: [180, 620],  // heading rises away
-    lift: [680, 860],  // the flap lifts 0° → 90° (the tie is clear)
-    open: [720, 420],  // closed → open body (tile liner + pocket)
-    flap: [1520, 760],  // the open flap (tile liner) stands up from −90°
-    rise: [1800, 1420],  // the card rises
-    sway: [1800, 1800],  // the top-left branch sways in
-    accents: 1950,  // one blossom down the liner
-    forward: [3220, 640],  // the card comes forward (× 1.04)
-    go: 4120,  // to home
-    fadeOut: 420  // without cross-document VT
+    tug: [0, 300],
+    closure: [0, 1400], // the tie slips, drops, rolls off
+    head: [180, 620],
+    lift: [680, 860], // the flap 0° → 90°
+    open: [720, 420], // closed → open body
+    flap: [1520, 760], // the open flap from −90°
+    rise: [1800, 1420],
+    sway: [1800, 1800], // the top-left branch
+    accents: 1950,
+    forward: [3220, 640],
+    go: 4120,
+    fadeOut: 420 // without cross-document VT
   },
 
   // entrances: scene → [[step, delay ms], …]
@@ -42,7 +42,7 @@ const MOTION = {
   batchGap: 380,  // scenes entering together
   arriveDelay: 0,
 
-  // particles (docs/11 §8): `avoid` = lanes beside these; 'liner' = the open tile liner; `host` = behind its text
+  // particles (docs/11 §8, README): `avoid` lanes beside, `host` behind its text
   accents: {
     open: [{ file: 'img/accent_2-200.webp', count: 1, path: 'drift', origin: 'liner', dur: [2100, 2100], size: [46, 54], spread: 0, avoid: '.env .card' }],
     arrive: [{ file: 'img/accent_2-200.webp', count: 2, path: 'drift', origin: 'top', dur: [6000, 7400], size: [22, 28], spread: 1400, avoid: '.hero-inner > *', host: '.hero' }],
@@ -88,7 +88,7 @@ function readSiteData() {
   try { return JSON.parse(el.textContent); } catch (e) { return null; }
 }
 const SITE = readSiteData();
-const CONTENT = SITE ? {} : DEV_CONTENT;   // the platform sends no record
+const CONTENT = SITE ? {} : DEV_CONTENT; // the platform sends no record
 const PAGES = (SITE && SITE.pages) || { index: 'index.html', home: 'home.html', story: 'story.html', details: 'details.html', rsvp: 'rsvp.html' };
 const KEY = SITE && SITE.slug ? ':' + SITE.slug : '';
 const OPENED = MOTION.storage.opened + KEY;
@@ -116,9 +116,9 @@ function flightPath(g, R, s, i) {
   if (g.origin === 'liner') {
     const st = rects('.stage')[0], cd = av[0];
     if (!st || !cd) return null;
-    // blue right of the card (≤ 3 % over its edge, off the photo); s ≤ 16 % fits every size
+    // blue right of the card (≤ 3 % over its edge); s ≤ 16 %
     ln = [[cd.right - st.width * .03 - R.left, st.right - st.width * .01 - s - R.left]];
-    y0 = st.top + st.height * .27 - R.top; y1 = st.top + st.height * .52 - R.top;   // centre 33–58 %
+    y0 = st.top + st.height * .27 - R.top; y1 = st.top + st.height * .52 - R.top; // centre 33–58 %
   } else if (av.length) {
     const l = Math.min(...av.map((r) => r.left)) - R.left - 8, r = Math.max(...av.map((r) => r.right)) - R.left + 8;
     ln = [[0, l - s], [r, R.width - s]].filter(([a, b]) => b - a > 2);
@@ -156,7 +156,6 @@ function accents(moment, until) {
       const img = Object.assign(new Image(), { src: asset(g.file), alt: '', decoding: 'async' });
       img.style.width = s.toFixed(1) + 'px';
       layer.append(img);
-      // `until` ms: gone before home
       const delay = i * (g.gap || 520) + rand(0, g.spread || 0);
       const a = img.animate(kf, { duration: Math.max(600, Math.min(rand(g.dur[0], g.dur[1]), (until || 1e9) - delay)), delay, easing: 'linear', fill: 'both' });
       a.onfinish = () => img.remove();
@@ -222,7 +221,7 @@ function initCountdown() {
       const diff = target - Date.now();
       if (diff <= 0) {
         box.classList.add('is-done');
-        const today = -diff < 43200000;   // started < 12 h ago
+        const today = -diff < 43200000; // started < 12 h ago
         box.querySelectorAll('.cd-done').forEach((p) => { p.hidden = (p.dataset.when === 'today') !== today; });
         return false;
       }
@@ -237,7 +236,7 @@ function initCountdown() {
   });
 }
 
-/* -- links without a URL (preview) */
+/* -- links without a URL */
 function initPlaceholders() {
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[data-url-missing]');
@@ -311,29 +310,35 @@ function fitNames() {
     for (let i = 0; i < 4 && c && top(c) < below - 0.5; i++, c = cut()) c.style.marginTop = `${parseFloat(getComputedStyle(c).marginTop) + below - top(c)}px`;
     if (keep) hero.style.setProperty('--fold', `${Math.max(0, hero.offsetHeight - end)}px`);
   };
-  // story, 3 across: panels shrink (≥ 190 px) until the row ends above the nav
+  // story, 3 across = one unit: panels shrink (≥ 140 px) till the row ends above the nav
   const tiles = () => {
     const g = $('.tiles');
     if (!g) return;
     g.style.removeProperty('--tw');
     if (getComputedStyle(g).gridTemplateColumns.split(' ').length < 3) return;
-    for (let w = g.firstElementChild.offsetWidth; w > 190 && Math.max(...[...g.children].map(bottom)) > sv() - navH() - 8;) g.style.setProperty('--tw', `${w -= 6}px`);
+    for (let w = g.firstElementChild.offsetWidth; w > 140 && bottom(g) > sv() - navH() - 8;) g.style.setProperty('--tw', `${w -= 6}px`);
+    return g;
   };
-  // [data-fold] in order: a unit (+ .card-tie) crossing the nav line starts below the first screen; the first may lift the page
+  // [data-fold] in order (story row = one): a unit (+ .card-tie) crossing the nav line starts below the first screen;
+  // the first may lift the page; the signature shrinks (--sg ≥ .72) first
   const folds = () => {
-    const f = $('.page-bg + *'), u = [...$$('[data-fold]')];
-    [f, ...u].forEach((e) => e && e.style.removeProperty('margin-top'));
-    tiles();
+    const f = $('.page-bg + *'), a = [...$$('[data-fold], .tiles')];
+    [f, ...a].forEach((e) => e && ['margin-top', '--sg'].forEach((p) => e.style.removeProperty(p)));
+    const g = tiles(), u = a.filter((e) => e.matches(g ? ':not(.tile)' : '[data-fold]'));
     let lift = f ? Math.min(40, parseFloat(getComputedStyle(f.parentElement).paddingTop) * .34) : 0;
     u.forEach((el) => {
-      const v = sv(), t = top(el), d = Math.max(bottom(el), ...[...el.querySelectorAll('.card-tie')].map(bottom)) - v + navH() + 8;
+      const v = sv(), t = top(el), D = () => Math.max(bottom(el), ...[...el.querySelectorAll('.card-tie')].map(bottom)) - v + navH() + 8;
+      let d = D();
       if (!el.offsetParent || d <= 0 || t >= v) return;
+      for (let k = 1; d > lift && k > .73 && el.matches('.sig-unit'); d = D()) el.style.setProperty('--sg', k -= .04);
+      if (d <= 0) return;
+      if (d > lift) el.style.removeProperty('--sg');
       const [e, m] = d <= lift ? [f, -d] : [el, v + 6 - t];
       lift = 0;
       e.style.marginTop = `${parseFloat(getComputedStyle(e).marginTop) + m}px`;
     });
   };
-  // envelope: --pt = the measured heading; --ok shrinks the stage until the hint is on screen
+  // envelope: --pt = the measured heading; --ok shrinks the stage till the hint is on screen
   const envFit = (h1) => {
     const pg = h1.closest('.env-page'), st = pg.querySelector('.stage'), hint = pg.querySelector('.env-hint'), head = h1.parentElement;
     pg.style.removeProperty('--ok'); pg.style.removeProperty('--pt');
@@ -346,7 +351,7 @@ function fitNames() {
       if (k < .6 || (top(st) >= -0.5 && bottom(hint) <= sv() - 6)) return;
     }
   };
-  // decor: a cluster never under wall text (16 × 16 leaf map: shrinks, else hides); a loose piece on text hides
+  // decor: a cluster never under wall text (16 × 16 leaf map: shrinks, else hides); a loose / wall piece on text hides
   const MAP = { tl: '1ffefffffffffffffffcfff0ffe0ffe0ff80fc00fe00fe00f000f000e0006000', br: '001f000e003f003f007f00ff01ff0fff0fff0fff7fffffffffff7fff7dff61fe' };
   const textBox = (el) => {
     const rg = document.createRange();
@@ -380,9 +385,9 @@ function fitNames() {
         c.style.setProperty('--cw', `${(w0 * k).toFixed(1)}px`);
       }
     });
-    bg.querySelectorAll('.float').forEach((f) => {
+    [...bg.querySelectorAll('.float'), ...scope.querySelectorAll('.wall-piece')].forEach((f) => {
       f.style.visibility = '';
-      if (solid.some((t) => { const [x0, y0, x1, y1] = meet(lay(f), t); return x0 < x1 && y0 < y1; })) f.style.visibility = 'hidden';
+      if ((f.matches('.float') ? solid : ts).some((t) => { const [x0, y0, x1, y1] = meet(lay(f), t); return x0 < x1 && y0 < y1; })) f.style.visibility = 'hidden';
     });
   });
   // hero: names ≤ 30 %, tight, ≥ 36 px, countdown last, else it scrolls; fold
@@ -458,7 +463,7 @@ function initEnvelope() {
     if (reduce || !Element.prototype.animate) { go(false); return; }
     A(el.hint, [{ opacity: 1 }, { opacity: 0 }], E.hint, 'ease-out', 'forwards');
     A(el.env, [{ transform: 'scale(1)' }, { transform: 'scale(.988)', offset: .4 }, { transform: 'scale(1)' }], E.tug, 'ease-out', 'none');
-    // the tie: slips, drops onto the bottom edge, rolls right 140° (2.44 rad × radius; lemon = .192 envelope), off screen
+    // the tie: slips, drops, rolls right 140° (2.44 rad × radius; lemon = .192 envelope), off screen
     const SW = stage.offsetWidth, SH = stage.offsetHeight, r = SW * .0952, cr = el.closure.getBoundingClientRect();
     const dy = SH * (.99911 - .61052 - .29179 * .72495) - r, d1 = r * 2.44, out = innerWidth - cr.left + cr.height * .6;
     const T = (x, y, a, o) => Object.assign({ transform: `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${a}deg)` }, o);
@@ -569,7 +574,7 @@ function devRsvp() {
 /* == dev fallback (as lib/theme/engine.ts) */
 function devRender(content) {
   const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
-    story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json
+    story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' }; // = theme.json
   const view = JSON.parse(JSON.stringify(content)), vn = view.venue;
   const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
   if (vn) { vn.city_region = join([vn.city, vn.region]); vn.city_region_country = join([vn.city, vn.region, vn.country]); }

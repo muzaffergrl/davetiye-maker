@@ -39,6 +39,16 @@ export const SITE_PAGES = [
  */
 export const DEMO_REPLY_TOTALS = { coming: 9, notComing: 1, replies: 5 } as const;
 
+/**
+ * The panel's own words for the replies download (Guests view, components/panel/guests.tsx since G069/G066: a button
+ * "Download list" that saves a CSV, one row per person). Copy that names the button uses this label, never the name of
+ * the old G042 RSVP section's button; tests/g080-copy.test.ts checks it against the panel.
+ */
+export const PANEL_REPLIES_DOWNLOAD = 'Download list';
+
+/** Alt text of the panel `replies` screen (home page): what the picture shows, with the button's real label. */
+export const REPLIES_SCREEN_ALT = `Replies in the couple's panel: totals, each reply and a "${PANEL_REPLIES_DOWNLOAD}" button (CSV)`;
+
 /** What one purchase includes (pricing, design pages, llms.txt). */
 export function included(cfg: MarketingConfig = MARKETING): string[] {
   return [
@@ -51,6 +61,8 @@ export function included(cfg: MarketingConfig = MARKETING): string[] {
     'Optional countdown, dress code, registry and travel links, and questions and answers',
     'A link preview with your names and date when you share your link',
     'A QR code to download as PNG or SVG',
+    'An optional guest password, so only people you give it to can open your website',
+    'After the wedding, your website can turn into a thank-you page for your guests (automatic, or switch it off)',
     `Your website stays online until ${cfg.hosting.monthsAfterWedding} months after your wedding date`,
   ];
 }
@@ -60,7 +72,6 @@ export const NOT_INCLUDED: readonly string[] = [
   'A custom domain (your address is on our domain)',
   'Music',
   'Changing the colors, fonts or layout of a design',
-  'Password protection',
   'Sending invitations to guests by email',
   'Guest list import',
   'Languages other than English',

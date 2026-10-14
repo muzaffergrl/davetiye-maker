@@ -635,7 +635,7 @@ test('envelope (docs/11 §7.1/§7.3 kapak): layers from the build, the seal brea
   assert.ok(css.includes(`aspect-ratio: ${pct(st.ratio)}`), 'stage ratio from the manifest');
   assert.ok(css.includes(`calc(var(--obj) * var(--env-fit, 1) / ${pct(st.closed_obj.frac_w)})`), 'stage width from the closed envelope share');
   // long names on a short screen: the envelope shrinks (≥ 72 %) until "Tap to open" is on screen; names ≥ 36 px
-  assert.match(jsText(), /\['\.env-head \.names', 1\.7, 0\.22, 36\]/);
+  assert.match(jsText(), /\['\.env-head \.names', innerWidth < 900 \? 1\.7 : 2\.2, 0\.22, 36\]/, 'two lines on wide screens (G402 QA)');
   assert.match(jsText(), /for \(let f = 1; f > 0\.73 && hint\.offsetParent && bottom\(hint\) > sv\(\) - 6; f -= 0\.04\)/);
   assert.ok(css.includes(`var(--w) * ${pct(st.closed_obj.top_frac_of_stage_w)}`), 'the card room above the envelope from the manifest');
   const { $ } = render('index');
@@ -685,21 +685,21 @@ test('story: three instant prints fly in one after another and settle (window �
   assert.equal(prints.length, 3);
   assert.deepEqual(prints.map((_, el) => $(el).attr('data-scene')).get(), ['story-print', 'story-print', 'story-print'], 'one scene per print: they land in turn');
   assert.deepEqual(prints.map((_, el) => $(el).find('.print-frame').attr('data-a')).get(), ['fly-l', 'fly-r', 'fly-b']);
-  assert.deepEqual(prints.map((_, el) => $(el).find('figcaption .cap-t').attr('data-field')).get(),
-    ['story.items.0.caption', 'story.items.1.caption', 'story.items.2.caption']);
+  assert.deepEqual(prints.map((_, el) => $(el).children('figcaption').find('.cap-t').attr('data-field')).get(),
+    ['story.items.0.caption', 'story.items.1.caption', 'story.items.2.caption'], 'the caption is the figure\'s own child (valid HTML)');
   const css = cssText();
   const pw = Number(/\.prints \{ --pw: min\((\d+)vw/.exec(css)![1]);
   const win = MANIFEST.photo_slots.portrait.box_pct[2] / 100;
   assert.ok(pw * win >= 38, `phone photo window ${(pw * win).toFixed(1)}vw ≥ 38vw (docs/11 §9)`);
   assert.match(css, /\.js \[data-a="fly-l"\] \{ transform: translate3d\(-105vw/);
   assert.match(css, /--settle: cubic-bezier\(\.17, 1\.16, \.38, 1\)/, 'the landing overshoots a hair and settles');
-  assert.match(css, /@media \(min-width: 760px\) \{\s*\.prints \{ --pw: 265px; display: grid;/, 'wide: the comp layout, two above one');
+  assert.match(css, /@media \(min-width: 760px\) \{\s*\.prints \{ --pw: clamp\(200px, \(100svh - 470px\) \/ 1\.5, 265px\); display: grid;/, 'wide: the comp layout, two above one (two prints in the first screen)');
   const js = jsText();
   assert.match(js, /'story-print':\s+\[\['print', 0\], \['caption', \d+\]\]/);
   assert.ok(Number(/batchGap: (\d+)/.exec(js)![1]) >= 300, 'prints entering together still land one after another');
   // captions are fitted (never under 11 px) inside the print margin; the band comes from the build
   assert.ok(MANIFEST.frame_portrait.caption_band_pct[1] - MANIFEST.frame_portrait.caption_band_pct[0] >= 12);
-  assert.match(js, /document\.querySelectorAll\('\.cap, \.mini-cap'\)/);
+  assert.match(js, /\$\$\('\.cap, \.mini-cap'\)/);
   assert.match(js, /Math\.max\(0\.5, 11 \/ fontPx\(el\)\)/);
 });
 
@@ -773,15 +773,15 @@ test('qa lessons: backdrop from parts, clusters never cut by a straight line, �
   assert.equal(MANIFEST.theme_check.clusters, '.corner, .page-corner');
   // small: no Android tap rectangle; tiny text ≥ 11 px
   assert.match(cssText(), /a, button, summary, label, \[role="button"\] \{ -webkit-tap-highlight-color: transparent; \}/);
-  for (const sel of ['.card-copy .kicker', '.sched-line .t', '.rsvp-text .wait', '.cd-lbl', '.seal-mono', '.ch-sub', '.cal .kicker', '.rsvp-text .reply-by', '.day-card .page-kicker']) {
+  for (const sel of ['.card-copy .kicker', '.card-copy .script', '.sched-line .t', '.rsvp-text .wait', '.cd-lbl', '.seal-mono', '.ch-sub', '.cal .kicker', '.rsvp-text .reply-by', '.day-card .page-kicker']) {
     const body = rule(sel);
     const fs = /font-size: max\((\d+(?:\.\d+)?)px/.exec(body) ?? /font: \d+ max\((\d+(?:\.\d+)?)px/.exec(body) ?? /font: \d+ (\d+(?:\.\d+)?)px/.exec(body) ?? /font-size: (\d+(?:\.\d+)?)px/.exec(body);
     assert.ok(fs && Number(fs[1]) >= 11, `${sel}: smallest font size ${fs && fs[1]} px`);
   }
-  // the hero card never below 150 px (its copy stays ≥ 11 px); names ≥ 36 px (= manifest theme_check). W1.2 proportions
-  // (G402 review): on phones a small tilted print (≈ 42vw) under large names; from 1024 px two columns
+  // the hero card ≥ 150 px (≥ 120 px only on a phone on its side under the preview bar; its copy stays ≥ 11 px, fitCopy
+  // drops lines); names ≥ 36 px (= manifest theme_check). W1.2 proportions: a small tilted print under large names
   const widths = [...cssText().matchAll(/\.hero-card \{[^}]*width: (clamp\((\d+)px[^;]+)/g)].map((m) => [m[1], Number(m[2])] as const);
-  assert.ok(widths.length >= 4 && widths.every(([, min]) => min >= 150), widths.map(([w]) => w).join(' | '));
+  assert.ok(widths.length >= 4 && widths.every(([w, min]) => min >= (/var\(--bar/.test(w) ? 120 : 150)), widths.map(([w]) => w).join(' | '));
   assert.match(rule('.hero-card'), /width: clamp\(150px, min\(42vw, 30svh\), 250px\); rotate: -2\.5deg/);
   assert.match(cssText(), /@media \(min-width: 1024px\) \{[^}]*\}\s*\.hero-inner \{ grid-template-columns: auto minmax\(0, 560px\)/);
   const js = jsText();
@@ -803,14 +803,14 @@ test('qa lessons: backdrop from parts, clusters never cut by a straight line, �
   // placeholders are clean crops of the paper; motion: no long idle wait after the card lands
   for (const key of Object.keys(theme.manifest.photos)) assert.ok(MANIFEST[`ph_${key}`].min_lum >= 175, `ph_${key} min luminance ${MANIFEST[`ph_${key}`].min_lum}`);
   assert.ok(Number(/arriveDelay: (\d+)/.exec(js)![1]) <= 400, 'no empty wait after the card lands');
-  assert.match(js, /arrive: +\[\{ file: 'img\/accent_2-200\.webp'[^\n]*avoid: '\.hero \[data-slot\]'/, 'arrival blossoms beside the photo, never over it');
+  assert.match(js, /arrive: +\[\{ file: 'img\/accent_2-200\.webp'[^\n]*\n\s+host: '\.hero', avoid: '\.hero-card, /, 'arrival blossoms behind the hero text, never over the photo');
   // GPT defects cleaned in the build (halo, fringe, window ring); no visible green
   assert.equal(MANIFEST.checks.green_px, 0);
   for (const k of ['card_small', 'frame_portrait', 'frame_landscape']) assert.ok(MANIFEST.cleanup[k].window_ring_px > 0, `${k}: window ring repainted`);
   for (const k of ['envelope_closed', 'envelope_open', 'closure', 'divider']) assert.ok(MANIFEST.cleanup[k].removed_px > 0, `${k}: halo removed`);
-  // docs/11 §6: site.js ≤ 35 KB, site.css ≤ 45 KB (1 KB = 1000 B: headroom under either reading)
-  assert.ok(statSync(path.join(DIR, 'site.js')).size <= 35_000, `site.js ${statSync(path.join(DIR, 'site.js')).size} B`);
-  assert.ok(statSync(path.join(DIR, 'site.css')).size <= 45_000, `site.css ${statSync(path.join(DIR, 'site.css')).size} B`);
+  // docs/11 §6: site.js ≤ 35 KB, site.css ≤ 45 KB (KiB, as in the 01 / 03 / 05 tests)
+  assert.ok(statSync(path.join(DIR, 'site.js')).size <= 35 * 1024, `site.js ${statSync(path.join(DIR, 'site.js')).size} B`);
+  assert.ok(statSync(path.join(DIR, 'site.css')).size <= 45 * 1024, `site.css ${statSync(path.join(DIR, 'site.css')).size} B`);
 });
 
 test('design range (docs/11 §12 level 1) renders every field; reduced motion skips the opening', () => {
@@ -996,4 +996,48 @@ test('15 privacy: sections the couple switched off leave nothing in any page sou
     const html = await res.text();
     for (const secret of secrets) assert.ok(!html.includes(secret), `${page}: "${secret}" is in the page source`);
   }
+});
+
+test('G402 QA: every inner-page piece ends above the nav or starts below the first screen; particles behind the text', () => {
+  const js = jsText(), css = cssText();
+  const units = (page: PageName) => {
+    const { $ } = render(page);
+    return { $, heads: $('[data-fold]').map((_, el) => `${(el as any).tagName}.${($(el).attr('class') ?? '').split(' ')[0]}${$(el).attr('data-fold') === 'join' ? '+' : ''}`).get() };
+  };
+  // story: one "center" group (head, prints, next link): a print that would cross the nav line starts below the first
+  // screen and the head is centred in the space it leaves
+  const story = units('story');
+  assert.equal(story.$('main').attr('data-fold-group'), 'center');
+  assert.deepEqual(story.heads, ['h1.script', 'p.kicker+', 'p.lede', 'figure.print', 'figure.print', 'figure.print', 'img.sprig', 'a.btn+']);
+  // details: card title (+ date) and every schedule row, then the venue print and what follows
+  const det = units('details');
+  assert.equal(det.$('main[data-fold-group]').length, 1);
+  assert.deepEqual(det.heads.slice(0, 5), ['h1.script', 'p.kicker+', 'li.sched-row', 'li.sched-row', 'li.sched-row']);
+  for (const h of ['figure.venue-print', 'div.venue-text', 'p.dress', 'div.cal']) assert.ok(det.heads.includes(h), h);
+  // rsvp: card, form and closing are separate groups (two columns from 960 px); the seal moves with the signature
+  const rs = units('rsvp');
+  assert.equal(rs.$('[data-fold-group]').length, 3);
+  assert.deepEqual(rs.heads.slice(0, 10), ['h1.script', 'p.kicker', 'p.deadline+', 'p.pill', 'img.card-sprig', 'p.kicker', 'p.script', 'p.script+', 'div.card-seal+', 'h2.script']);
+  assert.ok(rs.heads.includes('p.send') && rs.heads.includes('fieldset.choice'));
+  // home: the invitation after the hero (its host line was hidden behind the nav)
+  assert.deepEqual(units('home').heads, ['p.kicker', 'div.invite-card']);
+  // the algorithm: whole-px offsets (2 px spare), 12 px below the first screen, ≤ 28 px per gap, after every fit and on load
+  assert.match(js, /const v = sv\(\), limit = v - nav\.offsetHeight - 10, below = v \+ 12;/);
+  assert.match(js, /const x = n \? Math\.min\(28, D \/ \(n \+ ctr\)\) : 0;/);
+  assert.match(js, /if \(inner && nav\) fold\(hero\);\n\s+\}\);\n\s+foldAll\(\);/);
+  assert.match(js, /addEventListener\('load', run\)/);
+  // flow heights known before the images load (sprigs reserve their ratio)
+  for (const sel of ['.sprig', '.card-sprig']) assert.match(rule(sel), /aspect-ratio: 300 \/ 65/, sel);
+  // the RSVP card + seal fit a tall phone's first screen; landscape: the head beside a smaller cluster
+  assert.match(css, /@media \(min-height: 740px\) \{ \.rsvp-top \.wrap \{ --cw: min\(100% - 48px, 420px, max\(296px, \(100svh - var\(--nav-h\) - var\(--rt\) - 26px\) \/ 2\.12\)\); \} \}/);
+  const land = /@media \(min-aspect-ratio: 1\/1\) and \(max-height: 620px\) \{([\s\S]*?)\n\}/.exec(css)![1];
+  assert.match(land, /\.page-head, \.details-top, \.rsvp-top \{ --tl: min\(30vw, 64svh\);[^}]*padding: calc\(14px \+ env\(safe-area-inset-top\)\) 16px 6px calc\(var\(--tl\) \* \.62/);
+  // desktop RSVP: name | email and the two answers side by side (the form fits beside the card)
+  assert.match(css, /\.reply-form > \.field:nth-of-type\(-n\+2\) \{ grid-column: auto; \}/);
+  // particles: arrival and closing inside their section, behind its text (z 0 under the text's z 1), beside the text,
+  // fading out above the first text in their way; never over the form
+  assert.match(js, /closing: \[\{ file: 'img\/accent_2-200\.webp'[^\n]*\n\s+host: '\.closing', avoid: '\.closing \.sprig', ink: '\.closing h2, \.closing p' \}/);
+  assert.match(css, /\.accent-layer\.in-host \{ position: absolute; z-index: 0; \}/);
+  assert.match(css, /\.closing > h2, \.closing > p \{ width: fit-content; margin-inline: auto; \}/);
+  assert.match(js, /if \(best < 120\) return null;/);
 });

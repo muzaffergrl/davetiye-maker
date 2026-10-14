@@ -23,6 +23,7 @@ Kullanıcı canlıda denemek istiyor. Test yayını; kurgusal veri.
    link+QR, şifre ve düzenleme linki açılır bölümler → sonra geçici siteyi sil.
 4. 390 px ekran görüntüleri `docs/10_canli_test/g079/`: kurulum 1–3, Home, Edit listesi, bir editör, şerit + Review, Share (kapalı/açık), Guests.
    1280 px: Edit + sağda önizleme.
+4b. Main'e bu arada G075 (teşekkür modu) ve G080 (/start + signin BKE görünümü, onaysız tema kapısı) da girdi. Canlıda kontrol et: `/start?theme=dusty-blue-champagne` 404 + "This design is not available yet" (kapı `VERCEL_ENV=production` okuyor; çalışmazsa dur, yaz — ortam değişkeni ekleme), `/start?theme=blush-garden-rose` açılır; `/lily-and-theo` panelinde Day & place → "After the wedding" bölümü görünür (modu değiştirme). Ekran görüntüleri: /start, signin, onaysız tema sayfası.
 5. Sonuç: deployment ID/URL, commit, sayılar, gözlemler (takılan, kafa karıştıran, yavaş olan her şey — kullanıcı "çok daha basit" istedi;
    hâlâ ağır gelen yerleri madde madde yaz), bilinen eksikler. `docs/10` §2c'ye kısa satır.
 

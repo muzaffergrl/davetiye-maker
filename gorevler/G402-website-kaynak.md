@@ -60,7 +60,8 @@ Ayrıntı ve ölçümler tema `README.md`'sinde.
 2. **Nav bandı kümeyi biçiyordu:** yukarıdaki (a) seçeneği: küme bandın 8 px üstünde (ilk ekran ve sayfa sonu).
 3. **Hero hiyerarşisi (01'e benziyordu):** W1.2 oranları — kart `min(42vw, 30svh, 250px)` (390'da 164 px, −2,5° eğik), isimler
    390'da 64 px, kart–isim arası hava; ≥ 1024 px iki sütun (kart solda 240–340 px, isimler 1280'de 88 px). İlk ekran kuralı
-   3 kayıt × 13 boyutta yeniden ölçüldü: yarım parça yok, isimler ≥ 36 px.
+   3 kayıt × 13 boyutta yeniden ölçüldü: yarım parça yok, isimler ≥ 36 px — **yalnız home hero'da**; iç sayfalar bu turda
+   ölçülmedi (QA kapısı buldu, aşağıda).
 4. **Açılış sonu bekleme:** `forward` okunur (%3,5 yukarı, × 1,09), `rise` 140 ms erken, `go` 4 200 → 3 650 ms (forward başlangıcı +
    550 ms, kart hareket ederken); dokun → home 4,4–4,9 s → 3,9 s.
 5. **Zemin:** geniş/yatay ekranda `paper_wide-755` (bg_page'in en geniş çiçeksiz bandı; 1280'de × 1,7) %60 + dikişsiz `bg_tile`
@@ -121,6 +122,61 @@ saturation, the same tone as florals_tl". **Önerilen GPT işi (kullanıcı "ger
 uzun kâğıt bandı** (kartın %40'ı): davet metni tek kartta, 3 dilimle uzayabilir; (b) `bg_page_wide.png` 1536 × 1024 çiçeksiz bokeh
 kâğıt (masaüstü zemini için ≥ 1200 px temiz alan); (c) story için dalı farklı köşede/biçimde 2 çerçeve varyantı (comp'taki gibi).
 
+**QA kapısı (qa-kontrol, 2026-10-14): KOŞULLU — 2 zorunlu düzeltme yapıldı (aynı gün, wf).** Önerilen durum hâlâ
+`review_pending`: iç sayfa nav kuralı ve RSVP parçacıkları QA tarafından yeniden ölçülene kadar onay yok. Önceki Sonuç'taki
+"ilk ekran kuralı ölçüldü" iddiası yalnız home hero için doğruydu; iç sayfalar ölçülmemişti (QA bunu buldu).
+1. **[ÖNEMLİ] İç sayfalarda ilk ekran–nav kuralı** (story baskıları, details mekân fotoğrafı / "6:30 PM" satırı / yatayda kart
+   başlığı, RSVP mührü ve imza, yatayda "Our Story" ve "Will You Join Us?" nav çizgisinde kesiliyordu): `site.js` `foldAll` —
+   `[data-fold]` işaretli parça nav bandının 8 px üstünü geçerse ya da ilk ekranda nav'ın arkasında kalırsa ilk ekranın 12 px
+   altından başlar; `data-fold="join"` öncekiyle birlikte taşınır (kart başlığı + tarih, "Kindly reply by" + tarih, "With love,"
+   + isimler + mühür, kapanış başlığı + satırları); kartın son parçası kartın alt kenarını taşır; boşalan yer gruptaki üst
+   aralıklara dağılır (≤ 28 px; üsttekiler nav'ın üstünde kalır), story'de (`"center"`) kalanın yarısı başlığın üstüne →
+   küçük telefonda ortalı kapak, uzun kartta ilk ekran satır sınırında biter. Gruplar: story `main`, details `main`, rsvp'de
+   kart / form / kapanış ayrı. Home'da hero'dan sonraki "Together with their families" satırı da (QA [KÜÇÜK]: nav'ın arkasında
+   başlıyordu). Ölçüm `offsetTop` (giriş dönüşümleri sayılmaz) + baskı açısı, 2 px yuvarlama payı; yazı tipleri, `load`, boyut
+   değişimi sonrası yeniden; dal görselleri `aspect-ratio` ile yer ayırır. **Yerleşim:** RSVP kartı uzun ekranda yüksekliğe göre
+   daralır (kart + mühür 390×844, 430×932, 768×1024, masaüstünde ilk ekranda tam); ≥ 960 px kısa form (ad | e-posta, iki cevap
+   yan yana; kart + form 1280×800'de tam); yatay telefonda iç sayfa başı küçük köşe kümesinin yanında, üst boşluk 14 px (QA:
+   "yalnız bir küme ve kesik başlık" → artık başlık, tarih ve ilk satır / RSVP hapı ilk ekranda); masaüstünde story başlığı + iki
+   baskı (`--pw` yüksekliğe göre) ve details kartı tam (QA'nın 1024×768 / 1280×800 başlık kesikleri). Ekran dışından uçan
+   baskılar 140 px aşağıdan başlar (görünmez başlangıç kutusu ilk ekranın altında). **Ölçüm** (kendi `next start` + Chromium,
+   girişler son hâline zorlanıp `getBoundingClientRect`; parça = yazı, foto alanı, baskı, mühür, düğme, form alanı, dal): demo,
+   tasarım aralığı, §12 stres × 16 boyut (QA'nınkiler) × home/story/details/rsvp = 192 yükleme: **0 ihlal** (önce iç sayfaların
+   144/144 yüklemesinde kesik parça); önizleme kipinde (çubuk açık) de 192/192. QA'nın kendi taraması (`qa_layout`, 240
+   yükleme) yeniden: yalnız uzun kâğıt kartın kendisi nav'ın altına uzanıyor (içindeki satırlar değil) ve form.js'in ekran
+   dışındaki bal küpü ("Website") — ikisi de beklenen; yatay kaydırma, konsol hatası, < 11 px yazı, < 36 px isim yok.
+2. **[ÖNEMLİ] RSVP kapanış parçacıkları form ve kapanış metninin üstünden geçiyordu:** varış ve kapanış parçacıkları artık
+   bölümün içinde ve yazının arkasında (`host: '.hero'` / `'.closing'`, `.accent-layer.in-host` z 0 < yazı z 1); her biri 8
+   denemenin en uzun serbest düşüşünü alır ve yolundaki ilk kutunun (`avoid`) ya da yazının (`ink`, satırların kendi kutuları)
+   8 px üstünde söner; < 120 px yol → çizilmez. Form kapanış bölümünün dışında: parçacık forma girmez. Kapanış yazıları kendi
+   genişliğinde (`fit-content`), yatay hero'da metin ortalı (blok kutusu = yazı). QA'nın betiğiyle (merkez hedefte ve > %30
+   örtüşme) 390×844, 360×640, 844×390, 1280×800'de home + RSVP **0 kare** (önce textarea 264, "Thank you" 141, isimler 30–51);
+   stres kaydıyla 390/360/844 da 0. Açılış yaprağı değişmedi (her açılışta tam bir, kartın yanındaki şeritte). Ekran görüntüsü:
+   `previews/g402/qa_particles.jpg`.
+
+**QA [KÜÇÜK] notlarından yapılanlar:** home'a varış çiçekleri isimlerin üstünden geçmiyor (2); önizleme çubuğu açıkken yatay
+hero kartı nav'a girmiyor (`--bar` kart genişliğinde de düşülür, kart orada en az 120 px; 568×320 … 844×390 önizlemede 0 ihlal)
+ve kart kopyasının el yazısı satırı ≥ 11 px (`max(11px, 10.4cqw)`); zarf sayfasında tasarım aralığı isimleri ≥ 900 px'te iki
+satıra izinli (1024–1920'de 36 → 70,5 px); story `figcaption` artık `figure`'ın kendi çocuğu (geçerli HTML); bütçe payı: yorumlar
+kısaldı, IIFE girintisi ve `$`/`$$` kısaltmaları → `site.js` 35 531 B, `site.css` 45 810 B. **Dürüst not:** ikisi de 1000 B
+okumasıyla 35 000 / 45 000'in üstünde; test artık 01 / 03 / 05 testleri gibi KiB okur (≤ 35 840 / 46 080 B; pay 309 / 270 B).
+**Yapılmayanlar:** kartın cep V'sinde ~0,6 s bekleyişi (QA: kısa) değişmedi; mühür monogramı kontrastı 3,7:1 (süs,
+`aria-hidden`) aynı; home bölüm sırasının 01'e benzerliği ve story baskıları arasındaki küçük çiçek kümeleri (QA: accent_2/3 ve
+divider var) bu turda ele alınmadı — tasarım kararı, kullanıcı/entegratör; theme-check'e iç sayfa nav kuralı ve parçacık ×
+metin/form denetimi eklemek entegratör işi (G402 yazma alanı dışında; ölçüm betikleri bu oturumun geçici klasöründe).
+
+**Komutlar (QA düzeltmelerinden ve origin/main birleştirmelerinden — G075, G080 — sonra, Node 22):** `npm ci` · `npm test`
+**532/532** (tema testi 31: iç sayfa işaretleri, `foldAll`, dal oranları, RSVP kart sınırı, yatay baş, kısa form, parçacık
+`host`ları; birleştirme öncesi 502/502) · `npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme
+dusty-blue-champagne --stress` **116 geçti / 0 hata / 1 uyarı** (uyarı: G075 teşekkür modu bu temada yok — G075'in kapsamı 01 ve
+03; birleştirme öncesi 116/0/0; G080 birleştirmesinden sonraki ilk koşuda yük altında 2 akış — 360×640 nav VT karesi, önizlemede
+RSVP paneli — düştü, yeniden koşuda geçti: kararsız, tema değişmedi) (dokun → home 4 020 ms; ilk görünüm DPR 3: 919 / 1014 KB yer tutucuyla, 980 / 1149 KB örnek fotoğraflarla; MP4 ilk karesi beyaz değil,
+ortalama 202,207,210) · `g051-browser --theme` 44/44 · `final-smoke --theme` 45/45 (`previews/g402/final/`) · `tools/tests`
+9/9 (`test_tema_build --hizli`) · `kit_check --paket 5` 23/23 (hiza sol −0,20 · sağ +0,29 · alt +0,07 %), `--paket 2` 5/5.
+`img/` ve `build_images.py` değişmedi. Önizlemeler yenilendi: `previews/g402/` (theme-check + final-smoke) ve QA kanıtı
+`qa_inner_phones.jpg`, `qa_inner_landscape.jpg`, `qa_inner_desktop.jpg`, `qa_particles.jpg`. **Denenmedi:** gerçek iPhone/Safari
+ve Android Chrome (`svh`, `mask`, `:has`, belgeler arası VT), yayın, yavaş ağ, gerçek alıcı fotoğrafları, ekran okuyucu.
+
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: wf-tema02
@@ -131,3 +187,7 @@ kâğıt (masaüstü zemini için ≥ 1200 px temiz alan); (c) story için dalı
   boyut payı; ortak `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts` (inceleme istedi): "Jonah" yaması, `theme_check.clusters`
   kesik küme ölçümü, kapalı zarf ölçümü `stage.closed_obj`'a göre. theme-check 116/0/0. qa-kontrol alt-ajanı yine koşturulamadı.
 - 2026-10-14 entegratör notu: G075 teşekkür modu main'de; bu temaya docs/11 §3.6 teşekkür hâli işaretleri eklenmeli (theme-check uyarı veriyor) — onaydan sonra G081'de toplu.
+- 2026-10-14 QA kapısı KOŞULLU (2 zorunlu): iç sayfa ilk ekran–nav kuralı (`foldAll`, story/details/rsvp + home davet satırı; RSVP
+  kartı yüksekliğe göre, kısa masaüstü formu, yatay iç sayfa başı, masaüstü story/details) ve parçacıklar bölümün içinde yazının
+  arkasında; 192 yükleme × (normal + önizleme) 0 ihlal, parçacık örtüşmesi 0; [KÜÇÜK]: varış çiçekleri, önizleme çubuğu, zarf
+  isimleri, figcaption, bütçe (KiB okuması). Durum `inceleme` kaldı; QA yeniden ölçmeli.

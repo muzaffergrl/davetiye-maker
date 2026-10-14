@@ -103,9 +103,15 @@ en koyu pikselini (≥ 175) ve sarı/yeşil fazlasını (≤ 24; limon parlak ol
   köşenin üstünden geçer + bir accent_2 çiçeği; foto penceresine değmez. Telefonda pano 64vw, foto penceresi 64 × 0,605 = **38,7vw**
   (≥ 38vw); ≥ 720 px'te comp'un iki sütunlu basamaklı dizilişi (orta pano `align-self: start` + kenar boşluğuyla aşağıda, böylece
   fold itişi onu tam taşır). **Masaüstü** (≥ 1024 px, yatay, ≥ 621 px yükseklik): üç pano tek basamaklı sırada (yüksek, alçak,
-  yüksek) başlığın altında; `site.js` `tiles` panoları (≥ 190 px) sıra nav'ın üstünde bitene kadar küçültür (QA 2026-10-14: iki
-  sütunda üç pano da ilk ekranın altına itiliyordu, 1280×800'de ekranın %46'sı boş duvardı). Nav çizgisini kesecek pano ilk ekranın
-  altından başlar (`data-fold`).
+  yüksek) başlığın altında ve **tek fold birimi**: `folds` bu düzende panoları değil `.tiles`'ı katlar — pano asla tek başına (ya da
+  ikisi) ilk ekranın altına itilmez. Pano `min(27vw, 400px)`'ten başlar, `site.js` `tiles` sıra nav'ın üstünde bitene kadar 6 px
+  adımlarla küçültür (en az 140 px); yine sığmazsa üçü birlikte ilk ekranın altından başlar. Başlık bloğu yüksekliğe göre daralır
+  (üst boşluk `clamp(24px, 10svh − 40px, 90px)`, başlık `clamp(60px, 15svh − 36px, 104px)`, giriş cümlesi 680 px'e kadar geniş, pano
+  üstü ve başlık aralıkları `svh` ile) ve panolar sıraya gerilmez (`align-self: start`). Sonraki bölüm ("The Day →") de `data-fold`:
+  sıra artık nav'ın hemen üstünde bittiği için düğme nav bandına düşüyordu. Panonun yanındaki duvar parçası bir başlık satırına
+  değerse gizlenir (`decor`; dar panoda çok satırlı başlıklar). (Final QA 2026-10-14: 650–760 px yükseklikte üç pano ya da ikisi
+  ilk ekranın altına itiliyor, ilk ekranın %38–47'si boş duvar kalıyordu: ≥ 768 px'teki `.page-head { padding-top: 150px }` sonra
+  geldiği için masaüstü üst boşluğu hiç uygulanmıyordu ve gerilen pano kutusu sıra sonuna kadar uzayıp tek başına katlanıyordu.)
   Yan kaydırma yok (dikey sütun), bu yüzden kaydırma ipucu gerekmez. Dış köşe buketleri ekran kenarından taşar; `.tiles` (tam
   genişlik) yalnız yatayda kırpar (`overflow-x: clip`), yani buketi yalnız ekran kenarı keser.
 - **Parçacıklar** (`MOTION.accents`): açılış 1 çiçek (yukarıda) · home'a varış 2 çiçek · RSVP kapanışı 3 çiçek + 1 yaprak. Varış ve
@@ -130,7 +136,11 @@ kart kopyası `fitCopy`: tarih · kasaba tek satır, sığmazsa iki satır, sonr
 **İç sayfalar** (`folds`, QA 2026-10-14): aynı kural birim birim — her ilk ekran öğesi ya nav'ın üstünde biter ya da ilk ekranın
 tamamen altında başlar. Birimler `[data-fold]`: details'te kart başlığı, her program satırı, takvim çifti, mekân fotoğrafı; rsvp'de
 başlık, "Kindly reply by" + tarih, hap, iki çizgi + bekleme satırı, "With love," + isimler + limon bağı (bağ imza biriminin içinde,
-birlikte taşınır), form başlığı ve her form satırı; story'de alt başlık, giriş cümlesi ve panolar. Nav çizgisini kesen **ilk**
+birlikte taşınır), form başlığı ve her form satırı; story'de alt başlık, giriş cümlesi, panolar (masaüstü sırada üçü birlikte,
+`.tiles`) ve sonraki bölüm. **İmza önce sığdırılır:** imza birimi nav çizgisini kesiyorsa katlanmadan önce `--sg` 1'den 0,72'ye
+0,04 adımla küçülür — "With love," (yazı + üst boşluk), isimler (yazı + satır aralığı 1,12 → 1,0), limon bağı ve bağın oturduğu
+kart boşluğu (`22cqw × --sg`; bağ kartın kenarında kalır); sığınca (gerekirse aşağıdaki kaldırmayla) ilk ekranda kalır, sığmazsa
+tam boyda katlanır. Nav çizgisini kesen **ilk**
 birim için ilk bölüm en çok 40 px (üst boşluğun %34'ü) yukarı alınır (`.page-bg`'den sonraki öğeye negatif kenar boşluğu); bu
 yetmiyorsa birim ilk ekranın 6 px altından başlar (kart 3 dilimle uzar, ilk ekranda kartın boş kâğıdı nav'ın altına iner). Kısa
 yatayda kartlar daralır ki kart başlığı nav'ın üstünde bitsin (details `(100svh − 162px) × 1,98`, rsvp `(100svh − 128px) × 1,97`);
@@ -158,7 +168,8 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
   `decor_tl` + `decor_br` (ilk ekranda nav'ın üstünde biter) + 3 serbest parça; kartlar/çerçeveler kümelerin önünde (comp'taki gibi).
 - Duvardaki hiçbir yazı bir kümenin yaprağı üstünde durmaz: `decor` her kümenin 16 × 16 yaprak haritasını (WebP alfasından,
   `MAP`) yazı kutularıyla karşılaştırır; çakışırsa küme %6 adımlarla küçülür (en çok %45), yine çakışırsa gizlenir. Yazıya, karta,
-  çerçeveye değen serbest parça (`.float`) gizlenir. Ölçüm: yazı gizli / dekor gizli iki görüntü farkı (yazı satırlarının altında
+  çerçeveye değen serbest parça (`.float`) gizlenir; story panosunun yanındaki duvar parçası (`.wall-piece`) bir yazı satırına
+  değerse gizlenir. Ölçüm: yazı gizli / dekor gizli iki görüntü farkı (yazı satırlarının altında
   dekor pikseli) — 5 sayfa × 11 görünüm (390×844, 360×640, 375×553, 375×667, 320×568, 844×390, 568×320, 667×375, 740×360, 932×430,
   1280×800) × demo / tasarım aralığı / zorlama kaydı = 165 ilk ekran, hepsi temiz.
 - 320 px'te geri sayım satırı daralır (aralık 12 px, etiket harf aralığı .14em) — "SECONDS" artık yaprağa binmiyor.
@@ -196,7 +207,7 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
 |---|---|---|
 | "Our Story", "MOMENTS WE HOLD DEAR" | `h1.page-title`, `.page-head .kicker` | |
 | — | `.lede` (story.intro + tarih) | standart zorunlu |
-| üç çini çerçeve, basamaklı (sol, sağ, sol), dimdik | `.tiles .tile` (frame_portrait), `.t-2` sağda | telefonda tek sütun basamaklı (64vw); ≥ 720 px comp'un iki sütunu; **sapma:** ≥ 1024 px yatay masaüstünde tek basamaklı sıra (yüksek, alçak, yüksek), üç pano ilk ekranda |
+| üç çini çerçeve, basamaklı (sol, sağ, sol), dimdik | `.tiles .tile` (frame_portrait), `.t-2` sağda | telefonda tek sütun basamaklı (64vw); ≥ 720 px comp'un iki sütunu; **sapma:** ≥ 1024 px yatay masaüstünde tek basamaklı sıra (yüksek, alçak, yüksek) = tek fold birimi, üç pano ilk ekranda (621–1080 px yükseklik) |
 | başlık çerçevenin içinde, alt boşlukta | `figcaption` panonun altında | **sapma:** GPT `frame_portrait`'in alt boşluğu yok (pencere çerçeveyi dolduruyor); başlık duvarda, panonun altında |
 | köşelerde limon + çiçek demeti | `.sprig-tuck` (GPT `divider`: limon + çiçekler + yapraklar) + `.tuck-bloom` (accent_2) | demet parçası yok; `divider` aynı demet, dış alt köşede ±26° |
 | duvarda yaprak / çiçek | `.wall-piece` (accent_3 + accent_2, panonun boş yanında ikişer) | |
@@ -224,7 +235,7 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
 | "KINDLY REPLY BY", tarih | `.kicker`, `.deadline` | `data-if="rsvp.deadline"` |
 | RSVP hapı | `a.btn[href="#reply"]` | forma kaydırır |
 | iki kısa çizgi | `.hairs` (iki 1 px ayraç) | |
-| "WE CAN'T WAIT TO CELEBRATE WITH YOU", "With love," + isimler | `.wait`, `.love`, `.sign` | uzun isimde sarar |
+| "WE CAN'T WAIT TO CELEBRATE WITH YOU", "With love," + isimler | `.wait`, `.love`, `.sign` | uzun isimde sarar; ilk ekrana sığmazsa önce küçülür (`--sg` ≥ 0,72) |
 | alt kenarda limon bağı | `.sig-unit > .card-tie` (closure) | `drop` girişiyle karta oturur; imza birimiyle birlikte katlanır |
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi; masaüstünde de kartın altında (tek sütun) |
 
@@ -237,9 +248,20 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
   bir limon bağı (mühür değil, boş oval yok).
 - `favicon.png` şeffaf; `apple-touch-icon` yazılmaz.
 - Zarf sayfası isimleri (§12 zorlama kaydı, 40 harfli adlar) 01 gibi ölçeklenir (en çok 0,4×); home hero isimleri 36 px tabanında.
-- Boyut (docs/11 §6, KiB okuması; test `≤ 35 × 1024` / `≤ 45 × 1024`): `site.js` 35 804 B (34,96 KiB; IIFE gövdesi bir girinti
-  sola alındı, yorumlar kısaltıldı), `site.css` 46 039 B (44,96 KiB; aynı "tam doldur" kuralları birleştirildi). İkisinde de pay
-  ≤ 41 B: sonraki eklemeden önce sıkıştırma gerekir.
+- Boyut (docs/11 §6, KiB okuması; test `≤ 35 × 1024` / `≤ 45 × 1024`): `site.js` 35 807 B (34,97 KiB), `site.css` 46 051 B
+  (44,97 KiB); final QA düzeltmesi (tek sıra birimi, imza küçültme) yorumlar kısaltılarak ve etkisiz `.hero.is-folded` kuralı
+  silinerek sığdı. Pay 33 B / 29 B: sonraki eklemeden önce sıkıştırma gerekir.
+- İlk ekran ölçümü (final QA 2026-10-14; demo / tasarım aralığı / zorlama kaydı): story masaüstü 1024×768 … 1920×1080'de üç pano
+  hep ilk ekranda, sıranın altında 14–54 px duvar (1920×1080: 86–114 px, pano 400 px tavanında). RSVP imza birimi + bağ 390×844,
+  412×915, 430×932 ve 1024×768 … 1920×1080'de ilk ekranda (zorlama kaydında isimler 4–5 satır, 19,5–39 px); yalnız 360×640 ve
+  375×667'de (her kayıt) katlanır (360×640: %72'de bile ~190 px gerekiyor, ~90 px + ≤ 37 px kaldırma var), bekleme satırının altında **97 / 107 px**
+  boş kâğıt (öncekiyle aynı); yatay telefonlarda (844×390, 667×375) imza zaten ilk ekranın altında başlar, boş kâğıt 32–47 px.
+- Uç içerik: 200 karakterlik giriş + ~40 karakterlik başlıklarda 650 px yükseklikte panolar ~142 px'e iner (üçü ilk ekranda).
+  Masaüstü pano tavanı 400 px: `frame_portrait` en büyük 640w varyantı DPR 2'de 320 px'i aşan panoda en çok ~%25 büyütülür.
+- Telefonda (390–430 px) story'nin ikinci panosu ve 768×1024'te üçüncü pano ilk ekranın altına itildiğinde ekranın 25–57 px
+  üstünden, opak nav etiket satırının arkasından başlıyor (telefonda alt kenar boşluğu çakışması, 2 sütunda ızgara satır dağılımı;
+  nav çizgisini kesmiyor, görünmüyor). Bu tur değiştirilmedi (kapsam dışı); önerilen küçük düzeltme: itişten sonra yeniden ölçüp
+  farkı eklemek.
 - Kontrast (oluşan sayfada metnin arkasındaki piksellerin medyanı ve en kötü %10'u; 390 px, 844×390, 1280 px): görünen her metin
   ≥ 4,5:1 (büyük el yazısı ≥ 3:1); hap düğmeler beyaz yazı / kobalt degrade 5,5–7,9:1.
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, kesişen belge view transition), Vercel yayını, gerçek

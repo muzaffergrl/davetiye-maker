@@ -1,0 +1,94 @@
+{
+  "task": "G082",
+  "date": "2026-10-14",
+  "server": "next start (local production build of this checkout), temp data folder; nothing deployed",
+  "npm_test": "538/538 (after merging origin/main)",
+  "typecheck": "clean",
+  "build": "ok (trace-check ok)",
+  "marketing_browser": "312/312 (tests/marketing-browser.ts, output in a temp folder)",
+  "g080_browser": "97/97 (THEME_APPROVAL=enforce server: /start?theme=mediterranean-lemon 200 + form + its demo; POST /api/start 201)",
+  "perf_390_lab": {
+    "/": {
+      "lcp": 1456,
+      "lcpElement": "IMG http://127.0.0.1:41986/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1076,
+      "loadMs": 5229,
+      "transferredKB": 357,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 125
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1516,
+      "lcpElement": "IMG http://127.0.0.1:41986/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0,
+      "fcp": 980,
+      "loadMs": 5506,
+      "transferredKB": 390,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 159
+    },
+    "/designs/mediterranean-lemon": {
+      "lcp": 1288,
+      "lcpElement": "P",
+      "cls": 0.0004,
+      "fcp": 1288,
+      "loadMs": 5633,
+      "transferredKB": 416,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 184
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 880,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 880,
+      "loadMs": 4655,
+      "transferredKB": 234,
+      "scriptKB": 139,
+      "fontKB": 67,
+      "imageKB": 3
+    }
+  },
+  "cls_breadcrumb_fix": {
+    "before": "/designs/mediterranean-lemon CLS 0.1349 in 1 of 3 throttled loads (the breadcrumb wrapped when Montserrat arrived; hero pushed 44 px)",
+    "after": "5 throttled loads: max 0.0004; a guide page, 5 loads: 0"
+  },
+  "assets_05": {
+    "screens": [
+      "details",
+      "envelope",
+      "form",
+      "home",
+      "invitation",
+      "rsvp",
+      "schedule",
+      "story"
+    ],
+    "opening": {
+      "file": "/marketing/designs/mediterranean-lemon/opening.mp4",
+      "poster": "/marketing/designs/mediterranean-lemon/opening-poster.webp",
+      "width": 390,
+      "height": 844,
+      "seconds": 10,
+      "bytes": 331431
+    },
+    "source": "tools/listing_templates/capture.ts guest screens + opening recording (2026-10-14, local build; buyer/panel part removed in a temp copy because it stops at old panel selectors); demo couple Isabella & Marco (fictional)"
+  },
+  "unchanged": "public/marketing/designs/{blush-garden-rose,olive-ivory}/* and their assets.json entries are byte-identical (sha1 before/after); panel entries identical",
+  "previews": [
+    "designs_390.png",
+    "designs_1280.png",
+    "designs_cards_390.png",
+    "designs_cards_1280.png",
+    "design_mediterranean-lemon_390.png",
+    "design_mediterranean-lemon_1280.png",
+    "design_mediterranean-lemon_pages_390.png",
+    "design_mediterranean-lemon_pages_1280.png",
+    "design_mediterranean-lemon_opening_390.png",
+    "design_mediterranean-lemon_opening_1280.png"
+  ]
+}

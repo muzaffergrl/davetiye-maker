@@ -27,7 +27,7 @@
 
 <div class="page-bg" aria-hidden="true"><picture><source media="(min-width: 700px), (min-aspect-ratio: 1/1)" srcset="img/paper_wide-755.webp"><img src="img/paper-400.webp" alt=""></picture></div>
 
-<main class="site-main">
+<main class="site-main" data-fold-group>
   <!-- ORDER OF THE DAY (comp W1.4) — one row per schedule item -->
   <section class="details-top" data-scene="details-card" aria-labelledby="day-title">
     <img class="page-corner corner-tl" data-step="decor" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 400px)" alt="">
@@ -37,10 +37,10 @@
       <div class="paper info day-card" data-step="card" data-a="rise-lg">
         <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-787.webp 787w" sizes="min(calc(100vw - 40px), 440px)" alt="">
         <div class="paper-text info-text">
-          <h1 class="script card-title" id="day-title" data-step="title" data-a="write">Order of the Day</h1>
-          <p class="kicker page-kicker" data-step="kicker" data-a="fade"><span data-field="date" data-format="weekday"></span> <span class="dot" aria-hidden="true">·</span> <span class="nowrap" data-field="date"></span></p>
+          <h1 class="script card-title" id="day-title" data-fold data-step="title" data-a="write">Order of the Day</h1>
+          <p class="kicker page-kicker" data-fold="join" data-step="kicker" data-a="fade"><span data-field="date" data-format="weekday"></span> <span class="dot" aria-hidden="true">·</span> <span class="nowrap" data-field="date"></span></p>
           <ol class="sched-list">
-            <li class="sched-row" data-repeat="schedule" data-step="row" data-a="rise">
+            <li class="sched-row" data-repeat="schedule" data-fold data-step="row" data-a="rise">
               <span class="time" data-field=".time"></span>
               <span class="label" data-field=".label"></span>
               <span class="loc" data-if=".location" data-field=".location"></span>
@@ -53,26 +53,26 @@
 
   <!-- VENUE (comp W1.4): the landscape print tucked under the card's bottom edge -->
   <section class="wrap venue-sec" data-scene="details-venue" aria-label="The venue">
-    <figure class="venue-print" data-step="photo" data-a="fly-r">
+    <figure class="venue-print" data-fold data-step="photo" data-a="fly-r">
       <div class="photo-slot mask-landscape" data-slot="venue">
         <img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(calc(73vw - 21px), 330px)" alt="" data-attr-alt="{venue.name}" loading="lazy">
         <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
       </div>
       <img class="vframe" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(calc(92vw - 27px), 416px)" alt="" loading="lazy">
     </figure>
-    <div class="venue-text" data-step="body" data-a="rise">
+    <div class="venue-text" data-fold data-step="body" data-a="rise">
       <p class="venue-name" data-field="venue.name"></p>
       <p class="venue-city"><span data-field="venue.city_region"></span><span data-if="venue.country">, <span data-field="venue.country"></span></span></p>
       <p class="note" data-if="venue.address" data-field="venue.address"></p>
       <p class="note" data-if="ceremony_time">The ceremony begins at <span class="nowrap" data-field="ceremony_time"></span>.</p>
     </div>
-    <p class="dress" data-optional="dress_code" data-if="dress_code" data-step="dress" data-a="fade"><span class="kicker">Dress code</span> <span class="dot" aria-hidden="true">·</span> <em data-field="dress_code"></em></p>
+    <p class="dress" data-optional="dress_code" data-if="dress_code" data-fold data-step="dress" data-a="fade"><span class="kicker">Dress code</span> <span class="dot" aria-hidden="true">·</span> <em data-field="dress_code"></em></p>
     <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
-    <div class="cal" data-step="cal" data-a="rise">
+    <div class="cal" data-fold data-step="cal" data-a="rise">
       <p class="kicker">Add to your calendar</p>
       <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
     </div>
-    <p class="action" data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
+    <p class="action" data-fold data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank">View map</a></p>
   </section>
 
   <!-- link blocks are shown only with their link (no dead buttons on a live site) -->

@@ -31,7 +31,7 @@
 <div class="page-bg" aria-hidden="true"><picture><source media="(min-width: 700px), (min-aspect-ratio: 1/1)" srcset="img/paper_wide-755.webp"><img src="img/paper-400.webp" alt=""></picture></div>
 
 <main class="site-main">
-  <section class="rsvp-top" data-scene="rsvp-card" aria-label="RSVP">
+  <section class="rsvp-top" data-fold-group data-scene="rsvp-card" aria-label="RSVP">
     <img class="page-corner corner-tl" data-step="decor" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 400px)" alt="">
     <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_1-149.webp" alt="">
     <img class="float f-fern" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
@@ -39,16 +39,16 @@
       <div class="paper info rsvp-card" data-step="card" data-a="rise-lg">
         <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-787.webp 787w" sizes="min(calc(100vw - 48px), 420px)" alt="">
         <div class="paper-text rsvp-text">
-          <h1 class="script card-title" data-step="title" data-a="write">Will You Join Us?</h1>
-          <p class="kicker reply-by" data-step="kicker" data-a="fade" data-if="rsvp.deadline">Kindly reply by</p>
-          <p class="deadline" data-step="kicker" data-a="fade" data-if="rsvp.deadline" data-field="rsvp.deadline"></p>
-          <p class="pill" data-step="button" data-a="bloom"><a class="btn" href="#reply">RSVP</a></p>
-          <img class="card-sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="min(48vw, 210px)" alt="">
-          <p class="kicker wait" data-step="wait" data-a="fade">We can't wait to celebrate with you</p>
-          <p class="script love" data-step="love" data-a="write">With love,</p>
-          <p class="script sign" data-step="sign" data-a="write" data-fit="2.5"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+          <h1 class="script card-title" data-fold data-step="title" data-a="write">Will You Join Us?</h1>
+          <p class="kicker reply-by" data-fold data-step="kicker" data-a="fade" data-if="rsvp.deadline">Kindly reply by</p>
+          <p class="deadline" data-fold="join" data-step="kicker" data-a="fade" data-if="rsvp.deadline" data-field="rsvp.deadline"></p>
+          <p class="pill" data-fold data-step="button" data-a="bloom"><a class="btn" href="#reply">RSVP</a></p>
+          <img class="card-sprig" data-fold data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="min(48vw, 210px)" alt="">
+          <p class="kicker wait" data-fold data-step="wait" data-a="fade">We can't wait to celebrate with you</p>
+          <p class="script love" data-fold data-step="love" data-a="write">With love,</p>
+          <p class="script sign" data-fold="join" data-step="sign" data-a="write" data-fit="2.5"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
         </div>
-        <div class="card-seal" data-step="seal" data-a="press" aria-hidden="true">
+        <div class="card-seal" data-fold="join" data-step="seal" data-a="press" aria-hidden="true">
           <img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="min(40vw, 190px)" alt="">
           <span class="seal-mono" data-field="initials"></span>
         </div>
@@ -57,32 +57,32 @@
   </section>
 
   <!-- REPLY FORM — platform contract (G042). Field names, data-rsvp-* hooks and method="post" are required; no action. -->
-  <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply">
+  <section class="section reply-sec" id="reply" data-fold-group data-scene="rsvp-form" aria-label="Reply">
     <div class="wrap">
       <div class="reply-box" data-rsvp data-step="form" data-a="rise">
-        <h2 class="script">Your reply</h2>
+        <h2 class="script" data-fold>Your reply</h2>
         <form class="reply-form" data-rsvp-form method="post">
-          <label class="field"><span class="kicker">Your name</span>
+          <label class="field" data-fold><span class="kicker">Your name</span>
             <input type="text" name="name" required maxlength="120" autocomplete="name">
           </label>
           <p class="field-error" data-rsvp-error-for="name"></p>
-          <label class="field"><span class="kicker">Email <span class="opt">(optional)</span></span>
+          <label class="field" data-fold><span class="kicker">Email <span class="opt">(optional)</span></span>
             <input type="email" name="email" maxlength="254" autocomplete="email">
           </label>
           <p class="field-error" data-rsvp-error-for="email"></p>
-          <fieldset class="choice">
+          <fieldset class="choice" data-fold>
             <legend class="kicker">Will you attend?</legend>
             <label><input type="radio" name="attending" value="yes" required> <span>Joyfully accepts</span></label>
             <label><input type="radio" name="attending" value="no"> <span>Regretfully declines</span></label>
           </fieldset>
           <p class="field-error" data-rsvp-error-for="attending"></p>
-          <label class="field" data-rsvp-if-attending><span class="kicker">Number of guests <span class="opt">(including you)</span></span>
+          <label class="field" data-fold data-rsvp-if-attending><span class="kicker">Number of guests <span class="opt">(including you)</span></span>
             <input type="number" name="guests" min="1" value="1" inputmode="numeric">
           </label>
           <p class="field-error" data-rsvp-error-for="guests"></p>
           <!-- the couple's own questions (content rsvp.questions, G051): asked of guests who accept; form.js names the
                inputs "answer:<id>". Choice = the same pills as "Will you attend?", text = a short answer. -->
-          <div class="questions" data-rsvp-if-attending data-if="rsvp.questions">
+          <div class="questions" data-fold data-rsvp-if-attending data-if="rsvp.questions">
             <fieldset class="choice question" data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">
               <legend class="kicker" data-field=".label"></legend>
               <div class="q-options" data-if=".options">
@@ -92,11 +92,11 @@
               <p class="field-error" data-attr-data-rsvp-error-for="answer:{.id}"></p>
             </fieldset>
           </div>
-          <label class="field"><span class="kicker">A note for the couple <span class="opt">(optional)</span></span>
+          <label class="field" data-fold><span class="kicker">A note for the couple <span class="opt">(optional)</span></span>
             <textarea name="message" rows="3" maxlength="500"></textarea>
           </label>
           <p class="field-error" data-rsvp-error-for="message"></p>
-          <p class="send"><button class="btn" type="submit">Send reply</button></p>
+          <p class="send" data-fold><button class="btn" type="submit">Send reply</button></p>
           <p class="nojs-only note">Please turn on JavaScript to send your reply.</p>
         </form>
         <div class="reply-panel" data-rsvp-state="success" hidden>
@@ -119,13 +119,13 @@
     </div>
   </section>
 
-  <section class="section closing" data-scene="rsvp-closing" data-accents="closing" aria-label="Thank you">
+  <section class="section closing" data-fold-group data-scene="rsvp-closing" data-accents="closing" aria-label="Thank you">
     <img class="page-corner corner-br" data-step="decor" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-875.webp 875w" sizes="min(62vw, 360px)" alt="" loading="lazy">
-    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
-    <h2 class="script title" data-step="title" data-a="write">Thank you</h2>
-    <p class="line" data-step="line" data-a="fade">for being part of our story.</p>
-    <p class="kicker" data-step="meta" data-a="fade"><span data-field="name_display"></span> <span class="dot" aria-hidden="true">·</span> <span class="nowrap" data-field="date"></span></p>
-    <p class="replay-line" data-step="meta" data-a="fade"><a class="textlink" href="index.html?replay=1">Replay the envelope</a></p>
+    <img class="sprig" data-fold data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <h2 class="script title" data-fold="join" data-step="title" data-a="write">Thank you</h2>
+    <p class="line" data-fold="join" data-step="line" data-a="fade">for being part of our story.</p>
+    <p class="kicker" data-fold data-step="meta" data-a="fade"><span data-field="name_display"></span> <span class="dot" aria-hidden="true">·</span> <span class="nowrap" data-field="date"></span></p>
+    <p class="replay-line" data-fold="join" data-step="meta" data-a="fade"><a class="textlink" href="index.html?replay=1">Replay the envelope</a></p>
   </section>
 </main>
 

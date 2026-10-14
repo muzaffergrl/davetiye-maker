@@ -10,7 +10,7 @@ import { designScreen, openingVideo, panelScreen } from '../../components/market
 import { CheckList, Container, Eyebrow, FaqList, JsonLd, Screen, Section, TextLink } from '../../components/marketing/ui.tsx';
 import { MARKETING } from '../../lib/marketing/config.ts';
 import { liveDesigns } from '../../lib/marketing/designs.ts';
-import { DEMO_REPLY_TOTALS, definition, editRightsText, factStrip, LIMITS, phoneClaim, SITE_PAGES } from '../../lib/marketing/facts.ts';
+import { DEMO_REPLY_TOTALS, definition, editRightsText, factStrip, LIMITS, phoneClaim, REPLIES_SCREEN_ALT, SITE_PAGES } from '../../lib/marketing/facts.ts';
 import { faqItems, HOME_FAQ_IDS } from '../../lib/marketing/faq.ts';
 import { loadGuides } from '../../lib/marketing/guides.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
@@ -230,7 +230,7 @@ export default function HomePage() {
               {designScreen(first.id, 'form') ? (
                 <Screen file={designScreen(first.id, 'form')!} alt="A guest's reply form: attending or not, number of guests and a meal choice question" sizes="220px" />
               ) : null}
-              <Screen file={panelScreen('replies')} alt="Replies in the couple's panel: totals, each reply and a Download all replies (CSV) button" sizes="220px" />
+              <Screen file={panelScreen('replies')} alt={REPLIES_SCREEN_ALT} sizes="220px" />
             </div>
           </div>
         </Container>

@@ -1,21 +1,43 @@
 // Marketing site images and videos from REAL product captures (G061, docs/14 §9.6, §12.4). No drawing, no generated
-// screens: every image is a resize of a real theme / panel screenshot (collections/<NN>/package/shots, G059 capture,
-// 390 px at DPR 3, fictional demo content) and every video is a cut of the real opening recording (opening.webm).
+// screens: every image is a resize of a real theme / panel screenshot (390 × 844 at DPR 3, fictional demo content) and
+// every video is a cut of the real opening recording (opening.webm).
 //
-//   node scripts/marketing-assets.ts            # writes public/marketing/{designs,panel}/ + lib/marketing/assets.json
-//   node scripts/marketing-assets.ts --check    # only verifies that assets.json matches the files (exit 1 if not)
+//   node scripts/marketing-assets.ts               # designs + panel; writes public/marketing/{designs,panel}/ + lib/marketing/assets.json
+//   node scripts/marketing-assets.ts --designs     # only the design screens and opening videos
+//   node scripts/marketing-assets.ts --designs <id>[,<id>…] [--shots <dir>]
+//                                                  # only these designs; every other design (and the panel) keeps its
+//                                                  # entry and files from assets.json (G082: a new design is added
+//                                                  # without re-cutting the existing ones). --shots (one id only): take
+//                                                  # the capture from <dir> instead of collections/<NN>/package/shots
+//   NODE_PATH=/opt/node22/lib/node_modules node scripts/marketing-assets.ts --panel [--public-url <url>]
+//                                                  # only the panel screens (needs `npm run build` + Playwright)
+//   node scripts/marketing-assets.ts --check       # only verifies that assets.json matches the files (exit 1 if not)
 //
-// Needs sharp (dependency) and ffmpeg on PATH (videos). Outputs are deterministic for the same inputs; re-run after a
-// new capture (e.g. panel screens after G060). GPT scene images (docs/14 §12, public/marketing/gpt/) are composed by
-// a later step once they exist — this script does not touch them.
+// Sources:
+//   - designs: the G059 capture of each live design, collections/<NN>/package/shots/*.jpg + opening.webm (or --shots,
+//     the same tool's output in another folder). A design without a capture keeps its previous entry, if it has one.
+//   - panel (G080): captured from the CURRENT code — a local `next start` of this checkout's build on a temporary data
+//     folder (local adapter; nothing deployed, nothing sent to the live site). The design-03 demo is seeded as a
+//     published site (Clara & Julian, sample photos, a "Meal choice" question, five fictional replies); a fictional buyer
+//     (Elena & Marco) starts a site on /start. Screens: /start form, the "Save this link" screen (key masked), panel Home,
+//     photo crop, preview, Share (QR blurred: it would point at a site that only exists in this run), Guests (totals must
+//     equal facts.ts DEMO_REPLY_TOTALS, else the run fails), RSVP questions. G061–G066 took the panel screens from the
+//     G059 JPGs, which show the panel of their day: a full run brought back an old panel (G066-B note).
+//   PLATFORM_PUBLIC_URL = --public-url (default: the live vercel.app address, as in G059) so addresses read like real ones.
+//
+// Needs sharp (dependency) and ffmpeg on PATH (videos). Design outputs are deterministic for the same inputs; panel
+// screens show the day they are taken ("Replies close in N days", the preview's countdown). GPT scene images
+// (docs/14 §12, public/marketing/gpt/) are composed by a later step once they exist — this script does not touch them.
 
-import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { MARKETING } from '../lib/marketing/config.ts';
-import { DESIGN_COPY, PANEL_COLLECTION, PANEL_SOURCES, SCREEN_SOURCES } from '../lib/marketing/designs.ts';
+import { DESIGN_COPY, PANEL_SOURCES, SCREEN_SOURCES, type PanelKey } from '../lib/marketing/designs.ts';
+import { DEMO_REPLY_TOTALS } from '../lib/marketing/facts.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const REPO = path.resolve(ROOT, '..');
@@ -29,6 +51,9 @@ const WEBP_QUALITY = 74;
 /** Opening clip: from the recording's lead-in (opening.json) for CLIP_SECONDS — envelope closed → home page. */
 const CLIP_SECONDS = 10;
 const VIDEO_MAX_BYTES = 1_500_000;
+
+export const MANIFEST_NOTE =
+  'Generated by scripts/marketing-assets.ts from real captures (designs: collections/<NN>/package/shots; panel: a local run of the current panel). Do not edit by hand.';
 
 export interface ScreenAsset {
   /** Intrinsic size of the largest file. */
@@ -53,7 +78,8 @@ export interface AssetManifest {
 
 const rel = (abs: string) => '/' + path.relative(PUBLIC, abs).split(path.sep).join('/');
 
-async function screen(sharp: any, src: string, outDir: string, key: string): Promise<ScreenAsset> {
+/** `src`: an image file or the bytes of a screenshot. */
+async function screen(sharp: any, src: string | Buffer, outDir: string, key: string): Promise<ScreenAsset> {
   mkdirSync(outDir, { recursive: true });
   const meta = await sharp(src).metadata();
   const files: Record<string, string> = {};
@@ -66,7 +92,7 @@ async function screen(sharp: any, src: string, outDir: string, key: string): Pro
     width = info.width;
     height = info.height;
   }
-  if (!meta.width || !meta.height) throw new Error(`no size: ${src}`);
+  if (!meta.width || !meta.height) throw new Error(`no size: ${typeof src === 'string' ? src : `${key} capture`}`);
   return { width, height, files };
 }
 
@@ -127,6 +153,245 @@ export function checkManifest(manifest: AssetManifest, publicDir = PUBLIC): stri
   return problems;
 }
 
+/**
+ * Design screens + opening clips. `only`: the ids to (re)make — every other design keeps its `previous` entry untouched
+ * (null = all). `shotsDir`: the capture folder for the one id in `only`. A design without a capture folder keeps its
+ * previous entry (a later full run must not drop a design whose capture lives outside collections/).
+ */
+async function designAssets(
+  sharp: any,
+  opts: { only?: string[] | null; shotsDir?: string | null; previous?: AssetManifest['designs'] } = {},
+): Promise<AssetManifest['designs']> {
+  const designs: AssetManifest['designs'] = {};
+  const previous = opts.previous ?? {};
+  const only = opts.only ?? null;
+  if (only) {
+    const unknown = only.filter((id) => !MARKETING.designs.some((d) => d.id === id) || !DESIGN_COPY[id]);
+    if (unknown.length) throw new Error(`--designs: no design with copy in lib/marketing: ${unknown.join(', ')}`);
+  }
+  if (opts.shotsDir && only?.length !== 1) throw new Error('--shots needs exactly one design: --designs <id> --shots <dir>');
+  for (const d of MARKETING.designs) {
+    const copy = DESIGN_COPY[d.id];
+    if (!copy) continue; // 'coming' designs without copy yet
+    if (only && !only.includes(d.id)) {
+      if (previous[d.id]) designs[d.id] = previous[d.id];
+      continue;
+    }
+    const shots = opts.shotsDir ? path.resolve(opts.shotsDir) : path.join(REPO, 'collections', copy.collection, 'package/shots');
+    if (!existsSync(shots)) {
+      if (previous[d.id]) designs[d.id] = previous[d.id];
+      console.warn(`skip ${d.id}: no ${path.relative(REPO, shots)}${previous[d.id] ? ' (previous entry kept)' : ''}`);
+      continue;
+    }
+    const outDir = path.join(PUBLIC, 'marketing/designs', d.id);
+    const screens: Record<string, ScreenAsset> = {};
+    for (const [key, shot] of Object.entries(SCREEN_SOURCES)) {
+      screens[key] = await screen(sharp, path.join(shots, `${shot}.jpg`), outDir, key);
+    }
+    designs[d.id] = { screens, opening: opening(shots, outDir) };
+    console.log(`${d.id}: ${Object.keys(screens).length} screens, opening ${designs[d.id].opening?.bytes ?? 0} bytes`);
+  }
+  return designs;
+}
+
+// ---------------------------------------------------------------------------------------------------- panel (G080)
+
+/** The design whose demo and /start the panel screens show (its demo = the fictional Clara & Julian). */
+export const PANEL_THEME = 'blush-garden-rose';
+/** The fictional buyer of the /start → panel screens. */
+const BUYER = { order: '5550012345', email: 'elena.demo@example.test', names: ['Elena', 'Marco'] as const };
+/** Fictional guest replies of the seeded demo (totals 9 coming · 1 not coming · 5 replies = DEMO_REPLY_TOTALS). The
+ *  last one arrives after the couple's last look (the Guests view then shows "1 new reply"). */
+const REPLIES = [
+  { name: 'Olivia Bennett', attending: 'yes', guests: 2, message: 'We would not miss it!', answers: { meal: 'Fish' } },
+  { name: 'Marcus Reed', attending: 'yes', guests: 1, message: '', answers: { meal: 'Vegetarian' } },
+  { name: 'Hannah Clarke', attending: 'no', guests: 0, message: 'So sorry to miss it. Sending love!', answers: {} },
+  { name: 'The Alvarez Family', attending: 'yes', guests: 4, message: 'Counting the days.', answers: { meal: 'Chicken' } },
+  { name: 'Sofia Martin', attending: 'yes', guests: 2, message: '', answers: { meal: 'Fish' } },
+];
+
+function arg(name: string, def: string): string {
+  const i = process.argv.indexOf(`--${name}`);
+  if (i >= 0 && process.argv[i + 1]) return process.argv[i + 1];
+  const eq = process.argv.find((a) => a.startsWith(`--${name}=`));
+  return eq ? eq.slice(name.length + 3) : def;
+}
+
+async function freePort(): Promise<number> {
+  const net = await import('node:net');
+  return new Promise((resolve, reject) => {
+    const s = net.createServer();
+    s.once('error', reject);
+    s.listen(0, '127.0.0.1', () => {
+      const p = (s.address() as { port: number }).port;
+      s.close(() => resolve(p));
+    });
+  });
+}
+
+/** Screens of the current panel, taken from a local `next start` of this checkout's build. */
+async function panelAssets(sharp: any): Promise<AssetManifest['panel']> {
+  if (!existsSync(path.join(ROOT, '.next', 'BUILD_ID'))) throw new Error('panel screens need a production build: run `npm run build` first');
+  const { loadChromium, startNext, waitForServer } = await import('./lib/browser.ts');
+  const { loadThemeEnv, demoSlug } = await import('./lib/theme-env.ts');
+  const publicUrl = arg('public-url', 'https://davetiye-platform-five.vercel.app').replace(/\/+$/, '');
+  const env = loadThemeEnv({ theme: PANEL_THEME });
+  const demo = structuredClone(env.demo);
+  demo.rsvp = { ...demo.rsvp, questions: [{ id: 'meal', label: 'Meal choice', type: 'choice', options: ['Chicken', 'Fish', 'Vegetarian'] }] };
+  const slug = demoSlug(demo);
+  const photo = env.photoFiles.hero_portrait ?? Object.values(env.photoFiles)[0];
+  if (!photo) throw new Error(`no sample photo for ${PANEL_THEME}`);
+
+  const dataDir = mkdtempSync(path.join(os.tmpdir(), 'marketing-panel-'));
+  const out: AssetManifest['panel'] = {};
+  let server: { base: string; stop: () => void } | null = null;
+  let browser: any = null;
+  try {
+    const contentFile = path.join(dataDir, 'demo-content.json');
+    writeFileSync(contentFile, JSON.stringify(demo));
+    const seed = spawnSync(
+      process.execPath,
+      [path.join(ROOT, 'scripts/seed.ts'), '--theme', PANEL_THEME, '--slug', slug, '--content', contentFile, ...(env.photosDir ? ['--photos', env.photosDir] : ['--no-photos'])],
+      { cwd: ROOT, env: { ...process.env, PLATFORM_DATA_DIR: dataDir, DATA_ADAPTER: 'local', PLATFORM_PUBLIC_URL: publicUrl }, encoding: 'utf8' },
+    );
+    if (seed.status !== 0) throw new Error(`seed failed:\n${seed.stdout}\n${seed.stderr}`);
+    const demoKey: string = JSON.parse(readFileSync(path.join(dataDir, 'seed-keys.json'), 'utf8')).editKey;
+
+    const port = Number(process.env.PORT) || (await freePort());
+    // No VERCEL_ENV / THEME_APPROVAL: the panel theme is approved anyway; a local run is never "production".
+    const srv = startNext({ port, dataDir, env: { DATA_ADAPTER: 'local', PLATFORM_PUBLIC_URL: publicUrl, VERCEL_ENV: '', THEME_APPROVAL: '' } });
+    server = srv;
+    await waitForServer(`${srv.base}/signin`, 40_000, srv as any);
+    const base = srv.base;
+
+    // fictional guest replies through the public RSVP API (like a guest's phone); the couple last looked before the fifth
+    let seenAt = '';
+    for (const [i, r] of REPLIES.entries()) {
+      if (i === REPLIES.length - 1) {
+        seenAt = new Date().toISOString();
+        await new Promise((res) => setTimeout(res, 60));
+      }
+      const res = await fetch(`${base}/api/rsvp/${slug}`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-forwarded-for': `198.51.100.${i + 10}` },
+        body: JSON.stringify({ ...r, email: '', website: '' }),
+      });
+      if (res.status !== 200) throw new Error(`reply "${r.name}": ${res.status} ${await res.text()}`);
+    }
+
+    browser = await loadChromium().launch({ args: ['--disable-dev-shm-usage'] });
+    const device = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true };
+    const pause = (page: any, ms: number) => page.waitForTimeout(ms);
+    const take = async (page: any, key: PanelKey) => {
+      await page.evaluate(() => document.fonts.ready);
+      await pause(page, 400);
+      out[key] = await screen(sharp, await page.screenshot({ type: 'png' }), path.join(PUBLIC, 'marketing/panel'), key);
+      console.log(`panel: ${key}`);
+    };
+    const scrollTo = (page: any, sel: string, block: 'start' | 'end', offset: number) =>
+      page.evaluate(
+        ({ s, b, o }: { s: string; b: string; o: number }) => {
+          const r = document.querySelector(s)!.getBoundingClientRect();
+          const top = b === 'end' ? r.bottom + scrollY - innerHeight + o : r.top + scrollY - o;
+          window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+        },
+        { s: sel, b: block, o: offset },
+      );
+
+    // ---- buyer: /start → "Save this link" → panel Home → crop → preview
+    {
+      const ctx = await browser.newContext(device);
+      ctx.setDefaultTimeout(15_000);
+      const page = await ctx.newPage();
+      await page.goto(`${base}/start?theme=${PANEL_THEME}`, { waitUntil: 'networkidle' });
+      await page.frameLocator('iframe').locator('body').waitFor();
+      await page.fill('#start-order', BUYER.order);
+      await page.fill('#start-email', BUYER.email);
+      await page.fill('#start-name1', BUYER.names[0]);
+      if (await page.locator('#start-name2').count()) await page.fill('#start-name2', BUYER.names[1]);
+      await page.waitForSelector('[data-slug-available]');
+      await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur()); // no focus ring in the picture
+      await scrollTo(page, 'form button[type="submit"]', 'end', 96); // the filled form down to "Create my website"
+      await take(page, 'start');
+      await page.click('form button[type="submit"]');
+      await page.waitForSelector('[data-edit-link]');
+      const editUrl: string = await page.inputValue('[data-edit-link]');
+      if (!editUrl.startsWith(`${publicUrl}/edit/`)) throw new Error(`edit link does not use the public URL: ${editUrl.replace(/k=.*/, 'k=…')}`);
+      await page.evaluate(() => {
+        const el = document.querySelector('[data-edit-link]') as HTMLTextAreaElement;
+        el.value = el.value.replace(/k=[A-Za-z0-9_-]+/, 'k=••••••••••••••••'); // the private key, masked in the picture only
+        (document.activeElement as HTMLElement | null)?.blur();
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
+      await take(page, 'editLink');
+      const local = editUrl.replace(publicUrl, base).replace(/#.*$/, '');
+      await page.goto(`${local}#home`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-status-card]');
+      await pause(page, 800);
+      await take(page, 'panel');
+      await page.goto(`${local}#edit/photos`, { waitUntil: 'load' });
+      await page.setInputFiles('input[data-slot="hero_portrait"]', photo);
+      await page.waitForSelector('[data-testid="cropper"] img');
+      await pause(page, 900);
+      await take(page, 'crop');
+      await page.click('[data-crop-confirm]');
+      await page.waitForSelector('[data-photo-slot="hero_portrait"] img', { timeout: 25_000 });
+      await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
+      await page.goto(`${local}#home`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-status-card]');
+      await page.click('[data-open-preview]');
+      const home = page.getByRole('tab', { name: 'Home', exact: true });
+      await home.waitFor();
+      if ((await home.getAttribute('aria-selected')) !== 'true') await home.click();
+      await page.frameLocator('[data-preview] iframe').locator('body').waitFor();
+      await pause(page, 4500); // the theme's entrance on its home page
+      await take(page, 'preview');
+      await ctx.close();
+    }
+
+    // ---- the couple of the seeded (published) demo: Share, Guests, RSVP questions
+    {
+      const ctx = await browser.newContext(device);
+      ctx.setDefaultTimeout(15_000);
+      await ctx.addInitScript(({ key, at }: { key: string; at: string }) => {
+        try {
+          if (!window.localStorage.getItem(key)) window.localStorage.setItem(key, at);
+        } catch {
+          /* no storage: every reply shows as new */
+        }
+      }, { key: `seen:${slug}`, at: seenAt });
+      const page = await ctx.newPage();
+      const L = `${base}/edit/${slug}?k=${demoKey}`;
+      await page.goto(`${L}#share`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-share-qr] svg[role="img"]');
+      // the QR would open a site that only exists in this local run: blurred in the picture
+      await page.evaluate(() => ((document.querySelector('[data-share-qr] svg[role="img"]') as SVGElement).style.filter = 'blur(7px)'));
+      await take(page, 'share');
+      await page.goto(`${L}#guests`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-reply]');
+      await pause(page, 600);
+      const text: string = await page.locator('main').innerText();
+      const want = DEMO_REPLY_TOTALS;
+      const totals = new RegExp(`${want.coming}\\s*Guests coming[\\s\\S]*${want.notComing}\\s*Not coming[\\s\\S]*${want.replies}\\s*Replies`);
+      if (!totals.test(text)) throw new Error(`Guests totals differ from facts.ts DEMO_REPLY_TOTALS: ${text.slice(0, 160).replace(/\s+/g, ' ')}`);
+      await take(page, 'replies');
+      await page.goto(`${L}#edit/rsvp`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-rsvp-questions]');
+      await pause(page, 500);
+      await scrollTo(page, '[data-rsvp-questions]', 'start', 76);
+      await take(page, 'questions');
+      await ctx.close();
+    }
+  } finally {
+    if (browser) await browser.close();
+    server?.stop();
+    rmSync(dataDir, { recursive: true, force: true });
+  }
+  const missing = (Object.keys(PANEL_SOURCES) as PanelKey[]).filter((k) => !out[k]);
+  if (missing.length) throw new Error(`panel screens not taken: ${missing.join(', ')}`);
+  return out;
+}
+
 async function main(): Promise<void> {
   if (process.argv.includes('--check')) {
     const problems = checkManifest(JSON.parse(readFileSync(MANIFEST, 'utf8')));
@@ -137,32 +402,19 @@ async function main(): Promise<void> {
     console.log('marketing assets: ok');
     return;
   }
+  const onlyDesigns = process.argv.includes('--designs') || process.argv.some((a) => a.startsWith('--designs='));
+  const onlyPanel = process.argv.includes('--panel');
+  // --designs <id>[,<id>…] / --designs=<id>: only these designs (a bare --designs = every design)
+  const ids = arg('designs', '');
+  const only = ids && !ids.startsWith('--') ? ids.split(',').map((s) => s.trim()).filter(Boolean) : null;
+  const shotsDir = arg('shots', '') || null;
   const sharp = require('sharp');
+  const previous: AssetManifest | null = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : null;
   const manifest: AssetManifest = {
-    note: 'Generated by scripts/marketing-assets.ts from real captures (collections/<NN>/package/shots). Do not edit by hand.',
-    designs: {},
-    panel: {},
+    note: MANIFEST_NOTE,
+    designs: onlyPanel && previous ? previous.designs : await designAssets(sharp, { only, shotsDir, previous: previous?.designs }),
+    panel: onlyDesigns && previous ? previous.panel : await panelAssets(sharp),
   };
-  for (const d of MARKETING.designs) {
-    const copy = DESIGN_COPY[d.id];
-    if (!copy) continue; // 'coming' designs without copy yet
-    const shots = path.join(REPO, 'collections', copy.collection, 'package/shots');
-    if (!existsSync(shots)) {
-      console.warn(`skip ${d.id}: no ${path.relative(REPO, shots)}`);
-      continue;
-    }
-    const outDir = path.join(PUBLIC, 'marketing/designs', d.id);
-    const screens: Record<string, ScreenAsset> = {};
-    for (const [key, shot] of Object.entries(SCREEN_SOURCES)) {
-      screens[key] = await screen(sharp, path.join(shots, `${shot}.jpg`), outDir, key);
-    }
-    manifest.designs[d.id] = { screens, opening: opening(shots, outDir) };
-    console.log(`${d.id}: ${Object.keys(screens).length} screens, opening ${manifest.designs[d.id].opening?.bytes ?? 0} bytes`);
-  }
-  const panelShots = path.join(REPO, 'collections', PANEL_COLLECTION, 'package/shots');
-  for (const [key, shot] of Object.entries(PANEL_SOURCES)) {
-    manifest.panel[key] = await screen(sharp, path.join(panelShots, `${shot}.jpg`), path.join(PUBLIC, 'marketing/panel'), key);
-  }
   const problems = checkManifest(manifest);
   if (problems.length) throw new Error(problems.join('\n'));
   writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2) + '\n');
