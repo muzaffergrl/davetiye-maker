@@ -2,7 +2,7 @@
 id: G083
 baslik: Tasarım 02 Dusty Blue & Champagne satış sitesine eklenir (G082 yöntemi) — tasarım sayfası, metin, gerçek ekranlar, /designs düzeni
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-G083
 oncelik: 2
 bagimli: [G402, G082]
@@ -126,3 +126,4 @@ her şey yerel production build ile denendi.
 - 2026-10-14 açıldı (entegratör): G402 onaylandı
 - 2026-10-14 alindi: claude-G083
 - 2026-10-14 claude-G083: 02 live (config + metin + ≤ 60 karakter başlık kuralı), marketing-assets --designs dusty-blue-champagne --shots ile yalnız 02'nin ekranları/klibi (01/03/05 + panel bayt bayt aynı), kart ızgarası (tek kart yok; 1280'de 4'lü sıra) + telefonda tek satır çip şeridi, docs/14 §14.1; npm test 560/560, marketing-browser 358/358, g080-browser 99/99
+- 2026-10-14 bitti, incelemeye gönderildi
