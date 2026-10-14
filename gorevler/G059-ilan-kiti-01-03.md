@@ -2,7 +2,7 @@
 id: G059
 baslik: Platform modeline göre set paketi (docs/05) + tasarım 01 ve 03 için Etsy ilan kiti ve alıcı START HERE PDF'i
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: wf-ilan
 oncelik: 1
 bagimli: [G401, G038]
@@ -145,3 +145,4 @@ Kalıcı talep 5: her set için ilan görselleri, video ve Etsy alanlarını iç
 - 2026-10-14 alindi: wf-ilan
 - 2026-10-14 bitti, incelemeye gönderildi
 - 2026-10-14 inceleme düzeltmeleri (25 bulgu): dürüst metinler, canlı durum (bağlayıcı), satış öncesi şartlar, `check --prepublish`, temiz kenarlı yeni çekimler, kapak/görseller/kılavuz/video yeniden üretildi (wf-ilan)
+- 2026-10-14 entegratör onayladı
