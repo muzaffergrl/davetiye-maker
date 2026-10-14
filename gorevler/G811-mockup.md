@@ -2,7 +2,7 @@
 id: G811
 baslik: Tasarım 11 Boho Pampas Terracotta — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -51,3 +51,4 @@ Sınır / inceleme noktası: imagegen, ekranları görsel olarak düz ve opak ye
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A; 3.5 üretildi, Paket 3 kontrolü 5/5 geçti; saf yeşilin piksel düzeyindeki üretici sapması Sonuç'a yazıldı.
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
+- 2026-10-14 entegratör onayladı
