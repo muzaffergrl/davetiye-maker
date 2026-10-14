@@ -2,7 +2,7 @@
 id: G810
 baslik: Tasarım 10 Tuscan Vineyard — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: alindi
+durum: inceleme
 alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
@@ -27,8 +27,8 @@ Pilot: 01/03 (G801/G803).
 4. Ara kayıt: 3 sahnede bir commit + push. Kontrol: `python3 tools/kit_check.py collections/10_Tuscan_Vineyard --paket 3`.
 
 ## Bitti sayılması için
-- [ ] 5 sahne doğru yolda; `kit_check --paket 3` 5/5 geçti
-- [ ] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
+- [x] 5 sahne doğru yolda; `kit_check --paket 3` 5/5 geçti
+- [x] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
 
 ## Sonuç
 
@@ -36,7 +36,7 @@ Pilot: 01/03 (G801/G803).
 - Dosyalar: `assets/gpt/mockups/cover_hand.png`, `three_phones.png`, `laptop_phone.png`, `flatlay_phone.png`, `hand_phone_edit.png` (koleksiyon kökü: `collections/10_Tuscan_Vineyard/`).
 - Yeniden üretim: kapak `_v2` (telefonun konumu aşağı alındı, üstte başlık boşluğu genişletildi); dizüstü `_v2` (klavye üzerindeki harf benzeri işaretler kaldırıldı). Seçilenler sade adlarla kaydedildi.
 - Kontrol: `python3 tools/kit_check.py collections/10_Tuscan_Vineyard --paket 3` → **5/5 geçti**; ekran sayıları sırasıyla 1/3/2/1/1. Bütün dosyalar opak. Görsel denetimde ekran köşeleri açık, ekranlara el/dekor binmiyor, yazı/logo yok.
-- Açık teknik nokta: ham Imagegen ekranları saf RGB (0,255,0) yerine yakın yeşiller içeriyor; toleranslı kit_check bunu kabul ediyor. Kare çıktılar 1254×1254, yataylar 1536×1024. Yalnız ekran rengini ve kare ölçülerini ImageMagick ile kesinleştirmek için kullanıcıya yöntem onayı soruldu; cevap bekleniyor.
+- İnceleme notu: ham Imagegen ekranları saf RGB (0,255,0) yerine yakın yeşiller içeriyor; toleranslı kit_check bunu kabul ediyor. Kare çıktılar 1254×1254, yataylar 1536×1024. Kullanıcı (2026-10-14) **"Ham Imagegen çıktılarıyla incelemeye gönder."** dedi; ekran rengi/ölçüsü ImageMagick veya başka bir işlemle değiştirilmeden teslim edildi.
 - Ek önizleme, metrik veya rapor dosyası üretilmedi; ürün montajı/yayını bu görevin kapsamında test edilmedi.
 
 ## Günlük
@@ -46,3 +46,5 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 ara kayıt: gpt-gorsel-B; 3.1–3.2 kaydedildi. Kapak `_v2` seçildi; ilk denemede telefon yukarıdaydı, başlık boşluğu genişletildi. İki hazır sahne kit_check denetiminden geçti; kalan üç sahne henüz üretilmedi.
 - 2026-10-14 ara kayıt: gpt-gorsel-B; 3.3–3.4 kaydedildi. Dizüstü `_v2` seçildi; ilk denemedeki klavye işaretleri kaldırıldı. Dört hazır sahne kit_check denetiminden geçti; 3.5 henüz üretilmedi.
 - 2026-10-14 üretim: gpt-gorsel-B; 3.5 kaydedildi, kit_check 5/5 geçti. Tam #00FF00 ve kare 1024×1024 için teknik sabitleme yöntem onayı bekliyor.
+- 2026-10-14 kullanıcı kararı: ham Imagegen çıktılarıyla incelemeye gönder; teknik sabitleme uygulanmadı.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 5 sahne, kit_check 5/5.
