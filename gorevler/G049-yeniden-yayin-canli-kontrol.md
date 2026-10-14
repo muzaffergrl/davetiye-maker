@@ -2,8 +2,8 @@
 id: G049
 baslik: Canlıya inceleme düzeltmelerini yayınla + canlı kontrol betiklerini repoya al
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 1
 bagimli: [G044]
 yazar: [platform/scripts/live-check.mjs, platform/scripts/blob-smoke.mjs, platform/scripts/seed.ts, platform/README.md, docs/10_SITE_PLATFORMU.md]
@@ -27,3 +27,6 @@ düzeltmeleri, 197/197 test) yayınlanmadı. Local oturum yayınlar ve canlıda 
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-14 alindi: claude-local-1
