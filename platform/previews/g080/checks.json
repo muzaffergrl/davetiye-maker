@@ -1,0 +1,544 @@
+{
+  "base": "next start (production build); server A THEME_APPROVAL=enforce, server B no gate",
+  "approved": [
+    "blush-garden-rose",
+    "olive-ivory"
+  ],
+  "inReview": "dusty-blue-champagne",
+  "checks": [
+    {
+      "name": "prod /start?theme=olive-ivory (approved): 200 + form",
+      "ok": true
+    },
+    {
+      "name": "/start @390: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "/start @390: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "/start @390: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "/start @390: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "/start @390: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/start @390: main button aubergine, heading face",
+      "ok": true,
+      "detail": [
+        "rgb(43, 21, 38)",
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif"
+      ]
+    },
+    {
+      "name": "/start @390: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/start @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/start @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/start: empty submit marks 4 fields invalid",
+      "ok": true
+    },
+    {
+      "name": "/start @390 with field errors: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "claim (approved, production): edit link shown",
+      "ok": true
+    },
+    {
+      "name": "post-claim: title",
+      "ok": true
+    },
+    {
+      "name": "post-claim @390: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "post-claim @390: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "post-claim @390: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "post-claim @390: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "post-claim @390: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "post-claim @390: main button aubergine, heading face",
+      "ok": true,
+      "detail": [
+        "rgb(43, 21, 38)",
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif"
+      ]
+    },
+    {
+      "name": "post-claim @390: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "post-claim @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "post-claim @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "post-claim: \"Open my editor\" opens the panel at setup step 1",
+      "ok": true
+    },
+    {
+      "name": "/start flow: no page errors",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/start @320: no sideways scroll",
+      "ok": true
+    },
+    {
+      "name": "/start @1280: preview left of the form",
+      "ok": true,
+      "detail": {
+        "fBox": {
+          "x": 179.203125,
+          "y": 99,
+          "width": 327.5999755859375,
+          "height": 638.3999633789062
+        },
+        "formBox": {
+          "x": 568,
+          "y": 229.328125,
+          "width": 540,
+          "height": 870.390625
+        }
+      }
+    },
+    {
+      "name": "/start @1280: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "/start @1280: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "/start @1280: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "/start @1280: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "/start @1280: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/start @1280: main button aubergine, heading face",
+      "ok": true,
+      "detail": [
+        "rgb(43, 21, 38)",
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif"
+      ]
+    },
+    {
+      "name": "/start @1280: paper fills the window (1280 px)",
+      "ok": true,
+      "detail": [
+        1280,
+        "rgb(250, 247, 240)"
+      ]
+    },
+    {
+      "name": "/start @1280: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "post-claim @1280: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "post-claim @1280: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "post-claim @1280: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "post-claim @1280: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "post-claim @1280: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "post-claim @1280: main button aubergine, heading face",
+      "ok": true,
+      "detail": [
+        "rgb(43, 21, 38)",
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif"
+      ]
+    },
+    {
+      "name": "post-claim @1280: paper fills the window (1280 px)",
+      "ok": true,
+      "detail": [
+        1280,
+        "rgb(250, 247, 240)"
+      ]
+    },
+    {
+      "name": "post-claim @1280: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "prod /start?theme=dusty-blue-champagne (in review): 404",
+      "ok": true,
+      "detail": 404
+    },
+    {
+      "name": "in review: honest title and message",
+      "ok": true
+    },
+    {
+      "name": "in review: no form, no demo frame",
+      "ok": true
+    },
+    {
+      "name": "in review: lists only approved designs",
+      "ok": true,
+      "detail": [
+        "blush-garden-rose",
+        "olive-ivory"
+      ]
+    },
+    {
+      "name": "in review: noindex",
+      "ok": true
+    },
+    {
+      "name": "in review @390: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "in review @390: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "in review @390: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "in review @390: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "in review @390: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "in review @390: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "in review @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "in review @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "prod POST /api/start (dusty-blue-champagne): 403 theme_in_review",
+      "ok": true,
+      "detail": {
+        "status": 403,
+        "body": {
+          "ok": false,
+          "code": "theme_in_review",
+          "message": "This design is still being finished and is not on sale yet, so a website cannot be started from it. If you bought a design on Etsy, please open the start link from your Etsy download, or message the shop on Etsy."
+        }
+      }
+    },
+    {
+      "name": "prod /start/demo/dusty-blue-champagne: demo stays open (200)",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "prod /start (no theme): only approved designs listed",
+      "ok": true,
+      "detail": [
+        "blush-garden-rose",
+        "olive-ivory"
+      ]
+    },
+    {
+      "name": "/start (no theme) @390: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "/start (no theme) @390: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "/start (no theme) @390: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "/start (no theme) @390: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "/start (no theme) @390: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/start (no theme) @390: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/start (no theme) @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "in review @1280: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "in review @1280: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "in review @1280: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "in review @1280: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "in review @1280: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "in review @1280: paper fills the window (1280 px)",
+      "ok": true,
+      "detail": [
+        1280,
+        "rgb(250, 247, 240)"
+      ]
+    },
+    {
+      "name": "in review @1280: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/signin signin_390: 200, honest text, no form",
+      "ok": true
+    },
+    {
+      "name": "/signin signin_390: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "/signin signin_390: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "/signin signin_390: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "/signin signin_390: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "/signin signin_390: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/signin signin_390: paper fills the window (390 px)",
+      "ok": true,
+      "detail": [
+        390,
+        "rgb(250, 247, 240)"
+      ]
+    },
+    {
+      "name": "/signin signin_390: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/signin @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/signin signin_1280: 200, honest text, no form",
+      "ok": true
+    },
+    {
+      "name": "/signin signin_1280: headings in Archivo 800, aubergine",
+      "ok": true,
+      "detail": [
+        "Archivo, \"Archivo Fallback\", \"Arial Black\", \"Helvetica Neue\", Arial, sans-serif",
+        "800",
+        "rgb(43, 21, 38)"
+      ]
+    },
+    {
+      "name": "/signin signin_1280: text in DM Sans",
+      "ok": true,
+      "detail": "\"DM Sans\", \"DM Sans Fallback\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+    },
+    {
+      "name": "/signin signin_1280: paper ground (panel token)",
+      "ok": true,
+      "detail": "rgb(250, 247, 240)"
+    },
+    {
+      "name": "/signin signin_1280: BKE Studio logo (brand SVG)",
+      "ok": true
+    },
+    {
+      "name": "/signin signin_1280: no trace of the old green look",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/signin signin_1280: paper fills the window (1280 px)",
+      "ok": true,
+      "detail": [
+        560,
+        "rgb(250, 247, 240)"
+      ]
+    },
+    {
+      "name": "/signin signin_1280: no sideways scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "local /start?theme=dusty-blue-champagne: 200 + form (theme work not blocked)",
+      "ok": true
+    },
+    {
+      "name": "local /start: designs in review are listed too",
+      "ok": true,
+      "detail": [
+        "blush-garden-rose",
+        "dusty-blue-champagne",
+        "mediterranean-lemon",
+        "olive-ivory",
+        "vintage-airmail-love-letter"
+      ]
+    }
+  ]
+}
