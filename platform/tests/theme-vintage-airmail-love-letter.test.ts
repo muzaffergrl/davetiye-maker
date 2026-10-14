@@ -7,6 +7,7 @@
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import type { ContentRecord } from '../lib/content/types.ts';
@@ -636,14 +637,12 @@ test('22 K21: no code-drawn frames — countdown, sheets, stamps, seals without 
   }
   assert.doesNotMatch(CSS_NC, /conic-gradient|repeating-(linear|radial)-gradient/, 'no gradient-drawn pattern');
   // the only gradients are edgeless light (window light, the desk's lamp light and darker edges, the nav's soft ground) and
-  // the alpha masks that thin the hero backdrop and a cut corner cluster into the paper (docs/11 §5.7)
+  // the alpha masks that thin the hero / inner-page backdrop into the paper (docs/11 §5.7); no corner cluster is masked
+  // (qa review: clusters are whole, never faded or cut)
   for (const [, sel, body] of RULES) {
+    if (/corner/.test(sel)) assert.doesNotMatch(body, /mask|clip-path/, `${sel.trim()}: a cluster stays whole`);
     if (!/gradient\(/.test(body)) continue;
-    if (/corner-br/.test(sel)) {
-      assert.match(body, /^\s*-webkit-mask: linear-gradient\(to top, transparent, #000 \d+%\); mask: linear-gradient\(to top, transparent, #000 \d+%\);\s*$/, `${sel.trim()}: only a fade mask`);
-      continue;
-    }
-    assert.match(sel, /^\s*(body::before|\.hero-bg picture|\.site-nav|\.page-desk::before|\.page-desk \.site-nav)\s*$/, sel.trim());
+    assert.match(sel, /^\s*(body::before|\.hero-bg picture|\.page-bg picture|\.site-nav|\.page-desk::before|\.page-desk \.site-nav)\s*$/, sel.trim());
   }
   // the countdown: plain typed numerals (W1.2's boxed tiles would be code-drawn boxes)
   assert.doesNotMatch(rule('.cd-cell') + rule('.cd-num'), /background|border/);
@@ -766,10 +765,17 @@ test('story: three stamp frames, each its own scene dropped onto the desk one af
   // the drop preset: from above, turned, with a deep shadow that settles to the resting one
   assert.match(rule('.js [data-a="drop"]'), /transform: translate3d\(var\(--dx, 0\), -40px, 0\) rotate\(var\(--dr, -7deg\)\) scale\(var\(--ds, 1\.1\)\)/);
   assert.match(rule('.js [data-a="drop"].in'), /filter: var\(--rest-shadow, none\)/);
-  // phones: the photo window ≥ 38vw (frame 72vw × the portrait window width)
-  const fw = Number(/\.stamp \{ --fw: min\((\d+)vw/.exec(CSS_NC)![1]);
+  // phones: the photo window ≥ 38vw (frame 64vw × the portrait window width; site.js shrinks a frame to fit the first
+  // screen only down to 48.5vw, else the frame folds)
+  const fw = Number(/\.desk \{ --fw: min\((\d+)vw/.exec(CSS_NC)![1]);
   const win = fw * MANIFEST.photo_slots.portrait.box_pct[2] / 100;
   assert.ok(win >= 38, `phone photo window ${win.toFixed(1)}vw ≥ 38vw (docs/11 §9)`);
+  const lo = Number(/lo = row \? 160 : innerWidth \* ([\d.]+)/.exec(JS)![1]);
+  assert.ok(lo * MANIFEST.photo_slots.portrait.box_pct[2] >= 38, `smallest phone window ${(lo * MANIFEST.photo_slots.portrait.box_pct[2]).toFixed(1)}vw`);
+  // ≥ 720 px: one row of three (W1.3's high / low / middle scatter), one fold unit — never a lone frame (qa)
+  assert.match(CSS_NC, /@media \(min-width: 720px\) \{\s*\.desk \{ --fw: [^;]+; display: grid; grid-template-columns: repeat\(3, var\(--fw\)\);/);
+  assert.equal($('.desk').attr('data-fold'), 'row');
+  assert.deepEqual(stamps.map((_, el) => $(el).attr('data-fold')).get(), ['12', '12', '12'], 'phones: each frame its own unit (12 px for its tilt)');
   // no sideways scrolling on the story page (so no swipe affordance is needed)
   assert.doesNotMatch(CSS_NC, /overflow-x: (auto|scroll)|scroll-snap-type/);
   // the desk: GPT bg_desk + its mirror, one seamless vertical tile repeated down the page (no fixed layer: iOS, full-page shots)
@@ -797,7 +803,8 @@ test('letter sheets (docs/11 §9): top slice · one stripe period repeated · bo
   }
   assert.match(rule('.paper::before'), /background-repeat: no-repeat round/, 'repeated, never stretched');
   assert.match(JS, /document\.querySelectorAll\('\.paper\[data-band\]'\)/);
-  assert.match(JS, /const n = Math\.max\(1, Math\.ceil\(\(need - top - bot\) \/ band - 0\.004\)\);/);
+  // (1.5 px: offsetHeight rounds up — 0.004 of a band added a whole band at 390 px, qa review)
+  assert.match(JS, /const n = Math\.max\(1, Math\.ceil\(\(need - top - bot - 1\.5\) \/ band\)\);/);
   for (const [page, sel] of [['home', '.invite'], ['home', '.day-mini'], ['details', '.day-card'], ['rsvp', '.rsvp-card']] as const) {
     assert.equal(render(page).$(`.paper${sel}[data-band]`).length, 1, `${page} ${sel}`);
   }
@@ -833,11 +840,32 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   // the hero card never under 150 px (its copy stays ≥ 11 px)
   const widths = RULES.filter(([, s]) => s.trim() === '.hero-card-wrap').flatMap(([, , b]) => [...b.matchAll(/width: ([^;]+)/g)].map((m) => m[1]));
   assert.ok(widths.length >= 3 && widths.every((w) => w.startsWith('clamp(150px')), widths.join(' | '));
-  // clusters: no straight cut — the hero's corner-br sits at bottom 0, cut bottoms thin into the paper; wide RSVP corners
-  // sit on the page's edges
-  assert.match(rule('.hero .scene-bg .corner-br'), /bottom: 0/);
-  assert.match(rule('.hero .corner-br, .page-corner.corner-br'), /mask: linear-gradient\(to top, transparent/);
-  assert.match(CSS_NC, /\.page-rsvp \.rsvp-top > \.corner-tl \{ left: calc\(\(min\(100vw, 1040px\) - 100vw\) \/ 2\); \}/);
+  // clusters (qa review): whole — no mask, no clipping box; the hero's ends 8 px above the nav ground (26 px), smaller or
+  // hidden where its painted part would meet the hero's pieces (site.js corner); page ends 8 px above the nav
+  assert.match(rule('.hero .scene-bg .corner-br'), /bottom: 26px/);
+  assert.match(rule(':is(.foot, .next-sec, .closing) > .page-corner'), /bottom: 8px/);
+  assert.doesNotMatch(CSS_NC, /corner[^{]*\{[^}]*mask/);
+  assert.match(JS, /const corner = \(hero\) => \{/);
+  assert.match(JS, /L = \[0\.79, 0\.7, 0\.53, 0\.31, 0\.27, 0\.05, 0, 0\]/);
+  assert.equal(MANIFEST.theme_check.clusters, '.corner', 'theme-check measures the clusters (cuts, nav band)');
+  // inner pages: the first-screen fold units, the head that lifts, the flex columns that pack, the signature unit
+  for (const [page, n] of [['story', 7], ['details', 10], ['rsvp', 6]] as const) {
+    const { $ } = render(page);
+    assert.equal($('[data-lift]').length, 1, `${page}: one head lifts`);
+    assert.ok($('main [data-fold]').length >= n, `${page}: ${$('main [data-fold]').length} fold units`);
+  }
+  assert.equal(render('rsvp').$('.rsvp-text > .sig[data-fold] > .love + .sign').length, 1);
+  assert.equal(render('details').$('.sched-list[data-pack] > .sched-row[data-fold]').length, 3);
+  assert.match(JS, /if \(u === sig && sg > 0\.73\) \{ wrap\.style\.setProperty\('--sg', \(sg - 0\.04\)\.toFixed\(2\)\); continue; \}/);
+  // the envelope page keeps "Tap to open" on screen: the stage gives way, then the names (landscape: between the clusters)
+  assert.match(CSS_NC, /--obj: calc\(min\(86vw, 45svh \* 1\.5556, 440px\) \* var\(--ok, 1\)\)/);
+  assert.match(CSS_NC, /\.env-head \{ width: min\(100%, 560px, 100vw - 1\.6 \* min\(32vw, 48vh, 500px\)\); \}/);
+  assert.match(JS, /for \(let k = 1; k > 0\.63 && low\(\);\) page\.style\.setProperty\('--ok'/);
+  // particles (qa review): arrival and closing in their own section, behind its text (z 0) and clipped to it
+  assert.match(CSS_NC, /\.hero > \.accent-layer, \.closing > \.accent-layer \{ position: absolute; z-index: 0; \}/);
+  assert.match(JS, /accents\('arrive', 0, document\.querySelector\('\.hero'\)\)/);
+  assert.match(JS, /accents\('closing', 0, closing\)/);
+  assert.match(JS, /closing: \[\{[^\n]*from: '\.replay-line' \}/);
   // no Android tap rectangle
   assert.match(CSS_NC, /a, button, summary, label, \[role="button"\] \{ -webkit-tap-highlight-color: transparent; \}/);
   assert.match(rule('.stage'), /-webkit-tap-highlight-color: transparent/);
@@ -1007,4 +1035,122 @@ test('15 privacy: sections the couple switched off leave nothing in any page sou
     const html = await res.text();
     for (const secret of secrets) assert.ok(!html.includes(secret), `${page}: "${secret}" is in the page source`);
   }
+});
+
+// ---------------------------------------------------------------- the first-screen rules, measured in a browser (qa review)
+// Playwright from the global install (docs/11 §13.3; never `playwright install`): the pages are rendered here with the
+// engine and served from the theme folder, so site.css + site.js (folds, tiles, the signature, envFit) run for real.
+// Skipped when Playwright or its browsers are not installed. Google Fonts load through the proxy when there is one (else
+// the fallback fonts: the rules hold either way, site.js measures). Reduced motion: every entrance at rest.
+async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number) => Promise<any>) => Promise<void>) {
+  process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
+  process.env.PLAYWRIGHT_DISABLE_FORCED_CHROMIUM_PROXIED_LOOPBACK ||= '1';
+  const req = createRequire(import.meta.url);
+  let chromium: any = null;
+  for (const id of ['playwright', '/opt/node22/lib/node_modules/playwright']) {
+    try { chromium = req(id).chromium; break; } catch { /* next */ }
+  }
+  if (!chromium) return t.skip('playwright not installed');
+  const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
+  let browser: any;
+  try {
+    browser = await chromium.launch(proxy ? { proxy: { server: proxy, bypass: 'theme.test' } } : {});
+  } catch (e) {
+    return t.skip(`no browser: ${String(e).slice(0, 80)}`);
+  }
+  const types: Record<string, string> = { '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
+  try {
+    await fn(async (page, content, w, h) => {
+      const html = render(page, content).html;
+      const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
+      const p = await ctx.newPage();
+      await p.route('**/*', (route: any) => {
+        const u = new URL(route.request().url());
+        if (u.hostname === 'theme.test') {
+          const rel = u.pathname.startsWith(`/themes/${ID}/`) ? decodeURIComponent(u.pathname.slice(ID.length + 9)) : null;
+          if (rel && existsSync(path.join(DIR, rel))) return route.fulfill({ body: readFileSync(path.join(DIR, rel)), contentType: types[path.extname(rel)] ?? 'application/octet-stream' });
+          if (u.pathname === `/${SLUG}/${page}`) return route.fulfill({ body: html, contentType: 'text/html' });
+          return route.fulfill({ status: u.pathname === '/rsvp/form.js' ? 200 : 404, body: '', contentType: 'text/javascript' });
+        }
+        return /^fonts\.(googleapis|gstatic)\.com$/.test(u.hostname) ? route.continue() : route.abort();
+      });
+      await p.goto(`http://theme.test/${SLUG}/${page}`, { waitUntil: 'load' });
+      await p.evaluate(() => Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))]));
+      await p.waitForTimeout(450); // site.js runs again on fonts.ready
+      const m = await p.evaluate(MEASURE);
+      await ctx.close();
+      return m;
+    });
+  } finally {
+    await browser.close();
+  }
+}
+// in the page (viewport px): the nav top; every text, control, photo slot and frame / card / seal image whose box crosses
+// the nav top or starts under it on the first screen ("half under the nav"); the story frames; the RSVP signature unit
+// with its seal; the envelope hint
+const MEASURE = `(() => {
+  const vh = innerHeight, r = (e) => e.getBoundingClientRect(), navEl = document.querySelector('.site-nav'), nav = navEl ? r(navEl).top : vh;
+  const decor = '.corner, .float, .scene-bg, .accent-layer, .paper-top, .tuck, .desk-acc, .postmark, .twine, .seal-mono, .ph-mark, .site-nav, .skip';
+  const shown = (e) => { for (let x = e; x && x !== document.body; x = x.parentElement) { const s = getComputedStyle(x); if (s.display === 'none' || s.visibility === 'hidden' || +s.opacity === 0) return false; } return r(e).width > 0.5 && r(e).height > 0.5; };
+  const half = [];
+  for (const e of document.querySelectorAll('main *')) {
+    if (e.closest(decor) || e.closest('[hidden]')) continue;
+    const text = [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!(text || e.matches('a, button, input, textarea, .photo-slot, .frame-img, .vframe, .card-img, .card-seal > img, .mini-seal > img')) || !shown(e)) continue;
+    const b = r(e);
+    if (b.top < vh - 1 && b.bottom > nav + 0.5) half.push((e.className || e.tagName) + ' ' + Math.round(b.top) + '..' + Math.round(b.bottom));
+  }
+  const frames = [...document.querySelectorAll('.stamp')].map((s) => ({ top: r(s.querySelector('.frame')).top, bottom: r(s).bottom, win: r(s.querySelector('.photo-slot')).width }));
+  const sig = document.querySelector('.sig'), seal = document.querySelector('.card-seal'), hint = document.querySelector('.env-hint');
+  return { vh, nav, half, frames, sw: document.documentElement.scrollWidth, hint: hint && r(hint).bottom,
+    sig: sig && { top: r(sig).top, end: Math.max(r(sig).bottom, r(seal).bottom), names: parseFloat(getComputedStyle(sig.querySelector('.sign')).fontSize) } };
+})()`;
+
+test('browser (qa review): nothing half under the nav; the story row whole on laptops; the RSVP signature + seal before the fold; the envelope hint on landscape phones', async (t) => {
+  await withBrowser(t, async (open) => {
+    // rule 3 (G402 / G405 lesson): every first-screen piece ends above the nav or starts below the first screen
+    // (before the review: story 51/51 screens, details 29/51, RSVP 43/51 had a piece across the nav line)
+    for (const page of ['story', 'details', 'rsvp'] as PageName[]) {
+      for (const [w, h] of [[375, 667], [390, 844], [844, 390], [1366, 657]]) {
+        for (const [name, rec] of [['demo', demo()], ['stress', stressRecord(demo())]] as const) {
+          const m = await open(page, rec, w, h);
+          const at = `${page} ${w}×${h} ${name}`;
+          assert.deepEqual(m.half, [], `${at}: pieces half under the nav (top ${Math.round(m.nav)})`);
+          assert.ok(m.sw <= w, `${at}: no sideways scroll`);
+        }
+      }
+    }
+    // rule 4: story on laptops — the three frames on the first screen as one row (never one or two alone), above the nav
+    // (before: 1280×650 / 1366×657 no frame, 1280×720–800 a frame across the nav)
+    for (const [w, h] of [[1280, 650], [1280, 720], [1366, 768], [1280, 800]]) {
+      for (const [name, rec] of [['demo', demo()], ['range', rangeRecord(demo())]] as const) {
+        const m = await open('story', rec, w, h);
+        const at = `story ${w}×${h} ${name}`;
+        const on = m.frames.filter((f: { top: number }) => f.top < m.vh).length;
+        assert.equal(on, 3, `${at}: ${on} of 3 frames on the first screen`);
+        assert.ok(Math.max(...m.frames.map((f: { bottom: number }) => f.bottom)) <= m.nav, `${at}: the row ends above the nav`);
+        assert.ok(m.frames[0].win >= 140, `${at}: photo window ${Math.round(m.frames[0].win)} px`);
+      }
+    }
+    // phones: the first frame with its caption above the nav where it fits with a window ≥ 38vw
+    for (const [w, h] of [[390, 844], [375, 667]]) {
+      const m = await open('story', demo(), w, h);
+      assert.ok(m.frames[0].bottom <= m.nav && m.frames[0].win >= 0.38 * w, `story ${w}×${h}: the first frame on screen, window ${Math.round(m.frames[0].win)} px`);
+    }
+    // rule 5: RSVP "With love," + the names + the wax seal end above the nav before anything folds (range names
+    // "Alexandrina Rose & Maximilian James"; before: at 390×844 the seal ran under the nav, at 360–375 px the names did)
+    for (const [w, h] of [[360, 640], [390, 844], [430, 932], [1280, 720], [1280, 800]]) {
+      const m = await open('rsvp', rangeRecord(demo()), w, h);
+      const at = `rsvp ${w}×${h} range`;
+      assert.ok(m.sig.top < m.vh && m.sig.end <= m.nav, `${at}: signature + seal on the first screen (end ${Math.round(m.sig.end)}, nav ${Math.round(m.nav)})`);
+      assert.ok(m.sig.names >= 15, `${at}: names ${m.sig.names} px`);
+    }
+    // the envelope on a phone on its side and a short laptop: "Tap to open" on screen with long names (before: off screen)
+    for (const [w, h] of [[667, 375], [844, 390], [1280, 650]]) {
+      for (const [name, rec] of [['range', rangeRecord(demo())], ['stress', stressRecord(demo())]] as const) {
+        const m = await open('index', rec, w, h);
+        assert.ok(m.hint <= m.vh, `index ${w}×${h} ${name}: "Tap to open" ends at ${Math.round(m.hint)} of ${m.vh}`);
+      }
+    }
+  });
 });

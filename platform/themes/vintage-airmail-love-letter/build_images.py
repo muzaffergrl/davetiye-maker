@@ -665,7 +665,7 @@ def main():
                                                                ("landscape", "frame_landscape"))}}
     # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik; parçacık katmanı; yatay telefonda da ilk
     # ekran nav'ın üstünde, hero isimleri ≥ 36 px (qa 2026-10-14 dersleri)
-    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": True, "names_min_px": 36}}
+    manifest["theme_check"] = {"particles": ".accent-layer", "clusters": ".corner", "first_screen": {"landscape": True, "names_min_px": 36}}
     tb.manifest_yaz(out, manifest)
 
     if oniz:
