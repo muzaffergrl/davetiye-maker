@@ -2,7 +2,7 @@
 id: G401
 baslik: Tasarım 01 Olive & Ivory — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-tema01
 oncelik: 2
 bagimli: [G201, G038, G046, G052]
@@ -401,3 +401,4 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - 2026-10-14 qa-kontrol KOŞULLU GEÇTİ → düzeltildi: mekân yer tutucusu temiz kırpım (+ min_lum denetimi), kısa telefonda (360×640, 375×553) ve 1024×768'de home ilk ekranı nav'ın üstünde (eski iddia düzeltildi), kümeler düz çizgiyle kesilmiyor (hero/sayfa sonu maskesi, RSVP geniş köşeleri), ≥ 11 px yazı, dokunma vurgusu, yaprak/yasemin/isim zamanlaması, story kaydırma ipucu, MP4 beyaz ilk kare; theme-check yeni home kısa telefon akışı (01 ve 03 geçiyor); npm test 293/293, theme-check 01 88/88 + 03 87/87, g051 44/44, final-smoke 42/42
 - 2026-10-14 qa-kontrol ikinci tur KOŞULLU → düzeltildi: yatay telefonda home ilk ekranı (kısa yatay ızgara: kart isimlerin yanında; isimler ≥ 36 px, 0,4 tabanı kalktı; sıkı → sayaç hapın altına → kaydırma; kart her genişlikte ≥ 150 px; kart kopyası fitCopy), zarf sayfası yatayda (ipucu/Replay ekranda, açık zarf yanında düğmeler), README 'her boyutta' iddiası ölçülen kapsamla düzeltildi; theme-check home ilk ekran akışı: isim tabanı + pageChecks + first_screen.landscape (01: 844×390, 667×375) + --stress; npm test 294/294, theme-check 01 106/106 + 03 93/93, g051 44/44, final-smoke 42/42
 - 2026-10-14 qa-kontrol 2026-10-14 ikinci tur: KOŞULLU → geri sayım/nav düzeltildi (tasarım aralığında `.is-long` sayacı nav'ın arkasındaydı; 01 `fold`: sığmayan ilk parça ilk ekranın altından başlar, decor_br hapla kalır; 03 `foldHero`; theme-check home ilk ekranı tasarım aralığı kaydıyla, nav'ın altında yarım parça yok; ikinci turun "tasarım aralığı sığar" cümlesi düzeltildi); npm test 296/296, theme-check 01 114/114 + 03 97/97, g051 44/44, final-smoke 42/42
+- 2026-10-14 entegratör onayladı

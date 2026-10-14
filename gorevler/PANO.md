@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 0 · inceleme 1 · blokaj 296 · bitti 33 · toplam 368
+Özet: hazir 38 · alindi 0 · inceleme 0 · blokaj 296 · bitti 34 · toplam 368
 
 ## claude-canva
 
@@ -155,11 +155,11 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 ## claude-kod
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G058` p2 — 03 blush-garden-rose — yatay telefon düzeni ve isim aralığı kaydıyla ilk ekran (01'deki kurala eşit) → `gorevler/G058-tema03-yatay.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (82)**
+**Üzerinde çalışılan / incelemede / blokaj (81)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
@@ -180,7 +180,6 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `G118` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
-- `G401` inceleme · wf-tema01 — Tasarım 01 Olive & Ivory — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -244,7 +243,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 19 · Biten: 23
+Bağımlılık bekleyen: 18 · Biten: 24
 
 ## claude-metin
 

@@ -5,7 +5,7 @@
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-13",
+  "last_updated": "2026-10-14",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -546,6 +546,12 @@
         "design": "03",
         "status": "functional_pilot",
         "demo_site": "/clara-and-julian"
+      },
+      "olive-ivory": {
+        "design": "01",
+        "status": "functional_pilot",
+        "qa": "qa-kontrol 2026-10-14 KOŞULLU → 3 tur düzeltme, son kontrol geçti",
+        "deployed": false
       }
     },
     "tests": {
