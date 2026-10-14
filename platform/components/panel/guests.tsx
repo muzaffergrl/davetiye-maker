@@ -10,7 +10,7 @@
 // The overview is computed on the server (lib/rsvp/insights.ts, sent with the replies). "New" = arrived since the
 // last look on this device (localStorage `seen:<slug>`; docs/16 §6.2): never looked = all new; the couple's own
 // replies are never new. No e-mail notification: there is no e-mail provider (nothing is shown for it).
-// Archived site (G060): read only — list, CSV and print stay. Tokens and components only (G066 restyles the panel).
+// Archived site (G060): read only — list, CSV and print stay. G066: BKE Studio look through panel.module.css only.
 
 import {
   BellDot,
@@ -708,13 +708,17 @@ function ReplyCard({
           <span className={styles.replyTop}>
             <span className={styles.replyName}>{r.name}</span>
             {isNew ? (
-              <Badge tone="accent" data-new-badge>
+              <Badge tone="gold" data-new-badge>
                 New
               </Badge>
             ) : null}
           </span>
           <span className={styles.replyMeta}>
-            {r.attending ? <Badge tone="success">{`Coming · ${plural(r.guests, 'guest', 'guests')}`}</Badge> : <Badge>Not coming</Badge>}
+            {r.attending ? (
+              <Badge tone="success" data-dot>{`Coming · ${plural(r.guests, 'guest', 'guests')}`}</Badge>
+            ) : (
+              <Badge data-dot>Not coming</Badge>
+            )}
             {r.held ? <Badge tone="warning">Held</Badge> : null}
             {r.source === 'couple' ? <Badge tone="accent">Added by you</Badge> : r.editedAt ? <Badge>Edited by you</Badge> : null}
             <span className={styles.replyTime}>{new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>

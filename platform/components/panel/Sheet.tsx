@@ -7,6 +7,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { PANEL_FONTS } from './fonts.ts';
 import styles from './panel.module.css';
 
 const HISTORY_MARK = 'panel-sheet';
@@ -93,7 +94,7 @@ export function Sheet({
 
   if (!host) return null;
   return createPortal(
-    <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div className={`${styles.overlay} ${PANEL_FONTS}`} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div ref={ref} className={wide ? `${styles.sheet} ${styles.sheetWide}` : styles.sheet} role="dialog" aria-modal="true" aria-labelledby={titleId} data-testid={testId}>
         <div className={styles.sheetGrip} aria-hidden="true" />
         <div className={styles.sheetHeader}>

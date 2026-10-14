@@ -296,54 +296,87 @@ doğrulandı: `house`, `pencil`, `users`, `share-2`, `eye`, `eye-off`, `lock`, `
 
 ## 8. Görsel tasarım dili (tokenlar)
 
-Sakin, çağdaş, temasız: sıcak nötr zemin, mürekkep siyahı birincil, tek sakin vurgu (kayrak mavisi) yalnız link/odak/seçili için.
-Pembe (03), zeytin (01) ve hava postası (04) temalarının hiçbiriyle yarışmaz. Bugünkü yeşil vurgu (`#335a4b`) zeytin temasına çok yakın
-olduğu için v2'de kullanılmaz. CSS özel özellikleri `.app` kökünde; karanlık mod v2'de **yok** (tokenlar hazır, sonra eklenebilir).
+> **G066 (2026-10-14): panel BKE Studio markasına giydirildi.** Kaynak: `brand/tokens.json`, `brand/README.md`, GPT comp'ları
+> `brand/ui/panel/u2_*.png` (GM05; comp metni değil, ürünün gerçek metni kullanılır). Aşağıdaki tablolar güncel değerlerdir; G060'ın
+> marka-nötr değerleri (sıcak gri zemin, mürekkep siyahı, kayrak mavisi vurgu, sistem fontları) geride kaldı. Yapı, bileşenler ve
+> erişilebilirlik kuralları değişmedi; değişen yalnız token, tipografi, logo ve birkaç düzen ayrıntısı (§8.4).
+
+Kâğıt zemin, beyaz kartlar, derin patlıcan (`#2B1526`) başlık / birincil düğme / seçili sekme / odak için. Şampanya altını (`#D0AE6A`)
+ve toz lavanta (`#9F84A7`) **yalnız süs**: ince çizgi, nokta, çubuk, açık ton zemin — açık zeminde hiçbir zaman yazı rengi değil.
+Renk yine yalnız alıcının tasarımının önizlemesinde "şarkı söyler"; dekor çizimi yok (K21), tek görsel öğe markanın kendi logo SVG'si.
+CSS özel özellikleri `.app`, `.overlay`, `.snackHost`, `.notice` köklerinde (`components/panel/panel.module.css`); karanlık mod yok.
 
 ### 8.1 Renk
-| Token | Değer | Kullanım | Kontrast (hesaplandı) |
+| Token | Değer | Kullanım | Kontrast (WCAG, hesaplandı) |
 |---|---|---|---|
-| `--c-bg` | `#F7F6F3` | sayfa zemini | — |
+| `--c-bg` | `#FAF7F0` (paper_light) | sayfa zemini | — |
 | `--c-surface` | `#FFFFFF` | kart, sheet, alan | — |
-| `--c-surface-sunken` | `#F1EFEA` | boş foto yeri, iskelet | — |
-| `--c-text` | `#1D1C1A` | metin | 15.8 (bg), 17.0 (surface) |
-| `--c-text-muted` | `#5C584F` | yardım, özet | 6.6 (bg), 7.1 (surface), 6.2 (sunken) |
-| `--c-border` | `#E4E1DA` | ayırıcı (dekoratif) | 1.3 — bilgi taşımaz |
-| `--c-control-border` | `#8F897E` | alan çerçevesi, kapalı anahtar | 3.5 (surface), 3.2 (bg) ≥ 3:1 (1.4.11) |
-| `--c-primary` | `#1D1C1A` | birincil düğme zemini | beyaz metin 17.0 |
-| `--c-primary-hover` | `#3A3833` | | beyaz metin 11.7 |
-| `--c-accent` | `#2B5675` | link, odak halkası, seçili sekme | 7.8 (surface), 7.2 (bg) |
-| `--c-accent-soft` | `#E7EEF4` | seçili satır zemini | accent metin 6.7 |
-| `--c-success` / `-soft` | `#1E6B43` / `#E6F2EA` | Live, Saved | 5.6 |
-| `--c-warning` / `-soft` | `#7A4F00` / `#FBF0D9` | Sample, son hak, çevrimdışı | 6.3 |
+| `--c-surface-sunken` | `#F3EEE5` | ikon diskleri, link alanı, alt gezinme, ray, iskelet | — |
+| `--c-paper` | `#EDE5D7` (paper) | süzgeç çipleri, ilerleme çubuğu zemini, kapalı anahtar | — |
+| `--c-text` | `#202020` (ink) | gövde metni, etiket | 15.2 (bg), 16.3 (surface), 13.0 (paper) |
+| `--c-heading` = `--c-primary` = `--c-accent` | `#2B1526` (anchor) | başlıklar, birincil düğme, seçili sekme/çip, link, odak halkası | 15.9 (bg), 17.0 (surface), 13.6 (paper); beyaz metin 17.0 |
+| `--c-primary-hover` | `#45213C` | | beyaz metin ≥ 12 |
+| `--c-text-muted` | `#5C5560` | yardım, özet, pasif sekme | 6.7 (bg), 7.2 (surface), 6.2 (sunken), 5.7 (paper), 5.9 (lavanta tonu) |
+| `--c-border` | `#EBE3D6` | ayırıcı, kart çerçevesi (dekoratif) | bilgi taşımaz |
+| `--c-control-border` | `#8C7F8A` | alan çerçevesi, ikincil düğme, kapalı anahtar | 3.8 (surface), 3.6 (bg), 3.0 (paper) ≥ 3:1 (1.4.11) |
+| `--c-accent-soft` | `#EEE7F0` (lavanta tonu) | bilgi bandı, son tarih şeridi, kurallar kutusu, seçili satır, "Draft" | anchor metin 14.0 |
+| `--c-gold` | `#D0AE6A` (accent) | süs: aktif ray alt satırı çizgisi, başlık altı çizgi (≥ 960 px), yeni yanıt çerçevesi, çubuk, alt gezinme sayı rozeti zemini | anchor metin altın üstünde 8.0; altın açık zeminde **metin değil** (1.97) |
+| `--c-gold-soft` | `#F3E6C6` | "New" rozeti | anchor metin 13.7 |
+| `--c-lavender` | `#9F84A7` (secondary) | süs: çubuk, "Next steps" noktası | metin değil |
+| `--c-success` / `-soft` | `#1E6B43` / `#E3EFE4` | Live, Coming, Saved | 5.5 |
+| `--c-warning` / `-soft` | `#7A4F00` / `#F8EDD3` | Sample, son hak, çevrimdışı | 6.1 |
 | `--c-danger` / `-soft` | `#B0261E` / `#FBE9E7` | hata, kaldırma | 5.7; beyaz metin 6.7 |
 
-Rozetlerde renk tek ipucu değildir (her zaman metin, çoğu zaman ikon).
+Snackbar: patlıcan zemin, beyaz metin, eylemler altın (8.0). Rozetlerde renk tek ipucu değildir (her zaman metin, çoğu zaman ikon/nokta).
 
-### 8.2 Tipografi (font dosyası yok — sistem yığınları)
-- `--font-ui`: `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
-- `--font-display` (yalnız çiftin adı ve sihirbaz başlığı): `ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif`
+### 8.2 Tipografi (Google Fonts, `next/font` — repoda font dosyası yok)
+`components/panel/fonts.ts`: satış sitesiyle aynı aileler ve dosyalar (`app/(marketing)/layout.tsx`); değişken adları panele özgü
+(`--bke-display`, `--bke-wide`, `--bke-body`), sınıf her panel kökünde (uygulama, sheet ve snackbar portalları, "link geçersiz" sayfası).
+- `--font-ui`: DM Sans (değişken) + sistem yığını — etiket, alan, düğme, gövde.
+- `--font-display`: **Archivo 800**, harf aralığı −0.015 … −0.03em — her başlık (`h1`, kart/sheet/bölüm başlıkları, satır başlıkları,
+  sayı kutuları, yanıt adları) ve birincil düğmeler.
+- `--font-wide`: **Montserrat 300** — Home'da isimlerin altındaki tarih satırı, Edit grup etiketleri (büyük harf, +0.12em).
 
-| Token | Boyut / satır | Ağırlık | Kullanım |
-|---|---|---|---|
-| `--t-caption` | 13 / 18 | 500 | rozet, sayaç |
-| `--t-small` | 14 / 20 | 400 | yardım metni |
-| `--t-body` | 16 / 24 | 400 | gövde, alan metni (≥ 16: iOS yakınlaştırma yok) |
-| `--t-label` | 15 / 20 | 600 | alan etiketi, düğme |
-| `--t-title` | 20 / 26 | 600 | bölüm başlığı, sheet başlığı |
-| `--t-headline` | 26 / 32 | 500 (display) | sihirbaz sorusu, çiftin adı |
+| Rol | Boyut / satır | Ağırlık |
+|---|---|---|
+| Home isimler | clamp(34–54 px) / 1.0 | 800 |
+| Görünüm başlığı (`h1`) | clamp(30–42 px) / 1.04; bölüm sayfası (ikonlu) clamp(26–36 px) | 800 |
+| Sihirbaz sorusu | clamp(32–46 px) / 1.04 | 800 |
+| Kart / sheet başlığı | 20 / 24 px | 800 |
+| Satır başlığı (Edit) | 19 px | 800 |
+| Gövde, alan metni | 16 / 17 px (≥ 16: iOS yakınlaştırma yok) | 400 |
+| Etiket | 16 / 22 | 600 |
+| Yardım, özet | 14–15 / 20–21 | 400 |
+| Rozet | 13 / 18 | 600 |
 
 ### 8.3 Boşluk, köşe, gölge, hareket
-- Boşluk (4'ün katları): `--s-1` 4 · `--s-2` 8 · `--s-3` 12 · `--s-4` 16 · `--s-5` 20 · `--s-6` 24 · `--s-8` 32 · `--s-10` 40 · `--s-14` 56.
-  Kenar boşluğu 16 px (< 600), 24 px (≥ 600). Alanlar arası 20, gruplar arası 32.
-- Köşe: `--r-chip` 6 · `--r-control` 10 (alan, düğme) · `--r-card` 14 · `--r-sheet` 20 (üst köşeler) · `--r-pill` 999.
-- Gölge: `--e-1` `0 1px 2px rgb(29 28 26 / .06)` (kart) · `--e-2` `0 12px 32px rgb(29 28 26 / .16)` (sheet, menü).
-- Hareket: `--m-fast` 120 ms (basma), `--m-base` 200 ms (sheet, sayfa geçişi), eğri `cubic-bezier(.2, .8, .2, 1)`.
-  `prefers-reduced-motion: reduce` → kaydırma/ölçek yok, yalnız 0–100 ms opaklık.
-- Dokunma: hedef ≥ 44 × 44 px (birincil 48 px yükseklik), komşu hedefler arası ≥ 8 px.
-- Odak: `outline: 2px solid var(--c-accent); outline-offset: 2px` (koyu düğmede de zemin üstünde görünür).
+- Boşluk aynı (4'ün katları; kenar 16 px < 600, 24 px ≥ 600).
+- Köşe: `--r-chip` 8 · `--r-control` 12 (alan, düğme) · `--r-card` 18 · `--r-sheet` 24 · `--r-pill` 999.
+- Gölge: `--e-1` `0 1px 2px rgb(43 21 38 / .04), 0 10px 24px -16px rgb(43 21 38 / .18)` (kart) · `--e-2` `0 18px 44px rgb(43 21 38 / .2)`.
+- Yükseklik: üst çubuk 60 px, alt gezinme 68 px; birincil düğme 48 px (tam genişlikte 52), diğerleri 44 px, alan 52 px.
+- Hareket aynı (`--m-fast` 120 ms, `--m-base` 200 ms; `prefers-reduced-motion` → ~0).
+- Odak: `outline: 2px solid #2B1526; outline-offset: 2px`; alanlarda patlıcan çerçeve + lavanta hale.
 
----
+### 8.4 Düzen ayrıntıları (G066, comp'lara göre)
+- **Logo:** `components/panel/Brand.tsx` — `public/brand/bke-logo-horizontal-anchor.svg` (24 px; marka en küçük boyu). Telefonda
+  üst çubukta uzun bir Publish düğmesi varken (< 440 px) ve her ekranda < 360 px küçük sembol (`bke-monogram-small-anchor.svg`, 30 px;
+  marka kuralı 16–47 px). Bağlantı değil (alan adı yok, K26). Sihirbazın üstünde, başarı ekranında ve "link geçersiz" sayfasında da var.
+- **Üst çubuk:** logo · (bölüm sayfasında geri + başlık; telefonda logo yerine) · çiftin adı (yalnız ≥ 600 px; Home'da kaydırınca) ·
+  kayıt durumu · Preview (telefon) · Publish/Live. ≥ 600 px'te durum ile ana eylem arasında ince çizgi.
+- **Alt gezinme:** kâğıt bant; seçili sekme patlıcan metin + altında 3 px çubuk (yalnız renk değil). Yeni yanıt sayısı altın rozet.
+- **960–1279 px:** sekmeler içerik üstünde hap; seçili patlıcan. **≥ 1280 px:** logo rayın üstünde; ray kâğıt, seçili öğe patlıcan
+  dolgu; Edit alt öğelerinde seçili olan beyaz + altın sol çizgi; önizleme yuvarlak kâğıt panelde, telefon çerçevesi patlıcan; sayfa
+  başlığının altında kısa altın çizgi.
+- **Home:** isimler büyük; tarih Montserrat 300. Durum kartında link kâğıt alanda + Copy; yayında ve güncelken tek eylem **Share**
+  (birincil). "N new replies" kartı lavanta disk; yeni yanıt varken altın çerçeve. Next steps: açık halka + türüne göre nokta.
+- **Edit:** her bölüm ayrı kart (52 px disk ikon, Archivo başlık, tek satır özet, rozetler).
+- **Guests:** sayı kutuları (≥ 480 px'te sayı + disk yan yana, telefonda disk üstte), lavanta son tarih şeridi, cevap çubukları altın /
+  lavanta / patlıcan sırayla (süs; sayılar metinde), süzgeç çipleri kâğıt hap, her yanıt ayrı kart (yeni: altın kenar + "New" rozeti,
+  Coming/Not coming noktalı rozet), altta "Add a reply" + "Download list" (ikisi de başlık fontunda).
+- **Share:** kart başlıklarında disk ikon (link, QR, şifre, düzenleme linki); adres kâğıt alanda; yayındayken Copy birincil; QR beyaz
+  üstünde kâğıt paspartu, indirme düğmeleri sığarsa yan yana; "Copy edit link" tam genişlik birincil.
+- **Sihirbaz:** logo + "Save & exit", altında 6 parçalı çubuk + "Step n of 6"; büyük soru başlığı; Continue 52 px; adım 1'in zarf
+  önizlemesi kâğıt paspartuda.
 
 ## 9. Durumlar
 

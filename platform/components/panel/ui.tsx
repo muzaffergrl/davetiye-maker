@@ -26,6 +26,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from 'react';
+import { PANEL_FONTS } from './fonts.ts';
 import type { SaveState } from './usePanel.ts';
 import styles from './panel.module.css';
 
@@ -84,7 +85,8 @@ export function IconButton({
 // ---------------------------------------------------------------------------------------------
 // Badges, cards, banners
 
-export type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent';
+/** `gold`: a champagne tint with aubergine text (the "New" reply badge, G066). */
+export type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent' | 'gold';
 
 export function Badge({ tone = 'neutral', icon: Icon, children, ...rest }: { tone?: Tone; icon?: LucideIcon; children: ReactNode } & Record<`data-${string}`, unknown>) {
   return (
@@ -95,14 +97,34 @@ export function Badge({ tone = 'neutral', icon: Icon, children, ...rest }: { ton
   );
 }
 
-export function Card({ children, className, title, titleId, action, ...rest }: { children: ReactNode; className?: string; title?: ReactNode; titleId?: string; action?: ReactNode } & Record<`data-${string}`, unknown>) {
+export function Card({
+  children,
+  className,
+  title,
+  titleId,
+  action,
+  icon: Icon,
+  ...rest
+}: { children: ReactNode; className?: string; title?: ReactNode; titleId?: string; action?: ReactNode; icon?: LucideIcon } & Record<`data-${string}`, unknown>) {
+  const heading = (
+    <h2 id={titleId} className={styles.cardTitle}>
+      {title}
+    </h2>
+  );
   return (
     <section className={cx(styles.card, className)} aria-labelledby={title ? titleId : undefined} {...rest}>
       {title ? (
         <div className={styles.cardHead}>
-          <h2 id={titleId} className={styles.cardTitle}>
-            {title}
-          </h2>
+          {Icon ? (
+            <div className={styles.cardTitleWrap}>
+              <span className={styles.cardIcon} aria-hidden="true">
+                <Icon size={22} strokeWidth={1.75} />
+              </span>
+              {heading}
+            </div>
+          ) : (
+            heading
+          )}
           {action}
         </div>
       ) : null}
@@ -194,7 +216,7 @@ export function SnackbarProvider({ children }: { children: ReactNode }) {
   return (
     <SnackContext.Provider value={show}>
       {children}
-      <div className={styles.snackHost} role="status" aria-live="polite">
+      <div className={cx(styles.snackHost, PANEL_FONTS)} role="status" aria-live="polite">
         {item ? (
           <div key={item.id} className={styles.snack} data-snackbar>
             <span>{item.text}</span>

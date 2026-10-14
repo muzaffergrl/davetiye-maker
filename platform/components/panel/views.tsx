@@ -12,6 +12,7 @@ import {
   Hourglass,
   Image as ImageIcon,
   KeyRound,
+  Link as LinkIcon,
   ListOrdered,
   Lock,
   Mail,
@@ -313,7 +314,8 @@ function StatusCard({
     text = sampleCount
       ? `Your website is live — ${sampleCount === 1 ? '1 thing is' : `${sampleCount} things are`} still sample text from the design.`
       : 'Your website is live and up to date.';
-    action = { label: 'Share', run: onShare, variant: 'secondary', icon: Share2 };
+    // The one action of a live, up-to-date website: share it (comp u2_home_390: the dark button).
+    action = { label: 'Share', run: onShare, variant: 'primary', icon: Share2 };
   } else if (meta.publishedAt) {
     badge = { tone: 'neutral', text: 'Offline' };
     text = 'Your website is offline. Guests see “Page not found” until you publish again.';
@@ -476,13 +478,13 @@ export function ShareView({
   }, [slug, editKey]);
   return (
     <div className={styles.stack}>
-      <Card title="Your website link" titleId="share-link">
-        <p className={styles.bigUrl} data-share-url>
+      <Card title="Your website link" titleId="share-link" icon={LinkIcon}>
+        <p className={styles.urlField} data-share-url>
           <UrlText url={url} />
         </p>
         {!live && !archived ? <p className={styles.hint}>This address works once you publish your website.</p> : null}
         <div className={styles.buttonRow}>
-          <Button icon={Copy} onClick={() => onCopy(url, 'Link copied')}>
+          <Button variant={live ? 'primary' : 'secondary'} icon={Copy} onClick={() => onCopy(url, 'Link copied')}>
             Copy
           </Button>
           {live ? (
@@ -505,7 +507,7 @@ export function ShareView({
       </Card>
 
       {live ? (
-        <Card title="QR code" titleId="share-qr">
+        <Card title="QR code" titleId="share-qr" icon={QrIcon}>
           <QrCode url={url} fileBase={slug} />
           <p className={styles.hint}>Scan it once with your phone camera before you print it.</p>
         </Card>
@@ -513,13 +515,10 @@ export function ShareView({
 
       {!archived ? <GuestPasswordCard access={meta.guestAccess} online={online} onSave={onGuestAccess} onCopy={onCopy} /> : null}
 
-      <Card title="Your edit link" titleId="share-edit">
-        <p className={styles.cardText}>
-          <KeyRound size={18} strokeWidth={1.75} aria-hidden="true" className={styles.inlineIcon} />
-          Anyone with this link can edit your website. Share it only with your partner.
-        </p>
+      <Card title="Your edit link" titleId="share-edit" icon={KeyRound}>
+        <p className={styles.cardText}>Anyone with this link can edit your website. Share it only with your partner.</p>
         <div className={styles.buttonRow}>
-          <Button icon={Copy} disabled={!editUrl} onClick={() => onCopy(editUrl, 'Edit link copied')}>
+          <Button variant="primary" block icon={Copy} disabled={!editUrl} onClick={() => onCopy(editUrl, 'Edit link copied')}>
             Copy edit link
           </Button>
         </div>

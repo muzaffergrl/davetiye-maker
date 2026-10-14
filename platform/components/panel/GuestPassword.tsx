@@ -109,7 +109,7 @@ export function GuestPasswordCard({
   const describedBy = [`${fieldId}-hint`, error ? `${fieldId}-error` : ''].filter(Boolean).join(' ');
 
   return (
-    <Card title="Guest password" titleId="share-password" data-guest-password={access.enabled ? 'on' : opening ? 'opening' : 'off'}>
+    <Card title="Guest password" titleId="share-password" icon={LockKeyhole} data-guest-password={access.enabled ? 'on' : opening ? 'opening' : 'off'}>
       <div className={own.switchWrap}>
         <Switch
           id="guest-password-switch"

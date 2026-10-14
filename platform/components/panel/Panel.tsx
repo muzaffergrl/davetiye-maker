@@ -5,7 +5,8 @@
 // bookmarks work):  #setup/1…6 · #home · #edit · #edit/<section> · #guests · #guests/print (G069) · #share.
 // A site that was never published opens the setup wizard (until it is finished or closed on this phone);
 // everything else opens Home. Autosave, the live preview, publish and the edit-rights rules work the same
-// in every view (usePanel.ts). Neutral UI only: the colour on screen is the design's own preview (K21).
+// in every view (usePanel.ts). G066: dressed in the BKE Studio brand (logo SVG, panel.module.css tokens, fonts.ts); the
+// only drawing on screen is still the design's own preview (K21).
 
 import {
   Archive,
@@ -43,6 +44,8 @@ import {
   type SectionId,
 } from '../../lib/panel/model.ts';
 import { classifyIdentityChange, identityOf, sameIdentity, type Identity } from '../../lib/panel/rights.ts';
+import { BrandLogo } from './Brand.tsx';
+import { PANEL_FONTS } from './fonts.ts';
 import { IdentitySheet } from './IdentitySheet.tsx';
 import { PanelContext, useDeviceZone, type PanelContextValue } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
@@ -409,8 +412,9 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   // ---------------------------------------------------------------- unauthorized: nothing else works
   if (saveState === 'unauthorized') {
     return (
-      <div className={styles.app} data-panel data-status={meta.status}>
+      <div className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status}>
         <main className={styles.notice}>
+          <BrandLogo height={28} className={styles.noticeBrand} />
           <TriangleAlert size={32} strokeWidth={1.5} aria-hidden="true" />
           <h1 className={styles.noticeTitle}>This edit link no longer works</h1>
           <p>The link may have been replaced with a new one. If you did not change it, message {PANEL_BRAND.shopName} on Etsy with your order number.</p>
@@ -587,7 +591,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   if (route.view === 'setup') {
     return (
       <PanelContext.Provider value={ctx}>
-        <div className={styles.app} data-panel data-status={meta.status} data-panel-root>
+        <div className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status} data-panel-root>
           {banners}
           <Setup
             step={route.step}
@@ -696,23 +700,31 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
 
   return (
     <PanelContext.Provider value={ctx}>
-      <div className={styles.app} data-panel data-status={meta.status} data-view={sectionView ? `edit/${sectionView}` : route.view} data-panel-root>
+      <div className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status} data-view={sectionView ? `edit/${sectionView}` : route.view} data-panel-root>
         <a href="#main" className={styles.skipLink}>
           Skip to content
         </a>
+        {/* Bar (comps u2_*): logo · [back + section title] · names (where there is room) · save state · Preview · Publish.
+            A wide Publish button leaves no room for the full logo on a phone: the small monogram stands in (Brand.tsx). */}
         <header className={styles.appBar} inert={(previewOpen && !wide) || undefined}>
           <div className={styles.appBarInner}>
+            <BrandLogo compact={!upToDate} className={cx(styles.appBarBrand, sectionView && styles.appBarBrandSection)} />
             {sectionView ? (
-              <button type="button" className={styles.backBtn} onClick={back} aria-label={returnTo ? 'Back to setup' : 'Back to Edit'}>
-                <ArrowLeft size={22} strokeWidth={1.75} aria-hidden="true" />
-              </button>
+              <>
+                <button type="button" className={styles.backBtn} onClick={back} aria-label={returnTo ? 'Back to setup' : 'Back to Edit'}>
+                  <ArrowLeft size={22} strokeWidth={1.75} aria-hidden="true" />
+                </button>
+                <p className={cx(styles.appBarTitle, !scrolled && styles.appBarTitleNarrow)} title={SECTION_TITLES[sectionView]}>
+                  {SECTION_TITLES[sectionView]}
+                </p>
+              </>
             ) : null}
             <p
-              className={sectionView ? cx(styles.appBarTitle, !scrolled && styles.appBarTitleNarrow) : cx(styles.appBarNames, route.view === 'home' && !scrolled && styles.appBarNamesHidden)}
-              title={sectionView ? SECTION_TITLES[sectionView] : names}
+              className={cx(styles.appBarNames, route.view === 'home' && !scrolled && styles.appBarNamesHidden)}
+              title={names}
               aria-hidden={route.view === 'home' || undefined}
             >
-              {sectionView ? SECTION_TITLES[sectionView] : names}
+              {names}
             </p>
             <div className={styles.appBarActions}>
               <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />

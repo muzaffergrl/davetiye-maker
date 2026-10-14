@@ -23,6 +23,7 @@ import {
   type SectionId,
 } from '../../lib/panel/model.ts';
 import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
+import { BrandLogo } from './Brand.tsx';
 import { useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane, useSettledVersion } from './PreviewPane.tsx';
@@ -200,6 +201,11 @@ export function Setup({
   if (published) {
     return (
       <div className={styles.setup} data-setup-done>
+        <header className={styles.setupTop}>
+          <div className={styles.setupTopRow}>
+            <BrandLogo />
+          </div>
+        </header>
         <main className={styles.setupMain} id="main">
           <div className={styles.success}>
             <span className={styles.successIcon} aria-hidden="true">
@@ -243,19 +249,23 @@ export function Setup({
 
   return (
     <div className={styles.setup} data-setup={step}>
+      {/* Comp u2_setup_names_390: the logo and "Save & exit", then the 6-part bar with "Step n of 6" beside it. */}
       <header className={styles.setupTop}>
         <div className={styles.setupTopRow}>
-          <p className={styles.setupStep} aria-hidden="true">
-            Step {step} of 6
-          </p>
+          <BrandLogo />
           <Button small variant="tertiary" onClick={onExit} data-setup-exit>
             Save &amp; exit
           </Button>
         </div>
-        <div className={styles.progress6} aria-hidden="true">
-          {SETUP_STEPS.map((_, i) => (
-            <span key={i} className={cx(styles.progressPart, i < step && styles.progressPartOn)} />
-          ))}
+        <div className={styles.setupProgressRow}>
+          <div className={styles.progress6} aria-hidden="true">
+            {SETUP_STEPS.map((_, i) => (
+              <span key={i} className={cx(styles.progressPart, i < step && styles.progressPartOn)} />
+            ))}
+          </div>
+          <p className={styles.setupStep} aria-hidden="true">
+            Step {step} of 6
+          </p>
         </div>
       </header>
 
