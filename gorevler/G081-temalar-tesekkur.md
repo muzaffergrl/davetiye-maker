@@ -97,3 +97,4 @@ Commit'ler: 457bccc (alındı), 0db3c88 (işaretler + manifest + testler), c0d75
 - 2026-10-14 entegratör: 04 (G404) QA düzeltmesinde; bu tur yalnız 02 ve 05 yapılır, 04 onaylanınca aynı adımlar ek tur olarak (Günlük'e satır)
 - 2026-10-14 alindi: claude-G081
 - 2026-10-14 claude-G081: 02 ve 05 tamam; 04 bekliyor
+- 2026-10-14 entegratör: 02/05 turu incelendi (önizlemeler iyi, theme-check 127/0/0 iki temada); docs/11 §3.6/§3.7 cümleleri güncellendi; misafir adları satırı G084'e ayrıldı. 04 turu G404 onayından sonra.

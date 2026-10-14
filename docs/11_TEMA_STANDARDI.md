@@ -218,7 +218,7 @@ alır, hepsi tutmalı: `data-if="dress_code !thank_you_on"`. Motor teşekkür mo
   fotoğrafı `hero_portrait` oranında kırpılır (aynı pencere). Önizleme `?thanks=1` (yalnız önizleme anahtarıyla).
 - **Denetim:** `lib/theme/thank-you-support.ts` işaret listesi; `scripts/theme-check.cjs` eksik temada **uyarı** yazar (hata değil: o tema düğünden
   sonra da davet gösterir, platform yanıtları yine kapatır); `tests/g075-thank-you.test.ts` 01/03'ü tam sayar, diğerlerini `# WARN` ile listeler.
-  Örnek: `platform/themes/olive-ivory/`, `platform/themes/blush-garden-rose/`. 02, 04, 05 (G075 anında başka görevlerde) henüz yok.
+  Örnek: `platform/themes/olive-ivory/`, `platform/themes/blush-garden-rose/`. 02 ve 05'te G081 ile var; 04'te G081'in ikinci turunda (G404 onayından sonra).
 
 ### 3.7 Düzenlenebilir tasarım metinleri (G068, K28) — yeni temalarda zorunlu
 Kullanıcı: "neredeyse her metin panelden değişsin". Temanın **görünür her sabit metni** (başlık, etiket, düğme, gezinme, form
@@ -245,8 +245,8 @@ tasarımın metni görünür. Motor ve panel: `platform/README.md` → "Düzenle
 - **Denetim:** `lib/theme/copy-scan.ts` `unmarkedText` — şablonda harf içeren her metin düğümü `data-copy` / `data-field` /
   `data-text` içinde olmalı. İzin listesi: `.ph-mark` ("Your photo here", yalnız önizleme), `[data-rsvp-message]` (platform
   yazar), `[data-copy-fixed]`; yalnız işaret (·, &, →, ‹ ›, rakam) olan metin serbest. `<template>` içi de sayılır (form satırı).
-  `theme-check`: manifesti olan temada işaretsiz metin ve manifest farkı **hata**, manifesti olmayan temada **uyarı** (02/04/05
-  G068 anında başka görevlerde; geçişleri ayrı görev). `tests/g068-copy.test.ts` 01 ve 03'ü sayar.
+  `theme-check`: manifesti olan temada işaretsiz metin ve manifest farkı **hata**, manifesti olmayan temada **uyarı** (02 ve 05 G081 ile
+  manifestli; 04 G081'in ikinci turunda). `tests/g068-copy.test.ts` manifestli temaları (01, 02, 03, 05) sayar.
 - **Panel:** her anahtar bir editör sayfasında, o sayfanın sonundaki "Headings & labels on this page" bölümünde listelenir
   (`STANDARD_COPY.panel`): zarf/davet/imza → Us; Day sayfası, program, mekân, takvim, sayaç ve **teşekkür hâli** ("After the
   wedding" alt başlığı) → Day & place; hikâye → Our Story; bloklar, ana sayfa bağlantı başlığı ve **gezinme** → Details; RSVP kartı,
