@@ -2,7 +2,7 @@
 id: G817
 baslik: Tasarım 17 Emerald & Gold Estate — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -47,3 +47,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 ara kayıt: gpt-gorsel-A, 3.1–3.2 kontrol edildi ve main'e push edildi.
 - 2026-10-14 ara kayıt: gpt-gorsel-A, 3.3–3.4 kontrol edildi ve main'e push edildi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A; 5/5 kit_check geçti; tam #00FF00 renk şartının karşılanmadığı Sonuç'a yazıldı.
+- 2026-10-14 entegratör onayladı
