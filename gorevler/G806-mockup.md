@@ -33,6 +33,7 @@ Pilot: 01/03 (G801/G803).
 ## Sonuç
 
 ## Günlük
+- 2026-10-14 ara kayıt: gpt-gorsel-A; 3/5 sahne hazır (cover_hand, three_phones, laptop_phone). Kapakta üst alan ve dekor için, üç telefonda aynı dekor için _v2 seçildi; üç sahnenin ekran sayısı ve geometrisi kit_check denetiminden geçti. Ham imagegen yeşillerinde küçük RGB sapmaları sürüyor.
 - 2026-10-14 alindi: gpt-gorsel-A
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
