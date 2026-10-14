@@ -2,8 +2,8 @@
 id: G058
 baslik: 03 blush-garden-rose — yatay telefon düzeni ve isim aralığı kaydıyla ilk ekran (01'deki kurala eşit)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-kod-13
 oncelik: 2
 bagimli: [G401]
 yazar: [platform/themes/blush-garden-rose/, platform/tests/theme-blush-garden-rose.test.ts]
@@ -19,3 +19,6 @@ ilk ekranda hiçbir öğe nav'ın altında yarım kalmamalı; isimler ≥ 36 px 
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-14 alindi: claude-kod-13

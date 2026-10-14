@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 38 · alindi 0 · inceleme 0 · blokaj 296 · bitti 34 · toplam 368
+Özet: hazir 37 · alindi 1 · inceleme 0 · blokaj 296 · bitti 34 · toplam 368
 
 ## claude-canva
 
@@ -155,13 +155,14 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 ## claude-kod
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G058` p2 — 03 blush-garden-rose — yatay telefon düzeni ve isim aralığı kaydıyla ilk ekran (01'deki kurala eşit) → `gorevler/G058-tema03-yatay.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (81)**
+**Üzerinde çalışılan / incelemede / blokaj (82)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
+- `G058` alindi · claude-kod-13 — 03 blush-garden-rose — yatay telefon düzeni ve isim aralığı kaydıyla ilk ekran (01'deki kurala eşit)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
