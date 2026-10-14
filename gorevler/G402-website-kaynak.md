@@ -165,11 +165,12 @@ okumasıyla 35 000 / 45 000'in üstünde; test artık 01 / 03 / 05 testleri gibi
 divider var) bu turda ele alınmadı — tasarım kararı, kullanıcı/entegratör; theme-check'e iç sayfa nav kuralı ve parçacık ×
 metin/form denetimi eklemek entegratör işi (G402 yazma alanı dışında; ölçüm betikleri bu oturumun geçici klasöründe).
 
-**Komutlar (QA düzeltmelerinden ve origin/main birleştirmesinden sonra, Node 22):** `npm ci` · `npm test` **521/521** (tema
-testi 31: iç sayfa işaretleri, `foldAll`, dal oranları, RSVP kart sınırı, yatay baş, kısa form, parçacık `host`ları; birleştirme
-öncesi 502/502) · `npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme
+**Komutlar (QA düzeltmelerinden ve origin/main birleştirmelerinden — G075, G080 — sonra, Node 22):** `npm ci` · `npm test`
+**531/531** (tema testi 31: iç sayfa işaretleri, `foldAll`, dal oranları, RSVP kart sınırı, yatay baş, kısa form, parçacık
+`host`ları; birleştirme öncesi 502/502) · `npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme
 dusty-blue-champagne --stress` **116 geçti / 0 hata / 1 uyarı** (uyarı: G075 teşekkür modu bu temada yok — G075'in kapsamı 01 ve
-03; birleştirme öncesi 116/0/0) (dokun → home 4 020 ms; ilk görünüm DPR 3: 919 / 1014 KB yer tutucuyla, 980 / 1149 KB örnek fotoğraflarla; MP4 ilk karesi beyaz değil,
+03; birleştirme öncesi 116/0/0; G080 birleştirmesinden sonraki ilk koşuda yük altında 2 akış — 360×640 nav VT karesi, önizlemede
+RSVP paneli — düştü, yeniden koşuda geçti: kararsız, tema değişmedi) (dokun → home 4 020 ms; ilk görünüm DPR 3: 919 / 1014 KB yer tutucuyla, 980 / 1149 KB örnek fotoğraflarla; MP4 ilk karesi beyaz değil,
 ortalama 202,207,210) · `g051-browser --theme` 44/44 · `final-smoke --theme` 45/45 (`previews/g402/final/`) · `tools/tests`
 9/9 (`test_tema_build --hizli`) · `kit_check --paket 5` 23/23 (hiza sol −0,20 · sağ +0,29 · alt +0,07 %), `--paket 2` 5/5.
 `img/` ve `build_images.py` değişmedi. Önizlemeler yenilendi: `previews/g402/` (theme-check + final-smoke) ve QA kanıtı
