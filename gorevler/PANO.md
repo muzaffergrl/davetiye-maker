@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 3 · inceleme 8 · blokaj 277 · bitti 87 · toplam 393
+Özet: hazir 18 · alindi 2 · inceleme 9 · blokaj 277 · bitti 87 · toplam 393
 
 ## claude-canva
 
@@ -170,7 +170,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 **Üzerinde çalışılan / incelemede / blokaj (84)**
 
-- `G068` alindi · claude-G068 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
+- `G068` inceleme · claude-G068 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar

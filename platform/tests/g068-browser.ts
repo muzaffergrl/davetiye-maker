@@ -53,7 +53,7 @@ function seed(theme: string, slug: string, edit: (c: any) => void = () => {}): {
 
 /** The guest pages with the couple's own headings (the same words on both designs). */
 const GUEST_COPY = {
-  envelope_kicker: 'Join us under the olive trees',
+  envelope_kicker: 'Join us in the garden',
   card_line: 'We’re renewing our vows',
   schedule_title: 'How the day unfolds',
   rsvp_title: 'Will you be there?',
