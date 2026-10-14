@@ -37,7 +37,9 @@
 // Flows (390×844): envelope → home (card transition flag) → story via the nav; back → opened envelope + replay;
 //   skip; reduced motion; per-site session keys; preview key kept through the opening; countdown (target + clock);
 //   missing links send nothing; RSVP: a reply is stored and thanked, in a preview nothing is sent; the /start theme
-//   demo (not for internal themes); a content change in the data shows after reload; first-view weight (DPR 3) with
+//   demo (not for internal themes); the nav in the envelope → home view transition (390×844, 360×640: an opaque nav's label
+//   row at 0 / 120 ms = the settled nav, nothing of the envelope page between the labels; G064 qa); a content change in
+//   the data shows after reload (names / date through the panel's /identity rules, G060); first-view weight (DPR 3) with
 //   placeholders (≤ 1.5 MB, error) and with the seeded sample photos (≤ 1.5 MB, else a warning: platform matter, docs/11 §6).
 // --stress: the docs/11 §12 stress record (scripts/lib/theme-env.ts stressRecord: 40-character names and full names,
 //   80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code) on every page at
@@ -134,9 +136,18 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), `platform-theme-check-`));
   const contentFile = path.join(dataDir, 'demo-content.json');
   fs.writeFileSync(contentFile, JSON.stringify(DEMO_CONTENT));
+  /** execFileSync whose error carries the child's stderr (else a failure reads only "Command failed: … -e"). */
+  function run(file, argv, opts) {
+    try {
+      return execFileSync(file, argv, opts);
+    } catch (e) {
+      const out = String(e.stderr || '').trim().split('\n').filter((l) => l.trim() && !/^\s+at /.test(l)).slice(-4).join(' | ');
+      throw new Error(`${path.basename(file)} ${argv[0] === '--input-type=module' ? '(inline module)' : path.basename(argv[0] || '')} failed (exit ${e.status})${out ? `: ${out}` : ''}`);
+    }
+  }
   function seed(extra, file = contentFile) {
     const photos = env.photosDir && !extra.includes('--no-photos') ? ['--photos', env.photosDir] : [];
-    execFileSync(process.execPath, [path.join(ROOT, 'scripts/seed.ts'), '--theme', THEME, '--content', file, ...photos, ...extra], {
+    run(process.execPath, [path.join(ROOT, 'scripts/seed.ts'), '--theme', THEME, '--content', file, ...photos, ...extra], {
       cwd: ROOT, env: { ...process.env, PLATFORM_DATA_DIR: dataDir, SEED_BASE_URL: BASE }, stdio: 'pipe',
     });
     return JSON.parse(fs.readFileSync(path.join(dataDir, 'seed-keys.json'), 'utf8'));
@@ -144,11 +155,17 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   function readSite(id) {
     return JSON.parse(fs.readFileSync(path.join(dataDir, 'sites', `${id}.json`), 'utf8'));
   }
-  /** Changes the stored draft through the adapter and re-publishes (same path the panel will use). */
+  /**
+   * Changes a published site the way the panel does (G060): the names / date through the /identity rules
+   * (identityChangeFor, confirmed: one of the counted changes after the first publish), everything else through the draft,
+   * then re-publishes. A plain draft edit of the names / date is refused at publish (IdentityMismatchError) since G060.
+   */
   function editAndPublish(id, patch) {
     const code = `
       import { LocalAdapter } from ${JSON.stringify(path.join(ROOT, 'lib/data/local/index.ts'))};
       import { publishSite } from ${JSON.stringify(path.join(ROOT, 'lib/sites.ts'))};
+      import { identityChangeFor } from ${JSON.stringify(path.join(ROOT, 'lib/panel/api.ts'))};
+      import { identityOf } from ${JSON.stringify(path.join(ROOT, 'lib/panel/rights.ts'))};
       const a = new LocalAdapter(process.env.PLATFORM_DATA_DIR);
       const s = await a.getSiteById(${JSON.stringify(id)});
       const patch = ${JSON.stringify(patch)};
@@ -158,9 +175,11 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
         for (const p of parts.slice(0, -1)) o = o[p];
         o[parts.at(-1)] = v;
       }
+      const res = await identityChangeFor(a, s, { identity: identityOf(c), intent: 'change', baseUpdatedAt: s.updatedAt });
+      if (res.status !== 200) throw new Error('identity change refused: ' + res.status + ' ' + (await res.text()));
       await a.updateContent(s.id, c);
       await publishSite(a, s.id);`;
-    execFileSync(process.execPath, ['--input-type=module', '-e', code], { cwd: ROOT, env: { ...process.env, PLATFORM_DATA_DIR: dataDir }, stdio: 'pipe' });
+    run(process.execPath, ['--input-type=module', '-e', code], { cwd: ROOT, env: { ...process.env, PLATFORM_DATA_DIR: dataDir }, stdio: 'pipe' });
   }
 
   // ------------------------------------------------------------------ setup checks (theme files, before the browser)
@@ -878,6 +897,105 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       problems.forEach((p) => err(`opening flow: ${p}`));
       await ctx.close();
     });
+
+    // ---------------------------------------------------------------- the nav in the envelope → home view transition
+    // G064 qa: the envelope page has no nav, so ::view-transition-new(site-nav) is an only child and by default fades in
+    // (.25 s): for 1–2 frames the envelope page read through the labels of an opaque nav. The view-transition animations
+    // are paused on arrival (pagereveal → ready) at 0 and 120 ms and the nav's label row (from 6 px under its top rule to
+    // the bottom) is compared with the settled nav. Only for a nav whose label row is opaque (the settled row = the nav
+    // alone on magenta); a see-through nav (e.g. blur, 03) gets the same frames but only a warning when its labels are
+    // missing at the first frame.
+    await flow('nav in the envelope → home transition', async () => {
+      const sharp = require(path.join(ROOT, 'node_modules/sharp'));
+      const raw = async (png) => (await sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true }));
+      const diff = (a, b, mask) => {   // share of pixels further than 24 (max channel) and the mean of that distance
+        let far = 0, sum = 0, n = 0;
+        for (let i = 0, p = 0; i < a.data.length; i += 3, p++) {
+          if (mask && !mask[p]) continue;
+          const d = Math.max(Math.abs(a.data[i] - b.data[i]), Math.abs(a.data[i + 1] - b.data[i + 1]), Math.abs(a.data[i + 2] - b.data[i + 2]));
+          if (d > 24) far++;
+          sum += d; n++;
+        }
+        return { far: n ? far / n : 0, mean: n ? sum / n : 0, n };
+      };
+      const pct = (x) => `${(x * 100).toFixed(2)} %`;
+      for (const [w, h] of [[390, 844], [360, 640]]) {
+        const tag = `nav in the envelope → home view transition ${w}×${h}`;
+        const ctx = await mk(w, h);
+        const page = await ctx.newPage();
+        page.setDefaultTimeout(10000);
+        await page.addInitScript(() => {
+          if (!/\/home$/.test(location.pathname)) return;
+          window.addEventListener('pagereveal', (e) => {
+            const vt = e.viewTransition;
+            window.__navVT = { vt: Boolean(vt) };
+            if (!vt) return;
+            vt.ready.then(() => {
+              const anims = document.getAnimations().filter((a) => a.effect && String(a.effect.pseudoElement || '').startsWith('::view-transition'));
+              anims.forEach((a) => a.pause());
+              window.__navAnims = anims;
+              window.__navVT.paused = true;
+              window.__navVT.nav = anims.filter((a) => /\(site-nav\)/.test(a.effect.pseudoElement)).map((a) => `${a.effect.pseudoElement} ${a.animationName || ''}`.trim());
+            }, () => { window.__navVT.skipped = true; });
+            vt.finished.then(() => { window.__navVT.finished = true; }, () => { window.__navVT.finished = true; });
+          }, { once: true });
+        });
+        await page.goto(url(demo.slug, 'index'), { waitUntil: 'load' });
+        await page.waitForTimeout(600);
+        await need(page, '.stage', 'the envelope stage (role=button, docs/11 §3.2)');
+        await page.click('.stage');
+        await page.waitForURL(`${BASE}/${demo.slug}/home`, { timeout: 9000 });
+        await page.waitForFunction(() => window.__navVT && (window.__navVT.paused || window.__navVT.skipped || !window.__navVT.vt), null, { timeout: 5000 }).catch(() => null);
+        const st = await page.evaluate(() => window.__navVT || null);
+        const box = await page.evaluate(() => {
+          const n = document.querySelector('.site-nav');
+          if (!n) return null;
+          const r = n.getBoundingClientRect(), u = (n.querySelector('ul') || n).getBoundingClientRect();
+          const top = Math.ceil(u.top + 6), bottom = Math.floor(Math.min(r.bottom, innerHeight));
+          return { x: Math.max(0, Math.floor(u.left)), y: top, width: Math.floor(Math.min(u.right, innerWidth) - Math.max(0, u.left)), height: bottom - top };
+        });
+        if (!box || box.height < 8 || box.width < 40) { ok(`${tag}: no .site-nav on home — not checked`); await ctx.close(); continue; }
+        if (!st || !st.vt || !st.paused) {
+          warn(`${tag}: no view transition on arrival (${st ? JSON.stringify(st) : 'no pagereveal'}) — nav first frame not checked`);
+          await ctx.close();
+          continue;
+        }
+        const frames = [];
+        for (const t of [0, 120]) {
+          await page.evaluate((t) => window.__navAnims.forEach((a) => { a.currentTime = t; }), t);
+          await page.waitForTimeout(100);
+          frames.push({ t, img: await raw(await page.screenshot({ clip: box })) });
+        }
+        await page.evaluate(() => window.__navAnims.forEach((a) => a.play()));
+        await page.waitForFunction(() => window.__navVT.finished, null, { timeout: 5000 }).catch(() => null);
+        await page.waitForTimeout(400);
+        const settled = await raw(await page.screenshot({ clip: box }));
+        const iso = await page.addStyleTag({ content: '* { visibility: hidden !important; } .site-nav, .site-nav * { visibility: visible !important; } html, body { background: #f0f !important; }' });
+        await page.waitForTimeout(120);
+        const alone = await raw(await page.screenshot({ clip: box }));
+        await iso.evaluate((el) => el.remove());
+        const ground = diff(settled, alone);
+        const opaque = ground.far <= 0.005;
+        results.info[`nav_vt_${w}x${h}`] = { nav_animations: st.nav, opaque_label_row: opaque, settled_vs_alone: pct(ground.far),
+          frames: frames.map((f) => ({ t: f.t, differ: pct(diff(f.img, settled).far) })) };
+        if (opaque) {
+          const bad = frames.map((f) => ({ t: f.t, d: diff(f.img, settled) })).filter((f) => f.d.far > 0.005);
+          if (bad.length) err(`${tag}: the nav's label row is not the settled nav at ${bad.map((b) => `${b.t} ms (${pct(b.d.far)} of the pixels differ)`).join(', ')} — the envelope page reads through between the labels (nav animations: ${st.nav.join(', ') || 'none'}; e.g. ::view-transition-new(site-nav):only-child { animation: none; })`);
+          else ok(`${tag}: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)`);
+        } else {
+          // see-through by design: only the labels themselves (pixels clearly darker than the nav ground alone) must be there
+          const lum = (d, i) => 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+          const ls = []; for (let i = 0; i < alone.data.length; i += 3) ls.push(lum(alone.data, i));
+          const med = [...ls].sort((a, b) => a - b)[ls.length >> 1];
+          const mask = ls.map((l) => l < med - 60);
+          const first = diff(frames[0].img, settled, mask);
+          if (first.n && first.far > 0.25) warn(`${tag}: see-through nav (${pct(ground.far)} of its label row shows the page) and its labels are not there at the first frame (${pct(first.far)} of the label pixels differ) — they fade in over the page (::view-transition-new(site-nav):only-child)`);
+          else ok(`${tag}: see-through nav (blur/transparency by design, ${pct(ground.far)} of the label row shows the page) — its labels are there at the first frame`);
+        }
+        await ctx.close();
+      }
+    });
+
     await flow('skip / session keys / countdown clock', async () => {
       const ctx = await mk(390, 844);
       const page = await ctx.newPage();
