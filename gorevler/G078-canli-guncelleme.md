@@ -2,7 +2,7 @@
 id: G078
 baslik: Canlıya güncel main — BKE Studio satış sitesi (G066-A), RSVP v2 (G069), site şifresi (G076); canlı kontrol + test seti güncellemesi
 rol: claude-tarayici
-durum: alindi
+durum: inceleme
 alan: claude-local-1
 oncelik: 1
 bagimli: []
@@ -36,7 +36,39 @@ aynı adımlarıyla yeniden yayınlanır (Günlük'e yeni satır). Bu bir **test
 Ödeme/plan/ekip ayarı yok; alan adı alma yok; şifre/anahtar yazma yok; yalnız kurgusal test verisi. Kullanıcının e-postası hiçbir yere girilmez.
 
 ## Sonuç
+**Yayın:** production = main **`2dc812b`** (platform ağacı `cbebd425efc9`), **`dpl_CrRsWGBkUZNrtQW6LkQpZEJhRukG`** (READY) →
+https://davetiye-platform-five.vercel.app . G049/G077 arşiv yolu (`--meta gitCommit=2dc812b --meta platformTree=cbebd425efc9`).
+Ortam değişkeni eklenmedi/değişmedi; build yeni değişken istemedi.
+
+**Kontroller:** `npm ci` · `npm test` **493/493** (2 test build'e bağlı → build sonrası 2/2) · typecheck · build (trace-check: 6 tema)
+yeşil (Windows: `PYTHONUTF8=1`, temiz `.next`). Canlıda `live-check` **40/40** (yazma yolu; geçici siteler silindi), beş temalı
+salt-okuma `live-check` **41/41**, `blob-smoke` **12/12**.
+
+**Demolar (yeni kodla yeniden tohumlandı, slug'lar korundu):** `/clara-and-julian` (03), `/avery-and-jordan` (01), **yeni**
+`/eleanor-and-theo` (02 Dusty Blue & Champagne), `/margot-and-henry` (04), `/isabella-and-marco` (05). **Onaysız:** 02 (G402
+inceleme), 04 (G404), 05 (G405) — satış sitesinde yalnız 01 ve 03 var; `/designs/dusty-blue-champagne` 404.
+
+**Test sitesi `/lily-and-theo`:** G077 düzenleme linki geçerli. Kullanıcı bu sırada isimleri/tarihi değiştirmişti (Betül & Muzaffer,
+30 Mayıs 2027). Panelden RSVP'ye iki soru eklendi (Meal choice: Chicken/Fish/Vegetarian; Allergies or dietary needs — kısa cevap) ve
+"Publish changes" ile yayınlandı (kullanıcının taslaktaki değişiklikleri varsa onlar da yayına çıktı). Misafir gibi 4. yanıt: Sophie
+Example, 3 kişi (Daniel Example, Lucy Example), Fish, "No nuts, please." → Guests: 6 geliyor · 1 gelmiyor · 4 yanıt, soru dökümü,
+yemek & alerji notları, "4 new replies". (Betiğin ilk denemesi alerji alanını doldurmadı; o eksik yanıt silinip doğrusu gönderildi.)
+Site şifrelenmedi.
+
+**Site şifresi:** ayrı geçici sitede (`g078-sifre`) denendi — **çalışıyor**: varsayılan kapalı → Share'den açınca misafir sayfası şifre
+ister (`.ics` 303) → yanlış şifre reddedilir → doğru şifre siteyi açar → kapatınca şifresiz açılır. Site sonra silindi (404).
+
+**Ekran görüntüleri (390 px):** `docs/10_canli_test/g078/` — 01 satış ilk ekran, 02 satış tam sayfa, 03 `/designs`, 04 panel Home,
+05 Guests özet, 06 Guests döküm, 07 şifre ekranı. G077 görüntülerine dokunulmadı.
+
+**Test linkleri:** satış `/`, `/designs`, `/designs/blush-garden-rose`, `/designs/olive-ivory`, `/how-it-works`, `/faq`, `/pricing`;
+demolar yukarıda; `/lily-and-theo`; düzenleme linki yalnız sohbette.
+
+**Bilinen eksikler:** panel marka giydirmesi (G066-B) gelmedi; e-posta yok; Etsy sipariş doğrulaması yok; gerçek telefon testi yok;
+onaysız temalar `/start?theme=<id>` ile doğrudan sahiplenilebiliyor (G077 notu); mağaza sahibi için yönetim (admin) paneli yok —
+operatör işleri betiklerle (`reissue-edit-key.ts`, `grant-identity-change.ts`). G063 B1 (favicon) kapandı: sayfalarda `/brand/favicon.ico`.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G066-A, G069, G076 main'de; G066-B sonra aynı adımlarla yeniden yayın
 - 2026-10-14 alindi: claude-local-1
+- 2026-10-14 bitti, incelemeye gönderildi
