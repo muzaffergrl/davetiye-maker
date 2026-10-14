@@ -19,7 +19,7 @@ yatay telefon ızgarası, `devRender`); görünüş, aralıklar, süs konumları
 | `home.html` | hero (W1.2: kart + foto, isimler, gün · tarih, mekân, şehir/bölge/ülke, geri sayım, kobalt RSVP hapı), davet kartı (3 dilim, Didone yığılı tarih) + tek "Kindly reply by" satırı, takvime ekle, duvara gömülü iki çini pano (story_1 · mekân) → Our Story / The Day (altında programın ilk 4 satırı), kapanış (gök mavisi) |
 | `story.html` | W1.3: ilk ekran güneşli duvar (`.page-bg`: duvar kırpımı, iki köşe kümesi, serbest parçalar); başlık + alt başlık + giriş cümlesi, üç çini çerçeve basamaklı sütunda (sol, sağ, sol), dimdik, üst üste binmeden; her biri görünüme girerken pano gibi döner; dış alt köşede GPT `divider` buketi + çiçek, her panonun yanında duvarda iki parça; başlık panonun altında |
 | `details.html` | W1.4: ilk ekran güneşli duvar (`.page-bg`); Order of the Day kartı (info_card, 3 dilim; saat · ETKİNLİK · yer, satır aralarında GPT limon dalı), takvime ekle, mekân (GPT yatay çini çerçeve), çini çiçekli çizgi + dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
-| `rsvp.html` | W1.5: ilk ekran güneşli duvar (`.page-bg`); RSVP kartı (info_card, 3 dilim) + kartın alt kenarında limon bağı (closure), platform yanıt formu (G042 + G051 soruları), kapanış |
+| `rsvp.html` | W1.5: ilk ekran güneşli duvar (`.page-bg`); RSVP kartı (info_card, 3 dilim) + kartın alt kenarında limon bağı (closure), platform yanıt formu (G042 + G051 soruları + G069 misafir adları, G084), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`sway-tl/br`, `turn-l/r`, `drop`, `set` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri |
 | `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim + ilk ekranlar (`fitNames`, `fold`, `[data-fold]`, zarf sayfası `envFit`), dekor–metin (`decor`), kart kopyası (`fitCopy`), geri sayım, zarf, `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri |
@@ -264,7 +264,7 @@ hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçala
   koşulu okur; tasarım önizlemesi davet hâlini gösterir.
 
 ## Düzenlenebilir metinler (G068 kuralı, G081)
-Görünür her sabit metin `data-copy` taşır (70 standart anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
+Görünür her sabit metin `data-copy` taşır (71 standart anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
 `platform/README.md` "Düzenlenebilir tasarım metinleri"). Manifest şablonlardan yazılır: `node scripts/copy-manifest.ts --theme
 mediterranean-lemon` (`--check` ile denetim). `max` değerleri 360/390'da ölçüldü (`theme-check --stress`: her anahtar `max`'ta,
 §12 zorlama kaydıyla, teşekkür hâli dahil): gezinme 6/6/7/5 (`nav_home`/`nav_story`/`nav_details`/`nav_rsvp`; 8 harfte satır 434 px,

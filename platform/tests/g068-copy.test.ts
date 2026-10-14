@@ -390,7 +390,7 @@ test('every theme: every key at its max renders without engine warnings; titles 
     assert.equal($('title').text().split(' · ')[0], 'How we met');
     assert.equal($('meta[property="og:title"]').attr('content')!.split(' · ')[0], 'How we met');
     const rsvp = cheerio.load(renderTemplate({ html: (await readThemePage(theme, 'rsvp'))!, content: { ...record(id), copy: { form_party: 'Guest name', form_optional: '(if you like)' } }, theme: theme.manifest, page: 'rsvp', slug: 's' }).html);
-    // the guest-names row (G069, <template data-rsvp-party>) is in 01 and 03 only
+    // the guest-names row (G069, <template data-rsvp-party>): 01, 03 and (G084) 02, 05 — 04 not yet
     if (theme.manifest.copy.form_party) assert.equal(rsvp('[data-copy="form_party"]').text(), 'Guest name', 'the guest row inside <template data-rsvp-party>');
     assert.equal(rsvp('[data-copy="form_optional"]').length, theme.manifest.copy.form_party ? 3 : 2);
     assert.ok(rsvp('[data-copy="form_optional"]').toArray().every((e) => rsvp(e).text() === '(if you like)'));

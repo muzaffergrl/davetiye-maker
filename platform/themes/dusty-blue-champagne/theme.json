@@ -76,6 +76,7 @@
     "form_no": { "default": "Regretfully declines", "max": 30, "pages": ["rsvp"] },
     "form_guests": { "default": "Number of guests", "max": 30, "pages": ["rsvp"] },
     "form_including": { "default": "(including you)", "max": 24, "pages": ["rsvp"] },
+    "form_party": { "default": "Name of guest", "max": 24, "pages": ["rsvp"] },
     "form_note": { "default": "A note for the couple", "max": 40, "pages": ["rsvp"] },
     "form_send": { "default": "Send reply", "max": 20, "pages": ["rsvp"] },
     "rsvp_thanks": { "default": "Thank you!", "max": 30, "pages": ["rsvp"] },

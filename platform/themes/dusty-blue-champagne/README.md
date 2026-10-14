@@ -19,7 +19,7 @@ zamanlama, kart oranları ve bölüm sırası bu tasarımın.
 | `home.html` | hero (W1.2 oranları: küçük, hafif eğik anlık baskı kartı + foto, büyük isimler, gün · tarih, mekân, şehir, geri sayım, RSVP hapı; ≥ 1024 px iki sütun), davet seti (ev sahibi satırı → çiçekli davet kartı, isimler güllerin arasındaki düz kâğıtta → altına sıkıştırılmış düz info_card üstünde davet cümlesi, tarih bloğu, saat, dal, mekân) + takvime ekle, üç bölüm (story baskısı · günün kartı · mühür + "Kindly reply by"), kapanış |
 | `story.html` | W1.3: "Our Story" + "MOMENTS WE HOLD DEAR" + giriş cümlesi; üç anlık baskı sırayla uçup hafif açılarla oturur (2. baskının çerçevesi aynalı: dalı sağ üstte), başlıkları baskının alt kenar boşluğunda |
 | `details.html` | W1.4: Order of the Day kartı (info_card, 3 dilim; gün · tarih başlığı kartın içinde, program satırları + aralarında GPT dal), mekân (yatay baskı, kartın altına eğik), dress code, takvime ekle, harita / Travel & Stay / Registry (yalnız linkle), SSS |
-| `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim) + kartın alt kenarına basılmış mühür, platform yanıt formu (G042 + G051 soruları), kapanış |
+| `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim) + kartın alt kenarına basılmış mühür, platform yanıt formu (G042 + G051 soruları + G069 misafir adları, G084), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`fly-l/fly-r/fly-b` + `--settle` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri, kısa yatay düzen |
 | `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim + home ilk ekranı (`fitNames` + `fold`), iç sayfaların ilk ekranı (`foldAll`, `[data-fold]`), RSVP kartı + mühür ilk ekranda (`fitCard`), hero yazısı süsün üstünde değil (`decor`), kart kopyası (`fitCopy`), davet kartı (`fitInvite`), tarih satırı (`stack`), geri sayım, zarf, `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri ve temizliği |
@@ -322,8 +322,8 @@ hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçala
   koşulu okur; tasarım önizlemesi davet hâlini gösterir.
 
 ## Düzenlenebilir metinler (G068 kuralı, G081)
-Görünür her sabit metin `data-copy` taşır (70 anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
-`platform/README.md` "Düzenlenebilir tasarım metinleri"). 69'u standart anahtar; bu tasarıma özgü tek anahtar `home_day_sub`
+Görünür her sabit metin `data-copy` taşır (71 anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
+`platform/README.md` "Düzenlenebilir tasarım metinleri"). 70'i standart anahtar; bu tasarıma özgü tek anahtar `home_day_sub`
 (home'daki The Day bölümünün alt satırı "Order of the day & venue"; panelde Day & place, etiketi `theme.json`'da). Manifest
 şablonlardan yazılır: `node scripts/copy-manifest.ts --theme dusty-blue-champagne` (`--check` ile denetim). `max` değerleri
 360/390'da ölçüldü (`theme-check --stress`: her anahtar `max`'ta, §12 zorlama kaydıyla, teşekkür hâli dahil): gezinme 6/6/7/6
