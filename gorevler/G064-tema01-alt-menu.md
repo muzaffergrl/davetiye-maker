@@ -2,7 +2,7 @@
 id: G064
 baslik: Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-g064
 oncelik: 1
 bagimli: []
@@ -135,3 +135,4 @@ QA bulguları (1 orta, 4 düşük) üzerine. Yazma alanı bu turda `platform/scr
 - 2026-10-14 bitti, incelemeye gönderildi
 - 2026-10-14 QA ikinci tur (wf-g064): content change (G060 /identity yolu) + stderr, geçişte opak nav + theme-check akışı, nav dokunma alanı, README; yazar: theme-check.cjs ve tema README eklendi
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı

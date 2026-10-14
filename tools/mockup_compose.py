@@ -346,6 +346,97 @@ def birlestir(mockup: Image.Image, tasarim: Image.Image, mod="cover", tol=40, fe
     return out, bilgi
 
 
+# ----------------------------------------------------------------------------- çok ekranlı sahne (G067)
+# Yalnız yeni fonksiyonlar: yukarıdaki tek bölgeli davranış (en_buyuk_bolge, birlestir) değişmedi.
+
+def yesil_bolgeler(maske: np.ndarray, min_oran: float = 0.01) -> list:
+    """8-komşulukta bağlı bölgelerden alanı görselin ≥ min_oran'ı olanlar, soldan sağa (ağırlık merkezinin x'i).
+    Her öğe bir bool maske. Küçük yeşil lekeler (yaprak yansıması, gürültü) atlanır."""
+    h, w = maske.shape
+    kosular, satir_bas = [], []
+    for y in range(h):
+        satir_bas.append(len(kosular))
+        if not maske[y].any():
+            continue
+        d = np.diff(np.concatenate(([0], maske[y].view(np.int8), [0])))
+        kosular.extend((y, int(a), int(b)) for a, b in zip(np.flatnonzero(d == 1), np.flatnonzero(d == -1)))
+    satir_bas.append(len(kosular))
+    if not kosular:
+        return []
+    ebeveyn = list(range(len(kosular)))
+
+    def bul(i):
+        while ebeveyn[i] != i:
+            ebeveyn[i] = ebeveyn[ebeveyn[i]]
+            i = ebeveyn[i]
+        return i
+
+    for y in range(1, h):
+        ust, alt = range(satir_bas[y - 1], satir_bas[y]), range(satir_bas[y], satir_bas[y + 1])
+        if not ust or not alt:
+            continue
+        j = ust.start
+        for i in alt:
+            _, a0, a1 = kosular[i]
+            while j < ust.stop and kosular[j][2] < a0:
+                j += 1
+            k = j
+            while k < ust.stop and kosular[k][1] <= a1:
+                ri, rk = bul(i), bul(k)
+                if ri != rk:
+                    ebeveyn[ri] = rk
+                k += 1
+    gruplar: dict = {}
+    for i, kosu in enumerate(kosular):
+        gruplar.setdefault(bul(i), []).append(kosu)
+    esik = min_oran * h * w
+    sonuc = []
+    for kos in gruplar.values():
+        alan = sum(b - a for _, a, b in kos)
+        if alan < esik:
+            continue
+        m = np.zeros_like(maske, dtype=bool)
+        xs = 0.0
+        for y, a, b in kos:
+            m[y, a:b] = True
+            xs += (a + b - 1) / 2 * (b - a)
+        sonuc.append((xs / alan, m))
+    sonuc.sort(key=lambda t: t[0])
+    return [m for _, m in sonuc]
+
+
+def birlestir_cok(mockup: Image.Image, tasarimlar: list, mod="cover", tol=40, feather=1.5, zemin="#FFFFFF",
+                  min_oran: float = 0.01):
+    """Çok ekranlı sahne: her yeşil bölgeye (≥ min_oran, soldan sağa) sıradaki tasarımı `birlestir` ile yerleştirir.
+    Bölge sayısı tasarım sayısına eşit olmalı (değilse ValueError). (sonuç, [bilgi, …]) döndürür; bilgi'ye
+    "sira" (0'dan, soldan sağa) eklenir.
+
+    Yöntem: i. bölge için öteki bölgelerin yeşili geçici olarak siyaha çevrilir (birlestir en büyük bölgeyi seçer),
+    birlestir yalnız o bölgenin çevresini değiştirir; değişen pikseller sonuca aktarılır."""
+    rgb = mockup.convert("RGB")
+    ham = yesil_maske(np.asarray(rgb), tol)
+    bolgeler = yesil_bolgeler(ham, min_oran)
+    if len(bolgeler) != len(tasarimlar):
+        raise ValueError(f"{len(bolgeler)} yeşil bölge bulundu (≥ %{min_oran * 100:g}), {len(tasarimlar)} tasarım verildi")
+    sonuc = np.asarray(rgb).copy()
+    bilgiler = []
+    for i, (bolge, tas) in enumerate(zip(bolgeler, tasarimlar)):
+        gecici = sonuc.copy()
+        for j, oteki in enumerate(bolgeler):
+            if j != i:
+                gecici[oteki] = 0
+        out, bilgi = birlestir(Image.fromarray(gecici, "RGB"), tas, mod, tol, feather, zemin)
+        o = np.asarray(out)
+        degisen = (o != gecici).any(axis=2)
+        sonuc[degisen] = o[degisen]
+        bilgi["sira"] = i
+        bilgiler.append(bilgi)
+    out = Image.fromarray(sonuc, "RGB")
+    if mockup.mode in ("RGBA", "LA"):
+        out.putalpha(mockup.getchannel("A"))
+    return out, bilgiler
+
+
 # ----------------------------------------------------------------------------- ilan şablonları
 
 def sablon_doldur(metin: str, palet: dict, shop: str) -> str:
