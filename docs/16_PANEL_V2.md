@@ -78,6 +78,11 @@ Day & place'in üç bölümlü sayfası, Share'in açılır bölümleri, sihirba
 
 ---
 
+## 0c. K29 sonrası eklenenler (2026-10-14)
+
+- **After the wedding (G075):** Day & place sayfasının sonunda açılır bölüm — teşekkür modu Automatic / On now / Off, başlık, mesaj (≤ 400), fotoğraf, The Day sayfası Keep/Hide, teşekkür sayfası önizlemesi. Site geçince Home kartı. 7. sayfa yok.
+- **Headings & labels on this page (G068):** altı editörün her birinin sonunda açılır bölüm; temanın sabit metinleri (`data-copy` anahtarları, `theme.json` → `copy` manifesti) gri tasarım metniyle, satır başı "Reset to design text". Us'ta isteğe bağlı öneri çipleri (Wedding, Vow renewal, Elopement party, Commitment ceremony; Undo). Gezinme etiketleri Details'te. Değişiklikler şeritte sayılır, Review "<Sayfa> · Headings & labels" der; isim/tarih hakkı harcanmaz. Kurulum sihirbazına eklenmedi (3 adım sade kalır). Şimdilik 01 ve 03'te; 02/04/05 G081'de.
+
 ## 1. Mevcut panel (G039 + G051 + G055) — inceleme
 
 Çalıştırma (bu belge için, 2026-10-14): `npm ci`, iki tohum (`clara-and-julian` yayında, blush-garden-rose; `olive-draft` taslak,

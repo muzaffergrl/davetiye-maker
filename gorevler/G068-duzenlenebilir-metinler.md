@@ -2,7 +2,7 @@
 id: G068
 baslik: Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G068
 oncelik: 1
 bagimli: [G060]
@@ -117,3 +117,4 @@ hâli foto yeri), yeni `platform/scripts/copy-manifest.ts` (manifest üretici). 
 - 2026-10-14 alindi: claude-G068
 - 2026-10-14 claude-G068: motor + şema + panel bölümü + 01/03 işaretli (75/79 anahtar), theme-check --stress iki temada hatasız; testler yeşil; Sonuç yazıldı
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
