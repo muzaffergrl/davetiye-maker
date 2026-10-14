@@ -48,3 +48,4 @@ Kısım 1 — gpt-gorsel-H, 2026-10-14 (8/8; görevin tamamı bitmedi, durum `al
 - 2026-10-14 ara kayıt (W1): gpt-gorsel-H; comps/web_1_envelope.png, web_2_home.png, web_3_story.png, web_4_details.png, web_5_rsvp.png üretildi (5/8); beşi de 1024×1536, görsel Kontrol satırları incelendi. Kalan bu oturum: bg_page, bg_tile, envelope_closed.
 - 2026-10-14 ara kayıt (kısım 1, 8/8): gpt-gorsel-H; W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed doğru Kaydet yollarında. Bu sekiz dosya kit_check kontrolünden geçti; zarfın yaklaşık geometri farkı Sonuç'ta kayıtlı.
 - 2026-10-14 gpt-gorsel-H: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
+- 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi. envelope_closed 1,56:1 (prompt 5:4) kabul; closure ve envelope_open bu dosyaya hizalanacak. Kısım 2 verildi.
