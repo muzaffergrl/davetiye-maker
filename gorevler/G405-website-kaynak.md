@@ -2,8 +2,8 @@
 id: G405
 baslik: Tasarım 05 Mediterranean Lemon — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-tema05
 oncelik: 2
 bagimli: [G205, G038, G046, G052]
 yazar: [platform/themes/mediterranean-lemon/, platform/tests/theme-mediterranean-lemon.test.ts, platform/previews/g405/]
@@ -40,3 +40,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: wf-tema05

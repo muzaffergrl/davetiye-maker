@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 31 · alindi 9 · inceleme 1 · blokaj 293 · bitti 39 · toplam 373
+Özet: hazir 30 · alindi 10 · inceleme 1 · blokaj 293 · bitti 39 · toplam 373
 
 ## claude-canva
 
@@ -156,11 +156,11 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-kod
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G405` p2 — Tasarım 05 Mediterranean Lemon — platform teması → `gorevler/G405-website-kaynak.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (84)**
+**Üzerinde çalışılan / incelemede / blokaj (85)**
 
 - `G060` alindi · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
 - `G061` alindi · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
@@ -184,6 +184,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G404` alindi · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
+- `G405` alindi · wf-tema05 — Tasarım 05 Mediterranean Lemon — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
