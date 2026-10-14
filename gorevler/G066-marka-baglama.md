@@ -2,7 +2,7 @@
 id: G066
 baslik: Satış sitesi + panel BKE Studio marka tasarımına geçer (GM04/GM05 comp'ları, ad, logo, favicon, renk/yazı)
 rol: claude-kod
-durum: alindi
+durum: bitti
 alan: claude-G066
 oncelik: 1
 bagimli: [GM02, GM04, GM05, G060, G061]
@@ -192,3 +192,5 @@ share kapalı ve açık (`after_share_open_*`), guests.
 - 2026-10-14 entegratör: kısım A incelendi ve kabul edildi (önizlemeler, 495/495, marketing-browser 283/283); docs/14 §14.3b yazıldı. Lighthouse düşüşü açık iş. Kısım B (panel) başladı.
 - 2026-10-14 kapsam: K29 sadeleştirme B kısmına eklendi (çalışan ajana iletildi)
 - 2026-10-14 Kısım B (panel) bitti (claude-G066): BKE Studio giydirmesi + K29 sadeleştirme, npm test 500/500, tarayıcı 769/769 (11 paket), satış sitesi panel görselleri yeniden çekildi; durum alindi (bitir entegratörde)
+- 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
