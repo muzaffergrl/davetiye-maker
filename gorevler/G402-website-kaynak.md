@@ -2,7 +2,7 @@
 id: G402
 baslik: Tasarım 02 Dusty Blue & Champagne — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-tema02
 oncelik: 3
 bagimli: [G202, G038, G046, G052]
@@ -263,3 +263,5 @@ Rose & Maximilian James") / §12 stres.
   0 px, önce 198–397 px; 320×568 / yatay / 3 stres durumunda tek katlama 53–70 px, önce 63–80 — açık nokta), hero kümesi / yaprak
   hero yazısının altından çekiliyor (`decor`, yazı-süs %65,7 → ≤ %0,6); nav kuralı 192/192; 2 tarayıcı testi; yanlış README/Sonuç
   cümleleri düzeltildi. Durum `inceleme`.
+- 2026-10-14 entegratör onayladı
+- 2026-10-14 entegratör: son iki QA bulgusu düzeltildi (RSVP kart içi boşluk 36/48 durumda 0, kalan 12 küçük/yatay ekranda tek katlama 53–80 px — kabul; hero yazı altı süs %0–0,6). Onaylandı. Satış sitesine ekleme G083, teşekkür hâli + data-copy G081.

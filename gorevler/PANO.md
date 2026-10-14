@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 2 · inceleme 8 · blokaj 277 · bitti 88 · toplam 393
+Özet: hazir 19 · alindi 2 · inceleme 7 · blokaj 277 · bitti 89 · toplam 394
 
 ## claude-canva
 
@@ -156,9 +156,10 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (9)**
+**Alınabilir (10)**
 
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
+- `G083` p2 — Tasarım 02 Dusty Blue & Champagne satış sitesine eklenir (G082 yöntemi) — tasarım sayfası, metin, gerçek ekranlar, /designs düzeni → `gorevler/G083-satis-02.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
@@ -168,7 +169,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (83)**
+**Üzerinde çalışılan / incelemede / blokaj (82)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
@@ -191,7 +192,6 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G404` inceleme · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
-- `G402` inceleme · wf-tema02 — Tasarım 02 Dusty Blue & Champagne — platform teması
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -254,7 +254,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 8 · Biten: 38
+Bağımlılık bekleyen: 8 · Biten: 39
 
 ## claude-metin
 
