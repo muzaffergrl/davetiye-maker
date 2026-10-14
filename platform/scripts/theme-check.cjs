@@ -46,6 +46,9 @@
 // Short phones (360×640, 375×553, 390×690, 390×844): the envelope texts (h1 + p outside the .stage; "Replay" when
 //   opened) sit on the plain painted ground, not on painted decor (measured on the backdrop with the text hidden);
 //   no horizontal scroll closed or opened; the closed envelope (.stage) and its "Tap to open" hint on screen.
+//   Home at 360×640 / 375×553 (every theme, qa-kontrol 2026-10-14): the first scene's texts, links / buttons (the primary
+//   CTA), photo slots and card end above the site nav and none lies under it (decor may pass under the nav's ground).
+// Recording: the blank lead-in before the first paint is cut; a white first frame is an error.
 // Output: <out>/<page>_390.png (+ index/home at every width, details_1280), *_placeholder.png,
 //   details_390_changed_content.png, compare_<page>_390.jpg, opening_390x844.mp4, checks.json.
 //   <out> = --out, else THEME_SHOTS_DIR, else previews/g038 (blush-garden-rose), previews/g4NN (catalog design NN),
@@ -578,6 +581,63 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       results.info.envelope_backdrop = measured;
     });
 
+    // ---------------------------------------------------------------- short phones: the home first screen ends above the nav
+    // (qa-kontrol 2026-10-14, G401) At 360×640 and 375×553 every piece of the home hero — the first [data-scene]: its
+    // texts, links / buttons (the primary CTA), photo slots and the card — must end above the site nav and none may lie
+    // under it (a bottom nav: bottom ≤ its top; any other nav: no overlap). Decor (aria-hidden layers, alt="" images
+    // outside a photo slot) may pass under the nav's ground. Measured after the sequential entrance, scrolled to the top.
+    await flow('home first screen (short phones)', async () => {
+      const measured = [];
+      for (const [w, h] of [[360, 640], [375, 553]]) {
+        const ctx = await mk(w, h);
+        const page = await ctx.newPage();
+        await page.goto(url(demo.slug, 'home'), { waitUntil: 'load' });
+        await page.evaluate(() => document.fonts.ready);
+        await page.waitForTimeout(5200);
+        const r = await page.evaluate(() => {
+          window.scrollTo(0, 0);
+          const nav = document.querySelector('.site-nav');
+          const scene = document.querySelector('main [data-scene], [data-scene]');
+          if (!nav || !scene) return { missing: !nav ? '.site-nav' : '[data-scene]' };
+          const n = nav.getBoundingClientRect();
+          const bottomNav = n.top > innerHeight / 2;
+          const shown = (el) => {
+            if (el.closest('[aria-hidden="true"], [hidden]')) return false;
+            for (let e = el; e && e.nodeType === 1; e = e.parentElement) {
+              const cs = getComputedStyle(e);
+              if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) === 0) return false;
+            }
+            const b = el.getBoundingClientRect();
+            return b.width > 0 && b.height > 0;
+          };
+          const ownText = (el) => [...el.childNodes].some((c) => c.nodeType === 3 && c.textContent.trim());
+          const items = [...scene.querySelectorAll('*')].filter((el) => {
+            if (el.tagName === 'IMG') return el.closest('[data-slot]') ? false : el.alt !== '';
+            return ownText(el) || el.matches('a, button, [data-slot]') || getComputedStyle(el).viewTransitionName === 'invite-card';
+          }).filter(shown);
+          const name = (el) => `${el.tagName.toLowerCase()}${el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : ''}${ownText(el) ? ` "${el.textContent.trim().replace(/\s+/g, ' ').slice(0, 24)}"` : ''}`;
+          const bad = [];
+          let lowest = 0;
+          for (const el of items) {
+            const b = el.getBoundingClientRect();
+            lowest = Math.max(lowest, b.bottom);
+            const under = bottomNav ? b.bottom > n.top + 0.5 : (b.bottom > n.top && b.top < n.bottom && b.right > n.left && b.left < n.right);
+            if (under) bad.push(`${name(el)} bottom ${Math.round(b.bottom)}`);
+          }
+          const cta = items.find((el) => el.matches('a.btn, button.btn, a[href$="/rsvp"]'));
+          const cb = cta && cta.getBoundingClientRect();
+          return { scene: scene.getAttribute('data-scene'), navTop: Math.round(n.top), bottomNav, items: items.length, lowest: Math.round(lowest),
+            cta: cta ? { text: cta.textContent.trim().slice(0, 20), bottom: Math.round(cb.bottom) } : null, bad };
+        });
+        measured.push({ at: `${w}x${h}`, ...r });
+        if (r.missing) err(`home @${w}×${h}: no ${r.missing} (docs/11 §3.1, §8)`);
+        else if (r.bad.length) err(`home @${w}×${h}: the first screen (${r.scene}) runs under the nav (top ${r.navTop}): ${r.bad.slice(0, 6).join('; ')}${r.cta ? ` — CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ''}`);
+        else ok(`home @${w}×${h}: ${r.scene} (${r.items} pieces${r.cta ? `, CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ', no CTA in the hero'}) ends at ${r.lowest}, above the nav (top ${r.navTop})`);
+        await ctx.close();
+      }
+      results.info.home_first_screen = measured;
+    });
+
     // ---------------------------------------------------------------- touch targets of the small links (≥ 44 px)
     await flow('touch targets', async () => {
       const ctx = await mk(390, 844);
@@ -955,9 +1015,12 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true,
         recordVideo: { dir: vdir, size: { width: 390, height: 844 } } });
       const page = await ctx.newPage();
+      const tRecord = Date.now();   // the video starts with the page: blank until the first paint (cut below)
       page.setDefaultTimeout(10000);
       await page.goto(url(fresh.slug, 'index'), { waitUntil: 'load' });
       await page.evaluate(() => document.fonts.ready);
+      await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+      const leadIn = (Date.now() - tRecord + 150) / 1000;
       await page.waitForTimeout(1800);
       await need(page, '.stage', 'the envelope stage (docs/11 §3.2)');
       await page.tap('.stage');
@@ -998,11 +1061,20 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       const vpath = await page.video().path();
       await ctx.close();
       const mp4 = path.join(OUT, 'opening_390x844.mp4');
-      execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', vpath, '-vf', 'fps=30,scale=390:844:flags=lanczos', '-c:v', 'libx264',
+      // qa-kontrol 2026-10-14: the recording begins with the blank page before the first paint — cut that lead-in
+      // (-ss after -i: frame-accurate) and check that the first frame of the file is the painted page, not white
+      execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', vpath, '-ss', leadIn.toFixed(2), '-vf', 'fps=30,scale=390:844:flags=lanczos', '-c:v', 'libx264',
         '-preset', 'slow', '-crf', '23', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an', mp4]);
       fs.rmSync(vdir, { recursive: true, force: true });
       results.info.video_kb = Math.round(fs.statSync(mp4).size / 1024);
-      ok(`recording: ${path.relative(ROOT, mp4)} (${results.info.video_kb} KB) — tap → opening → home → ${nextPage}${nextPage !== 'details' ? ' → details' : ''}`);
+      const first = execFileSync('ffmpeg', ['-loglevel', 'error', '-i', mp4, '-frames:v', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'], { maxBuffer: 1 << 24 });
+      const sharp = require(path.join(ROOT, 'node_modules/sharp'));
+      const st = await sharp(first).stats();
+      const mean = st.channels.slice(0, 3).map((c) => Math.round(c.mean));
+      const spread = Math.round(Math.max(...st.channels.slice(0, 3).map((c) => c.stdev)));
+      results.info.video_first_frame = { lead_in_s: +leadIn.toFixed(2), mean_rgb: mean, stdev: spread };
+      if (mean.every((m) => m > 245) && spread < 6) err(`recording: the first frame of ${path.relative(ROOT, mp4)} is blank white (mean ${mean.join(',')})`);
+      ok(`recording: ${path.relative(ROOT, mp4)} (${results.info.video_kb} KB, lead-in ${leadIn.toFixed(2)} s cut, first frame mean ${mean.join(',')}) — tap → opening → home → ${nextPage}${nextPage !== 'details' ? ' → details' : ''}`);
     });
 
     // ---------------------------------------------------------------- side by side at 390 px: W1 comp (or the G035 demo) | theme

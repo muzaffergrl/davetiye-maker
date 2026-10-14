@@ -33,7 +33,9 @@ adlar); bütün görseller bu tasarımın GPT parçaları (K21). 03 (blush-garde
 Foto çerçevenin **altında**, kutusu pencere + 2 px, maske `mask_<şekil>.png` (yuvarlak köşe GPT penceresinden; CSS `border-radius`
 yok). `object-position` portre 50% 38%, mekân 50% 50%. "Your photo here" yalnız önizlemede (`html[data-preview="true"]`); misafir
 yalnız nötr yer tutucuyu (bg_page'in sakin, güneşli bölgelerinden bulanık + fildişine tonlanmış kırpım) görür. Alt metinler
-içerikten.
+içerikten. qa-kontrol 2026-10-14: mekân yer tutucusunun eski kırpımı (220, 560, 1000, 1080) sağ altta alt kümenin bulanık koyu
+yaprak ucunu alıyordu (en koyu 136); yeni kırpım (0, 760, 760, 1225) sol orta güneş lekeleri, en koyu 216. `build_images.py`
+her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → çıkış ≠ 0).
 
 ## Görseller (`python3 platform/themes/olive-ivory/build_images.py [--prep-dir DIR] [--onizleme DIR]`)
 - `tools/parts_prep.py` **geçici klasöre** (alfa kırpma, #00FF00 pencereleri + leke dolgusu, `windows.json`).
@@ -70,17 +72,22 @@ içerikten.
   birlikte** menteşesinde izleyiciye doğru soyulur gibi kalkar (tek `.env-cflap-wrap`, tek `rotateX`; 920 ms, yumuşak başlangıç:
   %30'da 22°, 80°'den sonra sarmalayıcı söner — kenardan ezik mühür şeridi görünmez), altında kapalı gövde açık gövdeye (zeytin
   dallı astar + ön cep) geçer, açık kapak −90°'den yatar, fildişi kart cepten süzülerek yükselir — iki zeytin yaprağı (accent_1 × 2,
-  `across`) biri kartın üstündeki, biri zarfın altındaki bantta ekranı soldan sağa geçer (fotoğrafın üstünden geçmez) — kart
+  `across`) biri kartın üstündeki, biri zarfın altındaki bantta ekranı soldan sağa geçer (fotoğrafın üstünden geçmez; 1,3 s'de
+  kalkar, ~2,3 s'de geçer, `go`dan önce ekrandan çıkar — süre `go`ya göre kırpılır) — kart
   **yukarıda kalır**: alt köşeleri cebin kenarını aştıktan sonra (`out` −87 %) olduğu yerde öne gelir (`front` −84 % × 1,04, büyüyen
   gölge; z-index takasında köşe atlamaz) ve view transition ile home hero kartına yukarı doğru uçar (yukarı–aşağı–yukarı yok).
-  Home'da hero kartı ilk kareden görünür (`.from-envelope .hero-card[data-step]`), geçiş görünür karta iner. Dokun → home ≈ 4,2 s
+  Home'da hero kartı ilk kareden görünür (`.from-envelope .hero-card[data-step]`), geçiş görünür karta iner; isimler kart inerken
+  yazılmaya başlar (`arriveDelay` 0, eskiden 700: MP4'te kart indikten sonra ~1,3 s boşluk vardı). Dokun → home ≈ 4,2 s
   (Skip her an). Zarf kartı `view-transition-name`'i yalnız açıkken ya da `go(true)`'da alır: "Replay the envelope"da kapalı
   zarfın üstünde kırpılmamış kart uçuşmaz; `?replay=1` `<head>` betiğinde de kapalı başlar.
 - **Story:** üç kart el yelpazesi gibi açılır — orta kart yükselir, yan kartlar onun arkasında toplanmış ve dik başlayıp 8°
   eğimlerine dönerek açılır (`fan`), sonra başlıklar yazılır. Telefonda aynı el **kaydırılan bir yelpaze** (scroll-snap): ortadaki
   kart dik ve biraz yukarıda, komşuları kenarlardan 8° dışa eğik görünür ve fildişi kenarlarından onun altına girer; yalnız ortadaki
   kartın başlığı görünür; sayfa orta kartla açılır (`initFan`). Kart 64vw, foto penceresi 64 × 0,789 = **50vw** (≥ 38vw).
-- **Parçacıklar:** açılış 2 zeytin yaprağı · home'a varış 3 yasemin çiçeği süzülür · RSVP kapanışı 2 çiçek + 1 yaprak.
+  Altında arayüz yazısıyla kaydırma ipucu `‹ 2 / 3 ›` (`.swipe-nav`, yalnız telefonda ve JS ile; oklar yelpazeyi bir kart kaydırır,
+  sayaç ortadaki kartı izler; çizim yok).
+- **Parçacıklar:** açılış 2 zeytin yaprağı · home'a varış 3 yasemin çiçeği süzülür (hero fotoğrafının iki yanındaki şeritlerden,
+  fotoğrafın/yüzlerin üstünden asla: `avoid`) · RSVP kapanışı 2 çiçek + 1 yaprak.
 
 ## Comp öğe haritası (docs/11 §8)
 
@@ -104,8 +111,8 @@ içerikten.
 | "SATURDAY · JUNE 12, 2027" | `.hero-date` | |
 | mekân (italik), şehir (büyük harf) | `.hero-venue`, `.hero-city` | |
 | dört kutulu geri sayım | `.countdown` sade rakam + etiket | **sapma:** kutular CSS çerçeve olurdu (K21, §5.7) |
-| olive RSVP düğmesi | `.hero-cta .btn` | hap düğme (arayüz); telefonda sağ alt küme hapın altında, aradaki boşluk ≥ 16 px |
-| köşe kümeleri | `decor_tl` / `decor_br` (hero `scene-bg`) | ilk ekran nav'ın üstünde biter; yalnız kâğıt aşağıya solar, küme bütün kalır |
+| olive RSVP düğmesi | `.hero-cta .btn` | hap düğme (arayüz); uzun telefonda sağ alt küme hapın altında, 9:16 ve daha basık telefonda (360×640, 375×553, 375×667, 390×690) comp'taki gibi hapın yanında; hap ile yaprak uçları arası ≥ 16 px (ölçüldü: 20–37 px) |
+| köşe kümeleri | `decor_tl` / `decor_br` (hero `scene-bg`) | ilk ekranın içeriği (kart … hap) her boyutta nav'ın 8+ px üstünde biter (qa 2026-10-14 düzeltmesi: 360×640 ve 375×553'te hap nav'ın altındaydı; boyutlar svh ile okunur tabanlara iner, kısa telefonda sıkı düzen, uzun isim + mekânda `fitNames` → `.is-tight`). `decor_br`'nin altı kesilmez: son sıraları kâğıda incelir (maske), sağ kenarı ekran kenarı |
 | alt gezinme | `.site-nav`: kâğıt üstünde bir yazı satırı + yazı genişliğinde 1 px altın çizgi, kenarsız yumuşak zemin | opak bant yok: boyalı köşeler altında düz çizgiyle kesilmez |
 | — (comp yok) | davet kartı (`invitation_card` 3 dilim) + tek "Kindly reply by" satırı, takvime ekle, "Pull up a chair" üçlüsü (story_1 çerçevesi −7° · günün kartı `info_card` ilk 4 satır · monogramlı mühür +7°; story yelpazesinin yankısı), "Until then" + isimler + "Open the envelope again" | bu tasarımın parçaları ve dili; 03'ün blok sırası/teaser metinleri kullanılmaz (G401 incelemesi) |
 
@@ -155,4 +162,10 @@ içerikten.
   düzeltmelerinden sonra yeniden ölçülmedi). Mühürdeki monogram (zarf, home üçlüsü, RSVP) bilerek kabartma tonunda (`--seal-ink`
   #735E2E + basılı gölge; G401 incelemesinde koyulaştırıldı) ve yardımcı teknolojiden gizli; zarf
   içindeki küçük kart metni kapalıyken görünmez, yalnız açılışta bir an görünür ve gizlidir (`aria-hidden`).
+- Yazı tabanı (qa 2026-10-14): görünen her metin ≥ 11 px — kart kopyası (index kartı = home hero kartı; harf aralığı .12em, kopya
+  alanı %7,5 iç boşluk), üçlüdeki saatler, RSVP kartındaki "We can't wait…", geri sayım etiketleri, "Read/Details/Reply". Hero
+  kartı bu yüzden en az 150 px (375×553'te 150 × 216). Android'de dokunma dikdörtgeni yok (`-webkit-tap-highlight-color`), odak
+  halkaları duruyor.
+- Köşe kümeleri hiçbir yerde düz çizgiyle kesilmez: hero ve sayfa sonlarında `decor_br`'nin alt sıraları kâğıda incelir (maske),
+  geniş RSVP'de (≥ 960 px, 1040 px ızgara) iki köşe de ızgaranın değil sayfanın kenarında.
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.

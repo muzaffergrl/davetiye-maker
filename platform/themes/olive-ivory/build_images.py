@@ -68,8 +68,11 @@ PLACEHOLDERS = {
     "story_1": ("portrait", [320, 640], (330, 380, 830, 1100)),
     "story_2": ("portrait", [320, 640], (520, 260, 1000, 960)),
     "story_3": ("portrait", [320, 640], (60, 640, 560, 1300)),
-    "venue": ("landscape", [480, 960], (220, 560, 1000, 1080)),
+    # qa-kontrol 2026-10-14: eski kutu (220, 560, 1000, 1080) sağ altta bg_page'in alt kümesinin bulanık koyu yaprak ucunu
+    # alıyordu (en düşük parlaklık 136); yeni kutu sol orta güneş lekeleri (en düşük 216), aşağıdaki PH_MIN_LUM denetimi
+    "venue": ("landscape", [480, 960], (0, 760, 760, 1225)),
 }
+PH_MIN_LUM = 175   # yer tutucuda en koyu piksel (gri ton) en az bu: kümeden yaprak/zeytin kırpıma girmez (çıkış ≠ 0)
 # comp W1.1 ölçümü (comps/web_1_envelope.png, 1024×1536): zarf gövdesi x 149–876 (727 px); mühür yüksekliği 205 px
 # (y 889–1094), merkezi (516, 991.5); dantel V'sinin dış kenar doğruları y = 1.147x + 504.6 ve y = −1.018x + 1585.5,
 # kesişim (ucu) (499.2, 1077.1). → mühür yüksekliği / zarf genişliği 0.282; mühür merkezi uçtan 0.118 × zarf genişliği
@@ -604,8 +607,13 @@ def main():
     # ------------------------------------------------------------------ nötr foto yer tutucuları (gerçek foto asla)
     for key, (ad, gen, kutu) in PLACEHOLDERS.items():
         oran = slots[ad]["aspect"]
-        webp(tb.yer_tutucu(bg, kutu, oran, max(gen), ton=IVORY, karisim=0.30), f"ph_{key}", gen, 80)
+        ph = tb.yer_tutucu(bg, kutu, oran, max(gen), ton=IVORY, karisim=0.30)
+        en_koyu = int(np.asarray(ph.convert("L")).min())
+        if en_koyu < PH_MIN_LUM:
+            sys.exit(f"ph_{key}: kırpım {kutu} bir dekor parçası içeriyor (en koyu {en_koyu} < {PH_MIN_LUM})")
+        webp(ph, f"ph_{key}", gen, 80)
         manifest[f"ph_{key}"]["aspect"] = oran
+        manifest[f"ph_{key}"]["min_lum"] = en_koyu
 
     # ------------------------------------------------------------------ paylaşım görseli + favicon
     og, og_bilgi = tb.og_kirp(Image.open(PARTS / "web_hero.png"), hiza="alt")

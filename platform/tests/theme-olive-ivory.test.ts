@@ -591,8 +591,16 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
     assert.doesNotMatch(raw, /<svg|<canvas/i, `${page}: no drawn shapes`);
   }
   assert.doesNotMatch(css, /conic-gradient|repeating-(linear|radial)-gradient/, 'no gradient-drawn pattern');
-  // the only gradients are borderless light (body light, hero paper fade mask, the nav's soft ground — docs/11 §5.7)
-  for (const [, sel, body] of rules) if (/gradient\(/.test(body)) assert.match(sel, /body::before|\.hero-bg|^\s*\.site-nav\s*$/, sel.trim());
+  // the only gradients are borderless light (body light, hero paper fade mask, the nav's soft ground — docs/11 §5.7) and
+  // the alpha mask that thins a corner cluster's bottom rows into the paper (qa-kontrol 2026-10-14: no straight cut)
+  for (const [, sel, body] of rules) {
+    if (!/gradient\(/.test(body)) continue;
+    if (/corner-br/.test(sel)) {
+      assert.match(body, /^\s*-webkit-mask: linear-gradient\(to top, transparent, #000 \d+%\); mask: linear-gradient\(to top, transparent, #000 \d+%\);\s*$/, `${sel.trim()}: only a fade mask`);
+      continue;
+    }
+    assert.match(sel, /body::before|\.hero-bg|^\s*\.site-nav\s*$/, sel.trim());
+  }
   // the nav is no opaque slab with a hard edge across painted corners (G401 review): no border-top / backdrop slab on it
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
   assert.doesNotMatch(nav, /border-top|backdrop-filter/, '.site-nav: no hard band');
@@ -683,6 +691,52 @@ test('G401 review: the story keeps the hand of cards on phones (swipeable fan, w
   assert.match(css, /scroll-snap-type: x mandatory/);
   assert.match(css, /\.fc-1 \{ rotate: -8deg; margin-right: calc\(var\(--cw\) \* -\.06\); \}/, 'wide: side cards tucked under the middle one');
   assert.match(readFileSync(path.join(DIR, 'site.js'), 'utf8'), /function initFan\(\)/);
+});
+
+// ---------------------------------------------------------------- qa-kontrol 2026-10-14 (KOŞULLU GEÇTİ → düzeltildi)
+
+test('qa 2026-10-14: clean placeholders, first screen above the nav, uncut clusters, ≥ 11 px text, swipe hint, motion timing', () => {
+  // 1 every neutral placeholder is a clean crop of the paper (the venue one held a blurred leaf tip: min luminance 136)
+  for (const key of Object.keys(theme.manifest.photos)) assert.ok(MANIFEST[`ph_${key}`].min_lum >= 175, `ph_${key} min luminance ${MANIFEST[`ph_${key}`].min_lum}`);
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const rule = (sel: string) => [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter(([, s]) => s.trim() === sel).map(([, , b]) => b).join(';');
+  // 2 the hero leaves the nav's soft top + 8 px free; 9:16 and squatter phones compact it (decor_br beside the pill)
+  assert.match(rule('.hero'), /padding-bottom: 27px/);
+  assert.match(css, /@media \(min-aspect-ratio: 11\/20\) and \(max-aspect-ratio: 3\/4\) and \(max-width: 640px\) \{\s*\.hero \{ --br: min\(/);
+  assert.match(rule('.hero-card'), /clamp\(150px, 37svh \* \.695, min\(50vw, 260px\)\)/, 'the hero card never below 150 px (its copy stays ≥ 11 px)');
+  // 3 corner clusters: no negative bottom in the hero (overflow would cut them), the bottom rows thin into the paper, and
+  // on the wide RSVP grid both corners sit on the page's edges
+  assert.match(rule('.hero .scene-bg .corner-br'), /bottom: 0/);
+  assert.match(rule('.hero .corner-br, .page-corner.corner-br'), /mask: linear-gradient\(to top, transparent/);
+  assert.match(css, /\.page-rsvp \.rsvp-top > \.corner-tl \{ left: calc\(\(min\(100vw, 1040px\) - 100vw\) \/ 2\); \}/);
+  assert.match(css, /\.page-rsvp \.closing \{ margin-inline: calc\(\(min\(100vw, 1040px\) - 100vw\) \/ 2\); \}/);
+  // small: no Android tap rectangle; tiny text ≥ 11 px (hero/envelope card copy, the trio's times, RSVP card line, labels)
+  assert.match(css, /a, button, summary, label, \[role="button"\] \{ -webkit-tap-highlight-color: transparent; \}/);
+  for (const sel of ['.card-copy .kicker', '.sched-line .t', '.rsvp-text .wait', '.cd-lbl', '.cue', '.invite-text .host', '.dateblock .wd']) {
+    const sizes = [...rule(sel).matchAll(/(?:max\()?(\d+(?:\.\d+)?)px/g)].map((m) => Number(m[1]));
+    assert.ok(/font(-size)?:/.test(rule(sel)), `${sel}: font size set`);
+    const fs = /font-size: max\((\d+(?:\.\d+)?)px/.exec(rule(sel)) ?? /font: \d+ max\((\d+(?:\.\d+)?)px/.exec(rule(sel)) ?? /font: \d+ (\d+(?:\.\d+)?)px/.exec(rule(sel)) ?? /font-size: (\d+(?:\.\d+)?)px/.exec(rule(sel));
+    assert.ok(fs && Number(fs[1]) >= 11, `${sel}: smallest font size ${fs && fs[1]} px (sizes ${sizes.join(', ')})`);
+  }
+  // the phone fan's swipe hint: interface type, hidden until site.js shows it
+  const { $ } = render('story');
+  const nav = $('.swipe-nav');
+  assert.notEqual(nav.attr('hidden'), undefined, 'hidden without JS');
+  assert.deepEqual(nav.find('button').map((_, b) => $(b).attr('data-by')).get(), ['-1', '1']);
+  assert.ok(nav.find('button').toArray().every((b) => $(b).attr('aria-label')), 'labelled arrows');
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  assert.match(js, /const nav = document\.querySelector\('\.swipe-nav'\)/);
+  // motion: the opening leaves have crossed before `go`; the arrival jasmine keeps out of the hero photo; the names start
+  // as the card morph lands
+  assert.match(js, /accents\('open', bands, E\.go - E\.accents - 80\)/);
+  assert.match(js, /arrive: +\[\{ file: 'img\/accent_3-200\.webp'[^\n]*avoid: '\.hero \[data-slot\]'/);
+  const dur = /open: +\[\{[^\n]*dur: \[(\d+), (\d+)\]/.exec(js)!;
+  const acc = Number(/\n\s+accents:\s+(\d+)/.exec(js)![1]), go = Number(/go:\s+(\d+)/.exec(js)![1]);
+  assert.ok(acc + Number(dur[1]) < go, `a leaf can cross before go (${acc} + ${dur[1]} < ${go})`);
+  assert.ok(Number(/arriveDelay: (\d+)/.exec(js)![1]) <= 400, 'no empty wait after the card lands');
+  // docs/11 §6: site.js ≤ 35 KB, site.css ≤ 45 KB
+  assert.ok(statSync(path.join(DIR, 'site.js')).size <= 35 * 1024, `site.js ${statSync(path.join(DIR, 'site.js')).size} B`);
+  assert.ok(statSync(path.join(DIR, 'site.css')).size <= 45 * 1024, `site.css ${statSync(path.join(DIR, 'site.css')).size} B`);
 });
 
 // ---------------------------------------------------------------- envelope: build geometry, layers, closure, motion

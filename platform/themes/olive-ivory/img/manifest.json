@@ -2242,7 +2242,8 @@
     "bytes": 2250
    }
   ],
-  "aspect": 0.9273
+  "aspect": 0.9273,
+  "min_lum": 184
  },
  "ph_story_1": {
   "src_size": [
@@ -2264,7 +2265,8 @@
     "bytes": 2388
    }
   ],
-  "aspect": 0.7395
+  "aspect": 0.7395,
+  "min_lum": 221
  },
  "ph_story_2": {
   "src_size": [
@@ -2286,7 +2288,8 @@
     "bytes": 2708
    }
   ],
-  "aspect": 0.7395
+  "aspect": 0.7395,
+  "min_lum": 217
  },
  "ph_story_3": {
   "src_size": [
@@ -2308,7 +2311,8 @@
     "bytes": 2676
    }
   ],
-  "aspect": 0.7395
+  "aspect": 0.7395,
+  "min_lum": 213
  },
  "ph_venue": {
   "src_size": [
@@ -2321,16 +2325,17 @@
     "file": "ph_venue-480.webp",
     "w": 480,
     "h": 294,
-    "bytes": 932
+    "bytes": 1014
    },
    {
     "file": "ph_venue-960.webp",
     "w": 960,
     "h": 588,
-    "bytes": 2500
+    "bytes": 2590
    }
   ],
-  "aspect": 1.6327
+  "aspect": 1.6327,
+  "min_lum": 216
  },
  "og": {
   "src_size": [
