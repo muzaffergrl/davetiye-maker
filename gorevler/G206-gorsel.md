@@ -2,7 +2,7 @@
 id: G206
 baslik: Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: inceleme
 alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
@@ -27,14 +27,41 @@ Tasarım 06'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/06_Art_Deco_Noir --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
-- [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
-- [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
+- [x] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [x] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
+- [x] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+2026-10-14 — gpt-gorsel-B. Aynı sohbette ImageGen ile önce W1, ardından W1 referanslı W2, son olarak Paket 2 üretildi. İngilizce kaynak prompt'lar aynen kullanıldı; ölçü, alfa, yeşil pencere ve yeniden üretim düzeltmeleri ek talimat olarak verildi. Yalnız bu görev ve `collections/06_Art_Deco_Noir/assets/gpt/` altında çalışıldı.
+
+**Kaydedilen 27 ana dosya (Kaydet satırlarının yollarında):**
+- `comps/`: `web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png`.
+- `parts/`: `bg_page.png`, `bg_tile.png`, `envelope_closed.png`, `closure.png`, `envelope_open.png`, `card_small.png`, `invitation_card.png`, `info_card.png`, `frame_portrait.png`, `frame_landscape.png`, `decor_tl.png`, `decor_br.png`, `accent_1.png`, `accent_2.png`, `accent_3.png`, `divider.png`, `web_hero.png`.
+- `photos/`: `hero_portrait.jpg`, `story_1.jpg`, `story_2.jpg`, `story_3.jpg`, `venue.jpg`. Hikâye fotoğraflarında ana portre referans verildi; aynı kurgusal çift, kıyafetler ve sıcak akşam ışığı korundu. JPEG dönüşümü kalite 95; yüzler, eller, konu konumu ve yazı/tabela bulunmaması görsel olarak kontrol edildi.
+
+**Yeniden üretimler ve seçimler:**
+- `web_3_story_v2`: ışık süpürmesi yeşil pencerelerden kaldırıldı; v2 sade adla seçildi.
+- `envelope_closed_v2`: dış hâle/kenar temizliği tekrar istendi; v2 seçildi. Gerçek RGBA mevcut; önizlemedeki dış RGB ışığının büyük bölümü alfa 0.
+- `envelope_open_v2`: kapı içlerindeki büyük sunburst yerine prompt'taki tekrar eden Deco fan/kemer deseni eklendi; v2 seçildi. Kapalı zarf referans verildi; merkez panel ve boş ön cep korundu.
+- `frame_portrait_v2`, `_v3`, `_v4`: yeşil pencere saydamlığı ve dar oranı düzeltmek için tekrar üretildi. V4 merkezinde alfa 1 olduğu için reddedildi; daha dolu yeşil pencereye sahip v3 sade adla seçildi. Renk/alfa kusuru aşağıda açık kaldı.
+- `frame_landscape_v2`: çok geniş ilk pencereyi 3:2'ye yaklaştırmak için üretildi; v2 seçildi. Hedef oran tam elde edilemedi.
+- `web_hero_v2`: zarf küçültüldü, aşağıdaki boşluk artırıldı ve gerçek basamaklı siluet korundu; v2 seçildi. 1200×630 merkez kırpımında zarf ve madalyon tam, alttaki boşluk yaklaşık 43 px (%6,8).
+- İlk denemeler ve seçilen sürümlerin `_vN` kopyaları korundu (14 deneme dosyası).
+
+**Kontroller:**
+- `python3 tools/kit_check.py collections/06_Art_Deco_Noir --paket 5`: **23/23 geçti**, çıkış 0; 22 dosya ve zarf hiza kontrolü.
+- `python3 tools/kit_check.py collections/06_Art_Deco_Noir --paket 2`: **5/5 geçti**, çıkış 0.
+- Zarf hizası: **UYARI**, üst −%0,29, alt −%0,49, sol kat +%1,43, sağ kat −%1,60. İlk açık sürümün en büyük farkı %0,75'ti; fan desenli seçili v2 %1,60. Araç bu aralığı geçti sayıyor; tema build'inin ölçülen dönüşümü uygulaması gerekir. Yarı saydam üst üste karşılaştırma da yapıldı.
+- `comps/qa_envelope_alignment.png`, `comps/qa_web_hero_1200x630.png`, `comps/qa_bg_tile_2x2.png`: yalnız kontrol önizlemeleri; ürün parçaları değildir. Tekrar eden dokuda belirgin dikiş görülmedi. Karşı kenarlar piksel düzeyinde özdeş değildir (ortalama fark yatay 6,62, dikey 5,74; komşu pikseller 5,47/255).
+- Dikey dosyalar 1024×1536, yataylar 1536×1024. Kare ImageGen çıktıları 1254×1254; kaynak oranını korur ve kit kontrolü geçer. W2 yüzlerinde metin/harf/monogram görülmedi; alfa ve boş kenarlar otomatik denetlendi.
+
+**Açık teknik kusur — otomatik GEÇTİ tam kabul değildir:**
+`card_small.png`, `frame_portrait.png`, `frame_landscape.png` pencereleri yeniden üretimlere rağmen **tam saf #00FF00 ve bütünüyle opak değil**; yeşilde gradyan/saydamlık kaldı. Üçünde de tam `(0,255,0,255)` piksel sayısı 0. Küçük kartın merkez örneği `(3,225,2,246)`; seçili dikey çerçevenin `(2,134,2,226)`; yatay çerçevenin `(1,41,2,190)`. `kit_check` yaklaşık yeşil bölge varlığını denetlediği için bu kusuru geçirdi. W1 yeşilleri de yaklaşık renktir; comp'lar yalnız yerleşim referansıdır. Pencere sınır kutusu oranları yaklaşık dikey 0,52 (hedef 0,75), yatay 1,96 (hedef 1,50); foto montajında kırpım gerekir. Bu üç parça teknik düzeltme yapılmadan kesin pencere şartını karşılamış sayılmamalı.
+
+ImageGen dışındaki düzenleme aracına geçmek için kullanıcıya yalnız bu üç pencerenin ImageMagick ile renk/alfa düzeltmesi soruldu; teslim anında yanıt gelmediğinden uygulanmadı. Önerilen teknik takip: aynı GPT dekorunu koruyarak bu üç pencereyi saf opak yeşile düzeltmek, çerçeve oranlarını değerlendirmek ve sonrasında yeniden kontrol etmek. Yeni görev açılmadı. Website montajı, animasyon, yayın ve alıcı akışı bu görsel görevinin kapsamında denenmedi.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-B
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 27 ana görsel, 14 deneme ve 3 QA önizlemesi; Paket 5 23/23, Paket 2 5/5; zarf hiza uyarısı ve üç yeşil pencerenin açık teknik kusuru Sonuç'ta kayıtlı.
