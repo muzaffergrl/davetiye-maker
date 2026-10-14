@@ -8,7 +8,7 @@ Bu dosya K22–K29 kararları ile güncel kaynak kodunu özetler. Eski Canva/vid
 - Katalog onaylı: 01 Olive & Ivory, 02 Dusty Blue, 03 Blush Garden Rose, 05 Mediterranean Lemon.
 - 04 Vintage Airmail tema kodu var; kabul/G081/G084 kapanışı bekliyor. 06–20 tema üretimi tamam değil.
 - G085: RSVP, veri adaptöründe ortak sayaç varsa bunu kullanıyor. Yerel bellek ve test override davranışı korunuyor. G085 testleri iki ayrı Blob adaptörü, paralel istek ve süreç belleği sıfırlanmasını kapsıyor.
-- 01/03 START_HERE.md yeni panelin gerçek Us / Day & place / Photos / Our Story / Details / RSVP sayfaları, Guests ve Download list, Review, QR düğmeleri, şifre/teşekkür modu ile eşitlendi. Eski panel ekran görüntüleri bu kaynak rehberlerden çıkarıldı.
+- 01/03 START_HERE.md ve dört sayfalık START_HERE.pdf yeni panelin gerçek Us / Day & place / Photos / Our Story / Details / RSVP sayfaları, Guests ve Download list, Review, QR düğmeleri, şifre/teşekkür modu ile eşitlendi. Eski panel ekran görüntüleri çıkarıldı. PDF'lerin bütün sayfaları render edilip gözle kontrol edildi; iki bağlantı/PDF doğrulandı; QR kodları raster çıktılardan jsqr ile çözülüp gerçek tema başlangıç URL'leriyle eşleştirildi. Tekrar üretim: `python tools/build_customer_guides.py` (reportlab). Destek adresi/SLA yer tutucuları duruyor; rehberler ticari teslim onayı değildir.
 
 ## Bu turdaki doğrulama
 - Yerel tam Node paketi: 570 test, 559 geçti, 0 hata, 11 atlandı (production build öncesi; Python/tarayıcı/build önkoşulları).
@@ -16,7 +16,7 @@ Bu dosya K22–K29 kararları ile güncel kaynak kodunu özetler. Eski Canva/vid
 - TypeScript typecheck temiz.
 - Yerel Webpack production derlemesi geçti; derlenmiş satış sayfaları 2/2.
 - Varsayılan Turbopack derlemesi Windows korumalı ortamda gerçek yol çözümleme erişimi nedeniyle çalışmadı. Webpack çıktısı trace-check'te 16 dosya-paketleme hatası verdi; bu çıktı canlıya gönderilmeyecek. Yerel ortamın fs.realpath/mkdir hataları için yalnız çalışma alanında uyumluluk yardımcısı kullanıldı; ürün kaynaklarına eklenmedi.
-- GitHub Actions eklendi: Node 22, npm ci, tüm testler, varsayılan npm run build + trace-check, typecheck, derlenmiş satış sayfaları. Uzak sonuç ayrıca kontrol edilir; iş akışının varlığı başarılı koşu demek değildir.
+- GitHub Actions #1 başarılı: [koşu 38653122309](https://github.com/muzaffergrl/davetiye-maker/actions/runs/38653122309). Linux/Node 22: 570 test, 564 geçti, 0 hata, 6 atlandı; varsayılan Turbopack production build + trace-check temiz, typecheck temiz, derlenmiş satış sayfaları 2/2. Tarayıcıya bağlı kontroller bu koşuda çalıştırılmadı.
 
 ## Canlı durum
 Son doğrulanmış görev kaydı G078: 2dc812b. 15 Ekim ilk incelemede canlı ana sayfa iki temayı (01/03) gösteriyordu; kaynak katalog dört temayı içeriyor. G079 sonuç kaydı boş. Güncel sürümün Vercel'de başarılı yayını ve canlı kontrolü henüz bu turda tamamlanmadı.
@@ -25,7 +25,7 @@ Son doğrulanmış görev kaydı G078: 2dc812b. 15 Ekim ilk incelemede canlı an
 | İş | Sonraki somut adım |
 |---|---|
 | G079 güncel yayın | Uzak build/trace-check yeşil; doğru Vercel ekip/proje erişimi; test yayını + live-check/blob-smoke |
-| G065 ilan/teslim | Güncel panel çekimleri + rehber PDF'lerini yeniden üret, QR/link/görsel kontrolü; yenilenmiş Markdown eski PDF'yi güncellemiş sayılmaz |
+| G065 ilan/teslim | Rehber kaynakları/PDF'leri G085'te yenilendi ve QR/link/görsel kontrolü yapıldı. İlan görsellerinin güncel panel çekimleri ve gerçek ticari alanları hâlâ G065'te |
 | G404/G081/G084 04 | Mevcut tema QA kapanışı, teşekkür/düzenlenebilir metinler/misafir adları; ardından katalog onayı |
 | 06–20 | Önce alınmış/incelemedeki GPT parçalarının kabulü; sonra tasarıma özgü tema montajı ve QA |
 | Gerçek sipariş | Manuel doğrulama canlıda sınanmalı veya Etsy API ile gerçek doğrulama tamamlanmalı; varsayılan yalnız biçim kontrolü |

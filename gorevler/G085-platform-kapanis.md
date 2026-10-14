@@ -2,11 +2,11 @@
 id: G085
 baslik: Platform kapanış açıkları — RSVP ortak sayaç, güncel teslim kılavuzu ve doğrulanabilir durum özeti
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: codex
 oncelik: 1
 bagimli: []
-yazar: [platform/lib/rsvp/, .github/workflows/, platform/lib/claim/limits.ts, platform/tests/, platform/README.md, docs/18_GUNCEL_DURUM.md, collections/01_Olive_Ivory/package/customer/, collections/03_Blush_Garden_Rose/package/customer/]
+yazar: [platform/lib/rsvp/, .github/workflows/, tools/build_customer_guides.py, platform/lib/claim/limits.ts, platform/tests/, platform/README.md, docs/18_GUNCEL_DURUM.md, collections/01_Olive_Ivory/package/customer/, collections/03_Blush_Garden_Rose/package/customer/]
 ---
 
 ## Amaç
@@ -19,7 +19,11 @@ Kullanıcı 2026-10-15 tarihinde GitHub'daki tamamlanmayan işleri tamamlamayı 
 - Güncel tema/kod/canlı durumları ayrı raporlanır; harici erişim ve ticari karar gerektiren işler tamamlanmış sayılmaz.
 
 ## Sonuç
-RSVP ortak sayaç düzeltmesi, 3 regresyon testi ve güncel 01/03 rehber kaynakları tamamlandı. Güncel durum docs/18_GUNCEL_DURUM.md. Yerel tam test 559 geçti / 0 hata / 11 atlandı; hedef test 45/45; typecheck temiz; Webpack build ve satış çıktıları 2/2. Varsayılan Turbopack/trace-check ve Vercel yayınının doğrulanması GitHub Actions/erişim sonrası bekliyor. PDF ve panel ekranları G065'te; kaynak Markdown'ın güncellenmesi PDF teslimi değildir.
+RSVP ortak sayaç düzeltmesi, 3 regresyon testi, güncel 01/03 Markdown rehberleri ve dört sayfalık PDF'leri tamamlandı. PDF sayfaları görsel kontrol edildi; bağlantılar doğrulandı; iki QR raster çıktıdan çözülerek doğru URL'lerle eşleşti. Yeniden üretim: python tools/build_customer_guides.py (reportlab).
+
+Linux GitHub Actions #1 (38653122309): 570 test / 564 geçti / 0 hata / 6 atlandı; varsayılan Turbopack production build + trace-check, typecheck ve derlenmiş satış sayfaları 2/2 geçti. Yerelde hedef testler 45/45, tam paket 559/0/11; typecheck ve Webpack build başarılı (yerel Webpack trace-check başarılı değil; bu çıktı yayınlanmaz).
+
+G085'in kod/rehber kapsamı bitti. Canlı yayın G079'da; mevcut Vercel hesabına erişim bekleniyor. İlan ekranları G065'te, Etsy/e-posta/fiyat/SLA ve gerçek cihaz denemeleri ayrı açık işler. Güncel durum docs/18_GUNCEL_DURUM.md.
 
 ## Günlük
 - 2026-10-15 kaynak düzeltmeleri hazır; uzak build/yayın doğrulaması sürüyor.
