@@ -3,7 +3,7 @@ id: G215
 baslik: Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
 durum: alindi
-alan: gpt-gorsel-G
+alan: gpt-gorsel-N
 oncelik: 2
 bagimli: []
 yazar: [collections/15_Cherry_Blossom/assets/gpt/comps/, collections/15_Cherry_Blossom/assets/gpt/parts/, collections/15_Cherry_Blossom/assets/gpt/photos/]
@@ -61,3 +61,4 @@ Kısım 2 — gpt-gorsel-G (2026-10-14), ara kayıt 4/8:
 - 2026-10-14 devam: gpt-gorsel-G (kısım 2)
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-M) 5/5 kit_check geçti, görsel olarak iyi.
 - 2026-10-14 ara kayıt: gpt-gorsel-G; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card kaydedildi; kullanıcı tuvaliyle dosya denetimleri ve zarf hizası geçti.
+- 2026-10-14 devam: gpt-gorsel-N (önceki sohbet kapandı)
