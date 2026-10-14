@@ -30,3 +30,4 @@ GPT Satış sitesi'nin görsel tasarımını yapar (K21); Claude aynı görünü
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği (marka tasarımına uygun site ve panel)
 - 2026-10-14 alindi: gpt-ui-site
+- 2026-10-14 ara kayıt (3/6): gpt-ui-site; U1.1–U1.3 kaydedildi. U1.1 fazla dekor/yeşil alan, U1.2 eklenen metin nedeniyle yeniden üretildi; seçilen sürümler sade adlarda.
