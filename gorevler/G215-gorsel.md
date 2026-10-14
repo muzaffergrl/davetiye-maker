@@ -42,6 +42,14 @@ Kısım 1 — gpt-gorsel-G (2026-10-14), seçilen 8 görsel:
 - `bg_tile` dikiş kontrolü: karşılıklı 16 px kenar bantlarının ortalama RGB farkı yatay 0,13/255, dikey 0,68/255; sınırdaki ortalama piksel farkı yatay 3,53, dikey 4,53; iç komşu farkları 2,61/3,54. Düşük kontrastlı, nesnesiz/yazısız kâğıt yüzeyi görsel olarak da kontrol edildi.
 - Bu oturumun sekiz dosyası `kit_check` dosya denetimlerinde 8/8 GEÇTİ. Tam `--paket 5`: 8/22 geçti, kalan 14 W2 dosyası kapsam gereği yok; hiza ATLANDI (`envelope_open` yok). `--paket 2`: 0/5, fotoğraflar kapsam gereği üretilmedi. Görev `alindi` kalır.
 
+Kısım 2 — gpt-gorsel-G (2026-10-14), ara kayıt 4/8:
+- Repodaki beş W1 comp'u ve `envelope_closed.png` bu sohbete referans olarak yüklendi; mevcut dosyalar korunuyor. Her üretimde ilgili W1 referansları kullanıldı; kapanış ve açık zarfta mevcut kapalı zarf ayrıca referans verildi.
+- Kaydedilenler: `parts/closure.png`, `envelope_open.png`, `card_small.png`, `invitation_card.png`; tümü gerçek alfa PNG, 1024×1536. Yalnız yeni parçalar ve bu görev dosyası değiştirildi.
+- Kullanıcının bu oturumdaki açık talebiyle `closure.png`, prompt'taki kare tuval yerine kapalı zarfla aynı 1024×1536 tuvalde üretildi. Kaynak prompt dosyası korunuyor; standart `kit_check` bu parçada eski kare oranı nedeniyle KALDI yazar. Kullanıcı ölçüsünü uygulayan aynı dosya denetimi geçti. Kapanış yalnız W1'deki üç çiçekli kısa dal; zarf üzerine aynı piksel koordinatlarında yerleştirilerek bellekte kontrol edildi, ek önizleme dosyası yazılmadı.
+- Açık/kapalı zarf `hiza_olc` sonucu GEÇTİ: sol kenar farkı 1 px (%0,1); sağ ve alt farkı 0 px. Aynı 1024×1536 tuvalde yarı saydam üst üste kontrol de yapıldı. Ön cep kenarı net, içi boş, kapanış ve kart yok.
+- Yeniden üretimler: kapanış ilk çıktıda fazla büyüktü, ikinci çıktı seçildi. Küçük kart ilk çıktıda yeşil pencere gradyanı, ikinci çıktıda pencereye taşan çiçekler nedeniyle düzeltildi; üçüncü çıktı seçildi. Yalnız yeşil tonu için yeniden üretim veya kodla piksel boyama yapılmadı. Açık zarf ve davet kartı ilk çıktıları seçildi.
+- Bu dört dosya, kapanışın kullanıcı tuvali dikkate alınarak `kit_check.denetle` ile 4/4 GEÇTİ; küçük kartta yeşil pencere %13,9. Durum `alindi` kalır.
+
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
@@ -52,3 +60,4 @@ Kısım 1 — gpt-gorsel-G (2026-10-14), seçilen 8 görsel:
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi. envelope_closed 1,39:1 kabul; closure ve envelope_open bu dosyaya hizalanacak. Kısım 2 verildi.
 - 2026-10-14 devam: gpt-gorsel-G (kısım 2)
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-M) 5/5 kit_check geçti, görsel olarak iyi.
+- 2026-10-14 ara kayıt: gpt-gorsel-G; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card kaydedildi; kullanıcı tuvaliyle dosya denetimleri ve zarf hizası geçti.
