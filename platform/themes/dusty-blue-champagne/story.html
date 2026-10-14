@@ -1,0 +1,92 @@
+<!doctype html>
+<!-- Dusty Blue & Champagne · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in gold calligraphy,
+     "MOMENTS WE HOLD DEAR", three instant-photo prints (GPT frame_portrait: ivory print, fine gold border, a eucalyptus
+     sprig at its corner) scattered across the page at gentle angles, touching only at their white borders, each caption
+     written in the print's bottom margin. Choreography: the prints fly in one after another and settle (W1.3). On phones
+     the comp's 2 + 1 layout would leave each photo window ~120 px wide (< 38vw, docs/11 §9): the same prints are laid in a
+     cascade (each print 66vw, photo window 50vw); from 760 px wide the comp's layout stands as drawn. Photo slots
+     story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is off (404) when
+     optional_blocks.our_story is false. Title / kicker = design copy. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="Our Story · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="Our Story · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="Our Story · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#CCDCEC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&amp;family=Pinyon+Script&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long page-story" data-optional="our_story" data-pending="This link will be added soon.">
+
+<div class="page-bg" aria-hidden="true"><img src="img/paper-400.webp" alt=""></div>
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <img class="page-corner corner-tl" data-step="decor" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 400px)" alt="">
+    <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_1-149.webp" alt="">
+    <img class="float f-fern" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    <h1 class="script page-title" data-step="title" data-a="write">Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="fade">Moments we hold dear</p>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the prints (one scene each): each flies in from its own side, turns and settles at its angle, one after another
+       (prints entering together play batchGap apart); then its caption is written in the margin -->
+  <section class="prints" aria-label="Our photos">
+    <figure class="print p-1" data-scene="story-print">
+      <div class="print-frame" data-step="print" data-a="fly-l">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-360.webp" srcset="img/ph_story_1-360.webp 360w, img/ph_story_1-720.webp 720w" sizes="(min-width: 760px) 200px, min(53vw, 250px)" alt="" data-attr-alt="{story.items.0.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="print-img" src="img/frame_portrait-360.webp" srcset="img/frame_portrait-360.webp 360w, img/frame_portrait-720.webp 720w" sizes="(min-width: 760px) 265px, min(70vw, 330px)" alt="">
+        <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.0.caption"></span></figcaption>
+      </div>
+    </figure>
+    <figure class="print p-2" data-scene="story-print">
+      <div class="print-frame" data-step="print" data-a="fly-r">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-360.webp" srcset="img/ph_story_2-360.webp 360w, img/ph_story_2-720.webp 720w" sizes="(min-width: 760px) 200px, min(53vw, 250px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="print-img" src="img/frame_portrait-360.webp" srcset="img/frame_portrait-360.webp 360w, img/frame_portrait-720.webp 720w" sizes="(min-width: 760px) 265px, min(70vw, 330px)" alt="" loading="lazy">
+        <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.1.caption"></span></figcaption>
+      </div>
+    </figure>
+    <figure class="print p-3" data-scene="story-print">
+      <div class="print-frame" data-step="print" data-a="fly-b">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-360.webp" srcset="img/ph_story_3-360.webp 360w, img/ph_story_3-720.webp 720w" sizes="(min-width: 760px) 200px, min(53vw, 250px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="print-img" src="img/frame_portrait-360.webp" srcset="img/frame_portrait-360.webp 360w, img/frame_portrait-720.webp 720w" sizes="(min-width: 760px) 265px, min(70vw, 330px)" alt="" loading="lazy">
+        <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.2.caption"></span></figcaption>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section next-sec" data-scene="story-next">
+    <img class="page-corner corner-br" data-step="decor" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-875.webp 875w" sizes="min(62vw, 360px)" alt="" loading="lazy">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span>Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span>Story</span></a></li>
+    <li><a href="details.html"><span>Details</span></a></li>
+    <li data-if="!rsvp.method"><a href="rsvp.html"><span>RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

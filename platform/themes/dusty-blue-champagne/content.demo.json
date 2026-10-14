@@ -1,0 +1,59 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    { "display_name": "Eleanor", "full_name": "Eleanor Grace" },
+    { "display_name": "Theo", "full_name": "Theodore James" }
+  ],
+  "name_display": "Eleanor & Theo",
+  "initials": "E&T",
+  "host_line": "Together with their families",
+  "date": "2027-09-18",
+  "ceremony_time": "16:30",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Rosewood Manor",
+    "city": "Charleston",
+    "region": "South Carolina",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    { "label": "Ceremony", "time": "16:30", "location": "The Garden Lawn" },
+    { "label": "Cocktail Hour", "time": "17:30", "location": "The Veranda" },
+    { "label": "Reception", "time": "18:30", "location": "The Grand Hall" }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": { "deadline": "2027-08-01", "method": null },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Coffee dates, sea breezes and all the quiet moments in between brought us to",
+    "items": [
+      { "caption": "Our first coffee" },
+      { "caption": "Sunset by the sea" },
+      { "caption": "Ever after" }
+    ]
+  }
+}
