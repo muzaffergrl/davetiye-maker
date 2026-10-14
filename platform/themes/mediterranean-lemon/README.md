@@ -90,14 +90,22 @@ en koyu pikselini (≥ 175) ve sarı/yeşil fazlasını (≤ 24; limon parlak ol
   kapaktan çekildikten sonra (680 ms) menteşesinde izleyiciye doğru kalkar (860 ms; 82°'den sonra söner), altında kapalı gövde açık
   gövdeye (çini astar + ön cep) geçer, çini astarlı açık kapak −90°'den dikilir (1,52 s) → kart cepten yükselir (1,8 s; cepte beklerken
   yalnız çini başlığı ve fotoğrafın ≤ %6'sı görünür) ve **aynı anda** sol üst köşedeki limon dalı içeri sallanır (−2,5° → +5° → +2,5°,
-  içeride kalır) ve tek bir limon çiçeği (accent_2 × 1, 46–54 px, `origin: 'liner'`) kartın kenarı ile zarfın kenarı arasındaki
-  şeritte, kobalt çini astarın üstünden süzülür (≥ 0,8 s mavi zeminde; `go`dan önce söner) → kart olduğu yerde öne gelir (× 1,04,
+  içeride kalır) ve tek bir limon çiçeği (accent_2 × 1, 46–54 px ama sahne genişliğinin en çok %16'sı, `origin: 'liner'`) kartın
+  sağındaki şeritte, kobalt çini astarın üstünden süzülür: şerit kartın sağ kenarının %3 içinden (kartın beyaz kenarı; fotoğraf
+  penceresi kenardan %11 içeride biter) zarfın sağ kenarına kadar, her boyutta sahnenin en az %8'i (QA 2026-10-14: eski şerit kart
+  kenarından başlıyordu ve telefonların çoğunda 0–8 px kalıyordu, çiçek hiç doğmuyordu); yol sahne yüksekliğinin %27'sinden %52'sine
+  (merkez %33 → %58: kapağın kenarından astara iner), merkezi 0,65–1,25 s mavi astarın üstünde (13 boyut × 10 deneme, hepsinde
+  doğdu, hiçbirinde fotoğraf penceresine girmedi) → kart olduğu yerde öne gelir (× 1,04,
   büyüyen gölge) ve view transition ile home kartına uçar. Dokun → home 4,12 s (Skip her an).
 - **Story:** her çini pano kendi sahnesi: görünüme girince dış kenarı üzerinde (sol pano sol kenarında, sağ pano sağ kenarında)
   72°'den döner ve dimdik durur (`turn-l` / `turn-r`), sonra başlığı yazılır ve duvardaki iki parça (yaprak + çiçek, panonun boş
   yanında) belirir. Dış alt köşede W1.3'ün buketi: GPT `divider` (limon + çiçekler + yapraklar) çerçeve genişliğinin %58'i, ±26°,
   köşenin üstünden geçer + bir accent_2 çiçeği; foto penceresine değmez. Telefonda pano 64vw, foto penceresi 64 × 0,605 = **38,7vw**
-  (≥ 38vw); ≥ 720 px'te comp'un iki sütunlu basamaklı dizilişi. Nav çizgisini kesecek pano ilk ekranın altından başlar (`data-fold`).
+  (≥ 38vw); ≥ 720 px'te comp'un iki sütunlu basamaklı dizilişi (orta pano `align-self: start` + kenar boşluğuyla aşağıda, böylece
+  fold itişi onu tam taşır). **Masaüstü** (≥ 1024 px, yatay, ≥ 621 px yükseklik): üç pano tek basamaklı sırada (yüksek, alçak,
+  yüksek) başlığın altında; `site.js` `tiles` panoları (≥ 190 px) sıra nav'ın üstünde bitene kadar küçültür (QA 2026-10-14: iki
+  sütunda üç pano da ilk ekranın altına itiliyordu, 1280×800'de ekranın %46'sı boş duvardı). Nav çizgisini kesecek pano ilk ekranın
+  altından başlar (`data-fold`).
   Yan kaydırma yok (dikey sütun), bu yüzden kaydırma ipucu gerekmez. Dış köşe buketleri ekran kenarından taşar; `.tiles` (tam
   genişlik) yalnız yatayda kırpar (`overflow-x: clip`), yani buketi yalnız ekran kenarı keser.
 - **Parçacıklar** (`MOTION.accents`): açılış 1 çiçek (yukarıda) · home'a varış 2 çiçek · RSVP kapanışı 3 çiçek + 1 yaprak. Varış ve
@@ -114,12 +122,21 @@ en koyu pikselini (≥ 175) ve sarı/yeşil fazlasını (≤ 24; limon parlak ol
 ## İlk ekranlar ve yatay telefon
 01'in çözülmüş adımları korunur: `fitNames` (isimler en çok %24 küçülür → `.is-tight` + isimler **36 px tabanı** → `.is-long`
 (sayaç hapın altına) → hero kaydırılır), ardından `fold` (nav'ın altında yarım parça yok: sığmayan parça ilk ekranın altından
-başlar). İç sayfalarda aynı kural `[data-fold]` ile: details'teki takvim çifti ve story panoları nav çizgisini keserse ilk ekranın
-altından başlar (G405 incelemesi: 390×844'te nav çizgisi takvim haplarının içinden geçiyordu). Kısa yatay (`min-aspect-ratio: 1/1`
-ve yükseklik ≤ 620 px) ızgara: kart solda, isimler · tarih · mekân · şehir · sayaç · hap sağda; iç sayfalarda üst boşluk 52 px —
-kart başlığı nav'ın üstünde biter. Kart ≥ 150 px her genişlikte (≥ 1024 px ve ≥ 621 px yükseklikte `47svh × .709`, en çok 290 px);
+başlar). Kısa yatay (`min-aspect-ratio: 1/1` ve yükseklik ≤ 620 px) ızgara: kart solda, isimler · tarih · mekân · şehir · sayaç ·
+hap sağda. Kart ≥ 150 px her genişlikte (≥ 1024 px ve ≥ 621 px yükseklikte `47svh × .709`, en çok 290 px);
 kart kopyası `fitCopy`: tarih · kasaba tek satır, sığmazsa iki satır, sonra kasaba, sonra script düşer (yazı ≥ 11 px); kasaba boşsa
 "·" ayırıcı da gizlenir.
+
+**İç sayfalar** (`folds`, QA 2026-10-14): aynı kural birim birim — her ilk ekran öğesi ya nav'ın üstünde biter ya da ilk ekranın
+tamamen altında başlar. Birimler `[data-fold]`: details'te kart başlığı, her program satırı, takvim çifti, mekân fotoğrafı; rsvp'de
+başlık, "Kindly reply by" + tarih, hap, iki çizgi + bekleme satırı, "With love," + isimler + limon bağı (bağ imza biriminin içinde,
+birlikte taşınır), form başlığı ve her form satırı; story'de alt başlık, giriş cümlesi ve panolar. Nav çizgisini kesen **ilk**
+birim için ilk bölüm en çok 40 px (üst boşluğun %34'ü) yukarı alınır (`.page-bg`'den sonraki öğeye negatif kenar boşluğu); bu
+yetmiyorsa birim ilk ekranın 6 px altından başlar (kart 3 dilimle uzar, ilk ekranda kartın boş kâğıdı nav'ın altına iner). Kısa
+yatayda kartlar daralır ki kart başlığı nav'ın üstünde bitsin (details `(100svh − 162px) × 1,98`, rsvp `(100svh − 128px) × 1,97`);
+sonraki satırlar ilk ekranın altından başlar (önceki "yatayda üst boşluk 52 px — kart başlığı nav'ın üstünde biter" iddiası
+568×320 ve 740×360'ta doğru değildi). Masaüstünde (≥ 1024 px) RSVP **tek sütun**: kart (`(100svh − 232px) × .58`, en çok 440 px)
+ve bağı ilk ekranda, form altında — yan yana form satırları her ekranda nav'ın altından geçiyordu.
 
 **Zarf sayfası** (`envFit`): sahnenin boş üstü (`.63776 × --w`) ölçülen başlığın altına girer (`--pt`); "Tap to open" ilk ekranda
 bitmiyorsa sahne küçülür (`--ok`, en az 0,6). Yatayda isim sütunu köşe kümelerinin arasında (`min(100% − 2 × min(10vw, 17svh), 560px)`).
@@ -179,7 +196,7 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
 |---|---|---|
 | "Our Story", "MOMENTS WE HOLD DEAR" | `h1.page-title`, `.page-head .kicker` | |
 | — | `.lede` (story.intro + tarih) | standart zorunlu |
-| üç çini çerçeve, basamaklı (sol, sağ, sol), dimdik | `.tiles .tile` (frame_portrait), `.t-2` sağda | telefonda tek sütun basamaklı (64vw); ≥ 720 px comp'un iki sütunu |
+| üç çini çerçeve, basamaklı (sol, sağ, sol), dimdik | `.tiles .tile` (frame_portrait), `.t-2` sağda | telefonda tek sütun basamaklı (64vw); ≥ 720 px comp'un iki sütunu; **sapma:** ≥ 1024 px yatay masaüstünde tek basamaklı sıra (yüksek, alçak, yüksek), üç pano ilk ekranda |
 | başlık çerçevenin içinde, alt boşlukta | `figcaption` panonun altında | **sapma:** GPT `frame_portrait`'in alt boşluğu yok (pencere çerçeveyi dolduruyor); başlık duvarda, panonun altında |
 | köşelerde limon + çiçek demeti | `.sprig-tuck` (GPT `divider`: limon + çiçekler + yapraklar) + `.tuck-bloom` (accent_2) | demet parçası yok; `divider` aynı demet, dış alt köşede ±26° |
 | duvarda yaprak / çiçek | `.wall-piece` (accent_3 + accent_2, panonun boş yanında ikişer) | |
@@ -208,8 +225,8 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
 | RSVP hapı | `a.btn[href="#reply"]` | forma kaydırır |
 | iki kısa çizgi | `.hairs` (iki 1 px ayraç) | |
 | "WE CAN'T WAIT TO CELEBRATE WITH YOU", "With love," + isimler | `.wait`, `.love`, `.sign` | uzun isimde sarar |
-| alt kenarda limon bağı | `.card-tie` (closure) | `drop` girişiyle karta oturur |
-| — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
+| alt kenarda limon bağı | `.sig-unit > .card-tie` (closure) | `drop` girişiyle karta oturur; imza birimiyle birlikte katlanır |
+| — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi; masaüstünde de kartın altında (tek sütun) |
 
 ## Bilinen sınırlar
 - Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim).
@@ -220,7 +237,9 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
   bir limon bağı (mühür değil, boş oval yok).
 - `favicon.png` şeffaf; `apple-touch-icon` yazılmaz.
 - Zarf sayfası isimleri (§12 zorlama kaydı, 40 harfli adlar) 01 gibi ölçeklenir (en çok 0,4×); home hero isimleri 36 px tabanında.
-- Boyut (docs/11 §6, KiB okuması; test `≤ 35 × 1024` / `≤ 45 × 1024`): `site.js` 35 831 B (34,99 KiB), `site.css` ~45,8 KB (44,7 KiB).
+- Boyut (docs/11 §6, KiB okuması; test `≤ 35 × 1024` / `≤ 45 × 1024`): `site.js` 35 804 B (34,96 KiB; IIFE gövdesi bir girinti
+  sola alındı, yorumlar kısaltıldı), `site.css` 46 039 B (44,96 KiB; aynı "tam doldur" kuralları birleştirildi). İkisinde de pay
+  ≤ 41 B: sonraki eklemeden önce sıkıştırma gerekir.
 - Kontrast (oluşan sayfada metnin arkasındaki piksellerin medyanı ve en kötü %10'u; 390 px, 844×390, 1280 px): görünen her metin
   ≥ 4,5:1 (büyük el yazısı ≥ 3:1); hap düğmeler beyaz yazı / kobalt degrade 5,5–7,9:1.
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, kesişen belge view transition), Vercel yayını, gerçek

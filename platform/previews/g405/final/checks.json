@@ -172,7 +172,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/f0e82cab-9488-497e-af73-b8792a9d24b7/d7b25c4f6a0792588900383b8b939412-1024w.jpg"
+      "detail": "/media/b5f2c90e-7b4a-4713-9756-420e4561b7cd/9e93cab2a5c7f3df926adceb7cf77d1f-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
@@ -189,7 +189,7 @@
     {
       "name": "buyer: the reply shows in the panel",
       "ok": true,
-      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close at the end of Saturday, May 1, 2027 (Rome time). All Coming Not com"
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 199 days. Last day: Saturday, May 1, 2027 (Rome time). 1 new rep"
     },
     {
       "name": "buyer: panel has no overflow at the end",

@@ -75,7 +75,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 489, nav top 307)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 62×44, home \"Replay the envelope\" 229×47, rsvp \"Replay the envelope\" 190×47",
-  "envelope → /isabella-and-marco/home in 4413 ms, card transition flag set",
+  "envelope → /isabella-and-marco/home in 4391 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (13 steps)",
   "countdown target from the platform: 2027-06-12 16:00 Europe/Rome = 2027-06-12 14:00 UTC",
@@ -95,7 +95,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-12T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-17T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (349 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (253 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -119,7 +119,7 @@
   "home first view (390×844, DPR 3, placeholders): 884 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 971 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1141 KB",
-  "recording: previews/g405/opening_390x844.mp4 (3199 KB, lead-in 0.84 s cut, first frame mean 218,218,205) — tap → opening → home → story → details"
+  "recording: previews/g405/opening_390x844.mp4 (3128 KB, lead-in 0.86 s cut, first frame mean 218,218,205) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -462,11 +462,11 @@
     "bad": [
      "span.cd-num \"349\" bottom 587",
      "span.cd-lbl \"Days\" bottom 602",
-     "span.cd-num \"23\" bottom 587",
+     "span.cd-num \"21\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 602",
-     "span.cd-num \"50\" bottom 587",
+     "span.cd-num \"54\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 602",
-     "span.cd-num \"59\" bottom 587",
+     "span.cd-num \"19\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 602"
     ],
     "partly": [],
@@ -532,11 +532,11 @@
      "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 672",
      "span.cd-num \"240\" bottom 716",
      "span.cd-lbl \"Days\" bottom 731",
-     "span.cd-num \"23\" bottom 716",
+     "span.cd-num \"21\" bottom 716",
      "span.cd-lbl \"Hours\" bottom 731",
-     "span.cd-num \"50\" bottom 716",
+     "span.cd-num \"53\" bottom 716",
      "span.cd-lbl \"Minutes\" bottom 731",
-     "span.cd-num \"39\" bottom 716",
+     "span.cd-num \"59\" bottom 716",
      "span.cd-lbl \"Seconds\" bottom 731",
      "a.btn \"RSVP\" bottom 790"
     ],
@@ -564,11 +564,11 @@
      "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 660",
      "span.cd-num \"240\" bottom 698",
      "span.cd-lbl \"Days\" bottom 713",
-     "span.cd-num \"23\" bottom 698",
+     "span.cd-num \"21\" bottom 698",
      "span.cd-lbl \"Hours\" bottom 713",
-     "span.cd-num \"50\" bottom 698",
+     "span.cd-num \"53\" bottom 698",
      "span.cd-lbl \"Minutes\" bottom 713",
-     "span.cd-num \"33\" bottom 698",
+     "span.cd-num \"53\" bottom 698",
      "span.cd-lbl \"Seconds\" bottom 713",
      "a.btn \"RSVP\" bottom 769"
     ],
@@ -594,11 +594,11 @@
     "bad": [
      "span.cd-num \"240\" bottom 424",
      "span.cd-lbl \"Days\" bottom 441",
-     "span.cd-num \"23\" bottom 424",
+     "span.cd-num \"21\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 441",
-     "span.cd-num \"50\" bottom 424",
+     "span.cd-num \"53\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 441",
-     "span.cd-num \"27\" bottom 424",
+     "span.cd-num \"46\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
@@ -623,11 +623,11 @@
     "bad": [
      "span.cd-num \"240\" bottom 414",
      "span.cd-lbl \"Days\" bottom 431",
-     "span.cd-num \"23\" bottom 414",
-     "span.cd-lbl \"Hours\" bottom 431",
-     "span.cd-num \"50\" bottom 414",
-     "span.cd-lbl \"Minutes\" bottom 431",
      "span.cd-num \"21\" bottom 414",
+     "span.cd-lbl \"Hours\" bottom 431",
+     "span.cd-num \"53\" bottom 414",
+     "span.cd-lbl \"Minutes\" bottom 431",
+     "span.cd-num \"40\" bottom 414",
      "span.cd-lbl \"Seconds\" bottom 431",
      "a.btn \"RSVP\" bottom 489"
     ],
@@ -635,7 +635,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4413,
+  "envelope_to_home_ms": 4391,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -712,7 +712,7 @@
    ],
    [
     "/themes/mediterranean-lemon/site.css",
-    45941
+    46039
    ],
    [
     "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
@@ -747,7 +747,7 @@
    ],
    [
     "/themes/mediterranean-lemon/site.css",
-    45941
+    46039
    ],
    [
     "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
@@ -765,7 +765,7 @@
     113712
    ],
    [
-    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/0e6de1efafcd4420b828c87119dd30bf-640w.jpg",
+    "/media/9422f22c-3686-4bc4-b6eb-a1cbcd8a4ba1/dd006541bc44f3dada2638602e665a6e-640w.jpg",
     98482
    ],
    [
@@ -786,7 +786,7 @@
    ],
    [
     "/themes/mediterranean-lemon/site.css",
-    45941
+    46039
    ]
   ],
   "first_view_home_kb_photos": 1141,
@@ -804,11 +804,11 @@
     113712
    ],
    [
-    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/e7efc311f6f1b45975075d46d95229b2-640w.jpg",
+    "/media/9422f22c-3686-4bc4-b6eb-a1cbcd8a4ba1/dab3d73cf7932b8797967d2e1d2907d5-640w.jpg",
     100571
    ],
    [
-    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/0e6de1efafcd4420b828c87119dd30bf-640w.jpg",
+    "/media/9422f22c-3686-4bc4-b6eb-a1cbcd8a4ba1/dd006541bc44f3dada2638602e665a6e-640w.jpg",
     98482
    ],
    [
@@ -820,13 +820,13 @@
     74228
    ],
    [
-    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/18bacf3b4653123d32c72fd5da825286-640w.jpg",
+    "/media/9422f22c-3686-4bc4-b6eb-a1cbcd8a4ba1/34a68bdfaffe291628a3820b6cfc21ee-640w.jpg",
     71048
    ]
   ],
-  "video_kb": 3199,
+  "video_kb": 3128,
   "video_first_frame": {
-   "lead_in_s": 0.84,
+   "lead_in_s": 0.86,
    "mean_rgb": [
     218,
     218,
