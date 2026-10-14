@@ -35,5 +35,6 @@ Pilot: 01/03 (G801/G803).
 ## Günlük
 - 2026-10-14 alindi: gpt-gorsel-A
 - 2026-10-14 ara kayıt: 3.1 kapak (v2 seçildi; telefon aşağı alındı, başlık alanı açıldı) ve 3.2 üç telefon üretildi; ekran sayısı/geometrisi kontrolleri geçti.
+- 2026-10-14 ara kayıt: 3.3 dizüstü + telefon (v2, boş klavye tuşları) ve 3.4 masa üstü (v2, sol üçte bir tamamen açıldı) üretildi; ekran sayısı/geometrisi kontrolleri geçti.
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
