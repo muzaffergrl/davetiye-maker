@@ -97,6 +97,51 @@ Kalıcı talep 5: her set için ilan görselleri, video ve Etsy alanlarını iç
   render`); `mockup_compose.py` bu görevin yazma alanında olmadığından dokunulmadı — kaldırılması/güncellenmesi ayrı iş.
 - Alan adı/marka seçilince `LISTING_BASE_URL` ile START HERE PDF'leri ve 8. görsel yeniden üretilmeli.
 
+**İnceleme düzeltmeleri (2026-10-14, wf-ilan, 25 bulgu; 23'ü tamamen, 2'si kapsam içi kısmıyla uygulandı)**
+- **Dürüstlük:** "all text" iddiası kaldırıldı (tema başlıkları sabit: "You are invited", "Order of the Day", "Will You Join Us?"…;
+  ilan PLEASE NOTE + SSS, kılavuz SSS + adım 3). "personal start link" kalktı (link herkes için aynı, sipariş doğrulaması yok).
+  HEIC "only in Safari" ve ölçülmemiş "20–30 dakika" kalktı. Gizlilik cümlesi: "shown only in your editor, not on your public
+  website". "registry link" tekil; adım 6'ya panelin **QR code** / **Share** düğmeleri. ABD yazımı (colors, Personalize);
+  "Who made it" `[VERIFY]`. Başlıklar tekrarsız (101/108 karakter, "Wedding" bir kez), "wedding evite" → "e invitation".
+- **Dil:** PLEASE NOTE + SSS "Is it available in other languages?" eklendi. Önce denendi (yerel üretim build'i, Chromium, iki tema,
+  isim/hikâye/program/SSS): aksanlı Latin ve Kiril tema fontlarıyla çıkıyor; Yunanca script alanlarda düz yedek fonta düşüyor (ve
+  dar sütunda taşabiliyor); Çince/Arapça/Korece yedek fontla. Metin buna göre yazıldı.
+- **Canlı durum** (Vercel bağlayıcısı, 2026-10-14 07:39–07:40 UTC; telefonla değil): `/start?theme=olive-ivory` form + "Design:
+  Olive & Ivory", `/start/demo/olive-ivory` ve `/home` 200 + "Add to your calendar", `/start/demo/blush-garden-rose/details` takvim
+  düğmeleri; canlı `dpl_2wNCu8cwSnw4PcWpQ2pTqcGjbdTC` = main `59b1291`, platform ağacı bu checkout'la aynı (`git diff 59b1291 HEAD --
+  platform` boş). **SSS ve RSVP soruları canlıda uçtan uca denenmedi** (demo kaydında yok, `live-check.mjs` kapsamıyor) →
+  `[VERIFY: try on the live site]`. İki listing.md §0/§9 ve docs/05 §D/§E/§G güncellendi. Yukarıdaki "Tema 01 canlıda yok" satırı eskidi.
+- **Satış öncesi şartlar:** docs/05 §C/§D ve iki §9'a: son alan adı ilk satıştan önce (ya da kalıcı yönlendirme; basılı QR'lar),
+  ticari barındırma planı (Vercel Hobby), Etsy politika uygunluğu (süreli barındırılan erişim + PDF link), `check --prepublish`.
+  Etsy sipariş doğrulaması docs/10 §3'e hizalandı (ilk sürüm biçim + kayıt; "satış öncesi şart" ifadesi kaldırıldı).
+- **`listing_kit.py`:** PDF link kontrolü linksiz PDF'te de hata (`pdf_link_problems`; pypdf yoksa açık hata); `check --prepublish`
+  (canlı başlat/demo 200 + tema adı, 8. görselin `listing/demo_qr.png`'si demo linkini kodluyor, `[VERIFY …]`/ticari yer tutucu
+  kalmamış: md'ler ve PDF metni); taban `*.vercel.app` iken uyarı; ilan PDF'inde kapağın 300 px ve 4:3 orta kırpma önizlemesi;
+  START HERE için kendi HTML'i (md_to_pdf'e dokunulmadan): kapak (temanın köşe parçaları + zarf ekranı + script ad, "Start Here" /
+  "Your <ad> Wedding Website"), her resim kendi başlığının altında ve görünür alt yazılı (`figure`), tablo/liste bölünmez, QR 1,75 in;
+  şeritler en çok 2 ekran, her biri metin genişliğinin %42,5'i (~3 in), alt sayfalar düz zeminden kırpılı. Video: siyahtan açılış/
+  kapanış yok; son 0,5 s ilk kareye çözülür (döngü dikişsiz), kart yazısı 1 s erken başlar. Testler: 11 test (yeni: kılavuz HTML'i,
+  linksiz PDF, işaret ayıklama, sahte canlıyla `--prepublish`, vercel uyarısı, dürüstlük kuralları).
+- **`capture.ts`:** `clearEdges()`: üst kenarda kesik yazı/alan (alt uzantılar dahil) ve arkası görünen menünün (01) etiketlerinin
+  arkasında yazı/foto yok; ±20…120 px kaydırır, olmazsa resmi menünün üstünden kısa keser (01'de 5 ekran). Alt sayfaların arkasındaki
+  karartma panelin düz zeminiyle değişir; yerel QR yerine "QR code (hidden in this picture)" kutusu; RSVP formu ad etiketinden başlar;
+  `/start` ekranı sipariş no ipucuyla biter; misafir adı "Sofia Martin"; yeni `g12_details_venue`.
+- **Görseller:** kapak (ad + "WEDDING WEBSITE · RSVP" 68 px + "No Canva needed · RSVP built in · Live demo" 50 px, y 250–1750),
+  tagline 02'ye; yazılar ≥ 38–40 px; 3 telefonlu görsellerde ekran 560 px; 02 = her sayfanın ilk ekranı (Home: takvimli ekran);
+  03 7 madde; 04 adım numaraları ekranın üstünde değil başlıkta; 05 sol = tarih bölümü; 06 alt yazılar ekranlarıyla eşleşti;
+  07 = Details sayfasından program+takvim, mekân, SSS; 08 URL satırı yok, "Scan to open the live demo" tek satır, notlar hizalı.
+- **Atlanan / kapsam dışı:** tema 01 `.site-nav` opaklığı (`platform/themes/olive-ivory/site.css`, tema sahibinin işi — çekimde
+  `clearEdges` atlatıyor, gerçek sitede hayalet yazı duruyor); docs/13 §7'deki "renk dışındaki her metin değişebilir" cümlesi (yazma
+  alanım değil; docs/05 §E'de yanlış olduğu yazıldı). Alt sayfa ekranları element ekran görüntüsü yerine perdenin düz zemine
+  boyanmasıyla alındı (aynı sonuç: sayfa değişmez, perde görünmez). `--prepublish` canlı kısmı bu ortamda proxy 403 ile düşer
+  (tasarlandığı gibi); canlı kontrol bağlayıcıyla yapıldı.
+- **Bakıldı:** 16 ilan görselinin hepsi (son yeniden çekimden sonra 8'i tekrar), iki kılavuzun bütün sayfaları (12'şer sayfa, ~3,5 MB),
+  ilan PDF'i (01), kapakların 300 px/4:3 önizlemesi, iki videonun kareleri. `check --theme all` 0 sorun (+ vercel uyarısı); `check --prepublish` beklenen şekilde düşüyor (canlıya
+  bağlanamıyor, yer tutucular/VERIFY açık). `test_listing_kit`, `test_md_to_pdf`, `test_mockup_compose` ok; `gorev.py kontrol` temiz.
+- **Önerilen görevler (ek):** tema 01 alt menüsü opak + blur (tema sahibi); docs/13 §7 düzeltmesi; SSS + RSVP sorularının canlıda
+  denenmesi; panel v2 (G060) yayına girince `listing_kit.py capture` + `all` yeniden.
+
 ## Günlük
 - 2026-10-14 alindi: wf-ilan
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 inceleme düzeltmeleri (25 bulgu): dürüst metinler, canlı durum (bağlayıcı), satış öncesi şartlar, `check --prepublish`, temiz kenarlı yeni çekimler, kapak/görseller/kılavuz/video yeniden üretildi (wf-ilan)
