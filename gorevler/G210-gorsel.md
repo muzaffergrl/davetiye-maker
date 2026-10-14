@@ -2,7 +2,7 @@
 id: G210
 baslik: Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-F
 oncelik: 2
 bagimli: []
@@ -53,3 +53,4 @@ Tasarım 10'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-F; 5 W1 + 18 W2 + 5 fotoğraf, kit kontrolleri geçti; yeşil pencere istisnası ve hiza uyarısı Sonuç'ta.
 - 2026-10-14 açıklama: entegratörün ara notu uzak repoda henüz görseller yokken eklenmişti; üretim bu aynı sohbette tamamlandı, 28 görsel bu teslim commit'indedir.
 - 2026-10-14 devam doğrulandı: gpt-gorsel-F; önceki oturumun `7d1831d` teslimi korundu, eksik yok, kit_check 24/24 ve 5/5 geçti; inceleme.
+- 2026-10-14 entegratör onayladı

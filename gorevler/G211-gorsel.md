@@ -42,3 +42,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-E
 - 2026-10-14 not (entegratör): ajan sohbeti yarıda koptu, repoda dosya yok (kit_check 0/23, 0/5); devam ajanı rol rehberindeki 'Ara kayıt ve devam' kuralıyla sürdürür
+- 2026-10-14 not (entegratör): ikinci oturum da koptu; main'de W1 (5) + bg_page, bg_tile, envelope_closed, closure var. Kalan 13 parça + 5 fotoğraf oturum başına en çok 8 görselle sürdürülür
