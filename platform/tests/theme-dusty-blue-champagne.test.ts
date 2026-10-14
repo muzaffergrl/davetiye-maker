@@ -1,13 +1,17 @@
 // Theme platform/themes/dusty-blue-champagne (design 02 · Dusty Blue & Champagne, task G402) — docs/11_TEMA_STANDARDI.md
 // §13.2. Server-side rendering with the content record, photo slots, optional blocks, links, the theme files, the GPT image
 // build (img/manifest.json) and the site.js contract. Browser checks (widths, short phones, landscape, opening flow, stress
-// record, weight, video) live in scripts/theme-check.cjs --theme dusty-blue-champagne; G051 in tests/g051-browser.ts.
+// record, weight, video) live in scripts/theme-check.cjs --theme dusty-blue-champagne; G051 in tests/g051-browser.ts; the two
+// final-QA rules (RSVP card without a blank band, no hero text on the clusters) at the end of this file (Playwright, skipped
+// without it).
 
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
+import sharp from 'sharp';
 import type { ContentRecord } from '../lib/content/types.ts';
 import { validateContent } from '../lib/content/validate.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
@@ -1021,15 +1025,29 @@ test('G402 QA: every inner-page piece ends above the nav or starts below the fir
   assert.ok(rs.heads.includes('p.send') && rs.heads.includes('fieldset.choice'));
   // home: the invitation after the hero (its host line was hidden behind the nav)
   assert.deepEqual(units('home').heads, ['p.kicker', 'div.invite-card']);
-  // the algorithm: whole-px offsets (2 px spare), 12 px below the first screen, ≤ 28 px per gap, after every fit and on load
-  assert.match(js, /const v = sv\(\), limit = v - nav\.offsetHeight - 10, below = v \+ 12;/);
+  // the algorithm: whole-px offsets (2 px spare), just below the first screen (final QA: 12 → 2 px, less blank paper at a
+  // fold), ≤ 28 px per gap, after every fit (the RSVP card is sized first, the hero decor checked last) and on load
+  assert.match(js, /const v = sv\(\), limit = v - nav\.offsetHeight - 10, below = v \+ 2;/);
   assert.match(js, /const x = n \? Math\.min\(28, D \/ \(n \+ ctr\)\) : 0;/);
-  assert.match(js, /if \(inner && nav\) fold\(hero\);\n\s+\}\);\n\s+foldAll\(\);/);
+  assert.match(js, /if \(inner && nav\) fold\(hero\);\n\s+\}\);\n\s+foldAll\(\);\n\s+decor\(\);/);
+  // the card is measured unfolded (after foldAll clears the old margins: a resize from a folded size re-fits it)
+  assert.match(js, /us\.forEach\(\(u\) => u\.style\.removeProperty\('margin-top'\)\);\n\s+if \(!nav\) return;\n\s+fitCard\(\);/);
   assert.match(js, /addEventListener\('load', run\)/);
   // flow heights known before the images load (sprigs reserve their ratio)
   for (const sel of ['.sprig', '.card-sprig']) assert.match(rule(sel), /aspect-ratio: 300 \/ 65/, sel);
-  // the RSVP card + seal fit a tall phone's first screen; landscape: the head beside a smaller cluster
-  assert.match(css, /@media \(min-height: 740px\) \{ \.rsvp-top \.wrap \{ --cw: min\(100% - 48px, 420px, max\(296px, \(100svh - var\(--nav-h\) - var\(--rt\) - 26px\) \/ 2\.12\)\); \} \}/);
+  // the RSVP card + seal on the first screen (final QA: a 2.12 × width estimate left the signature 2–60 px short and folded
+  // it, 200–400 px of blank card): site.js fitCard measures the card and steps --cw (≥ 296 px), --sg (≥ .72: the gaps, "With
+  // love,", the names, the seal and its room), --rt (≥ 64 px), --cw (≥ 240 px); names ≥ 19 px (their "&" ≥ 11 px)
+  assert.doesNotMatch(css, /2\.12/);
+  assert.match(rule('.rsvp-top .wrap'), /--cw: min\(100% - 48px, 420px\); --sg: 1;[^}]*padding-bottom: calc\(var\(--cw\) \* \.23 \* var\(--sg\)\)/);
+  for (const sel of ['.rsvp-text .reply-by', '.rsvp-text .pill', '.card-sprig', '.rsvp-text .wait', '.rsvp-text .love']) assert.match(rule(sel), /margin-top: calc\([\d.]+cqw \* var\(--sg\)\)/, sel);
+  assert.match(rule('.rsvp-text .sign'), /font-size: max\(19px, 11cqw \* var\(--fit, 1\) \* var\(--sg\)\)/);
+  assert.match(rule('.card-seal'), /bottom: calc\(-21cqw \* var\(--sg\)\); width: calc\(42cqw \* var\(--sg\)\)/);
+  assert.match(js, /if \(cw > 296 \|\| \(k < \.73 && rt <= 64 && cw > 240\)\)[^\n]*\n\s+else if \(k > \.73\)[^\n]*--sg[^\n]*\n\s+else if \(rt > 64\)[^\n]*--rt[^\n]*\n\s+else \{ clear\(\); break; \}/);
+  // home → envelope page (no nav there): the old nav leaves at once, not fading over the envelope (theme-check G068 check)
+  assert.match(css, /::view-transition-old\(site-nav\):only-child \{ animation: none; opacity: 0; \}/);
+  // hero: a cluster never under the hero text (16 × 16 alpha map of each florals_* part), a float on the text hides
+  assert.match(js, /bg\.querySelectorAll\('\.corner'\)[\s\S]*?for \(let k = \.94, w = c\.offsetWidth; ts\.some\(\(t\) => under\(box\(c\), t, m\)\); k -= \.06\)/);
   const land = /@media \(min-aspect-ratio: 1\/1\) and \(max-height: 620px\) \{([\s\S]*?)\n\}/.exec(css)![1];
   assert.match(land, /\.page-head, \.details-top, \.rsvp-top \{ --tl: min\(30vw, 64svh\);[^}]*padding: calc\(14px \+ env\(safe-area-inset-top\)\) 16px 6px calc\(var\(--tl\) \* \.62/);
   // desktop RSVP: name | email and the two answers side by side (the form fits beside the card)
@@ -1040,4 +1058,140 @@ test('G402 QA: every inner-page piece ends above the nav or starts below the fir
   assert.match(css, /\.accent-layer\.in-host \{ position: absolute; z-index: 0; \}/);
   assert.match(css, /\.closing > h2, \.closing > p \{ width: fit-content; margin-inline: auto; \}/);
   assert.match(js, /if \(best < 120\) return null;/);
+});
+
+// ---------------------------------------------------------------- the two final-QA rules, measured in a browser
+// Playwright from the global install (docs/11 §13.3; never `playwright install`): the pages are rendered here with the engine
+// and served from the theme folder, so site.css + site.js (fitCard, foldAll, decor) run for real. Skipped when Playwright or
+// its browsers are not installed. Google Fonts load through the proxy when there is one (else the fallback fonts: the rules
+// must hold either way, site.js measures).
+type Opened = { p: any; close: () => Promise<void> };
+async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number) => Promise<Opened>) => Promise<void>) {
+  process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
+  process.env.PLAYWRIGHT_DISABLE_FORCED_CHROMIUM_PROXIED_LOOPBACK ||= '1';
+  const req = createRequire(import.meta.url);
+  let chromium: any = null;
+  for (const id of ['playwright', '/opt/node22/lib/node_modules/playwright']) {
+    try { chromium = req(id).chromium; break; } catch { /* next */ }
+  }
+  if (!chromium) return t.skip('playwright not installed');
+  const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
+  let browser: any;
+  try {
+    browser = await chromium.launch(proxy ? { proxy: { server: proxy, bypass: 'theme.test' } } : {});
+  } catch (e) {
+    return t.skip(`no browser: ${String(e).slice(0, 80)}`);
+  }
+  const types: Record<string, string> = { '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
+  try {
+    await fn(async (page, content, w, h) => {
+      const html = render(page, content).html;
+      const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
+      const p = await ctx.newPage();
+      await p.route('**/*', (route: any) => {
+        const u = new URL(route.request().url());
+        if (u.hostname === 'theme.test') {
+          const rel = u.pathname.startsWith(`/themes/${ID}/`) ? decodeURIComponent(u.pathname.slice(ID.length + 9)) : null;
+          if (rel && existsSync(path.join(DIR, rel))) return route.fulfill({ body: readFileSync(path.join(DIR, rel)), contentType: types[path.extname(rel)] ?? 'application/octet-stream' });
+          if (u.pathname === `/${SLUG}/${page}`) return route.fulfill({ body: html, contentType: 'text/html' });
+          return route.fulfill({ status: u.pathname === '/rsvp/form.js' ? 200 : 404, body: '', contentType: 'text/javascript' });
+        }
+        return /^fonts\.(googleapis|gstatic)\.com$/.test(u.hostname) ? route.continue() : route.abort();
+      });
+      await p.goto(`http://theme.test/${SLUG}/${page}`, { waitUntil: 'load' });
+      await p.evaluate(() => Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))]));
+      await p.waitForTimeout(400); // site.js runs again on fonts.ready and load
+      return { p, close: () => ctx.close() };
+    });
+  } finally {
+    await browser.close();
+  }
+}
+// in the page: the gap site.js put inside the RSVP card (inline margin-top over the CSS one, largest), where the card and the
+// seal end, the nav line, the names' size
+const RSVP_MEASURE = `(() => {
+  const r = (e) => e.getBoundingClientRect(), card = document.querySelector('.rsvp-card');
+  let gap = 0;
+  card.querySelectorAll('[data-fold]').forEach((u) => {
+    const inl = u.style.marginTop;
+    if (!inl) return;
+    const now = parseFloat(getComputedStyle(u).marginTop);
+    u.style.removeProperty('margin-top');
+    gap = Math.max(gap, now - parseFloat(getComputedStyle(u).marginTop));
+    u.style.marginTop = inl;
+  });
+  return { vh: innerHeight, nav: r(document.querySelector('.site-nav')).top, top: r(card).top, seal: r(card.querySelector('.card-seal')).bottom,
+    sign: parseFloat(getComputedStyle(card.querySelector('.sign')).fontSize), gap, sw: document.documentElement.scrollWidth };
+})()`;
+
+test('browser: the RSVP card + seal on the first screen, no blank band inside the card (final QA: 390×844 range +249 px)', async (t) => {
+  await withBrowser(t, async (open) => {
+    // final QA: "With love," + names + seal pushed below the first screen, 200–400 px of blank card: demo 1024×768 / 1280×800,
+    // design range 390×844, 430×932, 768×1024, 1024×768, 1280×800, 1440×900, 1920×1080
+    const cases: Array<[string, ContentRecord, number, number]> = [];
+    for (const [w, h] of [[390, 844], [412, 915], [430, 932], [768, 1024], [1024, 768], [1280, 650], [1280, 800], [1440, 900], [1920, 1080]]) cases.push(['range', rangeRecord(demo()), w, h]);
+    for (const [w, h] of [[360, 640], [1024, 768], [1280, 800], [1536, 753]]) cases.push(['demo', demo(), w, h]);
+    cases.push(['stress', stressRecord(demo()), 390, 844]);
+    for (const [name, rec, w, h] of cases) {
+      const { p, close } = await open('rsvp', rec, w, h);
+      const m = await p.evaluate(RSVP_MEASURE);
+      await close();
+      const at = `rsvp ${w}×${h} ${name}`;
+      assert.ok(m.gap <= 0.5, `${at}: ${Math.round(m.gap)} px inserted inside the card`);
+      assert.ok(m.seal <= m.nav - 8, `${at}: card + seal end above the nav line (${Math.round(m.seal)} > ${Math.round(m.nav - 8)})`);
+      assert.ok(m.sign >= 19, `${at}: names ${m.sign} px`);
+      assert.ok(m.sw <= w, `${at}: no sideways scroll`);
+    }
+    // where even 240 px + --sg .72 cannot fit (320×568, a phone on its side): full size, the fold inserts one gap ≤ 72 px
+    // (nav band 70 + 8 + 2 spare + 2 below − the natural gap; was 80 / 63) and the card starts on the first screen
+    for (const [w, h] of [[320, 568], [844, 390]]) {
+      const { p, close } = await open('rsvp', rangeRecord(demo()), w, h);
+      const m = await p.evaluate(RSVP_MEASURE);
+      await close();
+      assert.ok(m.gap > 0 && m.gap <= 72 && m.top < m.vh / 2, `rsvp ${w}×${h} range: fold ${Math.round(m.gap)} px, card top ${Math.round(m.top)}`);
+    }
+  });
+});
+
+test('browser: no home hero text on the painted clusters or floats (final QA: range 390×844 "Seconds" 62 % on florals_br)', async (t) => {
+  await withBrowser(t, async (open) => {
+    // decor shown vs hidden (.hero-bg: both clusters and the floats), countdown frozen; in every hero text box (names, date,
+    // venue, city, countdown digits + labels, the RSVP pill) ≤ 2 % of the pixels may change (anti-aliasing), target 0
+    const cases: Array<[string, ContentRecord, number, number]> = [];
+    for (const [w, h] of [[390, 844], [430, 932], [768, 1024], [667, 375], [1280, 650]]) cases.push(['range', rangeRecord(demo()), w, h]);
+    for (const [w, h] of [[320, 568], [390, 844]]) cases.push(['stress', stressRecord(demo()), w, h]);
+    cases.push(['demo', demo(), 390, 844]);
+    for (const [name, rec, w, h] of cases) {
+      const { p, close } = await open('home', rec, w, h);
+      const boxes: Array<{ k: string; x: number; y: number; r: number; b: number }> = await p.evaluate(() => {
+        for (let i = 1; i < 5000; i++) clearInterval(i);
+        const out: Array<{ k: string; x: number; y: number; r: number; b: number }> = [];
+        document.querySelectorAll('.hero-inner :is(.names, .hero-date, .hero-venue, .hero-city, .cd-num, .cd-lbl, .btn)').forEach((el) => {
+          const rg = document.createRange();
+          rg.selectNodeContents(el);
+          for (const q of el.matches('.btn') ? [el.getBoundingClientRect()] : [...rg.getClientRects()]) {
+            if (q.width < 2 || q.bottom <= 0 || q.top >= innerHeight) continue;
+            out.push({ k: `${el.className.split(' ')[0]} "${(el.textContent || '').trim().slice(0, 16)}"`, x: Math.max(0, Math.floor(q.left)), y: Math.max(0, Math.floor(q.top)), r: Math.min(innerWidth, Math.ceil(q.right)), b: Math.min(innerHeight, Math.ceil(q.bottom)) });
+          }
+        });
+        return out;
+      });
+      const shown = await p.screenshot();
+      await p.addStyleTag({ content: '.hero-bg { visibility: hidden !important; }' });
+      await p.waitForTimeout(100);
+      const hidden = await p.screenshot();
+      await close();
+      const A = await sharp(shown).removeAlpha().raw().toBuffer({ resolveWithObject: true }), B = await sharp(hidden).removeAlpha().raw().toBuffer();
+      assert.ok(boxes.length > 4, `home ${w}×${h} ${name}: hero text found`);
+      for (const bx of boxes) {
+        let n = 0, d = 0;
+        for (let y = bx.y; y < bx.b; y++) for (let x = bx.x; x < bx.r; x++) {
+          const i = (y * A.info.width + x) * 3;
+          n++;
+          if (Math.hypot(A.data[i] - B[i], A.data[i + 1] - B[i + 1], A.data[i + 2] - B[i + 2]) > 40) d++;
+        }
+        assert.ok(!n || d / n <= 0.02, `home ${w}×${h} ${name}: ${bx.k} ${(100 * d / n).toFixed(1)} % on decor`);
+      }
+    }
+  });
 });
