@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 36 · alindi 10 · inceleme 4 · blokaj 277 · bitti 61 · toplam 388
+Özet: hazir 33 · alindi 13 · inceleme 4 · blokaj 277 · bitti 61 · toplam 388
 
 ## claude-canva
 
@@ -157,12 +157,10 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-kod
 
-**Alınabilir (10)**
+**Alınabilir (8)**
 
 - `G068` p1 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla) → `gorevler/G068-duzenlenebilir-metinler.md`
-- `G069` p1 — RSVP yanıtları çift için düzenli ve şık — özetler, soru cevap dökümü, yeni yanıt işareti, misafir isimleri, yazdırılabilir liste → `gorevler/G069-rsvp-paneli-v2.md`
 - `G075` p1 — Düğün sonrası teşekkür modu — site düğünden sonra "Thank you" hâline geçer (otomatik, çift kapatabilir) → `gorevler/G075-tesekkur-modu.md`
-- `G076` p1 — İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar → `gorevler/G076-site-sifresi.md`
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
@@ -170,10 +168,12 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `G409` p3 — Tasarım 09 Lavender Provence — platform teması → `gorevler/G409-website-kaynak.md`
 - `G410` p3 — Tasarım 10 Tuscan Vineyard — platform teması → `gorevler/G410-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (86)**
+**Üzerinde çalışılan / incelemede / blokaj (88)**
 
 - `G064` inceleme · wf-g064 — Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
 - `G067` alindi · claude-ilan2 — İlan görselleri v2 — kısım 1 (01, 03): GM03 düzeni + GPT sahneleri + gerçek misafir ekranları (kapak, sayfalar, nasıl çalışır, canlı demo)
+- `G069` alindi · claude-G069 — RSVP yanıtları çift için düzenli ve şık — özetler, soru cevap dökümü, yeni yanıt işareti, misafir isimleri, yazdırılabilir liste
+- `G076` alindi · claude-G076 — İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
@@ -326,7 +326,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (15)**
+**Alınabilir (14)**
 
 - `G214` p2 — Tasarım 14 Ivory Lace & Pearls — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G214-gorsel.md`
 - `G215` p2 — Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G215-gorsel.md`
@@ -335,7 +335,6 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G218-gorsel.md`
 - `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
-- `G813` p2 — Tasarım 13 Enchanted Forest Storybook — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G813-mockup.md`
 - `G814` p2 — Tasarım 14 Ivory Lace & Pearls — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G814-mockup.md`
 - `G815` p2 — Tasarım 15 Cherry Blossom Spring — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G815-mockup.md`
 - `G816` p2 — Tasarım 16 Sunflower Rustic Barn — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G816-mockup.md`
@@ -344,7 +343,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G819` p2 — Tasarım 19 Midnight Garden — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G819-mockup.md`
 - `G820` p2 — Tasarım 20 Coastal Seaside — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (36)**
+**Üzerinde çalışılan / incelemede / blokaj (37)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
@@ -357,6 +356,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G213` alindi · gpt-gorsel-C — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G811` alindi · gpt-gorsel-A — Tasarım 11 Boho Pampas Terracotta — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 - `G812` alindi · gpt-gorsel-B — Tasarım 12 Tropical Destination — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
+- `G813` alindi · gpt-marka — Tasarım 13 Enchanted Forest Storybook — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
 - `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
 - `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
