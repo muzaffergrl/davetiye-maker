@@ -2,7 +2,7 @@
 id: G075
 baslik: Düğün sonrası teşekkür modu — site düğünden sonra "Thank you" hâline geçer (otomatik, çift kapatabilir)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G075
 oncelik: 1
 bagimli: [G060]
@@ -104,3 +104,4 @@ Commit'ler: d84ab05 (çekirdek + temalar), f783447 (panel + testler + theme-chec
 - 2026-10-14 alindi: claude-G075
 - 2026-10-14 claude-G075: şema + kural + motor + RSVP 403 + 01/03 teşekkür hâli + panel "After the wedding"/Home kartı; npm test 520/520, g075-browser 61/61, diğer tarayıcı takımları yeşil; Sonuç yazıldı
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
