@@ -27,7 +27,7 @@
 </head>
 <body class="page-home" data-pending="This link will be added soon.">
 
-<div class="page-bg" aria-hidden="true"><img src="img/paper-400.webp" alt="" fetchpriority="high"></div>
+<div class="page-bg" aria-hidden="true"><picture><source media="(min-width: 700px), (min-aspect-ratio: 1/1)" srcset="img/paper_wide-755.webp"><img src="img/paper-400.webp" alt="" fetchpriority="high"></picture></div>
 
 <main class="site-main">
 
@@ -45,14 +45,14 @@
     <div class="hero-inner">
       <div class="card hero-card" data-step="card" data-a="rise-lg">
         <div class="photo-slot mask-card" data-slot="hero_portrait">
-          <img data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(36vw, 26svh, 220px)" alt="" data-attr-alt="Photo of {name_display}">
+          <img data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="(min-width: 1024px) 284px, min(35vw, 25svh, 209px)" alt="" data-attr-alt="Photo of {name_display}">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
-        <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-638.webp 638w" sizes="min(43vw, 31svh, 265px)" alt="">
+        <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-638.webp 638w" sizes="(min-width: 1024px) 340px, min(42vw, 30svh, 250px)" alt="">
         <div class="card-copy">
           <p class="script">We're getting married</p>
           <p class="kicker c-date" data-field="date"></p>
-          <p class="kicker c-city" data-if="venue.city" data-field="venue.city"></p>
+          <p class="kicker c-city" data-if="venue.city_region" data-field="venue.city_region"></p>
         </div>
       </div>
       <h1 class="script names" data-step="names" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
@@ -77,12 +77,14 @@
     </div>
   </section>
 
-  <!-- THE INVITATION (no W1 screen — this design's invitation_card: the names sit in the plain paper between its rose
-       corners; the wording (host line, request, date, time, venue) continues below the card, set on the page) -->
+  <!-- THE INVITATION (no W1 screen — a stationery suite of this design's parts): the host line, the floral invitation_card
+       with the names in the plain paper between its rose corners, and tucked under it the wording on the plain info_card
+       (3-slice: the paper grows with the text; its top sprig lies under the floral card) — request, date, time, venue -->
   <section class="section invite-sec" id="invitation" data-scene="home-invite" aria-label="Invitation">
     <div class="wrap invite-wrap">
+      <p class="kicker host" data-step="host" data-a="fade" data-field="host_line" data-if="host_line"></p>
       <div class="invite-card" data-step="card" data-a="rise-lg">
-        <img class="invite-img" src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-960.webp 960w" sizes="min(calc(100vw - 28px), 470px)" alt="" loading="lazy">
+        <img class="invite-img" src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-960.webp 960w" sizes="min(calc(100vw - 18px), 480px)" alt="" loading="lazy">
         <div class="invite-text">
           <!-- full name when given, else the first name (full_name may be null: never an empty name line) -->
           <p class="script nm" data-step="name1" data-a="write" data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
@@ -92,22 +94,24 @@
           <p class="script nm" data-step="name2" data-a="write" data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
         </div>
       </div>
-      <div class="invite-words">
-        <p class="kicker host" data-step="host" data-a="fade" data-field="host_line" data-if="host_line"></p>
-        <p class="request" data-step="request" data-a="fade">request the pleasure of your company<br> at the celebration of their marriage</p>
-        <div class="dateline" data-step="date" data-a="rise">
-          <p class="kicker wd" data-field="date" data-format="weekday"></p>
-          <p class="dmy"><span class="mon" data-field="date" data-format="month"></span><span class="day" data-field="date" data-format="day"></span><span class="yr" data-field="date" data-format="year"></span></p>
-          <p class="kicker at" data-if="ceremony_time">at <span data-field="ceremony_time"></span></p>
+      <div class="paper info words" data-step="words" data-a="rise-lg">
+        <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-787.webp 787w" sizes="min(calc(90vw - 16px), 432px)" alt="" loading="lazy">
+        <div class="paper-text">
+          <p class="request" data-step="request" data-a="fade">request the pleasure of your company<br> at the celebration of their marriage</p>
+          <div class="dateline" data-step="date" data-a="rise">
+            <p class="kicker wd" data-field="date" data-format="weekday"></p>
+            <p class="dmy"><span class="mon" data-field="date" data-format="month"></span><span class="day" data-field="date" data-format="day"></span><span class="yr" data-field="date" data-format="year"></span></p>
+            <p class="kicker at" data-if="ceremony_time">at <span data-field="ceremony_time"></span></p>
+          </div>
+          <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="min(40vw, 190px)" alt="" loading="lazy">
+          <p class="venue" data-step="venue" data-a="fade" data-field="venue.name"></p>
+          <p class="city" data-step="venue" data-a="fade" data-field="venue.city_region"></p>
         </div>
-        <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
-        <p class="venue" data-step="venue" data-a="fade" data-field="venue.name"></p>
-        <p class="city" data-step="venue" data-a="fade" data-field="venue.city_region"></p>
-        <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
-        <div class="cal" data-step="cal" data-a="rise">
-          <p class="kicker">Add to your calendar</p>
-          <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
-        </div>
+      </div>
+      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+      <div class="cal" data-scene="home-cal">
+        <p class="kicker" data-step="cal" data-a="rise">Add to your calendar</p>
+        <p class="cal-links" data-step="cal" data-a="rise" data-i="1"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
       </div>
     </div>
   </section>

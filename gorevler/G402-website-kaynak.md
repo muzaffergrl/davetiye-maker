@@ -35,60 +35,98 @@ Tasarım 02'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [ ] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-**Yapıldı (2026-10-14, wf-tema02).** `platform/themes/dusty-blue-champagne/` (theme.json, content.demo.json = koleksiyon kaydı
-birebir, 5 sayfa, site.css 45 792 B (≤ 45 KiB), site.js 35 558 B (≤ 35 KiB), build_images.py, README.md, img/ 52 dosya; klasör 1,92 MB),
-`platform/tests/theme-dusty-blue-champagne.test.ts` (§13.2'nin 23 maddesi + zarf, VT, story, home, qa dersleri, tasarım aralığı:
-29 test), `platform/previews/g402/`. Ayrıntı ve ölçümler tema `README.md`'sinde.
+**Yapıldı (2026-10-14, wf-tema02; inceleme düzeltmeleri aynı gün).** `platform/themes/dusty-blue-champagne/` (theme.json,
+content.demo.json = koleksiyon kaydı birebir, 5 sayfa, site.css 44 781 B ve site.js 34 912 B — ikisi de 1 KB = 1000 B okumasıyla
+da bütçenin altında —, build_images.py, README.md, img/ 50 dosya; klasör 1,80 MB), `platform/tests/theme-dusty-blue-champagne.test.ts`
+(§13.2'nin 23 maddesi + zarf, VT, story, home, qa dersleri, tasarım aralığı, inceleme düzeltmeleri: 30 test), `platform/previews/g402/`.
+Ayrıntı ve ölçümler tema `README.md`'sinde.
 
 - **Açılış:** dokununca tozlu mavi mum mühür kopup (0 ms) dönerek ekranın altından düşer, V kapak yukarı açılır, altın damask
   astar görünür, kart ön cebin arkasından yükselir; bu sırada tek okaliptüs yaprağı kartın yanından süzülür (accent_1 × 1,
-  `fall`, fotoğrafın üstünden geçmez), kart öne gelir ve view transition ile home hero kartına uçar (dokun → home 4,2 s; ölçülen
-  4,4–4,9 s; Skip her an). Mühür kapaktan ayrı katman (`carried_by_flap: false`), yeri V ucuna bağlı, boyu W1.1 comp'tan
-  (`compare_closure.jpg`).
+  `fall`; her açılışta tam bir yaprak, fotoğrafın üstünden geçmez), kart belirgin biçimde öne gelir (%3,5 yukarı, × 1,09, büyüyen
+  gölge) ve hâlâ hareket ederken view transition ile home hero kartına uçar (dokun → home **3,9 s**, theme-check 3 898 ms; Skip her
+  an). Mühür kapaktan ayrı katman (`carried_by_flap: false`), yeri V ucuna bağlı, boyu W1.1 comp'tan (`compare_closure.jpg`).
 - **Story:** üç anlık baskı sırayla (her biri kendi sahnesi) yandan/alttan uçup hafif taşmayla −4,5° / +4° / −2,5° oturur,
-  başlıklar baskının alt kenar boşluğuna yazılır; baskılar yalnız beyaz kenarlarından biner. Telefonda basamaklı sütun (pencere
-  50vw ≥ 38vw), ≥ 760 px'te comp dizilişi.
-- **GPT kusurları build'de temizlendi (çizim yok):** geniş yarı saydam hâle/sis (zarf ~90 px, kartlar ~140 px), suluboya
-  kümelerde renk saçağı, divider'da turuncu/yeşil ışıma, pencere çevresinde ayrıştırma saçağı, WebP kenar saçağı; görünür yeşil
-  0 px. bg_tile dikişsiz değildi (640 px'te 1 px ek izi) → yarım kaydırma harmanı. Telefon zemini bg_page'in çiçeksiz bandı +
-  kümeler ayrı katman. Kapak kesimi altın kenarın **altından** (tema_build.kapak_kes altın çizginin üstünden kesiyordu), ön cep
-  alttan tarama (cep_kes yan kanatlarda astar şeridi bırakıyordu), açık katmanlar menteşeye × 0,959. Yer tutucular leke yok
-  (en koyu 196–224 ≥ 175). `build_images.py` yeniden koşturuldu: img/ bayt bayt aynı.
-- **Comp sapmaları (README'de harita):** geri sayım kutuları yok (K21, sade rakam); story telefonda basamaklı (≥ 38vw); hero
-  kartında tarih ve şehir iki satır; details'te standart gün · tarih başlığı kartın içinde; home'daki davet kartı, bölümler ve
-  kapanış comp'suz bölümler (bu tasarımın parçaları); story'de baskılar arasındaki küçük çiçek kümeleri yok (ayrı parça yok).
-- **qa dersleri:** ilk ekran kuralı 3 kayıt (demo, tasarım aralığı, §12 stres) × 10 boyutta (320×568, 360×640, 375×553, 375×667,
-  390×844, 568×320, 667×375, 740×360, 844×390, 932×430) ölçüldü — nav'ın altında yarım parça yok, isimler ≥ 36 px (home ve
-  zarf), zarf + "Tap to open" ekranda (uzun isimde zarf küçülür, `fitEnv`); kısa yatay düzen; kümeler düz çizgiyle kesilmiyor;
-  tap highlight saydam; metin ≥ 11 px (tabanlar yukarı yuvarlanır); parçacıklar fotoğraf/yüz üstüne düşmez; açılıştan sonra
-  bekleme yok (`arriveDelay` 0); yana kaydırma yok; MP4 ilk karesi beyaz değil (ortalama 202,206,209); kontrast ölçüldü (küçük
-  metin en düşük 4,60, büyük 4,38, nav 7,95; mühürdeki monogram süs, 3,6, `aria-hidden`); dar ekranda "Saturday ·" asılı nokta
-  yok; nav G064 dersiyle satırın altında opak, zarf → home geçişinde ilk karede tam.
+  başlıklar baskının alt kenar boşluğuna yazılır; 2. baskının çerçevesi aynalı (dalı sağ üstte), önceki baskı sonrakinin üstünde.
+  Telefonda basamaklı sütun (pencere 50vw ≥ 38vw), ≥ 760 px'te comp dizilişi.
 
-**Komutlar** (origin/main iki kez birleştirildi; son hâlde yeniden koşuldu): `npm ci` · `npm test` 458/458 ·
-`npm run typecheck` temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme dusty-blue-champagne
---stress` **115 geçti / 0 uyarı / 3 hata** — üçü **yanlış alarm**: "content change" yamasının yeni 2. ismi "Theo" = bu demonun
-2. ismi → "old content still visible ("Theo")". Aynı değişiklik "Maren & Jonah" ile ayrı tohumlanmış sitede elle denendi: beş
-sayfada eski demo sözcüğü yok. (Ara koşuda G060 hakları adımı `IdentityMismatchError` ile düşürüyordu; G064 birleştirmesiyle
-denetim kimlik değişikliğini onaylıyor.) Yeni G064 denetimi "nav zarf → home geçişinde ilk karede tam" geçti · `g051-browser
---theme` 44/44 · `final-smoke --theme` 45/45 · `kit_check --paket 5` 23/23, `--paket 2` 5/5, hiza tamam (sol −0,20 · sağ
-+0,29 · alt +0,07 %) · `test_tema_build --hizli`, `test_kit_check`, `test_parts_prep` tamam. İlk görünüm (390×844, DPR 3):
-index 916 KB / home 1010 KB yer tutucuyla, 977 / 1145 KB örnek fotoğraflarla (≤ 1,5 MB); dokun → home 4,4–4,9 s (`go` 4,2 s +
-sayfa geçişi). Önizlemeler `previews/g402/` (compare_<sayfa>_390, compare_closure, cuts_envelope, kısa/yatay/aralık/stres,
-opening_390x844.mp4, checks.json, final/).
+**G402 incelemesi (17 bulgu) — yapılanlar:**
+1. **Hero kümesi düz çizgiyle kesiliyordu (yüksek, iki bulgu):** `.hero-bg` artık yalnız yanlarda kırpar (`overflow-x: clip`), alt
+   küme kendi alfasıyla nav bandının 8 px üstünde biter (`bottom: 24px`, maske yok); 1280'de de kesik yok. Sayfa sonu kümeleri
+   de bandın 8 px üstünde biter (`--navpad` + 24 px). Kısa telefon/yatayda küme küçülür, sayaç/ipucu yazısına binmez.
+   Platformun önizleme çubuğu hero'dan düşülür (`--bar`). **theme-check'e ölçüm eklendi** (`theme_check.clusters`, yalnız bu
+   kümeyi bildiren temalarda): kırpan ata yalnız ekran/sayfa kenarında olabilir; ilk ekranda ve sayfa sonunda nav bandının altına
+   giren küme hata. README ve bu Sonuç'taki eski "kesilmiyor" iddiası yanlıştı; düzeltildi.
+2. **Nav bandı kümeyi biçiyordu:** yukarıdaki (a) seçeneği: küme bandın 8 px üstünde (ilk ekran ve sayfa sonu).
+3. **Hero hiyerarşisi (01'e benziyordu):** W1.2 oranları — kart `min(42vw, 30svh, 250px)` (390'da 164 px, −2,5° eğik), isimler
+   390'da 64 px, kart–isim arası hava; ≥ 1024 px iki sütun (kart solda 240–340 px, isimler 1280'de 88 px). İlk ekran kuralı
+   3 kayıt × 13 boyutta yeniden ölçüldü: yarım parça yok, isimler ≥ 36 px.
+4. **Açılış sonu bekleme:** `forward` okunur (%3,5 yukarı, × 1,09), `rise` 140 ms erken, `go` 4 200 → 3 650 ms (forward başlangıcı +
+   550 ms, kart hareket ederken); dokun → home 4,4–4,9 s → 3,9 s.
+5. **Zemin:** geniş/yatay ekranda `paper_wide-755` (bg_page'in en geniş çiçeksiz bandı; 1280'de × 1,7) %60 + dikişsiz `bg_tile`
+   kendi ölçüsünde (q 85). `bg_page-*` ve `mist-640` artık üretilmiyor (test: img/ içindeki her görsel bir sayfa/CSS/JS'te
+   kullanılıyor). **Kısmen:** "≥ 800 px kâğıt" — kaynakta 755 px'ten geniş çiçeksiz bant yok; büyütmek ayrıntı eklemezdi.
+6. **Yatay telefon açılışı:** kapalı zarf dikeyde ortalı; dokununca isimler solarken sahne ortaya ve kart sığacak kadar aşağı
+   kayar; kartın üstü ≥ 12 px (ölçüm 844×390: 15 px). Genel kural: yükselen kart her boyutta ekranın üstüne ≥ 12 px uzak (sahne
+   gerekirse aşağı kayar; 7 boyut × 2 kayıtta ≥ 13 px). theme-check'in "kapalı zarf ekranda" denetimi artık manifest'teki
+   `stage.closed_obj.box_pct` kutusunu ölçer (sahnenin boş kart odası değil; kutu yoksa eskisi gibi `.stage`).
+7. **Eğrelti tonu:** `florals_br` H 25–45° doygunluk × 0,74, parlaklık × 1,04 (0,61 → 0,48; `florals_tl` × 0,86 → 0,525);
+   `manifest.cleanup.florals_*.fern_grade`. Renk düzeltmesi, çizim değil.
+8. **Zarfın altında 1 px kart şeridi:** `card-slot` kırpması altta %1,2.
+9. **Story dalı başlığa biniyordu:** 2. baskının çerçevesi aynalı (yalnız görsel; pencere/maske/foto/başlık ona göre), bindirme
+   −9vw → −6vw, önceki baskı üstte.
+10. **Davet kartı isim levhası gibiydi:** **önerilen yol uygulanmadı** — davet kartının %39–60 bandının sol kenarında yaprak ve
+    altın eğrelti var (%62'ye kadar), sağdaki eğrelti %55'te başlıyor; germek GPT yapraklarını sündürürdü. Yerine **davet seti**:
+    ev sahibi satırı başlık → çiçekli kart (isimler, "&" ~0,8 ×) → altına sıkıştırılmış düz `info_card` (3 dilim) üstünde davet
+    cümlesi, tarih bloğu, saat, dal, mekân. Metin artık kâğıtta.
+11. (1 ile aynı.)
+12. **Yaprak bazen hiç çıkmıyordu:** şerit seçimi geniş tarafı alır, boy (≥ 28 px) ve salınım şeride sığacak kadar küçülür;
+    ölçüm 320/360/390/430/844×390'da 12/12 açılışta 1 yaprak, hiçbir karede foto penceresinde değil.
+13. **60 karakterlik başlık dalın altında kalıyordu:** 9'daki düzen; 58–60 karakterlik iki satırlık başlıklarla 320/360/390/430/
+    768/1280'de başlık bölgesi öteki baskılar gizlenip karşılaştırıldı: %0 örtülme.
+14. **RSVP kapanışında asılı "·":** `.dot` span (bütün sayfalarda çıplak "·" yok; test).
+15. **Süreç:** theme-check "content change" yaması artık "Maren & Jonah" (hiçbir demoda yok) → yanlış alarm yok; latin-ext
+    doğrulandı (Google Fonts CSS'inde iki aile için de `latin-ext` bloğu). **qa-kontrol incelemesi yine yapılamadı:** bu
+    oturumda da alt-ajan aracı yok; `compare_*_390.jpg` ve README haritası yalnız kendi gözümle karşılaştırıldı — §13.4 kapısı
+    açık, entegratörün qa-kontrol koşturması gerekiyor.
+16. **`venue.city`:** kart kopyası artık docs/11 §3.2'deki `venue.city_region` ("Charleston, South Carolina", dengeli iki satır;
+    sığmazsa `fitCopy` düşürür).
+17. **Boyut:** yorumlar kısaltıldı, yinelenen kurallar birleşti, renkler hex; site.css 44 781 B, site.js 34 912 B; test sınırı
+    45 000 / 35 000 B.
 
-**Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `overflow: clip`, VT), Vercel yayını, gerçek alıcı
-fotoğrafları, yavaş ağ. **qa-kontrol incelemesi yapılmadı:** bu oturumda alt-ajan aracı yoktu; `compare_*` görselleri ve README
-haritası yalnız kendi gözümle karşılaştırıldı — §13.4 kapısı inceleme aşamasında qa-kontrol'e bırakıldı.
+**Comp sapmaları (README'de harita):** geri sayım kutuları yok (K21, sade rakam); story telefonda basamaklı (≥ 38vw); hero kartında
+tarih ve şehir ayrı satırlar (`city_region`); ≥ 1024 px iki sütunlu hero (masaüstü comp yok); details'te standart gün · tarih başlığı
+kartın içinde; home'daki davet seti, bölümler ve kapanış comp'suz bölümler (bu tasarımın parçaları); story'de baskılar arasındaki
+küçük çiçek kümeleri yok (ayrı parça yok).
 
-**Sorunlu GPT parçaları → önerilen prompt eki (`tools/katalog.py` WEB[02] / ortak metin):** (1) bütün şeffaf parçalar:
-"crisp alpha edge; no glow, haze, soft shadow or coloured fringe outside the object; fully transparent beyond 2 px of the
-edge"; (2) pencereler: "window exactly #00FF00 with a hard edge, no anti-aliased coloured ring"; (3) envelope_open: "the open
-flap's fold line on exactly the same row as the closed envelope's top edge" (GPT ~23 px yukarıda çizdi); (4) bg_tile:
-"seamless: left/right and top/bottom edges continue each other". **Önerilen görev:** theme-check "content change" yamasında demolarda olmayan
-isim (ör. "Jonah") ve kalan bütün eski sözcüklerin raporu — G402'nin 3 yanlış alarmı.
+**Komutlar** (son hâlde; origin/main birleştirildikten sonra yeniden koşuldu): `npm ci` · `npm test` 478/478 · `npm run typecheck`
+temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme dusty-blue-champagne --stress` **116 geçti / 0 uyarı
+/ 0 hata** · `g051-browser --theme` 44/44 · `final-smoke --theme` 45/45 · `kit_check --paket 5` 23/23, `--paket 2` 5/5, hiza
+tamam (sol −0,20 · sağ +0,29 · alt +0,07 %) · `test_tema_build --hizli`, `test_kit_check`, `test_parts_prep` tamam ·
+`build_images.py --out <geçici>` img/ ile bayt bayt aynı. İlk görünüm (390×844, DPR 3): index 917 KB / home 1012 KB yer
+tutucuyla, 979 / 1147 KB örnek fotoğraflarla (≤ 1,5 MB). Kontrast (yeniden): küçük metin en düşük 4,69, büyük 4,41. Önizlemeler
+`previews/g402/` (compare_<sayfa>_390, compare_closure, cuts_envelope, kısa/yatay/aralık/stres, opening_390x844.mp4, checks.json,
+final/).
+
+**Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `overflow-x: clip`, `translate`, VT), Vercel yayını, gerçek
+alıcı fotoğrafları, yavaş ağ (`go` 3,65 s'de başlar; yavaş ağda home daha geç gelir), qa-kontrol alt-ajanı (yukarıda).
+
+**Sorunlu GPT parçaları → önerilen prompt eki (`tools/katalog.py` WEB[02] / ortak metin; görsel bu görevde üretilmedi):**
+(1) bütün şeffaf parçalar: "crisp alpha edge; no glow, haze, soft shadow or coloured fringe outside the object; fully transparent
+beyond 2 px of the edge"; (2) pencereler: "window exactly #00FF00 with a hard edge, no anti-aliased coloured ring"; (3)
+envelope_open: "the open flap's fold line on exactly the same row as the closed envelope's top edge" (GPT ~23 px yukarıda çizdi);
+(4) bg_tile: "seamless: left/right and top/bottom edges continue each other"; (5) florals_br: "champagne gold fern, low
+saturation, the same tone as florals_tl". **Önerilen GPT işi (kullanıcı "gerekirse GPT'ye yaptıralım" dedi; entegratör açar):**
+(a) `invitation_card_tall.png` — aynı çiçekli kart, köşe kümeleri yalnız sol üst ve sağ altta, ortada **tam genişlikte, dekorsuz
+uzun kâğıt bandı** (kartın %40'ı): davet metni tek kartta, 3 dilimle uzayabilir; (b) `bg_page_wide.png` 1536 × 1024 çiçeksiz bokeh
+kâğıt (masaüstü zemini için ≥ 1200 px temiz alan); (c) story için dalı farklı köşede/biçimde 2 çerçeve varyantı (comp'taki gibi).
 
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: wf-tema02
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 inceleme düzeltmeleri (17 bulgu; wf): hero/sayfa sonu kümeleri düz çizgiyle ve nav bandıyla kesilmiyor, W1.2 hero
+  oranları + ≥ 1024 iki sütun, okunur forward + go 3,65 s (dokun → home 3,9 s), yatay açılış ortalı, deterministik yaprak, aynalı
+  story baskısı, davet seti (info_card), geniş ekran kâğıdı + bg_tile, eğrelti tonu, card-slot kırpması, `.dot`, `city_region`,
+  boyut payı; ortak `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts` (inceleme istedi): "Jonah" yaması, `theme_check.clusters`
+  kesik küme ölçümü, kapalı zarf ölçümü `stage.closed_obj`'a göre. theme-check 116/0/0. qa-kontrol alt-ajanı yine koşturulamadı.

@@ -31,6 +31,8 @@
 //     painted card itself (pixel test: everything but the card image hidden, the paint under each line box compared with
 //     the paper at the card's centre); a line outside the measured box is an error
 //   4b no text cut off by an ancestor that clips (overflow / clip-path)
+//   4c (theme_check.clusters) no decor cluster shortened by a clipping ancestor except at the screen's / page's edge, none
+//     running under the nav band on the first screen or at the page end
 //   5 photo slots: user photos on the demo site, placeholders on the no-photos site ("Your photo here" only in a preview);
 //     every theme.json slot is on some page
 //   6 the Google Fonts families of the page's <link> loaded (warning otherwise)
@@ -47,7 +49,8 @@
 //   screen); screenshots stress_<page>_<w>.png. Required for G4NN (docs/11 §13.1).
 // Short phones (360×640, 375×553, 390×690, 390×844): the envelope texts (h1 + p outside the .stage; "Replay" when
 //   opened) sit on the plain painted ground, not on painted decor (measured on the backdrop with the text hidden);
-//   no horizontal scroll closed or opened; the closed envelope (.stage) and its "Tap to open" hint on screen.
+//   no horizontal scroll closed or opened; the closed envelope (img/manifest.json stage.closed_obj.box_pct of the .stage,
+//   else the .stage) and its "Tap to open" hint on screen.
 //   Home at 360×640 / 375×553 (every theme, qa-kontrol 2026-10-14): the first scene's texts, links / buttons (the primary
 //   CTA), photo slots and card end above the site nav and none lies under it (decor may pass under the nav's ground); its
 //   h1 (names) ≥ theme_check.first_screen.names_min_px (default 32) and pageChecks at that size. A theme with
@@ -279,11 +282,15 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     return out;
   }
 
-  /** docs/11 §13.3: horizontal scroll, the closed envelope (.stage) and its "Tap to open" hint on screen. */
-  const envelopeFit = (page) => page.evaluate((REPLAY) => {
+  /** docs/11 §13.3: horizontal scroll, the closed envelope (closed object of the .stage) and its "Tap to open" hint on screen. */
+  // the closed object: img/manifest.json stage.closed_obj.box_pct inside the .stage box when the build wrote it (the
+  // stage's empty card room above it may pass the screen's top edge, e.g. 02 on its side, G402), else the whole .stage
+  const CLOSED_BOX = env.images?.stage?.closed_obj?.box_pct ?? null;
+  const envelopeFit = (page) => page.evaluate(({ REPLAY, CLOSED_BOX }) => {
     const vis = (el) => { const cs = getComputedStyle(el); const b = el.getBoundingClientRect(); return b.width > 0 && cs.display !== 'none' && cs.visibility !== 'hidden' ? b : null; };
     const stage = document.querySelector('.stage');
-    const sb = stage && vis(stage);
+    const st = stage && vis(stage);
+    const sb = st && CLOSED_BOX ? { top: st.top + st.height * CLOSED_BOX[1] / 100, bottom: st.top + st.height * (CLOSED_BOX[1] + CLOSED_BOX[3]) / 100 } : st;
     const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el));
     const hb = hint && hint.getBoundingClientRect();
     // effective opacity (a running CSS animation can keep a hint visible that the opened state means to hide)
@@ -291,7 +298,44 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     return { hscroll: document.documentElement.scrollWidth - innerWidth, stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
       hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null, hintShown: Boolean(hint && alpha(hint) > 0.05),
       replay: [...document.querySelectorAll(REPLAY)].map(vis).filter(Boolean).every((b) => b.top >= 0 && b.bottom <= innerHeight + 1) };
-  }, PROFILE.envelopeText.opened);
+  }, { REPLAY: PROFILE.envelopeText.opened, CLOSED_BOX });
+
+  // decor clusters (theme_check.clusters, G402 review): never shortened by a clipping ancestor except at the screen's or the
+  // page's own edge, never running under the fixed nav band — on the first screen and at the page end
+  async function clusterCuts(page) {
+    const out = [];
+    for (const at of ['top', 'end']) {
+      out.push(...await page.evaluate(({ SEL, at }) => {
+        window.scrollTo({ top: at === 'top' ? 0 : document.documentElement.scrollHeight, behavior: 'instant' });
+        const found = [], H = innerHeight, W = innerWidth, docH = document.documentElement.scrollHeight;
+        const nav = document.querySelector('.site-nav');
+        const nb = nav && getComputedStyle(nav).display !== 'none' ? nav.getBoundingClientRect() : null;
+        const tag = (a) => `${a.tagName.toLowerCase()}.${String(a.className).split(' ')[0]}`;
+        for (const img of document.querySelectorAll(SEL)) {
+          // the resting place, not an entrance still on its way (data-step transforms)
+          const keep = [img.style.transition, img.style.transform];
+          if (img.hasAttribute('data-step')) { img.style.transition = 'none'; img.style.transform = 'none'; }
+          const b = img.getBoundingClientRect();
+          [img.style.transition, img.style.transform] = keep;
+          if (!b.width || getComputedStyle(img).visibility === 'hidden') continue;
+          const name = `${String(img.className).trim().replace(/\s+/g, '.')} [${Math.round(b.top + scrollY)}..${Math.round(b.bottom + scrollY)}]`;
+          if (at === 'top') {
+            for (let a = img.parentElement; a && a !== document.documentElement; a = a.parentElement) {
+              const cs = getComputedStyle(a), ab = a.getBoundingClientRect(), fixed = cs.position === 'fixed';
+              const xc = cs.overflowX !== 'visible' || cs.clipPath !== 'none', yc = cs.overflowY !== 'visible' || cs.clipPath !== 'none';
+              const topEdge = fixed ? ab.top <= 0.5 : ab.top + scrollY <= 0.5, botEdge = fixed ? ab.bottom >= H - 0.5 : ab.bottom + scrollY >= docH - 0.5;
+              if (yc && ((b.bottom > ab.bottom + 0.5 && !botEdge) || (b.top < ab.top - 0.5 && !topEdge))) found.push(`${name} cut by ${tag(a)} at ${Math.round((b.bottom > ab.bottom ? ab.bottom : ab.top) + scrollY)}`);
+              if (xc && ((b.left < ab.left - 0.5 && ab.left > 0.5) || (b.right > ab.right + 0.5 && ab.right < W - 0.5))) found.push(`${name} cut at the side by ${tag(a)}`);
+            }
+          }
+          if (nb && b.top < nb.top && b.bottom > nb.top + 0.5 && b.top < H) found.push(`${name} runs under the nav band (${at === 'top' ? 'first screen' : 'page end'}: band top ${Math.round(nb.top)}, cluster bottom ${Math.round(b.bottom)})`);
+        }
+        return found;
+      }, { SEL: PROFILE.clusters, at }));
+    }
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    return [...new Set(out)];
+  }
 
   async function pageChecks(page, tag, content, photoMode) {
     await markCards(page, PROFILE);
@@ -427,6 +471,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     r.broken.forEach((x) => bad.push(`image not loaded ${x}`));
     r.zone.forEach((x) => bad.push(`card text over painted decor ${x}`));
     r.clipped.forEach((x) => bad.push(`text cut off ${x}`));
+    if (PROFILE.clusters) (await clusterCuts(page)).forEach((x) => bad.push(`decor cluster cut by a straight edge: ${x}`));
     for (const card of r.pixelCards) {
       const over = await stretchedCardOver(page, card);
       over.forEach((x) => bad.push(`card text over painted decor ${card.key} (card ${Math.round(card.h)} px > image ${Math.round(card.image_h)} px, pixel test) ${x}`));
@@ -1076,9 +1121,10 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     await flow('content change', async () => {
       const errorsBefore = results.errors.length;
       const oldWords = lib.personalWords(demoContent());
+      // new names that no theme's demo record uses (02's demo is "Eleanor & Theo": a new "Theo" read as old content, G402)
       editAndPublish(demo.siteId, {
-        'partners.0.display_name': 'Maren', 'partners.0.full_name': 'Maren Holloway', 'partners.1.display_name': 'Theo',
-        'partners.1.full_name': 'Theo Castellan', name_display: 'Maren & Theo', date: '2028-09-23', 'rsvp.deadline': '2028-08-01',
+        'partners.0.display_name': 'Maren', 'partners.0.full_name': 'Maren Holloway', 'partners.1.display_name': 'Jonah',
+        'partners.1.full_name': 'Jonah Castellan', name_display: 'Maren & Jonah', date: '2028-09-23', 'rsvp.deadline': '2028-08-01',
         'venue.name': 'Larkspur Hall', 'venue.city': 'Bath', 'venue.region': null, 'venue.country': 'United Kingdom', timezone: 'Europe/London',
         schedule: [{ label: 'Welcome Drinks', time: '14:45' }, { label: 'Ceremony', time: '15:30', location: 'The Walled Garden' },
           { label: 'Dinner', time: '18:00', location: 'The Long Room' }, { label: 'Dancing', time: '20:30', location: 'The Ballroom' }],

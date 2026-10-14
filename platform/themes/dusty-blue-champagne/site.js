@@ -1,36 +1,37 @@
-/* site.js — Dusty Blue & Champagne (02, G402): motion, envelope, text fitting, countdown. The platform writes the HTML
- * and #site-data; DEV_CONTENT + devRender() only without it. README.md */
+/* site.js — Dusty Blue & Champagne (02, G402). The platform writes the HTML + #site-data; DEV_CONTENT/devRender only
+ * without it. README.md */
 const MOTION = {
-  // sessionStorage keys (+ ":<slug>"), shared with the inline <head> scripts
+  // sessionStorage keys (+ ":<slug>") = the <head> scripts
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },
 
-  // opening (docs/11 §7.3, catalogue: "the dusty blue wax seal breaks free and falls away, the V flap opens upward to
-  // reveal the liner, and the card rises from behind the front pocket while a single eucalyptus leaf drifts down"):
-  // [start ms after the tap, duration ms]
+  // opening (catalogue: seal breaks free and falls, V flap opens upward, card rises from behind the pocket while one
+  // eucalyptus leaf drifts down): [start ms after the tap, duration ms]
   envelope: {
-    hint:    [0, 300],      // "Tap to open" fades
-    tug:     [0, 260],      // the envelope gives under the finger
-    closure: [0, 1250],     // the wax seal pops free (first motion at once) …
-    fall:    [230, 1020],   // … and falls away, turning, out of the screen
-    head:    [180, 620],    // "You are invited" + names rise away
-    lift:    [520, 820],    // the V flap opens upward on its hinge, 0° → 90°
-    open:    [560, 380],    // closed body → open body (liner + pocket)
-    flap:    [1340, 780],   // the open flap (liner side) lies back from −90°
-    rise:    [1820, 1420],  // the card rises from behind the front pocket
-    forward: [3260, 640],   // the card comes forward where it is (× 1.04)
-    accents: 1480,          // one eucalyptus leaf drifts down, gone before `go`
-    go:      4200,          // to home (the card flies into the hero card)
-    fadeOut: 420            // fade without cross-document view transitions
+    hint:    [0, 300],
+    tug:     [0, 260],      // the envelope gives
+    closure: [0, 1250],     // the seal pops free …
+    fall:    [230, 1020],   // … and falls away, turning
+    head:    [180, 620],    // kicker + names rise away
+    lift:    [520, 820],    // V flap 0° → 90°
+    open:    [560, 380],    // closed body → liner + pocket
+    flap:    [1340, 780],   // open flap −90° → 0°
+    rise:    [1680, 1420],  // card rises from behind the pocket
+    forward: [3100, 780],   // … comes forward: 3.5 % up, × 1.09, shadow grows
+    accents: 1400,          // the leaf
+    go:      3650,          // to home, the card still moving (VT into the hero card)
+    glide:   [300, 900],    // stage: down until the risen card fits; on its side also to the centre
+    fadeOut: 420            // without cross-document VT
   },
 
-  // entrances: scene → [[step, delay ms], …], never all at once
+  // entrances: scene → [[step, delay ms], …]
   scenes: {
     'home-hero':     [['decor', 0], ['card', 120], ['names', 620], ['date', 1380], ['venue', 1580], ['countdown', 1820], ['cta', 2120]],
-    'home-invite':   [['card', 0], ['name1', 560], ['amp', 1060], ['name2', 1200], ['host', 1720], ['request', 1940], ['date', 2180], ['sprig', 2420], ['venue', 2600], ['cal', 2860]],
-    'home-chapter':  [['fig', 0], ['text', 560]],      // each chapter: print / card / seal rises, turns, settles; then the words
+    'home-invite':   [['host', 0], ['card', 140], ['name1', 700], ['amp', 1180], ['name2', 1320], ['words', 1640], ['request', 2080], ['date', 2320], ['sprig', 2540], ['venue', 2720]],
+    'home-cal':      [['cal', 0]],
+    'home-chapter':  [['fig', 0], ['text', 560]],
     'home-foot':     [['decor', 0], ['sign', 150], ['links', 860]],
     'story-head':    [['decor', 0], ['title', 120], ['kicker', 1040], ['lede', 1320]],
-    'story-print':   [['print', 0], ['caption', 1050]],   // each print flies in and settles, then its caption is written
+    'story-print':   [['print', 0], ['caption', 1050]],   // each print flies in, then its caption is written
     'story-next':    [['decor', 0], ['sprig', 150], ['link', 560]],
     'details-card':  [['decor', 0], ['kicker', 140], ['card', 340], ['title', 900], ['row', 1420]],
     'details-venue': [['photo', 0], ['body', 640], ['dress', 920], ['cal', 1140], ['action', 1340]],
@@ -41,11 +42,11 @@ const MOTION = {
     'rsvp-form':     [['form', 0]],
     'rsvp-closing':  [['decor', 0], ['sprig', 150], ['title', 420], ['line', 1080], ['meta', 1320]]
   },
-  stagger: 190,          // data-i / repeated rows spacing inside one step
-  batchGap: 420,         // scenes entering together play in sequence
-  arriveDelay: 0,        // names start as the card morph lands
+  stagger: 190,
+  batchGap: 420,
+  arriveDelay: 0,        // no wait after the card lands
 
-  // particles (GPT accents, docs/11 §8)
+  // particles (GPT accents)
   accents: {
     open:    [{ file: 'img/accent_1-149.webp', count: 1, path: 'fall', origin: 'top', dur: [2700, 2700], size: [44, 52], spread: 0, avoid: '.env .card' }],
     arrive:  [{ file: 'img/accent_2-200.webp', count: 2, path: 'fall', origin: 'top', dur: [6400, 7600], size: [20, 26], spread: 1600, avoid: '.hero [data-slot]' }],
@@ -55,7 +56,7 @@ const MOTION = {
 };
 
 /* card path (% of its height, manifest stage.card_path) */
-const ENVELOPE_GEOMETRY = { out: 'translateY(-91.99%)', front: 'translateY(-88.99%) scale(1.04)' };
+const ENVELOPE_GEOMETRY = { out: 'translateY(-91.99%)', front: 'translateY(-95.49%) scale(1.09)' };
 
 /* DEV_CONTENT (no #site-data only) = content.demo.json */
 const DEV_CONTENT = {
@@ -85,7 +86,6 @@ const DEV_CONTENT = {
   const root = document.documentElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const crossDocVT = 'onpageswap' in window && typeof document.startViewTransition === 'function';
-  // theme assets resolve against this file, not the page URL
   const BASE = (document.currentScript && document.currentScript.src) || document.baseURI;
   const asset = (p) => new URL(p, BASE).href;
 
@@ -102,25 +102,23 @@ const DEV_CONTENT = {
   const OPENED = MOTION.storage.opened + KEY;
   const ARRIVE = MOTION.storage.arrive + KEY;
 
-  const store = {
-    get(k) { try { return window.sessionStorage.getItem(k); } catch (e) { return null; } },
-    set(k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) { /* private mode: no memory */ } },
-    del(k) { try { window.sessionStorage.removeItem(k); } catch (e) { /* ignore */ } }
-  };
+  const store = { set(k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } } };
   const rand = (a, b) => a + Math.random() * (b - a);
 
-  /* -- accents: fall / rise with sway; `avoid` (a photo) → a lane beside it */
+  /* -- accents: fall / rise with sway; `avoid` (a photo) → a lane beside it (wider side first; size ≥ 28 px and sway
+     shrink to fit: every accent is drawn) */
   function flightPath(path, W, H, s, i, avoid) {
     const kf = [];
     const N = 12;
     const down = path !== 'rise';
-    const sway = rand(14, 30), ph = rand(0, 6.28);
-    let x0 = rand(0.06, 0.94) * W, drift = rand(-0.16, 0.16) * W;
+    const ph = rand(0, 6.28);
+    let sway = rand(14, 30), x0 = rand(0.06, 0.94) * W, drift = rand(-0.16, 0.16) * W;
     if (avoid) {
-      const lanes = [[sway, avoid.left - s - sway], [avoid.right + sway, W - s - sway]].filter(([a, b]) => b > a);
-      if (!lanes.length) return null;
-      const [a, b] = lanes[i % lanes.length];
-      x0 = rand(a, b); drift = 0;
+      const lanes = [[0, avoid.left - 8], [avoid.right + 8, W]].sort((p, q) => (q[1] - q[0]) - (p[1] - p[0]));
+      const [a, b] = lanes[1][1] - lanes[1][0] >= 40 ? lanes[i % 2] : lanes[0];
+      s = Math.max(28, Math.min(s, b - a - 8));
+      sway = Math.min(sway, Math.max(0, (b - a - s) / 2));
+      x0 = (a + b - s) / 2 + rand(-1, 1) * Math.max(0, (b - a - s) / 2 - sway); drift = 0;
     }
     const r0 = rand(-30, 30), r1 = r0 + rand(-160, 160);
     for (let k = 0; k <= N; k++) {
@@ -130,7 +128,7 @@ const DEV_CONTENT = {
       kf.push({ transform: `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${(r0 + (r1 - r0) * t).toFixed(1)}deg) rotateY(${(Math.sin(t * 7 + ph) * 55).toFixed(1)}deg)`,
         opacity: k === 0 ? 0 : (k === N ? 0.5 : 0.96), offset: t });
     }
-    return kf;
+    return { kf, s };
   }
   function accents(moment, until) {
     const groups = MOTION.accents[moment];
@@ -146,9 +144,7 @@ const DEV_CONTENT = {
     groups.forEach((g) => {
       const av = g.avoid && document.querySelector(g.avoid);
       for (let i = 0; i < g.count; i++) {
-        const s = rand(g.size[0], g.size[1]);
-        const kf = flightPath(g.path, W, H, s, i, av && av.getBoundingClientRect());
-        if (!kf) continue;
+        const { kf, s } = flightPath(g.path, W, H, rand(g.size[0], g.size[1]), i, av && av.getBoundingClientRect());
         const img = new Image();
         img.src = asset(g.file);
         img.alt = '';
@@ -217,13 +213,12 @@ const DEV_CONTENT = {
     return t;
   }
   function countdownTarget() {
-    // platform: computed on the server
     if (SITE) {
       const t = SITE.derived && Date.parse(SITE.derived.countdown_target_utc);
       return Number.isFinite(t) ? t : null;
     }
     try { return zonedToUtc(CONTENT.date, CONTENT.ceremony_time, CONTENT.timezone); }
-    catch (e) { return Date.parse(CONTENT.date + 'T' + CONTENT.ceremony_time); }   // no Intl zone support: device time
+    catch (e) { return Date.parse(CONTENT.date + 'T' + CONTENT.ceremony_time); }
   }
   function initCountdown() {
     document.querySelectorAll('[data-countdown]').forEach((box) => {
@@ -253,7 +248,7 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- links without a URL yet (preview only) */
+  /* -- links without a URL (preview only) */
   function toast(msg) {
     let t = document.querySelector('.toast');
     if (!t) {
@@ -276,16 +271,15 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- text fitting: long values shrink (--fit / --names-scale), never under their floor; layout boxes only */
+  /* -- text fitting: long values shrink, never under their floor */
   const fontPx = (el) => parseFloat(getComputedStyle(el).fontSize);
-  // [data-fit="n"]: the element is never taller than n lines of its CSS size
+  // [data-fit="n"]: ≤ n lines of its CSS size
   function fitLines() {
     document.querySelectorAll('[data-fit]:not(.names)').forEach((el) => {
       el.style.setProperty('--fit', '1');
       const n = parseFloat(el.dataset.fit) || 2, lh = fontPx(el) * 1.16;
       for (let f = 1; f > 0.5 && el.offsetHeight > n * lh + 1; f -= 0.05) el.style.setProperty('--fit', (f - 0.05).toFixed(2));
     });
-    // one-line design copy (RSVP card title) and captions in the prints' margins
     document.querySelectorAll('.rsvp-text .card-title').forEach((el) => {
       el.style.setProperty('--fit', '1');
       for (let f = 1; f > 0.6 && el.scrollWidth > el.clientWidth + 1; f -= 0.04) el.style.setProperty('--fit', (f - 0.04).toFixed(2));
@@ -299,7 +293,7 @@ const DEV_CONTENT = {
       if (over() && el.matches('.mini-cap')) el.classList.add('cap-hide');
     });
   }
-  // invitation card: names stay in the free_zone box; long names shrink (≥ 16 px: CSS max())
+  // invitation card: names stay in the free_zone box
   function fitInvite() {
     const box = document.querySelector('.invite-text');
     if (!box) return;
@@ -307,8 +301,8 @@ const DEV_CONTENT = {
     box.style.setProperty('--fit', '1');
     for (let f = 1; f > 0.4 && over(); f -= 0.04) box.style.setProperty('--fit', (f - 0.04).toFixed(2));
   }
-  // first screen: names ≤ their share, ≥ the floor; tight; countdown after the pill; then a piece not ending above
-  // the nav starts below the first screen (fold)
+  // first screen: names ≤ share, ≥ floor; tight; countdown after the pill; a piece not ending above the nav starts below
+  // the first screen (fold)
   function fitNames() {
     const targets = [['.env-head .names', 1.7, 0.22, 36], ['.hero .names', 3.2, 0.3, 36]]
       .map(([sel, ...a]) => [document.querySelector(sel), ...a]).filter(([el]) => el);
@@ -330,7 +324,6 @@ const DEV_CONTENT = {
         if (s <= min || (lines <= maxLines && h <= innerHeight * maxShare && (s <= navFloor || !low(h1)))) break;
       }
     };
-    // card copy ≥ 11 px: drop parts rather than shrink
     const fits = (c) => {
       const k = [...c.children].filter((p) => p.offsetParent);
       return !k.length || (Math.max(...k.map((p) => p.offsetTop + p.offsetHeight)) - Math.min(...k.map((p) => p.offsetTop)) <= c.clientHeight + 1
@@ -357,13 +350,13 @@ const DEV_CONTENT = {
       for (let i = 0; i < 4 && c && top(c) < below - 0.5; i++, c = cut()) c.style.marginTop = `${parseFloat(getComputedStyle(c).marginTop) + below - top(c)}px`;
       if (keep) hero.style.setProperty('--fold', `${Math.max(0, hero.offsetHeight - end)}px`);
     };
-    // "Saturday · September 18, 2027" wrapping: no dangling dot, the weekday on its own line
+    // a wrapping "Saturday · …" line: no dangling dot
     const stack = () => document.querySelectorAll('.dot').forEach((d) => {
       const p = d.parentNode, y = (e) => e ? e.getBoundingClientRect().top : NaN;
       p.classList.remove('is-stacked');
       if (Math.abs(y(d.previousElementSibling) - y(d)) > 2 || Math.abs(y(d.nextElementSibling) - y(d)) > 2) p.classList.add('is-stacked');
     });
-    // envelope page: long names on a short screen → the envelope shrinks (≥ 72 %) until "Tap to open" is on screen
+    // envelope page: long names → the envelope shrinks (≥ 72 %) until the hint is on screen
     const fitEnv = () => {
       const pg = document.querySelector('.env-page'), hint = pg && pg.querySelector('.env-hint');
       if (!hint) return;
@@ -371,6 +364,9 @@ const DEV_CONTENT = {
       for (let f = 1; f > 0.73 && hint.offsetParent && bottom(hint) > sv() - 6; f -= 0.04) pg.style.setProperty('--env-fit', (f - 0.04).toFixed(2));
     };
     const run = () => {
+      // the platform's preview bar: the hero still ends at the nav
+      const bar = document.querySelector('[data-platform-preview-bar]');
+      root.style.setProperty('--bar', (bar ? bar.offsetHeight : 0) + 'px');
       stack();
       fitCopy();
       fitLines();
@@ -421,11 +417,10 @@ const DEV_CONTENT = {
 
     function go(withCard) {
       store.set(OPENED, '1');
-      // named for the view transition only now (a closed envelope's card has none)
       if (withCard) { store.set(ARRIVE, '1'); el.card.style.viewTransitionName = 'invite-card'; }
       else el.card.style.viewTransitionName = 'none';   // skip: no card morph out of a closed envelope
       if (crossDocVT || reduce) { location.href = PAGES.home; return; }
-      // fallback: fade the scene into the backdrop, home fades in on arrival
+      // no VT: fade out, home fades in
       page.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
       const layer = document.querySelector('.accent-layer');
       if (layer) layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
@@ -443,7 +438,10 @@ const DEV_CONTENT = {
       A(el.hint, [{ opacity: 1 }, { opacity: 0 }], E.hint, 'ease-out', 'forwards');
       A(el.env, [{ transform: 'scale(1)' }, { transform: 'scale(.988)', offset: .45 }, { transform: 'scale(1)' }], E.tug, 'ease-out', 'none');
       A(el.head, [{ opacity: 1, transform: 'translate3d(0,0,0)' }, { opacity: 0, transform: 'translate3d(0,-18px,0)' }], E.head, 'ease-in', 'forwards');
-      // the seal breaks free and falls away, turning
+      // the risen card (≈ its own height higher) keeps 12 px to the top: the stage glides down; on its side also to the centre
+      const r = stage.getBoundingClientRect(), c = el.card.getBoundingClientRect();
+      const dx = getComputedStyle(page).display === 'grid' ? innerWidth / 2 - r.left - r.width / 2 : 0, dy = Math.max(0, 12 + c.height - c.top);
+      if (dx || dy) A(stage, [{ transform: 'none' }, { transform: `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)` }], E.glide, 'cubic-bezier(.45,0,.25,1)', 'forwards');
       const cr = el.closure.getBoundingClientRect();
       const fall = Math.max(window.innerHeight - cr.top, cr.height) + cr.height * 0.4;
       const pop = E.fall[0] / (E.fall[0] + E.fall[1]);
@@ -453,36 +451,33 @@ const DEV_CONTENT = {
         { transform: `translate3d(${(cr.width * .16).toFixed(1)}px, ${(fall * .55).toFixed(1)}px, 0) rotate(16deg) scale(1.03)`, opacity: 1, offset: pop + (1 - pop) * .62, easing: 'cubic-bezier(.4,0,1,1)' },
         { transform: `translate3d(${(cr.width * .28).toFixed(1)}px, ${fall.toFixed(1)}px, 0) rotate(34deg) scale(1)`, opacity: .2 }
       ], [E.closure[0], E.fall[0] + E.fall[1]], 'linear', 'forwards');
-      // the V flap opens upward (0 → 90°), fading from 80°
       A(el.cflap, [
         { opacity: 1, transform: 'perspective(1000px) rotateX(0deg)', filter: 'brightness(1)', easing: 'cubic-bezier(.33,.1,.35,1)' },
         { opacity: 1, transform: 'perspective(1000px) rotateX(24deg)', filter: 'brightness(1.01)', offset: .3, easing: 'cubic-bezier(.4,0,.7,.7)' },
         { opacity: 1, transform: 'perspective(1000px) rotateX(80deg)', filter: 'brightness(.86)', offset: .9 },
         { opacity: 0, transform: 'perspective(1000px) rotateX(90deg)', filter: 'brightness(.82)' }
       ], E.lift, 'linear');
-      // closed body → open body + pocket
       A(el.body, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
       A(el.pocket, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
       A(el.closed, [{ opacity: 1 }, { opacity: 0 }], E.open, 'ease-in-out');
-      // the open flap (liner side) takes over at −90° and lies back
       A(el.flap, [
         { opacity: 1, transform: 'perspective(1100px) rotateX(-90deg)', filter: 'brightness(.88)' },
         { opacity: 1, transform: 'perspective(1100px) rotateX(0deg)', filter: 'brightness(1)' }
       ], E.flap, 'cubic-bezier(.2,.7,.3,1)');
-      // one leaf drifts down beside the card
       timers.push(setTimeout(() => accents('open', E.go - E.accents - 80), E.accents));
       A(el.card, [{ transform: 'translateY(0)' }, { transform: ENVELOPE_GEOMETRY.out }], E.rise, 'cubic-bezier(.42,0,.18,1)');
       timers.push(setTimeout(() => {
-        // out of the pocket: in front of the envelope
         el.slot.style.clipPath = 'none';
         el.slot.style.zIndex = '6';
-        A(el.card, [{ transform: ENVELOPE_GEOMETRY.out }, { transform: ENVELOPE_GEOMETRY.front }], [0, E.forward[1]], 'cubic-bezier(.45,0,.2,1)', 'forwards');
-        A(el.card, [{ filter: 'drop-shadow(0 6px 8px rgba(30,45,70,.16))' }, { filter: 'drop-shadow(0 24px 26px rgba(30,45,70,.28))' }], [0, E.forward[1]], 'ease-out', 'forwards');
+        // front: card top ≥ 12 px
+        const r = el.card.getBoundingClientRect(), fix = Math.max(0, r.height * 0.08 + 12 - r.top);
+        const front = ENVELOPE_GEOMETRY.front.replace(/translateY\(([^)]+)\)/, (m, v) => (fix ? `translateY(calc(${v} + ${fix.toFixed(1)}px))` : m));
+        A(el.card, [{ transform: ENVELOPE_GEOMETRY.out }, { transform: front }], [0, E.forward[1]], 'cubic-bezier(.45,0,.2,1)', 'forwards');
+        A(el.card, [{ filter: 'drop-shadow(0 6px 8px rgba(30,45,70,.16))' }, { filter: 'drop-shadow(0 30px 30px rgba(30,45,70,.3))' }], [0, E.forward[1]], 'ease-out', 'forwards');
       }, E.forward[0]));
       timers.push(setTimeout(() => { state = 'done'; go(true); }, E.go));
     }
 
-    // cancel the opening's script animations, not CSS ones
     function cancelScripted() {
       page.getAnimations({ subtree: true }).concat(page.getAnimations())
         .filter((a) => !(window.CSSAnimation && a instanceof CSSAnimation))
@@ -513,7 +508,7 @@ const DEV_CONTENT = {
     const enter = q('[data-enter]');
     if (enter) enter.addEventListener('click', (e) => { e.preventDefault(); go(true); });
 
-    // back/forward cache: card out as left — offer replay
+    // bfcache: opened state + replay
     window.addEventListener('pageshow', (e) => {
       if (e.persisted && state !== 'closed') {
         clearOpening();
@@ -525,9 +520,7 @@ const DEV_CONTENT = {
 
   /* -- boot */
   function boot() {
-    // without the platform: a design preview (placeholder labels, as in the panel)
     if (!SITE) { root.dataset.preview = 'true'; devRender(CONTENT); devRsvp(); }
-    // RSVP: after a reply the closing hides its generic thank-you
     document.addEventListener('rsvp:state', (e) => {
       const st = e.detail && e.detail.state;
       if (st === 'success') root.setAttribute('data-rsvp-replied', '');
@@ -557,7 +550,7 @@ const DEV_CONTENT = {
     }));
   }
 
-  /* == dev fallback: fills the markers like lib/theme/engine.ts (text / attributes only) */
+  /* == dev fallback: fills the markers like lib/theme/engine.ts */
   function devRender(content) {
     const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
       story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json

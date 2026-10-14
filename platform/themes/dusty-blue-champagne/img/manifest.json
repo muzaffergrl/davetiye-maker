@@ -166,7 +166,7 @@
   ],
   "center_pct": [
    49.592,
-   79.996
+   80.892
   ],
   "width_pct": 35.271,
   "scale": 0.38506,
@@ -226,73 +226,73 @@
   ],
   "box": [
    84,
-   112.6,
+   56.2,
    857,
-   1202.4
+   1258.8
   ],
-  "ratio": 0.71272,
+  "ratio": 0.68082,
   "parts": {
    "env_closed": [
     0.0,
-    50.85,
+    53.05,
     100.0,
-    49.15
+    46.95
    ],
    "env_cflap": [
     0.0,
-    50.85,
+    53.05,
     100.0,
-    34.596
+    33.048
    ],
    "env_flap": [
     0.0,
-    14.674,
+    18.492,
     100.0,
-    36.675
+    35.034
    ],
    "env_body": [
     0.0,
-    50.601,
+    52.811,
     100.0,
-    49.399
+    47.189
    ],
    "env_pocket": [
     0.0,
-    51.016,
+    53.209,
     100.0,
-    48.984
+    46.791
    ],
    "closure": [
     29.372,
-    63.888,
+    65.505,
     35.271,
-    30.422
+    29.061
    ],
    "card": [
     20.257,
-    53.872,
+    55.937,
     59.37,
-    58.563
+    55.942
    ]
   },
-  "hinge_pct": 50.933,
-  "body_bottom_pct": 99.917,
+  "hinge_pct": 53.129,
+  "body_bottom_pct": 99.921,
   "closed_obj": {
    "box_pct": [
     0.467,
-    50.933,
+    53.129,
     98.95,
-    48.984
+    46.791
    ],
    "aspect": 1.4397,
    "frac_w": 0.9895,
-   "top_frac_of_stage_w": 0.71464,
+   "top_frac_of_stage_w": 0.78037,
    "bottom_frac_of_stage_w": 0.00117
   },
   "card_path": {
    "out_translate_pct": -91.99,
-   "front_translate_pct": -88.99,
-   "front_scale": 1.04,
+   "front_translate_pct": -95.49,
+   "front_scale": 1.09,
    "pocket_edge_at_card_corners": 844.9,
    "card_w_of_env": 0.6
   },
@@ -2105,13 +2105,13 @@
     "file": "florals_tl-480.webp",
     "w": 480,
     "h": 482,
-    "bytes": 70450
+    "bytes": 69174
    },
    {
     "file": "florals_tl-960.webp",
     "w": 960,
     "h": 965,
-    "bytes": 204812
+    "bytes": 202708
    }
   ]
  },
@@ -2126,13 +2126,13 @@
     "file": "florals_br-480.webp",
     "w": 480,
     "h": 503,
-    "bytes": 67342
+    "bytes": 65732
    },
    {
     "file": "florals_br-875.webp",
     "w": 875,
     "h": 917,
-    "bytes": 158992
+    "bytes": 154636
    }
   ]
  },
@@ -2224,41 +2224,27 @@
   ],
   "busy_share": 0.0
  },
- "bg_page": {
+ "paper_wide": {
   "src_size": [
-   1024,
-   1536
+   755,
+   500
   ],
-  "ratio": 0.66667,
+  "ratio": 1.51,
   "files": [
    {
-    "file": "bg_page-640.webp",
-    "w": 640,
-    "h": 960,
-    "bytes": 42402
-   },
-   {
-    "file": "bg_page-1024.webp",
-    "w": 1024,
-    "h": 1536,
-    "bytes": 84846
+    "file": "paper_wide-755.webp",
+    "w": 755,
+    "h": 500,
+    "bytes": 3226
    }
-  ]
- },
- "mist": {
-  "src_size": [
-   640,
-   960
   ],
-  "ratio": 0.66667,
-  "files": [
-   {
-    "file": "mist-640.webp",
-    "w": 640,
-    "h": 960,
-    "bytes": 9944
-   }
-  ]
+  "crop": [
+   116,
+   600,
+   871,
+   1100
+  ],
+  "busy_share": 0.0
  },
  "bg_tile": {
   "src_size": [
@@ -2271,7 +2257,7 @@
     "file": "bg_tile-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 7216
+    "bytes": 16266
    }
   ],
   "tone": [
@@ -2536,14 +2522,40 @@
    "core": 110,
    "reach_px": 3,
    "removed_px": 57418,
-   "halo_px": 19257
+   "halo_px": 19257,
+   "fern_grade": {
+    "hue_deg": [
+     25,
+     45
+    ],
+    "feather_deg": 8,
+    "sat_from": 0.25,
+    "sat_k": 0.86,
+    "value_gain": 0.02,
+    "mean_sat_before": 0.575,
+    "mean_sat_after": 0.525,
+    "px": 137218
+   }
   },
   "florals_br": {
    "alpha_floor": 16,
    "core": 110,
    "reach_px": 3,
    "removed_px": 29834,
-   "halo_px": 500
+   "halo_px": 500,
+   "fern_grade": {
+    "hue_deg": [
+     25,
+     45
+    ],
+    "feather_deg": 8,
+    "sat_from": 0.25,
+    "sat_k": 0.74,
+    "value_gain": 0.04,
+    "mean_sat_before": 0.61,
+    "mean_sat_after": 0.482,
+    "px": 130245
+   }
   },
   "divider": {
    "alpha_floor": 110,
@@ -2599,6 +2611,7 @@
  },
  "theme_check": {
   "particles": ".accent-layer",
+  "clusters": ".corner, .page-corner",
   "first_screen": {
    "landscape": true,
    "names_min_px": 36
