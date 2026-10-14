@@ -2,7 +2,7 @@
 id: G810
 baslik: Tasarım 10 Tuscan Vineyard — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
@@ -48,3 +48,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 üretim: gpt-gorsel-B; 3.5 kaydedildi, kit_check 5/5 geçti. Tam #00FF00 ve kare 1024×1024 için teknik sabitleme yöntem onayı bekliyor.
 - 2026-10-14 kullanıcı kararı: ham Imagegen çıktılarıyla incelemeye gönder; teknik sabitleme uygulanmadı.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 5 sahne, kit_check 5/5.
+- 2026-10-14 entegratör onayladı
