@@ -57,9 +57,9 @@ giriş + duvar olarak kalır (pano 64vw, foto penceresi ≥ 38vw şartı sığma
 Bütçe (KiB okuması): `site.js` 35 804 B (IIFE gövdesi bir girinti sola, yorumlar kısaldı), `site.css` 46 039 B (aynı "tam
 doldur" kuralları birleşti) — ikisinde de pay ≤ 41 B.
 
-**Kontroller (origin/main birleştirmesi sonrası, bu worktree):** `npm ci`; `npm test` 497/497 (temanın 35 testi; yeni test: iç sayfa fold birimleri, lift, masaüstü
+**Kontroller (origin/main birleştirmesi sonrası, bu worktree):** `npm ci`; `npm test` 502/502 (temanın 35 testi; yeni test: iç sayfa fold birimleri, lift, masaüstü
 story sırası, çiçek şeridi); `npm run typecheck` temiz; `npm run build` + trace-check geçti (6 tema); `theme-check --theme
-mediterranean-lemon --stress` **116 geçti, 0 hata, 0 uyarı** (`previews/g405/` yeniden üretildi; dokun → home 4,51 s; ilk görünüm
+mediterranean-lemon --stress` **116 geçti, 0 hata, 0 uyarı** (`previews/g405/` yeniden üretildi; dokun → home 4,32 s; ilk görünüm
 DPR 3: index 877 / home 884 KB, fotoğraflarla 971 / 1141 KB; MP4 ilk karesi 218,217,205); `g051-browser --theme mediterranean-lemon` 44/44; `final-smoke --theme mediterranean-lemon` 45/45 (`previews/g405/final/`); `kit_check
 --paket 5` 23/23 (hiza sol −0,20 · sağ +0,49 · alt +0,85 %), `--paket 2` 5/5; `validate_content` GEÇTİ, tema demo kaydı
 koleksiyonunkiyle bayt bayt aynı; `tools/tests` 9/9 geçti (`test_kit_build` de artık geçiyor). Ölçüm betikleri ve çıktıları
@@ -208,4 +208,4 @@ gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 - 2026-10-14 alindi: wf-tema05
 - 2026-10-14 bitti, incelemeye gönderildi
 - 2026-10-14 inceleme düzeltmeleri (22 bulgu: 19 düzeltildi, 1 değişiklik gerekmez, qa-kontrol yapılamadı, content change G064'te çözülmüş); theme-check --stress 116/0/0, g051 44/44, final-smoke 45/45; durum inceleme, qa-kontrol kapısı açık
-- 2026-10-14 qa-kontrol: KOŞULLU (3 önemli must_fix: iç sayfalarda nav çizgisi yazıyı kesiyor, açılış çiçeği telefonlarda doğmuyor, masaüstü story ilk ekranı yarı boş) → üçü düzeltildi (fold birimleri + lift, çiçek şeridi, masaüstü üç pano sırası, RSVP masaüstü tek sütun); m1 126/126, çiçek 129/130 (+ düzeltilmiş betikle 20/20, zorlama 25/25), theme-check --stress 116/0/0, g051 44/44, final-smoke 45/45, npm test 497/497; durum inceleme, qa-kontrol yeniden kontrolü bekliyor
+- 2026-10-14 qa-kontrol: KOŞULLU (3 önemli must_fix: iç sayfalarda nav çizgisi yazıyı kesiyor, açılış çiçeği telefonlarda doğmuyor, masaüstü story ilk ekranı yarı boş) → üçü düzeltildi (fold birimleri + lift, çiçek şeridi, masaüstü üç pano sırası, RSVP masaüstü tek sütun); m1 126/126, çiçek 129/130 (+ düzeltilmiş betikle 20/20, zorlama 25/25), theme-check --stress 116/0/0, g051 44/44, final-smoke 45/45, npm test 502/502; durum inceleme, qa-kontrol yeniden kontrolü bekliyor
