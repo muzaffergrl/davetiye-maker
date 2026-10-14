@@ -68,6 +68,23 @@ demolar yukarıda; `/lily-and-theo`; düzenleme linki yalnız sohbette.
 onaysız temalar `/start?theme=<id>` ile doğrudan sahiplenilebiliyor (G077 notu); mağaza sahibi için yönetim (admin) paneli yok —
 operatör işleri betiklerle (`reissue-edit-key.ts`, `grant-identity-change.ts`). G063 B1 (favicon) kapandı: sayfalarda `/brand/favicon.ico`.
 
+**Kullanıcı isteği (sohbet, 2026-10-14) → önerilen görev — Panel sadeleştirme:** "Paneller GPT ile hazırladığımız gibi görünsün;
+çok daha basit olsun, kullanımı ve değişiklik yapması kolay, çağdaş ve harika bir tasarım." G066-B yalnız marka giydirmesi kalmasın,
+sadeleştirme de kapsama girsin (gerekirse GPT'den yeni panel comp'ları, K21). claude-local-1'in canlı panelde (390 px) gördükleri:
+1. Kurulum sihirbazı 6 adım, sonunda "14 things are still sample text" + "Publish anyway" → öneri: 3 adım (isimler + tarih → fotoğraf →
+   yayınla), gerisi sonra ve isteğe bağlı.
+2. Edit listesi 9 bölüm; satırlarda "Sample text" rozeti ve "3 changes left" kilidi → daha az, büyük bölüm; isim/tarih değiştirme hakkı
+   tek yerde.
+3. Otomatik kayıt + ayrı "Publish changes": taslaktaki başka değişiklikler de birlikte yayına çıkıyor (G078'de oldu) → üstte tek, net
+   "Yayınlanmamış değişiklik: n — gör / yayınla" şeridi.
+4. Home "Next steps" 14 madde → ilerleme göstergesi ("%60 hazır") + yalnız sıradaki 3 iş.
+5. Share uzun (link, QR, şifre, düzenleme linki alt alta) → link + QR üstte; şifre (varsayılan kapalı — kullanıcı onayladı) ve düzenleme
+   linki açılır bölümde.
+6. Guests (RSVP v2) iyi; korunsun.
+7. Masaüstü: solda düzenleme, sağda sabit canlı önizleme.
+Görsel: GM05'teki BKE Studio dili; daha çok boşluk, daha az rozet/çerçeve, büyük dokunma alanları, tek vurgu rengi. Bitince
+claude-local-1 aynı gün canlıya alır (bu görevin adımları) ve "isim / foto değiştir, yayınla, paylaş" işlerini dokunuş sayısıyla önce/sonra ölçebilir.
+
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G066-A, G069, G076 main'de; G066-B sonra aynı adımlarla yeniden yayın
 - 2026-10-14 alindi: claude-local-1
