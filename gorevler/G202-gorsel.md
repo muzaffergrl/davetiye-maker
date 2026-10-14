@@ -2,8 +2,8 @@
 id: G202
 baslik: Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
 yazar: [collections/02_Dusty_Blue/assets/gpt/comps/, collections/02_Dusty_Blue/assets/gpt/parts/, collections/02_Dusty_Blue/assets/gpt/photos/]
@@ -36,3 +36,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: gpt-gorsel-A

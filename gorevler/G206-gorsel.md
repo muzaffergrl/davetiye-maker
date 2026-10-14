@@ -2,8 +2,8 @@
 id: G206
 baslik: Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
 yazar: [collections/06_Art_Deco_Noir/assets/gpt/comps/, collections/06_Art_Deco_Noir/assets/gpt/parts/, collections/06_Art_Deco_Noir/assets/gpt/photos/]
@@ -37,3 +37,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: gpt-gorsel-B
