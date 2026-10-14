@@ -155,13 +155,22 @@ export function corePage(path: string, cfg: MarketingConfig = MARKETING): PageEn
   return p;
 }
 
+/**
+ * Title of a design page: "<Name>: Envelope Wedding Website | <brand>" (docs/14 §6.3). A long design name (G083: "Dusty
+ * Blue & Champagne" makes 61 characters) drops the colon, then "Envelope", so the title stays ≤ 60 characters.
+ */
+export function designTitle(name: string, cfg: MarketingConfig = MARKETING): string {
+  const options = [`${name}: Envelope Wedding Website`, `${name} Envelope Wedding Website`, `${name}: Wedding Website`];
+  return withBrand(options.find((t) => withBrand(t, cfg).length <= 60) ?? options[options.length - 1], cfg);
+}
+
 export function designPage(id: string, cfg: MarketingConfig = MARKETING): PageEntry | null {
   const d = liveDesigns(cfg).find((x) => x.id === id);
   if (!d) return null;
   return {
     path: `/designs/${d.id}`,
     label: d.name,
-    title: withBrand(`${d.name}: Envelope Wedding Website`, cfg),
+    title: designTitle(d.name, cfg),
     h1: `${d.name} wedding website`,
     description: d.copy.metaDescription,
     kind: 'WebPage',

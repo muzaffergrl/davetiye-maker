@@ -252,6 +252,90 @@
         "seconds": 10,
         "bytes": 331431
       }
+    },
+    "dusty-blue-champagne": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/envelope-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/envelope-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/home-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/home-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/invitation-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/invitation-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/story-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/story-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/details-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/details-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1270,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/schedule-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/schedule-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/rsvp-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/rsvp-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1244,
+          "files": {
+            "320": "/marketing/designs/dusty-blue-champagne/form-320.webp",
+            "480": "/marketing/designs/dusty-blue-champagne/form-480.webp",
+            "640": "/marketing/designs/dusty-blue-champagne/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/dusty-blue-champagne/opening.mp4",
+        "poster": "/marketing/designs/dusty-blue-champagne/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 398923
+      }
     }
   },
   "panel": {

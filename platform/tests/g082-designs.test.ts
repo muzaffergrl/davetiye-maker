@@ -49,7 +49,8 @@ afterEach(() => {
 });
 
 test('05 Mediterranean Lemon is live: third in the list after 03 and 01, same name as its theme, page entry', async () => {
-  assert.deepEqual(liveDesigns().map((d) => d.id), ['blush-garden-rose', 'olive-ivory', ID]);
+  // (G083 added 02 after it: tests/g083-designs.test.ts)
+  assert.deepEqual(liveDesigns().map((d) => d.id).slice(0, 3), ['blush-garden-rose', 'olive-ivory', ID]);
   const d = liveDesign(ID)!;
   assert.ok(d, 'listed');
   assert.equal(d.name, 'Mediterranean Lemon');
@@ -108,7 +109,7 @@ test('real screens and opening clip of 05 are in assets.json and on disk; 01 / 0
   assert.deepEqual(Object.keys(manifest.designs).slice(0, 2), ['blush-garden-rose', 'olive-ivory']);
 });
 
-test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 05; ItemList of /designs has 3', () => {
+test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 05; ItemList of /designs lists every live design', () => {
   const d = liveDesign(ID)!;
   const p = product(d);
   assert.equal(p.name, 'Mediterranean Lemon Wedding Website');
@@ -123,7 +124,8 @@ test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject
   const ready = liveDesigns(cfg).find((x) => x.id === ID)!;
   assert.equal((product(ready, cfg).offers as Record<string, string>).price, '29.40', 'Offer once a real price and link exist');
   const list = itemList(liveDesigns().map((x) => ({ path: `/designs/${x.id}`, name: x.name })));
-  assert.equal((list.itemListElement as unknown[]).length, 3);
+  assert.equal((list.itemListElement as unknown[]).length, liveDesigns().length);
+  assert.ok(liveDesigns().length >= 3);
   assert.deepEqual(validateJsonLd(graph(list)), []);
 });
 
@@ -143,12 +145,12 @@ test('llms.txt / llms-full.txt name 05; the sitemap stays empty while not launch
   assert.match(sitemapXml(guides, cfg), /<loc>https:\/\/example\.com\/designs\/mediterranean-lemon<\/loc>/);
 });
 
-test('/start production gate: 05 is approved, listed and can be started (201); 02 / 04 stay in review', async () => {
+test('/start production gate: 05 is approved, listed and can be started (201); 04 stays in review (02: G083)', async () => {
   assert.ok(approvedThemeIds().includes(ID));
   assert.equal(themeApproval(ID), 'approved');
   assert.equal(themeOpenForClaims(ID, { env: PROD }), true);
   assert.equal(themeOpenForClaims(ID, { env: { THEME_APPROVAL: 'enforce' } }), true);
-  for (const id of ['dusty-blue-champagne', 'vintage-airmail-love-letter']) assert.equal(themeOpenForClaims(id, { env: PROD }), false, id);
+  assert.equal(themeOpenForClaims('vintage-airmail-love-letter', { env: PROD }), false, 'vintage-airmail-love-letter');
   assert.ok((await offeredThemes(PROD)).some((t) => t.id === ID), '/start list in production');
   process.env.VERCEL_ENV = 'production';
   const res = await claimRoute(

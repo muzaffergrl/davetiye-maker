@@ -849,6 +849,38 @@
   border-color: var(--anchor);
   color: var(--paper-light);
 }
+/* G083: phones and tablets keep the design chips on ONE line (with four names they wrapped to three lines at 390 px
+   and pushed the buttons down). The row runs to the screen edges and scrolls sideways when the names do not fit; the
+   chip cut at the edge shows there is more. Centered while they fit (auto margins collapse when the row overflows). */
+@media (max-width: 1023px) {
+  .chips {
+    align-self: stretch;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    /* 6 px above and below: room for the focus ring inside the scroller */
+    margin: -4px calc(-1 * var(--gutter));
+    padding: 6px var(--gutter);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: var(--gutter);
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+  .chip {
+    flex: none;
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
+  .chip:first-child {
+    margin-inline-start: auto;
+  }
+  .chip:last-child {
+    margin-inline-end: auto;
+  }
+}
 .heroCaption {
   display: none;
   font-size: 14px;
@@ -1505,6 +1537,25 @@
   .cardGrid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 384px));
     gap: 24px;
+  }
+}
+/* G083: no lone card in the last row. Phones (two columns): an odd last card sits centered under the others, at the
+   same width. Wide screens: four designs are 2 × 2, then one row of four (auto-fit made 3 + 1 at 1280 px). */
+@media (max-width: 899px) {
+  .cardGrid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - 14px) / 2);
+  }
+}
+@media (min-width: 900px) {
+  .cardGrid:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 384px));
+  }
+}
+@media (min-width: 1200px) {
+  .cardGrid:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 .designCard {

@@ -32,7 +32,8 @@ const themeIds = readdirSync(path.join(ROOT, 'themes'), { withFileTypes: true })
   .map((d) => JSON.parse(readFileSync(path.join(ROOT, 'themes', d.name, 'theme.json'), 'utf8')) as { id: string; internal?: boolean })
   .filter((m) => !m.internal)
   .map((m) => m.id);
-const IN_REVIEW = themeIds.find((id) => !approved.includes(id) && id === 'dusty-blue-champagne') ?? themeIds.find((id) => !approved.includes(id));
+// (02 dusty-blue-champagne was the design in review until G083 approved it; now 04)
+const IN_REVIEW = themeIds.find((id) => !approved.includes(id) && id === 'vintage-airmail-love-letter') ?? themeIds.find((id) => !approved.includes(id));
 const APPROVED = approved.includes('olive-ivory') ? 'olive-ivory' : approved[0];
 
 mkdirSync(OUT, { recursive: true });
@@ -232,7 +233,8 @@ try {
   }
 
   // ------------------------------------------------------------------ production: EVERY approved design opens (G082)
-  // (a design approved later — 05 mediterranean-lemon in G082 — is started like the first ones: page, demo, API)
+  // (a design approved later — 05 mediterranean-lemon in G082, 02 dusty-blue-champagne in G083 — is started like the
+  // first ones: page, demo, API)
   {
     const ctx = await browser.newContext(phone);
     const page = await ctx.newPage();

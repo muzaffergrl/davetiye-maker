@@ -255,7 +255,7 @@ export function HeroDemo({
           </div>
         ) : null}
         {designs.length > 1 ? (
-          <div className={s.chips} role="group" aria-label="Choose a design">
+          <div className={s.chips} role="group" aria-label="Choose a design" data-scroll-x>
             {designs.map((x, i) => (
               <button key={x.id} type="button" className={s.chip} aria-pressed={i === sel} onClick={() => choose(i)}>
                 {x.name}

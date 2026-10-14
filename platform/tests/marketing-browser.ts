@@ -13,6 +13,8 @@
 //    Card "Open live demo" opens the dialog; the mobile menu and FAQ <details> open; the sticky bar shows on phones.
 //    G082: /designs has one card per live design; every design page loads its real screens and opening clip and
 //    carries its start / demo links and Product + VideoObject JSON-LD; llms.txt lists it; the sitemap stays empty.
+//    G083 (four designs): no lone card in the last row of /designs and the home strip at 320–1280 px; the home design
+//    chips stay on one line on phones and tablets (sideways scroller, every chip reachable); /about's story screen.
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
 //    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
@@ -248,6 +250,77 @@ try {
     await ctx.close();
   }
 
+  // 1d. G083 layout with four designs (02 Dusty Blue & Champagne joined): the card grids of /designs and the home strip
+  // leave no lone card in their last row (or it sits centered), the home design chips stay on ONE line on phones and
+  // tablets (a sideways scroller; every chip reachable, no page scroll), and /about shows a real Our Story screen.
+  for (const w of [320, 360, 390, 430, 768, 1024, 1280]) {
+    const mobile = w < 1024;
+    const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
+    const page = await ctx.newPage();
+    for (const p of ['/designs', '/']) {
+      await page.goto(BASE + p, { waitUntil: 'networkidle' });
+      const grid = await page.evaluate(() => {
+        const g = document.querySelector('main [class*="cardGrid"]')!;
+        const box = g.getBoundingClientRect();
+        const rows = new Map<number, DOMRect[]>();
+        for (const c of Array.from(g.children)) {
+          const r = c.getBoundingClientRect();
+          const t = Math.round(r.top);
+          rows.set(t, [...(rows.get(t) ?? []), r]);
+        }
+        const list = [...rows.values()];
+        const last = list[list.length - 1];
+        const centered = last.length === 1 && Math.abs(last[0].left - box.left - (box.right - last[0].right)) <= 2;
+        return { cards: g.children.length, perRow: list.map((r) => r.length), centered };
+      });
+      const rows = grid.perRow;
+      check(
+        `G083 ${p} @${w}: ${grid.cards} cards, no lone card in the last row (rows ${rows.join('+')})`,
+        grid.cards === designs.length && (rows.length === 1 || rows[rows.length - 1] === rows[0] || grid.centered),
+        grid,
+      );
+    }
+    // the home page is loaded: its design chips
+    const chips = await page.evaluate(() => {
+      const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
+      const tops = Array.from(box.querySelectorAll('button')).map((b) => Math.round(b.getBoundingClientRect().top));
+      return { n: tops.length, lines: new Set(tops).size, scroller: box.hasAttribute('data-scroll-x'), overflowX: getComputedStyle(box).overflowX };
+    });
+    if (mobile) {
+      check(`G083 home @${w}: the ${chips.n} design chips stay on one line`, chips.n === designs.length && chips.lines === 1 && chips.scroller && chips.overflowX === 'auto', chips);
+      const reach = await page.evaluate(async () => {
+        const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
+        box.scrollLeft = box.scrollWidth;
+        await new Promise((r) => setTimeout(r, 150));
+        const lastChip = box.lastElementChild!.getBoundingClientRect();
+        const r = { right: Math.round(lastChip.right), vw: document.documentElement.clientWidth, pageScroll: document.documentElement.scrollWidth };
+        box.scrollLeft = 0;
+        return r;
+      });
+      check(`G083 home @${w}: the row scrolls to its last chip, no page scroll`, reach.right <= reach.vw && reach.pageScroll <= reach.vw, reach);
+    } else {
+      check(`G083 home @${w}: all ${chips.n} design chips shown (wrapping allowed beside the text)`, chips.n === designs.length, chips);
+    }
+    if (w === 390) {
+      // the newest design's chip (scrolled into reach by the click) switches the poster
+      const newest = designs[designs.length - 1];
+      await page.getByRole('button', { name: newest.name, exact: true }).click();
+      const poster = await page.locator('a[aria-label^="Tap to open the live demo"] img').getAttribute('src');
+      check(`G083 home @390: the ${newest.name} chip switches the poster`, !!poster && poster.includes(newest.id), poster);
+      await page.goto(BASE + '/about', { waitUntil: 'networkidle' });
+      const about = await page.evaluate(() => {
+        const img = document.querySelector<HTMLImageElement>('main img[src*="/marketing/designs/"][src*="/story-"]');
+        return img ? { src: img.getAttribute('src'), alt: img.alt, ok: img.complete && img.naturalWidth > 0 } : null;
+      });
+      check(
+        "G083 /about: shows a live design's real Our Story screen",
+        !!about && about.ok && designs.some((d) => about.src!.includes(`/marketing/designs/${d.id}/story-`) && about.alt.startsWith(`${d.name}: the Our Story page`)),
+        about,
+      );
+    }
+    await ctx.close();
+  }
+
   // 2a. demo facade on a phone
   {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
@@ -407,7 +480,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066, G082)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

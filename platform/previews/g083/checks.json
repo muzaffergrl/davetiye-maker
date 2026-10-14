@@ -1,0 +1,604 @@
+{
+  "task": "G083 — 02 Dusty Blue & Champagne on the sales site",
+  "date": "2026-10-14",
+  "server": "next start (local production build of this checkout), temp data folder; nothing deployed",
+  "commands": {
+    "npm test": "560/560",
+    "npm run typecheck": "clean",
+    "npm run build": "ok (+ trace-check: 16 routes, 6 themes)",
+    "node scripts/marketing-assets.ts --check": "marketing assets: ok",
+    "tests/marketing-browser.ts": "358/358",
+    "tests/g080-browser.ts": "99/99"
+  },
+  "assets": {
+    "command": "node scripts/marketing-assets.ts --designs dusty-blue-champagne --shots <temp>/shots02",
+    "capture": "tools/listing_templates/capture.ts --theme dusty-blue-champagne, temporary uncommitted copy without the buyer/panel section (outdated panel selectors, G082 note); guest screens and recording code unchanged",
+    "capture_checks": [
+      {
+        "name": "reply stored: Olivia Bennett",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "reply stored: Marcus Reed",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "reply stored: Hannah Clarke",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "reply stored: The Alvarez Family",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "guest: envelope page 200",
+        "ok": true
+      },
+      {
+        "name": "guest: reply sent (\"thank you\")",
+        "ok": true
+      },
+      {
+        "name": "demo: /start/demo/<theme>/home 200",
+        "ok": true
+      },
+      {
+        "name": "recording: opening.webm written",
+        "ok": true
+      }
+    ],
+    "capture_notes": [
+      "Guest: home, reply-by + add to calendar (cut at 0–774 px: nothing clean to show at the edges)",
+      "Guest: Details, order of the day + add to calendar (cut at 0–774 px: nothing clean to show at the edges)",
+      "Guest: RSVP form with the couple's question (Meal choice) (cut at 16–774 px: nothing clean to show at the edges)"
+    ],
+    "screens": {
+      "envelope": [
+        640,
+        1385
+      ],
+      "home": [
+        640,
+        1385
+      ],
+      "invitation": [
+        640,
+        1385
+      ],
+      "story": [
+        640,
+        1385
+      ],
+      "details": [
+        640,
+        1385
+      ],
+      "schedule": [
+        640,
+        1270
+      ],
+      "rsvp": [
+        640,
+        1385
+      ],
+      "form": [
+        640,
+        1244
+      ]
+    },
+    "opening": {
+      "file": "/marketing/designs/dusty-blue-champagne/opening.mp4",
+      "poster": "/marketing/designs/dusty-blue-champagne/opening-poster.webp",
+      "width": 390,
+      "height": 844,
+      "seconds": 10,
+      "bytes": 398923
+    },
+    "unchanged": "01 / 03 / 05 / panel: 103 files under public/marketing byte-identical (sha1 before = after); their assets.json entries identical"
+  },
+  "perf_lab_390": {
+    "/": {
+      "lcp": 1508,
+      "lcpElement": "IMG http://127.0.0.1:42015/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1088,
+      "loadMs": 5350,
+      "transferredKB": 358,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 125
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1536,
+      "lcpElement": "IMG http://127.0.0.1:42015/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1100,
+      "loadMs": 5622,
+      "transferredKB": 391,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 159
+    },
+    "/designs/dusty-blue-champagne": {
+      "lcp": 1048,
+      "lcpElement": "P",
+      "cls": 0.0004,
+      "fcp": 1048,
+      "loadMs": 5423,
+      "transferredKB": 364,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 131
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 940,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 940,
+      "loadMs": 4771,
+      "transferredKB": 235,
+      "scriptKB": 139,
+      "fontKB": 67,
+      "imageKB": 3
+    }
+  },
+  "g083_browser_checks": [
+    {
+      "name": "/designs/dusty-blue-champagne @390: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @390: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 390,
+        "vw": 390,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @390: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @390: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @390: axe-core, no serious/critical violations",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @390: touch targets ≥ 44 × 44 px",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @1280: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 1280,
+        "vw": 1280,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @1280: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @1280: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @320: HTTP 200",
+      "ok": true,
+      "detail": 200
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @320: no horizontal page scroll",
+      "ok": true,
+      "detail": {
+        "scrollW": 320,
+        "vw": 320,
+        "h1": 1,
+        "cut": []
+      }
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @320: nothing cut off at the edges",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/dusty-blue-champagne @320: one h1",
+      "ok": true,
+      "detail": 1
+    },
+    {
+      "name": "/designs/dusty-blue-champagne: real screens load, opening clip, start + demo links, Product + VideoObject",
+      "ok": true,
+      "detail": {
+        "h1": "Dusty Blue & Champagne wedding website",
+        "screens": 5,
+        "broken": [],
+        "video": {
+          "src": "/marketing/designs/dusty-blue-champagne/opening.mp4",
+          "poster": "/marketing/designs/dusty-blue-champagne/opening-poster.webp"
+        },
+        "start": "/start?theme=dusty-blue-champagne",
+        "demo": "/start/demo/dusty-blue-champagne",
+        "product": "dusty-blue-champagne",
+        "videoLd": "http://localhost:3000/marketing/designs/dusty-blue-champagne/opening.mp4"
+      }
+    },
+    {
+      "name": "/designs/dusty-blue-champagne: clip and poster answer 200 (video/mp4, image/webp)",
+      "ok": true,
+      "detail": [
+        "200 video/mp4",
+        "200 image/webp"
+      ]
+    },
+    {
+      "name": "G083 /designs @320: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @320: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @320: the 4 design chips stay on one line",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 1,
+        "scroller": true,
+        "overflowX": "auto"
+      }
+    },
+    {
+      "name": "G083 home @320: the row scrolls to its last chip, no page scroll",
+      "ok": true,
+      "detail": {
+        "right": 304,
+        "vw": 320,
+        "pageScroll": 320
+      }
+    },
+    {
+      "name": "G083 /designs @360: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @360: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @360: the 4 design chips stay on one line",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 1,
+        "scroller": true,
+        "overflowX": "auto"
+      }
+    },
+    {
+      "name": "G083 home @360: the row scrolls to its last chip, no page scroll",
+      "ok": true,
+      "detail": {
+        "right": 344,
+        "vw": 360,
+        "pageScroll": 360
+      }
+    },
+    {
+      "name": "G083 /designs @390: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @390: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @390: the 4 design chips stay on one line",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 1,
+        "scroller": true,
+        "overflowX": "auto"
+      }
+    },
+    {
+      "name": "G083 home @390: the row scrolls to its last chip, no page scroll",
+      "ok": true,
+      "detail": {
+        "right": 374,
+        "vw": 390,
+        "pageScroll": 390
+      }
+    },
+    {
+      "name": "G083 home @390: the Dusty Blue & Champagne chip switches the poster",
+      "ok": true,
+      "detail": "/marketing/designs/dusty-blue-champagne/envelope-640.webp"
+    },
+    {
+      "name": "G083 /about: shows a live design's real Our Story screen",
+      "ok": true,
+      "detail": {
+        "src": "/marketing/designs/dusty-blue-champagne/story-640.webp",
+        "alt": "Dusty Blue & Champagne: the Our Story page with demo photos",
+        "ok": true
+      }
+    },
+    {
+      "name": "G083 /designs @430: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @430: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @430: the 4 design chips stay on one line",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 1,
+        "scroller": true,
+        "overflowX": "auto"
+      }
+    },
+    {
+      "name": "G083 home @430: the row scrolls to its last chip, no page scroll",
+      "ok": true,
+      "detail": {
+        "right": 414,
+        "vw": 430,
+        "pageScroll": 430
+      }
+    },
+    {
+      "name": "G083 /designs @768: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @768: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @768: the 4 design chips stay on one line",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 1,
+        "scroller": true,
+        "overflowX": "auto"
+      }
+    },
+    {
+      "name": "G083 home @768: the row scrolls to its last chip, no page scroll",
+      "ok": true,
+      "detail": {
+        "right": 744,
+        "vw": 768,
+        "pageScroll": 768
+      }
+    },
+    {
+      "name": "G083 /designs @1024: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @1024: 4 cards, no lone card in the last row (rows 2+2)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          2,
+          2
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @1024: all 4 design chips shown (wrapping allowed beside the text)",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 3,
+        "scroller": true,
+        "overflowX": "visible"
+      }
+    },
+    {
+      "name": "G083 /designs @1280: 4 cards, no lone card in the last row (rows 4)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          4
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 / @1280: 4 cards, no lone card in the last row (rows 4)",
+      "ok": true,
+      "detail": {
+        "cards": 4,
+        "perRow": [
+          4
+        ],
+        "centered": false
+      }
+    },
+    {
+      "name": "G083 home @1280: all 4 design chips shown (wrapping allowed beside the text)",
+      "ok": true,
+      "detail": {
+        "n": 4,
+        "lines": 2,
+        "scroller": true,
+        "overflowX": "visible"
+      }
+    },
+    {
+      "name": "demo: a card \"Open live demo\" opens its design (dusty-blue-champagne)",
+      "ok": true
+    },
+    {
+      "name": "demo: the close button closes it (dusty-blue-champagne)",
+      "ok": true
+    },
+    {
+      "name": "perf /designs/dusty-blue-champagne: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1048,
+        "lcpElement": "P",
+        "cls": 0.0004,
+        "fcp": 1048,
+        "loadMs": 5423,
+        "transferredKB": 364,
+        "scriptKB": 140,
+        "fontKB": 67,
+        "imageKB": 131
+      }
+    },
+    {
+      "name": "perf /designs/dusty-blue-champagne: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0.0004
+    },
+    {
+      "name": "perf /designs/dusty-blue-champagne: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": 364
+    }
+  ],
+  "previews": {
+    "designs_cards_{390,1280}.png": "/designs card grid: 2 + 2 on phones, one row of 4 at 1280",
+    "design_dusty-blue-champagne_{390,1280}.png": "design page, first screen",
+    "design_dusty-blue-champagne_pages_{390,1280}.png": "the 4 real screens + captions",
+    "home_designs_{390,1280}.png": "home page design strip",
+    "home_first_screen_{390,1280}.png": "home hero: design chips on one line at 390 (wrap beside the text at 1280)",
+    "home_chips_end_390.png": "chip row scrolled to its end, Dusty Blue & Champagne selected (poster switched)",
+    "about_story_390.png": "/about: the newest live design's Our Story screen (now 02)"
+  },
+  "not_tested": [
+    "Vercel / live site",
+    "real iPhone / Android (sideways chip scroll with touch)",
+    "screen reader by hand",
+    "Google Rich Results Test"
+  ]
+}

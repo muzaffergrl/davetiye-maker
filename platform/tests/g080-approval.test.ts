@@ -73,11 +73,12 @@ async function post(theme: string, names: [string, string]) {
   return { status: res.status, body: (await res.json()) as Record<string, any>, orderNumber };
 }
 
-test('one source: approved = the sales-site designs with status "live" (today 01, 03 and 05 — G082; 02, 04 in review)', () => {
+test('one source: approved = the sales-site designs with status "live" (today 01, 03, 05 — G082 — and 02 — G083; 04 in review)', () => {
   assert.deepEqual(approved, liveDesigns().map((d) => d.id));
   assert.ok(approved.includes('olive-ivory') && approved.includes('blush-garden-rose'), approved.join());
   assert.ok(approved.includes('mediterranean-lemon'), `G082: 05 is approved (${approved.join()})`);
-  for (const id of ['dusty-blue-champagne', 'vintage-airmail-love-letter']) {
+  assert.ok(approved.includes('dusty-blue-champagne'), `G083: 02 is approved (${approved.join()})`);
+  for (const id of ['vintage-airmail-love-letter']) {
     if (themeIds.includes(id) && !approved.includes(id)) assert.equal(themeApproval(id), 'review', id);
   }
   // 'coming' and not-listed designs are in review; a fixture config shows the rule without depending on today's list

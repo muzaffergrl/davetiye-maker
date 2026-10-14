@@ -143,6 +143,36 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'white envelope with a cobalt scalloped edge, tied with a lemon on a blue ribbon; blue-and-white tile frames, lemon branches and a sunlit plaster wall.',
     relatedGuides: ['digital-wedding-invitation-etiquette', 'what-to-put-on-your-wedding-website'],
   },
+  // G083: written against themes/dusty-blue-champagne/README.md (G402, approved), the catalogue's opening line
+  // (docs/09 WEB 02) and its real screens and opening frames (390 × 844 capture).
+  'dusty-blue-champagne': {
+    id: 'dusty-blue-champagne',
+    collection: '02_Dusty_Blue',
+    demoCouple: 'Eleanor & Theo',
+    style: 'Ivory envelope with a champagne gold edge and a dusty blue wax seal, cream roses, eucalyptus and instant-photo cards',
+    metaDescription:
+      'An ivory envelope sealed with dusty blue wax opens into your wedding website: cream roses, eucalyptus and champagne gold ferns. Edit it on your phone.',
+    intro:
+      'An ivory envelope with a champagne gold edge and a dusty blue wax seal that carries your initials, among cream roses, eucalyptus and gold ferns. Inside: instant-photo cards, a floral invitation card and an elegant script.',
+    opening:
+      'Your guests tap the envelope. The dusty blue wax seal breaks off and spins down off the screen, the flap lifts to show a blue and gold damask lining, and a card with your portrait rises out of the envelope while a single eucalyptus leaf drifts down beside it. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a slightly tilted instant-photo card, your names, date, venue, a live countdown and an RSVP button, then the floral invitation card.',
+      story: "Three instant-photo prints fly in one after another and settle at gentle angles, each with its caption written in the print's margin.",
+      details: 'An "Order of the Day" card, the venue photo as a tilted print, dress code, add to calendar, links and questions and answers.',
+      rsvp: 'A reply card with your reply-by date and a dusty blue wax seal pressed on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Dusty Blue', hex: '#4E6782' },
+      { name: 'Powder Blue', hex: '#CCDCEC' },
+      { name: 'Ivory', hex: '#FBF7EF' },
+      { name: 'Champagne', hex: '#B8996A' },
+      { name: 'Navy', hex: '#2B3A4E' },
+    ],
+    fonts: ['Pinyon Script', 'Cormorant Garamond'],
+    llmsLine: "ivory envelope with a champagne gold edge and a dusty blue wax seal with the couple's initials; cream roses, eucalyptus, baby's breath and instant-photo cards on dusty blue paper.",
+    relatedGuides: ['wedding-website-wording', 'when-to-send-your-wedding-website'],
+  },
 };
 
 export interface Design extends DesignCommerce {

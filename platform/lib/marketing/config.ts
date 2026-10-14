@@ -141,6 +141,16 @@ export const MARKETING: MarketingConfig = {
       updated: '2026-10-14',
     },
     {
+      // G402 approved (2026-10-14); on the sales site and open on /start since G083.
+      id: 'dusty-blue-champagne',
+      name: 'Dusty Blue & Champagne',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-14',
+    },
+    {
       // G404 (being built). Becomes 'live' only when the theme is live; until then it is not listed anywhere.
       id: 'vintage-airmail-love-letter',
       name: 'Vintage Airmail Love Letter',
