@@ -44,7 +44,7 @@ Ayrıntı ve ölçümler tema `README.md`'sinde.
 - **Açılış:** dokununca tozlu mavi mum mühür kopup (0 ms) dönerek ekranın altından düşer, V kapak yukarı açılır, altın damask
   astar görünür, kart ön cebin arkasından yükselir; bu sırada tek okaliptüs yaprağı kartın yanından süzülür (accent_1 × 1,
   `fall`; her açılışta tam bir yaprak, fotoğrafın üstünden geçmez), kart belirgin biçimde öne gelir (%3,5 yukarı, × 1,09, büyüyen
-  gölge) ve hâlâ hareket ederken view transition ile home hero kartına uçar (dokun → home **3,9 s**, theme-check 3 898 ms; Skip her
+  gölge) ve hâlâ hareket ederken view transition ile home hero kartına uçar (dokun → home **3,9 s**, theme-check 3 919 ms; Skip her
   an). Mühür kapaktan ayrı katman (`carried_by_flap: false`), yeri V ucuna bağlı, boyu W1.1 comp'tan (`compare_closure.jpg`).
 - **Story:** üç anlık baskı sırayla (her biri kendi sahnesi) yandan/alttan uçup hafif taşmayla −4,5° / +4° / −2,5° oturur,
   başlıklar baskının alt kenar boşluğuna yazılır; 2. baskının çerçevesi aynalı (dalı sağ üstte), önceki baskı sonrakinin üstünde.
@@ -99,7 +99,7 @@ tarih ve şehir ayrı satırlar (`city_region`); ≥ 1024 px iki sütunlu hero (
 kartın içinde; home'daki davet seti, bölümler ve kapanış comp'suz bölümler (bu tasarımın parçaları); story'de baskılar arasındaki
 küçük çiçek kümeleri yok (ayrı parça yok).
 
-**Komutlar** (son hâlde; origin/main birleştirildikten sonra yeniden koşuldu): `npm ci` · `npm test` 478/478 · `npm run typecheck`
+**Komutlar** (son hâlde; origin/main birleştirildikten sonra yeniden koşuldu): `npm ci` · `npm test` 496/496 · `npm run typecheck`
 temiz · `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme dusty-blue-champagne --stress` **116 geçti / 0 uyarı
 / 0 hata** · `g051-browser --theme` 44/44 · `final-smoke --theme` 45/45 · `kit_check --paket 5` 23/23, `--paket 2` 5/5, hiza
 tamam (sol −0,20 · sağ +0,29 · alt +0,07 %) · `test_tema_build --hizli`, `test_kit_check`, `test_parts_prep` tamam ·

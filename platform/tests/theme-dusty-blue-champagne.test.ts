@@ -516,7 +516,7 @@ test('18 G051 add to calendar: home and details carry the .ics link and a Google
   const noDate = demo();
   noDate.date = '';
   assert.equal(render('home', noDate).$('a[data-calendar]').length, 0, 'no date yet: no calendar buttons');
-  assert.match(jsText(), /'home-invite':[^\n]*\['cal', \d+\]/);
+  assert.match(jsText(), /'home-cal':\s+\[\['cal', 0\]\]/, 'home: the calendar row enters on its own when it scrolls in');
   assert.match(jsText(), /'details-venue':[^\n]*\['cal', \d+\]/);
 });
 
