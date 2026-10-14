@@ -56,3 +56,4 @@ Tasarım 14'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 gpt-gorsel-E: kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero + PAKET 2
 - 2026-10-14 gpt-gorsel-E eş zamanlı güncelleme notu: üstteki kapsam sonu satırı kullanıcı talebiyle aynen korundu; PAKET 2 bu oturum sürerken gpt-gorsel-L tarafından tamamlandı ve entegratörün yukarıdaki kaydı 5/5 geçtiğini doğruluyor. Ben yalnız kısım 2'nin sekiz parçasını ekledim; durum alindi, burada duruldu.
 - 2026-10-14 entegratör ara kontrol: kısım 2 (8 parça) geçti. frame_landscape ve frame_portrait yeşil pencerelerinde saydam leke var — tema build'i (parts_prep pencere doldurma) düzeltir, yeniden üretim gerekmez. Kısım 3 verildi.
+- 2026-10-14 devam: gpt-gorsel-E (kısım 3)
