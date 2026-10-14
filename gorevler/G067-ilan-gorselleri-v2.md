@@ -2,7 +2,7 @@
 id: G067
 baslik: İlan görselleri v2 — kısım 1 (01, 03): GM03 düzeni + GPT sahneleri + gerçek misafir ekranları (kapak, sayfalar, nasıl çalışır, canlı demo)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-ilan2
 oncelik: 1
 bagimli: [G801, G803, GM02]
@@ -67,3 +67,4 @@ bitince G065'te. Eski G059 kiti (`package/listing/`) dokunulmaz; v2 ayrı klasö
 - 2026-10-14 açıldı (entegratör): GM03 kısım 1 + G801/G803 sahneleri hazır
 - 2026-10-14 alindi: claude-ilan2
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
