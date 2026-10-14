@@ -53,3 +53,4 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-A (kısım 2)
 - 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card kaydedildi; dört dosya kit_check.denetle kontrolünü geçti. Açık kitap hiza kontrolü GEÇTİ (en büyük kenar farkı %0,29); durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 2, 8/8: info_card, frame_portrait, frame_landscape, decor_tl de kaydedildi; sekiz dosya ve kitap hizası kontrolü GEÇTİ; durum alindi.
+- 2026-10-14 gpt-gorsel-A: kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero
