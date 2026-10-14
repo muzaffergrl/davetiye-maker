@@ -463,14 +463,15 @@ async function main() {
       const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
       const p = await ctx.newPage();
       await p.goto(`${BASE}/edit/panel-limits?k=${panelSite.editKey}`, { waitUntil: 'networkidle' });
+      // Panel v2 (G060): each section is its own page (#edit/<id>); "couple" is "names".
       const open = async (id: string) => {
-        const b = p.locator(`#section-${id}`);
-        if ((await b.getAttribute('aria-expanded')) !== 'true') await b.click();
-        await b.scrollIntoViewIfNeeded();
+        const v2 = id === 'couple' ? 'names' : id;
+        await p.evaluate((h: string) => (window.location.hash = h), `#edit/${v2}`);
+        await p.waitForSelector(`#section-${v2}-body`);
       };
       await open('couple');
       const first = p.locator('#f-partners-0-display_name');
-      check('panel: first name limited to 40 with a counter', (await first.getAttribute('maxlength')) === '40' && (await p.locator('#section-couple-body').innerText()).includes(`${demo.partners[0].display_name.length}/40`));
+      check('panel: first name limited to 40 with a counter', (await first.getAttribute('maxlength')) === '40' && (await p.locator('#section-names-body').innerText()).includes(`${demo.partners[0].display_name.length}/40`));
       check('panel: full name 40, names line 85', (await p.getAttribute('#f-partners-0-full_name', 'maxlength')) === '40' && (await p.getAttribute('#f-name_display', 'maxlength')) === '85');
       await open('venue');
       check('panel: venue name limited to 80', (await p.getAttribute('#f-venue-name', 'maxlength')) === '80');
@@ -486,10 +487,11 @@ async function main() {
       const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
       const p = await ctx.newPage();
       await p.goto(`${BASE}/edit/old-site?k=${legacySite.editKey}`, { waitUntil: 'networkidle' });
+      // Panel v2 (G060): each section is its own page (#edit/<id>); "couple" is "names".
       const open = async (id: string) => {
-        const b = p.locator(`#section-${id}`);
-        if ((await b.getAttribute('aria-expanded')) !== 'true') await b.click();
-        await b.scrollIntoViewIfNeeded();
+        const v2 = id === 'couple' ? 'names' : id;
+        await p.evaluate((h: string) => (window.location.hash = h), `#edit/${v2}`);
+        await p.waitForSelector(`#section-${v2}-body`);
       };
       await open('schedule');
       const body = (await p.locator('#section-schedule-body').innerText()).replace(/\s+/g, ' ');
@@ -500,7 +502,7 @@ async function main() {
       );
       await p.screenshot({ path: path.join(OUT, 'panel_old_site_schedule_390.png') });
       await open('couple');
-      const couple = (await p.locator('#section-couple-body').innerText()).replace(/\s+/g, ' ');
+      const couple = (await p.locator('#section-names-body').innerText()).replace(/\s+/g, ' ');
       check('panel, old site: the name error says which field and how long', couple.includes('First name (first partner) is 41 characters. Please shorten it to 40.'), couple.slice(0, 200));
       // An unrelated edit autosaves (the site is published and up to date, so "Publish" needs a change to publish).
       await open('venue');
@@ -521,8 +523,8 @@ async function main() {
       await open('venue');
       const venue = await p.locator('#f-venue-name').inputValue();
       const city = await p.locator('#f-venue-city').inputValue();
-      await open('couple');
-      const first = await p.locator('#f-partners-0-display_name').inputValue();
+      // Published: the names are locked (G060), so the stored value is read from the site record.
+      const first = (await adapter.getSiteById(legacySite.site.id))!.content.partners[0].display_name;
       await open('schedule');
       const rowsLeft = await p.locator('[data-schedule-row]').count();
       check('panel, old site: values kept after an unrelated autosave + reload (41 / 87 characters, 12 events)', [...first].length === 41 && [...venue].length === 87 && city === 'Charleston' && rowsLeft === 12, `${[...first].length} / ${[...venue].length} / ${rowsLeft} / ${city}`);

@@ -4,6 +4,7 @@
 
 import { getDataAdapter } from '../data/index.ts';
 import { publicOrigin } from '../panel/http.ts';
+import { isArchived } from '../panel/rights.ts';
 import { canPreview } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { renderTemplate } from '../theme/engine.ts';
@@ -55,6 +56,17 @@ export function notFound(): Response {
   });
 }
 
+/**
+ * A site 12 months after its wedding (G060, docs/16 §11.9): 410 + a plain page without the couple's
+ * names (noindex). The couple still sees it through the panel preview.
+ */
+export function archivedPage(): Response {
+  return new Response(PLAIN_PAGE('This wedding website has been archived', 'Thank you for visiting.'), {
+    status: 410,
+    headers: htmlHeaders({ preview: false, status: 410 }),
+  });
+}
+
 function serverError(): Response {
   return new Response(PLAIN_PAGE('Something went wrong', 'Please try again in a moment.'), {
     status: 500,
@@ -89,6 +101,7 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     const preview = previewParam !== null && canPreview(site, previewParam);
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
+    if (!preview && isArchived(site)) return archivedPage();
 
     const theme = await loadTheme(site.theme);
     if (!theme) {

@@ -138,10 +138,14 @@ async function waitSaved(page: any) {
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') !== 'saved', null, { timeout: 1500 }).catch(() => undefined);
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
 }
+/** Panel v2 (G060): each section is its own page (#edit/<id>); Guests and Share are views (#guests, #share). */
 async function openSection(page: any, id: string) {
-  const button = page.locator(`#section-${id}`);
-  if ((await button.getAttribute('aria-expanded')) !== 'true') await button.click();
-  await button.scrollIntoViewIfNeeded();
+  await page.evaluate((h: string) => (window.location.hash = h), `#edit/${id}`);
+  await page.waitForSelector(`#section-${id}-body`);
+}
+async function openView(page: any, view: string) {
+  await page.evaluate((h: string) => (window.location.hash = h), `#${view}`);
+  await page.waitForTimeout(150);
 }
 async function decodeQrFrom(locator: any): Promise<string | null> {
   const png = await locator.screenshot();
@@ -277,14 +281,20 @@ try {
     await shot(page, '08_buyer_edit_link_390', { png: true });
 
     await page.click('[data-open-editor]');
-    await page.waitForURL(new RegExp(`/edit/${SLUG}\\?k=`));
-    await page.waitForSelector('[data-panel]');
-    check('buyer: panel opens with the names', (await page.locator('[data-panel] h1').first().innerText()) === (two ? 'Elena & Marco' : 'Elena'));
+    await page.waitForURL(new RegExp(`/edit/${SLUG}\\?k=.*#setup/1$`));
+    await page.waitForSelector('[data-setup="1"]');
+    check('buyer: the editor opens the setup at step 1 with the names (G060)', (await page.inputValue('#f-partners-0-display_name')) === 'Elena');
     check('buyer: panel draft status', (await page.getAttribute('[data-panel]', 'data-status')) === 'draft');
+    check('buyer: setup has no horizontal overflow', (await overflow(page)) <= 0);
+    await shot(page, '09_buyer_setup_390', { png: true });
+    // Save & exit -> the editor's Home (this smoke test then uses the editor views).
+    await page.click('[data-setup-exit]');
+    await page.waitForSelector('[data-status-card]');
+    check('buyer: Home shows the names', (await page.locator('[data-panel] h1').first().innerText()) === (two ? 'Elena & Marco' : 'Elena'));
     check('buyer: panel has no horizontal overflow', (await overflow(page)) <= 0);
     const bar = await page.locator('[data-publish]').boundingBox();
-    check('buyer: Publish button in the fixed bar, >= 44 px', bar && bar.y + bar.height <= 844 && bar.height >= 44, JSON.stringify(bar));
-    await shot(page, '09_buyer_panel_top_390', { png: true });
+    check('buyer: Publish button in the top bar, >= 44 px', bar && bar.y >= 0 && bar.y + bar.height <= 70 && bar.height >= 44, JSON.stringify(bar));
+    await shot(page, '09b_buyer_panel_home_390', { png: true });
 
     // Photos: upload + crop the portrait of the invitation card.
     const slots = Object.keys(env.manifest.photos).length;
@@ -294,9 +304,8 @@ try {
     await page.click('[data-crop-confirm]');
     await page.waitForSelector(`[data-photo-slot="${HERO}"] img`, { timeout: 20_000 });
     await waitSaved(page);
-    check(`buyer: photo uploaded (1 of ${slots} added)`, (await page.locator('#section-photos').innerText()).includes(`1 of ${slots} added`));
-    await page.locator('#section-photos').evaluate((el: Element) => el.scrollIntoView({ block: 'start' }));
-    await page.evaluate(() => window.scrollBy(0, -8));
+    check(`buyer: photo uploaded (1 of ${slots} photos)`, (await page.locator('[data-section="photos"]').innerText()).includes(`1 of ${slots} photos`));
+    await page.evaluate(() => window.scrollTo(0, 0));
     await shot(page, '10_buyer_panel_photos_390');
 
     // Publish -> notes sheet -> Publish anyway -> live + QR.
@@ -317,7 +326,7 @@ try {
     await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
     const PUBLIC_URL = `${BASE}/${SLUG}`;
     check('buyer: "Your website is live"', (await page.locator('[data-testid="live"] h2').innerText()) === 'Your website is live');
-    check('buyer: public link shown', (await page.locator('[data-live-link]').innerText()) === PUBLIC_URL);
+    check('buyer: public link shown', (await page.locator('[data-live-link]').getAttribute('href')) === PUBLIC_URL);
     const qr = page.locator('[data-testid="live"] svg[role="img"]');
     check('buyer: QR decodes to the public URL', (await decodeQrFrom(qr)) === PUBLIC_URL);
     await qr.scrollIntoViewIfNeeded();
@@ -352,9 +361,9 @@ try {
 
     await page.bringToFront();
     if (rsvpOn) {
-      await openSection(page, 'rsvp');
+      await openView(page, 'guests');
       await page.click('[data-refresh-replies]');
-      await page.waitForSelector('[data-replies] li', { timeout: 8000 }).catch(() => null);
+      await page.waitForSelector('[data-reply]', { timeout: 8000 }).catch(() => null);
       const replies = await page.locator('[data-replies]').innerText().catch(() => '');
       check('buyer: the reply shows in the panel', replies.includes('Ben Fictional'), replies.replace(/\s+/g, ' ').slice(0, 120));
     }

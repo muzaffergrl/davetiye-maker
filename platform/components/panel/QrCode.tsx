@@ -2,8 +2,10 @@
 // QR code of the public site address, generated from the real URL (lib/qr.ts, pinned uqr).
 // Shown as inline SVG; downloadable as SVG or PNG (rendered from the same module matrix).
 
+import { Download } from 'lucide-react';
 import { useMemo } from 'react';
 import { QR_BORDER, qrMatrix, qrPathData, qrSvg } from '../../lib/qr.ts';
+import { Button } from './ui.tsx';
 import styles from './panel.module.css';
 
 const DARK = '#1f1d1a';
@@ -59,12 +61,12 @@ export function QrCode({ url, fileBase }: { url: string; fileBase: string }) {
         <path d={qrPathData(qr)} fill={DARK} />
       </svg>
       <div className={styles.buttonRow}>
-        <button type="button" className={styles.secondaryButton} onClick={downloadPng}>
-          Download QR (PNG)
-        </button>
-        <button type="button" className={styles.secondaryButton} onClick={downloadSvg}>
-          Download QR (SVG)
-        </button>
+        <Button small icon={Download} onClick={downloadPng}>
+          Download PNG
+        </Button>
+        <Button small icon={Download} onClick={downloadSvg}>
+          Download SVG
+        </Button>
       </div>
     </div>
   );
