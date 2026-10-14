@@ -307,30 +307,55 @@ Kontrol (tüm fotoğraflar): aynı çift tutarlı; yüzler doğal; eller/parmakl
 
 ---
 
-## PAKET 3 — Etsy ilan mockup'ları (görev G804)
+## PAKET 3 — Etsy ilan sahneleri (görev G804; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 
-Ekran ve kart yüzeyleri **düz yeşil (#00FF00)**; tasarım oraya yerleştirilecek. Nesneler düz, eğik değil.
+> Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
+> görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir
+> (`tools/mockup_compose.py`), yazıları kendisi dizer. Telefon eğik durabilir; yeter ki ekranın **dört köşesi görünsün**.
+> Hepsini **tek sohbette** üret; aynı masa, aynı ışık, aynı süsler. Kaydet satırındaki `N ekran` = görselde beklenen yeşil ekran sayısı.
+> Üreten: `python3 tools/paket3_sahne.py --no 04` (pilot: 01/03, G801/G803).
 
-### 3.1 Telefon mockup'ı
-**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/phone_flatlay.png` · 1024×1536
+**Instructions for GPT (send before the first image):**
+```
+You are the photographer and set stylist for the Etsy listing photos of a digital wedding website design called "Vintage Airmail Love Letter". Every image in this chat is a real-looking styled product photo built around phones and a laptop whose screens are flat pure green (#00FF00); we will place the real website screens into the green areas afterwards. Keep one consistent set across all images: an aged wooden writing desk, a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen, the same light and the same color world (faded airmail red, navy blue, aged cream parchment and muted brass). Aim for best-selling, magazine-quality Etsy listing photos: rich, airy, luxurious, never cluttered, never cheap stock-photo looking.
+```
+
+### 3.1 Kapak — elde telefon
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/cover_hand.png` · 1024×1024 · 1 ekran
 
 ```
-Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on an aged wooden writing desk, surrounded at the edges by a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural light, gentle shadows, no text, no logos, no brand marks on the phone.
+A woman's elegant hand with natural manicured nails and a delicate gold ring holds a smartphone upright in the lower center of the frame, the phone turned very slightly (about 10 degrees) toward the viewer, its screen facing the camera. Fingers hold only the sides and back of the phone. Behind it, softly out of focus, a styled table with an aged wooden writing desk and a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen. The upper 30% of the image is calm, soft, out-of-focus background with no objects, kept free for a headline. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: faded airmail red, navy blue, aged cream parchment and muted brass. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
 ```
-Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+Kontrol: tek yeşil ekran; dört köşe görünüyor, parmak ekranda değil; üst %30 sakin ve boş; yazı/logo yok.
 
-### 3.2 Dizüstü mockup'ı
-**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/laptop_desk.png` · 1536×1024
-
-```
-Elegant styled scene: an open modern laptop seen straight from the front at eye level, centered, on an aged wooden writing desk, with a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen beside it. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural light, airy, no text, no logos, no brand marks.
-```
-Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
-
-### 3.3 Basılı kart mockup'ı
-**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/card_flatlay.png` · 1024×1536
+### 3.2 Üç telefon — sayfalar
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/three_phones.png` · 1536×1024 · 3 ekran
 
 ```
-Flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a red and navy striped airmail envelope on an aged wooden writing desk, with a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen at the edges. Soft natural light, gentle shadows, no text, no logos.
+Three identical smartphones stand upright side by side on an aged wooden writing desk, seen from the front at a slightly low eye level: the middle phone a little forward and larger, the two side phones slightly behind it, with clear space between them so they never overlap. Around their bases and at the edges of the frame: a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen. The phones fill about 70% of the image width and stand in the middle band of the image. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: faded airmail red, navy blue, aged cream parchment and muted brass. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
 ```
-Kontrol: yeşil alan tamamen düz ve tek renk; nesne düz duruyor; yazı/logo yok.
+Kontrol: tam 3 yeşil ekran; telefonlar üst üste binmiyor; her ekranın dört köşesi görünüyor; yazı/logo yok.
+
+### 3.3 Dizüstü + telefon
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/laptop_phone.png` · 1536×1024 · 2 ekran
+
+```
+An open modern laptop seen from the front at eye level stands slightly left of center on an aged wooden writing desk, and a smartphone stands upright to its right on a small stand, both screens facing the camera. Around them: a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen, arranged loosely at the edges. Generous calm space above the laptop. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: faded airmail red, navy blue, aged cream parchment and muted brass. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 2 yeşil ekran (dizüstü + telefon); dört köşe görünüyor; laptopta logo yok; yazı yok.
+
+### 3.4 Masa üstü — yukarıdan
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/flatlay_phone.png` · 1024×1024 · 1 ekran
+
+```
+Flat-lay photo from directly above: a smartphone lies on an aged wooden writing desk, slightly right of center and rotated about 8 degrees, surrounded at the edges by a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen. The left third of the image is calm, empty surface kept free for text. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: faded airmail red, navy blue, aged cream parchment and muted brass. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tek yeşil ekran; sol üçte bir boş; süsler kenarlarda; yazı/logo yok.
+
+### 3.5 Telefonda düzenleme — yaşam sahnesi
+**Kaydet:** `collections/04_Vintage_Airmail/assets/gpt/mockups/hand_phone_edit.png` · 1024×1024 · 1 ekran
+
+```
+A cozy lifestyle close-up: two hands hold a smartphone in portrait orientation at a comfortable reading angle, the screen facing the camera; one thumb rests at the very edge of the phone frame, never on the screen. The person sits on a cream linen sofa with a faded airmail red cushion and a ceramic coffee cup; a small arrangement of a few fictional botanical postage stamps without text, dried flowers and a vintage fountain pen is softly blurred in the background. Warm, relaxed, happy planning mood; the person's face is not visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: faded airmail red, navy blue, aged cream parchment and muted brass. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tek yeşil ekran; başparmak ekranın dışında; yüz görünmüyor; yazı/logo yok.

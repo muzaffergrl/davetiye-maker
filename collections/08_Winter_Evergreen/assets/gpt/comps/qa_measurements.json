@@ -1,0 +1,76 @@
+{
+  "card_small.png": {
+    "green_bbox": [
+      306,
+      412,
+      720,
+      846
+    ],
+    "window_bbox_ratio": 0.954,
+    "core_rgb_min": [
+      5,
+      242,
+      2
+    ],
+    "core_rgb_max": [
+      10,
+      247,
+      6
+    ],
+    "core_alpha_min": 253,
+    "core_alpha_max": 254,
+    "exact_opaque_green_pixels": 0
+  },
+  "frame_landscape.png": {
+    "green_bbox": [
+      244,
+      237,
+      1291,
+      784
+    ],
+    "window_bbox_ratio": 1.914,
+    "core_rgb_min": [
+      0,
+      165,
+      0
+    ],
+    "core_rgb_max": [
+      6,
+      232,
+      4
+    ],
+    "core_alpha_min": 37,
+    "core_alpha_max": 250,
+    "exact_opaque_green_pixels": 0
+  },
+  "frame_portrait.png": {
+    "green_bbox": [
+      238,
+      368,
+      790,
+      1093
+    ],
+    "window_bbox_ratio": 0.761,
+    "core_rgb_min": [
+      3,
+      235,
+      1
+    ],
+    "core_rgb_max": [
+      9,
+      245,
+      7
+    ],
+    "core_alpha_min": 249,
+    "core_alpha_max": 252,
+    "exact_opaque_green_pixels": 0
+  },
+  "delivery": {
+    "primary_files": 28,
+    "comps": 5,
+    "parts": 18,
+    "photos": 5,
+    "square_exports": "1254x1254 (1:1 ratio)",
+    "production_editing": "All source images and edits use imagegen; only JPEG encoding and QA previews are local."
+  }
+}

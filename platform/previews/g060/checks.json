@@ -1,0 +1,456 @@
+{
+  "base": "next start (production build)",
+  "viewport": "390x844 (isMobile, touch) + 320, 1000, 1280",
+  "theme": "blush-garden-rose",
+  "axe": {
+    "setup 1": [],
+    "setup 6": [],
+    "home": [],
+    "edit": [],
+    "section: names": [],
+    "identity sheet": [],
+    "first publish sheet": [],
+    "section: story": [],
+    "section: details": [],
+    "guests": [],
+    "share": [],
+    "archived home": [],
+    "desktop 1280 section": []
+  },
+  "checks": [
+    {
+      "name": "setup 1: opens at \"#setup/1\" with the names from /start",
+      "ok": true
+    },
+    {
+      "name": "setup 1: rights rule shown before publishing",
+      "ok": true
+    },
+    {
+      "name": "setup: no bottom navigation in the wizard",
+      "ok": true
+    },
+    {
+      "name": "setup: no horizontal scroll at 390 px",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): setup 1 has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "setup 2: \"When is the wedding?\", focus on the heading",
+      "ok": true
+    },
+    {
+      "name": "setup 2: sample-details note while the demo date is in",
+      "ok": true
+    },
+    {
+      "name": "setup 2: date written out",
+      "ok": true
+    },
+    {
+      "name": "setup: Back keeps what was typed",
+      "ok": true
+    },
+    {
+      "name": "setup 3: values still there after Back / Continue",
+      "ok": true
+    },
+    {
+      "name": "setup: phone back = previous step",
+      "ok": true
+    },
+    {
+      "name": "setup 4: photo counter \"0 of 5 photos\"",
+      "ok": true
+    },
+    {
+      "name": "setup 4: upload + crop, counter \"1 of 5 photos\"",
+      "ok": true
+    },
+    {
+      "name": "setup 5: preview + \"Still sample text\" list",
+      "ok": true,
+      "detail": "5"
+    },
+    {
+      "name": "setup 5: sample item opens its section with \"Done\"",
+      "ok": true
+    },
+    {
+      "name": "setup 5: \"Done\" returns to the check step",
+      "ok": true
+    },
+    {
+      "name": "setup 6: rules box (3 changes, typo free, online until)",
+      "ok": true,
+      "detail": "Good to know before you publish After you publish, you can change your names and wedding date 3 times. Fixing a small typo (up to 2 letters or digits) is free. Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like. Your website stays online until September 18, 2028, 12 months after your wedding. Then it becomes a read-only archive."
+    },
+    {
+      "name": "setup 6: summary shows names, date and address",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): setup 6 has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "publish: \"Your website is live\"",
+      "ok": true
+    },
+    {
+      "name": "publish: QR made from the public URL and decodes to it",
+      "ok": true,
+      "detail": "http://127.0.0.1:3341/elena-and-marco / http://127.0.0.1:3341/elena-and-marco"
+    },
+    {
+      "name": "editor: Home after publishing, status Live",
+      "ok": true
+    },
+    {
+      "name": "editor: rights card \"3 of 3 changes left\"",
+      "ok": true
+    },
+    {
+      "name": "editor: no Home-screen setup prompt after publish (setup never reopens)",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): home has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "preview (phone): full-screen layer, the editor behind is inert",
+      "ok": true,
+      "detail": "{\"x\":0,\"y\":122,\"width\":390,\"height\":722}"
+    },
+    {
+      "name": "preview (phone): back gesture closes it and stays on Home",
+      "ok": true
+    },
+    {
+      "name": "edit: Names row shows the lock + \"3 changes left\"",
+      "ok": true
+    },
+    {
+      "name": "edit: no separate \"Optional sections\"",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): edit has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "names: identity read only after publishing (no name inputs)",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): section: names has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "identity sheet: a 1-letter change is a free typo (\"Save fix\")",
+      "ok": true
+    },
+    {
+      "name": "identity sheet: a real change says what it uses (\"Use 1 change\", 2 left)",
+      "ok": true,
+      "detail": "This uses 1 of your 3 changes. You'll have 2 left."
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): identity sheet has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "identity: snackbar \"… 2 changes left\" with Publish",
+      "ok": true
+    },
+    {
+      "name": "names: meter now \"2 of 3 changes left\"",
+      "ok": true
+    },
+    {
+      "name": "home: rights card \"2 of 3 changes left\"",
+      "ok": true
+    },
+    {
+      "name": "home: status says there are unpublished changes",
+      "ok": true
+    },
+    {
+      "name": "publish changes: the Live badge replaces the Publish button",
+      "ok": true
+    },
+    {
+      "name": "public page shows the new name",
+      "ok": true
+    },
+    {
+      "name": "resume: a fresh device opens the first unfinished step (2: the date is still sample)",
+      "ok": true
+    },
+    {
+      "name": "resume: reload returns to the step on this phone (3)",
+      "ok": true
+    },
+    {
+      "name": "save & exit: Home offers \"Continue setup · Step 3 of 6\"",
+      "ok": true
+    },
+    {
+      "name": "save & exit: the wizard stays closed on this phone",
+      "ok": true
+    },
+    {
+      "name": "first publish from the editor: rules box shown",
+      "ok": true,
+      "detail": "Before you publish\nGood to know before you publish\nAfter you publish, you can change your names and wedding date 3 times. Fixing a small typo (up to 2 letters or digits) is free.\nEverything else — tim"
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): first publish sheet has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "nav: Guests view, hash #guests, focus on its heading",
+      "ok": true
+    },
+    {
+      "name": "guests: empty state before publishing",
+      "ok": true
+    },
+    {
+      "name": "nav: back gesture returns to the previous view",
+      "ok": true
+    },
+    {
+      "name": "list: Remove happens at once with an Undo snackbar",
+      "ok": true
+    },
+    {
+      "name": "list: Undo puts the event back",
+      "ok": true
+    },
+    {
+      "name": "switches: Our Story on/off sits on the Our Story page",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): section: story has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "switches: Details has the dress code / travel / registry switches next to their fields",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): section: details has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "320 px: no horizontal scroll on #home",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "320 px: no horizontal scroll on #edit",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "320 px: no horizontal scroll on #edit/date",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "320 px: no horizontal scroll on #share",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "guests: numbers (11 guests coming, 2 not coming, 8 replies)",
+      "ok": true,
+      "detail": "Guests 11 Guests coming 2 Not coming 8 Replies Replies close at the end of Saturday, April 3, 2027 (New York time). All Coming Not coming Search replies by na"
+    },
+    {
+      "name": "guests: search shown from 8 replies",
+      "ok": true
+    },
+    {
+      "name": "guests: search filters by name",
+      "ok": true
+    },
+    {
+      "name": "guests: filter \"Not coming\"",
+      "ok": true
+    },
+    {
+      "name": "guests: a reply opens to show its message",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): guests has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "guests: removing a reply asks first",
+      "ok": true
+    },
+    {
+      "name": "guests: reply removed",
+      "ok": true
+    },
+    {
+      "name": "guests: CSV link present",
+      "ok": true
+    },
+    {
+      "name": "share: link, edit-link warning, sign-in \"Not available yet\"",
+      "ok": true
+    },
+    {
+      "name": "share: the address does not break inside \"clara-and-julian\"",
+      "ok": true,
+      "detail": "27"
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): share has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "share: \"Take offline\" (confirmed) unpublishes",
+      "ok": true
+    },
+    {
+      "name": "share: \"Publish again\" brings it back",
+      "ok": true
+    },
+    {
+      "name": "rights 0: §11.8 text with [SUPPORT EMAIL] and [SHOP NAME]",
+      "ok": true,
+      "detail": "You've used all 3 name and date changes. Small typo fixes (up to 2 letters or digits) are still free. If your wedding moved or something else needs to change, contact us at [SUPPORT EMAIL] or message [SHOP NAME] on Etsy with your order number."
+    },
+    {
+      "name": "rights 0: the change button is disabled",
+      "ok": true
+    },
+    {
+      "name": "rights 0: a typo is still free (\"Save fix\")",
+      "ok": true
+    },
+    {
+      "name": "rights 0: typo saved",
+      "ok": true
+    },
+    {
+      "name": "offline: banner + \"Offline\" save state",
+      "ok": true
+    },
+    {
+      "name": "offline: the draft is kept on this phone",
+      "ok": true
+    },
+    {
+      "name": "offline: Change names and Publish are disabled",
+      "ok": true
+    },
+    {
+      "name": "offline: saved once back online, local copy removed",
+      "ok": true
+    },
+    {
+      "name": "local copy: \"You have unsaved changes from this phone.\" with Restore",
+      "ok": true
+    },
+    {
+      "name": "local copy: restored and saved",
+      "ok": true
+    },
+    {
+      "name": "local copy: an older-version copy offers only Discard",
+      "ok": true
+    },
+    {
+      "name": "conflict: \"Saving paused\" banner with Reload",
+      "ok": true
+    },
+    {
+      "name": "archive: Home says it is a read-only archive",
+      "ok": true
+    },
+    {
+      "name": "archive: no Publish button, \"Archived\" badge",
+      "ok": true
+    },
+    {
+      "name": "archive: rights card says names and date can no longer be changed",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): archived home has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "archive: banner \"Your website was archived on …\" in the editor",
+      "ok": true
+    },
+    {
+      "name": "archive: fields are read only",
+      "ok": true
+    },
+    {
+      "name": "archive: the public address answers 410",
+      "ok": true
+    },
+    {
+      "name": "401: full-screen \"This edit link no longer works\" + shop text",
+      "ok": true
+    },
+    {
+      "name": "bad link page: \"Lost your edit link?\" with the honest sign-in text",
+      "ok": true
+    },
+    {
+      "name": "sign-in API: 503 \"unavailable\" (no e-mail provider)",
+      "ok": true
+    },
+    {
+      "name": "/signin: no form, honest text",
+      "ok": true
+    },
+    {
+      "name": "touch targets: every visible control is at least 44 × 44 px",
+      "ok": true
+    },
+    {
+      "name": "reduced motion: transitions shortened to ~0",
+      "ok": true,
+      "detail": "0.001s"
+    },
+    {
+      "name": "1280: three columns (rail, content, sticky preview)",
+      "ok": true,
+      "detail": "{\"nav\":{\"x\":0,\"y\":57,\"width\":240,\"height\":804},\"main\":{\"x\":240,\"y\":57,\"width\":560,\"height\":1280},\"pv\":{\"x\":837.5,\"y\":204.5,\"width\":390,\"height\":630.5}}"
+    },
+    {
+      "name": "1280: no phone Preview button",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): desktop 1280 section has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "960–1279: tabs above the content + preview column",
+      "ok": true,
+      "detail": "{\"mnav\":{\"x\":0,\"y\":57,\"width\":540,\"height\":68},\"mpv\":{\"x\":567.5,\"y\":204.5,\"width\":390,\"height\":590.5}}"
+    },
+    {
+      "name": "video: MP4 written",
+      "ok": true,
+      "detail": "previews/g060/g060_journey_390.mp4"
+    }
+  ]
+}

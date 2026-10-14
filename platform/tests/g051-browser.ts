@@ -335,11 +335,17 @@ try {
   // ---------------------------------------------------------------- panel at 390 px: Q&A editor, question editor, answers in the list
   // (the panel shows these sections only when the theme carries the markers: themeFieldUse)
   await section('panel', async () => {
-    const { page, problems } = await newPage(`${BASE}/edit/${SLUG}?k=${seeded.editKey}`);
+    // Panel v2 (G060): sections are pages (#edit/<id>), replies are under Guests (#guests).
+    const { page, problems } = await newPage(`${BASE}/edit/${SLUG}?k=${seeded.editKey}#edit`);
+    const go = async (hash: string) => {
+      await page.evaluate((h: string) => (window.location.hash = h), hash);
+      await page.waitForTimeout(200);
+    };
+    await page.waitForSelector('[data-section-row]');
     const hasFaq = (await page.locator('#section-faq').count()) > 0;
     let faqRows = 0;
     if (hasFaq) {
-      await page.click('#section-faq');
+      await go('#edit/faq');
       await page.waitForSelector('[data-faq-row="2"]').catch(() => undefined);
       faqRows = await page.locator('[data-faq-row]').count();
     }
@@ -348,7 +354,8 @@ try {
       await page.click('[data-add-faq]');
       await page.fill('#f-faq-3-q', 'Is the venue step-free?');
       await page.fill('#f-faq-3-a', 'Yes: ramps at the entrance and in the hall.');
-      await page.click('[aria-label="Move question 4 up"]');
+      await page.click('[aria-label="Options for question 4"]');
+      await page.getByRole('menuitem', { name: 'Move up' }).click();
       await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
       const draft = (await adapter.getSiteById(seeded.site.id))!.content;
       check('panel: added and moved question saved in order', draft.faq?.length === 4 && draft.faq[2].q === 'Is the venue step-free?', JSON.stringify(draft.faq?.map((f) => f.q)));
@@ -356,13 +363,10 @@ try {
       await page.locator('[data-faq-row="2"]').screenshot({ path: path.join(shots, 'panel_faq_row_390.png') });
     }
 
-    await page.click('#section-rsvp');
+    await go('#edit/rsvp');
     const hasQuestions = await page.waitForSelector('[data-rsvp-questions] [data-question-row="1"]').then(() => true, () => false);
     const types = hasQuestions ? await page.locator('[data-rsvp-questions] select').evaluateAll((els: HTMLSelectElement[]) => els.map((e) => e.value)) : [];
     check('panel: RSVP section shows the two questions (choice, text)', JSON.stringify(types) === '["choice","text"]', hasQuestions ? JSON.stringify(types) : 'no "Questions for your guests": the theme has no rsvp.questions marker (docs/11 §3.5)');
-    await page.waitForSelector('[data-reply-answer]').catch(() => undefined);
-    const answers = await page.locator('[data-reply-answer]').allInnerTexts();
-    check('panel: the reply list shows the answers', answers.includes('Meal choice: Fish') && answers.some((t: string) => t.startsWith('A song that gets you dancing: September')), answers.join(' | '));
     if (hasQuestions) {
       await page.click('[data-add-question]');
       await page.fill('#f-rsvp-questions-2-label', 'Do you need a ride from the hotel?');
@@ -375,6 +379,13 @@ try {
       check('panel: no horizontal overflow (RSVP section)', (await overflowX(page)) <= 0);
       await page.locator('[data-rsvp-questions]').screenshot({ path: path.join(shots, 'panel_questions_390.png') });
     }
+    await go('#guests');
+    await page.waitForSelector('[data-reply]').catch(() => undefined);
+    const closed = page.locator('[data-reply] button[aria-expanded="false"]');
+    for (let i = 0; i < 20 && (await closed.count()); i++) await closed.first().click();
+    await page.waitForSelector('[data-reply-answer]').catch(() => undefined);
+    const answers = (await page.locator('[data-reply-answer]').allInnerTexts()).map((t: string) => t.replace(/\s+/g, ' ').trim());
+    check('panel: the reply list (Guests) shows the answers', answers.includes('Meal choice Fish') && answers.some((t: string) => t.startsWith('A song that gets you dancing September')), answers.join(' | '));
     await page.locator('[data-replies]').screenshot({ path: path.join(shots, 'panel_replies_answers_390.png') });
     check('panel: no console errors', problems.length === 0, problems.join(' | '));
     await page.close();

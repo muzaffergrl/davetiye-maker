@@ -7,10 +7,21 @@ düzenler. Bu belge platformun tek kaynağıdır.
 1. Etsy'den bir tasarım (tema) satın alır. İndirdiği kısa PDF'te **başlat linki** var: `/start?theme=<tema>`.
 2. `/start`: Etsy sipariş numarası + e-posta → taslak site oluşur → **düzenleme linki** verilir
    (gizli anahtarlı, şifresiz). Link e-postayla gönderilir (e-posta sağlayıcısı sonra; ilk sürümde ekranda gösterilir + "kaydet" uyarısı).
-3. Panel (`/edit/<slug>?k=<anahtar>`), telefonda rahat: isimler, tarih/saat, mekân, program satırları,
-   metinler, isteğe bağlı bölümler, fotoğraf yükleme (kırpma), RSVP son tarihi. Canlı önizleme. **Yayınla.**
+3. Panel (`/edit/<slug>?k=<anahtar>`), telefonda rahat (Panel v2, G060, tasarım `docs/16_PANEL_V2.md`): ilk açılışta
+   6 adımlı **kurulum sihirbazı** (isimler → tarih/saat → mekân → fotoğraflar (kırpma) → kontrol → yayınla), sonra
+   **Home · Edit · Guests · Share** görünümleri: bölüm bölüm düzenleme (isimler, tarih, mekân, program, hikâye, detaylar,
+   SSS, RSVP, fotoğraflar), canlı önizleme, otomatik kayıt göstergesi, çevrimdışı yerel yedek. **Yayınla.**
+   - **Düzenleme hakkı (G060, sunucuda zorlanır):** ilk yayından sonra **isimler ve tarih** (kimlik alanları) yalnız
+     sınırlı sayıda değişir (varsayılan 3; panelde "2 of 3 changes left"); alan başına ≤ 2 karakterlik yazım düzeltmesi ücretsiz;
+     diğer her şey sınırsız. Hak bitince panel destek mesajı gösterir; destek `scripts/grant-identity-change.ts` ile hak
+     ekleyebilir (kayıt site günlüğünde). Sayılar tek yapılandırmadan gelir (`lib/marketing/config.ts`).
+   - **Arşiv (K25):** site düğün tarihinden **12 ay** sonra (site saat diliminde ertesi gün 00:00) salt okunur arşive geçer:
+     misafir sayfaları 410, RSVP kapalı, panel okunur, yanıtlar CSV olarak indirilebilir. Öneri (karar bekliyor, docs/16 §15):
+     en geç ilk yayından 48 ay sonra. Arşivde verinin silinmesi henüz yok.
+   - **E-posta ile giriş (magic link):** arayüz notu var, e-posta sağlayıcısı olmadığı için **kapalı** (`/signin` dürüst metin,
+     `POST /api/signin` → 503).
 4. Site: `/<slug>` = kapalı zarf açılış sayfası → `/<slug>/home` → `/story`, `/details`, `/rsvp`.
-5. Misafir RSVP gönderir → çift yanıtları panelde görür, CSV indirir.
+5. Misafir RSVP gönderir → çift yanıtları panelde (Guests) görür, CSV indirir.
 
 ## 2. Mimari
 - `platform/` — Next.js (App Router) uygulaması; Vercel'e uygun.
@@ -107,4 +118,5 @@ düzenler. Bu belge platformun tek kaynağıdır.
 | G043 | Supabase adaptörü + şema + RLS + storage | G037 · **kullanıcı onayı** |
 | G044 | Vercel önizleme yayını | G038 · **kullanıcı onayı** |
 | G045 | `/start` sahiplenme akışı (sipariş no + e-posta → taslak site + düzenleme linki) | G039 |
+| G060 | Panel v2 (sihirbaz, Home/Edit/Guests/Share) + düzenleme hakkı + 12 ay arşiv | G039, G045 |
 | G046 | Tema standardı belgesi + GPT website parça listesi (Paket W) | G038 |

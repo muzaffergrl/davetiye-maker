@@ -1,6 +1,6 @@
 {
   "project": "Dijital Davetiye ve Özel Gün Şablon İşi",
-  "brand_name": null,
+  "brand_name": "BKE Studio",
   "user_language": "tr",
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
@@ -572,5 +572,15 @@
       "Etsy order verification (order-number squatting)"
     ],
     "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)"
+  },
+  "brand": {
+    "name": "BKE Studio",
+    "decision": "K26 + K27 (2026-10-14)",
+    "identity": "GM01 direction C \"The Reveal\" (approved for now)",
+    "assets": "brand/assets/gpt/final/",
+    "domain": null,
+    "domain_note": "not purchased (K26); bkestudio.com available on 2026-10-14",
+    "support_email": "Gmail address (to be opened)",
+    "etsy_shop_name": "BKEStudio (not opened yet)"
   }
 }

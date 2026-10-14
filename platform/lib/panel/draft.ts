@@ -9,6 +9,7 @@
 
 import type { ContentRecord } from '../content/types.ts';
 import { schemaIssues, type ValidationIssue } from '../content/validate.ts';
+import { identityOf, sameIdentity } from './rights.ts';
 
 /** Largest accepted draft (JSON bytes). A full record is ~3 KB. */
 export const MAX_DRAFT_BYTES = 64 * 1024;
@@ -53,4 +54,19 @@ export function prepareDraft(stored: ContentRecord, incoming: unknown): ContentR
   );
   if (structural.length) throw new DraftShapeError(structural);
   return draft as unknown as ContentRecord;
+}
+
+/**
+ * After the first publish the identity fields (names, full names, the names line, the monogram, the date;
+ * docs/16 §11.4) change only through POST /api/edit/<slug>/identity. An autosave keeps their stored values
+ * (and the number of names). `kept` is true when the incoming draft tried to change them.
+ */
+export function keepStoredIdentity(stored: ContentRecord, draft: ContentRecord): { draft: ContentRecord; kept: boolean } {
+  const next = structuredClone(draft);
+  next.partners = structuredClone(stored.partners);
+  if (stored.name_display === undefined) delete next.name_display;
+  else next.name_display = stored.name_display;
+  next.initials = stored.initials;
+  next.date = stored.date;
+  return { draft: next, kept: !sameIdentity(identityOf(draft), identityOf(next)) };
 }

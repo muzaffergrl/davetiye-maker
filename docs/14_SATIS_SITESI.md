@@ -2,7 +2,7 @@
 
 Kullanıcının isteği (K25): ürünü en iyi anlatan, satışa götüren, arama motorlarında ve yapay zekâ asistanlarında
 kendiliğinden bulunan ve tavsiye edilen bir satış sitesi. Bu belge **yalnız tasarım aşamasıdır**; kod yazılmadı, hiçbir
-şey yayınlanmadı. Uygulama G061'in ikinci aşamasıdır (§13).
+şey yayınlanmadı. Uygulama G061'in ikinci aşamasıdır (§13); kod aşamasının durumu §14'te.
 
 Belge bu sırayla okunur: araştırma (§1–3) → konumlandırma (§4) → bilgi mimarisi (§5) → sayfa planları (§6) → dönüşüm (§7)
 → şema (§8) → teknik plan (§9) → tek yapılandırma (§10) → ölçüm (§11) → GPT görselleri (§12) → uygulama sırası ve açık
@@ -423,8 +423,9 @@ Yayından önce canlı depoda bu adları kullanan bir site olmadığı kontrol e
 
 ### 5.5 Çift sitelerinin indekslenmesi (karar gerekiyor)
 
-Bugün yayındaki çift siteleri `200` dönüyor ve `noindex` işareti yok (`lib/site/render.ts` yalnız önizlemede ve hata
-sayfasında `noindex` yazıyor). Arama motorları bu siteleri indeksleyebilir.
+*(İlk durum, G061 kod aşaması:)* yayındaki çift siteleri `200` dönüyordu ve `noindex` işareti yoktu (`lib/site/render.ts`
+yalnız önizlemede ve hata sayfasında `noindex` yazıyordu). Arama motorları bu siteleri indeksleyebilirdi. Bugünkü durum
+bölümün sonunda.
 
 **Öneri: varsayılan `X-Robots-Tag: noindex`.** Gerekçeler:
 - Misafir bilgisi ve gizlilik: düğün tarihi, mekân, fotoğraflar.
@@ -433,6 +434,11 @@ sayfasında `noindex` yazıyor). Arama motorları bu siteleri indeksleyebilir.
 
 Panelde ileride "Let search engines show our website" seçeneği açılabilir (G060 kapsamı). `/media/` robots'ta kapatılır
 (§9.5). Çift sitesi kökte olduğu için robots ile kapatılamaz; doğru araç header'dır.
+
+**Uygulandı (G061 inceleme düzeltmesi, 2026-10-14):** karar 4 verilene kadar varsayılan **`X-Robots-Tag: noindex`**
+(`COUPLE_SITE_ROBOTS`, `lib/site/render.ts`). Arama botları sayfayı okuyabilir, yalnız listelemez. Eğitim botları
+`noindex`'e değil robots.txt'ye uyduğu için çift sitelerini onlardan robots.txt kapatır (§9.5). SSS'deki "Will our
+website show up on Google?" yanıtı bu davranışı söyler; test ikisini birbirine bağlar.
 
 ---
 
@@ -449,9 +455,10 @@ Ortak kurallar:
 
 ### 6.1 Ana sayfa `/`
 
-- **Title:** `Wedding Websites That Open Like an Invitation | [BRAND]`
-- **Meta:** `Envelope-opening wedding websites you edit from your phone. RSVP built in, add-to-calendar for guests, no Canva needed. Try the live demo.`
-- **H1:** `Wedding websites that open like a real invitation`
+- **Title:** `Digital Envelope Wedding Invitation Websites | [BRAND]` (G061 inceleme düzeltmesi: §2.1 kümesindeki
+  "envelope", "digital" ve "wedding invitation website" title'da; 12 karakterlik marka adıyla 59 karakter)
+- **Meta:** `A digital wedding invitation website with RSVP that opens from a sealed envelope. Edit it on your phone, no Canva needed. Try the live demo first.`
+- **H1:** `Envelope wedding websites that open like a real invitation`
 
 Bölümler:
 
@@ -1083,11 +1090,27 @@ Disallow: /start?
 Disallow: /start/
 Disallow: /media/
 
-# Eğitim botları (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot): KARAR §13.4
-# Öneri: aynı kurallarla açık. Marka modellerin bilgisine girer, görünürlük amacına uygun.
+# Eğitim botları (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent): KARAR §13.4
+# Öneri: YALNIZ pazarlama sayfaları açık (marka modellerin bilgisine girer); çift siteleri her durumda kapalı.
+User-agent: GPTBot
+...
+Allow: /$
+Allow: /designs$
+Allow: /designs/
+...                      (her pazarlama sayfası için "<yol>$" ve "<yol>/")
+Allow: /llms.txt$
+Allow: /themes/
+Allow: /marketing/
+Disallow: /
 
 Sitemap: https://[DOMAIN]/sitemap.xml
 ```
+
+- **Eğitim botları ve çift siteleri (G061 inceleme düzeltmesi):** önceki taslakta eğitim botlarına `Allow: /` veriliyordu.
+  Çift siteleri kökte (`/<isimler>`) olduğu için isimler, tarih, mekân ve hikâye metni de eğitim botlarına açık kalıyordu;
+  `noindex` onları durdurmaz. Şimdi grup `Disallow: /` ile biter ve yalnız pazarlama yolları (`trainingAllowPaths()`,
+  `lib/marketing/crawl.ts`, `corePages()`'ten türetilir) tek tek açılır. `$` ve `/` biçimi `/pricing-and-paul` gibi bir
+  çift slug'ını açmaz. Karar 6 "disallow" olursa grup yalnız `Disallow: /` olur.
 
 - `/start` için çıplak önek (`Disallow: /start`) yazılmaz. Robots önek eşleştirmesi yapar; `/starlight-and-sam` gibi bir
   çift slug'ını da kapatırdı. `$`, `?` ve `/` biçimi yalnız `/start`, `/start?theme=…` ve `/start/demo/…` adreslerini
@@ -1496,13 +1519,103 @@ G061 kod aşaması için şunlar gerekiyor (bugün listede değil):
    fiyatla aynıdır.
 3. **Destek e-postası ve yanıt süresi.** docs/15 önerisi: `hello@<alan adı>`, 24 saat.
 4. **Çift sitelerinin arama motorlarında görünmesi:** öneri varsayılan **kapalı** (`noindex`). Bu karar G061'e özgü,
-   docs/15 ve docs/16'da yok.
+   docs/15 ve docs/16'da yok. Karar gelene kadar `noindex` uygulanıyor (§5.5).
 5. **"Made with [BRAND]" bağlantısı** çift sitelerinin altında: docs/15 önerisi her misafir sayfasında ince alt bilgi.
    G061 bu bağlantının hedefini (ana sayfa, UTM) karşılar.
-6. **Yapay zekâ eğitim botları** (GPTBot, ClaudeBot, Google-Extended …): öneri **açık**. Markanın asistanlarca bilinmesi
-   amaca uygun; arama botları her durumda açık.
+6. **Yapay zekâ eğitim botları** (GPTBot, ClaudeBot, Google-Extended …): öneri **pazarlama sayfalarına açık**. Markanın
+   asistanlarca bilinmesi amaca uygun; arama botları her durumda açık. Çift siteleri eğitim botlarına her iki seçenekte
+   de kapalı (§9.5).
 7. **Analitik:** öneri Vercel Web Analytics ve Speed Insights (Pro'da var, çerezsiz [VERIFY]).
 8. İade, kayıp link, 12 ay sonrası uzatma, silme süreci metinleri (G062).
+
+---
+
+## 14. Uygulama durumu (G061 kod aşaması, 2026-10-14)
+
+Satış sitesi `platform/app/(marketing)/` altında kuruldu. Yayın yapılmadı, alan adı alınmadı, görsel üretilmedi. Site
+`launched: false` ile duruyor: her sayfa `noindex, follow`, sitemap boş, yer tutucular görünür.
+
+### 14.1 Ne var
+
+| Parça | Dosya | Not |
+|---|---|---|
+| Tek ayar | `platform/lib/marketing/config.ts` | `[BRAND]`, `[DOMAIN]`, `[PRICE]`, `[SUPPORT EMAIL]`, `[RESPONSE TIME]`, `[ETSY SHOP URL]`, `[SHOP NAME]`, `[ETSY LISTING URL]`, politika yer tutucuları; `verified` bayrakları (aşağıda) |
+| Yayın kapısı | `lib/marketing/placeholders.ts` | `launched: true` iken eksik karar varsa build durur (`assertLaunchReady`, layout'tan). Ek şartlar: `siteUrl` marka alan adı olmalı (vercel.app ile indeksleme açılmaz), Etsy linkinde `utm_` olmamalı, `verified.editRights/archive/privacyText` true olmalı |
+| İddialar | `lib/marketing/facts.ts` | Dahil / dahil değil listeleri, düzenlenebilenler, sınırlar (`lib/content/limits.ts`'ten), docs/16 §11.7 hak metni, Canva karşılaştırması (rakip adı yok). "Tested on iPhone" yalnız `verified.realDevices` ile |
+| Tasarım metinleri | `lib/marketing/designs.ts` | Açılış metinleri tema README'si ve gerçek ekranlarla karşılaştırılarak yazıldı. 04 `coming`: hiçbir yerde listelenmez |
+| SSS | `lib/marketing/faq.ts` | 7 grup, 31 soru; her yanıt 40–80 kelime, ilk cümle ≤ 25 kelime (test). "Why pay … when free wedding websites exist?" ücretsiz araçları küçümsemeden yanıtlar, rakip adı vermez (adlar birincil kaynakta doğrulanınca eklenebilir) |
+| Rehberler | `platform/content/guides/*.md` | 6 rehber, 1.250–1.470 kelime; hızlı yanıt, tablo/kontrol listesi, 4 soruluk SSS, kaynak linkleri (Emily Post Institute, Canva Help Centre). İstatistik, yorum, kurgu yazar yok |
+| Şema | `lib/marketing/schema.ts` | Organization, WebSite, WebPage türleri, ItemList, BreadcrumbList, Product (+Offer yalnız gerçek fiyat ve Etsy linkiyle), VideoObject, Article, FAQPage. Yer tutucu taşıyan alan ve SSS yanıtı JSON-LD'ye yazılmaz; puan/yorum yok |
+| Tarama | `lib/marketing/crawl.ts` + `app/(marketing)/{robots.txt,sitemap.xml,llms.txt,llms-full.txt}/route.ts` | Statik. robots §9.5 (`/start$`, `/start?`, `/start/`; çift slug'ları arama botlarına kapanmaz), eğitim botları yalnız pazarlama yollarına (config'ten; çift siteleri her durumda kapalı). Çift siteleri `X-Robots-Tag: noindex` (§5.5) |
+| Görseller | `scripts/marketing-assets.ts` → `public/marketing/{designs,panel}/`, `lib/marketing/assets.json` | Yalnız GERÇEK ekranlar (G059 çekimi, 320/480/640 WebP) ve gerçek açılış kaydından 10 sn H.264 klip (~350 KB) + poster. Panel ekranları bugünkü panel: **G060 bitince betik yeniden çalıştırılır** |
+| Bileşenler | `components/marketing/` | Sunucu bileşenleri; istemci JS yalnız `Demo.tsx` (canlı demo cephesi + diyalog), `LoopVideo.tsx`, `Tracker.tsx` |
+| İkonlar | `lucide-react@1.46.0` (G060 ile aynı sürüm) | Yalnız arayüz ikonu. Sekme ikonu geçici: lucide "mail" (`public/marketing/favicon.svg`) |
+
+Sayfalar: `/`, `/designs`, `/designs/blush-garden-rose`, `/designs/olive-ivory`, `/how-it-works`, `/features`, `/pricing`,
+`/faq`, `/guides` + 6 rehber, `/about`, `/contact`, `/privacy`, bilinmeyen tasarım/rehber için pazarlama 404'ü.
+
+### 14.2 Belgeden sapmalar (bilerek)
+
+- Gövde yazısı Inter değil, sistem yazı tipi. Lighthouse'ta LCP yolundan ~48 KB yazı tipi çıktı. Başlıklar Cormorant Garamond (500/600, `next/font`, kendi sunucumuzdan).
+- Başlık değişiklikleri (12 karakterlik marka adıyla ≤ 60 karakter): How it works → `How It Works: Etsy Order to Wedding Website`, Features → `Wedding Website Features: RSVP, Calendar, QR`, Pricing → `Pricing: One Etsy Purchase, No Subscription`, Designs → `Wedding Website Designs with Envelope Opening`.
+- GPT görselleri (MK01–MK17) henüz yok. §13.1 adım 2'deki gibi gerçek ekranlar çerçevesiz, yuvarlatılmış köşeyle gösteriliyor. Varsayılan paylaşım görseli `blush-garden-rose` temasının kendi `og-1200x630.jpg`'i. Tasarım sayfaları kendi temalarının `og` görselini kullanıyor.
+- Dokunulmayanlar:
+  - `app/layout.tsx`: kök `robots` pazarlama layout'unda eziliyor; kabuk kendi zeminini çiziyor.
+  - `lib/site/render.ts`: kod aşamasında dokunulmadı; inceleme düzeltmesinde yayındaki çift sayfalarına
+    `X-Robots-Tag: noindex` eklendi (karar 4 gelene kadar varsayılan, §5.5).
+  - `tools/mockup_compose.py --hole`: GPT görselleri gelince yapılacak.
+  - `next.config.ts`: `experimental.inlineCss` 7 KB'lık render-blocking CSS'i kaldırırdı. Öneri olarak bırakıldı.
+- Analitik: `provider: 'none'`. `track()` olayları DOM'a yazıyor. `'vercel'` seçilirse `@vercel/analytics` paketi eklenmeli; şu an kurulu değil, **denenmedi**.
+- `/start` başlığı "Already bought a design? Start your website" olarak menü ve alt bilgide var.
+
+### 14.3 Testler ve ölçümler (yerel production build)
+
+- `npm test`: 329/329 (299 eski + 30 yeni: `tests/marketing-{slug,config,content,schema,crawl,markdown,build}.test.ts`). `marketing-build` build çıktısı yoksa ya da eskiyse kendini atlar.
+- `npm run typecheck` ve `npm run build` (trace-check dahil) temiz.
+- `tests/marketing-browser.ts` (build sonrası): **170/170**. 18 sayfa × 390/1280 kontrol edildi:
+  - HTTP 200, yatay kaydırma yok, kenardan taşan öğe yok, tek H1.
+  - Demo cephesi: dokunmadan önce tema isteği yok; telefonda modal diyalog, Esc ve odak dönüşü çalışıyor; geniş ekranda yerinde ölçekli demo açılıyor.
+  - Kart düğmesi, tasarım çipleri, mobil menü, SSS, yapışkan çubuk çalışıyor.
+  - Sonuçlar `platform/previews/g061/` altında: ekran görüntüleri ve `checks.json`.
+- Lab ölçümü (CDP: CPU 4×, 150 ms RTT, 1,6 Mbps, 390 px):
+
+  | Sayfa | LCP | CLS | Aktarılan |
+  |---|---|---|---|
+  | `/` | 1,74 s | 0 | 300 KB |
+  | `/designs/olive-ivory` | 1,73 s | 0 | 300 KB |
+  | Rehber | 0,82 s | 0 | 198 KB |
+
+  - İlk yük JS'i 139 KB; §9.8 bütçesi 130 KB'tı. Bu yükün ~125 KB'ı Next ve React çalışma zamanı.
+- Lighthouse 13.5.0 (sürüm sabit, geçici klasöre kuruldu; mobil, simülasyonlu kısıtlama), `previews/g061/lighthouse.json`:
+
+  | Sayfa | Performans | Erişilebilirlik | En iyi uygulamalar | SEO |
+  |---|---|---|---|---|
+  | `/` | 93 | 100 | 100 | 69 |
+  | `/designs/olive-ivory` | 96 | 100 | 100 | 69 |
+  | Rehber | 88 | 100 | 100 | 66 |
+  | `/faq` | 97 | 100 | 100 | 66 |
+
+  - SEO'da kalan tek kusur `is-crawlable`: yayın öncesi `noindex` bilerek konuldu.
+  - Ölçümler aynı makinede çalışan başka ajanlar yüzünden oynak. Örneğin rehberin performansı bir çalıştırmada 97, sonrakinde 88 çıktı.
+- **Doğrulanmayanlar:**
+  - Canlıya yayın yapılmadı.
+  - Google Rich Results Test ve validator.schema.org denenmedi. Doğrulama yalnız yerel testle yapıldı.
+  - Gerçek telefonda deneme yapılmadı.
+  - Etsy'ye erişim olmadığı için link biçimi yalnız kuralla denetlendi.
+  - Dış kaynak linklerinin (Emily Post, Canva) açıldığı bu ortamdan doğrulanamadı. Adresler arama sonuçlarından alındı.
+
+### 14.4 Yayına geçiş listesi (sırayla)
+
+1. Kararları `config.ts`'e işle (§13.4):
+   - marka adı, alan adı, `MARKETING_SITE_URL`;
+   - fiyatlar ve Etsy Share & Save linkleri;
+   - destek e-postası ve yanıt süresi;
+   - politika metinleri.
+2. G060 canlıya çıkınca `verified.editRights` ve `verified.archive` alanlarını true yap. Panel ekranları için `node scripts/marketing-assets.ts` betiğini çalıştır.
+3. Gizlilik metni gözden geçirilince `verified.privacyText` alanını true yap.
+4. GPT görselleri (Ek A) geldikçe birleştirme adımını ayrı görev olarak aç (`--hole` + hero sahneleri).
+5. `launched: true` yap. Build, eksik karar kalmışsa durur.
+6. §9.14 adımlarını uygula: Search Console, Bing Webmaster Tools, IndexNow, Rich Results Test, Vercel Firewall bot kuralları.
 
 ---
 

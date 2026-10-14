@@ -16,6 +16,7 @@ import {
   type PanelTheme,
   type ThemeFieldUse,
 } from './model.ts';
+import { rightsView } from './rights.ts';
 
 const OPTIONAL_RE = /\bdata-optional\s*=\s*["']?([a-z_]+)/g;
 /** Values of the engine markers that name content paths (data-field, data-if, data-text, data-attr-*, data-repeat). */
@@ -112,12 +113,13 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
   };
 }
 
-export function panelMeta(site: SiteRecord): PanelMeta {
+export function panelMeta(site: SiteRecord, now: Date = new Date()): PanelMeta {
   return {
     status: site.status,
     updatedAt: site.updatedAt,
     publishedAt: site.publishedAt,
     hasUnpublishedChanges: site.status === 'published' && !sameContent(site.content, site.publishedContent),
+    rights: rightsView(site, now),
   };
 }
 
@@ -129,6 +131,7 @@ export async function panelState(site: SiteRecord, editKey: string, origin: stri
     content: site.content,
     previewKey: derivePreviewKey(editKey),
     origin,
+    orderRef: site.orderRef ?? null,
     ...panelMeta(site),
   };
 }

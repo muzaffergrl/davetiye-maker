@@ -248,10 +248,10 @@ export function PhotoCropper({
       )}
       {/* Sticky: on a short screen "Use this photo" stays in reach (the frame swallows swipes). */}
       <div className={`${styles.buttonRow} ${styles.stickyActions}`}>
-        <button type="button" className={styles.primaryButton} disabled={!current || busy || Boolean(error)} onClick={confirm} data-crop-confirm>
+        <button type="button" className={`${styles.btn} ${styles.btn_primary}`} disabled={!current || busy || Boolean(error)} onClick={confirm} data-crop-confirm>
           {busy ? 'Preparing…' : 'Use this photo'}
         </button>
-        <button type="button" className={styles.secondaryButton} onClick={onCancel}>
+        <button type="button" className={`${styles.btn} ${styles.btn_secondary}`} onClick={onCancel}>
           Cancel
         </button>
       </div>

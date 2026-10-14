@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 31 · alindi 10 · inceleme 1 · blokaj 293 · bitti 43 · toplam 378
+Özet: hazir 39 · alindi 8 · inceleme 6 · blokaj 277 · bitti 56 · toplam 386
 
 ## claude-canva
 
@@ -102,9 +102,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G077` p1 — Canlıya güncel main — panel v2, satış sitesi, yeni temalar; canlı kontrol + kullanıcı için test linkleri → `gorevler/G077-canli-yayin-guncel.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (43)**
 
@@ -156,16 +156,20 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-kod
 
-**Alınabilir (2)**
+**Alınabilir (5)**
 
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
+- `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
+- `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
 - `G409` p3 — Tasarım 09 Lavender Provence — platform teması → `gorevler/G409-website-kaynak.md`
+- `G410` p3 — Tasarım 10 Tuscan Vineyard — platform teması → `gorevler/G410-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (87)**
+**Üzerinde çalışılan / incelemede / blokaj (88)**
 
-- `G060` alindi · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
-- `G061` alindi · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
-- `G064` alindi · wf-g064 — Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
+- `G060` inceleme · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
+- `G061` inceleme · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
+- `G064` inceleme · wf-g064 — Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
+- `G067` alindi · claude-ilan2 — İlan görselleri v2 — kısım 1 (01, 03): GM03 düzeni + GPT sahneleri + gerçek misafir ekranları (kapak, sayfalar, nasıl çalışır, canlı demo)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
@@ -185,8 +189,8 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `G118` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — HTML sahne kaynağı + katmanlar
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
-- `G404` alindi · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
-- `G405` alindi · wf-tema05 — Tasarım 05 Mediterranean Lemon — platform teması
+- `G404` inceleme · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
+- `G405` inceleme · wf-tema05 — Tasarım 05 Mediterranean Lemon — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G402` inceleme · wf-tema02 — Tasarım 02 Dusty Blue & Champagne — platform teması
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
@@ -251,7 +255,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 15 · Biten: 25
+Bağımlılık bekleyen: 16 · Biten: 26
 
 ## claude-metin
 
@@ -318,13 +322,8 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (13)**
+**Alınabilir (17)**
 
-- `G801` p1 — Tasarım 01 Olive & Ivory — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G801-mockup.md`
-- `G803` p1 — Tasarım 03 Blush Garden Rose — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G803-mockup.md`
-- `G211` p2 — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G211-gorsel.md`
-- `G212` p2 — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G212-gorsel.md`
-- `G213` p2 — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G213-gorsel.md`
 - `G214` p2 — Tasarım 14 Ivory Lace & Pearls — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G214-gorsel.md`
 - `G215` p2 — Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G215-gorsel.md`
 - `G216` p2 — Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G216-gorsel.md`
@@ -332,35 +331,30 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G218-gorsel.md`
 - `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
-- `G804` p2 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
+- `G811` p2 — Tasarım 11 Boho Pampas Terracotta — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G811-mockup.md`
+- `G812` p2 — Tasarım 12 Tropical Destination — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G812-mockup.md`
+- `G813` p2 — Tasarım 13 Enchanted Forest Storybook — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G813-mockup.md`
+- `G814` p2 — Tasarım 14 Ivory Lace & Pearls — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G814-mockup.md`
+- `G815` p2 — Tasarım 15 Cherry Blossom Spring — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G815-mockup.md`
+- `G816` p2 — Tasarım 16 Sunflower Rustic Barn — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G816-mockup.md`
+- `G817` p2 — Tasarım 17 Emerald & Gold Estate — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G817-mockup.md`
+- `G818` p2 — Tasarım 18 Wildflower Meadow Vellum — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G818-mockup.md`
+- `G819` p2 — Tasarım 19 Midnight Garden — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G819-mockup.md`
+- `G820` p2 — Tasarım 20 Coastal Seaside — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (49)**
+**Üzerinde çalışılan / incelemede / blokaj (35)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
-- `GM01` alindi · gpt-marka — BKE Studio marka kimliği — 3 yön panosu + seçilen yönün logo/sembol/mühür/desen/ikon/sahne dosyaları
+- `GM03` alindi · gpt-marka — BKE Studio ortak Etsy ilan şablonu — 7 yerleşim/tipografi comp'u + 8 özellik ikonu (GPT tasarlar)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
-- `G207` alindi · gpt-gorsel-C — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
-- `G208` alindi · gpt-gorsel-D — Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
-- `G210` alindi · gpt-gorsel-F — Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G211` alindi · gpt-gorsel-E — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G212` alindi · gpt-gorsel-D — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G213` alindi · gpt-gorsel-C — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G809` alindi · gpt-gorsel-A — Tasarım 09 Lavender Provence — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
+- `G810` alindi · gpt-gorsel-B — Tasarım 10 Tuscan Vineyard — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
-- `G805` blokaj · - — Tasarım 05 Mediterranean Lemon — Paket 3 mockup görselleri
-- `G806` blokaj · - — Tasarım 06 Art Deco Black-Tie — Paket 3 mockup görselleri
-- `G807` blokaj · - — Tasarım 07 Burgundy Velvet Autumn — Paket 3 mockup görselleri
-- `G808` blokaj · - — Tasarım 08 Winter Evergreen — Paket 3 mockup görselleri
-- `G809` blokaj · - — Tasarım 09 Lavender Provence — Paket 3 mockup görselleri
-- `G810` blokaj · - — Tasarım 10 Tuscan Vineyard — Paket 3 mockup görselleri
-- `G811` blokaj · - — Tasarım 11 Boho Pampas Terracotta — Paket 3 mockup görselleri
-- `G812` blokaj · - — Tasarım 12 Tropical Destination — Paket 3 mockup görselleri
-- `G813` blokaj · - — Tasarım 13 Enchanted Forest Storybook — Paket 3 mockup görselleri
-- `G814` blokaj · - — Tasarım 14 Ivory Lace & Pearls — Paket 3 mockup görselleri
-- `G815` blokaj · - — Tasarım 15 Cherry Blossom Spring — Paket 3 mockup görselleri
-- `G816` blokaj · - — Tasarım 16 Sunflower Rustic Barn — Paket 3 mockup görselleri
-- `G817` blokaj · - — Tasarım 17 Emerald & Gold Estate — Paket 3 mockup görselleri
-- `G818` blokaj · - — Tasarım 18 Wildflower Meadow Vellum — Paket 3 mockup görselleri
-- `G819` blokaj · - — Tasarım 19 Midnight Garden — Paket 3 mockup görselleri
-- `G820` blokaj · - — Tasarım 20 Coastal Seaside — Paket 3 mockup görselleri
 - `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
 - `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
 - `G072` blokaj · - — V04_navy_gold — Paket 1 + Paket 3 görselleri
@@ -386,4 +380,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 1 · Biten: 9
+Bağımlılık bekleyen: 0 · Biten: 21

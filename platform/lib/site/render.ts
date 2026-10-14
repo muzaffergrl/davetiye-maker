@@ -4,6 +4,7 @@
 
 import { getDataAdapter } from '../data/index.ts';
 import { publicOrigin } from '../panel/http.ts';
+import { isArchived } from '../panel/rights.ts';
 import { canPreview } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { renderTemplate } from '../theme/engine.ts';
@@ -31,6 +32,14 @@ export function siteCsp(scriptHashes: readonly string[] = []): string {
   ].join('; ');
 }
 
+/**
+ * Published couple websites ask search engines not to list them (docs/14 §5.5): they are for guests who have the link,
+ * and they carry names, the date, the venue and photos. The owner's decision 4 (docs/14 §13.4) is still open; until it
+ * is made the default is noindex. Model-training bots are kept off couple websites by robots.txt
+ * (lib/marketing/crawl.ts), because they follow robots.txt rather than noindex.
+ */
+export const COUPLE_SITE_ROBOTS = 'noindex';
+
 function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: readonly string[] }): Headers {
   const h = new Headers({
     'Content-Type': 'text/html; charset=utf-8',
@@ -39,7 +48,7 @@ function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: re
     'Referrer-Policy': opts.preview ? 'no-referrer' : 'strict-origin-when-cross-origin',
     'Cache-Control': opts.preview || opts.status !== 200 ? 'private, no-store' : 'public, max-age=0, must-revalidate',
   });
-  if (opts.preview || opts.status !== 200) h.set('X-Robots-Tag', 'noindex, nofollow');
+  h.set('X-Robots-Tag', opts.preview || opts.status !== 200 ? 'noindex, nofollow' : COUPLE_SITE_ROBOTS);
   return h;
 }
 
@@ -52,6 +61,17 @@ export function notFound(): Response {
   return new Response(PLAIN_PAGE('Page not found', 'This page does not exist or is not published yet.'), {
     status: 404,
     headers: htmlHeaders({ preview: false, status: 404 }),
+  });
+}
+
+/**
+ * A site 12 months after its wedding (G060, docs/16 §11.9): 410 + a plain page without the couple's
+ * names (noindex). The couple still sees it through the panel preview.
+ */
+export function archivedPage(): Response {
+  return new Response(PLAIN_PAGE('This wedding website has been archived', 'Thank you for visiting.'), {
+    status: 410,
+    headers: htmlHeaders({ preview: false, status: 410 }),
   });
 }
 
@@ -89,6 +109,7 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     const preview = previewParam !== null && canPreview(site, previewParam);
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
+    if (!preview && isArchived(site)) return archivedPage();
 
     const theme = await loadTheme(site.theme);
     if (!theme) {

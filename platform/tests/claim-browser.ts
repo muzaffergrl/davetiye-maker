@@ -220,10 +220,10 @@ try {
 
   // Open the editor.
   await page.click('[data-open-editor]');
-  await page.waitForURL(/\/edit\/avery-and-jordan\?k=/);
-  await page.waitForSelector('[data-panel]');
-  const panelTitle = await page.locator('[data-panel] h1').first().innerText();
-  check('editor opens with the edit link (panel, G039)', panelTitle === 'Avery & Jordan', panelTitle);
+  await page.waitForURL(/\/edit\/avery-and-jordan\?k=.*#setup\/1$/);
+  await page.waitForSelector('[data-setup="1"]');
+  const firstName = await page.inputValue('#f-partners-0-display_name');
+  check('editor opens with the edit link at setup step 1, names filled (panel v2, G060)', firstName === 'Avery' && (await page.locator('h1').first().innerText()).includes('Your names'), firstName);
   check('editor: draft status', (await page.getAttribute('[data-panel]', 'data-status')) === 'draft');
   await shot(page, '05_editor_390');
 
@@ -329,8 +329,8 @@ try {
     await rp.click('button[type="submit"]');
     await rp.waitForSelector('[data-edit-link]');
     await rp.click('[data-open-editor]');
-    await rp.waitForSelector('[data-panel]');
-    check(`${REAL_THEME}: editor opens for the claimed site`, (await rp.locator('[data-panel] h1').first().innerText()) === 'Elena & Marco');
+    await rp.waitForSelector('[data-setup="1"]');
+    check(`${REAL_THEME}: editor opens for the claimed site (setup step 1, names filled)`, (await rp.inputValue('#f-partners-0-display_name')) === 'Elena' && (await rp.inputValue('#f-partners-1-display_name')) === 'Marco');
     await shot(rp, '10_blush_editor_390');
     await rc.close();
   } else {

@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, /start, blush-garden-rose ve olive-ivory temaları, takvim, G055, seed (298 test; Windows dahil)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), seed (348 test, 2026-10-14; Windows dahil)
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -28,6 +28,10 @@ NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id>
                        # testiyle), kırpılan metin; --stress = docs/11 §12 zorlama kaydı; varsayılan tema blush-garden-rose → previews/g038/
                        # (+ MP4); G4NN → previews/g4NN/. Port $PORT (3312); port doluysa "Ready"siz durur, başka sunucuya karşı koşmaz
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
+node scripts/grant-identity-change.ts --order <no> (--add <n> | --archive-on <YYYY-MM-DD|clear>) --reason "<neden>"   # destek (G060): isim/tarih
+                       # hakkı ekle ya da arşiv tarihini taşı; --show durumu yazar (aşağıda "Panel v2 ve düzenleme hakkı")
+NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts   # build sonrası: panel v2 yolculuğu 390 × 844 + MP4, hak/arşiv/çevrimdışı/
+                       # axe-core/1280 (104 kontrol; çıktı previews/g060/ ya da $G060_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts [--theme <id>]   # build sonrası: son duman testi, 390 px — misafir (zarf → home →
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts [--theme <id>]   # build sonrası: G051, 390 px — takvim düğmeleri + .ics,
@@ -63,12 +67,15 @@ app/
   themes/[theme]/[...path]/route.ts  tema CSS/JS/görselleri (html ve theme.json servis edilmez)
   media/[...path]/route.ts         adaptörün yüklediği fotoğraflar (local; blob = private depo)
   layout.tsx, page.tsx             platform sayfaları için kök
-  edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039); geçersiz link = genel 404
-  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır
+  edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039, v2 G060); geçersiz link = genel 404 + "Lost your edit link?"
+  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır, identity (isim/tarih, G060)
+  signin/page.tsx, api/signin/     e-posta ile giriş (G060): sağlayıcı yok → kapalı, dürüst metin, API 503
   start/page.tsx, StartForm.tsx    /start?theme=<tema> sahiplenme sayfası (G045); start/demo/[theme]/… = temanın canlı demosu
                                    (+ start/demo/[theme]/event.ics: demonun takvim dosyası, G051)
   api/start/, api/start/slug/      sahiplenme API'si (POST) ve adres uygunluk ipucu (GET)
-components/panel/                  panelin istemci bileşenleri (Panel, bölümler, kırpma, önizleme, QR) + panel.module.css
+components/panel/                  panel v2 (G060): Panel (yönlendirme, diyaloglar), Setup (sihirbaz), views (Home/Edit/Guests/Share/Help),
+                                   sections, fields, ui (düğme, rozet, snackbar, menü, hak sayacı), IdentitySheet, Sheet, PreviewPane,
+                                   PhotosSection, kırpma, QR, usePanel (kayıt kuyruğu, yerel yedek) + panel.module.css (tokenlar)
 lib/
   theme/engine.ts                  şablon motoru (işaretler aşağıda)
   theme/theme.ts                   theme.json okuma/doğrulama, sayfa şablonları
@@ -83,18 +90,20 @@ lib/
   photo-variants.ts                alıcı fotoğrafı türevleri (640/1280 px) — adlar, `srcset` adayları (G055; tarayıcıda da çalışır)
   site/render.ts, site/static.ts   rota mantığı, CSP ve diğer başlıklar;  site/ics.ts = /<slug>/event.ics (G051)
   calendar.ts                      takvime ekle (G051): etkinlik saatleri (saat dilimi + yaz saati), .ics (RFC 5545), Google Calendar linki
-  panel/                           panel: model.ts (istemci+sunucu yardımcıları), api.ts, draft.ts, photos.ts (sharp), state.ts, http.ts
+  panel/                           panel: model.ts (istemci+sunucu yardımcıları), api.ts, draft.ts, photos.ts (sharp), state.ts, http.ts,
+                                   rights.ts (düzenleme hakkı + arşiv, G060), brand.ts, signin.ts
   qr.ts                            gerçek URL'den QR (uqr; tools/make_qr.py ayarları)
   claim/                           /start: fields.ts (istemci+sunucu kuralları), claim.ts, api.ts, themes.ts, demo-page.ts,
                                    verify.ts (Etsy doğrulama arayüzü, kapalı), mailer.ts (e-posta arayüzü, yok), limits.ts, demo/
 themes/_sample/                    yalnız test iskeleti (tasarım DEĞİL); her işareti kullanır
 themes/blush-garden-rose/          ilk gerçek tema (tasarım 03, G038) — aşağıda "Tema: blush-garden-rose"
 themes/olive-ivory/                tasarım 01 Olive & Ivory (G401, docs/11 standardıyla) — ayrıntı: themes/olive-ivory/README.md
-scripts/                           seed.ts, screenshot.cjs, theme-check.cjs, sync-schema.cjs
+scripts/                           seed.ts, screenshot.cjs, theme-check.cjs, sync-schema.cjs, reissue-edit-key.ts, grant-identity-change.ts (G060)
 tests/                             *.test.ts (node:test)
 previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
                                    g045/ = /start akışı; final/ = son duman testi (tests/final-smoke.ts, blush-garden-rose, 390 px);
-                                   g051/ = takvim, SSS, RSVP özel soruları, panel düzenleyicileri (tests/g051-browser.ts, 390 px)
+                                   g051/ = takvim, SSS, RSVP özel soruları, panel düzenleyicileri (tests/g051-browser.ts, 390 px);
+                                   g060/ = panel v2 yolculuğu 390 × 844 (MP4) + 1280/1000 (tests/g060-browser.ts)
 previews/g038/                     blush-garden-rose: sayfa görüntüleri, G035 karşılaştırması, açılış MP4'ü, checks.json
 previews/g401/                     olive-ivory: sayfa görüntüleri, compare_<sayfa>_390.jpg (W1 comp | tema), açılış MP4'ü,
                                    checks.json; final/ = final-smoke --theme olive-ivory
@@ -518,8 +527,13 @@ CSP/konsol hatası yok. Ekran görüntüleri `$RSVP_SHOTS_DIR`'e (varsayılan ge
 ## Düzenleme paneli (G039)
 
 Alıcı sitesini telefonundan düzenler: `/edit/<slug>?k=<düzenleme anahtarı>`. Panel İngilizce, telefon öncelikli (390 px),
-sade bir araç: büyük dokunma alanları (≥ 44–48 px), akordeon bölümler, altta sabit **Save · Preview · Publish** çubuğu.
-Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (K21); renkler marka-nötr.
+sade bir araç: büyük dokunma alanları (≥ 44–48 px). Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (K21);
+renkler marka-nötr.
+
+> **G060 ile arayüz değişti** (aşağıda "Panel v2 ve düzenleme hakkı"): akordeon bölümler ve alttaki Save · Preview · Publish
+> çubuğu yerine kurulum sihirbazı + Home · Edit · Guests · Share görünümleri, bölüm sayfaları, üst çubukta kayıt göstergesi ve
+> Publish. Bu bölümdeki kurallar (link/anahtar, uzunluk sınırları, temaya göre alanlar, örnek metin işareti, otomatik kayıt ve
+> 409, doğrulama, taslak kuralları, önizleme anahtarı, yayın, QR, fotoğraf hattı) aynen sürüyor; yalnız düğme/yerleşim anlatımı eski.
 
 - **Link:** anahtar hash ile doğrulanır (`authorizeEditor`). Yanlış/eksik anahtar, önizleme anahtarı, başka sitenin anahtarı ve
   bilinmeyen slug → **aynı** genel 404 sayfası ("This edit link is not valid"); slug'ın varlığı sızmaz. Sayfa `noindex`,
@@ -595,17 +609,20 @@ Yanlış anahtar, önizleme anahtarı, başka sitenin anahtarı, bilinmeyen/ayr�
 
 | İstek | Yanıt |
 |---|---|
-| `GET /api/edit/<slug>` | `200 {ok, state: {slug, theme: {id, name, pages, photos[{key,label,source,aspect,ratio}], optionalBlocks}, content, status, updatedAt, publishedAt, hasUnpublishedChanges, previewKey, origin}}` |
-| `PUT /api/edit/<slug>` `{content, baseUpdatedAt?}` (JSON) | `200 {ok, status, updatedAt, publishedAt, hasUnpublishedChanges, validation: {ok, errors, warnings}}` · `400 bad_json / invalid_shape (+issues)` · `409 conflict (+updatedAt)` · `413` · `415` |
-| `POST /api/edit/<slug>/photo?slot=<anahtar>` (ham görsel gövdesi) | `200 {ok, slot, source, url, contentType, size, width, height}` · `400 empty / unknown_slot` · `413 too_large` · `415 unsupported_type` |
-| `POST /api/edit/<slug>/publish` `{baseUpdatedAt?}` | `200 {ok, status:"published", publishedAt, updatedAt, hasUnpublishedChanges, url}` · `409` · `422 invalid_content (+issues)` |
-| `POST /api/edit/<slug>/unpublish` | `200 {ok, status:"draft", …}` |
+| `GET /api/edit/<slug>` | `200 {ok, state: {slug, theme: {id, name, pages, photos[{key,label,source,aspect,ratio}], optionalBlocks}, content, status, updatedAt, publishedAt, hasUnpublishedChanges, rights, previewKey, origin, orderRef}}` (arşivde de okunur) |
+| `PUT /api/edit/<slug>` `{content, baseUpdatedAt?}` (JSON) | `200 {ok, status, updatedAt, publishedAt, hasUnpublishedChanges, rights, validation: {ok, errors, warnings}, identityKept?, identity?}` · `400 bad_json / invalid_shape (+issues)` · `403 archived` · `409 conflict (+updatedAt)` · `413` · `415` |
+| `POST /api/edit/<slug>/photo?slot=<anahtar>` (ham görsel gövdesi) | `200 {ok, slot, source, url, contentType, size, width, height}` · `400 empty / unknown_slot` · `403 archived` · `413 too_large` · `415 unsupported_type` |
+| `POST /api/edit/<slug>/publish` `{baseUpdatedAt?}` | `200 {ok, status:"published", publishedAt, updatedAt, hasUnpublishedChanges, rights, url}` · `403 archived` · `409 conflict / identity_mismatch` · `422 invalid_content (+issues)` |
+| `POST /api/edit/<slug>/unpublish` | `200 {ok, status:"draft", …}` · `403 archived` |
+| `POST /api/edit/<slug>/identity` `{identity: {names[{display, full}], shown, initials, date}, intent?: "fix"\|"change", baseUpdatedAt?}` (G060) | `200 {ok, result: "unchanged"\|"free"\|"typo"\|"change", identity, rights, …}` · `400 invalid_shape` · `403 archived / no_changes_left (+remaining, limit)` · `409 conflict / confirm_required (+kind, remaining, limit)` · `422 invalid_identity / date_archives_site (+issues)` |
 
 Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir sonraki kaydıdır (tek yazar: taslak).
+`rights` = `rightsView` (`lib/panel/rights.ts`): `{phase, limit, granted, used, remaining, anchor, firstPublishedAt, onlineUntil,
+archiveAt, archived, archiveSoon}`.
 
 ### Panel testleri
 
-- `tests/panel.test.ts` (node:test, 25 test; ayrıca tam ad izleme, yayın öncesi notlar, tema alan/sayfa bilgisi, yayın 409): anahtar (iyi/yanlış/eksik/başka site/`?k=`/bilinmeyen slug; önizleme anahtarı düzenleyemez),
+- `tests/panel.test.ts` (node:test, 27 test; G060: `/identity` rotası, isimler yayından sonra yalnız oradan; ayrıca tam ad izleme, yayın öncesi notlar, tema alan/sayfa bilgisi, yayın 409): anahtar (iyi/yanlış/eksik/başka site/`?k=`/bilinmeyen slug; önizleme anahtarı düzenleyemez),
   taslak kaydı (yayın kopyasına dokunmaz, 409 çakışma, kilitli alanlar, yapı reddi, 413/415/400), doğrulama mesajları ve
   `platform` seçeneği, yükleme sınırları (boş, > 10 MB, SVG/GIF/HTML, bozuk JPEG, > 50 MP, bilinmeyen alan, anahtarsız; EXIF silinir,
   oran kırpılır, 2400 px), yayınla/yayından kaldır, QR (bağımsız okuyucu `jsqr` ile geri çözülür), yardımcılar.
@@ -615,8 +632,10 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
   yayını engeller → önizlemede isim ve foto → yayınla → QR ekran görüntüsünden çözülür = genel URL → genel sayfada isim ve foto →
   misafir yanıtı panelde (+ silme) → "Publish changes" → kayıp kayıt yanıtı / yavaş yayın sırasında yazma (yanlış çakışma yok) →
   offline (404, foto da 404) → yeniden yayın → masaüstünde yan yana önizleme; önizleme modalı (odak, `inert`, geri tuşu), Tab ile odak
-  çubuğun altında kalmıyor, "Before you publish" notları, G055: küçük resim 640 türevi + yayında `srcset`. 74 kontrol;
+  çubuğun altında kalmıyor, "Before you publish" notları, G055: küçük resim 640 türevi + yayında `srcset`. 75 kontrol (G060'ta
+  v2 arayüzüne uyarlandı: sihirbaz adım 1, hash adresleri, Guests görünümü, menü eylemleri);
   ekran görüntüleri, `panel_flow_390.mp4` ve `checks.json` → `previews/g039/` (`PANEL_SHOTS_DIR`, `PORT` (3313), `PANEL_SLOWMO`).
+  Repodaki `previews/g039/` dosyaları G039 dönemi arayüzüdür (G060'ta üzerine yazılmadı); v2 görüntüleri `previews/g060/`.
   Test fotoğrafı: 03'ün kurgu GPT örnek fotoğrafı (`collections/03_Blush_Garden_Rose/assets/gpt/photos/hero_portrait.jpg`).
 
 `components/panel/next-types.d.ts`: `next-env.d.ts` (build üretir, repoda yok) yokken `npm run typecheck` CSS modül tiplerini bulsun diye.
@@ -634,9 +653,103 @@ Yükleme yalnız dosyayı saklar ve URL döner; içeriğe yazan, panelin bir son
   (`scripts/reissue-edit-key.ts`, aşağıda /start).
 - Gerçek telefonda (iOS Safari / Android Chrome) denenmedi; yalnız Chromium mobil emülasyonu. HEIC yalnız onu çözebilen tarayıcıda
   (Safari) açılır; Chrome'da açık hata mesajı çıkar. QR telefon kamerasıyla okutulmadı (ekran görüntüsünden `jsqr` ile çözüldü).
-- `local` adaptör tek süreçlidir; taslak kaydındaki çakışma kontrolü (`baseUpdatedAt`) oku-karşılaştır-yaz, atomik değil (Supabase'de
-  koşullu UPDATE). `blob` kaydı ETag ile bozulmadan korur, ama `baseUpdatedAt` karşılaştırması ile yazma arasındaki kısa aralık yine
-  atomik değil. Yayın (`publish`) ise atomik: beklenen sürüm adaptörün kilidi/ETag'i içinde karşılaştırılır.
+- `local` adaptör tek süreçlidir. G060'tan beri taslak kaydı da (`PUT`) ve `/identity` de koşullu yazar
+  (`adapter.patchSite(id, patch, {expectedUpdatedAt})`): beklenen sürüm adaptörün kilidi (`local`) / ETag'i (`blob`) içinde
+  karşılaştırılır, arada başka yazma olduysa `StaleSiteError` → 409. Yayın (`publish`) zaten böyleydi. Supabase'de koşullu UPDATE (G043).
+
+## Panel v2 ve düzenleme hakkı (G060)
+
+Tasarım belgesi: `docs/16_PANEL_V2.md` (bilgi mimarisi §4, sihirbaz §5, görünümler §6, tokenlar §8, durumlar §9, erişilebilirlik §10,
+hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; ikonlar `lucide-react@1.46.0` (sabit), font dosyası yok
+(sistem yığınları), dekor çizimi yok (K21). Görsel olarak yalnız temanın gerçek önizlemesi ve alıcının fotoğrafları.
+
+### Görünümler (`components/panel/`)
+
+- **Adresler (hash):** `#setup/1`…`#setup/6`, `#home`, `#edit`, `#edit/<bölüm>`, `#guests`, `#share`. Geri tuşu/hareketi bir
+  önceki adıma/görünüme döner; sayfa yenilenince aynı yerde açılır. `/start`'taki "Open my editor" → `#setup/1`.
+- **Kurulum sihirbazı (`Setup.tsx`, ilk açılış):** 1 isimler → 2 tarih ve saat → 3 mekân → 4 fotoğraflar (kırpma) → 5 kontrol
+  (önizleme + "Before you publish" notları, her not ilgili bölüme götürür) → 6 yayınla (ilk yayından önce kurallar kutusu:
+  kaç isim/tarih değişikliği, yazım düzeltmesi ücretsiz, site ne zamana kadar açık) → "Your website is live" (link, QR, paylaş).
+  Adım 1–4 atlanabilir ("Skip for now"), 5–6 atlanamaz. İlerleme `localStorage` `setup:<slug>`'ta; başka cihazda içerikten
+  çıkarılır (dolu adımlar geçilir). Değerler normal otomatik kayıtla saklanır.
+- **Home:** durum kartı (yayında / taslak / yayımlanmamış değişiklik / arşiv), sonraki adımlar (örnek metinler, boş fotolar),
+  kalan isim/tarih hakkı ("2 of 3 changes left" + noktalar), "Guests coming" sayıları, site ne zamana kadar açık
+  (son 30 gün uyarı). Üst çubuk başlığı kaydırınca görünür.
+- **Edit:** bölüm listesi (Names, Date, Venue, Schedule, Story, Details, Questions & answers, RSVP, Photos; temanın göstermediği
+  bölüm yok), her bölüm ayrı sayfa; altta yapışkan "Preview this page" (telefonda) ya da başka bir ekrandan gelindiyse "Done".
+  Program/an/SSS satırları: menüden yukarı/aşağı/sil,
+  silme **Undo** snackbar'ıyla geri alınır. Geniş ekranda (≥ 960 px) sağda telefon çerçeveli canlı önizleme; telefonda Preview tam
+  ekran sayfa (`Sheet.tsx`: portal, arka plan `inert`, geçmiş kaydı → geri tuşu kapatır).
+- **Guests:** yanıt sayıları, yeni yanıtlar işaretli (`seen:<slug>`), yanıtlar birlikte açılabilir, CSV, bekleyen yanıtlar,
+  seç → sil. Son tarih ve "Questions for your guests" Edit → RSVP bölümünde.
+- **Share:** genel link (kopyala/aç; cihaz destekliyorsa paylaş), QR (PNG/SVG), yayından kaldır.
+- **Durumlar:** üst çubukta kayıt göstergesi (Saved / Saving… / Unsaved changes / Offline / Not saved yet. Trying again… /
+  Saving paused); **çevrimdışı** iken
+  değişiklikler `localStorage` `draft:<slug>`'a yazılır, bağlantı gelince gönderilir; sayfa kaydedemeden kapandıysa bir sonraki
+  açılışta "Restore / Discard" sorulur (eski bir sürüme ait kopya yalnız "Discard"); çevrimdışıyken Publish kapalı. 409 çakışmada
+  "Reload" (sessiz üzerine yazma yok). Arşivde her şey salt okunur, yanıtlar indirilebilir.
+- **Erişilebilirlik:** dokunma alanları ≥ 44 px, odak halkası, `prefers-reduced-motion`, ekran okuyucu metinleri (ör. hak sayacı),
+  axe-core ile 13 görünümde ciddi/kritik ihlal 0 (tarayıcı testi).
+- **E-posta ile giriş (magic link, §12):** sağlayıcı yok → **kapalı**. `/signin` dürüst metin ("Email sign-in isn't available
+  yet. Open your editor with the edit link you saved. …"), form yok; `POST /api/signin` → `503 {code:"unavailable"}`; `lib/panel/signin.ts` `SignInMailer` arayüzü +
+  `DisabledSignInMailer`. Geçersiz link sayfasında "Lost your edit link?" kartı (destek adresi yer tutucu).
+- **Marka değerleri:** dükkân adı ve destek e-postası `lib/marketing/config.ts`'ten (G061) gelir; karar verilmediği için
+  `[SHOP NAME]`, `[SUPPORT EMAIL]` yer tutucusu görünür, `mailto:` linki yapılmaz (`lib/panel/brand.ts` `isPlaceholder`).
+
+### Düzenleme hakkı (anti-abuse, `lib/panel/rights.ts` — istemci + sunucu ortak, saf)
+
+- **Kimlik alanları:** iki kişinin ilk ismi ve tam adı, "Names as shown", monogram, düğün tarihi. Diğer her şey (saat, mekân,
+  program, hikâye, fotoğraflar, detaylar, RSVP) sınırsız.
+- **İlk yayına kadar** her şey serbest. İlk yayın `firstPublishedAt` ve `identity = {anchor, limit, granted:0, used:0, log}` yazar
+  (`publishSite`).
+- **Yayından sonra:** `PUT` kimlik alanlarını **saklı değerde tutar** (`keepStoredIdentity`, yanıtta `identityKept`); kimlik yalnız
+  `POST /identity` ile değişir. Sınıflandırma çapaya (son sayılan kimlik) göre: alan başına ≤ 2 düzenleme (Damerau–Levenshtein OSA,
+  kod noktası; NFC, görünmez karakterler ve boşluklar normalize; "Names as shown"da `&`/`and`/`+` farkı yok) = **yazım düzeltmesi,
+  ücretsiz**, çapa yerinde kalır (ücretsiz düzeltmeler birikip başka çift olamaz); fazlası = **değişiklik**: `intent:"change"`
+  olmadan `409 confirm_required`, onaylanırsa 1 hak harcanır ve çapa yeni kimlik olur. Hak 0 → `403 no_changes_left` (yazım
+  düzeltmesi yine serbest). Varsayılan 3 hak, ≤ 2 karakter, 12 ay: `lib/marketing/config.ts` `editRights`/`hosting` (satış sitesi
+  ve sunucu aynı sayıyı okur).
+- **Yarış güvenliği:** hak sayacı ve içerik **tek koşullu yazımda** (`patchSite` + `expectedUpdatedAt`); iki sekme son hakkı aynı
+  anda harcayamaz (test: `local` ve aynı Blob deposunda iki sunucu örneği).
+- **Yayın savunması:** taslak kimliği çapadan "değişiklik" kadar farklıysa (eski istemci vb.) yayın `409 identity_mismatch`.
+- **Eski kayıtlar:** G060'tan önce yayınlanmış site okunurken çapa = yayınlanmış kimlik, 0 kullanılmış; ilk yazımda kaydedilir.
+- **Günlük:** her ilk yayın/düzeltme/değişiklik/destek eylemi site kaydındaki `identity.log`'a (en çok 50, en yeniler).
+- **Destek aracı:** `node scripts/grant-identity-change.ts (--order <no> | --slug <adres>) --add <n> --reason "<neden>"` (hak ekler),
+  `--archive-on <YYYY-MM-DD>|clear --reason …` (arşiv tarihini taşır), `--show`. `DATA_ADAPTER`'ın deposunda çalışır; ne zaman
+  hak verileceği dükkân sahibinin kararı (kodda politika yok).
+
+### Arşiv (K25: düğünden 12 ay sonra)
+
+- `archiveDates`: düğün tarihi + 12 ay (ay sonu kırpılır) son gün; arşiv ertesi gün 00:00 **site saat diliminde** (geçersizse
+  UTC). Tavan (öneri, docs/16 §15 #3, **açık** — karar bekliyor): en geç ilk yayından 48 ay sonra (bedava "tarih düzeltmeleri" ile
+  sonsuz barındırmayı önler). Destek `archiveOverrideAt` ile taşıyabilir. Hiç yayınlanmamış site arşivlenmez.
+- Arşivde: genel sayfalar, fotoğraflar ve `.ics` **410** ("This wedding website has been archived", `noindex`, çift bilgisi yok);
+  misafir RSVP formu yok (site yayında değilmiş gibi: gönderim kabul edilmez); panel `GET`, yanıt listesi ve CSV çalışır; panelin
+  yazan uçları ve çiftin yanıt sil/tut ucu (`POST /api/rsvp/<slug>/responses`) `403 archived`. Önizleme anahtarıyla önizleme açılır.
+- Tarih, siteyi hemen arşivleyecek kadar eskiyse ilk yayın ve `/identity` reddedilir (`date_archives_site`).
+- Arşivden sonra verinin **silinmesi yok** (henüz yapılmadı; gizlilik metniyle birlikte karar).
+
+### Testler
+
+- `tests/g060-rights.test.ts` (7): mesafe, normalizasyon, sınıflandırma, çapa, arşiv tarihleri (saat dilimi, ay sonu, tavan,
+  override), `rightsView`.
+- `tests/g060-api.test.ts` (12): yayından önce serbest, ilk yayın kaydı, `identityKept`, yazım/değişiklik/onay/hak bitti, **iki sekme
+  yarışı** (`local`) ve **iki Blob sunucu örneği** (sahte Blob deposu, ETag), destek hakkı, arşivleyen tarih, arşiv kapıları
+  (sayfalar/foto/.ics 410, RSVP kapalı, CSV açık), eski kayıt göçü, 401 eşitliği, yayın savunması.
+- Tarayıcı (build gerekir): `NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts` — `next start` + Chromium
+  390 × 844 (isMobile, touch). Kayıtlı yolculuk: sihirbaz 1→6 (isim, tarih, mekân, foto + kırpma, kontrol, kurallar) → yayın →
+  QR çözülür → editör → Names kilitli → yazım düzeltmesi (ücretsiz) → 1 değişiklik → Home'da kalan hak → "Publish changes".
+  Ayrıca: devam adımı (yenileme / başka cihaz), Back değerleri korur, geri tuşu, editörden ilk yayında kurallar, hak 0, Undo,
+  Guests, Share, çevrimdışı + yerel kopya, çakışma, 401, arşiv, 1280 / 1000 düzenleri, 320 px, axe-core, dokunma alanları,
+  azaltılmış hareket. **104 kontrol**; ekran görüntüleri, `g060_journey_390.mp4` ve `checks.json` → `previews/g060/`
+  (`G060_SHOTS_DIR`, `PORT` (3341)). Eski tarayıcı testleri (panel-browser, final-smoke, g051, g055, claim) v2'ye uyarlandı.
+
+### Bilinen eksikler (G060)
+
+- Magic link akışı (gönderme, tek kullanımlık token, oturum) yok — sağlayıcı yok; yalnız kapalı arayüz.
+- Gerçek telefonda denenmedi (Chromium mobil emülasyonu). Saat dilimi seçimi yerel `<select>` (aranabilir liste yok).
+- Önizleme hash'i (`#preview/<sayfa>`) ve önizlemede "Preview — not published" şeridi yok; yardım üst çubuk menüsünde değil, Home'da.
+- Arşivden sonra veri silme yok; 48 ay tavanı karar bekliyor.
 
 ## /start sahiplenme akışı (G045)
 
@@ -914,7 +1027,8 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   değer yazılmaz. JSON bloğu `<`, `>`, `&`, U+2028/2029 kaçışlı.
 - URL'ler: link http/https/mailto/tel; foto http(s) veya kök göreli `/…` (`//`, `data:`, `javascript:` reddedilir).
 - Başlıklar: CSP (`script-src 'self'` + tema satır içi betik hash'leri, `object-src 'none'`, `base-uri 'none'`,
-  `frame-ancestors 'self'`), `nosniff`, önizlemede `noindex`/`no-store`/`no-referrer`. Gizli link taşıyan `/edit/…` ve `/start`:
+  `frame-ancestors 'self'`), `nosniff`, önizlemede `noindex`/`no-store`/`no-referrer`; yayındaki çift sayfaları
+  `X-Robots-Tag: noindex` (docs/14 §5.5, karar 4 gelene kadar; eğitim botlarını robots.txt kapatır). Gizli link taşıyan `/edit/…` ve `/start`:
   `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
 - `site-data` JSON'u içerik kaydını taşımaz (kapalı bölümler kaynakta görünmez); şablon yorumları silinir.
 - **Fotoğraflar** (`/media/<site>/<dosya>`, `lib/site/static.ts`): yalnız site yayındaysa ve yayındaki içerik o dosyayı kullanıyorsa
