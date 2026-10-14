@@ -2,7 +2,7 @@
 id: GM05
 baslik: BKE Studio Düzenleme paneli arayüz tasarımı — 6 yüksek kaliteli ekran comp'u (GPT tasarlar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-ui-panel
 oncelik: 1
 bagimli: [GM01]
@@ -40,3 +40,4 @@ GPT Düzenleme paneli'nin görsel tasarımını yapar (K21); Claude aynı görü
 - 2026-10-14 ara kayıt (6/6): U2.4 Guests, U2.5 Share, U2.6 masaüstü üretildi; ek metinler ve örtüşmeler imagegen ile düzeltildi. Altı comp belirtilen ölçülerde kaydedildi. Yeşil alanların RGB değerlerinde imagegen kaynaklı küçük sapmalar kaldığı piksel kontrolünde görüldü.
 - 2026-10-14 kullanıcı talimatı: yalnız imagegen; kalan yeşil renk ve kare oranı farkları Sonuç'a yazılacak, araç dışı düzenleme yapılmayacak.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-ui-panel; altı comp ve denemeler kaydedildi, kalan farklar Sonuç'ta açıklandı.
+- 2026-10-14 entegratör onayladı
