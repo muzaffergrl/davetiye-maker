@@ -1,27 +1,21 @@
 'use client';
-// Panel v2 views (G060, docs/16 §6): Home, Edit (section list), Guests (replies), Share, and the help sheet.
+// Panel v2 views (G060, docs/16 §6; K29 simpler panel): Home (status, progress + next three tasks, replies, dates),
+// Edit (the six pages), Guests (replies, guests.tsx), Share (link + QR; password and edit link folded), the help sheet.
 
 import {
   Archive,
-  BookOpen,
-  CalendarDays,
   ChevronRight,
   CircleCheckBig,
   Copy,
   ExternalLink,
   Hourglass,
-  Image as ImageIcon,
   KeyRound,
   Link as LinkIcon,
-  ListOrdered,
-  Lock,
-  Mail,
-  MapPin,
+  LockKeyhole,
   MessageCircleQuestionMark,
   QrCode as QrIcon,
   Send,
   Share2,
-  Shirt,
   Sparkles,
   Users,
   type LucideIcon,
@@ -35,7 +29,6 @@ import {
   photoAt,
   publicSiteUrl,
   sampleSummaries,
-  SECTION_GROUPS,
   SECTION_TITLES,
   sectionForPath,
   type PanelMeta,
@@ -43,28 +36,16 @@ import {
   type PublishNote,
   type SectionId,
 } from '../../lib/panel/model.ts';
-import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT } from '../../lib/panel/rights.ts';
+import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { rsvpClosesAt } from '../../lib/rsvp/deadline.ts';
 import type { Replies } from './guests.tsx';
+import { PAGE_TITLES, type PageId, type Readiness } from './pages.ts';
 import type { AccessOutcome } from './usePanel.ts';
-import { StatusBadges } from './fields.tsx';
 import { QrCode } from './QrCode.tsx';
 import { GuestPasswordCard } from './GuestPassword.tsx';
 import { Sheet } from './Sheet.tsx';
-import { Badge, Banner, Button, Card, cx, RightsMeter } from './ui.tsx';
+import { Badge, Banner, Button, Card, cx, Disclosure, ProgressBar } from './ui.tsx';
 import styles from './panel.module.css';
-
-export const SECTION_ICONS: Record<SectionId, LucideIcon> = {
-  names: Users,
-  date: CalendarDays,
-  venue: MapPin,
-  schedule: ListOrdered,
-  story: BookOpen,
-  details: Shirt,
-  faq: MessageCircleQuestionMark,
-  rsvp: Mail,
-  photos: ImageIcon,
-};
 
 const DAY = 86_400_000;
 
@@ -126,11 +107,10 @@ export function HomeView({
   theme,
   url,
   steps,
-  sampleCount = 0,
+  readiness,
   setupStep,
   replies,
   onGo,
-  onEditSection,
   onPublish,
   onShare,
   onContinueSetup,
@@ -141,13 +121,12 @@ export function HomeView({
   meta: PanelMeta;
   theme: PanelTheme;
   url: string;
+  /** The next tasks, at most three (K29). */
   steps: NextStep[];
-  /** Fields that are still the design's sample text (prePublishNotes().sample). */
-  sampleCount?: number;
+  readiness: Readiness;
   setupStep: number | null;
   replies: Replies;
   onGo: (path: string) => void;
-  onEditSection: (id: SectionId) => void;
   onPublish: () => void;
   onShare: () => void;
   onContinueSetup: () => void;
@@ -156,11 +135,10 @@ export function HomeView({
 }) {
   const r = meta.rights;
   const live = meta.status === 'published';
-  const total = r.limit + r.granted;
   const filled = theme.photos.filter((s) => photoAt(content, s.source)).length;
   return (
     <div className={styles.stack}>
-      <StatusCard meta={meta} url={url} sampleCount={sampleCount} setupStep={setupStep} onPublish={onPublish} onShare={onShare} onContinueSetup={onContinueSetup} onCopy={onCopy} />
+      <StatusCard meta={meta} url={url} setupStep={setupStep} onPublish={onPublish} onShare={onShare} onContinueSetup={onContinueSetup} onCopy={onCopy} />
 
       {r.archiveSoon && r.archiveAt ? (
         <Banner tone="warning" icon={Hourglass}>
@@ -169,27 +147,35 @@ export function HomeView({
         </Banner>
       ) : null}
 
+      {/* K29: how ready the website is + only the next three tasks (each opens the right editor). */}
       {!r.archived ? (
-        <Card title="Next steps" titleId="next-steps" data-next-steps>
+        <section className={styles.progressCard} aria-labelledby="next-steps" data-next-steps data-readiness={readiness.percent}>
+          <h2 id="next-steps" className={styles.cardTitle}>
+            {readiness.percent >= 100 ? 'Your website is ready' : `Your website is ${readiness.percent}% ready`}
+          </h2>
+          <ProgressBar value={readiness.percent} label="How ready your website is" />
           {steps.length ? (
-            <ul className={styles.checklist}>
-              {steps.map((s) => (
-                <li key={s.key}>
-                  <button type="button" className={cx(styles.checkItem, styles[`check_${s.tone}`])} onClick={() => onGo(s.path)}>
-                    <span className={styles.checkDot} aria-hidden="true" />
-                    <span className={styles.checkText}>{s.text}</span>
-                    <ChevronRight size={18} aria-hidden="true" className={styles.chev} />
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <>
+              <p className={styles.progressLead}>{steps.length === 1 ? 'Next:' : 'Next steps:'}</p>
+              <ul className={styles.checklist}>
+                {steps.map((s) => (
+                  <li key={s.key}>
+                    <button type="button" className={cx(styles.checkItem, styles[`check_${s.tone}`])} onClick={() => onGo(s.path)} data-next-step>
+                      <span className={styles.checkDot} aria-hidden="true" />
+                      <span className={styles.checkText}>{s.text}</span>
+                      <ChevronRight size={18} aria-hidden="true" className={styles.chev} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
           ) : (
             <p className={styles.allSet}>
               <CircleCheckBig size={20} strokeWidth={1.75} aria-hidden="true" />
               You&rsquo;re all set. {filled < theme.photos.length ? '' : 'Every photo place has a photo.'}
             </p>
           )}
-        </Card>
+        </section>
       ) : null}
 
       {live || r.phase !== 'before_publish' ? (
@@ -222,35 +208,6 @@ export function HomeView({
         </button>
       ) : null}
 
-      <Card
-        title="Names & date"
-        titleId="rights-card"
-        data-rights-card
-        action={
-          r.archived ? undefined : (
-            <Button small variant="tertiary" onClick={() => onHelp('changes')}>
-              How changes work
-            </Button>
-          )
-        }
-      >
-        {r.archived ? (
-          <p className={styles.cardText}>Your website is archived: names and date can no longer be changed.</p>
-        ) : r.phase === 'before_publish' ? (
-          <p className={styles.cardText}>{beforePublishText(IDENTITY_CHANGE_LIMIT)}</p>
-        ) : (
-          <div className={styles.rightsRow}>
-            <Lock size={18} strokeWidth={1.75} aria-hidden="true" />
-            <RightsMeter remaining={r.remaining} total={total} />
-            {!r.archived ? (
-              <Button small variant="secondary" onClick={() => onEditSection('names')}>
-                Change
-              </Button>
-            ) : null}
-          </div>
-        )}
-      </Card>
-
       <Card title="Dates" titleId="dates-card">
         <dl className={styles.dates}>
           <div>
@@ -277,10 +234,13 @@ export function HomeView({
   );
 }
 
+/**
+ * Status card (comp u2_home_390): one badge, one sentence, the link and one action. K29: a live website is "Live" even
+ * with unpublished changes — the sticky changes bar at the top carries those (no second "Publish changes" here).
+ */
 function StatusCard({
   meta,
   url,
-  sampleCount,
   setupStep,
   onPublish,
   onShare,
@@ -289,7 +249,6 @@ function StatusCard({
 }: {
   meta: PanelMeta;
   url: string;
-  sampleCount: number;
   setupStep: number | null;
   onPublish: () => void;
   onShare: () => void;
@@ -304,17 +263,10 @@ function StatusCard({
     badge = { tone: 'neutral', text: 'Archived', icon: Archive };
     text = 'Your website is closed for guests now. You can still see your content and download your replies.';
     action = null;
-  } else if (meta.status === 'published' && meta.hasUnpublishedChanges) {
-    badge = { tone: 'warning', text: 'Unpublished changes' };
-    text = 'Your website is live. You have changes your guests can’t see yet.';
-    action = { label: 'Publish changes', run: onPublish, variant: 'primary', icon: Send };
   } else if (meta.status === 'published') {
     badge = { tone: 'success', text: 'Live', icon: CircleCheckBig };
-    // "Up to date" only when nothing is left from the design's sample text (guests see whatever is published).
-    text = sampleCount
-      ? `Your website is live — ${sampleCount === 1 ? '1 thing is' : `${sampleCount} things are`} still sample text from the design.`
-      : 'Your website is live and up to date.';
-    // The one action of a live, up-to-date website: share it (comp u2_home_390: the dark button).
+    text = meta.hasUnpublishedChanges ? 'Your website is live. Your newest changes are not published yet.' : 'Your website is live.';
+    // The one action of a live website: share it (comp u2_home_390: the dark button).
     action = { label: 'Share', run: onShare, variant: 'primary', icon: Share2 };
   } else if (meta.publishedAt) {
     badge = { tone: 'neutral', text: 'Offline' };
@@ -325,7 +277,7 @@ function StatusCard({
     text = 'Your website is a draft. Only you can see it.';
     action =
       setupStep !== null
-        ? { label: `Continue setup · Step ${setupStep} of 6`, run: onContinueSetup, variant: 'primary', icon: Sparkles }
+        ? { label: `Continue setup · Step ${setupStep} of 3`, run: onContinueSetup, variant: 'primary', icon: Sparkles }
         : { label: 'Publish', run: onPublish, variant: 'primary', icon: Send };
   }
   return (
@@ -375,74 +327,52 @@ export function UrlText({ url }: { url: string }) {
 }
 
 // ---------------------------------------------------------------------------------------------
-// Edit: grouped section list
+// Edit: the six pages (K29) — big rows, one summary line, only an error count as a badge
 
 export function EditListView({
-  sections,
+  pages,
   summaries,
   errorCount,
-  sampleCount,
-  offSections,
-  meta,
+  icons,
   onOpen,
 }: {
-  sections: SectionId[];
-  summaries: Record<SectionId, string>;
-  errorCount: (id: SectionId) => number;
-  sampleCount: (id: SectionId) => number;
-  offSections: Set<SectionId>;
-  meta: PanelMeta;
-  onOpen: (id: SectionId) => void;
+  pages: PageId[];
+  summaries: Record<PageId, string>;
+  errorCount: (id: PageId) => number;
+  icons: Record<PageId, LucideIcon>;
+  onOpen: (id: PageId) => void;
 }) {
-  const r = meta.rights;
   return (
-    <div className={styles.stack}>
-      {SECTION_GROUPS.map((g) => {
-        const ids = g.ids.filter((id) => sections.includes(id));
-        if (!ids.length) return null;
+    <ul className={styles.list}>
+      {pages.map((id) => {
+        const Icon = icons[id];
+        const errors = errorCount(id);
         return (
-          <section key={g.title} aria-labelledby={`group-${g.title}`}>
-            <h2 id={`group-${g.title}`} className={styles.groupLabel}>
-              {g.title}
-            </h2>
-            <ul className={styles.list}>
-              {ids.map((id) => {
-                const Icon = SECTION_ICONS[id];
-                // One budget for names and date: shown once, on Names, in words that say so (G060-fix).
-                const identity = id === 'names' && r.phase !== 'before_publish';
-                return (
-                  <li key={id}>
-                    <a href={`#edit/${id}`} id={`section-${id}`} className={styles.row} onClick={(e) => (e.preventDefault(), onOpen(id))} data-section-row={id}>
-                      <span className={styles.rowIcon} aria-hidden="true">
-                        <Icon size={20} strokeWidth={1.75} />
-                      </span>
-                      <span className={styles.rowBody}>
-                        <span className={styles.rowTitle}>{SECTION_TITLES[id]}</span>
-                        <span className={styles.rowSummary}>{summaries[id]}</span>
-                        <span className={styles.rowBadges}>
-                          <StatusBadges errors={errorCount(id)} samples={sampleCount(id)} off={offSections.has(id)} />
-                          {identity ? (
-                            <Badge tone={r.remaining ? 'neutral' : 'warning'} icon={Lock}>
-                              {r.remaining} name &amp; date {r.remaining === 1 ? 'change' : 'changes'} left
-                            </Badge>
-                          ) : null}
-                        </span>
-                      </span>
-                      <ChevronRight size={20} aria-hidden="true" className={styles.chev} />
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
+          <li key={id}>
+            <a href={`#edit/${id}`} id={`section-${id}`} className={styles.row} onClick={(e) => (e.preventDefault(), onOpen(id))} data-section-row={id}>
+              <span className={styles.rowIcon} aria-hidden="true">
+                <Icon size={22} strokeWidth={1.75} />
+              </span>
+              <span className={styles.rowBody}>
+                <span className={styles.rowTitle}>{PAGE_TITLES[id]}</span>
+                <span className={styles.rowSummary}>{summaries[id]}</span>
+                {errors ? (
+                  <span className={styles.rowBadges}>
+                    <Badge tone="danger">{errors} to fix</Badge>
+                  </span>
+                ) : null}
+              </span>
+              <ChevronRight size={22} aria-hidden="true" className={styles.chev} />
+            </a>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
 
 // ---------------------------------------------------------------------------------------------
-// Share
+// Share (K29): the link and the QR code first; the guest password and the private edit link fold away below.
 
 export function ShareView({
   url,
@@ -504,27 +434,33 @@ export function ShareView({
             </Button>
           ) : null}
         </div>
+        {live ? (
+          <div className={styles.shareQr} data-share-qr>
+            <h3 className={styles.shareQrTitle}>
+              <QrIcon size={18} strokeWidth={1.75} aria-hidden="true" /> QR code for printed cards
+            </h3>
+            <QrCode url={url} fileBase={slug} />
+            <p className={styles.hint}>Scan it once with your phone camera before you print it.</p>
+          </div>
+        ) : null}
       </Card>
 
-      {live ? (
-        <Card title="QR code" titleId="share-qr" icon={QrIcon}>
-          <QrCode url={url} fileBase={slug} />
-          <p className={styles.hint}>Scan it once with your phone camera before you print it.</p>
-        </Card>
+      {!archived ? (
+        <Disclosure id="password" title="Guest password" status={meta.guestAccess.enabled ? 'On' : 'Off'} icon={LockKeyhole}>
+          <GuestPasswordCard access={meta.guestAccess} online={online} onSave={onGuestAccess} onCopy={onCopy} bare />
+        </Disclosure>
       ) : null}
 
-      {!archived ? <GuestPasswordCard access={meta.guestAccess} online={online} onSave={onGuestAccess} onCopy={onCopy} /> : null}
-
-      <Card title="Your edit link" titleId="share-edit" icon={KeyRound}>
-        <p className={styles.cardText}>Anyone with this link can edit your website. Share it only with your partner.</p>
-        <div className={styles.buttonRow}>
-          <Button variant="primary" block icon={Copy} disabled={!editUrl} onClick={() => onCopy(editUrl, 'Edit link copied')}>
+      <Disclosure id="edit-link" title="Your private edit link" icon={KeyRound}>
+        <div className={styles.stack}>
+          <p className={styles.cardText}>Anyone with this link can edit your website. Share it only with your partner.</p>
+          <Button variant="primary" block icon={Copy} disabled={!editUrl} onClick={() => onCopy(editUrl, 'Edit link copied')} data-copy-edit-link>
             Copy edit link
           </Button>
+          <p className={styles.hint}>Tip: add this page to your Home Screen to find your editor quickly.</p>
+          {orderRef ? <p className={styles.hint}>Your Etsy order number: {orderRef}</p> : null}
         </div>
-        <p className={styles.hint}>Tip: add this page to your Home Screen to find your editor quickly.</p>
-        {orderRef ? <p className={styles.hint}>Your Etsy order number: {orderRef}</p> : null}
-      </Card>
+      </Disclosure>
 
       {live && !archived ? (
         <div className={styles.dangerZone}>
@@ -539,6 +475,7 @@ export function ShareView({
 }
 
 // ---------------------------------------------------------------------------------------------
+
 // Help
 
 export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; locale: string; onClose: () => void; topic?: string }) {

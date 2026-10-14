@@ -174,50 +174,44 @@ try {
     await shot(page, '01_setup1_names');
     await axe(page, 'setup 1');
     await pause();
+    // K29: names and date are one step; the full names fold away (optional) and open on a tap.
+    const fullNames = page.locator('[data-disclosure="full-names"] button[aria-expanded]');
+    check('setup 1 (K29): full names folded, optional', (await fullNames.getAttribute('aria-expanded')) === 'false' && (await page.locator('#f-partners-0-full_name').isHidden()));
+    await fullNames.click();
     await page.locator('#f-partners-0-full_name').fill('Elena Rossi');
     await page.locator('#f-partners-1-full_name').fill('Marco Bianchi');
     await waitSaved(page);
     await pause(400);
-    await page.click('[data-setup-next]');
-    await page.waitForSelector('[data-setup="2"]');
-    check('setup 2: "When is the wedding?", focus on the heading', (await h1(page)).includes('When is the wedding?') && (await focusedIsH1(page)));
-    const s2 = await page.locator('main').innerText();
-    check('setup 2: no banners above the date (sample tags on the fields instead; the rule is shown on step 1 and 6)', !s2.includes('These are still the sample details') && !s2.includes('name and date changes in total') && (await page.locator('[data-sample-tag]').count()) >= 1, s2.slice(0, 200));
+    const s1 = await page.locator('main').innerText();
+    check('setup 1 (K29): the date is on the same step, no banners above it, the rule shown once', !s1.includes('These are still the sample details') && s1.split('name and date changes in total').length === 2 && (await page.locator('[data-sample-tag]').count()) >= 1, s1.slice(0, 200));
+    check('setup 1 (K29): no venue in the setup (later, under Edit → Day & place)', (await page.locator('#f-venue-name').count()) === 0);
     await page.waitForSelector('[data-zone-from-phone]');
-    check('setup 2: the time zone follows the phone ("We\u2019ll use London time, from your phone")', (await page.locator('[data-zone-from-phone]').innerText()).includes('London'));
-    check('setup 2: date style from the phone (en-GB), no country list in the setup', (await page.locator('#f-locale').count()) === 0);
-    await shot(page, '02_setup2_date');
+    check('setup 1: the time zone follows the phone ("We\u2019ll use London time, from your phone")', (await page.locator('[data-zone-from-phone]').innerText()).includes('London'));
+    check('setup 1: date style from the phone (en-GB), no country list in the setup', (await page.locator('#f-locale').count()) === 0);
     await page.fill('#f-date', '2027-09-18');
     await page.fill('#f-ceremony_time', '16:30');
     await waitSaved(page);
-    check('setup 2: date written out (day first, from the phone)', (await page.locator('main').innerText()).includes('Saturday, 18 September 2027'));
+    check('setup 1: date written out (day first, from the phone)', (await page.locator('main').innerText()).includes('Saturday, 18 September 2027'));
+    await shot(page, '02_setup1_date');
     await pause();
     await page.click('[data-setup-next]');
-    await page.waitForSelector('[data-setup="3"]');
-    await page.fill('#f-venue-name', 'Villa Aurelia');
-    await page.fill('#f-venue-city', 'Rome');
-    await page.fill('#f-venue-region', '');
-    await page.fill('#f-venue-country', 'Italy');
-    await page.fill('#f-venue-address', 'Largo di Porta San Pancrazio 1');
-    await waitSaved(page);
-    await shot(page, '03_setup3_venue');
-    await pause();
+    await page.waitForSelector('[data-setup="2"]');
+    check('setup 2: "Add your photo", focus on the heading', (await h1(page)).includes('Add your photo') && (await focusedIsH1(page)));
     // Back keeps the values; the phone's back gesture goes to the previous step too.
     await page.click('[data-setup-back]');
+    await page.waitForSelector('[data-setup="1"]');
+    check('setup: Back keeps what was typed', (await page.inputValue('#f-date')) === '2027-09-18' && (await page.inputValue('#f-ceremony_time')) === '16:30' && (await page.inputValue('#f-partners-0-full_name')) === 'Elena Rossi');
+    await page.click('[data-setup-next]');
     await page.waitForSelector('[data-setup="2"]');
-    check('setup: Back keeps what was typed', (await page.inputValue('#f-date')) === '2027-09-18' && (await page.inputValue('#f-ceremony_time')) === '16:30');
-    await page.click('[data-setup-next]');
-    await page.waitForSelector('[data-setup="3"]');
-    check('setup 3: values still there after Back / Continue', (await page.inputValue('#f-venue-name')) === 'Villa Aurelia');
-    await page.click('[data-setup-next]');
-    await page.waitForSelector('[data-setup="4"]');
     await page.goBack();
-    await page.waitForSelector('[data-setup="3"]');
+    await page.waitForSelector('[data-setup="1"]');
     check('setup: phone back = previous step', true);
     await page.goForward();
-    await page.waitForSelector('[data-setup="4"]');
-    check('setup 4: photo counter "0 of 5 photos"', (await page.locator('[data-photo-count]').innerText()).includes('0 of 5 photos'));
-    await shot(page, '04_setup4_photos');
+    await page.waitForSelector('[data-setup="2"]');
+    check('setup 2: photo counter "0 of 5 photos"', (await page.locator('[data-photo-count]').innerText()).includes('0 of 5 photos'));
+    const morePhotos = page.locator('[data-disclosure="more-photos"] button[aria-expanded]');
+    check('setup 2 (K29): one photo asked for (the portrait); the 4 others folded under "More photos", optional', (await page.locator('[data-setup="2"] [data-photo-slot]:visible').count()) === 1 && (await morePhotos.getAttribute('aria-expanded')) === 'false' && (await morePhotos.innerText()).includes('Optional'));
+    await shot(page, '04_setup2_photos');
     await page.setInputFiles('input[data-slot="hero_portrait"]', PHOTO);
     await page.waitForSelector('[data-testid="cropper"] img');
     const frame = await page.locator('[data-testid="cropper"] [role="group"]').boundingBox();
@@ -229,47 +223,27 @@ try {
     await page.click('[data-crop-confirm]');
     await page.waitForSelector('[data-photo-slot="hero_portrait"] img', { timeout: 30_000 });
     await waitSaved(page);
-    check('setup 4: upload + crop, counter "1 of 5 photos"', (await page.locator('[data-photo-count]').innerText()).includes('1 of 5 photos'));
+    check('setup 2: upload + crop, counter "1 of 5 photos"', (await page.locator('[data-photo-count]').innerText()).includes('1 of 5 photos'));
     await pause();
     await page.click('[data-setup-next]');
-    await page.waitForSelector('[data-setup="5"]');
-    await page.frameLocator('[data-setup="5"] iframe').locator('body').waitFor();
+    await page.waitForSelector('[data-setup="3"]');
+    await page.frameLocator('[data-setup="3"] iframe').locator('body').waitFor();
     await page.waitForTimeout(1500);
-    const sampleItems = page.locator('[data-setup="5"] [data-sample-line]');
-    const sampleText = (await sampleItems.allInnerTexts()).join(' | ');
-    check('setup 5: preview + "Still sample text" list', (await page.locator('[data-setup="5"] iframe').count()) === 1 && (await sampleItems.count()) > 0, String(await sampleItems.count()));
-    check('setup 5: one short line per section ("Our Story: story intro and 3 captions")', !/sample text\.|is a sample place|moment \d/.test(sampleText) && /Our Story: story intro and \d+ captions/.test(sampleText), sampleText);
-    await shot(page, '06_setup5_check', { jpeg: true });
-    // A sample item opens its section above the wizard; "Done" comes back.
-    await sampleItems.first().click();
-    await page.waitForSelector('[data-section-done]');
-    check('setup 5: sample item opens its section with "Done"', /#edit\//.test(page.url()));
-    await shot(page, '07_setup5_section_from_check');
-    await page.click('[data-section-done]');
-    await page.waitForSelector('[data-setup="5"]');
-    check('setup 5: "Done" returns to the check step', page.url().endsWith('#setup/5'));
-    // G061 review: with sample text left, the primary action is "Fix N items"; "Publish anyway" is the quieter one.
-    const sampleN = Number(await page.getAttribute('[data-setup="5"] [data-sample-list]', 'data-sample-list'));
-    const fixLabel = (await page.locator('[data-setup-fix]').innerText()).trim();
-    check('setup 5: sample text left -> primary "Fix N items", "Publish anyway" secondary, no "Looks good"', sampleN > 0 && fixLabel === (sampleN === 1 ? 'Fix 1 item' : `Fix ${sampleN} items`) && (await page.locator('[data-setup-anyway]').count()) === 1 && (await page.locator('[data-setup-next]').count()) === 0, `${sampleN} / ${fixLabel}`);
-    check('setup 5: no horizontal scroll with the extra button', (await overflow(page)) <= 0, String(await overflow(page)));
+    // K29: the last step checks once (the real preview) and publishes — no list or count of sample text, one calm line.
+    const s3 = (await page.locator('[data-setup="3"] main').innerText()).replace(/\s+/g, ' ');
+    const calm = await page.locator('[data-calm-note]').innerText();
+    check('setup 3 (K29): preview + one calm line instead of a sample-text list or count', (await page.locator('[data-setup="3"] iframe').count()) === 1 && (await page.locator('[data-sample-list], [data-sample-line]').count()) === 0 && !/\d+ things?\b|Still sample text from the design \(/.test(s3) && calm.includes('any time, before or after you publish'), calm);
+    check('setup 3: the step bar says "Step 3 of 3" and Publish is the main action (no Skip)', (await page.locator('[data-setup="3"] header').innerText()).includes('Step 3 of 3') && (await page.locator('[data-setup-skip]').count()) === 0 && (await page.locator('[data-setup-publish]').count()) === 1);
+    check('setup 3: no horizontal scroll', (await overflow(page)) <= 0, String(await overflow(page)));
+    await shot(page, '06_setup3_check', { jpeg: true });
     await pause();
-    await page.click('[data-setup-anyway]');
-    await page.waitForSelector('[data-setup="6"]');
-    const sample6 = await page.locator('[data-setup="6"] main').innerText();
-    check('setup 6: the publish step lists the sample text with its count', (await page.getAttribute('[data-setup="6"] [data-sample-list]', 'data-sample-list')) === String(sampleN) && sample6.includes(`Still sample text from the design (${sampleN})`) && sample6.includes('still sample text from the design'), sample6.slice(0, 300).replace(/\s+/g, ' '));
-    await page.locator('[data-setup="6"] [data-sample-list] li button').first().click();
-    await page.waitForSelector('[data-section-done]');
-    await page.click('[data-section-done]');
-    await page.waitForSelector('[data-setup="6"]');
-    check('setup 6: a sample item opens its section and "Done" comes back to step 6', page.url().endsWith('#setup/6'));
     const rules = await page.locator('[data-rules]').innerText();
-    check('setup 6: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)', rules.includes('3 changes in total') && rules.includes('moving your date by up to 7 days') && rules.includes('Undo it right away') && rules.includes('18 September 2028') && rules.includes('closes for guests'), rules.replace(/\s+/g, ' '));
+    check('setup 3: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)', rules.includes('3 changes in total') && rules.includes('moving your date by up to 7 days') && rules.includes('Undo it right away') && rules.includes('18 September 2028') && rules.includes('closes for guests'), rules.replace(/\s+/g, ' '));
     const summary = await page.locator('[data-publish-summary]').innerText();
-    check('setup 6: summary shows names, the invitation-card names, date and address', summary.includes('Elena & Marco') && summary.includes('On the invitation card: Elena Rossi & Marco Bianchi'), summary);
-    check('setup 6: no sample-date gate once the real date is set', (await page.locator('[data-sample-date-gate]').count()) === 0 && !(await page.locator('[data-setup-publish]').isDisabled()));
-    await shot(page, '08_setup6_publish');
-    await axe(page, 'setup 6');
+    check('setup 3: summary shows names, the invitation-card names, date and address', summary.includes('Elena & Marco') && summary.includes('On the invitation card: Elena Rossi & Marco Bianchi'), summary);
+    check('setup 3: no sample-date gate once the real date is set', (await page.locator('[data-sample-date-gate]').count()) === 0 && !(await page.locator('[data-setup-publish]').isDisabled()));
+    await shot(page, '08_setup3_publish');
+    await axe(page, 'setup 3');
     await pause(900);
     await page.click('[data-setup-publish]');
     await page.waitForSelector('[data-setup-done]', { timeout: 20_000 });
@@ -290,9 +264,14 @@ try {
     await page.click('[data-go-editor]');
     await page.waitForSelector('[data-status-card]');
     check('editor: Home after publishing, status Live', (await page.locator('[data-status-card]').innerText()).includes('Live') && page.url().endsWith('#home'));
+    // K29: Home = how ready the website is + only the next three tasks (the sample-text reminders live here).
+    const progress = (await page.locator('[data-next-steps]').innerText()).replace(/\s+/g, ' ');
+    const ready = Number(await page.getAttribute('[data-next-steps]', 'data-readiness'));
+    check('home (K29): "Your website is N% ready" with at most 3 next steps, sample text among them', ready > 0 && ready < 100 && progress.includes(`Your website is ${ready}% ready`) && (await page.locator('[data-next-step]').count()) <= 3 && (await page.locator('[data-next-step]').count()) >= 1 && progress.includes('replace the sample'), progress.slice(0, 200));
+    check('home (K29): a progress bar with its value', (await page.getAttribute('[data-next-steps] [role="progressbar"]', 'aria-valuenow')) === String(ready));
     const statusText = await page.locator('[data-status-card]').innerText();
-    check('editor: Live status names the sample text left instead of "up to date"', statusText.includes('still sample text from the design') && !statusText.includes('up to date'), statusText.replace(/\s+/g, ' ').slice(0, 160));
-    check('editor: rights card "3 of 3 changes left"', (await page.locator('[data-rights-card]').innerText()).includes('3 of 3 changes left'));
+    check('editor: Live status, no "up to date" claim while sample text is left', statusText.includes('Your website is live') && !statusText.includes('up to date'), statusText.replace(/\s+/g, ' ').slice(0, 160));
+    check('home (K29): the name & date changes are not on Home (only next to those fields)', (await page.locator('[data-rights-card]').count()) === 0);
     check('editor: no Home-screen setup prompt after publish (setup never reopens)', !(await page.locator('[data-status-card]').innerText()).includes('Continue setup'));
     await shot(page, '10_home_live');
     await axe(page, 'home');
@@ -307,17 +286,20 @@ try {
     await page.waitForTimeout(400);
     check('preview (phone): back gesture closes it and stays on Home', !(await page.locator('[data-preview] iframe').isVisible()) && page.url().endsWith('#home'));
     await pause();
-    // Edit -> Names: locked, "3 changes left".
+    // Edit (K29): six big rows, no sample-text badges, no lock badges; the changes left only inside Us / Day & place.
     await page.click('[data-nav="edit"]');
-    await page.waitForSelector('[data-section-row="names"]');
-    check('edit: one badge for the shared budget ("3 name & date changes left" on Names, none on Date)', (await page.locator('[data-section-row="names"]').innerText()).includes('3 name & date changes left') && !(await page.locator('[data-section-row="date"]').innerText()).includes('changes left'));
-    check('edit: Names has no "Sample text" badge once the names are set (host line lives under Details)', !(await page.locator('[data-section-row="names"]').innerText()).includes('Sample'));
-    check('edit: no separate "Optional sections"', !(await page.locator('main').innerText()).includes('Optional sections'));
+    await page.waitForSelector('[data-section-row="us"]');
+    const rows = await page.locator('[data-section-row]').evaluateAll((els: Element[]) => els.map((e) => e.getAttribute('data-section-row')));
+    check('edit (K29): six pages — Us, Day & place, Photos, Our Story, Details, RSVP', rows.join(',') === 'us,day,photos,story,details,rsvp', rows.join(','));
+    const listText = await page.locator('main').innerText();
+    check('edit (K29): no "Sample" and no "changes left" badges on the list', !listText.includes('Sample') && !listText.includes('changes left'), listText.replace(/\s+/g, ' ').slice(0, 200));
+    check('edit: no separate "Optional sections"', !listText.includes('Optional sections'));
     await shot(page, '11_edit_list', { full: true });
     await axe(page, 'edit');
-    await page.click('[data-section-row="names"]');
+    await page.click('[data-section-row="us"]');
     await page.waitForSelector('[data-locked-identity="names"]');
     check('names: identity read only after publishing (no name inputs)', (await page.locator('#f-partners-0-display_name').count()) === 0);
+    check('Us (K29): the one place for the name & date changes: "3 of 3 changes left" next to the names', (await page.locator('[data-rights-card]').innerText()).includes('3 of 3 changes left'));
     await shot(page, '12_names_locked');
     await axe(page, 'section: names');
     await pause();
@@ -360,10 +342,19 @@ try {
     check('change again after the undo: 2 of 3 left', true);
     await pause(900);
     await page.click('[data-nav="home"]');
-    await page.waitForSelector('[data-rights-card]');
-    check('home: rights card "2 of 3 changes left"', (await page.locator('[data-rights-card]').innerText()).includes('2 of 3 changes left'));
-    check('home: status says there are unpublished changes', (await page.locator('[data-status-card]').innerText()).includes('Unpublished changes'));
+    await page.waitForSelector('[data-changes-bar]');
+    // K29: one sticky bar while guests see an older version; Review names the changed page.
+    const bar = (await page.locator('[data-changes-bar]').innerText()).replace(/\s+/g, ' ');
+    check('home (K29): sticky bar "Unpublished changes: 1 · Review · Publish"', /Unpublished changes: 1\b/.test(bar) && (await page.locator('[data-changes-bar] [data-publish]').count()) === 1 && (await page.locator('header [data-publish]').count()) === 1, bar);
+    check('home (K29): no second "Publish changes" in the status card', !(await page.locator('[data-status-card]').innerText()).includes('Publish changes'));
     await shot(page, '16_home_unpublished');
+    await page.click('[data-changes-review]');
+    await page.waitForSelector('[data-testid="review"]');
+    check('review (K29): the changed page is "Us"', (await page.locator('[data-review-item]').allInnerTexts()).join('|') === 'Us');
+    await shot(page, '16b_review');
+    await axe(page, 'review sheet');
+    await page.locator('[data-testid="review"]').getByRole('button', { name: 'Keep editing' }).last().click();
+    await page.waitForSelector('[data-testid="review"]', { state: 'detached' });
     await pause();
     await page.click('[data-publish]');
     await page.waitForSelector('[data-testid="live"], [data-testid="notes"]', { timeout: 15_000 });
@@ -388,52 +379,53 @@ try {
     const N = editUrl('nora-and-sam', other.editKey);
     await page.goto(N);
     await page.waitForSelector('[data-setup]');
-    check('resume: a fresh device opens the first unfinished step (2: the date is still sample)', (await page.getAttribute('[data-setup]', 'data-setup')) === '2');
-    check('setup 2 (phone in the design\'s own zone): the zone stays New York, shown as the phone\'s', (await page.locator('[data-zone-from-phone]').innerText()).includes('New York'));
-    // Step 6 with the design's sample date: blocked until the date is set or confirmed (G060-fix).
+    check('resume: a fresh device opens the first unfinished step (1: the date is still sample)', (await page.getAttribute('[data-setup]', 'data-setup')) === '1');
+    check('setup 1 (phone in the design\'s own zone): the zone stays New York, shown as the phone\'s', (await page.locator('[data-zone-from-phone]').innerText()).includes('New York'));
+    // The publish step with the design's sample date: blocked until the date is set or confirmed (G060-fix). An old
+    // address of the 6-step wizard (#setup/6) lands on the publish step (K29).
     await page.goto(`${N}#setup/6`);
-    await page.waitForSelector('[data-setup="6"] [data-sample-date-gate]');
+    await page.waitForSelector('[data-setup="3"] [data-sample-date-gate]');
+    check('old address #setup/6 opens the publish step (#setup/3)', page.url().endsWith('#setup/3'));
     const gate = await page.locator('[data-sample-date-gate]').innerText();
-    check('setup 6: "Your wedding date is still the design\u2019s sample" above Publish, Publish disabled', gate.includes('still the design') && (await page.locator('[data-setup-publish]').isDisabled()), gate.replace(/\s+/g, ' '));
-    await shot(page, '08b_setup6_sample_date');
-    await axe(page, 'setup 6 with sample date');
+    check('setup 3: "Your wedding date is still the design\u2019s sample" above Publish, Publish disabled', gate.includes('still the design') && (await page.locator('[data-setup-publish]').isDisabled()), gate.replace(/\s+/g, ' '));
+    await shot(page, '08b_setup3_sample_date');
+    await axe(page, 'setup 3 with sample date');
     for (const width of [320, 360, 390]) {
       await page.setViewportSize({ width, height: 700 });
       await page.waitForTimeout(300);
       const out = await outOfScreen(page, '[data-setup]');
-      check(`setup 6 at ${width} px: every control of the fixed bars stays on screen`, !out.length, out.join(' ; '));
-      if (width === 360) await shot(page, '08c_setup6_360');
+      check(`setup 3 at ${width} px: every control of the fixed bars stays on screen`, !out.length, out.join(' ; '));
+      if (width === 360) await shot(page, '08c_setup3_360');
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.click('[data-confirm-sample-date]');
-    check('setup 6: "… really is our wedding date" unlocks Publish', !(await page.locator('[data-setup-publish]').isDisabled()));
+    check('setup 3: "… really is our wedding date" unlocks Publish', !(await page.locator('[data-setup-publish]').isDisabled()));
     await page.click('[data-confirm-sample-date]');
     await page.click('[data-fix-date]');
-    await page.waitForSelector('[data-setup="2"]');
-    check('setup 6: "Set our date" goes to the date step', page.url().endsWith('#setup/2'));
-    // 360 × 640: the date and the ceremony time are above the fixed bar (no banners on step 2).
+    await page.waitForSelector('[data-setup="1"]');
+    check('setup 3: "Set our date" goes to the date step (step 1)', page.url().endsWith('#setup/1'));
+    // 360 × 640: the first field is well above the fixed bar (no banners above it; the rule sits under the names).
     await page.setViewportSize({ width: 360, height: 640 });
     await page.waitForTimeout(300);
     const fit = await page.evaluate(() => {
       const bar = document.querySelector('footer')!.getBoundingClientRect().top;
-      const time = document.getElementById('f-ceremony_time')!.getBoundingClientRect();
-      const date = document.getElementById('f-date')!.getBoundingClientRect();
-      return { bar, date: date.top, time: time.bottom };
+      const first = document.getElementById('f-partners-0-display_name')!.getBoundingClientRect();
+      return { bar, first: first.top, firstBottom: first.bottom };
     });
-    check('setup 2 at 360 × 640: the date field starts well above the bar (no banners)', fit.date < 360, JSON.stringify(fit));
-    await shot(page, '02b_setup2_360x640');
+    check('setup 1 at 360 × 640: the first name field starts well above the bar (no banners)', fit.first < 360 && fit.firstBottom < fit.bar, JSON.stringify(fit));
+    await shot(page, '02b_setup1_360x640');
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(N);
-    await page.waitForSelector('[data-setup="2"]');
+    await page.waitForSelector('[data-setup="1"]');
     await page.click('[data-setup-skip]');
-    await page.waitForSelector('[data-setup="3"]');
+    await page.waitForSelector('[data-setup="2"]');
     await page.reload();
     await page.waitForSelector('[data-setup]');
-    check('resume: reload returns to the step on this phone (3)', (await page.getAttribute('[data-setup]', 'data-setup')) === '3');
-    // Save & exit -> Home with "Continue setup · Step 3 of 6"
+    check('resume: reload returns to the step on this phone (2)', (await page.getAttribute('[data-setup]', 'data-setup')) === '2');
+    // Save & exit -> Home with "Continue setup · Step 2 of 3"
     await page.click('[data-setup-exit]');
     await page.waitForSelector('[data-status-card]');
-    check('save & exit: Home offers "Continue setup · Step 3 of 6"', (await page.locator('[data-status-card]').innerText()).includes('Continue setup · Step 3 of 6'));
+    check('save & exit: Home offers "Continue setup · Step 2 of 3"', (await page.locator('[data-status-card]').innerText()).includes('Continue setup · Step 2 of 3'));
     await shot(page, '17_home_draft');
     await page.reload();
     await page.waitForSelector('[data-status-card]');
@@ -552,6 +544,13 @@ try {
     // Share
     await page.click('[data-nav="share"]');
     await page.waitForSelector('[data-share-url]');
+    // K29: the link and the QR code first; the guest password and the private edit link fold away below.
+    const folds = await page.locator('[data-disclosure] button[aria-expanded]').evaluateAll((els: Element[]) =>
+      els.map((e) => `${e.closest('[data-disclosure]')!.getAttribute('data-disclosure')}:${e.getAttribute('aria-expanded')}`),
+    );
+    check('share (K29): link + QR on top; guest password and edit link folded', (await page.locator('[data-share-qr] svg[role="img"]').count()) === 1 && folds.join(',') === 'password:false,edit-link:false', folds.join(','));
+    await page.click('[data-disclosure="edit-link"] button[aria-expanded]');
+    await page.waitForSelector('[data-copy-edit-link]');
     const share = await page.locator('main').innerText();
     check('share: link + edit-link warning and tip; no "Sign in by email" card for a feature that does not exist', share.includes('Anyone with this link can edit your website') && share.includes('add this page to your Home Screen') && !share.includes('Sign in by email') && !share.includes('Not available yet'));
     const urlBox = await page.locator('[data-share-url]').boundingBox();
@@ -669,9 +668,12 @@ try {
     await page.waitForSelector('[data-status-card]');
     check('archive: Home says the website is closed for guests', (await page.locator('[data-status-card]').innerText()).includes('closed for guests'));
     check('archive: no Publish button, "Archived" badge', (await page.locator('[data-publish]').count()) === 0 && (await page.locator('header').innerText()).includes('Archived'));
-    check('archive: rights card says names and date can no longer be changed', (await page.locator('[data-rights-card]').innerText()).includes('can no longer be changed'));
     await shot(page, '27_archived');
     await axe(page, 'archived home');
+    // K29: the name & date changes live next to the names (Us page), also when archived.
+    await page.goto(editUrl('old-wedding', archivedSite.editKey, '#edit/us'));
+    await page.waitForSelector('[data-rights-card]');
+    check('archive: Us says names and date can no longer be changed (no Change button)', (await page.locator('[data-rights-card]').innerText()).includes('can no longer be changed') && (await page.locator('[data-change-identity]').count()) === 0);
     await page.goto(editUrl('old-wedding', archivedSite.editKey, '#edit/venue'));
     await page.waitForSelector('#f-venue-name');
     check('archive: banner "Your website closed for guests on …" in the editor', (await page.locator('[data-archived-banner]').innerText()).includes('Your website closed for guests on'));
@@ -751,7 +753,7 @@ try {
     const nav = await d.locator('nav[aria-label="Editor"]').boundingBox();
     const main = await d.locator('main#main').boundingBox();
     const pv = await d.locator('[data-preview] iframe').boundingBox();
-    check('1280: three columns (rail, content, sticky preview)', nav && main && pv && nav.x < 30 && nav.width >= 200 && main.x > nav.x + nav.width - 1 && pv.x > main.x + main.width - 40, JSON.stringify({ nav, main, pv }));
+    check('1280 (K29): two columns — editing with the tabs above it, the sticky live preview on the right', nav && main && pv && nav.height < 80 && nav.y + nav.height <= main.y + 1 && pv.x > main.x + main.width - 40 && pv.x > 640, JSON.stringify({ nav, main, pv }));
     check('1280: no phone Preview button', (await d.locator('[data-open-preview]').count()) === 0);
     await d.screenshot({ path: path.join(OUT, '28_desktop_1280_home.jpg'), type: 'jpeg', quality: 82 });
     await d.goto(`${L}#edit/schedule`);

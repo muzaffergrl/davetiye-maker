@@ -4,6 +4,7 @@
 // Icons: lucide-react (pinned 1.46.0), imported one by one; an icon never carries meaning alone.
 
 import {
+  ChevronDown,
   CircleAlert,
   CircleCheckBig,
   Cloud,
@@ -85,8 +86,8 @@ export function IconButton({
 // ---------------------------------------------------------------------------------------------
 // Badges, cards, banners
 
-/** `gold`: a champagne tint with aubergine text (the "New" reply badge, G066). */
-export type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent' | 'gold';
+/** `strong`: aubergine with white text (the "New" reply badge; K29: one accent colour). */
+export type Tone = 'neutral' | 'success' | 'warning' | 'danger' | 'accent' | 'strong';
 
 export function Badge({ tone = 'neutral', icon: Icon, children, ...rest }: { tone?: Tone; icon?: LucideIcon; children: ReactNode } & Record<`data-${string}`, unknown>) {
   return (
@@ -162,6 +163,59 @@ export function Banner({
         <div>{children}</div>
         {actions ? <div className={styles.bannerActions}>{actions}</div> : null}
       </div>
+    </div>
+  );
+}
+
+/**
+ * A section that opens and closes (K29: Share keeps the guest password and the private edit link one tap away).
+ * Heading + button (aria-expanded / aria-controls); the closed body stays in the page, `hidden`, so what was typed in it
+ * is kept. `status` is a short word after the title ("Off", "On").
+ */
+export function Disclosure({
+  id,
+  title,
+  status,
+  icon: Icon,
+  defaultOpen = false,
+  children,
+}: {
+  id: string;
+  title: string;
+  status?: ReactNode;
+  icon?: LucideIcon;
+  defaultOpen?: boolean;
+  children: ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  const bodyId = useId();
+  return (
+    <section className={cx(styles.disclosure, open && styles.disclosureOpen)} data-disclosure={id}>
+      <h2 className={styles.disclosureHeading}>
+        <button type="button" className={styles.disclosureButton} aria-expanded={open} aria-controls={bodyId} onClick={() => setOpen((v) => !v)}>
+          {Icon ? (
+            <span className={styles.cardIcon} aria-hidden="true">
+              <Icon size={22} strokeWidth={1.75} />
+            </span>
+          ) : null}
+          <span className={styles.disclosureTitle}>{title}</span>
+          {status ? <span className={styles.disclosureStatus}>{status}</span> : null}
+          <ChevronDown size={22} strokeWidth={1.75} aria-hidden="true" className={styles.disclosureChev} />
+        </button>
+      </h2>
+      <div id={bodyId} className={styles.disclosureBody} hidden={!open}>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+/** A plain progress bar with its own text (role="progressbar"). */
+export function ProgressBar({ value, label }: { value: number; label: string }) {
+  const v = Math.max(0, Math.min(100, Math.round(value)));
+  return (
+    <div className={styles.meterBar} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={v} aria-label={label}>
+      <span className={styles.meterBarFill} style={{ width: `${v}%` }} />
     </div>
   );
 }

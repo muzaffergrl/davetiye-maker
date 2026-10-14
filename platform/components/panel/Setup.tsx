@@ -1,9 +1,10 @@
 'use client';
-// First-run setup (G060, docs/16 §5): Names -> Date & time -> Venue -> Photos -> Preview -> Publish.
-// One topic per screen, a 6-part progress bar, Back never loses anything (it is all autosaved), every step
-// can be skipped, and the step to resume is worked out from the content (another phone finds it too).
+// First-run setup (G060, docs/16 §5; K29: three steps): 1 names + date -> 2 the opening photo -> 3 publish.
+// Everything else (venue, schedule, story, details, RSVP) comes later and is optional; Home shows what is left.
+// Back never loses anything (it is all autosaved), steps 1–2 can be skipped, and the step to resume is worked out
+// from the content (another phone finds it too).
 
-import { ArrowLeft, CalendarDays, Check, CircleCheckBig, Copy, ExternalLink, Hourglass, Pencil, Share2, Sparkles, TriangleAlert } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Check, CircleCheckBig, Copy, ExternalLink, Hourglass, Share2, Sparkles, TriangleAlert } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
@@ -14,54 +15,52 @@ import {
   photoAt,
   prePublishNotes,
   sampleDateLeft,
-  sampleSummaries,
-  SECTION_TITLES,
-  sectionForPath,
   type PanelState,
   type PanelTheme,
-  type PublishNote,
-  type SectionId,
 } from '../../lib/panel/model.ts';
 import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
 import { BrandLogo } from './Brand.tsx';
 import { useDeviceZone, usePanelContext } from './fields.tsx';
+import { heroSlot, SETUP_STEP_COUNT } from './pages.ts';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane, useSettledVersion } from './PreviewPane.tsx';
 import { QrCode } from './QrCode.tsx';
-import { DateFields, NamesFields, RIGHTS_HINT_BEFORE, VenueFields } from './sections.tsx';
-import { Banner, Button, cx, SaveIndicator } from './ui.tsx';
+import { DateFields, NamesFields, RIGHTS_HINT_BEFORE } from './sections.tsx';
+import { Banner, Button, cx, Disclosure, SaveIndicator } from './ui.tsx';
 import type { PanelController } from './usePanel.ts';
 import { UrlText } from './views.tsx';
 import styles from './panel.module.css';
 
+
+
 export const SETUP_STEPS = [
-  { title: 'Your names', help: 'As your guests know you. You can add full names for the invitation card.', paths: ['partners', 'name_display', 'initials'] },
-  { title: 'When is the wedding?', help: 'The date, the ceremony time and your time zone.', paths: ['date', 'ceremony_time', 'timezone', 'locale'] },
-  { title: 'Where is it?', help: 'Guests see the venue on the Details page, with your map link.', paths: ['venue', 'urls.map'] },
-  { title: 'Add your photos', help: 'Until you add a photo, your guests see a soft placeholder image. You can add photos later too.', paths: ['media'] },
-  { title: 'Check your website', help: 'This is exactly what your guests will see once you publish.', paths: [] },
-  { title: 'Publish your website', help: 'You can keep editing after you publish.', paths: [] },
+  {
+    title: 'Your names and date',
+    help: 'As your guests know you, and the day itself. Everything else can wait until later.',
+    paths: ['partners', 'name_display', 'initials', 'date', 'ceremony_time', 'timezone', 'locale'],
+  },
+  { title: 'Add your photo', help: 'One photo is enough to start: it opens your website. The others are optional.', paths: ['media'] },
+  { title: 'Publish your website', help: 'Check it once, then publish. You can keep editing after you publish.', paths: [] },
 ] as const;
 
-const SAMPLE_STEP: Record<number, string[]> = { 2: ['date', 'ceremony_time'], 3: ['venue.name', 'venue.address', 'venue.city'] };
 
-/** Steps (1-6) whose content is filled in and no longer the design's sample text. */
+
+/** Steps (1-2) whose content is filled in and no longer the design's sample text. */
 export function doneSteps(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>, deviceZone: string | null = null): Set<number> {
   const done = new Set<number>();
   const samples = new Set(prePublishNotes(content, theme, { deviceZone }).sample.map((n) => n.path));
-  const hasSample = (step: number) => (SAMPLE_STEP[step] ?? []).some((p) => samples.has(p));
-  if ((content.partners ?? []).length && content.partners.every((p) => (p.display_name ?? '').trim())) done.add(1);
-  if (content.date && content.ceremony_time && !hasSample(2)) done.add(2);
-  if ((content.venue?.name ?? '').trim() && (content.venue?.city ?? '').trim() && !hasSample(3)) done.add(3);
-  if (!theme.photos.length || theme.photos.some((s) => photoAt(content, s.source))) done.add(4);
+  const names = (content.partners ?? []).length > 0 && content.partners.every((p) => (p.display_name ?? '').trim());
+  const date = Boolean(content.date && content.ceremony_time) && !samples.has('date') && !samples.has('ceremony_time');
+  if (names && date) done.add(1);
+  if (!theme.photos.length || theme.photos.some((s) => photoAt(content, s.source))) done.add(2);
   return done;
 }
 
-/** The first step not done yet (5 = check, when 1–4 are done). */
+/** The first step not done yet (3 = publish, when 1–2 are done). */
 export function firstOpenStep(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>, deviceZone: string | null = null): number {
   const done = doneSteps(content, theme, deviceZone);
-  for (let s = 1; s <= 4; s++) if (!done.has(s)) return s;
-  return 5;
+  for (let s = 1; s < SETUP_STEP_COUNT; s++) if (!done.has(s)) return s;
+  return SETUP_STEP_COUNT;
 }
 
 const setupKey = (slug: string) => `setup:${slug}`;
@@ -109,7 +108,6 @@ export function Setup({
   visiblePages,
   onStep,
   onExit,
-  onOpenSection,
   onPublished,
   onIssues,
 }: {
@@ -121,7 +119,6 @@ export function Setup({
   visiblePages: string[];
   onStep: (n: number) => void;
   onExit: () => void;
-  onOpenSection: (id: SectionId, path?: string) => void;
   onPublished: () => void;
   onIssues: (issues: ValidationIssue[], message?: string) => void;
 }) {
@@ -148,7 +145,7 @@ export function Setup({
     writeSetup(initial.slug, { step });
     setError(null);
     headingRef.current?.focus();
-    document.title = `Step ${step} of 6 · ${def.title}`;
+    document.title = `Step ${step} of ${SETUP_STEP_COUNT} · ${def.title}`;
   }, [step, initial.slug, def.title]);
   useEffect(() => setCanShare(typeof navigator !== 'undefined' && typeof navigator.share === 'function'), []);
   useEffect(() => {
@@ -192,11 +189,9 @@ export function Setup({
     }
   };
 
-  /** Opens the first sample item's section above the wizard ("Done" comes back to this step). */
-  const fixFirstSample = () => {
-    const first = notes.sample[0];
-    if (first) onOpenSection(sectionForPath(first.path) ?? 'names', first.path);
-  };
+  const hero = heroSlot(theme.photos);
+  const otherSlots = theme.photos.filter((s) => s !== hero);
+  const filledPhotos = theme.photos.filter((s) => photoAt(content, s.source)).length;
 
   if (published) {
     return (
@@ -264,14 +259,16 @@ export function Setup({
             ))}
           </div>
           <p className={styles.setupStep} aria-hidden="true">
-            Step {step} of 6
+            Step {step} of {SETUP_STEP_COUNT}
           </p>
         </div>
       </header>
 
       <main className={styles.setupMain} id="main">
         <h1 ref={headingRef} tabIndex={-1} className={styles.setupTitle}>
-          <span className={styles.visuallyHidden}>Step {step} of 6: </span>
+          <span className={styles.visuallyHidden}>
+            Step {step} of {SETUP_STEP_COUNT}:{' '}
+          </span>
           {def.title}
         </h1>
         <p className={styles.setupHelp}>{def.help}</p>
@@ -284,33 +281,36 @@ export function Setup({
         {step === 1 ? (
           <>
             <NamesFields setup />
+            <h2 className={styles.setupSubTitle}>The wedding day</h2>
+            <DateFields theme={theme} setup />
             <div className={styles.miniPreview} aria-label="Your envelope page" role="img">
               <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} />
             </div>
           </>
         ) : null}
-        {step === 2 ? <DateFields theme={theme} setup /> : null}
-        {step === 3 ? <VenueFields setup /> : null}
-        {step === 4 ? <PhotoSlots intro="count" /> : null}
-        {step === 5 ? (
+        {step === 2 ? (
           <>
-            <div className={styles.setupPreview}>
-              <PreviewPane slug={initial.slug} previewToken={panel.meta.previewToken} pages={visiblePages} version={panel.previewVersion} open wide onClose={() => undefined} />
-            </div>
-            {sampleCount ? (
-              <SampleChecklist notes={notes.sample} onOpen={onOpenSection} />
-            ) : (
-              <p className={styles.allSet}>
-                <CircleCheckBig size={20} strokeWidth={1.75} aria-hidden="true" />
-                No sample text left from the design.
-              </p>
-            )}
+            <p className={styles.hint} data-photo-count>
+              <strong className={styles.counterInline}>
+                {filledPhotos} of {theme.photos.length} photos
+              </strong>{' '}
+              · Each photo is cropped to the shape the design uses.
+            </p>
+            {hero ? <PhotoSlots slots={[hero]} /> : <PhotoSlots />}
+            {hero && otherSlots.length ? (
+              <Disclosure id="more-photos" title="More photos" status="Optional">
+                <div className={styles.stack}>
+                  <p className={styles.hint}>Until you add a photo, your guests see a soft placeholder image. You can add these any time under Edit → Photos.</p>
+                  <PhotoSlots slots={otherSlots} />
+                </div>
+              </Disclosure>
+            ) : null}
           </>
         ) : null}
-        {step === 6 ? (
+        {step === 3 ? (
           <>
             {/* First, so it is seen before anything else on the publish screen (G060-fix). */}
-            <SampleDateGate content={content} sample={theme.sample} confirmed={dateConfirmed} onConfirm={setDateConfirmed} onFix={() => onStep(2)} />
+            <SampleDateGate content={content} sample={theme.sample} confirmed={dateConfirmed} onConfirm={setDateConfirmed} onFix={() => onStep(1)} />
             {meta.orderPending ? <OrderPendingNote /> : null}
             <div className={styles.summary} data-publish-summary>
               <p className={styles.summaryNames}>{content.name_display || '—'}</p>
@@ -321,23 +321,25 @@ export function Setup({
                 <UrlText url={url} />
               </p>
             </div>
+            <div className={styles.setupPreview}>
+              <PreviewPane slug={initial.slug} previewToken={panel.meta.previewToken} pages={visiblePages} version={panel.previewVersion} open wide onClose={() => undefined} />
+            </div>
+            {/* K29: no list or count of sample text here — one calm, honest line; Home shows what is left. */}
+            <p className={styles.calmNote} data-calm-note>
+              {sampleCount
+                ? 'Some details — like the venue, the schedule or your story — still show the design’s sample text. You can change them any time, before or after you publish; Home shows what is left.'
+                : filledPhotos < theme.photos.length
+                  ? 'You can add more photos and details any time, before or after you publish.'
+                  : 'Everything is filled in. You can still change it all after you publish.'}
+            </p>
             {(content.partners ?? []).some((p) => !(p.full_name ?? '').trim()) ? (
               <p className={styles.hint}>
                 Want surnames on the invitation card? Add them under{' '}
                 <button type="button" className={styles.inlineLink} onClick={() => onStep(1)}>
-                  Your names
+                  Your names and date
                 </button>{' '}
                 — now or later; adding a surname is always free.
               </p>
-            ) : null}
-            {sampleCount ? (
-              <>
-                <Banner tone="warning">
-                  {sampleCount === 1 ? 'One thing on your website is' : `${sampleCount} things on your website are`} still sample text from the design. Your
-                  guests will see {sampleCount === 1 ? 'it' : 'them'} as written. Tap one to change it, or publish now and change {sampleCount === 1 ? 'it' : 'them'} later.
-                </Banner>
-                <SampleChecklist notes={notes.sample} onOpen={onOpenSection} />
-              </>
             ) : null}
             <RulesBox rights={meta.rights} locale={content.locale} />
             {validation.errors.length ? (
@@ -352,15 +354,10 @@ export function Setup({
         ) : null}
       </main>
 
-      <footer className={cx(styles.setupBar, step === 6 && styles.setupBarPublish)}>
-        {step < 5 ? (
+      <footer className={cx(styles.setupBar, step === SETUP_STEP_COUNT && styles.setupBarPublish)}>
+        {step < SETUP_STEP_COUNT ? (
           <button type="button" className={styles.skip} onClick={() => onStep(step + 1)} data-setup-skip>
             Skip for now
-          </button>
-        ) : null}
-        {step === 5 && sampleCount ? (
-          <button type="button" className={styles.skip} onClick={() => onStep(6)} data-setup-anyway>
-            Publish anyway
           </button>
         ) : null}
         <div className={styles.setupBarRow}>
@@ -371,13 +368,9 @@ export function Setup({
                 <span className={styles.backLabel}>Back</span>
               </Button>
             ) : null}
-            {step === 5 && sampleCount ? (
-              <Button variant="primary" icon={Pencil} onClick={fixFirstSample} data-setup-fix>
-                {sampleCount === 1 ? 'Fix 1 item' : `Fix ${sampleCount} items`}
-              </Button>
-            ) : step < 6 ? (
+            {step < SETUP_STEP_COUNT ? (
               <Button variant="primary" onClick={next} data-setup-next>
-                {step === 5 ? 'Looks good' : 'Continue'}
+                Continue
               </Button>
             ) : (
               <Button
@@ -394,38 +387,13 @@ export function Setup({
             )}
           </div>
         </div>
-        {step === 6 && !ctx.online ? <p className={styles.hint}>Connect to the internet to publish.</p> : null}
-        {step === 6 && ctx.online && dateBlocked ? (
+        {step === SETUP_STEP_COUNT && !ctx.online ? <p className={styles.hint}>Connect to the internet to publish.</p> : null}
+        {step === SETUP_STEP_COUNT && ctx.online && dateBlocked ? (
           <p className={styles.hint} data-publish-blocked>
             Set your wedding date first (or confirm the sample date is yours).
           </p>
         ) : null}
       </footer>
-    </div>
-  );
-}
-
-/**
- * "Still sample text from the design (N)" (G061 review): one short line per section ("Our Story: story intro and 3
- * captions", G060-fix sampleSummaries). Steps 5 and 6 (the publish moment) both show it; a tap opens the section and
- * "Done" comes back to the step.
- */
-function SampleChecklist({ notes, onOpen }: { notes: PublishNote[]; onOpen: (id: SectionId, path?: string) => void }) {
-  return (
-    <div className={styles.stack} data-sample-list={notes.length}>
-      <h2 className={styles.subTitle}>Still sample text from the design ({notes.length})</h2>
-      <ul className={styles.checklist}>
-        {sampleSummaries(notes).map((s) => (
-          <li key={s.section}>
-            <button type="button" className={cx(styles.checkItem, styles.check_warning)} onClick={() => onOpen(s.section, s.path)} data-sample-line>
-              <span className={styles.checkDot} aria-hidden="true" />
-              <span className={styles.checkText}>
-                <strong>{SECTION_TITLES[s.section]}:</strong> {s.what}
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

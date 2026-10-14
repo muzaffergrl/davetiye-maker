@@ -342,10 +342,12 @@ try {
       await page.waitForTimeout(200);
     };
     await page.waitForSelector('[data-section-row]');
-    const hasFaq = (await page.locator('#section-faq').count()) > 0;
+    // K29: Questions & answers is a part of the Details page; the old address #edit/faq opens it there.
+    await go('#edit/faq');
+    await page.waitForSelector('[data-page="details"]');
+    const hasFaq = (await page.locator('#section-faq-body').count()) > 0;
     let faqRows = 0;
     if (hasFaq) {
-      await go('#edit/faq');
       await page.waitForSelector('[data-faq-row="2"]').catch(() => undefined);
       faqRows = await page.locator('[data-faq-row]').count();
     }

@@ -13,7 +13,7 @@ import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, withPartnerNa
 import { beforePublishText, IDENTITY_CHANGE_LIMIT } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
-import { Button, cx, EmptyState, RightsMeter, Segmented } from './ui.tsx';
+import { Button, cx, Disclosure, EmptyState, RightsMeter, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
 
 const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
@@ -27,13 +27,16 @@ function RightsLine() {
   return null;
 }
 
-/** The locked names / date after the first publish: values, a lock, and "Change" (docs/16 §6.3, §11.6). */
+/**
+ * The locked names / date after the first publish: values, a lock, and "Change" (docs/16 §6.3, §11.6). K29: this is the
+ * one place the name & date changes left are shown (Us and Day & place pages), never as badges on the Edit list.
+ */
 function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows: Array<{ label: string; value: string; id?: string }>; paths: string[] }) {
   const { rights, openIdentity, locked, online, issuesAt } = usePanelContext();
   const total = rights.limit + rights.granted;
   const issues = paths.flatMap((p) => issuesAt(p));
   return (
-    <div className={styles.locked} data-locked-identity={focus}>
+    <div className={styles.locked} data-locked-identity={focus} data-rights-card>
       {issues.length ? (
         <>
           <IssueList issues={issues} />
@@ -61,7 +64,8 @@ function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows:
           </Button>
         )}
       </div>
-      {!online ? <p className={styles.hint}>Connect to the internet to change your names or date.</p> : null}
+      {rights.archived ? <p className={styles.hint}>Your website is archived: names and date can no longer be changed.</p> : null}
+      {!online && !rights.archived ? <p className={styles.hint}>Connect to the internet to change your names or date.</p> : null}
     </div>
   );
 }
@@ -92,8 +96,15 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
         />
       ) : (
         <>
-          <RightsLine />
-          {partners.map((p, i) => (
+          {/* First run: the rule comes under the names, so the first field is the first thing on a small phone (K29). */}
+          {setup ? null : <RightsLine />}
+          {setup ? (
+            <>
+              <SetupNames />
+              <RightsLine />
+            </>
+          ) : (
+            partners.map((p, i) => (
             <Group key={i} title={i === 0 ? 'First partner' : 'Second partner'}>
               <TextField
                 path={`partners.${i}.display_name`}
@@ -114,7 +125,8 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
                 onChange={(v) => edit((c) => withPartnerName(c, i, 'full_name', v))}
               />
             </Group>
-          ))}
+            ))
+          )}
           {partners.length < 2 ? (
             <Button variant="secondary" icon={Plus} disabled={locked} onClick={() => edit((c) => void c.partners.push({ display_name: '', full_name: null }))}>
               Add a second name
@@ -144,8 +156,9 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
               ))}
             </div>
           ) : null}
-          {/* Only when the design shows a monogram (a field that changes nothing would mislead). */}
-          {fields.initials ? (
+          {/* Only when the design shows a monogram (a field that changes nothing would mislead). It follows the names until
+              edited, so the first-run setup leaves it for later (K29). */}
+          {fields.initials && !setup ? (
             <TextField
               path="initials"
               label="Monogram"
@@ -157,6 +170,48 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           ) : null}
         </>
       )}
+    </>
+  );
+}
+
+/**
+ * First run (K29): the two first names, then — folded, optional — the full names for the invitation card. Same fields
+ * and ids as the editor (#f-partners-<n>-display_name / -full_name).
+ */
+function SetupNames() {
+  const { content, edit } = usePanelContext();
+  const partners = content.partners ?? [];
+  const anyFull = partners.some((p) => (p.full_name ?? '').trim());
+  return (
+    <>
+      {partners.map((p, i) => (
+        <TextField
+          key={i}
+          path={`partners.${i}.display_name`}
+          label={i === 0 ? 'First name' : 'Partner’s first name'}
+          hint={i === 0 ? 'As your guests know you, e.g. Clara.' : undefined}
+          maxLength={CONTENT_LIMITS.name}
+          value={p.display_name}
+          autoComplete="off"
+          onChange={(v) => edit((c) => withPartnerName(c, i, 'display_name', v))}
+        />
+      ))}
+      <Disclosure id="full-names" title="Full names for the invitation card" status="Optional" defaultOpen={anyFull}>
+        <div className={styles.stack}>
+          <p className={styles.hint}>Empty: the card shows the first names. Adding a surname later is free.</p>
+          {partners.map((p, i) => (
+            <TextField
+              key={i}
+              path={`partners.${i}.full_name`}
+              label={`Full name${p.display_name ? ` of ${p.display_name}` : i === 0 ? ' (first partner)' : ' (partner)'}`}
+              optional
+              maxLength={CONTENT_LIMITS.fullName}
+              value={p.full_name}
+              onChange={(v) => edit((c) => withPartnerName(c, i, 'full_name', v))}
+            />
+          ))}
+        </div>
+      </Disclosure>
     </>
   );
 }

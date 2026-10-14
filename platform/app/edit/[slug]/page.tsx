@@ -31,5 +31,6 @@ export default async function EditPage({ params, searchParams }: Props) {
   const site = key ? await authorizeEditor(getDataAdapter(), slug, key) : null;
   if (!site || !key) notFound();
   const state = await panelState(site, publicOrigin(await headers()));
-  return <Panel initial={state} editKey={key} />;
+  // K29: the published copy too, so the panel can say which parts of the draft guests do not see yet (Review).
+  return <Panel initial={state} editKey={key} published={site.publishedContent ?? null} />;
 }

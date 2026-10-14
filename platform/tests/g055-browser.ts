@@ -522,6 +522,10 @@ async function main() {
       );
       await p.screenshot({ path: path.join(OUT, 'panel_old_site_publish_390.png') });
       await p.keyboard.press('Escape');
+      // The closing sheet steps back its own history entry (Sheet.tsx, deferred): reloading in the middle of that
+      // navigation aborted the reload (net::ERR_ABORTED, also on main before G066). Wait until it has settled.
+      await p.waitForSelector('[data-testid="issues"]', { state: 'detached' });
+      await p.waitForTimeout(400);
       // After a reload the over-limit values are still there (nothing cut) and the city change was saved.
       await p.reload({ waitUntil: 'networkidle' });
       await open('venue');

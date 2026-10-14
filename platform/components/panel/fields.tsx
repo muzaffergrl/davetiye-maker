@@ -11,7 +11,7 @@ import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDateLong, formatTime, isValidTimeZone } from '../../lib/content/format.ts';
 import { fieldId, type PanelPhotoSlot, type ThemeFieldUse } from '../../lib/panel/model.ts';
 import type { RightsView } from '../../lib/panel/rights.ts';
-import { Badge, cx, OverflowMenu, useSnackbar } from './ui.tsx';
+import { cx, OverflowMenu, useSnackbar } from './ui.tsx';
 import type { Change } from './usePanel.ts';
 import styles from './panel.module.css';
 
@@ -453,22 +453,4 @@ export function moveItem<T>(list: T[], from: number, to: number): T[] {
   const [item] = copy.splice(from, 1);
   copy.splice(to, 0, item);
   return copy;
-}
-
-export function StatusBadges({ errors, samples, off }: { errors: number; samples: number; off?: boolean }) {
-  return (
-    <>
-      {errors ? (
-        <Badge tone="danger" data-error-badge>
-          {errors} to fix
-        </Badge>
-      ) : null}
-      {samples && !errors ? (
-        <Badge tone="warning" data-sample-badge>
-          Sample text
-        </Badge>
-      ) : null}
-      {off ? <Badge tone="neutral">Off</Badge> : null}
-    </>
-  );
 }

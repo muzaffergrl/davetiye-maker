@@ -708,7 +708,7 @@ function ReplyCard({
           <span className={styles.replyTop}>
             <span className={styles.replyName}>{r.name}</span>
             {isNew ? (
-              <Badge tone="gold" data-new-badge>
+              <Badge tone="strong" data-new-badge>
                 New
               </Badge>
             ) : null}

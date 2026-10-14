@@ -113,6 +113,11 @@ try {
     const before = await guest.goto(`${BASE}/clara-and-julian/home`);
     check('before: the website is open (no password by default)', before.status() === 200 && !(await isGate(guest)));
     await couple.goto(`${BASE}/edit/clara-and-julian?k=${encodeURIComponent(blush.editKey)}#share`);
+    // K29: the guest password is a folded section under the link and the QR code; its title says "Off".
+    const fold = couple.locator('[data-disclosure="password"] button[aria-expanded]');
+    await fold.waitFor();
+    check('Share (K29): the password section is folded and says "Off"', (await fold.getAttribute('aria-expanded')) === 'false' && (await fold.innerText()).includes('Off'), await fold.innerText());
+    await fold.click();
     await couple.waitForSelector('[data-guest-password]');
     check('Share: the password card is there, off by default', (await couple.getAttribute('[data-guest-password]', 'data-guest-password')) === 'off');
     const sw = couple.locator('#guest-password-switch');
@@ -135,6 +140,7 @@ try {
     await couple.waitForSelector('[data-guest-password="on"]');
     await couple.waitForSelector('[data-snackbar]');
     check('turned on: snackbar says guests need it', (await couple.locator('[data-snackbar]').innerText()).includes('Guests need it'));
+    check('Share (K29): the folded section now says "On"', (await fold.innerText()).includes('On'), await fold.innerText());
     password = await couple.inputValue('[data-guest-password-input]');
     check('the couple sees their password (to share it)', password === second);
     await couple.click('[data-guest-password-copy]');
