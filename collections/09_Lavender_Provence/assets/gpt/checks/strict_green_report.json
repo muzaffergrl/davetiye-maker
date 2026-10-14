@@ -1,0 +1,146 @@
+[
+  {
+    "file": "parts/card_small.png",
+    "green_component_bbox": [
+      309,
+      426,
+      717,
+      890
+    ],
+    "rgba_min": [
+      1,
+      158,
+      1,
+      211
+    ],
+    "rgba_max": [
+      88,
+      255,
+      89,
+      253
+    ],
+    "exact_opaque_green_count": 0,
+    "green_component_pixel_count": 188457,
+    "strict_pass": false
+  },
+  {
+    "file": "parts/frame_portrait.png",
+    "green_component_bbox": [
+      224,
+      358,
+      795,
+      1089
+    ],
+    "rgba_min": [
+      0,
+      150,
+      0,
+      39
+    ],
+    "rgba_max": [
+      97,
+      250,
+      86,
+      253
+    ],
+    "exact_opaque_green_count": 0,
+    "green_component_pixel_count": 357821,
+    "strict_pass": false
+  },
+  {
+    "file": "parts/frame_landscape.png",
+    "green_component_bbox": [
+      260,
+      261,
+      1278,
+      747
+    ],
+    "rgba_min": [
+      0,
+      151,
+      0,
+      4
+    ],
+    "rgba_max": [
+      86,
+      250,
+      74,
+      253
+    ],
+    "exact_opaque_green_count": 0,
+    "green_component_pixel_count": 163426,
+    "strict_pass": false
+  },
+  {
+    "file": "comps/web_2_home.png",
+    "green_component_bbox": [
+      381,
+      243,
+      644,
+      527
+    ],
+    "rgba_min": [
+      0,
+      170,
+      9,
+      255
+    ],
+    "rgba_max": [
+      49,
+      253,
+      77,
+      255
+    ],
+    "exact_opaque_green_count": 0,
+    "green_component_pixel_count": 74572,
+    "strict_pass": false
+  },
+  {
+    "file": "comps/web_3_story.png",
+    "green_component_bbox": [
+      161,
+      895,
+      469,
+      1218
+    ],
+    "rgba_min": [
+      0,
+      160,
+      4,
+      255
+    ],
+    "rgba_max": [
+      85,
+      254,
+      94,
+      255
+    ],
+    "exact_opaque_green_count": 0,
+    "green_component_pixel_count": 68466,
+    "strict_pass": false
+  },
+  {
+    "file": "comps/web_4_details.png",
+    "green_component_bbox": [
+      267,
+      866,
+      756,
+      1113
+    ],
+    "rgba_min": [
+      0,
+      159,
+      8,
+      255
+    ],
+    "rgba_max": [
+      80,
+      255,
+      90,
+      255
+    ],
+    "exact_opaque_green_count": 0,
+    "green_component_pixel_count": 120248,
+    "strict_pass": false
+  }
+]
