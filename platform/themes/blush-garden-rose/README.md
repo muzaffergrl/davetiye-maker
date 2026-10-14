@@ -72,6 +72,43 @@ gövde kapalıdan tuvalin %4,55'i kadar kısa (en/boy farkı). `site.css` bunu `
   değişmesin). JS yalnız bu iki CSS değişkenini yazar; kişisel metne dokunmaz. JS'siz: CSS boyunda sarar (zarf aşağı kayabilir).
   Ölçüm (`theme-check --stress`, 40+40 karakter): 390×844'te 3 satır × 27 px; 360×640'ta 25 px; imza 3 satır × 22 px (390).
 
+## Yatay telefon ve ilk ekran (G058)
+Kural (01 ile aynı, G401 QA): ilk ekranda hiçbir hero parçası alt nav'ın altında yarım kalmaz — ya nav'ın üstünde biter ya ilk
+ekranın tamamen altından başlar; ana sayfa isimleri ≥ 36 px. Çizim yok, yeni GPT parçası yok: yalnız yerleşim, boyut, JS ölçümü.
+- **Kısa yatay düzen** (`site.css` sonundaki `@media (min-aspect-ratio: 1/1) and (max-height: 620px) and (max-width: 959px)`:
+  yan çevrilmiş telefon, nav altta; ≥ 960 px'te nav üstte, oradaki düzen değişmedi). Nav 48 px, yanlarda `safe-area` payı.
+  - **Home:** hero ızgara — kart solda, ilk ekran yüksekliğinde (`--cw` = (100svh − nav − 24 px) × 0,62, 150–250 px; üstten,
+    `align-self: start`: katlanan parça kartı aşağı çekmez); isimler · tarih · mekân + şehir · sayaç sağ sütunda (≤ 440 px),
+    karta göre dikeyde ortalı. İsimler `clamp(36px, 13svh, 64px)` (dengeli sarar), sayaç `clamp(26px, 8.5svh, 40px)`, mekân
+    dengeli sarar. Köşe çiçekleri yüksekliğe göre (`min(34vw, 54svh)`): kartın arkasındaki üst sol kalır, alt sağ gizli (yatayda
+    sayacın "SECONDS"ına biniyordu). Sığmayan parça `foldHero` ile ilk ekranın altından başlar.
+  - **Zarf sayfası:** isimler `clamp(36px, min(14vw, 14svh), 78px)` (uzun adlar yine `fitText`, 1,5 satır), isim sütunu köşe
+    çiçeklerinin arasında (`108vw − 2 × çiçek − 24 px`). Zarf genişliği (`--w`) dört sınırın en küçüğü: 84vw; kapalı zarf +
+    "Tap to open" ekranda (`(100svh − 116 px − 1,12 × isim) × 1,1`); açılışta kartın yükseldiği en üst nokta (`out`, sahnenin
+    0,153w üstü) ekranda (`45.6svh + 0,51 × isim − 6 px`); 460 px — sonra `--names-x` düşülür. Açık hâl (geri dönüş, bfcache):
+    sahne ekran yüksekliğinde (`(100svh − 24 px) × 0,716`), "Enter" / "Replay the opening" zarfın sağında; köşe çiçekleri o
+    hâlde `min(28vw, 46svh)` (568×320'de Replay alt sağ çiçeğe biniyordu). Başlık açık hâlde akıştan çıkar ama ölçülür
+    (`position: absolute; visibility: hidden` — `display: none` "Replay"de `fitText`'e 0 yükseklik verirdi).
+- **Ana sayfa isimleri (her boyutta, `site.js foldHero`):** isimlerin satır içi kutuları (yazı fontunun kuyrukları satır
+  kutusunun altına iner) nav'ın 8 px üstünde bitmiyorsa isimler CSS `--fit` ile küçülür, 36 px'ten aşağı inmez (`NAMES_MIN`
+  = `manifest.theme_check.first_screen.names_min_px`); sonra eski katlama. Demo kaydında hiçbir boyutta devreye girmez.
+  320×568 tasarım aralığında "James" nav'a değiyordu (mürekkep altı 505, nav üstü 504) → 49,8 px, 3 satır, mürekkep 447; tarih
+  ilk ekranda (450–467), yer ve sayaç ilk ekranın altından (579'dan). Stres kaydında isimler artık nav'ın altına uzanmaz (390×844:
+  58,5 px × 8 satır → 50,5 px × 6 satır, mürekkep 715 / nav 780; 320×568: 38,4 px, mürekkep 494 / nav 504).
+- `img/manifest.json` `theme_check.first_screen = {landscape: true, names_min_px: 36}` (`build_images.py` yazar; 03 yeniden üretimi
+  bayt bayt aynı): `theme-check` 844×390 ve 667×375'te de home ilk ekran kuralını (demo, tasarım aralığı, stres) ve zarf sayfası
+  denetimini (kapalı: zarf + ipucu ekranda, yazılar düz zeminde; açık: "Replay" ekranda) zorunlu tutar.
+- Home hero çiçeklerinde `width`/`height` (480×488, 480×471): `loading="lazy"` görsel yüklenmeden 0 px yüksekti ve kırpan
+  `.scene-bg`'nin üstünde kalınca hiç yüklenmiyordu (yatayda bazen görünüp bazen görünmüyordu; dikey telefonda `display: none`,
+  yüklenmez). Hero kartı ve foto `sizes`'ı yatay kart boyunu biliyor.
+- **Ölçüm** (Chromium, `next start`, DPR 2; nav üstü · hero sonu, px): demo 844×390 342 · 325, 932×430 382 · 364, 915×412 364 · 346,
+  667×375 327 · 310, 740×360 312 · 295, 568×320 272 · 256 (isimler 41,6–55,9 px, kart 154–222 px, hiçbir parça katlanmaz);
+  tasarım aralığı aynı boyutlarda isimler 2 satır, hepsi nav'ın üstünde, yalnız 568×320'de sayaç ilk ekranın altından (332);
+  stres kaydında isimler ilk ekranda (4–5 satır), tarihten/yerden sonrası aşağıda. Zarf sayfası (demo): "Tap to open" 844×390
+  331–362 (önce 349–380), 740×360 307–337 (önce 336–366, ekran dışı), 568×320 274–305 (önce 318–348, ekran dışı); açık hâlde
+  "Replay" her yatay boyutta ekranda (önce 844×390'da 405–450, ekran dışı). Dikey boyutlarda (320×568 … 430×932) demo home ve
+  zarf sayfası kutu kutu aynı; tasarım aralığında yalnız 320×568 home değişti (yukarıda). Önce/sonra görüntüleri G058 Sonuç'ta.
+
 **Yeni tasarım (G4NN) bu temanın kopyası değildir:** `docs/11_TEMA_STANDARDI.md` geçerlidir — yerleşim o tasarımın W1
 comp'larından (sayfa başına "comp öğe haritası"), zarf tipi ve açılış katalogdaki `acilis` cümlesinden, parçacık ve story dizilişi
 o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP formu, `#site-data`, oturum anahtarları) ve
@@ -85,9 +122,13 @@ o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP fo
   nav'ın 4 px üstünde bitmiyorsa ilk ekranın **altından** başlar (`site.js foldHero`: yalnız `margin-top`; ilk ekran = küçük
   görünüm `100svh`, toplanan araç çubukları yerleşimi oynatmaz; yazı tipi yüklenince ve genişlik değişince yeniden). Önce
   tasarım aralığı kaydında (`theme-env.ts rangeRecord`) yer ve sayaç nav'ın yarı saydam zemininin arkasındaydı (375×553: yer
-  487–566, nav üstü 489). Kart ve isimler yerinde kalır: §12 stres kaydında isimlerin kendisi nav'ın altına uzanır (hero kaydırılır,
-  `theme-check --stress` buna izin verir); 320×568'de tasarım aralığında "James"in kuyruğu nav'ın üst çizgisine 2 px değer
-  (`theme-check` boyutlarında değil). Yatay telefonda 03'ün ayrı düzeni yok (isimler 85–92 px, nav'a uzanır).
+  487–566, nav üstü 489). Kart yerinde kalır; isimler nav'ın 8 px üstünde bitmezse küçülür, en çok 36 px'e (G058, yukarıda
+  "Yatay telefon ve ilk ekran"); 36 px'te de sığmayan bir çift nav'a uzanabilir (ölçülen 14 boyutta — 6 yatay, 8 dikey — 40+40 karakterlik stres kaydı
+  sığıyor).
+- Yatay telefon (G058): yalnız Chromium emülasyonunda ölçüldü (iPhone Safari'nin yatay araç çubukları ve çentik payı, Android
+  Chrome gerçek cihazda görülmedi). Tasarım aralığı 568×320'de sayaç, stres kaydında yer ve sayaç ilk ekranın altından başlar
+  (kaydırılır). Zarf sayfasında uzun adlar yatayda küçük kalır (1,5 satır kuralı: tasarım aralığı 33–45 px, 40+40 karakter
+  20–30 px); 03'ün zarf isimlerinde 36 px tabanı yok (taban ana sayfa için).
 - Program en çok 10 satır (şema, G055); Details kartı 10 satırı ve 60 karakterlik etiket/yeri taşır (kart uzar). Ana sayfa
   tanıtımı ilk 4 satırı gösterir; uzun etiket kendi altına sarar (asılı girinti, 360 px'te kesilmez).
 - `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve); anların `text`'i ve monogram (`initials`) bu temada

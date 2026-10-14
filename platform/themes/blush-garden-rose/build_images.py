@@ -175,6 +175,9 @@ def main():
     if yesil:
         sys.exit(f"görünür #00FF00 kalıntısı: {yesil}")
     manifest["checks"] = {"envelope_open_overlap_diff": round(fark, 5), "green_px": 0}
+    # theme-check: the short landscape layout (site.css, G058) is held to the home first-screen rule at 844×390 / 667×375
+    # too, and the home names to 36 px (scripts/lib/theme-env.ts first_screen)
+    manifest["theme_check"] = {"first_screen": {"landscape": True, "names_min_px": 36}}
     tb.manifest_yaz(out, manifest)
     tot = sum(f.stat().st_size for f in out.glob("*.webp"))
     print(f"{len(list(out.glob('*.webp')))} webp, toplam {tot / 1024:.0f} KB → {out}")

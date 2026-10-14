@@ -2281,5 +2281,11 @@
  "checks": {
   "envelope_open_overlap_diff": 0.00455,
   "green_px": 0
+ },
+ "theme_check": {
+  "first_screen": {
+   "landscape": true,
+   "names_min_px": 36
+  }
  }
 }

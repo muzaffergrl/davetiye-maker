@@ -1,10 +1,5 @@
-/* ==========================================================================
-   Blush Garden Rose — platform theme (design 03) · shared styles for all pages
-   Ported from the G035 demo (collections/03_Blush_Garden_Rose/website/site.css).
-   Visuals: GPT parts only (img/, build_images.py). Code does layout, type, motion — no drawn decor.
-   Colours: palette.json tokens. Fonts: Google Fonts link in each page (no files).
-   Photo slots: the platform marks [data-slot] and its img with data-photo-state="user|placeholder".
-   ========================================================================== */
+/* Blush Garden Rose — platform theme (design 03), styles of all pages; from the G035 demo. Visuals: GPT parts only
+   (img/, build_images.py); code does layout, type, motion — no drawn decor. Fonts: Google Fonts link (no files). */
 
 @view-transition { navigation: auto; }
 
@@ -81,8 +76,7 @@ button { font: inherit; color: inherit; }
 .florals { position: absolute; z-index: 1; pointer-events: none; user-select: none; height: auto; }
 .florals-tl { top: -3%; left: -4%; width: min(46vw, 68vh, 560px); }
 .florals-br { bottom: -3%; right: -4%; width: min(46vw, 68vh, 560px); }
-/* short phones (Safari with its bars, 360×640, the panel preview): the painting shows almost whole, so its
-   corner peonies reach the centred text; zoom in from the middle so the text stays on the plain wash */
+/* short phones (Safari bars, 360×640, panel preview): zoom in from the middle, the corner peonies off the text */
 @media (min-aspect-ratio: 1/2) and (max-aspect-ratio: 9/16) {
   .scene-bg > picture img { transform: scale(1.15); transform-origin: 50% 45%; }
 }
@@ -124,8 +118,7 @@ button { font: inherit; color: inherit; }
 .textlink.replay::after, .closing .textlink::after { content: ""; position: absolute; inset: -14px -8px; }
 
 /* ==========================================================================
-   Motion presets — elements carry data-step (order key, timed in site.js MOTION)
-   and data-a (how they enter). Without JS everything is simply visible.
+   Motion presets: data-step (order, site.js MOTION) + data-a (how it enters); without JS all visible
    ========================================================================== */
 .js [data-step] {
   opacity: 0;
@@ -152,8 +145,7 @@ button { font: inherit; color: inherit; }
    Page 1 — envelope landing (index.html)
    ========================================================================== */
 .env-page {
-  /* envelope group width (open envelope canvas 966×1349); long names (site.js fitText, data-fit): the envelope gives
-     back the names' extra height (--names-x) so names, envelope and hint keep their places on the painted wash */
+  /* envelope width (open envelope canvas 966×1349), less the long names' extra height (--names-x, site.js fitText) */
   --w: calc(min(84vw, 44svh, 460px) - var(--names-x, 0px));
   position: relative; z-index: 2;
   min-height: 100vh; min-height: 100svh;
@@ -189,8 +181,7 @@ button { font: inherit; color: inherit; }
 .card-slot { left: 0; top: 0; width: 100%; height: 100%; clip-path: inset(-80% -25% 3.3% -25%); }
 .env-pocket{ left: 0; top: 35.211%; width: 100%; height: 64.789%; opacity: 0; }
 .env-closed{ left: .341%; top: 34.788%; width: 98.944%; height: 64.503%; }
-/* the closed envelope's own flap, cut along its deckled edge (img/manifest.json env_cflap.cut): it lies exactly on
-   env-closed and lifts on its hinge (top edge) when the envelope opens; then the open flap (env-flap) takes over */
+/* the closed flap (manifest env_cflap.cut) lies on env-closed and lifts on its hinge; then env-flap takes over */
 .env-cflap { left: .341%; top: 34.788%; width: 98.944%; height: 34.698%;   /* 64.503% × 53.793% */
              transform-origin: 50% 2.015%; backface-visibility: hidden; }
 .env-ribbon{ left: 1.884%; top: 47.07%; width: 96.37%; height: 42.03%; transform-origin: 50% 35%; }
@@ -207,8 +198,7 @@ button { font: inherit; color: inherit; }
 @media (hover: hover) and (pointer: fine) { .env-hint .tap { display: none; } .env-hint .click { display: inline; } }
 @media (min-aspect-ratio: 3/4) { .env-page { --w: calc(min(84vw, 50svh, 540px) - var(--names-x, 0px)); } .env-head { max-width: max(40vw, 420px); } }
 .env-after { position: relative; z-index: 3; margin-top: 18px; display: none; flex-direction: column; align-items: center; gap: 14px; }
-/* "Replay" sits low, where the painted bottom florals are on many phones: a soft wash behind it (like .btn-ghost)
-   keeps it readable, and it is a 44 px tap target */
+/* "Replay" sits low (painted florals on many phones): a soft wash behind it, a 44 px tap target */
 .env-after .replay { background: rgba(255, 249, 246, .78); border: 0; border-radius: 999px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
 .skip {
   position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); right: 16px;
@@ -238,8 +228,7 @@ button { font: inherit; color: inherit; }
    The little arch card (index card ↔ home hero card share it; morphs between pages)
    ========================================================================== */
 .card { aspect-ratio: 804 / 1254; container-type: inline-size; view-transition-name: invite-card; }
-/* the envelope's card is named only when it may morph (opened, or from go() in site.js): a closed envelope's card would
-   float unclipped over the envelope during "Replay the envelope" (the snapshot ignores the slot's clip-path) */
+/* the envelope's card is named only when it may morph (opened, or go() in site.js): else it floats unclipped on replay */
 .env-page .card { view-transition-name: none; }
 .card > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .card .photo-slot { left: 14.677%; top: 9.569%; width: 70.522%; height: 47.448%; }   /* manifest photo_slots.card */
@@ -249,9 +238,7 @@ button { font: inherit; color: inherit; }
 .card-copy .kicker + .kicker { margin-top: 1.2cqw; font-size: max(8px, 4.2cqw); }
 
 /* ==========================================================================
-   Photo slot — one component everywhere (data-slot = photo key; img[data-photo] is the swappable photo).
-   Placeholder look comes from the built image (soft bg_scene crop) + .ph-mark (GPT petal + label);
-   img/photos.css turns .ph-mark on only for slots that still have no real photo.
+   Photo slot (data-slot = photo key; img[data-photo] is the swappable photo; .ph-mark = GPT petal + label)
    ========================================================================== */
 .photo-slot { position: absolute; overflow: hidden; background: #EED7D6; container-type: inline-size; }
 .photo-slot > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -305,7 +292,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .hero .scene-bg { bottom: -14%; -webkit-mask-image: linear-gradient(#000 74%, transparent); mask-image: linear-gradient(#000 74%, transparent); }
 .hero-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
 .hero-card { position: relative; width: var(--cw); filter: drop-shadow(0 18px 22px rgba(63, 42, 46, .18)); }
-.hero .names { font-size: clamp(50px, 15vw, 92px); margin-top: max(6px, 1.4svh); }
+.hero .names { font-size: calc(clamp(50px, 15vw, 92px) * var(--fit, 1)); margin-top: max(6px, 1.4svh); }   /* --fit: site.js foldHero */
 .hero .names .amp { font-size: .6em; padding: 0 .08em; }
 .hero-date { margin-top: 4px; }
 .hero-place { margin-top: 2px; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 18px; color: var(--ink-soft); }
@@ -430,8 +417,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
   content: ""; grid-column: 1 / -1; justify-self: center; width: 11cqw; aspect-ratio: 569 / 272;
   background: url("img/divider-300.webp") center / contain no-repeat; margin: .2cqw 0 .6cqw;
 }
-/* longer schedules (one row per schedule item): the card's plain-paper area is fixed, so from 4 rows the painted
-   sprigs between rows go and from 5 rows the rows tighten — text must never run into the painted florals */
+/* longer schedules: from 4 rows the sprigs between rows go, from 5 rows the rows tighten */
 .sched-list:has(> .sched-row:nth-child(4)) .sched-row + .sched-row::before { display: none; }
 .sched-list:has(> .sched-row:nth-child(4)) .sched-row + .sched-row { margin-top: 1.6cqw; }
 .sched-list:has(> .sched-row:nth-child(4)) { margin-top: 2cqw; }
@@ -441,13 +427,9 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .sched-list:has(> .sched-row:nth-child(5)) .sched-row .loc { font-size: max(11px, 3cqw); line-height: 1.25; }
 .info-text:has(.sched-row:nth-child(5)) .title { font-size: 9cqw; }
 .info-text:has(.sched-row:nth-child(5)) .dress { margin-top: 1.8cqw; }
-/* G055 — the Order of the Day card grows with its rows (up to 10, long labels, a dress code): the GPT card is
-   lengthened by the 3-slice cut of docs/11 §9, nothing is drawn. Image rows 0–42 % (arch, top florals, title area)
-   stay the <img>, clipped; rows 66–100 % (bottom florals) are ::after; the plain paper band 42–66 % (manifest free_zone
-   rows 41–67: nothing between the two straight gold lines) is ::before, stretched to fill the height between.
-   The text is in the flow (same place as before), so the card is never shorter than the image: with a short schedule
-   the three slices put the image back together at its own size. 154.71cqw = card image height (1411 / 912 × 100cqw).
-   G056: the RSVP card (long signature) grows the same way: class "tall" on both cards. */
+/* G055/G056 — Order of the Day and RSVP cards ("tall") grow by the docs/11 §9 3-slice cut, nothing drawn: <img> rows
+   0–42 % (clipped), ::before = plain band 42–66 % (free_zone 41–67) stretched, ::after = rows 66–100 %. Text in the flow,
+   never shorter than the image (a short card is the image at its own size). Image height 154.71cqw (1411 / 912). */
 .info.tall { aspect-ratio: auto; }
 .info.tall > img { bottom: auto; height: auto; aspect-ratio: 912 / 1411; clip-path: inset(0 0 58% 0); }
 .info.tall::before,
@@ -460,8 +442,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 /* band 42–66 %: 24 % of the image -> background 416.667 % tall, at 42 / (1 - 0.24) = 55.263 % (1 px overlaps) */
 .info.tall::before { top: calc(64.98cqw - 1px); bottom: calc(52.6cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
 .info.tall::after { bottom: 0; height: 52.6cqw; background-size: 100% auto; background-position: 0 100%; }
-/* text: from 28.9 % of the image (44.71cqw, as before) down to image row 72 % at most (43.32cqw above the bottom: below
-   it the bottom florals reach into the text column), and at least the image's own height in total (66.68cqw) */
+/* text: image row 28.9 % (44.71cqw) to 72 % at most (43.32cqw above the bottom florals); ≥ the image's height */
 .info.tall > .info-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 11.2%;
   padding: 44.71cqw 0 43.32cqw; min-height: 66.68cqw; box-sizing: content-box; }
 /* RSVP: text from 34 % of the image (52.6cqw) to row 72 % at most */
@@ -638,6 +619,35 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .site-main { padding-bottom: 24px; padding-top: var(--nav-h); }
   .hero { padding-top: calc(var(--nav-h) + 3svh); padding-bottom: 4svh; margin-top: calc(-1 * var(--nav-h)); }
   .toast { bottom: 24px; }
+}
+
+/* ---------------------------------------------------------------- short landscape phones (G058, README "Yatay telefon")
+   home: the card beside the names, by the height; envelope: names + envelope by the height, opened: Enter / Replay beside */
+@media (min-aspect-ratio: 1/1) and (max-height: 620px) and (max-width: 959px) {
+  :root { --nav-h: 48px; --sx: max(16px, env(safe-area-inset-left), env(safe-area-inset-right)); }
+  .hero { --cw: clamp(150px, (100svh - var(--nav-h) - var(--safe-b) - 24px) * .62, 250px); padding: 12px var(--sx) calc(var(--nav-h) + var(--safe-b) + 12px); }
+  .hero-inner { display: grid; grid-template: 1fr repeat(5, auto) 1fr / auto minmax(0, 440px); column-gap: clamp(24px, 6vw, 64px); justify-items: center; }
+  .hero-card { grid-area: 1 / 1 / -1; align-self: start; }
+  .hero .names { grid-area: 2 / 2; margin-top: 0; font-size: calc(clamp(36px, 13svh, 64px) * var(--fit, 1)); text-wrap: balance; overflow-wrap: anywhere; }
+  .hero-date { grid-area: 3 / 2; }
+  .hero-place { grid-area: 4 / 2; text-wrap: balance; }
+  .countdown { grid-area: 5 / 2; margin-top: clamp(8px, 3svh, 18px); }
+  .cue { grid-area: 6 / 2; }
+  .cd-num { font-size: clamp(26px, 8.5svh, 40px); }
+  /* corner florals by the height (smaller beside the opened envelope's Replay); home keeps the one behind the card (the
+     lower one would reach the countdown) */
+  .florals { width: min(34vw, 54svh); }
+  .is-opened .florals { width: min(28vw, 46svh); }
+  .hero .florals-br { display: none; }
+  /* closed: pad + head + .9065w (stage after its tuck) + hint ≤ 100svh, the card risen out (.153w above the stage) on screen, names
+     between the florals; opened: the stage (1.3965w) in the height, the head out of the flow but measurable (fitText) */
+  .env-page { --nm: clamp(36px, min(14vw, 14svh), 78px); padding: 12px var(--sx);
+              --w: calc(min(84vw, (100svh - 116px - var(--nm) * 1.12) * 1.1, 45.6svh + var(--nm) * .51 - 6px, 460px) - var(--names-x, 0px)); }
+  .env-head { max-width: min(max(40vw, 420px), 108vw - 2 * min(34vw, 54svh) - 24px); }
+  .env-head .names { font-size: calc(var(--nm) * var(--fit, 1)); }
+  .is-opened .env-page { --w: min(60vw, (100svh - 24px) * .716, 440px); flex-direction: row; gap: clamp(24px, 6vw, 64px); }
+  .is-opened .env-head { position: absolute; visibility: hidden; }
+  .is-opened .stage, .is-opened .env-after { margin-top: 0; }
 }
 
 /* ---------------------------------------------------------------- page arrival fade (browsers without cross-document view transitions) */
