@@ -2,8 +2,8 @@
 id: GM02
 baslik: BKE Studio marka kiti — vektör logo, renk/yazı token'ları, favicon seti, Etsy ikon/banner, "Made with" rozeti
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-marka
 oncelik: 1
 bagimli: [GM01]
 yazar: [brand/, platform/public/brand/]
@@ -36,3 +36,4 @@ GM01'in GPT çıktılarından kullanılabilir marka kiti. Claude yeni şekil çi
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): GM01'e bağlı
+- 2026-10-14 alindi: claude-marka
