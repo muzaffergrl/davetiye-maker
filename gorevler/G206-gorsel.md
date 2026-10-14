@@ -2,7 +2,7 @@
 id: G206
 baslik: Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
@@ -65,3 +65,4 @@ ImageGen dışındaki düzenleme aracına geçmek için kullanıcıya yalnız bu
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-B
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 27 ana görsel, 14 deneme ve 3 QA önizlemesi; Paket 5 23/23, Paket 2 5/5; zarf hiza uyarısı ve üç yeşil pencerenin açık teknik kusuru Sonuç'ta kayıtlı.
+- 2026-10-14 entegratör onayladı

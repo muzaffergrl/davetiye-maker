@@ -2,7 +2,7 @@
 id: G209
 baslik: Tasarım 09 Lavender Provence — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-E
 oncelik: 2
 bagimli: []
@@ -64,3 +64,4 @@ Website/Canva montajı, yayın ve RSVP testi bu görev kapsamında yapılmadı.
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-E; 27 ana dosya üretildi, Paket 5 23/23 ve Paket 2 5/5 geçti. Saf opak yeşil düzeltmesi açık, kese hiza uyarısı Sonuç'ta kayıtlı.
+- 2026-10-14 entegratör onayladı
