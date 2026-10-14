@@ -54,6 +54,13 @@ yapım aşamasında. Bu oturumdan canlı adrese erişilemedi (proxy reddi), canl
    - Çift sitelerinin altına küçük bir "Made with [BRAND]" bağlantısı konup konmayacağı.
 8. **GPT görselleri:** 17 prompt, 4 paralel ajana bölündü (§12): telefon çerçevesi, sahneler, dokular, küçük nesne
    görselleri, rehber kapakları. Ürünün kendisi her yerde gerçek tema ekranlarıyla gösterilir.
+9. **Diğer belgelerle uyum** (aynı gün yazıldılar):
+   - **docs/15 (G062):** marka önerisi *Seal & Story* (karar değil); fiyat Strateji A önerisi (liste $49 → satış $29.40);
+     Etsy düğmeleri **Share & Save** linki; her misafir sayfasında "Made with [BRAND]"; doğrudan satış için Stripe yerine
+     MoR (Paddle/Gumroad), Faz 2.
+   - **docs/16 (G060):** yayından sonra isim ve tarih için **3 değişiklik**, ≤ 2 karakterlik yazım düzeltmesi bedava; site
+     düğünden 12 ay sonra arşive geçer.
+   - Bu belgedeki metin ve config o kararları tek yerden okur. Karar değişirse yalnız `config.ts` değişir.
 
 ---
 
@@ -302,8 +309,12 @@ Fiyat Etsy'de bir kez ödenir; misafir sayısına bağlı değildir. Telefondan 
 - **Ton:** sıcak, net, kibar. Kısa cümleler. Abartı yok. Romantik ama açıklayıcı.
 - **Kullan:** wedding website, envelope, opens, guests, RSVP, edit from your phone, live demo, one purchase, details.
 - **Kullanma:** "template" (kategori kelimesi olarak sayfa adlarında ve rehberlerde geçebilir, ürün adı olarak değil),
-  "app", "editable PNG", "instant", "unlimited", "forever", "best", "AI-powered", "hand-painted".
-  Tasarım görselleri GPT ile üretiliyor (K21), bu yüzden "hand-painted" yanlış olur. Doğrusu: "painterly artwork".
+  "app", "editable PNG", "unlimited", "forever", "best", "AI-powered", "hand-painted", "subscription", "hosting plan".
+  - Tasarım görselleri GPT ile üretiliyor (K21), bu yüzden "hand-painted" yanlış olur. Doğrusu: "painterly artwork".
+  - "subscription" ve "hosting plan" yerine docs/15'in ilan dili kullanılır: "digital wedding website template + instant
+    access; online until 12 months after your wedding date". Site ve ilan aynı dili konuşur.
+  - "Instant access" yalnız Etsy'deki erişim için kullanılır. Etsy dijital ürünlere kendi "Instant Download" etiketini
+    koyuyor. Sitenin kendisi için "instant" denmez.
 
 ### 4.5 İddia listesi (sitede kullanım kuralı)
 
@@ -318,7 +329,7 @@ Fiyat Etsy'de bir kez ödenir; misafir sayısına bağlı değildir. Telefondan 
 | Personal link preview (names + date) | G055; canlıda (og:image kontrolü) | Kullanılır |
 | QR code download (PNG/SVG) | Panelde var; QR kamerayla okutulmadı | Kullanılır. Kılavuzda "scan before you print" uyarısı |
 | Online until 12 months after your wedding date | **Politika kararı** (K25). Uygulaması G060'ta (arşiv) | `[VERIFY: G060 archive shipped]` |
-| Names/date can be changed N times after publishing; typo fixes free | G060 tasarımı (varsayılan 3) | `[VERIFY: G060]`, sayı config'ten |
+| After publishing, names and date can be changed 3 times; small typo fixes (up to 2 letters or digits) are free | docs/16 §11 tasarımı; uygulama G060 | `[VERIFY: G060 shipped]`. Sayı config'ten; metin docs/16 §11.7 ile aynı |
 | Edit link sent by email | **Yok** (e-posta sağlayıcısı yok) | Yazılmaz. Doğru ifade: "save your private edit link" |
 | We verify your Etsy order | **Yok** (yalnız biçim kontrolü ve sipariş başına bir site) | Yazılmaz |
 | Custom domain, music, change colors/fonts, password protection, guest email sending, multiple languages, printed invitations | Yok | "Not included" listesinde **açıkça** |
@@ -538,8 +549,8 @@ Adımlar: numaralı liste. Her adımda ne olur, ne kadar sürer ve hangi gerçek
 
 1. **Choose a design and try the live demo on your phone.** GERÇEK demo.
 2. **Buy it on Etsy.** Etsy'deki indirmede (START HERE PDF) kişisel başlangıç linki bulunur.
-   - "Instant download" yazılmaz; Etsy dijital ürünü ödeme onayından sonra açar. Doğru ifade: "Your download is
-     available on Etsy after payment."
+   - Doğru ifade: "Instant access on Etsy: your download opens as soon as your payment goes through." Etsy indirmeyi
+     ödeme onayından sonra açar.
 3. **Start your website.** Etsy sipariş numarası ve e-posta girilir; taslak site oluşur.
    - Uyarı kutusu: `Save your private edit link. Anyone with it can edit your website.` (e-posta gönderimi yok).
    - GERÇEK `b01`–`b03` (G060 sonrası yeniden).
@@ -610,8 +621,10 @@ Gruplar ve sorular (her yanıt ilk cümlede cevap verir, 40–80 kelime, ilgili 
 - **Buying:** How do I buy? · What do I get after buying on Etsy? · Is it a subscription? · Can I get a refund?
   `[REFUND POLICY]` · Can I use one purchase for two weddings? (No: one order = one website; G060)
 - **Editing:** Do I need Canva or an app? · What can I change? · Can I change colors or fonts? · Can I change our names
-  or date after publishing? `[VERIFY: G060]` · What if I lose my edit link? `[LOST LINK POLICY]` · Can two people edit?
-  (Anyone with the edit link can; keep it private)
+  or date after publishing? ("Yes, 3 times. Fixing a small typo (up to 2 letters or digits) is free, and everything else
+  can change as often as you like." docs/16 §11.7 ile aynı; `[VERIFY: G060 shipped]`) · What if our wedding date moves?
+  (contact support; docs/15 §1: ertelenen düğün için tarih değişikliği ücretsiz önerisi) · What if I lose my edit link?
+  `[LOST LINK POLICY]` · Can two people edit? (Anyone with the edit link can; keep it private)
 - **Guests and RSVP:** How do guests reply? · Do guests need an account or app? (No) · Can I ask a meal choice? (Up to 3
   questions) · Where do I see replies? · When should the RSVP deadline be? → guide 3
 - **Sharing:** How do I share it? (Link, QR) · What do guests see when I send the link? (Your names and date in the
@@ -820,15 +833,17 @@ destination-wedding-website · save-the-date-website (ürün olunca).
    tasarıma özel G8NN mockup'ları; düzen kodla, dekor yok.
 3. **Rehber → satır içi çağrı (`open a live demo`) → tasarım sayfası → Etsy.**
 4. **Asistan → doğrudan tasarım sayfası ya da Etsy ilanı.** Ad, tanım ve fiyat iki yerde aynı olmalı (§1.2).
-5. **Misafir → çift sitesi → "Made with [BRAND]" (kararsa) → ana sayfa.** Yalnız RSVP teşekkür panelinde ve son sayfanın
-   altında, küçük. UTM: `utm_source=couple_site&utm_medium=referral`.
+5. **Misafir → çift sitesi → "Made with [BRAND]" (kararsa) → ana sayfa.** docs/15 önerisi: her misafir sayfasında ince
+   bir alt bilgi (P1). Link pazarlama sitesine gider, Etsy'ye değil. UTM: `utm_source=couple_site&utm_medium=referral`.
+   Bu link bizim sitemize gittiği için UTM serbesttir.
 6. **Satın almış alıcı → pazarlama sitesi → `Start your website` → `/start`.** Kayıp PDF durumunda.
 
 ### 7.2 Etsy bağlantıları
 
-- Her düğme config'teki ilan URL'sine gider. Gerekirse sabit bir izleme sorgusu eklenir: `?utm_source=[site]&utm_medium=site&utm_campaign=<sayfa>`.
-  Etsy'nin bu parametreyi istatistikte gösterip göstermediği [VERIFY: Etsy Stats]. Etsy Stats trafik kaynaklarında
-  yönlendiren alan adı görünür.
+- Her düğme config'teki ilan linkine gider. Bu link Etsy'nin **Share & Save** linkidir (docs/15 §3.2: kendi
+  kanalımızdan gelen satışta %4 iade). Shop Manager'da ilan başına üretilir.
+  - Linke UTM ya da başka sorgu **eklenmez**; Share & Save eşleştirmesini bozabilir [VERIFY].
+  - Ölçüm üç yerden yapılır: bizim `etsy_click` olayımız, Etsy Stats'taki yönlendiren alan adı ve Share & Save raporu.
 - `target="_blank"` kullanılmaz (mobilde geri dönüşü bozar). `rel="noopener"` gerekmez. Ölçüm için `etsy_click` olayı.
 - İlan URL'si yer tutucuyken düğme `Coming soon on Etsy` olur ve devre dışı kalır. Kırık link yayınlanmaz.
 
@@ -838,12 +853,15 @@ destination-wedding-website · save-the-date-website (ürün olunca).
 - Mobilde tasarım sayfalarında alt yapışkan çubuk; 44 px dokunma alanı.
 - Fiyat her yerde aynıdır, tek alandan gelir.
 
-### 7.4 Sonraki aşama: doğrudan ödeme (Stripe)
+### 7.4 Sonraki aşama: doğrudan ödeme (Faz 2)
 
+- docs/15 §4.7'ye göre Stripe Türkiye'deki işletmeye büyük olasılıkla kapalı. Aday, bir "merchant of record" (MoR)
+  platformu: Paddle ya da Gumroad. Önce satıcı uygunluğu doğrulanır.
 - Config `checkout.mode: 'etsy' | 'etsy+direct'`. `direct` açılınca tasarım sayfası birincil düğmesi `Buy now — [PRICE]`
-  olur (Stripe Checkout). Etsy düğmesi ikincile iner.
+  olur (MoR ödeme sayfası). Etsy düğmesi ikincile iner.
 - Ödeme sonrası `/start` sipariş numarası yerine ödeme oturumuyla açılır (G062 ve G043 ile tasarlanır).
-- Şema merchant listing'e geçer: satıcı biz, fiyat > 0, para birimi, `hasMerchantReturnPolicy`.
+- Şema: sayfadan satın alma mümkün olunca merchant listing'e geçilir (fiyat > 0, para birimi, `hasMerchantReturnPolicy`).
+  MoR'da satıcı alanı [VERIFY: Google merchant listing şartı].
 - **Etsy kuralı:** Etsy kanallarında (ilan, mesaj, START HERE PDF, Etsy'deki QR'lar) alıcı **Etsy dışında satın almaya
   yönlendirilmez** ("encouraging buyers to purchase … through another venue" yasak). Pazarlama sitesi iki yolu da
   gösterebilir; Etsy içinden siteye "daha ucuz" çağrısı yapılmaz.
@@ -1128,7 +1146,9 @@ Gerçek kullanıcı ölçümü: Vercel Speed Insights (Pro). Yayından sonra Pag
 
 - `config.analytics.provider: 'none' | 'vercel'`. Varsayılan `none`.
 - `vercel` seçilirse Vercel Web Analytics (çerezsiz [VERIFY]) ve Speed Insights eklenir. Paketler sürümü sabitlenmiş
-  `@vercel/analytics` ve `@vercel/speed-insights` olur; özel olaylar Pro planda.
+  `@vercel/analytics` ve `@vercel/speed-insights` olur.
+- Özel olaylar Pro plan ister. Pro'nun aktif olduğu doğrulanmadı: docs/15 risk 5'e göre fatura sorgusu "Plan not found"
+  döndü [VERIFY: Vercel paneli]. Pro yoksa yalnız sayfa görüntüleme sayılır.
 - Olaylar: `demo_open {design, placement}`, `etsy_click {design, placement}`, `start_click {design}`,
   `guide_cta {guide, target}`, `contact_email_click`, `nav_designs`.
 - Kişisel veri olaya yazılmaz. Analitik yalnız pazarlama layout'undadır; panel, `/start` ve çift sitelerinde yoktur.
@@ -1251,8 +1271,8 @@ export const MARKETING = {
   support: { email: '[SUPPORT EMAIL]', responseTime: '[RESPONSE TIME]' },
   etsy: { shopUrl: '[ETSY SHOP URL]' },
   currency: 'USD',
-  hosting: { monthsAfterWedding: 12 }, // K25 (uygulaması G060)
-  editRights: { identityChangesAfterPublish: '[N: G060]' as number | string },
+  hosting: { monthsAfterWedding: 12 }, // K25 (uygulaması G060, docs/16 §11.9)
+  editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2 },   // docs/16 §11 (uygulaması G060)
   policies: {
     refund: '[REFUND POLICY]', lostLink: '[LOST LINK POLICY]',
     extension: '[EXTENSION POLICY]', deletion: '[DELETION PROCESS]', retention: '[RETENTION AFTER ARCHIVE]',
@@ -1272,6 +1292,11 @@ export const MARKETING = {
   ],
 } as const;
 ```
+
+Alan anlamları:
+- `price` = Etsy'de **o an görünen satış fiyatı**. `compareAtPrice` = Etsy'nin üstü çizili liste fiyatı. docs/15 önerisi
+  (karar değil): liste $49 → satış $29.40, lansmanda $24.50.
+- `etsyListingUrl` = ilanın **Share & Save** linki (§7.2).
 
 Kurallar:
 - `isPlaceholder(v)`: `/^\[[^\]]+\]$/`.
@@ -1466,13 +1491,14 @@ G061 kod aşaması için şunlar gerekiyor (bugün listede değil):
 
 ### 13.4 Kullanıcının vereceği kararlar (tek tek, kısa)
 
-1. **Marka adı ve alan adı** (G062). İndeksleme bundan sonra açılır.
-2. **Tasarım başına fiyat** (Etsy merkezli, G062) ve kampanya politikası. Sitedeki fiyat her zaman Etsy'deki fiyatla aynı
-   olur.
-3. **Destek e-postası ve yanıt süresi.**
-4. **Çift sitelerinin arama motorlarında görünmesi:** öneri varsayılan **kapalı** (`noindex`).
-5. **"Made with [BRAND]" bağlantısı** çift sitelerinin altında: öneri **evet**, küçük, yalnız teşekkür panelinde ve son
-   sayfanın altında.
+1. **Marka adı ve alan adı.** docs/15 önerisi *Seal & Story* / `sealandstory.com`. İndeksleme bu karardan sonra açılır.
+2. **Tasarım başına fiyat** ve kampanya politikası. docs/15 önerisi Strateji A. Sitedeki fiyat her zaman Etsy'deki
+   fiyatla aynıdır.
+3. **Destek e-postası ve yanıt süresi.** docs/15 önerisi: `hello@<alan adı>`, 24 saat.
+4. **Çift sitelerinin arama motorlarında görünmesi:** öneri varsayılan **kapalı** (`noindex`). Bu karar G061'e özgü,
+   docs/15 ve docs/16'da yok.
+5. **"Made with [BRAND]" bağlantısı** çift sitelerinin altında: docs/15 önerisi her misafir sayfasında ince alt bilgi.
+   G061 bu bağlantının hedefini (ana sayfa, UTM) karşılar.
 6. **Yapay zekâ eğitim botları** (GPTBot, ClaudeBot, Google-Extended …): öneri **açık**. Markanın asistanlarca bilinmesi
    amaca uygun; arama botları her durumda açık.
 7. **Analitik:** öneri Vercel Web Analytics ve Speed Insights (Pro'da var, çerezsiz [VERIFY]).
