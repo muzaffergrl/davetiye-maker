@@ -1,0 +1,209 @@
+{
+  "task": "G204",
+  "date": "2026-10-14",
+  "agent": "codex-gpt-gorsel",
+  "tool": "image_gen.imagegen",
+  "prompt_source": "collections/04_Vintage_Airmail/assets/gpt/GPT_PROMPTS.md",
+  "sequence": "W1 screens → W2 with W1 image references → PAKET 2 with hero couple reference",
+  "files": [
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/comps/web_1_envelope.png",
+      "original_prompt": "Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: aged warm parchment gradient (#F2EADB to #DCCDB2) with subtle paper stains, faint vintage map contour lines without any labels, with dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style framing the top-left and bottom-right corners and a few small floating accents (a fictional botanical postage stamp, a pressed dried forget-me-not sprig, a faint inky circular postmark ring). Centered slightly below the middle: a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, bordered with diagonal faded-red and navy airmail stripes along its left, right and bottom edges and in a straight band just under the tear strip, two fictional botanical postage stamps in the top-right corner below that band (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words), and a slim plain perforated tear strip running along the whole top edge as a clean separate band, closed, with a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it — on the middle of the tear strip at the top edge. Above it, typography in a handwritten fountain-pen script for the names and a vintage typewriter-style serif for the small details: a small spaced line \"YOU ARE INVITED\" and the names \"Margot & Henry\" large; below the airmail envelope a small spaced line \"TAP TO OPEN\". All decor in vintage print style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "source_png": "/workspace/generated_images/exec-804bec62-2c67-4f11-b895-17eccc24cab8.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/comps/web_2_home.png",
+      "original_prompt": "Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the airmail envelope: a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line \"We're getting married\" in the script and a small spaced line \"OCTOBER 2, 2027 · HUDSON\". Under the card: the names \"Margot & Henry\" large in the script, a small spaced line \"SATURDAY · OCTOBER 2, 2027\", the venue \"The Old Post House\" and \"Hudson, New York\" in typewriter-style serif, four small elegant countdown boxes \"354 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS\", and a navy blue pill button with a thin cream inner line labelled \"RSVP\". A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "source_png": "/workspace/generated_images/exec-f5404b1c-6bbc-49aa-8a55-65816bd1bcce.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/comps/web_3_story.png",
+      "original_prompt": "Same design, page 3 of 5: our story. The title \"Our Story\" in the script at the top with a small spaced subtitle \"MOMENTS WE HOLD DEAR\". Below: three large perforated postage-stamp frames scattered at slight angles across an old wooden writing desk, as if dropped one by one, a faint inky postmark ring (no letters or numbers) overlapping one corner; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: \"A table for two\", \"Sealed with a yes\", \"Yours, always\". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "source_png": "/workspace/generated_images/exec-b0be00cf-1dcd-49db-aab7-e668ec154278.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/comps/web_4_details.png",
+      "original_prompt": "Same design, page 4 of 5: details. A tall aged-cream laid-paper letter sheet with a thinner airmail-stripe border and only one small pressed flower at the top holds the title \"Order of the Day\" in the script and three schedule rows separated by tiny dividers (a short twine string with a small dried flower tied on it): \"4:00 PM — Ceremony — The Orchard Lawn\", \"5:00 PM — Cocktail Hour — The Library Bar\", \"6:30 PM — Reception — The Post Hall\" (time in small spaced typewriter-style serif, event in typewriter-style serif, place in typewriter-style serif). Below the card: a landscape version of the same large blank perforated postage-stamp frame in aged cream paper with the same fine engraved inner border line, no denomination or lettering, its window filled with flat pure green #00FF00 (the venue photo), under it \"The Old Post House\" and \"Hudson, New York\", then a small line \"DRESS CODE · Cocktail attire\". A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "source_png": "/workspace/generated_images/exec-f3835ad0-6164-4eb1-8d18-323810060d6e.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/comps/web_5_rsvp.png",
+      "original_prompt": "Same design, page 5 of 5: RSVP. The same card as page 4 with the title \"Will You Join Us?\" in the script, \"Kindly reply by August 21, 2027\" in typewriter-style serif, a navy blue pill button with a thin cream inner line labelled \"RSVP\", the line \"We can't wait to celebrate with you\" and \"With love, Margot & Henry\" in the script at the bottom; a small burgundy wax seal — the same one as on the airmail envelope — rests at the base of the card. A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "source_png": "/workspace/generated_images/exec-631d926a-033e-4722-b43d-312e75e64c4b.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_page.png",
+      "original_prompt": "The page background of the W1 screens alone, as a vertical phone-screen background: aged warm parchment gradient (#F2EADB to #DCCDB2) with subtle paper stains, faint vintage map contour lines without any labels, with dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no airmail envelope, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.",
+      "source_png": "/workspace/generated_images/exec-3e23c87a-d4ec-49dd-a861-91cab31081ee.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png",
+      "original_prompt": "A seamless tileable square texture for long website pages: aged warm-cream parchment (#F2EADB) with very subtle stains and fibers. Calm, even and very low in contrast; no objects, no flowers, no vignette, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.",
+      "source_png": "/workspace/generated_images/exec-37a63297-e345-4845-9928-94d600320e8d.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/envelope_closed.png",
+      "original_prompt": "The same airmail envelope as in the W1 screens, alone and closed, WITHOUT the burgundy wax seal: a vintage airmail envelope of aged cream laid paper, about 3:2 wider than tall, bordered with diagonal faded-red and navy airmail stripes along its left, right and bottom edges and in a straight band just under the tear strip, two fictional botanical postage stamps in the top-right corner below that band (each showing only a tiny pressed-flower illustration, perforated edges, no numbers, no words), and a slim plain perforated tear strip running along the whole top edge as a clean separate band. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. The edges where this piece will be cut must read clearly: the perforation line along the lower edge of the tear strip — a crisp line with a slight contact shade on the object itself (not a cast shadow). Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-f4fe4c22-faa1-43f2-bd8d-0fed1ba8e00a.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/closure.png",
+      "original_prompt": "Only a small cracked burgundy-red wax seal with a smooth EMPTY center and a short pressed sprig of dried lavender tucked under it, alone, exactly as it sits on the airmail envelope in the W1 screens (on the middle of the tear strip at the top edge), drawn large so it fills about 70% of the square (Claude scales it to the airmail envelope), with the same perspective, material and light as on the airmail envelope and with no airmail envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-6752efa3-49d3-4c6f-b7ee-9eab44e4e0de.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/envelope_open.png",
+      "original_prompt": "Make this by EDITING envelope_closed.png (image edit), not as a new drawing — change nothing except what is described: The SAME airmail envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: exactly the same envelope with ONLY the slim tear strip removed along its perforation line, leaving a slightly ragged torn top edge; the two stamps, the airmail stripes, the paper, the size and the position are unchanged; the inside is not visible. The ragged torn top edge is crisp and clearly visible. No card, nothing inside, no burgundy wax seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-ce6848ab-f32e-4e7a-a2ab-82e3e17d34de.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/card_small.png",
+      "original_prompt": "The small card that comes out of the airmail envelope in W1.2, alone: a small aged-cream laid-paper letter card with faint laid lines and softly deckled edges, a portrait postcard-style photo window with a thin red-and-navy airmail-stripe border in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the airmail envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-a1ac3ec3-74c2-419d-b442-bcb962aee309.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/invitation_card.png",
+      "original_prompt": "The large invitation card of this design, alone: a tall aged-cream laid-paper letter sheet with a border of diagonal faded-red and navy airmail stripes, pressed dried wildflowers and one fictional botanical postage stamp (tiny flower illustration only, no text) tucked at the top-left corner, and faint inky postmark rings with wavy cancellation lines (no letters or numbers) at the bottom-right. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-e392f0a0-38fc-4706-a26e-ba31102808dd.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/info_card.png",
+      "original_prompt": "The lighter card from W1.4 and W1.5, alone: a tall aged-cream laid-paper letter sheet with a thinner airmail-stripe border and only one small pressed flower at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-b297e5fd-9d90-4885-940a-e015e4ae2329.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/frame_portrait.png",
+      "original_prompt": "One photo frame from W1.3, alone and upright: a large blank vintage postage-stamp shaped frame with perforated scalloped edges in aged cream paper and a fine engraved inner border line — no denomination, no country name, no numbers or lettering anywhere. The window inside is a portrait window (about 4:5), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-4a006abf-a5a3-4461-b2c3-56591bb0ce5b.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/frame_landscape.png",
+      "original_prompt": "A landscape version of the same large blank perforated postage-stamp frame in aged cream paper with the same fine engraved inner border line, no denomination or lettering, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-f8642cba-c87e-49e5-bd51-46c284c85589.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/decor_tl.png",
+      "original_prompt": "ONE cluster of dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-907e85ca-041e-426b-b97e-ce0b09eed953.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/decor_br.png",
+      "original_prompt": "ONE cluster of dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-c858316f-4368-4b65-9346-46cf25529e39.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/accent_1.png",
+      "original_prompt": "Exactly ONE fictional botanical postage stamp with perforated edges showing only a tiny pressed-flower illustration (no numbers, no words), in the same vintage print style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-2f484075-815e-4fcf-83b2-0c54daa0ff55.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/accent_2.png",
+      "original_prompt": "Exactly ONE pressed dried forget-me-not sprig, in the same vintage print style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-32c6eb7c-8c1a-4a12-9325-fcc6528e38fe.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/accent_3.png",
+      "original_prompt": "Exactly ONE faint inky circular postmark ring with wavy cancellation lines, containing no letters, numbers or symbols, in the same vintage print style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-4e090f7c-d71e-4bf2-b338-fe996c3251dd.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/divider.png",
+      "original_prompt": "A small horizontal divider in the same vintage print style: a short twine string with a small dried flower tied on it, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "source_png": "/workspace/generated_images/exec-a6f64656-8455-4966-becd-125d2e0204dc.png",
+      "transparent_requested": true
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_desk.png",
+      "original_prompt": "A vertical phone-screen background of an old warm walnut writing-desk top seen from directly above, fine wood grain, soft light from the top-left, calm and even, slightly darker toward the left and right edges, nothing on it (no papers, no objects, no text); the top and bottom edges match so it can repeat vertically without a seam; everything important inside the central 85% of the width.",
+      "source_png": "/workspace/generated_images/exec-72e6c5d2-853d-440f-8aba-861b8769e7e7.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/parts/web_hero.png",
+      "original_prompt": "Wide horizontal version of the same design for the desktop website header: aged warm parchment gradient (#F2EADB to #DCCDB2) with subtle paper stains, faint vintage map contour lines without any labels, with dried pressed wildflowers, a sprig of dried lavender, a short twine loop and two or three fictional botanical postage stamps with perforated edges (each showing only a tiny flower illustration, no numbers, no words), layered in a vintage print style framing the left and right edges, and the closed airmail envelope with its burgundy wax seal resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is also cropped to 1200×630 for link previews: keep the closed airmail envelope with its burgundy wax seal completely visible with at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, colors and light as the W1 screens. No text, no letters.",
+      "source_png": "/workspace/generated_images/exec-0755246e-ac17-4c49-86d4-963b722e9caa.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/photos/hero_portrait.jpg",
+      "original_prompt": "Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on the platform of a small old countryside train station in autumn, a vintage leather suitcase at their feet, soft golden light, no station signs, no timetables, no posters; she wears a vintage-inspired tea-length cream lace dress, he wears a navy wool suit with a knit tie. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.",
+      "source_png": "/workspace/generated_images/exec-f65e5c49-ec14-4e01-9dd2-e7675703621d.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/photos/story_1.jpg",
+      "original_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together over two cups of tea at a small wooden table by the window of a cozy old café, a vintage fountain pen and a few blank cream envelopes on the table, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.",
+      "source_png": "/workspace/generated_images/exec-7cf73b21-582d-4b60-b8bd-507b8a4174bd.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/photos/story_2.jpg",
+      "original_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment in an apple orchard in autumn at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.",
+      "source_png": "/workspace/generated_images/exec-6b7a6713-9d26-4c7a-9f34-53bc120110bc.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/photos/story_3.jpg",
+      "original_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, resting on a bundle of old letters tied with twine (no visible writing), soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.",
+      "source_png": "/workspace/generated_images/exec-d2781db6-4c29-4aa7-9f79-220e0a0a44bd.png",
+      "transparent_requested": false
+    },
+    {
+      "path": "collections/04_Vintage_Airmail/assets/gpt/photos/venue.jpg",
+      "original_prompt": "A fictional historic red-brick former post office converted into a wedding venue in a river-valley town in autumn: tall arched windows, an orchard lawn with rows of wooden ceremony chairs and a simple arch of dried flowers, warm golden light, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.",
+      "source_png": "/workspace/generated_images/exec-e4776478-93e7-4509-aaad-2da2bba16ac2.png",
+      "transparent_requested": false
+    }
+  ],
+  "checks": {
+    "paket5": {
+      "chunk_id": "6a6d86",
+      "wall_time_seconds": 1.038178468,
+      "exit_code": 0,
+      "original_token_count": 615,
+      "output": "GEÇTİ  collections/04_Vintage_Airmail/assets/gpt/comps/web_1_envelope.png  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/comps/web_2_home.png  — 1024×1536 · pencere %4.2\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/comps/web_3_story.png  — 1024×1536 · pencere %5.3\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/comps/web_4_details.png  — 1024×1536 · pencere %7.9\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/comps/web_5_rsvp.png  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/bg_page.png  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png  — 1254×1254\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/envelope_closed.png  — 1024×1536 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/closure.png  — 1254×1254 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/envelope_open.png  — 1024×1536 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/card_small.png  — 1024×1536 şeffaf · pencere %18.3\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/invitation_card.png  — 1024×1536 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/info_card.png  — 1024×1536 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/frame_portrait.png  — 1024×1536 şeffaf · pencere %20.5\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/frame_landscape.png  — 1536×1024 şeffaf · pencere %10.9\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/decor_tl.png  — 1254×1254 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/decor_br.png  — 1254×1254 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/accent_1.png  — 1254×1254 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/accent_2.png  — 1254×1254 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/accent_3.png  — 1254×1254 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/divider.png  — 1536×1024 şeffaf\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/bg_desk.png  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/parts/web_hero.png  — 1536×1024\nUYARI  hiza  envelope_closed ↔ envelope_open — kapak · tuval · sol +0.00% · sağ +0.39% · alt +1.56% (±%1,5 aşıldı: tema build'i ölçülen ölçek + ötelemeyle düzeltir, manifest.stage.align)\n\n24/24 geçti\n"
+    },
+    "paket2": {
+      "chunk_id": "4c987c",
+      "wall_time_seconds": 0.091067251,
+      "exit_code": 0,
+      "original_token_count": 112,
+      "output": "GEÇTİ  collections/04_Vintage_Airmail/assets/gpt/photos/hero_portrait.jpg  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/photos/story_1.jpg  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/photos/story_2.jpg  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/photos/story_3.jpg  — 1024×1536\nGEÇTİ  collections/04_Vintage_Airmail/assets/gpt/photos/venue.jpg  — 1536×1024\n\n5/5 geçti\n"
+    }
+  },
+  "regenerated": [
+    "web_2_home: landscape window corrected to portrait; v2 selected",
+    "envelope_closed: v2 placement attempt; initial v1 selected for closer alignment with open v2",
+    "envelope_open: first failed 9.64% bottom shift; v2 selected with initial closed: bottom +1.56% warning",
+    "frame_portrait, frame_landscape: v2 and v3 attempts to restore opaque flat green; v3 selected, incomplete green opacity remains",
+    "decor_tl: v2 retains full twine endpoints",
+    "web_hero: v2 improves centered 1200×630 crop; visually inspected"
+  ],
+  "review_notes": [
+    "kit_check checks green-region presence, not uniform color or opacity over whole window. Frame windows remain nonuniform/partly transparent despite three imagegen attempts; card_small has slight green variation. Needs technical window mask repair or fresh generation before theme approval.",
+    "Closed/open envelopes are not pixel-identical: +1.56% bottom and +0.39% right edge, paper and stamps have minor visual differences. Initial closed selected; actual envelope sits higher and wider than the nominal 88%/80% guidance. Theme alignment and opening motion need visual review.",
+    "bg_tile and bg_desk repeatability was not proven pixel-exact; visual texture only.",
+    "Square tool outputs are 1254×1254; kit_check validates aspect ratio and passed. JPEG photos are encoded from generated PNG without resizing.",
+    "This task contains generated references and assets, not a deployed website or edited Canva design."
+  ]
+}

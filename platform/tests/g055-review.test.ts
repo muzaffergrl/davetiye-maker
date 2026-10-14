@@ -84,7 +84,7 @@ test('limits: the browser module equals the schema; /start fields do not pull th
     for (const m of src.matchAll(/^import\s+(?!type\b)[^'"]*from\s+'(\.[^']+)'/gm)) walk(path.resolve(path.dirname(file), m[1]));
   };
   walk(path.join(PLATFORM_ROOT, 'lib/claim/fields.ts'));
-  const rel = [...seen].map((f) => path.relative(PLATFORM_ROOT, f)).sort();
+  const rel = [...seen].map((f) => path.relative(PLATFORM_ROOT, f).split(path.sep).join('/')).sort();
   assert.ok(!rel.includes('lib/content/validate.ts') && !rel.includes('lib/content/schema.ts'), rel.join(', '));
   assert.ok(rel.includes('lib/content/limits.ts'), rel.join(', '));
   const form = readFileSync(path.join(PLATFORM_ROOT, 'app/start/StartForm.tsx'), 'utf8');

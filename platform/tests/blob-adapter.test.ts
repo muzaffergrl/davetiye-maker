@@ -170,6 +170,44 @@ test('blob: unusual order references get a hashed index name; null orderRef has 
   await assert.rejects(a.createSite(newSite('odd-ref-2', { orderRef: 'Order #12/34 ../x' })), OrderRefTakenError);
 });
 
+// The real store answers overlapping conditional writes with this plain BlobError (G049 smoke test), not a 412.
+const CONFLICTING = 'The conditional request cannot succeed due to a conflicting operation against this resource.';
+
+test('blob: a "conflicting operation" answer to a site update is retried like a stale ETag (no error, one version)', async () => {
+  const { fake, adapters } = instances(1);
+  const [a] = adapters;
+  const site = await a.createSite(newSite('busy-store'));
+  let conditional = 0;
+  fake.beforePut = (p, _body, o) => {
+    if (p.startsWith('sites/') && o.ifMatch && conditional++ === 0) throw new BlobError(CONFLICTING);
+  };
+  const content = structuredClone(site.content);
+  content.host_line = 'Written after a busy store';
+  const saved = await a.updateContent(site.id, content);
+  fake.beforePut = null;
+  assert.equal(conditional, 2, 'first conditional write refused, second one lands');
+  assert.equal(saved.content.host_line, 'Written after a busy store');
+  assert.equal(JSON.parse(fake.text(`sites/${site.id}.json`)!).version, 2);
+  // other plain BlobErrors are still real failures, not conflicts
+  fake.beforePut = (p, _body, o) => {
+    if (p.startsWith('sites/') && o.ifMatch) throw new BlobError('Some other failure');
+  };
+  await assert.rejects(a.updateContent(site.id, content), /Some other failure/);
+  fake.beforePut = null;
+});
+
+test('blob: a "conflicting operation" while claiming a free slug is retried, not a failed create', async () => {
+  const { fake, adapters } = instances(1);
+  let claims = 0;
+  fake.beforePut = (p) => {
+    if (p.startsWith('slugs/') && claims++ === 0) throw new BlobError(CONFLICTING);
+  };
+  const site = await adapters[0].createSite(newSite('busy-slug', { orderRef: '4088888888' }));
+  fake.beforePut = null;
+  assert.equal(JSON.parse(fake.text('slugs/busy-slug.json')!).id, site.id);
+  assert.equal(JSON.parse(fake.text('orders/4088888888.json')!).id, site.id);
+});
+
 test('blob: a failed site write releases the slug and order indexes', async () => {
   const { fake, adapters } = instances(1);
   fake.beforePut = (p) => {
