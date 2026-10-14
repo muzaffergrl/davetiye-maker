@@ -28,55 +28,55 @@
 
 <div class="page-bg" aria-hidden="true"><picture><source media="(min-width: 700px), (min-aspect-ratio: 1/1)" srcset="img/paper_wide-755.webp"><img src="img/paper-400.webp" alt=""></picture></div>
 
-<main class="site-main">
+<main class="site-main" data-fold-group="center">
   <header class="page-head" data-scene="story-head">
     <img class="page-corner corner-tl" data-step="decor" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 400px)" alt="">
     <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_1-149.webp" alt="">
     <img class="float f-fern" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
-    <h1 class="script page-title" data-step="title" data-a="write">Our Story</h1>
-    <p class="kicker" data-step="kicker" data-a="fade">Moments we hold dear</p>
-    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+    <h1 class="script page-title" data-fold data-step="title" data-a="write">Our Story</h1>
+    <p class="kicker" data-fold="join" data-step="kicker" data-a="fade">Moments we hold dear</p>
+    <p class="lede" data-fold data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
 
   <!-- the prints (one scene each): each flies in from its own side, turns and settles at its angle, one after another
        (prints entering together play batchGap apart); then its caption is written in the margin -->
   <section class="prints" aria-label="Our photos">
-    <figure class="print p-1" data-scene="story-print">
+    <figure class="print p-1" data-scene="story-print" data-fold>
       <div class="print-frame" data-step="print" data-a="fly-l">
         <div class="photo-slot mask-portrait" data-slot="story_1">
           <img data-photo="story_1" src="img/ph_story_1-360.webp" srcset="img/ph_story_1-360.webp 360w, img/ph_story_1-720.webp 720w" sizes="(min-width: 760px) 200px, min(53vw, 250px)" alt="" data-attr-alt="{story.items.0.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="print-img" src="img/frame_portrait-360.webp" srcset="img/frame_portrait-360.webp 360w, img/frame_portrait-720.webp 720w" sizes="(min-width: 760px) 265px, min(70vw, 330px)" alt="">
-        <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.0.caption"></span></figcaption>
       </div>
+      <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.0.caption"></span></figcaption>
     </figure>
-    <figure class="print p-2" data-scene="story-print">
+    <figure class="print p-2" data-scene="story-print" data-fold>
       <div class="print-frame" data-step="print" data-a="fly-r">
         <div class="photo-slot mask-portrait" data-slot="story_2">
           <img data-photo="story_2" src="img/ph_story_2-360.webp" srcset="img/ph_story_2-360.webp 360w, img/ph_story_2-720.webp 720w" sizes="(min-width: 760px) 200px, min(53vw, 250px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="print-img" src="img/frame_portrait-360.webp" srcset="img/frame_portrait-360.webp 360w, img/frame_portrait-720.webp 720w" sizes="(min-width: 760px) 265px, min(70vw, 330px)" alt="" loading="lazy">
-        <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.1.caption"></span></figcaption>
       </div>
+      <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.1.caption"></span></figcaption>
     </figure>
-    <figure class="print p-3" data-scene="story-print">
+    <figure class="print p-3" data-scene="story-print" data-fold>
       <div class="print-frame" data-step="print" data-a="fly-b">
         <div class="photo-slot mask-portrait" data-slot="story_3">
           <img data-photo="story_3" src="img/ph_story_3-360.webp" srcset="img/ph_story_3-360.webp 360w, img/ph_story_3-720.webp 720w" sizes="(min-width: 760px) 200px, min(53vw, 250px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
         <img class="print-img" src="img/frame_portrait-360.webp" srcset="img/frame_portrait-360.webp 360w, img/frame_portrait-720.webp 720w" sizes="(min-width: 760px) 265px, min(70vw, 330px)" alt="" loading="lazy">
-        <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.2.caption"></span></figcaption>
       </div>
+      <figcaption class="script cap" data-step="caption" data-a="write"><span class="cap-t" data-field="story.items.2.caption"></span></figcaption>
     </figure>
   </section>
 
   <section class="section next-sec" data-scene="story-next">
     <img class="page-corner corner-br" data-step="decor" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-875.webp 875w" sizes="min(62vw, 360px)" alt="" loading="lazy">
-    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
-    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
+    <img class="sprig" data-fold data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-fold="join" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
   </section>
 </main>
 
