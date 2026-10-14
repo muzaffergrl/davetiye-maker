@@ -65,6 +65,24 @@ düzenler. Bu belge platformun tek kaynağıdır.
     Geçici siteler silindi.
   - Denenmedi: gerçek telefon (iOS Safari / Android Chrome), Vercel'de çok örnekli hız sınırı davranışı (sınırlar hâlâ süreç içi),
     yük/maliyet ölçümü, Git bağlantılı otomatik yayın.
+- **Yeniden yayın (G049, 2026-10-14, `claude-local-1`):**
+  - Production = main `59b1291` (platform ağacı `f9ff114cfa65`; sonraki main commit'leri platforma dokunmadı), `dpl_2wNCu8cwSnw4PcWpQ2pTqcGjbdTC`,
+    aynı adres https://davetiye-platform-five.vercel.app. Ortam değişkeni adlarına `PLATFORM_PUBLIC_URL` eklendi (Production + Preview;
+    og:image ve takvim linkleri için).
+  - **Yayın yolu:** ekip Pro planda ve repo private → Vercel yalnız ekip üyelerinin commit'lerini yayınlıyor; commit yazarı
+    `Claude <noreply@anthropic.com>` olduğu için CLI yayını `BLOCKED` oldu (`dpl_BgNBxoWYAdD5bf38BFqsZefyYJzu`). Kullanıcı kararıyla
+    (2026-10-14) yayın, commit'in `git archive HEAD:platform` ile çıkarılmış birebir kopyasından yapılıyor (git bilgisi gitmez;
+    `--meta gitCommit=<kısa sha> --meta platformTree=<ağaç>` notu eklenir). Kalıcı çözüm seçenekleri (kullanıcı): commit'leri ekip üyesinin
+    Git kimliğiyle atmak ya da Vercel ekip ayarı.
+  - **Windows notu:** Git for Windows varsayılanı `core.autocrlf=true` çalışma kopyasını CRLF'e çeviriyordu → bu makineden yapılan yayın
+    main'le bayt bayt aynı değildi ve `site.js` boyut bütçesi testi kalıyordu. Yerel kopya `core.autocrlf=false`, `core.eol=lf`'ye alındı;
+    `git archive` zaten repo içeriğini (LF) verir. Önerilen: repoya `.gitattributes` (`* text=auto eol=lf`).
+  - Canlı sonuç: `scripts/live-check.mjs` **41/41** (5 demo sayfası + CSP, og:image, `.ics`, foto, panel + başlıklar, 2 temanın `/start` ve
+    demoları, geçici sitede kaydet/409/foto (yayınlanmamış foto önizleme anahtarı olmadan 404, anahtarla 200)/yayın/RSVP/CSV, `/start`
+    201 + 409, temizlik); `scripts/blob-smoke.mjs` **12/12** (8/8 eşzamanlı yazma). Telefon boyutunda (375 px) zarf → home → story →
+    details → RSVP akışı ve iki `/start` sayfası görsel olarak kontrol edildi.
+  - Gerçek depoda bulunan ikinci ayrıntı: üst üste binen koşullu yazmalar `412` yerine düz `BlobError("… conflicting operation …")`
+    alıyor → adaptör bunu da yeniden dener (G049; önceden 8 eşzamanlı yazmadan 1'i hatayla düşüyordu, veri kaybı yoktu).
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
