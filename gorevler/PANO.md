@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 33 · alindi 10 · inceleme 5 · blokaj 277 · bitti 63 · toplam 388
+Özet: hazir 33 · alindi 10 · inceleme 4 · blokaj 277 · bitti 64 · toplam 388
 
 ## claude-canva
 
@@ -343,7 +343,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G819` p2 — Tasarım 19 Midnight Garden — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G819-mockup.md`
 - `G820` p2 — Tasarım 20 Coastal Seaside — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G820-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (35)**
+**Üzerinde çalışılan / incelemede / blokaj (34)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
@@ -354,7 +354,6 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G211` alindi · gpt-gorsel-E — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G212` alindi · gpt-gorsel-D — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G213` alindi · gpt-gorsel-C — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
-- `G813` inceleme · gpt-marka — Tasarım 13 Enchanted Forest Storybook — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
 - `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
 - `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
@@ -381,4 +380,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 26
+Bağımlılık bekleyen: 0 · Biten: 27
