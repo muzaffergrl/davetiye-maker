@@ -15,6 +15,7 @@ import type { ContentRecord } from '../../content/types.ts';
 import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
+  applySitePatch,
   SlugTakenError,
   StaleSiteError,
   nextTimestamp,
@@ -26,8 +27,10 @@ import {
   type RsvpRecord,
   type SavedPhoto,
   type SiteKeyHashes,
+  type SitePatch,
   type SiteRecord,
   type StoredFile,
+  type WriteOptions,
 } from '../types.ts';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -174,6 +177,18 @@ export class LocalAdapter implements DataAdapter {
       site.publishedContent = structuredClone(site.content);
       site.status = 'published';
       site.publishedAt = new Date().toISOString();
+      if (opts.set) applySitePatch(site, opts.set);
+    });
+  }
+
+  patchSite(id: string, patch: SitePatch, opts: WriteOptions = {}): Promise<SiteRecord> {
+    const copy = structuredClone(patch);
+    return this.mutate(id, (site) => {
+      // Checked on the freshly read version that this write replaces (G060: rights counter + content in step).
+      if (opts.expectedUpdatedAt !== undefined && site.updatedAt !== opts.expectedUpdatedAt) {
+        throw new StaleSiteError(id, site.updatedAt);
+      }
+      applySitePatch(site, copy);
     });
   }
 

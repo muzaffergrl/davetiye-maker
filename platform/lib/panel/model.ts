@@ -4,6 +4,7 @@
 import type { ContentRecord, Partner } from '../content/types.ts';
 import { CONTENT_LIMITS } from '../content/limits.ts';
 import type { ValidationIssue } from '../content/validate.ts';
+import type { RightsView } from './rights.ts';
 
 export type SiteStatus = 'draft' | 'published';
 
@@ -86,6 +87,8 @@ export interface PanelMeta {
   publishedAt: string | null;
   /** Published, but the draft differs from what visitors see. */
   hasUnpublishedChanges: boolean;
+  /** Name / date changes left, archive dates (G060, lib/panel/rights.ts). */
+  rights: RightsView;
 }
 
 export interface PanelState extends PanelMeta {
@@ -96,6 +99,8 @@ export interface PanelState extends PanelMeta {
   previewKey: string;
   /** e.g. https://example.vercel.app — used for the public link and its QR code. */
   origin: string;
+  /** The buyer's Etsy order number when the site was claimed with one (shown for support requests). */
+  orderRef: string | null;
 }
 
 /** Body of every panel API error. */
