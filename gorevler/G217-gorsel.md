@@ -48,3 +48,4 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 1, 8/8 görsel kaydedildi ve denetlendi (W1 5 + W2 bg_page, bg_tile, envelope_closed).
 - 2026-10-14 gpt-gorsel-I: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (zümrüt kadife + altın). bg_page köşe süssüz düz kadife; köşe süsleri decor_tl/decor_br'den gelecek. Kısım 2 verildi.
+- 2026-10-14 devam: gpt-gorsel-I (kısım 2)
