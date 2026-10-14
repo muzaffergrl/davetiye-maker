@@ -35,6 +35,7 @@ Tasarım 11'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
 
 ## Günlük
+- 2026-10-14 ara kayıt (kısım 1, 8/8): frame_portrait.png, frame_landscape.png, decor_tl.png, decor_br.png Kaydet yollarına eklendi (gpt-gorsel-E). İki çerçevede de 3 denemeden en temiz 2. çıktı seçildi; yeşil alanlarda ton/alfa değişimi kaldı ve pencere oranları hedef 3:4 / 3:2'ye tam oturmadı. Köşe kümeleri gerçek alfa, yazısız ve kenar boşluklu.
 - 2026-10-14 ara kayıt (kısım 1, 4/8): envelope_open.png, card_small.png, invitation_card.png, info_card.png Kaydet yollarına eklendi (gpt-gorsel-E). Alfa ve dosya kontrolleri geçti; zarf hizası GEÇTİ. card_small penceresi 3 denemede tam #00FF00 olmadı; en temiz 2. çıktı seçildi.
 - 2026-10-14 devam: gpt-gorsel-E (kısım 1)
 - 2026-10-14 ara kayıt: W2 1/4; bg_page, bg_tile, envelope_closed ve closure eklendi (gpt-gorsel-E).
