@@ -1,163 +1,122 @@
 # Start Here: Your Blush Garden Rose Wedding Website
 
-Thank you for your order from [SHOP NAME]. This guide takes you from your Etsy purchase to a published wedding website your guests can open on their phones. Keep this PDF: the start link for your design is inside.
+Thank you for choosing BKE Studio. Keep this guide and your private edit link.
 
-## Your start link
+## 1. Start your website
 
-> **Open this link to start your website:**
->
-> [https://davetiye-platform-five.vercel.app/start?theme=blush-garden-rose](https://davetiye-platform-five.vercel.app/start?theme=blush-garden-rose)
-
-Or scan this code with your phone camera:
+[Start your Blush Garden Rose website](https://davetiye-platform-five.vercel.app/start?theme=blush-garden-rose)
 
 ![QR code of your start link](img/start_qr_page.png)
 
-The link opens the Blush Garden Rose design. Everything happens in your web browser: the editor is made for phone screens and also works on a computer. There is nothing to install and you do not need a Canva account.
+You do not need Canva or an app. Open the link in your browser. Enter your Etsy order number, email address and first names. Check **Website address** before tapping **Create my website**: you can choose the address here, but cannot change it later.
 
-## What you need
+Your order number contains 8 to 12 digits. An order can start one website. If the page says your order is already used, return to your saved edit link or contact the shop on Etsy.
 
-- Your **Etsy order number**. You find it in your Etsy order confirmation email, or on Etsy under **Purchases and reviews**. Only the digits matter: "Order #1234567890" is fine.
-- An **email address** (we keep it with your website).
-- Your **names, wedding date, ceremony time and venue**.
-- Up to **5 photos**: a portrait for the invitation card, three photos for Our Story and one of your venue. You can add them later.
+Your website starts as a private draft. If your order is waiting for confirmation, you can edit it; publishing waits until the shop confirms the order.
 
-Everything saves as you go, so you can stop and come back at any time.
+## 2. Save your private edit link
 
-## Step 1: Start your website
+Tap **Copy link** and keep the link in a safe place, such as your notes app. **Email it to myself** opens your own email app so you can send the link to yourself. The platform does not send it automatically yet.
 
-![Step 1: the start page with the design, and the form filled in](img/step1_start.jpg)
+Anyone with the edit link can change your website. Share the public website address with guests; keep the edit link private. Tap **Open my editor** to continue.
 
-1. Open your start link. You see the Blush Garden Rose design with sample names (Clara & Julian) and a link to **Open the full demo**.
-2. Under **Your details**, enter your **Etsy order number**, your **email address** and your **first names**.
-3. Check the **Website address**. It is made from your names, for example `elena-and-marco`. You can change it now, but **not later**. If an address is taken, the page suggests another one.
-4. Tap **Create my website**. Your website starts as a **private draft**: nobody can see it until you publish it.
+## 3. Follow the three setup steps
 
-One website can be started per order number.
+1. **Your names and date:** add your names, wedding date, ceremony time and time zone. The full-name fields are optional.
+2. **Add a photo:** choose a portrait for your invitation. You can add the remaining photos later.
+3. **Publish your website:** preview it and read the publishing rules. Replace sample details before sharing it with guests.
 
-## Step 2: Save your edit link
+The first publication sets the starting point for your name/date changes. After publication you have **3 name and date changes in total**. Small spelling fixes and date adjustments of up to **7 days** from the counted date are free; the panel tells you whether a change uses a right before you confirm it. Your other text, links and photos can still be edited.
 
-![Step 2: Save this link (the private part of the link is hidden in this picture)](img/step2_link.jpg)
+Your site normally stays online until **12 months after your wedding date**. The panel shows your exact online-until date; the maximum is 48 months from the first publication.
 
-The next screen shows your **edit link**. It is the only way to open your editor, so keep it safe and private: anyone who has it can change your website.
+## 4. Edit your website
 
-- Tap **Copy link** and paste it somewhere safe, for example your notes app.
-- Or tap **Email it to myself**: this opens your own email app with the link in a new message. Send it to yourself.
-- We **cannot email the link to you yet**, so please save it now.
+Use **Home**, **Edit**, **Guests** and **Share** to move around the panel. Home shows how much is ready and the next few things to complete.
 
-Then tap **Open my editor**.
+Open **Edit**, then choose a page:
 
-## Step 3: Fill in your details
-
-![Step 3: the editor, with the Couple and Date & time sections](img/step3_editor.jpg)
-
-The editor is one page with sections. Tap a section to open it:
-
-| Section | What you change |
+| Page | What you can change |
 |---|---|
-| Couple | First names, full names (shown on the invitation card), "Names as shown", host line |
-| Date & time | Wedding date, ceremony time, time zone, date style (United States, United Kingdom, Canada or Australia) |
-| Venue | Venue name, address, city, region and country |
-| Schedule | The order of the day: up to 10 events with time and place |
-| Story | The intro line and a short caption for each Our Story photo |
-| Details | Dress code, map link, travel & stay link, registry link |
-| Questions & answers | Up to 12 questions and answers for your guests |
-| RSVP | Reply-by date, up to 3 questions for your guests, and your replies |
-| Optional sections | Turn Our Story, Countdown, Dress code, Registry, Travel & stay and Questions & answers on or off |
-| Photos | Your 5 photos |
+| Us | First/full names, names as shown and initials |
+| Day & place | Wedding date, time, time zone, venue, up to 10 schedule entries and After the wedding |
+| Photos | Invitation portrait, three story photos and venue photo |
+| Our Story | Story text, three captions and whether to show the story |
+| Details | Host line, dress code, travel, registry, map and up to 12 questions and answers |
+| RSVP | Reply-by date and up to 3 questions for accepting guests |
 
-- Values that still come from the design's sample are marked **Sample**. Replace them with your own.
-- Every change **saves by itself**. The bar at the bottom says "All changes saved".
-- Tap **Preview** at any time to see your website as your guests will.
-- The design's own headings (for example "You are invited", "Order of the Day", "Will You Join Us?") are part of the design and stay as they are.
+Optional sections are controlled inside their own pages. **Headings & labels** lets you edit almost every design heading, button and form label. Keep within the length shown for each field. You can restore a design's default wording. Colors, fonts, painted decoration and the envelope animation stay with the design.
 
-## Step 4: Add your photos
+Changes save automatically to your draft. Saving and publishing are separate: guests see the last published version. When you see **Unpublished changes**, tap **Review** to see what will go live, then **Publish changes**. Review can include changes from several pages, so check the whole list before publishing.
 
-![Step 4: cropping a photo, and the Photos section after the upload](img/step4_photos.jpg)
+If the panel reports you are offline or that changes are not saved, wait until the connection is restored before closing it. If it reports a conflict, reload the current version before continuing.
 
-1. Open **Photos** and tap **Add photo** next to a photo place.
-2. Choose a photo. Drag it to move it, pinch or use the slider to zoom, then tap **Use this photo**.
-3. Each photo is cropped to the shape the design uses. You can **Replace** or **Remove** it later.
+## 5. Add and crop photos
 
-Tip: if a photo does not open, choose a JPEG or PNG copy of it (up to 30 MB). Until you add a photo, the design shows a soft placeholder image, and your guests see it too.
+In **Edit → Photos**, choose a photo slot and tap **Add photo**. Move the photo, zoom with the slider or pinch, and tap **Use this photo**. Each slot uses the frame's crop shape. You can replace or remove it later.
 
-## Step 5: Preview and publish
+Use a JPEG or PNG copy if your phone's photo cannot be opened. The file chooser accepts photos up to 30 MB; the editor prepares a smaller cropped copy for upload. Empty slots show the design's soft placeholder. Add your own photos before sharing if you do not want guests to see placeholders.
 
-![Step 5: Before you publish, and Your website is live (the QR code is hidden in this picture)](img/step5_publish.jpg)
+## 6. Preview, publish and share
 
-1. Tap **Preview** and look through Envelope, Home, Story, Details and RSVP. Tap **Close** to go back.
-2. Tap **Publish**. If something still shows sample text or a photo place is empty, **Before you publish** lists it. Tap an item to go to it, or tap **Publish anyway** and change it later.
-3. **Your website is live** shows your website address, **Copy link**, **Open website** and a QR code.
+On a phone, open **Preview** and check Envelope, Home, Story, Details and RSVP. **Close** returns to editing. On a wider screen the preview sits beside the editor.
 
-Later changes: edit as before, then tap **Publish changes**. Your guests see changes only after you publish them. **Take the website offline** hides it again (your content is kept).
+Tap **Publish** for the first publication. Check any sample-content warnings and the online-until date. After editing a published site, use **Review → Publish changes**.
 
-## Step 6: Share it with your guests
+Open **Share**:
+- **Copy link** copies your public website address.
+- **Download PNG** or **Download SVG** saves the QR code. Scan it with your phone before printing.
+- The private edit-link controls are inside their own expandable section.
+- **Take offline** hides the public site while keeping your content.
 
-- **Copy link** and send it by text message, WhatsApp, email or social media. Your website address looks like `https://davetiye-platform-five.vercel.app/your-names`.
-- **Download QR (PNG)** or **Download QR (SVG)** to print the code on paper invitations or signs. Scan it once with your phone camera before you print.
-- Later, tap **QR code** in the "Your website is published" box at the top of your editor, or **Share** at the bottom (it shows when all your changes are published), to copy the link or download the QR code again.
-- Your guests do not need an app or an account. They tap the envelope to open your invitation.
+Guests need no account. They open your public link and tap the envelope.
 
-## Step 7: See your replies
+### Optional guest password
 
-![Step 7: your replies with the CSV download, and questions for your guests](img/step7_replies.jpg)
+In **Share**, expand the password section and turn on **Password protect your website**. Choose a password and confirm it; use **Copy password** to send it with your public invitation link. Password protection is off by default.
 
-Open **RSVP** in your editor:
+This is one shared guest password, not a separate login for each person. Turning it on or changing it takes effect immediately. Changing it asks guests to enter the new password again. Switching it off lets anyone with the public link enter.
 
-- The reply count, how many guests are coming and who declined.
-- Each reply with the guest's answers to your questions (for example "Meal choice: Fish").
-- **Refresh** loads new replies. **Download all replies (CSV)** gives you a spreadsheet for Excel, Numbers or Google Sheets.
-- To delete a spam or duplicate reply, tick it and tap **Remove selected**.
-- Replies close at the **end of your reply-by date**, in your wedding's time zone.
+## 7. Manage guest replies
 
-## What your guests see
+Open **Guests**, not the RSVP editing page, to see responses. **Edit → RSVP** changes the form; **Guests** manages replies.
 
-![The envelope and the Home page (sample names and photos)](img/guests.jpg)
+- See the number coming, not coming and the response total.
+- Read meal choices, notes and other answers; expand a reply to see the people in that party.
+- Search/filter replies and use **Refresh** to load new ones.
+- **Download list** exports CSV for Excel, Numbers or Google Sheets. A party is shown as one row per person when names are provided.
+- Add a reply received another way, correct a reply, or print your guest list.
+- Check held replies before including them in your totals. Removing a reply permanently deletes it; check before confirming.
 
-1. **The envelope**: your names on a closed envelope. A tap opens it.
-2. **Home**: your portrait card, names, date, venue, a countdown, the invitation card, add-to-calendar buttons and RSVP.
-3. **Our Story**: your three photos with short captions.
-4. **Details**: the order of the day, dress code, venue, map, travel & stay, registry and your questions & answers.
-5. **RSVP**: guests reply with their name, whether they come, how many guests and your questions.
+Replies close at the end of your reply-by date in your wedding time zone. When guests choose two or more people, they may add the other guests' names. Those names are optional.
 
-## Questions and troubleshooting
+## 8. After the wedding
 
-**I lost my edit link.**
-Look for the message you sent to yourself in Step 2. If you cannot find it, message [SHOP NAME] on Etsy with your order number. [LOST LINK POLICY: how and when the shop sends a new edit link]
+Open **Edit → Day & place → After the wedding**. **Thank-you mode** offers:
+- **Automatic:** shows the thank-you version from midnight after the wedding day in your wedding time zone.
+- **On now:** shows it immediately after you publish.
+- **Off:** keeps the invitation version.
 
-**"A website has already been started with this order number."**
-Each order starts one website. Open it with the edit link you saved. If you did not start it, message us on Etsy.
+Add a thank-you title/message and optional photo. Preview the result, then publish your changes. In thank-you mode the invitation's countdown, calendar and RSVP invitations disappear, and guest replies close. Your existing replies remain in Guests and can be downloaded. You can choose whether to keep The Day details.
 
-**"This start link is not valid."**
-Open the start link from this PDF again, or pick your design from the list on that page.
+## Troubleshooting
 
-**The website address I want is taken.**
-Use the suggested address or add a word, for example `elena-and-marco-wedding`.
+**Guests cannot see my edits.** Check that changes are saved, then use Review and Publish changes.
 
-**My photo does not upload.**
-Choose a JPEG or PNG copy of the photo, up to 30 MB.
+**I lost my edit link.** Check your notes or the email you sent yourself. Contact BKE Studio on Etsy with your order number if it is missing. A replacement link invalidates the old one; do not post your private link publicly.
 
-**My guests do not see my changes.**
-Tap **Publish changes** in the editor.
+**My order is waiting for confirmation.** Continue editing your draft. Contact the shop on Etsy if you need help; you cannot publish until the order is confirmed.
 
-**Can I change the address later?**
-No. Choose it carefully in Step 1.
+**My photo will not upload.** Try a JPEG or PNG copy and check your connection.
 
-**Can I use my own domain (for example yournames.com)?**
-Not at the moment.
+**Can I change the website address or use my own domain?** The address cannot be changed after creation. Your own domain is not currently supported.
 
-**How long does my website stay online?**
-[HOSTING PERIOD]
+**Can I use another language?** You can change almost every heading/label and write your own text. Keep within the displayed limits and preview all pages; font coverage varies by alphabet. The design's colors, artwork and fonts do not change.
 
-**Can I change the colors, fonts or headings?**
-No. You change your names, date, times, venue, schedule, dress code, story captions, questions & answers, RSVP questions, links and photos. The design's headings (for example "You are invited", "Order of the Day", "Will You Join Us?"), the painted design and the colors stay as they are.
+## Help and privacy
 
-**Can my website be in another language?**
-The design's headings, buttons and RSVP form are in English. You can write your own texts in another language: letters with accents (é, ñ, ü) and Cyrillic use the design's fonts; other alphabets may show in a plain standard font.
+Message **BKE Studio on Etsy**, or write to **[SUPPORT EMAIL]**. Support response time: **[SUPPORT RESPONSE TIME]**.
 
-## Help
+Guests' replies are visible in your private panel, not on your public site. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
 
-Message [SHOP NAME] on Etsy, or write to [SUPPORT EMAIL]. We answer within [SUPPORT RESPONSE TIME].
-
-Privacy: your guests' replies are shown only in your editor, not on your public website. [PRIVACY NOTICE LINK]
-
-The sample names, dates, places and photos in the design are fictional. Replace them with your own before you share your website.
+The design's sample names, dates, places and photos are fictional. Replace them before sharing.

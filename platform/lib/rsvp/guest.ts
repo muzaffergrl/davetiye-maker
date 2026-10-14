@@ -133,7 +133,7 @@ function sameReply(a: RsvpRecord, b: RsvpInput): boolean {
 
 /** Handles one guest reply. `body` is the parsed JSON object. */
 export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown): Promise<RsvpResult> {
-  const limiter = ctx.limiter ?? getRsvpRateLimiter();
+  const limiter = ctx.limiter ?? getRsvpRateLimiter(ctx.adapter);
   const limits = ctx.limits ?? DEFAULT_RSVP_LIMITS;
   const now = ctx.now ?? new Date();
 

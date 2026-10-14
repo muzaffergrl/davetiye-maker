@@ -6,8 +6,7 @@
 // limits are counted there; the local adapter (one process) keeps the in-memory limiter.
 
 import { getDataAdapter } from '../data/index.ts';
-import type { DataAdapter } from '../data/types.ts';
-import { MemoryRateLimiter, type RateLimitRule, type RateLimiter, type RateLimitResult } from '../rsvp/rate-limit.ts';
+import { AdapterRateLimiter, MemoryRateLimiter, type RateLimitRule, type RateLimiter } from '../rsvp/rate-limit.ts';
 
 export interface ClaimLimits {
   /** Every POST /api/start from one address (wrong order numbers count too: slows down guessing). */
@@ -41,28 +40,7 @@ export const UPLOAD_LIMITS = {
   maxFilesPerSite: 450,
 };
 
-/** A RateLimiter on the data adapter's shared counter (every server instance counts the same window). */
-export class AdapterRateLimiter implements RateLimiter {
-  private readonly adapter: Pick<DataAdapter, 'hitCounter' | 'readCounter'>;
-  private readonly now: () => number;
-
-  constructor(adapter: Pick<DataAdapter, 'hitCounter' | 'readCounter'>, now: () => number = Date.now) {
-    this.adapter = adapter;
-    this.now = now;
-  }
-
-  async hit(key: string, rule: RateLimitRule): Promise<RateLimitResult> {
-    const { count, resetAt } = await this.adapter.hitCounter!(key, rule.windowMs);
-    return { allowed: count <= rule.limit, remaining: Math.max(0, rule.limit - count), retryAfterMs: Math.max(0, resetAt - this.now()) };
-  }
-
-  /** Reads the window without a hit (G076); an adapter without readCounter answers "allowed" (hit() still counts). */
-  async peek(key: string, rule: RateLimitRule): Promise<RateLimitResult> {
-    const live = this.adapter.readCounter ? await this.adapter.readCounter(key) : null;
-    const count = live?.count ?? 0;
-    return { allowed: count < rule.limit, remaining: Math.max(0, rule.limit - count), retryAfterMs: live ? Math.max(0, live.resetAt - this.now()) : 0 };
-  }
-}
+export { AdapterRateLimiter } from '../rsvp/rate-limit.ts';
 
 let shared: RateLimiter | null = null;
 
