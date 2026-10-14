@@ -118,6 +118,12 @@ kod aşamasının durumu §14'te.
 3. `next.config.ts`'e `experimental.inlineCss` ekle; render-blocking CSS'i kaldırır, Lighthouse LCP'sini düşürür.
 4. Çift siteleri için `noindex` ve "Made with [BRAND]" alt bilgisi (karar 4–5).
 
+**K26 ile ilişki (merge sırasında görüldü):** çalışma adı *BKE Studio* (kesin onay bekliyor). Bu yüzden config'te hâlâ
+`[BRAND]` yazıyor; onay gelince tek satırla değişir. K26'ya göre alan adı şimdilik alınmayacak. Bu durumda yayın kapısı
+indekslemeyi kapalı tutar, çünkü `siteUrl` marka alan adı olmalı (docs/14 §9.3: vercel.app'te birikmiş SEO taşınamaz).
+Kullanıcı vercel.app üzerinde indekslemeyi açmayı seçerse bu kural `placeholders.ts` içinde bilerek değiştirilmeli. Fiyat
+önerisi düz $29.40 (docs/15 §0); `compareAtPrice: null` zaten varsayılan.
+
 **Kullanıcı kararları** (docs/14 §13.4):
 1. Marka ve alan adı.
 2. Tasarım başına fiyat.
