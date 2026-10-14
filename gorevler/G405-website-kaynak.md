@@ -56,8 +56,8 @@ Playwright varsa; yoksa atlanır): story 8 masaüstü boyut (650–800 px) × 3 
 ekranda, sıra nav'ın üstünde, altında ≤ %12 duvar; rsvp 390×844 / 430×932 / 1280×800 demo + aralık → imza + bağ nav'ın üstünde;
 360×640 / 375×667 aralık → katlanırsa boş kâğıt ≤ 110 px. Eski temayla koşulunca "story 1280×650 demo: the three panels are on
 the first screen" ile düşüyor.
-**Kontroller (bu worktree):** `npm test` 521 test, 519 geçti, 0 hata, 2 atlandı (build çıktısı yokken marketing testleri);
-`npm run typecheck` temiz; `npm run build` + trace-check geçti (6 tema); `theme-check --theme mediterranean-lemon --stress --no-video`
+**Kontroller (bu worktree, origin/main birleştirmesinden sonra; öncesinde de aynı sonuçlar):** `npm test` **531/531** (build
+sonrası; build'den önce 2 marketing testi atlanıyor); `npm run typecheck` temiz; `npm run build` + trace-check geçti (6 tema); `theme-check --theme mediterranean-lemon --stress --no-video`
 (çıktı geçici klasörde) **115 geçti, 0 hata, 1 uyarı** (G075 teşekkür modu bu temada yok — önceki turdaki gibi); bilinen "content
 change" sorunu (G060'tan beri her temada `IdentityMismatchError`) bu koşuda yaşanmadı, akış geçti; `g051-browser` 44/44;
 `final-smoke` 45/45. Bütçe: `site.js` 35 807 B, `site.css` 46 051 B (≤ 35 / 45 KiB; yorumlar kısaltıldı, etkisiz `.hero.is-folded`
@@ -247,4 +247,4 @@ gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 - 2026-10-14 inceleme düzeltmeleri (22 bulgu: 19 düzeltildi, 1 değişiklik gerekmez, qa-kontrol yapılamadı, content change G064'te çözülmüş); theme-check --stress 116/0/0, g051 44/44, final-smoke 45/45; durum inceleme, qa-kontrol kapısı açık
 - 2026-10-14 qa-kontrol: KOŞULLU (3 önemli must_fix: iç sayfalarda nav çizgisi yazıyı kesiyor, açılış çiçeği telefonlarda doğmuyor, masaüstü story ilk ekranı yarı boş) → üçü düzeltildi (fold birimleri + lift, çiçek şeridi, masaüstü üç pano sırası, RSVP masaüstü tek sütun); m1 126/126, çiçek 129/130 (+ düzeltilmiş betikle 20/20, zorlama 25/25), theme-check --stress 116 geçti / 0 hata / 1 uyarı (G075 teşekkür modu bu temada yok); g051 44/44, final-smoke 45/45, npm test 520/520; durum inceleme, qa-kontrol yeniden kontrolü bekliyor
 - 2026-10-14 entegratör notu: docs/11 §3.6 teşekkür hâli bu temada yok (G081'de toplu).
-- 2026-10-14 final QA'nın 2 must-fix'i: story masaüstü sırası tek fold birimi + başlık yüksekliğe göre (650–1080 px'te 3/3 pano, 14–54 px duvar; önce 0–1/3, 247–308 px), RSVP imzası katlanmadan önce küçülür (390×844 aralık 267 → 0 px; kısa telefon 97/107 px); tarayıcı testi eklendi; npm test 519/521 (2 atlandı), theme-check --stress 115/0/1, g051 44/44, final-smoke 45/45; durum inceleme
+- 2026-10-14 final QA'nın 2 must-fix'i: story masaüstü sırası tek fold birimi + başlık yüksekliğe göre (650–1080 px'te 3/3 pano, 14–54 px duvar; önce 0–1/3, 247–308 px), RSVP imzası katlanmadan önce küçülür (390×844 aralık 267 → 0 px; kısa telefon 97/107 px); tarayıcı testi eklendi; npm test 531/531, theme-check --stress 115/0/1, g051 44/44, final-smoke 45/45; durum inceleme
