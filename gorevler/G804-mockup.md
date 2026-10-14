@@ -2,7 +2,7 @@
 id: G804
 baslik: Tasarım 04 Vintage Airmail Love Letter — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-C
 oncelik: 2
 bagimli: []
@@ -46,3 +46,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 alindi: gpt-gorsel-C
 - 2026-10-14 ara kayıt: gpt-gorsel-C; 3/5 sahne hazır (cover_hand, three_phones, laptop_phone); her biri _v2 ile temizlendi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-C; 5 sahne, kit_check 5/5; saf #00FF00 piksel sapması Sonuç'ta açıkça belirtildi.
+- 2026-10-14 entegratör onayladı
