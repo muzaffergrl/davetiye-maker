@@ -2,8 +2,8 @@
 id: G077
 baslik: Canlıya güncel main — panel v2, satış sitesi, yeni temalar; canlı kontrol + kullanıcı için test linkleri
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 1
 bagimli: []
 yazar: [docs/10_SITE_PLATFORMU.md, platform/README.md]
@@ -37,3 +37,4 @@ kurgusal veri. Panel v2 ve satış sitesinin inceleme düzeltmeleri sürüyor; o
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği
+- 2026-10-14 alindi: claude-local-1
