@@ -2,7 +2,7 @@
 id: G815
 baslik: Tasarım 15 Cherry Blossom Spring — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -47,3 +47,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 ara kayıt: gpt-gorsel-A; 3.5 yaşam sahnesi kaydedildi; python3 tools/kit_check.py collections/15_Cherry_Blossom --paket 3 → 5/5 geçti. Piksel kontrolünde ImageGen ekran yeşilinde küçük RGB sapmaları görüldü; saf #00FF00 şartı henüz sağlanmadı.
 - 2026-10-14 kullanıcı tercihi: ImageGen ham çıktıları olduğu gibi bırakıldı; teknik #00FF00 renk dolgusu yapılmadı.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A; PAKET 3 beş sahne, kit_check 5/5 geçti.
+- 2026-10-14 entegratör onayladı
