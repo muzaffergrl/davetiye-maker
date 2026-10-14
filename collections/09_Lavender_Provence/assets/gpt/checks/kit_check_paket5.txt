@@ -1,0 +1,25 @@
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/comps/web_1_envelope.png  — 1024×1536
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/comps/web_2_home.png  — 1024×1536 · pencere %4.7
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/comps/web_3_story.png  — 1024×1536 · pencere %4.4
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/comps/web_4_details.png  — 1024×1536 · pencere %7.6
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/comps/web_5_rsvp.png  — 1024×1536
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/bg_page.png  — 1024×1536
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/bg_tile.png  — 1254×1254
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/envelope_closed.png  — 1024×1536 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/closure.png  — 1024×1536 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/envelope_open.png  — 1024×1536 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/card_small.png  — 1024×1536 şeffaf · pencere %12.0
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/invitation_card.png  — 1024×1536 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/info_card.png  — 1024×1536 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/frame_portrait.png  — 1024×1536 şeffaf · pencere %22.7
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/frame_landscape.png  — 1536×1024 şeffaf · pencere %6.6
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/florals_tl.png  — 1254×1254 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/florals_br.png  — 1254×1254 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/accent_1.png  — 1254×1254 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/accent_2.png  — 1254×1254 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/accent_3.png  — 1254×1254 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/divider.png  — 1536×1024 şeffaf
+GEÇTİ  collections/09_Lavender_Provence/assets/gpt/parts/web_hero.png  — 1536×1024
+UYARI  hiza  envelope_closed ↔ envelope_open (+ sarılı closure) — kese · tuval · sol +0.00% · sağ -0.10% · alt -2.15% · kapanış sol uç -1.37% · kapanış sağ uç -1.22% (±%1,5 aşıldı: tema build'i ölçülen ölçek + ötelemeyle düzeltir, manifest.stage.align)
+
+23/23 geçti
