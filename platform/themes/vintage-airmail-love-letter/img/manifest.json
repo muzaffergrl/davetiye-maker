@@ -2713,6 +2713,7 @@
  },
  "theme_check": {
   "particles": ".accent-layer",
+  "clusters": ".corner",
   "first_screen": {
    "landscape": true,
    "names_min_px": 36

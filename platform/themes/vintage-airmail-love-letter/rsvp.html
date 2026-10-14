@@ -29,20 +29,35 @@
 <body class="page-long page-rsvp" data-if="!rsvp.method" data-pending="This link will be added soon.">
 
 <main class="site-main">
-  <section class="rsvp-top" data-scene="rsvp-card" aria-label="RSVP">
+  <!-- first-screen backdrop (qa: inner pages are not flat): the map-lined parchment, a postmark and, on landscape screens,
+       the lower-right dried-flower cluster ending above the nav — GPT bg_page / mist, accent_3, decor_br, as on home -->
+  <div class="scene-bg page-bg" aria-hidden="true">
+    <picture>
+      <source media="(min-aspect-ratio: 3/4)" srcset="img/mist-640.webp">
+      <img class="scene-img" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="212vw" alt="">
+    </picture>
+    <img class="corner corner-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-760.webp 760w" sizes="min(32vw, 48vh, 500px)" alt="" loading="lazy">
+    <img class="float f-mark" src="img/accent_3-240.webp" alt="">
+  </div>
+  <section class="rsvp-top" data-scene="rsvp-card" aria-label="RSVP" data-lift>
     <img class="corner corner-tl page-corner" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-760.webp 760w" sizes="min(52vw, 340px)" alt="">
     <div class="wrap">
       <div class="paper info rsvp-card" data-band data-step="card" data-a="rise-lg">
         <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-901.webp 901w" sizes="min(calc(100vw - 32px), 440px)" alt="">
-        <div class="paper-text rsvp-text">
-          <h1 class="script card-title" data-step="title" data-a="write">Will You Join Us?</h1>
-          <p class="kicker" data-step="kicker" data-a="type" data-if="rsvp.deadline">Kindly reply by</p>
-          <p class="deadline" data-step="deadline" data-a="type" data-if="rsvp.deadline" data-field="rsvp.deadline"></p>
-          <p class="pill" data-step="button" data-a="stamp"><a class="btn" href="#reply">RSVP</a></p>
+        <div class="paper-text rsvp-text" data-pack>
+          <h1 class="script card-title" data-step="title" data-a="write" data-fold>Will You Join Us?</h1>
+          <div class="by" data-if="rsvp.deadline" data-fold>
+            <p class="kicker" data-step="kicker" data-a="type">Kindly reply by</p>
+            <p class="deadline" data-step="deadline" data-a="type" data-field="rsvp.deadline"></p>
+          </div>
+          <p class="pill" data-step="button" data-a="stamp" data-fold><a class="btn" href="#reply">RSVP</a></p>
           <img class="twine" data-step="twine" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="">
-          <p class="kicker wait" data-step="wait" data-a="type">We can't wait to celebrate with you</p>
-          <p class="script love" data-step="love" data-a="write">With love,</p>
-          <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+          <p class="kicker wait" data-step="wait" data-a="type" data-fold>We can't wait to celebrate with you</p>
+          <!-- the signature unit with the seal below it (site.js folds: shrinks before it folds) -->
+          <div class="sig" data-fold>
+            <p class="script love" data-step="love" data-a="write">With love,</p>
+            <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+          </div>
         </div>
       </div>
       <!-- the wax seal resting on the sheet's bottom edge (decor beside the sheet, not card text) -->
@@ -56,7 +71,7 @@
   <!-- REPLY FORM — platform contract (G042). Field names, data-rsvp-* hooks and method="post" are required; no action. -->
   <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply">
     <div class="wrap">
-      <div class="reply-box" data-rsvp data-step="form" data-a="rise">
+      <div class="reply-box" data-rsvp data-step="form" data-a="rise" data-fold>
         <img class="twine" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
         <h2 class="script">Your reply</h2>
         <form class="reply-form" data-rsvp-form method="post">

@@ -27,17 +27,19 @@
 <body class="page-long page-desk" data-optional="our_story" data-pending="This link will be added soon.">
 
 <main class="site-main">
-  <header class="page-head desk-head" data-scene="story-head">
+  <header class="page-head desk-head" data-scene="story-head" data-lift>
     <img class="corner corner-tl page-corner" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-760.webp 760w" sizes="min(52vw, 340px)" alt="">
-    <h1 class="script page-title" data-step="title" data-a="write">Our Story</h1>
-    <p class="kicker" data-step="kicker" data-a="type">Moments we hold dear</p>
-    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+    <h1 class="script page-title" data-step="title" data-a="write" data-fold>Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="type" data-fold>Moments we hold dear</p>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro" data-fold><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
 
   <!-- the desk: each frame is its own scene — it drops onto the desk when it scrolls into view, then its caption is
-       written; the postmark is struck over the first frame after it lands -->
-  <section class="desk" aria-label="Our photos">
-    <figure class="stamp st-1" data-scene="story-stamp">
+       written; the postmark is struck over the first frame after it lands. First screen (site.js folds): phones — a frame
+       ends above the nav or starts below the first screen; from 720 px one row of three, sized to end above the nav or
+       folded whole (never a lone frame) -->
+  <section class="desk" aria-label="Our photos" data-fold="row">
+    <figure class="stamp st-1" data-scene="story-stamp" data-fold="12">
       <div class="frame" data-step="drop" data-a="drop">
         <div class="photo-slot mask-portrait" data-slot="story_1">
           <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) 230px, min(57vw, 300px)" alt="" data-attr-alt="{story.items.0.caption}">
@@ -48,7 +50,7 @@
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
     </figure>
-    <figure class="stamp st-2" data-scene="story-stamp">
+    <figure class="stamp st-2" data-scene="story-stamp" data-fold="12">
       <img class="desk-acc acc-stamp" data-step="acc" data-a="drop" src="img/accent_1-200.webp" srcset="img/accent_1-200.webp 200w, img/accent_1-400.webp 400w" sizes="min(17vw, 84px)" alt="" loading="lazy">
       <div class="frame" data-step="drop" data-a="drop">
         <div class="photo-slot mask-portrait" data-slot="story_2">
@@ -59,7 +61,7 @@
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
     </figure>
-    <figure class="stamp st-3" data-scene="story-stamp">
+    <figure class="stamp st-3" data-scene="story-stamp" data-fold="12">
       <img class="desk-acc acc-flower" data-step="acc" data-a="drop" src="img/accent_2-200.webp" srcset="img/accent_2-200.webp 200w, img/accent_2-386.webp 386w" sizes="min(16vw, 76px)" alt="" loading="lazy">
       <div class="frame" data-step="drop" data-a="drop">
         <div class="photo-slot mask-portrait" data-slot="story_3">
@@ -72,7 +74,7 @@
     </figure>
   </section>
 
-  <section class="section next-sec" data-scene="story-next">
+  <section class="section next-sec" data-scene="story-next" data-fold>
     <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-760.webp 760w" sizes="min(58vw, 340px)" alt="" loading="lazy">
     <img class="twine" data-step="twine" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
     <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
