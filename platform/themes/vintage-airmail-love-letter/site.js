@@ -1,7 +1,7 @@
 /* site.js — Vintage Airmail Love Letter (04, G404): motion, envelope (tear strip), first-screen fits, sheets, countdown.
  * #site-data from the platform; DEV_CONTENT + devRender() only without it. Hooks and reasons: README.md. */
 const MOTION = {
-  // [start ms after the tap, duration ms]; scenes: [[step, delay ms]]; accents: docs/11 §8 (+ from / to: README)
+  // ms [start after the tap, duration]; scenes [[step, delay]]; accents docs/11 §8 + from/to (README)
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },
 
   envelope: {
@@ -74,7 +74,7 @@ const DEV_CONTENT = {
 (function () {
 'use strict';
 const root = document.documentElement;
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const crossDocVT = 'onpageswap' in window && typeof document.startViewTransition === 'function';
 const BASE = (document.currentScript && document.currentScript.src) || document.baseURI;
 const asset = (p) => new URL(p, BASE).href;
@@ -92,8 +92,8 @@ const OPENED = MOTION.storage.opened + KEY;
 const ARRIVE = MOTION.storage.arrive + KEY;
 
 const store = {
-  get(k) { try { return window.sessionStorage.getItem(k); } catch (e) { return null; } },
-  set(k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) {} }
+  get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
 };
 const rand = (a, b) => a + Math.random() * (b - a);
 const top = (el) => { let y = 0; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
@@ -287,12 +287,12 @@ function fitPaper() {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
   if (window.ResizeObserver) {
     let w = 0;
-    const ro = new ResizeObserver(() => { if (window.innerWidth !== w) { w = window.innerWidth; run(); } });
+    const ro = new ResizeObserver(() => { if (innerWidth !== w) { w = innerWidth; run(); } });
     ro.observe(document.documentElement);
   }
 }
 
-// long names, the hero's first screen (fold + corner cluster), card copy (README "Home ilk ekranı")
+// long names, the hero's first screen (fold, corner), card copy (README)
 function fitNames() {
   const targets = [['.env-head .names', 5, 0.3, 20], ['.hero .names', 3.2, 0.3, 36]]
     .map(([sel, ...a]) => [document.querySelector(sel), ...a]).filter(([el]) => el);
@@ -307,9 +307,10 @@ function fitNames() {
   const fit = (h1, maxLines, maxShare, minPx, navFloor) => {
     h1.style.setProperty('--names-scale', '1');
     const min = Math.min(1, Math.max(0.4, minPx / parseFloat(getComputedStyle(h1).fontSize)));
-    const cw = h1.clientWidth;
+    const cs = getComputedStyle(h1), g = document.createRange(), cw = h1.clientWidth - parseFloat(cs.paddingLeft) * 2;
     h1.style.whiteSpace = 'nowrap';
-    const one = cw / h1.scrollWidth - 0.01;
+    g.selectNodeContents(h1);
+    const one = cw / g.getBoundingClientRect().width - 0.01;
     h1.style.whiteSpace = '';
     for (let s = one < 0.99 && one > Math.max(0.86, min) ? one : 1; ; s = Math.max(min, s - 0.06)) {
       h1.style.setProperty('--names-scale', s.toFixed(3));
@@ -381,11 +382,11 @@ function fitNames() {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
   if (window.ResizeObserver) { const ro = new ResizeObserver(fitCopy); document.querySelectorAll('.card-copy').forEach((c) => ro.observe(c)); }
   let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(run, 150); });
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(run, 150); });
 }
 
-// inner pages' first screen (qa): each [data-fold] unit ends above the nav or starts below the first screen —
-// pack, lift the head (≤ 35 %), shrink the RSVP signature (--sg ≥ .72), else fold; story: --fw for the first row
+// inner pages (qa): each [data-fold] unit ends above the nav or starts below the first screen — pack, lift the
+// head (≤ 35 %), shrink the signature (--sg ≥ .72), else fold; story: --fw for the first row
 function folds() {
   const nav = document.querySelector('.site-nav'), units = [...document.querySelectorAll('main [data-fold]')];
   if (!nav || !units.length) return;
@@ -431,7 +432,7 @@ function folds() {
   run();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
   let t;
-  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 160); });
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 160); });
 }
 
 // envelope page: "Tap to open" stays on screen (--ok ≥ .62, then the names ≥ 20 px)
@@ -449,7 +450,7 @@ function envFit() {
   run();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
   let t;
-  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 220); });
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 220); });
 }
 
 // envelope: seal pops off → strip tears left → right → card slides up → forward → home (README)
@@ -567,7 +568,7 @@ function initEnvelope() {
   const enter = q('[data-enter]');
   if (enter) enter.addEventListener('click', (e) => { e.preventDefault(); go(true); });
 
-  window.addEventListener('pageshow', (e) => {
+  addEventListener('pageshow', (e) => {
     if (e.persisted && state !== 'closed') {
       clearOpening();
       root.classList.add('is-opened');

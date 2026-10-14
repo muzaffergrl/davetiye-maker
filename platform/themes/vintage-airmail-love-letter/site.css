@@ -164,6 +164,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 @media (max-aspect-ratio: 3/4) {
   .scene-bg picture { overflow: hidden; }
   .scene-bg .scene-img { inset: auto; left: -131.71vw; top: 0; width: 249.76vw; height: auto; aspect-ratio: 2 / 3; }
+  .env-head .names { padding-inline: 5vw; } /* off the corner's twine */
 }
 .float { position: absolute; display: block; height: auto; filter: drop-shadow(0 4px 4px rgba(60, 40, 20, .14)); }
 .f-mark { right: 5%; top: 7%; width: clamp(64px, 22vw, 130px); opacity: .7; mix-blend-mode: multiply; rotate: 12deg; filter: none; }
