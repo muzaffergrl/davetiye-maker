@@ -1,9 +1,7 @@
 // Rate limiting for RSVP submissions, behind an interface.
 //
-// MemoryRateLimiter (fixed window, one process) is what the local adapter uses. A deployment
-// with several server instances (Vercel functions) needs a shared store; the Supabase task (G043)
-// can implement RateLimiter on a table or RPC (e.g. upsert key + window start, increment, compare)
-// and register it with setRsvpRateLimiter(). Callers only use hit().
+// MemoryRateLimiter is the local fallback. RSVP uses the data adapter's shared counters when
+// available, so separate Vercel instances and cold starts enforce the same windows.
 
 export interface RateLimitRule {
   /** Allowed hits per window. */
@@ -75,17 +73,59 @@ export class MemoryRateLimiter implements RateLimiter {
   }
 }
 
-let shared: RateLimiter | null = null;
-
-/** The limiter the API routes use (one MemoryRateLimiter per server process unless replaced). */
-export function getRsvpRateLimiter(): RateLimiter {
-  shared ??= new MemoryRateLimiter();
-  return shared;
+/** Shared counters supplied by a data adapter (Blob in production). No storage dependency in this module. */
+export interface CounterStore {
+  hitCounter?: (key: string, windowMs: number) => Promise<{ count: number; resetAt: number }>;
+  readCounter?: (key: string) => Promise<{ count: number; resetAt: number } | null>;
 }
 
-/** Replaces the shared limiter (persistent store in production, a fresh one in tests). */
+/** A RateLimiter on the data adapter's shared counter (every server instance counts the same window). */
+export class AdapterRateLimiter implements RateLimiter {
+  private readonly adapter: CounterStore;
+  private readonly now: () => number;
+
+  constructor(adapter: CounterStore, now: () => number = Date.now) {
+    this.adapter = adapter;
+    this.now = now;
+  }
+
+  async hit(key: string, rule: RateLimitRule): Promise<RateLimitResult> {
+    const { count, resetAt } = await this.adapter.hitCounter!(key, rule.windowMs);
+    return { allowed: count <= rule.limit, remaining: Math.max(0, rule.limit - count), retryAfterMs: Math.max(0, resetAt - this.now()) };
+  }
+
+  /** Reads the window without a hit (G076); an adapter without readCounter answers "allowed" (hit() still counts). */
+  async peek(key: string, rule: RateLimitRule): Promise<RateLimitResult> {
+    const live = this.adapter.readCounter ? await this.adapter.readCounter(key) : null;
+    const count = live?.count ?? 0;
+    return { allowed: count < rule.limit, remaining: Math.max(0, rule.limit - count), retryAfterMs: live ? Math.max(0, live.resetAt - this.now()) : 0 };
+  }
+}
+
+let override: RateLimiter | null = null;
+let memory: RateLimiter | null = null;
+let adapters = new WeakMap<CounterStore, RateLimiter>();
+
+/** Use shared storage for this adapter; explicit test overrides take precedence. */
+export function getRsvpRateLimiter(adapter?: CounterStore): RateLimiter {
+  if (override) return override;
+  if (adapter?.hitCounter) {
+    let limiter = adapters.get(adapter);
+    if (!limiter) {
+      limiter = new AdapterRateLimiter(adapter);
+      adapters.set(adapter, limiter);
+    }
+    return limiter;
+  }
+  memory ??= new MemoryRateLimiter();
+  return memory;
+}
+
+/** Replace the limiter explicitly; null resets both local and adapter caches. */
 export function setRsvpRateLimiter(limiter: RateLimiter | null): void {
-  shared = limiter;
+  override = limiter;
+  memory = null;
+  adapters = new WeakMap();
 }
 
 /**

@@ -1170,7 +1170,7 @@ CSP site ile aynı (`frame-ancestors 'self'`).
 **Hız sınırları** (`limits.ts`, `RateLimiter` arayüzü RSVP ile ortak): IP başına 10 deneme / 15 dk
 (yanlış numaralar da sayılır → tahmin yavaşlar), IP başına 5 site / 24 sa, toplam 300 site / sa (Etsy doğrulaması kapalıyken
 kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob adaptöründe sayaç paylaşılır (`hitCounter`,
-`AdapterRateLimiter`: her Vercel örneği aynı pencereyi sayar); `local`'de süreç içi bellek. RSVP limiter'ı hâlâ süreç içi.
+`AdapterRateLimiter`: her Vercel örneği aynı pencereyi sayar); `local`'de süreç içi bellek. G085: RSVP de `getRsvpRateLimiter(adapter)` ile aynı ortak sayaç sözleşmesini kullanır; ayrı Vercel örnekleri ve soğuk başlangıçlar sınırı sıfırlamaz. Yerel adaptör bellekte kalır; test override'ları korunur.
 
 ### Arayüz noktaları (kapalı / yok)
 - **Etsy sipariş doğrulaması** (`verify.ts`): `OrderVerifier.check({orderNumber, email, theme})` →
