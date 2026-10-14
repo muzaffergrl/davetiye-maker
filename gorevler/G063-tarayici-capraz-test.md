@@ -2,8 +2,8 @@
 id: G063
 baslik: Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 1
 bagimli: [G049]
 yazar: [docs/17_CAPRAZ_TARAYICI_TESTI.md]
@@ -23,3 +23,6 @@ yazar: [docs/17_CAPRAZ_TARAYICI_TESTI.md]
 
 ## Sonuç
 _(görevi yapan ajan doldurur)_
+
+## Günlük
+- 2026-10-14 alindi: claude-local-1
