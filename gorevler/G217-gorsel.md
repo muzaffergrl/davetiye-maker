@@ -57,3 +57,4 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-I (kısım 2)
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card kaydedildi. Kullanıcının tuval talebi nedeniyle closure 1024×1536; mühür merkezi (512, 1013), çap 168 px. Kapalı/açık zarf hiza kontrolü GEÇTİ (sol -%0,10; sağ +%0,20; alt +%0,13). Dört parça, closure ölçüsü kullanıcı talebine göre denetlenerek GEÇTİ.
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 2, 8/8: info_card, frame_portrait, frame_landscape, decor_tl eklendi; sekiz parça ve zarf hizası denetlendi. Durum alindi.
+- 2026-10-14 kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero + PAKET 2
