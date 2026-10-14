@@ -49,3 +49,4 @@ Görev `alindi`, sahibi `gpt-gorsel-F` kalır. Kalan: W2.4–W2.18 (15 parça) +
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 gpt-gorsel-F: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
+- 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (dalga kapaklı kum zarf ~1,55:1). Kısım 2 verildi.

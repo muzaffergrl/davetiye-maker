@@ -51,3 +51,4 @@ Kısım 1 — gpt-gorsel-G (2026-10-14), seçilen 8 görsel:
 - 2026-10-14 gpt-gorsel-G: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi. envelope_closed 1,39:1 kabul; closure ve envelope_open bu dosyaya hizalanacak. Kısım 2 verildi.
 - 2026-10-14 devam: gpt-gorsel-G (kısım 2)
+- 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-M) 5/5 kit_check geçti, görsel olarak iyi.
