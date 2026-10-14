@@ -1,0 +1,25 @@
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png  — 1024×1536
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png  — 1024×1536 · pencere %5.2
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png  — 1024×1536 · pencere %4.1
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png  — 1024×1536 · pencere %5.4
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp.png  — 1024×1536
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_page.png  — 1024×1536
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png  — 1254×1254
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png  — 1024×1536 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/closure.png  — 1254×1254 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_open.png  — 1024×1536 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/card_small.png  — 1024×1536 şeffaf · pencere %18.5
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/invitation_card.png  — 1024×1536 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/info_card.png  — 1024×1536 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait.png  — 1024×1536 şeffaf · pencere %24.0
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_landscape.png  — 1536×1024 şeffaf · pencere %27.5
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_tl.png  — 1254×1254 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_br.png  — 1254×1254 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_1.png  — 1254×1254 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_2.png  — 1254×1254 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_3.png  — 1254×1254 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/divider.png  — 1536×1024 şeffaf
+GEÇTİ  collections/05_Lemon_Mediterranean/assets/gpt/parts/web_hero.png  — 1536×1024
+GEÇTİ  hiza  envelope_closed ↔ envelope_open — kapak · tuval · sol -0.20% · sağ +0.49% · alt +0.85%
+
+23/23 geçti

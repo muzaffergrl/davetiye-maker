@@ -2,7 +2,7 @@
 id: G049
 baslik: Canlıya inceleme düzeltmelerini yayınla + canlı kontrol betiklerini repoya al
 rol: claude-tarayici
-durum: inceleme
+durum: bitti
 alan: claude-local-1
 oncelik: 1
 bagimli: [G044]
@@ -58,3 +58,4 @@ düzeltmeleri, 197/197 test) yayınlanmadı. Local oturum yayınlar ve canlıda 
 ## Günlük
 - 2026-10-14 alindi: claude-local-1
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı

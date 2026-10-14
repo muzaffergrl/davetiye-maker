@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 36 · alindi 5 · inceleme 2 · blokaj 293 · bitti 36 · toplam 372
+Özet: hazir 32 · alindi 10 · inceleme 1 · blokaj 293 · bitti 39 · toplam 375
 
 ## claude-canva
 
@@ -108,7 +108,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 **Üzerinde çalışılan / incelemede / blokaj (43)**
 
-- `G049` inceleme · claude-local-1 — Canlıya inceleme düzeltmelerini yayınla + canlı kontrol betiklerini repoya al
+- `G063` alindi · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -152,7 +152,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 0 · Biten: 1
+Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-kod
 
@@ -160,7 +160,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (84)**
+**Üzerinde çalışılan / incelemede / blokaj (85)**
 
 - `G060` alindi · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
 - `G061` alindi · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
@@ -184,6 +184,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G404` alindi · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
+- `G405` alindi · wf-tema05 — Tasarım 05 Mediterranean Lemon — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -255,11 +256,10 @@ Bağımlılık bekleyen: 17 · Biten: 25
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (23)**
+**Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
 - `G059` inceleme · wf-ilan — Platform modeline göre set paketi (docs/05) + tasarım 01 ve 03 için Etsy ilan kiti ve alıcı START HERE PDF'i
-- `G062` alindi · wf-strateji — Karar belgesi — marka/dükkân adı adayları (alan adı müsaitliği), Etsy merkezli fiyatlandırma, satış sonrası ve müşteri bağlama
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
@@ -281,7 +281,7 @@ Bağımlılık bekleyen: 17 · Biten: 25
 - `G720` blokaj · - — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
 - `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
-Bağımlılık bekleyen: 0 · Biten: 3
+Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-qa
 
@@ -316,13 +316,9 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (19)**
+**Alınabilir (15)**
 
-- `G202` p2 — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G202-gorsel.md`
-- `G206` p2 — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G206-gorsel.md`
-- `G207` p2 — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G207-gorsel.md`
-- `G208` p2 — Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G208-gorsel.md`
-- `G209` p2 — Tasarım 09 Lavender Provence — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G209-gorsel.md`
+- `GM01` p1 — BKE Studio marka kimliği — 3 yön panosu + seçilen yönün logo/sembol/mühür/desen/ikon/sahne dosyaları → `gorevler/GM01-marka-gorsel.md`
 - `G210` p2 — Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G210-gorsel.md`
 - `G211` p2 — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G211-gorsel.md`
 - `G212` p2 — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G212-gorsel.md`
@@ -338,13 +334,17 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G803` p2 — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri → `gorevler/G803-mockup.md`
 - `G804` p2 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (46)**
+**Üzerinde çalışılan / incelemede / blokaj (50)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
-- `G205` alindi · codex-gpt-gorsel — Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
+- `G202` alindi · gpt-gorsel-A — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
+- `G206` alindi · gpt-gorsel-B — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G207` alindi · gpt-gorsel-C — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G208` alindi · gpt-gorsel-D — Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G209` alindi · gpt-gorsel-E — Tasarım 09 Lavender Provence — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
 - `G805` blokaj · - — Tasarım 05 Mediterranean Lemon — Paket 3 mockup görselleri
 - `G806` blokaj · - — Tasarım 06 Art Deco Black-Tie — Paket 3 mockup görselleri
@@ -387,4 +387,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 5
+Bağımlılık bekleyen: 0 · Biten: 6
