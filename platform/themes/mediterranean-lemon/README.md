@@ -254,7 +254,11 @@ hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçala
   yok; tören cümlesi geçmiş zaman ("The ceremony began at …", `ceremony_after`). Çift gizlerse sayfa 404 ve hiçbir link yok
   (story'nin kapanış düğmesi Home'a döner).
 - **RSVP:** eski linkler için açık: kartta "Replies are closed" (`rsvp_closed_title`) + teşekkür başlığı + Home hapı + imza birimi
-  ("With love," + isimler + limon bağı); bekleme satırı ve form yok (platform da `403 closed`, `reason: thank_you`).
+  ("With love," + isimler + limon bağı); bekleme satırı ve form yok (platform da `403 closed`, `reason: thank_you`). Formsuz
+  sayfada kapanış ("Thank you" …) kartın hemen altına gelir: kapanışın satırları da `[data-fold]` (nav çizgisini kesen satır ilk
+  ekranın altından başlar; davet hâlinde form arada olduğu için etkisiz). Ölçüm (giriş hareketleri azaltılmış, yazı satır
+  kutuları + foto/düğme/bağ): teşekkür hâlinde home/story/details/rsvp × 12 boyut (320×568 … 1440×900, yatay dahil) × demo ve
+  tasarım aralığı kaydı — nav çizgisini kesen parça yalnız 667×375 details kart başlığı, davet hâlinde de aynı (önceden vardı).
 - **Nav:** Details etiketi "The Day" (`nav_day`), RSVP yok.
 - Stiller `thank-you.css`'te (yalnız teşekkür modunda yüklenir; `site.css` bütçesi değişmedi). `site.js` `devRender` çoklu
   koşulu okur; tasarım önizlemesi davet hâlini gösterir.
@@ -262,7 +266,17 @@ hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçala
 ## Düzenlenebilir metinler (G068 kuralı, G081)
 Görünür her sabit metin `data-copy` taşır (70 standart anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
 `platform/README.md` "Düzenlenebilir tasarım metinleri"). Manifest şablonlardan yazılır: `node scripts/copy-manifest.ts --theme
-mediterranean-lemon` (`--check` ile denetim). Ana sayfa kapanışındaki "With love" (`foot_kicker`) ile kartlardaki "With love,"
+mediterranean-lemon` (`--check` ile denetim). `max` değerleri 360/390'da ölçüldü (`theme-check --stress`: her anahtar `max`'ta,
+§12 zorlama kaydıyla, teşekkür hâli dahil): gezinme 6/6/7/5 (`nav_home`/`nav_story`/`nav_details`/`nav_rsvp`; 8 harfte satır 434 px,
+360 px'e sığmıyordu), teşekkür hâlinde `nav_day` 10; sayaç etiketleri 7 (`cd_*`, 360 px'te dört hücre). Order of the Day /
+Will You Join Us? / Replies are closed kart başlıkları ve ana sayfa panolarının başlıkları artık tek satıra zorlanmıyor
+(`white-space: nowrap` → `text-wrap: balance`): tasarımın kendi metni sütuna sığdığı için görünüm aynı, uzun başlık iki dengeli
+satıra iner (kart 3 dilimle uzar, `folds` yeniden ölçer). Teşekkür kartının başlığı çelengin altından başlar ve onun düz kâğıdında
+kalır (`max-width: 54cqw`, invitation_card `free_zone`). Zarfa dönüşte (home → `index?replay=1`) nav'ın eski görüntüsü çizilmez:
+`html:has(.page-envelope)::view-transition-group(site-nav) { display: none; }` (theme-check G068 denetimi; önce 0 ms'de bandın
+%89,9'u). Yalnız `::view-transition-old(site-nav)`'ı saydam yapmak (02'nin kuralı) burada yetmedi: grup yine bir şey çiziyordu
+(120 ms'de bandın %13,7'si; aynı kare iki kez çekilince fark %0, yani canlı animasyon değil — olası sebep nav'ın
+`backdrop-filter`'ı, doğrulanmadı); grup gizlenince %0. Ana sayfa kapanışındaki "With love" (`foot_kicker`) ile kartlardaki "With love,"
 (`love_line`) ayrı anahtar (iki ayrı söz). Bilerek sabit: iç sayfaların `description` meta cümleleri, bölge `aria-label`'ları,
 "Please turn on JavaScript…" (`data-copy-fixed`), platform mesajları (`[data-rsvp-message]`).
 
@@ -277,7 +291,9 @@ mediterranean-lemon` (`--check` ile denetim). Ana sayfa kapanışındaki "With l
 - Zarf sayfası isimleri (§12 zorlama kaydı, 40 harfli adlar) 01 gibi ölçeklenir (en çok 0,4×); home hero isimleri 36 px tabanında.
 - Boyut (docs/11 §6, KiB okuması; test `≤ 35 × 1024` / `≤ 45 × 1024`): `site.js` 35 807 B (34,97 KiB), `site.css` 46 051 B
   (44,97 KiB); final QA düzeltmesi (tek sıra birimi, imza küçültme) yorumlar kısaltılarak ve etkisiz `.hero.is-folded` kuralı
-  silinerek sığdı. Pay 33 B / 29 B: sonraki eklemeden önce sıkıştırma gerekir.
+  silinerek sığdı. Pay 33 B / 29 B: sonraki eklemeden önce sıkıştırma gerekir. G081: `site.js` 35 831 B (pay 9 B;
+  `devRender` çoklu `data-if` + `{copy.…}`, aynı işlev daha kısa yazıldı), `site.css` 46 070 B (pay 10 B; zarfa dönüş nav
+  kuralı eklendi, iki yorum kısaldı, kart/pano başlıklarında `nowrap` → `text-wrap: balance`). Teşekkür hâli `thank-you.css`'te.
 - İlk ekran ölçümü (final QA 2026-10-14; demo / tasarım aralığı / zorlama kaydı): story masaüstü 1024×768 … 1920×1080'de üç pano
   hep ilk ekranda, sıranın altında 14–54 px duvar (1920×1080: 86–114 px, pano 400 px tavanında). RSVP imza birimi + bağ 390×844,
   412×915, 430×932 ve 1024×768 … 1920×1080'de ilk ekranda (zorlama kaydında isimler 4–5 satır, 19,5–39 px); yalnız 360×640 ve

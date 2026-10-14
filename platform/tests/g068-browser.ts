@@ -110,6 +110,10 @@ async function smallTargets(page: any, scope: string): Promise<string[]> {
     return out;
   }, scope);
 }
+/** Waits until the entrances (finite transitions / animations: a print flying in from the side, G081 02) have played —
+ *  a layout is measured at rest; endless decor loops (floats, the hint) do not count. */
+const entrancesDone = (page: any) =>
+  page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== 'running' || a.effect?.getComputedTiming().iterations === Infinity), null, { timeout: 6000 }).catch(() => null);
 const pageProblems = (page: any) =>
   page.evaluate(() => {
     const out: string[] = [];
@@ -332,6 +336,7 @@ try {
         await page.goto(`${BASE}/${site.slug}${p}`, { waitUntil: 'networkidle' });
         await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
         await page.waitForTimeout(200);
+        await entrancesDone(page);
         for (const x of await pageProblems(page)) bad.push(`${p || '/'}: ${x}`);
       }
       check(`${theme} 390: five pages without horizontal scroll or broken image`, !bad.length, bad.join('; '));

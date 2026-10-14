@@ -121,6 +121,10 @@ async function smallTargets(page: any, scope: string): Promise<string[]> {
     return out;
   }, scope);
 }
+/** Waits until the entrances (finite transitions / animations: a print flying in from the side, G081 02) have played —
+ *  a layout is measured at rest; endless decor loops (floats, the hint) do not count. */
+const entrancesDone = (page: any) =>
+  page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== 'running' || a.effect?.getComputedTiming().iterations === Infinity), null, { timeout: 6000 }).catch(() => null);
 /** Layout problems of a guest page: horizontal scroll, images not loaded, a "Your photo here" label, card text outside its card. */
 const pageProblems = (page: any) =>
   page.evaluate(() => {
@@ -206,6 +210,7 @@ try {
           if (r.status() !== 200) bad.push(`${p || '/'} ${r.status()}`);
           await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
           await page.waitForTimeout(150);
+          await entrancesDone(page);
           for (const x of await pageProblems(page)) bad.push(`${p || '/'}: ${x}`);
         }
         check(`${theme} ${w} px: five thank-you pages without overflow, broken image or label`, !bad.length, bad.join('; '));

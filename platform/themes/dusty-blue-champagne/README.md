@@ -325,7 +325,13 @@ hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçala
 Görünür her sabit metin `data-copy` taşır (70 anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
 `platform/README.md` "Düzenlenebilir tasarım metinleri"). 69'u standart anahtar; bu tasarıma özgü tek anahtar `home_day_sub`
 (home'daki The Day bölümünün alt satırı "Order of the day & venue"; panelde Day & place, etiketi `theme.json`'da). Manifest
-şablonlardan yazılır: `node scripts/copy-manifest.ts --theme dusty-blue-champagne` (`--check` ile denetim). Davet cümlesinin
+şablonlardan yazılır: `node scripts/copy-manifest.ts --theme dusty-blue-champagne` (`--check` ile denetim). `max` değerleri
+360/390'da ölçüldü (`theme-check --stress`: her anahtar `max`'ta, §12 zorlama kaydıyla, teşekkür hâli dahil): gezinme 6/6/7/6
+(`nav_home`/`nav_story`/`nav_details`/`nav_rsvp`; 8 harfte dört etiket 360 px'te iki yandan ~21 px taşıyordu), teşekkür hâlinde
+`nav_day` 10 (üç etiket); RSVP kartının başlığı 20 (`rsvp_title`, `rsvp_closed_title`: tek satır, `fitLines` en çok 0,6'ya
+küçültür; 30 harfte kartın %117'si); zarftaki dokunmatik ipucu 12 (`envelope_hint_tap`: 40 harflik isimlerle zarf aşağı iner, 18
+harflik ipucu 390×844'te sağ alt kümenin yapraklarına değiyordu — koyu pay 0,13; 12 harfte 0,005), bilgisayar ipucu 18
+(`envelope_hint_click`: 1024×768, 1280×800, 1280×650, 1366×768'de zemin temiz). Davet cümlesinin
 satır kırılımı (`<br>`) tasarım metninde kalır; çift kendi cümlesini yazarsa tek satır olarak dengeli sarar. Bilerek sabit: iç
 sayfaların `description` meta cümleleri, bölge `aria-label`'ları, "Please turn on JavaScript…" (`data-copy-fixed`), platform
 mesajları (`[data-rsvp-message]`).
@@ -356,6 +362,8 @@ mesajları (`[data-rsvp-message]`).
   Final QA düzeltmelerinden sonra `site.js` 35 775 B (pay 65 B; fitCard + decor için yorumlar kısaldı, sayaç saat dilimi
   yardımcısı tek işlev, `fitLines`/`fitInvite` tek `shrink` döngüsü, devRender sıkıştı — davranış aynı, testler ve ölçümler
   yeniden koşuldu), `site.css` 46 001 B (pay 79 B; G068 birleştirmesinden sonra nav çıkış kuralı eklendi); ikisi de 1000 B okumasıyla bütçenin üstünde. Pay çok az.
+  G081: `site.js` 35 814 B (pay 26 B; `devRender` çoklu `data-if` + `{copy.…}` eklendi, mekân birleştirmesi sıkıştı);
+  `site.css` değişmedi (teşekkür hâli `thank-you.css`'te).
 - RSVP kartı 320×568'de ve yatay telefonda (667×375, 844×390) ilk ekrana hiçbir kayıtla sığmaz (240 px + `--sg` 0,72 ile bile);
   orada kart tam boyda katlanır, kartın içinde tek bir 53–70 px boşluk kalır (yukarıda "RSVP kartı + mühür ilk ekranda").
 - Aksanlı isimler: Pinyon Script ve Cormorant Garamond'un Google Fonts CSS yanıtında `latin-ext` bloğu var (docs/11 §12).
