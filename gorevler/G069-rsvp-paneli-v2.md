@@ -61,11 +61,13 @@ Kullanıcı (2026-10-14): "RSVP talepleri müşterilere görünmeli, düzenli, h
   Answers, adlar A–Z; yazdırırken panel çubukları gizli, A4 ve Letter'a sığar; telefonda kişi başına blok.
 - **Uyumluluk:** `party`, `source`, `editedAt` isteğe bağlı; eski yanıtlar aynen okunur (adsız kişiler "Guest 2"). `local` + `blob`
   adaptörlerine `updateRsvp` (blob: ETag'li). Hız sınırları ve honeypot değişmedi. Arayüz panel v2 tokenları/bileşenleriyle
-  (`components/panel/guests.tsx`); `brand/ui/panel/u2_guests_390.png` main'de yoktu → `UI_GPT_PROMPTS.md` U2.4 tarifi ve
-  `u2_home_390.png`'deki "3 new replies" kartı izlendi; G066 sınıf/token değiştirerek yeniden boyayabilir.
+  (`components/panel/guests.tsx`). Düzen, iş sırasında main'e gelen `brand/ui/panel/u2_guests_390.png`'yi izler (ikonlu sayı kutuları,
+  "Replies close in **N days**" şeridi, tek satır çubuklar, çipler, arama, avatar'lı kartlar, altta yapışkan "Add a reply" + "Download
+  list"; "Print list" Replies başlığının yanında) ve `u2_home_390.png`'deki "3 new replies" kartını; renkler hâlâ panel v2 tokenları —
+  marka renkleri G066'nın işi (yalnız token/sınıf).
 
-**Testler (2026-10-14, yerel, Chromium 390 × 844 mobil emülasyon)**
-- `npm test` 443/443, `npm run typecheck` temiz, `npm run build` + trace-check geçti.
+**Testler (2026-10-14, yerel, Chromium 390 × 844 mobil emülasyon; origin/main (G076 site şifresi dahil) birleştirildikten sonra)**
+- `npm test` 491/491, `npm run typecheck` temiz, `npm run build` + trace-check geçti.
 - Yeni `tests/g069-rsvp.test.ts` 13/13 (party doğrulaması, ekle/düzelt/sil, 404/401, arşiv 403, özet matematiği, yemek notları,
   son tarih günleri, CSV kişi satırları, eski kayıtlar, blob `updateRsvp`, 01/03 şablon sözleşmesi); `rsvp.test.ts` / `rsvp-api.test.ts`
   yeni CSV biçimine uyarlandı.
@@ -73,9 +75,9 @@ Kullanıcı (2026-10-14): "RSVP talepleri müşterilere görünmeli, düzenli, h
   Home "1 new reply" → özet, çubuklar, evet/hayır yüzdesi, yemek notları, parti kartı, New → cevap süzgeci, sıralama → Mark as seen →
   Add a reply → Edit reply → CSV (3 kişilik yanıt = 3 satır, BOM) → yazdırma görünümü + print medyası + A4/Letter PDF; 1280/320 px,
   arşiv, axe-core (ciddi/kritik 0), dokunma alanları ≥ 44 px, konsol hatası yok.
-- Mevcutlar geçti: `g060-browser` 147/147, `rsvp-browser` 25/25, `panel-browser` 75/75, `g051-browser` 44/44,
-  `final-smoke --theme olive-ivory` 45/45 ve `--theme blush-garden-rose` 45/45, `theme-check` blush-garden-rose 95/95 (2 uyarı: menü
-  geçişi, tema tarafı). `theme-check` olive-ivory 96/98: 2 FAIL "home@390 (draft preview, no photos): card text over painted decor" —
+- Mevcutlar geçti: `g060-browser` 147/147, `g076-browser` 49/49, `rsvp-browser` 25/25, `panel-browser` 75/75, `g051-browser` 44/44,
+  `final-smoke --theme olive-ivory` 45/45 ve `--theme blush-garden-rose` 45/45; `theme-check` (birleştirmeden önce; temalara o
+  zamandan beri dokunmadım) blush-garden-rose 95/95 (2 uyarı: menü geçişi, tema tarafı). `theme-check` olive-ivory 96/98: 2 FAIL "home@390 (draft preview, no photos): card text over painted decor" —
   **G069 öncesi kodda da aynı** (aynı koşuyu değişiklikten önceki commit'in kendi build'inde çalıştırdım: 96/98, aynı kontrol); home
   sayfası/önizleme şeridiyle ilgili, bu görevin dokunduğu dosyalarla değil. Ayrı iş olarak bakılmalı.
 - Önizlemeler `platform/previews/g069/`: 01/02 misafir formu (03 ve 01), 03 Home kartı, 04 Guests özet, 05 cevap dökümü, 06 yemek notları,

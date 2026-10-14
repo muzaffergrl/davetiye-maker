@@ -6,6 +6,7 @@
 //   POST /api/edit/<slug>/publish     publish the stored draft {baseUpdatedAt?}
 //   POST /api/edit/<slug>/unpublish   take the site offline
 //   POST /api/edit/<slug>/identity    change names / date after the first publish {identity, baseUpdatedAt?, intent} (G060)
+//   POST /api/edit/<slug>/access      guest password on/off or a new one {enabled, password?} (G076)
 //
 // Every request needs "Authorization: Bearer <edit key>". A wrong key, a preview key, another
 // site's key and an unknown slug all get the same 401, so the API never tells whether a slug exists.
@@ -51,6 +52,7 @@ import {
   withIdentity,
 } from './rights.ts';
 import { panelMeta, panelState, panelTheme } from './state.ts';
+import { GuestPasswordError, setGuestAccess } from '../site/access.ts';
 
 type Authorized = { site: SiteRecord; key: string };
 
@@ -262,6 +264,38 @@ export async function unpublish(req: Request, slug: string): Promise<Response> {
   } catch (e) {
     if (e instanceof NotFoundError) return unauthorized();
     return serverError(`unpublish ${slug}`, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Guest password (G076, K28)
+
+/**
+ * POST /api/edit/<slug>/access {enabled: boolean, password?: string}: switches the guest password on or off, or sets a
+ * new one (4–40 characters). Applies at once (no publish needed). A new password signs every guest out (`signedOut`).
+ * Not the content: the password lives in the private site record and is never published with the pages.
+ */
+export async function setAccess(req: Request, slug: string): Promise<Response> {
+  try {
+    const auth = await authorize(req, slug);
+    if (!auth) return unauthorized();
+    if (isArchived(auth.site)) return archived();
+    const body = await readJsonBody(req, 2048);
+    if ('error' in body) return body.error;
+    const { enabled, password } = body.value;
+    if (typeof enabled !== 'boolean' || !(password === undefined || password === null || typeof password === 'string')) {
+      return fail(400, 'invalid_shape', 'This change could not be read. Please reload the page.');
+    }
+    try {
+      const { site, signedOut } = await setGuestAccess(getDataAdapter(), auth.site.id, { enabled, password: password as string | null | undefined });
+      return json(200, { ok: true, ...panelMeta(site), signedOut });
+    } catch (e) {
+      if (e instanceof GuestPasswordError) return fail(422, 'invalid_password', e.message);
+      throw e;
+    }
+  } catch (e) {
+    if (e instanceof NotFoundError) return unauthorized();
+    return serverError(`access ${slug}`, e);
   }
 }
 

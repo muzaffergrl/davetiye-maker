@@ -1,0 +1,46 @@
+/* G067 — BKE Studio ilan sistemi v2 (GM03 comp'ları). Renkler brand/tokens.json; fontlar fonts.css (Google Fonts,
+   çalışma anında indirilir). Tuval 2000 × 2000, ölçüler px. */
+:root {
+  --anchor: #2B1526;
+  --accent: #D0AE6A;
+  --paper: #EDE5D7;
+  --paper-light: #FAF7F0;
+  --ink: #202020;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 2000px; height: 2000px; overflow: hidden; background: var(--paper-light); }
+.stage { position: relative; width: 2000px; height: 2000px; overflow: hidden; }
+.bg { position: absolute; left: 0; top: 0; width: 2000px; height: 2000px; display: block; }
+
+/* başlık: Archivo 900, comp'taki sıkı, ağır başlık */
+.h1 {
+  position: absolute; width: max-content; white-space: nowrap;
+  font-family: 'Archivo', sans-serif; font-weight: 900; font-stretch: 100%;
+  letter-spacing: -0.03em; line-height: 0.98; color: var(--anchor); text-align: center;
+}
+.center-x { left: 50%; transform: translateX(-50%); }
+
+/* ince alt satır: Montserrat 300 */
+.sub {
+  position: absolute; width: max-content; white-space: nowrap;
+  font-family: 'Montserrat', sans-serif; font-weight: 300; letter-spacing: 0.005em;
+  line-height: 1.1; color: var(--anchor);
+}
+
+/* hap etiket: DM Sans 500 */
+.pills { position: absolute; display: flex; gap: 26px; width: max-content; }
+.pill {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  height: 118px; padding: 0 54px; border-radius: 999px;
+  background: rgba(250, 247, 240, 0.94);
+  box-shadow: 0 14px 36px rgba(43, 21, 38, 0.13), 0 2px 6px rgba(43, 21, 38, 0.06);
+  font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 50px; letter-spacing: -0.005em; color: var(--anchor);
+}
+
+/* logo: SVG (brand/svg), açık zeminde anchor sürümü; kalabalık fotoğrafta kâğıt rengi çipin içinde */
+.logo { position: absolute; line-height: 0; }
+.logo svg { display: block; height: 72px; width: auto; }
+.logo.chip {
+  padding: 24px 34px; border-radius: 999px; background: rgba(250, 247, 240, 0.92);
+  box-shadow: 0 12px 30px rgba(43, 21, 38, 0.12);
+}

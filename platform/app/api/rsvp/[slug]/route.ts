@@ -1,6 +1,7 @@
 // /api/rsvp/<slug> — guest side (public).
 //   GET   form status {open, reason, message, closesAt, deadline, maxGuests, preview}; ?preview=<key> reads the draft
 //   POST  one reply, JSON body {name, email, attending, guests, message, answers?{<question id>: value} (G051), website(honeypot)}
+// A password-protected website (G076) answers both with 401 password_required unless the request has its guest cookie.
 // Used by /rsvp/form.js (the theme form contract, README "RSVP").
 import { getDataAdapter } from '../../../../lib/data/index.ts';
 import { BODY_MAX_BYTES } from '../../../../lib/rsvp/config.ts';
@@ -16,7 +17,7 @@ export async function GET(req: Request, ctx: Ctx): Promise<Response> {
   const { slug } = await ctx.params;
   try {
     const preview = new URL(req.url).searchParams.get('preview');
-    return jsonResponse(await getRsvpStatus({ adapter: getDataAdapter() }, slug, preview));
+    return jsonResponse(await getRsvpStatus({ adapter: getDataAdapter(), cookie: req.headers.get('cookie') }, slug, preview));
   } catch (e) {
     console.error(`[rsvp] status ${slug}:`, e);
     return jsonResponse(errorResult(500, 'server'));
@@ -35,7 +36,7 @@ export async function POST(req: Request, ctx: Ctx): Promise<Response> {
     return jsonResponse(errorResult(400, 'unsupported'));
   }
   try {
-    return jsonResponse(await submitRsvp({ adapter: getDataAdapter(), ip: clientIp(req) }, slug, body));
+    return jsonResponse(await submitRsvp({ adapter: getDataAdapter(), ip: clientIp(req), cookie: req.headers.get('cookie') }, slug, body));
   } catch (e) {
     console.error(`[rsvp] submit ${slug}:`, e);
     return jsonResponse(errorResult(500, 'server'));

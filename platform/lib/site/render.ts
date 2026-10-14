@@ -4,6 +4,8 @@
 // site or a stale draft — lib/sites.ts previewAccess); everything else is a plain 404.
 
 import { getDataAdapter } from '../data/index.ts';
+import { guestMayEnter, isProtected } from './access.ts';
+import { lockedResponse } from './gate.ts';
 import { publicOrigin } from '../panel/http.ts';
 import { isArchived } from '../panel/rights.ts';
 import { previewAccess } from '../sites.ts';
@@ -41,15 +43,19 @@ export function siteCsp(scriptHashes: readonly string[] = []): string {
  */
 export const COUPLE_SITE_ROBOTS = 'noindex';
 
-function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: readonly string[] }): Headers {
+function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: readonly string[]; guestOnly?: boolean }): Headers {
+  // guestOnly (G076): a password-protected site seen with the guest cookie — never stored by a shared cache (Vercel's
+  // CDN, a proxy): another visitor must never get it from there.
+  const closed = opts.preview || opts.status !== 200 || opts.guestOnly;
   const h = new Headers({
     'Content-Type': 'text/html; charset=utf-8',
     'Content-Security-Policy': siteCsp(opts.scriptHashes),
     'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': opts.preview ? 'no-referrer' : 'strict-origin-when-cross-origin',
-    'Cache-Control': opts.preview || opts.status !== 200 ? 'private, no-store' : 'public, max-age=0, must-revalidate',
+    'Cache-Control': closed ? 'private, no-store' : 'public, max-age=0, must-revalidate',
   });
-  h.set('X-Robots-Tag', opts.preview || opts.status !== 200 ? 'noindex, nofollow' : COUPLE_SITE_ROBOTS);
+  h.set('X-Robots-Tag', closed ? 'noindex, nofollow' : COUPLE_SITE_ROBOTS);
+  if (opts.guestOnly) h.set('Vary', 'Cookie');
   return h;
 }
 
@@ -143,6 +149,10 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
     if (!preview && isArchived(site)) return archivedPage();
+    // G076: a password-protected site shows the password page first (the panel's own preview never needs it). Every
+    // page name of the platform gets it, whether the theme has / shows that page or not (nothing about the site leaks).
+    const guestOnly = access !== 'panel' && isProtected(site);
+    if (guestOnly && !guestMayEnter(site, req.headers.get('cookie'))) return lockedResponse(req, site, content, page, slug);
 
     const theme = await loadTheme(site.theme);
     if (!theme) {
@@ -163,6 +173,8 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
       // og:image and the calendar link need the public address (PLATFORM_PUBLIC_URL, else the request's host).
       origin: publicOrigin(req.headers, url.origin),
       share: theme.share,
+      // link previews and the tab of a protected site: the names and "You're invited" only (G076)
+      guestOnlyMeta: guestOnly,
     });
     if (warnings.length && process.env.NODE_ENV !== 'production') {
       console.warn(`[theme ${theme.manifest.id}/${page}] ${warnings.join(' | ')}`);
@@ -170,7 +182,7 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     if (disabled) return notFound(); // e.g. story page while optional_blocks.our_story is off
     // A shared preview link (not the panel) always says it is a preview, so it cannot pass for the real website.
     const body = access === 'shared' ? withPreviewBar(html, site.status === 'published') : html;
-    return new Response(body, { status: 200, headers: htmlHeaders({ preview, status: 200, scriptHashes }) });
+    return new Response(body, { status: 200, headers: htmlHeaders({ preview, status: 200, scriptHashes, guestOnly }) });
   } catch (e) {
     console.error(`[site] ${slug}/${page}:`, e);
     return serverError();

@@ -22,6 +22,11 @@ export interface RateLimitResult {
 export interface RateLimiter {
   /** Counts one hit for `key` under `rule` and says whether it is within the limit. */
   hit(key: string, rule: RateLimitRule): Promise<RateLimitResult>;
+  /**
+   * The same answer for the hits already counted, without counting one (G076: a guest password form refuses even the
+   * right password while its wrong-attempt window is full). `allowed` = another hit would still be within the limit.
+   */
+  peek?(key: string, rule: RateLimitRule): Promise<RateLimitResult>;
 }
 
 interface Bucket {
@@ -51,6 +56,13 @@ export class MemoryRateLimiter implements RateLimiter {
     bucket.count += 1;
     const allowed = bucket.count <= rule.limit;
     return { allowed, remaining: Math.max(0, rule.limit - bucket.count), retryAfterMs: Math.max(0, bucket.resetAt - now) };
+  }
+
+  async peek(key: string, rule: RateLimitRule): Promise<RateLimitResult> {
+    const now = this.now();
+    const bucket = this.buckets.get(key);
+    const count = bucket && bucket.resetAt > now ? bucket.count : 0;
+    return { allowed: count < rule.limit, remaining: Math.max(0, rule.limit - count), retryAfterMs: bucket && bucket.resetAt > now ? bucket.resetAt - now : 0 };
   }
 
   /** Number of live buckets (tests). */

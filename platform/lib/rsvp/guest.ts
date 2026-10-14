@@ -4,6 +4,7 @@
 // Order of checks for a reply (limits: config.ts):
 //   1. per-IP ceiling, all sites (every POST counts)       -> 429 rate_limited
 //   2. site exists and is published                        -> 404 not_found
+//   2b. password-protected site without its guest cookie   -> 401 password_required (G076)
 //   3. per-IP limit for this site (every POST counts)      -> 429 rate_limited
 //   4. form open (deadline / rsvp.method "none")           -> 403 closed
 //   5. honeypot filled                                     -> 200 success, nothing stored
@@ -16,6 +17,7 @@
 
 import type { DataAdapter, RsvpInput, RsvpRecord } from '../data/types.ts';
 import { isArchived } from '../panel/rights.ts';
+import { guestMayEnter, isProtected } from '../site/access.ts';
 import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
@@ -24,7 +26,7 @@ import { getRsvpRateLimiter, ipBucket, type RateLimiter } from './rate-limit.ts'
 import { formQuestions, parseSubmission, isHoneypotFilled } from './validate.ts';
 
 export type RsvpState = 'success' | 'closed' | 'error';
-export type RsvpErrorCode = 'not_found' | 'invalid' | 'rate_limited' | 'busy' | 'too_large' | 'unsupported' | 'server';
+export type RsvpErrorCode = 'not_found' | 'invalid' | 'rate_limited' | 'busy' | 'too_large' | 'unsupported' | 'server' | 'password_required';
 
 export interface RsvpResult {
   status: number;
@@ -40,6 +42,8 @@ export interface GuestContext {
   now?: Date;
   /** Client IP (see clientIp in http.ts); null/empty share one "unknown" bucket. */
   ip?: string | null;
+  /** The request's Cookie header: a password-protected site needs its guest cookie (G076, lib/site/access.ts). */
+  cookie?: string | null;
 }
 
 export const MESSAGES = {
@@ -50,6 +54,7 @@ export const MESSAGES = {
   too_large: 'Your reply is too long. Please shorten your message and try again.',
   unsupported: 'Please send your reply from the RSVP page.',
   server: 'Something went wrong. Please try again in a moment.',
+  password_required: 'This website is password protected. Please reload the page and enter the password.',
 } as const;
 
 export function errorResult(status: number, code: RsvpErrorCode, extra: Record<string, unknown> = {}, headers?: Record<string, string>): RsvpResult {
@@ -84,6 +89,7 @@ export async function getRsvpStatus(ctx: GuestContext, slug: string, previewKey?
   let site = await publishedSite(ctx.adapter, slug);
   let content = site?.publishedContent ?? null;
   let preview = false;
+  let panel = false;
   if (previewKey) {
     const any = isValidSlugFormat(slug) && !isReservedSlug(slug) ? await ctx.adapter.getSiteBySlug(slug) : null;
     const access = any ? previewAccess(any, previewKey, ctx.now ?? new Date()) : null;
@@ -91,9 +97,12 @@ export async function getRsvpStatus(ctx: GuestContext, slug: string, previewKey?
       site = any;
       content = any.content;
       preview = true;
+      panel = access === 'panel';
     }
   }
   if (!site || !content) return errorResult(404, 'not_found');
+  // G076: the form's state (deadline, guest cap) is behind the guest password too; the panel's preview never needs it.
+  if (!panel && isProtected(site) && !guestMayEnter(site, ctx.cookie, (ctx.now ?? new Date()).getTime())) return errorResult(401, 'password_required');
   const w = rsvpWindow(content, ctx.now ?? new Date());
   return {
     status: 200,
@@ -134,6 +143,8 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
 
   const site = await publishedSite(ctx.adapter, slug);
   if (!site) return errorResult(404, 'not_found');
+  // G076: no reply to a password-protected website without its guest cookie (nothing is stored).
+  if (isProtected(site) && !guestMayEnter(site, ctx.cookie, now.getTime())) return errorResult(401, 'password_required');
 
   const perSiteIp = await limiter.hit(`rsvp:site-ip:${site.id}:${ip}`, limits.perSiteIp);
   if (!perSiteIp.allowed) return errorResult(429, 'rate_limited', {}, retryAfter(perSiteIp.retryAfterMs));

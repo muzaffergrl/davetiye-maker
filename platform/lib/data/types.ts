@@ -51,6 +51,24 @@ export interface SiteRecord {
    * cannot be published until the shop confirms the Etsy order (scripts/verify-order.ts). "verified": confirmed.
    */
   orderCheck?: OrderCheckRecord | null;
+  /**
+   * Optional guest password (G076, K28; lib/site/access.ts). Absent or null: the website is open to anyone with the link
+   * (the default). Private: never rendered into a page, never sent to guests; the couple sees it in the panel (Share).
+   */
+  guestAccess?: GuestAccessRecord | null;
+}
+
+/** The website's guest password (G076). Kept with the site, deleted with it. */
+export interface GuestAccessRecord {
+  /** Guests must enter the password before any page, photo, calendar file or RSVP answer is served. */
+  enabled: boolean;
+  /** As the couple typed it (trimmed). Shown to them in the panel: it is meant to be shared with guests. */
+  password: string;
+  /** +1 whenever the password changes: a guest cookie signed for an older version stops working (guests are asked again). */
+  version: number;
+  /** Per-site HMAC key of the guest cookies (32 random bytes, base64url). Never leaves the server. */
+  secret: string;
+  updatedAt: string;
 }
 
 export interface OrderCheckRecord {
@@ -115,9 +133,10 @@ export interface SitePatch {
   identity?: IdentityRights | null;
   archiveOverrideAt?: string | null;
   orderCheck?: OrderCheckRecord | null;
+  guestAccess?: GuestAccessRecord | null;
 }
 
-export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck'] as const satisfies ReadonlyArray<keyof SitePatch>;
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess'] as const satisfies ReadonlyArray<keyof SitePatch>;
 
 /** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
 export function applySitePatch(site: SiteRecord, patch: SitePatch): void {
@@ -343,6 +362,8 @@ export interface DataAdapter {
    * and the callers use in-process memory.
    */
   hitCounter?(key: string, windowMs: number): Promise<{ count: number; resetAt: number }>;
+  /** The live window of a hitCounter key without adding a hit (null: no live window). G076. */
+  readCounter?(key: string): Promise<{ count: number; resetAt: number } | null>;
 }
 
 /**

@@ -32,12 +32,16 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-- Kısım 1 ara kayıt (gpt-gorsel-C, 2026-10-14): W1'in beş referans ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` üretildi; hepsi 1024×1536.
+- Kısım 1 (gpt-gorsel-C, 2026-10-14): W1'in beş referans ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` üretildi; hepsi 1024×1536.
 - W1.3 yeniden üretildi: ilk taslak yatay foto pencereleri içeriyordu; seçilen sürümde üç dikey pencere var. W1.4 yeniden üretildi: ilk program kartı genişti; seçilen sürüm uzun kitap sayfası biçiminde.
-- W1 dosyaları `kit_check.denetle` ile kontrol edildi: 5/5 GEÇTİ (oran ve gereken yeşil pencere alanı). Metin, nesne ve yerleşim kontrolleri görsel olarak yapıldı. W2'nin bu oturuma ait üç parçası sırada; kalan W2 ve PAKET 2 bu oturumun kapsamı dışında.
+- W2'nin bu oturuma ait üç parçası W1 ekranları referans verilerek üretildi: `assets/gpt/parts/bg_page.png` (1024×1536), `bg_tile.png` (1254×1254; aracın doğal kare çıktısı, kit kontrolü oranı kabul ediyor), `envelope_closed.png` (1536×1024, gerçek RGBA alfa). Kitap tokasız ve yazısız, sağ yarıda; sol yarı açılma için boş. Kenar şeridi %100 şeffaf; zemine düşen gölge/hâle alfa kanalında yok.
+- W2.1 yeniden üretildi: ilk arka planda alt sol yoğun dekor vardı; seçilende sol üst ve sağ alt köşe düzeni var. W2.2 yeniden üretildi: ilk doku sarıydı ve kenar farkları daha yüksekti; seçilen düşük kontrastlı açık yosun dokusunda RGB standart sapmaları 3,10/2,99/3,17; karşı kenarların ortalama kanal farkı sol-sağ 2,37, üst-alt 2,70 (0–255). Kenarlar piksel piksel aynı değil; döşenmiş website testi yapılmadı.
+- Bu oturumun sekiz dosyası `kit_check.denetle` ile kontrol edildi: 8/8 GEÇTİ (oran, opaklık/alfa ve gereken yeşil pencere alanı). Metin, nesne ve yerleşim kontrolleri görsel olarak yapıldı. `python3 tools/kit_check.py collections/13_Enchanted_Forest --paket 5`: 8/22 geçti; kalan 14 W2 dosyası kapsam dışında. `--paket 2`: 0/5, fotoğraflar kapsam dışında. Açık kitap/kapanış üretilmediği için hiza testi atlandı. Seçilen sekiz PNG dışında rapor/önizleme/deneme dosyası eklenmedi.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-C; bu oturum kısım 1: W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
 - 2026-10-14 ara kayıt: gpt-gorsel-C; W1 bitti (5/8), seçilen beş ekran kaydedildi; durum alindi.
+- 2026-10-14 ara kayıt: gpt-gorsel-C; kısım 1, 8/8 (W1 + bg_page, bg_tile, envelope_closed); teknik dosya kontrolleri geçti; durum alindi.
+- 2026-10-14 gpt-gorsel-C: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2

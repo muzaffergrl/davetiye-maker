@@ -1,5 +1,5 @@
 {
-  "when": "2026-10-14T11:55:28.560Z",
+  "when": "2026-10-14T12:20:16.449Z",
   "passed": 60,
   "failed": 0,
   "checks": [
@@ -27,7 +27,7 @@
     {
       "name": "03 form: reply stored with the names of the 2 others, the meal and the note",
       "ok": true,
-      "detail": "{\"id\":\"a7897509-d5e2-486d-80e1-11f61e54ef41\",\"siteId\":\"e5034df3-e436-494b-9eb0-61748e19a55f\",\"name\":\"Margaret Hamilton\",\"email\":\"margaret@example.com\",\"attending\":true,\"guests\":3,\"message\":null,\"answers\":[{\"id\":\"meal\",\"question\":\"Meal choice\",\"answer\":\"Vegetarian\"},{\"id\":\"shuttle\",\"question\":\"Do you need the hotel shuttle?\",\"answer\":\"Yes, please\"},{\"id\":\"diet\",\"question\":\"Any allergies or dietary needs?\",\"answer\":\"James: no nuts, please\"}],\"party\":[\"James Hamilton\",\"Ada Hamilton\"],\"createdAt\":\"2026-10-14T11:55:05.171Z\"}"
+      "detail": "{\"id\":\"44f29d9b-e706-4628-9857-f0b244541363\",\"siteId\":\"09f854f6-6bce-4843-b9e5-aa2c96c99a32\",\"name\":\"Margaret Hamilton\",\"email\":\"margaret@example.com\",\"attending\":true,\"guests\":3,\"message\":null,\"answers\":[{\"id\":\"meal\",\"question\":\"Meal choice\",\"answer\":\"Vegetarian\"},{\"id\":\"shuttle\",\"question\":\"Do you need the hotel shuttle?\",\"answer\":\"Yes, please\"},{\"id\":\"diet\",\"question\":\"Any allergies or dietary needs?\",\"answer\":\"James: no nuts, please\"}],\"party\":[\"James Hamilton\",\"Ada Hamilton\"],\"createdAt\":\"2026-10-14T12:19:52.591Z\"}"
     },
     {
       "name": "03 form: \"Send another reply\" starts with no name fields",
@@ -49,7 +49,7 @@
     {
       "name": "01 form: reply stored with the second guest's name",
       "ok": true,
-      "detail": "{\"id\":\"1c90d037-d59b-4965-88eb-c011b970d27e\",\"siteId\":\"15d240c6-230d-47d6-a40b-5867d96cd0ff\",\"name\":\"Rosa Bell\",\"email\":null,\"attending\":true,\"guests\":2,\"message\":null,\"party\":[\"Tom Bell\"],\"createdAt\":\"2026-10-14T11:55:09.262Z\"}"
+      "detail": "{\"id\":\"4499503f-0dad-4c41-9818-64f5c2a1dc17\",\"siteId\":\"565918ff-2dfd-4207-a1b5-cb0e3ca2469f\",\"name\":\"Rosa Bell\",\"email\":null,\"attending\":true,\"guests\":2,\"message\":null,\"party\":[\"Tom Bell\"],\"createdAt\":\"2026-10-14T12:19:56.840Z\"}"
     },
     {
       "name": "01 form: no console errors",
@@ -95,7 +95,7 @@
     {
       "name": "Answers: bar lengths follow the counts (Chicken = Vegetarian = 2 × Fish)",
       "ok": true,
-      "detail": "[121,60,121]"
+      "detail": "[59,30,59]"
     },
     {
       "name": "Food & allergy notes: answers and a message that mentions an allergy, \"None\" left out",

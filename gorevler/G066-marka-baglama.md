@@ -2,8 +2,8 @@
 id: G066
 baslik: Satış sitesi + panel BKE Studio marka tasarımına geçer (GM04/GM05 comp'ları, ad, logo, favicon, renk/yazı)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G066
 oncelik: 1
 bagimli: [GM02, GM04, GM05, G060, G061]
 yazar: [platform/lib/marketing/, platform/components/marketing/, platform/components/panel/, platform/app/(marketing)/, platform/app/layout.tsx, platform/app/edit/, platform/public/brand/, platform/tests/, platform/previews/g066/, docs/16_PANEL_V2.md]
@@ -29,6 +29,10 @@ kullanılır (alan adı yok — `bkestudio.com` yalnız comp'ta; link `config`'t
 5. "Made with BKE Studio" rozeti misafir sayfalarına **bu görevde eklenmez** (hedef link kararı yok; docs/15 P1).
 6. Testler, build, satış sitesi 390/1280 önizlemesi (`platform/previews/g066/`).
 
+## Sıra (2026-10-14, entegratör)
+İki aşama: **A — satış sitesi** (hemen; panel koduna dokunmaz) → **B — panel** (G069 RSVP v2 ve G076 site şifresi main'e
+girdikten sonra; aynı bileşenlere dokundukları için). Aynı görev, iki ayrı ajan turu; Sonuç'a iki bölüm.
+
 ## Bitti sayılması için
 - [ ] Satış sitesinde ad, logo ve favicon BKE Studio; testler ve build geçti; önizleme görüntüleri
 
@@ -36,3 +40,4 @@ kullanılır (alan adı yok — `bkestudio.com` yalnız comp'ta; link `config`'t
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): GM02 onayı sonrası; G061 düzeltme turu bitince başlar
+- 2026-10-14 alindi: claude-G066

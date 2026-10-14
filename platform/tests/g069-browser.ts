@@ -280,6 +280,7 @@ try {
     await page.waitForSelector('[data-answer-filter]');
     const vegNames = await page.locator('[data-reply]').evaluateAll((els: Element[]) => els.map((e) => e.getAttribute('data-reply-name')));
     check('Filter: tapping "Vegetarian" lists only those replies', vegNames.length === 2 && vegNames.includes('Margaret Hamilton') && vegNames.includes('Alan Turing'), JSON.stringify(vegNames));
+    await page.waitForTimeout(900); // the list heading scrolls into view (smooth)
     await shot(page, '08_guests_filter_vegetarian_390');
     await page.locator('[data-answer-filter] button').click();
     check('Filter: cleared (6 replies)', (await page.locator('[data-reply]').count()) === 6);

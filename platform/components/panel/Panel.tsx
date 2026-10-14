@@ -882,6 +882,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
                 onPublish={() => void startPublish()}
                 onOffline={() => setDialog({ kind: 'offline' })}
                 onCopy={(text, what) => void copy(text, what)}
+                onGuestAccess={panel.setGuestAccess}
               />
             ) : null}
           </main>

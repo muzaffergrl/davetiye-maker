@@ -2,8 +2,8 @@
 id: G815
 baslik: Tasarım 15 Cherry Blossom Spring — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
 yazar: [collections/15_Cherry_Blossom/assets/gpt/mockups/]
@@ -35,3 +35,7 @@ Pilot: 01/03 (G801/G803).
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
+- 2026-10-14 alindi: gpt-gorsel-A
+- 2026-10-14 ara kayıt: gpt-gorsel-A; 3.1 kapak (v2 seçildi, telefon alt yarıya indirildi) ve 3.2 üç telefon kaydedildi; iki sahnenin oran/ekran kontrolleri geçti.
+- 2026-10-14 ara kayıt: gpt-gorsel-A; 3.3 dizüstü + telefon ve 3.4 masa üstü kaydedildi; iki sahnenin oran/ekran kontrolleri geçti; klavye yazısız ve masa üstünün sol üçte biri boş.
+- 2026-10-14 ara kayıt: gpt-gorsel-A; 3.5 yaşam sahnesi kaydedildi; python3 tools/kit_check.py collections/15_Cherry_Blossom --paket 3 → 5/5 geçti. Piksel kontrolünde ImageGen ekran yeşilinde küçük RGB sapmaları görüldü; saf #00FF00 şartı henüz sağlanmadı.

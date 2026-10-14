@@ -16,6 +16,7 @@ import {
   BellDot,
   CalendarClock,
   Download,
+  Mail,
   Pencil,
   Plus,
   Printer,
@@ -25,12 +26,14 @@ import {
   Share2,
   Trash2,
   TriangleAlert,
+  User,
   Users,
+  UserX,
   Utensils,
   WifiOff,
   X,
 } from 'lucide-react';
-import { Fragment, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord, RsvpQuestion } from '../../lib/content/types.ts';
 import type { PanelMeta } from '../../lib/panel/model.ts';
@@ -300,39 +303,29 @@ export function GuestsView({
     <div className={styles.stack} data-replies>
       <div className={styles.stats}>
         <div className={styles.stat} data-stat="coming">
+          <span className={styles.statIcon} aria-hidden="true">
+            <Users size={18} strokeWidth={1.75} />
+          </span>
           <span className={styles.statNum}>{counts.totalGuests}</span>
           <span className={styles.statLabel}>Guests coming</span>
         </div>
         <div className={styles.stat} data-stat="not">
+          <span className={styles.statIcon} aria-hidden="true">
+            <UserX size={18} strokeWidth={1.75} />
+          </span>
           <span className={styles.statNum}>{counts.notAttending}</span>
           <span className={styles.statLabel}>Not coming</span>
         </div>
         <div className={styles.stat} data-stat="replies">
+          <span className={styles.statIcon} aria-hidden="true">
+            <Mail size={18} strokeWidth={1.75} />
+          </span>
           <span className={styles.statNum}>{counts.responses}</span>
           <span className={styles.statLabel}>Replies</span>
         </div>
       </div>
       <DeadlineLine insights={insights} content={content} canAdd={!archived} />
 
-      <div className={styles.guestActions} data-guest-actions>
-        {!archived ? (
-          <Button icon={Plus} disabled={!online} onClick={() => setSheet({ reply: null })} data-add-reply>
-            Add a reply
-          </Button>
-        ) : null}
-        {counts.responses ? (
-          <Button icon={Printer} onClick={onPrint} data-print-list>
-            Print list
-          </Button>
-        ) : null}
-        {counts.responses ? (
-          <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
-            <Download size={18} strokeWidth={1.75} aria-hidden="true" />
-            <span>Download list (CSV)</span>
-          </a>
-        ) : null}
-      </div>
-      {!archived && !online ? <p className={styles.hint}>Connect to the internet to add or change replies.</p> : null}
 
       {newCount ? (
         <Banner
@@ -372,12 +365,19 @@ export function GuestsView({
       {counts.responses ? <DietaryCard insights={insights} hasQuestion={hasDietQuestion} archived={archived} onSettings={onSettings} /> : null}
 
       <section className={styles.stack} aria-labelledby="replies-title">
-        <h2 id="replies-title" ref={listRef} tabIndex={-1} className={styles.sectionHeading}>
-          Replies{' '}
-          <span className={styles.headingCount}>
-            {list.length === data.responses.length ? data.responses.length : `${list.length} of ${data.responses.length}`}
-          </span>
-        </h2>
+        <div className={styles.sectionHead}>
+          <h2 id="replies-title" ref={listRef} tabIndex={-1} className={styles.sectionHeading}>
+            Replies{' '}
+            <span className={styles.headingCount}>
+              {list.length === data.responses.length ? data.responses.length : `${list.length} of ${data.responses.length}`}
+            </span>
+          </h2>
+          {counts.responses ? (
+            <Button small variant="tertiary" icon={Printer} onClick={onPrint} data-print-list>
+              Print list
+            </Button>
+          ) : null}
+        </div>
         {data.responses.length ? (
           <>
             <div className={styles.chips} role="group" aria-label="Show">
@@ -468,6 +468,25 @@ export function GuestsView({
         ) : null}
       </div>
 
+      {/* Always in reach while scrolling the list (comp u2_guests_390): add a phone reply, download the list. */}
+      {!archived || counts.responses ? (
+        <div className={styles.guestBar} data-guest-actions>
+          {!archived ? (
+            <Button variant="primary" icon={Plus} disabled={!online} onClick={() => setSheet({ reply: null })} data-add-reply>
+              Add a reply
+            </Button>
+          ) : null}
+          {counts.responses ? (
+            <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
+              <Download size={18} strokeWidth={1.75} aria-hidden="true" />
+              <span>Download list</span>
+              <span className={styles.visuallyHidden}> (CSV, opens in Excel or Google Sheets)</span>
+            </a>
+          ) : null}
+          {!archived && !online ? <p className={styles.guestBarNote}>Connect to the internet to add or change replies.</p> : null}
+        </div>
+      ) : null}
+
       {confirm ? (
         <Sheet title="Remove this reply?" onClose={() => setConfirm(null)} closeLabel="Cancel" testId="remove-reply">
           <p>
@@ -508,19 +527,36 @@ function DeadlineLine({ insights, content, canAdd }: { insights?: RsvpInsights; 
   if (!d) return null;
   const long = formatDateLong(content.rsvp?.deadline, content.locale);
   const city = zoneCity(content.timezone);
-  const add = canAdd ? ' You can still add replies you get another way.' : '';
-  let text: string | null;
-  if (d.state === 'off') text = `Replies on the website are off.${add}`;
-  else if (d.state === 'closed') text = `${deadlineText(d)}${add}`;
-  else if (d.state === 'last_day') text = `Today is the last day to reply (${city} time).`;
-  else if (d.state === 'open') text = `${deadlineText(d)}${long ? ` Last day: ${long} (${city} time).` : ''}`;
-  else text = null;
-  if (!text) return null;
+  const add = canAdd ? 'You can still add replies you get another way.' : null;
+  let head: ReactNode;
+  let detail: string | null = null;
+  if (d.state === 'off') {
+    head = 'Replies on the website are off.';
+    detail = add;
+  } else if (d.state === 'closed') {
+    head = deadlineText(d);
+    detail = add;
+  } else if (d.state === 'last_day') {
+    head = <strong>Today is the last day to reply.</strong>;
+    detail = `${city} time.`;
+  } else if (d.state === 'open') {
+    head = (
+      <>
+        Replies close in <strong>{d.daysLeft === 1 ? '1 day' : `${d.daysLeft} days`}</strong>.
+      </>
+    );
+    detail = long ? `Last day: ${long} (${city} time).` : null;
+  } else return null;
   return (
-    <p className={styles.deadline} data-deadline={d.state}>
-      <CalendarClock size={18} strokeWidth={1.75} aria-hidden="true" />
-      <span>{text}</span>
-    </p>
+    <div className={styles.deadline} data-deadline={d.state}>
+      <span className={styles.deadlineIcon} aria-hidden="true">
+        <CalendarClock size={20} strokeWidth={1.75} />
+      </span>
+      <p className={styles.deadlineText}>
+        <span className={styles.deadlineHead}>{head}</span>
+        {detail ? <span className={styles.deadlineDetail}> {detail}</span> : null}
+      </p>
+    </div>
   );
 }
 
@@ -560,12 +596,14 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
             return (
               <li key={o.value}>
                 <button type="button" className={cx(styles.barRow, on && styles.barRowOn)} aria-pressed={on} onClick={() => onPick(q, o.value)} data-answer-option={o.value}>
-                  <span className={styles.barTop}>
-                    <span className={styles.barLabel}>
-                      {o.value}
-                      {o.old ? <span className={styles.barOld}> · earlier option</span> : null}
-                    </span>
-                    <span className={styles.barValue}>
+                  <span className={styles.barLabel}>
+                    {o.value}
+                    {o.old ? <span className={styles.barOld}> · earlier option</span> : null}
+                  </span>
+                  <span className={styles.bar} aria-hidden="true">
+                    <span className={styles.barFill} style={{ width: `${o.percent}%` }} />
+                  </span>
+                  <span className={styles.barValue}>
                       {q.kind === 'yesno' ? (
                         <>
                           {o.percent}% <span className={styles.barCount}>({o.count})</span>
@@ -578,10 +616,6 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
                         {o.count === 1 ? 'reply' : 'replies'}
                         {q.kind === 'yesno' ? '' : `, ${o.percent}%`}
                       </span>
-                    </span>
-                  </span>
-                  <span className={styles.bar} aria-hidden="true">
-                    <span className={styles.barFill} style={{ width: `${o.percent}%` }} />
                   </span>
                 </button>
               </li>
@@ -666,7 +700,11 @@ function ReplyCard({
   return (
     <li className={cx(styles.reply, isNew && styles.replyNew)} data-reply data-reply-name={r.name}>
       <div className={styles.replyHead}>
-        <button type="button" className={styles.replyToggle} aria-expanded={open} aria-controls={open ? bodyId : undefined} onClick={onToggle}>
+        <button type="button" className={cx(styles.replyToggle, styles.replyToggleRow)} aria-expanded={open} aria-controls={open ? bodyId : undefined} onClick={onToggle}>
+          <span className={cx(styles.replyAvatar, !r.attending && styles.replyAvatarNo)} aria-hidden="true">
+            {!r.attending ? <UserX size={20} strokeWidth={1.75} /> : r.guests > 1 ? <Users size={20} strokeWidth={1.75} /> : <User size={20} strokeWidth={1.75} />}
+          </span>
+          <span className={styles.replyText}>
           <span className={styles.replyTop}>
             <span className={styles.replyName}>{r.name}</span>
             {isNew ? (
@@ -686,6 +724,7 @@ function ReplyCard({
               {party}
             </span>
           ) : null}
+          </span>
         </button>
         {!archived ? (
           <OverflowMenu

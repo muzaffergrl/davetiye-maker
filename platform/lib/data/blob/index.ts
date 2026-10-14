@@ -634,6 +634,14 @@ export class BlobAdapter implements DataAdapter {
     }
   }
 
+  /** The current window of a shared counter without adding a hit (G076: a locked-out guest password form). */
+  async readCounter(key: string): Promise<{ count: number; resetAt: number } | null> {
+    const pathname = `limits/${createHash('sha256').update(key).digest('hex')}.json`;
+    const current = await this.readJson<{ count?: unknown; resetAt?: unknown }>(pathname);
+    if (!current || typeof current.data.count !== 'number' || typeof current.data.resetAt !== 'number') return null;
+    return current.data.resetAt > this.#now() ? { count: current.data.count, resetAt: current.data.resetAt } : null;
+  }
+
   async readPhoto(rel: string): Promise<StoredFile | null> {
     const m = PHOTO_PATH_RE.exec(rel);
     if (!m || !UUID_RE.test(m[1])) return null;

@@ -2,8 +2,8 @@
 id: G220
 baslik: Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-F
 oncelik: 2
 bagimli: []
 yazar: [collections/20_Coastal_Seaside/assets/gpt/comps/, collections/20_Coastal_Seaside/assets/gpt/parts/, collections/20_Coastal_Seaside/assets/gpt/photos/]
@@ -35,5 +35,6 @@ Tasarım 20'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
 
 ## Günlük
+- 2026-10-14 alindi: gpt-gorsel-F; bu oturum: kısım 1 (W1 5 ekran + W2 bg_page, bg_tile, envelope_closed).
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)

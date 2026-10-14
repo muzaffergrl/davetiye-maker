@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), RSVP paneli v2 (G069), seed (443 test, 2026-10-14; Windows dahil)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), RSVP paneli v2 (G069), seed (491 test, 2026-10-14 G069; Windows dahil — bkz. "Windows notları")
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -30,6 +30,8 @@ NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id>
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
 node scripts/grant-identity-change.ts --order <no> (--add <n> | --archive-on <YYYY-MM-DD|clear>) --reason "<neden>"   # destek (G060): isim/tarih
                        # hakkı ekle ya da arşiv tarihini taşı; --show durumu yazar (aşağıda "Panel v2 ve düzenleme hakkı")
+NODE_PATH=/opt/node22/lib/node_modules node tests/g076-browser.ts   # build sonrası: site şifresi (G076) 390 × 844 — Share'de aç, misafir şifre
+                       # sayfası, yanlış/doğru, şifre değişince yeniden sorma, iki tema (51 kontrol; previews/g076/ ya da $G076_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts   # build sonrası: panel v2 yolculuğu 390 × 844 + MP4, hak/arşiv/çevrimdışı/
                        # axe-core/1280 (104 kontrol; çıktı previews/g060/ ya da $G060_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g069-browser.ts   # build sonrası: RSVP paneli v2 — 03/01 formunda adlar, Guests özeti,
@@ -70,7 +72,8 @@ app/
   media/[...path]/route.ts         adaptörün yüklediği fotoğraflar (local; blob = private depo)
   layout.tsx, page.tsx             platform sayfaları için kök
   edit/[slug]/page.tsx, not-found.tsx   /edit/<slug>?k=<anahtar> düzenleme paneli (G039, v2 G060); geçersiz link = genel 404 + "Lost your edit link?"
-  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır, identity (isim/tarih, G060)
+  api/edit/[slug]/…                panel API: durum, taslak kaydı, foto, yayınla, yayından kaldır, identity (isim/tarih, G060),
+                                   access (misafir şifresi, G076)
   signin/page.tsx, api/signin/     e-posta ile giriş (G060): sağlayıcı yok → kapalı, dürüst metin, API 503
   start/page.tsx, StartForm.tsx    /start?theme=<tema> sahiplenme sayfası (G045); start/demo/[theme]/… = temanın canlı demosu
                                    (+ start/demo/[theme]/event.ics: demonun takvim dosyası, G051)
@@ -245,6 +248,11 @@ node --env-file=.env.local scripts/blob-smoke.mjs                               
   makineden art arda çok koşturmak 429 verebilir.
 - `blob-smoke`: yukarıdaki gerçek-depo doğrulamaları; yalnız `smoke-<zaman>-*` / `SMOKE<zaman>` yollarına yazar ve siler.
 - Çıkış kodu 0 = hepsi geçti. Windows'ta çalışır (Node 22, `.env.local`).
+- Windows notları (G077): `npm test`'teki `tools/validate_content.py` karşılaştırması (g055-limits, `astral-name-40`) Python UTF-8 kipi
+  kapalıyken kalıyor → `PYTHONUTF8=1` ile koşturun. Eski bir yerel `.next/` (silinmiş bir rotanın `.next/types/validator.ts`'i) `npm run
+  typecheck`'i kırar → `.next`'i silip typecheck/build. Tohumlama: `DATA_ADAPTER=blob PLATFORM_DATA_DIR=<yerel geçici klasör> node
+  --env-file=.env.local scripts/seed.ts --theme <id> --slug <slug> --content ../collections/<NN>/content.demo.json --photos
+  ../collections/<NN>/assets/gpt/photos` (anahtarlar o klasöre yazılır, ekrana basılanları log'a koymayın).
 
 ## Tema biçimi
 
@@ -827,8 +835,9 @@ Kullanıcı isteği (2026-10-14): yanıtlar çifte düzenli ve şık görünsün
 `components/panel/guests.tsx` (Guests görünümü, yanıt kartı, ekle/düzelt sheet'i, yazdırma görünümü, `useReplies`), `lib/rsvp/insights.ts`
 (saf özet hesapları), `lib/rsvp/couple.ts` (çiftin yanıtları, CSV), `lib/rsvp/validate.ts` (`party`, `parseCoupleReply`), `public/rsvp/form.js`
 (ad alanları), 01/03 `rsvp.html` (`<template data-rsvp-party>`). Panel tokenları ve bileşenleri (§8, §7); G066 paneli BKE Studio
-markasına göre yeniden boyayacak (yalnız token/sınıf değişir). `brand/ui/panel/u2_guests_390.png` yoktu; düzen
-`brand/UI_GPT_PROMPTS.md` U2.4 tarifine ve `u2_home_390.png`'deki "3 new replies" kartına göre.
+markasına göre yeniden boyayacak (yalnız token/sınıf değişir). Düzen GPT kompozisyonu `brand/ui/panel/u2_guests_390.png`'yi izler
+(ikonlu üç sayı kutusu, "Replies close in **42 days**" şeridi, tek satır çubuklu "Meal choices", çipler, arama, avatar'lı kartlar,
+altta "Add a reply" + "Download list") ve `u2_home_390.png`'deki "3 new replies" kartını; renkler henüz panel v2 tokenları.
 
 - **Özet:** üç sayı (Guests coming = kişi, Not coming = yanıt, Replies) + son tarih satırı "Replies close in 30 days. Last day: …
   (New York time)." / "Today is the last day to reply" / "Replies closed on … You can still add replies you get another way." / yanıtlar
@@ -851,7 +860,9 @@ markasına göre yeniden boyayacak (yalnız token/sınıf değişir). `brand/ui/
 - **Ekle / düzelt:** "Add a reply" sheet'i (ad, Coming/Not coming, kişi sayısı 1..tema sınırı, diğer adlar, misafirin şu an gördüğü sorular —
   seçenekli soru `select` "No answer" ile —, e-posta, not); hatalar alanın altında (sunucunun mesajı), kaydet düğmeleri yapışkan. Kartın
   menüsünde "Edit reply", "Keep this reply" (bekleyen), "Remove reply" (onaylı). Çevrimdışıyken kapalı ve nedeni yazılı.
-- **Dışa aktarma:** "Download list (CSV)" (yukarıda, kişi başına satır) ve "Print list" → `#guests/print`: "Guests coming" /
+- **Eylemler:** "Add a reply" (birincil) + "Download list" alt gezinmenin üstünde yapışkan çubukta (liste kayarken hep erişilir;
+  `scroll-padding-bottom` odaklanan alanı örtmez); "Print list" Replies başlığının yanında.
+- **Dışa aktarma:** "Download list" (CSV, kişi başına satır, yukarıda) ve "Print list" → `#guests/print`: "Guests coming" /
   "Everyone who replied", "Include guests' messages"; tablo ✓ kutusu (kapıda işaretlemek için) · Name · Party ("Party of 3" / "with …") ·
   Answers; adlar A–Z; yazdırırken (`@media print`) üst çubuk, gezinme, önizleme ve ayarlar gizlenir, `@page` kenar 14/12 mm — A4 ve
   US Letter'a sığar (Chromium PDF'iyle denendi; gerçek yazıcıda denenmedi). Telefonda tablo kişi başına bloklara döner.
@@ -867,6 +878,66 @@ yemek notları, son tarih günleri, kişi satırları, eski kayıtlar, blob `upd
 panel Home "1 new reply" → Guests özet, cevap çubukları, evet/hayır yüzdesi, yemek notları, parti kartı, cevap süzgeci, sıralama,
 Mark as seen (yenilemeden sonra da), Add a reply, Edit reply, CSV (3 kişilik yanıt = 3 satır), yazdırma görünümü + print medyası + A4/Letter
 PDF, 1280 / 320 px, arşiv, axe-core, dokunma alanları. Çıktı `previews/g069/` (`G069_SHOTS_DIR`, `PORT` (3369)).
+
+## Site şifresi (G076, K28)
+
+Çift isterse sitesini **tek bir misafir şifresiyle** korur; **varsayılan kapalı**. Şifre paylaşılmak için vardır (davetiye
+mesajına yazılır): çift panelde görür ve kopyalar; genel sayfalara hiç gönderilmez.
+
+- **Panel (Share → "Guest password"):** "Password protect your website" anahtarı. Açınca öneri gelir (iki kelime + sayı, ör.
+  `RainSaffron60`; "Suggest a password" yenisini verir); 4–40 karakter (kod noktası), büyük/küçük harf ve uçtaki boşluklar
+  önemsiz. "Copy password", "Add the password to your invitation message …" ipucu. Değişiklik **hemen** geçerli (yayın gerekmez;
+  `POST /api/edit/<slug>/access {enabled, password?}`, Bearer). Kapatınca şifre saklı kalır (tekrar açınca aynısı, kimse
+  çıkmaz); **şifre değişince** misafirler yeniden sorulur (snackbar ve uyarı satırı bunu söyler). Arşivde kart yok, uç `403 archived`.
+- **Saklama:** site kaydında `guestAccess = {enabled, password, version, secret, updatedAt}` (özel depo; içerik kaydında
+  **değil** → yayınlanan içerikle, önizlemeyle, `site-data`'yla hiçbir yere gitmez; şema değişmedi). Panel yalnız
+  `{enabled, password}` görür (`PanelMeta.guestAccess`); `secret` ve `version` sunucuda kalır. `version` şifre her
+  değiştiğinde +1.
+- **Misafir çerezi:** `__Host-guest-<site id>` = `<version>.<exp>.<HMAC-SHA256(secret, "guest-access:v1:<site id>:<version>:<exp>")>`,
+  `HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=90 gün`. İmza site kimliğini ve şifre sürümünü bağlar: başka sitenin
+  çerezi (adı değiştirilse de) geçmez, şifre değişince eski çerezler düşer. Şifre ve imza karşılaştırmaları sabit zamanlı
+  (`timingSafeEqual`; şifre SHA-256 özetleriyle, uzunluk sızmaz).
+- **Sıra (her misafir rotasında):** geçersiz/bilinmeyen adres, yayında olmayan site → **404** (şifreden söz edilmez) ·
+  arşiv → **410** (isimsiz) · panelin kısa ömürlü önizleme jetonu → her zaman açık · şifre açık + geçerli çerez yok
+  (kalıcı önizleme linki dahil) → sayfalar: **şifre sayfası** (200; bağlantı önizlemeleri yalnız 200'de etiket okur),
+  `/event.ics` → **303 `/<slug>`**, `/media/...` → **401** (görsel yok), `GET/POST /api/rsvp/<slug>` → **401
+  `password_required`** (hiçbir şey saklanmaz) · sonra sayfa. İleride teşekkür modu (G075) çiftin içeriğidir: şifreden **sonra**.
+- **Şifre sayfası** (`lib/site/gate.ts`): platformun sayfası, tema şablonu değil; temanın **kendi** stil dosyalarını
+  (`index.html` `<head>`'indeki Google Fonts + `site.css`: zemin dokusu, `--page/--ink/--ink-soft/--ivory/--script`
+  tokenları, gövde fontu) ve `theme-color`'ını kullanır; yalnız isimler + "You're invited" + şifre kutusu (tarih, mekân,
+  foto, yeni dekor yok — K21). "Show" düğmesi küçük, hash'li satır içi betik (CSP `default-src 'none'`, `form-action
+  'self'`). Meta: `og:title`/`<title>` = isimler, `description`/`og:description` = "You're invited", `og:image` = temanın
+  isimsiz paylaşım görseli, `robots noindex`. Başlıklar: `private, no-store`, `Vary: Cookie`, `noindex, nofollow`,
+  `no-referrer` (Google Fonts'a adres gitmez). Temanın sayfa geçişi (`@view-transition`) burada kapalı.
+- **Form:** aynı adrese `POST` (`site_access=1&password=…`, `application/x-www-form-urlencoded`, ≤ 4 KB) → doğru: çerez +
+  **303 aynı adres** (göreli `Location`, denetlenmiş slug'dan kurulur: açık yönlendirme yok; `next` parametresi yok) ·
+  yanlış: **401** + hata metni · çok deneme: **429** + `Retry-After` · `site_access` yoksa **405** (temanın JS'siz RSVP
+  formu eskisi gibi) · `Sec-Fetch-Site: cross-site` → **403** (başka site misafirin denemelerini harcayamaz).
+- **Hız sınırı** (`ACCESS_LIMITS`): yalnız **yanlış** şifreler sayılır — IP (+ IPv6 /64) + site başına 10 / 15 dk, IP başına
+  bütün siteler 30 / 15 dk; pencere doluyken **doğru şifre de** reddedilir (tahmin sürmez). Doğrular sayılmaz (aynı Wi-Fi'daki
+  aile/mekân). Sayaç paylaşımlı: `blob`'da `AdapterRateLimiter` (`hitCounter` + yeni `readCounter` = artırmadan okuma), bütün
+  Vercel örnekleri aynı pencereyi görür; `local`'da süreç içi bellek. `RateLimiter.peek` eklendi (bellek + adaptör).
+- **Korumalı sitede açık sayfalar:** `Cache-Control: private, no-store` + `Vary: Cookie` (Vercel CDN/proxy saklamaz); meta
+  etiketler yine yalnız isimler + "You're invited" (sekme başlığı dahil); `noindex, nofollow`. Fotoğraflar `private,
+  max-age=300` (tarayıcı kısa süre tutar, paylaşılan önbellek asla), `.ics` `private, no-store`. Şifre kapatılınca eski
+  başlıklar döner.
+- **Panel ve önizleme:** panel (düzenleme anahtarı) ve panelin önizleme jetonu şifresiz çalışır (çiftin kendi sitesi);
+  **kalıcı önizleme linki** misafir gibi şifre ister (dolaşan bir linktir).
+- **Site haritası / satış sitesi:** çift siteleri zaten hiçbir site haritasında ve örnek listesinde yok (satış sitesi yalnız
+  tema demolarını `/start/demo/<tema>` gösterir); test bunu korumalı site için de denetler. Çift siteleri `noindex`.
+
+Testler: `tests/g076-access.test.ts` (19, `npm test`'te): kurallar (sınırlar, temizleme, öneri), sabit zamanlı karşılaştırma,
+çerez (bayraklar, 90 gün, imza/sürüm/süre/başka site), panel ucu (açma/kapama/değiştirme, sürüm, 401/422/403), çerezsiz
+**her rota kapalı** (5 sayfa, `.ics`, foto, RSVP durum + gönderim), şifre sayfası içeriği/CSP, doğru/yanlış, açık
+yönlendirme yok, 405/403/413, hız sınırı (site+IP, IP, IPv6 /64, doğru şifre sayılmaz), blob'da iki sunucu örneği aynı sayaç,
+şifre değişince çıkış, başka sitenin çerezi, panel/önizleme, sıra (404/410), gizlilik (şifre hiçbir genel yanıtta yok,
+site haritası). Tarayıcı: `tests/g076-browser.ts` (51 kontrol, 390 × 844; ekranlar `previews/g076/`: `01_share_password_on`,
+`02_guest_password_blush-garden-rose`, `03_guest_wrong_password`, `04_guest_password_olive-ivory`, `checks.json`).
+
+Bilinen sınırlar: kısa şifre (ör. 4 rakam) kararlı bir saldırgana karşı zayıftır — sınır yavaşlatır, durdurmaz (öneri ~830 bin
+olasılık); şifre açılmadan önce paylaşılan bir fotoğraf URL'si Vercel CDN'de en çok 5 dk daha servis edilebilir (eski
+`public, s-maxage=300`); gerçek telefonda (iOS Safari / Android Chrome) ve gerçek Vercel Blob deposunda denenmedi;
+bağlantı önizlemesi (WhatsApp/iMessage) kazıyıcılarıyla denenmedi.
 
 ## /start sahiplenme akışı (G045)
 
@@ -1152,6 +1223,8 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   `X-Robots-Tag: noindex` (docs/14 §5.5, karar 4 gelene kadar; eğitim botlarını robots.txt kapatır). Gizli link taşıyan `/edit/…` ve `/start`:
   `frame-ancestors 'none'`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
 - `site-data` JSON'u içerik kaydını taşımaz (kapalı bölümler kaynakta görünmez); şablon yorumları silinir.
+- **Site şifresi (G076):** isteğe bağlı; korumalı sitede her misafir rotası imzalı, siteye özel `__Host-` çerezi ister
+  (yukarıda "Site şifresi"); yanıtlar `private, no-store`, şifre yalnız özel site kaydında.
 - **Fotoğraflar** (`/media/<site>/<dosya>`, `lib/site/static.ts`): yalnız site yayındaysa ve yayındaki içerik o dosyayı kullanıyorsa
   (bir türev, fotoğrafı kullanılıyorsa — G055) (hikâye fotoğrafları yalnız Our Story açıkken) `public, max-age=300`; ya da isteğin `?preview=` anahtarı o sitenin ise
   `private, no-store`. Yayından kaldırılan sitenin, değiştirilen/silinen ve hiç kullanılmamış fotoğrafların hepsi 404. (Önceden her
