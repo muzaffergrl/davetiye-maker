@@ -1,31 +1,47 @@
-/* Edit panel v2 (G060, docs/16 §8). Calm, contemporary and theme-neutral: warm neutral ground, ink-black
-   primary, one quiet slate-blue accent for links / focus / selection. The only colour that "sings" is the
-   buyer's own design in the preview. No decorative drawings (K21): type, spacing, borders, icons. */
+/* Edit panel v2 (G060, docs/16 §8), dressed in the BKE Studio brand (G066 part B; brand/tokens.json, GM05 comps
+   brand/ui/panel/u2_*). Warm paper ground, white cards, deep aubergine for headings, primary buttons, the active tab
+   and focus; champagne gold and dusty lavender only as small accents (rules, dots, bars, tints) — never as text on a
+   light ground. Archivo 800 headings, Montserrat 300 light lines, DM Sans for everything else (components/panel/
+   fonts.ts; no font file in the repo). The only colour that "sings" is still the buyer's own design in the preview.
+   No decorative drawings (K21): type, spacing, tints, the brand's own logo SVG and line icons. Contrast (WCAG):
+   text #202020 / #2B1526 13–17:1 on every surface; muted text #5C5560 ≥ 5.7:1 on every surface and tint below;
+   control borders #8C7F8A ≥ 3:1 (1.4.11). */
 
 .app,
 .notice,
 .overlay,
 .snackHost {
-  --c-bg: #f7f6f3;
+  /* brand/tokens.json */
+  --c-anchor: #2b1526;
+  --c-gold: #d0ae6a;
+  --c-lavender: #9f84a7;
+  --c-paper: #ede5d7;
+
+  --c-bg: #faf7f0;
   --c-surface: #ffffff;
-  --c-surface-sunken: #f1efea;
-  --c-text: #1d1c1a;
-  --c-text-muted: #5c584f;
-  --c-border: #e4e1da;
-  --c-control-border: #8f897e;
-  --c-primary: #1d1c1a;
-  --c-primary-hover: #3a3833;
-  --c-accent: #2b5675;
-  --c-accent-soft: #e7eef4;
+  --c-surface-sunken: #f3eee5;
+  --c-text: #202020;
+  --c-heading: var(--c-anchor);
+  --c-text-muted: #5c5560;
+  --c-border: #ebe3d6;
+  --c-control-border: #8c7f8a;
+  --c-primary: var(--c-anchor);
+  --c-primary-hover: #45213c;
+  /* K29: ONE accent colour — the aubergine, for links, focus, selection and the main action; its pale tint for quiet
+     grounds (info, the deadline strip, the rules box). Gold and lavender stay in the logo only. */
+  --c-accent: var(--c-anchor);
+  --c-accent-soft: #f3edf1;
+  --c-accent-line: #ddd0d9;
   --c-success: #1e6b43;
-  --c-success-soft: #e6f2ea;
+  --c-success-soft: #e3efe4;
   --c-warning: #7a4f00;
-  --c-warning-soft: #fbf0d9;
+  --c-warning-soft: #f8edd3;
   --c-danger: #b0261e;
   --c-danger-soft: #fbe9e7;
 
-  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-ui: var(--bke-body, 'DM Sans'), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: var(--bke-display, 'Archivo'), 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+  --font-wide: var(--bke-wide, 'Montserrat'), 'Helvetica Neue', Arial, sans-serif;
 
   --s-1: 4px;
   --s-2: 8px;
@@ -38,20 +54,20 @@
   --s-14: 56px;
   --gutter: 16px;
 
-  --r-chip: 6px;
-  --r-control: 10px;
-  --r-card: 14px;
-  --r-sheet: 20px;
+  --r-chip: 8px;
+  --r-control: 12px;
+  --r-card: 18px;
+  --r-sheet: 24px;
   --r-pill: 999px;
 
-  --e-1: 0 1px 2px rgb(29 28 26 / 0.06);
-  --e-2: 0 12px 32px rgb(29 28 26 / 0.16);
+  --e-1: 0 1px 2px rgb(43 21 38 / 0.04), 0 10px 24px -16px rgb(43 21 38 / 0.18);
+  --e-2: 0 18px 44px rgb(43 21 38 / 0.2);
   --m-fast: 120ms;
   --m-base: 200ms;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  --bar-h: 56px;
-  --nav-h: 64px;
+  --bar-h: 60px;
+  --nav-h: 68px;
 
   color: var(--c-text);
   font-family: var(--font-ui);
@@ -59,6 +75,29 @@
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Every heading of the panel: the heavy, tight grotesque of the BKE logo. */
+.homeTitle,
+.pageTitle,
+.setupTitle,
+.cardTitle,
+.statusText,
+.sheetTitle,
+.sectionHeading,
+.subTitle,
+.rowTitle,
+.cardButtonTitle,
+.statNum,
+.replyName,
+.noticeTitle,
+.summaryNames,
+.printTitle,
+.rulesTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--c-heading);
+  letter-spacing: -0.015em;
 }
 
 @media (min-width: 600px) {
@@ -83,9 +122,9 @@
 
 /* Sticky bars must never hide the field that has focus (WCAG 2.4.11). */
 :global(html):has(.app) {
-  scroll-padding-top: calc(var(--bar-h, 56px) + 16px);
+  scroll-padding-top: calc(var(--bar-h, 60px) + 16px);
   scroll-padding-bottom: calc(160px + env(safe-area-inset-bottom));
-  background: #f7f6f3;
+  background: #faf7f0;
 }
 
 .app :focus-visible,
@@ -145,25 +184,82 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgb(247 246 243 / 0.97);
-  backdrop-filter: saturate(1.4) blur(10px);
-  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  background: rgb(250 247 240 / 0.96);
+  backdrop-filter: saturate(1.3) blur(12px);
+  -webkit-backdrop-filter: saturate(1.3) blur(12px);
   border-bottom: 1px solid var(--c-border);
 }
 
 .appBarInner {
   display: flex;
   align-items: center;
-  gap: var(--s-2);
+  gap: var(--s-1);
   height: var(--bar-h);
   padding: 0 calc(var(--gutter) - 4px) 0 var(--gutter);
   padding-top: env(safe-area-inset-top);
   box-sizing: content-box;
 }
 
+/* BKE Studio logo (Brand.tsx): the horizontal SVG; the small monogram stands in where the bar is tight. */
+.brand {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  line-height: 0;
+}
+
+.brand img {
+  display: block;
+  height: auto;
+}
+
+.brandMark {
+  display: none !important;
+}
+
+@media (max-width: 439px) {
+  .brandCompact .brandFull {
+    display: none !important;
+  }
+  .brandCompact .brandMark {
+    display: block !important;
+  }
+}
+
+@media (max-width: 359px) {
+  .brand .brandFull {
+    display: none !important;
+  }
+  .brand .brandMark {
+    display: block !important;
+  }
+}
+
+.appBarBrand {
+  margin-right: auto;
+  padding-right: var(--s-2);
+}
+
+/* Phones and tablets: a section page's bar is "back + title" (the logo is on the four main views). */
+@media (max-width: 959px) {
+  .appBarBrandSection {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* The logo sits above the navigation rail (240 px), the section title above the content. */
+  .appBarBrand {
+    width: calc(240px - var(--gutter));
+    margin-right: 0;
+  }
+  .appBarBrand:not(.appBarBrandSection) {
+    margin-right: auto;
+  }
+}
+
 .appBarNames,
 .appBarTitle {
-  flex: 1;
   min-width: 0;
   margin: 0;
   overflow: hidden;
@@ -171,15 +267,29 @@
   text-overflow: ellipsis;
 }
 
-.appBarNames {
+.appBarTitle {
+  flex: 1;
+  color: var(--c-heading);
   font-family: var(--font-display);
-  font-size: 20px;
-  letter-spacing: 0.01em;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
-.appBarTitle {
-  font-size: 17px;
+/* The couple's names next to the save state (comp u2_*): only where there is room for them. */
+.appBarNames {
+  flex: 0 1 auto;
+  max-width: 34%;
+  padding: 0 var(--s-2);
+  color: var(--c-text);
+  font-size: 15px;
   font-weight: 600;
+}
+
+@media (max-width: 599px) {
+  .appBarNames {
+    display: none;
+  }
 }
 
 .appBarActions {
@@ -187,6 +297,23 @@
   align-items: center;
   gap: var(--s-1);
   flex: none;
+}
+
+@media (min-width: 600px) {
+  /* "Elena & Marco · Saved | Publish changes": a hairline between the status and the main action. */
+  .appBarActions > :last-child:not(:only-child) {
+    position: relative;
+    margin-left: var(--s-3);
+  }
+  .appBarActions > :last-child:not(:only-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--s-2) - 1px);
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--c-border);
+  }
 }
 
 .backBtn {
@@ -207,28 +334,33 @@
   background: var(--c-surface-sunken);
 }
 
+@media (min-width: 960px) {
+  .backBtn {
+    margin-left: 0;
+  }
+}
+
 .liveBadge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid #b9d9c6;
+  padding: 0 16px;
+  border: 1px solid #c7dfcb;
   border-radius: var(--r-pill);
   background: var(--c-success-soft);
   color: var(--c-success);
   font: inherit;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .liveDot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--c-success);
-  box-shadow: 0 0 0 3px rgb(30 107 67 / 0.18);
 }
 
 /* ================================================================== layout */
@@ -252,14 +384,14 @@
   display: contents;
 }
 
-/* Bottom navigation (phones) */
+/* Bottom navigation (phones, comp u2_home_390): paper band, line icons, the current tab in aubergine with a bar. */
 .nav {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 30;
-  background: var(--c-surface);
+  background: var(--c-surface-sunken);
   border-top: 1px solid var(--c-border);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -279,23 +411,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   height: var(--nav-h);
   color: var(--c-text-muted);
   text-decoration: none;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
   -webkit-tap-highlight-color: transparent;
 }
 
 .navItem[aria-current='page'] {
-  color: var(--c-text);
+  color: var(--c-heading);
+  font-weight: 700;
 }
 
-.navItem[aria-current='page'] .navIcon {
-  background: var(--c-accent-soft);
-  color: var(--c-accent);
+/* The current tab's bar under its label (shape, not only colour). */
+.navItem[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--c-anchor);
+  transform: translateX(-50%);
+}
+
+.navItem[aria-current='page'] .navIcon svg {
+  stroke-width: 2.25;
 }
 
 .navIcon {
@@ -303,29 +448,25 @@
   display: inline-grid;
   place-items: center;
   width: 56px;
-  height: 30px;
-  border-radius: var(--r-pill);
-  transition: background var(--m-base) var(--ease);
+  height: 28px;
 }
 
+/* New replies: an aubergine count with white numerals (17:1). */
 .navBadge {
   position: absolute;
-  top: -3px;
-  right: 8px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
+  top: -4px;
+  right: 6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
   border-radius: var(--r-pill);
-  background: var(--c-danger);
+  background: var(--c-anchor);
   color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 18px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 20px;
   text-align: center;
-}
-
-.railSub {
-  display: none;
+  box-shadow: 0 0 0 2px var(--c-surface-sunken);
 }
 
 /* 600–959: one column, content centred; bottom nav stays. */
@@ -363,14 +504,17 @@
     gap: 8px;
     height: 44px;
     border-radius: var(--r-pill);
-    font-size: 14px;
+    font-size: 15px;
+  }
+  .navItem:hover {
+    color: var(--c-heading);
   }
   .navItem[aria-current='page'] {
-    background: var(--c-surface);
-    box-shadow: var(--e-1);
+    background: var(--c-anchor);
+    color: #fff;
   }
-  .navItem[aria-current='page'] .navIcon {
-    background: transparent;
+  .navItem[aria-current='page']::after {
+    display: none;
   }
   .navIcon {
     width: auto;
@@ -383,6 +527,7 @@
   .navBadge {
     top: -8px;
     right: -12px;
+    box-shadow: none;
   }
   .main {
     padding-bottom: var(--s-14);
@@ -393,72 +538,27 @@
     position: sticky;
     top: var(--bar-h);
     height: calc(100dvh - var(--bar-h));
-    padding: var(--s-4) var(--s-6) var(--s-4) var(--s-2);
-    border-left: 1px solid var(--c-border);
-    background: var(--c-surface-sunken);
+    padding: var(--s-4) var(--s-5) var(--s-4) var(--s-2);
   }
 }
 
-/* >= 1280: navigation rail on the left with the Edit sections. */
+/* >= 1280 (K29): still two columns — editing on the left (tabs above it), the live preview fixed on the right — with
+   more room for both. (The G060 navigation rail is gone: the Edit list is one tap away and shows every page.) */
 @media (min-width: 1280px) {
   .shell {
-    grid-template-columns: 240px minmax(0, 1fr) 480px;
-    grid-template-areas: 'nav main preview';
+    grid-template-columns: minmax(0, 1fr) 520px;
   }
-  .nav {
-    position: sticky;
-    top: var(--bar-h);
-    height: calc(100dvh - var(--bar-h));
-    overflow-y: auto;
-    padding: var(--s-5) var(--s-3);
-    border-right: 1px solid var(--c-border);
-  }
-  .navList {
-    display: block;
-    padding: 0;
-    background: transparent;
-  }
-  .navItem {
-    justify-content: flex-start;
-    gap: 12px;
-    padding: 0 14px;
-    margin-bottom: 2px;
-    border-radius: var(--r-control);
-    font-size: 15px;
-  }
-  .navItem:hover {
-    background: var(--c-surface-sunken);
-  }
-  .navItem[aria-current='page'] {
-    background: var(--c-surface);
-  }
-  .railSub {
-    display: block;
-    list-style: none;
-    margin: 0 0 var(--s-2);
-    padding: 0 0 0 34px;
-  }
-  .railSubItem {
-    display: flex;
-    align-items: center;
-    min-height: 36px;
-    padding: 0 12px;
-    border-radius: var(--r-chip);
-    color: var(--c-text-muted);
-    font-size: 14px;
-    text-decoration: none;
-  }
-  .railSubItem:hover {
-    color: var(--c-text);
-    background: var(--c-surface-sunken);
-  }
-  .railSubItem[aria-current='page'] {
-    color: var(--c-accent);
-    background: var(--c-accent-soft);
-    font-weight: 600;
+  .nav,
+  .main {
+    max-width: 720px;
+    width: 100%;
+    justify-self: center;
   }
   .main {
-    padding-top: var(--s-8);
+    padding-top: var(--s-6);
+  }
+  .previewColumn {
+    padding-right: var(--s-6);
   }
 }
 
@@ -469,7 +569,7 @@
   grid-template-columns: auto 1fr;
   align-items: center;
   column-gap: var(--s-3);
-  margin: var(--s-2) 0 var(--s-6);
+  margin: var(--s-1) 0 var(--s-6);
 }
 
 .pageHead > :not(.pageIcon) {
@@ -483,41 +583,48 @@
 .pageIcon {
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
-  color: var(--c-text);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--c-surface-sunken);
+  color: var(--c-heading);
 }
 
+/* "Edit your website", "Guests", "Share", a section's name (comp: heavy, tight, aubergine). */
 .pageTitle {
   margin: 0;
-  font-size: 26px;
-  line-height: 32px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-}
-
-.homeTitle {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 32px;
-  line-height: 38px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
+  font-size: clamp(30px, 7.4vw + 4px, 42px);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   overflow-wrap: anywhere;
 }
 
+.pageIcon + .pageTitle {
+  font-size: clamp(26px, 5.6vw + 6px, 36px);
+}
+
+/* Home: the couple's names, large. */
+.homeTitle {
+  margin: 0;
+  font-size: clamp(34px, 9.5vw + 4px, 54px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+/* Under the names: the date in the brand's light, wide line. */
 .pageSub {
-  margin: 4px 0 0;
-  color: var(--c-text-muted);
-  font-size: 15px;
+  margin: 10px 0 0;
+  color: var(--c-text);
+  font-family: var(--font-wide);
+  font-weight: 300;
+  font-size: clamp(18px, 2.4vw + 9px, 22px);
+  line-height: 1.3;
 }
 
 .stack {
   display: grid;
-  gap: var(--s-4);
+  gap: var(--s-5);
 }
 
 /* ================================================================== buttons */
@@ -549,10 +656,15 @@
   transform: scale(0.98);
 }
 
+/* Primary: aubergine with the heading face (comp "Continue", "Add a reply"); white text 17:1. */
 .btn_primary {
   min-height: 48px;
   background: var(--c-primary);
   color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.005em;
 }
 
 .btn_primary:hover:not(:disabled) {
@@ -562,17 +674,21 @@
 .btn_secondary {
   background: var(--c-surface);
   border-color: var(--c-control-border);
-  color: var(--c-text);
+  color: var(--c-heading);
 }
 
 .btn_secondary:hover:not(:disabled) {
   background: var(--c-surface-sunken);
 }
 
+/* Tertiary: a text button, underlined like the comp's "Back". */
 .btn_tertiary {
   background: transparent;
-  color: var(--c-accent);
+  color: var(--c-heading);
   padding: 0 10px;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
 }
 
 .btn_tertiary:hover:not(:disabled) {
@@ -592,6 +708,8 @@
   background: transparent;
   color: var(--c-danger);
   padding: 0 10px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .btn_dangerText:hover:not(:disabled) {
@@ -606,10 +724,19 @@
 
 .btn_primary.btnSmall {
   min-height: 44px;
+  font-size: 15px;
 }
 
+/* A full-width button may wrap its label ("Continue setup · Step 3 of 6" on a 320 px phone) instead of widening the page. */
 .btnBlock {
   width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+.btn_primary.btnBlock {
+  min-height: 52px;
+  font-size: 17px;
 }
 
 .btn:disabled,
@@ -627,7 +754,7 @@
   border: 0;
   border-radius: var(--r-pill);
   background: transparent;
-  color: var(--c-text);
+  color: var(--c-heading);
   cursor: pointer;
 }
 
@@ -651,9 +778,9 @@
   padding: 0;
   border: 0;
   background: none;
-  color: var(--c-accent);
+  color: var(--c-heading);
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -665,14 +792,24 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 24px;
-  padding: 2px 8px;
-  border-radius: var(--r-chip);
+  gap: 5px;
+  min-height: 26px;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
   font-size: 13px;
   line-height: 18px;
   font-weight: 600;
   white-space: nowrap;
+}
+
+/* A status dot in front of the text (Coming / Not coming, comp u2_guests_390); the text says it all. */
+.badge[data-dot]::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .badge_neutral {
@@ -697,12 +834,20 @@
 
 .badge_accent {
   background: var(--c-accent-soft);
-  color: var(--c-accent);
+  color: var(--c-heading);
 }
 
+/* "New": aubergine with white text (K29: one accent colour). */
+.badge_strong {
+  background: var(--c-anchor);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* K29: fewer borders — white cards on the paper ground, a soft shadow only. */
 .card {
-  padding: var(--s-4);
-  border: 1px solid var(--c-border);
+  padding: var(--s-6) var(--s-5);
+  border: 0;
   border-radius: var(--r-card);
   background: var(--c-surface);
   box-shadow: var(--e-1);
@@ -713,14 +858,32 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--s-2);
-  margin: -4px 0 var(--s-2);
+  margin: -4px 0 var(--s-3);
+}
+
+/* A card's line icon (Share, comp u2_share_390): a paper disc before the title. */
+.cardTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.cardIcon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--c-surface-sunken);
+  color: var(--c-heading);
 }
 
 .cardTitle {
   margin: 0;
-  font-size: 17px;
-  line-height: 24px;
-  font-weight: 650;
+  font-size: 20px;
+  line-height: 1.2;
 }
 
 .cardText {
@@ -769,13 +932,13 @@
 
 .banner_info {
   background: var(--c-accent-soft);
-  border-color: #cddbe7;
-  color: #1f405a;
+  border-color: var(--c-accent-line);
+  color: var(--c-heading);
 }
 
 .banner_warning {
   background: var(--c-warning-soft);
-  border-color: #efd9a6;
+  border-color: #ecd6a2;
   color: var(--c-warning);
 }
 
@@ -787,7 +950,7 @@
 
 .banner_success {
   background: var(--c-success-soft);
-  border-color: #c5e0cf;
+  border-color: #c7dfcb;
   color: var(--c-success);
 }
 
@@ -796,7 +959,7 @@
   justify-items: center;
   gap: var(--s-3);
   padding: var(--s-8) var(--s-4);
-  border: 1px dashed var(--c-border);
+  border: 1px dashed var(--c-control-border);
   border-radius: var(--r-card);
   background: var(--c-surface);
   text-align: center;
@@ -805,11 +968,11 @@
 .emptyIcon {
   display: inline-grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: var(--c-surface-sunken);
-  color: var(--c-text-muted);
+  background: var(--c-accent-soft);
+  color: var(--c-heading);
 }
 
 .emptyText {
@@ -820,13 +983,14 @@
 
 /* ================================================================== home */
 
+/* Status card (comp "Your website is live"): badge, one sentence, the link in a paper field with Copy, one action. */
 .status {
   display: grid;
-  gap: var(--s-3);
-  padding: var(--s-4);
+  gap: var(--s-4);
+  padding: var(--s-6) var(--s-5);
   border-radius: var(--r-card);
   background: var(--c-surface);
-  border: 1px solid var(--c-border);
+  border: 0;
   box-shadow: var(--e-1);
 }
 
@@ -838,9 +1002,8 @@
 
 .statusText {
   margin: 0;
-  font-size: 17px;
-  line-height: 24px;
-  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.2;
 }
 
 .statusLink {
@@ -848,14 +1011,26 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--s-2);
-  padding: 6px 6px 6px 12px;
+  min-height: 52px;
+  padding: 4px 4px 4px 16px;
   border-radius: var(--r-control);
   background: var(--c-surface-sunken);
 }
 
+.statusLink .btn_tertiary {
+  flex: none;
+  border-radius: 10px;
+  background: var(--c-paper);
+  text-decoration: none;
+}
+
+.statusLink .btn_tertiary:hover:not(:disabled) {
+  background: #e4dac9;
+}
+
 .url {
   min-width: 0;
-  color: var(--c-accent);
+  color: var(--c-heading);
   font-weight: 600;
   text-decoration: none;
 }
@@ -887,31 +1062,37 @@
   margin: var(--s-2) 0 0;
   font-size: 18px;
   font-weight: 600;
-  color: var(--c-accent);
+  color: var(--c-heading);
   text-decoration: none;
 }
 
+/* Next steps (comp): open rings, hairline rows. The ring's dot says what kind of step (also in the text). */
 .checklist {
   display: grid;
-  gap: 2px;
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.checklist > li + li {
+  border-top: 1px solid var(--c-border);
+}
+
 .checkItem {
   display: flex;
   align-items: center;
-  gap: var(--s-3);
+  gap: var(--s-4);
   width: 100%;
-  min-height: 52px;
-  padding: 8px 4px 8px 2px;
+  min-height: 60px;
+  padding: 10px 4px 10px 0;
   border: 0;
   border-radius: var(--r-control);
   background: transparent;
   color: var(--c-text);
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
+  line-height: 22px;
   text-align: left;
   cursor: pointer;
 }
@@ -921,19 +1102,28 @@
 }
 
 .checkDot {
+  position: relative;
   flex: none;
-  width: 10px;
-  height: 10px;
-  margin-left: 8px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: var(--c-accent);
+  border: 1.5px solid #d9cfbf;
+  background: var(--c-bg);
 }
 
-.check_warning .checkDot {
-  background: #c48a12;
+.checkDot::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: var(--c-anchor);
 }
 
-.check_danger .checkDot {
+.check_warning .checkDot::after {
+  background: var(--c-anchor);
+}
+
+.check_danger .checkDot::after {
   background: var(--c-danger);
 }
 
@@ -944,7 +1134,7 @@
 
 .chev {
   flex: none;
-  color: var(--c-text-muted);
+  color: var(--c-heading);
 }
 
 .allSet {
@@ -956,14 +1146,15 @@
   font-weight: 600;
 }
 
+/* "3 new replies" (comp): lavender disc, heavy title, a line of numbers, chevron. */
 .cardButton {
   display: flex;
   align-items: center;
-  gap: var(--s-3);
+  gap: var(--s-4);
   width: 100%;
-  min-height: 72px;
-  padding: var(--s-3) var(--s-4);
-  border: 1px solid var(--c-border);
+  min-height: 88px;
+  padding: var(--s-4) var(--s-4) var(--s-4) var(--s-4);
+  border: 1px solid transparent;
   border-radius: var(--r-card);
   background: var(--c-surface);
   box-shadow: var(--e-1);
@@ -974,33 +1165,35 @@
 }
 
 .cardButton:hover {
-  border-color: var(--c-control-border);
+  border-color: var(--c-accent-line);
 }
 
 .cardButtonIcon {
   display: inline-grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   flex: none;
-  border-radius: 12px;
+  border-radius: 50%;
   background: var(--c-accent-soft);
-  color: var(--c-accent);
+  color: var(--c-heading);
 }
 
 .cardButtonBody {
   display: grid;
   flex: 1;
   min-width: 0;
+  gap: 2px;
 }
 
 .cardButtonTitle {
-  font-weight: 650;
+  font-size: 21px;
+  line-height: 1.2;
 }
 
 .cardButtonText {
   color: var(--c-text-muted);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .rightsRow {
@@ -1024,7 +1217,7 @@
   display: flex;
   justify-content: space-between;
   gap: var(--s-3);
-  padding: 10px 0;
+  padding: 12px 0;
   border-top: 1px solid var(--c-border);
 }
 
@@ -1045,53 +1238,43 @@
 
 /* ================================================================== edit list */
 
-.groupLabel {
-  margin: var(--s-2) 0 var(--s-2) 4px;
-  color: var(--c-text-muted);
-  font-size: 13px;
-  font-weight: 650;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
+/* Each section is its own card (comp u2_edit_390). */
 .list {
+  display: grid;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-card);
-  background: var(--c-surface);
-  box-shadow: var(--e-1);
-  overflow: hidden;
-}
-
-.list > li + li {
-  border-top: 1px solid var(--c-border);
 }
 
 .row {
   display: flex;
   align-items: center;
-  gap: var(--s-3);
-  min-height: 72px;
-  padding: var(--s-3) var(--s-3) var(--s-3) var(--s-4);
+  gap: var(--s-4);
+  min-height: 88px;
+  padding: var(--s-4) var(--s-3) var(--s-4) var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
   color: var(--c-text);
   text-decoration: none;
+  transition: border-color var(--m-fast) var(--ease);
 }
 
 .row:hover {
-  background: #fbfaf8;
+  border-color: var(--c-accent-line);
 }
 
 .rowIcon {
   display: inline-grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 52px;
+  height: 52px;
   flex: none;
-  border-radius: 10px;
+  border-radius: 50%;
   background: var(--c-surface-sunken);
-  color: var(--c-text);
+  color: var(--c-heading);
 }
 
 .rowBody {
@@ -1102,14 +1285,15 @@
 }
 
 .rowTitle {
-  font-weight: 650;
+  font-size: 19px;
+  line-height: 1.2;
 }
 
 .rowSummary {
   overflow: hidden;
   color: var(--c-text-muted);
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 15px;
+  line-height: 21px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -1118,6 +1302,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 4px;
+}
+
+/* "3 name & date changes left" may wrap inside a narrow row. */
+.rowBadges .badge {
+  white-space: normal;
+}
+
+@media (max-width: 379px) {
+  .row {
+    gap: var(--s-3);
+    padding-left: var(--s-3);
+  }
+  .rowIcon {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .rowBadges:empty {
@@ -1138,7 +1339,7 @@
   margin: var(--s-2) calc(-1 * var(--gutter)) 0;
   padding: var(--s-6) var(--gutter) var(--s-3);
   /* Content scrolling under the button fades out instead of showing through. */
-  background: linear-gradient(to bottom, rgb(247 246 243 / 0), var(--c-bg) 45%);
+  background: linear-gradient(to bottom, rgb(250 247 240 / 0), var(--c-bg) 45%);
   pointer-events: none;
 }
 
@@ -1165,10 +1366,11 @@
   gap: var(--s-4);
   min-width: 0;
   margin: 0;
-  padding: var(--s-4);
-  border: 1px solid var(--c-border);
+  padding: var(--s-5);
+  border: 0;
   border-radius: var(--r-card);
   background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .groupTitle {
@@ -1176,8 +1378,11 @@
   width: 100%;
   margin: 0 0 calc(-1 * var(--s-1));
   padding: 0;
-  font-size: 15px;
-  font-weight: 650;
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .groupTitle + * {
@@ -1186,9 +1391,8 @@
 
 .subTitle {
   margin: var(--s-4) 0 var(--s-2);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 24px;
-  font-weight: 650;
 }
 
 .field {
@@ -1205,8 +1409,9 @@
 }
 
 .label {
-  font-size: 15px;
-  line-height: 20px;
+  color: var(--c-text);
+  font-size: 16px;
+  line-height: 22px;
   font-weight: 600;
 }
 
@@ -1245,10 +1450,10 @@
 .rightsHint {
   margin: 0;
   padding: var(--s-3) var(--s-4);
-  border-left: 3px solid var(--c-accent);
+  border-left: 3px solid var(--c-anchor);
   border-radius: 0 var(--r-control) var(--r-control) 0;
   background: var(--c-accent-soft);
-  color: #1f405a;
+  color: var(--c-heading);
   font-size: 14px;
   line-height: 20px;
 }
@@ -1273,12 +1478,13 @@
 
 .sampleTag {
   flex: none;
-  padding: 1px 8px;
-  border-radius: var(--r-chip);
-  background: var(--c-warning-soft);
-  color: var(--c-warning);
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  /* K29: a quiet marker, not a warning (one accent; reminders live on Home). */
+  background: var(--c-surface-sunken);
+  color: var(--c-text-muted);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
@@ -1286,14 +1492,14 @@
 .select,
 .textarea {
   width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
+  min-height: 52px;
+  padding: 13px 16px;
   border: 1px solid var(--c-control-border);
   border-radius: var(--r-control);
   background: var(--c-surface);
   color: var(--c-text);
   font: inherit;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 24px;
   transition:
     border-color var(--m-fast) var(--ease),
@@ -1303,14 +1509,17 @@
 .input:hover,
 .select:hover,
 .textarea:hover {
-  border-color: #6f6a61;
+  border-color: #6b5f69;
 }
 
+/* Focus: an aubergine border plus a lavender halo (the field's frame, ≥ 3:1, stays). */
 .input:focus,
 .select:focus,
 .textarea:focus {
-  border-color: var(--c-accent);
-  box-shadow: 0 0 0 3px rgb(43 86 117 / 0.18);
+  border-color: var(--c-anchor);
+  box-shadow:
+    0 0 0 1px var(--c-anchor),
+    0 0 0 5px var(--c-accent-line);
   outline: none;
 }
 
@@ -1323,8 +1532,8 @@
   padding-right: 40px;
   background-image: linear-gradient(45deg, transparent 50%, var(--c-text-muted) 50%), linear-gradient(135deg, var(--c-text-muted) 50%, transparent 50%);
   background-position:
-    calc(100% - 20px) 21px,
-    calc(100% - 15px) 21px;
+    calc(100% - 22px) 23px,
+    calc(100% - 17px) 23px;
   background-size: 5px 5px;
   background-repeat: no-repeat;
 }
@@ -1393,7 +1602,7 @@
   padding: 0;
   border: 1px solid var(--c-control-border);
   border-radius: var(--r-pill);
-  background: #e9e6e0;
+  background: var(--c-paper);
   cursor: pointer;
   transition: background var(--m-base) var(--ease);
 }
@@ -1495,22 +1704,28 @@
   gap: 8px;
 }
 
+/* Filter chips (comp): paper pills; the chosen one aubergine (also aria-pressed). */
 .chip {
   min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid var(--c-control-border);
+  padding: 0 18px;
+  border: 1px solid var(--c-border);
   border-radius: var(--r-pill);
-  background: var(--c-surface);
-  color: var(--c-text);
+  background: var(--c-paper);
+  color: var(--c-heading);
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }
 
-.chipOn {
-  border-color: var(--c-text);
-  background: var(--c-text);
+.chip:hover:not(:disabled) {
+  border-color: var(--c-control-border);
+}
+
+.chipOn,
+.chipOn:hover:not(:disabled) {
+  border-color: var(--c-anchor);
+  background: var(--c-anchor);
   color: #fff;
 }
 
@@ -1524,10 +1739,11 @@
   gap: var(--s-4);
   min-width: 0;
   margin: 0;
-  padding: var(--s-3) var(--s-4) var(--s-4);
-  border: 1px solid var(--c-border);
+  padding: var(--s-3) var(--s-4) var(--s-5);
+  border: 0;
   border-radius: var(--r-card);
   background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .itemHead {
@@ -1541,7 +1757,8 @@
 .itemTitle {
   min-width: 0;
   overflow: hidden;
-  font-weight: 650;
+  color: var(--c-heading);
+  font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -1609,10 +1826,11 @@
 .locked {
   display: grid;
   gap: var(--s-3);
-  padding: var(--s-4);
-  border: 1px solid var(--c-border);
+  padding: var(--s-5);
+  border: 0;
   border-radius: var(--r-card);
   background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .lockedList {
@@ -1641,7 +1859,9 @@
 
 .lockedValue {
   margin: 0;
-  font-size: 17px;
+  color: var(--c-heading);
+  font-size: 18px;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -1682,8 +1902,8 @@
 }
 
 .meterDotOn {
-  border-color: var(--c-text);
-  background: var(--c-text);
+  border-color: var(--c-anchor);
+  background: var(--c-anchor);
 }
 
 .meterText {
@@ -1726,7 +1946,7 @@
 
 .costInfo {
   background: var(--c-accent-soft);
-  color: #1f405a;
+  color: var(--c-heading);
 }
 
 .costWarn {
@@ -1782,11 +2002,11 @@
 }
 
 .pendingDot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   margin: 0 5px;
   border-radius: 50%;
-  background: #c48a12;
+  background: var(--c-anchor);
 }
 
 @media (max-width: 719px) {
@@ -1823,9 +2043,10 @@
   gap: var(--s-4);
   align-items: start;
   padding: var(--s-3);
-  border: 1px solid var(--c-border);
+  border: 0;
   border-radius: var(--r-card);
   background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .group .photoCard {
@@ -1838,7 +2059,7 @@
   overflow: hidden;
   width: 112px;
   max-height: 160px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--c-surface-sunken);
 }
 
@@ -1903,7 +2124,8 @@
 
 .photoLabel {
   margin: 0;
-  font-weight: 650;
+  color: var(--c-heading);
+  font-weight: 700;
 }
 
 .photoActions {
@@ -1935,7 +2157,7 @@
 .cropFrame {
   position: relative;
   overflow: hidden;
-  background: #2b2925;
+  background: #241520;
   border-radius: 10px;
   touch-action: none;
   cursor: grab;
@@ -1973,10 +2195,18 @@
   gap: var(--s-2);
 }
 
+/* Number tiles (comp u2_guests_390): big heavy numeral, its icon disc beside it, the label under both. The DOM order
+   stays icon · number · label, so the tile still reads "12 Guests coming". */
 .stat {
   display: grid;
-  gap: 2px;
-  padding: var(--s-3) var(--s-3) var(--s-4);
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'num icon'
+    'label label';
+  align-items: center;
+  column-gap: 6px;
+  row-gap: 2px;
+  padding: var(--s-3) var(--s-3) var(--s-4) var(--s-4);
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
   background: var(--c-surface);
@@ -1984,32 +2214,60 @@
 }
 
 .statNum {
-  font-family: var(--font-display);
-  font-size: 30px;
-  line-height: 36px;
+  grid-area: num;
+  font-size: clamp(30px, 6vw + 8px, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 
 .statLabel {
-  color: var(--c-text-muted);
-  font-size: 13px;
+  grid-area: label;
+  color: var(--c-text);
+  font-size: 14px;
+  line-height: 18px;
   font-weight: 600;
+}
+
+/* Phones: three tiles of ~100 px — the disc goes above the numeral, so 3-digit numbers never touch it. */
+@media (max-width: 479px) {
+  .stat {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'icon'
+      'num'
+      'label';
+    justify-items: start;
+    row-gap: 4px;
+  }
+  .statIcon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 2px;
+  }
 }
 
 .search {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 12px;
+  gap: 10px;
+  padding: 0 16px;
   border: 1px solid var(--c-control-border);
   border-radius: var(--r-control);
   background: var(--c-surface);
-  color: var(--c-text-muted);
+  color: var(--c-heading);
+}
+
+.search:focus-within {
+  border-color: var(--c-anchor);
+  box-shadow:
+    0 0 0 1px var(--c-anchor),
+    0 0 0 5px var(--c-accent-line);
 }
 
 .searchInput {
   flex: 1;
-  min-height: 46px;
+  min-height: 50px;
   border: 0;
   background: transparent;
   color: var(--c-text);
@@ -2018,20 +2276,21 @@
   outline: none;
 }
 
+/* Each reply is its own card (comp). */
 .replyList {
   display: grid;
-  gap: 0;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-card);
-  background: var(--c-surface);
   overflow: visible;
 }
 
-.reply + .reply {
-  border-top: 1px solid var(--c-border);
+.reply {
+  border: 1px solid transparent;
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .replyHead {
@@ -2057,7 +2316,8 @@
 }
 
 .replyName {
-  font-weight: 650;
+  font-size: 18px;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
@@ -2097,9 +2357,9 @@
 }
 
 .skeletonRow {
-  height: 64px;
+  height: 72px;
   border-radius: var(--r-card);
-  background: linear-gradient(90deg, var(--c-surface-sunken), #f8f7f4, var(--c-surface-sunken));
+  background: linear-gradient(90deg, var(--c-surface-sunken), #faf7f0, var(--c-surface-sunken));
   background-size: 200% 100%;
   animation: indeterminate 1.4s linear infinite;
 }
@@ -2107,27 +2367,26 @@
 /* ------------------------------------------------------------------ guests v2 (G069): overview, answers, notes, cards,
    add / edit sheet, printable list. Tokens only (G066 restyles the whole panel). */
 
+/* New replies since the last look: an aubergine frame (the title says how many). */
 .cardButtonNew {
-  border-color: var(--c-accent);
-  box-shadow: inset 0 0 0 1px var(--c-accent), var(--e-1);
-}
-
-.cardButtonNew .cardButtonTitle {
-  color: var(--c-accent);
+  border-color: var(--c-anchor);
+  box-shadow:
+    inset 0 0 0 1px var(--c-anchor),
+    var(--e-1);
 }
 
 .statIcon {
+  grid-area: icon;
   display: inline-grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  margin-bottom: 2px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--c-surface-sunken);
-  color: var(--c-text-muted);
+  color: var(--c-heading);
 }
 
-/* Deadline strip: "Replies close in 30 days" (comp u2_guests_390). */
+/* Deadline strip: "Replies close in 30 days" (comp u2_guests_390): a lavender tint, aubergine text. */
 .deadline {
   display: flex;
   align-items: center;
@@ -2135,18 +2394,18 @@
   padding: var(--s-3) var(--s-4);
   border-radius: var(--r-card);
   background: var(--c-accent-soft);
-  color: #1f405a;
+  color: var(--c-heading);
 }
 
 .deadlineIcon {
   display: inline-grid;
   flex: none;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--c-surface);
-  color: var(--c-accent);
+  color: var(--c-heading);
 }
 
 .deadlineText {
@@ -2157,7 +2416,7 @@
 }
 
 .deadlineHead {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 24px;
 }
 
@@ -2185,7 +2444,7 @@
   padding: var(--s-2);
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
-  background: rgb(247 246 243 / 0.97);
+  background: rgb(250 247 240 / 0.97);
   box-shadow: var(--e-2);
 }
 
@@ -2194,8 +2453,16 @@
   grid-column: 1 / -1;
 }
 
+/* "Add a reply" + "Download list": both in the heading face, the second outlined in aubergine (comp). */
 .guestBar > .btn {
-  min-height: 48px;
+  min-height: 52px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.guestBar > .btn_secondary {
+  border-color: var(--c-anchor);
 }
 
 .guestBarNote {
@@ -2213,10 +2480,10 @@
 }
 
 .sectionHeading {
-  margin: var(--s-2) 0 0;
-  font-size: 20px;
-  line-height: 26px;
-  font-weight: 650;
+  margin: var(--s-3) 0 0;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .sectionHeading:focus {
@@ -2250,7 +2517,7 @@
   padding: 4px 4px 4px var(--s-4);
   border-radius: var(--r-control);
   background: var(--c-accent-soft);
-  color: #1f405a;
+  color: var(--c-heading);
   font-size: 15px;
   overflow-wrap: anywhere;
 }
@@ -2266,12 +2533,12 @@
 
 .barRow {
   display: grid;
-  grid-template-columns: minmax(0, 36%) minmax(48px, 1fr) auto;
+  grid-template-columns: minmax(0, 34%) minmax(48px, 1fr) auto;
   align-items: center;
   gap: var(--s-3);
   width: 100%;
   min-height: 44px;
-  padding: 6px 10px;
+  padding: 6px 8px;
   border: 1px solid transparent;
   border-radius: var(--r-control);
   background: transparent;
@@ -2294,7 +2561,8 @@
 
 .barLabel {
   min-width: 0;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   overflow-wrap: anywhere;
 }
 
@@ -2306,7 +2574,9 @@
 
 .barValue {
   min-width: 2ch;
-  font-weight: 650;
+  color: var(--c-heading);
+  font-size: 16px;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
@@ -2316,9 +2586,10 @@
   font-weight: 500;
 }
 
+/* Answer bars (comp "Meal choices"): aubergine on paper (K29: one accent colour); the numbers carry the meaning. */
 .bar {
   display: block;
-  height: 8px;
+  height: 14px;
   border-radius: var(--r-pill);
   background: var(--c-surface-sunken);
   overflow: hidden;
@@ -2329,8 +2600,10 @@
   height: 100%;
   min-width: 0;
   border-radius: var(--r-pill);
-  background: var(--c-accent);
+  background: var(--c-anchor);
 }
+
+
 
 .cardFootHint {
   margin-top: var(--s-2);
@@ -2367,7 +2640,7 @@
 .dietIcon {
   flex: none;
   margin-top: 2px;
-  color: var(--c-text-muted);
+  color: var(--c-heading);
 }
 
 .dietBody {
@@ -2379,7 +2652,8 @@
 }
 
 .dietName {
-  font-weight: 650;
+  color: var(--c-heading);
+  font-weight: 700;
 }
 
 .dietFrom {
@@ -2387,21 +2661,11 @@
   font-size: 13px;
 }
 
-/* Reply cards */
+/* Reply cards: a new one gets an aubergine edge (and its "New" badge). */
 .replyNew {
-  background: linear-gradient(90deg, var(--c-accent-soft), var(--c-surface) 60%);
-}
-
-.reply:first-child {
-  border-radius: var(--r-card) var(--r-card) 0 0;
-}
-
-.reply:last-child {
-  border-radius: 0 0 var(--r-card) var(--r-card);
-}
-
-.reply:only-child {
-  border-radius: var(--r-card);
+  box-shadow:
+    inset 4px 0 0 var(--c-anchor),
+    var(--e-1);
 }
 
 .replyToggleRow {
@@ -2414,11 +2678,11 @@
   display: inline-grid;
   flex: none;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--c-surface-sunken);
-  color: var(--c-text);
+  color: var(--c-heading);
 }
 
 .replyAvatarNo {
@@ -2480,6 +2744,11 @@
 }
 
 .partyFields legend {
+  color: var(--c-heading);
+  font-weight: 700;
+}
+
+.partyFields legend {
   padding: 0 4px;
 }
 
@@ -2513,7 +2782,7 @@
 }
 
 .printDoc {
-  padding: var(--s-5) var(--s-4);
+  padding: var(--s-6) var(--s-5);
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
   background: var(--c-surface);
@@ -2526,15 +2795,13 @@
   gap: 2px;
   margin-bottom: var(--s-4);
   padding-bottom: var(--s-3);
-  border-bottom: 2px solid var(--c-text);
+  border-bottom: 2px solid var(--c-anchor);
 }
 
 .printTitle {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 32px;
-  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.15;
 }
 
 .printNames {
@@ -2668,15 +2935,31 @@
   display: grid;
   justify-items: start;
   gap: var(--s-2);
-  margin: var(--s-3) 0 var(--s-2);
+  margin: var(--s-1) 0 var(--s-2);
 }
 
+/* The real QR (lib/qr.ts) on white, framed by a paper mat. */
 .qr {
   display: block;
   width: min(220px, 64vw);
   height: auto;
+  padding: 6px;
   border: 1px solid var(--c-border);
-  border-radius: 10px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 0 0 6px var(--c-surface-sunken);
+  margin: 6px;
+}
+
+/* "Download PNG" · "Download SVG": two even buttons where they fit, one under the other where they do not. */
+.qrBlock > .buttonRow {
+  width: 100%;
+  max-width: 420px;
+}
+
+.qrBlock > .buttonRow > .btn {
+  flex: 1 1 140px;
+  padding: 0 12px;
 }
 
 .help section {
@@ -2689,7 +2972,20 @@
 }
 
 .help a {
-  color: var(--c-accent);
+  color: var(--c-heading);
+  font-weight: 600;
+}
+
+/* The website address in a paper field (comp u2_share_390). */
+.urlField {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+  color: var(--c-heading);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 /* ================================================================== preview */
@@ -2708,11 +3004,15 @@
   padding-top: env(safe-area-inset-top);
 }
 
+/* Wide screens (comp u2_desktop): the live preview in a rounded paper panel. */
 @media (min-width: 960px) {
   .previewColumn .previewDock {
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding: var(--s-2) var(--s-3) var(--s-4);
+    border-radius: var(--r-sheet);
+    background: var(--c-surface-sunken);
   }
 }
 
@@ -2731,7 +3031,11 @@
 
 .previewTitle {
   margin: 0;
-  font-weight: 650;
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .previewSub {
@@ -2756,20 +3060,24 @@
 .previewTab {
   flex: none;
   min-height: 44px;
-  padding: 6px 10px;
+  padding: 6px 14px;
   border-radius: var(--r-pill);
-  border: 1px solid var(--c-control-border);
+  border: 1px solid var(--c-border);
   background: var(--c-surface);
-  color: var(--c-text);
+  color: var(--c-heading);
   font: inherit;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
 
+.previewTab:hover {
+  border-color: var(--c-control-border);
+}
+
 .previewTab[aria-selected='true'] {
-  background: var(--c-text);
-  border-color: var(--c-text);
+  background: var(--c-anchor);
+  border-color: var(--c-anchor);
   color: #fff;
 }
 
@@ -2828,7 +3136,7 @@
     margin: 0 auto;
     padding: 10px;
     border-radius: 44px;
-    background: #1d1c1a;
+    background: var(--c-anchor);
     box-shadow: var(--e-2);
   }
   .previewColumn .previewFrame {
@@ -2846,7 +3154,7 @@
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgb(24 22 19 / 0.45);
+  background: rgb(43 21 38 / 0.48);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -2899,11 +3207,11 @@
 }
 
 .sheetGrip {
-  width: 40px;
+  width: 44px;
   height: 4px;
-  margin: 8px auto 0;
+  margin: 10px auto 0;
   border-radius: 2px;
-  background: var(--c-border);
+  background: var(--c-paper);
 }
 
 .sheetHeader {
@@ -2914,15 +3222,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px 0 10px;
+  padding: 12px 0 10px;
   background: var(--c-surface);
 }
 
 .sheetTitle {
   margin: 0;
-  font-size: 20px;
-  line-height: 26px;
-  font-weight: 650;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .sheetClose {
@@ -3000,7 +3308,7 @@
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 /* Main actions of a tall sheet stay on screen while it scrolls. */
@@ -3022,18 +3330,18 @@
   }
 }
 
+/* "Good to know before you publish": the pale aubergine tint, aubergine text. */
 .rules {
-  padding: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  border-left: 0;
   border-radius: var(--r-card);
   background: var(--c-accent-soft);
-  color: #1f405a;
+  color: var(--c-heading);
 }
 
 .rulesTitle {
   margin: 0 0 var(--s-2);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--c-text);
+  font-size: 18px;
 }
 
 .rules ul {
@@ -3070,10 +3378,10 @@
   align-items: center;
   gap: var(--s-3);
   max-width: 560px;
-  min-height: 48px;
-  padding: 6px 6px 6px 16px;
-  border-radius: var(--r-control);
-  background: #1d1c1a;
+  min-height: 52px;
+  padding: 6px 6px 6px 18px;
+  border-radius: 14px;
+  background: var(--c-anchor);
   color: #fff;
   font-size: 15px;
   box-shadow: var(--e-2);
@@ -3081,16 +3389,23 @@
   animation: rise var(--m-base) var(--ease);
 }
 
+/* Actions in paper on aubergine (13.6:1), underlined. */
 .snackAction {
   min-height: 40px;
   padding: 0 12px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 10px;
   background: transparent;
-  color: #a9cbe6;
+  color: var(--c-paper);
+  text-decoration: underline;
+  text-underline-offset: 4px;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
+}
+
+.snack :focus-visible {
+  outline-color: #fff;
 }
 
 .snackAction:hover {
@@ -3107,45 +3422,64 @@
   margin: 0 auto;
 }
 
+/* Top of the wizard (comp u2_setup_names_390): the logo and "Save & exit", then the progress bar with "Step n of 6". */
 .setupTop {
   position: sticky;
   top: 0;
   z-index: 20;
-  padding: calc(8px + env(safe-area-inset-top)) var(--gutter) 12px;
-  background: rgb(247 246 243 / 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: calc(10px + env(safe-area-inset-top)) var(--gutter) 14px;
+  background: rgb(250 247 240 / 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .setupTopRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--s-3);
+  margin-right: -8px;
+}
+
+.setupProgressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: 10px;
 }
 
 .setupStep {
+  flex: none;
   margin: 0;
-  color: var(--c-text-muted);
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--c-heading);
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .progress6 {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
-  margin-top: 6px;
+  gap: 3px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--c-paper);
 }
 
 .progressPart {
-  height: 4px;
-  border-radius: 2px;
-  background: var(--c-border);
+  height: 10px;
+  background: transparent;
   transition: background var(--m-base) var(--ease);
 }
 
 .progressPartOn {
-  background: var(--c-primary);
+  background: var(--c-anchor);
+}
+
+.progressPartOn:has(+ .progressPart:not(.progressPartOn)),
+.progressPartOn:last-child {
+  border-radius: 0 var(--r-pill) var(--r-pill) 0;
 }
 
 .setupMain {
@@ -3153,20 +3487,20 @@
   display: grid;
   align-content: start;
   gap: var(--s-5);
-  padding: var(--s-4) var(--gutter) 200px;
+  padding: var(--s-4) var(--gutter) 210px;
 }
 
 .setupTitle {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 30px;
-  line-height: 36px;
-  font-weight: 500;
+  font-size: clamp(32px, 8.4vw + 2px, 46px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
 }
 
 .setupHelp {
-  margin: -12px 0 0;
+  margin: -10px 0 0;
   color: var(--c-text-muted);
+  font-size: 17px;
 }
 
 .setupBar {
@@ -3175,8 +3509,8 @@
   right: 0;
   bottom: 0;
   z-index: 20;
-  padding: 8px var(--gutter) calc(12px + env(safe-area-inset-bottom));
-  background: rgb(255 255 255 / 0.96);
+  padding: 10px var(--gutter) calc(14px + env(safe-area-inset-bottom));
+  background: rgb(250 247 240 / 0.97);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid var(--c-border);
@@ -3195,10 +3529,13 @@
   padding: 0 4px;
   border: 0;
   background: none;
-  color: var(--c-accent);
+  color: var(--c-heading);
   font: inherit;
   font-size: 15px;
   font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
   cursor: pointer;
 }
 
@@ -3216,13 +3553,16 @@
 
 .setupButtons .btn_primary {
   min-width: 132px;
+  min-height: 52px;
+  font-size: 17px;
 }
 
+/* The envelope preview in a paper mat (comp: the green area of step 1). */
 .miniPreview {
   overflow: hidden;
   height: 300px;
   border-radius: var(--r-card);
-  border: 1px solid var(--c-border);
+  border: 12px solid var(--c-surface-sunken);
   background: var(--c-surface-sunken);
 }
 
@@ -3237,24 +3577,33 @@
 }
 
 .setupPreview {
-  height: min(70dvh, 640px);
+  height: min(58dvh, 560px);
   border-radius: var(--r-card);
   border: 1px solid var(--c-border);
   overflow: hidden;
   background: var(--c-surface-sunken);
+  box-shadow: var(--e-1);
 }
 
 .setupPreview .previewDock {
   height: 100%;
 }
 
+/* In the setup's publish step every page tab stays on screen: they wrap to a second line (G039 rule) instead of
+   scrolling sideways out of view. */
+.setupPreview .previewTabs {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
 .summary {
   display: grid;
   gap: 4px;
-  padding: var(--s-5) var(--s-4);
+  padding: var(--s-6) var(--s-4);
   border-radius: var(--r-card);
   border: 1px solid var(--c-border);
   background: var(--c-surface);
+  box-shadow: var(--e-1);
   text-align: center;
 }
 
@@ -3264,15 +3613,15 @@
 }
 
 .summaryNames {
-  font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 32px;
-  color: var(--c-text) !important;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--c-heading) !important;
 }
 
 .summaryUrl {
   margin-top: 8px !important;
-  color: var(--c-accent) !important;
+  color: var(--c-heading) !important;
   font-weight: 600;
 }
 
@@ -3309,15 +3658,18 @@
   min-height: 100dvh;
   max-width: 560px;
   margin: 0 auto;
-  padding: 64px 20px;
+  padding: 32px 20px 64px;
   background: var(--c-bg);
 }
 
+.noticeBrand {
+  margin-bottom: var(--s-10);
+}
+
 .noticeTitle {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 36px;
+  font-size: clamp(30px, 6vw + 8px, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
   margin: 12px 0;
 }
 
@@ -3331,15 +3683,20 @@
 
 .noticeCard {
   margin-top: var(--s-6);
-  padding: var(--s-4);
+  padding: var(--s-5);
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
   background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .noticeCard h2 {
   margin: 0 0 6px;
-  font-size: 17px;
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.01em;
 }
 
 /* ================================================================== G060-fix (review findings) */
@@ -3425,7 +3782,7 @@
   display: grid;
   gap: var(--s-3);
   padding: var(--s-4);
-  border: 1px solid #e8cf9c;
+  border: 1px solid #ecd6a2;
   border-radius: var(--r-card);
   background: var(--c-warning-soft);
   color: var(--c-text);
@@ -3467,6 +3824,326 @@
 .costUndo {
   background: var(--c-success-soft);
   color: var(--c-success);
+}
+
+/* ================================================================== K29: simpler panel */
+
+/* "Unpublished changes: 2 · Review · Publish" — in the sticky header, only while guests see an older version. */
+.changesBar {
+  background: var(--c-anchor);
+  color: #fff;
+}
+
+.changesInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px var(--s-2);
+  padding: 6px calc(var(--gutter) - 6px) 6px var(--gutter);
+}
+
+.changesText {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Phones: one line from ~380 px (the dot goes; Review and Publish get narrower); below that the actions wrap. */
+@media (max-width: 479px) {
+  .changesDot {
+    display: none;
+  }
+  .changesText {
+    font-size: 14px;
+  }
+  .changesReview {
+    padding: 0 8px;
+    font-size: 14px;
+  }
+  .changesActions .changesPublish {
+    padding: 0 14px;
+  }
+}
+
+.changesText strong {
+  font-weight: 800;
+}
+
+.changesDot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.22);
+}
+
+.changesActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  margin-left: auto;
+}
+
+.changesReview {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.changesReview:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+/* On the aubergine bar the main action turns around: white with aubergine text (17:1). */
+.changesPublish,
+.changesPublish:hover:not(:disabled) {
+  border-color: #fff;
+  background: #fff;
+  color: var(--c-anchor);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.changesPublish:hover:not(:disabled) {
+  background: var(--c-paper);
+}
+
+.changesBar :focus-visible {
+  outline-color: #fff;
+}
+
+/* The taller header must not cover the field that has focus (WCAG 2.4.11). */
+:global(html):has(.appWithChanges) {
+  scroll-padding-top: calc(var(--bar-h, 60px) + 76px);
+}
+
+@media (min-width: 960px) {
+  .appWithChanges .previewColumn {
+    top: calc(var(--bar-h) + 57px);
+    height: calc(100dvh - var(--bar-h) - 57px);
+  }
+}
+
+/* Home: how ready the website is + the next three tasks. */
+.progressCard {
+  display: grid;
+  gap: var(--s-4);
+  padding: var(--s-6) var(--s-5) var(--s-4);
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+}
+
+.progressCard > .cardTitle {
+  margin: 0;
+  font-size: 22px;
+}
+
+.meterBar {
+  display: block;
+  height: 10px;
+  border-radius: var(--r-pill);
+  background: var(--c-surface-sunken);
+  overflow: hidden;
+}
+
+.meterBarFill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: var(--c-anchor);
+  transition: width var(--m-base) var(--ease);
+}
+
+.progressLead {
+  margin: var(--s-2) 0 calc(-1 * var(--s-3));
+  color: var(--c-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* A section that folds (Share: guest password, edit link; setup: full names, more photos). */
+.disclosure {
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+}
+
+.disclosureHeading {
+  margin: 0;
+  font: inherit;
+}
+
+.disclosureButton {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 72px;
+  padding: var(--s-3) var(--s-4) var(--s-3) var(--s-5);
+  border: 0;
+  border-radius: var(--r-card);
+  background: transparent;
+  color: var(--c-heading);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.disclosureButton:hover {
+  background: rgb(43 21 38 / 0.03);
+}
+
+.disclosureTitle {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.disclosureStatus {
+  flex: none;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.disclosureChev {
+  flex: none;
+  transition: transform var(--m-base) var(--ease);
+}
+
+.disclosureOpen .disclosureChev {
+  transform: rotate(180deg);
+}
+
+.disclosureBody {
+  padding: 0 var(--s-5) var(--s-6);
+}
+
+/* An editor page: its sections one under the other, each with a sub-heading where a page holds more than one. */
+.sectionBlock {
+  display: grid;
+  gap: var(--s-5);
+  min-width: 0;
+  scroll-margin-top: calc(var(--bar-h) + 24px);
+}
+
+.appWithChanges .sectionBlock {
+  scroll-margin-top: calc(var(--bar-h) + 84px);
+}
+
+.sectionBlock + .sectionBlock {
+  margin-top: var(--s-6);
+  padding-top: var(--s-8);
+  border-top: 1px solid var(--c-border);
+}
+
+.blockTitle {
+  margin: 0;
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Review: the pages with changes guests do not see yet. */
+.reviewList {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reviewItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 64px;
+  padding: 8px 12px 8px 8px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+  color: var(--c-heading);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reviewItem .rowIcon {
+  width: 44px;
+  height: 44px;
+  background: var(--c-surface);
+}
+
+.reviewItemText {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Setup */
+.setupSubTitle {
+  margin: var(--s-4) 0 0;
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.calmNote {
+  margin: 0;
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-card);
+  background: var(--c-accent-soft);
+  color: var(--c-heading);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* Share: the QR code under the link, in the same card. */
+.shareQr {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--c-border);
+}
+
+.shareQrTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--c-heading);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* ================================================================== motion */

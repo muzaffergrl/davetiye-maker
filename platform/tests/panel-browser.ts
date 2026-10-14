@@ -385,7 +385,15 @@ try {
   await page.fill('#f-host_line', 'Together with our families');
   await page.locator('#f-host_line').blur();
   await waitSaved(page);
-  check('bar: "Publish changes" after an edit', (await page.locator('[data-publish]').innerText()) === 'Publish changes');
+  // K29: one sticky bar says the live website is behind the draft; Review names what changed.
+  const changesBar = (await page.locator('[data-changes-bar]').innerText()).replace(/\s+/g, ' ');
+  check('bar (K29): "Unpublished changes: 1 · Review · Publish" after an edit', /Unpublished changes: 1\b/.test(changesBar) && changesBar.includes('Review') && (await page.locator('[data-changes-bar] [data-publish]').innerText()) === 'Publish', changesBar);
+  await page.click('[data-changes-review]');
+  await page.waitForSelector('[data-testid="review"]');
+  const review = (await page.locator('[data-testid="review"]').innerText()).replace(/\s+/g, ' ');
+  check('review (K29): lists the changed page (Details) and offers "Publish changes"', (await page.locator('[data-review-item]').allInnerTexts()).join('|') === 'Details' && review.includes('Publish changes'), review.slice(0, 200));
+  await page.locator('[data-testid="review"]').getByRole('button', { name: 'Keep editing' }).last().click();
+  await page.waitForSelector('[data-testid="review"]', { state: 'detached' });
   await pub.goto(`${PUBLIC_URL}/home`, { waitUntil: 'networkidle' });
   check('public page: unpublished edit not visible', (await pub.locator('.kicker').textContent()) === 'Together with their families');
   await publishNow(page);
@@ -418,9 +426,11 @@ try {
     return route.fulfill({ response: res });
   });
   await page.click('[data-publish]');
-  await page.waitForSelector('[data-testid="live"], [data-testid="notes"]', { timeout: 15_000 });
+  // K29: publishing changes goes straight out (no notes sheet): type while it is on its way ("Publishing…").
+  await page.waitForSelector('[data-publish][aria-busy="true"], [data-testid="notes"]', { timeout: 15_000 });
   if (await page.locator('[data-testid="notes"]').count()) await page.click('[data-publish-anyway]');
   await page.waitForTimeout(300);
+  check('slow publish: the bar\'s button says "Publishing…" meanwhile', (await page.locator('[data-publish]').innerText()).includes('Publishing'));
   await page.fill('#f-host_line', 'Typed during the publish');
   await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
   await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();

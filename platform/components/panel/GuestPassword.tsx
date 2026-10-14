@@ -17,11 +17,14 @@ export function GuestPasswordCard({
   online,
   onSave,
   onCopy,
+  bare = false,
 }: {
   access: GuestAccessView;
   online: boolean;
   onSave: (enabled: boolean, password?: string) => Promise<AccessOutcome>;
   onCopy: (text: string, what: string) => void;
+  /** Without its own card frame and title (K29: Share shows it inside a "Guest password" section that folds). */
+  bare?: boolean;
 }) {
   const snack = useSnackbar();
   const ids = useId();
@@ -108,8 +111,9 @@ export function GuestPasswordCard({
 
   const describedBy = [`${fieldId}-hint`, error ? `${fieldId}-error` : ''].filter(Boolean).join(' ');
 
-  return (
-    <Card title="Guest password" titleId="share-password" data-guest-password={access.enabled ? 'on' : opening ? 'opening' : 'off'}>
+  const state = access.enabled ? 'on' : opening ? 'opening' : 'off';
+  const body = (
+    <>
       <div className={own.switchWrap}>
         <Switch
           id="guest-password-switch"
@@ -204,6 +208,15 @@ export function GuestPasswordCard({
           </p>
         </div>
       ) : null}
+    </>
+  );
+  return bare ? (
+    <div className={own.bare} data-guest-password={state}>
+      {body}
+    </div>
+  ) : (
+    <Card title="Guest password" titleId="share-password" icon={LockKeyhole} data-guest-password={state}>
+      {body}
     </Card>
   );
 }

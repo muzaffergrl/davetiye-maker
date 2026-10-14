@@ -33,11 +33,11 @@ export const SITE_PAGES = [
 ] as const;
 
 /**
- * The totals of the DEMO replies panel (panel screen p01_panel_replies: "5 replies · 4 attending (9 guests) · 1 not
- * attending", fictional guests). The home page shows them as an example, labelled as such — never as our numbers.
- * Retake together with the panel screens (scripts/marketing-assets.ts) when the replies view changes (G069).
+ * The totals of the DEMO replies panel (panel screen `replies`, retaken in G066-B with the G069 Guests view: tiles
+ * "9 Guests coming · 1 Not coming · 5 Replies", fictional guests). The home page shows them as an example, labelled as
+ * such — never as our numbers. Retake together with the panel screens (scripts/marketing-assets.ts) when the view changes.
  */
-export const DEMO_REPLY_TOTALS = { coming: 4, notComing: 1, replies: 5 } as const;
+export const DEMO_REPLY_TOTALS = { coming: 9, notComing: 1, replies: 5 } as const;
 
 /** What one purchase includes (pricing, design pages, llms.txt). */
 export function included(cfg: MarketingConfig = MARKETING): string[] {
