@@ -2,7 +2,7 @@
 id: G061
 baslik: Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-hiz
 oncelik: 1
 bagimli: [G038, G401]
@@ -140,3 +140,4 @@ Kullanıcı vercel.app üzerinde indekslemeyi açmayı seçerse bu kural `placeh
 - 2026-10-14 kod aşaması bitti: satış sitesi (app/(marketing)), 6 rehber, testler, previews/g061 (wf-hiz)
 - 2026-10-14 bitti, incelemeye gönderildi
 - 2026-10-14 inceleme düzeltmesi (wf-hiz): kurulum sihirbazı 5. adımda örnek metin kalınca birincil düğme "Fix N items", ikincil "Publish anyway"; 6. adımda (yayın anı) örnek metin listesi sayısıyla; Home'da "Your website is live — N things are still sample text"; yayın ekranında "Copied" + duyurulan durum satırı (snackbar "Go to my editor"ın üstüne biniyordu), adres link oldu, "Open website" eklendi. robots: eğitim botları yalnız pazarlama yollarına (`$`/`/` biçimi, çift slug'ları kapalı), yayındaki çift sitelerine `X-Robots-Tag: noindex` (karar 4 gelene kadar), robots yorumu düzeltildi. Ana sayfa title/H1/meta §2.1 kümesine göre. SSS: "Why pay … free wedding websites" (rakip adı yok) ve "show up on Google?" yanıtı gerçek davranışa göre. Organization `alternateName` = Etsy dükkân adı (gerçek değer girilince). Atlananlar: marka adı/logo (K27 kesin onayı ve PROJECT_STATE `undecided` sürüyor), sihirbazda zorunlu onay kutusu (G060-fix D "sample date block" ile çakışır), rakip adları ve "free vs buy once" rehberi (birincil kaynağa bu ortamdan erişilemedi). Birleştirmede GM02'nin `public/brand/` klasörü slug testini kırdı: `brand` ayrılmış slug yapıldı, eğitim botlarına da açıldı. Test (origin/main ile birleştikten sonra): npm test 412/412, typecheck, build + trace-check, marketing-browser 170/170, g060-browser 113/113; panel-browser 75/75 (birleştirmeden önce)
+- 2026-10-14 entegratör onayladı
