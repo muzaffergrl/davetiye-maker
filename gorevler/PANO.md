@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 30 · alindi 10 · inceleme 1 · blokaj 293 · bitti 39 · toplam 373
+Özet: hazir 32 · alindi 10 · inceleme 1 · blokaj 293 · bitti 39 · toplam 375
 
 ## claude-canva
 
@@ -248,7 +248,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 16 · Biten: 25
+Bağımlılık bekleyen: 17 · Biten: 25
 
 ## claude-metin
 
@@ -316,8 +316,9 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (14)**
+**Alınabilir (15)**
 
+- `GM01` p1 — BKE Studio marka kimliği — 3 yön panosu + seçilen yönün logo/sembol/mühür/desen/ikon/sahne dosyaları → `gorevler/GM01-marka-gorsel.md`
 - `G210` p2 — Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G210-gorsel.md`
 - `G211` p2 — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G211-gorsel.md`
 - `G212` p2 — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G212-gorsel.md`
