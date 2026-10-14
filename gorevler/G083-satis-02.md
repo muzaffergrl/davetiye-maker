@@ -2,8 +2,8 @@
 id: G083
 baslik: Tasarım 02 Dusty Blue & Champagne satış sitesine eklenir (G082 yöntemi) — tasarım sayfası, metin, gerçek ekranlar, /designs düzeni
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G083
 oncelik: 2
 bagimli: [G402, G082]
 yazar: [platform/lib/marketing/, platform/public/marketing/designs/, platform/scripts/marketing-assets.ts, platform/tests/, platform/previews/g083/, docs/14_SATIS_SITESI.md, platform/components/marketing/]
@@ -23,3 +23,4 @@ G402 (02 Dusty Blue & Champagne, tema `dusty-blue-champagne`) onaylandı. G082 i
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G402 onaylandı
+- 2026-10-14 alindi: claude-G083
