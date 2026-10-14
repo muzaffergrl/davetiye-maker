@@ -73,6 +73,7 @@ Uzun sohbetler yarıda kopabiliyor; üretilen ama push edilmemiş görsel kaybol
 - Nesne kenardan kesilmez; etrafında boşluk kalır.
 - Gerçek kişiye, ünlüye, markaya, başka satıcının tasarımına benzemez. Fotoğraflarda eller/parmaklar düzgün.
 - Mockup'larda ekran/kart yüzeyi **düz #00FF00**, yansımasız; nesne düz, eğik değil.
+- **Yeşil tonu toleranslı (2026-10-14):** imagegen tam `(0,255,0)` vermez; `(3,250,8)` gibi değerler normaldir. `kit_check` geçiyorsa yeşil yeterlidir; **yalnız renk tonu için yeniden üretme** ve kodla piksel boyama. Yeniden üretim yalnız şu durumlarda: pencere/ekranda doku, yansıma, gradyan, leke, üstüne binen nesne ya da `kit_check` KALDI.
 - Yalnız görevin `yazar:` klasörlerine dosya koy.
 
 ## Video (GV görevleri)
