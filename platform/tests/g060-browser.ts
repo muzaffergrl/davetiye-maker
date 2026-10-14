@@ -86,9 +86,10 @@ async function block(name: string, fn: () => Promise<void>) {
 }
 
 const PHONE = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
-const shot = async (page: any, name: string, opts: { full?: boolean } = {}) => {
+/** PNG for UI screens; JPEG (q 82) for screens dominated by the design's preview or a photo (keeps previews/ small). */
+const shot = async (page: any, name: string, opts: { full?: boolean; jpeg?: boolean } = {}) => {
   await page.waitForTimeout(350);
-  await page.screenshot({ path: path.join(OUT, `${name}.png`), fullPage: Boolean(opts.full) });
+  await page.screenshot({ path: path.join(OUT, `${name}.${opts.jpeg ? 'jpg' : 'png'}`), fullPage: Boolean(opts.full), ...(opts.jpeg ? { type: 'jpeg', quality: 82 } : {}) });
 };
 const saveState = (page: any) => page.getAttribute('[data-save-state]', 'data-save-state');
 async function waitSaved(page: any) {
@@ -205,7 +206,7 @@ try {
     await page.mouse.down();
     await page.mouse.move(frame.x + frame.width / 2, frame.y + frame.height / 2 - 40, { steps: 8 });
     await page.mouse.up();
-    await shot(page, '05_setup4_crop');
+    await shot(page, '05_setup4_crop', { jpeg: true });
     await page.click('[data-crop-confirm]');
     await page.waitForSelector('[data-photo-slot="hero_portrait"] img', { timeout: 30_000 });
     await waitSaved(page);
@@ -217,7 +218,7 @@ try {
     await page.waitForTimeout(1500);
     const sampleItems = page.locator('[data-setup="5"] main li button');
     check('setup 5: preview + "Still sample text" list', (await page.locator('[data-setup="5"] iframe').count()) === 1 && (await sampleItems.count()) > 0, String(await sampleItems.count()));
-    await shot(page, '06_setup5_check');
+    await shot(page, '06_setup5_check', { jpeg: true });
     // A sample item opens its section above the wizard; "Done" comes back.
     await sampleItems.first().click();
     await page.waitForSelector('[data-section-done]');
@@ -256,7 +257,7 @@ try {
     await page.waitForTimeout(1200);
     const pvBox = await page.locator('[data-preview] iframe').boundingBox();
     check('preview (phone): full-screen layer, the editor behind is inert', pvBox && pvBox.width >= 380 && pvBox.height > 600 && (await page.evaluate(() => (document.querySelector('main#main') as HTMLElement).inert)), JSON.stringify(pvBox));
-    await shot(page, '10b_preview_phone');
+    await shot(page, '10b_preview_phone', { jpeg: true });
     await page.goBack();
     await page.waitForTimeout(400);
     check('preview (phone): back gesture closes it and stays on Home', !(await page.locator('[data-preview] iframe').isVisible()) && page.url().endsWith('#home'));
@@ -283,6 +284,7 @@ try {
     await shot(page, '13_identity_typo');
     await pause();
     await firstInput.fill('Sofia');
+    await page.locator('[data-testid="identity"] input').nth(1).fill('Sofia Rossi');
     await page.waitForTimeout(200);
     const cost = await page.locator('[data-identity-class]').innerText();
     check('identity sheet: a real change says what it uses ("Use 1 change", 2 left)', (await page.getAttribute('[data-identity-class]', 'data-identity-class')) === 'change' && cost.includes("You'll have 2 left") && (await page.locator('[data-identity-submit]').innerText()).includes('Use 1 change'), cost);
@@ -468,18 +470,21 @@ try {
     await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'offline', null, { timeout: 10_000 });
     check('offline: banner + "Offline" save state', (await page.locator('[data-offline-banner]').innerText()).includes('offline'));
     check('offline: the draft is kept on this phone', await page.evaluate(() => Boolean(localStorage.getItem('draft:clara-and-julian'))));
-    check('offline: Change names is disabled', await page.locator('[data-change-identity="names"]').isDisabled());
+    check('offline: Change names and Publish are disabled', (await page.locator('[data-change-identity="names"]').isDisabled()) && (await page.locator('[data-publish]').isDisabled()));
     await shot(page, '24_offline');
     await ctx.setOffline(false);
     await waitSaved(page);
     check('offline: saved once back online, local copy removed', !(await page.evaluate(() => localStorage.getItem('draft:clara-and-julian'))));
 
-    // Local copy after closing the page offline: offered on the next visit.
-    await ctx.setOffline(true);
-    await page.fill('#f-host_line', 'Kept on this phone');
-    await page.waitForTimeout(1200);
+    // Local copy left on the phone (the page was closed before it could save): offered on the next visit.
+    // Written directly, because whether the browser's last keepalive save got through while closing is a race.
+    const stamp = (await adapter.getSiteById(live.site.id))!;
+    await page.evaluate(
+      ({ slug, base, content }: { slug: string; base: string; content: unknown }) =>
+        localStorage.setItem(`draft:${slug}`, JSON.stringify({ baseUpdatedAt: base, content, at: new Date().toISOString() })),
+      { slug: 'clara-and-julian', base: stamp.updatedAt, content: { ...stamp.content, host_line: 'Kept on this phone' } },
+    );
     await page.close();
-    await ctx.setOffline(false);
     const again = await ctx.newPage();
     await again.goto(`${L}#edit/names`);
     await again.waitForSelector('[data-backup-banner]');
@@ -487,7 +492,13 @@ try {
     await shot(again, '25_restore_backup');
     await again.locator('[data-backup-banner]').getByRole('button', { name: 'Restore' }).click();
     await waitSaved(again);
-    check('local copy: restored and saved', (await again.inputValue('#f-host_line')) === 'Kept on this phone');
+    check('local copy: restored and saved', (await again.inputValue('#f-host_line')) === 'Kept on this phone' && (await adapter.getSiteById(live.site.id))!.content.host_line === 'Kept on this phone');
+    // A copy made on an older version is never applied silently.
+    await again.evaluate((slug: string) => localStorage.setItem(`draft:${slug}`, JSON.stringify({ baseUpdatedAt: '2000-01-01T00:00:00.000Z', content: { host_line: 'old' }, at: '' })), 'clara-and-julian');
+    await again.reload();
+    await again.waitForSelector('[data-backup-banner]');
+    check('local copy: an older-version copy offers only Discard', (await again.locator('[data-backup-banner]').getByRole('button', { name: 'Restore' }).count()) === 0);
+    await again.locator('[data-backup-banner]').getByRole('button', { name: 'Discard' }).click();
 
     // Conflict: another tab saved meanwhile.
     const tabB = await ctx.newPage();
@@ -579,10 +590,10 @@ try {
     const pv = await d.locator('[data-preview] iframe').boundingBox();
     check('1280: three columns (rail, content, sticky preview)', nav && main && pv && nav.x < 30 && nav.width >= 200 && main.x > nav.x + nav.width - 1 && pv.x > main.x + main.width - 40, JSON.stringify({ nav, main, pv }));
     check('1280: no phone Preview button', (await d.locator('[data-open-preview]').count()) === 0);
-    await d.screenshot({ path: path.join(OUT, '28_desktop_1280_home.png') });
+    await d.screenshot({ path: path.join(OUT, '28_desktop_1280_home.jpg'), type: 'jpeg', quality: 82 });
     await d.goto(`${L}#edit/venue`);
     await d.waitForTimeout(1200);
-    await d.screenshot({ path: path.join(OUT, '29_desktop_1280_venue.png') });
+    await d.screenshot({ path: path.join(OUT, '29_desktop_1280_venue.jpg'), type: 'jpeg', quality: 82 });
     await axe(d, 'desktop 1280 section');
     await desk.close();
     const mid = await browser.newContext({ viewport: { width: 1000, height: 820 } });
@@ -592,7 +603,7 @@ try {
     const mnav = await m.locator('nav[aria-label="Editor"]').boundingBox();
     const mpv = await m.locator('[data-preview] iframe').boundingBox();
     check('960–1279: tabs above the content + preview column', mnav && mpv && mnav.height < 80 && mpv.x > 500, JSON.stringify({ mnav, mpv }));
-    await m.screenshot({ path: path.join(OUT, '30_tablet_1000_edit.png') });
+    await m.screenshot({ path: path.join(OUT, '30_tablet_1000_edit.jpg'), type: 'jpeg', quality: 82 });
     await mid.close();
   });
 } catch (e) {

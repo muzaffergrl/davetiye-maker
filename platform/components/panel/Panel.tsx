@@ -563,7 +563,16 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
     );
   else
     publishControl = (
-      <Button variant="primary" small busy={busy} busyLabel="Publishing…" disabled={locked} onClick={() => void startPublish()} data-publish>
+      <Button
+        variant="primary"
+        small
+        busy={busy}
+        busyLabel="Publishing…"
+        disabled={locked || !online}
+        title={online ? undefined : 'Connect to the internet to publish.'}
+        onClick={() => void startPublish()}
+        data-publish
+      >
         {meta.status === 'published' ? 'Publish changes' : meta.publishedAt ? 'Publish again' : 'Publish'}
       </Button>
     );

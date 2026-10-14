@@ -1133,9 +1133,17 @@
 
 .sectionFoot {
   position: sticky;
-  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 12px);
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom));
   z-index: 5;
-  margin-top: var(--s-2);
+  margin: var(--s-2) calc(-1 * var(--gutter)) 0;
+  padding: var(--s-6) var(--gutter) var(--s-3);
+  /* Content scrolling under the button fades out instead of showing through. */
+  background: linear-gradient(to bottom, rgb(247 246 243 / 0), var(--c-bg) 45%);
+  pointer-events: none;
+}
+
+.sectionFoot > * {
+  pointer-events: auto;
 }
 
 .sectionFoot:empty {
@@ -1143,12 +1151,12 @@
 }
 
 .sectionFoot .btn_secondary {
-  box-shadow: var(--e-2);
+  box-shadow: var(--e-1);
 }
 
 @media (min-width: 960px) {
   .sectionFoot {
-    bottom: var(--s-4);
+    bottom: 0;
   }
 }
 

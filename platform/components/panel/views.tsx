@@ -46,7 +46,7 @@ import {
   type PublishNote,
   type SectionId,
 } from '../../lib/panel/model.ts';
-import { IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE } from '../../lib/panel/rights.ts';
+import { ARCHIVE_AFTER_MONTHS, IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE } from '../../lib/panel/rights.ts';
 import { SIGN_IN_UNAVAILABLE } from '../../lib/panel/signin.ts';
 import { rsvpClosesAt } from '../../lib/rsvp/deadline.ts';
 import type { PanelApi } from './api.ts';
@@ -868,7 +868,7 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
         <section>
           <h3 className={styles.subTitle}>How long does my website stay online?</h3>
           <p>
-            Until 12 months after your wedding{until ? ` (${until})` : ''}. Then it becomes a read-only archive: guests can no longer open it, and you can still
+            Until {ARCHIVE_AFTER_MONTHS} months after your wedding{until ? ` (${until})` : ''}. Then it becomes a read-only archive: guests can no longer open it, and you can still
             look at your content and download your replies.
           </p>
         </section>

@@ -17,15 +17,18 @@
 import type { ContentRecord } from '../content/types.ts';
 import { isValidTimeZone, parseIsoDate, zonedTimeToUtc } from '../content/format.ts';
 import type { Identity, IdentityLogEntry, IdentityRights, SiteRecord } from '../data/types.ts';
+import { MARKETING } from '../marketing/config.ts';
 
 export type { Identity, IdentityName, IdentityRights, IdentityLogEntry } from '../data/types.ts';
 
-/** Name / date changes included after the first publish. */
-export const IDENTITY_CHANGE_LIMIT = 3;
-/** A change of at most this many characters (per field) is a typo fix and free. */
-export const TYPO_MAX_DISTANCE = 2;
-/** The website is online until this many months after the wedding date (K25). */
-export const ARCHIVE_AFTER_MONTHS = 12;
+// The numbers come from the one brand configuration (lib/marketing/config.ts), so what the sales site and the
+// listing say and what the server enforces cannot drift apart.
+/** Name / date changes included after the first publish (3). */
+export const IDENTITY_CHANGE_LIMIT = MARKETING.editRights.identityChangesAfterPublish;
+/** A change of at most this many characters (per field) is a typo fix and free (2). */
+export const TYPO_MAX_DISTANCE = MARKETING.editRights.typoFreeChars;
+/** The website is online until this many months after the wedding date (12, K25). */
+export const ARCHIVE_AFTER_MONTHS = MARKETING.hosting.monthsAfterWedding;
 /**
  * Hosting ceiling (docs/16 §11.9, PROPOSAL awaiting the owner's decision §15 #3): the archive comes at the
  * latest this many months after the first publish, so free date "fixes" (2027 -> 2029 is one character)
@@ -262,7 +265,7 @@ export function archiveDates(input: {
   return { onlineUntil: lastDay, archiveAt: new Date(at).toISOString(), source: 'wedding_date' };
 }
 
-export const DATE_ARCHIVES_SITE_MESSAGE = 'This date is more than 12 months ago. Your website would close right away.';
+export const DATE_ARCHIVES_SITE_MESSAGE = `This date is more than ${ARCHIVE_AFTER_MONTHS} months ago. Your website would close right away.`;
 
 /**
  * Validation issue (path "date") when publishing / changing to this date would archive the site at once,

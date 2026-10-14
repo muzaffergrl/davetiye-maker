@@ -9,7 +9,7 @@ import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { fieldId, pageShown, photoAt, prePublishNotes, sectionForPath, type PanelState, type PanelTheme, type PublishNote, type SectionId } from '../../lib/panel/model.ts';
-import { IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE, type RightsView } from '../../lib/panel/rights.ts';
+import { ARCHIVE_AFTER_MONTHS, IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE, type RightsView } from '../../lib/panel/rights.ts';
 import { usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
@@ -79,8 +79,8 @@ export function RulesBox({ rights, locale, total = IDENTITY_CHANGE_LIMIT }: { ri
         </li>
         <li>Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.</li>
         <li>
-          Your website stays online until <strong>{until ?? '12 months after your wedding'}</strong>
-          {until ? ', 12 months after your wedding' : ''}. Then it becomes a read-only archive.
+          Your website stays online until <strong>{until ?? `${ARCHIVE_AFTER_MONTHS} months after your wedding`}</strong>
+          {until ? `, ${ARCHIVE_AFTER_MONTHS} months after your wedding` : ''}. Then it becomes a read-only archive.
         </li>
       </ul>
     </div>
