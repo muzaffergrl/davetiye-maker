@@ -561,12 +561,13 @@ CSP/konsol hatası yok. Ekran görüntüleri `$RSVP_SHOTS_DIR`'e (varsayılan ge
 
 Alıcı sitesini telefonundan düzenler: `/edit/<slug>?k=<düzenleme anahtarı>`. Panel İngilizce, telefon öncelikli (390 px),
 sade bir araç: büyük dokunma alanları (≥ 44–48 px). Geniş ekranda (≥ 960 px) önizleme formun yanında durur. Görsel dekor yok (K21);
-renkler marka-nötr.
+G066'dan beri BKE Studio görünümü (aşağıda "Panel v2 …" → "Görünüm").
 
-> **G060 ile arayüz değişti** (aşağıda "Panel v2 ve düzenleme hakkı"): akordeon bölümler ve alttaki Save · Preview · Publish
-> çubuğu yerine kurulum sihirbazı + Home · Edit · Guests · Share görünümleri, bölüm sayfaları, üst çubukta kayıt göstergesi ve
-> Publish. Bu bölümdeki kurallar (link/anahtar, uzunluk sınırları, temaya göre alanlar, örnek metin işareti, otomatik kayıt ve
-> 409, doğrulama, taslak kuralları, önizleme anahtarı, yayın, QR, fotoğraf hattı) aynen sürüyor; yalnız düğme/yerleşim anlatımı eski.
+> **G060 ile arayüz değişti, G066/K29 ile sadeleşti** (aşağıda "Panel v2 ve düzenleme hakkı"): akordeon bölümler ve alttaki
+> Save · Preview · Publish çubuğu yerine 3 adımlı kurulum + Home · Edit (6 sayfa) · Guests · Share, üst çubukta kayıt göstergesi
+> ve Publish, yayımlanmamış değişiklik şeridi. Bu bölümdeki kurallar (link/anahtar, uzunluk sınırları, temaya göre alanlar, örnek
+> metin işareti, otomatik kayıt ve 409, doğrulama, taslak kuralları, önizleme anahtarı, yayın, QR, fotoğraf hattı) aynen sürüyor;
+> yalnız düğme/yerleşim anlatımı (bölüm adları, "Before you publish" listesi, "Publish changes" düğmesi) eski.
 
 - **Link:** anahtar hash ile doğrulanır (`authorizeEditor`). Yanlış/eksik anahtar, önizleme anahtarı, başka sitenin anahtarı ve
   bilinmeyen slug → **aynı** genel 404 sayfası ("This edit link is not valid"); slug'ın varlığı sızmaz. Sayfa `noindex`,
@@ -694,38 +695,71 @@ archiveAt, archived, archiveSoon, undo}` (`undo` = `{from, until}`: son sayılan
 ## Panel v2 ve düzenleme hakkı (G060)
 
 Tasarım belgesi: `docs/16_PANEL_V2.md` (bilgi mimarisi §4, sihirbaz §5, görünümler §6, tokenlar §8, durumlar §9, erişilebilirlik §10,
-hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; ikonlar `lucide-react@1.46.0` (sabit), font dosyası yok
-(sistem yığınları), dekor çizimi yok (K21). Görsel olarak yalnız temanın gerçek önizlemesi ve alıcının fotoğrafları.
+hak modeli §11, kabul testleri §14, açık kararlar §15; **§0b K29 sadeleştirmesi** §4.3/§4.4/§5.3/§6.2–6.5/§11.7'nin yerine geçer).
+Panel İngilizce; ikonlar `lucide-react@1.46.0` (sabit), dekor çizimi yok (K21). Görsel olarak yalnız temanın gerçek önizlemesi, alıcının
+fotoğrafları ve marka logosu.
 
-### Görünümler (`components/panel/`)
+### Görünüm (G066, BKE Studio; `brand/tokens.json`, GM05 comp'ları `brand/ui/panel/`)
 
-- **Adresler (hash):** `#setup/1`…`#setup/6`, `#home`, `#edit`, `#edit/<bölüm>`, `#guests`, `#share`. Geri tuşu/hareketi bir
+- **Token'lar** `components/panel/panel.module.css` başında (`.app`, `.notice`, `.overlay`, `.snackHost` kökleri): patlıcan #2B1526
+  (başlık, birincil düğme, bağlantı, odak — K29: **tek vurgu rengi**), kâğıt #FAF7F0 / #EDE5D7 zemin, beyaz kart + yumuşak gölge,
+  ink #202020 metin, ikincil metin #5C5560 (her zeminde ≥ 5,7:1), kontrol çerçevesi #8C7F8A (≥ 3:1). Altın ve lavanta yalnız logoda;
+  açık zeminde metin rengi değil.
+- **Yazı:** Archivo 800 başlık, Montserrat 300 ince geniş satır, DM Sans gövde — `components/panel/fonts.ts` (`next/font/google`,
+  kendi origin'imizden; repoda font dosyası yok). Sınıf (`PANEL_FONTS`) her panel kökünde: uygulama, sheet'ler, snackbar, 404.
+- **Logo:** `components/panel/Brand.tsx` → `/brand/bke-logo-horizontal-anchor.svg` (dar çubukta monogram); `<img>`, fontla yazılmaz.
+- **Aynı dil panel dışında da (G080):** `/start`, kayıt sonrası "Save this link" ekranı ve `/signin` panelin `.app` token'larını,
+  `PANEL_FONTS`'u ve `BrandLogo`'yu kullanır (`app/start/shell.tsx` `StartShell`; değer kopyalanmaz, panel token'ı değişince onlar da
+  değişir). Ayrıntı aşağıda "/start sahiplenme akışı".
+
+### Görünümler (`components/panel/`, K29 sonrası)
+
+- **Adresler (hash):** `#setup/1…3`, `#home`, `#edit`, `#edit/<sayfa>` (`us`, `day`, `photos`, `story`, `details`, `rsvp`),
+  `#guests`, `#guests/print` (G069), `#share`. Eski adresler açılmaya devam eder: `#setup/4` → 2, `#setup/5|6` → 3; `#edit/<bölüm>`
+  (ör. `#edit/venue`, `#edit/faq`, `#edit/names`, `#edit/thankyou`) bölümün sayfasını açıp o bölüme kaydırır. Geri tuşu/hareketi bir
   önceki adıma/görünüme döner; sayfa yenilenince aynı yerde açılır. `/start`'taki "Open my editor" → `#setup/1`.
-- **Kurulum sihirbazı (`Setup.tsx`, ilk açılış):** 1 isimler → 2 tarih ve saat → 3 mekân → 4 fotoğraflar (kırpma) → 5 kontrol
-  (önizleme + "Before you publish" notları, her not ilgili bölüme götürür) → 6 yayınla (ilk yayından önce kurallar kutusu:
-  kaç isim/tarih değişikliği, yazım düzeltmesi ücretsiz, site ne zamana kadar açık) → "Your website is live" (link, QR, paylaş).
-  Adım 1–4 atlanabilir ("Skip for now"), 5–6 atlanamaz. İlerleme `localStorage` `setup:<slug>`'ta; başka cihazda içerikten
-  çıkarılır (dolu adımlar geçilir). Değerler normal otomatik kayıtla saklanır.
-- **Home:** durum kartı (yayında / taslak / yayımlanmamış değişiklik / arşiv), sonraki adımlar (örnek metinler, boş fotolar),
-  kalan isim/tarih hakkı ("2 of 3 changes left" + noktalar), "Guests coming" sayıları, site ne zamana kadar açık
-  (son 30 gün uyarı). Üst çubuk başlığı kaydırınca görünür.
-- **Edit:** bölüm listesi (Names, Date, Venue, Schedule, Story, Details, Questions & answers, RSVP, Photos; temanın göstermediği
-  bölüm yok), her bölüm ayrı sayfa; altta yapışkan "Preview this page" (telefonda) ya da başka bir ekrandan gelindiyse "Done".
-  Program/an/SSS satırları: menüden yukarı/aşağı/sil,
-  silme **Undo** snackbar'ıyla geri alınır. Geniş ekranda (≥ 960 px) sağda telefon çerçeveli canlı önizleme; telefonda Preview tam
-  ekran sayfa (`Sheet.tsx`: portal, arka plan `inert`, geçmiş kaydı → geri tuşu kapatır).
-- **Guests:** G069 ile yenilendi (aşağıda "RSVP paneli v2 (G069)"). Son tarih ve "Questions for your guests" Edit → RSVP bölümünde.
-- **Share:** genel link (kopyala/aç; cihaz destekliyorsa paylaş), QR (PNG/SVG), yayından kaldır.
+- **Kurulum (`Setup.tsx`, hiç yayınlanmamış sitede ilk açılış) — 3 adım:** (1) isimler + tarih (ilk isimler; tam adlar "Full names for
+  the invitation card" açılır bölümünde, isteğe bağlı; tarih, tören saati, telefondan saat dilimi; hak kuralı isimlerin altında bir
+  kez) → (2) fotoğraf (tasarımın kapak yeri + kırpma; diğerleri "More photos" açılır bölümünde) → (3) yayınla (örnek tarih kapısı,
+  sipariş notu, özet, gerçek önizleme, ilk yayından önce kurallar kutusu) → "Your website is live" (link, QR, paylaş). Son adımda örnek
+  metin listesi/sayısı yok, tek sakin satır ("… Home shows what is left"). Adım 1–2 atlanabilir. Mekân, program, hikâye, detaylar,
+  RSVP sonra ve isteğe bağlı. İlerleme `localStorage` `setup:<slug>`; başka cihazda içerikten çıkarılır.
+- **Home:** durum kartı (taslak / yayında / arşiv) → **"Your website is N% ready"** + ilerleme çubuğu + **yalnız sıradaki 3 iş** (her
+  biri doğru editöre ve alana götürür; örnek metin ve boş foto hatırlatmaları burada; `pages.ts` `readiness`: tasarımın gösterdiği her
+  bölüm, fotoğraflar (kısmi) ve yayın birer kalem) → yanıt kartı ("Guests coming", yeni yanıtlar) → site ne zamana kadar açık
+  (Dates) → yardım. İsim/tarih hak kartı Home'da yok (aşağıda Edit). Yayındaki site teşekkür modundaysa "Your website switched to
+  thank-you mode" kartı (G075).
+- **Edit — 6 sayfa** (`pages.ts` `PAGE_SECTIONS`): **Us** (isimler, monogram) · **Day & place** (Date & time · Venue · Schedule alt
+  başlıkları + sonda açılır **"After the wedding"** = teşekkür modu, G075; 7. sayfa yok) · **Photos** · **Our Story** · **Details**
+  (host line, dress code, travel & stay, registry, misafir notu, sorular ve cevaplar) · **RSVP** (son tarih, "Questions for your
+  guests"). Listede satır başına tek satır özet; örnek metin ve kilit rozeti yok, yalnız hata varsa "N to fix". Alan etiketindeki
+  küçük "Sample" işareti sessiz gri. **İsim ve tarih hakları tek yerde:** kilitli isimler Us'ta, kilitli tarih Day & place'te, "N of 3
+  changes left" + "Change" alanların yanında (`data-rights-card`); arşivde aynı yerde "names and date can no longer be changed".
+  Telefonda altta yapışkan "Preview this page" (ya da başka ekrandan gelindiyse "Done"). Program/an/SSS satırları: menüden
+  yukarı/aşağı/sil, silme **Undo** snackbar'ıyla geri alınır.
+- **Yayımlanmamış değişiklikler:** otomatik kayıt taslağa yazar; yayındaki site taslağın gerisindeyken üst çubuğun altında tek yapışkan
+  şerit **"Unpublished changes: n · Review · Publish"** (`role="status"`, n = değişen sayfa sayısı). **Review** sheet'i yayındaki kopya
+  (`site.publishedContent`, `app/edit/[slug]/page.tsx`) ile taslağı karşılaştırır, değişen sayfaları (ve sayfa içindeki bölümü, ör. "Day &
+  place · After the wedding") listeler; her biri o sayfayı açar + "Publish changes". İlk yayın kurallar + notlar sheet'iyle, sonrakiler
+  doğrudan. Yayın anlamı sunucuda değişmedi (taslağın tamamı yayınlanır).
+- **Guests:** G069 (aşağıda "RSVP paneli v2 (G069)"); yalnız görsel dil değişti. Altta yapışkan "Add a reply" + **"Download list"**
+  (CSV). Son tarih ve sorular Edit → RSVP'de.
+- **Share:** önce **link + QR** tek kartta (kopyala/aç/paylaş; QR PNG/SVG), altta açılır bölümler **"Guest password"** (G076, varsayılan
+  kapalı, başlıkta Off/On) ve **"Your private edit link"** (uyarı + "Home Screen" ipucu); en altta "Take the website offline".
+- **Masaüstü:** ≥ 960 px iki sütun — solda düzenleme (sekmeler üstte), sağda sabit canlı önizleme (açık sayfayı gösterir); ≥ 1280 px
+  daha geniş, ray yok. Telefonda Preview tam ekran sayfa (`Sheet.tsx`: portal, arka plan `inert`, geçmiş kaydı → geri tuşu kapatır).
 - **Durumlar:** üst çubukta kayıt göstergesi (Saved / Saving… / Unsaved changes / Offline / Not saved yet. Trying again… /
   Saving paused); **çevrimdışı** iken
   değişiklikler `localStorage` `draft:<slug>`'a yazılır, bağlantı gelince gönderilir; sayfa kaydedemeden kapandıysa bir sonraki
   açılışta "Restore / Discard" sorulur (eski bir sürüme ait kopya yalnız "Discard"); çevrimdışıyken Publish kapalı. 409 çakışmada
   "Reload" (sessiz üzerine yazma yok). Arşivde her şey salt okunur, yanıtlar indirilebilir.
-- **Erişilebilirlik:** dokunma alanları ≥ 44 px, odak halkası, `prefers-reduced-motion`, ekran okuyucu metinleri (ör. hak sayacı),
-  axe-core ile 13 görünümde ciddi/kritik ihlal 0 (tarayıcı testi).
+- **Erişilebilirlik:** dokunma alanları ≥ 44 px, odak halkası (patlıcan; patlıcan çubukta beyaz), `prefers-reduced-motion`, ekran
+  okuyucu metinleri (ör. hak sayacı), açılır bölümler başlık + düğme (`aria-expanded`, `aria-controls`, kapalı gövde `hidden`),
+  axe-core ile ciddi/kritik ihlal 0 (tarayıcı testi).
 - **E-posta ile giriş (magic link, §12):** sağlayıcı yok → **kapalı**. `/signin` dürüst metin ("Email sign-in isn't available
-  yet. Open your editor with the edit link you saved. …"), form yok; `POST /api/signin` → `503 {code:"unavailable"}`; `lib/panel/signin.ts` `SignInMailer` arayüzü +
-  `DisabledSignInMailer`. Geçersiz link sayfasında "Lost your edit link?" kartı (destek adresi yer tutucu).
+  yet. Open your editor with the edit link you saved. …"), form yok — G080'den beri panelin "edit link not valid" sayfasıyla aynı
+  görünüm (logo, panel fontları, kâğıt zemin tam genişlikte); `POST /api/signin` → `503 {code:"unavailable"}`; `lib/panel/signin.ts`
+  `SignInMailer` arayüzü + `DisabledSignInMailer`. Geçersiz link sayfasında "Lost your edit link?" kartı (destek adresi yer tutucu).
 - **Marka değerleri:** dükkân adı ve destek e-postası `lib/marketing/config.ts`'ten (G061) gelir; karar verilmediği için
   `[SHOP NAME]`, `[SUPPORT EMAIL]` yer tutucusu görünür, `mailto:` linki yapılmaz (`lib/panel/brand.ts` `isPlaceholder`).
 
@@ -773,12 +807,14 @@ hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; i
   yarışı** (`local`) ve **iki Blob sunucu örneği** (sahte Blob deposu, ETag), destek hakkı, arşivleyen tarih, arşiv kapıları
   (sayfalar/foto/.ics 410, RSVP kapalı, CSV açık), eski kayıt göçü, 401 eşitliği, yayın savunması.
 - Tarayıcı (build gerekir): `NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts` — `next start` + Chromium
-  390 × 844 (isMobile, touch). Kayıtlı yolculuk: sihirbaz 1→6 (isim, tarih, mekân, foto + kırpma, kontrol, kurallar) → yayın →
-  QR çözülür → editör → Names kilitli → yazım düzeltmesi (ücretsiz) → 1 değişiklik → Home'da kalan hak → "Publish changes".
-  Ayrıca: devam adımı (yenileme / başka cihaz), Back değerleri korur, geri tuşu, editörden ilk yayında kurallar, hak 0, Undo,
-  Guests, Share, çevrimdışı + yerel kopya, çakışma, 401, arşiv, 1280 / 1000 düzenleri, 320 px, axe-core, dokunma alanları,
-  azaltılmış hareket. **104 kontrol**; ekran görüntüleri, `g060_journey_390.mp4` ve `checks.json` → `previews/g060/`
-  (`G060_SHOTS_DIR`, `PORT` (3341)). Eski tarayıcı testleri (panel-browser, final-smoke, g051, g055, claim) v2'ye uyarlandı.
+  390 × 844 (isMobile, touch). Kayıtlı yolculuk (G066/K29 akışı): 3 adımlı kurulum (isimler + tarih, foto + kırpma, yayınla:
+  örnek tarih kapısı, kurallar) → yayın → QR çözülür → Home (hazırlık yüzdesi, en çok 3 iş) → Edit 6 sayfa → Us'ta isimler kilitli →
+  yazım düzeltmesi (ücretsiz) → 1 değişiklik → hak alanın yanında → "Unpublished changes" şeridi + Review → yayın.
+  Ayrıca: devam adımı (yenileme / başka cihaz, eski `#setup/6`), Back değerleri korur, geri tuşu, editörden ilk yayında kurallar,
+  hak 0, Undo, Guests, Share (link + QR üstte, açılır bölümler), çevrimdışı + yerel kopya, çakışma, 401, arşiv, 1280 / 960 iki
+  sütun, 320 px, axe-core, dokunma alanları, azaltılmış hareket. **151 kontrol** (2026-10-14, G080'de yeniden koşuldu); ekran
+  görüntüleri, `g060_journey_390.mp4` ve `checks.json` → `previews/g060/` (`G060_SHOTS_DIR`, `PORT` (3341)). Eski tarayıcı
+  testleri (panel-browser, final-smoke, g051, g055, claim) v2'ye ve K29'a uyarlandı.
 
 ### G060-fix (2026-10-14, panel / hak / sahiplenme incelemesi)
 
@@ -990,7 +1026,9 @@ görünmüyordu. Artık kapanışta çerçevenin o anki istenen adresiyle karş�
 ## /start sahiplenme akışı (G045)
 
 Etsy alıcısı indirdiği PDF'teki başlat linkini açar: `/start?theme=<tema>`. Sayfa İngilizce, telefon öncelikli (390 px),
-panelle aynı sade araç görünümü (dekor çizimi yok, K21).
+panelle aynı BKE Studio görünümü (G080: `app/start/shell.tsx` `StartShell` = panelin `.app` token'ları + `PANEL_FONTS` + logo;
+`start.module.css` yalnız düzen, renk/font/köşe/gölge değerleri panel token'ı; dekor çizimi yok, K21). Kontrast ≥ 4,5:1, dokunma
+hedefi ≥ 44 px (axe-core + ölçüm, `tests/g080-browser.ts`).
 
 1. **Tema önizlemesi:** küçültülmüş canlı iframe (`/start/demo/<tema>`, 390 × 760 px içerik ölçeklenir) + "Open the full demo".
    Demo = temanın kendi şablonları + demo içeriği; ekran görüntüsü gerekmez, tema değişince önizleme de değişir.
@@ -1011,6 +1049,26 @@ panelle aynı sade araç görünümü (dekor çizimi yok, K21).
 
 Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunulabilen tasarımların listesi. `internal` tema
 (`_sample`) sunulmaz.
+
+### Tasarım onayı (G080, `lib/themes/approval.ts`)
+
+- **Tek kaynak:** satış sitesinin tasarım listesi `lib/marketing/config.ts` `designs[]`. `status: 'live'` = **onaylı**; `'coming'` ya da
+  listede olmayan = **incelemede**. Böylece satış sitesi ile `/start` hiç ayrışmaz; bir tasarımı satışa açmak zaten yapılan tek satırlık
+  değişikliktir (`'coming'` → `'live'`). Tema klasörlerinde (`theme.json`) onay alanı yok; tema işi (G4NN) ona dokunmaz.
+  Bugün onaylı: 03 `blush-garden-rose`, 01 `olive-ivory`; incelemede: 02 `dusty-blue-champagne`, 04 `vintage-airmail-love-letter`
+  (`'coming'`), 05 `mediterranean-lemon`.
+- **Yalnız production'da zorlanır:** `VERCEL_ENV=production` (Vercel'in production dağıtımı, Vercel koyar) ya da `THEME_APPROVAL=enforce`
+  (test / yerelde production davranışını denemek). Orada: `/start?theme=<incelemede>` → **404** + dürüst sayfa ("This design is not
+  available yet … still being finished and is not on sale yet …", `app/start/not-found.tsx`, onaylı tasarımların listesi);
+  `POST /api/start` → **403 `theme_in_review`** (tema kontrolünden hemen sonra, alan/sipariş kontrollerinden önce; hiçbir şey
+  saklanmaz); temasız `/start` listesi yalnız onaylıları gösterir (`lib/themes/offered.ts`). **Demolar** (`/start/demo/<tema>`) ve var
+  olan siteler her yerde açık kalır (incelemedeki tasarım böyle denenir).
+- **Yerelde** (`next dev` / `next start`), Vercel preview'da ve `npm test`'te her tema başlatılabilir: başka ajanların tema işi
+  engellenmez. `claimableTheme()` (tema var mı, demo içeriği geçerli mi) değişmedi; onay ayrı bir kapı.
+- Testler: `tests/g080-approval.test.ts` (8; tek kaynak, ortam kuralı, production'da onaylı 201 / incelemede 403 + kayıt yok,
+  production dışında 201, liste, demo açık), `tests/g080-browser.ts` (sayfada 404 + metin, API 403, demo 200, ikinci sunucuda
+  kapı yok). Vercel'de canlı denenmedi: yayından sonra `curl -s -o /dev/null -w '%{http_code}' <site>/start?theme=dusty-blue-champagne`
+  → 404 beklenir.
 
 ### Varsayımlar ve kurallar
 - **Sipariş numarası biçimi (VARSAYIM, Etsy API ile doğrulanmadı):** Etsy'de "Order #1234567890" (makbuz numarası), yalnız
@@ -1082,6 +1140,11 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob
   dostça mesaj, sızıntı yok → dolu adres `-2`'ye kayıyor / "Use …" önerisi → masaüstü yan yana. Ekran görüntüleri,
   `start_flow_390.mp4` ve `checks.json` → `previews/g045/` (`CLAIM_SHOTS_DIR`, `PORT` (3314), `CLAIM_SLOWMO`).
   `platform/themes/blush-garden-rose` (G038) dalda varsa onun başlat sayfası ve paneli de çekilir; yoksa `checks.json`'da not.
+- G080 görünüm + onay kapısı: `npm run build && NODE_PATH=/opt/node22/lib/node_modules PORT=41971 node tests/g080-browser.ts` —
+  iki `next start` (A: `THEME_APPROVAL=enforce`, B: kapısız, PORT+1); `/start`, kayıt sonrası ekran, incelemedeki tasarımın 404 sayfası,
+  temasız liste ve `/signin` için panel fontları/token'ları/logo, eski yeşilin hiç kalmadığı, axe-core (ciddi/kritik 0, kontrast dahil),
+  ≥ 44 px dokunma hedefi, 320/390 px'te yatay kaydırma yok; 390 (tam sayfa) + 1280 ekranları ve `checks.json` → `previews/g080/`
+  (`G080_SHOTS_DIR`).
 
 ### Açık konular
 - **Birden çok sunucu örneği:** sipariş kilidi süreç içi. `blob` (G048): `orders/<no>.json` dizini "varsa yazma" ile → aynı
