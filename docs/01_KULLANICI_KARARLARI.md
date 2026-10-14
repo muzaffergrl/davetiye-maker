@@ -28,6 +28,7 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K22 | (2026-10-13) **Videodan çıkıldı; ürün yalnız website.** Mobil görünüm ön planda (mobile-first). Tasarımın belirgin bir çizgisi ve "şov"u olmalı. Görselleri GPT imagegen üretir (K21 sürer). PDF/paylaşım görseli şimdilik ürün dışı (yanlışsa kullanıcı düzeltir) | sohbet |
 | K23 | (2026-10-13) Website yapısı: **her tasarımda ilk sayfa kapalı zarf**; tıklayınca zarf sırayla açılır ve asıl içeriğin olduğu **yeni sayfaya** geçilir. Site **çok sayfalı** (ana sayfa + hikâye, detaylar, RSVP vb.), açılış sayfasından yönlendirilir. Animasyonlar tasarıma göre **sıralı** | sohbet |
 | K24 | (2026-10-13) **Teslim Canva değil: kendi sitemiz + düzenleme paneli.** Alıcı siteyi telefonundan panelde düzenler (isim, tarih, metin, fotoğraf), site kendi linkinde yayınlanır, RSVP yanıtları panelde. Şart 1 bu yönde değişti. Plan: `docs/10_SITE_PLATFORMU.md` | sohbet |
+| K25 | (2026-10-14) Satış öncesi kararlar: siteler **düğünden sonra 12 ay** yayında; **yasal kimlik yok** — gizlilik metni dükkân adı + destek e-postasıyla yazılır; **Vercel Pro** mevcut hesapta (ticari kullanım engeli yok); fiyatlar **Etsy merkezli** belirlenecek; marka/dükkân adı ve destek e-postası kararlaştırılacak (açılacak). Hız: GPT ajanları paralel çalışır; ayrıca premium kullanıcı dostu panel, kötüye kullanımı sınırlayan düzenleme hakkı sistemi, satış sonrası müşteri bağlama ve SEO/GEO/AEO odaklı satış sitesi istendi | sohbet |
 
 ## Geçersizleşenler
 
