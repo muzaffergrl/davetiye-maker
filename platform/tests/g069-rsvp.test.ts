@@ -413,8 +413,9 @@ test('blob adapter: party and source stored, updateRsvp corrects one reply (edit
 
 // ---------------------------------------------------------------------------------------------- theme form contract
 
-test('themes 01 and 03: the reply form carries the party template (one input, number, error slot) and no input name of its own', () => {
-  for (const id of ['olive-ivory', 'blush-garden-rose']) {
+test('themes 01, 02, 03, 05: the reply form carries the party template (one input, number, error slot) and no input name of its own', () => {
+  // G084: 02 and 05 too (04 after its own round)
+  for (const id of ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon']) {
     const html = readFileSync(path.join(PLATFORM_ROOT, 'themes', id, 'rsvp.html'), 'utf8');
     const $ = cheerio.load(html);
     const tpl = $('form[data-rsvp-form] template[data-rsvp-party]');

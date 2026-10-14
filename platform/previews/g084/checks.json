@@ -1,0 +1,181 @@
+{
+  "when": "2026-10-14T22:11:48.630Z",
+  "themes": [
+    "dusty-blue-champagne",
+    "mediterranean-lemon"
+  ],
+  "passed": 38,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "G084 02 form: no name fields before \"Number of guests\" is 2+",
+      "ok": true
+    },
+    {
+      "name": "G084 02 form: 3 guests → 2 name fields, \"Name of guest 2 / 3 (optional)\"",
+      "ok": true,
+      "detail": "[\"Name of guest 2 (optional)\",\"Name of guest 3 (optional)\"]"
+    },
+    {
+      "name": "G084 02 form: the name rows use the theme's own field style (label, input, width, spacing), right after the guest count",
+      "ok": true,
+      "detail": "\"Cormorant Garamond\", Garamond, Georgia, serif / 19px / 1px / rgba(68, 89, 122, 0.45) / 10px / rgba(255, 255, 255, 0.92) / 322 / 51 / \"Cormorant Garamond\", Garamond, Georgia, serif / 12px / 2.64px / uppercase / rgb(43, 58, 78) / 16px"
+    },
+    {
+      "name": "G084 02 form: a \"no\" takes the name fields out of the form",
+      "ok": true
+    },
+    {
+      "name": "G084 02 form: back to \"yes\": the typed names are still there",
+      "ok": true
+    },
+    {
+      "name": "G084 02 form: no horizontal scroll at 390 px with the name fields",
+      "ok": true
+    },
+    {
+      "name": "G084 02 form: reply stored with 3 guests and the names of the 2 others",
+      "ok": true,
+      "detail": "{\"id\":\"15716891-7035-4d53-888c-8bf92548615d\",\"siteId\":\"0be3eff0-a6ff-4e1e-987a-db7e96d05522\",\"name\":\"Evelyn Hartley\",\"email\":\"evelyn@example.com\",\"attending\":true,\"guests\":3,\"message\":null,\"answers\":[{\"id\":\"meal\",\"question\":\"Meal choice\",\"answer\":\"Fish\"}],\"party\":[\"Arthur Hartley\",\"Mae Hartley\"],\"createdAt\":\"2026-10-14T22:11:14.601Z\"}"
+    },
+    {
+      "name": "G084 02 form: \"Send another reply\" starts with no name fields",
+      "ok": true
+    },
+    {
+      "name": "G084 02 form: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 02 panel: the card shows the party (\"With Arthur Hartley and Mae Hartley\")",
+      "ok": true,
+      "detail": "With Arthur Hartley and Mae Hartley"
+    },
+    {
+      "name": "G084 02 panel: 3 guests coming",
+      "ok": true
+    },
+    {
+      "name": "G084 02 panel: the opened card lists everyone (3)",
+      "ok": true,
+      "detail": "Evelyn Hartley|Arthur Hartley|Mae Hartley"
+    },
+    {
+      "name": "G084 02 CSV: the 3-person reply is 3 rows (Evelyn, Arthur, Mae), \"Party size\" 3 on the first row only",
+      "ok": true,
+      "detail": "[[\"Evelyn Hartley\",\"Evelyn Hartley\",\"Yes\",\"3\"],[\"Arthur Hartley\",\"Evelyn Hartley\",\"Yes\",\"\"],[\"Mae Hartley\",\"Evelyn Hartley\",\"Yes\",\"\"]]"
+    },
+    {
+      "name": "G084 02 CSV: one row per person in all (3)",
+      "ok": true,
+      "detail": "3"
+    },
+    {
+      "name": "G084 02 panel: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 02 stress @360: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width",
+      "ok": true,
+      "detail": "{\"hscroll\":0,\"rows\":[{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 2 Celebrate together b\"},{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 3 Celebrate together b\"}]}"
+    },
+    {
+      "name": "G084 02 stress @360: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 02 stress @390: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width",
+      "ok": true,
+      "detail": "{\"hscroll\":0,\"rows\":[{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 2 Celebrate together b\"},{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 3 Celebrate together b\"}]}"
+    },
+    {
+      "name": "G084 02 stress @390: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 05 form: no name fields before \"Number of guests\" is 2+",
+      "ok": true
+    },
+    {
+      "name": "G084 05 form: 3 guests → 2 name fields, \"Name of guest 2 / 3 (optional)\"",
+      "ok": true,
+      "detail": "[\"Name of guest 2 (optional)\",\"Name of guest 3 (optional)\"]"
+    },
+    {
+      "name": "G084 05 form: the name rows use the theme's own field style (label, input, width, spacing), right after the guest count",
+      "ok": true,
+      "detail": "\"Playfair Display\", \"Bodoni Moda\", Didot, Georgia, serif / 17px / 1px / rgba(42, 93, 168, 0.45) / 10px / rgba(255, 255, 255, 0.94) / 310 / 48 / \"Playfair Display\", \"Bodoni Moda\", Didot, Georgia, serif / 11.5px / 2.53px / uppercase / rgb(46, 69, 105) / 16px"
+    },
+    {
+      "name": "G084 05 form: a \"no\" takes the name fields out of the form",
+      "ok": true
+    },
+    {
+      "name": "G084 05 form: back to \"yes\": the typed names are still there",
+      "ok": true
+    },
+    {
+      "name": "G084 05 form: no horizontal scroll at 390 px with the name fields",
+      "ok": true
+    },
+    {
+      "name": "G084 05 form: reply stored with 3 guests and the names of the 2 others",
+      "ok": true,
+      "detail": "{\"id\":\"746d0315-48d1-4631-88f2-056a8f5ddbf1\",\"siteId\":\"6581000f-f0c4-4aee-8d61-45632d2c1fec\",\"name\":\"Evelyn Hartley\",\"email\":\"evelyn@example.com\",\"attending\":true,\"guests\":3,\"message\":null,\"answers\":[{\"id\":\"meal\",\"question\":\"Meal choice\",\"answer\":\"Fish\"}],\"party\":[\"Arthur Hartley\",\"Mae Hartley\"],\"createdAt\":\"2026-10-14T22:11:24.919Z\"}"
+    },
+    {
+      "name": "G084 05 form: \"Send another reply\" starts with no name fields",
+      "ok": true
+    },
+    {
+      "name": "G084 05 form: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 05 panel: the card shows the party (\"With Arthur Hartley and Mae Hartley\")",
+      "ok": true,
+      "detail": "With Arthur Hartley and Mae Hartley"
+    },
+    {
+      "name": "G084 05 panel: 3 guests coming",
+      "ok": true
+    },
+    {
+      "name": "G084 05 panel: the opened card lists everyone (3)",
+      "ok": true,
+      "detail": "Evelyn Hartley|Arthur Hartley|Mae Hartley"
+    },
+    {
+      "name": "G084 05 CSV: the 3-person reply is 3 rows (Evelyn, Arthur, Mae), \"Party size\" 3 on the first row only",
+      "ok": true,
+      "detail": "[[\"Evelyn Hartley\",\"Evelyn Hartley\",\"Yes\",\"3\"],[\"Arthur Hartley\",\"Evelyn Hartley\",\"Yes\",\"\"],[\"Mae Hartley\",\"Evelyn Hartley\",\"Yes\",\"\"]]"
+    },
+    {
+      "name": "G084 05 CSV: one row per person in all (3)",
+      "ok": true,
+      "detail": "3"
+    },
+    {
+      "name": "G084 05 panel: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 05 stress @360: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width",
+      "ok": true,
+      "detail": "{\"hscroll\":0,\"rows\":[{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 2 Celebrate together b\"},{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 3 Celebrate together b\"}]}"
+    },
+    {
+      "name": "G084 05 stress @360: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 05 stress @390: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width",
+      "ok": true,
+      "detail": "{\"hscroll\":0,\"rows\":[{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 2 Celebrate together b\"},{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 3 Celebrate together b\"}]}"
+    },
+    {
+      "name": "G084 05 stress @390: no console errors",
+      "ok": true
+    }
+  ]
+}

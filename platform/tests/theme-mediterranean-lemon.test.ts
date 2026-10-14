@@ -252,7 +252,7 @@ test('5 a content change shows on every page (names, date, venue, schedule rows,
   assert.equal(details('.sched-row').first().find('.loc').length, 0, 'row without a location: no empty location line');
   assert.equal(details('[data-field="venue.address"]').text(), '12 Orchard Lane');
   assert.equal(details('.venue-place').text(), 'Bath, United Kingdom', 'no region: no stray comma');
-  assert.equal(details('p[data-if="ceremony_time"]').text(), 'The ceremony begins at 3:30 PM.');
+  assert.equal(details('p[data-if="ceremony_time !thank_you_on"]').text(), 'The ceremony begins at 3:30 PM.');
   const home = render('home', c).$;
   assert.equal(home('[data-field="host_line"]').length, 0, 'empty host line removed');
   assert.equal(home('.countdown').length, 1);

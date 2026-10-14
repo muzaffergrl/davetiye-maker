@@ -6,21 +6,27 @@
      breaks free and falls away, the V flap opens upward to reveal the patterned liner, and the card rises from behind the
      front pocket while a single eucalyptus leaf drifts down; the card comes forward and flies to home (view transition).
      Personal text: none — [data-field] / [data-text] / [data-photo] are filled on the server (platform/README.md).
+     Thank-you mode (G075, data-if="thank_you_on"): the same envelope and opening; the card carries the couple's thank-you
+     title and the date, its window the thank-you photo or — without one — the bokeh paper and the wax seal with the
+     monogram (never a photo placeholder). Design texts: data-copy (G068, theme.json "copy").
      Visuals: GPT parts only (img/, build_images.py). -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-text="{name_display} · {date}">Wedding invitation</title>
-<meta name="description" data-attr-content="You're invited · {name_display} · {date|date-long} · {venue.city_region}" content="Wedding invitation">
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {name_display} · {date|date-long} · {venue.city_region}" content="Wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
 <meta property="og:type" content="website">
 <meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
-<meta property="og:description" data-attr-content="You're invited · {date|date-long} · {venue.city_region}" content="You're invited">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {date|date-long} · {venue.city_region}" content="You're invited">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
 <meta name="theme-color" content="#CCDCEC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&amp;family=Pinyon+Script&amp;display=swap">
 <link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
 </script>
@@ -43,29 +49,34 @@
   <img class="float f-bloom2" src="img/accent_2-200.webp" alt="">
 </div>
 
-<a class="skip" href="home.html" data-skip><span>Skip</span></a>
+<a class="skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
 
 <main class="env-page">
   <header class="env-head">
-    <p class="kicker">You are invited</p>
+    <p class="kicker" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
+    <p class="kicker" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
     <h1 class="script names" data-fit="1.6"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
   </header>
 
-  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation">
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
     <div class="env">
       <img class="env-flap" src="img/env_flap-440.webp" srcset="img/env_flap-440.webp 440w, img/env_flap-857.webp 857w" sizes="min(85vw, 445px)" alt="">
       <img class="env-body" src="img/env_body-440.webp" srcset="img/env_body-440.webp 440w, img/env_body-857.webp 857w" sizes="min(85vw, 445px)" alt="">
       <div class="card-slot">
         <div class="card" aria-hidden="true">
           <div class="photo-slot mask-card" data-slot="hero_portrait">
-            <img data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(43vw, 220px)" alt="">
-            <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(43vw, 220px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+            <!-- thank-you mode: the couple's thank-you photo in the same window, else the bokeh paper and the wax seal (decoration) -->
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(43vw, 220px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><span class="ty-seal"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="min(30vw, 155px)" alt=""><span class="seal-mono" data-field="initials"></span></span></span>
           </div>
           <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-638.webp 638w" sizes="min(51vw, 265px)" alt="">
           <div class="card-copy">
-            <p class="script">We're getting married</p>
+            <p class="script" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
+            <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
             <p class="kicker c-date" data-field="date"></p>
-            <p class="kicker c-city" data-if="venue.city_region" data-field="venue.city_region"></p>
+            <p class="kicker c-city" data-if="venue.city_region !thank_you_on" data-field="venue.city_region"></p>
           </div>
         </div>
       </div>
@@ -80,15 +91,15 @@
     </div>
   </div>
 
-  <p class="env-hint" aria-hidden="true"><span class="tap">Tap to open</span><span class="click">Click to open</span></p>
+  <p class="env-hint" aria-hidden="true"><span class="tap" data-copy="envelope_hint_tap">Tap to open</span><span class="click" data-copy="envelope_hint_click">Click to open</span></p>
 
   <div class="env-after">
-    <a class="btn" href="home.html" data-enter>Enter</a>
-    <button class="replay textlink" type="button">Replay the opening</button>
+    <a class="btn" href="home.html" data-enter data-copy="envelope_enter">Enter</a>
+    <button class="replay textlink" type="button" data-copy="envelope_replay">Replay the opening</button>
   </div>
 
   <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
-  <p class="nojs-only"><a class="btn" href="home.html">Open the invitation</a></p>
+  <p class="nojs-only"><a class="btn" href="home.html" data-copy="envelope_open">Open the invitation</a></p>
 </main>
 
 </body>

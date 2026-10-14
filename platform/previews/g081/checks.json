@@ -1,0 +1,106 @@
+{
+ "theme_check_stress_dusty-blue-champagne": {
+  "passed": 127,
+  "warnings": 0,
+  "errors": 0,
+  "info": {
+   "thank_you": "complete",
+   "copy": {
+    "keys": 70,
+    "unmarked": 0,
+    "problems": 0
+   },
+   "stress_record": {
+    "slug": "stress-site",
+    "pages": [
+     "index",
+     "home",
+     "story",
+     "details",
+     "rsvp"
+    ],
+    "widths": [
+     360,
+     390
+    ],
+    "copy_keys_at_max": 70,
+    "thank_you": true
+   },
+   "envelope_to_home_ms": 3894,
+   "first_view_index_kb_placeholders": 921,
+   "first_view_home_kb_placeholders": 1015,
+   "first_view_index_kb_photos": 982,
+   "first_view_home_kb_photos": 1150,
+   "nav_back_vt_390x844": {
+    "nav_animations": [],
+    "frames": [
+     {
+      "t": 0,
+      "nav_drawn": "0.00 %"
+     },
+     {
+      "t": 120,
+      "nav_drawn": "0.00 %"
+     }
+    ]
+   }
+  }
+ },
+ "theme_check_stress_mediterranean-lemon": {
+  "passed": 127,
+  "warnings": 0,
+  "errors": 0,
+  "info": {
+   "thank_you": "complete",
+   "copy": {
+    "keys": 70,
+    "unmarked": 0,
+    "problems": 0
+   },
+   "stress_record": {
+    "slug": "stress-site",
+    "pages": [
+     "index",
+     "home",
+     "story",
+     "details",
+     "rsvp"
+    ],
+    "widths": [
+     360,
+     390
+    ],
+    "copy_keys_at_max": 70,
+    "thank_you": true
+   },
+   "envelope_to_home_ms": 4355,
+   "first_view_index_kb_placeholders": 878,
+   "first_view_home_kb_placeholders": 885,
+   "first_view_index_kb_photos": 973,
+   "first_view_home_kb_photos": 1142,
+   "nav_back_vt_390x844": {
+    "nav_animations": [],
+    "frames": [
+     {
+      "t": 0,
+      "nav_drawn": "0.00 %"
+     },
+     {
+      "t": 120,
+      "nav_drawn": "0.00 %"
+     }
+    ]
+   }
+  }
+ },
+ "g075_browser_02_05": {
+  "when": "2026-10-14T21:36:30.459Z",
+  "passed": 40,
+  "failed": 0
+ },
+ "g068_browser_02_05": {
+  "when": "2026-10-14T21:25:37.440Z",
+  "passed": 16,
+  "failed": 0
+ }
+}

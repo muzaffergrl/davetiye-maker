@@ -19,7 +19,7 @@ yatay telefon ızgarası, `devRender`); görünüş, aralıklar, süs konumları
 | `home.html` | hero (W1.2: kart + foto, isimler, gün · tarih, mekân, şehir/bölge/ülke, geri sayım, kobalt RSVP hapı), davet kartı (3 dilim, Didone yığılı tarih) + tek "Kindly reply by" satırı, takvime ekle, duvara gömülü iki çini pano (story_1 · mekân) → Our Story / The Day (altında programın ilk 4 satırı), kapanış (gök mavisi) |
 | `story.html` | W1.3: ilk ekran güneşli duvar (`.page-bg`: duvar kırpımı, iki köşe kümesi, serbest parçalar); başlık + alt başlık + giriş cümlesi, üç çini çerçeve basamaklı sütunda (sol, sağ, sol), dimdik, üst üste binmeden; her biri görünüme girerken pano gibi döner; dış alt köşede GPT `divider` buketi + çiçek, her panonun yanında duvarda iki parça; başlık panonun altında |
 | `details.html` | W1.4: ilk ekran güneşli duvar (`.page-bg`); Order of the Day kartı (info_card, 3 dilim; saat · ETKİNLİK · yer, satır aralarında GPT limon dalı), takvime ekle, mekân (GPT yatay çini çerçeve), çini çiçekli çizgi + dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
-| `rsvp.html` | W1.5: ilk ekran güneşli duvar (`.page-bg`); RSVP kartı (info_card, 3 dilim) + kartın alt kenarında limon bağı (closure), platform yanıt formu (G042 + G051 soruları), kapanış |
+| `rsvp.html` | W1.5: ilk ekran güneşli duvar (`.page-bg`); RSVP kartı (info_card, 3 dilim) + kartın alt kenarında limon bağı (closure), platform yanıt formu (G042 + G051 soruları + G069 misafir adları, G084), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`sway-tl/br`, `turn-l/r`, `drop`, `set` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri |
 | `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim + ilk ekranlar (`fitNames`, `fold`, `[data-fold]`, zarf sayfası `envFit`), dekor–metin (`decor`), kart kopyası (`fitCopy`), geri sayım, zarf, `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri |
@@ -239,6 +239,55 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
 | alt kenarda limon bağı | `.sig-unit > .card-tie` (closure) | `drop` girişiyle karta oturur; imza birimiyle birlikte katlanır |
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi; masaüstünde de kartın altında (tek sütun) |
 
+## Teşekkür hâli (G075 kuralı, G081)
+Düğünden sonra (platform kuralı `lib/content/thank-you.ts`, docs/11 §3.6) aynı sayfalar `data-if="thank_you_on"` ile teşekkür
+hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçaları):
+- **Zarf:** açılış şovu aynen (limon bağı gevşeyip yuvarlanır, kapak açılır, kart yükselir); üst satır "With love and thanks"
+  (`ty_kicker`); kartta teşekkür başlığı (`thank_you_title`, el yazısı, dengeli sarar; `fitCopy` sığmazsa küçültür, ≥ 11 px) +
+  tarih; " · kasaba" yok. Kart penceresinde teşekkür fotoğrafı (`thank_you.photo`, `hero_portrait` oranında); yoksa **gök mavisine
+  dönen güneşli duvar (`wall-540`) üstünde zarfın limon bağı (closure)** — asla yer tutucu.
+- **Home:** hero kartı zarfla aynı; isimler, tarih, mekân kalır; geri sayım ve RSVP hapı yok. Davet kartının yerine aynı
+  `invitation_card` kâğıdında (3 dilim — mesajla uzar) **teşekkür kartı**: başlık, çiftin mesajı (`white-space: pre-line`), "With
+  love,", isimler, tarih. Yanıt satırı ve takvime ekle yok; duvardaki panolarda Our Story ve The Day kalır (çift Details'i
+  gizlerse The Day panosu yok).
+- **Details:** "The Day" olarak kalır (program, mekân, harita, registry); takvim, dress code, Travel & Stay, SSS ve RSVP linki
+  yok; tören cümlesi geçmiş zaman ("The ceremony began at …", `ceremony_after`). Çift gizlerse sayfa 404 ve hiçbir link yok
+  (story'nin kapanış düğmesi Home'a döner).
+- **RSVP:** eski linkler için açık: kartta "Replies are closed" (`rsvp_closed_title`) + teşekkür başlığı + Home hapı + imza birimi
+  ("With love," + isimler + limon bağı); bekleme satırı ve form yok (platform da `403 closed`, `reason: thank_you`). Formsuz
+  sayfada kapanış ("Thank you" …) kartın hemen altına gelir: kapanışın satırları da `[data-fold]` (nav çizgisini kesen satır ilk
+  ekranın altından başlar; davet hâlinde form arada olduğu için etkisiz). Ölçüm (giriş hareketleri azaltılmış, yazı satır
+  kutuları + foto/düğme/bağ): teşekkür hâlinde home/story/details/rsvp × 12 boyut (320×568 … 1440×900, yatay dahil) × demo ve
+  tasarım aralığı kaydı — nav çizgisini kesen parça yalnız 667×375 details kart başlığı, davet hâlinde de aynı (önceden vardı).
+- **Nav:** Details etiketi "The Day" (`nav_day`), RSVP yok.
+- Stiller `thank-you.css`'te (yalnız teşekkür modunda yüklenir; `site.css` bütçesi değişmedi). `site.js` `devRender` çoklu
+  koşulu okur; tasarım önizlemesi davet hâlini gösterir.
+
+## Düzenlenebilir metinler (G068 kuralı, G081)
+Görünür her sabit metin `data-copy` taşır (71 standart anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
+`platform/README.md` "Düzenlenebilir tasarım metinleri"). Manifest şablonlardan yazılır: `node scripts/copy-manifest.ts --theme
+mediterranean-lemon` (`--check` ile denetim). `max` değerleri 360/390'da ölçüldü (`theme-check --stress`: her anahtar `max`'ta,
+§12 zorlama kaydıyla, teşekkür hâli dahil): gezinme 6/6/7/5 (`nav_home`/`nav_story`/`nav_details`/`nav_rsvp`; 8 harfte satır 434 px,
+360 px'e sığmıyordu), teşekkür hâlinde `nav_day` 10; sayaç etiketleri 7 (`cd_*`, 360 px'te dört hücre). Order of the Day /
+Will You Join Us? / Replies are closed kart başlıkları ve ana sayfa panolarının başlıkları artık tek satıra zorlanmıyor
+(`white-space: nowrap` → `text-wrap: balance`): tasarımın kendi metni sütuna sığdığı için görünüm aynı, uzun başlık iki dengeli
+satıra iner (kart 3 dilimle uzar, `folds` yeniden ölçer). Teşekkür kartının başlığı çelengin altından başlar ve onun düz kâğıdında
+kalır (`max-width: 54cqw`, invitation_card `free_zone`). Zarfa dönüşte (home → `index?replay=1`) nav'ın eski görüntüsü çizilmez:
+`html:has(.page-envelope)::view-transition-group(site-nav) { display: none; }` (theme-check G068 denetimi; önce 0 ms'de bandın
+%89,9'u). Yalnız `::view-transition-old(site-nav)`'ı saydam yapmak (02'nin kuralı) burada yetmedi: grup yine bir şey çiziyordu
+(120 ms'de bandın %13,7'si; aynı kare iki kez çekilince fark %0, yani canlı animasyon değil — olası sebep nav'ın
+`backdrop-filter`'ı, doğrulanmadı); grup gizlenince %0. Ana sayfa kapanışındaki "With love" (`foot_kicker`) ile kartlardaki "With love,"
+(`love_line`) ayrı anahtar (iki ayrı söz). Bilerek sabit: iç sayfaların `description` meta cümleleri, bölge `aria-label`'ları,
+"Please turn on JavaScript…" (`data-copy-fixed`), platform mesajları (`[data-rsvp-message]`).
+
+## Misafir adları (G069 satırı, G084)
+Formda "Number of guests"in hemen altında `<template data-rsvp-party>`: misafir 2+ yazınca `/rsvp/form.js` diğer misafirler
+için "Name of guest 2 / 3 … (optional)" satırlarını açar (`party:<n>`, `party: [...]` gönderir; "no"da formdan çıkar, yazılan
+kalır). Satır formun kendi `.field` / `.kicker` / `.opt` stilinde (yeni dekor, yeni CSS, yeni JS yok — `site.css` / `site.js`
+baytı değişmedi). Satır `data-fold` taşır: yeniden ölçümde (döndürme/yeniden boyut) `folds` onu diğer alanlar gibi nav çizgisine
+katlar. Metinler `form_party` (`max` 24, standart) ve `form_optional`; 360/390'da her anahtar `max`'ta satırlar açıkken yatay
+kaydırma yok, etiket kutuda sarar (`tests/g069-browser.ts` G084 bölümü).
+
 ## Bilinen sınırlar
 - Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim).
 - Details tören cümlesi yalnız saati söyler ("The ceremony begins at 4:00 PM.").
@@ -250,7 +299,9 @@ geneli `scroll-behavior: smooth` betikle yapılan her kaydırmayı da yavaşlat�
 - Zarf sayfası isimleri (§12 zorlama kaydı, 40 harfli adlar) 01 gibi ölçeklenir (en çok 0,4×); home hero isimleri 36 px tabanında.
 - Boyut (docs/11 §6, KiB okuması; test `≤ 35 × 1024` / `≤ 45 × 1024`): `site.js` 35 807 B (34,97 KiB), `site.css` 46 051 B
   (44,97 KiB); final QA düzeltmesi (tek sıra birimi, imza küçültme) yorumlar kısaltılarak ve etkisiz `.hero.is-folded` kuralı
-  silinerek sığdı. Pay 33 B / 29 B: sonraki eklemeden önce sıkıştırma gerekir.
+  silinerek sığdı. Pay 33 B / 29 B: sonraki eklemeden önce sıkıştırma gerekir. G081: `site.js` 35 831 B (pay 9 B;
+  `devRender` çoklu `data-if` + `{copy.…}`, aynı işlev daha kısa yazıldı), `site.css` 46 070 B (pay 10 B; zarfa dönüş nav
+  kuralı eklendi, iki yorum kısaldı, kart/pano başlıklarında `nowrap` → `text-wrap: balance`). Teşekkür hâli `thank-you.css`'te.
 - İlk ekran ölçümü (final QA 2026-10-14; demo / tasarım aralığı / zorlama kaydı): story masaüstü 1024×768 … 1920×1080'de üç pano
   hep ilk ekranda, sıranın altında 14–54 px duvar (1920×1080: 86–114 px, pano 400 px tavanında). RSVP imza birimi + bağ 390×844,
   412×915, 430×932 ve 1024×768 … 1920×1080'de ilk ekranda (zorlama kaydında isimler 4–5 satır, 19,5–39 px); yalnız 360×640 ve

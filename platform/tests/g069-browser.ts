@@ -10,6 +10,12 @@
 //    card, "New" → filter by an answer, sort → Mark as seen (stays after reload) → Add a reply (sheet) → correct a reply
 //    → CSV (one row per person: 3 rows for the 3-person reply) → print view (screen, print media, A4 + Letter PDF).
 // 3. 1280 px layout, 320 px, archived site (read only, CSV + print stay), axe-core, touch targets ≥ 44 px, console.
+// 4. G084: the same guest-names row on 02 Dusty Blue & Champagne and 05 Mediterranean Lemon (04 after its own round): a
+//    3-person reply with names (rows in the theme's own field style, "no" takes them out, typed names come back) → stored →
+//    the panel card "With … and …" and the CSV, one row per person; every design text at its theme.json max (like
+//    theme-check --stress) with the rows open at 360 / 390 px: no horizontal scroll, labels inside the reply box.
+//    G084_THEMES=<id,…> runs only those designs' G084 part (and skips 1–3); PNGs + checks.json -> previews/g084/ (or
+//    $G084_SHOTS_DIR).
 // Screenshots, PDFs and checks.json -> previews/g069/ (or $G069_SHOTS_DIR). Exit 1 on a failed check.
 // Uses the global Playwright and /opt/pw-browsers (never `playwright install`); data lives in temporary folders.
 
@@ -20,6 +26,7 @@ import path from 'node:path';
 import type { ContentRecord } from '../lib/content/types.ts';
 import { LocalAdapter } from '../lib/data/local/index.ts';
 import { createSiteWithKeys, publishSite, setArchiveOverride } from '../lib/sites.ts';
+import { stressCopy } from '../lib/theme/copy.ts';
 import { loadChromium, startNext, waitForServer } from '../scripts/lib/browser.ts';
 import { REPO, ROOT } from '../scripts/lib/theme-env.ts';
 
@@ -80,6 +87,25 @@ const seenAt = (await adapter.listRsvps(blush.site.id)).at(-1)!.createdAt;
 for (const r of earlier.slice(0, 3)) await adapter.saveRsvp(archived.site.id, r);
 await setArchiveOverride(adapter, archived.site.id, '2026-01-01', 'browser check: archive');
 
+// G084: one site per design with its own copy, one with every design text at its theme.json max (stress, like theme-check).
+const PARTY_THEMES = [
+  { id: 'dusty-blue-champagne', dir: '02_Dusty_Blue', tag: '02' },
+  { id: 'mediterranean-lemon', dir: '05_Lemon_Mediterranean', tag: '05' },
+] as const;
+const G084_ONLY = (process.env.G084_THEMES ?? '').split(',').filter(Boolean);
+const G084_OUT = process.env.G084_SHOTS_DIR || path.join(ROOT, 'previews/g084');
+type Keys = Awaited<ReturnType<typeof createSiteWithKeys>>;
+const partySites: Array<(typeof PARTY_THEMES)[number] & { site: Keys; stress: Keys }> = [];
+for (const t of PARTY_THEMES.filter((x) => !G084_ONLY.length || G084_ONLY.includes(x.id))) {
+  const copy = stressCopy(JSON.parse(readFileSync(path.join(ROOT, 'themes', t.id, 'theme.json'), 'utf8')).copy);
+  const site = await createSiteWithKeys(adapter, { slug: `party-${t.tag}`, theme: t.id, content: siteContent(t.dir) });
+  await publishSite(adapter, site.site.id);
+  const stress = await createSiteWithKeys(adapter, { slug: `party-${t.tag}-stress`, theme: t.id, content: { ...siteContent(t.dir), copy } });
+  await publishSite(adapter, stress.site.id);
+  partySites.push({ ...t, site, stress });
+}
+if (partySites.length) mkdirSync(G084_OUT, { recursive: true });
+
 const editUrl = (slug: string, key: string, hash = '') => `${BASE}/edit/${slug}?k=${encodeURIComponent(key)}${hash}`;
 const PANEL = editUrl('clara-and-julian', blush.editKey);
 
@@ -89,6 +115,7 @@ const check = (name: string, ok: unknown, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `  (${detail})` : ''}`);
 };
 async function block(name: string, fn: () => Promise<void>) {
+  if (G084_ONLY.length && !name.startsWith('G084')) return; // G084_THEMES: only the G084 part
   try {
     await fn();
   } catch (e) {
@@ -218,6 +245,139 @@ try {
     check('01 form: no console errors', problems.length === 0, problems.join(' | '));
     await ctx.close();
   });
+
+  // =========================================================================== 4. G084: the guest-names row on 02 and 05
+  const shot84 = async (page: any, name: string) => {
+    await new Promise((r) => setTimeout(r, 300));
+    await page.screenshot({ path: path.join(G084_OUT, `${name}.png`) });
+  };
+  /** Scrolls the form (name … the name rows) or the guest count to the top of the screen; no focus ring in the picture. */
+  const scrollTo = (page: any, sel: string, gap: number) =>
+    page.evaluate(([s, g]: [string, number]) => {
+      (document.activeElement as HTMLElement | null)?.blur();
+      window.scrollTo(0, document.querySelector(s)!.getBoundingClientRect().top + window.scrollY - g);
+    }, [sel, gap]);
+  const toGuests = (page: any) => scrollTo(page, 'label:has([name="guests"])', 96);
+  for (const t of partySites) {
+    const T = `G084 ${t.tag}`;
+    await block(`${T} guest`, async () => {
+      const ctx = await browser.newContext(PHONE);
+      const page = await ctx.newPage();
+      const problems = watch(page);
+      await page.goto(`${BASE}/${t.site.site.slug}/rsvp`, { waitUntil: 'load' });
+      await page.waitForSelector('form[data-rsvp-form][data-rsvp-status="ready"]');
+      check(`${T} form: no name fields before "Number of guests" is 2+`, (await page.locator('[name^="party:"]').count()) === 0);
+      await page.fill('[data-rsvp-form] [name="name"]', 'Evelyn Hartley');
+      await page.fill('[data-rsvp-form] [name="email"]', 'evelyn@example.com');
+      await page.check('[data-rsvp-form] [name="attending"][value="yes"]');
+      await page.fill('[data-rsvp-form] [name="guests"]', '3');
+      await page.waitForSelector('[name="party:3"]');
+      const labels = await page.evaluate(() => [...document.querySelectorAll('[name^="party:"]')].map((i) => (i.closest('label')?.textContent ?? '').replace(/\s+/g, ' ').trim()));
+      check(`${T} form: 3 guests → 2 name fields, "Name of guest 2 / 3 (optional)"`, labels.join('|') === 'Name of guest 2 (optional)|Name of guest 3 (optional)', JSON.stringify(labels));
+      // the rows are the form's own fields: same label and input styles, same spacing, right after the guest count
+      const look = await page.evaluate(() => {
+        (document.activeElement as HTMLElement | null)?.blur(); // the guest count keeps the focus (its focus border)
+        const field = (i: HTMLElement) => {
+          const c = getComputedStyle(i), l = i.closest('label')!, k = getComputedStyle(l.querySelector('.kicker')!), b = i.getBoundingClientRect();
+          return [c.fontFamily, c.fontSize, c.borderTopWidth, c.borderTopColor, c.borderRadius, c.backgroundColor, Math.round(b.width), Math.round(b.height),
+            k.fontFamily, k.fontSize, k.letterSpacing, k.textTransform, k.color, getComputedStyle(l).marginTop].join(' / ');
+        };
+        const g = document.querySelector('[name="guests"]') as HTMLElement, p = document.querySelector('[name="party:2"]') as HTMLElement;
+        return { guests: field(g), party: field(p), order: document.querySelector('[data-rsvp-error-for="guests"]')!.nextElementSibling === p.closest('label') };
+      });
+      check(`${T} form: the name rows use the theme's own field style (label, input, width, spacing), right after the guest count`, look.guests === look.party && look.order, look.guests === look.party ? look.party : `${look.party} ≠ ${look.guests}`);
+      await page.fill('[name="party:2"]', 'Arthur Hartley');
+      await page.fill('[name="party:3"]', 'Mae Hartley');
+      await page.check('[data-rsvp-form] [name="attending"][value="no"]');
+      check(`${T} form: a "no" takes the name fields out of the form`, (await page.locator('[name^="party:"]').count()) === 0);
+      await page.check('[data-rsvp-form] [name="attending"][value="yes"]');
+      await page.waitForSelector('[name="party:3"]');
+      check(`${T} form: back to "yes": the typed names are still there`, (await page.inputValue('[name="party:2"]')) === 'Arthur Hartley' && (await page.inputValue('[name="party:3"]')) === 'Mae Hartley');
+      await page.check('fieldset[data-rsvp-question="meal"] input[value="Fish"]');
+      await scrollTo(page, '[data-rsvp]', 12); // the reply box: "Your reply" heading → name, email, attend, guests, the 2 name rows
+      await page.waitForTimeout(1500); // the design's entrance motion
+      check(`${T} form: no horizontal scroll at 390 px with the name fields`, (await overflow(page)) <= 0);
+      await shot84(page, `01_form_party_${t.tag}_390`);
+      await page.click('[data-rsvp-form] button[type="submit"]');
+      await page.waitForSelector('[data-rsvp-state="success"]:not([hidden])', { timeout: 8000 });
+      const stored = (await adapter.listRsvps(t.site.site.id)).find((r) => r.name === 'Evelyn Hartley');
+      check(`${T} form: reply stored with 3 guests and the names of the 2 others`, JSON.stringify(stored?.party) === '["Arthur Hartley","Mae Hartley"]' && stored?.guests === 3 && stored?.attending === true, JSON.stringify(stored));
+      await page.click('[data-rsvp-again]');
+      check(`${T} form: "Send another reply" starts with no name fields`, (await page.locator('[name^="party:"]').count()) === 0);
+      check(`${T} form: no console errors`, problems.length === 0, problems.join(' | '));
+      await ctx.close();
+    });
+
+    await block(`${T} panel`, async () => {
+      const ctx = await browser.newContext(PHONE);
+      const page = await ctx.newPage();
+      const problems = watch(page);
+      await page.goto(editUrl(t.site.site.slug, t.site.editKey, '#guests'));
+      await page.waitForSelector('[data-reply-name="Evelyn Hartley"]');
+      const card = page.locator('[data-reply-name="Evelyn Hartley"]');
+      const party = await text(page, '[data-reply-name="Evelyn Hartley"] [data-reply-party]');
+      check(`${T} panel: the card shows the party ("With Arthur Hartley and Mae Hartley")`, party.includes('With Arthur Hartley and Mae Hartley'), party);
+      check(`${T} panel: 3 guests coming`, (await text(page, '[data-stat="coming"]')) === '3 Guests coming');
+      await card.locator('button[aria-expanded]').first().click();
+      await page.waitForSelector('[data-reply-people]');
+      const people = await card.locator('[data-reply-people] li').allInnerTexts();
+      check(`${T} panel: the opened card lists everyone (3)`, people.join('|') === 'Evelyn Hartley|Arthur Hartley|Mae Hartley', people.join('|'));
+      await toTop(page, '[data-reply-name="Evelyn Hartley"]');
+      await page.waitForTimeout(200);
+      await card.screenshot({ path: path.join(G084_OUT, `02_panel_party_card_${t.tag}_390.png`) });
+      const href = await page.getAttribute('[data-csv]', 'href');
+      const csv: string = await page.evaluate(async (u: string) => new TextDecoder().decode(new Uint8Array(await (await fetch(u)).arrayBuffer())), href);
+      const rows = csv.replace(/^﻿/, '').split('\r\n').filter(Boolean).map((l: string) => l.slice(1, -1).split('","'));
+      const hers = rows.filter((r: string[]) => r[1] === 'Evelyn Hartley');
+      check(`${T} CSV: the 3-person reply is 3 rows (Evelyn, Arthur, Mae), "Party size" 3 on the first row only`,
+        hers.map((r) => r[0]).join('|') === 'Evelyn Hartley|Arthur Hartley|Mae Hartley' && hers.map((r) => r[3]).join('|') === '3||' && hers.every((r) => r[2] === 'Yes'),
+        JSON.stringify(hers.map((r) => r.slice(0, 4))));
+      check(`${T} CSV: one row per person in all (3)`, rows.length - 1 === 3, String(rows.length - 1));
+      check(`${T} panel: no console errors`, problems.length === 0, problems.join(' | '));
+      await ctx.close();
+    });
+
+    await block(`${T} stress`, async () => {
+      for (const w of [360, 390]) {
+        const ctx = await browser.newContext({ ...PHONE, viewport: { width: w, height: 844 } });
+        const page = await ctx.newPage();
+        const problems = watch(page);
+        await page.goto(`${BASE}/${t.stress.site.slug}/rsvp`, { waitUntil: 'load' });
+        await page.waitForSelector('form[data-rsvp-form][data-rsvp-status="ready"]');
+        await page.check('[data-rsvp-form] [name="attending"][value="yes"]');
+        await page.fill('[data-rsvp-form] [name="guests"]', '3');
+        await page.waitForSelector('[name="party:3"]');
+        await page.evaluate(() => document.fonts.ready);
+        await toGuests(page);
+        await page.waitForTimeout(1500); // entrance motion over: final boxes
+        const m = await page.evaluate(() => {
+          const box = document.querySelector('[data-rsvp]')!.getBoundingClientRect();
+          const gw = Math.round(document.querySelector('[name="guests"]')!.getBoundingClientRect().width);
+          return {
+            hscroll: document.documentElement.scrollWidth - innerWidth,
+            rows: [...document.querySelectorAll('label[data-rsvp-party-guest]')].map((l) => {
+              const k = l.querySelector('.kicker') as HTMLElement, rg = document.createRange();
+              rg.selectNodeContents(k);
+              const rs = [...rg.getClientRects()].filter((q) => q.width && q.height);
+              return {
+                text: (k.textContent ?? '').replace(/\s+/g, ' ').trim(),
+                inside: rs.every((q) => q.left >= box.left - 0.5 && q.right <= box.right + 0.5),
+                clipped: k.scrollWidth > k.clientWidth + 1,
+                lines: new Set(rs.map((q) => Math.round(q.top))).size,
+                input: Math.round(l.querySelector('input')!.getBoundingClientRect().width) === gw,
+              };
+            }),
+          };
+        });
+        const ok = m.hscroll <= 0 && m.rows.length === 2 && m.rows.every((r: any) => r.inside && !r.clipped && r.input && r.text.length > 45);
+        check(`${T} stress @${w}: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width`, ok,
+          JSON.stringify({ hscroll: m.hscroll, rows: m.rows.map((r: any) => ({ lines: r.lines, inside: r.inside, clipped: r.clipped, input: r.input, text: r.text })) }));
+        if (w === 360) await shot84(page, `03_form_party_stress_${t.tag}_360`);
+        check(`${T} stress @${w}: no console errors`, problems.length === 0, problems.join(' | '));
+        await ctx.close();
+      }
+    });
+  }
 
   // =========================================================================== 2. the couple
   await block('couple', async () => {
@@ -430,6 +590,11 @@ try {
 }
 
 writeFileSync(path.join(OUT, 'checks.json'), JSON.stringify({ when: new Date().toISOString(), passed: checks.filter((c) => c.ok).length, failed: checks.filter((c) => !c.ok).length, checks }, null, 2) + '\n');
+const g084 = checks.filter((c) => c.name.startsWith('G084'));
+if (partySites.length) {
+  const summary = { when: new Date().toISOString(), themes: partySites.map((t) => t.id), passed: g084.filter((c) => c.ok).length, failed: g084.filter((c) => !c.ok).length, checks: g084 };
+  writeFileSync(path.join(G084_OUT, 'checks.json'), JSON.stringify(summary, null, 2) + '\n');
+}
 const failed = checks.filter((c) => !c.ok);
 console.log(`\n${checks.length - failed.length}/${checks.length} checks passed${failed.length ? `; failed: ${failed.map((f) => f.name).join(' · ')}` : ''}`);
 process.exit(failed.length ? 1 : 0);

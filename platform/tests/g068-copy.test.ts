@@ -1,7 +1,7 @@
 // G068 (K28): almost every text of a design changes from the panel — the engine (data-copy, data-copy-attr, {copy.<key>}:
 // escaped, one line, at most the key's max, empty = the design's text), the schema (TS + Python parity), the theme.json
-// "copy" manifest of 01 olive-ivory and 03 blush-garden-rose (= their templates, every visible fixed text marked, standard
-// keys only), the theme-dependent checks (too long blocks publishing, a new unknown key is refused when saving), the panel
+// "copy" manifest of 01 olive-ivory and 03 blush-garden-rose (G081: also 02 dusty-blue-champagne, 05 mediterranean-lemon)
+// (= their templates, every visible fixed text marked, standard keys or a design key with its own label), the theme-dependent checks (too long blocks publishing, a new unknown key is refused when saving), the panel
 // API (a copy edit never uses a name/date change), the guest pages after publishing (both themes, thank-you mode too) and
 // the panel helpers (Unpublished changes by page, Review's "Headings & labels", suggestions, reset). The browser journey
 // and previews: tests/g068-browser.ts.
@@ -47,9 +47,21 @@ import { changedCopyPages, changedPages, COPY_TITLE } from '../components/panel/
 import { PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
 
 const BASE = 'https://wedding.example';
-const THEMES = ['olive-ivory', 'blush-garden-rose'] as const;
+const THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon'] as const;
 type Theme = (typeof THEMES)[number];
-const COLLECTION: Record<Theme, string> = { 'olive-ivory': '01_Olive_Ivory', 'blush-garden-rose': '03_Blush_Garden_Rose' };
+const COLLECTION: Record<Theme, string> = {
+  'olive-ivory': '01_Olive_Ivory',
+  'blush-garden-rose': '03_Blush_Garden_Rose',
+  'dusty-blue-champagne': '02_Dusty_Blue',
+  'mediterranean-lemon': '05_Lemon_Mediterranean',
+};
+/** Design keys outside the catalogue (docs/11 §3.7: theme.json gives them a label and a panel page). */
+const DESIGN_KEYS: Record<Theme, string[]> = {
+  'olive-ivory': [],
+  'blush-garden-rose': [],
+  'dusty-blue-champagne': ['home_day_sub'],
+  'mediterranean-lemon': [],
+};
 const record = (theme: Theme = 'olive-ivory'): ContentRecord =>
   JSON.parse(readFileSync(path.join(REPO_ROOT, 'collections', COLLECTION[theme], 'content.demo.json'), 'utf8')) as ContentRecord;
 
@@ -219,7 +231,7 @@ test('theme.json copy: parse rules (key, default, max, pages, label for a non-st
   assert.deepEqual(ok.copy, { custom: { default: 'Hi', max: 9, pages: ['index'], label: 'Greeting', panel: 'us' } });
 });
 
-test('01 and 03: theme.json copy = the templates; no unmarked visible text; standard keys; most-changed keys present', async () => {
+test('01, 02, 03, 05: theme.json copy = the templates; no unmarked visible text; standard keys; most-changed keys present', async () => {
   for (const id of THEMES) {
     const theme = (await loadTheme(id))!;
     const pages: Partial<Record<PageName, string>> = {};
@@ -230,7 +242,8 @@ test('01 and 03: theme.json copy = the templates; no unmarked visible text; stan
     assert.deepEqual(buildCopyManifest(scan, theme.manifest.copy), theme.manifest.copy, `${id}: the generator writes what is stored`);
     const keys = Object.keys(theme.manifest.copy);
     assert.ok(keys.length >= 70, `${id}: ${keys.length} keys`);
-    assert.deepEqual(keys.filter((k) => !STANDARD_COPY[k]), [], `${id}: standard keys only`);
+    assert.deepEqual(keys.filter((k) => !STANDARD_COPY[k]), DESIGN_KEYS[id], `${id}: standard keys (+ its design keys)`);
+    for (const k of DESIGN_KEYS[id]) assert.ok(theme.manifest.copy[k].label && theme.manifest.copy[k].panel, `${id}: ${k} has a label and a panel page`);
     for (const k of ['envelope_kicker', 'card_line', 'invite_request', 'rsvp_title', 'rsvp_by', 'story_title', 'day_title', 'schedule_title', 'nav_home', 'nav_rsvp', 'form_send', 'rsvp_closed_title', 'ty_kicker'])
       assert.ok(theme.manifest.copy[k], `${id}: ${k}`);
     // every default fits its max; every max is within the schema ceiling
@@ -354,7 +367,7 @@ test('panel API: copy edits save, count as unpublished changes, never use a name
   assert.ok(keep.data.validation.warnings.some((w: any) => w.path === 'copy.retired_key'));
 });
 
-test('both themes: every key at its max renders without engine warnings; titles and the RSVP form follow the copy', async () => {
+test('every theme: every key at its max renders without engine warnings; titles and the RSVP form follow the copy', async () => {
   for (const id of THEMES) {
     const theme = (await loadTheme(id))!;
     const c = record(id);
@@ -377,8 +390,9 @@ test('both themes: every key at its max renders without engine warnings; titles 
     assert.equal($('title').text().split(' · ')[0], 'How we met');
     assert.equal($('meta[property="og:title"]').attr('content')!.split(' · ')[0], 'How we met');
     const rsvp = cheerio.load(renderTemplate({ html: (await readThemePage(theme, 'rsvp'))!, content: { ...record(id), copy: { form_party: 'Guest name', form_optional: '(if you like)' } }, theme: theme.manifest, page: 'rsvp', slug: 's' }).html);
-    assert.equal(rsvp('[data-copy="form_party"]').text(), 'Guest name', 'the guest row inside <template data-rsvp-party>');
-    assert.equal(rsvp('[data-copy="form_optional"]').length, 3);
+    // the guest-names row (G069, <template data-rsvp-party>): 01, 03 and (G084) 02, 05 — 04 not yet
+    if (theme.manifest.copy.form_party) assert.equal(rsvp('[data-copy="form_party"]').text(), 'Guest name', 'the guest row inside <template data-rsvp-party>');
+    assert.equal(rsvp('[data-copy="form_optional"]').length, theme.manifest.copy.form_party ? 3 : 2);
     assert.ok(rsvp('[data-copy="form_optional"]').toArray().every((e) => rsvp(e).text() === '(if you like)'));
   }
 });

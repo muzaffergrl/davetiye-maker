@@ -576,9 +576,11 @@ function devRender(content) {
   const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
     story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' }; // = theme.json
   const view = JSON.parse(JSON.stringify(content)), vn = view.venue;
-  const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
+  const join = (a) => a.filter((x) => x?.trim?.()).join(', ');
   if (vn) { vn.city_region = join([vn.city, vn.region]); vn.city_region_country = join([vn.city, vn.region, vn.country]); }
-  try { view.countdown_target_utc = new Date(zonedToUtc(view.date, view.ceremony_time, view.timezone)).toISOString(); } catch (e) { /* none */ }
+  view.copy = {}; // {copy.<key>} = the page's [data-copy] text (G068)
+  $$('[data-copy]').forEach((e) => { view.copy[e.dataset.copy] ??= e.textContent.trim(); });
+  try { view.countdown_target_utc = new Date(zonedToUtc(view.date, view.ceremony_time, view.timezone)).toISOString(); } catch { /* none */ }
   const get = (path) => path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), view);
   const present = (v) => !(v == null || v === false || (typeof v === 'string' && !v.trim()) || (Array.isArray(v) && !v.length));
   const abs = (p, scope) => (p.startsWith('.') ? (scope ? scope + p : p.slice(1)) : p);
@@ -597,32 +599,24 @@ function devRender(content) {
   const fill = (tpl, scope) => tpl.replace(/\{\s*([^{}|\s]+)\s*(?:\|\s*([a-z-]+)\s*)?\}/g, (_m, p, f) => fmt(get(abs(p, scope)), f, abs(p, scope)));
   const photoState = (img, url) => {
     if (url) { img.removeAttribute('srcset'); img.src = url; }
-    const slot = img.closest('[data-slot]');
-    img.dataset.photoState = url ? 'user' : 'placeholder';
-    if (slot) slot.dataset.photoState = img.dataset.photoState;
+    [img, img.closest('[data-slot]')].forEach((e) => { if (e) e.dataset.photoState = url ? 'user' : 'placeholder'; });
   };
   function walk(el, scope) {
     const d = el.dataset;
     if (d.optional !== undefined && !(view.optional_blocks && view.optional_blocks[d.optional] === true)) { el.remove(); return; }
-    if (d.if !== undefined) {
-      const neg = d.if.startsWith('!');
-      if (present(get(abs(d.if.replace(/^!/, ''), scope))) === neg) { el.remove(); return; }
-    }
+    if (d.if?.split(' ').some((c) => present(get(abs(c.replace('!', ''), scope))) === (c[0] === '!'))) return el.remove(); // all hold (G075)
     if (d.repeat !== undefined) {
-      const path = abs(d.repeat, scope);
-      const list = get(path);
+      const path = abs(d.repeat, scope), list = get(path);
       (Array.isArray(list) ? list : []).forEach((_, i) => {
         const c = el.cloneNode(true);
         delete c.dataset.repeat;
         el.before(c);
         walk(c, c.dataset.repeatItem = `${path}.${i}`);
       });
-      el.remove();
-      return;
+      return el.remove();
     }
     if (d.field !== undefined) {
-      const path = abs(d.field, scope);
-      const v = get(path);
+      const path = abs(d.field, scope), v = get(path);
       if (el.tagName === 'IMG') photoState(el, v);
       else if (el.tagName === 'A' && path.startsWith('urls.')) {
         if (v) { el.href = v; delete el.dataset.urlMissing; } else { el.setAttribute('href', '#'); el.dataset.urlMissing = ''; }
@@ -637,7 +631,7 @@ function devRender(content) {
       const attr = name.slice(4).replace(/[A-Z]/g, (c) => '-' + c.toLowerCase()).replace(/^-/, '');
       el.setAttribute(attr, d[name].includes('{') ? fill(d[name], scope) : String(get(abs(d[name], scope)) ?? ''));
     }
-    Array.from(el.children).forEach((c) => walk(c, scope));
+    [...el.children].forEach((c) => walk(c, scope));
   }
   if (document.body.dataset.optional && !(view.optional_blocks || {})[document.body.dataset.optional]) {
     document.body.prepend(Object.assign(document.createElement('p'), { textContent: 'This page is switched off (optional_blocks).' }));

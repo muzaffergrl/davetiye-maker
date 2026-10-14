@@ -8,8 +8,9 @@
 // heading on the RSVP page → "Unpublished changes: 2" → Preview this page (the RSVP page with the new heading) → Review
 // ("Us · Headings & labels", "RSVP · Headings & labels") → Publish → the guest pages show the couple's words → no
 // name/date change used → "Reset to design text" → publish → the design's text is back. axe-core and touch targets on the
-// section; 1280: the preview follows the text being edited. Guests (390, both themes): changed headings, menu and buttons
-// on index / home / details / rsvp without horizontal scroll or broken images.
+// section; 1280: the preview follows the text being edited. Guests (390; 01, 03 and — G081 — 02, 05): changed headings,
+// menu and buttons on index / home / details / rsvp without horizontal scroll or broken images. G068_THEMES=<id,…> runs
+// only those designs' guest pages (the couple's panel journey on 01 is skipped).
 // PNG previews + checks.json → previews/g068/ (or $G068_SHOTS_DIR). Exit 1 on a failed check.
 // Global Playwright and /opt/pw-browsers (never `playwright install`); data in a temporary folder; port $PORT (3368).
 
@@ -63,11 +64,14 @@ const GUEST_COPY = {
   nav_rsvp: 'Reply',
   calendar_title: 'Save the date',
 };
-const panelSite = seed('olive-ivory', 'g068-panel');
-const guests = {
-  'olive-ivory': seed('olive-ivory', 'g068-olive', (c) => void (c.copy = GUEST_COPY)),
-  'blush-garden-rose': seed('blush-garden-rose', 'g068-blush', (c) => void (c.copy = GUEST_COPY)),
-};
+const ONLY = (process.env.G068_THEMES ?? '').split(',').filter(Boolean);
+const PANEL = !ONLY.length;
+const panelSite = PANEL ? seed('olive-ivory', 'g068-panel') : null!;
+const guests = Object.fromEntries(
+  (['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon'] as const)
+    .filter((t) => !ONLY.length || ONLY.includes(t))
+    .map((t) => [t, seed(t, `g068-${t}`, (c) => void (c.copy = GUEST_COPY))]),
+);
 
 const checks: Array<{ name: string; ok: boolean; detail?: string }> = [];
 const check = (name: string, ok: unknown, detail = '') => {
@@ -106,6 +110,10 @@ async function smallTargets(page: any, scope: string): Promise<string[]> {
     return out;
   }, scope);
 }
+/** Waits until the entrances (finite transitions / animations: a print flying in from the side, G081 02) have played —
+ *  a layout is measured at rest; endless decor loops (floats, the hint) do not count. */
+const entrancesDone = (page: any) =>
+  page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== 'running' || a.effect?.getComputedTiming().iterations === Infinity), null, { timeout: 6000 }).catch(() => null);
 const pageProblems = (page: any) =>
   page.evaluate(() => {
     const out: string[] = [];
@@ -165,7 +173,7 @@ try {
   browser = await chromium.launch();
 
   // ------------------------------------------------------------------------------------------ couple (panel)
-  await block('panel: Headings & labels → suggestion → RSVP heading → preview → Review → publish → reset', async () => {
+  if (PANEL) await block('panel: Headings & labels → suggestion → RSVP heading → preview → Review → publish → reset', async () => {
     const ctx = await browser.newContext(PHONE);
     const page = await ctx.newPage();
     const errors: string[] = [];
@@ -279,7 +287,7 @@ try {
   });
 
   // wide screens: the preview next to the editor follows the text being edited
-  await block('panel 1280: the preview follows the design text', async () => {
+  if (PANEL) await block('panel 1280: the preview follows the design text', async () => {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 });
     const page = await ctx.newPage();
     await page.goto(`${BASE}/edit/${panelSite.slug}?k=${encodeURIComponent(panelSite.editKey)}#edit/details`, { waitUntil: 'networkidle' });
@@ -328,6 +336,7 @@ try {
         await page.goto(`${BASE}/${site.slug}${p}`, { waitUntil: 'networkidle' });
         await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
         await page.waitForTimeout(200);
+        await entrancesDone(page);
         for (const x of await pageProblems(page)) bad.push(`${p || '/'}: ${x}`);
       }
       check(`${theme} 390: five pages without horizontal scroll or broken image`, !bad.length, bad.join('; '));
