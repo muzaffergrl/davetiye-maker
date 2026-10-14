@@ -2,8 +2,8 @@
 id: GM05
 baslik: BKE Studio Düzenleme paneli arayüz tasarımı — 6 yüksek kaliteli ekran comp'u (GPT tasarlar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-ui-panel
 oncelik: 1
 bagimli: [GM01]
 yazar: [brand/ui/panel/]
@@ -29,3 +29,4 @@ GPT Düzenleme paneli'nin görsel tasarımını yapar (K21); Claude aynı görü
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği (marka tasarımına uygun site ve panel)
+- 2026-10-14 alindi: gpt-ui-panel
