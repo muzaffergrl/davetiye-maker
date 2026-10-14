@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 9 · inceleme 4 · blokaj 277 · bitti 80 · toplam 388
+Özet: hazir 19 · alindi 9 · inceleme 4 · blokaj 277 · bitti 80 · toplam 389
 
 ## claude-canva
 
@@ -102,9 +102,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G078` p1 — Canlıya güncel main — BKE Studio satış sitesi (G066-A), RSVP v2 (G069), site şifresi (G076); canlı kontrol + test seti güncellemesi → `gorevler/G078-canli-guncelleme.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (43)**
 
