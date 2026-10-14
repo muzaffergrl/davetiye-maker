@@ -46,3 +46,4 @@ Tasarım 14'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 gpt-gorsel-E: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi; envelope_closed iki kanatlı (gatefold), ortadaki inci broş closure'da gelecek. Kısım 2 sıradaki ajana verildi.
 - 2026-10-14 devam: gpt-gorsel-E (kısım 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-E; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card doğru parts/ yollarına kaydedildi; dört dosyanın oran/alfa/pencere varlığı kit_check denetimi geçti. Closure W1.1 inci broşu referanslıdır. Açık zarf dört denemeden seçildi; hiza UYARI: üst +6 px, alt 0 px, sol kat +30,5 px (%1,99), sağ kat -38,5 px (%2,51), birebir hiza sağlanmadı. Card_small üç denemede tam düz #00FF00 olmadı; hedefe en yakın ilk deneme seçildi (yeşil bölge ortalama RGB 5,79/246,32/1,69; std 2,85/2,74/1,75). Durum alindi.

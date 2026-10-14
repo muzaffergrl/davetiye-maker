@@ -32,13 +32,20 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-- Kısım 1 devam ediyor (gpt-gorsel-I): W1'in 5 ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` yollarına kaydedildi; hepsi 1024×1536 PNG.
+- Kısım 1 tamamlandı (gpt-gorsel-I): yalnız 8 seçilmiş PNG, `collections/17_Emerald_Gold_Estate/assets/gpt/` altında Kaydet satırlarındaki yollara kondu. W1: `comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` (hepsi 1024×1536). W2: `parts/bg_page.png` (1024×1536), `bg_tile.png` (araç çıktısı 1254×1254; hedef kare oranını korur), `envelope_closed.png` (1024×1536 RGBA, gerçek alfa).
 - W1.1 zarf gövdesi fazla geniş olduğu için üç kez yeniden üretildi; daha yüksek gövdeli son tasarım seçildi. W1.3 kalın çerçeveler ince altın metal çerçevelere dönüştürülerek bir kez yeniden üretildi. Yalnız seçilen beş dosya repoya kondu.
 - W1 görsel kontrolü: telefon donanımı/çubuğu yok; home'da kart, geri sayım ve RSVP; story'de birbirini kesmeyen üç çerçeve; details'ta üç program satırı ve yatay mekân penceresi; RSVP'de kart içindeki buton ve aynı yaprak bordürlü mühür mevcut. PNG dosyaları açılarak ölçüleri doğrulandı.
-- Sıradaki bu oturum kapsamı: W2 `bg_page.png`, `bg_tile.png`, `envelope_closed.png`; diğer W2 parçaları ve PAKET 2 sonraki oturuma kalacak. Durum `alindi`.
+- W2'nin üç parçası W1 referanslarıyla üretildi. Kapalı zarf ilk denemede tuvale fazla geniş yayıldığı için bir kez yeniden üretildi; son dosyada mühür/kapanış ve yazı yok, gövde/kapak/cep kenarları ince altın çizgiyle okunur; çevrede düşen gölge yok. Alfa kenar şeridinin tamamı şeffaflık denetimini geçti.
+- Doku kontrolü: `bg_tile` karşı kenarlarının 16 piksellik şeritlerinde ortalama RGB farkı en fazla 2,09/255; yatay/dikey birleşim piksel farkları 7,24/6,35, iç dokudaki komşu piksel farkları 5,37/5,97. Ek rapor veya önizleme dosyası üretilmedi.
+- `PYTHONDONTWRITEBYTECODE=1 python3 tools/kit_check.py collections/17_Emerald_Gold_Estate --paket 5`: 8/22 GEÇTİ; üretilen sekiz dosyanın hiçbiri KALDI değil. Kalan 14 W2 parçası bu oturum kapsamı dışında olduğu için dosya yok. `--paket 2`: 0/5; beş fotoğraf sonraki oturuma kaldı. Tam paket tamamlanmış değildir; durum `alindi` kalır.
+- Devam için konum notu: `envelope_closed` alfa ≥128 gövde kutusu `(79, 647)–(945, 1270)` (genişlik %84,6, alt kenar tuval yüksekliğinin %82,7'si; prompt'un yaklaşık %80/%88 hedefinden sapma var). `envelope_open` henüz yok; hiza testi yapılmadı. Sonraki oturumda kapalı zarfın bu dosyasını referans vererek aynı gövde boyu/konumu korunmalı. Önce mevcut dosyalar kontrol edilmeli; W1 baştan üretilmemeli.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-I; bu oturum: kısım 1, W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
 - 2026-10-14 ara kayıt: gpt-gorsel-I; W1 tamamlandı (5/5 ekran), W2'nin ilk 3 parçası sırada.
+- 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 1, 8/8 görsel kaydedildi ve denetlendi (W1 5 + W2 bg_page, bg_tile, envelope_closed).
+- 2026-10-14 gpt-gorsel-I: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
+- 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (zümrüt kadife + altın). bg_page köşe süssüz düz kadife; köşe süsleri decor_tl/decor_br'den gelecek. Kısım 2 verildi.
+- 2026-10-14 devam: gpt-gorsel-I (kısım 2)

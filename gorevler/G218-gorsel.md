@@ -32,9 +32,15 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kısım 1: `collections/18_Wildflower_Vellum/assets/gpt/comps/` altında `web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` üretildi (hepsi 1024×1536). Aynı renkli kalem botanik tekniği, vellum/kağıt dokusu ve sol üst ışığı referanslarla korundu.
+- W1 referanslarıyla `collections/18_Wildflower_Vellum/assets/gpt/parts/` altında yalnız `bg_page.png` (1024×1536, opak), `bg_tile.png` (1254×1254, opak kare; kontrol aracı hedef oranını kabul ediyor), `envelope_closed.png` (1024×1536, gerçek alfa PNG) üretildi. Kılıf tek başına ve tamamen boş; kart, kapanış etiketi ve yazı yok. Teslimde toplam **8 PNG** var; ek rapor/önizleme dosyası yok.
+- Yeniden üretimler: W1.2'de yatay fotoğraf penceresi dikey 2:3 olarak düzeltildi; W1.3'te yan kartlar ve açıklamalar güvenli orta %85 alana alındı. İkinci üretimler sade adlarla seçildi; denemeler teslim klasöründe tutulmadı.
+- Kılıf önizlemesindeki dış hâle nedeniyle `envelope_closed` yeniden üretildi; ikinci üretim seçildi. Seçilen PNG'nin alfa kanalında nesne dışı kalıntılar en fazla 2/255; görünen yaygın hâle ham RGB önizlemesinde, belirgin opak bir gölge katmanı yok. Kılıf yüzeyi neredeyse opak (ortanca alfa 253/255); prompt'taki izinli seçenek uyarınca geçirgenlik sitede CSS opacity ile ayarlanabilir.
+- Kontrol: W1/W2 görsel kontrol listeleri uygulandı; `kit_check.denetle` ile bu oturumun sekiz dosyası için ölçü/oran, opaklık, gerçek alfa ve gereken yeşil pencere kontrolleri **8/8 geçti**. `bg_tile` karşı kenar şeritlerinin ortalama RGB farkı 1/255'ten az; düşük kontrastlı tekrar zemini kontrol edildi. Tam `kit_check --paket 5`: **8/23**, kalan 15 W2 parçası yok; zarf hizası `envelope_open` henüz olmadığından ölçülmedi. `--paket 2`: **0/5**, fotoğraflar bu oturumun kapsamında değil. Görev `alindi` olarak kalır.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-J (kısım 1: W1 5 comp + W2 bg_page, bg_tile, envelope_closed)
+- 2026-10-14 ara kayıt: gpt-gorsel-J — W1 bitti (5/5 comp); sıradaki: W2 bg_page, bg_tile, envelope_closed.
+- 2026-10-14 gpt-gorsel-J: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
