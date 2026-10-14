@@ -1,10 +1,10 @@
 {
  "base": "next start (production build)",
  "theme": "vintage-airmail-love-letter",
- "errors": [
-  "content change: Command failed: /opt/node22/bin/node --input-type=module -e "
+ "errors": [],
+ "warnings": [
+  "thank-you mode (G075, docs/11 §3.6): not in this theme — guests keep the invitation after the wedding. Missing: index: the envelope card switches (data-if=\"thank_you_on\"); index: the card carries the thank-you title (data-field=\"thank_you_title\"); index: the thank-you photo in the card window (data-field=\"thank_you.photo\"); index: the design's decoration without a photo (data-if=\"thank_you_on !thank_you.photo\"); home: the thank-you title; home: the couple's message (data-field=\"thank_you.message\"); home: the thank-you photo; home: invitation-only parts (countdown, RSVP, calendar) off in thank-you mode; details: the page can be hidden (<body data-if=\"!thank_you_hides_details\">); rsvp: no reply form in thank-you mode, honest \"Replies are closed\""
  ],
- "warnings": [],
  "passed": [
   "fonts: Google Fonts link with 2 families (Homemade Apple, Special Elite), display=swap",
   "seed: 5 sample photos uploaded to the demo site (collections/04_Vintage_Airmail/assets/gpt/photos (PAKET 2))",
@@ -52,7 +52,7 @@
   "envelope opened @844×390: \"Replay the opening\" on the plain painted ground",
   "envelope closed @667×375: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
   "envelope opened @667×375: \"Replay the opening\" on the plain painted ground",
-  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 534, names 36 px) ends at 534, above the nav (top 567)",
+  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 535, names 37.1 px) ends at 535, above the nav (top 567)",
   "home@360×640: no overflow, 28 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
   "home @375×553: home-hero (22 pieces, CTA \"RSVP\" bottom 466, names 36 px) ends at 466, above the nav (top 480)",
   "home@375×553: no overflow, 28 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
@@ -77,7 +77,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 621, nav top 308)",
   "home@667×375 (stress record): no overflow, 42 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 60×44, home \"Replay the envelope\" 220×48, rsvp \"Replay the envelope\" 184×48",
-  "envelope → /margot-and-henry/home in 3869 ms, card transition flag set",
+  "envelope → /margot-and-henry/home in 3817 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (10 steps)",
   "countdown target from the platform: 2027-10-02 16:00 America/New_York = 2027-10-02 20:00 UTC",
@@ -91,13 +91,21 @@
   "RSVP: \"Send another reply\" reopens the form",
   "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
   "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: see-through nav (blur/transparency by design, 27.54 % of the label row shows the page) — its labels are there at the first frame",
+  "nav in the envelope → home view transition 360×640: see-through nav (blur/transparency by design, 27.16 % of the label row shows the page) — its labels are there at the first frame",
   "Skip → home",
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-10-02T21:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-10-07T20:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (314 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (313 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390 (changed content): no overflow, 30 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 18 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 6 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
   "index@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "home@360 (stress record): no overflow, 42 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots placeholder",
   "story@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
@@ -109,11 +117,10 @@
   "details@390 (stress record): no overflow, 37 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@390 (stress record): no overflow, 6 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 921 KB",
-  "home first view (390×844, DPR 3, placeholders): 1233 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 1014 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 1414 KB",
-  "recording: previews/g404/opening_390x844.mp4 (3025 KB, lead-in 0.65 s cut, first frame mean 210,183,153) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, placeholders): 922 KB",
+  "home first view (390×844, DPR 3, placeholders): 1234 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 1016 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1416 KB"
  ],
  "info": {
   "setup": {
@@ -135,6 +142,7 @@
     "Special Elite"
    ]
   },
+  "thank_you": "none",
   "seed_photos": [
    "hero_portrait → media.hero_portrait (199 KB, 1024×1221, variants 640)",
    "story_1 → media.memory_photos.0 (195 KB, 1024×1276, variants 640)",
@@ -154,12 +162,12 @@
      },
      {
       "box": "script names",
-      "edge": 0.63,
+      "edge": 0.62,
       "dark": 0
      },
      {
       "box": "env-hint",
-      "edge": 0.56,
+      "edge": 0.54,
       "dark": 0
      }
     ]
@@ -346,16 +354,16 @@
     "screen": 640,
     "bottomNav": true,
     "items": 22,
-    "lowest": 534,
-    "above": 534,
+    "lowest": 535,
+    "above": 535,
     "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 534
+     "bottom": 535
     },
     "bad": [],
     "partly": [],
-    "names": 36
+    "names": 37.1
    },
    {
     "at": "375x553",
@@ -435,13 +443,13 @@
     },
     "bad": [
      "p.hero-city.in.done \"Hudson, New York\" bottom 672",
-     "span.cd-num \"350\" bottom 713",
+     "span.cd-num \"349\" bottom 713",
      "span.cd-lbl \"Days\" bottom 728",
-     "span.cd-num \"08\" bottom 713",
+     "span.cd-num \"23\" bottom 713",
      "span.cd-lbl \"Hours\" bottom 728",
-     "span.cd-num \"24\" bottom 713",
+     "span.cd-num \"21\" bottom 713",
      "span.cd-lbl \"Minutes\" bottom 728",
-     "span.cd-num \"22\" bottom 713",
+     "span.cd-num \"53\" bottom 713",
      "span.cd-lbl \"Seconds\" bottom 728",
      "a.btn \"RSVP\" bottom 786"
     ],
@@ -467,13 +475,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Orangery and Walled \" bottom 608",
      "p.hero-city.in.done \"Hudson, New York\" bottom 630",
-     "span.cd-num \"350\" bottom 664",
+     "span.cd-num \"349\" bottom 664",
      "span.cd-lbl \"Days\" bottom 679",
-     "span.cd-num \"08\" bottom 664",
+     "span.cd-num \"23\" bottom 664",
      "span.cd-lbl \"Hours\" bottom 679",
-     "span.cd-num \"24\" bottom 664",
+     "span.cd-num \"21\" bottom 664",
      "span.cd-lbl \"Minutes\" bottom 679",
-     "span.cd-num \"16\" bottom 664",
+     "span.cd-num \"47\" bottom 664",
      "span.cd-lbl \"Seconds\" bottom 679",
      "a.btn \"RSVP\" bottom 734"
     ],
@@ -545,13 +553,13 @@
      "span.nowrap \"October 2, 2027\" bottom 1103",
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 1200",
      "p.hero-city.in.done \"Hudson, New York\" bottom 1222",
-     "span.cd-num \"353\" bottom 1263",
+     "span.cd-num \"352\" bottom 1263",
      "span.cd-lbl \"Days\" bottom 1278",
-     "span.cd-num \"08\" bottom 1263",
-     "span.cd-lbl \"Hours\" bottom 1278",
      "span.cd-num \"23\" bottom 1263",
+     "span.cd-lbl \"Hours\" bottom 1278",
+     "span.cd-num \"21\" bottom 1263",
      "span.cd-lbl \"Minutes\" bottom 1278",
-     "span.cd-num \"56\" bottom 1263",
+     "span.cd-num \"28\" bottom 1263",
      "span.cd-lbl \"Seconds\" bottom 1278",
      "a.btn \"RSVP\" bottom 1336"
     ],
@@ -583,13 +591,13 @@
      "span.nowrap \"October 2, 2027\" bottom 1015",
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 1088",
      "p.hero-city.in.done \"Hudson, New York\" bottom 1110",
-     "span.cd-num \"353\" bottom 1144",
+     "span.cd-num \"352\" bottom 1144",
      "span.cd-lbl \"Days\" bottom 1159",
-     "span.cd-num \"08\" bottom 1144",
-     "span.cd-lbl \"Hours\" bottom 1159",
      "span.cd-num \"23\" bottom 1144",
+     "span.cd-lbl \"Hours\" bottom 1159",
+     "span.cd-num \"21\" bottom 1144",
      "span.cd-lbl \"Minutes\" bottom 1159",
-     "span.cd-num \"50\" bottom 1144",
+     "span.cd-num \"22\" bottom 1144",
      "span.cd-lbl \"Seconds\" bottom 1159",
      "a.btn \"RSVP\" bottom 1214"
     ],
@@ -615,13 +623,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 475",
      "p.hero-city.in.done \"Hudson, New York\" bottom 500",
-     "span.cd-num \"353\" bottom 538",
+     "span.cd-num \"352\" bottom 538",
      "span.cd-lbl \"Days\" bottom 555",
-     "span.cd-num \"08\" bottom 538",
-     "span.cd-lbl \"Hours\" bottom 555",
      "span.cd-num \"23\" bottom 538",
+     "span.cd-lbl \"Hours\" bottom 555",
+     "span.cd-num \"21\" bottom 538",
      "span.cd-lbl \"Minutes\" bottom 555",
-     "span.cd-num \"44\" bottom 538",
+     "span.cd-num \"15\" bottom 538",
      "span.cd-lbl \"Seconds\" bottom 555",
      "a.btn \"RSVP\" bottom 614"
     ],
@@ -650,13 +658,13 @@
      "span.nowrap \"October 2, 2027\" bottom 403",
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 484",
      "p.hero-city.in.done \"Hudson, New York\" bottom 510",
-     "span.cd-num \"353\" bottom 546",
+     "span.cd-num \"352\" bottom 546",
      "span.cd-lbl \"Days\" bottom 563",
-     "span.cd-num \"08\" bottom 546",
-     "span.cd-lbl \"Hours\" bottom 563",
      "span.cd-num \"23\" bottom 546",
+     "span.cd-lbl \"Hours\" bottom 563",
+     "span.cd-num \"21\" bottom 546",
      "span.cd-lbl \"Minutes\" bottom 563",
-     "span.cd-num \"37\" bottom 546",
+     "span.cd-num \"09\" bottom 546",
      "span.cd-lbl \"Seconds\" bottom 563",
      "a.btn \"RSVP\" bottom 621"
     ],
@@ -664,10 +672,40 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 3869,
+  "envelope_to_home_ms": 3817,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": false,
+   "settled_vs_alone": "27.54 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.06 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": false,
+   "settled_vs_alone": "27.16 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.01 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
   },
   "stress_record": {
    "slug": "stress-site",
@@ -683,7 +721,7 @@
     390
    ]
   },
-  "first_view_index_kb_placeholders": 921,
+  "first_view_index_kb_placeholders": 922,
   "first_view_index_files": [
    [
     "/themes/vintage-airmail-love-letter/img/decor_br-760.webp",
@@ -715,10 +753,10 @@
    ],
    [
     "/themes/vintage-airmail-love-letter/site.css",
-    44594
+    46066
    ]
   ],
-  "first_view_home_kb_placeholders": 1233,
+  "first_view_home_kb_placeholders": 1234,
   "first_view_home_files": [
    [
     "/themes/vintage-airmail-love-letter/img/invitation_card-960.webp",
@@ -753,7 +791,7 @@
     53296
    ]
   ],
-  "first_view_index_kb_photos": 1014,
+  "first_view_index_kb_photos": 1016,
   "first_view_index_files_photos": [
    [
     "/themes/vintage-airmail-love-letter/img/decor_br-760.webp",
@@ -768,7 +806,7 @@
     126758
    ],
    [
-    "/media/4d9e44f2-bf36-4f18-a425-51de8610eed6/0da3ae43e5db2137d6c9c5213b6ceeb5-640w.jpg",
+    "/media/02198faa-189a-4fdd-b965-19a04cfd30b3/47d6715bb7195af6edc830e2b4144cb7-640w.jpg",
     96219
    ],
    [
@@ -788,7 +826,7 @@
     48344
    ]
   ],
-  "first_view_home_kb_photos": 1414,
+  "first_view_home_kb_photos": 1416,
   "first_view_home_files_photos": [
    [
     "/themes/vintage-airmail-love-letter/img/invitation_card-960.webp",
@@ -811,11 +849,11 @@
     96880
    ],
    [
-    "/media/4d9e44f2-bf36-4f18-a425-51de8610eed6/0da3ae43e5db2137d6c9c5213b6ceeb5-640w.jpg",
+    "/media/02198faa-189a-4fdd-b965-19a04cfd30b3/47d6715bb7195af6edc830e2b4144cb7-640w.jpg",
     96219
    ],
    [
-    "/media/4d9e44f2-bf36-4f18-a425-51de8610eed6/d5e2fa13f4e0c8b4a1ca19a5380a1bb2-640w.jpg",
+    "/media/02198faa-189a-4fdd-b965-19a04cfd30b3/6fc38d45b209eda0a9c6f4914f231b57-640w.jpg",
     93606
    ],
    [
@@ -823,16 +861,6 @@
     85400
    ]
   ],
-  "video_kb": 3025,
-  "video_first_frame": {
-   "lead_in_s": 0.65,
-   "mean_rgb": [
-    210,
-    183,
-    153
-   ],
-   "stdev": 42
-  },
   "compare": {
    "source": "w1",
    "pages": [
