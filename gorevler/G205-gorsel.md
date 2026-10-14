@@ -38,3 +38,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: codex-gpt-gorsel
+- 2026-10-14 devam: codex-gpt-gorsel; main güncellendi, G204 teslimi doğrulandı; G205 W1 ekranları tamamlandı (RSVP v2 seçildi), W2 ve fotoğraflar sürüyor.
