@@ -6,6 +6,7 @@
 //   1. per-IP attempt limit (every request counts)          -> 429 rate_limited
 //   2. honeypot field "website" filled                      -> 400 invalid (nothing stored)
 //   3. theme exists, is offered and has demo content        -> 404 theme_unavailable
+//      … and, in production, is approved for sale (G080, lib/themes/approval.ts) -> 403 theme_in_review
 //   4. field checks (fields.ts, same rules as the browser)  -> 400 invalid (+ fields)
 //   --- serialised per order number (in this process) ---
 //   5. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
@@ -48,6 +49,7 @@ import {
 import { DEFAULT_CLAIM_LIMITS, getClaimRateLimiter, type ClaimLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
 import { claimableTheme } from './themes.ts';
+import { THEME_IN_REVIEW, themeOpenForClaims, type ApprovalEnv } from '../themes/approval.ts';
 import { getOrderVerifier, type OrderVerifier } from './verify.ts';
 
 export interface ClaimContext {
@@ -61,6 +63,8 @@ export interface ClaimContext {
   verifier?: OrderVerifier;
   mailer?: EditLinkMailer;
   now?: () => number;
+  /** Where the theme approval gate reads VERCEL_ENV / THEME_APPROVAL (default process.env; G080). */
+  approvalEnv?: ApprovalEnv;
 }
 
 /** How long a lost /start answer can be recovered by retrying with the same claim token. */
@@ -87,6 +91,7 @@ export interface ClaimResult {
 export type ClaimErrorCode =
   | 'invalid'
   | 'theme_unavailable'
+  | 'theme_in_review'
   | 'order_used'
   | 'order_not_verified'
   | 'verification_unavailable'
@@ -101,6 +106,7 @@ export type ClaimErrorCode =
 export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
   invalid: 'Please check the highlighted fields.',
   theme_unavailable: 'This design is not available. Please open the start link from your Etsy download again.',
+  theme_in_review: THEME_IN_REVIEW.message,
   order_used:
     'A website has already been started with this order number. Open it with the edit link you saved when you created it. ' +
     'If you have lost the link, message the shop on Etsy and include your order number.',
@@ -241,6 +247,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
 
   const theme = await claimableTheme(raw.theme);
   if (!theme) return claimError(404, 'theme_unavailable');
+  if (!themeOpenForClaims(theme.id, { env: ctx.approvalEnv })) return claimError(403, 'theme_in_review');
 
   const names = (Array.isArray(raw.names) ? raw.names : []).slice(0, 2).map(text);
   const values = { orderNumber: text(raw.orderNumber), email: text(raw.email), names, slug: text(raw.slug) };

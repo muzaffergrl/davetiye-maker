@@ -1,43 +1,17 @@
-/* /start (G045). Phone first (390 px), calm tool styling shared with the edit panel's palette.
-   No decorative drawings (K21): only type, spacing, borders and brand-neutral colours. */
+/* /start (G045) in the BKE Studio look of the edit panel (G080). Phone first (390 px).
+   Every colour, font, radius and shadow is the PANEL's token: the page root also carries the panel's `.app` class
+   (components/panel/panel.module.css: --c-*, --font-*, --r-*, --e-*, box-sizing, focus ring) and PANEL_FONTS
+   (components/panel/fonts.ts). No value is repeated here — when the panel tokens change, /start follows.
+   Rules as in the panel (K29): warm paper ground, white cards with a soft shadow, aubergine for headings, the main
+   action, links and focus; gold and lavender only inside the logo, never as text on a light ground. Archivo 800
+   headings, Montserrat 300 for the light wide line, DM Sans for everything else. No decorative drawings (K21).
+   Contrast: text #202020 / #2B1526 ≥ 13:1, muted #5C5560 ≥ 5.7:1 on paper, white, sunken and soft tints; success,
+   warning and danger text ≥ 4.5:1 on their own soft grounds. Touch targets ≥ 44 px. */
 
 .page {
-  --bg: #f6f3ee;
-  --surface: #ffffff;
-  --ink: #23211e;
-  --muted: #655f56;
-  --line: #e3dccf;
-  --line-strong: #cbc1b2;
-  --accent: #335a4b;
-  --accent-hover: #284a3d;
-  --accent-soft: #e6efe9;
-  --danger: #a3271f;
-  --danger-soft: #fbeceb;
-  --warn: #6b4800;
-  --warn-soft: #fbf3e2;
-  --focus: 0 0 0 3px rgba(51, 90, 75, 0.35);
-  --radius: 14px;
-  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  min-height: 100dvh;
-  color: var(--ink);
-  background: var(--bg);
-  font-family: var(--sans);
   font-size: 16px;
-  line-height: 1.45;
-  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
   overflow-wrap: anywhere;
-}
-
-.page *,
-.page *::before,
-.page *::after {
-  box-sizing: border-box;
-}
-
-.page :focus-visible {
-  outline: none;
-  box-shadow: var(--focus);
 }
 
 .visuallyHidden {
@@ -52,33 +26,55 @@
   border: 0;
 }
 
+/* ---------------------------------------------------------------- top bar: the logo (as on the panel's first screen) */
+
+/* The logo lines up with the content column below it: 568 px for the one-column screens, the two-column width
+   (preview 340 + gap 56 + form 540) for the form on a wide screen. */
+.topBar {
+  width: 100%;
+  max-width: 568px;
+  margin: 0 auto;
+  padding: calc(14px + env(safe-area-inset-top)) var(--gutter) 0;
+}
+
+@media (min-width: 900px) {
+  .topBarWide {
+    max-width: calc(936px + 2 * var(--gutter));
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* ---------------------------------------------------------------- layout */
 
 .layout,
 .narrow,
 .resultWrap {
   width: 100%;
-  max-width: 560px;
+  max-width: 568px;
   margin: 0 auto;
-  padding: 24px 16px 56px;
+  padding: var(--s-5) var(--gutter) var(--s-14);
 }
 
 .header {
-  margin: 0 0 16px;
+  margin: 0 0 var(--s-5);
 }
 
 @media (min-width: 900px) {
   .layout {
-    max-width: 1000px;
+    max-width: calc(936px + 2 * var(--gutter));
     display: grid;
-    grid-template-columns: 340px minmax(0, 520px);
+    grid-template-columns: 340px minmax(0, 1fr);
     grid-template-areas:
       'preview header'
       'preview form';
     grid-template-rows: auto 1fr;
-    column-gap: 56px;
-    justify-content: center;
-    padding-top: 48px;
+    column-gap: var(--s-14);
+    padding-top: var(--s-10);
   }
   .header {
     grid-area: header;
@@ -86,7 +82,7 @@
   .preview {
     grid-area: preview;
     position: sticky;
-    top: 24px;
+    top: var(--s-6);
     align-self: start;
   }
   .card {
@@ -95,44 +91,52 @@
   }
 }
 
+/* The brand's light, wide line (Montserrat 300) above each title. */
 .eyebrow {
   margin: 0;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  color: var(--c-text-muted);
+  font-family: var(--font-wide);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
 }
 
 .title {
-  margin: 4px 0 6px;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 2rem;
-  line-height: 1.15;
+  margin: 6px 0 var(--s-3);
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(32px, 8.4vw + 2px, 46px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
 }
 
-.title:focus {
+.title:focus,
+.title:focus-visible {
   outline: none;
 }
 
 .lead {
-  margin: 0 0 8px;
-  color: var(--muted);
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: 17px;
 }
 
 .lead strong {
-  color: var(--ink);
-  font-weight: 600;
+  color: var(--c-heading);
+  font-weight: 700;
 }
 
 .muted {
-  color: var(--muted);
+  color: var(--c-text-muted);
 }
 
 /* ---------------------------------------------------------------- demo preview */
 
 .preview {
-  margin: 0 0 20px;
+  margin: 0 0 var(--s-6);
   text-align: center;
 }
 
@@ -144,9 +148,10 @@
   height: calc(760px * var(--scale));
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid var(--line-strong);
-  border-radius: 18px;
-  background: var(--surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+  background: var(--c-surface-sunken);
+  box-shadow: var(--e-1);
 }
 
 .frame {
@@ -171,47 +176,59 @@
 }
 
 .previewNote {
-  margin: 10px auto 4px;
+  margin: var(--s-3) auto var(--s-1);
   max-width: 34ch;
-  font-size: 0.88rem;
-  color: var(--muted);
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
 }
 
+/* A text link (the panel's tertiary button: aubergine, underlined). */
 .textLink {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 8px;
-  color: var(--accent);
+  padding: 0 10px;
+  border-radius: var(--r-control);
+  color: var(--c-heading);
   font-weight: 600;
-  text-underline-offset: 3px;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
 }
 
-/* ---------------------------------------------------------------- form */
+.textLink:hover {
+  background: var(--c-accent-soft);
+}
+
+/* ---------------------------------------------------------------- form card */
 
 .card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 20px 16px 22px;
+  padding: var(--s-6) var(--s-5);
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 @media (min-width: 420px) {
   .card {
-    padding: 24px 22px 26px;
+    padding: var(--s-8) var(--s-6);
   }
 }
 
 .cardTitle {
-  margin: 0 0 14px;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 1.4rem;
+  margin: 0 0 var(--s-5);
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
 }
 
 .field,
 .fieldset {
-  margin: 0 0 20px;
+  margin: 0 0 var(--s-6);
 }
 
 .fieldset {
@@ -224,39 +241,61 @@
   display: block;
   margin: 0 0 6px;
   padding: 0;
+  color: var(--c-text);
+  font-size: 16px;
+  line-height: 22px;
   font-weight: 600;
 }
 
 .subLabel {
   display: block;
-  margin: 0 0 4px;
-  font-size: 0.9rem;
-  color: var(--muted);
+  margin: 0 0 6px;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
 }
 
+/* = the panel's text field (52 px, control border ≥ 3:1, aubergine focus with a soft halo). */
 .input {
   display: block;
   width: 100%;
-  min-height: 48px;
-  padding: 10px 12px;
+  min-height: 52px;
+  padding: 13px 16px;
+  border: 1px solid var(--c-control-border);
+  border-radius: var(--r-control);
+  background: var(--c-surface);
+  color: var(--c-text);
   font: inherit;
-  font-size: 16px; /* no zoom on iOS */
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 10px;
+  font-size: 17px; /* ≥ 16: no zoom on iOS */
+  line-height: 24px;
   appearance: none;
+  transition:
+    border-color var(--m-fast) var(--ease),
+    box-shadow var(--m-fast) var(--ease);
 }
 
-.input[aria-invalid='true'] {
-  border-color: var(--danger);
-  background: var(--danger-soft);
+.input:hover {
+  border-color: var(--c-heading);
+}
+
+.page .input:focus,
+.page .input:focus-visible {
+  border-color: var(--c-anchor);
+  box-shadow:
+    0 0 0 1px var(--c-anchor),
+    0 0 0 5px var(--c-accent-line);
+  outline: none;
+}
+
+.page .input[aria-invalid='true'] {
+  border-color: var(--c-danger);
+  box-shadow: 0 0 0 1px var(--c-danger);
 }
 
 .nameRow {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: var(--s-4);
 }
 
 @media (min-width: 420px) {
@@ -271,51 +310,64 @@
 
 .hint {
   margin: 6px 0 0;
-  font-size: 0.88rem;
-  color: var(--muted);
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .error {
   margin: 6px 0 0;
-  font-size: 0.92rem;
-  color: var(--danger);
+  color: var(--c-danger);
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 600;
 }
 
 .ok {
   margin: 6px 0 0;
-  font-size: 0.92rem;
-  color: var(--accent);
+  color: var(--c-success);
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 600;
 }
 
 .slugStatus {
-  margin-top: 6px;
+  margin-top: var(--s-2);
 }
 
+/* The address being built: on a quiet sunken strip, the typed part in the heading colour. */
 .address {
   margin: 0;
-  font-size: 0.92rem;
-  color: var(--muted);
+  padding: 10px 14px;
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+  color: var(--c-text-muted);
+  font-size: 15px;
+  line-height: 22px;
   word-break: break-all;
 }
 
 .address strong {
-  color: var(--ink);
+  color: var(--c-heading);
+  font-weight: 700;
 }
 
 .suggestion {
-  margin: 8px 0 0;
+  margin: var(--s-2) 0 0;
   min-height: 44px;
-  padding: 8px 14px;
+  padding: 8px 16px;
+  border: 1px solid var(--c-accent-line);
+  border-radius: var(--r-pill);
+  background: var(--c-accent-soft);
+  color: var(--c-heading);
   font: inherit;
-  font-weight: 600;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid transparent;
-  border-radius: 999px;
+  font-weight: 700;
   cursor: pointer;
   word-break: break-all;
+}
+
+.suggestion:hover {
+  border-color: var(--c-heading);
 }
 
 .honeypot {
@@ -327,29 +379,30 @@
   overflow: hidden;
 }
 
+/* Messages (the panel's tints): an error in danger, "this order already has a website" in warning. */
 .alert,
 .notice {
-  margin: 0 0 18px;
-  padding: 12px 14px;
-  border-radius: 10px;
+  margin: 0 0 var(--s-5);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-control);
+  font-size: 15px;
+  line-height: 22px;
 }
 
 .alert {
-  background: var(--danger-soft);
-  border: 1px solid #efc4c0;
-  color: var(--danger);
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 }
 
 .notice {
-  background: var(--warn-soft);
-  border: 1px solid #ecd6a8;
-  color: var(--warn);
+  background: var(--c-warning-soft);
+  color: var(--c-warning);
 }
 
 .alert:focus,
 .notice:focus {
-  outline: none;
-  box-shadow: var(--focus);
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
 }
 
 .alert p,
@@ -358,11 +411,11 @@
 }
 
 .alertTitle {
-  font-weight: 700;
   margin-bottom: 4px !important;
+  font-weight: 700;
 }
 
-/* ---------------------------------------------------------------- buttons */
+/* ---------------------------------------------------------------- buttons (= the panel's .btn_primary / _secondary) */
 
 .primary {
   display: flex;
@@ -371,24 +424,41 @@
   width: 100%;
   min-height: 52px;
   padding: 12px 18px;
-  font: inherit;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: #fff;
-  background: var(--accent);
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--r-control);
+  background: var(--c-primary);
+  color: #fff;
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.005em;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
+  transition:
+    background var(--m-fast) var(--ease),
+    transform var(--m-fast) var(--ease);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .primary:hover {
-  background: var(--accent-hover);
+  background: var(--c-primary-hover);
+}
+
+.primary:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .primary:disabled {
   opacity: 0.7;
   cursor: progress;
+}
+
+/* White on aubergine: the focus ring sits outside the button, in aubergine on the paper. */
+.primary:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
 }
 
 .secondary {
@@ -397,117 +467,178 @@
   justify-content: center;
   flex: 1 1 140px;
   min-height: 48px;
-  padding: 10px 14px;
+  padding: 10px 16px;
+  border: 1px solid var(--c-control-border);
+  border-radius: var(--r-control);
+  background: var(--c-surface);
+  color: var(--c-heading);
   font: inherit;
+  font-size: 15px;
   font-weight: 600;
   text-align: center;
-  color: var(--accent);
-  background: var(--surface);
-  border: 1px solid var(--accent);
-  border-radius: 12px;
   text-decoration: none;
   cursor: pointer;
+}
+
+.secondary:hover {
+  background: var(--c-surface-sunken);
 }
 
 .linkButton {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  margin-top: 8px;
-  padding: 0;
-  font: inherit;
-  color: var(--muted);
-  background: none;
+  margin-top: var(--s-2);
+  padding: 0 10px;
+  margin-left: -10px;
   border: 0;
+  border-radius: var(--r-control);
+  background: none;
+  color: var(--c-heading);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
   cursor: pointer;
 }
 
+.linkButton:hover {
+  background: var(--c-accent-soft);
+}
+
 .small {
-  margin: 12px 0 0;
-  font-size: 0.88rem;
-  color: var(--muted);
+  margin: var(--s-3) 0 0;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.small strong {
+  color: var(--c-text);
 }
 
 .breakAll {
   word-break: break-all;
-  color: var(--ink);
+  color: var(--c-text);
 }
 
-/* ---------------------------------------------------------------- result */
+/* ---------------------------------------------------------------- result: the edit link, shown once */
 
 .result {
   margin: 0;
 }
 
+/* "Save this link": a white card with the panel's quiet accent rule on the left (as the panel's rules box; no alarm
+   colour, the words carry it). */
 .saveBox {
-  margin: 18px 0 20px;
-  padding: 18px 16px;
-  background: var(--warn-soft);
-  border: 2px solid #e0c27f;
-  border-radius: var(--radius);
+  margin: var(--s-6) 0;
+  padding: var(--s-6) var(--s-5) var(--s-4);
+  border-left: 4px solid var(--c-anchor);
+  border-radius: 0 var(--r-card) var(--r-card) 0;
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
 }
 
 .saveBox p {
-  margin: 0 0 10px;
+  margin: 0 0 var(--s-3);
 }
 
 .saveTitle {
-  margin: 0 0 8px;
-  font-size: 1.3rem;
-  font-weight: 700;
+  margin: 0 0 var(--s-2);
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .linkBox {
   display: block;
   width: 100%;
-  margin: 6px 0 12px;
-  padding: 12px;
+  margin: 6px 0 var(--s-3);
+  padding: 12px 14px;
+  border: 1px solid var(--c-control-border);
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+  color: var(--c-text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 1.05rem;
-  line-height: 1.4;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1.45;
   resize: none;
   word-break: break-all;
+}
+
+.page .linkBox:focus {
+  border-color: var(--c-anchor);
+  box-shadow:
+    0 0 0 1px var(--c-anchor),
+    0 0 0 5px var(--c-accent-line);
+  outline: none;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--s-3);
 }
 
 .copyStatus {
   min-height: 1.4em;
-  margin: 8px 0 0 !important;
-  font-size: 0.9rem;
+  margin: var(--s-2) 0 0 !important;
+  color: var(--c-success);
+  font-size: 14px;
   font-weight: 600;
-  color: var(--accent);
 }
 
-/* ---------------------------------------------------------------- theme list (no/invalid theme) */
+/* ---------------------------------------------------------------- no / invalid / unavailable theme: the design list */
 
 .themeList {
   list-style: none;
-  margin: 16px 0 0;
+  margin: var(--s-5) 0 0;
   padding: 0;
   display: grid;
-  gap: 10px;
+  gap: var(--s-3);
 }
 
 .themeLink {
   display: flex;
   align-items: center;
-  min-height: 52px;
-  padding: 12px 16px;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: 56px;
+  padding: 12px 18px;
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+  color: var(--c-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  font-weight: 600;
+}
+
+.themeLink::after {
+  content: '→';
+  content: '→' / '';
+  flex: none;
+  font-family: var(--font-ui);
+  font-weight: 400;
+}
+
+.themeLink:hover {
+  background: var(--c-surface-sunken);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary,
+  .input {
+    transition: none;
+  }
+  .primary:active:not(:disabled) {
+    transform: none;
+  }
 }
