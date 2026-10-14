@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 19 · alindi 3 · inceleme 8 · blokaj 277 · bitti 83 · toplam 390
+Özet: hazir 20 · alindi 3 · inceleme 8 · blokaj 277 · bitti 83 · toplam 391
 
 ## claude-canva
 
@@ -156,11 +156,12 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (11)**
+**Alınabilir (12)**
 
 - `G068` p1 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla) → `gorevler/G068-duzenlenebilir-metinler.md`
 - `G075` p1 — Düğün sonrası teşekkür modu — site düğünden sonra "Thank you" hâline geçer (otomatik, çift kapatabilir) → `gorevler/G075-tesekkur-modu.md`
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
+- `G080` p2 — Marka ve panel sonrası kalanlar — /start ve signin BKE görünümü, onaysız temaların /start'tan kapatılması, metin/README/görsel kaynakları → `gorevler/G080-marka-kalanlar.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
