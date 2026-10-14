@@ -2,7 +2,7 @@
 id: GM03
 baslik: BKE Studio ortak Etsy ilan şablonu — 7 yerleşim/tipografi comp'u + 8 özellik ikonu (GPT tasarlar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-marka
 oncelik: 1
 bagimli: [GM01]
@@ -51,3 +51,4 @@ Tasarıma özel fotoğraf sahneleri G8NN'de (PAKET 3). Claude bu comp'lara göre
 - 2026-10-14 ara kayıt: gpt-marka — LI 4/8 kaydedildi; dört ikon gerçek alfa kontrolünden geçti, ölçü/tek renk teknik sınırı Sonuç'a yazıldı.
 - 2026-10-14 ara kayıt: gpt-marka — LI 8/8 kaydedildi; LI7 çizgi kalınlığı ve LI8 yaklaşık %60 yerleşim için `_v2` yeniden üretildi, bu sürümler sade adlara seçildi. Sekiz ikonun son alfa/renk kontrolü yapılacak.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-marka — LI 8/8 gerçek alfa kontrolünden geçti; yeniden üretimler ve ölçü/tek renk teknik kabul sınırları Sonuç'a yazıldı. Kısım 2 son kaydı; bu oturum durduruldu.
+- 2026-10-14 entegratör onayladı
