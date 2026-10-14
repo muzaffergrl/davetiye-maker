@@ -198,6 +198,47 @@ def test_hiza(t: Path):
     assert kod == 1 and "kapanış sol uç +5.86%" in out, out
 
 
+SAHNE = """# test
+## PAKET 3 — Etsy ilan sahneleri
+**Kaydet:** `{k}/assets/gpt/mockups/hand.png` · 1024×1024 · 1 ekran
+**Kaydet:** `{k}/assets/gpt/mockups/three.png` · 1536×1024 · 3 ekran
+"""
+
+
+def _telefon(img: np.ndarray, cx: float, cy: float, w: float, h: float, aci: float, r: float = 0.0):
+    """Döndürülmüş, köşeleri yuvarlatılmış düz yeşil ekran (GPT yeşili ≈ (3,252,45))."""
+    yy, xx = np.mgrid[: img.shape[0], : img.shape[1]].astype(np.float32)
+    c, s = np.cos(np.radians(aci)), np.sin(np.radians(aci))
+    u, v = (xx - cx) * c + (yy - cy) * s, -(xx - cx) * s + (yy - cy) * c
+    du, dv = np.abs(u) - (w / 2 - r), np.abs(v) - (h / 2 - r)
+    m = np.hypot(np.maximum(du, 0), np.maximum(dv, 0)) <= r
+    m &= (np.abs(u) <= w / 2) & (np.abs(v) <= h / 2)
+    img[m] = (3, 252, 45)
+    return m
+
+
+def test_sahne(t: Path):
+    """İlan sahneleri: eğik + yuvarlak köşeli tek ekran ve üç ayrı ekran geçer; ekrana binen parmak ve eksik ekran kalır."""
+    for ad, iyi in (("sahne_iyi", True), ("sahne_kotu", False)):
+        k = t / ad
+        (k / "assets/gpt/mockups").mkdir(parents=True)
+        (k / "assets/gpt/GPT_PROMPTS.md").write_text(SAHNE.format(k=k))
+        a = np.full((1024, 1024, 3), (236, 226, 214), np.uint8)
+        _telefon(a, 512, 600, 300, 600, 10, r=36)
+        if not iyi:  # parmak ekranın kenarına biniyor
+            a[540:680, 330:430] = (214, 170, 150)
+        Image.fromarray(a, "RGB").save(k / "assets/gpt/mockups/hand.png")
+        b = np.full((1024, 1536, 3), (236, 226, 214), np.uint8)
+        for cx in ((420, 768, 1116) if iyi else (520, 1016)):
+            _telefon(b, cx, 520, 230, 470, 0 if cx == 768 else 4, r=28)
+        Image.fromarray(b, "RGB").save(k / "assets/gpt/mockups/three.png")
+        kod, out = calistir(k, "--paket", "3")
+        if iyi:
+            assert kod == 0 and "1 ekran" in out and "3 ekran" in out, out
+        else:
+            assert kod == 1 and "düz/tek parça dörtgen değil" in out and "3 yeşil ekran bekleniyordu, 2 bulundu" in out, out
+
+
 def main():
     with tempfile.TemporaryDirectory() as t:
         t = Path(t)
@@ -211,7 +252,8 @@ def main():
         assert kod == 0 and out.strip().endswith("1/1 geçti"), out
         test_paket5(t)
         test_hiza(t)
-    print("test_kit_check: tamam (paket 1/3/5, pencere denetimi, zarf hizası)")
+        test_sahne(t)
+    print("test_kit_check: tamam (paket 1/3/5, pencere denetimi, zarf hizası, ilan sahneleri)")
 
 
 if __name__ == "__main__":

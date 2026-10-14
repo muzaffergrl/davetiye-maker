@@ -34,7 +34,7 @@ Yalnız kendi rolündeki görevi al.
 | G7NN | Tasarım NN — kılavuz + Etsy ilan metni | claude-metin |
 | G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
 | G9NN | Tasarım NN — Etsy ilan kiti montajı | claude-kod |
-| GMNN | Marka kimliği (BKE Studio, K26): GM01 GPT görselleri, GM02 marka kiti | gpt-gorsel / claude-kod |
+| GMNN | Marka kimliği (BKE Studio, K26): GM01 GPT görselleri, GM02 marka kiti, GM03 ortak ilan şablonu (GPT) | gpt-gorsel / claude-kod |
 | GANN | (askıda, K22) Tasarım NN — video animasyonu | — |
 | GBNN | (askıda, K24) Tasarım NN — Canva website Form/yayın | — |
 | GQNN | Tasarım NN — QA raporu | claude-qa |

@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 31 · alindi 12 · inceleme 1 · blokaj 293 · bitti 40 · toplam 377
+Özet: hazir 32 · alindi 11 · inceleme 2 · blokaj 293 · bitti 40 · toplam 378
 
 ## claude-canva
 
@@ -318,6 +318,8 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 **Alınabilir (13)**
 
+- `G801` p1 — Tasarım 01 Olive & Ivory — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G801-mockup.md`
+- `G803` p1 — Tasarım 03 Blush Garden Rose — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G803-mockup.md`
 - `G211` p2 — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G211-gorsel.md`
 - `G212` p2 — Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G212-gorsel.md`
 - `G213` p2 — Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G213-gorsel.md`
@@ -328,8 +330,6 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G218` p2 — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G218-gorsel.md`
 - `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
-- `G801` p2 — Tasarım 01 Olive & Ivory — Paket 3 mockup görselleri → `gorevler/G801-mockup.md`
-- `G803` p2 — Tasarım 03 Blush Garden Rose — Paket 3 mockup görselleri → `gorevler/G803-mockup.md`
 - `G804` p2 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (52)**
@@ -340,7 +340,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G202` inceleme · gpt-gorsel-A — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
-- `G206` alindi · gpt-gorsel-B — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G206` inceleme · gpt-gorsel-B — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G207` alindi · gpt-gorsel-C — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G208` alindi · gpt-gorsel-D — Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G209` alindi · gpt-gorsel-E — Tasarım 09 Lavender Provence — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
@@ -387,4 +387,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 6
+Bağımlılık bekleyen: 1 · Biten: 6
