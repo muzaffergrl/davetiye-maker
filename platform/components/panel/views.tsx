@@ -296,12 +296,16 @@ export function HomeView({
         titleId="rights-card"
         data-rights-card
         action={
-          <Button small variant="tertiary" onClick={() => onHelp('changes')}>
-            How changes work
-          </Button>
+          r.archived ? undefined : (
+            <Button small variant="tertiary" onClick={() => onHelp('changes')}>
+              How changes work
+            </Button>
+          )
         }
       >
-        {r.phase === 'before_publish' ? (
+        {r.archived ? (
+          <p className={styles.cardText}>Your website is archived: names and date can no longer be changed.</p>
+        ) : r.phase === 'before_publish' ? (
           <p className={styles.cardText}>
             You can change these freely until you publish. After that, you can change your names or wedding date {IDENTITY_CHANGE_LIMIT} times — fixing a small typo
             is free.
@@ -528,7 +532,7 @@ export function GuestsView({
 }) {
   const [filter, setFilter] = useState<Filter>('all');
   const [query, setQuery] = useState('');
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openIds, setOpenIds] = useState<Set<string>>(new Set());
   const [confirm, setConfirm] = useState<ReplyEntry | null>(null);
   const [working, setWorking] = useState(false);
   const snack = useSnackbar();
@@ -654,11 +658,16 @@ export function GuestsView({
       ) : (
         <ul className={styles.replyList}>
           {list.map((r) => {
-            const open = openId === r.id;
+            const open = openIds.has(r.id);
             return (
               <li key={r.id} className={styles.reply} data-reply>
                 <div className={styles.replyHead}>
-                  <button type="button" className={styles.replyToggle} aria-expanded={open} onClick={() => setOpenId(open ? null : r.id)}>
+                  <button type="button" className={styles.replyToggle} aria-expanded={open} onClick={() => setOpenIds((cur) => {
+                        const next = new Set(cur);
+                        if (open) next.delete(r.id);
+                        else next.add(r.id);
+                        return next;
+                      })}>
                     <span className={styles.replyName}>{r.name}</span>
                     <span className={styles.replyMeta}>
                       {r.attending ? <Badge tone="success">{`Coming · ${r.guests} ${r.guests === 1 ? 'guest' : 'guests'}`}</Badge> : <Badge>Not coming</Badge>}

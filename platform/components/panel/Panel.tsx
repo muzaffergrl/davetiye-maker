@@ -41,6 +41,7 @@ import {
   type PublishNote,
   type SectionId,
 } from '../../lib/panel/model.ts';
+import { identityOf } from '../../lib/panel/rights.ts';
 import { IdentitySheet } from './IdentitySheet.tsx';
 import { PanelContext, type PanelContextValue } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
@@ -299,6 +300,8 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const upToDate = meta.status === 'published' && !meta.hasUnpublishedChanges && saveState === 'saved';
 
   const doPublish = async () => {
+    // The sheet closes at once; the bar's button shows "Publishing…" (the editor stays usable meanwhile).
+    setDialog(null);
     setBusy(true);
     const res = await panel.publish();
     setBusy(false);
@@ -388,7 +391,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
           {panel.saveMessage ?? 'These changes could not be saved. Please reload the page.'}
         </Banner>
       ) : null}
-      {rights.archived ? (
+      {rights.archived && route.view !== 'home' ? (
         <Banner tone="info" icon={Archive} data-archived-banner>
           Your website was archived on {rights.archiveAt ? formatDate(rights.archiveAt.slice(0, 10), content.locale) : 'its archive date'}. You can still see your
           content and download your replies.
@@ -489,10 +492,13 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
           onClose={() => setDialog(null)}
           onSubmit={async (identity, intent) => {
             const before = rights.remaining;
+            const dateChanged = identity.date !== content.date;
+            const namesChanged = JSON.stringify({ ...identity, date: '' }) !== JSON.stringify({ ...identityOf(content), date: '' });
             const res = await panel.changeIdentity(identity, intent);
             if (res.ok && res.result !== 'unchanged') {
               const left = res.result === 'change' ? before - 1 : before;
-              const text = `${res.result === 'change' ? 'Names and date changed.' : 'Fixed — free.'} ${left} ${left === 1 ? 'change' : 'changes'} left.`;
+              const what = namesChanged && dateChanged ? 'Names and date changed.' : dateChanged ? 'Date changed.' : 'Names changed.';
+              const text = `${res.result === 'change' ? what : 'Fixed — free.'} ${left} ${left === 1 ? 'change' : 'changes'} left.`;
               // On a live site the change shows after publishing: offer it right here.
               snack(text, meta.status === 'published' ? { label: 'Publish', run: () => void startPublish() } : undefined);
             }

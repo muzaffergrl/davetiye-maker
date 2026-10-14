@@ -145,7 +145,7 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgb(247 246 243 / 0.92);
+  background: rgb(247 246 243 / 0.97);
   backdrop-filter: saturate(1.4) blur(10px);
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom: 1px solid var(--c-border);
@@ -247,8 +247,9 @@
   padding: var(--s-5) var(--gutter) calc(var(--nav-h) + 96px + env(safe-area-inset-bottom));
 }
 
+/* Phones: no column; the preview opens as a full-screen layer (position: fixed) from the bar's Preview button. */
 .previewColumn {
-  display: none;
+  display: contents;
 }
 
 /* Bottom navigation (phones) */
@@ -604,8 +605,7 @@
 }
 
 .btn_primary.btnSmall {
-  min-height: 40px;
-  margin: 2px 0;
+  min-height: 44px;
 }
 
 .btnBlock {
@@ -2263,7 +2263,7 @@
     padding-right: 0;
   }
   .previewColumn .phone {
-    width: 390px;
+    width: 410px;
     max-width: 100%;
     height: min(800px, 100%);
     margin: 0 auto;
@@ -2631,7 +2631,7 @@
 
 .skip {
   display: block;
-  min-height: 40px;
+  min-height: 44px;
   margin-bottom: 4px;
   padding: 0 4px;
   border: 0;

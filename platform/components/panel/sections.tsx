@@ -28,11 +28,18 @@ function RightsLine() {
 }
 
 /** The locked names / date after the first publish: values, a lock, and "Change" (docs/16 §6.3, §11.6). */
-function LockedIdentity({ focus, rows }: { focus: 'names' | 'date'; rows: Array<{ label: string; value: string; id?: string }> }) {
-  const { rights, openIdentity, locked, online } = usePanelContext();
+function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows: Array<{ label: string; value: string; id?: string }>; paths: string[] }) {
+  const { rights, openIdentity, locked, online, issuesAt } = usePanelContext();
   const total = rights.limit + rights.granted;
+  const issues = paths.flatMap((p) => issuesAt(p));
   return (
     <div className={styles.locked} data-locked-identity={focus}>
+      {issues.length ? (
+        <>
+          <IssueList issues={issues} />
+          <p className={styles.hint}>Use “Change” to fix it. Fixing a small typo is free.</p>
+        </>
+      ) : null}
       <dl className={styles.lockedList}>
         {rows.map((r) => (
           <div key={r.label} className={styles.lockedRow}>
@@ -73,6 +80,7 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
       {counting ? (
         <LockedIdentity
           focus="names"
+          paths={[...partners.flatMap((_, i) => [`partners.${i}.display_name`, `partners.${i}.full_name`]), 'partners', 'name_display', 'initials']}
           rows={[
             ...partners.map((p, i) => ({
               label: i === 0 ? 'First partner' : 'Second partner',
@@ -213,7 +221,7 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
   return (
     <>
       {counting ? (
-        <LockedIdentity focus="date" rows={[{ label: 'Wedding date', value: formatDateLong(content.date, locale) ?? content.date, id: 'f-date' }]} />
+        <LockedIdentity focus="date" paths={['date']} rows={[{ label: 'Wedding date', value: formatDateLong(content.date, locale) ?? content.date }]} />
       ) : (
         <>
           <RightsLine />
