@@ -2,7 +2,7 @@
 id: G058
 baslik: 03 blush-garden-rose — yatay telefon düzeni ve isim aralığı kaydıyla ilk ekran (01'deki kurala eşit)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-kod-13
 oncelik: 2
 bagimli: [G401]
@@ -84,3 +84,4 @@ boyutlar) denendi — repo'daki theme-check değişmedi.
 ## Günlük
 - 2026-10-14 alindi: claude-kod-13
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
