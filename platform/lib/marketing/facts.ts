@@ -61,6 +61,8 @@ export function included(cfg: MarketingConfig = MARKETING): string[] {
     'Optional countdown, dress code, registry and travel links, and questions and answers',
     'A link preview with your names and date when you share your link',
     'A QR code to download as PNG or SVG',
+    'An optional guest password, so only people you give it to can open your website',
+    'After the wedding, your website can turn into a thank-you page for your guests (automatic, or switch it off)',
     `Your website stays online until ${cfg.hosting.monthsAfterWedding} months after your wedding date`,
   ];
 }
@@ -70,7 +72,6 @@ export const NOT_INCLUDED: readonly string[] = [
   'A custom domain (your address is on our domain)',
   'Music',
   'Changing the colors, fonts or layout of a design',
-  'Password protection',
   'Sending invitations to guests by email',
   'Guest list import',
   'Languages other than English',

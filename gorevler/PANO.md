@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 3 · inceleme 10 · blokaj 277 · bitti 84 · toplam 392
+Özet: hazir 18 · alindi 3 · inceleme 9 · blokaj 277 · bitti 85 · toplam 392
 
 ## claude-canva
 
@@ -168,11 +168,10 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (86)**
+**Üzerinde çalışılan / incelemede / blokaj (85)**
 
 - `G068` alindi · claude-G068 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G080` inceleme · claude-G080 — Marka ve panel sonrası kalanlar — /start ve signin BKE görünümü, onaysız temaların /start'tan kapatılması, metin/README/görsel kaynakları
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -257,7 +256,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 8 · Biten: 34
+Bağımlılık bekleyen: 8 · Biten: 35
 
 ## claude-metin
 
