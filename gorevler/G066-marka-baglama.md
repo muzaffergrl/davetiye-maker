@@ -78,7 +78,8 @@ girdikten sonra; aynı bileşenlere dokundukları için). Aynı görev, iki ayr�
   Menüde Guides kaldı (comp'ta yok; iç link kuralı).
 
 **Testler (yerel production build)**
-- `npm test` 458/458 (build testleri dahil, atlanan yok); `npm run typecheck`; `npm run build` + trace-check temiz.
+- `npm test` 458/458 (build testleri dahil, atlanan yok); origin/main birleştirmesinden (G076 vb.) sonra 481/481;
+  `npm run typecheck`; `npm run build` + trace-check temiz.
 - `tests/marketing-browser.ts` 283/283. Eski 170 kontrolün hepsi + yeni: her sayfa 320 px'te yatay kaydırma/kesilme yok;
   390 px'te her sayfada axe-core 4.13.0 serious/critical ihlal 0 (kontrast dahil) ve dokunma hedefi ≥ 44 px (metin içi
   linkler hariç); logo, favicon ve manifest kontrolleri. Sonuç: `platform/previews/g066/after/checks.json`.
