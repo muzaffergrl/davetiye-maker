@@ -15,6 +15,7 @@
 // Responses never contain other guests' data, ids or counts, and never say a reply was held.
 
 import type { DataAdapter, RsvpInput, RsvpRecord } from '../data/types.ts';
+import { isArchived } from '../panel/rights.ts';
 import { canPreview } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
@@ -69,6 +70,8 @@ async function publishedSite(adapter: DataAdapter, slug: string) {
   if (!isValidSlugFormat(slug) || isReservedSlug(slug)) return null;
   const site = await adapter.getSiteBySlug(slug);
   if (!site || site.status !== 'published' || !site.publishedContent) return null;
+  // 12 months after the wedding the site is an archive (G060): no form, no replies.
+  if (isArchived(site)) return null;
   return site;
 }
 

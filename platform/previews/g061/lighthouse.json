@@ -1,0 +1,103 @@
+{
+  "tool": "lighthouse@13.5.0",
+  "config": "default (mobile, simulated throttling: Moto G Power, slow 4G, CPU 4x)",
+  "date": "2026-10-14",
+  "pages": {
+    "/": {
+      "scores": {
+        "performance": 93,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 69
+      },
+      "lcp": "3.0 s",
+      "fcp": "1.0 s",
+      "tbt": "160 ms",
+      "cls": "0",
+      "si": "2.4 s",
+      "totalBytes": "Total size was 278 KiB",
+      "below90": [
+        "largest-contentful-paint: Largest Contentful Paint (3.0 s)",
+        "max-potential-fid: Max Potential First Input Delay (170 ms)",
+        "unused-javascript: Reduce unused JavaScript (Est savings of 55 KiB)",
+        "is-crawlable: Page is blocked from indexing (0)",
+        "forced-reflow-insight: Forced reflow (0)",
+        "network-dependency-tree-insight: Network dependency tree (0)",
+        "render-blocking-insight: Render-blocking requests (0.5)"
+      ],
+      "runWarnings": []
+    },
+    "/designs/olive-ivory": {
+      "scores": {
+        "performance": 96,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 69
+      },
+      "lcp": "2.3 s",
+      "fcp": "1.0 s",
+      "tbt": "180 ms",
+      "cls": "0",
+      "si": "1.0 s",
+      "totalBytes": "Total size was 277 KiB",
+      "below90": [
+        "max-potential-fid: Max Potential First Input Delay (250 ms)",
+        "unused-javascript: Reduce unused JavaScript (Est savings of 55 KiB)",
+        "is-crawlable: Page is blocked from indexing (0)",
+        "network-dependency-tree-insight: Network dependency tree (0)",
+        "render-blocking-insight: Render-blocking requests (0.5)"
+      ],
+      "runWarnings": []
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "scores": {
+        "performance": 88,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 66
+      },
+      "lcp": "2.7 s",
+      "fcp": "1.8 s",
+      "tbt": "290 ms",
+      "cls": "0",
+      "si": "4.0 s",
+      "totalBytes": "Total size was 199 KiB",
+      "below90": [
+        "largest-contentful-paint: Largest Contentful Paint (2.7 s)",
+        "speed-index: Speed Index (4.0 s)",
+        "total-blocking-time: Total Blocking Time (290 ms)",
+        "max-potential-fid: Max Potential First Input Delay (270 ms)",
+        "unused-javascript: Reduce unused JavaScript (Est savings of 55 KiB)",
+        "is-crawlable: Page is blocked from indexing (0)",
+        "forced-reflow-insight: Forced reflow (0)",
+        "legacy-javascript-insight: Legacy JavaScript (Est savings of 14 KiB)",
+        "network-dependency-tree-insight: Network dependency tree (0)",
+        "render-blocking-insight: Render-blocking requests (Est savings of 300 ms)"
+      ],
+      "runWarnings": []
+    },
+    "/faq": {
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 66
+      },
+      "lcp": "2.3 s",
+      "fcp": "0.9 s",
+      "tbt": "100 ms",
+      "cls": "0",
+      "si": "0.9 s",
+      "totalBytes": "Total size was 199 KiB",
+      "below90": [
+        "max-potential-fid: Max Potential First Input Delay (150 ms)",
+        "unused-javascript: Reduce unused JavaScript (Est savings of 55 KiB)",
+        "is-crawlable: Page is blocked from indexing (0)",
+        "legacy-javascript-insight: Legacy JavaScript (Est savings of 14 KiB)",
+        "network-dependency-tree-insight: Network dependency tree (0)",
+        "render-blocking-insight: Render-blocking requests (Est savings of 50 ms)"
+      ],
+      "runWarnings": []
+    }
+  }
+}

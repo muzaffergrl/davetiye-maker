@@ -58,6 +58,15 @@ Canva'ya dokunmazsın, kod yazmazsın, kullanıcıdan hiçbir şey istemezsin.
 - Kontrol: `python3 tools/kit_check.py collections/<NN_Ad> --paket 5` (pencere isteyen parçada yeşil pencere de
   denetlenir) ve `--paket 2`. Commit: `G2NN: website paketi`.
 
+## Ara kayıt ve kaldığın yerden devam (2026-10-14)
+Uzun sohbetler yarıda kopabiliyor; üretilen ama push edilmemiş görsel kaybolur. Bu yüzden:
+- **Sık push:** W1 bitince bir kez, W2'de her 4–5 parçada bir, PAKET 2'de fotoğraflar bitince commit + push
+  (`G2NN: ara kayıt (W1)`, `G2NN: ara kayıt (W2 1/4)` …). Yarım iş push edilebilir; durum `alindi` kalır.
+- **Devam:** Görev `alindi` ama sohbet koptuysa yeni ajan baştan başlamaz. Önce
+  `python3 tools/kit_check.py <koleksiyon> --paket 5` ve `--paket 2` ile **eksikleri** listeler; repodaki W1 comp'larını
+  ve hazır parçaları sohbete **referans görsel** olarak yükler; yalnız eksik dosyaları üretir. W1 hiç yoksa W1'den başlar.
+  Günlük'e `- <tarih> devam: <ajan adın>` satırı yazar.
+
 ## Kesin kurallar
 - Görselde **yazı, harf, rakam, monogram, logo, filigran yok** (tek istisna: Paket 4 T1 ve Paket 5 W1 comp'ları) (posta damgası, etiket, kitap kapağı dahil).
 - "Transparent background" → **gerçek alfa kanallı PNG** (beyaz ya da dama desenli zemin değil).

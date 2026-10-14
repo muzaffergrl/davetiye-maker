@@ -2,8 +2,8 @@
 id: G402
 baslik: Tasarım 02 Dusty Blue & Champagne — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-tema02
 oncelik: 3
 bagimli: [G202, G038, G046, G052]
 yazar: [platform/themes/dusty-blue-champagne/, platform/tests/theme-dusty-blue-champagne.test.ts, platform/previews/g402/]
@@ -39,3 +39,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: wf-tema02

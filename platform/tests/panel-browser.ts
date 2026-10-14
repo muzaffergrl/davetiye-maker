@@ -1,4 +1,4 @@
-// Browser check of the edit panel (G039): real `next start` + Chromium at 390 px (phone).
+// Browser check of the edit panel (G039, adapted to the panel v2 views of G060): real `next start` + Chromium at 390 px (phone).
 // Not part of `npm test` (needs a build):
 //
 //   npm run build
@@ -107,10 +107,15 @@ async function waitSaved(page: any) {
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') !== 'saved', null, { timeout: 1500 }).catch(() => undefined);
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
 }
+/** v2: each section is its own page (#edit/<id>); "couple" is "names" since G060. */
 async function openSection(page: any, id: string) {
-  const button = page.locator(`#section-${id}`);
-  if ((await button.getAttribute('aria-expanded')) !== 'true') await button.click();
-  await button.scrollIntoViewIfNeeded();
+  const v2 = id === 'couple' ? 'names' : id;
+  await page.evaluate((h: string) => (window.location.hash = h), `#edit/${v2}`);
+  await page.waitForSelector(`#section-${v2}-body`);
+}
+async function openView(page: any, view: string) {
+  await page.evaluate((h: string) => (window.location.hash = h), `#${view}`);
+  await page.waitForTimeout(150);
 }
 /** Publish; the "Before you publish" notes sheet (sample text, empty photo places, …) is answered with "Publish anyway". */
 async function publishNow(page: any): Promise<string> {
@@ -165,7 +170,8 @@ try {
   page.on('console', (m: { type(): string; text(): string }) => m.type() === 'error' && problems.push(m.text()));
   page.on('pageerror', (e: unknown) => problems.push(String(e)));
 
-  const res = await page.goto(EDIT_URL, { waitUntil: 'networkidle' });
+  // v2: a never-published site opens the setup wizard; this check works in the editor views (#home …).
+  const res = await page.goto(`${EDIT_URL}#home`, { waitUntil: 'networkidle' });
   check('edit link opens the panel (200)', res.status() === 200);
   check('panel: response is not cached', /no-store/.test(res.headers()['cache-control'] ?? ''), res.headers()['cache-control']);
   check('panel: noindex + no-referrer', (await page.locator('meta[name="referrer"]').getAttribute('content')) === 'no-referrer');
@@ -173,10 +179,11 @@ try {
   check('panel: draft status card', /draft/i.test(await page.locator('[data-status-card]').innerText()));
   check('panel: no horizontal overflow at 390 px', (await overflow(page)) <= 0);
   const barBox = await page.locator('[data-publish]').boundingBox();
-  check('panel: sticky Publish button visible at the bottom', barBox && barBox.y + barBox.height <= 844 && barBox.height >= 44, JSON.stringify(barBox));
+  check('panel: Publish button visible in the top bar', barBox && barBox.y >= 0 && barBox.y + barBox.height <= 70 && barBox.height >= 44, JSON.stringify(barBox));
   await shot(page, '01_panel_390');
 
   // Couple: change the names; names-as-shown and monogram follow.
+  await openSection(page, 'couple');
   await page.fill('#f-partners-0-display_name', 'Elena');
   await page.fill('#f-partners-0-full_name', 'Elena Rossi');
   await page.fill('#f-partners-1-display_name', 'Marco');
@@ -191,13 +198,15 @@ try {
   const focusBox = await page.evaluate(() => {
     const el = document.activeElement as HTMLElement;
     const b = el.getBoundingClientRect();
-    const bar = document.querySelector('[data-save-state]')!.parentElement!.parentElement!.getBoundingClientRect(); // the fixed bar
+    const bar = document.querySelector('nav[aria-label="Editor"]')!.getBoundingClientRect(); // the fixed bottom navigation
     return { id: el.id, bottom: Math.round(b.bottom), barTop: Math.round(bar.top) };
   });
   check('focus: a field reached with Tab is not under the fixed bar', focusBox.id === 'f-partners-0-full_name' && focusBox.bottom <= focusBox.barTop, JSON.stringify(focusBox));
-  check('couple: header updates', (await page.locator('h1').innerText()) === 'Elena & Marco');
   await waitSaved(page);
   check('autosave: "All changes saved"', (await page.locator('[data-save-state]').innerText()).includes('All changes saved'));
+  await openView(page, 'home');
+  check('couple: Home heading updates', (await page.locator('h1').innerText()) === 'Elena & Marco');
+  await openSection(page, 'couple');
   await shot(page, '02_couple_390');
 
   // Date & time: dates are shown as "Saturday, May 15, 2027" and "4:00 PM".
@@ -215,17 +224,24 @@ try {
   check('schedule: row added', (await rows()) === before + 1);
   await page.fill(`#f-schedule-${before}-time`, '21:30');
   await page.fill(`#f-schedule-${before}-label`, 'Sparkler send-off');
-  await page.getByRole('button', { name: `Move event ${before + 1} up` }).click();
-  check('schedule: row moved up', (await page.inputValue(`#f-schedule-${before - 1}-label`)) === 'Sparkler send-off');
-  check('schedule: shown as 9:30 PM', (await page.locator(`[data-schedule-row="${before - 1}"]`).innerText()).includes('9:30 PM'));
+  const menu = async (n: number, item: string) => {
+    await page.getByRole('button', { name: `Options for event ${n}` }).click();
+    await page.getByRole('menuitem', { name: item }).click();
+  };
+  await menu(before + 1, 'Move up');
+  check('schedule: row moved up (menu "Move up")', (await page.inputValue(`#f-schedule-${before - 1}-label`)) === 'Sparkler send-off');
+  check('schedule: time kept as 21:30', (await page.inputValue(`#f-schedule-${before - 1}-time`)) === '21:30');
   await waitSaved(page);
   await shot(page, '04_schedule_390');
-  await page.getByRole('button', { name: `Move event ${before} down` }).click();
-  check('schedule: focus follows the moved row', (await page.evaluate(() => document.activeElement?.getAttribute('aria-label'))) === `Move event ${before + 1} up`);
-  await page.getByRole('button', { name: `Move event ${before + 1} up` }).click();
-  await page.getByRole('button', { name: `Remove event ${before}` }).click();
-  check('schedule: Remove asks once more', (await rows()) === before + 1 && (await page.getByRole('button', { name: `Yes, remove event ${before}` }).count()) === 1);
-  await page.getByRole('button', { name: `Yes, remove event ${before}` }).click();
+  await menu(before, 'Move down');
+  await page.waitForTimeout(50);
+  check('schedule: focus follows the moved row', (await page.evaluate(() => document.activeElement?.getAttribute('aria-label'))) === `Options for event ${before + 1}`);
+  await menu(before + 1, 'Move up');
+  await menu(before, 'Remove');
+  check('schedule: Remove at once, with Undo', (await rows()) === before && (await page.locator('[data-snackbar]').innerText()).includes('Undo'));
+  await page.locator('[data-snackbar]').getByRole('button', { name: 'Undo' }).click();
+  check('schedule: Undo brings the row back', (await rows()) === before + 1 && (await page.inputValue(`#f-schedule-${before - 1}-label`)) === 'Sparkler send-off');
+  await menu(before, 'Remove');
   check('schedule: row removed', (await rows()) === before);
   await waitSaved(page);
 
@@ -256,7 +272,7 @@ try {
   check('photo: not public before publishing', (await fetch(`${BASE}${heroPath}`)).status === 404);
   const heroMeta = await sharp(Buffer.from(await (await fetch(`${BASE}${heroSrc}`)).arrayBuffer())).metadata();
   check('photo: server copy is a 4:5 JPEG without EXIF', heroMeta.format === 'jpeg' && Math.abs(heroMeta.width / heroMeta.height - 0.8) < 0.01 && !heroMeta.exif, `${heroMeta.width}x${heroMeta.height}`);
-  check('photos: section summary counts it', (await page.locator('#section-photos').innerText()).includes('1 of 5 added'));
+  check('photos: the page counts it', (await page.locator('[data-section="photos"]').innerText()).includes('1 of 5 photos'));
   await page.locator('[data-section="photos"]').scrollIntoViewIfNeeded();
   await shot(page, '06_photos_390');
 
@@ -267,8 +283,10 @@ try {
   const inline = page.locator('#f-rsvp-deadline-issues');
   await inline.waitFor();
   check('validation: inline error under the field', (await inline.innerText()).includes('The RSVP deadline must be before the event date.'));
-  check('validation: section badge "1 to fix"', (await page.locator('#section-rsvp').innerText()).includes('1 to fix'));
   await waitSaved(page);
+  await openView(page, 'edit');
+  check('validation: section badge "1 to fix"', (await page.locator('#section-rsvp').innerText()).includes('1 to fix'));
+  await openSection(page, 'rsvp');
   await page.click('[data-publish]');
   await page.waitForSelector('[data-testid="issues"]');
   check('publish blocked: list of issues', (await page.locator('[data-testid="issues"]').innerText()).includes('The RSVP deadline must be before the event date.'));
@@ -283,6 +301,7 @@ try {
   await waitSaved(page);
 
   // Preview shows the draft with the photo.
+  await openView(page, 'home');
   await page.click('[data-open-preview]');
   const previewFrame = page.frameLocator('[data-preview] iframe');
   await previewFrame.locator('h1').waitFor();
@@ -306,22 +325,22 @@ try {
   // Android back button / gesture closes the preview and stays in the editor.
   await page.goBack();
   await page.waitForTimeout(400);
-  check('preview: Back closes it and stays in the editor', page.url() === EDIT_URL && !(await page.locator('[data-preview] iframe').isVisible()), page.url());
+  check('preview: Back closes it and stays in the editor', page.url() === `${EDIT_URL}#home` && !(await page.locator('[data-preview] iframe').isVisible()), page.url());
   check('preview: focus back on the Preview button', (await page.evaluate(() => document.activeElement?.hasAttribute('data-open-preview'))) === true);
 
   // Publish -> notes (empty photo places, link blocks without a link) -> "Publish anyway" -> live link + QR.
   const notes = await publishNow(page);
   check('publish: notes before publishing (empty photo places, sections without a link)', /Photo places without a photo/.test(notes) && /Sections without a link/.test(notes), notes.replace(/\s+/g, ' ').slice(0, 160));
   check('publish: "Your website is live"', (await page.locator('[data-testid="live"] h2').innerText()) === 'Your website is live');
-  check('publish: public link shown', (await page.locator('[data-live-link]').innerText()) === PUBLIC_URL);
+  check('publish: public link shown', (await page.locator('[data-live-link]').getAttribute('href')) === PUBLIC_URL);
   const qr = page.locator('[data-testid="live"] svg[role="img"]');
   check('QR: generated from the public URL', (await qr.getAttribute('data-qr-text')) === PUBLIC_URL);
   check('QR: screenshot decodes to the public URL', (await decodeQrFrom(qr)) === PUBLIC_URL);
   await qr.scrollIntoViewIfNeeded();
   await shot(page, '09_live_qr_390');
   await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();
-  check('status card: live with link', (await page.locator('[data-public-link]').innerText()) === PUBLIC_URL);
-  check('bar: button says "Share" when up to date', (await page.locator('[data-publish]').innerText()) === 'Share');
+  check('status card: live with link', (await page.locator('[data-public-link]').getAttribute('href')) === PUBLIC_URL);
+  check('bar: a calm "Live" badge instead of Publish when up to date', (await page.locator('[data-live-badge]').count()) === 1 && (await page.locator('[data-publish]').count()) === 0);
 
   // Public page shows names and photo.
   const pub = await ctx.newPage();
@@ -345,19 +364,18 @@ try {
   });
   check('guest reply accepted by the RSVP API', reply.status === 200, String(reply.status));
   await page.bringToFront();
-  await openSection(page, 'rsvp');
+  await openView(page, 'guests');
   await page.click('[data-refresh-replies]');
-  await page.waitForSelector('[data-replies] li');
-  const repliesText = await page.locator('[data-replies]').innerText();
-  check('RSVP section: reply and counts listed', repliesText.includes('Ada Example') && repliesText.includes('1 reply · 1 attending (2 guests)'), repliesText.replace(/\s+/g, ' ').slice(0, 120));
-  await page.locator('[data-replies] li').first().scrollIntoViewIfNeeded();
+  await page.waitForSelector('[data-reply]');
+  const repliesText = (await page.locator('[data-replies]').innerText()).replace(/\s+/g, ' ');
+  check('Guests: reply and counts listed', repliesText.includes('Ada Example') && /2 Guests coming/.test(repliesText) && /1 Replies/.test(repliesText), repliesText.slice(0, 160));
   await shot(page, '10b_replies_390');
   // A test or spam reply can be removed (asked once more); the counts follow.
-  await page.getByRole('checkbox', { name: 'Select the reply from Ada Example' }).check();
-  await page.click('[data-remove-replies]');
-  await page.click('[data-confirm-remove-replies]');
-  await page.waitForFunction(() => !document.querySelector('[data-replies] li'));
-  check('RSVP section: a reply can be removed', (await page.locator('[data-replies]').innerText()).includes('No replies yet.'));
+  await page.getByRole('button', { name: 'Options for the reply from Ada Example' }).click();
+  await page.getByRole('menuitem', { name: 'Remove reply' }).click();
+  await page.click('[data-confirm-remove-reply]');
+  await page.waitForFunction(() => !document.querySelector('[data-reply]'));
+  check('Guests: a reply can be removed', (await page.locator('main').innerText()).includes('No replies yet.'));
 
   // Edit after publishing: guests keep the old text until "Publish changes".
   await page.bringToFront();
@@ -410,7 +428,7 @@ try {
   await page.unroute(`**/api/edit/${SLUG}/publish`);
 
   // Take offline, then publish again.
-  await page.locator('[data-status-card]').scrollIntoViewIfNeeded();
+  await openView(page, 'share');
   await page.getByRole('button', { name: 'Take the website offline' }).click();
   await page.click('[data-confirm-offline]');
   await page.waitForFunction(() => document.querySelector('[data-panel]')?.getAttribute('data-status') === 'draft');
@@ -438,7 +456,7 @@ try {
   // Wide screens: form and a 390 px preview side by side (no Preview button needed).
   const desk = await browser.newContext({ viewport: { width: 1280, height: 860 } });
   const dp = await desk.newPage();
-  await dp.goto(EDIT_URL, { waitUntil: 'networkidle' });
+  await dp.goto(`${EDIT_URL}#home`, { waitUntil: 'networkidle' });
   await dp.frameLocator('[data-preview] iframe').locator('h1').waitFor();
   const dBox = await dp.locator('[data-preview] iframe').boundingBox();
   check('desktop: preview shown next to the form, 390 px wide', dBox && Math.round(dBox.width) === 390 && dBox.x > 600, JSON.stringify(dBox));
