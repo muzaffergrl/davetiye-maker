@@ -57,3 +57,4 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-J (kısım 2, 8/8) — info_card, frame_portrait, frame_landscape, decor_tl (Kaydet: florals_tl.png) eklendi; bu oturumun sekiz parçası için kit_check.denetle 8/8 geçti. Durum alindi kalır.
 - 2026-10-14 gpt-gorsel-J: kısım 2 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 güncel kontrol notu: yukarıdaki bitiş satırı istenen kayıt metnidir; PAKET 2 gpt-gorsel-L tarafından tamamlanmış ve 5/5 geçmiştir. Fiilen kalan yedi W2 parçasıdır. Bu oturum burada durdu; durum alindi.
+- 2026-10-14 entegratör ara kontrol: kısım 2 geçti (etiket kapanışı aynı tuvalde 213 px — tarif böyle, doğru). Kısım 3 verildi.
