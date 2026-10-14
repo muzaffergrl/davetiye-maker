@@ -16,24 +16,37 @@ platforma bağlama. **Belge karar değildir, öneridir.** Kararlar kullanıcın�
 | **[Ölçüm]** | Vercel aracı ya da repodaki kod/belge |
 | **[Varsayım]** | Kaynaksız model varsayımı (§3.9) |
 
+**Bağımsız inceleme (2026-10-14, ikinci tur).** Belge eleştirel gözle yeniden kontrol edildi. Düzeltmeler yerinde yapıldı ve
+"(inceleme)" diye işaretlendi:
+- 5 ad adayının .com'u Vercel aracıyla yeniden sorgulandı: hepsi müsait (§2.2). Mühür motifi katalogdaki 20 tasarımın yalnız
+  5'inde var (§2.2).
+- Marj hesabı §3.6 formülüyle yeniden yapıldı. Satış başına netler doğru çıktı. "$1,000 net için satış" sütununda iki sayı
+  düzeltildi (§3.7).
+- Offsite Ads cümlesi yanlıştı: $5.29 yalnız reklam ücreti. O siparişte Etsy'nin toplam payı ≈ $11.90 (§1, §3.2).
+- Yeni risk 7: **kalıcı %40 indirim** Etsy satıcı rehberine ve FTC'nin referans fiyat kuralına ters düşüyor (§3.9).
+- Yeni risk 8: "yasal kimlik yok" kararı, Etsy'nin bireysel satıcıdan istediği kimlik doğrulamasını kaldırmıyor.
+- CA/AU ödeme işleme ücreti eklendi (§3.2). Destek e-postası için ücretsiz seçenekler (§4.5) ve "bu hafta" karar listesi (§5) eklendi.
+- Siteler hâlâ bu ortamdan açılamıyor: etsy.com, vercel.com, resend.com, improvmx.com, zoho.com, ftc.gov, ecfr.gov (proxy 403).
+  Yeni bilgiler arama özetlerinden; etiketler aynı anlamda.
+
 ---
 
 ## 1. Özet ve önerilen kararlar
 
 | Konu | Öneri | Kısa gerekçe |
 |---|---|---|
-| **Marka / dükkân adı** | **Seal & Story**. Etsy dükkân adı `SealAndStory`; alan adı `sealandstory.com` (müsait, $11.25/yıl). Yedekler: Seal & Sonnet, Silk & Seal | Ürünü tek ifadede anlatıyor: mühürlü zarf açılır, hikâye ve site sayfaları gelir. Bilinen çakışma bulunmadı. Marka tescil araması yapılamadı (§2.5) |
+| **Marka / dükkân adı** | **Seal & Story**. Etsy dükkân adı `SealAndStory`; alan adı `sealandstory.com` (müsait, $11.25/yıl; 2026-10-14'te yeniden doğrulandı). Yedekler: Seal & Sonnet, Silk & Seal | Ürünü tek ifadede anlatıyor: mühürlü zarf açılır, hikâye ve site sayfaları gelir. Bilinen çakışma bulunmadı. Marka tescil araması yapılamadı (§2.5). (inceleme) 20 tasarımın yalnız 5'i mühürle kapanıyor; ad "kapalı zarf" mecazı olarak okunmalı (§2.2) |
 | **Destek e-postası** | Seçilen alan adında, ör. `hello@sealandstory.com`. Sağlayıcı ayrı karar (§4.5) | E-posta gönderimi (SPF/DKIM) aynı alan adını ister. Alan adı kararı e-postanın da önkoşulu |
-| **Fiyat stratejisi** | **A: premium çapa.** Liste fiyatı $49, kalıcı %40 indirim → satış **$29.40**. Yorumlar gelince %30 indirim → $34.30 | Pazarda görülen üst sınırın ($32.18) içinde. TR satıcı varsayımıyla satış başına net ≈ $19.24; B stratejisinde $11.61 (§3.7) |
-| **Lansman** | İlk ~30 gün ya da ilk ~25 sipariş %50 indirim → $24.50 (TR net ≈ $15.58) | İlk yorumları toplamak. Sonra %40, ≥15–20 yorum (4.8+) gelince %30 |
-| **İlan yapısı** | Tasarım başına tek ilan. Lansmanda tek varyasyon: **Wedding Website**. Save the Date ürünü hazır olunca ikinci varyasyon: **Website + Save the Date** ($69 → $41.40) | Save the Date teması/ürünü henüz yok (docs/13 §7). Olmayan ürün satılmaz |
+| **Fiyat stratejisi** | **A: premium konum.** Alıcının ödediği fiyat **$29.40**; yorumlar gelince **$34.30**. (inceleme) İlk taslaktaki "$49 liste fiyatından kalıcı %40 indirim" yerine **düz fiyat**. Üstü çizili fiyat yalnız gerçek ve süreli kampanyada (risk 7) | Pazarda görülen üst sınırın ($32.18) içinde. TR satıcı varsayımıyla satış başına net ≈ $19.24; B stratejisinde $11.61 (§3.7). Netler indirimin gösterimine bağlı değil, alıcının ödediği fiyata bağlı |
+| **Lansman** | İlk ~30 gün ya da ilk ~25 sipariş **$24.50** (TR net ≈ $15.58). Etsy satış aracıyla en çok 30 günlük gerçek kampanya, ya da üstü çizili fiyat göstermeden düz fiyat | İlk yorumları toplamak. Sonra $29.40; ≥15–20 yorum (4.8+) gelince $34.30 |
+| **İlan yapısı** | Tasarım başına tek ilan. Lansmanda tek varyasyon: **Wedding Website**. Save the Date ürünü hazır olunca ikinci varyasyon: **Website + Save the Date** ($41.40) | Save the Date teması/ürünü henüz yok (docs/13 §7). Olmayan ürün satılmaz |
 | **Ek ürünler** (barındırma uzatma, ek düzenleme hakkı, kurulum hizmeti) | **Lansmanda satılmaz.** Ertelenen düğün için tarih değişikliği ücretsiz; istisnaları destek çözer. Ücretli ekler Faz 2'de, Etsy politikası doğrulanınca (§3.10) | Etsy Services ve Off-Platform politikaları ikisini de riskli kılıyor; iki araştırma bu konuda farklı yorum yaptı |
 | **Ürün tanımı (ilan dili)** | "digital wedding website template + instant access; online until 12 months after your wedding date". "subscription", "hosting plan" kelimeleri kullanılmaz | Services politikası "genel olarak hizmetler satılamaz" diyor ve yazılım aboneliklerini yasaklıyor [R-özet] |
 | **Etsy dışına yönlendirme** | İlan, START HERE PDF'i ve Etsy mesajlarında kendi sitemizin fiyatı, kuponu, ödeme sayfası ya da **QR kodu olmaz**. İlan görseli 8'deki demo QR'ı çıkarılır | Off-Platform Transactions politikası "Etsy dışına yönlendiren QR kodu"nu açıkça örnek veriyor [R-özet] |
 | **E-posta altyapısı** | **Resend** (Vercel Marketplace entegrasyonu; ücretsiz kota 3,000/ay). İlk iş: düzenleme linkini e-postayla göndermek | Link bugün e-postayla gitmiyor (docs/05 §E). Kayıp link, destek yükünün ana kaynağı |
 | **Müşteriyi bağlama** | Her misafir sayfasında ince "Made with [BRAND]" alt bilgisi (satış sitesine gider) + QR kart PDF'i + teşekkür modu + arşivden 30 gün önce bildirim | Misafirler Etsy alıcısı değil; edinim kanalı Etsy kuralının dışında. Satış sitesindeki "Buy on Etsy" butonları **Share & Save** linki olur (%4 iade) |
 | **Yorum isteği** | Tek istek, teşviksiz, yıldız istemeden. Zamanı: site yayınlandıktan ve ilk RSVP'ler geldikten sonra (satın almadan ~3–21 gün) | Etsy ve FTC kuralları; dijital üründe yorum penceresi 100 gün [İkincil] |
-| **Offsite Ads** | Son 365 günde $10k satışın altındayken, isteğe bağlıyken **kapalı** başla. Onsite Etsy Ads küçük günlük bütçeyle denenir | TR satıcıda reklamla gelen $29.40'lık siparişin Etsy ücreti KDV dahil $5.29'a çıkıyor (§3.2) |
+| **Offsite Ads** | Son 365 günde $10k satışın altındayken, isteğe bağlıyken **kapalı** başla. Onsite Etsy Ads küçük günlük bütçeyle denenir | TR satıcıda reklamla gelen $29.40'lık siparişte yalnız Offsite Ads ücreti KDV dahil $5.29. (inceleme) O siparişte Etsy'nin toplam payı ≈ **$11.90 (%40)** (§3.2) |
 | **Doğrudan satış (kendi site)** | Şimdilik yok. Faz 2'de bir "merchant of record" (MoR) platformu: Paddle ya da Gumroad. Önce satıcı uygunluğu doğrulanır | Stripe'ın Türkiye'deki işletmeye hesap açmadığını söyleyen ikincil kaynaklar var; PayPal Türkiye'de yok [İkincil] |
 
 **Satıştan önce çözülmesi gereken riskler**
@@ -48,9 +61,21 @@ platforma bağlama. **Belge karar değildir, öneridir.** Kararlar kullanıcın�
 4. **Düzenleme linki e-postayla gitmiyor.** Resend kurulumu alan adına bağlı; alan adı kararı bu yüzden acil.
 5. **Vercel Pro'nun aktif olduğu doğrulanmadı.** `list_billing_charges` (ekip `team_pZ2ioUaryATDt15wOOUcCkQD`) 2026-10-14'te
    `404 "Plan not found"` döndü [Ölçüm]. Aynı gün G049 ekibin Pro'da olduğunu kaydetti (docs/10 §2c). Panelden kontrol gerekir;
-   kullanıcı gerekirse yeniden alacağını söyledi.
+   kullanıcı gerekirse yeniden alacağını söyledi. (inceleme) İkinci kontrolde `list_billing_charges` yine 404 döndü; `get_team`
+   plan bilgisi vermiyor [Ölçüm]. Durum hâlâ belirsiz.
 6. **Ödeme alacak ülke belli değil.** Etsy'nin satış fiyatından aldığı pay: TR satıcıda ≈ %25, UK'de ≈ %20.5, US'de ≈ %13.4 (§3.2).
    Fiyat hesapları TR ana senaryosuyla yapıldı.
+7. **(inceleme) Kalıcı indirim ve referans fiyat.**
+   - Etsy satıcı rehberi (12 Oca 2026): "perpetual sale"den kaçının; indirimli gösterilen ürün o fiyattan makul miktarda satılmış
+     olmalı; fiyatı kısa süre şişirip indirim göstermek yasak. Etsy'nin satış aracı en çok 30 gün sürüyor [R-özet].
+   - ABD, FTC 16 CFR 233.1: karşılaştırılan eski fiyat, makul ve önemli bir süre gerçekten uygulanmış bir fiyat olmalı [R-özet eCFR].
+   - Rakiplerin 72/81'inin sürekli indirimde olması (docs/13) bunu güvenli yapmaz.
+   - Önlem: alıcının ödediği fiyat düz fiyat olur. Üstü çizili fiyat yalnız gerçek ve süreli kampanyada (§3.9). Netler değişmez.
+     UK (CMA) ve AB kuralları ayrıca kontrol edilmedi.
+8. **(inceleme) "Yasal kimlik yok" kimliksiz satış demek değil.** K25 şirket kurmamayı kapsıyor. Etsy Payments bireysel satıcıdan da
+   şunları istiyor: yasal ad, doğum tarihi, ev adresi, ülkeye göre vergi numarası, adına kayıtlı banka hesabı (hesap sahibi adı
+   eşleşmeli). Yeni satıcılara kimlik + selfie doğrulaması (Persona) yapılıyor [R-özet help 360001980067, 22481159004567].
+   Dükkânın kimin adına ve hangi ülkenin bankasıyla açılacağı bu hafta seçilmeli; Etsy payı ve net buna bağlı (risk 6).
 
 ---
 
@@ -86,6 +111,17 @@ platforma bağlama. **Belge karar değildir, öneridir.** Kararlar kullanıcın�
 **Kullanım notu.** "Seal" kelimesi aramada hayvan ve şarkıcı Seal ile paylaşılıyor. Marka hep tam ifadeyle kullanılmalı
 ("Seal & Story"), tek başına "Seal" olarak değil. Görünen dükkân başlığında ve sitede `&` yazılabilir; yalnız Etsy dükkân adında
 "And" zorunlu.
+
+**(inceleme) Yeniden kontrol, 2026-10-14.**
+- **Alan adı [Ölçüm]:** `get_bulk_availability` ile ilk 5'in .com'u yeniden sorgulandı: sealandstory.com, sealandsonnet.com,
+  silkandseal.com, foldandvow.com, vellumlane.com **müsait**. sealandstory.co, .net ve .app de müsait; sealedstory.com müsait;
+  sealtheday.com alınmış. `get_domain_price` sealandstory.com: alım, yenileme ve transfer $11.25. Satın alma yapılmadı.
+- **Çakışma (arama özeti):** "Seal & Story" ya da "Seal and Story" adıyla işletme, Etsy dükkânı ya da USPTO kaydı çıkmadı. Silk &
+  Seal, Fold & Vow, Vellum Lane ve Seal & Sonnet için de eşleşme çıkmadı. Bu bir tescil araması değildir; USPTO hâlâ açılamıyor.
+- **Ad ile ürün uyumu:** Katalogdaki 20 tasarımın yalnız 5'i mühürle kapanıyor (01, 02, 04, 17, 19). Ötekiler kurdele, ip, toka,
+  klips, dal, etiket ya da deniz kabuğuyla kapanıyor; 09 keten kese, 13 kitap kapağı, 18 vellum kılıf (docs/09 "Kapanış" ve "Zarf tipi"
+  sütunları). Bu yüzden "Seal" ürün vaadi olarak değil, "kapalı zarf" mecazı olarak kullanılmalı. İlan ve satış sitesi her tasarımda
+  mühür varmış gibi yazmamalı. Bütün kataloğa daha geniş uyan yedek **Fold & Vow** (17 tasarım kapaklı zarf ya da gatefold).
 
 ### 2.3 Tam liste (25 aday, araştırmanın sıralamasıyla)
 
@@ -154,11 +190,11 @@ Risk: L = düşük, M = orta, H = yüksek.
 |---|---|---|---|
 | Listeleme | $0.20 / ilan; 4 ayda bir yenilenir; ürün sattıkça her satışta $0.20 otomatik yenileme | — | [R-özet] etsy.com/legal/fees |
 | İşlem ücreti | %6.5 | Ürün + kargo + hediye paketi (vergi hariç) | [R-özet]; [İkincil] 2026'da değişmedi |
-| Ödeme işleme, **TR** | **%6.5 + 14 TRY** (8 Tem 2024'ten beri; ≈ $0.28) | Vergi dahil toplam | [R-özet] etsy.com/legal/etsy-payments. Satış sonrası araştırmasındaki tek ikincil kaynak "+3 TRY" diyordu; resmi özet esas alındı |
+| Ödeme işleme, **TR** | **%6.5 + 14 TRY** (8 Tem 2024'ten beri; ≈ $0.28) | Vergi dahil toplam | [R-özet] etsy.com/legal/etsy-payments. Satış sonrası araştırmasındaki tek ikincil kaynak "+3 TRY" diyordu; resmi özet esas alındı. (inceleme) globalfeecalculator (Mayıs 2026) 14 TRY, navlungo 3 TRY diyor [İkincil]. Fark satış başına ≈ $0.27 (KDV dahil) |
 | Ödeme işleme, US | %3 + $0.25 | Vergi dahil toplam | [İkincil], kaynaklar tutarlı |
 | Ödeme işleme, UK | %4 + £0.20 | Toplam | [İkincil] |
-| Ödeme işleme, CA / AU | Kaynaklar çelişiyor | — | Doğrulanmadı |
-| Regulatory Operating Fee, **TR** | **%1.67** (22 Haz 2026'dan beri; önceki %2.27) | Ürün + kargo | [İkincil] growtsy, iscompliant. Eski kaynaklar %2.24–2.27 diyor |
+| Ödeme işleme, CA / AU | (inceleme) **CA:** %3 + 0.25 CAD (yurt içi ve ABD'den sipariş), %4 + 0.25 CAD (diğer ülkeler). **AU:** %3 + 0.25 AUD yurt içi, %4 + 0.25 AUD uluslararası. AU satıcıda ABD'li alıcı uluslararası sayılır | Vergi ve kargo dahil toplam | [R-özet] help 115015628847 tablosu. Bir hesaplayıcının "AU %3.5" değeri resmi tabloyla çelişiyor |
+| Regulatory Operating Fee, **TR** | **%1.67** (22 Haz 2026'dan beri; önceki %2.27) | Ürün + kargo | [İkincil] growtsy, iscompliant. Eski kaynaklar %2.24–2.27 diyor. (inceleme) Value Added Resource da 22 Haz 2026'da TR oranının **düştüğünü** yazıyor; yeni oran o özette yok [İkincil] |
 | Regulatory Operating Fee, UK / US | %0.48 (önceki %0.32) / yok | Ürün + kargo | [İkincil] |
 | Etsy ücretlerine KDV (TR) | Etsy TR satıcının ücretlerine KDV alabiliyor; **%20** varsayıldı | Tüm Etsy ücretleri | [R-özet] mekanizma; [İkincil] oran. Geçerli VAT ID'nin kesintiyi durdurduğu söyleniyor, doğrulanmadı. "Yasal kimlik yok" kararıyla ödenir varsayıldı |
 | UK satıcı, KDV kaydı yoksa | Ücretlere %20 KDV | — | [İkincil] |
@@ -177,8 +213,9 @@ Risk: L = düşük, M = orta, H = yüksek.
 | UK | ≈ %20.5 |
 | US | ≈ %13.4 |
 
-TR'deki yükü %6.5 ödeme işleme, %20 KDV ve %2.5 döviz çevirme oluşturuyor. Siparişin tamamı Offsite Ads'ten gelirse, $29.40'ta
-TR Etsy ücreti KDV dahil **$5.29** olur.
+TR'deki yükü %6.5 ödeme işleme, %20 KDV ve %2.5 döviz çevirme oluşturuyor. Sipariş Offsite Ads'ten gelirse, $29.40'ta yalnız
+Offsite Ads ücreti KDV dahil **$5.29** olur (%15 × $29.40 × 1.20). (inceleme) İlk taslak bunu siparişin bütün Etsy ücreti gibi yazmıştı.
+O siparişte toplam Etsy payı ≈ **$11.90 (%40)**: reklamsız ücretler KDV dahil $5.87 + döviz çevirme $0.74 + Offsite Ads $5.29.
 
 ### 3.3 Vergi
 - **Alıcı KDV'si:** Etsy, otomatik indirilen dijital ürünlerde KDV'yi checkout'ta hesaplıyor, tahsil ediyor ve devlete ödüyor
@@ -196,7 +233,8 @@ TR Etsy ücreti KDV dahil **$5.29** olur.
 |---|---|---|
 | Vercel Pro | $20/ay. 1 deploy koltuğu, $20 kullanım kredisi, 1 TB Fast Data Transfer, 10M Edge Request dahil | [R-özet] vercel.com/docs/plans/pro-plan |
 | Destek e-postası | Google Workspace Starter ≈ $7–8.40 / kullanıcı / ay. Ücretsiz yönlendirme seçenekleri de var, fiyatlanmadı | [İkincil] |
-| İşlem e-postası | Resend Free: 3,000 e-posta/ay, $0 | Resend dokümanı |
+| İşlem e-postası | Resend Free: 3,000 e-posta/ay, $0 | Resend dokümanı. (inceleme) Günlük 100 e-posta sınırı da var [R-özet resend.com/blog/new-free-tier]. Link paylaşılan gün RSVP'ler yığılırsa önce bu sınır dolar; yanıt başına bildirim yerine özet e-posta bunu azaltır [Varsayım] |
+| (inceleme) Alan adı | $11.25/yıl ≈ $0.94/ay; $28.40'a dahil değil. 50 satış/ayda satış başına ≈ $0.02 | [Ölçüm] `get_domain_price` |
 
 | Aylık satış | 10 | 30 | 50 | 100 | 300 |
 |---|---|---|---|---|---|
@@ -247,11 +285,16 @@ Net = fiyat − Etsy ücretleri (KDV, döviz çevirme, beklenen Offsite Ads dahi
 
 | Strateji | Liste → satış | Net TR | Marj TR | Net US | Marj US | $1,000 net/ay için satış (TR / US) |
 |---|---|---|---|---|---|---|
-| **A. Premium çapa + lansman indirimi** | $49 → %40 → **$29.40**. Yorumlar gelince %30 → $34.30 | **$19.24** ($34.30'da $22.91) | %65.5 | $22.70 | %77 | **52 / 44** |
-| **B. Pazar ortası** | $32 → %40 → **$19.20** | $11.61 | %60.5 | $13.91 | %72.5 | 86 / 72 |
+| **A. Premium çapa + lansman indirimi** | $49 → %40 → **$29.40**. Yorumlar gelince %30 → $34.30 | **$19.24** ($34.30'da $22.91) | %65.5 | $22.70 | %77 | **52 / 45** |
+| **B. Pazar ortası** | $32 → %40 → **$19.20** | $11.61 | %60.5 | $13.91 | %72.5 | 87 / 72 |
 | **C. Paket odaklı giriş** | Site $25 → $15. Komple set $55 → $33 (site + Save the Date + uzatma + hak paketi). %35'i seti seçerse sepet ortalaması $21.30 | Karma $12.89 (yalnız site $8.47) | %56.5 (yalnız site) | Karma $15.43 | %68.6 (yalnız site) | 78 / 65 |
 
 Karşılaştırma: pazar medyanı $18.19'da TR net $10.86, US net $13.04.
+
+(inceleme) Bütün netler §3.6 formülü ve §3.9 varsayımlarıyla yeniden hesaplandı; tablodakilerle ±$0.01 içinde aynı (UK $29.40'ta
+$20.61). Son sütun = $1,000 ÷ net, yukarı yuvarlanmış. İlk taslakta A/US 44 (doğrusu 45: 44 × $22.70 = $998.80) ve B/TR 86
+(doğrusu 87) idi. Sabit maliyet ($28.40/ay) satış adedine bölünürse B/TR 85, C/TR 77 çıkar. "Liste → satış" sütunundaki
+üstü çizili fiyat kurgusu için risk 7'ye bakın.
 
 **Not:** C'deki "komple set" henüz olmayan Save the Date ürününe ve Etsy'de riskli ek hizmetlere (uzatma, hak paketi; §3.10)
 dayanıyor. Bu yüzden şu an uygulanamaz.
@@ -264,11 +307,15 @@ dayanıyor. Bu yüzden şu an uygulanamaz.
 | **Website + Save the Date** | $69 | **$41.40** | $27.62 | $32.43 | Save the Date ürünü hazır olunca (şemada `event_type: save_the_date` var, tema yok) |
 | Website + Save the Date + 24 ay barındırma ("Keepsake") | $79 | $47.40 | $32.11 | $37.59 | **Bekletilir.** Barındırma süresini fiyatlandırmak Services riskini artırıyor (§3.10) |
 
+(inceleme) "Liste" sütunu yalnız referanstır. Alıcının gördüğü ve ödediği fiyat "Satış" sütunudur ve **düz fiyat** olarak girilir.
+Üstü çizili liste fiyatı ancak o fiyattan gerçekten satış yapıldıktan sonra, süreli bir kampanyada gösterilir (risk 7).
+
 **Gerekçe:**
 - $29–34 pazarda görülen üst sınırın ($32.18) içinde; $25–35 bandında 16 ilan var.
-- $49 liste fiyatı + %40 indirim pazar normuna uyuyor (72/81 ilan indirimde, medyan %40).
+- $49 liste fiyatı + %40 indirim pazar normuna uyuyor (72/81 ilan indirimde, medyan %40). (inceleme) Pazar normu olması uyumlu
+  olduğunu göstermez: Etsy rehberi kalıcı indirime karşı (risk 7). Öneri düz fiyattır; netler aynı kalır.
 - TR satıcıda ≈ %25 Etsy payına rağmen satış başına ≈ $19 net kalıyor; bu B'den ≈ %65 fazla. $1,000 net için 52 satış yetiyor
-  (B'de 86).
+  (B'de 87).
 - Destek ve iade maliyeti düşük fiyatta orantısal olarak ağırlaşıyor.
 - Ürün rakiplerden farklı: barındırma, RSVP, telefonda düzenleme. Pazarın en ucuz ucunda rekabet etmesi gerekmiyor.
 
@@ -276,12 +323,18 @@ dayanıyor. Bu yüzden şu an uygulanamaz.
 
 | Aşama | Ne zaman | Satış fiyatı | Net TR |
 |---|---|---|---|
-| Lansman | İlk ~30 gün ya da ilk ~25 sipariş | %50 indirim → **$24.50** | $15.58 |
-| Normal | Sonrası | %40 indirim → **$29.40** | $19.24 |
-| Yorumlu | ≥ 15–20 yorum, ortalama 4.8+ | %30 indirim → **$34.30** | $22.91 |
-| Düşük dönüşüm | 60–90 gün sonra dönüşüm çok düşükse | Önce %50'ye dönülür ($24.50) | $15.58 |
+| Lansman | İlk ~30 gün ya da ilk ~25 sipariş | **$24.50** | $15.58 |
+| Normal | Sonrası | **$29.40** | $19.24 |
+| Yorumlu | ≥ 15–20 yorum, ortalama 4.8+ | **$34.30** | $22.91 |
+| Düşük dönüşüm | 60–90 gün sonra dönüşüm çok düşükse | Önce yeniden $24.50 | $15.58 |
 
-- B stratejisi ancak %50 indirim de yetmezse denenir.
+- (inceleme) **Uygulama biçimi (risk 7).** İlk taslak bu aşamaları $49'dan %50 / %40 / %30 kalıcı indirim olarak yazmıştı. Etsy
+  rehberi kalıcı indirime karşı ve Etsy'nin satış aracı en çok 30 gün sürüyor [R-özet]. Bu yüzden:
+  - Normal ve Yorumlu aşamaları **düz fiyat** olarak girilir.
+  - Lansman ve sonraki sezon kampanyaları gerçek, süreli Etsy kampanyasıdır (≤ 30 gün). İndirimin referansı, sonra gerçekten
+    uygulanacak normal fiyattır ($29.40'tan ≈ %17). En güvenlisi lansman fiyatını üstü çizili göstermeden düz $24.50 girmek.
+  - Netler değişmez; yalnız gösterim değişir.
+- B stratejisi ancak $24.50 de yetmezse denenir.
 - **Ek kaldıraçlar:**
   - İlanı TRY ile açmak %2.5 döviz çevirme ücretini kaldırır. Bedeli: kur hareketi yüzünden sık fiyat güncellemesi. **Öneri:**
     USD ile başla, TRY'yi satış oturunca değerlendir.
@@ -319,13 +372,13 @@ dayanıyor. Bu yüzden şu an uygulanamaz.
 
 | Konu | Kaynak | Bize etkisi |
 |---|---|---|
-| **Off-Platform Transactions** | [R-özet] legal/policy/off-platform-transactions | Etsy'deki ürünü başka kanaldan almaya teşvik, Etsy dışına yönlendiren QR, Etsy dışı indirim yasak. Satış sitesi → Etsy linki serbest (yön Etsy'ye). Etsy → kendi ödeme sayfamız yasak |
+| **Off-Platform Transactions** | [R-özet] legal/policy/off-platform-transactions | Etsy'deki ürünü başka kanaldan almaya teşvik, Etsy dışına yönlendiren QR, Etsy dışı indirim yasak. Satış sitesi → Etsy linki serbest (yön Etsy'ye). Etsy → kendi ödeme sayfamız yasak. (inceleme) Etsy Messages kuralları da Etsy dışı işlem için iletişim bilgisi ya da QR paylaşmayı yasaklıyor [R-özet help/article/4508] |
 | **Services** (son güncelleme 9 Haz 2026) | [R-özet] legal/policy/services | "Genel olarak hizmetler satılamaz"; yazılım aboneliği ve fiziksel ürünü olmayan ek hizmetler yasak listesinde. Dijital dosya çıktısı olanlar istisna. Ürün "dijital şablon + anında erişim" olarak tanımlanır (§1) |
 | **Mesajlar** | [R-özet] legal/sellers, help/article/4508 | Etsy Messages yalnız sipariş ve destek için; istenmeyen reklam yasak. Satıcı yalnız siparişi olan alıcıya yazabiliyor [İkincil] |
 | **Alıcı e-postası** | [İkincil] satıcı rehberi alıntıları; EcommerceBytes 2024 | Etsy siparişinden alınan e-posta, açık onay olmadan pazarlama listesine eklenmez |
 | **Yorum** | [İkincil] Etsy anti-shilling; FTC Consumer Review Rule ve Endorsement Guides (hukuk bürosu özetleri) | Tek istek; teşvik yok; "5 yıldız" istemek yok. FTC olumlu yoruma bağlı teşviki yasaklıyor (ihlal başına $53,088'e kadar). "Review gating" (yalnız memnun müşteriyi yoruma yönlendirmek) aldatıcı sayılabiliyor |
 | **Purchase Protection** | [R-özet] etsy.com/uk/trust + [İkincil] | Dijital üründe "açıklamaya uymuyor" vakası açılabiliyor. İlan iddiaları docs/05 §E'deki dürüst listeyle birebir olmalı |
-| **Star Seller** | [İkincil] | 3 aylık dönem; ilk mesaja 24 saat içinde %95 yanıt; ortalama 4.8; ≥ 5 sipariş. → Destek yanıt süresi 24 saat (karar) |
+| **Star Seller** | [İkincil]; (inceleme) [R-özet] seller-handbook 1020956976086 | 3 aylık dönem; ilk mesaja 24 saat içinde %95 yanıt; ortalama 4.8; ≥ 5 sipariş. (inceleme) İlk satıştan en az 90 gün geçmiş olmalı; "$300 satış" şartı tek forum kaynağında, doğrulanmadı. Yeni dükkân rozeti en erken ilk satıştan ≈ 3 ay sonra alır. → Destek yanıt süresi 24 saat (karar) |
 | **Etsy API** | [İkincil] | `GET /v3/application/shops/{shop_id}/receipts/{receipt_id}` var → `/start`'ta gerçek sipariş doğrulaması mümkün görünüyor (Etsy uygulama onayı gerekebilir). Mesaj gönderme uç noktası yok (doğrulanmadı) → e-posta sağlayıcısı şart |
 | **Yaratıcılık / AI** | [R-özet] legal/creativity; [İkincil] 2026 AI kutusu | İlanda "design elements created with AI (GPT)" beyanı (docs/05 §E zaten öngörüyor) |
 
@@ -388,7 +441,7 @@ Panel v2 ve düzenleme hakkı G060'ta yapılıyor (durum: `alindi`). Aşağıdak
 |---|---|---|---|---|---|
 | P0 | Düzenleme linki e-postası + magic link | Çok yüksek (kayıp link = destek yükü) | Düşük–orta | — | Resend + alan adı |
 | P0 | `/start`'ta işaretsiz pazarlama onay kutusu + gizlilik metni | Yasal gereklilik | Düşük | — | CAN-SPAM, CASL, UK PECR (§4.5) |
-| P1 | **"Made with [BRAND]" ince alt bilgi** (her misafir sayfası → satış sitesi) | Çok yüksek edinim: her düğünde onlarca–yüzlerce misafir, bir kısmı nişanlı | Çok düşük | — | Misafirler Etsy alıcısı değil, Off-Platform kuralı dışında. Satış sitesi → Etsy Share & Save linki |
+| P1 | **"Made with [BRAND]" ince alt bilgi** (her misafir sayfası → satış sitesi) | Çok yüksek edinim: her düğünde onlarca–yüzlerce misafir, bir kısmı nişanlı | Çok düşük | — | Misafirler Etsy alıcısı değil, Off-Platform kuralı dışında. Satış sitesi → Etsy Share & Save linki. (inceleme) Etsy alıcısı da kendi sitesinde bu linki görür. Faz 2'de satış sitesine Etsy dışı ödeme gelirse, Etsy'den gelen alıcıyı Etsy dışında satın almaya yönlendirmek sayılabilir. O zaman panelde ve alt bilgide satın alma yolu Etsy'de kalmalı |
 | P1 | Yazdırılabilir QR kart PDF'i + paylaşım kiti | Yüksek (misafir trafiği, "kolay" algısı) | Düşük (`lib/qr.ts`, `tools/make_qr.py` var) | Ücretsiz | QR gerçek URL'den (şart 8) |
 | P1 | RSVP özet e-postaları | Orta–yüksek | Düşük | Ücretsiz | Resend |
 | P1 | Düğün sonrası teşekkür modu | Yüksek; 12 ay yayını anlamlı kılar | Düşük–orta | Ücretsiz | Bitiş bildirimiyle birleşir |
@@ -434,6 +487,18 @@ Hepsi bir sağlayıcı gerektirir. Tür: **İ** = işlemsel, **P** = pazarlama (
 
 **Öneri:** Resend. Önkoşul: marka alan adı (SPF/DKIM). **Gelen posta** (destek kutusu) çözümü araştırılmadı; Google Workspace
 dışındaki ücretsiz yönlendirme seçenekleri karar öncesi ayrıca bakılmalı.
+
+**(inceleme) Destek kutusu seçenekleri** (fiyat sayfaları açılamadı; hepsi [İkincil] arama özetinden). Alan adı Vercel'den alınırsa
+DNS Vercel'de kalır; aşağıdakilerin hepsi MX/TXT kaydıyla çalışır.
+
+| Seçenek | Ücret | Sınır / not |
+|---|---|---|
+| Zoho Mail Forever Free | $0 | 5 kullanıcı, 5 GB/kullanıcı, 1 alan adı. Yalnız web ve Zoho uygulamaları; IMAP/POP yok (Mail Lite ≈ $1/kullanıcı/ay ekler) |
+| ImprovMX Free (yönlendirme → kişisel Gmail) | $0 | Kaynaklar çelişiyor: 1 alan adı, 25 takma ad, 500 e-posta/gün (üçüncü taraf) ya da daha yüksek (resmi sayfa özeti). Ücretsizde SMTP yok, yanıt kişisel adresten gider |
+| Resend gelen posta | Free planda "sending & receiving" yazıyor | Gelen posta webhook'la gelir, posta kutusu değildir. Destek kutusu için tek başına uygun değil |
+| Google Workspace Starter | ≈ $7–8.40/kullanıcı/ay | Tam posta kutusu, Gmail arayüzü |
+
+En ucuz ve tam çalışan yol: **Zoho Mail Free** (`hello@<alanadı>`, web/telefon uygulaması). Giden işlemsel e-posta yine Resend'den.
 
 ### 4.6 Yorum, kupon, tavsiye
 - **Yorum:**
@@ -493,14 +558,23 @@ hakkı, kendi alan adını bağlama.
 
 ## 5. Kullanıcının vermesi gereken kararlar
 
+**(inceleme) Bu hafta, bu sırayla.** Her biri bir sonrakinin önkoşulu:
+1. **Ad + alan adı alım onayı.** Destek e-postası, Resend, START HERE linkleri ve ilan görselleri buna bağlı (§2.5, §5b-1).
+2. **Etsy dükkânı kimin adına, hangi ülkenin bankasıyla açılacak.** Bireysel satıcı da kimlik + selfie, yasal ad, adres ve adına
+   banka hesabı ister (risk 8). Etsy payı ve net bu seçime bağlı (TR ≈ %25, UK ≈ %20.5, US ≈ %13.4).
+3. **Fiyat gösterimi:** düz $29.40 (öneri) mi, üstü çizili $49 mu (risk 7). Lansman fiyatı $24.50 süreli mi, düz mü.
+4. **Destek kutusu sağlayıcısı** (öneri: Zoho Mail Free; §4.5) ve yanıt süresi (öneri: 24 saat).
+5. **Vercel Pro durumu:** API iki kez 404 döndü; panelden bakılmalı (risk 5).
+
 **Marka ve iletişim**
 - [ ] Marka / dükkân adı (öneri: **Seal & Story**; yedekler Seal & Sonnet, Silk & Seal, Fold & Vow, Vellum Lane)
 - [ ] Alan adı alımına onay (`.com` $11.25/yıl, Vercel); `.co` savunma kaydı istenir mi
-- [ ] Destek e-postası adresi (öneri: `hello@<alanadı>`) ve gelen posta sağlayıcısı (ücretli Google Workspace ≈ $7–8.40/ay ya da ücretsiz yönlendirme)
+- [ ] Destek e-postası adresi (öneri: `hello@<alanadı>`) ve gelen posta sağlayıcısı (ücretli Google Workspace ≈ $7–8.40/ay ya da ücretsiz yönlendirme; (inceleme) ücretsiz posta kutusu Zoho Mail Free, §4.5)
 - [ ] Destek yanıt süresi (öneri: 24 saat; Star Seller şartı)
 
 **Etsy ve ödeme**
 - [ ] Etsy dükkânı ve ödeme hesabının ülkesi (TR / US / UK). Etsy payını (≈ %25 / %13.4 / %20.5) ve doğrudan satış seçeneklerini belirler
+- [ ] (inceleme) Dükkânı açacak kişi: Etsy kimliğini, adresini ve adına banka hesabını doğrulayacak gerçek kişi (risk 8)
 - [ ] İlan para birimi (öneri: USD ile başla; TRY %2.5 kazandırır ama sık fiyat güncellemesi ister)
 - [ ] Offsite Ads: $10k altındayken kapalı mı (öneri: kapalı)
 - [ ] Etsy Ads günlük bütçesi (minimum $1/gün)
@@ -508,8 +582,9 @@ hakkı, kendi alan adını bağlama.
 
 **Fiyat**
 - [ ] Strateji: **A** (öneri) / B / C
-- [ ] Lansman indirimi: %50, ilk ~30 gün ya da ilk ~25 sipariş
-- [ ] Varyasyonlar: lansmanda yalnız "Wedding Website"; Save the Date gelince "Website + Save the Date" ($69 → $41.40)
+- [ ] (inceleme) Fiyat gösterimi: düz fiyat (öneri) / üstü çizili liste fiyatı (risk 7)
+- [ ] Lansman fiyatı: $24.50, ilk ~30 gün ya da ilk ~25 sipariş (süreli kampanya ya da düz fiyat)
+- [ ] Varyasyonlar: lansmanda yalnız "Wedding Website"; Save the Date gelince "Website + Save the Date" ($41.40)
 - [ ] Ek ürünler lansmanda satılmasın mı (öneri: satılmasın; ertelenen düğün için tarih değişikliği ücretsiz)
 
 **Satış sonrası**
@@ -523,6 +598,9 @@ hakkı, kendi alan adını bağlama.
 - Vercel Pro'nun aktif olduğu: Vercel paneli
 - Marka tescil araması (USPTO, UKIPO, Kanada, Avustralya), Etsy dükkân adı, sosyal kullanıcı adları
 - MoR (Paddle / Gumroad) satıcı uygunluğu ve Türkiye'ye ödeme (Faz 2 öncesi)
+- (inceleme) Etsy'de satıcı türü (Individual / Business) ve AB'li ziyaretçilere gösterilecek satıcı bilgileri. İkincil kaynaklara
+  göre Etsy, profesyonel satıcıyı "trader" sayıp işletme bilgilerini AB'li ziyaretçilere gösteriyor; doğrulanmadı
+- (inceleme) Kalıcı indirim için UK (CMA/DMCC) ve AB kuralları (risk 7 yalnız Etsy ve ABD FTC'ye bakıyor)
 
 ### 5b. Önerilen görevler (entegratör açar)
 1. **Marka/alan adı bağlama:** alan adı alındıktan sonra Vercel projesine ekleme. `PLATFORM_PUBLIC_URL` ve `LISTING_BASE_URL`
@@ -530,7 +608,7 @@ hakkı, kendi alan adını bağlama.
 2. **Resend entegrasyonu** (`claude-kod`): düzenleme linki e-postası, magic link, RSVP bildirimi; `lib/claim/mailer.ts`.
 3. **`/start` onay kutusu + gizlilik sayfası** (`claude-kod` + `claude-metin`).
 4. **Etsy Shop Manager ayarları** (`claude-tarayici`): Message to Buyers metinleri, Offsite Ads kararı, kuponlar, ücret ekranı ve
-   politika metinlerinin okunması.
+   politika metinlerinin okunması. (inceleme) Fiyatlar düz girilir; lansman ve sezon indirimleri ≤ 30 günlük kampanyadır (risk 7).
 5. **İlan kitlerinin düzeltilmesi** (`claude-metin` / `claude-kod`): 8. görseldeki QR'ın çıkarılması; "online until 12 months
    after your wedding date" dili; `[PRICE]`, `[HOSTING PERIOD]`, `[SUPPORT EMAIL]` yer tutucularının kararla doldurulması.
 6. **"Made with [BRAND]" alt bilgisi + QR kart PDF'i + paylaşım kiti** (`claude-kod`).
@@ -672,3 +750,27 @@ curl proxy CONNECT 403). Bu sitelerin URL'leri aşağıda yalnız arama özetini
 - https://paperlust.co/blog/wedding-invitation-timeline/
 - https://www.wedibox.com/compare/best-wedding-photo-sharing-apps
 - https://www.yogile.com/blog/best-wedding-photo-sharing-app
+
+**(inceleme) İkinci tur, 2026-10-14.** Aynı siteler yine açılamadı (WebFetch DNS hatası, curl proxy CONNECT 403; ek olarak
+resend.com, improvmx.com, zoho.com, ftc.gov, ico.org.uk, archive.org). Aşağıdakiler arama özetinden.
+- Ölçüm: Vercel MCP `get_bulk_availability` (10 alan adı), `get_domain_price` sealandstory.com, `get_team` (plan alanı yok),
+  `list_billing_charges` → yine `404 "Plan not found"`; docs/09_TASARIM_KATALOGU.md "Zarf tipi" ve "Kapanış" sütunları
+- Kalıcı indirim: https://www.etsy.com/seller-handbook/article/1450964704111 [R-özet, 12 Oca 2026] ·
+  https://www.ecfr.gov/current/title-16/chapter-I/subchapter-B/part-233 [R-özet] · https://www.law.cornell.edu/cfr/text/16/233.1 ·
+  https://www.listadum.com/blog/truthful-advertising-and-discounts-on-etsy-what-sellers-need-to-know [İkincil]
+- Satıcı kimliği: https://help.etsy.com/hc/en-us/articles/360001980067-How-to-Verify-Your-Seller-Information-for-Etsy-Payments [R-özet] ·
+  https://help.etsy.com/hc/en-us/articles/22481159004567-How-to-Verify-Your-Identity-on-Etsy [R-özet]
+- AB satıcı bilgisi: https://www.valueaddedresource.net/etsy-new-requirements-selling-eu/ ·
+  https://valueaddedresource.net/etsy-removes-required-seller-details-from-uk-eu-stores [İkincil]
+- Ödeme işleme CA/AU: https://help.etsy.com/hc/articles/115015628847 [R-özet]
+- TR ücretleri: https://globalfeecalculator.com/etsy-fee-turkey/ · https://navlungo.com/en/blog/etsy-fee-guide ·
+  https://www.valueaddedresource.net/etsy-ups-regulatory-operating-fees/ · https://www.ideasoft.com.tr/etsy-komisyon-oranlari/ [İkincil]
+- Offsite Ads: https://help.etsy.com/hc/articles/360000338367 [R-özet]
+- Share & Save: https://help.etsy.com/hc/pt/articles/16981332744087 [R-özet, Portekizce] · https://valueaddedresource.net/etsy-introduces-share-save-marketing-incentive-for-sellers [İkincil]
+- Messages / QR: https://www.etsy.com/help/article/4508 [R-özet]
+- Star Seller: https://www.etsy.com/seller-handbook/article/1020956976086 [R-özet] · https://craftybase.com/blog/how-to-become-etsy-star-seller [İkincil]
+- Destek kutusu: https://www.improvmx.com/pricing [R-özet] · https://freetier.co/directory/products/improvmx ·
+  https://www.capterra.com/p/174694/Zoho-Mail/pricing/ · https://codroiditlabs.com/is-zoho-email-still-free-guide/ ·
+  https://resend.com/pricing.md [R-özet] · https://resend.com/blog/new-free-tier [R-özet]
+- Ad çakışması: "Seal & Story", "Seal and Story", "SEAL & STORY trademark", "Silk and Seal / Fold and Vow / Vellum Lane /
+  Seal and Sonnet" aramaları (2026-10-14; eşleşme yok)
