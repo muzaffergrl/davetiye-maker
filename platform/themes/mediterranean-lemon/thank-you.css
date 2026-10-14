@@ -15,7 +15,8 @@
 .card-copy[data-drop~="s"] .ty-title { font-size: max(11px, 6.4cqw); }   /* site.js fitCopy: smaller, never dropped */
 
 /* the thank-you card (invitation_card paper, 3-slice: the message lengthens it): title, message, signature, date */
-.ty-text .ty-head { font-size: 10cqw; line-height: 1.1; }
+/* the title starts under the garland and stays inside its plain paper (free_zone: the leaves hang to ~30 % at the sides) */
+.ty-text .ty-head { margin-top: 4cqw; max-width: 54cqw; font-size: 10cqw; line-height: 1.1; }
 .ty-text .ty-message { margin-top: 3.6cqw; font-style: italic; font-size: max(15px, 4.5cqw); line-height: 1.5; color: var(--ink);
                        white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
 .ty-text .ty-love { margin-top: 4.6cqw; font-size: 8.4cqw; line-height: 1.1; color: var(--script-ink); }

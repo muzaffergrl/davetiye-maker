@@ -3,7 +3,8 @@
 //   npm run build
 //   NODE_PATH=/opt/node22/lib/node_modules node tests/g075-browser.ts
 //
-// Guests (01 olive-ivory, 03 blush-garden-rose): a site whose wedding was two days ago is a thank-you page by itself
+// Guests (01 olive-ivory, 03 blush-garden-rose; G081: 02 dusty-blue-champagne, 05 mediterranean-lemon — G075_THEMES=<id,…>
+// runs only those designs and skips the couple's part): a site whose wedding was two days ago is a thank-you page by itself
 // (envelope opens, card with the thank-you title, home thank-you card, honest closed RSVP, API 403); five pages × 360 /
 // 390 / 430 / 1280 without horizontal scroll, broken image or console/CSP error; the card's window with the thank-you
 // photo and — without one — the design's decoration; the Day page hidden (404, no link); a 60-character title on the card
@@ -34,10 +35,16 @@ const chromium = loadChromium();
 const dataDir = mkdtempSync(path.join(os.tmpdir(), 'g075-browser-data-'));
 mkdirSync(OUT, { recursive: true });
 
-const THEMES = ['olive-ivory', 'blush-garden-rose'] as const;
+const ALL_THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon'] as const;
+const ONLY = (process.env.G075_THEMES ?? '').split(',').filter(Boolean);
+const THEMES = ALL_THEMES.filter((t) => !ONLY.length || ONLY.includes(t));
+/** The couple's panel journey (03 + 01's automatic switch) runs in the full run only. */
+const PANEL = !ONLY.length;
 const PHOTO: Record<string, string> = {
   'olive-ivory': path.join(REPO, 'collections/01_Olive_Ivory/assets/gpt/photos/story_2.jpg'),
   'blush-garden-rose': path.join(REPO, 'collections/03_Blush_Garden_Rose/assets/gpt/photos/story_2.jpg'),
+  'dusty-blue-champagne': path.join(REPO, 'collections/02_Dusty_Blue/assets/gpt/photos/story_2.jpg'),
+  'mediterranean-lemon': path.join(REPO, 'collections/05_Lemon_Mediterranean/assets/gpt/photos/story_2.jpg'),
 };
 const MESSAGE = 'What a day! Thank you for the laughter, the dancing and every kind word.\nWe will treasure it always.';
 const DAY = 86_400_000;
@@ -75,7 +82,7 @@ const sites = Object.fromEntries(
     })],
   ]),
 );
-const panelSite = seed('blush-garden-rose', 'clara-and-julian');
+const panelSite = PANEL ? seed('blush-garden-rose', 'clara-and-julian') : null!;
 
 const checks: Array<{ name: string; ok: boolean; detail?: string }> = [];
 const check = (name: string, ok: unknown, detail = '') => {
@@ -230,7 +237,7 @@ try {
   }
 
   // ------------------------------------------------------------------------------------------ couple (panel)
-  await block('panel: After the wedding → On now → preview → publish → Home card → Off', async () => {
+  if (PANEL) await block('panel: After the wedding → On now → preview → publish → Home card → Off', async () => {
     const ctx = await browser.newContext(PHONE);
     const page = await ctx.newPage();
     const errors: string[] = [];
@@ -314,7 +321,7 @@ try {
   });
 
   // automatic mode in the panel: two days after the wedding the Home card is there without any setting
-  await block('panel: automatic switch shows the Home card', async () => {
+  if (PANEL) await block('panel: automatic switch shows the Home card', async () => {
     const after = sites['after-olive-ivory'];
     const page = await (await browser.newContext(PHONE)).newPage();
     await page.goto(`${BASE}/edit/${after.slug}?k=${encodeURIComponent(after.editKey)}#home`, { waitUntil: 'networkidle' });

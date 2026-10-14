@@ -300,6 +300,36 @@ davet bölümü de aynı kurala uyar (`site.js` `foldAll`):
 | alt kenara basılı mühür + okaliptüs | `.card-seal` (closure) + monogram | |
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
 
+## Teşekkür hâli (G075 kuralı, G081)
+Düğünden sonra (platform kuralı `lib/content/thank-you.ts`, docs/11 §3.6) aynı sayfalar `data-if="thank_you_on"` ile teşekkür
+hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçaları):
+- **Zarf:** açılış şovu aynen (mühür kopar, kapak açılır, kart yükselir, yaprak süzülür); üst satır "With love and thanks"
+  (`ty_kicker`); kartta teşekkür başlığı (`thank_you_title`, el yazısı, dengeli sarar; `fitCopy` sığmazsa küçültür, ≥ 11 px) +
+  tarih, şehir satırı yok. Kart penceresinde teşekkür fotoğrafı (`thank_you.photo`, `hero_portrait` oranında); yoksa **bokeh
+  kâğıt (`paper-400`) üstünde mavi mum mühür (closure) ve monogram** — asla yer tutucu.
+- **Home:** hero kartı zarfla aynı; isimler, tarih, mekân kalır; geri sayım ve RSVP hapı yok. Davet setinin yerine **teşekkür
+  seti** (aynı iki kart): çiçekli davet kartının güller arasındaki düz kâğıdında başlık (`fitInvite` sığdırır), altına
+  sıkıştırılmış yazı kartında (info_card, 3 dilim — mesajla uzar) çiftin mesajı (`white-space: pre-line`), dal, "With love,",
+  isimler, tarih. Takvime ekle yok; bölümlerde Our Story ve The Day kalır (çift Details'i gizlerse The Day de yok), RSVP bölümü
+  yok. Ev sahibi satırı gösterilmez (davet sözü).
+- **Details:** "The Day" olarak kalır (program, mekân, harita, registry); takvim, dress code, Travel & Stay, SSS ve RSVP linki
+  yok; tören cümlesi geçmiş zaman ("The ceremony began at …", `ceremony_after`). Çift gizlerse sayfa 404 ve hiçbir link yok
+  (story'nin kapanış düğmesi Home'a döner).
+- **RSVP:** eski linkler için açık: kartta "Replies are closed" (`rsvp_closed_title`) + teşekkür başlığı + Home hapı + "With love,"
+  + isimler + mühür; form yok (platform da `403 closed`, `reason: thank_you`). ≥ 960 px tek sütun (formun sütunu boş kalmaz).
+- **Nav:** Details etiketi "The Day" (`nav_day`), RSVP yok.
+- Stiller `thank-you.css`'te (yalnız teşekkür modunda yüklenir; `site.css` bütçesi değişmedi). `site.js` `devRender` çoklu
+  koşulu okur; tasarım önizlemesi davet hâlini gösterir.
+
+## Düzenlenebilir metinler (G068 kuralı, G081)
+Görünür her sabit metin `data-copy` taşır (70 anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
+`platform/README.md` "Düzenlenebilir tasarım metinleri"). 69'u standart anahtar; bu tasarıma özgü tek anahtar `home_day_sub`
+(home'daki The Day bölümünün alt satırı "Order of the day & venue"; panelde Day & place, etiketi `theme.json`'da). Manifest
+şablonlardan yazılır: `node scripts/copy-manifest.ts --theme dusty-blue-champagne` (`--check` ile denetim). Davet cümlesinin
+satır kırılımı (`<br>`) tasarım metninde kalır; çift kendi cümlesini yazarsa tek satır olarak dengeli sarar. Bilerek sabit: iç
+sayfaların `description` meta cümleleri, bölge `aria-label`'ları, "Please turn on JavaScript…" (`data-copy-fixed`), platform
+mesajları (`[data-rsvp-message]`).
+
 ## Bilinen sınırlar
 - Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim). Home'daki günün kartı ilk 4 satırı gösterir.
 - Details tören cümlesi yalnız saati söyler ("The ceremony begins at 4:30 PM.").
