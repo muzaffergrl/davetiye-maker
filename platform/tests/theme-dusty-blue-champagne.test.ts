@@ -1044,6 +1044,8 @@ test('G402 QA: every inner-page piece ends above the nav or starts below the fir
   assert.match(rule('.rsvp-text .sign'), /font-size: max\(19px, 11cqw \* var\(--fit, 1\) \* var\(--sg\)\)/);
   assert.match(rule('.card-seal'), /bottom: calc\(-21cqw \* var\(--sg\)\); width: calc\(42cqw \* var\(--sg\)\)/);
   assert.match(js, /if \(cw > 296 \|\| \(k < \.73 && rt <= 64 && cw > 240\)\)[^\n]*\n\s+else if \(k > \.73\)[^\n]*--sg[^\n]*\n\s+else if \(rt > 64\)[^\n]*--rt[^\n]*\n\s+else \{ clear\(\); break; \}/);
+  // home → envelope page (no nav there): the old nav leaves at once, not fading over the envelope (theme-check G068 check)
+  assert.match(css, /::view-transition-old\(site-nav\):only-child \{ animation: none; opacity: 0; \}/);
   // hero: a cluster never under the hero text (16 × 16 alpha map of each florals_* part), a float on the text hides
   assert.match(js, /bg\.querySelectorAll\('\.corner'\)[\s\S]*?for \(let k = \.94, w = c\.offsetWidth; ts\.some\(\(t\) => under\(box\(c\), t, m\)\); k -= \.06\)/);
   const land = /@media \(min-aspect-ratio: 1\/1\) and \(max-height: 620px\) \{([\s\S]*?)\n\}/.exec(css)![1];

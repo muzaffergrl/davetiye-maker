@@ -325,7 +325,7 @@ davet bölümü de aynı kurala uyar (`site.js` `foldAll`):
 - Yazılım bütçesi (docs/11 §6; KiB, 01 / 03 / 05 testleri gibi): `site.css` ≤ 46 080 B, `site.js` ≤ 35 840 B (test denetler).
   Final QA düzeltmelerinden sonra `site.js` 35 775 B (pay 65 B; fitCard + decor için yorumlar kısaldı, sayaç saat dilimi
   yardımcısı tek işlev, `fitLines`/`fitInvite` tek `shrink` döngüsü, devRender sıkıştı — davranış aynı, testler ve ölçümler
-  yeniden koşuldu), `site.css` 45 925 B (pay 155 B); ikisi de 1000 B okumasıyla bütçenin üstünde. Pay çok az.
+  yeniden koşuldu), `site.css` 46 001 B (pay 79 B; G068 birleştirmesinden sonra nav çıkış kuralı eklendi); ikisi de 1000 B okumasıyla bütçenin üstünde. Pay çok az.
 - RSVP kartı 320×568'de ve yatay telefonda (667×375, 844×390) ilk ekrana hiçbir kayıtla sığmaz (240 px + `--sg` 0,72 ile bile);
   orada kart tam boyda katlanır, kartın içinde tek bir 53–70 px boşluk kalır (yukarıda "RSVP kartı + mühür ilk ekranda").
 - Aksanlı isimler: Pinyon Script ve Cormorant Garamond'un Google Fonts CSS yanıtında `latin-ext` bloğu var (docs/11 §12).

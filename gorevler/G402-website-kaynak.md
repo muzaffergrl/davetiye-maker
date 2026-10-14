@@ -230,7 +230,20 @@ Rose & Maximilian James") / §12 stres.
    düşüyor (denendi). Statik testler: `fitCard` adımları, `--sg` kuralları, 2,12 kuralının yokluğu, `foldAll` sırası.
 4. **Bütçe:** `site.js` 35 775 B (KiB sınırı 35 840; yer açmak için yorumlar kısaldı, sayaç saat dilimi yardımcısı tek işlev,
    `fitLines`/`fitInvite` ortak `shrink`, devRender ve küçük yerler sıkıştı — davranış aynı, bütün testler/ölçümler yeniden
-   koşuldu), `site.css` 45 925 B (sınır 46 080). Pay çok az (65 / 155 B).
+   koşuldu), `site.css` 46 001 B (sınır 46 080). Pay çok az (65 / 79 B).
+5. **Ek (bulgu dışı, G068 birleştirmesinin yeni denetimi):** origin/main'deki G068 theme-check'e "nav leaving the envelope page"
+   denetimini ekledi; bu tema 390×844 / 360×640'ta düşüyordu (home → zarf sayfasında eski nav %2,5 / %3,8 görünüyordu). 01'deki
+   tek satır eklendi: `::view-transition-old(site-nav):only-child { animation: none; opacity: 0; }` (+ statik test).
+6. **Komutlar** (origin/main — G068 — birleştirildikten sonra, Node 22): `npm test` **553/553** · `npm run typecheck` temiz ·
+   `npm run build` + trace-check (16 rota, 6 tema) · `theme-check --theme dusty-blue-champagne --stress --no-video` **117 geçti /
+   0 hata / 2 uyarı** (uyarılar: G075 teşekkür modu ve G068 `copy` bu temada yok — G081 kapsamı; birleştirmeden sonraki ilk koşuda
+   yukarıdaki nav çıkışı 2 hata verdi, düzeltmeden sonra 0; içerik değişimi adımı geçti — "Theo" yanlış alarmı bu koşuda
+   görülmedi) · dokun → home 3 950 ms · ilk görünüm DPR 3: index 920 / home 1014 KB yer tutucuyla, 981 / 1149 KB örnek
+   fotoğraflarla · `g051-browser --theme` 44/44 · `final-smoke --theme` 45/45 (çıktılar geçici klasörde). Önizlemeler
+   (`previews/g402/`, `next start` + tohumlanmış örnek fotoğraflı siteler): `qa_inner_desktop.jpg` yenilendi (1280×800 ve
+   1024×768'de RSVP kartı + mühür + form tam), yeni `final_rsvp_1280x800.png` (demo), `final_rsvp_390x844_range.png`,
+   `final_home_390x844_range.png`. **Denenmedi:** gerçek iPhone/Safari ve Android Chrome, yayın, yavaş ağ, gerçek alıcı
+   fotoğrafları; qa-kontrol bu turda yeniden koşturulmadı (bağımsız QA'nın yeniden ölçmesi gerekiyor).
 
 ## Günlük
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
