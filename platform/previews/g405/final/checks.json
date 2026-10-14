@@ -129,7 +129,7 @@
     {
       "name": "buyer: Publish button in the top bar, >= 44 px",
       "ok": true,
-      "detail": "{\"x\":298.0625,\"y\":6,\"width\":79.9375,\"height\":44}"
+      "detail": "{\"x\":292.359375,\"y\":8,\"width\":85.640625,\"height\":44}"
     },
     {
       "name": "buyer: photo uploaded (1 of 5 photos)",
@@ -143,7 +143,7 @@
     {
       "name": "buyer: \"Publish anyway\" reachable on the phone (sheet scrolls)",
       "ok": true,
-      "detail": "{\"x\":16,\"y\":784,\"width\":203.921875,\"height\":48}"
+      "detail": "{\"x\":16,\"y\":784,\"width\":216.40625,\"height\":48}"
     },
     {
       "name": "buyer: the sample date holds the first publish until confirmed",
@@ -172,7 +172,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/f0e82cab-9488-497e-af73-b8792a9d24b7/d7b25c4f6a0792588900383b8b939412-1024w.jpg"
+      "detail": "/media/763c8e4d-9f14-45a9-a9d4-2c811005a411/3297958793ec350e2cdf6715659490ef-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
@@ -189,7 +189,7 @@
     {
       "name": "buyer: the reply shows in the panel",
       "ok": true,
-      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close at the end of Saturday, May 1, 2027 (Rome time). All Coming Not com"
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 199 days. Last day: Saturday, May 1, 2027 (UTC time). 1 new repl"
     },
     {
       "name": "buyer: panel has no overflow at the end",

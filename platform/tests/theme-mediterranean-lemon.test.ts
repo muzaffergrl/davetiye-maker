@@ -665,6 +665,14 @@ test('envelope (kapak): layers from the build, the lemon tie on the scalloped ti
   // "… and a blossom drifts down": accent_2 (the blossom) × 1, drifting, beside the card, gone before go; 46–56 px, down
   // the cobalt tile liner between the card and the envelope's edge (white on white plaster was invisible, G405 review)
   assert.match(js, /open:\s+\[\{ file: 'img\/accent_2-200\.webp', count: 1, path: 'drift', origin: 'liner'[^\n]*size: \[(4[6-9]|5\d), (4[6-9]|5[0-6])\][^\n]*avoid: '\.env \.card'/);
+  // qa 2026-10-14: the lane (card edge → stage edge) left no room on most phones and the blossom never appeared. Now it may
+  // run ≤ 3 % of the stage over the card's white edge (the photo window ends 11 % inside it) and the blossom is ≤ 16 % of
+  // the stage: lane ≥ 8 % of the stage on every size
+  assert.match(js, /ln = \[\[cd\.right - st\.width \* \.03 - R\.left, st\.right - st\.width \* \.01 - s - R\.left\]\]/);
+  assert.match(js, /s = Math\.min\(rand\(g\.size\[0\], g\.size\[1\]\), st \? st\.width \* \.16 : 1e3\)/);
+  const cardRight = st.parts.card[0] + st.parts.card[2], photoRight = st.parts.card[0] + st.parts.card[2] * (MANIFEST.photo_slots.card.box_pct[0] + MANIFEST.photo_slots.card.box_pct[2]) / 100;
+  assert.ok(cardRight - 3 > photoRight + 5, `lane start ${cardRight - 3} % clear of the photo window (${photoRight.toFixed(1)} %)`);
+  assert.ok(99 - (cardRight - 3) - 16 >= 8, 'lane ≥ 8 % of the stage');
   const dur = /open: +\[\{[^\n]*dur: \[(\d+), (\d+)\]/.exec(js)!;
   assert.ok(E.accents + Number(dur[1]) <= E.go, 'the blossom has settled before go');
   assert.match(js, new RegExp(`out: 'translateY\\(${st.card_path.out_translate_pct}%\\)'`), 'card path from the manifest');
@@ -770,6 +778,44 @@ test('inner pages (story, details, rsvp): the sunlit wall of W1.3–W1.5 behind 
   assert.ok(map, 'leaf maps');
   // the details calendar pair folds below the first screen when it would cross the nav line
   assert.equal(render('details').$('.cal[data-fold]').length, 1);
+});
+
+test('inner pages: nothing half under the nav on the first screen — fold units, one small lift, desktop story row (qa 2026-10-14)', () => {
+  // every unit a first screen can end on is a [data-fold]: it ends above the nav or starts below the first screen
+  const d = render('details').$;
+  assert.equal(d('.day-card h1.card-title[data-fold]').length, 1);
+  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, demo().schedule.length, 'each schedule row');
+  assert.equal(d('.venue-photo[data-fold]').length, 1);
+  const r = render('rsvp').$;
+  assert.equal(r('.rsvp-text > [data-fold]').length, 5, 'title, reply-by, pill, the wait line, the signature');
+  // "With love," + the names + the lemon tie fold together: the tie rides on the signature unit, not on the card
+  assert.equal(r('.rsvp-text > .sig-unit[data-fold] > .card-tie').length, 1);
+  assert.equal(r('.rsvp-card > .card-tie').length, 0);
+  assert.equal(r('.rsvp-text > .unit[data-fold] > .deadline[data-field="rsvp.deadline"]').length, 1);
+  assert.equal(r('.reply-box > [data-fold] > h2').length, 1);
+  assert.ok(r('.reply-form > [data-fold]').length >= 6, 'form rows fold one by one');
+  const s = render('story').$;
+  assert.equal(s('.page-head > .kicker[data-fold]').length, 1);
+  assert.equal(s('.page-head > .lede[data-fold]').length, 1);
+  const js = jsText();
+  // a unit (+ its .card-tie) crossing the nav line starts 6 px below the first screen; the first crossing one may lift the
+  // whole first section instead (the element after .page-bg, ≤ 40 px and ≤ 34 % of the top padding)
+  assert.match(js, /const f = \$\('\.page-bg \+ \*'\), u = \[\.\.\.\$\$\('\[data-fold\]'\)\]/);
+  assert.match(js, /Math\.min\(40, parseFloat\(getComputedStyle\(f\.parentElement\)\.paddingTop\) \* \.34\)/);
+  assert.match(js, /querySelectorAll\('\.card-tie'\)\]\.map\(bottom\)\) - v \+ navH\(\) \+ 8/);
+  assert.match(js, /d <= lift \? \[f, -d\] : \[el, v \+ 6 - t\]/);
+  const css = cssText().replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.doesNotMatch(css, /\.page-rsvp \.site-main \{ display: grid/, 'no side-by-side form: it would always run under the nav');
+  assert.match(css, /\.card-tie \{ position: absolute; z-index: 2; left: 50%; top: calc\(100% \+ 10\.72cqw\);/);
+  // desktop story (QA: half the first screen was an empty wall): three panels in one staggered row, sized to end above the
+  // nav (site.js tiles shrinks them, ≥ 190 px)
+  const desk = /@media \(min-width: 1024px\) and \(min-aspect-ratio: 5\/4\) and \(min-height: 621px\) \{([\s\S]*?)\n\}/.exec(css);
+  assert.ok(desk, 'desktop story block');
+  assert.match(desk![1], /grid-template-columns: repeat\(3, var\(--tw\)\)/);
+  assert.match(desk![1], /\.tile\.t-2 \{ margin-top: calc\(var\(--tw\) \* \.\d+\); \}/, 'the middle panel lower');
+  assert.match(js, /w > 190 && Math\.max\(\.\.\.\[\.\.\.g\.children\]\.map\(bottom\)\) > sv\(\) - navH\(\) - 8/);
+  // two columns (720–1023 px): the middle panel is offset by a margin, so a fold push moves it fully (align-self: center halved it)
+  assert.match(css, /\.t-2 \{ grid-column: 2; grid-row: 1 \/ span 2; align-self: start; margin: calc\(var\(--tw\) \* \.\d+\) 0 0; \}/);
 });
 
 test('nav and dress code: the GPT tile flower (frame_portrait crop) on a hairline (W1.2, W1.4)', () => {
