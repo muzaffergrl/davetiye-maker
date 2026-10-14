@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 3 · inceleme 9 · blokaj 277 · bitti 85 · toplam 392
+Özet: hazir 19 · alindi 3 · inceleme 8 · blokaj 277 · bitti 86 · toplam 393
 
 ## claude-canva
 
@@ -156,9 +156,10 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (9)**
+**Alınabilir (10)**
 
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
+- `G082` p2 — Onaylanan yeni tasarımları satış sitesine ekle (05 Mediterranean Lemon; 02/04 onaylanınca) — tasarım sayfası, metin, gerçek ekranlar → `gorevler/G082-satis-yeni-tasarimlar.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
@@ -168,7 +169,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (85)**
+**Üzerinde çalışılan / incelemede / blokaj (84)**
 
 - `G068` alindi · claude-G068 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
@@ -191,7 +192,6 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G119` blokaj · - — Tasarım 19 Midnight Garden — HTML sahne kaynağı + katmanlar
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G404` inceleme · wf-tema04 — Tasarım 04 Vintage Airmail Love Letter — platform teması
-- `G405` inceleme · wf-tema05 — Tasarım 05 Mediterranean Lemon — platform teması
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G402` inceleme · wf-tema02 — Tasarım 02 Dusty Blue & Champagne — platform teması
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
@@ -256,7 +256,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 8 · Biten: 35
+Bağımlılık bekleyen: 8 · Biten: 36
 
 ## claude-metin
 

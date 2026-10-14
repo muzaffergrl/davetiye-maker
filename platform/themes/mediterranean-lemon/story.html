@@ -5,7 +5,8 @@
      wall, never overlapping; a little lemon sprig tucked at a corner of each, loose leaves and blossoms on the wall, a
      caption with each panel. Catalogue: the frames turn in like tile panels (site.css preset "turn-l" / "turn-r": each
      panel swings in on its outer edge and stands straight). Phones: the same column, each panel 64vw (photo window
-     ≥ 38vw, docs/11 §9), captions under the panels; from 720 px the comp's two staggered columns. Photo slots story_1..3
+     ≥ 38vw, docs/11 §9), captions under the panels; from 720 px the comp's two staggered columns; desktop (≥ 1024 px
+     landscape) one staggered row = one fold unit, sized to end above the nav (site.js tiles). Photo slots story_1..3
      (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is off (404) when
      optional_blocks.our_story is false. Kicker / title = design copy. -->
 <html lang="en" class="no-js">
@@ -50,11 +51,11 @@
     <figure class="tile t-1" data-scene="story-tile" data-fold>
       <div class="frame" data-step="panel" data-a="turn-l">
         <div class="photo-slot mask-portrait" data-slot="story_1">
-          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 1024px) 194px, (min-width: 720px) 152px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.0.caption}">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 1024px) min(16.4vw, 242px), (min-width: 720px) 152px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.0.caption}">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
-        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 1024px) 320px, (min-width: 720px) 250px, min(64vw, 330px)" alt="">
-        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 720px) 145px, min(38vw, 192px)" alt="">
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 1024px) min(27vw, 400px), (min-width: 720px) 250px, min(64vw, 330px)" alt="">
+        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 1024px) min(15.7vw, 232px), (min-width: 720px) 145px, min(38vw, 192px)" alt="">
         <img class="tuck-bloom" src="img/accent_2-200.webp" alt="">
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
@@ -64,11 +65,11 @@
     <figure class="tile t-2" data-scene="story-tile" data-fold>
       <div class="frame" data-step="panel" data-a="turn-r">
         <div class="photo-slot mask-portrait" data-slot="story_2">
-          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 1024px) 194px, (min-width: 720px) 152px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 1024px) min(16.4vw, 242px), (min-width: 720px) 152px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
-        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 1024px) 320px, (min-width: 720px) 250px, min(64vw, 330px)" alt="" loading="lazy">
-        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 720px) 145px, min(38vw, 192px)" alt="" loading="lazy">
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 1024px) min(27vw, 400px), (min-width: 720px) 250px, min(64vw, 330px)" alt="" loading="lazy">
+        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 1024px) min(15.7vw, 232px), (min-width: 720px) 145px, min(38vw, 192px)" alt="" loading="lazy">
         <img class="tuck-bloom" src="img/accent_2-200.webp" alt="" loading="lazy">
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
@@ -78,11 +79,11 @@
     <figure class="tile t-3" data-scene="story-tile" data-fold>
       <div class="frame" data-step="panel" data-a="turn-l">
         <div class="photo-slot mask-portrait" data-slot="story_3">
-          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 1024px) 194px, (min-width: 720px) 152px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 1024px) min(16.4vw, 242px), (min-width: 720px) 152px, min(39vw, 200px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
         </div>
-        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 1024px) 320px, (min-width: 720px) 250px, min(64vw, 330px)" alt="" loading="lazy">
-        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 720px) 145px, min(38vw, 192px)" alt="" loading="lazy">
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 1024px) min(27vw, 400px), (min-width: 720px) 250px, min(64vw, 330px)" alt="" loading="lazy">
+        <img class="sprig-tuck" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="(min-width: 1024px) min(15.7vw, 232px), (min-width: 720px) 145px, min(38vw, 192px)" alt="" loading="lazy">
         <img class="tuck-bloom" src="img/accent_2-200.webp" alt="" loading="lazy">
       </div>
       <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
@@ -91,7 +92,7 @@
     </figure>
   </section>
 
-  <section class="section next-sec wash-end" data-scene="story-next">
+  <section class="section next-sec wash-end" data-scene="story-next" data-fold>
     <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-960.webp 960w" sizes="min(56vw, 330px)" alt="" loading="lazy">
     <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
     <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise">The Day <span aria-hidden="true">→</span></a>
