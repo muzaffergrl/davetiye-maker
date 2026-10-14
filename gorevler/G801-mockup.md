@@ -2,7 +2,7 @@
 id: G801
 baslik: Tasarım 01 Olive & Ivory — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 1
 bagimli: []
@@ -44,3 +44,4 @@ düzenleme. Ekranlar düz `#00FF00`; Claude gerçek site ekranlarını perspekti
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (kullanıcı: daha etkileyici, GPT tasarlasın)
 - 2026-10-14 alindi: gpt-gorsel-A
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A; 5 sahne, 2 yeniden üretim, kit_check 5/5. Tam saf RGB(0,255,0) için teknik düzeltme onayı bekleniyor (Sonuç).
+- 2026-10-14 entegratör onayladı

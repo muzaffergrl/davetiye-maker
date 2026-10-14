@@ -2,7 +2,7 @@
 id: G207
 baslik: Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-C
 oncelik: 2
 bagimli: []
@@ -65,3 +65,4 @@ Kontroller:
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-C
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-C; PAKET 5 24/24, PAKET 2 5/5 geçti; kalan saf yeşil/alfa, kurdele hizası ve yatay pencere oranı Sonuç'a yazıldı.
+- 2026-10-14 entegratör onayladı

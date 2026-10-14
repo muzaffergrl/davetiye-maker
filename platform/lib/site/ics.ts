@@ -5,9 +5,10 @@
 import { calendarEvent, icsFile, type CalendarEvent } from '../calendar.ts';
 import { getDataAdapter } from '../data/index.ts';
 import { publicOrigin } from '../panel/http.ts';
+import { isArchived } from '../panel/rights.ts';
 import { canPreview } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
-import { notFound } from './render.ts';
+import { archivedPage, notFound } from './render.ts';
 
 /** The .ics response for an event (also used by the theme demo, lib/claim/demo-page.ts). */
 export function icsResponse(event: CalendarEvent, opts: { uid: string; stamp?: Date; filename: string; preview: boolean }): Response {
@@ -39,6 +40,7 @@ export async function handleIcsRequest(req: Request, slugParam: string): Promise
     const preview = previewParam !== null && canPreview(site, previewParam);
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
+    if (!preview && isArchived(site)) return archivedPage();
     // the public origin, like the pages (og:image, the Google Calendar link): both "Add to calendar" buttons give the
     // same site link, and the UID stays the same whichever host served the file (re-importing updates the entry)
     const origin = publicOrigin(req.headers, url.origin);

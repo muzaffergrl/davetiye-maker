@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 28 · alindi 7 · inceleme 7 · blokaj 293 · bitti 43 · toplam 378
+Özet: hazir 28 · alindi 6 · inceleme 4 · blokaj 293 · bitti 47 · toplam 378
 
 ## claude-canva
 
@@ -156,14 +156,16 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-kod
 
-**Alınabilir (2)**
+**Alınabilir (4)**
 
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
+- `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
+- `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
 - `G409` p3 — Tasarım 09 Lavender Provence — platform teması → `gorevler/G409-website-kaynak.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (87)**
 
-- `G060` alindi · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
+- `G060` inceleme · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
 - `G061` inceleme · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
 - `G064` inceleme · wf-g064 — Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
@@ -251,7 +253,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 15 · Biten: 25
+Bağımlılık bekleyen: 13 · Biten: 25
 
 ## claude-metin
 
@@ -331,17 +333,13 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
 - `G804` p2 — Tasarım 04 Vintage Airmail Love Letter — Paket 3 mockup görselleri → `gorevler/G804-mockup.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (52)**
+**Üzerinde çalışılan / incelemede / blokaj (48)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
-- `G801` inceleme · gpt-gorsel-A — Tasarım 01 Olive & Ivory — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
-- `G803` inceleme · gpt-gorsel-B — Tasarım 03 Blush Garden Rose — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 - `GM01` inceleme · gpt-marka — BKE Studio marka kimliği — 3 yön panosu + seçilen yönün logo/sembol/mühür/desen/ikon/sahne dosyaları
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
-- `G207` inceleme · gpt-gorsel-C — Tasarım 07 Burgundy Velvet Autumn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
-- `G208` inceleme · gpt-gorsel-D — Tasarım 08 Winter Evergreen — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G210` alindi · gpt-gorsel-F — Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G211` alindi · gpt-gorsel-E — Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
@@ -386,4 +384,4 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 1 · Biten: 9
+Bağımlılık bekleyen: 1 · Biten: 13

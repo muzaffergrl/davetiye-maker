@@ -35,6 +35,82 @@ export interface SiteRecord {
    * Absent on sites made elsewhere (seed, tests) and on records written before it existed.
    */
   claimTokenHash?: string | null;
+  /**
+   * Edit rights (G060, docs/16 §11): the moment of the FIRST successful publish. Written once by
+   * lib/sites.ts publishSite and never cleared (unpublish / publish again keep it). Absent on records
+   * from before G060 (lib/panel/rights.ts effectiveRights derives it from publishedAt).
+   */
+  firstPublishedAt?: string | null;
+  /** Name and date change bookkeeping after the first publish (G060). Absent before the first publish. */
+  identity?: IdentityRights | null;
+  /** Support extension of the archive date (YYYY-MM-DD: the site is archived from 00:00 of that day, site time zone). */
+  archiveOverrideAt?: string | null;
+}
+
+/** One name of the couple as the edit-rights rule sees it (docs/16 §11.2). */
+export interface IdentityName {
+  /** partners[i].display_name */
+  display: string;
+  /** partners[i].full_name ("" when empty) */
+  full: string;
+}
+
+/** The identity fields of a site: names, the names line, the monogram and the wedding date (docs/16 §11.2). */
+export interface Identity {
+  names: IdentityName[];
+  /** name_display ("" when empty) */
+  shown: string;
+  initials: string;
+  /** ISO YYYY-MM-DD */
+  date: string;
+}
+
+export type IdentityLogKind = 'first_publish' | 'typo' | 'change' | 'grant' | 'archive_override';
+
+export interface IdentityLogEntry {
+  at: string;
+  kind: IdentityLogKind;
+  /** The identity written (typo / change). */
+  to?: Identity;
+  by: 'buyer' | 'support';
+  note?: string;
+}
+
+/** Stored with the site after its first publish (G060). Kept with the site and deleted with it. */
+export interface IdentityRights {
+  /** The last COUNTED identity (first publish, or the last change that used a right). Typo fixes do not move it. */
+  anchor: Identity;
+  /** Changes included with the purchase (IDENTITY_CHANGE_LIMIT, 3). */
+  limit: number;
+  /** Extra changes added by support (scripts/grant-identity-change.ts). */
+  granted: number;
+  used: number;
+  /** Newest last; at most the last 50 entries. */
+  log: IdentityLogEntry[];
+}
+
+/** Fields of a site record that patchSite() can set in one conditional write. Keys left out are not touched. */
+export interface SitePatch {
+  content?: ContentRecord;
+  firstPublishedAt?: string | null;
+  identity?: IdentityRights | null;
+  archiveOverrideAt?: string | null;
+}
+
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt'] as const satisfies ReadonlyArray<keyof SitePatch>;
+
+/** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
+export function applySitePatch(site: SiteRecord, patch: SitePatch): void {
+  for (const key of SITE_PATCH_KEYS) {
+    if (Object.prototype.hasOwnProperty.call(patch, key)) {
+      (site as unknown as Record<string, unknown>)[key] = structuredClone(patch[key]) ?? null;
+    }
+  }
+}
+
+export interface WriteOptions {
+  /** Write only if the site still has this updatedAt; otherwise throw StaleSiteError and write nothing. */
+  expectedUpdatedAt?: string;
 }
 
 export interface NewSite {
@@ -61,6 +137,8 @@ export interface PublishOptions {
    * otherwise throw StaleSiteError and change nothing.
    */
   expectedUpdatedAt?: string;
+  /** Extra fields written in the SAME write (G060: firstPublishedAt + identity on the first publish). */
+  set?: Omit<SitePatch, 'content'>;
 }
 
 /**
@@ -144,6 +222,13 @@ export interface DataAdapter {
   createSite(input: NewSite): Promise<SiteRecord>;
   /** Replaces the draft content (autosave). Does not touch publishedContent. Throws NotFoundError. */
   updateContent(id: string, content: ContentRecord): Promise<SiteRecord>;
+  /**
+   * Sets the patch's fields (draft content and/or edit-rights bookkeeping, G060) in ONE write.
+   * With opts.expectedUpdatedAt the write is conditional: StaleSiteError (nothing written) when the
+   * site changed since the caller read it — this is what keeps a rights counter and the content in step
+   * when two tabs send at once. Throws NotFoundError.
+   */
+  patchSite(id: string, patch: SitePatch, opts?: WriteOptions): Promise<SiteRecord>;
   /**
    * publishedContent := content, status := published. Throws NotFoundError; with
    * opts.expectedUpdatedAt, throws StaleSiteError (and writes nothing) when the site changed since.

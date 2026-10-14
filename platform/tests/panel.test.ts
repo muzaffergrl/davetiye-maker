@@ -11,6 +11,7 @@ import { GET as stateRoute, PUT as saveRoute } from '../app/api/edit/[slug]/rout
 import { POST as photoRoute } from '../app/api/edit/[slug]/photo/route.ts';
 import { POST as publishRoute } from '../app/api/edit/[slug]/publish/route.ts';
 import { POST as unpublishRoute } from '../app/api/edit/[slug]/unpublish/route.ts';
+import { POST as identityRoute } from '../app/api/edit/[slug]/identity/route.ts';
 import { GET as siteRoute } from '../app/[slug]/route.ts';
 import { GET as mediaRoute } from '../app/media/[...path]/route.ts';
 import type { ContentRecord } from '../lib/content/types.ts';
@@ -79,6 +80,7 @@ function suffixOf(h: Handler): string {
     SUFFIX.set(photoRoute, '/photo');
     SUFFIX.set(publishRoute, '/publish');
     SUFFIX.set(unpublishRoute, '/unpublish');
+    SUFFIX.set(identityRoute, '/identity');
   }
   return SUFFIX.get(h) ?? '';
 }
@@ -499,8 +501,20 @@ test('after publishing: draft edits stay private until the next publish; unpubli
   assert.equal(s.status, 'published');
   const c = structuredClone(s.content);
   c.name_display = 'Elena & Marco Rossi';
+  // G060: after the first publish an autosave keeps the names (they change only through /identity).
   const saved = await save(c, s.updatedAt);
-  assert.equal(saved.data.hasUnpublishedChanges, true);
+  assert.equal(saved.status, 200);
+  assert.equal(saved.data.identityKept, true);
+  assert.equal(saved.data.identity.shown, 'Elena & Marco');
+  assert.equal(saved.data.hasUnpublishedChanges, false);
+  const changed = await call(identityRoute, 'panel-site', {
+    key: site.editKey,
+    json: { identity: { ...saved.data.identity, shown: 'Elena & Marco Rossi' }, baseUpdatedAt: saved.data.updatedAt, intent: 'change' },
+  });
+  assert.equal(changed.status, 200, JSON.stringify(changed.data));
+  assert.equal(changed.data.result, 'change');
+  assert.equal(changed.data.rights.remaining, 2);
+  assert.equal(changed.data.hasUnpublishedChanges, true);
   assert.equal(cheerio.load((await publicPage()).html)('h1').text(), 'Elena & Marco');
 
   const again = await call(publishRoute, 'panel-site', { key: site.editKey });
@@ -698,7 +712,9 @@ test('small helpers: aspect parsing, issue sections, key-order-free comparison, 
   assert.equal(parseAspect('1.5'), 1.5);
   assert.equal(parseAspect('wide'), null);
   assert.equal(parseAspect(undefined), null);
-  assert.equal(sectionForPath('partners.1.display_name'), 'couple');
+  assert.equal(sectionForPath('partners.1.display_name'), 'names');
+  assert.equal(sectionForPath('urls.map'), 'venue', 'G060: the map link lives under Venue');
+  assert.equal(sectionForPath('optional_blocks.our_story'), 'story', 'G060: each switch lives next to its content');
   assert.equal(sectionForPath('schedule.2.time'), 'schedule');
   assert.equal(sectionForPath('urls'), 'details');
   assert.equal(sectionForPath('media.memory_photos'), 'photos');
