@@ -36,6 +36,8 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts   # build sonr
                        # axe-core/1280 (104 kontrol; çıktı previews/g060/ ya da $G060_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g069-browser.ts   # build sonrası: RSVP paneli v2 — 03/01 formunda adlar, Guests özeti,
                        # cevap dökümü, New + Mark as seen, Add/Edit reply, CSV kişi satırları, yazdırma + A4/Letter PDF (60 kontrol; previews/g069/)
+NODE_PATH=/opt/node22/lib/node_modules node tests/g075-browser.ts   # build sonrası: teşekkür modu (G075) — 01 ve 03, 360/390/430/1280 misafir
+                       # sayfaları, kapalı RSVP + API 403, panel yolculuğu (mod, mesaj, önizleme, yayın), Home kartı (previews/g075/ ya da $G075_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts [--theme <id>]   # build sonrası: son duman testi, 390 px — misafir (zarf → home →
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts [--theme <id>]   # build sonrası: G051, 390 px — takvim düğmeleri + .ics,
@@ -108,7 +110,8 @@ tests/                             *.test.ts (node:test)
 previews/                          _sample tohum sitesinin 390 px görüntüleri + checks.json; g039/ = panel akışı (PNG/JPG + MP4);
                                    g045/ = /start akışı; final/ = son duman testi (tests/final-smoke.ts, blush-garden-rose, 390 px);
                                    g051/ = takvim, SSS, RSVP özel soruları, panel düzenleyicileri (tests/g051-browser.ts, 390 px);
-                                   g060/ = panel v2 yolculuğu 390 × 844 (MP4) + 1280/1000 (tests/g060-browser.ts)
+                                   g060/ = panel v2 yolculuğu 390 × 844 (MP4) + 1280/1000 (tests/g060-browser.ts);
+                                   g075/ = teşekkür modu: iki tema misafir sayfaları, kapalı RSVP, panel bölümü, Home kartı (tests/g075-browser.ts)
 previews/g038/                     blush-garden-rose: sayfa görüntüleri, G035 karşılaştırması, açılış MP4'ü, checks.json
 previews/g401/                     olive-ivory: sayfa görüntüleri, compare_<sayfa>_390.jpg (W1 comp | tema), açılış MP4'ü,
                                    checks.json; final/ = final-smoke --theme olive-ivory
@@ -288,7 +291,7 @@ const data = JSON.parse(document.getElementById('site-data').textContent);
 // data.slug, data.theme, data.variant, data.page, data.preview
 // data.pages      {index: "/clara-and-julian", home: "/clara-and-julian/home", …}  (önizlemede ?preview= ile)
 // data.derived    {date_display, date_long, date_weekday, ceremony_time_display, rsvp_deadline_display,
-//                  venue_city_region, venue_city_region_country, countdown_target_utc}
+//                  venue_city_region, venue_city_region_country, countdown_target_utc, thank_you_on (G075)}
 ```
 
 **İçerik kaydı ve foto haritası bilerek YOK** (önceden `data.content` / `data.photos` vardı): çiftin kapattığı bölümler (hikâye
@@ -311,17 +314,18 @@ Yollar noktalıdır: `venue.name`, `schedule.0.time`, `story.items.1.caption`.
 | `data-photo="anahtar"` | `theme.json` `photos.<anahtar>.source` yolundaki foto; `<img>` → `src`, diğer öğeler → `style="--photo: url(…)"` |
 | `data-url="map"` | `<a>` `href` = `urls.map` (kurallar `data-field="urls.*"` ile aynı) |
 | `data-optional="anahtar"` | `optional_blocks.anahtar === true` değilse öğe **kaldırılır**. `<html>`/`<body>` üzerindeyse sayfa 404 |
-| `data-if="yol"` / `data-if="!yol"` | Değer boş değilse (boşsa) öğe kalır; `<body>` üzerinde sayfa düzeyinde çalışır |
+| `data-if="yol"` / `data-if="!yol"` | Değer boş değilse (boşsa) öğe kalır; `<body>` üzerinde sayfa düzeyinde çalışır. G075: **boşlukla ayrılmış birden çok koşul** — hepsi tutmalı (`data-if="dress_code !thank_you_on"`); çıktıda koşullar mutlak yollarıyla aynı sırada kalır |
 | `data-repeat="schedule"` | Öğe listedeki her eleman için çoğaltılır; içeride `.time`, `.label`, `data-if=".location"` göreli yollar. Boş listede öğe kalkar. Kopya `data-repeat-item="schedule.2"` alır |
 | `data-attr-<ad>="yol"` | Öznitelik = ham değer (ör. `datetime`); `{…}` içeriyorsa şablon. İzinli adlar: `alt`, `title`, `content`, `aria-label`, `datetime`, `value`, `placeholder`, `data-*` (motor işaretleri hariç). Yer tutucu gösteren foto `<img>`'sinde `data-attr-alt` uygulanmaz (`alt=""`, süs) |
 | `data-calendar="ics\|google"` | (G051) Yalnız `<a>`. `ics` → `href="/<slug>/event.ics"` (önizlemede `?preview=` ile), `google` → Google Calendar şablon linki (`target` varsa `rel="noopener noreferrer"`). İçerikte okunur tarih yoksa öğe **kaldırılır**; bilinmeyen değer ya da `<a>` dışı öğe → uyarı + kaldırılır |
 
 Türetilmiş alanlar (`data-field` ile kullanılabilir): `date_weekday`, `date_long`, `venue.city_region`,
-`venue.city_region_country`, `countdown_target_utc`.
+`venue.city_region_country`, `countdown_target_utc`; G075: `thank_you_on`, `thank_you_title`, `thank_you_hides_details` (aşağıda
+"Teşekkür modu").
 
 Çıktıda `data-field` / `data-if` yolları mutlak yola çevrilir (panel canlı önizlemesi için). Önizlemede platform fotoğrafları
 (`/media/…`) `?preview=<anahtar>` alır (yayında olmayan foto herkese açık değil).
-`<html>` öğesine `data-theme`, `data-page`, varsa `data-variant`, önizlemede `data-preview="true"` eklenir.
+`<html>` öğesine `data-theme`, `data-page`, varsa `data-variant`, önizlemede `data-preview="true"`, teşekkür modunda `data-thank-you` (G075) eklenir.
 
 G035 kaynağı (`collections/03_Blush_Garden_Rose/website/*.html`) bu motorla uyarısız işleniyor (test:
 `tests/engine.test.ts`, "G035 source pages"); platform teması hâli `themes/blush-garden-rose/` (G038, aşağıda).
@@ -495,7 +499,7 @@ Misafir tarafı (herkese açık, yalnız JSON):
 
 | İstek | Yanıt |
 |---|---|
-| `GET /api/rsvp/<slug>` (`?preview=<önizleme anahtarı>` taslağı okur) | `200 {ok, open, reason: null\|"deadline"\|"disabled", message, closesAt, deadline: "April 3, 2027", maxGuests, preview}` · `404` |
+| `GET /api/rsvp/<slug>` (`?preview=<önizleme anahtarı>` taslağı okur) | `200 {ok, open, reason: null\|"deadline"\|"disabled"\|"thank_you", message, closesAt, deadline: "April 3, 2027", maxGuests, preview}` · `404` |
 | `POST /api/rsvp/<slug>` `Content-Type: application/json`, ≤ 8 KB: `{name, email, attending, guests, message, answers?, website}` | `200` success · `400` invalid (+`fields`) · `403` closed · `404` · `413` · `415` · `429` (+`Retry-After`) · `500` |
 
 Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields?}`. Kurallar (`lib/rsvp/`):
@@ -504,7 +508,8 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 - `maxGuests`: tema `theme.json` → `"rsvp": {"max_guests": N}` (1..20); yoksa 10. (Fixture: 6.)
 - **Son tarih:** `rsvp.deadline` gününün **sonu**, sitenin `timezone`'unda (ertesi gün 00:00; o gece saat 00:00'da ileri alınıyorsa —
   Asia/Beirut, Africa/Cairo — 01:00, hiç erken değil: `zonedTimeToUtc` Temporal "compatible" kuralı). Saat dilimi geçersizse
-  UTC-12 (kimse erken geri çevrilmez). `rsvp.method: "none"` → form kapalı (`reason: "disabled"`).
+  UTC-12 (kimse erken geri çevrilmez). `rsvp.method: "none"` → form kapalı (`reason: "disabled"`). **Teşekkür modu** (G075) → form
+  kapalı, `403 {code: "closed", reason: "thank_you"}`, son tarihten önce de (sıra: disabled → thank_you → deadline).
 - **Özel sorular (G051):** `answers` = `{<soru id>: değer}`; sorular yayındaki içeriğin `rsvp.questions`'ı. `choice` → seçeneklerden biri
   (yoksa `400`, `fields["answer:<id>"]` = "Please choose one of the options."), `text` → ≤ 300 karakter (`ANSWER_MAX`). Cevaplamamak
   serbest (zorunlu soru yok); bilinmeyen id yok sayılır. Sorular **katılan** misafire: `attending: no` → cevap saklanmaz. Kayıt
@@ -938,6 +943,44 @@ Bilinen sınırlar: kısa şifre (ör. 4 rakam) kararlı bir saldırgana karşı
 olasılık); şifre açılmadan önce paylaşılan bir fotoğraf URL'si Vercel CDN'de en çok 5 dk daha servis edilebilir (eski
 `public, s-maxage=300`); gerçek telefonda (iOS Safari / Android Chrome) ve gerçek Vercel Blob deposunda denenmedi;
 bağlantı önizlemesi (WhatsApp/iMessage) kazıyıcılarıyla denenmedi.
+
+## Teşekkür modu (G075, K28)
+
+Düğünden sonra misafir aynı linke döndüğünde davet yerine **teşekkür sayfası** görür; site 12 ay sonra arşivlenene kadar (K25, G060)
+anlamlı kalır. Görev: `gorevler/G075-tesekkur-modu.md`. Tema kuralı: `docs/11` §3.6.
+
+- **İçerik** (`docs/03_URUN_ICERIK_SEMASI.json`, hepsi isteğe bağlı): `thank_you = {mode: auto|on|off, title (≤ 60), message (≤ 400),
+  photo, details: keep|hide}`. Yoksa = `auto`, varsayılan başlık "Thank you for celebrating with us", mesaj/foto yok, Details kalır.
+  Sınırlar şemada + `CONTENT_LIMITS.thankYouTitle/thankYouMessage` (eşlik testi `g055-review`).
+- **Kural** (`lib/content/thank-you.ts`, saf; sunucu + panel): `auto` = düğün gününün **sonu** sitenin saat diliminde (ertesi gün 00:00;
+  `zonedTimeToUtc` — yaz saati geçişinde var olmayan gece yarısı 01:00 olur, iki kez yaşanan gece ikincisinden sonra; hiç erken değil);
+  geçersiz saat diliminde UTC-12 ("anywhere on earth"); okunamayan tarihte kendiliğinden hiç açılmaz. `on` = hemen, `off` = hiç (arşive
+  kadar davet). Arşiv kuralları değişmedi: arşivde 410, hangi mod olursa olsun.
+- **Görünüm:** motor `buildView(content, {now, thankYou})` ile `thank_you_on`, `thank_you_title`, `thank_you_hides_details` türetir; tema
+  bunlarla `data-if` yazar (yeni sayfa yok); `<html data-thank-you>`; `site-data.derived.thank_you_on`. Teşekkür modunda şifreli sitenin
+  bağlantı önizlemesi "Thank you for celebrating with us" der (çiftin kendi başlığı değil; şifre sayfası önce gelir, G076). Tema demosu
+  (`/start/demo`) hep davet gösterir (kurgu tarih geçse de).
+- **RSVP:** `rsvpWindow` → `reason: "thank_you"`; misafir `GET` kapalı, `POST` **403** `{code: "closed", reason: "thank_you"}`, hiçbir şey
+  saklanmaz. Çiftin paneli (Guests) "Replies are closed: your website shows its thank-you page." der; çiftin elle eklediği yanıt eskisi gibi.
+- **Fotoğraf:** `thank_you.photo` `/media/…` rotasından yalnız teşekkür modu açıkken herkese açık (öncesinde hiçbir sayfada yok → 404).
+  Panelde yükleme `POST /api/edit/<slug>/photo?slot=thank_you` (yalnız teşekkür hâli olan temada; yoksa `400 unknown_slot`), kırpma
+  `hero_portrait` oranında (aynı kart penceresi); Photos sayfasında ve hazırlık yüzdesinde sayılmaz.
+- **Panel (K29: 7. sayfa yok):** Day & place'in sonunda açılır bölüm **"After the wedding"** (`components/panel/ThankYou.tsx`, başlıkta
+  Automatic/On/Off): "Thank-you mode" (Automatic — "From Sunday, June 13, 2027" / On now / Off), ne zaman ne göreceklerini söyleyen tek satır,
+  Title, Your message, Photo (yoksa "the design's own decoration"), "The Day page: Keep it / Hide it", **"Preview the thank-you page"**
+  (önizleme `?thanks=1` — yalnız önizleme anahtarıyla, sayfalar arası korunur; başlıkta "Show the invitation"). Değişiklikler her düzenleme
+  gibi otomatik kaydedilir ve "Unpublished changes" şeridine girer; Review sayfanın içindeki değişen bölümü de yazar ("Day & place ·
+  After the wedding"). Yayındaki site teşekkür modundayken Home'da **"Your website switched to thank-you mode"** kartı ("Edit the
+  thank-you page" → `#edit/thankyou`). Yalnız tema `thank_you_on` kullanıyorsa (`themeFieldUse().thankYou`).
+- **Temalar:** 01 `olive-ivory` (kart penceresinde foto yoksa kâğıt + botanik mühür ve monogram), 03 `blush-garden-rose` (sis + kurdele);
+  stiller `thank-you.css` (yalnız teşekkür modunda yüklenir). 02, 04, 05 henüz yok: `scripts/theme-check.cjs` **uyarı** verir
+  (`lib/theme/thank-you-support.ts`).
+
+Testler: `tests/g075-thank-you.test.ts` (node:test, 18): saat dilimi sınırı (New York, Londra, Beyrut boşluğu, Santiago iki yön, Sydney,
+UTC+14/−11, yıl sonu, geçersiz bölge; 1 ms önce/sonra), modlar, başlık/türetilmiş alanlar, şema sınırları, çoklu `data-if`, RSVP kuralı,
+iki temada beş sayfa (kart, foto/süs, mesaj kaçışı, kapalı RSVP, Details kalır/gizlenir, nav, meta, `thank-you.css`), gizlilik (öncesinde
+kaynakta iz yok), `?thanks=1`, gerçek rotalar (kendiliğinden geçiş, API 403, On/Off, 404 Details, arşiv 410, şifre, foto, demo), panel API
+(kayıt, şekil reddi, sınır yayını engeller, foto yeri), panel yardımcıları, theme-check kuralı. Tarayıcı: `tests/g075-browser.ts`.
 
 ## /start sahiplenme akışı (G045)
 
