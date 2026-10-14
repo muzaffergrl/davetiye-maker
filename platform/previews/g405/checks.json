@@ -1,9 +1,7 @@
 {
  "base": "next start (production build)",
  "theme": "mediterranean-lemon",
- "errors": [
-  "nav in the envelope → home view transition 390×844: the nav's label row is not the settled nav at 0 ms (94.73 % of the pixels differ), 120 ms (85.27 % of the pixels differ) — the envelope page reads through between the labels (nav animations: none; e.g. ::view-transition-new(site-nav):only-child { animation: none; })"
- ],
+ "errors": [],
  "warnings": [],
  "passed": [
   "fonts: Google Fonts link with 2 families (Allura, Playfair Display), display=swap",
@@ -77,7 +75,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 489, nav top 307)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 62×44, home \"Replay the envelope\" 229×47, rsvp \"Replay the envelope\" 190×47",
-  "envelope → /isabella-and-marco/home in 4385 ms, card transition flag set",
+  "envelope → /isabella-and-marco/home in 4413 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (13 steps)",
   "countdown target from the platform: 2027-06-12 16:00 Europe/Rome = 2027-06-12 14:00 UTC",
@@ -91,12 +89,13 @@
   "RSVP: \"Send another reply\" reopens the form",
   "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
   "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
   "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
   "Skip → home",
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-12T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-17T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (198 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (349 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -120,7 +119,7 @@
   "home first view (390×844, DPR 3, placeholders): 884 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 971 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1141 KB",
-  "recording: previews/g405/opening_390x844.mp4 (3378 KB, lead-in 0.57 s cut, first frame mean 218,217,205) — tap → opening → home → story → details"
+  "recording: previews/g405/opening_390x844.mp4 (3199 KB, lead-in 0.84 s cut, first frame mean 218,218,205) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -461,13 +460,13 @@
      "bottom": 463
     },
     "bad": [
-     "span.cd-num \"350\" bottom 587",
+     "span.cd-num \"349\" bottom 587",
      "span.cd-lbl \"Days\" bottom 602",
-     "span.cd-num \"00\" bottom 587",
+     "span.cd-num \"23\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 602",
-     "span.cd-num \"09\" bottom 587",
+     "span.cd-num \"50\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 602",
-     "span.cd-num \"10\" bottom 587",
+     "span.cd-num \"59\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 602"
     ],
     "partly": [],
@@ -531,13 +530,13 @@
     },
     "bad": [
      "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 672",
-     "span.cd-num \"241\" bottom 716",
+     "span.cd-num \"240\" bottom 716",
      "span.cd-lbl \"Days\" bottom 731",
-     "span.cd-num \"00\" bottom 716",
+     "span.cd-num \"23\" bottom 716",
      "span.cd-lbl \"Hours\" bottom 731",
-     "span.cd-num \"08\" bottom 716",
+     "span.cd-num \"50\" bottom 716",
      "span.cd-lbl \"Minutes\" bottom 731",
-     "span.cd-num \"52\" bottom 716",
+     "span.cd-num \"39\" bottom 716",
      "span.cd-lbl \"Seconds\" bottom 731",
      "a.btn \"RSVP\" bottom 790"
     ],
@@ -563,13 +562,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 638",
      "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 660",
-     "span.cd-num \"241\" bottom 698",
+     "span.cd-num \"240\" bottom 698",
      "span.cd-lbl \"Days\" bottom 713",
-     "span.cd-num \"00\" bottom 698",
+     "span.cd-num \"23\" bottom 698",
      "span.cd-lbl \"Hours\" bottom 713",
-     "span.cd-num \"08\" bottom 698",
+     "span.cd-num \"50\" bottom 698",
      "span.cd-lbl \"Minutes\" bottom 713",
-     "span.cd-num \"46\" bottom 698",
+     "span.cd-num \"33\" bottom 698",
      "span.cd-lbl \"Seconds\" bottom 713",
      "a.btn \"RSVP\" bottom 769"
     ],
@@ -593,13 +592,13 @@
      "bottom": 306
     },
     "bad": [
-     "span.cd-num \"241\" bottom 424",
+     "span.cd-num \"240\" bottom 424",
      "span.cd-lbl \"Days\" bottom 441",
-     "span.cd-num \"00\" bottom 424",
+     "span.cd-num \"23\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 441",
-     "span.cd-num \"08\" bottom 424",
+     "span.cd-num \"50\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 441",
-     "span.cd-num \"39\" bottom 424",
+     "span.cd-num \"27\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
@@ -622,13 +621,13 @@
      "bottom": 489
     },
     "bad": [
-     "span.cd-num \"241\" bottom 414",
+     "span.cd-num \"240\" bottom 414",
      "span.cd-lbl \"Days\" bottom 431",
-     "span.cd-num \"00\" bottom 414",
+     "span.cd-num \"23\" bottom 414",
      "span.cd-lbl \"Hours\" bottom 431",
-     "span.cd-num \"08\" bottom 414",
+     "span.cd-num \"50\" bottom 414",
      "span.cd-lbl \"Minutes\" bottom 431",
-     "span.cd-num \"33\" bottom 414",
+     "span.cd-num \"21\" bottom 414",
      "span.cd-lbl \"Seconds\" bottom 431",
      "a.btn \"RSVP\" bottom 489"
     ],
@@ -636,7 +635,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4385,
+  "envelope_to_home_ms": 4413,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -648,11 +647,11 @@
    "frames": [
     {
      "t": 0,
-     "differ": "94.73 %"
+     "differ": "0.00 %"
     },
     {
      "t": 120,
-     "differ": "85.27 %"
+     "differ": "0.00 %"
     }
    ]
   },
@@ -766,7 +765,7 @@
     113712
    ],
    [
-    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/681fcfa58c632e788fcd92913f2665b5-640w.jpg",
+    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/0e6de1efafcd4420b828c87119dd30bf-640w.jpg",
     98482
    ],
    [
@@ -805,11 +804,11 @@
     113712
    ],
    [
-    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/e77ef65d37ef1a8f4bf1312e26222b7d-640w.jpg",
+    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/e7efc311f6f1b45975075d46d95229b2-640w.jpg",
     100571
    ],
    [
-    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/681fcfa58c632e788fcd92913f2665b5-640w.jpg",
+    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/0e6de1efafcd4420b828c87119dd30bf-640w.jpg",
     98482
    ],
    [
@@ -821,16 +820,16 @@
     74228
    ],
    [
-    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/5ad073d2ec9d806c9155ddb45a2dd803-640w.jpg",
+    "/media/33c6bcc9-f221-42f3-bc48-631f9ec21b94/18bacf3b4653123d32c72fd5da825286-640w.jpg",
     71048
    ]
   ],
-  "video_kb": 3378,
+  "video_kb": 3199,
   "video_first_frame": {
-   "lead_in_s": 0.57,
+   "lead_in_s": 0.84,
    "mean_rgb": [
     218,
-    217,
+    218,
     205
    ],
    "stdev": 62

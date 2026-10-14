@@ -884,7 +884,7 @@ test('smooth scrolling only for the RSVP page\'s #reply jump, never with reduced
   const { $ } = render('rsvp');
   assert.equal($('#reply').length, 1, 'the RSVP page has the #reply target');
   assert.equal($('a[href="#reply"]').length, 1);
-  for (const page of ['index', 'home', 'story', 'details']) assert.equal(render(page).$('#reply').length, 0, `${page}: no #reply, no smooth scroll`);
+  for (const page of ['index', 'home', 'story', 'details'] as const) assert.equal(render(page).$('#reply').length, 0, `${page}: no #reply, no smooth scroll`);
 });
 
 test('13 site.js: reads #site-data, navigates with the page map, per-site session keys = <head> scripts, DEV_CONTENT = demo', () => {
