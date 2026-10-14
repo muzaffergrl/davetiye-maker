@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 37 · alindi 0 · inceleme 1 · blokaj 296 · bitti 33 · toplam 367
+Özet: hazir 38 · alindi 0 · inceleme 1 · blokaj 296 · bitti 33 · toplam 368
 
 ## claude-canva
 
@@ -244,7 +244,7 @@ Bağımlılık bekleyen: 0 · Biten: 1
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 18 · Biten: 23
+Bağımlılık bekleyen: 19 · Biten: 23
 
 ## claude-metin
 
