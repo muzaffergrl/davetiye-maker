@@ -2,7 +2,7 @@
 id: G205
 baslik: Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: codex-gpt-gorsel
 oncelik: 1
 bagimli: []
@@ -52,3 +52,4 @@ Tasarım 05'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 alindi: codex-gpt-gorsel
 - 2026-10-14 devam: codex-gpt-gorsel; main güncellendi, G204 teslimi doğrulandı; G205 W1 ekranları tamamlandı (RSVP v2 seçildi), W2 ve fotoğraflar sürüyor.
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı

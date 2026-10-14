@@ -31,6 +31,25 @@ platforma bağlama. **Belge karar değildir, öneridir.** Kararlar kullanıcın�
 
 ---
 
+## 0. K26 güncellemesi (2026-10-14)
+
+- **Ad:** kullanıcı adında **BKE** istiyor; Seal & Story ve yedekleri düştü. Çalışma adı **BKE Studio** (Etsy `BKEStudio`, 9 karakter).
+  Kesin onaydan sonra satış sitesi, "Made with" alt bilgisi ve `PROJECT_STATE.brand_name` doldurulur.
+- **Alan adı [Ölçüm]:** `get_bulk_availability` — bkestudio.com, bkestudio.co, bke.studio, bkeinvites.com, bkeinvite.com,
+  bkeweddings.com, bkeatelier.com, bkepaper.com, bkeevents.com **müsait**; bkestudios.com alınmış. **Satın alma yok** (K26).
+- **Çakışma [R-özet]:** ABD'de **BKE**, Buckle'ın giyim markası; Buckle Brands adına giyim, kozmetik ve takı sınıflarında
+  BKE / BKE LOUNGE / BKE SPORT / BOUTIQUE BY BKE kayıtları görünüyor (Justia özeti). Sektör farklı (dijital düğün sitesi), risk
+  düşük ama sıfır değil: Buckle'a benzeyen logo/yazı stili kullanılmaz, ad her yerde "BKE Studio" olarak ikinci kelimeyle yazılır.
+  Resmi USPTO/TÜRKPATENT araması yapılmadı. "BKEStudio" adıyla Etsy dükkânı arama özetinde çıkmadı (Etsy bu ortamdan açılamıyor).
+- **Destek e-postası:** Gmail (öneri `bkestudio.help@gmail.com`; müsaitliği hesap açılırken görülür). Alan adı alınmadığı için
+  Resend şimdilik yok; düzenleme linki ekranda gösterilir. Linki e-postayla göndermek için ileride Gmail SMTP (uygulama şifresi,
+  kullanıcının tek seferlik onayı) ya da alan adı + Resend.
+- **"Yüksek liste fiyatı + %50 indirim" sorusu:** öneri değişmedi (risk 7). Kalıcı indirim yerine düz $29.40; yılda 3–4 kez
+  **gerçek, süreli** kampanya (%25–40, en çok 30 gün; Black Friday, Aralık–Şubat nişan sezonu, ilkbahar). Kampanya dışı dönemde
+  normal fiyattan satış yapıldığı için üstü çizili fiyat gerçek olur. Kalıcı %50 seçilirse risk kullanıcıya açıkça yazılır.
+
+---
+
 ## 1. Özet ve önerilen kararlar
 
 | Konu | Öneri | Kısa gerekçe |
