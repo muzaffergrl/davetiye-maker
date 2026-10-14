@@ -21,7 +21,7 @@ zamanlama, kart oranları ve bölüm sırası bu tasarımın.
 | `details.html` | W1.4: Order of the Day kartı (info_card, 3 dilim; gün · tarih başlığı kartın içinde, program satırları + aralarında GPT dal), mekân (yatay baskı, kartın altına eğik), dress code, takvime ekle, harita / Travel & Stay / Registry (yalnız linkle), SSS |
 | `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim) + kartın alt kenarına basılmış mühür, platform yanıt formu (G042 + G051 soruları), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`fly-l/fly-r/fly-b` + `--settle` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri, kısa yatay düzen |
-| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim + home ilk ekranı (`fitNames` + `fold`), kart kopyası (`fitCopy`), davet kartı (`fitInvite`), tarih satırı (`stack`), geri sayım, zarf, `DEV_CONTENT` + `devRender` |
+| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim + home ilk ekranı (`fitNames` + `fold`), iç sayfaların ilk ekranı (`foldAll`, `[data-fold]`), kart kopyası (`fitCopy`), davet kartı (`fitInvite`), tarih satırı (`stack`), geri sayım, zarf, `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri ve temizliği |
 | `img/` | WebP katmanlar, `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` (servis edilmez) |
 
@@ -116,8 +116,14 @@ Alt metinler içerikten.
   320/360/390/430/768/1280'de hiçbir baskının altında kalmıyor (ölçüm: başlık bölgesi öteki baskılar gizlenerek karşılaştırıldı,
   %0 fark). Telefonda baskı 66vw, foto penceresi 66 × 0,755 = **50vw** (≥ 38vw); ≥ 760 px'te comp dizilişi (iki üstte, biri altta
   ortada). Yana kaydırma yok (ipucu gerekmez).
-- **Parçacıklar:** açılış 1 okaliptüs yaprağı · home'a varış 2 küçük beyaz çiçek (accent_2; hero fotoğrafının iki yanındaki
-  şeritlerden, fotoğrafın/yüzlerin üstünden asla: `avoid: '.hero [data-slot]'`) · RSVP kapanışı 2 çiçek + 1 yaprak.
+- **Parçacıklar:** açılış 1 okaliptüs yaprağı (`avoid: '.env .card'`, her açılışta tam bir) · home'a varış 2 küçük beyaz çiçek
+  (accent_2) · RSVP kapanışı 2 çiçek + 1 yaprak. Varış ve kapanışta katman **bölümün içinde, yazının arkasında** (G402 QA:
+  `host`, `.accent-layer.in-host` z 0, yazı z 1); her parçacık 8 denemenin en uzun serbest düşüşünü alır (taraflar sırayla) ve
+  yolundaki ilk kutunun (`avoid`: hero kartı, hap, sayaç hücreleri / kapanış dalı) ya da yazının (`ink`: satırların kendi
+  kutuları) 8 px üstünde söner; 120 px'ten kısa yol → o parçacık çizilmez. Form kapanış bölümünün dışında: parçacık forma
+  girmez; kapanış yazıları kendi genişliğinde (`fit-content`), yatay hero'da metin ızgarada ortalı. Ölçüm (QA'nın parçacık
+  betiği: merkezi hedef kutuda ve alanının > %30'u üst üste olan kareler): 390×844, 360×640, 844×390, 1280×800'de home ve
+  RSVP'de **0 kare** (önce textarea 264, "Thank you" 141, isimler 30–51 kare).
 - Hareket azaltma (`prefers-reduced-motion`): açılış atlanır, girişler hareketsiz.
 
 ## Home ilk ekranı (hero) ve yatay telefon
@@ -157,6 +163,37 @@ solda `clamp(240px, 24vw, 340px)`, metin sağda, isimler 1280'de 88 px) — dar 
   - §12 stres kaydı (40 karakter isimler, 80 karakter mekân): isimler 36 px tabanında (932×430'da 38,8); 360×640, 375×667,
     740×360, 844×390'da `.is-long` + `fold`; hiçbir boyutta yarım parça yok.
   - `theme-check --stress` aynı kuralı 360×640, 375×553, 844×390, 667×375'te üç kayıtla denetler (geçti).
+- **Önizleme çubuğu** (paylaşılan önizleme linki, G402 QA): yatay telefonda hero kartı da çubuğu düşer (`--bar`; kart ≥ 120 px
+  yalnız bu durumda, kopyası ≥ 11 px ya da satır düşer). Kart kopyasının el yazısı satırı da ≥ 11 px (`max(11px, 10.4cqw)`).
+
+## İç sayfalar: ilk ekran kuralı (G402 QA)
+QA kapısı ilk ekran kuralının yalnız home hero'da uygulandığını buldu (story baskıları, details mekân fotoğrafı / program
+satırı, RSVP mührü ve yatayda başlıklar nav çizgisinde kesiliyordu). Artık story, details, rsvp ve home'da hero'dan sonraki
+davet bölümü de aynı kurala uyar (`site.js` `foldAll`):
+- **İşaretler:** `[data-fold]` = bir parça; `data-fold="join"` bir öncekiyle birlikte taşınır (kart başlığı + tarih, "Kindly reply
+  by" + tarih, "With love," + isimler + mühür, kapanış başlığı + satırları); kartın son parçası kartın alt kenarını taşır (kartın
+  çerçevesi nav çizgisinde kesilmez). `[data-fold-group]`: story'de `main` (`"center"`), details'te `main`, rsvp'de kart / form /
+  kapanış ayrı (≥ 960 px iki sütun).
+- **Algoritma:** nav çizgisini (nav bandının 8 px üstü) kesen ya da ilk ekranda nav'ın arkasında kalan ilk parça ilk ekranın
+  12 px altından başlar. Boşalan yer gruptaki üst aralıklara dağılır (aralık başına ≤ 28 px; üstteki parçalar yine nav'ın
+  üstünde kalır); `"center"` grubunda kalanın yarısı başlığın üstüne → küçük telefonda story başlığı ilk ekranda ortalı bir
+  kapak, uzun kartta ilk ekran bir satır sınırında biter ve satırlar eşit aralıkla yayılır. Ölçüm `offsetTop` ile (giriş
+  dönüşümleri sayılmaz) + döndürülmüş baskının kutusu, tam piksel yuvarlaması için 2 px pay; yazı tipleri, `load` ve boyut
+  değişiminde yeniden. Dal görselleri oranlarını baştan ayırır (`aspect-ratio: 300 / 65`): yüklenince kayma yok. Ekran dışından
+  uçan baskılar 140 px aşağıdan başlar (görünmez başlangıç kutusu ilk ekranın altında kalır).
+- **Yerleşim (CSS):** RSVP kartı uzun ekranda (yükseklik ≥ 740 px) ekrana göre daralır (`--cw`, en az 296 px): kart + mühür
+  390×844, 430×932, 768×1024 ve masaüstünde ilk ekranda tam. ≥ 960 px yanıt formu kısa (ad | e-posta, iki cevap yan yana): kart ve
+  form 1280×800'de tam. Yatay telefonda iç sayfa başı küçültülmüş köşe kümesinin yanında (`--tl: min(30vw, 64svh)`, üst boşluk
+  14 px, story başlığı `clamp(52px, 20svh, 96px)`, kart `max(340px, …)` genişlikte → başlık, tarih ve ilk satırlar ilk ekranda).
+  Masaüstünde story başlığı + iki baskı ilk ekranda (`--pw: clamp(200px, (100svh − 470px) / 1.5, 265px)`, üst boşluk
+  `clamp(72px, 100svh − 680px, 160px)`); details kartı ekran yüksekliğine göre (≥ 340 px) → 1024×768 ve 1280×800'de tam kart.
+- **Ölçüm** (kendi `next start` + Chromium; giriş adımları son hâline zorlanıp `getBoundingClientRect`; parça = yazı, foto alanı,
+  baskı, mühür, düğme, form alanı, dal — kâğıt kartın kendisi değil): 3 kayıt (demo, tasarım aralığı, §12 stres) × 16 boyut
+  (320×568, 360×640, 375×553, 375×667, 390×844, 430×932 · 568×320, 667×375, 740×360, 844×390, 932×430 · 768×1024, 1024×768,
+  1280×800, 1440×900, 1920×1080) × home/story/details/rsvp = 192 yükleme: **nav'ın 8 px üstünü geçen ya da ilk ekranda nav'ın
+  arkasında kalan parça 0**; önizleme kipinde (çubuk açık) de 192/192 temiz. QA'nın kendi taramasıyla (giriş dönüşümleri
+  ölçülür) yalnız uzun kâğıt kartın kendisi nav'ın altına uzanıyor (içindeki satırlar değil) ve form.js'in ekran dışındaki bal
+  küpü alanı ("Website") görünüyor — ikisi de beklenen. Önce: 144 yüklemenin 144'ünde kesik parça vardı.
 
 ## Comp öğe haritası (docs/11 §8)
 
@@ -191,7 +228,7 @@ solda `clamp(240px, 24vw, 340px)`, metin sağda, isimler 1280'de 88 px) — dar 
 | — | `.lede` (story.intro + tarih) | standart zorunlu |
 | iki üstte bir altta üç anlık baskı (köşesinde okaliptüs dalı; comp'ta dallar baskıdan baskıya değişiyor), aralarında küçük çiçek kümeleri | `.prints` ≥ 760 px: aynı düzen (265 px baskılar); dal çerçevenin kendi parçası (frame_portrait); 2. baskının çerçevesi aynalı (dalı sağ üstte) | baskıların arasındaki küçük çiçek kümeleri yok (ayrı GPT parçası yok; çizilmez) |
 | | telefon: basamaklı sütun (sol −4,5°, sağ +4° aynalı, sol −2,5°; önceki baskı üstte, bindirme −6vw) | **sapma:** comp'un yan yana baskısı 390 px'te pencereyi ~120 px yapardı (< 38vw, §9); telefonda pencere 50vw |
-| başlık baskının alt kenar boşluğunda (el yazısı) | `figcaption .cap` (`frame_portrait.caption_band_pct` %81,8–97,8) | uzun başlık küçülür (≥ 11 px), yine sığmazsa satır kısalır |
+| başlık baskının alt kenar boşluğunda (el yazısı) | `figcaption .cap` — `figure`'ın kendi çocuğu (geçerli HTML; G402 QA) (`frame_portrait.caption_band_pct` %81,8–97,8) | uzun başlık küçülür (≥ 11 px), yine sığmazsa satır kısalır |
 | köşe kümeleri | `.page-corner` florals_tl (başlık), florals_br (sayfa sonu) | |
 
 ### details ← W1.4 `web_4_details.png`
@@ -240,7 +277,8 @@ solda `clamp(240px, 24vw, 340px)`, metin sağda, isimler 1280'de 88 px) — dar 
   kümeyi kaydırınca görünen düz bir çizgiyle kesiyordu, opak nav bandı da kümeyi biçiyordu (G402 incelemesi).
 - Açılış giriş durumları ekran dışına taşmaz: home bölümlerindeki baskı/kart yukarı doğru dönerek oturur (`fly-up-l/r`), yalnız
   story baskıları ve mekân baskısı yandan uçar (bölüm `overflow-x: clip`).
-- Yazılım bütçesi (docs/11 §6, 1 KB = 1000 B okumasıyla da): `site.css` ≤ 45 000 B, `site.js` ≤ 35 000 B (test denetler).
+- Yazılım bütçesi (docs/11 §6; KiB, 01 / 03 / 05 testleri gibi): `site.css` ≤ 46 080 B, `site.js` ≤ 35 840 B (test denetler).
+  G402 QA düzeltmelerinden sonra ikisi de 1000 B okumasıyla bütçenin üstünde (aşağıdaki Sonuç'ta boyutlar); pay az.
 - Aksanlı isimler: Pinyon Script ve Cormorant Garamond'un Google Fonts CSS yanıtında `latin-ext` bloğu var (docs/11 §12).
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (Safari'nin yatay araç çubukları, `svh`, `mask`, `ResizeObserver`,
   `overflow: clip`), Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.

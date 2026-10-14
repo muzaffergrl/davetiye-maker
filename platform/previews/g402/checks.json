@@ -54,9 +54,9 @@
   "home@360×640: no overflow, 29 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
   "home @375×553: home-hero (20 pieces, CTA \"RSVP\" bottom 470, names 46.5 px) ends at 470, above the nav (top 483)",
   "home@375×553: no overflow, 29 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
-  "home @844×390: home-hero (21 pieces, CTA \"RSVP\" bottom 286, names 42.9 px) ends at 322, above the nav (top 328)",
+  "home @844×390: home-hero (21 pieces, CTA \"RSVP\" bottom 286, names 42.9 px) ends at 318, above the nav (top 328)",
   "home@844×390: no overflow, 29 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
-  "home @667×375: home-hero (21 pieces, CTA \"RSVP\" bottom 276, names 41.3 px) ends at 306, above the nav (top 313)",
+  "home @667×375: home-hero (21 pieces, CTA \"RSVP\" bottom 276, names 41.3 px) ends at 303, above the nav (top 313)",
   "home@667×375: no overflow, 29 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
   "home @360×640 (design range): names 44.1 px (≥ 36); nothing partly under the nav (top 570): the first screen ends at 558; CTA \"RSVP\" bottom 558",
   "home@360×640 (design range): no overflow, 35 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
@@ -70,12 +70,12 @@
   "home@360×640 (stress record): no overflow, 43 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
   "home @375×553 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 694, nav top 483)",
   "home@375×553 (stress record): no overflow, 43 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
-  "home @844×390 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 312, nav top 328)",
+  "home @844×390 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 306, nav top 328)",
   "home@844×390 (stress record): no overflow, 43 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 488, nav top 313)",
   "home@667×375 (stress record): no overflow, 43 fields = content record, title ok, images loaded, text on 4 cards on paper, 2 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 236×48, rsvp \"Replay the envelope\" 193×48",
-  "envelope → /eleanor-and-theo/home in 3919 ms, card transition flag set",
+  "envelope → /eleanor-and-theo/home in 3945 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (14 steps)",
   "countdown target from the platform: 2027-09-18 16:30 America/New_York = 2027-09-18 20:30 UTC",
@@ -95,7 +95,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-09-18T21:30:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-09-23T20:30:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (232 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (220 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -115,11 +115,11 @@
   "details@390 (stress record): no overflow, 37 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@390 (stress record): no overflow, 6 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 917 KB",
-  "home first view (390×844, DPR 3, placeholders): 1012 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 979 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 1147 KB",
-  "recording: previews/g402/opening_390x844.mp4 (2181 KB, lead-in 0.77 s cut, first frame mean 202,207,210) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, placeholders): 919 KB",
+  "home first view (390×844, DPR 3, placeholders): 1014 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 980 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1149 KB",
+  "recording: previews/g402/opening_390x844.mp4 (2175 KB, lead-in 0.66 s cut, first frame mean 202,207,210) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -392,8 +392,8 @@
     "screen": 390,
     "bottomNav": true,
     "items": 21,
-    "lowest": 322,
-    "above": 322,
+    "lowest": 318,
+    "above": 318,
     "below": null,
     "cta": {
      "text": "RSVP",
@@ -412,8 +412,8 @@
     "screen": 375,
     "bottomNav": true,
     "items": 21,
-    "lowest": 306,
-    "above": 306,
+    "lowest": 303,
+    "above": 303,
     "below": null,
     "cta": {
      "text": "RSVP",
@@ -462,11 +462,11 @@
     "bad": [
      "span.cd-num \"350\" bottom 589",
      "span.cd-lbl \"Days\" bottom 604",
-     "span.cd-num \"04\" bottom 589",
+     "span.cd-num \"02\" bottom 589",
      "span.cd-lbl \"Hours\" bottom 604",
-     "span.cd-num \"28\" bottom 589",
+     "span.cd-num \"10\" bottom 589",
      "span.cd-lbl \"Minutes\" bottom 604",
-     "span.cd-num \"32\" bottom 589",
+     "span.cd-num \"33\" bottom 589",
      "span.cd-lbl \"Seconds\" bottom 604"
     ],
     "partly": [],
@@ -531,9 +531,9 @@
     "bad": [
      "span.cd-num \"339\" bottom 676",
      "span.cd-lbl \"Days\" bottom 691",
-     "span.cd-num \"04\" bottom 676",
+     "span.cd-num \"02\" bottom 676",
      "span.cd-lbl \"Hours\" bottom 691",
-     "span.cd-num \"28\" bottom 676",
+     "span.cd-num \"10\" bottom 676",
      "span.cd-lbl \"Minutes\" bottom 691",
      "span.cd-num \"14\" bottom 676",
      "span.cd-lbl \"Seconds\" bottom 691"
@@ -561,11 +561,11 @@
      "p.hero-city.in.done \"Charleston, South Caroli\" bottom 589",
      "span.cd-num \"339\" bottom 625",
      "span.cd-lbl \"Days\" bottom 640",
-     "span.cd-num \"04\" bottom 625",
+     "span.cd-num \"02\" bottom 625",
      "span.cd-lbl \"Hours\" bottom 640",
-     "span.cd-num \"28\" bottom 625",
+     "span.cd-num \"10\" bottom 625",
      "span.cd-lbl \"Minutes\" bottom 640",
-     "span.cd-num \"07\" bottom 625",
+     "span.cd-num \"08\" bottom 625",
      "span.cd-lbl \"Seconds\" bottom 640",
      "a.btn \"RSVP\" bottom 694"
     ],
@@ -582,20 +582,20 @@
     "bottomNav": true,
     "items": 21,
     "lowest": 443,
-    "above": 317,
+    "above": 310,
     "below": 402,
     "cta": {
      "text": "RSVP",
-     "bottom": 312
+     "bottom": 306
     },
     "bad": [
      "span.cd-num \"339\" bottom 426",
      "span.cd-lbl \"Days\" bottom 443",
-     "span.cd-num \"04\" bottom 426",
+     "span.cd-num \"02\" bottom 426",
      "span.cd-lbl \"Hours\" bottom 443",
-     "span.cd-num \"28\" bottom 426",
+     "span.cd-num \"10\" bottom 426",
      "span.cd-lbl \"Minutes\" bottom 443",
-     "span.cd-num \"01\" bottom 426",
+     "span.cd-num \"02\" bottom 426",
      "span.cd-lbl \"Seconds\" bottom 443"
     ],
     "partly": [],
@@ -611,7 +611,7 @@
     "bottomNav": true,
     "items": 21,
     "lowest": 488,
-    "above": 301,
+    "above": 295,
     "below": 387,
     "cta": {
      "text": "RSVP",
@@ -620,9 +620,9 @@
     "bad": [
      "span.cd-num \"339\" bottom 414",
      "span.cd-lbl \"Days\" bottom 431",
-     "span.cd-num \"04\" bottom 414",
+     "span.cd-num \"02\" bottom 414",
      "span.cd-lbl \"Hours\" bottom 431",
-     "span.cd-num \"27\" bottom 414",
+     "span.cd-num \"09\" bottom 414",
      "span.cd-lbl \"Minutes\" bottom 431",
      "span.cd-num \"55\" bottom 414",
      "span.cd-lbl \"Seconds\" bottom 431",
@@ -632,7 +632,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 3919,
+  "envelope_to_home_ms": 3945,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -681,7 +681,7 @@
     390
    ]
   },
-  "first_view_index_kb_placeholders": 917,
+  "first_view_index_kb_placeholders": 919,
   "first_view_index_files": [
    [
     "/themes/dusty-blue-champagne/img/florals_tl-960.webp",
@@ -705,7 +705,7 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    44781
+    45810
    ],
    [
     "/themes/dusty-blue-champagne/img/env_closed-857.webp",
@@ -716,7 +716,7 @@
     39260
    ]
   ],
-  "first_view_home_kb_placeholders": 1012,
+  "first_view_home_kb_placeholders": 1014,
   "first_view_home_files": [
    [
     "/themes/dusty-blue-champagne/img/florals_tl-960.webp",
@@ -740,7 +740,7 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    44781
+    45810
    ],
    [
     "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
@@ -751,7 +751,7 @@
     39044
    ]
   ],
-  "first_view_index_kb_photos": 979,
+  "first_view_index_kb_photos": 980,
   "first_view_index_files_photos": [
    [
     "/themes/dusty-blue-champagne/img/florals_tl-960.webp",
@@ -766,7 +766,7 @@
     85622
    ],
    [
-    "/media/b020002e-d0cc-46c4-90ec-9128125dc60d/8d8d5b228b3590dc20c91a22b7b5b5be-640w.jpg",
+    "/media/805e1814-5e51-47ca-9fe5-8e1bf24bda27/055f4efeb381637aa5ee0b7b24dd83dd-640w.jpg",
     63994
    ],
    [
@@ -779,14 +779,14 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    44781
+    45810
    ],
    [
     "/themes/dusty-blue-champagne/img/env_closed-857.webp",
     41974
    ]
   ],
-  "first_view_home_kb_photos": 1147,
+  "first_view_home_kb_photos": 1149,
   "first_view_home_files_photos": [
    [
     "/themes/dusty-blue-champagne/img/florals_tl-960.webp",
@@ -805,11 +805,11 @@
     85622
    ],
    [
-    "/media/b020002e-d0cc-46c4-90ec-9128125dc60d/4b17368ba29f6d079286f99686b0af44-640w.jpg",
+    "/media/805e1814-5e51-47ca-9fe5-8e1bf24bda27/79a981e0ff8fbff4f4e128ad3e3a4bcd-640w.jpg",
     77836
    ],
    [
-    "/media/b020002e-d0cc-46c4-90ec-9128125dc60d/8d8d5b228b3590dc20c91a22b7b5b5be-640w.jpg",
+    "/media/805e1814-5e51-47ca-9fe5-8e1bf24bda27/055f4efeb381637aa5ee0b7b24dd83dd-640w.jpg",
     63994
    ],
    [
@@ -818,12 +818,12 @@
    ],
    [
     "/themes/dusty-blue-champagne/site.css",
-    44781
+    45810
    ]
   ],
-  "video_kb": 2181,
+  "video_kb": 2175,
   "video_first_frame": {
-   "lead_in_s": 0.77,
+   "lead_in_s": 0.66,
    "mean_rgb": [
     202,
     207,
