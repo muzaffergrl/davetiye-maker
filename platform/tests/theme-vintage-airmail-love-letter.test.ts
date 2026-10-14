@@ -10,6 +10,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
+import sharp from 'sharp';
 import type { ContentRecord } from '../lib/content/types.ts';
 import { validateContent } from '../lib/content/validate.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
@@ -642,7 +643,7 @@ test('22 K21: no code-drawn frames — countdown, sheets, stamps, seals without 
   for (const [, sel, body] of RULES) {
     if (/corner/.test(sel)) assert.doesNotMatch(body, /mask|clip-path/, `${sel.trim()}: a cluster stays whole`);
     if (!/gradient\(/.test(body)) continue;
-    assert.match(sel, /^\s*(body::before|\.hero-bg picture|\.page-bg picture|\.site-nav|\.page-desk::before|\.page-desk \.site-nav)\s*$/, sel.trim());
+    assert.match(sel, /^\s*(body::before|\.hero-bg picture|\.page-bg picture|\.site-nav|\.page-desk::before|\.page-desk \.site-nav|\.page-desk :is\(\.page-title, \.kicker, \.lede, figcaption\)::before)\s*$/, sel.trim());
   }
   // the countdown: plain typed numerals (W1.2's boxed tiles would be code-drawn boxes)
   assert.doesNotMatch(rule('.cd-cell') + rule('.cd-num'), /background|border/);
@@ -701,7 +702,7 @@ test('envelope (docs/11 §7.2 kapak — yırtma şeridi): layers from the build,
 });
 
 test('envelope opening = the design sentence: seal pops off, strip rips left → right, card slides up, one pressed flower falls', () => {
-  const env = /envelope: \{([\s\S]*?)\n {2}\}/.exec(JS)![1];
+  const env = /envelope: \{([\s\S]*?)\n {1,2}\}/.exec(JS)![1];
   const t = (k: string) => { const m = new RegExp(`\\n\\s+${k}:\\s+\\[(\\d+), (\\d+)\\]`).exec(env); assert.ok(m, k); return [Number(m![1]), Number(m![2])]; };
   const n = (k: string) => Number(new RegExp(`\\n\\s+${k}:\\s+(\\d+)`).exec(env)![1]);
   const [closure, tear, rise, forward] = [t('closure'), t('tear'), t('rise'), t('forward')];
@@ -726,6 +727,13 @@ test('envelope opening = the design sentence: seal pops off, strip rips left →
   const open = /\n\s+open:\s+\[(\{[^\n]*\})\]/.exec(JS)![1];
   assert.match(open, /file: 'img\/accent_2-200\.webp', count: 1, path: 'fall'/);
   assert.match(open, /avoid: '\.env \.card'/);
+  // second QA: on 320–390 px phones no lane held a 62–74 px flower + sway, so often none fell (320×568 0 of 6). Now always
+  // one: the lane's flower and sway shrink to fit (≥ 36 px), else it falls over the envelope body (the card is behind it)
+  assert.match(open, /over: '\.env-open'/);
+  assert.doesNotMatch(JS, /if \(!lanes\.length\) return null/);
+  assert.match(JS, /\.filter\(\(\[a, b\]\) => b - a >= 36\);/);
+  assert.match(JS, /if \(!l\) \{ if \(!ov\) return null; l = \[ov\.left \+ sway, ov\.right - sway, sway\]; y0 = ov\.top \+ 2 \* s; \}/);
+  assert.match(JS, /sway = l\[2\]; s = Math\.min\(s, l\[1\] - l\[0\]\);/);
   const dur = Number(/dur: \[(\d+), \d+\]/.exec(open)![1]);
   assert.ok(accentsAt + dur < go, `the flower has fallen before home (${accentsAt} + ${dur} < ${go})`);
   assert.match(JS, /accents\('open', E\.go - E\.accents - 60\)/);
@@ -841,12 +849,34 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   const widths = RULES.filter(([, s]) => s.trim() === '.hero-card-wrap').flatMap(([, , b]) => [...b.matchAll(/width: ([^;]+)/g)].map((m) => m[1]));
   assert.ok(widths.length >= 3 && widths.every((w) => w.startsWith('clamp(150px')), widths.join(' | '));
   // clusters (qa review): whole — no mask, no clipping box; the hero's ends 8 px above the nav ground (26 px), smaller or
-  // hidden where its painted part would meet the hero's pieces (site.js corner); page ends 8 px above the nav
+  // gone where its painted part would meet the hero's line boxes (site.js corner); page ends 8 px above the nav
   assert.match(rule('.hero .scene-bg .corner-br'), /bottom: 26px/);
   assert.match(rule(':is(.foot, .next-sec, .closing) > .page-corner'), /bottom: 8px/);
   assert.doesNotMatch(CSS_NC, /corner[^{]*\{[^}]*mask/);
   assert.match(JS, /const corner = \(hero\) => \{/);
-  assert.match(JS, /L = \[0\.79, 0\.7, 0\.53, 0\.31, 0\.27, 0\.05, 0, 0\]/);
+  // second QA (2026-10-14): `hidden` lost to `.corner { display: block }` (47 of 297 loads) and the test used block boxes.
+  // Now: the painted edge measured from decor_br / decor_tl (24 rows), line boxes (Range rects), display none below 64 px
+  const edge = /const EDGE = \{ br: \[([\d.]+), '([^']{24})'\], tl: \[([\d.]+), '([^']{24})'\] \};/.exec(JS);
+  assert.ok(edge, 'painted-edge profiles of both clusters');
+  assert.ok(Math.abs(Number(edge![1]) - 1.234) < 0.01 && Math.abs(Number(edge![3]) - 1.105) < 0.01, 'h / w of decor_br / decor_tl');
+  for (const k of [2, 4]) assert.ok([...edge![k]].every((c) => c.charCodeAt(0) >= 48 && c.charCodeAt(0) <= 80), 'edges in 32nds of the width');
+  assert.match(JS, /r\[e\.matches\('\.btn, \.card'\) \? 'selectNode' : 'selectNodeContents'\]\(e\);/, 'line boxes, not block boxes');
+  assert.match(JS, /if \(\(w \*= 0\.94\) < 64\) return c\.style\.display = 'none';/, 'gone means display: none (the [hidden] attribute lost to the CSS)');
+  assert.doesNotMatch(JS, /br\.hidden = true/);
+  assert.match(JS, /giveWay\(br, ink\(\[\.\.\.inner\.querySelectorAll\('\.names, \.hero-date, \.hero-venue, \.hero-city, \.cd-cell, \.cd-done, \.btn, \.card'\)\]\)\);/);
+  // the envelope page and the inner-page heads: the clusters give way to the texts too (qa: "You are invited", "Tap to
+  // open", "WEDNESDAY" touched them); the preview bar comes off the first screen (--vh)
+  assert.match(JS, /const ts = ink\(\[h1\.previousElementSibling, h1, hint\]\);\s*cs\.forEach\(\(c\) => giveWay\(c, ts\)\);/);
+  assert.match(JS, /if \(pc\) giveWay\(pc, ink\(list\.filter\(\(x\) => x\.parentNode === head\)\)\);/);
+  assert.match(JS, /root\.style\.setProperty\('--bar', \(document\.querySelector\('\[data-platform-preview-bar\]'\)\?\.offsetHeight \|\| 0\) \+ 'px'\)/);
+  assert.match(CSS_NC, /--vh: calc\(100svh - var\(--bar, 0px\)\);/);
+  for (const sel of ['.env-page', '.hero', '.page-bg']) assert.match(rule(sel), /var\(--vh\)/, `${sel}: the first screen without the preview bar`);
+  assert.doesNotMatch(rule('.page-bg'), /100svh/);
+  // the hero names: room for Homemade Apple's descenders (≈ .34 em below the line box) before the date (qa: "Margot" g
+  // through "SATURDAY", 10 % at 1280×650)
+  assert.match(rule('.hero .names'), /margin: clamp\(4px, 1\.6svh, 18px\) 0 \.34em;/);
+  assert.match(rule('.hero.is-tight .names'), /margin: 2px 0 \.4em;/);
+  assert.doesNotMatch(rule('.hero-date') + rule('.hero.is-tight .hero-date'), /margin-top/);
   assert.equal(MANIFEST.theme_check.clusters, '.corner', 'theme-check measures the clusters (cuts, nav band)');
   // inner pages: the first-screen fold units, the head that lifts, the flex columns that pack, the signature unit
   for (const [page, n] of [['story', 7], ['details', 10], ['rsvp', 6]] as const) {
@@ -856,7 +886,17 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   }
   assert.equal(render('rsvp').$('.rsvp-text > .sig[data-fold] > .love + .sign').length, 1);
   assert.equal(render('details').$('.sched-list[data-pack] > .sched-row[data-fold]').length, 3);
-  assert.match(JS, /if \(u === sig && sg > 0\.73\) \{ wrap\.style\.setProperty\('--sg', \(sg - 0\.04\)\.toFixed\(2\)\); continue; \}/);
+  // RSVP (second QA: up to 465 px of blank letter when the signature folded): tighter rhythm, then a narrower letter (names
+  // ≥ 18 px); a fold leaves no blank paper — its blank is spread over the gaps above (≤ 72 px each); one fold per page
+  assert.match(JS, /if \(!wrap\.classList\.contains\('tight'\)\) \{ wrap\.classList\.add\('tight'\); continue; \}/);
+  assert.match(JS, /if \(cw > 225\) \{ head\.style\.setProperty\('--cw', \(cw = Math\.max\(225, cw \* 0\.94\)\) \+ 'px'\); continue; \}/);
+  assert.ok(225 * 0.08 >= 18, 'names (8cqw) ≥ 18 px at the narrowest letter');
+  assert.match(rule('.tight .pill .btn'), /min-height: 44px/, 'the pill keeps a 44 px target');
+  assert.match(JS, /units\.forEach\(\(x\) => \{ x\.style\.marginTop = ''; \}\);\s*const up = pk \?/, 'one push per page: any earlier one is stale');
+  assert.match(JS, /Math\.min\(72, \(limit - 1 - bottom\(u\.previousElementSibling\)\) \/ up\.length\)/, "the blank under the last piece above (a twine too)");
+  // details: "packed" must win over the list's space-evenly (it did not: a stale second fold, qa 148 + 87 px)
+  assert.match(CSS_NC, /\.paper \[data-pack\]\.packed \{ justify-content: flex-start; \}/);
+  assert.doesNotMatch(CSS_NC + JS, /--sg/);
   // the envelope page keeps "Tap to open" on screen: the stage gives way, then the names (landscape: between the clusters)
   assert.match(CSS_NC, /--obj: calc\(min\(86vw, 45svh \* 1\.5556, 440px\) \* var\(--ok, 1\)\)/);
   assert.match(CSS_NC, /\.env-head \{ width: min\(100%, 560px, 100vw - 1\.6 \* min\(32vw, 48vh, 500px\)\); \}/);
@@ -866,6 +906,9 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   assert.match(JS, /accents\('arrive', 0, document\.querySelector\('\.hero'\)\)/);
   assert.match(JS, /accents\('closing', 0, closing\)/);
   assert.match(JS, /closing: \[\{[^\n]*from: '\.replay-line' \}/);
+  // second QA: the path started 1.6 flower heights above its y0 — now the whole flower starts below the Replay line
+  assert.match(JS, /const y0 = fr \? fr\.bottom \+ 1\.6 \* g\.size\[1\] : 0/);
+  assert.match(JS, /const y = down \? y0 - s \* 1\.6 \+/);
   // no Android tap rectangle
   assert.match(CSS_NC, /a, button, summary, label, \[role="button"\] \{ -webkit-tap-highlight-color: transparent; \}/);
   assert.match(rule('.stage'), /-webkit-tap-highlight-color: transparent/);
@@ -1042,7 +1085,8 @@ test('15 privacy: sections the couple switched off leave nothing in any page sou
 // engine and served from the theme folder, so site.css + site.js (folds, tiles, the signature, envFit) run for real.
 // Skipped when Playwright or its browsers are not installed. Google Fonts load through the proxy when there is one (else
 // the fallback fonts: the rules hold either way, site.js measures). Reduced motion: every entrance at rest.
-async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number) => Promise<any>) => Promise<void>) {
+type Probe = (p: any) => Promise<any>;
+async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number, probe?: Probe, motion?: boolean) => Promise<any>) => Promise<void>) {
   process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
   process.env.PLAYWRIGHT_DISABLE_FORCED_CHROMIUM_PROXIED_LOOPBACK ||= '1';
   const req = createRequire(import.meta.url);
@@ -1060,9 +1104,9 @@ async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: P
   }
   const types: Record<string, string> = { '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
   try {
-    await fn(async (page, content, w, h) => {
+    await fn(async (page, content, w, h, probe, motion) => {
       const html = render(page, content).html;
-      const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
+      const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: motion ? 'no-preference' : 'reduce', hasTouch: !!motion });
       const p = await ctx.newPage();
       await p.route('**/*', (route: any) => {
         const u = new URL(route.request().url());
@@ -1077,7 +1121,7 @@ async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: P
       await p.goto(`http://theme.test/${SLUG}/${page}`, { waitUntil: 'load' });
       await p.evaluate(() => Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 3000))]));
       await p.waitForTimeout(450); // site.js runs again on fonts.ready
-      const m = await p.evaluate(MEASURE);
+      const m = await (probe ? probe(p) : p.evaluate(MEASURE));
       await ctx.close();
       return m;
     });
@@ -1150,6 +1194,123 @@ test('browser (qa review): nothing half under the nav; the story row whole on la
       for (const [name, rec] of [['range', rangeRecord(demo())], ['stress', stressRecord(demo())]] as const) {
         const m = await open('index', rec, w, h);
         assert.ok(m.hint <= m.vh, `index ${w}×${h} ${name}: "Tap to open" ends at ${Math.round(m.hint)} of ${m.vh}`);
+      }
+    }
+  });
+});
+
+// second QA (2026-10-14): text never on painted decor or on other text (docs/11 §12: target 0 %, ≤ 2 % anti-aliasing), the
+// RSVP letter without blank paper, one fold per page, the opening flower on every phone
+/** Share (%) of each listed text's line boxes (ink band: 12 % off top and bottom) whose pixels change between two states. */
+async function inkShare(p: any, sel: string, before: string, after: string): Promise<Array<[string, number]>> {
+  const boxes: Array<[string, number, number, number, number]> = await p.evaluate((sel: string) => {
+    for (let i = 1; i < 5000; i++) clearInterval(i);
+    const out: Array<[string, number, number, number, number]> = [];
+    document.querySelectorAll(sel).forEach((el) => {
+      const rg = document.createRange();
+      rg.selectNodeContents(el);
+      for (const q of el.matches('.btn') ? [el.getBoundingClientRect()] : [...rg.getClientRects()]) {
+        if (q.width < 2 || q.bottom <= 0 || q.top >= innerHeight) continue;
+        out.push([`${String(el.className).split(' ')[0]} "${(el.textContent || '').trim().slice(0, 18)}"`, Math.max(0, Math.round(q.left)),
+          Math.max(0, Math.round(q.top + q.height * 0.12)), Math.min(innerWidth, Math.round(q.right)), Math.min(innerHeight, Math.round(q.bottom - q.height * 0.12))]);
+      }
+    });
+    return out;
+  }, sel);
+  const shot = async (css: string) => {
+    const tag = await p.addStyleTag({ content: css });
+    await p.waitForTimeout(80);
+    const b = await sharp(await p.screenshot()).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+    await tag.evaluate((e: Element) => e.remove());
+    return b;
+  };
+  const A = await shot(before), B = await shot(after);
+  return boxes.map(([k, x0, y0, x1, y1]) => {
+    let n = 0, d = 0;
+    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
+      const i = (y * A.info.width + x) * 3;
+      n++;
+      if (Math.max(Math.abs(A.data[i] - B.data[i]), Math.abs(A.data[i + 1] - B.data[i + 1]), Math.abs(A.data[i + 2] - B.data[i + 2])) > 40) d++;
+    }
+    return [k, n ? (100 * d) / n : 0];
+  });
+}
+const CLEAR = '*, *::before, *::after { color: transparent !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; } .site-nav { visibility: hidden !important; }';
+
+test('browser (second QA): hero and envelope text off the clusters, names off the date, the RSVP letter without blank paper, one fold, the opening flower', async (t) => {
+  await withBrowser(t, async (open) => {
+    // 1 the hero's lower-right cluster never under the hero's text (before: 47 of 297 loads, range 360×640 venue 14.4 %,
+    // stress 384×854 date 52.9 %, 375×812 names 17.7 %): decor shown vs hidden, every hero line box ≤ 2 %
+    const heroText = '.hero-inner :is(.names, .hero-date, .hero-venue, .hero-city, .cd-num, .cd-lbl, .btn)';
+    const hero: Array<[string, ContentRecord, number, number]> = [['range', rangeRecord(demo()), 360, 640], ['range', rangeRecord(demo()), 320, 740],
+      ['stress', stressRecord(demo()), 375, 812], ['stress', stressRecord(demo()), 384, 854], ['stress', stressRecord(demo()), 640, 360], ['demo', demo(), 390, 844]];
+    for (const [name, rec, w, h] of hero) {
+      const r = await open('home', rec, w, h, (p) => inkShare(p, heroText, CLEAR, `${CLEAR} .hero .scene-bg .corner { visibility: hidden !important; }`));
+      assert.ok(r.length > 4, `home ${w}×${h} ${name}: hero text found`);
+      for (const [k, v] of r) assert.ok(v <= 2, `home ${w}×${h} ${name}: ${k} ${v.toFixed(1)} % on the cluster`);
+    }
+    // 3 the envelope page: "You are invited", the names and "Tap to open" off both clusters (before: range 340×720 kicker
+    // 4.1 %, 360×740 hint 3.0 %)
+    for (const [w, h] of [[320, 568], [340, 720], [360, 740]]) {
+      const r = await open('index', rangeRecord(demo()), w, h, (p) => inkShare(p, '.env-head :is(.kicker, .names), .env-hint',
+        `${CLEAR} .stage { visibility: hidden !important; }`, `${CLEAR} .stage, .corner, .float { visibility: hidden !important; }`));
+      for (const [k, v] of r) assert.ok(v <= 2, `index ${w}×${h} range: ${k} ${v.toFixed(1)} % on decor`);
+    }
+    // 2 Homemade Apple's descenders ("Margot", "Henry") never into the date line (before: 1280×650 10 %, 1366×657 9.9 %)
+    for (const [w, h] of [[390, 844], [320, 568], [1280, 650], [1366, 657], [1280, 800]]) {
+      const r = await open('home', demo(), w, h, (p) => inkShare(p, '.hero-date', CLEAR,
+        `${CLEAR} .hero .names, .hero .names * { color: #000 !important; -webkit-text-fill-color: #000 !important; }`));
+      for (const [k, v] of r) assert.ok(v <= 0.5, `home ${w}×${h}: names ink in ${k} ${v.toFixed(2)} %`);
+    }
+    // 4 the RSVP letter: "With love," + names + seal on the first screen where they fit with names ≥ 18 px (before: blank
+    // 149 px at 320×568, 316–392 px on stress laptops); else one fold whose blank goes into the gaps above (in-letter gap
+    // ≤ the nav band + 16 px, first-screen blank ≤ 16 px)
+    const RSVP = (p: any) => p.evaluate(() => {
+      const r = (e: Element) => e.getBoundingClientRect(), nav = r(document.querySelector('.site-nav')!).top, sig = document.querySelector('.sig')!;
+      const units = [...document.querySelectorAll('.rsvp-text > [data-fold]')], end = Math.max(r(sig).bottom, r(document.querySelector('.card-seal')!).bottom);
+      const above = units.filter((u) => u !== sig && r(u).bottom <= nav);
+      return { nav, vh: innerHeight, sigTop: r(sig).top, end, last: Math.max(...above.map((u) => r(u).bottom)),
+        names: parseFloat(getComputedStyle(sig.querySelector('.sign')!).fontSize), band: innerHeight - nav };
+    });
+    for (const [name, rec, w, h] of [['demo', demo(), 320, 568], ['range', rangeRecord(demo()), 360, 640], ['stress', stressRecord(demo()), 1024, 768], ['stress', stressRecord(demo()), 1280, 800]] as const) {
+      const m = await open('rsvp', rec, w, h, RSVP);
+      assert.ok(m.end <= m.nav - 8 && m.names >= 18, `rsvp ${w}×${h} ${name}: signature + seal end ${Math.round(m.end)} (nav ${Math.round(m.nav)}), names ${m.names} px`);
+    }
+    for (const [name, rec, w, h] of [['stress', stressRecord(demo()), 360, 640], ['stress', stressRecord(demo()), 375, 667], ['stress', stressRecord(demo()), 1366, 657], ['demo', demo(), 844, 390]] as const) {
+      const m = await open('rsvp', rec, w, h, RSVP);
+      const at = `rsvp ${w}×${h} ${name}`;
+      assert.ok(m.sigTop >= m.vh, `${at}: the signature folds whole`);
+      assert.ok(m.nav - m.last <= 16, `${at}: ${Math.round(m.nav - m.last)} px blank on the first screen`);
+      assert.ok(m.sigTop - m.last <= m.band + 16, `${at}: ${Math.round(m.sigTop - m.last)} px gap in the letter (nav band ${Math.round(m.band)})`);
+    }
+    // 5 details: one fold in the "Order of the Day" letter (before: 148 + 87 px at 375×667 range, a stale second push)
+    for (const [w, h] of [[375, 667], [1280, 650], [1366, 657]]) {
+      const pushes: number[] = await open('details', rangeRecord(demo()), w, h, (p) => p.evaluate(() => [...document.querySelectorAll('main [data-fold]')].map((u) => {
+        const el = u as HTMLElement, inl = el.style.marginTop, now = parseFloat(getComputedStyle(el).marginTop);
+        el.style.marginTop = '';
+        const add = now - parseFloat(getComputedStyle(el).marginTop);
+        el.style.marginTop = inl;
+        return add;
+      }).filter((a) => a > 72.5)));
+      assert.ok(pushes.length <= 1, `details ${w}×${h} range: ${pushes.length} folds (${pushes.map(Math.round).join(' + ')} px)`);
+    }
+    // 6 "… while a pressed flower flutters down": on every phone (before: 320×568 0 of 6, 360×640 2 of 6), never over the photo
+    for (const [w, h] of [[320, 568], [360, 640], [390, 844]]) {
+      for (let k = 0; k < 2; k++) {
+        const f = await open('index', demo(), w, h, async (p) => {
+          const st = await p.locator('.stage').boundingBox();
+          await p.touchscreen.tap(st.x + st.width / 2, st.y + st.height * 0.75);
+          await p.waitForTimeout(1800);
+          return p.evaluate(() => {
+            const slot = document.querySelector('.env .card [data-slot]')!.getBoundingClientRect();
+            return [...document.querySelectorAll('.accent-layer img')].map((i) => {
+              const b = i.getBoundingClientRect();
+              return { w: b.width, over: (Math.max(0, Math.min(b.right, slot.right) - Math.max(b.left, slot.left)) * Math.max(0, Math.min(b.bottom, slot.bottom) - Math.max(b.top, slot.top))) / (b.width * b.height) };
+            });
+          });
+        }, true);
+        assert.equal(f.length, 1, `index ${w}×${h}: ${f.length} flowers fall`);
+        assert.ok(f[0].w >= 30 && f[0].over <= 0.3, `index ${w}×${h}: flower ${Math.round(f[0].w)} px, ${(100 * f[0].over).toFixed(0)} % over the photo`);
       }
     }
   });

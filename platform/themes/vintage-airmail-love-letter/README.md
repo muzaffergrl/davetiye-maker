@@ -21,7 +21,7 @@ zamanlama, giriş ön ayarları ve bölüm sırası bu tasarımın.
 | `details.html` | W1.4: ilk ekran zemini (`.page-bg`: harita çizgili parşömen + damga; yatay/geniş ekranda sağ alt kuru çiçek kümesi), Order of the Day mektubu (info_card, program satırları + aralarında papatyalı sicim), takvime ekle, mekân (pul kenarlı yatay çerçeve), dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
 | `rsvp.html` | W1.5: ilk ekran zemini (`.page-bg`, details gibi), "Will You Join Us?" mektubu (info_card) + tabanında lavantalı mühür (closure) — mektup ve mührü ilk ekrana sığacak boyda, imza birimi (`.sig`: "With love," + isimler), platform yanıt formu (G042 + G051 soruları, her genişlikte mektubun altında), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`type`, `drop`, `stamp`, `strike` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, mektup kâğıdı bandı, sayfa yerleşimleri |
-| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, mektup bandı (`fitPaper`), uzun isim + home ilk ekranı (`fitNames`, `fitCopy`, `fold`, `corner`), iç sayfaların ilk ekranı (`folds`, story `tiles`), zarf sayfası sığdırma (`envFit`), geri sayım, zarf (yırtılma), `DEV_CONTENT` + `devRender` |
+| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, mektup bandı (`fitPaper`), kümelerin boyalı kenarı (`EDGE`, `ink`, `paints`, `giveWay`), uzun isim + home ilk ekranı (`fitNames`, `fitCopy`, `fold`, `corner`), iç sayfaların ilk ekranı (`folds`, story `tiles`), zarf sayfası sığdırma (`envFit`), önizleme çubuğu (`--bar`), geri sayım, zarf (yırtılma), `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri ve temizliği |
 | `img/` | WebP katmanlar, `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png` (yalnız mühür), `manifest.json` (servis edilmez) |
 
@@ -87,7 +87,7 @@ left to right, and the cream letter card slides up out of the envelope while a p
 | `tear` | [360, 860] | şerit soldan sağa yırtılır: bağlı şerit soldan kırpılır (`clip-path`), yırtılan parça (`env_torn`) yırtılma noktasının solunda görünür ve o noktada kalkar (`transform-origin` noktayla yürür); yavaş başlar, hızlı yırtılır, yavaş biter |
 | `fly` | [1220, 560] | yırtılan şerit zarftan kalkıp gider |
 | `rise` | [1180, 1320] | krem mektup kartı zarftan yukarı kayar (gövdenin alt kenarında kırpılı; `ENVELOPE_GEOMETRY.out` −109,5 %) |
-| `accents` | 1240 | **bir** kuru unutmabeni (accent_2) kartın yanındaki şeritte yaprak gibi sallanarak düşer (`avoid: '.env .card'`: fotoğrafın üstünden geçmez), `go`'dan önce ekrandan çıkar |
+| `accents` | 1240 | **bir** kuru unutmabeni (accent_2) kartın yanındaki şeritte yaprak gibi sallanarak düşer (`avoid: '.env .card'`: fotoğrafın üstünden geçmez), `go`'dan önce ekrandan çıkar. **Her ekranda düşer (ikinci QA):** şerit 62–74 px'lik çiçeği ve salınımı taşımıyorsa çiçek ve salınım şeride göre küçülür (≥ 36 px); hiç şerit yoksa zarf gövdesinin üstünden düşer (`over: '.env-open'`: kart orada gövdenin arkasında). Önce 320×568'de 6 denemenin 0'ında, 360×640'ta 2'sinde, 390×844'te 4'ünde çiçek yoktu |
 | `forward` | [2560, 620] | kart zarfın önüne geçer, olduğu yerde × 1,04 büyür, gölgesi derinleşir |
 | `go` | 3620 | home; kart view transition ile hero kartına uçar (VT yoksa 420 ms solma) |
 
@@ -99,9 +99,10 @@ opening") ve `?replay=1` (head betiğinde kapalı başlar) 01/03 sözleşmesiyle
 kapanış parçacıkları **kendi bölümlerinin içinde** (`accents(an, until, host)`: katman `.hero` / `.closing` içinde,
 `z-index: 0`, taşanı kırpılır) ve **yazının arkasında** (bölümün yazıları `z-index: 1`): varışta iki unutmabeni hero
 fotoğrafının yanındaki şeritten yalnız fotoğrafın alt kenarına kadar iner (`to: 'avoid'`), kapanışta üç parça yalnız
-"Replay the envelope" satırının altındaki bantta (`from: '.replay-line'`) — forma, isimlere, geri sayıma hiç değmez.
-`MOTION.accents` grubu docs/11 §8'e iki anahtar ekler: `from` (seçici: o öğenin altından başlar), `to: 'avoid'` (avoid
-kutusunun altında biter).
+"Replay the envelope" satırının altındaki bantta (`from: '.replay-line'`; ikinci QA: yol çiçeğin 1,6 boyu yukarıdan
+başlıyordu, çiçekler "Replay", isimler ve tarih satırının arkasından geçiyordu — başlangıç artık satırın altında,
+`fr.bottom + 1,6 × size[1]`). `MOTION.accents` grubu docs/11 §8'e üç anahtar ekler: `from` (seçici: o öğenin altından
+başlar), `to: 'avoid'` (avoid kutusunun altında biter), `over` (şerit yoksa bu öğenin üstünden düşer).
 
 Giriş ön ayarları (bu tasarımın): `type` (daktilo satırı: `clip-path` 18 adımda açılır), `write` (el yazısı soldan sağa),
 `drop` (kart/pul masaya yukarıdan, eğik ve derin gölgeyle düşer, gölge dinlenme gölgesine oturur), `stamp` (lastik damga gibi
@@ -114,21 +115,34 @@ vurulur), `strike` (posta damgası çerçevenin köşesine vurulur), `unfurl` (s
   `fitNames` önce isimleri (≤ 3,2 satır, ekranın ≤ %30'u; **taban 36 px** = `manifest.theme_check.first_screen.names_min_px`),
   sonra sıkı düzen (`is-tight`), sonra geri sayımı hapın arkasına (`is-long`) dener; olmazsa `fold` sığmayan ilk parçayı ilk
   ekranın altına iter (`--fold`: dekor hapın yanında kalır). Yalnız kart sığıyorsa (§12 stres isimleri, 320–375 px) kart ilk
-  ekranda ortalanır. İlk ekran = `100svh` (araç çubukları hiçbir şeyi oynatmaz).
+  ekranda ortalanır. İlk ekran = `100svh` (araç çubukları hiçbir şeyi oynatmaz; paylaşılan önizlemede eksi platform çubuğu: `--vh`).
 - Kısa yatay (`min-aspect-ratio: 1/1` ve `max-height: 620px`): kart solda, isimler … hap sağ sütunda (ızgara); zarf sayfasında
   açık zarf Enter / Replay'in yanında; kart her genişlikte ≥ 150 px (kopyası ≥ 11 px; küçük kartta satır düşer, `fitCopy`).
 - İsimler W1.2'deki gibi **tek satır**, %86'ya kadar küçülerek sığıyorsa (390 px'te "Margot & Henry" 41,3 → 40,5 px);
   sığmıyorsa eski kural (≤ 3,2 satır, taban 36 px).
-- **Sağ alt küme (qa incelemesi):** bütün (maske yok, kutuyla kesilmez), ilk ekranda nav zemininin 8 px üstünde biter
-  (`bottom: 26px` = nav zemini 18 + 8; hero ilk ekrandan uzunsa `site.js` `corner` yükseltir). Boyalı kısmı (sekizde bir
-  yükseklik başına sol kenar profili `L`, `decor_br-480`'den ölçüldü) hero parçalarına (isimler, geri sayım, hap) değiyorsa
-  küme %6 adımlarla küçülür, 64 px altında gizlenir. Sayfa sonu kümeleri (`.foot`, `.next-sec`, `.closing`) de bütün ve nav'ın
-  8 px üstünde biter.
+- **İsimlerin kuyrukları (ikinci QA):** Homemade Apple'ın "g", "y" kuyrukları satır kutusunun ~0,34 em altına iner ("Margot"un
+  g'si "SATURDAY"ın içinden geçiyordu: 1280×650 %10, 1366×657 %9,9). İsimlerin altında `.34em` (sıkı düzende satır aralığı
+  1,28 olduğu için `.4em`) boşluk; tarih satırının kendi üst boşluğu kalktı. Bedeli 375×553'te geri alındı: sıkı düzende
+  mekân, geri sayım ve hap aralıkları 2 px azaldı, `is-long`'da geri sayım haptan 6 px aşağıda (22 px idi).
+- **Sağ alt küme (qa incelemesi + ikinci QA):** bütün (maske yok, kutuyla kesilmez), yerinde durur (`bottom: 26px` = nav
+  zemini 18 + 8); yalnız orada ilk ekranın sonunu keserek nav bandına girecekse `site.js` `corner` onu nav'ın 8 px üstüne
+  alır. Boyalı kısmı hero'nun **satır kutularına** (isimler, tarih, mekân, şehir, geri sayım, hap, kart; `Range` dikdörtgenleri,
+  blok kutusu değil) 3 px'ten yakınsa %6 adımlarla küçülür, 64 px altında **kalkar** (`display: none`). Boyalı kenar
+  `EDGE`: `decor_br` / `decor_tl`'nin yüksekliğinin 24'te biri başına sol / sağ boyalı ucu (genişliğin 32'de biri, α ≥ 40,
+  `decor_*-760`'tan ölçüldü). Önce: `hidden` özniteliği `.corner { display: block }`'a yeniliyordu — küme "gizlenmesi
+  gereken" 297 yüklemenin 47'sinde yazının altında görünüyordu (aralık 360×640 mekân %14,4, zorlama 384×854 tarih %52,9).
+  Sayfa sonu kümeleri (`.foot`, `.next-sec`, `.closing`) de bütün ve nav'ın 8 px üstünde biter.
 - Zarf sayfası: sahnenin kart için ayrılan üst boşluğu (`closed_obj.top_frac_of_stage_w` 0,6759) başlığın altına kayar;
   uzun isimler 20 px'e kadar küçülür. **"Tap to open" her ekranda görünür (qa incelemesi):** `envFit` ipucu ilk ekranın 6 px
   üstünde bitene kadar önce zarfı küçültür (`--ok` 1 → ≥ 0,64, sahnenin bütün yüzdeleri onunla), sonra isimleri (≥ 20 px);
   yatay/geniş ekranda isim sütunu iki köşe kümesinin arasında (`100vw − 1,6 × küme genişliği`). Önce: 667×375 / 844×390'da
-  aralık ve zorlama isimleriyle, 1280×650 / 1366×657'de demo ile bile ipucu ekranın altındaydı.
+  aralık ve zorlama isimleriyle, 1280×650 / 1366×657'de demo ile bile ipucu ekranın altındaydı. **İkinci QA:** iki köşe
+  kümesi kicker'a, isimlere ve "Tap to open"a (satır kutuları, `EDGE`) 3 px'ten yakınsa küçülür (`giveWay`; önce aralık
+  340×720'de kicker %4,1, 360×740'ta ipucu %3,0 boyalı kümenin üstündeydi).
+- **Önizleme çubuğu (ikinci QA):** paylaşılan önizlemede platformun "Preview" çubuğu sayfanın üstünde akışta durur (~36–56 px).
+  `site.js` yüksekliğini `--bar` yazar; `--vh: calc(100svh − var(--bar))` zarf sayfasının, hero'nun, iç sayfa zemininin
+  (`.page-bg`) ve mektup genişliklerinin ilk ekranıdır. Önce önizlemede "Tap to open" kümenin üstündeydi (390×844 aralık
+  %12,8), 844×390'da hero kartı nav'ın altına iniyor, details/rsvp `.page-bg` kümesi nav bandına giriyordu.
 
 ## İç sayfaların ilk ekranı (story, details, rsvp — G404 qa incelemesi)
 Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya da tamamen ilk ekranın altından başlar — nav
@@ -138,9 +152,16 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
   mekân fotoğrafı, mekân yazısı, dress code, harita, link blokları, SSS, sonraki bölüm; rsvp başlık, "Kindly reply by" + tarih
   (tek birim `.by`), hap, bekleme satırı, **imza birimi** `.sig`, form kutusu.
 - Nav çizgisini kesen (ya da nav bandında başlayan) **ilk** birim için sırayla: içinde durduğu esnek sütun toplanır
-  (`[data-pack]`: details program listesi `space-evenly`, rsvp metni `center` → üstten), sayfa başı yükselir (`[data-lift]`:
-  `--lift` ≤ üst boşluğun %35'i; telefonda köşe kümesi onunla küçülür, yazıya binmez), imza küçülür (`--sg` 1 → 0,72: "With
-  love,", isimler, alt boşluk, mühür), olmazsa birim ilk ekranın 6 px altından başlar (imza tam boyda).
+  (`[data-pack]`: details program listesi `space-evenly`, rsvp metni `center` → üstten; ikinci QA: details'te `.packed`
+  listenin `space-evenly`'sine yeniliyordu → `.paper [data-pack].packed`), sayfa başı yükselir (`[data-lift]`: `--lift` ≤ üst
+  boşluğun %35'i; telefonda köşe kümesi onunla küçülür, yazıya binmez). RSVP imzası (ikinci QA): önce mektubun ritmi sıkılaşır
+  (`.tight`: hap, sicim, satır araları; hap ≥ 44 px), sonra mektup daralır (`--cw` %6 adımlarla ≥ 225 px: isimler 8cqw ≥ 18 px;
+  her şey oranla küçülür). Eski `--sg` (yalnız imzayı küçültüp daraltan, isimleri daha çok satıra saran) kalktı.
+- Yine sığmazsa birim ilk ekranın 6 px altından başlar — **sayfada tek katlama** (yeni katlama öncekileri siler: ikinci QA'da
+  details'te listenin büyümesiyle ikinci, bayat bir itme kalıyordu, 148 + 87 px) ve katlananın üstündeki boşluk aynı sütunun
+  aralarına dağılır (her araya ≤ 72 px): ilk ekranda boş kâğıt kalmaz, mektubun içindeki boşluk ≈ nav bandı (80–90 px).
+- Baş kümesi (`.page-corner.corner-tl`): başın yazılarına (story başlık/kicker/giriş, details kicker) değerse küçülür
+  (`giveWay`; önce details 320×568 aralık "WEDNESDAY" %4,8).
 - Story: `tiles` çerçeve genişliğini (`--fw`) ilk sıra nav'ın üstünde bitecek en büyük değere ayarlar (ikili arama;
   telefonda pencere ≥ 38vw → çerçeve ≥ 48,5vw; ≥ 720 px'te üçlü sıra ≥ 160 px); sığmazsa telefonda çerçeve tam boyda katlanır,
   geniş ekranda sıra **bir bütün** olarak katlanır (bir ekrana sığacak boyda) — tek ya da iki çerçeve asla kalmaz.
@@ -148,7 +169,7 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
   `--cw` (mektup + mühür, ≥ 270 px; masaüstünde de tek sütun, form altında — yan yana formun satırları nav'ın altından
   geçiyordu). Kâğıt bandı yuvarlaması 1,5 px toleransla (önce `offsetHeight`'in yukarı yuvarlaması 390 px'te fazladan bir
   çizgi bandı ekliyordu: RSVP mektubu 558 → 635 px).
-- İç sayfalarda ilk ekran zemini (`.page-bg`, `100svh`): home'daki gibi harita çizgili parşömen (telefon) / bulanık sayfa
+- İç sayfalarda ilk ekran zemini (`.page-bg`, `--vh`): home'daki gibi harita çizgili parşömen (telefon) / bulanık sayfa
   (yatay), damga; yatay/geniş ekranda sağ altta `decor_br` (nav'ın 8 px üstünde biter). Önce iç sayfalar düz `bg_tile`'dı.
 
 ## Comp öğe haritası (docs/11 §8)
@@ -199,7 +220,7 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
 | saat (kırmızı) · ETKİNLİK / yer | `.sched-row` (`.time`, `.label`, `.loc`) | |
 | satır arası papatyalı sicim | `::before` GPT `divider` | 6+ satırda yalnız boşluk |
 | — | `.page-kicker` gün · tarih | standart zorunlu başlık tarihi |
-| pul kenarlı yatay çerçevede mekân fotoğrafı | `.venue-photo` (frame_landscape + `venue`) | |
+| pul kenarlı yatay çerçevede mekân fotoğrafı | `.venue-photo` (frame_landscape + `venue`) | **sapma:** comp'ta mektubun hemen altında, ilk ekranda; temada takvim bağlantılarından sonra, ilk ekranın altında — mektup ilk ekrana sığacak boyda ve program 1–10 satır uzayabildiği için ikisi telefonda birlikte sığmaz (yarım foto nav'ın altında kalırdı) |
 | "The Old Post House", "Hudson, New York" | `.venue-name`, `.venue-text .kicker` (+ ülke, adres, tören cümlesi) | |
 | "DRESS CODE · Cocktail attire" | `.dress` | **sapma:** comp'taki iki yan çizgi yerine üstte sicim (CSS çizgisi yok) |
 | köşe kümeleri | `decor_tl` (başlık), `decor_br` (sayfa sonu) | |
@@ -219,12 +240,17 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
 
 ## Bilinen sınırlar
-- **İlk ekran (G404 incelemesi, ölçülen):** 4 sayfa × 17 boyut × demo/aralık/zorlama = 204 ilk ekranda nav'ın altında yarım
-  parça yok. Bedeli (kuralın bilinçli karşılığı): katlanan birimin üstünde boş kâğıt/masa kalır — RSVP imzası 320×568'de
-  (her kayıt, 144 px boş kâğıt), yatay telefonda (7–22 px) ve zorlama isimleriyle 360/375 px (207/230 px) ile 1280×650 /
-  1366×657'de (253/258 px) katlanır; story ilk çerçevesi 320×568'de (ve aralık kaydıyla 360×640'ta) katlanır, ilk ekran başlık
-  + giriş + masa (193/246 px boş masa); yatay telefonda story ilk ekranı yalnız başlık + giriş.
-- Zorlama isimleri 320 px zarf sayfasında "YOU ARE INVITED" köşe kümesinin unutmabenisine çok yakın.
+- **İlk ekran (ikinci QA'nın betikleriyle yeniden ölçüldü):** 4 sayfa × 18 boyut × demo/aralık/zorlama + 6 önizleme boyutu
+  (çubuklu) × 3 kayıt = 288 ilk ekranda nav'ın altında yarım yazı/bağlantı/foto/görsel yok; nav bandında küme yok (önizlemede
+  önce 18 ekranda `.page-bg` kümesi). RSVP imzası 72 ilk ekranın 53'ünde mühürle birlikte ilk ekranda (isimler ≥ 18,7 px);
+  sığmadığı yerde (320×568 aralık/zorlama, 360/375 px zorlama, yatay telefonlar, zorlama 1280×650 / 1366×657) katlanır: ilk
+  ekranda ≤ 14 px boş kâğıt, mektubun içinde 85–93 px aralık (nav bandı + 6 px); önizleme çubuğuyla 844×390'da "We can't
+  wait" satırı da katlanır (hapın altında sicim; hap → nav 35 px, sicim → satır 82 px). Önce: 149–392 px boş kâğıt, 223–465 px
+  aralık.
+  Story ilk çerçevesi 320×568'de (ve aralık kaydıyla 360×640'ta) katlanır, ilk ekran başlık + giriş + masa; yatay telefonda
+  story ilk ekranı yalnız başlık + giriş.
+- Hero'nun sağ alt kümesi yazıya yer açmak için çoğu telefonda küçülür (297 yüklemenin 225'inde, medyan %78), dar ve uzun
+  ekranlarda 10 yüklemede kalkar (320–340 px); masaüstünde ve yatay telefonda tam boy. Zarf sayfasında 138 küme yerleşiminin 18'inde küçülür (en çok %22, önizleme çubuğuyla 360×640).
 - **Yazı tipi alfabesi:** Homemade Apple Google Fonts'ta yalnız `latin` (U+0000–00FF: "Élodie", "Zoë", "Müller" içinde);
   `latin-ext` harfleri (ł, ő, ş, ř …) el yazısında `Segoe Script` / `Bradley Hand` / `cursive` ile karışır. Special Elite
   `latin-ext` taşır. Görev fontları belirlediği için değiştirilmedi.
@@ -239,9 +265,13 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
 - Kontrast (token'lar, `tests/theme-vintage-airmail-love-letter.test.ts`): mürekkep 9:1, küçük daktilo `--ink-soft` 6,4:1
   parşömende / 8,6:1 kâğıtta, el yazısı `--pen` 9,4:1, kırmızı saat `--red-ink` ≥ 5,2:1, hap etiketi 10,8:1; masadaki krem yazı
   masanın ortalama tonuna karşı ≥ 4,5:1 (üstüne koyulaştırma katmanı + yazı gölgesi). Mühür monogramı bilerek kabartma tonunda
-  ve yardımcı teknolojiden gizli; zarf içindeki küçük kart `aria-hidden`. **Boyalı zeminde ölçüm (G404 incelemesi):** yazı
-  saydam yapılmış tam sayfa görüntüsünde her satırın altındaki zeminin en kötü %5'i (yazı gölgesi hesaba katılmadan), 5 sayfa
-  × 390×844 / 1280×720: hepsi ≥ 4,5:1, en düşük 4,75:1 (story "MOMENTS WE HOLD DEAR", masada).
+  ve yardımcı teknolojiden gizli; zarf içindeki küçük kart `aria-hidden`. **Masada boyalı zeminde ölçüm (ikinci QA):** önceki
+  "hepsi ≥ 4,5:1, en düşük 4,75:1" iddiası yanlıştı — QA'nın ölçümü (yazı saydam, öğe kutusunun zemininin en kötü %5'i,
+  gölgesiz / gölgeli) "MOMENTS WE HOLD DEAR" 2,25 / 2,69 (390×844), 1,74 (1280×720), giriş 2,73 / 3,28, başlıklar 2,8 / 3,2,
+  "Our Story" 2,4 / 2,8 buldu (masanın lamba ışığı başlığın arkasında). Şimdi: başlık ve kicker yazı genişliğinde kutu, kicker
+  14 px, her krem yazının arkasında kenarsız koyu gölge (`::before`, `radial-gradient(closest-side …)`, §5.7) → aynı ölçümde
+  390×844 / 1280×720 / 360×640 / 1440×900 / 844×390: "Our Story" en kötü %5 ≥ 5,48:1, kicker ≥ 5,81, giriş ≥ 4,81, başlıklar ≥ 5,71
+  (gölgesiz; gölgeyle 6,91 / 6,86 / 5,83 / 5,75).
 - Yazı tabanı: görünen her metin ≥ 11 px (kart kopyası, mühür monogramı, mektuptaki küçük satırlar, geri sayım etiketleri,
   zarf başlığı küçülünce `&`). Android'de dokunma dikdörtgeni yok (`-webkit-tap-highlight-color`), odak halkaları duruyor.
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `clip-path` animasyonu, `ResizeObserver`, view transition),
