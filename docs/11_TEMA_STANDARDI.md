@@ -167,6 +167,7 @@ alanları): işareti olmayan temada alıcı o özelliği hiç görmez — §3.2'
   kısa yanıt `<textarea data-if="!.options" maxlength="300" data-attr-aria-label=".label">`, hata yeri
   `<p data-attr-data-rsvp-error-for="answer:{.id}">`. Girişlere `name` yazılmaz (`form.js` `answer:<id>` verir). Örnek:
   `platform/themes/blush-garden-rose/rsvp.html`; tam metin README → "Özel sorular (G051)".
+- **Misafir adları (G069, zorunlu):** `guests` alanından hemen sonra `<template data-rsvp-party>` — içinde temanın kendi alan stiliyle `label.field` (etiket `data-copy="form_party"` + numara + `form_optional`), adsız `input` (≤120; `form.js` `party[]` olarak gönderir), hata yeri `[data-rsvp-error-for="party"]`. Kişi sayısı ≥ 2 iken "Name of guest 2/3…" satırları açılır. Örnek: 01, 02, 03, 05 `rsvp.html` (G069, G084).
 
 ### 3.4 `#site-data` ve sayfa haritası
 - Motor her sayfaya `<script type="application/json" id="site-data">` ekler: `slug`, `theme`, `variant`, `page`, `preview`,

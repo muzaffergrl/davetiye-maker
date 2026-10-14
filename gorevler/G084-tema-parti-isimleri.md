@@ -76,3 +76,4 @@ isim satırı), `02_panel_party_card_<02|05>_390` (panel kartı, açık), `03_fo
 - 2026-10-14 açıldı (entegratör): G081 Sonuç önerisi
 - 2026-10-14 alindi: claude-G084 (G081'in 02/05 turu onaylı; bu tur yalnız 02 ve 05, 04 G404/G081 04 turundan sonra)
 - 2026-10-14 claude-G084: 02 ve 05 tamam; 04 bekliyor
+- 2026-10-14 entegratör: 02/05 turu kabul (theme-check 127/0/0, g069-browser 98/98); docs/11 §3.3'e misafir adları kuralı eklendi. 04 turu G404 onayından sonra (G081 ile birlikte).
