@@ -20,6 +20,7 @@ import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
 import { panelIssues, previewTokenExpiry, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
 import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
+import { NO_GUEST_ACCESS, type GuestAccessView } from '../../lib/panel/guest-access.ts';
 import { panelApi } from './api.ts';
 
 export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'offline' | 'conflict' | 'unauthorized' | 'refused';
@@ -50,6 +51,15 @@ export interface IdentityOutcome {
   issues?: ValidationIssue[];
 }
 
+export interface AccessOutcome {
+  ok: boolean;
+  status: number;
+  code?: string;
+  message?: string;
+  /** A new password: guests who entered the old one are asked again (G076). */
+  signedOut?: boolean;
+}
+
 export interface LocalBackup {
   baseUpdatedAt: string;
   content: ContentRecord;
@@ -66,7 +76,15 @@ function metaFrom(body: Record<string, unknown>, fallback: PanelMeta): PanelMeta
     // Same value for a whole hour (lib/keys.ts), so the preview frame keeps its address between saves.
     previewToken: typeof body.previewToken === 'string' && body.previewToken ? body.previewToken : fallback.previewToken,
     orderPending: typeof body.orderPending === 'boolean' ? body.orderPending : fallback.orderPending,
+    guestAccess: guestAccessFrom(body.guestAccess) ?? fallback.guestAccess,
   };
+}
+
+function guestAccessFrom(value: unknown): GuestAccessView | null {
+  if (!value || typeof value !== 'object') return null;
+  const v = value as Record<string, unknown>;
+  if (typeof v.enabled !== 'boolean') return null;
+  return { enabled: v.enabled, password: typeof v.password === 'string' && v.password ? v.password : null };
 }
 
 /** Renew the preview token this long before it runs out (an idle tab, the phone asleep). */
@@ -111,6 +129,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     rights: initial.rights,
     previewToken: initial.previewToken,
     orderPending: initial.orderPending,
+    guestAccess: initial.guestAccess ?? NO_GUEST_ACCESS,
   });
   const [saveState, setSaveState] = useState<SaveState>('saved');
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -324,6 +343,26 @@ export function usePanel(initial: PanelState, editKey: string) {
     [api, enqueue, flush, keepBackup, replaceContent],
   );
 
+  /**
+   * Guest password on/off or a new one (G076, POST /access). Runs in the save queue: it changes updatedAt, so a save typed
+   * meanwhile is sent after it with the new version. Applies to the live website at once (no publish).
+   */
+  const setGuestAccess = useCallback(
+    async (enabled: boolean, password?: string): Promise<AccessOutcome> => {
+      const res = await enqueue(() => api.access(enabled, password));
+      const body = res.body as Record<string, unknown> & { code?: string; message?: string };
+      if (res.ok) return { ok: true, status: res.status, signedOut: body.signedOut === true };
+      stopOn(res.status, body);
+      return {
+        ok: false,
+        status: res.status,
+        code: body.code,
+        message: res.status === 0 ? 'No connection. Please try again when you are back online.' : body.message,
+      };
+    },
+    [api, enqueue],
+  );
+
   const uploadPhoto = useCallback(
     async (slot: PanelPhotoSlot, blob: Blob): Promise<{ ok: boolean; message?: string }> => {
       if (stopped.current) return { ok: false, message: saveMessage ?? 'Saving is paused. Please reload the page.' };
@@ -468,6 +507,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     publish,
     unpublish,
     changeIdentity,
+    setGuestAccess,
     uploadPhoto,
     removePhoto,
     restoreBackup,

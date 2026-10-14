@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 33 · alindi 13 · inceleme 4 · blokaj 277 · bitti 61 · toplam 388
+Özet: hazir 33 · alindi 12 · inceleme 5 · blokaj 277 · bitti 61 · toplam 388
 
 ## claude-canva
 
@@ -173,7 +173,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `G064` inceleme · wf-g064 — Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
 - `G067` alindi · claude-ilan2 — İlan görselleri v2 — kısım 1 (01, 03): GM03 düzeni + GPT sahneleri + gerçek misafir ekranları (kapak, sayfalar, nasıl çalışır, canlı demo)
 - `G069` alindi · claude-G069 — RSVP yanıtları çift için düzenli ve şık — özetler, soru cevap dökümü, yeni yanıt işareti, misafir isimleri, yazdırılabilir liste
-- `G076` alindi · claude-G076 — İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar
+- `G076` inceleme · claude-G076 — İsteğe bağlı site şifresi — yalnız şifreyi bilen misafirler siteyi açar
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar

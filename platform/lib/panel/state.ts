@@ -3,6 +3,7 @@
 import { claimableTheme } from '../claim/themes.ts';
 import type { SiteRecord } from '../data/types.ts';
 import { panelPreviewToken } from '../keys.ts';
+import { guestAccessView } from '../site/access.ts';
 import { orderPending } from '../sites.ts';
 import { loadTheme, PAGE_NAMES, readThemePage, type LoadedTheme, type PageName } from '../theme/theme.ts';
 import {
@@ -124,6 +125,8 @@ export function panelMeta(site: SiteRecord, now: Date = new Date()): PanelMeta {
     // Short-lived (lib/keys.ts): every answer renews it, so an open panel keeps a working preview.
     previewToken: panelPreviewToken(site.id, site.previewKeyHash, now.getTime()),
     orderPending: orderPending(site),
+    // The couple's own password (shown in Share); the cookie secret and version stay on the server.
+    guestAccess: guestAccessView(site),
   };
 }
 
