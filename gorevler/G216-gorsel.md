@@ -65,3 +65,4 @@ Kısım 2 — gpt-gorsel-H, 2026-10-14 (8/8; durum `alindi`):
 - 2026-10-14 gpt-gorsel-H: kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 2 (8 parça) geçti, closure↔zarf hizası GEÇTİ. Kısım 3 verildi; PAKET 2 gpt-gorsel-D'de.
 - 2026-10-14 devam: gpt-gorsel-H (kısım 3)
+- 2026-10-14 ara kayıt (kısım 3, 4/8): gpt-gorsel-H; florals_br, accent_1, accent_2, accent_3 Kaydet yollarında. Dördü de 1254×1254, gerçek alfa; oran/kenar/içerik kontrolleri GEÇTİ. W1 referansları kullanıldı, florals_br için florals_tl ayrıca verildi; açık krem zemin üzerinde yazı ve görünür dış gölge/hâle bulunmadı.
