@@ -131,6 +131,16 @@ export const MARKETING: MarketingConfig = {
       updated: '2026-10-14',
     },
     {
+      // G405 approved (2026-10-14); on the sales site and open on /start since G082.
+      id: 'mediterranean-lemon',
+      name: 'Mediterranean Lemon',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-14',
+    },
+    {
       // G404 (being built). Becomes 'live' only when the theme is live; until then it is not listed anywhere.
       id: 'vintage-airmail-love-letter',
       name: 'Vintage Airmail Love Letter',

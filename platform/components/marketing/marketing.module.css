@@ -2157,7 +2157,7 @@
 }
 .breadcrumbs ol {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* G082: one row, see .breadcrumbs li:last-child */
   align-items: center;
   list-style: none;
   margin: 0;
@@ -2182,6 +2182,19 @@
 .breadcrumbs a:hover {
   text-decoration: underline;
   text-decoration-color: var(--gold);
+}
+/* G082: always one row, whatever the font. A long current page ("Home / Designs / Mediterranean Lemon" at 390 px) fit
+   in the fallback font and wrapped once Montserrat arrived, pushing the whole hero down 44 px (CLS 0.13 on a slow
+   load). Now the current page's name is cut with an ellipsis instead; the full name is the h1 right below. */
+.breadcrumbs li:last-child {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.breadcrumbs li:last-child > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 /* The closing call to action: a simple aubergine block (brand color), paper text. */
 .finalCta {
