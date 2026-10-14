@@ -46,3 +46,4 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 alindi: gpt-gorsel-I; bu oturum: kısım 1, W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
 - 2026-10-14 ara kayıt: gpt-gorsel-I; W1 tamamlandı (5/5 ekran), W2'nin ilk 3 parçası sırada.
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 1, 8/8 görsel kaydedildi ve denetlendi (W1 5 + W2 bg_page, bg_tile, envelope_closed).
+- 2026-10-14 gpt-gorsel-I: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
