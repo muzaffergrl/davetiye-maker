@@ -55,3 +55,4 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-D (kısım 2)
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 2, 4/8); closure, envelope_open, card_small, invitation_card kaydedildi. Dört dosya oran/gerçek alfa/pencere varlığı denetiminden geçti; kapalı–açık cüzdan hizası GEÇTİ (sol/sağ +%0,20, alt %0). card_small üç denemede tam #00FF00 olmadı; en düz ve saf yeşile en yakın ilk çıktı seçildi (pencere içi ortalama RGB 7,73/246,03/2,70); mevcut dosyalar korundu.
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 2, 8/8); info_card, frame_portrait, frame_landscape, florals_tl kaydedildi; sekiz yeni dosya oran/alfa/pencere-varlığı denetiminden geçti; yeşil renk ve yatay oran farkları Sonuç'ta kaydedildi. Durum alindi.
+- 2026-10-14 kısım 2 bitti; kalan: florals_br, accent_1–3, divider, web_hero + PAKET 2
