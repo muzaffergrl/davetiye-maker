@@ -2,7 +2,7 @@
 id: G217
 baslik: Tasarım 17 Emerald & Gold Estate — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: inceleme
 alan: gpt-gorsel-I
 oncelik: 2
 bagimli: []
@@ -27,11 +27,29 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/17_Emerald_Gold_Estate --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
-- [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
-- [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
+- [x] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [x] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
+- [x] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
+
+### Son teslim — üç kısmın özeti (2026-10-14)
+
+- G217 görsel paketi tamamlandı; durum `inceleme`. PAKET 5: 5 W1 comp + 17 W2 parça; PAKET 2: 5 fotoğraf. Aşağıdaki eski üretim kayıtları tarihçedir; kısım 2'deki dikey closure ölçüsü ve eksik dosya listeleri bu son teslimle geçersizdir.
+- Kısım 1 (gpt-gorsel-I): W1 `web_1_envelope`, `web_2_home`, `web_3_story`, `web_4_details`, `web_5_rsvp`; W2 `bg_page`, `bg_tile`, `envelope_closed` üretildi. Bu oturumda bu sekiz dosya korundu.
+- Kısım 2 (gpt-gorsel-I): `closure`, `envelope_open`, `card_small`, `invitation_card`, `info_card`, `frame_portrait`, `frame_landscape`, `decor_tl` üretildi. Önceki talimat nedeniyle closure küçük mühürlü 1024×1536 tuvaldeydi; kısım 3'te bu tek dosyanın üzerine doğru kare sürüm kaydedildi. Diğer yedi parça korundu.
+- Kısım 3 (bu oturum, gpt-gorsel-I): sırayla `parts/closure.png` yeniden üretildi; `decor_br.png`, `accent_1.png`, `accent_2.png`, `accent_3.png`, `divider.png`, `web_hero.png` eklendi. İlk beşi 1024×1024 RGBA, divider 1536×1024 RGBA, web_hero 1536×1024 opak RGB. Beş mevcut W1 comp ve decor_tl sohbete referans olarak yüklendi; ilgili W1 ekranları her üretimde imagegen'e verildi. Decor_br'de decor_tl, closure ve hero'da mevcut kapalı zarf da referans kullanıldı.
+- Closure düzeltmesi: yalnız altın mühür; boş merkez, ince yaprak bordürü, yazı/harf/monogram ve zarf yok. Gerçek alfa ≥128 nesne kutusu `(156,154)–(869,870)`; genişlik 713 px (%69,6), yükseklik 716 px (%69,9), merkez yaklaşık `(512,512)`. Zarf tuvalindeki eski 168 px mühür artık kullanılmıyor; site kare dosyayı zarf üzerine ölçekler.
+- Yeniden üretimler: closure'da W1'de bulunmayan yuvarlak tomurcuklar nedeniyle bir ek deneme; decor_br'de dolu görünen yapraklar yerine açık kontur için bir ek deneme; divider'da ek okaliptüs/taneleri çıkarıp yalnız eğrelti bırakmak için bir ek deneme; hero'da ilk ortalı paylaşım kırpımının alt boşluğu %5'in altında kaldığı için bir ek deneme. Yalnız seçilen sade adlar repoya kondu.
+- Kaydetme hazırlığı: imagegen'in kare alfa çıktıları 1254×1254 olduğundan ImageMagick ile Kaydet ölçülerine aktarıldı; alfa <16 artık pikseller temizlendi. Closure ortalanıp yaklaşık %70 çapa, divider ortalanıp yaklaşık %60 genişliğe getirildi. Dekor çizilmedi, yeşil pencereler boyanmadı. Ek rapor/önizleme dosyası repoya eklenmedi; mevcut comp, fotoğraf ve mockup dosyaları korundu.
+- Hero görsel kontrolü: orta-üst isim alanı boş, üst %20 yalnız zemin/dekor, zarf ve mühür tam görünüyor. 1536×1024 kaynaktan ortalı 1200×630 kırpımın kaynak sınırları yaklaşık `y=108,8–915,2`; zarfın alt altın kenarı `y≈797`. Kırpımda altta yaklaşık %14,7 boşluk kalıyor (istenen ≥%5).
+- Son kontroller: `PYTHONDONTWRITEBYTECODE=1 python3 tools/kit_check.py collections/17_Emerald_Gold_Estate --paket 5` **23/23 GEÇTİ** (22 dosya + hiza), `--paket 2` **5/5 GEÇTİ**; iki komut da çıkış kodu 0. Kapalı/açık zarf hizası **GEÇTİ**: sol -%0,10, sağ +%0,20, alt +%0,13. Denetim kodu ve GPT_PROMPTS.md değiştirilmedi.
+- PAKET 2, entegratör günlüğüne göre gpt-gorsel-M tarafından tamamlanmıştı. Bu oturumda beş fotoğraf yeniden üretilmedi; görüntüler açılarak çiftin yüz/kıyafet tutarlılığı, eller ve renk dünyası gözden geçirildi, dosya denetimleri geçti.
+- İnceleme notları / emin olunmayanlar: decor_br aynı altın süs dilinde karşı köşe olarak yeniden çizilmiştir; decor_tl'nin birebir piksel aynası değildir. Accent nesnelerinin alfa ≥128 genişlikleri sırasıyla yaklaşık %33,3 / %44,5 / %33,4; prompt'taki yaklaşık %40 hedefine yakın ama eşit değil. Önceki bg_tile 1254×1254 olarak korunmuştur (kare oran kontrolü geçer). Önceki kapalı zarfın araç önizlemesinde geniş hâle gibi görünen dış renklerin örnek alfa değerleri 0'dır; gerçek zeminde görünmez. Site içinde nihai ölçek, animasyon, metin yerleşimi ve paylaşım servislerinin kendi kırpımları bu görsel görevinde denenmedi.
+- İstenen ara kayıtlar `G217: ara kayıt (kısım 3, 3/7)` ve `G217: ara kayıt (kısım 3, 7/7)` ile main'e push edildi. Her push öncesi `git pull --rebase origin main` uygulandı. Bu görevden sonra yeni göreve geçilmez.
+
+### Önceki kısımların üretim kayıtları
+
 - Kısım 1 tamamlandı (gpt-gorsel-I): yalnız 8 seçilmiş PNG, `collections/17_Emerald_Gold_Estate/assets/gpt/` altında Kaydet satırlarındaki yollara kondu. W1: `comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` (hepsi 1024×1536). W2: `parts/bg_page.png` (1024×1536), `bg_tile.png` (araç çıktısı 1254×1254; hedef kare oranını korur), `envelope_closed.png` (1024×1536 RGBA, gerçek alfa).
 - W1.1 zarf gövdesi fazla geniş olduğu için üç kez yeniden üretildi; daha yüksek gövdeli son tasarım seçildi. W1.3 kalın çerçeveler ince altın metal çerçevelere dönüştürülerek bir kez yeniden üretildi. Yalnız seçilen beş dosya repoya kondu.
 - W1 görsel kontrolü: telefon donanımı/çubuğu yok; home'da kart, geri sayım ve RSVP; story'de birbirini kesmeyen üç çerçeve; details'ta üç program satırı ve yatay mekân penceresi; RSVP'de kart içindeki buton ve aynı yaprak bordürlü mühür mevcut. PNG dosyaları açılarak ölçüleri doğrulandı.
@@ -62,3 +80,4 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-I (kısım 3)
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 3, 3/7: closure yeniden üretildi (1024×1024 RGBA; alfa ≥128 mühür kutusu (156,154)–(869,870), çap yaklaşık %70); decor_br ve accent_1 eklendi. Üç dosyanın Kaydet ölçüsü/gerçek alfa denetimi GEÇTİ. Durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 3, 7/7: accent_2, accent_3, divider ve web_hero eklendi. Bu oturumdaki yedi dosyanın Kaydet ölçüsü/alfa denetimi GEÇTİ. Son tam paket kontrolleri ve Sonuç özeti sırada; durum alindi.
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-I; kısım 3 ve G217 tamamlandı. PAKET 5 23/23, PAKET 2 5/5, zarf hizası GEÇTİ. Closure kare tuvalde yaklaşık %70 çapla düzeltildi; üç kısmın özeti ve inceleme notları Sonuç'a yazıldı. DUR.
