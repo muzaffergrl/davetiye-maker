@@ -2,7 +2,7 @@
 id: G805
 baslik: Tasarım 05 Mediterranean Lemon — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-B
 oncelik: 2
 bagimli: []
@@ -45,3 +45,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-B; 5/5 geçti, kullanıcının tercihiyle ham imagegen çıktıları korundu.
+- 2026-10-14 entegratör onayladı
