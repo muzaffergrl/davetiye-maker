@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 39 · alindi 8 · inceleme 5 · blokaj 277 · bitti 56 · toplam 385
+Özet: hazir 40 · alindi 8 · inceleme 5 · blokaj 277 · bitti 56 · toplam 386
 
 ## claude-canva
 
@@ -102,9 +102,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G077` p1 — Canlıya güncel main — panel v2, satış sitesi, yeni temalar; canlı kontrol + kullanıcı için test linkleri → `gorevler/G077-canli-yayin-guncel.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (43)**
 
