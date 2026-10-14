@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 32 · alindi 9 · inceleme 2 · blokaj 293 · bitti 37 · toplam 373
+Özet: hazir 31 · alindi 10 · inceleme 1 · blokaj 293 · bitti 38 · toplam 373
 
 ## claude-canva
 
@@ -102,12 +102,13 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G063` p1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu → `gorevler/G063-tarayici-capraz-test.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (42)**
+**Üzerinde çalışılan / incelemede / blokaj (43)**
 
+- `G063` alindi · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -254,11 +255,10 @@ Bağımlılık bekleyen: 17 · Biten: 25
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (23)**
+**Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
 - `G059` inceleme · wf-ilan — Platform modeline göre set paketi (docs/05) + tasarım 01 ve 03 için Etsy ilan kiti ve alıcı START HERE PDF'i
-- `G062` inceleme · wf-strateji — Karar belgesi — marka/dükkân adı adayları (alan adı müsaitliği), Etsy merkezli fiyatlandırma, satış sonrası ve müşteri bağlama
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
@@ -280,7 +280,7 @@ Bağımlılık bekleyen: 17 · Biten: 25
 - `G720` blokaj · - — Tasarım 20 Coastal Seaside — A5 kılavuz + B3 Etsy ilan metni
 - `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
-Bağımlılık bekleyen: 0 · Biten: 3
+Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-qa
 
