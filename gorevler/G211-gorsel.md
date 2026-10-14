@@ -43,6 +43,7 @@ Kısım 2 (gpt-gorsel-E, 2026-10-14): mevcut 5 W1 comp'u, envelope_closed.png, c
 `python3 tools/kit_check.py collections/11_Boho_Pampas --paket 5`: **23/23 geçti**. Bu sonuç kısım 1'de kaydedilen pencere renk/alfa ve oran sınırlamalarını ortadan kaldırmaz; o dosyalara dokunulmadı. Paket 2 fotoğrafları bu oturumda üretilmedi; kalan üretim PAKET 2 fotoğraflarıdır. Durum `alindi` kalır; kısım 2 sonunda duruldu.
 
 ## Günlük
+- 2026-10-14 devam: gpt-gorsel-E (PAKET 2)
 - 2026-10-14 kısım 2 bitti; kalan: PAKET 2 fotoğrafları (gpt-gorsel-E). `kit_check --paket 5`: 23/23 geçti. Durum `alindi` bırakıldı; bu oturum durdu.
 - 2026-10-14 ara kayıt (kısım 2, 5/5): divider.png ve web_hero.png Kaydet yollarına eklendi (gpt-gorsel-E). Ayırıcıda 4 denemeden kenar boşluğu en geniş olan 3. çıktı seçildi; gösterimde görünen geniş hâlenin nesne dışındaki örnek pikselleri alfa 0 olarak doğrulandı. Hero'nun dış gölgesi için ikinci çıktı seçildi; kapalı zarf ve kapanışı 1200×630 merkez kırpımında tam, altında %7,84 boşluk var. İki yatay dosya 1536×1024; divider gerçek alfa, hero opak. Ek rapor/önizleme dosyası eklenmedi. Durum `alindi`.
 - 2026-10-14 ara kayıt (kısım 2, 3/5): accent_1.png, accent_2.png, accent_3.png Paket 5 prompt'larıyla sırayla üretildi ve Kaydet yollarına eklendi (gpt-gorsel-E). Mevcut 5 W1 comp'u, envelope_closed.png, closure.png ve decor_tl.png sohbete referans olarak yüklendi; mevcut dosyalar korunuyor. Üç accent tek nesne, yazısız, kenar boşluklu ve gerçek alfa PNG; kare çıktılar 1254×1254. Durum `alindi`.
