@@ -53,21 +53,22 @@ standarda (docs/11 §15), W1 comp'larına ve G405/G402 QA derslerine karşı yen
 | 7 | **Parçacıklar (orta; ders 6):** varış ve kapanış çiçekleri `z-index: 30` sabit katmanda isimlerin, geri sayımın, kapanış yazısının üstünden geçiyordu | Katman bölümün içinde (`.hero`, `.closing`), `z-index: 0` (yazılar 1), taşanı kırpılır; varışta iki unutmabeni fotoğrafın yanındaki şeritten yalnız fotoğrafın altına kadar (`to: 'avoid'`), kapanışta "Replay the envelope"ın altındaki bantta (`from`). Açılıştaki tek çiçek değişmedi (ekranda yazı yok) | 390×844 / 1280×720: katman `.hero` / `.closing` içinde, z 0, `overflow: hidden`; kapanış çiçekleri 225–323 px (yazı ~180 px'te biter) |
 | 8 | **Comp sapmaları (düşük):** hero isimleri iki satır ("Margot / & Henry"; W1.2 tek satır); RSVP hapı açık periwinkle (#3D4F7A), comp'unki koyu lacivert | `fitNames` sığıyorsa (%86'ya kadar) tek satır; hap `--navy` #2B3753 (paletin `deep`'i koyulaştırılmış, etiket 10,8:1) | 390×844: isimler tek satır 40,5 px; `compare_home_390.jpg` |
 | 9 | Doğrulanan, değişiklik gerekmeyen | Foto pencereleri DPR 3'te örnek fotoğraflarla: yeşil/pembe saçak yok, yarı saydam leke yok (ders 9). Kontrast boyalı zeminde (yazı saydam tam sayfa görüntüsünde satır başına zeminin en kötü %5'i, gölgesiz): 5 sayfa × 390×844 / 1280×720 hepsi ≥ 4,5:1, en düşük 4,75:1 (ders 10). Açılış kareleri: mühür 0 ms'de zıplar ve sola yuvarlanır, şerit 360–1220 ms soldan sağa yırtılır, kart 1,2 s'de zarftan kayar, tek unutmabeni kartın yanından (139 karede fotoğrafın üstünde 0), Skip her an (ders 8); koreografi değişmedi → **yeni video yok** (`opening_390x844.mp4` ilk turdan) | — |
-| 10 | **Bu turun theme-check bulguları (düzeltildi):** taslak önizlemede (üstte platform çubuğu) hero'nun sol üst kümesi `scene-bg`'nin üst kenarında düz çizgiyle kesiliyordu; zorlama kaydında 390 px'te küçülen imza mektubun alt köşe lekelerine biniyordu (%1,2); zarf → home geçişinde nav etiketleri ilk karede yoktu (2 uyarı) | Hero zemini yalnız yanlarda kırpar (`overflow: clip visible`); `.sig` küçüldükçe daralır (`(1 − --sg) × 36cqw`, `free_zone`'un alt satırları içinde); `::view-transition-new(site-nav):only-child { animation: none; }` (01/02/05 gibi) | Son koşu 115/0/1 |
+| 10 | **Bu turun theme-check bulguları (düzeltildi):** taslak önizlemede (üstte platform çubuğu) hero'nun sol üst kümesi `scene-bg`'nin üst kenarında düz çizgiyle kesiliyordu; zorlama kaydında 390 px'te küçülen imza mektubun alt köşe lekelerine biniyordu (%1,2); zarf → home geçişinde nav etiketleri ilk karede yoktu (2 uyarı); G068 birleşince: home → zarf dönüşünde eski nav zarfın üstünde sönüyordu (2 uyarı) | Hero zemini yalnız yanlarda kırpar (`overflow: clip visible`); `.sig` küçüldükçe daralır (`(1 − --sg) × 36cqw`, `free_zone`'un alt satırları içinde); `::view-transition-new(site-nav):only-child { animation: none; }` ve `::view-transition-old(site-nav):only-child { animation: none; opacity: 0; }` (01 gibi) | Son koşu: aşağıda |
 
-**Kontroller (origin/main birleştirmesinden sonra, bu worktree):** `npm ci`; `npm run build` + trace-check (16 rota, 6 tema);
-`npm run typecheck` temiz; `npm test` **539/539** (temanın 31 testi; yeni: maskesiz kümeler, fold birimleri, `--sg`, envFit,
+**Kontroller (iki origin/main birleştirmesinden sonra — ikincisi G068 data-copy + theme-check — bu worktree):** `npm ci`; `npm run build` +
+trace-check (16 rota, 6 tema); `npm run typecheck` temiz; `npm test` **552/552** (ilk birleştirmeden sonra 539/539) (temanın 31 testi; yeni: maskesiz kümeler, fold birimleri, `--sg`, envFit,
 bölüm içi parçacıklar, bant toleransı, story sırası + **tarayıcı testi**: story/details/rsvp × 375×667, 390×844, 844×390,
 1366×657 × demo/zorlama nav'ın altında yarım parça yok; story 1280×650/720/800, 1366×768 × demo/aralık 3/3 çerçeve; rsvp aralık
 360×640 … 1280×800 imza + mühür ilk ekranda; zarf 667×375 / 844×390 / 1280×650 × aralık/zorlama ipucu ekranda — önceki ölçümde bu
 boyutların hepsi kural dışıydı). `theme-check --theme vintage-airmail-love-letter --stress --no-video`
-(port 41991, çıktı geçici klasörde) **115 geçti, 0 hata, 1 uyarı** (G075 teşekkür modu bu temada yok → G081); bilinen "content
-change" `IdentityMismatchError` bu koşuda yaşanmadı, akış geçti; dokun → home 3 817 ms, azaltılmış hareket 313 ms; ilk görünüm
+(port 41991, çıktı geçici klasörde; son koşu ikinci birleştirmeden sonra) **117 geçti, 0 hata, 2 uyarı** (G075 teşekkür modu ve G068
+düzenlenebilir metinler bu temada yok → G081); bilinen "content change" `IdentityMismatchError` bu koşularda yaşanmadı, akış
+geçti; dokun → home 3 818 ms, azaltılmış hareket 153 ms; ilk görünüm
 (390×844, DPR 3) index 922 / home 1 234 KB yer tutucuyla, 1 016 / 1 416 KB örnek fotoğraflarla (≤ 1,5 MB); dokunma hedefleri
-≥ 44 px. Bu turun ilk theme-check koşusu 2 hata + 2 uyarı buldu, düzeltildi (#10). `g051-browser --theme …` **44/44**
-(port 41992), `final-smoke --theme …` **45/45** (port 41993; misafir ekranları `previews/g404/final/01–06` yenilendi).
+≥ 44 px. Bu turun theme-check koşuları önce 2 hata + 2 uyarı, birleştirmeden sonra 2 yeni uyarı buldu; düzeltildi (#10).
+`g051-browser --theme …` **44/44** (port 41992), `final-smoke --theme …` **45/45** (port 41993; ikisi de son birleştirmeden sonra; misafir ekranları `previews/g404/final/01–06` yenilendi).
 Bütçe (KiB okuması, docs/11 §6): `site.js` 35 824 B (≤ 35 840; IIFE bir girinti sola, yorumlar kısaltıldı — gerekçeler README'de),
-`site.css` 46 066 B (≤ 46 080). Tema klasörü 2,54 MB.
+`site.css` 46 078 B (≤ 46 080). Tema klasörü 2,54 MB.
 
 **Önizlemeler (`previews/g404/`):** `compare_<sayfa>_390.jpg` (W1 | tema) ve `checks.json` bu turun theme-check'inden;
 `final_*.jpg` (12 ilk ekran: zarf 667×375 aralık / 844×390 zorlama, home 390×844 demo/aralık, story 375×667 / 1280×650 /
@@ -78,11 +79,11 @@ Bütçe (KiB okuması, docs/11 §6): `site.js` 35 824 B (≤ 35 840; IIFE bir gi
 **Açık noktalar (dürüst):** qa-kontrol alt-ajan incelemesi bu oturumda da yapılamadı (alt-ajan aracı yok) → §13.4 kapısı
 açık, durum `inceleme` kalıyor; bağımsız QA'nın kendi ölçümüyle yeniden kontrolü gerekir. Kuralın bedeli: katlanan birimin
 üstünde boş kâğıt/masa (sayılar #2 ve #5'te; en büyükleri zorlama kaydında). Yatay telefonda story ilk ekranı yalnız başlık +
-giriş. 320 px zarf sayfasında zorlama isimleriyle "YOU ARE INVITED" kümenin unutmabenisine çok yakın. G075 teşekkür modu bu
-temada yok (G081). Denenmedi: gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `clip-path` animasyonu, `:has`,
+giriş. 320 px zarf sayfasında zorlama isimleriyle "YOU ARE INVITED" kümenin unutmabenisine çok yakın. G075 teşekkür modu ve G068 düzenlenebilir
+metinler (`theme.json` `copy` yok: theme-check "94 fixed texts" uyarısı) bu temada yok — ikisi de G081'in kapsamı. Denenmedi: gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `clip-path` animasyonu, `:has`,
 `ResizeObserver`, belgeler arası VT), Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ.
 
-İlk tur metninde (aşağıda) artık geçersiz olanlar: `site.css` 44,6 KB / `site.js` 35,4 KB (şimdi 46 066 / 35 824 B),
+İlk tur metninde (aşağıda) artık geçersiz olanlar: `site.css` 44,6 KB / `site.js` 35,4 KB (şimdi 46 078 / 35 824 B),
 "30 test" (şimdi 31), "telefonda zikzak tek sütun (pencere 56,8vw)" (şimdi 64vw çerçeve, ≥ 38vw), "≥ 720 px'te comp dizilişi"
 (şimdi tek sıra), "kümeler düz kenarla kesilmez" (maskeyle soluyorlardı; şimdi bütün), "qa-kontrol incelemesi yapılmadı" (hâlâ yapılmadı).
 
@@ -171,4 +172,4 @@ panelin onay adımı) ile yayınlasın; şu an her temada "content change" kırm
 - 2026-10-14 alindi: wf-tema04
 - 2026-10-14 bitti, incelemeye gönderildi
 - 2026-10-14 entegratör notu: docs/11 §3.6 teşekkür hâli bu temada yok (G081'de toplu).
-- 2026-10-14 inceleme + QA turu (claude-kod): ilk ekran–nav kuralı 204/204, story masaüstü sırası, RSVP imza + mühür, bütün kümeler, iç sayfa zemini, bölüm içi parçacıklar, zarf ipucu; testler + theme-check 115/0/1, g051 44/44, final-smoke 45/45; durum inceleme (qa-kontrol bekliyor)
+- 2026-10-14 inceleme + QA turu (claude-kod): ilk ekran–nav kuralı 204/204, story masaüstü sırası, RSVP imza + mühür, bütün kümeler, iç sayfa zemini, bölüm içi parçacıklar, zarf ipucu; npm test 552/552, theme-check 117/0/2 (uyarılar G081), g051 44/44, final-smoke 45/45; durum inceleme (qa-kontrol bekliyor)
