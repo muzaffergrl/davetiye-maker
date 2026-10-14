@@ -63,3 +63,4 @@ Kısım 2 — gpt-gorsel-H, 2026-10-14 (8/8; durum `alindi`):
 - 2026-10-14 ara kayıt (kısım 2, 4/8): gpt-gorsel-H; closure, envelope_open, card_small, invitation_card Kaydet yollarında; dört dosya oran/alfa/pencere kontrolünden geçti. Zarf hizası GEÇTİ: sol +0.10%, sağ -0.20%, alt +1.43% (22 px); kapanış uçları -0.39% / -0.10%. Küçük kartta üç denemeden en temiz ilk çıktı seçildi; yeşilde hafif ton/doku değişimi kalıyor.
 - 2026-10-14 ara kayıt (kısım 2, 8/8): gpt-gorsel-H; 8 parça Kaydet yollarında; tüm yeni dosyaların oran/alfa/pencere kontrolleri ve zarf hiza testi GEÇTİ. Kalan geometrik/yeşil pencere farkları Sonuç bölümünde; durum alindi.
 - 2026-10-14 gpt-gorsel-H: kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero + PAKET 2
+- 2026-10-14 entegratör ara kontrol: kısım 2 (8 parça) geçti, closure↔zarf hizası GEÇTİ. Kısım 3 verildi; PAKET 2 gpt-gorsel-D'de.
