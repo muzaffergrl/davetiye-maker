@@ -1,25 +1,24 @@
 {{head}}
 <style>
-  :root { --pw: 440px; --gap: 110px; --corner: 430px; --corner-br: 360px; }
-  .row { top: 520px; }
-  .cap { width: 520px; margin-top: 18px; }
-  .num { width: 104px; height: 104px; border-radius: 50%; border: 3px solid var(--gold); background: var(--ivory);
-    display: grid; place-items: center; margin: 34px auto 0; position: relative; z-index: 2;
-    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 64px; color: var(--deep); }
+  :root { --pw: 560px; --gap: 60px; --corner: 400px; }
+  .row { top: 440px; }
+  .cap { width: 600px; }
+  /* the step number sits in the caption, never over the screen (an earlier badge covered screen text) */
+  .cap h2 .k { display: inline-grid; place-items: center; width: 74px; height: 74px; margin-right: 14px; vertical-align: 6px;
+    border-radius: 50%; border: 3px solid var(--gold); background: var(--ivory); font-size: 48px; line-height: 1; }
 </style>
 </head>
 <body>
 <img class="corner tl" src="{{part.corner_tl}}" alt="">
-<img class="corner br" src="{{part.corner_br}}" alt="">
 <header class="head">
   <p class="eyebrow">{{theme_name}}</p>
   <h1 class="serif">How it works</h1>
   <p class="sub">From your Etsy order to your guests' phones</p>
 </header>
 <div class="row">
-  <div class="col"><img class="phone" src="{{shot.b01_start}}" alt=""><div class="num">1</div><div class="cap"><h2>Start</h2><p>Open the link in your START HERE PDF and enter your Etsy order number</p></div></div>
-  <div class="col"><img class="phone" src="{{shot.b04_panel_top}}" alt=""><div class="num">2</div><div class="cap"><h2>Personalise</h2><p>Type your names, date, venue and schedule, and add your photos</p></div></div>
-  <div class="col"><img class="phone" src="{{shot.b10_live_qr}}" alt=""><div class="num">3</div><div class="cap"><h2>Publish &amp; share</h2><p>Press Publish, then send your link or print the QR code</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.b01_start}}" alt=""></div><div class="cap"><h2><span class="k">1</span>Start</h2><p>Open the link in your PDF, enter your order number</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.b04_panel_top}}" alt=""></div><div class="cap"><h2><span class="k">2</span>Personalize</h2><p>Your names, date, venue and photos</p></div></div>
+  <div class="col"><div class="slot"><img class="phone" src="{{shot.b10_live_qr}}" alt=""></div><div class="cap"><h2><span class="k">3</span>Publish &amp; share</h2><p>Send your link or print the QR code</p></div></div>
 </div>
 </body>
 </html>

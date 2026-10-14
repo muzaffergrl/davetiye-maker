@@ -1,0 +1,151 @@
+{
+  "card_small": {
+    "window_bounds": [
+      278,
+      374,
+      744,
+      999
+    ],
+    "ratio": 0.7456,
+    "inner_rgb_min": [
+      5,
+      240,
+      0
+    ],
+    "inner_rgb_max": [
+      10,
+      248,
+      4
+    ],
+    "inner_alpha_min": 252,
+    "inner_alpha_max": 254,
+    "pure_green_opaque_fraction": 0.0
+  },
+  "frame_portrait": {
+    "window_bounds": [
+      250,
+      383,
+      774,
+      1117
+    ],
+    "ratio": 0.7139,
+    "inner_rgb_min": [
+      0,
+      146,
+      0
+    ],
+    "inner_rgb_max": [
+      21,
+      248,
+      4
+    ],
+    "inner_alpha_min": 33,
+    "inner_alpha_max": 252,
+    "pure_green_opaque_fraction": 0.0
+  },
+  "frame_landscape": {
+    "window_bounds": [
+      326,
+      262,
+      1268,
+      766
+    ],
+    "ratio": 1.869,
+    "inner_rgb_min": [
+      0,
+      29,
+      0
+    ],
+    "inner_rgb_max": [
+      248,
+      255,
+      67
+    ],
+    "inner_alpha_min": 30,
+    "inner_alpha_max": 253,
+    "pure_green_opaque_fraction": 0.0
+  },
+  "alignment": {
+    "tip": "kapak",
+    "yontem": "tuval",
+    "tuval": [
+      1024,
+      1536
+    ],
+    "kenarlar": [
+      {
+        "kenar": "sol",
+        "kapali": 70.0,
+        "acik": 68.0,
+        "fark_px": -2.0,
+        "fark_pct": -0.2,
+        "durum": "tamam"
+      },
+      {
+        "kenar": "sağ",
+        "kapali": 955.0,
+        "acik": 960.0,
+        "fark_px": 5.0,
+        "fark_pct": 0.49,
+        "durum": "tamam"
+      },
+      {
+        "kenar": "alt",
+        "kapali": 1298.0,
+        "acik": 1311.0,
+        "fark_px": 13.0,
+        "fark_pct": 0.85,
+        "durum": "tamam"
+      }
+    ],
+    "uyarilar": [],
+    "esik": [
+      1.5,
+      4.0
+    ],
+    "durum": "tamam"
+  },
+  "tile_seams": {
+    "left_right_mean_abs_rgb": 4.78601807549176,
+    "top_bottom_mean_abs_rgb": 5.250132908027645,
+    "adjacent_horizontal_mean_abs_rgb": 4.7282916534607216,
+    "adjacent_vertical_mean_abs_rgb": 5.529425179675107
+  },
+  "photo_formats": {
+    "hero_portrait.jpg": {
+      "format": "JPEG",
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    "venue.jpg": {
+      "format": "JPEG",
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "story_2.jpg": {
+      "format": "JPEG",
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    "story_1.jpg": {
+      "format": "JPEG",
+      "size": [
+        1024,
+        1536
+      ]
+    },
+    "story_3.jpg": {
+      "format": "JPEG",
+      "size": [
+        1024,
+        1536
+      ]
+    }
+  }
+}

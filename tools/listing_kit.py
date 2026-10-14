@@ -9,13 +9,19 @@ Steps (each one reads what the step before it wrote; `all` = qr, strips, images,
             → collections/<NN_*>/package/shots/
   qr        QR of the buyer's start link /start?theme=<id> (segno, error correction Q, like tools/make_qr.py)
             → package/customer/img/start_qr.png + .svg
-  strips    the guide's step pictures: 1–3 real screens side by side on white → package/customer/img/*.jpg
+  strips    the guide's step pictures: 1–2 real screens side by side on white, each cut to the part the step is about
+            (each ≥ 42 % of the page's text width in the PDF) → package/customer/img/*.jpg
   images    the Etsy listing images, 2000 × 2000 PNG, from tools/listing_templates/platform/*.html (Playwright Chromium;
             layout + typography only, the theme's own GPT parts and real screens) → package/listing/images/
   video     a short silent listing clip from the opening recording, 1080 × 1080 H.264 → package/listing/video.mp4
-  pdf       START_HERE.md → START_HERE.pdf (clickable start link + QR) and listing.md → listing_<id>.pdf (all fields,
-            image thumbnails, video facts) with tools/md_to_pdf.py
+  pdf       START_HERE.md → START_HERE.pdf (a cover with the theme's own painted corners and its envelope screen,
+            clickable start link + QR, every picture kept with its step and captioned) and listing.md →
+            listing_<id>.pdf (all fields, image thumbnails, the cover at search-result size and as a 4:3 crop, video
+            facts) with tools/md_to_pdf.py
   check     checks every output (sizes, counts, title/tag rules, video rules, the PDF's link, the QR's content)
+            --prepublish also: start link and demo answer 200 with the theme's name (live), the demo QR of image 8
+            encodes the demo link, and no [VERIFY …] or [COMMERCIAL PLACEHOLDER] is left in listing.md, START_HERE.md
+            or the PDFs. A kit is not sale_ready until `check --prepublish` passes (docs/05 §D).
 
 Text (START_HERE.md, listing.md) is written by hand; this tool only builds files from it. Commercial fields stay as
 placeholders ([SHOP NAME], [PRICE], …). Etsy rules used by `check` are in ETSY below with their source and status.
@@ -89,19 +95,22 @@ IMAGES = ["01_cover", "02_guest_pages", "03_whats_included", "04_how_it_works", 
           "07_details", "08_live_demo"]
 # Screens each template / guide strip uses (from capture.ts).
 SHOTS = ["g01_envelope", "g02_home_top", "g03_home_invitation", "g04_home_calendar", "g05_story", "g06_details_top",
-         "g07_details_schedule", "g08_details_faq", "g09_rsvp_top", "g10_rsvp_form", "g11_rsvp_sent", "b01_start",
+         "g07_details_schedule", "g08_details_faq", "g09_rsvp_top", "g10_rsvp_form", "g11_rsvp_sent",
+         "g12_details_venue", "b01_start",
          "b02_start_form", "b03_edit_link", "b04_panel_top", "b05_panel_date", "b06_panel_crop", "b07_panel_photos",
          "b08_panel_preview", "b09_publish_notes", "b10_live_qr", "p01_panel_replies", "p02_panel_csv",
          "p03_panel_questions", "d01_demo_home"]
-# START HERE pictures: file → screens shown side by side.
-STRIPS = {
-    "step1_start": ["b01_start", "b02_start_form"],
-    "step2_link": ["b03_edit_link"],
-    "step3_editor": ["b04_panel_top", "b05_panel_date"],
-    "step4_photos": ["b06_panel_crop", "b07_panel_photos"],
-    "step5_publish": ["b08_panel_preview", "b09_publish_notes", "b10_live_qr"],
-    "step7_replies": ["p01_panel_replies", "p02_panel_csv", "p03_panel_questions"],
-    "guests": ["g01_envelope", "g02_home_top", "g07_details_schedule"],
+# START HERE pictures: file → at most two screens side by side (G059 review: a row of three or four small phones was
+# unreadable in the PDF), each with the part of it the step is about: None = the whole screen, (top, bottom) = CSS px
+# of the 390 px wide screen, "sheet" = a bottom sheet without the plain background above it.
+STRIPS: dict[str, list[tuple[str, object]]] = {
+    "step1_start": [("b01_start", None), ("b02_start_form", None)],
+    "step2_link": [("b03_edit_link", (0, 612))],
+    "step3_editor": [("b04_panel_top", None), ("b05_panel_date", None)],
+    "step4_photos": [("b06_panel_crop", "sheet"), ("b07_panel_photos", None)],
+    "step5_publish": [("b09_publish_notes", "sheet"), ("b10_live_qr", "sheet")],
+    "step7_replies": [("p01_panel_replies", None), ("p03_panel_questions", None)],
+    "guests": [("g01_envelope", None), ("g02_home_top", None)],
 }
 
 # Etsy rules checked by `check`. Source + status: help.etsy.com and etsy.com could NOT be opened from this environment
@@ -343,31 +352,62 @@ def _rounded(im: Image.Image, r: int) -> Image.Image:
     return out
 
 
-def make_strip(screens: list[Path], out: Path, slots: int = 4, h: int = 900, gap: int = 54, pad: int = 24) -> Path:
-    """1–3 screens side by side on white, always `slots` wide (so every guide picture has the same height on the
-    page, about 3.5 in on US Letter); rounded corners and a hairline border (layout only)."""
-    w = round(h * 1170 / 2532)
-    canvas = Image.new("RGB", (slots * w + (slots - 1) * gap + 2 * pad, h + 2 * pad), "white")
-    used = len(screens) * w + (len(screens) - 1) * gap
+def _sheet_top(im: Image.Image) -> int:
+    """First pixel row of a bottom sheet: rows above it are one plain colour (capture.ts puts the editor's background
+    behind the sheet)."""
+    a = np.asarray(im.convert("RGB")).astype(int)
+    ref = a[2, a.shape[1] // 2]
+    for y in range(a.shape[0]):  # the white sheet is only ≈ 9–17 levels from the editor's background
+        if np.abs(a[y] - ref).max() > 8:
+            return max(0, y - 6)
+    return 0
+
+
+def screen_part(path: Path, part: object) -> Image.Image:
+    """The part of a captured screen a guide picture shows (see STRIPS); screens are 390 CSS px wide at any scale."""
+    im = Image.open(path).convert("RGB")
+    k = im.width / 390
+    if part == "sheet":
+        return im.crop((0, _sheet_top(im), im.width, im.height))
+    if isinstance(part, tuple):
+        top, bottom = (round(v * k) for v in part)
+        return im.crop((0, min(top, im.height - 1), im.width, min(bottom, im.height)))
+    return im
+
+
+STRIP = {"w": 880, "gap": 132, "pad": 22}  # 880 px ≈ 300 dpi at 3 in
+
+
+def make_strip(screens: list[tuple[Path, object]], out: Path, w: int = STRIP["w"], gap: int = STRIP["gap"],
+               pad: int = STRIP["pad"]) -> Path:
+    """1–2 screens side by side on white, always two slots wide: in the PDF (the picture at 93.5 % of the text width,
+    GUIDE_CSS) every screen is then 42.5 % of the text width (≈ 3 in on US Letter). Rounded corners and a hairline
+    border (layout only)."""
+    if not 1 <= len(screens) <= 2:
+        raise ValueError(f"a guide picture holds 1 or 2 screens, not {len(screens)}")
+    parts = [screen_part(p, part) for p, part in screens]
+    parts = [im.resize((w, round(im.height * w / im.width)), Image.LANCZOS) for im in parts]
+    h = max(im.height for im in parts)
+    canvas = Image.new("RGB", (2 * w + gap + 2 * pad, h + 2 * pad), "white")
+    used = len(parts) * w + (len(parts) - 1) * gap
     x = (canvas.width - used) // 2
-    for s in screens:
-        im = Image.open(s).convert("RGB").resize((w, h), Image.LANCZOS)
-        r = round(w * 0.07)
-        border = Image.new("RGBA", (w + 4, h + 4))
-        ImageDraw.Draw(border).rounded_rectangle((0, 0, w + 3, h + 3), r + 2, fill=(205, 200, 190, 255))
+    r = round(w * 0.06)
+    for im in parts:
+        border = Image.new("RGBA", (w + 4, im.height + 4))
+        ImageDraw.Draw(border).rounded_rectangle((0, 0, w + 3, im.height + 3), r + 2, fill=(205, 200, 190, 255))
         canvas.paste(border, (x - 2, pad - 2), border)
         rim = _rounded(im, r)
         canvas.paste(rim, (x, pad), rim)
         x += w + gap
     out.parent.mkdir(parents=True, exist_ok=True)
-    canvas.save(out, quality=86, optimize=True)
+    canvas.save(out, quality=82, optimize=True)
     return out
 
 
 def step_strips(t: Theme) -> list[Path]:
     shots = t.package / "shots"
-    return [make_strip([shots / f"{s}.jpg" for s in names], t.package / "customer" / "img" / f"{name}.jpg")
-            for name, names in STRIPS.items()]
+    return [make_strip([(shots / f"{s}.jpg", part) for s, part in parts], t.package / "customer" / "img" / f"{name}.jpg")
+            for name, parts in STRIPS.items()]
 
 
 def step_images(t: Theme, fonts: bool = True) -> list[Path]:
@@ -376,16 +416,16 @@ def step_images(t: Theme, fonts: bool = True) -> list[Path]:
     if missing:
         raise RuntimeError(f"missing screens in {shots}: {missing} (run the capture step)")
     out_dir = t.package / "listing" / "images"
-    with tempfile.TemporaryDirectory(prefix="listing_qr_") as tmp:
-        pal = palette(t)
-        qr_png, _ = make_qr(demo_url(t), Path(tmp) / "demo_qr", dark=pal["ink"], light=pal.get("ivory", "#FFFFFF"))
-        values = template_values(t, shots, {"qr.demo": qr_png.resolve().as_uri()})
-        pages = []
-        for name in IMAGES:
-            values["title"] = name
-            pages.append((fill((TEMPLATES / f"{name}.html").read_text(encoding="utf-8"), values),
-                          out_dir / f"{name}.png", 2000, 2000))
-        _render_pages(pages, fonts)
+    # the demo QR of image 8 is kept next to the images: `check --prepublish` decodes it (it must open demo_url)
+    pal = palette(t)
+    qr_png, _ = make_qr(demo_url(t), t.package / "listing" / "demo_qr", dark=pal["ink"], light=pal.get("ivory", "#FFFFFF"))
+    values = template_values(t, shots, {"qr.demo": qr_png.resolve().as_uri()})
+    pages = []
+    for name in IMAGES:
+        values["title"] = name
+        pages.append((fill((TEMPLATES / f"{name}.html").read_text(encoding="utf-8"), values),
+                      out_dir / f"{name}.png", 2000, 2000))
+    _render_pages(pages, fonts)
     outs = [out_dir / f"{n}.png" for n in IMAGES]
     for o in outs:  # lossless re-save: smaller file, same pixels
         Image.open(o).convert("RGB").save(o, optimize=True)
@@ -450,12 +490,16 @@ def step_video(t: Theme, fonts: bool = True) -> Path:
         m = Image.new("L", (slot_w, slot_h), 0)
         ImageDraw.Draw(m).rounded_rectangle((0, 0, slot_w - 1, slot_h - 1), radius, fill=255)
         m.save(mask)
-        fade = 0.4
-        fc = (f"[1:v]trim=start={meta['lead_in_s']}:duration={dur},setpts=PTS-STARTPTS,fps={VIDEO['fps']},"
+        # No fade from or to black (G059 review: a black first frame, and a black flash each time Etsy loops the
+        # clip): the clip starts on the closed envelope and its last `xf` seconds dissolve back into that first frame,
+        # so the loop is seamless.
+        xf, fps = 0.5, VIDEO["fps"]
+        fc = (f"[1:v]trim=start={meta['lead_in_s']}:duration={dur},setpts=PTS-STARTPTS,fps={fps},"
               f"crop={cw}:{ch}:0:0,scale={slot_w}:{slot_h}:flags=lanczos,format=rgba[v];"
               f"[2:v]format=gray,scale={slot_w}:{slot_h}[m];[v][m]alphamerge[vm];"
-              f"[0:v][vm]overlay={slot_x}:{slot_y}:shortest=1,"
-              f"fade=t=in:st=0:d={fade},fade=t=out:st={dur - fade:.2f}:d={fade},format=yuv420p[out]")
+              f"[0:v][vm]overlay={slot_x}:{slot_y}:shortest=1,format=yuv420p,split[a][b];"
+              f"[b]trim=end_frame=1,loop=loop={round(xf * fps) - 1}:size=1:start=0,setpts=N/{fps}/TB[first];"
+              f"[a][first]xfade=transition=fade:duration={xf}:offset={dur - xf:.2f},format=yuv420p[out]")
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-framerate", str(VIDEO["fps"]), "-t", f"{dur}",
                "-i", str(bg), "-i", str(src), "-loop", "1", "-t", f"{dur}", "-i", str(mask),
                "-filter_complex", fc, "-map", "[out]", "-an", "-c:v", "libx264", "-preset", "slow", "-crf", "20",
@@ -472,6 +516,17 @@ def _video_frames(video: Path, out_dir: Path, times=(0.6, 4.0, 9.0)) -> list[Pat
                         "-vf", "scale=360:-1", str(o)], check=True)
         outs.append(o)
     return outs
+
+
+def cover_previews(cover: Path, tmp: Path) -> tuple[Path, Path]:
+    """The cover at search-result size (300 px) and its centred 4:3 crop (2000 × 1500, shown 600 px wide)."""
+    im = Image.open(cover).convert("RGB")
+    small = tmp / "cover_300.png"
+    im.resize((300, 300), Image.LANCZOS).save(small)
+    top = (im.height - im.width * 3 // 4) // 2
+    crop = tmp / "cover_4x3.jpg"
+    im.crop((0, top, im.width, top + im.width * 3 // 4)).resize((600, 450), Image.LANCZOS).save(crop, quality=86)
+    return small, crop
 
 
 def media_markdown(t: Theme, tmp: Path) -> str:
@@ -492,6 +547,13 @@ def media_markdown(t: Theme, tmp: Path) -> str:
         part = thumbs[i:i + 4]
         rows.append("| " + " | ".join(f"![{n}]({th}) **{n}.png** · {w}×{h} · {s / 1_000_000:.1f} MB"
                                       for n, th, (w, h), s in part) + " |")
+    small, crop = cover_previews(img_dir / "01_cover.png", tmp)
+    rows += ["", "## The cover as buyers see it first (generated)", "",
+             "Left: 300 px wide, about the size of a search result. Right: the centred 4:3 crop (2000 × 1500), in case "
+             "Etsy shows the thumbnail cropped (not verified; the listing editor lets you adjust the thumbnail). The "
+             "theme name, \"Wedding Website · RSVP\", both phones and the three labels must stay readable in both.", "",
+             "| 300 px | 4:3 centre crop |", "|---|---|",
+             f"| ![cover 300 px]({small}) | ![cover 4:3]({crop}) |"]
     v = t.package / "listing" / "video.mp4"
     if v.exists():
         f = video_facts(v)
@@ -512,11 +574,118 @@ def media_markdown(t: Theme, tmp: Path) -> str:
     return "\n".join(rows) + "\n"
 
 
-def step_pdf(t: Theme) -> list[Path]:
+GUIDE_CSS = """
+/* START HERE (G059 review): every picture stays with its step and has a visible caption; tables and short lists do
+   not split across pages; page 1 opens with a cover in the theme's own painted parts (layout only, K21). */
+figure { margin: .5em 0 1em; break-inside: avoid; page-break-inside: avoid; }
+/* 93.5 % of the text width: each of the two screens of a guide picture is then 42.5 % of it (≈ 3 in on Letter) */
+figure img { margin: 0 auto; width: 93.5%; }
+figcaption { text-align: center; font-size: .9em; font-style: italic; color: var(--ink); margin-top: .35em; }
+.keep { break-inside: avoid; page-break-inside: avoid; }
+table, ul, ol { break-inside: avoid; page-break-inside: avoid; }
+img.qr { width: 1.75in; margin: .4em auto .2em; }
+.cover { position: relative; overflow: hidden; border-radius: 10px; margin: 0 0 1em; padding: .4in .45in .4in .5in;
+  background-color: var(--cover-bg); background-image: var(--cover-tile); background-size: 3.2in;
+  border: 1px solid var(--gold-light); display: flex; align-items: center; gap: .3in; min-height: 4.1in;
+  break-inside: avoid; page-break-inside: avoid; }
+.cover .c-tl, .cover .c-br { position: absolute; pointer-events: none; }
+.cover .c-tl { top: -.1in; left: -.1in; width: 1.7in; }
+.cover .c-br { bottom: -.1in; right: -.1in; width: 1.4in; }
+.cover .c-text { position: relative; z-index: 1; flex: 1; padding-top: .6in; }
+.cover .c-eyebrow { font-family: var(--body-font); font-weight: 600; font-size: 9pt; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--head); margin: 0 0 .6em; }
+.cover h1 { text-align: left; margin: 0; font-size: 36pt; line-height: 1.05; }
+.cover h1::after { display: none; }
+.cover .c-line2 { font-family: var(--heading-font); font-size: 15pt; line-height: 1.25; color: var(--head); margin: .3em 0 0;
+  white-space: nowrap; text-align: left; }
+.cover .c-name { font-family: "Great Vibes", "Snell Roundhand", cursive; font-size: 38pt; line-height: 1.2; color: var(--head);
+  margin: .3em 0 0; white-space: nowrap; }
+.cover .c-screen { position: relative; z-index: 1; width: 1.65in; border-radius: .14in; border: 1px solid var(--gold-light);
+  box-shadow: 0 6px 18px rgba(40, 30, 20, .18); margin: 0; }
+"""
+
+
+def cover_assets(t: Theme, tmp: Path) -> dict[str, str]:
+    """The guide cover's pictures, resized for print at their size on the page (the full-size paper tile alone is
+    2.6 MB): corners 600/520 px PNG (transparent), envelope screen 560 px JPEG, paper tile 800 px JPEG."""
+    out = {}
+    for key, src, width, fmt in (("tl", REPO / t.corner_tl, 600, "png"), ("br", REPO / t.corner_br, 520, "png"),
+                                 ("screen", t.package / "shots" / "g01_envelope.jpg", 560, "jpg"),
+                                 ("tile", REPO / t.bg if t.bg else None, 800, "jpg")):
+        if src is None:
+            out[key] = ""
+            continue
+        im = Image.open(src).convert("RGBA" if fmt == "png" else "RGB")
+        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+        dst = tmp / f"cover_{key}.{fmt}"
+        im.save(dst, **({"optimize": True} if fmt == "png" else {"quality": 82}))
+        out[key] = dst.resolve().as_uri()
+    return out
+
+
+def guide_html(t: Theme, doc: str, fonts: dict, assets: dict[str, str] | None = None) -> str:
+    """md_to_pdf's HTML of START_HERE.md → the guide's HTML: the # title becomes a cover ("Start Here" and "Your <name>
+    Wedding Website" on two controlled lines, the theme name in script, the theme's own painted corners and its
+    envelope screen), each picture becomes a figure with its alt text as a visible caption, and a ## heading is kept
+    together with the picture right under it."""
+    pal = palette(t)
+    a = assets or {"tl": (REPO / t.corner_tl).resolve().as_uri(), "br": (REPO / t.corner_br).resolve().as_uri(),
+                   "screen": (t.package / "shots" / "g01_envelope.jpg").resolve().as_uri(),
+                   "tile": (REPO / t.bg).resolve().as_uri() if t.bg else ""}
+    tile = f"url('{a['tile']}')" if a["tile"] else "none"
+    cover = (
+        '<section class="cover">'
+        f'<img class="c-tl" src="{a["tl"]}" alt="">'
+        f'<img class="c-br" src="{a["br"]}" alt="">'
+        '<div class="c-text">'
+        '<p class="c-eyebrow">Your guide</p>'
+        '<h1>Start Here</h1>'
+        f'<p class="c-line2">Your {html.escape(t.name)} Wedding Website</p>'
+        f'<p class="c-name">{html.escape(t.name)}</p>'
+        '</div>'
+        f'<img class="c-screen" src="{a["screen"]}" alt="">'
+        '</section>')
+    doc, n = re.subn(r"<h1[^>]*>.*?</h1>", lambda m: cover, doc, count=1, flags=re.S)
+    if not n:
+        raise RuntimeError("START_HERE.md has no # title")
+
+    def figure(m):
+        src, alt = m.group(1), m.group(2)
+        if "start_qr" in src:  # the code itself at 1.75 in (start_qr_page.png is the same code on a 4× wide strip)
+            return f'<p><img class="qr" src="{src.replace("start_qr_page.png", "start_qr.png")}" alt="{alt}"></p>'
+        return f'<figure><img src="{src}" alt="{alt}"><figcaption>{alt}</figcaption></figure>'
+
+    doc = re.sub(r'<p>\s*<img src="([^"]+)" alt="([^"]*)">\s*</p>', figure, doc)
+    # (one heading only: a lazy .*? would run on to a later heading that has a picture and glue whole sections)
+    doc = re.sub(r"(<h2[^>]*>(?:(?!</h2>).)*</h2>)\s*(<figure>.*?</figure>)", r'<div class="keep">\1\2</div>', doc, flags=re.S)
+    root = (f":root {{ --cover-bg: {pal.get('mist_top', '#F6F1EA')}; --cover-tile: {tile}; "
+            f"--heading-font: \"{fonts['heading']}\", Georgia, serif; --body-font: \"{fonts['body']}\", Arial, sans-serif; }}")
+    return doc.replace("</head>", f"<style>{root}\n{GUIDE_CSS}</style>\n</head>", 1)
+
+
+def guide_pdf(t: Theme, md: Path, out: Path, fonts: bool = True) -> Path:
+    import md_to_pdf as m2p
+    pal = m2p.palet_oku(t.collection / "palette.json")
+    with tempfile.TemporaryDirectory(prefix="guide_pdf_") as tmp:
+        tmp = Path(tmp)
+        families = {**m2p.VARSAYILAN_FONTLAR, **(pal.get("fonts") or {})}
+        names = sorted({families["heading"], families["body"], "Great Vibes"})
+        css = m2p.google_fonts_css(names, tmp / "fonts") if fonts else ""
+        doc, families = m2p.html_belge(md.read_text(encoding="utf-8"), md.parent, pal, "letter", css)
+        page = tmp / "guide.html"
+        page.write_text(guide_html(t, doc, families, cover_assets(t, tmp)), encoding="utf-8")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        m2p.playwright_calistir({"url": page.as_uri(), "out": str(out.resolve()), "mode": "pdf", "format": "Letter",
+                                 "margin": m2p.kenar("letter"), "footer": m2p.altbilgi(pal, families),
+                                 "fonts": names if css else []}, tmp)
+    return out
+
+
+def step_pdf(t: Theme, fonts: bool = True) -> list[Path]:
     import md_to_pdf as m2p
     pal_path = t.collection / "palette.json"
     guide_md = t.package / "customer" / "START_HERE.md"
-    guide_pdf = m2p.donustur(guide_md, t.package / "customer" / "START_HERE.pdf", pal_path, "letter", True)
+    guide = guide_pdf(t, guide_md, t.package / "customer" / "START_HERE.pdf", fonts)
     listing_md = t.package / "listing" / "listing.md"
     with tempfile.TemporaryDirectory(prefix="listing_pdf_") as tmp:
         tmp = Path(tmp)
@@ -526,15 +695,16 @@ def step_pdf(t: Theme) -> list[Path]:
             raise RuntimeError(f"{listing_md} has no '{marker}' line")
         doc = tmp / "listing.md"
         doc.write_text(text.replace(marker, media_markdown(t, tmp)), encoding="utf-8")
-        listing_pdf = m2p.donustur(doc, t.package / "listing" / f"listing_{t.id}.pdf", pal_path, "letter", True)
-    return [guide_pdf, listing_pdf]
+        listing_pdf = m2p.donustur(doc, t.package / "listing" / f"listing_{t.id}.pdf", pal_path, "letter", fonts)
+    return [guide, listing_pdf]
 
 
-def pdf_uris(pdf: Path) -> set[str]:
+def pdf_uris(pdf: Path) -> set[str] | None:
+    """Link targets (/URI) in a PDF; None when pypdf is not installed (the link cannot be checked then)."""
     try:
         from pypdf import PdfReader
     except ImportError:  # pragma: no cover
-        return set()
+        return None
     uris = set()
     for page in PdfReader(str(pdf)).pages:
         for a in page.get("/Annots") or []:
@@ -545,8 +715,80 @@ def pdf_uris(pdf: Path) -> set[str]:
     return uris
 
 
-def step_check(t: Theme, base: str) -> list[str]:
-    """Returns problems (empty = all good). Prints a short report."""
+def pdf_text(pdf: Path) -> str | None:
+    try:
+        from pypdf import PdfReader
+    except ImportError:  # pragma: no cover
+        return None
+    return "\n".join(page.extract_text() or "" for page in PdfReader(str(pdf)).pages)
+
+
+# An open marker: [VERIFY …] or a commercial placeholder in capitals, e.g. [SHOP NAME], [PRICE], [AUTO RENEW: yes/no].
+# (Markdown links [text](url) and task boxes [ ] / [x] do not match.)
+OPEN_MARKER = re.compile(r"\[(?:VERIFY\b[^\]]*|[A-Z][A-Z0-9 _/-]*[A-Z0-9](?::[^\]]*)?)\]")
+
+
+def open_markers(text: str) -> list[str]:
+    """Distinct open markers, [VERIFY …] first (they need a test, the others a decision)."""
+    found = {" ".join(m.group(0).split()) for m in OPEN_MARKER.finditer(text)}
+    return sorted(found, key=lambda x: (not x.startswith("[VERIFY"), x))
+
+
+def fetch(url: str, timeout: int = 20) -> tuple[int, str]:
+    """GET through the environment's proxy settings (urllib). (status, text); status 0 = could not connect."""
+    import urllib.error
+    import urllib.request
+    req = urllib.request.Request(url, headers={"User-Agent": "listing-kit-check/1 (+G059)"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.status, r.read(400_000).decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        return e.code, ""
+    except Exception as e:  # noqa: BLE001
+        return 0, f"{type(e).__name__}: {e}"
+
+
+def prepublish_problems(t: Theme, base: str, get=fetch) -> list[str]:
+    """What must be true before the listing goes up (docs/05 §D): the start link and the demo answer 200 on the live
+    site and name the theme, the demo QR of image 8 encodes the demo link, and no [VERIFY …] or commercial placeholder
+    is left in the texts or the PDFs."""
+    p: list[str] = []
+    for label, url in (("start link", start_url(t, base)), ("demo", demo_url(t, base))):
+        status, body = get(url)
+        if status != 200:
+            p.append(f"live {label} {url}: {'could not connect (' + body[:120] + ')' if status == 0 else status}")
+        elif t.name not in body and html.escape(t.name) not in body:
+            p.append(f"live {label} {url}: 200 but the page does not name {t.name}")
+    qr = t.package / "listing" / "demo_qr.png"
+    if not qr.exists() or not qr_matches(qr, demo_url(t, base)):
+        p.append(f"listing/demo_qr.png (image 8) does not encode {demo_url(t, base)} (run the images step)")
+    for f in (t.package / "listing" / "listing.md", t.package / "customer" / "START_HERE.md"):
+        left = open_markers(f.read_text(encoding="utf-8"))
+        if left:
+            p.append(f"{f.relative_to(t.package)}: {len(left)} still open: {', '.join(left[:8])}{' …' if len(left) > 8 else ''}")
+    for f in (t.package / "customer" / "START_HERE.pdf", t.package / "listing" / f"listing_{t.id}.pdf"):
+        text = pdf_text(f) if f.exists() else ""
+        if text is None:
+            p.append(f"{f.name}: cannot read the PDF text (pypdf not installed)")
+        elif open_markers(" ".join(text.split())):  # PDF text breaks lines inside a marker: join them first
+            left = open_markers(" ".join(text.split()))
+            p.append(f"{f.name}: {len(left)} still open: {', '.join(left[:8])}{' …' if len(left) > 8 else ''} "
+                     "(fill them in the .md, then rebuild with the pdf step)")
+    return p
+
+
+def host_warnings(base: str) -> list[str]:
+    from urllib.parse import urlparse
+    host = urlparse(base).hostname or ""
+    if host.endswith(".vercel.app"):
+        return [f"start links, QR codes and image 8 use {host}, a temporary Vercel address: choose the final domain "
+                "(or commit to a permanent redirect from this one) before the first sale; buyers print these QR codes "
+                "(docs/05 §C)"]
+    return []
+
+
+def step_check(t: Theme, base: str, prepublish: bool = False) -> list[str]:
+    """Returns problems (empty = all good) and prints a short report; warnings are printed, not counted."""
     p: list[str] = []
     pk = t.package
     md = (pk / "listing" / "listing.md").read_text(encoding="utf-8")
@@ -586,19 +828,31 @@ def step_check(t: Theme, base: str) -> list[str]:
     if not gpdf.exists():
         p.append("no START_HERE.pdf")
     else:
-        uris = pdf_uris(gpdf)
-        if uris and start_url(t, base) not in uris:
-            p.append(f"START_HERE.pdf has no clickable {start_url(t, base)} (links: {sorted(uris)[:4]})")
+        p += [f"START_HERE.pdf: {x}" for x in pdf_link_problems(gpdf, start_url(t, base))]
         mb = gpdf.stat().st_size / 1_000_000
         if mb > ETSY["digital_file_max_mb"]:
             p.append(f"START_HERE.pdf is {mb:.1f} MB (Etsy digital file max {ETSY['digital_file_max_mb']} MB)")
     if not (pk / "listing" / f"listing_{t.id}.pdf").exists():
         p.append(f"no listing_{t.id}.pdf")
+    if prepublish:
+        p += [f"prepublish: {x}" for x in prepublish_problems(t, base)]
     print(f"[{t.id}] title {len(f['title'] or '')} chars · {len(f['tags'])} tags · {len(imgs)} images · "
-          f"{'video ok' if v.exists() else 'no video'} · {len(p)} problem(s)")
+          f"{'video ok' if v.exists() else 'no video'} · {len(p)} problem(s){' (prepublish)' if prepublish else ''}")
     for x in p:
         print(f"  - {x}")
+    for x in host_warnings(base):
+        print(f"  ! warning: {x}")
     return p
+
+
+def pdf_link_problems(pdf: Path, url: str) -> list[str]:
+    """The PDF must hold a clickable link to `url` (a PDF without any link fails too)."""
+    uris = pdf_uris(pdf)
+    if uris is None:
+        return ["cannot check its links (pypdf not installed)"]
+    if url not in uris:
+        return [f"no clickable {url} (links: {sorted(uris)[:4] or 'none'})"]
+    return []
 
 
 STEPS = ["capture", "qr", "strips", "images", "video", "pdf", "check"]
@@ -610,6 +864,9 @@ def main(argv=None) -> int:
     ap.add_argument("--theme", required=True, help=f"theme id or 'all' ({', '.join(THEMES)})")
     ap.add_argument("--base-url", default=BASE_URL, help="public base URL of the platform (default: %(default)s)")
     ap.add_argument("--no-fonts", action="store_true", help="do not download Google Fonts (system fonts)")
+    ap.add_argument("--prepublish", action="store_true",
+                    help="check: also the live start link and demo, image 8's demo QR and no open [VERIFY]/[PLACEHOLDER] "
+                         "markers (must pass before the listing goes up)")
     a = ap.parse_args(argv)
     check_url(a.base_url)
     themes = list(THEMES.values()) if a.theme == "all" else [theme_of(a.theme)]
@@ -633,10 +890,10 @@ def main(argv=None) -> int:
                 x = step_video(t, not a.no_fonts)
                 print(f"  {x.relative_to(REPO)}  {video_facts(x)}")
             elif s == "pdf":
-                for x in step_pdf(t):
+                for x in step_pdf(t, not a.no_fonts):
                     print(f"  {x.relative_to(REPO)}  {x.stat().st_size / 1_000_000:.2f} MB")
             elif s == "check":
-                bad += len(step_check(t, a.base_url))
+                bad += len(step_check(t, a.base_url, a.prepublish))
     return 1 if bad else 0
 
 

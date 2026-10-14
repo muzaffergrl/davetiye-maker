@@ -9,7 +9,10 @@
   "buyer_site": "Elena & Marco, order 5550012345, elena.demo@example.test (fictional)",
   "notes": [
     "edit key masked in b03_edit_link.jpg",
-    "QR blurred in b10_live_qr.jpg (local-only site)",
+    "QR replaced by a labelled box in b10_live_qr.jpg (local-only site)",
+    "dimmed overlay behind the sheets of b06/b09/b10 replaced by the editor background",
+    "stills: nothing cut at the top edge or by the bottom bar, nothing behind a see-through menu (clearEdges; a picture is cut shorter when no position works)",
+    "guest who fills in the form: Sofia Martin (fictional)",
     "particle layers (.petal-layer, .accent-layer) hidden in the stills, not in the recording"
   ],
   "shots": [
@@ -27,7 +30,7 @@
     },
     {
       "name": "g04_home_calendar.jpg",
-      "what": "Guest: home, reply-by + add to calendar"
+      "what": "Guest: home, reply-by + add to calendar (cut at 15–769 px: nothing clean to show at the edges)"
     },
     {
       "name": "g05_story.jpg",
@@ -35,11 +38,15 @@
     },
     {
       "name": "g06_details_top.jpg",
-      "what": "Guest: Details page, first screen"
+      "what": "Guest: Details page, first screen (cut at 0–769 px: nothing clean to show at the edges)"
     },
     {
       "name": "g07_details_schedule.jpg",
-      "what": "Guest: Details, order of the day"
+      "what": "Guest: Details, order of the day + add to calendar (cut at 0–769 px: nothing clean to show at the edges)"
+    },
+    {
+      "name": "g12_details_venue.jpg",
+      "what": "Guest: Details, the venue (photo, name, address) (cut at 12–769 px: nothing clean to show at the edges)"
     },
     {
       "name": "g08_details_faq.jpg",
@@ -51,7 +58,7 @@
     },
     {
       "name": "g10_rsvp_form.jpg",
-      "what": "Guest: RSVP form with the couple's question (Meal choice)"
+      "what": "Guest: RSVP form with the couple's question (Meal choice) (cut at 17–769 px: nothing clean to show at the edges)"
     },
     {
       "name": "g11_rsvp_sent.jpg",
@@ -63,7 +70,7 @@
     },
     {
       "name": "b01_start.jpg",
-      "what": "Buyer: /start page (design preview)"
+      "what": "Buyer: /start page (design preview + the order number field with its hint)"
     },
     {
       "name": "b02_start_form.jpg",
@@ -83,7 +90,7 @@
     },
     {
       "name": "b06_panel_crop.jpg",
-      "what": "Buyer: editor, cropping a photo to the design's shape"
+      "what": "Buyer: editor, cropping a photo to the design's shape (plain background behind the sheet)"
     },
     {
       "name": "b07_panel_photos.jpg",
@@ -95,11 +102,11 @@
     },
     {
       "name": "b09_publish_notes.jpg",
-      "what": "Buyer: \"Before you publish\" (sample text still in place)"
+      "what": "Buyer: \"Before you publish\" (sample text still in place; plain background behind the sheet)"
     },
     {
       "name": "b10_live_qr.jpg",
-      "what": "Buyer: \"Your website is live\" + QR (QR blurred in this picture)"
+      "what": "Buyer: \"Your website is live\" + QR (the QR is replaced by a labelled box in this picture)"
     },
     {
       "name": "p01_panel_replies.jpg",
@@ -164,7 +171,7 @@
     {
       "name": "panel: replies listed",
       "ok": true,
-      "detail": "Replies Refresh 5 replies · 4 attending (9 guests) · 1 not attending Ada Fictional — yes, 2 guests M"
+      "detail": "Replies Refresh 5 replies · 4 attending (9 guests) · 1 not attending Sofia Martin — yes, 2 guests Me"
     },
     {
       "name": "panel: CSV export has the replies and the Meal choice column",

@@ -2,7 +2,7 @@
 id: G062
 baslik: Karar belgesi — marka/dükkân adı adayları (alan adı müsaitliği), Etsy merkezli fiyatlandırma, satış sonrası ve müşteri bağlama
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: wf-strateji
 oncelik: 1
 bagimli: []
@@ -65,3 +65,4 @@ satış sonrası. **Alan adı satın alınmadı.**
 ## Günlük
 - 2026-10-14 alindi: wf-strateji
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
