@@ -2,8 +2,8 @@
 id: G064
 baslik: Tema 01 alt menüsü — arkadaki yazı harflerin arasından okunmasın (opak + bulanık zemin)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: wf-g064
 oncelik: 1
 bagimli: []
 yazar: [platform/themes/olive-ivory/site.css, platform/previews/g064/]
@@ -29,3 +29,4 @@ yazı menü harflerinin arasından okunuyor. 03'teki gibi okunur, sakin bir men�
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G059 bulgusu
+- 2026-10-14 alindi: wf-g064
