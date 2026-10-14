@@ -182,8 +182,15 @@ export interface RsvpInput {
   message?: string | null;
   /** Answers to the custom questions (only answered ones; absent when there are none). */
   answers?: RsvpAnswer[];
+  /**
+   * Names of the other people in this reply (G069): guest 2, 3, … — at most guests − 1, only the names given
+   * (unnamed guests are left out). Absent when none (and always for a "no").
+   */
+  party?: string[];
   /** Stored but held back for the couple's review (unusual volume, lib/rsvp/guest.ts). */
   held?: boolean;
+  /** "couple": added by the couple in the panel (a reply they got by phone, G069). Absent: the website form. */
+  source?: 'couple';
 }
 
 export interface RsvpRecord {
@@ -196,9 +203,54 @@ export interface RsvpRecord {
   message: string | null;
   /** Answers to custom questions (G051). Absent on replies without answers and on older replies. */
   answers?: RsvpAnswer[];
+  /** Names of the other people in this reply (G069). Absent on replies without them and on older replies. */
+  party?: string[];
   createdAt: string;
   /** True: arrived during unusual volume; not counted, not in the CSV until the couple keeps it. */
   held?: boolean;
+  /** "couple": added in the panel (G069). Absent: sent with the website form (and every older reply). */
+  source?: 'couple';
+  /** Last time the couple corrected this reply in the panel (G069). Absent when never corrected. */
+  editedAt?: string;
+}
+
+/**
+ * A correction of a reply by the couple (G069): the new values of the fields a guest fills in. Replaces them all;
+ * id, createdAt, source and held stay as they are, and editedAt is set.
+ */
+export interface RsvpUpdate {
+  name: string;
+  email: string | null;
+  attending: boolean;
+  guests: number;
+  message: string | null;
+  /** Empty or absent: no answers. */
+  answers?: RsvpAnswer[];
+  /** Empty or absent: no names of other guests. */
+  party?: string[];
+}
+
+/** The stored form of a reply's optional lists: present only when not empty (older records look the same). */
+export function rsvpLists(input: { answers?: readonly RsvpAnswer[]; party?: readonly string[] }): Pick<RsvpRecord, 'answers' | 'party'> {
+  return {
+    ...(input.answers?.length ? { answers: input.answers.map((a) => ({ id: a.id, question: a.question, answer: a.answer })) } : {}),
+    ...(input.party?.length ? { party: [...input.party] } : {}),
+  };
+}
+
+/** A stored reply with a couple's correction applied (shared by the adapters). */
+export function applyRsvpUpdate(current: RsvpRecord, update: RsvpUpdate, editedAt: string): RsvpRecord {
+  const { answers: _a, party: _p, ...rest } = current;
+  return {
+    ...rest,
+    name: update.name,
+    email: update.email ?? null,
+    attending: update.attending,
+    guests: update.guests,
+    message: update.message ?? null,
+    ...rsvpLists(update),
+    editedAt,
+  };
 }
 
 export interface PhotoInput {
@@ -270,6 +322,11 @@ export interface DataAdapter {
   deleteRsvps(siteId: string, ids: readonly string[]): Promise<number>;
   /** Sets or clears `held` on these replies of the site. Returns how many changed. */
   setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number>;
+  /**
+   * The couple's correction of one reply of the site (G069, applyRsvpUpdate): the guest fields are replaced, editedAt
+   * is set. Returns the stored reply, or null when the site has no reply with this id.
+   */
+  updateRsvp(siteId: string, id: string, update: RsvpUpdate): Promise<RsvpRecord | null>;
   /**
    * Validates the image and each variant (assertImageUpload, checkPhotoSet) and stores them (variants first,
    * the photo last). Throws UploadRejectedError / NotFoundError.

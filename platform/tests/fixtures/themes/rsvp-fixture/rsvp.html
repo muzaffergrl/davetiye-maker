@@ -43,6 +43,13 @@
         <label data-rsvp-if-attending>Number of guests (including you)
           <input type="number" name="guests" min="1" value="1" inputmode="numeric">
         </label>
+        <!-- G069: names of the other guests; form.js copies the row per other guest ("party:<n>") -->
+        <template data-rsvp-party>
+          <label>Name of guest <span data-rsvp-party-number>2</span> (optional)
+            <input type="text" maxlength="120" autocomplete="off">
+          </label>
+          <p data-rsvp-error-for="party"></p>
+        </template>
         <label>Message (optional)
           <textarea name="message" rows="4" maxlength="500"></textarea>
         </label>

@@ -117,7 +117,8 @@ function sameReply(a: RsvpRecord, b: RsvpInput): boolean {
     a.attending === b.attending &&
     a.guests === b.guests &&
     (a.message ?? null) === (b.message ?? null) &&
-    JSON.stringify(a.answers ?? []) === JSON.stringify(b.answers ?? [])
+    JSON.stringify(a.answers ?? []) === JSON.stringify(b.answers ?? []) &&
+    JSON.stringify(a.party ?? []) === JSON.stringify(b.party ?? [])
   );
 }
 
@@ -153,7 +154,7 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
 
   const recent = await ctx.adapter.listRsvps(site.id);
   const since = now.getTime() - DUPLICATE_WINDOW_MS;
-  if (recent.some((r) => Date.parse(r.createdAt) >= since && sameReply(r, parsed.value))) return success();
+  if (recent.some((r) => r.source !== 'couple' && Date.parse(r.createdAt) >= since && sameReply(r, parsed.value))) return success();
 
   // Over either volume rule the reply is still stored, but held: junk cannot inflate the couple's
   // head count, and real guests are not locked out while it lasts.

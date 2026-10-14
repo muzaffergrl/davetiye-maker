@@ -9,6 +9,12 @@
  * {answers: {<id>: value}} — only from enabled inputs, so questions inside [data-rsvp-if-attending] are
  * not sent for a "no". Errors come back keyed "answer:<id>" ([data-rsvp-error-for="answer:<id>"]).
  *
+ * Names of the other guests (G069, optional): <template data-rsvp-party> in the form holds ONE row (an input,
+ * optionally [data-rsvp-party-number] and [data-rsvp-error-for="party"]). When "guests" is 2 or more the script puts
+ * one copy per other guest right before the template (numbers 2, 3, …; inputs named "party:<n>", error slots
+ * "party:<n>") and sends {party: ["<name>", …]} in guest order ("" = no name). For a "no" or one guest the rows are
+ * out of the form and nothing is sent; without JavaScript the template never shows.
+ *
  * Full contract: platform/README.md, section "RSVP". No dependencies, no inline handlers (CSP).
  * The script reads the slug from the page's #site-data block and talks to /api/rsvp/<slug>.
  * The browser's own validation bubbles are turned off (form.noValidate): the same English messages
@@ -22,6 +28,8 @@
   var PLAIN_SLUG = /^[a-z0-9-]+$/;
   var QUESTION_ID = /^[a-z0-9][a-z0-9_-]{0,23}$/;
   var ANSWER_PREFIX = 'answer:';
+  var PARTY_PREFIX = 'party:';
+  var PARTY_MAX = 20; // platform ceiling of guests in one reply (lib/rsvp/config.ts MAX_GUESTS_CEILING)
   var slotSeq = 0;
   var HONEYPOT = 'website';
   var TEXT = {
@@ -90,6 +98,90 @@
     form.appendChild(wrap);
   }
 
+  /**
+   * The rows for the names of the other guests (G069). The theme writes one row inside <template data-rsvp-party>
+   * (never shown by itself, also not without JavaScript); its clones go right before the template, so they sit in the
+   * form like its other fields (same spacing). show(n, off) keeps n rows (guest 2 … n + 1; typed names stay while the
+   * number only grows) and takes them out of the form for a "no" (`off`), so nothing hidden is sent or checked.
+   */
+  function partyRows(form) {
+    var tpl = form.querySelector('template[data-rsvp-party]');
+    if (!tpl || !tpl.content || !tpl.parentNode) return null;
+    var rows = [];
+    var on = false;
+
+    function inputOf(row) {
+      for (var i = 0; i < row.length; i++) {
+        var el = row[i].matches('input, textarea') ? row[i] : row[i].querySelector('input, textarea');
+        if (el) return el;
+      }
+      return null;
+    }
+
+    function make(n) {
+      var frag = document.importNode(tpl.content, true);
+      var nodes = Array.prototype.filter.call(frag.childNodes, function (node) {
+        return node.nodeType === 1;
+      });
+      nodes.forEach(function (el) {
+        frag.removeChild(el); // a loose row: attach() puts it in the form
+        el.setAttribute('data-rsvp-party-guest', String(n));
+        var all = [el].concat(Array.prototype.slice.call(el.querySelectorAll('*')));
+        all.forEach(function (x) {
+          if (x.hasAttribute('data-rsvp-party-number')) x.textContent = String(n);
+          if (x.hasAttribute('data-rsvp-error-for')) x.setAttribute('data-rsvp-error-for', PARTY_PREFIX + n);
+          x.removeAttribute('id');
+        });
+      });
+      var input = inputOf(nodes);
+      if (input) {
+        input.name = PARTY_PREFIX + n;
+        if (!(input.maxLength > 0)) input.maxLength = 120;
+      }
+      return nodes;
+    }
+
+    function attach(row) {
+      row.forEach(function (el) {
+        if (!el.parentNode) tpl.parentNode.insertBefore(el, tpl);
+      });
+    }
+
+    function detach(row) {
+      row.forEach(function (el) {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      });
+    }
+
+    return {
+      show: function (n, off) {
+        while (rows.length < n) rows.push(make(rows.length + 2));
+        while (rows.length > n) detach(rows.pop());
+        on = n > 0 && !off;
+        rows.forEach(function (row) {
+          if (on) attach(row);
+          else detach(row);
+        });
+      },
+      active: function () {
+        return on;
+      },
+      names: function () {
+        return on
+          ? rows.map(function (r, i) {
+              return PARTY_PREFIX + (i + 2);
+            })
+          : [];
+      },
+      values: function () {
+        return rows.map(function (row) {
+          var input = inputOf(row);
+          return input ? String(input.value || '').trim() : '';
+        });
+      }
+    };
+  }
+
   function setup(form, ctx) {
     var root = form.closest('[data-rsvp]');
     var scope = root || document;
@@ -105,11 +197,15 @@
       });
       questions.push({ id: id, name: name });
     });
-    var fieldNames = FIELDS.concat(
-      questions.map(function (q) {
-        return q.name;
-      })
-    );
+    var party = partyRows(form);
+    function fieldNames() {
+      return FIELDS.concat(
+        questions.map(function (q) {
+          return q.name;
+        }),
+        party ? party.names() : []
+      );
+    }
 
     function panels() {
       return scope.querySelectorAll('[data-rsvp-state]');
@@ -193,6 +289,18 @@
           c.disabled = no;
         });
       });
+      syncParty();
+    }
+
+    /** One name field per other guest (G069): rows follow "guests"; hidden and off for a "no". */
+    function syncParty() {
+      if (!party) return;
+      var no = replyOf(fieldValue(form, 'attending')) === 'no';
+      var g = form.elements.namedItem('guests');
+      var max = g && !isRadioList(g) && Number(g.max) > 0 ? Math.min(Number(g.max), PARTY_MAX) : PARTY_MAX;
+      var count = parseInt(fieldValue(form, 'guests'), 10);
+      if (!(count >= 1)) count = 1;
+      party.show(Math.min(count, max) - 1, no);
     }
 
     function describedBy(c, id, on) {
@@ -211,7 +319,7 @@
 
     function clearInvalid(target) {
       var name = target && target.name;
-      if (!name || fieldNames.indexOf(name) === -1) return;
+      if (!name || fieldNames().indexOf(name) === -1) return;
       var f = form.elements.namedItem(name);
       if (!f) return;
       var slots = scope.querySelectorAll('[data-rsvp-error-for="' + name + '"]');
@@ -230,7 +338,7 @@
     /** Field messages from the browser's constraint check, worded like the server's (lib/rsvp/validate.ts). */
     function clientErrors() {
       var out = null;
-      fieldNames.forEach(function (name) {
+      fieldNames().forEach(function (name) {
         var f = form.elements.namedItem(name);
         if (!f) return;
         var list = isRadioList(f) ? Array.prototype.slice.call(f) : [f];
@@ -245,6 +353,7 @@
         else if (name === 'attending') msg = 'Please let us know if you can attend.';
         else if (name === 'guests') msg = 'Please enter a number of guests from ' + (bad.min || 1) + (bad.max ? ' to ' + bad.max : '') + '.';
         else if (name.indexOf(ANSWER_PREFIX) === 0) msg = v.tooLong ? 'Please keep your answer to ' + bad.maxLength + ' characters or fewer.' : 'Please check your answer.';
+        else if (name.indexOf(PARTY_PREFIX) === 0) msg = 'Please keep each name to ' + (bad.maxLength > 0 ? bad.maxLength : 120) + ' characters or fewer.';
         else msg = 'Please keep your message to ' + (bad.maxLength > 0 ? bad.maxLength : 500) + ' characters or fewer.';
         out = out || {};
         out[name] = msg;
@@ -256,7 +365,7 @@
       if (!fields) return;
       var first = null;
       var firstHasSlot = false;
-      fieldNames.forEach(function (name) {
+      fieldNames().forEach(function (name) {
         var msg = fields[name];
         if (!msg) return;
         var f = form.elements.namedItem(name);
@@ -309,6 +418,8 @@
         });
         out.answers = answers;
       }
+      // Names of the other guests, in guest order ("" = no name given); none for a "no" or one guest.
+      if (party && party.active()) out.party = party.values();
       return out;
     }
 
@@ -388,6 +499,7 @@
           if (b.maxGuests && g && g.type === 'number' && (!g.max || Number(g.max) > b.maxGuests)) {
             g.max = String(b.maxGuests);
             if (!g.min) g.min = '1';
+            syncParty();
           }
           if (b.open === false) {
             setReason(b.reason || 'deadline');
@@ -409,9 +521,11 @@
     syncAttending();
     form.addEventListener('change', function (e) {
       if (e.target && e.target.name === 'attending') syncAttending();
+      if (e.target && e.target.name === 'guests') syncParty();
       clearInvalid(e.target);
     });
     form.addEventListener('input', function (e) {
+      if (e.target && e.target.name === 'guests') syncParty();
       clearInvalid(e.target);
     });
     form.addEventListener('submit', onSubmit);

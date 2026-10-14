@@ -67,6 +67,15 @@
             <input type="number" name="guests" min="1" value="1" inputmode="numeric">
           </label>
           <p class="field-error" data-rsvp-error-for="guests"></p>
+          <!-- names of the other guests (G069, optional): /rsvp/form.js puts one copy of this row before the template per
+               other guest when "Number of guests" is 2 or more (inputs named "party:<n>"); none for a "no", and the
+               template never shows by itself. The form's own field styles: no new decoration. -->
+          <template data-rsvp-party>
+            <label class="field"><span class="kicker">Name of guest <span data-rsvp-party-number>2</span> <span class="opt">(optional)</span></span>
+              <input type="text" maxlength="120" autocomplete="off">
+            </label>
+            <p class="field-error" data-rsvp-error-for="party"></p>
+          </template>
           <!-- the couple's own questions (content rsvp.questions, G051): asked of guests who accept; form.js names the
                inputs "answer:<id>". Choice = pills like "Will you attend?", text = a short answer. -->
           <div class="questions" data-rsvp-if-attending data-if="rsvp.questions">
