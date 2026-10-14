@@ -2,8 +2,8 @@
 id: G078
 baslik: Canlıya güncel main — BKE Studio satış sitesi (G066-A), RSVP v2 (G069), site şifresi (G076); canlı kontrol + test seti güncellemesi
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 1
 bagimli: []
 yazar: [docs/10_SITE_PLATFORMU.md, docs/10_canli_test/, platform/README.md]
@@ -39,3 +39,4 @@ aynı adımlarıyla yeniden yayınlanır (Günlük'e yeni satır). Bu bir **test
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G066-A, G069, G076 main'de; G066-B sonra aynı adımlarla yeniden yayın
+- 2026-10-14 alindi: claude-local-1
