@@ -1,5 +1,6 @@
 'use client';
-// /start form and result (G045). Phone first (390 px), plain tool styling (no decorative drawings, K21).
+// /start form and result (G045). Phone first (390 px), in the edit panel's BKE Studio look (G080: StartShell —
+// panel tokens, fonts and logo; no decorative drawings, K21).
 // Same field rules as the server (lib/claim/fields.ts). On success the edit link is shown once,
 // big, with "Save this link", copy and "email it to myself" (mailto: opens the buyer's own mail app;
 // the platform does not send email yet). The result is kept in sessionStorage so a reload of this
@@ -20,6 +21,7 @@ import {
   NAME_MAX,
   type ClaimField,
 } from '../../lib/claim/fields.ts';
+import { StartShell } from './shell.tsx';
 import styles from './start.module.css';
 
 export interface StartTheme {
@@ -149,7 +151,7 @@ export default function StartForm({ theme, origin, emailEnabled }: { theme: Star
   }, []);
 
   return (
-    <main className={styles.page}>
+    <StartShell wide={!result}>
       {result ? (
         <ResultView result={result} themeName={theme.name} onStartOver={startOver} />
       ) : (
@@ -165,7 +167,7 @@ export default function StartForm({ theme, origin, emailEnabled }: { theme: Star
           <ClaimForm theme={theme} origin={origin} emailEnabled={emailEnabled} initialEmail={lastEmail} onCreated={onCreated} />
         </div>
       )}
-    </main>
+    </StartShell>
   );
 }
 

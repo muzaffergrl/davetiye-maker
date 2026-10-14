@@ -130,3 +130,4 @@ kâğıt (masaüstü zemini için ≥ 1200 px temiz alan); (c) story için dalı
   story baskısı, davet seti (info_card), geniş ekran kâğıdı + bg_tile, eğrelti tonu, card-slot kırpması, `.dot`, `city_region`,
   boyut payı; ortak `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts` (inceleme istedi): "Jonah" yaması, `theme_check.clusters`
   kesik küme ölçümü, kapalı zarf ölçümü `stage.closed_obj`'a göre. theme-check 116/0/0. qa-kontrol alt-ajanı yine koşturulamadı.
+- 2026-10-14 entegratör notu: G075 teşekkür modu main'de; bu temaya docs/11 §3.6 teşekkür hâli işaretleri eklenmeli (theme-check uyarı veriyor) — onaydan sonra G081'de toplu.

@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 20 · alindi 3 · inceleme 8 · blokaj 277 · bitti 83 · toplam 391
+Özet: hazir 19 · alindi 3 · inceleme 9 · blokaj 277 · bitti 84 · toplam 392
 
 ## claude-canva
 
@@ -156,12 +156,9 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (12)**
+**Alınabilir (10)**
 
-- `G068` p1 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla) → `gorevler/G068-duzenlenebilir-metinler.md`
-- `G075` p1 — Düğün sonrası teşekkür modu — site düğünden sonra "Thank you" hâline geçer (otomatik, çift kapatabilir) → `gorevler/G075-tesekkur-modu.md`
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G080` p2 — Marka ve panel sonrası kalanlar — /start ve signin BKE görünümü, onaysız temaların /start'tan kapatılması, metin/README/görsel kaynakları → `gorevler/G080-marka-kalanlar.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
@@ -171,9 +168,11 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (84)**
+**Üzerinde çalışılan / incelemede / blokaj (85)**
 
+- `G068` alindi · claude-G068 — Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
+- `G080` alindi · claude-G080 — Marka ve panel sonrası kalanlar — /start ve signin BKE görünümü, onaysız temaların /start'tan kapatılması, metin/README/görsel kaynakları
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -258,7 +257,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 7 · Biten: 33
+Bağımlılık bekleyen: 8 · Biten: 34
 
 ## claude-metin
 
@@ -339,7 +338,7 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G215` alindi · gpt-gorsel-N — Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G216` alindi · gpt-gorsel-H — Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G217` inceleme · gpt-gorsel-I — Tasarım 17 Emerald & Gold Estate — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
-- `G218` alindi · gpt-gorsel-J — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `G218` inceleme · gpt-gorsel-J — Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G219` inceleme · gpt-gorsel-K — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G220` inceleme · gpt-gorsel-F — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)

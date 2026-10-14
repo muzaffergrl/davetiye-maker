@@ -2,8 +2,8 @@
 id: G080
 baslik: Marka ve panel sonrası kalanlar — /start ve signin BKE görünümü, onaysız temaların /start'tan kapatılması, metin/README/görsel kaynakları
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G080
 oncelik: 2
 bagimli: [G066]
 yazar: [platform/app/start/, platform/app/signin/, platform/components/start/, platform/lib/themes/, platform/lib/marketing/facts.ts, platform/scripts/marketing-assets.ts, platform/README.md, platform/tests/, platform/previews/g080/]
@@ -28,3 +28,4 @@ G066-A/B ve G078 Sonuç'larında kalan açıklar.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G066-B, G078 açıkları
+- 2026-10-14 alindi: claude-G080
