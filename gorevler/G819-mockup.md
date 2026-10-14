@@ -36,3 +36,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 alindi: gpt-ui-panel
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
+- 2026-10-14 ara kayıt: gpt-ui-panel — 3.1 ve 3.2 üretildi; cover_hand_v2 başlık alanı için, three_phones_v2 ekranın üstüne taşan meyve dalını kaldırmak için seçildi. İki sahnenin ekran sayısı ve geometrisi denetimden geçti.
