@@ -79,19 +79,15 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .btn-ghost:hover { background: rgba(251, 248, 240, .9); }
 .btn-sm { min-height: 44px; min-width: 0; padding: 10px 20px; font-size: 12px; letter-spacing: .2em; text-indent: .2em; }
 
-/* -- navigation (comp: slim bar "HOME · STORY · DETAILS · RSVP")
-   G064: the soft top stays (painted corners fade into it, no straight edge), but from the gold rule down the ground is the
-   paper itself — opaque from 24 px (bg_tile is flat, ±2 levels), so no text or photo reads through between the letters while
-   the page scrolls (it did at .8–.93); no backdrop-filter: nothing to blur under an opaque ground, no blur edge */
+/* -- nav (comp: "HOME · STORY · DETAILS · RSVP"); G064: soft top, opaque paper from 24 px, no blur */
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
   padding: 18px 8px env(safe-area-inset-bottom);
-  background: linear-gradient(rgba(237, 228, 208, 0), rgba(237, 228, 208, .4) 8px, rgba(237, 228, 208, .8) 14px,
-              rgba(237, 228, 208, .97) 19px, rgb(237, 228, 208) 24px);
+  background: linear-gradient(#ede4d000, #ede4d066 8px, #ede4d0cc 14px, #ede4d0f7 19px, #ede4d0 24px);
   text-shadow: 0 0 10px rgba(246, 240, 224, .95), 0 0 3px rgba(246, 240, 224, .9);
-  pointer-events: none;   /* G064 qa: the soft top (above the rule) shows the page, so it lets taps through (story ‹ 2 / 3 › at 390×844) */
+  pointer-events: none; /* G064 qa: taps pass the soft top, the row keeps them */
 }
-.site-nav::before { content: ""; position: absolute; inset: 18px 0 0; z-index: -1; pointer-events: auto; }   /* the opaque label row takes every tap: nothing hidden under it is clickable */
+.site-nav::before { content: ""; position: absolute; inset: 18px 0 0; z-index: -1; pointer-events: auto; }
 .site-nav ul { pointer-events: auto; display: flex; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 4px; list-style: none;
                border-top: 1px solid rgba(179, 154, 99, .6); }
 .site-nav li { display: flex; align-items: center; }
@@ -294,8 +290,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
 ::view-transition-group(invite-card) { animation-duration: .9s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .55s; }
-/* G064 (qa): envelope → home — the nav exists only on the new page; its default .25 s fade-in let the envelope's bouquet read
-   through the labels for 1–2 frames. It arrives opaque with the page (home → story keeps the default cross-fade: both opaque) */
+/* G064 qa: opaque nav from the first frame */
 ::view-transition-new(site-nav):only-child { animation: none; }
 .hero .names { margin-top: clamp(12px, 3svh, 26px); font-size: calc(var(--hn) * var(--names-scale, 1)); line-height: 1.04; text-wrap: balance; }
 .hero-date { margin-top: calc(var(--hn) * .27); font-size: 13px; letter-spacing: .28em; }   /* clears the J descender */
