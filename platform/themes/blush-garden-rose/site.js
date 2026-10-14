@@ -438,6 +438,44 @@ const DEV_CONTENT = {
     window.addEventListener('resize', () => { if (window.innerWidth !== fitWidth) { cancelAnimationFrame(raf); raf = requestAnimationFrame(fitText); } });
   }
 
+  /* ------------------------------------------------------------------ home hero: the first screen (qa-kontrol 2026-10-14)
+     A hero piece after the names (date, place, countdown, cue) that does not end 4 px above the bottom nav starts below
+     the first screen (top ≥ the small viewport + 12 px) — never half under the nav: a long record (docs/11 §12) scrolls.
+     The card and the names stay where they are. The first screen is the small viewport (svh), so toolbars collapsing
+     while scrolling move nothing; layout boxes, so the entrance transforms do not count. Again when a font loads (the
+     names wrap) and when the width changes. */
+  let foldWidth = 0;
+  function foldHero() {
+    const inner = document.querySelector('.hero-inner'), nav = document.querySelector('.site-nav');
+    if (!inner || !nav) return;
+    foldWidth = window.innerWidth;
+    const kids = Array.from(inner.children).filter((c) => !c.matches('.hero-card, .names'));
+    kids.forEach((c) => c.style.removeProperty('margin-top'));
+    if (nav.getBoundingClientRect().top < window.innerHeight / 2) return;   // wide screens: the nav is on top
+    const probe = document.createElement('i');
+    probe.style.cssText = 'position:fixed;height:100svh';
+    document.body.appendChild(probe);
+    const sv = probe.offsetHeight || window.innerHeight;
+    probe.remove();
+    const limit = sv - nav.offsetHeight - 4, below = sv + 12;
+    const top = (el) => { let y = 0; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
+    for (let i = 0; i < 4; i++) {
+      const cut = kids.filter((k) => k.offsetParent && top(k) + k.offsetHeight > limit).sort((a, b) => top(a) - top(b))[0];
+      if (!cut || top(cut) >= below - 0.5) return;
+      cut.style.marginTop = (parseFloat(getComputedStyle(cut).marginTop) + below - top(cut)).toFixed(1) + 'px';
+    }
+  }
+  function initFold() {
+    if (!document.querySelector('.hero-inner')) return;
+    foldHero();
+    if (document.fonts) {
+      if (document.fonts.ready) document.fonts.ready.then(foldHero);
+      if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', foldHero);
+    }
+    let raf = 0;
+    window.addEventListener('resize', () => { if (window.innerWidth !== foldWidth) { cancelAnimationFrame(raf); raf = requestAnimationFrame(foldHero); } });
+  }
+
   /* ------------------------------------------------------------------ boot */
   function boot() {
     // the theme files opened without the platform are a design preview: placeholder labels show, as in the panel
@@ -452,6 +490,7 @@ const DEV_CONTENT = {
     initEnvelope();
     initScenes();
     initCountdown();
+    initFold();
     initPlaceholders();
     if (root.classList.contains('from-envelope')) setTimeout(() => petals('arrive'), 250);
     const closing = document.querySelector('[data-petals="closing"]');

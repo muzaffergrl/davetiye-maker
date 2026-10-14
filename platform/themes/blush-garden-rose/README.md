@@ -81,6 +81,13 @@ o tasarımdan. Buradan yalnız platform sözleşmesi (motor işaretleri, RSVP fo
 - Uzun isimde zarf sayfası yazısı küçülür ve zarf biraz küçülür (40+40 karakterde 390×844'te zarf ~328 → ~296 px genişlik); JS kapalıyken
   isimler tam boyda sarar, zarf ve "Tap to open" kısa ekranlarda aşağı kayabilir (JS'siz zarf zaten açılmaz; "Open the
   invitation" linki görünür). Ana sayfa hero ve kapanış imzası uzun isimde küçülmez, sarar (`theme-check --stress` geçiyor).
+- Ana sayfa hero'su ilk ekranda (qa-kontrol 2026-10-14, G401 üçüncü tur): isimlerden sonraki parça (tarih, yer, sayaç, ipucu) alt
+  nav'ın 4 px üstünde bitmiyorsa ilk ekranın **altından** başlar (`site.js foldHero`: yalnız `margin-top`; ilk ekran = küçük
+  görünüm `100svh`, toplanan araç çubukları yerleşimi oynatmaz; yazı tipi yüklenince ve genişlik değişince yeniden). Önce
+  tasarım aralığı kaydında (`theme-env.ts rangeRecord`) yer ve sayaç nav'ın yarı saydam zemininin arkasındaydı (375×553: yer
+  487–566, nav üstü 489). Kart ve isimler yerinde kalır: §12 stres kaydında isimlerin kendisi nav'ın altına uzanır (hero kaydırılır,
+  `theme-check --stress` buna izin verir); 320×568'de tasarım aralığında "James"in kuyruğu nav'ın üst çizgisine 2 px değer
+  (`theme-check` boyutlarında değil). Yatay telefonda 03'ün ayrı düzeni yok (isimler 85–92 px, nav'a uzanır).
 - Program en çok 10 satır (şema, G055); Details kartı 10 satırı ve 60 karakterlik etiket/yeri taşır (kart uzar). Ana sayfa
   tanıtımı ilk 4 satırı gösterir; uzun etiket kendi altına sarar (asılı girinti, 360 px'te kesilmez).
 - `story.items` 3'ten fazlaysa yalnız ilk 3 başlık gösterilir (3 çerçeve); anların `text`'i ve monogram (`initials`) bu temada

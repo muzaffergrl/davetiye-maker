@@ -1,29 +1,26 @@
-/* site.js — Olive & Ivory (design 01, G401): motion, envelope, long-name fit, countdown, story fan, dev preview. The platform
- * writes every personal value into the HTML and injects #site-data (slug, pages, derived; no content record); DEV_CONTENT
- * + devRender() fill the same markers only without the platform. Choreography and reasons: README.md. Hooks: [data-scene]
- * (MOTION.scenes), [data-step] delay, [data-a] preset (site.css), [data-i] extra stagger.
- */
+/* site.js — Olive & Ivory (01, G401): motion, envelope, name fit, countdown, story fan. The platform writes the HTML and
+ * #site-data (no content record); DEV_CONTENT + devRender() only without it. Hooks, reasons: README.md. */
 const MOTION = {
-  // sessionStorage keys (+ ":<slug>" on the platform) — the tiny inline <head> scripts use the same keys
+  // sessionStorage keys (+ ":<slug>"), shared with the inline <head> scripts
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },
 
-  // index opening (kapaklı zarf, docs/11 §7.2 / §7.3): [start ms after the tap, duration ms]
+  // opening (docs/11 §7.3): [start ms after the tap, duration ms]
   envelope: {
     hint:    [0, 300],      // "Tap to open" fades
     tug:     [0, 320],      // the envelope gives under the finger
     closure: [0, 240],      // the wax seal lifts a hair as it lets go (first motion < 250 ms)
     head:    [200, 640],    // "You are invited" + names rise away
-    lift:    [260, 920],    // flap + seal (+ sprig) peel up on the hinge, 0° → 90° (edge-on), together; visible from ~200 ms
-    open:    [300, 420],    // under the lifting flap the closed body gives way to the open body (lining + pocket)
-    flap:    [1180, 760],   // the open flap (olive-sprig lining) takes over at −90° and lies back to 0°
-    rise:    [1620, 1380],  // the ivory card glides up out of the pocket, its corners clear of the pocket edge
-    forward: [3000, 700],   // the card comes forward where it is (× 1.04, growing shadow) — it stays high
-    accents: 1300,          // two olive leaves float across (above the card, below the envelope), gone before `go`
-    go:      3950,          // navigate to home (the card flies on upward into the home hero card)
-    fadeOut: 420            // fallback fade when cross-document view transitions are unsupported
+    lift:    [260, 920],    // flap + seal + sprig peel up together, 0° → 90°
+    open:    [300, 420],    // closed body → open body (lining + pocket)
+    flap:    [1180, 760],   // the open flap lies back from −90°
+    rise:    [1620, 1380],  // the card glides up out of the pocket
+    forward: [3000, 700],   // the card comes forward where it is (× 1.04)
+    accents: 1300,          // two olive leaves float across, gone before `go`
+    go:      3950,          // to home (the card flies into the hero card)
+    fadeOut: 420            // fade without cross-document view transitions
   },
 
-  // page entrances: scene → [[step, delay ms], …] — deliberate order, never all at once
+  // entrances: scene → [[step, delay ms], …], never all at once
   scenes: {
     'home-hero':      [['decor', 0], ['card', 120], ['names', 700], ['date', 1500], ['venue', 1720], ['countdown', 1980], ['cta', 2300]],
     'home-invite':    [['card', 0], ['host', 600], ['name1', 820], ['amp', 1380], ['name2', 1520], ['request', 2100], ['date', 2380], ['venue', 2640], ['cta', 2900], ['cal', 3120]],
@@ -45,7 +42,7 @@ const MOTION = {
   batchGap: 360,         // scenes entering together play in sequence
   arriveDelay: 0,        // from the envelope: the names (step 700 ms) start as the card morph (.9 s) lands
 
-  // particles (GPT accents only): moment → groups; each group one kind of accent (docs/11 §8)
+  // particles (GPT accents): moment → groups, one kind each (docs/11 §8)
   accents: {
     open:    [{ file: 'img/accent_1-200.webp', count: 2, path: 'across', origin: 'left', dur: [2300, 2500], size: [58, 74], spread: 120, gap: 260 }],
     arrive:  [{ file: 'img/accent_3-200.webp', count: 3, path: 'fall', origin: 'top', dur: [6200, 7800], size: [20, 28], spread: 1800, avoid: '.hero [data-slot]' }],
@@ -54,10 +51,10 @@ const MOTION = {
   }
 };
 
-/* Card path (% of the card's height, manifest stage.card_path): out clears the pocket edge, front stays high × 1.04 */
+/* card path (% of its height, manifest stage.card_path) */
 const ENVELOPE_GEOMETRY = { out: 'translateY(-87.001%)', front: 'translateY(-84.001%) scale(1.04)' };
 
-/* DEV_CONTENT — only without the platform (no #site-data): = content.demo.json (fictional demo record) */
+/* DEV_CONTENT (no #site-data only) = content.demo.json */
 const DEV_CONTENT = {
   record_kind: 'demo', event_type: 'wedding', locale: 'en-US',
   partners: [{ display_name: 'Avery', full_name: 'Avery Louise' }, { display_name: 'Jordan', full_name: 'Jordan Samuel' }],
@@ -80,7 +77,6 @@ const DEV_CONTENT = {
   }
 };
 
-
 (function () {
   'use strict';
   const root = document.documentElement;
@@ -97,7 +93,7 @@ const DEV_CONTENT = {
     try { return JSON.parse(el.textContent); } catch (e) { return null; }
   }
   const SITE = readSiteData();
-  const CONTENT = SITE ? {} : DEV_CONTENT;   // the platform never sends the record (site-data has no content)
+  const CONTENT = SITE ? {} : DEV_CONTENT;   // the platform sends no record
   const PAGES = (SITE && SITE.pages) || { index: 'index.html', home: 'home.html', story: 'story.html', details: 'details.html', rsvp: 'rsvp.html' };
   const KEY = SITE && SITE.slug ? ':' + SITE.slug : '';
   const OPENED = MOTION.storage.opened + KEY;
@@ -115,7 +111,7 @@ const DEV_CONTENT = {
     const kf = [];
     const N = 10;
     if (path === 'across') {
-      // a leaf gliding across, waving and fluttering; band [top, bottom] px keeps it off the photo
+      // a leaf across; band [top, bottom] px keeps it off the photo
       const ltr = origin !== 'right';
       const half = band ? Math.max(0, (band[1] - band[0] - s * 0.6) / 2) : H;
       const y0 = band ? (band[0] + band[1]) / 2 : H * (0.30 + 0.22 * i + rand(-0.04, 0.04));
@@ -132,7 +128,7 @@ const DEV_CONTENT = {
       }
       return kf;
     }
-    // 'fall' / 'rise': a soft drift with sway; `avoid` (a photo's box): down a lane beside it, never across
+    // fall / rise with sway; `avoid` (a photo's box): a lane beside it
     const down = path !== 'rise';
     const sway = rand(12, 30), ph = rand(0, 6.28);
     let x0 = rand(0.06, 0.94) * W, drift = rand(-0.18, 0.18) * W;
@@ -175,7 +171,7 @@ const DEV_CONTENT = {
         img.decoding = 'async';
         img.style.width = s.toFixed(1) + 'px';
         layer.appendChild(img);
-        // `until` (ms): the opening leaves have crossed the screen before the page hands over to home
+        // `until` ms: off screen before home
         const delay = i * (g.gap || 420) + rand(0, g.spread || 0);
         const a = img.animate(kf, { duration: Math.min(rand(g.dur[0], g.dur[1]), (until || 1e9) - delay), delay, easing: 'linear', fill: 'both' });
         a.onfinish = () => img.remove();
@@ -186,7 +182,7 @@ const DEV_CONTENT = {
   /* -- scenes (sequential entrances) */
   function stepIndex(n) {
     if (n.dataset.i !== undefined) return Number(n.dataset.i) || 0;
-    const item = n.dataset.repeatItem;               // "schedule.2" — set by the platform's data-repeat
+    const item = n.dataset.repeatItem;   // "schedule.2" (data-repeat)
     return item ? Number(item.split('.').pop()) || 0 : 0;
   }
   function reveal(scene, base, instant) {
@@ -238,7 +234,7 @@ const DEV_CONTENT = {
     return t;
   }
   function countdownTarget() {
-    // platform: computed on the server (date + ceremony_time in the record's IANA zone)
+    // platform: computed on the server
     if (SITE) {
       const t = SITE.derived && Date.parse(SITE.derived.countdown_target_utc);
       return Number.isFinite(t) ? t : null;
@@ -297,19 +293,21 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- long names (--names-scale) and the hero's first screen above the nav; card copy that fits its card (README) */
+  /* -- long names, the hero's first screen, card copy (README) */
   function fitNames() {
     const targets = [['.env-head .names', 2.15, 0.22, 0], ['.hero .names', 3.2, 0.3, 36]]
       .map(([sel, ...a]) => [document.querySelector(sel), ...a]).filter(([el]) => el);
     if (!targets.length) return;
     const inner = document.querySelector('.hero-inner'), nav = document.querySelector('.site-nav');
-    // layout boxes: the entrance transforms do not count
+    // layout boxes (no entrance transforms)
     const bottom = (el) => { let y = el.offsetHeight; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
+    // the first screen = the small viewport (svh): collapsing toolbars move nothing
+    const sv = () => { const p = document.createElement('i'); p.style.cssText = 'position:fixed;height:100svh'; document.body.append(p); const h = p.offsetHeight; p.remove(); return h || innerHeight; };
     const low = (h1) => {
       const hero = h1.closest('.hero');
       if (!hero || !inner || !nav) return false;
       const long = hero.classList.contains('is-long');
-      return Math.max(...[...inner.children].filter((c) => !(long && c.matches('.countdown'))).map(bottom)) > nav.getBoundingClientRect().top - 8;
+      return Math.max(...[...inner.children].filter((c) => !(long && c.matches('.countdown'))).map(bottom)) > sv() - nav.offsetHeight - 8;
     };
     const fit = (h1, maxLines, maxShare, minPx, navFloor) => {
       h1.style.setProperty('--names-scale', '1');
@@ -329,16 +327,38 @@ const DEV_CONTENT = {
     const fitCopy = () => document.querySelectorAll('.card-copy').forEach((c) => {
       for (const d of ['', 'c', 's', 'c d', 's c d']) { c.dataset.drop = d; if (fits(c)) break; }
     });
-    // hero: names ≤ 24 %; tight + names to 36 px; countdown after the pill; else it scrolls (never squeezed)
+    // fold (qa 2026-10-14, 3rd round): a piece not ending above the nav starts below the first screen, never half under it;
+    // a pill left above keeps the backdrop (--fold: scene-bg ends after it; .is-folded: no decor_br room)
+    const top = (el) => bottom(el) - el.offsetHeight;
+    const pieces = () => [...inner.children].filter((c) => c.offsetParent && !c.matches('.hero-card'));
+    const unfold = (hero) => {
+      pieces().forEach((c) => c.style.removeProperty('margin-top'));
+      hero.classList.remove('is-folded');
+      hero.style.removeProperty('--fold');
+    };
+    const fold = (hero) => {
+      const v = sv(), limit = v - nav.offsetHeight - 8, below = v + 12, cs = getComputedStyle(hero);
+      const cut = () => pieces().filter((c) => bottom(c) > limit).sort((a, b) => top(a) - top(b))[0];
+      let c = cut();
+      if (!c || top(c) >= below - 0.5) return;
+      const cta = inner.querySelector('.hero-cta'), keep = cta && cta.offsetParent && bottom(cta) <= limit;
+      const end = keep && Math.max(parseFloat(cs.minHeight) || 0, bottom(cta) - top(hero) + parseFloat(cs.paddingBottom));
+      hero.classList.toggle('is-folded', !!keep);
+      for (let i = 0; i < 4 && c && top(c) < below - 0.5; i++, c = cut()) c.style.marginTop = `${parseFloat(getComputedStyle(c).marginTop) + below - top(c)}px`;
+      if (keep) hero.style.setProperty('--fold', `${Math.max(0, hero.offsetHeight - end)}px`);
+    };
+    // hero: names ≤ 24 %; tight + names ≥ 36 px; countdown after the pill; else it scrolls; then fold
     const run = () => fitCopy() || targets.forEach(([h1, maxLines, maxShare, minPx]) => {
       const hero = h1.closest('.hero');
       if (!hero) return fit(h1, maxLines, maxShare, minPx, 0);
+      if (inner && nav) unfold(hero);
       for (const [cls, navFloor] of [[[], 0.76], [['is-tight'], 0], [['is-tight', 'is-long'], 0], [[], 1]]) {
         hero.classList.remove('is-tight', 'is-long');
         hero.classList.add(...cls);
         fit(h1, maxLines, maxShare, minPx, navFloor);
         if (!low(h1)) break;
       }
+      if (inner && nav) fold(hero);
     });
     run();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
@@ -373,7 +393,7 @@ const DEV_CONTENT = {
 
     function go(withCard) {
       store.set(OPENED, '1');
-      // the card is named for the view transition only now (site.css: a closed envelope's card has no name)
+      // named for the view transition only now (a closed envelope's card has none)
       if (withCard) { store.set(ARRIVE, '1'); el.card.style.viewTransitionName = 'invite-card'; }
       else el.card.style.viewTransitionName = 'none';   // skip: no card morph out of a closed envelope
       if (crossDocVT || reduce) { location.href = PAGES.home; return; }
@@ -394,17 +414,17 @@ const DEV_CONTENT = {
       if (reduce || !Element.prototype.animate) { go(false); return; }
       A(el.hint, [{ opacity: 1 }, { opacity: 0 }], E.hint, 'ease-out', 'forwards');
       A(el.env, [{ transform: 'scale(1)' }, { transform: 'scale(.988)', offset: .4 }, { transform: 'scale(1)' }], E.tug, 'ease-out', 'none');
-      // the wax lets go: a hair of lift before the flap carries it away
+      // the wax lets go first
       A(el.closure, [{ transform: 'translateY(0) scale(1)' }, { transform: 'translateY(-1.2%) scale(1.035)' }], E.closure, 'cubic-bezier(.3,.7,.4,1)', 'forwards');
       A(el.head, [{ opacity: 1, transform: 'translate3d(0,0,0)' }, { opacity: 0, transform: 'translate3d(0,-18px,0)' }], E.head, 'ease-in', 'forwards');
-      // flap + seal + sprig peel up on the hinge as ONE piece (one wrapper): 22° by 30 % on a soft start, fading from 80°
+      // flap + seal + sprig as ONE piece: 22° by 30 %, fading from 80°
       A(el.wrap, [
         { opacity: 1, transform: 'perspective(950px) rotateX(0deg)', filter: 'brightness(1)', easing: 'cubic-bezier(.33,.1,.35,1)' },
         { opacity: 1, transform: 'perspective(950px) rotateX(22deg)', filter: 'brightness(1.01)', offset: .3, easing: 'cubic-bezier(.4,0,.7,.7)' },
         { opacity: 1, transform: 'perspective(950px) rotateX(80deg)', filter: 'brightness(.88)', offset: .9 },
         { opacity: 0, transform: 'perspective(950px) rotateX(90deg)', filter: 'brightness(.84)' }
       ], E.lift, 'linear');
-      // under the lifting flap: closed body → open body + pocket
+      // closed body → open body + pocket
       A(el.body, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
       A(el.pocket, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
       A(el.closed, [{ opacity: 1 }, { opacity: 0 }], E.open, 'ease-in-out');
@@ -413,14 +433,14 @@ const DEV_CONTENT = {
         { opacity: 1, transform: 'perspective(1100px) rotateX(-90deg)', filter: 'brightness(.9)' },
         { opacity: 1, transform: 'perspective(1100px) rotateX(0deg)', filter: 'brightness(1)' }
       ], E.flap, 'cubic-bezier(.2,.7,.3,1)');
-      // the leaves' bands: above the standing card and below the envelope (never across the photo)
+      // leaf bands: above the card, below the envelope (not across the photo)
       const cr = el.card.getBoundingClientRect(), er = el.closed.getBoundingClientRect();
       const cardTop = cr.top - cr.height * 0.89, vh = window.innerHeight;
       const bands = [[Math.max(8, cardTop - 0.2 * vh), Math.max(30, cardTop - 6)], [er.bottom + 30, Math.max(er.bottom + 60, vh - 16)]];
       timers.push(setTimeout(() => accents('open', bands, E.go - E.accents - 80), E.accents));
       A(el.card, [{ transform: 'translateY(0)' }, { transform: ENVELOPE_GEOMETRY.out }], E.rise, 'cubic-bezier(.42,0,.18,1)');
       timers.push(setTimeout(() => {
-        // the card is out of the pocket: bring it in front of the envelope
+        // out of the pocket: in front of the envelope
         el.slot.style.clipPath = 'none';
         el.slot.style.zIndex = '5';
         A(el.card, [{ transform: ENVELOPE_GEOMETRY.out }, { transform: ENVELOPE_GEOMETRY.front }], [0, E.forward[1]], 'cubic-bezier(.45,0,.2,1)', 'forwards');
@@ -429,7 +449,7 @@ const DEV_CONTENT = {
       timers.push(setTimeout(() => { state = 'done'; go(true); }, E.go));
     }
 
-    // cancel only the opening's script animations (keep CSS ones such as the hint breathing)
+    // cancel the opening's script animations, not CSS ones
     function cancelScripted() {
       page.getAnimations({ subtree: true }).concat(page.getAnimations())
         .filter((a) => !(window.CSSAnimation && a instanceof CSSAnimation))
@@ -453,7 +473,7 @@ const DEV_CONTENT = {
     stage.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stage.click(); }
     });
-    // Skip: 'done' (not 'closed'), so a back/forward-cache return clears the fallback fade below
+    // Skip: 'done', so a bfcache return clears the fallback fade
     document.querySelectorAll('[data-skip]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); reset(); state = 'done'; go(false); }));
     const rep = q('.replay');
     if (rep) rep.addEventListener('click', () => { reset(); requestAnimationFrame(() => play()); });
@@ -470,12 +490,12 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- story fan on phones (scroll-snap, W1.3): middle card upright on top (is-active), opens on it */
+  /* -- story fan on phones (scroll-snap, W1.3), opens on the middle card */
   function initFan() {
     const fan = document.querySelector('.fan');
     if (!fan) return;
     const cards = Array.from(fan.querySelectorAll('.fan-card'));
-    // the swipe hint under the fan (phones): ‹ 2 / 3 › — the count follows the middle card, the arrows step the fan
+    // swipe hint ‹ 2 / 3 ›: the count follows the middle card, the arrows step the fan
     const nav = document.querySelector('.swipe-nav'), count = nav && nav.querySelector('.swipe-count');
     let raf = 0, best = 0;
     const swipe = () => fan.scrollWidth > fan.clientWidth + 2;
@@ -501,15 +521,15 @@ const DEV_CONTENT = {
     const later = () => { if (!raf) raf = requestAnimationFrame(update); };
     fan.addEventListener('scroll', later, { passive: true });
     if (nav) nav.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) centre(cards[best + Number(b.dataset.by)], true); });
-    // a new width (rotation) keeps the card that was in the middle there
+    // on a new width the middle card stays
     window.addEventListener('resize', () => { centre(fan.querySelector('.is-active')); later(); });
   }
 
   /* -- boot */
   function boot() {
-    // the theme files opened without the platform are a design preview: placeholder labels show, as in the panel
+    // without the platform: a design preview (placeholder labels, as in the panel)
     if (!SITE) { root.dataset.preview = 'true'; devRender(CONTENT); devRsvp(); }
-    // RSVP page: once a reply is sent, the closing section hides its generic thank-you (site.css)
+    // RSVP: after a reply the closing hides its generic thank-you
     document.addEventListener('rsvp:state', (e) => {
       const st = e.detail && e.detail.state;
       if (st === 'success') root.setAttribute('data-rsvp-replied', '');
@@ -531,8 +551,7 @@ const DEV_CONTENT = {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 
-
-  /* dev fallback for the RSVP form: without the platform (/rsvp/form.js + #site-data) nothing may be posted */
+  /* dev fallback for the RSVP form: nothing is posted */
   function devRsvp() {
     document.querySelectorAll('form[data-rsvp-form]').forEach((form) => form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -541,7 +560,7 @@ const DEV_CONTENT = {
     }));
   }
 
-  /* == dev fallback (static server only): fills the markers like lib/theme/engine.ts, textContent / attributes only */
+  /* == dev fallback: fills the markers like lib/theme/engine.ts (text / attributes only) */
   function devRender(content) {
     const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
       story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json
@@ -610,7 +629,7 @@ const DEV_CONTENT = {
         return;
       }
       if (d.text !== undefined) { el.textContent = fill(d.text, scope); return; }
-      // "Add to calendar" needs the platform (/<slug>/event.ics, Google link): in this preview it only shows the notice
+      // "Add to calendar" needs the platform: here only the notice
       if (d.calendar !== undefined) { el.setAttribute('href', '#'); el.dataset.urlMissing = ''; }
       if (d.photo !== undefined) photoState(el, get(PHOTO_SOURCES[d.photo] || ''));
       for (const name of Object.keys(d)) {

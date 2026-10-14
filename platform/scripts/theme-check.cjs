@@ -50,7 +50,11 @@
 //   CTA), photo slots and card end above the site nav and none lies under it (decor may pass under the nav's ground); its
 //   h1 (names) ≥ theme_check.first_screen.names_min_px (default 32) and pageChecks at that size. A theme with
 //   first_screen.landscape (01) is held to the same at 844×390 / 667×375, and its envelope page there too (closed: envelope
-//   + hint on screen; opened: "Replay" on screen). --stress: names minimum + pageChecks with the §12 record (it may scroll).
+//   + hint on screen; opened: "Replay" on screen). The same sizes with the docs/11 §12 design-range record (every run, every
+//   theme; scripts/lib/theme-env.ts rangeRecord: 16-letter names, 60-character venue, en-GB date, 6 rows): names minimum +
+//   pageChecks, and no hero piece partly under the nav on the first view — each ends above the nav or starts below the
+//   first screen (top ≥ innerHeight; the hero may scroll; qa-kontrol 2026-10-14, G401 third round). --stress: names
+//   minimum + pageChecks with the §12 stress record (it may scroll).
 // Recording: the blank lead-in before the first paint is cut; a white first frame is an error.
 // Output: <out>/<page>_390.png (+ index/home at every width, details_1280), *_placeholder.png,
 //   details_390_changed_content.png, compare_<page>_390.jpg, opening_390x844.mp4, checks.json.
@@ -593,16 +597,21 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     // (a bottom nav: bottom ≤ its top; any other nav: no overlap). Decor (aria-hidden layers, alt="" images outside a
     // photo slot) may pass under the nav's ground. The hero's h1 (names) is ≥ first_screen.names_min_px — never squeezed
     // to fit — and the card text stays on its paper at these sizes too (pageChecks: free_zone, overflow, cut-off text).
-    // --stress: the same sizes with the §12 record (names minimum + pageChecks); its first screen may scroll. Measured
-    // after the sequential entrance, scrolled to the top. Landscape sizes of a theme without the flag: checks.json only.
+    // Design range (docs/11 §12 level 1, lib.rangeRecord; every run): the same sizes, names minimum + pageChecks, and no
+    // piece partly under the nav — it ends above the nav or starts below the first screen (top ≥ innerHeight), so the hero
+    // may scroll but nothing shows through the nav's ground (qa-kontrol 2026-10-14, G401 third round: the countdown sat
+    // behind the links). --stress: the same sizes with the §12 stress record (names minimum + pageChecks); its first screen
+    // may scroll. Measured after the sequential entrance, scrolled to the top. Landscape sizes of a theme without the
+    // flag: checks.json only.
     await flow('home first screen', async () => {
       const FS = PROFILE.firstScreen;
-      const records = [{ label: '', slug: demo.slug, content: demoContent() }];
-      if (args.stress) {
-        const file = path.join(dataDir, 'stress-first.json');
-        fs.writeFileSync(file, JSON.stringify(lib.stressRecord(DEMO_CONTENT)));
-        const st = seed(['--slug', 'stress-first'], file);
-        records.push({ label: ' (stress record)', slug: st.slug, content: readSite(st.siteId).publishedContent, stress: true });
+      const records = [{ label: '', slug: demo.slug, content: demoContent(), kind: 'demo' }];
+      for (const [kind, make, on] of [['range', lib.rangeRecord, true], ['stress', lib.stressRecord, args.stress]]) {
+        if (!on) continue;
+        const file = path.join(dataDir, `${kind}-first.json`);
+        fs.writeFileSync(file, JSON.stringify(make(DEMO_CONTENT)));
+        const st = seed(['--slug', `${kind}-first`], file);
+        records.push({ label: kind === 'range' ? ' (design range)' : ' (stress record)', slug: st.slug, content: readSite(st.siteId).publishedContent, kind });
       }
       const measured = [];
       for (const rec of records) for (const [w, h] of [[360, 640], [375, 553], [844, 390], [667, 375]]) {
@@ -635,35 +644,43 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
             return ownText(el) || el.matches('a, button, [data-slot]') || getComputedStyle(el).viewTransitionName === 'invite-card';
           }).filter(shown);
           const name = (el) => `${el.tagName.toLowerCase()}${el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : ''}${ownText(el) ? ` "${el.textContent.trim().replace(/\s+/g, ' ').slice(0, 24)}"` : ''}`;
-          const bad = [];
-          let lowest = 0;
+          const bad = [], partly = [];
+          let lowest = 0, above = 0, below = null;
           for (const el of items) {
             const b = el.getBoundingClientRect();
             lowest = Math.max(lowest, b.bottom);
             const under = bottomNav ? b.bottom > n.top + 0.5 : (b.bottom > n.top && b.top < n.bottom && b.right > n.left && b.left < n.right);
             if (under) bad.push(`${name(el)} bottom ${Math.round(b.bottom)}`);
+            else above = Math.max(above, b.bottom);
+            // partly under the nav on the first view: neither above it nor starting below the first screen
+            if (under && (!bottomNav || b.top < innerHeight - 0.5)) partly.push(`${name(el)} ${Math.round(b.top)}–${Math.round(b.bottom)}`);
+            else if (under) below = below === null ? b.top : Math.min(below, b.top);
           }
           const cta = items.find((el) => el.matches('a.btn, button.btn, a[href$="/rsvp"]'));
           const cb = cta && cta.getBoundingClientRect();
           const h1 = scene.querySelector('h1');
-          return { scene: scene.getAttribute('data-scene'), navTop: Math.round(n.top), bottomNav, items: items.length, lowest: Math.round(lowest),
-            cta: cta ? { text: cta.textContent.trim().slice(0, 20), bottom: Math.round(cb.bottom) } : null, bad,
+          return { scene: scene.getAttribute('data-scene'), navTop: Math.round(n.top), screen: innerHeight, bottomNav, items: items.length, lowest: Math.round(lowest),
+            above: Math.round(above), below: below === null ? null : Math.round(below),
+            cta: cta ? { text: cta.textContent.trim().slice(0, 20), bottom: Math.round(cb.bottom) } : null, bad, partly,
             names: h1 ? +parseFloat(getComputedStyle(h1).fontSize).toFixed(1) : null };
         });
-        measured.push({ at: `${w}x${h}`, record: rec.stress ? 'stress' : 'demo', required, ...r });
+        measured.push({ at: `${w}x${h}`, record: rec.kind, required, ...r });
         const at = `home @${w}×${h}${rec.label}`;
         if (required) {
           if (r.missing) err(`${at}: no ${r.missing} (docs/11 §3.1, §8)`);
           else {
             const names = r.names === null ? 'no h1' : `names ${r.names} px`;
             if (r.names !== null && r.names < FS.names_min_px - 0.05) err(`${at}: the names (h1) are ${r.names} px < ${FS.names_min_px} px — a long record scrolls, it is not squeezed (theme_check.first_screen.names_min_px)`);
-            if (rec.stress) ok(`${at}: ${names} (≥ ${FS.names_min_px}); the first screen ${r.bad.length ? `scrolls (allowed for the §12 record${r.cta ? `; CTA "${r.cta.text}" bottom ${r.cta.bottom}, nav top ${r.navTop}` : ''})` : `ends at ${r.lowest}, above the nav (top ${r.navTop})`}`);
-            else if (r.bad.length) err(`${at}: the first screen (${r.scene}) runs under the nav (top ${r.navTop}): ${r.bad.slice(0, 6).join('; ')}${r.cta ? ` — CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ''}`);
+            if (rec.kind === 'stress') ok(`${at}: ${names} (≥ ${FS.names_min_px}); the first screen ${r.bad.length ? `scrolls (allowed for the §12 record${r.cta ? `; CTA "${r.cta.text}" bottom ${r.cta.bottom}, nav top ${r.navTop}` : ''})` : `ends at ${r.lowest}, above the nav (top ${r.navTop})`}`);
+            else if (rec.kind === 'range') {
+              if (r.partly.length) err(`${at}: on the first view a hero piece sits partly under the nav (top ${r.navTop}, screen ${r.screen}): ${r.partly.slice(0, 6).join('; ')} — it must end above the nav or start below the first screen (docs/11 §12)`);
+              else ok(`${at}: ${names} (≥ ${FS.names_min_px}); nothing partly under the nav (top ${r.navTop}): the first screen ends at ${r.above}${r.below === null ? '' : `, the hero goes on below it from ${r.below} (≥ ${r.screen})`}${r.cta ? `; CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ''}`);
+            } else if (r.bad.length) err(`${at}: the first screen (${r.scene}) runs under the nav (top ${r.navTop}): ${r.bad.slice(0, 6).join('; ')}${r.cta ? ` — CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ''}`);
             else ok(`${at}: ${r.scene} (${r.items} pieces${r.cta ? `, CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ', no CTA in the hero'}, ${names}) ends at ${r.lowest}, above the nav (top ${r.navTop})`);
             await eager(page);
             await pageChecks(page, at.replace('home @', 'home@'), rec.content, 'user');
             problems.forEach((x) => err(`${at}: ${x}`));
-            if (land || w === 375) await page.screenshot({ path: path.join(OUT, `${rec.stress ? 'stress_' : ''}home_${w}x${h}.png`) });
+            if (land || w === 375) await page.screenshot({ path: path.join(OUT, `${rec.kind === 'demo' ? '' : rec.kind + '_'}home_${w}x${h}.png`) });
           }
         }
         await ctx.close();

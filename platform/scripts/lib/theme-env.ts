@@ -384,6 +384,40 @@ export function stressRecord(demo: ContentRecord): ContentRecord {
   return c;
 }
 
+/**
+ * docs/11 §12 "tasarım aralığı" (design range, level 1), built on the theme's demo record: the long end of what the design
+ * itself must hold — 16-character names ("Alexandrina Rose" / "Maximilian James", qa-kontrol 2026-10-14), a 60-character
+ * venue, the full British date (en-GB, "Wednesday · 29 September 2027": the longest weekday and month), 6 schedule rows.
+ * The countdown stays on (a future date). Every value is valid under the schema (G055 limits).
+ */
+export function rangeRecord(demo: ContentRecord): ContentRecord {
+  const c = structuredClone(demo) as ContentRecord;
+  const a = 'Alexandrina Rose'; // 16
+  const b = 'Maximilian James'; // 16
+  c.partners = [
+    { ...(c.partners?.[0] ?? {}), display_name: a, full_name: `${a} Whitmore` },
+    { ...(c.partners?.[1] ?? {}), display_name: b, full_name: `${b} Ashworth` },
+  ];
+  c.name_display = `${a} & ${b}`;
+  c.initials = 'A & M';
+  c.locale = 'en-GB';
+  c.date = '2027-09-29'; // a Wednesday
+  c.venue = { ...c.venue, name: 'The Orangery and Walled Rose Gardens at Ashcombe Hall Estate' }; // 60
+  const rows: [string, string, string][] = [
+    ['14:00', 'Ceremony', 'The Walled Rose Garden'],
+    ['15:00', 'Drinks on the lawn', 'The South Lawn'],
+    ['16:30', 'Wedding breakfast', 'The Orangery'],
+    ['18:00', 'Speeches and toasts', 'The Orangery'],
+    ['19:30', 'First dance', 'The Long Gallery'],
+    ['23:30', 'Carriages', 'The Front Courtyard'],
+  ];
+  c.schedule = rows.map(([time, label, location]) => ({ time, label, location }));
+  c.ceremony_time = c.schedule[0].time;
+  c.rsvp = { ...c.rsvp, deadline: '2027-08-15' };
+  c.optional_blocks = { ...c.optional_blocks, countdown: true };
+  return c;
+}
+
 export function demoSlug(content: ContentRecord, fallback = 'demo-site'): string {
   const names = (content.partners ?? []).map((p) => p.display_name).filter(Boolean);
   const s = names.join(' and ').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');

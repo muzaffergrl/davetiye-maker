@@ -34,14 +34,64 @@ Tasarım 01'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [x] `theme-check --theme olive-ivory` hatasız; `previews/g401/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
       — qa-kontrol 2026-10-14: **KOŞULLU GEÇTİ**; 3 MUST FIX + 7 küçük madde düzeltildi (Sonuç → "qa-kontrol 2026-10-14"),
       theme-check --stress 88/88; qa yeniden bakışı (ikinci tur) yine **KOŞULLU**: 2 MUST FIX (yatay telefonda home ilk
-      ekranı + yanlış "her boyutta" iddiası) düzeltildi (Sonuç → "ikinci tur"), theme-check --stress 106/106; qa'nın yeniden
-      bakması önerilir
+      ekranı + yanlış "her boyutta" iddiası) düzeltildi (Sonuç → "ikinci tur"), theme-check --stress 106/106; ikinci turun
+      yeniden bakışı yine **KOŞULLU**: tasarım aralığında `.is-long` sayacı nav'ın arkasında → düzeltildi (Sonuç → "yeniden
+      bakış"), theme-check tasarım aralığı kaydıyla da (01 114/114, 03 97/97); qa'nın yeniden bakması önerilir
 - [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
 **Yapıldı (wf-tema01, 2026-10-13).** Durum: yerelde çalışan ve test edilen platform teması; **hiçbir yere yayınlanmadı**.
 Ayrıntı: `platform/themes/olive-ivory/README.md` (dosyalar, foto alanları, görsel hattı + GPT kusur temizliği, açılış/koreografi,
 sayfa başına comp öğe haritası, bilinen sınırlar).
+
+### qa-kontrol 2026-10-14, ikinci turun yeniden bakışı (üçüncü tur): KOŞULLU → geri sayım/nav düzeltildi (2026-10-14)
+QA, ikinci turun "tasarım aralığı sığar" iddiasını tasarım aralığı kaydıyla (docs/11 §12 düzey 1: "Alexandrina Rose" /
+"Maximilian James", 54 karakter mekân, en-GB tarih) denedi: kısa telefonda `.is-long`'da hap nav'ın üstünde kalıyor, ama sayaç
+hapın altına geçip nav'ın yarı saydam zemininin arkasında, ilk ekranda yarım kalıyordu — rakamlar "HOME · STORY · DETAILS · RSVP"
+yazısının arkasından görünüyordu. Kendi `next start` + Chromium ölçümümle aynen doğrulandı (375×553: hap 420–466, sayaç 488–525,
+nav üstü 478; 320×568: sayaç 505–542, nav 493), sonra düzeltildi. Çizim yok, GPT parçası yok: yalnız yerleşim ve JS ölçümü.
+- **Kural:** hero'nun hiçbir parçası ilk görünümde nav'ın altında yarım kalmaz — ya nav'ın üstünde biter ya ilk ekranın tamamen
+  altından başlar (üstü ≥ ekran yüksekliği; kaydırınca gelir).
+- **01 (`site.js` `fitNames` → `fold`, `site.css`):** adımlardan sonra kart dışındaki ilk parça nav'ın 8 px üstünde bitmiyorsa
+  `margin-top` ile ilk ekranın altından başlar (üstü = ekran + 12 px): `.is-long`'da sayaç, kaydırılan stres hero'sunda mekân ve
+  sonrası. Hap ilk ekranda kalınca `decor_br` ve yasemin onunla kalır (`scene-bg` hapın bittiği yerde biter: `--fold`;
+  `.is-folded` `decor_br` payını 27 px'e indirir) — ilk denemede küme sayacın "SECONDS"ının üstüne biniyordu, görüntüde görüldü ve
+  düzeltildi. `f-leaf`/`f-olive` üst konumu ilk ekrana göre (`min(%, (100svh − nav) × k)`): uzayan stres hero'sunda zeytin
+  "Elizabeth"in üstüne düşüyordu. "İlk ekran" = küçük görünüm (`100svh` ölçülür): adımlar ve katlama aynı yükseklikle, kaydırırken
+  toplanan araç çubukları yerleşimi oynatmaz. İsimler 36 px tabanının altına inmez. `site.js` 35 622 B (sınır 35 840: yorumlar
+  kısaltıldı), `site.css` 45 635 B.
+- **Ölçüm sonra (Chromium, DPR 2, 15 boyut × demo / tasarım aralığı / stres; hap · sayaç · nav üstü px):** demo değişmedi
+  (320×568 431–477 · 378–421 · 493; 360×640 490–536 · 430–476 · 565; 375×553 422–468 · 370–412 · 478; 375×667 513–559 · 451–498 ·
+  592; 390×844 600–650 · 520–570 · 769). Tasarım aralığı (`rangeRecord`, 60 karakter mekân): 320×568 437–483 · **580–617** · 493
+  (`.is-long` + fold), 360×640 509–555 · 464–501 · 565, 375×553 420–466 · **565–602** · 478 (`.is-long` + fold), 375×667 531–577 ·
+  486–523 · 592, 390×844 676–726 · 595–646 · 769; QA'nın 54 karakterlik mekânıyla da aynı. Stres: 320×568 735–781 · 682–725 ·
+  493 ve 375×553 721–767 · 669–711 · 478 (kaydırılır, mekândan sonrası ilk ekranın altında; ilk ekran tarihle biter), 360×640
+  511–557 · 652–689 · 565, 375×667 524–570 · 679–716 · 592 (`.is-long` + fold), 390×844 645–695 · 598–637 · 769. Yatay (844×390,
+  667×375, 568×320, 740×360) ve 360×740, 360×780, 390×690, 412×915, 430×932, 768×1024 de: üç kayıtta hiçbir boyutta nav'ın altında
+  yarım parça yok. Kırpımlar: oturumun scratchpad'inde `qa401c/` (rapor).
+- **03 (`platform/themes/blush-garden-rose/site.js` `foldHero`, yalnız gerektiği için):** yeni theme-check tasarım aralığında 03'ü de
+  yakaladı (375×553: yer 487–566, nav üstü 489; 360×640: tarih ve sayaç nav'ın altında). Aynı kural: isimlerden sonraki parça
+  (tarih, yer, sayaç, ipucu) alt nav'ın 4 px üstünde bitmiyorsa ilk ekranın altından başlar; kart ve isimler yerinde kalır (stres
+  kaydında isimlerin kendisi nav'a uzanır — `--stress` buna izin verir; isimleri ilk ekrandan atmak daha kötüydü, denendi). 03 demo
+  ölçülen her dikey boyutta değişmedi. Sınır: 320×568'de tasarım aralığında "James"in kuyruğu nav çizgisine 2 px değer
+  (theme-check boyutu değil); 03'ün yatay düzeni hâlâ yok. 03 README "Bilinen sınırlar".
+- **theme-check (her tema, `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts` `rangeRecord`; G052'nin dosyaları, QA isteği):**
+  "home first screen" akışı her koşuda tasarım aralığı kaydıyla da çalışır (aynı boyutlar: 360×640, 375×553 + landscape bayraklı
+  temada 844×390, 667×375): isim tabanı + `pageChecks` + **nav'ın altında yarım parça yok** (nav'ın üstünde biter ya da ilk ekranın
+  altından başlar; kaydırma serbest). Ekran görüntüsü `range_home_<w>x<h>.png`. Aynı kuralla ölçüm eski 01 kodunda 375×553 ve 320×568'de sayacı yarım buluyordu.
+- **Testler:** `tests/theme-olive-ivory.test.ts` "qa 2026-10-14 (third round)" (rangeRecord geçerli ve her alan doğru basılıyor,
+  `fold` + `100svh` ölçümü, `--fold`/`.is-folded`, yüzen parçaların ilk ekran konumu); `tests/theme-blush-garden-rose.test.ts`
+  `foldHero` (yalnız `margin-top`, kart ve isimler hariç).
+
+**Bu turun sayıları:** `npm test` 296/296, typecheck temiz, `npm run build` + trace-check temiz; `theme-check --theme olive-ivory
+--stress` **114/114, 0 uyarı** (MP4 dahil; zarf → home 4188 ms; ilk kare ort. 197, 189, 162; lead-in 0,51 s kesildi);
+`theme-check --theme blush-garden-rose --stress --no-video` **97/97, 0 uyarı** (çıktı geçici klasöre, `previews/g038`
+dokunulmadı); `g051-browser --theme olive-ivory` 44/44; `final-smoke --theme olive-ivory` 42/42 (çıktı geçici klasöre,
+`previews/g401/final/` değişmedi). `previews/g401/` bu koşudan: home önizlemeleri değişti (`stress_home_*` katlandı, yeni
+`range_home_375x553/667x375/844x390.png`), MP4 yenilendi.
+
+**Denenmedi:** gerçek iPhone/Safari ve Android Chrome'da araç çubuğu toplanırken (`100svh` ölçümü yalnız Chromium emülasyonunda;
+orada svh = pencere yüksekliği).
 
 ### qa-kontrol 2026-10-14, ikinci tur: KOŞULLU → düzeltildi (2026-10-14)
 QA, önceki düzeltmenin yatay telefonlarda yeni bir gerileme getirdiğini buldu; iki MUST FIX önce kendi `next start` + Chromium
@@ -63,7 +113,10 @@ QA, önceki düzeltmenin yatay telefonlarda yeni bir gerileme getirdiğini buldu
   768×1024, 1024×500/600/768, 1280×540/600/800, 1366×657, 1440×900, 1920×1080):** her boyutta kart ve hap nav'ın üstünde, isimler
   ≥ 37,6 px (yalnız 568×320'de %6 küçülür), kart ≥ 150 px, kart kopyası kâğıtta, yatay kaydırma yok. Hap altı / nav üstü: 844×390
   288/323, 932×430 315/363, 667×375 278/308, 740×360 268/293, 375×553 468/478, 360×640 536/565, 1024×600 425/533. Tasarım aralığı
-  (14–16 harflik isimler, 57 karakter mekân, "September 30, 2027"): hepsi sığar (375×553, 320×568, 568×320'de `.is-long`). §12
+  (14–16 harflik isimler, 57 karakter mekân, "September 30, 2027"): 375×553, 320×568, 568×320'de `.is-long` — *(üçüncü tur
+  düzeltmesi: burada "hepsi sığar" yazıyordu, yanlıştı. `.is-long`'da hap ilk ekranda kalıyordu ama sayaç hapın altına geçip nav'ın
+  yarı saydam zemininin arkasında kalıyordu, rakamlar nav yazısının arkasından görünüyordu: 375×553 sayaç 488–525 / nav üstü 478,
+  320×568 505–542 / 493. Düzeltme ve yeni ölçüm: yukarıda "üçüncü tur")*. §12
   stres kaydı: 375×553, 320×568, 667×375, 568×320'de hero kaydırılır, öteki 20 boyutta hap ilk ekranda; isimler her yerde ≥ 36 px.
   Hap–yaprak arası yatayda 19–124 px (568×320'de 11–12 px). Zarf → home akışı 844×390'da kare kare bakıldı: kart cepten çıkıp
   sol hero kartına iniyor. Ekran görüntüleri: `previews/g401/home_844x390.png`, `home_667x375.png`, `home_375x553.png`,
@@ -345,3 +398,4 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - 2026-10-13 son denetim (wf-tema01, origin/main c637fcc temiz worktree): npm test 292/292, typecheck, build+trace-check, seed; theme-check --stress olive-ivory 86/86 ve blush-garden-rose 86/86 (MP4 dahil); g051 44/44 + final-smoke 42/42 iki temada; tools/tests 7/7; kit_check 01 p5 23/23 p2 5/5, 03 p4 21/21 p2 5/5; validate_content 20/20; katalog --dene temiz (docs/09 01 satırı eşitlendi); previews/g401 güncel kodla aynı. qa-kontrol incelemesi hâlâ yapılmadı.
 - 2026-10-14 qa-kontrol KOŞULLU GEÇTİ → düzeltildi: mekân yer tutucusu temiz kırpım (+ min_lum denetimi), kısa telefonda (360×640, 375×553) ve 1024×768'de home ilk ekranı nav'ın üstünde (eski iddia düzeltildi), kümeler düz çizgiyle kesilmiyor (hero/sayfa sonu maskesi, RSVP geniş köşeleri), ≥ 11 px yazı, dokunma vurgusu, yaprak/yasemin/isim zamanlaması, story kaydırma ipucu, MP4 beyaz ilk kare; theme-check yeni home kısa telefon akışı (01 ve 03 geçiyor); npm test 293/293, theme-check 01 88/88 + 03 87/87, g051 44/44, final-smoke 42/42
 - 2026-10-14 qa-kontrol ikinci tur KOŞULLU → düzeltildi: yatay telefonda home ilk ekranı (kısa yatay ızgara: kart isimlerin yanında; isimler ≥ 36 px, 0,4 tabanı kalktı; sıkı → sayaç hapın altına → kaydırma; kart her genişlikte ≥ 150 px; kart kopyası fitCopy), zarf sayfası yatayda (ipucu/Replay ekranda, açık zarf yanında düğmeler), README 'her boyutta' iddiası ölçülen kapsamla düzeltildi; theme-check home ilk ekran akışı: isim tabanı + pageChecks + first_screen.landscape (01: 844×390, 667×375) + --stress; npm test 294/294, theme-check 01 106/106 + 03 93/93, g051 44/44, final-smoke 42/42
+- 2026-10-14 qa-kontrol 2026-10-14 ikinci tur: KOŞULLU → geri sayım/nav düzeltildi (tasarım aralığında `.is-long` sayacı nav'ın arkasındaydı; 01 `fold`: sığmayan ilk parça ilk ekranın altından başlar, decor_br hapla kalır; 03 `foldHero`; theme-check home ilk ekranı tasarım aralığı kaydıyla, nav'ın altında yarım parça yok; ikinci turun "tasarım aralığı sığar" cümlesi düzeltildi); npm test 296/296, theme-check 01 114/114 + 03 97/97, g051 44/44, final-smoke 42/42

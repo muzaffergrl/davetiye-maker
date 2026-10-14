@@ -274,6 +274,24 @@ test('G056 long names: envelope names and RSVP signature wrap and shrink to fit 
   assert.match(js, /initFit\(\);\s*\n\s*initEnvelope\(\);/);
 });
 
+test('qa-kontrol 2026-10-14 (G401 third round): a home hero piece after the names never sits half under the bottom nav', async () => {
+  const { rangeRecord } = await import('../scripts/lib/theme-env.ts');
+  const range = rangeRecord(demoContent()); // docs/11 §12 level 1: 16-letter names, 60-character venue, en-GB date
+  const home = render('home', range);
+  assert.deepEqual(home.warnings, []);
+  assert.equal(home.$('.hero-place [data-field="venue.name"]').text(), range.venue.name);
+  // site.js moves only margins of the pieces after the names (theme-check measures it in the browser): the card and the
+  // names stay; the first screen is the small viewport (svh), so collapsing toolbars move nothing
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  const fold = js.slice(js.indexOf('function foldHero()'), js.indexOf('function initFold()'));
+  assert.ok(fold.length > 100, 'foldHero found');
+  assert.doesNotMatch(fold, /textContent|innerHTML|innerText|setProperty/);
+  assert.match(fold, /!c\.matches\('\.hero-card, \.names'\)/);
+  assert.match(fold, /'position:fixed;height:100svh'/);
+  assert.match(fold, /limit = sv - nav\.offsetHeight - 4, below = sv \+ 12/);
+  assert.match(js, /initCountdown\(\);\s*\n\s*initFold\(\);/);
+});
+
 test('invitation card: without a full name the first name is shown (never an empty name line)', () => {
   const c = demoContent();
   c.partners[0] = { display_name: 'Avery', full_name: null };

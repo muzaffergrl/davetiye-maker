@@ -89,7 +89,7 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
 - **Parçacıklar:** açılış 2 zeytin yaprağı · home'a varış 3 yasemin çiçeği süzülür (hero fotoğrafının iki yanındaki şeritlerden,
   fotoğrafın/yüzlerin üstünden asla: `avoid`) · RSVP kapanışı 2 çiçek + 1 yaprak.
 
-## Home ilk ekranı (hero) ve yatay telefon (qa 2026-10-14, ikinci tur)
+## Home ilk ekranı (hero) ve yatay telefon (qa 2026-10-14, ikinci ve üçüncü tur)
 - **Üç düzen:** uzun telefon (kart üstte, `decor_br` hapın altında) · 9:16 ve daha basık telefon (≤ 640 px genişlik, sıkı aralık,
   `decor_br` hapın yanında) · **kısa yatay** (`min-aspect-ratio: 1/1` ve yükseklik ≤ 620 px: yan çevrilmiş telefon, kısa
   pencere): ızgara, kart solda ilk ekran yüksekliğinde (150–260 px), isimler · tarih · mekân · şehir · sayaç · hap sağ sütunda
@@ -99,6 +99,15 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
   (1) isimler en çok %24 küçülür, (2) `.is-tight` (mekân 16 px, sayaç 22 px) + isimler **36 px tabanına** kadar, (3) `.is-long`:
   sayaç hapın altına geçer (hap ilk ekranda kalır), (4) yine sığmazsa hero **kaydırılır** — isimler rahat boylarında, ezilmez.
   Eski 0,4 tabanı (isimler 17,6 px'e iniyordu) kalktı. Taban `img/manifest.json theme_check.first_screen.names_min_px` ile aynı.
+- **Nav'ın altında yarım parça yok (`fold`, qa 2026-10-14 üçüncü tur):** adımlardan sonra kart dışındaki ilk parça nav'ın 8 px
+  üstünde bitmiyorsa ilk ekranın **altından** başlar (üstü ≥ ekran + 12 px, `margin-top`; kaydırınca gelir): `.is-long`'da sayaç,
+  kaydırılan hero'da (stres kaydı) mekân ve sonrası. Eskiden `.is-long`'da sayaç hapın 22 px altında nav'ın yarı saydam zemininin
+  arkasında kalıyordu, rakamlar "HOME · STORY · DETAILS · RSVP"nin arkasından görünüyordu (tasarım aralığı 375×553: hap 420–466,
+  sayaç 488–525, nav üstü 478; 320×568: sayaç 505–542, nav 493). Hap ilk ekranda kalınca `decor_br` ve yasemin onunla kalır:
+  hero'nun `scene-bg`'si hapın bittiği yerde biter (`--fold`), `.is-folded` `decor_br` için ayrılan alt boşluğu 27 px'e indirir
+  (sayaç düz kâğıtta, kümenin altında; eskiden küme sayacın "SECONDS"ının üstüne biniyordu). `f-leaf` / `f-olive`'in üst konumu
+  ilk ekrana göre (`min(%, (100svh − nav) × k)`): ekrandan uzun hero'da zeytin isimlerin üstüne düşmez. "İlk ekran" = küçük
+  görünüm (`100svh` ölçülür) — adımlar ve `fold` aynı yükseklikle; kaydırırken toplanan araç çubukları yerleşimi oynatmaz.
 - **Kart ≥ 150 px her genişlikte** (eski `min(260px, 34svh × .695)` 768 px üstü yatay telefonda kartı 92–102 px'e indiriyordu).
 - **Kart kopyası (`fitCopy`):** yazı ≥ 11 px kalır; kopya kartın kâğıdına sığmazsa satır düşer: hepsi → yer (hero zaten
   gösterir) → script → yalnız script → hiçbiri (`.card-copy[data-drop]`); kart boyu değişince (`ResizeObserver`, ör. Replay)
@@ -109,9 +118,15 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
   915×412 · 932×430 yatay, 768×1024, 1024×500/600/768, 1280×540/600/800, 1366×657, 1440×900, 1920×1080 — her boyutta hap ve
   kart nav'ın üstünde, isimler ≥ 37,6 px (yalnız 568×320'de %6 küçülür; öteki boyutlarda hiç), kart ≥ 150 px, kart kopyası kâğıtta.
   Örnekler (hap altı / nav üstü): 844×390 288/323, 667×375 278/308, 740×360 268/293, 375×553 468/478, 360×640 536/565.
-  Tasarım aralığı (14–16 harflik isimler, 57 karakter mekân, "September 30"): 375×553, 320×568, 568×320'de `.is-long`, ötekilerde
-  sığar. §12 stres kaydı: 375×553, 320×568, 667×375 ve 568×320'de hero kaydırılır; ölçülen öteki 20 boyutta hap ilk ekranda
-  (gerekirse sıkı / `.is-long`); isimler her boyutta ≥ 36 px.
+  **Tasarım aralığı** (`theme-env.ts rangeRecord`: "Alexandrina Rose" / "Maximilian James", 60 karakter mekân, en-GB
+  "Wednesday · 29 September 2027", 6 program satırı; üçüncü tur, 15 boyut): 320×568, 375×553 ve 568×320'de `.is-long` + `fold`
+  — hap ilk ekranda, sayaç ilk ekranın altından (sayaç / hap / nav üstü: 320×568 580–617 / 437–483 / 493, 375×553 565–602 /
+  420–466 / 478, 568×320 332–371 / 195–241 / 253); öteki boyutlarda hepsi nav'ın üstünde (360×640 sayaç 464–501, hap 509–555,
+  nav 565; 375×667 486–523 / 531–577 / 592; 390×844 595–646 / 676–726 / 769); isimler 36–77 px. *(İkinci turun "tasarım
+  aralığı sığar" iddiası yanlıştı: `.is-long`'da sayaç nav'ın arkasındaydı.)* **§12 stres kaydı:** 320×568, 375×553, 667×375,
+  568×320'de hero kaydırılır ve mekân ilk ekranın altından başlar; 360×640, 375×667, 360×740, 390×690, 740×360, 844×390'da
+  `.is-long` + `fold`; isimler her boyutta ≥ 36 px. Üç kayıtta da 15 boyutun hiçbirinde nav'ın altında yarım kalan parça yok
+  (`theme-check` "home first screen": tasarım aralığı her koşuda, aynı kural).
 
 ## Comp öğe haritası (docs/11 §8)
 
@@ -196,7 +211,8 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
 - Köşe kümeleri hiçbir yerde düz çizgiyle kesilmez: hero ve sayfa sonlarında `decor_br`'nin alt sıraları kâğıda incelir (maske),
   geniş RSVP'de (≥ 960 px, 1040 px ızgara) iki köşe de ızgaranın değil sayfanın kenarında.
 - Uzun kayıt + kısa ekran (§12 stres kaydı 375×553, 320×568, 667×375, 568×320): hero ilk ekrana sığmaz, **kaydırılır** (isimler
-  ≥ 36 px); hap ya da sayaç nav'ın yumuşak zemininin altından geçer. `venue.city/region` şemada sınırsız: çok uzun yer adı kartta
+  ≥ 36 px); sığmayan ilk parça (mekân) ilk ekranın altından başlar, ilk ekran tarih satırıyla biter ve nav'a kadar boş kâğıt
+  kalır (`fold`; nav'ın altında yarım parça yok). `venue.city/region` şemada sınırsız: çok uzun yer adı kartta
   gösterilmez (hero'da tam), `fitCopy`. 568×320'de (iPhone SE 1. kuşak yatay) hap–yaprak arası 11–12 px (ölçülen öteki yatay boyutlarda ≥ 19 px).
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (Safari'nin yatay araç çubukları, `svh`, `mask`, `ResizeObserver`), Vercel
   yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.

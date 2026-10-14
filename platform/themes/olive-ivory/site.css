@@ -160,8 +160,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .f-leaf  { right: 6%; top: 9%; width: clamp(40px, 12vw, 84px); rotate: -28deg; }
 .f-olive { right: 19%; top: 19%; width: clamp(14px, 4.4vw, 28px); rotate: 18deg; }
 .f-bloom { left: 6%; top: 70%; width: clamp(18px, 6vw, 38px); }
-.hero .f-leaf { top: 6%; right: 4%; }
-.hero .f-olive { top: 30%; right: 7%; }
+/* a hero taller than the first screen (long record, site.js fold) keeps them where the first screen has them */
+.hero .f-leaf { top: min(6%, (100svh - var(--nav-h)) * .06); right: 4%; }
+.hero .f-olive { top: min(30%, (100svh - var(--nav-h)) * .3); right: 7%; }
 .hero .f-bloom { top: auto; bottom: 22%; left: 5%; }
 .js .float { animation: air 7s ease-in-out infinite alternate; }
 .js .f-olive { animation-duration: 9s; animation-delay: -3s; }
@@ -267,7 +268,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* == page 2 — home (W1.2): the first screen ends above the nav (README); decor_br (--br) under / beside the pill */
 .hero { --hn: clamp(44px, min(15vw, 10.4svh), 82px); position: relative; min-height: calc(100svh - var(--nav-h) - env(safe-area-inset-bottom)); padding-bottom: 27px;   /* nav's soft top 19 + 8 */
         display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.hero .scene-bg { position: absolute; z-index: 0; }
+.hero .scene-bg { position: absolute; z-index: 0; bottom: var(--fold, 0px); }   /* site.js fold: ends with the pill */
 .hero .scene-bg .corner-br { bottom: 0; }
 @media (max-aspect-ratio: 3/4) {
   .hero { --br: min(52vw, 26svh, 300px); padding-bottom: calc(var(--br) * .62 + 16px); }
@@ -320,9 +321,10 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .hero.is-tight .hero-venue { font-size: 16px; line-height: 1.2; }
 .hero.is-tight .cd-num { font-size: 22px; }
 .hero.is-tight .countdown, .hero.is-tight .hero-cta { margin-top: 8px; }
-.hero.is-long .countdown { order: 1; grid-row: 7; margin-top: 22px; }   /* the pill stays in the first screen */
+.hero.is-long .countdown { order: 1; grid-row: 7; margin-top: 22px; }   /* the pill stays in the first screen; site.js fold moves the countdown below it */
 .hero.is-long .hero-cta { grid-row: 6; }
 .hero.is-long .hero-card { grid-row: 1 / 7; }
+.hero.is-folded { padding-bottom: 27px; }   /* decor_br stays by the pill in the first screen (--fold) */
 html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 @keyframes arrive-fade { from { opacity: 0; } }
 

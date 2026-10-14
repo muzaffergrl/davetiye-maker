@@ -12,7 +12,7 @@ import type { ContentRecord } from '../lib/content/types.ts';
 import { validateContent } from '../lib/content/validate.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
 import { listThemes, loadTheme, type LoadedTheme, type PageName } from '../lib/theme/theme.ts';
-import { stressRecord } from '../scripts/lib/theme-env.ts';
+import { rangeRecord, stressRecord } from '../scripts/lib/theme-env.ts';
 import { PLATFORM_ROOT, REPO_ROOT, tinyPng, tmpDir } from './helpers.ts';
 
 const ID = 'olive-ivory';
@@ -782,6 +782,35 @@ test('qa 2026-10-14 (second round): short landscape layout, names ≥ 36 px, car
   assert.match(rule('.seal-mono'), /font-size: max\(11px, 8\.8cqw\)/);
   assert.match(rule('.env-head .kicker'), /width: fit-content; margin-inline: auto;/);
   assert.match(rule('body::before'), /height: min\(100%, max\(100svh, 640px\)\)/);
+});
+
+test('qa 2026-10-14 (third round): no hero piece half under the nav — the fold starts it below the first screen', () => {
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  // the design-range record (docs/11 §12 level 1) the browser check uses is valid and renders every field
+  const range = rangeRecord(demo());
+  assert.ok(validateContent(range).ok, JSON.stringify(validateContent(range).errors));
+  assert.equal(range.venue.name.length, 60);
+  assert.ok(range.partners.every((p) => p.display_name.length >= 14));
+  for (const page of PAGES) {
+    const { $, warnings } = render(page, range);
+    assert.deepEqual(warnings, [], `range ${page}`);
+    assertFieldsMatch($, range, page);
+  }
+  assert.equal(render('home', range).$('.hero-date').text().replace(/\s+/g, ' ').trim(), 'Wednesday · 29 September 2027');
+  // the first screen = the small viewport (svh), the same for the steps and the fold (collapsing toolbars move nothing)
+  assert.match(js, /p\.style\.cssText = 'position:fixed;height:100svh'/);
+  assert.match(js, /\.map\(bottom\)\) > sv\(\) - nav\.offsetHeight - 8;/);
+  assert.match(js, /const v = sv\(\), limit = v - nav\.offsetHeight - 8, below = v \+ 12/);
+  // every piece but the card may move below the first screen; undone before the steps, applied after them
+  assert.match(js, /const pieces = \(\) => \[\.\.\.inner\.children\]\.filter\(\(c\) => c\.offsetParent && !c\.matches\('\.hero-card'\)\);/);
+  assert.match(js, /if \(inner && nav\) unfold\(hero\);[\s\S]*?if \(!low\(h1\)\) break;[\s\S]*?if \(inner && nav\) fold\(hero\);/);
+  // a pill left in the first screen keeps decor_br and the bloom beside it (not beside the moved countdown)
+  assert.match(css, /\.hero \.scene-bg \{ position: absolute; z-index: 0; bottom: var\(--fold, 0px\); \}/);
+  assert.match(css, /\.hero\.is-folded \{ padding-bottom: 27px; \}/);
+  // the top floats keep their first-screen place in a hero taller than the screen (never on the names)
+  assert.match(css, /\.hero \.f-leaf \{ top: min\(6%, \(100svh - var\(--nav-h\)\) \* \.06\); right: 4%; \}/);
+  assert.match(css, /\.hero \.f-olive \{ top: min\(30%, \(100svh - var\(--nav-h\)\) \* \.3\); right: 7%; \}/);
 });
 
 // ---------------------------------------------------------------- envelope: build geometry, layers, closure, motion
