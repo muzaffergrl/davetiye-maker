@@ -6,7 +6,7 @@ durum: inceleme
 alan: wf-g064
 oncelik: 1
 bagimli: []
-yazar: [platform/themes/olive-ivory/site.css, platform/previews/g064/]
+yazar: [platform/themes/olive-ivory/site.css, platform/themes/olive-ivory/README.md, platform/scripts/theme-check.cjs, platform/previews/g064/]
 ---
 
 ## Amaç
