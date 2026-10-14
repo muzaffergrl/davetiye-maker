@@ -31,14 +31,73 @@ Tasarım 01'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 ## Bitti sayılması için
 - [x] docs/11 §15 kontrol listesi tamam (atlanan madde Sonuç'ta gerekçesiyle: qa-kontrol incelemesi)
 - [x] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-olive-ivory.test.ts` (§13.2)
-- [ ] `theme-check --theme olive-ivory` hatasız; `previews/g401/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
-      — theme-check hatasız (ikinci tur 86/86); **qa-kontrol incelemesi yapılmadı** (bu oturumda alt-ajan aracı yoktu; Sonuç'a bak)
+- [x] `theme-check --theme olive-ivory` hatasız; `previews/g401/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
+      — qa-kontrol 2026-10-14: **KOŞULLU GEÇTİ**; 3 MUST FIX + 7 küçük madde düzeltildi (Sonuç → "qa-kontrol 2026-10-14"),
+      theme-check --stress 88/88; düzeltmelere qa'nın yeniden bakması önerilir
 - [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
 **Yapıldı (wf-tema01, 2026-10-13).** Durum: yerelde çalışan ve test edilen platform teması; **hiçbir yere yayınlanmadı**.
 Ayrıntı: `platform/themes/olive-ivory/README.md` (dosyalar, foto alanları, görsel hattı + GPT kusur temizliği, açılış/koreografi,
 sayfa başına comp öğe haritası, bilinen sınırlar).
+
+### qa-kontrol 2026-10-14: KOŞULLU GEÇTİ → düzeltildi (2026-10-14)
+QA raporunun 3 MUST FIX'i ve 7 küçük maddesi `next start` + Chromium'da gerçek ekran görüntüleriyle (360×640, 375×553, 375×667,
+390×690, 412×732, 390×844, 430×932, 768×1024, 1024×768, 1280×800, 1440×900, 1920×1080) önce doğrulandı, sonra düzeltildi ve
+yeniden ölçüldü. Görsel çizilmedi, yeni GPT parçası istenmedi: kırpım, yerleşim, boyut, alfa maskesi, hareket zamanlaması.
+- **1 Mekân yer tutucusunda leke (doğrulandı → düzeltildi):** `ph_venue` kırpımı (220, 560, 1000, 1080) bg_page alt kümesinin bulanık
+  koyu yaprak ucunu alıyordu (en koyu 141); `build_images.py` yeni kırpım (0, 760, 760, 1225): sol orta güneş lekeleri, en koyu 216
+  (öteki `ph_*` 184–221). Yeni sert denetim: her yer tutucunun en koyu pikseli ≥ 175 (`manifest.ph_*.min_lum`, aksi çıkış ≠ 0).
+  Yalnız `ph_venue-480/960.webp` + `manifest.json` değişti, öteki görseller bayt bayt aynı (md5).
+- **2 Kısa telefonda hap nav'ın altında (doğrulandı → düzeltildi):** önce (hap altı / nav üstü): 375×553 540/478, 360×640 576/565,
+  375×667 594/592, 390×690 610/615, 1024×768 700/693, 1280×800 724/725. Düzeltme `site.css`: hero `100svh − nav` içinde 27 px alt
+  boşlukla (nav'ın yumuşak üstü 19 + 8) biter; boyutlar svh terimleriyle okunur tabanlara iner (hero kartı ≥ 150 px, isimler ≥ 40 px,
+  sayaç ≥ 26 px); 9:16 ve daha basık telefonda (≤ 640 px) sıkı düzen ve `decor_br` W1.2'deki gibi hapın **yanında** (hap–yaprak
+  ≥ 16 px; ölçüm 20–37 px); geniş ekranda kart 34svh, isimler 10,4svh ile sınırlı. `site.js` `fitNames`: hero'da ilk ekran nav'ın
+  8 px üstünde bitene kadar önce isimler (en çok %24), yetmezse `.is-tight` (mekân 16 px, sayaç 22 px), sonra yine isimler. Sonra
+  (demo kaydı, 14 boyut): nav'a boşluk 10–176 px — 375×553 hap 468 / nav 478, 360×640 536/565, 1024×768 674/693, 1280×800 698/725;
+  §12 stres kaydı (40+40 karakter isim, 80 karakter mekân) 375×553'te 10 px, 360×640'ta 19 px, 390×844'te 26 px boşlukla nav'ın
+  üstünde. **Eski "home ilk ekranı nav'ın üstünde biter" iddiası kısa telefonlarda yanlıştı** (ikinci tur maddesinde işaretlendi).
+- **3 Geniş ekranda düz çizgiyle kesilen kümeler (doğrulandı → düzeltildi):** home hero `decor_br`'si landscape'te `bottom: −6 %` ile
+  hero'nun `overflow: hidden` kenarında (1280×800'de y = 744) kesiliyordu; aynı alt kenar telefonda da sayfa kayınca ve bütün sayfa
+  sonlarında (home altbilgisi, story/details sonu, RSVP kapanışı) düz çizgi olarak görünüyordu. Şimdi hero'da `bottom: 0`, hero ve sayfa
+  sonu `decor_br`'lerinin son %15'i kâğıda incelir (GPT parçasına alfa maskesi, `.hero .corner-br, .page-corner.corner-br`).
+  RSVP ≥ 960 px: kapanış `decor_br`'si 1040 px ızgaranın sağ kenarında (x ≈ 1160) dikey kesiliyordu, üstteki `decor_tl` de ızgaranın
+  sol kenarında (x ≈ 125) düz kenarla duruyordu → ikisi de sayfanın kenarında (`calc((min(100vw, 1040px) − 100vw) / 2)`).
+  1024×768, 1280×800, 1000×800 (RSVP) ekran görüntüleriyle bakıldı.
+- **Küçük maddeler (hepsi yapıldı):** (a) Android mavi dokunma dikdörtgeni: `a, button, summary, label, [role="button"]` →
+  `-webkit-tap-highlight-color: transparent`, odak halkaları duruyor; (b) açılış yaprakları 1,3 s'de kalkar, ~2,3 s'de ekranı geçer,
+  süreleri `go`ya göre kırpılır (ölçüm: ikinci yaprak dokunuştan ~3,9 s'de ekrandan çıkıyor, sayfa 4,15 s'de el değiştiriyor;
+  eskiden 3,9–4,6 s süreyle yolun ortasında kalıyordu); (c) varış yasemini hero fotoğrafının iki yanındaki şeritlerden düşer
+  (`MOTION.accents.arrive.avoid`; 4,5 s boyunca 126 örnekte fotoğraf kutusuyla 0 temas); (d) kart inişi → isimler: `arriveDelay`
+  700 → 0 (yeni MP4: kart ~7,5 s'de iner, isimler ~7,7 s'de yazılmaya başlar; eskiden ~7,7 → 9,0 s); (e) yazı tabanı ≥ 11 px: kart
+  kopyası (index + hero kartı) 8,5 → 11 px (harf aralığı .12em, kopya alanı %7,5 iç boşluk; 150 px kartta "NAPA, CALIFORNIA" tek
+  satır), üçlüdeki saatler 9,5 → 11, RSVP kartı "We can't wait…" 10 → 11, ayrıca geri sayım etiketleri ve "Read/Details/Reply"
+  10,5 → 11, davet kartının küçük satırları 10,5 → 11 (taşma yok: theme-check 5 genişlik + stres 360/390); (f) story telefon
+  yelpazesinin altında arayüz yazısıyla `‹ 2 / 3 ›` kaydırma ipucu (`.swipe-nav`: iki etiketli ok düğmesi 48 × 44 px yelpazeyi bir
+  kart kaydırır, sayaç ortadaki kartı izler, uçta ok söner; JS'siz ve ≥ 720 px'te gizli; çizim yok); (g) MP4'ün beyaz ilk karesi:
+  kayıt sayfa açılınca başlıyor → theme-check ilk boyamaya kadarki süreyi kesiyor (bu koşuda 0,67 s) ve ilk kare beyazsa hata veriyor;
+  yeni `opening_390x844.mp4`'ün ilk karesi zarf sayfası (ort. RGB 197, 189, 162).
+- **theme-check (her tema, `platform/scripts/theme-check.cjs`):** yeni akış "home first screen (short phones)": 360×640 ve 375×553'te
+  home'un ilk sahnesindeki her metin, link/düğme (birincil CTA), foto alanı ve kart nav'ın üstünde biter, hiçbiri nav'ın altında
+  kalmaz (dekor nav zemininin altına girebilir). 01: 536/565 ve 468/478; 03 (hero'da CTA yok): 542/576 ve 481/489 — 03 değişmeden
+  geçiyor, dokunulmadı. Eski 01 CSS'ine karşı denendi: 375×553'te hap (505 > 478) yakalanıyor. Kayıt akışı: lead-in kesimi + beyaz
+  ilk kare denetimi.
+- **Testler:** `tests/theme-olive-ivory.test.ts` yeni "qa 2026-10-14" testi (yer tutucu `min_lum`, hero alt boşluğu ve sıkı düzen,
+  küme maskesi + RSVP köşeleri, dokunma vurgusu, ≥ 11 px tabanlar, kaydırma ipucu, yaprak zamanlaması ve `avoid`, `site.js` ≤ 35 KiB,
+  `site.css` ≤ 45 KiB); test 22'nin gradyan izni kümelerin alfa maskesini kapsar (yalnız `mask: linear-gradient(to top, …)`).
+- **Boyut:** `site.css` 45 277 B (44,2 KiB), `site.js` 35 571 B (34,7 KiB) — sınırların altında kalmak için yorumlar kısaltıldı
+  (gerekçeler bu README'de); tema klasörü 1,71 MB.
+
+**Bu turun sayıları:** `npm test` 293/293, typecheck temiz, `npm run build` + trace-check temiz; `theme-check --theme olive-ivory
+--stress` **88/88, 0 uyarı** (MP4 dahil; zarf → home 4212 ms; ilk görünüm 390×844 DPR 3: yer tutucuyla index 998 / home 814 KB,
+örnek fotoğraflarla 1072 / 992 KB); `theme-check --theme blush-garden-rose --stress --no-video` **87/87, 0 uyarı** (çıktı geçici
+klasöre, `previews/g038` dokunulmadı); `g051-browser --theme olive-ivory` 44/44; `final-smoke --theme olive-ivory` 42/42
+(`previews/g401/final/` yenilendi). `previews/g401/` bu koşudan (yeni MP4 dahil).
+
+**Denenmedi / sınırlar:** gerçek iPhone SE / Android cihaz (yalnız Chromium emülasyonu; Safari'de `svh` ve `mask` davranışı
+görülmedi); kontrast yeniden ölçülmedi (yazılar büyüdü, renkler aynı); `docs/11` (G056) ve `platform/README.md`'ye yeni theme-check
+akışı yazılmadı (yazma alanım dışında — entegratöre not).
 
 ### İnceleme düzeltmeleri (wf-tema01, 2026-10-13, ikinci tur)
 İncelemenin 24 bulgusu tek tek doğrulandı; aşağıdaki sayılar ve önizlemeler bu turun koşusundan (`previews/g401/` yeniden
@@ -57,9 +116,12 @@ sayfa başına comp öğe haritası, bilinen sınırlar).
   yukarı, home kartına taşıyor. Kısa telefonda sahnenin boş üst kısmı ekranda kalsın diye üst boşluk `w` ile büyüyor; açık hâlde
   (geri dönüş) isimler kalkar, kısa ekranda zarf küçülür.
 - **Nav bandı çiçekleri kesiyordu (orta → düzeltildi):** opak bant + çizgi yerine kâğıt üstünde yazı satırı, yazı genişliğinde 1 px
-  altın çizgi, kenarsız yumuşak zemin (§5.7); home ilk ekranı nav'ın üstünde biter.
+  altın çizgi, kenarsız yumuşak zemin (§5.7). ~~home ilk ekranı nav'ın üstünde biter~~ — **bu iddia yanlıştı** (qa-kontrol
+  2026-10-14): yalnız 390×690/844'te doğruydu; 375×553'te RSVP hapı nav'ın 0–50 px altında, 360×640'ta nav'a değiyordu (hap altı
+  576 > nav üstü 565), 375×667 ve 1024×768'de de nav'ın altına giriyordu. Düzeltme ve ölçüm: aşağıda "qa-kontrol 2026-10-14".
 - **Hero maskesi kümeyi soldurıyordu (orta → düzeltildi):** maske yalnız kâğıtta (`.hero-bg picture`); `decor_br` maskesiz ve
-  telefonda RSVP hapının altında: hap ile yaprak uçları arası 360 px'te ≥ 50 px (ölçüldü), 390 px'te ≥ 31 px.
+  telefonda RSVP hapının altında: hap ile yaprak uçları arası 360 px'te ≥ 50 px (ölçüldü), 390 px'te ≥ 31 px. *(qa turu: 9:16 ve
+  daha basık telefonda küme hapın yanına geçti; hap–yaprak 20–37 px, 390×844'te 32 px.)*
 - **Story telefonda 03'ün basamaklarına benziyordu (orta → düzeltildi):** telefonda **kaydırılan el yelpazesi** (scroll-snap; ortadaki
   kart dik + %3 yukarıda, komşular ±8° kenarlardan, fildişi kenarlarından altına giriyor; yalnız ortadaki kartın başlığı; sayfa orta
   kartla açılır, `initFan`); kart 64vw, pencere **50vw**. ≥ 720 px: yanlar merkez etrafında ±8°, orta karta kartın %6'sı kadar
@@ -221,3 +283,4 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - 2026-10-13 inceleme düzeltmesi (wf-tema01): 24 bulgu doğrulandı; varış kartı, telefon sahnesi parçalardan, kart yolu, nav, story yelpazesi, home üçlüsü, kapak kesimi; theme-check 86/86, qa-kontrol yapılamadı
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-tema01, origin/main c637fcc temiz worktree): npm test 292/292, typecheck, build+trace-check, seed; theme-check --stress olive-ivory 86/86 ve blush-garden-rose 86/86 (MP4 dahil); g051 44/44 + final-smoke 42/42 iki temada; tools/tests 7/7; kit_check 01 p5 23/23 p2 5/5, 03 p4 21/21 p2 5/5; validate_content 20/20; katalog --dene temiz (docs/09 01 satırı eşitlendi); previews/g401 güncel kodla aynı. qa-kontrol incelemesi hâlâ yapılmadı.
+- 2026-10-14 qa-kontrol KOŞULLU GEÇTİ → düzeltildi: mekân yer tutucusu temiz kırpım (+ min_lum denetimi), kısa telefonda (360×640, 375×553) ve 1024×768'de home ilk ekranı nav'ın üstünde (eski iddia düzeltildi), kümeler düz çizgiyle kesilmiyor (hero/sayfa sonu maskesi, RSVP geniş köşeleri), ≥ 11 px yazı, dokunma vurgusu, yaprak/yasemin/isim zamanlaması, story kaydırma ipucu, MP4 beyaz ilk kare; theme-check yeni home kısa telefon akışı (01 ve 03 geçiyor); npm test 293/293, theme-check 01 88/88 + 03 87/87, g051 44/44, final-smoke 42/42

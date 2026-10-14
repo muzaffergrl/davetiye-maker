@@ -46,8 +46,10 @@
   "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
   "envelope closed @390×844: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
   "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 536) ends at 536, above the nav (top 565)",
+  "home @375×553: home-hero (22 pieces, CTA \"RSVP\" bottom 468) ends at 468, above the nav (top 478)",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 235×48, rsvp \"Replay the envelope\" 193×48",
-  "envelope → /avery-and-jordan/home in 4179 ms, card transition flag set",
+  "envelope → /avery-and-jordan/home in 4212 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-06-12 16:00 America/Los_Angeles = 2027-06-12 23:00 UTC",
@@ -65,7 +67,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-13T00:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-17T23:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (202 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (282 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -85,11 +87,11 @@
   "details@390 (stress record): no overflow, 37 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@390 (stress record): no overflow, 6 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 999 KB",
-  "home first view (390×844, DPR 3, placeholders): 816 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 1073 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 993 KB",
-  "recording: previews/g401/opening_390x844.mp4 (2431 KB) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, placeholders): 998 KB",
+  "home first view (390×844, DPR 3, placeholders): 814 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 1072 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 992 KB",
+  "recording: previews/g401/opening_390x844.mp4 (2285 KB, lead-in 0.67 s cut, first frame mean 197,189,162) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -248,7 +250,35 @@
     ]
    }
   ],
-  "envelope_to_home_ms": 4179,
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "scene": "home-hero",
+    "navTop": 565,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 536,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 536
+    },
+    "bad": []
+   },
+   {
+    "at": "375x553",
+    "scene": "home-hero",
+    "navTop": 478,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 468,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 468
+    },
+    "bad": []
+   }
+  ],
+  "envelope_to_home_ms": 4212,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -267,7 +297,7 @@
     390
    ]
   },
-  "first_view_index_kb_placeholders": 999,
+  "first_view_index_kb_placeholders": 998,
   "first_view_index_files": [
    [
     "/themes/olive-ivory/img/decor_tl-960.webp",
@@ -302,7 +332,7 @@
     53274
    ]
   ],
-  "first_view_home_kb_placeholders": 816,
+  "first_view_home_kb_placeholders": 814,
   "first_view_home_files": [
    [
     "/themes/olive-ivory/img/decor_tl-960.webp",
@@ -326,7 +356,7 @@
    ],
    [
     "/themes/olive-ivory/site.css",
-    46255
+    45277
    ],
    [
     "https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2",
@@ -337,7 +367,7 @@
     42800
    ]
   ],
-  "first_view_index_kb_photos": 1073,
+  "first_view_index_kb_photos": 1072,
   "first_view_index_files_photos": [
    [
     "/themes/olive-ivory/img/decor_tl-960.webp",
@@ -356,7 +386,7 @@
     76886
    ],
    [
-    "/media/4809ba59-3681-4403-851f-99402560412b/e483412e76b7743d978784896c5e3272-640w.jpg",
+    "/media/572fc0da-ebdd-4aa9-82a2-b71c1696d4b6/beb496601b274f678d664c6fcbf64e61-640w.jpg",
     76554
    ],
    [
@@ -372,7 +402,7 @@
     56860
    ]
   ],
-  "first_view_home_kb_photos": 993,
+  "first_view_home_kb_photos": 992,
   "first_view_home_files_photos": [
    [
     "/themes/olive-ivory/img/decor_tl-960.webp",
@@ -383,11 +413,11 @@
     149464
    ],
    [
-    "/media/4809ba59-3681-4403-851f-99402560412b/37626631decf361be5e40108e8ce69d1-640w.jpg",
+    "/media/572fc0da-ebdd-4aa9-82a2-b71c1696d4b6/01d33d049e429741f28315206eab2773-640w.jpg",
     107652
    ],
    [
-    "/media/4809ba59-3681-4403-851f-99402560412b/e483412e76b7743d978784896c5e3272-640w.jpg",
+    "/media/572fc0da-ebdd-4aa9-82a2-b71c1696d4b6/beb496601b274f678d664c6fcbf64e61-640w.jpg",
     76554
    ],
    [
@@ -404,10 +434,19 @@
    ],
    [
     "/themes/olive-ivory/site.css",
-    46255
+    45277
    ]
   ],
-  "video_kb": 2431,
+  "video_kb": 2285,
+  "video_first_frame": {
+   "lead_in_s": 0.67,
+   "mean_rgb": [
+    197,
+    189,
+    162
+   ],
+   "stdev": 60
+  },
   "compare": {
    "source": "w1",
    "pages": [
