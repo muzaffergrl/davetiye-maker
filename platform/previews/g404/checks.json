@@ -1,7 +1,9 @@
 {
  "base": "next start (production build)",
  "theme": "vintage-airmail-love-letter",
- "errors": [],
+ "errors": [
+  "content change: Command failed: /opt/node22/bin/node --input-type=module -e "
+ ],
  "warnings": [],
  "passed": [
   "fonts: Google Fonts link with 2 families (Homemade Apple, Special Elite), display=swap",
@@ -50,7 +52,7 @@
   "envelope opened @844×390: \"Replay the opening\" on the plain painted ground",
   "envelope closed @667×375: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
   "envelope opened @667×375: \"Replay the opening\" on the plain painted ground",
-  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 536, names 38.2 px) ends at 536, above the nav (top 567)",
+  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 534, names 36 px) ends at 534, above the nav (top 567)",
   "home@360×640: no overflow, 28 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
   "home @375×553: home-hero (22 pieces, CTA \"RSVP\" bottom 466, names 36 px) ends at 466, above the nav (top 480)",
   "home@375×553: no overflow, 28 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
@@ -75,7 +77,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 621, nav top 308)",
   "home@667×375 (stress record): no overflow, 42 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 60×44, home \"Replay the envelope\" 220×48, rsvp \"Replay the envelope\" 184×48",
-  "envelope → /margot-and-henry/home in 4090 ms, card transition flag set",
+  "envelope → /margot-and-henry/home in 3869 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (10 steps)",
   "countdown target from the platform: 2027-10-02 16:00 America/New_York = 2027-10-02 20:00 UTC",
@@ -93,15 +95,9 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-10-02T21:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-10-07T20:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (464 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (314 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
-  "index@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@390 (changed content): no overflow, 30 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
-  "story@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
-  "details@390 (changed content): no overflow, 18 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "rsvp@390 (changed content): no overflow, 6 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
-  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
   "index@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "home@360 (stress record): no overflow, 42 fields = content record, title ok, images loaded, text on 3 cards on paper, 2 photo slots placeholder",
   "story@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
@@ -117,7 +113,7 @@
   "home first view (390×844, DPR 3, placeholders): 1233 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 1014 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1414 KB",
-  "recording: previews/g404/opening_390x844.mp4 (3009 KB, lead-in 0.52 s cut, first frame mean 210,183,153) — tap → opening → home → story → details"
+  "recording: previews/g404/opening_390x844.mp4 (3025 KB, lead-in 0.65 s cut, first frame mean 210,183,153) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -350,16 +346,16 @@
     "screen": 640,
     "bottomNav": true,
     "items": 22,
-    "lowest": 536,
-    "above": 536,
+    "lowest": 534,
+    "above": 534,
     "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 536
+     "bottom": 534
     },
     "bad": [],
     "partly": [],
-    "names": 38.2
+    "names": 36
    },
    {
     "at": "375x553",
@@ -443,9 +439,9 @@
      "span.cd-lbl \"Days\" bottom 728",
      "span.cd-num \"08\" bottom 713",
      "span.cd-lbl \"Hours\" bottom 728",
-     "span.cd-num \"35\" bottom 713",
+     "span.cd-num \"24\" bottom 713",
      "span.cd-lbl \"Minutes\" bottom 728",
-     "span.cd-num \"48\" bottom 713",
+     "span.cd-num \"22\" bottom 713",
      "span.cd-lbl \"Seconds\" bottom 728",
      "a.btn \"RSVP\" bottom 786"
     ],
@@ -475,9 +471,9 @@
      "span.cd-lbl \"Days\" bottom 679",
      "span.cd-num \"08\" bottom 664",
      "span.cd-lbl \"Hours\" bottom 679",
-     "span.cd-num \"35\" bottom 664",
+     "span.cd-num \"24\" bottom 664",
      "span.cd-lbl \"Minutes\" bottom 679",
-     "span.cd-num \"42\" bottom 664",
+     "span.cd-num \"16\" bottom 664",
      "span.cd-lbl \"Seconds\" bottom 679",
      "a.btn \"RSVP\" bottom 734"
     ],
@@ -553,9 +549,9 @@
      "span.cd-lbl \"Days\" bottom 1278",
      "span.cd-num \"08\" bottom 1263",
      "span.cd-lbl \"Hours\" bottom 1278",
-     "span.cd-num \"35\" bottom 1263",
-     "span.cd-lbl \"Minutes\" bottom 1278",
      "span.cd-num \"23\" bottom 1263",
+     "span.cd-lbl \"Minutes\" bottom 1278",
+     "span.cd-num \"56\" bottom 1263",
      "span.cd-lbl \"Seconds\" bottom 1278",
      "a.btn \"RSVP\" bottom 1336"
     ],
@@ -591,9 +587,9 @@
      "span.cd-lbl \"Days\" bottom 1159",
      "span.cd-num \"08\" bottom 1144",
      "span.cd-lbl \"Hours\" bottom 1159",
-     "span.cd-num \"35\" bottom 1144",
+     "span.cd-num \"23\" bottom 1144",
      "span.cd-lbl \"Minutes\" bottom 1159",
-     "span.cd-num \"17\" bottom 1144",
+     "span.cd-num \"50\" bottom 1144",
      "span.cd-lbl \"Seconds\" bottom 1159",
      "a.btn \"RSVP\" bottom 1214"
     ],
@@ -610,7 +606,7 @@
     "bottomNav": true,
     "items": 22,
     "lowest": 614,
-    "above": 306,
+    "above": 307,
     "below": 402,
     "cta": {
      "text": "RSVP",
@@ -623,9 +619,9 @@
      "span.cd-lbl \"Days\" bottom 555",
      "span.cd-num \"08\" bottom 538",
      "span.cd-lbl \"Hours\" bottom 555",
-     "span.cd-num \"35\" bottom 538",
+     "span.cd-num \"23\" bottom 538",
      "span.cd-lbl \"Minutes\" bottom 555",
-     "span.cd-num \"11\" bottom 538",
+     "span.cd-num \"44\" bottom 538",
      "span.cd-lbl \"Seconds\" bottom 555",
      "a.btn \"RSVP\" bottom 614"
     ],
@@ -658,9 +654,9 @@
      "span.cd-lbl \"Days\" bottom 563",
      "span.cd-num \"08\" bottom 546",
      "span.cd-lbl \"Hours\" bottom 563",
-     "span.cd-num \"35\" bottom 546",
+     "span.cd-num \"23\" bottom 546",
      "span.cd-lbl \"Minutes\" bottom 563",
-     "span.cd-num \"04\" bottom 546",
+     "span.cd-num \"37\" bottom 546",
      "span.cd-lbl \"Seconds\" bottom 563",
      "a.btn \"RSVP\" bottom 621"
     ],
@@ -668,7 +664,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4090,
+  "envelope_to_home_ms": 3869,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -719,7 +715,7 @@
    ],
    [
     "/themes/vintage-airmail-love-letter/site.css",
-    44577
+    44594
    ]
   ],
   "first_view_home_kb_placeholders": 1233,
@@ -772,7 +768,7 @@
     126758
    ],
    [
-    "/media/7eddf345-5185-447f-921c-c26372dd1600/f9aa4ed32cadf95ad79dd8225b857ca4-640w.jpg",
+    "/media/4d9e44f2-bf36-4f18-a425-51de8610eed6/0da3ae43e5db2137d6c9c5213b6ceeb5-640w.jpg",
     96219
    ],
    [
@@ -815,11 +811,11 @@
     96880
    ],
    [
-    "/media/7eddf345-5185-447f-921c-c26372dd1600/f9aa4ed32cadf95ad79dd8225b857ca4-640w.jpg",
+    "/media/4d9e44f2-bf36-4f18-a425-51de8610eed6/0da3ae43e5db2137d6c9c5213b6ceeb5-640w.jpg",
     96219
    ],
    [
-    "/media/7eddf345-5185-447f-921c-c26372dd1600/5bec5e93f9a7e5915c1bcbf1252ee249-640w.jpg",
+    "/media/4d9e44f2-bf36-4f18-a425-51de8610eed6/d5e2fa13f4e0c8b4a1ca19a5380a1bb2-640w.jpg",
     93606
    ],
    [
@@ -827,9 +823,9 @@
     85400
    ]
   ],
-  "video_kb": 3009,
+  "video_kb": 3025,
   "video_first_frame": {
-   "lead_in_s": 0.52,
+   "lead_in_s": 0.65,
    "mean_rgb": [
     210,
     183,
