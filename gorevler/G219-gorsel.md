@@ -49,3 +49,4 @@ Tasarım 19'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (siyah zarf ~1,57:1). Kısım 2 verildi.
 - 2026-10-14 devam: gpt-gorsel-K (kısım 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-K (kısım 2, 4/8); closure, envelope_open, card_small, invitation_card üretildi. Kullanıcının bu oturumdaki talebiyle closure 1024×1536 zarf tuvalinde (prompt'taki kare yerine); bu ölçüyle dosya denetimi 4/4 geçti. Zarf hizası GEÇTİ: sol +%0,00, sağ -%0,10, alt +%0,13. Yeşil pencere denetimi geçti; yalnız ton için yeniden üretim/piksel boyama yapılmadı.
