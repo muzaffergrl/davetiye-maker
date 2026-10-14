@@ -66,3 +66,4 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 3, 6/6); accent_3, divider, web_hero kaydedildi. Üç parça oran ve gereken alfa/opaklık kontrolünden geçti. web_hero'nun 1200×630 merkez kırpımında cüzdan ve kapanış tam, alt boşluk yaklaşık %6,47. Ek rapor/önizleme dosyası üretilmedi; durum alindi.
 - 2026-10-14 kısım 3 bitti; kalan: PAKET 2 fotoğrafları
 - 2026-10-14 devam: gpt-gorsel-D (PAKET 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-D (PAKET 2, 3/5); hero_portrait.jpg, story_1.jpg ve story_2.jpg prompt'ları kelimesi kelimesine, sırayla üretildi ve 1024×1536 RGB JPEG olarak Kaydet yollarına kondu. Home/story comp'ları sohbete yüklendi; story_1 ve story_2'de hero_portrait.jpg referans verildi. Çift, yüzler, görünen eller/parmaklar ve yazısız yüzeyler görsel olarak kontrol edildi; durum alindi.
