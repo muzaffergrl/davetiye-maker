@@ -2,8 +2,8 @@
 id: G075
 baslik: Düğün sonrası teşekkür modu — site düğünden sonra "Thank you" hâline geçer (otomatik, çift kapatabilir)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G075
 oncelik: 1
 bagimli: [G060]
 yazar: [platform/lib/, platform/app/, platform/components/panel/, platform/themes/olive-ivory/, platform/themes/blush-garden-rose/, platform/tests/, docs/03_URUN_ICERIK_SEMASI.json, docs/11_TEMA_STANDARDI.md, platform/README.md, platform/previews/g075/]
@@ -33,3 +33,4 @@ kadar (K25) anlamlı kalsın. docs/15'teki satış sonrası planın parçası.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): K28
+- 2026-10-14 alindi: claude-G075
