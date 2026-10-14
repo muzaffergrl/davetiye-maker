@@ -46,3 +46,4 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 gpt-gorsel-J: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (vellum kılıf, dikey gövde ~0,83:1). Kısım 2 verildi.
 - 2026-10-14 devam: gpt-gorsel-J (kısım 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-J (kısım 2, 4/8) — closure, envelope_open, card_small, invitation_card kaydedildi; dosya kontrolleri 4/4 geçti; kılıf gövde hizası geçti. Kalan: info_card, frame_portrait, frame_landscape, decor_tl (Kaydet: florals_tl.png).
