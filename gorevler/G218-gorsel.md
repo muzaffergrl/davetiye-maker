@@ -43,3 +43,4 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-J (kısım 1: W1 5 comp + W2 bg_page, bg_tile, envelope_closed)
 - 2026-10-14 ara kayıt: gpt-gorsel-J — W1 bitti (5/5 comp); sıradaki: W2 bg_page, bg_tile, envelope_closed.
+- 2026-10-14 gpt-gorsel-J: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
