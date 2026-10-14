@@ -37,3 +37,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
 - 2026-10-14 alindi: gpt-marka
 - 2026-10-14 ara kayıt (gpt-marka): 3.1–3.2 tamamlandı; iki sade dosya ekran/ oran denetiminden geçti. `cover_hand_v2.png` ekran rengini saflaştırma denemesi; daha düşük renk sapması olan ilk çıktı `cover_hand.png` olarak seçildi. Imagegen saf RGB(0,255,0) yerine yakın yeşil pikseller üretiyor; bu teknik sınırlama Sonuç'a yazılacak.
+- 2026-10-14 ara kayıt (gpt-marka): 3.3–3.4 tamamlandı; iki sade dosya ekran/oran denetiminden geçti. Dizüstü ilk çıktısındaki tuş yazıları nedeniyle `laptop_phone_v2.png` yeniden üretildi; boş tuşlu ikinci çıktı `laptop_phone.png` olarak seçildi.
