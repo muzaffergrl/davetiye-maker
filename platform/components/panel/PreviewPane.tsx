@@ -18,7 +18,7 @@ const SLOW_MS = 10_000;
 
 export function PreviewPane({
   slug,
-  previewKey,
+  previewToken,
   pages,
   version,
   open,
@@ -27,7 +27,7 @@ export function PreviewPane({
   onClose,
 }: {
   slug: string;
-  previewKey: string;
+  previewToken: string;
   pages: string[];
   version: number;
   open: boolean;
@@ -53,7 +53,7 @@ export function PreviewPane({
   const modalRef = useRef(false);
   modalRef.current = open && !wide;
   const shown = wide || open;
-  const src = previewPath(slug, page, previewKey);
+  const src = previewPath(slug, page, previewToken);
 
   useEffect(() => {
     if (shown) setMounted(true);

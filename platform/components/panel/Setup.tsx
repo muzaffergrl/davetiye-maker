@@ -236,7 +236,7 @@ export function Setup({
           <>
             <NamesFields setup />
             <div className={styles.miniPreview} aria-label="Your envelope page" role="img">
-              <PreviewMini slug={initial.slug} previewKey={initial.previewKey} version={panel.previewVersion} />
+              <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} />
             </div>
           </>
         ) : null}
@@ -246,7 +246,7 @@ export function Setup({
         {step === 5 ? (
           <>
             <div className={styles.setupPreview}>
-              <PreviewPane slug={initial.slug} previewKey={initial.previewKey} pages={visiblePages} version={panel.previewVersion} open wide onClose={() => undefined} />
+              <PreviewPane slug={initial.slug} previewToken={panel.meta.previewToken} pages={visiblePages} version={panel.previewVersion} open wide onClose={() => undefined} />
             </div>
             {notes.sample.length ? (
               <div className={styles.stack}>
@@ -335,7 +335,7 @@ function groupNotes(notes: PublishNote[]): Array<[SectionId, PublishNote[]]> {
 }
 
 /** The envelope page of the real theme, scaled down (step 1 only). */
-function PreviewMini({ slug, previewKey, version }: { slug: string; previewKey: string; version: number }) {
+function PreviewMini({ slug, previewToken, version }: { slug: string; previewToken: string; version: number }) {
   const ref = useRef<HTMLIFrameElement>(null);
   const first = useRef(version);
   useEffect(() => {
@@ -349,7 +349,7 @@ function PreviewMini({ slug, previewKey, version }: { slug: string; previewKey: 
   return (
     <iframe
       ref={ref}
-      src={`/${slug}?preview=${encodeURIComponent(previewKey)}`}
+      src={`/${slug}?preview=${encodeURIComponent(previewToken)}`}
       title="Your envelope page"
       tabIndex={-1}
       aria-hidden="true"

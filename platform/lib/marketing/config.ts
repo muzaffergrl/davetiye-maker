@@ -46,8 +46,11 @@ export interface MarketingConfig {
   currency: 'USD';
   /** K25: online until 12 months after the wedding date (implementation: G060, docs/16 §11.9). */
   hosting: { monthsAfterWedding: number };
-  /** docs/16 §11: name/date changes after the first publish; small typo fixes are free (implementation: G060). */
-  editRights: { identityChangesAfterPublish: number; typoFreeChars: number };
+  /**
+   * docs/16 §11: name/date changes after the first publish; small typo fixes (per name field) are free; moving the
+   * wedding date by up to `dateFreeDays` days is free (implementation: G060, lib/panel/rights.ts).
+   */
+  editRights: { identityChangesAfterPublish: number; typoFreeChars: number; dateFreeDays: number };
   policies: { refund: string; lostLink: string; extension: string; deletion: string; retention: string };
   /** Bundle offer text (G062) or null: the pricing section stays hidden while null. */
   bundles: string | null;
@@ -62,9 +65,11 @@ export interface MarketingConfig {
    * Claims the copy makes that depend on work not verified yet (docs/14 §4.5). Launch needs editRights + archive true:
    * the pages state those rules. realDevices switches "Designed for phone screens" to device claims — only after a real
    * iPhone + Android test. privacyText: the privacy notice draft was reviewed (it is not legal advice; K25: no legal
-   * identity, so it names the shop and the support email).
+   * identity, so it names the shop and the support email). orderCheck (G060-fix): /start checks Etsy orders — today
+   * any well-formed order number starts a website; true only once CLAIM_ORDER_VERIFICATION=manual (the shop confirms
+   * each order, scripts/verify-order.ts) or a real Etsy check is live, so "one order = one website" is enforced.
    */
-  verified: { editRights: boolean; archive: boolean; realDevices: boolean; privacyText: boolean };
+  verified: { editRights: boolean; archive: boolean; realDevices: boolean; privacyText: boolean; orderCheck: boolean };
   designs: DesignCommerce[];
 }
 
@@ -84,7 +89,7 @@ export const MARKETING: MarketingConfig = {
   etsy: { shopUrl: '[ETSY SHOP URL]', shopName: '[SHOP NAME]' },
   currency: 'USD',
   hosting: { monthsAfterWedding: 12 },
-  editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2 },
+  editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2, dateFreeDays: 7 },
   policies: {
     refund: '[REFUND POLICY]',
     lostLink: '[LOST LINK POLICY]',
@@ -99,7 +104,7 @@ export const MARKETING: MarketingConfig = {
   aiTrainingBots: 'allow',
   copyUpdated: '2026-10-14',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
-  verified: { editRights: false, archive: false, realDevices: false, privacyText: false },
+  verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
   designs: [
     {
       id: 'blush-garden-rose',

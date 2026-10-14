@@ -5,14 +5,22 @@
 // Rules (task G060, docs/16 §11.1):
 //  1. one order = one site (/start, G045);
 //  2. identity = the couple's names (first names, full names, the names line, the monogram) + the wedding date.
-//     After the FIRST publish they can be changed IDENTITY_CHANGE_LIMIT (3) times;
-//  3. a typo fix (at most TYPO_MAX_DISTANCE = 2 characters per field) is free;
+//     After the FIRST publish they can be changed IDENTITY_CHANGE_LIMIT (3) times in total (one save that changes
+//     several of them counts once);
+//  3. free, never counted:
+//     - a typo fix in a name field (at most TYPO_MAX_DISTANCE = 2 characters per field);
+//     - moving the wedding date by at most DATE_FREE_DAYS (7) days (dates are measured in days, not characters);
+//     - adding (or removing) a surname while the first name stays the same ("Ada" -> "Ada Lovelace");
+//     - taking back the last counted change soon after (UNDO_WINDOW_MS) or before it was published: the change is
+//       given back;
+//     - replacing the design's sample date once, when the site was first published with it;
 //  4. everything else is unlimited;
 //  5. the site becomes a read-only archive ARCHIVE_AFTER_MONTHS (12) months after the wedding date;
 //  6. all of it is enforced on the server.
 //
 // The ANCHOR is the last COUNTED identity. Free fixes never move it, so free fixes cannot add up to
-// a different couple: whatever the buyer does for free stays within 2 characters (per field) of the anchor.
+// a different couple: whatever the buyer does for free stays within 2 characters (per name field) and
+// 7 days (date) of the anchor.
 
 import type { ContentRecord } from '../content/types.ts';
 import { isValidTimeZone, parseIsoDate, zonedTimeToUtc } from '../content/format.ts';
@@ -25,8 +33,12 @@ export type { Identity, IdentityName, IdentityRights, IdentityLogEntry } from '.
 // listing say and what the server enforces cannot drift apart.
 /** Name / date changes included after the first publish (3). */
 export const IDENTITY_CHANGE_LIMIT = MARKETING.editRights.identityChangesAfterPublish;
-/** A change of at most this many characters (per field) is a typo fix and free (2). */
+/** A change of at most this many characters (per name field) is a typo fix and free (2). */
 export const TYPO_MAX_DISTANCE = MARKETING.editRights.typoFreeChars;
+/** Moving the wedding date by at most this many days (either way, from the counted date) is free (7). */
+export const DATE_FREE_DAYS = MARKETING.editRights.dateFreeDays;
+/** A counted change can be taken back for free this long after it (or any time before it is published). */
+export const UNDO_WINDOW_MS = 10 * 60_000;
 /** The website is online until this many months after the wedding date (12, K25). */
 export const ARCHIVE_AFTER_MONTHS = MARKETING.hosting.monthsAfterWedding;
 /**
@@ -137,23 +149,115 @@ export function sameIdentity(a: Identity, b: Identity): boolean {
 
 export type IdentityClass = 'unchanged' | 'typo' | 'change';
 
+/** Why a change is free: a small typo in a name field, the date moved by up to a week, a surname added or removed. */
+export type FreeReason = 'typo' | 'date' | 'surname';
+
+export interface IdentityClassification {
+  kind: IdentityClass;
+  /** Largest per-field character distance over the name fields (the date is measured in days). */
+  distance: number;
+  /** Days between the anchor's date and the new date (null when either is not a real date). */
+  dateDays: number | null;
+  /** For a free result ('typo'): what made it free (several can apply at once). */
+  free: FreeReason[];
+}
+
+/** Whole days from a to b (YYYY-MM-DD), or null when either is not a real date. */
+export function daysBetween(a: string, b: string): number | null {
+  const x = parseIsoDate(a);
+  const y = parseIsoDate(b);
+  if (!x || !y) return null;
+  return Math.round((Date.UTC(y.year, y.month - 1, y.day) - Date.UTC(x.year, x.month - 1, x.day)) / 86_400_000);
+}
+
+/** " Mary Ann " inside "Augusta Mary-Ann King" (whole words, case-insensitive; hyphens count as spaces). */
+function hasWords(text: string, words: string): boolean {
+  const norm = (v: string) => ` ${v.toLowerCase().replace(/-/g, ' ').replace(/\s+/g, ' ').trim()} `;
+  return words.trim() !== '' && norm(text).includes(norm(words));
+}
+
 /**
- * How a new identity compares with the anchor (docs/16 §11.3): the largest per-field distance after
- * normalisation; a different number of names is always a change. One change covers every identity field
- * changed together (names + date at once = 1).
+ * A full name that only gains or loses a surname while the first name stays the same is free: "Ada" -> "Ada
+ * Lovelace", "Ada Lovelace" -> "Ada Lovelace-Byron", "Ada Lovelace" -> "Ada". While no full name was counted yet
+ * (the anchor's full name is empty or just the first name), any full name that still contains the first name as a
+ * word is free ("Ada" -> "Augusta Ada King"). An empty full name means "the first name" (the themes fall back to it).
  */
-export function classifyIdentityChange(anchor: Identity, next: Identity): { kind: IdentityClass; distance: number } {
-  if (next.names.length !== anchor.names.length) return { kind: 'change', distance: Infinity };
+export function surnameOnly(anchor: Identity['names'][number], next: Identity['names'][number]): boolean {
+  const dA = normalizeIdentityText(anchor.display);
+  const dN = normalizeIdentityText(next.display);
+  if (dA !== dN || !dA) return false;
+  const fA = normalizeIdentityText(anchor.full) || dA;
+  const fN = normalizeIdentityText(next.full) || dN;
+  if (fA === fN) return false;
+  const extendsName = (short: string, long: string) => long.startsWith(`${short} `) || long.startsWith(`${short}-`);
+  if (extendsName(fA, fN) || extendsName(fN, fA)) return true;
+  if (fA === dA) return hasWords(fN, dA);
+  if (fN === dN) return hasWords(fA, dN);
+  return false;
+}
+
+/**
+ * How a new identity compares with the anchor (docs/16 §11.3): name fields by their largest per-field character
+ * distance after normalisation (a typo is at most TYPO_MAX_DISTANCE), full names that only gain or lose a surname
+ * are free, the date by days (at most DATE_FREE_DAYS is free); a different number of names is always a change.
+ * One change covers every identity field changed together (names + date at once = 1).
+ */
+export function classifyIdentityChange(anchor: Identity, next: Identity): IdentityClassification {
+  if (next.names.length !== anchor.names.length) return { kind: 'change', distance: Infinity, dateDays: daysBetween(anchor.date, next.date), free: [] };
+  const free = new Set<FreeReason>();
   const pairs: Array<[string, string]> = [];
   anchor.names.forEach((n, i) => {
-    pairs.push([normalizeIdentityText(n.display), normalizeIdentityText(next.names[i].display)]);
-    pairs.push([normalizeIdentityText(n.full), normalizeIdentityText(next.names[i].full)]);
+    const m = next.names[i];
+    pairs.push([normalizeIdentityText(n.display), normalizeIdentityText(m.display)]);
+    if (surnameOnly(n, m)) free.add('surname');
+    else pairs.push([normalizeIdentityText(n.full) || normalizeIdentityText(n.display), normalizeIdentityText(m.full) || normalizeIdentityText(m.display)]);
   });
   pairs.push([normalizeShown(anchor.shown), normalizeShown(next.shown)]);
   pairs.push([normalizeIdentityText(anchor.initials), normalizeIdentityText(next.initials)]);
-  pairs.push([normalizeIdentityText(anchor.date), normalizeIdentityText(next.date)]);
   const distance = Math.max(0, ...pairs.map(([a, b]) => (a === b ? 0 : editDistance(a, b))));
-  return { kind: distance === 0 ? 'unchanged' : distance <= TYPO_MAX_DISTANCE ? 'typo' : 'change', distance };
+  let change = distance > TYPO_MAX_DISTANCE;
+  if (distance > 0 && !change) free.add('typo');
+  const aDate = normalizeIdentityText(anchor.date);
+  const nDate = normalizeIdentityText(next.date);
+  const dateDays = daysBetween(aDate, nDate);
+  if (aDate !== nDate) {
+    if (dateDays !== null && Math.abs(dateDays) <= DATE_FREE_DAYS) free.add('date');
+    else change = true;
+  }
+  if (change) return { kind: 'change', distance, dateDays, free: [] };
+  return { kind: free.size ? 'typo' : 'unchanged', distance, dateDays, free: [...free] };
+}
+
+/**
+ * The once-only free date change (docs/16 §11.7): a site first published while its date was still the design's
+ * sample date may set its real date for free, once. True when `next` differs from the anchor only by that date move
+ * (plus free fixes). The caller moves the anchor's date (the next date change is counted normally).
+ */
+export function isSampleDateReplacement(anchor: Identity, next: Identity, sampleDate: string | null | undefined): boolean {
+  if (!sampleDate || anchor.date !== sampleDate || next.date === anchor.date || !parseIsoDate(next.date)) return false;
+  return classifyIdentityChange({ ...anchor, date: next.date }, next).kind !== 'change';
+}
+
+/** The last counted change while it can be taken back for free, else null (docs/16 §11.6 "Undo"). */
+export function undoState(
+  rights: Pick<IdentityRights, 'undo'> | null | undefined,
+  site: { publishedAt?: string | null },
+  now: Date = new Date(),
+): { at: string; from: Identity; until: string | null } | null {
+  const undo = rights?.undo;
+  if (!undo) return null;
+  const at = Date.parse(undo.at);
+  if (!Number.isFinite(at)) return null;
+  const published = site.publishedAt ? Date.parse(site.publishedAt) : NaN;
+  const publishedSince = Number.isFinite(published) && published >= at;
+  if (!publishedSince) return { at: undo.at, from: undo.from, until: null };
+  const until = at + UNDO_WINDOW_MS;
+  return now.getTime() <= until ? { at: undo.at, from: undo.from, until: new Date(until).toISOString() } : null;
+}
+
+/** True when sending `next` takes back the last counted change (free, the change is given back). */
+export function isUndo(undo: { from: Identity } | null | undefined, next: Identity): boolean {
+  return Boolean(undo && classifyIdentityChange(undo.from, next).kind !== 'change');
 }
 
 /** Keeps the last IDENTITY_LOG_MAX entries. */
@@ -282,12 +386,25 @@ export function archivingDateIssue(
   return { level: 'error', code: 'date_archives_site', path: 'date', message: DATE_ARCHIVES_SITE_MESSAGE };
 }
 
-/** Archive dates of a site: the counted identity's date (= draft = published after the first publish). Null before the first publish. */
+/**
+ * The wedding date the archive is counted from: the draft's date while it is within DATE_FREE_DAYS of the counted
+ * (anchor) date — a free move — else the counted date. So a free edit can never push the archive by more than a week
+ * (a 2-character "typo" 2027 -> 2029 used to move it by two years).
+ */
+export function countedDate(site: Pick<RightsSite, 'content'>, identity: Pick<IdentityRights, 'anchor'> | null | undefined): unknown {
+  const draft = site.content?.date;
+  const anchor = identity?.anchor?.date;
+  if (!anchor || typeof draft !== 'string') return draft;
+  const days = daysBetween(anchor, draft);
+  return days !== null && Math.abs(days) <= DATE_FREE_DAYS ? draft : anchor;
+}
+
+/** Archive dates of a site: from its counted wedding date (countedDate). Null before the first publish. */
 export function siteArchiveDates(site: RightsSite): ArchiveDates | null {
-  const { firstPublishedAt } = effectiveRights(site);
+  const { firstPublishedAt, identity } = effectiveRights(site);
   if (!firstPublishedAt) return null;
   return archiveDates({
-    date: site.content?.date,
+    date: countedDate(site, identity),
     timezone: site.content?.timezone,
     firstPublishedAt,
     archiveOverrideAt: site.archiveOverrideAt ?? null,
@@ -298,6 +415,22 @@ export function siteArchiveDates(site: RightsSite): ArchiveDates | null {
 export function isArchived(site: RightsSite, now: Date = new Date()): boolean {
   const dates = siteArchiveDates(site);
   return Boolean(dates && now.getTime() >= Date.parse(dates.archiveAt));
+}
+
+/**
+ * A site that was never published shows its draft only to the couple. Its long-lived preview link (shared with a
+ * partner or family to look at the draft) stops this many months after the site was created, so a draft cannot be
+ * used as the real website for ever without publishing (docs/16 §11.11). The panel's own preview is not affected.
+ */
+export const DRAFT_PREVIEW_MAX_MONTHS = 18;
+
+/** True when a never-published site's shared preview link has run out (DRAFT_PREVIEW_MAX_MONTHS after createdAt). */
+export function draftPreviewExpired(site: RightsSite & { createdAt?: string }, now: Date = new Date()): boolean {
+  if (effectiveRights(site).firstPublishedAt || !site.createdAt) return false;
+  const created = new Date(site.createdAt);
+  if (!Number.isFinite(created.getTime())) return false;
+  const lastDay = addMonthsClamped(created.toISOString().slice(0, 10), DRAFT_PREVIEW_MAX_MONTHS);
+  return Boolean(lastDay && now.getTime() >= Date.parse(`${lastDay}T${created.toISOString().slice(11)}`));
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -318,6 +451,11 @@ export interface RightsView {
   archived: boolean;
   /** Archive within ARCHIVE_NOTICE_DAYS. */
   archiveSoon: boolean;
+  /**
+   * The last counted change while it can still be taken back for free (undoState): `from` is the identity before it,
+   * `until` the end of the undo window (null: until it is published). Null otherwise.
+   */
+  undo: { from: Identity; until: string | null } | null;
 }
 
 export function rightsView(site: RightsSite, now: Date = new Date()): RightsView {
@@ -344,5 +482,9 @@ export function rightsView(site: RightsSite, now: Date = new Date()): RightsView
     archiveAt: dates?.archiveAt ?? null,
     archived,
     archiveSoon,
+    undo: (() => {
+      const u = archived ? null : undoState(identity, site, now);
+      return u ? { from: u.from, until: u.until } : null;
+    })(),
   };
 }

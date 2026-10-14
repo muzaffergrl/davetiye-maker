@@ -18,7 +18,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
-import { panelIssues, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
+import { panelIssues, previewTokenExpiry, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
 import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
 import { panelApi } from './api.ts';
 
@@ -44,7 +44,7 @@ export interface IdentityOutcome {
   ok: boolean;
   status: number;
   code?: string;
-  result?: 'unchanged' | 'free' | 'typo' | 'change';
+  result?: 'unchanged' | 'free' | 'typo' | 'undo' | 'sample_date' | 'change';
   message?: string;
   remaining?: number;
   issues?: ValidationIssue[];
@@ -63,8 +63,14 @@ function metaFrom(body: Record<string, unknown>, fallback: PanelMeta): PanelMeta
     publishedAt: typeof body.publishedAt === 'string' || body.publishedAt === null ? (body.publishedAt as string | null) : fallback.publishedAt,
     hasUnpublishedChanges: typeof body.hasUnpublishedChanges === 'boolean' ? body.hasUnpublishedChanges : fallback.hasUnpublishedChanges,
     rights: body.rights && typeof body.rights === 'object' ? (body.rights as RightsView) : fallback.rights,
+    // Same value for a whole hour (lib/keys.ts), so the preview frame keeps its address between saves.
+    previewToken: typeof body.previewToken === 'string' && body.previewToken ? body.previewToken : fallback.previewToken,
+    orderPending: typeof body.orderPending === 'boolean' ? body.orderPending : fallback.orderPending,
   };
 }
+
+/** Renew the preview token this long before it runs out (an idle tab, the phone asleep). */
+const TOKEN_RENEW_MS = 60 * 60_000;
 
 const backupKey = (slug: string) => `draft:${slug}`;
 
@@ -103,6 +109,8 @@ export function usePanel(initial: PanelState, editKey: string) {
     publishedAt: initial.publishedAt,
     hasUnpublishedChanges: initial.hasUnpublishedChanges,
     rights: initial.rights,
+    previewToken: initial.previewToken,
+    orderPending: initial.orderPending,
   });
   const [saveState, setSaveState] = useState<SaveState>('saved');
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -405,6 +413,29 @@ export function usePanel(initial: PanelState, editKey: string) {
   }, [api]);
 
   useEffect(() => () => clearTimer(), []);
+
+  // The preview token is short-lived (G060-fix): every answer renews it; a tab left open (or a phone asleep) asks for a
+  // fresh one before it runs out, when it is shown again and every 15 minutes.
+  useEffect(() => {
+    const renew = () => {
+      const exp = previewTokenExpiry(metaRef.current.previewToken);
+      if (document.visibilityState === 'hidden' || (exp !== null && exp - Date.now() > TOKEN_RENEW_MS)) return;
+      void api.state().then((res) => {
+        const state = (res.body as { state?: Record<string, unknown> }).state;
+        if (res.ok && state && typeof state.previewToken === 'string') {
+          const next = { ...metaRef.current, previewToken: state.previewToken };
+          metaRef.current = next;
+          setMeta(next);
+        }
+      });
+    };
+    const timer = window.setInterval(renew, 15 * 60_000);
+    document.addEventListener('visibilitychange', renew);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', renew);
+    };
+  }, [api]);
 
   const validation = useMemo(() => {
     const result = validateContent(content, { platform: true });

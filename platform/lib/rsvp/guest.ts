@@ -16,7 +16,7 @@
 
 import type { DataAdapter, RsvpInput, RsvpRecord } from '../data/types.ts';
 import { isArchived } from '../panel/rights.ts';
-import { canPreview } from '../sites.ts';
+import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
 import { closedMessage, rsvpWindow } from './deadline.ts';
@@ -86,7 +86,8 @@ export async function getRsvpStatus(ctx: GuestContext, slug: string, previewKey?
   let preview = false;
   if (previewKey) {
     const any = isValidSlugFormat(slug) && !isReservedSlug(slug) ? await ctx.adapter.getSiteBySlug(slug) : null;
-    if (any && canPreview(any, previewKey)) {
+    const access = any ? previewAccess(any, previewKey, ctx.now ?? new Date()) : null;
+    if (any && (access === 'panel' || access === 'shared')) {
       site = any;
       content = any.content;
       preview = true;

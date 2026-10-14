@@ -45,6 +45,20 @@ export interface SiteRecord {
   identity?: IdentityRights | null;
   /** Support extension of the archive date (YYYY-MM-DD: the site is archived from 00:00 of that day, site time zone). */
   archiveOverrideAt?: string | null;
+  /**
+   * Order check of a site claimed on /start (G060-fix, lib/claim/verify.ts). Absent or null: no check is required
+   * (verification off; sites made elsewhere). "pending": claimed while CLAIM_ORDER_VERIFICATION=manual — the site
+   * cannot be published until the shop confirms the Etsy order (scripts/verify-order.ts). "verified": confirmed.
+   */
+  orderCheck?: OrderCheckRecord | null;
+}
+
+export interface OrderCheckRecord {
+  status: 'pending' | 'verified';
+  /** When the status was set. */
+  at: string;
+  by: 'claim' | 'etsy' | 'support';
+  note?: string;
 }
 
 /** One name of the couple as the edit-rights rule sees it (docs/16 §11.2). */
@@ -65,7 +79,7 @@ export interface Identity {
   date: string;
 }
 
-export type IdentityLogKind = 'first_publish' | 'typo' | 'change' | 'grant' | 'archive_override';
+export type IdentityLogKind = 'first_publish' | 'typo' | 'change' | 'undo' | 'sample_date' | 'grant' | 'archive_override';
 
 export interface IdentityLogEntry {
   at: string;
@@ -87,6 +101,11 @@ export interface IdentityRights {
   used: number;
   /** Newest last; at most the last 50 entries. */
   log: IdentityLogEntry[];
+  /**
+   * The last counted change, while it can still be taken back for free (lib/panel/rights.ts undoState): `from` is the
+   * anchor before it. Cleared by an undo; replaced by the next counted change. Absent on older records.
+   */
+  undo?: { at: string; from: Identity } | null;
 }
 
 /** Fields of a site record that patchSite() can set in one conditional write. Keys left out are not touched. */
@@ -95,9 +114,10 @@ export interface SitePatch {
   firstPublishedAt?: string | null;
   identity?: IdentityRights | null;
   archiveOverrideAt?: string | null;
+  orderCheck?: OrderCheckRecord | null;
 }
 
-export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt'] as const satisfies ReadonlyArray<keyof SitePatch>;
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck'] as const satisfies ReadonlyArray<keyof SitePatch>;
 
 /** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
 export function applySitePatch(site: SiteRecord, patch: SitePatch): void {
@@ -123,6 +143,8 @@ export interface NewSite {
   orderRef?: string | null;
   ownerEmail?: string | null;
   claimTokenHash?: string | null;
+  /** Written with the site (G060-fix): a manual order check starts as "pending" in the same write. */
+  orderCheck?: OrderCheckRecord | null;
 }
 
 /** New key hashes for a site (edit link reissued: the old link stops working). */
@@ -255,6 +277,15 @@ export interface DataAdapter {
   savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto>;
   /** Only adapters that serve photos through /media/... implement this (local, blob). */
   readPhoto?(path: string): Promise<StoredFile | null>;
+  /** Number of photo files stored for the site (photos and their size variants), for the per-site cap (G060-fix). */
+  countPhotos?(siteId: string): Promise<number>;
+  /**
+   * A fixed-window counter shared by every server instance (G060-fix: /start and upload limits must not reset
+   * with each Vercel function instance). Adds one hit to `key`'s current window (a new window starts when the last
+   * one has ended) and returns the count in it. Adapters without shared storage (local: one process) leave it out
+   * and the callers use in-process memory.
+   */
+  hitCounter?(key: string, windowMs: number): Promise<{ count: number; resetAt: number }>;
 }
 
 /**

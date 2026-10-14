@@ -138,7 +138,7 @@ async function exifJpeg(width: number, height: number): Promise<Uint8Array> {
 // ---------------------------------------------------------------------------------------------
 // Keys
 
-test('edit key: good key opens the panel state; preview key is derived from it', async () => {
+test('edit key: good key opens the panel state with a short-lived preview token (never the long-lived preview key)', async () => {
   const r = await call(stateRoute, 'panel-site', { key: site.editKey });
   assert.equal(r.status, 200);
   assert.equal(r.headers.get('cache-control'), 'private, no-store');
@@ -146,8 +146,12 @@ test('edit key: good key opens the panel state; preview key is derived from it',
   const s = r.data.state;
   assert.equal(s.slug, 'panel-site');
   assert.equal(s.status, 'draft');
-  assert.equal(s.previewKey, site.previewKey);
-  assert.equal(s.previewKey, derivePreviewKey(site.editKey));
+  assert.equal(s.previewKey, undefined, 'G060-fix: the long-lived preview key is not sent to the panel');
+  assert.ok(!JSON.stringify(r.data).includes(site.previewKey));
+  assert.equal(site.previewKey, derivePreviewKey(site.editKey));
+  assert.match(s.previewToken, /^\d{10}\.[A-Za-z0-9_-]{43}$/);
+  const exp = Number(s.previewToken.split('.')[0]) * 1000;
+  assert.ok(exp - Date.now() > 10.9 * 3600_000 && exp - Date.now() <= 12 * 3600_000, 'valid for 11 to 12 hours');
   assert.equal(s.origin, BASE);
   assert.equal(s.content.name_display, 'Clara & Julian');
   assert.deepEqual(s.theme.pages, ['index', 'home', 'story', 'details', 'rsvp']);
@@ -602,16 +606,16 @@ test('withPartnerName keeps the automatic names and monogram in step, never a cu
   assert.equal(defaultInitials(c.partners, true), 'E & M');
 });
 
-test('withPartnerName: the full name (invitation card) follows the first name until it is changed by hand', () => {
-  // A /start draft: full name = the typed first name.
+test('withPartnerName: an empty full name stays empty (the design shows the first name); a copy of the first name follows it', () => {
+  // A /start draft (G060-fix): full names empty, so a surname added later is never counted as a new name.
   let c = draftFromDemo(demoContent(), ['Mia', 'Theo']);
-  assert.equal(c.partners[0].full_name, 'Mia');
+  assert.deepEqual(c.partners.map((p) => p.full_name), [null, null]);
   c = withPartnerName(c, 0, 'display_name', 'Ava');
   c = withPartnerName(c, 1, 'display_name', 'Noah');
-  assert.deepEqual(c.partners.map((p) => p.full_name), ['Ava', 'Noah']);
+  assert.deepEqual(c.partners.map((p) => p.full_name), [null, null]);
   assert.equal(c.name_display, 'Ava & Noah');
-  // an empty full name follows too; a full name typed by hand never does
-  c = withPartnerName(c, 0, 'full_name', '');
+  // a draft from before G060-fix (full name = first name) keeps following; a full name typed by hand never does
+  c = withPartnerName(c, 0, 'full_name', 'Ava');
   c = withPartnerName(c, 0, 'display_name', 'Avery');
   assert.equal(c.partners[0].full_name, 'Avery');
   c = withPartnerName(c, 1, 'full_name', 'Noah James Hart');

@@ -89,14 +89,19 @@ export interface PanelMeta {
   hasUnpublishedChanges: boolean;
   /** Name / date changes left, archive dates (G060, lib/panel/rights.ts). */
   rights: RightsView;
+  /**
+   * Short-lived token for the panel's own draft preview (?preview=…, lib/keys.ts panelPreviewToken): valid for about
+   * 12 hours, renewed with every answer. The long-lived preview key is never sent to the browser (G060-fix).
+   */
+  previewToken: string;
+  /** The shop has not confirmed the Etsy order yet (manual order checks): editing works, publishing waits (G060-fix). */
+  orderPending: boolean;
 }
 
 export interface PanelState extends PanelMeta {
   slug: string;
   theme: PanelTheme;
   content: ContentRecord;
-  /** Derived from the edit key; opens the draft preview (read only). */
-  previewKey: string;
   /** e.g. https://example.vercel.app — used for the public link and its QR code. */
   origin: string;
   /** The buyer's Etsy order number when the site was claimed with one (shown for support requests). */
@@ -203,8 +208,9 @@ export function defaultInitials(partners: readonly Partner[], spaced = false): s
 /**
  * Applies a partner name change and keeps name_display / initials / that partner's full name in
  * step while they still hold the automatic value (a value the buyer typed by hand is never
- * overwritten). The full name follows the first name while it is empty or equal to it — a site
- * claimed on /start starts with full name = first name, and the invitation card shows full names.
+ * overwritten). An empty full name stays empty (the designs show the first name instead; G060-fix:
+ * /start no longer copies the first name into it). A full name equal to the first name (drafts made
+ * before that) keeps following it.
  */
 export function withPartnerName(
   content: ContentRecord,
@@ -220,7 +226,7 @@ export function withPartnerName(
     const oldFirst = (before[index]?.display_name ?? '').trim();
     const oldFull = (before[index]?.full_name ?? '').trim();
     partner.display_name = value;
-    if (oldFull === '' || oldFull === oldFirst) partner.full_name = value.trim() ? value : null;
+    if (oldFull !== '' && oldFull === oldFirst) partner.full_name = value.trim() ? value : null;
   } else partner.full_name = value.trim() ? value : null;
   if (field === 'display_name') {
     const autoName = defaultNameDisplay(before);
@@ -539,9 +545,15 @@ export function publicSiteUrl(origin: string, slug: string): string {
 }
 
 /** Preview address of a theme page (index = /<slug>). */
-export function previewPath(slug: string, page: string, previewKey: string): string {
+export function previewPath(slug: string, page: string, previewToken: string): string {
   const base = page === 'index' ? `/${slug}` : `/${slug}/${page}`;
-  return `${base}?preview=${encodeURIComponent(previewKey)}`;
+  return `${base}?preview=${encodeURIComponent(previewToken)}`;
+}
+
+/** When a panel preview token ("<exp seconds>.<signature>") runs out, in ms; null when it is not one. */
+export function previewTokenExpiry(token: unknown): number | null {
+  const m = typeof token === 'string' ? /^(\d{9,11})\./.exec(token) : null;
+  return m ? Number(m[1]) * 1000 : null;
 }
 
 export const PAGE_LABELS: Record<string, string> = {

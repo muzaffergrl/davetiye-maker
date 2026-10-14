@@ -145,6 +145,7 @@ export class LocalAdapter implements DataAdapter {
       updatedAt: now,
       publishedAt: null,
       ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
+      ...(input.orderCheck ? { orderCheck: structuredClone(input.orderCheck) } : {}),
     };
     await this.writeJson(this.sitePath(id), site);
     return structuredClone(site);
@@ -292,6 +293,16 @@ export class LocalAdapter implements DataAdapter {
       size: main.size,
       variants: stored.slice(0, -1).map((v) => ({ width: v.width!, url: `${this.mediaBaseUrl}/${v.rel}`, path: v.rel, size: v.size })),
     };
+  }
+
+  async countPhotos(siteId: string): Promise<number> {
+    if (!UUID_RE.test(siteId)) return 0;
+    try {
+      return (await fs.readdir(this.uploadDir(siteId))).length;
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') return 0;
+      throw e;
+    }
   }
 
   async readPhoto(rel: string): Promise<StoredFile | null> {

@@ -5,11 +5,12 @@
 import type { ContentRecord } from './content/types.ts';
 import { validateContent, type ValidationIssue } from './content/validate.ts';
 import { StaleSiteError, type DataAdapter, type PublishOptions, type SitePatch, type SiteRecord } from './data/types.ts';
-import { newSiteKeys, verifyKey } from './keys.ts';
+import { newSiteKeys, verifyKey, verifyPanelPreviewToken } from './keys.ts';
 import {
   appendLog,
   archivingDateIssue,
   classifyIdentityChange,
+  draftPreviewExpired,
   effectiveRights,
   identityOf,
   isArchived,
@@ -61,6 +62,22 @@ export class IdentityMismatchError extends Error {
   }
 }
 
+/**
+ * Publish refused: the site was claimed while order checks are manual (CLAIM_ORDER_VERIFICATION=manual) and the
+ * shop has not confirmed the Etsy order yet (scripts/verify-order.ts). G060-fix.
+ */
+export class OrderPendingError extends Error {
+  constructor(id: string) {
+    super(`site ${id}: the Etsy order is not confirmed yet`);
+    this.name = 'OrderPendingError';
+  }
+}
+
+/** True while the site waits for the shop to confirm its order (it can be edited, not published or shared). */
+export function orderPending(site: Pick<SiteRecord, 'orderCheck'>): boolean {
+  return site.orderCheck?.status === 'pending';
+}
+
 export interface CreateSiteInput {
   slug: string;
   theme: string;
@@ -70,6 +87,8 @@ export interface CreateSiteInput {
   ownerEmail?: string | null;
   /** SHA-256 of the /start form's claim token (lib/claim/claim.ts). */
   claimTokenHash?: string | null;
+  /** The order check the claim recorded (lib/claim/verify.ts), written with the site. */
+  orderCheck?: SiteRecord['orderCheck'];
 }
 
 export interface CreatedSite {
@@ -97,6 +116,7 @@ export async function createSiteWithKeys(adapter: DataAdapter, input: CreateSite
     orderRef: input.orderRef ?? null,
     ownerEmail: input.ownerEmail ?? null,
     claimTokenHash: input.claimTokenHash ?? null,
+    ...(input.orderCheck ? { orderCheck: input.orderCheck } : {}),
   });
   return { site, editKey: keys.editKey, previewKey: keys.previewKey };
 }
@@ -115,8 +135,28 @@ export function canEdit(site: SiteRecord, editKey: unknown): boolean {
   return verifyKey(editKey, site.editKeyHash);
 }
 
+/** True for the site's long-lived (shareable) preview key. Public routes use previewAccess(). */
 export function canPreview(site: SiteRecord, previewKey: unknown): boolean {
   return verifyKey(previewKey, site.previewKeyHash);
+}
+
+/**
+ * What a ?preview= value opens (G060-fix, docs/16 §11.11):
+ *  - 'panel':  the panel's short-lived token (lib/keys.ts panelPreviewToken): the draft, also of an archived site
+ *              (the couple still sees their content in the panel);
+ *  - 'shared': the long-lived preview key: the draft, under a "Preview — not published" bar;
+ *  - 'gone':   the long-lived key of an archived site, or of a never-published draft whose shared preview has run out
+ *              (DRAFT_PREVIEW_MAX_MONTHS): 410, so the preview link can never stand in for the real, time-limited website;
+ *  - null:     anything else (public rules apply).
+ */
+export type PreviewAccess = 'panel' | 'shared' | 'gone';
+
+export function previewAccess(site: SiteRecord, value: unknown, now: Date = new Date()): PreviewAccess | null {
+  if (typeof value !== 'string' || !value) return null;
+  if (verifyPanelPreviewToken(value, site.id, site.previewKeyHash, now.getTime())) return 'panel';
+  // While its order is unconfirmed a site is seen only in its panel (G060-fix): no shared preview either.
+  if (orderPending(site) || !verifyKey(value, site.previewKeyHash)) return null;
+  return isArchived(site, now) || draftPreviewExpired(site, now) ? 'gone' : 'shared';
 }
 
 /**
@@ -140,6 +180,7 @@ export async function publishSite(
     }
     const now = opts.now ?? new Date();
     if (isArchived(site, now)) throw new SiteArchivedError(siteId);
+    if (orderPending(site)) throw new OrderPendingError(siteId);
     const result = validateContent(site.content);
     if (!result.ok) throw new ContentInvalidError(result.errors);
     const rights = effectiveRights(site);
@@ -185,6 +226,25 @@ export async function grantIdentityChanges(adapter: DataAdapter, siteId: string,
     };
     try {
       return await adapter.patchSite(siteId, { firstPublishedAt: rights.firstPublishedAt, identity }, { expectedUpdatedAt: site.updatedAt });
+    } catch (e) {
+      if (!(e instanceof StaleSiteError) || attempt >= 5) throw e;
+    }
+  }
+}
+
+/**
+ * Support tool (scripts/verify-order.ts, G060-fix): the shop has found the order in Etsy (paid, our shop, this design):
+ * the site may be published. Idempotent; the reason is kept on the site.
+ */
+export async function confirmOrder(adapter: DataAdapter, siteId: string, reason: string, now: Date = new Date()): Promise<SiteRecord> {
+  if (!reason.trim()) throw new Error('Give a reason (it is kept with the site).');
+  for (let attempt = 1; ; attempt++) {
+    const site = await adapter.getSiteById(siteId);
+    if (!site) throw new Error(`site ${siteId} not found`);
+    if (site.orderCheck?.status === 'verified') return site;
+    const orderCheck = { status: 'verified' as const, at: now.toISOString(), by: 'support' as const, note: reason.trim().slice(0, 300) };
+    try {
+      return await adapter.patchSite(siteId, { orderCheck }, { expectedUpdatedAt: site.updatedAt });
     } catch (e) {
       if (!(e instanceof StaleSiteError) || attempt >= 5) throw e;
     }

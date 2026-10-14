@@ -6,7 +6,7 @@ import { getDataAdapter } from '../data/index.ts';
 import type { SiteRecord } from '../data/types.ts';
 import { photoCandidates } from '../photo-variants.ts';
 import { isArchived } from '../panel/rights.ts';
-import { canPreview } from '../sites.ts';
+import { previewAccess } from '../sites.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
 
 /** Only these theme files are public. Templates (.html), theme.json and anything else are not served. */
@@ -118,11 +118,14 @@ export async function serveLocalMedia(segments: string[] | undefined, req?: Requ
   const rel = parts.join('/');
   const site = await adapter.getSiteById(parts[0]);
   if (!site) return notFound();
-  const previewKey = req ? new URL(req.url).searchParams.get('preview') : null;
-  const preview = previewKey !== null && canPreview(site, previewKey);
-  if (!preview && !publiclyUsed(site, rel)) return notFound();
-  // An archived site's photos are gone for the public (G060); the couple still sees them with the preview key.
-  if (!preview && isArchived(site)) return new Response('Gone', { status: 410, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'public, max-age=300' } });
+  const access = previewAccess(site, req ? new URL(req.url).searchParams.get('preview') : null);
+  const preview = access === 'panel' || access === 'shared';
+  if (!preview && access !== 'gone' && !publiclyUsed(site, rel)) return notFound();
+  // An archived site's photos are gone for the public (G060) and for the long-lived preview key (G060-fix); the
+  // couple still sees them in the panel (short-lived token).
+  if (access === 'gone' || (!preview && isArchived(site))) {
+    return new Response('Gone', { status: 410, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store' } });
+  }
   const file = await adapter.readPhoto(rel);
   if (!file) return notFound();
   return new Response(new Uint8Array(file.bytes), {

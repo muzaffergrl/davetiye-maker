@@ -46,6 +46,7 @@ test('launch gate: a launched config has no problems; an unlaunched one lists ev
     [!MARKETING.verified.editRights, 'verified.editRights'],
     [!MARKETING.verified.archive, 'verified.archive'],
     [!MARKETING.verified.privacyText, 'verified.privacyText'],
+    [!MARKETING.verified.orderCheck, 'verified.orderCheck'],
     [MARKETING.designs.some((d) => d.status === 'live' && isPlaceholder(d.price)), 'price'],
     [MARKETING.designs.some((d) => d.status === 'live' && isPlaceholder(d.etsyListingUrl)), 'etsyListingUrl'],
   ];

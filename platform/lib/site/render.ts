@@ -1,11 +1,12 @@
 // Public site pages: /<slug> (theme index page) and /<slug>/<home|story|details|rsvp>.
-// Published sites show publishedContent. Drafts (and unpublished edits) are only
-// visible with ?preview=<previewKey>; everything else is a plain 404.
+// Published sites show publishedContent. Drafts (and unpublished edits) are only visible with ?preview=: the
+// panel's short-lived token, or the long-lived preview key (then under a "Preview" bar, never for an archived
+// site or a stale draft — lib/sites.ts previewAccess); everything else is a plain 404.
 
 import { getDataAdapter } from '../data/index.ts';
 import { publicOrigin } from '../panel/http.ts';
 import { isArchived } from '../panel/rights.ts';
-import { canPreview } from '../sites.ts';
+import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { renderTemplate } from '../theme/engine.ts';
 import { loadTheme, readThemePage, SUB_PAGES, type PageName } from '../theme/theme.ts';
@@ -67,6 +68,35 @@ export function archivedPage(): Response {
   });
 }
 
+/** A never-published draft's shared preview link after DRAFT_PREVIEW_MAX_MONTHS (G060-fix): 410, no names. */
+export function previewExpiredPage(): Response {
+  return new Response(PLAIN_PAGE('This preview link has expired', 'The website was never published. Its owners can still open it in their editor.'), {
+    status: 410,
+    headers: htmlHeaders({ preview: true, status: 410 }),
+  });
+}
+
+/**
+ * The non-removable "Preview" bar of a shared preview link (G060-fix, docs/16 §11.11): rendered by the server outside
+ * the theme's markup (first element of <body>, inline styles only — no script, the page CSP stays as it is). The
+ * panel's own preview (short-lived token) does not get it.
+ */
+export const PREVIEW_BAR_ATTR = 'data-platform-preview-bar';
+
+export function withPreviewBar(html: string, published: boolean): string {
+  const text = published
+    ? 'Preview of unpublished changes — guests see the published version.'
+    : 'Preview — this website is not published. Guests cannot open it.';
+  const bar =
+    `<div ${PREVIEW_BAR_ATTR} role="note" style="all:initial;position:sticky;z-index:2147483647;top:0;display:block;box-sizing:border-box;width:100%;` +
+    'padding:calc(8px + env(safe-area-inset-top)) 16px 8px;background:#1f1d1a;color:#fff;font:600 14px/20px system-ui,-apple-system,sans-serif;' +
+    `text-align:center">${text}</div>`;
+  const body = /<body\b[^>]*>/i.exec(html);
+  if (!body) return bar + html;
+  const at = body.index + body[0].length;
+  return html.slice(0, at) + bar + html.slice(at);
+}
+
 function serverError(): Response {
   return new Response(PLAIN_PAGE('Something went wrong', 'Please try again in a moment.'), {
     status: 500,
@@ -98,7 +128,10 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     if (!site) return notFound();
 
     const previewParam = url.searchParams.get('preview');
-    const preview = previewParam !== null && canPreview(site, previewParam);
+    const access = previewAccess(site, previewParam);
+    // The long-lived preview key never outlives the website (archive) or a stale draft (G060-fix).
+    if (access === 'gone') return isArchived(site) ? archivedPage() : previewExpiredPage();
+    const preview = access !== null;
     const content = preview ? site.content : site.status === 'published' ? site.publishedContent : null;
     if (!content) return notFound();
     if (!preview && isArchived(site)) return archivedPage();
@@ -127,7 +160,9 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
       console.warn(`[theme ${theme.manifest.id}/${page}] ${warnings.join(' | ')}`);
     }
     if (disabled) return notFound(); // e.g. story page while optional_blocks.our_story is off
-    return new Response(html, { status: 200, headers: htmlHeaders({ preview, status: 200, scriptHashes }) });
+    // A shared preview link (not the panel) always says it is a preview, so it cannot pass for the real website.
+    const body = access === 'shared' ? withPreviewBar(html, site.status === 'published') : html;
+    return new Response(body, { status: 200, headers: htmlHeaders({ preview, status: 200, scriptHashes }) });
   } catch (e) {
     console.error(`[site] ${slug}/${page}:`, e);
     return serverError();

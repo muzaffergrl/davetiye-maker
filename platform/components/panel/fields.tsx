@@ -24,8 +24,8 @@ export interface PanelContextValue {
   locked: boolean;
   /** True while the value at `path` is still the design's sample text (lib/panel/model.ts sampleNotes). */
   isSample: (path: string) => boolean;
-  /** For the buyer's own photo views (/media/… needs it until published). */
-  previewKey: string;
+  /** Short-lived panel preview token, for the buyer's own photo views (/media/… needs it until published). */
+  previewToken: string;
   /** Fields the theme shows (others are hidden in the panel). */
   fields: ThemeFieldUse;
   rights: RightsView;

@@ -259,7 +259,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
       issuesAt: (p: string) => issuesByPath.get(p) ?? [],
       locked,
       isSample: (p: string) => samples.has(p),
-      previewKey: initial.previewKey,
+      previewToken: meta.previewToken,
       fields: theme.fields,
       rights,
       online,
@@ -268,7 +268,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
       uploadPhoto: panel.uploadPhoto,
       removePhoto: panel.removePhoto,
     }),
-    [content, panel.edit, issuesByPath, locked, samples, initial.previewKey, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto],
+    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto],
   );
 
   /** From an issue / note / next step to its field (or a view). */
@@ -403,7 +403,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const preview = (
     <PreviewPane
       slug={initial.slug}
-      previewKey={initial.previewKey}
+      previewToken={meta.previewToken}
       pages={visiblePages}
       version={panel.previewVersion}
       open={previewOpen}
