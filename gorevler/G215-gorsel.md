@@ -50,6 +50,14 @@ Kısım 2 — gpt-gorsel-G (2026-10-14), ara kayıt 4/8:
 - Yeniden üretimler: kapanış ilk çıktıda fazla büyüktü, ikinci çıktı seçildi. Küçük kart ilk çıktıda yeşil pencere gradyanı, ikinci çıktıda pencereye taşan çiçekler nedeniyle düzeltildi; üçüncü çıktı seçildi. Yalnız yeşil tonu için yeniden üretim veya kodla piksel boyama yapılmadı. Açık zarf ve davet kartı ilk çıktıları seçildi.
 - Bu dört dosya, kapanışın kullanıcı tuvali dikkate alınarak `kit_check.denetle` ile 4/4 GEÇTİ; küçük kartta yeşil pencere %13,9. Durum `alindi` kalır.
 
+Kısım 2 — oturum sonu, 6/8 seçilen dosya; iki çerçeve tamamlanamadı:
+- Eklenen son iki dosya: `parts/info_card.png` (1024×1536, gerçek alfa) ve kullanıcının `decor_tl` dediği parçanın Kaydet satırındaki adı `parts/florals_tl.png` (1254×1254 kare, gerçek alfa). İkisi de `kit_check.denetle` GEÇTİ. Bilgi kartı ilk çıktıda seçildi; sol üst dekor ilk çıktıda sol kenardan kesildiği için yeniden üretildi, ikinci çıktı seçildi. Dekorun alfa >128 sınır kutusu `(47, 95, 1136, 1040)`; tuval kenarlarında şeffaf boşluk var.
+- `frame_portrait` için 11 imagegen üretim/düzenleme çağrısı (opak veya beyaz dolu yüzey ara aşamaları dahil), `frame_landscape` için 2 çağrı yapıldı. Yeşil pencere merkezindeki belirgin gradyan, kararma ve alfa boşlukları giderilemedi; bazı denemelerde pencere oranı/tuval oranı da hedefe uymadı. Bu başarısız çıktılar seçilmiş `frame_portrait.png` ve `frame_landscape.png` adlarıyla repoya konmadı. Yalnız yeşil tonundan dolayı yeniden üretim yapılmadı.
+- Kullanıcıya alfa kanalını renkleri boyamadan teknik onarma seçeneği soruldu; kullanıcı **"Hayır, yalnız imagegen kullan"** dedi. Buna uyuldu; seçilen tüm görseller imagegen çıktılarının değiştirilmemiş kopyalarıdır. Kodla renk/alfa onarımı yapılmadı. Ek rapor, deneme veya önizleme dosyası repoya yazılmadı.
+- Seçilen bu oturum dosyaları: `closure`, `envelope_open`, `card_small`, `invitation_card`, `info_card`, `florals_tl` — toplam 6/8. Kullanıcının kapanış için 1024×1536 tuvaliyle dosya denetimleri 6/6 geçti. Standart `--paket 5`: 13/22 dosya + zarf hizası GEÇTİ (toplam 14/23); kapanış eski kare Kaydet ölçüsü nedeniyle KALDI, iki çerçeve ve bu oturumun kapsamı dışındaki altı W2 parçası yok. Açık/kapalı zarf hiza sonucu yine GEÇTİ: sol +%0,10, sağ/alt %0.
+- PAKET 2 bu oturumda üretilmedi. Eş zamanlı main güncellemesinde `gpt-gorsel-M` fotoğrafları geldi; salt okunur `--paket 2` kontrolü 5/5 GEÇTİ. Günlük çakışması, entegratörün bu kaydı ve kendi 4/8 ara kaydı birlikte korunarak çözüldü.
+- **Kısım 2 bitti denemez:** iki çerçeve için düz opak yeşil pencere + gerçek dış alfa koşulu imagegen ile halen sağlanamadı. Kalan bu oturum parçaları `frame_portrait`, `frame_landscape`; ardından kapsam dışı `decor_br` (Kaydet: `florals_br`), `accent_1–3`, `divider`, `web_hero`. PAKET 2 main'de hazır. Görev `alindi` kalır; ayrı dal/PR açılmadı.
+
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
@@ -62,3 +70,5 @@ Kısım 2 — gpt-gorsel-G (2026-10-14), ara kayıt 4/8:
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-M) 5/5 kit_check geçti, görsel olarak iyi.
 - 2026-10-14 ara kayıt: gpt-gorsel-G; kısım 2, 4/8: closure, envelope_open, card_small, invitation_card kaydedildi; kullanıcı tuvaliyle dosya denetimleri ve zarf hizası geçti.
 - 2026-10-14 devam: gpt-gorsel-N (önceki sohbet kapandı)
+- 2026-10-14 ara kayıt: gpt-gorsel-G; kısım 2, 6/8: info_card ve decor_tl (Kaydet: florals_tl) kaydedildi. İki çerçeve imagegen'de yeşil merkez gradyanı/alfa boşluğu nedeniyle seçilemedi; kullanıcı yalnız imagegen istedi, kodla onarım yapılmadı.
+- 2026-10-14 gpt-gorsel-G: kısım 2 tamamlanamadı; kalan: frame_portrait, frame_landscape + decor_br, accent_1–3, divider, web_hero. PAKET 2 gpt-gorsel-M tarafından main'de tamamlandı, 5/5 kontrol geçti. Durum alindi; bu oturum burada durdu.
