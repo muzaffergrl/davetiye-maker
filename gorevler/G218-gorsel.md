@@ -32,9 +32,12 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kısım 1 / W1 ara kayıt: `collections/18_Wildflower_Vellum/assets/gpt/comps/` altında `web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` üretildi (hepsi 1024×1536). Aynı renkli kalem botanik tekniği, vellum/kağıt dokusu ve sol üst ışığı referanslarla korundu.
+- Yeniden üretimler: W1.2'de yatay fotoğraf penceresi dikey 2:3 olarak düzeltildi; W1.3'te yan kartlar ve açıklamalar güvenli orta %85 alana alındı. İkinci üretimler sade adlarla seçildi; denemeler teslim klasöründe tutulmadı.
+- Kontrol: W1 görsel kontrol listeleri uygulandı; `kit_check.denetle` ile beş comp'un ölçü/oran, opaklık ve gereken yeşil pencere kontrolleri **5/5 geçti**. W2 ve PAKET 2 henüz üretilmedi; görev `alindi` olarak sürüyor.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-J (kısım 1: W1 5 comp + W2 bg_page, bg_tile, envelope_closed)
+- 2026-10-14 ara kayıt: gpt-gorsel-J — W1 bitti (5/5 comp); sıradaki: W2 bg_page, bg_tile, envelope_closed.
