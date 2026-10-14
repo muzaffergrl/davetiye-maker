@@ -74,7 +74,9 @@ nav üstü 478; 320×568: sayaç 505–542, nav 493), sonra düzeltildi. Çizim 
   (tarih, yer, sayaç, ipucu) alt nav'ın 4 px üstünde bitmiyorsa ilk ekranın altından başlar; kart ve isimler yerinde kalır (stres
   kaydında isimlerin kendisi nav'a uzanır — `--stress` buna izin verir; isimleri ilk ekrandan atmak daha kötüydü, denendi). 03 demo
   ölçülen her dikey boyutta değişmedi. Sınır: 320×568'de tasarım aralığında "James"in kuyruğu nav çizgisine 2 px değer
-  (theme-check boyutu değil); 03'ün yatay düzeni hâlâ yok. 03 README "Bilinen sınırlar".
+  (theme-check boyutu değil); 03'ün yatay düzeni hâlâ yok. 03 README "Bilinen sınırlar". **G058'e devir** (origin'de açıldı, bu
+  işe bağlı): `foldHero` yalnız dikey telefonda theme-check'i geçirmek için en küçük adım; 03'ün yatay düzeni, isim tabanı ve
+  320×568'deki 2 px orada.
 - **theme-check (her tema, `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts` `rangeRecord`; G052'nin dosyaları, QA isteği):**
   "home first screen" akışı her koşuda tasarım aralığı kaydıyla da çalışır (aynı boyutlar: 360×640, 375×553 + landscape bayraklı
   temada 844×390, 667×375): isim tabanı + `pageChecks` + **nav'ın altında yarım parça yok** (nav'ın üstünde biter ya da ilk ekranın
