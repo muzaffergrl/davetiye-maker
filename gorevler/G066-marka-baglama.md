@@ -107,3 +107,4 @@ girdikten sonra; aynı bileşenlere dokundukları için). Aynı görev, iki ayr�
 - 2026-10-14 açıldı (entegratör): GM02 onayı sonrası; G061 düzeltme turu bitince başlar
 - 2026-10-14 alindi: claude-G066
 - 2026-10-14 Kısım A (satış sitesi) bitti (claude-G066): BKE Studio giydirmesi, testler 458/458 + tarayıcı 283/283; durum alindi (Kısım B panel bekliyor)
+- 2026-10-14 entegratör: kısım A incelendi ve kabul edildi (önizlemeler, 495/495, marketing-browser 283/283); docs/14 §14.3b yazıldı. Lighthouse düşüşü açık iş. Kısım B (panel) başladı.
