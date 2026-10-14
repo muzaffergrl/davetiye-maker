@@ -732,6 +732,8 @@ test('story: three tile panels in a staggered column (left, right, left), straig
   assert.equal($('.tiles .frame img.sprig-tuck[src$="divider-300.webp"]').length, 3);
   assert.equal($('.tiles .frame img.tuck-bloom').length, 3);
   assert.match(rule('.sprig-tuck'), /width: 5\d%;[^;]*; left: -\d+%; bottom: \d+%; rotate: \d+deg;/);
+  // the bouquets run off the screen edge: .tiles (full width) clips sideways, so only the viewport edge cuts them
+  assert.match(rule('.tiles'), /overflow-x: clip/);
   for (const t of [1, 2, 3]) assert.equal($(`.tiles .t-${t} > .wall-piece`).length, 2, `panel ${t}: two pieces on the wall`);
   // a panel crossing the nav line starts below the first screen (never half under the nav)
   assert.equal($('.tiles .tile[data-fold]').length, 3);
@@ -874,6 +876,16 @@ test('design range (docs/11 §12 level 1) renders every field', () => {
 });
 
 // ---------------------------------------------------------------- 13: site.js contract
+
+test('smooth scrolling only for the RSVP page\'s #reply jump, never with reduced motion (a scripted scroll is never eased)', () => {
+  const css = cssText().replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.equal((css.match(/scroll-behavior: smooth/g) || []).length, 1);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{ html:has\(#reply\) \{ scroll-behavior: smooth; \} \}/);
+  const { $ } = render('rsvp');
+  assert.equal($('#reply').length, 1, 'the RSVP page has the #reply target');
+  assert.equal($('a[href="#reply"]').length, 1);
+  for (const page of ['index', 'home', 'story', 'details']) assert.equal(render(page).$('#reply').length, 0, `${page}: no #reply, no smooth scroll`);
+});
 
 test('13 site.js: reads #site-data, navigates with the page map, per-site session keys = <head> scripts, DEV_CONTENT = demo', () => {
   const js = jsText();

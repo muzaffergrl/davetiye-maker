@@ -1,43 +1,45 @@
 {
  "base": "next start (production build)",
  "theme": "mediterranean-lemon",
- "errors": [],
+ "errors": [
+  "nav in the envelope → home view transition 390×844: the nav's label row is not the settled nav at 0 ms (94.73 % of the pixels differ), 120 ms (85.27 % of the pixels differ) — the envelope page reads through between the labels (nav animations: none; e.g. ::view-transition-new(site-nav):only-child { animation: none; })"
+ ],
  "warnings": [],
  "passed": [
   "fonts: Google Fonts link with 2 families (Allura, Playfair Display), display=swap",
   "seed: 5 sample photos uploaded to the demo site (collections/05_Lemon_Mediterranean/assets/gpt/photos (PAKET 2))",
   "index@360: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@360: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home@360: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@360: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
   "details@360: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "rsvp@360: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "index@390: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@390: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home@390: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@390: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
   "details@390: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "rsvp@390: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "index@430: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@430: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home@430: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@430: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
   "details@430: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "rsvp@430: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "index@768: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@768: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home@768: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@768: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
   "details@768: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "rsvp@768: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "index@1280: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@1280: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home@1280: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@1280: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
   "details@1280: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "rsvp@1280: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
   "index@390 (no photos): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
-  "home@390 (no photos): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "home@390 (no photos): no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
   "story@390 (no photos): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
   "details@390 (no photos): no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@390 (no photos): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
-  "home@390 (draft preview, no photos): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots preview-placeholder",
+  "home@390 (draft preview, no photos): no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots preview-placeholder",
   "envelope closed @360×640: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
   "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
   "envelope closed @375×553: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
@@ -50,32 +52,32 @@
   "envelope opened @844×390: \"Replay the opening\" on the plain painted ground",
   "envelope closed @667×375: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
   "envelope opened @667×375: \"Replay the opening\" on the plain painted ground",
-  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 530, names 48.6 px) ends at 530, above the nav (top 567)",
-  "home@360×640: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553: home-hero (21 pieces, CTA \"RSVP\" bottom 465, names 42 px) ends at 465, above the nav (top 480)",
-  "home@375×553: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @844×390: home-hero (22 pieces, CTA \"RSVP\" bottom 287, names 44.9 px) ends at 310, above the nav (top 325)",
-  "home@844×390: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @667×375: home-hero (22 pieces, CTA \"RSVP\" bottom 277, names 43.1 px) ends at 295, above the nav (top 310)",
-  "home@667×375: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @360×640 (design range): names 37 px (≥ 36); nothing partly under the nav (top 567): the first screen ends at 556; CTA \"RSVP\" bottom 556",
-  "home@360×640 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553 (design range): names 42 px (≥ 36); nothing partly under the nav (top 480): the first screen ends at 463, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 463",
-  "home@375×553 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @844×390 (design range): names 36.8 px (≥ 36); nothing partly under the nav (top 325): the first screen ends at 315; CTA \"RSVP\" bottom 315",
-  "home@844×390 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @667×375 (design range): names 43.1 px (≥ 36); nothing partly under the nav (top 310): the first screen ends at 299; CTA \"RSVP\" bottom 299",
-  "home@667×375 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @360×640 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 790, nav top 567)",
-  "home@360×640 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 769, nav top 480)",
-  "home@375×553 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @844×390 (stress record): names 36.8 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 306, nav top 325)",
-  "home@844×390 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 489, nav top 310)",
-  "home@667×375 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 530, names 48.6 px) ends at 530, above the nav (top 564)",
+  "home@360×640: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553: home-hero (21 pieces, CTA \"RSVP\" bottom 465, names 42 px) ends at 465, above the nav (top 477)",
+  "home@375×553: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @844×390: home-hero (22 pieces, CTA \"RSVP\" bottom 287, names 44.9 px) ends at 310, above the nav (top 322)",
+  "home@844×390: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @667×375: home-hero (22 pieces, CTA \"RSVP\" bottom 277, names 43.1 px) ends at 295, above the nav (top 307)",
+  "home@667×375: no overflow, 27 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (design range): names 45.7 px (≥ 36); nothing partly under the nav (top 564): the first screen ends at 549; CTA \"RSVP\" bottom 549",
+  "home@360×640 (design range): no overflow, 33 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (design range): names 42 px (≥ 36); nothing partly under the nav (top 477): the first screen ends at 463, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 463",
+  "home@375×553 (design range): no overflow, 33 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @844×390 (design range): names 44.9 px (≥ 36); nothing partly under the nav (top 322): the first screen ends at 310; CTA \"RSVP\" bottom 308",
+  "home@844×390 (design range): no overflow, 33 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @667×375 (design range): names 43.1 px (≥ 36); nothing partly under the nav (top 307): the first screen ends at 299; CTA \"RSVP\" bottom 299",
+  "home@667×375 (design range): no overflow, 33 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 790, nav top 564)",
+  "home@360×640 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 769, nav top 477)",
+  "home@375×553 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @844×390 (stress record): names 36.8 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 306, nav top 322)",
+  "home@844×390 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 489, nav top 307)",
+  "home@667×375 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 62×44, home \"Replay the envelope\" 229×47, rsvp \"Replay the envelope\" 190×47",
-  "envelope → /isabella-and-marco/home in 4454 ms, card transition flag set",
+  "envelope → /isabella-and-marco/home in 4385 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (13 steps)",
   "countdown target from the platform: 2027-06-12 16:00 Europe/Rome = 2027-06-12 14:00 UTC",
@@ -89,35 +91,36 @@
   "RSVP: \"Send another reply\" reopens the form",
   "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
   "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
   "Skip → home",
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-12T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-17T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (156 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (198 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
-  "home@390 (changed content): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home@390 (changed content): no overflow, 29 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
   "details@390 (changed content): no overflow, 17 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "rsvp@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
   "index@360 (stress record): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
-  "home@360 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "home@360 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
   "story@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
   "details@360 (stress record): no overflow, 36 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "index@390 (stress record): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
-  "home@390 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "home@390 (stress record): no overflow, 41 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
   "story@390 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
   "details@390 (stress record): no overflow, 36 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@390 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 937 KB",
-  "home first view (390×844, DPR 3, placeholders): 1007 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 1031 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 1263 KB",
-  "recording: previews/g405/opening_390x844.mp4 (3476 KB, lead-in 0.69 s cut, first frame mean 218,217,205) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, placeholders): 877 KB",
+  "home first view (390×844, DPR 3, placeholders): 884 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 971 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1141 KB",
+  "recording: previews/g405/opening_390x844.mp4 (3378 KB, lead-in 0.57 s cut, first frame mean 218,217,205) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -158,12 +161,12 @@
      },
      {
       "box": "script names",
-      "edge": 1.44,
-      "dark": 0.004
+      "edge": 1.46,
+      "dark": 0.005
      },
      {
       "box": "env-hint",
-      "edge": 0.85,
+      "edge": 0.87,
       "dark": 0
      }
     ]
@@ -185,7 +188,7 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.73,
+      "edge": 0.74,
       "dark": 0
      },
      {
@@ -195,7 +198,7 @@
      },
      {
       "box": "env-hint",
-      "edge": 0.86,
+      "edge": 0.87,
       "dark": 0
      }
     ]
@@ -222,12 +225,12 @@
      },
      {
       "box": "script names",
-      "edge": 1.4,
-      "dark": 0.004
+      "edge": 1.42,
+      "dark": 0.005
      },
      {
       "box": "env-hint",
-      "edge": 0.75,
+      "edge": 0.76,
       "dark": 0
      }
     ]
@@ -249,17 +252,17 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.49,
+      "edge": 0.5,
       "dark": 0
      },
      {
       "box": "script names",
-      "edge": 1,
+      "edge": 0.98,
       "dark": 0
      },
      {
       "box": "env-hint",
-      "edge": 0.6,
+      "edge": 0.61,
       "dark": 0
      }
     ]
@@ -313,17 +316,17 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.62,
+      "edge": 0.6,
       "dark": 0
      },
      {
       "box": "script names",
-      "edge": 1.09,
-      "dark": 0.009
+      "edge": 0.74,
+      "dark": 0
      },
      {
       "box": "env-hint",
-      "edge": 1.19,
+      "edge": 1.15,
       "dark": 0
      }
     ]
@@ -346,7 +349,7 @@
     "record": "demo",
     "required": true,
     "scene": "home-hero",
-    "navTop": 567,
+    "navTop": 564,
     "screen": 640,
     "bottomNav": true,
     "items": 22,
@@ -366,7 +369,7 @@
     "record": "demo",
     "required": true,
     "scene": "home-hero",
-    "navTop": 480,
+    "navTop": 477,
     "screen": 553,
     "bottomNav": true,
     "items": 21,
@@ -386,7 +389,7 @@
     "record": "demo",
     "required": true,
     "scene": "home-hero",
-    "navTop": 325,
+    "navTop": 322,
     "screen": 390,
     "bottomNav": true,
     "items": 22,
@@ -406,7 +409,7 @@
     "record": "demo",
     "required": true,
     "scene": "home-hero",
-    "navTop": 310,
+    "navTop": 307,
     "screen": 375,
     "bottomNav": true,
     "items": 22,
@@ -426,27 +429,27 @@
     "record": "range",
     "required": true,
     "scene": "home-hero",
-    "navTop": 567,
+    "navTop": 564,
     "screen": 640,
     "bottomNav": true,
     "items": 22,
-    "lowest": 556,
-    "above": 556,
+    "lowest": 549,
+    "above": 549,
     "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 556
+     "bottom": 549
     },
     "bad": [],
     "partly": [],
-    "names": 37
+    "names": 45.7
    },
    {
     "at": "375x553",
     "record": "range",
     "required": true,
     "scene": "home-hero",
-    "navTop": 480,
+    "navTop": 477,
     "screen": 553,
     "bottomNav": true,
     "items": 20,
@@ -460,11 +463,11 @@
     "bad": [
      "span.cd-num \"350\" bottom 587",
      "span.cd-lbl \"Days\" bottom 602",
-     "span.cd-num \"02\" bottom 587",
+     "span.cd-num \"00\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 602",
-     "span.cd-num \"18\" bottom 587",
+     "span.cd-num \"09\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 602",
-     "span.cd-num \"56\" bottom 587",
+     "span.cd-num \"10\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 602"
     ],
     "partly": [],
@@ -475,27 +478,27 @@
     "record": "range",
     "required": true,
     "scene": "home-hero",
-    "navTop": 325,
+    "navTop": 322,
     "screen": 390,
     "bottomNav": true,
     "items": 22,
-    "lowest": 315,
-    "above": 315,
+    "lowest": 310,
+    "above": 310,
     "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 315
+     "bottom": 308
     },
     "bad": [],
     "partly": [],
-    "names": 36.8
+    "names": 44.9
    },
    {
     "at": "667x375",
     "record": "range",
     "required": true,
     "scene": "home-hero",
-    "navTop": 310,
+    "navTop": 307,
     "screen": 375,
     "bottomNav": true,
     "items": 22,
@@ -515,7 +518,7 @@
     "record": "stress",
     "required": true,
     "scene": "home-hero",
-    "navTop": 567,
+    "navTop": 564,
     "screen": 640,
     "bottomNav": true,
     "items": 22,
@@ -530,11 +533,11 @@
      "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 672",
      "span.cd-num \"241\" bottom 716",
      "span.cd-lbl \"Days\" bottom 731",
-     "span.cd-num \"02\" bottom 716",
+     "span.cd-num \"00\" bottom 716",
      "span.cd-lbl \"Hours\" bottom 731",
-     "span.cd-num \"18\" bottom 716",
+     "span.cd-num \"08\" bottom 716",
      "span.cd-lbl \"Minutes\" bottom 731",
-     "span.cd-num \"36\" bottom 716",
+     "span.cd-num \"52\" bottom 716",
      "span.cd-lbl \"Seconds\" bottom 731",
      "a.btn \"RSVP\" bottom 790"
     ],
@@ -546,7 +549,7 @@
     "record": "stress",
     "required": true,
     "scene": "home-hero",
-    "navTop": 480,
+    "navTop": 477,
     "screen": 553,
     "bottomNav": true,
     "items": 21,
@@ -562,11 +565,11 @@
      "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 660",
      "span.cd-num \"241\" bottom 698",
      "span.cd-lbl \"Days\" bottom 713",
-     "span.cd-num \"02\" bottom 698",
+     "span.cd-num \"00\" bottom 698",
      "span.cd-lbl \"Hours\" bottom 713",
-     "span.cd-num \"18\" bottom 698",
+     "span.cd-num \"08\" bottom 698",
      "span.cd-lbl \"Minutes\" bottom 713",
-     "span.cd-num \"30\" bottom 698",
+     "span.cd-num \"46\" bottom 698",
      "span.cd-lbl \"Seconds\" bottom 713",
      "a.btn \"RSVP\" bottom 769"
     ],
@@ -578,7 +581,7 @@
     "record": "stress",
     "required": true,
     "scene": "home-hero",
-    "navTop": 325,
+    "navTop": 322,
     "screen": 390,
     "bottomNav": true,
     "items": 22,
@@ -592,11 +595,11 @@
     "bad": [
      "span.cd-num \"241\" bottom 424",
      "span.cd-lbl \"Days\" bottom 441",
-     "span.cd-num \"02\" bottom 424",
+     "span.cd-num \"00\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 441",
-     "span.cd-num \"18\" bottom 424",
+     "span.cd-num \"08\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 441",
-     "span.cd-num \"23\" bottom 424",
+     "span.cd-num \"39\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
@@ -607,7 +610,7 @@
     "record": "stress",
     "required": true,
     "scene": "home-hero",
-    "navTop": 310,
+    "navTop": 307,
     "screen": 375,
     "bottomNav": true,
     "items": 22,
@@ -621,11 +624,11 @@
     "bad": [
      "span.cd-num \"241\" bottom 414",
      "span.cd-lbl \"Days\" bottom 431",
-     "span.cd-num \"02\" bottom 414",
+     "span.cd-num \"00\" bottom 414",
      "span.cd-lbl \"Hours\" bottom 431",
-     "span.cd-num \"18\" bottom 414",
+     "span.cd-num \"08\" bottom 414",
      "span.cd-lbl \"Minutes\" bottom 431",
-     "span.cd-num \"17\" bottom 414",
+     "span.cd-num \"33\" bottom 414",
      "span.cd-lbl \"Seconds\" bottom 431",
      "a.btn \"RSVP\" bottom 489"
     ],
@@ -633,10 +636,40 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4454,
+  "envelope_to_home_ms": 4385,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "94.73 %"
+    },
+    {
+     "t": 120,
+     "differ": "85.27 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
   },
   "stress_record": {
    "slug": "stress-site",
@@ -652,15 +685,15 @@
     390
    ]
   },
-  "first_view_index_kb_placeholders": 937,
+  "first_view_index_kb_placeholders": 877,
   "first_view_index_files": [
    [
     "/themes/mediterranean-lemon/img/decor_br-960.webp",
     187140
    ],
    [
-    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
-    176972
+    "/themes/mediterranean-lemon/img/decor_tl-720.webp",
+    113712
    ],
    [
     "/themes/mediterranean-lemon/img/closure-640.webp",
@@ -680,26 +713,26 @@
    ],
    [
     "/themes/mediterranean-lemon/site.css",
-    45482
+    45941
    ],
    [
     "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
     38404
    ]
   ],
-  "first_view_home_kb_placeholders": 1007,
+  "first_view_home_kb_placeholders": 884,
   "first_view_home_files": [
-   [
-    "/themes/mediterranean-lemon/img/decor_br-960.webp",
-    187140
-   ],
-   [
-    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
-    176972
-   ],
    [
     "/themes/mediterranean-lemon/img/invitation_card-944.webp",
     136654
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_br-720.webp",
+    120594
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_tl-720.webp",
+    113712
    ],
    [
     "/themes/mediterranean-lemon/img/frame_landscape-960.webp",
@@ -715,25 +748,25 @@
    ],
    [
     "/themes/mediterranean-lemon/site.css",
-    45482
+    45941
    ],
    [
     "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
     38404
    ]
   ],
-  "first_view_index_kb_photos": 1031,
+  "first_view_index_kb_photos": 971,
   "first_view_index_files_photos": [
    [
     "/themes/mediterranean-lemon/img/decor_br-960.webp",
     187140
    ],
    [
-    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
-    176972
+    "/themes/mediterranean-lemon/img/decor_tl-720.webp",
+    113712
    ],
    [
-    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/bc4c1387d92b776e2444b66b38d87220-640w.jpg",
+    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/681fcfa58c632e788fcd92913f2665b5-640w.jpg",
     98482
    ],
    [
@@ -754,29 +787,29 @@
    ],
    [
     "/themes/mediterranean-lemon/site.css",
-    45482
+    45941
    ]
   ],
-  "first_view_home_kb_photos": 1263,
+  "first_view_home_kb_photos": 1141,
   "first_view_home_files_photos": [
-   [
-    "/themes/mediterranean-lemon/img/decor_br-960.webp",
-    187140
-   ],
-   [
-    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
-    176972
-   ],
    [
     "/themes/mediterranean-lemon/img/invitation_card-944.webp",
     136654
    ],
    [
-    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/6249593667bddea7246287f68711f4ca-640w.jpg",
+    "/themes/mediterranean-lemon/img/decor_br-720.webp",
+    120594
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_tl-720.webp",
+    113712
+   ],
+   [
+    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/e77ef65d37ef1a8f4bf1312e26222b7d-640w.jpg",
     100571
    ],
    [
-    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/bc4c1387d92b776e2444b66b38d87220-640w.jpg",
+    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/681fcfa58c632e788fcd92913f2665b5-640w.jpg",
     98482
    ],
    [
@@ -788,13 +821,13 @@
     74228
    ],
    [
-    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/3e9c4c001810086b498e0b911edb880d-640w.jpg",
+    "/media/331f86a2-54f7-4f45-8005-514bbbdf76f9/5ad073d2ec9d806c9155ddb45a2dd803-640w.jpg",
     71048
    ]
   ],
-  "video_kb": 3476,
+  "video_kb": 3378,
   "video_first_frame": {
-   "lead_in_s": 0.69,
+   "lead_in_s": 0.57,
    "mean_rgb": [
     218,
     217,

@@ -22,7 +22,9 @@
 @view-transition { navigation: auto; }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; background: var(--page); scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; background: var(--page); }
+/* smooth for the #reply jump only, not for scripted scrolls */
+@media (prefers-reduced-motion: no-preference) { html:has(#reply) { scroll-behavior: smooth; } }
 body {
   margin: 0; min-height: 100svh; overflow-x: clip; position: relative;
   font-family: var(--serif); font-size: 17px; line-height: 1.6; color: var(--ink);
@@ -294,6 +296,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
 ::view-transition-group(invite-card) { animation-duration: .9s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .55s; }
+::view-transition-new(site-nav):only-child { animation: none; }   /* the nav arrives whole (G064) */
 .hero .names { margin-top: clamp(10px, 2.6svh, 24px); font-size: calc(var(--hn) * var(--names-scale, 1)); line-height: 1.04; text-wrap: balance; }
 .hero-date { margin-top: calc(var(--hn) * .2); font-size: 12.5px; letter-spacing: .3em; color: var(--ink-soft); }
 .hero-venue { margin-top: 8px; font-style: italic; font-size: clamp(21px, 6vw, 28px); line-height: 1.22; color: var(--script-ink); text-wrap: balance; overflow-wrap: break-word; }
@@ -440,7 +443,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .next-sec .sprig { margin: 0 auto 18px; }
 
 /* == story (W1.3) */
-.tiles { position: relative; z-index: 1; padding: 34px 0 6px; --tw: min(64vw, 330px); }
+.tiles { position: relative; z-index: 1; padding: 34px 0 6px; --tw: min(64vw, 330px); overflow-x: clip; } /* bouquets cut by the screen edge only */
 .tile { position: relative; width: var(--tw); margin: 0 0 30px; text-align: center; }
 .t-1, .t-3 { margin-left: max(7.5vw, calc(50% - var(--tw) + 1vw)); }
 .t-2 { margin-left: auto; margin-right: max(7.5vw, calc(50% - var(--tw) + 1vw)); }
@@ -646,7 +649,6 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 
 /* == reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   .js [data-step] { opacity: 1 !important; transform: none !important; clip-path: none !important; filter: none !important; transition: none !important; }
   .js .env-hint, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
