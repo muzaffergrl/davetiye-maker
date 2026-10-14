@@ -9,6 +9,7 @@
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { sameContent, SECTION_IDS, sectionForPath, type PanelTheme, type PublishNote, type SectionId } from '../../lib/panel/model.ts';
+import { copyText, type PanelCopyEntry } from '../../lib/theme/copy.ts';
 
 export const PAGE_IDS = ['us', 'day', 'photos', 'story', 'details', 'rsvp'] as const;
 export type PageId = (typeof PAGE_IDS)[number];
@@ -32,6 +33,9 @@ export const PAGE_SECTIONS: Record<PageId, SectionId[]> = {
   details: ['details', 'faq'],
   rsvp: ['rsvp'],
 };
+
+/** The design's texts at the end of every page (G068); Review names them as a part of the page ("Us · Headings & labels"). */
+export const COPY_TITLE = 'Headings & labels';
 
 /** Sub-headings inside a page (only where a page holds more than one topic). */
 export const BLOCK_TITLES: Partial<Record<SectionId, string>> = {
@@ -124,10 +128,27 @@ export function changedSections(draft: ContentRecord, published: ContentRecord |
   return SECTION_IDS.filter((id) => out.has(id));
 }
 
-/** The editor pages whose content differs from the published copy, in page order. */
-export function changedPages(draft: ContentRecord, published: ContentRecord | null): PageId[] {
+/**
+ * The editor pages whose design texts (content.copy, G068) differ from the published copy: each key counts on the page
+ * that lists it ("Headings & labels on this page"). An empty text and a missing one are the same (the design's text).
+ */
+export function changedCopyPages(draft: ContentRecord, published: ContentRecord | null, copy: readonly PanelCopyEntry[]): PageId[] {
   if (!published) return [];
+  const a = draft.copy ?? {};
+  const b = published.copy ?? {};
   const pages = new Set<PageId>();
+  for (const key of new Set([...Object.keys(a), ...Object.keys(b)])) {
+    if (copyText(a[key]) === copyText(b[key])) continue;
+    const page = copy.find((e) => e.key === key)?.panel;
+    if (page) pages.add(page);
+  }
+  return PAGE_IDS.filter((id) => pages.has(id));
+}
+
+/** The editor pages whose content (sections, and the design texts listed on them) differs from the published copy. */
+export function changedPages(draft: ContentRecord, published: ContentRecord | null, copy: readonly PanelCopyEntry[] = []): PageId[] {
+  if (!published) return [];
+  const pages = new Set<PageId>(changedCopyPages(draft, published, copy));
   for (const p of changedPaths(draft, published)) {
     const s = sectionForPath(p);
     if (s) pages.add(pageOf(s));

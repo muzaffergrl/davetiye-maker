@@ -97,4 +97,9 @@ export interface ContentRecord {
   faq?: FaqItem[];
   /** After the wedding (G075): thank-you mode settings. */
   thank_you?: ThankYou;
+  /**
+   * The couple's words for the design's fixed texts (G068): key → text; empty / null = the design's text. Keys, defaults
+   * and the longest text each carries are in the theme's theme.json "copy" (lib/theme/copy.ts).
+   */
+  copy?: Record<string, string | null>;
 }

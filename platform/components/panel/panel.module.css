@@ -4252,3 +4252,40 @@
     break-after: avoid;
   }
 }
+
+/* ------------------------------------------------------------------ design texts (G068) */
+/* "Headings & labels on this page": one row per text of the design; the design's own text in grey under a changed one */
+.copyRow {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.copyDefault {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px var(--s-3);
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.copyDefaultText {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.copyDefaultText q {
+  quotes: '“' '”';
+}
+
+.copyGroupTitle {
+  margin: var(--s-4) 0 0;
+  color: var(--c-heading);
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 700;
+}

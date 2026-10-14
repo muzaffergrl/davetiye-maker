@@ -213,9 +213,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .env { position: absolute; inset: 0; }
 .env img, .env-cflap-wrap > img { position: absolute; display: block; }
 /* layers bottom → top (docs/11 §7.2, manifest stage.parts) */
-.env-flap   { left: 0;      top: 16.61%; width: 100%;     height: 31.145%; transform-origin: 50% 100%; opacity: 0; }   /* stage.parts.env_flap */
-.env-body   { left: 0;      top: 47.054%; width: 100%;    height: 52.946%;  opacity: 0; }                                /* stage.parts.env_body */
-.env-pocket { left: 0;      top: 50.324%; width: 100%;    height: 49.676%; opacity: 0; z-index: 2; }                   /* stage.parts.env_pocket */
+.env-flap   { left: 0; top: 16.61%; width: 100%; height: 31.145%; transform-origin: 50% 100%; opacity: 0; } /* stage.parts.env_flap */
+.env-body   { left: 0; top: 47.054%; width: 100%; height: 52.946%; opacity: 0; } /* stage.parts.env_body */
+.env-pocket { left: 0; top: 50.324%; width: 100%; height: 49.676%; opacity: 0; z-index: 2; } /* stage.parts.env_pocket */
 .env-closed { left: 0;      top: 47.21%; width: 100%;     height: 52.634%; z-index: 3;
               filter: drop-shadow(0 18px 22px rgba(52, 58, 36, .22)) drop-shadow(0 3px 4px rgba(52, 58, 36, .16)); }  /* stage.parts.env_closed */
 .env-body, .env-pocket, .env-flap { filter: drop-shadow(0 16px 20px rgba(52, 58, 36, .18)); }
@@ -225,7 +225,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .env .card { position: absolute; left: 21.041%; top: 51.224%; width: 57.809%; }   /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 10px 16px rgba(52, 58, 36, .18)); }
 .env-cflap-wrap { position: absolute; inset: 0; z-index: 4; transform-origin: 50% 47.288%; backface-visibility: hidden; }
-.env-cflap { left: 0; top: 47.21%; width: 100%; height: 39.009%; }                                           /* stage.parts.env_cflap */
+.env-cflap { left: 0; top: 47.21%; width: 100%; height: 39.009%; } /* stage.parts.env_cflap */
 /* closure (seal + sprig) at the lace V tip (stage.parts.closure) */
 .closure { position: absolute; left: 23.129%; top: 59.202%; width: 48.734%; height: 32.709%; container-type: inline-size;
            filter: drop-shadow(0 6px 7px rgba(52, 46, 20, .28)) drop-shadow(0 1px 1px rgba(52, 46, 20, .25)); }
@@ -290,8 +290,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
 ::view-transition-group(invite-card) { animation-duration: .9s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .55s; }
-/* G064 qa: opaque nav from the first frame */
+/* G064/G068 qa: the nav arrives whole (opaque from the first frame) and leaves the envelope page at once */
 ::view-transition-new(site-nav):only-child { animation: none; }
+::view-transition-old(site-nav):only-child { animation: none; opacity: 0; }
 .hero .names { margin-top: clamp(12px, 3svh, 26px); font-size: calc(var(--hn) * var(--names-scale, 1)); line-height: 1.04; text-wrap: balance; }
 .hero-date { margin-top: calc(var(--hn) * .27); font-size: 13px; letter-spacing: .28em; }   /* clears the J descender */
 .hero-venue { margin-top: 10px; font-style: italic; font-size: clamp(21px, 6vw, 27px); line-height: 1.25; color: var(--ink); letter-spacing: .02em; text-wrap: balance; }

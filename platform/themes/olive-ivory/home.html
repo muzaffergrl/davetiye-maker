@@ -56,7 +56,7 @@
         </div>
         <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(50vw, 37svh, 260px)" alt="">
         <div class="card-copy">
-          <p class="script" data-if="!thank_you_on">We're getting married</p>
+          <p class="script" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
           <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
           <p class="kicker" data-field="date"></p>
           <p class="kicker" data-if="!thank_you_on" data-field="venue.city_region"></p>
@@ -69,15 +69,15 @@
       <!-- live countdown: the platform computes the UTC target (date + ceremony_time + timezone) → site.js -->
       <div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-step="countdown" data-a="rise" data-countdown role="timer" aria-label="Countdown to the ceremony">
         <div class="cd-row">
-          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl">Days</span></div>
-          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl">Hours</span></div>
-          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl">Minutes</span></div>
-          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl">Seconds</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl" data-copy="cd_days">Days</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl" data-copy="cd_hours">Hours</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl" data-copy="cd_minutes">Minutes</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl" data-copy="cd_seconds">Seconds</span></div>
         </div>
-        <p class="cd-done" data-when="today" hidden>Today is the day — we're celebrating!</p>
-        <p class="cd-done" data-when="after" hidden>Thank you for celebrating with us.</p>
+        <p class="cd-done" data-when="today" hidden data-copy="cd_today">Today is the day — we're celebrating!</p>
+        <p class="cd-done" data-when="after" hidden data-copy="cd_after">Thank you for celebrating with us.</p>
       </div>
-      <p class="hero-cta" data-step="cta" data-a="bloom" data-if="!rsvp.method !thank_you_on"><a class="btn" href="rsvp.html">RSVP</a></p>
+      <p class="hero-cta" data-step="cta" data-a="bloom" data-if="!rsvp.method !thank_you_on"><a class="btn" href="rsvp.html" data-copy="rsvp_button">RSVP</a></p>
     </div>
   </section>
 
@@ -94,11 +94,11 @@
           <p class="amp-line" data-step="amp" data-a="bloom" aria-hidden="true">&amp;</p>
           <p class="script nm" data-step="name2" data-a="write" data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
           <p class="script nm" data-step="name2" data-a="write" data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
-          <p class="request" data-step="request" data-a="fade">invite you to celebrate their marriage</p>
+          <p class="request" data-step="request" data-a="fade" data-copy="invite_request">invite you to celebrate their marriage</p>
           <div class="dateblock" data-step="date" data-a="rise">
             <p class="kicker wd" data-field="date" data-format="weekday"></p>
             <p class="dmy"><span class="mon" data-field="date" data-format="month"></span><span class="day" data-field="date" data-format="day"></span><span class="yr" data-field="date" data-format="year"></span></p>
-            <p class="kicker at" data-if="ceremony_time">at <span data-field="ceremony_time"></span></p>
+            <p class="kicker at" data-if="ceremony_time"><span data-copy="invite_at">at</span> <span data-field="ceremony_time"></span></p>
           </div>
           <p class="venue" data-step="venue" data-a="fade" data-field="venue.name"></p>
           <p class="kicker city" data-step="venue" data-a="fade" data-field="venue.city_region"></p>
@@ -106,13 +106,13 @@
       </div>
       <!-- replies collected another way (rsvp.method "none"): no reply call, no RSVP page -->
       <div class="reply" data-step="cta" data-a="rise" data-if="!rsvp.method">
-        <p class="kicker" data-if="rsvp.deadline">Kindly reply by <span class="nowrap" data-field="rsvp.deadline"></span></p>
-        <a class="btn" href="rsvp.html">RSVP</a>
+        <p class="kicker" data-if="rsvp.deadline"><span data-copy="rsvp_by">Kindly reply by</span> <span class="nowrap" data-field="rsvp.deadline"></span></p>
+        <a class="btn" href="rsvp.html" data-copy="rsvp_button">RSVP</a>
       </div>
       <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
       <div class="cal" data-step="cal" data-a="rise">
-        <p class="kicker">Add to your calendar</p>
-        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank">Google</a></p>
+        <p class="kicker" data-copy="calendar_title">Add to your calendar</p>
+        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics" data-copy="calendar_ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" data-copy="calendar_google">Google</a></p>
       </div>
     </div>
   </section>
@@ -125,7 +125,7 @@
         <div class="paper-text invite-text ty-text">
           <h2 class="script ty-head" id="ty-head" data-step="name1" data-a="write" data-field="thank_you_title"></h2>
           <p class="ty-message" data-step="request" data-a="fade" data-if="thank_you.message" data-field="thank_you.message"></p>
-          <p class="script ty-love" data-step="amp" data-a="fade">With love,</p>
+          <p class="script ty-love" data-step="amp" data-a="fade" data-copy="love_line">With love,</p>
           <p class="script nm" data-step="name2" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
           <p class="kicker city" data-step="venue" data-a="fade"><span class="nowrap" data-field="date"></span></p>
         </div>
@@ -138,31 +138,31 @@
        closure); the first three steps of the day are written on the card -->
   <section class="section more-sec" data-scene="home-more" aria-label="More about the day">
     <div class="wrap trio-wrap">
-      <p class="kicker more-title" data-step="title" data-a="fade" data-if="!thank_you_on">Pull up a chair</p>
-      <p class="kicker more-title" data-step="title" data-a="fade" data-if="thank_you_on">Look back with us</p>
+      <p class="kicker more-title" data-step="title" data-a="fade" data-if="!thank_you_on" data-copy="home_more">Pull up a chair</p>
+      <p class="kicker more-title" data-step="title" data-a="fade" data-if="thank_you_on" data-copy="ty_more">Look back with us</p>
       <div class="trio">
         <a class="vignette v-story" data-optional="our_story" href="story.html" data-step="side" data-a="fan">
           <span class="mini-frame" aria-hidden="true">
             <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(23vw, 140px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span></span>
             <img src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(29vw, 176px)" alt="" loading="lazy">
           </span>
-          <span class="script v-title">Our Story</span>
-          <span class="kicker cue">Read</span>
+          <span class="script v-title" data-copy="story_title">Our Story</span>
+          <span class="kicker cue" data-copy="home_story_cue">Read</span>
         </a>
-        <a class="vignette v-day" href="details.html" aria-label="The Day: schedule and venue" data-if="!thank_you_hides_details" data-step="mid" data-a="rise">
+        <a class="vignette v-day" href="details.html" aria-label="The Day: Details" data-attr-aria-label="{copy.day_title}: {copy.home_day_cue}" data-if="!thank_you_hides_details" data-step="mid" data-a="rise">
           <span class="paper info day-mini">
             <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-772.webp 772w" sizes="min(44vw, 264px)" alt="" loading="lazy">
             <span class="paper-text">
-              <span class="script v-title">The Day</span>
+              <span class="script v-title" data-copy="day_title">The Day</span>
               <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="t" data-field=".time"></span> <span class="l" data-field=".label"></span></span></span>
             </span>
           </span>
-          <span class="kicker cue">Details</span>
+          <span class="kicker cue" data-copy="home_day_cue">Details</span>
         </a>
         <a class="vignette v-rsvp" href="rsvp.html" data-if="!rsvp.method !thank_you_on" data-step="side" data-a="fan">
           <span class="mini-seal" aria-hidden="true"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="min(29vw, 176px)" alt="" loading="lazy"><span class="seal-mono" data-field="initials"></span></span>
-          <span class="script v-title">Will You Join Us?</span>
-          <span class="kicker cue">Reply</span>
+          <span class="script v-title" data-copy="rsvp_title">Will You Join Us?</span>
+          <span class="kicker cue" data-copy="home_rsvp_cue">Reply</span>
         </a>
       </div>
     </div>
@@ -170,19 +170,19 @@
 
   <footer class="foot" data-scene="home-foot">
     <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(62vw, 360px)" alt="" loading="lazy">
-    <p class="kicker" data-step="sign" data-a="fade" data-if="!thank_you_on">Until then</p>
-    <p class="kicker" data-step="sign" data-a="fade" data-if="thank_you_on">With love</p>
+    <p class="kicker" data-step="sign" data-a="fade" data-if="!thank_you_on" data-copy="foot_kicker">Until then</p>
+    <p class="kicker" data-step="sign" data-a="fade" data-if="thank_you_on" data-copy="foot_kicker_after">With love</p>
     <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
-    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1">Open the envelope again</a></p>
+    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1" data-copy="home_replay">Open the envelope again</a></p>
   </footer>
 </main>
 
 <nav class="site-nav" aria-label="Wedding pages">
   <ul>
-    <li><a href="home.html" aria-current="page"><span>Home</span></a></li>
-    <li data-optional="our_story"><a href="story.html"><span>Story</span></a></li>
-    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on">Details</span><span data-if="thank_you_on">The Day</span></a></li>
-    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span>RSVP</span></a></li>
+    <li><a href="home.html" aria-current="page"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
 </body>

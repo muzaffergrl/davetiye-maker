@@ -527,7 +527,7 @@ const DEV_CONTENT = {
 
   /* -- boot */
   function boot() {
-    // without the platform: a design preview (placeholder labels, as in the panel)
+    // without the platform: a design preview
     if (!SITE) { root.dataset.preview = 'true'; devRender(CONTENT); devRsvp(); }
     // RSVP: after a reply the closing hides its generic thank-you
     document.addEventListener('rsvp:state', (e) => {
@@ -560,11 +560,13 @@ const DEV_CONTENT = {
     }));
   }
 
-  /* == dev fallback: fills the markers like lib/theme/engine.ts (text / attributes only) */
+  /* == dev fallback: fills the markers like lib/theme/engine.ts */
   function devRender(content) {
     const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
       story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json
     const view = JSON.parse(JSON.stringify(content));
+    view.copy = {};   // G068: {copy.<key>} = the page's [data-copy] text
+    document.querySelectorAll('[data-copy]').forEach((el) => { view.copy[el.dataset.copy] ??= el.textContent.trim(); });
     if (view.venue) {
       const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
       view.venue.city_region = join([view.venue.city, view.venue.region]);

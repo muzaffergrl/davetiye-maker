@@ -16,6 +16,10 @@
 //   data-attr-<name>="path"        attribute <name> = raw value, or a {template} (allow-listed attributes only)
 //   data-calendar="ics|google"     <a> href = /<slug>/event.ics or a Google Calendar link (lib/calendar.ts);
 //                                  removed when the content has no readable date
+//   data-copy="envelope_kicker"    G068: an editable design text — content.copy.<key> (one line, escaped, at most the
+//                                  key's theme.json max) replaces the element's text; empty = the template's text stays
+//   data-copy-attr="aria-label:k"  the same for attributes (alt, title, content, aria-label, placeholder)
+//   {copy.<key>}                   inside data-text / data-attr-* templates: the couple's text, else theme.json's default
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.
 // Buyer photos with size variants (lib/photo-variants.ts) get srcset (+ the template's sizes).
 // Share image and tab icon (G055): when the theme has img/og-1200x630.jpg / img/favicon.png
@@ -33,6 +37,7 @@ import { buildView, fieldKind, getPath } from '../content/derive.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
 import { THANK_YOU_DEFAULT_TITLE } from '../content/thank-you.ts';
 import { photoCandidates } from '../photo-variants.ts';
+import { COPY_ATTRS, ownCopy, parseCopyAttr, resolveCopy, type CopyManifest } from './copy.ts';
 import type { ThemeShareFiles } from './share.ts';
 import { OG_IMAGE_SIZE } from './share.ts';
 import type { PageName, ThemeManifest } from './theme.ts';
@@ -41,7 +46,8 @@ import { cssUrl, isRelativeReference, safeLinkUrl, safePhotoUrl, splitSuffix, th
 export interface RenderOptions {
   html: string;
   content: unknown;
-  theme: Pick<ThemeManifest, 'id' | 'pages' | 'photos'>;
+  /** `copy` (G068): the theme's editable texts; absent = none (data-copy elements keep their template text). */
+  theme: Pick<ThemeManifest, 'id' | 'pages' | 'photos'> & { copy?: CopyManifest };
   page: PageName;
   slug: string;
   variant?: string | null;
@@ -83,7 +89,20 @@ const TEXT_FORMATS = new Set(['auto', 'raw', 'date', 'date-long', 'weekday', 'mo
 const KNOWN_BLOCKS = new Set(['our_story', 'countdown', 'dress_code', 'registry', 'travel_stay', 'faq', 'guest_policy']);
 const URL_KEYS = new Set(['website', 'rsvp_form', 'map', 'registry', 'accommodation']);
 const ATTR_ALLOW = new Set(['alt', 'title', 'content', 'aria-label', 'datetime', 'value', 'placeholder']);
-const ENGINE_ATTRS = new Set(['data-field', 'data-format', 'data-text', 'data-photo', 'data-optional', 'data-url', 'data-if', 'data-repeat', 'data-calendar']);
+const ENGINE_ATTRS = new Set([
+  'data-field',
+  'data-format',
+  'data-text',
+  'data-photo',
+  'data-optional',
+  'data-url',
+  'data-if',
+  'data-repeat',
+  'data-calendar',
+  'data-copy',
+  'data-copy-attr',
+  'data-copy-fixed',
+]);
 const SRC_ELEMENTS = new Set(['img', 'script', 'source', 'video', 'audio', 'track', 'embed', 'iframe', 'input']);
 const OG_IMAGE = new Set(['og:image', 'og:image:url', 'twitter:image']);
 const DATA_SCRIPT_TYPES = new Set(['application/json', 'application/ld+json', 'text/template', 'text/plain']);
@@ -206,6 +225,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   // The thank-you preview (G075) needs a preview key: a guest's ?thanks=1 changes nothing.
   const thanksPreview = Boolean(opts.thankYouPreview && opts.previewKey);
   const view = buildView(opts.content, { now: opts.now, thankYou: thanksPreview });
+  // G068: {copy.<key>} in templates reads the text the site shows (the couple's, else the design's), never the raw record
+  const copyManifest: CopyManifest = theme.copy ?? {};
+  view.copy = resolveCopy(opts.content, copyManifest);
   const locale = typeof view.locale === 'string' ? view.locale : 'en-US';
   const blocks = (view.optional_blocks ?? {}) as Record<string, unknown>;
 
@@ -377,6 +399,42 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     return true;
   };
 
+  /** The couple's own text for a copy key ('' = keep the design's text written in the template). */
+  const ownText = (key: string): string => {
+    const entry = copyManifest[key];
+    if (!entry) {
+      if (theme.copy) warn(`copy key "${key}" is not in theme.json copy`);
+      return '';
+    }
+    return ownCopy(opts.content, key, entry.max);
+  };
+
+  /** data-copy: the couple's text replaces the element's (true); without one the template's text stays (false). */
+  const applyCopy = (el: Element): boolean => {
+    if (RAW_TEXT.has(el.name) || VOID.has(el.name)) {
+      warn(`data-copy ignored on <${el.name}> (use data-copy-attr for attributes)`);
+      return true;
+    }
+    const text = ownText(el.attribs['data-copy'].trim());
+    if (!text) return false;
+    // a heading written with the script type's "&" (Travel <span class="amp">&amp;</span> Stay) keeps that styling
+    const formats = (el.attribs['data-format'] ?? '').split(/\s+/).filter(Boolean);
+    if (formats.includes('amp') || $(el).find('.amp').length) setAmpText(el, text);
+    else $(el).text(text);
+    return true;
+  };
+
+  const applyCopyAttrs = (el: Element): void => {
+    for (const [attr, key] of parseCopyAttr(el.attribs['data-copy-attr'])) {
+      if (!COPY_ATTRS.has(attr)) {
+        warn(`data-copy-attr: "${attr}" is not allowed`);
+        continue;
+      }
+      const text = ownText(key);
+      if (text) el.attribs[attr] = text;
+    }
+  };
+
   const applyPhoto = (el: Element): void => {
     const key = el.attribs['data-photo'].trim();
     const slot = theme.photos[key];
@@ -500,6 +558,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     let replaced = false;
     if ('data-field' in a) replaced = applyField(el, scope);
     else if ('data-text' in a) replaced = applyText(el, scope);
+    // a link to a urls.* value keeps its text from the field: its words can still be the couple's (View map)
+    if ('data-copy' in a && !replaced) replaced = applyCopy(el);
+    if ('data-copy-attr' in a) applyCopyAttrs(el);
     if ('data-photo' in a) applyPhoto(el);
     if ('data-url' in a) applyUrl(el);
     applyAttrs(el, scope);
@@ -508,6 +569,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     if (replaced) return;
     for (const child of [...el.children]) {
       if (isTag(child)) walk(child, scope);
+      // <template> content is a fragment of its own (e.g. the RSVP form's guest row, G069): its markers count too
+      else if (child.type === 'root' && hasChildren(child)) for (const c of [...child.children]) if (isTag(c)) walk(c, scope);
     }
   };
 

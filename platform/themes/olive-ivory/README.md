@@ -189,6 +189,18 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
 | alt kenara basılı mühür + dal | `.card-seal` (closure) + monogram | |
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
 
+## Düzenlenebilir metinler (G068)
+
+Görünür her sabit metin `data-copy` taşır (75 anahtar, `theme.json` → `copy`; kural `docs/11` §3.7, motor ve panel
+`platform/README.md` "Düzenlenebilir tasarım metinleri"). Manifest şablonlardan yazılır: `node scripts/copy-manifest.ts --theme
+olive-ivory` (`--check` ile denetim). `max` değerleri 360/390'da ölçüldü (`theme-check --stress`, her anahtar `max`'ta, teşekkür hâli
+dahil): gezinme etiketleri en dar sıra — 4 etiket 360 px'e 6/6/7/6 harfle sığıyor (`nav_home`/`nav_story`/`nav_details`/`nav_rsvp`;
+teşekkür hâlinde `nav_day` 8); sayaç etiketleri 7 (`cd_*`, "Minutes"/"Seconds" kadar); ana sayfa üçlüsünün yan kartlarındaki
+bağlantı yazıları 10 (`home_story_cue`, `home_rsvp_cue`) ve hikâye sayfasının adı 13 (`story_title`, "Our Story"): daha uzunu
+sol kartın başlığını üçüncü satıra taşır, kart uzar ve 7° yatık kartın üst köşesi ekran kenarını 1–2 px geçer (390/430 px'te
+ölçüldü; "How We Met" gibi kısa adlar sığar, sağdaki RSVP kartı başlıkta 30 harfi taşıyor). Zarfa dönüşte eski nav görüntüsü çizilmez (`::view-transition-old(site-nav):only-child`, G064 qa). Story'deki
+kaydırma okları ve bölge adları (`aria-label`) sabit; iç sayfaların `description` meta cümleleri sabit.
+
 ## Bilinen sınırlar
 - Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim). Home üçlüsündeki günün kartı ilk 4 satırı gösterir.
 - Details tören cümlesi yalnız saati söyler ("The ceremony begins at 4:00 PM."): programın ilk satırı tören olmayabilir.

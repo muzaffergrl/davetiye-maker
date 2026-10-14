@@ -58,11 +58,13 @@ import {
   type SectionId,
 } from '../../lib/panel/model.ts';
 import { classifyIdentityChange, identityOf, sameIdentity, type Identity } from '../../lib/panel/rights.ts';
+import { copyPanelPage, type PanelCopyEntry } from '../../lib/theme/copy.ts';
 import { BrandLogo } from './Brand.tsx';
+import { CopyFields } from './CopyFields.tsx';
 import { PANEL_FONTS } from './fonts.ts';
 import { IdentitySheet } from './IdentitySheet.tsx';
 import { PanelContext, useDeviceZone, type PanelContextValue } from './fields.tsx';
-import { BLOCK_TITLES, changedPages, changedSections, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
+import { BLOCK_TITLES, changedCopyPages, changedPages, changedSections, COPY_TITLE, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
 import { QrCode } from './QrCode.tsx';
@@ -286,7 +288,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   );
   const pageErrors = (page: PageId) => validation.errors.filter((i) => {
     const s = sectionForPath(i.path);
-    return s !== null && PAGE_SECTIONS[page].includes(s);
+    return (s !== null && PAGE_SECTIONS[page].includes(s)) || copyPanelPage(i.path, theme.copy) === page;
   }).length;
   const blocks = content.optional_blocks ?? {};
   const steps = useMemo(() => nextSteps(validation.errors, notes, content, meta), [validation.errors, notes, content, meta]);
@@ -309,8 +311,11 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     // the draft at the moment the publish answered is what went live
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meta.publishedAt]);
-  const changes = useMemo(() => changedPages(content, publishedCopy), [content, publishedCopy]);
+  const changes = useMemo(() => changedPages(content, publishedCopy, theme.copy), [content, publishedCopy, theme.copy]);
   const changedParts = useMemo(() => changedSections(content, publishedCopy), [content, publishedCopy]);
+  // G068: pages whose design texts changed (Review: "<Page> · Headings & labels"), and pages whose own content did
+  const copyChanges = useMemo(() => changedCopyPages(content, publishedCopy, theme.copy), [content, publishedCopy, theme.copy]);
+  const contentChanges = useMemo(() => changedPages(content, publishedCopy), [content, publishedCopy]);
 
   const summaries: Record<PageId, string> = {
     us: names,
@@ -390,22 +395,33 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto],
   );
 
+  /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */
+  const [copyJump, setCopyJump] = useState<{ path: string } | null>(null);
+  /** The website page of the design text edited last on an editor page (its preview opens there). */
+  const copyPreview = useRef<{ page: PageId | null; target: string; thanks: boolean } | null>(null);
+
   /** From an issue / note / next step to its field (or a view). */
   const goTo = useCallback(
     (path: string) => {
       setDialog(null);
       setPreviewOpen(false);
       if (path.startsWith('#')) return go(path);
-      const section = sectionForPath(path) ?? 'names';
-      const page = pageOf(section);
-      go({ view: 'section', page, focus: PAGE_SECTIONS[page][0] === section ? null : section });
+      const copyPage = copyPanelPage(path, theme.copy);
+      if (copyPage) {
+        setCopyJump({ path });
+        go({ view: 'section', page: copyPage, focus: null });
+      } else {
+        const section = sectionForPath(path) ?? 'names';
+        const page = pageOf(section);
+        go({ view: 'section', page, focus: PAGE_SECTIONS[page][0] === section ? null : section });
+      }
       window.setTimeout(() => {
         const el = document.getElementById(fieldId(path)) ?? document.querySelector<HTMLElement>(`[data-locked-identity] [data-change-identity]`);
         el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
         (el as HTMLElement | null)?.focus({ preventScroll: true });
       }, 120);
     },
-    [go],
+    [go, theme.copy],
   );
 
   const copy = async (text: string, done = 'Link copied') => {
@@ -589,8 +605,16 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             <ul className={styles.reviewList}>
               {changes.map((id) => {
                 const Icon = PAGE_ICONS[id];
-                // a page with several parts names the changed ones (e.g. "Date & time, After the wedding")
-                const parts = pageSections(id).length > 1 ? changedParts.filter((s) => PAGE_SECTIONS[id].includes(s)).map((s) => SECTION_TITLES[s]) : [];
+                // a page with several parts names the changed ones (e.g. "Date & time, After the wedding"); the design's texts
+                // are a part of every page (G068: "Us · Headings & labels")
+                const copied = copyChanges.includes(id);
+                const own =
+                  pageSections(id).length > 1
+                    ? changedParts.filter((s) => PAGE_SECTIONS[id].includes(s)).map((s) => SECTION_TITLES[s])
+                    : copied && contentChanges.includes(id)
+                      ? pageSections(id).map((s) => SECTION_TITLES[s])
+                      : [];
+                const parts = [...own, ...(copied ? [COPY_TITLE] : [])];
                 return (
                   <li key={id}>
                     <button type="button" className={styles.reviewItem} onClick={() => go({ view: 'section', page: id, focus: null })} data-review-item={id}>
@@ -787,6 +811,27 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     }
   };
 
+  /**
+   * G068: the website page of the design text being edited (the preview opens there; a text shown only after the wedding
+   * opens the thank-you version). Wide screens follow at once; on a phone "Preview this page" opens it.
+   */
+  const followCopy = (e: PanelCopyEntry) => {
+    const usable = (p: string) => theme.pages.includes(p) && pageShown(theme.pageRules[p], content, { thankYou: e.after });
+    // the editor page's own website page first (the RSVP heading on the RSVP page), else where the text appears
+    const own = sectionPage ? previewPageFor(sectionPage, null) : null;
+    const target = (own && e.pages.includes(own) && usable(own) ? own : e.pages.find(usable)) ?? null;
+    copyPreview.current = target ? { page: sectionPage, target, thanks: e.after } : null;
+    if (wide && target) {
+      setPreviewThanks(e.after);
+      setPreviewPage(target);
+    }
+  };
+  const pagePreview = (page: PageId) => {
+    const c = copyPreview.current;
+    if (c && c.page === page) openPreview(c.target, c.thanks);
+    else openPreview(previewPageFor(page, openFocus));
+  };
+
   /** Opens the preview at `page`; `thanks` = the thank-you version (G075), else the website as it is now. */
   const openPreview = (page?: string | null, thanks = false) => {
     setPreviewThanks(thanks);
@@ -843,7 +888,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             </p>
             <div className={styles.appBarActions}>
               <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
-              {!wide ? <IconButton icon={Eye} label="Preview" onClick={() => openPreview(sectionPage ? previewPageFor(sectionPage, openFocus) : null)} data-open-preview /> : null}
+              {!wide ? <IconButton icon={Eye} label="Preview" onClick={() => (sectionPage ? pagePreview(sectionPage) : openPreview(null))} data-open-preview /> : null}
               {publishControl}
             </div>
           </div>
@@ -985,9 +1030,15 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                     </section>
                   );
                 })}
+                {/* G068: the design's texts of this page, folded at its end (K29: no seventh "Wording" page) */}
+                {theme.copy.some((e) => e.panel === sectionPage) ? (
+                  <section id="section-copy-body" className={styles.sectionBlock} data-section="copy">
+                    <CopyFields page={sectionPage} entries={theme.copy} openRequest={copyJump} onFocusKey={followCopy} />
+                  </section>
+                ) : null}
                 {!wide ? (
                   <div className={styles.sectionFoot}>
-                    <Button block icon={Eye} onClick={() => openPreview(previewPageFor(sectionPage, openFocus))}>
+                    <Button block icon={Eye} onClick={() => pagePreview(sectionPage)}>
                       Preview this page
                     </Button>
                   </div>
