@@ -15,7 +15,16 @@ import { identityOf, sameIdentity } from './rights.ts';
 export const MAX_DRAFT_BYTES = 64 * 1024;
 
 /** Schema issue codes that mean "not shaped like a content record" (refused) rather than "not finished yet". */
-const STRUCTURAL_CODES = new Set(['schema_type', 'schema_unknown_field', 'schema_required', 'schema_enum', 'schema_max_items', 'schema_min_items']);
+const STRUCTURAL_CODES = new Set([
+  'schema_type',
+  'schema_unknown_field',
+  'schema_required',
+  'schema_enum',
+  'schema_max_items',
+  'schema_min_items',
+  // G068: more design-text keys than the schema allows (content.copy)
+  'schema_max_properties',
+]);
 
 /**
  * Buyer-facing list limits (G055): a draft over them is still saved (a site made before the limit, or an

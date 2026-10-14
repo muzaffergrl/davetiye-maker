@@ -178,6 +178,7 @@ export function Disclosure({
   status,
   icon: Icon,
   defaultOpen = false,
+  openRequest,
   children,
 }: {
   id: string;
@@ -185,10 +186,15 @@ export function Disclosure({
   status?: ReactNode;
   icon?: LucideIcon;
   defaultOpen?: boolean;
+  /** Opens the section when this value changes to something truthy (e.g. a jump to a field inside it). */
+  openRequest?: unknown;
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const bodyId = useId();
+  useEffect(() => {
+    if (openRequest) setOpen(true);
+  }, [openRequest]);
   return (
     <section className={cx(styles.disclosure, open && styles.disclosureOpen)} data-disclosure={id}>
       <h2 className={styles.disclosureHeading}>

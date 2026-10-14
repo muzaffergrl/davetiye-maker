@@ -220,6 +220,42 @@ alır, hepsi tutmalı: `data-if="dress_code !thank_you_on"`. Motor teşekkür mo
   sonra da davet gösterir, platform yanıtları yine kapatır); `tests/g075-thank-you.test.ts` 01/03'ü tam sayar, diğerlerini `# WARN` ile listeler.
   Örnek: `platform/themes/olive-ivory/`, `platform/themes/blush-garden-rose/`. 02, 04, 05 (G075 anında başka görevlerde) henüz yok.
 
+### 3.7 Düzenlenebilir tasarım metinleri (G068, K28) — yeni temalarda zorunlu
+Kullanıcı: "neredeyse her metin panelden değişsin". Temanın **görünür her sabit metni** (başlık, etiket, düğme, gezinme, form
+etiketi, teşekkür hâlinin metinleri) bir **copy anahtarı** taşır; çiftin metni `content.copy.<anahtar>`'dadır (docs/03), boşsa
+tasarımın metni görünür. Motor ve panel: `platform/README.md` → "Düzenlenebilir tasarım metinleri (G068)".
+
+| İşaret | Etki |
+|---|---|
+| `<p data-copy="envelope_kicker">You are invited</p>` | öğenin metni = tasarımın metni (varsayılan); çiftin metni varsa motor onu yazar (kaçışlı, tek satır, en çok `max`). Öğe **yalnız metin** taşır: içinde başka işaret varsa metin kendi `<span data-copy>`'sine alınır (`<span data-copy="rsvp_by">Kindly reply by</span> <span data-field="rsvp.deadline">`). Script yazı tipinin `&`'ı (`<span class="amp">`) kalır |
+| `data-copy-attr="aria-label:envelope_open"` | öznitelik metni (`alt`, `title`, `content`, `aria-label`, `placeholder`); varsayılan = özniteliğin şablondaki değeri. Görünür bir metnin eşi olan erişilebilir adlar aynı anahtarı kullanır (sahne düğmesi "Open the invitation" = JS'siz düğme) |
+| `{copy.<anahtar>}` | `data-text` / `data-attr-*` şablonunda: `<title data-text="{copy.story_title} · {name_display}">`, paylaşım cümlesi `{copy.share_invited}`. Bir öğe `aria-label`'ı görünür metinlerden kuruyorsa onları anar (`{copy.day_title}: {copy.home_day_cue}`, WCAG 2.5.3) |
+| `data-field="urls.*"` + `data-copy` | link adresi alandan, yazısı copy'den ("View map") |
+| `data-copy-fixed` | bilinçli sabit kalan sistem cümlesi (ör. "Please turn on JavaScript…"); yanına gerekçe yorumu |
+
+- **Anahtarlar standarttır** (`platform/lib/theme/copy.ts` `STANDARD_COPY`: panel sayfası, etiket, sıra, önerilen `max`): aynı
+  söz aynı anahtar — panel etiketleri, "en çok değişenler üstte" sırası ve etkinlik türü önerileri her temada çalışır. Aynı anahtar
+  bir temada tek varsayılan taşır (iki farklı söz = iki anahtar: 01'de "Open the envelope again" `home_replay`, "Replay the
+  envelope" `rsvp_replay`). Tasarıma özgü bir metin kendi anahtarını alabilir; `theme.json`'da `label` ve `panel` ister.
+- **Manifest:** `theme.json` → `"copy": {"<anahtar>": {"default", "max", "pages"}}`; şablonlardan **üretilir**:
+  `node scripts/copy-manifest.ts --theme <slug>` (varsayılan + sayfalar şablondan, `max` korunur; yalnız `{copy.…}` içinde geçen
+  anahtarın varsayılanı bir kez elle yazılır), `--check` farkı ve işaretsiz metni listeler. `max` = tasarımın **taşmadan**
+  taşıdığı en uzun metin; `theme-check --stress` her anahtarı `max` uzunluğunda gerçek sözcüklerle doldurup 360/390'da (teşekkür
+  hâli dahil) taşma/kesilme/dekor üstü metin arar (§12, §13.3) — sığmıyorsa `max` küçülür ya da CSS sarar.
+- **Denetim:** `lib/theme/copy-scan.ts` `unmarkedText` — şablonda harf içeren her metin düğümü `data-copy` / `data-field` /
+  `data-text` içinde olmalı. İzin listesi: `.ph-mark` ("Your photo here", yalnız önizleme), `[data-rsvp-message]` (platform
+  yazar), `[data-copy-fixed]`; yalnız işaret (·, &, →, ‹ ›, rakam) olan metin serbest. `<template>` içi de sayılır (form satırı).
+  `theme-check`: manifesti olan temada işaretsiz metin ve manifest farkı **hata**, manifesti olmayan temada **uyarı** (02/04/05
+  G068 anında başka görevlerde; geçişleri ayrı görev). `tests/g068-copy.test.ts` 01 ve 03'ü sayar.
+- **Panel:** her anahtar bir editör sayfasında, o sayfanın sonundaki "Headings & labels on this page" bölümünde listelenir
+  (`STANDARD_COPY.panel`): zarf/davet/imza → Us; Day sayfası, program, mekân, takvim, sayaç ve **teşekkür hâli** ("After the
+  wedding" alt başlığı) → Day & place; hikâye → Our Story; bloklar, ana sayfa bağlantı başlığı ve **gezinme** → Details; RSVP kartı,
+  form, teşekkür paneli, kapanış → RSVP. Photos'ta anahtar yok.
+- `thank_you.title` (G075) içerik alanı olarak kalır (çiftin kendi başlığı, platform varsayılanı, paylaşım cümlesi ondan bağımsız);
+  teşekkür hâlinin **tasarım** metinleri ("With love and thanks", "Replies are closed", "Look back with us" …) copy anahtarıdır.
+- Copy çiftin kendi sözüdür ama **kimlik değildir**: değiştirmek isim/tarih hakkı (G060) harcamaz; isimler ve tarih yine
+  `data-field` ile gelir. Tema bir kişisel değeri (isim, tarih, mekân) copy varsayılanına **yazmaz** (§4).
+
 ---
 
 ## 4. Şablonda ve JS'te sabit yazılmayacaklar (zorunlu)
@@ -241,10 +277,11 @@ alır, hepsi tutmalı: `data-if="dress_code !thank_you_on"`. Motor teşekkür mo
 | `<noscript>` içinde link | `.nojs-only` sınıflı normal öğe |
 | Şablonda HTML yorumu olarak görev/üretim notu | izinli (motor siler) ama kişisel veri içermez |
 
-**Serbest tasarım metni** (İngilizce, işaretsiz kalabilir): "You are invited", "We're getting married", "Our Story", "Moments we
-hold dear", "The Day", "Order of the Day", "Kindly reply by", "Will You Join Us?", "Thank you", "With love", "Tap to open",
-form etiketleri. Şartı: içerikle çelişmez ("Ceremony at …" yalnız `data-if="ceremony_time"`), olmayan şeyi vaat etmez
-(şemada olmayan "travel tips" yok), etkinlik türü bugün yalnız `wedding`.
+**Tasarım metni** (İngilizce): "You are invited", "We're getting married", "Our Story", "Moments we hold dear", "The Day",
+"Order of the Day", "Kindly reply by", "Will You Join Us?", "Thank you", "With love", "Tap to open", form etiketleri. G068'den
+beri **işaretsiz kalmaz**: her biri `data-copy` taşır (§3.7), çift panelden değiştirir. Şartı aynı: içerikle çelişmez ("Ceremony
+at …" yalnız `data-if="ceremony_time"`), olmayan şeyi vaat etmez (şemada olmayan "travel tips" yok); varsayılan söz düğün içindir
+(etkinlik türü önerileri — vow renewal, elopement … — panelde, §3.7).
 
 ---
 
@@ -694,6 +731,17 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
 - **Zarf kartının adı yalnız dönüşebilecekken:** kapalı zarfın kartı ad taşırsa "Replay the envelope"da (home → `?replay=1`)
   view transition kartın `clip-path`'ini yok sayar ve kapalı zarfın üstünde bütün bir kart uçuşur. Kural: index kartı varsayılan
   `view-transition-name: none`, `.is-opened` hâlinde ve `go(true)`'da `invite-card`; `?replay=1` `<head>` betiğinde de kapalı başlar.
+- **Nav zarf sayfasına dönerken (G068, G064 qa'nın tersi):** zarf sayfasında nav yok; home → `index?replay=1` geçişinde eski nav'ın
+  görüntüsü tek çocuktur ve varsayılan olarak 250 ms solarken zarf sayfası etiketlerin arasından görünür. Opak nav'lı temada
+  `::view-transition-old(site-nav):only-child { animation: none; opacity: 0; }` (01'de; gelişte `::view-transition-new(site-nav):only-child
+  { animation: none; }`). `theme-check` dönüşte 0 / 120 ms'de nav bandını nav grubu gizli hâliyle karşılaştırır (opak nav: hata,
+  saydam nav: uyarı).
+- **Yatay/kısa ekranda iç sayfalar (kabul edilen davranış, G068; G064 qa'nın notu):** story/details/rsvp'nin ilk ekranında son
+  görünen satır sabit nav'ın üst çizgisine denk gelebilir. 01'de ölçüldü (G068): 844×390'da story giriş cümlesinin 2. satırı
+  (321–346 px, nav 323), details'te "Order of the Day" kart başlığı, rsvp'de "Kindly reply by"; 667×375'te story'de "Moments we hold
+  dear", rsvp'de "Will You Join Us?". Sayfa kaydırılınca satır nav'ın üstüne çıkar, metin kesilmez (nav akışta değil, üstünde
+  durur); uzun bir iç sayfanın ilk ekranı bir yerde biter. İlk ekran kuralı (§13.3 "Home at 360×640 / 375×553", yatayda 01) yalnız
+  home'un ilk sahnesi içindir. Üst boşluğu kısaltmak bu yüzden yapılmadı (01'in `site.css` bütçesi de dolu: 46 002 / 46 080 B).
 - Açık hâlde "Tap to open" görünmez: sonsuz bir CSS animasyonu düz `opacity: 0`'ı ezer → `display: none` (ya da `animation: none`).
   `theme-check` açık zarfta ipucunun görünmediğini denetler.
 - bfcache: `pageshow` (`persisted`) → betik animasyonları iptal, açık durum (kullanıcı tuzağa düşmez).
@@ -785,6 +833,9 @@ sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı ko�
 22. **K21 statik denetim:** `site.css`'te `.cd-*` (ve tasarımın içerik bloklarında) `border`/`outline`/`box-shadow` yok (§5.7).
 23. **Story girişi:** story sayfasının giriş paragrafı = `story.intro` + " " + biçimli tarih + "." (ör. "… led us to May 15,
     2027."); `story.intro` boşken paragraf yok (§3.2).
+24. **Tasarım metinleri (G068, §3.7):** `theme.json` copy = şablonlar (`manifestProblems` boş), işaretsiz görünür metin yok, yalnız
+    standart anahtarlar (ya da `label`'lı); her anahtar `max` uzunluğunda uyarısız render; `tests/g068-copy.test.ts` 01/03 için
+    aynısını yapar — yeni tema kendi listesini oraya ekler.
 
 ### 13.3 Tarayıcı denetimi (`theme-check --theme` + `g051-browser --theme`, G052; Playwright, `next start`, `/opt/pw-browsers`; `playwright install` yok)
 - **Genişlikler:** 5 sayfa × 360 / 390 / 430 / 768 / 1280: yatay kaydırma yok, ekran dışı metin yok, kırpılmamış taşan öğe yok,
@@ -864,6 +915,8 @@ sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı ko�
 - [ ] Davet kartında tam ad yedeği (`full_name` boşsa `display_name`); `guest_policy` yok
 - [ ] G051: takvim çifti home + details, SSS bloğu details, çiftin soruları rsvp formunda (§3.5); SSS işareti erişilebilir ada girmiyor
 - [ ] G075 teşekkür modu (§3.6): index/home/details/rsvp/nav işaretleri, foto yoksa temanın süsü, `thank-you.css`; theme-check uyarısız
+- [ ] G068 tasarım metinleri (§3.7): görünür her sabit metin `data-copy` (izin listesi hariç), standart anahtarlar, `theme.json`
+      copy `scripts/copy-manifest.ts --check` temiz, `max`'lar `--stress` ile doğrulandı
 - [ ] RSVP sayfası G042 sözleşmesinde; story `data-optional="our_story"`, rsvp `data-if="!rsvp.method"`; nav kuralları
 - [ ] `build_images.py` (`tools/tema_build.py` ile): geçici `parts_prep`, tip kesimleri (geometrik yedek uyarısı varsa önizleme +
       Sonuç), maskeler, `free_zone`, yer tutucular, `og-1200x630.jpg` + `favicon.png`, klasör ≤ 3 MB; pencere şeffaflığı ve yeşil

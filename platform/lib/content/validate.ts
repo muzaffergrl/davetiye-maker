@@ -171,11 +171,23 @@ function checkSchema(schema: Schema, value: unknown, path: string, out: Validati
         out.push({ level: 'error', code: 'schema_required', path: joinPath(path, key), message: 'This field is required.' });
       }
     }
+    // G068 (content.copy: a map of design texts): maxProperties, propertyNames.pattern, additionalProperties as a schema
+    if (typeof schema.maxProperties === 'number' && Object.keys(value).length > schema.maxProperties) {
+      err('schema_max_properties', `At most ${schema.maxProperties} entries.`);
+    }
+    const names = schema.propertyNames as Schema | undefined;
+    const additional = schema.additionalProperties;
     for (const [key, v] of Object.entries(value)) {
+      if (names && typeof names.pattern === 'string' && !new RegExp(names.pattern, 'u').test(key)) {
+        out.push({ level: 'error', code: 'schema_unknown_field', path: joinPath(path, key), message: 'Unknown field.' });
+        continue;
+      }
       if (Object.hasOwn(props, key)) {
         checkSchema(props[key], v, joinPath(path, key), out);
-      } else if (schema.additionalProperties === false) {
+      } else if (additional === false) {
         out.push({ level: 'error', code: 'schema_unknown_field', path: joinPath(path, key), message: 'Unknown field.' });
+      } else if (isPlainObject(additional)) {
+        checkSchema(additional as Schema, v, joinPath(path, key), out);
       }
     }
   }

@@ -35,3 +35,4 @@ G059 kiti onaylandı; üç değişiklik birikti, bir kerede yeniden üretilir:
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G059 onayı sonrası birikenler
 - 2026-10-14 entegratör (G080 Sonuç): 01/03 START_HERE.md hâlâ "Refresh" ve "Download all replies (CSV)" diyor → K29 paneline göre (3 adım, 6 sayfa, Unpublished changes şeridi, Download list, şifre, teşekkür modu) yeniden yazılmalı; tools/listing_templates/capture.ts eski panel seçicilerini kullanıyor → güncellenmeli. Kalan v2 ilan görselleri (editör, RSVP, dahil olanlar) yeni panelden çekilir.
+- 2026-10-14 entegratör: G068 ile 01/03'te neredeyse her başlık/etiket panelden değişiyor (meta ve aria hariç) → ilan metni ve START_HERE bunu dürüstçe söyleyebilir ("almost every heading and label"); 05 için G081 sonrası.

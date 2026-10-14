@@ -408,6 +408,21 @@ export const CONTENT_SCHEMA = {
         }
       }
     },
+    "copy": {
+      "type": "object",
+      "maxProperties": 200,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]{0,47}$"
+      },
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "maxLength": 300
+      },
+      "description": "İsteğe bağlı (G068, K28): temanın düzenlenebilir sabit metinleri — başlıklar, etiketler, düğmeler, gezinme (ör. envelope_kicker = 'You are invited', rsvp_title = 'Will You Join Us?'). Anahtar → çiftin metni; boş/null = tasarımın metni. Anahtar listesi, varsayılan ve tasarımın taşıdığı en uzun metin (max) temanın theme.json 'copy' manifestindedir; bilinmeyen anahtar ve max aşımı platformda (lib/theme/copy.ts) denetlenir. Kimlik alanı değildir: değiştirmek isim/tarih hakkı harcamaz."
+    },
     "faq": {
       "type": "array",
       "maxItems": 12,
