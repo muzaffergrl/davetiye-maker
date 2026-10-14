@@ -1,0 +1,99 @@
+{
+  "task": "G207",
+  "agent": "gpt-gorsel-C",
+  "date": "2026-10-14",
+  "kit_check": {
+    "paket_5": {
+      "passed": 24,
+      "total": 24,
+      "exit_code": 0,
+      "alignment_status": "UYARI",
+      "body_edges_pct": {
+        "left": -0.1,
+        "right": -0.1,
+        "bottom": 0.13
+      },
+      "closure_ends_pct": {
+        "left": 0.29,
+        "right": 0.68,
+        "top": -2.6,
+        "bottom": -0.91
+      }
+    },
+    "paket_2": {
+      "passed": 5,
+      "total": 5,
+      "exit_code": 0
+    }
+  },
+  "green_windows": {
+    "card_small": {
+      "window_bbox": [
+        320,
+        411,
+        701,
+        907
+      ],
+      "window_bbox_ratio": 0.769,
+      "core_pixels": 135076,
+      "exact_rgb_alpha_255_pixels": 0,
+      "mean_rgb": [
+        7.73,
+        246.21,
+        2.78
+      ],
+      "alpha_min": 252,
+      "alpha_max": 254,
+      "core_alpha_below_250_pixels": 0
+    },
+    "frame_portrait": {
+      "window_bbox": [
+        202,
+        469,
+        819,
+        1273
+      ],
+      "window_bbox_ratio": 0.768,
+      "core_pixels": 369091,
+      "exact_rgb_alpha_255_pixels": 0,
+      "mean_rgb": [
+        5.75,
+        244.07,
+        1.12
+      ],
+      "alpha_min": 252,
+      "alpha_max": 254,
+      "core_alpha_below_250_pixels": 0
+    },
+    "frame_landscape": {
+      "window_bbox": [
+        322,
+        326,
+        1213,
+        833
+      ],
+      "window_bbox_ratio": 1.756,
+      "core_pixels": 330230,
+      "exact_rgb_alpha_255_pixels": 0,
+      "mean_rgb": [
+        7.24,
+        241.63,
+        1.75
+      ],
+      "alpha_min": 250,
+      "alpha_max": 254,
+      "core_alpha_below_250_pixels": 0
+    }
+  },
+  "strict_rgb_alpha_requirement_met": false,
+  "note": "Kit checker accepts approximate green. Generated green windows are not pixel-exact uniform RGB(0,255,0), alpha 255. Require normalization before production.",
+  "selected_versions": {
+    "web_2_home": "v2",
+    "envelope_closed": "v6",
+    "closure": "v2",
+    "frame_portrait": "v5",
+    "frame_landscape": "v5",
+    "florals_br": "v2",
+    "story_3": "v2"
+  }
+}
