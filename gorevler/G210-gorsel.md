@@ -38,3 +38,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-F
+- 2026-10-14 not (entegratör): ajan sohbeti yarıda koptu, repoda dosya yok (kit_check 0/23, 0/5); devam ajanı rol rehberindeki 'Ara kayıt ve devam' kuralıyla sürdürür
