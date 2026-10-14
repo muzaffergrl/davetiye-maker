@@ -32,9 +32,13 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kısım 1 devam ediyor (gpt-gorsel-I): W1'in 5 ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` yollarına kaydedildi; hepsi 1024×1536 PNG.
+- W1.1 zarf gövdesi fazla geniş olduğu için üç kez yeniden üretildi; daha yüksek gövdeli son tasarım seçildi. W1.3 kalın çerçeveler ince altın metal çerçevelere dönüştürülerek bir kez yeniden üretildi. Yalnız seçilen beş dosya repoya kondu.
+- W1 görsel kontrolü: telefon donanımı/çubuğu yok; home'da kart, geri sayım ve RSVP; story'de birbirini kesmeyen üç çerçeve; details'ta üç program satırı ve yatay mekân penceresi; RSVP'de kart içindeki buton ve aynı yaprak bordürlü mühür mevcut. PNG dosyaları açılarak ölçüleri doğrulandı.
+- Sıradaki bu oturum kapsamı: W2 `bg_page.png`, `bg_tile.png`, `envelope_closed.png`; diğer W2 parçaları ve PAKET 2 sonraki oturuma kalacak. Durum `alindi`.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-I; bu oturum: kısım 1, W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
+- 2026-10-14 ara kayıt: gpt-gorsel-I; W1 tamamlandı (5/5 ekran), W2'nin ilk 3 parçası sırada.
