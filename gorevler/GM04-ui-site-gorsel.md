@@ -2,8 +2,8 @@
 id: GM04
 baslik: BKE Studio Satış sitesi arayüz tasarımı — 6 yüksek kaliteli ekran comp'u (GPT tasarlar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-ui-site
 oncelik: 1
 bagimli: [GM01]
 yazar: [brand/ui/site/]
@@ -29,3 +29,4 @@ GPT Satış sitesi'nin görsel tasarımını yapar (K21); Claude aynı görünü
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği (marka tasarımına uygun site ve panel)
+- 2026-10-14 alindi: gpt-ui-site
