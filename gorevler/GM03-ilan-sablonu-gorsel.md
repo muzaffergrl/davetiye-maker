@@ -46,3 +46,4 @@ Tasarıma özel fotoğraf sahneleri G8NN'de (PAKET 3). Claude bu comp'lara göre
 - 2026-10-14 gpt-marka: kısım 1 bitti, LI ikonları kaldı — yedi comp'un üretimi ve kayıtları tamamlandı; yukarıdaki ölçü/saf renk teknik kabul sınırı devam ediyor. Durum alindi; bu oturum durduruldu.
 - 2026-10-14 devam: gpt-marka (kısım 2, LI ikonları)
 - 2026-10-14 ara kayıt: gpt-marka — LI 4/8 kaydedildi; dört ikon gerçek alfa kontrolünden geçti, ölçü/tek renk teknik sınırı Sonuç'a yazıldı.
+- 2026-10-14 ara kayıt: gpt-marka — LI 8/8 kaydedildi; LI7 çizgi kalınlığı ve LI8 yaklaşık %60 yerleşim için `_v2` yeniden üretildi, bu sürümler sade adlara seçildi. Sekiz ikonun son alfa/renk kontrolü yapılacak.
