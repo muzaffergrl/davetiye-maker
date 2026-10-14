@@ -33,7 +33,10 @@ def footer(canvas,doc):
 for collection,title,theme in [('01_Olive_Ivory','Olive & Ivory','olive-ivory'),('03_Blush_Garden_Rose','Blush Garden Rose','blush-garden-rose')]:
     src=ROOT/'collections'/collection/'package/customer/START_HERE.md'
     output=ROOT/'collections'/collection/'package/customer/START_HERE.pdf'
-    flow=[];lines=src.read_text(encoding='utf8').splitlines();i=0
+    markdown=src.read_text(encoding='utf8')
+    start=re.search(r'\]\((https?://[^)]+/start\?theme=[^)]+)\)',markdown)
+    if not start: raise ValueError('Missing real start URL in '+str(src))
+    flow=[];lines=markdown.splitlines();i=0
     while i<len(lines):
         line=lines[i];i+=1
         if not line.strip():continue
@@ -47,7 +50,7 @@ for collection,title,theme in [('01_Olive_Ivory','Olive & Ivory','olive-ivory'),
             table=Table(data,colWidths=[108,408],repeatRows=1,hAlign='LEFT')
             table.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),PAPER),('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),8),('RIGHTPADDING',(0,0),(-1,-1),8),('TOPPADDING',(0,0),(-1,-1),8),('BOTTOMPADDING',(0,0),(-1,-1),8),('LINEBELOW',(0,0),(-1,-1),0.5,GOLD)]));flow.extend([table,Spacer(1,10)]);continue
         if line.startswith('!['):
-            url='https://davetiye-platform-five.vercel.app/start?theme='+theme
+            url=start.group(1)
             qr=QrCodeWidget(url);b=qr.getBounds();size=100;d=Drawing(size,size,transform=[size/(b[2]-b[0]),0,0,size/(b[3]-b[1]),0,0]);d.add(qr);flow.extend([d,Spacer(1,10)]);continue
         if line.startswith('# '):style='GuideTitle';line=line[2:]
         elif line.startswith('## '):style='GuideH2';line=line[3:]
