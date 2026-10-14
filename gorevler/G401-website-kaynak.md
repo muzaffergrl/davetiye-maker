@@ -33,13 +33,71 @@ Tasarım 01'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [x] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-olive-ivory.test.ts` (§13.2)
 - [x] `theme-check --theme olive-ivory` hatasız; `previews/g401/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
       — qa-kontrol 2026-10-14: **KOŞULLU GEÇTİ**; 3 MUST FIX + 7 küçük madde düzeltildi (Sonuç → "qa-kontrol 2026-10-14"),
-      theme-check --stress 88/88; düzeltmelere qa'nın yeniden bakması önerilir
+      theme-check --stress 88/88; qa yeniden bakışı (ikinci tur) yine **KOŞULLU**: 2 MUST FIX (yatay telefonda home ilk
+      ekranı + yanlış "her boyutta" iddiası) düzeltildi (Sonuç → "ikinci tur"), theme-check --stress 106/106; qa'nın yeniden
+      bakması önerilir
 - [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
 **Yapıldı (wf-tema01, 2026-10-13).** Durum: yerelde çalışan ve test edilen platform teması; **hiçbir yere yayınlanmadı**.
 Ayrıntı: `platform/themes/olive-ivory/README.md` (dosyalar, foto alanları, görsel hattı + GPT kusur temizliği, açılış/koreografi,
 sayfa başına comp öğe haritası, bilinen sınırlar).
+
+### qa-kontrol 2026-10-14, ikinci tur: KOŞULLU → düzeltildi (2026-10-14)
+QA, önceki düzeltmenin yatay telefonlarda yeni bir gerileme getirdiğini buldu; iki MUST FIX önce kendi `next start` + Chromium
+ölçümümle doğrulandı (844×390: hap altı 379 / nav üstü 315, isimler 17,6 px, kart 92 px ve kopyası kart dışında; 667×375: hap
+462 / nav 300), sonra düzeltildi. Görsel çizilmedi, yeni GPT parçası istenmedi: yalnız yerleşim, boyut, satır seçimi ve JS ölçümü.
+- **1 Yatay telefonda home ilk ekranı (doğrulandı → düzeltildi):** `site.css` yeni **kısa yatay düzen** (`min-aspect-ratio: 1/1`
+  ve yükseklik ≤ 620 px: yan çevrilmiş telefon, kısa pencere): ızgara, kart solda ilk ekran yüksekliğinde (150–260 px), isimler ·
+  tarih · mekân · şehir · sayaç · hap sağ sütunda; nav 48 px; köşe kümeleri küçük, `decor_br` hapın sağında. `site.js`
+  `fitNames` yeniden: (1) isimler en çok %24, (2) `.is-tight` + isimler **36 px tabanına** kadar (eski 0,4 tabanı kalktı),
+  (3) `.is-long`: sayaç hapın altına geçer, hap ilk ekranda kalır, (4) yine sığmazsa hero kaydırılır, isimler rahat boyda —
+  ezilmez. Ölçüm artık `offsetTop` ile (giriş animasyonunun dönüşümleri sonucu 2–3 px oynatıyordu). Kart **her genişlikte
+  ≥ 150 px** (768 px üstündeki `min(260px, 34svh × .695)` kuralı 92–102 px veriyordu). Kart kopyası `fitCopy`: yazı 11 px'in
+  altına inmez, kâğıda sığmazsa satır düşer (yer → script → …); kart boyu değişince `ResizeObserver`. **Zarf sayfası da yatayda
+  düzeltildi** (QA'nın listesinde yoktu, aynı ölçümde bulundu): 844×390'da "Tap to open" ekran dışındaydı (406/390), açık zarfta
+  kart 114 px, kopyası kart dışında ve "Replay" ekran altındaydı → isimler yüksekliğe göre, açık zarf ekran boyunda ve
+  Enter/Replay yanında, kart kopyası `fitCopy`, mühür monogramı ≥ 11 px, "You are invited" kutusu yazı genişliğinde (köşe
+  çiçeğine uzanmıyor). Ayrıca `body::before` ışık katmanı kısa sayfayı 640 px'e uzatıyordu (zarf sayfası boşluğa kayıyordu).
+  **Sonra (demo kaydı, 24 boyut: 320×568 … 430×932 dikey, 568×320 · 667×375 · 740×360 · 844×390 · 915×412 · 932×430 yatay,
+  768×1024, 1024×500/600/768, 1280×540/600/800, 1366×657, 1440×900, 1920×1080):** her boyutta kart ve hap nav'ın üstünde, isimler
+  ≥ 37,6 px (yalnız 568×320'de %6 küçülür), kart ≥ 150 px, kart kopyası kâğıtta, yatay kaydırma yok. Hap altı / nav üstü: 844×390
+  288/323, 932×430 315/363, 667×375 278/308, 740×360 268/293, 375×553 468/478, 360×640 536/565, 1024×600 425/533. Tasarım aralığı
+  (14–16 harflik isimler, 57 karakter mekân, "September 30, 2027"): hepsi sığar (375×553, 320×568, 568×320'de `.is-long`). §12
+  stres kaydı: 375×553, 320×568, 667×375, 568×320'de hero kaydırılır, öteki 20 boyutta hap ilk ekranda; isimler her yerde ≥ 36 px.
+  Hap–yaprak arası yatayda 19–124 px (568×320'de 11–12 px). Zarf → home akışı 844×390'da kare kare bakıldı: kart cepten çıkıp
+  sol hero kartına iniyor. Ekran görüntüleri: `previews/g401/home_844x390.png`, `home_667x375.png`, `home_375x553.png`,
+  `stress_home_*`.
+- **2 Dürüst iddia (doğrulandı → düzeltildi):** README comp haritasındaki "ilk ekranın içeriği her boyutta nav'ın 8+ px üstünde
+  biter" yatay telefonda yanlıştı; artık ölçülen kapsamla yazılı (demo kaydı, yukarıdaki 24 boyut; uzun kayıt adımları ve
+  kaydırma README "Home ilk ekranı" bölümünde). Önceki turun `fitNames` tarifi 0,4 tabanını (17,6 px) yazmıyordu — aşağıda
+  işaretlendi; o taban kaldırıldı.
+- **theme-check (her tema; `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts`, G052'nin dosyaları — yazma alanım dışı, QA
+  önerisi):** "home first screen" akışı: 360×640 / 375×553 her temada (önceki gibi) + h1 (isimler) ≥ `theme_check.first_screen.
+  names_min_px` (varsayılan 32) + o boyutta `pageChecks` (kart yazısı kâğıtta, taşma, kesik yazı, alanlar); `img/manifest.json
+  theme_check.first_screen.landscape: true` olan tema (01) 844×390 ve 667×375'te de aynı kurala ve zarf sayfası denetimine
+  (kapalı: zarf + ipucu ekranda, açık: "Replay" ekranda) tabi; `--stress` ile aynı boyutlarda §12 kaydı (isim tabanı +
+  `pageChecks`; ilk ekranı kaydırılabilir). Bayraksız temada yatay boyutlar yalnız `checks.json`'a yazılır. 03'te yatay hero
+  nav'ın altına uzanıyor (ölçüldü, `checks.json`; 03 yatay düzen kurmadı) — 03 değişmeden 93/93 geçiyor. **Eski 01 CSS/JS'ine karşı
+  denendi:** yeni akış QA'nın bulduğu her şeyi yakalıyor (22 hata: isimler 17,6 px, hap 379 > 315, kart yazısı kâğıt dışında,
+  "Tap to open"/"Replay" ekran dışında).
+- **Testler:** `tests/theme-olive-ivory.test.ts` yeni "qa 2026-10-14 (second round)" testi (kısa yatay ızgara, her `.hero-card`
+  genişliğinde 150 px tabanı, `.is-long`, `fitNames` adımları + 36 px = manifest, `fitCopy` + `ResizeObserver`, açık zarf yatay,
+  mühür ≥ 11 px, kicker kutusu, ışık katmanı).
+- **Boyut:** `site.css` 45 235 B (sınıra 845 B), `site.js` 35 437 B (403 B) — README'de tekrarlanan yorumlar kısaltıldı.
+- **Kontrast (kısa yatay, 844×390 ve 667×375, metin gizlenip zemin medyanı):** isimler 5,1, tarih/şehir 6,8–6,9, mekân 9,1, sayaç
+  rakamları 4,6–4,9 (26–27 px, büyük metin), etiketler 6,4–6,7, nav 5,2–7,2, zarf sayfası 5,1–7,1.
+
+**Bu turun sayıları:** `npm test` 294/294, typecheck temiz, `npm run build` + trace-check temiz; `theme-check --theme olive-ivory
+--stress` **106/106, 0 uyarı** (MP4 dahil; zarf → home 4202 ms; ilk kare ort. 197, 189, 162; lead-in 0,58 s kesildi);
+`theme-check --theme blush-garden-rose --stress --no-video` **93/93, 0 uyarı** (çıktı geçici klasöre, `previews/g038`
+dokunulmadı); `g051-browser --theme olive-ivory` 44/44; `final-smoke --theme olive-ivory` 42/42 (`previews/g401/final/`
+yenilendi). `previews/g401/` bu koşudan (yeni MP4 + yatay/kısa ekran görüntüleri).
+
+**Denenmedi / sınırlar:** gerçek iPhone/Safari ve Android Chrome (Safari'nin yatay araç çubukları, `svh`, `mask`,
+`ResizeObserver` gerçek cihazda görülmedi; yalnız Chromium emülasyonu); `venue.city/region` şemada sınırsız — çok uzun yer adı
+kartta gösterilmez (`fitCopy`, hero'da tam); docs/11 §13.3 ve `platform/README.md`'ye yeni `first_screen` bayrağı ve yatay
+akış yazılmadı (entegratörün alanı); 03 için yatay düzen ayrı görev olmalı (öneri).
 
 ### qa-kontrol 2026-10-14: KOŞULLU GEÇTİ → düzeltildi (2026-10-14)
 QA raporunun 3 MUST FIX'i ve 7 küçük maddesi `next start` + Chromium'da gerçek ekran görüntüleriyle (360×640, 375×553, 375×667,
@@ -54,8 +112,10 @@ yeniden ölçüldü. Görsel çizilmedi, yeni GPT parçası istenmedi: kırpım,
   boşlukla (nav'ın yumuşak üstü 19 + 8) biter; boyutlar svh terimleriyle okunur tabanlara iner (hero kartı ≥ 150 px, isimler ≥ 40 px,
   sayaç ≥ 26 px); 9:16 ve daha basık telefonda (≤ 640 px) sıkı düzen ve `decor_br` W1.2'deki gibi hapın **yanında** (hap–yaprak
   ≥ 16 px; ölçüm 20–37 px); geniş ekranda kart 34svh, isimler 10,4svh ile sınırlı. `site.js` `fitNames`: hero'da ilk ekran nav'ın
-  8 px üstünde bitene kadar önce isimler (en çok %24), yetmezse `.is-tight` (mekân 16 px, sayaç 22 px), sonra yine isimler. Sonra
-  (demo kaydı, 14 boyut): nav'a boşluk 10–176 px — 375×553 hap 468 / nav 478, 360×640 536/565, 1024×768 674/693, 1280×800 698/725;
+  8 px üstünde bitene kadar önce isimler (en çok %24), yetmezse `.is-tight` (mekân 16 px, sayaç 22 px), sonra yine isimler
+  *(ikinci tur düzeltmesi: bu son adım isimleri 0,4 ölçeğine — 17,6 px'e — kadar indiriyordu ve burada yazılmamıştı; yatay
+  telefonda isimler gövde yazısı boyuna iniyordu. Taban kalktı, isimler ≥ 36 px: yukarıda "ikinci tur")*. Sonra
+  (demo kaydı, 14 boyut — dikey telefon, tablet, masaüstü; **yatay telefon ölçülmemişti**): nav'a boşluk 10–176 px — 375×553 hap 468 / nav 478, 360×640 536/565, 1024×768 674/693, 1280×800 698/725;
   §12 stres kaydı (40+40 karakter isim, 80 karakter mekân) 375×553'te 10 px, 360×640'ta 19 px, 390×844'te 26 px boşlukla nav'ın
   üstünde. **Eski "home ilk ekranı nav'ın üstünde biter" iddiası kısa telefonlarda yanlıştı** (ikinci tur maddesinde işaretlendi).
 - **3 Geniş ekranda düz çizgiyle kesilen kümeler (doğrulandı → düzeltildi):** home hero `decor_br`'si landscape'te `bottom: −6 %` ile
@@ -284,3 +344,4 @@ hâlleri, `stress_*`, `rsvp_390_reply_sent.png`, `compare_<sayfa>_390.jpg` (W1 c
 - 2026-10-13 bitti, incelemeye gönderildi
 - 2026-10-13 son denetim (wf-tema01, origin/main c637fcc temiz worktree): npm test 292/292, typecheck, build+trace-check, seed; theme-check --stress olive-ivory 86/86 ve blush-garden-rose 86/86 (MP4 dahil); g051 44/44 + final-smoke 42/42 iki temada; tools/tests 7/7; kit_check 01 p5 23/23 p2 5/5, 03 p4 21/21 p2 5/5; validate_content 20/20; katalog --dene temiz (docs/09 01 satırı eşitlendi); previews/g401 güncel kodla aynı. qa-kontrol incelemesi hâlâ yapılmadı.
 - 2026-10-14 qa-kontrol KOŞULLU GEÇTİ → düzeltildi: mekân yer tutucusu temiz kırpım (+ min_lum denetimi), kısa telefonda (360×640, 375×553) ve 1024×768'de home ilk ekranı nav'ın üstünde (eski iddia düzeltildi), kümeler düz çizgiyle kesilmiyor (hero/sayfa sonu maskesi, RSVP geniş köşeleri), ≥ 11 px yazı, dokunma vurgusu, yaprak/yasemin/isim zamanlaması, story kaydırma ipucu, MP4 beyaz ilk kare; theme-check yeni home kısa telefon akışı (01 ve 03 geçiyor); npm test 293/293, theme-check 01 88/88 + 03 87/87, g051 44/44, final-smoke 42/42
+- 2026-10-14 qa-kontrol ikinci tur KOŞULLU → düzeltildi: yatay telefonda home ilk ekranı (kısa yatay ızgara: kart isimlerin yanında; isimler ≥ 36 px, 0,4 tabanı kalktı; sıkı → sayaç hapın altına → kaydırma; kart her genişlikte ≥ 150 px; kart kopyası fitCopy), zarf sayfası yatayda (ipucu/Replay ekranda, açık zarf yanında düğmeler), README 'her boyutta' iddiası ölçülen kapsamla düzeltildi; theme-check home ilk ekran akışı: isim tabanı + pageChecks + first_screen.landscape (01: 844×390, 667×375) + --stress; npm test 294/294, theme-check 01 106/106 + 03 93/93, g051 44/44, final-smoke 42/42

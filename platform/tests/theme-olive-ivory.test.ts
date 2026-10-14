@@ -739,6 +739,51 @@ test('qa 2026-10-14: clean placeholders, first screen above the nav, uncut clust
   assert.ok(statSync(path.join(DIR, 'site.css')).size <= 45 * 1024, `site.css ${statSync(path.join(DIR, 'site.css')).size} B`);
 });
 
+test('qa 2026-10-14 (second round): short landscape layout, names ≥ 36 px, card copy fits its card, envelope on its side', () => {
+  const css = readFileSync(path.join(DIR, 'site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const rule = (sel: string) => [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].filter(([, s]) => s.trim() === sel).map(([, , b]) => b).join(';');
+  const js = readFileSync(path.join(DIR, 'site.js'), 'utf8');
+  // a phone on its side / a short window: the card beside the names (grid), the card as tall as the first screen allows
+  const land = /@media \(min-aspect-ratio: 1\/1\) and \(max-height: 620px\) \{([\s\S]*?)\n\}/.exec(css);
+  assert.ok(land, 'short-landscape block');
+  assert.match(land![1], /\.hero-inner \{\s*display: grid; grid-template: 1fr repeat\(6, auto\) 1fr \/ auto minmax\(0, 460px\)/);
+  assert.match(land![1], /\.hero-card \{ grid-area: 1 \/ 1 \/ -1; align-self: start; width: clamp\(150px, \(100svh - var\(--nav-h\) - 48px\) \* \.695, 260px\); \}/);
+  for (const [sel, row] of [['.hero .names', 2], ['.hero-date', 3], ['.hero-venue', 4], ['.hero-city', 5], ['.countdown', 6], ['.hero-cta', 7]] as const) {
+    assert.match(land![1], new RegExp(`\\n  ${sel.replace(/\./g, '\\.')} \\{ grid-area: ${row} \\/ 2;`), `${sel} in row ${row} beside the card`);
+  }
+  assert.match(land![1], /\.is-opened \.env-page \{ --obj: min\(60vw, calc\(\(100svh - 30px\) \* \.7054\), 440px\); flex-direction: row;/, 'opened envelope beside Enter / Replay');
+  // the hero card never under 150 px at any width (its copy is ≥ 11 px); every width rule of it has the floor
+  const widths = [...rule('.hero-card').matchAll(/width: ([^;]+)/g)].map((m) => m[1]);
+  assert.ok(widths.length >= 3 && widths.every((w) => w.startsWith('clamp(150px')), widths.join(' | '));
+  // long record on a short screen: the countdown follows the pill (the pill stays in the first screen)
+  assert.match(css, /\.hero\.is-long \.countdown \{ order: 1; grid-row: 7;/);
+  assert.match(css, /\.hero\.is-long \.hero-card \{ grid-row: 1 \/ 7; \}/);
+  // site.js: hero names ≥ 36 px (= manifest theme_check.first_screen.names_min_px), steps, transform-free layout boxes
+  const floor = /\['\.hero \.names', 3\.2, 0\.3, (\d+)\]/.exec(js);
+  assert.ok(floor, 'hero names floor in fitNames');
+  assert.deepEqual(MANIFEST.theme_check.first_screen, { landscape: true, names_min_px: Number(floor![1]) });
+  assert.ok(Number(floor![1]) >= 36);
+  assert.match(js, /for \(const \[cls, navFloor\] of \[\[\[\], 0\.76\], \[\['is-tight'\], 0\], \[\['is-tight', 'is-long'\], 0\], \[\[\], 1\]\]\)/);
+  assert.match(js, /const bottom = \(el\) => \{ let y = el\.offsetHeight; for \(let e = el; e; e = e\.offsetParent\) y \+= e\.offsetTop; return y; \};/);
+  assert.doesNotMatch(js, /fit\(h1, maxLines, maxShare, 0\.4\)/, 'no 0.4 floor for the hero names');
+  // card copy: lines drop (place, script, …) instead of overflowing a small card; re-fitted when the card resizes
+  assert.match(js, /for \(const d of \['', 'c', 's', 'c d', 's c d'\]\) \{ c\.dataset\.drop = d; if \(fits\(c\)\) break; \}/);
+  assert.match(js, /new ResizeObserver\(fitCopy\)/);
+  assert.match(css, /\.card-copy\[data-drop~="s"\] \.script, \.card-copy\[data-drop~="d"\] \[data-field="date"\], \.card-copy\[data-drop~="c"\] \[data-field="venue\.city_region"\] \{ display: none; \}/);
+  for (const page of ['index', 'home'] as const) {
+    const { $ } = render(page);
+    const copy = $(page === 'index' ? '.env .card .card-copy' : '.hero-card .card-copy');
+    assert.equal(copy.find('.script').length, 1);
+    assert.equal(copy.find('[data-field="date"]').length, 1);
+    assert.equal(copy.find('[data-field="venue.city_region"]').length, 1);
+  }
+  // small things of the landscape pass: the seal monogram ≥ 11 px, the kicker box hugs its text (not the flowers), the
+  // morning-light layer no longer lengthens a short page
+  assert.match(rule('.seal-mono'), /font-size: max\(11px, 8\.8cqw\)/);
+  assert.match(rule('.env-head .kicker'), /width: fit-content; margin-inline: auto;/);
+  assert.match(rule('body::before'), /height: min\(100%, max\(100svh, 640px\)\)/);
+});
+
 // ---------------------------------------------------------------- envelope: build geometry, layers, closure, motion
 
 test('envelope (docs/11 §7.1/§7.3 kapak): layers from the build, the seal rides the flap in one wrapper, card path, opening sentence', () => {

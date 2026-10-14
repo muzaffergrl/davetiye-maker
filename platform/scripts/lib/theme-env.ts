@@ -28,6 +28,11 @@
 //                > light_above) ≤ dark_max. Calibrated on 03's light wash (plain ≤ 1.3 / 0.03, florals ≥ 2.7 / 0.06); a
 //                dark design (06, 19) sets e.g. dark_below 0 + light_above 110 from its own measurements, which
 //                theme-check writes to checks.json (info.envelope_backdrop).
+//   "first_screen": { "landscape": false, "names_min_px": 32 }  home's first screen (flow "home first screen"): at
+//                360×640 / 375×553 every theme must end above the nav; "landscape": true adds 844×390 and 667×375 (a
+//                phone on its side) to that rule and the envelope checks (a theme with a short-landscape layout, e.g.
+//                01); without it they are measured and reported in checks.json only. The hero's h1 (names) is never
+//                smaller than names_min_px there, with the demo and the --stress record (qa-kontrol 2026-10-14, G401).
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
@@ -58,6 +63,7 @@ export interface CheckProfile {
   particles: string;
   envelopeText: { closed: string; opened: string };
   backdrop: { edge_max: number; dark_max: number; dark_below: number; light_above: number };
+  firstScreen: { landscape: boolean; names_min_px: number };
   /** Where the table came from. */
   source: 'img/manifest.json theme_check' | 'defaults';
 }
@@ -206,6 +212,7 @@ const DEFAULT_PROFILE = {
   particles: '.petal-layer, .accent-layer',
   envelopeText: { closed: 'h1, p', opened: '.replay' },
   backdrop: { edge_max: 2.2, dark_max: 0.05, dark_below: 170, light_above: 256 },
+  firstScreen: { landscape: false, names_min_px: 32 },
 };
 
 function profileFor(images: Record<string, any> | null, notes: string[]): CheckProfile {
@@ -226,6 +233,7 @@ function profileFor(images: Record<string, any> | null, notes: string[]): CheckP
     particles: typeof t?.particles === 'string' ? t.particles : DEFAULT_PROFILE.particles,
     envelopeText: { ...DEFAULT_PROFILE.envelopeText, ...(t?.envelope_text ?? {}) },
     backdrop: { ...DEFAULT_PROFILE.backdrop, ...(t?.backdrop ?? {}) },
+    firstScreen: { ...DEFAULT_PROFILE.firstScreen, ...(t?.first_screen ?? {}) },
     source: t ? 'img/manifest.json theme_check' : 'defaults',
   };
 }

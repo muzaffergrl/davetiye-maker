@@ -47,7 +47,10 @@
 //   opened) sit on the plain painted ground, not on painted decor (measured on the backdrop with the text hidden);
 //   no horizontal scroll closed or opened; the closed envelope (.stage) and its "Tap to open" hint on screen.
 //   Home at 360×640 / 375×553 (every theme, qa-kontrol 2026-10-14): the first scene's texts, links / buttons (the primary
-//   CTA), photo slots and card end above the site nav and none lies under it (decor may pass under the nav's ground).
+//   CTA), photo slots and card end above the site nav and none lies under it (decor may pass under the nav's ground); its
+//   h1 (names) ≥ theme_check.first_screen.names_min_px (default 32) and pageChecks at that size. A theme with
+//   first_screen.landscape (01) is held to the same at 844×390 / 667×375, and its envelope page there too (closed: envelope
+//   + hint on screen; opened: "Replay" on screen). --stress: names minimum + pageChecks with the §12 record (it may scroll).
 // Recording: the blank lead-in before the first paint is cut; a white first frame is an error.
 // Output: <out>/<page>_390.png (+ index/home at every width, details_1280), *_placeholder.png,
 //   details_390_changed_content.png, compare_<page>_390.jpg, opening_390x844.mp4, checks.json.
@@ -254,7 +257,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   }
 
   /** docs/11 §13.3: horizontal scroll, the closed envelope (.stage) and its "Tap to open" hint on screen. */
-  const envelopeFit = (page) => page.evaluate(() => {
+  const envelopeFit = (page) => page.evaluate((REPLAY) => {
     const vis = (el) => { const cs = getComputedStyle(el); const b = el.getBoundingClientRect(); return b.width > 0 && cs.display !== 'none' && cs.visibility !== 'hidden' ? b : null; };
     const stage = document.querySelector('.stage');
     const sb = stage && vis(stage);
@@ -263,8 +266,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     // effective opacity (a running CSS animation can keep a hint visible that the opened state means to hide)
     const alpha = (el) => { let a = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) a *= Number(getComputedStyle(n).opacity); return a; };
     return { hscroll: document.documentElement.scrollWidth - innerWidth, stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
-      hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null, hintShown: Boolean(hint && alpha(hint) > 0.05) };
-  });
+      hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null, hintShown: Boolean(hint && alpha(hint) > 0.05),
+      replay: [...document.querySelectorAll(REPLAY)].map(vis).filter(Boolean).every((b) => b.top >= 0 && b.bottom <= innerHeight + 1) };
+  }, PROFILE.envelopeText.opened);
 
   async function pageChecks(page, tag, content, photoMode) {
     await markCards(page, PROFILE);
@@ -551,9 +555,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       const { edge_max: EDGE, dark_max: DARK } = PROFILE.backdrop;
       const busy = backdropBusy;
       const measured = [];
-      for (const [w, h] of [[360, 640], [375, 553], [390, 690], [390, 844]]) {
+      for (const [w, h] of [[360, 640], [375, 553], [390, 690], [390, 844], ...(PROFILE.firstScreen.landscape ? [[844, 390], [667, 375]] : [])]) {
         for (const state of ['closed', 'opened']) {
-          const ctx = await mk(w, h);
+          const ctx = await mk(w, h, w > h ? { isMobile: true, hasTouch: true } : {});
           const page = await ctx.newPage();
           if (state === 'opened') await page.addInitScript((slug) => sessionStorage.setItem('invite:opened:' + slug, '1'), nophoto.slug);
           await page.goto(url(nophoto.slug, 'index'), { waitUntil: 'load' });
@@ -568,6 +572,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
           if (state === 'closed' && fit.hint === false) err(`envelope closed @${w}×${h}: "Tap to open" is below the screen`);
           if (state === 'closed' && fit.hint === null && once('hint')) warn('envelope: no visible "Tap to open" / "Click to open" hint found on the index page');
           if (state === 'opened' && fit.hintShown) err(`envelope opened @${w}×${h}: "Tap to open" still shows under the opened envelope (next to "Enter")`);
+          if (state === 'opened' && w > h && fit.replay === false) err(`envelope opened @${w}×${h}: "Replay" (${PROFILE.envelopeText.opened}) is below the screen`);
           const all = await busy(page, sel);
           measured.push({ at: `${w}x${h}`, state, boxes: all.map((x) => ({ ...x, edge: +x.edge.toFixed(2), dark: +x.dark.toFixed(3) })) });
           // calibrated on 03: plain wash edge ≤ 1.3 / dark ≤ 0.03; over florals edge ≥ 2.7 or dark ≥ 0.06 (before the fix)
@@ -581,17 +586,31 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       results.info.envelope_backdrop = measured;
     });
 
-    // ---------------------------------------------------------------- short phones: the home first screen ends above the nav
-    // (qa-kontrol 2026-10-14, G401) At 360×640 and 375×553 every piece of the home hero — the first [data-scene]: its
-    // texts, links / buttons (the primary CTA), photo slots and the card — must end above the site nav and none may lie
-    // under it (a bottom nav: bottom ≤ its top; any other nav: no overlap). Decor (aria-hidden layers, alt="" images
-    // outside a photo slot) may pass under the nav's ground. Measured after the sequential entrance, scrolled to the top.
-    await flow('home first screen (short phones)', async () => {
+    // ---------------------------------------------------------------- the home first screen ends above the nav
+    // (qa-kontrol 2026-10-14, G401) At 360×640 and 375×553 — plus 844×390 and 667×375 (a phone on its side) when the
+    // theme sets theme_check.first_screen.landscape — every piece of the home hero — the first [data-scene]: its texts,
+    // links / buttons (the primary CTA), photo slots and the card — must end above the site nav and none may lie under it
+    // (a bottom nav: bottom ≤ its top; any other nav: no overlap). Decor (aria-hidden layers, alt="" images outside a
+    // photo slot) may pass under the nav's ground. The hero's h1 (names) is ≥ first_screen.names_min_px — never squeezed
+    // to fit — and the card text stays on its paper at these sizes too (pageChecks: free_zone, overflow, cut-off text).
+    // --stress: the same sizes with the §12 record (names minimum + pageChecks); its first screen may scroll. Measured
+    // after the sequential entrance, scrolled to the top. Landscape sizes of a theme without the flag: checks.json only.
+    await flow('home first screen', async () => {
+      const FS = PROFILE.firstScreen;
+      const records = [{ label: '', slug: demo.slug, content: demoContent() }];
+      if (args.stress) {
+        const file = path.join(dataDir, 'stress-first.json');
+        fs.writeFileSync(file, JSON.stringify(lib.stressRecord(DEMO_CONTENT)));
+        const st = seed(['--slug', 'stress-first'], file);
+        records.push({ label: ' (stress record)', slug: st.slug, content: readSite(st.siteId).publishedContent, stress: true });
+      }
       const measured = [];
-      for (const [w, h] of [[360, 640], [375, 553]]) {
-        const ctx = await mk(w, h);
+      for (const rec of records) for (const [w, h] of [[360, 640], [375, 553], [844, 390], [667, 375]]) {
+        const land = w > h, required = !land || FS.landscape;
+        const ctx = await mk(w, h, land ? { isMobile: true, hasTouch: true } : {});
         const page = await ctx.newPage();
-        await page.goto(url(demo.slug, 'home'), { waitUntil: 'load' });
+        const problems = watch(page);
+        await page.goto(url(rec.slug, 'home'), { waitUntil: 'load' });
         await page.evaluate(() => document.fonts.ready);
         await page.waitForTimeout(5200);
         const r = await page.evaluate(() => {
@@ -626,15 +645,30 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
           }
           const cta = items.find((el) => el.matches('a.btn, button.btn, a[href$="/rsvp"]'));
           const cb = cta && cta.getBoundingClientRect();
+          const h1 = scene.querySelector('h1');
           return { scene: scene.getAttribute('data-scene'), navTop: Math.round(n.top), bottomNav, items: items.length, lowest: Math.round(lowest),
-            cta: cta ? { text: cta.textContent.trim().slice(0, 20), bottom: Math.round(cb.bottom) } : null, bad };
+            cta: cta ? { text: cta.textContent.trim().slice(0, 20), bottom: Math.round(cb.bottom) } : null, bad,
+            names: h1 ? +parseFloat(getComputedStyle(h1).fontSize).toFixed(1) : null };
         });
-        measured.push({ at: `${w}x${h}`, ...r });
-        if (r.missing) err(`home @${w}×${h}: no ${r.missing} (docs/11 §3.1, §8)`);
-        else if (r.bad.length) err(`home @${w}×${h}: the first screen (${r.scene}) runs under the nav (top ${r.navTop}): ${r.bad.slice(0, 6).join('; ')}${r.cta ? ` — CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ''}`);
-        else ok(`home @${w}×${h}: ${r.scene} (${r.items} pieces${r.cta ? `, CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ', no CTA in the hero'}) ends at ${r.lowest}, above the nav (top ${r.navTop})`);
+        measured.push({ at: `${w}x${h}`, record: rec.stress ? 'stress' : 'demo', required, ...r });
+        const at = `home @${w}×${h}${rec.label}`;
+        if (required) {
+          if (r.missing) err(`${at}: no ${r.missing} (docs/11 §3.1, §8)`);
+          else {
+            const names = r.names === null ? 'no h1' : `names ${r.names} px`;
+            if (r.names !== null && r.names < FS.names_min_px - 0.05) err(`${at}: the names (h1) are ${r.names} px < ${FS.names_min_px} px — a long record scrolls, it is not squeezed (theme_check.first_screen.names_min_px)`);
+            if (rec.stress) ok(`${at}: ${names} (≥ ${FS.names_min_px}); the first screen ${r.bad.length ? `scrolls (allowed for the §12 record${r.cta ? `; CTA "${r.cta.text}" bottom ${r.cta.bottom}, nav top ${r.navTop}` : ''})` : `ends at ${r.lowest}, above the nav (top ${r.navTop})`}`);
+            else if (r.bad.length) err(`${at}: the first screen (${r.scene}) runs under the nav (top ${r.navTop}): ${r.bad.slice(0, 6).join('; ')}${r.cta ? ` — CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ''}`);
+            else ok(`${at}: ${r.scene} (${r.items} pieces${r.cta ? `, CTA "${r.cta.text}" bottom ${r.cta.bottom}` : ', no CTA in the hero'}, ${names}) ends at ${r.lowest}, above the nav (top ${r.navTop})`);
+            await eager(page);
+            await pageChecks(page, at.replace('home @', 'home@'), rec.content, 'user');
+            problems.forEach((x) => err(`${at}: ${x}`));
+            if (land || w === 375) await page.screenshot({ path: path.join(OUT, `${rec.stress ? 'stress_' : ''}home_${w}x${h}.png`) });
+          }
+        }
         await ctx.close();
       }
+      if (!FS.landscape) results.info.home_first_screen_landscape = 'not required (img/manifest.json theme_check.first_screen.landscape unset): measured only';
       results.info.home_first_screen = measured;
     });
 

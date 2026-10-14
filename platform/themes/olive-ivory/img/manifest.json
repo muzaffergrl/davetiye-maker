@@ -2520,6 +2520,10 @@
   }
  },
  "theme_check": {
-  "particles": ".accent-layer"
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": true,
+   "names_min_px": 36
+  }
  }
 }

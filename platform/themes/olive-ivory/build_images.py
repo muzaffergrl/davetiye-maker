@@ -643,8 +643,9 @@ def main():
                           "windows_transparent": {k: [f.get("window_visible_px") for f in manifest[p]["files"]]
                                                   for k, p in (("card", "card_small"), ("portrait", "frame_portrait"),
                                                                ("landscape", "frame_landscape"))}}
-    # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik bulunur; parçacık katmanı adı
-    manifest["theme_check"] = {"particles": ".accent-layer"}
+    # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik bulunur; parçacık katmanı adı; ilk ekran
+    # yatay telefonda da (844×390, 667×375) nav'ın üstünde biter, hero isimleri ≥ 36 px (qa 2026-10-14, ikinci tur)
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": True, "names_min_px": 36}}
     tb.manifest_yaz(out, manifest)
 
     if oniz:

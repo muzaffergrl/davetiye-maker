@@ -1,16 +1,7 @@
-/* site.js — shared behaviour of every page of the Olive & Ivory theme (design 01, platform theme, G401).
- * The platform writes every personal value into the HTML (engine markers, platform/README.md) and injects
- * <script type="application/json" id="site-data"> = {slug, theme, variant, page, preview, pages, derived} (no content
- * record): with it this file never writes personal text, it only reads the countdown target, the page map and the slug
- * (per-site session keys). DEV_CONTENT + devRender() fill the same markers only without the platform (static preview).
- * Motion (docs/11 §7.3, §8), catalogue sentence for design 01: "On tap, the lace-edged flap peels up on its hinge
- * carrying the oval seal and its tucked olive sprig with it, and the ivory card glides up out of the pocket while two olive
- * leaves float across the screen." → the seal gives as it lets go, flap + seal turn together on the hinge (one
- * .env-cflap-wrap), the open flap takes over and lies back, the card glides up while two olive leaves (accent_1 × 2)
- * cross left → right, it comes forward and flies to home as the hero card (view transition). Story: the three cards fan
- * out like a hand (preset "fan"); phones: a swipeable fan (initFan). Accents: open 2 leaves · arrive 3 jasmine (never over
- * the hero photo) · RSVP closing 2 blossoms + 1 leaf. Hooks: [data-scene] enters in view (MOTION.scenes), [data-step]
- * its delay, [data-a] preset (site.css), [data-i] extra stagger.
+/* site.js — Olive & Ivory (design 01, G401): motion, envelope, long-name fit, countdown, story fan, dev preview. The platform
+ * writes every personal value into the HTML and injects #site-data (slug, pages, derived; no content record); DEV_CONTENT
+ * + devRender() fill the same markers only without the platform. Choreography and reasons: README.md. Hooks: [data-scene]
+ * (MOTION.scenes), [data-step] delay, [data-a] preset (site.css), [data-i] extra stagger.
  */
 const MOTION = {
   // sessionStorage keys (+ ":<slug>" on the platform) — the tiny inline <head> scripts use the same keys
@@ -63,9 +54,7 @@ const MOTION = {
   }
 };
 
-/* Card path (% of the card's height, manifest stage.card_path): out = its bottom corners clear the pocket edge by 4 %
-   (no corner pops over the pocket when it comes in front); front = it stays high, × 1.04 — the view transition carries
-   it on upward to the home hero card (no up–down–up). */
+/* Card path (% of the card's height, manifest stage.card_path): out clears the pocket edge, front stays high × 1.04 */
 const ENVELOPE_GEOMETRY = { out: 'translateY(-87.001%)', front: 'translateY(-84.001%) scale(1.04)' };
 
 /* DEV_CONTENT — only without the platform (no #site-data): = content.demo.json (fictional demo record) */
@@ -308,34 +297,52 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- long names (40 + 40 characters): --names-scale shrinks the line to ≤ 2 lines on the envelope page (3 in the hero)
-     and a modest share of the screen; in the hero also until the first screen (pill) ends 8 px above the nav. */
+  /* -- long names (--names-scale) and the hero's first screen above the nav; card copy that fits its card (README) */
   function fitNames() {
-    const targets = [['.env-head .names', 2.15, 0.22], ['.hero .names', 3.2, 0.3]]
-      .map(([sel, maxLines, maxShare]) => [document.querySelector(sel), maxLines, maxShare]).filter(([el]) => el);
+    const targets = [['.env-head .names', 2.15, 0.22, 0], ['.hero .names', 3.2, 0.3, 36]]
+      .map(([sel, ...a]) => [document.querySelector(sel), ...a]).filter(([el]) => el);
     if (!targets.length) return;
     const inner = document.querySelector('.hero-inner'), nav = document.querySelector('.site-nav');
-    const low = (h1) => inner && nav && h1.closest('.hero') && inner.getBoundingClientRect().bottom + scrollY > nav.getBoundingClientRect().top - 8;
-    const fit = (h1, maxLines, maxShare, floor) => {
-      let scale = 1;
+    // layout boxes: the entrance transforms do not count
+    const bottom = (el) => { let y = el.offsetHeight; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
+    const low = (h1) => {
+      const hero = h1.closest('.hero');
+      if (!hero || !inner || !nav) return false;
+      const long = hero.classList.contains('is-long');
+      return Math.max(...[...inner.children].filter((c) => !(long && c.matches('.countdown'))).map(bottom)) > nav.getBoundingClientRect().top - 8;
+    };
+    const fit = (h1, maxLines, maxShare, minPx, navFloor) => {
       h1.style.setProperty('--names-scale', '1');
-      for (let i = 0; i < 14 && scale > 0.4; i++) {
-        const h = h1.getBoundingClientRect().height;
-        const lines = h / (parseFloat(getComputedStyle(h1).fontSize) * 1.04);
-        if (lines <= maxLines && h <= window.innerHeight * maxShare && (scale <= floor || !low(h1))) break;
-        scale -= 0.06;
-        h1.style.setProperty('--names-scale', scale.toFixed(2));
+      const min = Math.min(1, Math.max(0.4, minPx / parseFloat(getComputedStyle(h1).fontSize)));
+      for (let s = 1; ; s = Math.max(min, s - 0.06)) {
+        h1.style.setProperty('--names-scale', s.toFixed(3));
+        const h = h1.getBoundingClientRect().height, lines = h / (parseFloat(getComputedStyle(h1).fontSize) * 1.04);
+        if (s <= min || (lines <= maxLines && h <= innerHeight * maxShare && (s <= navFloor || !low(h1)))) break;
       }
     };
-    // for the nav the names give at most a quarter; then the hero tightens (.is-tight: venue, countdown) and they go on
-    const run = () => targets.forEach(([h1, maxLines, maxShare]) => {
+    // card copy ≥ 11 px: all, no place, no script, script only, none
+    const fits = (c) => {
+      const k = [...c.children].filter((p) => p.offsetParent);
+      return !k.length || (Math.max(...k.map((p) => p.offsetTop + p.offsetHeight)) - Math.min(...k.map((p) => p.offsetTop)) <= c.clientHeight + 1
+        && k.every((p) => p.scrollWidth <= c.clientWidth + 1));
+    };
+    const fitCopy = () => document.querySelectorAll('.card-copy').forEach((c) => {
+      for (const d of ['', 'c', 's', 'c d', 's c d']) { c.dataset.drop = d; if (fits(c)) break; }
+    });
+    // hero: names ≤ 24 %; tight + names to 36 px; countdown after the pill; else it scrolls (never squeezed)
+    const run = () => fitCopy() || targets.forEach(([h1, maxLines, maxShare, minPx]) => {
       const hero = h1.closest('.hero');
-      if (hero) hero.classList.remove('is-tight');
-      fit(h1, maxLines, maxShare, 0.76);
-      if (low(h1)) { hero.classList.add('is-tight'); fit(h1, maxLines, maxShare, 0.4); }
+      if (!hero) return fit(h1, maxLines, maxShare, minPx, 0);
+      for (const [cls, navFloor] of [[[], 0.76], [['is-tight'], 0], [['is-tight', 'is-long'], 0], [[], 1]]) {
+        hero.classList.remove('is-tight', 'is-long');
+        hero.classList.add(...cls);
+        fit(h1, maxLines, maxShare, minPx, navFloor);
+        if (!low(h1)) break;
+      }
     });
     run();
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    if (window.ResizeObserver) { const ro = new ResizeObserver(fitCopy); document.querySelectorAll('.card-copy').forEach((c) => ro.observe(c)); }
     let rt;
     window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(run, 150); });
   }
@@ -463,8 +470,7 @@ const DEV_CONTENT = {
     });
   }
 
-  /* -- story fan on phones (scroll-snap): the middle card upright on top (is-active), the others tilt out; opens on the
-     middle card (W1.3). Wide screens: no state. */
+  /* -- story fan on phones (scroll-snap, W1.3): middle card upright on top (is-active), opens on it */
   function initFan() {
     const fan = document.querySelector('.fan');
     if (!fan) return;
@@ -535,8 +541,7 @@ const DEV_CONTENT = {
     }));
   }
 
-  /* == dev fallback (static server only, never on the platform): fills the markers like lib/theme/engine.ts, with
-   * textContent / attributes only. */
+  /* == dev fallback (static server only): fills the markers like lib/theme/engine.ts, textContent / attributes only */
   function devRender(content) {
     const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
       story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json

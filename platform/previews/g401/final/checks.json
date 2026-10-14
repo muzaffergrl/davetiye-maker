@@ -100,7 +100,7 @@
     {
       "name": "buyer: edit link shown",
       "ok": true,
-      "detail": "http://127.0.0.1:3321/edit/elena-and-marco?k=…"
+      "detail": "http://127.0.0.1:3316/edit/elena-and-marco?k=…"
     },
     {
       "name": "buyer: site not public before Publish",
@@ -160,7 +160,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/1f5120fd-bd9b-4e00-8390-fd331c2fefd6/e757f14cce18ac69fe1e84b2e7ca107f-1024w.jpg"
+      "detail": "/media/919de8d6-cbc5-47ea-b26c-d93345f793d8/64602d12d11f7f7405b278bb625c2310-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",

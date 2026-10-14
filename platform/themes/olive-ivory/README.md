@@ -19,7 +19,7 @@ adlar); bütün görseller bu tasarımın GPT parçaları (K21). 03 (blush-garde
 | `details.html` | W1.4: Order of the Day kartı (info_card, 3 dilim, program satırları + aralarında GPT dal), takvime ekle, mekân (GPT yatay çerçeve), dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
 | `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim) + kartın alt kenarına basılmış mühür (closure), platform yanıt formu (G042 + G051 soruları), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`fan` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri |
-| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim sığdırma, geri sayım, zarf, story yelpazesi (`initFan`), `DEV_CONTENT` + `devRender` |
+| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, uzun isim + home ilk ekranı (`fitNames`), kart kopyası (`fitCopy`), geri sayım, zarf, story yelpazesi (`initFan`), `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri |
 | `img/` | WebP katmanlar, `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` (servis edilmez) |
 
@@ -89,6 +89,30 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
 - **Parçacıklar:** açılış 2 zeytin yaprağı · home'a varış 3 yasemin çiçeği süzülür (hero fotoğrafının iki yanındaki şeritlerden,
   fotoğrafın/yüzlerin üstünden asla: `avoid`) · RSVP kapanışı 2 çiçek + 1 yaprak.
 
+## Home ilk ekranı (hero) ve yatay telefon (qa 2026-10-14, ikinci tur)
+- **Üç düzen:** uzun telefon (kart üstte, `decor_br` hapın altında) · 9:16 ve daha basık telefon (≤ 640 px genişlik, sıkı aralık,
+  `decor_br` hapın yanında) · **kısa yatay** (`min-aspect-ratio: 1/1` ve yükseklik ≤ 620 px: yan çevrilmiş telefon, kısa
+  pencere): ızgara, kart solda ilk ekran yüksekliğinde (150–260 px), isimler · tarih · mekân · şehir · sayaç · hap sağ sütunda
+  (en çok 460 px), nav 48 px, köşe kümeleri küçük, `decor_br` hapın sağında. W1'de yatay comp yok; bu düzen comp'un öğeleri ve
+  sırasıyla kurulur (sapma değil, ek düzen).
+- **`fitNames` adımları** (ilk ekran nav'ın 8 px üstünde bitene kadar; ölçüm `offsetTop` ile, giriş dönüşümleri sayılmaz):
+  (1) isimler en çok %24 küçülür, (2) `.is-tight` (mekân 16 px, sayaç 22 px) + isimler **36 px tabanına** kadar, (3) `.is-long`:
+  sayaç hapın altına geçer (hap ilk ekranda kalır), (4) yine sığmazsa hero **kaydırılır** — isimler rahat boylarında, ezilmez.
+  Eski 0,4 tabanı (isimler 17,6 px'e iniyordu) kalktı. Taban `img/manifest.json theme_check.first_screen.names_min_px` ile aynı.
+- **Kart ≥ 150 px her genişlikte** (eski `min(260px, 34svh × .695)` 768 px üstü yatay telefonda kartı 92–102 px'e indiriyordu).
+- **Kart kopyası (`fitCopy`):** yazı ≥ 11 px kalır; kopya kartın kâğıdına sığmazsa satır düşer: hepsi → yer (hero zaten
+  gösterir) → script → yalnız script → hiçbiri (`.card-copy[data-drop]`); kart boyu değişince (`ResizeObserver`, ör. Replay)
+  yeniden. Yatay zarf sayfasında kart 105–147 px: "We're getting married" + tarih; açık zarfta 844×390'da üç satır.
+- **Zarf sayfası yatayda:** isimler yüksekliğe göre (`min(14vw, 11svh)`, ≥ 36 px), zarf 42svh; "Tap to open" ekranda (844×390'da
+  357/390). Açık zarf (geri dönüş) zarf ekran boyunda, Enter + Replay yanında. Mühür monogramı ≥ 11 px.
+- **Ölçüm (kendi `next start` + Chromium, 24 boyut, demo kaydı):** 320×568 … 430×932 dikey, 568×320 · 667×375 · 740×360 · 844×390 ·
+  915×412 · 932×430 yatay, 768×1024, 1024×500/600/768, 1280×540/600/800, 1366×657, 1440×900, 1920×1080 — her boyutta hap ve
+  kart nav'ın üstünde, isimler ≥ 37,6 px (yalnız 568×320'de %6 küçülür; öteki boyutlarda hiç), kart ≥ 150 px, kart kopyası kâğıtta.
+  Örnekler (hap altı / nav üstü): 844×390 288/323, 667×375 278/308, 740×360 268/293, 375×553 468/478, 360×640 536/565.
+  Tasarım aralığı (14–16 harflik isimler, 57 karakter mekân, "September 30"): 375×553, 320×568, 568×320'de `.is-long`, ötekilerde
+  sığar. §12 stres kaydı: 375×553, 320×568, 667×375 ve 568×320'de hero kaydırılır; ölçülen öteki 20 boyutta hap ilk ekranda
+  (gerekirse sıkı / `.is-long`); isimler her boyutta ≥ 36 px.
+
 ## Comp öğe haritası (docs/11 §8)
 
 ### index ← W1.1 `web_1_envelope.png`
@@ -111,8 +135,8 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
 | "SATURDAY · JUNE 12, 2027" | `.hero-date` | |
 | mekân (italik), şehir (büyük harf) | `.hero-venue`, `.hero-city` | |
 | dört kutulu geri sayım | `.countdown` sade rakam + etiket | **sapma:** kutular CSS çerçeve olurdu (K21, §5.7) |
-| olive RSVP düğmesi | `.hero-cta .btn` | hap düğme (arayüz); uzun telefonda sağ alt küme hapın altında, 9:16 ve daha basık telefonda (360×640, 375×553, 375×667, 390×690) comp'taki gibi hapın yanında; hap ile yaprak uçları arası ≥ 16 px (ölçüldü: 20–37 px) |
-| köşe kümeleri | `decor_tl` / `decor_br` (hero `scene-bg`) | ilk ekranın içeriği (kart … hap) her boyutta nav'ın 8+ px üstünde biter (qa 2026-10-14 düzeltmesi: 360×640 ve 375×553'te hap nav'ın altındaydı; boyutlar svh ile okunur tabanlara iner, kısa telefonda sıkı düzen, uzun isim + mekânda `fitNames` → `.is-tight`). `decor_br`'nin altı kesilmez: son sıraları kâğıda incelir (maske), sağ kenarı ekran kenarı |
+| olive RSVP düğmesi | `.hero-cta .btn` | hap düğme (arayüz); uzun telefonda sağ alt küme hapın altında, 9:16 ve daha basık telefonda (360×640, 375×553, 375×667, 390×690) comp'taki gibi hapın yanında; hap ile yaprak uçları arası ≥ 16 px (ölçüldü: 20–37 px); kısa yatayda küme hapın sağında (667×375'te 28 px, 844×390'da 95 px; yalnız 568×320'de 12 px) |
+| köşe kümeleri | `decor_tl` / `decor_br` (hero `scene-bg`) | ilk ekranın içeriği (kart … hap) **demo kaydıyla ölçülen 24 boyutta** (dikey 320–430 px telefonlar, yatay 568×320–932×430, tablet, masaüstü 1024×500–1920×1080) nav'ın 8+ px üstünde biter; uzun kayıtta adımlar ve kaydırma: "Home ilk ekranı" bölümü. *(Önceki turun "her boyutta" iddiası yatay telefonlarda yanlıştı: 844×390'da hap 379 / nav 315, isimler 17,6 px — qa 2026-10-14 ikinci tur.)* `decor_br`'nin altı kesilmez: son sıraları kâğıda incelir (maske), sağ kenarı ekran kenarı |
 | alt gezinme | `.site-nav`: kâğıt üstünde bir yazı satırı + yazı genişliğinde 1 px altın çizgi, kenarsız yumuşak zemin | opak bant yok: boyalı köşeler altında düz çizgiyle kesilmez |
 | — (comp yok) | davet kartı (`invitation_card` 3 dilim) + tek "Kindly reply by" satırı, takvime ekle, "Pull up a chair" üçlüsü (story_1 çerçevesi −7° · günün kartı `info_card` ilk 4 satır · monogramlı mühür +7°; story yelpazesinin yankısı), "Until then" + isimler + "Open the envelope again" | bu tasarımın parçaları ve dili; 03'ün blok sırası/teaser metinleri kullanılmaz (G401 incelemesi) |
 
@@ -158,14 +182,21 @@ her yer tutucunun en koyu pikselini ölçer (`manifest.ph_*.min_lum`; < 175 → 
 - `story.items` 3'ten fazlaysa ilk 3 başlık; anların `text`'i gösterilmez (panel sormaz). Monogram (`initials`) mühürde gösterilir.
 - Link blokları yalnız linkleriyle; `rsvp.method` dolu → RSVP sayfası 404, ona giden her link kalkar.
 - `favicon.png` şeffaf; `apple-touch-icon` yazılmaz (docs/11 §3.1).
-- Kontrast (390 px, oluşan sayfada metnin arkasındaki piksellerin medyanı): görünen her metin ≥ 5,1:1 (G401 ilk ölçümü; inceleme
-  düzeltmelerinden sonra yeniden ölçülmedi). Mühürdeki monogram (zarf, home üçlüsü, RSVP) bilerek kabartma tonunda (`--seal-ink`
+- Kontrast (oluşan sayfada metnin arkasındaki piksellerin medyanı): G401 ilk ölçümünde (390 px) görünen her metin ≥ 5,1:1;
+  qa 2026-10-14: home hero + nav 5,2–9,4, el yazısı isimler 4,9–5,1 (büyük metin, ≥ 3 gerekir); kısa
+  yatay (844×390, 667×375; ikinci tur): isimler 5,1, tarih/şehir 6,8–6,9, mekân 9,1, sayaç rakamları 4,6–4,9 (26–27 px, büyük
+  metin), etiketler 6,4–6,7, nav 5,2–7,2, zarf sayfası 5,1–7,1. Mühürdeki monogram (zarf, home üçlüsü, RSVP) bilerek kabartma tonunda (`--seal-ink`
   #735E2E + basılı gölge; G401 incelemesinde koyulaştırıldı) ve yardımcı teknolojiden gizli; zarf
   içindeki küçük kart metni kapalıyken görünmez, yalnız açılışta bir an görünür ve gizlidir (`aria-hidden`).
 - Yazı tabanı (qa 2026-10-14): görünen her metin ≥ 11 px — kart kopyası (index kartı = home hero kartı; harf aralığı .12em, kopya
   alanı %7,5 iç boşluk), üçlüdeki saatler, RSVP kartındaki "We can't wait…", geri sayım etiketleri, "Read/Details/Reply". Hero
-  kartı bu yüzden en az 150 px (375×553'te 150 × 216). Android'de dokunma dikdörtgeni yok (`-webkit-tap-highlight-color`), odak
-  halkaları duruyor.
+  kartı bu yüzden **her genişlikte** en az 150 px (375×553'te 150 × 216); daha küçük kartta (yatay zarf sayfası) satır düşer
+  (`fitCopy`), yazı küçülmez. Mühür monogramı `max(11px, 8.8cqw)` (yatay zarfta mühür küçük). Android'de dokunma dikdörtgeni
+  yok (`-webkit-tap-highlight-color`), odak halkaları duruyor.
 - Köşe kümeleri hiçbir yerde düz çizgiyle kesilmez: hero ve sayfa sonlarında `decor_br`'nin alt sıraları kâğıda incelir (maske),
   geniş RSVP'de (≥ 960 px, 1040 px ızgara) iki köşe de ızgaranın değil sayfanın kenarında.
-- Denenmedi: gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
+- Uzun kayıt + kısa ekran (§12 stres kaydı 375×553, 320×568, 667×375, 568×320): hero ilk ekrana sığmaz, **kaydırılır** (isimler
+  ≥ 36 px); hap ya da sayaç nav'ın yumuşak zemininin altından geçer. `venue.city/region` şemada sınırsız: çok uzun yer adı kartta
+  gösterilmez (hero'da tam), `fitCopy`. 568×320'de (iPhone SE 1. kuşak yatay) hap–yaprak arası 11–12 px (ölçülen öteki yatay boyutlarda ≥ 19 px).
+- Denenmedi: gerçek iPhone/Safari ve Android Chrome (Safari'nin yatay araç çubukları, `svh`, `mask`, `ResizeObserver`), Vercel
+  yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
