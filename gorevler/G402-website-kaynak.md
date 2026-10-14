@@ -185,6 +185,7 @@ ve Android Chrome (`svh`, `mask`, `:has`, belgeler arası VT), yayın, yavaş a�
   story baskısı, davet seti (info_card), geniş ekran kâğıdı + bg_tile, eğrelti tonu, card-slot kırpması, `.dot`, `city_region`,
   boyut payı; ortak `scripts/theme-check.cjs` + `scripts/lib/theme-env.ts` (inceleme istedi): "Jonah" yaması, `theme_check.clusters`
   kesik küme ölçümü, kapalı zarf ölçümü `stage.closed_obj`'a göre. theme-check 116/0/0. qa-kontrol alt-ajanı yine koşturulamadı.
+- 2026-10-14 entegratör notu: G075 teşekkür modu main'de; bu temaya docs/11 §3.6 teşekkür hâli işaretleri eklenmeli (theme-check uyarı veriyor) — onaydan sonra G081'de toplu.
 - 2026-10-14 QA kapısı KOŞULLU (2 zorunlu): iç sayfa ilk ekran–nav kuralı (`foldAll`, story/details/rsvp + home davet satırı; RSVP
   kartı yüksekliğe göre, kısa masaüstü formu, yatay iç sayfa başı, masaüstü story/details) ve parçacıklar bölümün içinde yazının
   arkasında; 192 yükleme × (normal + önizleme) 0 ihlal, parçacık örtüşmesi 0; [KÜÇÜK]: varış çiçekleri, önizleme çubuğu, zarf

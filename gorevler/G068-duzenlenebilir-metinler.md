@@ -2,8 +2,8 @@
 id: G068
 baslik: Neredeyse her metin düzenlenebilir — tema başlık/etiketleri panelden değişsin (varsayılan + sıfırla)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G068
 oncelik: 1
 bagimli: [G060]
 yazar: [platform/lib/, platform/components/panel/, platform/app/api/, platform/themes/olive-ivory/, platform/themes/blush-garden-rose/, platform/tests/, docs/03_URUN_ICERIK_SEMASI.json, docs/11_TEMA_STANDARDI.md, platform/README.md, platform/previews/g068/]
@@ -44,3 +44,4 @@ gezinme etiketleri, düğme yazıları…). G059 bu yüzden ilan metnini "her ya
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği (neredeyse tüm alanlar düzenlenebilir); panel v2 düzeltme turu bitince başlar
+- 2026-10-14 alindi: claude-G068

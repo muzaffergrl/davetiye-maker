@@ -212,3 +212,4 @@ gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 - 2026-10-14 bitti, incelemeye gönderildi
 - 2026-10-14 inceleme düzeltmeleri (22 bulgu: 19 düzeltildi, 1 değişiklik gerekmez, qa-kontrol yapılamadı, content change G064'te çözülmüş); theme-check --stress 116/0/0, g051 44/44, final-smoke 45/45; durum inceleme, qa-kontrol kapısı açık
 - 2026-10-14 qa-kontrol: KOŞULLU (3 önemli must_fix: iç sayfalarda nav çizgisi yazıyı kesiyor, açılış çiçeği telefonlarda doğmuyor, masaüstü story ilk ekranı yarı boş) → üçü düzeltildi (fold birimleri + lift, çiçek şeridi, masaüstü üç pano sırası, RSVP masaüstü tek sütun); m1 126/126, çiçek 129/130 (+ düzeltilmiş betikle 20/20, zorlama 25/25), theme-check --stress 116 geçti / 0 hata / 1 uyarı (G075 teşekkür modu bu temada yok); g051 44/44, final-smoke 45/45, npm test 520/520; durum inceleme, qa-kontrol yeniden kontrolü bekliyor
+- 2026-10-14 entegratör notu: docs/11 §3.6 teşekkür hâli bu temada yok (G081'de toplu).

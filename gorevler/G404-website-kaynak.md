@@ -120,3 +120,4 @@ panelin onay adımı) ile yayınlasın; şu an her temada "content change" kırm
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: wf-tema04
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör notu: docs/11 §3.6 teşekkür hâli bu temada yok (G081'de toplu).

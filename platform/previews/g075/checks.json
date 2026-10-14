@@ -1,0 +1,261 @@
+{
+ "when": "2026-10-14T16:14:37.972Z",
+ "passed": 61,
+ "failed": 0,
+ "checks": [
+  {
+   "name": "olive-ivory: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "olive-ivory: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "olive-ivory: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "olive-ivory 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "blush-garden-rose: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "blush-garden-rose: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "blush-garden-rose 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "before: the invitation (the wedding is in 2027, mode automatic)",
+   "ok": true
+  },
+  {
+   "name": "Edit keeps six pages (K29: no 7th page)",
+   "ok": true,
+   "detail": "us,day,photos,story,details,rsvp"
+  },
+  {
+   "name": "Day & place ends with a folded \"After the wedding\" section that says \"Automatic\"",
+   "ok": true,
+   "detail": "After the wedding\nAutomatic"
+  },
+  {
+   "name": "it says when it switches by itself (\"From Sunday, May 16, 2027\")",
+   "ok": true,
+   "detail": "Thank-you mode Automatic From Sunday, May 16, 2027 On now Show the thank-you page now Off Keep the invitation"
+  },
+  {
+   "name": "a11y (axe-core): After the wedding (panel) has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "touch targets ≥ 44 px in the section",
+   "ok": true
+  },
+  {
+   "name": "status line: guests see the thank-you page now, replies closed",
+   "ok": true
+  },
+  {
+   "name": "the change counts like any other (\"Unpublished changes: 1\")",
+   "ok": true
+  },
+  {
+   "name": "Preview the thank-you page: the preview shows it (home, the message)",
+   "ok": true
+  },
+  {
+   "name": "the preview says what it shows",
+   "ok": true
+  },
+  {
+   "name": "Review names the page and the part: Day & place · After the wedding",
+   "ok": true,
+   "detail": "Day & place After the wedding"
+  },
+  {
+   "name": "Publish from Review: \"Your website is live\"",
+   "ok": true
+  },
+  {
+   "name": "after publishing, guests see the thank-you page",
+   "ok": true
+  },
+  {
+   "name": "Home: \"Your website switched to thank-you mode\"",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): Home with the thank-you card has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "\"Edit the thank-you page\" opens Day & place at After the wedding, unfolded",
+   "ok": true
+  },
+  {
+   "name": "Off + publish: the invitation is back",
+   "ok": true
+  },
+  {
+   "name": "Home: the card is gone",
+   "ok": true
+  },
+  {
+   "name": "panel: no page error",
+   "ok": true
+  },
+  {
+   "name": "automatic: the Home card after the wedding day",
+   "ok": true
+  },
+  {
+   "name": "automatic: the section says guests see the thank-you page",
+   "ok": true
+  }
+ ]
+}

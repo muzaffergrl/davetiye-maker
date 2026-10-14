@@ -54,6 +54,7 @@ platform/themes/<slug>/
   rsvp.html            /<slug>/rsvp    (<body data-if="!rsvp.method">)
   site.css             token'lar, hareket preset'leri, foto bileşeni, zarf katman yüzdeleri (manifest'ten)
   site.js              MOTION + zarf geometrisi + DEV_CONTENT; bütün sayfaların ortak davranışı
+  thank-you.css        teşekkür modu stilleri (G075, §3.6); yalnız düğünden sonra yüklenir
   build_images.py      GPT parçaları → img/ (servis edilmez)
   README.md            tema notu: dosyalar, foto alanları, zarf kesimi, comp'tan sapmalar, bilinen sınırlar
   img/                 <parça>-<genişlik>.webp, mask_<şekil>.png, og-1200x630.jpg, favicon.png, manifest.json
@@ -191,6 +192,33 @@ G051 (`main`'de; README → "Takvime ekle, SSS, RSVP özel soruları (G051)") ü
 
 Bu işaretlerden biri eksik tema alıcıya o özelliği **sessizce** vermez (panel bölümü hiç çıkmaz) — test (§13.2 #18–#20) ve
 `g051-browser --theme` (G052) bunu yakalar.
+
+### 3.6 Teşekkür modu (G075, K28) — yeni temalarda zorunlu
+Düğün günü bitince (sitenin saat diliminde ertesi gün 00:00; panelde Automatic / On now / Off) aynı link **teşekkür sayfası** olur.
+Kural platformda (`lib/content/thank-you.ts`); tema yalnız **mevcut sayfalarda** `data-if` ile iki hâli yazar — yeni sayfa yok, yeni görsel
+yok (K21: temanın kendi GPT parçaları). Türetilmiş alanlar (motor, içerik kaydında yok): `thank_you_on` (mod açık), `thank_you_title`
+(çiftin başlığı, boşsa "Thank you for celebrating with us"), `thank_you_hides_details` (mod açık + çift Details'i gizledi). İçerik:
+`thank_you.message` (≤ 400, `white-space: pre-line`), `thank_you.photo`. `data-if` artık **boşlukla ayrılmış birden çok koşul**
+alır, hepsi tutmalı: `data-if="dress_code !thank_you_on"`. Motor teşekkür modunda `<html data-thank-you>` yazar (CSS kancası).
+
+| Sayfa | Teşekkür hâli |
+|---|---|
+| **index** | Zarf ve açılış şovu aynen; kicker "You are invited" yerine bir teşekkür satırı (`data-if` çifti); kart: `data-field="thank_you_title"` + tarih (yer satırı yok). Kart penceresinde `img.ty-photo[data-field="thank_you.photo"]` (`data-if="thank_you_on thank_you.photo"`, aynı `sizes`); foto yoksa **temanın süsü** (`data-if="thank_you_on !thank_you.photo"`; ör. 01: kâğıt + mühür, 03: sis + kurdele) — asla `ph_*` yer tutucusu ya da "Your photo here". `hero_portrait` `img`'si ve `.ph-mark` `data-if="!thank_you_on"` |
+| **home** | Kart index ile aynı; isimler/tarih/mekân kalır; geri sayım, RSVP hapı, yanıt çağrısı, takvime ekle **gider** (`!thank_you_on`); davet kartının yerine aynı kâğıtta **teşekkür kartı** (başlık, mesaj, "With love," + isimler, tarih; 3 dilim kesimle uzar); tanıtımlarda Story kalır, The Day `!thank_you_hides_details`, RSVP gider |
+| **details** | `<body data-if="!thank_you_hides_details">` (çift gizlerse 404). Kalırsa "The Day": program, mekân, harita, registry; takvim, kıyafet, travel, SSS, RSVP linki `!thank_you_on`; tören cümlesi geçmiş zaman ("began") |
+| **rsvp** | Sayfa eski linkler için **açık kalır**: başlık "Replies are closed", `thank_you_title`, ana sayfaya düğme; form bölümü `data-if="!thank_you_on"` (platform da `403 closed`, `reason: thank_you`) |
+| **story** | Değişmez; Details'e giden link `!thank_you_hides_details` (gizliyse ana sayfaya) |
+| **nav** (her sayfa) | Details `<li data-if="!thank_you_hides_details">`, etiketi teşekkür modunda "The Day"; RSVP `<li data-if="!rsvp.method !thank_you_on">` |
+| **meta** | `description` / `og:description` `data-if` çiftiyle: teşekkür modunda `{thank_you_title} · …` ("You're invited" yok) |
+
+- **CSS:** teşekkür hâlinin stilleri ayrı `thank-you.css`'te, index/home/rsvp `<head>`'inde `<link rel="stylesheet" href="thank-you.css"
+  data-if="thank_you_on">` — yalnız düğünden sonra yüklenir, `site.css` bütçesi (§6) değişmez.
+- **site.js:** `devRender` çoklu koşulu okur (`d.if.split(/\s+/)`); tasarım önizlemesi davet hâlini gösterir.
+- **Panel:** "After the wedding" bölümü (Day & place sonunda) yalnız tema `thank_you_on` adını kullanıyorsa çıkar (`themeFieldUse`); teşekkür
+  fotoğrafı `hero_portrait` oranında kırpılır (aynı pencere). Önizleme `?thanks=1` (yalnız önizleme anahtarıyla).
+- **Denetim:** `lib/theme/thank-you-support.ts` işaret listesi; `scripts/theme-check.cjs` eksik temada **uyarı** yazar (hata değil: o tema düğünden
+  sonra da davet gösterir, platform yanıtları yine kapatır); `tests/g075-thank-you.test.ts` 01/03'ü tam sayar, diğerlerini `# WARN` ile listeler.
+  Örnek: `platform/themes/olive-ivory/`, `platform/themes/blush-garden-rose/`. 02, 04, 05 (G075 anında başka görevlerde) henüz yok.
 
 ---
 
@@ -835,6 +863,7 @@ sunucusu "Ready" demeden durur ve sebebini yazar — başka sunucuya karşı ko�
 - [ ] Kişisel her değer işaretli (§3.2, §4); comp demo metni şablonda yok; link blokları `data-if="urls.*"`
 - [ ] Davet kartında tam ad yedeği (`full_name` boşsa `display_name`); `guest_policy` yok
 - [ ] G051: takvim çifti home + details, SSS bloğu details, çiftin soruları rsvp formunda (§3.5); SSS işareti erişilebilir ada girmiyor
+- [ ] G075 teşekkür modu (§3.6): index/home/details/rsvp/nav işaretleri, foto yoksa temanın süsü, `thank-you.css`; theme-check uyarısız
 - [ ] RSVP sayfası G042 sözleşmesinde; story `data-optional="our_story"`, rsvp `data-if="!rsvp.method"`; nav kuralları
 - [ ] `build_images.py` (`tools/tema_build.py` ile): geçici `parts_prep`, tip kesimleri (geometrik yedek uyarısı varsa önizleme +
       Sonuç), maskeler, `free_zone`, yer tutucular, `og-1200x630.jpg` + `favicon.png`, klasör ≤ 3 MB; pencere şeffaflığı ve yeşil

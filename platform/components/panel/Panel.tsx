@@ -361,7 +361,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   // On wide screens the preview sits next to the editor: it follows the open page (or section) (G060-fix).
   const openPage = route.view === 'section' ? route.page : null;
   const openFocus = route.view === 'section' ? route.focus : null;
-  // The thank-you preview lasts until the editor moves to another page (or the phone preview closes).
+  // The thank-you preview lasts until the editor moves to another page or the preview is opened for something else.
   useEffect(() => setPreviewThanks(false), [openPage, route.view]);
   useEffect(() => {
     if (!wide || !openPage) return;
@@ -547,10 +547,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       page={previewPage}
       thanks={previewThanks}
       onThanksOff={() => setPreviewThanks(false)}
-      onClose={() => {
-        setPreviewOpen(false);
-        setPreviewThanks(false);
-      }}
+      // the frame is left as it is while closed (changing it during the close would leave the preview's history entry)
+      onClose={() => setPreviewOpen(false)}
     />
   );
 
@@ -783,16 +781,15 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
           <ThankYouFields
             slot={theme.thankYou?.photo ?? null}
             defaultOpen={openFocus === 'thankyou'}
-            onPreview={() => {
-              setPreviewThanks(true);
-              openPreview('home');
-            }}
+            onPreview={() => openPreview('home', true)}
           />
         );
     }
   };
 
-  const openPreview = (page?: string | null) => {
+  /** Opens the preview at `page`; `thanks` = the thank-you version (G075), else the website as it is now. */
+  const openPreview = (page?: string | null, thanks = false) => {
+    setPreviewThanks(thanks);
     setPreviewPage(page && visiblePages.includes(page) ? page : null);
     setPreviewOpen(true);
   };
