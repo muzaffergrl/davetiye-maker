@@ -27,7 +27,7 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/12_Tropical_Destination --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [x] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
 - [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
@@ -45,6 +45,11 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - Yeşil pencere istisnası: card_small, frame_portrait ve frame_landscape için üçer yeşil denemesi yapıldı; tam düz saf #00FF00 elde edilemedi. Kullanıcının sınırına göre en temizleri seçildi: card_small ilk, portrait üçüncü, landscape ilk çıktı. Landscape'te bunun ardından yalnız oranı düzeltmek için gövde/pencere genişliği kısaltıldı; yeni yeşil denemesi yapılmadı. Nihai yeşil alanlarda küçük renk farkları, özellikle landscape'te gradyan kalıyor; otomatik pencere-varlığı kontrolü tam renk doğruluğu anlamına gelmez. Nihai pencere genişlik/yükseklik oranları portrait 0,762 (yaklaşık 3:4), landscape 1,625 (3:2 hedefine yakın; tam 1,5 değil).
 - Son kontrol: `kit_check --paket 5` mevcut 16 dosyanın tamamını ve zarf hizasını geçirdi (17/23); kalan altı W2 parçası bu oturum kapsamı dışında. `--paket 2` 0/5; fotoğraflar üretilmedi. Durum `alindi` bırakıldı.
 
+- Kısım 3 (gpt-gorsel-D, 6/6): yalnız `assets/gpt/parts/florals_br.png`, `accent_1.png`, `accent_2.png`, `accent_3.png`, `divider.png`, `web_hero.png` sırayla üretildi. Repodaki beş W1 comp'u, envelope_closed, closure ve florals_tl sohbete referans yüklendi; üretimlerde ilgili W1 ve hazır parçalar referans kullanıldı. Mevcut görseller yeniden üretilmedi veya değiştirilmedi.
+- florals_br ve üç accent aracın doğal kare çıktısı 1254×1254 gerçek RGBA alfa PNG; divider 1536×1024 gerçek RGBA alfa PNG; web_hero 1536×1024 opak RGB PNG. Oranlar kit_check standardından geçti. florals_br, florals_tl ile aynı hibiskus/plumeria, monstera/palmiye ve canlı suluboya tekniğinde; accent'ler tek nesne, divider tek yatay küme. Yazısız yüzler, sol üst ışık ve gölgesiz dış alanlar görsel olarak kontrol edildi.
+- Yeniden üretim: accent_3 ilk çıktıda fazla büyüktü, bir kez küçültüldü. Divider'ın ham önizlemesindeki hâle için bir ek deneme yapıldı; gerçek alfa kontrolü ilk çıktının dış alanının şeffaf olduğunu gösterdiği için uygun boyutlu ilk çıktı seçildi. web_hero ilk çıktıda alt kırpım payı yetersiz ve zemine düşen gölge vardı; bir kez düzeltilip cüzdan küçültüldü ve dış gölge kaldırıldı. Nihai 1200×630 merkez kırpımında cüzdan ve kapanış tam; altta yaklaşık %6,47 boşluk var, üst %20 yalnız zemin/dekor. Kırpım yalnız bellekte kontrol edildi; ek rapor/önizleme dosyası üretilmedi.
+- Son kontrol: `python3 tools/kit_check.py collections/12_Tropical_Destination --paket 5` çıkış kodu 0, **23/23 GEÇTİ** (22 görsel + mevcut zarf hizası). Önceki kısımdaki yeşil pencere renk/oran istisnaları korundu; bu kontrol onların tam #00FF00 olduğunu garanti etmez. PAKET 2 fotoğrafları bu oturumda üretilmedi; durum `alindi` bırakıldı.
+
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
@@ -59,3 +64,4 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-D (kısım 3)
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 3, 3/6); florals_br, accent_1, accent_2 kaydedildi. Üç parça gerçek alfa ve oran kontrolünden geçti; florals_br, mevcut florals_tl ile aynı çiçekler ve suluboya tekniğinde üretildi. Mevcut dosyalar korundu; durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 3, 6/6); accent_3, divider, web_hero kaydedildi. Üç parça oran ve gereken alfa/opaklık kontrolünden geçti. web_hero'nun 1200×630 merkez kırpımında cüzdan ve kapanış tam, alt boşluk yaklaşık %6,47. Ek rapor/önizleme dosyası üretilmedi; durum alindi.
+- 2026-10-14 kısım 3 bitti; kalan: PAKET 2 fotoğrafları
