@@ -36,3 +36,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
 - 2026-10-14 alindi: gpt-gorsel-B
+- 2026-10-14 ara kayıt: gpt-gorsel-B; 3.1–3.2 kaydedildi. Kapak `_v2` seçildi; ilk denemede telefon yukarıdaydı, başlık boşluğu genişletildi. İki hazır sahne kit_check denetiminden geçti; kalan üç sahne henüz üretilmedi.
