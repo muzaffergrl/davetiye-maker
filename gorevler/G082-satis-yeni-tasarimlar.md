@@ -2,7 +2,7 @@
 id: G082
 baslik: Onaylanan yeni tasarımları satış sitesine ekle (05 Mediterranean Lemon; 02/04 onaylanınca) — tasarım sayfası, metin, gerçek ekranlar
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G082
 oncelik: 2
 bagimli: [G405, G080]
@@ -116,3 +116,5 @@ Sonuçları:
 - 2026-10-14 alindi: claude-G082
 - 2026-10-14 claude-G082: 05 live (config + metin), marketing-assets --designs <id> --shots ile yalnız 05'in ekranları/klibi (01/03 bayt bayt aynı), breadcrumb CLS düzeltmesi, testler; npm test 538/538, marketing-browser 312/312, g080-browser 97/97
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 entegratör onayladı
+- 2026-10-14 entegratör: onaylandı. Sonraki tasarım eklenirken: /designs telefonda 2 sütun → tek kalan kart (3, 5 tasarımda) için düzen; ana sayfa tasarım düğmeleri 390'da iki satır; docs/14 §14.1 ve README'ye 05 + marketing-assets yeni seçenekleri.
