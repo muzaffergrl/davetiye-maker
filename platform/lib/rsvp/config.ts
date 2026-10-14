@@ -17,6 +17,8 @@ export const EMAIL_MAX = 254;
 export const MESSAGE_MAX = 500;
 /** Longest answer to a custom "text" question (G051). */
 export const ANSWER_MAX = 300;
+/** Longest name of another guest in a reply (G069: "party:<n>" fields; same as the name of the guest who replies). */
+export const PARTY_NAME_MAX = NAME_MAX;
 /** Request body cap for a guest submission (JSON). */
 export const BODY_MAX_BYTES = 8 * 1024;
 /** Field name of the honeypot input (must stay empty; bots fill it). */

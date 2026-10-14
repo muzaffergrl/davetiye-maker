@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), seed (477 test, 2026-10-14 G076; Windows dahil — bkz. "Windows notları")
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), RSVP paneli v2 (G069), seed (491 test, 2026-10-14 G069; Windows dahil — bkz. "Windows notları")
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -34,6 +34,8 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/g076-browser.ts   # build sonr
                        # sayfası, yanlış/doğru, şifre değişince yeniden sorma, iki tema (51 kontrol; previews/g076/ ya da $G076_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts   # build sonrası: panel v2 yolculuğu 390 × 844 + MP4, hak/arşiv/çevrimdışı/
                        # axe-core/1280 (104 kontrol; çıktı previews/g060/ ya da $G060_SHOTS_DIR)
+NODE_PATH=/opt/node22/lib/node_modules node tests/g069-browser.ts   # build sonrası: RSVP paneli v2 — 03/01 formunda adlar, Guests özeti,
+                       # cevap dökümü, New + Mark as seen, Add/Edit reply, CSV kişi satırları, yazdırma + A4/Letter PDF (60 kontrol; previews/g069/)
 NODE_PATH=/opt/node22/lib/node_modules node tests/final-smoke.ts [--theme <id>]   # build sonrası: son duman testi, 390 px — misafir (zarf → home →
                        # story → details → RSVP) + alıcı (/start → panel → foto → yayınla → QR → misafir yanıtı panelde); previews/final/
 NODE_PATH=/opt/node22/lib/node_modules node tests/g051-browser.ts [--theme <id>]   # build sonrası: G051, 390 px — takvim düğmeleri + .ics,
@@ -146,6 +148,7 @@ interface DataAdapter {
   deleteSite(id)                 // site + RSVP + fotoğraflar
   saveRsvp(siteId, input), listRsvps(siteId)   // input.held → kayıt "beklemede" (yoğunluk, aşağıda RSVP)
   deleteRsvps(siteId, ids), setRsvpsHeld(siteId, ids, held)   // yalnız o sitenin yanıtları
+  updateRsvp(siteId, id, update)  // G069: çiftin düzeltmesi (misafir alanları değişir, editedAt yazılır); yoksa null
   savePhoto(siteId, {bytes, width?, variants?})  // assertImageUpload: JPG/PNG/WebP/AVIF, ≤ 10 MB, tür baytlardan;
                                  // width + variants (G055) → <rastgele>-<W>w.<uzantı> + türevleri (önce türevler); dönüş .variants
   readPhoto?(path)               // /media/... üzerinden servis eden adaptörler (local, blob)
@@ -162,7 +165,8 @@ Kurallar: adaptör yalnız depolamadır; anahtar üretimi, slug kuralı ve içer
 Düz anahtar asla saklanmaz. Dönen kayıtlar kopyadır. Supabase şeması (G043) şu alanları taşımalı:
 `sites(id, slug unique, theme, variant, status, content jsonb, published_content jsonb, edit_key_hash,
 preview_key_hash, order_ref, owner_email, created_at, updated_at, published_at)`,
-`rsvps(id, site_id, name, email, attending, guests, message, answers jsonb (G051, null olabilir), created_at)`.
+`rsvps(id, site_id, name, email, attending, guests, message, answers jsonb (G051, null olabilir), party jsonb (G069, null olabilir),
+source text (G069: null = form, 'couple'), edited_at (G069, null olabilir), held, created_at)`.
 (`docs/10` §2'deki tabloya `published_content`, `preview_key_hash`, `published_at` eklendi.)
 
 `local` uygulaması: `.data/sites/<id>.json`, `.data/slugs/<slug>.json` (O_EXCL ile benzersizlik),
@@ -454,6 +458,7 @@ Tema yalnız işaretli HTML yazar; gönderim, durum ve hata gösterimi platform 
 | `[data-rsvp-if-attending]` | Misafir "no" seçince gizlenir, içindeki alanlar devre dışı (ör. guests) |
 | `[data-rsvp-reply="yes\|no"]` | Yalnız misafirin cevabı buysa görünür (success panelinde katılan/katılmayan için ayrı teşekkür) |
 | `[data-rsvp-again]` | Formu sıfırlayıp yeniden açar (aynı aileden ikinci yanıt) |
+| `<template data-rsvp-party>` (G069, isteğe bağlı) | Diğer misafirlerin adları. Formun içinde, **tek satırlık** şablon: bir `<input>` (ad yazılmaz), isteğe bağlı `[data-rsvp-party-number]` (betik misafir numarasını yazar: 2, 3, …) ve `[data-rsvp-error-for="party"]` (betik `party:<n>` yapar). "guests" 2+ olunca betik her diğer misafir için bir kopyayı şablonun **hemen önüne** koyar (girişler `party:2`, `party:3`…; formun kendi alanlarıyla aynı aralık, tema CSS'i değişmez); "no" seçilince satırlar formdan çıkar (yazılanlar saklanır, "yes"te geri gelir); JS yoksa şablon hiç görünmez. Gönderim `party: ["<ad>", …]` (misafir sırasıyla, boş = adsız) |
 | `[data-rsvp]` | İsteğe bağlı kapsayıcı: paneller bunun içinde aranır (yoksa bütün sayfa). Sayfada birden çok form varsa zorunlu |
 | `data-rsvp-reason` (betik yazar) | `closed` durumunda formda ve `[data-rsvp]`'de: `deadline` (son tarih geçti) ya da `disabled` (çift yanıtları başka yoldan topluyor) — tema iki durum için farklı başlık gösterebilir ("Replies are closed" yalnız `deadline` için doğru) |
 | `data-rsvp-status` (betik yazar) | Formda ve `[data-rsvp]`'de: `ready`, `sending`, `success`, `closed`, `error`, `preview` (CSS için). Ayrıca formda `rsvp:state` olayı (`event.detail.state`) — tema animasyonu bağlanabilir |
@@ -480,6 +485,9 @@ Betik davranışı:
   (tema: `data-attr-data-rsvp-error-for="answer:{.id}"`). Seçenekli soru = radyolar (`data-repeat=".options"`, `data-attr-value="."`),
   kısa yanıt = `<textarea maxlength="300">`; hangisinin görüneceği `data-if=".options"` / `data-if="!.options"` ile (iş kuralı:
   `choice` ≥ 2 seçenek, `text` seçeneksiz). Örnek: `themes/blush-garden-rose/rsvp.html`.
+- **Diğer misafirlerin adları (G069):** `<template data-rsvp-party>` (yukarıdaki tablo). 01 Olive & Ivory ve 03 Blush Garden Rose
+  "Number of guests"tan hemen sonra taşır ("Name of guest 2 (optional)"; temanın `.field`/`.kicker`/`.opt`/`.field-error` sınıfları,
+  yeni dekor yok). Şablonu olmayan tema (04, 05, `_sample`) eskisi gibi çalışır: adlar sorulmaz, panel "Guest 2" der.
 
 ### API
 
@@ -517,19 +525,27 @@ Gövde her zaman `{ok, state: "success"|"closed"|"error", code?, message, fields
 
 | İstek | Yanıt |
 |---|---|
-| `GET /api/rsvp/<slug>/responses` | `200 {ok, site: {slug, status}, window: {open, reason, closesAt, deadlineDisplay}, counts: {responses, attending, notAttending, totalGuests}, responses: [{id, name, email, attending, guests, message, answers: [{id, question, answer}], createdAt}]}` — yeniden eskiye |
-| `GET /api/rsvp/<slug>/export` | `text/csv`, `attachment; filename="rsvps-<slug>-<YYYY-MM-DD>.csv"` (bekleyenler hariç) |
+| `GET /api/rsvp/<slug>/responses` | `200 {ok, site: {slug, status}, window: {open, reason, closesAt, deadlineDisplay}, counts: {responses, attending, notAttending, totalGuests, held}, insights, questions, maxGuests, responses: [{id, name, email, attending, guests, message, answers: [{id, question, answer}], party: [...], source: "guest"\|"couple", editedAt, createdAt, held}]}` — yeniden eskiye. `insights` (G069, `lib/rsvp/insights.ts`): `people {coming, named, unnamed, notComing}`, `deadline {state: open\|last_day\|closed\|off\|none, daysLeft, display}`, `questions [{id, label, kind: choice\|yesno\|text, current, answered, asked, options [{value, count, percent, old}], answers [{replyId, name, answer}], dietary}]`, `dietary [{replyId, name, text, from: answer\|message, question}]`; `questions` = misafirin şu an gördüğü sorular (panelin "Add a reply" formu), `maxGuests` = tema sınırı |
+| `GET /api/rsvp/<slug>/export` | `text/csv`, `attachment; filename="rsvps-<slug>-<YYYY-MM-DD>.csv"` (bekleyenler hariç; G069: kişi başına bir satır) |
 | `POST /api/rsvp/<slug>/responses` `{action: "remove"\|"keep", ids: [...]}` (yalnız `Bearer`) | `200 {ok, changed, …özet}` · `400` · `401` · `413` · `415` — "remove" kalıcı siler, "keep" bekleyeni sayılara alır; başka sitenin yanıtına dokunmaz |
+| `POST …/responses` `{action: "add", reply: {name, email, attending, guests, message, answers: {<id>: değer}, party: [...]}}` (G069) | `200 {ok, reply, …özet}` · `400 invalid (+fields, misafir formuyla aynı mesajlar)` · `403 archived` — çiftin telefonla/elden aldığı yanıt: `source: "couple"` ("Added by you"); son tarih geçmiş ya da site yayında değilken de eklenir (son tarih misafir içindir); hız sınırı ve honeypot misafir formunda, değişmedi |
+| `POST …/responses` `{action: "update", id, reply: {…}}` (G069) | `200 {ok, reply, …özet}` · `400` · `404 not_found` (yanıt yok ya da başka sitenin) · `403 archived` — misafir alanları baştan yazılır, `id`/`createdAt`/`source`/`held` kalır, `editedAt` yazılır ("Edited by you"); seçeneği sonradan değişmiş eski cevap ve silinmiş soruların cevapları korunur; "no"ya çevrilen yanıtın adları ve cevapları düşer |
 
 - Yanlış anahtar, önizleme anahtarı, başka sitenin anahtarı ve bilinmeyen slug **aynı** `401` (`This edit link is not valid.`).
   Bütün RSVP yanıtları `private, no-store`, `noindex`, `no-referrer`.
 - `totalGuests` = katılan yanıtlardaki `guests` toplamı (baş sayısı). `counts.held` = bekleyen yanıt sayısı; listede her yanıt `held` taşır.
 - CSV: UTF-8 BOM (Excel aksanlı isimler), CRLF, her hücre tırnaklı; `=`, `+`, `-`, `@` (ve sekme/CR) ile başlayan
-  hücrenin başına `'` eklenir (CSV injection). Sütunlar: `Submitted (<timezone>)` ("March 1, 2027 10:05 AM", sitenin
-  saat diliminde), `Name`, `Email`, `Attending` (Yes/No), `Guests`, `Message`; eskiden yeniye. **G051:** `Message`'tan sonra her özel soru
+  hücrenin başına `'` eklenir (CSV injection). **G069: kişi başına bir satır** (Excel / Google Sheets misafir listesi): yanıt veren,
+  sonra yanındakiler (adı verilmişse adı, yoksa `Guest 3 (no name given)`). Sütunlar: `Name`, `Party of` (yanıttaki ad), `Attending`
+  (Yes/No), `Party size`, `Email`, `Submitted (<timezone>)` ("March 1, 2027 10:05 AM", sitenin saat diliminde), `Source` (`Website` /
+  `Added by you` / `Website, edited by you`), `Message`; yanıtlar eskiden yeniye. Yanıt düzeyindeki hücreler (Party size, Email, Message,
+  cevaplar) yalnız yanıtın ilk satırında → "Party size" toplamı = "Yes" satır sayısı = gelen kişi. **G051:** `Message`'tan sonra her özel soru
   için bir sütun (başlık = sorunun şimdiki metni, yayındaki içerikten); sonradan silinen sorunun cevapları da kendi sütununda kalır
-  (başlık = misafirin gördüğü metin). Sorusuz sitede CSV eskisiyle aynı (6 sütun). Başlıklar ve cevaplar da formül korumalı.
-- Panel sunucuda doğrudan da çağırabilir: `authorizeEditor`, `rsvpSummary`, `rsvpCounts`, `rsvpCsvForSite` (`lib/rsvp/couple.ts`).
+  (başlık = misafirin gördüğü metin). Başlıklar ve cevaplar da formül korumalı. (G069 öncesi biçim: yanıt başına bir satır, `Submitted`
+  ilk sütun — değişti.)
+- Panel sunucuda doğrudan da çağırabilir: `authorizeEditor`, `rsvpSummary`, `rsvpCounts`, `rsvpCsvForSite`, `addCoupleReply`,
+  `updateCoupleReply` (`lib/rsvp/couple.ts`); özet hesapları saf ve istemcide de kullanılabilir (`lib/rsvp/insights.ts`: `rsvpInsights`,
+  `replyPeople`, `deadlineInsight`).
 
 Tarayıcı kontrolü (build gerekir; `npm test`'e dahil değil):
 `npm run build && NODE_PATH=/opt/node22/lib/node_modules node tests/rsvp-browser.ts` — fixture tema, `next start`,
@@ -693,8 +709,7 @@ hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; i
   Program/an/SSS satırları: menüden yukarı/aşağı/sil,
   silme **Undo** snackbar'ıyla geri alınır. Geniş ekranda (≥ 960 px) sağda telefon çerçeveli canlı önizleme; telefonda Preview tam
   ekran sayfa (`Sheet.tsx`: portal, arka plan `inert`, geçmiş kaydı → geri tuşu kapatır).
-- **Guests:** yanıt sayıları, yeni yanıtlar işaretli (`seen:<slug>`), yanıtlar birlikte açılabilir, CSV, bekleyen yanıtlar,
-  seç → sil. Son tarih ve "Questions for your guests" Edit → RSVP bölümünde.
+- **Guests:** G069 ile yenilendi (aşağıda "RSVP paneli v2 (G069)"). Son tarih ve "Questions for your guests" Edit → RSVP bölümünde.
 - **Share:** genel link (kopyala/aç; cihaz destekliyorsa paylaş), QR (PNG/SVG), yayından kaldır.
 - **Durumlar:** üst çubukta kayıt göstergesi (Saved / Saving… / Unsaved changes / Offline / Not saved yet. Trying again… /
   Saving paused); **çevrimdışı** iken
@@ -813,6 +828,56 @@ hak modeli §11, kabul testleri §14, açık kararlar §15). Panel İngilizce; i
 - Önizleme hash'i (`#preview/<sayfa>`) yok; yardım üst çubuk menüsünde değil, Home'da. ("Preview — not published" şeridi
   G060-fix'te geldi: paylaşılan kalıcı önizleme anahtarında.)
 - Arşivden sonra veri silme yok; 48 ay tavanı karar bekliyor.
+
+## RSVP paneli v2 (G069)
+
+Kullanıcı isteği (2026-10-14): yanıtlar çifte düzenli ve şık görünsün. Görev: `gorevler/G069-rsvp-paneli-v2.md`. Kod:
+`components/panel/guests.tsx` (Guests görünümü, yanıt kartı, ekle/düzelt sheet'i, yazdırma görünümü, `useReplies`), `lib/rsvp/insights.ts`
+(saf özet hesapları), `lib/rsvp/couple.ts` (çiftin yanıtları, CSV), `lib/rsvp/validate.ts` (`party`, `parseCoupleReply`), `public/rsvp/form.js`
+(ad alanları), 01/03 `rsvp.html` (`<template data-rsvp-party>`). Panel tokenları ve bileşenleri (§8, §7); G066 paneli BKE Studio
+markasına göre yeniden boyayacak (yalnız token/sınıf değişir). Düzen GPT kompozisyonu `brand/ui/panel/u2_guests_390.png`'yi izler
+(ikonlu üç sayı kutusu, "Replies close in **42 days**" şeridi, tek satır çubuklu "Meal choices", çipler, arama, avatar'lı kartlar,
+altta "Add a reply" + "Download list") ve `u2_home_390.png`'deki "3 new replies" kartını; renkler henüz panel v2 tokenları.
+
+- **Özet:** üç sayı (Guests coming = kişi, Not coming = yanıt, Replies) + son tarih satırı "Replies close in 30 days. Last day: …
+  (New York time)." / "Today is the last day to reply" / "Replies closed on … You can still add replies you get another way." / yanıtlar
+  kapalıyken dürüst metin. Gün sayısı sitenin saat diliminde takvim günüdür (`deadlineInsight`).
+- **Answers:** her soru bir kart. Seçenekli soru: seçenek sırasıyla sayı + çubuk (kimsenin seçmediği seçenek de görünür; sonradan
+  değişen seçeneğin eski cevapları "earlier option"); iki seçenekli evet/hayır sorusu (`isYesNo`: "Yes…"/"No…") yüzdeyle "80% (4)";
+  metin sorusu son 3 cevap + "Show all". "From guests who are coming; one answer per reply" — cevap yanıt başınadır (kişi başına değil),
+  ekranda öyle yazar. Silinmiş sorunun cevapları "Removed question" rozetiyle kalır. Çubuğa dokunmak listeyi o cevaba süzer.
+- **Food & allergy notes:** yemek/alerji sorusunun (etiketinde diet/allergy/food/vegan/gluten…; metin sorusunda "meal") cevapları +
+  mesajında alerji/vegan/gluten/fıstık… geçen notlar, isme göre; "None", "n/a" gibi cevaplar elenir. Böyle bir soru yoksa: "To ask every
+  guest, add a question …" + Reply settings. (Anahtar kelime eşleşmesi kesin değildir; mesajdaki bir notu kaçırabilir.)
+- **Liste:** süzgeç çipleri All · Coming · Not coming · New (n) · Held for review (n); sıralama Newest / Oldest / Name (A–Z) / Coming first;
+  ≥ 8 yanıtta arama (ad, diğer misafirlerin adları, e-posta); cevap süzgeci "Meal choice: Vegetarian · Clear". Kart: ad, `New`,
+  "Coming · 3 guests", `Added by you` / `Edited by you` / `Held`, tarih, "With James Hamilton and Ada Hamilton" (adsızlar "+ 2 more" /
+  "+ 2 guests, no names given"); açılınca herkes numaralı, e-posta, cevaplar, mesaj, "Sent on …" / "Added by you on …", "Edit reply".
+- **Yeni yanıtlar:** bu cihazda son bakıştan sonra gelenler (`localStorage seen:<slug>`, docs/16 §6.2; hiç bakılmamışsa hepsi yeni;
+  çiftin kendi eklediği ve bekleyen yanıt yeni sayılmaz). Home kartı "3 new replies · 24 coming · 6 not coming" (vurgulu), alt gezinmede
+  sayı rozeti, Guests'te "3 new replies since you last looked on this device. [Mark as seen]". Guests'ten ayrılınca da görülmüş sayılır.
+  Başka cihazda (eşin telefonu) ayrı tutulur — sunucuda "okundu" bilgisi yok.
+- **Ekle / düzelt:** "Add a reply" sheet'i (ad, Coming/Not coming, kişi sayısı 1..tema sınırı, diğer adlar, misafirin şu an gördüğü sorular —
+  seçenekli soru `select` "No answer" ile —, e-posta, not); hatalar alanın altında (sunucunun mesajı), kaydet düğmeleri yapışkan. Kartın
+  menüsünde "Edit reply", "Keep this reply" (bekleyen), "Remove reply" (onaylı). Çevrimdışıyken kapalı ve nedeni yazılı.
+- **Eylemler:** "Add a reply" (birincil) + "Download list" alt gezinmenin üstünde yapışkan çubukta (liste kayarken hep erişilir;
+  `scroll-padding-bottom` odaklanan alanı örtmez); "Print list" Replies başlığının yanında.
+- **Dışa aktarma:** "Download list" (CSV, kişi başına satır, yukarıda) ve "Print list" → `#guests/print`: "Guests coming" /
+  "Everyone who replied", "Include guests' messages"; tablo ✓ kutusu (kapıda işaretlemek için) · Name · Party ("Party of 3" / "with …") ·
+  Answers; adlar A–Z; yazdırırken (`@media print`) üst çubuk, gezinme, önizleme ve ayarlar gizlenir, `@page` kenar 14/12 mm — A4 ve
+  US Letter'a sığar (Chromium PDF'iyle denendi; gerçek yazıcıda denenmedi). Telefonda tablo kişi başına bloklara döner.
+- **Arşiv:** liste, CSV ve yazdırma açık; ekle/düzelt/sil/tut yok (sunucu `403 archived`).
+- **E-posta bildirimi yok** (sağlayıcı yok): arayüzde yeri de yok.
+- **Uyumluluk:** `party`/`source`/`editedAt` isteğe bağlı; eski yanıtlar aynen okunur (adsız kişiler "Guest 2"). `local` ve `blob`
+  adaptörlerinde `updateRsvp` (blob: ETag'li koşullu yazım, yarışta yeniden okur).
+
+Testler: `tests/g069-rsvp.test.ts` (node:test, 13: `party` doğrulaması, çiftin ekle/düzelt/sil'i, 404/401, arşiv 403, özet matematiği,
+yemek notları, son tarih günleri, kişi satırları, eski kayıtlar, blob `updateRsvp`, 01/03 şablon sözleşmesi) +
+`rsvp.test.ts`/`rsvp-api.test.ts` CSV beklentileri yeni biçime. Tarayıcı (build gerekir):
+`NODE_PATH=/opt/node22/lib/node_modules node tests/g069-browser.ts` — 03 ve 01 temasında misafir 3/2 kişilik yanıtı adlarla gönderir →
+panel Home "1 new reply" → Guests özet, cevap çubukları, evet/hayır yüzdesi, yemek notları, parti kartı, cevap süzgeci, sıralama,
+Mark as seen (yenilemeden sonra da), Add a reply, Edit reply, CSV (3 kişilik yanıt = 3 satır), yazdırma görünümü + print medyası + A4/Letter
+PDF, 1280 / 320 px, arşiv, axe-core, dokunma alanları. Çıktı `previews/g069/` (`G069_SHOTS_DIR`, `PORT` (3369)).
 
 ## Site şifresi (G076, K28)
 

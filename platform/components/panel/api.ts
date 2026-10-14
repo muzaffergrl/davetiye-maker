@@ -69,6 +69,12 @@ export function panelApi(slug: string, editKey: string) {
     /** "remove" deletes replies for good; "keep" releases replies held for review. Answers with the new summary. */
     manageReplies: (action: 'remove' | 'keep', ids: string[]) =>
       call<Record<string, unknown>>(`/api/rsvp/${encodeURIComponent(slug)}/responses`, jsonInit('POST', { action, ids })),
+    /** A reply the couple got another way (G069, "Added by you"); `id` given: their correction of that reply. */
+    saveReply: (reply: Record<string, unknown>, id?: string) =>
+      call<Record<string, unknown>>(
+        `/api/rsvp/${encodeURIComponent(slug)}/responses`,
+        jsonInit('POST', id ? { action: 'update', id, reply } : { action: 'add', reply }),
+      ),
     /** CSV download (a plain link cannot send a header, so this one carries the key; same origin, no-referrer). */
     repliesCsvUrl: () => `/api/rsvp/${encodeURIComponent(slug)}/export?k=${encodeURIComponent(editKey)}`,
   };

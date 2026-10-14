@@ -2,7 +2,7 @@
 // The buyer's edit panel, v2 (G039 -> G060, docs/16_PANEL_V2.md). Phone first.
 //
 // Views are hash routes on the one /edit/<slug>?k=… page (the key stays in the query; back/forward and
-// bookmarks work):  #setup/1…6 · #home · #edit · #edit/<section> · #guests · #share.
+// bookmarks work):  #setup/1…6 · #home · #edit · #edit/<section> · #guests · #guests/print (G069) · #share.
 // A site that was never published opens the setup wizard (until it is finished or closed on this phone);
 // everything else opens Home. Autosave, the live preview, publish and the edit-rights rules work the same
 // in every view (usePanel.ts). Neutral UI only: the colour on screen is the design's own preview (K21).
@@ -53,7 +53,7 @@ import { firstOpenStep, OrderPendingNote, readSetup, RulesBox, SampleDateGate, S
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
 import { usePanel } from './usePanel.ts';
-import { EditListView, GuestsView, HelpSheet, HomeView, nextSteps, SECTION_ICONS, ShareView, UrlText, useReplies } from './views.tsx';
+import { EditListView, GuestPrintView, GuestsView, HelpSheet, HomeView, nextSteps, SECTION_ICONS, ShareView, UrlText, useReplies } from './views.tsx';
 import styles from './panel.module.css';
 
 type Route =
@@ -62,6 +62,7 @@ type Route =
   | { view: 'edit' }
   | { view: 'section'; id: SectionId }
   | { view: 'guests' }
+  | { view: 'print' }
   | { view: 'share' };
 
 function parseHash(hash: string): Route | null {
@@ -72,6 +73,7 @@ function parseHash(hash: string): Route | null {
   if (h === 'edit') return { view: 'edit' };
   if ((m = /^edit\/([a-z]+)$/.exec(h)) && (SECTION_IDS as readonly string[]).includes(m[1])) return { view: 'section', id: m[1] as SectionId };
   if (h === 'guests') return { view: 'guests' };
+  if (h === 'guests/print') return { view: 'print' };
   if (h === 'share') return { view: 'share' };
   return null;
 }
@@ -82,6 +84,8 @@ function hashOf(r: Route): string {
       return `#setup/${r.step}`;
     case 'section':
       return `#edit/${r.id}`;
+    case 'print':
+      return '#guests/print';
     default:
       return `#${r.view}`;
   }
@@ -206,7 +210,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const firstFocus = useRef(true);
   useEffect(() => {
     if (!ready || route.view === 'setup') return;
-    const label = route.view === 'section' ? SECTION_TITLES[route.id] : ROOT_VIEWS.find((v) => v.view === route.view)?.label;
+    const label = route.view === 'section' ? SECTION_TITLES[route.id] : route.view === 'print' ? 'Guest list' : ROOT_VIEWS.find((v) => v.view === route.view)?.label;
     document.title = `${label} · ${names}`;
     if (firstFocus.current) {
       firstFocus.current = false;
@@ -283,7 +287,16 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const [dateConfirmed, setDateConfirmed] = useState(false);
   const firstPublishDateBlocked = rights.phase === 'before_publish' && sampleDateLeft(content, theme.sample) && !dateConfirmed;
 
-  const replies = useReplies(panel.api, initial.slug, ready && (route.view === 'home' || route.view === 'guests') && !neverPublished, meta.status === 'published');
+  const replies = useReplies(panel.api, initial.slug, ready && (route.view === 'home' || route.view === 'guests' || route.view === 'print') && !neverPublished, meta.status === 'published');
+  // Leaving Guests marks the replies seen on this device (G069: "New" = since the last look; also "Mark as seen").
+  const lastView = useRef(route.view);
+  useEffect(() => {
+    const was = lastView.current;
+    lastView.current = route.view;
+    if ((was === 'guests' || was === 'print') && route.view !== 'guests' && route.view !== 'print') replies.markSeen();
+    // markSeen reads the replies of this render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route.view]);
 
   // On wide screens the preview sits next to the editor: it follows the open section to its page (G060-fix).
   const openSection = route.view === 'section' ? route.id : null;
@@ -604,7 +617,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
 
   // ---------------------------------------------------------------- editor
   const sectionView = route.view === 'section' ? route.id : null;
-  const rootView = route.view === 'section' ? 'edit' : route.view;
+  const rootView = route.view === 'section' ? 'edit' : route.view === 'print' ? 'guests' : route.view;
   const back = () => {
     if (returnTo) {
       const target = returnTo;
@@ -669,7 +682,17 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   };
 
   const viewTitle =
-    route.view === 'section' ? SECTION_TITLES[route.id] : route.view === 'home' ? 'Your website' : route.view === 'edit' ? 'Edit your website' : route.view === 'guests' ? 'Guests' : 'Share';
+    route.view === 'section'
+      ? SECTION_TITLES[route.id]
+      : route.view === 'home'
+        ? 'Your website'
+        : route.view === 'edit'
+          ? 'Edit your website'
+          : route.view === 'guests'
+            ? 'Guests'
+            : route.view === 'print'
+              ? 'Guest list'
+              : 'Share';
 
   return (
     <PanelContext.Provider value={ctx}>
@@ -834,6 +857,18 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
                 onPublish={() => void startPublish()}
                 onShare={() => go({ view: 'share' })}
                 onSettings={() => go({ view: 'section', id: 'rsvp' })}
+                onPrint={() => go({ view: 'print' })}
+              />
+            ) : null}
+            {route.view === 'print' ? (
+              <GuestPrintView
+                replies={replies}
+                content={content}
+                names={names}
+                onBack={() => {
+                  if (navCount.current > 0) window.history.back();
+                  else go({ view: 'guests' }, true);
+                }}
               />
             ) : null}
             {route.view === 'share' ? (

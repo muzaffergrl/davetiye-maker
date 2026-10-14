@@ -10,17 +10,25 @@
 //             rsvp.questions, G051): "choice" = one of its options, "text" = at most ANSWER_MAX
 //             characters. Questions are for guests who accept: a "no" reply stores no answers.
 //             Unanswered questions are fine (not required); unknown ids are ignored.
+//   party     optional ["<name of guest 2>", "<name of guest 3>", …] (G069): the names of the other people in
+//             an attending reply, each at most PARTY_NAME_MAX characters. Only the first guests − 1 count;
+//             empty ones are fine (a name is never required) and are not stored. A "no" stores none.
 //   website   honeypot; must be empty (see HONEYPOT_FIELD)
 //
 // Unknown fields are ignored. Error messages are English and can be shown to guests.
-// Errors of an answer are keyed "answer:<id>" (the form's input name, public/rsvp/form.js).
+// Errors of an answer are keyed "answer:<id>" (the form's input name, public/rsvp/form.js), errors of a
+// party name "party:<n>" (n = the guest's number in the reply: 2, 3, …).
+//
+// The couple's own replies and corrections in the panel (G069) use the same rules (parseCoupleReply), except that
+// a stored answer stays valid when the couple has renamed that option since, and answers to questions they have
+// removed since are kept.
 
 import type { RsvpQuestion } from '../content/types.ts';
 import type { RsvpAnswer, RsvpInput } from '../data/types.ts';
 import { CONTROL_RE, normalizeLine } from '../content/text.ts';
-import { ANSWER_MAX, EMAIL_MAX, HONEYPOT_FIELD, MESSAGE_MAX, NAME_MAX } from './config.ts';
+import { ANSWER_MAX, EMAIL_MAX, HONEYPOT_FIELD, MESSAGE_MAX, NAME_MAX, PARTY_NAME_MAX } from './config.ts';
 
-export type RsvpField = 'name' | 'email' | 'attending' | 'guests' | 'message' | `answer:${string}`;
+export type RsvpField = 'name' | 'email' | 'attending' | 'guests' | 'message' | `answer:${string}` | `party:${number}`;
 
 export type ParsedSubmission =
   | { ok: true; value: RsvpInput; spam: boolean }
@@ -28,6 +36,9 @@ export type ParsedSubmission =
 
 /** Form field name of a question's answer (also the key of its error). */
 export const answerField = (id: string): `answer:${string}` => `answer:${id}`;
+
+/** Form field name of the name of guest `n` (2, 3, …) in a reply (also the key of its error), G069. */
+export const partyField = (n: number): `party:${number}` => `party:${n}`;
 
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:".]{2,}$/;
 
@@ -89,19 +100,26 @@ export function formQuestions(content: unknown): RsvpQuestion[] {
 }
 
 /** Answers of an attending guest: {ok: answers in question order} or {errors by "answer:<id>"}. */
-function parseAnswers(raw: unknown, questions: readonly RsvpQuestion[]): { answers: RsvpAnswer[]; errors: Record<string, string> } {
+function parseAnswers(
+  raw: unknown,
+  questions: readonly RsvpQuestion[],
+  existing: readonly RsvpAnswer[] = [],
+): { answers: RsvpAnswer[]; errors: Record<string, string> } {
   const answers: RsvpAnswer[] = [];
   const errors: Record<string, string> = {};
   const given = raw && typeof raw === 'object' && !Array.isArray(raw) ? (raw as Record<string, unknown>) : {};
   for (const q of questions) {
     if (!Object.hasOwn(given, q.id)) continue;
     const field = answerField(q.id);
+    // A correction by the couple keeps a stored answer as it was (the option may have been renamed since).
+    const before = existing.find((a) => a.id === q.id);
     if (q.type === 'choice') {
       const value = cleanLine(given[q.id]);
       if (!value) continue;
       const match = (q.options ?? []).find((o) => cleanLine(o) === value);
-      if (match === undefined) errors[field] = 'Please choose one of the options.';
-      else answers.push({ id: q.id, question: cleanLine(q.label), answer: cleanLine(match) });
+      if (match !== undefined) answers.push({ id: q.id, question: cleanLine(q.label), answer: cleanLine(match) });
+      else if (before && cleanLine(before.answer) === value) answers.push({ ...before });
+      else errors[field] = 'Please choose one of the options.';
     } else {
       const value = cleanBlock(given[q.id]);
       if (!value) continue;
@@ -109,7 +127,24 @@ function parseAnswers(raw: unknown, questions: readonly RsvpQuestion[]): { answe
       else answers.push({ id: q.id, question: cleanLine(q.label), answer: value });
     }
   }
+  // Answers to questions removed since stay with the reply (the CSV keeps their column).
+  const asked = new Set(questions.map((q) => q.id));
+  for (const a of existing) if (!asked.has(a.id)) answers.push({ id: a.id, question: a.question, answer: a.answer });
   return { answers, errors };
+}
+
+/** Names of the other people of an attending reply: raw[i] is guest i + 2; only the first guests − 1 count. */
+function parseParty(raw: unknown, guests: number): { party: string[]; errors: Record<string, string> } {
+  const party: string[] = [];
+  const errors: Record<string, string> = {};
+  if (!Array.isArray(raw) || guests < 2) return { party, errors };
+  raw.slice(0, guests - 1).forEach((value, i) => {
+    const name = cleanLine(value);
+    if (!name) return;
+    if (name.length > PARTY_NAME_MAX) errors[partyField(i + 2)] = `Please keep each name to ${PARTY_NAME_MAX} characters or fewer.`;
+    else party.push(name);
+  });
+  return { party, errors };
 }
 
 /**
@@ -117,6 +152,24 @@ function parseAnswers(raw: unknown, questions: readonly RsvpQuestion[]): { answe
  * couple's custom questions of the published content (formQuestions).
  */
 export function parseSubmission(body: unknown, maxGuests: number, questions: readonly RsvpQuestion[] = []): ParsedSubmission {
+  return parseReply(body, maxGuests, questions, []);
+}
+
+/**
+ * Validates a reply the couple adds in the panel, or their correction of `existing` (G069). Same fields and messages
+ * as a guest's reply (a phone reply looks like any other); the honeypot does not apply.
+ */
+export function parseCoupleReply(
+  body: unknown,
+  maxGuests: number,
+  questions: readonly RsvpQuestion[] = [],
+  existing: { answers?: readonly RsvpAnswer[] } | null = null,
+): ParsedSubmission {
+  const parsed = parseReply(body, maxGuests, questions, existing?.answers ?? []);
+  return { ...parsed, spam: false } as ParsedSubmission;
+}
+
+function parseReply(body: unknown, maxGuests: number, questions: readonly RsvpQuestion[], existingAnswers: readonly RsvpAnswer[]): ParsedSubmission {
   if (!body || typeof body !== 'object' || Array.isArray(body)) {
     return { ok: false, errors: { name: 'Please enter your name.' }, spam: false };
   }
@@ -149,9 +202,17 @@ export function parseSubmission(body: unknown, maxGuests: number, questions: rea
 
   // Questions are asked of guests who accept (the theme shows them with the guest count).
   let answers: RsvpAnswer[] = [];
-  if (attending === true && questions.length) {
-    const parsed = parseAnswers(b.answers, questions);
+  if (attending === true && (questions.length || existingAnswers.length)) {
+    const parsed = parseAnswers(b.answers, questions, existingAnswers);
     answers = parsed.answers;
+    Object.assign(errors, parsed.errors);
+  }
+
+  // The names of the other people coming with this guest (G069): optional, only for guests who accept.
+  let party: string[] = [];
+  if (attending === true && guests > 1) {
+    const parsed = parseParty(b.party, guests);
+    party = parsed.party;
     Object.assign(errors, parsed.errors);
   }
 
@@ -166,6 +227,7 @@ export function parseSubmission(body: unknown, maxGuests: number, questions: rea
       guests,
       message: message || null,
       ...(answers.length ? { answers } : {}),
+      ...(party.length ? { party } : {}),
     },
   };
 }

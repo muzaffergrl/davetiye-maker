@@ -53,7 +53,9 @@ import type { ContentRecord } from '../../content/types.ts';
 import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
+  applyRsvpUpdate,
   applySitePatch,
+  rsvpLists,
   OrderRefTakenError,
   SlugTakenError,
   StaleSiteError,
@@ -65,6 +67,7 @@ import {
   type PublishOptions,
   type RsvpInput,
   type RsvpRecord,
+  type RsvpUpdate,
   type SavedPhoto,
   type SiteKeyHashes,
   type SitePatch,
@@ -503,9 +506,10 @@ export class BlobAdapter implements DataAdapter {
       attending: input.attending,
       guests: input.guests,
       message: input.message ?? null,
-      ...(input.answers?.length ? { answers: input.answers.map((a) => ({ id: a.id, question: a.question, answer: a.answer })) } : {}),
+      ...rsvpLists(input),
       createdAt: new Date(ms).toISOString(),
       ...(input.held ? { held: true } : {}),
+      ...(input.source === 'couple' ? { source: 'couple' as const } : {}),
     };
     // Time first so a listing sorts oldest first; the per-process counter orders same-millisecond replies.
     this.#rsvpSeq = (this.#rsvpSeq + 1) % 1_000_000;
@@ -535,6 +539,24 @@ export class BlobAdapter implements DataAdapter {
     const paths = await this.rsvpPathsFor(siteId, ids);
     for (let i = 0; i < paths.length; i += DELETE_BATCH) await this.del(paths.slice(i, i + DELETE_BATCH));
     return paths.length;
+  }
+
+  async updateRsvp(siteId: string, id: string, update: RsvpUpdate): Promise<RsvpRecord | null> {
+    const [p] = await this.rsvpPathsFor(siteId, [id]);
+    if (!p) return null;
+    // A couple's correction: read-modify-write guarded by the ETag (a "keep" or a second tab in between -> read again).
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const current = await this.readJson<RsvpRecord>(p);
+      if (!current) return null;
+      const next = applyRsvpUpdate(current.data, update, new Date(this.#now()).toISOString());
+      try {
+        await this.putJson(p, next, { ifMatch: current.etag });
+        return { ...next };
+      } catch (e) {
+        if (!(e instanceof BlobPreconditionFailedError) && !looksLikeConcurrentWrite(e)) throw e;
+      }
+    }
+    throw new WriteConflictError(`reply ${id}`);
   }
 
   async setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number> {
