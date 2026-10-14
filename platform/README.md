@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), seed (448 test, 2026-10-14; Windows dahil)
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), seed (477 test, 2026-10-14 G076; Windows dahil — bkz. "Windows notları")
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -244,6 +244,11 @@ node --env-file=.env.local scripts/blob-smoke.mjs                               
   makineden art arda çok koşturmak 429 verebilir.
 - `blob-smoke`: yukarıdaki gerçek-depo doğrulamaları; yalnız `smoke-<zaman>-*` / `SMOKE<zaman>` yollarına yazar ve siler.
 - Çıkış kodu 0 = hepsi geçti. Windows'ta çalışır (Node 22, `.env.local`).
+- Windows notları (G077): `npm test`'teki `tools/validate_content.py` karşılaştırması (g055-limits, `astral-name-40`) Python UTF-8 kipi
+  kapalıyken kalıyor → `PYTHONUTF8=1` ile koşturun. Eski bir yerel `.next/` (silinmiş bir rotanın `.next/types/validator.ts`'i) `npm run
+  typecheck`'i kırar → `.next`'i silip typecheck/build. Tohumlama: `DATA_ADAPTER=blob PLATFORM_DATA_DIR=<yerel geçici klasör> node
+  --env-file=.env.local scripts/seed.ts --theme <id> --slug <slug> --content ../collections/<NN>/content.demo.json --photos
+  ../collections/<NN>/assets/gpt/photos` (anahtarlar o klasöre yazılır, ekrana basılanları log'a koymayın).
 
 ## Tema biçimi
 

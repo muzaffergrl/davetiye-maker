@@ -31,6 +31,11 @@ gezinme etiketleri, düğme yazıları…). G059 bu yüzden ilan metnini "her ya
    theme-check `--stress` her iki temada uzun `copy` değerleriyle; `final-smoke`, `g051-browser`, `g060-browser` geçmeli.
 6. Önizleme: `platform/previews/g068/` (panel Wording 390 px, değişmiş başlıklarla misafir sayfaları).
 
+7. **G064 QA'dan küçük ek (01 olive-ivory, düşük):** zarfa geri dönüşte (`index?replay=1`) giden nav 250 ms solarken zarf sayfası
+   etiketlerin arasından görünüyor → `::view-transition-old(site-nav):only-child { animation: none; opacity: 0; }` + theme-check'e ters
+   yön kontrolü. Yatay/kısa ekranda iç sayfaların ilk ekranında son satırın nav çizgisinde kesilmesi: docs/11'e kabul edilen davranış
+   olarak yazılır ya da yatay düzende üst boşluk kısaltılır.
+
 ## Bitti sayılması için
 - [ ] 01 ve 03'te görünür her sabit metin panelden değişir ve sıfırlanır; theme-check işaretsiz metin bulmaz
 - [ ] Bütün testler geçti; docs/11 ve README güncel

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LC3 how it works</title>
+<style>{{fonts_css}}</style>
+<style>{{base_css}}</style>
+<style>
+  /* GM03 lc3_how: başlık, dört numaralı adım kartı (rakam rozeti kartın üst kenarında), logo altta ortada.
+     İkon yok (brand/listing/icons henüz yok; yeni ikon çizilmez): kartta yalnız rakam ve adım adı. */
+  .h1 { top: {{h1_top}}px; font-size: 232px; }
+  .steps { position: absolute; top: {{cards_top}}px; left: 50%; transform: translateX(-50%); display: flex; gap: 32px; }
+  .step {
+    position: relative; width: 420px; height: 470px; border-radius: 44px;
+    background: rgba(253, 251, 247, 0.90);
+    box-shadow: 0 22px 56px rgba(43, 21, 38, 0.12), 0 2px 8px rgba(43, 21, 38, 0.05);
+    display: flex; align-items: center; justify-content: center; padding: 120px 20px 36px;
+  }
+  .num {
+    position: absolute; top: -112px; left: 50%; transform: translateX(-50%);
+    width: 224px; height: 224px; border-radius: 50%; background: var(--anchor);
+    border: 9px solid var(--accent); box-shadow: 0 14px 30px rgba(43, 21, 38, 0.22);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 128px; line-height: 1; color: var(--paper-light);
+    padding-bottom: 4px;
+  }
+  .label {
+    font-family: 'Archivo', sans-serif; font-weight: 800; font-stretch: 100%; font-size: 62px; line-height: 1.08;
+    letter-spacing: -0.02em; color: var(--anchor); text-align: center;
+  }
+  .logo { left: 50%; transform: translateX(-50%); bottom: {{logo_bottom}}px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <img class="bg" src="{{bg}}" alt="">
+  <div class="h1 center-x" data-kutu="baslik" data-fit="1500">How it works</div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div class="label" data-kutu="adim">Buy this<br>design</div></div>
+    <div class="step"><div class="num">2</div><div class="label" data-kutu="adim">Open your<br>start link</div></div>
+    <div class="step"><div class="num">3</div><div class="label" data-kutu="adim">Edit on<br>your phone</div></div>
+    <div class="step"><div class="num">4</div><div class="label" data-kutu="adim">Publish<br>and share</div></div>
+  </div>
+  <div class="logo chip" data-kutu="logo">{{logo}}</div>
+</div>
+<script>{{fit_js}}</script>
+</body>
+</html>

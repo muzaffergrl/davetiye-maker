@@ -102,6 +102,13 @@ düzenler. Bu belge platformun tek kaynağıdır.
     details → RSVP akışı ve iki `/start` sayfası görsel olarak kontrol edildi.
   - Gerçek depoda bulunan ikinci ayrıntı: üst üste binen koşullu yazmalar `412` yerine düz `BlobError("… conflicting operation …")`
     alıyor → adaptör bunu da yeniden dener (G049; önceden 8 eşzamanlı yazmadan 1'i hatayla düşüyordu, veri kaybı yoktu).
+- **Test yayını (G077, 2026-10-14, `claude-local-1`):** production = main `db0eac7` (platform ağacı `1f72af6309a2`; panel v2 +
+  G060-fix, satış sitesi, G064 QA, 4 tema), `dpl_HkfyAujAQ9U7jHxuQ8CGAeqRYz7j`, aynı adres; G049 arşiv yolu, ortam değişkeni değişmedi.
+  Önce `npm test` 427/427 (+2 build'e bağlı test build sonrası 2/2), typecheck, build yeşil. (Aynı gün önce `b289187` yayınlanmıştı —
+  `dpl_3fUg7HxKhWPKWyccfenHRLmc4qWJ`, 410/410 + 40/40 + 12/12 —; G060-fix/G064 gelince yeniden yayınlandı.) Demo siteler Blob'da yeni kodla:
+  `/clara-and-julian` (03), `/avery-and-jordan` (01), `/margot-and-henry` (04, onaysız), `/isabella-and-marco` (05, onaysız).
+  `live-check` 40/40 + dört temalı salt-okuma 36/36, `blob-smoke` 12/12. Kullanıcı için test sitesi `/lily-and-theo` (blush, kurgu,
+  3 RSVP). Ekran görüntüleri (390 px): `docs/10_canli_test/`.
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 

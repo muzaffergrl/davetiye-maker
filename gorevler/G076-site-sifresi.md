@@ -46,7 +46,7 @@ Yapıldı (2026-10-14, claude-G076). Ayrıntı: `platform/README.md` "Site şifr
   "You're invited", `noindex`. Panel ve panel önizleme jetonu şifresiz; kalıcı önizleme linki şifre ister.
 - **Sıra:** 404 (yok/yayında değil) → 410 arşiv (isimsiz) → panel jetonu açık → şifre → sayfa; G075 teşekkür modu
   şifreden sonra gelmeli (`lib/site/access.ts` başı, README).
-- **Testler:** `npm test` 448/448 (yeni `tests/g076-access.test.ts` 19), `npm run typecheck` temiz, `npm run build` +
+- **Testler:** `npm test` 448/448 (yeni `tests/g076-access.test.ts` 19; origin/main birleştirmesinden sonra 477/477), `npm run typecheck` temiz, `npm run build` +
   trace-check geçti; tarayıcı: `tests/g076-browser.ts` 51/51, `g060-browser` 147/147, `final-smoke --theme olive-ivory`
   45/45 ve `--theme blush-garden-rose` 45/45, `rsvp-browser` 25/25 (son üçü + g060 çıktıları geçici klasöre; repodaki
   önizlemelere dokunulmadı). Ekranlar: `platform/previews/g076/` (390 px: Share şifre açık, iki temanın şifre sayfası,
