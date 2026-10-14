@@ -3,8 +3,11 @@
 //   npm run build
 //   NODE_PATH=/opt/node22/lib/node_modules node tests/marketing-browser.ts [--out previews/g061] [--no-shots]
 //
-// 1. Every marketing page at 390 × 844 (phone, touch) and 1280 × 800: HTTP 200, no horizontal page scroll, nothing
-//    cut off at the right edge, one H1; full-page screenshots <page>_<390|1280>.jpg.
+// 1. Every marketing page at 390 × 844 (phone, touch), 1280 × 800 and 320 × 640 (smallest phone, no shots): HTTP 200,
+//    no horizontal page scroll, nothing cut off at the right edge, one H1; full-page screenshots <page>_<390|1280>.jpg.
+//    G066: at 390 every page also passes axe-core 4.13.0 (no serious/critical violation, incl. color contrast) and has
+//    no touch target under 44 × 44 px (links inside running text excepted); the BKE Studio logos, tab icons and web
+//    manifest are wired.
 // 2. Live demo facade: before a tap no theme file is requested; on a phone the demo opens in a modal <dialog>
 //    (iframe = /start/demo/<id>, the theme loads), Esc closes it and focus returns; on a wide screen it loads in place.
 //    Card "Open live demo" opens the dialog; the mobile menu and FAQ <details> open; the sticky bar shows on phones.
@@ -13,6 +16,7 @@
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
 
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
@@ -22,6 +26,7 @@ import { liveDesigns } from '../lib/marketing/designs.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { corePages } from '../lib/marketing/site.ts';
 
+const AXE = createRequire(import.meta.url).resolve('axe-core/axe.min.js');
 const args = process.argv.slice(2);
 const argOut = args.includes('--out') ? args[args.indexOf('--out') + 1] : null;
 const OUT = path.resolve(argOut ?? path.join(ROOT, 'previews/g061'));
@@ -63,6 +68,7 @@ try {
   for (const vp of [
     { w: 390, h: 844, mobile: true },
     { w: 1280, h: 800, mobile: false },
+    { w: 320, h: 640, mobile: true },
   ]) {
     const ctx = await browser.newContext({ viewport: { width: vp.w, height: vp.h }, deviceScaleFactor: 1, isMobile: vp.mobile, hasTouch: vp.mobile });
     const page = await ctx.newPage();
@@ -93,13 +99,85 @@ try {
       check(`${p} @${vp.w}: no horizontal page scroll`, layout.scrollW <= layout.vw, layout);
       check(`${p} @${vp.w}: nothing cut off at the edges`, layout.cut.length === 0, layout.cut);
       check(`${p} @${vp.w}: one h1`, layout.h1 === 1, layout.h1);
-      // Full-page shots: every page except the 2nd+ guide (same template; keeps previews/ small).
-      const shot = SHOTS && !(p.startsWith('/guides/') && p !== guides[0].path);
+      if (vp.w === 390) {
+        // G066 accessibility: axe-core (serious + critical, color contrast included) and 44 px touch targets.
+        await page.addScriptTag({ path: AXE });
+        const axe = await page.evaluate(async () => {
+          const r = await (window as any).axe.run(document, { resultTypes: ['violations'] });
+          return r.violations
+            .filter((v: any) => v.impact === 'serious' || v.impact === 'critical')
+            .map((v: any) => `${v.id}: ${v.nodes.map((n: any) => n.target.join(' ')).slice(0, 3).join(' | ')}`);
+        });
+        check(`${p} @390: axe-core, no serious/critical violations`, axe.length === 0, axe);
+        const small = await page.evaluate(() => {
+          const out: string[] = [];
+          const text = (el: Element | null) => (el?.textContent ?? '').replace(/\s+/g, ' ').trim();
+          for (const el of Array.from(document.querySelectorAll<HTMLElement>('a[href], button, summary, input, select, textarea'))) {
+            const r = el.getBoundingClientRect();
+            const cs = getComputedStyle(el);
+            if (!r.width || !r.height || cs.visibility === 'hidden' || r.bottom <= 0) continue;
+            if (el.tagName !== 'SUMMARY' && el.closest('details:not([open])')) continue; // closed menu / FAQ answer
+            // WCAG 2.5.5/2.5.8 inline exception: a link inside a sentence or block of text.
+            const block = el.closest('p, li, dd, td, th');
+            if (el.tagName === 'A' && block && block !== el && text(block).length > text(el).length + 1) continue;
+            if (r.width < 43.5 || r.height < 43.5) out.push(`${el.tagName.toLowerCase()} "${text(el).slice(0, 30)}" ${Math.round(r.width)}×${Math.round(r.height)}`);
+          }
+          return out;
+        });
+        check(`${p} @390: touch targets ≥ 44 × 44 px`, small.length === 0, small.slice(0, 6));
+      }
+      // Full-page shots: every page except the 2nd+ guide (same template; keeps previews/ small). None at 320 px.
+      const shot = SHOTS && vp.w !== 320 && !(p.startsWith('/guides/') && p !== guides[0].path);
       if (shot) await page.screenshot({ path: path.join(OUT, `${shotName(p)}_${vp.w}.jpg`), fullPage: true, type: 'jpeg', quality: 68 });
     }
     // first screen of the home page, PNG, sharper
     await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-    if (SHOTS) await page.screenshot({ path: path.join(OUT, `home_first_screen_${vp.w}.png`) });
+    if (SHOTS && vp.w !== 320) await page.screenshot({ path: path.join(OUT, `home_first_screen_${vp.w}.png`) });
+    await ctx.close();
+  }
+
+  // 1b. G066 brand: logos from public/brand/, tab icons and the web manifest (also on a platform page: /start).
+  {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+    await page.locator('footer img').scrollIntoViewIfNeeded(); // the footer logo is lazy
+    await page.waitForFunction(() => document.querySelector<HTMLImageElement>('footer img')?.complete, null, { timeout: 5000 });
+    const brand = await page.evaluate(() => {
+      const img = (sel: string) => {
+        const el = document.querySelector<HTMLImageElement>(sel);
+        return el ? { src: new URL(el.src).pathname, alt: el.alt, ok: el.complete && el.naturalWidth > 0 } : null;
+      };
+      return {
+        header: img('header img'),
+        footer: img('footer img'),
+        icons: Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel~="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]')).map(
+          (l) => `${l.rel} ${new URL(l.href).pathname}`,
+        ),
+      };
+    });
+    check(
+      'brand: header logo is the anchor SVG, footer logo the reverse SVG, both load',
+      brand.header?.src === '/brand/bke-logo-horizontal-anchor.svg' && brand.header.ok && /BKE Studio/.test(brand.header.alt) &&
+        brand.footer?.src === '/brand/bke-logo-horizontal-reverse.svg' && brand.footer.ok,
+      brand,
+    );
+    const want = ['icon /brand/favicon.ico', 'icon /brand/icon.svg', 'apple-touch-icon /brand/apple-touch-icon.png', 'manifest /brand/site.webmanifest'];
+    check('brand: favicon, SVG icon, apple-touch-icon and manifest in <head>', want.every((w) => brand.icons.includes(w)), brand.icons);
+    const files = await page.evaluate(async (paths: string[]) => {
+      const out: Record<string, string> = {};
+      for (const p of paths) {
+        const r = await fetch(p);
+        out[p] = `${r.status} ${r.headers.get('content-type')}`;
+      }
+      return out;
+    }, ['/brand/favicon.ico', '/brand/icon.svg', '/brand/apple-touch-icon.png', '/brand/icon-192.png', '/brand/icon-512.png', '/brand/site.webmanifest', '/brand/pattern_tile.png']);
+    check('brand: icon, manifest and pattern files answer 200', Object.values(files as Record<string, string>).every((v) => v.startsWith('200')), files);
+    const manifest = await page.evaluate(async () => (await fetch('/brand/site.webmanifest')).json());
+    check('brand: manifest names BKE Studio with 192 and 512 px icons', manifest.name === 'BKE Studio' && manifest.icons.some((i: any) => i.sizes === '192x192') && manifest.icons.some((i: any) => i.sizes === '512x512'), manifest);
+    await page.goto(BASE + '/start', { waitUntil: 'domcontentloaded' });
+    const startIcons = await page.evaluate(() => Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel~="icon"]')).map((l) => new URL(l.href).pathname));
+    check('brand: platform pages (/start) carry the brand tab icon too', startIcons.includes('/brand/icon.svg'), startIcons);
     await ctx.close();
   }
 
@@ -260,7 +338,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061)',
+      tool: 'tests/marketing-browser.ts (G061, G066)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

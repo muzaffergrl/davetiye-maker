@@ -15,7 +15,9 @@ import type { ContentRecord } from '../../content/types.ts';
 import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
+  applyRsvpUpdate,
   applySitePatch,
+  rsvpLists,
   SlugTakenError,
   StaleSiteError,
   nextTimestamp,
@@ -25,6 +27,7 @@ import {
   type PublishOptions,
   type RsvpInput,
   type RsvpRecord,
+  type RsvpUpdate,
   type SavedPhoto,
   type SiteKeyHashes,
   type SitePatch,
@@ -227,9 +230,10 @@ export class LocalAdapter implements DataAdapter {
       attending: input.attending,
       guests: input.guests,
       message: input.message ?? null,
-      ...(input.answers?.length ? { answers: input.answers.map((a) => ({ id: a.id, question: a.question, answer: a.answer })) } : {}),
+      ...rsvpLists(input),
       createdAt: new Date().toISOString(),
       ...(input.held ? { held: true } : {}),
+      ...(input.source === 'couple' ? { source: 'couple' as const } : {}),
     };
     await this.withLock(`rsvps:${siteId}`, async () => {
       const list = (await this.readJson<RsvpRecord[]>(this.rsvpPath(siteId))) ?? [];
@@ -261,6 +265,15 @@ export class LocalAdapter implements DataAdapter {
       const list = all.filter((r) => !drop.has(r.id));
       return { list, changed: all.length - list.length };
     });
+  }
+
+  async updateRsvp(siteId: string, id: string, update: RsvpUpdate): Promise<RsvpRecord | null> {
+    let saved: RsvpRecord | null = null;
+    await this.editRsvps(siteId, (all) => {
+      const list = all.map((r) => (r.id === id ? (saved = applyRsvpUpdate(r, update, new Date().toISOString())) : r));
+      return { list, changed: saved ? 1 : 0 };
+    });
+    return saved ? { ...(saved as RsvpRecord) } : null;
   }
 
   setRsvpsHeld(siteId: string, ids: readonly string[], held: boolean): Promise<number> {

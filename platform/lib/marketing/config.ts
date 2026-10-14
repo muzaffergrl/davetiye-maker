@@ -34,7 +34,7 @@ export interface MarketingConfig {
     name: string;
     /** Same short definition everywhere (docs/14 §4.6): ≤ 160 characters. */
     shortDescription: string;
-    /** Absolute path under public/ of a square logo (≥ 112 px), or null until the brand is decided. */
+    /** Absolute path under public/ of a square logo (≥ 112 px) for JSON-LD, or null. Site header/footer logos: lib/marketing/brand.ts. */
     logo: string | null;
   };
   /** The domain shown in copy ("[DOMAIN]/<your-names>"), without protocol. */
@@ -79,11 +79,13 @@ export interface MarketingConfig {
 
 export const MARKETING: MarketingConfig = {
   launched: false,
+  // K26/K27 (2026-10-14): working name BKE Studio, identity GM01 direction C (brand/). The Etsy shop name, domain and
+  // support email are still open, so they stay placeholders below; nothing is indexed while `launched` is false.
   brand: {
-    name: '[BRAND]',
+    name: 'BKE Studio',
     shortDescription:
-      '[BRAND] makes wedding websites that open like a real invitation. Buy a design on Etsy, edit it on your phone and collect RSVPs online.',
-    logo: null,
+      'BKE Studio makes wedding websites that open like a real invitation. Buy a design on Etsy, edit it on your phone and collect RSVPs online.',
+    logo: '/brand/icon-512.png',
   },
   domain: '[DOMAIN]',
   // MARKETING_SITE_URL (the brand domain, once decided) wins; then PLATFORM_PUBLIC_URL (set on Vercel); else the

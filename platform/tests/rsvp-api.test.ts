@@ -363,8 +363,14 @@ test('couple API: list (newest first) and counts for one site only', async () =>
     body.responses.map((r: { name: string; guests: number }) => [r.name, r.guests]),
     [['Yes Four', 4], ['No One', 0], ['Yes Two', 2]],
   );
-  assert.deepEqual(Object.keys(body.responses[0]).sort(), ['answers', 'attending', 'createdAt', 'email', 'guests', 'held', 'id', 'message', 'name']);
+  assert.deepEqual(Object.keys(body.responses[0]).sort(), ['answers', 'attending', 'createdAt', 'editedAt', 'email', 'guests', 'held', 'id', 'message', 'name', 'party', 'source']);
   assert.deepEqual(body.responses[0].answers, [], 'no custom questions: an empty answers list (G051)');
+  // G069: older-style replies (no party names) still list: no names, from the website, never corrected
+  assert.deepEqual([body.responses[0].party, body.responses[0].source, body.responses[0].editedAt], [[], 'guest', null]);
+  assert.equal(body.maxGuests, 6, 'the theme cap, for the panel\'s "Add a reply" form');
+  assert.deepEqual(body.questions, []);
+  assert.deepEqual(body.insights.people, { coming: 6, named: 2, unnamed: 4, notComing: 1 });
+  assert.equal(body.insights.deadline.state, 'open');
 });
 
 test('CSV export: attachment, BOM, formula cells escaped, only this site', async () => {
@@ -379,9 +385,13 @@ test('CSV export: attachment, BOM, formula cells escaped, only this site', async
   const bytes = new Uint8Array(await res.arrayBuffer());
   assert.deepEqual([...bytes.slice(0, 3)], [0xef, 0xbb, 0xbf]); // UTF-8 BOM
   const lines = new TextDecoder().decode(bytes).split('\r\n'); // decoder drops the BOM
-  assert.equal(lines[0], '"Submitted (America/New_York)","Name","Email","Attending","Guests","Message"');
-  assert.match(lines[1], /^"[A-Z][a-z]+ \d{1,2}, \d{4} \d{1,2}:\d{2} [AP]M","'=HYPERLINK\(""http:\/\/evil\.example"",""x""\)","","Yes","1","'@SUM\(1\+1\)"$/);
-  assert.match(lines[2], /,"'\+Plus","plus@example\.org","No","0","'-minus ""quoted"""$/);
+  // G069: one row per person — Name, Party of, Attending, Party size, Email, Submitted, Source, Message
+  assert.equal(lines[0], '"Name","Party of","Attending","Party size","Email","Submitted (America/New_York)","Source","Message"');
+  assert.match(
+    lines[1],
+    /^"'=HYPERLINK\(""http:\/\/evil\.example"",""x""\)","'=HYPERLINK\(""http:\/\/evil\.example"",""x""\)","Yes","1","","[A-Z][a-z]+ \d{1,2}, \d{4} \d{1,2}:\d{2} [AP]M","Website","'@SUM\(1\+1\)"$/,
+  );
+  assert.match(lines[2], /^"'\+Plus","'\+Plus","No","0","plus@example\.org","[^"]+","Website","'-minus ""quoted"""$/);
   assert.equal(lines.length, 4); // header + 2 rows + trailing empty
 });
 
@@ -466,11 +476,15 @@ test('questions: answers stored with the reply, listed for the couple, one CSV c
   const res = await csv('questions-site', { bearer: site.editKey });
   assert.equal(res.status, 200);
   const lines = new TextDecoder().decode(new Uint8Array(await res.arrayBuffer())).split('\r\n');
-  assert.equal(lines[0], '"Submitted (America/New_York)","Name","Email","Attending","Guests","Message","Dinner","Song request"');
-  assert.ok(lines[1].endsWith(',"Early Bird","","Yes","1","","",""'), lines[1]);
-  assert.ok(lines[2].endsWith(`,"Ada Answer","","Yes","2","","Fish","'=1+1 by the band"`), `guest text is formula-safe: ${lines[2]}`);
-  assert.ok(lines[3].endsWith(',"No Thanks","","No","0","","",""'), lines[3]);
-  assert.equal(lines.length, 5);
+  assert.equal(lines[0], '"Name","Party of","Attending","Party size","Email","Submitted (America/New_York)","Source","Message","Dinner","Song request"');
+  const cells = (line: string) => line.slice(1, -1).split('","');
+  const noDate = (line: string) => cells(line).filter((_, i) => i !== 5);
+  assert.deepEqual(noDate(lines[1]), ['Early Bird', 'Early Bird', 'Yes', '1', '', 'Website', '', '', '']);
+  assert.deepEqual(noDate(lines[2]), ['Ada Answer', 'Ada Answer', 'Yes', '2', '', 'Website', '', 'Fish', "'=1+1 by the band"], 'guest text is formula-safe');
+  // G069: one row per person: Ada's second guest gave no name; reply-level cells only on Ada's own row
+  assert.deepEqual(noDate(lines[3]), ['Guest 2 (no name given)', 'Ada Answer', 'Yes', '', '', 'Website', '', '', '']);
+  assert.deepEqual(noDate(lines[4]), ['No Thanks', 'No Thanks', 'No', '0', '', 'Website', '', '', '']);
+  assert.equal(lines.length, 6);
 });
 
 test('questions: a reply without answers is still accepted (questions are optional)', async () => {

@@ -199,12 +199,41 @@ test('CSV: header, BOM, CRLF, oldest first, local time in the site zone', () => 
   );
   assert.ok(csv.startsWith('﻿'));
   const lines = csv.slice(1).split('\r\n');
-  assert.equal(lines[0], '"Submitted (America/New_York)","Name","Email","Attending","Guests","Message"');
-  assert.equal(lines[1], `"March 1, 2027 10:05 AM","'=cmd|calc","a@example.org","Yes","2",""`);
-  assert.equal(lines[2], '"March 2, 2027 1:30 PM","Later","","No","0","Sorry,\nwe are away"');
-  assert.equal(lines[3], '');
+  // G069: one row per person (a reply of 2 without names = the guest + "Guest 2 (no name given)")
+  assert.equal(lines[0], '"Name","Party of","Attending","Party size","Email","Submitted (America/New_York)","Source","Message"');
+  assert.equal(lines[1], `"'=cmd|calc","'=cmd|calc","Yes","2","a@example.org","March 1, 2027 10:05 AM","Website",""`);
+  assert.equal(lines[2], `"Guest 2 (no name given)","'=cmd|calc","Yes","","","March 1, 2027 10:05 AM","Website",""`);
+  assert.equal(lines[3], '"Later","Later","No","0","","March 2, 2027 1:30 PM","Website","Sorry,\nwe are away"');
+  assert.equal(lines[4], '');
   assert.equal(formatLocalDateTime('2027-03-01T15:05:00.000Z', 'Europe/London', 'en-GB'), '1 March 2027 3:05 pm');
-  assert.equal(rsvpCsv([], { bom: false }), '"Submitted (UTC)","Name","Email","Attending","Guests","Message"\r\n');
+  assert.equal(rsvpCsv([], { bom: false }), '"Name","Party of","Attending","Party size","Email","Submitted (UTC)","Source","Message"\r\n');
+});
+
+test('CSV (G069): one row per person with the names given, party size once per reply, source of each reply', () => {
+  const csv = rsvpCsv(
+    [
+      rec({ name: 'Avery Stone', guests: 3, party: ['Jordan Stone'], email: 'avery@example.org', message: 'Yay', createdAt: '2027-03-01T10:00:00.000Z', answers: [{ id: 'meal', question: 'Meal', answer: 'Fish' }] }),
+      rec({ name: 'Phone Call', guests: 2, party: ['@Partner'], source: 'couple', createdAt: '2027-03-02T10:00:00.000Z' }),
+      rec({ name: 'Fixed Up', guests: 1, editedAt: '2027-03-05T10:00:00.000Z', createdAt: '2027-03-03T10:00:00.000Z' }),
+      rec({ name: 'Held Back', guests: 4, held: true, createdAt: '2027-03-04T10:00:00.000Z' }),
+    ],
+    { timeZone: 'UTC', bom: false, questions: [{ id: 'meal', label: 'Meal' }] },
+  );
+  const rows = csv.split('\r\n').slice(1, -1).map((l) => l.slice(1, -1).split('","'));
+  assert.deepEqual(
+    rows.map((r) => [r[0], r[1], r[2], r[3], r[4], r[6], r[7], r[8]]),
+    [
+      ['Avery Stone', 'Avery Stone', 'Yes', '3', 'avery@example.org', 'Website', 'Yay', 'Fish'],
+      ['Jordan Stone', 'Avery Stone', 'Yes', '', '', 'Website', '', ''],
+      ['Guest 3 (no name given)', 'Avery Stone', 'Yes', '', '', 'Website', '', ''],
+      ['Phone Call', 'Phone Call', 'Yes', '2', '', 'Added by you', '', ''],
+      ["'@Partner", 'Phone Call', 'Yes', '', '', 'Added by you', '', ''],
+      ['Fixed Up', 'Fixed Up', 'Yes', '1', '', 'Website, edited by you', '', ''],
+    ],
+  );
+  // the head count two ways: rows saying "Yes", and the sum of "Party size"
+  assert.equal(rows.filter((r) => r[2] === 'Yes').length, 6);
+  assert.equal(rows.reduce((n, r) => n + (Number(r[3]) || 0), 0), 6);
 });
 
 // ---------------------------------------------------------------- G051: custom questions
@@ -273,12 +302,12 @@ test('CSV: one column per question after Message, removed questions keep theirs,
     { timeZone: 'UTC', bom: false, questions: [{ id: 'meal', label: 'Meal choice' }, { id: 'song', label: '-Song "request"' }] },
   );
   const lines = csv.split('\r\n');
-  assert.equal(lines[0], `"Submitted (UTC)","Name","Email","Attending","Guests","Message","Meal choice","'-Song ""request""","'+Removed question"`);
-  assert.equal(lines[1], '"March 1, 2027 10:00 AM","Old Reply","","Yes","1","","","",""');
-  assert.equal(lines[2], `"March 2, 2027 10:00 AM","With Answers","","Yes","1","","Fish","'=HYPERLINK(""http://x.example"",""go"")","'@cmd"`);
-  assert.equal(lines[3], '"March 3, 2027 10:00 AM","Declined","","No","0","","","",""');
-  // a site without questions keeps the original six columns
-  assert.equal(rsvpCsv([rec({})], { bom: false }).split('\r\n')[0], '"Submitted (UTC)","Name","Email","Attending","Guests","Message"');
+  assert.equal(lines[0], `"Name","Party of","Attending","Party size","Email","Submitted (UTC)","Source","Message","Meal choice","'-Song ""request""","'+Removed question"`);
+  assert.equal(lines[1], '"Old Reply","Old Reply","Yes","1","","March 1, 2027 10:00 AM","Website","","","",""');
+  assert.equal(lines[2], `"With Answers","With Answers","Yes","1","","March 2, 2027 10:00 AM","Website","","Fish","'=HYPERLINK(""http://x.example"",""go"")","'@cmd"`);
+  assert.equal(lines[3], '"Declined","Declined","No","0","","March 3, 2027 10:00 AM","Website","","","",""');
+  // a site without questions has the eight person columns only
+  assert.equal(rsvpCsv([rec({})], { bom: false }).split('\r\n')[0], '"Name","Party of","Attending","Party size","Email","Submitted (UTC)","Source","Message"');
 });
 
 test('theme guest cap: theme.json rsvp.max_guests, else the platform default', async () => {

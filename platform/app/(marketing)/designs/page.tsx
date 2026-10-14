@@ -1,7 +1,8 @@
-// /designs — gallery (docs/14 §6.2). Only live designs; the style filter appears from 6 designs on.
+// /designs — gallery (docs/14 §6.2; G066 comp u1_designs_390). Only live designs; the style filter appears from 6
+// designs on.
 import { DesignCard } from '../../../components/marketing/DesignCard.tsx';
 import s from '../../../components/marketing/marketing.module.css';
-import { CheckList, Container, Eyebrow, JsonLd, LastUpdated, Section, TextLink } from '../../../components/marketing/ui.tsx';
+import { CheckList, Container, JsonLd, LastUpdated, Section, TextLink } from '../../../components/marketing/ui.tsx';
 import { liveDesigns } from '../../../lib/marketing/designs.ts';
 import { FIXED, SITE_PAGES } from '../../../lib/marketing/facts.ts';
 import { breadcrumbs, graph, itemList, webPage } from '../../../lib/marketing/schema.ts';
@@ -19,7 +20,6 @@ export default function DesignsPage() {
     <>
       <Section className={s.pageHead}>
         <Container>
-          <Eyebrow>Envelope opening · {designs.length} designs</Eyebrow>
           <h1 className={s.h1}>{PAGE.h1}</h1>
           <p className={s.lead}>
             Every design opens from a sealed envelope and has the same four pages: {SITE_PAGES.map((p) => p.name).join(', ')}.

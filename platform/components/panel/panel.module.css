@@ -2104,6 +2104,557 @@
   animation: indeterminate 1.4s linear infinite;
 }
 
+/* ------------------------------------------------------------------ guests v2 (G069): overview, answers, notes, cards,
+   add / edit sheet, printable list. Tokens only (G066 restyles the whole panel). */
+
+.cardButtonNew {
+  border-color: var(--c-accent);
+  box-shadow: inset 0 0 0 1px var(--c-accent), var(--e-1);
+}
+
+.cardButtonNew .cardButtonTitle {
+  color: var(--c-accent);
+}
+
+.statIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 2px;
+  border-radius: 50%;
+  background: var(--c-surface-sunken);
+  color: var(--c-text-muted);
+}
+
+/* Deadline strip: "Replies close in 30 days" (comp u2_guests_390). */
+.deadline {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-card);
+  background: var(--c-accent-soft);
+  color: #1f405a;
+}
+
+.deadlineIcon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--c-surface);
+  color: var(--c-accent);
+}
+
+.deadlineText {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  min-width: 0;
+}
+
+.deadlineHead {
+  font-size: 17px;
+  line-height: 24px;
+}
+
+.deadlineDetail {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+/* Actions that stay in reach above the bottom navigation while the list scrolls. */
+.guestBar {
+  position: sticky;
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + var(--s-2));
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-2);
+  padding: var(--s-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+  background: rgb(247 246 243 / 0.97);
+  box-shadow: var(--e-2);
+}
+
+.guestBar > :only-child,
+.guestBar > .guestBarNote {
+  grid-column: 1 / -1;
+}
+
+.guestBar > .btn {
+  min-height: 48px;
+}
+
+.guestBarNote {
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+@media (min-width: 960px) {
+  .guestBar {
+    bottom: var(--s-4);
+  }
+}
+
+.sectionHeading {
+  margin: var(--s-2) 0 0;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 650;
+}
+
+.sectionHeading:focus {
+  outline: none;
+}
+
+.headingCount {
+  color: var(--c-text-muted);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sortRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.sortRow .select {
+  flex: 1;
+  min-width: 0;
+}
+
+.activeFilter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: 4px 4px 4px var(--s-4);
+  border-radius: var(--r-control);
+  background: var(--c-accent-soft);
+  color: #1f405a;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+/* Answer breakdown: one bar per option; the bar is the button (tap = show who chose it). */
+.bars {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: minmax(0, 36%) minmax(48px, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: var(--c-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .barRow:hover {
+    background: var(--c-surface-sunken);
+  }
+}
+
+.barRowOn {
+  border-color: var(--c-accent);
+  background: var(--c-accent-soft);
+}
+
+.barLabel {
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.barOld {
+  color: var(--c-text-muted);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.barValue {
+  min-width: 2ch;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.barCount {
+  color: var(--c-text-muted);
+  font-weight: 500;
+}
+
+.bar {
+  display: block;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--c-surface-sunken);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  border-radius: var(--r-pill);
+  background: var(--c-accent);
+}
+
+.cardFootHint {
+  margin-top: var(--s-2);
+}
+
+.textAnswers {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.preLine {
+  white-space: pre-line;
+}
+
+.dietList {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dietList li {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+}
+
+.dietIcon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--c-text-muted);
+}
+
+.dietBody {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.dietName {
+  font-weight: 650;
+}
+
+.dietFrom {
+  color: var(--c-text-muted);
+  font-size: 13px;
+}
+
+/* Reply cards */
+.replyNew {
+  background: linear-gradient(90deg, var(--c-accent-soft), var(--c-surface) 60%);
+}
+
+.reply:first-child {
+  border-radius: var(--r-card) var(--r-card) 0 0;
+}
+
+.reply:last-child {
+  border-radius: 0 0 var(--r-card) var(--r-card);
+}
+
+.reply:only-child {
+  border-radius: var(--r-card);
+}
+
+.replyToggleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.replyAvatar {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--c-surface-sunken);
+  color: var(--c-text);
+}
+
+.replyAvatarNo {
+  color: var(--c-text-muted);
+}
+
+.replyText {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.replyTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.replyParty {
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+
+.replyStamp {
+  color: var(--c-text-muted);
+  font-size: 13px;
+}
+
+.peopleList {
+  display: grid;
+  gap: 2px;
+  margin: 4px 0 0;
+  padding-left: 22px;
+}
+
+.unnamed {
+  color: var(--c-text-muted);
+  font-style: italic;
+}
+
+/* Add / edit a reply */
+.replyForm {
+  display: grid;
+  gap: var(--s-5);
+}
+
+.partyFields {
+  display: grid;
+  gap: var(--s-3);
+  min-width: 0;
+  margin: 0;
+  padding: var(--s-3) var(--s-4) var(--s-4);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+  background: var(--c-bg);
+}
+
+.partyFields legend {
+  padding: 0 4px;
+}
+
+.hintLabel {
+  color: var(--c-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkRow input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--c-primary);
+}
+
+/* Printable guest list (#guests/print). On screen a sheet of paper; printed: only the list (A4 / US Letter). */
+.printTools {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.printDoc {
+  padding: var(--s-5) var(--s-4);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+  color: var(--c-text);
+}
+
+.printHead {
+  display: grid;
+  gap: 2px;
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-3);
+  border-bottom: 2px solid var(--c-text);
+}
+
+.printTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+.printNames {
+  margin: 0;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.printMeta {
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: 14px;
+}
+
+.printSection {
+  margin: var(--s-5) 0 var(--s-2);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.printTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.printTable th {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--c-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.printTable td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.printFirst td {
+  border-top: 1px solid var(--c-control-border);
+}
+
+.printCheck {
+  width: 34px;
+}
+
+.printBox {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  border: 1.5px solid var(--c-text);
+  border-radius: 3px;
+}
+
+.printName {
+  font-weight: 600;
+}
+
+.printParty {
+  color: var(--c-text-muted);
+}
+
+.printNotes {
+  color: var(--c-text);
+}
+
+.printFoot {
+  margin: var(--s-4) 0 0;
+  color: var(--c-text-muted);
+  font-size: 13px;
+}
+
+/* Phones: each person is a short block (name, party, answers) instead of a 4-column row. */
+@media screen and (max-width: 599px) {
+  .printTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .printTable,
+  .printTable tbody,
+  .printTable tr,
+  .printTable td {
+    display: block;
+  }
+  .printTable tr {
+    position: relative;
+    padding: 8px 0 8px 30px;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .printTable td {
+    padding: 0;
+    border: 0;
+  }
+  .printFirst {
+    border-top: 1px solid var(--c-control-border);
+  }
+  .printFirst td {
+    border-top: 0;
+  }
+  .printTable .printCheck {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: auto;
+  }
+  .printTable td:empty {
+    display: none;
+  }
+}
+
 /* ================================================================== share */
 
 .dangerZone {
@@ -2935,5 +3486,55 @@
   }
   .spin {
     animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ print (G069: the guest list, #guests/print) */
+@media print {
+  @page {
+    margin: 14mm 12mm;
+  }
+  :global(html):has(.app),
+  .app {
+    background: #fff !important;
+  }
+  .app {
+    min-height: 0;
+  }
+  .appBar,
+  .nav,
+  .previewColumn,
+  .skipLink,
+  .pageHead,
+  .snackHost,
+  .main > .banner,
+  .printTools {
+    display: none !important;
+  }
+  .shell {
+    display: block;
+  }
+  .main {
+    max-width: none;
+    padding: 0;
+  }
+  .printDoc {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 11pt;
+  }
+  .printTable {
+    font-size: 10pt;
+  }
+  .printTable thead {
+    display: table-header-group;
+  }
+  .printTable tr {
+    break-inside: avoid;
+  }
+  .printSection {
+    break-after: avoid;
   }
 }

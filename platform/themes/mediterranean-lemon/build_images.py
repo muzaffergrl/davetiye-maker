@@ -62,9 +62,15 @@ LUM = np.array([0.299, 0.587, 0.114])
 WIDTHS = {
     "env_closed": [440, 880], "env_cflap": [440, 880], "env_flap": [440, 880], "env_body": [440, 880],
     "env_pocket": [440, 880], "closure": [320, 640], "card_small": [320, 640], "invitation_card": [480, 960],
-    "info_card": [480, 960], "frame_portrait": [320, 640], "frame_landscape": [480, 960], "decor_tl": [480, 960],
-    "decor_br": [480, 960], "divider": [300, 600],
+    "info_card": [480, 960], "frame_portrait": [320, 640], "frame_landscape": [480, 960], "decor_tl": [480, 720, 960],
+    "decor_br": [480, 720, 960], "divider": [300, 600],
 }
+# 720 px kümeler: 390 px telefonda DPR 3 (sizes ≈ 230–250 px) 960'ı değil 720'yi seçer (ilk görünümde WebP < 150 KB, docs/11 §6)
+# kartın cepteki duruşu: fotoğraf penceresinin en çok bu kadarı cebin düz kenarının üstünde görünür (yüzler kenarla kesilmez)
+CARD_PHOTO_ABOVE = 0.06
+# W1.2 gezinme ortasındaki / W1.4 dress code üstündeki küçük çini çiçeği: frame_portrait üst sırasının ortadaki çini karosu
+# (kaynak 1024×1536 pikseli; karo x 465–564, y 282–370; çiçek merkezi sarı nokta). Yalnız kırpım + renkle anahtar (K21)
+TILE_FLOWER_BOX = (466, 284, 564, 368)
 # palet (palette.json lemon-azure): ivory #FFFDF7 — yer tutucu tonu
 IVORY = (255, 253, 247)
 # foto anahtarı → (pencere, çıktı genişlikleri, bg_page kırpım kutusu: çiçeksiz, güneş gölgeli sakin sıva)
@@ -209,6 +215,38 @@ def webp_yaz(im: Image.Image, name: str, widths, q: int, manifest: dict, out: Pa
         r.save(p, "WEBP", quality=q, method=6, alpha_quality=90)
         files.append({"file": p.name, "w": w, "h": h, "bytes": p.stat().st_size})
     manifest[name] = {"src_size": [w0, h0], "ratio": round(w0 / h0, 5), "files": files}
+
+
+def cini_cicegi(fp: Image.Image):
+    """frame_portrait'in ortadaki çiçek karosundan yalnız çiçek (8 kobalt yaprak + sarı göbek): karo zemini renkle anahtarlanır
+    (doygunluk: kobalt ve sarı yüksek, krem zemin/gölge düşük), merkeze yakın bileşenler kalır (köşe noktaları, karo
+    kenarı düşer), yaprak parlaklıkları (iç delikler) dolu, kenar rengi çiçeğin kendi rengi. Çizim yok."""
+    t = np.asarray(fp.convert("RGBA").crop(TILE_FLOWER_BOX)).astype(np.float64)
+    rgb = t[..., :3]
+    ink = np.clip((rgb.max(-1) - rgb.min(-1) - 45) / 90, 0, 1)
+    sari = (rgb[..., 0] > 200) & (rgb[..., 2] < 110)
+    if sari.sum() < 20:
+        sys.exit("tile_flower: karoda sarı göbek bulunamadı (TILE_FLOWER_BOX)")
+    cy, cx = [float(v.mean()) for v in np.nonzero(sari)]
+    yy, xx = np.mgrid[:t.shape[0], :t.shape[1]]
+    kalan, cicek = genislet(ink > 0.5, 1).copy(), np.zeros(t.shape[:2], bool)
+    while True:
+        b = en_buyuk_bolge(kalan)
+        if b.sum() < 25:
+            break
+        if np.hypot(xx[b].mean() - cx, yy[b].mean() - cy) < 34:
+            cicek |= b
+        kalan &= ~b
+    dis = en_buyuk_bolge(~cicek)
+    dolu = ~dis
+    alfa = np.maximum(ink * genislet(cicek, 1), (dolu & ~genislet(dis, 1)).astype(np.float64))
+    kat = (ink > 0.9) | (dolu & ~genislet(dis, 2))
+    pay = _kutu_bulanik(kat.astype(np.float64), 3)
+    yakin = np.stack([_kutu_bulanik(rgb[..., i] * kat, 3) for i in range(3)], -1) / np.maximum(pay, 1e-6)[..., None]
+    rgb = np.where((alfa[..., None] < 0.95) & (pay[..., None] > 1e-3), yakin, rgb)
+    im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), alfa * 255]).round().astype(np.uint8), "RGBA")
+    return im.crop(im.getbbox()), {"source": "frame_portrait", "tile_box_px": list(TILE_FLOWER_BOX),
+                                   "petals_px": int(cicek.sum()), "centre_in_tile": [round(cx, 1), round(cy, 1)]}
 
 
 def alfa_kutu(im: Image.Image, esik: int = 8):
@@ -537,7 +575,12 @@ def main():
     card_w = card_w_of_env * (k_x1 - k_x0)
     card_h = card_w / card_ar
     card_x = (k_x0 + k_x1) / 2 - card_w / 2
-    hidden_top = govde_ust + 0.07 * (k_alt - k_ust)                   # astar penceresinde kartın üstü görünür
+    # cepte bekleyen kart: çini başlığı ve fotoğrafın en çok CARD_PHOTO_ABOVE'u cebin düz kenarının üstünde (G405 incelemesi:
+    # %7'lik duruşta fotoğrafın üst ~%26'sı görünüyor, yüzler 1 s boyunca cep kenarıyla kesiliyordu)
+    ck_win = win["card_small"][0]
+    cw_y, cw_h = ck_win["kutu"][1] / ck_win["katman_olcu"][1], ck_win["kutu"][3] / ck_win["katman_olcu"][1]
+    cep_duz = float(cep_kenar[int(round(card_x + card_w / 2))])
+    hidden_top = cep_duz - (cw_y + CARD_PHOTO_ABOVE * cw_h) * card_h
     kose_kenar = float(min(cep_kenar[int(card_x)], cep_kenar[int(card_x + card_w)]))
     # kart yukarıda kalır (yukarı → aşağı → yukarı yok): out = alt köşeleri cebin kenarını kartın %4'ü kadar aşmış;
     # front = aynı yerde öne gelir (%3 aşağı + × 1.04, büyüyen gölge) → home kartına yukarı uçar
@@ -585,7 +628,8 @@ def main():
                            "bottom_frac_of_stage_w": round((Y1 - env_y1) / SW, 5)}
     stage["card_path"] = {"out_translate_pct": round(100 * (out_top - hidden_top) / card_h, 3),
                           "front_translate_pct": round(100 * (front_top - hidden_top) / card_h, 3), "front_scale": scale_front,
-                          "pocket_edge_at_card_corners": round(kose_kenar, 1), "card_w_of_env": card_w_of_env}
+                          "pocket_edge_at_card_corners": round(kose_kenar, 1), "card_w_of_env": card_w_of_env,
+                          "pocket_flat_edge": round(cep_duz, 1), "photo_above_pocket": CARD_PHOTO_ABOVE}
     stage["cuts"] = {"cflap": kb, "pocket": cep}
     stage["checks"] = {"open_layers_overlap_diff": round(fark_acik, 5), "cflap_outside_closed_px": int(fark_kapak)}
     stage["align_fix"] = hiza_duzeltme
@@ -638,6 +682,9 @@ def main():
         im = im.crop(alfa_kutu(im))
         im.thumbnail((200, 200), Image.LANCZOS)
         webp(im, f"accent_{i}", [im.width])
+    cicek, cicek_bilgi = cini_cicegi(Image.open(PARTS / "frame_portrait.png"))
+    webp(cicek, "tile_flower", [cicek.width])
+    manifest["tile_flower"].update(cicek_bilgi)
 
     # ------------------------------------------------------------------ zemin
     bg = Image.open(PARTS / "bg_page.png").convert("RGB")

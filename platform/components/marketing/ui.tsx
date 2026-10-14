@@ -1,5 +1,5 @@
 // Server components of the marketing site (G061). No client JavaScript here: links, <details>, images, JSON-LD.
-import { ArrowRight, Check, Minus, ShoppingBag } from 'lucide-react';
+import { ArrowRight, Check, Minus } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { Design } from '../../lib/marketing/designs.ts';
 import type { Block, Inline } from '../../lib/marketing/markdown.ts';
@@ -98,14 +98,12 @@ export function EtsyButton({
   if (!url) {
     return (
       <span className={cx(cls, s.btnDisabled)} aria-disabled="true" data-etsy-pending={design.id}>
-        <ShoppingBag aria-hidden size={18} strokeWidth={1.75} />
         Coming soon on Etsy
       </span>
     );
   }
   return (
     <a className={cls} href={url} data-track="etsy_click" data-track-design={design.id} data-track-placement={placement}>
-      <ShoppingBag aria-hidden size={18} strokeWidth={1.75} />
       {withPrice ? `Buy on Etsy — ${withPrice}` : 'Buy on Etsy'}
     </a>
   );
@@ -142,12 +140,26 @@ export function LastUpdated({ day, label = 'Last updated' }: { day: string; labe
   );
 }
 
-export function CheckList({ items, tone = 'yes' }: { items: readonly ReactNode[]; tone?: 'yes' | 'no' }) {
+/**
+ * Check list (G066 comps): `solid` = gold disc with an aubergine check (design pages, pricing), `soft` = paper disc with
+ * a gold check (home). The mark is decorative; the text carries the meaning. `tone="no"` = a dash on a paper disc.
+ */
+export function CheckList({
+  items,
+  tone = 'yes',
+  variant = 'solid',
+}: {
+  items: readonly ReactNode[];
+  tone?: 'yes' | 'no';
+  variant?: 'solid' | 'soft';
+}) {
   return (
-    <ul className={cx(s.checkList, tone === 'no' && s.checkListNo)}>
+    <ul className={cx(s.checkList, tone === 'no' && s.checkListNo, tone === 'yes' && variant === 'soft' && s.checkListSoft)}>
       {items.map((it, i) => (
         <li key={i}>
-          {tone === 'yes' ? <Check aria-hidden size={18} strokeWidth={2} /> : <Minus aria-hidden size={18} strokeWidth={2} />}
+          <span className={s.checkMark} aria-hidden>
+            {tone === 'yes' ? <Check size={15} strokeWidth={3} /> : <Minus size={15} strokeWidth={2.5} />}
+          </span>
           <span>{it}</span>
         </li>
       ))}

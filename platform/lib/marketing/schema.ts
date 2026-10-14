@@ -158,7 +158,7 @@ export function article(guide: Guide, cfg: MarketingConfig = MARKETING, image?: 
     datePublished: guide.published,
     dateModified: guide.updated,
     author: brand
-      ? { '@type': 'Organization', name: `${brand} Editorial`, url: absUrl('/about', cfg) }
+      ? { '@type': 'Organization', '@id': `${absUrl('/about', cfg)}#editorial`, name: `${brand} Editorial`, url: absUrl('/about', cfg) }
       : { '@id': orgId(cfg) },
     publisher: { '@id': orgId(cfg) },
     mainEntityOfPage: absUrl(guide.path, cfg),

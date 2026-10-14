@@ -6,7 +6,7 @@
 // - HeroDemo: poster + design chips; on wide screens the demo loads in place, on phones it opens the dialog.
 // Same origin only: theme responses allow frame-ancestors 'self' (lib/site/render.ts).
 
-import { Play, RotateCcw, ShoppingBag, X } from 'lucide-react';
+import { Play, RotateCcw, X } from 'lucide-react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { track } from '../../lib/marketing/analytics.ts';
 import s from './marketing.module.css';
@@ -63,14 +63,12 @@ function EtsyAction({ d, placement }: { d: DemoDesign; placement: string }) {
   if (!d.etsyUrl) {
     return (
       <span className={`${s.btn} ${s.btnDisabled}`} aria-disabled="true">
-        <ShoppingBag aria-hidden size={18} strokeWidth={1.75} />
         Coming soon on Etsy
       </span>
     );
   }
   return (
     <a className={s.btn} href={d.etsyUrl} onClick={() => track('etsy_click', { design: d.id, placement })}>
-      <ShoppingBag aria-hidden size={18} strokeWidth={1.75} />
       Buy on Etsy
     </a>
   );
@@ -167,6 +165,8 @@ export function DemoHost({ designs }: { designs: DemoDesign[] }) {
 /**
  * Hero with the live demo facade. `children` = the server-rendered text (eyebrow, H1, intro). The primary button and
  * the poster open the selected design: in place on wide screens (≥ 1024 px), in the dialog on phones and tablets.
+ * Layout (G066 comps): phone = text, poster + design chips, buttons, fact strip; wide = text and buttons beside the
+ * poster, the fact strip across the bottom.
  */
 export function HeroDemo({
   designs,
@@ -174,6 +174,7 @@ export function HeroDemo({
   primaryLabel,
   secondary,
   footnote,
+  className,
   children,
 }: {
   designs: DemoDesign[];
@@ -181,6 +182,7 @@ export function HeroDemo({
   primaryLabel: string;
   secondary?: ReactNode;
   footnote?: ReactNode;
+  className?: string;
   children: ReactNode;
 }) {
   const [sel, setSel] = useState(0);
@@ -202,59 +204,43 @@ export function HeroDemo({
   };
 
   return (
-    <div className={s.hero}>
-      <div className={s.heroText}>
-        {children}
-        <div className={s.ctaRow}>
-          <a
-            className={`${s.btn} ${s.btnLarge}`}
-            href={d.demoPath}
-            onClick={(e) => {
-              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-              e.preventDefault();
-              start('button');
-            }}
-          >
-            <Play aria-hidden size={18} strokeWidth={1.75} />
-            {primaryLabel}
-          </a>
-          {secondary}
-        </div>
-      </div>
-      {footnote ? <div className={s.heroFoot}>{footnote}</div> : null}
+    <div className={className ? `${s.hero} ${className}` : s.hero}>
+      <div className={s.heroText}>{children}</div>
       <div className={s.heroVisual}>
-        <div className={s.heroScreen}>
-          {inline ? (
-            <ScaledFrame key={`${d.id}-${inline.n}`} src={d.demoPath} title={`Live demo: ${d.name}`} fit="width" />
-          ) : (
-            <a
-              className={s.posterButton}
-              href={d.demoPath}
-              onClick={(e) => {
-                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-                e.preventDefault();
-                start('poster');
-              }}
-              aria-label={`Tap to open the live demo of ${d.name}`}
-            >
-              <img
-                key={d.id}
-                src={d.poster.src}
-                srcSet={d.poster.srcSet}
-                sizes="(min-width: 1024px) 320px, (min-width: 600px) 300px, 66vw"
-                width={d.poster.width}
-                height={d.poster.height}
-                alt={d.poster.alt}
-                fetchPriority={sel === 0 ? 'high' : 'auto'}
-                loading="eager"
-                decoding="async"
-              />
-              <span className={s.tapLabel}>
-                <Play aria-hidden size={16} strokeWidth={2} />
-                Tap to open
-              </span>
-            </a>
-          )}
+        <div className={s.heroStage}>
+          <div className={s.heroScreen}>
+            {inline ? (
+              <ScaledFrame key={`${d.id}-${inline.n}`} src={d.demoPath} title={`Live demo: ${d.name}`} fit="width" />
+            ) : (
+              <a
+                className={s.posterButton}
+                href={d.demoPath}
+                onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                  e.preventDefault();
+                  start('poster');
+                }}
+                aria-label={`Tap to open the live demo of ${d.name}`}
+              >
+                <img
+                  key={d.id}
+                  src={d.poster.src}
+                  srcSet={d.poster.srcSet}
+                  sizes="(min-width: 1024px) 300px, (min-width: 600px) 220px, 46vw"
+                  width={d.poster.width}
+                  height={d.poster.height}
+                  alt={d.poster.alt}
+                  fetchPriority={sel === 0 ? 'high' : 'auto'}
+                  loading="eager"
+                  decoding="async"
+                />
+                <span className={s.tapLabel}>
+                  <Play aria-hidden size={14} strokeWidth={2} />
+                  Tap to open
+                </span>
+              </a>
+            )}
+          </div>
         </div>
         {inline ? (
           <div className={s.inlineControls}>
@@ -283,6 +269,21 @@ export function HeroDemo({
           </p>
         ) : null}
       </div>
+      <div className={s.heroCta}>
+        <a
+          className={`${s.btn} ${s.btnLarge}`}
+          href={d.demoPath}
+          onClick={(e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            e.preventDefault();
+            start('button');
+          }}
+        >
+          {primaryLabel}
+        </a>
+        {secondary}
+      </div>
+      {footnote ? <div className={s.heroFoot}>{footnote}</div> : null}
     </div>
   );
 }

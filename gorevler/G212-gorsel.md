@@ -2,7 +2,7 @@
 id: G212
 baslik: Tasarım 12 Tropical Destination — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-D
 oncelik: 2
 bagimli: []
@@ -77,3 +77,4 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-D (PAKET 2, 3/5); hero_portrait.jpg, story_1.jpg ve story_2.jpg prompt'ları kelimesi kelimesine, sırayla üretildi ve 1024×1536 RGB JPEG olarak Kaydet yollarına kondu. Home/story comp'ları sohbete yüklendi; story_1 ve story_2'de hero_portrait.jpg referans verildi. Çift, yüzler, görünen eller/parmaklar ve yazısız yüzeyler görsel olarak kontrol edildi; durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-D (PAKET 2, 5/5); story_3.jpg (1024×1536) ve venue.jpg (1536×1024) sırayla, prompt'lar aynen ve hero_portrait.jpg referansıyla üretildi; beş dosya Kaydet yollarında RGB JPEG. Story_3'te eller/yüzük/buket, venue'da insansız mekân ve yazı/logo/tabela bulunmaması görsel olarak kontrol edildi. Yeniden üretim ve ek rapor/önizleme dosyası yok; PAKET 5 değiştirilmedi, durum alindi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-D; dört oturumun toplamı 5 comp + 17 parça + 5 fotoğraf. Son kit_check PAKET 5 23/23 ve PAKET 2 5/5 geçti; açık yeşil pencere renk/gradyan ve yatay oran kusurları Sonuç'ta korundu. Kullanıcı talebi gereği bu görevden sonra duruldu.
+- 2026-10-14 entegratör onayladı

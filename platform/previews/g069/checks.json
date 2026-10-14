@@ -1,0 +1,268 @@
+{
+  "when": "2026-10-14T12:20:16.449Z",
+  "passed": 60,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "03 form: no name fields for the other guests before \"Number of guests\" is 2+",
+      "ok": true
+    },
+    {
+      "name": "03 form: \"Number of guests: 3\" shows 2 name fields, labelled guest 2 and 3",
+      "ok": true,
+      "detail": "[\"Name of guest 2 (optional)\",\"Name of guest 3 (optional)\"]"
+    },
+    {
+      "name": "03 form: a \"no\" takes the name fields out of the form",
+      "ok": true
+    },
+    {
+      "name": "03 form: back to \"yes\": the typed names are still there",
+      "ok": true
+    },
+    {
+      "name": "03 form: no horizontal scroll at 390 px with the name fields",
+      "ok": true
+    },
+    {
+      "name": "03 form: reply stored with the names of the 2 others, the meal and the note",
+      "ok": true,
+      "detail": "{\"id\":\"44f29d9b-e706-4628-9857-f0b244541363\",\"siteId\":\"09f854f6-6bce-4843-b9e5-aa2c96c99a32\",\"name\":\"Margaret Hamilton\",\"email\":\"margaret@example.com\",\"attending\":true,\"guests\":3,\"message\":null,\"answers\":[{\"id\":\"meal\",\"question\":\"Meal choice\",\"answer\":\"Vegetarian\"},{\"id\":\"shuttle\",\"question\":\"Do you need the hotel shuttle?\",\"answer\":\"Yes, please\"},{\"id\":\"diet\",\"question\":\"Any allergies or dietary needs?\",\"answer\":\"James: no nuts, please\"}],\"party\":[\"James Hamilton\",\"Ada Hamilton\"],\"createdAt\":\"2026-10-14T12:19:52.591Z\"}"
+    },
+    {
+      "name": "03 form: \"Send another reply\" starts with no name fields",
+      "ok": true
+    },
+    {
+      "name": "03 form: no console errors",
+      "ok": true
+    },
+    {
+      "name": "01 form: \"Number of guests: 2\" shows one name field",
+      "ok": true
+    },
+    {
+      "name": "01 form: the name field is full width like the other fields (theme styles)",
+      "ok": true,
+      "detail": "318 vs 318"
+    },
+    {
+      "name": "01 form: reply stored with the second guest's name",
+      "ok": true,
+      "detail": "{\"id\":\"4499503f-0dad-4c41-9818-64f5c2a1dc17\",\"siteId\":\"565918ff-2dfd-4207-a1b5-cb0e3ca2469f\",\"name\":\"Rosa Bell\",\"email\":null,\"attending\":true,\"guests\":2,\"message\":null,\"party\":[\"Tom Bell\"],\"createdAt\":\"2026-10-14T12:19:56.840Z\"}"
+    },
+    {
+      "name": "01 form: no console errors",
+      "ok": true
+    },
+    {
+      "name": "Home: card \"1 new reply\" with the numbers (coming · not coming)",
+      "ok": true,
+      "detail": "1 new reply 10 coming · 1 not coming"
+    },
+    {
+      "name": "Home: the Guests tab shows the new count",
+      "ok": true
+    },
+    {
+      "name": "Guests: opened from the Home card (#guests)",
+      "ok": true
+    },
+    {
+      "name": "Guests: 10 guests coming · 1 not coming · 6 replies",
+      "ok": true,
+      "detail": "10 Guests coming · 1 Not coming · 6 Replies"
+    },
+    {
+      "name": "Guests: days left to reply (\"Replies close in 30 days. Last day: …\")",
+      "ok": true,
+      "detail": "Replies close in 30 days. Last day: Friday, November 13, 2026 (New York time)."
+    },
+    {
+      "name": "Guests: \"1 new reply\" banner",
+      "ok": true
+    },
+    {
+      "name": "Answers: meal choices counted (Chicken 2 · Fish 1 · Vegetarian 2) with bars",
+      "ok": true,
+      "detail": "Meal choice Chicken 2 replies, 40% Fish 1 reply, 20% Vegetarian 2 replies, 40% 5 replies answered"
+    },
+    {
+      "name": "Answers: a yes/no question as percentages (Yes 80% (4) · No 20% (1))",
+      "ok": true,
+      "detail": "Do you need the hotel shuttle? Yes, please 80% (4) replies No, thank you 20% (1) reply 5 replies answered"
+    },
+    {
+      "name": "Answers: bar lengths follow the counts (Chicken = Vegetarian = 2 × Fish)",
+      "ok": true,
+      "detail": "[59,30,59]"
+    },
+    {
+      "name": "Food & allergy notes: answers and a message that mentions an allergy, \"None\" left out",
+      "ok": true,
+      "detail": "Food & allergy notes Alan Turing Gluten-free, please Any allergies or dietary needs? Katherine Johnson Our youngest is allergic to peanuts. From their message Margaret Hamilton James: no nuts, please Any allergies or dietary needs?"
+    },
+    {
+      "name": "List: newest first, Margaret's card has \"New\" and her party (\"With James Hamilton and Ada Hamilton\")",
+      "ok": true
+    },
+    {
+      "name": "List: an older reply without names says how many came without a name",
+      "ok": true
+    },
+    {
+      "name": "Card: opened, everyone in the reply listed (3)",
+      "ok": true,
+      "detail": "Margaret Hamilton|James Hamilton|Ada Hamilton"
+    },
+    {
+      "name": "Filter: tapping \"Vegetarian\" lists only those replies",
+      "ok": true,
+      "detail": "[\"Margaret Hamilton\",\"Alan Turing\"]"
+    },
+    {
+      "name": "Filter: cleared (6 replies)",
+      "ok": true
+    },
+    {
+      "name": "Sort: by name (Alan Turing first)",
+      "ok": true
+    },
+    {
+      "name": "Filter chips: \"Not coming\" shows the one decline",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): Guests (390) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Guests: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Guests: no horizontal scroll at 390 px",
+      "ok": true
+    },
+    {
+      "name": "Mark as seen: \"New\" badges and banner gone, Guests tab without a count",
+      "ok": true
+    },
+    {
+      "name": "Mark as seen: still seen after a reload (this device)",
+      "ok": true
+    },
+    {
+      "name": "Add a reply: sheet opens with the focus on the name",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): Add a reply sheet has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Add a reply: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Add a reply: card marked \"Added by you\", party shown, numbers updated (12 coming)",
+      "ok": true,
+      "detail": "Uncle Bob Coming · 2 guests Added by you Oct 14 With Aunt May Everyone in this reply Uncle Bob Aunt May Meal choice Chicken “Called on Sunday” Added by you on O"
+    },
+    {
+      "name": "Add a reply: not \"New\" (the couple's own reply)",
+      "ok": true
+    },
+    {
+      "name": "Edit: the sheet starts from the reply (name, meal)",
+      "ok": true
+    },
+    {
+      "name": "Edit: saved (2 guests, \"Howard Aiken\"), marked \"Edited by you\"",
+      "ok": true
+    },
+    {
+      "name": "CSV: UTF-8 BOM, text/csv, header \"Name, Party of, Attending, Party size, …\"",
+      "ok": true,
+      "detail": "Name|Party of|Attending|Party size|Email|Submitted (America/New_York)|Source|Message|Meal choice|Do you need the hotel shuttle?|Any allergies or dietary needs?"
+    },
+    {
+      "name": "CSV: the 3-person reply is 3 rows (Margaret, James, Ada)",
+      "ok": true,
+      "detail": "[\"Margaret Hamilton\",\"James Hamilton\",\"Ada Hamilton\"]"
+    },
+    {
+      "name": "CSV: one row per person in all (14 people: 13 coming + 1 not coming)",
+      "ok": true,
+      "detail": "14"
+    },
+    {
+      "name": "CSV: \"Added by you\" and \"Website, edited by you\" in the Source column",
+      "ok": true
+    },
+    {
+      "name": "Print: #guests/print, heading \"Guest list\"",
+      "ok": true
+    },
+    {
+      "name": "Print: one row per person coming (13)",
+      "ok": true,
+      "detail": "13"
+    },
+    {
+      "name": "Print: no horizontal scroll at 390 px",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): Print view has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Print media: app bar, tabs and the print controls are not printed",
+      "ok": true,
+      "detail": "none,none none"
+    },
+    {
+      "name": "Print: \"Everyone who replied\" adds the \"Not coming\" table",
+      "ok": true
+    },
+    {
+      "name": "Print: Chromium prints the list to A4 (PDF 233 KB)",
+      "ok": true
+    },
+    {
+      "name": "Print: Chromium prints the list to Letter (PDF 233 KB)",
+      "ok": true
+    },
+    {
+      "name": "Print: \"Back to Guests\"",
+      "ok": true
+    },
+    {
+      "name": "Couple: no console errors",
+      "ok": true
+    },
+    {
+      "name": "1280 px: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "320 px: Guests without horizontal scroll",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "320 px: print view without horizontal scroll",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "Archive: no \"Add a reply\", no options menu (read only)",
+      "ok": true
+    },
+    {
+      "name": "Archive: CSV and print stay",
+      "ok": true
+    }
+  ]
+}

@@ -124,6 +124,7 @@ HIZA = """# test
 **Kaydet:** `{k}/assets/gpt/parts/envelope_closed.png` · {olcu} · **Şeffaf zemin**
 #### W2.4 Kapanış elemanı (tek başına)
 **Kaydet:** `{k}/assets/gpt/parts/closure.png` · {kolcu} · **Şeffaf zemin**
+{ktarif}
 #### W2.5 Açık zarf{tip} — boş
 **Kaydet:** `{k}/assets/gpt/parts/envelope_open.png` · {olcu} · **Şeffaf zemin**
 """
@@ -136,11 +137,12 @@ def rgba(w, h, kutular, renk=(226, 196, 192, 255)):
     return Image.fromarray(a, "RGBA")
 
 
-def hiza_kit(t: Path, ad: str, tip="", olcu=(1024, 1536), kolcu=(1024, 1024)) -> Path:
+def hiza_kit(t: Path, ad: str, tip="", olcu=(1024, 1536), kolcu=(1024, 1024),
+             ktarif="A ribbon wrapped around the envelope.") -> Path:
     k = t / ad
     (k / "assets/gpt/parts").mkdir(parents=True)
     (k / "assets/gpt/GPT_PROMPTS.md").write_text(
-        HIZA.format(k=k, tip=tip, olcu=f"{olcu[0]}×{olcu[1]}", kolcu=f"{kolcu[0]}×{kolcu[1]}"), encoding="utf-8")
+        HIZA.format(k=k, tip=tip, olcu=f"{olcu[0]}×{olcu[1]}", kolcu=f"{kolcu[0]}×{kolcu[1]}", ktarif=ktarif), encoding="utf-8")
     return k
 
 
@@ -196,6 +198,14 @@ def test_hiza(t: Path):
     rgba(1024, 1536, [(160, 850, 864, 950)], (180, 60, 80, 255)).save(P / "closure.png")      # 60 px kısa: %5,86
     kod, out = calistir(k, "--hiza")
     assert kod == 1 and "kapanış sol uç +5.86%" in out, out
+    # aynı tuvalde ama sarmayan kapanış (18'in yuvarlak etiketi): uçlar ölçülmez
+    k = hiza_kit(t, "hz_etiket", "", (1024, 1536), (1024, 1536), ktarif="A small round sticker on the sleeve.")
+    P = k / "assets/gpt/parts"
+    rgba(1024, 1536, [govde]).save(P / "envelope_closed.png")
+    rgba(1024, 1536, [govde, (200, 300, 824, 500)]).save(P / "envelope_open.png")
+    rgba(1024, 1536, [(450, 800, 574, 924)], (180, 60, 80, 255)).save(P / "closure.png")
+    kod, out = calistir(k, "--hiza")
+    assert kod == 0 and "sarılı" not in out and "kapanış sol uç" not in out, out
 
 
 SAHNE = """# test

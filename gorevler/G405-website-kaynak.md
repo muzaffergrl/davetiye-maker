@@ -35,6 +35,56 @@ Tasarım 05'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
+**2026-10-14 · inceleme düzeltmeleri (claude-kod, `work-mediterranean-lemon-fix`) — durum: inceleme (qa-kontrol kapısı açık).**
+İncelemenin 22 bulgusu tek tek yeniden üretilip doğrulandı: 19'u düzeltildi, 1'i "değişiklik gerekmez" kaydı, 1'i (qa-kontrol)
+bu oturumda yapılamadı, 1'i (theme-check "content change") temanın dışında ve G064 ile zaten çözülmüş. Bütün görseller yine
+GPT parçaları; yeni şekil/dekor çizilmedi (K21) — çini çiçeği `frame_portrait`'ten **kırpım**.
+
+| # | Bulgu | Ne yapıldı |
+|---|---|---|
+| 1, 13 (yüksek) | Hero'nun sağ alt limon kümesi düz yatay çizgiyle kesiliyor (nav bandı / hero sonu) | Küme hero'nun içinde **bütün**: negatif `bottom` ve sönme maskesi kaldırıldı; `bottom` = max(22 px, hero sonu − ilk ekran + nav + 2) → ilk ekranda nav'ın üstünde biter, kaydırınca hiçbir yerde kesilmez (yalnız sağda ekran kenarı). `scripts/theme-check.cjs` yazma alanımda değil → istenen "kırpılan küme" denetimi tema testinde (köşe kümesi kurallarında `mask`/`clip-path` yok; hero kümesi negatif `bottom`suz) ve kendi ölçümümde |
+| 2 (yüksek) | story/details/rsvp ilk ekranı düz fildişi | `.page-bg` (100svh): `wall` / `wall_wide` (alt %26 maskeyle söner) + bütün `decor_tl` + `decor_br` (nav'ın üstünde biter) + 3 serbest parça; story'de pano başına iki duvar parçası, karşılıklı; ≥ 1024 px `wall_wide` + sağda `decor_br`; `wash-end` sonda kaldı |
+| 3 (orta) | Çiçek parçacıkları isimlerin, kapanış satırının, form alanlarının üstünden geçiyor | Varış ve kapanışta katman bölümün içinde ve **metnin arkasında** (`host`, `.accent-layer.in-host`); yollar yazı sütununun/fotoğrafın yanındaki şeritlerden (`avoid`), şerit yoksa yazının altındaki banttan; kapanışınki yalnız `.closing` kutusunda, forma uzanmaz |
+| 4 (orta) | Nav saydam, içerik etiketlerden görünüyor; nav çizgisi takvim haplarını / yatayda başlıkları kesiyor | Etiket satırı `.96–.97` + `backdrop-filter: blur(8px)`; iç sayfalarda `[data-fold]` (details takvim çifti, story panoları nav çizgisini keserse ilk ekranın altından başlar); yatayda iç sayfa üst boşluğu 52 px; nav ortasında ve dress code üstünde `tile_flower` (frame_portrait'in çini karosundan kırpım, `build_images.py` `cini_cicegi`) |
+| 5 (orta) | Limon bağı fırıldak gibi 300° dönüp zarfın üstünde sönüyor | Üç vuruş: gevşer (0–350 ms, %5 aşağı, ≤ 7°) → zarfın alt kenarına düşer → yarıçapa uygun yuvarlanır (zarf üstünde ≤ 150°) → ekranın sağından çıkar, zarfın üstünde **sönmez**; kapak 680 ms'de kalkar (bağ çekildikten sonra) |
+| 6 (orta) | Kart cepte beklerken yüzler 1 s cep kenarıyla kesiliyor | Kart cepte `top: 60,755 %` (fotoğraf penceresinin ≤ %6'sı görünür; `CARD_PHOTO_ABOVE`), `out`/`front` −97,838 / −94,838 % → çıkış ve öne gelme konumları değişmedi |
+| 7 (orta) | Story köşelerinde tek limon "çıkartma" gibi | W1.3 buketi: GPT `divider` (limon + çiçek + yaprak) çerçeve genişliğinin %58'i, ±26°, dış alt köşede + bir accent_2 çiçeği; foto penceresine değmez. Buket ekran kenarından taşar; `.tiles` (tam genişlik) yalnız yatayda kırpar → yalnız ekran kenarı keser |
+| 8 (düşük) | Hero kümesi küçük, hap açık mavi iOS düğmesi gibi | Küme `min(58vw, 30svh, 320px)` (comp ≈ %45 genişlik), sağdan taşar; hap koyu kobalt emaye `#2A5DA8 → #1C3F80`, dar gölge, en az 150 px |
+| 9 (düşük) | Açılıştaki çiçek fildişi sıvada görünmüyor | 46–54 px, `origin: 'liner'`: kart kenarı ile zarf kenarı arasındaki şeritte kobalt çini astarın üstünden (≥ 0,8 s mavi zeminde); sayı 1, yön aşağı |
+| 10 (düşük) | İç sayfalar 01'in yeniden boyanmışı gibi | 2 + 4 ile: iç sayfa duvarı, nav ve dress code'da çini çiçeği. Geri sayım ayırıcısına çiçek konmadı (sade Didone rakamlar yeterli; karar) |
+| 11 (düşük) | Masaüstü: hero kartı küçük, iç sayfaların sağı boş | ≥ 1024 px ve ≥ 621 px yükseklikte hero kartı `47svh × .709` (en çok 290 px); iç sayfalarda `wall_wide` + `decor_br` |
+| 12 (düşük) | Doğrulanmış olanlar | Değişiklik gerekmez; zarf hizası (kit_check), pencere temizliği, yer tutucular, MP4 ilk karesi yeniden kontrol edildi |
+| 14 (yüksek) | Yatay telefonda "Tap to open" ekran dışında (aralık / zorlama kaydı) | `envFit`: sahnenin boş üstü ölçülen başlığın altına (`--pt`), ipucu ilk ekranda bitmiyorsa sahne küçülür (`--ok` ≥ 0,6); yatayda isim sütunu köşe kümelerinin arasında. 9 görünüm (568×320 … 932×430 dahil) × demo/aralık/zorlama: sahne üstü ≥ 0, ipucu ekranda (932×430 aralık 410/430, 568×320 zorlama 311/320) |
+| 15 (orta) | 320 px'te "SECONDS" yaprağın üstünde | ≤ 359 px'te geri sayım aralığı 12 px, harf aralığı .14em; ayrıca `decor()` her kümenin 16 × 16 yaprak haritasını (alfa) yazı kutularıyla karşılaştırır, çakışırsa küme küçülür / gizlenir |
+| 16 (orta) | Home "The Day" panosunda program satırı yok (docs/11 §3.2) | `.pl-sched`: `data-repeat="schedule"` ilk 4 satır `label · time`; testte |
+| 17 (orta) | qa-kontrol incelemesi yapılmadan inceleme | **Yapılamadı**: bu oturumda alt ajan başlatma aracı yok. `compare_*_390.jpg`'leri kendim W1 ile karşılaştırdım; kapı **açık**, görev onaya gitmemeli |
+| 18 (düşük) | theme-check "content change" her temada düşüyor | Temanın dışında (`scripts/theme-check.cjs`); G064 ile çözülmüş — bu koşularda "changed content" akışı geçti; yeni görev gerekmedi |
+| 19 (düşük) | İlk görünümde ≥ 150 KB WebP'ler; site.css boyutu | `decor_*` 720 varyantı: home 390×844 DPR 3'te 720'leri yükler (121 / 114 KB). index'te `decor_br-960` (187 KB) hâlâ yüklenir: küme 241,8 CSS px = 725 cihaz pikseli (720 %0,7 kısa; 393–430 px telefonlarda da 960 gerekir) — gerekçe: kümenin keskinliği, sayfa toplamı 877 KB ≤ 1,5 MB. Boyutlar KiB okunur (docs/11 §6; tema testi de KiB okur): site.css 45 941 B = 44,86 KiB (≤ 45 KiB = 46 080 B), site.js 35 831 B = 34,99 KiB (≤ 35 KiB = 35 840 B — **9 B pay**; sonraki eklemeden önce sıkıştırma gerekir) |
+| 20 (düşük) | `home-invite` son adımı 3040 ms, `sway-*` 2200 ms | `cal` 2860 ms, `sway-*` 1800 ms (docs/11 §8) |
+| 21 (düşük) | Zorlama kaydında `&` 8,4 px; hero çiçeği isimlere değiyor | `.amp` `max(11px, .5em)`; `decor()` yazıya / karta / çerçeveye değen `.float`'ı gizler |
+| 22 (düşük) | Kart kopyası `venue.city` (docs/11 `venue.city_region`), kasaba boşsa "·" kalıyor | README comp haritasında **sapma** olarak yazıldı (W1.2 yalnız kasabayı yazar); kasaba boşsa ayırıcı da gizlenir (`.kicker:has(.cc-city[data-empty]) .sep`) |
+
+Bu turun kendi theme-check hataları (düzeltildi): story buketleri 360–430 px'te ekran kenarından taşıyor ve kırpan ata yok
+(`.tiles { overflow-x: clip }`); taslak önizlemede davet kartı piksel testi %100 "dekor üstünde" — sayfa geneli
+`scroll-behavior: smooth` yüzünden theme-check'in `scrollTo(0, 0)`'ı 250 ms'de bitmiyor, yapışkan "Preview" şeridi kart
+görüntüsünün ortasına düşüyordu → yumuşak kaydırma yalnız RSVP'nin `#reply` atlaması için (`html:has(#reply)`, azaltılmış
+harekette kapalı). Ölçüm (5 sayfa × 11 görünüm × demo/aralık/zorlama = 165 ilk ekran; yazı-gizli / dekor-gizli fark): hiçbir
+yazı satırının altında dekor pikseli yok. Açılış kareleri: gevşeme / düşme / yuvarlanma / çıkış ve astar üstündeki çiçek görüldü.
+
+**Kontroller (origin/main birleştirmesi sonrası, 2026-10-14):** `npm ci`; `npm test` 481 test, 479 geçti, 0 hata (2 atlandı;
+temanın 34 testi dahil); `npm run typecheck` temiz; `npm run build` + trace-check geçti; `theme-check --theme mediterranean-lemon
+--stress` **116 geçti, 0 hata, 0 uyarı** (taslak önizleme, nav VT 390×844 / 360×640, değişen içerik dahil; `previews/g405/`
+yeniden üretildi); `g051-browser` 44/44; `final-smoke` 45/45 (`previews/g405/final/`); `kit_check --paket 5` 23/23, `--paket 2` 5/5
+(hiza sol −0,20 · sağ +0,49 · alt +0,85 %); `tools/tests` hepsi geçti, yalnız `test_kit_build.py` düşüyor — 02 koleksiyonunda
+`moment_*.jpg` yok (bu görevle ilgisiz, önceden de böyle). İlk görünüm (390×844, DPR 3): index 877 KB · home 884 KB (yer tutucu),
+örnek fotoğraflarla 971 / 1141 KB. Dokun → home 4,1–4,4 s (makine yükü; bu koşuda başka ajanın theme-check'i de çalışıyordu).
+Tema klasörü 2,30 MB (≤ 3 MB). Bir ara koşuda "nav VT 390×844" bir kez düştü; aynı akışı 8 kez ayrı koştum, hep 0,00 % fark —
+yük altında zamanlama kaynaklı tek seferlik sonuç olarak not edildi, son koşuda geçti.
+**Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`:has`, `backdrop-filter`, `svh`, belgeler arası VT), yayın, qa-kontrol.
+
+İlk tur metninde (aşağıda) artık geçersiz olanlar: "gezinme ve dress code'daki çini çiçeği yok" (artık var), story "köşelerinde
+küçük limon" (artık `divider` buketi), "site.css (45,5 KB)", "30 test" (şimdi 34), ilk görünüm ağırlıkları (yukarıdaki satır).
+
 **2026-10-14 · wf-tema05 (claude-kod) — durum: inceleme.** Ayrıntı ve comp öğe haritası: `platform/themes/mediterranean-lemon/README.md`.
 
 **Ne yapıldı**
@@ -123,3 +173,4 @@ gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: wf-tema05
 - 2026-10-14 bitti, incelemeye gönderildi
+- 2026-10-14 inceleme düzeltmeleri (22 bulgu: 19 düzeltildi, 1 değişiklik gerekmez, qa-kontrol yapılamadı, content change G064'te çözülmüş); theme-check --stress 116/0/0, g051 44/44, final-smoke 45/45; durum inceleme, qa-kontrol kapısı açık

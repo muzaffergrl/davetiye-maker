@@ -24,13 +24,20 @@ export const LIMITS = {
   storyCaptionChars: 60,
 } as const;
 
-/** The four pages after the envelope, in order. */
+/** The four pages after the envelope, in order. `short` = the 2-line card caption on the home page (G066). */
 export const SITE_PAGES = [
-  { key: 'home', name: 'Home', summary: 'Your names, the date and venue, an optional countdown and your invitation card with add to calendar.' },
-  { key: 'story', name: 'Our Story', summary: 'Three photos with captions and a short intro line, in the frames of the design.' },
-  { key: 'details', name: 'Details', summary: 'The order of the day, venue photo and map link, dress code, travel and registry links, and your questions and answers.' },
-  { key: 'rsvp', name: 'RSVP', summary: 'A reply form with your deadline and up to three questions of your own. Replies go straight to your panel.' },
+  { key: 'home', name: 'Home', short: 'Your names, date and venue', summary: 'Your names, the date and venue, an optional countdown and your invitation card with add to calendar.' },
+  { key: 'story', name: 'Our Story', short: 'Three photos with captions', summary: 'Three photos with captions and a short intro line, in the frames of the design.' },
+  { key: 'details', name: 'Details', short: 'Schedule, venue and dress code', summary: 'The order of the day, venue photo and map link, dress code, travel and registry links, and your questions and answers.' },
+  { key: 'rsvp', name: 'RSVP', short: 'Replies and your own questions', summary: 'A reply form with your deadline and up to three questions of your own. Replies go straight to your panel.' },
 ] as const;
+
+/**
+ * The totals of the DEMO replies panel (panel screen p01_panel_replies: "5 replies · 4 attending (9 guests) · 1 not
+ * attending", fictional guests). The home page shows them as an example, labelled as such — never as our numbers.
+ * Retake together with the panel screens (scripts/marketing-assets.ts) when the replies view changes (G069).
+ */
+export const DEMO_REPLY_TOTALS = { coming: 4, notComing: 1, replies: 5 } as const;
 
 /** What one purchase includes (pricing, design pages, llms.txt). */
 export function included(cfg: MarketingConfig = MARKETING): string[] {

@@ -2,8 +2,8 @@
 id: G219
 baslik: Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-K
 oncelik: 2
 bagimli: []
 yazar: [collections/19_Midnight_Garden/assets/gpt/comps/, collections/19_Midnight_Garden/assets/gpt/parts/, collections/19_Midnight_Garden/assets/gpt/photos/]
@@ -32,8 +32,29 @@ Tasarım 19'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kısım 1 üretimi tamamlandı (gpt-gorsel-K): W1'in 5 ekranı `comps/web_1_envelope.png`–`web_5_rsvp.png` ve W2'nin `parts/bg_page.png`, `parts/bg_tile.png`, `parts/envelope_closed.png` dosyaları doğru Kaydet yollarında hazır (8 seçilen görsel). Ek rapor/önizleme dosyası oluşturulmadı.
+- W1.1 iki kez yeniden üretildi: zarf oranı/boyutu ve gümüş mührün nötr metal tonu iyileştirildi. W1.2 bir kez yeniden üretildi: yatay çıkan foto penceresi dikey 3:4 pencereye düzeltildi. Repoda yalnız seçilen sade adlı dosyalar tutuldu.
+- W1 görsel kontrolleri ve `kit_check` içindeki mevcut W1 dosya denetimleri geçti (5/5); yeşil foto pencereleri, alt menüler ve istenen demo alanları mevcut. Bunlar yalnız tasarım referansıdır.
+- W2'nin üç parçası W1 görselleri referans verilerek üretildi. Arka planlar opak ve yazısız; kapalı zarf tek nesne, mühür/kapanış ve yazı yok, sol üstten ışık, dış gölge yok, kesilecek V kapak kenarı okunuyor; PNG gerçek alfa kanallı. `envelope_closed` üç kez yeniden üretildi: tuvaldeki ölçek/konum ve zarf oranı için; repoya yalnız seçilen son dosya kondu.
+- Ölçüler: W1, `bg_page` ve `envelope_closed` 1024×1536; `bg_tile` 1254×1254 (istenen kare oran korunuyor; doğrulayıcı oran denetimini geçti). `bg_tile` RGB standart sapması yaklaşık 2,27/255; karşı kenar şeritlerinin ortalama kanal farkı en çok 1,27/255, nesne/yazı ve belirgin vinyet yok. Kesin piksel eşitliği değil, düşük kontrastlı görsel dikiş denetimi yapıldı.
+- Zarf geometri notu: alfa >128 gövde kutusu `(68, 719)–(957, 1287)`; genişlik %86,82, alt kenar %83,79, gövde oranı yaklaşık 1,565:1. Prompt'taki yaklaşık %80 / %88 / 5:4 değerleri tam yakalanmadı; sonraki `envelope_open` üretiminde bu gerçek `envelope_closed.png` referans alınmalı ve değişmeyen gövde üst üste denetlenmeli. Alfa kenar denetimi geçti; nesne dışında çok düşük alfa kalıntıları bulunabildiğinden bütünüyle piksel düzeyinde temiz dış alfa iddiası yok.
+- `python3 tools/kit_check.py collections/19_Midnight_Garden --paket 5`: mevcut 8 dosyanın tamamı GEÇTİ (8/22); kalan 14 W2 dosyası bu oturum kapsamı dışında olduğu için eksik. `--paket 2`: 0/5, fotoğraflar bu oturumda üretilmedi. `envelope_open` olmadığı için zarf hizası denetimi atlandı; tam paket bitti/inceleme olarak işaretlenmedi.
+- Kısım 2 tamamlandı (gpt-gorsel-K): yalnız `parts/closure.png`, `envelope_open.png`, `card_small.png`, `invitation_card.png`, `info_card.png`, `frame_portrait.png`, `frame_landscape.png`, `florals_tl.png` üretildi. Kullanıcının `decor_tl` dediği parça Kaydet satırına uygun olarak `florals_tl.png` yoluna kondu. Mevcut 5 W1 comp'u sohbete yüklendi; W2 üretimlerinde ilgili W1'ler, closure/envelope_open için ayrıca mevcut envelope_closed referans verildi. Önceki 8 dosya ve GPT_PROMPTS değişmedi (`git diff 4b79631` ile doğrulandı). Ek rapor/önizleme dosyası yok.
+- Altı yeni dikey parça 1024×1536, frame_landscape 1536×1024, florals_tl 1254×1254 (kare oran) gerçek alfa PNG. Kullanıcının bu oturumdaki açık talebi gereği closure da zarfın 1024×1536 tuvalinde; GPT_PROMPTS'taki kare/%70 yerleşim uygulanmadı. Yalnız W1'deki boş merkezli, yükseltilmiş halkalı gümüş mum mühür var; zarf/dekor/yazı yok. Seçilen mühür alfa >128 kutusu `(422,1001)–(603,1189)`, merkezi `(512,5;1095)`; V ucu yaklaşık y=1107 olduğundan merkezde yaklaşık 12 piksel yukarı fark var, piksel düzeyinde birebir eşleşme iddiası yok.
+- Açık zarf mevcut kapalı zarfın yaklaşık 1,565:1 gövdesi esas alınarak üretildi; boş, mühürsüz, burgundy-plum çiçekli astarlı ve ön cep kenarı net. Hiza GEÇTİ: sol +%0,00, sağ -%0,10, alt +%0,13. Açık zarf alfa >128 sınırı `(68,310)–(956,1289)`; kapalı zarf dosyası korunuyor.
+- Yeniden üretim/düzeltme nedenleri: closure ölçeği ve tuvaldeki konumu; envelope_open alt kenarının ilk çıktıda 31 piksel yukarıda olması; frame_portrait/frame_landscape pencerelerinde merkez kararması/şeffaflaşması ve yatay pencerenin fazla geniş çıkması. Çerçevelerde opak yeşil panel içeren ara üretimden sonra yalnız dış zemin imagegen ile kaldırıldı. Seçilen sade adlı dosyalar kaydedildi; elenen denemeler repoya eklenmedi. Kodla piksel boyama yapılmadı; yalnız yeşil tonu için yeniden üretim yapılmadı.
+- Seçilen küçük kartın ve iki çerçevenin yeşil pencere denetimleri GEÇTİ. Ölçülen pencere en/boy oranları card_small 0,7621, frame_portrait 0,7397 (~3:4), frame_landscape 1,5374 (~3:2). Kart yüzlerinde yazı yok; invitation_card köşeleri zengin çiçekli, info_card yalnız üstte küçük gül tomurcuğu/berry dalıyla daha sade; florals_tl tek bağlı sol üst köşe kümesi.
+- Son doğrulama: ham `kit_check --paket 5` dosya denetimi 15/22 + hiza 1/1 (çıktı toplamı 16/23). Tek mevcut-dosya oran hatası closure için prompt'taki kare beklentisi; kullanıcının istediği 1024×1536 ölçü bellek içinde uygulanarak, kaynak/test dosyası değiştirilmeden, bu oturumun 8 parçası 8/8 GEÇTİ. Eksik kalan 6 W2 parçası (`florals_br`, `accent_1..3`, `divider`, `web_hero`) ve PAKET 2 fotoğrafları (0/5) bu oturum kapsamı dışında. Durum `alindi` bırakıldı; tam paket/inceleme ilan edilmedi.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-14 alindi: gpt-gorsel-K; bu oturum: kısım 1 (W1 5 ekran + W2 bg_page, bg_tile, envelope_closed).
+- 2026-10-14 ara kayıt: W1 tamamlandı (5/5); gpt-gorsel-K.
+- 2026-10-14 ara kayıt: kısım 1 görselleri tamamlandı (8/8); W2 bg_page, bg_tile, envelope_closed; gpt-gorsel-K.
+- 2026-10-14 kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
+- 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (siyah zarf ~1,57:1). Kısım 2 verildi.
+- 2026-10-14 devam: gpt-gorsel-K (kısım 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-K (kısım 2, 4/8); closure, envelope_open, card_small, invitation_card üretildi. Kullanıcının bu oturumdaki talebiyle closure 1024×1536 zarf tuvalinde (prompt'taki kare yerine); bu ölçüyle dosya denetimi 4/4 geçti. Zarf hizası GEÇTİ: sol +%0,00, sağ -%0,10, alt +%0,13. Yeşil pencere denetimi geçti; yalnız ton için yeniden üretim/piksel boyama yapılmadı.
+- 2026-10-14 ara kayıt: gpt-gorsel-K (kısım 2, 8/8); info_card, frame_portrait, frame_landscape ve decor_tl (Kaydet adı: florals_tl.png) tamamlandı. Yeni 8 dosyanın tamamı kullanıcının closure tuval talebiyle denetlendiğinde GEÇTİ; yeşil pencere oranları: card_small 0,7621, frame_portrait 0,7397, frame_landscape 1,5374. Durum alindi kalır.
+- 2026-10-14 kısım 2 bitti; kalan: W2'nin diğer parçaları + PAKET 2

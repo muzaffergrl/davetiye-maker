@@ -1,5 +1,6 @@
-// / — home (docs/14 §6.1). Static. The live demo loads only after a tap (DemoFacade, §9.7).
-import { CalendarDays, Eye, ListChecks, Lock, MessageCircle, Pencil, Smartphone } from 'lucide-react';
+// / — home (docs/14 §6.1; G066 layout from the BKE Studio comps brand/ui/site/u1_home_*). Static. The live demo loads
+// only after a tap (DemoFacade, §9.7). Every picture is a REAL theme or panel screen (or the real opening recording).
+import { ArrowRight } from 'lucide-react';
 import { HeroDemo } from '../../components/marketing/Demo.tsx';
 import { DesignCard } from '../../components/marketing/DesignCard.tsx';
 import { demoDesigns } from '../../components/marketing/demo-data.ts';
@@ -9,7 +10,7 @@ import { designScreen, openingVideo, panelScreen } from '../../components/market
 import { CheckList, Container, Eyebrow, FaqList, JsonLd, Screen, Section, TextLink } from '../../components/marketing/ui.tsx';
 import { MARKETING } from '../../lib/marketing/config.ts';
 import { liveDesigns } from '../../lib/marketing/designs.ts';
-import { definition, editRightsText, factStrip, LIMITS, phoneClaim, SITE_PAGES } from '../../lib/marketing/facts.ts';
+import { DEMO_REPLY_TOTALS, definition, editRightsText, factStrip, LIMITS, phoneClaim, SITE_PAGES } from '../../lib/marketing/facts.ts';
 import { faqItems, HOME_FAQ_IDS } from '../../lib/marketing/faq.ts';
 import { loadGuides } from '../../lib/marketing/guides.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
@@ -33,15 +34,22 @@ export default function HomePage() {
   const designs = liveDesigns();
   const demo = demoDesigns();
   const first = designs[0];
-  // The hero shows the first design; the opening video shows the next one, so visitors see two envelopes.
+  // The hero shows the first design; the opening row shows the next one, so visitors see two envelopes.
   const second = designs[1] ?? first;
   const video = openingVideo(second.id);
+  const sealed = designScreen(second.id, 'envelope');
+  const opened = designScreen(second.id, 'home');
   const guides = loadGuides();
   const faq = faqItems().filter((f) => (HOME_FAQ_IDS as readonly string[]).includes(f.id));
   const prices = designs.map((d) => realPrice(d.price)).filter(Boolean) as string[];
   const fromPrice = prices.length ? displayPrice(prices.sort((a, b) => Number(a) - Number(b))[0]) : null;
   const def = definition();
   const rights = editRightsText();
+  const totals = [
+    { n: DEMO_REPLY_TOTALS.coming, label: 'Coming' },
+    { n: DEMO_REPLY_TOTALS.notComing, label: 'Not coming' },
+    { n: DEMO_REPLY_TOTALS.replies, label: 'Replies' },
+  ];
 
   return (
     <>
@@ -70,7 +78,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section band labelledBy="what-is">
+      <Section labelledBy="what-is">
         <Container narrow>
           <h2 id="what-is" className={s.h2}>
             What is {MARKETING.brand.name}?
@@ -81,8 +89,17 @@ export default function HomePage() {
 
       <Section labelledBy="opening">
         <Container>
-          <div className={s.split}>
-            <div className={s.splitMedia}>
+          <Eyebrow>The first moment</Eyebrow>
+          <h2 id="opening" className={s.h2}>
+            How the opening works
+          </h2>
+          <ol className={s.flowRow} aria-label={`The ${second.name} envelope, from sealed to open`}>
+            <li className={s.flowItem}>
+              {sealed ? <Screen file={sealed} alt={`${second.name}: the sealed envelope with the demo couple's names`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
+              <p className={s.flowLabel}>Sealed</p>
+              <ArrowRight aria-hidden className={s.flowArrow} size={28} strokeWidth={1.5} />
+            </li>
+            <li className={s.flowItem}>
               {video ? (
                 <div className={s.videoFrame}>
                   <LoopVideo
@@ -94,49 +111,58 @@ export default function HomePage() {
                   />
                 </div>
               ) : null}
-            </div>
-            <div className={s.splitText}>
-              <Eyebrow>The first moment</Eyebrow>
-              <h2 id="opening" className={s.h2}>
-                How the opening works
-              </h2>
-              <ol className={s.steps}>
-                <li>
-                  <strong>Your link opens on a sealed envelope</strong> with your names, the way a paper invitation arrives.
-                </li>
-                <li>
-                  <strong>Guests tap it.</strong> The envelope opens in the order of its design: a bow slides, a seal lifts, a card
-                  rises.
-                </li>
-                <li>
-                  <strong>The card becomes your home page.</strong> From there guests read your story, the details and reply.
-                </li>
-              </ol>
-              <p className={s.muted}>
-                Every design opens in its own way. Guests can skip the animation, and on a phone set to reduce motion a tap goes
-                straight to the home page.
-              </p>
-            </div>
+              <p className={s.flowLabel}>Opening</p>
+              <ArrowRight aria-hidden className={s.flowArrow} size={28} strokeWidth={1.5} />
+            </li>
+            <li className={s.flowItem}>
+              {opened ? <Screen file={opened} alt={`${second.name}: the home page after the envelope opens`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
+              <p className={s.flowLabel}>Your website</p>
+            </li>
+          </ol>
+          <div className={s.flowText}>
+            <ol className={s.steps}>
+              <li>
+                <strong>Your link opens on a sealed envelope</strong> with your names, the way a paper invitation arrives.
+              </li>
+              <li>
+                <strong>Guests tap it.</strong> The envelope opens in the order of its design: a bow slides, a seal lifts, a card
+                rises.
+              </li>
+              <li>
+                <strong>The card becomes your home page.</strong> From there guests read your story, the details and reply.
+              </li>
+            </ol>
+            <p className={s.small}>
+              Every design opens in its own way. Guests can skip the animation, and on a phone set to reduce motion a tap goes
+              straight to the home page.
+            </p>
           </div>
         </Container>
       </Section>
 
-      <Section band labelledBy="pages">
+      <Section labelledBy="pages">
         <Container>
           <Eyebrow>After the envelope</Eyebrow>
           <h2 id="pages" className={s.h2}>
             Four pages your guests will actually use
           </h2>
-          <ul className={s.screenRow}>
+          <ul className={s.pageCards}>
             {SITE_PAGES.map((p) => {
-              const file = designScreen(first.id, p.key === 'home' ? 'home' : p.key);
+              const file = designScreen(first.id, p.key);
               return (
-                <li key={p.key} className={s.screenItem}>
+                <li key={p.key} className={s.pageCard}>
                   {file ? (
-                    <Screen file={file} alt={`${first.name} design, ${p.name} page (demo couple ${first.copy.demoCouple})`} sizes="(min-width: 1024px) 240px, 62vw" />
+                    <Screen
+                      file={file}
+                      alt={`${first.name} design, ${p.name} page (demo couple ${first.copy.demoCouple})`}
+                      sizes="(min-width: 1024px) 96px, 64px"
+                      className={s.pageThumb}
+                    />
                   ) : null}
-                  <h3 className={s.h3}>{p.name}</h3>
-                  <p className={s.small}>{p.summary}</p>
+                  <div>
+                    <h3 className={s.pageCardTitle}>{p.name}</h3>
+                    <p className={s.pageCardText}>{p.short}</p>
+                  </div>
                 </li>
               );
             })}
@@ -146,77 +172,65 @@ export default function HomePage() {
 
       <Section labelledBy="edit">
         <Container>
-          <div className={`${s.split} ${s.splitReverse}`}>
-            <div className={s.splitMedia}>
-              <Screen file={panelScreen('panel')} alt="The editing panel on a phone: the couple's names, a draft notice and the Publish button" sizes="(min-width: 1024px) 300px, 70vw" />
-            </div>
-            <div className={s.splitText}>
-              <Eyebrow>{phoneClaim()}</Eyebrow>
-              <h2 id="edit" className={s.h2}>
-                Made to edit from your phone
-              </h2>
-              <p className={s.lead}>No Canva, no app. Open your private edit link and change what you need, between other plans.</p>
-              <ul className={s.iconList}>
-                <li>
-                  <Pencil aria-hidden size={20} strokeWidth={1.75} />
-                  Names, date and time, venue and map link, the order of the day (up to {LIMITS.scheduleRows} rows)
-                </li>
-                <li>
-                  <Smartphone aria-hidden size={20} strokeWidth={1.75} />
-                  {LIMITS.photoSpots} photos, each cropped to its frame on your phone
-                </li>
-                <li>
-                  <ListChecks aria-hidden size={20} strokeWidth={1.75} />
-                  Your story, questions and answers (up to {LIMITS.faqItems}), dress code, registry and travel links
-                </li>
-                <li>
-                  <Eye aria-hidden size={20} strokeWidth={1.75} />
-                  Preview every page before you publish; changes save on their own
-                </li>
-                <li>
-                  <Lock aria-hidden size={20} strokeWidth={1.75} />
-                  {rights.short}
-                </li>
-              </ul>
-              <TextLink href="/features#editing">Everything you can edit</TextLink>
-            </div>
+          <Eyebrow>{phoneClaim()}</Eyebrow>
+          <h2 id="edit" className={s.h2}>
+            Made to edit from your phone
+          </h2>
+          <p className={s.lead}>No Canva, no app. Open your private edit link and change what you need, between other plans.</p>
+          <div className={s.editSplit}>
+            <Screen
+              file={panelScreen('panel')}
+              alt="The editing panel on a phone: the couple's names, a draft notice and the Publish button"
+              sizes="(min-width: 1024px) 280px, 36vw"
+            />
+            <CheckList
+              variant="soft"
+              items={[
+                `Names, date and time, venue and map link, the order of the day (up to ${LIMITS.scheduleRows} rows)`,
+                `${LIMITS.photoSpots} photos, each cropped to its frame on your phone`,
+                `Your story, questions and answers (up to ${LIMITS.faqItems}), dress code, registry and travel links`,
+                'Preview every page before you publish; changes save on their own',
+                rights.short,
+              ]}
+            />
           </div>
+          <TextLink href="/features#editing">Everything you can edit</TextLink>
         </Container>
       </Section>
 
-      <Section band labelledBy="rsvp">
+      <Section labelledBy="rsvp">
         <Container>
-          <div className={s.split}>
-            <div className={`${s.splitMedia} ${s.pair}`}>
-              {designScreen(first.id, 'form') ? (
-                <Screen file={designScreen(first.id, 'form')!} alt="A guest's reply form: attending or not, number of guests and a meal choice question" sizes="(min-width: 1024px) 220px, 42vw" />
-              ) : null}
-              <Screen file={panelScreen('replies')} alt="Replies in the couple's panel: totals, each reply and a Download all replies (CSV) button" sizes="(min-width: 1024px) 220px, 42vw" />
-            </div>
-            <div className={s.splitText}>
+          <div className={s.rsvpSplit}>
+            <div className={s.rsvpText}>
               <Eyebrow>RSVP built in</Eyebrow>
               <h2 id="rsvp" className={s.h2}>
                 RSVPs without the spreadsheet chaos
               </h2>
-              <ul className={s.iconList}>
-                <li>
-                  <MessageCircle aria-hidden size={20} strokeWidth={1.75} />
-                  Guests reply on your website: coming or not, party size and a note. No account for them.
-                </li>
-                <li>
-                  <ListChecks aria-hidden size={20} strokeWidth={1.75} />
-                  Up to {LIMITS.rsvpQuestions} questions of your own, such as a meal choice
-                </li>
-                <li>
-                  <CalendarDays aria-hidden size={20} strokeWidth={1.75} />
-                  A reply-by date; the form closes on its own after it
-                </li>
-                <li>
-                  <Eye aria-hidden size={20} strokeWidth={1.75} />
-                  Every reply and the totals in your panel, plus a CSV download
-                </li>
-              </ul>
+              <dl className={s.tiles}>
+                {totals.map((t) => (
+                  <div key={t.label} className={s.tile}>
+                    <dt className={s.tileLabel}>{t.label}</dt>
+                    <dd className={s.tileNumber}>{t.n}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className={s.tilesNote}>Example totals from the demo panel (fictional guests)</p>
+              <CheckList
+                variant="soft"
+                items={[
+                  'Guests reply on your website: coming or not, party size and a note. No account for them.',
+                  `Up to ${LIMITS.rsvpQuestions} questions of your own, such as a meal choice`,
+                  'A reply-by date; the form closes on its own after it',
+                  'Every reply and the totals in your panel, plus a CSV download',
+                ]}
+              />
               <TextLink href="/features#rsvp">More about RSVP</TextLink>
+            </div>
+            <div className={s.rsvpMedia}>
+              {designScreen(first.id, 'form') ? (
+                <Screen file={designScreen(first.id, 'form')!} alt="A guest's reply form: attending or not, number of guests and a meal choice question" sizes="220px" />
+              ) : null}
+              <Screen file={panelScreen('replies')} alt="Replies in the couple's panel: totals, each reply and a Download all replies (CSV) button" sizes="220px" />
             </div>
           </div>
         </Container>
@@ -228,14 +242,16 @@ export default function HomePage() {
           <h2 id="how" className={s.h2}>
             How it works
           </h2>
-          <ol className={s.stepGrid}>
+          <ol className={s.stepRow}>
             {STEPS.map((st, i) => (
               <li key={st.title}>
                 <span className={s.stepNum} aria-hidden>
                   {i + 1}
                 </span>
-                <h3 className={s.h3}>{st.title}</h3>
-                <p className={s.small}>{st.text}</p>
+                <div>
+                  <h3 className={s.stepTitle}>{st.title}</h3>
+                  <p className={s.stepText}>{st.text}</p>
+                </div>
               </li>
             ))}
           </ol>
@@ -243,7 +259,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section band labelledBy="designs">
+      <Section labelledBy="designs">
         <Container>
           <Eyebrow>Designs</Eyebrow>
           <h2 id="designs" className={s.h2}>
@@ -274,7 +290,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section band labelledBy="faq">
+      <Section labelledBy="faq">
         <Container narrow>
           <h2 id="faq" className={s.h2}>
             Questions couples ask first
@@ -285,14 +301,14 @@ export default function HomePage() {
       </Section>
 
       <Section labelledBy="final">
-        <Container narrow>
+        <Container>
           <div className={s.finalCta}>
             <h2 id="final" className={s.h2}>
               Try it on your phone first
             </h2>
             <p className={s.lead}>Open a live demo, tap the envelope and read it the way your guests will.</p>
             <div className={s.ctaRow}>
-              <a className={s.btn} href={`/designs/${first.id}`} data-demo={first.id} data-demo-placement="home-final">
+              <a className={`${s.btn} ${s.btnLight}`} href={`/designs/${first.id}`} data-demo={first.id} data-demo-placement="home-final">
                 Open a live demo
               </a>
               <TextLink href="/designs">Compare designs</TextLink>
