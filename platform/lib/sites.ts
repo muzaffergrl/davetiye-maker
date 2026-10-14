@@ -17,6 +17,7 @@ import {
   newIdentityRights,
 } from './panel/rights.ts';
 import { isAvailableSlugShape } from './slug.ts';
+import { copyIssues } from './theme/copy.ts';
 import { loadTheme } from './theme/theme.ts';
 
 export class InvalidSlugError extends Error {
@@ -182,7 +183,9 @@ export async function publishSite(
     if (isArchived(site, now)) throw new SiteArchivedError(siteId);
     if (orderPending(site)) throw new OrderPendingError(siteId);
     const result = validateContent(site.content);
-    if (!result.ok) throw new ContentInvalidError(result.errors);
+    // G068: the couple's design texts within what the design carries (theme.json copy max)
+    const copyErrors = copyIssues(site.content, (await loadTheme(site.theme))?.manifest.copy ?? {}).filter((i) => i.level === 'error');
+    if (!result.ok || copyErrors.length) throw new ContentInvalidError([...result.errors, ...copyErrors]);
     const rights = effectiveRights(site);
     let set: PublishOptions['set'];
     if (!rights.firstPublishedAt || !rights.identity) {

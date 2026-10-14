@@ -18,6 +18,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
+import { copyIssues } from '../../lib/theme/copy.ts';
 import { panelIssues, previewTokenExpiry, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
 import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
 import { NO_GUEST_ACCESS, type GuestAccessView } from '../../lib/panel/guest-access.ts';
@@ -477,9 +478,13 @@ export function usePanel(initial: PanelState, editKey: string) {
     };
   }, [api]);
 
+  // G068: the design's texts within what the design carries (theme.json copy max), next to the content checks
+  const copyLimits = useMemo(() => Object.fromEntries(initial.theme.copy.map((e) => [e.key, { max: e.max }])), [initial.theme.copy]);
+  const copyLabels = useMemo(() => new Map(initial.theme.copy.map((e) => [e.key, e.label])), [initial.theme.copy]);
   const validation = useMemo(() => {
     const result = validateContent(content, { platform: true });
     const errors = panelIssues(result.errors, content);
+    for (const issue of copyIssues(content, copyLimits, (k) => copyLabels.get(k) ?? 'This text')) if (issue.level === 'error') errors.push(issue);
     // Before the first publish: a date more than 12 months ago would archive the site at once (G060).
     if (meta.rights.phase === 'before_publish') {
       const now = new Date();
@@ -487,7 +492,7 @@ export function usePanel(initial: PanelState, editKey: string) {
       if (issue && !errors.some((e) => e.path === 'date')) errors.push(issue);
     }
     return { ...result, ok: result.ok && errors.length === panelIssues(result.errors, content).length, errors, warnings: panelIssues(result.warnings, content) };
-  }, [content, meta.rights.phase]);
+  }, [content, meta.rights.phase, copyLimits, copyLabels]);
 
   return {
     api,

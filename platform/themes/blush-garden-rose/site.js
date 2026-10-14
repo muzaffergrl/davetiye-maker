@@ -538,6 +538,8 @@ const DEV_CONTENT = {
     const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
       story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };   // = theme.json
     const view = JSON.parse(JSON.stringify(content));
+    view.copy = {};   // G068: {copy.<key>} = the page's [data-copy] text
+    document.querySelectorAll('[data-copy]').forEach((el) => { view.copy[el.dataset.copy] ??= el.textContent.trim(); });
     if (view.venue) {
       const join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
       view.venue.city_region = join([view.venue.city, view.venue.region]);

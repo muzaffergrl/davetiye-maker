@@ -3,6 +3,7 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { parseCopyManifest, type CopyManifest } from './copy.ts';
 import { findShareFiles, type ThemeShareFiles } from './share.ts';
 
 export const PAGE_NAMES = ['index', 'home', 'story', 'details', 'rsvp'] as const;
@@ -28,6 +29,11 @@ export interface ThemeManifest {
   internal?: boolean;
   pages: Partial<Record<PageName, string>>;
   photos: Record<string, PhotoSlot>;
+  /**
+   * Editable design texts (G068, lib/theme/copy.ts): key → default, max length, pages. {} = none (a theme from before
+   * G068: its fixed texts stay fixed; theme-check warns).
+   */
+  copy: CopyManifest;
 }
 
 export interface LoadedTheme {
@@ -90,6 +96,8 @@ export function parseManifest(raw: unknown, folderId: string): ThemeManifest {
     }
     photos[key] = { label: s.label, source: s.source, ...(typeof s.aspect === 'string' ? { aspect: s.aspect } : {}) };
   }
+  const copy = parseCopyManifest(m.copy);
+  if (copy.problems.length) throw new ThemeError(`${folderId}: theme.json ${copy.problems.join('; ')}`);
   return {
     id: folderId,
     name: m.name,
@@ -97,6 +105,7 @@ export function parseManifest(raw: unknown, folderId: string): ThemeManifest {
     ...(m.internal === true ? { internal: true } : {}),
     pages,
     photos,
+    copy: copy.manifest,
   };
 }
 

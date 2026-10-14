@@ -7,6 +7,7 @@ import { buildView, type ViewOptions } from '../content/derive.ts';
 import { CONTENT_LIMITS } from '../content/limits.ts';
 import type { ValidationIssue } from '../content/validate.ts';
 import type { RightsView } from './rights.ts';
+import type { PanelCopyEntry } from '../theme/copy.ts';
 
 export type SiteStatus = 'draft' | 'published';
 
@@ -83,6 +84,11 @@ export interface PanelTheme {
    * "thank_you.photo", the hero portrait's shape — the photo takes the place of the portrait on the card).
    */
   thankYou: { photo: PanelPhotoSlot } | null;
+  /**
+   * The design's editable texts (G068, theme.json "copy"): key, the design's text, the longest the design carries, the
+   * editor page that lists it ("Headings & labels on this page"). [] for a design without them.
+   */
+  copy: PanelCopyEntry[];
   /**
    * The theme's fictional demo record (what a site claimed on /start starts from), or null.
    * Values still equal to it are flagged as sample text before publishing.
@@ -339,6 +345,7 @@ export function sectionForPath(path: string): SectionId | null {
       return 'photos';
     case 'thank_you':
       return 'thankyou';
+    // 'copy': each key belongs to the editor page of its text (theme.json, lib/theme/copy.ts copyPanelPage)
     default:
       return null;
   }

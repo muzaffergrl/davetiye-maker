@@ -21,6 +21,7 @@ import {
   type ThemeFieldUse,
 } from './model.ts';
 import { rightsView } from './rights.ts';
+import { panelCopyEntries } from '../theme/copy.ts';
 
 const OPTIONAL_RE = /\bdata-optional\s*=\s*["']?([a-z_]+)/g;
 /** Values of the engine markers that name content paths (data-field, data-if, data-text, data-attr-*, data-repeat). */
@@ -133,6 +134,7 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     optionalBlocks: themeOptionalBlocks(pages),
     fields,
     thankYou,
+    copy: panelCopyEntries(m.copy),
     sample: (await claimableTheme(m.id))?.demo ?? null,
   };
 }

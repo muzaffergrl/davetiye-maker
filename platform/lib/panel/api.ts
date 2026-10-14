@@ -53,6 +53,8 @@ import {
 } from './rights.ts';
 import { panelMeta, panelState, panelTheme } from './state.ts';
 import { GuestPasswordError, setGuestAccess } from '../site/access.ts';
+import { copyIssues, unknownNewCopyKeys } from '../theme/copy.ts';
+import { loadTheme } from '../theme/theme.ts';
 
 type Authorized = { site: SiteRecord; key: string };
 
@@ -127,6 +129,15 @@ export async function saveDraft(req: Request, slug: string): Promise<Response> {
         }
         throw e;
       }
+      // G068: a design text the design does not have is refused (an older draft may still hold a key a newer version of
+      // the design dropped: kept, ignored by the site). Design texts are not identity: they never use a name/date change.
+      const copyManifest = (await loadTheme(site.theme))?.manifest.copy ?? {};
+      const unknownCopy = unknownNewCopyKeys(site.content, draft, copyManifest);
+      if (unknownCopy.length) {
+        return fail(400, 'invalid_shape', 'These changes could not be saved. Please reload the page.', {
+          issues: unknownCopy.map((k) => ({ level: 'error', code: 'copy_unknown_key', path: `copy.${k}`, message: 'This text is not part of the design.' })),
+        });
+      }
       // After the first publish the names and the date change only through /identity (G060).
       let identityKept = false;
       if (effectiveRights(site).firstPublishedAt) {
@@ -138,10 +149,16 @@ export async function saveDraft(req: Request, slug: string): Promise<Response> {
       try {
         // Conditional on the version read above: the identity kept is the one stored, never an older one.
         const saved = await getDataAdapter().patchSite(site.id, { content: draft }, { expectedUpdatedAt: site.updatedAt });
+        const validation = validateContent(saved.content, { platform: true });
+        const copy = copyIssues(saved.content, copyManifest);
         return json(200, {
           ok: true,
           ...panelMeta(saved),
-          validation: validateContent(saved.content, { platform: true }),
+          validation: {
+            ok: validation.ok && !copy.some((i) => i.level === 'error'),
+            errors: [...validation.errors, ...copy.filter((i) => i.level === 'error')],
+            warnings: [...validation.warnings, ...copy.filter((i) => i.level === 'warning')],
+          },
           ...(identityKept ? { identityKept: true, identity: identityOf(saved.content) } : {}),
         });
       } catch (e) {
