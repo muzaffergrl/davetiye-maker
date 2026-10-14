@@ -299,29 +299,55 @@ Kontrol (tüm fotoğraflar): aynı çift tutarlı; yüzler doğal; eller/parmakl
 
 ---
 
-## PAKET 3 — Etsy ilan mockup'ları (sonra)
+## PAKET 3 — Etsy ilan sahneleri (görev G802; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 
-Ekran ve kart yüzeyleri **düz yeşil (#00FF00)** olacak; ben gerçek tasarımı oraya yerleştireceğim.
+> Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
+> görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir
+> (`tools/mockup_compose.py`), yazıları kendisi dizer. Telefon eğik durabilir; yeter ki ekranın **dört köşesi görünsün**.
+> Hepsini **tek sohbette** üret; aynı masa, aynı ışık, aynı süsler. Kaydet satırındaki `N ekran` = görselde beklenen yeşil ekran sayısı.
+> Üreten: `python3 tools/paket3_sahne.py --no 02` (pilot: 01/03, G801/G803).
 
-### 3.1 Telefon mockup'ı (video ve website ekranı için)
-**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/phone_flatlay.png` · Dikey (1024×1536)
-
+**Instructions for GPT (send before the first image):**
 ```
-Bright airy flat-lay photo from directly above: a modern smartphone lying perfectly straight (not tilted, not rotated) in the center on an ivory linen tablecloth, surrounded at the edges by white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents. The phone screen is a perfectly flat, uniform pure green (#00FF00) with no reflections, no glare and no icons. Soft natural daylight, gentle shadows, no text, no logos, no brand marks on the phone.
-```
-
-### 3.2 Dizüstü mockup'ı (website için)
-**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/laptop_desk.png` · Yatay (1536×1024)
-
-```
-Elegant styled desk scene: an open modern laptop seen straight from the front at eye level, centered, on a light oak desk with a small vase of white roses and eucalyptus and a linen notebook. The laptop screen is a perfectly flat, uniform pure green (#00FF00) with no reflections and no glare. Soft natural window light, airy and bright, no text, no logos, no brand marks.
+You are the photographer and set stylist for the Etsy listing photos of a digital wedding website design called "Dusty Blue & Champagne". Every image in this chat is a real-looking styled product photo built around phones and a laptop whose screens are flat pure green (#00FF00); we will place the real website screens into the green areas afterwards. Keep one consistent set across all images: an ivory linen tablecloth, white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents, the same light and the same color world (dusty blue, deep slate blue, ivory and champagne gold with soft eucalyptus green). Aim for best-selling, magazine-quality Etsy listing photos: rich, airy, luxurious, never cluttered, never cheap stock-photo looking.
 ```
 
-### 3.3 Basılı kart mockup'ı (PDF davetiye için)
-**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/card_flatlay.png` · Dikey (1024×1536)
+### 3.1 Kapak — elde telefon
+**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/cover_hand.png` · 1024×1024 · 1 ekran
 
 ```
-Bright flat-lay photo from directly above: a single blank 5x7 portrait invitation card lying perfectly straight in the center, its face is a perfectly flat, uniform pure green (#00FF00) with crisp edges, resting on a dusty blue envelope with an ivory linen background, a few white roses and eucalyptus sprigs at the edges, a dusty blue silk ribbon. Soft natural daylight, gentle shadows, no text, no logos.
+A woman's elegant hand with natural manicured nails and a delicate gold ring holds a smartphone upright in the lower center of the frame, the phone turned very slightly (about 10 degrees) toward the viewer, its screen facing the camera. Fingers hold only the sides and back of the phone. Behind it, softly out of focus, a styled table with an ivory linen tablecloth and white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents. The upper 30% of the image is calm, soft, out-of-focus background with no objects, kept free for a headline. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: dusty blue, deep slate blue, ivory and champagne gold with soft eucalyptus green. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
 ```
+Kontrol: tek yeşil ekran; dört köşe görünüyor, parmak ekranda değil; üst %30 sakin ve boş; yazı/logo yok.
 
-Kontrol (mockup'lar): yeşil alan tamamen düz ve tek renk; telefon, laptop ve kart düz duruyor, eğik değil.
+### 3.2 Üç telefon — sayfalar
+**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/three_phones.png` · 1536×1024 · 3 ekran
+
+```
+Three identical smartphones stand upright side by side on an ivory linen tablecloth, seen from the front at a slightly low eye level: the middle phone a little forward and larger, the two side phones slightly behind it, with clear space between them so they never overlap. Around their bases and at the edges of the frame: white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents. The phones fill about 70% of the image width and stand in the middle band of the image. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: dusty blue, deep slate blue, ivory and champagne gold with soft eucalyptus green. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 3 yeşil ekran; telefonlar üst üste binmiyor; her ekranın dört köşesi görünüyor; yazı/logo yok.
+
+### 3.3 Dizüstü + telefon
+**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/laptop_phone.png` · 1536×1024 · 2 ekran
+
+```
+An open modern laptop seen from the front at eye level stands slightly left of center on an ivory linen tablecloth, and a smartphone stands upright to its right on a small stand, both screens facing the camera. Around them: white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents, arranged loosely at the edges. Generous calm space above the laptop. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: dusty blue, deep slate blue, ivory and champagne gold with soft eucalyptus green. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 2 yeşil ekran (dizüstü + telefon); dört köşe görünüyor; laptopta logo yok; yazı yok.
+
+### 3.4 Masa üstü — yukarıdan
+**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/flatlay_phone.png` · 1024×1024 · 1 ekran
+
+```
+Flat-lay photo from directly above: a smartphone lies on an ivory linen tablecloth, slightly right of center and rotated about 8 degrees, surrounded at the edges by white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents. The left third of the image is calm, empty surface kept free for text. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: dusty blue, deep slate blue, ivory and champagne gold with soft eucalyptus green. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tek yeşil ekran; sol üçte bir boş; süsler kenarlarda; yazı/logo yok.
+
+### 3.5 Telefonda düzenleme — yaşam sahnesi
+**Kaydet:** `collections/02_Dusty_Blue/assets/gpt/mockups/hand_phone_edit.png` · 1024×1024 · 1 ekran
+
+```
+A cozy lifestyle close-up: two hands hold a smartphone in portrait orientation at a comfortable reading angle, the screen facing the camera; one thumb rests at the very edge of the phone frame, never on the screen. The person sits on a cream linen sofa with a dusty blue cushion and a ceramic coffee cup; a small arrangement of white roses, eucalyptus sprigs, a dusty blue silk ribbon and a few champagne-gold accents is softly blurred in the background. Warm, relaxed, happy planning mood; the person's face is not visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: dusty blue, deep slate blue, ivory and champagne gold with soft eucalyptus green. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tek yeşil ekran; başparmak ekranın dışında; yüz görünmüyor; yazı/logo yok.

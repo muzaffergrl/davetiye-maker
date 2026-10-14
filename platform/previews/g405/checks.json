@@ -1,0 +1,816 @@
+{
+ "base": "next start (production build)",
+ "theme": "mediterranean-lemon",
+ "errors": [],
+ "warnings": [],
+ "passed": [
+  "fonts: Google Fonts link with 2 families (Allura, Playfair Display), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections/05_Lemon_Mediterranean/assets/gpt/photos (PAKET 2))",
+  "index@360: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@360: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@360: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@360: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@390: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@430: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@430: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@430: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@430: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@768: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@768: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@768: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@768: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@1280: no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@1280: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@1280: no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@1280: no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@390 (no photos): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 15 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots preview-placeholder",
+  "envelope closed @360×640: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @844×390: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @844×390: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @667×375: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @667×375: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 530, names 48.6 px) ends at 530, above the nav (top 567)",
+  "home@360×640: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553: home-hero (21 pieces, CTA \"RSVP\" bottom 465, names 42 px) ends at 465, above the nav (top 480)",
+  "home@375×553: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @844×390: home-hero (22 pieces, CTA \"RSVP\" bottom 287, names 44.9 px) ends at 310, above the nav (top 325)",
+  "home@844×390: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @667×375: home-hero (22 pieces, CTA \"RSVP\" bottom 277, names 43.1 px) ends at 295, above the nav (top 310)",
+  "home@667×375: no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (design range): names 37 px (≥ 36); nothing partly under the nav (top 567): the first screen ends at 556; CTA \"RSVP\" bottom 556",
+  "home@360×640 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (design range): names 42 px (≥ 36); nothing partly under the nav (top 480): the first screen ends at 463, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 463",
+  "home@375×553 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @844×390 (design range): names 36.8 px (≥ 36); nothing partly under the nav (top 325): the first screen ends at 315; CTA \"RSVP\" bottom 315",
+  "home@844×390 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @667×375 (design range): names 43.1 px (≥ 36); nothing partly under the nav (top 310): the first screen ends at 299; CTA \"RSVP\" bottom 299",
+  "home@667×375 (design range): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 790, nav top 567)",
+  "home@360×640 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 769, nav top 480)",
+  "home@375×553 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @844×390 (stress record): names 36.8 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 306, nav top 325)",
+  "home@844×390 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 489, nav top 310)",
+  "home@667×375 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 62×44, home \"Replay the envelope\" 229×47, rsvp \"Replay the envelope\" 190×47",
+  "envelope → /isabella-and-marco/home in 4454 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (13 steps)",
+  "countdown target from the platform: 2027-06-12 16:00 Europe/Rome = 2027-06-12 14:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-06-12T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-06-17T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (156 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390 (changed content): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 17 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 36 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record): no overflow, 4 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 21 fields = content record, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@390 (stress record): no overflow, 5 fields = content record, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 36 fields = content record, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 5 fields = content record, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 937 KB",
+  "home first view (390×844, DPR 3, placeholders): 1007 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 1031 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1263 KB",
+  "recording: previews/g405/opening_390x844.mp4 (3476 KB, lead-in 0.69 s cut, first frame mean 218,217,205) — tap → opening → home → story → details"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections/05_Lemon_Mediterranean",
+   "demo_record": "platform/themes/mediterranean-lemon/content.demo.json",
+   "photos": "collections/05_Lemon_Mediterranean/assets/gpt/photos (PAKET 2)",
+   "w1_comps": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "compare": "w1",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (card_small, invitation_card, info_card)",
+   "fonts": [
+    "Allura",
+    "Playfair Display 400/500/italic 400"
+   ]
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (196 KB, 1024×1370, variants 640)",
+   "story_1 → media.memory_photos.0 (199 KB, 1024×1431, variants 640)",
+   "story_2 → media.memory_photos.1 (232 KB, 1024×1431, variants 640)",
+   "story_3 → media.memory_photos.2 (147 KB, 1024×1431, variants 640)",
+   "venue → media.venue_image (321 KB, 1536×825, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.74,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 1.44,
+      "dark": 0.004
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.85,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 1.04,
+      "dark": 0.009
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.73,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 1.7,
+      "dark": 0.005
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.86,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.89,
+      "dark": 0.007
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.64,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 1.4,
+      "dark": 0.004
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.75,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.77,
+      "dark": 0.005
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.49,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 1,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.6,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.38,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "844x390",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.56,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.56,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.84,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "844x390",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.39,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "667x375",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.62,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 1.09,
+      "dark": 0.009
+     },
+     {
+      "box": "env-hint",
+      "edge": 1.19,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "667x375",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.47,
+      "dark": 0
+     }
+    ]
+   }
+  ],
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 567,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 530,
+    "above": 530,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 530
+    },
+    "bad": [],
+    "partly": [],
+    "names": 48.6
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 480,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 465,
+    "above": 465,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 465
+    },
+    "bad": [],
+    "partly": [],
+    "names": 42
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 325,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 310,
+    "above": 310,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 287
+    },
+    "bad": [],
+    "partly": [],
+    "names": 44.9
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 310,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 295,
+    "above": 295,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 277
+    },
+    "bad": [],
+    "partly": [],
+    "names": 43.1
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 567,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 556,
+    "above": 556,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 556
+    },
+    "bad": [],
+    "partly": [],
+    "names": 37
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 480,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 602,
+    "above": 463,
+    "below": 565,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 463
+    },
+    "bad": [
+     "span.cd-num \"350\" bottom 587",
+     "span.cd-lbl \"Days\" bottom 602",
+     "span.cd-num \"02\" bottom 587",
+     "span.cd-lbl \"Hours\" bottom 602",
+     "span.cd-num \"18\" bottom 587",
+     "span.cd-lbl \"Minutes\" bottom 602",
+     "span.cd-num \"56\" bottom 587",
+     "span.cd-lbl \"Seconds\" bottom 602"
+    ],
+    "partly": [],
+    "names": 42
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 325,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 315,
+    "above": 315,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 315
+    },
+    "bad": [],
+    "partly": [],
+    "names": 36.8
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 310,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 299,
+    "above": 299,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 299
+    },
+    "bad": [],
+    "partly": [],
+    "names": 43.1
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 567,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 790,
+    "above": 542,
+    "below": 652,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 790
+    },
+    "bad": [
+     "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 672",
+     "span.cd-num \"241\" bottom 716",
+     "span.cd-lbl \"Days\" bottom 731",
+     "span.cd-num \"02\" bottom 716",
+     "span.cd-lbl \"Hours\" bottom 731",
+     "span.cd-num \"18\" bottom 716",
+     "span.cd-lbl \"Minutes\" bottom 731",
+     "span.cd-num \"36\" bottom 716",
+     "span.cd-lbl \"Seconds\" bottom 731",
+     "a.btn \"RSVP\" bottom 790"
+    ],
+    "partly": [],
+    "names": 36
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 480,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 769,
+    "above": 407,
+    "below": 565,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 769
+    },
+    "bad": [
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 638",
+     "p.hero-city.in.done \"Sorrento, Campania, Ital\" bottom 660",
+     "span.cd-num \"241\" bottom 698",
+     "span.cd-lbl \"Days\" bottom 713",
+     "span.cd-num \"02\" bottom 698",
+     "span.cd-lbl \"Hours\" bottom 713",
+     "span.cd-num \"18\" bottom 698",
+     "span.cd-lbl \"Minutes\" bottom 713",
+     "span.cd-num \"30\" bottom 698",
+     "span.cd-lbl \"Seconds\" bottom 713",
+     "a.btn \"RSVP\" bottom 769"
+    ],
+    "partly": [],
+    "names": 36
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 325,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 441,
+    "above": 306,
+    "below": 402,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 306
+    },
+    "bad": [
+     "span.cd-num \"241\" bottom 424",
+     "span.cd-lbl \"Days\" bottom 441",
+     "span.cd-num \"02\" bottom 424",
+     "span.cd-lbl \"Hours\" bottom 441",
+     "span.cd-num \"18\" bottom 424",
+     "span.cd-lbl \"Minutes\" bottom 441",
+     "span.cd-num \"23\" bottom 424",
+     "span.cd-lbl \"Seconds\" bottom 441"
+    ],
+    "partly": [],
+    "names": 36.8
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 310,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 489,
+    "above": 291,
+    "below": 387,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 489
+    },
+    "bad": [
+     "span.cd-num \"241\" bottom 414",
+     "span.cd-lbl \"Days\" bottom 431",
+     "span.cd-num \"02\" bottom 414",
+     "span.cd-lbl \"Hours\" bottom 431",
+     "span.cd-num \"18\" bottom 414",
+     "span.cd-lbl \"Minutes\" bottom 431",
+     "span.cd-num \"17\" bottom 414",
+     "span.cd-lbl \"Seconds\" bottom 431",
+     "a.btn \"RSVP\" bottom 489"
+    ],
+    "partly": [],
+    "names": 36
+   }
+  ],
+  "envelope_to_home_ms": 4454,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ]
+  },
+  "first_view_index_kb_placeholders": 937,
+  "first_view_index_files": [
+   [
+    "/themes/mediterranean-lemon/img/decor_br-960.webp",
+    187140
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
+    176972
+   ],
+   [
+    "/themes/mediterranean-lemon/img/closure-640.webp",
+    86172
+   ],
+   [
+    "/themes/mediterranean-lemon/img/env_flap-880.webp",
+    62192
+   ],
+   [
+    "/themes/mediterranean-lemon/img/card_small-640.webp",
+    56770
+   ],
+   [
+    "/themes/mediterranean-lemon/img/env_body-880.webp",
+    53660
+   ],
+   [
+    "/themes/mediterranean-lemon/site.css",
+    45482
+   ],
+   [
+    "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+    38404
+   ]
+  ],
+  "first_view_home_kb_placeholders": 1007,
+  "first_view_home_files": [
+   [
+    "/themes/mediterranean-lemon/img/decor_br-960.webp",
+    187140
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
+    176972
+   ],
+   [
+    "/themes/mediterranean-lemon/img/invitation_card-944.webp",
+    136654
+   ],
+   [
+    "/themes/mediterranean-lemon/img/frame_landscape-960.webp",
+    90692
+   ],
+   [
+    "/themes/mediterranean-lemon/img/frame_portrait-640.webp",
+    74228
+   ],
+   [
+    "/themes/mediterranean-lemon/img/card_small-640.webp",
+    56770
+   ],
+   [
+    "/themes/mediterranean-lemon/site.css",
+    45482
+   ],
+   [
+    "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+    38404
+   ]
+  ],
+  "first_view_index_kb_photos": 1031,
+  "first_view_index_files_photos": [
+   [
+    "/themes/mediterranean-lemon/img/decor_br-960.webp",
+    187140
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
+    176972
+   ],
+   [
+    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/bc4c1387d92b776e2444b66b38d87220-640w.jpg",
+    98482
+   ],
+   [
+    "/themes/mediterranean-lemon/img/closure-640.webp",
+    86172
+   ],
+   [
+    "/themes/mediterranean-lemon/img/env_flap-880.webp",
+    62192
+   ],
+   [
+    "/themes/mediterranean-lemon/img/card_small-640.webp",
+    56770
+   ],
+   [
+    "/themes/mediterranean-lemon/img/env_body-880.webp",
+    53660
+   ],
+   [
+    "/themes/mediterranean-lemon/site.css",
+    45482
+   ]
+  ],
+  "first_view_home_kb_photos": 1263,
+  "first_view_home_files_photos": [
+   [
+    "/themes/mediterranean-lemon/img/decor_br-960.webp",
+    187140
+   ],
+   [
+    "/themes/mediterranean-lemon/img/decor_tl-960.webp",
+    176972
+   ],
+   [
+    "/themes/mediterranean-lemon/img/invitation_card-944.webp",
+    136654
+   ],
+   [
+    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/6249593667bddea7246287f68711f4ca-640w.jpg",
+    100571
+   ],
+   [
+    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/bc4c1387d92b776e2444b66b38d87220-640w.jpg",
+    98482
+   ],
+   [
+    "/themes/mediterranean-lemon/img/frame_landscape-960.webp",
+    90692
+   ],
+   [
+    "/themes/mediterranean-lemon/img/frame_portrait-640.webp",
+    74228
+   ],
+   [
+    "/media/36072805-aeaa-4a1c-9997-4c28dc79225e/3e9c4c001810086b498e0b911edb880d-640w.jpg",
+    71048
+   ]
+  ],
+  "video_kb": 3476,
+  "video_first_frame": {
+   "lead_in_s": 0.69,
+   "mean_rgb": [
+    218,
+    217,
+    205
+   ],
+   "stdev": 62
+  },
+  "compare": {
+   "source": "w1",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ]
+  }
+ }
+}

@@ -2,7 +2,7 @@
 id: G210
 baslik: Tasarım 10 Tuscan Vineyard — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-F
 oncelik: 2
 bagimli: []
@@ -42,6 +42,7 @@ Tasarım 10'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - Zarf/açık zarf/kapanış bellekte yarı saydam üst üste kontrol edildi; dosya oluşturulmadı. **Kalan hiza uyarısı:** açık gövde sol `-0,10%`, sağ `0,00%`, alt `-1,82%`; sicim üst uç `-2,02%`, alt uç `-3,12%`. Bire bir eşleşme değildir; tema build'inin ölçülen ölçek/öteleme düzeltmesi ve düğümün kapak ucuna yerleşiminin kontrolü gerekir.
 - `bg_tile` ve `oak_tile` bellekte 2×2 tekrar ile kontrol edildi; `web_hero` seçilen sürümde zarf+kapanışın altı yaklaşık y=795'tedir ve merkezli 1200×630 kırpımında %5'ten fazla alt boşluk kalır. Dikişsiz dokularda piksel düzeyinde kenar eşitliği garanti edilmez; üretilen kareler 1254×1254 olup kit standardının oran kontrolünü geçer.
 - Çalıştırıldı: `python3 tools/kit_check.py collections/10_Tuscan_Vineyard --paket 5` → **24/24 geçti, çıkış 0** (23 görsel + hiza; hiza UYARI olarak geçer). `--paket 2` → **5/5 geçti, çıkış 0**. Bu kontroller yeşilin kusursuz düz/255 alfa olduğunu, OCR veya çift kimliğini otomatik doğrulamaz. Website/Canva/kod montajı bu görevin kapsamı değildir.
+- Devam doğrulaması (gpt-gorsel-F, 2026-10-14): ilk pull ve kontrollerde 28 görsel eksikti. Bu oturumun W1 ara kaydı öncesindeki `git pull --rebase origin main` sırasında önceki oturumun tam paketi (`7d1831d`, `G210: website paketi`) main'e geldi. Çakışmada bu teslimdeki 28 görsel ve Sonuç korundu; bu oturumdaki alternatif W1 ve arka plan üretimleri teslim edilmedi. Mevcut 5 comp, 18 parça ve 5 fotoğraf sohbete referans olarak alınıp görsel olarak kontrol edildi; zarf/kapanış üst üste kontrolü yalnız bellekte yapıldı. Korunan dosyalarda iki kit kontrolü tekrar çalıştırıldı: **PAKET 5 24/24, PAKET 2 5/5, iki çıkış kodu da 0**. Yukarıdaki yeşil pencere istisnası ve hiza uyarısı geçerlidir; eksik dosya yoktur. Bu devamın son kaydı yalnız görev dosyasını günceller; durum `inceleme`, alan `gpt-gorsel-F`.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
@@ -51,3 +52,5 @@ Tasarım 10'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-F
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-F; 5 W1 + 18 W2 + 5 fotoğraf, kit kontrolleri geçti; yeşil pencere istisnası ve hiza uyarısı Sonuç'ta.
 - 2026-10-14 açıklama: entegratörün ara notu uzak repoda henüz görseller yokken eklenmişti; üretim bu aynı sohbette tamamlandı, 28 görsel bu teslim commit'indedir.
+- 2026-10-14 devam doğrulandı: gpt-gorsel-F; önceki oturumun `7d1831d` teslimi korundu, eksik yok, kit_check 24/24 ve 5/5 geçti; inceleme.
+- 2026-10-14 entegratör onayladı

@@ -2,8 +2,8 @@
 id: GM03
 baslik: BKE Studio ortak Etsy ilan şablonu — 7 yerleşim/tipografi comp'u + 8 özellik ikonu (GPT tasarlar)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-marka
 oncelik: 1
 bagimli: [GM01]
 yazar: [brand/listing/]
@@ -30,6 +30,10 @@ Tasarıma özel fotoğraf sahneleri G8NN'de (PAKET 3). Claude bu comp'lara göre
 - [ ] Sonuç'ta yeniden üretilenler ve emin olunmayan noktalar
 
 ## Sonuç
+- Kısım 1 ara kayıt: LC1–LC4 üretildi; comp metinleri ve BKE Studio harf harf kontrol edildi. LC1 ikinci denemesi `lc1_cover_v2.png` olarak saklandı; sade ad ilk Olive & Ivory sahnesidir.
+- Teknik kontrol henüz açık: imagegen 1254×1254 çıktı verdi; yeşil ekranlar piksel düzeyinde saf #00FF00 değil. LC2'de kamera adaları, LC4'te ekran içine uzanan bağlantı uçları var. 1024×1024 ve saf ekran için yalnız teknik boyut/renk düzeltmesi izni kullanıcıya soruldu; yanıt bekleniyor.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): kullanıcı isteği, ilan görselleri GPT tasarımı
+- 2026-10-14 alindi: gpt-marka — bu oturum yalnız kısım 1, LC1–LC7; LI ikonları sonraki oturuma kaldı.
+- 2026-10-14 ara kayıt: gpt-marka — LC 4/7 üretildi; harf kontrolleri geçti, teknik boyut/saf ekran düzeltmesi açık.
