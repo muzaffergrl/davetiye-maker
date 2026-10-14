@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 37 · alindi 1 · inceleme 0 · blokaj 296 · bitti 34 · toplam 368
+Özet: hazir 35 · alindi 4 · inceleme 0 · blokaj 296 · bitti 34 · toplam 369
 
 ## claude-canva
 
@@ -102,12 +102,13 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G049` p1 — Canlıya inceleme düzeltmelerini yayınla + canlı kontrol betiklerini repoya al → `gorevler/G049-yeniden-yayin-canli-kontrol.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (42)**
+**Üzerinde çalışılan / incelemede / blokaj (43)**
 
+- `G049` alindi · claude-local-1 — Canlıya inceleme düzeltmelerini yayınla + canlı kontrol betiklerini repoya al
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -252,9 +253,10 @@ Bağımlılık bekleyen: 18 · Biten: 24
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (21)**
+**Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
+- `G059` alindi · wf-ilan — Platform modeline göre set paketi (docs/05) + tasarım 01 ve 03 için Etsy ilan kiti ve alıcı START HERE PDF'i
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
@@ -311,9 +313,8 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (18)**
+**Alınabilir (17)**
 
-- `G204` p1 — Tasarım 04 Vintage Airmail Love Letter — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G204-gorsel.md`
 - `G205` p1 — Tasarım 05 Mediterranean Lemon — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G205-gorsel.md`
 - `G202` p2 — Tasarım 02 Dusty Blue & Champagne — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G202-gorsel.md`
 - `G206` p2 — Tasarım 06 Art Deco Black-Tie — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G206-gorsel.md`
@@ -332,10 +333,11 @@ Bağımlılık bekleyen: 0 · Biten: 0
 - `G219` p2 — Tasarım 19 Midnight Garden — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G219-gorsel.md`
 - `G220` p2 — Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar) → `gorevler/G220-gorsel.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (48)**
+**Üzerinde çalışılan / incelemede / blokaj (49)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
+- `G204` alindi · codex-gpt-gorsel — Tasarım 04 Vintage Airmail Love Letter — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
