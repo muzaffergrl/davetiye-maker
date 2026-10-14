@@ -1,12 +1,17 @@
 'use client';
-// Form building blocks of the panel: labelled inputs with inline validation, switches, sections.
+// Form building blocks of the panel: labelled inputs with inline validation, switches, repeatable items.
 // An input's errors are hidden while the buyer is typing in it and shown again on blur.
+// A field still holding the design's sample text shows a "Sample" tag; focusing it selects the whole text,
+// so typing replaces the sample (docs/16 §5.4).
 
+import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react';
 import { createContext, useContext, useId, useState, type ReactNode } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDateLong, formatTime } from '../../lib/content/format.ts';
-import { fieldId, type SectionId, type ThemeFieldUse } from '../../lib/panel/model.ts';
+import { fieldId, type PanelPhotoSlot, type ThemeFieldUse } from '../../lib/panel/model.ts';
+import type { RightsView } from '../../lib/panel/rights.ts';
+import { Badge, cx, OverflowMenu, useSnackbar } from './ui.tsx';
 import type { Change } from './usePanel.ts';
 import styles from './panel.module.css';
 
@@ -15,7 +20,7 @@ export interface PanelContextValue {
   edit: (change: Change) => void;
   /** Issues whose path is exactly `path`. */
   issuesAt: (path: string) => ValidationIssue[];
-  /** Saving stopped (conflict / invalid link): inputs are read only. */
+  /** Saving stopped (conflict / invalid link) or the site is archived: inputs are read only. */
   locked: boolean;
   /** True while the value at `path` is still the design's sample text (lib/panel/model.ts sampleNotes). */
   isSample: (path: string) => boolean;
@@ -23,6 +28,13 @@ export interface PanelContextValue {
   previewKey: string;
   /** Fields the theme shows (others are hidden in the panel). */
   fields: ThemeFieldUse;
+  rights: RightsView;
+  online: boolean;
+  /** Opens the "Change names or date" sheet (after the first publish). */
+  openIdentity: (focus: 'names' | 'date') => void;
+  photoSlots: PanelPhotoSlot[];
+  uploadPhoto: (slot: PanelPhotoSlot, blob: Blob) => Promise<{ ok: boolean; message?: string }>;
+  removePhoto: (slot: PanelPhotoSlot) => void;
 }
 
 export const PanelContext = createContext<PanelContextValue | null>(null);
@@ -58,11 +70,11 @@ interface BaseFieldProps {
 }
 
 function useFieldState(path: string) {
-  const { issuesAt, locked } = usePanelContext();
+  const { issuesAt, locked, isSample } = usePanelContext();
   const [typing, setTyping] = useState(false);
   const issues = issuesAt(path);
   const shown = typing ? [] : issues;
-  return { issues: shown, hasError: shown.some((i) => i.level === 'error'), setTyping, locked };
+  return { issues: shown, hasError: shown.some((i) => i.level === 'error'), setTyping, locked, sample: isSample(path) };
 }
 
 function FieldFrame({
@@ -83,12 +95,12 @@ function FieldFrame({
         <label htmlFor={id} className={styles.label}>
           {label}
           {optional ? <span className={styles.optional}> (optional)</span> : null}
-          {isSample(path) ? (
-            <span className={styles.sampleTag} data-sample-tag>
-              Sample
-            </span>
-          ) : null}
         </label>
+        {isSample(path) ? (
+          <span className={styles.sampleTag} data-sample-tag>
+            Sample
+          </span>
+        ) : null}
         {counter}
       </div>
       {hint ? (
@@ -123,7 +135,7 @@ export function TextField(
   },
 ) {
   const { path, value, onChange, maxLength, placeholder, type = 'text', inputMode, autoComplete, multiline, rows = 3 } = props;
-  const { issues, hasError, setTyping, locked } = useFieldState(path);
+  const { issues, hasError, setTyping, locked, sample } = useFieldState(path);
   const text = value ?? '';
   const length = [...text].length;
   const counter =
@@ -142,6 +154,8 @@ export function TextField(
     'aria-invalid': hasError || undefined,
     'aria-describedby': describedBy(path, props.hint, issues),
     onBlur: () => setTyping(false),
+    // Sample text is selected on focus: typing replaces it.
+    onFocus: sample ? (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => e.currentTarget.select() : undefined,
   };
   return (
     <FieldFrame {...props} counter={counter} issues={issues}>
@@ -210,11 +224,24 @@ export function DateField(props: BaseFieldProps & { value: string | undefined; l
   );
 }
 
+/**
+ * Time picker. The written form ("4:00 PM") is shown only when the phone's own time format differs from the
+ * site's (docs/16 §5.3: the same information twice is noise).
+ */
 export function TimeField(props: BaseFieldProps & { value: string | undefined; locale: string; onChange: (value: string) => void }) {
   const { path, value, locale, onChange } = props;
   const { issues, hasError, setTyping, locked } = useFieldState(path);
+  const [deviceUses12h] = useState(() => {
+    try {
+      return new Intl.DateTimeFormat(undefined, { hour: 'numeric' }).resolvedOptions().hour12 === true;
+    } catch {
+      return true;
+    }
+  });
+  const siteUses12h = locale === 'en-US' || locale === 'en-CA' || locale === 'en-AU';
+  const written = deviceUses12h === siteUses12h ? null : formatTime(value, locale);
   return (
-    <FieldFrame {...props} display={props.display ?? formatTime(value, locale)} issues={issues}>
+    <FieldFrame {...props} display={props.display ?? (written ? `On your website: ${written}` : null)} issues={issues}>
       <input
         id={fieldId(path)}
         type="time"
@@ -277,6 +304,7 @@ export function SelectField(
   );
 }
 
+/** On/off row with its description, right next to the content it controls (docs/16 §4.3). */
 export function Switch({
   id,
   label,
@@ -316,141 +344,91 @@ export function Switch({
         onClick={() => onChange(!checked)}
       >
         <span className={styles.switchKnob} aria-hidden="true" />
-        <span className={styles.switchState} aria-hidden="true">
-          {checked ? 'On' : 'Off'}
-        </span>
       </button>
     </div>
   );
 }
 
-export function Section({
-  id,
-  title,
-  summary,
-  errorCount,
-  sampleCount = 0,
-  open,
-  onToggle,
-  children,
-}: {
-  id: SectionId;
-  title: string;
-  summary?: string;
-  errorCount: number;
-  /** Fields still holding the design's sample text. */
-  sampleCount?: number;
-  open: boolean;
-  onToggle: () => void;
-  children: ReactNode;
-}) {
+/** A group of fields inside a section page, with an optional heading. */
+export function Group({ title, children, className, ...rest }: { title?: ReactNode; children: ReactNode; className?: string } & Record<`data-${string}`, unknown>) {
   return (
-    <section className={open ? `${styles.section} ${styles.sectionOpen}` : styles.section} data-section={id}>
-      <h2 className={styles.sectionHeading}>
-        <button
-          type="button"
-          id={`section-${id}`}
-          className={styles.sectionButton}
-          aria-expanded={open}
-          aria-controls={`section-${id}-body`}
-          onClick={onToggle}
-        >
-          <span className={styles.sectionTitleWrap}>
-            <span className={styles.sectionTitle}>{title}</span>
-            {summary ? <span className={styles.sectionSummary}>{summary}</span> : null}
-          </span>
-          {errorCount ? (
-            <span className={styles.badge}>
-              {errorCount} to fix
-            </span>
-          ) : sampleCount ? (
-            <span className={styles.sampleBadge} data-sample-badge>
-              Sample text
-            </span>
-          ) : null}
-          <span className={styles.chevron} aria-hidden="true" />
-        </button>
-      </h2>
-      {/* Only the open section is rendered (lighter page; its data, e.g. RSVP replies, loads on open). */}
-      <div id={`section-${id}-body`} className={styles.sectionBody} hidden={!open} role="region" aria-labelledby={`section-${id}`}>
-        {open ? children : null}
-      </div>
-    </section>
+    <fieldset className={cx(styles.group, className)} {...rest}>
+      {title ? <legend className={styles.groupTitle}>{title}</legend> : null}
+      {children}
+    </fieldset>
   );
 }
 
 /**
- * Small row of actions (move up / down / remove) for list items. Remove asks once more ("Yes, remove"),
- * like photos: autosave stores a deletion within a second and there is no undo. After a move, focus
- * follows the moved item (rows are keyed by position, so the pressed button now belongs to another row).
+ * One card of a list (event, moment, question, form question): title + overflow menu (Move up / Move down /
+ * Remove). Remove happens at once with a 6 s Undo (autosave stores it within a second; Undo puts it back).
+ * No drag and drop (hard on touch and with screen readers, WCAG 2.5.7).
  */
-export function RowActions({
+export function RepeatableItem<T>({
   index,
   count,
   noun,
-  onMove,
-  onRemove,
+  title,
+  select,
+  assign,
+  children,
+  ...rest
 }: {
   index: number;
   count: number;
   noun: string;
-  onMove: (from: number, to: number) => void;
-  onRemove: (index: number) => void;
-}) {
-  const { locked } = usePanelContext();
-  const [confirming, setConfirming] = useState(false);
-  const move = (to: number, dir: 'up' | 'down') => {
-    onMove(index, to);
-    window.setTimeout(() => {
-      const same = document.querySelector<HTMLButtonElement>(`[aria-label="Move ${noun} ${to + 1} ${dir}"]`);
-      const other = document.querySelector<HTMLButtonElement>(`[aria-label="Move ${noun} ${to + 1} ${dir === 'up' ? 'down' : 'up'}"]`);
-      (same && !same.disabled ? same : other)?.focus();
-    }, 0);
+  title: string;
+  /** The list inside a draft, and how to put a new list back (moves, removal and Undo run on the latest draft). */
+  select: (c: ContentRecord) => T[];
+  assign: (c: ContentRecord, list: T[]) => void;
+  children: ReactNode;
+} & Record<`data-${string}`, unknown>) {
+  const { locked, edit } = usePanelContext();
+  const snack = useSnackbar();
+  const capital = noun.charAt(0).toUpperCase() + noun.slice(1);
+  const focusMoved = (to: number) =>
+    window.setTimeout(() => document.querySelector<HTMLButtonElement>(`[aria-label="Options for ${noun} ${to + 1}"]`)?.focus(), 0);
+  const move = (to: number) => {
+    edit((c) => assign(c, moveItem(select(c), index, to)));
+    focusMoved(to);
+  };
+  const remove = () => {
+    let removed: T | undefined;
+    edit((c) => {
+      const list = select(c);
+      removed = list[index];
+      assign(c, list.filter((_, i) => i !== index));
+    });
+    snack(`${capital} removed`, {
+      label: 'Undo',
+      run: () =>
+        edit((c) => {
+          if (removed === undefined) return;
+          const list = [...select(c)];
+          list.splice(Math.min(index, list.length), 0, removed);
+          assign(c, list);
+        }),
+    });
   };
   return (
-    <div className={styles.rowActions}>
-      <button type="button" className={styles.smallButton} disabled={locked || index === 0} onClick={() => move(index - 1, 'up')} aria-label={`Move ${noun} ${index + 1} up`}>
-        Up
-      </button>
-      <button
-        type="button"
-        className={styles.smallButton}
-        disabled={locked || index === count - 1}
-        onClick={() => move(index + 1, 'down')}
-        aria-label={`Move ${noun} ${index + 1} down`}
-      >
-        Down
-      </button>
-      {confirming ? (
-        <>
-          <button
-            type="button"
-            className={`${styles.smallButton} ${styles.dangerText}`}
-            disabled={locked}
-            onClick={() => {
-              setConfirming(false);
-              onRemove(index);
-            }}
-            aria-label={`Yes, remove ${noun} ${index + 1}`}
-          >
-            Yes, remove
-          </button>
-          <button type="button" className={styles.smallButton} onClick={() => setConfirming(false)} aria-label={`Keep ${noun} ${index + 1}`}>
-            Keep
-          </button>
-        </>
-      ) : (
-        <button
-          type="button"
-          className={`${styles.smallButton} ${styles.dangerText}`}
+    <fieldset className={styles.item} {...rest}>
+      <legend className={styles.visuallyHidden}>{title}</legend>
+      <div className={styles.itemHead}>
+        <span className={styles.itemTitle} aria-hidden="true">
+          {title}
+        </span>
+        <OverflowMenu
+          label={`Options for ${noun} ${index + 1}`}
           disabled={locked}
-          onClick={() => setConfirming(true)}
-          aria-label={`Remove ${noun} ${index + 1}`}
-        >
-          Remove
-        </button>
-      )}
-    </div>
+          items={[
+            { label: 'Move up', icon: ArrowUp, disabled: index === 0, onSelect: () => move(index - 1) },
+            { label: 'Move down', icon: ArrowDown, disabled: index === count - 1, onSelect: () => move(index + 1) },
+            { label: 'Remove', icon: Trash2, danger: true, onSelect: remove },
+          ]}
+        />
+      </div>
+      {children}
+    </fieldset>
   );
 }
 
@@ -460,4 +438,22 @@ export function moveItem<T>(list: T[], from: number, to: number): T[] {
   const [item] = copy.splice(from, 1);
   copy.splice(to, 0, item);
   return copy;
+}
+
+export function StatusBadges({ errors, samples, off }: { errors: number; samples: number; off?: boolean }) {
+  return (
+    <>
+      {errors ? (
+        <Badge tone="danger" data-error-badge>
+          {errors} to fix
+        </Badge>
+      ) : null}
+      {samples && !errors ? (
+        <Badge tone="warning" data-sample-badge>
+          Sample text
+        </Badge>
+      ) : null}
+      {off ? <Badge tone="neutral">Off</Badge> : null}
+    </>
+  );
 }

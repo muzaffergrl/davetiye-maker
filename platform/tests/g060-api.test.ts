@@ -293,7 +293,7 @@ test('14: archived site — writes 403, panel state readable, CSV ok, public pag
     c.rsvp.deadline = '2027-05-01';
   });
   // a photo used by the published content
-  const up = await call(photoRoute, `/api/edit/${k.slug}/photo?slot=hero`, { slug: k.slug }, { method: 'POST', key: k.editKey, body: tinyPng(), type: 'image/png' });
+  const up = await call(photoRoute, `/api/edit/${k.slug}/photo?slot=hero`, { slug: k.slug }, { method: 'POST', key: k.editKey, body: Buffer.from(tinyPng()), type: 'image/png' });
   assert.equal(up.status, 200);
   const s0 = await getState(k);
   const withPhoto = structuredClone(s0.content) as ContentRecord;
@@ -312,7 +312,7 @@ test('14: archived site — writes 403, panel state readable, CSV ok, public pag
   c.venue.name = 'Changed';
   for (const [name, res] of [
     ['PUT', await put(k, c)],
-    ['photo', await call(photoRoute, `/api/edit/${k.slug}/photo?slot=hero`, { slug: k.slug }, { method: 'POST', key: k.editKey, body: tinyPng(), type: 'image/png' })],
+    ['photo', await call(photoRoute, `/api/edit/${k.slug}/photo?slot=hero`, { slug: k.slug }, { method: 'POST', key: k.editKey, body: Buffer.from(tinyPng()), type: 'image/png' })],
     ['publish', await publish(k)],
     ['unpublish', await call(unpublishRoute, `/api/edit/${k.slug}/unpublish`, { slug: k.slug }, { method: 'POST', key: k.editKey })],
     ['identity', await identityCall(k, identityOf(s.content), 'fix')],

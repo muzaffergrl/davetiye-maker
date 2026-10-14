@@ -712,7 +712,9 @@ test('small helpers: aspect parsing, issue sections, key-order-free comparison, 
   assert.equal(parseAspect('1.5'), 1.5);
   assert.equal(parseAspect('wide'), null);
   assert.equal(parseAspect(undefined), null);
-  assert.equal(sectionForPath('partners.1.display_name'), 'couple');
+  assert.equal(sectionForPath('partners.1.display_name'), 'names');
+  assert.equal(sectionForPath('urls.map'), 'venue', 'G060: the map link lives under Venue');
+  assert.equal(sectionForPath('optional_blocks.our_story'), 'story', 'G060: each switch lives next to its content');
   assert.equal(sectionForPath('schedule.2.time'), 'schedule');
   assert.equal(sectionForPath('urls'), 'details');
   assert.equal(sectionForPath('media.memory_photos'), 'photos');

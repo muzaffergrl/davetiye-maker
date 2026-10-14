@@ -684,7 +684,8 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
           </p>
         </div>
 
-        <a className={styles.primary} href={result.editPath} data-open-editor="">
+        {/* G060: the editor's first-run setup starts at step 1 (names already filled in from this form). */}
+        <a className={styles.primary} href={`${result.editPath}#setup/1`} data-open-editor="">
           Open my editor
         </a>
         <p className={styles.small}>

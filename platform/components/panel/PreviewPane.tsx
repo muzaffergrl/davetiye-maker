@@ -1,18 +1,20 @@
 'use client';
 // Live preview of the draft: the real site route with ?preview=<preview key>, 390 px wide.
 // Reloads after every save. On phones it opens as a full-screen modal; on wide screens it sits
-// next to the form. The iframe loads only once it is first shown on a phone.
+// next to the editor in a phone-sized frame. The iframe loads only once it is first shown.
 //
-// Phone modal: focus moves to Close (and back to the Preview button afterwards), the page behind
-// does not scroll (the form and bar are `inert`, see Panel.tsx), and opening it adds a history
-// entry, so the Android back button / gesture closes the preview instead of leaving the editor.
+// Phone modal: focus moves to Close (and back to the opener afterwards), the page behind does not
+// scroll and is `inert` (Panel.tsx), and opening it adds a history entry, so the Android back
+// button / gesture closes the preview instead of leaving the editor.
 // Only pages guests can open with the current content get a tab (Panel passes them filtered).
 
+import { RotateCcw, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { PAGE_LABELS, previewPath } from '../../lib/panel/model.ts';
 import styles from './panel.module.css';
 
 const HISTORY_MARK = 'panel-preview';
+const SLOW_MS = 10_000;
 
 export function PreviewPane({
   slug,
@@ -21,6 +23,7 @@ export function PreviewPane({
   version,
   open,
   wide,
+  page: wanted,
   onClose,
 }: {
   slug: string;
@@ -29,12 +32,20 @@ export function PreviewPane({
   version: number;
   open: boolean;
   wide: boolean;
+  /** Page to show (e.g. "story" when opened from Our Story). */
+  page?: string | null;
   onClose: () => void;
 }) {
-  const [chosen, setChosen] = useState(pages[0] ?? 'index');
+  const [chosen, setChosen] = useState(wanted ?? pages[0] ?? 'index');
+  useEffect(() => {
+    if (wanted) setChosen(wanted);
+  }, [wanted]);
   // A page that was turned off (e.g. Our Story) falls back to the first page.
   const page = pages.includes(chosen) ? chosen : (pages[0] ?? 'index');
   const [mounted, setMounted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [slow, setSlow] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const onCloseRef = useRef(onClose);
@@ -47,6 +58,13 @@ export function PreviewPane({
   useEffect(() => {
     if (shown) setMounted(true);
   }, [shown]);
+
+  // Skeleton until the first load; after 10 s a "Try again".
+  useEffect(() => {
+    if (!mounted || loaded) return;
+    const t = setTimeout(() => setSlow(true), SLOW_MS);
+    return () => clearTimeout(t);
+  }, [mounted, loaded, page, reloadKey]);
 
   // Reload after each save; keeps the page the buyer navigated to inside the preview.
   const lastVersion = useRef(version);
@@ -74,7 +92,7 @@ export function PreviewPane({
     let pushed = false;
     let popped = false;
     try {
-      window.history.pushState({ [HISTORY_MARK]: true }, '');
+      window.history.pushState({ ...(window.history.state ?? {}), [HISTORY_MARK]: true }, '');
       pushed = true;
     } catch {
       /* history not available: Close and Escape still work */
@@ -113,25 +131,71 @@ export function PreviewPane({
       <div className={styles.previewHeader}>
         <div>
           <p className={styles.previewTitle}>Preview</p>
-          <p className={styles.hint}>Your latest changes. Guests see them after you publish.</p>
+          <p className={styles.previewSub}>Draft — guests see changes after you publish.</p>
         </div>
         {!wide ? (
-          <button ref={closeRef} type="button" className={styles.closeButton} onClick={onClose} data-close-preview>
-            Close
+          <button ref={closeRef} type="button" className={styles.sheetClose} onClick={onClose} data-close-preview aria-label="Close preview" title="Close preview">
+            <X size={22} strokeWidth={1.75} aria-hidden="true" />
           </button>
         ) : null}
       </div>
       <div className={styles.previewTabs} role="tablist" aria-label="Page">
         {pages.map((p) => (
-          <button key={p} type="button" role="tab" aria-selected={p === page} className={styles.previewTab} onClick={() => setChosen(p)}>
+          <button
+            key={p}
+            type="button"
+            role="tab"
+            aria-selected={p === page}
+            className={styles.previewTab}
+            onClick={() => {
+              setLoaded(false);
+              setSlow(false);
+              setChosen(p);
+            }}
+          >
             {PAGE_LABELS[p] ?? p}
           </button>
         ))}
       </div>
       <div className={styles.previewFrameWrap}>
-        {mounted ? (
-          <iframe ref={frameRef} key={page} src={src} title="Preview of your website" className={styles.previewFrame} referrerPolicy="no-referrer" />
-        ) : null}
+        <div className={styles.phone}>
+          {mounted ? (
+            <iframe
+              ref={frameRef}
+              key={`${page}-${reloadKey}`}
+              src={src}
+              title="Preview of your website"
+              className={styles.previewFrame}
+              referrerPolicy="no-referrer"
+              onLoad={() => {
+                setLoaded(true);
+                setSlow(false);
+              }}
+            />
+          ) : null}
+          {!loaded ? (
+            <div className={styles.previewSkeleton} aria-hidden={!slow}>
+              {slow ? (
+                <>
+                  <p>The preview is taking longer than usual.</p>
+                  <button
+                    type="button"
+                    className={`${styles.btn} ${styles.btn_secondary} ${styles.btnSmall}`}
+                    onClick={() => {
+                      setSlow(false);
+                      setReloadKey((n) => n + 1);
+                    }}
+                  >
+                    <RotateCcw size={16} aria-hidden="true" />
+                    <span>Try again</span>
+                  </button>
+                </>
+              ) : (
+                <p className={styles.skeletonText}>Loading preview…</p>
+              )}
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

@@ -238,31 +238,48 @@ export function withPartnerName(
 // ---------------------------------------------------------------------------------------------
 // Sections and issues
 
-export const SECTION_IDS = ['couple', 'date', 'venue', 'schedule', 'story', 'details', 'faq', 'rsvp', 'optional', 'photos'] as const;
+/** Panel v2 sections (G060, docs/16 §4.3); each opens as its own page (#edit/<id>). */
+export const SECTION_IDS = ['names', 'date', 'venue', 'schedule', 'story', 'details', 'faq', 'rsvp', 'photos'] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export const SECTION_TITLES: Record<SectionId, string> = {
-  couple: 'Couple',
+  names: 'Names',
   date: 'Date & time',
   venue: 'Venue',
   schedule: 'Schedule',
-  story: 'Story',
+  story: 'Our Story',
   details: 'Details',
   faq: 'Questions & answers',
-  rsvp: 'RSVP',
-  optional: 'Optional sections',
+  rsvp: 'RSVP settings',
   photos: 'Photos',
+};
+
+export const SECTION_GROUPS: Array<{ title: string; ids: SectionId[] }> = [
+  { title: 'Wedding basics', ids: ['names', 'date', 'venue'] },
+  { title: 'Your pages', ids: ['schedule', 'story', 'details', 'faq', 'rsvp'] },
+  { title: 'Photos', ids: ['photos'] },
+];
+
+/** Where each on/off switch lives (next to the content it controls). */
+const BLOCK_SECTION: Record<string, SectionId> = {
+  our_story: 'story',
+  countdown: 'date',
+  dress_code: 'details',
+  registry: 'details',
+  travel_stay: 'details',
+  guest_policy: 'details',
+  faq: 'faq',
 };
 
 /** Which panel section shows an issue with this content path (null = shown in the page header). */
 export function sectionForPath(path: string): SectionId | null {
-  const head = path.split('.')[0];
+  const [head, second] = path.split('.');
   switch (head) {
     case 'partners':
     case 'name_display':
     case 'initials':
     case 'host_line':
-      return 'couple';
+      return 'names';
     case 'date':
     case 'ceremony_time':
     case 'timezone':
@@ -275,14 +292,15 @@ export function sectionForPath(path: string): SectionId | null {
     case 'story':
       return 'story';
     case 'dress_code':
-    case 'urls':
       return 'details';
+    case 'urls':
+      return second === 'map' ? 'venue' : 'details';
     case 'faq':
       return 'faq';
     case 'rsvp':
       return 'rsvp';
     case 'optional_blocks':
-      return 'optional';
+      return BLOCK_SECTION[second] ?? 'details';
     case 'media':
       return 'photos';
     default:
