@@ -3,16 +3,16 @@
 // One topic per screen, a 6-part progress bar, Back never loses anything (it is all autosaved), every step
 // can be skipped, and the step to resume is worked out from the content (another phone finds it too).
 
-import { ArrowLeft, CircleCheckBig, Copy, Share2, Sparkles } from 'lucide-react';
+import { ArrowLeft, CalendarDays, CircleCheckBig, Copy, Hourglass, Share2, Sparkles, TriangleAlert } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
-import { fieldId, pageShown, photoAt, prePublishNotes, sectionForPath, type PanelState, type PanelTheme, type PublishNote, type SectionId } from '../../lib/panel/model.ts';
-import { ARCHIVE_AFTER_MONTHS, IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE, type RightsView } from '../../lib/panel/rights.ts';
-import { usePanelContext } from './fields.tsx';
+import { fieldId, pageShown, photoAt, prePublishNotes, sampleDateLeft, sampleSummaries, SECTION_TITLES, type PanelState, type PanelTheme, type SectionId } from '../../lib/panel/model.ts';
+import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
+import { useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
-import { PreviewPane } from './PreviewPane.tsx';
+import { PreviewPane, useSettledVersion } from './PreviewPane.tsx';
 import { QrCode } from './QrCode.tsx';
 import { DateFields, NamesFields, RIGHTS_HINT_BEFORE, VenueFields } from './sections.tsx';
 import { Banner, Button, cx, SaveIndicator } from './ui.tsx';
@@ -32,9 +32,9 @@ export const SETUP_STEPS = [
 const SAMPLE_STEP: Record<number, string[]> = { 2: ['date', 'ceremony_time'], 3: ['venue.name', 'venue.address', 'venue.city'] };
 
 /** Steps (1-6) whose content is filled in and no longer the design's sample text. */
-export function doneSteps(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>): Set<number> {
+export function doneSteps(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>, deviceZone: string | null = null): Set<number> {
   const done = new Set<number>();
-  const samples = new Set(prePublishNotes(content, theme).sample.map((n) => n.path));
+  const samples = new Set(prePublishNotes(content, theme, { deviceZone }).sample.map((n) => n.path));
   const hasSample = (step: number) => (SAMPLE_STEP[step] ?? []).some((p) => samples.has(p));
   if ((content.partners ?? []).length && content.partners.every((p) => (p.display_name ?? '').trim())) done.add(1);
   if (content.date && content.ceremony_time && !hasSample(2)) done.add(2);
@@ -44,8 +44,8 @@ export function doneSteps(content: ContentRecord, theme: Pick<PanelTheme, 'photo
 }
 
 /** The first step not done yet (5 = check, when 1–4 are done). */
-export function firstOpenStep(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>): number {
-  const done = doneSteps(content, theme);
+export function firstOpenStep(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>, deviceZone: string | null = null): number {
+  const done = doneSteps(content, theme, deviceZone);
   for (let s = 1; s <= 4; s++) if (!done.has(s)) return s;
   return 5;
 }
@@ -73,14 +73,13 @@ export function RulesBox({ rights, locale, total = IDENTITY_CHANGE_LIMIT }: { ri
     <div className={styles.rules} data-rules>
       <h3 className={styles.rulesTitle}>Good to know before you publish</h3>
       <ul>
-        <li>
-          After you publish, you can change your names and wedding date <strong>{total} times</strong>. Fixing a small typo (up to {TYPO_MAX_DISTANCE} letters or
-          digits) is free.
-        </li>
+        <li>{changesRuleText(total)}</li>
+        <li>{FREE_CHANGES_TEXT}</li>
+        <li>{UNDO_TEXT}</li>
         <li>Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.</li>
         <li>
           Your website stays online until <strong>{until ?? `${ARCHIVE_AFTER_MONTHS} months after your wedding`}</strong>
-          {until ? `, ${ARCHIVE_AFTER_MONTHS} months after your wedding` : ''}. Then it becomes a read-only archive.
+          {until ? `, ${ARCHIVE_AFTER_MONTHS} months after your wedding` : ''}. {ARCHIVE_TEXT}
         </li>
       </ul>
     </div>
@@ -120,7 +119,11 @@ export function Setup({
   const [error, setError] = useState<string | null>(null);
   const [canShare, setCanShare] = useState(false);
   const def = SETUP_STEPS[step - 1];
-  const notes = prePublishNotes(content, theme);
+  const deviceZone = useDeviceZone();
+  const notes = prePublishNotes(content, theme, { deviceZone });
+  // The first publish waits while the date is still the design's sample (G060-fix), unless the couple confirms it.
+  const [dateConfirmed, setDateConfirmed] = useState(false);
+  const dateBlocked = sampleDateLeft(content, theme.sample) && !dateConfirmed;
 
   useEffect(() => {
     writeSetup(initial.slug, { step });
@@ -131,7 +134,6 @@ export function Setup({
   useEffect(() => setCanShare(typeof navigator !== 'undefined' && typeof navigator.share === 'function'), []);
 
   const stepIssues = validation.errors.filter((i) => def.paths.some((p) => i.path === p || i.path.startsWith(`${p}.`)));
-  const stepSamples = notes.sample.filter((n) => def.paths.some((p) => n.path === p || n.path.startsWith(`${p}.`)));
 
   const next = () => {
     if (stepIssues.length) {
@@ -230,7 +232,6 @@ export function Setup({
             {error}
           </Banner>
         ) : null}
-        {stepSamples.length ? <Banner tone="warning">These are still the sample details from the design.</Banner> : null}
 
         {step === 1 ? (
           <>
@@ -252,11 +253,13 @@ export function Setup({
               <div className={styles.stack}>
                 <h2 className={styles.subTitle}>Still sample text</h2>
                 <ul className={styles.checklist}>
-                  {groupNotes(notes.sample).map(([section, list]) => (
-                    <li key={section}>
-                      <button type="button" className={cx(styles.checkItem, styles.check_warning)} onClick={() => onOpenSection(section, list[0].path)}>
+                  {sampleSummaries(notes.sample).map((s) => (
+                    <li key={s.section}>
+                      <button type="button" className={cx(styles.checkItem, styles.check_warning)} onClick={() => onOpenSection(s.section, s.path)} data-sample-line>
                         <span className={styles.checkDot} aria-hidden="true" />
-                        <span className={styles.checkText}>{list.map((n) => n.message.replace(/: still the sample text\.?$/, '')).join(', ')}</span>
+                        <span className={styles.checkText}>
+                          <strong>{SECTION_TITLES[s.section]}:</strong> {s.what}
+                        </span>
                       </button>
                     </li>
                   ))}
@@ -272,14 +275,27 @@ export function Setup({
         ) : null}
         {step === 6 ? (
           <>
+            {/* First, so it is seen before anything else on the publish screen (G060-fix). */}
+            <SampleDateGate content={content} sample={theme.sample} confirmed={dateConfirmed} onConfirm={setDateConfirmed} onFix={() => onStep(2)} />
+            {meta.orderPending ? <OrderPendingNote /> : null}
             <div className={styles.summary} data-publish-summary>
               <p className={styles.summaryNames}>{content.name_display || '—'}</p>
+              <p data-card-names>On the invitation card: {cardNames(content)}</p>
               <p>{formatDateLong(content.date, content.locale) ?? '—'}</p>
               <p>{[content.venue?.name, content.venue?.city].filter(Boolean).join(', ') || '—'}</p>
               <p className={styles.summaryUrl}>
                 <UrlText url={url} />
               </p>
             </div>
+            {(content.partners ?? []).some((p) => !(p.full_name ?? '').trim()) ? (
+              <p className={styles.hint}>
+                Want surnames on the invitation card? Add them under{' '}
+                <button type="button" className={styles.inlineLink} onClick={() => onStep(1)}>
+                  Your names
+                </button>{' '}
+                — now or later; adding a surname is always free.
+              </p>
+            ) : null}
             <RulesBox rights={meta.rights} locale={content.locale} />
             {validation.errors.length ? (
               <Banner tone="danger">
@@ -293,7 +309,7 @@ export function Setup({
         ) : null}
       </main>
 
-      <footer className={styles.setupBar}>
+      <footer className={cx(styles.setupBar, step === 6 && styles.setupBarPublish)}>
         {step < 5 ? (
           <button type="button" className={styles.skip} onClick={() => onStep(step + 1)} data-setup-skip>
             Skip for now
@@ -303,8 +319,8 @@ export function Setup({
           <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
           <div className={styles.setupButtons}>
             {step > 1 ? (
-              <Button icon={ArrowLeft} onClick={() => onStep(step - 1)} data-setup-back>
-                Back
+              <Button icon={ArrowLeft} onClick={() => onStep(step - 1)} aria-label="Back" data-setup-back>
+                <span className={styles.backLabel}>Back</span>
               </Button>
             ) : null}
             {step < 6 ? (
@@ -312,31 +328,89 @@ export function Setup({
                 {step === 5 ? 'Looks good' : 'Continue'}
               </Button>
             ) : (
-              <Button variant="primary" icon={Sparkles} busy={publishing} busyLabel="Publishing…" disabled={!ctx.online || ctx.locked} onClick={() => void publish()} data-setup-publish>
+              <Button
+                variant="primary"
+                icon={Sparkles}
+                busy={publishing}
+                busyLabel="Publishing…"
+                disabled={!ctx.online || ctx.locked || dateBlocked || meta.orderPending}
+                onClick={() => void publish()}
+                data-setup-publish
+              >
                 Publish my website
               </Button>
             )}
           </div>
         </div>
         {step === 6 && !ctx.online ? <p className={styles.hint}>Connect to the internet to publish.</p> : null}
+        {step === 6 && ctx.online && dateBlocked ? (
+          <p className={styles.hint} data-publish-blocked>
+            Set your wedding date first (or confirm the sample date is yours).
+          </p>
+        ) : null}
       </footer>
     </div>
   );
 }
 
-function groupNotes(notes: PublishNote[]): Array<[SectionId, PublishNote[]]> {
-  const map = new Map<SectionId, PublishNote[]>();
-  for (const n of notes) {
-    const s = sectionForPath(n.path) ?? 'names';
-    if (!map.has(s)) map.set(s, []);
-    map.get(s)!.push(n);
-  }
-  return [...map.entries()];
+/** "Ada Lovelace & Grace": the names as the invitation card prints them (full name, else the first name). */
+function cardNames(content: ContentRecord): string {
+  return (content.partners ?? []).map((p) => (p.full_name ?? '').trim() || p.display_name).filter(Boolean).join(' & ') || '—';
+}
+
+/** The shop still has to confirm the Etsy order (manual order checks, G060-fix). */
+export function OrderPendingNote() {
+  return (
+    <Banner tone="info" icon={Hourglass} data-order-pending>
+      We are confirming your Etsy order. Everything you set up is saved; you can publish as soon as the order is confirmed.
+    </Banner>
+  );
+}
+
+/**
+ * The first publish while the wedding date is still the design's sample (G060-fix): a blocking note with a way to the
+ * date field and an explicit "this is our date" for the couple whose date really is the same.
+ */
+export function SampleDateGate({
+  content,
+  sample,
+  confirmed,
+  onConfirm,
+  onFix,
+}: {
+  content: ContentRecord;
+  sample: ContentRecord | null;
+  confirmed: boolean;
+  onConfirm: (v: boolean) => void;
+  onFix: () => void;
+}) {
+  if (!sampleDateLeft(content, sample)) return null;
+  const when = formatDateLong(content.date, content.locale) ?? content.date;
+  return (
+    <div className={styles.dateGate} role="group" aria-labelledby="date-gate-title" data-sample-date-gate>
+      <p id="date-gate-title" className={styles.dateGateTitle}>
+        <TriangleAlert size={20} strokeWidth={1.75} aria-hidden="true" />
+        Your wedding date is still the design&rsquo;s sample
+      </p>
+      <p>
+        Guests would see <strong>{when}</strong>. Set your real date before you publish.
+      </p>
+      <Button variant="secondary" icon={CalendarDays} onClick={onFix} data-fix-date>
+        Set our date
+      </Button>
+      <label className={styles.checkRow}>
+        <input type="checkbox" checked={confirmed} onChange={(e) => onConfirm(e.target.checked)} data-confirm-sample-date />
+        <span>{when} really is our wedding date</span>
+      </label>
+    </div>
+  );
 }
 
 /** The envelope page of the real theme, scaled down (step 1 only). */
-function PreviewMini({ slug, previewToken, version }: { slug: string; previewToken: string; version: number }) {
+function PreviewMini({ slug, previewToken, version: raw }: { slug: string; previewToken: string; version: number }) {
   const ref = useRef<HTMLIFrameElement>(null);
+  // Reload once typing has settled, not after every save (G060-fix).
+  const version = useSettledVersion(raw);
   const first = useRef(version);
   useEffect(() => {
     if (version === first.current) return;

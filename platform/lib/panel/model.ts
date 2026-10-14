@@ -284,8 +284,9 @@ export function sectionForPath(path: string): SectionId | null {
     case 'partners':
     case 'name_display':
     case 'initials':
-    case 'host_line':
       return 'names';
+    case 'host_line':
+      return 'details';
     case 'date':
     case 'ceremony_time':
     case 'timezone':
@@ -407,9 +408,11 @@ export interface PublishNote {
 }
 
 /** Paths (in order) whose value, while still equal to the theme's demo record, is sample text. */
-const SAMPLE_FIELDS: Array<{ path: string; label: string; block?: OptionalBlockKey }> = [
+const SAMPLE_FIELDS: Array<{ path: string; label: string; block?: OptionalBlockKey; message?: string }> = [
   { path: 'date', label: 'Wedding date' },
   { path: 'ceremony_time', label: 'Ceremony time' },
+  // The RSVP close time, the countdown and the guests' calendar entry all use it (G060-fix).
+  { path: 'timezone', label: 'Time zone', message: 'Time zone: still the design’s sample.' },
   { path: 'venue.name', label: 'Venue name' },
   { path: 'venue.address', label: 'Street address' },
   { path: 'venue.city', label: 'City' },
@@ -419,11 +422,16 @@ const SAMPLE_FIELDS: Array<{ path: string; label: string; block?: OptionalBlockK
   { path: 'rsvp.deadline', label: 'Reply-by date' },
 ];
 
+export interface SampleOptions {
+  /** This phone's time zone (browser only): a sample zone equal to it is not flagged. */
+  deviceZone?: string | null;
+}
+
 /**
  * Values that are still the theme's fictional demo text (a site claimed on /start starts as a copy
  * of it with only the names changed). Only non-empty values that are switched on count.
  */
-export function sampleNotes(content: ContentRecord, sample: ContentRecord | null): PublishNote[] {
+export function sampleNotes(content: ContentRecord, sample: ContentRecord | null, opts: SampleOptions = {}): PublishNote[] {
   if (!sample) return [];
   const blocks = (content.optional_blocks ?? {}) as Record<string, unknown>;
   const notes: PublishNote[] = [];
@@ -433,7 +441,9 @@ export function sampleNotes(content: ContentRecord, sample: ContentRecord | null
   };
   for (const f of SAMPLE_FIELDS) {
     if (f.block && blocks[f.block] !== true) continue;
-    if (same(f.path)) notes.push({ path: f.path, message: `${f.label}: still the sample text.` });
+    // A phone in the sample's own time zone: the couple most likely is there too (no false alarm).
+    if (f.path === 'timezone' && opts.deviceZone && opts.deviceZone === content.timezone) continue;
+    if (same(f.path)) notes.push({ path: f.path, message: f.message ?? `${f.label}: still the sample text.` });
   }
   const demoPlaces = new Set((sample.schedule ?? []).map((r) => (r.location ?? '').trim()).filter(Boolean));
   (content.schedule ?? []).forEach((row, i) => {
@@ -469,6 +479,60 @@ export function sampleNotes(content: ContentRecord, sample: ContentRecord | null
   return notes;
 }
 
+/** True while the wedding date is still the design's sample date (blocks the first publish until confirmed, G060-fix). */
+export function sampleDateLeft(content: ContentRecord, sample: ContentRecord | null): boolean {
+  return Boolean(sample?.date && content.date === sample.date);
+}
+
+/** List notes counted per kind: [singular, plural]. */
+const LIST_LABELS: Array<[RegExp, string, string]> = [
+  [/^schedule\./, 'event place', 'event places'],
+  [/^story\.items\./, 'caption', 'captions'],
+  [/^faq\./, 'question', 'questions'],
+  [/^rsvp\.questions\./, 'form question', 'form questions'],
+];
+
+/** "Wedding date: still the sample text." -> "wedding date"; list notes -> "3 captions", "1 event place". */
+function sampleParts(list: PublishNote[]): string[] {
+  const parts: string[] = [];
+  const counts = new Map<number, number>();
+  for (const n of list) {
+    const k = LIST_LABELS.findIndex(([re]) => re.test(n.path));
+    if (k >= 0) {
+      if (!counts.has(k)) parts.push(`#${k}`);
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+      continue;
+    }
+    const label = n.message.split(':')[0].trim();
+    const text = label.charAt(0).toLowerCase() + label.slice(1);
+    if (!parts.includes(text)) parts.push(text);
+  }
+  return parts.map((p) => {
+    if (!p.startsWith('#')) return p;
+    const k = Number(p.slice(1));
+    const count = counts.get(k) ?? 0;
+    return `${count} ${count === 1 ? LIST_LABELS[k][1] : LIST_LABELS[k][2]}`;
+  });
+}
+
+/**
+ * The sample-text notes as one short line per section (G060-fix: the raw messages joined together read as
+ * "Story, moment 1: the caption is sample text., Story, moment 2: …"): "Our Story" + "story intro and 3 captions".
+ */
+export function sampleSummaries(notes: PublishNote[]): Array<{ section: SectionId; path: string; what: string }> {
+  const bySection = new Map<SectionId, PublishNote[]>();
+  for (const n of notes) {
+    const s = sectionForPath(n.path) ?? 'names';
+    if (!bySection.has(s)) bySection.set(s, []);
+    bySection.get(s)!.push(n);
+  }
+  return [...bySection].map(([section, list]) => {
+    const parts = sampleParts(list);
+    const what = parts.length <= 2 ? parts.join(' and ') : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+    return { section, path: list[0].path, what };
+  });
+}
+
 /** Every content path flagged by sampleNotes (for "Sample" tags next to fields). */
 export function samplePaths(content: ContentRecord, sample: ContentRecord | null): Set<string> {
   return new Set(sampleNotes(content, sample).map((n) => n.path));
@@ -483,7 +547,11 @@ const LINK_BLOCKS: Array<{ block: OptionalBlockKey; url: 'registry' | 'accommoda
  * Things guests will notice that are not errors: sample text, empty photo places, link blocks that
  * are on without a link. Shown before publishing ("Publish anyway" is always possible).
  */
-export function prePublishNotes(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>): {
+export function prePublishNotes(
+  content: ContentRecord,
+  theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>,
+  opts: SampleOptions = {},
+): {
   sample: PublishNote[];
   photos: PublishNote[];
   links: PublishNote[];
@@ -505,7 +573,7 @@ export function prePublishNotes(content: ContentRecord, theme: Pick<PanelTheme, 
     theme.optionalBlocks.includes('faq') && blocks.faq === true && !(content.faq ?? []).length
       ? [{ path: 'faq', message: 'Questions & answers is on but has no questions yet, so guests do not see it.' }]
       : [];
-  return { sample: sampleNotes(content, theme.sample), photos, links, empty };
+  return { sample: sampleNotes(content, theme.sample, opts), photos, links, empty };
 }
 
 // ---------------------------------------------------------------------------------------------

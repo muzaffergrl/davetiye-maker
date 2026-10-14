@@ -159,13 +159,19 @@ export function EmptyState({ icon: Icon, children, action }: { icon: LucideIcon;
 // ---------------------------------------------------------------------------------------------
 // Snackbar ("Event removed · Undo", "Copied")
 
+export interface SnackAction {
+  label: string;
+  run: () => void;
+}
+
 interface SnackItem {
   id: number;
   text: string;
-  action?: { label: string; run: () => void };
+  actions: SnackAction[];
 }
 
-const SnackContext = createContext<(text: string, action?: SnackItem['action']) => void>(() => undefined);
+/** Shows a snackbar with up to two actions (e.g. "Undo" and "Publish", G060-fix). */
+const SnackContext = createContext<(text: string, action?: SnackAction | SnackAction[]) => void>(() => undefined);
 
 export function useSnackbar() {
   return useContext(SnackContext);
@@ -176,11 +182,13 @@ const SNACK_MS = 6000;
 export function SnackbarProvider({ children }: { children: ReactNode }) {
   const [item, setItem] = useState<SnackItem | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const show = useCallback((text: string, action?: SnackItem['action']) => {
+  const show = useCallback((text: string, action?: SnackAction | SnackAction[]) => {
     if (timer.current) clearTimeout(timer.current);
     const id = Date.now();
-    setItem({ id, text, action });
-    timer.current = setTimeout(() => setItem((cur) => (cur?.id === id ? null : cur)), SNACK_MS);
+    const actions = (Array.isArray(action) ? action : action ? [action] : []).slice(0, 2);
+    setItem({ id, text, actions });
+    // With an action the message stays a little longer (time to read it and reach the button).
+    timer.current = setTimeout(() => setItem((cur) => (cur?.id === id ? null : cur)), actions.length > 1 ? SNACK_MS + 4000 : SNACK_MS);
   }, []);
   useEffect(() => () => void (timer.current && clearTimeout(timer.current)), []);
   return (
@@ -190,17 +198,23 @@ export function SnackbarProvider({ children }: { children: ReactNode }) {
         {item ? (
           <div key={item.id} className={styles.snack} data-snackbar>
             <span>{item.text}</span>
-            {item.action ? (
-              <button
-                type="button"
-                className={styles.snackAction}
-                onClick={() => {
-                  item.action!.run();
-                  setItem(null);
-                }}
-              >
-                {item.action.label}
-              </button>
+            {item.actions.length ? (
+              <span className={styles.snackActions}>
+                {item.actions.map((a) => (
+                  <button
+                    key={a.label}
+                    type="button"
+                    className={styles.snackAction}
+                    onClick={() => {
+                      a.run();
+                      setItem(null);
+                    }}
+                    data-snack-action={a.label}
+                  >
+                    {a.label}
+                  </button>
+                ))}
+              </span>
             ) : null}
           </div>
         ) : null}

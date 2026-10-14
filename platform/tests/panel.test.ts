@@ -30,7 +30,9 @@ import {
   prePublishNotes,
   previewPhotoUrl,
   sameContent,
+  sampleDateLeft,
   sampleNotes,
+  sampleSummaries,
   SECTION_IDS,
   sectionForPath,
   shapeLabel,
@@ -812,4 +814,29 @@ test('G051 panel helpers: section of faq paths, notes for an empty Q&A block and
   assert.notEqual(id, 'qaaaaaa');
   assert.match(id, QUESTION_ID_RE);
   for (let i = 0; i < 50; i++) assert.match(newQuestionId([]), /^q[a-z0-9]{6}$/);
+});
+
+test('G060-fix: time zone sample note, sample date, short sample lines per section, host line under Details', () => {
+  const demo = JSON.parse(readFileSync(path.join(PLATFORM_ROOT, 'lib/claim/demo/blush-garden-rose.json'), 'utf8')) as ContentRecord;
+  const theme = { sample: demo, optionalBlocks: ['our_story', 'dress_code'] as OptionalBlockKey[], photos: [] };
+  const claimed = draftFromDemo(demo, ['Mia', 'Theo']);
+  // The design's time zone is flagged, unless this phone is in that very zone (no false alarm for a New York couple).
+  assert.ok(prePublishNotes(claimed, theme).sample.some((n) => n.path === 'timezone' && /Time zone: still the design/.test(n.message)));
+  assert.ok(prePublishNotes(claimed, theme, { deviceZone: 'Europe/London' }).sample.some((n) => n.path === 'timezone'));
+  assert.ok(!prePublishNotes(claimed, theme, { deviceZone: demo.timezone }).sample.some((n) => n.path === 'timezone'));
+  // The first publish is held while the date is still the sample date.
+  assert.equal(sampleDateLeft(claimed, demo), true);
+  assert.equal(sampleDateLeft({ ...claimed, date: '2027-09-26' }, demo), false);
+  assert.equal(sampleDateLeft(claimed, null), false);
+  // One short line per section instead of the raw messages joined together.
+  const lines = sampleSummaries(prePublishNotes(claimed, theme).sample);
+  const story = lines.find((l) => l.section === 'story')!;
+  assert.match(story.what, /^story intro and \d+ captions$/);
+  const schedule = lines.find((l) => l.section === 'schedule')!;
+  assert.match(schedule.what, /^\d+ event places?$/);
+  assert.ok(!lines.some((l) => /sample text\.|is a sample place/.test(l.what)), JSON.stringify(lines));
+  // The host line is free text (Details), not part of the names.
+  assert.equal(sectionForPath('host_line'), 'details');
+  assert.ok(lines.find((l) => l.section === 'details')?.what.includes('host line'));
+  assert.ok(!lines.some((l) => l.section === 'names'), 'Names has no sample text once the names are typed');
 });

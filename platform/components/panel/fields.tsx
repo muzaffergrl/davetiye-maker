@@ -5,10 +5,10 @@
 // so typing replaces the sample (docs/16 §5.4).
 
 import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react';
-import { createContext, useContext, useId, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useId, useState, type ReactNode } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
-import { formatDateLong, formatTime } from '../../lib/content/format.ts';
+import { formatDateLong, formatTime, isValidTimeZone } from '../../lib/content/format.ts';
 import { fieldId, type PanelPhotoSlot, type ThemeFieldUse } from '../../lib/panel/model.ts';
 import type { RightsView } from '../../lib/panel/rights.ts';
 import { Badge, cx, OverflowMenu, useSnackbar } from './ui.tsx';
@@ -38,6 +38,20 @@ export interface PanelContextValue {
 }
 
 export const PanelContext = createContext<PanelContextValue | null>(null);
+
+/** This phone's time zone (read after mount, so the server and the first browser render match). Null when unknown. */
+export function useDeviceZone(): string | null {
+  const [zone, setZone] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      const z = Intl.DateTimeFormat().resolvedOptions().timeZone || null;
+      setZone(z && isValidTimeZone(z) ? z : null);
+    } catch {
+      /* unknown */
+    }
+  }, []);
+  return zone;
+}
 
 export function usePanelContext(): PanelContextValue {
   const ctx = useContext(PanelContext);
@@ -138,8 +152,9 @@ export function TextField(
   const { issues, hasError, setTyping, locked, sample } = useFieldState(path);
   const text = value ?? '';
   const length = [...text].length;
+  // Only near the limit (G060-fix: "5/40" next to every name was noise).
   const counter =
-    maxLength !== undefined ? (
+    maxLength !== undefined && length >= Math.floor(maxLength * 0.8) ? (
       // Not a live region: announcing every keystroke is noise; the input's maxlength already limits it.
       <span className={length > maxLength ? styles.counterOver : styles.counter}>
         {length}/{maxLength}

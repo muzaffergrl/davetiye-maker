@@ -1,6 +1,6 @@
 'use client';
-// Live preview of the draft: the real site route with ?preview=<preview key>, 390 px wide.
-// Reloads after every save. On phones it opens as a full-screen modal; on wide screens it sits
+// Live preview of the draft: the real site route with ?preview=<panel preview token>, 390 px wide.
+// Reloads once saving has settled (PREVIEW_SETTLE_MS). On phones it opens as a full-screen modal; on wide screens it sits
 // next to the editor in a phone-sized frame. The iframe loads only once it is first shown.
 //
 // Phone modal: focus moves to Close (and back to the opener afterwards), the page behind does not
@@ -15,12 +15,25 @@ import styles from './panel.module.css';
 
 const HISTORY_MARK = 'panel-preview';
 const SLOW_MS = 10_000;
+/** The preview reloads once saving has been quiet this long (G060-fix: not on every autosave while typing). */
+export const PREVIEW_SETTLE_MS = 2500;
+
+/** `version` once it has stopped changing for PREVIEW_SETTLE_MS (the first value at once). */
+export function useSettledVersion(version: number, ms: number = PREVIEW_SETTLE_MS): number {
+  const [settled, setSettled] = useState(version);
+  useEffect(() => {
+    if (version === settled) return;
+    const t = setTimeout(() => setSettled(version), ms);
+    return () => clearTimeout(t);
+  }, [version, settled, ms]);
+  return settled;
+}
 
 export function PreviewPane({
   slug,
   previewToken,
   pages,
-  version,
+  version: rawVersion,
   open,
   wide,
   page: wanted,
@@ -36,6 +49,7 @@ export function PreviewPane({
   page?: string | null;
   onClose: () => void;
 }) {
+  const version = useSettledVersion(rawVersion);
   const [chosen, setChosen] = useState(wanted ?? pages[0] ?? 'index');
   useEffect(() => {
     if (wanted) setChosen(wanted);

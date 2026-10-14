@@ -202,8 +202,9 @@ export function PhotoCropper({
             <div
               ref={frameRef}
               className={styles.cropFrame}
-              // Height leaves room for the title, hint, zoom and buttons on short phones (375 × 553 Safari).
-              style={{ aspectRatio: String(ratio), width: `min(100%, calc(max(160px, min(56dvh, 100dvh - 340px)) * ${ratio}))` }}
+              // Height leaves room for the title, hint, the zoom slider (~70 px) and the sticky buttons on short phones
+              // (375 × 553 Safari, 360 × 640: the slider must not sit under "Use this photo", G060-fix).
+              style={{ aspectRatio: String(ratio), width: `min(100%, calc(max(150px, min(56dvh, 100dvh - 420px)) * ${ratio}))` }}
               tabIndex={0}
               role="group"
               aria-label="Photo framing. Use the arrow keys to move and plus or minus to zoom."

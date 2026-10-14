@@ -308,7 +308,8 @@ export function usePanel(initial: PanelState, editKey: string) {
         if (body.identity && typeof body.identity === 'object') replaceContent(withIdentity(contentRef.current, body.identity as Identity));
         setPreviewVersion((n) => n + 1);
         keepBackup();
-        return { ok: true, status: res.status, result: body.result as IdentityOutcome['result'] };
+        const rights = body.rights as RightsView | undefined;
+        return { ok: true, status: res.status, result: body.result as IdentityOutcome['result'], remaining: rights?.remaining };
       }
       stopOn(res.status, body);
       return {

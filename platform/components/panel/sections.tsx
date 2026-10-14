@@ -5,13 +5,13 @@
 // Each on/off switch sits next to the content it controls (no separate "Optional sections").
 
 import { CalendarDays, Lock, Pencil, Plus, Shuffle } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
 import type { ContentRecord, Locale, RsvpQuestion } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
-import { IDENTITY_CHANGE_LIMIT } from '../../lib/panel/rights.ts';
-import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, usePanelContext } from './fields.tsx';
+import { beforePublishText, IDENTITY_CHANGE_LIMIT } from '../../lib/panel/rights.ts';
+import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { Button, cx, EmptyState, RightsMeter, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
@@ -19,7 +19,7 @@ import styles from './panel.module.css';
 const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
 
 /** The rule as the buyer reads it before the first publish (docs/16 §11.7). */
-export const RIGHTS_HINT_BEFORE = `You can change these freely until you publish. After that, you can change your names or wedding date ${IDENTITY_CHANGE_LIMIT} times — fixing a small typo is free.`;
+export const RIGHTS_HINT_BEFORE = beforePublishText(IDENTITY_CHANGE_LIMIT);
 
 function RightsLine() {
   const { rights } = usePanelContext();
@@ -108,7 +108,7 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
                 path={`partners.${i}.full_name`}
                 label="Full name"
                 optional
-                hint="For the invitation card. Follows the first name until you change it."
+                hint="For the invitation card. Empty: the card shows the first name. Adding a surname later is free."
                 maxLength={CONTENT_LIMITS.fullName}
                 value={p.full_name}
                 onChange={(v) => edit((c) => withPartnerName(c, i, 'full_name', v))}
@@ -157,16 +157,6 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           ) : null}
         </>
       )}
-      {setup ? null : (
-        <TextField
-          path="host_line"
-          label="Host line"
-          optional
-          hint="For example: Together with their families."
-          value={content.host_line}
-          onChange={(v) => edit((c) => void (c.host_line = nullIfEmpty(v)))}
-        />
-      )}
     </>
   );
 }
@@ -174,12 +164,25 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
 // ---------------------------------------------------------------------------------------------
 // Date & time
 
-const LOCALES: Array<{ value: Locale; name: string }> = [
-  { value: 'en-US', name: 'United States' },
-  { value: 'en-GB', name: 'United Kingdom' },
-  { value: 'en-CA', name: 'Canada' },
-  { value: 'en-AU', name: 'Australia' },
-];
+/**
+ * Date style: only "month first" (US) and "day first" (UK, Canada, Australia) look different on the website
+ * (lib/content/format.ts), so the panel offers those two (G060-fix: four country names, three of them identical).
+ */
+type DateStyle = 'en-US' | 'day';
+
+/** This phone's English locale when it is one the website supports, else null (docs/16 §5.3). */
+function phoneLocale(): Locale | null {
+  try {
+    const langs = navigator.languages?.length ? navigator.languages : [navigator.language];
+    for (const l of langs) {
+      const m = /^en-(US|GB|CA|AU)\b/i.exec(l ?? '');
+      if (m) return `en-${m[1].toUpperCase()}` as Locale;
+    }
+  } catch {
+    /* no navigator */
+  }
+  return null;
+}
 
 /** All IANA zones of this browser (filled after mount so server and client markup match). */
 function useTimeZones(current: string): string[] {
@@ -207,24 +210,38 @@ export const zoneCity = (zone: string | undefined) => (zone ? (zone.split('/').p
 export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?: boolean }) {
   const { content, edit, locked, rights } = usePanelContext();
   const zones = useTimeZones(content.timezone);
-  const [deviceZone, setDeviceZone] = useState<string | null>(null);
+  const deviceZone = useDeviceZone();
+  const [zoneOpen, setZoneOpen] = useState(false);
+  // First run (G060-fix, docs/16 §5.3): while the date and the time zone are still the design's sample, the time zone
+  // and the date style follow this phone (a UK couple must not get a New York ceremony time in guests' calendars).
+  const sample = theme.sample;
+  const followed = useRef(false);
   useEffect(() => {
-    try {
-      setDeviceZone(Intl.DateTimeFormat().resolvedOptions().timeZone || null);
-    } catch {
-      /* unknown */
-    }
-  }, []);
+    if (!setup || locked || followed.current || !deviceZone || !sample) return;
+    if (content.date !== sample.date || content.timezone !== sample.timezone) return;
+    followed.current = true;
+    const loc = phoneLocale();
+    const zone = deviceZone !== content.timezone ? deviceZone : null;
+    const style = loc && content.locale === sample.locale && loc !== content.locale ? loc : null;
+    if (zone || style)
+      edit((c) => {
+        if (zone) c.timezone = zone;
+        if (style) c.locale = style;
+      });
+  }, [setup, locked, deviceZone, sample, content.date, content.timezone, content.locale, edit]);
   const locale = content.locale;
   const sampleDate = content.date || '2027-06-12';
   const counting = rights.phase !== 'before_publish';
+  const fromPhone = setup && !zoneOpen && deviceZone !== null && content.timezone === deviceZone;
+  const time = content.ceremony_time || '16:00';
   return (
     <>
       {counting ? (
         <LockedIdentity focus="date" paths={['date']} rows={[{ label: 'Wedding date', value: formatDateLong(content.date, locale) ?? content.date }]} />
       ) : (
         <>
-          <RightsLine />
+          {/* In the setup the rule is shown once, on step 1 and before publishing (G060-fix). */}
+          {setup ? null : <RightsLine />}
           <DateField path="date" label="Wedding date" value={content.date} locale={locale} onChange={(v) => edit((c) => void (c.date = v))} />
         </>
       )}
@@ -242,32 +259,54 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
           })
         }
       />
-      <SelectField
-        path="timezone"
-        label="Time zone of the wedding"
-        hint={`Your countdown and the reply deadline use ${zoneCity(content.timezone) || 'this'} time.`}
-        value={content.timezone}
-        options={zones.map(zoneOption)}
-        onChange={(v) => edit((c) => void (c.timezone = v))}
-      />
-      {deviceZone && deviceZone !== content.timezone ? (
-        <Button small variant="tertiary" icon={Shuffle} disabled={locked} onClick={() => edit((c) => void (c.timezone = deviceZone))}>
-          Use {zoneCity(deviceZone)} time (this phone)
-        </Button>
-      ) : null}
-      <Segmented
-        id="f-locale"
-        label="Date style"
-        value={locale}
-        disabled={locked}
-        options={LOCALES.map((l) => ({ value: l.value, label: l.name, hint: `${formatDate(sampleDate, l.value)} · ${formatTime(content.ceremony_time || '16:00', l.value)}` }))}
-        onChange={(v) => edit((c) => void (c.locale = v))}
-      />
+      {fromPhone ? (
+        <div className={styles.field} data-zone-from-phone>
+          <p className={styles.label}>Time zone of the wedding</p>
+          <p className={styles.zoneLine}>
+            <span>
+              We&rsquo;ll use <strong>{zoneCity(content.timezone)}</strong> time, from your phone.
+            </span>
+            <Button small variant="tertiary" disabled={locked} onClick={() => setZoneOpen(true)} data-change-zone>
+              Change
+            </Button>
+          </p>
+          <p className={styles.hint}>The countdown, the reply deadline and guests&rsquo; calendars use it.</p>
+        </div>
+      ) : (
+        <>
+          <SelectField
+            path="timezone"
+            label="Time zone of the wedding"
+            hint={`The countdown, the reply deadline and guests’ calendars use ${zoneCity(content.timezone) || 'this'} time.`}
+            value={content.timezone}
+            options={zones.map(zoneOption)}
+            onChange={(v) => edit((c) => void (c.timezone = v))}
+          />
+          {deviceZone && deviceZone !== content.timezone ? (
+            <Button small variant="tertiary" icon={Shuffle} disabled={locked} onClick={() => edit((c) => void (c.timezone = deviceZone))}>
+              Use {zoneCity(deviceZone)} time (this phone)
+            </Button>
+          ) : null}
+        </>
+      )}
+      {/* The date style is set from the phone in the setup; it can be changed here in the editor (G060-fix). */}
+      {setup ? null : (
+        <Segmented<DateStyle>
+          id="f-locale"
+          label="Date style"
+          value={locale === 'en-US' ? 'en-US' : 'day'}
+          disabled={locked}
+          options={[
+            { value: 'en-US', label: 'Month first', hint: `${formatDate(sampleDate, 'en-US')} · ${formatTime(time, 'en-US')}` },
+            { value: 'day', label: 'Day first', hint: `${formatDate(sampleDate, 'en-GB')} · ${formatTime(time, 'en-GB')}` },
+          ]}
+          onChange={(v) => edit((c) => void (c.locale = v === 'en-US' ? 'en-US' : c.locale !== 'en-US' ? c.locale : 'en-GB'))}
+        />
+      )}
       {!setup && theme.optionalBlocks.includes('countdown') ? <BlockSwitch block="countdown" /> : null}
     </>
   );
 }
-
 function BlockSwitch({ block, label, hint }: { block: OptionalBlockKey; label?: string; hint?: string }) {
   const { content, edit } = usePanelContext();
   return (
@@ -485,6 +524,15 @@ export function DetailsFields({ optionalBlocks }: { optionalBlocks: readonly Opt
   const has = (b: OptionalBlockKey) => optionalBlocks.includes(b);
   return (
     <>
+      {/* Not part of the names (G060-fix): it is free text, so it never uses a name change and never marks Names as "sample". */}
+      <TextField
+        path="host_line"
+        label="Host line"
+        optional
+        hint="A line above your names on the invitation, for example: Together with their families."
+        value={content.host_line}
+        onChange={(v) => edit((c) => void (c.host_line = nullIfEmpty(v)))}
+      />
       <Group title="Dress code">
         {has('dress_code') ? <BlockSwitch block="dress_code" label="Show the dress code" hint="Guests see it on the Details page." /> : null}
         <TextField path="dress_code" label="Dress code" optional placeholder="Garden formal" value={content.dress_code} onChange={(v) => edit((c) => void (c.dress_code = nullIfEmpty(v)))} />

@@ -26,7 +26,7 @@ import { NotFoundError, StaleSiteError, type DataAdapter, type Identity, type Si
 import { getClaimRateLimiter, UPLOAD_LIMITS } from '../claim/limits.ts';
 import { claimableTheme } from '../claim/themes.ts';
 import { authorizeEditor } from '../rsvp/couple.ts';
-import { PANEL_BRAND } from './brand.ts';
+import { ORDER_PENDING_TEXT, PANEL_BRAND } from './brand.ts';
 import { ContentInvalidError, IdentityMismatchError, OrderPendingError, publishSite, SiteArchivedError, unpublishSite } from '../sites.ts';
 import { MAX_UPLOAD_BYTES, UploadRejectedError } from '../uploads.ts';
 import { DraftShapeError, keepStoredIdentity, MAX_DRAFT_BYTES, prepareDraft } from './draft.ts';
@@ -68,7 +68,7 @@ function serverError(where: string, e: unknown): Response {
 const CONFLICT_MESSAGE = 'This website was changed in another window or on another device. Reload to get the latest version.';
 
 /** Publish while the shop has not confirmed the Etsy order yet (CLAIM_ORDER_VERIFICATION=manual, G060-fix). */
-export const ORDER_PENDING_MESSAGE = `We are still confirming your Etsy order. Your changes are saved; you can publish as soon as the order is confirmed. Questions? Message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+export const ORDER_PENDING_MESSAGE = ORDER_PENDING_TEXT;
 
 function archived(): Response {
   return fail(403, 'archived', ARCHIVED_MESSAGE);

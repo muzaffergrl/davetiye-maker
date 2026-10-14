@@ -26,13 +26,14 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
-import { PANEL_BRAND } from '../../lib/panel/brand.ts';
+import { ORDER_PENDING_TEXT, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import {
   defaultNameDisplay,
   fieldId,
   pageShown,
   photoAt,
   prePublishNotes,
+  sampleDateLeft,
   publicSiteUrl,
   SECTION_IDS,
   SECTION_TITLES,
@@ -41,14 +42,14 @@ import {
   type PublishNote,
   type SectionId,
 } from '../../lib/panel/model.ts';
-import { identityOf } from '../../lib/panel/rights.ts';
+import { classifyIdentityChange, identityOf, sameIdentity, type Identity } from '../../lib/panel/rights.ts';
 import { IdentitySheet } from './IdentitySheet.tsx';
-import { PanelContext, type PanelContextValue } from './fields.tsx';
+import { PanelContext, useDeviceZone, type PanelContextValue } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
 import { QrCode } from './QrCode.tsx';
 import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
-import { firstOpenStep, readSetup, RulesBox, Setup, writeSetup } from './Setup.tsx';
+import { firstOpenStep, OrderPendingNote, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
 import { usePanel } from './usePanel.ts';
@@ -107,6 +108,33 @@ type Dialog =
   | { kind: 'help'; topic?: string }
   | { kind: 'identity'; focus: 'names' | 'date' };
 
+/** The preview page that shows a section (phone "Preview this page"; the wide preview follows the open section). */
+const PAGE_OF_SECTION: Partial<Record<SectionId, string>> = {
+  story: 'story',
+  details: 'details',
+  faq: 'details',
+  rsvp: 'rsvp',
+  schedule: 'details',
+  venue: 'details',
+  names: 'index',
+  date: 'index',
+  photos: 'home',
+};
+
+/** The snackbar text after a names / date save, in the buyer's words (G060-fix: "Date moved — free", not "Fixed"). */
+export function identityOutcomeText(result: string, anchor: Identity | null, next: Identity, previous: Identity): string {
+  if (result === 'undo') return 'Change undone — you got it back.';
+  if (result === 'sample_date') return 'Wedding date set — free.';
+  if (result === 'change') {
+    const date = next.date !== previous.date;
+    const names = !sameIdentity({ ...next, date: '' }, { ...previous, date: '' });
+    return names && date ? 'Names and date changed.' : date ? 'Date changed.' : 'Names changed.';
+  }
+  const free = anchor ? classifyIdentityChange(anchor, next).free : [];
+  const parts = [free.includes('date') ? 'Date moved' : '', free.includes('surname') ? 'Surname saved' : '', free.includes('typo') ? 'Fixed' : ''].filter(Boolean);
+  return `${parts.join(', ') || 'Saved'} — free.`;
+}
+
 const ROOT_VIEWS: Array<{ view: 'home' | 'edit' | 'guests' | 'share'; label: string; icon: LucideIcon }> = [
   { view: 'home', label: 'Home', icon: House },
   { view: 'edit', label: 'Edit', icon: Pencil },
@@ -132,6 +160,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const url = publicSiteUrl(initial.origin, initial.slug);
   const names = content.name_display || defaultNameDisplay(content.partners ?? []) || 'Your website';
   const neverPublished = !meta.publishedAt && meta.status !== 'published' && rights.phase === 'before_publish';
+  const deviceZone = useDeviceZone();
 
   // ---------------------------------------------------------------- routing
   const defaultRoute = (): Route => (neverPublished ? { view: 'setup', step: firstOpenStep(content, theme) } : { view: 'home' });
@@ -206,7 +235,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
     }
     return map;
   }, [validation]);
-  const notes = useMemo(() => prePublishNotes(content, theme), [content, theme]);
+  const notes = useMemo(() => prePublishNotes(content, theme, { deviceZone }), [content, theme, deviceZone]);
   const samples = useMemo(() => new Set(notes.sample.map((n) => n.path)), [notes]);
   const noteCount = notes.sample.length + notes.photos.length + notes.links.length + notes.empty.length;
   const sectionIds = useMemo(() => SECTION_IDS.filter((id) => id !== 'faq' || theme.fields.faq), [theme.fields.faq]);
@@ -232,8 +261,9 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
     schedule: content.schedule?.length ? `${content.schedule.length} ${content.schedule.length === 1 ? 'event' : 'events'}` : 'Add the order of the day',
     story: `${content.story?.items?.length ?? 0} ${content.story?.items?.length === 1 ? 'moment' : 'moments'}`,
     details:
-      [content.dress_code ? 'Dress code' : '', content.urls?.accommodation ? 'Travel & stay' : '', content.urls?.registry ? 'Registry' : ''].filter(Boolean).join(', ') ||
-      'Dress code, travel, registry',
+      [content.host_line ? 'Host line' : '', content.dress_code ? 'Dress code' : '', content.urls?.accommodation ? 'Travel & stay' : '', content.urls?.registry ? 'Registry' : '']
+        .filter(Boolean)
+        .join(', ') || 'Host line, dress code, travel, registry',
     faq: `${content.faq?.length ?? 0} ${content.faq?.length === 1 ? 'question' : 'questions'}`,
     rsvp:
       content.rsvp?.method === 'none'
@@ -249,8 +279,21 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const [busy, setBusy] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewPage, setPreviewPage] = useState<string | null>(null);
+  // First publish with the design's sample date: blocked until the date is set or confirmed (G060-fix).
+  const [dateConfirmed, setDateConfirmed] = useState(false);
+  const firstPublishDateBlocked = rights.phase === 'before_publish' && sampleDateLeft(content, theme.sample) && !dateConfirmed;
 
   const replies = useReplies(panel.api, initial.slug, ready && (route.view === 'home' || route.view === 'guests') && !neverPublished, meta.status === 'published');
+
+  // On wide screens the preview sits next to the editor: it follows the open section to its page (G060-fix).
+  const openSection = route.view === 'section' ? route.id : null;
+  useEffect(() => {
+    if (!wide || !openSection) return;
+    const page = PAGE_OF_SECTION[openSection];
+    if (page && visiblePages.includes(page)) setPreviewPage(page);
+    // visiblePages changes with the content; following the section is enough.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wide, openSection]);
 
   const ctx: PanelContextValue = useMemo(
     () => ({
@@ -299,6 +342,17 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
 
   const upToDate = meta.status === 'published' && !meta.hasUnpublishedChanges && saveState === 'saved';
 
+  /** Snackbar "Undo" after a counted change: back to what it was, free, the change is given back (G060-fix). */
+  const undoChange = async (previous: Identity) => {
+    const res = await panel.changeIdentity(previous, 'fix');
+    if (res.ok && res.result === 'undo') {
+      const left = res.remaining;
+      snack(`Change undone — you got it back.${typeof left === 'number' ? ` ${left} name & date ${left === 1 ? 'change' : 'changes'} left.` : ''}`);
+    }
+    else if (!res.ok) snack(res.message ?? 'This could not be undone. Please try again.');
+    else if (res.result === 'change') snack('Changed back. This used a change: the first one could no longer be undone.');
+  };
+
   const doPublish = async () => {
     // The sheet closes at once; the bar's button shows "Publishing…" (the editor stays usable meanwhile).
     setDialog(null);
@@ -316,6 +370,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
   const startPublish = async () => {
     if (!online) return setDialog({ kind: 'message', title: 'You’re offline', text: 'Connect to the internet to publish. Your changes are kept on this phone.' });
     if (upToDate) return go({ view: 'share' });
+    if (meta.orderPending) return setDialog({ kind: 'message', title: 'Not yet', text: ORDER_PENDING_TEXT });
     if (validation.errors.length) return setDialog({ kind: 'issues', issues: validation.errors });
     // Every first publish shows the rules (docs/16 §11.7); later ones only when there is something to check.
     if (rights.phase === 'before_publish' || noteCount) return setDialog({ kind: 'prepublish' });
@@ -393,7 +448,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
       ) : null}
       {rights.archived && route.view !== 'home' ? (
         <Banner tone="info" icon={Archive} data-archived-banner>
-          Your website was archived on {rights.archiveAt ? formatDate(rights.archiveAt.slice(0, 10), content.locale) : 'its archive date'}. You can still see your
+          Your website closed for guests on {rights.archiveAt ? formatDate(rights.archiveAt.slice(0, 10), content.locale) : 'its archive date'}. You can still see your
           content and download your replies.
         </Banner>
       ) : null}
@@ -423,6 +478,9 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
       ) : null}
       {dialog?.kind === 'prepublish' ? (
         <Sheet title="Before you publish" onClose={() => setDialog(null)} closeLabel="Keep editing" testId="notes">
+          {rights.phase === 'before_publish' ? (
+            <SampleDateGate content={content} sample={theme.sample} confirmed={dateConfirmed} onConfirm={setDateConfirmed} onFix={() => goTo('date')} />
+          ) : null}
           {rights.phase === 'before_publish' ? <RulesBox rights={rights} locale={content.locale} /> : null}
           {noteCount ? <p>Your guests will see these. Check them, or publish anyway and change them later.</p> : null}
           <NoteGroup title="Still sample text from the design" notes={notes.sample} onJump={goTo} />
@@ -430,7 +488,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
           <NoteGroup title="Sections without a link" notes={notes.links} onJump={goTo} />
           <NoteGroup title="Sections without content" notes={notes.empty} onJump={goTo} />
           <div className={cx(styles.buttonRow, styles.stickyActions)}>
-            <Button variant="primary" icon={Send} busy={busy} busyLabel="Publishing…" onClick={() => void doPublish()} data-publish-anyway>
+            <Button variant="primary" icon={Send} busy={busy} busyLabel="Publishing…" disabled={firstPublishDateBlocked} onClick={() => void doPublish()} data-publish-anyway>
               {rights.phase === 'before_publish' ? 'Publish my website' : 'Publish anyway'}
             </Button>
             <Button onClick={() => setDialog(null)}>Keep editing</Button>
@@ -490,17 +548,21 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
           showInitials={theme.fields.initials}
           focus={dialog.focus}
           onClose={() => setDialog(null)}
+          sampleDate={theme.sample?.date ?? null}
+          undo={rights.undo}
           onSubmit={async (identity, intent) => {
-            const before = rights.remaining;
-            const dateChanged = identity.date !== content.date;
-            const namesChanged = JSON.stringify({ ...identity, date: '' }) !== JSON.stringify({ ...identityOf(content), date: '' });
+            const previous = identityOf(content);
             const res = await panel.changeIdentity(identity, intent);
-            if (res.ok && res.result !== 'unchanged') {
-              const left = res.result === 'change' ? before - 1 : before;
-              const what = namesChanged && dateChanged ? 'Names and date changed.' : dateChanged ? 'Date changed.' : 'Names changed.';
-              const text = `${res.result === 'change' ? what : 'Fixed — free.'} ${left} ${left === 1 ? 'change' : 'changes'} left.`;
-              // On a live site the change shows after publishing: offer it right here.
-              snack(text, meta.status === 'published' ? { label: 'Publish', run: () => void startPublish() } : undefined);
+            if (res.ok && res.result && res.result !== 'unchanged') {
+              const left = res.remaining ?? rights.remaining;
+              const text = `${identityOutcomeText(res.result, rights.anchor, identity, previous)} ${left} name & date ${left === 1 ? 'change' : 'changes'} left.`;
+              const actions = [
+                // A counted change can be taken back for free right away (G060-fix).
+                ...(res.result === 'change' ? [{ label: 'Undo', run: () => void undoChange(previous) }] : []),
+                // On a live site the change shows after publishing: offer it right here.
+                ...(meta.status === 'published' ? [{ label: 'Publish', run: () => void startPublish() }] : []),
+              ];
+              snack(text, actions);
             }
             return res;
           }}
@@ -599,7 +661,6 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
         return <PhotoSlots intro />;
     }
   };
-  const pageOfSection: Partial<Record<SectionId, string>> = { story: 'story', details: 'details', faq: 'details', rsvp: 'rsvp', schedule: 'details', venue: 'details', names: 'index', date: 'index', photos: 'home' };
 
   const openPreview = (page?: string | null) => {
     setPreviewPage(page && visiblePages.includes(page) ? page : null);
@@ -623,7 +684,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
               </button>
             ) : null}
             <p
-              className={sectionView ? styles.appBarTitle : cx(styles.appBarNames, route.view === 'home' && !scrolled && styles.appBarNamesHidden)}
+              className={sectionView ? cx(styles.appBarTitle, !scrolled && styles.appBarTitleNarrow) : cx(styles.appBarNames, route.view === 'home' && !scrolled && styles.appBarNamesHidden)}
               title={sectionView ? SECTION_TITLES[sectionView] : names}
               aria-hidden={route.view === 'home' || undefined}
             >
@@ -631,7 +692,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
             </p>
             <div className={styles.appBarActions}>
               <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
-              {!wide ? <IconButton icon={Eye} label="Preview" onClick={() => openPreview(sectionView ? pageOfSection[sectionView] : null)} data-open-preview /> : null}
+              {!wide ? <IconButton icon={Eye} label="Preview" onClick={() => openPreview(sectionView ? PAGE_OF_SECTION[sectionView] : null)} data-open-preview /> : null}
               {publishControl}
             </div>
           </div>
@@ -754,7 +815,7 @@ function PanelApp({ initial, editKey }: { initial: PanelState; editKey: string }
                       Done
                     </Button>
                   ) : !wide ? (
-                    <Button block icon={Eye} onClick={() => openPreview(pageOfSection[sectionView])}>
+                    <Button block icon={Eye} onClick={() => openPreview(PAGE_OF_SECTION[sectionView])}>
                       Preview this page
                     </Button>
                   ) : null}

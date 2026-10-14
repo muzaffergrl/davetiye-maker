@@ -51,6 +51,23 @@ export const ARCHIVE_MAX_AFTER_FIRST_PUBLISH_MONTHS: number | null = 48;
 export const ARCHIVE_NOTICE_DAYS = 30;
 /** Log entries kept per site. */
 export const IDENTITY_LOG_MAX = 50;
+
+// The rules in the buyer's words (one source for the rules box, the help sheet and the names / date pages, so the
+// copy cannot drift from what is enforced; docs/16 §11.7).
+/** "After you publish, you have 3 changes in total for your names, monogram and wedding date …" */
+export function changesRuleText(total: number = IDENTITY_CHANGE_LIMIT): string {
+  return `After you publish, you have ${total} ${total === 1 ? 'change' : 'changes'} in total for your names, monogram and wedding date (changing several in one go counts once).`;
+}
+/** What never uses a change. */
+export const FREE_CHANGES_TEXT = `Always free: fixing a small typo (up to ${TYPO_MAX_DISTANCE} letters in a name), adding a surname, and moving your date by up to ${DATE_FREE_DAYS} days.`;
+/** The undo rule. */
+export const UNDO_TEXT = 'Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back.';
+/** Before the first publish (names and date pages, Home). */
+export function beforePublishText(total: number = IDENTITY_CHANGE_LIMIT): string {
+  return `You can change these freely until you publish. After that you have ${total} name and date changes in total — small typo fixes, surnames and moving the date by up to a week are free.`;
+}
+/** What happens at the archive date (rules box, help, the reminder before it). */
+export const ARCHIVE_TEXT = 'Then your website closes for guests; you can still see your content and download your replies.';
 /** Answer of every write endpoint once a site is archived (403 archived). */
 export const ARCHIVED_MESSAGE = 'This website is archived. You can still see your content and download your replies, but it can no longer be changed.';
 
