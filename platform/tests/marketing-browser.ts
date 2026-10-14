@@ -11,8 +11,10 @@
 // 2. Live demo facade: before a tap no theme file is requested; on a phone the demo opens in a modal <dialog>
 //    (iframe = /start/demo/<id>, the theme loads), Esc closes it and focus returns; on a wide screen it loads in place.
 //    Card "Open live demo" opens the dialog; the mobile menu and FAQ <details> open; the sticky bar shows on phones.
+//    G082: /designs has one card per live design; every design page loads its real screens and opening clip and
+//    carries its start / demo links and Product + VideoObject JSON-LD; llms.txt lists it; the sitemap stays empty.
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
-//    transferred bytes, script bytes — home, a design page, a guide.
+//    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
 
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
@@ -181,6 +183,71 @@ try {
     await ctx.close();
   }
 
+  // 1c. G082: every live design (05 Mediterranean Lemon joined 03 and 01) — a card on /designs, its page with the
+  // real screens and opening clip loading, the start / demo links, Product + VideoObject JSON-LD, llms.txt.
+  {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+    const page = await ctx.newPage();
+    await page.goto(BASE + '/designs', { waitUntil: 'networkidle' });
+    const cards = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('main article')).map((a) => ({
+        name: a.querySelector('h2 a')?.textContent?.trim() ?? '',
+        href: a.querySelector('h2 a')?.getAttribute('href') ?? '',
+        demo: a.querySelector('a[data-demo]')?.getAttribute('href') ?? '',
+      })),
+    );
+    check(
+      `/designs: one card per live design (${designs.length}), in config order, with page and demo links`,
+      cards.length === designs.length && designs.every((d, i) => cards[i]?.name === d.name && cards[i].href === `/designs/${d.id}` && cards[i].demo === `/start/demo/${d.id}`),
+      cards,
+    );
+    const ld = await page.evaluate(() => Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map((s) => s.textContent ?? '').join('\n'));
+    check('/designs: ItemList JSON-LD lists every live design', designs.every((d) => ld.includes(`/designs/${d.id}"`)) && ld.includes('"ItemList"'));
+    for (const d of designs) {
+      await page.goto(`${BASE}/designs/${d.id}`, { waitUntil: 'networkidle' });
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 500) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 60));
+        }
+      });
+      await page.waitForTimeout(400);
+      const info = await page.evaluate((id: string) => {
+        const imgs = Array.from(document.querySelectorAll<HTMLImageElement>(`main img[src*="/marketing/designs/${id}/"]`));
+        const video = document.querySelector<HTMLVideoElement>('main video');
+        const json = Array.from(document.querySelectorAll('script[type="application/ld+json"]')).map((s) => JSON.parse(s.textContent ?? '{}'));
+        const nodes = json.flatMap((j: any) => j['@graph'] ?? [j]);
+        return {
+          h1: document.querySelector('h1')?.textContent?.trim(),
+          screens: imgs.length,
+          broken: imgs.filter((i) => !(i.complete && i.naturalWidth > 0)).map((i) => i.currentSrc),
+          video: video ? { src: video.getAttribute('src'), poster: video.getAttribute('poster') } : null,
+          start: document.querySelector('main a[data-track="start_click"][data-track-design]')?.getAttribute('href'),
+          demo: document.querySelector('a[data-demo-placement="design-sticky"]')?.getAttribute('href'),
+          product: nodes.find((n: any) => n['@type'] === 'Product')?.sku ?? null,
+          videoLd: nodes.find((n: any) => n['@type'] === 'VideoObject')?.contentUrl ?? null,
+        };
+      }, d.id);
+      check(
+        `/designs/${d.id}: real screens load, opening clip, start + demo links, Product + VideoObject`,
+        info.h1 === `${d.name} wedding website` && info.screens >= 4 && info.broken.length === 0 &&
+          info.video?.src === `/marketing/designs/${d.id}/opening.mp4` && info.video.poster === `/marketing/designs/${d.id}/opening-poster.webp` &&
+          info.start === `/start?theme=${d.id}` && info.demo === `/start/demo/${d.id}` && info.product === d.id && String(info.videoLd).endsWith(`/marketing/designs/${d.id}/opening.mp4`),
+        info,
+      );
+      const media = await page.evaluate(async (urls: string[]) => Promise.all(urls.map(async (u) => {
+        const r = await fetch(u);
+        return `${r.status} ${r.headers.get('content-type')}`;
+      })), [`/marketing/designs/${d.id}/opening.mp4`, `/marketing/designs/${d.id}/opening-poster.webp`]);
+      check(`/designs/${d.id}: clip and poster answer 200 (video/mp4, image/webp)`, media[0].startsWith('200 video/mp4') && media[1].startsWith('200 image/webp'), media);
+    }
+    const llms = await (await fetch(`${BASE}/llms.txt`)).text();
+    check('llms.txt: every live design is listed', designs.every((d) => llms.includes(`/designs/${d.id}): ${d.copy.llmsLine}`)), llms.slice(0, 200));
+    const sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
+    check('sitemap.xml: still empty (launched: false)', !sitemap.includes('<url>'), sitemap.slice(0, 200));
+    await ctx.close();
+  }
+
   // 2a. demo facade on a phone
   {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
@@ -223,12 +290,14 @@ try {
     const poster = await page.locator('a[aria-label^="Tap to open the live demo"] img').getAttribute('src');
     check('demo: a design chip switches the poster', !!poster && poster.includes(designs[1].id), poster);
 
-    // card button opens the dialog for its design
-    await page.locator(`a[data-demo="${designs[1].id}"]`).first().click();
-    await page.locator('dialog[open]').waitFor({ timeout: 5000 });
-    check('demo: a card "Open live demo" opens its design', (await page.locator('dialog[open] iframe').getAttribute('src')) === `/start/demo/${designs[1].id}`);
-    await page.getByRole('button', { name: 'Close the demo' }).click();
-    check('demo: the close button closes it', (await page.locator('dialog[open]').count()) === 0);
+    // card button opens the dialog for its design (every design after the first; G082: the newest too)
+    for (const d of designs.slice(1)) {
+      await page.locator(`a[data-demo="${d.id}"]`).first().click();
+      await page.locator('dialog[open]').waitFor({ timeout: 5000 });
+      check(`demo: a card "Open live demo" opens its design (${d.id})`, (await page.locator('dialog[open] iframe').getAttribute('src')) === `/start/demo/${d.id}`);
+      await page.getByRole('button', { name: 'Close the demo' }).click();
+      check(`demo: the close button closes it (${d.id})`, (await page.locator('dialog[open]').count()) === 0);
+    }
 
     // mobile menu and FAQ
     await page.locator('summary', { hasText: 'Menu' }).click();
@@ -275,7 +344,7 @@ try {
   }
 
   // 3. lab performance (Lighthouse-like mobile throttling)
-  for (const p of ['/', `/designs/${designs[1].id}`, guides[0].path]) {
+  for (const p of ['/', ...new Set([`/designs/${designs[1].id}`, `/designs/${designs[designs.length - 1].id}`]), guides[0].path]) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
     const page = await ctx.newPage();
     const cdp = await ctx.newCDPSession(page);
@@ -338,7 +407,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

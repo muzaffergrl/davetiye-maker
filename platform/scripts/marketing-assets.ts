@@ -4,12 +4,18 @@
 //
 //   node scripts/marketing-assets.ts               # designs + panel; writes public/marketing/{designs,panel}/ + lib/marketing/assets.json
 //   node scripts/marketing-assets.ts --designs     # only the design screens and opening videos
+//   node scripts/marketing-assets.ts --designs <id>[,<id>…] [--shots <dir>]
+//                                                  # only these designs; every other design (and the panel) keeps its
+//                                                  # entry and files from assets.json (G082: a new design is added
+//                                                  # without re-cutting the existing ones). --shots (one id only): take
+//                                                  # the capture from <dir> instead of collections/<NN>/package/shots
 //   NODE_PATH=/opt/node22/lib/node_modules node scripts/marketing-assets.ts --panel [--public-url <url>]
 //                                                  # only the panel screens (needs `npm run build` + Playwright)
 //   node scripts/marketing-assets.ts --check       # only verifies that assets.json matches the files (exit 1 if not)
 //
 // Sources:
-//   - designs: the G059 capture of each live design, collections/<NN>/package/shots/*.jpg + opening.webm.
+//   - designs: the G059 capture of each live design, collections/<NN>/package/shots/*.jpg + opening.webm (or --shots,
+//     the same tool's output in another folder). A design without a capture keeps its previous entry, if it has one.
 //   - panel (G080): captured from the CURRENT code — a local `next start` of this checkout's build on a temporary data
 //     folder (local adapter; nothing deployed, nothing sent to the live site). The design-03 demo is seeded as a
 //     published site (Clara & Julian, sample photos, a "Meal choice" question, five fictional replies); a fictional buyer
@@ -147,14 +153,34 @@ export function checkManifest(manifest: AssetManifest, publicDir = PUBLIC): stri
   return problems;
 }
 
-async function designAssets(sharp: any): Promise<AssetManifest['designs']> {
+/**
+ * Design screens + opening clips. `only`: the ids to (re)make — every other design keeps its `previous` entry untouched
+ * (null = all). `shotsDir`: the capture folder for the one id in `only`. A design without a capture folder keeps its
+ * previous entry (a later full run must not drop a design whose capture lives outside collections/).
+ */
+async function designAssets(
+  sharp: any,
+  opts: { only?: string[] | null; shotsDir?: string | null; previous?: AssetManifest['designs'] } = {},
+): Promise<AssetManifest['designs']> {
   const designs: AssetManifest['designs'] = {};
+  const previous = opts.previous ?? {};
+  const only = opts.only ?? null;
+  if (only) {
+    const unknown = only.filter((id) => !MARKETING.designs.some((d) => d.id === id) || !DESIGN_COPY[id]);
+    if (unknown.length) throw new Error(`--designs: no design with copy in lib/marketing: ${unknown.join(', ')}`);
+  }
+  if (opts.shotsDir && only?.length !== 1) throw new Error('--shots needs exactly one design: --designs <id> --shots <dir>');
   for (const d of MARKETING.designs) {
     const copy = DESIGN_COPY[d.id];
     if (!copy) continue; // 'coming' designs without copy yet
-    const shots = path.join(REPO, 'collections', copy.collection, 'package/shots');
+    if (only && !only.includes(d.id)) {
+      if (previous[d.id]) designs[d.id] = previous[d.id];
+      continue;
+    }
+    const shots = opts.shotsDir ? path.resolve(opts.shotsDir) : path.join(REPO, 'collections', copy.collection, 'package/shots');
     if (!existsSync(shots)) {
-      console.warn(`skip ${d.id}: no ${path.relative(REPO, shots)}`);
+      if (previous[d.id]) designs[d.id] = previous[d.id];
+      console.warn(`skip ${d.id}: no ${path.relative(REPO, shots)}${previous[d.id] ? ' (previous entry kept)' : ''}`);
       continue;
     }
     const outDir = path.join(PUBLIC, 'marketing/designs', d.id);
@@ -376,13 +402,17 @@ async function main(): Promise<void> {
     console.log('marketing assets: ok');
     return;
   }
-  const onlyDesigns = process.argv.includes('--designs');
+  const onlyDesigns = process.argv.includes('--designs') || process.argv.some((a) => a.startsWith('--designs='));
   const onlyPanel = process.argv.includes('--panel');
+  // --designs <id>[,<id>…] / --designs=<id>: only these designs (a bare --designs = every design)
+  const ids = arg('designs', '');
+  const only = ids && !ids.startsWith('--') ? ids.split(',').map((s) => s.trim()).filter(Boolean) : null;
+  const shotsDir = arg('shots', '') || null;
   const sharp = require('sharp');
   const previous: AssetManifest | null = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : null;
   const manifest: AssetManifest = {
     note: MANIFEST_NOTE,
-    designs: onlyPanel && previous ? previous.designs : await designAssets(sharp),
+    designs: onlyPanel && previous ? previous.designs : await designAssets(sharp, { only, shotsDir, previous: previous?.designs }),
     panel: onlyDesigns && previous ? previous.panel : await panelAssets(sharp),
   };
   const problems = checkManifest(manifest);

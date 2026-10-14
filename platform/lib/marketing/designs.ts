@@ -114,6 +114,35 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'olive green envelope with an ivory lace edge and a wax seal with the couple\'s initials; olive branches, white roses and gold frames.',
     relatedGuides: ['when-to-send-your-wedding-website', 'how-to-make-a-wedding-website'],
   },
+  // G082: written against themes/mediterranean-lemon/README.md (G405, approved) and its real screens (390 × 844 capture).
+  'mediterranean-lemon': {
+    id: 'mediterranean-lemon',
+    collection: '05_Lemon_Mediterranean',
+    demoCouple: 'Isabella & Marco',
+    style: 'White envelope with a cobalt scalloped edge and a lemon tie, blue-and-white tile frames and lemon branches',
+    metaDescription:
+      'A white envelope tied with a lemon and a cobalt ribbon opens into your wedding website: blue-and-white tiles and lemon branches. Edit it on your phone.',
+    intro:
+      'A white envelope with a cobalt blue scalloped edge, tied with a lemon on a blue ribbon, on a sunlit plaster wall with lemon branches. Inside: blue-and-white tile frames, scalloped cards and a flowing script.',
+    opening:
+      'Your guests tap the envelope. The lemon tie slips loose and rolls off the screen, the flap lifts to show a blue-and-white tile lining, and a card with your portrait rises out of the envelope while a lemon branch sways in from the corner and a blossom drifts down. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a tile-framed card, your names, date, venue, a live countdown and an RSVP button, then the invitation card and two tile panels that lead to Our Story and Details.',
+      story: 'Three photos in blue-and-white tile frames, one under the other; each turns into place as guests scroll, with a caption under it.',
+      details: 'An "Order of the Day" card, add to calendar, the venue photo in a tile frame, dress code, links and questions and answers.',
+      rsvp: 'A scalloped reply card with your reply-by date and a lemon tie, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Cobalt', hex: '#2A5DA8' },
+      { name: 'Lemon', hex: '#F2C94C' },
+      { name: 'Sky', hex: '#DCE6F2' },
+      { name: 'Ivory', hex: '#FFFDF7' },
+      { name: 'Navy', hex: '#1F3557' },
+    ],
+    fonts: ['Allura', 'Playfair Display'],
+    llmsLine: 'white envelope with a cobalt scalloped edge, tied with a lemon on a blue ribbon; blue-and-white tile frames, lemon branches and a sunlit plaster wall.',
+    relatedGuides: ['digital-wedding-invitation-etiquette', 'what-to-put-on-your-wedding-website'],
+  },
 };
 
 export interface Design extends DesignCommerce {

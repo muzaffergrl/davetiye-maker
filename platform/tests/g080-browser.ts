@@ -4,7 +4,8 @@
 //   npm run build
 //   NODE_PATH=/opt/node22/lib/node_modules PORT=41971 node tests/g080-browser.ts
 //
-// Server A runs with THEME_APPROVAL=enforce (= what VERCEL_ENV=production does): an approved design starts normally,
+// Server A runs with THEME_APPROVAL=enforce (= what VERCEL_ENV=production does): an approved design starts normally
+// (G082: every approved design's /start page opens with its demo, and POST /api/start answers 201 for each),
 // a design in review answers 404 with the honest page and POST /api/start 403, its demo stays open, the /start list
 // shows approved designs only. Server B (PORT+1) has no gate: the same design in review can be started (local work).
 // Look: panel fonts (Archivo / DM Sans), panel tokens (paper ground, aubergine button, no old green), BKE logo,
@@ -228,6 +229,32 @@ try {
     lookChecks('post-claim @1280', await look(dp), { primary: true, width: 1280 });
     await shot(dp, 'claimed_1280');
     await dc.close();
+  }
+
+  // ------------------------------------------------------------------ production: EVERY approved design opens (G082)
+  // (a design approved later — 05 mediterranean-lemon in G082 — is started like the first ones: page, demo, API)
+  {
+    const ctx = await browser.newContext(phone);
+    const page = await ctx.newPage();
+    for (const id of approved) {
+      const res = await page.goto(`${prod.base}/start?theme=${id}`, { waitUntil: 'networkidle' });
+      const src = await page.locator('iframe').first().getAttribute('src').catch(() => null);
+      check(
+        `prod /start?theme=${id} (approved): 200 + form + its demo`,
+        res.status() === 200 && (await page.locator('h1').innerText()) === 'Start your website' && (await page.locator('form').count()) === 1 && src === `/start/demo/${id}`,
+        { status: res.status(), src },
+      );
+    }
+    await ctx.close();
+    for (const [i, id] of approved.filter((x) => x !== APPROVED).entries()) {
+      const api = await fetch(`${prod.base}/api/start`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ theme: id, orderNumber: String(6100012457 + i * 7919), email: 'g082@example.test', names: [['Lucia', 'Paolo'], ['Chiara', 'Matteo'], ['Giulia', 'Luca']][i % 3], slug: '', website: '' }),
+      });
+      const body = (await api.json()) as Record<string, unknown>;
+      check(`prod POST /api/start (${id}, approved): 201, a site is started`, api.status === 201 && typeof body.slug === 'string', { status: api.status, body });
+    }
   }
 
   // ------------------------------------------------------------------ production: design in review
