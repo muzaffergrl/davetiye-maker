@@ -66,6 +66,12 @@ IVORY = (251, 247, 239)
 MIST = (221, 229, 236)
 # telefon zemini: bg_page'in çiçeksiz, bokehli orta-sol bandı (kümeler ayrı katman: florals_tl / florals_br)
 PAPER_CROP = (168, 420, 568, 1290)
+# geniş/yatay ekran zemini: bg_page'in en geniş çiçeksiz yatay bandı (755 × 500; 1280 × 800'de × 1,7, dikey kırpımın × 3,2
+# yerine); altında dikişsiz bg_tile kendi ölçüsünde (kâğıt dokusu) — site.css
+PAPER_WIDE_CROP = (116, 600, 871, 1100)
+# GPT'nin sağ alt kümesindeki altın eğrelti comp'un şampanya altınından turuncuya kaçıyor (doygunluk 0,60; comp ~0,47):
+# yalnız sıcak tonlara (H 25–45°) doygunluk × k, parlaklık × (1 + L); renk düzeltmesi, çizim değil (manifest.cleanup)
+FERN_GRADE = {"florals_br": (0.74, 0.04), "florals_tl": (0.86, 0.02)}
 PAPER_BUSY_MAX = 0.002   # kırpımda "dolu" piksel payı (yaprak/altın/gül) en çok bu; aşarsa çıkış ≠ 0
 # foto anahtarı → (pencere, çıktı genişlikleri, bg_page kırpım kutusu: çiçeksiz bokehli bölgeler)
 PLACEHOLDERS = {
@@ -176,6 +182,48 @@ def webp_yaz(im: Image.Image, name: str, widths, q: int, manifest: dict, out: Pa
         r.save(p, "WEBP", quality=q, method=6, alpha_quality=90)
         files.append({"file": p.name, "w": w, "h": h, "bytes": p.stat().st_size})
     manifest[name] = {"src_size": [w0, h0], "ratio": round(w0 / h0, 5), "files": files}
+
+
+def _hsv(rgb):
+    mx, mn = rgb.max(-1), rgb.min(-1)
+    d = mx - mn
+    s = np.where(mx > 0, d / np.maximum(mx, 1e-9), 0)
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    dd = np.maximum(d, 1e-9)
+    h = np.where(mx == r, ((g - b) / dd) % 6, np.where(mx == g, (b - r) / dd + 2, (r - g) / dd + 4)) * 60
+    return np.where(d > 0, h, 0), s, mx
+
+
+def _rgb(h, s, v):
+    c = v * s
+    x = c * (1 - np.abs((h / 60) % 2 - 1))
+    m = v - c
+    z = np.zeros_like(h)
+    k = (h // 60).astype(int) % 6
+    r = np.choose(k, [c, x, z, z, x, c]); g = np.choose(k, [x, c, c, x, z, z]); b = np.choose(k, [z, z, x, c, c, x])
+    return np.stack([r + m, g + m, b + m], -1)
+
+
+def egrelti_ton(im: Image.Image, k: float, L: float):
+    """Altın eğrelti tonu: H 25–45° (yumuşak kenar ± 8°) ve doygunluk ≥ 0,25 (krem güller 0,1 civarı: dokunulmaz) olan
+    piksellerde doygunluk × k, parlaklık × (1 + L). Ölçü: opak (α > 200), H 25–45°, S > 0,3 piksellerin ortalama doygunluğu."""
+    a = np.asarray(im.convert("RGBA")).astype(np.float64)
+    h, s, v = _hsv(a[..., :3] / 255)
+    op = a[..., 3] > 200
+
+    def olc(h_, s_):
+        m = op & (h_ >= 25) & (h_ <= 45) & (s_ > 0.3)
+        return round(float(s_[m].mean()), 3) if m.any() else None
+    once = olc(h, s)
+    wh = np.clip(1 - np.maximum(25 - h, h - 45) / 8, 0, 1)
+    ws = np.clip((s - 0.15) / 0.10, 0, 1)
+    w = wh * ws
+    s2 = s * (1 - w * (1 - k))
+    v2 = np.minimum(1, v * (1 + w * L))
+    a[..., :3] = np.clip(_rgb(h, s2, v2) * 255, 0, 255)
+    out = Image.fromarray(np.rint(a).astype(np.uint8), "RGBA")
+    return out, {"hue_deg": [25, 45], "feather_deg": 8, "sat_from": 0.25, "sat_k": k, "value_gain": L,
+                 "mean_sat_before": once, "mean_sat_after": olc(h, s2), "px": int((w > 0.5).sum())}
 
 
 def dikissiz(im: Image.Image, bant: float = 0.28) -> Image.Image:
@@ -572,15 +620,16 @@ def main():
     card_x = (env_x0 + env_x1) / 2 - card_w / 2
     hidden_top = govde_ust + 0.06 * (env_y1 - env_y0)                  # kapalıyken gövdenin arkasında
     kose_kenar = float(min(cep_kenar[int(card_x)], cep_kenar[int(card_x + card_w)]))
-    # out: alt köşeler cebin kenarını kartın %4'ü kadar aşmış; front: aynı yerde öne (%3 aşağı, × 1.04) → home'a yukarı
+    # out: alt köşeler cebin kenarını kartın %4'ü kadar aşmış; front: okunur biçimde öne gelir (%3,5 yukarı, × 1.09,
+    # büyüyen gölge) → home kartına yukarı devam eder (aşağı inmez; G402 incelemesi: × 1.04 fark edilmiyordu)
     out_top = kose_kenar - 0.04 * card_h - card_h
-    front_top = out_top + 0.03 * card_h
+    front_top = out_top - 0.035 * card_h
     card_box_hidden = [card_x, hidden_top, card_x + card_w, hidden_top + card_h]
 
     # ------------------------------------------------------------------ sahne kutusu = birleşim (docs/11 §7.1)
     ob_box = alfa_kutu(eo, esik=1)
     cb_box = alfa_kutu(ec, esik=1)
-    scale_front = 1.04
+    scale_front = 1.09
     fr_w, fr_h = card_w * scale_front, card_h * scale_front
     front_box = [card_x - (fr_w - card_w) / 2, front_top - (fr_h - card_h) / 2,
                  card_x + card_w + (fr_w - card_w) / 2, front_top + card_h + (fr_h - card_h) / 2]
@@ -690,6 +739,8 @@ def main():
         esik, cek = (110, 200) if nm == "divider" else (16, 110)
         im, temizlik[nm] = hale_temizle(Image.open(prep / f"{nm}.png"), sert=False, esik=esik, cekirdek=cek)
         temizlik[nm].update(hale_payi(im))
+        if nm in FERN_GRADE:
+            im, temizlik[nm]["fern_grade"] = egrelti_ton(im, *FERN_GRADE[nm])
         im = im.crop(alfa_kutu(im))
         webp(im, nm, WIDTHS[nm])
         if oniz:
@@ -714,8 +765,14 @@ def main():
         sys.exit(f"paper: kırpım {PAPER_CROP} dekor içeriyor (dolu pay {dolu:.4f} > {PAPER_BUSY_MAX})")
     webp(paper, "paper", [paper.width], 82)
     manifest["paper"].update({"crop": list(PAPER_CROP), "busy_share": round(dolu, 5)})
-    webp(bg, "bg_page", [640, 1024], 76)
-    webp(tb.bulanik_fon(bg, (640, 960), 6), "mist", [640], 80)
+    genis = bg.crop(PAPER_WIDE_CROP)
+    ga = np.asarray(genis).astype(np.float64)
+    dolu_g = float((((ga @ LUM) < 170) | (ga[..., 0] > ga[..., 2] + 8)).mean())
+    if dolu_g > PAPER_BUSY_MAX:
+        sys.exit(f"paper_wide: kırpım {PAPER_WIDE_CROP} dekor içeriyor (dolu pay {dolu_g:.4f} > {PAPER_BUSY_MAX})")
+    webp(genis, "paper_wide", [genis.width], 82)
+    manifest["paper_wide"].update({"crop": list(PAPER_WIDE_CROP), "busy_share": round(dolu_g, 5)})
+    # bg_page-* / mist: hiçbir sayfa kullanmıyor (docs/11 §1: kullanılmayan görsel tema klasörüne girmez)
     # uzun sayfa zemini: bg_tile (dikişsiz suluboya kağıt), sahne kağıdının ortalama rengine çekilir (renk sıçraması yok)
     # periodisch küçültme: 3 × 3 döşenmiş karo küçültülüp ortası alınır (kenar sütunları komşu karoyu görür; tek karonun
     # LANCZOS küçültmesi kenarda kopma bırakıyordu → sayfada 640 px'te dikey/yatay ek izi)
@@ -729,7 +786,7 @@ def main():
     hedef_renk = pa.reshape(-1, 3).mean(0)
     ta = ta - ta.reshape(-1, 3).mean(0) + hedef_renk
     tile = Image.fromarray(np.clip(np.rint(ta), 0, 255).astype(np.uint8), "RGB")
-    webp(tile, "bg_tile", [640], 78)
+    webp(tile, "bg_tile", [640], 85)   # kâğıt dokusu geniş ekranda görünür: daha yüksek kalite (G402 incelemesi)
     manifest["bg_tile"]["tone"] = [round(v, 1) for v in hedef_renk]
     manifest["page_color"] = "#%02X%02X%02X" % tuple(int(round(v)) for v in hedef_renk)
 
@@ -773,9 +830,10 @@ def main():
                           "windows_transparent": {k: [f.get("window_visible_px") for f in manifest[p]["files"]]
                                                   for k, p in (("card", "card_small"), ("portrait", "frame_portrait"),
                                                                ("landscape", "frame_landscape"))}}
-    # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik bulunur; parçacık katmanı; ilk ekran
-    # yatay telefonda da nav'ın üstünde biter, hero isimleri ≥ 36 px
-    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": True, "names_min_px": 36}}
+    # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik bulunur; parçacık katmanı; köşe kümeleri
+    # düz çizgiyle (kırpan ata, nav bandı) kesilmez; ilk ekran yatay telefonda da nav'ın üstünde biter, isimler ≥ 36 px
+    manifest["theme_check"] = {"particles": ".accent-layer", "clusters": ".corner, .page-corner",
+                               "first_screen": {"landscape": True, "names_min_px": 36}}
     tb.manifest_yaz(out, manifest)
 
     if oniz:

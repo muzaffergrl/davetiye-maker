@@ -29,7 +29,7 @@
     {
       "name": "guest: home shows names, date and venue",
       "ok": true,
-      "detail": "We're getting married SEPTEMBER 18, 2027 CHARLESTON Eleanor & Theo SATURDAY · SEPTEMBER 18, 2027 Rosewood Manor Charlest"
+      "detail": "We're getting married September 18, 2027 Charleston, South Carolina Eleanor & Theo SATURDAY · SEPTEMBER 18, 2027 Rosewoo"
     },
     {
       "name": "guest: home has no broken images",
@@ -100,7 +100,7 @@
     {
       "name": "buyer: edit link shown",
       "ok": true,
-      "detail": "http://127.0.0.1:3394/edit/elena-and-marco?k=…"
+      "detail": "http://127.0.0.1:3321/edit/elena-and-marco?k=…"
     },
     {
       "name": "buyer: site not public before Publish",
@@ -172,7 +172,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/cc4a4c8b-594e-48ef-af4a-38b1145b5796/f184cee1e721d6314d97e6ba061bd60a-1024w.jpg"
+      "detail": "/media/2e4e9f86-888d-42df-b191-850cdcad4446/091a01f646ee59ceff608fcda0d83cde-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
@@ -189,7 +189,7 @@
     {
       "name": "buyer: the reply shows in the panel",
       "ok": true,
-      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close at the end of Sunday, August 1, 2027 (New York time). All Coming No"
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 291 days. Last day: Sunday, August 1, 2027 (New York time). 1 ne"
     },
     {
       "name": "buyer: panel has no overflow at the end",

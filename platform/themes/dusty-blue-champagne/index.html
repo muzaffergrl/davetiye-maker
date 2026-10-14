@@ -33,7 +33,7 @@
 <!-- backdrop (W1.1): the bokeh paper (flower-free crop of bg_page) + the two GPT corner clusters as separate layers, each
      whole on screen, and the comp's loose leaves and blossoms (GPT accents) -->
 <div class="scene-bg" aria-hidden="true">
-  <img class="paper" src="img/paper-400.webp" alt="" fetchpriority="high">
+  <picture><source media="(min-width: 700px), (min-aspect-ratio: 1/1)" srcset="img/paper_wide-755.webp"><img class="paper" src="img/paper-400.webp" alt="" fetchpriority="high"></picture>
   <img class="corner corner-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="(min-aspect-ratio: 1/1) min(30vw, 56svh, 460px), min(72vw, 37svh, 430px)" alt="" fetchpriority="high">
   <img class="corner corner-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-875.webp 875w" sizes="(min-aspect-ratio: 1/1) min(28vw, 54svh, 440px), min(74vw, 38svh, 440px)" alt="">
   <img class="float f-leaf" src="img/accent_1-149.webp" alt="">
@@ -65,7 +65,7 @@
           <div class="card-copy">
             <p class="script">We're getting married</p>
             <p class="kicker c-date" data-field="date"></p>
-            <p class="kicker c-city" data-if="venue.city" data-field="venue.city"></p>
+            <p class="kicker c-city" data-if="venue.city_region" data-field="venue.city_region"></p>
           </div>
         </div>
       </div>

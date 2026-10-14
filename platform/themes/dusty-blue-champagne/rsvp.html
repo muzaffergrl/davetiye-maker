@@ -28,7 +28,7 @@
 <!-- replies collected another way (rsvp.method "none"): the whole page is off (404), like the links to it -->
 <body class="page-long page-rsvp" data-if="!rsvp.method" data-pending="This link will be added soon.">
 
-<div class="page-bg" aria-hidden="true"><img src="img/paper-400.webp" alt=""></div>
+<div class="page-bg" aria-hidden="true"><picture><source media="(min-width: 700px), (min-aspect-ratio: 1/1)" srcset="img/paper_wide-755.webp"><img src="img/paper-400.webp" alt=""></picture></div>
 
 <main class="site-main">
   <section class="rsvp-top" data-scene="rsvp-card" aria-label="RSVP">
@@ -124,7 +124,7 @@
     <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
     <h2 class="script title" data-step="title" data-a="write">Thank you</h2>
     <p class="line" data-step="line" data-a="fade">for being part of our story.</p>
-    <p class="kicker" data-step="meta" data-a="fade"><span data-field="name_display"></span> · <span class="nowrap" data-field="date"></span></p>
+    <p class="kicker" data-step="meta" data-a="fade"><span data-field="name_display"></span> <span class="dot" aria-hidden="true">·</span> <span class="nowrap" data-field="date"></span></p>
     <p class="replay-line" data-step="meta" data-a="fade"><a class="textlink" href="index.html?replay=1">Replay the envelope</a></p>
   </section>
 </main>

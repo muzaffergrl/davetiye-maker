@@ -28,6 +28,10 @@
 //                > light_above) ≤ dark_max. Calibrated on 03's light wash (plain ≤ 1.3 / 0.03, florals ≥ 2.7 / 0.06); a
 //                dark design (06, 19) sets e.g. dark_below 0 + light_above 110 from its own measurements, which
 //                theme-check writes to checks.json (info.envelope_backdrop).
+//   "clusters":  "<css selector>"  the theme's painted decor clusters (default "": not checked). Each one is never shortened
+//                by a clipping ancestor (overflow / clip-path) except at the screen's or the page's own edge, and never
+//                runs under the fixed site nav's band, on the first screen and at the page end (G402 review: a hero box and
+//                an opaque nav band cut the roses with a straight line).
 //   "first_screen": { "landscape": false, "names_min_px": 32 }  home's first screen (flow "home first screen"): at
 //                360×640 / 375×553 every theme must end above the nav; "landscape": true adds 844×390 and 667×375 (a
 //                phone on its side) to that rule and the envelope checks (a theme with a short-landscape layout, e.g.
@@ -61,6 +65,7 @@ export interface CheckProfile {
   /** manifest key → free_zone rows [y %, left %, right %] (left/right null = no plain paper on that row). */
   freeZones: Record<string, Array<[number, number | null, number | null]>>;
   particles: string;
+  clusters: string;
   envelopeText: { closed: string; opened: string };
   backdrop: { edge_max: number; dark_max: number; dark_below: number; light_above: number };
   firstScreen: { landscape: boolean; names_min_px: number };
@@ -210,6 +215,7 @@ export function parseGoogleFonts(html: string | null): ThemeEnv['fonts'] {
 
 const DEFAULT_PROFILE = {
   particles: '.petal-layer, .accent-layer',
+  clusters: '',
   envelopeText: { closed: 'h1, p', opened: '.replay' },
   backdrop: { edge_max: 2.2, dark_max: 0.05, dark_below: 170, light_above: 256 },
   firstScreen: { landscape: false, names_min_px: 32 },
@@ -231,6 +237,7 @@ function profileFor(images: Record<string, any> | null, notes: string[]): CheckP
     cards,
     freeZones,
     particles: typeof t?.particles === 'string' ? t.particles : DEFAULT_PROFILE.particles,
+    clusters: typeof t?.clusters === 'string' ? t.clusters : DEFAULT_PROFILE.clusters,
     envelopeText: { ...DEFAULT_PROFILE.envelopeText, ...(t?.envelope_text ?? {}) },
     backdrop: { ...DEFAULT_PROFILE.backdrop, ...(t?.backdrop ?? {}) },
     firstScreen: { ...DEFAULT_PROFILE.firstScreen, ...(t?.first_screen ?? {}) },
