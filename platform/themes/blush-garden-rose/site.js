@@ -575,9 +575,10 @@ const DEV_CONTENT = {
     function walk(el, scope) {
       const d = el.dataset;
       if (d.optional !== undefined && !(view.optional_blocks && view.optional_blocks[d.optional] === true)) { el.remove(); return; }
-      if (d.if !== undefined) {
-        const neg = d.if.startsWith('!');
-        if (present(get(abs(d.if.replace(/^!/, ''), scope))) === neg) { el.remove(); return; }
+      // data-if: one or more conditions, all must hold (G075)
+      if (d.if !== undefined && d.if.trim().split(/\s+/).some((c) => present(get(abs(c.replace(/^!/, ''), scope))) === c.startsWith('!'))) {
+        el.remove();
+        return;
       }
       if (d.repeat !== undefined) {
         const path = abs(d.repeat, scope);

@@ -39,6 +39,22 @@ export interface RsvpQuestion {
   options?: string[];
 }
 
+/** Thank-you mode after the wedding (G075): auto = from 00:00 the day after the wedding (site time zone). */
+export type ThankYouMode = 'auto' | 'on' | 'off';
+
+/** After-the-wedding settings (G075, K28). Missing = automatic with the default title, no message, no photo. */
+export interface ThankYou {
+  mode?: ThankYouMode;
+  /** Empty: "Thank you for celebrating with us". */
+  title?: string | null;
+  /** The couple's short message to guests (≤ 400 characters). */
+  message?: string | null;
+  /** Photo URL (/media/…); none = the design's own decoration (never a photo placeholder). */
+  photo?: string | null;
+  /** The Details page in thank-you mode: kept (as "The Day") or hidden. Missing = keep. */
+  details?: 'keep' | 'hide';
+}
+
 /** One question and answer of the FAQ block (G051). */
 export interface FaqItem {
   q: string;
@@ -79,4 +95,6 @@ export interface ContentRecord {
   };
   /** Optional questions & answers (shown while optional_blocks.faq is on). */
   faq?: FaqItem[];
+  /** After the wedding (G075): thank-you mode settings. */
+  thank_you?: ThankYou;
 }

@@ -250,7 +250,7 @@ test('5 a content change shows on every page (names, date, venue, schedule rows,
   assert.deepEqual(details('.sched-row').map((_, el) => details(el).attr('data-repeat-item')).get(), ['schedule.0', 'schedule.1', 'schedule.2', 'schedule.3']);
   assert.equal(details('.sched-row').first().find('.loc').length, 0, 'row without a location: no empty location line');
   assert.equal(details('[data-field="venue.address"]').text(), '12 Orchard Lane');
-  assert.equal(details('p[data-if="ceremony_time"]').text(), 'The ceremony begins at 3:30 PM.', 'schedule.0 without a location → no " in …"');
+  assert.equal(details('p[data-if="ceremony_time !thank_you_on"]').text(), 'The ceremony begins at 3:30 PM.', 'schedule.0 without a location → no " in …"');
   const home = render('home', c).$;
   assert.equal(home('[data-field="host_line"]').length, 0, 'empty host line removed');
   assert.equal(home('.v-day .sched-line').length, 4);
@@ -678,7 +678,7 @@ test('G401 review: home copy in this design\'s voice, the reply-by line once, ev
   // details: the ceremony line no longer claims the first programme row is the ceremony's place
   const c = demo();
   c.schedule = [{ label: 'Welcome drinks', time: '15:00', location: 'The Bar' }, ...c.schedule];
-  assert.equal(render('details', c).$('p[data-if="ceremony_time"]').text(), 'The ceremony begins at 4:00 PM.');
+  assert.equal(render('details', c).$('p[data-if="ceremony_time !thank_you_on"]').text(), 'The ceremony begins at 4:00 PM.');
 });
 
 test('G401 review: the story keeps the hand of cards on phones (swipeable fan, window ≥ 38vw) and overlaps on wide screens', () => {

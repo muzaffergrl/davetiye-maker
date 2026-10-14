@@ -43,18 +43,26 @@
     <div class="wrap">
       <div class="paper info rsvp-card" data-step="card" data-a="set">
         <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-870.webp 870w" sizes="min(calc(100vw - 40px), 420px)" alt="">
+        <!-- [data-fold] = units that start below the first screen if the nav line would cut them (site.js folds) -->
         <div class="paper-text rsvp-text">
-          <h1 class="script card-title" data-step="title" data-a="write">Will You Join Us?</h1>
-          <p class="kicker" data-step="kicker" data-a="fade" data-if="rsvp.deadline">Kindly reply by</p>
-          <p class="deadline" data-step="deadline" data-a="fade" data-if="rsvp.deadline" data-field="rsvp.deadline"></p>
-          <p class="pill" data-step="button" data-a="bloom"><a class="btn" href="#reply">RSVP</a></p>
-          <p class="hairs" data-step="wait" data-a="fade" aria-hidden="true"><span></span><span></span></p>
-          <p class="kicker wait" data-step="wait" data-a="fade">We can't wait to celebrate with you</p>
-          <p class="script love" data-step="love" data-a="write">With love,</p>
-          <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
-        </div>
-        <div class="card-tie" data-step="tie" data-a="drop" aria-hidden="true">
-          <img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="min(36vw, 170px)" alt="">
+          <h1 class="script card-title" data-step="title" data-a="write" data-fold>Will You Join Us?</h1>
+          <div class="unit" data-if="rsvp.deadline" data-fold>
+            <p class="kicker" data-step="kicker" data-a="fade">Kindly reply by</p>
+            <p class="deadline" data-step="deadline" data-a="fade" data-field="rsvp.deadline"></p>
+          </div>
+          <p class="pill" data-step="button" data-a="bloom" data-fold><a class="btn" href="#reply">RSVP</a></p>
+          <div class="unit" data-fold>
+            <p class="hairs" data-step="wait" data-a="fade" aria-hidden="true"><span></span><span></span></p>
+            <p class="kicker wait" data-step="wait" data-a="fade">We can't wait to celebrate with you</p>
+          </div>
+          <!-- "With love," + the names + the lemon tie on the card's bottom edge stay together -->
+          <div class="unit sig-unit" data-fold>
+            <p class="script love" data-step="love" data-a="write">With love,</p>
+            <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+            <div class="card-tie" data-step="tie" data-a="drop" aria-hidden="true">
+              <img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="min(36vw, 170px)" alt="">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -64,30 +72,32 @@
   <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply">
     <div class="wrap">
       <div class="reply-box" data-rsvp data-step="form" data-a="rise">
-        <img class="sprig" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
-        <h2 class="script">Your reply</h2>
+        <div data-fold>
+          <img class="sprig" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+          <h2 class="script">Your reply</h2>
+        </div>
         <form class="reply-form" data-rsvp-form method="post">
-          <label class="field"><span class="kicker">Your name</span>
+          <label class="field" data-fold><span class="kicker">Your name</span>
             <input type="text" name="name" required maxlength="120" autocomplete="name">
           </label>
           <p class="field-error" data-rsvp-error-for="name"></p>
-          <label class="field"><span class="kicker">Email <span class="opt">(optional)</span></span>
+          <label class="field" data-fold><span class="kicker">Email <span class="opt">(optional)</span></span>
             <input type="email" name="email" maxlength="254" autocomplete="email">
           </label>
           <p class="field-error" data-rsvp-error-for="email"></p>
-          <fieldset class="choice">
+          <fieldset class="choice" data-fold>
             <legend class="kicker">Will you attend?</legend>
             <label><input type="radio" name="attending" value="yes" required> <span>Joyfully accepts</span></label>
             <label><input type="radio" name="attending" value="no"> <span>Regretfully declines</span></label>
           </fieldset>
           <p class="field-error" data-rsvp-error-for="attending"></p>
-          <label class="field" data-rsvp-if-attending><span class="kicker">Number of guests <span class="opt">(including you)</span></span>
+          <label class="field" data-rsvp-if-attending data-fold><span class="kicker">Number of guests <span class="opt">(including you)</span></span>
             <input type="number" name="guests" min="1" value="1" inputmode="numeric">
           </label>
           <p class="field-error" data-rsvp-error-for="guests"></p>
           <!-- the couple's own questions (content rsvp.questions, G051): asked of guests who accept; form.js names the
                inputs "answer:<id>". Choice = the same pills as "Will you attend?", text = a short answer. -->
-          <div class="questions" data-rsvp-if-attending data-if="rsvp.questions">
+          <div class="questions" data-rsvp-if-attending data-if="rsvp.questions" data-fold>
             <fieldset class="choice question" data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">
               <legend class="kicker" data-field=".label"></legend>
               <div class="q-options" data-if=".options">
@@ -97,11 +107,11 @@
               <p class="field-error" data-attr-data-rsvp-error-for="answer:{.id}"></p>
             </fieldset>
           </div>
-          <label class="field"><span class="kicker">A note for the couple <span class="opt">(optional)</span></span>
+          <label class="field" data-fold><span class="kicker">A note for the couple <span class="opt">(optional)</span></span>
             <textarea name="message" rows="3" maxlength="500"></textarea>
           </label>
           <p class="field-error" data-rsvp-error-for="message"></p>
-          <p class="send"><button class="btn" type="submit">Send reply</button></p>
+          <p class="send" data-fold><button class="btn" type="submit">Send reply</button></p>
           <p class="nojs-only note">Please turn on JavaScript to send your reply.</p>
         </form>
         <div class="reply-panel" data-rsvp-state="success" hidden>

@@ -6,10 +6,13 @@
 // guest is never turned away early. A missing/unreadable deadline means the form stays open
 // (published content is validated, so this only happens with hand-made records).
 // rsvp.method === "none" means the couple turned replies off.
+// Thank-you mode (G075, lib/content/thank-you.ts: after the wedding day, or turned on by the couple) closes the form too
+// (reason "thank_you"), whatever the deadline says.
 
 import { formatDate, isValidTimeZone, parseIsoDate, zonedTimeToUtc } from '../content/format.ts';
+import { isThankYouOn } from '../content/thank-you.ts';
 
-export type RsvpClosedReason = 'deadline' | 'disabled';
+export type RsvpClosedReason = 'deadline' | 'disabled' | 'thank_you';
 
 export interface RsvpWindow {
   open: boolean;
@@ -42,6 +45,7 @@ export function rsvpWindow(content: unknown, now: Date = new Date()): RsvpWindow
   const deadlineDisplay = formatDate(deadline, typeof c.locale === 'string' ? c.locale : 'en-US');
   const base = { closesAt: closes ? closes.toISOString() : null, deadlineDisplay };
   if (c.rsvp?.method === 'none') return { open: false, reason: 'disabled', ...base };
+  if (isThankYouOn(content, now)) return { open: false, reason: 'thank_you', ...base };
   if (closes && now.getTime() >= closes.getTime()) return { open: false, reason: 'deadline', ...base };
   return { open: true, reason: null, ...base };
 }
@@ -49,6 +53,7 @@ export function rsvpWindow(content: unknown, now: Date = new Date()): RsvpWindow
 /** Friendly English text for a closed form. */
 export function closedMessage(w: Pick<RsvpWindow, 'reason' | 'deadlineDisplay'>): string {
   if (w.reason === 'disabled') return 'Online replies are not open for this event. Please contact the couple directly.';
+  if (w.reason === 'thank_you') return 'Replies are closed. Thank you for celebrating with us.';
   return w.deadlineDisplay
     ? `Replies closed on ${w.deadlineDisplay}. If you still need to reply, please contact the couple directly.`
     : 'Replies are closed. If you still need to reply, please contact the couple directly.';

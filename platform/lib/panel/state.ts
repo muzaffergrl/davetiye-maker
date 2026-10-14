@@ -11,6 +11,8 @@ import {
   OPTIONAL_BLOCK_KEYS,
   parseAspect,
   sameContent,
+  THANK_YOU_PHOTO_KEY,
+  THANK_YOU_PHOTO_SOURCE,
   type OptionalBlockKey,
   type PageRule,
   type PanelMeta,
@@ -70,7 +72,10 @@ export function themeFieldUse(htmlPages: readonly string[]): ThemeFieldUse {
     for (const m of html.matchAll(MARKER_RE)) {
       const value = m[2];
       if (m[1] === 'repeat' && value.trim() === 'story.items') repeatsStory = true;
-      const refs = value.includes('{') ? [...value.matchAll(/\{\s*([^{}|\s]+)/g)].map((x) => x[1]) : [value.replace(/^!/, '').trim()];
+      // data-if may hold several conditions ("dress_code !thank_you_on", G075)
+      const refs = value.includes('{')
+        ? [...value.matchAll(/\{\s*([^{}|\s]+)/g)].map((x) => x[1])
+        : value.trim().split(/\s+/).filter(Boolean).map((v) => v.replace(/^!/, ''));
       for (const r of refs) {
         if (r === '.text') relativeText = true;
         paths.push(r);
@@ -88,6 +93,8 @@ export function themeFieldUse(htmlPages: readonly string[]): ThemeFieldUse {
     storyItems: repeatsStory ? MAX_STORY_ITEMS : indexes.length ? Math.min(MAX_STORY_ITEMS, Math.max(...indexes) + 1) : 0,
     faq: uses('faq'),
     rsvpQuestions: uses('rsvp.questions'),
+    // G075: a design with a thank-you version names thank_you_on (docs/11 §3.6); others get no "After the wedding"
+    thankYou: paths.includes('thank_you_on'),
   };
 }
 
@@ -103,6 +110,20 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     })
     .map(([key, slot]) => ({ key, label: slot.label, source: slot.source, aspect: slot.aspect ?? null, ratio: parseAspect(slot.aspect) }));
   const pages = await themePages(theme);
+  const fields = themeFieldUse(pages.map(([, html]) => html));
+  // G075: the thank-you photo takes the place of the hero portrait on the card (docs/11 §3.6): same shape.
+  const hero = photos.find((p) => p.key === 'hero_portrait') ?? photos[0] ?? null;
+  const thankYou = fields.thankYou
+    ? {
+        photo: {
+          key: THANK_YOU_PHOTO_KEY,
+          label: 'Thank-you photo',
+          source: THANK_YOU_PHOTO_SOURCE,
+          aspect: hero?.aspect ?? null,
+          ratio: hero?.ratio ?? null,
+        },
+      }
+    : null;
   return {
     id: m.id,
     name: m.name,
@@ -110,7 +131,8 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     pageRules: themePageRules(pages),
     photos,
     optionalBlocks: themeOptionalBlocks(pages),
-    fields: themeFieldUse(pages.map(([, html]) => html)),
+    fields,
+    thankYou,
     sample: (await claimableTheme(m.id))?.demo ?? null,
   };
 }

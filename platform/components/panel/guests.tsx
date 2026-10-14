@@ -533,7 +533,7 @@ function DeadlineLine({ insights, content, canAdd }: { insights?: RsvpInsights; 
   if (d.state === 'off') {
     head = 'Replies on the website are off.';
     detail = add;
-  } else if (d.state === 'closed') {
+  } else if (d.state === 'closed' || d.state === 'thank_you') {
     head = deadlineText(d);
     detail = add;
   } else if (d.state === 'last_day') {

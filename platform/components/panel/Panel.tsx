@@ -40,6 +40,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
+import { isThankYouOn } from '../../lib/content/thank-you.ts';
 import { ORDER_PENDING_TEXT, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import {
   defaultNameDisplay,
@@ -61,11 +62,12 @@ import { BrandLogo } from './Brand.tsx';
 import { PANEL_FONTS } from './fonts.ts';
 import { IdentitySheet } from './IdentitySheet.tsx';
 import { PanelContext, useDeviceZone, type PanelContextValue } from './fields.tsx';
-import { BLOCK_TITLES, changedPages, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
+import { BLOCK_TITLES, changedPages, changedSections, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
 import { QrCode } from './QrCode.tsx';
 import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
+import { ThankYouFields } from './ThankYou.tsx';
 import { firstOpenStep, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
@@ -270,9 +272,18 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const notes = useMemo(() => prePublishNotes(content, theme, { deviceZone }), [content, theme, deviceZone]);
   const samples = useMemo(() => new Set(notes.sample.map((n) => n.path)), [notes]);
   const noteCount = notes.sample.length + notes.photos.length + notes.links.length + notes.empty.length;
-  const sectionIds = useMemo(() => SECTION_IDS.filter((id) => id !== 'faq' || theme.fields.faq), [theme.fields.faq]);
+  // A section the design has no place for is not offered (questions & answers G051, after the wedding G075).
+  const sectionIds = useMemo(
+    () => SECTION_IDS.filter((id) => (id !== 'faq' || theme.fields.faq) && (id !== 'thankyou' || theme.thankYou)),
+    [theme.fields.faq, theme.thankYou],
+  );
   const pageSections = useCallback((page: PageId) => PAGE_SECTIONS[page].filter((id) => sectionIds.includes(id)), [sectionIds]);
-  const visiblePages = useMemo(() => theme.pages.filter((p) => pageShown(theme.pageRules[p], content)), [theme, content]);
+  // G075: the couple's preview of the thank-you page (?thanks=1) shows the pages guests will have then.
+  const [previewThanks, setPreviewThanks] = useState(false);
+  const visiblePages = useMemo(
+    () => theme.pages.filter((p) => pageShown(theme.pageRules[p], content, { thankYou: previewThanks })),
+    [theme, content, previewThanks],
+  );
   const pageErrors = (page: PageId) => validation.errors.filter((i) => {
     const s = sectionForPath(i.path);
     return s !== null && PAGE_SECTIONS[page].includes(s);
@@ -299,6 +310,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meta.publishedAt]);
   const changes = useMemo(() => changedPages(content, publishedCopy), [content, publishedCopy]);
+  const changedParts = useMemo(() => changedSections(content, publishedCopy), [content, publishedCopy]);
 
   const summaries: Record<PageId, string> = {
     us: names,
@@ -349,6 +361,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   // On wide screens the preview sits next to the editor: it follows the open page (or section) (G060-fix).
   const openPage = route.view === 'section' ? route.page : null;
   const openFocus = route.view === 'section' ? route.focus : null;
+  // The thank-you preview lasts until the editor moves to another page (or the phone preview closes).
+  useEffect(() => setPreviewThanks(false), [openPage, route.view]);
   useEffect(() => {
     if (!wide || !openPage) return;
     const page = previewPageFor(openPage, openFocus);
@@ -531,7 +545,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       open={previewOpen}
       wide={wide}
       page={previewPage}
-      onClose={() => setPreviewOpen(false)}
+      thanks={previewThanks}
+      onThanksOff={() => setPreviewThanks(false)}
+      onClose={() => {
+        setPreviewOpen(false);
+        setPreviewThanks(false);
+      }}
     />
   );
 
@@ -572,13 +591,18 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             <ul className={styles.reviewList}>
               {changes.map((id) => {
                 const Icon = PAGE_ICONS[id];
+                // a page with several parts names the changed ones (e.g. "Date & time, After the wedding")
+                const parts = pageSections(id).length > 1 ? changedParts.filter((s) => PAGE_SECTIONS[id].includes(s)).map((s) => SECTION_TITLES[s]) : [];
                 return (
                   <li key={id}>
                     <button type="button" className={styles.reviewItem} onClick={() => go({ view: 'section', page: id, focus: null })} data-review-item={id}>
                       <span className={styles.rowIcon} aria-hidden="true">
                         <Icon size={20} strokeWidth={1.75} />
                       </span>
-                      <span className={styles.reviewItemText}>{PAGE_TITLES[id]}</span>
+                      <span className={styles.reviewItemText}>
+                        {PAGE_TITLES[id]}
+                        {parts.length ? <span className={styles.reviewItemSub}>{parts.join(', ')}</span> : null}
+                      </span>
                       <ChevronRight size={20} aria-hidden="true" className={styles.chev} />
                     </button>
                   </li>
@@ -754,6 +778,17 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         return <RsvpFields onOpenGuests={() => go({ view: 'guests' })} />;
       case 'photos':
         return <PhotoSlots intro />;
+      case 'thankyou':
+        return (
+          <ThankYouFields
+            slot={theme.thankYou?.photo ?? null}
+            defaultOpen={openFocus === 'thankyou'}
+            onPreview={() => {
+              setPreviewThanks(true);
+              openPreview('home');
+            }}
+          />
+        );
     }
   };
 
@@ -916,6 +951,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 steps={steps.slice(0, 3)}
                 readiness={ready100}
                 setupStep={setupStep}
+                thankYouOn={Boolean(theme.thankYou) && meta.status === 'published' && !rights.archived && isThankYouOn(publishedCopy ?? content)}
                 replies={replies}
                 onGo={goTo}
                 onPublish={() => void startPublish()}

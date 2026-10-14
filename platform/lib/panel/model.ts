@@ -3,6 +3,7 @@
 
 import type { GuestAccessView } from './guest-access.ts';
 import type { ContentRecord, Partner } from '../content/types.ts';
+import { buildView, type ViewOptions } from '../content/derive.ts';
 import { CONTENT_LIMITS } from '../content/limits.ts';
 import type { ValidationIssue } from '../content/validate.ts';
 import type { RightsView } from './rights.ts';
@@ -35,7 +36,7 @@ export interface PanelPhotoSlot {
   /** theme.json photo key, e.g. "hero". */
   key: string;
   label: string;
-  /** Content path, always under media., e.g. "media.memory_photos.0". */
+  /** Content path, under media. (e.g. "media.memory_photos.0") — or "thank_you.photo" for the thank-you photo (G075). */
   source: string;
   /** As written in theme.json ("4/5") or null. */
   aspect: string | null;
@@ -62,6 +63,8 @@ export interface ThemeFieldUse {
   faq: boolean;
   /** Custom questions in the guest reply form (content rsvp.questions, G051). */
   rsvpQuestions: boolean;
+  /** A thank-you version after the wedding (data-if="thank_you_on" …, G075): the panel offers "After the wedding". */
+  thankYou: boolean;
 }
 
 export interface PanelTheme {
@@ -75,6 +78,11 @@ export interface PanelTheme {
   /** Optional sections the theme's pages actually use (data-optional markers). */
   optionalBlocks: OptionalBlockKey[];
   fields: ThemeFieldUse;
+  /**
+   * Thank-you mode (G075), only for a design that has a thank-you version: its photo place (key "thank_you", source
+   * "thank_you.photo", the hero portrait's shape — the photo takes the place of the portrait on the card).
+   */
+  thankYou: { photo: PanelPhotoSlot } | null;
   /**
    * The theme's fictional demo record (what a site claimed on /start starts from), or null.
    * Values still equal to it are flagged as sample text before publishing.
@@ -159,8 +167,17 @@ export function isEditablePhotoSource(source: string): boolean {
   return MEDIA_SOURCE_RE.test(source);
 }
 
+/** Content path of the thank-you photo (G075; not a theme.json photo place: the panel offers it under Day & place). */
+export const THANK_YOU_PHOTO_SOURCE = 'thank_you.photo';
+/** Its key for the upload API (?slot=thank_you). */
+export const THANK_YOU_PHOTO_KEY = 'thank_you';
+
 /** The photo URL stored at a slot's source path ("" and missing -> null). */
 export function photoAt(content: ContentRecord, source: string): string | null {
+  if (source === THANK_YOU_PHOTO_SOURCE) {
+    const v = content.thank_you?.photo;
+    return typeof v === 'string' && v.trim() ? v : null;
+  }
   const m = MEDIA_SOURCE_RE.exec(source);
   if (!m) return null;
   const media = (content.media ?? {}) as Record<string, unknown>;
@@ -174,6 +191,11 @@ export function photoAt(content: ContentRecord, source: string): string | null {
  * trailing empty entries are dropped.
  */
 export function withPhoto(content: ContentRecord, source: string, url: string | null): ContentRecord {
+  if (source === THANK_YOU_PHOTO_SOURCE) {
+    const next = structuredClone(content);
+    next.thank_you = { ...(next.thank_you ?? {}), photo: url };
+    return next;
+  }
   const m = MEDIA_SOURCE_RE.exec(source);
   if (!m) throw new Error(`not an editable photo slot: ${source}`);
   const next = structuredClone(content);
@@ -248,7 +270,7 @@ export function withPartnerName(
 // Sections and issues
 
 /** Panel v2 sections (G060, docs/16 §4.3); each opens as its own page (#edit/<id>). */
-export const SECTION_IDS = ['names', 'date', 'venue', 'schedule', 'story', 'details', 'faq', 'rsvp', 'photos'] as const;
+export const SECTION_IDS = ['names', 'date', 'venue', 'schedule', 'thankyou', 'story', 'details', 'faq', 'rsvp', 'photos'] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export const SECTION_TITLES: Record<SectionId, string> = {
@@ -256,6 +278,8 @@ export const SECTION_TITLES: Record<SectionId, string> = {
   date: 'Date & time',
   venue: 'Venue',
   schedule: 'Schedule',
+  // G075: thank-you mode (a folded section at the end of Day & place; only for a design with a thank-you version)
+  thankyou: 'After the wedding',
   story: 'Our Story',
   details: 'Details',
   faq: 'Questions & answers',
@@ -265,7 +289,7 @@ export const SECTION_TITLES: Record<SectionId, string> = {
 
 export const SECTION_GROUPS: Array<{ title: string; ids: SectionId[] }> = [
   { title: 'Wedding basics', ids: ['names', 'date', 'venue'] },
-  { title: 'Your pages', ids: ['schedule', 'story', 'details', 'faq', 'rsvp'] },
+  { title: 'Your pages', ids: ['schedule', 'story', 'details', 'faq', 'rsvp', 'thankyou'] },
   { title: 'Photos', ids: ['photos'] },
 ];
 
@@ -313,6 +337,8 @@ export function sectionForPath(path: string): SectionId | null {
       return BLOCK_SECTION[second] ?? 'details';
     case 'media':
       return 'photos';
+    case 'thank_you':
+      return 'thankyou';
     default:
       return null;
   }
@@ -345,6 +371,8 @@ export function fieldLabel(path: string): string {
   if ((m = /^faq\.(\d+)\.(q|a)$/.exec(path))) return `Questions & answers, question ${n(m[1])}: ${m[2] === 'q' ? 'question' : 'answer'}`;
   if ((m = /^rsvp\.questions\.(\d+)\.label$/.exec(path))) return `RSVP, question ${n(m[1])}`;
   if ((m = /^rsvp\.questions\.(\d+)\.options\.(\d+)$/.exec(path))) return `RSVP, question ${n(m[1])}: choice ${n(m[2])}`;
+  if (path === 'thank_you.title') return 'Thank-you title';
+  if (path === 'thank_you.message') return 'Thank-you message';
   return 'This text';
 }
 
@@ -391,15 +419,22 @@ function present(v: unknown): boolean {
   return true;
 }
 
-/** Same rule as the theme engine: is this page served for this content? */
-export function pageShown(rule: PageRule | undefined, content: unknown): boolean {
+/**
+ * Same rule as the theme engine: is this page served for this content? Conditions read the derived fields too
+ * (thank_you_hides_details, G075: a Details page hidden after the wedding), at `opts.now`; `opts.thankYou` = the
+ * thank-you preview. Several space-separated conditions must all hold.
+ */
+export function pageShown(rule: PageRule | undefined, content: unknown, opts: ViewOptions = {}): boolean {
   if (!rule) return true;
   const blocks = ((content as { optional_blocks?: Record<string, unknown> })?.optional_blocks ?? {}) as Record<string, unknown>;
   if (rule.optional && blocks[rule.optional] !== true) return false;
   if (rule.if) {
-    const negate = rule.if.startsWith('!');
-    const path = negate ? rule.if.slice(1) : rule.if;
-    if (present(valueAt(content, path)) === negate) return false;
+    const view = buildView(content, opts);
+    for (const cond of rule.if.trim().split(/\s+/).filter(Boolean)) {
+      const negate = cond.startsWith('!');
+      const path = negate ? cond.slice(1) : cond;
+      if (present(valueAt(view, path)) === negate) return false;
+    }
   }
   return true;
 }

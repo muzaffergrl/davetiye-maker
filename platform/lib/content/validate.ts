@@ -66,6 +66,8 @@ export const SCHEMA_LIMITS = {
   questionLabel: QUESTION.label.maxLength,
   questionOptions: QUESTION.options.maxItems,
   questionOption: QUESTION.options.items.maxLength,
+  thankYouTitle: P.thank_you.properties.title.maxLength,
+  thankYouMessage: P.thank_you.properties.message.maxLength,
 } as const;
 
 export { CONTENT_LIMITS };

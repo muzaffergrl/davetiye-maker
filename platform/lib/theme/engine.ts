@@ -10,7 +10,8 @@
 //   data-url="map"                 href = urls.map (http/https/mailto/tel only), else href="#" + data-url-missing
 //   data-optional="our_story"      element kept only when optional_blocks.our_story === true
 //                                  (on <html>/<body>: the whole page is off -> 404)
-//   data-if="venue.address"        element kept only when the value is non-empty ("!path" negates)
+//   data-if="venue.address"        element kept only when the value is non-empty ("!path" negates); several
+//                                  conditions separated by spaces must all hold ("dress_code !thank_you_on", G075)
 //   data-repeat="schedule"         element repeated per array item; inner paths start with "." (".time")
 //   data-attr-<name>="path"        attribute <name> = raw value, or a {template} (allow-listed attributes only)
 //   data-calendar="ics|google"     <a> href = /<slug>/event.ics or a Google Calendar link (lib/calendar.ts);
@@ -30,6 +31,7 @@ import { Text, hasChildren, isTag, type AnyNode, type Element } from 'domhandler
 import { calendarEvent, googleCalendarUrl, type CalendarEvent } from '../calendar.ts';
 import { buildView, fieldKind, getPath } from '../content/derive.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
+import { THANK_YOU_DEFAULT_TITLE } from '../content/thank-you.ts';
 import { photoCandidates } from '../photo-variants.ts';
 import type { ThemeShareFiles } from './share.ts';
 import { OG_IMAGE_SIZE } from './share.ts';
@@ -57,6 +59,13 @@ export interface RenderOptions {
    * names and "You're invited" (no date, venue or place), and a robots noindex meta is added.
    */
   guestOnlyMeta?: boolean;
+  /** The moment of the render: thank-you mode (G075) depends on it. Default: now. */
+  now?: Date;
+  /**
+   * The couple's preview of the thank-you version (?thanks=1 next to a preview key, G075): thank_you_on is true whatever
+   * the mode and the date, and links between pages keep thanks=1. Ignored without a previewKey (guests never get it).
+   */
+  thankYouPreview?: boolean;
 }
 
 export interface RenderResult {
@@ -85,9 +94,13 @@ export function pageRoute(slug: string, page: PageName): string {
   return page === 'index' ? `/${slug}` : `/${slug}/${page}`;
 }
 
-function withPreview(route: string, previewKey: string | null | undefined, extraQuery = ''): string {
+/** Query value that shows the thank-you version in a preview (G075): /<slug>?preview=<key>&thanks=1. */
+export const THANK_YOU_PREVIEW_PARAM = 'thanks';
+
+function withPreview(route: string, previewKey: string | null | undefined, extraQuery = '', thanks = false): string {
   const params = new URLSearchParams(extraQuery.replace(/^\?/, ''));
   if (previewKey) params.set('preview', previewKey);
+  if (previewKey && thanks) params.set(THANK_YOU_PREVIEW_PARAM, '1');
   const q = params.toString();
   return q ? `${route}?${q}` : route;
 }
@@ -152,11 +165,15 @@ function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShar
 /** "You're invited" — the only words besides the names a protected website shows to link previews (G076). */
 const INVITED = "You're invited";
 
+/** Its counterpart in thank-you mode (G075): the fixed default title, never the couple's own words. */
+const THANKED = THANK_YOU_DEFAULT_TITLE;
+
 /**
- * Meta tags of a password-protected website (G076): names + "You're invited" only, whatever the template wrote
- * (its description and og:description name the date and the place). Adds <meta name="robots" content="noindex, nofollow">.
+ * Meta tags of a password-protected website (G076): names + "You're invited" (thank-you mode: "Thank you for celebrating
+ * with us") only, whatever the template wrote (its description and og:description name the date and the place). Adds
+ * <meta name="robots" content="noindex, nofollow">.
  */
-function guestOnlyMeta($: cheerio.CheerioAPI, names: string): void {
+function guestOnlyMeta($: cheerio.CheerioAPI, names: string, phrase: string = INVITED): void {
   const head = $('head').first();
   if (!head.length) return;
   const set = (attr: 'name' | 'property', key: string, value: string) => {
@@ -172,11 +189,11 @@ function guestOnlyMeta($: cheerio.CheerioAPI, names: string): void {
   const title = head.find('title').first();
   if (title.length) title.text(names);
   else head.prepend($('<title></title>').text(names));
-  set('name', 'description', INVITED);
+  set('name', 'description', phrase);
   set('property', 'og:title', names);
-  set('property', 'og:description', INVITED);
+  set('property', 'og:description', phrase);
   head.find('meta[name="twitter:title"]').attr('content', names);
-  head.find('meta[name="twitter:description"]').attr('content', INVITED);
+  head.find('meta[name="twitter:description"]').attr('content', phrase);
   head.find('meta[property="og:url"], meta[name="keywords"]').remove();
   set('name', 'robots', 'noindex, nofollow');
 }
@@ -186,7 +203,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   const warnings = new Set<string>();
   const warn = (msg: string) => warnings.add(msg);
   const $ = cheerio.load(opts.html);
-  const view = buildView(opts.content);
+  // The thank-you preview (G075) needs a preview key: a guest's ?thanks=1 changes nothing.
+  const thanksPreview = Boolean(opts.thankYouPreview && opts.previewKey);
+  const view = buildView(opts.content, { now: opts.now, thankYou: thanksPreview });
   const locale = typeof view.locale === 'string' ? view.locale : 'en-US';
   const blocks = (view.optional_blocks ?? {}) as Record<string, unknown>;
 
@@ -438,12 +457,18 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       if (blocks[key] !== true) return false;
     }
     if ('data-if' in a) {
-      let expr = a['data-if'].trim();
-      const negate = expr.startsWith('!');
-      if (negate) expr = expr.slice(1);
-      const abs = resolvePath(expr, scope);
-      a['data-if'] = (negate ? '!' : '') + abs;
-      if (isPresent(getPath(view, abs)) === negate) return false;
+      // One condition ("path" / "!path") or several separated by spaces, all of which must hold (G075).
+      const conditions = a['data-if'].trim().split(/\s+/).filter(Boolean);
+      let ok = true;
+      a['data-if'] = conditions
+        .map((cond) => {
+          const negate = cond.startsWith('!');
+          const abs = resolvePath(negate ? cond.slice(1) : cond, scope);
+          if (isPresent(getPath(view, abs)) === negate) ok = false;
+          return (negate ? '!' : '') + abs;
+        })
+        .join(' ');
+      if (!ok) return false;
     }
     return true;
   };
@@ -516,7 +541,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       const hashAt = suffix.indexOf('#');
       const query = hashAt === -1 ? suffix : suffix.slice(0, hashAt);
       const hash = hashAt === -1 ? '' : suffix.slice(hashAt);
-      return withPreview(pageRoute(slug, target), opts.previewKey, query) + hash;
+      return withPreview(pageRoute(slug, target), opts.previewKey, query, thanksPreview) + hash;
     }
     if (file.endsWith('.html')) warn(`link to "${file}" is not a declared theme page`);
     return rewriteAsset(value);
@@ -571,7 +596,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
 
   const names = typeof view.name_display === 'string' ? view.name_display.trim() : '';
   writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? `${names} wedding invitation` : 'Wedding invitation');
-  if (opts.guestOnlyMeta) guestOnlyMeta($, names || 'Our wedding');
+  if (opts.guestOnlyMeta) guestOnlyMeta($, names || 'Our wedding', view.thank_you_on === true ? THANKED : INVITED);
 
   // Theme inline scripts are trusted template code (content can never create a <script>:
   // every inserted value is text). Their hashes go into the page CSP.
@@ -596,7 +621,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     page,
     preview: Boolean(opts.previewKey),
     pages: Object.fromEntries(
-      Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey)]),
+      Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey, '', thanksPreview)]),
     ),
     derived: {
       date_display: formatDate(view.date, locale),
@@ -607,6 +632,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       venue_city_region: venue.city_region ?? null,
       venue_city_region_country: venue.city_region_country ?? null,
       countdown_target_utc: view.countdown_target_utc ?? null,
+      // G075: theme JS may skip what has no place after the wedding (countdown, accents of the invitation)
+      thank_you_on: view.thank_you_on === true,
     },
   };
   $('#site-data').remove();
@@ -631,6 +658,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   html.attr('data-page', page);
   if (opts.variant) html.attr('data-variant', opts.variant);
   if (opts.previewKey) html.attr('data-preview', 'true');
+  // CSS hook of thank-you mode (G075): html[data-thank-you] (the content itself switches with data-if="thank_you_on").
+  if (view.thank_you_on === true) html.attr('data-thank-you', '');
 
   return { html: $.html(), warnings: [...warnings], disabled: false, scriptHashes: [...scriptHashes] };
 }

@@ -50,7 +50,8 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
     if (template === null) return demoNotFound();
     const { html, disabled, scriptHashes } = renderTemplate({
       html: template,
-      content: theme.demo,
+      // The demo always shows the invitation (G075): its fictional wedding date passing must not turn it into a thank-you.
+      content: { ...theme.demo, thank_you: { ...(theme.demo.thank_you ?? {}), mode: 'off' } },
       theme: theme.manifest,
       page,
       // pageRoute() builds "/<slug>/<page>": this keeps the demo's page links under /start/demo/<theme>.

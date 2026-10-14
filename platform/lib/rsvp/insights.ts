@@ -61,8 +61,11 @@ export function replyPeople(r: ReplyLike): Person[] {
 // Deadline
 
 export interface DeadlineInsight {
-  /** open: replies come in · last_day: today is the last day · closed: past the deadline · off: replies on the website are off · none: no deadline */
-  state: 'open' | 'last_day' | 'closed' | 'off' | 'none';
+  /**
+   * open: replies come in · last_day: today is the last day · closed: past the deadline · off: replies on the website are
+   * off · thank_you: the website shows its thank-you version (G075), replies are closed · none: no deadline
+   */
+  state: 'open' | 'last_day' | 'closed' | 'off' | 'thank_you' | 'none';
   /** Whole days from today (in the site's time zone) to the last day to reply: 0 = today, negative = past. Null without a deadline. */
   daysLeft: number | null;
   /** The last day as guests read it: "April 3, 2027". */
@@ -93,6 +96,7 @@ export function deadlineInsight(content: unknown, now: Date = new Date()): Deadl
   const display = formatDate(c.rsvp?.deadline, typeof c.locale === 'string' ? c.locale : 'en-US');
   const daysLeft = daysBetween(todayIn(c.timezone, now), c.rsvp?.deadline);
   if (w.reason === 'disabled') return { state: 'off', daysLeft, display };
+  if (w.reason === 'thank_you') return { state: 'thank_you', daysLeft, display };
   if (w.reason === 'deadline') return { state: 'closed', daysLeft, display };
   if (daysLeft === null) return { state: 'none', daysLeft, display };
   return { state: daysLeft <= 0 ? 'last_day' : 'open', daysLeft: Math.max(0, daysLeft), display };
@@ -105,6 +109,8 @@ export function deadlineText(d: DeadlineInsight): string | null {
       return 'Replies on the website are off.';
     case 'closed':
       return d.display ? `Replies closed on ${d.display}.` : 'Replies are closed.';
+    case 'thank_you':
+      return 'Replies are closed: your website shows its thank-you page.';
     case 'last_day':
       return 'Today is the last day to reply.';
     case 'open':

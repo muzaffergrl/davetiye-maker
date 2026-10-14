@@ -25,7 +25,8 @@ export const PAGE_TITLES: Record<PageId, string> = {
 /** The sections each page shows, top to bottom. */
 export const PAGE_SECTIONS: Record<PageId, SectionId[]> = {
   us: ['names'],
-  day: ['date', 'venue', 'schedule'],
+  // G075: "After the wedding" (thank-you mode) folds in at the end of Day & place (no 7th page, K29)
+  day: ['date', 'venue', 'schedule', 'thankyou'],
   photos: ['photos'],
   story: ['story'],
   details: ['details', 'faq'],
@@ -66,6 +67,7 @@ const PREVIEW_OF_SECTION: Partial<Record<SectionId, string>> = {
   faq: 'details',
   rsvp: 'rsvp',
   photos: 'home',
+  thankyou: 'home',
 };
 const PREVIEW_OF_PAGE: Record<PageId, string> = { us: 'index', day: 'details', photos: 'home', story: 'story', details: 'details', rsvp: 'rsvp' };
 
@@ -111,6 +113,17 @@ export function changedPaths(a: ContentRecord | null, b: ContentRecord | null): 
   return out;
 }
 
+/** The sections whose content differs from the published copy (Review names them inside a page, e.g. "After the wedding"). */
+export function changedSections(draft: ContentRecord, published: ContentRecord | null): SectionId[] {
+  if (!published) return [];
+  const out = new Set<SectionId>();
+  for (const p of changedPaths(draft, published)) {
+    const s = sectionForPath(p);
+    if (s) out.add(s);
+  }
+  return SECTION_IDS.filter((id) => out.has(id));
+}
+
 /** The editor pages whose content differs from the published copy, in page order. */
 export function changedPages(draft: ContentRecord, published: ContentRecord | null): PageId[] {
   if (!published) return [];
@@ -154,7 +167,8 @@ export function readiness(input: {
   let sum = 0;
   let total = 0;
   for (const s of sections) {
-    if (s === 'photos') continue;
+    // the photos count below; "After the wedding" is optional (an error in it still shows as a next step)
+    if (s === 'photos' || s === 'thankyou') continue;
     total += 1;
     if (!open.has(s)) sum += 1;
   }

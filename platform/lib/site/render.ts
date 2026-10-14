@@ -10,7 +10,7 @@ import { publicOrigin } from '../panel/http.ts';
 import { isArchived } from '../panel/rights.ts';
 import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
-import { renderTemplate } from '../theme/engine.ts';
+import { renderTemplate, THANK_YOU_PREVIEW_PARAM } from '../theme/engine.ts';
 import { loadTheme, readThemePage, SUB_PAGES, type PageName } from '../theme/theme.ts';
 
 /**
@@ -175,6 +175,10 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
       share: theme.share,
       // link previews and the tab of a protected site: the names and "You're invited" only (G076)
       guestOnlyMeta: guestOnly,
+      // G075: thank-you mode follows the clock (the end of the wedding day in the site's time zone); the couple's
+      // preview can show it ahead of time (?thanks=1 next to a preview key; ignored for guests).
+      now: new Date(),
+      thankYouPreview: preview && url.searchParams.get(THANK_YOU_PREVIEW_PARAM) === '1',
     });
     if (warnings.length && process.env.NODE_ENV !== 'production') {
       console.warn(`[theme ${theme.manifest.id}/${page}] ${warnings.join(' | ')}`);

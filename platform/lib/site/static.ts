@@ -2,6 +2,7 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { isThankYouOn, thankYouPhoto } from '../content/thank-you.ts';
 import { getDataAdapter } from '../data/index.ts';
 import type { SiteRecord } from '../data/types.ts';
 import { photoCandidates } from '../photo-variants.ts';
@@ -76,16 +77,19 @@ export async function serveThemeAsset(themeId: string, segments: string[] | unde
 /**
  * Every photo URL guests can be shown (media.*: strings and lists of strings). The story photos
  * (media.memory_photos) only count while the Our Story section is on: switching it off takes them down.
+ * The thank-you photo (thank_you.photo, G075) only counts while thank-you mode is on (it is on no page before).
  */
-function mediaUrls(content: unknown): string[] {
+function mediaUrls(content: unknown, now: Date = new Date()): string[] {
   const c = content as { media?: Record<string, unknown>; optional_blocks?: Record<string, unknown> } | null;
   const media = c?.media;
-  if (!media || typeof media !== 'object') return [];
   const storyOn = c?.optional_blocks?.our_story === true;
-  return Object.entries(media)
+  const urls = (media && typeof media === 'object' ? Object.entries(media) : [])
     .filter(([key]) => key !== 'memory_photos' || storyOn)
     .flatMap(([, v]) => (Array.isArray(v) ? v : [v]))
     .filter((v): v is string => typeof v === 'string' && v !== '');
+  const thanks = thankYouPhoto(content);
+  if (thanks && isThankYouOn(content, now)) urls.push(thanks);
+  return urls;
 }
 
 /**
