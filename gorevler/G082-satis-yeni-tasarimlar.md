@@ -2,8 +2,8 @@
 id: G082
 baslik: Onaylanan yeni tasarımları satış sitesine ekle (05 Mediterranean Lemon; 02/04 onaylanınca) — tasarım sayfası, metin, gerçek ekranlar
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G082
 oncelik: 2
 bagimli: [G405, G080]
 yazar: [platform/lib/marketing/, platform/public/marketing/designs/, platform/scripts/marketing-assets.ts, platform/tests/, platform/previews/g082/]
@@ -24,3 +24,4 @@ G405 (05 Mediterranean Lemon) onaylandı ama listede yok → satılamaz ve /star
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G405 onaylandı
+- 2026-10-14 alindi: claude-G082
