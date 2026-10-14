@@ -32,9 +32,14 @@ Tasarım 15'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+Kısım 1 ara kayıt — gpt-gorsel-G (2026-10-14):
+- W1 tamamlandı: `comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png`; tamamı `collections/15_Cherry_Blossom/assets/gpt/` altında, 1024×1536.
+- W1.1 ilk denemede fazla yatay görünen zarfı daraltmak için yeniden üretildi; seçilen ikinci çıktı sade dosya adına kaydedildi. Diğer W1 ekranları bu seçilen ekranı referans aldı.
+- `kit_check` dosya denetimleri W1 için 5/5 GEÇTİ (oran, opaklık, gereken ekranlarda yeşil pencere). Beş ekranın Kontrol satırları görsel olarak da denetlendi.
+- Bu oturumda sıradaki üç parça: W2 `bg_page`, `bg_tile`, `envelope_closed`. W2'nin diğer parçaları ve PAKET 2 bu oturumun kapsamı dışında; görev `alindi` kalır.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-G; bu oturum kısım 1: W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
+- 2026-10-14 ara kayıt: gpt-gorsel-G; W1 5/5 tamamlandı ve dosya denetimleri geçti; W1.1 zarf oranı için yeniden üretildi.
