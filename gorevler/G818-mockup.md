@@ -2,8 +2,8 @@
 id: G818
 baslik: Tasarım 18 Wildflower Meadow Vellum — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-ui-site
 oncelik: 2
 bagimli: []
 yazar: [collections/18_Wildflower_Vellum/assets/gpt/mockups/]
@@ -24,7 +24,7 @@ Pilot: 01/03 (G801/G803).
 2. Her ekran **düz, opak, saf #00FF00**; dört köşesi görünür; parmak, yaprak, kurdele ekrana binmez. Telefon/laptopta logo yok.
    Yazı/harf/logo hiçbir yerde yok.
 3. Beğenmediğini yeniden üret (`_v2`, `_v3`); seçtiğin sade adla kalır. Ek önizleme/rapor dosyası üretme.
-4. Ara kayıt: 3 sahnede bir commit + push. Kontrol: `python3 tools/kit_check.py collections/18_Wildflower_Vellum --paket 3`.
+4. Ara kayıt: 2 sahnede bir commit + push (kullanıcı talebi, 2026-10-14). Kontrol: `python3 tools/kit_check.py collections/18_Wildflower_Vellum --paket 3`.
 
 ## Bitti sayılması için
 - [ ] 5 sahne doğru yolda; `kit_check --paket 3` 5/5 geçti
@@ -35,3 +35,4 @@ Pilot: 01/03 (G801/G803).
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
+- 2026-10-14 alindi: gpt-ui-site
