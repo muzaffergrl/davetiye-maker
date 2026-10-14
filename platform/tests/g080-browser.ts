@@ -161,7 +161,6 @@ try {
     none('/start @390: axe-core, no serious/critical violations', await axeViolations(page));
     none('/start @390: touch targets ≥ 44 × 44 px', await smallTargets(page));
     await page.waitForTimeout(1200); // the demo's opening scene settles in the mini preview
-    await shot(page, 'start_390');
     await shot(page, 'start_full_390', true);
 
     // errors shown: still readable (contrast) and the same rules as before
