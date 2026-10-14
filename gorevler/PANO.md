@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 36 · alindi 2 · inceleme 2 · blokaj 293 · bitti 36 · toplam 369
+Özet: hazir 36 · alindi 5 · inceleme 2 · blokaj 293 · bitti 36 · toplam 372
 
 ## claude-canva
 
@@ -160,8 +160,10 @@ Bağımlılık bekleyen: 0 · Biten: 1
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (82)**
+**Üzerinde çalışılan / incelemede / blokaj (84)**
 
+- `G060` alindi · wf-hiz — Panel v2 — çağdaş, en kullanıcı dostu panel + kötüye kullanıma karşı düzenleme hakkı sistemi
+- `G061` alindi · wf-hiz — Satış websitesi — anlatan, satışa yönlendiren, SEO/GEO/AEO'da en üst düzey
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
@@ -253,10 +255,11 @@ Bağımlılık bekleyen: 17 · Biten: 25
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (22)**
+**Üzerinde çalışılan / incelemede / blokaj (23)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
 - `G059` inceleme · wf-ilan — Platform modeline göre set paketi (docs/05) + tasarım 01 ve 03 için Etsy ilan kiti ve alıcı START HERE PDF'i
+- `G062` alindi · wf-strateji — Karar belgesi — marka/dükkân adı adayları (alan adı müsaitliği), Etsy merkezli fiyatlandırma, satış sonrası ve müşteri bağlama
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
