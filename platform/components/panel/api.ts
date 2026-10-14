@@ -2,6 +2,7 @@
 // Authorization header (never in a URL the panel builds, except the CSV download link).
 
 import type { ContentRecord } from '../../lib/content/types.ts';
+import type { Identity } from '../../lib/panel/rights.ts';
 
 export interface ApiResult<T = Record<string, unknown>> {
   ok: boolean;
@@ -57,6 +58,9 @@ export function panelApi(slug: string, editKey: string) {
         body: blob,
       }),
     publish: (baseUpdatedAt: string) => call<Record<string, unknown>>(`${base}/publish`, jsonInit('POST', { baseUpdatedAt })),
+    /** Names / date after the first publish (G060): intent "change" confirms using one change. */
+    identity: (identity: Identity, intent: 'fix' | 'change', baseUpdatedAt: string) =>
+      call<Record<string, unknown>>(`${base}/identity`, jsonInit('POST', { identity, intent, baseUpdatedAt })),
     unpublish: () => call<Record<string, unknown>>(`${base}/unpublish`, { method: 'POST', headers: auth }),
     replies: () => call<Record<string, unknown>>(`/api/rsvp/${encodeURIComponent(slug)}/responses`, { headers: auth }),
     /** "remove" deletes replies for good; "keep" releases replies held for review. Answers with the new summary. */

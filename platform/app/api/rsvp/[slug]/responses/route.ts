@@ -8,6 +8,7 @@ import { authorizeEditor, manageRsvps, MAX_RSVP_ACTION_IDS, rsvpSummary } from '
 import { errorResult } from '../../../../../lib/rsvp/guest.ts';
 import { BodyTooLargeError, editKeyFrom, isJsonRequest, jsonResponse, readLimitedText, unauthorized } from '../../../../../lib/rsvp/http.ts';
 import { bearerKey } from '../../../../../lib/panel/http.ts';
+import { ARCHIVED_MESSAGE, isArchived } from '../../../../../lib/panel/rights.ts';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -33,6 +34,8 @@ export async function POST(req: Request, ctx: { params: Promise<{ slug: string }
     const adapter = getDataAdapter();
     const site = await authorizeEditor(adapter, slug, bearerKey(req));
     if (!site) return unauthorized();
+    // An archived site (G060) keeps its replies readable (list, CSV) but no longer changes them.
+    if (isArchived(site)) return jsonResponse({ status: 403, body: { ok: false, code: 'archived', message: ARCHIVED_MESSAGE } });
     if (!isJsonRequest(req)) return jsonResponse(errorResult(415, 'unsupported'));
     let body: { action?: unknown; ids?: unknown };
     try {

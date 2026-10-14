@@ -9,6 +9,13 @@ export const RESERVED_SLUGS: ReadonlySet<string> = new Set([
   'terms', 'privacy', 'legal', 'pricing', 'blog', 'shop', 'login', 'logout', 'signin', 'signup',
   'register', 'account', 'dashboard', 'settings', 'static', 'public', 'assets', 'app', 'www',
   'mail', 'status', 'robots.txt', 'sitemap.xml', 'favicon.ico', 'manifest.json',
+  // marketing site (G061, docs/14 §5.4): app/(marketing)/ pages share the root with couple sites, and a static
+  // segment wins over /[slug] — a site with one of these names would never open. tests/marketing-slug.test.ts
+  // checks that every marketing route's first segment is in this list.
+  'designs', 'design', 'guides', 'guide', 'how-it-works', 'features', 'examples', 'gallery', 'reviews', 'compare',
+  'checkout', 'buy', 'cart', 'order', 'orders', 'gift', 'search', 'feed', 'rss', 'sitemap', 'llms', 'llms.txt',
+  'llms-full.txt', 'opengraph-image', 'twitter-image', 'icon', 'apple-icon', 'save-the-date', 'wedding-websites',
+  'refund', 'refunds', 'cookies', 'accessibility', 'marketing', 'not-found',
 ]);
 
 /** 3-48 chars, lowercase letters, digits and single hyphens; no leading/trailing hyphen. */

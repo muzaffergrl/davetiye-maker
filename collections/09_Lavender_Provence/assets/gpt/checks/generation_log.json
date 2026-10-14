@@ -1,0 +1,279 @@
+{
+  "agent": "gpt-gorsel-E",
+  "task": "G209",
+  "date": "2026-10-14",
+  "order": "W1 → W2 → Paket 2, one conversation",
+  "note": "latest_generated_file may be a rejected attempt; envelope_closed.png uses envelope_closed_v2.png, envelope_open.png uses envelope_open_v1.png, closure.png uses closure_v1.png. Original source prompts are recorded verbatim. Corrective attempts and remaining issues are detailed in gorevler/G209-gorsel.md.",
+  "images": [
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/comps/web_1_envelope.png",
+      "source_prompt": "Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat framing the top-left and bottom-right corners and a few small floating accents (a pressed dried lavender stem, a pressed white daisy, a small pressed sprig of wild thyme). Centered slightly below the middle: a small natural cream linen drawstring pouch (#FAF8F3, fine visible weave), portrait-shaped, its mouth gathered closed at the top, closed, with a small bundle of dried lavender stems tied with natural jute twine in a simple bow — tied around the gathered neck of the pouch. Above it, typography in a light airy brush script for the names and a delicate Garamond-style serif: a small spaced line \"YOU ARE INVITED\" and the names \"Amélie & Louis\" large; below the linen pouch a small spaced line \"TAP TO OPEN\". All decor in pressed flower flat-lay photograph style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-c7601f46-0ba2-4b4e-a813-8d1d6c0ee82f.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/comps/web_2_home.png",
+      "source_prompt": "Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the linen pouch: a small cream deckle-edged cotton card with a thin border of tiny pressed lavender florets around a portrait photo window in its upper part and plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line \"We're getting married\" in the script and a small spaced line \"JULY 3, 2027 · GORDES\". Under the card: the names \"Amélie & Louis\" large in the script, a small spaced line \"SATURDAY · JULY 3, 2027\", the venue \"Les Jardins de Lavande\" and \"Gordes, France\" in italic serif, four small elegant countdown boxes \"263 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS\", and a soft dusty-purple pill button with cream lettering labelled \"RSVP\". A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-66e15377-76f3-441c-b96f-cb76d55cd952.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/comps/web_3_story.png",
+      "source_prompt": "Same design, page 3 of 5: our story. The title \"Our Story\" in the script at the top with a small spaced subtitle \"MOMENTS WE HOLD DEAR\". Below: three pressed-flower cards tumbling in at loose angles as if carried by a summer breeze, not overlapping; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: \"Rosé in the square\", \"In the lavender\", \"Tied together\". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-0b3400ba-e623-4dd7-8d0c-d07027cdf751.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/comps/web_4_details.png",
+      "source_prompt": "Same design, page 4 of 5: details. A tall cream deckle-edged card with only one pressed lavender stem laid along the top holds the title \"Order of the Day\" in the script and three schedule rows separated by tiny dividers (a single pressed lavender stem with one small white daisy lying horizontally, flat-lay photo): \"4:00 PM — Ceremony — The Lavender Field\", \"5:00 PM — Cocktail Hour — The Stone Terrace\", \"6:30 PM — Reception — The Old Barn\" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape cream deckle-edged card with a thin border of tiny pressed lavender florets around the window, its window filled with flat pure green #00FF00 (the venue photo), under it \"Les Jardins de Lavande\" and \"Gordes, France\", then a small line \"DRESS CODE · Summer chic\". A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-390fe27f-f006-422f-9962-fd28f22113b2.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/comps/web_5_rsvp.png",
+      "source_prompt": "Same design, page 5 of 5: RSVP. The same card as page 4 with the title \"Will You Join Us?\" in the script, \"Kindly reply by May 22, 2027\" in serif, a soft dusty-purple pill button with cream lettering labelled \"RSVP\", the line \"We can't wait to celebrate with you\" and \"With love, Amélie & Louis\" in the script at the bottom; a small lavender-and-twine tie — the same one as on the linen pouch — rests at the base of the card. A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-3b6ceff1-d00b-4e11-857d-bdc8a1e778ad.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/bg_page.png",
+      "source_prompt": "The page background of the W1 screens alone, as a vertical phone-screen background: soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no linen pouch, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-8e6dac6e-4890-418c-936c-d81f7d9c18e6.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/bg_tile.png",
+      "source_prompt": "A seamless tileable square texture for long website pages: natural undyed cream linen weave (#FAF8F3), evenly lit. Calm, even and very low in contrast; no objects, no flowers, no vignette, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.",
+      "size_requested": [
+        1024,
+        1024
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-e65ea3ff-6d01-47a8-8b58-cafbcc4e91a1.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/envelope_closed.png",
+      "source_prompt": "The same linen pouch as in the W1 screens, alone and closed, WITHOUT the lavender-and-twine tie: a small natural cream linen drawstring pouch (#FAF8F3, fine visible weave), portrait-shaped, its mouth gathered closed at the top. Horizontally centered, its bottom edge at about 90% of the image height and its width about 60% of the image width; the empty upper part is left for the card to rise into. The edges where this piece will be cut must read clearly: the gathered mouth — a crisp line with a slight contact shade on the object itself (not a cast shadow). Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-470be313-7772-42e0-9859-01b31c2651d9.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/closure.png",
+      "source_prompt": "Only a small bundle of dried lavender stems tied with natural jute twine in a simple bow, alone, exactly as it sits on the linen pouch in the W1 screens (tied around the gathered neck of the pouch), with no linen pouch behind it. Draw it on a canvas of exactly the same size as envelope_closed.png and give envelope_closed.png as the reference image: the lavender-and-twine tie sits exactly where it wraps the linen pouch there, so the two images overlay pixel for pixel. Where it wraps around the edges, its ends stop exactly at the linen pouch's outline. The linen pouch itself is NOT drawn. Front view, perfectly straight. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-21107917-0110-4f69-b3dc-e0aa78fafe8f.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/envelope_open.png",
+      "source_prompt": "The SAME linen pouch as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: its gathered mouth loosened and opened wide into an oval, seen very slightly from above so the inside of the back wall shows soft lavender (#9C8FC4) linen with a delicate block-printed sprig pattern in cream as the lining; the front rim stays plain cream linen (not folded over); the pouch empty. The front rim of the mouth is a crisp, clearly visible edge against the lining. No card, nothing inside, no lavender-and-twine tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-78a98eeb-3f68-4af4-9575-1891a36d7af9.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/card_small.png",
+      "source_prompt": "The small card that comes out of the linen pouch in W1.2, alone: a small cream deckle-edged cotton card with a thin border of tiny pressed lavender florets around a portrait photo window in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the linen pouch so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-a1de7f77-93a4-4803-9f51-b388f946a469.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/invitation_card.png",
+      "source_prompt": "The large invitation card of this design, alone: a tall cream deckle-edged handmade cotton card with real pressed lavender stems, small white daisies and golden wheat ears laid along the left edge and across the top, pressed completely flat. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-686c4313-5ee8-49ea-91aa-92745e253a91.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/info_card.png",
+      "source_prompt": "The lighter card from W1.4 and W1.5, alone: a tall cream deckle-edged card with only one pressed lavender stem laid along the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-6b2a69f2-cd81-4e04-ba2f-e4e3a6a5a481.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/frame_portrait.png",
+      "source_prompt": "One photo frame from W1.3, alone and upright: a cream deckle-edged card with a thin border of tiny pressed lavender florets around the window. The window inside is a portrait window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-d3454683-475d-4bdf-b8fd-adec9dadbbb6.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/frame_landscape.png",
+      "source_prompt": "A landscape cream deckle-edged card with a thin border of tiny pressed lavender florets around the window, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1536,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-d2b3938a-48b0-447a-b6e9-4c147f5c485a.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/florals_tl.png",
+      "source_prompt": "ONE cluster of real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-34b86a1f-6384-4f2d-9d62-253efec16f6d.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/florals_br.png",
+      "source_prompt": "ONE cluster of real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-fdd713d0-0d90-480f-ac9f-222a184f0d88.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/accent_1.png",
+      "source_prompt": "Exactly ONE pressed dried lavender stem, in the same pressed flower flat-lay photograph style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-fd6387a6-4936-4d32-b059-d24c71c3f98a.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/accent_2.png",
+      "source_prompt": "Exactly ONE pressed white daisy, in the same pressed flower flat-lay photograph style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-60159bd1-1562-4f9b-b1bd-a813cf67ee83.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/accent_3.png",
+      "source_prompt": "Exactly ONE small pressed sprig of wild thyme with tiny pink-purple flowers, in the same pressed flower flat-lay photograph style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1024,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-887cf81b-8054-40f1-ba08-218be45cb801.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/divider.png",
+      "source_prompt": "A small horizontal divider in the same pressed flower flat-lay photograph style: a single pressed lavender stem with one small white daisy lying horizontally, flat-lay photo, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "size_requested": [
+        1536,
+        1024
+      ],
+      "transparent_requested": true,
+      "latest_generated_file": "/workspace/generated_images/exec-2da99b82-1956-4cc6-ad99-c6411c2376d9.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/parts/web_hero.png",
+      "source_prompt": "Wide horizontal version of the same design for the desktop website header: soft lavender-tinted handmade cotton paper (#F3F0F7 at the top deepening to #D9D2E8 at the bottom) photographed flat from directly above in soft daylight, faint paper fibers, calm empty center, with real pressed and dried lavender stems, small white daisies and golden wheat ears arranged as one corner cluster, photographed flat from above and pressed completely flat framing the left and right edges, and the closed linen pouch with its lavender-and-twine tie resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is also cropped to 1200×630 for link previews: keep the closed linen pouch with its lavender-and-twine tie completely visible with at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, colors and light as the W1 screens. No text, no letters.",
+      "size_requested": [
+        1536,
+        1024
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-1288453d-2d35-431f-9bea-91bbe6fc54e3.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/photos/hero_portrait.jpg",
+      "source_prompt": "Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other in a blooming lavender field at golden hour, soft hills behind; she wears a flowing lavender chiffon midi dress, a straw hat in her hand, he wears a light stone-colored linen suit with an open collar. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-adb160b4-24b9-4204-b79e-8dad973d9049.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/photos/story_1.jpg",
+      "source_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a small bistro table in a sunny stone village square, two glasses of rosé and a bunch of lavender, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-bb9a7cac-ec21-4571-887d-055129d85a21.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/photos/story_2.jpg",
+      "source_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment between the rows of a lavender field at sunset: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-eef963c8-6093-4582-815b-341ad147c0cb.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/photos/story_3.jpg",
+      "source_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small bundle of lavender tied with twine, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.",
+      "size_requested": [
+        1024,
+        1536
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-ca8c88c5-fcdc-4c30-addf-ff1c58c546ef.png"
+    },
+    {
+      "file": "collections/09_Lavender_Provence/assets/gpt/photos/venue.jpg",
+      "source_prompt": "A fictional Provençal stone farmhouse wedding venue at golden hour: honey-colored stone walls with lavender-blue shutters, a terrace with rows of wooden chairs facing long lavender rows, an old stone barn, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.",
+      "size_requested": [
+        1536,
+        1024
+      ],
+      "transparent_requested": false,
+      "latest_generated_file": "/workspace/generated_images/exec-2280c95a-6c7c-4688-b5d8-e123f6bc0f06.png"
+    }
+  ]
+}

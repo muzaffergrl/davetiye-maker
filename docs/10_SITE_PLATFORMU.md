@@ -7,10 +7,21 @@ düzenler. Bu belge platformun tek kaynağıdır.
 1. Etsy'den bir tasarım (tema) satın alır. İndirdiği kısa PDF'te **başlat linki** var: `/start?theme=<tema>`.
 2. `/start`: Etsy sipariş numarası + e-posta → taslak site oluşur → **düzenleme linki** verilir
    (gizli anahtarlı, şifresiz). Link e-postayla gönderilir (e-posta sağlayıcısı sonra; ilk sürümde ekranda gösterilir + "kaydet" uyarısı).
-3. Panel (`/edit/<slug>?k=<anahtar>`), telefonda rahat: isimler, tarih/saat, mekân, program satırları,
-   metinler, isteğe bağlı bölümler, fotoğraf yükleme (kırpma), RSVP son tarihi. Canlı önizleme. **Yayınla.**
+3. Panel (`/edit/<slug>?k=<anahtar>`), telefonda rahat (Panel v2, G060, tasarım `docs/16_PANEL_V2.md`): ilk açılışta
+   6 adımlı **kurulum sihirbazı** (isimler → tarih/saat → mekân → fotoğraflar (kırpma) → kontrol → yayınla), sonra
+   **Home · Edit · Guests · Share** görünümleri: bölüm bölüm düzenleme (isimler, tarih, mekân, program, hikâye, detaylar,
+   SSS, RSVP, fotoğraflar), canlı önizleme, otomatik kayıt göstergesi, çevrimdışı yerel yedek. **Yayınla.**
+   - **Düzenleme hakkı (G060, sunucuda zorlanır):** ilk yayından sonra **isimler ve tarih** (kimlik alanları) yalnız
+     sınırlı sayıda değişir (varsayılan 3; panelde "2 of 3 changes left"); alan başına ≤ 2 karakterlik yazım düzeltmesi ücretsiz;
+     diğer her şey sınırsız. Hak bitince panel destek mesajı gösterir; destek `scripts/grant-identity-change.ts` ile hak
+     ekleyebilir (kayıt site günlüğünde). Sayılar tek yapılandırmadan gelir (`lib/marketing/config.ts`).
+   - **Arşiv (K25):** site düğün tarihinden **12 ay** sonra (site saat diliminde ertesi gün 00:00) salt okunur arşive geçer:
+     misafir sayfaları 410, RSVP kapalı, panel okunur, yanıtlar CSV olarak indirilebilir. Öneri (karar bekliyor, docs/16 §15):
+     en geç ilk yayından 48 ay sonra. Arşivde verinin silinmesi henüz yok.
+   - **E-posta ile giriş (magic link):** arayüz notu var, e-posta sağlayıcısı olmadığı için **kapalı** (`/signin` dürüst metin,
+     `POST /api/signin` → 503).
 4. Site: `/<slug>` = kapalı zarf açılış sayfası → `/<slug>/home` → `/story`, `/details`, `/rsvp`.
-5. Misafir RSVP gönderir → çift yanıtları panelde görür, CSV indirir.
+5. Misafir RSVP gönderir → çift yanıtları panelde (Guests) görür, CSV indirir.
 
 ## 2. Mimari
 - `platform/` — Next.js (App Router) uygulaması; Vercel'e uygun.
@@ -65,6 +76,24 @@ düzenler. Bu belge platformun tek kaynağıdır.
     Geçici siteler silindi.
   - Denenmedi: gerçek telefon (iOS Safari / Android Chrome), Vercel'de çok örnekli hız sınırı davranışı (sınırlar hâlâ süreç içi),
     yük/maliyet ölçümü, Git bağlantılı otomatik yayın.
+- **Yeniden yayın (G049, 2026-10-14, `claude-local-1`):**
+  - Production = main `59b1291` (platform ağacı `f9ff114cfa65`; sonraki main commit'leri platforma dokunmadı), `dpl_2wNCu8cwSnw4PcWpQ2pTqcGjbdTC`,
+    aynı adres https://davetiye-platform-five.vercel.app. Ortam değişkeni adlarına `PLATFORM_PUBLIC_URL` eklendi (Production + Preview;
+    og:image ve takvim linkleri için).
+  - **Yayın yolu:** ekip Pro planda ve repo private → Vercel yalnız ekip üyelerinin commit'lerini yayınlıyor; commit yazarı
+    `Claude <noreply@anthropic.com>` olduğu için CLI yayını `BLOCKED` oldu (`dpl_BgNBxoWYAdD5bf38BFqsZefyYJzu`). Kullanıcı kararıyla
+    (2026-10-14) yayın, commit'in `git archive HEAD:platform` ile çıkarılmış birebir kopyasından yapılıyor (git bilgisi gitmez;
+    `--meta gitCommit=<kısa sha> --meta platformTree=<ağaç>` notu eklenir). Kalıcı çözüm seçenekleri (kullanıcı): commit'leri ekip üyesinin
+    Git kimliğiyle atmak ya da Vercel ekip ayarı.
+  - **Windows notu:** Git for Windows varsayılanı `core.autocrlf=true` çalışma kopyasını CRLF'e çeviriyordu → bu makineden yapılan yayın
+    main'le bayt bayt aynı değildi ve `site.js` boyut bütçesi testi kalıyordu. Yerel kopya `core.autocrlf=false`, `core.eol=lf`'ye alındı;
+    `git archive` zaten repo içeriğini (LF) verir. Önerilen: repoya `.gitattributes` (`* text=auto eol=lf`).
+  - Canlı sonuç: `scripts/live-check.mjs` **41/41** (5 demo sayfası + CSP, og:image, `.ics`, foto, panel + başlıklar, 2 temanın `/start` ve
+    demoları, geçici sitede kaydet/409/foto (yayınlanmamış foto önizleme anahtarı olmadan 404, anahtarla 200)/yayın/RSVP/CSV, `/start`
+    201 + 409, temizlik); `scripts/blob-smoke.mjs` **12/12** (8/8 eşzamanlı yazma). Telefon boyutunda (375 px) zarf → home → story →
+    details → RSVP akışı ve iki `/start` sayfası görsel olarak kontrol edildi.
+  - Gerçek depoda bulunan ikinci ayrıntı: üst üste binen koşullu yazmalar `412` yerine düz `BlobError("… conflicting operation …")`
+    alıyor → adaptör bunu da yeniden dener (G049; önceden 8 eşzamanlı yazmadan 1'i hatayla düşüyordu, veri kaybı yoktu).
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
@@ -89,4 +118,5 @@ düzenler. Bu belge platformun tek kaynağıdır.
 | G043 | Supabase adaptörü + şema + RLS + storage | G037 · **kullanıcı onayı** |
 | G044 | Vercel önizleme yayını | G038 · **kullanıcı onayı** |
 | G045 | `/start` sahiplenme akışı (sipariş no + e-posta → taslak site + düzenleme linki) | G039 |
+| G060 | Panel v2 (sihirbaz, Home/Edit/Guests/Share) + düzenleme hakkı + 12 ay arşiv | G039, G045 |
 | G046 | Tema standardı belgesi + GPT website parça listesi (Paket W) | G038 |

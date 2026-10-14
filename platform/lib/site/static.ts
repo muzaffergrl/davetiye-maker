@@ -5,6 +5,7 @@ import path from 'node:path';
 import { getDataAdapter } from '../data/index.ts';
 import type { SiteRecord } from '../data/types.ts';
 import { photoCandidates } from '../photo-variants.ts';
+import { isArchived } from '../panel/rights.ts';
 import { canPreview } from '../sites.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
 
@@ -120,6 +121,8 @@ export async function serveLocalMedia(segments: string[] | undefined, req?: Requ
   const previewKey = req ? new URL(req.url).searchParams.get('preview') : null;
   const preview = previewKey !== null && canPreview(site, previewKey);
   if (!preview && !publiclyUsed(site, rel)) return notFound();
+  // An archived site's photos are gone for the public (G060); the couple still sees them with the preview key.
+  if (!preview && isArchived(site)) return new Response('Gone', { status: 410, headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'public, max-age=300' } });
   const file = await adapter.readPhoto(rel);
   if (!file) return notFound();
   return new Response(new Uint8Array(file.bytes), {

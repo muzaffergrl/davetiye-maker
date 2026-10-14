@@ -1,0 +1,807 @@
+{
+  "schema_version": 1,
+  "task": "G205",
+  "date": "2026-10-14",
+  "agent": "codex-gpt-gorsel",
+  "generator": "image_gen.imagegen",
+  "prompt_source": "collections/05_Lemon_Mediterranean/assets/gpt/GPT_PROMPTS.md",
+  "workflow": "W1 screens → W2 parts referencing W1; envelope_open/closure also reference envelope_closed → PAKET 2 photos referencing hero_portrait",
+  "deliverable_counts": {
+    "W1": 5,
+    "W2": 17,
+    "PAKET2": 5
+  },
+  "images": [
+    {
+      "title": "W1.1 Açılış sayfası — kapalı zarf",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+      "base_prompt": "Design a luxury mobile wedding website screen, page 1 of 5: the envelope landing page. Full-bleed portrait phone screen layout — no phone hardware, no status bar, no browser bar. Background: sunlit warm white plaster wall texture fading to a soft sky blue at the bottom (#F7F4EC to #DCE6F2), gentle dappled leaf shadows at the edges, empty center, with lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor framing the top-left and bottom-right corners and a few small floating accents (a whole ripe lemon with one glossy leaf, a white lemon blossom, a glossy green lemon leaf). Centered slightly below the middle: a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap whose edge is gently scalloped and traced with a thin hand-painted cobalt blue line, closed, with a single small glossy lemon with two leaves and a short sprig of white lemon blossom, tied together with a thin cobalt blue ribbon in a little bow — tucked onto the tip of the V flap. Above it, typography in a breezy flowing script for the names and an elegant high-contrast Didone serif: a small spaced line \"YOU ARE INVITED\" and the names \"Isabella & Marco\" large; below the white envelope a small spaced line \"TAP TO OPEN\". All decor in soft watercolor style. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-8d4be4fd-1dd8-4093-8239-ad9998c7003c.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+          "reference_paths": []
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "a978c8c5887882e781950e6112ff347adbcbe7cf31d89ce694a96547910d1732",
+      "base_prompt_sha256": "f82a97f8add356a4da2003c2b50f015c6ba7985de6e12dac2e9c0a98de3c4eed"
+    },
+    {
+      "title": "W1.2 Home — kart, isimler, geri sayım",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png",
+      "base_prompt": "Same design, page 2 of 5: home. Same background, decor and light. At the top, the card that came out of the white envelope: a small bright-white card with a gently scalloped edge, a portrait photo window framed by a single row of tiny hand-painted cobalt-and-white tiles in its upper part and plain blank paper below; its photo window is filled with flat pure green #00FF00, and on the card below the window the line \"We're getting married\" in the script and a small spaced line \"JUNE 12, 2027 · SORRENTO\". Under the card: the names \"Isabella & Marco\" large in the script, a small spaced line \"SATURDAY · JUNE 12, 2027\", the venue \"Villa Limonaia\" and \"Sorrento, Italy\" in italic serif, four small elegant countdown boxes \"242 DAYS · 09 HOURS · 05 MINUTES · 05 SECONDS\", and a cobalt blue pill button with white lettering labelled \"RSVP\". A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". One or two floating accents. Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-bc3dab44-3e7d-465a-92d6-df1883f3746f.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "f7d93784164902b7961e51d8e45883d7cbc35b4e8f6fb0ea5079734c5fc75034",
+      "base_prompt_sha256": "95afab0ba8ad102a7c08c237a9799fea70056be0b4be122d3429a0022ba93948"
+    },
+    {
+      "title": "W1.3 Story — üç fotoğraf",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png",
+      "base_prompt": "Same design, page 3 of 5: our story. The title \"Our Story\" in the script at the top with a small spaced subtitle \"MOMENTS WE HOLD DEAR\". Below: three scalloped tile-framed portraits standing perfectly straight in a gentle staggered column down the page (left, right, left) like painted tile panels set into a sunlit white plaster wall, not overlapping; every photo window is filled with flat pure green #00FF00 and each frame has a small caption in the script underneath: \"On the piazza\", \"Above the sea\", \"Our sweetest yes\". Small touches of the same decor between the frames. A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-4690b38b-32d1-4c16-a62e-ba905c7bbdeb.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "d793aa53ecf90fa34be05dd1627d5358fba9d26a1e9f3790c88a5b58154155cd",
+      "base_prompt_sha256": "20bc89680c97d9e177d1aab3bc62a43a70aeafb2a47baa5c147807f0bc543337"
+    },
+    {
+      "title": "W1.4 Details — program kartı ve mekân",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png",
+      "base_prompt": "Same design, page 4 of 5: details. A tall bright-white scalloped card with a thin cobalt blue painted border and only one small lemon sprig at the top holds the title \"Order of the Day\" in the script and three schedule rows separated by tiny dividers (a single short lemon sprig with one small lemon and two blossoms): \"4:00 PM — Ceremony — The Lemon Grove\", \"5:00 PM — Cocktail Hour — The Sea Terrace\", \"6:30 PM — Reception — The Villa Courtyard\" (time in small spaced serif, event in serif, place in italic serif). Below the card: a landscape scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles, a tiny lemon sprig at one corner, its window filled with flat pure green #00FF00 (the venue photo), under it \"Villa Limonaia\" and \"Sorrento, Italy\", then a small line \"DRESS CODE · Summer formal\". A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-9225a62b-7c9f-4a52-a5a5-162259e66f5c.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "7fe913618ea292f57588729cb3c799f500a2dd5151111e02056abf8aa2b7d5df",
+      "base_prompt_sha256": "1004da56bc087f3aef296c8fdc27892c8d8af89657ccff9973b4477beb8c5743"
+    },
+    {
+      "title": "W1.5 RSVP — davet kartı ve buton",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp.png",
+      "base_prompt": "Same design, page 5 of 5: RSVP. The same card as page 4 with the title \"Will You Join Us?\" in the script, \"Kindly reply by May 1, 2027\" in serif, a cobalt blue pill button with white lettering labelled \"RSVP\", the line \"We can't wait to celebrate with you\" and \"With love, Isabella & Marco\" in the script at the bottom; a small lemon tie — the same one as on the white envelope — rests at the base of the card. A slim elegant bottom navigation bar reads \"HOME · STORY · DETAILS · RSVP\". Premium luxury wedding stationery quality, real paper and material textures, soft natural light from the top-left, refined, rich and airy.",
+      "transparent": false,
+      "selected_attempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-bdb09d5f-a2b4-44ad-9148-be857b34225f.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp_v1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png"
+          ]
+        },
+        {
+          "attempt": 2,
+          "generated_source": "/workspace/generated_images/exec-b9951594-c1e8-425d-87f7-169bb80364c8.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp_v2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp_v1.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "918c4af80e62c5b092ec60f0e30783dacb33df0fcf38f47bf057feb6cb742b44",
+      "base_prompt_sha256": "715a1d82db323b65c5a69e3d8524a5d6348faf5a2e8f02811d7d9d2cf52bb9ed"
+    },
+    {
+      "title": "W2.1 Sayfa arka planı (telefon)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_page.png",
+      "base_prompt": "The page background of the W1 screens alone, as a vertical phone-screen background: sunlit warm white plaster wall texture fading to a soft sky blue at the bottom (#F7F4EC to #DCE6F2), gentle dappled leaf shadows at the edges, empty center, with lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor entering softly from the top-left and bottom-right edges only. The whole central area stays calm and empty (no white envelope, no card, no frames, no text) so it still works when a tall phone crops the sides. Same colors, technique and light as the W1 screens.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-e4cb8375-8e7e-4e4e-89fb-894366777a27.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_page.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "80cb22aa8dc1ec03f1c924dbc1ec7ac1e359b0cdf29ffb29f86802907e4afe27",
+      "base_prompt_sha256": "1b05a791dcc589dedbb39f96a9be1f9f50061e4c23f59fa92141d8f8e7c693d9"
+    },
+    {
+      "title": "W2.2 Dikişsiz zemin dokusu (uzun sayfalar)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png",
+      "base_prompt": "A seamless tileable square texture for long website pages: sunlit warm-white plaster (#F7F4EC) with a very soft trowel texture. Calm, even and very low in contrast; no objects, no flowers, no vignette, no text; the left and right edges and the top and bottom edges match so it repeats without visible seams.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-19d7bdba-200c-4d8f-b50b-36c3c0fe0900.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "ffaab58085647878acf200ec357b4ae1a6d5b836348f0fa5229ac2378c303a9a",
+      "base_prompt_sha256": "ae26ec240fdc79ce9b5ad41b9ba286522388f8551102efee05fce2d89aaccf37"
+    },
+    {
+      "title": "W2.3 Kapalı zarf — kapanış elemanı OLMADAN",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png",
+      "base_prompt": "The same white envelope as in the W1 screens, alone and closed, WITHOUT the lemon tie: a crisp bright-white watercolor-paper envelope, about 5:4 wider than tall, with a pointed V flap whose edge is gently scalloped and traced with a thin hand-painted cobalt blue line. Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 80% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. The edges where this piece will be cut must read clearly: the free edge of the flap — a crisp line with a slight contact shade on the object itself (not a cast shadow). Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-9215d203-668f-48a8-b54e-56905f943f79.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed_v1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        },
+        {
+          "attempt": 2,
+          "generated_source": "/workspace/generated_images/exec-dddd1b0b-7192-4e3d-b278-ff415dd8e099.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed_v2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed_v1.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "349943dff940b7d2441f1eb59d0cbe0be476732ad79c465ca0c57196ac3daca4",
+      "base_prompt_sha256": "c21e037a688bf625627f6c8a0c09950d440d8621eb4410d9043df9d9c2781a11"
+    },
+    {
+      "title": "W2.4 Kapanış elemanı (tek başına)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/closure.png",
+      "base_prompt": "Only a single small glossy lemon with two leaves and a short sprig of white lemon blossom, tied together with a thin cobalt blue ribbon in a little bow, alone, exactly as it sits on the white envelope in the W1 screens (tucked onto the tip of the V flap), drawn large so it fills about 70% of the square (Claude scales it to the white envelope), with the same perspective, material and light as on the white envelope and with no white envelope behind it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-ea320d36-f15f-4a85-8790-d9ae3ce25d9f.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/closure.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "56410da3c4986d13e293b478c27c78e599b673181f825c3c412e57b510813869",
+      "base_prompt_sha256": "6fbf332dfbcb8a345a6795975dec1b0cdd1d013678ed48fe00e6312399c335a9"
+    },
+    {
+      "title": "W2.5 Açık zarf — boş",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_open.png",
+      "base_prompt": "The SAME white envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the scalloped V flap folded fully upward, its inner side and the inside of the back showing original hand-painted blue and white majolica-style tile pattern (cobalt #2A5DA8 on white) with small lemon and leaf motifs, seamless square tiles; the front pocket empty. The top edge of the front pocket is a crisp, clearly visible edge against the liner. No card, nothing inside, no lemon tie. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-4b598de8-224f-4095-b96f-5356b3a6b3a6.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_open_v1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        },
+        {
+          "attempt": 2,
+          "generated_source": "/workspace/generated_images/exec-a8f3bc15-9816-4df8-9ba8-95feab3ce27f.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_open_v2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_open_v1.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "73ff405ce0fb80ed5cea96fecb8d2f1987bd4349268b61d0e432886e9b051b5b",
+      "base_prompt_sha256": "f56dde0cbe88a642e5a5f98b0ec558c3ed8a7b90785b2a0cb04ab2bd698a90f1"
+    },
+    {
+      "title": "W2.6 Zarftan çıkan küçük kart (boş)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/card_small.png",
+      "base_prompt": "The small card that comes out of the white envelope in W1.2, alone: a small bright-white card with a gently scalloped edge, a portrait photo window framed by a single row of tiny hand-painted cobalt-and-white tiles in its upper part and plain blank paper below. Its photo window is filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank (no text). Slightly narrower than the white envelope so it fits inside it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-267b13c8-b617-4d08-9264-5cb24e983cf4.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/card_small.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "575fa1e6305bc156d332856170b88451d07a6e40a78cab5d64bfcdaa27a3822a",
+      "base_prompt_sha256": "ab6ebba121359021585e9b90f55fa4ab76a250a68b5b7a8b1442b8c907e50002"
+    },
+    {
+      "title": "W2.7 Büyük davet kartı (boş)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/invitation_card.png",
+      "base_prompt": "The large invitation card of this design, alone: a tall bright-white card with a gently scalloped outer edge and a thin cobalt blue painted border, a watercolor lemon branch with ripe lemons, white blossoms and glossy leaves across the top, and a narrow band of blue-and-white majolica tile pattern along the bottom edge. The card face is completely blank (no text at all) with a large calm area in the middle for the invitation wording. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-4fa4bbb0-8f00-4593-996a-ff9323c14eb0.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/invitation_card.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "3af4af86ad09be307339c944da1e3f54df9c100a37132eb3488369723d621037",
+      "base_prompt_sha256": "aaa39f7d88be26c8ae51cc135c3b35c0fecd94ff2d36bbfda72a81bab6a1158d"
+    },
+    {
+      "title": "W2.8 Hafif kart (details/rsvp için, boş)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/info_card.png",
+      "base_prompt": "The lighter card from W1.4 and W1.5, alone: a tall bright-white scalloped card with a thin cobalt blue painted border and only one small lemon sprig at the top. Completely blank face (no text) with a large calm writing area. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-d0553c45-0631-4742-a73b-9fe907827bd1.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/info_card.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_5_rsvp.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "24e7813f555c840e3ce3e2a1723807424ee36b30e873a379c184d50a4409a426",
+      "base_prompt_sha256": "84f888ddde483556027c2270854f8b282b34ca4a80a7b56ca0abc8bb4e54a938"
+    },
+    {
+      "title": "W2.9 Dikey foto çerçevesi (story)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait.png",
+      "base_prompt": "One photo frame from W1.3, alone and upright: a scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles. The window inside is a portrait rectangular window (about 3:4), filled with flat pure green #00FF00. No caption, no text. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-415fd52f-ed3b-4d6e-9bf9-9d56349937a7.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait_v1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_2_home.png"
+          ]
+        },
+        {
+          "attempt": 2,
+          "generated_source": "/workspace/generated_images/exec-ec5f66f8-a9f3-4532-b9e2-b2bcd72e79e4.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait_v2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait_v1.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png"
+          ]
+        },
+        {
+          "attempt": 3,
+          "generated_source": "/workspace/generated_images/exec-ead09bff-2faa-409a-832d-7204536b4316.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait_v3.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/card_small.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "04dc5346fad25dea564e3e8ee81bacd2f81f7af5b6b1ee7c8e0ba3db3f1c5aa5",
+      "base_prompt_sha256": "d25cab4487f64239467127305c4a0bc8a37a0ca29c58d3c3534735aa4aac7301"
+    },
+    {
+      "title": "W2.10 Yatay foto çerçevesi (mekân fotoğrafı)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_landscape.png",
+      "base_prompt": "A landscape scalloped-edge rectangular frame made of a single row of small hand-painted cobalt-and-white majolica tiles, a tiny lemon sprig at one corner, matching frame_portrait.png exactly in material and ornament, about 80% of the image width. The window inside is a 3:2 landscape window, filled with flat pure green #00FF00, for the venue photo. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-abf1d496-1447-41e9-ab9a-7e1ef0e25f63.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_landscape_v1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait.png"
+          ]
+        },
+        {
+          "attempt": 2,
+          "generated_source": "/workspace/generated_images/exec-e1920007-af05-4ff4-bdee-ae96fefc9351.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_landscape_v2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_landscape_v1.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png"
+          ]
+        },
+        {
+          "attempt": 3,
+          "generated_source": "/workspace/generated_images/exec-ef7c4dce-9eb8-49af-b530-4237880d3ce6.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_landscape_v3.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_3_story.png"
+          ]
+        }
+      ],
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "ac2500306b802046ad2a6a038e133dc92e4294ccc9f939e69b786b25ff3df4e8",
+      "base_prompt_sha256": "bebf1988a0310009c0ba4650d83d43cfc8ef2d98c13b276e08f35dc7bd5339dc"
+    },
+    {
+      "title": "W2.11 Köşe kümesi — sol üst",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_tl.png",
+      "base_prompt": "ONE cluster of lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor, isolated, as at the top-left corner of the W1 screens: it fans from the top-left toward the center and leaves the bottom-right half of the square empty. Keep a thin empty margin even at the top and left edges (do not cut it off at the image border). Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-4be6b71f-a36d-473e-8c99-4d9c3729b115.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_tl.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "b33ccccf92180bbd2ffab85a22912a5724c1aed4d6b62589582801e16d20230d",
+      "base_prompt_sha256": "74ea6ef03bd9d6759452bc99220887c9a5e560f3c0efc2bf4e7e7191bd6129b8"
+    },
+    {
+      "title": "W2.12 Köşe kümesi — sağ alt",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_br.png",
+      "base_prompt": "ONE cluster of lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor, isolated, as at the bottom-right corner of the W1 screens: it fans from the bottom-right toward the center and leaves the top-left half of the square empty. Keep a thin empty margin even at the bottom and right edges. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-4f324c64-a5c8-493f-b51f-791355f801e0.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_br.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/decor_tl.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "fb830fb89d1745c8820102ee351ba4e732dfa83a5f22513e1f22a18e1c91140c",
+      "base_prompt_sha256": "5e75649c796c19fa7764f3507b049db9e97bc084aef699b582f4df58dce9ca82"
+    },
+    {
+      "title": "W2.13 Süzülen accent 1",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_1.png",
+      "base_prompt": "Exactly ONE whole ripe lemon with one glossy leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-65f83b23-ca42-47df-b587-eb4b1938614d.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "da8a883c51f25daafaa64e773de8e244fb8434c54fb3fce5745cc749c3ede7a7",
+      "base_prompt_sha256": "e842a5342e119ddb3290bcc8d529d8bf905da0d80e073476486c134ff6f5ccde"
+    },
+    {
+      "title": "W2.14 Süzülen accent 2",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_2.png",
+      "base_prompt": "Exactly ONE white lemon blossom, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-59c29436-1b8b-4ab5-9d8f-0ee481dec8a8.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "961137b01d8927e88664b20ce6e3580341c28e2ce8158e27a57d25434dc6fbaf",
+      "base_prompt_sha256": "8d9fcbd985c161439150ee81999bd735de84a192fae92ccef92a1cd38aa9749a"
+    },
+    {
+      "title": "W2.15 Süzülen accent 3",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_3.png",
+      "base_prompt": "Exactly ONE glossy green lemon leaf, in the same soft watercolor style as the W1 screens, alone in the middle of the square at about 40% of its width with lots of empty space around it — a single small object that will float across the website. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-29463a4c-761a-49db-a0b9-51a7f7c6b8fc.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/accent_3.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "5f3faff0e833b08bfef9f5028807aa9ca612b0cd324b1f739426c227713eb17f",
+      "base_prompt_sha256": "9b796c3d59923e814a0a1a406033911309335cdf92250266bc8ceb43cfe19a4d"
+    },
+    {
+      "title": "W2.16 Küçük ayırıcı",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/divider.png",
+      "base_prompt": "A small horizontal divider in the same soft watercolor style: a single short lemon sprig with one small lemon and two blossoms, lying horizontally and centered, about 60% of the image width, lots of empty space around it. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).",
+      "transparent": true,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-84f97827-a076-46c4-94e1-40616de4c5d3.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/divider.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_4_details.png"
+          ]
+        }
+      ],
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "sha256": "c2d4945eff9b91116740df5929b717ae9ea5b4072f6fc9d1c9d242fa74808119",
+      "base_prompt_sha256": "9d395be8824d8194c74f3c8991a0eae602cc0912f4634be010acdc1c4c43cbd4"
+    },
+    {
+      "title": "W2.17 Website hero + paylaşım görseli (og:image kaynağı)",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/web_hero.png",
+      "base_prompt": "Wide horizontal version of the same design for the desktop website header: sunlit warm white plaster wall texture fading to a soft sky blue at the bottom (#F7F4EC to #DCE6F2), gentle dappled leaf shadows at the edges, empty center, with lemon branches with ripe yellow lemons, white lemon blossoms and glossy green leaves, fresh watercolor framing the left and right edges, and the closed white envelope with its lemon tie resting slightly off-center at the bottom. The center-top area is calm and empty for the couple's names. This image is also cropped to 1200×630 for link previews: keep the closed white envelope with its lemon tie completely visible with at least 5% empty margin below it, and keep the top 20% to background and decor only. Same technique, colors and light as the W1 screens. No text, no letters.",
+      "transparent": false,
+      "selected_attempt": 2,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-9803f7f7-fb26-44bb-b3b2-b346623c4a94.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/web_hero_v1.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/envelope_closed.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/closure.png"
+          ]
+        },
+        {
+          "attempt": 2,
+          "generated_source": "/workspace/generated_images/exec-117d6ca6-87b1-4586-aca1-2ecca326c563.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/parts/web_hero_v2.png",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/parts/web_hero_v1.png",
+            "collections/05_Lemon_Mediterranean/assets/gpt/comps/web_1_envelope.png"
+          ]
+        }
+      ],
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "sha256": "fe05f9ab31798c59874873a5be9da0849335a55d9c901acff91d89161e4aabd0",
+      "base_prompt_sha256": "f8710068e9d07d02f8580abba956103048063f8e23c59d11055db5e622400252"
+    },
+    {
+      "title": "2.1 Ana portre",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/hero_portrait.jpg",
+      "base_prompt": "Romantic editorial engagement photo of a fictional couple in their late twenties (not resembling any real person), standing close and smiling at each other on a sunlit Mediterranean terrace shaded by lemon trees, the sea far behind; she wears a flowing white linen sundress, he wears a light cream linen suit with an open collar. Natural skin, true-to-life colors, soft warm film look, shallow depth of field. Both faces in the central area of the frame with generous space around them. Vertical photo, no text, no watermark.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-2214eacd-ba31-45cb-8636-1a8b32033860.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/hero_portrait.jpg",
+          "reference_paths": []
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "sha256": "0f6333d19a85b8dc2a4cbd966015f5248b8d112678f029eaf890bbf092061fc3",
+      "base_prompt_sha256": "11217e1d35cd1db512ab2c960a82812ee966a87503af63843bbde214a2162726"
+    },
+    {
+      "title": "2.2 Hikâye 1 — \"On the piazza\"",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/story_1.jpg",
+      "base_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), a candid first-date moment laughing together at a small café table on a sunny piazza, two glasses of lemonade and a little vase of lemon blossoms, relaxed and natural, true-to-life colors, soft film look, subjects centered, vertical photo, no text, no signage, no watermark.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-406aeb29-6b46-4ef5-a543-a7dc93041037.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/story_1.jpg",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/photos/hero_portrait.jpg"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "sha256": "492bf394f419cce5b01db39a50b17e4985c61cb6481e1055e5c7abd0da83fbbc",
+      "base_prompt_sha256": "b4f67d0286faafe5fb422c02e64a6202a99697f0e8685a8b563778f13b70b272"
+    },
+    {
+      "title": "2.3 Hikâye 2 — \"Above the sea\"",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/story_2.jpg",
+      "base_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), the proposal moment on a whitewashed terrace overlooking the sea at sunset, lemon trees around them: he kneels holding a small open ring box, she covers her mouth in happy surprise, photographed from a respectful medium distance, subjects centered, true-to-life colors, soft film look, vertical photo, no text, no watermark.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-9128f535-f326-40cb-b084-667d93ca862e.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/story_2.jpg",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/photos/hero_portrait.jpg"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "sha256": "805a693548182765b91ecb85449b5999d68e5d6ca046ef9b84b69a7a3838a761",
+      "base_prompt_sha256": "7c261ee4d69f63d231e51f1a186c8dd266d2c8ee6113ce1daadaec7de4f23cd6"
+    },
+    {
+      "title": "2.4 Hikâye 3 — \"Our sweetest yes\"",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/story_3.jpg",
+      "base_prompt": "Same couple as in the engagement photo hero_portrait.jpg (photo 2.1 just above), close-up of their hands intertwined showing a delicate engagement ring, holding a small sprig of lemon blossoms and leaves, soft natural light, shallow depth of field, centered composition, true-to-life colors, vertical photo, no text, no watermark.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-44fec161-1a97-4519-892b-b616f964664e.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/story_3.jpg",
+          "reference_paths": [
+            "collections/05_Lemon_Mediterranean/assets/gpt/photos/hero_portrait.jpg"
+          ]
+        }
+      ],
+      "size": [
+        1024,
+        1536
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "sha256": "d29a3fc1089d5850c6b92791027e99905f7cf1fe866dee65296d9834ea28e280",
+      "base_prompt_sha256": "e1abf2098e18c848c68b00b843dd8b4386ee68b383ff2a3ea667e9f14a766f36"
+    },
+    {
+      "title": "2.5 Mekân",
+      "path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/venue.jpg",
+      "base_prompt": "A fictional Italian lemon-grove villa wedding venue at golden hour: a pale yellow villa with blue shutters, a stone terrace above the sea, rows of white chairs between lemon trees and an arch of lemon branches and white flowers, true-to-life colors, horizontal photo, no people, no text, no signage, no watermark.",
+      "transparent": false,
+      "selected_attempt": 1,
+      "attempts": [
+        {
+          "attempt": 1,
+          "generated_source": "/workspace/generated_images/exec-94974974-d7e3-4146-9de1-b8338960f96d.png",
+          "saved_path": "collections/05_Lemon_Mediterranean/assets/gpt/photos/venue.jpg",
+          "reference_paths": []
+        }
+      ],
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "JPEG",
+      "mode": "RGB",
+      "sha256": "500855280bf247939191ae9083b88ad9f36a324dd376a0315aa1a16bfdc1bbd1",
+      "base_prompt_sha256": "7fc502caa4851562bc256c872f34abe376e99483d49ae238555d4143de909570"
+    }
+  ],
+  "validation": {
+    "package5": "23/23 passed, includes envelope alignment",
+    "package2": "5/5 passed",
+    "metrics": "QUALITY_METRICS.json",
+    "logs": [
+      "KIT_CHECK_PAKET5.txt",
+      "KIT_CHECK_PAKET2.txt"
+    ],
+    "visual_review": [
+      "W1 screens inspected as generated",
+      "W2 real alpha composited on dark blue background",
+      "closed/open envelope half-opacity overlay",
+      "2×2 bg_tile repeat",
+      "1200×630 center crop of web_hero",
+      "same fictional couple identity; faces/hands and absence of signage"
+    ]
+  },
+  "open_issues": [
+    "Photo placeholders are not fully uniform opaque #00FF00. Selected portrait/landscape frame centers contain translucent patches; card_small has small color/alpha deviations. Technical mask preparation or regeneration is still required before theme approval.",
+    "Window aspect ratios measured: card_small 0.7456; frame_portrait 0.7139 versus about 0.75 target; frame_landscape 1.8690 versus 1.5 target after three attempts. Venue crop must be reviewed or frame regenerated.",
+    "Envelope boundary differences pass the tool but are not pixel-identical: left -2 px, right +5 px, bottom +13 px. Closed envelope body is wider/higher than the approximate requested placement and 5:4 proportion.",
+    "Square generated outputs are 1254×1254, matching the requested square ratio rather than exact 1024×1024. Accent sizes vary from the approximate 40% target and must be scaled in the theme.",
+    "Texture repeat visually inspected at 2×2; edges are not pixel-identical and long-page appearance remains for theme QA."
+  ],
+  "not_tested": [
+    "Live website",
+    "Envelope/page animation",
+    "Photo replacement flow",
+    "RSVP end-to-end submission",
+    "Canva"
+  ],
+  "status": "review_pending",
+  "prompt_source_sha256": "b93bc27a1ae187636eb8fd276655ca5782e013a4ed525421bf1a5b475df88017"
+}

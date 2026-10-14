@@ -98,10 +98,12 @@ BestCelebrations (201.3k). Çok ucuz uç ($1–3) yeni ve hacim odaklı dükkân
 - RSVP platformun kendisinde: yanıt listesi + CSV (Google Forms kurulumu yok).
 - Kişisel paylaşım önizlemesi (`og:title` = çiftin adı + tarih) ve hafif ilk açılış — **gerçek telefonda ve Vercel'de ölçülmeden
   "daha hızlı" iddiası yazılmaz** (AGENTS dürüstlük kuralı).
-- Kişisel alanlar görsele pişirilmiyor → renk dışındaki her metin değişebilir (rakip şikâyeti: "çok sabit öğe").
+- Kişisel alanlar görsele pişirilmiyor → isimler, tarih/saat, mekân, program, hikâye, SSS, RSVP soruları, linkler ve fotoğraflar
+  panelden değişir (rakip şikâyeti: "çok sabit öğe"). (G059 düzeltmesi) Tema başlıkları ("You are invited", "Order of the Day",
+  "Will You Join Us?"…), boyalı tasarım ve renkler **sabit**; "her metin değişir" denmez (docs/05 §E).
 
 **Pazarda standart olup bizde olmayanlar (şemaya göre, `docs/03_URUN_ICERIK_SEMASI.json`):**
-- Müzik çalar — yok. Takvime ekle (.ics / Google Calendar) — yok. Adres toplama formu — yok.
+- Müzik çalar — yok. Takvime ekle (.ics / Google Calendar) — (G051 ile eklendi). Adres toplama formu — yok.
 - RSVP'de özel soru (menü seçimi vb.) — yok (alanlar sabit: isim, e-posta, katılım, kişi sayısı, mesaj).
 - SSS metni — şemada yalnız aç/kapa (`optional_blocks.faq`), metin alanı yok (platform/README "Panel açık konuları").
 - Çok dil — yalnız İngilizce yerel ayarlar (`en-US/GB/CA/AU`); rakiplerden biri İspanyolca sayfayı hizmet olarak yapıyor.

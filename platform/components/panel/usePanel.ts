@@ -1,33 +1,59 @@
 'use client';
-// Panel state: the draft, autosave (debounced, one request at a time), publish / unpublish, photos.
+// Panel state: the draft, autosave (debounced, one request at a time), publish / unpublish, photos,
+// name / date changes after publishing (G060), the offline copy on this phone (G060 §9.2).
 //
 // Every save sends the `updatedAt` it last saw; the server answers 409 when the site changed
 // elsewhere (another tab or phone). Saving then stops and the panel asks for a reload, so one
 // device never silently overwrites another. Two cases look like that but are not:
 //  - our own save was stored but its answer was lost (flaky phone network): on 409 the panel reads
 //    the stored draft; if it is exactly what we sent, it takes the new updatedAt and carries on;
-//  - publish / unpublish change updatedAt too: they run in the same one-at-a-time queue as the
-//    saves, so a save typed during a slow publish is sent after it with the new updatedAt.
+//  - publish / unpublish / identity change updatedAt too: they run in the same one-at-a-time queue as
+//    the saves, so a save typed during a slow publish is sent after it with the new updatedAt.
+//
+// Offline copy: while a change is not stored yet, the draft is also kept in localStorage
+// ("draft:<slug>" = {baseUpdatedAt, content, at}). It is removed once everything is saved. When the panel
+// opens and finds one made on the same server version, it offers to restore it; a copy made on an older
+// version is never applied silently (it would overwrite another device's work).
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
 import { panelIssues, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
+import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
 import { panelApi } from './api.ts';
 
-export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'conflict' | 'unauthorized' | 'refused';
+export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'offline' | 'conflict' | 'unauthorized' | 'refused';
 
 const AUTOSAVE_DELAY_MS = 800;
 const RETRY_MIN_MS = 2000;
 const RETRY_MAX_MS = 30000;
+const BACKUP_MAX_BYTES = 64 * 1024;
 
 export type Change = (draft: ContentRecord) => ContentRecord | void;
 
 export interface PublishOutcome {
   ok: boolean;
   url?: string;
+  status?: number;
+  code?: string;
   message?: string;
   issues?: ValidationIssue[];
+}
+
+export interface IdentityOutcome {
+  ok: boolean;
+  status: number;
+  code?: string;
+  result?: 'unchanged' | 'free' | 'typo' | 'change';
+  message?: string;
+  remaining?: number;
+  issues?: ValidationIssue[];
+}
+
+export interface LocalBackup {
+  baseUpdatedAt: string;
+  content: ContentRecord;
+  at: string;
 }
 
 function metaFrom(body: Record<string, unknown>, fallback: PanelMeta): PanelMeta {
@@ -36,7 +62,36 @@ function metaFrom(body: Record<string, unknown>, fallback: PanelMeta): PanelMeta
     updatedAt: typeof body.updatedAt === 'string' ? body.updatedAt : fallback.updatedAt,
     publishedAt: typeof body.publishedAt === 'string' || body.publishedAt === null ? (body.publishedAt as string | null) : fallback.publishedAt,
     hasUnpublishedChanges: typeof body.hasUnpublishedChanges === 'boolean' ? body.hasUnpublishedChanges : fallback.hasUnpublishedChanges,
+    rights: body.rights && typeof body.rights === 'object' ? (body.rights as RightsView) : fallback.rights,
   };
+}
+
+const backupKey = (slug: string) => `draft:${slug}`;
+
+function readBackup(slug: string): LocalBackup | null {
+  try {
+    const raw = window.localStorage.getItem(backupKey(slug));
+    if (!raw) return null;
+    const v = JSON.parse(raw) as LocalBackup;
+    return v && typeof v.baseUpdatedAt === 'string' && v.content && typeof v.content === 'object' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeBackup(slug: string, value: LocalBackup | null): boolean {
+  try {
+    if (!value) {
+      window.localStorage.removeItem(backupKey(slug));
+      return false;
+    }
+    const text = JSON.stringify(value);
+    if (text.length > BACKUP_MAX_BYTES) return false;
+    window.localStorage.setItem(backupKey(slug), text);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function usePanel(initial: PanelState, editKey: string) {
@@ -47,11 +102,19 @@ export function usePanel(initial: PanelState, editKey: string) {
     updatedAt: initial.updatedAt,
     publishedAt: initial.publishedAt,
     hasUnpublishedChanges: initial.hasUnpublishedChanges,
+    rights: initial.rights,
   });
   const [saveState, setSaveState] = useState<SaveState>('saved');
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   /** Bumped after every successful save / publish: the preview reloads. */
   const [previewVersion, setPreviewVersion] = useState(0);
+  const [online, setOnline] = useState(true);
+  /** A copy found on this phone when the panel opened (offer Restore / Discard). */
+  const [foundBackup, setFoundBackup] = useState<{ backup: LocalBackup; sameBase: boolean } | null>(null);
+  /** True while the unsaved draft is also kept on this phone. */
+  const [backedUp, setBackedUp] = useState(false);
+  /** The server kept the stored names/date over an autosave (another tab changed them): tell the buyer once. */
+  const [identityKeptAt, setIdentityKeptAt] = useState(0);
 
   const contentRef = useRef(content);
   const metaRef = useRef(meta);
@@ -61,6 +124,7 @@ export function usePanel(initial: PanelState, editKey: string) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const retryDelay = useRef(RETRY_MIN_MS);
   const queue = useRef<Promise<unknown>>(Promise.resolve());
+  const archived = meta.rights.archived;
 
   const applyMeta = useCallback((body: Record<string, unknown>) => {
     const next = metaFrom(body, metaRef.current);
@@ -68,13 +132,28 @@ export function usePanel(initial: PanelState, editKey: string) {
     setMeta(next);
   }, []);
 
+  /** Replaces the local draft without making it "unsaved" (it already equals what the server stored). */
+  const replaceContent = useCallback((next: ContentRecord) => {
+    contentRef.current = next;
+    setContent(next);
+  }, []);
+
   const clearTimer = () => {
     if (timer.current) clearTimeout(timer.current);
     timer.current = null;
   };
 
-  const scheduleRetry = useCallback(() => {
-    setSaveState('retrying');
+  const keepBackup = useCallback(() => {
+    if (version.current === savedVersion.current) {
+      writeBackup(initial.slug, null);
+      setBackedUp(false);
+      return;
+    }
+    setBackedUp(writeBackup(initial.slug, { baseUpdatedAt: metaRef.current.updatedAt, content: contentRef.current, at: new Date().toISOString() }));
+  }, [initial.slug]);
+
+  const scheduleRetry = useCallback((offline: boolean) => {
+    setSaveState(offline ? 'offline' : 'retrying');
     const delay = retryDelay.current;
     retryDelay.current = Math.min(delay * 2, RETRY_MAX_MS);
     clearTimer();
@@ -91,9 +170,15 @@ export function usePanel(initial: PanelState, editKey: string) {
       savedVersion.current = v;
       retryDelay.current = RETRY_MIN_MS;
       applyMeta(body);
+      if (body.identityKept === true && body.identity && typeof body.identity === 'object') {
+        // Names and date are kept on the server after the first publish: show what is stored.
+        replaceContent(withIdentity(contentRef.current, body.identity as Identity));
+        setIdentityKeptAt(Date.now());
+      }
       setPreviewVersion((n) => n + 1);
       setSaveMessage(null);
       setSaveState(version.current === savedVersion.current ? 'saved' : 'pending');
+      keepBackup();
       return true;
     };
     if (res.ok) return stored(res.body);
@@ -103,7 +188,7 @@ export function usePanel(initial: PanelState, editKey: string) {
       const state = (check.body as { state?: { content?: unknown } & Record<string, unknown> }).state;
       if (check.ok && state && sameContent(state.content, sent)) return stored(state);
       if (check.status === 0) {
-        scheduleRetry();
+        scheduleRetry(typeof navigator !== 'undefined' && navigator.onLine === false);
         return false;
       }
       setSaveMessage(res.body.message ?? null);
@@ -115,13 +200,16 @@ export function usePanel(initial: PanelState, editKey: string) {
     if (res.status === 401) {
       stopped.current = true;
       setSaveState('unauthorized');
+    } else if (res.status === 403 && res.body.code === 'archived') {
+      stopped.current = true;
+      setSaveState('refused');
     } else if (res.status === 400 || res.status === 413 || res.status === 415) {
       setSaveState('refused'); // retried with the next change
     } else {
-      scheduleRetry();
+      scheduleRetry(res.status === 0 && typeof navigator !== 'undefined' && navigator.onLine === false);
     }
     return false;
-  }, [api, applyMeta, scheduleRetry]);
+  }, [api, applyMeta, keepBackup, replaceContent, scheduleRetry]);
 
   /** Saves everything typed so far (requests are queued, never parallel). Resolves true when all is stored. */
   const flush = useCallback((): Promise<boolean> => {
@@ -139,24 +227,28 @@ export function usePanel(initial: PanelState, editKey: string) {
   flushRef.current = flush;
 
   /** Applies a change to a copy of the draft and schedules the autosave. */
-  const edit = useCallback((change: Change) => {
-    if (stopped.current) return;
-    const draft = structuredClone(contentRef.current);
-    const next = change(draft) ?? draft;
-    contentRef.current = next;
-    setContent(next);
-    version.current += 1;
-    setSaveState('pending');
-    clearTimer();
-    timer.current = setTimeout(() => void flushRef.current(), AUTOSAVE_DELAY_MS);
-  }, []);
+  const edit = useCallback(
+    (change: Change) => {
+      if (stopped.current || archived) return;
+      const draft = structuredClone(contentRef.current);
+      const next = change(draft) ?? draft;
+      contentRef.current = next;
+      setContent(next);
+      version.current += 1;
+      setSaveState((s) => (s === 'offline' ? 'offline' : 'pending'));
+      keepBackup();
+      clearTimer();
+      timer.current = setTimeout(() => void flushRef.current(), AUTOSAVE_DELAY_MS);
+    },
+    [archived, keepBackup],
+  );
 
   /**
    * Runs a request in the save queue (after any save in flight; saves typed meanwhile wait for it)
    * and applies the new updatedAt before the next queued save is sent.
    */
   const enqueue = useCallback(
-    (send: () => ReturnType<typeof api.publish>): ReturnType<typeof api.publish> => {
+    <T extends { ok: boolean; body: Record<string, unknown> }>(send: () => Promise<T>): Promise<T> => {
       const run = queue.current.then(async () => {
         const res = await send();
         if (res.ok) applyMeta(res.body);
@@ -168,6 +260,18 @@ export function usePanel(initial: PanelState, editKey: string) {
     [applyMeta],
   );
 
+  const stopOn = (status: number, body: { code?: string; message?: string }) => {
+    if (status === 409 && body.code === 'conflict') {
+      stopped.current = true;
+      setSaveState('conflict');
+      setSaveMessage(body.message ?? null);
+    }
+    if (status === 401) {
+      stopped.current = true;
+      setSaveState('unauthorized');
+    }
+  };
+
   const publish = useCallback(async (): Promise<PublishOutcome> => {
     if (!(await flush())) return { ok: false, message: 'Your latest changes are not saved yet. Please try again in a moment.' };
     const res = await enqueue(() => api.publish(metaRef.current.updatedAt));
@@ -175,33 +279,49 @@ export function usePanel(initial: PanelState, editKey: string) {
       setPreviewVersion((n) => n + 1);
       return { ok: true, url: typeof res.body.url === 'string' ? res.body.url : undefined };
     }
-    if (res.status === 409) {
-      stopped.current = true;
-      setSaveState('conflict');
-      setSaveMessage(res.body.message ?? null);
-    }
-    if (res.status === 401) {
-      stopped.current = true;
-      setSaveState('unauthorized');
-    }
-    return { ok: false, message: res.body.message, issues: (res.body as { issues?: ValidationIssue[] }).issues };
+    stopOn(res.status, res.body);
+    return { ok: false, status: res.status, code: res.body.code, message: res.body.message, issues: (res.body as { issues?: ValidationIssue[] }).issues };
   }, [api, enqueue, flush]);
 
   const unpublish = useCallback(async (): Promise<PublishOutcome> => {
     const res = await enqueue(() => api.unpublish());
     if (res.ok) return { ok: true };
-    if (res.status === 401) {
-      stopped.current = true;
-      setSaveState('unauthorized');
-    }
-    return { ok: false, message: res.body.message };
+    stopOn(res.status, res.body);
+    return { ok: false, status: res.status, code: res.body.code, message: res.body.message };
   }, [api, enqueue]);
+
+  /** Names / date after the first publish (POST /identity). intent "change" confirms using one change. */
+  const changeIdentity = useCallback(
+    async (identity: Identity, intent: 'fix' | 'change'): Promise<IdentityOutcome> => {
+      if (!(await flush())) return { ok: false, status: 0, message: 'Your latest changes are not saved yet. Please try again in a moment.' };
+      const res = await enqueue(() => api.identity(identity, intent, metaRef.current.updatedAt));
+      const body = res.body as Record<string, unknown> & { code?: string; message?: string };
+      if (res.ok) {
+        if (body.identity && typeof body.identity === 'object') replaceContent(withIdentity(contentRef.current, body.identity as Identity));
+        setPreviewVersion((n) => n + 1);
+        keepBackup();
+        return { ok: true, status: res.status, result: body.result as IdentityOutcome['result'] };
+      }
+      stopOn(res.status, body);
+      return {
+        ok: false,
+        status: res.status,
+        code: body.code,
+        message: body.message,
+        remaining: typeof body.remaining === 'number' ? body.remaining : undefined,
+        issues: Array.isArray(body.issues) ? (body.issues as ValidationIssue[]) : undefined,
+      };
+    },
+    [api, enqueue, flush, keepBackup, replaceContent],
+  );
 
   const uploadPhoto = useCallback(
     async (slot: PanelPhotoSlot, blob: Blob): Promise<{ ok: boolean; message?: string }> => {
       if (stopped.current) return { ok: false, message: saveMessage ?? 'Saving is paused. Please reload the page.' };
       const res = await api.uploadPhoto(slot.key, blob);
-      if (!res.ok || typeof res.body.url !== 'string') return { ok: false, message: res.body.message ?? 'The photo could not be uploaded.' };
+      if (!res.ok || typeof res.body.url !== 'string') {
+        return { ok: false, message: res.status === 0 ? 'No connection. Please try again when you are back online.' : (res.body.message ?? 'The photo could not be uploaded.') };
+      }
       const url = res.body.url;
       edit((c) => withPhoto(c, slot.source, url));
       void flush(); // store the new photo right away
@@ -216,6 +336,51 @@ export function usePanel(initial: PanelState, editKey: string) {
     },
     [edit],
   );
+
+  // Copy left on this phone by an earlier visit (closed while offline / before it was saved).
+  useEffect(() => {
+    const backup = readBackup(initial.slug);
+    if (!backup) return;
+    if (sameContent(backup.content, initial.content)) {
+      writeBackup(initial.slug, null);
+      return;
+    }
+    setFoundBackup({ backup, sameBase: backup.baseUpdatedAt === initial.updatedAt });
+  }, [initial.slug, initial.content, initial.updatedAt]);
+
+  const restoreBackup = useCallback(() => {
+    const found = foundBackup;
+    setFoundBackup(null);
+    if (!found?.sameBase) return;
+    edit(() => structuredClone(found.backup.content));
+  }, [edit, foundBackup]);
+
+  const discardBackup = useCallback(() => {
+    setFoundBackup(null);
+    writeBackup(initial.slug, null);
+  }, [initial.slug]);
+
+  // Online / offline: keep typing offline (kept on this phone), save when the connection is back.
+  useEffect(() => {
+    const update = () => {
+      const on = navigator.onLine !== false;
+      setOnline(on);
+      if (on) {
+        retryDelay.current = RETRY_MIN_MS;
+        setSaveState((s) => (s === 'offline' ? 'pending' : s));
+        if (version.current !== savedVersion.current) void flushRef.current();
+      } else {
+        setSaveState((s) => (s === 'saved' || s === 'saving' ? s : 'offline'));
+      }
+    };
+    update();
+    window.addEventListener('online', update);
+    window.addEventListener('offline', update);
+    return () => {
+      window.removeEventListener('online', update);
+      window.removeEventListener('offline', update);
+    };
+  }, []);
 
   // Save when the tab is hidden (phones switch apps); warn and send a last save when closing.
   useEffect(() => {
@@ -243,8 +408,15 @@ export function usePanel(initial: PanelState, editKey: string) {
 
   const validation = useMemo(() => {
     const result = validateContent(content, { platform: true });
-    return { ...result, errors: panelIssues(result.errors, content), warnings: panelIssues(result.warnings, content) };
-  }, [content]);
+    const errors = panelIssues(result.errors, content);
+    // Before the first publish: a date more than 12 months ago would archive the site at once (G060).
+    if (meta.rights.phase === 'before_publish') {
+      const now = new Date();
+      const issue = archivingDateIssue(content, now.toISOString(), now);
+      if (issue && !errors.some((e) => e.path === 'date')) errors.push(issue);
+    }
+    return { ...result, ok: result.ok && errors.length === panelIssues(result.errors, content).length, errors, warnings: panelIssues(result.warnings, content) };
+  }, [content, meta.rights.phase]);
 
   return {
     api,
@@ -254,13 +426,20 @@ export function usePanel(initial: PanelState, editKey: string) {
     saveMessage,
     previewVersion,
     validation,
-    locked: saveState === 'conflict' || saveState === 'unauthorized',
+    online,
+    backedUp,
+    foundBackup,
+    identityKeptAt,
+    locked: saveState === 'conflict' || saveState === 'unauthorized' || archived,
     edit,
     flush,
     publish,
     unpublish,
+    changeIdentity,
     uploadPhoto,
     removePhoto,
+    restoreBackup,
+    discardBackup,
   };
 }
 

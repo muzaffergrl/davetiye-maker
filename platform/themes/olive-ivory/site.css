@@ -79,11 +79,15 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .btn-ghost:hover { background: rgba(251, 248, 240, .9); }
 .btn-sm { min-height: 44px; min-width: 0; padding: 10px 20px; font-size: 12px; letter-spacing: .2em; text-indent: .2em; }
 
-/* -- navigation (comp: slim bar "HOME · STORY · DETAILS · RSVP") */
+/* -- navigation (comp: slim bar "HOME · STORY · DETAILS · RSVP")
+   G064: the soft top stays (painted corners fade into it, no straight edge), but from the gold rule down the ground is the
+   paper itself — opaque from 24 px (bg_tile is flat, ±2 levels), so no text or photo reads through between the letters while
+   the page scrolls (it did at .8–.93); no backdrop-filter: nothing to blur under an opaque ground, no blur edge */
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
   padding: 18px 8px env(safe-area-inset-bottom);
-  background: linear-gradient(rgba(237, 228, 208, 0), rgba(237, 228, 208, .8) 18px, rgba(237, 228, 208, .93));
+  background: linear-gradient(rgba(237, 228, 208, 0), rgba(237, 228, 208, .4) 8px, rgba(237, 228, 208, .8) 14px,
+              rgba(237, 228, 208, .97) 19px, rgb(237, 228, 208) 24px);
   text-shadow: 0 0 10px rgba(246, 240, 224, .95), 0 0 3px rgba(246, 240, 224, .9);
 }
 .site-nav ul { display: flex; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 4px; list-style: none;

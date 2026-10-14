@@ -1,0 +1,12 @@
+# Windows'taki ajanlar (local oturum) için: metin dosyaları her yerde LF (G049 önerisi)
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.mp4 binary
+*.pdf binary
+*.ico binary
+*.woff binary
+*.woff2 binary
