@@ -54,7 +54,8 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
 - Metinler (`START_HERE.md`, `listing.md`) elle yazılır; araç yalnız dosya üretir. `listing.md` içindeki
   `<!-- listing-kit:media -->` satırının yerine PDF'te görsel küçükleri ve video bilgisi gelir.
 - Başlat linki tabanı `LISTING_BASE_URL` (varsayılan `https://davetiye-platform-five.vercel.app`). **Alan adı ilk satıştan önce
-  kesinleşmeli** (ya da bu adresten kalıcı yönlendirme taahhüt edilmeli): satılmış START HERE PDF'leri ve özellikle alıcıların
+  kesinleşmeli** (ya da bu adresten kalıcı yönlendirme taahhüt edilmeli; K26: alan adı şimdilik alınmıyor, yani ilk satışlar bu
+  adresle olursa ileride alan adına geçerken bu adresten kalıcı yönlendirme şart): satılmış START HERE PDF'leri ve özellikle alıcıların
   kendi davetiyelerine bastırdığı QR'lar (kılavuz adım 6) `davetiye-platform-five.vercel.app/<adres>`'e bağlı; satıştan sonra alan
   adı değişirse yönlendirme olmadan hepsi kırılır. Adreste Türkçe "davetiye" ve markasız `vercel.app` var (alıcı güveni zayıf).
   Alan adı değişince bütün START HERE PDF'leri, QR'lar ve 4./5./8. görseller yeniden üretilir. `check`, taban `*.vercel.app`
