@@ -64,3 +64,4 @@ Kısım 2 — gpt-gorsel-H, 2026-10-14 (8/8; durum `alindi`):
 - 2026-10-14 ara kayıt (kısım 2, 8/8): gpt-gorsel-H; 8 parça Kaydet yollarında; tüm yeni dosyaların oran/alfa/pencere kontrolleri ve zarf hiza testi GEÇTİ. Kalan geometrik/yeşil pencere farkları Sonuç bölümünde; durum alindi.
 - 2026-10-14 gpt-gorsel-H: kısım 2 bitti; kalan: decor_br, accent_1–3, divider, web_hero + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 2 (8 parça) geçti, closure↔zarf hizası GEÇTİ. Kısım 3 verildi; PAKET 2 gpt-gorsel-D'de.
+- 2026-10-14 devam: gpt-gorsel-H (kısım 3)
