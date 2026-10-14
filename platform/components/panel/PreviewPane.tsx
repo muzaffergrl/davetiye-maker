@@ -11,6 +11,7 @@
 import { RotateCcw, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { PAGE_LABELS, previewPath } from '../../lib/panel/model.ts';
+import { cx } from './ui.tsx';
 import styles from './panel.module.css';
 
 const HISTORY_MARK = 'panel-preview';
@@ -37,6 +38,8 @@ export function PreviewPane({
   open,
   wide,
   page: wanted,
+  thanks = false,
+  onThanksOff,
   onClose,
 }: {
   slug: string;
@@ -47,6 +50,9 @@ export function PreviewPane({
   wide: boolean;
   /** Page to show (e.g. "story" when opened from Our Story). */
   page?: string | null;
+  /** G075: show the thank-you version (?thanks=1), whatever the mode and the date. */
+  thanks?: boolean;
+  onThanksOff?: () => void;
   onClose: () => void;
 }) {
   const version = useSettledVersion(rawVersion);
@@ -67,7 +73,7 @@ export function PreviewPane({
   const modalRef = useRef(false);
   modalRef.current = open && !wide;
   const shown = wide || open;
-  const src = previewPath(slug, page, previewToken);
+  const src = `${previewPath(slug, page, previewToken)}${thanks ? '&thanks=1' : ''}`;
 
   useEffect(() => {
     if (shown) setMounted(true);
@@ -145,7 +151,18 @@ export function PreviewPane({
       <div className={styles.previewHeader}>
         <div>
           <p className={styles.previewTitle}>Preview</p>
-          <p className={styles.previewSub}>Draft — guests see changes after you publish.</p>
+          {thanks ? (
+            <p className={cx(styles.previewSub, styles.previewThanks)} data-preview-thanks>
+              <span>Thank-you page — what guests see after the wedding.</span>
+              {onThanksOff ? (
+                <button type="button" className={styles.inlineLink} onClick={onThanksOff}>
+                  Show the invitation
+                </button>
+              ) : null}
+            </p>
+          ) : (
+            <p className={styles.previewSub}>Draft — guests see changes after you publish.</p>
+          )}
         </div>
         {!wide ? (
           <button ref={closeRef} type="button" className={styles.sheetClose} onClick={onClose} data-close-preview aria-label="Close preview" title="Close preview">

@@ -13,7 +13,7 @@
 // Archive rules are unchanged: 12 months after the wedding the site is archived (410) whatever the mode.
 
 import { isValidTimeZone, parseIsoDate, zonedTimeToUtc } from './format.ts';
-import type { ThankYouMode } from './types.ts';
+import type { ThankYou, ThankYouMode } from './types.ts';
 
 export const THANK_YOU_MODES: readonly ThankYouMode[] = ['auto', 'on', 'off'];
 
@@ -111,7 +111,24 @@ export function thankYouViewFields(
   return { thank_you_on: on, thank_you_title: thankYouTitle(content), thank_you_hides_details: on && thankYouHidesDetailsSetting(content) };
 }
 
-/** Does a theme template use thank-you mode? (any marker naming thank_you_on / thank_you_title / thank_you.*) */
-export function usesThankYou(html: string): boolean {
-  return /\bdata-(?:if|field|text|attr-[a-z0-9-]+)\s*=\s*"[^"]*\bthank_you(?:_on|_title|_hides_details|\.)/.test(html);
+/**
+ * Writes thank-you settings into a record (the panel's edits), keeping it tidy: defaults (mode "auto", details "keep")
+ * and empty values are left out and an empty thank_you is removed — so trying a setting and going back is no
+ * "unpublished change". Mutates and returns `c`.
+ */
+export function withThankYou<C extends { thank_you?: ThankYou }>(c: C, patch: Partial<ThankYou>): C {
+  const next: Record<string, unknown> = { ...(c.thank_you ?? {}), ...patch };
+  for (const [k, v] of Object.entries(next)) {
+    if (v === null || v === undefined || v === '' || (k === 'mode' && v === 'auto') || (k === 'details' && v === 'keep')) delete next[k];
+  }
+  if (Object.keys(next).length) c.thank_you = next as ThankYou;
+  else delete c.thank_you;
+  return c;
+}
+
+/** The day automatic thank-you mode starts, as a date (YYYY-MM-DD, the day after the wedding), or null. */
+export function thankYouDay(content: unknown): string | null {
+  const d = parseIsoDate((content as { date?: unknown } | null)?.date);
+  if (!d) return null;
+  return new Date(Date.UTC(d.year, d.month - 1, d.day + 1)).toISOString().slice(0, 10);
 }

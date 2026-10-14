@@ -1656,6 +1656,10 @@
   gap: 8px;
 }
 
+.segmentedStacked {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .segment {
   position: relative;
   display: grid;
@@ -4106,6 +4110,14 @@
   min-width: 0;
 }
 
+/* which parts of a page changed (G075: "Day & place · After the wedding") */
+.reviewItemSub {
+  display: block;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
 /* Setup */
 .setupSubTitle {
   margin: var(--s-4) 0 0;
@@ -4164,6 +4176,31 @@
   .spin {
     animation: none;
   }
+}
+
+/* ------------------------------------------------------------------ thank-you mode (G075) */
+/* "After the wedding" (end of Day & place): one calm line saying what guests see, in the accent's soft tone */
+.thankYouNow {
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-control);
+  background: var(--c-accent-soft);
+  color: var(--c-heading);
+  font-size: 15px;
+  line-height: 21px;
+}
+
+/* Home: "Your website switched to thank-you mode" */
+.thankYouCard .cardText {
+  margin-bottom: var(--s-4);
+}
+
+/* the preview's own line while it shows the thank-you version */
+.previewThanks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px var(--s-2);
 }
 
 /* ------------------------------------------------------------------ print (G069: the guest list, #guests/print) */

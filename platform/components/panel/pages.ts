@@ -113,6 +113,17 @@ export function changedPaths(a: ContentRecord | null, b: ContentRecord | null): 
   return out;
 }
 
+/** The sections whose content differs from the published copy (Review names them inside a page, e.g. "After the wedding"). */
+export function changedSections(draft: ContentRecord, published: ContentRecord | null): SectionId[] {
+  if (!published) return [];
+  const out = new Set<SectionId>();
+  for (const p of changedPaths(draft, published)) {
+    const s = sectionForPath(p);
+    if (s) out.add(s);
+  }
+  return SECTION_IDS.filter((id) => out.has(id));
+}
+
 /** The editor pages whose content differs from the published copy, in page order. */
 export function changedPages(draft: ContentRecord, published: ContentRecord | null): PageId[] {
   if (!published) return [];

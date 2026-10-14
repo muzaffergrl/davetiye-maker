@@ -8,11 +8,13 @@ import {
   CircleCheckBig,
   Copy,
   ExternalLink,
+  Heart,
   Hourglass,
   KeyRound,
   Link as LinkIcon,
   LockKeyhole,
   MessageCircleQuestionMark,
+  Pencil,
   QrCode as QrIcon,
   Send,
   Share2,
@@ -22,6 +24,7 @@ import {
 } from 'lucide-react';
 import { Fragment, useEffect, useState } from 'react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
+import { isThankYouOn } from '../../lib/content/thank-you.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { isPlaceholder, PANEL_BRAND } from '../../lib/panel/brand.ts';
@@ -88,7 +91,7 @@ export function nextSteps(
     out.push({ key: 'photos', tone: 'info', path: notes.photos[0].path, text: `Add your photos (${notes.photos.length} still empty)` });
   }
   for (const n of [...notes.links, ...notes.empty]) out.push({ key: `note-${n.path}`, tone: 'info', path: n.path, text: n.message });
-  if (meta.status === 'published' && content.rsvp?.method !== 'none') {
+  if (meta.status === 'published' && content.rsvp?.method !== 'none' && !isThankYouOn(content, now)) {
     const closes = rsvpClosesAt(content.rsvp?.deadline, content.timezone);
     const days = closes ? Math.ceil((closes.getTime() - now.getTime()) / DAY) : null;
     if (days !== null && days > 0 && days <= 14) {
@@ -109,6 +112,7 @@ export function HomeView({
   steps,
   readiness,
   setupStep,
+  thankYouOn = false,
   replies,
   onGo,
   onPublish,
@@ -125,6 +129,8 @@ export function HomeView({
   steps: NextStep[];
   readiness: Readiness;
   setupStep: number | null;
+  /** G075: the live website shows its thank-you page now. */
+  thankYouOn?: boolean;
   replies: Replies;
   onGo: (path: string) => void;
   onPublish: () => void;
@@ -139,6 +145,18 @@ export function HomeView({
   return (
     <div className={styles.stack}>
       <StatusCard meta={meta} url={url} setupStep={setupStep} onPublish={onPublish} onShare={onShare} onContinueSetup={onContinueSetup} onCopy={onCopy} />
+
+      {/* G075: after the wedding (or turned on) the live website is a thank-you page. */}
+      {thankYouOn ? (
+        <Card title="Your website switched to thank-you mode" titleId="thank-you-card" icon={Heart} className={styles.thankYouCard} data-thank-you-card>
+          <p className={styles.cardText}>
+            Guests who open your link see your thank-you page{content.thank_you?.message ? ' and your note' : ''}. Replies are closed.
+          </p>
+          <Button variant="secondary" icon={Pencil} block onClick={() => onGo('#edit/thankyou')} data-edit-thank-you>
+            Edit the thank-you page
+          </Button>
+        </Card>
+      ) : null}
 
       {r.archiveSoon && r.archiveAt ? (
         <Banner tone="warning" icon={Hourglass}>
