@@ -280,6 +280,14 @@ kalır (`max-width: 54cqw`, invitation_card `free_zone`). Zarfa dönüşte (home
 (`love_line`) ayrı anahtar (iki ayrı söz). Bilerek sabit: iç sayfaların `description` meta cümleleri, bölge `aria-label`'ları,
 "Please turn on JavaScript…" (`data-copy-fixed`), platform mesajları (`[data-rsvp-message]`).
 
+## Misafir adları (G069 satırı, G084)
+Formda "Number of guests"in hemen altında `<template data-rsvp-party>`: misafir 2+ yazınca `/rsvp/form.js` diğer misafirler
+için "Name of guest 2 / 3 … (optional)" satırlarını açar (`party:<n>`, `party: [...]` gönderir; "no"da formdan çıkar, yazılan
+kalır). Satır formun kendi `.field` / `.kicker` / `.opt` stilinde (yeni dekor, yeni CSS, yeni JS yok — `site.css` / `site.js`
+baytı değişmedi). Satır `data-fold` taşır: yeniden ölçümde (döndürme/yeniden boyut) `folds` onu diğer alanlar gibi nav çizgisine
+katlar. Metinler `form_party` (`max` 24, standart) ve `form_optional`; 360/390'da her anahtar `max`'ta satırlar açıkken yatay
+kaydırma yok, etiket kutuda sarar (`tests/g069-browser.ts` G084 bölümü).
+
 ## Bilinen sınırlar
 - Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim).
 - Details tören cümlesi yalnız saati söyler ("The ceremony begins at 4:00 PM.").

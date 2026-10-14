@@ -251,11 +251,13 @@ try {
     await new Promise((r) => setTimeout(r, 300));
     await page.screenshot({ path: path.join(G084_OUT, `${name}.png`) });
   };
-  const toGuests = (page: any) =>
-    page.evaluate(() => {
-      const el = document.querySelector('[name="guests"]')!.closest('label')!;
-      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 96);
-    });
+  /** Scrolls the form (name … the name rows) or the guest count to the top of the screen; no focus ring in the picture. */
+  const scrollTo = (page: any, sel: string, gap: number) =>
+    page.evaluate(([s, g]: [string, number]) => {
+      (document.activeElement as HTMLElement | null)?.blur();
+      window.scrollTo(0, document.querySelector(s)!.getBoundingClientRect().top + window.scrollY - g);
+    }, [sel, gap]);
+  const toGuests = (page: any) => scrollTo(page, 'label:has([name="guests"])', 96);
   for (const t of partySites) {
     const T = `G084 ${t.tag}`;
     await block(`${T} guest`, async () => {
@@ -274,6 +276,7 @@ try {
       check(`${T} form: 3 guests → 2 name fields, "Name of guest 2 / 3 (optional)"`, labels.join('|') === 'Name of guest 2 (optional)|Name of guest 3 (optional)', JSON.stringify(labels));
       // the rows are the form's own fields: same label and input styles, same spacing, right after the guest count
       const look = await page.evaluate(() => {
+        (document.activeElement as HTMLElement | null)?.blur(); // the guest count keeps the focus (its focus border)
         const field = (i: HTMLElement) => {
           const c = getComputedStyle(i), l = i.closest('label')!, k = getComputedStyle(l.querySelector('.kicker')!), b = i.getBoundingClientRect();
           return [c.fontFamily, c.fontSize, c.borderTopWidth, c.borderTopColor, c.borderRadius, c.backgroundColor, Math.round(b.width), Math.round(b.height),
@@ -291,7 +294,7 @@ try {
       await page.waitForSelector('[name="party:3"]');
       check(`${T} form: back to "yes": the typed names are still there`, (await page.inputValue('[name="party:2"]')) === 'Arthur Hartley' && (await page.inputValue('[name="party:3"]')) === 'Mae Hartley');
       await page.check('fieldset[data-rsvp-question="meal"] input[value="Fish"]');
-      await toGuests(page);
+      await scrollTo(page, '[data-rsvp]', 12); // the reply box: "Your reply" heading → name, email, attend, guests, the 2 name rows
       await page.waitForTimeout(1500); // the design's entrance motion
       check(`${T} form: no horizontal scroll at 390 px with the name fields`, (await overflow(page)) <= 0);
       await shot84(page, `01_form_party_${t.tag}_390`);
