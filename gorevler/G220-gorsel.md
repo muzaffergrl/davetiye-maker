@@ -51,3 +51,4 @@ Görev `alindi`, sahibi `gpt-gorsel-F` kalır. Kalan: W2.4–W2.18 (15 parça) +
 - 2026-10-14 gpt-gorsel-F: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör ara kontrol: kısım 1 (8 görsel) kit_check geçti, görsel olarak iyi (dalga kapaklı kum zarf ~1,55:1). Kısım 2 verildi.
 - 2026-10-14 devam: gpt-gorsel-F (kısım 2)
+- 2026-10-14 ara kayıt: gpt-gorsel-F; kısım 2, 4/8 (closure, envelope_open, card_small, invitation_card); kullanıcı talebindeki 1024×1536 closure tuvaliyle dört parça kit_check işlevinden geçti, zarf hizası GEÇTİ.
