@@ -35,3 +35,4 @@ Pilot: 01/03 (G801/G803).
 ## Günlük
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
 - 2026-10-14 alindi: gpt-gorsel-A
+- 2026-10-14 ara kayıt: gpt-gorsel-A; 3/5 sahne hazır (cover_hand için v2: üst boşluğu; laptop_phone için v2: yazısız tuşlar). Üç sahnenin ekran sayısı ve geometrisi kit_check ile geçti; piksel düzeyinde saf yeşil doğrulanmadı.
