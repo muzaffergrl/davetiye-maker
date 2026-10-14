@@ -2,7 +2,7 @@
 id: G802
 baslik: Tasarım 02 Dusty Blue & Champagne — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -44,3 +44,4 @@ Pilot: 01/03 (G801/G803).
 - 2026-10-14 alindi: gpt-gorsel-A
 - 2026-10-14 ara kayıt: gpt-gorsel-A; 3/5 sahne hazır (cover_hand için v2: üst boşluğu; laptop_phone için v2: yazısız tuşlar). Üç sahnenin ekran sayısı ve geometrisi kit_check ile geçti; piksel düzeyinde saf yeşil doğrulanmadı.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A; PAKET 3 kontrolü 5/5 geçti; piksel düzeyinde saf #00FF00 eksikliği Sonuç'a kaydedildi.
+- 2026-10-14 entegratör onayladı
