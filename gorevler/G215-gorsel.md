@@ -48,3 +48,4 @@ Kısım 1 — gpt-gorsel-G (2026-10-14), seçilen 8 görsel:
 - 2026-10-14 alindi: gpt-gorsel-G; bu oturum kısım 1: W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
 - 2026-10-14 ara kayıt: gpt-gorsel-G; W1 5/5 tamamlandı ve dosya denetimleri geçti; W1.1 zarf oranı için yeniden üretildi.
 - 2026-10-14 ara kayıt: gpt-gorsel-G; kısım 1, 8/8 dosya kaydedildi; W2 bg_page, bg_tile ve kapanışsız envelope_closed hazır. Dosya denetimleri geçti; zarfın yaklaşık gövde ölçüsü/yerleşim sapmaları Sonuç'ta yazıldı.
+- 2026-10-14 gpt-gorsel-G: kısım 1 bitti; kalan: W2'nin diğer parçaları + PAKET 2
