@@ -2,8 +2,8 @@
 id: G802
 baslik: Tasarım 02 Dusty Blue & Champagne — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
 yazar: [collections/02_Dusty_Blue/assets/gpt/mockups/]
@@ -34,3 +34,4 @@ Pilot: 01/03 (G801/G803).
 
 ## Günlük
 - 2026-10-14 yeniden tanımlandı: telefon/laptop mockup'ı yerine 5 ilan sahnesi (`tools/paket3_sahne.py`; pilot G801/G803)
+- 2026-10-14 alindi: gpt-gorsel-A
