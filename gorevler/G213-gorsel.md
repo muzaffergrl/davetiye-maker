@@ -32,9 +32,12 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+- Kısım 1 ara kayıt (gpt-gorsel-C, 2026-10-14): W1'in beş referans ekranı `assets/gpt/comps/web_1_envelope.png`, `web_2_home.png`, `web_3_story.png`, `web_4_details.png`, `web_5_rsvp.png` üretildi; hepsi 1024×1536.
+- W1.3 yeniden üretildi: ilk taslak yatay foto pencereleri içeriyordu; seçilen sürümde üç dikey pencere var. W1.4 yeniden üretildi: ilk program kartı genişti; seçilen sürüm uzun kitap sayfası biçiminde.
+- W1 dosyaları `kit_check.denetle` ile kontrol edildi: 5/5 GEÇTİ (oran ve gereken yeşil pencere alanı). Metin, nesne ve yerleşim kontrolleri görsel olarak yapıldı. W2'nin bu oturuma ait üç parçası sırada; kalan W2 ve PAKET 2 bu oturumun kapsamı dışında.
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 alindi: gpt-gorsel-C; bu oturum kısım 1: W1'in 5 ekranı + W2 bg_page, bg_tile, envelope_closed (8 görsel).
+- 2026-10-14 ara kayıt: gpt-gorsel-C; W1 bitti (5/8), seçilen beş ekran kaydedildi; durum alindi.
