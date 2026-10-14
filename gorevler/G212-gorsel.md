@@ -57,3 +57,4 @@ Tasarım 12'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 2, 8/8); info_card, frame_portrait, frame_landscape, florals_tl kaydedildi; sekiz yeni dosya oran/alfa/pencere-varlığı denetiminden geçti; yeşil renk ve yatay oran farkları Sonuç'ta kaydedildi. Durum alindi.
 - 2026-10-14 kısım 2 bitti; kalan: florals_br, accent_1–3, divider, web_hero + PAKET 2
 - 2026-10-14 devam: gpt-gorsel-D (kısım 3)
+- 2026-10-14 ara kayıt: gpt-gorsel-D (kısım 3, 3/6); florals_br, accent_1, accent_2 kaydedildi. Üç parça gerçek alfa ve oran kontrolünden geçti; florals_br, mevcut florals_tl ile aynı çiçekler ve suluboya tekniğinde üretildi. Mevcut dosyalar korundu; durum alindi.

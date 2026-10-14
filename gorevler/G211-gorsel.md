@@ -2,7 +2,7 @@
 id: G211
 baslik: Tasarım 11 Boho Pampas Terracotta — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: inceleme
 alan: gpt-gorsel-E
 oncelik: 2
 bagimli: []
@@ -27,22 +27,29 @@ Tasarım 11'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 6. Kontrol: `python3 tools/kit_check.py collections/11_Boho_Pampas --paket 5` ve `--paket 2` (kabuk yoksa her görselin Kontrol satırını uygula).
 
 ## Bitti sayılması için
-- [ ] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
-- [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
-- [ ] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
+- [x] PAKET 5: 5 comp + 17 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
+- [x] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
+- [x] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
-Kısım 1 (gpt-gorsel-E, 2026-10-14): mevcut 5 W1 comp'u, envelope_closed.png ve closure.png aynı sohbete referans olarak yüklendi; repodaki hazır dosyalar yeniden üretilmedi. Paket 5 prompt'larıyla yalnız envelope_open.png, card_small.png, invitation_card.png, info_card.png, frame_portrait.png, frame_landscape.png, decor_tl.png ve decor_br.png sırasıyla üretilip `collections/11_Boho_Pampas/assets/gpt/parts/` içindeki Kaydet yollarına kondu. 4/8 ve 8/8 ara kayıtları main'e push edildi. Ek önizleme, metrik veya rapor dosyası eklenmedi.
+G211 üretimi bütün oturumlar sonunda tamamlandı: PAKET 5 için 5 W1 comp + 17 W2 parça, PAKET 2 için 5 örnek fotoğraf Kaydet yollarında. Durum `inceleme`; açık görsel kusurlar aşağıda kayıtlı.
 
-`python3 tools/kit_check.py collections/11_Boho_Pampas --paket 5`: **18/23 geçti** (17 mevcut dosya + zarf hizası); 5 parça henüz yok. Açık zarf kapalı zarf referansıyla üretildi, gövde kenarları otomatik hiza kontrolünden geçti. Büyük davet kartı ve sağ alt küme kenar boşluğu için yeniden üretildi. Üretilen parçalar yazısız, gerçek alfa PNG'dir; iki köşe kümesi imagegen'in 1254×1254 kare çıktılarıdır (denetleyici Kaydet oranını kabul eder).
+Önceki oturumların özeti (Günlük ve önceki Sonuç kayıtları): ilk kopan sohbet repoya çıktı bırakmadı. Sonraki oturumda 5 W1 telefon ekranı ile bg_page.png, bg_tile.png, envelope_closed.png ve closure.png üretildi ve ara kayıtlarla main'e gönderildi. Kısım 1'de mevcut comp'lar ve zarf/kapanış referanslarıyla envelope_open.png, card_small.png, invitation_card.png, info_card.png, frame_portrait.png, frame_landscape.png, decor_tl.png ve decor_br.png üretildi; 4/8 ve 8/8 kayıtları gönderildi. O aşamada `kit_check --paket 5` 18/23 geçti; kalan beş parça yoktu. Kısım 2'de accent_1.png, accent_2.png, accent_3.png, divider.png ve web_hero.png üretildi; 3/5 ve 5/5 kayıtları gönderildi, PAKET 5 23/23'e ulaştı.
 
-Pencere sınırlamaları: card_small ve iki çerçevede 3'er denemeden en temiz 2. çıktı seçildi; tam düz saf #00FF00 elde edilemedi. Özellikle çerçevelerin yeşil alanlarında ton/alfa değişimi kaldı; dikey pencere yaklaşık 0,62:1, yatay pencere yaklaşık 1,80:1 olduğu için hedef 3:4 / 3:2 oranları da tam sağlanmadı. Otomatik denetleyicinin yeşil alanın varlığını kabul etmesi bu renk, alfa ve pencere oranı sorunlarını gidermez; sonraki incelemede düzeltme gerekir. Paket 2 fotoğrafları bu oturumun kapsamında üretilmedi. Görev tamamlanmadı; durum `alindi` bırakıldı.
+Son oturum (gpt-gorsel-E, 2026-10-14; PAKET 2): önce main çekildi, rol rehberi okundu ve devam kaydı push edildi. web_2_home.png ile web_3_story.png aynı sohbete renk ve atmosfer referansı olarak yüklendi. GPT_PROMPTS.md içindeki beş İngilizce prompt kelimesi kelimesine, hero_portrait → story_1 → story_2 → story_3 → venue sırasıyla kullanıldı. story_1–3 ve venue'da hero_portrait.jpg görsel referansı verildi; mekân prompt'a göre insansızdır. `collections/11_Boho_Pampas/assets/gpt/photos/` altında hero_portrait.jpg ve story_1.jpg–story_3.jpg 1024×1536, venue.jpg 1536×1024 RGB JPEG olarak kaydedildi. Yalnız dosya biçimi dönüştürüldü (kalite 95); kırpma, ölçekleme veya sonradan rötuş yapılmadı. 3/5 ve 5/5 ara kayıtları her seferinde `git pull --rebase origin main` ardından `git push origin HEAD:main` ile gönderildi. Bu oturumda PAKET 5 dosyaları değişmedi; ek rapor, önizleme veya deneme dosyası repoya eklenmedi.
 
-Kısım 2 (gpt-gorsel-E, 2026-10-14): mevcut 5 W1 comp'u, envelope_closed.png, closure.png ve decor_tl.png sohbete referans olarak yüklendi. Yalnız eksik accent_1.png, accent_2.png, accent_3.png, divider.png ve web_hero.png Paket 5 prompt'larıyla bu sırayla üretildi; `collections/11_Boho_Pampas/assets/gpt/parts/` içindeki Kaydet yollarına eklendi. Mevcut dosyalar korunuyor; ek rapor/önizleme dosyası yok. 3/5 ve 5/5 ara kayıtları rebase sonrası main'e push edildi. Accent'ler gerçek alfa, tek nesne ve yazısız; imagegen kare çıktıları 1254×1254. Ayırıcı 4 denemeden kenar boşluğu en geniş olan 3. çıktı; gerçek alfa 1536×1024, dış hâle örneklerinde alfa 0. Opak 1536×1024 hero için dış gölgesi kaldırılan 2. çıktı seçildi; zarf ve kapanışı 1200×630 merkez kırpımında tam ve altta **%7,84** boşluk var.
+Yeniden üretimler ve seçimler: önceki kısım 1'de büyük davet kartı ve sağ alt küme kenar boşluğu için yeniden üretildi; card_small ve iki çerçevede üçer denemeden en temiz ikinci çıktı seçildi. Kısım 2'de divider için dört denemeden kenar boşluğu en geniş üçüncü çıktı, web_hero için dış gölgesi kaldırılmış ikinci çıktı seçildi. Önceki ölçüme göre hero'nun zarfı/kapanışı 1200×630 merkez kırpımında tam, altında %7,84 boşluk var; ayırıcıdaki dış hâle örneklerinde alfa 0 doğrulandı. Bu son oturumda story_3 el anatomisi ve tutuş netliği için dört üretim çağrısı aldı; bir çağrı araç içerik filtresinde kesildi, tamamlanan üç görüntüden sonuncusu seçildi. Diğer dört fotoğraf ilk çıktılarıyla kaydedildi.
 
-`python3 tools/kit_check.py collections/11_Boho_Pampas --paket 5`: **23/23 geçti**. Bu sonuç kısım 1'de kaydedilen pencere renk/alfa ve oran sınırlamalarını ortadan kaldırmaz; o dosyalara dokunulmadı. Paket 2 fotoğrafları bu oturumda üretilmedi; kalan üretim PAKET 2 fotoğraflarıdır. Durum `alindi` kalır; kısım 2 sonunda duruldu.
+Son kontroller (2026-10-14):
+
+- `python3 tools/kit_check.py collections/11_Boho_Pampas --paket 5`: **23/23 geçti**, çıkış kodu 0. Bu sayı 22 dosya + zarf hizasıdır; kapalı/açık zarfın sol kenar farkı -%0,29, sağ +%0,39, alt +%1,04 ile hiza GEÇTİ.
+- `python3 tools/kit_check.py collections/11_Boho_Pampas --paket 2`: **5/5 geçti**, çıkış kodu 0. Beş dosyanın gerçekten RGB JPEG olduğu, açılabildiği ve hedef piksel ölçüleri ayrıca doğrulandı.
+- Fotoğraflarda yüzler ve çift tutarlılığı, eller, merkezde konu ve yazı/logo/tabela/filigran yokluğu görsel olarak kontrol edildi. story_3'te yüz yerine el/buket yakın planı vardır; doğal görünen son tutuş seçildi. Yazı ve el anatomisi için otomatik OCR/anatomi denetimi yapılmadı. Website montajı, gerçek çerçeveye yerleştirme ve yayın/RSVP bu görevin kapsamında test edilmedi.
+
+Açık kusurlar ve inceleme notları: card_small ile frame_portrait/frame_landscape foto pencereleri tam düz, saf #00FF00 değil; özellikle çerçevelerde yeşil ton/alfa değişimi kaldı. Dikey pencere yaklaşık 0,62:1 (hedef 3:4), yatay pencere yaklaşık 1,80:1 (hedef 3:2). Otomatik yeşil bölge kontrolünün geçmesi bu renk, alfa ve pencere oranı sorunlarını gidermez. story_3'te eller buket saplarını birlikte kavrıyor; parmaklar tamamen iç içe geçmiyor, bu poz farkı incelemede değerlendirilmeli. Önceki parçalardaki kusurlar bu oturumda düzeltilmedi; önerilen takip işi pencere renk/alfa ve oranlarının onarılması, fotoğrafların gerçek çerçevelerde denenmesidir. Kare W2 çıktılarının bir bölümü 1254×1254; denetleyici Kaydet oranını kabul ediyor. Açık üretim veya push blokajı kalmadı.
 
 ## Günlük
+- 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-E (PAKET 2). Son kontroller PAKET 5 23/23 ve PAKET 2 5/5 geçti; bütün oturumların özeti, yeniden üretimler ve açık pencere/poz kusurları Sonuç'a yazıldı.
 - 2026-10-14 ara kayıt (PAKET 2, 5/5): story_3.jpg (1024×1536) ve venue.jpg (1536×1024) Kaydet yollarına RGB JPEG olarak eklendi (gpt-gorsel-E); ikisinde de hero_portrait.jpg görsel referansı verildi, İngilizce prompt'lar değiştirilmedi. story_3 el anatomisi için dört çağrıda yeniden denendi; bir çağrı araç içerik filtresinde kesildi, tamamlanan üç görüntüden el tutuşu en net olan sonuncu seçildi. Mekân prompt'a göre insansızdır. PAKET 5'e dokunulmadı; repoya deneme, rapor veya önizleme dosyası eklenmedi. Durum son kontroller öncesi `alindi`.
 - 2026-10-14 ara kayıt (PAKET 2, 3/5): hero_portrait.jpg, story_1.jpg ve story_2.jpg prompt'ları kelimesi kelimesine bu sırayla üretildi; Kaydet yollarına 1024×1536 RGB JPEG olarak kondu (gpt-gorsel-E). Home ve Story comp'ları sohbete renk/atmosfer referansı olarak yüklendi; story_1 ve story_2 üretiminde hero_portrait.jpg görsel referansı kullanıldı. Yüzler, eller ve yazı/logo yokluğu görsel olarak kontrol edildi. PAKET 5'e dokunulmadı; ek rapor/önizleme dosyası yok. Durum `alindi`.
 - 2026-10-14 devam: gpt-gorsel-E (PAKET 2)
