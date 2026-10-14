@@ -59,3 +59,4 @@ Tasarım 19'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-K (kısım 2, 8/8); info_card, frame_portrait, frame_landscape ve decor_tl (Kaydet adı: florals_tl.png) tamamlandı. Yeni 8 dosyanın tamamı kullanıcının closure tuval talebiyle denetlendiğinde GEÇTİ; yeşil pencere oranları: card_small 0,7621, frame_portrait 0,7397, frame_landscape 1,5374. Durum alindi kalır.
 - 2026-10-14 kısım 2 bitti; kalan: W2'nin diğer parçaları + PAKET 2
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-L) 5/5 geçti. Kısım 2 geçti ama closure.png 1024×1536 tuvalde küçük mühür (talimat hatası); Kaydet 1024×1024, mühür ~%70 → kısım 3'te yeniden. frame_portrait penceresinde koyu leke — tema build'i doldurur.
+- 2026-10-14 devam: gpt-gorsel-K (kısım 3)
