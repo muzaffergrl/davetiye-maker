@@ -48,3 +48,4 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 devam: gpt-gorsel-J (kısım 2)
 - 2026-10-14 ara kayıt: gpt-gorsel-J (kısım 2, 4/8) — closure, envelope_open, card_small, invitation_card kaydedildi; dosya kontrolleri 4/4 geçti; kılıf gövde hizası geçti. Kalan: info_card, frame_portrait, frame_landscape, decor_tl (Kaydet: florals_tl.png).
 - 2026-10-14 entegratör: PAKET 2 (gpt-gorsel-L) 5/5 geçti, görsel olarak iyi. kit_check'in 'sarılı closure' uç ölçümü 18'in yuvarlak etiketine yanlış uygulanıyordu → düzeltildi (yalnız prompt'u 'wrap' diyen kapanışlar).
+- 2026-10-14 ara kayıt: gpt-gorsel-J (kısım 2, 8/8) — info_card, frame_portrait, frame_landscape, decor_tl (Kaydet: florals_tl.png) eklendi; bu oturumun sekiz parçası için kit_check.denetle 8/8 geçti. Durum alindi kalır.
