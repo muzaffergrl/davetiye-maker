@@ -240,8 +240,10 @@ try {
     await guest.goto(`${BASE}/${panelSite.slug}/home`, { waitUntil: 'networkidle' });
     check('before: the invitation (the wedding is in 2027, mode automatic)', !(await guest.locator('html[data-thank-you]').count()));
 
+    await page.goto(`${panel}#edit`, { waitUntil: 'networkidle' });
+    const rows = await page.locator('[data-section-row]').evaluateAll((els: Element[]) => els.map((e) => e.getAttribute('data-section-row')));
+    check('Edit keeps six pages (K29: no 7th page)', rows.join() === 'us,day,photos,story,details,rsvp', rows.join());
     await page.goto(`${panel}#edit/day`, { waitUntil: 'networkidle' });
-    check('Edit keeps six pages (K29: no 7th page)', true);
     const fold = page.locator('[data-disclosure="thank-you"] button[aria-expanded]');
     await fold.scrollIntoViewIfNeeded();
     check('Day & place ends with a folded "After the wedding" section that says "Automatic"', (await fold.getAttribute('aria-expanded')) === 'false' && (await fold.innerText()).includes('Automatic'), await fold.innerText());
@@ -256,7 +258,11 @@ try {
     await page.locator('#f-thank_you-mode label:has(input[value="on"])').click();
     await page.fill('#f-thank_you-message', MESSAGE);
     check('status line: guests see the thank-you page now, replies closed', (await page.locator('[data-thank-you-now]').innerText()).includes('Replies are closed'));
-    await page.locator('[data-disclosure="thank-you"]').screenshot({ path: path.join(OUT, '10_panel_after_the_wedding.png') });
+    // the whole section in one phone-wide picture (a tall window: the sticky bars stay at the top, nothing overlaps)
+    await page.setViewportSize({ width: 390, height: 1560 });
+    await page.locator('[data-disclosure="thank-you"]').evaluate((el: HTMLElement) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 140));
+    await shot(page, '10_panel_after_the_wedding');
+    await page.setViewportSize({ width: 390, height: 844 });
     await page.waitForSelector('[data-changes-bar]', { timeout: 10_000 });
     await page.waitForFunction(() => (document.querySelector('[data-changes-count]')?.textContent ?? '') !== '', null, { timeout: 10_000 });
     check('the change counts like any other ("Unpublished changes: 1")', (await page.locator('[data-changes-count]').innerText()) === '1');
@@ -278,7 +284,8 @@ try {
     check('Review names the page and the part: Day & place · After the wedding', (await item.innerText()).includes('After the wedding'), (await item.innerText()).replace(/\s+/g, ' '));
     await shot(page, '12_panel_review');
     await page.click('[data-review-publish]');
-    await page.waitForSelector('[data-testid="live"]', { timeout: 20_000 });
+    const live = await page.waitForSelector('[data-testid="live"]', { timeout: 30_000 }).then(() => true, () => false);
+    check('Publish from Review: "Your website is live"', live, live ? '' : (await page.locator('[role="dialog"], [role="alert"]').allInnerTexts()).join(' | ').slice(0, 300));
     await page.keyboard.press('Escape');
     await guest.reload({ waitUntil: 'networkidle' });
     check('after publishing, guests see the thank-you page', (await guest.locator('html[data-thank-you]').count()) === 1 && (await guest.locator('#thank-you').innerText()).includes('We will treasure it always.'));

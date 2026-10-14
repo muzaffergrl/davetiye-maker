@@ -19,7 +19,7 @@ cd platform
 npm ci                 # bağımlılıklar
 npm run seed           # demo site /clara-and-julian (blush-garden-rose teması, 03 demo içeriği + örnek fotoğraflar); DATA_ADAPTER'ın deposuna (local: .data/)
 npm run dev            # http://localhost:3000/clara-and-julian
-npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), RSVP paneli v2 (G069), seed (491 test, 2026-10-14 G069; Windows dahil — bkz. "Windows notları")
+npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), RSVP paneli v2 (G069), teşekkür modu (G075), seed (519 test, 2026-10-14 G075 — build varken; Windows dahil — bkz. "Windows notları")
 npm run typecheck      # tsc --noEmit
 npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
@@ -981,6 +981,11 @@ UTC+14/−11, yıl sonu, geçersiz bölge; 1 ms önce/sonra), modlar, başlık/t
 iki temada beş sayfa (kart, foto/süs, mesaj kaçışı, kapalı RSVP, Details kalır/gizlenir, nav, meta, `thank-you.css`), gizlilik (öncesinde
 kaynakta iz yok), `?thanks=1`, gerçek rotalar (kendiliğinden geçiş, API 403, On/Off, 404 Details, arşiv 410, şifre, foto, demo), panel API
 (kayıt, şekil reddi, sınır yayını engeller, foto yeri), panel yardımcıları, theme-check kuralı. Tarayıcı: `tests/g075-browser.ts`.
+
+Yan düzeltme (G075 yolculuğunda bulundu, eskiden de vardı): telefonda önizleme modalı başka bir sayfada açılınca (`PreviewPane`) açılış
+adresi bir render geride kalıyordu → kapanışta "çerçeve gezinmiş" sayılıp geçmiş kaydı silinmiyordu; ardından açılan bir sheet'in (ör.
+Review) kapanışındaki geri adımı bu kayda düşüyor, sayfa yeniden yükleniyor, "Review → Publish changes" sonrası "Your website is live"
+görünmüyordu. Artık kapanışta çerçevenin o anki istenen adresiyle karşılaştırılıyor (yüklenmemiş çerçeve = gezinmemiş).
 
 ## /start sahiplenme akışı (G045)
 

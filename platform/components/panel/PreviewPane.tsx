@@ -74,10 +74,20 @@ export function PreviewPane({
   modalRef.current = open && !wide;
   const shown = wide || open;
   const src = `${previewPath(slug, page, previewToken)}${thanks ? '&thanks=1' : ''}`;
+  // The page the frame was asked to show, read when the modal closes (G075 fix: the address captured when it opened
+  // could be the previous tab's — the wanted page arrives one render later — so every opening on another page looked
+  // "navigated" and left its history entry behind; the next sheet's Back then landed on it).
+  const srcRef = useRef(src);
+  srcRef.current = src;
 
   useEffect(() => {
     if (shown) setMounted(true);
   }, [shown]);
+  // G075: switching to / from the thank-you version loads a new frame
+  useEffect(() => {
+    setLoaded(false);
+    setSlow(false);
+  }, [thanks]);
 
   // Skeleton until the first load; after 10 s a "Try again".
   useEffect(() => {
@@ -122,7 +132,6 @@ export function PreviewPane({
       onCloseRef.current();
     };
     window.addEventListener('popstate', onPop);
-    const startPath = new URL(src, window.location.href).pathname;
     return () => {
       document.removeEventListener('keydown', onKey);
       window.removeEventListener('popstate', onPop);
@@ -135,14 +144,16 @@ export function PreviewPane({
         if (!pushed || popped || modalRef.current) return;
         let navigated = true;
         try {
-          navigated = frameRef.current?.contentWindow?.location.pathname !== startPath;
+          const at = frameRef.current?.contentWindow?.location.pathname;
+          // not loaded yet ("blank") or still on the page it was given: nothing happened inside the frame
+          navigated = at !== 'blank' && at !== new URL(srcRef.current, window.location.href).pathname;
         } catch {
           /* unreadable: treat as navigated */
         }
         if (!navigated && (window.history.state as Record<string, unknown> | null)?.[HISTORY_MARK]) window.history.back();
       }, 0);
     };
-    // `src` is read once per opening on purpose (the page tab may change while it is open).
+    // `src` is read through srcRef when it closes (the page tab may change while it is open).
   }, [open, wide]);
 
   const className = [styles.previewDock, open && !wide ? styles.previewDockOpen : ''].filter(Boolean).join(' ');
@@ -193,7 +204,9 @@ export function PreviewPane({
           {mounted ? (
             <iframe
               ref={frameRef}
-              key={`${page}-${reloadKey}`}
+              // a new frame (not a navigation of this one) per page / thank-you version: no extra history entries,
+              // so the phone's back button still closes the preview
+              key={`${page}-${reloadKey}-${thanks ? 'thanks' : 'invitation'}`}
               src={src}
               title="Preview of your website"
               className={styles.previewFrame}
