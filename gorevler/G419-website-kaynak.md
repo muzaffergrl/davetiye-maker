@@ -2,8 +2,8 @@
 id: G419
 baslik: Tasarım 19 Midnight Garden — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: inceleme
+alan: claude-G419
 oncelik: 3
 bagimli: [G219, G038, G046, G052]
 yazar: [platform/themes/midnight-garden/, platform/tests/theme-midnight-garden.test.ts, platform/previews/g419/]
@@ -35,9 +35,59 @@ Tasarım 19'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [ ] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+**Ne yapıldı (claude-G419, dal `claude/g419-tema`):** `platform/themes/midnight-garden/` (theme.json, content.demo.json =
+koleksiyon kaydı birebir, 5 sayfa, site.css, site.js, thank-you.css, build_images.py, README.md + comp öğe haritası, img/ build
+çıktısı ~1,9 MB), `platform/tests/theme-midnight-garden.test.ts` (38 test), `platform/previews/g419/` (sayfa görüntüleri,
+`compare_<sayfa>_390.jpg`, `compare_closure.jpg`, kesim önizlemeleri, `opening_390x844.mp4`, `checks.json`, `final/`).
+Platform iskeleti (motor işaretleri, RSVP/G051/G069/G075/G068, fold/fit kodu, test iskeleti) 08 winter-evergreen'den; görünüş,
+tipografi (Playfair Display SC + Cormorant SC + Cormorant Garamond), renk, süs konumları, açılış, story ve zamanlama bu tasarımın
+W1 comp'larından.
+
+- **Açılış:** dokununca gümüş mühür (aynı GPT parçasının iki kopyası, tek düz çizgiyle `clip-path` — çatlak çizilmez) çatlar,
+  iki yarısı ayrı yönlere dönerek düşüp ekrandan çıkar; siyah kapak yavaşça (1,18 s) açılır; içeriden sıcak altın mum ışığı
+  (kenarsız CSS ışığı, §5.7) taşar; kart karanlıktan (brightness .18 → 1) ışığa yükselir, öne gelir, VT ile home kartına uçar.
+  Dokun → home 4762 ms. Cümlede parçacık yok → `accents.open = []`. Mühürde monogram (`initials`, pişirilmez).
+- **Story:** üç barok yaldızlı çerçeve "salon" dizilişinde; her biri görünüme girince arkasındaki duvarda mum ışığı ısınır ve
+  çerçeve + foto neredeyse siyahtan aydınlanır (`kindle`). Telefonda alt alta ama dönüşümlü sola/sağa (pencere 41,2vw ≥ 38vw),
+  ≥ 720 px comp'un iki sütunlu salonu.
+- **Comp sapmaları** (README'de gerekçeli): geri sayım kutusuz sade rakam (K21); story telefonda iki sütun yerine dönüşümlü tek
+  sütun (§9); çerçeve diplerindeki çiçek demetleri yok (GPT'de ayrı parça değil); mekân çerçevesi comp'tan kare (GPT
+  `frame_landscape` 1,53:1 pencere); RSVP başlık altı elmas süs yerine GPT gül dalı; hero kartında yalnız şehir (comp'a uyuldu);
+  mühürde monogram (comp'ta boş); kısa telefonda "Tap to open" arkasında kenarsız koyu okunabilirlik hâlesi.
+- **Görsel hattı:** kapak `kapak_kes("v")` renk; ön cep tema içi yukarıdan tarama (alt kanadın düz üstü + yan kanatlar;
+  `cep_kes("v")`/parts_prep tek V uydurup astar şeridi alıyordu), astar içi 0 px; hiza sol 0,00 · sağ −0,10 · alt +0,13 %
+  (dönüşüm yok); kapanış W1.1'den ölçüldü (genişlik/zarf 0,1492), `compare_closure.jpg` örtüşüyor. Davet kartında temiz bant
+  yalnız %48,2–50,4 → bant ayrı dosya, kendi boyunda `repeat-y` (esnetilmez). Telefon zemini `night`: kümesiz düz gece karası
+  (dikeyde × 2 ölçekli, dokusuz) + mum ışığının alt yarısı — ışık ekranın alt dörtte birinde kalır.
+
+**Komut sonuçları (2026-10-15):** `kit_check --paket 5` 23/23, `--paket 2` 5/5 · `npm test` 994/994 · `npm run typecheck` temiz ·
+`npm run build` + trace-check temiz (16 tema) · `theme-check --theme midnight-garden --stress` 128 geçti / 0 hata / 0 uyarı ·
+`g051-browser --theme midnight-garden` 44/44 · `final-smoke --theme midnight-garden` 45/45 · `copy-manifest --check` temiz
+(71 anahtar). İlk görünüm 390×844 DPR 3: index 718 KB, home 949 KB (yer tutucu); tohumlanmış fotoğrafla 808 / 1423 KB.
+Azaltılmış hareket 201 ms. site.js 35 550 B, site.css 46 041 B.
+
+**Kendi QA turum:** 360/390/430/768/1280, 375×553, 667×375, 844×390, zorlama kaydı ve teşekkür hâli görüntülerine ve MP4
+karelerine baktım; düzeltilenler: rsvp mührü kart öğesinin dışına (monogram "kart metni" sayılıyordu), ışık katmanı ekran
+kenarından taşıyordu, "Tap to open" kısa telefonda mum ışığı üstündeydi (zemin yeniden kuruldu + hâle), teşekkür başlığı
+360'ta kart kâğıdından taşıyordu (`fitCopy` son adım: tarih düşer), home 375×553'te isim 31 px, masaüstü story ızgarasında
+itilen çerçeve öncekini yukarı çekiyordu (yayılan öğe kaldırıldı). **qa-kontrol incelemesi:** 5 sayfa + kapanış KABUL, ret sebebi
+yok; önemli bulgu (details kartında fold'un bıraktığı boşluk) → program satırları fold birimi olmaktan çıkarıldı; küçük not
+(story başlığı 3. çerçeveye yakın) → aralık açıldı; diğer küçük notlar (kümelerin kart/panel arkasından taşması) kabul.
+
+**Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, `mix-blend-mode`, çapraz belge VT), Vercel
+yayını (görevin işi değil), gerçek alıcı fotoğrafları, yavaş ağ.
+
+**Sorunlu GPT parçaları:** engelleyici yok. `frame_landscape` comp'taki geniş yatay çerçeveden kare (pencere 1,53:1) — kabul;
+istenirse önerilen gpt-gorsel görevi: "frame_landscape ~2.2:1 window, as in W1.4". `invitation_card`'da köşe çiçekleri ve yan
+kıvrımlar arasında yalnız ~32 px temiz bant var (tekrarla çözüldü); öneri (katalog ortak metni): davet kartında ortada en az
+%15 boyunda süssüz düz bant.
+
+**Entegratöre notlar:** ortak dosyaya dokunulmadı; tema sayısını sayan ortak testler kırılmadı (düzeltme gerekmedi).
+`gorevler/PANO.md` commit'lenmedi.
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 entegratör notu: frame_portrait penceresinin sağ yarısında koyu leke → build'de pencere doldurma şart.
+- 2026-10-15 alindi: claude-G419
+- 2026-10-15 bitti, incelemeye gönderildi

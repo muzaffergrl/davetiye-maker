@@ -1,0 +1,116 @@
+<!doctype html>
+<!-- Midnight Garden · page 1 — envelope landing (/<slug>). W1.1 comp: a black night garden painted like a Dutch still
+     life — crimson and garnet roses, plum peonies, midnight-blue delphiniums, dark berries and dusky leaves in the
+     top-left and bottom-right corners, a velvet-plum butterfly and a red rose petal on the right, a warm candle glow
+     low on the left; "YOU ARE INVITED", the names in high-contrast small capitals, the matte black envelope with its
+     hair-thin silver edges and the silver wax seal on the tip of the V flap, "TAP TO OPEN" between two hairlines.
+     Opening (catalogue, docs/11 §7.3): on tap, the silver seal cracks and falls away, the black flap opens slowly, warm
+     golden candlelight spills out from inside, and the card rises out of the darkness into the glow; the card comes
+     forward and flies to home (view transition). Personal text: none — [data-field] / [data-text] / [data-photo] are
+     filled on the server (platform/README.md); the seal's monogram is the couple's initials (data-field, never baked).
+     Thank-you mode (G075, data-if="thank_you_on"): the same envelope and opening; the card carries the couple's
+     thank-you title and the date, its window the thank-you photo or — without one — the silver seal on the night
+     (never a photo placeholder). Design texts: data-copy (G068, theme.json "copy"). Visuals: GPT parts only (img/,
+     build_images.py); the candle glow is borderless CSS light (docs/11 §5.7). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{name_display} · {date}">Wedding invitation</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {name_display} · {date|date-long} · {venue.city_region}" content="Wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {date|date-long} · {venue.city_region}" content="You're invited">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<meta name="theme-color" content="#0E0D0E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;family=Cormorant+SC:wght@500;600&amp;family=Playfair+Display+SC&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-envelope" data-pending="This link will be added soon.">
+
+<!-- backdrop (W1.1): the night (two cluster-free crops of bg_page: plain black + the candle glow low on the left) + the
+     two GPT floral clusters as separate layers, each whole on screen; the comp's butterfly, petal and plum -->
+<div class="scene-bg" aria-hidden="true">
+  <picture>
+    <source media="(min-aspect-ratio: 3/4)" srcset="img/night_wide-720.webp">
+    <img class="scene-img" src="img/night-690.webp" alt="" fetchpriority="high">
+  </picture>
+  <img class="corner corner-tl" src="img/florals_tl-360.webp" srcset="img/florals_tl-360.webp 360w, img/florals_tl-540.webp 540w, img/florals_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(30vw, 50vh, 460px), min(62vw, 31svh, 330px)" alt="" fetchpriority="high">
+  <img class="corner corner-br" src="img/florals_br-360.webp" srcset="img/florals_br-360.webp 360w, img/florals_br-540.webp 540w, img/florals_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 50vh, 440px), min(56vw, 28svh, 300px)" alt="">
+  <img class="float f-butterfly" src="img/accent_3-200.webp" alt="">
+  <img class="float f-petal" src="img/accent_1-200.webp" alt="">
+  <img class="float f-plum" src="img/accent_2-200.webp" alt="">
+</div>
+
+<a class="skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+
+<main class="env-page">
+  <header class="env-head">
+    <p class="kicker" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
+    <p class="kicker" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="disp names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </header>
+
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
+    <div class="env">
+      <img class="env-flap" src="img/env_flap-440.webp" srcset="img/env_flap-440.webp 440w, img/env_flap-880.webp 880w" sizes="min(81vw, 432px)" alt="">
+      <img class="env-body" src="img/env_body-440.webp" srcset="img/env_body-440.webp 440w, img/env_body-880.webp 880w" sizes="min(81vw, 432px)" alt="">
+      <!-- candlelight inside the pocket, behind the card -->
+      <span class="env-glow" aria-hidden="true"></span>
+      <div class="card-slot">
+        <div class="card" aria-hidden="true">
+          <div class="photo-slot mask-card" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(27vw, 142px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+            <!-- thank-you mode: the couple's thank-you photo in the same window, else the silver seal on the night (decoration) -->
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(27vw, 142px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/closure-160.webp" srcset="img/closure-160.webp 160w, img/closure-320.webp 320w" sizes="min(16vw, 84px)" alt=""></span>
+          </div>
+          <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(44vw, 233px)" alt="">
+          <div class="card-copy">
+            <p class="disp" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
+            <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+            <p class="kicker"><span class="nowrap" data-field="date"></span><span class="sep" aria-hidden="true" data-if="!thank_you_on"> · </span><span class="cc-city" data-if="!thank_you_on" data-field="venue.city"></span></p>
+          </div>
+        </div>
+      </div>
+      <img class="env-pocket" src="img/env_pocket-440.webp" srcset="img/env_pocket-440.webp 440w, img/env_pocket-880.webp 880w" sizes="min(81vw, 432px)" alt="">
+      <img class="env-closed" src="img/env_closed-440.webp" srcset="img/env_closed-440.webp 440w, img/env_closed-880.webp 880w" sizes="min(81vw, 432px)" alt="" fetchpriority="high">
+      <img class="env-cflap" src="img/env_cflap-440.webp" srcset="img/env_cflap-440.webp 440w, img/env_cflap-880.webp 880w" sizes="min(81vw, 432px)" alt="">
+      <!-- the silver seal: its own layer on the flap's tip with the couple's monogram pressed into its empty centre. Two
+           copies cut by one straight line (clip-path, nothing drawn): on tap the seal cracks and the halves fall away -->
+      <div class="closure" aria-hidden="true">
+        <span class="seal-half sh-l"><img src="img/closure-160.webp" srcset="img/closure-160.webp 160w, img/closure-320.webp 320w" sizes="min(12vw, 64px)" alt=""><span class="seal-mono" data-field="initials"></span></span>
+        <span class="seal-half sh-r"><img src="img/closure-160.webp" srcset="img/closure-160.webp 160w, img/closure-320.webp 320w" sizes="min(12vw, 64px)" alt=""><span class="seal-mono" data-field="initials"></span></span>
+      </div>
+      <!-- warm golden candlelight spilling out of the open envelope (borderless CSS light, docs/11 §5.7) -->
+      <span class="env-spill" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <!-- W1.1: "— TAP TO OPEN —" between two hairlines -->
+  <div class="env-hint" aria-hidden="true">
+    <p class="rule"><span class="tap" data-copy="envelope_hint_tap">Tap to open</span><span class="click" data-copy="envelope_hint_click">Click to open</span></p>
+  </div>
+
+  <div class="env-after">
+    <a class="btn" href="home.html" data-enter data-copy="envelope_enter">Enter</a>
+    <button class="replay textlink" type="button" data-copy="envelope_replay">Replay the opening</button>
+  </div>
+
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html" data-copy="envelope_open">Open the invitation</a></p>
+</main>
+
+</body>
+</html>

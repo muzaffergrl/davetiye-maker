@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Celeste",
+      "full_name": "Celeste Marie"
+    },
+    {
+      "display_name": "Damien",
+      "full_name": "Damien Alexander"
+    }
+  ],
+  "name_display": "Celeste & Damien",
+  "initials": "C&D",
+  "host_line": "Together with their families",
+  "date": "2027-11-06",
+  "ceremony_time": "18:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "The Midnight Conservatory",
+    "city": "New Orleans",
+    "region": "Louisiana",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "18:00",
+      "location": "The Moonlit Garden"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "19:00",
+      "location": "The Velvet Lounge"
+    },
+    {
+      "label": "Reception",
+      "time": "20:30",
+      "location": "The Glasshouse"
+    }
+  ],
+  "dress_code": "Black tie",
+  "rsvp": {
+    "deadline": "2027-09-25",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Candlelit evenings and moonlit walks led us, one midnight at a time, to",
+    "items": [
+      {
+        "caption": "By candlelight"
+      },
+      {
+        "caption": "Under the moon"
+      },
+      {
+        "caption": "One red rose"
+      }
+    ]
+  }
+}
