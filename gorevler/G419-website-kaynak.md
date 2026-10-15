@@ -2,8 +2,8 @@
 id: G419
 baslik: Tasarım 19 Midnight Garden — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G419
 oncelik: 3
 bagimli: [G219, G038, G046, G052]
 yazar: [platform/themes/midnight-garden/, platform/tests/theme-midnight-garden.test.ts, platform/previews/g419/]
@@ -41,3 +41,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 entegratör notu: frame_portrait penceresinin sağ yarısında koyu leke → build'de pencere doldurma şart.
+- 2026-10-15 alindi: claude-G419
