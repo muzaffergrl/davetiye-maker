@@ -139,26 +139,26 @@
   <section class="section teasers" data-scene="home-teasers" aria-label="More about the day">
     <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="170px" alt="" loading="lazy">
     <div class="wrap teaser-list">
-      <a class="teaser t-story" data-optional="our_story" href="story.html" data-step="teaser" data-a="tumble-l">
-        <span class="pressed pr-portrait" aria-hidden="true">
+      <a class="teaser t-story" data-optional="our_story" href="story.html">
+        <span class="pressed pr-portrait" aria-hidden="true" data-step="teaser" data-a="tumble-l">
           <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(30vw, 137px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/bud-80.webp" alt=""><span>Your photo here</span></span></span>
           <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(46vw, 210px)" alt="" loading="lazy">
         </span>
-        <span class="tz-text"><span class="script tz-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
+        <span class="tz-text" data-step="words" data-a="rise"><span class="script tz-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
       </a>
-      <a class="teaser t-day" href="details.html" data-if="!thank_you_hides_details" data-step="teaser" data-i="1" data-a="tumble-r">
-        <span class="pressed pr-landscape" aria-hidden="true">
+      <a class="teaser t-day" href="details.html" data-if="!thank_you_hides_details">
+        <span class="pressed pr-landscape" aria-hidden="true" data-step="teaser" data-i="1" data-a="tumble-r">
           <span class="photo-slot mask-landscape" data-slot="venue"><img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(57vw, 270px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/bud-80.webp" alt=""><span>Your photo here</span></span></span>
           <img class="frame-img" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(76vw, 360px)" alt="" loading="lazy">
         </span>
-        <span class="tz-text"><span class="script tz-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span>
+        <span class="tz-text" data-step="words" data-i="1" data-a="rise"><span class="script tz-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span>
           <!-- the first four schedule rows (docs/11 §3.2; site.css shows four) -->
           <span class="tz-sched"><span class="tz-row" data-repeat="schedule"><span data-field=".label"></span> · <span class="nowrap" data-field=".time"></span></span></span>
         </span>
       </a>
-      <a class="teaser t-rsvp" href="rsvp.html" data-if="!rsvp.method !thank_you_on" data-step="teaser" data-i="2" data-a="tumble-l">
-        <span class="tz-bundle" aria-hidden="true"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-550.webp 550w" sizes="min(34vw, 150px)" alt="" loading="lazy"></span>
-        <span class="tz-text"><span class="script tz-title" data-copy="rsvp_title">Will You Join Us?</span><span class="kicker cue" data-copy="home_rsvp_cue">Reply</span></span>
+      <a class="teaser t-rsvp" href="rsvp.html" data-if="!rsvp.method !thank_you_on">
+        <span class="tz-bundle" aria-hidden="true" data-step="teaser" data-i="2" data-a="tumble-l"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-550.webp 550w" sizes="min(34vw, 150px)" alt="" loading="lazy"></span>
+        <span class="tz-text" data-step="words" data-i="2" data-a="rise"><span class="script tz-title" data-copy="rsvp_title">Will You Join Us?</span><span class="kicker cue" data-copy="home_rsvp_cue">Reply</span></span>
       </a>
     </div>
   </section>

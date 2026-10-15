@@ -2220,8 +2220,35 @@
    "top_end_pct": 79.0,
    "bottom_start_pct": 95.0,
    "ratio": 0.70724,
-   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+   "mid": "invitation_mid",
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before = <ad>_mid (liften temizlenmiş aynı satırlar, dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
   }
+ },
+ "invitation_mid": {
+  "src_size": [
+   918,
+   208
+  ],
+  "ratio": 4.41346,
+  "files": [
+   {
+    "file": "invitation_mid-480.webp",
+    "w": 480,
+    "h": 109,
+    "bytes": 7294
+   },
+   {
+    "file": "invitation_mid-918.webp",
+    "w": 918,
+    "h": 208,
+    "bytes": 14924
+   }
+  ],
+  "rows_pct": [
+   79.0,
+   95.0
+  ],
+  "despeckled_share": 0.00513
  },
  "info_card": {
   "src_size": [
@@ -2749,8 +2776,35 @@
    "top_end_pct": 14.0,
    "bottom_start_pct": 95.0,
    "ratio": 0.64627,
-   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+   "mid": "info_mid",
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before = <ad>_mid (liften temizlenmiş aynı satırlar, dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
   }
+ },
+ "info_mid": {
+  "src_size": [
+   771,
+   966
+  ],
+  "ratio": 0.79814,
+  "files": [
+   {
+    "file": "info_mid-480.webp",
+    "w": 480,
+    "h": 601,
+    "bytes": 40130
+   },
+   {
+    "file": "info_mid-771.webp",
+    "w": 771,
+    "h": 966,
+    "bytes": 41874
+   }
+  ],
+  "rows_pct": [
+   14.0,
+   95.0
+  ],
+  "despeckled_share": 0.00223
  },
  "florals_tl": {
   "src_size": [

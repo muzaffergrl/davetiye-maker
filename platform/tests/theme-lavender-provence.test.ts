@@ -240,10 +240,12 @@ test('4 no personal text is hard-coded in the templates, the stylesheets or the 
     // W1 comp demo text is a layout reference only
     assert.doesNotMatch(raw, /Amélie|Louis|Lavande|Gordes|Rosé in the square|Summer chic/, page);
   }
-  assert.deepEqual(personal.filter((s) => cssText().includes(s)), []);
-  assert.deepEqual(personal.filter((s) => readFileSync(path.join(DIR, 'thank-you.css'), 'utf8').includes(s)), []);
+  // the design's own name in the file headers is not the couple's region
+  const own = (t: string) => t.replace(/Lavender Provence/g, '');
+  assert.deepEqual(personal.filter((s) => own(cssText()).includes(s)), []);
+  assert.deepEqual(personal.filter((s) => own(readFileSync(path.join(DIR, 'thank-you.css'), 'utf8')).includes(s)), []);
   // site.js: personal text only inside DEV_CONTENT (the static design preview), never written by the script
-  const js = jsText().replace(/const DEV_CONTENT = \{[\s\S]*?\n\};/, '');
+  const js = own(jsText()).replace(/const DEV_CONTENT = \{[\s\S]*?\n\};/, '');
   assert.deepEqual(personal.filter((s) => js.includes(s)), []);
   assert.doesNotMatch(js, /textContent = (CONTENT|SITE)/, 'the script never writes personal text');
 });
