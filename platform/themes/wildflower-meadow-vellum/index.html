@@ -1,0 +1,109 @@
+<!doctype html>
+<!-- Wildflower Meadow Vellum · page 1 — the vellum sleeve landing (/<slug>). W1.1 comp: a bright airy cream-to-pale-
+     meadow-green ground with blurred wildflower colours at the very bottom, colored-pencil wildflower clusters (poppies,
+     cornflowers, daisies, lupines, grasses) in the top-left and bottom-right corners, a poppy petal, a cornflower head and
+     a field daisy floating on the right; "YOU ARE INVITED", the names in a flowing script, a frosted vellum sleeve with the
+     card showing faintly through it and a round deckled wildflower label just below its open top edge, "TAP TO OPEN".
+     Opening (catalogue, docs/11 §7.7 — kılıf): on tap, the wildflower label peels away, the frosted vellum sleeve slides
+     down off the card and fades, and the card lifts up as a few colored-pencil petals flutter across the screen; the card
+     comes forward and flies to home (view transition). Personal text: none — [data-field] / [data-text] / [data-photo]
+     are filled on the server (platform/README.md). Thank-you mode (G075, data-if="thank_you_on"): the same sleeve and
+     opening; the card carries the couple's thank-you title and the date, its window the thank-you photo or — without
+     one — the meadow mist and the wildflower label (never a photo placeholder). Design texts: data-copy (G068, theme.json
+     "copy"). Visuals: GPT parts only (img/, build_images.py). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{name_display} · {date}">Wedding invitation</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {name_display} · {date|date-long} · {venue.city_region}" content="Wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {date|date-long} · {venue.city_region}" content="You're invited">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<meta name="theme-color" content="#F1F0E1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&amp;family=Spectral:ital,wght@0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-envelope" data-pending="This link will be added soon.">
+
+<!-- backdrop (W1.1): the meadow mist (two cluster-free crops of bg_page) + the two GPT wildflower clusters as separate
+     layers, each whole on screen; the comp's three floating accents on the right -->
+<div class="scene-bg" aria-hidden="true">
+  <picture>
+    <source media="(min-aspect-ratio: 3/4)" srcset="img/meadow_wide-640.webp">
+    <img class="scene-img" src="img/meadow-580.webp" alt="" fetchpriority="high">
+  </picture>
+  <img class="corner corner-tl" src="img/florals_tl-360.webp" srcset="img/florals_tl-360.webp 360w, img/florals_tl-540.webp 540w, img/florals_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(30vw, 50vh, 460px), min(58vw, 30svh, 320px)" alt="" fetchpriority="high">
+  <img class="corner corner-br" src="img/florals_br-360.webp" srcset="img/florals_br-360.webp 360w, img/florals_br-540.webp 540w, img/florals_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 50vh, 440px), min(54vw, 28svh, 300px)" alt="">
+  <img class="float f-petal" src="img/accent_1-200.webp" alt="">
+  <img class="float f-corn" src="img/accent_2-200.webp" alt="">
+  <img class="float f-daisy" src="img/accent_3-200.webp" alt="">
+</div>
+
+<a class="skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+
+<main class="env-page">
+  <header class="env-head">
+    <p class="kicker" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
+    <p class="kicker" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="script names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </header>
+
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
+    <div class="env">
+      <!-- the card waits BEHIND the frosted sleeve, inside its edges (docs/11 §7.7) -->
+      <div class="card-slot">
+        <div class="card" aria-hidden="true">
+          <div class="photo-slot mask-card" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(30vw, 150px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+            <!-- thank-you mode: the couple's thank-you photo in the same window, else the meadow mist and the label (decoration) -->
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(30vw, 150px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/closure-200.webp" srcset="img/closure-200.webp 200w, img/closure-214.webp 214w" sizes="min(22vw, 110px)" alt=""></span>
+          </div>
+          <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-590.webp 590w" sizes="min(60vw, 300px)" alt="">
+          <div class="card-copy">
+            <p class="script" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
+            <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+            <p class="kicker"><span class="nowrap" data-field="date"></span><span class="sep" aria-hidden="true" data-if="!thank_you_on"> · </span><span class="cc-city" data-if="!thank_you_on" data-field="venue.city"></span></p>
+          </div>
+        </div>
+      </div>
+      <!-- the frosted vellum sleeve: one group (its opacity), the body stays one object; at "flare" only the top band
+           (the open mouth) changes (docs/11 §7.7, build_images.py serit_bul) -->
+      <div class="sleeve">
+        <img class="sleeve-body" src="img/sleeve_body-440.webp" srcset="img/sleeve_body-440.webp 440w, img/sleeve_body-720.webp 720w" sizes="min(80vw, 400px)" alt="" fetchpriority="high">
+        <img class="sleeve-band" src="img/sleeve_band-440.webp" srcset="img/sleeve_band-440.webp 440w, img/sleeve_band-720.webp 720w" sizes="min(80vw, 400px)" alt="">
+        <img class="sleeve-open-band" src="img/sleeve_open_band-440.webp" srcset="img/sleeve_open_band-440.webp 440w, img/sleeve_open_band-720.webp 720w" sizes="min(80vw, 400px)" alt="">
+      </div>
+      <!-- the wildflower label: its own layer just below the sleeve's open top edge — it peels away first -->
+      <div class="closure"><img src="img/closure-200.webp" srcset="img/closure-200.webp 200w, img/closure-214.webp 214w" sizes="min(22vw, 110px)" alt=""></div>
+    </div>
+  </div>
+
+  <div class="env-hint" aria-hidden="true">
+    <p><span class="tap" data-copy="envelope_hint_tap">Tap to open</span><span class="click" data-copy="envelope_hint_click">Click to open</span></p>
+  </div>
+
+  <div class="env-after">
+    <a class="btn" href="home.html" data-enter data-copy="envelope_enter">Enter</a>
+    <button class="replay textlink" type="button" data-copy="envelope_replay">Replay the opening</button>
+  </div>
+
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html" data-copy="envelope_open">Open the invitation</a></p>
+</main>
+
+</body>
+</html>

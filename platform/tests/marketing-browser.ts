@@ -24,6 +24,9 @@
 //    text column on wide screens (two rows, main button and chips inside the first screen at 1280 × 800).
 //    G094 (fourteen designs): card rows 2×7 on phones and 3+3+3+3+2 from 900 px, "other designs" 2+…+1 / 3+3+3+3+1;
 //    every chip in the phone strip; wide screens seven names + "+7 more" (≤ 2 rows at 1280 × 800), which reveals the rest.
+//    G097 (15–20 joined, twenty designs): the G094 rows follow the live count (20: 2×10 / 3×6+2); each of the
+//    six has its card and loaded screen on /designs and the home strip, a chip that switches the poster (after
+//    "+N more" on wide screens) and a design page whose "Other designs" lists every other live design (390 and 1280).
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
 //    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
@@ -69,6 +72,8 @@ const BASE = server.base;
 const chromium = loadChromium();
 const browser = await chromium.launch();
 const metrics: Record<string, unknown> = {};
+/** G097: expected card rows of a grid of n cards, `per` in a row ("3+3+2"); the count comes from the live list. */
+const rowsOf = (n: number, per: number) => Array.from({ length: Math.ceil(n / per) }, (_, i) => Math.min(per, n - i * per)).join('+');
 
 try {
   await waitForServer(`${BASE}/robots.txt`, 60_000, server);
@@ -490,7 +495,7 @@ try {
     await ctx.close();
   }
 
-  // 1g. G094 layout with fourteen designs (09–14 joined): exact rows of /designs, the home strip and a design page's
+  // 1g. G094 layout with fourteen designs (09–14 joined; G097: any count): exact rows of /designs, the home strip and a design page's
   // "other designs" (thirteen cards); phones keep every design chip in the sideways strip (no "+N more" chip there);
   // wide screens show seven names and "+7 more" in ≤ 2 rows at 1280 × 800 (main button inside the first screen), the
   // more chip reveals the rest, moves focus to the first revealed name and goes away; a revealed name switches the poster.
@@ -500,11 +505,12 @@ try {
       const mobile = w < 1024;
       const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
       const page = await ctx.newPage();
-      const fourteen = designs.length === 14;
+      // G097: the exact rows follow the live count (14: 2×7 / 3+3+3+3+2; 20: 2×10 / 3×6+2), phones 2 a row, ≥ 900 px 3
+      const per = w < 900 ? 2 : 3;
       for (const [p, want] of [
-        ['/designs', w < 900 ? '2+2+2+2+2+2+2' : '3+3+3+3+2'],
-        [`/designs/${designs[designs.length - 1].id}`, w < 900 ? '2+2+2+2+2+2+1' : '3+3+3+3+1'],
-        ['/', w < 900 ? '2+2+2+2+2+2+2' : '3+3+3+3+2'],
+        ['/designs', rowsOf(designs.length, per)],
+        [`/designs/${designs[designs.length - 1].id}`, rowsOf(designs.length - 1, per)],
+        ['/', rowsOf(designs.length, per)],
       ] as const) {
         await page.goto(BASE + p, { waitUntil: 'networkidle' });
         const grid = await page.evaluate(() => {
@@ -526,8 +532,8 @@ try {
           };
         });
         check(
-          `G094 ${p} @${w}: ${fourteen ? want : grid.rows} card rows, last row centered, cards the same width, no page scroll`,
-          (!fourteen || grid.rows === want) && Math.abs(grid.lastOffset) <= 2 && grid.sameWidth && !grid.pageScroll,
+          `G094 ${p} @${w}: ${want} card rows, last row centered, cards the same width, no page scroll`,
+          grid.rows === want && Math.abs(grid.lastOffset) <= 2 && grid.sameWidth && !grid.pageScroll,
           grid,
         );
       }
@@ -568,6 +574,106 @@ try {
         await page.getByRole('button', { name: newest.name, exact: true }).click();
         const poster = await page.locator('a[aria-label^="Tap to open the live demo"] img').getAttribute('src');
         check(`G094 home @${w}: the revealed ${newest.name} chip switches the poster`, !!poster && poster.includes(newest.id), poster);
+      }
+      await ctx.close();
+    }
+  }
+
+  // 1h. G097: 15–20 joined (Cherry Blossom Spring, Sunflower Rustic Barn, Emerald & Gold Estate, Wildflower Meadow
+  // Vellum, Midnight Garden, Coastal Seaside; nothing here counts designs — the rows above follow the live list). At
+  // 390 × 844 and 1280 × 800: each of the six has its card on /designs and in the home strip with its real envelope
+  // screen loaded, its home chip switches the poster (wide screens: after "+N more"), and its design page lists every
+  // other live design under "Other designs"; no page scrolls sideways. Wide screens with every chip revealed: rows and
+  // the main button's position are recorded (metrics). With --out, the previews of previews/g097 are written.
+  {
+    const added = ['cherry-blossom-spring', 'sunflower-rustic-barn', 'emerald-gold-estate', 'wildflower-meadow-vellum', 'midnight-garden', 'coastal-seaside'];
+    const g097 = designs.filter((d) => added.includes(d.id));
+    check(`G097: ${added.join(', ')} are live`, g097.length === added.length, g097.map((d) => d.id));
+    // element pictures: the sticky header and the phone's bottom bar would lie over the element in the picture
+    const HIDE_BARS = 'header[class*="header"], [class*="stickyBar"] { visibility: hidden !important; }';
+    const loadAll = (page: any) =>
+      page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 400) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 50));
+        }
+        window.scrollTo(0, 0);
+        await new Promise((r) => setTimeout(r, 300));
+      });
+    for (const w of [390, 1280]) {
+      const mobile = w < 1024;
+      const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
+      const page = await ctx.newPage();
+      for (const [p, shot] of [['/designs', 'designs_cards'], ['/', 'home_designs']] as const) {
+        await page.goto(BASE + p, { waitUntil: 'networkidle' });
+        await loadAll(page);
+        const cards = await page.evaluate((ids: string[]) => {
+          const grid = document.querySelector('main [class*="cardGrid"]')!;
+          return {
+            n: grid.children.length,
+            pageScroll: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+            added: ids.map((id) => {
+              const card = grid.querySelector(`h2 a[href="/designs/${id}"], h3 a[href="/designs/${id}"]`)?.closest('article');
+              const img = card?.querySelector<HTMLImageElement>(`img[src*="/marketing/designs/${id}/envelope-"]`);
+              return { id, card: !!card, screen: !!img && img.complete && img.naturalWidth > 0 };
+            }),
+          };
+        }, added);
+        check(
+          `G097 ${p} @${w}: ${cards.n} cards, one for each of 15–20 with its real envelope screen loaded, no page scroll`,
+          cards.n === designs.length && cards.added.every((c: { card: boolean; screen: boolean }) => c.card && c.screen) && !cards.pageScroll,
+          cards,
+        );
+        if (SHOTS) await page.locator('main [class*="cardGrid"]').first().screenshot({ path: path.join(OUT, `${shot}_${w}.jpg`), quality: 70, style: HIDE_BARS });
+      }
+      // the home page is loaded: chips and poster
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(300);
+      if (SHOTS) await page.screenshot({ path: path.join(OUT, `home_first_screen_${w}.png`) });
+      if (!mobile) {
+        await page.getByRole('button', { name: `Show ${designs.length - 7} more designs` }).click();
+        await page.waitForTimeout(200);
+        metrics[`G097 home @${w}, every chip shown`] = await page.evaluate(() => {
+          const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
+          const vis = Array.from(box.querySelectorAll('button')).filter((b) => b.getBoundingClientRect().width > 0);
+          return {
+            chips: vis.length,
+            rows: new Set(vis.map((b) => Math.round(b.getBoundingClientRect().top))).size,
+            ctaBottom: Math.round(document.querySelector('main a[class*="btnLarge"]')!.getBoundingClientRect().bottom),
+            viewportHeight: innerHeight,
+          };
+        });
+      }
+      for (const d of g097) {
+        await page.getByRole('button', { name: d.name, exact: true }).click();
+        await page.waitForTimeout(150);
+        const poster = await page.locator('a[aria-label^="Tap to open the live demo"] img').getAttribute('src');
+        check(`G097 home @${w}: the ${d.name} chip switches the poster`, !!poster && poster.includes(`/marketing/designs/${d.id}/`), poster);
+      }
+      if (SHOTS) {
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.screenshot({ path: path.join(OUT, mobile ? `home_chips_end_${w}.png` : `home_first_screen_${w}_all_chips.png`) });
+      }
+      for (const d of g097) {
+        await page.goto(`${BASE}/designs/${d.id}`, { waitUntil: 'networkidle' });
+        if (SHOTS) await page.screenshot({ path: path.join(OUT, `design_${d.id}_${w}.png`) });
+        await loadAll(page);
+        const others = await page.evaluate(() => ({
+          hrefs: Array.from(document.querySelectorAll('section[aria-labelledby="related"] [class*="cardGrid"] article h3 a')).map((a) => a.getAttribute('href')),
+          pageScroll: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+        }));
+        const want = designs.filter((o) => o.id !== d.id).map((o) => `/designs/${o.id}`);
+        check(
+          `G097 /designs/${d.id} @${w}: "Other designs" lists the other ${want.length} live designs in order, no page scroll`,
+          others.hrefs.join('|') === want.join('|') && !others.pageScroll,
+          others,
+        );
+        if (SHOTS) {
+          const pages = page.locator('section[aria-labelledby="pages"]');
+          await pages.scrollIntoViewIfNeeded();
+          await page.waitForTimeout(400);
+          await pages.screenshot({ path: path.join(OUT, `design_${d.id}_pages_${w}.png`), style: HIDE_BARS });
+        }
       }
       await ctx.close();
     }
@@ -732,7 +838,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093, G094)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093, G094, G097)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

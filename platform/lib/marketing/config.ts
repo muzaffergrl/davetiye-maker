@@ -252,5 +252,67 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
     },
+    // G097: designs 15–20 (approved theme tasks G415–G420). A new design is one entry here in design-number order, plus its
+    // copy in designs.ts and its screens (marketing-assets.ts --designs <id> --shots <capture>).
+    {
+      // G415 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'cherry-blossom-spring',
+      name: 'Cherry Blossom Spring',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G416 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'sunflower-rustic-barn',
+      name: 'Sunflower Rustic Barn',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G417 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'emerald-gold-estate',
+      name: 'Emerald & Gold Estate',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G418 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'wildflower-meadow-vellum',
+      name: 'Wildflower Meadow Vellum',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G419 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'midnight-garden',
+      name: 'Midnight Garden',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G420 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'coastal-seaside',
+      name: 'Coastal Seaside',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
   ],
 };

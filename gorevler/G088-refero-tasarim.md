@@ -2,8 +2,8 @@
 id: G088
 baslik: Refero Pro ile tasarım turu — satış sitesi, alıcı paneli ve admin ekranları en iyi örneklere göre (K31)
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 2
 bagimli: [G087]
 yazar: [docs/18_REFERANS_TASARIM.md, docs/18_referans/]
@@ -28,3 +28,4 @@ Bu görev **araştırma + tasarım kararı** üretir; kodu G089 ve sonraki claud
 
 ## Günlük
 - 2026-10-15 açıldı (kullanıcı isteği K31)
+- 2026-10-15 alindi: claude-local-1 (kullanıcı isteğiyle; bağımlılık G087'nin dosyası hâlâ 'alindi' ama /admin main'de ve canlıda — G092/G096'da denendi)

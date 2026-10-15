@@ -66,3 +66,4 @@ G059 kiti onaylandı; üç değişiklik birikti, bir kerede yeniden üretilir:
 - 2026-10-14 entegratör: G068 ile 01/03'te neredeyse her başlık/etiket panelden değişiyor (meta ve aria hariç) → ilan metni ve START_HERE bunu dürüstçe söyleyebilir ("almost every heading and label"); 05 için G081 sonrası.
 - 2026-10-15 alindi: claude-G065
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 not: main'de aynı gün `claude-local-G065` de "alindi" yazdı (4e32871; main'de G065 iş commit'i yok). İş bu dalda bitti; çift alım entegratörce kapatılmalı.

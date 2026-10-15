@@ -2,7 +2,7 @@
 id: G092
 baslik: Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol
 rol: claude-tarayici
-durum: inceleme
+durum: bitti
 alan: claude-local-1
 oncelik: 1
 bagimli: []
@@ -86,7 +86,25 @@ testleri + build'e bağlı) · typecheck · build yeşil.
 **Ekranlar:** `docs/10_canli_test/g096/` (alıcı onay bekliyor + "Not yet", admin Özet, onayla, onaylandı, alıcı onay sonrası, Siparişler/Müşteriler/Tasarımlar, satış 390, /my).
 Şifre ve düzenleme linkleri hiçbir yerde yok.
 
+**İkinci (bağımsız) doğrulama, aynı gün ~16:00–16:57, ayrı bir yerel oturum:** yukarıdakinden habersiz aynı görev yeniden koşturuldu. Ortam değişkeni zaten vardı
+(dokunulmadı; değeri canlı davranışla doğrulandı). Ayrı main worktree'sinde (`e63bab4`) `npm ci` · `npm test` 940 geçti / 0 hata (13 atlanan; build sonrası
+`marketing-build` 2/2) · typecheck · build yeşil → aynı ağaç (`379814651d32`) arşiv yoluyla yeniden yüklendi: **`dpl_4zT5UsW6hmJkKNoWrGrDss663CFu`** (READY, şu anki
+production; içerik `dpl_8dFjoZ9…` ile aynı). Canlı deneme (`/g096-onay`, sipariş `20261018`) aynı sonuç: kurulum 3. adımında ve Home'da "Confirming your order";
+örnek tarih onaylandıktan sonra da "Publish my website" pasif, üstteki Publish "Not yet" açıyor → admin Özet/Yapılacaklar → Siparişi onayla → şablon "Sipariş onaylandı
+— yayınlayabilir" → alıcı panelinde "Before you publish" ve "Publish my website" etkin (yayınlanmadı) → Siteyi sil → `/g096-onay`, `/api/sites/g096-onay` ve eski düzenleme
+linki 404; Siparişler 6 site, Yapılacak 0. Admin 4 sekme 200 ve veriyle dolu; satış 390 px'te "My website" + menü düğmesi görünür, açık menüde taşma yok (DOM ölçümü,
+16–374 px); /my açılıyor; /designs 14 tasarım; admin Tasarımlar "14 tasarım satış sitesinde".
+**Ek gözlemler (düzeltilmedi):**
+- Admin **Özet, 5 demo siteyi (`#DEMO-SEED-…`) satış sayıyor**: "Bugün 6 satış · toplam 7", "En çok satan tasarımlar" ve haftalık grafik demolarla şişiyor.
+- **/my "On this device"** silinmiş siteyi (`/g096-onay`) göstermeye devam ediyor; silinen/404 olan siteler listeden düşmüyor ("Remove from this device" ile temizlendi).
+- Saat dilimi: `/start` sonrası kurulumda "Los Angeles (Sample)" görünürken kayıtta `Europe/Istanbul` var (admin "Saat dilimi"); sayfa yenilenince kurulum "Istanbul" gösterdi.
+- Admin "Sipariş onaylanıyor (Publish bekliyor)" şablonu: "Bu mesaj henüz gönderilemez: [ORDER CHECK TIME] karar bekliyor" ve İngilizce geliştirici notu
+  (`node scripts/verify-order.ts …`) dükkân paneline sızıyor.
+- Onay sonrası yeniden açılan panelde "Saturday, June 12, 2027 really is our wedding date" işareti kalıcı değil (yayın penceresi yeniden soruyor).
+Bu turun ekranları yukarıdaki setin tekrarı olduğu için repoya eklenmedi.
+
 ## Günlük
 - 2026-10-15 açıldı (entegratör, kullanıcı K30/K33)
 - 2026-10-15 alindi: claude-local-1
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı
