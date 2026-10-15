@@ -194,7 +194,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .page-envelope, .env-page { overflow-x: clip; }
 /* the wood floor: below the hint on the envelope, off the inner pages' first screen (it would sit mid-page) */
 .page-envelope .scene-bg picture { height: calc(100% + 14svh); }
-.page-long .page-bg picture { height: calc(100% + 34svh); }
+.page-long .page-bg picture { height: calc(100% + 34svh); -webkit-mask-image: linear-gradient(#000 52%, transparent 74%); mask-image: linear-gradient(#000 52%, transparent 74%); }
 .skip {
   position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;

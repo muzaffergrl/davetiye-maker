@@ -606,10 +606,10 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   assert.doesNotMatch(css, /conic-gradient|repeating-(linear|radial)-gradient/, 'no gradient-drawn pattern');
   // gradients only as borderless light / fade masks / the interface pill (docs/11 §5.7): the golden-hour light, the
   // ground's fade below the first screen, the barn-wood floor fading in at the foot, the nav's soft ground, the button,
-  // the soft edges of the GPT barn wood (tabletop, story wall)
+  // the soft edges of the GPT barn wood (tabletop, story wall), the inner pages' ground fading out above its wood floor
   for (const [, sel, body] of rules) {
     if (!/gradient\(/.test(body)) continue;
-    assert.match(sel, /body::before|\.hero-bg picture|\.wood-end::before|^\s*\.site-nav\s*$|^\s*\.btn\s*$|^\s*\.table\s*$|^\s*\.wall::before\s*$/, sel.trim());
+    assert.match(sel, /body::before|\.hero-bg picture|\.page-bg picture|\.wood-end::before|^\s*\.site-nav\s*$|^\s*\.btn\s*$|^\s*\.table\s*$|^\s*\.wall::before\s*$/, sel.trim());
   }
   assert.match(rule('.table'), /mask: radial-gradient\(50% 50% at 50% 50%, #000 52%, transparent 100%\)/, 'the tabletop = GPT barn wood with soft edges');
   // the corner clusters are whole GPT parts: no mask / clip on them
