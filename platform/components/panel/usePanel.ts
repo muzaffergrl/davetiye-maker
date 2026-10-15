@@ -19,7 +19,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { validateContent, type ValidationIssue } from '../../lib/content/validate.ts';
 import { copyIssues } from '../../lib/theme/copy.ts';
-import { panelIssues, previewTokenExpiry, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
+import { followWeddingDate, panelIssues, previewTokenExpiry, sameContent, withPhoto, type PanelMeta, type PanelPhotoSlot, type PanelState } from '../../lib/panel/model.ts';
 import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
 import { NO_GUEST_ACCESS, type GuestAccessView } from '../../lib/panel/guest-access.ts';
 import { panelApi } from './api.ts';
@@ -258,8 +258,10 @@ export function usePanel(initial: PanelState, editKey: string) {
   const edit = useCallback(
     (change: Change) => {
       if (stopped.current || archived) return;
-      const draft = structuredClone(contentRef.current);
-      const next = change(draft) ?? draft;
+      const prev = contentRef.current;
+      const draft = structuredClone(prev);
+      // G087: a sample reply-by date follows the wedding date (lib/panel/model.ts followWeddingDate).
+      const next = followWeddingDate(prev, change(draft) ?? draft, initial.theme.sample);
       contentRef.current = next;
       setContent(next);
       version.current += 1;
@@ -268,7 +270,7 @@ export function usePanel(initial: PanelState, editKey: string) {
       clearTimer();
       timer.current = setTimeout(() => void flushRef.current(), AUTOSAVE_DELAY_MS);
     },
-    [archived, keepBackup],
+    [archived, keepBackup, initial.theme.sample],
   );
 
   /**

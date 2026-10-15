@@ -290,6 +290,11 @@ function StatusCard({
     badge = { tone: 'neutral', text: 'Offline' };
     text = 'Your website is offline. Guests see “Page not found” until you publish again.';
     action = { label: 'Publish again', run: onPublish, variant: 'primary', icon: Send };
+  } else if (meta.orderPending) {
+    // G087: say it where the couple looks first, not only when Publish is tapped.
+    badge = { tone: 'warning', text: 'Confirming your order', icon: Hourglass };
+    text = 'Your website is a private draft. We are confirming your Etsy order — set everything up now; you can publish as soon as it is confirmed.';
+    action = setupStep !== null ? { label: `Continue setup · Step ${setupStep} of 3`, run: onContinueSetup, variant: 'primary', icon: Sparkles } : null;
   } else {
     badge = { tone: 'accent', text: 'Draft' };
     text = 'Your website is a draft. Only you can see it.';

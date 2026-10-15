@@ -105,6 +105,39 @@ export class LocalAdapter implements DataAdapter {
     return ref ? this.getSiteById(ref.id) : null;
   }
 
+  async listSites(): Promise<SiteRecord[]> {
+    let files: string[];
+    try {
+      files = await fs.readdir(path.join(this.dir, 'sites'));
+    } catch {
+      return [];
+    }
+    const out: SiteRecord[] = [];
+    for (const f of files) {
+      if (!f.endsWith('.json')) continue;
+      const site = await this.readJson<SiteRecord>(path.join(this.dir, 'sites', f));
+      if (site) out.push(site);
+    }
+    return out.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }
+
+  async rsvpCounts(): Promise<Record<string, number>> {
+    let files: string[];
+    try {
+      files = await fs.readdir(path.join(this.dir, 'rsvps'));
+    } catch {
+      return {};
+    }
+    const out: Record<string, number> = {};
+    for (const f of files) {
+      const m = /^([0-9a-f-]{36})\.json$/.exec(f);
+      if (!m) continue;
+      const list = await this.readJson<RsvpRecord[]>(path.join(this.dir, 'rsvps', f));
+      if (list?.length) out[m[1]] = list.length;
+    }
+    return out;
+  }
+
   async findSitesByOrderRef(orderRef: string): Promise<SiteRecord[]> {
     let files: string[];
     try {

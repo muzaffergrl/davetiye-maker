@@ -307,6 +307,10 @@ export interface DataAdapter {
   getSiteBySlug(slug: string): Promise<SiteRecord | null>;
   /** Sites claimed with an Etsy order reference (for the one-site-per-order rule, G045). */
   findSitesByOrderRef(orderRef: string): Promise<SiteRecord[]>;
+  /** Every site, newest first (shop admin, G087). Reads every record: fine for the shop's volume, not for a public route. */
+  listSites(): Promise<SiteRecord[]>;
+  /** Number of stored replies per site id (shop admin, G087). Sites without replies are left out. */
+  rsvpCounts(): Promise<Record<string, number>>;
   /**
    * Throws SlugTakenError if the slug exists. Status starts as "draft".
    * Adapters with an order index (blob) also throw OrderRefTakenError when another site already

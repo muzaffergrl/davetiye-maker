@@ -27,9 +27,12 @@ NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id>
                        # build sonrası (G052): her tema — 5 genişlik, kısa telefonlar, akış, içerik, kart metni (uzayan kart piksel
                        # testiyle), kırpılan metin; --stress = docs/11 §12 zorlama kaydı; varsayılan tema blush-garden-rose → previews/g038/
                        # (+ MP4); G4NN → previews/g4NN/. Port $PORT (3312); port doluysa "Ready"siz durur, başka sunucuya karşı koşmaz
+# G087: aynı destek işleri artık /admin'den (ADMIN_PASSWORD ile; docs/17_ADMIN_PANELI.md). Betikler de çalışır:
 node scripts/reissue-edit-key.ts --order <no> --origin https://<host>   # destek: kayıp düzenleme linki yerine yenisi (aşağıda)
 node scripts/grant-identity-change.ts --order <no> (--add <n> | --archive-on <YYYY-MM-DD|clear>) --reason "<neden>"   # destek (G060): isim/tarih
                        # hakkı ekle ya da arşiv tarihini taşı; --show durumu yazar (aşağıda "Panel v2 ve düzenleme hakkı")
+NODE_PATH=/opt/node22/lib/node_modules node tests/g087-browser.ts   # build sonrası: dükkân paneli (G087) — kapalı/giriş/liste/arama/site/onay/
+                       # mesaj/yeni link/silme kilidi + alıcının "Confirming your order" kartı (33 kontrol; previews/g087/)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g076-browser.ts   # build sonrası: site şifresi (G076) 390 × 844 — Share'de aç, misafir şifre
                        # sayfası, yanlış/doğru, şifre değişince yeniden sorma, iki tema (51 kontrol; previews/g076/ ya da $G076_SHOTS_DIR)
 NODE_PATH=/opt/node22/lib/node_modules node tests/g060-browser.ts   # build sonrası: panel v2 yolculuğu 390 × 844 + MP4, hak/arşiv/çevrimdışı/
@@ -55,7 +58,7 @@ Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).
 `npm run screenshot` geçici bir veri klasörü kullanır; global Playwright (`/opt/node22/lib/node_modules`) ve
 `/opt/pw-browsers` tarayıcılarıyla çalışır, `playwright install` çalıştırmaz.
 
-Ortam değişkenleri: `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob, aşağıda; `supabase` = G043, yok),
+Ortam değişkenleri: `ADMIN_PASSWORD` (G087: dükkân paneli `/admin`; en az 12 karakter, yoksa panel kapalı; repoya/log'a yazılmaz), `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob, aşağıda; `supabase` = G043, yok),
 `BLOB_READ_WRITE_TOKEN` (yalnız `blob`: **private** Blob deposunun anahtarı; Vercel depo projeye bağlanınca kendisi ekler; repoya
 ve log'a yazılmaz), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`; `blob`'da yalnız seed'in `seed-keys.json`'u),
 `PLATFORM_THEMES_DIR` (varsayılan `platform/themes`), `PLATFORM_PUBLIC_URL` (sitelerin herkese açık kökü, ör. `https://<ad>.vercel.app`;

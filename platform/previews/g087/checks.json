@@ -1,0 +1,143 @@
+{
+ "when": "2026-10-15T05:59:35.900Z",
+ "checks": [
+  {
+   "name": "off: /admin answers 200 with an honest \"kapalı\" note",
+   "ok": true
+  },
+  {
+   "name": "off: no sign-in form",
+   "ok": true
+  },
+  {
+   "name": "off: noindex + frame-ancestors none",
+   "ok": true
+  },
+  {
+   "name": "/start gives an edit link",
+   "ok": true,
+   "detail": "http://127.0.0.1:3387/edit/emma-and-liam?k=…"
+  },
+  {
+   "name": "Home: the status card says the order is being confirmed",
+   "ok": true,
+   "detail": "Confirming your order Your website is a private draft. We are confirming your Etsy order — set everything up now; you can publish as soon as it is confirmed. Co"
+  },
+  {
+   "name": "Home: no Publish button in the status card while the order waits",
+   "ok": true
+  },
+  {
+   "name": "Home: replies close 6 weeks before the new date (not on the sample day)",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin sign-in has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "wrong password: clear Turkish message",
+   "ok": true
+  },
+  {
+   "name": "session cookie is HttpOnly + SameSite=Strict",
+   "ok": true
+  },
+  {
+   "name": "\"Yapılacak\" filter is selected and shows the new order",
+   "ok": true
+  },
+  {
+   "name": "list: card says the order waits",
+   "ok": true
+  },
+  {
+   "name": "list 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin list has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "list: touch targets ≥ 36 px",
+   "ok": true
+  },
+  {
+   "name": "search by order number finds the site",
+   "ok": true
+  },
+  {
+   "name": "search without a match: empty state",
+   "ok": true
+  },
+  {
+   "name": "site 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin site page has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "site page: touch targets ≥ 36 px",
+   "ok": false,
+   "detail": "a \"Bütün siteler\" 122×23"
+  },
+  {
+   "name": "after confirm: the to-do box is gone",
+   "ok": true
+  },
+  {
+   "name": "the \"order confirmed\" message is ready, filled in",
+   "ok": true,
+   "detail": "Hi Emma & Liam!\n\nThank you for your order (#3456789012). We have confirmed it, so your wedding website can now go live.\n"
+  },
+  {
+   "name": "history shows the confirmation",
+   "ok": true
+  },
+  {
+   "name": "buyer Home: no \"confirming\" any more",
+   "ok": true
+  },
+  {
+   "name": "a new edit link is shown once",
+   "ok": true,
+   "detail": "http://127.0.0.1:3387/edit/emma-and-liam?k=…"
+  },
+  {
+   "name": "the \"new editor link\" message holds the new link",
+   "ok": true
+  },
+  {
+   "name": "the old edit link no longer opens the panel",
+   "ok": true
+  },
+  {
+   "name": "the new edit link opens the panel",
+   "ok": true
+  },
+  {
+   "name": "delete is disabled until the address is typed",
+   "ok": true
+  },
+  {
+   "name": "a wrong address keeps it disabled",
+   "ok": true
+  },
+  {
+   "name": "1280: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "sign out returns to the sign-in form",
+   "ok": true
+  },
+  {
+   "name": "API after sign-out: 401",
+   "ok": true,
+   "detail": "401"
+  }
+ ]
+}
