@@ -336,6 +336,90 @@
         "seconds": 10,
         "bytes": 398923
       }
+    },
+    "vintage-airmail-love-letter": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/envelope-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/envelope-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/home-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/home-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/invitation-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/invitation-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/story-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/story-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/details-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/details-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1265,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/schedule-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/schedule-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/rsvp-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/rsvp-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1229,
+          "files": {
+            "320": "/marketing/designs/vintage-airmail-love-letter/form-320.webp",
+            "480": "/marketing/designs/vintage-airmail-love-letter/form-480.webp",
+            "640": "/marketing/designs/vintage-airmail-love-letter/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/vintage-airmail-love-letter/opening.mp4",
+        "poster": "/marketing/designs/vintage-airmail-love-letter/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 428947
+      }
     }
   },
   "panel": {

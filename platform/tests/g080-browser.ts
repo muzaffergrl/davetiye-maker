@@ -8,6 +8,8 @@
 // (G082: every approved design's /start page opens with its demo, and POST /api/start answers 201 for each),
 // a design in review answers 404 with the honest page and POST /api/start 403, its demo stays open, the /start list
 // shows approved designs only. Server B (PORT+1) has no gate: the same design in review can be started (local work).
+// G085: since 04 went live no real theme is in review, so both servers read a fixture themes folder (every real theme +
+// a design in review, tests/review-fixture.ts) through PLATFORM_THEMES_DIR; a real theme in review is used if one exists.
 // Look: panel fonts (Archivo / DM Sans), panel tokens (paper ground, aubergine button, no old green), BKE logo,
 // axe-core 4.13.0 with no serious/critical violation (colour contrast included), touch targets ≥ 44 px, no sideways
 // scroll at 320 / 390 px. Screens (390 full page, 1280 first screen) + checks.json -> previews/g080/ ($G080_SHOTS_DIR).
@@ -20,6 +22,7 @@ import path from 'node:path';
 import { loadChromium, startNext, waitForServer, type NextServer } from '../scripts/lib/browser.ts';
 import { ROOT } from '../scripts/lib/theme-env.ts';
 import { approvedThemeIds, THEME_IN_REVIEW } from '../lib/themes/approval.ts';
+import { REVIEW_FIXTURE_ID, reviewFixtureThemesDir } from './review-fixture.ts';
 
 const PORT = Number(process.env.PORT || 41971);
 const OUT = process.env.G080_SHOTS_DIR || path.join(ROOT, 'previews/g080');
@@ -32,8 +35,9 @@ const themeIds = readdirSync(path.join(ROOT, 'themes'), { withFileTypes: true })
   .map((d) => JSON.parse(readFileSync(path.join(ROOT, 'themes', d.name, 'theme.json'), 'utf8')) as { id: string; internal?: boolean })
   .filter((m) => !m.internal)
   .map((m) => m.id);
-// (02 dusty-blue-champagne was the design in review until G083 approved it; now 04)
-const IN_REVIEW = themeIds.find((id) => !approved.includes(id) && id === 'vintage-airmail-love-letter') ?? themeIds.find((id) => !approved.includes(id));
+// (02 dusty-blue-champagne was the design in review until G083 approved it, then 04 until G085; now the fixture)
+const IN_REVIEW = themeIds.find((id) => !approved.includes(id)) ?? REVIEW_FIXTURE_ID;
+const THEMES_DIR = reviewFixtureThemesDir();
 const APPROVED = approved.includes('olive-ivory') ? 'olive-ivory' : approved[0];
 
 mkdirSync(OUT, { recursive: true });
@@ -133,7 +137,7 @@ try {
   const mk = (port: number, env: Record<string, string>) => {
     const dataDir = mkdtempSync(path.join(os.tmpdir(), 'g080-data-'));
     dataDirs.push(dataDir);
-    const s = startNext({ port, dataDir, env: { DATA_ADAPTER: 'local', ...env } });
+    const s = startNext({ port, dataDir, env: { DATA_ADAPTER: 'local', PLATFORM_THEMES_DIR: THEMES_DIR, ...env } });
     servers.push(s);
     return s;
   };
@@ -233,8 +237,8 @@ try {
   }
 
   // ------------------------------------------------------------------ production: EVERY approved design opens (G082)
-  // (a design approved later — 05 mediterranean-lemon in G082, 02 dusty-blue-champagne in G083 — is started like the
-  // first ones: page, demo, API)
+  // (a design approved later — 05 mediterranean-lemon in G082, 02 dusty-blue-champagne in G083, 04
+  // vintage-airmail-love-letter in G085 — is started like the first ones: page, demo, API)
   {
     const ctx = await browser.newContext(phone);
     const page = await ctx.newPage();
@@ -251,8 +255,10 @@ try {
     for (const [i, id] of approved.filter((x) => x !== APPROVED).entries()) {
       const api = await fetch(`${prod.base}/api/start`, {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ theme: id, orderNumber: String(6100012457 + i * 7919), email: 'g082@example.test', names: [['Lucia', 'Paolo'], ['Chiara', 'Matteo'], ['Giulia', 'Luca']][i % 3], slug: '', website: '' }),
+        // its own address per design: one address may start 5 sites a day (lib/claim/limits.ts), the two browser
+        // claims above count too (G085: the fifth design made it six)
+        headers: { 'content-type': 'application/json', 'x-forwarded-for': `198.51.100.${120 + i}` },
+        body: JSON.stringify({ theme: id, orderNumber: String(6100012457 + i * 7919), email: 'g082@example.test', names: [['Lucia', 'Paolo'], ['Chiara', 'Matteo'], ['Giulia', 'Luca'], ['Rosa', 'Enzo']][i % 4], slug: '', website: '' }),
       });
       const body = (await api.json()) as Record<string, unknown>;
       check(`prod POST /api/start (${id}, approved): 201, a site is started`, api.status === 201 && typeof body.slug === 'string', { status: api.status, body });
@@ -337,7 +343,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify({ base: 'next start (production build); server A THEME_APPROVAL=enforce, server B no gate', approved, inReview: IN_REVIEW, checks }, null, 2) + '\n',
 );
-for (const d of dataDirs) rmSync(d, { recursive: true, force: true });
+for (const d of [...dataDirs, THEMES_DIR]) rmSync(d, { recursive: true, force: true });
 const failed = checks.filter((c) => !c.ok);
 if (failed.length) {
   console.error(`\n${failed.length} check(s) failed.`);

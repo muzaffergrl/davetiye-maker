@@ -15,6 +15,12 @@ import { COUPLE_SITE_ROBOTS } from '../lib/site/render.ts';
 import { isReservedSlug, isValidSlugFormat } from '../lib/slug.ts';
 import { readyConfig } from './marketing-helpers.ts';
 
+/** G085: every real design is live now; an unreleased ('coming') design for the "never mentioned" checks. */
+const withComing = (cfg: ReturnType<typeof readyConfig>) => ({
+  ...cfg,
+  designs: [...cfg.designs, { ...cfg.designs[0], id: 'unreleased-fixture', name: 'Unreleased Fixture', status: 'coming' as const }],
+});
+
 /** Google-style robots matching for one user agent group: longest match wins, Allow wins ties; * and $ supported. */
 function allowed(robots: string, agent: string, urlPath: string): boolean {
   const groups: Array<{ agents: string[]; rules: Array<{ allow: boolean; pattern: string }> }> = [];
@@ -96,7 +102,7 @@ test('robots: decisions in config — training bots can be closed; sitemap line 
 test('sitemap: empty until launch; then every page, live design and guide with a real lastmod', () => {
   const guides = loadGuides();
   assert.doesNotMatch(sitemapXml(guides, MARKETING), /<url>/);
-  const cfg = readyConfig();
+  const cfg = withComing(readyConfig());
   const xml = sitemapXml(guides, cfg);
   const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const expected = [...corePages(cfg).map((p) => p.path), ...liveDesigns(cfg).map((d) => `/designs/${d.id}`), ...guides.map((g) => g.path)];
@@ -104,7 +110,7 @@ test('sitemap: empty until launch; then every page, live design and guide with a
   for (const p of expected) assert.ok(locs.includes(`https://example.com${p === '/' ? '/' : p}`), p);
   for (const m of xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) assert.match(m[1], /^\d{4}-\d{2}-\d{2}$/);
   assert.doesNotMatch(xml, /changefreq|priority/);
-  assert.ok(!locs.some((l) => /\/start|\/edit|\/api|vintage-airmail/.test(l)), 'no private, demo or unreleased URLs');
+  assert.ok(!locs.some((l) => /\/start|\/edit|\/api|unreleased-fixture/.test(l)), 'no private, demo or unreleased URLs');
 });
 
 test('llms.txt: llmstxt.org shape; every link is a sitemap URL; llms-full.txt carries designs, FAQ and every guide', () => {
@@ -125,7 +131,8 @@ test('llms.txt: llmstxt.org shape; every link is a sitemap URL; llms-full.txt ca
   for (const g of guides) assert.ok(full.includes(`# ${g.title}`), g.slug);
   for (const it of faqItems(cfg)) assert.ok(full.includes(`**${it.q}**`), it.id);
   assert.ok(!/\]\(\/[a-z]/.test(full), 'internal links are absolute in llms-full.txt');
-  assert.ok(!txt.includes('Vintage Airmail'), 'designs that are not live are not mentioned');
+  const coming = withComing(cfg);
+  assert.ok(!llmsTxt(guides, coming).includes('Unreleased Fixture') && !llmsFullTxt(guides, coming).includes('Unreleased Fixture'), 'designs that are not live are not mentioned');
 });
 
 test('route handlers answer with the right content types and noindex for llms files before launch', async () => {

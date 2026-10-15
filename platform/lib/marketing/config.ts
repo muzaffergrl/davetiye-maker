@@ -151,14 +151,14 @@ export const MARKETING: MarketingConfig = {
       updated: '2026-10-14',
     },
     {
-      // G404 (being built). Becomes 'live' only when the theme is live; until then it is not listed anywhere.
+      // G404 approved (2026-10-15); on the sales site and open on /start since G085.
       id: 'vintage-airmail-love-letter',
       name: 'Vintage Airmail Love Letter',
-      status: 'coming',
+      status: 'live',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
-      updated: '2026-10-14',
+      updated: '2026-10-15',
     },
   ],
 };

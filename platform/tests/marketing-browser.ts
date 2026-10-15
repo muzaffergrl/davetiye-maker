@@ -15,6 +15,10 @@
 //    carries its start / demo links and Product + VideoObject JSON-LD; llms.txt lists it; the sitemap stays empty.
 //    G083 (four designs): no lone card in the last row of /designs and the home strip at 320–1280 px; the home design
 //    chips stay on one line on phones and tablets (sideways scroller, every chip reachable); /about's story screen.
+//    G085 (five designs): rows of the card grids — phones 2 + 2 + 1 with the last card centered, from 900 px 3 + 2
+//    with the last row centered; the chip strip's right edge fades out (a chip visibly runs into the fade at every
+//    phone width, scrolled to the end the last chip is clear of it); wide screens: chips in ≤ 2 rows at 1280 px and
+//    the main button inside the first screen at 1280 × 800.
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
 //    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
@@ -270,7 +274,8 @@ try {
         }
         const list = [...rows.values()];
         const last = list[list.length - 1];
-        const centered = last.length === 1 && Math.abs(last[0].left - box.left - (box.right - last[0].right)) <= 2;
+        // G085: the whole last row (one card or several) sits centered
+        const centered = Math.abs(last[0].left - box.left - (box.right - last[last.length - 1].right)) <= 2;
         return { cards: g.children.length, perRow: list.map((r) => r.length), centered };
       });
       const rows = grid.perRow;
@@ -317,6 +322,84 @@ try {
         !!about && about.ok && designs.some((d) => about.src!.includes(`/marketing/designs/${d.id}/story-`) && about.alt.startsWith(`${d.name}: the Our Story page`)),
         about,
       );
+    }
+    await ctx.close();
+  }
+
+  // 1e. G085 layout with five designs (04 Vintage Airmail Love Letter joined): exact rows of the card grids, the chip
+  // strip's fade edge on phones and tablets, compact chips beside the text on wide screens.
+  for (const w of [320, 360, 390, 430, 768, 900, 1024, 1280]) {
+    const mobile = w < 1024;
+    const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
+    const page = await ctx.newPage();
+    const want = designs.length === 5 ? (w < 900 ? '2+2+1' : '3+2') : null;
+    for (const p of ['/designs', '/']) {
+      await page.goto(BASE + p, { waitUntil: 'networkidle' });
+      const grid = await page.evaluate(() => {
+        const g = document.querySelector('main [class*="cardGrid"]')!;
+        const box = g.getBoundingClientRect();
+        const rows = new Map<number, DOMRect[]>();
+        for (const c of Array.from(g.children)) {
+          const r = c.getBoundingClientRect();
+          rows.set(Math.round(r.top), [...(rows.get(Math.round(r.top)) ?? []), r]);
+        }
+        const list = [...rows.values()];
+        const last = list[list.length - 1];
+        const widths = list.flat().map((r) => Math.round(r.width));
+        return {
+          rows: list.map((r) => r.length).join('+'),
+          lastOffset: Math.round(last[0].left - box.left - (box.right - last[last.length - 1].right)),
+          sameWidth: Math.max(...widths) - Math.min(...widths) <= 1,
+        };
+      });
+      check(
+        `G085 ${p} @${w}: ${want ?? grid.rows} card rows, last row centered, cards the same width`,
+        (want === null || grid.rows === want) && Math.abs(grid.lastOffset) <= 2 && grid.sameWidth,
+        grid,
+      );
+    }
+    // the home page is loaded: its chip strip
+    const strip = await page.evaluate(async (fade: number) => {
+      const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
+      const vw = document.documentElement.clientWidth;
+      const chips = () => Array.from(box.querySelectorAll('button')).map((b) => b.getBoundingClientRect());
+      const mask = getComputedStyle(box).maskImage || getComputedStyle(box).getPropertyValue('-webkit-mask-image');
+      box.scrollLeft = 0;
+      await new Promise((r) => setTimeout(r, 100));
+      const start = chips();
+      // a chip reaches into the faded right edge (vw − fade … vw): the row visibly runs on
+      const intoFade = start.filter((r) => r.right > vw - fade + 4 && r.left < vw - 4).map((r) => Math.round(Math.min(r.right, vw) - Math.max(r.left, vw - fade)));
+      box.scrollLeft = box.scrollWidth;
+      await new Promise((r) => setTimeout(r, 150));
+      const end = chips();
+      const res = {
+        vw,
+        mask: mask.slice(0, 40),
+        overflow: box.scrollWidth > box.clientWidth,
+        firstLeft: Math.round(start[0].left),
+        intoFade,
+        lastRightAtEnd: Math.round(end[end.length - 1].right),
+        rows: new Set(start.map((r) => Math.round(r.top))).size,
+        cta: Math.round(document.querySelector('main a[class*="btnLarge"]')!.getBoundingClientRect().bottom),
+        vh: innerHeight,
+      };
+      box.scrollLeft = 0;
+      return res;
+    }, 48);
+    if (mobile) {
+      check(
+        `G085 home @${w}: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)`,
+        strip.overflow && /gradient/.test(strip.mask) && strip.intoFade.length > 0 && strip.intoFade.some((px: number) => px >= 8),
+        strip,
+      );
+      check(`G085 home @${w}: the first chip is not dimmed, the last one is clear of the fade at the end`, strip.firstLeft >= 16 && strip.lastRightAtEnd <= strip.vw - 47, strip);
+    } else {
+      check(`G085 home @${w}: no fade beside the text (chips wrap)`, !/gradient/.test(strip.mask), strip);
+      if (w >= 1280) {
+        check(`G085 home @${w}: five chips in ≤ 2 rows, the main button inside the first screen (${strip.vh} px)`, strip.rows <= 2 && strip.cta <= strip.vh, strip);
+      } else {
+        metrics[`G085 home chips @${w}`] = { rows: strip.rows, ctaBottom: strip.cta, viewportHeight: strip.vh };
+      }
     }
     await ctx.close();
   }
@@ -480,7 +563,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',
