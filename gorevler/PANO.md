@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 16 · alindi 2 · inceleme 6 · blokaj 277 · bitti 101 · toplam 402
+Özet: hazir 13 · alindi 6 · inceleme 3 · blokaj 277 · bitti 104 · toplam 403
 
 ## claude-canva
 
@@ -157,13 +157,10 @@ Bağımlılık bekleyen: 1 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (12)**
+**Alınabilir (9)**
 
+- `G093` p1 — Tasarım 06, 07, 08 satış sitesine eklenir (G082/G083/G086 yöntemi) — tasarım sayfaları, metin, gerçek ekranlar, /designs 8 tasarımla → `gorevler/G093-satis-06-07-08.md`
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G409` p3 — Tasarım 09 Lavender Provence — platform teması → `gorevler/G409-website-kaynak.md`
-- `G410` p3 — Tasarım 10 Tuscan Vineyard — platform teması → `gorevler/G410-website-kaynak.md`
-- `G411` p3 — Tasarım 11 Boho Pampas Terracotta — platform teması → `gorevler/G411-website-kaynak.md`
-- `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 - `G413` p3 — Tasarım 13 Enchanted Forest Storybook — platform teması → `gorevler/G413-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 - `G415` p3 — Tasarım 15 Cherry Blossom Spring — platform teması → `gorevler/G415-website-kaynak.md`
@@ -172,7 +169,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `G419` p3 — Tasarım 19 Midnight Garden — platform teması → `gorevler/G419-website-kaynak.md`
 - `G420` p3 — Tasarım 20 Coastal Seaside — platform teması → `gorevler/G420-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (85)**
+**Üzerinde çalışılan / incelemede / blokaj (86)**
 
 - `G087` alindi · claude-G087 — Dükkân (admin) paneli + alıcı panelinde satın alma sonrası akış düzeltmeleri (K30)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
@@ -196,9 +193,10 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
-- `G406` inceleme · claude-G406 — Tasarım 06 Art Deco Black-Tie — platform teması
-- `G407` inceleme · claude-G407 — Tasarım 07 Burgundy Velvet Autumn — platform teması
-- `G408` inceleme · claude-G408 — Tasarım 08 Winter Evergreen — platform teması
+- `G409` alindi · claude-local-G409 — Tasarım 09 Lavender Provence — platform teması
+- `G410` alindi · claude-local-G410 — Tasarım 10 Tuscan Vineyard — platform teması
+- `G411` alindi · claude-local-G411 — Tasarım 11 Boho Pampas Terracotta — platform teması
+- `G412` alindi · claude-local-G412 — Tasarım 12 Tropical Destination — platform teması
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G504` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -260,7 +258,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 2 · Biten: 45
+Bağımlılık bekleyen: 2 · Biten: 48
 
 ## claude-metin
 

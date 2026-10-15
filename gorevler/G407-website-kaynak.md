@@ -2,7 +2,7 @@
 id: G407
 baslik: Tasarım 07 Burgundy Velvet Autumn — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G407
 oncelik: 3
 bagimli: [G207, G038, G046, G052]
@@ -125,3 +125,5 @@ gerçek alıcı fotoğrafları (farklı oran/ışık; yalnız PAKET 2 örnekleri
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-G407
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı
+- 2026-10-15 entegratör: W1 karşılaştırmaları (index/home/story/rsvp 390) görsel olarak incelendi — tasarıma sadık; theme-check 128/0/0, final-smoke 45/45. Onaylandı → satış sitesine G093.

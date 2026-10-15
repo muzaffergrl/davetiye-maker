@@ -2,7 +2,7 @@
 id: G406
 baslik: Tasarım 06 Art Deco Black-Tie — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G406
 oncelik: 3
 bagimli: [G206, G038, G046, G052]
@@ -164,3 +164,5 @@ karşılaştırmaları, MP4 kareleri, teşekkür hâli (fotoğraflı/fotoğrafs�
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-G406
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı
+- 2026-10-15 entegratör: W1 karşılaştırmaları (index/home/story/rsvp 390) görsel olarak incelendi — tasarıma sadık; theme-check 128/0/0, final-smoke 45/45. Onaylandı → satış sitesine G093.
