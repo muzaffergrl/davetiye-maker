@@ -1,6 +1,6 @@
 // G075 (K28): post-wedding thank-you mode — the rule (end of the wedding day in the site's time zone, DST included),
 // Automatic / On now / Off, the engine's multi-condition data-if, the themes with a thank-you version (01 olive-ivory,
-// 03 blush-garden-rose; G081: 02 dusty-blue-champagne, 05 mediterranean-lemon) in thank-you mode, the RSVP API's 403 closed (reason thank_you), the thank-you photo route, the panel API (schema,
+// 03 blush-garden-rose; G081: 02 dusty-blue-champagne, 05 mediterranean-lemon, 04 vintage-airmail-love-letter) in thank-you mode, the RSVP API's 403 closed (reason thank_you), the thank-you photo route, the panel API (schema,
 // limits, the thank-you photo place), panel helpers (sections, Review, readiness) and the theme-check rule for themes
 // without a thank-you version. The browser journey and previews: tests/g075-browser.ts.
 import { before, test } from 'node:test';
@@ -46,12 +46,13 @@ import { changedPages, changedSections, PAGE_SECTIONS, parseEditTarget, readines
 import { PLATFORM_ROOT, REPO_ROOT, tinyPng, tmpDir } from './helpers.ts';
 
 const BASE = 'https://wedding.example';
-const THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon'] as const;
+const THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter'] as const;
 const COLLECTION: Record<(typeof THEMES)[number], string> = {
   'olive-ivory': '01_Olive_Ivory',
   'blush-garden-rose': '03_Blush_Garden_Rose',
   'dusty-blue-champagne': '02_Dusty_Blue',
   'mediterranean-lemon': '05_Lemon_Mediterranean',
+  'vintage-airmail-love-letter': '04_Vintage_Airmail',
 };
 const DAY = 86_400_000;
 
@@ -225,11 +226,11 @@ test('RSVP rule: thank-you mode closes the form (reason thank_you) before the de
 // ---------------------------------------------------------------------------------------------- the themes
 
 const SLUG = 'ty-test';
-// the default "now" is after every demo wedding (02's is September 18, 2027): Automatic is on
+// the default "now" is after every demo wedding (04's is October 2, 2027): Automatic is on
 async function renderPage(themeId: string, page: PageName, content: unknown, opts: { now?: Date; previewKey?: string; thankYouPreview?: boolean } = {}) {
   const theme = (await loadTheme(themeId))!;
   const html = (await readThemePage(theme, page))!;
-  const r = renderTemplate({ html, content, theme: theme.manifest, page, slug: SLUG, now: opts.now ?? new Date('2027-10-01'), ...opts });
+  const r = renderTemplate({ html, content, theme: theme.manifest, page, slug: SLUG, now: opts.now ?? new Date('2027-10-15'), ...opts });
   assert.deepEqual(r.warnings, [], `${themeId}/${page}: engine warnings`);
   return { ...r, $: cheerio.load(r.html) };
 }
@@ -558,7 +559,7 @@ test('panel: After the wedding sits in Day & place (no 7th page); Review names i
   assert.equal((await panelTheme('_sample')).thankYou, null);
 });
 
-test('theme-check rule (docs/11 §3.6): 01, 02, 03 and 05 complete; every other theme is reported (a warning), never half-done silently', async () => {
+test('theme-check rule (docs/11 §3.6): 01, 02, 03, 04 and 05 complete; every other theme is reported (a warning), never half-done silently', async () => {
   // every theme of the repo (also those other tasks are building now), not the test copy
   const dir = path.join(PLATFORM_ROOT, 'themes');
   for (const id of readdirSync(dir).filter((d) => !d.startsWith('.')).sort()) {

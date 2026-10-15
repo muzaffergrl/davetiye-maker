@@ -8,7 +8,7 @@
 // heading on the RSVP page → "Unpublished changes: 2" → Preview this page (the RSVP page with the new heading) → Review
 // ("Us · Headings & labels", "RSVP · Headings & labels") → Publish → the guest pages show the couple's words → no
 // name/date change used → "Reset to design text" → publish → the design's text is back. axe-core and touch targets on the
-// section; 1280: the preview follows the text being edited. Guests (390; 01, 03 and — G081 — 02, 05): changed headings,
+// section; 1280: the preview follows the text being edited. Guests (390; 01, 03 and — G081 — 02, 05, 04): changed headings,
 // menu and buttons on index / home / details / rsvp without horizontal scroll or broken images. G068_THEMES=<id,…> runs
 // only those designs' guest pages (the couple's panel journey on 01 is skipped).
 // PNG previews + checks.json → previews/g068/ (or $G068_SHOTS_DIR). Exit 1 on a failed check.
@@ -68,7 +68,7 @@ const ONLY = (process.env.G068_THEMES ?? '').split(',').filter(Boolean);
 const PANEL = !ONLY.length;
 const panelSite = PANEL ? seed('olive-ivory', 'g068-panel') : null!;
 const guests = Object.fromEntries(
-  (['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon'] as const)
+  (['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter'] as const)
     .filter((t) => !ONLY.length || ONLY.includes(t))
     .map((t) => [t, seed(t, `g068-${t}`, (c) => void (c.copy = GUEST_COPY))]),
 );

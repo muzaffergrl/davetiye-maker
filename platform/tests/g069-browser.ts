@@ -10,7 +10,7 @@
 //    card, "New" → filter by an answer, sort → Mark as seen (stays after reload) → Add a reply (sheet) → correct a reply
 //    → CSV (one row per person: 3 rows for the 3-person reply) → print view (screen, print media, A4 + Letter PDF).
 // 3. 1280 px layout, 320 px, archived site (read only, CSV + print stay), axe-core, touch targets ≥ 44 px, console.
-// 4. G084: the same guest-names row on 02 Dusty Blue & Champagne and 05 Mediterranean Lemon (04 after its own round): a
+// 4. G084: the same guest-names row on 02 Dusty Blue & Champagne, 05 Mediterranean Lemon and 04 Vintage Airmail: a
 //    3-person reply with names (rows in the theme's own field style, "no" takes them out, typed names come back) → stored →
 //    the panel card "With … and …" and the CSV, one row per person; every design text at its theme.json max (like
 //    theme-check --stress) with the rows open at 360 / 390 px: no horizontal scroll, labels inside the reply box.
@@ -91,6 +91,7 @@ await setArchiveOverride(adapter, archived.site.id, '2026-01-01', 'browser check
 const PARTY_THEMES = [
   { id: 'dusty-blue-champagne', dir: '02_Dusty_Blue', tag: '02' },
   { id: 'mediterranean-lemon', dir: '05_Lemon_Mediterranean', tag: '05' },
+  { id: 'vintage-airmail-love-letter', dir: '04_Vintage_Airmail', tag: '04' },
 ] as const;
 const G084_ONLY = (process.env.G084_THEMES ?? '').split(',').filter(Boolean);
 const G084_OUT = process.env.G084_SHOTS_DIR || path.join(ROOT, 'previews/g084');
@@ -246,7 +247,7 @@ try {
     await ctx.close();
   });
 
-  // =========================================================================== 4. G084: the guest-names row on 02 and 05
+  // =========================================================================== 4. G084: the guest-names row on 02, 05 and 04
   const shot84 = async (page: any, name: string) => {
     await new Promise((r) => setTimeout(r, 300));
     await page.screenshot({ path: path.join(G084_OUT, `${name}.png`) });

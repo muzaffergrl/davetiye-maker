@@ -201,7 +201,7 @@ function zonedToUtc(date, time, tz) {
 }
 function countdownTarget() {
  if (SITE) {
-  const t = SITE.derived && Date.parse(SITE.derived.countdown_target_utc);
+  const t = Date.parse(SITE.derived?.countdown_target_utc);
   return Number.isFinite(t) ? t : null;
  }
  try { return zonedToUtc(CONTENT.date, CONTENT.ceremony_time, CONTENT.timezone); }
@@ -514,7 +514,7 @@ function initEnvelope() {
 function boot() {
  if (!SITE) { root.dataset.preview = 'true'; devRender(CONTENT); devRsvp(); }
  document.addEventListener('rsvp:state', (e) => {
-  const st = e.detail && e.detail.state;
+  const st = e.detail?.state;
   if (st === 'success') root.setAttribute('data-rsvp-replied', '');
   else if (st === 'ready') root.removeAttribute('data-rsvp-replied');
  });
@@ -543,8 +543,10 @@ function devRsvp() {
 function devRender(content) {
  const PHOTO_SOURCES = { hero_portrait: 'media.hero_portrait', story_1: 'media.memory_photos.0',
   story_2: 'media.memory_photos.1', story_3: 'media.memory_photos.2', venue: 'media.venue_image' };
- const view = JSON.parse(JSON.stringify(content)), vn = view.venue, join = (a) => a.filter((x) => typeof x === 'string' && x.trim()).join(', ');
+ const view = JSON.parse(JSON.stringify(content)), vn = view.venue, join = (a) => a.filter((x) => x?.trim?.()).join(', ');
  if (vn) { vn.city_region = join([vn.city, vn.region]); vn.city_region_country = join([vn.city, vn.region, vn.country]); }
+ view.copy = {}; // {copy.<key>} = the page's [data-copy] text (G068)
+ document.querySelectorAll('[data-copy]').forEach((e) => view.copy[e.dataset.copy] ??= e.textContent.trim());
  try { view.countdown_target_utc = new Date(zonedToUtc(view.date, view.ceremony_time, view.timezone)).toISOString(); } catch (e) {}
  const get = (path) => path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), view), dead = (a) => { a.setAttribute('href', '#'); a.dataset.urlMissing = ''; };
  const present = (v) => !(v == null || v === false || (typeof v === 'string' && !v.trim()) || (Array.isArray(v) && !v.length));
@@ -552,30 +554,24 @@ function devRender(content) {
  const fmt = (v, f, path) => {
   if (v == null || typeof v === 'object') return '';
   v = String(v);
-  const generic = path.replace(/\.\d+(?=\.|$)/g, '.*');
-  if (!f) f = ['date', 'rsvp.deadline'].includes(generic) ? 'date' : ['ceremony_time', 'schedule.*.time'].includes(generic) ? 'time' : 'raw';
+  const g = path.replace(/\.\d+(?=\.|$)/g, '.*'), L = 'long', N = 'numeric';
+  f ||= ['date', 'rsvp.deadline'].includes(g) ? 'date' : ['ceremony_time', 'schedule.*.time'].includes(g) ? 'time' : 'raw';
   if (/^\d{4}-\d{2}-\d{2}$/.test(v) && f !== 'raw' && f !== 'time') {
-   const o = { weekday: { weekday: 'long' }, month: { month: 'long' }, day: { day: 'numeric' }, year: { year: 'numeric' },
-    'date-long': { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' } }[f] || { month: 'long', day: 'numeric', year: 'numeric' };
+   const o = { weekday: { weekday: L }, month: { month: L }, day: { day: N }, year: { year: N }, 'date-long': { weekday: L, month: L, day: N, year: N } }[f] || { month: L, day: N, year: N };
    return new Date(v + 'T12:00:00Z').toLocaleDateString('en-US', { timeZone: 'UTC', ...o });
   }
-  if (/^\d{2}:\d{2}$/.test(v) && f === 'time') {
-   const [h, m] = v.split(':').map(Number);
-   return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
-  }
+  if (/^\d{2}:\d{2}$/.test(v) && f === 'time') { const [h, m] = v.split(':').map(Number); return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; }
   return v;
  };
  const fill = (tpl, scope) => tpl.replace(/\{\s*([^{}|\s]+)\s*(?:\|\s*([a-z-]+)\s*)?\}/g, (_m, p, f) => (p = abs(p, scope), fmt(get(p), f, p)));
  const photoState = (img, url) => {
-  const state = url ? 'user' : 'placeholder', slot = img.closest('[data-slot]');
   if (url) { img.removeAttribute('srcset'); img.src = url; }
-  img.dataset.photoState = state;
-  if (slot) slot.dataset.photoState = state;
+  [img, img.closest('[data-slot]')].forEach((e) => { if (e) e.dataset.photoState = url ? 'user' : 'placeholder'; });
  };
  function walk(el, scope) {
   const d = el.dataset;
-  if (d.optional !== undefined && !(view.optional_blocks && view.optional_blocks[d.optional] === true)) { el.remove(); return; }
-  if (d.if !== undefined && present(get(abs(d.if.replace(/^!/, ''), scope))) === d.if.startsWith('!')) { el.remove(); return; }
+  if (d.optional !== undefined && view.optional_blocks?.[d.optional] !== true) return el.remove();
+  if (d.if?.split(' ').some((c) => present(get(abs(c.replace('!', ''), scope))) === (c[0] == '!'))) return el.remove(); // all hold (G075)
   if (d.repeat !== undefined) {
    const path = abs(d.repeat, scope), list = get(path);
    (Array.isArray(list) ? list : []).forEach((_, i) => {
@@ -584,8 +580,7 @@ function devRender(content) {
     el.before(c);
     walk(c, c.dataset.repeatItem = `${path}.${i}`);
    });
-   el.remove();
-   return;
+   return el.remove();
   }
   if (d.field !== undefined) {
    const path = abs(d.field, scope), v = get(path);
@@ -605,9 +600,8 @@ function devRender(content) {
   }
   [...el.children].forEach((c) => walk(c, scope));
  }
- if (document.body.dataset.optional && !(view.optional_blocks || {})[document.body.dataset.optional]) {
-  document.body.prepend(Object.assign(document.createElement('p'), { textContent: 'This page is switched off (optional_blocks).' }));
- }
+ const off = document.body.dataset.optional;
+ if (off && !(view.optional_blocks || {})[off]) document.body.prepend(Object.assign(document.createElement('p'), { textContent: 'This page is switched off (optional_blocks).' }));
  [document.head, document.body].forEach((e) => walk(e, null));
 }
 })();

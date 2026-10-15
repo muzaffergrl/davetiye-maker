@@ -1,0 +1,33 @@
+/* Vintage Airmail Love Letter (design 04) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">),
+   so the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
+
+/* the card's window: the couple's thank-you photo, else the parchment (bg_tile) with the envelope's burgundy wax seal, its
+   lavender and the monogram (decoration, not a placeholder; .seal-mono sits in the seal as on the envelope) */
+.photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
+.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                          background: #E9DCC6 url("img/bg_tile-640.webp") 50% 50% / 260% auto; }
+.ty-seal { position: relative; width: 56%; aspect-ratio: 655 / 1156; container-type: inline-size; translate: 6% 3%; rotate: -9deg;
+           filter: drop-shadow(0 5px 6px rgba(60, 20, 15, .3)) drop-shadow(0 1px 1px rgba(60, 20, 15, .3)); }
+.ty-seal > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* card copy: the thank-you title (≤ 60 characters) wraps in the pen script, the date under it; kept off the card's ragged
+   left edge (free_zone) */
+.card-copy .ty-title { max-width: 74cqw; font-family: var(--script); color: var(--pen); font-size: max(11px, 7.2cqw); line-height: 1.3;
+                       text-wrap: balance; overflow-wrap: break-word; word-spacing: .08em; }
+/* site.js fitCopy "s" (a long title on a small card): typed instead of handwritten — this design's typewriter face is ~⅔ as
+   wide as the pen script at the 11 px floor — never dropped */
+.card-copy[data-drop~="s"] .ty-title { font: 400 max(11px, 4.6cqw)/1.15 var(--type); letter-spacing: .02em; word-spacing: 0; color: var(--ink); }
+
+/* the thank-you letter on the invitation_card sheet (3-slice like the invitation: the band repeats with the message) */
+.ty-text .ty-head { max-width: 64cqw; font-size: 7.6cqw; line-height: 1.5; }
+.ty-text .ty-message { margin-top: 4cqw; max-width: 68cqw; white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; }
+.ty-text .twine { width: 34cqw; margin-top: 5cqw; }
+.ty-text .ty-love { margin-top: 3cqw; font-size: 6.4cqw; line-height: 1.5; }
+.ty-text .ty-names { font-size: 8cqw; }
+.ty-text .city { margin-top: 1.4cqw; }
+/* "Inside this letter" with Our Story off and the Day page hidden: no title over nothing */
+.more-sec:not(:has(.item)) { display: none; }
+
+/* RSVP sheet: "Replies are closed" a little smaller than the invitation's heading (one line), the couple's title under it */
+.rsvp-text .card-title { font-size: 7.5cqw; overflow-wrap: break-word; max-width: 100%; }
+.rsvp-text .ty-kicker { max-width: 70cqw; line-height: 1.6; text-wrap: balance; overflow-wrap: break-word; }

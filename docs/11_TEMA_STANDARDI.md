@@ -167,7 +167,7 @@ alanları): işareti olmayan temada alıcı o özelliği hiç görmez — §3.2'
   kısa yanıt `<textarea data-if="!.options" maxlength="300" data-attr-aria-label=".label">`, hata yeri
   `<p data-attr-data-rsvp-error-for="answer:{.id}">`. Girişlere `name` yazılmaz (`form.js` `answer:<id>` verir). Örnek:
   `platform/themes/blush-garden-rose/rsvp.html`; tam metin README → "Özel sorular (G051)".
-- **Misafir adları (G069, zorunlu):** `guests` alanından hemen sonra `<template data-rsvp-party>` — içinde temanın kendi alan stiliyle `label.field` (etiket `data-copy="form_party"` + numara + `form_optional`), adsız `input` (≤120; `form.js` `party[]` olarak gönderir), hata yeri `[data-rsvp-error-for="party"]`. Kişi sayısı ≥ 2 iken "Name of guest 2/3…" satırları açılır. Örnek: 01, 02, 03, 05 `rsvp.html` (G069, G084).
+- **Misafir adları (G069, zorunlu):** `guests` alanından hemen sonra `<template data-rsvp-party>` — içinde temanın kendi alan stiliyle `label.field` (etiket `data-copy="form_party"` + numara + `form_optional`), adsız `input` (≤120; `form.js` `party[]` olarak gönderir), hata yeri `[data-rsvp-error-for="party"]`. Kişi sayısı ≥ 2 iken "Name of guest 2/3…" satırları açılır. Örnek: 01–05 `rsvp.html` (G069, G084).
 
 ### 3.4 `#site-data` ve sayfa haritası
 - Motor her sayfaya `<script type="application/json" id="site-data">` ekler: `slug`, `theme`, `variant`, `page`, `preview`,
@@ -218,8 +218,8 @@ alır, hepsi tutmalı: `data-if="dress_code !thank_you_on"`. Motor teşekkür mo
 - **Panel:** "After the wedding" bölümü (Day & place sonunda) yalnız tema `thank_you_on` adını kullanıyorsa çıkar (`themeFieldUse`); teşekkür
   fotoğrafı `hero_portrait` oranında kırpılır (aynı pencere). Önizleme `?thanks=1` (yalnız önizleme anahtarıyla).
 - **Denetim:** `lib/theme/thank-you-support.ts` işaret listesi; `scripts/theme-check.cjs` eksik temada **uyarı** yazar (hata değil: o tema düğünden
-  sonra da davet gösterir, platform yanıtları yine kapatır); `tests/g075-thank-you.test.ts` 01/03'ü tam sayar, diğerlerini `# WARN` ile listeler.
-  Örnek: `platform/themes/olive-ivory/`, `platform/themes/blush-garden-rose/`. 02 ve 05'te G081 ile var; 04'te G081'in ikinci turunda (G404 onayından sonra).
+  sonra da davet gösterir, platform yanıtları yine kapatır); `tests/g075-thank-you.test.ts` 01–05'i tam sayar, diğerlerini `# WARN` ile listeler.
+  Örnek: `platform/themes/olive-ivory/`, `platform/themes/blush-garden-rose/`. 02 ve 05'te G081 ile, 04'te G081'in ikinci turunda var.
 
 ### 3.7 Düzenlenebilir tasarım metinleri (G068, K28) — yeni temalarda zorunlu
 Kullanıcı: "neredeyse her metin panelden değişsin". Temanın **görünür her sabit metni** (başlık, etiket, düğme, gezinme, form
@@ -246,8 +246,8 @@ tasarımın metni görünür. Motor ve panel: `platform/README.md` → "Düzenle
 - **Denetim:** `lib/theme/copy-scan.ts` `unmarkedText` — şablonda harf içeren her metin düğümü `data-copy` / `data-field` /
   `data-text` içinde olmalı. İzin listesi: `.ph-mark` ("Your photo here", yalnız önizleme), `[data-rsvp-message]` (platform
   yazar), `[data-copy-fixed]`; yalnız işaret (·, &, →, ‹ ›, rakam) olan metin serbest. `<template>` içi de sayılır (form satırı).
-  `theme-check`: manifesti olan temada işaretsiz metin ve manifest farkı **hata**, manifesti olmayan temada **uyarı** (02 ve 05 G081 ile
-  manifestli; 04 G081'in ikinci turunda). `tests/g068-copy.test.ts` manifestli temaları (01, 02, 03, 05) sayar.
+  `theme-check`: manifesti olan temada işaretsiz metin ve manifest farkı **hata**, manifesti olmayan temada **uyarı** (02, 04 ve 05 G081
+  ile manifestli). `tests/g068-copy.test.ts` manifestli temaları (01–05) sayar.
 - **Panel:** her anahtar bir editör sayfasında, o sayfanın sonundaki "Headings & labels on this page" bölümünde listelenir
   (`STANDARD_COPY.panel`): zarf/davet/imza → Us; Day sayfası, program, mekân, takvim, sayaç ve **teşekkür hâli** ("After the
   wedding" alt başlığı) → Day & place; hikâye → Our Story; bloklar, ana sayfa bağlantı başlığı ve **gezinme** → Details; RSVP kartı,

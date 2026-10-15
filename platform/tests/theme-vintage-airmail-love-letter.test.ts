@@ -286,7 +286,7 @@ test('5 a content change shows on every page (names, date, venue, schedule rows,
   assert.deepEqual(details('.sched-row').map((_, el) => details(el).attr('data-repeat-item')).get(), ['schedule.0', 'schedule.1', 'schedule.2', 'schedule.3']);
   assert.equal(details('.sched-row').first().find('.loc').length, 0, 'row without a location: no empty location line');
   assert.equal(details('[data-field="venue.address"]').text(), '12 Orchard Lane');
-  assert.equal(details('p[data-if="ceremony_time"]').text(), 'The ceremony begins at 3:30 PM.');
+  assert.equal(details('p[data-if="ceremony_time !thank_you_on"]').text(), 'The ceremony begins at 3:30 PM.');
   assert.equal(details('.venue-text .kicker').text(), 'Bath · United Kingdom');
   const home = render('home', c).$;
   assert.equal(home('[data-field="host_line"]').length, 0, 'empty host line removed');

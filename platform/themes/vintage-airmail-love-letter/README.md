@@ -13,15 +13,16 @@ zamanlama, giriş ön ayarları ve bölüm sırası bu tasarımın.
 ## Dosyalar
 | Dosya | İş |
 |---|---|
-| `theme.json` | ad "Vintage Airmail Love Letter", 5 sayfa, 5 foto alanı (oranlar = `img/manifest.json` `photo_slots.*.box_px`) |
+| `theme.json` | ad "Vintage Airmail Love Letter", 5 sayfa, 5 foto alanı (oranlar = `img/manifest.json` `photo_slots.*.box_px`), `copy`: 74 düzenlenebilir tasarım metni (G068; `node scripts/copy-manifest.ts --theme vintage-airmail-love-letter`) |
 | `content.demo.json` | `collections/04_Vintage_Airmail/content.demo.json`'ın birebir kopyası (`/start?theme=vintage-airmail-love-letter` ve tema demosu bunu kullanır; servis edilmez) |
 | `index.html` | kapalı zarf → dokun → mühür fırlar, şerit soldan sağa yırtılır, kart zarftan yukarı kayar, bir unutmabeni süzülür, kart öne gelir → home (view transition) |
 | `home.html` | hero (W1.2: mektup kartı + foto, isimler, gün · tarih, mekân, şehir, geri sayım, RSVP hapı), mektup (invitation_card, tekrarlanan çizgi bandı) + "Kindly reply by", takvime ekle, "Inside this letter" (pul çerçevesi + damga · günün mektubu · mühür, sırayla kâğıda bırakılır), "Until then, with love" |
 | `story.html` | W1.3: yazı masası (bg_desk), "Our Story" + "Moments we hold dear" + giriş cümlesi, üç pul çerçevesi masaya tek tek düşer (telefonda zikzak, ≥ 720 px tek sıra), birincisine posta damgası vurulur, başlıklar çerçevelerin altında el yazısıyla |
 | `details.html` | W1.4: ilk ekran zemini (`.page-bg`: harita çizgili parşömen + damga; yatay/geniş ekranda sağ alt kuru çiçek kümesi), Order of the Day mektubu (info_card, program satırları + aralarında papatyalı sicim), takvime ekle, mekân (pul kenarlı yatay çerçeve), dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
-| `rsvp.html` | W1.5: ilk ekran zemini (`.page-bg`, details gibi), "Will You Join Us?" mektubu (info_card) + tabanında lavantalı mühür (closure) — mektup ve mührü ilk ekrana sığacak boyda, imza birimi (`.sig`: "With love," + isimler), platform yanıt formu (G042 + G051 soruları, her genişlikte mektubun altında), kapanış |
+| `rsvp.html` | W1.5: ilk ekran zemini (`.page-bg`, details gibi), "Will You Join Us?" mektubu (info_card) + tabanında lavantalı mühür (closure) — mektup ve mührü ilk ekrana sığacak boyda, imza birimi (`.sig`: "With love," + isimler), platform yanıt formu (G042 + G051 soruları + G069 misafir adları satırı, her genişlikte mektubun altında), kapanış |
+| `thank-you.css` | yalnız teşekkür hâlinde yüklenir (`data-if="thank_you_on"`, G075/G081): kart penceresinin süsü (parşömen + mühür), kart başlığı, ana sayfanın teşekkür mektubu, RSVP'nin "Replies are closed" kartı |
 | `site.css` | palet token'ları, giriş ön ayarları (`type`, `drop`, `stamp`, `strike` bu tasarımın), foto alanı + maske, zarf katman yüzdeleri, mektup kâğıdı bandı, sayfa yerleşimleri |
-| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, mektup bandı (`fitPaper`), kümelerin boyalı kenarı (`EDGE`, `ink`, `paints`, `giveWay`), uzun isim + home ilk ekranı (`fitNames`, `fitCopy`, `fold`, `corner`), iç sayfaların ilk ekranı (`folds`, story `tiles`), zarf sayfası sığdırma (`envFit`), önizleme çubuğu (`--bar`), geri sayım, zarf (yırtılma), `DEV_CONTENT` + `devRender` |
+| `site.js` | `MOTION` (açılış, sahneler, `accents`), `ENVELOPE_GEOMETRY`, mektup bandı (`fitPaper`), kümelerin boyalı kenarı (`EDGE`, `ink`, `paints`, `giveWay`), uzun isim + home ilk ekranı (`fitNames`, `fitCopy`, `fold`, `corner`), iç sayfaların ilk ekranı (`folds`, story `tiles`), zarf sayfası sığdırma (`envFit`), önizleme çubuğu (`--bar`), geri sayım, zarf (yırtılma), `DEV_CONTENT` + `devRender` (çoklu `data-if`, `{copy.…}`) |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri ve temizliği |
 | `img/` | WebP katmanlar, `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png` (yalnız mühür), `manifest.json` (servis edilmez) |
 
@@ -256,7 +257,7 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
 | W1 öğesi | Şablon | Not |
 |---|---|---|
 | çizgili kenarlı mektup, üstte unutmabeni | `.rsvp-card` (info_card, tekrarlanan bant) | |
-| "Will You Join Us?" | `h1.card-title` (tek satır) | |
+| "Will You Join Us?" | `h1.card-title` | tasarımın metni tek satır (sütunun %91,5'i, `cqw` ile her genişlikte aynı oran); çiftin uzun başlığı dengeli iki satıra iner (G081: `white-space: nowrap` kalktı) |
 | "KINDLY REPLY BY", "AUGUST 21, 2027" | `.kicker`, `.deadline` | `data-if="rsvp.deadline"` |
 | lacivert RSVP hapı | `a.btn[href="#reply"]` | forma kaydırır |
 | papatyalı sicim | `.twine` (divider) | |
@@ -264,6 +265,56 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
 | "With love," + isimler | `.love`, `.sign` | uzun isimde sarar |
 | tabanda lavantalı mühür | `.card-seal` (closure + monogram), kâğıdın kardeşi (kart metni sayılmaz), alt kenarın üstüne biner | mühür (dal değil) ortalı; mektup + mühür ilk ekrana sığacak boyda (W1.5'teki gibi bütün mektup görünür) |
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
+
+## Teşekkür hâli (G075 kuralı, G081)
+Düğünden sonra (platform kuralı `lib/content/thank-you.ts`, docs/11 §3.6) aynı sayfalar `data-if="thank_you_on"` ile teşekkür
+hâline döner; yeni sayfa ve yeni görsel yok (K21: bu tasarımın GPT parçaları):
+- **Zarf:** açılış şovu aynen (mühür fırlar, şerit yırtılır, kart kayar, unutmabeni düşer); üst satır "With love and thanks"
+  (`ty_kicker`); kartta teşekkür başlığı (`thank_you_title`, dolma kalem el yazısı, dengeli sarar) + tarih; şehir satırı yok.
+  Kart penceresinde teşekkür fotoğrafı (`thank_you.photo`, `hero_portrait` oranında, `srcset`'li); yoksa **parşömen (`bg_tile`)
+  üstünde zarfın lavantalı bordo mührü (closure) ve monogram** — asla yer tutucu. Küçük kartta `fitCopy`: uzun başlık önce
+  tarihi bırakır, yine sığmazsa **daktiloyla yazılır** (`data-drop~="s"`: Special Elite 11 px'te el yazısının ~⅔'ü genişlikte;
+  başlık hiç düşmez).
+- **Home:** hero kartı zarfla aynı; isimler, gün · tarih, mekân, şehir kalır; geri sayım ve RSVP hapı yok. Mektubun yerine aynı
+  `invitation_card` kâğıdında (bant tekrarlanır — mesajla uzar) **teşekkür mektubu**: başlık (el yazısı), çiftin mesajı (daktilo,
+  `white-space: pre-line`), papatyalı sicim, "With love," + isimler, tarih. Yanıt satırı ve takvime ekle yok. "Inside this
+  letter"ta Our Story ve The Day kalır (çift Details'i gizlerse The Day ve sicimi yok; ikisi de yoksa bölüm gizli); sayfa sonu
+  "With love and thanks" (`foot_kicker_after`; davet hâlinde "Until then, with love").
+- **Details:** "The Day" olarak kalır (program, mekân, harita, registry); takvim, dress code, Travel & Stay, SSS ve RSVP linki
+  yok; tören cümlesi geçmiş zaman ("The ceremony began at …", `ceremony_after`). Çift gizlerse sayfa 404 ve hiçbir link yok
+  (story'nin kapanış düğmesi Home'a döner).
+- **RSVP:** eski linkler için açık: mektupta "Replies are closed" (`rsvp_closed_title`, davet başlığından biraz küçük: tek satır)
+  + teşekkür başlığı (daktilo) + Home hapı + sicim + imza birimi ("With love," + isimler) + tabandaki mühür; son tarih, bekleme
+  satırı ve form yok (platform da `403 closed`, `reason: thank_you`). Formsuz sayfada kapanış ("Thank you" …) mektubun hemen
+  altına gelir: kapanışın satırları da `[data-fold]` (nav çizgisini kesen satır ilk ekranın altından başlar; davet hâlinde form
+  arada olduğu için etkisiz).
+- **Nav:** Details etiketi "The Day" (`nav_day`), RSVP yok.
+- Stiller `thank-you.css`'te (2 913 B; yalnız teşekkür modunda yüklenir). `site.css`'e kural eklenmedi (RSVP başlığının
+  `nowrap`'ı kalktı, iki kuralı birleşti: 46 073 → 46 025 B ≤ 46 080). `site.js` `devRender` çoklu koşulu (`d.if.split(' ')`)
+  ve `{copy.…}`'yu (sayfanın `[data-copy]` metni) okur; tasarım önizlemesi davet hâlini gösterir. Bunun baytları aynı
+  işlevlerin kısaltılmasından (davranış aynı: `?.`, `||=`, `devRender`'ın `fmt` / `photoState` / sayfa kapalı notu): 35 837 →
+  35 803 B ≤ 35 840.
+
+## Düzenlenebilir metinler (G068 kuralı, G081)
+Görünür her sabit metin `data-copy` / `data-copy-attr` / `{copy.…}` taşır (74 standart anahtar, `theme.json` → `copy`; kural
+`docs/11` §3.7, motor ve panel `platform/README.md` "Düzenlenebilir tasarım metinleri"). Manifest şablonlardan yazılır: `node
+scripts/copy-manifest.ts --theme vintage-airmail-love-letter` (`--check` ile denetim; yalnız `{copy.…}` içinde geçen
+`share_invited`'in varsayılanı elle). `max` değerleri `theme-check --stress` ile 360/390'da ölçüldü (her anahtar `max`'ta, §12
+zorlama kaydıyla, teşekkür hâli dahil): gezinme 6/6/7/5 (`nav_home`/`nav_story`/`nav_details`/`nav_rsvp`; 8 harfte satır
+398 px, 360/390 px'e sığmıyordu), teşekkür hâlinde `nav_day` 10; ötekiler katalogdaki önerilen değer. RSVP kart başlığı
+artık tek satıra zorlanmıyor (yukarıda, comp haritası). Home'daki The Day bağlantısının `aria-label`'ı görünür yazılardan
+(`{copy.day_title}: {copy.home_day_cue}`, WCAG 2.5.3; önce sabit "The Day: schedule and venue"). Ana sayfa kapanışındaki
+"Until then, with love" (`foot_kicker`) ile kartlardaki "With love," (`love_line`) ayrı anahtar. Bilerek sabit: iç sayfaların
+`description` meta cümleleri, bölge `aria-label`'ları, "Please turn on JavaScript…" (`data-copy-fixed`), platform mesajları
+(`[data-rsvp-message]`).
+
+## Misafir adları (G069 satırı, G084)
+Formda "Number of guests"in hata yerinin hemen ardından `<template data-rsvp-party>`: misafir 2+ yazınca `/rsvp/form.js` diğer
+misafirler için "Name of guest 2 / 3 … (optional)" satırlarını açar (`party:<n>`, `party: [...]` gönderir; "no"da formdan çıkar,
+yazılan kalır). Satır formun kendi `.field` / `.kicker` / `.opt` stilinde (yeni dekor, yeni CSS, yeni JS yok). Yanıt kutusu
+(`.reply-box`) tek ilk ekran birimi olduğu için satır `data-fold` taşımaz (kutu bütün olarak katlanır ya da yerinde kalır).
+Metinler `form_party` (`max` 24, standart) ve `form_optional`; 360/390'da her anahtar `max`'ta satırlar açıkken yatay kaydırma
+yok, etiket kutuda sarar (`tests/g069-browser.ts` G084 bölümü).
 
 ## Bilinen sınırlar
 - **İlk ekran, üçüncü QA (QA'nın `sweep`'i, 28 boyut — 568×320 ve 375×553 eklendi — × 3 kayıt × canlı / çubuk × 5 sayfa =
