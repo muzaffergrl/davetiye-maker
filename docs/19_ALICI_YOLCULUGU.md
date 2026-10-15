@@ -218,7 +218,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 | 23 | Will my website show up on Google? | No. Each website asks search engines not to list it. Only people with your link (or QR code) can open it. | İ, İS | ✓ |
 | 24 | Can I add a password so only invited guests can see it? | Yes, optional: one shared guest password that you send with your link. | İ, İS, SH | ✓ |
 | 25 | Is the design made with AI? | Yes. The artwork and sample photos were made with AI image tools from our own descriptions, then cut into layers and assembled by us. | İ, SS | ✓ (Etsy beyan alanı V) |
-| 26 | Can I get a refund? | [REFUND POLICY] Please try the live demo first. | İ, İS | K |
+| 26 | Can I get a refund? | No returns, exchanges or cancellations (digital product, instant access). If something does not work as described, we fix it. Please try the live demo first. | İ, İS | ✓ (2026-10-15) |
 | 27 | Can I use one purchase for two events? | No. One Etsy order starts one website. | İ, İS, ST | ✓ |
 
 ### 3.2 Satın alma ve indirme
@@ -363,7 +363,7 @@ GOOD TO KNOW
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
 • No music. Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
-• [REFUND POLICY]
+• No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.
@@ -476,7 +476,7 @@ anahtar), `title` (admin listesinde), `when` (ne zaman gönderilir; dükkân iç
 | `{changes_left}` | kalan isim/tarih hakkı (hak eklendikten sonra) | `rightsView` |
 | `{online_until}` | "Online until" günü, sitenin tarih stiliyle uzun biçim ("February 11, 2028") | `rightsView.onlineUntil` |
 
-Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHECK TIME]`, `[REFUND POLICY]` …). Admin paneli,
+Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHECK TIME]`, `[EXTENSION POLICY]` …). Admin paneli,
 çözülmemiş `{…}` ya da köşeli parantezli yer tutucu içeren metni **göndertmemeli** (uyarı + düzenleme), §6 öneri A3.
 
 <!-- g091:templates:start -->
@@ -695,7 +695,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "placeholders": ["shop"],
     "body": [
       "Hi, I'm sorry it's not working out. Could you tell us what went wrong? Many problems have a quick fix, and we would like to try that first.",
-      "Our refund policy: [REFUND POLICY]",
+      "Our refund policy: because this is a digital product with instant access, we do not accept returns, exchanges or cancellations. If something on your website does not work as described, we will fix it.",
       "{shop}"
     ]
   },

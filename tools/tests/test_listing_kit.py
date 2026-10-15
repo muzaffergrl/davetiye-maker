@@ -67,8 +67,9 @@ def test_real_listings():
         m = re.search(r"This title: (\d+) characters", md)
         assert m and int(m.group(1)) == len(f["title"]), (t.id, m and m.group(1), len(f["title"]))
         assert "<!-- listing-kit:media -->" in md
-        for ph in ("[PRICE]", "[SHOP NAME]", "[HOSTING PERIOD]", "[SUPPORT EMAIL]"):
-            assert ph in md, (t.id, ph)
+        # Undecided commercial fields stay placeholders. Shop name, support email (K33) and hosting period (K25) are
+        # decided and filled in the newer listings (2026-10-15), so only [PRICE] is still required here.
+        assert "[PRICE]" in md, (t.id, "[PRICE]")
         guide = (t.package / "customer" / "START_HERE.md").read_text(encoding="utf-8")
         assert lk.start_url(t) in guide and f"({lk.start_url(t)})" in guide, t.id  # shown and clickable
         assert "img/start_qr_page.png" in guide

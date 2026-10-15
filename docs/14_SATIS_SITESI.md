@@ -615,7 +615,7 @@ Bölümler:
 - **"Not included":** §6.5 listesi.
 - **Paket / indirim:** `[BUNDLE OFFER: G062]`. Karar gelene kadar bölüm görünmez.
 - **Fiyat SSS:** Why Etsy? (Etsy handles payment and gives you your download) · Is it a subscription? (No) · What happens
-  after 12 months? (`[EXTENSION POLICY]`) · Refunds? (`[REFUND POLICY]`) · Can I buy directly on this site? (Not yet: §7.4)
+  after 12 months? (`[EXTENSION POLICY]`) · Refunds? (no returns or refunds for the digital product; we fix what does not work as described, 2026-10-15) · Can I buy directly on this site? (Not yet: §7.4)
 - **Şema:** WebPage, BreadcrumbList. Offer **yalnız tasarım sayfasında**; aynı ürün birden çok sayfada işaretlenmez.
 
 ### 6.7 SSS `/faq`
@@ -626,7 +626,7 @@ Bölümler:
 
 Gruplar ve sorular (her yanıt ilk cümlede cevap verir, 40–80 kelime, ilgili sayfaya link):
 - **Buying:** How do I buy? · What do I get after buying on Etsy? · Is it a subscription? · Can I get a refund?
-  `[REFUND POLICY]` · Can I use one purchase for two weddings? (No: one order = one website; G060)
+  (no; we fix what does not work as described) · Can I use one purchase for two weddings? (No: one order = one website; G060)
 - **Editing:** Do I need Canva or an app? · What can I change? · Can I change colors or fonts? · Can I change our names
   or date after publishing? ("Yes, 3 times. Fixing a small typo (up to 2 letters or digits) is free, and everything else
   can change as often as you like." docs/16 §11.7 ile aynı; `[VERIFY: G060 shipped]`) · What if our wedding date moves?
@@ -640,7 +640,7 @@ Gruplar ve sorular (her yanıt ilk cümlede cevap verir, 40–80 kelime, ilgili 
   Google? [§5.5] · Can I take it offline? (Unpublish) · How do I delete my data? `[DELETION PROCESS]`
 - **Designs:** Is the artwork AI-generated? (Yes: created with AI image tools, then assembled, tested and hosted by us) ·
   Is there a matching save the date? (Not yet) · Do you sell printed invitations? (No)
-- **Support:** How do I contact you? `[SUPPORT EMAIL]` · How fast do you reply? `[RESPONSE TIME]`
+- **Support:** How do I contact you? (bkestudio@gmail.com, K33) · How fast do you reply? (24 hours, 2026-10-15)
 
 Şema: FAQPage, görünen metinle birebir aynı (isteğe bağlı; Google'da sonuç yok, diğer motorlar okuyabilir).
 
@@ -674,7 +674,7 @@ Kurallar:
 - **H1:** `Contact us`
 
 İçerik:
-- `[SUPPORT EMAIL]` (mailto), yanıt süresi `[RESPONSE TIME]`, mesaja eklenecekler (Etsy sipariş numarası, site adresi).
+- `bkestudio@gmail.com` (mailto, K33), yanıt süresi 24 saat (2026-10-15), mesaja eklenecekler (Etsy sipariş numarası, site adresi).
 - **Güvenlik notu:** `We will never ask for your edit link.`
 - Etsy siparişleri için Etsy mesajları da kullanılabilir.
 - Form yok: e-posta sağlayıcısı yok; sahte form kurulmaz.
@@ -1291,7 +1291,7 @@ export const MARKETING = {
     logo: null as string | null,       // marka kararından sonra
   },
   siteUrl: process.env.MARKETING_SITE_URL ?? process.env.PLATFORM_PUBLIC_URL ?? 'https://[DOMAIN]',
-  support: { email: '[SUPPORT EMAIL]', responseTime: '[RESPONSE TIME]' },
+  support: { email: '[SUPPORT EMAIL]', responseTime: '[RESPONSE TIME]' }, // 2026-10-15: bkestudio@gmail.com, '24 hours' (güncel değer config.ts'te)
   etsy: { shopUrl: '[ETSY SHOP URL]' },
   currency: 'USD',
   hosting: { monthsAfterWedding: 12 }, // K25 (uygulaması G060, docs/16 §11.9)
