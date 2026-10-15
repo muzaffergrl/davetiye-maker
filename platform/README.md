@@ -259,6 +259,10 @@ node --env-file=.env.local scripts/blob-smoke.mjs                               
   typecheck`'i kırar → `.next`'i silip typecheck/build. Tohumlama: `DATA_ADAPTER=blob PLATFORM_DATA_DIR=<yerel geçici klasör> node
   --env-file=.env.local scripts/seed.ts --theme <id> --slug <slug> --content ../collections/<NN>/content.demo.json --photos
   ../collections/<NN>/assets/gpt/photos` (anahtarlar o klasöre yazılır, ekrana basılanları log'a koymayın).
+- Windows (G079): `tests/g080-approval.test.ts` temaları `symlinkSync(…, 'dir')` ile bağlıyor; Windows bunu yönetici izni / Geliştirici Modu
+  olmadan vermiyor (`EPERM`, 8 test). Öneri: `tests/review-fixture.ts`'te win32'de `'junction'`. O zamana kadar: dizin symlink'ini junction'a
+  çeviren bir ön yükleme ile `NODE_OPTIONS=--import=<shim> npm test` (G079'da 574/574 böyle geçti). Playwright'lı 6 tema tarayıcı testi
+  bu makinede atlanıyor (Playwright kurulu değil).
 
 ## Tema biçimi
 

@@ -116,6 +116,11 @@ düzenler. Bu belge platformun tek kaynağıdır.
   493/493 (+2 build sonrası 2/2), typecheck, build yeşil. Demolara `/eleanor-and-theo` (02, onaysız) eklendi; hepsi yeni kodla tohumlandı.
   `live-check` 40/40 + beş temalı salt-okuma 41/41, `blob-smoke` 12/12. Site şifresi ayrı geçici sitede denendi (çalışıyor), site silindi.
   Ekran görüntüleri: `docs/10_canli_test/g078/`.
+- **Sade panel canlıda (G079, 2026-10-15, `claude-local-1`):** production = main `1d25e57` (platform ağacı `5b9002e5e600`; G066-B BKE
+  Studio paneli + K29 sadeleştirme, G075 teşekkür modu, G068 düzenlenebilir metinler, G080 `/start` kapısı, 5 tasarım satışta),
+  `dpl_BfYJEMS1nxXarDBKovViJ2F81Y6h`. `npm test` 574/574 (Windows'ta g080-approval'ın 8 testi symlink izni yüzünden yalnız junction
+  shim'iyle geçiyor — README "Windows notları"), typecheck, build yeşil. Demolar yeniden tohumlandı; `live-check` 40/40, beş tema 41/41,
+  `blob-smoke` 12/12. Panel gezintisi ve 3 adımlı kurulum canlıda denendi; ekran görüntüleri `docs/10_canli_test/g079/`.
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
