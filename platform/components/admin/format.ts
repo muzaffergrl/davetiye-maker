@@ -23,3 +23,11 @@ export function day(isoDate: string | null | undefined): string {
   if (!isoDate || !/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) return '—';
   return DAY.format(new Date(`${isoDate}T12:00:00Z`));
 }
+
+const SHORT = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+
+/** "2026-10-12" → "12 Eki" (week labels). */
+export function shortDay(isoDate: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) return '';
+  return SHORT.format(new Date(`${isoDate}T12:00:00Z`));
+}

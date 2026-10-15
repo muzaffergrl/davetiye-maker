@@ -1,5 +1,5 @@
 {
- "when": "2026-10-15T06:33:11.743Z",
+ "when": "2026-10-15T11:23:38.234Z",
  "checks": [
   {
    "name": "off: /admin answers 200 with an honest \"kapalı\" note",
@@ -16,7 +16,7 @@
   {
    "name": "/start gives an edit link",
    "ok": true,
-   "detail": "http://127.0.0.1:3395/edit/emma-and-liam?k=…"
+   "detail": "http://127.0.0.1:3390/edit/emma-and-liam?k=…"
   },
   {
    "name": "Home: the status card says the order is being confirmed",
@@ -41,6 +41,30 @@
   },
   {
    "name": "session cookie is HttpOnly + SameSite=Strict",
+   "ok": true
+  },
+  {
+   "name": "overview: the waiting order is a to-do",
+   "ok": true
+  },
+  {
+   "name": "overview: \"Onay bekleyen sipariş\" counts it",
+   "ok": true
+  },
+  {
+   "name": "overview: weekly sales chart",
+   "ok": true
+  },
+  {
+   "name": "overview 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin overview has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "overview: touch targets ≥ 36 px",
    "ok": true
   },
   {
@@ -103,7 +127,7 @@
   {
    "name": "a new edit link is shown once",
    "ok": true,
-   "detail": "http://127.0.0.1:3395/edit/emma-and-liam?k=…"
+   "detail": "http://127.0.0.1:3390/edit/emma-and-liam?k=…"
   },
   {
    "name": "the \"new editor link\" message holds the new link",
@@ -118,11 +142,119 @@
    "ok": true
   },
   {
+   "name": "note saved",
+   "ok": true
+  },
+  {
+   "name": "replies section with CSV",
+   "ok": true
+  },
+  {
+   "name": "content section shows the venue",
+   "ok": true
+  },
+  {
+   "name": "\"Taslağı gör\" opens the draft",
+   "ok": true,
+   "detail": "200"
+  },
+  {
+   "name": "customers: the buyer is listed by email",
+   "ok": true
+  },
+  {
+   "name": "customers 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin customers has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "designs: every design has a card",
+   "ok": true
+  },
+  {
+   "name": "designs 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin designs has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): admin new order has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "empty form: fields marked",
+   "ok": true
+  },
+  {
+   "name": "created: link + ready message",
+   "ok": true,
+   "detail": "Hi Nora & Sam, thank you for your order! We have set up your Art Deco Black-Tie wedding website for you.\n\nHere is your p"
+  },
+  {
+   "name": "new order 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "the new order is in the list",
+   "ok": true
+  },
+  {
+   "name": "/my without a saved editor: no \"On this device\"",
+   "ok": true
+  },
+  {
+   "name": "/my: a foreign link is refused",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): my website has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "/my after opening the editor: \"On this device\" with Open editor",
+   "ok": true
+  },
+  {
+   "name": "\"Open editor\" goes back into the panel",
+   "ok": true
+  },
+  {
+   "name": "sales site header: \"My website\" button at 390",
+   "ok": true
+  },
+  {
+   "name": "sales site 390: the menu button is still on screen",
+   "ok": true,
+   "detail": "{\"x\":334,\"y\":8,\"width\":48,\"height\":48}"
+  },
+  {
+   "name": "sales site 390: no horizontal scroll",
+   "ok": true
+  },
+  {
+   "name": "sales site 360: header fits",
+   "ok": true
+  },
+  {
+   "name": "sales site 360: the menu button is still on screen",
+   "ok": true,
+   "detail": "{\"x\":304,\"y\":8,\"width\":48,\"height\":48}"
+  },
+  {
    "name": "delete is disabled until the address is typed",
    "ok": true
   },
   {
    "name": "a wrong address keeps it disabled",
+   "ok": true
+  },
+  {
+   "name": "1280 overview: no horizontal scroll",
    "ok": true
   },
   {

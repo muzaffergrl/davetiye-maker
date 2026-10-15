@@ -3,7 +3,7 @@
 /** First path segments the platform uses (or may use) itself; never available as a site slug. */
 export const RESERVED_SLUGS: ReadonlySet<string> = new Set([
   // platform routes
-  'edit', 'start', 'api', '_next', 'themes', 'media', 'preview', 'demo', 'panel', 'admin',
+  'edit', 'start', 'api', '_next', 'themes', 'media', 'preview', 'demo', 'panel', 'admin', 'my',
   // pages a site or the platform may add later
   'index', 'home', 'story', 'details', 'rsvp', 'about', 'help', 'support', 'contact', 'faq',
   'terms', 'privacy', 'legal', 'pricing', 'blog', 'shop', 'login', 'logout', 'signin', 'signup',

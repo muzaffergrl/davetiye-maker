@@ -6,7 +6,11 @@ import { getClaimRateLimiter } from '../claim/limits.ts';
 import { getDataAdapter, type DataAdapter, type SiteRecord } from '../data/index.ts';
 import { BodyTooLargeError, fail, json, readLimitedBytes, requestOrigin } from '../panel/http.ts';
 import { clientIp } from '../rsvp/http.ts';
-import { confirmOrder, grantIdentityChanges, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
+import { panelPreviewToken } from '../keys.ts';
+import { normalizeEmail } from '../claim/fields.ts';
+import { rsvpCsvForSite, rsvpSummary, type RsvpCounts, type RsvpEntry } from '../rsvp/couple.ts';
+import { confirmOrder, grantIdentityChanges, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
+import { adminCreateSite } from './create.ts';
 import {
   adminConfig,
   clearedSessionCookie,
@@ -15,7 +19,7 @@ import {
   passwordMatches,
   sessionCookie,
 } from './auth.ts';
-import { countSites, siteHistory, summarizeSite, type AdminCounts, type AdminHistoryEntry, type AdminSiteSummary } from './summary.ts';
+import { countSites, ordersCsv, siteHistory, summarizeSite, type AdminCounts, type AdminHistoryEntry, type AdminSiteSummary } from './summary.ts';
 
 const MINUTE = 60_000;
 /** Wrong or right, every sign-in attempt counts: 8 per 15 minutes per address, 40 per hour in total. */
@@ -104,16 +108,120 @@ export async function adminList(adapter: DataAdapter = getDataAdapter(), now: Da
   return { sites: list, counts: countSites(list) };
 }
 
+/** What the site holds now (the draft), for the shop's overview. Read-only; the buyer edits in the panel. */
+export interface AdminContentView {
+  date: string | null;
+  time: string | null;
+  timezone: string | null;
+  venue: string | null;
+  address: string | null;
+  schedule: Array<{ label: string; time: string }>;
+  rsvpDeadline: string | null;
+  dressCode: string | null;
+  photos: number;
+  storyItems: number;
+  faq: number;
+}
+
+export interface AdminRsvpView {
+  counts: RsvpCounts;
+  /** Newest first. */
+  responses: RsvpEntry[];
+}
+
 export interface AdminSiteDetail {
   summary: AdminSiteSummary;
   history: AdminHistoryEntry[];
+  content: AdminContentView;
+  rsvp: AdminRsvpView;
+  /** "/<slug>?preview=<short-lived token>": the draft as the buyer's panel shows it (12 h, never stored). */
+  previewPath: string;
+}
+
+function contentView(site: SiteRecord): AdminContentView {
+  const c = site.content as unknown as Record<string, any>;
+  const s = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null);
+  const venue = c?.venue ?? {};
+  const media = c?.media ?? {};
+  let photos = 0;
+  const walk = (v: unknown) => {
+    if (typeof v === 'string' && v) photos++;
+    else if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') Object.values(v).forEach(walk);
+  };
+  walk(media);
+  const storyItems = Array.isArray(c?.story?.items) ? c.story.items.length : Array.isArray(c?.story?.moments) ? c.story.moments.length : 0;
+  return {
+    date: s(c?.date),
+    time: s(c?.ceremony_time),
+    timezone: s(c?.timezone),
+    venue: [s(venue.name), s(venue.city), s(venue.region), s(venue.country)].filter(Boolean).join(', ') || null,
+    address: s(venue.address),
+    schedule: (Array.isArray(c?.schedule) ? c.schedule : []).map((i: any) => ({ label: String(i?.label ?? ''), time: String(i?.time ?? '') })),
+    rsvpDeadline: s(c?.rsvp?.deadline),
+    dressCode: s(c?.dress_code),
+    photos,
+    storyItems,
+    faq: Array.isArray(c?.faq) ? c.faq.length : 0,
+  };
 }
 
 export async function adminSite(id: string, adapter: DataAdapter = getDataAdapter(), now: Date = new Date()): Promise<AdminSiteDetail | null> {
   const site = await adapter.getSiteById(id);
   if (!site) return null;
-  const replies = (await adapter.listRsvps(site.id)).length;
-  return { summary: summarizeSite(site, replies, now), history: siteHistory(site) };
+  return detailOf(site, adapter, now);
+}
+
+async function detailOf(site: SiteRecord, adapter: DataAdapter, now: Date = new Date()): Promise<AdminSiteDetail> {
+  const rsvp = await rsvpSummary(adapter, site, now);
+  return {
+    summary: summarizeSite(site, rsvp.counts.responses + rsvp.counts.held, now),
+    history: siteHistory(site),
+    content: contentView(site),
+    rsvp: { counts: rsvp.counts, responses: rsvp.responses },
+    previewPath: `/${site.slug}?preview=${encodeURIComponent(panelPreviewToken(site.id, site.previewKeyHash, now.getTime()))}`,
+  };
+}
+
+/** POST /api/admin/sites — the shop starts a website for a buyer ("Yeni sipariş"). */
+export async function createRoute(req: Request): Promise<Response> {
+  const denied = adminGuard(req, { write: true });
+  if (denied) return denied;
+  const body = await readJsonBody(req);
+  if (body instanceof Response) return body;
+  const result = await adminCreateSite(getDataAdapter(), requestOrigin(req), body);
+  return json(result.ok ? 201 : 400, result as unknown as Record<string, unknown>);
+}
+
+function csvResponse(csv: string, filename: string): Response {
+  return new Response(csv, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': `attachment; filename="${filename}"`,
+      'Cache-Control': 'no-store',
+      'X-Robots-Tag': 'noindex',
+    },
+  });
+}
+
+/** GET /api/admin/export — every order as CSV. */
+export async function exportRoute(req: Request): Promise<Response> {
+  const denied = adminGuard(req);
+  if (denied) return denied;
+  const { sites } = await adminList();
+  return csvResponse(ordersCsv(sites, requestOrigin(req)), `siparisler-${new Date().toISOString().slice(0, 10)}.csv`);
+}
+
+/** GET /api/admin/sites/<id>/rsvps — the site's replies as CSV (same file the couple downloads). */
+export async function rsvpCsvRoute(req: Request, id: string): Promise<Response> {
+  const denied = adminGuard(req);
+  if (denied) return denied;
+  const adapter = getDataAdapter();
+  const site = await adapter.getSiteById(id);
+  if (!site) return fail(404, 'not_found', 'This website does not exist (any more).');
+  const { csv, filename } = await rsvpCsvForSite(adapter, site);
+  return csvResponse(csv, filename);
 }
 
 export async function listRoute(req: Request): Promise<Response> {
@@ -124,8 +232,20 @@ export async function listRoute(req: Request): Promise<Response> {
 
 // --- actions --------------------------------------------------------------------------------------------------
 
-export const ADMIN_ACTIONS = ['confirm', 'reissue', 'grant', 'archive', 'unpublish', 'delete'] as const;
+export const ADMIN_ACTIONS = ['confirm', 'reissue', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'rsvp-delete', 'delete'] as const;
 export type AdminAction = (typeof ADMIN_ACTIONS)[number];
+
+/** Turkish words for the errors lib/sites.ts throws (the admin speaks Turkish). */
+function actionError(e: unknown): string {
+  const name = e instanceof Error ? e.name : '';
+  const message = e instanceof Error ? e.message : String(e);
+  if (name === 'OrderPendingError') return 'Sipariş henüz onaylanmadı; önce siparişi onaylayın.';
+  if (name === 'SiteArchivedError') return 'Site arşivde; önce yayında kalma süresini uzatın.';
+  if (name === 'IdentityMismatchError') return 'İsim/tarih değişikliği hakkı kalmadı; alıcının taslağındaki isim/tarih yayınlanandan farklı. Önce hak ekleyin.';
+  if (name === 'ContentInvalidError') return 'Taslakta eksik ya da hatalı alan var (alıcının panelindeki Home listesi gösterir); yayınlanamadı.';
+  if (name === 'StaleSiteError' || name === 'WriteConflictError') return 'Site tam o sırada değişti; tekrar deneyin.';
+  return message.replace(/^--add/, 'The number');
+}
 
 function text(value: unknown, max = 300): string {
   return typeof value === 'string' ? value.trim().slice(0, max) : '';
@@ -176,16 +296,39 @@ export async function siteAction(req: Request, id: string, action: string): Prom
         updated = await unpublishSite(adapter, site.id);
         break;
       }
+      case 'publish': {
+        if (site.status === 'published' && site.publishedContent && JSON.stringify(site.content) === JSON.stringify(site.publishedContent)) {
+          return fail(409, 'already_published', 'Site zaten yayında ve yayınlanmamış değişiklik yok.');
+        }
+        updated = await publishSite(adapter, site.id);
+        break;
+      }
+      case 'note': {
+        const note = text(body.note, 2000);
+        updated = await adapter.patchSite(site.id, { adminNote: note ? { text: note, at: new Date().toISOString() } : null });
+        break;
+      }
+      case 'email': {
+        const email = normalizeEmail(text(body.email, 260));
+        if (!email) return fail(400, 'bad_email', 'Geçerli bir e-posta yazın.');
+        updated = await adapter.patchSite(site.id, { ownerEmail: email });
+        break;
+      }
+      case 'rsvp-delete': {
+        const ids = Array.isArray(body.ids) ? body.ids.filter((x): x is string => typeof x === 'string').slice(0, 1000) : [];
+        if (!ids.length) return fail(400, 'no_ids', 'Silinecek yanıt seçin.');
+        await adapter.deleteRsvps(site.id, ids);
+        break;
+      }
       case 'delete': {
         if (text(body.confirm, 64).toLowerCase() !== site.slug) return fail(400, 'confirm_mismatch', 'Type the website address exactly to delete it.');
         await adapter.deleteSite(site.id);
         return json(200, { ok: true, deleted: true });
       }
     }
-    const replies = (await adapter.listRsvps(updated.id)).length;
-    return json(200, { ok: true, summary: summarizeSite(updated, replies), history: siteHistory(updated), ...extra });
+    const fresh = (await adapter.getSiteById(updated.id)) ?? updated;
+    return json(200, { ok: true, ...(await detailOf(fresh, adapter)), ...extra });
   } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    return fail(409, 'not_possible', message.replace(/^--add/, 'The number'));
+    return fail(409, 'not_possible', actionError(e));
   }
 }

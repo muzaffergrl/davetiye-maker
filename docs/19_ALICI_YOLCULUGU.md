@@ -486,7 +486,12 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "welcome_start",
     "title": "Welcome + start link",
     "when": "Optional, right after an order (Etsy's automatic digital-items message already gives the start link). Also when a buyer writes before starting.",
-    "placeholders": ["order", "design", "start_url", "shop"],
+    "placeholders": [
+      "order",
+      "design",
+      "start_url",
+      "shop"
+    ],
     "body": [
       "Hi, thank you for your order!",
       "Your {design} wedding website is ready for you to start. Open this link on your phone or computer: {start_url}",
@@ -500,7 +505,12 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "start_link_reminder",
     "title": "Reminder: start your website",
     "when": "About 3 days after an order if no website exists for the order number, or when a buyer cannot find the PDF or the link. Send once.",
-    "placeholders": ["order", "design", "start_url", "shop"],
+    "placeholders": [
+      "order",
+      "design",
+      "start_url",
+      "shop"
+    ],
     "body": [
       "Hi, just a friendly note: your {design} wedding website is waiting for you.",
       "Start it here: {start_url}",
@@ -514,7 +524,10 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "publish_blocked_pending",
     "title": "Order being confirmed (Publish is waiting)",
     "when": "The buyer asks why Publish does not work, or mentions 'We are confirming your Etsy order', before the shop has confirmed the order.",
-    "placeholders": ["order", "shop"],
+    "placeholders": [
+      "order",
+      "shop"
+    ],
     "body": [
       "Hi, thank you for starting your website!",
       "Before any website goes live, we check the order in our Etsy shop: that it is paid and for the design you chose. Everything you set up is saved, so please keep going with your names, photos and details.",
@@ -527,7 +540,13 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "order_confirmed",
     "title": "Order confirmed: you can publish",
     "when": "Right after the shop confirms an order whose website is waiting (verify-order). The platform does not tell the buyer by itself.",
-    "placeholders": ["order", "names", "design", "site_url", "shop"],
+    "placeholders": [
+      "order",
+      "names",
+      "design",
+      "site_url",
+      "shop"
+    ],
     "body": [
       "Hi {names}, good news: we have confirmed your Etsy order {order}.",
       "You can now publish your {design} website. Open your editor with the edit link you saved (if it is already open, reload the page) and tap Publish.",
@@ -539,7 +558,10 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "how_to_publish",
     "title": "How to publish / guests don't see my changes",
     "when": "The buyer asks how to publish, or says guests cannot see a change.",
-    "placeholders": ["site_url", "shop"],
+    "placeholders": [
+      "site_url",
+      "shop"
+    ],
     "body": [
       "Hi! Your changes save by themselves, but guests only see them after you publish.",
       "First time: tap Publish at the top of your editor, check the list under 'Before you publish', then tap Publish my website.",
@@ -552,7 +574,12 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "new_edit_link",
     "title": "New edit link (lost link)",
     "when": "After the shop has made a new link with reissue-edit-key (lost link, or the link was shared by mistake). Only inside this order's own Etsy conversation, or after the buyer wrote from the email address used on /start with the order number.",
-    "placeholders": ["names", "edit_url", "site_url", "shop"],
+    "placeholders": [
+      "names",
+      "edit_url",
+      "site_url",
+      "shop"
+    ],
     "body": [
       "Hi {names}, here is your new private edit link:",
       "{edit_url}",
@@ -563,10 +590,32 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "note": "Never paste {edit_url} into any other template, note or log. Tell the buyer to use the newest link if they asked twice."
   },
   {
+    "id": "shop_created_site",
+    "title": "Your website is ready (set up by the shop)",
+    "when": "Right after the shop creates the website in the admin for a buyer (for example, the buyer asked us to set it up).",
+    "placeholders": [
+      "names",
+      "design",
+      "edit_url",
+      "site_url",
+      "shop"
+    ],
+    "body": [
+      "Hi {names}, thank you for your order! We have set up your {design} wedding website for you.",
+      "Here is your private edit link:\n{edit_url}",
+      "It opens your editor, where you can change every text, add your photos and publish when you are ready. Your website starts as a private draft: nobody can see it until you publish it. Your website address will be {site_url}.",
+      "Please save the link now: copy it into your notes app or email it to yourself. Share it only with your partner. We will never ask you for it.",
+      "{shop}"
+    ]
+  },
+  {
     "id": "order_already_used",
     "title": "Start page says: this order already has a website",
     "when": "The buyer reports 'This order already has a website' on the start page.",
-    "placeholders": ["order", "shop"],
+    "placeholders": [
+      "order",
+      "shop"
+    ],
     "body": [
       "Hi, thanks for letting us know.",
       "This message means a website has already been started with order {order}, maybe by you earlier or by your partner. If you saved an edit link, please open it: that is your website.",
@@ -579,7 +628,11 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "wrong_design_started",
     "title": "Started with a different design",
     "when": "The buyer started a website with a different design than the one bought (for example from the design chooser).",
-    "placeholders": ["order", "design", "shop"],
+    "placeholders": [
+      "order",
+      "design",
+      "shop"
+    ],
     "body": [
       "Hi, thanks for telling us. Please don't publish this website yet.",
       "Your order {order} is for {design}. [DESIGN SWITCH POLICY]",
@@ -591,7 +644,11 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "extra_change_granted",
     "title": "Extra name/date change added",
     "when": "After the shop has added name/date changes (grant-identity-change), for example for a real postponement.",
-    "placeholders": ["names", "changes_left", "shop"],
+    "placeholders": [
+      "names",
+      "changes_left",
+      "shop"
+    ],
     "body": [
       "Hi {names}, we have added a name and date change to your website. You now have {changes_left} left.",
       "To use it: open your editor, go to Edit → Us (names) or Edit → Day & place (date), tap Change and confirm. Then publish: Review → Publish changes.",
@@ -603,7 +660,10 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "date_moved",
     "title": "Our wedding date moved",
     "when": "The buyer says the wedding was postponed or moved.",
-    "placeholders": ["names", "shop"],
+    "placeholders": [
+      "names",
+      "shop"
+    ],
     "body": [
       "Hi {names}, thank you for letting us know.",
       "Open your editor, go to Edit → Day & place and tap Change next to your date. Moving the date by up to 7 days is free; a bigger move uses one of your name and date changes. The editor tells you before you confirm. Then publish: Review → Publish changes.",
@@ -616,7 +676,9 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "photo_upload_help",
     "title": "Photo will not upload",
     "when": "The buyer says a photo does not upload or open.",
-    "placeholders": ["shop"],
+    "placeholders": [
+      "shop"
+    ],
     "body": [
       "Hi! A few things usually help:",
       "1. Use a JPEG or PNG copy of the photo (on many phones: share or save the photo as JPEG, then choose that copy). Photos up to 30 MB work.",
@@ -629,7 +691,10 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "guest_access_help",
     "title": "A guest cannot open the website",
     "when": "The buyer says a guest cannot open the link or the QR code.",
-    "placeholders": ["site_url", "shop"],
+    "placeholders": [
+      "site_url",
+      "shop"
+    ],
     "body": [
       "Hi! Please check these:",
       "1. Is your website published? Home in your editor should say 'Your website is live.' If it says draft or offline, tap Publish.",
@@ -644,7 +709,9 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "general_help",
     "title": "General help",
     "when": "Any question no other template answers.",
-    "placeholders": ["shop"],
+    "placeholders": [
+      "shop"
+    ],
     "body": [
       "Hi, thanks for your message! We are happy to help.",
       "So we can answer in one go, please tell us: your Etsy order number, your website address, what you tried and what you see (a screenshot helps), and which phone or computer and browser you use.",
@@ -657,7 +724,11 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "archive_notice",
     "title": "Website closes soon",
     "when": "About 30 days before 'Online until' (the editor's Home shows the same reminder; no email is sent yet).",
-    "placeholders": ["names", "online_until", "shop"],
+    "placeholders": [
+      "names",
+      "online_until",
+      "shop"
+    ],
     "body": [
       "Hi {names}, a short note: your wedding website stays online until {online_until}.",
       "After that it closes for guests. In your editor you can still see your content and download your replies (Guests → Download list). If you want a copy of your replies, it is easiest to download them before then.",
@@ -669,7 +740,10 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "after_wedding_tip",
     "title": "After the wedding: thank-you page",
     "when": "Optional, a few days after the wedding date. Order and support only, no advertising (Etsy message rules).",
-    "placeholders": ["names", "shop"],
+    "placeholders": [
+      "names",
+      "shop"
+    ],
     "body": [
       "Hi {names}, congratulations!",
       "If you like, your website can now say thank you to your guests: in your editor go to Edit → Day & place → After the wedding, write a short message, add a photo, preview and publish. If you chose Automatic, it is already showing.",
@@ -681,7 +755,10 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "review_request",
     "title": "Review request (once)",
     "when": "Once per order, after the website is published and the first replies have arrived, and only if no problem is open. Same text for everyone; never with a discount or gift; never ask for a star rating.",
-    "placeholders": ["names", "shop"],
+    "placeholders": [
+      "names",
+      "shop"
+    ],
     "body": [
       "Hi {names}, we hope your website is making wedding planning a little easier.",
       "If you have a moment, we would be grateful for a review on Etsy (Purchases and reviews). And if something is not right, just reply here and we will help.",
@@ -692,7 +769,9 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "refund_or_problem",
     "title": "Refund request / unhappy buyer",
     "when": "The buyer asks for a refund or says the product does not work for them.",
-    "placeholders": ["shop"],
+    "placeholders": [
+      "shop"
+    ],
     "body": [
       "Hi, I'm sorry it's not working out. Could you tell us what went wrong? Many problems have a quick fix, and we would like to try that first.",
       "Our refund policy: [REFUND POLICY]",
@@ -703,7 +782,11 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "id": "delete_data",
     "title": "Delete my website and data",
     "when": "The buyer asks to delete the website or the guests' data.",
-    "placeholders": ["order", "site_url", "shop"],
+    "placeholders": [
+      "order",
+      "site_url",
+      "shop"
+    ],
     "body": [
       "Hi, of course. To hide your website from guests right away, open your editor and go to Share → Take the website offline.",
       "To delete your website, photos and guest replies for good: [DELETION PROCESS]. Before we delete anything we confirm it is you (order {order}, website {site_url}). Deleting cannot be undone, so download your replies first if you want a copy (Guests → Download list).",

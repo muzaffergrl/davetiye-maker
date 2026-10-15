@@ -23,6 +23,20 @@ function namesOf(site: SiteRecord): string {
   return parts.join(' & ') || site.slug;
 }
 
+function placeOf(site: SiteRecord): string | null {
+  const v = (site.content as unknown as { venue?: { name?: unknown; city?: unknown } })?.venue;
+  const parts = [v?.name, v?.city].filter((x): x is string => typeof x === 'string' && x.trim() !== '').map((x) => x.trim());
+  return parts.length ? parts.join(', ') : null;
+}
+
+/** Made in the admin ("Yeni sipariş"): no /start claim token, order confirmed by the shop. */
+export function madeByShop(site: SiteRecord): boolean {
+  return Boolean(site.orderRef) && !site.claimTokenHash && site.orderCheck?.by === 'support' && site.orderCheck.note === SHOP_CREATED_NOTE;
+}
+
+/** orderCheck note of sites the shop made in the admin. */
+export const SHOP_CREATED_NOTE = 'Dükkân panelinden eklendi';
+
 export function summarizeSite(site: SiteRecord, replies: number, now: Date = new Date()): AdminSiteSummary {
   const rights = rightsView(site, now);
   const pending = orderPending(site);
@@ -53,12 +67,19 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     unpublishedChanges:
       site.status === 'published' && site.publishedContent !== null && JSON.stringify(site.content) !== JSON.stringify(site.publishedContent),
     needsAction: pending && !rights.archived,
+    note: site.adminNote?.text || null,
+    noteAt: site.adminNote?.at ?? null,
+    place: placeOf(site),
+    madeByShop: madeByShop(site),
   };
 }
 
 export function siteHistory(site: SiteRecord): AdminHistoryEntry[] {
-  const out: AdminHistoryEntry[] = [{ at: site.createdAt, text: `Site oluşturuldu${site.orderRef ? ` (sipariş #${site.orderRef})` : ''}`, by: 'buyer' }];
-  if (site.orderCheck?.status === 'verified') {
+  const shop = madeByShop(site);
+  const out: AdminHistoryEntry[] = [
+    { at: site.createdAt, text: `Site oluşturuldu${site.orderRef ? ` (sipariş #${site.orderRef})` : ''}${shop ? ' — dükkân panelinden' : ''}`, by: shop ? 'support' : 'buyer' },
+  ];
+  if (site.orderCheck?.status === 'verified' && !shop) {
     out.push({ at: site.orderCheck.at, text: `Sipariş onaylandı${site.orderCheck.note ? `: ${site.orderCheck.note}` : ''}`, by: site.orderCheck.by === 'support' ? 'support' : 'system' });
   }
   const KIND: Record<string, string> = {

@@ -1,12 +1,13 @@
 'use client';
-// Shop admin — every website (G087). Filter chips with counts ("Yapılacak" first), search by order number, email,
-// names, address or design; each card opens the site's page. Filtering happens in the browser (the shop's volume).
-import { Search } from 'lucide-react';
+// Shop admin — every order/website (G087, G095). Filter chips with counts ("Yapılacak" first), search by order
+// number, email, names, address, venue, design or note; sort; CSV export. Each card opens the site's page.
+// Filtering happens in the browser (the shop's volume).
+import { Download, Search, StickyNote } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { filterSites, type AdminCounts, type AdminFilter, type AdminSiteSummary } from '../../lib/admin/view.ts';
+import { filterSites, SORT_LABELS, sortSites, type AdminCounts, type AdminFilter, type AdminSiteSummary, type AdminSort } from '../../lib/admin/view.ts';
 import styles from './admin.module.css';
-import { stamp } from './format.ts';
+import { day, stamp } from './format.ts';
 import { StateBadges } from './badges.tsx';
 
 const FILTERS: Array<{ id: AdminFilter; label: string; count: (c: AdminCounts) => number }> = [
@@ -17,10 +18,21 @@ const FILTERS: Array<{ id: AdminFilter; label: string; count: (c: AdminCounts) =
   { id: 'archived', label: 'Arşiv', count: (c) => c.archived },
 ];
 
-export default function AdminList({ sites, counts }: { sites: AdminSiteSummary[]; counts: AdminCounts }) {
-  const [filter, setFilter] = useState<AdminFilter>(counts.needsAction > 0 ? 'action' : 'all');
-  const [query, setQuery] = useState('');
-  const shown = useMemo(() => filterSites(sites, filter, query), [sites, filter, query]);
+export default function AdminList({
+  sites,
+  counts,
+  initialFilter = null,
+  initialQuery = '',
+}: {
+  sites: AdminSiteSummary[];
+  counts: AdminCounts;
+  initialFilter?: AdminFilter | null;
+  initialQuery?: string;
+}) {
+  const [filter, setFilter] = useState<AdminFilter>(initialFilter ?? (counts.needsAction > 0 ? 'action' : 'all'));
+  const [query, setQuery] = useState(initialQuery);
+  const [sort, setSort] = useState<AdminSort>('newest');
+  const shown = useMemo(() => sortSites(filterSites(sites, filter, query), sort), [sites, filter, query, sort]);
 
   return (
     <>
@@ -35,20 +47,35 @@ export default function AdminList({ sites, counts }: { sites: AdminSiteSummary[]
           );
         })}
       </div>
-      <div className={styles.search}>
-        <Search size={18} className={styles.searchIcon} aria-hidden />
-        <label htmlFor="admin-search" className={styles.visuallyHidden}>
-          Ara
+      <div className={styles.toolbar}>
+        <div className={styles.search}>
+          <Search size={18} className={styles.searchIcon} aria-hidden />
+          <label htmlFor="admin-search" className={styles.visuallyHidden}>
+            Ara
+          </label>
+          <input
+            id="admin-search"
+            className={styles.input}
+            type="search"
+            placeholder="Sipariş no, e-posta, isimler, adres, mekân…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoComplete="off"
+          />
+        </div>
+        <label htmlFor="admin-sort" className={styles.visuallyHidden}>
+          Sırala
         </label>
-        <input
-          id="admin-search"
-          className={styles.input}
-          type="search"
-          placeholder="Sipariş no, e-posta, isimler, adres…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          autoComplete="off"
-        />
+        <select id="admin-sort" className={styles.select} value={sort} onChange={(e) => setSort(e.target.value as AdminSort)} data-sort="">
+          {(Object.keys(SORT_LABELS) as AdminSort[]).map((k) => (
+            <option key={k} value={k}>
+              {SORT_LABELS[k]}
+            </option>
+          ))}
+        </select>
+        <a className={styles.btnSmall} href="/api/admin/export" download data-export="">
+          <Download size={16} aria-hidden /> CSV
+        </a>
       </div>
       <p className={styles.visuallyHidden} role="status">
         {shown.length} site
@@ -58,7 +85,7 @@ export default function AdminList({ sites, counts }: { sites: AdminSiteSummary[]
           {filter === 'action' && !query
             ? 'Yapılacak bir şey yok. Onay bekleyen yeni siparişler burada görünür.'
             : sites.length === 0
-              ? 'Henüz site yok. Alıcı /start sayfasında sitesini başlattığında burada görünür.'
+              ? 'Henüz site yok. Alıcı /start sayfasında sitesini başlattığında ya da siz "Yeni sipariş" eklediğinizde burada görünür.'
               : 'Bu aramayla eşleşen site yok.'}
         </div>
       ) : (
@@ -68,13 +95,19 @@ export default function AdminList({ sites, counts }: { sites: AdminSiteSummary[]
               <StateBadges summary={s} />
               <p className={styles.siteNames}>{s.names}</p>
               <p className={styles.siteMeta}>
-                /{s.slug} · {s.themeName}
+                {s.orderRef ? `#${s.orderRef} · ` : ''}
+                {s.themeName}
               </p>
+              <p className={styles.siteMeta}>{s.ownerEmail ?? 'E-posta yok'}</p>
               <p className={styles.siteMeta}>
-                {s.orderRef ? `Sipariş #${s.orderRef} · ` : ''}
-                {stamp(s.createdAt)}
-                {s.replies ? ` · ${s.replies} yanıt` : ''}
+                Düğün {day(s.weddingDate)}
+                {s.replies ? ` · ${s.replies} yanıt` : ''} · {stamp(s.createdAt)}
               </p>
+              {s.note ? (
+                <p className={styles.noteLine}>
+                  <StickyNote size={14} aria-hidden style={{ verticalAlign: '-2px' }} /> {s.note.length > 80 ? `${s.note.slice(0, 80)}…` : s.note}
+                </p>
+              ) : null}
             </Link>
           ))}
         </div>

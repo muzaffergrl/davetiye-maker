@@ -83,6 +83,7 @@ try {
   await waitForServer(`http://127.0.0.1:${PORT_OFF}/start`, 60_000, serverOff);
   browser = await chromium.launch();
   let editUrl = '';
+  let shopEdit = '';
   let slug = '';
 
   await block('admin off without a password', async () => {
@@ -143,10 +144,23 @@ try {
     check('wrong password: clear Turkish message', (await phone.locator('#admin-login-error').innerText()).includes('Şifre doğru değil'));
     await phone.fill('#admin-password', PASSWORD);
     await phone.click('[data-admin-login] button[type=submit]');
-    await phone.waitForSelector('[data-filter="action"]', { timeout: 15_000 });
+    await phone.waitForSelector('[data-kpis]', { timeout: 15_000 });
     const cookies = await phoneCtx.cookies();
     const c = cookies.find((x: any) => x.name === 'bke_admin');
     check('session cookie is HttpOnly + SameSite=Strict', c && c.httpOnly && c.sameSite === 'Strict');
+  });
+
+  await block('overview (Özet)', async () => {
+    check('overview: the waiting order is a to-do', (await phone.locator('[data-todo="confirm"]').count()) >= 1 && (await phone.locator('[data-todos]').innerText()).includes('Emma & Liam'));
+    check('overview: "Onay bekleyen sipariş" counts it', Number(await phone.locator('[data-kpi="action"] p').first().innerText()) >= 1);
+    check('overview: weekly sales chart', (await phone.locator('[data-weeks] [role="img"]').count()) === 1);
+    check('overview 390: no horizontal scroll', (await overflow(phone)) <= 0);
+    await shot(phone, 'a01b_overview_390', true);
+    await axe(phone, 'admin overview');
+    const small = await smallTargets(phone);
+    check('overview: touch targets ≥ 36 px', !small.length, small.join(', '));
+    await phone.click('[data-nav="orders"]');
+    await phone.waitForSelector('[data-filter="action"]');
   });
 
   await block('list', async () => {
@@ -212,7 +226,105 @@ try {
     await ctx.close();
   });
 
+  await block('note, replies, content on the site page', async () => {
+    await phone.fill('#note-text', 'Etsy: altın yazı istedi');
+    await phone.click('[data-action="note"]');
+    await phone.waitForSelector('section[data-note] [role="status"]');
+    check('note saved', (await phone.locator('section[data-note]').innerText()).includes('Not kaydedildi'));
+    check('replies section with CSV', (await phone.locator('[data-rsvp-csv]').count()) === 1);
+    check('content section shows the venue', (await phone.locator('[data-content]').innerText()).length > 40);
+    const preview = await phone.getAttribute('[data-quick-preview]', 'href');
+    const ctx = await browser.newContext(BUYER);
+    const page = await ctx.newPage();
+    const res = await page.goto(`${BASE}${preview}`);
+    check('"Taslağı gör" opens the draft', res.status() === 200, String(res.status()));
+    await ctx.close();
+    await shot(phone, 'a03b_site_sections_390', true);
+  });
+
+  await block('customers + designs', async () => {
+    await phone.goto(`${BASE}/admin/customers`);
+    await phone.waitForSelector('[data-customer]');
+    check('customers: the buyer is listed by email', (await phone.locator('[data-customer]').first().innerText()).includes('@'));
+    check('customers 390: no horizontal scroll', (await overflow(phone)) <= 0);
+    await axe(phone, 'admin customers');
+    await shot(phone, 'a07_customers_390', true);
+    await phone.goto(`${BASE}/admin/designs`);
+    await phone.waitForSelector('[data-design]');
+    check('designs: every design has a card', (await phone.locator('[data-design]').count()) >= 1);
+    check('designs 390: no horizontal scroll', (await overflow(phone)) <= 0);
+    await axe(phone, 'admin designs');
+    await shot(phone, 'a08_designs_390', true);
+  });
+
+  await block('Yeni sipariş', async () => {
+    await phone.goto(`${BASE}/admin/new`);
+    await phone.waitForSelector('[data-new-order]');
+    await axe(phone, 'admin new order');
+    await phone.click('[data-action="create"]');
+    await phone.waitForSelector('[aria-invalid="true"]');
+    check('empty form: fields marked', (await phone.locator('[aria-invalid="true"]').count()) >= 3);
+    const theme = await phone.locator('#new-theme option').nth(1).getAttribute('value');
+    await phone.selectOption('#new-theme', theme!);
+    await phone.fill('#new-orderNumber', '9988776655');
+    await phone.fill('#new-email', 'shopmade@example.com');
+    await phone.fill('#new-name1', 'Nora');
+    if (await phone.locator('#new-name2').isVisible()) await phone.fill('#new-name2', 'Sam');
+    await phone.click('[data-action="create"]');
+    await phone.waitForSelector('[data-created]');
+    const text = await phone.inputValue('#created-msg');
+    check('created: link + ready message', /\/edit\/nora/.test(text) && !/[{}]/.test(text), text.slice(0, 120));
+    shopEdit = (/(https?:\/\/\S+\/edit\/\S+)/.exec(text) ?? [''])[0];
+    check('new order 390: no horizontal scroll', (await overflow(phone)) <= 0);
+    await shot(phone, 'a09_new_order_done_390', true);
+    await phone.goto(`${BASE}/admin/orders?f=all`);
+    await phone.waitForSelector('[data-site]');
+    check('the new order is in the list', (await phone.locator('[data-site^="nora"]').count()) === 1);
+  });
+
+  await block('"My website" on the sales site', async () => {
+    const ctx = await browser.newContext(BUYER);
+    const page = await ctx.newPage();
+    await page.goto(`${BASE}/my`);
+    await page.waitForSelector('#my-edit-link');
+    check('/my without a saved editor: no "On this device"', (await page.locator('[data-my-saved]').count()) === 0);
+    await page.fill('#my-edit-link', 'https://example.com/whatever');
+    await page.click('[data-my-paste]');
+    await page.waitForSelector('#my-edit-link-err');
+    check('/my: a foreign link is refused', true);
+    await axe(page, 'my website');
+    await shot(page, 'a10_my_empty_390', true);
+    // opening the editor once on this device makes "My website" one tap
+    await page.goto(shopEdit);
+    await page.waitForSelector('[data-status-card], [data-setup]', { timeout: 20_000 }).catch(() => undefined);
+    await page.goto(`${BASE}/my`);
+    await page.waitForSelector('[data-my-saved]');
+    check('/my after opening the editor: "On this device" with Open editor', (await page.locator('[data-my-open]').count()) === 1);
+    await shot(page, 'a11_my_saved_390');
+    await page.click('[data-my-open]');
+    await page.waitForURL(/\/edit\//);
+    check('"Open editor" goes back into the panel', page.url().includes('/edit/nora'));
+    await page.goto(`${BASE}/`);
+    check('sales site header: "My website" button at 390', await page.locator('header [data-my-website]').isVisible());
+    const menu390 = await page.locator('header summary').boundingBox();
+    check('sales site 390: the menu button is still on screen', Boolean(menu390 && menu390.x + menu390.width <= 390), JSON.stringify(menu390));
+    check('sales site 390: no horizontal scroll', (await overflow(page)) <= 0);
+    await shot(page, 'a12_home_header_390');
+    await ctx.close();
+    const small = await browser.newContext({ ...BUYER, viewport: { width: 360, height: 780 } });
+    const p360 = await small.newPage();
+    await p360.goto(`${BASE}/`);
+    check('sales site 360: header fits', (await overflow(p360)) <= 0 && (await p360.locator('header [data-my-website]').isVisible()));
+    const menu360 = await p360.locator('header summary').boundingBox();
+    check('sales site 360: the menu button is still on screen', Boolean(menu360 && menu360.x + menu360.width <= 360), JSON.stringify(menu360));
+    await shot(p360, 'a13_home_header_360');
+    await small.close();
+  });
+
   await block('delete needs the address', async () => {
+    await phone.goto(`${BASE}/admin/orders?f=all&q=${encodeURIComponent(slug)}`);
+    await phone.click(`[data-site="${slug}"]`);
+    await phone.waitForSelector('#delete-confirm');
     const del = phone.locator('[data-action="delete"]');
     check('delete is disabled until the address is typed', await del.isDisabled());
     await phone.fill('#delete-confirm', 'wrong');
@@ -224,6 +336,10 @@ try {
     await ctx.addCookies(await phoneCtx.cookies());
     const page = await ctx.newPage();
     await page.goto(`${BASE}/admin`);
+    await page.waitForSelector('[data-kpis]');
+    check('1280 overview: no horizontal scroll', (await overflow(page)) <= 0);
+    await shot(page, 'a05a_overview_1280', true);
+    await page.goto(`${BASE}/admin/orders`);
     await page.waitForSelector('[data-filter="all"]');
     check('1280: no horizontal scroll', (await overflow(page)) <= 0);
     await shot(page, 'a05_list_1280');
