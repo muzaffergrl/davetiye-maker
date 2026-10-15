@@ -2,7 +2,7 @@
 
 Internal listing kit for the seller (G091, 2026-10-15). Not published on Etsy. Theme `mediterranean-lemon`. Written from the common skeleton in
 `docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32): every sentence answers a buyer question from docs/19 §3 and promises only what
-the platform does today. Product language: English (US spelling). This design has no earlier `listing.md`: this is its first listing text. `tools/listing_kit.py` reads `listing.md`, so copy or switch it when the kit is built (G905).
+the platform does today. Product language: English (US spelling). This design has no earlier `listing.md`: this is its first listing text. `tools/listing_kit.py` reads this file (since 2026-10-15).
 
 ## 0. Status before publishing
 
@@ -137,18 +137,18 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-**Not produced yet** for this design (listing kit task G905: `tools/listing_kit.py` knows only 01 and 03 today). Target set and alt texts, the same as designs 01 and 03 after their rebuild:
+The 8 images in `images/` were rebuilt on 2026-10-15 with the current editor (K29): `python3 tools/listing_kit.py capture --theme mediterranean-lemon` then `images`. Every phone shows a real screen, captured from a local production build of the platform (this repository's code; the addresses on the screens are the live base URL; sample names and photos). Images 1, 2 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`: `cover_hand.png`, `three_phones.png`, `flatlay_phone.png`); images 3–7 lay them out with the theme's own painted corners. Image 3 says "Your start link, its QR code and every step explained" (no "every step in pictures"); images 4 and 5 show the 3-step setup and the six-page editor. Image 8's QR code encodes the demo link (`listing/demo_qr.png`, checked by `check --prepublish`). Alt texts below describe these files.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Mediterranean Lemon wedding website with RSVP on two phone screens: a white envelope tied with a lemon and a cobalt ribbon, and the home page with the couple's photo. Labels: no Canva needed, RSVP built in, live demo |
-| 2 | `02_guest_pages.png` | The five pages guests see: envelope, home, our story, details and RSVP |
+| 1 | `01_cover.png` | Mediterranean Lemon wedding website with RSVP on a phone held in a hand: the opening page with a white envelope tied with a lemon and a cobalt ribbon. Labels: no Canva needed, RSVP built in, live demo |
+| 2 | `02_guest_pages.png` | Three phones on a styled table with the pages guests see: home, our story and RSVP (the website also has the envelope opening and a details page) |
 | 3 | `03_whats_included.png` | What is included: website, online editor, RSVP with your own questions, add to calendar, questions and answers, QR code, START HERE guide |
-| 4 | `04_how_it_works.png` | Three steps: start with your Etsy order number, personalize in the editor, publish and share |
-| 5 | `05_editor.png` | The online editor on a phone: the six pages to edit, cropping a photo, previewing the website |
-| 6 | `06_rsvp.png` | RSVP: the guest reply form with a meal question, the replies in the editor with a Download list button (CSV) |
+| 4 | `04_how_it_works.png` | Three steps: start with your Etsy order number, add your names, date and a photo in a short 3-step setup, publish and share your link or QR code |
+| 5 | `05_editor.png` | The online editor on a phone: the six pages to edit, Headings & labels for your own wording, cropping a photo to its frame |
+| 6 | `06_rsvp.png` | RSVP: the guest reply form with a meal question, the editor's Guests page with head counts and a Download list button (CSV), the questions you ask your guests |
 | 7 | `07_details.png` | Details page: order of the day with add to calendar buttons, the venue, questions and answers |
-| 8 | `08_live_demo.png` | QR code that opens the live demo of the Mediterranean Lemon design. [VERIFY: Etsy policy on QR codes and links in listing photos] |
+| 8 | `08_live_demo.png` | A phone on a styled table showing the live demo of the Mediterranean Lemon design, next to a QR code that opens it. [VERIFY: Etsy policy on QR codes and links in listing photos] |
 
 Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
 - 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
@@ -245,9 +245,9 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf, its QR and image 8 rebuilt
 - [ ] Response time, price, refund policy and hosting extension decided and filled in (guide + listing + docs/19 templates)
-- [ ] Images and video produced (G905)
+- [x] Images and video produced (G905; rebuilt 2026-10-15 with the current editor, see §5)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] Shop-wide Etsy messages (docs/19 §4.4) entered in Shop Manager
-- [ ] `python3 tools/listing_kit.py check --theme mediterranean-lemon --prepublish` passes (the tool reads `listing.md`: switch it to this file first)
+- [ ] `python3 tools/listing_kit.py check --theme mediterranean-lemon --prepublish` passes (the tool reads this file)
 
 <!-- listing-kit:media -->

@@ -1,27 +1,28 @@
 {{head}}
 <style>
-  /* The cover must say what the product is at search-result size (≈ 300 px wide) and survive a centred 4:3 crop
-     (y 250–1750): name, product type, phones and the three labels all sit inside that band. */
-  :root { --head-top: 290px; --corner: 380px; }
+  /* The design's own GPT scene (cover_hand.png) with the real envelope screen in the phone (listing_kit.scene_background).
+     The cover must say what the product is at search-result size (≈ 300 px wide) and survive a centred 4:3 crop
+     (y 250–1750): name, product type and the three labels sit above the phone, inside that band. */
+  body { background: #e9e4da url('{{scene.bg}}') center / 2000px 2000px no-repeat; }
+  .head { top: 210px; padding: 0 160px; }
+  .plate { display: inline-block; padding: 26px 70px 34px; border-radius: 48px;
+    background: color-mix(in srgb, var(--ivory) 80%, transparent); backdrop-filter: blur(6px);
+    box-shadow: 0 18px 50px rgba(40, 30, 20, .14); }
   .head h1.script { font-size: {{title_px}}px; margin: 0; line-height: 1.08; }
-  .kind { font-weight: 600; font-size: 68px; letter-spacing: .12em; text-transform: uppercase; color: var(--deep); margin-top: 4px; }
-  .p1, .p2 { position: absolute; --pw: 440px; z-index: 1; }
-  .p1 { left: 548px; top: 662px; transform: rotate(-3deg); }
-  .p2 { left: 1028px; top: 636px; transform: rotate(3deg); }
-  .labels { position: absolute; left: 0; right: 0; top: 1626px; z-index: 2; display: flex; justify-content: center; gap: 26px; }
-  .labels span { font-weight: 600; font-size: 50px; line-height: 1; color: var(--deep); padding: 18px 34px 20px; border-radius: 999px;
-    background: color-mix(in srgb, var(--ivory) 90%, transparent); border: 2px solid var(--gold-light); white-space: nowrap; }
+  .kind { font-weight: 600; font-size: 64px; letter-spacing: .12em; text-transform: uppercase; color: var(--deep); margin-top: 2px; }
+  .labels { position: absolute; left: 0; right: 0; top: 640px; z-index: 2; display: flex; justify-content: center; gap: 24px; }
+  .labels span { font-weight: 600; font-size: 46px; line-height: 1; color: var(--deep); padding: 18px 32px 20px; border-radius: 999px;
+    background: color-mix(in srgb, var(--ivory) 92%, transparent); border: 2px solid var(--gold-light); white-space: nowrap;
+    box-shadow: 0 10px 26px rgba(40, 30, 20, .12); }
 </style>
 </head>
 <body>
-<img class="corner tl" src="{{part.corner_tl}}" alt="">
-<img class="corner br" src="{{part.corner_br}}" alt="">
 <header class="head">
-  <h1 class="script">{{theme_name}}</h1>
-  <p class="kind">Wedding Website · RSVP</p>
+  <div class="plate">
+    <h1 class="script">{{theme_name}}</h1>
+    <p class="kind">Wedding Website · RSVP</p>
+  </div>
 </header>
-<img class="phone p1" src="{{shot.g01_envelope}}" alt="">
-<img class="phone p2" src="{{shot.g02_home_top}}" alt="">
 <div class="labels"><span>No Canva needed</span><span>RSVP built in</span><span>Live demo</span></div>
 </body>
 </html>

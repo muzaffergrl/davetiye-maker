@@ -3,27 +3,30 @@
 
   python3 tools/listing_kit.py <step> --theme <id>|all [--base-url https://…] [--no-fonts]
 
-Steps (each one reads what the step before it wrote; `all` = qr, strips, images, video, pdf, check):
+Steps (each one reads what the step before it wrote; `all` = qr, images, video, pdf, check):
   capture   real screenshots + the opening recording of the theme: runs tools/listing_templates/capture.ts against a
-            local production build of platform/ (`npm ci && npm run build` first; nothing is deployed)
-            → collections/<NN_*>/package/shots/
+            local production build of platform/ (`npm ci && npm run build` first; nothing is deployed); guest pages,
+            /start, and the K29 editor (3-step setup, Home, Edit's six pages, Headings & labels, Share, Guests, RSVP
+            questions) → collections/<NN_*>/package/shots/
   qr        QR of the buyer's start link /start?theme=<id> (segno, error correction Q, like tools/make_qr.py)
             → package/customer/img/start_qr.png + .svg
-  strips    the guide's step pictures: 1–2 real screens side by side on white, each cut to the part the step is about
-            (each ≥ 42 % of the page's text width in the PDF) → package/customer/img/*.jpg
+  strips    step pictures for a guide with pictures: 1–2 real screens side by side on white, each cut to the part the
+            step is about → package/customer/img/*.jpg (the G091 guide is text + QR only and uses none of them)
   images    the Etsy listing images, 2000 × 2000 PNG, from tools/listing_templates/platform/*.html (Playwright Chromium;
-            layout + typography only, the theme's own GPT parts and real screens) → package/listing/images/
+            layout + typography only): 01, 02 and 08 on the design's own GPT mockup scene with the real screens placed
+            in its #00FF00 screens (SCENES, tools/mockup_compose.py), the others with the theme's own GPT corners
+            → package/listing/images/
   video     a short silent listing clip from the opening recording, 1080 × 1080 H.264 → package/listing/video.mp4
-  pdf       START_HERE.md → START_HERE.pdf (a cover with the theme's own painted corners and its envelope screen,
-            clickable start link + QR, every picture kept with its step and captioned) and listing.md →
-            listing_<id>.pdf (all fields, image thumbnails, the cover at search-result size and as a 4:3 crop, video
-            facts) with tools/md_to_pdf.py
+  pdf       listing_v3.md → listing_<id>.pdf (all fields, image thumbnails, the cover at search-result size and as a
+            4:3 crop, video facts) with tools/md_to_pdf.py
+  guide     START_HERE.md → START_HERE.pdf with this tool's cover (not in `all`: since G091 the guide PDF is built by
+            tools/build_customer_guides.py, and this step would replace it)
   check     checks every output (sizes, counts, title/tag rules, video rules, the PDF's link, the QR's content)
             --prepublish also: start link and demo answer 200 with the theme's name (live), the demo QR of image 8
-            encodes the demo link, and no [VERIFY …] or [COMMERCIAL PLACEHOLDER] is left in listing.md, START_HERE.md
+            encodes the demo link, and no [VERIFY …] or [COMMERCIAL PLACEHOLDER] is left in listing_v3.md, START_HERE.md
             or the PDFs. A kit is not sale_ready until `check --prepublish` passes (docs/05 §D).
 
-Text (START_HERE.md, listing.md) is written by hand; this tool only builds files from it. Commercial fields stay as
+Text (START_HERE.md, listing_v3.md) is written by hand; this tool only builds files from it. Commercial fields stay as
 placeholders ([SHOP NAME], [PRICE], …). Etsy rules used by `check` are in ETSY below with their source and status.
 Needs: Pillow, numpy, segno, pypdf (optional), ffmpeg/ffprobe, node + Playwright (NODE_PATH, /opt/pw-browsers).
 """
@@ -88,30 +91,64 @@ THEMES: dict[str, Theme] = {
         corner_tl="platform/themes/blush-garden-rose/img/florals_tl-960.webp",
         corner_br="platform/themes/blush-garden-rose/img/florals_br-960.webp",
     ),
+    "dusty-blue-champagne": Theme(
+        id="dusty-blue-champagne", no="02", folder="02_Dusty_Blue", name="Dusty Blue & Champagne",
+        tagline="An ivory envelope with a dusty blue wax seal, cream roses and eucalyptus",
+        corner_tl="platform/themes/dusty-blue-champagne/img/florals_tl-960.webp",
+        corner_br="platform/themes/dusty-blue-champagne/img/florals_br-875.webp",
+    ),
+    "vintage-airmail-love-letter": Theme(
+        id="vintage-airmail-love-letter", no="04", folder="04_Vintage_Airmail", name="Vintage Airmail Love Letter",
+        tagline="A striped airmail envelope, a burgundy wax seal, stamps and dried flowers",
+        corner_tl="platform/themes/vintage-airmail-love-letter/img/decor_tl-760.webp",
+        corner_br="platform/themes/vintage-airmail-love-letter/img/decor_br-760.webp",
+    ),
+    "mediterranean-lemon": Theme(
+        id="mediterranean-lemon", no="05", folder="05_Lemon_Mediterranean", name="Mediterranean Lemon",
+        tagline="Lemons, cobalt tiles and a scalloped envelope tied with a blue ribbon",
+        corner_tl="platform/themes/mediterranean-lemon/img/decor_tl-960.webp",
+        corner_br="platform/themes/mediterranean-lemon/img/decor_br-960.webp",
+    ),
 }
+# The listing text each tool reads (G091: listing_v3.md replaced listing.md, which stays as the earlier record).
+LISTING_MD = "listing_v3.md"
 
 # Listing images, in upload order (file = <name>.png; template = tools/listing_templates/platform/<name>.html).
 IMAGES = ["01_cover", "02_guest_pages", "03_whats_included", "04_how_it_works", "05_editor", "06_rsvp",
           "07_details", "08_live_demo"]
-# Screens each template / guide strip uses (from capture.ts).
+# Screens each template / guide strip uses (from capture.ts; b*/e*/s*/p* = the K29 editor, docs/16 §0b).
 SHOTS = ["g01_envelope", "g02_home_top", "g03_home_invitation", "g04_home_calendar", "g05_story", "g06_details_top",
          "g07_details_schedule", "g08_details_faq", "g09_rsvp_top", "g10_rsvp_form", "g11_rsvp_sent",
-         "g12_details_venue", "b01_start",
-         "b02_start_form", "b03_edit_link", "b04_panel_top", "b05_panel_date", "b06_panel_crop", "b07_panel_photos",
-         "b08_panel_preview", "b09_publish_notes", "b10_live_qr", "p01_panel_replies", "p02_panel_csv",
-         "p03_panel_questions", "d01_demo_home"]
-# START HERE pictures: file → at most two screens side by side (G059 review: a row of three or four small phones was
-# unreadable in the PDF), each with the part of it the step is about: None = the whole screen, (top, bottom) = CSS px
-# of the 390 px wide screen, "sheet" = a bottom sheet without the plain background above it.
+         "g12_details_venue", "d01_demo_home", "b01_start", "b02_start_form", "b03_edit_link", "b04_setup_names",
+         "b05_setup_photo", "b06_panel_crop", "b07_setup_publish", "b08_home", "b09_panel_preview", "b10_live_qr",
+         "e01_edit_pages", "e02_day_place", "e03_copy_labels", "s01_share", "p01_panel_replies",
+         "p02_panel_reply_list", "p03_panel_questions"]
+# START HERE pictures (for a guide with step pictures; the G091 guide is text + QR only): file → at most two screens
+# side by side (G059 review: a row of three or four small phones was unreadable in the PDF), each with the part of it
+# the step is about: None = the whole screen, (top, bottom) = CSS px of the 390 px wide screen, "sheet" = a bottom
+# sheet without the plain background above it.
 STRIPS: dict[str, list[tuple[str, object]]] = {
     "step1_start": [("b01_start", None), ("b02_start_form", None)],
     "step2_link": [("b03_edit_link", (0, 612))],
-    "step3_editor": [("b04_panel_top", None), ("b05_panel_date", None)],
-    "step4_photos": [("b06_panel_crop", "sheet"), ("b07_panel_photos", None)],
-    "step5_publish": [("b09_publish_notes", "sheet"), ("b10_live_qr", "sheet")],
+    "step3_editor": [("b04_setup_names", None), ("e01_edit_pages", None)],
+    "step4_photos": [("b06_panel_crop", "sheet"), ("b05_setup_photo", None)],
+    "step5_publish": [("b07_setup_publish", None), ("b10_live_qr", None)],
     "step7_replies": [("p01_panel_replies", None), ("p03_panel_questions", None)],
     "guests": [("g01_envelope", None), ("g02_home_top", None)],
 }
+# Listing images built on the design's own GPT mockup scene (PAKET 3, collections/<NN>/assets/gpt/mockups/, flat
+# #00FF00 screens): the real screens go into the green screens left to right (tools/mockup_compose.py through
+# tools/listing_v2/kompozit.py), the template sets the text on top. The other images are layout + real screens only.
+SCENES: dict[str, tuple[str, list[str]]] = {
+    "01_cover": ("cover_hand.png", ["g01_envelope"]),
+    "02_guest_pages": ("three_phones.png", ["g02_home_top", "g05_story", "g09_rsvp_top"]),
+    "08_live_demo": ("flatlay_phone.png", ["d01_demo_home"]),
+}
+# Placement on the 2000 px canvas (the same as G067's listing_v2): the cover phone's screen starts at y 830 under the
+# headline (the strip above the scene is its own edge, mirrored and blurred); the three phones are scaled 1.52 with their
+# screens from y 640; the flat-lay is scaled 1.7 against the left edge, its empty linen holding the QR column.
+SCENE_LAYOUT = {"cover_screen_top": 830, "pages_scale": 1.52, "pages_screen_top": 640, "demo_scale": 1.7,
+                "demo_col_left": 120}
 
 # Etsy rules checked by `check`. Source + status: help.etsy.com and etsy.com could NOT be opened from this environment
 # (2026-10-14: DNS/proxy refusal); the values come from web-search excerpts of Etsy's own help pages ("How to Create a
@@ -191,7 +228,7 @@ def qr_matches(png: Path, url: str, scale: int = 20) -> bool:
     return bool((centres == expect).all())
 
 
-# ----------------------------------------------------------------------------- listing.md fields
+# ----------------------------------------------------------------------------- listing_v3.md fields
 
 def _block_after(md: str, heading_re: str) -> str | None:
     m = re.search(heading_re + r".*?\n```text\n(.*?)\n```", md, re.S | re.I | re.M)
@@ -199,7 +236,7 @@ def _block_after(md: str, heading_re: str) -> str | None:
 
 
 def listing_fields(md: str) -> dict:
-    """Title and tags from listing.md: the first ```text block after '## 1. Title' and after '## 3. Tags'."""
+    """Title and tags from listing_v3.md: the first ```text block after '## 1. Title' and after '## 3. Tags'."""
     title = _block_after(md, r"^##\s*1\.\s*Title")
     tags = _block_after(md, r"^##\s*3\.\s*Tags")
     return {
@@ -269,7 +306,7 @@ def fill(template: str, values: dict[str, str], raw: frozenset = frozenset({"hea
         if k not in values:
             raise KeyError(f"template placeholder {{{{{k}}}}} has no value")
         v = values[k]
-        return v if k in raw or k.startswith(("shot.", "part.", "qr.")) else html.escape(v, quote=True)
+        return v if k in raw or k.startswith(("shot.", "part.", "qr.", "scene.")) else html.escape(v, quote=True)
     out = re.sub(r"\{\{\s*([\w.]+)\s*\}\}", sub, template)
     # the head block itself holds placeholders
     return re.sub(r"\{\{\s*([\w.]+)\s*\}\}", sub, out)
@@ -304,6 +341,8 @@ def _render_pages(pages: list[tuple[str, Path, int, int]], fonts: bool) -> None:
         tmp = Path(tmp)
         shutil.copy(TEMPLATES / "kit.css", tmp / "kit.css")
         css = m2p.google_fonts_css(FONTS, tmp / "fonts") if fonts else ""
+        if fonts and not css:  # a silent fallback (Georgia) is wider: headings wrap and run into the phones
+            raise RuntimeError("Google Fonts could not be downloaded (try again, or --no-fonts to accept fallback fonts)")
         (tmp / "fonts.css").write_text(css, encoding="utf-8")
         for i, (text, out, w, h) in enumerate(pages):
             page = tmp / f"page_{i}.html"
@@ -410,6 +449,73 @@ def step_strips(t: Theme) -> list[Path]:
             for name, parts in STRIPS.items()]
 
 
+def screen_green(im: Image.Image) -> int:
+    """Pixels still close to the mockup's flat screen green (#00FF00): a fringe left after placing the screens. (Not
+    kompozit.yesil_kalinti's wider test: leaves in a theme's own screens, e.g. 05's lemon leaves, are green too.)"""
+    a = np.asarray(im.convert("RGB")).astype(np.int16)
+    return int((((a[..., 1] - np.maximum(a[..., 0], a[..., 2])) >= 150) & (a[..., 1] >= 200)).sum())
+
+
+def _screen_for(im: Image.Image, ratio: float) -> Image.Image:
+    """A captured screen cut to a green screen's width/height ratio: taller screens keep their top (the page's first
+    screen is what a phone shows), wider ones (a still cut shorter by capture.ts) lose the same width on both sides."""
+    im = im.convert("RGB")
+    if im.width / im.height < ratio:
+        return im.crop((0, 0, im.width, round(im.width / ratio)))
+    w = round(im.height * ratio)
+    x = (im.width - w) // 2
+    return im.crop((x, 0, x + w, im.height))
+
+
+def scene_background(t: Theme, name: str, shots: Path, out: Path) -> dict[str, str]:
+    """The listing image's 2000 px background: the design's GPT mockup scene, placed on the canvas (SCENE_LAYOUT), with
+    the real screens in its green screens (no drawing, K21). Returns the template values: the background and where the
+    screens ended up (so text never covers a phone)."""
+    sys.path.insert(0, str(TOOLS / "listing_v2"))
+    import kompozit as kz  # scale + edge extension, then mockup_compose.birlestir_cok for the screens
+    file, names = SCENES[name]
+    scene = Image.open(t.collection / "assets" / "gpt" / "mockups" / file)
+    regions = kz.ekran_bolgeleri(scene)
+    if len(regions) != len(names):
+        raise RuntimeError(f"{t.folder} {file}: {len(regions)} green screens, {len(names)} expected")
+    T, L = kz.TUVAL, SCENE_LAYOUT
+    if name == "01_cover":
+        k = T / scene.width
+        x0, y0 = 0, L["cover_screen_top"] - regions[0]["kutu"][1] * k
+    elif name == "02_guest_pages":
+        k = L["pages_scale"]
+        x0 = T / 2 - (regions[0]["kutu"][0] + regions[-1]["kutu"][2]) / 2 * k
+        y0 = L["pages_screen_top"] - min(r["kutu"][1] for r in regions) * k
+    else:  # the flat-lay: against the left edge, the phone centred vertically where the scene allows it
+        k = L["demo_scale"]
+        mid = (regions[0]["kutu"][1] + regions[0]["kutu"][3]) / 2 * k
+        x0, y0 = 0, min(0, max(T - scene.height * k, T / 2 - mid))
+    bg, _ = kz.yerlestir(scene, k, x0, y0, sis_gucu=0.45)
+    placed = kz.ekran_bolgeleri(bg)
+    screens = [_screen_for(Image.open(shots / f"{n}.jpg"), r["oran"]) for n, r in zip(names, placed)]
+    bg, _ = kz.ekranlari_oturt(bg, screens)
+    left = screen_green(bg)
+    if left:
+        raise RuntimeError(f"{t.folder} {name}: {left} green pixels left after placing the screens")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    bg.save(out)
+    v = {"scene.bg": out.resolve().as_uri()}
+    for i, r in enumerate(placed, 1):
+        x_0, y_0, x_1, y_1 = r["kutu"]
+        v.update({f"s{i}_cx": str(round((x_0 + x_1) / 2)), f"s{i}_left": str(x_0), f"s{i}_top": str(y_0),
+                  f"s{i}_bottom": str(y_1)})
+    # (the phone's frame is ≈ 20 px outside its screen)
+    v["below_screens"] = str(max(r["kutu"][3] for r in placed) + 56)
+    v["above_screens"] = str(min(r["kutu"][1] for r in placed) - 20)
+    if name == "08_live_demo":
+        col_w = placed[0]["kutu"][0] - 90 - L["demo_col_left"]
+        if col_w < 640:
+            raise RuntimeError(f"{t.folder} {file}: only {col_w} px left of the phone for the QR column (need 640)")
+        v.update({"col_left": str(L["demo_col_left"]), "col_w": str(min(820, col_w)),
+                  "col_mid": str(round((placed[0]["kutu"][1] + placed[0]["kutu"][3]) / 2))})
+    return v
+
+
 def step_images(t: Theme, fonts: bool = True) -> list[Path]:
     shots = t.package / "shots"
     missing = [s for s in SHOTS if not (shots / f"{s}.jpg").exists()]
@@ -421,11 +527,14 @@ def step_images(t: Theme, fonts: bool = True) -> list[Path]:
     qr_png, _ = make_qr(demo_url(t), t.package / "listing" / "demo_qr", dark=pal["ink"], light=pal.get("ivory", "#FFFFFF"))
     values = template_values(t, shots, {"qr.demo": qr_png.resolve().as_uri()})
     pages = []
-    for name in IMAGES:
-        values["title"] = name
-        pages.append((fill((TEMPLATES / f"{name}.html").read_text(encoding="utf-8"), values),
-                      out_dir / f"{name}.png", 2000, 2000))
-    _render_pages(pages, fonts)
+    with tempfile.TemporaryDirectory(prefix="listing_scenes_") as tmp:
+        for name in IMAGES:
+            v = dict(values, title=name)
+            if name in SCENES:
+                v.update(scene_background(t, name, shots, Path(tmp) / f"{name}_bg.png"))
+            pages.append((fill((TEMPLATES / f"{name}.html").read_text(encoding="utf-8"), v),
+                          out_dir / f"{name}.png", 2000, 2000))
+        _render_pages(pages, fonts)
     outs = [out_dir / f"{n}.png" for n in IMAGES]
     for o in outs:  # lossless re-save: smaller file, same pixels
         Image.open(o).convert("RGB").save(o, optimize=True)
@@ -681,12 +790,14 @@ def guide_pdf(t: Theme, md: Path, out: Path, fonts: bool = True) -> Path:
     return out
 
 
+def step_guide(t: Theme, fonts: bool = True) -> Path:
+    return guide_pdf(t, t.package / "customer" / "START_HERE.md", t.package / "customer" / "START_HERE.pdf", fonts)
+
+
 def step_pdf(t: Theme, fonts: bool = True) -> list[Path]:
     import md_to_pdf as m2p
     pal_path = t.collection / "palette.json"
-    guide_md = t.package / "customer" / "START_HERE.md"
-    guide = guide_pdf(t, guide_md, t.package / "customer" / "START_HERE.pdf", fonts)
-    listing_md = t.package / "listing" / "listing.md"
+    listing_md = t.package / "listing" / LISTING_MD
     with tempfile.TemporaryDirectory(prefix="listing_pdf_") as tmp:
         tmp = Path(tmp)
         text = listing_md.read_text(encoding="utf-8")
@@ -696,7 +807,7 @@ def step_pdf(t: Theme, fonts: bool = True) -> list[Path]:
         doc = tmp / "listing.md"
         doc.write_text(text.replace(marker, media_markdown(t, tmp)), encoding="utf-8")
         listing_pdf = m2p.donustur(doc, t.package / "listing" / f"listing_{t.id}.pdf", pal_path, "letter", fonts)
-    return [guide, listing_pdf]
+    return [listing_pdf]
 
 
 def pdf_uris(pdf: Path) -> set[str] | None:
@@ -762,7 +873,7 @@ def prepublish_problems(t: Theme, base: str, get=fetch) -> list[str]:
     qr = t.package / "listing" / "demo_qr.png"
     if not qr.exists() or not qr_matches(qr, demo_url(t, base)):
         p.append(f"listing/demo_qr.png (image 8) does not encode {demo_url(t, base)} (run the images step)")
-    for f in (t.package / "listing" / "listing.md", t.package / "customer" / "START_HERE.md"):
+    for f in (t.package / "listing" / LISTING_MD, t.package / "customer" / "START_HERE.md"):
         left = open_markers(f.read_text(encoding="utf-8"))
         if left:
             p.append(f"{f.relative_to(t.package)}: {len(left)} still open: {', '.join(left[:8])}{' …' if len(left) > 8 else ''}")
@@ -791,15 +902,22 @@ def step_check(t: Theme, base: str, prepublish: bool = False) -> list[str]:
     """Returns problems (empty = all good) and prints a short report; warnings are printed, not counted."""
     p: list[str] = []
     pk = t.package
-    md = (pk / "listing" / "listing.md").read_text(encoding="utf-8")
+    md = (pk / "listing" / LISTING_MD).read_text(encoding="utf-8")
     f = listing_fields(md)
     p += [f"title: {x}" for x in title_problems(f["title"])]
     p += [f"tags: {x}" for x in tag_problems(f["tags"])]
     if re.search(r"\b(TBD|lorem)\b", md, re.I):
-        p.append("listing.md: TBD/lorem left")
+        p.append(f"{LISTING_MD}: TBD/lorem left")
     imgs = sorted((pk / "listing" / "images").glob("*.png"))
     if len(imgs) < 7:
         p.append(f"{len(imgs)} listing images (need ≥ 7)")
+    for name in IMAGES:
+        if not (pk / "listing" / "images" / f"{name}.png").exists():
+            p.append(f"no listing/images/{name}.png")
+    for name in SCENES:  # a green edge left by the mockup screen reads as a defect
+        scene_img = pk / "listing" / "images" / f"{name}.png"
+        if scene_img.exists() and screen_green(Image.open(scene_img)):
+            p.append(f"{name}.png: green pixels left from the mockup screen")
     if len(imgs) > ETSY["photos_max"]:
         p.append(f"{len(imgs)} listing images (Etsy max {ETSY['photos_max']})")
     for i in imgs:
@@ -821,9 +939,6 @@ def step_check(t: Theme, base: str, prepublish: bool = False) -> list[str]:
     guide = (pk / "customer" / "START_HERE.md").read_text(encoding="utf-8")
     if start_url(t, base) not in guide:
         p.append("START_HERE.md does not contain the start link")
-    for name in STRIPS:
-        if f"img/{name}.jpg" not in guide:
-            p.append(f"START_HERE.md does not show img/{name}.jpg")
     gpdf = pk / "customer" / "START_HERE.pdf"
     if not gpdf.exists():
         p.append("no START_HERE.pdf")
@@ -855,7 +970,7 @@ def pdf_link_problems(pdf: Path, url: str) -> list[str]:
     return []
 
 
-STEPS = ["capture", "qr", "strips", "images", "video", "pdf", "check"]
+STEPS = ["capture", "qr", "strips", "images", "video", "pdf", "guide", "check"]
 
 
 def main(argv=None) -> int:
@@ -870,7 +985,7 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     check_url(a.base_url)
     themes = list(THEMES.values()) if a.theme == "all" else [theme_of(a.theme)]
-    steps = ["qr", "strips", "images", "video", "pdf", "check"] if a.step == "all" else [a.step]
+    steps = ["qr", "images", "video", "pdf", "check"] if a.step == "all" else [a.step]
     bad = 0
     for t in themes:
         for s in steps:
@@ -892,6 +1007,9 @@ def main(argv=None) -> int:
             elif s == "pdf":
                 for x in step_pdf(t, not a.no_fonts):
                     print(f"  {x.relative_to(REPO)}  {x.stat().st_size / 1_000_000:.2f} MB")
+            elif s == "guide":
+                x = step_guide(t, not a.no_fonts)
+                print(f"  {x.relative_to(REPO)}  {x.stat().st_size / 1_000_000:.2f} MB")
             elif s == "check":
                 bad += len(step_check(t, a.base_url, a.prepublish))
     return 1 if bad else 0

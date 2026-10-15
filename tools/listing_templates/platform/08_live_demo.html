@@ -1,29 +1,31 @@
 {{head}}
 <style>
-  :root { --corner: 440px; }
-  .left { position: absolute; left: 200px; top: 540px; width: 900px; z-index: 1; }
-  .qr { padding: 64px 70px 56px; text-align: center; }
-  .qr img { width: 640px; height: 640px; display: block; margin: 0 auto; image-rendering: pixelated; }
-  .qr .scan { font-weight: 600; font-size: 40px; letter-spacing: .1em; text-transform: uppercase; color: var(--deep); margin-top: 36px; white-space: nowrap; }
-  .left .note { position: static; text-align: left; margin-top: 34px; padding-left: 8px; }
-  .ph { position: absolute; right: 200px; top: 520px; --pw: 560px; z-index: 1; transform: rotate(2deg); }
+  /* The design's own GPT scene (flatlay_phone.png) with the real public demo in the phone (listing_kit.scene_background);
+     the QR column sits on the scene's empty linen, left of the phone. The QR is the real code of the demo link. */
+  body { background: #e9e4da url('{{scene.bg}}') center / 2000px 2000px no-repeat; }
+  .col { position: absolute; left: {{col_left}}px; width: {{col_w}}px; top: {{col_mid}}px; transform: translateY(-50%); z-index: 2; }
+  .col .plate { padding: 34px 44px 30px; margin: 0 0 34px; border-radius: 30px;
+    background: color-mix(in srgb, var(--ivory) 88%, transparent); box-shadow: 0 18px 50px rgba(40, 30, 20, .14); }
+  .col h1 { font-size: 124px; line-height: 1; color: var(--deep); font-weight: 600; margin: 0 0 14px; }
+  .col .sub { margin: 0; font-size: 50px; }
+  .qr { padding: 46px 50px 40px; text-align: center; }
+  .qr img { width: 520px; height: 520px; display: block; margin: 0 auto; image-rendering: pixelated; }
+  .qr .scan { font-weight: 600; font-size: 34px; letter-spacing: .1em; text-transform: uppercase; color: var(--deep); margin-top: 28px; white-space: nowrap; }
+  .col .note { position: static; text-align: left; margin-top: 30px; padding: 22px 30px; font-size: 34px; border-radius: 22px;
+    background: color-mix(in srgb, var(--ivory) 85%, transparent); }
 </style>
 </head>
 <body>
-<img class="corner tl" src="{{part.corner_tl}}" alt="">
-<img class="corner br" src="{{part.corner_br}}" alt="">
-<header class="head">
-  <p class="eyebrow">{{theme_name}}</p>
-  <h1 class="serif">Try the live demo</h1>
-  <p class="sub">Open it on your phone before you buy</p>
-</header>
-<div class="left">
+<div class="col">
+  <div class="plate">
+    <h1 class="serif">Try the live demo</h1>
+    <p class="sub">Open it on your phone before you buy</p>
+  </div>
   <div class="qr card">
     <img src="{{qr.demo}}" alt="QR code of the demo">
-    <p class="scan">Scan to open the live demo</p>
+    <p class="scan">Scan to open the demo</p>
   </div>
-  <p class="note">The demo shows sample names and placeholder photos.<br>You add your own after purchase.</p>
+  <p class="note">The demo shows sample names and placeholder photos. You add your own after purchase.</p>
 </div>
-<img class="phone ph" src="{{shot.d01_demo_home}}" alt="">
 </body>
 </html>

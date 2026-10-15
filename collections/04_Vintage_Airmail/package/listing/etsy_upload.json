@@ -47,58 +47,58 @@
     {
       "n": 1,
       "file": "collections/04_Vintage_Airmail/package/listing/images/01_cover.png",
-      "alt": "Vintage Airmail Love Letter wedding website with RSVP on two phone screens: a striped airmail envelope with a burgundy wax seal, and the home page with the couple's photo. Labels: no Canva needed, RSVP built in, live demo",
-      "exists": false,
-      "status": "missing"
+      "alt": "Vintage Airmail Love Letter wedding website with RSVP on a phone held in a hand: the opening page with a striped airmail envelope with a burgundy wax seal. Labels: no Canva needed, RSVP built in, live demo",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 2,
       "file": "collections/04_Vintage_Airmail/package/listing/images/02_guest_pages.png",
-      "alt": "The five pages guests see: envelope, home, our story, details and RSVP",
-      "exists": false,
-      "status": "missing"
+      "alt": "Three phones on a styled table with the pages guests see: home, our story and RSVP (the website also has the envelope opening and a details page)",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 3,
       "file": "collections/04_Vintage_Airmail/package/listing/images/03_whats_included.png",
       "alt": "What is included: website, online editor, RSVP with your own questions, add to calendar, questions and answers, QR code, START HERE guide",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 4,
       "file": "collections/04_Vintage_Airmail/package/listing/images/04_how_it_works.png",
-      "alt": "Three steps: start with your Etsy order number, personalize in the editor, publish and share",
-      "exists": false,
-      "status": "missing"
+      "alt": "Three steps: start with your Etsy order number, add your names, date and a photo in a short 3-step setup, publish and share your link or QR code",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 5,
       "file": "collections/04_Vintage_Airmail/package/listing/images/05_editor.png",
-      "alt": "The online editor on a phone: the six pages to edit, cropping a photo, previewing the website",
-      "exists": false,
-      "status": "missing"
+      "alt": "The online editor on a phone: the six pages to edit, Headings & labels for your own wording, cropping a photo to its frame",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 6,
       "file": "collections/04_Vintage_Airmail/package/listing/images/06_rsvp.png",
-      "alt": "RSVP: the guest reply form with a meal question, the replies in the editor with a Download list button (CSV)",
-      "exists": false,
-      "status": "missing"
+      "alt": "RSVP: the guest reply form with a meal question, the editor's Guests page with head counts and a Download list button (CSV), the questions you ask your guests",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 7,
       "file": "collections/04_Vintage_Airmail/package/listing/images/07_details.png",
       "alt": "Details page: order of the day with add to calendar buttons, the venue, questions and answers",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     },
     {
       "n": 8,
       "file": "collections/04_Vintage_Airmail/package/listing/images/08_live_demo.png",
-      "alt": "QR code that opens the live demo of the Vintage Airmail Love Letter design.",
-      "exists": false,
-      "status": "missing"
+      "alt": "A phone on a styled table showing the live demo of the Vintage Airmail Love Letter design, next to a QR code that opens it.",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     }
   ],
   "gpt_mockup_scenes": [
@@ -113,7 +113,7 @@
   ],
   "video": {
     "file": "collections/04_Vintage_Airmail/package/listing/video.mp4",
-    "exists": false
+    "exists": true
   },
   "open_checks": [
     {
@@ -158,7 +158,6 @@
     }
   ],
   "blockers": [
-    "listing images: none yet",
     "quantity and renewal not decided",
     "final price not decided"
   ],

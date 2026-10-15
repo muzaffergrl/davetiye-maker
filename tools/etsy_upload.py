@@ -9,8 +9,8 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   its sentence, so the claim stays visible until it is tested. `ready_to_publish` stays false while any check is open.
 - Price is the draft price the user gave on 2026-10-15 (USD 29.40, "for now"); quantity and renewal stay null:
   they are the user's decision (renewal costs a listing fee).
-- Images: the rows of §5 with the file's real state. The 01/03 images were made before the current editor (G059) and
-  must be rebuilt; 02/04/05 have none yet. GPT's mockup scenes (assets/gpt/mockups/) are listed as the base.
+- Images: the rows of §5 with the file's real state. All five designs were rebuilt on 2026-10-15 with the current
+  editor (K29) by `tools/listing_kit.py capture` + `images`: real screens, in GPT's mockup scenes for images 1, 2, 8.
 """
 from __future__ import annotations
 
@@ -35,7 +35,8 @@ DESIGNS = [
 PRICE_USD = 29.40
 PRICE_NOTE = "Draft price from the user on 2026-10-15 ('for now'); final price is still a decision (docs/15 §5)."
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
-OUTDATED_IMAGES = "made 2026-10-14 (G059) with the old editor; rebuild before publishing (listing_v3 §5)"
+IMAGES_STATUS = ("current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, "
+                 "GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)")
 
 
 def section(md: str, no: int) -> str:
@@ -91,7 +92,7 @@ def images(md: str, listing: Path) -> tuple[list[dict], list[dict]]:
             "file": str(path.relative_to(REPO)).replace("\\", "/"),
             "alt": VERIFY.sub("", row[2]).strip(),
             "exists": path.exists(),
-            "status": OUTDATED_IMAGES if path.exists() else "missing",
+            "status": IMAGES_STATUS if path.exists() else "missing",
         })
     return rows, checks
 
@@ -111,7 +112,10 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     problems = [f"title: {p}" for p in title_problems(f["title"])] + [f"tags: {p}" for p in tag_problems(f["tags"])]
     if not pdf.exists():
         problems.append(f"missing digital file {pdf.relative_to(REPO)}")
-    blockers = ["listing images: " + ("outdated, rebuild" if any(i["exists"] for i in imgs) else "none yet")]
+    missing = [i["file"] for i in imgs if not i["exists"]]
+    blockers = [f"listing images missing: {', '.join(missing)}"] if missing else []
+    if not video.exists():
+        blockers.append("listing video missing")
     data = {
         "design": no,
         "theme": theme,
