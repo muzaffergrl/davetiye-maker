@@ -2,7 +2,7 @@
 id: G092
 baslik: Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol
 rol: claude-tarayici
-durum: alindi
+durum: inceleme
 alan: claude-local-1
 oncelik: 1
 bagimli: []
@@ -36,7 +36,34 @@ G091'in /start, panel yardımı ve satış sitesi metin düzeltmeleri.
 Ödeme/plan/ekip ayarı yok; alan adı alma yok; şifre yalnız Vercel'e. Kullanıcının `/lily-and-theo` sitesine dokunma. Kurgusal test verisi.
 
 ## Sonuç
+**Yayın:** production = main **`55cf6ee`** (platform ağacı `117993db9549`), **`dpl_9VoCE8w6VuARyzHPJCfeDeWPRDSj`** (READY) → https://davetiye-platform-five.vercel.app .
+Arşiv yolu (`--meta gitCommit=55cf6ee --meta platformTree=117993db9549`). **`ADMIN_PASSWORD`** Vercel'e Production + Preview, Secret türde eklendi
+(değeri kullanıcı verdi ve sohbette onayladı; repoda/log'da/burada yok). Başka ortam değişkeni değişmedi.
+
+**Kontroller:** `npm ci` · `npm test` **651/651** (8 atlanan: 2 build'e bağlı → build sonrası 2/2; 6 Playwright'lı tema testi, bu makinede yok; Windows'ta
+g080 symlink testleri junction shim'iyle) · typecheck · build yeşil (trace-check 8 tema: yarım lavender-provence ve boho-pampas-terracotta da build'de; satışta
+değiller, `/start` kapısı kapalı tutar). Bu yayından önce main bir süre kırmızıydı (G409 ara kaydı, tek test) — G409 düzeltti (`27071ab`).
+Canlıda `live-check` **40/40**, beş temalı salt-okuma **41/41**, `blob-smoke` **12/12**; 5 demo yeni kodla tohumlandı.
+
+**Canlı admin yolculuğu (390 px, geçici `/g092-admin`, sipariş `20261016`, `test@example.com`):**
+- `/admin` giriş ekranı → şifreyle giriş → **"Geçici kısa şifre"** uyarısı görünür → liste (Yapılacak 0 · Hepsi 7 · Yayında 6 · Taslak 1 · Arşiv 0).
+- Site sayfası: Bilgiler, Etsy mesajı (17 şablon), Destek işlemleri, Siteyi sil. "Mesajı kopyala" çalışıyor (panoya 465 karakter, "Kopyalandı").
+- **Yeni düzenleme linki** → eski link 404 ("This edit link is not valid"), yeni link paneli açıyor.
+- **Siteyi sil** (adres yazılınca düğme açılıyor) → liste; genel adres 404; `slugs/g092*` ve `orders/20261016` 0 dosya.
+- **Sipariş onayı denenemedi:** `CLAIM_ORDER_VERIFICATION` canlıda **tanımlı değil** (= yalnız biçim kontrolü; site sayfasında "Sipariş kontrolü: Gerekmedi").
+  Bu yüzden Yapılacak'a düşme, "Siparişi onayla", "Confirming your order" kartı ve onay sonrası Publish açılması canlıda görünmüyor. Değer değiştirilmedi;
+  açmak için Vercel'e `CLAIM_ORDER_VERIFICATION=manual` (kullanıcı kararı).
+
+**Yer tutucular:** panel Help'te "BKE Studio" ve "bkestudio@gmail.com" var, `[SHOP NAME]`/`[SUPPORT EMAIL]` yok; `/faq`, `/contact`, `/`, `/pricing` da BKE Studio +
+e-posta gösteriyor. Kalan (karar bekleyen) yer tutucular: `[ETSY SHOP URL]` (/, /faq, /contact, /pricing), `[DOMAIN]` (/faq), `[PRICE]` (/pricing).
+
+**Ekranlar:** `docs/10_canli_test/g092/` — 01 giriş, 02 liste + geçici şifre uyarısı, 03 site sayfası, 05 silme kartı, 06 alıcı paneli (kurulum), 07 panel Help.
+(Yeni link ekrandayken görüntü alınmadı — anahtar içerir.)
+
+**Notlar:** admin listesi kullanıcının `/lily-and-theo` sitesini de gösteriyor (dokunulmadı). Vercel'de `BLOB_READ_WRITE_TOKEN` "Config" türünde (ekip üyeleri
+değeri görebilir) — öneri: Sensitive'e çevirmek (kullanıcı kararı; değiştirilmedi).
 
 ## Günlük
 - 2026-10-15 açıldı (entegratör, kullanıcı K30/K33)
 - 2026-10-15 alindi: claude-local-1
+- 2026-10-15 bitti, incelemeye gönderildi
