@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 19 · alindi 4 · inceleme 1 · blokaj 277 · bitti 100 · toplam 401
+Özet: hazir 18 · alindi 3 · inceleme 3 · blokaj 277 · bitti 100 · toplam 401
 
 ## claude-canva
 
@@ -102,13 +102,14 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G079` p1 — Canlıya güncel main — sade ve BKE Studio görünümlü panel (G066-B, K29); canlı kontrol + panel ekranları → `gorevler/G079-canli-panel.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (43)**
+**Üzerinde çalışılan / incelemede / blokaj (44)**
 
 - `G063` inceleme · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
+- `G079` inceleme · claude-local-1 — Canlıya güncel main — sade ve BKE Studio görünümlü panel (G066-B, K29); canlı kontrol + panel ekranları
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -269,7 +270,7 @@ Bağımlılık bekleyen: 3 · Biten: 45
 **Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G005` blokaj · - — G004'ün belge ayağı — Canva UI işleri için web/belge araştırması
-- `G091` alindi · claude-G091 — Alıcı yolculuğu — ilan, satın alma ve satış sonrası: alıcıda hiçbir soru işareti kalmasın (K32)
+- `G091` inceleme · claude-G091 — Alıcı yolculuğu — ilan, satın alma ve satış sonrası: alıcıda hiçbir soru işareti kalmasın (K32)
 - `G701` blokaj · - — Tasarım 01 Olive & Ivory — A5 kılavuz + B3 Etsy ilan metni
 - `G703` blokaj · - — Tasarım 03 Blush Garden Rose — A5 kılavuz + B3 Etsy ilan metni
 - `G704` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A5 kılavuz + B3 Etsy ilan metni
