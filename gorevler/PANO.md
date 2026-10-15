@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 13 · alindi 6 · inceleme 3 · blokaj 277 · bitti 104 · toplam 403
+Özet: hazir 12 · alindi 6 · inceleme 3 · blokaj 277 · bitti 105 · toplam 403
 
 ## claude-canva
 
@@ -157,11 +157,10 @@ Bağımlılık bekleyen: 1 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (9)**
+**Alınabilir (8)**
 
 - `G093` p1 — Tasarım 06, 07, 08 satış sitesine eklenir (G082/G083/G086 yöntemi) — tasarım sayfaları, metin, gerçek ekranlar, /designs 8 tasarımla → `gorevler/G093-satis-06-07-08.md`
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G413` p3 — Tasarım 13 Enchanted Forest Storybook — platform teması → `gorevler/G413-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 - `G415` p3 — Tasarım 15 Cherry Blossom Spring — platform teması → `gorevler/G415-website-kaynak.md`
 - `G417` p3 — Tasarım 17 Emerald & Gold Estate — platform teması → `gorevler/G417-website-kaynak.md`
@@ -258,7 +257,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 2 · Biten: 48
+Bağımlılık bekleyen: 2 · Biten: 49
 
 ## claude-metin
 
