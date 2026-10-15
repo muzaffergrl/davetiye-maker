@@ -2856,6 +2856,12 @@
   "first_screen": {
    "landscape": true,
    "names_min_px": 36
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 130,
+   "light_above": 256
   }
  }
 }

@@ -897,9 +897,12 @@ def main():
                                                   for k, p in (("card", "card_small"), ("portrait", "frame_portrait"),
                                                                ("landscape", "frame_landscape"))}}
     # theme-check tablosu (scripts/lib/theme-env.ts): parçacık katmanı, köşe kümeleri; ilk ekran yatay telefonda da nav'ın
-    # üstünde biter, hero isimleri ≥ 36 px
+    # üstünde biter, hero isimleri ≥ 36 px. backdrop: bu duvar 03'ün açık yıkamasından koyu (mum ışığı, alt kısmı şeftali–bakır):
+    # wall-560'ın gri %5'liği 149, %1'liği 140 → varsayılan dark_below 170 düz duvarı "dolu" sayıyordu (zarf ipucunun altı
+    # %15–47); ölçüm: düz duvarın %0,1'i < 130, dalya kümelerinin %92'si < 130 → dark_below 130 ikisini ayırır
     manifest["theme_check"] = {"particles": ".accent-layer", "clusters": ".corner",
-                               "first_screen": {"landscape": True, "names_min_px": 36}}
+                               "first_screen": {"landscape": True, "names_min_px": 36},
+                               "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 130, "light_above": 256}}
     tb.manifest_yaz(out, manifest)
 
     if oniz:

@@ -437,7 +437,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .page-head { padding: clamp(96px, 26vw, 160px) 16px 4px; }
 :is(.page-head, .details-top, .rsvp-top) > :not(.page-bg) { position: relative; z-index: 1; }
 .page-title { font-size: clamp(66px, 20vw, 108px); line-height: 1.05; }
-.page-head .kicker { margin-top: 2px; font-size: 12.5px; letter-spacing: .3em; color: var(--wine-ink); }
+.page-head .kicker { margin-top: clamp(8px, 4vw, 18px); font-size: 12.5px; letter-spacing: .3em; color: var(--wine-ink); }
 .page-head .orn { width: 160px; margin-top: 8px; }
 .unit { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .lede { width: min(100%, 420px); margin: 16px auto 0; font-style: italic; font-size: 20px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }

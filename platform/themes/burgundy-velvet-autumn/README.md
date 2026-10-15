@@ -56,7 +56,7 @@ aşarsa çıkış ≠ 0). İlk denemede `ph_story_2` kırpımına koyu bir dal u
   (× 1,0011, × 0,92975) + ötelemeyle kapalının sol/sağ kenarına, menteşesine ve alt kenarına oturtuldu (sonrası sol 0, sağ 0, alt 0 px;
   `kit_check` sol −1, sağ −1, alt +2 px "tamam"). Kesilen katmanlar açık zarfı %0,52 farkla yeniden kurar.
 - **Kapanış = sarılı kurdele** (`closure.png`, zarfla aynı 1024 × 1536 tuval, 1:1; kapakla **taşınmaz**): `kit_check` yatay bant
-  uçlarının zarf kenarına 3–7 px varmadığını, dikey bandın üstten 41 / alttan 14 px taşdığını ölçtü. `kapanis_hizala` yatay ölçek
+  uçlarının zarf kenarına 3–7 px varmadığını, dikey bandın üstten 41 / alttan 14 px taştığını ölçtü. `kapanis_hizala` yatay ölçek
   (× 1,0133, −4,8 px) ile bant uçlarını zarf kenarına (+1 px sarma) getirir, zarfın alfa kutusu dışında kalanı kırpar (kurdele kenardan
   arkaya döner); sonrası tüm uçlar −1…−2 px. W1.1'de ölçülen dikey bant / zarf genişliği 0,0904, bizim GPT parçasında 0,1107 (parça
   olduğu gibi kullanıldı). `--onizleme` ile `compare_closure.jpg` (tema | comp).
@@ -88,7 +88,7 @@ aşarsa çıkış ≠ 0). İlk denemede `ph_story_2` kırpımına koyu bir dal u
   (sahnenin yarısı kadar, 12°'ye kadar dönerek; yalnız yolun son %40'ında, zarfın kenarını geçerken söner), dikey bant düğüm ve
   tılsımla birlikte zarfın altından kayar (1,15 s). Kurdele kapağın kenarını geçtikten sonra (980 ms) dikdörtgen kapak menteşesinde
   kalkar (820 ms), altında kapalı gövde açık gövdeye (astar + ön cep) geçer, açık kapak −90°'den dikilir (1,78 s) → arkada sıcak
-  **mum ışığı** (GPT değil, sınırsız radyal ışık `.glow`, 1,98 s'de 1,5 s'de yanar) kart cepten yükselir (2,06 s, 1,42 s) ve **aynı
+  **mum ışığı** (GPT değil, sınırsız radyal ışık `.glow`, 1,98 s'de başlayıp 1,5 s'de yanar) kart cepten yükselir (2,06 s, 1,42 s) ve **aynı
   anda tek bir bakır akçaağaç yaprağı** (`accent_1` × 1, 40–48 px, `origin: 'card'`) kartın yanındaki şeritte süzülür (2,2 s'de
   başlar, `go`'dan önce yerleşir) → kart olduğu yerde öne gelir (× 1,04, 3,48 s) ve view transition ile home kartına uçar. Dokun →
   home 4,38 s (Skip her an). Hareketli parçalar ayrı: kurdelenin üç parçası, kapak, açık kapak, gövde, kart, ışık, yaprak.
@@ -98,7 +98,8 @@ aşarsa çıkış ≠ 0). İlk denemede `ph_story_2` kırpımına koyu bir dal u
   points along one long burgundy velvet ribbon swag … each frame swaying slightly" cümlesi. Telefonda çerçeve 60vw, foto penceresi
   60 × 0,648 = **38,9vw** (≥ 38vw).
 - **Home:** hero sırası dekor → kart → isimler → tarih → mekân → geri sayım → hap; davet kartı `set` (hep opak) sonra metinler sırayla;
-  iki çerçeve de bağlarında sallanır.
+  iki çerçeve bağlarında iner (`hang`, yalnız çerçeve — başlık, ipucu ve program satırları ayrıca `rise`; döndürülen uzun metin
+  bloğu --stress'te ekran kenarını aşıyordu) ve sallanır.
 - **Parçacıklar** (`MOTION.accents`): açılış 1 bakır yaprak · home'a varış 2 bordo yaprak (hero'nun içinde, metnin arkasında) · RSVP
   kapanışı 2 bordo yaprak + 1 bakır yaprak (yalnız `.closing` kutusunda). Yollar metin sütununun yanındaki şeritlerden (`avoid`).
 - Süreler (docs/11 §8): her sahnenin son adımı ≤ 3000 ms (`rsvp-card` `tie` 2900), tek giriş 600–1800 ms. Azaltılmış hareket: açılış
@@ -111,14 +112,20 @@ nav çizgisini kesen birim ilk ekranın altından başlar; ilki sayfayı en çok
 - **Story telefon:** bir birim (kurdele parçası + çerçeve + alt yazı) 390 px'te ~505 px boyunda; başlık bloğuyla birlikte ilk
   ekrana sığmaz (390 × 844'te de: başlık 345 px'te biter, birim 850'de biterdi, nav 770'te). İlk çerçeve katlanınca başlık bloğu ilk
   ekranın ortasına alınır (boşluğun %42'si üste) — ilk ekran yarım çerçeve yerine mum ışıklı bir başlık sayfası olur, çerçeveler
-  kaydırınca birer birer bağlarında iner. Pencereyi 38vw'nin altına küçültmek tek çözüm olurdu; yapılmadı. ≥ 720 px: kurdele + üç çerçeve **tek birim** (`.garland`); `garland()` genişliği
-  12 px adımlarla (≥ 560 px) nav'ın üstünde bitene kadar daraltır, yine sığmazsa birlikte katlanır.
+  kaydırınca birer birer bağlarında iner. Pencereyi 38vw'nin altına küçültmek tek çözüm olurdu; yapılmadı.
+- **Story ≥ 720 px:** kurdele + üç çerçeve **tek birim** (`.garland`); `garland()` genişliği 12 px adımlarla (≥ 560 px) nav'ın
+  üstünde bitene kadar daraltır, yine sığmazsa birlikte katlanır.
 - **Details:** kartın başlığı ve her program satırı ayrı birim; dar yatay telefonda kart `min(100% − 40px, 420px, (100svh − 160px) × 1,55)`
   genişliğe iner ki başlık + ilk satır nav'ın üstünde kalsın (yalnız başlıklı bir kart ilk ekranda bırakılmaz).
 - **RSVP:** başlık, "Kindly reply by" + tarih, hap, "We can't wait …", imza (+ fiyonk) beş birim; imza birimi önce `--sg` ile %73'e
   kadar küçülür (fiyonk onunla birlikte), sonra katlanır. 360 × 640'ta imza katlanır; kartın altında ~130 px boş kâğıt kalır (05'teki
   gibi kabul edilen ödünleşim).
 - **Yatay telefon** (en-boy ≥ 1, yükseklik ≤ 620 px): hero iki sütun (kart solda, isimler → tarih → mekân → şehir → sayaç → hap sağda).
+
+**theme-check zemin ölçümü** (`manifest.theme_check.backdrop`, `build_images.py` yazar): bu duvar 03'ün açık yıkamasından koyu
+(alt kısmı şeftali–bakır); varsayılan `dark_below: 170` düz duvarı "dolu" sayıyor, zarf ipucunun altını %15–47 "boyalı dekor"
+ölçüyordu. Ölçüm: `wall-560`'ın %0,1'i, dalya kümelerinin %92'si gri < 130 → `dark_below: 130` (diğer eşikler varsayılan). İpucu
+ayrıca kendi `<p>`'sine alındı (tılsım ve çizgiler ölçülen kutunun dışında).
 
 ## Dekor ve metin (`site.js` `decor`)
 Köşe kümeleri duvar metninin altına girmez (16 × 16 yaprak haritası: önce küçülür, sığmazsa gizlenir); serbest parçalar (bakır yaprak,
@@ -198,7 +205,8 @@ bordo yaprak, böğürtlen) metin, kart, çerçeve, kurdele ya da kapalı zarfı
 ## Düzenlenebilir metinler (G068 kuralı)
 71 anahtar (`theme.json` `copy`, `node scripts/copy-manifest.ts --theme burgundy-velvet-autumn` üretir / `--check` denetler); hepsi
 standart anahtar; görünür sabit metin `data-copy`'siz değil. `max` değerleri `theme-check --stress` (her anahtar en uzununda) ile
-denetlendi.
+denetlendi: nav'da Cinzel büyük harfleri geniş, 4 × 8 karakter 360 px'e sığmadı → 04/05'in değerleri (Home 6, Story 6, Details 7,
+RSVP 5; teşekkür nav'ında üç öğe olduğu için The Day 10) ve ≤ 400 px'te daha dar harf aralığı (en uzunlarla 360 px'te 34 px pay).
 
 ## Misafir adları (G069 satırı)
 `<template data-rsvp-party>` "Number of guests" alanının (ve hata yuvasının) hemen arkasında; formun kendi `.field` stili, yeni süs yok.
@@ -208,6 +216,8 @@ denetlendi.
 - Comp'taki geri sayım kutuları, nav fleur'ü, details'teki kart–çerçeve kadife bağı ve story'deki ortadaki çerçevenin böğürtlen
   süsü GPT parçası olarak yok; yerine düz rakamlar / tılsım kullanıldı, bağ kaldırıldı (yukarıdaki haritada).
 - Üçüncü yazı ailesi (Cormorant Garamond) görev metninde yoktu (Pinyon + Cinzel); comp'un italik mekân ve yer satırları ile gövde
-  metni için eklendi (Cinzel'in küçük harfi ve italiği yok). docs/11 §6 sınırı (≤ 3 aile) içinde.
+  metni için eklendi (Cinzel'in küçük harfi ve italiği yok). docs/11 §6 sınırı (≤ 3 aile) içinde. Cinzel tek değişken yüz olarak
+  istenir (`wght@400..500`: büyük rakamlar 400, satırlar 500); iki ayrı ağırlıkla `document.fonts.check` yalnız 500 kullanan
+  sayfalarda "Cinzel yüklenmedi" uyarısı veriyordu (font yüklüydü, denetim 400'ü soruyordu).
 - GPT kurdele parçasının dikey bandı comp'tan %22 geniş (0,1107 / 0,0904); parça değiştirilmedi.
 - RSVP 360 × 640'ta imza katlanır ve kartın altında boş kâğıt kalır (yukarıda).
