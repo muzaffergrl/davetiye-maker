@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 17 · alindi 2 · inceleme 1 · blokaj 277 · bitti 100 · toplam 397
+Özet: hazir 19 · alindi 3 · inceleme 1 · blokaj 277 · bitti 100 · toplam 400
 
 ## claude-canva
 
@@ -152,7 +152,7 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 0 · Biten: 4
+Bağımlılık bekleyen: 1 · Biten: 4
 
 ## claude-kod
 
@@ -173,8 +173,9 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G419` p3 — Tasarım 19 Midnight Garden — platform teması → `gorevler/G419-website-kaynak.md`
 - `G420` p3 — Tasarım 20 Coastal Seaside — platform teması → `gorevler/G420-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (81)**
+**Üzerinde çalışılan / incelemede / blokaj (82)**
 
+- `G087` alindi · claude-G087 — Dükkân (admin) paneli + alıcı panelinde satın alma sonrası akış düzeltmeleri (K30)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
@@ -257,7 +258,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 2 · Biten: 45
+Bağımlılık bekleyen: 3 · Biten: 45
 
 ## claude-metin
 
