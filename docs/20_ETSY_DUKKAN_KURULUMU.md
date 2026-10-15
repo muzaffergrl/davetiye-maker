@@ -194,12 +194,15 @@ No. It is a digital product.
 | Dükkân dili | English | Hedef alıcı yabancı (AGENTS) |
 | Para birimi | USD | docs/15 §5 önerisi. Dükkân açılışında seçildiyse değiştirilmez, §7'ye yazılır |
 | Konum | Türkiye | K26 |
-| Offsite Ads | Kapalı (opt out), $10k altındayken | docs/15 §1. Yalnız ayar okunur ve §7'ye yazılır; değişiklik kullanıcı onayıyla |
+| Offsite Ads | **Kapat (opt out)** — kullanıcı onayı 2026-10-15 | docs/15 §1. Son 12 ayda $10k altındayken isteğe bağlı |
 | Etsy Ads | Kapalı | Para harcatır; ilanlar yayında değil |
 | Vacation mode / auto-reply | Değiştirilmez | İlanlar yayında değil |
 | Shop updates / bildirimler | Değiştirilmez | — |
 
 ## 6. Kullanıcıdan bekleyen kararlar (uygulama bunları beklemeden yapılır)
+
+**2026-10-15 kararları:** Offsite Ads kapatılır (§5); Etsy dükkân adı `STUDIOBKE` kalır (§7.4). Gizlilik politikası için veri
+sorumlusu adı ve iletişim bilgisi kullanıcıdan gelecek (§7.2).
 
 1. ~~İade metni~~ **Karar (kullanıcı, 2026-10-15): iade yok.** §4 metni para iadesi sözü vermez; yalnız "çalışmazsa düzeltiriz"
    der. Not: Etsy Purchase Protection'da alıcı "açıklamaya uymuyor" vakası yine açabilir; düzeltme sözü bu vakaları azaltmak içindir.
@@ -267,7 +270,8 @@ Not: iptal politikası docs/20 tablosunda ayrı bir satır değildi. Kullanıcı
 | İlanlar | Active 0 · Draft 0 · Expired 0 · Sold out 0 · Inactive 0 | Listings |
 
 ### 7.4 Beklenmedik bulgular
-- Dükkân adı `STUDIOBKE`, belgede ise `BKEStudio`. About metni "BKE Studio" diyor. Tutarlılık kararı kullanıcının.
+- Dükkân adı `STUDIOBKE`, belgede ise `BKEStudio`. About metni "BKE Studio" diyor. **Karar (kullanıcı, 2026-10-15): Etsy adı
+  `STUDIOBKE` olarak kalır;** metinlerdeki marka adı "BKE Studio" değişmez.
 - Önceki logo ve banner eski marka çalışmasındandı ("STUDIO BKE INVITATIONS" mührü). Banner "Animated Video" vaat ediyordu;
   video ürünü K22'den beri askıda. §7.5'te değiştirildi.
 - Eski URL `/your/shops/me/edit` 404 veriyor. Info & Appearance: `/your/shops/me`; Your shop:
