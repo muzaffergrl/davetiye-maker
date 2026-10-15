@@ -2,7 +2,7 @@
 id: G414
 baslik: Tasarım 14 Ivory Lace & Pearls — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G414
 oncelik: 3
 bagimli: [G214, G038, G046, G052]
@@ -122,3 +122,5 @@ modu (yukarıda).
 - 2026-10-14 entegratör notu (G214 onayı): frame_landscape ve frame_portrait yeşil pencerelerinde saydam/pembe leke var → build'de pencere doldurma (parts_prep) şart; closed↔open hiza UYARI (kapı kanatları ±2,5%) → manifest.stage.align ile düzelt. envelope_closed iki kanatlı kapı (kapi tipi), closure inci broş 1254 kare.
 - 2026-10-15 alindi: claude-G414
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı
+- 2026-10-15 entegratör: W1 karşılaştırmaları incelendi — tasarıma sadık; ortak testler 14 ile geçti (g068 13/13, g075 48/48, g069 13/13). Onaylandı.
