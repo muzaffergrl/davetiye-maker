@@ -2,7 +2,7 @@
 id: G404
 baslik: Tasarım 04 Vintage Airmail Love Letter — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: wf-tema04
 oncelik: 2
 bagimli: [G204, G038, G046, G052]
@@ -248,3 +248,5 @@ panelin onay adımı) ile yayınlasın; şu an her temada "content change" kırm
 - 2026-10-14 inceleme + QA turu (claude-kod): ilk ekran–nav kuralı 204/204, story masaüstü sırası, RSVP imza + mühür, bütün kümeler, iç sayfa zemini, bölüm içi parçacıklar, zarf ipucu; npm test 552/552, theme-check 117/0/2 (uyarılar G081), g051 44/44, final-smoke 45/45; durum inceleme (qa-kontrol bekliyor)
 - 2026-10-14 ikinci QA (KOŞULLU, 7 ÖNEMLİ) düzeltildi (claude-kod): hero kümesi (`display: none`, satır kutuları, boyalı kenar), isim kuyrukları, zarf/baş kümeleri + önizleme çubuğu (`--vh`), RSVP boş kâğıt (sıkı ritim, `--cw` ≥ 225, katlama boşluğu dağıtılır), details tek katlama, açılış çiçeği her telefonda, story kontrastı; QA betikleriyle yeniden ölçüldü; npm test 571/571 (birleştirme sonrası), theme-check 117/0/2, g051 44/44, final-smoke 45/45; durum inceleme
 - 2026-10-15 üçüncü QA'nın 2 zorunlu bulgusu düzeltildi (claude-kod): details yatayda yalnız başlıklı mektup (ilk birim → tam lift / `.tight` / `--cw` / bütün mektup katlanır), çubuklu kısa yatayda hero kartı nav zemininde (taban `--vh`'yi izler), ops. varış çiçeği şeridi isim sütununda biter; QA betikleriyle 840 yükleme (nav ihlali 6 → 0, yalnız başlık 11 → 0); tema testi 33/33, npm test 572/572, theme-check 117/0/2, g051 44/44, final-smoke 45/45; durum inceleme
+- 2026-10-15 entegratör onayladı
+- 2026-10-15 entegratör: QA 1 (7 bulgu) ve QA 2 (2 yatay bulgu) kapandı; 840 yüklemede ölçüldü. Onaylandı. Satış sitesine ekleme G085; teşekkür hâli + data-copy (G081 2. tur) ve misafir adları (G084 2. tur) sırada. site.js bütçesi 3 B, site.css 7 B — sonraki eklemeler sıkıştırma ister.
