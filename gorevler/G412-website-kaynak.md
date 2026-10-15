@@ -2,7 +2,7 @@
 id: G412
 baslik: Tasarım 12 Tropical Destination — platform teması
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-local-G412
 oncelik: 3
 bagimli: [G212, G038, G046, G052]
@@ -35,9 +35,23 @@ Tasarım 12'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [ ] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+**Yapılan (claude-local-G412, 2026-10-15).** `platform/themes/tropical-destination/` (theme.json + 71 copy anahtarı, content.demo.json = koleksiyon kaydı birebir, 5 sayfa, site.css 44,2 KB, site.js 33,8 KB, thank-you.css, build_images.py, README.md comp öğe haritasıyla, img/ — klasör 2,0 MB), `platform/tests/theme-tropical-destination.test.ts` (33 test, §13.2'nin 24 maddesi + tasarıma özel), `platform/previews/g412/` (theme-check çıktıları, compare_*_390.jpg, compare_closure.jpg, checks.json).
+
+- **Açılış**: dokununca pirinç çıtçıt patlar, plumerialı sekme topun çevresinde savrulup ekranın sağından çıkar → yuvarlak kapak kayışıyla menteşede kalkar, palmiye astarlı iç yüz devralır → bavul etiketi kart cepten yukarı kayar, bir monstera (soldan) ve bir beyaz plumeria (sağdan) ekranı geçer → kart öne gelir, home'a VT ile uçar (go 4,18 s).
+- **Story**: üç ipli kraft etiket (yazısız) ipinin tepesinden sallanarak tek tek yerine oturur ve hafifçe sallanmaya devam eder; telefonda zikzak sütun (pencere 42vw), ≥ 720 px comp'taki gibi tek sıra, üç yükseklik.
+- **Kesimler (K21, çizim yok)**: `tema_build.kapak_kes("egri")` yuvarlak kapağın dik yanlarında ve kayış sütunlarında yanıldığı için tema kendi kesimini yapar (elips uydurma + iz, kayış deri renginden kapak katmanına); ön cep "gülümseme" eğrisi astar renginden; kit_check hiza GEÇTİ (sol/sağ +%0,20, alt 0), açık katmanlar katlanma satırına ölçülen dönüşümle oturtuldu; kapanış comp'tan ölçülen oranla kapak ucuna bağlandı (`manifest.closure`, compare_closure.jpg).
+- **Comp sapmaları** (README'de gerekçeli): geri sayım sade rakam; altın palmiye ikonu yerine GPT plumeria + 1 px kıl çizgi; telefonda story zikzak; ev davet kartı `info_card` (invitation_card'ın süsleri çapraz köşelerde, 3 dilimle uzatılamıyor → temaya alınmadı); W1.4 satır arası kıl çizgiler yok; telefonda details/rsvp başındaki sağ alt küme gizli (kartın arkasında yarım kalıyordu); 2. etikette palmiye yaprağı yerine monstera.
+
+**Testler.** `kit_check --paket 5` 23/23 (+hiza GEÇTİ), `--paket 2` 5/5. `npm test` (Windows, junction ön yüklemesiyle) 629 testten 620 geçti, 8 atlandı, 1 hata = bu temanın testindeki eski regex — düzeltildi, `theme-tropical-destination.test.ts` 33/33; push öncesi (main'e rebase sonrası) tam koşu **942 test: 929 geçti, 0 hata, 13 atlandı**. `npm run typecheck` temiz. `npm run build` + trace-check geçti (7 tema). `theme-check --theme tropical-destination --stress --no-video` (playwright-core 1.64.1 + kurulu Chrome 155, geçici klasörde; repo dışı): **105 geçti, 0 uyarı, 1 hata** — hata "content change" akışı: theme-check.cjs Windows'ta `C:\…` mutlak yolunu ESM import ediyor (`ERR_UNSUPPORTED_ESM_URL_SCHEME`), tema değil araç hatası; aynı davranış tema testindeki #5 ile sunucu tarafında doğrulandı. Önceki turlarda bulunan ve düzeltilen: home kısa telefonda giriş öncesi dönük etiketin ekran kenarını aşması, tarih ayracının "kırpılmış metin" sayılması, en-GB uzun tarihin dar etikette taşması, açık zarfta "Replay" altına giren küme. Makine %100 CPU'dayken (başka oturumlar) bir turda VT/skip akışları zaman aşımına düştü; son turda hepsi geçti. İlk görünüm (390×844, DPR 3): index 852 KB, home 758 KB; tohum fotoğraflarıyla 945 / 940 KB (sınır 1,5 MB). Zarf → home 4,8 s (go 4,18 s + yükleme). `g051-browser --theme tropical-destination`: 44/44. qa-kontrol (§13.4): index, home, story, rsvp, kapanış GEÇTİ; details "kart altı boş" bulgusu (kart en az ham parça boyundaydı) ve README notları düzeltildi, düzeltilmiş hâl yeniden incelettirilmedi.
+
+**Denenmedi.** Gerçek iPhone/Safari ve Android Chrome; temanın Vercel'de yayını; gerçek alıcı fotoğrafları (farklı oran/ışık); yavaş ağ; MP4 açılış kaydı (`opening_390x844.mp4` yok: makinede ffmpeg ve Playwright video bileşeni yok; açılış kare kare Web Animations `currentTime` ile denetlendi).
+
+**Sorunlu GPT parçaları.** `invitation_card`: süsler çapraz köşelerde, tam genişlikte düz yatay bant yok → 3 dilimle uzatılamıyor. Zarf katmanları kaynakta en çok ~567 px (DPR 3'te hafif büyütme). `kapak_kes("egri")` eğri+kayışlı kapakta yanıldı (araç geliştirmesi önerisi).
+
+**Önerilen görevler (entegratör açar).** (1) gpt-gorsel: `invitation_card_long.png` — tam genişlikte düz kağıt bandı olan uzun kart (süsler yalnız üstte ve altta) ya da süssüz kart + ayrı köşe kümeleri (`tools/katalog.py` `WEB[12]` `ekler`). (2) claude-kod: `scripts/theme-check.cjs` inline modül importlarında `pathToFileURL` (Windows'ta "content change" akışı). (3) claude-kod: `tema_build.kapak_kes("egri")`'ye kayış/sap sütunlarını dışlama + dik yan yaylar için elips ön bilgisi.
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-local-G412
+- 2026-10-15 bitti, incelemeye gönderildi

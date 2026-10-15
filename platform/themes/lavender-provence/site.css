@@ -90,7 +90,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   -webkit-mask: linear-gradient(transparent, #000 12px); mask: linear-gradient(transparent, #000 12px);
 }
 .site-nav .orn { margin: -10px auto -10px; }
-.site-nav ul { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 6px; list-style: none; }
+.site-nav ul { display: flex; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 6px; list-style: none; }
 .site-nav li { display: flex; align-items: center; }
 .site-nav li + li::before { content: "·"; content: "·" / ""; color: var(--deep-ink); font-size: 17px; }
 .site-nav a {
@@ -119,9 +119,9 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="unfurl"] { opacity: 1; clip-path: inset(0 50% 0 50%); --dur: 1300ms; }
 .js [data-a="unfurl"].in { clip-path: inset(0 -2% 0 -2%); }
 .js [data-a="write"].done, .js [data-a="unfurl"].done { clip-path: none; }
-/* a pressed bouquet drifts into its corner */
-.js [data-a="drift-tl"] { transform: translate3d(-7%, -5%, 0) rotate(-4deg); transform-origin: 0 0; --dur: 1800ms; }
-.js [data-a="drift-br"] { transform: translate3d(7%, 5%, 0) rotate(-4deg); transform-origin: 100% 100%; --dur: 1800ms; }
+/* a pressed bouquet drifts into its corner (turning about the corner: never past the screen edge before it settles) */
+.js [data-a="drift-tl"] { transform: translate3d(0, -6%, 0) rotate(-4deg); transform-origin: 0 0; --dur: 1800ms; }
+.js [data-a="drift-br"] { transform: translate3d(0, 6%, 0) rotate(-4deg); transform-origin: 100% 100%; --dur: 1800ms; }
 /* 09: pressed-flower cards tumble in on a summer breeze from their side and settle at their own tilt (rotate) */
 .js [data-a="tumble-l"] { transform: translate3d(-58vw, -9vh, 0) rotate(-26deg); --dur: 1500ms; transition-timing-function: cubic-bezier(.2, .7, .25, 1); }
 .js [data-a="tumble-r"] { transform: translate3d(58vw, -7vh, 0) rotate(24deg); --dur: 1500ms; transition-timing-function: cubic-bezier(.2, .7, .25, 1); }
@@ -292,7 +292,7 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; }
 .cd-done { font-style: italic; font-size: 21px; color: var(--script-ink); }
 .countdown.is-done .cd-row { display: none; }
 @media (max-width: 359px) { .cd-row { gap: 10px; } .cd-cell { min-width: 44px; } .cd-lbl { letter-spacing: .14em; } }
-@media (max-width: 420px) { .site-nav a { padding: 0 8px; letter-spacing: .2em; } }
+@media (max-width: 420px) { .site-nav a { padding: 0 7px; letter-spacing: .15em; } }
 .hero-cta { margin-top: clamp(16px, 3.2svh, 30px); }
 @media (min-aspect-ratio: 11/20) and (max-aspect-ratio: 3/4) and (max-width: 640px) {
   .hero { --hn: clamp(42px, min(13.6vw, 7.6svh), 82px); }

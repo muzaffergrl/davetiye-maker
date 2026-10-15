@@ -1,0 +1,757 @@
+{
+ "base": "next start (production build)",
+ "theme": "boho-pampas-terracotta",
+ "errors": [
+  "envelope → home: no element with view-transition-name invite-card on home (docs/11 §11)",
+  "reduced motion: 2063 ms, all visible=true",
+  "draft preview: page.check: Timeout 10000ms exceeded.",
+  "content change: node.exe (inline module) failed (exit 1): Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'c:'\r |   code: 'ERR_UNSUPPORTED_ESM_URL_SCHEME'\r | }\r | Node.js v22.23.2"
+ ],
+ "warnings": [],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 75 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 2 families (Josefin Slab, Sacramento), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections\\11_Boho_Pampas\\assets\\gpt\\photos (PAKET 2))",
+  "index@360: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@360: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@360: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@360: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@390: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@430: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@430: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@430: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@430: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@768: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@768: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@768: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@768: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@1280: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@1280: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "story@1280: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@1280: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots placeholder",
+  "story@390 (no photos): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots preview-placeholder",
+  "envelope closed @360×640: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (20 pieces, CTA \"RSVP\" bottom 516, names 48.6 px) ends at 516, above the nav (top 569)",
+  "home@360×640: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "home @375×553: home-hero (20 pieces, CTA \"RSVP\" bottom 439, names 42 px) ends at 439, above the nav (top 482)",
+  "home@375×553: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "home @360×640 (design range): names 42.8 px (≥ 32); nothing partly under the nav (top 569): the first screen ends at 549; CTA \"RSVP\" bottom 549",
+  "home@360×640 (design range): no overflow, 33 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "home @375×553 (design range): names 39.5 px (≥ 32); nothing partly under the nav (top 482): the first screen ends at 472; CTA \"RSVP\" bottom 472",
+  "home@375×553 (design range): no overflow, 33 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "home @360×640 (stress record): names 32 px (≥ 32); the first screen ends at 537, above the nav (top 569)",
+  "home@360×640 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "home @375×553 (stress record): names 32 px (≥ 32); the first screen ends at 473, above the nav (top 482)",
+  "home@375×553 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 250×49, rsvp \"Replay the envelope\" 203×49",
+  "envelope → /luna-and-river/home in 11728 ms, card transition flag set",
+  "home first scene (home-hero): sequential entrance finished (12 steps)",
+  "countdown target from the platform: 2027-04-17 16:00 America/Los_Angeles = 2027-04-17 23:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-04-18T00:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-04-22T23:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "index@360 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots placeholder",
+  "story@360 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 37 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots placeholder",
+  "story@390 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 37 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 7 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 35 fields = content record, 11 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 36 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 7 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 11 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 75 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 1142 KB",
+  "home first view (390×844, DPR 3, placeholders): 1050 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 1242 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1272 KB"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections\\11_Boho_Pampas",
+   "demo_record": "platform\\themes\\boho-pampas-terracotta\\content.demo.json",
+   "photos": "collections\\11_Boho_Pampas\\assets\\gpt\\photos (PAKET 2)",
+   "w1_comps": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "compare": "w1",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (card_small, invitation_card, info_card)",
+   "fonts": [
+    "Josefin Slab 400/600/italic 400/italic 600",
+    "Sacramento"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 75,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (196 KB, 944×1536, variants 640)",
+   "story_1 → media.memory_photos.0 (224 KB, 945×1536, variants 640)",
+   "story_2 → media.memory_photos.1 (218 KB, 945×1536, variants 640)",
+   "story_3 → media.memory_photos.2 (203 KB, 945×1536, variants 640)",
+   "venue → media.venue_image (268 KB, 1536×857, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.11,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.15,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.15,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.25,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.11,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.15,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.08,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.19,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.09,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.14,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.17,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.24,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.16,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.12,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.19,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.28,
+      "dark": 0
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 569,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 516,
+    "above": 516,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 516
+    },
+    "bad": [],
+    "partly": [],
+    "names": 48.6
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 482,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 439,
+    "above": 439,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 439
+    },
+    "bad": [],
+    "partly": [],
+    "names": 42
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 327,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 314,
+    "above": 314,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 286
+    },
+    "bad": [],
+    "partly": [],
+    "names": 42.9
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 312,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 299,
+    "above": 299,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 276
+    },
+    "bad": [],
+    "partly": [],
+    "names": 41.3
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 569,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 549,
+    "above": 549,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 549
+    },
+    "bad": [],
+    "partly": [],
+    "names": 42.8
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 482,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 472,
+    "above": 472,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 472
+    },
+    "bad": [],
+    "partly": [],
+    "names": 39.5
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 327,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 316,
+    "above": 316,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 316
+    },
+    "bad": [],
+    "partly": [],
+    "names": 37.8
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 312,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 303,
+    "above": 303,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 303
+    },
+    "bad": [],
+    "partly": [],
+    "names": 33.8
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 569,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 537,
+    "above": 537,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 537
+    },
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 482,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 473,
+    "above": 473,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 473
+    },
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 327,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 319,
+    "above": 319,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 319
+    },
+    "bad": [],
+    "partly": [],
+    "names": 35.2
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 312,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 425,
+    "above": 295,
+    "below": 387,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 269
+    },
+    "bad": [
+     "span.cd-num \"184\" bottom 409",
+     "span.cd-lbl \"Days\" bottom 425",
+     "span.cd-num \"12\" bottom 409",
+     "span.cd-lbl \"Hours\" bottom 425",
+     "span.cd-num \"11\" bottom 409",
+     "span.cd-lbl \"Minutes\" bottom 425",
+     "span.cd-num \"23\" bottom 409",
+     "span.cd-lbl \"Seconds\" bottom 425"
+    ],
+    "partly": [],
+    "names": 33.8
+   }
+  ],
+  "envelope_to_home_ms": 11728,
+  "home_card_first_frame": {
+   "opacity": null
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 75,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 1142,
+  "first_view_index_files": [
+   [
+    "/themes/boho-pampas-terracotta/img/decor_tl-960.webp",
+    223902
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/decor_br-940.webp",
+    182888
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/closure-640.webp",
+    118720
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/env_closed-648.webp",
+    116614
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/bg_page-1024.webp",
+    67386
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/env_body-648.webp",
+    61240
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/card_small-596.webp",
+    55736
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/env_cflap-648.webp",
+    49236
+   ]
+  ],
+  "first_view_home_kb_placeholders": 1050,
+  "first_view_home_files": [
+   [
+    "/themes/boho-pampas-terracotta/img/decor_tl-960.webp",
+    223902
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/decor_br-940.webp",
+    182888
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/invitation_card-877.webp",
+    137788
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/frame_portrait-640.webp",
+    69654
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/bg_page-1024.webp",
+    67386
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/card_small-596.webp",
+    55736
+   ],
+   [
+    "/themes/boho-pampas-terracotta/site.css",
+    44928
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/closure-320.webp",
+    36666
+   ]
+  ],
+  "first_view_index_kb_photos": 1242,
+  "first_view_index_files_photos": [
+   [
+    "/themes/boho-pampas-terracotta/img/decor_tl-960.webp",
+    223902
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/decor_br-940.webp",
+    182888
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/closure-640.webp",
+    118720
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/env_closed-648.webp",
+    116614
+   ],
+   [
+    "/media/4a422780-c9d6-40d5-a961-67c21298fda5/2505ff568c34e7a36105b77ad0325717-640w.jpg",
+    105414
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/bg_page-1024.webp",
+    67386
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/env_body-648.webp",
+    61240
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/card_small-596.webp",
+    55736
+   ]
+  ],
+  "first_view_home_kb_photos": 1272,
+  "first_view_home_files_photos": [
+   [
+    "/themes/boho-pampas-terracotta/img/decor_tl-960.webp",
+    223902
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/decor_br-940.webp",
+    182888
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/invitation_card-877.webp",
+    137788
+   ],
+   [
+    "/media/4a422780-c9d6-40d5-a961-67c21298fda5/753c9100462a6267ceaa31d28b3bad4e-640w.jpg",
+    124669
+   ],
+   [
+    "/media/4a422780-c9d6-40d5-a961-67c21298fda5/2505ff568c34e7a36105b77ad0325717-640w.jpg",
+    105414
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/frame_portrait-640.webp",
+    69654
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/bg_page-1024.webp",
+    67386
+   ],
+   [
+    "/themes/boho-pampas-terracotta/img/card_small-596.webp",
+    55736
+   ]
+  ],
+  "compare": {
+   "source": "w1",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ]
+  }
+ }
+}

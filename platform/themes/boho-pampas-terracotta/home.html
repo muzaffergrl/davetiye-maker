@@ -42,8 +42,8 @@
         <source media="(min-aspect-ratio: 3/4)" srcset="img/mist-640.webp">
         <img class="scene-img" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="218vw" alt="" fetchpriority="high">
       </picture>
-      <img class="corner corner-tl" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 48vh, 500px), min(48vw, 24vh, 300px)" alt="">
-      <img class="corner corner-br" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-940.webp 940w" sizes="(min-aspect-ratio: 3/4) min(30vw, 46vh, 460px), min(44vw, 24vh, 280px)" alt="">
+      <img class="corner corner-tl" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w, img/decor_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(32vw, 48vh, 500px), min(48vw, 24vh, 300px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-940.webp 940w" sizes="(min-aspect-ratio: 3/4) min(30vw, 46vh, 460px), min(44vw, 24vh, 280px)" alt="">
       <img class="float f-plume" data-step="decor" data-a="fade" src="img/accent_1-66.webp" alt="">
       <img class="float f-spear" data-step="decor" data-a="fade" src="img/accent_2-98.webp" alt="">
       <img class="float f-rose" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
@@ -136,7 +136,7 @@
   </section>
 
   <!-- THE OTHER PAGES (no W1 screen): three arch tiles in a row, like the story's arches — the portrait arch frame with the
-       first story photo, the arch day card with the first rows of the day, the pampas-and-palm tie (GPT frame_portrait,
+       first story photo, the arch day card (its first rows of the day written beside it, never on the painted card), the pampas-and-palm tie (GPT frame_portrait,
        info_card, closure). Phones: one tile per row, the arch beside its title -->
   <section class="section more-sec" data-scene="home-more" aria-label="More about the day">
     <div class="wrap more-wrap">
@@ -151,13 +151,10 @@
           <span class="tile-text"><span class="script t-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
         </a>
         <a class="tile t-day" href="details.html" aria-label="The Day: Details" data-attr-aria-label="{copy.day_title}: {copy.home_day_cue}" data-if="!thank_you_hides_details" data-step="tile" data-i="1" data-a="sunrise">
-          <span class="tile-art paper info day-mini" aria-hidden="true">
-            <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-747.webp 747w" sizes="(min-width: 640px) 172px, 34vw" alt="" loading="lazy">
-            <span class="paper-text">
-              <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="l" data-field=".label"></span> <span class="dot">·</span> <span class="t" data-field=".time"></span></span></span>
-            </span>
-          </span>
-          <span class="tile-text"><span class="script t-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span></span>
+          <span class="tile-art mini-card" aria-hidden="true"><img src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-747.webp 747w" sizes="(min-width: 640px) 132px, 28vw" alt="" loading="lazy"></span>
+          <span class="tile-text"><span class="script t-title" data-copy="day_title">The Day</span>
+            <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="l" data-field=".label"></span> <span class="dot">·</span> <span class="t" data-field=".time"></span></span></span>
+            <span class="kicker cue" data-copy="home_day_cue">Details</span></span>
         </a>
         <a class="tile t-rsvp" href="rsvp.html" data-if="!rsvp.method !thank_you_on" data-step="tile" data-i="2" data-a="sunrise">
           <span class="tile-art mini-tie" aria-hidden="true"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="(min-width: 640px) 110px, 22vw" alt="" loading="lazy"></span>
@@ -168,7 +165,7 @@
   </section>
 
   <footer class="foot" data-scene="home-foot">
-    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-940.webp 940w" sizes="min(56vw, 320px)" alt="" loading="lazy">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-720.webp 720w, img/decor_br-940.webp 940w" sizes="min(56vw, 320px)" alt="" loading="lazy">
     <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
     <p class="kicker" data-step="sign" data-a="fade" data-if="!thank_you_on" data-copy="foot_kicker">Until then</p>
     <p class="kicker" data-step="sign" data-a="fade" data-if="thank_you_on" data-copy="foot_kicker_after">With love</p>

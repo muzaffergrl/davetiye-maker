@@ -8,7 +8,7 @@
 .ty-decor > img { width: 64%; height: auto; display: block; translate: -4% 4%;
                   filter: drop-shadow(0 6px 7px rgba(80, 40, 15, .22)) drop-shadow(0 1px 1px rgba(80, 40, 15, .18)); }
 /* card copy: the thank-you title (≤ 60 characters) wraps in the brush script, the date under it */
-.card-copy .ty-title { font-family: var(--script); color: var(--rust); font-size: 11cqw; line-height: 1.02; text-wrap: balance;
+.card-copy .ty-title { font-family: var(--script); color: var(--rust); font-size: 9.6cqw; line-height: 1.02; text-wrap: balance;
                        overflow-wrap: break-word; max-width: 100%; }
 .card-copy[data-drop~="s"] .ty-title { font-size: 8.4cqw; }   /* site.js fitCopy: smaller, never dropped */
 /* the thank-you card (invitation_card paper): title, message, signature */

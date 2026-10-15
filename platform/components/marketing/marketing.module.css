@@ -664,6 +664,11 @@
   row-gap: 18px;
   align-items: center;
 }
+/* G093: the design chips (home) are a grid item of their own; heroes without chips (design pages) keep the template
+   above, so no empty row (and row gap) is added there. */
+.hero:has(> .chips) {
+  grid-template-areas: 'text' 'visual' 'chips' 'cta' 'foot';
+}
 .heroText {
   grid-area: text;
   min-width: 0;
@@ -730,6 +735,11 @@
     grid-template-rows: 1fr auto auto 1fr auto;
     column-gap: 72px;
     row-gap: 0;
+  }
+  /* G093: with design chips, they sit in the text column between the intro and the buttons. */
+  .hero:has(> .chips) {
+    grid-template-areas: '. visual' 'text visual' 'chips visual' 'cta visual' '. visual' 'foot foot';
+    grid-template-rows: 1fr auto auto auto 1fr auto;
   }
   .heroCta {
     justify-content: flex-start;
@@ -820,6 +830,8 @@
   gap: 10px;
 }
 .chips {
+  grid-area: chips; /* G093: a grid item of .hero (under the poster on phones, in the text column on wide screens) */
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -857,8 +869,9 @@
     align-self: stretch;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    /* 6 px above and below: room for the focus ring inside the scroller */
-    margin: -4px calc(-1 * var(--gutter));
+    /* 6 px above and below: room for the focus ring inside the scroller. G093: the top margin also takes back the
+       hero's row gap (18 px) down to the poster gap the chips had inside .heroVisual (14 px). */
+    margin: -8px calc(-1 * var(--gutter)) -4px;
     /* G085: the right edge fades out over 48 px, so a chip visibly runs off the screen at every width (with five
        names only ~12 px of the third chip showed at 360 px). End padding and scroll padding = the fade: scrolled to the
        end, or focused, a chip stands clear of it. The left fade covers the gutter only (the first chip is not dimmed). */
@@ -887,14 +900,19 @@
   }
 }
 /* G085: wide screens, five names beside the text: compact chips wrap to two rows at 1280 px (three before), so the
-   poster column does not push the main button out of the first screen. */
+   poster column does not push the main button out of the first screen. G093: with eight names the chips wrapped to
+   four rows under the poster (six at 1024 px) and the button fell below the first screen; they now wrap in the wider
+   text column, left-aligned between the intro and the main button; 13 px names and 11 px side padding keep eight
+   chips in two rows at 1280 px (three at 1024 px). */
 @media (min-width: 1024px) {
   .chips {
+    justify-content: flex-start;
+    margin-top: 24px;
     gap: 8px;
   }
   .chip {
-    padding: 0 12px;
-    font-size: 14px;
+    padding: 0 11px;
+    font-size: 13px;
   }
 }
 .heroCaption {

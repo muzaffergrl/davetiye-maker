@@ -420,6 +420,258 @@
         "seconds": 10,
         "bytes": 428947
       }
+    },
+    "art-deco-black-tie": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/envelope-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/envelope-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/home-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/home-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/invitation-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/invitation-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/story-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/story-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/details-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/details-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/schedule-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/schedule-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/rsvp-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/rsvp-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/art-deco-black-tie/form-320.webp",
+            "480": "/marketing/designs/art-deco-black-tie/form-480.webp",
+            "640": "/marketing/designs/art-deco-black-tie/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/art-deco-black-tie/opening.mp4",
+        "poster": "/marketing/designs/art-deco-black-tie/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 452586
+      }
+    },
+    "burgundy-velvet-autumn": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/envelope-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/envelope-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/home-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/home-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/invitation-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/invitation-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/story-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/story-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/details-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/details-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/schedule-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/schedule-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/rsvp-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/rsvp-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/burgundy-velvet-autumn/form-320.webp",
+            "480": "/marketing/designs/burgundy-velvet-autumn/form-480.webp",
+            "640": "/marketing/designs/burgundy-velvet-autumn/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/burgundy-velvet-autumn/opening.mp4",
+        "poster": "/marketing/designs/burgundy-velvet-autumn/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 402245
+      }
+    },
+    "winter-evergreen": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/envelope-320.webp",
+            "480": "/marketing/designs/winter-evergreen/envelope-480.webp",
+            "640": "/marketing/designs/winter-evergreen/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/home-320.webp",
+            "480": "/marketing/designs/winter-evergreen/home-480.webp",
+            "640": "/marketing/designs/winter-evergreen/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/invitation-320.webp",
+            "480": "/marketing/designs/winter-evergreen/invitation-480.webp",
+            "640": "/marketing/designs/winter-evergreen/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/story-320.webp",
+            "480": "/marketing/designs/winter-evergreen/story-480.webp",
+            "640": "/marketing/designs/winter-evergreen/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/details-320.webp",
+            "480": "/marketing/designs/winter-evergreen/details-480.webp",
+            "640": "/marketing/designs/winter-evergreen/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/schedule-320.webp",
+            "480": "/marketing/designs/winter-evergreen/schedule-480.webp",
+            "640": "/marketing/designs/winter-evergreen/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/rsvp-320.webp",
+            "480": "/marketing/designs/winter-evergreen/rsvp-480.webp",
+            "640": "/marketing/designs/winter-evergreen/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/winter-evergreen/form-320.webp",
+            "480": "/marketing/designs/winter-evergreen/form-480.webp",
+            "640": "/marketing/designs/winter-evergreen/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/winter-evergreen/opening.mp4",
+        "poster": "/marketing/designs/winter-evergreen/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 517711
+      }
     }
   },
   "panel": {

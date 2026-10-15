@@ -1,0 +1,2107 @@
+{
+ "_note": "build_images.py çıktısı (tropical-destination); ölçüler px, kutular [x, y, w, h], box_pct yüzde. stage.* yüzdeleri sahne kutusuna göre (docs/11 §7.1)",
+ "env_closed": {
+  "src_size": [
+   567,
+   900
+  ],
+  "ratio": 0.63,
+  "files": [
+   {
+    "file": "env_closed-440.webp",
+    "w": 440,
+    "h": 698,
+    "bytes": 35892
+   },
+   {
+    "file": "env_closed-567.webp",
+    "w": 567,
+    "h": 900,
+    "bytes": 57688
+   }
+  ],
+  "canvas_box": [
+   228,
+   555,
+   795,
+   1455
+  ]
+ },
+ "env_cflap": {
+  "src_size": [
+   567,
+   470
+  ],
+  "ratio": 1.20638,
+  "files": [
+   {
+    "file": "env_cflap-440.webp",
+    "w": 440,
+    "h": 365,
+    "bytes": 19994
+   },
+   {
+    "file": "env_cflap-567.webp",
+    "w": 567,
+    "h": 470,
+    "bytes": 29348
+   }
+  ],
+  "canvas_box": [
+   228,
+   555,
+   795,
+   1025
+  ]
+ },
+ "env_flap": {
+  "src_size": [
+   567,
+   528
+  ],
+  "ratio": 1.07386,
+  "files": [
+   {
+    "file": "env_flap-440.webp",
+    "w": 440,
+    "h": 410,
+    "bytes": 29658
+   },
+   {
+    "file": "env_flap-567.webp",
+    "w": 567,
+    "h": 528,
+    "bytes": 40716
+   }
+  ],
+  "canvas_box": [
+   228,
+   41,
+   795,
+   569
+  ]
+ },
+ "env_body": {
+  "src_size": [
+   567,
+   897
+  ],
+  "ratio": 0.63211,
+  "files": [
+   {
+    "file": "env_body-440.webp",
+    "w": 440,
+    "h": 696,
+    "bytes": 42772
+   },
+   {
+    "file": "env_body-567.webp",
+    "w": 567,
+    "h": 897,
+    "bytes": 60720
+   }
+  ],
+  "canvas_box": [
+   228,
+   558,
+   795,
+   1455
+  ]
+ },
+ "env_pocket": {
+  "src_size": [
+   567,
+   718
+  ],
+  "ratio": 0.78969,
+  "files": [
+   {
+    "file": "env_pocket-440.webp",
+    "w": 440,
+    "h": 557,
+    "bytes": 18618
+   },
+   {
+    "file": "env_pocket-567.webp",
+    "w": 567,
+    "h": 718,
+    "bytes": 27374
+   }
+  ],
+  "canvas_box": [
+   228,
+   737,
+   795,
+   1455
+  ]
+ },
+ "closure": {
+  "src_size": [
+   1087,
+   1116
+  ],
+  "ratio": 0.97401,
+  "files": [
+   {
+    "file": "closure-320.webp",
+    "w": 320,
+    "h": 329,
+    "bytes": 19972
+   },
+   {
+    "file": "closure-640.webp",
+    "w": 640,
+    "h": 657,
+    "bytes": 56050
+   }
+  ],
+  "anchor": "the rounded flap's lowest point under the leather strap (ellipse bottom on the strap axis)",
+  "anchor_px": [
+   512.5,
+   929.9
+  ],
+  "ball_center_px": [
+   512.5,
+   855.9
+  ],
+  "center_pct": [
+   63.54,
+   58.893
+  ],
+  "width_pct": 43.953,
+  "scale": 0.22927,
+  "ball_in_closure_px": [
+   344.0,
+   540.0
+  ],
+  "ball_d_closure_px": 294,
+  "pivot_in_crop_pct": [
+   19.595,
+   43.011
+  ],
+  "measured_from": "comps/web_1_envelope.png",
+  "comp": {
+   "env_w": 382.0,
+   "closure_w_over_env_w": 0.445,
+   "ball_center_minus_tip_over_env_w": -0.1322,
+   "remeasured": {
+    "ball_center": [
+     520.5,
+     820.5
+    ],
+    "strap_axis_x": 512.0,
+    "strap_cols": [
+     480,
+     544
+    ]
+   }
+  },
+  "carried_by_flap": false,
+  "motion": "the brass snap pops, the plumeria tab swings away about the snap and leaves (MOTION.envelope.closure) before the flap lifts"
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1584
+  ],
+  "canvas_top_pad": 48,
+  "box": [
+   228,
+   41,
+   567,
+   1414
+  ],
+  "ratio": 0.40099,
+  "parts": {
+   "env_closed": [
+    0.0,
+    36.351,
+    100.0,
+    63.649
+   ],
+   "env_cflap": [
+    0.0,
+    36.351,
+    100.0,
+    33.239
+   ],
+   "env_flap": [
+    0.0,
+    0.0,
+    100.0,
+    37.341
+   ],
+   "env_body": [
+    0.0,
+    36.563,
+    100.0,
+    63.437
+   ],
+   "env_pocket": [
+    0.0,
+    49.222,
+    100.0,
+    50.778
+   ],
+   "closure": [
+    41.564,
+    49.846,
+    43.953,
+    18.095
+   ],
+   "card": [
+    21.446,
+    41.245,
+    57.284,
+    53.481
+   ]
+  },
+  "hinge_pct": 36.846,
+  "hinge_in_cflap_pct": 1.489,
+  "body_bottom_pct": 99.929,
+  "closed_obj": {
+   "box_pct": [
+    0.705,
+    36.421,
+    98.765,
+    63.508
+   ],
+   "aspect": 0.6236,
+   "frac_w": 0.98765,
+   "top_frac_of_stage_w": 0.90829,
+   "bottom_frac_of_stage_w": 0.00176
+  },
+  "card_path": {
+   "out_translate_pct": -74.878,
+   "front_translate_pct": -71.878,
+   "front_scale": 1.05,
+   "pocket_edge_at_card_corners": 844.4,
+   "card_w_of_env": 0.58,
+   "pocket_edge_at_window": 896.8,
+   "photo_above_pocket": 0.04
+  },
+  "cuts": {
+   "cflap": {
+    "method": "renk",
+    "shape": "egri (elips) + kayış",
+    "detector": "sütun başına en güçlü parlaklık düşüşü (kapak kenar gölgesi), kayış sütunları dışında; aykırısız eksen hizalı elips; elips ± 10 px iz; dik yanlar elipsten",
+    "hinge_row": 562,
+    "ellipse": {
+     "xc": 511.9,
+     "yc": 689.9,
+     "a": 267.4,
+     "b": 240.0,
+     "points": 216,
+     "kept": 194
+    },
+    "columns": [
+     232,
+     791
+    ],
+    "traced_columns": 414,
+    "from_fit_columns": 146,
+    "trace_minus_fit_px_p50_p95": [
+     1.24,
+     2.66
+    ],
+    "strap": {
+     "columns": [
+      465,
+      560
+     ],
+     "axis_x": 512.5,
+     "rows": [
+      556,
+      1022
+     ],
+     "px": 45892
+    },
+    "tip": [
+     512.5,
+     929.9
+    ],
+    "rows": [
+     562,
+     1024
+    ],
+    "warnings": []
+   },
+   "pocket": {
+    "method": "renk",
+    "shape": "egri",
+    "body": [
+     234,
+     577,
+     794,
+     1454
+    ],
+    "curve": [
+     -0.00198,
+     2.033983,
+     383.19031
+    ],
+    "points": 555,
+    "kept": 354,
+    "lowered_columns": 180,
+    "liner_below_edge_px": 0,
+    "edge_at": {
+     "x0": 751.7,
+     "mid": 906.6,
+     "x1": 750.9
+    },
+    "warnings": []
+   }
+  },
+  "checks": {
+   "open_layers_overlap_diff": 0.00466,
+   "cflap_outside_closed_px": 0
+  },
+  "align_fix": {
+   "open_scale": [
+    0.99822,
+    1.01595
+   ],
+   "open_offset_px": [
+    -1.6,
+    -24.2
+   ],
+   "open_body_before": [
+    234,
+    577,
+    795,
+    1455
+   ],
+   "closed_body": [
+    232,
+    562,
+    792,
+    1454
+   ],
+   "open_fold_row": 577,
+   "fold_step": 36.4,
+   "reason": "açık görselin katlanma satırı ve gövde kenarları kapalı zarfın menteşe satırı ve kenarlarına ölçülen ölçek + ötelemeyle oturtulur (90°'de aynı menteşe)",
+   "after_px": {
+    "left": 0,
+    "right": -1,
+    "bottom": 0
+   }
+  }
+ },
+ "card_small": {
+  "src_size": [
+   527,
+   1227
+  ],
+  "ratio": 0.4295,
+  "files": [
+   {
+    "file": "card_small-320.webp",
+    "w": 320,
+    "h": 745,
+    "bytes": 15428,
+    "window_visible_px": 0
+   },
+   {
+    "file": "card_small-527.webp",
+    "w": 527,
+    "h": 1227,
+    "bytes": 37634,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   88,
+   424,
+   351,
+   458
+  ],
+  "leke_px": 0,
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    null,
+    null
+   ],
+   [
+    2.0,
+    null,
+    null
+   ],
+   [
+    3.0,
+    null,
+    null
+   ],
+   [
+    4.0,
+    null,
+    null
+   ],
+   [
+    5.0,
+    null,
+    null
+   ],
+   [
+    6.0,
+    null,
+    null
+   ],
+   [
+    7.0,
+    null,
+    null
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    null,
+    null
+   ],
+   [
+    10.0,
+    null,
+    null
+   ],
+   [
+    11.0,
+    null,
+    null
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    null,
+    null
+   ],
+   [
+    14.0,
+    null,
+    null
+   ],
+   [
+    15.0,
+    null,
+    null
+   ],
+   [
+    16.0,
+    null,
+    null
+   ],
+   [
+    17.0,
+    null,
+    null
+   ],
+   [
+    18.0,
+    null,
+    null
+   ],
+   [
+    19.0,
+    null,
+    null
+   ],
+   [
+    20.0,
+    null,
+    null
+   ],
+   [
+    21.0,
+    null,
+    null
+   ],
+   [
+    22.0,
+    null,
+    null
+   ],
+   [
+    23.0,
+    null,
+    null
+   ],
+   [
+    24.0,
+    null,
+    null
+   ],
+   [
+    25.0,
+    null,
+    null
+   ],
+   [
+    26.0,
+    null,
+    null
+   ],
+   [
+    27.0,
+    null,
+    null
+   ],
+   [
+    28.0,
+    null,
+    null
+   ],
+   [
+    29.0,
+    null,
+    null
+   ],
+   [
+    30.0,
+    null,
+    null
+   ],
+   [
+    31.0,
+    null,
+    null
+   ],
+   [
+    32.0,
+    null,
+    null
+   ],
+   [
+    33.0,
+    3.42,
+    96.02
+   ],
+   [
+    34.0,
+    null,
+    null
+   ],
+   [
+    35.0,
+    null,
+    null
+   ],
+   [
+    36.0,
+    null,
+    null
+   ],
+   [
+    37.0,
+    null,
+    null
+   ],
+   [
+    38.0,
+    null,
+    null
+   ],
+   [
+    39.0,
+    null,
+    null
+   ],
+   [
+    40.0,
+    null,
+    null
+   ],
+   [
+    41.0,
+    null,
+    null
+   ],
+   [
+    42.0,
+    null,
+    null
+   ],
+   [
+    43.0,
+    null,
+    null
+   ],
+   [
+    44.0,
+    null,
+    null
+   ],
+   [
+    45.0,
+    null,
+    null
+   ],
+   [
+    46.0,
+    null,
+    null
+   ],
+   [
+    47.0,
+    null,
+    null
+   ],
+   [
+    48.0,
+    null,
+    null
+   ],
+   [
+    49.0,
+    null,
+    null
+   ],
+   [
+    50.0,
+    null,
+    null
+   ],
+   [
+    51.0,
+    null,
+    null
+   ],
+   [
+    52.0,
+    null,
+    null
+   ],
+   [
+    53.0,
+    null,
+    null
+   ],
+   [
+    54.0,
+    null,
+    null
+   ],
+   [
+    55.0,
+    null,
+    null
+   ],
+   [
+    56.0,
+    null,
+    null
+   ],
+   [
+    57.0,
+    null,
+    null
+   ],
+   [
+    58.0,
+    null,
+    null
+   ],
+   [
+    59.0,
+    null,
+    null
+   ],
+   [
+    60.0,
+    null,
+    null
+   ],
+   [
+    61.0,
+    null,
+    null
+   ],
+   [
+    62.0,
+    null,
+    null
+   ],
+   [
+    63.0,
+    null,
+    null
+   ],
+   [
+    64.0,
+    null,
+    null
+   ],
+   [
+    65.0,
+    null,
+    null
+   ],
+   [
+    66.0,
+    null,
+    null
+   ],
+   [
+    67.0,
+    null,
+    null
+   ],
+   [
+    68.0,
+    null,
+    null
+   ],
+   [
+    69.0,
+    null,
+    null
+   ],
+   [
+    70.0,
+    null,
+    null
+   ],
+   [
+    71.0,
+    null,
+    null
+   ],
+   [
+    72.0,
+    1.71,
+    97.53
+   ],
+   [
+    73.0,
+    1.71,
+    97.72
+   ],
+   [
+    74.0,
+    1.71,
+    97.53
+   ],
+   [
+    75.0,
+    1.71,
+    97.72
+   ],
+   [
+    76.0,
+    1.71,
+    97.53
+   ],
+   [
+    77.0,
+    1.71,
+    97.72
+   ],
+   [
+    78.0,
+    1.71,
+    97.72
+   ],
+   [
+    79.0,
+    1.71,
+    97.72
+   ],
+   [
+    80.0,
+    1.71,
+    97.53
+   ],
+   [
+    81.0,
+    1.71,
+    97.53
+   ],
+   [
+    82.0,
+    1.71,
+    97.72
+   ],
+   [
+    83.0,
+    1.71,
+    97.72
+   ],
+   [
+    84.0,
+    1.71,
+    97.72
+   ],
+   [
+    85.0,
+    1.71,
+    97.72
+   ],
+   [
+    86.0,
+    1.71,
+    97.72
+   ],
+   [
+    87.0,
+    1.71,
+    97.72
+   ],
+   [
+    88.0,
+    1.71,
+    97.53
+   ],
+   [
+    89.0,
+    1.71,
+    97.53
+   ],
+   [
+    90.0,
+    1.71,
+    97.53
+   ],
+   [
+    91.0,
+    1.71,
+    97.72
+   ],
+   [
+    92.0,
+    1.71,
+    97.53
+   ],
+   [
+    93.0,
+    1.71,
+    97.53
+   ],
+   [
+    94.0,
+    1.71,
+    97.72
+   ],
+   [
+    95.0,
+    1.71,
+    97.72
+   ],
+   [
+    96.0,
+    1.71,
+    97.53
+   ],
+   [
+    97.0,
+    1.71,
+    97.53
+   ],
+   [
+    98.0,
+    38.52,
+    60.72
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ]
+ },
+ "frame_portrait": {
+  "src_size": [
+   607,
+   1359
+  ],
+  "ratio": 0.44665,
+  "files": [
+   {
+    "file": "frame_portrait-320.webp",
+    "w": 320,
+    "h": 716,
+    "bytes": 23600,
+    "window_visible_px": 0
+   },
+   {
+    "file": "frame_portrait-607.webp",
+    "w": 607,
+    "h": 1359,
+    "bytes": 82586,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   69,
+   658,
+   470,
+   617
+  ],
+  "leke_px": 0,
+  "tag_top_pct": 44.15,
+  "string_top_pct": [
+   48.757,
+   0.0
+  ]
+ },
+ "frame_landscape": {
+  "src_size": [
+   1224,
+   574
+  ],
+  "ratio": 2.1324,
+  "files": [
+   {
+    "file": "frame_landscape-480.webp",
+    "w": 480,
+    "h": 225,
+    "bytes": 14520,
+    "window_visible_px": 0
+   },
+   {
+    "file": "frame_landscape-960.webp",
+    "w": 960,
+    "h": 450,
+    "bytes": 50070,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   475,
+   85,
+   662,
+   407
+  ],
+  "leke_px": 0
+ },
+ "photo_slots": {
+  "card": {
+   "box_pct": [
+    16.319,
+    34.393,
+    67.362,
+    37.653
+   ],
+   "aspect": 0.7684,
+   "box_px": [
+    355,
+    462
+   ],
+   "mask": "mask_card.png"
+  },
+  "portrait": {
+   "box_pct": [
+    11.038,
+    48.271,
+    78.089,
+    45.695
+   ],
+   "aspect": 0.7633,
+   "box_px": [
+    474,
+    621
+   ],
+   "mask": "mask_portrait.png"
+  },
+  "landscape": {
+   "box_pct": [
+    38.644,
+    14.46,
+    54.412,
+    71.603
+   ],
+   "aspect": 1.6204,
+   "box_px": [
+    666,
+    411
+   ],
+   "mask": "mask_landscape.png"
+  }
+ },
+ "info_card": {
+  "src_size": [
+   607,
+   1320
+  ],
+  "ratio": 0.45985,
+  "files": [
+   {
+    "file": "info_card-480.webp",
+    "w": 480,
+    "h": 1044,
+    "bytes": 33040
+   },
+   {
+    "file": "info_card-607.webp",
+    "w": 607,
+    "h": 1320,
+    "bytes": 59894
+   }
+  ],
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    42.01,
+    60.13
+   ],
+   [
+    2.0,
+    null,
+    null
+   ],
+   [
+    3.0,
+    48.43,
+    50.58
+   ],
+   [
+    4.0,
+    null,
+    null
+   ],
+   [
+    5.0,
+    null,
+    null
+   ],
+   [
+    6.0,
+    null,
+    null
+   ],
+   [
+    7.0,
+    null,
+    null
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    null,
+    null
+   ],
+   [
+    10.0,
+    null,
+    null
+   ],
+   [
+    11.0,
+    null,
+    null
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    null,
+    null
+   ],
+   [
+    14.0,
+    null,
+    null
+   ],
+   [
+    15.0,
+    null,
+    null
+   ],
+   [
+    16.0,
+    null,
+    null
+   ],
+   [
+    17.0,
+    null,
+    null
+   ],
+   [
+    18.0,
+    null,
+    null
+   ],
+   [
+    19.0,
+    null,
+    null
+   ],
+   [
+    20.0,
+    null,
+    null
+   ],
+   [
+    21.0,
+    1.65,
+    53.71
+   ],
+   [
+    22.0,
+    1.48,
+    98.35
+   ],
+   [
+    23.0,
+    1.48,
+    98.35
+   ],
+   [
+    24.0,
+    1.48,
+    98.35
+   ],
+   [
+    25.0,
+    1.48,
+    98.35
+   ],
+   [
+    26.0,
+    1.48,
+    98.35
+   ],
+   [
+    27.0,
+    1.48,
+    98.35
+   ],
+   [
+    28.0,
+    1.48,
+    98.35
+   ],
+   [
+    29.0,
+    1.48,
+    98.35
+   ],
+   [
+    30.0,
+    1.48,
+    98.35
+   ],
+   [
+    31.0,
+    1.48,
+    98.35
+   ],
+   [
+    32.0,
+    1.48,
+    98.35
+   ],
+   [
+    33.0,
+    1.48,
+    98.35
+   ],
+   [
+    34.0,
+    1.48,
+    98.35
+   ],
+   [
+    35.0,
+    1.48,
+    98.35
+   ],
+   [
+    36.0,
+    1.48,
+    98.35
+   ],
+   [
+    37.0,
+    1.48,
+    98.35
+   ],
+   [
+    38.0,
+    1.48,
+    98.35
+   ],
+   [
+    39.0,
+    1.48,
+    98.35
+   ],
+   [
+    40.0,
+    1.48,
+    98.35
+   ],
+   [
+    41.0,
+    1.48,
+    98.35
+   ],
+   [
+    42.0,
+    1.48,
+    98.35
+   ],
+   [
+    43.0,
+    1.48,
+    98.35
+   ],
+   [
+    44.0,
+    1.48,
+    98.35
+   ],
+   [
+    45.0,
+    1.48,
+    98.35
+   ],
+   [
+    46.0,
+    1.48,
+    98.35
+   ],
+   [
+    47.0,
+    1.48,
+    98.35
+   ],
+   [
+    48.0,
+    1.48,
+    98.35
+   ],
+   [
+    49.0,
+    1.48,
+    98.35
+   ],
+   [
+    50.0,
+    1.48,
+    98.35
+   ],
+   [
+    51.0,
+    1.48,
+    98.35
+   ],
+   [
+    52.0,
+    1.48,
+    98.35
+   ],
+   [
+    53.0,
+    1.48,
+    98.35
+   ],
+   [
+    54.0,
+    1.48,
+    98.35
+   ],
+   [
+    55.0,
+    1.48,
+    98.35
+   ],
+   [
+    56.0,
+    1.48,
+    98.35
+   ],
+   [
+    57.0,
+    1.48,
+    98.35
+   ],
+   [
+    58.0,
+    1.48,
+    98.35
+   ],
+   [
+    59.0,
+    1.48,
+    98.35
+   ],
+   [
+    60.0,
+    1.48,
+    98.35
+   ],
+   [
+    61.0,
+    1.48,
+    98.35
+   ],
+   [
+    62.0,
+    1.48,
+    98.35
+   ],
+   [
+    63.0,
+    1.48,
+    98.35
+   ],
+   [
+    64.0,
+    1.48,
+    98.35
+   ],
+   [
+    65.0,
+    1.48,
+    98.35
+   ],
+   [
+    66.0,
+    1.48,
+    98.35
+   ],
+   [
+    67.0,
+    1.48,
+    98.35
+   ],
+   [
+    68.0,
+    1.48,
+    98.35
+   ],
+   [
+    69.0,
+    1.48,
+    98.35
+   ],
+   [
+    70.0,
+    1.48,
+    98.35
+   ],
+   [
+    71.0,
+    1.48,
+    98.35
+   ],
+   [
+    72.0,
+    1.48,
+    98.35
+   ],
+   [
+    73.0,
+    1.48,
+    98.35
+   ],
+   [
+    74.0,
+    1.48,
+    98.35
+   ],
+   [
+    75.0,
+    1.48,
+    98.35
+   ],
+   [
+    76.0,
+    1.48,
+    98.35
+   ],
+   [
+    77.0,
+    1.48,
+    98.35
+   ],
+   [
+    78.0,
+    1.48,
+    98.35
+   ],
+   [
+    79.0,
+    1.48,
+    98.35
+   ],
+   [
+    80.0,
+    1.48,
+    98.35
+   ],
+   [
+    81.0,
+    1.48,
+    98.35
+   ],
+   [
+    82.0,
+    1.48,
+    98.35
+   ],
+   [
+    83.0,
+    1.48,
+    98.35
+   ],
+   [
+    84.0,
+    1.48,
+    98.35
+   ],
+   [
+    85.0,
+    1.48,
+    98.35
+   ],
+   [
+    86.0,
+    1.48,
+    98.35
+   ],
+   [
+    87.0,
+    1.48,
+    98.35
+   ],
+   [
+    88.0,
+    1.48,
+    98.35
+   ],
+   [
+    89.0,
+    1.48,
+    98.35
+   ],
+   [
+    90.0,
+    1.48,
+    98.35
+   ],
+   [
+    91.0,
+    1.48,
+    98.35
+   ],
+   [
+    92.0,
+    1.48,
+    98.35
+   ],
+   [
+    93.0,
+    1.48,
+    98.35
+   ],
+   [
+    94.0,
+    1.48,
+    98.35
+   ],
+   [
+    95.0,
+    1.48,
+    98.35
+   ],
+   [
+    96.0,
+    1.65,
+    98.35
+   ],
+   [
+    97.0,
+    1.65,
+    98.35
+   ],
+   [
+    98.0,
+    1.65,
+    69.19
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ],
+  "slices": {
+   "top_end_pct": 22.0,
+   "bottom_start_pct": 97.0,
+   "ratio": 0.45985,
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+  }
+ },
+ "florals_tl": {
+  "src_size": [
+   1148,
+   1098
+  ],
+  "ratio": 1.04554,
+  "files": [
+   {
+    "file": "florals_tl-480.webp",
+    "w": 480,
+    "h": 459,
+    "bytes": 62690
+   },
+   {
+    "file": "florals_tl-800.webp",
+    "w": 800,
+    "h": 765,
+    "bytes": 139034
+   },
+   {
+    "file": "florals_tl-960.webp",
+    "w": 960,
+    "h": 918,
+    "bytes": 186104
+   }
+  ],
+  "map16": "1ffc7ffe7ffffffffffffff7fff0ff00ff00ff00f700f200e000e00060006000"
+ },
+ "florals_br": {
+  "src_size": [
+   1226,
+   1223
+  ],
+  "ratio": 1.00245,
+  "files": [
+   {
+    "file": "florals_br-480.webp",
+    "w": 480,
+    "h": 479,
+    "bytes": 59724
+   },
+   {
+    "file": "florals_br-800.webp",
+    "w": 800,
+    "h": 798,
+    "bytes": 130906
+   },
+   {
+    "file": "florals_br-960.webp",
+    "w": 960,
+    "h": 958,
+    "bytes": 175466
+   }
+  ],
+  "map16": "0008000f001f001f001f001f007f007f03ff03ff0fff1fff7fffffffffff7fff"
+ },
+ "divider": {
+  "src_size": [
+   1052,
+   462
+  ],
+  "ratio": 2.27706,
+  "files": [
+   {
+    "file": "divider-300.webp",
+    "w": 300,
+    "h": 132,
+    "bytes": 15674
+   },
+   {
+    "file": "divider-600.webp",
+    "w": 600,
+    "h": 263,
+    "bytes": 38204
+   }
+  ]
+ },
+ "accent_1": {
+  "src_size": [
+   200,
+   189
+  ],
+  "ratio": 1.0582,
+  "files": [
+   {
+    "file": "accent_1-200.webp",
+    "w": 200,
+    "h": 189,
+    "bytes": 6368
+   }
+  ]
+ },
+ "accent_2": {
+  "src_size": [
+   200,
+   212
+  ],
+  "ratio": 0.9434,
+  "files": [
+   {
+    "file": "accent_2-200.webp",
+    "w": 200,
+    "h": 212,
+    "bytes": 17678
+   }
+  ]
+ },
+ "accent_3": {
+  "src_size": [
+   200,
+   192
+  ],
+  "ratio": 1.04167,
+  "files": [
+   {
+    "file": "accent_3-200.webp",
+    "w": 200,
+    "h": 192,
+    "bytes": 11804
+   }
+  ]
+ },
+ "lagoon": {
+  "src_size": [
+   504,
+   920
+  ],
+  "ratio": 0.54783,
+  "files": [
+   {
+    "file": "lagoon-504.webp",
+    "w": 504,
+    "h": 920,
+    "bytes": 2770
+   }
+  ],
+  "top_crop": [
+   520,
+   140,
+   1024,
+   640
+  ],
+  "bottom_crop": [
+   120,
+   560,
+   624,
+   1100
+  ],
+  "blend_px": 120,
+  "tone_top": "#DDFCF9",
+  "tone_bottom": "#BFF7F6"
+ },
+ "lagoon_wide": {
+  "src_size": [
+   710,
+   470
+  ],
+  "ratio": 1.51064,
+  "files": [
+   {
+    "file": "lagoon_wide-710.webp",
+    "w": 710,
+    "h": 470,
+    "bytes": 2040
+   }
+  ],
+  "crop": [
+   240,
+   450,
+   950,
+   920
+  ]
+ },
+ "bg_tile": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bg_tile-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1894
+   }
+  ],
+  "tone": [
+   231.9,
+   251.6,
+   247.6
+  ]
+ },
+ "page_color": "#E8FCF8",
+ "ph_hero_portrait": {
+  "src_size": [
+   640,
+   833
+  ],
+  "ratio": 0.76831,
+  "files": [
+   {
+    "file": "ph_hero_portrait-320.webp",
+    "w": 320,
+    "h": 416,
+    "bytes": 706
+   },
+   {
+    "file": "ph_hero_portrait-640.webp",
+    "w": 640,
+    "h": 833,
+    "bytes": 2146
+   }
+  ],
+  "aspect": 0.7684,
+  "crop": [
+   560,
+   260,
+   900,
+   704
+  ],
+  "min_lum": 235,
+  "decor_px": 0
+ },
+ "ph_story_1": {
+  "src_size": [
+   640,
+   838
+  ],
+  "ratio": 0.76372,
+  "files": [
+   {
+    "file": "ph_story_1-320.webp",
+    "w": 320,
+    "h": 419,
+    "bytes": 710
+   },
+   {
+    "file": "ph_story_1-640.webp",
+    "w": 640,
+    "h": 838,
+    "bytes": 2100
+   }
+  ],
+  "aspect": 0.7633,
+  "crop": [
+   420,
+   300,
+   760,
+   746
+  ],
+  "min_lum": 235,
+  "decor_px": 0
+ },
+ "ph_story_2": {
+  "src_size": [
+   640,
+   838
+  ],
+  "ratio": 0.76372,
+  "files": [
+   {
+    "file": "ph_story_2-320.webp",
+    "w": 320,
+    "h": 419,
+    "bytes": 684
+   },
+   {
+    "file": "ph_story_2-640.webp",
+    "w": 640,
+    "h": 838,
+    "bytes": 2064
+   }
+  ],
+  "aspect": 0.7633,
+  "crop": [
+   600,
+   420,
+   940,
+   866
+  ],
+  "min_lum": 234,
+  "decor_px": 0
+ },
+ "ph_story_3": {
+  "src_size": [
+   640,
+   838
+  ],
+  "ratio": 0.76372,
+  "files": [
+   {
+    "file": "ph_story_3-320.webp",
+    "w": 320,
+    "h": 419,
+    "bytes": 706
+   },
+   {
+    "file": "ph_story_3-640.webp",
+    "w": 640,
+    "h": 838,
+    "bytes": 2098
+   }
+  ],
+  "aspect": 0.7633,
+  "crop": [
+   300,
+   520,
+   640,
+   966
+  ],
+  "min_lum": 234,
+  "decor_px": 0
+ },
+ "ph_venue": {
+  "src_size": [
+   960,
+   592
+  ],
+  "ratio": 1.62162,
+  "files": [
+   {
+    "file": "ph_venue-480.webp",
+    "w": 480,
+    "h": 296,
+    "bytes": 764
+   },
+   {
+    "file": "ph_venue-960.webp",
+    "w": 960,
+    "h": 592,
+    "bytes": 2122
+   }
+  ],
+  "aspect": 1.6204,
+  "crop": [
+   200,
+   560,
+   780,
+   916
+  ],
+  "min_lum": 234,
+  "decor_px": 0
+ },
+ "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 125859
+ },
+ "favicon": {
+  "src_box": [
+   131,
+   60,
+   1087,
+   1116
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "source": "closure",
+  "file": "favicon.png",
+  "bytes": 39750
+ },
+ "align": {
+  "tip": "kapak",
+  "yontem": "tuval",
+  "tuval": [
+   1024,
+   1536
+  ],
+  "kenarlar": [
+   {
+    "kenar": "sol",
+    "kapali": 232.0,
+    "acik": 234.0,
+    "fark_px": 2.0,
+    "fark_pct": 0.2,
+    "durum": "tamam"
+   },
+   {
+    "kenar": "sağ",
+    "kapali": 793.0,
+    "acik": 795.0,
+    "fark_px": 2.0,
+    "fark_pct": 0.2,
+    "durum": "tamam"
+   },
+   {
+    "kenar": "alt",
+    "kapali": 1407.0,
+    "acik": 1407.0,
+    "fark_px": 0.0,
+    "fark_pct": 0.0,
+    "durum": "tamam"
+   }
+  ],
+  "uyarilar": [],
+  "esik": [
+   1.5,
+   4.0
+  ],
+  "durum": "tamam"
+ },
+ "cleanup": {
+  "envelope_closed": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 16857
+  },
+  "envelope_open": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 13587
+  },
+  "closure": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 36684
+  },
+  "card_small": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 11097
+  },
+  "frame_portrait": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 24181
+  },
+  "frame_landscape": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 21451
+  },
+  "info_card": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 17463
+  },
+  "florals_tl": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 91306
+  },
+  "florals_br": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 81069
+  },
+  "divider": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 43019
+  },
+  "accent_1": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 9260
+  },
+  "accent_2": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 26328
+  },
+  "accent_3": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 8258
+  }
+ },
+ "checks": {
+  "envelope_open_overlap_diff": 0.00466,
+  "green_px": 0,
+  "green_check": {
+   "chroma_key_px": 0,
+   "tema_build_yesil_gorunur_foliage_px": {
+    "accent_2-200.webp": 11819,
+    "closure-320.webp": 2306,
+    "closure-640.webp": 11851,
+    "divider-300.webp": 4454,
+    "divider-600.webp": 17037,
+    "env_body-440.webp": 28207,
+    "env_body-567.webp": 47322,
+    "env_flap-440.webp": 21316,
+    "env_flap-567.webp": 35818,
+    "florals_br-480.webp": 24127,
+    "florals_br-800.webp": 66616,
+    "florals_br-960.webp": 97424,
+    "florals_tl-480.webp": 19647,
+    "florals_tl-800.webp": 55944,
+    "florals_tl-960.webp": 81990,
+    "info_card-480.webp": 1791,
+    "info_card-607.webp": 3484
+   },
+   "note": "tema_build.yesil_gorunur canlı yaprak yeşilini de sayar; parlak kroma şartı (G ≥ 190, fazla ≥ 60) ile 0 — kroma_yesil()"
+  },
+  "windows_transparent": {
+   "card": [
+    0,
+    0
+   ],
+   "portrait": [
+    0,
+    0
+   ],
+   "landscape": [
+    0,
+    0
+   ]
+  }
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  }
+ }
+}
