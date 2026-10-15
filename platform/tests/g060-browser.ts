@@ -599,7 +599,7 @@ try {
     const first = page.locator('[data-testid="identity"] input').first();
     await first.fill('Hannah');
     const zero = await page.locator('[data-identity-class]').innerText();
-    check('rights 0: §11.8 text with [SUPPORT EMAIL] and [SHOP NAME]', zero.includes("You've used all 3 name and date changes") && zero.includes('[SUPPORT EMAIL]') && zero.includes('[SHOP NAME]'), zero);
+    check('rights 0: §11.8 text with the support email and the shop name (K33)', zero.includes("You've used all 3 name and date changes") && zero.includes('bkestudio@gmail.com') && zero.includes('BKE Studio'), zero);
     check('rights 0: the change button is disabled', await page.locator('[data-identity-submit]').isDisabled());
     await shot(page, '23_identity_no_rights');
     await first.fill('Clare');
@@ -692,7 +692,7 @@ try {
     await reissueKeys(adapter, fresh.site.id);
     await page.fill('#f-host_line', 'after the link changed');
     await page.waitForSelector('text=This edit link no longer works', { timeout: 15_000 });
-    check('401: full-screen "This edit link no longer works" + shop text', (await page.locator('main').innerText()).includes('[SHOP NAME]'));
+    check('401: full-screen "This edit link no longer works" + shop text', (await page.locator('main').innerText()).includes('BKE Studio on Etsy'));
     await page.goto(`${BASE}/edit/lost-link?k=wrong`);
     const nf = await page.locator('main').innerText();
     check('bad link page: "Lost your edit link?" with the honest sign-in text', nf.includes('Lost your edit link?') && nf.includes("Email sign-in isn't available yet"));

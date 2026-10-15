@@ -59,9 +59,13 @@ export function realEtsyUrl(url: string | null | undefined): string | null {
   }
 }
 
-/** Problems that block `launched: true` (empty list = ready). */
-export function launchProblems(cfg: MarketingConfig): string[] {
+/** Problems that block `launched: true` (empty list = ready). `env`: the build's environment (admin password, K33). */
+export function launchProblems(cfg: MarketingConfig, env: Record<string, string | undefined> = process.env): string[] {
   const out: string[] = [];
+  // K33: a short temporary admin password is allowed only before launch (lib/admin/auth.ts ADMIN_PASSWORD_MIN = 12).
+  if (env.ADMIN_PASSWORD !== undefined && env.ADMIN_PASSWORD.length < 12) {
+    out.push('ADMIN_PASSWORD is shorter than 12 characters: set a long shop admin password before launch (K33)');
+  }
   if (!real(cfg.brand.name)) out.push('brand.name is a placeholder');
   if (hasPlaceholder(cfg.brand.shortDescription)) out.push('brand.shortDescription contains a placeholder');
   if (cfg.brand.shortDescription.length > 160) out.push('brand.shortDescription is longer than 160 characters');

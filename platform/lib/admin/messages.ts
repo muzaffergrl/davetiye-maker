@@ -27,7 +27,7 @@ export interface MessageTemplate {
   body: (v: MessageVars) => string;
 }
 
-const sign = () => `Warmly,\n${MARKETING.etsy.shopName === '[SHOP NAME]' ? MARKETING.brand.name : MARKETING.etsy.shopName}`;
+const sign = () => `Warmly,\n${/^\[.*\]$/.test(MARKETING.etsy.shopName) ? MARKETING.brand.name : MARKETING.etsy.shopName}`;
 
 export const MESSAGE_TEMPLATES: MessageTemplate[] = [
   {

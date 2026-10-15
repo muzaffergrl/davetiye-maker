@@ -2,9 +2,9 @@
 import { cookies } from 'next/headers';
 import { ADMIN_COOKIE, adminConfig, verifySessionToken, type AdminConfig } from './auth.ts';
 
-export async function adminPageState(): Promise<{ config: AdminConfig['state']; signedIn: boolean }> {
+export async function adminPageState(): Promise<{ config: AdminConfig['state']; signedIn: boolean; temporaryPassword: boolean }> {
   const cfg = adminConfig();
-  if (cfg.state !== 'on') return { config: cfg.state, signedIn: false };
+  if (cfg.state !== 'on') return { config: cfg.state, signedIn: false, temporaryPassword: false };
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
-  return { config: 'on', signedIn: verifySessionToken(token, cfg.password) };
+  return { config: 'on', signedIn: verifySessionToken(token, cfg.password), temporaryPassword: cfg.temporary };
 }

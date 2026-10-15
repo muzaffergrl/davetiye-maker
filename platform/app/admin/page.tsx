@@ -28,6 +28,17 @@ export default async function AdminPage() {
   const { sites, counts } = await adminList();
   return (
     <AdminShell signedIn>
+      {state.temporaryPassword ? (
+        <div className={styles.callout} role="note" data-temporary-password="">
+          <p className={styles.calloutTitle} style={{ marginBottom: 4 }}>
+            Geçici kısa şifre
+          </p>
+          <p style={{ margin: 0 }}>
+            Panel şu an kısa bir şifreyle açık. Gerçek satışa (lansman) geçmeden önce en az 12 karakterli bir şifreye geçilmeli; kısa
+            şifreyle lansman build&apos;i durur.
+          </p>
+        </div>
+      ) : null}
       <h1 className={styles.h1}>Siteler</h1>
       <p className={styles.lead}>
         {counts.total} site · {counts.published} yayında · {counts.replies} RSVP yanıtı

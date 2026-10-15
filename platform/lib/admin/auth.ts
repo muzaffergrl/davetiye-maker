@@ -8,20 +8,27 @@
 // cross-site requests from carrying the cookie; the Origin check is the second lock.
 
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
+import { MARKETING } from '../marketing/config.ts';
 
 export const ADMIN_COOKIE = 'bke_admin';
 /** Sessions last 12 hours; the shop signs in again after that. */
 export const ADMIN_SESSION_MS = 12 * 60 * 60 * 1000;
-/** Shorter passwords leave the admin off (a guessable shared password would open every buyer's site). */
+/** Once the shop is launched, shorter passwords leave the admin off (a guessable shared password would open every buyer's site). */
 export const ADMIN_PASSWORD_MIN = 12;
+/**
+ * K33 (2026-10-15): before launch (MARKETING.launched false — demo and test sites only, no real buyers) the owner may use
+ * a short temporary password. The admin then shows a reminder, and `launched: true` refuses to build while the password
+ * is shorter than ADMIN_PASSWORD_MIN (lib/marketing/placeholders.ts launchProblems).
+ */
+export const ADMIN_PASSWORD_MIN_PRELAUNCH = 4;
 
-export type AdminConfig = { state: 'on'; password: string } | { state: 'off' } | { state: 'weak' };
+export type AdminConfig = { state: 'on'; password: string; temporary: boolean } | { state: 'off' } | { state: 'weak' };
 
-export function adminConfig(env: Record<string, string | undefined> = process.env): AdminConfig {
+export function adminConfig(env: Record<string, string | undefined> = process.env, launched: boolean = MARKETING.launched): AdminConfig {
   const password = env.ADMIN_PASSWORD ?? '';
   if (!password) return { state: 'off' };
-  if (password.length < ADMIN_PASSWORD_MIN) return { state: 'weak' };
-  return { state: 'on', password };
+  if (password.length < (launched ? ADMIN_PASSWORD_MIN : ADMIN_PASSWORD_MIN_PRELAUNCH)) return { state: 'weak' };
+  return { state: 'on', password, temporary: password.length < ADMIN_PASSWORD_MIN };
 }
 
 function sessionKey(password: string): Buffer {

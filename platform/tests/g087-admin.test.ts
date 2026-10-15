@@ -26,6 +26,8 @@ import { getDataAdapter } from '../lib/data/index.ts';
 import { LocalAdapter } from '../lib/data/local/index.ts';
 import { followWeddingDate } from '../lib/panel/model.ts';
 import { MemoryRateLimiter } from '../lib/rsvp/rate-limit.ts';
+import { MARKETING } from '../lib/marketing/config.ts';
+import { launchProblems } from '../lib/marketing/placeholders.ts';
 import { canEdit, createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { FakeBlobStore } from './fake-blob.ts';
 import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
@@ -86,10 +88,16 @@ function act(id: string, action: string, cookie: string, json: unknown = {}, ori
 
 // --- auth -------------------------------------------------------------------------------------------------------
 
-test('admin is off without a password and with a short one', () => {
+test('admin is off without a password; a short one only before launch (K33)', () => {
   assert.equal(adminConfig({}).state, 'off');
-  assert.equal(adminConfig({ ADMIN_PASSWORD: 'short' }).state, 'weak');
-  assert.equal(adminConfig({ ADMIN_PASSWORD: PASSWORD }).state, 'on');
+  assert.equal(adminConfig({ ADMIN_PASSWORD: '123' }, false).state, 'weak', 'under 4 characters: off even before launch');
+  assert.deepEqual(adminConfig({ ADMIN_PASSWORD: '1234' }, false), { state: 'on', password: '1234', temporary: true });
+  assert.equal(adminConfig({ ADMIN_PASSWORD: '1234' }, true).state, 'weak', 'launched: a short password leaves the admin off');
+  assert.deepEqual(adminConfig({ ADMIN_PASSWORD: PASSWORD }, true), { state: 'on', password: PASSWORD, temporary: false });
+  // the launch gate refuses a short admin password; a long one (or none) adds no problem
+  assert.ok(launchProblems(MARKETING, { ADMIN_PASSWORD: '1234' }).some((p) => p.includes('ADMIN_PASSWORD')));
+  assert.ok(!launchProblems(MARKETING, { ADMIN_PASSWORD: PASSWORD }).some((p) => p.includes('ADMIN_PASSWORD')));
+  assert.ok(!launchProblems(MARKETING, {}).some((p) => p.includes('ADMIN_PASSWORD')));
 });
 
 test('session token: valid, expired, tampered, other password', () => {

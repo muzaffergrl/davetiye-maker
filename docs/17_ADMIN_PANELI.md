@@ -4,8 +4,9 @@ Kullanıcı kararı K30: satın alma sonrası her iş **arayüzden** yapılır; 
 Adres: **`/admin`** (satış sitesiyle aynı alan adı). Dil: Türkçe (dükkânın dili); alıcıya giden mesajlar İngilizce.
 
 ## 1. Açma
-- Sunucu ortam değişkeni **`ADMIN_PASSWORD`** (en az 12 karakter). Yoksa ya da kısaysa `/admin` "Yönetim paneli kapalı" der,
-  giriş formu bile göstermez. Şifre repoya, log'a ve bu belgeye yazılmaz.
+- Sunucu ortam değişkeni **`ADMIN_PASSWORD`**. Yoksa `/admin` "Yönetim paneli kapalı" der, giriş formu bile göstermez. Şifre repoya,
+  log'a ve bu belgeye yazılmaz. **K33:** lansmandan önce (`MARKETING.launched` false) en az 4 karakter kabul edilir ve panelde
+  "Geçici kısa şifre" uyarısı çıkar; lansmanda en az 12 karakter şart — `launched: true` build'i kısa şifreyle durur, panel de kapanır.
 - Giriş: tek şifre → 12 saatlik oturum çerezi (`bke_admin`, HttpOnly, SameSite=Strict, https'te Secure). Şifre değişince bütün
   oturumlar düşer. Deneme sınırı: adres başına 15 dakikada 8, toplam saatte 40 (doğru ya da yanlış her deneme sayılır).
 - Sayfalar `noindex`, `no-store`, `no-referrer`, çerçeveye alınmaz (`frame-ancestors 'none'`). Yazma isteklerinde Origin kontrolü.
@@ -60,7 +61,8 @@ her site bir kart: durum rozetleri, isimler, adres + tasarım, sipariş no, olu�
   `platform/previews/g087/`.
 
 ## 6. Açık / sonra
-- Canlıda `ADMIN_PASSWORD` tanımlı değil → canlı admin kapalı; yayın + şifre G079 yayınıyla birlikte.
+- Canlıda `ADMIN_PASSWORD` henüz yok → canlı admin kapalı. Bulut oturumunun Vercel bağlantısı env eklerken 403 aldı; şifre ve yayın
+  yerel oturumun G079 4d adımında (değer kullanıcıdan alınır).
 - Yeni sipariş bildirimi (e-posta/push) yok: e-posta sağlayıcısı kararı (docs/10 §3). Şimdilik Yapılacak listesi.
 - Etsy API ile otomatik sipariş doğrulama (docs/10 §3) gelince "Siparişi onayla" adımı kendiliğinden kalkar.
 - Çok sayıda sitede liste her açılışta bütün kayıtları okur (blob); yüzlerce site için yeterli, binlerde sayfalama/indeks gerekir.
