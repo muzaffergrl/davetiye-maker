@@ -102,7 +102,13 @@ fotoğrafının yanındaki şeritten yalnız fotoğrafın alt kenarına kadar in
 "Replay the envelope" satırının altındaki bantta (`from: '.replay-line'`; ikinci QA: yol çiçeğin 1,6 boyu yukarıdan
 başlıyordu, çiçekler "Replay", isimler ve tarih satırının arkasından geçiyordu — başlangıç artık satırın altında,
 `fr.bottom + 1,6 × size[1]`). `MOTION.accents` grubu docs/11 §8'e üç anahtar ekler: `from` (seçici: o öğenin altından
-başlar), `to: 'avoid'` (avoid kutusunun altında biter), `over` (şerit yoksa bu öğenin üstünden düşer).
+başlar), `to: 'avoid'` (avoid kutusunun altında biter), `over` (şerit yoksa bu öğenin üstünden düşer), `text` (bu öğe
+avoid kutusunun yanında başlıyorsa şerit onun 4 px solunda biter). **Üçüncü QA:** yatay telefonda kart solda, isimler sağ
+sütunda; sağ şerit isim sütununu da kapsıyordu, varış çiçekleri isimlerin, tarihin, mekânın ve geri sayımın arkasından
+geçiyordu (QA'nın piksel ölçümü: 667×375'te 6 koşunun 6'sında, 4–64 karede, en çok 2 036 px; 844×390'da 5/6) → `text:
+'.hero .names'`: şerit kartla isim sütunu arasında; aynı ölçüm 640×360, 667×375, 740×360, 844×390 × 3 kayıt × 2 = 24 koşu:
+20'sinde 0, 4'ünde (aralık kaydı, `is-long`) geri sayım satırında tek kare (20–155 px, çiçek solarken); her koşuda iki çiçek
+düşer, dikey telefonda değişiklik yok (isimler kartın altında).
 
 Giriş ön ayarları (bu tasarımın): `type` (daktilo satırı: `clip-path` 18 adımda açılır), `write` (el yazısı soldan sağa),
 `drop` (kart/pul masaya yukarıdan, eğik ve derin gölgeyle düşer, gölge dinlenme gölgesine oturur), `stamp` (lastik damga gibi
@@ -117,7 +123,11 @@ vurulur), `strike` (posta damgası çerçevenin köşesine vurulur), `unfurl` (s
   ekranın altına iter (`--fold`: dekor hapın yanında kalır). Yalnız kart sığıyorsa (§12 stres isimleri, 320–375 px) kart ilk
   ekranda ortalanır. İlk ekran = `100svh` (araç çubukları hiçbir şeyi oynatmaz; paylaşılan önizlemede eksi platform çubuğu: `--vh`).
 - Kısa yatay (`min-aspect-ratio: 1/1` ve `max-height: 620px`): kart solda, isimler … hap sağ sütunda (ızgara); zarf sayfasında
-  açık zarf Enter / Replay'in yanında; kart her genişlikte ≥ 150 px (kopyası ≥ 11 px; küçük kartta satır düşer, `fitCopy`).
+  açık zarf Enter / Replay'in yanında; kart telefonda ve masaüstünde ≥ 150 px, kısa yatayda ilk ekrana göre
+  (`min((--vh − nav − 48 px) × 0,5886, 230 px)`, tabanı yok); kopyası ≥ 11 px, küçük kartta satır düşer (`fitCopy`).
+  **Üçüncü QA:** önizleme çubuğuyla (`--vh` = 324 px) 640×360 / 740×360'ta 150 px tabanı kartı nav zeminine soktu (3 kayıt:
+  kart 48–303, nav 293; RSVP hapı katlanıyordu) → kart 134 px, 48–276 / 53–280 (nav'ın ≥ 13 px üstünde), şehir satırı
+  düşer, kopya 12 / 11 px; demo'da hap yine ilk ekranda. 667×375 çubukla kart 150 → 143 px (alt kenar 303 → 291–295).
 - İsimler W1.2'deki gibi **tek satır**, %86'ya kadar küçülerek sığıyorsa (390 px'te "Margot & Henry" 41,3 → 40,5 px);
   sığmıyorsa eski kural (≤ 3,2 satır, taban 36 px).
 - **İsimlerin kuyrukları (ikinci QA):** Homemade Apple'ın "g", "y" kuyrukları satır kutusunun ~0,34 em altına iner ("Margot"un
@@ -142,7 +152,9 @@ vurulur), `strike` (posta damgası çerçevenin köşesine vurulur), `unfurl` (s
 - **Önizleme çubuğu (ikinci QA):** paylaşılan önizlemede platformun "Preview" çubuğu sayfanın üstünde akışta durur (~36–56 px).
   `site.js` yüksekliğini `--bar` yazar; `--vh: calc(100svh − var(--bar))` zarf sayfasının, hero'nun, iç sayfa zemininin
   (`.page-bg`) ve mektup genişliklerinin ilk ekranıdır. Önce önizlemede "Tap to open" kümenin üstündeydi (390×844 aralık
-  %12,8), 844×390'da hero kartı nav'ın altına iniyor, details/rsvp `.page-bg` kümesi nav bandına giriyordu.
+  %12,8), 844×390'da hero kartı nav'ın altına iniyor, details/rsvp `.page-bg` kümesi nav bandına giriyordu. İkinci turun
+  "önizlemede nav ihlali 0" iddiası 6 boyutluk ölçüme dayanıyordu; üçüncü QA 640×360 / 740×360'ta 6 yüklemede kartı nav
+  zemininde buldu (yukarıda, düzeltildi).
 
 ## İç sayfaların ilk ekranı (story, details, rsvp — G404 qa incelemesi)
 Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya da tamamen ilk ekranın altından başlar — nav
@@ -159,7 +171,21 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
   her şey oranla küçülür). Eski `--sg` (yalnız imzayı küçültüp daraltan, isimleri daha çok satıra saran) kalktı.
 - Yine sığmazsa birim ilk ekranın 6 px altından başlar — **sayfada tek katlama** (yeni katlama öncekileri siler: ikinci QA'da
   details'te listenin büyümesiyle ikinci, bayat bir itme kalıyordu, 148 + 87 px) ve katlananın üstündeki boşluk aynı sütunun
-  aralarına dağılır (her araya ≤ 72 px): ilk ekranda boş kâğıt kalmaz, mektubun içindeki boşluk ≈ nav bandı (80–90 px).
+  aralarına dağılır (her araya ≤ 72 px), mektubun içindeki boşluk ≈ nav bandı.
+- **Mektup yalnız başlığıyla kalmaz (üçüncü QA):** katlanacak birim mektubun ilk birimiyse (details: kart başlığı ya da ilk
+  program satırı — başlık listenin dışında olduğundan boşluğun dağılacağı üst birim yoktu; RSVP: başlık) imzanın adımları:
+  tam `--lift` (yatayda üst boşluk `--pt0 − lift`, önce `clamp(24px, …)` kaldırmayı 0–4 px'e indiriyordu), `.tight` (details:
+  kâğıdın üst boşluğu 26 → 20cqw — unutmabeni 17,7cqw'de biter —, başlık ve satırların satır aralığı 1,25, kicker → mektup
+  8 px), `--cw` %6 adımlarla ≥ 225 px; yine sığmazsa **bütün mektup** ilk ekranın 6 px altından başlar ve boşluk mektubun
+  üstüne gider (kicker ≤ 72 px aşağı). Kenar boşluğu çöküşü için itme iki kez uygulanır (kicker'ın alt boşluğu mektubun
+  üst boşluğuyla birleşiyordu). Ölçüm (QA'nın betikleri, 28 boyut × demo / aralık / zorlama × canlı / çubuk = 168 details
+  ilk ekranı): önce yatayda 11 ilk ekranda yalnız başlık — canlı zorlama 640×360 107 / 180 px (ilk ekranda boş kâğıt /
+  mektup içi aralık), 667×375 121 / 194, 740×360 107 / 180; çubukla demo ve aralık 640×360 / 740×360 72 / 145, zorlama
+  640×360 / 740×360 71 / 144, 667×375 85 / 158, 844×390 99 / 172 → **0**: 640×360, 667×375, 740×360, 844×390'ın 24
+  ekranının hepsinde başlık + en az ilk satır nav'ın üstünde, sonraki satır katlanır: 8–9 / 81–83 px (zorlama + çubuk
+  640×360 / 740×360: `.tight` ve `--cw` 310 px). Bütün katlamalar (90): ilk ekranda 7–25 px (25: 320×568 zorlama, dikey,
+  değişmedi), mektup içi 81–105 px. 568×320 (test boyutlarında değil): demo / aralık canlı sığar (`.tight`, `--cw` 258);
+  çubukla ve zorlama kaydıyla bütün mektup katlanır (ilk ekranda kicker + zemin).
 - Baş kümesi (`.page-corner.corner-tl`): başın yazılarına (story başlık/kicker/giriş, details kicker) değerse küçülür
   (`giveWay`; önce details 320×568 aralık "WEDNESDAY" %4,8).
 - Story: `tiles` çerçeve genişliğini (`--fw`) ilk sıra nav'ın üstünde bitecek en büyük değere ayarlar (ikili arama;
@@ -240,6 +266,9 @@ Kural (G402/G405 dersleri): ilk ekrandaki her parça nav'ın üstünde biter ya 
 | — | yanıt formu, kapanış ("Thank you"; yanıttan sonra gizlenir) | platform sözleşmesi |
 
 ## Bilinen sınırlar
+- **İlk ekran, üçüncü QA (QA'nın `sweep`'i, 28 boyut — 568×320 ve 375×553 eklendi — × 3 kayıt × canlı / çubuk × 5 sayfa =
+  840 yükleme):** nav'ın altında yarım parça 6 → **0** (672 nav'lı ilk ekran; eklenen 568×320'de önce 9 daha); details'te
+  yalnız başlıklı mektup 11 → 0; index / story / rsvp'nin 468 yüklemesi önceki ölçümle birebir aynı. Ayrıntı yukarıda.
 - **İlk ekran (ikinci QA'nın betikleriyle yeniden ölçüldü):** 4 sayfa × 18 boyut × demo/aralık/zorlama + 6 önizleme boyutu
   (çubuklu) × 3 kayıt = 288 ilk ekranda nav'ın altında yarım yazı/bağlantı/foto/görsel yok; nav bandında küme yok (önizlemede
   önce 18 ekranda `.page-bg` kümesi). RSVP imzası 72 ilk ekranın 53'ünde mühürle birlikte ilk ekranda (isimler ≥ 18,7 px);

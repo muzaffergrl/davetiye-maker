@@ -14,6 +14,7 @@ import sharp from 'sharp';
 import type { ContentRecord } from '../lib/content/types.ts';
 import { validateContent } from '../lib/content/validate.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
+import { withPreviewBar } from '../lib/site/render.ts';
 import { listThemes, loadTheme, type LoadedTheme, type PageName } from '../lib/theme/theme.ts';
 import { rangeRecord, stressRecord } from '../scripts/lib/theme-env.ts';
 import { PLATFORM_ROOT, REPO_ROOT, tinyPng, tmpDir } from './helpers.ts';
@@ -845,9 +846,11 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   assert.match(land![1], /\.hero-inner \{\s*display: grid; grid-template: 1fr repeat\(6, auto\) 1fr \/ auto minmax\(0, 460px\)/);
   assert.match(land![1], /\.hero-card-wrap \{ grid-area: 1 \/ 1 \/ -1;/);
   assert.match(land![1], /\.is-opened \.env-page \{[^}]*flex-direction: row;/, 'opened envelope beside Enter / Replay');
-  // the hero card never under 150 px (its copy stays ≥ 11 px)
+  // the hero card ≥ 150 px on phones and laptops; on short landscape screens it follows the first screen (third QA: with the
+  // preview bar the 150 px floor put the card 10 px into the nav ground at 640×360 / 740×360); its copy stays ≥ 11 px
   const widths = RULES.filter(([, s]) => s.trim() === '.hero-card-wrap').flatMap(([, , b]) => [...b.matchAll(/width: ([^;]+)/g)].map((m) => m[1]));
-  assert.ok(widths.length >= 3 && widths.every((w) => w.startsWith('clamp(150px')), widths.join(' | '));
+  assert.ok(widths.length >= 3 && widths.filter((w) => !w.startsWith('clamp(150px')).length === 1, widths.join(' | '));
+  assert.match(land![1], /\.hero-card-wrap \{[^}]*width: min\(\(var\(--vh\) - var\(--nav-h\) - 48px\) \* \.5886, 230px\);/);
   // clusters (qa review): whole — no mask, no clipping box; the hero's ends 8 px above the nav ground (26 px), smaller or
   // gone where its painted part would meet the hero's line boxes (site.js corner); page ends 8 px above the nav
   assert.match(rule('.hero .scene-bg .corner-br'), /bottom: 26px/);
@@ -867,7 +870,8 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   // the envelope page and the inner-page heads: the clusters give way to the texts too (qa: "You are invited", "Tap to
   // open", "WEDNESDAY" touched them); the preview bar comes off the first screen (--vh)
   assert.match(JS, /const ts = ink\(\[h1\.previousElementSibling, h1, hint\]\);\s*cs\.forEach\(\(c\) => giveWay\(c, ts\)\);/);
-  assert.match(JS, /if \(pc\) giveWay\(pc, ink\(list\.filter\(\(x\) => x\.parentNode === head\)\)\);/);
+  assert.match(JS, /hu = list\.filter\(\(x\) => x\.parentNode === head\);/);
+  assert.match(JS, /if \(pc\) giveWay\(pc, ink\(hu\)\);/);
   assert.match(JS, /root\.style\.setProperty\('--bar', \(document\.querySelector\('\[data-platform-preview-bar\]'\)\?\.offsetHeight \|\| 0\) \+ 'px'\)/);
   assert.match(CSS_NC, /--vh: calc\(100svh - var\(--bar, 0px\)\);/);
   for (const sel of ['.env-page', '.hero', '.page-bg']) assert.match(rule(sel), /var\(--vh\)/, `${sel}: the first screen without the preview bar`);
@@ -892,7 +896,15 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   assert.match(JS, /if \(cw > 225\) \{ head\.style\.setProperty\('--cw', \(cw = Math\.max\(225, cw \* 0\.94\)\) \+ 'px'\); continue; \}/);
   assert.ok(225 * 0.08 >= 18, 'names (8cqw) ≥ 18 px at the narrowest letter');
   assert.match(rule('.tight .pill .btn'), /min-height: 44px/, 'the pill keeps a 44 px target');
-  assert.match(JS, /units\.forEach\(\(x\) => \{ x\.style\.marginTop = ''; \}\);\s*const up = pk \?/, 'one push per page: any earlier one is stale');
+  assert.match(JS, /units\.forEach\(\(x\) => \{ x\.style\.marginTop = ''; \}\);\s*const gap = up\.length/, 'one push per page: any earlier one is stale');
+  // third QA: a letter never shows only its title — its first unit (details: the title or the first schedule row; RSVP: the
+  // title) gets the signature's steps (full lift, .tight, --cw ≥ 225), else the whole letter folds and the blank goes above it
+  assert.match(JS, /ld = u === sig \|\| !up\.length && u\.closest\('\[data-lift\] \.paper'\);/);
+  assert.match(JS, /if \(u !== sig\) up = hu, u = wrap;/);
+  assert.match(CSS_NC, /\.tight :is\(\.card-title, \.sched-row > \*\) \{ line-height: 1\.25; \}/);
+  assert.match(rule('.tight .info-text'), /padding-top: 20cqw/, 'the title stays under the pressed flower (17.7 % of the width)');
+  assert.match(rule('.details-top .tight'), /margin-top: -8px/);
+  assert.match(CSS_NC, /\.details-top \{ --pt0: clamp\(24px, 7svh, 80px\); padding-top: calc\(var\(--pt0\) - var\(--lift, 0px\)\); \}/, 'the full lift on landscape screens');
   assert.match(JS, /Math\.min\(72, \(limit - 1 - bottom\(u\.previousElementSibling\)\) \/ up\.length\)/, "the blank under the last piece above (a twine too)");
   // details: "packed" must win over the list's space-evenly (it did not: a stale second fold, qa 148 + 87 px)
   assert.match(CSS_NC, /\.paper \[data-pack\]\.packed \{ justify-content: flex-start; \}/);
@@ -904,6 +916,10 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   // particles (qa review): arrival and closing in their own section, behind its text (z 0) and clipped to it
   assert.match(CSS_NC, /\.hero > \.accent-layer, \.closing > \.accent-layer \{ position: absolute; z-index: 0; \}/);
   assert.match(JS, /accents\('arrive', 0, document\.querySelector\('\.hero'\)\)/);
+  // third QA: on landscape phones the arrival lane beside the card ends at the names column (the flowers passed behind the
+  // names, date, venue and countdown at 667×375 / 844×390)
+  assert.match(JS, /arrive: [^\n]*text: '\.hero \.names' \}\]/);
+  assert.match(JS, /flightPath\(g\.path, t && r && t\.top < r\.bottom \? t\.left - 4 : W,/);
   assert.match(JS, /accents\('closing', 0, closing\)/);
   assert.match(JS, /closing: \[\{[^\n]*from: '\.replay-line' \}/);
   // second QA: the path started 1.6 flower heights above its y0 — now the whole flower starts below the Replay line
@@ -1086,7 +1102,7 @@ test('15 privacy: sections the couple switched off leave nothing in any page sou
 // Skipped when Playwright or its browsers are not installed. Google Fonts load through the proxy when there is one (else
 // the fallback fonts: the rules hold either way, site.js measures). Reduced motion: every entrance at rest.
 type Probe = (p: any) => Promise<any>;
-async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number, probe?: Probe, motion?: boolean) => Promise<any>) => Promise<void>) {
+async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: PageName, content: unknown, w: number, h: number, probe?: Probe, motion?: boolean, bar?: boolean) => Promise<any>) => Promise<void>) {
   process.env.PLAYWRIGHT_BROWSERS_PATH ||= '/opt/pw-browsers';
   process.env.PLAYWRIGHT_DISABLE_FORCED_CHROMIUM_PROXIED_LOOPBACK ||= '1';
   const req = createRequire(import.meta.url);
@@ -1104,8 +1120,9 @@ async function withBrowser(t: { skip: (m: string) => void }, fn: (open: (page: P
   }
   const types: Record<string, string> = { '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
   try {
-    await fn(async (page, content, w, h, probe, motion) => {
-      const html = render(page, content).html;
+    await fn(async (page, content, w, h, probe, motion, bar) => {
+      // bar: the shared preview link's "Preview" bar (the platform's own markup, first in <body>)
+      const html = bar ? withPreviewBar(render(page, content).html, false) : render(page, content).html;
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: motion ? 'no-preference' : 'reduce', hasTouch: !!motion });
       const p = await ctx.newPage();
       await p.route('**/*', (route: any) => {
@@ -1311,6 +1328,50 @@ test('browser (second QA): hero and envelope text off the clusters, names off th
         }, true);
         assert.equal(f.length, 1, `index ${w}×${h}: ${f.length} flowers fall`);
         assert.ok(f[0].w >= 30 && f[0].over <= 0.3, `index ${w}×${h}: flower ${Math.round(f[0].w)} px, ${(100 * f[0].over).toFixed(0)} % over the photo`);
+      }
+    }
+  });
+});
+
+// third QA (2026-10-15): landscape phones, live and through the shared preview link (the platform's "Preview" bar on top)
+test('browser (third QA): the details letter never shows only its title on landscape screens; the hero card off the nav ground with the preview bar', async (t) => {
+  await withBrowser(t, async (open) => {
+    // 1 details (before: stress 640×360 107 px blank first screen / 180 px gap in the letter, 667×375 121 / 194, 740×360
+    // 107 / 180; with the bar demo 640×360 / 740×360 72 / 145, stress 71 / 144 … 844×390 99 / 172): the title and at least
+    // the first row above the nav, the next row folded with ≤ 16 px blank paper above the nav
+    const DET = (p: any) => p.evaluate(() => {
+      const r = (e: Element) => e.getBoundingClientRect(), nav = r(document.querySelector('.site-nav')!).top, vh = innerHeight;
+      const units = [...document.querySelectorAll('.day-card [data-fold]')].map((u) => [r(u).top, r(u).bottom]);
+      const on = units.filter(([, b]) => b <= nav), next = units.find(([tp]) => tp >= vh);
+      return { nav, vh, band: vh - nav, on: on.length, last: Math.max(...on.map(([, b]) => b)), next: next ? next[0] : null,
+        half: units.filter(([tp, b]) => tp < vh && b > nav).length, paper: r(document.querySelector('.day-card')!).top };
+    });
+    for (const [w, h] of [[640, 360], [667, 375], [740, 360], [844, 390]]) {
+      for (const [name, rec] of [['demo', demo()], ['stress', stressRecord(demo())]] as const) {
+        for (const bar of [false, true]) {
+          const m = await open('details', rec, w, h, DET, false, bar);
+          const at = `details ${w}×${h} ${name}${bar ? ' + preview bar' : ''}`;
+          assert.equal(m.half, 0, `${at}: a letter unit half under the nav`);
+          assert.ok(m.on >= 2, `${at}: ${m.on} unit(s) of the letter on the first screen (the title alone?)`);
+          assert.ok(m.nav - m.last <= 16, `${at}: ${Math.round(m.nav - m.last)} px blank paper on the first screen`);
+          if (m.next !== null) assert.ok(m.next - m.last <= m.band + 16, `${at}: ${Math.round(m.next - m.last)} px gap in the letter (nav band ${Math.round(m.band)})`);
+        }
+      }
+    }
+    // where even the tight letter's first row cannot fit (568×320, stress names + schedule), the whole letter folds
+    const low = await open('details', stressRecord(demo()), 568, 320, DET, false, true);
+    assert.ok(low.half === 0 && low.on === 0 && low.paper >= low.vh, `details 568×320 stress + bar: the letter starts ${Math.round(low.paper)} (screen ${low.vh})`);
+    // 2 home with the preview bar (before: 640×360 / 740×360, all three records: the card 48–303 px, nav 293 — 10 px into
+    // the nav ground, the RSVP pill folded): the card ends ≥ 8 px above the nav, its copy ≥ 11 px, nothing half under the nav
+    const HOME = (p: any) => p.evaluate(`(() => { const m = ${MEASURE}; const c = document.querySelector('.hero-card').getBoundingClientRect();
+      return { ...m, card: c.bottom, copy: Math.min(...[...document.querySelectorAll('.card-copy > *')].filter((e) => e.offsetParent).map((e) => parseFloat(getComputedStyle(e).fontSize))) }; })()`);
+    for (const [w, h] of [[640, 360], [740, 360], [667, 375], [844, 390]]) {
+      for (const [name, rec] of [['demo', demo()], ['range', rangeRecord(demo())], ['stress', stressRecord(demo())]] as const) {
+        const m = await open('home', rec, w, h, HOME, false, true);
+        const at = `home ${w}×${h} ${name} + preview bar`;
+        assert.deepEqual(m.half, [], `${at}: pieces half under the nav (top ${Math.round(m.nav)})`);
+        assert.ok(m.card <= m.nav - 8, `${at}: the card ends at ${Math.round(m.card)} (nav ${Math.round(m.nav)})`);
+        assert.ok(m.copy >= 11, `${at}: card copy ${m.copy} px`);
       }
     }
   });

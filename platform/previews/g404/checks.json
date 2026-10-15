@@ -78,7 +78,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 622, nav top 308)",
   "home@667×375 (stress record): no overflow, 42 fields = content record, 0 design texts, title ok, images loaded, text on 3 cards on paper, 2 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 60×44, home \"Replay the envelope\" 220×48, rsvp \"Replay the envelope\" 184×48",
-  "envelope → /margot-and-henry/home in 3806 ms, card transition flag set",
+  "envelope → /margot-and-henry/home in 3768 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (10 steps)",
   "countdown target from the platform: 2027-10-02 16:00 America/New_York = 2027-10-02 20:00 UTC",
@@ -100,7 +100,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-10-02T21:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-10-07T20:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (201 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (158 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 5 fields = content record, 0 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -120,7 +120,7 @@
   "details@390 (stress record): no overflow, 37 fields = content record, 0 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "rsvp@390 (stress record): no overflow, 6 fields = content record, 0 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 0 design texts at their max): every page at 360/390 without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 922 KB",
+  "index first view (390×844, DPR 3, placeholders): 923 KB",
   "home first view (390×844, DPR 3, placeholders): 1234 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 1016 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1416 KB"
@@ -454,11 +454,11 @@
      "p.hero-city.in.done \"Hudson, New York\" bottom 718",
      "span.cd-num \"349\" bottom 759",
      "span.cd-lbl \"Days\" bottom 774",
-     "span.cd-num \"19\" bottom 759",
+     "span.cd-num \"16\" bottom 759",
      "span.cd-lbl \"Hours\" bottom 774",
-     "span.cd-num \"21\" bottom 759",
+     "span.cd-num \"54\" bottom 759",
      "span.cd-lbl \"Minutes\" bottom 774",
-     "span.cd-num \"02\" bottom 759",
+     "span.cd-num \"20\" bottom 759",
      "span.cd-lbl \"Seconds\" bottom 774",
      "a.btn \"RSVP\" bottom 832"
     ],
@@ -486,11 +486,11 @@
      "p.hero-city.in.done \"Hudson, New York\" bottom 631",
      "span.cd-num \"349\" bottom 665",
      "span.cd-lbl \"Days\" bottom 680",
-     "span.cd-num \"19\" bottom 665",
+     "span.cd-num \"16\" bottom 665",
      "span.cd-lbl \"Hours\" bottom 680",
-     "span.cd-num \"20\" bottom 665",
+     "span.cd-num \"54\" bottom 665",
      "span.cd-lbl \"Minutes\" bottom 680",
-     "span.cd-num \"56\" bottom 665",
+     "span.cd-num \"14\" bottom 665",
      "span.cd-lbl \"Seconds\" bottom 680",
      "a.btn \"RSVP\" bottom 735"
     ],
@@ -564,11 +564,11 @@
      "p.hero-city.in.done \"Hudson, New York\" bottom 1230",
      "span.cd-num \"352\" bottom 1271",
      "span.cd-lbl \"Days\" bottom 1286",
-     "span.cd-num \"19\" bottom 1271",
+     "span.cd-num \"16\" bottom 1271",
      "span.cd-lbl \"Hours\" bottom 1286",
-     "span.cd-num \"20\" bottom 1271",
+     "span.cd-num \"53\" bottom 1271",
      "span.cd-lbl \"Minutes\" bottom 1286",
-     "span.cd-num \"37\" bottom 1271",
+     "span.cd-num \"56\" bottom 1271",
      "span.cd-lbl \"Seconds\" bottom 1286",
      "a.btn \"RSVP\" bottom 1344"
     ],
@@ -602,11 +602,11 @@
      "p.hero-city.in.done \"Hudson, New York\" bottom 1119",
      "span.cd-num \"352\" bottom 1153",
      "span.cd-lbl \"Days\" bottom 1168",
-     "span.cd-num \"19\" bottom 1153",
+     "span.cd-num \"16\" bottom 1153",
      "span.cd-lbl \"Hours\" bottom 1168",
-     "span.cd-num \"20\" bottom 1153",
+     "span.cd-num \"53\" bottom 1153",
      "span.cd-lbl \"Minutes\" bottom 1168",
-     "span.cd-num \"31\" bottom 1153",
+     "span.cd-num \"51\" bottom 1153",
      "span.cd-lbl \"Seconds\" bottom 1168",
      "a.btn \"RSVP\" bottom 1223"
     ],
@@ -634,11 +634,11 @@
      "p.hero-city.in.done \"Hudson, New York\" bottom 501",
      "span.cd-num \"352\" bottom 538",
      "span.cd-lbl \"Days\" bottom 555",
-     "span.cd-num \"19\" bottom 538",
+     "span.cd-num \"16\" bottom 538",
      "span.cd-lbl \"Hours\" bottom 555",
-     "span.cd-num \"20\" bottom 538",
+     "span.cd-num \"53\" bottom 538",
      "span.cd-lbl \"Minutes\" bottom 555",
-     "span.cd-num \"25\" bottom 538",
+     "span.cd-num \"45\" bottom 538",
      "span.cd-lbl \"Seconds\" bottom 555",
      "a.btn \"RSVP\" bottom 614"
     ],
@@ -669,11 +669,11 @@
      "p.hero-city.in.done \"Hudson, New York\" bottom 510",
      "span.cd-num \"352\" bottom 546",
      "span.cd-lbl \"Days\" bottom 563",
-     "span.cd-num \"19\" bottom 546",
+     "span.cd-num \"16\" bottom 546",
      "span.cd-lbl \"Hours\" bottom 563",
-     "span.cd-num \"20\" bottom 546",
+     "span.cd-num \"53\" bottom 546",
      "span.cd-lbl \"Minutes\" bottom 563",
-     "span.cd-num \"19\" bottom 546",
+     "span.cd-num \"39\" bottom 546",
      "span.cd-lbl \"Seconds\" bottom 563",
      "a.btn \"RSVP\" bottom 622"
     ],
@@ -681,7 +681,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 3806,
+  "envelope_to_home_ms": 3768,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -758,7 +758,7 @@
    "copy_keys_at_max": 0,
    "thank_you": false
   },
-  "first_view_index_kb_placeholders": 922,
+  "first_view_index_kb_placeholders": 923,
   "first_view_index_files": [
    [
     "/themes/vintage-airmail-love-letter/img/decor_br-760.webp",
@@ -790,7 +790,7 @@
    ],
    [
     "/themes/vintage-airmail-love-letter/site.css",
-    46032
+    46073
    ]
   ],
   "first_view_home_kb_placeholders": 1234,
@@ -843,7 +843,7 @@
     126758
    ],
    [
-    "/media/1a0438e6-c1b9-411f-9337-e92bddea32fd/5da4ee63e6d6d099ff8ba523600e4867-640w.jpg",
+    "/media/2922b4ff-f8d8-422c-8524-0643e9e04060/350354966c618f0a7718e49e1bf77b9e-640w.jpg",
     96219
    ],
    [
@@ -886,11 +886,11 @@
     96880
    ],
    [
-    "/media/1a0438e6-c1b9-411f-9337-e92bddea32fd/5da4ee63e6d6d099ff8ba523600e4867-640w.jpg",
+    "/media/2922b4ff-f8d8-422c-8524-0643e9e04060/350354966c618f0a7718e49e1bf77b9e-640w.jpg",
     96219
    ],
    [
-    "/media/1a0438e6-c1b9-411f-9337-e92bddea32fd/f9014310888542364f8c459f5d558e7e-640w.jpg",
+    "/media/2922b4ff-f8d8-422c-8524-0643e9e04060/7f48dbb9a7691b51061c4276a2d38c04-640w.jpg",
     93606
    ],
    [

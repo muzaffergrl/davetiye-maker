@@ -1,5 +1,5 @@
-/* site.js — Vintage Airmail Love Letter (04, G404). #site-data from the platform; DEV_CONTENT + devRender() only
- * without it. Hooks and reasons: README.md. */
+/* site.js — Vintage Airmail Love Letter (04, G404). #site-data from the platform, else DEV_CONTENT + devRender().
+ * Hooks and reasons: README.md. */
 const MOTION = {
  // ms [after the tap, duration]; scenes [[step, delay]]; accents docs/11 §8 + from/to/over (README)
  storage: { opened: 'invite:opened', arrive: 'invite:arrive' },
@@ -38,7 +38,7 @@ const MOTION = {
  arriveDelay: 0,
  accents: {
   open: [{ file: 'img/accent_2-200.webp', count: 1, path: 'fall', dur: [2300, 2300], size: [62, 74], avoid: '.env .card', over: '.env-open' }],
-  arrive: [{ file: 'img/accent_2-200.webp', count: 2, path: 'fall', dur: [3600, 4400], size: [34, 44], spread: 1400, avoid: '.hero [data-slot]', to: 'avoid' }],
+  arrive: [{ file: 'img/accent_2-200.webp', count: 2, path: 'fall', dur: [3600, 4400], size: [34, 44], spread: 1400, avoid: '.hero [data-slot]', to: 'avoid', text: '.hero .names' }],
   closing: [{ file: 'img/accent_1-200.webp', count: 1, path: 'fall', dur: [4600, 4600], size: [40, 40], from: '.replay-line' },
    { file: 'img/accent_2-200.webp', count: 2, path: 'fall', dur: [4200, 5200], size: [32, 40], spread: 1500, from: '.replay-line' }]
  }
@@ -84,7 +84,7 @@ const store = {
  get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
  set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
 };
-const rand = (a, b) => a + Math.random() * (b - a);
+const rand = (a, b) => a + Math.random() * (b - a), q = (s) => document.querySelector(s);
 const pos = (el) => { let x = 0, y = 0; for (let e = el; e; e = e.offsetParent) { x += e.offsetLeft; y += e.offsetTop; } return [x, y]; };
 const top = (el) => pos(el)[1], bottom = (el) => top(el) + el.offsetHeight;
 const sv = () => { const p = document.createElement('i'); p.style.cssText = 'position:fixed;height:100svh'; document.body.append(p); const h = p.offsetHeight; p.remove(); return h || innerHeight; };
@@ -95,13 +95,13 @@ const later = (run, ms) => {
  let t;
  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, ms); });
 };
-// line boxes (.btn, .card: the box), layout px (no entrance transform); top 12 %: the script's empty ascent
+// line boxes (.btn, .card: the box) in layout px (no entrance transform); top 12 %: script ascent
 const ink = (els) => els.flatMap((e) => {
  const b = e.getBoundingClientRect(), [x, y] = pos(e), r = document.createRange();
  r[e.matches('.btn, .card') ? 'selectNode' : 'selectNodeContents'](e);
  return [...r.getClientRects()].filter((q) => q.width > 1).map((q) => [q.left - b.left + x, q.top + q.height * 0.12 - b.top + y, q.right - b.left + x, q.bottom - b.top + y]);
 });
-// decor_br / _tl: h / w, painted left / right end per 24th of the height in 32nds of the width (α ≥ 40); README
+// decor_br / _tl: h / w; painted left / right end per 24th of h, in 32nds of w (α ≥ 40); README
 const EDGE = { br: [1.234, 'IIIIGFBAA:::898721300022'], tl: [1.105, 'FIOPPNNMMMGHHGECDCA;:965'] };
 const paints = (c, ts) => {
  const br = c.matches('.corner-br'), [k, E] = EDGE[br ? 'br' : 'tl'], w = c.offsetWidth, h = w * k, [x, y0] = pos(c), y = br ? y0 + c.offsetHeight - h : y0;
@@ -113,7 +113,8 @@ const paints = (c, ts) => {
 const giveWay = (c, ts) => { for (let w = c.offsetWidth; paints(c, ts); c.style.setProperty('--cw', w + 'px')) if ((w *= 0.94) < 64) return c.style.display = 'none'; };
 const unset = (e, ...ks) => e && ks.forEach((k) => e.style.removeProperty(k));
 
-// accents: a lane beside `avoid` (flower + sway shrink to fit, ≥ 36 px), else over `over`; a host keeps them behind text
+// accents: a lane beside `avoid` (up to `text` beside it; flower + sway shrink, ≥ 36 px), else over `over`; a host keeps them
+// behind text
 function flightPath(path, W, y0, H, s, i, av, ov) {
  const kf = [], N = 12, down = path !== 'rise', ph = rand(0, 6.28), r0 = rand(-30, 30), turn = rand(-140, 140);
  let sway = rand(16, 30), x0 = rand(0.08, 0.92) * W, drift = rand(-0.14, 0.14) * W;
@@ -140,12 +141,12 @@ function accents(moment, until, host) {
  layer.setAttribute('aria-hidden', 'true');
  (host || document.body).append(layer);
  const o = host ? host.getBoundingClientRect() : { left: 0, top: 0 }, W = host ? host.clientWidth : innerWidth;
- const rel = (s) => { const e = s && document.querySelector(s), r = e && e.getBoundingClientRect(); return r && { left: r.left - o.left, right: r.right - o.left, top: r.top - o.top, bottom: r.bottom - o.top }; };
+ const rel = (s) => { const e = s && q(s), r = e && e.getBoundingClientRect(); return r && { left: r.left - o.left, right: r.right - o.left, top: r.top - o.top, bottom: r.bottom - o.top }; };
  groups.forEach((g) => {
-  const r = rel(g.avoid), fr = rel(g.from);
+  const r = rel(g.avoid), fr = rel(g.from), t = rel(g.text);
   const y0 = fr ? fr.bottom + 1.6 * g.size[1] : 0, H = r && g.to ? r.bottom : host ? host.clientHeight : innerHeight;
   for (let i = 0; i < g.count; i++) {
-   const [kf, s] = flightPath(g.path, W, y0, H, rand(g.size[0], g.size[1]), i, r, rel(g.over)) || [];
+   const [kf, s] = flightPath(g.path, t && r && t.top < r.bottom ? t.left - 4 : W, y0, H, rand(g.size[0], g.size[1]), i, r, rel(g.over)) || [];
    if (!kf) continue;
    const img = Object.assign(new Image(), { src: asset(g.file), alt: '', decoding: 'async' }), delay = i * 700 + rand(0, g.spread || 0);
    img.style.width = s.toFixed(1) + 'px';
@@ -230,7 +231,7 @@ function initCountdown() {
  });
 }
 function toast(msg) {
- let t = document.querySelector('.toast');
+ let t = q('.toast');
  if (!t) { t = Object.assign(document.createElement('div'), { className: 'toast' }); t.setAttribute('role', 'status'); document.body.append(t); }
  t.textContent = msg;
  t.classList.add('show');
@@ -272,9 +273,9 @@ function fitPaper() {
 // long names, the hero's first screen (fold, corner), card copy (README)
 function fitNames() {
  const targets = [['.env-head .names', 5, 0.3, 20], ['.hero .names', 3.2, 0.3, 36]]
-  .map(([sel, ...a]) => [document.querySelector(sel), ...a]).filter(([el]) => el);
+  .map(([sel, ...a]) => [q(sel), ...a]).filter(([el]) => el);
  if (!targets.length) return;
- const inner = document.querySelector('.hero-inner'), nav = document.querySelector('.site-nav');
+ const inner = q('.hero-inner'), nav = q('.site-nav');
  const low = (h1) => {
   const hero = h1.closest('.hero');
   if (!hero || !inner || !nav) return false;
@@ -317,7 +318,7 @@ function fitNames() {
   for (let i = 0; i < 4 && c && top(c) < below - 0.5; i++, c = cut()) c.style.marginTop = `${parseFloat(getComputedStyle(c).marginTop) + below - top(c)}px`;
   if (keep) hero.style.setProperty('--fold', `${Math.max(0, hero.offsetHeight - end)}px`);
  };
- // lower-right cluster: 8 px above the nav ground, or above the nav if it would run across the first screen's end
+ // lower-right cluster: 8 px above the nav ground, or above the nav if it would cross the first screen's end
  const corner = (hero) => {
   const br = hero.querySelector('.scene-bg .corner-br'), lim = sv() - nav.offsetHeight - 8;
   if (!br) return;
@@ -343,13 +344,13 @@ function fitNames() {
  if (window.ResizeObserver) { const ro = new ResizeObserver(fitCopy); document.querySelectorAll('.card-copy').forEach((c) => ro.observe(c)); }
 }
 
-// inner pages: each [data-fold] unit ends above the nav or starts below the first screen (README): pack, lift the head,
-// RSVP: .tight, --cw ≥ 225; else one fold, its blank spread over the column; story: --fw for the first row
+// inner pages: each [data-fold] unit ends above the nav or starts below the first screen (README): pack, lift the head;
+// RSVP signature, a letter's first unit: .tight, --cw ≥ 225, else the letter folds whole (blank above); else one fold,
+// its blank spread over the column; story: --fw for the first row
 function folds() {
- const nav = document.querySelector('.site-nav'), units = [...document.querySelectorAll('main [data-fold]')];
+ const nav = q('.site-nav'), units = [...document.querySelectorAll('main [data-fold]')];
  if (!nav || !units.length) return;
- const head = document.querySelector('[data-lift]'), desk = document.querySelector('.desk'), sig = document.querySelector('.sig');
- const seal = document.querySelector('.card-seal'), wrap = sig && sig.closest('.wrap'), pc = head && head.querySelector('.corner-tl');
+ const head = q('[data-lift]'), desk = q('.desk'), sig = q('.sig'), seal = q('.card-seal'), wrap = q('[data-lift] .wrap'), pc = q('[data-lift] .corner-tl');
  const sl = (u) => +u.dataset.fold || 0, mt = (u) => parseFloat(getComputedStyle(u).marginTop);
  const tiles = (row, limit, lift) => {
   const figs = [...desk.querySelectorAll('.stamp')], f = figs[0];
@@ -366,36 +367,38 @@ function folds() {
   units.forEach((u) => { u.style.marginTop = ''; });
   document.querySelectorAll('.packed').forEach((p) => p.classList.remove('packed'));
   if (wrap) wrap.classList.remove('tight');
-  unset(head, '--lift', '--cw'); unset(desk, '--fw'); unset(pc, '--cw', 'display');
+  unset(head, '--lift', '--cw'); unset(desk, '--fw'); unset(pc, '--cw', 'display'); unset(wrap, 'margin-top');
   refit();
   const v = sv(), limit = v - nav.offsetHeight - 8;
   const row = desk && getComputedStyle(desk).display === 'grid';
   const list = units.filter((u) => u.offsetParent && (u === desk ? row : !(row && desk.contains(u))));
   const end = (u) => (u === sig && seal ? Math.max(bottom(u), bottom(seal)) : bottom(u)) + sl(u);
-  const cross = () => list.find((u) => top(u) - sl(u) < v && end(u) > limit);
-  if (desk) { tiles(row, limit, head ? 0.35 * parseFloat(getComputedStyle(head).paddingTop) : 0); refit(); }
+  const cross = () => list.find((u) => top(u) - sl(u) < v && end(u) > limit), hu = list.filter((x) => x.parentNode === head);
+  const max = head ? 0.35 * parseFloat(getComputedStyle(head).paddingTop) : 0;
+  if (desk) { tiles(row, limit, max); refit(); }
   let u, lifted, cw = wrap && wrap.offsetWidth;
   for (let i = 0; i < 48 && (u = cross()); i++, refit()) {
    const pk = u.parentElement.closest('[data-pack]');
    if (pk && !pk.classList.contains('packed')) { pk.classList.add('packed'); continue; }
+   let up = pk ? list.filter((x) => x !== u && pk.contains(x) && top(x) < top(u)) : [], ld = u === sig || !up.length && u.closest('[data-lift] .paper');
    if (!lifted && head) {
     lifted = 1;
-    const need = end(u) - limit, max = 0.35 * parseFloat(getComputedStyle(head).paddingTop);
-    if (need <= max || u === sig) { head.style.setProperty('--lift', Math.min(need, max).toFixed(1) + 'px'); continue; }
+    const need = end(u) - limit;
+    if (need <= max || ld) { head.style.setProperty('--lift', Math.min(need, max).toFixed(1) + 'px'); continue; }
    }
-   if (u === sig) {
+   if (ld) {
     if (!wrap.classList.contains('tight')) { wrap.classList.add('tight'); continue; }
     if (cw > 225) { head.style.setProperty('--cw', (cw = Math.max(225, cw * 0.94)) + 'px'); continue; }
     wrap.classList.remove('tight'); unset(head, '--cw'); refit();
+    if (u !== sig) up = hu, u = wrap;
    }
    // fold u (any other push is stale); the blank above it into its column's gaps
    units.forEach((x) => { x.style.marginTop = ''; });
-   const up = pk ? list.filter((x) => x !== u && pk.contains(x) && top(x) < top(u)) : [];
    const gap = up.length && Math.min(72, (limit - 1 - bottom(u.previousElementSibling)) / up.length);
    if (gap > 0) up.forEach((x) => { x.style.marginTop = mt(x) + gap + 'px'; });
-   u.style.marginTop = mt(u) + v + 6 + sl(u) - top(u) + 'px';
+   for (let k = 2; k--;) u.style.marginTop = mt(u) + v + 6 + sl(u) - top(u) + 'px'; // twice (margin collapse)
   }
-  if (pc) giveWay(pc, ink(list.filter((x) => x.parentNode === head)));
+  if (pc) giveWay(pc, ink(hu));
  };
  run();
  later(run, 160);
@@ -403,7 +406,7 @@ function folds() {
 
 // envelope page: "Tap to open" on screen (--ok ≥ .62, then names ≥ 20 px); the clusters give way to the texts
 function envFit() {
- const page = document.querySelector('.env-page');
+ const page = q('.env-page');
  if (!page) return;
  const hint = page.querySelector('.env-hint'), h1 = page.querySelector('.names'), cs = document.querySelectorAll('.scene-bg .corner');
  const run = () => {
@@ -521,7 +524,7 @@ function boot() {
  addEventListener('resize', bar);
  [fitPaper, fitNames, folds, envFit, initEnvelope, initScenes, initCountdown, initPlaceholders].forEach((f) => f());
  if (root.classList.contains('from-envelope')) setTimeout(() => accents('arrive', 0, document.querySelector('.hero')), 300);
- const closing = document.querySelector('[data-accents="closing"]');
+ const closing = q('[data-accents="closing"]');
  if (closing && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver((en) => { if (en.some((x) => x.isIntersecting)) { io.disconnect(); accents('closing', 0, closing); } }, { threshold: .35 });
   io.observe(closing);
