@@ -410,7 +410,7 @@ rotate: -8deg; margin: 0 6vw; filter: drop-shadow(0 8px 8px rgba(60, 20, 15, .26
 .foot .textlink { margin-top: 18px; }
 
 /* == long pages */
-.page-long .site-main { padding-top: env(safe-area-inset-top); }
+.page-long .site-main { padding-top: env(safe-area-inset-top); overflow-x: clip; }
 .page-corner { position: absolute; z-index: 0; display: block; height: auto; pointer-events: none; }
 .page-head, .details-top, .rsvp-top { position: relative; text-align: center; --hcw: calc(var(--hc) - var(--lift, 0px) * 1.02); }
 .page-bg { position: absolute; inset: 0 0 auto; height: var(--vh); }
