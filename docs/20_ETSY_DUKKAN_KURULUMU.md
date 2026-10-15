@@ -6,7 +6,7 @@ Chrome'una erişemez. Değerler İngilizce, açıklamalar Türkçe.
 
 **Dayanak:** docs/13 (rakip araştırması), docs/15 (marka, fiyat, Etsy kuralları), docs/19 §4 (alıcı metinleri, SSS),
 `brand/README.md` (ikon/banner), K25–K33 (docs/01). Etsy bu ortamdan açılamıyor. Alan adları ve karakter sınırları
-`[VERIFY]` etiketlidir; uygulayan oturum gerçek ekranda doğrular ve sonucu §7'ye yazar.
+`[VERIFY]` etiketliydi; 2026-10-15'te gerçek ekranda doğrulandı, etiketler güncellendi, sonuç §7'de.
 
 **eCommerce-Skills (nexscope-ai) değerlendirmesi (2026-10-15):** repo klonlanıp okundu, **projeye eklenmedi**.
 - 22 Etsy beceri dosyasının 21'i aynı 56 satırlık boş şablon. İçlerinde yöntem ya da veri yok; "yapay zekâna sor" ve Nexscope
@@ -31,9 +31,9 @@ headline 38 · story 771 · iade ek metni 204 · gizlilik notu 341 · bölüm ad
 - Kullanıcı çıkış yapmışsa yalnız "Etsy'de oturum açık değil" denir. Şifre istenmez, yazılmaz.
 - Etsy dışına satın alma yönlendirmesi, kupon, QR ya da dış fiyat yazılmaz (Off-Platform politikası, docs/15 §4.1).
 
-## 1. Görünüm (Shop Manager → Settings → Info & Appearance) [VERIFY menü adları]
+## 1. Görünüm (Shop Manager → Settings → Info & Appearance / Your shop) [doğrulandı 2026-10-15, §7]
 
-### 1.1 Shop title (sınır 55) [VERIFY]
+### 1.1 Shop title — Etsy'de artık **Tagline** (Settings → Your shop → Shop basics; sınır 55) [doğrulandı]
 Google ve Etsy aramasında dükkân adının altında görünür. Ürünü anahtar kelimeyle anlatır.
 
 ```text
@@ -45,11 +45,11 @@ Yedek: `Digital Wedding Website Templates with Online RSVP`
 ### 1.2 Shop icon ve banner
 | Alan | Dosya | Not |
 |---|---|---|
-| Shop icon | `brand/etsy/etsy_shop_icon_1000.png` (500'lük de var) | 500×500 gösterim [VERIFY] |
+| Shop icon | `brand/etsy/etsy_shop_icon_1000.png` (500'lük de var) | Etsy'de "Logo" (Your shop → Shop basics). **Uygulanmadı, §7** |
 | Banner (büyük) | `brand/etsy/etsy_banner_big_3360x840.jpg` | Yazı logosu sağ tarafta. Yükleme önizlemesinde mobil kırpım kontrol edilir; logo kesiliyorsa yükleme yapılmaz, §7'ye yazılır |
-| Mini banner | `brand/etsy/etsy_banner_mini_1600x213.jpg` | Etsy hangisini sunuyorsa. İkisi birden seçilemez [VERIFY] |
+| Mini banner | `brand/etsy/etsy_banner_mini_1600x213.jpg` | Banner, Shop Home editor'de (kalem ikonu). **Uygulanmadı, §7** |
 
-### 1.3 Shop announcement (sınır 5,000) [VERIFY]
+### 1.3 Shop announcement (alanda sınır tanımlı değil) [doğrulandı]
 İlk 1–2 satır kısaltılmış önizlemede görünür. Bu yüzden ana değer başta.
 
 ```text
@@ -69,14 +69,14 @@ GOOD TO KNOW
 • Questions before or after you buy? Message us here on Etsy. We reply within 24 hours.
 ```
 
-### 1.4 Message to Buyers (makbuz + sipariş onay e-postası) [VERIFY sınır]
+### 1.4 Message to Buyers (makbuz + sipariş onay e-postası) [doğrulandı; alanda sınır tanımlı değil]
 docs/19 §4.4. `{START_BASE}` = `https://davetiye-platform-five.vercel.app/start` (alan adı alınınca değişir, docs/05 §C).
 
 ```text
 Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
 ```
 
-### 1.5 Message to Buyers for Digital Items (indirme sayfası; bütün dijital ilanlar) [VERIFY sınır]
+### 1.5 Message to Buyers for Digital Items (indirme sayfası; bütün dijital ilanlar) [doğrulandı; alanda sınır tanımlı değil]
 
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
@@ -88,9 +88,9 @@ You will enter your Etsy order number, your email and your first names. Then SAV
 Questions? Message us here on Etsy with your order number.
 ```
 
-## 2. About (Shop Manager → Settings → About your shop) [VERIFY]
+## 2. About (Settings → Your shop → Shop basics → About your shop) [doğrulandı]
 
-### 2.1 Story headline (kısa) [VERIFY sınır]
+### 2.1 Story headline (Headline, sınır 150) [doğrulandı]
 
 ```text
 Wedding websites you can edit yourself
@@ -116,7 +116,7 @@ Questions are always welcome. Message us here on Etsy; we reply within 24 hours.
 - **Social links:** boş (hesap yok).
 - **About photos/video:** şimdilik yok. İleride `brand/assets/gpt/` sahnelerinden GM06 güven sahneleri kullanılabilir (GPT işi).
 
-## 3. Shop sections [VERIFY: başlık sınırı 24 karakter, en çok 20 bölüm]
+## 3. Shop sections (Listings → Sections → Organize your listings; başlık 24, en çok 20) [doğrulandı]
 
 Lansmanda 5 tasarım (01–05). Bölümler stile göre:
 
@@ -129,7 +129,7 @@ Lansmanda 5 tasarım (01–05). Bölümler stile göre:
 İlan yoksa bölümler boş görünür. Bölümler açılır, ilanlar yayınlanınca atanır. Save the Date ürünü gelince `Save the Date` bölümü
 eklenir.
 
-## 4. Policies (Shop Manager → Settings → Policies) [VERIFY]
+## 4. Policies (Settings → Policy settings: Returns & exchanges · Cancellations · Privacy · Fixed policies) [kısmen, §7]
 
 | Alan | Değer | Durum |
 |---|---|---|
@@ -152,7 +152,7 @@ When you start your website, we store the details you enter (your email, names, 
 ```
 Silme süreci kararı `[DELETION PROCESS]` açık (docs/19 §7); "earlier deletion" cümlesi ancak süreç tanımlanınca kalır.
 
-### 4.1 Shop FAQ [VERIFY: en çok 10 soru olabilir]
+### 4.1 Shop FAQ (Shop Home editor → Frequently asked questions; en çok 10, soru "Custom" 300, cevap 750) [doğrulandı]
 docs/19 §4.3'ten en sık 10 soru (kalan 3'ü ilan açıklamasında):
 
 ```text
@@ -212,4 +212,71 @@ No. It is a digital product.
 Her alan için: mevcut değer (yedek) · girilen değer · kaydedildi mi · yeniden yüklemede doğrulandı mı · gerçek karakter sınırı ·
 Etsy'deki gerçek menü adı. Uygulanmayan alan ve nedeni.
 
-_(boş — 2026-10-15 itibarıyla hiçbir alan uygulanmadı)_
+**Uygulama: 2026-10-15, Claude in Chrome (kullanıcının oturumu açık Chrome'u, Shop Manager).** Dükkân: `STUDIOBKE`
+(studiobke.etsy.com). Kullanıcının açık sekmesi bu oturumun sekme grubunda görünmedi. Aynı Chrome profilinde yeni bir sekme
+açıldı; oturum açıktı.
+
+### 7.1 Girilen ve doğrulanan alanlar
+Her alan kaydedildi. Sonra sayfa yeniden yüklendi, değer okundu ve birebir aynı çıktı.
+
+| Alan | Etsy'deki gerçek yer / ad | Yedek (önceki değer) | Gerçek sınır | Girilen (karakter) |
+|---|---|---|---|---|
+| Shop title | Settings → **Your shop** → Shop basics → **Tagline** ("Formerly known as Shop title") | boş | 55 (sayaç) | §1.1 ana değer (53) |
+| Shop announcement | Settings → **Info & Appearance** → Shop Announcement (`shop[announcement]`) | boş | alanda `maxlength` yok | §1.3 (756; satır sonları dahil, betik 730 saymıştı) |
+| Message to Buyers | Info & Appearance → Message to Buyers (`shop[sale_message]`) | boş | `maxlength` yok | §1.4 (248) |
+| Message to Buyers for Digital Items | Info & Appearance → Message to Buyers for Digital Items (`shop[digital_sale_message]`) | boş | `maxlength` yok | §1.5 (464) |
+| About headline | Your shop → Shop basics → **About your shop** → Headline | boş | 150 | §2.1 (38) |
+| About story | aynı yer → Your story | boş | 5000 | §2.2 (745; paragraflar korundu) |
+| Bölümler | Listings → sağ kolon **Sections** → "Organize your listings" → New Section / **Manage Sections** | bölüm yoktu | başlık 24, en çok 20 | `Floral & Garden`, `Classic & Vintage`, `Summer & Destination` (ilan yok, hepsi 0) |
+| İptal politikası | Settings → **Policy settings** → **Cancellations** → Create policy → Publish | boş | serbest metin yok, yalnız aç/kapa | "I don't accept order cancellations" (vitrinde: "Cancellations: not accepted") |
+| SSS (10 soru) | **Shop Home editor** (`/shop/STUDIOBKE/edit`) → Frequently asked questions → Add an FAQ → soru listesinde **Custom** | SSS yoktu | en çok 10 (10. sorudan sonra "Add an FAQ" kayboluyor); soru 300, cevap 750 | §4.1'deki 10 soru, aynı sırayla |
+
+Not: iptal politikası docs/20 tablosunda ayrı bir satır değildi. Kullanıcının "iade yok" kararıyla (§6.1) ve §4 iade metnindeki
+"cancellations" ifadesiyle aynı olduğu için yayınlandı. Geri almak için: Policy settings → Cancellations → kalem ikonu.
+
+### 7.2 Girilmeyen alanlar ve nedeni
+- **Shop icon (Logo) ve banner uygulanmadı.** Dükkânda kullanıcının daha önce yüklediği logo ve banner var (dashboard: "Logo
+  added", "Banner added"). İkisi de `brand/etsy/` dosyalarından farklı, eski bir tasarım. Logo, içinde "STUDIO · BKE · INVITATIONS"
+  yazan bir daire mühür. Banner'da "Digital Wedding Invitations / Animated Video & Website Templates" yazıyor. Logoyu değiştirmek
+  için önce mevcut logoyu kaldırmak gerekiyor (Shop basics → Logo → Edit → ×). Bu tıklama Claude Code izin denetimince engellendi.
+  Kullanıcının kendi yüklediği görseller açık onayı olmadan ezilmesin diye banner'a da dokunulmadı. Bu yüzden mobil kırpım
+  önizlemesi yapılmadı.
+  Mevcut görsellerin yedek URL'leri:
+  - logo: `https://i.etsystatic.com/68570726/r/isla/de861b/90028703/isla_500x500.90028703_r9emg7wh.jpg`
+  - banner: `https://i.etsystatic.com/68570726/r/isbl/4fd719/89080116/isbl_3360x840.89080116_nvqgkb5c.jpg`
+  Yeni görseller şuradan yüklenir. Banner: Shop Home editor → banner'ın sağ altındaki kalem ikonu. Logo: Shop Home editor'de
+  ikonun üstündeki kamera ya da Shop basics → Logo.
+- **Returns ek metni için alan yok.** Policy settings → Returns & exchanges yalnız **fiziksel ürünler** için politika kuruyor
+  ("return and exchange policies for non-digital items"). Dijital ürünlerde Etsy iadeyi zaten kapalı tutuyor. Vitrinde "See item
+  details for return and exchange eligibility." yazıyor. Metin ilan açıklamasına konmalı (etsy-metin işi). İptal tarafı 7.1'de
+  yayınlandı.
+- **Privacy yayınlanmadı.** Etsy'de hazır bir şablon yok. Tek bir serbest metin kutusu var ve AB alıcıları için GDPR uyumlu tam
+  bir politika isteniyor (Etsy yalnız örnek şablona link veriyor). §4'teki 341 karakterlik not "şablona ek" olarak yazılmıştı.
+  Tek başına GDPR politikasının yerini tutmaz. "Earlier deletion" cümlesi de `[DELETION PROCESS]` kararına bağlı. Tam metin veri
+  sorumlusunun adını ve iletişim bilgisini gerektiriyor; bunlar uydurulamaz. Karar kullanıcının.
+- Members, social links, featured photos/video: §2.3 gereği boş bırakıldı.
+
+### 7.3 Yalnız okunan ayarlar (§5); hiçbiri değiştirilmedi
+| Ayar | Ekrandaki değer | Yer |
+|---|---|---|
+| Dükkân adı | `STUDIOBKE` (docs'ta `BKEStudio` yazıyordu) | Shop basics |
+| Konum | Bilecik, Türkiye | Shop Home editor |
+| Saat dilimi | Türkiye / Istanbul (UTC+03) | Settings → Options |
+| Dükkân dili | Ekranda gösterilmiyor; ek çeviri yok | Settings → Languages and translations |
+| Automatic Listing Translation | **Enabled** | Options |
+| Para birimi | Doğrulanamadı. Offsite Ads panelinde tutarlar **TL** görünüyor; bu, hesabın görüntüleme para birimi olabilir. Ödeme ayarları sayfası §0 gereği açılmadı | — |
+| Offsite Ads | **Açık** (sayfada "Opt out from Offsite Ads" butonu duruyor). docs/15 kapalı olmasını öneriyor; kullanıcı onayı bekliyor | Marketing → Offsite Ads |
+| Etsy Ads | Henüz kullanılamıyor: "13 days left until you can start advertising" (yeni dükkânda 15 gün bekleme) | Marketing → Etsy Ads |
+| Vacation mode | Kapalı | Options → Vacation Mode |
+| Custom order requests | Disabled | Options |
+| Gift wrap / gift note | Gift wrap disabled · gift note **offered** (dijital üründe etkisiz) | Options |
+| GPSR | Fiziksel ve dijital: "Sell … to all EEA states and NI" | Options |
+| Satıcı statüsü (AB) | Private individual | Shop Home editor → Seller details |
+| İlanlar | Active 0 · Draft 0 · Expired 0 · Sold out 0 · Inactive 0 | Listings |
+
+### 7.4 Beklenmedik bulgular
+- Dükkân adı `STUDIOBKE`, belgede ise `BKEStudio`. About metni "BKE Studio" diyor. Tutarlılık kararı kullanıcının.
+- Mevcut logo ve banner eski marka çalışmasından ("STUDIO BKE INVITATIONS" mührü). Banner'daki "Animated Video" vaadi şu an
+  vitrinde duruyor; oysa video ürünü K22'den beri askıda.
+- Eski URL `/your/shops/me/edit` 404 veriyor. Info & Appearance: `/your/shops/me`; Your shop:
+  `/your/shops/me/settings/your-shop/shop-basics`.
