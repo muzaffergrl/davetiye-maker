@@ -57,8 +57,9 @@ pikselini (≥ 150) ve doygunluğunu (≤ 40) ölçer (`manifest.ph_*`).
   `compare_closure.jpg` (previews/g413): tema | comp.
 - **Kart yolu**: kart (card_small) yaprağın %66'sı genişlikte, sayfanın ortasında düz yatar; `lift` boyunun %4'ü yukarı ×
   1,08, `forward` açık çift sayfanın ortasına × 1,4 (`manifest.stage.card_path`); sahne kutusu bu yolu kapsar.
-- **Zeminler**: telefon `mist` = bg_page'in kümesiz orta sisi (x 250–830, y 250–1250); geniş ekran `mist_wide` = aynı kırpım iki
-  yanına aynalı (1200 px; aynalı ek yeri dikişsiz). Köşe kümeleri hep ayrı katman (`decor_tl` / `decor_br`), ekranda bütün.
+- **Zeminler**: telefon `mist` = bg_page'in kümesiz orta sisi (x 250–830, y 250–1250); geniş ekran (en/boy ≥ 5/4) `mist_wide` =
+  bütün genişlikte kümesiz bant (y 630–985). Aynalı geniş zemin denendi: 1280 px'te ek yerlerinde ağaç gölgeleri simetrik
+  "mürekkep lekesi" gibi görünüyordu, bırakıldı. Köşe kümeleri hep ayrı katman (`decor_tl` / `decor_br`), ekranda bütün.
   Uzun sayfaların zemini `bg_tile` (bg_page'in orta sis rengine çekilmiş), sayfa rengi `#DED8B8`.
 - **Kartlar** (`free_zone` + 3 dilim): eskitilmiş kâğıdın lekeleri `serbest_bolge`'nin 28 eşiğinde her satırı "süslü"
   sayıyordu → eşik 52 (`free_zone_threshold`; boyalı süs kâğıttan > 80 uzak). Davet kartı dilimleri %37–59, bilgi kartı
@@ -111,7 +112,7 @@ pikselini (≥ 150) ve doygunluğunu (≤ 40) ölçer (`manifest.ph_*`).
 ### index ← W1.1 `web_1_envelope.png`
 | W1 öğesi | Şablon | Not |
 |---|---|---|
-| sisli orman, ateş böceği bokehi, ağaç silüetleri | `.scene-bg` `mist` (telefon) / `mist_wide` (geniş) | bg_page 2:3 telefonda kümeleri keserdi: zemin kümesiz kırpım |
+| sisli orman, ateş böceği bokehi, ağaç silüetleri | `.scene-bg` `mist` (telefon) / `mist_wide` (geniş) | bg_page 2:3 telefonda kümeleri keserdi: zemin kümesiz kırpım (geniş ekranda büyütülmüş, yumuşak) |
 | sol üst sarmaşıklı gövde + yüksük çiçekleri, sağ alt eğrelti + mantarlar | `decor_tl` / `decor_br` ayrı katman | **sapma:** GPT kümeleri L biçimli kenar kümesi (comp'taki ağaç gövdesi parçalarda yok); ekranda bütün |
 | sisin içinde iki ateş böceği | `.float.f-fly1`, `.f-fly2` (accent_1 + ışıltı) | yazıya/kitaba değerse gizlenir |
 | "YOU ARE INVITED" + çizgi · sarmaşık · çizgi | `.env-head .kicker` + `.env-head .orn` (GPT divider + iki 1 px çizgi) | |
@@ -205,5 +206,13 @@ stili, `form_party` + `form_optional`).
 - Denenmedi: gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, `cqw`, kesişen belge view transition, 3B
   `rotateY` + `perspective`), Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 
-## Ölçümler
-(aşağıda — G413 Sonuç'uyla aynı sayılar)
+## Ölçümler (2026-10-15)
+| Ölçüm | Sonuç |
+|---|---|
+| `theme-check --theme enchanted-forest-storybook --stress` | 128 geçti · 0 hata · 0 uyarı (`previews/g413/checks.json`) |
+| Dokun → home | 4806 ms (yüklü makinede; `MOTION.envelope.go` 4500 ms) · reduced-motion 343 ms |
+| İlk ekran (390 × 844, DPR 3) | index 938 KB / home 993 KB (yer tutucu) · index 1043 KB / home 1304 KB (örnek fotoğraf) — sınır 1536 KB |
+| `img/` | 2,38 MB (WebP + srcset); `site.css` 45,7 KB · `site.js` 35,2 KB |
+| Kontrast (WCAG) | mürekkep 10,1:1 (sis üstü 10,9) · ink-soft 7,1 · el yazısı mürekkebi 6,2 · yosun 5,2 · hap yazısı 5,0 |
+| `kit_check --paket 5` / `--paket 2` | 23/23 (kitap hizası sırt +0,23 · üst −0,10 · alt +0,29 · sağ +0,20 %) / 5/5 |
+| Testler | tema testi 38/38 · `npm test` 634/634 · typecheck temiz · build + trace-check geçti · g051-browser 44/44 · final-smoke 45/45 |

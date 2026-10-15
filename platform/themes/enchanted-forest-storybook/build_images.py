@@ -65,8 +65,8 @@ WIDTHS = {
 }
 # eğrelti/yosun dokusu WebP'de ağır, ağırlığın çoğu alfa kanalında: kümelerde alfa kalitesi 60 (suluboya yumuşak kenar)
 # kitap kapağı (kabartma altın varak, kumaş dokusu) en ağır parça: q 68 ile 640 px < 150 KB (ilk görünüm, docs/11 §6);
-# davet kartının çelengi q 70 ile 860 px < 200 KB (ekran altı)
-QUALITY = {"decor_tl": 76, "decor_br": 76, "closure": 78, "book_cover": 68, "book_cover_in": 70, "invitation_card": 70}
+# davet kartının çelengi q 64 ile 860 px ≈ 190 KB (ekran altı; CSS alt dilimi DPR ≥ 2 ilk görünümde de iner)
+QUALITY = {"decor_tl": 76, "decor_br": 76, "closure": 78, "book_cover": 68, "book_cover_in": 70, "invitation_card": 64}
 ALPHA_Q = {"decor_tl": 60, "decor_br": 60}
 CARD_W_OF_LEAF = 0.66        # kart genişliği / yaprak genişliği (kart sayfaya sığar; GPT: "slightly narrower")
 LIFT_UP, LIFT_SCALE = 0.04, 1.08    # lift: kart sayfadan kalkar (boyunun %4'ü yukarı, × 1,08, gölge büyür)

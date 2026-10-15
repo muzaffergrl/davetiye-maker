@@ -337,8 +337,8 @@ function fitNames() {
     }
     pg.style.setProperty('--s', Math.min(1, .94 * innerWidth / (st.offsetWidth * .98607), (sv() - 150) / st.offsetHeight).toFixed(4));
   };
-  // decor: a cluster never under mist text (16 × 16 maps = manifest decor_*.map16: shrinks, else hides); a floating
-  // firefly on text hides
+  // decor: a cluster never under mist text nor half behind a page, card or book (16 × 16 maps = manifest decor_*.map16:
+  // shrinks, else hides); a floating firefly on them hides
   const MAP = { tl: '8fe0fffe7ffffffffff7ff81fe00fc00fc00fc00f800f800f000f000f800a000', br: '001e001f003f001f003f003f003f007f003f00ff03ff0fff3fff7fffffff1ffe' };
   const textBox = (el) => {
     const rg = document.createRange();
@@ -367,7 +367,7 @@ function fitNames() {
       c.style.removeProperty('--cw'); c.style.removeProperty('bottom'); c.style.visibility = '';
       if (br && bg.matches('.hero .scene-bg')) c.style.bottom = `${Math.max(22, top(bg) + bg.offsetHeight - sv() + navH() + 2)}px`;
       const w0 = c.offsetWidth;
-      for (let k = .94; ts.some((t) => under(lay(c), t, m)); k -= .06) {
+      for (let k = .94; solid.some((t) => under(lay(c), t, m)); k -= .06) {
         if (k < .55) { c.style.visibility = 'hidden'; break; }
         c.style.setProperty('--cw', `${(w0 * k).toFixed(1)}px`);
       }

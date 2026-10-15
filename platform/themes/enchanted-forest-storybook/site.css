@@ -125,8 +125,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="sway-br"] { transform: rotate(-6deg) translate3d(5%, 5%, 0); transform-origin: 100% 100%; --dur: 1800ms; }
 /* turn (13): a storybook page turns into place on its left edge */
 .js [data-a="turn"] { transform: perspective(1400px) rotateY(-50deg); transform-origin: 0 50%; --dur: 1500ms; }
-/* mount (13): a photo-cornered picture is pressed onto the page */
-.js [data-a="mount"] { transform: translate3d(0, -14px, 0) rotate(-2.5deg) scale(1.05); --dur: 1100ms; }
+/* mount (13): a photo-cornered picture is pressed onto the page (never wider than its place while waiting) */
+.js [data-a="mount"] { transform: translate3d(0, -12px, 0) rotate(-2deg) scale(.96); --dur: 1100ms; }
 /* glow (13): a firefly lights up */
 .js [data-a="glow"] { transform: scale(.6); filter: brightness(.6); --dur: 1200ms; }
 .js [data-a="glow"].in { filter: none; }
@@ -209,14 +209,14 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   margin-top: 2px; font-size: calc(var(--nm) * var(--names-scale, 1)); line-height: 1;
   text-wrap: balance; overflow-wrap: break-word; text-shadow: 0 0 18px rgba(246, 242, 222, .95);
 }
-/* the stage (stage.box, ratio 1.61601): the closed book's centre (closed_obj.center_x_frac .73344) on the screen's centre */
+/* stage.box: the closed book's centre (closed_obj.center_x_frac) on the screen's centre */
 .stage {
   position: relative; z-index: 2; width: var(--w); aspect-ratio: 1.61601; flex: none; margin-top: clamp(8px, 2.2svh, 24px);
   translate: calc(var(--w) * -.23344) 0; cursor: pointer;
 }
 .stage:focus-visible { outline: none; }
 .stage:focus-visible .book-cover { outline: 2px solid var(--moss); outline-offset: 4px; }
-/* opened: the spread (open_obj.center_x_frac .49375) centred and scaled to the screen (site.js --s) — docs/11 §7.5 */
+/* opened: the spread (open_obj.center_x_frac) centred and fitted (site.js --s), docs/11 §7.5 */
 .env { position: absolute; inset: 0; transform-origin: 49.375% 50%; }
 .env > img, .book-leaf, .closure > img { position: absolute; display: block; }
 /* layers bottom → top (stage.parts) */
@@ -235,7 +235,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .book-leaf-back > img { width: 100%; height: 100%; display: block; transform: scaleX(-1); }
 .book-cover { left: 48.154%; top: .116%; width: 50.382%; height: 99.535%; z-index: 3; transform-origin: 0 50%;
               filter: drop-shadow(0 18px 22px rgba(40, 40, 20, .26)) drop-shadow(0 3px 4px rgba(40, 40, 20, .18)); } /* stage.parts.book_cover */
-/* the brass clasp (manifest closure: the cover's right edge at half height; turns on its hinge, hinge_x_pct 91.44) */
+/* the brass clasp (manifest closure; turns on its hinge, hinge_x_pct) */
 .closure { position: absolute; z-index: 5; left: 87.858%; top: 39.971%; width: 12.142%; height: 17.069%; transform-origin: 91.44% 50%;
            filter: drop-shadow(0 4px 5px rgba(40, 30, 10, .34)) drop-shadow(0 1px 1px rgba(40, 30, 10, .26)); } /* stage.parts.closure */
 .closure > img { inset: 0; width: 100%; height: 100%; }
@@ -254,7 +254,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 
 .is-opened .book-cover, .is-opened .closure, .is-opened .book-leaf { opacity: 0; visibility: hidden; }
 .is-opened .book-cover-in, .is-opened .book-page, .is-opened .card-slot, .is-opened .book-leaf-back { opacity: 1; }
-.is-opened .env { transform: translateX(23.969%) scale(var(--s, .58)); } /* (center_x_frac closed − open) × 100 % */
+.is-opened .env { transform: translateX(23.969%) scale(var(--s, .58)); } /* center_x_frac closed − open */
 .is-opened .env-page .card-slot { z-index: 6; }
 /* VT name only if the card may morph */
 .is-opened .env .card { transform: translate(-78.194%, -0.083%) scale(1.4); view-transition-name: invite-card; } /* ENVELOPE_GEOMETRY.front */
@@ -345,7 +345,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .paper { position: relative; width: 100%; margin-inline: auto; container-type: inline-size; isolation: isolate;
          --top-h: calc(100cqw * var(--t) / var(--ar)); --bot-h: calc(100cqw * (1 - var(--b)) / var(--ar));
          filter: drop-shadow(0 20px 24px rgba(40, 40, 20, .16)) drop-shadow(0 2px 3px rgba(40, 40, 20, .12)); }
-/* the slices cross-fade over 6cqw (fade masks, no edge): the aged paper is lighter in the middle than near the slices */
+/* the slices cross-fade over 6cqw (fade masks): the aged paper is lighter in the middle */
 .paper > .paper-top { position: absolute; left: 0; top: 0; width: 100%; height: var(--top-h); object-fit: cover; object-position: 50% 0; display: block; z-index: 0;
                       -webkit-mask: linear-gradient(#000 calc(100% - 6cqw), transparent); mask: linear-gradient(#000 calc(100% - 6cqw), transparent); }
 .paper::before, .paper::after { content: ""; position: absolute; left: 0; right: 0; z-index: 0; background-repeat: no-repeat; }
@@ -399,8 +399,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .pic-frame { position: relative; display: block; filter: drop-shadow(0 14px 16px rgba(40, 40, 20, .2)) drop-shadow(0 2px 2px rgba(40, 40, 20, .12)); }
 .pic-frame .ph-mark span { display: none; }
 .pf-portrait { width: min(58vw, 240px); aspect-ratio: 805 / 1116; }
-.pf-portrait .photo-slot, .pic .photo-slot { left: 15.652%; top: 15.323%; width: 68.199%; height: 64.516%; } /* photo_slots.portrait (≥ 38vw on phones) */
-.pf-landscape { width: min(86vw, 380px); aspect-ratio: 1203 / 765; }
+.pf-portrait .photo-slot, .pic .photo-slot { left: 15.652%; top: 15.323%; width: 68.199%; height: 64.516%; } /* photo_slots.portrait */
+.pf-landscape { width: min(80vw, 380px); aspect-ratio: 1203 / 765; }
 .pf-landscape .photo-slot, .venue-photo .photo-slot { left: 17.373%; top: 16.078%; width: 65.004%; height: 66.013%; } /* photo_slots.landscape */
 .pic-frame > img, .venue-photo > .vframe { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 /* The Day: four schedule rows */
@@ -624,7 +624,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .env-page { --obj: min(78vw, calc(46svh * .8166), 430px); --nm: clamp(40px, min(13vw, 11svh), 80px); padding-top: calc(16px + env(safe-area-inset-top)); padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
   .env-head { width: min(100% - 2 * min(14vw, 22svh), 560px); }
   .env-head .orn, .env-hint .orn { display: none; }
-  .is-opened .env-page { padding: 12px 16px; }
+  .is-opened .env-page { --obj: min(78vw, calc(62svh * .8166), 430px); padding: 12px 16px; }
 
   .page-head { padding-top: max(48px, 16svh); }
   .details-top, .rsvp-top { padding-top: 52px; }
