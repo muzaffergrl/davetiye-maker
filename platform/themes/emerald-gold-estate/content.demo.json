@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Evelyn",
+      "full_name": "Evelyn Rose"
+    },
+    {
+      "display_name": "Alexander",
+      "full_name": "Alexander Reid"
+    }
+  ],
+  "name_display": "Evelyn & Alexander",
+  "initials": "E&A",
+  "host_line": "Together with their families",
+  "date": "2027-05-29",
+  "ceremony_time": "16:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "Emerald Court Estate",
+    "city": "Lake Geneva",
+    "region": "Wisconsin",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Lakeside Lawn"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Marble Gallery"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Emerald Ballroom"
+    }
+  ],
+  "dress_code": "Black tie",
+  "rsvp": {
+    "deadline": "2027-04-17",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "From our first toast among the paintings, every moment has been leading us to",
+    "items": [
+      {
+        "caption": "At the gallery"
+      },
+      {
+        "caption": "By the lake"
+      },
+      {
+        "caption": "Set in gold"
+      }
+    ]
+  }
+}
