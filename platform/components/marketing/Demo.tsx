@@ -165,8 +165,8 @@ export function DemoHost({ designs }: { designs: DemoDesign[] }) {
 /**
  * Hero with the live demo facade. `children` = the server-rendered text (eyebrow, H1, intro). The primary button and
  * the poster open the selected design: in place on wide screens (≥ 1024 px), in the dialog on phones and tablets.
- * Layout (G066 comps): phone = text, poster + design chips, buttons, fact strip; wide = text and buttons beside the
- * poster, the fact strip across the bottom.
+ * Layout (G066 comps): phone = text, poster + design chips, buttons, fact strip; wide = text, design chips (G093) and
+ * buttons beside the poster, the fact strip across the bottom.
  */
 export function HeroDemo({
   designs,
@@ -255,20 +255,23 @@ export function HeroDemo({
           </div>
         ) : null}
         {designs.length > 1 ? (
-          <div className={s.chips} role="group" aria-label="Choose a design" data-scroll-x>
-            {designs.map((x, i) => (
-              <button key={x.id} type="button" className={s.chip} aria-pressed={i === sel} onClick={() => choose(i)}>
-                {x.name}
-              </button>
-            ))}
-          </div>
-        ) : null}
-        {designs.length > 1 ? (
           <p className={s.heroCaption}>
             <a href={d.designPath}>{d.name}</a>: {d.style.charAt(0).toLowerCase() + d.style.slice(1)}.
           </p>
         ) : null}
       </div>
+      {/* G093: the chips are their own grid item — under the poster on phones and tablets, in the text column above
+          the main button on wide screens (eight names wrapped to four rows under the poster at 1280 px and pushed the
+          button out of the first screen). */}
+      {designs.length > 1 ? (
+        <div className={s.chips} role="group" aria-label="Choose a design" data-scroll-x>
+          {designs.map((x, i) => (
+            <button key={x.id} type="button" className={s.chip} aria-pressed={i === sel} onClick={() => choose(i)}>
+              {x.name}
+            </button>
+          ))}
+        </div>
+      ) : null}
       <div className={s.heroCta}>
         <a
           className={`${s.btn} ${s.btnLarge}`}
