@@ -2,7 +2,7 @@
 id: G213
 baslik: Tasarım 13 Enchanted Forest Storybook — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-A
 oncelik: 2
 bagimli: []
@@ -66,3 +66,4 @@ Tasarım 13'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 3, 3/6: decor_br, accent_1, accent_2 kaydedildi; üç dosya kit_check.denetle kontrolünü geçti. decor_br kenar boşluğu ve ateş böceği hâlesi için iki kez, accent_1 küçük accent ölçeği için bir kez yeniden üretildi; yalnız seçilen dosyalar repoya eklendi. Durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-A; kısım 3, 6/6: accent_3, divider, web_hero de kaydedildi. Paket 5 genel kontrolü 23/23 GEÇTİ (22 dosya + kitap hizası); Paket 2 5/5 GEÇTİ. divider alfa/ölçek, web_hero sosyal kırpım ve zemine oturma için düzeltildi; durum alindi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-A (kısım 3); üç kısım ve fotoğrafların Sonuç özeti tamamlandı; Paket 5 23/23, Paket 2 5/5 GEÇTİ. Son push sonrası duruldu.
+- 2026-10-15 entegratör onayladı

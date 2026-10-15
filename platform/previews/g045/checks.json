@@ -2,9 +2,7 @@
   "base": "next start (production build)",
   "viewport": "390x844 (isMobile, touch); desktop 1280x860",
   "theme": "sample-design",
-  "notes": [
-    "platform/themes/blush-garden-rose is not on this branch yet (G038): only the fixture theme was used."
-  ],
+  "notes": [],
   "checks": [
     {
       "name": "/start without theme: 200 + design list",
@@ -43,7 +41,7 @@
     {
       "name": "demo preview: scaled mini iframe fits the phone",
       "ok": true,
-      "detail": "{\"x\":86.796875,\"y\":129.078125,\"width\":218.39999389648438,\"height\":425.5999755859375}"
+      "detail": "{\"x\":86.796875,\"y\":198.65625,\"width\":218.39999389648438,\"height\":425.5999755859375}"
     },
     {
       "name": "start page: no horizontal overflow at 390 px",
@@ -78,7 +76,7 @@
     {
       "name": "result: edit link shown",
       "ok": true,
-      "detail": "http://127.0.0.1:3314/edit/avery-and-jordan?k=…"
+      "detail": "http://127.0.0.1:3399/edit/avery-and-jordan?k=…"
     },
     {
       "name": "result: \"Save this link\" warning",
@@ -95,7 +93,7 @@
     {
       "name": "result: link shown big (>= 16 px)",
       "ok": true,
-      "detail": "16.8px"
+      "detail": "16px"
     },
     {
       "name": "result: no horizontal overflow",
@@ -126,9 +124,9 @@
       "ok": true
     },
     {
-      "name": "editor opens with the edit link (panel, G039)",
+      "name": "editor opens with the edit link at setup step 1, names filled (panel v2, G060)",
       "ok": true,
-      "detail": "Avery & Jordan"
+      "detail": "Avery"
     },
     {
       "name": "editor: draft status",
@@ -180,9 +178,39 @@
       "ok": true
     },
     {
+      "name": "lost answer: the server created the site (201)",
+      "ok": true,
+      "detail": "201"
+    },
+    {
+      "name": "lost answer: the form retried by itself and shows the edit link",
+      "ok": true,
+      "detail": "http://127.0.0.1:3399/edit/rowan-and-sage?k=…"
+    },
+    {
+      "name": "lost answer: still one site for the order",
+      "ok": true
+    },
+    {
+      "name": "lost answer: the shown link opens the editor",
+      "ok": true
+    },
+    {
+      "name": "lost answer: no page errors",
+      "ok": true
+    },
+    {
       "name": "desktop: preview left of the form",
       "ok": true,
-      "detail": "{\"fBox\":{\"x\":189.203125,\"y\":49,\"width\":327.5999755859375,\"height\":638.3999633789062},\"formBox\":{\"x\":578,\"y\":160.078125,\"width\":520,\"height\":811.09375}}"
+      "detail": "{\"fBox\":{\"x\":179.203125,\"y\":99,\"width\":327.5999755859375,\"height\":638.3999633789062},\"formBox\":{\"x\":568,\"y\":229.328125,\"width\":540,\"height\":902.390625}}"
+    },
+    {
+      "name": "blush-garden-rose: start page with live demo",
+      "ok": true
+    },
+    {
+      "name": "blush-garden-rose: editor opens for the claimed site (setup step 1, names filled)",
+      "ok": true
     },
     {
       "name": "video: MP4 written",

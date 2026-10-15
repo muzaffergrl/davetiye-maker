@@ -28,8 +28,15 @@ Kullanıcı canlıda denemek istiyor. Test yayını; kurgusal veri.
 5. Sonuç: deployment ID/URL, commit, sayılar, gözlemler (takılan, kafa karıştıran, yavaş olan her şey — kullanıcı "çok daha basit" istedi;
    hâlâ ağır gelen yerleri madde madde yaz), bilinen eksikler. `docs/10` §2c'ye kısa satır.
 
+4d. **(2026-10-15, G087 + K33) Admin paneli ve yeni değerler:** main'e G087 (dükkân paneli `/admin`, `docs/17_ADMIN_PANELI.md`) ve K33
+   (dükkân adı BKE Studio, destek e-postası) girince: Vercel'e `ADMIN_PASSWORD` ortam değişkeni (Production + Preview, tür sensitive) —
+   **değeri kullanıcı 2026-10-15'te sohbette verdi (geçici kısa şifre); repoya/log'a yazma, kullanıcıdan al**. Bulut oturumunun Vercel
+   bağlantısı env eklerken 403 aldı, bu yüzden yerelden. Yayından sonra: `/admin` giriş ekranı → şifreyle giriş → liste; geçici
+   `/start` sitesi "Yapılacak"ta görünür → Siparişi onayla → alıcı panelinde Publish açılır → Yeni düzenleme linki (eski link 404) →
+   geçici siteyi admin'den sil. Admin'de "Geçici kısa şifre" uyarısı görünmeli. Ekranlar `docs/10_canli_test/g079/admin_*`.
+
 ## Kurallar
-Ödeme/plan/ekip ayarı yok; alan adı alma yok; şifre/anahtar yazma yok; yalnız kurgusal test verisi. Kullanıcının e-postası hiçbir yere girilmez.
+Ödeme/plan/ekip ayarı yok; alan adı alma yok; şifre/anahtar repoya yazma yok (ADMIN_PASSWORD yalnız Vercel'e, 4d); yalnız kurgusal test verisi. Kullanıcının e-postası hiçbir yere girilmez.
 Kullanıcının `/lily-and-theo` içeriğini değiştirip yayınlama.
 
 ## Sonuç

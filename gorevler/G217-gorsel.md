@@ -2,7 +2,7 @@
 id: G217
 baslik: Tasarım 17 Emerald & Gold Estate — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-I
 oncelik: 2
 bagimli: []
@@ -81,3 +81,4 @@ Tasarım 17'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 3, 3/7: closure yeniden üretildi (1024×1024 RGBA; alfa ≥128 mühür kutusu (156,154)–(869,870), çap yaklaşık %70); decor_br ve accent_1 eklendi. Üç dosyanın Kaydet ölçüsü/gerçek alfa denetimi GEÇTİ. Durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-I; kısım 3, 7/7: accent_2, accent_3, divider ve web_hero eklendi. Bu oturumdaki yedi dosyanın Kaydet ölçüsü/alfa denetimi GEÇTİ. Son tam paket kontrolleri ve Sonuç özeti sırada; durum alindi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-I; kısım 3 ve G217 tamamlandı. PAKET 5 23/23, PAKET 2 5/5, zarf hizası GEÇTİ. Closure kare tuvalde yaklaşık %70 çapla düzeltildi; üç kısmın özeti ve inceleme notları Sonuç'a yazıldı. DUR.
+- 2026-10-15 entegratör onayladı

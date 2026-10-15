@@ -63,6 +63,9 @@ const config: NextConfig = {
     return [
       { source: '/edit/:path*', headers: SECRET_PAGE_HEADERS },
       { source: '/start', headers: SECRET_PAGE_HEADERS },
+      // G087: the shop admin shows buyers' emails and, once, a fresh edit link.
+      { source: '/admin', headers: SECRET_PAGE_HEADERS },
+      { source: '/admin/:path*', headers: SECRET_PAGE_HEADERS },
     ];
   },
 };

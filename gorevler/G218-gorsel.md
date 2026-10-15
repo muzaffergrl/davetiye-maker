@@ -2,7 +2,7 @@
 id: G218
 baslik: Tasarım 18 Wildflower Meadow Vellum — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-J
 oncelik: 2
 bagimli: []
@@ -71,3 +71,4 @@ Tasarım 18'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 - 2026-10-14 ara kayıt: gpt-gorsel-J (kısım 3, 4/7) — florals_br, accent_1, accent_2, accent_3 kaydedildi; kit_check.denetle 4/4 GEÇTİ (1254×1254, gerçek alfa). Sağ-alt küme kesilen kenarlar için, accent_1 ve accent_2 daha küçük ve ortalı ölçek için yeniden üretildi. Sıradaki: divider, vellum_overlay, web_hero. Durum alindi.
 - 2026-10-14 ara kayıt: gpt-gorsel-J (kısım 3, 7/7) — divider, vellum_overlay ve web_hero da kaydedildi. Paket 5 24/24, Paket 2 5/5 GEÇTİ; kılıf hizası GEÇTİ. Vellum gerçek kısmi alfa içeriyor (merkez 216–232/255, medyan 226/255); hedef %80 opaklık ve kartla tam ölçü eşleşmesindeki kalan farklar Sonuç'a yazılacak. Mevcut dosyaların SHA-256 değerleri korunmuştur; ek rapor/önizleme dosyası yok. Durum ara kayıtta alindi.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-J (kısım 3) — üç kısmın ve mevcut fotoğrafların özeti, yeniden üretimler ve kalan vellum/ölçek farkları Sonuç'ta; Paket 5 24/24, Paket 2 5/5, kılıf hizası GEÇTİ. Son push sonrası DUR.
+- 2026-10-15 entegratör onayladı

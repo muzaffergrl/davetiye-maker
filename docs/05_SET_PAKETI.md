@@ -6,6 +6,9 @@ barındırılan mobil öncelikli düğün sitesi (`docs/10_SITE_PLATFORMU.md`). 
 alıcı paketini, ilan kitini, bitti şartlarını ve dürüst iddia listesini tanımlar. Durum her koleksiyonun
 `COLLECTION_STATUS.md`'sinde bu listeyle aynı sırada tutulur (entegratör).
 
+**Alıcı yolculuğu** (ilan → satın alma → satış sonrası), soru envanteri, ilan iskeleti, Etsy'nin otomatik mesajları, satış sonrası
+mesaj şablonları (admin paneli) ve START HERE ortak kaynağı: `docs/19_ALICI_YOLCULUGU.md` (G091, K32).
+
 Canva dönemi listesi (video, Canva website + Form, 5×7 PDF, story/kare, template linkleri) K22–K24 ile askıda;
 eski hâli: `git show 76f68f9:docs/05_SET_PAKETI.md`.
 
@@ -18,7 +21,7 @@ eski hâli: `git show 76f68f9:docs/05_SET_PAKETI.md`.
 | A3 | **RSVP**: misafir formu, panelde liste + sayılar, CSV, özel sorular | platform (G042, G051) | Tema formu standarda uygun (docs/11 §3.3) |
 | A4 | **Takvime ekle** (.ics + Google), **SSS**, geri sayım | platform + tema (G051) | Tema işaretleri var (docs/11 §3.5) |
 | A5 | **Paylaşım**: site linki + QR (PNG/SVG) | panel | QR gerçek URL'den (`lib/qr.ts`) |
-| A6 | **START HERE PDF** (alıcının Etsy'den indirdiği tek dosya) | `collections/<NN_*>/package/customer/START_HERE.pdf` | Başlat linki tıklanabilir (PDF'te /URI) ve canlıda açılıyor; QR aynı URL'yi kodluyor (`make_qr` ayarları); adımlar **gerçek ekran görüntüleriyle**; SSS; ticari alanlar açık yer tutucu; ≤ 20 MB |
+| A6 | **START HERE PDF** (alıcının Etsy'den indirdiği tek dosya) | `collections/<NN_*>/package/customer/START_HERE.pdf` (kaynak: docs/19 Ek A; G091'de 01–05) | Başlat linki tıklanabilir (PDF'te /URI) ve canlıda açılıyor; QR aynı URL'yi kodluyor (`make_qr` ayarları); adımlar **gerçek paneldeki adlarla** (düğme/başlık adları kaynaktan birebir); "Save your edit link", sık sorulanlar, sorun giderme; karar bekleyen alanlar açık yer tutucu; ≤ 20 MB. Ekran görüntüleri G079 canlı yayınından sonra eklenebilir (bugünkü ekranlar yerel adres ya da K29 öncesi panel) |
 
 Pakette **yok**: basılı davetiye, video, özel alan adı, müzik, yazı tipi dosyası. Kişisel alanlar görsele pişirilmez
 (AGENTS şart 7): bütün metin ve fotoğraflar içerik kaydında, tema görselleri isimsiz.
@@ -27,7 +30,7 @@ Pakette **yok**: basılı davetiye, video, özel alan adı, müzik, yazı tipi d
 
 | # | Parça | Dosya | Not |
 |---|---|---|---|
-| B1 | İlan metni | `listing/listing.md` | §0 durum tablosu · başlık (≤ 140) · açıklama · 13 etiket (≤ 20) · kategori/nitelikler · görsel sırası + alt metin · video · SSS · alıcı mesajı · yayın öncesi kontrol listesi. Doğrulanmamış iddia `[VERIFY]`, ticari alan `[PLACEHOLDER]` |
+| B1 | İlan metni | `listing/listing.md` → güncel metin `listing/listing_v3.md` (G091; docs/19 §4 iskeleti; onaylanınca `listing_kit.py` ona geçer) | §0 durum tablosu · başlık (≤ 140) · açıklama · 13 etiket (≤ 20) · kategori/nitelikler · görsel sırası + alt metin · video · SSS · alıcı mesajı · yayın öncesi kontrol listesi. Doğrulanmamış iddia `[VERIFY]`, ticari alan `[PLACEHOLDER]` |
 | B2 | İlan görselleri | `listing/images/*.png` | ≥ 7, 2000 × 2000. Şu an 8: kapak, misafir sayfaları, What's included, How it works, editör, RSVP, Details, canlı demo QR (`listing/demo_qr.png`). Yalnız yerleşim + tipografi (K21); tema kendi GPT parçaları (kâğıt, köşe çiçekleri) ve gerçek ekran görüntüleri; çizilmiş dekor ve rakip görseli yok. Telefon çerçevesi GPT mockup'ı (Paket 3) gelene kadar çerçevesiz, yuvarlatılmış ekran. **Kapak** arama sonucu boyutunda (~300 px) okunmalı: tema adı + "Wedding Website · RSVP" (68 px) + üç etiket ("No Canva needed · RSVP built in · Live demo", 50 px), hepsi y = 250–1750 arasında (olası 4:3 orta kırpma); ilan PDF'inde kapağın 300 px ve 4:3 önizlemesi var. Yazılar telefonda okunur boyda (Etsy görseli ~390 px gösterir: alt yazı ≥ 40 px, not ≥ 38 px) |
 | B3 | İlan videosu | `listing/video.mp4` | Temanın açılış kaydından: 1080 × 1080, H.264, sessiz, 5–15 s, ≤ 100 MB |
 | B4 | İlan PDF'i | `listing/listing_<tema>.pdf` | B1'in tamamı + görsellerin küçükleri + video bilgisi (kare, süre, boyut, kural kontrolü) |
@@ -94,7 +97,7 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
 | Misafir RSVP → panelde liste + CSV | Yerelde ve **canlıda** test edildi | G042 testleri, G044 canlı uçtan uca 30/30 | Yazılabilir |
 | Takvime ekle | Yerel (G051) + **canlıda**: canlı demo sayfalarında Apple / Outlook ve Google düğmeleri (2026-10-14 07:40 UTC, Vercel bağlayıcısı; telefonla değil) | `tests/g051-browser.ts`, canlı demo | Yazılabilir |
 | RSVP özel soruları, SSS | Yerel üretim build'inde test edildi (G051, 44 kontrol); kod canlıda (canlı = main `59b1291`, platform ağacı aynı), ama **canlıda uçtan uca denenmedi** (canlı demo kaydında yok; `live-check.mjs` kapsamıyor) | `tests/g051-browser.ts` | `[VERIFY: try on the live site]` |
-| "Bütün yazıyı değiştirirsiniz" | **Yanlış**: tema başlıkları şablona sabit ("You are invited", "We're getting married", "Order of the Day", "Will You Join Us?", "Pull up a chair", "Kindly reply by", menü etiketleri…); panelde alanı yok. docs/13 §7'deki "renk dışındaki her metin değişebilir" varsayımı koda uymuyor | `platform/themes/*/*.html` | Değişen alanlar tek tek sayılır; başlıkların, boyalı tasarımın ve renklerin sabit kaldığı yazılır |
+| "Bütün yazıyı değiştirirsiniz" | **Kısmen doğru (G068, 2026-10-14'ten beri):** tasarımın başlık, etiket, düğme ve menü metinleri her editör sayfasının sonundaki "Headings & labels on this page" ile değişir (5 temada copy manifesti, 71–79 anahtar). Sabit kalanlar: boyalı tasarım, renkler, fontlar, yerleşim, zarf animasyonu ve platform mesajları (RSVP form hata metinleri, takvim metni, önizleme bildirimi) | `lib/theme/copy.ts`, `components/panel/CopyFields.tsx`, `themes/*/theme.json` `copy` | "The design's headings, labels and buttons, in your own words" yazılır; sabit kalanlar ayrıca sayılır (G091 `listing_v3.md`). "Every text" yazılmaz |
 | Diller | Site arayüzü (başlıklar, düğmeler, RSVP formu, takvim metni) yalnız İngilizce; tarih stili en-US/GB/CA/AU. Alıcının kendi metinleri: aksanlı Latin ve Kiril tema fontlarıyla çıkıyor; Yunanca script alanlarda düz yedek fonta düşüyor, Çince/Arapça/Korece yedek fontla (yerel Chromium, 2026-10-14, iki tema) | `components/panel/sections.tsx` LOCALES | İlanda PLEASE NOTE + SSS "Is it available in other languages?" |
 | iPhone HEIC fotoğrafları | Panel HEIC'i kabul ediyor; çözme tarayıcıya bağlı; **gerçek iPhone'da denenmedi** | `PhotosSection.tsx`, platform/README | Kılavuz yalnız "açılmazsa JPEG/PNG kopyasını seçin" der; "only in Safari" yazılmaz |
 | Süre ("20–30 dakika") | Ölçülmedi | — | Yazılmaz |
@@ -103,9 +106,12 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
 | `/start` ile başlama | Yerel + canlı (G044: sahiplenme 201, aynı sipariş 409) | G045, G044 | Yazılabilir. İki temanın başlat sayfası canlıda (2026-10-14 07:39 UTC, Vercel bağlayıcısı; 01 aynı günün ilk kontrolünde yoktu, G049 yayınıyla geldi) |
 | Etsy siparişinin doğrulanması | **Yok** (yalnız biçim + sipariş başına bir site; `FormatOnlyVerifier`) | `lib/claim/verify.ts` | "we verify your order" yazılmaz; başlat linki herkes için aynı adres olduğundan "personal start link" de yazılmaz. docs/10 §3 kararı: ilk sürüm biçim kontrolü + kayıt, Etsy API doğrulaması sonra |
 | Düzenleme linkinin e-postayla gönderilmesi | **Yok** | `lib/claim/mailer.ts` | Kılavuz: "we cannot email it yet", "Email it to myself" = alıcının kendi posta uygulaması |
-| Kayıp link yenileme | Operatör aracı yerelde test edildi; canlı depoda denenmedi; süreç karar bekliyor | `scripts/reissue-edit-key.ts` | `[LOST LINK POLICY]` yer tutucu |
+| Kayıp link yenileme | Operatör aracı yerelde test edildi; canlı depoda denenmedi. Süreç (G091): alıcı Etsy'de sipariş numarasıyla yazar → dükkân yeni link üretir (eski link hemen ölür) → `new_edit_link` şablonu (docs/19 §4.5); panel açıkken link Share → Your private edit link'ten yeniden kopyalanır | `scripts/reissue-edit-key.ts`, `views.tsx` | Süreç yazılabilir; süre vaadi yazılmaz (yanıt süresi `[RESPONSE TIME]`) |
 | "Daha hızlı", "en iyi" | Ölçülmedi | — | Yazılmaz |
-| Barındırma süresi, fiyat, iade, destek, gizlilik metni | **Karar yok** | — | `[HOSTING PERIOD]`, `[PRICE]`, `[REFUND POLICY]`, `[SUPPORT EMAIL]`, `[PRIVACY NOTICE LINK]` |
+| Barındırma süresi, dükkân adı, destek e-postası | **Karar var:** düğünden 12 ay sonrasına kadar (K25; panelde Home → Dates → "Online until"); dükkân adı **BKE Studio**, destek **bkestudio@gmail.com** (K33, 2026-10-15) | `lib/panel/rights.ts`, `lib/marketing/config.ts` | Yazılabilir |
+| Fiyat, iade, yanıt süresi, uzatma, silme süreci, gizlilik metni | **Karar yok** | — | `[PRICE]`, `[REFUND POLICY]`, `[RESPONSE TIME]`, `[EXTENSION POLICY]`, `[DELETION PROCESS]`; sipariş onay süresi `[ORDER CHECK TIME]` |
+| Sipariş onayı (manuel) | `CLAIM_ORDER_VERIFICATION=manual`: taslak hemen açılır, dükkân onaylayana kadar Publish kapalı; onay alıcıya otomatik bildirilmez | `scripts/verify-order.ts`, `Setup.tsx` | Kod + test; canlıda açık olduğu entegratör bildirimi (2026-10-15) → ilanda `[VERIFY: manual order check on in production]`; dükkân `order_confirmed` şablonunu gönderir (docs/19 §4.5) |
+| Misafir şifresi, teşekkür modu | Kodda ve yerelde test edildi (G076, G075); şifre ayrı geçici canlı sitede denendi (G078) | `GuestPassword.tsx`, `ThankYou.tsx` | Yazılabilir (G079 canlı yayınından sonra) |
 | Özel alan adı, müzik, renk/yazı tipi değiştirme | Yok | — | "not included" olarak yazılır |
 | AI ile üretilmiş tasarım parçaları ve örnek fotoğraflar | Doğru (K21: GPT) | — | Açıklamada beyan; Etsy AI/Creativity kuralı `[VERIFY]` |
 
@@ -129,8 +135,8 @@ Images", "How to Manage Your Digital Listings"); **doğrulanmadı** — yayında
 
 ## G. Açık konular (kullanıcı / entegratör)
 
-- Ticari kararlar: mağaza/marka adı, **alan adı**, **barındırma planı** (Vercel Hobby ticari değil), fiyat, barındırma süresi, iade,
-  destek e-postası ve yanıt süresi, kayıp link politikası, gizlilik metni. Karar gelince iki dosya güncellenir (`START_HERE.md`,
+- Ticari kararlar: **alan adı**, **barındırma planı** (Vercel Hobby ticari değil), fiyat, iade, yanıt süresi, uzatma, kayıp link
+  süresi, gizlilik metni. (Barındırma süresi K25, dükkân adı + destek e-postası K33 ile verildi.) Karar gelince iki dosya güncellenir (`START_HERE.md`,
   `listing.md`) ve `listing_kit.py pdf` (alan adı değiştiyse `qr`, `images`, `pdf`) yeniden koşulur.
 - Etsy'nin dijital ürün kuralları açısından barındırılan site + süreli erişim + PDF'teki link modelinin uygunluğu (docs/13 §1).
 - Tema 01'in alt menüsü (`.site-nav`) yarı saydam ve bulanıklıksız: arkadaki yazı menü harflerinin arasından okunuyor (gerçek

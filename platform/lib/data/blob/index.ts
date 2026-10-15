@@ -361,6 +361,25 @@ export class BlobAdapter implements DataAdapter {
     return site && site.slug === slug ? site : null;
   }
 
+  async listSites(): Promise<SiteRecord[]> {
+    const paths = (await this.listAll('sites/')).filter((p) => /^sites\/[0-9a-f-]{36}\.json$/.test(p));
+    const records = await mapLimit(paths, READ_CONCURRENCY, async (p) => {
+      const res = await this.readJson<StoredSite>(p);
+      return res ? toRecord(res.data) : null;
+    });
+    return records.filter((r): r is SiteRecord => r !== null).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }
+
+  /** One listing of rsvps/ (no reads): rsvps/<siteId>/<file>.json → count per site. */
+  async rsvpCounts(): Promise<Record<string, number>> {
+    const out: Record<string, number> = {};
+    for (const p of await this.listAll('rsvps/')) {
+      const m = /^rsvps\/([0-9a-f-]{36})\/[^/]+\.json$/.exec(p);
+      if (m) out[m[1]] = (out[m[1]] ?? 0) + 1;
+    }
+    return out;
+  }
+
   async findSitesByOrderRef(orderRef: string): Promise<SiteRecord[]> {
     const index = await this.readJson<Partial<IndexEntry>>(this.orderPath(orderRef));
     if (!index || typeof index.data.id !== 'string') return [];

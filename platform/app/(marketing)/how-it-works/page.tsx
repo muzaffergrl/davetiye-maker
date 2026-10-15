@@ -174,7 +174,8 @@ export default function HowItWorksPage() {
               <h2 className={s.h2}>After the wedding</h2>
               <p>
                 Your website stays online until {MARKETING.hosting.monthsAfterWedding} months after your wedding date, so guests
-                can come back to it. After that: {MARKETING.policies.extension}.
+                can come back to it. After that your website closes for guests; you can still see your content and download your replies. Longer
+                hosting: {MARKETING.policies.extension}.
               </p>
               <p className={s.small}>
                 Already bought a design? <a href={startPath()} data-track="start_click">Start your website</a>.

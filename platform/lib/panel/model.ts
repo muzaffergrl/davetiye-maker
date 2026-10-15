@@ -529,6 +529,43 @@ export function sampleDateLeft(content: ContentRecord, sample: ContentRecord | n
   return Boolean(sample?.date && content.date === sample.date);
 }
 
+const ISO_DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+function isoDayNumber(value: unknown): number | null {
+  if (typeof value !== 'string' || !ISO_DAY_RE.test(value)) return null;
+  const t = Date.parse(`${value}T00:00:00Z`);
+  return Number.isFinite(t) ? Math.round(t / 86_400_000) : null;
+}
+
+function isoDayFromNumber(n: number): string {
+  return new Date(n * 86_400_000).toISOString().slice(0, 10);
+}
+
+/**
+ * G087: the reply-by date moves with the wedding date while the couple has not chosen it themselves. A site claimed on
+ * /start starts with the design's sample deadline (e.g. six weeks before the sample wedding); when the couple sets
+ * their own wedding date the deadline keeps the same distance before it, instead of staying on the sample's day
+ * (a wedding on September 18 with "Replies close April 3"). The deadline counts as "not chosen" while it is the
+ * sample's own deadline or still exactly that distance before the previous wedding date. A deadline the couple
+ * picked is never touched. Returns `next` itself when nothing moves.
+ */
+export function followWeddingDate(prev: ContentRecord, next: ContentRecord, sample: ContentRecord | null): ContentRecord {
+  if (!sample || prev.date === next.date) return next;
+  const sampleDate = isoDayNumber(sample.date);
+  const sampleDeadline = isoDayNumber(sample.rsvp?.deadline);
+  const prevDate = isoDayNumber(prev.date);
+  const nextDate = isoDayNumber(next.date);
+  const deadline = isoDayNumber(next.rsvp?.deadline);
+  if (sampleDate === null || sampleDeadline === null || prevDate === null || nextDate === null || deadline === null) return next;
+  const offset = sampleDeadline - sampleDate;
+  if (offset >= 0) return next;
+  const untouched = deadline === sampleDeadline || deadline === prevDate + offset;
+  if (!untouched) return next;
+  const moved = isoDayFromNumber(nextDate + offset);
+  if (moved === next.rsvp?.deadline) return next;
+  return { ...next, rsvp: { ...next.rsvp, deadline: moved } };
+}
+
 /** List notes counted per kind: [singular, plural]. */
 const LIST_LABELS: Array<[RegExp, string, string]> = [
   [/^schedule\./, 'event place', 'event places'],

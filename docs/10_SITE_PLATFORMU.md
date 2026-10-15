@@ -30,6 +30,8 @@ düzenler. Bu belge platformun tek kaynağıdır.
      `POST /api/signin` → 503).
 4. Site: `/<slug>` = kapalı zarf açılış sayfası → `/<slug>/home` → `/story`, `/details`, `/rsvp`.
 5. Misafir RSVP gönderir → çift yanıtları panelde (Guests) görür, CSV indirir.
+6. **Dükkân tarafı (G087, K30):** `/admin` — onay bekleyen siparişler (Yapılacak), siparişi onayla, yeni düzenleme linki,
+   isim/tarih hakkı, yayında kalma tarihi, yayından kaldır, sil, hazır Etsy mesajları. Ayrıntı `docs/17_ADMIN_PANELI.md`.
 
 ## 2. Mimari
 - `platform/` — Next.js (App Router) uygulaması; Vercel'e uygun.

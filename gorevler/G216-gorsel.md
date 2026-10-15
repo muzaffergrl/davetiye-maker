@@ -85,3 +85,4 @@ Kısım 3 — gpt-gorsel-H, 2026-10-14 (8/8; W2 tamam):
 - 2026-10-14 ara kayıt (kısım 3, 8/8): gpt-gorsel-H; divider, twine_line, barnwood, web_hero eklendi; bu oturumun sekiz dosyası Kaydet yollarında. PAKET 5: 24 dosya + zarf/kapanış hizası = 25/25 GEÇTİ (çıkış 0). Hero 1200×630 merkez kırpımında zarf ve kurdele tam, alt boşluk %5 üstünde; ek rapor/önizleme dosyası yok.
 - 2026-10-14 gpt-gorsel-H: kısım 3 bitti; W2 tamam. Üç kısmın özeti Sonuç'a eklendi; PAKET 5 25/25 GEÇTİ. PAKET 2 gpt-gorsel-D'de; durumu entegratör incelemeye alır.
 - 2026-10-14 entegratör: W2 25/25 geçti, görsel olarak iyi (barnwood, twine_line, web_hero dahil). PAKET 2 bekleniyor (gpt-gorsel-D).
+- 2026-10-15 entegratör: PAKET 5 25/25 onaylı (görsel olarak iyi). PAKET 2 (5 fotoğraf) repoda yok — photos/ klasörü hiç oluşmamış; prompt'lar kullanıcıya yeniden iletildi.

@@ -227,10 +227,10 @@ try {
   check('editor: draft status', (await page.getAttribute('[data-panel]', 'data-status')) === 'draft');
   await shot(page, '05_editor_390');
 
-  // Back to /start: the stored result; "Start another website" gives an empty form (email kept).
+  // Back to /start: the stored result; "Start with a different order" gives an empty form (email kept).
   await page.goto(`${BASE}/start?theme=${FIXTURE}`, { waitUntil: 'networkidle' });
   check('back on /start: the saved link is shown again', (await page.locator('[data-edit-link]').count()) === 1);
-  await page.getByRole('button', { name: 'Start another website' }).click();
+  await page.getByRole('button', { name: 'Start with a different order' }).click();
   await page.waitForSelector('#start-order');
   check('start another: form again, email kept', (await page.inputValue('#start-email')) === 'avery@example.test' && (await page.inputValue('#start-order')) === '');
 

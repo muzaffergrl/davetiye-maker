@@ -290,6 +290,11 @@ function StatusCard({
     badge = { tone: 'neutral', text: 'Offline' };
     text = 'Your website is offline. Guests see “Page not found” until you publish again.';
     action = { label: 'Publish again', run: onPublish, variant: 'primary', icon: Send };
+  } else if (meta.orderPending) {
+    // G087: say it where the couple looks first, not only when Publish is tapped.
+    badge = { tone: 'warning', text: 'Confirming your order', icon: Hourglass };
+    text = 'Your website is a private draft. We are confirming your Etsy order — set everything up now; you can publish as soon as it is confirmed.';
+    action = setupStep !== null ? { label: `Continue setup · Step ${setupStep} of 3`, run: onContinueSetup, variant: 'primary', icon: Sparkles } : null;
   } else {
     badge = { tone: 'accent', text: 'Draft' };
     text = 'Your website is a draft. Only you can see it.';
@@ -526,11 +531,26 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
         </section>
         <section>
           <h3 className={styles.subTitle}>Can my partner edit too?</h3>
-          <p>Yes: share your edit link with your partner (Share → Your edit link). Anyone with that link can edit, so keep it private.</p>
+          <p>Yes: share your edit link with your partner (Share → Your private edit link → Copy). Anyone with that link can edit, so keep it private.</p>
+        </section>
+        <section>
+          <h3 className={styles.subTitle}>I lost my edit link</h3>
+          <p>
+            While this page is open, copy it again under Share → Your private edit link. If it is lost, message {PANEL_BRAND.shopName} on
+            Etsy with your order number: we send you a new link and the old one stops working.
+          </p>
         </section>
         <section>
           <h3 className={styles.subTitle}>Do guests see my changes right away?</h3>
-          <p>Your changes are saved as you type. Guests see them after you tap “Publish changes”.</p>
+          <p>Your changes are saved as you type. Guests see them after you publish: when you see “Unpublished changes”, tap Review, then Publish changes.</p>
+        </section>
+        <section>
+          <h3 className={styles.subTitle}>Can guests change their reply?</h3>
+          <p>Yes: they send the form again. You see both replies under Guests and can remove the old one.</p>
+        </section>
+        <section>
+          <h3 className={styles.subTitle}>Will I get an email when someone replies?</h3>
+          <p>Not yet: new replies show under Guests (with a “New” mark) the next time you open your editor.</p>
         </section>
         <section>
           <h3 className={styles.subTitle}>Need help?</h3>
