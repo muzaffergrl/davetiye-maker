@@ -1,9 +1,7 @@
 {
  "base": "next start (production build)",
  "theme": "tuscan-vineyard",
- "errors": [
-  "draft preview: page.check: Timeout 10000ms exceeded."
- ],
+ "errors": [],
  "warnings": [],
  "passed": [
   "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
@@ -63,7 +61,7 @@
   "home @375×553 (stress record): names 40 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 851, nav top 479)",
   "home@375×553 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 57×44, home \"Replay the envelope\" 220×48, rsvp \"Replay the envelope\" 177×48",
-  "envelope → /giulia-and-matteo/home in 5530 ms, card transition flag set",
+  "envelope → /giulia-and-matteo/home in 4405 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-09-25 16:00 Europe/Rome = 2027-09-25 14:00 UTC",
@@ -77,16 +75,17 @@
   "RSVP: \"Send another reply\" reopens the form",
   "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
   "external requests: Google Fonts only",
-  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
-  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 390×844: see-through nav (blur/transparency by design, 100.00 % of the label row shows the page) — its labels are there at the first frame",
+  "nav in the envelope → home view transition 360×640: see-through nav (blur/transparency by design, 100.00 % of the label row shows the page) — its labels are there at the first frame",
   "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
   "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
   "Skip → home",
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-09-25T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-09-30T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (449 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (251 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "home@390 (changed content): no overflow, 29 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@390 (changed content): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
@@ -112,8 +111,8 @@
   "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 75 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 1238 KB",
-  "home first view (390×844, DPR 3, placeholders): 938 KB",
+  "index first view (390×844, DPR 3, placeholders): 1237 KB",
+  "home first view (390×844, DPR 3, placeholders): 939 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 1331 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1201 KB"
  ],
@@ -351,9 +350,9 @@
      "span.cd-lbl \"Days\" bottom 645",
      "span.cd-num \"04\" bottom 628",
      "span.cd-lbl \"Hours\" bottom 645",
-     "span.cd-num \"49\" bottom 628",
+     "span.cd-num \"18\" bottom 628",
      "span.cd-lbl \"Minutes\" bottom 645",
-     "span.cd-num \"00\" bottom 628",
+     "span.cd-num \"53\" bottom 628",
      "span.cd-lbl \"Seconds\" bottom 645",
      "a.btn \"RSVP\" bottom 709"
     ],
@@ -389,9 +388,9 @@
      "span.cd-lbl \"Days\" bottom 630",
      "span.cd-num \"04\" bottom 613",
      "span.cd-lbl \"Hours\" bottom 630",
-     "span.cd-num \"48\" bottom 613",
+     "span.cd-num \"18\" bottom 613",
      "span.cd-lbl \"Minutes\" bottom 630",
-     "span.cd-num \"52\" bottom 613",
+     "span.cd-num \"46\" bottom 613",
      "span.cd-lbl \"Seconds\" bottom 630",
      "a.btn \"RSVP\" bottom 694"
     ],
@@ -419,9 +418,9 @@
      "span.cd-lbl \"Days\" bottom 691",
      "span.cd-num \"02\" bottom 674",
      "span.cd-lbl \"Hours\" bottom 691",
-     "span.cd-num \"48\" bottom 674",
+     "span.cd-num \"18\" bottom 674",
      "span.cd-lbl \"Minutes\" bottom 691",
-     "span.cd-num \"44\" bottom 674",
+     "span.cd-num \"40\" bottom 674",
      "span.cd-lbl \"Seconds\" bottom 691"
     ],
     "partly": [],
@@ -476,9 +475,9 @@
      "span.cd-lbl \"Days\" bottom 731",
      "span.cd-num \"02\" bottom 714",
      "span.cd-lbl \"Hours\" bottom 731",
-     "span.cd-num \"48\" bottom 714",
+     "span.cd-num \"18\" bottom 714",
      "span.cd-lbl \"Minutes\" bottom 731",
-     "span.cd-num \"27\" bottom 714",
+     "span.cd-num \"26\" bottom 714",
      "span.cd-lbl \"Seconds\" bottom 731",
      "a.btn \"RSVP\" bottom 795"
     ],
@@ -514,9 +513,9 @@
      "span.cd-lbl \"Days\" bottom 716",
      "span.cd-num \"02\" bottom 699",
      "span.cd-lbl \"Hours\" bottom 716",
-     "span.cd-num \"48\" bottom 699",
+     "span.cd-num \"18\" bottom 699",
      "span.cd-lbl \"Minutes\" bottom 716",
-     "span.cd-num \"21\" bottom 699",
+     "span.cd-num \"20\" bottom 699",
      "span.cd-lbl \"Seconds\" bottom 716",
      "a.btn \"RSVP\" bottom 780"
     ],
@@ -546,9 +545,9 @@
      "span.cd-lbl \"Days\" bottom 848",
      "span.cd-num \"02\" bottom 831",
      "span.cd-lbl \"Hours\" bottom 848",
-     "span.cd-num \"48\" bottom 831",
+     "span.cd-num \"18\" bottom 831",
      "span.cd-lbl \"Minutes\" bottom 848",
-     "span.cd-num \"14\" bottom 831",
+     "span.cd-num \"13\" bottom 831",
      "span.cd-lbl \"Seconds\" bottom 848",
      "a.btn \"RSVP\" bottom 907"
     ],
@@ -579,9 +578,9 @@
      "span.cd-lbl \"Days\" bottom 795",
      "span.cd-num \"02\" bottom 778",
      "span.cd-lbl \"Hours\" bottom 795",
-     "span.cd-num \"48\" bottom 778",
+     "span.cd-num \"18\" bottom 778",
      "span.cd-lbl \"Minutes\" bottom 795",
-     "span.cd-num \"05\" bottom 778",
+     "span.cd-num \"06\" bottom 778",
      "span.cd-lbl \"Seconds\" bottom 795",
      "a.btn \"RSVP\" bottom 851"
     ],
@@ -619,9 +618,9 @@
      "span.cd-lbl \"Days\" bottom 743",
      "span.cd-num \"02\" bottom 726",
      "span.cd-lbl \"Hours\" bottom 743",
-     "span.cd-num \"47\" bottom 726",
+     "span.cd-num \"17\" bottom 726",
      "span.cd-lbl \"Minutes\" bottom 743",
-     "span.cd-num \"57\" bottom 726",
+     "span.cd-num \"59\" bottom 726",
      "span.cd-lbl \"Seconds\" bottom 743",
      "a.btn \"RSVP\" bottom 807"
     ],
@@ -657,9 +656,9 @@
      "span.cd-lbl \"Days\" bottom 727",
      "span.cd-num \"02\" bottom 710",
      "span.cd-lbl \"Hours\" bottom 727",
-     "span.cd-num \"47\" bottom 710",
+     "span.cd-num \"17\" bottom 710",
      "span.cd-lbl \"Minutes\" bottom 727",
-     "span.cd-num \"50\" bottom 710",
+     "span.cd-num \"53\" bottom 710",
      "span.cd-lbl \"Seconds\" bottom 727",
      "a.btn \"RSVP\" bottom 791"
     ],
@@ -667,15 +666,15 @@
     "names": 40
    }
   ],
-  "envelope_to_home_ms": 5530,
+  "envelope_to_home_ms": 4405,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
   },
   "nav_vt_390x844": {
    "nav_animations": [],
-   "opaque_label_row": true,
-   "settled_vs_alone": "0.00 %",
+   "opaque_label_row": false,
+   "settled_vs_alone": "100.00 %",
    "frames": [
     {
      "t": 0,
@@ -689,8 +688,8 @@
   },
   "nav_vt_360x640": {
    "nav_animations": [],
-   "opaque_label_row": true,
-   "settled_vs_alone": "0.00 %",
+   "opaque_label_row": false,
+   "settled_vs_alone": "100.00 %",
    "frames": [
     {
      "t": 0,
@@ -744,7 +743,7 @@
    "copy_keys_at_max": 75,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 1238,
+  "first_view_index_kb_placeholders": 1237,
   "first_view_index_files": [
    [
     "/themes/tuscan-vineyard/img/decor_br-960.webp",
@@ -779,7 +778,7 @@
     44338
    ]
   ],
-  "first_view_home_kb_placeholders": 938,
+  "first_view_home_kb_placeholders": 939,
   "first_view_home_files": [
    [
     "/themes/tuscan-vineyard/img/decor_br-960.webp",
@@ -799,7 +798,7 @@
    ],
    [
     "/themes/tuscan-vineyard/site.css",
-    43913
+    43917
    ],
    [
     "/themes/tuscan-vineyard/img/favicon.png",
@@ -833,7 +832,7 @@
     132834
    ],
    [
-    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/e95de2e5a0308fea3cacaecb6a2badf2-640w.jpg",
+    "/media/0f00443c-3b3b-45aa-adec-c16ae21d4d69/7cf568648e9442307a442ee43b14cbc5-640w.jpg",
     97932
    ],
    [
@@ -864,15 +863,15 @@
     125256
    ],
    [
-    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/a1b8297d1a26280a87b40524d16ac8b5-640w.jpg",
+    "/media/0f00443c-3b3b-45aa-adec-c16ae21d4d69/610847fb2181fbaf6e40efa9e6ba1d9a-640w.jpg",
     99933
    ],
    [
-    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/e95de2e5a0308fea3cacaecb6a2badf2-640w.jpg",
+    "/media/0f00443c-3b3b-45aa-adec-c16ae21d4d69/7cf568648e9442307a442ee43b14cbc5-640w.jpg",
     97932
    ],
    [
-    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/c988de18284ecf08167d07ed58e4e46a-640w.jpg",
+    "/media/0f00443c-3b3b-45aa-adec-c16ae21d4d69/1032c9a86048719fae16c3dae6fcf7cc-640w.jpg",
     76570
    ],
    [
@@ -881,7 +880,7 @@
    ],
    [
     "/themes/tuscan-vineyard/site.css",
-    43913
+    43917
    ]
   ],
   "compare": {
