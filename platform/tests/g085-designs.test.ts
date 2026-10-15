@@ -162,7 +162,9 @@ test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject
   const ready = liveDesigns(cfg).find((x) => x.id === ID)!;
   assert.equal((product(ready, cfg).offers as Record<string, string>).price, '29.40', 'Offer once a real price and link exist');
   const list = itemList(liveDesigns().map((x) => ({ path: `/designs/${x.id}`, name: x.name })));
-  assert.equal((list.itemListElement as unknown[]).length, 5);
+  // G093: one item per live design (8 since 06/07/08), as in g082/g083
+  assert.equal((list.itemListElement as unknown[]).length, liveDesigns().length);
+  assert.ok(liveDesigns().length >= 5);
   assert.deepEqual(validateJsonLd(graph(list)), []);
 });
 

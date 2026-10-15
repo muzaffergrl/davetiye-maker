@@ -2,7 +2,7 @@
 id: G410
 baslik: Tasarım 10 Tuscan Vineyard — platform teması
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-local-G410
 oncelik: 3
 bagimli: [G210, G038, G046, G052]
@@ -38,9 +38,69 @@ Tasarım 10'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [ ] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+**Yapıldı (claude-local-G410, 2026-10-15).** `platform/themes/tuscan-vineyard/` (theme.json 5 sayfa + 5 foto alanı + 75 copy
+anahtarı, content.demo.json = koleksiyon kaydı birebir, 5 şablon, site.css 43,9 KB, site.js 35,6 KB, thank-you.css,
+build_images.py, README.md, img/ 48 WebP + 3 maske + og + favicon + manifest; klasör 2,7 MB), `platform/tests/theme-tuscan-vineyard.test.ts`
+(29 test: §13.2'nin 24 maddesi + zarf/kart/story/bütçe/G068/G075 eşdeğerleri — g068/g075 ortak testleri temayı artık
+`tests/design-themes.ts` ile kendiliğinden de sayıyor), `platform/previews/g410/` (theme-check çıktıları, `compare_*_390.jpg`,
+`compare_closure.jpg`, `story_1280_static.png`).
+
+- **Açılış:** dokununca jüt sicim mantarı ve iki zeytin yaprağıyla kapağın ucundan yukarı çözülür (alt tel düğüme toplanır,
+  teller zarfın kenarından arkaya kayar; ilk hareket 0 ms), kraft kapak 0→90° açılır, şarap rengi üzüm astarlı iç yüz −90→0°
+  devralır, kart cepten yükselirken sağ üst köşeden bir asma dalı (accent_2 × 1, tasarıma özel `curl` yolu) kıvrılarak gelir,
+  kart öne çıkıp home kartına uçar (VT). `go` 3,95 s; theme-check ölçümü dokun → home 4405 ms.
+- **Story:** isimsiz şarap etiketi çerçeveleri meşe masaya (`oak_tile`) tek tek bırakılır (`place`), caption'lar yazılır,
+  yanlarına üzüm salkımı, gümüşi zeytin yaprağı ve asma yaprağı konar; telefonda basamaklı sütun (pencere 52,6vw ≥ 38vw),
+  ≥ 720 px yan yana.
+- **Kesimler (tasarıma özel, build_images.py):** kapak kenarı `kapak_kes`'in bulduğu bordür sapı yerine gerçek kenardan
+  (kanat boyunca medyan düşüş skoru 94,7 / 101,5); ön cep iki çapraz + düz alt kanat (renk sınıflayıcı kraft ↔ şarap astar);
+  açık zarf ölçülen dönüşümle kapalıya oturtuldu (× 0,9989 / 1,0077, öteleme 1,1 / 17,6 px → `manifest.stage.align`);
+  sarılı kapanışın taşan sicim uçları zarf alfasıyla kırpıldı (4 552 px). Çerçeve pencere lekeleri `parts_prep leke_doldur`
+  ile şeffaf (her WebP'de denetlendi). Telefon zemini `bg_page`'in kümesiz gökyüzü+tepeler kırpımı + ayrı köşe kümeleri;
+  yatayda aynı kırpımın yumuşak hâli.
+- **Comp sapmaları (README haritasında):** geri sayım kutuları → sade rakam (K21); Marcellus'ta italik yok → dik
+  (`font-synthesis: none`); story caption'ları etiketin altında masada (GPT çerçevesinde pencere altında kâğıt yok);
+  telefonda üç etiket basamaklı; story başlığı ile masa arası tepe yok; masa örtüsü / zeytin taneleri / hap içi süsler yok
+  (parça yok); "Tap to open" altındaki minik süs yok; kısa telefonda (≤ 600 px yükseklik) kart isimlerin yanında.
+  Monogram yok (mantar diski "no branding", W1.1'de harf yok → panelde Monogram alanı bu temada çıkmaz).
+
+**Testler (Windows 10, Node 22.23, Python 3.13):**
+- `kit_check --paket 5` 24/24 (hiza UYARI: alt −1,82 %, sicim uçları −2,02 / −3,12 % → tema düzeltti), `--paket 2` 5/5.
+- `node --test tests/theme-tuscan-vineyard.test.ts` 29/29. **`npm test` 906 test: 893 geçti, 0 hata, 13 atlandı** (rebase
+  sonrası; symlink shim'iyle), `npm run typecheck` geçti, `npm run build` + trace-check geçti (14 tema).
+- `copy-manifest.ts --check` temiz (75 anahtar, işaretsiz metin yok).
+- `theme-check --theme tuscan-vineyard --stress --no-video` (kurulu Chrome 155 + geçici `playwright-core` shim'i, tarayıcı
+  indirilmedi): **111 geçti / 0 uyarı / 0 hata** (5 genişlik, kısa telefonlar 360×640 · 375×553 · 390×690 · 390×844, akışlar,
+  zorlama kaydı + teşekkür hâli, G068 `max`'lar, VT, oturum anahtarları, reduced motion, dış istek yalnız Google Fonts).
+  İlk görünüm (390×844 DPR 3): index 1237 KB / home 939 KB (yer tutucu), 1331 / 1201 KB (tohumlanmış PAKET 2 fotoğrafları).
+  `tests/g051-browser.ts --theme tuscan-vineyard`: 44/44.
+- Ara turlarda düzeltildi: home satır girişleri kenarı aşıyordu, nav 360 px'te (Marcellus geniş harfler; nav `max` 6/7),
+  teşekkür kartı başlığı salkımın üstüne biniyordu, 375×553'te hero nav'ın altına iniyordu, font geç gelince ölçüm yenilenmiyordu.
+- **qa-kontrol (§13.4 kapısı): GEÇTİ** — ret sebebi yok; küçük notlardan RSVP kartındaki sicim kâğıt kenarına çekildi, README'ye
+  home bölüm sırası ve "Tap to open" süsü gerekçesi eklendi; hero kartında yer satırının virgülde kırılması (`fitCopy`) açık kaldı.
+
+**Test edilmedi / sınırlar:**
+- Açılış MP4'ü (`opening_390x844.mp4`): makinede ffmpeg yok, `--no-video` koşuldu. Gerçek iPhone/Safari ve Android Chrome,
+  Vercel'de yayın, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ denenmedi.
+- theme-check'in "content change" adımı Windows'ta `C:\` yolunu ESM'e verdiği için koşmuyordu; yerel bir yükleme kancasıyla
+  (scratchpad, repo değişmedi) koşturuldu ve geçti — script'in Windows uyumu ayrı iş. "Taslak önizlemede RSVP" adımı yük altında
+  iki turda zaman aşımına uğradı; aynı tekrar senaryosunda onaylı 01 teması da aynı davrandı (9,8 s / panel yok) → ortam kaynaklı;
+  son turda geçti.
+- Story ≥ 720 px yalnız statik önizlemede (`story_1280_static.png`, DEV_CONTENT) görüldü; theme-check story'yi geniş ekranda çekmiyor.
+
+**Sorunlu GPT parçaları / önerilen prompt düzeltmeleri (`tools/katalog.py` `WEB[10]`):**
+- `frame_portrait`: pencere görselin %92,7'sine iniyor, caption için kâğıt payı yok → "leave a plain paper band below the window
+  (about 18 % of the frame height) for a caption".
+- `envelope_open`: gövde kapalıdan ~23 px yukarıda (alt −1,82 %); `closure`: sicim uçları zarf hattını 30–48 px aşıyor — prompt
+  zaten istiyor, GPT tutmadı; tema ölçülen düzeltmeyle çözdü.
+- `frame_landscape` penceresi ≈ 1,59:1 (prompt 3:2) ve iki çerçevede pencere lekesi (parts_prep doldurdu).
+- W1.2'deki geri sayım kutuları, W1.3'teki masa örtüsü için parça yok → istenirse `countdown_tile`, `linen_cloth` (katalog + G2NN).
+
+**Önerilen görevler:** (1) claude-kod: `scripts/theme-check.cjs` `editAndPublish` ve `tests/*-browser.ts` satır içi ESM
+importlarını `pathToFileURL` ile Windows uyumlu yapmak. (2) gpt-gorsel (isteğe bağlı): yukarıdaki `frame_portrait` caption payı.
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-local-G410
+- 2026-10-15 bitti, incelemeye gönderildi

@@ -1,0 +1,131 @@
+<!doctype html>
+<!-- Ivory Lace & Pearls · page 4 — Details (/<slug>/details). W1.4 comp: the tall ivory card with a hair-thin
+     silver-gold edge and a narrow scalloped lace edge along the top (GPT info_card) holding "Order of the Day" in the
+     copperplate script and the rows (time in small spaced Bodoni capitals | the event in Bodoni, its place in italic
+     under it) separated by a small strand of pearls with a lace bow (GPT divider); below it the venue photo in the wide
+     carved oval frame (GPT frame_landscape), the venue in the script, its place in italic Bodoni, a strand of pearls and
+     "DRESS CODE · …". The card grows with the schedule (1–10 rows, docs/11 §9 3-slice cut, nothing drawn). Then add to
+     calendar, map, Travel & Stay, Registry (link blocks only with their link), Questions & Answers (G051). Personal
+     text: none — filled on the server. Design texts: data-copy (G068). Thank-you mode (G075): the page stays as "The
+     Day" (order of the day, venue, map, registry) without what only matters before the wedding (calendar, dress code,
+     travel, questions, RSVP); the ceremony sentence in the past tense; the couple can hide it (thank_you.details "hide":
+     404, like the links to it). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.day_title} · {name_display}">The Day</title>
+<meta name="description" data-attr-content="Schedule, venue and travel · {name_display} · {date|date-long}" content="Schedule, venue and travel">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.day_title} · {name_display}" content="The Day">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.name} · {venue.city_region}" content="">
+<meta name="theme-color" content="#F1E7DE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&amp;family=Mrs+Saint+Delafield&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-if="!thank_you_hides_details" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <!-- ORDER OF THE DAY (comp W1.4) — one row per schedule item -->
+  <section class="details-top" data-scene="details-card" aria-labelledby="day-title">
+    <div class="page-bg" aria-hidden="true">
+      <img class="corner corner-tl" data-step="decor" data-a="glide-tl" src="img/decor_tl-320.webp" srcset="img/decor_tl-320.webp 320w, img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(22vw, 38vh, 320px), min(36vw, 210px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="glide-br" src="img/decor_br-320.webp" srcset="img/decor_br-320.webp 320w, img/decor_br-480.webp 480w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(22vw, 38vh, 320px), min(38vw, 20svh, 220px)" alt="">
+      <img class="float f-drop" data-step="decor" data-a="fade" src="img/accent_1-96.webp" alt="">
+      <img class="float f-petal" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-bow" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    </div>
+    <p class="kicker page-kicker" data-step="kicker" data-a="fade" data-fold><span data-field="date" data-format="weekday"></span> · <span class="nowrap" data-field="date"></span></p>
+    <div class="wrap">
+      <div class="paper info day-card" data-step="card" data-a="set">
+        <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-771.webp 771w" sizes="min(calc(100vw - 40px), 420px)" alt="">
+        <div class="paper-text info-text">
+          <h1 class="script card-title" id="day-title" data-step="title" data-a="write" data-fold data-copy="schedule_title">Order of the Day</h1>
+          <ol class="sched-list">
+            <li class="sched-row" data-repeat="schedule" data-step="row" data-a="rise" data-fold>
+              <span class="time" data-field=".time"></span>
+              <span class="label" data-field=".label"></span>
+              <span class="loc" data-if=".location" data-field=".location"></span>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+      <div class="cal" data-step="cal" data-a="rise" data-fold data-if="!thank_you_on">
+        <p class="kicker" data-copy="calendar_title">Add to your calendar</p>
+        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics" data-copy="calendar_ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" data-copy="calendar_google">Google</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE (comp W1.4) -->
+  <section class="wrap venue-sec" data-scene="details-venue" aria-label="The venue">
+    <figure class="venue-photo" data-step="photo" data-a="glint" data-fold>
+      <div class="photo-slot mask-landscape" data-slot="venue">
+        <img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(calc(75vw - 30px), 330px)" alt="" data-attr-alt="{venue.name}" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><img src="img/accent_2-200.webp" alt=""><span>Your photo here</span></span>
+      </div>
+      <img class="vframe" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(calc(100vw - 40px), 440px)" alt="" loading="lazy">
+    </figure>
+    <div class="venue-text" data-step="body" data-a="rise" data-fold>
+      <p class="script venue-name" data-field="venue.name"></p>
+      <p class="venue-place" data-field="venue.city_region_country"></p>
+      <p class="note" data-if="venue.address" data-field="venue.address"></p>
+      <p class="note" data-if="ceremony_time !thank_you_on"><span data-copy="ceremony_line">The ceremony begins at</span> <span class="nowrap" data-field="ceremony_time"></span>.</p>
+      <p class="note" data-if="ceremony_time thank_you_on"><span data-copy="ceremony_after">The ceremony began at</span> <span class="nowrap" data-field="ceremony_time"></span>.</p>
+    </div>
+    <div class="dress" data-optional="dress_code" data-if="dress_code !thank_you_on" data-step="dress" data-a="fade" data-fold>
+      <img class="dress-orn" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="170px" alt="" loading="lazy">
+      <p><span class="kicker" data-copy="dress_label">Dress code</span> <span class="dot" aria-hidden="true">·</span> <span class="dress-val" data-field="dress_code"></span></p>
+    </div>
+    <p class="action" data-step="action" data-a="rise" data-if="urls.map" data-fold><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank" data-copy="view_map">View map</a></p>
+  </section>
+
+  <!-- link blocks are shown only with their link (no dead buttons on a live site) -->
+  <section class="wrap block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation !thank_you_on" aria-label="Travel and stay">
+    <img class="sec-orn" data-step="orn" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="200px" alt="" loading="lazy">
+    <h2 class="script" data-step="title" data-a="write" data-copy="travel_title">Travel <span class="amp">&amp;</span> Stay</h2>
+    <p class="note" data-step="body" data-a="fade" data-copy="travel_note">Where to stay and how to get here: see the link below.</p>
+    <p class="action" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank" data-copy="travel_button">Where to stay</a></p>
+  </section>
+
+  <section class="wrap block" data-scene="details-block" data-optional="registry" data-if="urls.registry" aria-label="Registry">
+    <img class="sec-orn" data-step="orn" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="200px" alt="" loading="lazy">
+    <h2 class="script" data-step="title" data-a="write" data-copy="registry_title">Registry</h2>
+    <p class="note" data-step="body" data-a="fade" data-copy="registry_note">Your presence is the greatest gift. For those who wish to honour us with a gift, our registry is linked below.</p>
+    <p class="action" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.registry" target="_blank" data-copy="registry_button">View registry</a></p>
+  </section>
+
+  <!-- QUESTIONS & ANSWERS (content faq, G051) — native details/summary: opens and closes without JS -->
+  <section class="wrap faq-sec" data-scene="details-faq" data-optional="faq" data-if="faq !thank_you_on" aria-labelledby="faq-title">
+    <img class="sec-orn" data-step="orn" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="200px" alt="" loading="lazy">
+    <h2 class="script" id="faq-title" data-step="title" data-a="write" data-copy="faq_title">Questions <span class="amp">&amp;</span> Answers</h2>
+    <div class="faq-list">
+      <details class="faq-item" data-repeat="faq" data-step="item" data-a="rise">
+        <summary><span class="faq-q" data-field=".q"></span></summary>
+        <p class="faq-a" data-field=".a"></p>
+      </details>
+    </div>
+  </section>
+
+  <section class="section next-sec page-end" data-scene="details-next">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="glide-br" src="img/decor_br-320.webp" srcset="img/decor_br-320.webp 320w, img/decor_br-480.webp 480w, img/decor_br-720.webp 720w" sizes="min(46vw, 270px)" alt="" loading="lazy">
+    <p data-step="link" data-a="rise" data-if="!rsvp.method !thank_you_on"><a class="btn" href="rsvp.html" data-copy="rsvp_button">RSVP</a></p>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <img class="orn" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="180px" alt="" aria-hidden="true">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
+    <li><a href="details.html" aria-current="page"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

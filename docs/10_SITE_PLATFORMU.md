@@ -121,6 +121,11 @@ düzenler. Bu belge platformun tek kaynağıdır.
   `dpl_BfYJEMS1nxXarDBKovViJ2F81Y6h`. `npm test` 574/574 (Windows'ta g080-approval'ın 8 testi symlink izni yüzünden yalnız junction
   shim'iyle geçiyor — README "Windows notları"), typecheck, build yeşil. Demolar yeniden tohumlandı; `live-check` 40/40, beş tema 41/41,
   `blob-smoke` 12/12. Panel gezintisi ve 3 adımlı kurulum canlıda denendi; ekran görüntüleri `docs/10_canli_test/g079/`.
+- **Dükkân paneli canlıda (G092, 2026-10-15, `claude-local-1`):** production = main `55cf6ee` (platform ağacı `117993db9549`; /admin G087,
+  G091 metinleri, K33), `dpl_9VoCE8w6VuARyzHPJCfeDeWPRDSj`. Vercel'e `ADMIN_PASSWORD` (Production + Preview, Secret; kullanıcı onayıyla, K33 geçici kısa
+  şifre) eklendi. `npm test` 651/651, typecheck, build yeşil; `live-check` 40/40, beş tema 41/41, `blob-smoke` 12/12. Canlı admin: giriş + "Geçici kısa
+  şifre" uyarısı, liste, site sayfası, mesaj kopyalama, yeni düzenleme linki (eski 404, yeni açılır), adres yazarak silme (404).
+  `CLAIM_ORDER_VERIFICATION` tanımlı değil (= biçim kontrolü) → sipariş onayı adımı canlıda yok. Ekranlar `docs/10_canli_test/g092/`.
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 

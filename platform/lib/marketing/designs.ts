@@ -203,6 +203,96 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: "red and navy striped airmail envelope with a perforated tear strip and a burgundy wax seal with the couple's initials; postage stamps, postmarks, pressed flowers and airmail letter cards.",
     relatedGuides: ['digital-wedding-invitation-etiquette', 'canva-wedding-website-template-vs-hosted-website'],
   },
+  // G093: written against themes/art-deco-black-tie/README.md (G406, approved), the catalogue's opening line
+  // (docs/09 WEB 06) and its real screens and opening frames (390 × 844 capture).
+  'art-deco-black-tie': {
+    id: 'art-deco-black-tie',
+    collection: '06_Art_Deco_Noir',
+    demoCouple: 'Vivian & Charles',
+    style: 'Navy two-door gatefold with a gold art deco medallion, gold fan rays, pearls and stepped deco arch frames',
+    metaDescription:
+      'A navy gatefold with a gold medallion clasp opens like ballroom doors into your wedding website: gold rays and art deco arches. Edit it on your phone.',
+    intro:
+      'A 1920s ballroom in navy velvet: thin gold rays fan out from the top, gold deco corners with pearls and a champagne coupe frame a two-door navy gatefold, closed with a gold medallion clasp around a pearl. Inside: stepped deco arch frames, navy cards with gold borders and tall deco capitals.',
+    opening:
+      'Your guests tap the gatefold. The gold medallion clasp turns and lifts away, the two navy doors swing open to the sides like ballroom doors to show their fan-patterned insides, and a card with your portrait rises from the center pocket as a thin band of gold light sweeps across the screen. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a stepped deco arch on an ivory card, your names, date, venue, a live countdown and an RSVP button, then the navy invitation card with a gold fan crest and two gold deco frames that lead to Our Story and the details of the day.',
+      story: 'Three photos in stepped art deco arch frames, set like a staircase on a phone; as guests scroll, each one turns from dark to light while a band of gold light sweeps across it, and its caption appears below.',
+      details: 'An "Order of the Day" card with gold dividers between the rows, add to calendar, the venue photo in a wide stepped deco frame, dress code, links and questions and answers.',
+      rsvp: 'A navy "Will You Join Us?" card with your reply-by date, signed with your names and closed with the gold medallion on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Navy', hex: '#14213D' },
+      { name: 'Midnight', hex: '#0A1729' },
+      { name: 'Gold', hex: '#C9A55C' },
+      { name: 'Pale Gold', hex: '#E6CF8F' },
+      { name: 'Ivory', hex: '#F5EEDC' },
+    ],
+    fonts: ['Italiana', 'Josefin Sans'],
+    llmsLine: 'navy two-door gatefold closed with a gold art deco medallion; gold fan rays, pearls, a champagne coupe and stepped deco arch frames on navy velvet.',
+    relatedGuides: ['wedding-website-wording', 'how-to-make-a-wedding-website'],
+  },
+  // G093: written against themes/burgundy-velvet-autumn/README.md (G407, approved), the catalogue's opening line
+  // (docs/09 WEB 07) and its real screens and opening frames (390 × 844 capture).
+  'burgundy-velvet-autumn': {
+    id: 'burgundy-velvet-autumn',
+    collection: '07_Burgundy_Velvet',
+    demoCouple: 'Rosalind & Edward',
+    style: 'Ivory envelope wrapped in burgundy velvet ribbon, dahlias, blackberries, copper autumn leaves and oval gold frames',
+    metaDescription:
+      'An ivory envelope wrapped in burgundy velvet ribbon opens into your wedding website: dahlias, autumn leaves and oval gold frames. Edit it on your phone.',
+    intro:
+      'An ivory felt-textured envelope wrapped in burgundy velvet ribbon, tied in a bow with a little gold oak-leaf charm, on a warm peach plaster wall with soft candlelight and clusters of burgundy dahlias, roses, blackberries and copper leaves. Inside: oval gold frames, ivory cards and a flowing script.',
+    opening:
+      'Your guests tap the envelope. The velvet bow unties and the ribbon slides off the sides of the envelope, the rectangular flap lifts to show a burgundy liner with gold leaves, and a card with your portrait rises in a warm candlelight glow while a single copper maple leaf drifts down beside it. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in an oval gold frame on an ivory card, your names, date, venue, a live countdown and an RSVP button, then the invitation card with dahlias and two oval gold frames, hung from velvet bows, that lead to Our Story and the details of the day.',
+      story: 'Three photos in oval gold frames, each hanging from a burgundy velvet ribbon and bow; as guests scroll, each frame drops into place on its tie and then sways gently, with a script caption below.',
+      details: 'An "Order of the Day" card with blackberry sprigs between the rows, add to calendar, the venue photo in an oval gold frame, dress code, links and questions and answers.',
+      rsvp: 'A "Will You Join Us?" card with your reply-by date, signed with your names and tied with a burgundy velvet bow on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Wine', hex: '#6E1F2E' },
+      { name: 'Copper', hex: '#7A391B' },
+      { name: 'Peach', hex: '#F2D4BE' },
+      { name: 'Ivory', hex: '#FBF5EE' },
+      { name: 'Gold', hex: '#B88A4A' },
+    ],
+    fonts: ['Pinyon Script', 'Cinzel', 'Cormorant Garamond'],
+    llmsLine: 'ivory envelope wrapped in burgundy velvet ribbon with a bow and a gold oak-leaf charm; burgundy dahlias, roses, blackberries, copper leaves and oval gold frames on a candlelit wall.',
+    relatedGuides: ['what-to-put-on-your-wedding-website', 'canva-wedding-website-template-vs-hosted-website'],
+  },
+  // G093: written against themes/winter-evergreen/README.md (G408, approved), the catalogue's opening line
+  // (docs/09 WEB 08) and its real screens and opening frames (390 × 844 capture).
+  'winter-evergreen': {
+    id: 'winter-evergreen',
+    collection: '08_Winter_Evergreen',
+    demoCouple: 'Noelle & James',
+    style: 'Forest green envelope with a snowy deckle edge, a pine-and-berry bundle, pine cones and frosted window frames',
+    metaDescription:
+      'A forest green envelope sealed with pine and red berries opens into your wedding website: falling snow, pine cones and frosted windows. Edit it on your phone.',
+    intro:
+      'A forest green envelope with a snowy white deckle edge on its flap, sealed with a bundle of pine, cedar and three red berries tied with a red velvet bow, among pine, juniper, winter berries and pine cones in a soft snowy mist. Inside: white wooden window frames, snowy white cards and a flowing script.',
+    opening:
+      'Your guests tap the envelope. Soft snow begins to fall, the pine-and-berry bundle loosens and slides away down the screen, the green flap opens upward to show a white liner patterned with pine and red berries, and a card with your portrait rises while snowflakes drift across the screen. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a snowy white window frame on a white card, your names, date, venue, a live countdown and an RSVP button, then the invitation card with a pine garland and two snowy windows that lead to Our Story and the details of the day.',
+      story: 'Three photos behind frosted panes in white wooden windows; as each window comes into view, the frost wipes clear from the middle and stays in the corners, with a script caption below.',
+      details: 'An "Order of the Day" card with pine sprigs between the rows, add to calendar, the venue photo in a wide snowy window, dress code, links and questions and answers.',
+      rsvp: 'A "Will You Join Us?" card with your reply-by date and the same pine-and-berry bundle as the envelope in its middle, signed with your names, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Forest', hex: '#2F5240' },
+      { name: 'Berry', hex: '#8C1D26' },
+      { name: 'Mist', hex: '#E3E8E7' },
+      { name: 'Snow', hex: '#FAFAF6' },
+      { name: 'Pine Ink', hex: '#1F2E26' },
+    ],
+    fonts: ['Parisienne', 'Libre Baskerville'],
+    llmsLine: 'forest green envelope with a snowy deckle edge, sealed with a pine-and-berry bundle tied with a red bow; pine, juniper, winter berries, pine cones, falling snow and frosted window frames.',
+    relatedGuides: ['when-to-send-your-wedding-website', 'digital-wedding-invitation-etiquette'],
+  },
 };
 
 export interface Design extends DesignCommerce {
