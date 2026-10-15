@@ -1,0 +1,26 @@
+/* Emerald & Gold Estate (design 17) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">),
+   so the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
+
+/* the card's window: the couple's thank-you photo, else the emerald velvet and the envelope's gold seal (decoration,
+   not a placeholder) */
+.photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
+.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                          background: var(--page) url("img/velvet-600.webp") 50% 40% / cover; }
+.photo-slot > .ty-decor > img { width: 56%; height: auto; display: block;
+                                filter: drop-shadow(0 6px 7px rgba(0, 0, 0, .45)) drop-shadow(0 1px 1px rgba(0, 0, 0, .3)); }
+
+/* card copy: the thank-you title (≤ 60 characters) wraps in the italic serif, the date under it */
+.card-copy .ty-title { font: italic 500 max(11px, 9.4cqw)/1.08 var(--serif); color: var(--bronze);
+                       text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.card-copy[data-drop~="s"] .ty-title { font-size: max(11px, 7cqw); }   /* site.js fitCopy: smaller, never dropped */
+
+/* the thank-you card (invitation_card marble, 3-slice: the message lengthens it): title, message, signature, date */
+.ty-text .ty-head { max-width: 66cqw; font-size: 8cqw; line-height: 1.16; }
+.ty-text .ty-message { margin-top: 3.6cqw; font-style: italic; font-size: max(17px, 5cqw); line-height: 1.45; color: var(--ink);
+                       white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
+.ty-text .ty-love { margin-top: 4.4cqw; font: 600 max(11px, 3.4cqw)/1.6 var(--serif); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.ty-text .ty-love + .nm { font-size: 8.4cqw; }
+.ty-text .city { margin-top: 2.4cqw; }
+
+/* RSVP card: "Replies are closed", the thank-you title under it */
+.rsvp-text .ty-kicker { margin-top: 4cqw; max-width: 70cqw; line-height: 1.5; text-wrap: balance; overflow-wrap: break-word; }

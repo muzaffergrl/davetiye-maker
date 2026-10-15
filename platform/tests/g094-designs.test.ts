@@ -172,7 +172,8 @@ afterEach(() => {
 });
 
 test('09–14 are live after the first eight, named as their themes, with design pages and placeholder prices', async () => {
-  assert.deepEqual(liveDesigns().map((d) => d.id), FOURTEEN);
+  // G097: later designs (15, 17, 18, …) follow; tests/g097-designs.test.ts
+  assert.deepEqual(liveDesigns().map((d) => d.id).slice(0, FOURTEEN.length), FOURTEEN);
   for (const n of NEW) {
     const d = liveDesign(n.id)!;
     assert.ok(d, `${n.id} listed`);
@@ -242,7 +243,7 @@ test('copy matches each theme: demo couple, fonts, palette tokens, collection, g
 
 test('real screens and opening clips of 09–14 are in assets.json and on disk; the eight earlier entries are unchanged in front', () => {
   assert.deepEqual(checkManifest(manifest), []);
-  assert.deepEqual(Object.keys(manifest.designs), FOURTEEN);
+  assert.deepEqual(Object.keys(manifest.designs).slice(0, FOURTEEN.length), FOURTEEN); // G097: later designs follow
   for (const n of NEW) {
     const m = manifest.designs[n.id];
     assert.ok(m, `no ${n.id} entry: node scripts/marketing-assets.ts --designs ${n.id} --shots <capture>`);
@@ -268,10 +269,10 @@ test('real screens and opening clips of 09–14 are in assets.json and on disk; 
     assert.ok(m.opening!.bytes > 50_000 && m.opening!.bytes <= 1_500_000, `${n.id} ${m.opening!.bytes}`);
   }
   // one folder per live design, nothing else
-  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), [...FOURTEEN].sort());
+  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), liveDesigns().map((d) => d.id).sort());
 });
 
-test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 09–14; ItemList of /designs has 14', () => {
+test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 09–14; ItemList of /designs has every live design', () => {
   const cfg = readyConfig();
   for (const n of NEW) {
     const d = liveDesign(n.id)!;
@@ -288,7 +289,7 @@ test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject
     assert.equal((product(ready, cfg).offers as Record<string, string>).price, '29.40', 'Offer once a real price and link exist');
   }
   const list = itemList(liveDesigns().map((x) => ({ path: `/designs/${x.id}`, name: x.name })));
-  assert.equal((list.itemListElement as unknown[]).length, 14);
+  assert.equal((list.itemListElement as unknown[]).length, liveDesigns().length); // 14 in G094, 17 since G097
   assert.deepEqual(validateJsonLd(graph(list)), []);
 });
 

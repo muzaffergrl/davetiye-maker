@@ -1,0 +1,107 @@
+<!doctype html>
+<!-- Wildflower Meadow Vellum · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in the flowing script,
+     "MOMENTS WE HOLD DEAR", then three soft-white cotton photo cards in a gentle row, each half covered by a frosted
+     vellum sheet printed with white wildflower silhouettes, lifting away from the bottom to reveal the photo; a caption in
+     the script under each; small wildflower touches between the cards; wildflower clusters in two corners. Catalogue: the
+     photos appear as the vellum lifts (site.css preset "lift-veil": the GPT vellum_overlay over each photo lifts from its
+     bottom edge toward the viewer about its top edge and fades, revealing the whole photo). Phones: the cards one under
+     another in a gentle stagger, each slightly tilted like cards laid down by hand (card 62vw, photo window 47vw ≥ 38vw,
+     docs/11 §9 — three in a row would be ~ 20vw), a cornflower / daisy between them; from 720 px the comp's row of three.
+     Photo slots story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is
+     off (404) when optional_blocks.our_story is false. Kicker / title = design copy (data-copy, G068). Thank-you mode
+     (G075): unchanged; with the Day page hidden by the couple the closing link leads home. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#F1F0E1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Satisfy&amp;family=Spectral:ital,wght@0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/meadow_wide-640.webp">
+        <img class="scene-img" src="img/meadow-580.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="grow-tl" src="img/florals_tl-360.webp" srcset="img/florals_tl-360.webp 360w, img/florals_tl-540.webp 540w, img/florals_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 400px), min(50vw, 290px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="grow-br" src="img/florals_br-360.webp" srcset="img/florals_br-360.webp 360w, img/florals_br-540.webp 540w, img/florals_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 48vh, 420px), min(48vw, 26svh, 290px)" alt="">
+      <img class="float f-petal" data-step="decor" data-a="fade" src="img/accent_1-200.webp" alt="">
+      <img class="float f-corn" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-daisy" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    </div>
+    <h1 class="script page-title" data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="fade" data-fold data-copy="story_kicker">Moments we hold dear</p>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro" data-fold><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the photo cards: one scene each — the card rises into place, then its vellum sheet lifts away -->
+  <section class="cards-row" aria-label="Our photos">
+    <figure class="pane p-1" data-scene="story-card" data-fold>
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) min(19.5vw, 230px), min(47vw, 240px)" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) min(25.5vw, 300px), min(62vw, 310px)" alt="">
+        <img class="veil" data-step="veil" data-a="lift-veil" src="img/vellum_overlay-320.webp" srcset="img/vellum_overlay-320.webp 320w, img/vellum_overlay-640.webp 640w" sizes="(min-width: 720px) min(21.2vw, 250px), min(52vw, 258px)" alt="">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+    </figure>
+    <img class="between b-1" src="img/accent_2-200.webp" alt="" aria-hidden="true" loading="lazy">
+    <figure class="pane p-2" data-scene="story-card" data-fold>
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) min(19.5vw, 230px), min(47vw, 240px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) min(25.5vw, 300px), min(62vw, 310px)" alt="" loading="lazy">
+        <img class="veil" data-step="veil" data-a="lift-veil" src="img/vellum_overlay-320.webp" srcset="img/vellum_overlay-320.webp 320w, img/vellum_overlay-640.webp 640w" sizes="(min-width: 720px) min(21.2vw, 250px), min(52vw, 258px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+    </figure>
+    <img class="between b-2" src="img/accent_3-200.webp" alt="" aria-hidden="true" loading="lazy">
+    <figure class="pane p-3" data-scene="story-card" data-fold>
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) min(19.5vw, 230px), min(47vw, 240px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_3-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) min(25.5vw, 300px), min(62vw, 310px)" alt="" loading="lazy">
+        <img class="veil" data-step="veil" data-a="lift-veil" src="img/vellum_overlay-320.webp" srcset="img/vellum_overlay-320.webp 320w, img/vellum_overlay-640.webp 640w" sizes="(min-width: 720px) min(21.2vw, 250px), min(52vw, 258px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+    </figure>
+  </section>
+
+  <section class="section next-sec meadow-end" data-scene="story-next" data-fold>
+    <img class="corner corner-br page-corner" data-step="decor" data-a="grow-br" src="img/florals_br-360.webp" srcset="img/florals_br-360.webp 360w, img/florals_br-540.webp 540w, img/florals_br-720.webp 720w" sizes="min(52vw, 300px)" alt="" loading="lazy">
+    <span class="orn" data-step="orn" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy"></span>
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Day page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Willow",
+      "full_name": "Willow Anne"
+    },
+    {
+      "display_name": "Finn",
+      "full_name": "Finn Patrick"
+    }
+  ],
+  "name_display": "Willow & Finn",
+  "initials": "W&F",
+  "host_line": "Together with their families",
+  "date": "2027-06-26",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Meadowlark Farm",
+    "city": "Lancaster",
+    "region": "Pennsylvania",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Wildflower Meadow"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Garden Barn"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Meadow Tent"
+    }
+  ],
+  "dress_code": "Garden party",
+  "rsvp": {
+    "deadline": "2027-05-15",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Picnics, wildflowers and long summer afternoons brought us to",
+    "items": [
+      {
+        "caption": "Our first picnic"
+      },
+      {
+        "caption": "In the meadow"
+      },
+      {
+        "caption": "Picked for keeps"
+      }
+    ]
+  }
+}
