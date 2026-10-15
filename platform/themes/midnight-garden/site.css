@@ -79,7 +79,6 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .btn:active { transform: scale(.98); }
 .btn:focus-visible { outline-color: var(--ivory); outline-width: 3px; }
 .btn-ghost { background: rgba(20, 18, 23, .72); color: var(--gold-light); box-shadow: inset 0 0 0 1px rgba(201, 164, 106, .7); }
-.btn-ghost:focus-visible { outline-color: var(--gold-light); }
 .btn-sm { min-height: 44px; min-width: 0; padding: 10px 20px; font-size: 14px; letter-spacing: .16em; text-indent: .16em; }
 
 /* -- navigation */
@@ -119,16 +118,14 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="unfurl"] { opacity: 1; clip-path: inset(0 50% 0 50%); --dur: 1300ms; }
 .js [data-a="unfurl"].in { clip-path: inset(0 -2% 0 -2%); }
 .js [data-a="write"].done, .js [data-a="unfurl"].done { clip-path: none; }
-/* florals emerge out of the dark */
 .js [data-a="sway-tl"] { transform: rotate(-5deg) translate3d(-4%, -5%, 0); transform-origin: 0 0; filter: brightness(.2); --dur: 1800ms; }
 .js [data-a="sway-br"] { transform: rotate(-5deg) translate3d(5%, 5%, 0); transform-origin: 100% 100%; filter: brightness(.2); --dur: 1800ms; }
 .js [data-a="sway-tl"].in, .js [data-a="sway-br"].in { filter: none; }
 /* kindle (19): out of the darkness by candlelight */
 .js [data-a="kindle"] { opacity: .14; filter: brightness(.12) saturate(.6); transform: scale(.985); --dur: 1700ms; }
 .js [data-a="kindle"].in { filter: none; }
-/* the seal pressed onto the card */
 .js [data-a="press"] { transform: translate3d(0, -14px, 0) scale(1.18); --dur: 900ms; }
-/* a card set down, always opaque */
+/* always opaque */
 .js [data-a="set"] { opacity: 1; transform: translate3d(0, 24px, 0) scale(.97); --dur: 1300ms; }
 
 /* -- photo slots (docs/11 §5.6, §9) */
@@ -152,7 +149,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 :is(.scene-bg, .page-bg) :is(picture, .scene-img), .card > .card-img, .frame > .frame-img, .fr-box > .frame-img, .venue-photo .vframe, .card-seal > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 /* free_zone: plain black paper 72–96 % under the frame */
 .card-copy {
-  position: absolute; left: 8%; right: 8%; top: 71.5%; bottom: 5%;
+  position: absolute; left: 8%; right: 8%; top: 73%; bottom: 4.5%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.6cqw;
 }
 .card-copy .disp { font-size: 6.6cqw; line-height: 1.1; white-space: nowrap; color: var(--ivory); letter-spacing: .04em; }
@@ -163,6 +160,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-copy[data-drop~="c"] .sep, .card-copy[data-drop~="c"] .cc-city, .card-copy[data-drop~="s"] .disp { display: none; }
 .card-copy[data-drop~="t"] .kicker { letter-spacing: .02em; }
 .card-copy[data-drop~="w"] .nowrap { white-space: normal; }
+.card-copy[data-drop~="d"] .kicker { display: none; } /* long thank-you title: the date drops */
 
 /* -- backdrop: night + whole florals + floats */
 .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--page); }
@@ -202,7 +200,6 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   --obj: min(84vw, calc(38svh * 1.5644), 440px); --w: calc(var(--obj) * var(--ok, 1) / .99551); --nm: clamp(32px, 9.4vw, 60px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
   justify-content: center; text-align: center;
-  /* site.js envelope fit: --pt, --ok */
   padding: max(calc(var(--pt0, 40px) + env(safe-area-inset-top)), var(--pt, calc(var(--w) * .68288 - var(--nm) * 1.12 - 34px))) 16px max(calc(26px + env(safe-area-inset-bottom)), 17svh);
 }
 .env-head { position: relative; z-index: 3; width: min(100%, 560px); pointer-events: none; }
@@ -232,10 +229,10 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   background: radial-gradient(50% 50% at 50% 62%, rgba(255, 196, 110, .78), rgba(232, 150, 64, .34) 46%, rgba(200, 110, 40, 0) 76%);
   mix-blend-mode: screen;
 }
-/* the light spilling out (above every layer) */
+/* light spilling out */
 .env-spill {
-  position: absolute; left: -30%; right: -30%; top: 8%; height: 80%; z-index: 7; pointer-events: none; opacity: 0;
-  background: radial-gradient(42% 46% at 50% 58%, rgba(255, 200, 120, .34), rgba(240, 160, 70, .14) 50%, rgba(240, 160, 70, 0) 78%);
+  position: absolute; left: 0; right: 0; top: 8%; height: 80%; z-index: 7; pointer-events: none; opacity: 0;
+  background: radial-gradient(60% 46% at 50% 58%, rgba(255, 200, 120, .34), rgba(240, 160, 70, .14) 50%, rgba(240, 160, 70, 0) 78%);
   mix-blend-mode: screen;
 }
 
@@ -255,6 +252,8 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   text-shadow: 0 1px 0 rgba(255, 255, 255, .45), 0 -1px 0 rgba(0, 0, 0, .28);
 }
 .env-hint { position: relative; z-index: 3; margin-top: 20px; color: var(--ink-soft); }
+/* the hint stays on night on short phones (readability halo) */
+.env-hint::before { content: ""; position: absolute; inset: -30px -12%; z-index: -1; background: radial-gradient(closest-side, rgba(12, 11, 13, .9), rgba(12, 11, 13, .6) 60%, rgba(12, 11, 13, 0)); }
 .env-hint p { font: 500 15px/1.6 var(--sc); letter-spacing: .34em; text-transform: lowercase; }
 /* W1.1: "— TAP TO OPEN —" (two 1 px hairlines) */
 .rule { display: flex; align-items: center; justify-content: center; gap: 16px; }
@@ -290,7 +289,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .accent-layer img { position: absolute; left: 0; top: 0; display: block; height: auto; will-change: transform, opacity; filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .6)); }
 
 /* == page 2 — home (W1.2) */
-.hero { --hn: clamp(32px, min(9.4vw, 6.4svh), 60px); position: relative; min-height: calc(100svh - var(--nav-h) - env(safe-area-inset-bottom)); padding-bottom: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.hero { --hn: clamp(33px, min(9.4vw, 6.4svh), 60px); position: relative; min-height: calc(100svh - var(--nav-h) - env(safe-area-inset-bottom)); padding-bottom: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .hero .scene-bg { position: absolute; z-index: 0; bottom: var(--fold, 0px); }
 .hero .scene-bg .corner-br { bottom: 22px; right: calc(var(--cw) * -.1); }
 .hero .scene-bg .f-plum { display: none; }
@@ -298,7 +297,6 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   .hero .scene-bg .corner-tl { --cw: min(56vw, 28svh, 300px); }
   .hero .scene-bg .corner-br { --cw: min(50vw, 26svh, 280px); right: calc(var(--cw) * -.14); }
 }
-/* the night fades out */
 .hero-bg picture, .page-bg picture { -webkit-mask-image: linear-gradient(#000 76%, transparent); mask-image: linear-gradient(#000 76%, transparent); }
 .hero .f-butterfly { top: 9%; }
 .hero .f-petal { top: 16%; }
@@ -312,7 +310,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 ::view-transition-group(invite-card) { animation-duration: .9s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .55s; }
 ::view-transition-new(site-nav):only-child { animation: none; } /* G064 */
-::view-transition-old(site-nav):only-child { animation: none; opacity: 0; } /* G068: opaque nav, back to the envelope */
+::view-transition-old(site-nav):only-child { animation: none; opacity: 0; } /* G068 */
 html:has(.page-envelope)::view-transition-group(site-nav) { display: none; }
 .hero .names { margin-top: clamp(12px, 2.6svh, 24px); font-size: calc(var(--hn) * var(--names-scale, 1)); line-height: 1.1; text-wrap: balance; }
 .hero-date { margin-top: calc(var(--hn) * .16); font-size: 14px; letter-spacing: .26em; text-wrap: balance; color: var(--gold-ink); }
@@ -329,7 +327,7 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; }
 @media (max-width: 359px) { .cd-row { gap: 12px; } .cd-cell { min-width: 44px; } .cd-lbl { letter-spacing: .12em; } }
 .hero-cta { margin-top: clamp(16px, 3.2svh, 28px); }
 @media (min-aspect-ratio: 11/20) and (max-aspect-ratio: 3/4) and (max-width: 640px) {
-  .hero { --hn: clamp(30px, min(9.6vw, 5.6svh), 60px); }
+  .hero { --hn: clamp(33px, min(9.6vw, 5.6svh), 60px); }
   .hero .scene-bg .corner-tl { --cw: min(46vw, 25svh, 270px); }
   .hero .scene-bg .corner-br { --cw: min(44vw, 24svh, 270px); }
   .hero-inner { padding-top: calc(clamp(8px, 4svh - 12px, 24px) + env(safe-area-inset-top)); }
@@ -370,7 +368,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* -- home: invitation card (no comp) */
 .invite-sec { padding: 34px 0 26px; }
 /* free_zone: between the corner florals, inside the gold border */
-.invite-text { padding: 46cqw 16% calc(var(--bot-h) - 20cqw); min-height: calc(100cqw / .69745); justify-content: center; }
+.invite-text { padding: 49cqw 16% calc(var(--bot-h) - 20cqw); min-height: calc(100cqw / .69745); justify-content: center; }
 .invite-text .host { max-width: 60cqw; font-size: max(12px, 3.4cqw); letter-spacing: .2em; line-height: 1.6; text-wrap: balance; color: var(--gold-ink); }
 .invite-text .nm { font-size: 8.4cqw; line-height: 1.14; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .invite-text .host + .nm { margin-top: 3cqw; }
@@ -404,7 +402,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* candle glow behind each frame (W1.3) */
 .fr-box::before, .frame > .glow {
   content: ""; position: absolute; left: -38%; right: -38%; top: -26%; bottom: -26%; z-index: -1; pointer-events: none;
-  background: radial-gradient(closest-side, rgba(236, 168, 84, .3), rgba(200, 120, 50, .1) 55%, rgba(200, 120, 50, 0));
+  background: radial-gradient(closest-side, rgba(236, 168, 84, .42), rgba(200, 120, 50, .15) 55%, rgba(200, 120, 50, 0));
 }
 .fb-portrait { width: min(56vw, 240px); aspect-ratio: 951 / 1275; }
 .fb-portrait .photo-slot, .pane .photo-slot { left: 17.876%; top: 19.608%; width: 64.353%; height: 64.784%; } /* photo_slots.portrait (≥ 38vw on phones) */
@@ -537,8 +535,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .sig-unit .love { font-style: italic; font-size: max(16px, calc(4.6cqw * var(--sg))); color: var(--ink-soft); }
 .rsvp-text .sign { margin-top: calc(1cqw * var(--sg)); font-size: calc(7.6cqw * var(--sg)); line-height: 1.14; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 /* the seal on the card's lower gold line (W1.5) */
-.card-seal { position: absolute; left: 50%; bottom: -3.4cqw; width: 15.5cqw; aspect-ratio: 706 / 687; margin-left: -7.75cqw; container-type: inline-size; filter: drop-shadow(0 6px 7px rgba(0, 0, 0, .6)) drop-shadow(0 1px 1px rgba(0, 0, 0, .5)); }
-.card-seal .seal-mono { font-size: max(10px, 19cqw); }
+.card-seal { position: absolute; left: 50%; bottom: calc(var(--ww) * -.034); width: calc(var(--ww) * .155); aspect-ratio: 706 / 687; translate: -50% 0; z-index: 2; container-type: inline-size;
+             filter: drop-shadow(0 6px 7px rgba(0, 0, 0, .6)) drop-shadow(0 1px 1px rgba(0, 0, 0, .5)); }
 .reply-sec { padding: 50px 0 10px; }
 .reply-box { position: relative; z-index: 1; padding: 26px 20px 24px; border-radius: 18px; background: rgba(20, 18, 23, .9); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); text-align: center; }
 .reply-box .orn { width: 180px; }
@@ -597,7 +595,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 /* short landscape */
 @media (min-aspect-ratio: 1/1) and (max-height: 620px) {
   :root { --nav-h: 46px; }
-  .hero { --hn: clamp(28px, 8.6svh, 56px); }
+  .hero { --hn: clamp(33px, 8.6svh, 56px); }
   .hero-inner {
     display: grid; grid-template: 1fr repeat(7, auto) 1fr / auto minmax(0, 460px); justify-content: center; align-items: center;
     column-gap: clamp(28px, 6vw, 72px); width: calc(100% - 32px - env(safe-area-inset-left) - env(safe-area-inset-right));

@@ -78,8 +78,10 @@ PH_MAX_RED = 40    # yer tutucuda gül kırmızısı yok: (R − 1,6 G) %99,9 �
 # x ≤ 140; sağda soluk yapraklar x ≥ 905 (y 450–760), sağ alt küme y ≥ 770'te x ≥ 900, y ≥ 1180'de x ≥ 770, y ≥ 1290'da
 # x ≥ 545)
 NIGHT_TOP = (190, 440, 880, 1080)     # düz gece karası
-NIGHT_BOTTOM = (0, 1100, 540, 1536)   # sol alttaki mum ışığı parıltısı ve koyu yaprak gölgeleri (comp'ların sol altı)
+NIGHT_BOTTOM = (0, 1270, 540, 1536)   # sol alttaki mum ışığının alt yarısı ve parlayan zemin (comp'ların alt bandı)
 NIGHT_BLEND = 110                     # px — iki kırpımın yumuşak geçiş bandı
+NIGHT_STRETCH = 2.0                   # düz gece karası dikeyde × 2 (dokusuz siyah; telefonda mum ışığı ekranın alt
+                                      # üçte birine iner — "Tap to open" W1.1'deki gibi karanlıkta kalır)
 NIGHT_WIDE = (60, 440, 890, 1100)     # geniş ekran: kümesiz tek geniş kırpım (en/boy 1,26)
 # comp W1.1 ölçümü (comps/web_1_envelope.png, 1024×1536): siyah zarf x 132–896 (1000. satır; genişlik 764); kapağın gümüş
 # kenarının her sütundaki ilk parlak pikseli → V doğruları y = 0.7996x + 512.6 (x 200–420) ve y = −0.80x + 1333
@@ -278,8 +280,10 @@ def temiz_bant(im: Image.Image, aralik=(.25, .80)):
 # ============================================================================= zemin
 
 def gece_zemini(bg: Image.Image):
-    """Telefon zemini: iki kümesiz bg_page kırpımı üst üste (NIGHT_BLEND px yumuşak geçiş). RGB."""
+    """Telefon zemini: iki kümesiz bg_page kırpımı üst üste (NIGHT_BLEND px yumuşak geçiş); düz üst kırpım dikeyde
+    NIGHT_STRETCH kat ölçeklenir (dokusuz gece karası, ölçek görünmez). RGB."""
     ust = bg.crop(NIGHT_TOP)
+    ust = ust.resize((ust.width, round(ust.height * NIGHT_STRETCH)), Image.LANCZOS)
     alt = bg.crop(NIGHT_BOTTOM)
     if alt.width != ust.width:
         alt = alt.resize((ust.width, round(alt.height * ust.width / alt.width)), Image.LANCZOS)
@@ -503,7 +507,8 @@ def main():
     bg = Image.open(PARTS / "bg_page.png").convert("RGB")
     night = gece_zemini(bg)
     webp(night, "night", [night.width], 78)
-    manifest["night"].update({"top_crop": list(NIGHT_TOP), "bottom_crop": list(NIGHT_BOTTOM), "blend_px": NIGHT_BLEND})
+    manifest["night"].update({"top_crop": list(NIGHT_TOP), "top_stretch_y": NIGHT_STRETCH, "bottom_crop": list(NIGHT_BOTTOM),
+                              "blend_px": NIGHT_BLEND})
     wide = bg.crop(NIGHT_WIDE)
     webp(wide, "night_wide", [720], 78)
     manifest["night_wide"]["crop"] = list(NIGHT_WIDE)

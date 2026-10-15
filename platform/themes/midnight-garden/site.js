@@ -282,7 +282,7 @@ function fitNames() {
   };
   const oneLine = (c) => { const k = c.querySelector('.kicker'); return !k || k.offsetHeight <= parseFloat(getComputedStyle(k).lineHeight) * 1.5; };
   const fitCopy = () => $$('.card-copy').forEach((c) => {
-    for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c s'], [true, 'c s t'], [true, 'c s t w']]) {
+    for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c s'], [true, 'c s t'], [true, 'c s t w'], [true, 'c s t w d']]) {
       c.toggleAttribute('data-wrap', wrap);
       c.dataset.drop = d;
       if (fits(c) && (wrap || oneLine(c))) break;

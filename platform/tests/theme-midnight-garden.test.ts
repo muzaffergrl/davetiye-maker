@@ -609,7 +609,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   // pill, and the candlelight of this design (inside the envelope, spilling out of it, behind each gilded frame)
   for (const [, sel, body] of rules) {
     if (!/gradient\(/.test(body)) continue;
-    assert.match(sel, /body::before|\.hero-bg picture|\.night-end::before|^\s*\.site-nav\s*$|^\s*\.btn\s*$|^\s*\.env-glow\s*$|^\s*\.env-spill\s*$|\.fr-box::before, \.frame > \.glow/, sel.trim());
+    assert.match(sel, /body::before|\.hero-bg picture|\.night-end::before|^\s*\.site-nav\s*$|^\s*\.btn\s*$|^\s*\.env-glow\s*$|^\s*\.env-spill\s*$|\.fr-box::before, \.frame > \.glow|^\s*\.env-hint::before\s*$/, sel.trim());
     if (/env-|glow|fr-box/.test(sel)) assert.match(body, /radial-gradient\([^)]*rgba\([^)]*\), [^;]*rgba\([^)]*, 0\)/, `${sel.trim()}: soft light that fades to nothing (no edge)`);
   }
   // the corner clusters are whole GPT parts: no mask / clip on them
@@ -789,7 +789,7 @@ test('inner pages: nothing half under the nav on the first screen — fold units
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 5, 'title, reply-by, pill, the wait line, the signature');
-  assert.equal(r('.rsvp-text > .card-seal > img[src$="closure-160.webp"] + .seal-mono[data-field="initials"]').length, 1, 'W1.5: the envelope\'s seal on the card\'s lower edge');
+  assert.equal(r('.rsvp-top .wrap > .paper + .card-seal > img[src$="closure-160.webp"] + .seal-mono[data-field="initials"]').length, 1, 'W1.5: the envelope\'s seal on the card\'s lower edge (outside the card: not card text)');
   assert.equal(r('.rsvp-text > .sig-unit[data-fold] > .love + .sign').length, 1, '"With love," and the names');
   assert.equal(r('.rsvp-text > .unit[data-fold] > .deadline[data-field="rsvp.deadline"]').length, 1);
   assert.equal(r('.reply-box > [data-fold] > h2').length, 1);
@@ -951,7 +951,8 @@ test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 32 p
     const fs = /font-size: max\((\d+(?:\.\d+)?)px/.exec(r) ?? /font: \d+ max\((\d+(?:\.\d+)?)px/.exec(r) ?? /font: \d+ (\d+(?:\.\d+)?)px/.exec(r) ?? /font-size: (\d+(?:\.\d+)?)px/.exec(r);
     assert.ok(fs && Number(fs[1]) >= 11, `${sel}: smallest font size ${fs && fs[1]} px`);
   }
-  assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c s'\], \[true, 'c s t'\], \[true, 'c s t w'\]\]\)/);
+  assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c s'\], \[true, 'c s t'\], \[true, 'c s t w'\], \[true, 'c s t w d'\]\]\)/);
+  assert.match(cssText(), /\.card-copy\[data-drop~="d"\] \.kicker \{ display: none; \}/, 'a long thank-you title: the date drops last');
   assert.match(js, /new ResizeObserver\(fitCopy\)/);
   assert.ok(Number(/arriveDelay: (\d+)/.exec(js)![1]) <= 400);
   // arrival / closing: a few GPT rose petals inside the section, behind its text, in lanes beside the text column
