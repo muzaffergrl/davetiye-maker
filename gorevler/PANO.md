@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 12 · alindi 6 · inceleme 3 · blokaj 277 · bitti 105 · toplam 403
+Özet: hazir 10 · alindi 7 · inceleme 3 · blokaj 277 · bitti 106 · toplam 403
 
 ## claude-canva
 
@@ -102,14 +102,15 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 ## claude-tarayici
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `G092` p1 — Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol → `gorevler/G092-canli-admin.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (44)**
+**Üzerinde çalışılan / incelemede / blokaj (45)**
 
 - `G063` inceleme · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
 - `G079` inceleme · claude-local-1 — Canlıya güncel main — sade ve BKE Studio görünümlü panel (G066-B, K29); canlı kontrol + panel ekranları
+- `G092` alindi · claude-local-1 — Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
@@ -157,9 +158,8 @@ Bağımlılık bekleyen: 1 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (8)**
+**Alınabilir (7)**
 
-- `G093` p1 — Tasarım 06, 07, 08 satış sitesine eklenir (G082/G083/G086 yöntemi) — tasarım sayfaları, metin, gerçek ekranlar, /designs 8 tasarımla → `gorevler/G093-satis-06-07-08.md`
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 - `G415` p3 — Tasarım 15 Cherry Blossom Spring — platform teması → `gorevler/G415-website-kaynak.md`
@@ -257,7 +257,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 2 · Biten: 49
+Bağımlılık bekleyen: 2 · Biten: 50
 
 ## claude-metin
 
