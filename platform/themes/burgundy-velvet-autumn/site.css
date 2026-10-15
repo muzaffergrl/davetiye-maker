@@ -606,6 +606,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 @media (min-width: 1024px) and (min-aspect-ratio: 5/4) and (min-height: 621px) {
   .page-head.page-head { padding-top: clamp(24px, 10svh - 40px, 90px); }
   .page-title { font-size: clamp(60px, 15svh - 36px, 104px); }
+  .page-head .kicker { margin-top: clamp(6px, 2.6svh - 8px, 18px); }
   .lede { width: min(100%, 880px); margin-top: clamp(8px, 3svh - 12px, 18px); }
 }
 /* short landscape */
