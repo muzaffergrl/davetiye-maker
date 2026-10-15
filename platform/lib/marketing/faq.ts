@@ -183,7 +183,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'delete-data',
           q: 'How do we delete our data?',
-          a: `${cfg.policies.deletion}. Until then, write to ${cfg.support.email} from the email address you used when you started your website and include your Etsy order number, so we can confirm it is you before we delete anything. [Read our privacy notice](/privacy).`,
+          a: `${cfg.policies.deletion}. Until then, write to ${cfg.support.email} from the email address you used when you started your website and include your Etsy order number and website address, so we can confirm it is you before we delete anything. [Read our privacy notice](/privacy).`,
         },
       ],
     },
