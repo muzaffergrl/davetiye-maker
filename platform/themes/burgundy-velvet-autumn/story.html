@@ -1,0 +1,114 @@
+<!doctype html>
+<!-- Burgundy Velvet Autumn · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in the copperplate script,
+     "MOMENTS WE HOLD DEAR", a hairline with the gold oak-leaf charm, then one long burgundy velvet ribbon swag draped
+     across the candlelit wall like a garland (bows at both ends) with three oval gold-leaf frames tied at different points
+     along it — the outer two higher, the middle one lowest — each with its caption in script. Catalogue: each frame
+     sways slightly (site.css .sway). From 720 px: the comp itself — one GPT velvet_swag, the frames hung at the measured
+     points of its ribbon (img/manifest.json velvet_swag.hang), the whole garland one fold unit sized to end above the nav
+     (site.js garland). Phones: three side-by-side frames would leave a photo window of ~20vw (docs/11 §9 asks ≥ 38vw), so
+     each frame hangs from its own length of the same velvet swag, one under the other (README: comp deviation).
+     Photo slots story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is
+     off (404) when optional_blocks.our_story is false. Kicker / title = design copy (data-copy, G068). Thank-you mode
+     (G075): unchanged; with the Day page hidden by the couple the closing link leads home. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#F2D4BE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Pinyon+Script&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/wall_wide-710.webp">
+        <img class="scene-img" src="img/wall-560.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-720.webp 720w, img/florals_tl-900.webp 900w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 400px), min(48vw, 25svh, 280px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-720.webp 720w, img/florals_br-900.webp 900w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 400px), min(46vw, 24svh, 270px)" alt="">
+      <img class="float f-leaf" data-step="decor" data-a="fade" src="img/accent_1-194.webp" alt="">
+      <img class="float f-petal" data-step="decor" data-a="fade" src="img/accent_2-129.webp" alt="">
+      <img class="float f-berry" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    </div>
+    <h1 class="script page-title" data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
+    <div class="unit" data-fold>
+      <p class="kicker" data-step="kicker" data-a="fade" data-copy="story_kicker">Moments we hold dear</p>
+      <span class="orn" data-step="kicker" data-a="unfurl" aria-hidden="true"><img src="img/charm-48.webp" alt=""></span>
+    </div>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro" data-fold><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the garland: from 720 px one swag with the three frames tied along it (one fold unit); on phones each frame hangs
+       from its own length of the swag. Each frame is its own scene: it drops onto its bow and settles, swaying. -->
+  <section class="garland" data-scene="story-garland" aria-label="Our photos">
+    <img class="swag swag-wide" data-step="swag" data-a="unfurl" src="img/velvet_swag-960.webp" srcset="img/velvet_swag-480.webp 480w, img/velvet_swag-960.webp 960w, img/velvet_swag-1440.webp 1440w" sizes="(min-width: 720px) min(100vw - 40px, 980px), 1px" alt="" loading="lazy">
+    <figure class="hang h-1" data-scene="story-frame" data-fold>
+      <img class="swag swag-unit" data-step="swag" data-a="unfurl" src="img/velvet_swag-480.webp" srcset="img/velvet_swag-480.webp 480w, img/velvet_swag-960.webp 960w" sizes="(min-width: 720px) 1px, 100vw" alt="">
+      <div class="sway frame" data-step="frame" data-a="hang">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) min(14.3vw, 140px), min(39vw, 190px)" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/charm-48.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) min(22vw, 216px), min(60vw, 290px)" alt="">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+      <span class="orn mini" data-step="caption" data-a="unfurl" aria-hidden="true"><img src="img/charm-48.webp" alt=""></span>
+    </figure>
+    <figure class="hang h-2" data-scene="story-frame" data-fold>
+      <img class="swag swag-unit" data-step="swag" data-a="unfurl" src="img/velvet_swag-480.webp" srcset="img/velvet_swag-480.webp 480w, img/velvet_swag-960.webp 960w" sizes="(min-width: 720px) 1px, 100vw" alt="" loading="lazy">
+      <div class="sway frame" data-step="frame" data-a="hang">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) min(14.3vw, 140px), min(39vw, 190px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/charm-48.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) min(22vw, 216px), min(60vw, 290px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+      <span class="orn mini" data-step="caption" data-a="unfurl" aria-hidden="true"><img src="img/charm-48.webp" alt="" loading="lazy"></span>
+    </figure>
+    <figure class="hang h-3" data-scene="story-frame" data-fold>
+      <img class="swag swag-unit" data-step="swag" data-a="unfurl" src="img/velvet_swag-480.webp" srcset="img/velvet_swag-480.webp 480w, img/velvet_swag-960.webp 960w" sizes="(min-width: 720px) 1px, 100vw" alt="" loading="lazy">
+      <div class="sway frame" data-step="frame" data-a="hang">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) min(14.3vw, 140px), min(39vw, 190px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/charm-48.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) min(22vw, 216px), min(60vw, 290px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+      <span class="orn mini" data-step="caption" data-a="unfurl" aria-hidden="true"><img src="img/charm-48.webp" alt="" loading="lazy"></span>
+    </figure>
+  </section>
+
+  <section class="section next-sec page-end" data-scene="story-next" data-fold>
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-720.webp 720w, img/florals_br-900.webp 900w" sizes="min(52vw, 300px)" alt="" loading="lazy">
+    <span class="orn orn-sprig" data-step="sprig" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy"></span>
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Day page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <span class="orn" aria-hidden="true"><img src="img/charm-48.webp" alt=""></span>
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
