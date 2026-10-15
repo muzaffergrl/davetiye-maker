@@ -260,7 +260,7 @@ Not: iptal politikası docs/20 tablosunda ayrı bir satır değildi. Kullanıcı
 | Dükkân dili | Ekranda gösterilmiyor; ek çeviri yok | Settings → Languages and translations |
 | Automatic Listing Translation | **Enabled** | Options |
 | Para birimi | Doğrulanamadı. Offsite Ads panelinde tutarlar **TL** görünüyor; bu, hesabın görüntüleme para birimi olabilir. Ödeme ayarları sayfası §0 gereği açılmadı | — |
-| Offsite Ads | **Açık** (sayfada "Opt out from Offsite Ads" butonu duruyor). docs/15 kapalı olmasını öneriyor; kullanıcı onayı bekliyor | Marketing → Offsite Ads |
+| Offsite Ads | **Hâlâ açık; kapatılamadı (2026-10-15, kullanıcı kapatmayı onayladı).** "Opt out from Offsite Ads" bir aç/kapa anahtarı (`#switch02`, açık konumda). 3 deneme yapıldı: ref ile tık, koordinatla tık, odak + Space. Anahtar değişmedi, onay penceresi açılmadı, para ya da bütçe soran bir adım çıkmadı. Sayfadaki "Loading" alanları takılı kaldı. Sekme arka plandaydı (`visibilityState: hidden`), ekran görüntüsü alınamadı. Ekrandaki metin: "Opting out of Offsite Ads might reduce your shop's visibility and sales opportunities. Some sellers aren't eligible to opt out based on their shop's performance." Yeniden açma koşulu ekranda yazmıyor. Sonraki deneme: sekme önde, sayfa tam yüklendikten sonra | Marketing → Offsite Ads |
 | Etsy Ads | Henüz kullanılamıyor: "13 days left until you can start advertising" (yeni dükkânda 15 gün bekleme) | Marketing → Etsy Ads |
 | Vacation mode | Kapalı | Options → Vacation Mode |
 | Custom order requests | Disabled | Options |
