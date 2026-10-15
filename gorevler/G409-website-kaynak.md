@@ -2,7 +2,7 @@
 id: G409
 baslik: Tasarım 09 Lavender Provence — platform teması
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-local-G409
 oncelik: 3
 bagimli: [G209, G038, G046, G052]
@@ -37,9 +37,49 @@ Tasarım 09'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - [ ] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+**Yapıldı (claude-local-G409, 2026-10-15):** `platform/themes/lavender-provence/` — theme.json (5 sayfa, 5 foto alanı, 72 copy anahtarı;
+`copy-manifest --check` temiz), content.demo.json (koleksiyon kaydının birebir kopyası), 5 şablon, site.css (45 KB sınırında), site.js
+(34,8 KB), thank-you.css, build_images.py (tools/tema_build.py + bu tasarımın kesimleri), README.md (comp öğe haritası, sapmalar), img/
+(2,77 MB, ≤ 3 MB). `platform/tests/theme-lavender-provence.test.ts` (34 test; §13.2'nin 24 maddesi + kese, açılış, story, home, teşekkür).
+`platform/previews/g409/` (theme-check çıktısı, compare_*_390.jpg, compare_closure.jpg, cuts_pouch.jpg, checks.json).
+- **Açılış:** dokununca sicimin iki ilmeği gevşeyip yanlara açılarak söner, lavanta demeti düğümüyle kesenin önünden sağ alta kayıp gider;
+  kapalı kese açık keseye geçerken gevşer (scaleX 1,03→1, scaleY ,97→1, alt kenar sabit); kart ağızdan yukarı kayar (ağız kenarı kırpar)
+  ve 7 lavanta tomurcuğu esintiyle ağızdan sağa-yukarı savrulur; kart öne gelir, VT ile home kartına uçar (`go` 3550 ms + VT 0,9 s).
+- **Story:** üç preslenmiş kart (frame_portrait) kendi yanından ±25° dönerek esintiyle gelir, gevşek açısında (−4°, +3,5°, −2,2°) durur;
+  üst üste binmez; telefonda foto penceresi 40,3vw; başlık el yazısıyla kartın altında.
+- **Görsel hattı:** hiza UYARI'sı ölçülen dönüşümle giderildi (açık kese ölçek+öteleme: alt −2,15 % → −0,07 %; sicim uçları düğüm
+  çevresinde yatay × 0,9466: −1,37/−1,22 % → 0/+0,44 %; `manifest.stage.align`). `tema_build.kese_kes` ağız yayını bulamadı (geometrik
+  yedek astarı ön duvara katıyordu) → ön duvar leylak astarın alt sınırından renkle kesildi (415 sütun). Kapanış renkle üç parçaya
+  (tie_l, tie_r, bundle; örtüşme 0). Pencereler `leke_doldur` ile tam şeffaf (yeşil/alfa boşluğu kusuru giderildi, denetim 0 px). GPT
+  tuvallerindeki alfa 1–7 hâlesi sıfırlandı. Gerilen kart bantları kâğıt lifinden temizlendi (`*_mid`). Kart: card_small, kese
+  gövdesinin %55'i; ağız kırpması `stage.rim.clip`.
+- **Comp sapmaları (README'de gerekçeli):** dört kutulu geri sayım → sade rakam (§5.7); story ve details'te comp'ta kart üstündeki
+  yazılar kartın altında (GPT çerçevelerinin pencere altı düz bandı ~%7–10, yazı sığmıyor); RSVP kartında info_card'ın tepe dalı
+  kalıyor (comp'ta yok); "Gordes, France" → `venue.city_region_country`; kese telefonda comp'tan büyük (§7.1 sahne boyu); bg_tile
+  (keten) kullanılmadı, zemin bg_page'in çiçeksiz bandı + aynası; monogram yok (kapanışta mühür yok).
+
+**Testler:** `npm test` (Windows, junction shim'iyle) 659 test, 0 fail (27071ab öncesi; son CSS düzeltmelerinden sonra yeniden koşuldu —
+aşağıdaki commit); `tests/theme-lavender-provence.test.ts` 34/34; `npm run typecheck` temiz; `npm run build` + trace-check geçti
+(lavender-provence izleniyor). Tarayıcı denetimleri playwright-core + kurulu Chrome 155 ile (tarayıcı indirilmedi):
+`theme-check --theme lavender-provence --stress --no-video` **120 geçti / 2 kaldı** — ikisi ortam kaynaklı: (1) "reduced motion 2291 ms"
+(%94 CPU yükünde; aynı tema bir önceki turda 422 ms ile geçti), (2) "content change" adımı Windows'ta denetim betiğinin ESM yol hatası
+(`ERR_UNSUPPORTED_ESM_URL_SCHEME`, scripts/theme-check.cjs inline import'u `C:\…` yolu veriyor — tema dışı, Linux'ta denenmeli).
+İlk görünüm (390×844, DPR 3): index 1078 KB, home 1067 KB (yer tutucu); fotoğraflı 1160 / 1455 KB. Dokun → home 4,7 s (yükte 6,4 s;
+nominal 4,45 s). `g051-browser --theme lavender-provence`: 44/44. Kontrast: metin token'ları en koyu zeminde ≥ 4,8:1, hap 4,7:1.
+Alex Brush + Cormorant Garamond latin-ext içeriyor (Amélie).
+
+**Denenmedi:** gerçek iPhone/Safari ve Android Chrome; Vercel yayını; MP4 kayıt (`--no-video`: makinede ffmpeg yok); gerçek alıcı
+fotoğrafları; yavaş ağ; theme-check "content change" akışı (Windows). **qa-kontrol incelemesi (§13.4) yapılamadı:** alt-ajan API
+haftalık limitine takıldı (429). compare_*.jpg'ler tarafımdan gözle karşılaştırıldı; entegratörün qa-kontrol'ü koşturması gerekiyor.
+
+**Sorunlu GPT parçaları / önerilen prompt düzeltmeleri** (`tools/katalog.py WEB[09]`): envelope_open kapalıdan 31 px yukarıda (aynı
+tuvalde alt kenar çakışmalı); closure sicim uçları kese kenarından ~14 px taşıyor; frame_portrait / frame_landscape pencere altı düz bandı
+çok dar (başlık için ≥ %15 boş kâğıt istenmeli); card_small/frame pencerelerinde yarı saydam yeşil + alfa boşluğu; tuvallerde alfa 1–7
+hâle. **Önerilen görev:** scripts/theme-check.cjs ve tests/*-browser.ts'te inline ESM import'larını `pathToFileURL` ile Windows uyumlu
+yapmak (claude-kod); tests/g068-copy.test.ts ve g075-thank-you.test.ts listelerine lavender-provence eklemek (yazar alanım dışı).
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-local-G409
+- 2026-10-15 bitti, incelemeye gönderildi
