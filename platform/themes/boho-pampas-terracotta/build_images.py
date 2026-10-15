@@ -56,8 +56,8 @@ LUM = np.array([0.299, 0.587, 0.114])
 WIDTHS = {
     "env_closed": [440, 880], "env_cflap": [440, 880], "env_flap": [440, 880], "env_body": [440, 880],
     "env_pocket": [440, 880], "closure": [320, 640], "card_small": [320, 596], "invitation_card": [480, 877],
-    "info_card": [480, 747], "frame_portrait": [320, 640], "frame_landscape": [480, 960], "decor_tl": [480, 960],
-    "decor_br": [480, 960], "divider": [300, 600],
+    "info_card": [480, 747], "frame_portrait": [320, 640], "frame_landscape": [480, 960], "decor_tl": [480, 720, 960],
+    "decor_br": [480, 720, 940], "divider": [300, 600],
 }
 # palet (palette.json terracotta-boho): ivory #FBF5EC — yer tutucu tonu
 IVORY = (251, 245, 236)

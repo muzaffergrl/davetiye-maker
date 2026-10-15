@@ -9,14 +9,14 @@ const MOTION = {
     hint:    [0, 260],      // "Tap to open" fades
     tug:     [0, 300],      // the pocket gives under the finger
     closure: [0, 780],      // the pampas-and-palm tie slips off the flap's edge (first motion at once)
-    head:    [160, 620],    // "You are invited" + names drift up and away
-    lift:    [520, 860],    // the arch flap folds upward on its top edge, 0° → 90°
-    open:    [560, 360],    // closed pocket → open pocket (lined back + front pocket)
-    flap:    [1360, 760],   // the lined arch takes over at 90° and stands up from the shoulders
-    rise:    [1720, 2000],  // the card slides slowly up out of the arch, like a rising sun
-    forward: [3760, 600],   // the card comes forward where it is (× 1.05)
-    accents: 1640,          // a pampas plume sways in from the side, gone before `go`
-    go:      4420,          // to home (the card flies into the hero card)
+    head:    [160, 600],    // "You are invited" + names drift up and away
+    lift:    [500, 820],    // the arch flap folds upward on its top edge, 0° → 90°
+    open:    [540, 340],    // closed pocket → open pocket (lined back + front pocket)
+    flap:    [1320, 720],   // the lined arch takes over at 90° and stands up from the shoulders
+    rise:    [1680, 1840],  // the card slides slowly up out of the arch, like a rising sun
+    forward: [3540, 560],   // the card comes forward where it is (× 1.05)
+    accents: 1560,          // a pampas plume sways in from the side, gone before `go`
+    go:      4140,          // to home (the card flies into the hero card)
     fadeOut: 420            // fade without cross-document view transitions
   },
 
@@ -45,7 +45,7 @@ const MOTION = {
   // particles (GPT accents): moment → groups, one kind each (docs/11 §8). Opening sentence: "a pampas plume sways in
   // from the side" → accent_1 × 1, across from the left, swaying like a pendulum, over the front pocket (not the photo)
   accents: {
-    open:    [{ file: 'img/accent_1-66.webp', count: 1, path: 'across', origin: 'left', sway: true, reach: 0.82, dur: [2500, 2500], size: [46, 52], spread: 0 }],
+    open:    [{ file: 'img/accent_1-66.webp', count: 1, path: 'across', origin: 'left', sway: true, reach: 0.82, dur: [2400, 2400], size: [46, 52], spread: 0 }],
     arrive:  [{ file: 'img/accent_1-66.webp', count: 2, path: 'fall', origin: 'top', dur: [7000, 8400], size: [26, 34], spread: 1600, avoid: '.hero [data-slot]' }],
     closing: [{ file: 'img/accent_3-200.webp', count: 2, path: 'fall', origin: 'top', dur: [6400, 7800], size: [22, 28], spread: 1500 },
               { file: 'img/accent_1-66.webp', count: 1, path: 'across', origin: 'right', sway: true, reach: 1, dur: [5600, 5600], size: [44, 44], spread: 0 }]

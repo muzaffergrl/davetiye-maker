@@ -14,7 +14,7 @@ Görseller yalnız bu tasarımın GPT parçaları (`collections/11_Boho_Pampas/a
 | `thank-you.css` | teşekkür modu (G075); yalnız düğünden sonra yüklenir |
 | `site.js` | `MOTION` (açılış, sahneler, parçacıklar), `ENVELOPE_GEOMETRY`, isim sığdırma + ilk ekran katlama, geri sayım, `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (`tools/tema_build.py`; `parts_prep` geçici klasöre); denetimler, `img/manifest.json` |
-| `img/` | WebP'ler (srcset genişlikleri), `mask_*.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` — toplam ~2,1 MB |
+| `img/` | WebP'ler (srcset genişlikleri; köşe kümeleri 480/720/960 — DPR 3 telefonda ilk görünüm dosyası ≤ 200 KB), `mask_*.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` — toplam ~2,3 MB |
 
 Yeniden üretim (repo kökünden): `PYTHONUTF8=1 python3 platform/themes/boho-pampas-terracotta/build_images.py [--onizleme <klasör>]`.
 
@@ -34,10 +34,10 @@ up out of the arch like a rising sun while a pampas plume sways in from the side
   genişliği, y≈730), alt kenarlar aynı → iki hâl aynı kemer siluette (üst kenar farkı 9 px), açılışta gövdeye "omuz" eklenmez.
 - **Katmanlar** (alttan üste): `env_flap` · `env_body` · kart · `env_pocket` · `env_closed` · `env_cflap` · `closure`.
 - **Hareket** (`MOTION.envelope`, dokunmadan ms): `closure` 0–780 bağ kapağın kenarından kayıp düşer (ilk hareket anında) →
-  `lift` 520–1380 kemer kapak üst kenarında 0→90° katlanır, aynı anda `open` kapalı → açık gövde → `flap` 1360–2120 astarlı kemer
-  −90°→0 omuzdan kalkar (90°'de el değiştirme) → `rise` 1720–3720 kart cepten yavaşça yükselir (uzun, düzgün yavaşlama: doğan
-  güneş) → `accents` 1640 bir pampas tüyü (`accent_1` × 1, `across` soldan, sarkaç gibi sallanarak, ön cebin üstünde — fotoğrafın
-  üstünden geçmez) → `forward` 3760–4360 kart olduğu yerde öne (× 1,05, büyüyen gölge) → `go` 4420 home (view transition).
+  `lift` 500–1320 kemer kapak üst kenarında 0→90° katlanır, aynı anda `open` kapalı → açık gövde → `flap` 1320–2040 astarlı kemer
+  −90°→0 omuzdan kalkar (90°'de el değiştirme) → `rise` 1680–3520 kart cepten yavaşça yükselir (uzun, düzgün yavaşlama: doğan
+  güneş) → `accents` 1560 bir pampas tüyü (`accent_1` × 1, `across` soldan, sarkaç gibi sallanarak, ön cebin üstünde — fotoğrafın
+  üstünden geçmez) → `forward` 3540–4100 kart olduğu yerde öne (× 1,05, büyüyen gölge) → `go` 4140 home (view transition).
 - **Kapanış yeri** (`manifest.closure`): çapa = kemer kapağın ucu (kenarın en alt noktası, `kapak_kes` `tip`); boy ve kayma W1.1
   comp'unda ölçüldü (zarf genişliği 493 px, kapanış kutusu yüksekliği 360 px → 0,730; kutu merkezi uçtan (+0,045, −0,143) × zarf
   genişliği; comp'ta uç bağın altında kaldığı için iki yandaki kenar sütunlarından parabolle bulundu). Görsel doğrulama:
@@ -76,7 +76,7 @@ up out of the arch like a rising sun while a pampas plume sways in from the side
 | köşe kümeleri, serbest parçalar | `.hero-bg` | kısa telefonda (≤ 700 px yükseklik) sağ alt küme geri sayıma binmesin diye gizlenir |
 | *(comp'ta yok)* davet kartı | `.paper.invite` (`invitation_card`, 3 dilim: %40–57 düz bant) | aileler, tam adlar (yedekli), davet cümlesi, tarih bloğu, saat, mekân |
 | *(comp'ta yok)* yanıt, takvime ekle | `.reply`, `.cal` | |
-| *(comp'ta yok)* diğer sayfalar | `.tiles`: kemer çerçeve (story_1), kemer gün kartı (ilk 4 program satırı), bağ | telefonda tek sütun, kemer ve başlık yan yana (sırayla sola/sağa); ≥ 640 px üçü yan yana |
+| *(comp'ta yok)* diğer sayfalar | `.tiles`: kemer çerçeve (story_1), kemer gün kartı (`info_card` yalnız görsel; ilk 4 program satırı başlığın altında, kartın üstüne yazılmaz — uzun kayıtta 3 dilimle uzayan kartın alt pampası satırlara giriyordu), bağ | telefonda tek sütun, kemer ve başlık yan yana (sırayla sola/sağa); ≥ 640 px üçü yan yana |
 | *(comp'ta yok)* kapanış | `.foot` (`divider`, isimler, "Open the envelope again") | |
 
 ### W1.3 — story (`story.html`)
@@ -126,6 +126,15 @@ bölgelerinden (en koyu piksel ≥ 175). "Your photo here" yalnız önizlemede.
 (`manifest.theme_check.first_screen.names_min_px`), sığmazsa `is-tight` → `is-long` (geri sayım hapın arkasına) → katlama
 (ilk ekranın altından başlar, nav'ın altında yarım kalmaz). Kart kopyası sığmazsa satır düşer (`fitCopy`: önce şehir, sonra script).
 Hero kartının yüksekliği ekrana göre: `clamp(150px, 100svh − 440px, 350px)`.
+
+## Ekran kenarları, nav, önizleme bandı
+- Nav (`.site-nav`) her zaman tek satır: dar telefonda harf aralığı ve boşluk küçülür (panelin izin verdiği en uzun etiketlerle
+  360 px'te sığar; `theme-check --stress`). Nav bandı sabit yükseklikte kalır, köşe kümeleri onun üstünde biter.
+- Paylaşılan önizleme linkinde platform sayfanın üstüne bir bant koyar (akışta, `data-platform-preview-bar`): `site.js` yüksekliğini
+  `--bar` yazar, ilk ekran `--vh = 100svh − --bar` (zarf sayfası, hero, `fitNames`).
+- Köşe kümeleri: zarf ve hero zeminindekiler (`.scene-bg .corner`, `manifest.theme_check.clusters`) hiçbir kenarla kesilmez ve nav
+  bandının altına girmez. Sayfa sonu köşeleri (`.page-corner`) kaydırılan içeriktir: bölümleri kümenin boyu kadar (1,14 × genişlik)
+  uzun, sayfa sonunda nav'ın üstünde biter.
 
 ## Bilinen sınırlar
 - Josefin Slab Google Fonts'ta yalnız `latin` alt kümesiyle gelir (Latin-1 aksanları var: é, ü, ñ); Orta Avrupa/Türkçe harfleri

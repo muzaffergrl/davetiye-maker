@@ -2073,6 +2073,12 @@
     "bytes": 66258
    },
    {
+    "file": "decor_tl-720.webp",
+    "w": 720,
+    "h": 724,
+    "bytes": 135022
+   },
+   {
     "file": "decor_tl-960.webp",
     "w": 960,
     "h": 966,
@@ -2092,6 +2098,12 @@
     "w": 480,
     "h": 540,
     "bytes": 65432
+   },
+   {
+    "file": "decor_br-720.webp",
+    "w": 720,
+    "h": 810,
+    "bytes": 124612
    },
    {
     "file": "decor_br-940.webp",
