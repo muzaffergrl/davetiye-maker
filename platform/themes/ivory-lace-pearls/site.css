@@ -3,14 +3,12 @@
 /* -- tokens (palette.json: ivory-pearl) */
 :root {
   --page: #F1E7DE; /* manifest page_color (bg_page satin) */
-  --paper: #FBF7F1;
   --ivory: #FFFDF8;
   --ink: #3A3530; /* on the satin 9.9:1 */
   --ink-soft: #5B4D3E; /* 6.7:1 */
-  --taupe: #7A6650; /* script names, titles: 4.3:1 (large text) */
-  --taupe-dark: #67543F; /* italic lines 5.6:1 */
-  --gold: #BFA67A;
-  --gold-ink: #8C7350; /* the italic & in the names: 3.6:1 (large text) */
+  --taupe: #7A6650; /* script names, titles: 4.5:1 */
+  --taupe-dark: #67543F; /* italic lines 5.9:1 */
+  --gold-ink: #8C7350; /* the & in the names: 3.7:1 (large) */
   --hair: rgba(140, 123, 102, .42);
   --script: "Mrs Saint Delafield", "Bodoni Moda", serif;
   --serif: "Bodoni Moda", "Bodoni 72", "Didot", serif;
@@ -23,7 +21,6 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; background: var(--page); }
-/* smooth: the #reply jump only */
 @media (prefers-reduced-motion: no-preference) { html:has(#reply) { scroll-behavior: smooth; } }
 body {
   margin: 0; min-height: 100svh; overflow-x: clip; position: relative;
@@ -31,7 +28,7 @@ body {
   background: var(--page) url("img/bg_tile-640.webp") 50% 0 / 640px auto repeat;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
-/* soft window light from the top-left (W1: "soft natural light from the top-left") */
+/* soft window light from the top-left (W1) */
 body::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: min(100%, max(100svh, 640px)); z-index: 0; pointer-events: none;
   background: radial-gradient(80% 50% at 10% 0%, rgba(255, 253, 248, .55), rgba(255, 253, 248, 0) 72%);
@@ -39,13 +36,12 @@ body::before {
 img { max-width: 100%; }
 p, h1, h2, h3, figure { margin: 0; }
 a { color: inherit; }
-/* no tap rectangle */
 a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transparent; }
 .nowrap { white-space: nowrap; }
 [data-empty] { display: none; }
 :focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; border-radius: 4px; }
 
-/* -- type: a copperplate script (Mrs Saint Delafield) + high-contrast Bodoni (Bodoni Moda) */
+/* -- type */
 .script { font-family: var(--script); font-weight: 400; color: var(--taupe); line-height: 1.18; letter-spacing: 0;
           text-shadow: 0 0 14px rgba(255, 253, 248, .85); }
 .kicker {
@@ -64,7 +60,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .section { position: relative; }
 .orn, .names-orn, .head-orn, .sec-orn, .cap-orn, .card-orn, .dress-orn { display: block; height: auto; margin-inline: auto; }
 
-/* -- buttons: champagne-taupe pill with ivory lettering (W1.2, W1.5) */
+/* -- buttons: champagne-taupe pill (W1.2, W1.5) */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .6em; min-height: 50px; min-width: 168px;
   padding: 12px 38px; border-radius: 999px; border: 0;
@@ -78,12 +74,11 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .btn-ghost { background: rgba(255, 253, 248, .66); color: var(--taupe-dark); box-shadow: inset 0 0 0 1px rgba(122, 102, 80, .55); }
 .btn-sm { min-height: 44px; min-width: 0; padding: 10px 18px; font-size: 11.5px; letter-spacing: .18em; text-indent: .18em; }
 
-/* -- navigation (W1: spaced capitals under a small strand of pearls) */
+/* -- navigation */
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
   padding: 20px 8px env(safe-area-inset-bottom);
-  /* opaque label row, soft top edge */
-  background: linear-gradient(rgba(246, 240, 233, 0), rgba(246, 240, 233, .97) 20px, rgba(246, 240, 233, .98));
+    background: linear-gradient(rgba(246, 240, 233, 0), rgba(246, 240, 233, .97) 20px, rgba(246, 240, 233, .98));
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   -webkit-mask: linear-gradient(transparent, #000 12px); mask: linear-gradient(transparent, #000 12px);
 }
@@ -93,7 +88,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .site-nav li + li::before { content: "·"; content: "·" / ""; color: var(--gold-ink); font-size: 16px; }
 .site-nav a {
   display: flex; align-items: center; min-height: var(--nav-h); padding: 0 8px; text-decoration: none;
-  font: 500 12px/1 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft);
+  font: 500 12px/1 var(--serif); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft);
 }
 .site-nav a span { padding: 6px 0 4px; border-bottom: 1px solid transparent; }
 .site-nav a[aria-current="page"] { color: var(--taupe-dark); }
@@ -117,12 +112,12 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="unfurl"] { opacity: 1; clip-path: inset(0 50% 0 50%); --dur: 1300ms; }
 .js [data-a="unfurl"].in { clip-path: inset(0 -2% 0 -2%); }
 .js [data-a="write"].done, .js [data-a="unfurl"].done { clip-path: none; }
-/* a corner cluster grows out of its corner (never past the screen edge) */
+/* a corner cluster grows from its corner */
 .js [data-a="glide-tl"] { transform: scale(.92); transform-origin: 0 0; --dur: 1600ms; }
 .js [data-a="glide-br"] { transform: scale(.92); transform-origin: 100% 100%; --dur: 1600ms; }
-/* descend (14): a frame comes down on its strand of pearls, swinging softly about the top of the strand till it settles */
+/* descend (14): a frame comes down on its strand, swinging softly about its top */
 .js [data-a="descend"] { transform: translate3d(0, -30%, 0) rotate(-3deg); transform-origin: 50% 0; --dur: 1800ms; --ease-t: cubic-bezier(.3, 1.32, .5, 1); }
-/* glint (14): a borderless band of light runs over the carved ivory and the pearls (masked to the frame and its window) */
+/* glint (14): borderless light over the carved ivory and pearls, masked to the frame + window */
 .js [data-a="glint"] { transform: translate3d(0, 14px, 0); --dur: 1300ms; }
 .js [data-a="glint"]::after, .js .tile [data-a="descend"] .frame-in::after {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0;
@@ -135,9 +130,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="glint"].in::after { animation: glint 1800ms var(--ease-soft) calc(var(--d, 0ms) + 400ms) both; }
 .js .tile [data-a="descend"].in .frame-in::after { animation: glint 1800ms var(--ease-soft) calc(var(--d, 0ms) + 1300ms) both; }
 @keyframes glint { 0% { opacity: 0; background-position-x: 100%; } 18% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; background-position-x: 0%; } }
-/* the pearl clasp comes to rest at the card's base */
+
 .js [data-a="rest"] { transform: translate3d(0, -14px, 0) scale(1.08); --dur: 1300ms; --ease-t: cubic-bezier(.3, 1.25, .5, 1); }
-/* a card set down, always opaque */
 .js [data-a="set"] { opacity: 1; transform: translate3d(0, 24px, 0) scale(.97); --dur: 1300ms; }
 
 /* -- photo slots (docs/11 §5.6, §9) */
@@ -155,7 +149,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 }
 .ph-mark img { width: 28%; max-width: 44px; opacity: .9; }
 
-/* -- card_small (= home hero card): oval window in carved ivory, plain card below */
+/* -- card_small (= home hero card) */
 .card { position: relative; aspect-ratio: 728 / 1146; container-type: inline-size; }
 .card > .photo-slot { left: 19.78%; top: 13.7%; width: 60.165%; height: 52.705%; } /* photo_slots.card */
 .card > .card-img, .oval-frame > .frame-img, .land-frame > .frame-img, .frame-in > .frame-img, .venue-photo .vframe, .card-clasp > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -172,10 +166,10 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-copy[data-wrap] .nowrap { white-space: normal; }
 .card-copy[data-drop~="c"] .sep, .card-copy[data-drop~="c"] .cc-city, .card-copy[data-drop~="s"] .card-line { display: none; }
 
-/* -- backdrop: the satin with its window light + whole decor_tl / decor_br + the small pieces */
+/* -- backdrop: satin (mist) + whole decor_tl / decor_br + small pieces */
 .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .scene-bg::before, .page-bg::before { content: ""; position: absolute; inset: 0; background: url("img/mist-640.webp") 50% 50% / cover no-repeat; }
-.page-bg::before { -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent); }
+.page-bg::before, .hero-bg::before { -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent); }
 .float { position: absolute; display: block; height: auto; filter: drop-shadow(0 5px 6px rgba(58, 53, 48, .18)); }
 .f-drop { right: 7%; top: max(2.5%, 18px); width: clamp(16px, 5vw, 38px); transform-origin: 50% 0; }
 .f-petal { right: 17%; top: calc(max(2.5%, 18px) + clamp(18px, 5vw, 40px)); width: clamp(30px, 10vw, 74px); }
@@ -204,7 +198,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   font: 500 12px/1 var(--serif); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft);
 }
 .skip span { padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
-/* --obj = closed folder, --w = --obj / .49343 (closed_obj.frac_w); empty top .2196 × --w (the card's room) */
+/* --w = --obj / .49343 (closed_obj.frac_w); card room .2196 × --w */
 .env-page {
   --obj: min(78vw, 34svh, 400px); --w: calc(var(--obj) * var(--ok, 1) / .49343); --nm: clamp(44px, 13.6vw, 84px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
@@ -223,7 +217,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   margin-top: calc(max(16px, var(--nm) * var(--names-scale, 1) * .3) - var(--w) * .2196); cursor: pointer; border-radius: 6px;
 }
 .stage:focus-visible { outline-offset: -4px; }
-/* the opened folder fits the screen (docs/11 §7.1: × min(1, .94 × 100vw / open spread); site.js --os) */
+/* open folder fits the screen (docs/11 §7.1; site.js --os) */
 .env { position: absolute; inset: 0; transform-origin: 50% 62.969%; } /* closed_obj.center_pct */
 .env > img, .closure > img { position: absolute; display: block; }
 /* layers bottom → top (stage.parts) */
@@ -234,11 +228,11 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .door-l { left: 25.121%; top: 25.857%; width: 24.775%; height: 74.224%; z-index: 3; transform-origin: 0 50%; backface-visibility: hidden; } /* stage.parts.door_l */
 .door-r { left: 49.827%; top: 25.857%; width: 24.775%; height: 74.224%; z-index: 3; transform-origin: 100% 50%; backface-visibility: hidden; } /* stage.parts.door_r */
 .door-l, .door-r, .center, .door-l-in, .door-r-in { filter: drop-shadow(0 14px 18px rgba(58, 53, 48, .22)) drop-shadow(0 2px 3px rgba(58, 53, 48, .16)); }
-/* the card waits in the satin centre's pocket (clipped at the folder's foot) */
+/* the card waits in the pocket */
 .card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-200% -10% 0 -10%); }
 .env .card { position: absolute; left: 30.125%; top: 70.464%; width: 39.474%; } /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 8px 14px rgba(58, 53, 48, .22)); }
-/* the pearl clasp on the seam at mid-height (manifest closure), unhooking about its centre pearl */
+/* the pearl clasp on the seam (manifest closure) */
 .closure { position: absolute; z-index: 5; left: 43.302%; top: 54.042%; width: 13.163%; height: 15.16%;
            transform-origin: 49.837% 46.102%; /* closure.pearl_center_in_crop_pct */
            filter: drop-shadow(0 6px 7px rgba(58, 53, 48, .32)) drop-shadow(0 1px 1px rgba(58, 53, 48, .28)); } /* stage.parts.closure */
@@ -248,7 +242,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 @media (hover: hover) and (pointer: fine) { .env-hint .tap { display: none; } .env-hint .click { display: inline; } }
 .js .env-hint { animation: hint-breathe 2.8s ease-in-out 1.6s infinite; }
 @keyframes hint-breathe { 0%, 100% { opacity: 1; } 50% { opacity: .66; } }
-/* the strand of tiny pearls under the hint; it glints as the card rises (MOTION.envelope.glint) */
+/* the strand of tiny pearls; glints as the card rises (MOTION.envelope.glint) */
 .hint-orn { position: relative; z-index: 3; display: block; width: 170px; margin-top: 4px; }
 .hint-orn img { display: block; width: 100%; height: auto; }
 .glint-band { position: absolute; inset: -20% 0; opacity: 0; pointer-events: none;
@@ -264,10 +258,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .is-opened .center, .is-opened .pocket { opacity: 1; }
 .is-opened .env { transform: scale(var(--os, .65)); }
 .is-opened .env-page .card-slot { clip-path: none; z-index: 6; }
-/* VT name only if the card may morph */
 .is-opened .env .card { transform: translateY(-93%) scale(1.06); view-transition-name: invite-card; } /* ENVELOPE_GEOMETRY.front */
 .is-opened .env-page { padding-top: max(calc(18px + env(safe-area-inset-top)), 2svh); padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
-.is-opened .env-head, .is-opened .hint-orn { display: none; }
+.is-opened .env-head, .is-opened .hint-orn, .is-opened .f-petal2 { display: none; }
 .is-opened .env-hint { display: none; animation: none; }
 .is-opened .stage { margin-top: 0; }
 .is-opened .env-after {
@@ -278,7 +271,6 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .is-opened .env-after .replay::after { display: none; }
 
 .accent-layer { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
-/* behind the section's text */
 .accent-layer.in-host { position: absolute; z-index: 0; }
 .accent-layer img { position: absolute; left: 0; top: 0; display: block; height: auto; will-change: transform, opacity;
                     filter: drop-shadow(0 4px 5px rgba(58, 53, 48, .16)); }
@@ -296,7 +288,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   position: relative; z-index: 1; width: min(100% - 32px, 520px); display: flex; flex-direction: column; align-items: center;
   text-align: center; padding: calc(24px + env(safe-area-inset-top)) 0 0;
 }
-.hero-card { width: clamp(150px, 34svh * .635, min(46vw, 240px)); filter: drop-shadow(0 16px 20px rgba(58, 53, 48, .2)) drop-shadow(0 2px 3px rgba(58, 53, 48, .14)); }
+.hero-card { width: clamp(136px, 34svh * .635, min(46vw, 240px)); filter: drop-shadow(0 16px 20px rgba(58, 53, 48, .2)) drop-shadow(0 2px 3px rgba(58, 53, 48, .14)); }
 .hero-card { view-transition-name: invite-card; }
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
 ::view-transition-group(invite-card) { animation-duration: .9s; animation-timing-function: cubic-bezier(.4, 0, .2, 1); }
@@ -318,7 +310,6 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; } /* 
 .countdown.is-done .cd-row { display: none; }
 @media (max-width: 359px) { .cd-row { gap: 12px; } .cd-cell { min-width: 44px; } .cd-lbl { letter-spacing: .1em; } }
 .hero-cta { margin-top: clamp(14px, 3svh, 28px); }
-/* 9:16 and squatter phones */
 @media (min-aspect-ratio: 11/20) and (max-aspect-ratio: 3/4) and (max-width: 640px) {
   .hero { --hn: clamp(42px, min(13.2vw, 6.8svh), 84px); }
   .hero-inner { padding-top: calc(clamp(8px, 4svh - 12px, 24px) + env(safe-area-inset-top)); }
@@ -329,10 +320,15 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; } /* 
   .hero-cta .btn { min-height: 46px; }
 }
 /* site.js fitNames */
+.hero.is-tight .names { line-height: 1.08; }
+.hero.is-tight .hero-date { margin-top: 0; }
 .hero.is-tight .names-orn { margin-top: 2px; width: 110px; }
-.hero.is-tight .hero-venue { font-size: 18px; }
-.hero.is-tight .cd-num { font-size: 26px; }
-.hero.is-tight .countdown, .hero.is-tight .hero-cta { margin-top: 8px; }
+.hero.is-tight .hero-venue { margin-top: 2px; font-size: 18px; line-height: 1.25; }
+.hero.is-tight .hero-city { margin-top: 0; font-size: 14px; }
+.hero.is-tight .cd-num { font-size: 24px; }
+.hero.is-tight .cd-lbl { margin-top: 3px; }
+.hero.is-tight .countdown, .hero.is-tight .hero-cta { margin-top: 6px; }
+.hero.is-tight .hero-cta .btn { min-height: 44px; }
 .hero.is-long .countdown { order: 1; grid-row: 8; margin-top: 22px; } /* site.js fold */
 .hero.is-long .hero-cta { grid-row: 7; }
 .hero.is-long .hero-card { grid-row: 1 / 8; }
@@ -348,7 +344,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .paper::before { top: calc(var(--top-h) - 1px); bottom: calc(var(--bot-h) - 1px); }
 .paper::after { bottom: 0; height: var(--bot-h); background-size: 100% auto; background-position: 0 100%; }
 .paper-text { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-/* invitation_card: plain band 44–80 % (the rose cluster and its pearls hang down the left edge to 44 %) */
+/* invitation_card: plain band 44–80 % */
 .invite { --ar: .66735; --t: .44; --b: .80; }
 .invite::before, .invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-800.webp") 2x); }
 .invite::before { background-size: 100% 277.778%; background-position: 0 68.75%; } /* 1 / (.80 − .44); .44 / (1 − .36) */
@@ -359,7 +355,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* -- home: invitation card (no comp) */
 .invite-sec { padding: 34px 0 26px; }
-/* free_zone: the text starts at 40 % (right of the hanging pearls), above the bottom lace (80 %) */
+/* free_zone: text from 40 % to the bottom lace (80 %) */
 .invite-text { padding: 60cqw 12% calc(var(--bot-h) + 3cqw); min-height: calc(100cqw / .66735); justify-content: flex-start; }
 .invite-text .host { max-width: 46cqw; font-size: max(11px, 3.1cqw); letter-spacing: .24em; line-height: 1.6; text-wrap: balance; }
 .invite-text .nm { font-size: 12.6cqw; line-height: 1.16; text-wrap: balance; overflow-wrap: break-word; max-width: 66cqw; }
@@ -379,7 +375,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .cal .kicker { font-size: 11.5px; }
 .cal-links { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
-/* -- home: two hanging pearl frames (no comp) */
+/* -- home: two frames (no comp) */
 .frames-sec { padding: 40px 0 10px; text-align: center; }
 .sec-orn { width: min(56vw, 200px); }
 .teasers { display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 14px; }
@@ -410,7 +406,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .foot .sign { font-size: clamp(46px, 13vw, 64px); margin-top: 4px; overflow-wrap: break-word; text-wrap: balance; }
 .foot .textlink { margin-top: 18px; }
 
-/* == long pages: the satin, corners and pieces of W1.3–W1.5 */
+/* == long pages */
 .page-long .site-main { padding-top: env(safe-area-inset-top); }
 .page-corner { position: absolute; z-index: 0; display: block; height: auto; pointer-events: none; }
 .page-head, .details-top, .rsvp-top { position: relative; text-align: center; }
@@ -429,10 +425,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .lede { width: min(100%, 420px); margin: 10px auto 0; font: italic 400 18px/1.6 var(--serif); color: var(--ink); text-wrap: pretty; }
 .next-sec .sec-orn { margin: 0 auto 18px; }
 
-/* == story (W1.3): three frames hanging on strands of different lengths (W1.3: left the highest, the middle the lowest).
-   The strand is the top 33.78 % of frame_portrait (manifest frame_portrait.strand); each tile shows it shortened from its
-   top by --cut (a crop of the GPT part, clip-path). Phones: a zigzag (left, right, left), each strand rising beside the
-   frame above, the oval below it; ≥ 900 px the comp's row, the strands' tops in one line */
+/* == story (W1.3): frames on strands of different lengths (README); strand = top 33.78 % of frame_portrait
+   (manifest frame_portrait.strand), cut by --cut. Phones: zigzag; ≥ 900 px the comp's row */
 .tiles { position: relative; z-index: 1; padding: 18px 0 6px; --tw: min(58vw, 330px); overflow-x: clip; }
 .tile { position: relative; width: var(--tw); margin: 0 0 22px; text-align: center; --cut: .16; }
 .t-2 { --cut: 0; }
@@ -469,7 +463,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* time | event, its place in italic under it (W1.4) */
 .sched-row { display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 1fr); column-gap: 4cqw; align-items: baseline; text-align: left; }
 .sched-row + .sched-row { margin-top: 2.4cqw; }
-/* GPT divider (a strand of pearls with a lace bow) between rows (W1.4) */
+/* GPT divider between rows (W1.4) */
 .sched-row + .sched-row::before {
   content: ""; grid-column: 1 / -1; justify-self: center; width: 46cqw; aspect-ratio: 1283 / 199; margin-bottom: 2.4cqw;
   background: url("img/divider-300.webp") center / contain no-repeat;
@@ -478,8 +472,9 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .sched-list:has(> .sched-row:nth-child(6)) .sched-row + .sched-row { margin-top: 3.4cqw; }
 .sched-row .time { grid-row: 2; font: 500 max(11px, 3.3cqw)/1.5 var(--serif); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
 .sched-row .label { grid-row: 2; font: 400 max(16px, 5.1cqw)/1.3 var(--serif); color: var(--ink); overflow-wrap: break-word; }
-.sched-row .loc { grid-column: 2; font: italic 400 max(14px, 4.1cqw)/1.4 var(--serif); color: var(--taupe-dark); overflow-wrap: break-word; }
+.sched-row .loc { grid-column: 2; grid-row: 3; font: italic 400 max(14px, 4.1cqw)/1.4 var(--serif); color: var(--taupe-dark); overflow-wrap: break-word; }
 .sched-row:first-child .time, .sched-row:first-child .label { grid-row: 1; }
+.sched-row:first-child .loc { grid-row: 2; }
 .venue-sec { padding: 36px 0 0; text-align: center; z-index: 1; }
 .venue-photo { position: relative; width: 100%; aspect-ratio: 1432 / 947; filter: drop-shadow(0 14px 18px rgba(58, 53, 48, .18)); }
 .venue-text { margin-top: 6px; }
@@ -523,7 +518,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .rsvp-text .sign { margin-top: 0; font-size: calc(14cqw * var(--sg)); line-height: calc(.8 + .36 * var(--sg)); text-wrap: balance; overflow-wrap: break-word; max-width: 100%; text-shadow: none; }
 .unit { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .sig-unit { --sg: 1; position: relative; padding-bottom: calc(20cqw * var(--sg)); }
-/* the pearl clasp (W1.5) resting at the card's base, half past it */
+/* the pearl clasp at the card's base (W1.5) */
 .card-clasp { position: absolute; z-index: 2; left: 50%; top: calc(100% - 7cqw * var(--sg)); width: calc(26cqw * var(--sg)); aspect-ratio: 921 / 898; translate: -49.8% -46.1%;
               filter: drop-shadow(0 6px 7px rgba(58, 53, 48, .3)) drop-shadow(0 1px 1px rgba(58, 53, 48, .24)); }
 .reply-sec { padding: 46px 0 10px; }
@@ -589,14 +584,14 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
     column-gap: clamp(28px, 6vw, 72px); width: calc(100% - 32px - env(safe-area-inset-left) - env(safe-area-inset-right));
     padding-top: calc(12px + env(safe-area-inset-top));
   }
-  .hero-card { grid-area: 1 / 1 / -1; align-self: start; width: clamp(150px, (100svh - var(--nav-h) - 48px) * .635, 240px); }
+  .hero-card { grid-area: 1 / 1 / -1; align-self: start; width: clamp(136px, (100svh - var(--nav-h) - 64px) * .635, 240px); }
   .hero .names { grid-area: 2 / 2; margin-top: 0; }
   .hero-date { grid-area: 3 / 2; }
   .names-orn { grid-area: 4 / 2; }
   .hero-venue { grid-area: 5 / 2; }
   .hero-city { grid-area: 6 / 2; }
-  .countdown { grid-area: 7 / 2; margin-top: clamp(8px, 2.6svh, 22px); }
-  .hero-cta { grid-area: 8 / 2; margin-top: clamp(8px, 3svh, 24px); }
+  .countdown { grid-area: 7 / 2; margin-top: clamp(6px, 2svh, 22px); }
+  .hero-cta { grid-area: 8 / 2; margin-top: clamp(6px, 2.4svh, 24px); }
   .cd-num { font-size: clamp(26px, 7svh, 40px); }
   .cd-row { gap: clamp(14px, 3vw, 34px); }
   .hero-cta .btn { min-height: 46px; }
@@ -604,7 +599,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 
   .env-page { --obj: min(78vw, 36svh, 400px); --nm: clamp(38px, min(10vw, 10svh), 64px); --pt0: 14px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
   .env-head { width: min(100% - 2 * min(20vw, 34svh), 560px); }
-  .is-opened .env-page { --obj: min(60vw, (100svh - 30px) * 1.18122 * .49343 / .74061, 400px); flex-direction: row; gap: clamp(20px, 5vw, 64px); padding: 12px 16px; }
+  .is-opened .env-page { --obj: min(60vw, (100svh - 30px) * 1.18122 * .49343, 400px); flex-direction: row; gap: clamp(20px, 5vw, 64px); padding: 12px 16px; }
   .is-opened .stage, .is-opened .env-after { margin-top: 0; }
 
   .page-head { padding-top: max(48px, 16svh); }

@@ -7,15 +7,15 @@ const MOTION = {
   envelope: {
     hint: [0, 300],
     tug: [0, 300],
-    closure: [80, 1000], // the pearl clasp unhooks (lifts towards the viewer), then slips away down the seam
+    closure: [80, 950], // the pearl clasp unhooks (lifts towards the viewer), then slips away down the seam
     head: [200, 700],
-    doors: [700, 1000], // both lace doors part together, slowly, lifting a little like a veil (0° → ∓90°)
-    inner: [1700, 900], // the lace-lined insides take over at 90° → 0°; the stage fits the open folder (--os)
-    rise: [2450, 1300],
-    glint: [2500, 1600], // the strand of tiny pearls glints as the card rises (14)
-    accents: 2450, // no particles: the sentence names none (the glint is light, CSS)
-    forward: [3700, 600],
-    go: 4500,
+    doors: [650, 950], // both lace doors part together, slowly, lifting a little like a veil (0° → ∓90°)
+    inner: [1600, 850], // the lace-lined insides take over at 90° → 0°; the stage fits the open folder (--os)
+    rise: [2300, 1250],
+    glint: [2350, 1500], // the strand of tiny pearls glints as the card rises (14)
+    accents: 2300, // no particles: the sentence names none (the glint is light, CSS)
+    forward: [3500, 550],
+    go: 4250,
     fadeOut: 420 // without cross-document VT
   },
 
