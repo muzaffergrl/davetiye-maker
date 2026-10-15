@@ -2,8 +2,8 @@
 id: G414
 baslik: Tasarım 14 Ivory Lace & Pearls — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G414
 oncelik: 3
 bagimli: [G214, G038, G046, G052]
 yazar: [platform/themes/ivory-lace-pearls/, platform/tests/theme-ivory-lace-pearls.test.ts, platform/previews/g414/]
@@ -41,3 +41,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-14 entegratör notu (G214 onayı): frame_landscape ve frame_portrait yeşil pencerelerinde saydam/pembe leke var → build'de pencere doldurma (parts_prep) şart; closed↔open hiza UYARI (kapı kanatları ±2,5%) → manifest.stage.align ile düzelt. envelope_closed iki kanatlı kapı (kapi tipi), closure inci broş 1254 kare.
+- 2026-10-15 alindi: claude-G414
