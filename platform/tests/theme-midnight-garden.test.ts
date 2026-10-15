@@ -785,7 +785,9 @@ test('inner pages (story, details, rsvp): the night of W1.3–W1.5 behind the fi
 test('inner pages: nothing half under the nav on the first screen — fold units, one small lift', () => {
   const d = render('details').$;
   assert.equal(d('.day-card h1.card-title[data-fold]').length, 1);
-  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, demo().schedule.length, 'each schedule row');
+  // schedule rows do not fold: inside the painted card a pushed row left an empty hole (qa-kontrol G419); a row under the
+  // nav line on the first screen is the accepted inner-page behaviour (docs/11 §11)
+  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, 0);
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 5, 'title, reply-by, pill, the wait line, the signature');

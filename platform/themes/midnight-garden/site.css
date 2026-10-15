@@ -202,7 +202,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   justify-content: center; text-align: center;
   padding: max(calc(var(--pt0, 40px) + env(safe-area-inset-top)), var(--pt, calc(var(--w) * .68288 - var(--nm) * 1.12 - 34px))) 16px max(calc(26px + env(safe-area-inset-bottom)), 17svh);
 }
-.env-head { position: relative; z-index: 3; width: min(100%, 560px); pointer-events: none; }
+.env-head { position: relative; z-index: 3; width: min(100%, 720px); pointer-events: none; }
 .env-head .kicker { width: fit-content; margin-inline: auto; font-size: 15px; letter-spacing: .32em; color: var(--ink-soft); }
 .names {
   margin-top: 6px; font-size: calc(var(--nm) * var(--names-scale, 1)); line-height: 1.12;
@@ -456,7 +456,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* phones: staggered, alternately left and right */
 .p-1, .p-3 { align-self: flex-start; margin-left: max(14px, 50vw - var(--fw) * .86); }
 .p-2 { align-self: flex-end; margin-right: max(14px, 50vw - var(--fw) * .86); margin-top: -6vw; }
-.p-3 { margin-top: -6vw; }
+.p-3 { margin-top: 3vw; }
 .pane .frame { position: relative; aspect-ratio: 951 / 1275; filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .7)) drop-shadow(0 2px 2px rgba(0, 0, 0, .5)); }
 .frame > .glow { opacity: 0; transition: opacity 1600ms var(--ease-soft); }
 .no-js .frame > .glow, .frame.in > .glow { opacity: 1; }

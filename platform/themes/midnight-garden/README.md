@@ -77,7 +77,7 @@ kırpım; kişi/yazı/gül yok — `build_images.py` gül kırmızısını ölç
   ağzında, kartın arkasında sıcak altın ışık (`.env-glow`) ve zarfın üstüne/çevresine yayılan kenarsız ışık (`.env-spill`,
   `mix-blend-mode: screen`) — CSS ışığı, çizim değil (§5.7). 2,38 s'de **kart karanlıktan ışığa yükselir** (cepten kalkarken
   parlaklığı %18'den %100'e), öne gelir (× 1,04, büyüyen gölge) ve view transition ile home kartına uçar. Dokun → home 4,52 s
-  (`go`; theme-check ölçümü 4754 ms, Skip her an). Açılış cümlesinde parçacık yok → `accents.open = []`.
+  (`go`; theme-check ölçümü 4762 ms, Skip her an). Açılış cümlesinde parçacık yok → `accents.open = []`.
 - **Story:** her çerçeve kendi sahnesi: görünüme girince çerçevenin arkasında duvardaki mum ışığı (`.glow`) ısınır, çerçeve ve
   fotoğrafı neredeyse siyahtan aydınlanır (`kindle`: opaklık .14 + `brightness(.12)` → 1, 1,7 s), sonra başlık belirir.
   Telefonda çerçeve 64vw (foto penceresi 64 × 0,6435 = **41,2vw** ≥ 38vw), comp'un "salon" düzeni korunur: alt alta ama
@@ -92,7 +92,8 @@ kırpım; kişi/yazı/gül yok — `build_images.py` gül kırmızısını ölç
 08'in çözülmüş adımları korunur: `fitNames` (isimler en çok %24 küçülür → `.is-tight` + isimler **32 px tabanı** → `.is-long`
 (sayaç hapın altına) → hero kaydırılır), ardından `fold`. Kısa yatay (`min-aspect-ratio: 1/1` ve yükseklik ≤ 620 px) ızgara: kart
 solda, isimler · tarih · mekân · şehir · sayaç · hap sağda. **İç sayfalar** (`folds`): her ilk ekran öğesi ya nav'ın üstünde
-biter ya da ilk ekranın tamamen altında başlar (story'de her çerçeve ayrı birim; masaüstü ızgarasında yayılan öğe yok, itilen
+biter ya da ilk ekranın tamamen altında başlar (details'te program satırları birim **değil**: boyalı kartın içinde itilen
+satır yazısız bir delik bırakıyordu — qa-kontrol; nav çizgisindeki satır docs/11 §11'in kabul edilen davranışı; story'de her çerçeve ayrı birim; masaüstü ızgarasında yayılan öğe yok, itilen
 çerçeve yalnız arkasından gelenleri iter). **Zarf sayfası** (`envFit`): sahnenin boş üstü (`.68288 × --w`) ölçülen başlığın
 altına girer; "Tap to open" ilk ekranda bitmiyorsa sahne küçülür (`--ok`, en az 0,6). Kısa telefonlarda (360×640, 375×553) mum
 ışığı ipucuna yaklaşabildiği için ipucunun arkasında kenarsız koyu bir okunabilirlik hâlesi var (`.env-hint::before`, §5.7).
@@ -199,10 +200,11 @@ hemen altında `<template data-rsvp-party>`.
 | `theme-check --theme midnight-garden --stress` | 128 geçti, 0 hata, 0 uyarı (`previews/g419/checks.json`) |
 | `g051-browser --theme midnight-garden` | 44/44 |
 | `final-smoke --theme midnight-garden` | 45/45 (`previews/g419/final/`) |
-| `npm test` / `typecheck` / `build` | 994 test: 992 geçti, 2 atlandı (build çıktısı beklenen iki pazarlama testi), 0 hata · temiz · temiz (trace-check 16 tema) |
-| zarf → home | 4754 ms (MOTION `go` 4520 + view transition) |
+| `npm test` / `typecheck` / `build` | 994/994 · temiz · temiz (trace-check 16 tema) |
+| zarf → home | 4762 ms (MOTION `go` 4520 + view transition) |
 | azaltılmış hareket | 201 ms, doğrudan home, her şey görünür |
 | ilk görünüm 390×844 DPR 3 | index 718 KB, home 949 KB (yer tutucu); örnek fotoğrafla 808 / 1423 KB (sınır 1,5 MB) |
 | açılış kaydı | `previews/g419/opening_390x844.mp4` (dokun → açılış → home → story → details) |
 | dosya boyları | site.js 35 550 B (≤ 35 KiB), site.css 46 041 B (≤ 45 KiB), thank-you.css 2285 B; tema klasörü ~1,9 MB |
 | kit uyumu (`kit_check`) | paket 5 23/23 (hiza sol +0,00, sağ −0,10, alt +0,13 %), paket 2 5/5 |
+| qa-kontrol (§13.4) | 5 sayfa + kapanış KABUL; önemli bulgu (details kartında fold boşluğu) ve story başlık aralığı düzeltildi |
