@@ -24,6 +24,7 @@ Kullanıcı canlıda denemek istiyor. Test yayını; kurgusal veri.
 4. 390 px ekran görüntüleri `docs/10_canli_test/g079/`: kurulum 1–3, Home, Edit listesi, bir editör, şerit + Review, Share (kapalı/açık), Guests.
    1280 px: Edit + sağda önizleme.
 4b. Main'e bu arada G075 (teşekkür modu) ve G080 (/start + signin BKE görünümü, onaysız tema kapısı) da girdi. Canlıda kontrol et: `/start?theme=dusty-blue-champagne` 404 + "This design is not available yet" (kapı `VERCEL_ENV=production` okuyor; çalışmazsa dur, yaz — ortam değişkeni ekleme), `/start?theme=blush-garden-rose` açılır; `/lily-and-theo` panelinde Day & place → "After the wedding" bölümü görünür (modu değiştirme). Ekran görüntüleri: /start, signin, onaysız tema sayfası.
+4c. Main'e ayrıca G068 (düzenlenebilir metinler), G081/G084 (teşekkür hâli + metinler + misafir adları 5 temada), G082/G083/G086 (satış sitesinde 5 tasarım), G402/G404/G405 (02, 04, 05 temaları onaylı) girdi. Canlıda kontrol: `/designs` 5 kart; her tasarımın `/designs/<id>` sayfası 200; `/start?theme=<id>` beşi için açılır; beş demo site (`/clara-and-julian`, `/avery-and-jordan`, `/eleanor-and-theo`, `/margot-and-henry`, `/isabella-and-marco`) yeni kodla tohumlanır ve açılır; `/lily-and-theo` panelinde bir editörün "Headings & labels on this page" bölümü görünür (değiştirme).
 5. Sonuç: deployment ID/URL, commit, sayılar, gözlemler (takılan, kafa karıştıran, yavaş olan her şey — kullanıcı "çok daha basit" istedi;
    hâlâ ağır gelen yerleri madde madde yaz), bilinen eksikler. `docs/10` §2c'ye kısa satır.
 

@@ -2,7 +2,7 @@
 id: G084
 baslik: 02, 04, 05 temalarına RSVP misafir adları satırı (G069 `data-rsvp-party` şablonu + `form_party` copy anahtarı)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G084
 oncelik: 2
 bagimli: [G069, G081]
@@ -114,3 +114,4 @@ döndürülünce yanıt kutusu bütün olarak yeniden katlanır (satır tek tek 
 - 2026-10-14 entegratör: 02/05 turu kabul (theme-check 127/0/0, g069-browser 98/98); docs/11 §3.3'e misafir adları kuralı eklendi. 04 turu G404 onayından sonra (G081 ile birlikte).
 - 2026-10-15 claude-G084: 04 turu tamam (G081 04 turuyla birlikte): `<template data-rsvp-party>` + `form_party`; g069-browser G084 04 19/19, npm test 582/582, theme-check 127/0/0; docs/11 §3.3 örnek listesi 01–05
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı

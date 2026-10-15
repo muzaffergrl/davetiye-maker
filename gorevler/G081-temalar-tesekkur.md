@@ -2,7 +2,7 @@
 id: G081
 baslik: 02, 04, 05 temalarına teşekkür hâli (docs/11 §3.6) ve düzenlenebilir metinler (§3.7 data-copy + manifest)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G081
 oncelik: 2
 bagimli: [G075, G068, G402, G405]
@@ -175,3 +175,4 @@ telefonlarda yalnız kapanış başlığı ilk ekranın altından başlar; yatay
 - 2026-10-14 entegratör: 02/05 turu incelendi (önizlemeler iyi, theme-check 127/0/0 iki temada); docs/11 §3.6/§3.7 cümleleri güncellendi; misafir adları satırı G084'e ayrıldı. 04 turu G404 onayından sonra.
 - 2026-10-15 claude-G081: 04 turu tamam (G084 04 turuyla birlikte): teşekkür hâli + 74 copy anahtarı; theme-check 127/0/0, npm test 582/582 (birleştirme sonrası), g075 20/20, g068 8/8, g051 44/44, final-smoke 45/45; site.js 35 803 B, site.css 46 043 B
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı
