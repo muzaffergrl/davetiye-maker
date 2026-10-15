@@ -26,7 +26,7 @@
 <meta name="theme-color" content="#F2D4BE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Pinyon+Script&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..500&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Pinyon+Script&amp;display=swap">
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
@@ -145,19 +145,19 @@
   <section class="section teasers" data-scene="home-teasers" aria-label="More about the day">
     <span class="orn orn-sprig" data-step="sprig" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy"></span>
     <div class="wrap teaser-row">
-      <a class="teaser t-story" data-optional="our_story" href="story.html" data-step="frame" data-a="hang">
-        <span class="sway frame fp" aria-hidden="true">
+      <a class="teaser t-story" data-optional="our_story" href="story.html">
+        <span class="sway frame fp" aria-hidden="true" data-step="frame" data-a="hang">
           <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(31vw, 140px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/charm-48.webp" alt=""><span>Your photo here</span></span></span>
           <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(48vw, 216px)" alt="" loading="lazy">
         </span>
-        <span class="t-text"><span class="script t-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
+        <span class="t-text" data-step="title" data-a="rise"><span class="script t-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
       </a>
-      <a class="teaser t-day" href="details.html" data-if="!thank_you_hides_details" data-step="frame" data-i="1" data-a="hang">
-        <span class="sway frame fl" aria-hidden="true">
+      <a class="teaser t-day" href="details.html" data-if="!thank_you_hides_details">
+        <span class="sway frame fl" aria-hidden="true" data-step="frame" data-i="1" data-a="hang">
           <span class="photo-slot mask-landscape" data-slot="venue"><img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(52vw, 240px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/charm-48.webp" alt=""><span>Your photo here</span></span></span>
           <img class="frame-img" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(72vw, 330px)" alt="" loading="lazy">
         </span>
-        <span class="t-text"><span class="script t-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span>
+        <span class="t-text" data-step="title" data-i="1" data-a="rise"><span class="script t-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span>
         <!-- the first four schedule rows (docs/11 §3.2; site.css shows four) -->
         <span class="t-sched"><span class="t-row" data-repeat="schedule"><span data-field=".label"></span> · <span class="nowrap" data-field=".time"></span></span></span></span>
       </a>

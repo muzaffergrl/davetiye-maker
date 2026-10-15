@@ -505,7 +505,7 @@ test('17 schedule of 1, 6 and 10 rows, long names, en-GB, the design-range and �
   // has capitals only): three families (docs/11 §6), all with latin-ext (accented names, §12), display=swap
   for (const page of PAGES) {
     const href = render(page).$('link[rel="stylesheet"][href^="https://fonts.googleapis.com"]').attr('href')!;
-    assert.equal(href, 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Pinyon+Script&display=swap', page);
+    assert.equal(href, 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400..500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Pinyon+Script&display=swap', page);
   }
 });
 
