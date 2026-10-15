@@ -1,9 +1,9 @@
 ---
-id: G085
+id: G086
 baslik: Tasarım 04 Vintage Airmail Love Letter satış sitesine eklenir (G082/G083 yöntemi) — 5 tasarımla düzen
 rol: claude-kod
-durum: inceleme
-alan: claude-G085
+durum: bitti
+alan: claude-G086
 oncelik: 2
 bagimli: [G404, G083]
 yazar: [platform/lib/marketing/, platform/public/marketing/designs/, platform/scripts/marketing-assets.ts, platform/tests/, platform/previews/g085/, docs/14_SATIS_SITESI.md, platform/components/marketing/]
@@ -157,3 +157,5 @@ onaylı; incelemede gerçek tema kalmadı. Yayın yapılmadı; her şey yerel pr
 - 2026-10-15 alindi: claude-G085 (elle: `gorev.py al` aynı id iki dosyada diye reddetti — G085-platform-kapanis.md da G085; entegratöre not)
 - 2026-10-15 claude-G085: 04 live (config + metin + ≤ 60 karakter başlık), marketing-assets --designs vintage-airmail-love-letter --shots ile yalnız 04'ün ekranları/klibi (01/02/03/05 + panel bayt bayt aynı), ≥ 900 px üçlü sıra + ortalı son sıra, çip şeridinde solan kenar, masaüstünde sıkı çipler, kapı testleri kurgu "incelemede" temayla, docs/14 §14.1; npm test 579/579, marketing-browser 407/407, g080-browser 101/101
 - 2026-10-15 bitti, incelemeye gönderildi (elle: `gorev.py bitir` aynı id iki dosyada diye reddetti)
+- 2026-10-15 entegratör: görev numarası G085 → **G086** (G085 codex'in `G085-platform-kapanis.md` görevine ait; çakışmayı entegratör yaptı). Kod ve önizlemedeki `g085` adları (`tests/g085-designs.test.ts`, `platform/previews/g085/`, CSS yorumları, marketing-browser 'G085' bölümü) bu göreve aittir; yeniden adlandırılmadı. İncelendi ve onaylandı.
+- 2026-10-15 entegratör onayladı
