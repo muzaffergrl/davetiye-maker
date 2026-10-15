@@ -1,5 +1,5 @@
 {
- "when": "2026-10-15T06:02:57.642Z",
+ "when": "2026-10-15T06:20:39.308Z",
  "checks": [
   {
    "name": "off: /admin answers 200 with an honest \"kapalı\" note",
@@ -16,7 +16,7 @@
   {
    "name": "/start gives an edit link",
    "ok": true,
-   "detail": "http://127.0.0.1:3387/edit/emma-and-liam?k=…"
+   "detail": "http://127.0.0.1:3399/edit/emma-and-liam?k=…"
   },
   {
    "name": "Home: the status card says the order is being confirmed",
@@ -90,7 +90,7 @@
   {
    "name": "the \"order confirmed\" message is ready, filled in",
    "ok": true,
-   "detail": "Hi Emma & Liam!\n\nThank you for your order (#3456789012). We have confirmed it, so your wedding website can now go live.\n"
+   "detail": "Hi Emma & Liam, good news: we have confirmed your Etsy order 3456789012.\n\nYou can now publish your Blush Garden Rose website. Open your editor with the edit lin"
   },
   {
    "name": "history shows the confirmation",
@@ -103,7 +103,7 @@
   {
    "name": "a new edit link is shown once",
    "ok": true,
-   "detail": "http://127.0.0.1:3387/edit/emma-and-liam?k=…"
+   "detail": "http://127.0.0.1:3399/edit/emma-and-liam?k=…"
   },
   {
    "name": "the \"new editor link\" message holds the new link",
