@@ -70,19 +70,21 @@ kırpım) görür. `build_images.py` her yer tutucunun en koyu pikselini (≥ 17
 ## Açılış ve koreografi (`site.js` `MOTION`)
 - **Açılış** (katalog: "On tap, soft snow begins to fall, the pine-and-berry bundle loosens and slides away, the green flap opens
   upward, and the snowy white card rises as snowflakes drift across the screen."): dokununca (0 ms) **kar yağmaya başlar**
-  (GPT kar tanesi accent_1 × 16, 11–22 px, ekranın üstünden aşağı, salınarak, açılış boyunca); **demet gevşer** (120 ms'den:
+  (GPT kar tanesi accent_1 × 18, 14–26 px, gölgeli; zarfın **arkasında**, bir kısmı havada başlar, salınarak aşağı, açılış
+  boyunca); **demet gevşer** (120 ms'den:
   fiyonk düğümü çevresinde −4° → +3,5° → −1,5° sallanır, hafifçe şişip yerine oturur) ve **kayarak gider** (zarfın önünden aşağı,
   hafifçe sağa ve 16° dönerek, hızlanarak ekranın altından çıkar — zarfın üstünde sönmez; 1,62 s'de biter); **yeşil kapak**
   menteşesinde izleyiciye doğru kalkar (1,24 s; 82°'den sonra söner), altında kapalı gövde açık gövdeye (karlı astar + ön cep)
   geçer, astarlı açık kapak −90°'den dikilir (2,06 s) → **kart cepten yükselir** (2,32 s) ve **aynı anda** 4 büyük kar tanesi
-  (26–36 px) sırayla soldan ve sağdan ekranı boydan boya geçer → kart olduğu yerde öne gelir (× 1,04, büyüyen gölge) ve view
+  (24–32 px) sırayla soldan ve sağdan ekranı boydan boya geçer (zarfın yeşil ön cebinin önünde, cep yüksekliğinin %50–86'sı
+  şeridinde — kartın foto penceresinin üstünden geçmez) → kart olduğu yerde öne gelir (× 1,04, büyüyen gölge) ve view
   transition ile home kartına uçar. Dokun → home 4,56 s (Skip her an).
 - **Story:** her pencere kendi sahnesi: görünüme girince yükselerek yerine oturur (`rise-lg`), 760 ms sonra camındaki buğu ortadan
   dışa silinir (`wipe`: GPT buğu katmanına radyal maske, `--wipe` 0 → %74, 1,7 s; köşelerde kırağı kalır — "frost still clinging
   to their corners as if just wiped clear"), sonra başlığı yazılır. Telefonda pencere 66vw (foto penceresi 66 × 0,65 = **42,9vw**
   ≥ 38vw), alt alta ortalı, aralarında duvarda bir meyve dalı (accent_3); ≥ 720 px comp'un üçlü sırası (aralarında dal) ve
   **tek fold birimi**: sıra nav'ın üstünde bitene kadar `site.js` `row` pencereleri 6 px adımlarla küçültür (en az 140 px).
-- **Parçacıklar** (`MOTION.accents`, hep GPT kar tanesi): açılış 16 düşen + 4 süzülen · home'a varış 4 kar tanesi (hero'nun içinde,
+- **Parçacıklar** (`MOTION.accents`, hep GPT kar tanesi): açılış 18 düşen (zarfın arkasında) + 4 süzülen (ön cebin önünde) · home'a varış 4 kar tanesi (hero'nun içinde,
   metnin arkasında, yazı sütununun yanındaki şeritlerde) · RSVP kapanışı 5 kar tanesi (yalnız `.closing` kutusunda, forma uzanmaz).
 - **Boyalı kartlar** (davet, Order of the Day, RSVP): `set` girişi — kart konur gibi kayar ve yerleşir, **hep opak** (theme-check'in
   kart piksel testi gerçek kart üstünde ölçer). RSVP kartındaki demet `drop` ile karta düşer.
@@ -205,4 +207,19 @@ stili, `form_party` + `form_optional`).
   yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 
 ## Ölçümler
-_(theme-check sonrası doldurulur)_
+2026-10-15, worktree `worktree-agent-a489a0b0127280e51`, PORT 3480, Chromium (Playwright, `/opt/pw-browsers`).
+
+| Ölçüm | Sonuç |
+|---|---|
+| `theme-check --theme winter-evergreen --stress` | 128 geçti, 0 hata, 0 uyarı (`previews/g408/checks.json`) |
+| `g051-browser --theme winter-evergreen` | 44/44 |
+| `final-smoke --theme winter-evergreen` | 45/45, konsol/sayfa hatası yok (`previews/g408/final/`) |
+| `npm test` / `typecheck` / `build` | 620/620 · temiz · temiz (trace-check 7 tema) |
+| zarf → home | 4855 ms (MOTION `go` 4560 + view transition) |
+| azaltılmış hareket | 231 ms, doğrudan home, her şey görünür |
+| ilk görünüm 390×844 DPR 3 | index 1003 KB, home 962 KB (yer tutucu); örnek fotoğrafla 1074 / 1350 KB (sınır 1,5 MB) |
+| açılış kaydı | `previews/g408/opening_390x844.mp4` 2884 KB (dokun → açılış → home → story → details) |
+| dosya boyları | site.js 35 741 B (≤ 35 KiB), site.css 45 583 B (≤ 45 KiB), thank-you.css 2372 B; tema klasörü 2,35 MB; decor_tl/br-720 116 / 123 KB |
+| kit uyumu (`kit_check`) | paket 5 24/24 (hiza sol +0,00, sağ +0,00, alt +0,13 %), paket 2 5/5 |
+| kendi ilk-ekran taraması | 228 ilk ekran (home/story/details/rsvp × 19 boy × demo/range/stress): nav çizgisinin kestiği parça 0, nav bandında parça 0 |
+| kontrast (metnin arkasındaki en kötü %10 zemin) | en düşük "Click to open" 5,68:1 (index 390×844, gerekli 4,5); diğerleri 6–8,5:1 |

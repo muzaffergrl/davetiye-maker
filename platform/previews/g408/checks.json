@@ -1,16 +1,7 @@
 {
  "base": "next start (production build)",
  "theme": "winter-evergreen",
- "errors": [
-  "home@360×640 (design range): card text over painted decor card_small \"29 September 2027\" y78.6–82.7% x0.5–99.5% vs band 78% [2.03..97.82]",
-  "home@375×553 (design range): card text over painted decor card_small \"29 September 2027\" y78.6–82.8% x0.2–99.8% vs band 78% [2.03..97.82]",
-  "home@360×640 (stress record): card text over painted decor invitation_card (card 890 px > image 150 px, pixel test) \"Together with their fami\" y135 px 3.5%",
-  "home@375×553 (stress record): card text over painted decor invitation_card (card 923 px > image 157 px, pixel test) \"Together with their fami\" y141 px 2.3%",
-  "home@844×390 (stress record): card text over painted decor invitation_card (card 1146 px > image 201 px, pixel test) \"Together with their fami\" y159 px 1.5%",
-  "home@844×390 (stress record): card text over painted decor invitation_card (card 1146 px > image 201 px, pixel test) \"Together with their fami\" y179 px 4.2%",
-  "home@667×375 (stress record): card text over painted decor invitation_card (card 1146 px > image 201 px, pixel test) \"Together with their fami\" y159 px 1.6%",
-  "home@667×375 (stress record): card text over painted decor invitation_card (card 1146 px > image 201 px, pixel test) \"Together with their fami\" y179 px 4.2%"
- ],
+ "errors": [],
  "warnings": [],
  "passed": [
   "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
@@ -70,17 +61,23 @@
   "home @667×375: home-hero (22 pieces, CTA \"RSVP\" bottom 278, names 41.3 px) ends at 299, above the nav (top 314)",
   "home@667×375: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @360×640 (design range): names 38.4 px (≥ 36); nothing partly under the nav (top 571): the first screen ends at 552; CTA \"RSVP\" bottom 552",
+  "home@360×640 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @375×553 (design range): names 40.9 px (≥ 36); nothing partly under the nav (top 484): the first screen ends at 467, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 467",
+  "home@375×553 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @844×390 (design range): names 37.8 px (≥ 36); nothing partly under the nav (top 329): the first screen ends at 318; CTA \"RSVP\" bottom 318",
   "home@844×390 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @667×375 (design range): names 41.3 px (≥ 36); nothing partly under the nav (top 314): the first screen ends at 300; CTA \"RSVP\" bottom 300",
   "home@667×375 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @360×640 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 889, nav top 571)",
+  "home@360×640 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @375×553 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 767, nav top 484)",
+  "home@375×553 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @844×390 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 316, nav top 329)",
+  "home@844×390 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 488, nav top 314)",
+  "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 63×44, home \"Replay the envelope\" 247×46, rsvp \"Replay the envelope\" 204×46",
-  "envelope → /noelle-and-james/home in 4837 ms, card transition flag set",
+  "envelope → /noelle-and-james/home in 4855 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (13 steps)",
   "countdown target from the platform: 2027-12-11 16:00 America/Denver = 2027-12-11 23:00 UTC",
@@ -102,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-12-12T00:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-12-16T23:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (212 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (231 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -130,10 +127,11 @@
   "details@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 1002 KB",
+  "index first view (390×844, DPR 3, placeholders): 1003 KB",
   "home first view (390×844, DPR 3, placeholders): 962 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 1074 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 1349 KB"
+  "home first view (390×844, DPR 3, seeded sample photos): 1350 KB",
+  "recording: previews/g408/opening_390x844.mp4 (2884 KB, lead-in 0.60 s cut, first frame mean 176,182,176) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -484,9 +482,9 @@
      "span.cd-lbl \"Days\" bottom 602",
      "span.cd-num \"13\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 602",
-     "span.cd-num \"37\" bottom 587",
+     "span.cd-num \"20\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 602",
-     "span.cd-num \"58\" bottom 587",
+     "span.cd-num \"29\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 602"
     ],
     "partly": [],
@@ -555,9 +553,9 @@
      "span.cd-lbl \"Days\" bottom 829",
      "span.cd-num \"14\" bottom 814",
      "span.cd-lbl \"Hours\" bottom 829",
-     "span.cd-num \"37\" bottom 814",
+     "span.cd-num \"20\" bottom 814",
      "span.cd-lbl \"Minutes\" bottom 829",
-     "span.cd-num \"39\" bottom 814",
+     "span.cd-num \"10\" bottom 814",
      "span.cd-lbl \"Seconds\" bottom 829",
      "a.btn \"RSVP\" bottom 889"
     ],
@@ -587,9 +585,9 @@
      "span.cd-lbl \"Days\" bottom 711",
      "span.cd-num \"14\" bottom 696",
      "span.cd-lbl \"Hours\" bottom 711",
-     "span.cd-num \"37\" bottom 696",
+     "span.cd-num \"20\" bottom 696",
      "span.cd-lbl \"Minutes\" bottom 711",
-     "span.cd-num \"33\" bottom 696",
+     "span.cd-num \"04\" bottom 696",
      "span.cd-lbl \"Seconds\" bottom 711",
      "a.btn \"RSVP\" bottom 767"
     ],
@@ -617,9 +615,9 @@
      "span.cd-lbl \"Days\" bottom 442",
      "span.cd-num \"14\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 442",
-     "span.cd-num \"37\" bottom 424",
+     "span.cd-num \"19\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 442",
-     "span.cd-num \"27\" bottom 424",
+     "span.cd-num \"57\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 442"
     ],
     "partly": [],
@@ -646,9 +644,9 @@
      "span.cd-lbl \"Days\" bottom 429",
      "span.cd-num \"14\" bottom 412",
      "span.cd-lbl \"Hours\" bottom 429",
-     "span.cd-num \"37\" bottom 412",
+     "span.cd-num \"19\" bottom 412",
      "span.cd-lbl \"Minutes\" bottom 429",
-     "span.cd-num \"20\" bottom 412",
+     "span.cd-num \"51\" bottom 412",
      "span.cd-lbl \"Seconds\" bottom 429",
      "a.btn \"RSVP\" bottom 488"
     ],
@@ -656,7 +654,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4837,
+  "envelope_to_home_ms": 4855,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -733,7 +731,7 @@
    "copy_keys_at_max": 71,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 1002,
+  "first_view_index_kb_placeholders": 1003,
   "first_view_index_files": [
    [
     "/themes/winter-evergreen/img/decor_br-720.webp",
@@ -800,7 +798,7 @@
    ],
    [
     "/themes/winter-evergreen/site.css",
-    45329
+    45583
    ]
   ],
   "first_view_index_kb_photos": 1074,
@@ -826,7 +824,7 @@
     90236
    ],
    [
-    "/media/f34ec60f-f6e6-4640-9326-cf68d24062ad/f44c92349ad1420ee3aab561f4274ef9-640w.jpg",
+    "/media/a7c06beb-ced6-45f8-bef6-daab1cc21bb2/9d1a1566ccddc0e48aa84f4e0aff7d43-640w.jpg",
     73375
    ],
    [
@@ -838,10 +836,10 @@
     54554
    ]
   ],
-  "first_view_home_kb_photos": 1349,
+  "first_view_home_kb_photos": 1350,
   "first_view_home_files_photos": [
    [
-    "/media/f34ec60f-f6e6-4640-9326-cf68d24062ad/c5817bbfbb5a3503a8aff89f9cdf9e19-1280w.jpg",
+    "/media/a7c06beb-ced6-45f8-bef6-daab1cc21bb2/0759780293e4c4640c9dec5efe1b034d-1280w.jpg",
     235256
    ],
    [
@@ -861,7 +859,7 @@
     104516
    ],
    [
-    "/media/f34ec60f-f6e6-4640-9326-cf68d24062ad/f4231ae9d942c63a7ad9d8f44139842c-640w.jpg",
+    "/media/a7c06beb-ced6-45f8-bef6-daab1cc21bb2/a5fd291958630eeb49e454dc69ce905c-640w.jpg",
     91689
    ],
    [
@@ -873,6 +871,16 @@
     82760
    ]
   ],
+  "video_kb": 2884,
+  "video_first_frame": {
+   "lead_in_s": 0.6,
+   "mean_rgb": [
+    176,
+    182,
+    176
+   ],
+   "stdev": 75
+  },
   "compare": {
    "source": "w1",
    "pages": [
