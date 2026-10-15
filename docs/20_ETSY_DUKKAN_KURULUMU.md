@@ -192,9 +192,9 @@ No. It is a digital product.
 | Ayar | Öneri | Gerekçe / durum |
 |---|---|---|
 | Dükkân dili | English | Hedef alıcı yabancı (AGENTS) |
-| Para birimi | USD | docs/15 §5 önerisi. Dükkân açılışında seçildiyse değiştirilmez, §7'ye yazılır |
+| Para birimi | **TRY** (kullanıcı kararı 2026-10-15; USD önerisi yerine) | §7.3, §8. İlan fiyatı TL girilir |
 | Konum | Türkiye | K26 |
-| Offsite Ads | **Kapat (opt out)** — kullanıcı onayı 2026-10-15 | docs/15 §1. Son 12 ayda $10k altındayken isteğe bağlı |
+| Offsite Ads | **Kapatıldı** (opt out, 2026-10-15, kullanıcı onayıyla; doğrulandı §7.3) | docs/15 §1. Son 12 ayda $10k altındayken isteğe bağlı |
 | Etsy Ads | Kapalı | Para harcatır; ilanlar yayında değil |
 | Vacation mode / auto-reply | Değiştirilmez | İlanlar yayında değil |
 | Shop updates / bildirimler | Değiştirilmez | — |

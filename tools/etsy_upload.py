@@ -33,7 +33,8 @@ DESIGNS = [
     ("05", "05_Lemon_Mediterranean", "mediterranean-lemon"),
 ]
 PRICE_USD = 29.40
-PRICE_NOTE = "Draft price from the user on 2026-10-15 ('for now'); final price is still a decision (docs/15 §5)."
+PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY "
+              "amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 OUTDATED_IMAGES = "made 2026-10-14 (G059) with the old editor; rebuild before publishing (listing_v3 §5)"
 

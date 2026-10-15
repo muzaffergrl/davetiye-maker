@@ -33,7 +33,7 @@
     "Personalization": "Off (nothing to fill in at checkout; the buyer fills in the website)"
   },
   "price_usd": 29.4,
-  "price_note": "Draft price from the user on 2026-10-15 ('for now'); final price is still a decision (docs/15 §5).",
+  "price_note": "Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).",
   "quantity": null,
   "renewal": null,
   "shop_section": "Summer & Destination",
