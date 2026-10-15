@@ -9,7 +9,7 @@ kullanacağı satış sonrası mesaj şablonları** (§4), START HERE rehberinin
 satış sitesi için metin önerileri (§6) ve açık kalanlar (§7).
 
 **Kurallar** (AGENTS, docs/05 §E): yalnız kodda olan ve test edilmiş özellik vaat edilir; doğrulanmamış iddia `[VERIFY …]`;
-karar verilmemiş ticari alan köşeli parantezli yer tutucu (`[RESPONSE TIME]`, `[REFUND POLICY]` …) kalır; tarih `June 12, 2027`;
+karar verilmemiş ticari alan köşeli parantezli yer tutucu (`[ORDER CHECK TIME]`, `[EXTENSION POLICY]` …) kalır; tarih `June 12, 2027`;
 rakip metni kopyalanmaz. **K33 (2026-10-15):** dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com** (şimdilik);
 bütün alıcı metinlerinde bu değerler kullanılır. Ürün metni İngilizce, açıklamalar Türkçe.
 
@@ -300,7 +300,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 |---|---|---|---|---|
 | 76 | What happens after the wedding? | You can turn your website into a thank-you page (automatically the day after, or right away), with your own message and photo. Replies close. | İ, SH | ✓ |
 | 77 | What happens after it closes? Can I extend it? | Your website closes for guests; in your editor you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY]. Deleting your data: [DELETION PROCESS]. | SH, M | ✓ / K |
-| 78 | How do I get help, and how fast? | Message BKE Studio on Etsy with your order number (or email bkestudio@gmail.com). We reply within [RESPONSE TIME]. We never ask for your edit link. | İ, SH, P | ✓ (K33) / süre K |
+| 78 | How do I get help, and how fast? | Message BKE Studio on Etsy with your order number (or email bkestudio@gmail.com). We reply within 24 hours. We never ask for your edit link. | İ, SH, P | ✓ (K33; süre 2026-10-15) |
 
 ---
 
@@ -366,7 +366,7 @@ GOOD TO KNOW
 • [REFUND POLICY]
 
 QUESTIONS?
-Message us here on Etsy. We reply within [RESPONSE TIME].
+Message us here on Etsy. We reply within 24 hours.
 ```
 
 Notlar:
@@ -723,7 +723,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
 3. Etsy mesajları yalnız sipariş ve destek içindir; reklam, kupon, Etsy dışı satın alma yönlendirmesi yok (docs/15 §4.1).
 4. `review_request`: sipariş başına bir kez, herkese aynı metin, teşviksiz, yıldız istemeden; açık sorun varken gönderilmez
    (FTC ve Etsy kuralları, docs/15 §4.6).
-5. Zaman vaadi (`[ORDER CHECK TIME]`, `[RESPONSE TIME]`) karar verilmeden doldurulmaz.
+5. Zaman vaadi (`[ORDER CHECK TIME]`) karar verilmeden doldurulmaz. Yanıt süresi kararlı: 24 saat (kullanıcı, 2026-10-15).
 6. `order_confirmed` platform tarafından gönderilmez; `verify-order` sonrası dükkân gönderir (admin paneli bu ikisini tek
    eylemde birleştirebilir, §6 A2).
 
@@ -754,7 +754,7 @@ privacy.
   Skip for now, Save & exit, Continue, Publish my website, Unpublished changes, Review, Publish changes, Headings & labels on this
   page, Reset to design text, Use this photo, Copy edit link, Guest password, Suggest a password, Turn on password, Copy password,
   Take the website offline, Download list, Add a reply, Print list, Refresh, After the wedding, Automatic / On now / Off.
-- K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi `[RESPONSE TIME]` yer tutucu.
+- K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
 - Ekran görüntüsü yok: mevcut ekranlar ya yerel adres (127.0.0.1) ya da K29 öncesi panel gösteriyor. G079 sonrası canlı tabanla
   `capture` yeniden alınınca rehbere görsel eklenebilir (önerilen görev, §7).
 - PDF: `tools/build_customer_guides.py` biçimi (reportlab; başlık, paragraf, `- ` madde, 2 sütunlu tablo, link, QR = başlat linki).
@@ -841,7 +841,7 @@ Biçim: **dosya** · mevcut metin → önerilen metin · gerekçe. Kod bu görev
 
 ## 7. Açık kalanlar
 
-**Karar bekleyen (kullanıcı):** destek yanıt süresi (`[RESPONSE TIME]`; dükkân adı ve e-posta K33 ile verildi), Etsy dükkân linki, fiyat, iade politikası, kayıp link
+**Karar bekleyen (kullanıcı):** ~~destek yanıt süresi~~ (2026-10-15: 24 saat; dükkân adı ve e-posta K33), Etsy dükkân linki, fiyat, ~~iade politikası~~ (2026-10-15: iade yok, "çalışmazsa düzeltiriz"; docs/20 §4), kayıp link
 politikası (süre), sipariş onay süresi (`[ORDER CHECK TIME]`), erteleme politikası (`[POSTPONEMENT POLICY]`; docs/16 §15 öneri:
 ertelemede 1 hak), yanlış tasarım politikası (`[DESIGN SWITCH POLICY]`), uzatma (`[EXTENSION POLICY]`), silme süreci
 (`[DELETION PROCESS]`), 48 aylık tavan (kodda açık, karar yok), alan adı.
@@ -1067,7 +1067,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 ## Help and privacy
 
-Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **[RESPONSE TIME]**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
+Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
 Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
 
