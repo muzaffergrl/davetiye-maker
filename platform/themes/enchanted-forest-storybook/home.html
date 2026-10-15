@@ -1,0 +1,188 @@
+<!doctype html>
+<!-- Enchanted Forest Storybook · page 2 — home (/<slug>/home). W1.2 comp: the card that came out of the storybook (an
+     aged-cream book-page card with deckled edges, the portrait held by four black photo corners, "We're getting married",
+     date · town), the names in the calligraphic script, a small ivy sprig between two hairlines, weekday · date in spaced
+     capitals, the venue and its place in italic, the countdown, the moss-green RSVP pill with its thin gold line, the slim
+     navigation; ivy, foxgloves, ferns and toadstools in two corners and fireflies in the misty forest.
+     Below the comp (no W1 screen; this design's parts and type, docs/11 §8): the invitation card (GPT invitation_card: a
+     storybook page with ferns, ivy and toadstools along the top and in the bottom corners, a fine ink rule; 3-slice so long
+     names and venues lengthen it) with the date as MONTH | day | YEAR between hairlines, the one reply-by line, add to
+     calendar (G051), two photo-cornered pictures — the first story photo (GPT frame_portrait) and the venue (GPT
+     frame_landscape) — leading to Our Story and The Day, and the closing under the fern corner. Personal text: none.
+     Thank-you mode (G075, data-if="thank_you_on"): the hero keeps the card (thank-you photo or the brass clasp on the misty
+     forest), names, date and place, without the countdown and the RSVP pill; the invitation card becomes the thank-you
+     card on the same paper (title, the couple's message, "With love," the names, the date); no reply call, no calendar;
+     the pictures keep Our Story and The Day. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{name_display} · {date}">Wedding</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{name_display} · {date|date-long} · {venue.city_region}" content="Wedding website">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{date|date-long} · {venue.name} · {venue.city_region}" content="">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<meta name="theme-color" content="#DED8B8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Tangerine:wght@700&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'',s=sessionStorage;if(s.getItem('invite:arrive'+k)){s.removeItem('invite:arrive'+k);r.classList.add('from-envelope');if(!('onpageswap' in window&&document.startViewTransition))r.classList.add('arrive-fade');}}catch(e){}})(document.documentElement);
+</script>
+<script src="site.js" defer></script>
+</head>
+<body data-pending="This link will be added soon.">
+
+<main class="site-main">
+
+  <!-- HERO (comp W1.2) -->
+  <section class="hero" data-scene="home-hero" aria-label="Welcome">
+    <div class="scene-bg hero-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 5/4)" srcset="img/mist_wide-1024.webp">
+        <img class="scene-img" src="img/mist-580.webp" alt="" fetchpriority="high">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-360.webp" srcset="img/decor_tl-360.webp 360w, img/decor_tl-540.webp 540w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(30vw, 52vh, 460px), min(50vw, 26svh, 290px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(30vw, 52vh, 460px), min(48vw, 25svh, 280px)" alt="">
+      <img class="float f-fly1" data-step="decor" data-a="glow" src="img/accent_1-200.webp" alt="">
+      <img class="float f-fly2" data-step="decor" data-a="glow" src="img/accent_1-200.webp" alt="">
+    </div>
+    <div class="hero-inner">
+      <div class="card hero-card" data-step="card" data-a="rise-lg">
+        <div class="photo-slot mask-card" data-slot="hero_portrait">
+          <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(32vw, 16svh, 170px)" alt="" data-attr-alt="Photo of {name_display}">
+          <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+          <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(32vw, 16svh, 170px)" alt="" data-attr-alt="Photo of {name_display}">
+          <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(24vw, 12svh, 130px)" alt=""></span>
+        </div>
+        <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(46vw, 23svh, 240px)" alt="">
+        <div class="card-copy">
+          <p class="script" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
+          <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+          <p class="kicker"><span class="nowrap" data-field="date"></span><span class="sep" aria-hidden="true" data-if="!thank_you_on"> · </span><span class="cc-city" data-if="!thank_you_on" data-field="venue.city"></span></p>
+        </div>
+      </div>
+      <h1 class="script names" data-step="names" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+      <!-- W1.2: a small ivy sprig between two hairlines under the names (GPT divider) -->
+      <span class="orn hero-orn" data-step="orn" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" alt=""></span>
+      <p class="kicker hero-date" data-step="date" data-a="rise"><span data-field="date" data-format="weekday"></span> · <span class="nowrap" data-field="date"></span></p>
+      <p class="hero-venue" data-step="venue" data-a="rise" data-field="venue.name"></p>
+      <p class="hero-city" data-step="venue" data-a="rise" data-field="venue.city_region"></p>
+      <!-- live countdown: the platform computes the UTC target (date + ceremony_time + timezone) → site.js -->
+      <div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-step="countdown" data-a="rise" data-countdown role="timer" aria-label="Countdown to the ceremony">
+        <div class="cd-row">
+          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl" data-copy="cd_days">Days</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl" data-copy="cd_hours">Hours</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl" data-copy="cd_minutes">Minutes</span></div>
+          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl" data-copy="cd_seconds">Seconds</span></div>
+        </div>
+        <p class="cd-done" data-when="today" hidden data-copy="cd_today">Today is the day — we're celebrating!</p>
+        <p class="cd-done" data-when="after" hidden data-copy="cd_after">Thank you for celebrating with us.</p>
+      </div>
+      <p class="hero-cta" data-step="cta" data-a="bloom" data-if="!rsvp.method !thank_you_on"><a class="btn" href="rsvp.html" data-copy="rsvp_button">RSVP</a></p>
+    </div>
+  </section>
+
+  <!-- INVITATION CARD (no W1 screen — this design's invitation_card part and type) -->
+  <section class="section invite-sec" id="invitation" data-scene="home-invite" aria-label="Invitation" data-if="!thank_you_on">
+    <div class="wrap">
+      <div class="paper invite" data-step="card" data-a="turn">
+        <img class="paper-top" src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-860.webp 860w" sizes="min(calc(100vw - 32px), 440px)" alt="" loading="lazy">
+        <div class="paper-text invite-text">
+          <p class="kicker host" data-step="host" data-a="fade" data-field="host_line" data-if="host_line"></p>
+          <!-- full name when given, else the first name (full_name may be null: never an empty name line) -->
+          <p class="script nm" data-step="name1" data-a="write" data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
+          <p class="script nm" data-step="name1" data-a="write" data-if="!partners.0.full_name" data-field="partners.0.display_name"></p>
+          <p class="amp-line" data-step="amp" data-a="fade" aria-hidden="true">&amp;</p>
+          <p class="script nm" data-step="name2" data-a="write" data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
+          <p class="script nm" data-step="name2" data-a="write" data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
+          <p class="request" data-step="request" data-a="fade" data-copy="invite_request">invite you to celebrate their wedding</p>
+          <!-- the date: weekday over MONTH | day | YEAR between hairlines (no W1 screen; the card's own type) -->
+          <div class="dateblock" data-step="date" data-a="rise">
+            <p class="kicker wd" data-field="date" data-format="weekday"></p>
+            <div class="dline">
+              <p class="kicker mon" data-field="date" data-format="month"></p>
+              <p class="day" data-field="date" data-format="day"></p>
+              <p class="kicker yr" data-field="date" data-format="year"></p>
+            </div>
+            <p class="at" data-if="ceremony_time"><span data-copy="invite_at">at</span> <span class="nowrap" data-field="ceremony_time"></span></p>
+          </div>
+          <p class="venue" data-step="venue" data-a="fade" data-field="venue.name"></p>
+          <p class="kicker city" data-step="venue" data-a="fade" data-field="venue.city_region"></p>
+        </div>
+      </div>
+      <!-- replies collected another way (rsvp.method "none"): no reply call, no RSVP page -->
+      <div class="reply" data-step="cta" data-a="rise" data-if="!rsvp.method">
+        <p class="kicker" data-if="rsvp.deadline"><span data-copy="rsvp_by">Kindly reply by</span> <span class="nowrap" data-field="rsvp.deadline"></span></p>
+        <a class="btn" href="rsvp.html" data-copy="rsvp_button">RSVP</a>
+      </div>
+      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
+      <div class="cal" data-step="cal" data-a="rise">
+        <p class="kicker" data-copy="calendar_title">Add to your calendar</p>
+        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics" data-copy="calendar_ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" data-copy="calendar_google">Google</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THANK-YOU CARD (G075, thank-you mode): the same invitation_card paper (3-slice: the message lengthens it) -->
+  <section class="section invite-sec" id="thank-you" data-scene="home-invite" aria-labelledby="ty-head" data-if="thank_you_on">
+    <div class="wrap">
+      <div class="paper invite ty-card" data-step="card" data-a="turn">
+        <img class="paper-top" src="img/invitation_card-480.webp" srcset="img/invitation_card-480.webp 480w, img/invitation_card-860.webp 860w" sizes="min(calc(100vw - 32px), 440px)" alt="" loading="lazy">
+        <div class="paper-text invite-text ty-text">
+          <h2 class="script nm ty-head" id="ty-head" data-step="name1" data-a="write" data-field="thank_you_title"></h2>
+          <p class="request ty-message" data-step="request" data-a="fade" data-if="thank_you.message" data-field="thank_you.message"></p>
+          <p class="script ty-love" data-step="amp" data-a="fade" data-copy="love_line">With love,</p>
+          <p class="script nm" data-step="name2" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+          <p class="kicker city" data-step="venue" data-a="fade"><span class="nowrap" data-field="date"></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO PICTURES (no W1 screen): the first story photo (GPT frame_portrait, as on the story page) and the venue (GPT
+       frame_landscape), each held by its four photo corners -->
+  <section class="section pics-sec" data-scene="home-pics" aria-label="More about the day">
+    <span class="orn" data-step="orn" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" alt="" loading="lazy"></span>
+    <div class="wrap pics">
+      <a class="pic-link pl-story" data-optional="our_story" href="story.html" data-step="pic" data-a="mount">
+        <span class="pic-frame pf-portrait" aria-hidden="true">
+          <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(40vw, 164px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span></span>
+          <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(58vw, 240px)" alt="" loading="lazy">
+        </span>
+        <span class="pic-text"><span class="script pic-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
+      </a>
+      <a class="pic-link pl-day" href="details.html" data-if="!thank_you_hides_details" data-step="pic" data-i="1" data-a="mount">
+        <span class="pic-frame pf-landscape" aria-hidden="true">
+          <span class="photo-slot mask-landscape" data-slot="venue"><img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(56vw, 248px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span></span>
+          <img class="frame-img" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(86vw, 380px)" alt="" loading="lazy">
+        </span>
+        <span class="pic-text"><span class="script pic-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span></span>
+        <!-- the first four schedule rows (docs/11 §3.2; site.css shows four) -->
+        <span class="pic-sched"><span class="pic-row" data-repeat="schedule"><span data-field=".label"></span> · <span class="nowrap" data-field=".time"></span></span></span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="foot forest-end" data-scene="home-foot">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="min(56vw, 320px)" alt="" loading="lazy">
+    <p class="kicker" data-step="sign" data-a="fade" data-copy="foot_kicker">With love</p>
+    <p class="script sign" data-step="sign" data-a="write"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
+    <p data-step="links" data-a="fade"><a class="textlink replay" href="index.html?replay=1" data-copy="home_replay">Open the book again</a></p>
+  </footer>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html" aria-current="page"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
