@@ -1576,7 +1576,7 @@
   }
 }
 /* G085: five designs or more on wide screens: rows of three (six tracks, each card spans two); an unfinished last row
-   sits centered — 5 = 3 + 2, 7 = 3 + 3 + 1 (auto-fit made 3 + 2 left-aligned at 1280 px and 2 + 2 + 1 at 900 px). */
+   sits centered — 5 = 3 + 2, 7 = 3 + 3 + 1 (auto-fit would make 3 + 2 left-aligned at 1280 px, 2 + 2 + 1 at 900 px). */
 @media (min-width: 900px) {
   .cardGrid:has(> :nth-child(5)) {
     grid-template-columns: repeat(6, minmax(0, 1fr));
