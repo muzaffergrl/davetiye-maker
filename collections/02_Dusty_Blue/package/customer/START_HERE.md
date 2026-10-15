@@ -196,7 +196,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 ## Help and privacy
 
-Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **[RESPONSE TIME]**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
+Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
 Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
 

@@ -30,7 +30,7 @@ def footer(canvas,doc):
     canvas.setFillColor(INK);canvas.setFont('Helvetica',8)
     canvas.drawString(48,28,'BKE Studio  |  Website guide')
     canvas.drawRightString(564,28,str(doc.page));canvas.restoreState()
-for collection,title,theme in [('01_Olive_Ivory','Olive & Ivory','olive-ivory'),('03_Blush_Garden_Rose','Blush Garden Rose','blush-garden-rose')]:
+for collection,title,theme in [('01_Olive_Ivory','Olive & Ivory','olive-ivory'),('02_Dusty_Blue','Dusty Blue & Champagne','dusty-blue-champagne'),('03_Blush_Garden_Rose','Blush Garden Rose','blush-garden-rose'),('04_Vintage_Airmail','Vintage Airmail Love Letter','vintage-airmail-love-letter'),('05_Lemon_Mediterranean','Mediterranean Lemon','mediterranean-lemon')]:
     src=ROOT/'collections'/collection/'package/customer/START_HERE.md'
     output=ROOT/'collections'/collection/'package/customer/START_HERE.pdf'
     markdown=src.read_text(encoding='utf8')

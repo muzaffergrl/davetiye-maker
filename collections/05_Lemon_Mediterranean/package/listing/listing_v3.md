@@ -86,10 +86,10 @@ GOOD TO KNOW
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
 • No music. Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
-• [REFUND POLICY]
+• No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
-Message us here on Etsy. We reply within [RESPONSE TIME].
+Message us here on Etsy. We reply within 24 hours.
 
 ---
 
@@ -132,7 +132,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 20 KB) |
 | Price | [PRICE] |
 | Quantity | [QUANTITY] |
-| Shop section | [SHOP SECTION] |
+| Shop section | Summer & Destination (created in the shop on 2026-10-15, docs/20 §7) |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text

@@ -99,7 +99,8 @@ export const MARKETING: MarketingConfig = {
   hosting: { monthsAfterWedding: 12 },
   editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2, dateFreeDays: 7 },
   policies: {
-    refund: '[REFUND POLICY]',
+    refund:
+      'no returns, exchanges or refunds, because you get instant access to a digital product. If something on your website does not work as described, we fix it',
     lostLink: '[LOST LINK POLICY]',
     extension: '[EXTENSION POLICY]',
     deletion: '[DELETION PROCESS]',
