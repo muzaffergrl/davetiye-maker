@@ -740,10 +740,10 @@ test('story: photo cards whose frosted vellum sheet lifts away (GPT vellum_overl
   assert.deepEqual($('.cards-row > img.between').map((_, el) => $(el).attr('src')!.replace(/^.*img\//, '')).get(), ['accent_2-200.webp', 'accent_3-200.webp'], 'small wildflower touches between the cards');
   const css = cssText();
   // the sheet covers the photo only with JS; without JS and with reduced motion it is lifted (the photo always shows)
-  assert.match(css, /\n\.veil \{ opacity: 0; \}/);
-  assert.match(css, /\.js \[data-a="lift-veil"\] \{ opacity: 1; transform: perspective\(700px\) rotateX\(0deg\); transform-origin: 50% 0;/);
-  assert.match(css, /\.js \[data-a="lift-veil"\]\.in \{ opacity: 0; transform: perspective\(700px\) rotateX\(\d+deg\)/);
-  assert.match(css, /\.js \[data-a="lift-veil"\] \{ opacity: 0 !important; \}/, 'reduced motion: lifted');
+  assert.match(css, /\n\.veil \{ visibility: hidden; \}/);
+  assert.match(css, /\.js \[data-a="lift-veil"\] \{ visibility: visible; opacity: 1; transform: perspective\(700px\) rotateX\(0deg\); transform-origin: 50% 0;/);
+  assert.match(css, /\.js \[data-a="lift-veil"\]\.in \{ visibility: hidden; opacity: 0; transform: perspective\(700px\) rotateX\(\d+deg\)/);
+  assert.match(css, /\.js \[data-a="lift-veil"\] \{ visibility: hidden !important; \}/, 'reduced motion: lifted (theme-check: every step at opacity 1)');
   const fw = Number(/--fw: min\((\d+)vw/.exec(css)![1]);
   const win = MANIFEST.photo_slots.portrait.box_pct[2] / 100;
   assert.ok(fw * win >= 38, `phone photo window ${(fw * win).toFixed(1)}vw ≥ 38vw (docs/11 §9)`);

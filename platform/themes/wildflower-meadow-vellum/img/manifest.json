@@ -889,14 +889,18 @@
     "file": "invitation_card-480.webp",
     "w": 480,
     "h": 705,
-    "bytes": 75410
+    "bytes": 68306
    },
    {
     "file": "invitation_card-900.webp",
     "w": 900,
     "h": 1321,
-    "bytes": 180136
+    "bytes": 152390
    }
+  ],
+  "quality": [
+   76,
+   90
   ],
   "free_zone": [
    [
@@ -1947,24 +1951,24 @@
     "file": "florals_tl-360.webp",
     "w": 360,
     "h": 366,
-    "bytes": 38592
+    "bytes": 36940
    },
    {
     "file": "florals_tl-540.webp",
     "w": 540,
     "h": 550,
-    "bytes": 73724
+    "bytes": 70250
    },
    {
     "file": "florals_tl-720.webp",
     "w": 720,
     "h": 733,
-    "bytes": 116534
+    "bytes": 110798
    }
   ],
   "quality": [
-   76,
-   62
+   72,
+   56
   ]
  },
  "florals_br": {
@@ -1978,24 +1982,24 @@
     "file": "florals_br-360.webp",
     "w": 360,
     "h": 370,
-    "bytes": 43278
+    "bytes": 40834
    },
    {
     "file": "florals_br-540.webp",
     "w": 540,
     "h": 555,
-    "bytes": 86120
+    "bytes": 80952
    },
    {
     "file": "florals_br-720.webp",
     "w": 720,
     "h": 740,
-    "bytes": 138208
+    "bytes": 130534
    }
   ],
   "quality": [
-   76,
-   62
+   72,
+   56
   ]
  },
  "divider": {
@@ -2530,10 +2534,11 @@
    "chroma_key_px": 0,
    "tema_build_yesil_gorunur_foliage_px": {
     "card_small-590.webp": 10,
+    "florals_br-540.webp": 1,
     "frame_landscape-400.webp": 6,
     "frame_landscape-800.webp": 239,
     "frame_portrait-640.webp": 1,
-    "invitation_card-900.webp": 5
+    "invitation_card-900.webp": 1
    },
    "note": "tema_build.yesil_gorunur yaprak yeşilini de sayar; parlak kroma şartı (G ≥ 190, fazla ≥ 60) ile 0 — kroma_yesil()"
   },

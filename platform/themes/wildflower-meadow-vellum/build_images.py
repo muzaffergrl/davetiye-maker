@@ -63,8 +63,8 @@ WIDTHS = {
     "frame_landscape": [400, 800], "florals_tl": [360, 540, 720], "florals_br": [360, 540, 720], "divider": [300, 600],
     "vellum_overlay": [320, 640],
 }
-QUALITY = {"florals_tl": 76, "florals_br": 76, "vellum_overlay": 74, "closure": 80}
-ALPHA_Q = {"florals_tl": 62, "florals_br": 62, "vellum_overlay": 72}
+QUALITY = {"florals_tl": 72, "florals_br": 72, "vellum_overlay": 74, "closure": 80, "invitation_card": 76}
+ALPHA_Q = {"florals_tl": 56, "florals_br": 56, "vellum_overlay": 72}
 CARD_W_OF_SLEEVE = 0.74    # kart genişliği / kılıf genişliği (kart kılıfa sığar: card_small 0,657 en/boy, kılıf 0,827)
 CARD_TOP_PAD = 0.04        # kartın üst kenarı kılıfın üst kenarından bu kadar (× kılıf genişliği) aşağıda
 LIFT = 0.17                # kılıf gidince kart kendi boyunun bu kadarı yukarı kalkar

@@ -87,6 +87,6 @@
     "rsvp_closed_title": { "default": "Replies are closed", "max": 30, "pages": ["rsvp"] },
     "closing_title": { "default": "Thank you", "max": 30, "pages": ["rsvp"] },
     "closing_line": { "default": "for being part of our story.", "max": 60, "pages": ["rsvp"] },
-    "rsvp_replay": { "default": "Replay the envelope", "max": 30, "pages": ["rsvp"] }
+    "rsvp_replay": { "default": "Replay the opening", "max": 30, "pages": ["rsvp"] }
   }
 }
