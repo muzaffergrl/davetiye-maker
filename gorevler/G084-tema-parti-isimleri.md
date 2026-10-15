@@ -2,7 +2,7 @@
 id: G084
 baslik: 02, 04, 05 temalarına RSVP misafir adları satırı (G069 `data-rsvp-party` şablonu + `form_party` copy anahtarı)
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-G084
 oncelik: 2
 bagimli: [G069, G081]
@@ -95,7 +95,7 @@ Motor, panel, `form.js`, `lib/`, `scripts/` değişmedi. Yayın yapılmadı.
   yalnız ilk satırda 3) → her anahtar `max`'ta 360/390, satırlar açık: etiket kutuda iki satıra sarar, kesilme yok, girişler tam
   genişlik → konsol hatası yok.
 - `g069-rsvp.test.ts` şablon sözleşmesi 01–05; `g068-copy.test.ts` RSVP render testi `form_party`'yi 04'te de doğruluyor
-  (`form_optional` 3). `npm test` **575/575**, typecheck temiz, build geçti; `theme-check --stress` **127/0/0** (RSVP akışı 2
+  (`form_optional` 3). `npm test` **575/575** (birleştirme sonrası 582/582), typecheck temiz, build geçti; `theme-check --stress` **127/0/0** (RSVP akışı 2
   kişilik yanıtla — satır açık — kaydedildi); temanın dosyası 33/33 ("RSVP signature + seal before the fold" dahil).
 - İlk ekran: davet hâlinin yerleşimi HEAD ile aynı (G081 Sonuç: 405 yüklemenin 404'ü birebir, 1'i 1 px); her metni `max`'ta zorlama
   kaydıyla RSVP × 27 boyut — nav çizgisini kesen parça 0 (satırlar kapalıyken; formun kendisi tek birim).
@@ -112,4 +112,5 @@ döndürülünce yanıt kutusu bütün olarak yeniden katlanır (satır tek tek 
 - 2026-10-14 alindi: claude-G084 (G081'in 02/05 turu onaylı; bu tur yalnız 02 ve 05, 04 G404/G081 04 turundan sonra)
 - 2026-10-14 claude-G084: 02 ve 05 tamam; 04 bekliyor
 - 2026-10-14 entegratör: 02/05 turu kabul (theme-check 127/0/0, g069-browser 98/98); docs/11 §3.3'e misafir adları kuralı eklendi. 04 turu G404 onayından sonra (G081 ile birlikte).
-- 2026-10-15 claude-G084: 04 turu tamam (G081 04 turuyla birlikte): `<template data-rsvp-party>` + `form_party`; g069-browser G084 04 19/19, npm test 575/575, theme-check 127/0/0; docs/11 §3.3 örnek listesi 01–05
+- 2026-10-15 claude-G084: 04 turu tamam (G081 04 turuyla birlikte): `<template data-rsvp-party>` + `form_party`; g069-browser G084 04 19/19, npm test 582/582, theme-check 127/0/0; docs/11 §3.3 örnek listesi 01–05
+- 2026-10-15 bitti, incelemeye gönderildi

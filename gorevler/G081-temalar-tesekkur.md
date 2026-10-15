@@ -2,7 +2,7 @@
 id: G081
 baslik: 02, 04, 05 temalarına teşekkür hâli (docs/11 §3.6) ve düzenlenebilir metinler (§3.7 data-copy + manifest)
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-G081
 oncelik: 2
 bagimli: [G075, G068, G402, G405]
@@ -140,8 +140,9 @@ telefonlarda yalnız kapanış başlığı ilk ekranın altından başlar; yatay
 (mektup içi 82 px); zorlama kaydında 1280×650 / 1366×657'de 110–115 px.
 
 **Testler (Node 22, `/opt/pw-browsers`, PORT 4208x)**
-- `npm test` **575/575**; `npm run typecheck` temiz; `npm run build` + trace-check (16 rota, 6 tema; varlık rotası 277 dosya,
-  `thank-you.css` dahil).
+- `npm test` **575/575** (origin/main birleştirmesinden — G085/G086 satış sitesi — sonra **582/582**); `npm run typecheck` temiz;
+  `npm run build` + trace-check (16 rota, 6 tema; varlık rotası 277 dosya, `thank-you.css` dahil); birleştirmeden sonra
+  theme-check yine 127/0/0.
 - `theme-check --theme vintage-airmail-love-letter --stress --no-video`: **127 geçti / 0 uyarı / 0 hata** (önce 117/0/2: G075 ve
   G068 uyarıları gitti); teşekkür hâli "complete", copy 74 anahtar, stres kaydı teşekkür hâli dahil; dokun → home 3 800 ms; ilk
   görünüm (390×844, DPR 3) index 924 / home 1 236 KB yer tutucuyla, 1 018 / 1 417 KB fotoğrafla (≤ 1,5 MB). İlk koşu 52 hata
@@ -172,4 +173,5 @@ telefonlarda yalnız kapanış başlığı ilk ekranın altından başlar; yatay
 - 2026-10-14 alindi: claude-G081
 - 2026-10-14 claude-G081: 02 ve 05 tamam; 04 bekliyor
 - 2026-10-14 entegratör: 02/05 turu incelendi (önizlemeler iyi, theme-check 127/0/0 iki temada); docs/11 §3.6/§3.7 cümleleri güncellendi; misafir adları satırı G084'e ayrıldı. 04 turu G404 onayından sonra.
-- 2026-10-15 claude-G081: 04 turu tamam (G084 04 turuyla birlikte): teşekkür hâli + 74 copy anahtarı; theme-check 127/0/0, npm test 575/575, g075 20/20, g068 8/8, g051 44/44, final-smoke 45/45; site.js 35 803 B, site.css 46 043 B
+- 2026-10-15 claude-G081: 04 turu tamam (G084 04 turuyla birlikte): teşekkür hâli + 74 copy anahtarı; theme-check 127/0/0, npm test 582/582 (birleştirme sonrası), g075 20/20, g068 8/8, g051 44/44, final-smoke 45/45; site.js 35 803 B, site.css 46 043 B
+- 2026-10-15 bitti, incelemeye gönderildi
