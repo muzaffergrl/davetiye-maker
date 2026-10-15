@@ -203,8 +203,8 @@ No. It is a digital product.
 
 1. ~~İade metni~~ **Karar (kullanıcı, 2026-10-15): iade yok.** §4 metni para iadesi sözü vermez; yalnız "çalışmazsa düzeltiriz"
    der. Not: Etsy Purchase Protection'da alıcı "açıklamaya uymuyor" vakası yine açabilir; düzeltme sözü bu vakaları azaltmak içindir.
-2. ~~Yanıt süresi~~ **Karar (kullanıcı, 2026-10-15): 24 saat.** Duyuruya ve About'a yazıldı. `platform/lib/marketing/config.ts`
-   `responseTime` ve docs/19 `[RESPONSE TIME]` yer tutucuları ayrı görevde doldurulur (entegratör).
+2. ~~Yanıt süresi~~ **Karar (kullanıcı, 2026-10-15): 24 saat.** Duyuruya, About'a, `platform/lib/marketing/config.ts`
+   (`responseTime: '24 hours'`) ve docs/19'a yazıldı.
 3. **Fiyat ve lansman:** docs/15 §5. Bu belge fiyata dokunmaz.
 
 ## 7. Uygulama kaydı (uygulayan oturum doldurur)
