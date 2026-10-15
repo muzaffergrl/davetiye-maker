@@ -2,8 +2,8 @@
 id: G079
 baslik: Canlıya güncel main — sade ve BKE Studio görünümlü panel (G066-B, K29); canlı kontrol + panel ekranları
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 1
 bagimli: []
 yazar: [docs/10_SITE_PLATFORMU.md, docs/10_canli_test/, platform/README.md]
@@ -36,3 +36,4 @@ Kullanıcının `/lily-and-theo` içeriğini değiştirip yayınlama.
 
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G066-B main'de (31e82ab)
+- 2026-10-15 alindi: claude-local-1
