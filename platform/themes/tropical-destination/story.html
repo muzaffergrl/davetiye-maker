@@ -1,0 +1,111 @@
+<!doctype html>
+<!-- Tropical Destination · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in the lively script, the hairline
+     with the plumeria, "MOMENTS WE HOLD DEAR", three blank kraft luggage tags hanging from their twine strings in a row at
+     slightly different heights (a plumeria tucked at the first, a monstera leaf at the second, a hibiscus at the third),
+     a script caption under each, clusters in two corners. Catalogue: the tags (no writing) swing into place one by one
+     (site.css preset "swing": each tag swings in on its string's top) and keep gently swinging (.tag-sway). Phones: one
+     tag per row in a zigzag (left, right, left; each next string rises beside the tag above), each tag 54vw (photo window
+     ≥ 38vw, docs/11 §9) — a comp deviation (README); from 720 px the comp's row at three heights. Photo slots story_1..3
+     (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is off (404) when
+     optional_blocks.our_story is false. Kicker / title = design copy (data-copy, G068). Thank-you mode (G075): unchanged;
+     with the Day page hidden by the couple the closing link leads home. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#E8FCF8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&amp;family=Raleway:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/lagoon_wide-710.webp">
+        <img class="scene-img" src="img/lagoon-504.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-800.webp 800w, img/florals_tl-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 420px), min(58vw, 360px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-800.webp 800w, img/florals_br-960.webp 960w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 420px), min(56vw, 30svh, 340px)" alt="">
+      <img class="float f-hibiscus" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+      <img class="float f-plumeria" data-step="decor" data-a="fade" src="img/accent_1-200.webp" alt="">
+    </div>
+    <h1 class="script page-title" data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
+    <span class="orn" data-step="kicker" data-a="unfurl" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""></span>
+    <p class="kicker" data-step="kicker" data-a="fade" data-copy="story_kicker">Moments we hold dear</p>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the luggage tags: one scene each, so each one swings in as it comes into view -->
+  <section class="tags" aria-label="Our photos">
+    <figure class="tag t-1" data-scene="story-tag">
+      <div class="tag-art tag-p" data-step="tag" data-a="swing">
+        <div class="tag-sway">
+          <div class="photo-slot mask-portrait" data-slot="story_1">
+            <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) min(19.6vw, 196px), min(42.2vw, 235px)" alt="" data-attr-alt="{story.items.0.caption}">
+            <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+          </div>
+          <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-607.webp 607w" sizes="(min-width: 720px) min(25vw, 250px), min(54vw, 300px)" alt="">
+          <img class="tuck" src="img/accent_1-200.webp" alt="">
+        </div>
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+    </figure>
+    <figure class="tag t-2" data-scene="story-tag">
+      <div class="tag-art tag-p" data-step="tag" data-a="swing">
+        <div class="tag-sway">
+          <div class="photo-slot mask-portrait" data-slot="story_2">
+            <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) min(19.6vw, 196px), min(42.2vw, 235px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+            <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+          </div>
+          <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-607.webp 607w" sizes="(min-width: 720px) min(25vw, 250px), min(54vw, 300px)" alt="" loading="lazy">
+          <img class="tuck" src="img/accent_2-200.webp" alt="" loading="lazy">
+        </div>
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+    </figure>
+    <figure class="tag t-3" data-scene="story-tag">
+      <div class="tag-art tag-p" data-step="tag" data-a="swing">
+        <div class="tag-sway">
+          <div class="photo-slot mask-portrait" data-slot="story_3">
+            <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) min(19.6vw, 196px), min(42.2vw, 235px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+            <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+          </div>
+          <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-607.webp 607w" sizes="(min-width: 720px) min(25vw, 250px), min(54vw, 300px)" alt="" loading="lazy">
+          <img class="tuck" src="img/accent_3-200.webp" alt="" loading="lazy">
+        </div>
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+    </figure>
+  </section>
+
+  <section class="section next-sec end" data-scene="story-next">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-800.webp 800w, img/florals_br-960.webp 960w" sizes="min(58vw, 340px)" alt="" loading="lazy">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Day page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <span class="orn" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""></span>
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
