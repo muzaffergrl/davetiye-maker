@@ -103,7 +103,7 @@ theme-check "home first screen"); comp dikey düzeni 390 × 844 ve üstünde.
 |---|---|---|
 | "Our Story" + kıl çizgi + "MOMENTS WE HOLD DEAR" | `h1.page-title`, `.orn`, `.kicker` | |
 | üç ipli kraft etiket, farklı yükseklikte | `.tags .tag` (`frame_portrait`) | **sapma (telefon)**: yan yana dizilişte pencere ~ 18vw kalırdı (docs/11 §9: ≥ 38vw) → telefonda zikzak sütun (sol, sağ, sol; her etiket 54vw, pencere 42vw, sonraki ip üsttekinin yanından yükselir); ≥ 720 px comp'taki gibi tek sıra, üç yükseklik |
-| köşelere sıkıştırılmış plumeria / palmiye yaprağı / hibiskus | `.tuck` (`accent_1`, `accent_2` monstera, `accent_3`) | 2. etikette comp'taki palmiye yaprağı yerine monstera (palmiye tek parça olarak yok) |
+| köşelere sıkıştırılmış plumeria / palmiye yaprağı / hibiskus | `.tuck` (`accent_1`, `accent_2` monstera, `accent_3`) | 2. etikette comp'taki palmiye yaprağı yerine monstera (palmiye tek parça olarak yok); telefonda 3. etiketin hibiskusu **sol** üstte (zikzakta etiketin dış kenarı: sağda 2. etiketin başlığının üstüne binerdi), ≥ 720 px'te comp'taki gibi sağda |
 | el yazısı başlıklar + aradaki küçük plumerialar | `figcaption` | başlıklar arası plumeria'lar yok (telefonda etiketler alt alta) |
 | yazı (giriş cümlesi) | `.lede` | comp'ta yok; standart (docs/11 §3.2) |
 
@@ -113,7 +113,8 @@ theme-check "home first screen"); comp dikey düzeni 390 × 844 ve üstünde.
 | yuvarlak tepeli kart + üstte sprey | `.paper.info.day-card` (`info_card`, 3 dilim 22–97 %) | 1–10 satırla uzar |
 | "Order of the Day" | `h1.card-title` | |
 | saat / ETKİNLİK / yer satırları | `.sched-row` (`.time`, `.label`, `.loc`) | |
-| satırlar arası palmiye + plumeria sprey, kıl çizgili | `.sched-row + .sched-row::before` (`divider`) | kıl çizgiler yok (spreyin kendisi ayraç); 6+ satırda sprey kalkar |
+| satırlar arası palmiye + plumeria sprey, kıl çizgili | `.sched-row + .sched-row::before` (`divider`) | **sapma**: yanlardaki kıl çizgiler yok — sprey satır sözde öğesi; çizgiler için her satıra ek boş öğe gerekirdi (motor `data-repeat` kopyası), sprey tek başına ayraç; 6+ satırda sprey kalkar |
+| sağ alt çiçek kümesi (kartın yanında) | — | **sapma (telefon)**: kart ekran genişliğinde, küme arkasında yarım kalırdı; telefonda sayfa sonundaki `florals_br` taşır (geniş ekranda yerinde) |
 | yatay kraft etiket, ip solda, mekân fotoğrafı | `.venue-tag` (`frame_landscape`, `venue`) | |
 | "Coral Bay Resort" / "Wailea, Hawaii" | `.venue-name`, `.venue-place` (+ ülke) | |
 | kıl çizgi + "DRESS CODE · Beach formal" | `.dress` | |

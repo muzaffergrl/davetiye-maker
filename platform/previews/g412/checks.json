@@ -1,0 +1,769 @@
+{
+ "base": "next start (production build)",
+ "theme": "tropical-destination",
+ "errors": [
+  "content change: node.exe (inline module) failed (exit 1): Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'c:'\r |   code: 'ERR_UNSUPPORTED_ESM_URL_SCHEME'\r | }\r | Node.js v22.23.2"
+ ],
+ "warnings": [],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 71 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 2 families (Dancing Script, Raleway), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections\\12_Tropical_Destination\\assets\\gpt\\photos (PAKET 2))",
+  "index@360: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@360: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@360: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 15 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@360: no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@390: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 15 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390: no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@430: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@430: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@430: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 15 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@430: no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@768: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@768: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@768: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 15 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@768: no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@1280: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@1280: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@1280: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 15 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@1280: no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@390 (no photos): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 15 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots preview-placeholder",
+  "envelope closed @360×640: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (21 pieces, CTA \"RSVP\" bottom 439, names 39.6 px) ends at 439, above the nav (top 565)",
+  "home@360×640: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553: home-hero (21 pieces, CTA \"RSVP\" bottom 406, names 40.9 px) ends at 406, above the nav (top 478)",
+  "home@375×553: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (design range): names 32 px (≥ 32); nothing partly under the nav (top 565): the first screen ends at 461; CTA \"RSVP\" bottom 461",
+  "home@360×640 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (design range): names 32 px (≥ 32); nothing partly under the nav (top 478): the first screen ends at 429; CTA \"RSVP\" bottom 429",
+  "home@375×553 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (stress record): names 32 px (≥ 32); the first screen ends at 547, above the nav (top 565)",
+  "home@360×640 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 678, nav top 478)",
+  "home@375×553 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 230×47, rsvp \"Replay the envelope\" 191×47",
+  "envelope → /maya-and-kai/home in 4819 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (13 steps)",
+  "countdown target from the platform: 2027-06-19 16:00 Pacific/Honolulu = 2027-06-20 02:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-06-20T03:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-06-25T02:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (417 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@360 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@360 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 36 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@390 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 36 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 7 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 35 fields = content record, 10 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 7 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 7 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 10 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 7 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 852 KB",
+  "home first view (390×844, DPR 3, placeholders): 758 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 945 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 940 KB"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections\\12_Tropical_Destination",
+   "demo_record": "platform\\themes\\tropical-destination\\content.demo.json",
+   "photos": "collections\\12_Tropical_Destination\\assets\\gpt\\photos (PAKET 2)",
+   "w1_comps": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "compare": "w1",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (card_small, info_card)",
+   "fonts": [
+    "Dancing Script 500",
+    "Raleway 400/500/600/italic 400"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 71,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (191 KB, 1024×1333, variants 640)",
+   "story_1 → media.memory_photos.0 (183 KB, 1024×1342, variants 640)",
+   "story_2 → media.memory_photos.1 (198 KB, 1024×1342, variants 640)",
+   "story_3 → media.memory_photos.2 (131 KB, 1024×1342, variants 640)",
+   "venue → media.venue_image (403 KB, 1536×948, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.11,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.36,
+      "dark": 0.001
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.46,
+      "dark": 0.001
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.46,
+      "dark": 0.006
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.15,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.3,
+      "dark": 0.001
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.45,
+      "dark": 0.001
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.44,
+      "dark": 0.005
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.12,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.37,
+      "dark": 0.001
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.45,
+      "dark": 0.001
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.56,
+      "dark": 0.006
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.09,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.22,
+      "dark": 0.001
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.44,
+      "dark": 0.001
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.23,
+      "dark": 0.002
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 565,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 439,
+    "above": 439,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 439
+    },
+    "bad": [],
+    "partly": [],
+    "names": 39.6
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 478,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 406,
+    "above": 406,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 406
+    },
+    "bad": [],
+    "partly": [],
+    "names": 40.9
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 321,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 306,
+    "above": 306,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 267
+    },
+    "bad": [],
+    "partly": [],
+    "names": 42.9
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 306,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 291,
+    "above": 291,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 265
+    },
+    "bad": [],
+    "partly": [],
+    "names": 41.3
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 565,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 461,
+    "above": 461,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 461
+    },
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 478,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 429,
+    "above": 429,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 429
+    },
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 321,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 306,
+    "above": 306,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 290
+    },
+    "bad": [],
+    "partly": [],
+    "names": 42.9
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 306,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 20,
+    "lowest": 291,
+    "above": 291,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 286
+    },
+    "bad": [],
+    "partly": [],
+    "names": 41.3
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 565,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 547,
+    "above": 547,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 547
+    },
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 478,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 678,
+    "above": 460,
+    "below": 565,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 678
+    },
+    "bad": [
+     "span.cd-num \"247\" bottom 595",
+     "span.cd-lbl \"Days\" bottom 612",
+     "span.cd-num \"14\" bottom 595",
+     "span.cd-lbl \"Hours\" bottom 612",
+     "span.cd-num \"29\" bottom 595",
+     "span.cd-lbl \"Minutes\" bottom 612",
+     "span.cd-num \"50\" bottom 595",
+     "span.cd-lbl \"Seconds\" bottom 612",
+     "a.btn \"RSVP\" bottom 678"
+    ],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 321,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 311,
+    "above": 311,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 311
+    },
+    "bad": [],
+    "partly": [],
+    "names": 35.2
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 306,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 506,
+    "above": 291,
+    "below": 387,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 506
+    },
+    "bad": [
+     "span.cd-num \"247\" bottom 425",
+     "span.cd-lbl \"Days\" bottom 442",
+     "span.cd-num \"14\" bottom 425",
+     "span.cd-lbl \"Hours\" bottom 442",
+     "span.cd-num \"29\" bottom 425",
+     "span.cd-lbl \"Minutes\" bottom 442",
+     "span.cd-num \"36\" bottom 425",
+     "span.cd-lbl \"Seconds\" bottom 442",
+     "a.btn \"RSVP\" bottom 506"
+    ],
+    "partly": [],
+    "names": 33.8
+   }
+  ],
+  "envelope_to_home_ms": 4819,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 71,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 852,
+  "first_view_index_files": [
+   [
+    "/themes/tropical-destination/img/florals_tl-800.webp",
+    139034
+   ],
+   [
+    "/themes/tropical-destination/img/florals_br-800.webp",
+    130906
+   ],
+   [
+    "/themes/tropical-destination/img/env_body-567.webp",
+    60720
+   ],
+   [
+    "/themes/tropical-destination/img/env_closed-567.webp",
+    57688
+   ],
+   [
+    "/themes/tropical-destination/img/closure-640.webp",
+    56050
+   ],
+   [
+    "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
+    48813
+   ],
+   [
+    "/themes/tropical-destination/site.css",
+    44184
+   ],
+   [
+    "/themes/tropical-destination/img/env_flap-567.webp",
+    40716
+   ]
+  ],
+  "first_view_home_kb_placeholders": 758,
+  "first_view_home_files": [
+   [
+    "/themes/tropical-destination/img/florals_tl-800.webp",
+    139034
+   ],
+   [
+    "/themes/tropical-destination/img/florals_br-800.webp",
+    130906
+   ],
+   [
+    "/themes/tropical-destination/img/frame_portrait-607.webp",
+    82586
+   ],
+   [
+    "/themes/tropical-destination/img/info_card-607.webp",
+    59894
+   ],
+   [
+    "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
+    48813
+   ],
+   [
+    "/themes/tropical-destination/site.css",
+    44184
+   ],
+   [
+    "/themes/tropical-destination/img/favicon.png",
+    39750
+   ],
+   [
+    "/themes/tropical-destination/img/divider-600.webp",
+    38204
+   ]
+  ],
+  "first_view_index_kb_photos": 945,
+  "first_view_index_files_photos": [
+   [
+    "/themes/tropical-destination/img/florals_tl-800.webp",
+    139034
+   ],
+   [
+    "/themes/tropical-destination/img/florals_br-800.webp",
+    130906
+   ],
+   [
+    "/media/0da35dd2-62bc-43a4-9b4e-df38e60f2902/4cf154f07de519779dd5745fb9bb9319-640w.jpg",
+    96047
+   ],
+   [
+    "/themes/tropical-destination/img/env_body-567.webp",
+    60720
+   ],
+   [
+    "/themes/tropical-destination/img/env_closed-567.webp",
+    57688
+   ],
+   [
+    "/themes/tropical-destination/img/closure-640.webp",
+    56050
+   ],
+   [
+    "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
+    48398
+   ],
+   [
+    "/themes/tropical-destination/site.css",
+    44184
+   ]
+  ],
+  "first_view_home_kb_photos": 940,
+  "first_view_home_files_photos": [
+   [
+    "/themes/tropical-destination/img/florals_tl-800.webp",
+    139034
+   ],
+   [
+    "/themes/tropical-destination/img/florals_br-800.webp",
+    130906
+   ],
+   [
+    "/media/0da35dd2-62bc-43a4-9b4e-df38e60f2902/4cf154f07de519779dd5745fb9bb9319-640w.jpg",
+    96047
+   ],
+   [
+    "/media/0da35dd2-62bc-43a4-9b4e-df38e60f2902/420a5f104a228cb19c569caf9c72659f-640w.jpg",
+    92808
+   ],
+   [
+    "/themes/tropical-destination/img/frame_portrait-607.webp",
+    82586
+   ],
+   [
+    "/themes/tropical-destination/img/info_card-607.webp",
+    59894
+   ],
+   [
+    "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
+    48398
+   ],
+   [
+    "/themes/tropical-destination/site.css",
+    44184
+   ]
+  ],
+  "compare": {
+   "source": "w1",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ]
+  }
+ }
+}

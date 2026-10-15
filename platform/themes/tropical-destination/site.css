@@ -162,6 +162,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-copy[data-wrap] .sep, .card-copy .kicker:has(.cc-city[data-empty]) .sep { display: none; }
 .card-copy[data-wrap] .cc-city { display: block; }
 .card-copy[data-drop~="c"] .sep, .card-copy[data-drop~="c"] .cc-city, .card-copy[data-drop~="s"] .script { display: none; }
+/* a long date (en-GB "29 September 2027") on a narrow tag: tighter, and it may break */
+.card-copy[data-drop~="n"] .kicker { letter-spacing: .05em; }
+.card-copy[data-drop~="n"] .nowrap { white-space: normal; }
 
 /* -- backdrop: lagoon wash + whole florals_tl / florals_br + loose flowers (W1) */
 .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
@@ -314,7 +317,7 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; } /* 
   .hero .names { margin-top: 0; }
   .hero-inner > .countdown, .hero-inner > .hero-cta, .hero-inner > .hero-orn { grid-column: 1 / -1; }
   .hero-date { letter-spacing: .2em; }
-  .hero-date .sep { display: block; height: 0; overflow: hidden; } /* weekday over the date, no dangling dot */
+  .hero-date .sep { display: block; height: 0; font-size: 0; visibility: hidden; } /* weekday over the date, no dangling dot */
 }
 /* site.js fitNames */
 .hero.is-tight .hero-venue { font-size: 16px; line-height: 1.2; }
@@ -364,7 +367,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .cal-links { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* -- home: two kraft tags (no comp): the first story photo, the venue */
-.tags-sec { padding: 40px 0 10px; text-align: center; }
+.tags-sec { padding: 40px 0 10px; text-align: center; overflow-x: clip; } /* a tag waiting to swing in stays inside the screen */
 .sprig { display: block; width: 150px; height: auto; margin: 0 auto; filter: drop-shadow(0 4px 4px rgba(20, 70, 60, .1)); }
 .tag-links { display: flex; flex-direction: column; gap: 26px; margin-top: 18px; }
 .tag-link { position: relative; display: flex; align-items: center; gap: 4vw; text-decoration: none; color: inherit; }
@@ -405,6 +408,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
   .page-bg .corner-tl { --cw: min(28vw, 46vh, 420px); }
   .page-bg .corner-br { --cw: min(28vw, 46vh, 420px); }
 }
+/* details / rsvp phones: the card spans the screen, a cluster behind it would show half → the page end carries it */
+@media (max-aspect-ratio: 3/4) { :is(.details-top, .rsvp-top) .page-bg .corner-br { display: none; } }
 .page-bg .f-hibiscus { top: 16%; }
 .page-bg .f-plumeria { top: 52%; }
 .page-bg .f-monstera { top: 64%; }
@@ -450,8 +455,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .details-top { padding: clamp(120px, 36vw, 180px) 0 0; }
 .page-kicker { position: relative; z-index: 1; margin-bottom: 14px; font-size: 12.5px; letter-spacing: .3em; }
 .details-top .wrap { z-index: 1; }
-.day-card .info-text { padding: calc(var(--top-h) + 1cqw) 12% calc(var(--bot-h) + 10cqw); }
-.card-title { font-size: 13cqw; line-height: 1.04; text-wrap: balance; }
+.day-card .info-text { padding: calc(var(--top-h) + 1cqw) 12% calc(var(--bot-h) + 10cqw); min-height: calc(100cqw / .6); } /* W1.4: the card hugs its rows (comp ≈ .57), 3-slice */
+.card-title { font-size: 10.6cqw; line-height: 1.06; text-wrap: balance; } /* W1.4: "Order of the Day" on one line */
 .sched-list { list-style: none; margin: 5cqw 0 0; padding: 0; width: 100%; }
 .sched-row { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .sched-row + .sched-row { margin-top: 2.6cqw; }
@@ -567,6 +572,10 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 }
 @media (min-width: 1024px) and (min-height: 621px) {
   .hero { --tag: clamp(130px, (100svh - 420px) * .4295, 220px); }
+  /* the story row on the first screen: the head by the height, the tags by what is left */
+  .page-head { padding-top: clamp(40px, 9svh - 20px, 110px); }
+  .page-title { font-size: clamp(60px, 11svh, 104px); }
+  .tags { --tw: clamp(140px, (100svh - 430px) * .44665, 250px); padding-top: 18px; }
   .details-top, .rsvp-top { padding-top: clamp(76px, 12svh, 140px); }
 }
 /* short landscape */

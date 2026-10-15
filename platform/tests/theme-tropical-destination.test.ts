@@ -806,7 +806,7 @@ test('lessons kept: names ≥ 32 px on home, fold below the first screen, tag co
   assert.match(js, /p\.style\.cssText = 'position:fixed;height:100svh'/);
   assert.match(js, /const v = sv\(\), limit = v - navH\(\) - 8, below = v \+ 12/);
   assert.match(css, /\.hero \.scene-bg \{ position: absolute; z-index: 0; bottom: var\(--fold, 0px\); \}/);
-  assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c s'\]\]\)/);
+  assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c n'\], \[true, 'c s n'\]\]\)/);
   assert.match(js, /new ResizeObserver\(fitCopy\)/);
   for (const sel of ['.card-copy .kicker', '.cd-lbl', '.cue', '.invite-text .host', '.dateline .wd', '.sched-row .time', '.rsvp-text .kicker', '.kicker']) {
     const fs = /font-size: max\((\d+(?:\.\d+)?)px/.exec(rule(sel)) ?? /font: \d+ max\((\d+(?:\.\d+)?)px/.exec(rule(sel)) ?? /font: \d+ (\d+(?:\.\d+)?)px/.exec(rule(sel)) ?? /font-size: (\d+(?:\.\d+)?)px/.exec(rule(sel));

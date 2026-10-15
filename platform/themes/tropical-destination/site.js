@@ -276,7 +276,7 @@ function fitNames() {
       if (s <= min || (lines <= maxLines && h <= innerHeight * maxShare && (s <= navFloor || !low(h1)))) break;
     }
   };
-  // tag copy ≥ 11 px: one line, two, no town, no script
+  // tag copy ≥ 11 px: one line, two, no town, a long date may break, no script
   const fits = (c) => {
     const k = [...c.children].filter((p) => p.offsetParent);
     return !k.length || (Math.max(...k.map((p) => p.offsetTop + p.offsetHeight)) - Math.min(...k.map((p) => p.offsetTop)) <= c.clientHeight + 1
@@ -284,7 +284,7 @@ function fitNames() {
   };
   const oneLine = (c) => { const k = c.querySelector('.kicker'); return !k || k.offsetHeight <= parseFloat(getComputedStyle(k).lineHeight) * 1.5; };
   const fitCopy = () => $$('.card-copy').forEach((c) => {
-    for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c s']]) {
+    for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c n'], [true, 'c s n']]) {
       c.toggleAttribute('data-wrap', wrap);
       c.dataset.drop = d;
       if (fits(c) && (wrap || oneLine(c))) break;
@@ -339,7 +339,7 @@ function fitNames() {
   };
   const decor = () => $$('.scene-bg, .page-bg').forEach((bg) => {
     const scope = bg.closest('.hero') || bg.closest('main') || document.body;
-    const ts = [...scope.querySelectorAll('h1, h2, p, figcaption, .cd-cell, .btn')]
+    const ts = [...scope.querySelectorAll('h1, h2, p, figcaption, .cd-cell, .btn, .replay')]
       .filter((t) => t.offsetParent && !t.closest('.card, .paper, .reply-box, .site-nav, .scene-bg, .page-bg') && !t.querySelector('p, .cd-cell'))
       .map(textBox).filter(Boolean);
     const solid = ts.concat([...scope.querySelectorAll('.card, .paper, .tag-art, .venue-tag, .stage')].map(lay));
@@ -498,6 +498,7 @@ function initEnvelope() {
       clearOpening();
       root.classList.add('is-opened');
       state = 'opened';
+      refit();
     }
   });
 }
