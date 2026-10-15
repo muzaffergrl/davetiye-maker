@@ -44,8 +44,8 @@ site sayfası (siparişi onayla adımları, bilgiler, hazır Etsy mesajları, ye
 tarihi, yayından kaldır, adres yazarak silme, geçmiş). Türkçe arayüz; alıcı mesajları İngilizce. Veri adaptörüne `listSites()` +
 `rsvpCounts()` (local + blob).
 
-**Testler:** `tests/g087-admin.test.ts` 14/14; `tests/g087-browser.ts` 32/33 → dokunma hedefi düzeltildi (geri linki 44 px);
-ekranlar `platform/previews/g087/`. Denenmedi: canlı yayın (ADMIN_PASSWORD canlıda yok), gerçek telefon.
+**Testler:** `npm test` **596/596** (yeni `tests/g087-admin.test.ts` 14/14 dahil), typecheck, build (trace-check) yeşil;
+`tests/g087-browser.ts` **33/33** (ilk koşuda geri linki 23 px'ti → 44 px); ekranlar `platform/previews/g087/`. Denenmedi: canlı yayın (ADMIN_PASSWORD canlıda yok), gerçek telefon.
 
 ## Günlük
 - 2026-10-15 açıldı ve alındı (claude-G087, kullanıcı isteği K30)

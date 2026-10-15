@@ -1,5 +1,5 @@
 {
- "when": "2026-10-15T05:59:35.900Z",
+ "when": "2026-10-15T06:02:57.642Z",
  "checks": [
   {
    "name": "off: /admin answers 200 with an honest \"kapalı\" note",
@@ -81,8 +81,7 @@
   },
   {
    "name": "site page: touch targets ≥ 36 px",
-   "ok": false,
-   "detail": "a \"Bütün siteler\" 122×23"
+   "ok": true
   },
   {
    "name": "after confirm: the to-do box is gone",
