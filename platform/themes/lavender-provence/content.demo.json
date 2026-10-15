@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Amélie",
+      "full_name": "Amélie Claire"
+    },
+    {
+      "display_name": "Louis",
+      "full_name": "Louis Henri"
+    }
+  ],
+  "name_display": "Amélie & Louis",
+  "initials": "A&L",
+  "host_line": "Together with their families",
+  "date": "2027-07-03",
+  "ceremony_time": "16:00",
+  "timezone": "Europe/Paris",
+  "venue": {
+    "name": "Les Jardins de Lavande",
+    "city": "Gordes",
+    "region": "Provence",
+    "country": "France",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Lavender Field"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Stone Terrace"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Old Barn"
+    }
+  ],
+  "dress_code": "Summer chic",
+  "rsvp": {
+    "deadline": "2027-05-22",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Long summer evenings and fields of lavender carried us all the way to",
+    "items": [
+      {
+        "caption": "Rosé in the square"
+      },
+      {
+        "caption": "In the lavender"
+      },
+      {
+        "caption": "Tied together"
+      }
+    ]
+  }
+}
