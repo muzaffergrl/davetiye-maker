@@ -175,4 +175,16 @@ coastal-seaside --check` temiz). Formda "Number of guests"in hemen altında `<te
   gerçek alıcı fotoğrafları, yavaş ağ.
 
 ## Ölçümler
-Bkz. görev dosyası `gorevler/G420-website-kaynak.md` → Sonuç ve `platform/previews/g420/checks.json`.
+2026-10-15, Chromium (Playwright, `/opt/pw-browsers`).
+
+| Ölçüm | Sonuç |
+|---|---|
+| `theme-check --theme coastal-seaside --stress` | 128 geçti, 0 hata, 0 uyarı (`previews/g420/checks.json`) |
+| `g051-browser --theme coastal-seaside` | 44/44 |
+| `final-smoke --theme coastal-seaside` | 45/45 (`previews/g420/final/`) |
+| `npm test` / `typecheck` / `build` | 993/993 · temiz · temiz (trace-check 16 tema) |
+| zarf → home | MOTION `go` 4480 ms + view transition; azaltılmış hareket 186 ms |
+| ilk görünüm 390×844 DPR 3 | index 904 KB, home 922 KB (yer tutucu); örnek fotoğrafla 988 / 1347 KB (sınır 1,5 MB) |
+| açılış kaydı | `previews/g420/opening_390x844.mp4` |
+| dosya boyları | site.js 35 444 B, site.css 45 987 B; tema klasörü 2,3 MB |
+| kit uyumu (`kit_check`) | paket 5 24/24 (hiza sol +0,10, sağ +0,49, alt +1,11 %), paket 2 5/5 |
