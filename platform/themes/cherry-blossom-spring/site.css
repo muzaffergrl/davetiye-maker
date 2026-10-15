@@ -374,11 +374,12 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* -- home: invitation card (no comp) */
 .invite-sec { padding: 34px 0 26px; }
-/* free_zone: column 24–76 %, from 23 % (36cqw) to 74 % (29cqw into the bottom slice) */
-.invite-text { padding: 37cqw 24% calc(var(--bot-h) - 29cqw); min-height: calc(100cqw / .64674); justify-content: center; }
-.invite-text .host { max-width: 52cqw; font-size: max(11px, 2.8cqw); letter-spacing: .2em; line-height: 1.5; text-wrap: balance; color: var(--rose-ink); }
+/* free_zone: column 24–76 % from 28 % (43cqw; the first line ≤ 30–70 %) to 75 % (31cqw into the bottom slice) */
+.invite-text { padding: 43cqw 24% calc(var(--bot-h) - 31cqw); min-height: calc(100cqw / .64674); justify-content: center; }
+.invite-text .host { max-width: 40cqw; font-size: max(11px, 2.8cqw); letter-spacing: .2em; line-height: 1.5; text-wrap: balance; color: var(--rose-ink); }
 .invite-text .nm { font-size: 6.8cqw; line-height: 1.26; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .invite-text .host + .nm { margin-top: 2cqw; }
+.invite-text > .nm:first-child { max-width: 42cqw; }
 .amp-line { font: italic 400 4.6cqw/1 var(--serif); color: var(--rose); }
 .invite-text .request { margin-top: 2cqw; font-style: italic; font-size: max(15px, 3.9cqw); line-height: 1.42; color: var(--ink); max-width: 52cqw; text-wrap: balance; }
 /* MONTH | day | YEAR, then weekday · at time */
