@@ -1,12 +1,13 @@
-// G097: designs 15 Cherry Blossom Spring (G415), 17 Emerald & Gold Estate (G417) and 18 Wildflower Meadow Vellum (G418)
-// go on the sales site the way G094 added 09–14. Listing them as 'live' in lib/marketing/config.ts is also their approval
-// for /start (G080, lib/themes/approval.ts): the sales-site entries (copy written against each theme README, the
-// catalogue's opening line and the real captured screens and clip), the ≤ 60-character titles, JSON-LD, llms.txt, the
-// sitemap rule and the production gate that now lets buyers start them.
+// G097: designs 15–20 go on the sales site the way G094 added 09–14: 15 Cherry Blossom Spring (G415), 16 Sunflower Rustic
+// Barn (G416), 17 Emerald & Gold Estate (G417), 18 Wildflower Meadow Vellum (G418), 19 Midnight Garden (G419) and 20
+// Coastal Seaside (G420). Listing them as 'live' in lib/marketing/config.ts is also their approval for /start (G080,
+// lib/themes/approval.ts): the sales-site entries (copy written against each theme README, the catalogue's opening line
+// and the real captured screens and clip), the ≤ 60-character titles, JSON-LD, llms.txt, the sitemap rule and the
+// production gate that now lets buyers start them.
 //
-// Nothing here depends on how many designs are live: 16, 19 and 20 are added later the same way (one config entry, one
-// copy entry, `marketing-assets.ts --designs <id> --shots <capture>`, and one entry in NEW below). The rules that hold for
-// every live design (copy, screens, clip, folder, design-number order) are checked over liveDesigns().
+// Nothing here depends on how many designs are live: a later design is added the same way (one config entry, one copy
+// entry, `marketing-assets.ts --designs <id> --shots <capture>`, and one entry in NEW below). The rules that hold for
+// every live design (copy, screens, clip, folder, design-number order, no file names in the copy) run over liveDesigns().
 // Layout of the card grids and the home chips for any number of designs: tests/marketing-browser.ts (G094 + G097).
 import { afterEach, before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -33,14 +34,15 @@ const PROD = { VERCEL_ENV: 'production' } as const;
 const manifest = assets as unknown as AssetManifest;
 /** The order of the first sales-site designs (G061–G085) predates numbering by design: 03, 01, 05, 02, 04. */
 const FIRST_FIVE = ['blush-garden-rose', 'olive-ivory', 'mediterranean-lemon', 'dusty-blue-champagne', 'vintage-airmail-love-letter'];
-// signature words of 01–14 that none of the three may borrow (each entry below drops the ones it really has)
+// signature words of 01–14 that none of the new designs may borrow (an entry may allow the ones its theme really has)
 const EARLIER = [
   'lemon', String.raw`\btiles?\b`, 'cobalt', 'instant-photo', 'damask', 'airmail', 'stamp', 'postmark', 'peon', String.raw`\bwax\b`,
   'ribbon', 'dahlia', 'snow', String.raw`\bpine\b`, 'navy', 'medallion', String.raw`\bdeco\b`, 'lavender', 'olive', 'grape',
   String.raw`\bvine\b`, 'pampas', 'plumeria', 'firefl', 'pearl', String.raw`\blace\b`, 'twine', 'cork', 'terracotta', 'toadstool',
   'storybook',
 ];
-const foreign = (...extra: string[]) => new RegExp([...EARLIER, ...extra].join('|'), 'i');
+/** Words this design must not use: the earlier designs' (minus `allow`) and the other new designs' (`extra`). */
+const foreign = (allow: string[], ...extra: string[]) => new RegExp([...EARLIER.filter((w) => !allow.includes(w)), ...extra].join('|'), 'i');
 
 /** What each new design must say, in the words of its theme README (G4NN) and the catalogue (docs/09 WEB NN). */
 const NEW = [
@@ -57,8 +59,25 @@ const NEW = [
     opening: ['tap', 'blossom twig', 'loosens and drifts off', 'curved grey flap lifts', 'cherry blossom liner', 'rises from the pocket', 'flurry of cherry petals swirls up and floats across the screen', 'comes forward', 'home page'],
     readme: ['kiraz çiçeği', 'yuvarlak', 'tırtıklı', 'dal gevşer', 'yaprak gibi süzülür', 'çiçekli hap', 'Petit Formal Script', 'Noto Serif Display', 'Order of the Day', 'Will You Join Us?'],
     pages: { story: /Three blossom-framed ovals.*drifts down like a falling petal/, rsvp: /Will You Join Us\?.*cherry blossom twig/ },
-    foreign: foreign('emerald', 'velvet', 'marble', 'monstera', 'eucalyptus', 'vellum', 'sleeve', 'popp', 'cornflower', String.raw`\bgold\b`),
+    foreign: foreign([], 'emerald', 'velvet', 'marble', 'monstera', 'eucalyptus', 'vellum', 'sleeve', 'popp', 'cornflower', String.raw`\bgold\b`, 'sunflower', 'gingham', 'porthole', 'butterfl', 'candle'),
     guides: ['what-to-put-on-your-wedding-website', 'how-to-make-a-wedding-website'],
+  },
+  {
+    id: 'sunflower-rustic-barn',
+    name: 'Sunflower Rustic Barn',
+    title: 'Sunflower Rustic Barn: Envelope Wedding Website | BKE Studio',
+    collection: '16_Sunflower_Rustic',
+    couple: 'Daisy & Wyatt',
+    fonts: ['Kaushan Script', 'Merriweather'],
+    catalogue:
+      'On tap, the gingham bow tugs loose and the ribbon slides off with its little sunflower, the kraft flap flips open, and the card slides out onto the weathered barn-wood tabletop (barnwood.png) while a few sunflower petals tumble.',
+    style: ['kraft', 'gingham', 'bow', 'sunflower', 'wheat', 'daisies', 'jute twine', 'golden-hour'],
+    opening: ['tap', 'gingham bow tugs loose', 'ribbon slides off with its little sunflower', 'kraft flap flips open', 'barn-wood tabletop', 'slides out onto the table', 'sunflower petals tumble', 'comes forward', 'home page'],
+    readme: ['kraft', 'kareli', 'fiyonk', 'ayçiçeği', 'ahşap masa', 'mandal', 'jüt ip', 'Kaushan Script', 'Merriweather', 'Order of the Day', 'Will You Join Us?'],
+    pages: { story: /barn-wood wall.*pegged onto it and swings once on its peg/, rsvp: /Will You Join Us\?.*gingham ribbon/ },
+    // the envelope really has a ribbon and the prints hang on jute twine
+    foreign: foreign(['ribbon', 'twine'], 'cherry', 'blossom', 'emerald', 'velvet', 'marble', 'monstera', 'vellum', 'sleeve', 'porthole', 'candle', 'butterfl', String.raw`\bseal\b`),
+    guides: ['how-to-make-a-wedding-website', 'wedding-website-wording'],
   },
   {
     id: 'emerald-gold-estate',
@@ -73,7 +92,7 @@ const NEW = [
     opening: ['tap', 'glint', 'gold seal', 'lifts away', 'emerald flap opens upward', 'gold leaf liner', 'draw themselves across the screen', 'marble card', 'rises from the pocket', 'comes forward', 'home page'],
     readme: ['zümrüt kadife', 'altın mühür', 'çan', 'galeri duvarı', 'kendini çizer', 'mermer', 'okaliptüs', 'Cinzel Decorative', 'Cormorant Infant', 'Order of the Day', 'Will You Join Us?'],
     pages: { story: /gallery wall of three thin gold frames.*hung on a nail/, rsvp: /Will You Join Us\?.*gold seal/ },
-    foreign: foreign('cherry', 'blossom', 'vellum', 'sleeve', 'popp', 'cornflower', 'dais'),
+    foreign: foreign([], 'cherry', 'blossom', 'vellum', 'sleeve', 'popp', 'cornflower', 'dais', 'sunflower', 'gingham', 'porthole', 'butterfl', 'candle'),
     guides: ['wedding-website-wording', 'when-to-send-your-wedding-website'],
   },
   {
@@ -91,8 +110,42 @@ const NEW = [
     readme: ['vellum kılıf', 'etiket soyulur', 'gelincik', 'peygamber çiçeği', 'papatya', 'vellum örtü', 'Satisfy', 'Spectral', 'Order of the Day', 'Will You Join Us?'],
     pages: { story: /Three photo cards.*vellum veil lifts/, rsvp: /Will You Join Us\?.*wildflower label/ },
     // "instead of an envelope" is allowed (09 says the same of its pouch); no seal, no gold, no other design's motifs
-    foreign: foreign('cherry', 'blossom', 'emerald', 'velvet', 'marble', 'monstera', 'eucalyptus', String.raw`\bgold\b`, String.raw`\bseal\b`),
+    foreign: foreign([], 'cherry', 'blossom', 'emerald', 'velvet', 'marble', 'monstera', 'eucalyptus', String.raw`\bgold\b`, String.raw`\bseal\b`, 'sunflower', 'gingham', 'porthole', 'butterfl', 'candle'),
     guides: ['digital-wedding-invitation-etiquette', 'canva-wedding-website-template-vs-hosted-website'],
+  },
+  {
+    id: 'midnight-garden',
+    name: 'Midnight Garden',
+    title: 'Midnight Garden: Envelope Wedding Website | BKE Studio',
+    collection: '19_Midnight_Garden',
+    couple: 'Celeste & Damien',
+    fonts: ['Playfair Display SC', 'Cormorant SC', 'Cormorant Garamond'],
+    catalogue:
+      'On tap, the silver seal cracks and falls away, the black flap opens slowly, warm golden candlelight spills out from inside, and the card rises out of the darkness into the glow.',
+    style: ['matte black envelope', 'antique silver', 'silver seal', 'roses', 'peonies', 'hydrangea', 'butterfly', 'candlelight', 'gilded frames', 'dutch still life'],
+    opening: ['tap', 'silver seal cracks', 'fall away', 'black flap opens slowly', 'warm golden candlelight spills out from inside', 'rises out of the darkness into the glow', 'comes forward', 'home page'],
+    readme: ['siyah zarf', 'gümüş mühür', 'çatlar', 'mum ışığı', 'yaldızlı çerçeve', 'şakayık', 'kelebek', 'Playfair Display SC', 'Cormorant SC', 'Order of the Day'],
+    pages: { story: /Three baroque gilded frames hung salon-style.*glow up out of the dark/, rsvp: /Will You Join Us\?.*silver seal/ },
+    // 03 has peonies too; these are oil-painted plum ones
+    foreign: foreign(['peon'], 'cherry', 'blossom', 'emerald', 'marble', 'monstera', 'eucalyptus', 'vellum', 'sleeve', 'sunflower', 'gingham', 'porthole', 'shell', 'popp', 'cornflower'),
+    guides: ['digital-wedding-invitation-etiquette', 'what-to-put-on-your-wedding-website'],
+  },
+  {
+    id: 'coastal-seaside',
+    name: 'Coastal Seaside',
+    title: 'Coastal Seaside: Envelope Wedding Website | BKE Studio',
+    collection: '20_Coastal_Seaside',
+    couple: 'Marina & Oliver',
+    fonts: ['Allison', 'Lora'],
+    catalogue:
+      'On tap, the watercolor wave (wave.png) sweeps across the screen and carries the seashell and twine away, the wave-edged flap lifts, and the card rises like the incoming tide.',
+    style: ['sand-colored envelope', 'wavy shoreline', 'scallop shell', 'twine', 'sea glass', 'starfish', 'dune grass', 'porthole', 'watercolor'],
+    opening: ['tap', 'watercolor wave sweeps across the screen', 'carries the scallop shell and its twine away', 'wave-edged flap lifts', 'like the incoming tide', 'comes forward', 'home page'],
+    readme: ['dalga', 'deniz tarağı', 'sicim', 'lomboz', 'deniz camı', 'deniz yıldızı', 'gelgit', 'Allison', 'Lora', 'Order of the Day', 'Will You Join Us?'],
+    pages: { story: /Three brass portholes in a zigzag.*slides in from its own side/, rsvp: /Will You Join Us\?.*scallop shell/ },
+    // the shell hangs on a loop of twine
+    foreign: foreign(['twine'], 'cherry', 'blossom', 'emerald', 'velvet', 'marble', 'monstera', 'vellum', 'sunflower', 'gingham', String.raw`\broses?\b`, 'candle', 'butterfl', 'popp', 'cornflower'),
+    guides: ['when-to-send-your-wedding-website', 'canva-wedding-website-template-vs-hosted-website'],
   },
 ] as const;
 
@@ -119,7 +172,7 @@ afterEach(() => {
   }
 });
 
-test('every live design: one entry, copy, design-number order after the first five (16, 19, 20 slot in by number)', () => {
+test('every live design: one entry, copy, design-number order after the first five (later designs slot in by number)', () => {
   const ids = liveDesigns().map((d) => d.id);
   assert.equal(new Set(ids).size, ids.length, 'no design listed twice');
   assert.deepEqual(ids.slice(0, FIRST_FIVE.length), FIRST_FIVE);
@@ -128,6 +181,9 @@ test('every live design: one entry, copy, design-number order after the first fi
   for (const id of ids) {
     assert.ok(DESIGN_COPY[id], `${id}: copy in lib/marketing/designs.ts`);
     assert.equal(DESIGN_COPY[id].id, id);
+    // the catalogue names part files ("barnwood.png", "wave.png"); buyers never see a file name
+    const c = DESIGN_COPY[id];
+    assert.doesNotMatch([c.style, c.metaDescription, c.intro, c.opening, c.llmsLine, ...Object.values(c.pages)].join(' '), /\.(png|webp|jpe?g)\b/i, id);
   }
   // no two designs share a style line, meta description, opening or llms line
   for (const k of ['style', 'metaDescription', 'opening', 'llmsLine'] as const) {
@@ -136,7 +192,7 @@ test('every live design: one entry, copy, design-number order after the first fi
   }
 });
 
-test('15, 17, 18 are live, named as their themes, with design pages and placeholder prices', async () => {
+test('15–20 are live, named as their themes, with design pages and placeholder prices', async () => {
   const ids = liveDesigns().map((d) => d.id);
   for (const n of NEW) {
     assert.ok(ids.includes(n.id), `${n.id} listed`);
@@ -228,7 +284,7 @@ test('every live design has its real screens and opening clip in assets.json and
   }
   for (const n of NEW) {
     const m = manifest.designs[n.id];
-    // all eight screens of 15, 17 and 18 came out whole
+    // all eight screens of 15–20 came out whole
     for (const k of Object.keys(SCREEN_SOURCES)) assert.equal(m.screens[k].height, 1385, `${n.id}.${k}: ${m.screens[k].height}`);
     assert.equal(m.opening!.poster, `/marketing/designs/${n.id}/opening-poster.webp`);
     assert.equal(m.opening!.width, 390);
@@ -239,7 +295,7 @@ test('every live design has its real screens and opening clip in assets.json and
   assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), [...ids].sort());
 });
 
-test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 15, 17, 18; ItemList has every live design', () => {
+test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 15–20; ItemList has every live design', () => {
   const cfg = readyConfig();
   for (const n of NEW) {
     const d = liveDesign(n.id)!;
@@ -260,7 +316,7 @@ test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject
   assert.deepEqual(validateJsonLd(graph(list)), []);
 });
 
-test('llms.txt / llms-full.txt name 15, 17, 18; the sitemap stays empty while not launched and lists them after launch', () => {
+test('llms.txt / llms-full.txt name 15–20; the sitemap stays empty while not launched and lists them after launch', () => {
   const guides = loadGuides();
   const txt = llmsTxt(guides);
   const full = llmsFullTxt(guides);
@@ -278,7 +334,7 @@ test('llms.txt / llms-full.txt name 15, 17, 18; the sitemap stays empty while no
   assert.doesNotMatch(sitemapXml(guides), /<url>/, 'empty while launched is false');
 });
 
-test('/start production gate: 15, 17, 18 are approved, listed and can be started (201)', async () => {
+test('/start production gate: 15–20 are approved, listed and can be started (201)', async () => {
   const offered = (await offeredThemes(PROD)).map((t) => t.id);
   for (const id of liveDesigns().map((d) => d.id)) {
     assert.ok(approvedThemeIds().includes(id), id);

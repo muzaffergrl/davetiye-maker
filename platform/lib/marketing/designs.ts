@@ -503,6 +503,36 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'pale grey envelope with a deckle-edged round flap and a cherry blossom twig in a soft pink mist; watercolor cherry blossom branches, drifting petals and blossom-framed ovals.',
     relatedGuides: ['what-to-put-on-your-wedding-website', 'how-to-make-a-wedding-website'],
   },
+  // G097: written against themes/sunflower-rustic-barn/README.md (G416), the catalogue's opening line (docs/09 WEB 16)
+  // and its real screens and opening frames (390 × 844 capture).
+  'sunflower-rustic-barn': {
+    id: 'sunflower-rustic-barn',
+    collection: '16_Sunflower_Rustic',
+    demoCouple: 'Daisy & Wyatt',
+    style: 'Kraft envelope tied with a mustard gingham bow and a sunflower, sunflowers, wheat and prints pegged on twine',
+    metaDescription:
+      'A kraft envelope tied with a gingham bow and a sunflower opens into your wedding website: sunflowers, wheat and a barn-wood table. Edit it on your phone.',
+    intro:
+      'A country wedding in golden-hour light on cream paper with weathered wood along the bottom: watercolor sunflowers, wheat, daisies and leaves in two corners, a sunflower petal, a small sunflower head and a wheat ear drifting, and a kraft paper envelope with a rounded square flap and a mustard-and-cream gingham liner, wrapped in a wide mustard gingham ribbon with a big bow and a little sunflower at the knot. Inside: deckle-edged cream cards, old prints pegged on jute twine and a warm brush script.',
+    opening:
+      'Your guests tap the envelope. The gingham bow tugs loose and the ribbon slides off with its little sunflower, the kraft flap flips open to show the gingham liner, a weathered barn-wood tabletop appears under the envelope, and the card with your portrait rises and slides out onto the table while a few sunflower petals tumble. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a gingham-edged window on a cream card, your names, date, venue, a live countdown and a mustard RSVP button, then the invitation card and two prints pegged on jute twine that lead to Our Story and the details of the day.',
+      story: 'A barn-wood wall with three lengths of jute twine; as guests scroll, each line of twine stretches out, an old print is pegged onto it and swings once on its peg before it settles, and its caption is written below, with a little sunflower or wheat ear beside it.',
+      details: 'An "Order of the Day" card topped with gingham and sunflowers, small sunflower sprays between the rows, add to calendar, the venue photo as a wide print pegged on twine, dress code, links and questions and answers.',
+      rsvp: "A \"Will You Join Us?\" card with your reply-by date, signed with your names, with the envelope's gingham ribbon and bow laid along its base, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Golden Cream', hex: '#F9E7CB' },
+      { name: 'Mustard', hex: '#E3A72F' },
+      { name: 'Wheat Gold', hex: '#B88B3E' },
+      { name: 'Leaf', hex: '#6E7D3A' },
+      { name: 'Barn Brown', hex: '#5A4429' },
+    ],
+    fonts: ['Kaushan Script', 'Merriweather'],
+    llmsLine: 'kraft envelope wrapped in mustard gingham ribbon with a bow and a little sunflower in golden-hour light; watercolor sunflowers, wheat, daisies, a barn-wood table and prints pegged on jute twine.',
+    relatedGuides: ['how-to-make-a-wedding-website', 'wedding-website-wording'],
+  },
   // G097: written against themes/emerald-gold-estate/README.md (G417), the catalogue's opening line (docs/09 WEB 17) and
   // its real screens and opening frames (390 × 844 capture).
   'emerald-gold-estate': {
@@ -562,6 +592,66 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     fonts: ['Satisfy', 'Spectral'],
     llmsLine: 'frosted vellum sleeve with a deckle-edged wildflower label in a summer meadow; colored-pencil poppies, cornflowers, daisies and lupins, and photo cards under lifting vellum veils.',
     relatedGuides: ['digital-wedding-invitation-etiquette', 'canva-wedding-website-template-vs-hosted-website'],
+  },
+  // G097: written against themes/midnight-garden/README.md (G419), the catalogue's opening line (docs/09 WEB 19) and its
+  // real screens and opening frames (390 × 844 capture).
+  'midnight-garden': {
+    id: 'midnight-garden',
+    collection: '19_Midnight_Garden',
+    demoCouple: 'Celeste & Damien',
+    style: 'Matte black envelope with antique silver edges and a silver seal, oil-painted roses, peonies and gilded frames',
+    metaDescription:
+      'A black envelope with a silver seal opens into your wedding website in warm candlelight: dark roses, plum peonies and gilded frames. Edit it on your phone.',
+    intro:
+      'A night garden painted like a dark Dutch still life on black: oil-painted deep red roses, plum peonies, midnight-blue hydrangea, dark fruit and dusky leaves in two corners, a velvet plum butterfly and a rose petal, candlelight glowing low on the page, and a matte black envelope edged with hairline antique silver, closed at the tip of its V flap with a silver seal carrying your initials. Inside: black cards with fine gold borders, baroque gilded frames and classic small capitals.',
+    opening:
+      'Your guests tap the envelope. The silver seal cracks in two and the halves fall away, the black flap opens slowly to show a dark rose liner, warm golden candlelight spills out from inside, and the card with your portrait rises out of the darkness into the glow. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a gilded frame on a black card, your names, date, venue, a live countdown and a gold RSVP button, then the invitation card and two gilded frames that lead to Our Story and the details of the day.',
+      story: 'Three baroque gilded frames hung salon-style, one to the left and the next to the right; as guests scroll, candlelight warms the wall behind each frame and the frame and its photo glow up out of the dark, then its caption appears.',
+      details: 'An "Order of the Day" card with small rose sprigs between the rows, add to calendar, the venue photo in a wide gilded frame, dress code, links and questions and answers.',
+      rsvp: "A \"Will You Join Us?\" card with your reply-by date, signed with your names, with the envelope's silver seal pressed onto its lower gold line, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Midnight', hex: '#141217' },
+      { name: 'Plum', hex: '#4A2335' },
+      { name: 'Candle Gold', hex: '#C9A46A' },
+      { name: 'Pale Gold', hex: '#E3C99A' },
+      { name: 'Ivory', hex: '#EFE6DA' },
+    ],
+    fonts: ['Playfair Display SC', 'Cormorant SC', 'Cormorant Garamond'],
+    llmsLine: 'matte black envelope with antique silver edges and a silver seal that cracks open to candlelight; oil-painted dark roses, plum peonies, hydrangea, a plum butterfly and baroque gilded frames.',
+    relatedGuides: ['digital-wedding-invitation-etiquette', 'what-to-put-on-your-wedding-website'],
+  },
+  // G097: written against themes/coastal-seaside/README.md (G420), the catalogue's opening line (docs/09 WEB 20) and its
+  // real screens and opening frames (390 × 844 capture).
+  'coastal-seaside': {
+    id: 'coastal-seaside',
+    collection: '20_Coastal_Seaside',
+    demoCouple: 'Marina & Oliver',
+    style: 'Speckled sand envelope with a wave-edged flap and a scallop shell, watercolor sea, shells and brass porthole frames',
+    metaDescription:
+      'A sand-colored envelope with a scallop shell opens into your wedding website: a watercolor wave, shells, sea glass and portholes. Edit it on your phone.',
+    intro:
+      'An ocean shore in a pale sea-mist watercolor: a beach corner of dune grass, a moon snail shell, coral, sea glass, sand and foam, a foamy wave along the bottom, a scallop shell and sea glass in the other corner, a piece of sea glass and a starfish drifting, and a speckled sand-colored envelope whose V flap is cut like a wavy shoreline, with a scallop shell on a short loop of twine at its tip. Inside: an ocean watercolor liner, sand cards with wave-washed edges, brass porthole frames and a flowing script.',
+    opening:
+      'Your guests tap the envelope. A watercolor wave sweeps across the screen and carries the scallop shell and its twine away, the wave-edged flap lifts to show the ocean liner, and the card with your portrait rises slowly like the incoming tide. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a brass porthole on a sand card, your names, date, venue, a live countdown and an ocean-blue RSVP button, then the invitation card and two portholes that slide in from their own sides and lead to Our Story and the details of the day.',
+      story: 'Three brass portholes in a zigzag, left, right and left; as guests scroll, each one slides in from its own side and turns gently into place with a shell, sea glass or starfish beside it, and its handwritten caption appears below.',
+      details: 'An "Order of the Day" card with small rows of shells between the rows, add to calendar, the venue photo in a wide oval porthole, dress code, links and questions and answers.',
+      rsvp: "A \"Will You Join Us?\" card with your reply-by date, signed with your names, with the envelope's scallop shell resting on the wave at its foot, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Sea Mist', hex: '#D8EEF6' },
+      { name: 'Ivory', hex: '#FFFDF8' },
+      { name: 'Ocean', hex: '#2E5E7E' },
+      { name: 'Deep Sea', hex: '#1D3445' },
+      { name: 'Sand', hex: '#8A6A35' },
+    ],
+    fonts: ['Allison', 'Lora'],
+    llmsLine: 'speckled sand-colored envelope with a wave-edged flap and a scallop shell on twine, carried away by a watercolor wave; sea-mist watercolor, shells, sea glass, starfish and brass porthole frames.',
+    relatedGuides: ['when-to-send-your-wedding-website', 'canva-wedding-website-template-vs-hosted-website'],
   },
 };
 

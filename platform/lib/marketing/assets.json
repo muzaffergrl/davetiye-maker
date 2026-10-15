@@ -1261,6 +1261,90 @@
         "bytes": 384526
       }
     },
+    "sunflower-rustic-barn": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/envelope-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/envelope-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/home-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/home-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/invitation-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/invitation-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/story-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/story-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/details-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/details-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/schedule-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/schedule-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/rsvp-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/rsvp-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/sunflower-rustic-barn/form-320.webp",
+            "480": "/marketing/designs/sunflower-rustic-barn/form-480.webp",
+            "640": "/marketing/designs/sunflower-rustic-barn/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/sunflower-rustic-barn/opening.mp4",
+        "poster": "/marketing/designs/sunflower-rustic-barn/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 435924
+      }
+    },
     "emerald-gold-estate": {
       "screens": {
         "envelope": {
@@ -1427,6 +1511,174 @@
         "height": 844,
         "seconds": 10,
         "bytes": 461285
+      }
+    },
+    "midnight-garden": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/envelope-320.webp",
+            "480": "/marketing/designs/midnight-garden/envelope-480.webp",
+            "640": "/marketing/designs/midnight-garden/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/home-320.webp",
+            "480": "/marketing/designs/midnight-garden/home-480.webp",
+            "640": "/marketing/designs/midnight-garden/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/invitation-320.webp",
+            "480": "/marketing/designs/midnight-garden/invitation-480.webp",
+            "640": "/marketing/designs/midnight-garden/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/story-320.webp",
+            "480": "/marketing/designs/midnight-garden/story-480.webp",
+            "640": "/marketing/designs/midnight-garden/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/details-320.webp",
+            "480": "/marketing/designs/midnight-garden/details-480.webp",
+            "640": "/marketing/designs/midnight-garden/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/schedule-320.webp",
+            "480": "/marketing/designs/midnight-garden/schedule-480.webp",
+            "640": "/marketing/designs/midnight-garden/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/rsvp-320.webp",
+            "480": "/marketing/designs/midnight-garden/rsvp-480.webp",
+            "640": "/marketing/designs/midnight-garden/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/midnight-garden/form-320.webp",
+            "480": "/marketing/designs/midnight-garden/form-480.webp",
+            "640": "/marketing/designs/midnight-garden/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/midnight-garden/opening.mp4",
+        "poster": "/marketing/designs/midnight-garden/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 377191
+      }
+    },
+    "coastal-seaside": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/envelope-320.webp",
+            "480": "/marketing/designs/coastal-seaside/envelope-480.webp",
+            "640": "/marketing/designs/coastal-seaside/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/home-320.webp",
+            "480": "/marketing/designs/coastal-seaside/home-480.webp",
+            "640": "/marketing/designs/coastal-seaside/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/invitation-320.webp",
+            "480": "/marketing/designs/coastal-seaside/invitation-480.webp",
+            "640": "/marketing/designs/coastal-seaside/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/story-320.webp",
+            "480": "/marketing/designs/coastal-seaside/story-480.webp",
+            "640": "/marketing/designs/coastal-seaside/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/details-320.webp",
+            "480": "/marketing/designs/coastal-seaside/details-480.webp",
+            "640": "/marketing/designs/coastal-seaside/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/schedule-320.webp",
+            "480": "/marketing/designs/coastal-seaside/schedule-480.webp",
+            "640": "/marketing/designs/coastal-seaside/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/rsvp-320.webp",
+            "480": "/marketing/designs/coastal-seaside/rsvp-480.webp",
+            "640": "/marketing/designs/coastal-seaside/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/coastal-seaside/form-320.webp",
+            "480": "/marketing/designs/coastal-seaside/form-480.webp",
+            "640": "/marketing/designs/coastal-seaside/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/coastal-seaside/opening.mp4",
+        "poster": "/marketing/designs/coastal-seaside/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 473459
       }
     }
   },
