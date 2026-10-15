@@ -102,5 +102,62 @@
   "when": "2026-10-14T21:25:37.440Z",
   "passed": 16,
   "failed": 0
+ },
+ "theme_check_stress_vintage-airmail-love-letter": {
+  "passed": 127,
+  "warnings": 0,
+  "errors": 0,
+  "info": {
+   "thank_you": "complete",
+   "copy": {
+    "keys": 74,
+    "unmarked": 0,
+    "problems": 0
+   },
+   "stress_record": {
+    "slug": "stress-site",
+    "pages": [
+     "index",
+     "home",
+     "story",
+     "details",
+     "rsvp"
+    ],
+    "widths": [
+     360,
+     390
+    ],
+    "copy_keys_at_max": 74,
+    "thank_you": true
+   },
+   "envelope_to_home_ms": 3800,
+   "first_view_index_kb_placeholders": 924,
+   "first_view_home_kb_placeholders": 1236,
+   "first_view_index_kb_photos": 1018,
+   "first_view_home_kb_photos": 1417,
+   "nav_back_vt_390x844": {
+    "nav_animations": [],
+    "frames": [
+     {
+      "t": 0,
+      "nav_drawn": "0.00 %"
+     },
+     {
+      "t": 120,
+      "nav_drawn": "0.00 %"
+     }
+    ]
+   }
+  }
+ },
+ "g075_browser_04": {
+  "when": "2026-10-15T03:06:40.896Z",
+  "passed": 20,
+  "failed": 0
+ },
+ "g068_browser_04": {
+  "when": "2026-10-15T02:58:10.991Z",
+  "passed": 8,
+  "failed": 0
  }
 }

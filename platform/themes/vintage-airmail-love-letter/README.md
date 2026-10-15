@@ -317,6 +317,18 @@ Metinler `form_party` (`max` 24, standart) ve `form_optional`; 360/390'da her an
 yok, etiket kutuda sarar (`tests/g069-browser.ts` G084 bölümü).
 
 ## Bilinen sınırlar
+- **Teşekkür hâli ve düzenlenebilir metinler (G081 2. tur, 2026-10-15):** davet hâlinin yerleşimi değişmedi — HEAD ile bu tur
+  aynı veride, 27 boyut (320×568 … 1920×1080, yatay dahil) × demo / yer tutucu / tasarım aralığı × 5 sayfa = 405 yüklemede
+  yazı satırları, görseller ve bloklar 404'ünde birebir, birinde (384×854 aralık, "at 4:00 PM") 1 px (satır `<span>`'a bölündü).
+  Teşekkür hâlinde home / story / details / rsvp × aynı 27 boyut × demo (foto + mesaj), fotoğrafsız, aralık, Details gizli:
+  nav çizgisini kesen ya da nav bandında başlayan yazı / bağlantı / foto / kart / mühür **0**, yatay kaydırma 0; zorlama kaydıyla
+  (60 harflik başlık, 400 harflik mesaj, her metin `max`'ta) da 0. RSVP'de formsuz sayfanın kapanış başlığı çoğu telefonda ilk
+  ekranın altından başlar (katlama); yatay telefonda imza (ve kısa yatayda hap) davet hâlindeki gibi katlanır (mektup içinde 82 px);
+  zorlama kaydında 1280×650 / 1366×657'de imza katlanınca mektup içi aralık 110–115 px (davet hâlinde 85–93).
+- **Zarf kartında 60 harflik teşekkür başlığı:** kart küçük (≥ 11 px kuralı). Kapalı zarfta 360/390'da sığar (theme-check), açık
+  zarfta 390'da sığar; açık zarfta 320/360 px'te 4–8 px, yatay telefonda (667×375, 844×390) ~35 px yazı alanından taşar. Tasarımın
+  kendi başlığı ("Thank you for celebrating with us") her boyutta sığar (320 px'te ve açık zarfta tarih düşer, yatayda daktilo).
+- Sayaç etiketleri (`cd_*`, `max` 8): dördü birden 8 harf olunca 320 px'te satır ekrandan taşar (360/390 temiz; docs/11 360+).
 - **İlk ekran, üçüncü QA (QA'nın `sweep`'i, 28 boyut — 568×320 ve 375×553 eklendi — × 3 kayıt × canlı / çubuk × 5 sayfa =
   840 yükleme):** nav'ın altında yarım parça 6 → **0** (672 nav'lı ilk ekran; eklenen 568×320'de önce 9 daha); details'te
   yalnız başlıklı mektup 11 → 0; index / story / rsvp'nin 468 yüklemesi önceki ölçümle birebir aynı. Ayrıntı yukarıda.

@@ -72,8 +72,44 @@ isim satırı), `02_panel_party_card_<02|05>_390` (panel kartı, açık), `03_fo
 - `docs/11` §3.3'te parti satırı (G069) anılmıyor (yazma alanı dışı) → entegratör: "isteğe bağlı `<template data-rsvp-party>`,
   örnek 01/02/03/05" eklenebilir.
 
+### Tur 2 — 04 vintage-airmail-love-letter (G081'in 04 turuyla birlikte)
+Commit'ler: 1a932fd (şablon + `form_party` + manifest + testler, G081 04 turuyla tek commit), + bu Sonuç / önizleme commit'i.
+Motor, panel, `form.js`, `lib/`, `scripts/` değişmedi. Yayın yapılmadı.
+
+**Yapılan (01/03'ün G069 sözleşmesi aynen; K21: yeni görsel yok)**
+- `rsvp.html` formunda guests hata yerinin hemen ardından, soruların önünde `<template data-rsvp-party>`: tek `label.field`
+  (`.kicker` içinde `form_party` "Name of guest" + `[data-rsvp-party-number]` + `.opt` `form_optional`), adsız
+  `input type="text" maxlength="120"`, `p.field-error[data-rsvp-error-for="party"]`. Temanın kendi `.field` / `.kicker` / `.opt` /
+  input kuralları — yeni CSS ve JS yok.
+- 04'te yanıt kutusu (`.reply-box`) tek ilk ekran birimi (`data-fold`); satırlar kutunun içinde olduğu için **kendi `data-fold`'ları
+  yok** (02/05'te alanlar tek tek birimdi): kutu bütün olarak ya yerinde kalır ya katlanır, satır açılınca kutu aşağı uzar.
+- Copy: `form_party` (standart, `max` 24) ve `form_optional` (formda 3 kez); `theme.json` → 74 anahtar (G081 turu). Başlıktaki
+  açıklama yorumunda `data-rsvp-party` yazmıyor (sözleşme testi ilk geçişi `name="guests"`'ten sonra arar).
+
+**Testler (Node 22, PORT 4208x)**
+- `g069-browser` (`G084_THEMES=vintage-airmail-love-letter`, PNG + `checks.json` geçici klasöre, sonra buraya): **19/19** — 2+
+  kişiden önce satır yok → "3" → "Name of guest 2 (optional)", "… 3 (optional)" → satırlar temanın alan stilinde (Special Elite,
+  çerçeve, yarıçap, zemin, genişlik, üst boşluk = guests alanı) ve guests'in hemen ardında → "no" çıkarır, "yes" yazılanı geri
+  getirir → 390'da yatay kaydırma yok → gönder → `party ["Arthur Hartley","Mae Hartley"]`, guests 3 → "Send another reply"
+  satırsız → panel kartı "With Arthur Hartley and Mae Hartley", 3 kişi, "3 Guests coming" → CSV kişi başına satır (Party size
+  yalnız ilk satırda 3) → her anahtar `max`'ta 360/390, satırlar açık: etiket kutuda iki satıra sarar, kesilme yok, girişler tam
+  genişlik → konsol hatası yok.
+- `g069-rsvp.test.ts` şablon sözleşmesi 01–05; `g068-copy.test.ts` RSVP render testi `form_party`'yi 04'te de doğruluyor
+  (`form_optional` 3). `npm test` **575/575**, typecheck temiz, build geçti; `theme-check --stress` **127/0/0** (RSVP akışı 2
+  kişilik yanıtla — satır açık — kaydedildi); temanın dosyası 33/33 ("RSVP signature + seal before the fold" dahil).
+- İlk ekran: davet hâlinin yerleşimi HEAD ile aynı (G081 Sonuç: 405 yüklemenin 404'ü birebir, 1'i 1 px); her metni `max`'ta zorlama
+  kaydıyla RSVP × 27 boyut — nav çizgisini kesen parça 0 (satırlar kapalıyken; formun kendisi tek birim).
+
+**Önizlemeler** `platform/previews/g084/`: `01_form_party_04_390.png` (ad, e-posta, katılım, 3 misafir, iki isim satırı),
+`02_panel_party_card_04_390.png` (panel kartı, açık), `03_form_party_stress_04_360.png` (her metin `max`'ta); `checks.json` üç
+tema (02, 05, 04), 57/57.
+
+**Açık / denenmedi:** gerçek iPhone/Safari ve Android Chrome, Vercel yayını (Chromium emülasyonu). Satırlar açıkken ekran
+döndürülünce yanıt kutusu bütün olarak yeniden katlanır (satır tek tek değil) — ölçülmedi, `folds` aynı kodla çalışır.
+
 ## Günlük
 - 2026-10-14 açıldı (entegratör): G081 Sonuç önerisi
 - 2026-10-14 alindi: claude-G084 (G081'in 02/05 turu onaylı; bu tur yalnız 02 ve 05, 04 G404/G081 04 turundan sonra)
 - 2026-10-14 claude-G084: 02 ve 05 tamam; 04 bekliyor
 - 2026-10-14 entegratör: 02/05 turu kabul (theme-check 127/0/0, g069-browser 98/98); docs/11 §3.3'e misafir adları kuralı eklendi. 04 turu G404 onayından sonra (G081 ile birlikte).
+- 2026-10-15 claude-G084: 04 turu tamam (G081 04 turuyla birlikte): `<template data-rsvp-party>` + `form_party`; g069-browser G084 04 19/19, npm test 575/575, theme-check 127/0/0; docs/11 §3.3 örnek listesi 01–05

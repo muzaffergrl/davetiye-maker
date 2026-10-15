@@ -2,9 +2,10 @@
   "when": "2026-10-14T22:11:48.630Z",
   "themes": [
     "dusty-blue-champagne",
-    "mediterranean-lemon"
+    "mediterranean-lemon",
+    "vintage-airmail-love-letter"
   ],
-  "passed": 38,
+  "passed": 57,
   "failed": 0,
   "checks": [
     {
@@ -176,6 +177,92 @@
     {
       "name": "G084 05 stress @390: no console errors",
       "ok": true
+    },
+    {
+      "name": "G084 04 form: no name fields before \"Number of guests\" is 2+",
+      "ok": true
+    },
+    {
+      "name": "G084 04 form: 3 guests → 2 name fields, \"Name of guest 2 / 3 (optional)\"",
+      "ok": true,
+      "detail": "[\"Name of guest 2 (optional)\",\"Name of guest 3 (optional)\"]"
+    },
+    {
+      "name": "G084 04 form: the name rows use the theme's own field style (label, input, width, spacing), right after the guest count",
+      "ok": true,
+      "detail": "\"Special Elite\", \"American Typewriter\", \"Courier New\", Courier, monospace / 17px / 1px / rgba(42, 42, 53, 0.4) / 10px / rgba(255, 252, 246, 0.94) / 318 / 48 / \"Special Elite\", \"American Typewriter\", \"Courier New\", Courier, monospace / 11.5px / 2.07px / uppercase / rgb(42, 42, 53) / 16px"
+    },
+    {
+      "name": "G084 04 form: a \"no\" takes the name fields out of the form",
+      "ok": true
+    },
+    {
+      "name": "G084 04 form: back to \"yes\": the typed names are still there",
+      "ok": true
+    },
+    {
+      "name": "G084 04 form: no horizontal scroll at 390 px with the name fields",
+      "ok": true
+    },
+    {
+      "name": "G084 04 form: reply stored with 3 guests and the names of the 2 others",
+      "ok": true,
+      "detail": "{\"id\":\"c9fc10f2-bf4f-4e62-806c-dc0c95e8abb6\",\"siteId\":\"50ae8c11-2507-47e5-8ab6-39ed23d0ebe3\",\"name\":\"Evelyn Hartley\",\"email\":\"evelyn@example.com\",\"attending\":true,\"guests\":3,\"message\":null,\"answers\":[{\"id\":\"meal\",\"question\":\"Meal choice\",\"answer\":\"Fish\"}],\"party\":[\"Arthur Hartley\",\"Mae Hartley\"],\"createdAt\":\"2026-10-15T02:58:26.581Z\"}"
+    },
+    {
+      "name": "G084 04 form: \"Send another reply\" starts with no name fields",
+      "ok": true
+    },
+    {
+      "name": "G084 04 form: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 04 panel: the card shows the party (\"With Arthur Hartley and Mae Hartley\")",
+      "ok": true,
+      "detail": "With Arthur Hartley and Mae Hartley"
+    },
+    {
+      "name": "G084 04 panel: 3 guests coming",
+      "ok": true
+    },
+    {
+      "name": "G084 04 panel: the opened card lists everyone (3)",
+      "ok": true,
+      "detail": "Evelyn Hartley|Arthur Hartley|Mae Hartley"
+    },
+    {
+      "name": "G084 04 CSV: the 3-person reply is 3 rows (Evelyn, Arthur, Mae), \"Party size\" 3 on the first row only",
+      "ok": true,
+      "detail": "[[\"Evelyn Hartley\",\"Evelyn Hartley\",\"Yes\",\"3\"],[\"Arthur Hartley\",\"Evelyn Hartley\",\"Yes\",\"\"],[\"Mae Hartley\",\"Evelyn Hartley\",\"Yes\",\"\"]]"
+    },
+    {
+      "name": "G084 04 CSV: one row per person in all (3)",
+      "ok": true,
+      "detail": "3"
+    },
+    {
+      "name": "G084 04 panel: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 04 stress @360: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width",
+      "ok": true,
+      "detail": "{\"hscroll\":0,\"rows\":[{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 2 Celebrate together b\"},{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 3 Celebrate together b\"}]}"
+    },
+    {
+      "name": "G084 04 stress @360: no console errors",
+      "ok": true
+    },
+    {
+      "name": "G084 04 stress @390: every design text at its max, 2 name rows open — no horizontal scroll, labels wrap inside the reply box, inputs full width",
+      "ok": true,
+      "detail": "{\"hscroll\":0,\"rows\":[{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 2 Celebrate together b\"},{\"lines\":2,\"inside\":true,\"clipped\":false,\"input\":true,\"text\":\"Celebrate together benea 3 Celebrate together b\"}]}"
+    },
+    {
+      "name": "G084 04 stress @390: no console errors",
+      "ok": true
     }
-  ]
+  ],
+  "when_04": "2026-10-15T02:58:32.518Z"
 }
