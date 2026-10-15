@@ -655,9 +655,11 @@ def onizleme(oniz, ec, flap, env_flap, env_body, pocket, cl_crop, katman, stage,
     ox, oy, ow, oh = stage["closed_obj"]["box_pct"]
     env_px = ow / 100 * 900
     olcek = (875 - 150) / env_px * (1.0)
-    t = kapali.resize((round(900 * olcek), round(kapali.height * olcek)), Image.LANCZOS)
-    ex = ox / 100 * 900 * olcek
-    ey = (oy + oh) / 100 * kapali.height * olcek
+    t0 = kapali.resize((round(900 * olcek), round(kapali.height * olcek)), Image.LANCZOS)
+    t = Image.new("RGBA", (t0.width + 400, t0.height + 400), zemin)
+    t.alpha_composite(t0, (200, 200))
+    ex = ox / 100 * 900 * olcek + 200
+    ey = (oy + oh) / 100 * kapali.height * olcek + 200
     t = t.crop((round(ex - 40), round(ey - (cy1 - cy0) + 40), round(ex - 40) + cmp_crop.width, round(ey + 40)))
     out_im = Image.new("RGB", (cmp_crop.width * 2 + 16, cmp_crop.height), (255, 255, 255))
     out_im.paste(t.convert("RGB"), (0, 0))

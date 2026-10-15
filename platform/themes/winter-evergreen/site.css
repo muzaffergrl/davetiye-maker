@@ -169,12 +169,14 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-copy[data-wrap] .sep, .card-copy .kicker:has(.cc-city[data-empty]) .sep { display: none; }
 .card-copy[data-wrap] .cc-city { display: block; }
 .card-copy[data-drop~="c"] .sep, .card-copy[data-drop~="c"] .cc-city, .card-copy[data-drop~="s"] .script { display: none; }
+.card-copy[data-drop~="t"] .kicker { letter-spacing: .02em; }
+.card-copy[data-drop~="w"] .nowrap { white-space: normal; }
 
 /* -- backdrop: snowy mist + whole decor_tl / decor_br + the comp's floating accents */
 .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 :is(.scene-bg, .page-bg) .scene-img { object-fit: cover; object-position: 50% 30%; }
 .float { position: absolute; display: block; height: auto; filter: drop-shadow(0 4px 4px rgba(30, 50, 40, .14)); }
-.f-flake { right: 10%; top: 9%; width: clamp(34px, 11vw, 64px); }
+.f-flake { right: 10%; top: 9%; width: clamp(34px, 11vw, 64px); filter: drop-shadow(0 1px 3px rgba(28, 56, 44, .36)); }
 .f-cone { right: 3%; top: 17%; width: clamp(24px, 7vw, 42px); rotate: 8deg; }
 .f-berry { right: 7%; top: 24.5%; width: clamp(30px, 9vw, 54px); rotate: -6deg; }
 .js .float { animation: air 8s ease-in-out infinite alternate; }
@@ -273,8 +275,11 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .accent-layer { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
 /* behind the section's text */
 .accent-layer.in-host { position: absolute; z-index: 0; }
+/* the opening's soft snow falls behind the envelope */
+.accent-layer.back { z-index: 0; }
+/* a white GPT snowflake on the pale mist: a soft cool shadow keeps it readable (§5.7: shadow on a part) */
 .accent-layer img { position: absolute; left: 0; top: 0; display: block; height: auto; will-change: transform, opacity;
-                    filter: drop-shadow(0 3px 4px rgba(30, 50, 40, .12)); }
+                    filter: drop-shadow(0 1px 2px rgba(28, 56, 44, .42)); }
 
 /* == page 2 — home (W1.2) */
 .hero { --hn: clamp(42px, min(12.4vw, 8.6svh), 78px); position: relative; min-height: calc(100svh - var(--nav-h) - env(safe-area-inset-bottom)); padding-bottom: 24px;
@@ -363,8 +368,9 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* -- home: invitation card (no comp) */
 .invite-sec { padding: 34px 0 26px; }
-/* free_zone: under the garland (to 34 %), inside the gold border, clear of the bottom-left sprig */
-.invite-text { padding: 37cqw 15% 26cqw; min-height: calc(100cqw / .72496); justify-content: center; }
+/* free_zone: under the garland (its tips hang to 34 % of the card = 47cqw), inside the gold border, above the bottom
+   slice with the sprig (76 %) */
+.invite-text { padding: 47cqw 15% calc(var(--bot-h) + 3cqw); min-height: calc(100cqw / .72496); justify-content: center; }
 .invite-text .host { max-width: 60cqw; font-size: max(11px, 3cqw); letter-spacing: .2em; line-height: 1.6; text-wrap: balance; color: var(--green-ink); }
 .invite-text .nm { font-size: 10.6cqw; line-height: 1.12; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .invite-text .host + .nm { margin-top: 3cqw; }

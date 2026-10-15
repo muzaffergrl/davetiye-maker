@@ -975,8 +975,11 @@ test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 36 p
     const fs = /font-size: max\((\d+(?:\.\d+)?)px/.exec(r) ?? /font: \d+ max\((\d+(?:\.\d+)?)px/.exec(r) ?? /font: \d+ (\d+(?:\.\d+)?)px/.exec(r) ?? /font-size: (\d+(?:\.\d+)?)px/.exec(r);
     assert.ok(fs && Number(fs[1]) >= 10.5, `${sel}: smallest font size ${fs && fs[1]} px`);
   }
-  // card copy: date · town on one line, else two, else lines drop; refitted when the card resizes
-  assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c s'\]\]\)/);
+  // card copy: date · town on one line, else two, else the town and the script drop, then tighter capitals, then the date
+  // wraps (theme-check range record at 360×640: "29 SEPTEMBER 2027" was wider than the 150 px card); refitted on resize
+  assert.match(js, /for \(const \[wrap, d\] of \[\[false, ''\], \[true, ''\], \[true, 'c'\], \[true, 'c s'\], \[true, 'c s t'\], \[true, 'c s t w'\]\]\)/);
+  assert.match(cssText(), /\.card-copy\[data-drop~="t"\] \.kicker \{ letter-spacing: \.02em; \}/);
+  assert.match(cssText(), /\.card-copy\[data-drop~="w"\] \.nowrap \{ white-space: normal; \}/);
   assert.match(js, /new ResizeObserver\(fitCopy\)/);
   // motion: no empty wait after the card lands; the arrival / closing snow falls inside its section, behind its text,
   // in lanes beside the text column

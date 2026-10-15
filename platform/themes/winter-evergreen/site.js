@@ -8,13 +8,13 @@ const MOTION = {
     hint: [0, 300],
     tug: [0, 300],
     snow: 0, // soft snow begins to fall (accents.open[0])
-    closure: [120, 1500], // the bundle loosens (≈ 35 %), then slides away down the front and off screen
+    closure: [120, 1500], // loosens (≈ 35 %), slides off
     head: [200, 620],
     lift: [1240, 820], // the flap 0° → 90°
     open: [1280, 420], // closed → open body
     flap: [2060, 760], // the open flap from −90°
     rise: [2320, 1420],
-    accents: 2320, // snowflakes drift across while the card rises (accents.open[1])
+    accents: 2320, // the drift, as the card rises (accents.open[1])
     forward: [3740, 640],
     go: 4560,
     fadeOut: 420 // without cross-document VT
@@ -42,10 +42,11 @@ const MOTION = {
   batchGap: 380,  // scenes entering together
   arriveDelay: 0,
 
-  // particles (docs/11 §8, README): accent_1 = the GPT snowflake; `avoid` lanes beside, `host` behind its text
+  // particles (docs/11 §8): accent_1 = the snowflake; avoid = lanes beside, host = behind its text
   accents: {
-    open: [{ file: 'img/accent_1-178.webp', count: 16, path: 'fall', origin: 'top', dur: [3600, 5200], size: [11, 22], spread: 900, gap: 110, end: [1.02, 1.08] },
-           { file: 'img/accent_1-178.webp', count: 4, path: 'across', origin: 'sides', dur: [3000, 3800], size: [26, 36], spread: 300, gap: 420 }],
+    // snow falls behind the envelope; the drift crosses its green front, never the card
+    open: [{ file: 'img/accent_1-178.webp', count: 18, path: 'fall', origin: 'top', dur: [3800, 5400], size: [14, 26], spread: 700, gap: 90, from: [-.04, .34], end: [1.02, 1.08], back: true },
+           { file: 'img/accent_1-178.webp', count: 4, path: 'across', origin: 'sides', dur: [2600, 3200], size: [24, 32], spread: 200, gap: 380, lane: ['.env-pocket', .5, .86] }],
     arrive: [{ file: 'img/accent_1-178.webp', count: 4, path: 'fall', origin: 'top', dur: [6000, 7600], size: [16, 24], spread: 1400, avoid: '.hero-inner > *', host: '.hero' }],
     closing: [{ file: 'img/accent_1-178.webp', count: 5, path: 'fall', origin: 'top', dur: [6400, 8400], size: [14, 24], spread: 1800, avoid: '.closing > p, .closing > h2', host: '.closing' }]
   }
@@ -102,7 +103,9 @@ const rects = (sel) => [...$$(sel)].filter((e) => e.offsetParent).map((e) => e.g
 function flightPath(g, R, s, i) {
   const F = (v) => v.toFixed(1), kf = [], N = 12, ph = rand(0, 6.28), av = g.avoid ? rects(g.avoid) : [], ab = Math.max(0, ...av.map((r) => r.bottom - R.top));
   if (g.path === 'across') {
-    const ltr = i % 2 === 0, y0 = R.height * rand(.22, .62), drop = R.height * rand(.06, .14), amp = rand(10, 20), spin = rand(60, 140) * (ltr ? 1 : -1);
+    // lane [sel, from, to]: the band the drift crosses
+    const lb = g.lane && rects(g.lane[0])[0], y0 = lb ? lb.top - R.top + lb.height * rand(g.lane[1], g.lane[2]) - s / 2 : R.height * rand(.22, .62);
+    const ltr = i % 2 === 0, drop = lb ? lb.height * .06 : R.height * rand(.06, .14), amp = rand(6, 12), spin = rand(60, 140) * (ltr ? 1 : -1);
     for (let k = 0; k <= N; k++) {
       const t = k / N, x = ltr ? -s * 1.2 + (R.width + s * 2.4) * t : R.width + s * .2 - (R.width + s * 2.4) * t;
       kf.push({ transform: `translate3d(${F(x)}px, ${F(y0 + drop * t + Math.sin(t * 6.6 + ph) * amp)}px, 0) rotate(${F(spin * t)}deg)`,
@@ -111,7 +114,7 @@ function flightPath(g, R, s, i) {
     return kf;
   }
   const end = g.end || [.72, .86];
-  let y0 = -s - 10, y1 = R.height * rand(end[0], end[1]), ln = [[0, R.width - s]];
+  let y0 = g.from ? R.height * rand(g.from[0], g.from[1]) : -s - 10, y1 = R.height * rand(end[0], end[1]), ln = [[0, R.width - s]];
   if (av.length) {
     const l = Math.min(...av.map((r) => r.left)) - R.left - 8, r = Math.max(...av.map((r) => r.right)) - R.left + 8;
     ln = [[0, l - s], [r, R.width - s]].filter(([a, b]) => b - a > 2);
@@ -136,9 +139,10 @@ function accents(moment, until, only) {
     const host = g.host && $(g.host);
     if (g.host && !host) return;
     const box = host || document.body;
-    let layer = box.querySelector(':scope > .accent-layer');
+    const cls = 'accent-layer' + (host ? ' in-host' : '') + (g.back ? ' back' : '');
+    let layer = [...box.querySelectorAll(':scope > .accent-layer')].find((l) => l.className === cls);
     if (!layer) {
-      layer = Object.assign(document.createElement('div'), { className: 'accent-layer' + (host ? ' in-host' : '') });
+      layer = Object.assign(document.createElement('div'), { className: cls });
       layer.setAttribute('aria-hidden', 'true');
       const first = host && host.querySelector(':scope > .scene-bg, :scope > .page-corner');
       if (first) first.after(layer); else box.append(layer);
@@ -272,7 +276,7 @@ function fitNames() {
       if (s <= min || (lines <= maxLines && h <= innerHeight * maxShare && (s <= navFloor || !low(h1)))) break;
     }
   };
-  // card copy ≥ 11 px: one line, two, no town, no script
+  // card copy ≥ 11 px: one line, two, no town, no script, tighter capitals, the date on two lines
   const fits = (c) => {
     const k = [...c.children].filter((p) => p.offsetParent);
     return !k.length || (Math.max(...k.map((p) => p.offsetTop + p.offsetHeight)) - Math.min(...k.map((p) => p.offsetTop)) <= c.clientHeight + 1
@@ -280,7 +284,7 @@ function fitNames() {
   };
   const oneLine = (c) => { const k = c.querySelector('.kicker'); return !k || k.offsetHeight <= parseFloat(getComputedStyle(k).lineHeight) * 1.5; };
   const fitCopy = () => $$('.card-copy').forEach((c) => {
-    for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c s']]) {
+    for (const [wrap, d] of [[false, ''], [true, ''], [true, 'c'], [true, 'c s'], [true, 'c s t'], [true, 'c s t w']]) {
       c.toggleAttribute('data-wrap', wrap);
       c.dataset.drop = d;
       if (fits(c) && (wrap || oneLine(c))) break;
@@ -314,7 +318,7 @@ function fitNames() {
     return g;
   };
   // [data-fold] in order (story row = one): a unit crossing the nav line starts below the first screen; the first may
-  // lift the page; the signature (and the card's bundle) shrink (--sg ≥ .72) first
+  // lift the page; signature / bundle shrink (--sg ≥ .72) first
   const folds = () => {
     const f = $('.page-bg + *'), a = [...$$('[data-fold], .windows-row')];
     [f, ...a].forEach((e) => e && ['margin-top', '--sg'].forEach((p) => e.style.removeProperty(p)));
@@ -368,7 +372,7 @@ function fitNames() {
     const ts = [...scope.querySelectorAll('h1, h2, p, figcaption, .cd-cell, .btn, .env-hint')]
       .filter((t) => t.offsetParent && !t.closest('.card, .paper, .reply-box, .site-nav, .scene-bg, .page-bg') && !t.querySelector('p, .cd-cell'))
       .map(textBox).filter(Boolean);
-    // the stage's empty card room above the envelope is not solid: the closed envelope is (W1.1 floats beside its corner)
+    // the envelope, not the stage's empty card room
     const solid = ts.concat([...scope.querySelectorAll('.card, .paper, .frame, .win-frame, .venue-photo, .env-closed')].map(lay));
     bg.querySelectorAll('.corner').forEach((c) => {
       const br = c.classList.contains('corner-br'), m = MAP[br ? 'br' : 'tl'];
@@ -442,8 +446,7 @@ function initEnvelope() {
     else el.card.style.viewTransitionName = 'none';
     if (crossDocVT || reduce) { location.href = PAGES.home; return; }
     page.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
-    const layer = $('.accent-layer');
-    if (layer) layer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
+    $$('.accent-layer').forEach((l) => l.animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' }));
     setTimeout(() => { location.href = PAGES.home; }, E.fadeOut);
   }
 
@@ -457,10 +460,9 @@ function initEnvelope() {
     if (reduce || !Element.prototype.animate) { go(false); return; }
     A(el.hint, [{ opacity: 1 }, { opacity: 0 }], E.hint, 'ease-out', 'forwards');
     A(el.env, [{ transform: 'scale(1)' }, { transform: 'scale(.988)', offset: .4 }, { transform: 'scale(1)' }], E.tug, 'ease-out', 'none');
-    // soft snow begins to fall (the whole opening)
+    // soft snow
     timers.push(setTimeout(() => accents('open', E.go - E.snow - 60, 0), E.snow));
-    // the bundle: loosens (the bow's knot wobbles, the bundle settles a little), then slides away down the envelope
-    // front, turning a little, and leaves the screen at the bottom — never fading on the envelope
+    // the bundle loosens (wobbles about the knot), then slides down the front and off screen, never fading
     const SH = stage.offsetHeight, cr = el.closure.getBoundingClientRect();
     const out = Math.max(innerHeight - cr.top + 12, SH * .5), side = stage.offsetWidth * .16;
     const T = (x, y, a, sc, o) => Object.assign({ transform: `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${a}deg) scale(${sc})` }, o);
@@ -484,9 +486,9 @@ function initEnvelope() {
     A(el.body, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
     A(el.pocket, [{ opacity: 0 }, { opacity: 1 }], [E.open[0], 80]);
     A(el.closed, [{ opacity: 1 }, { opacity: 0 }], E.open, 'ease-in-out');
-    // the open flap (snowy liner) takes over at −90°
+    // the open flap takes over at −90°
     A(el.flap, [X(-90, .88, 1, 1100), X(0, 1, 1, 1100)], E.flap, 'cubic-bezier(.2,.7,.3,1)');
-    // the snowy white card rises as snowflakes drift across the screen
+    // the card rises; snowflakes drift across
     timers.push(setTimeout(() => accents('open', E.go - E.accents - 60, 1), E.accents));
     A(el.card, [{ transform: 'translateY(0)' }, { transform: ENVELOPE_GEOMETRY.out }], E.rise, 'cubic-bezier(.42,0,.18,1)');
     timers.push(setTimeout(() => {
