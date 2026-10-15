@@ -28,6 +28,7 @@ import { LocalAdapter } from '../lib/data/local/index.ts';
 import { createSiteWithKeys, publishSite, setArchiveOverride } from '../lib/sites.ts';
 import { stressCopy } from '../lib/theme/copy.ts';
 import { loadChromium, startNext, waitForServer } from '../scripts/lib/browser.ts';
+import { builtDesignThemes, DESIGN_COLLECTIONS } from './design-themes.ts';
 import { REPO, ROOT } from '../scripts/lib/theme-env.ts';
 
 const require = createRequire(import.meta.url);
@@ -88,11 +89,9 @@ for (const r of earlier.slice(0, 3)) await adapter.saveRsvp(archived.site.id, r)
 await setArchiveOverride(adapter, archived.site.id, '2026-01-01', 'browser check: archive');
 
 // G084: one site per design with its own copy, one with every design text at its theme.json max (stress, like theme-check).
-const PARTY_THEMES = [
-  { id: 'dusty-blue-champagne', dir: '02_Dusty_Blue', tag: '02' },
-  { id: 'mediterranean-lemon', dir: '05_Lemon_Mediterranean', tag: '05' },
-  { id: 'vintage-airmail-love-letter', dir: '04_Vintage_Airmail', tag: '04' },
-] as const;
+const PARTY_THEMES = builtDesignThemes()
+  .filter((id) => id !== 'olive-ivory' && id !== 'blush-garden-rose')
+  .map((id) => ({ id, dir: DESIGN_COLLECTIONS[id].dir, tag: DESIGN_COLLECTIONS[id].tag }));
 const G084_ONLY = (process.env.G084_THEMES ?? '').split(',').filter(Boolean);
 const G084_OUT = process.env.G084_SHOTS_DIR || path.join(ROOT, 'previews/g084');
 type Keys = Awaited<ReturnType<typeof createSiteWithKeys>>;

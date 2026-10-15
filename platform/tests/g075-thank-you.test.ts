@@ -44,19 +44,14 @@ import { thankYouSupport } from '../lib/theme/thank-you-support.ts';
 import { loadTheme, readThemePage, type PageName } from '../lib/theme/theme.ts';
 import { changedPages, changedSections, PAGE_SECTIONS, parseEditTarget, readiness } from '../components/panel/pages.ts';
 import { PLATFORM_ROOT, REPO_ROOT, tinyPng, tmpDir } from './helpers.ts';
+import { builtDesignThemes, DESIGN_COLLECTIONS } from './design-themes.ts';
 
 const BASE = 'https://wedding.example';
-const THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter'] as const;
-const COLLECTION: Record<(typeof THEMES)[number], string> = {
-  'olive-ivory': '01_Olive_Ivory',
-  'blush-garden-rose': '03_Blush_Garden_Rose',
-  'dusty-blue-champagne': '02_Dusty_Blue',
-  'mediterranean-lemon': '05_Lemon_Mediterranean',
-  'vintage-airmail-love-letter': '04_Vintage_Airmail',
-};
+const THEMES = builtDesignThemes();
+const COLLECTION: Record<string, string> = Object.fromEntries(Object.entries(DESIGN_COLLECTIONS).map(([id, c]) => [id, c.dir]));
 const DAY = 86_400_000;
 
-const record = (theme: (typeof THEMES)[number] = 'blush-garden-rose'): ContentRecord =>
+const record = (theme: string = 'blush-garden-rose'): ContentRecord =>
   JSON.parse(readFileSync(path.join(REPO_ROOT, 'collections', COLLECTION[theme], 'content.demo.json'), 'utf8')) as ContentRecord;
 
 /** YYYY-MM-DD of `ms` in UTC. */
@@ -226,11 +221,11 @@ test('RSVP rule: thank-you mode closes the form (reason thank_you) before the de
 // ---------------------------------------------------------------------------------------------- the themes
 
 const SLUG = 'ty-test';
-// the default "now" is after every demo wedding (04's is October 2, 2027): Automatic is on
+// the default "now" is after every demo wedding (the latest, 08/19/…, are in late 2027): Automatic is on
 async function renderPage(themeId: string, page: PageName, content: unknown, opts: { now?: Date; previewKey?: string; thankYouPreview?: boolean } = {}) {
   const theme = (await loadTheme(themeId))!;
   const html = (await readThemePage(theme, page))!;
-  const r = renderTemplate({ html, content, theme: theme.manifest, page, slug: SLUG, now: opts.now ?? new Date('2027-10-15'), ...opts });
+  const r = renderTemplate({ html, content, theme: theme.manifest, page, slug: SLUG, now: opts.now ?? new Date('2028-02-15'), ...opts });
   assert.deepEqual(r.warnings, [], `${themeId}/${page}: engine warnings`);
   return { ...r, $: cheerio.load(r.html) };
 }
@@ -392,7 +387,7 @@ async function call(handler: Handler, url: string, params: Record<string, unknow
 let n = 0;
 /** A published site whose wedding was `daysAgo` days ago (negative: in the future); deadline a week before it. */
 async function site(theme: string, daysAgo: number, thankYou?: ContentRecord['thank_you']) {
-  const c = record((THEMES as readonly string[]).includes(theme) ? (theme as (typeof THEMES)[number]) : 'blush-garden-rose');
+  const c = record(THEMES.includes(theme) ? theme : 'blush-garden-rose');
   c.timezone = 'UTC';
   c.date = isoDay(Date.now() - daysAgo * DAY);
   c.rsvp = { ...c.rsvp, deadline: isoDay(Date.now() - (daysAgo + 7) * DAY) };
@@ -572,7 +567,7 @@ test('theme-check rule (docs/11 §3.6): 01, 02, 03, 04 and 05 complete; every ot
     const pages: Partial<Record<PageName, string>> = {};
     for (const [p, f] of Object.entries(manifest.pages)) pages[p as PageName] = readFileSync(path.join(dir, id, f), 'utf8');
     const s = thankYouSupport(pages);
-    if ((THEMES as readonly string[]).includes(id)) assert.deepEqual(s, { complete: true, partial: false, missing: [] }, id);
+    if (THEMES.includes(id)) assert.deepEqual(s, { complete: true, partial: false, missing: [] }, id);
     else if (!s.complete) console.log(`# WARN theme ${id}: no thank-you version (G075) — ${s.missing.length} of the docs/11 §3.6 markers missing`);
   }
   assert.equal(thankYouSupport({ index: '<p data-if="thank_you_on"></p>' }).partial, true);
