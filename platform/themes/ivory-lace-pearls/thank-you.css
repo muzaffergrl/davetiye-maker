@@ -1,0 +1,26 @@
+/* Ivory Lace & Pearls (design 14) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">),
+   so the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
+
+/* the card's window: the couple's thank-you photo, else the ivory satin with its window light and the pearl clasp from
+   the folder (decoration, not a placeholder) */
+.photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; }
+.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                          background: var(--page) url("img/mist-640.webp") 50% 50% / cover no-repeat; }
+.photo-slot > .ty-decor > img { width: 64%; height: auto; display: block;
+                                filter: drop-shadow(0 6px 7px rgba(58, 53, 48, .3)) drop-shadow(0 1px 1px rgba(58, 53, 48, .24)); }
+
+/* card copy: the thank-you title (≤ 60 characters) wraps in the script, the date under it */
+.card-copy .ty-title { font-family: var(--script); color: var(--taupe); font-size: max(13px, 9.6cqw); line-height: 1.04;
+                       text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.card-copy[data-drop~="s"] .ty-title { font-size: max(13px, 7.2cqw); display: block; } /* site.js fitCopy: smaller, never dropped */
+
+/* the thank-you card (invitation_card paper, 3-slice: the message lengthens it): title, message, signature, date */
+.ty-text .ty-head { font-size: 12cqw; line-height: 1.12; max-width: 66cqw; }
+.ty-text .ty-message { margin-top: 4cqw; font: italic 400 max(16px, 4.6cqw)/1.55 var(--serif); color: var(--ink);
+                       white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
+.ty-text .ty-love { margin-top: 5cqw; }
+.ty-text .ty-love + .nm { margin-top: 0; }
+.ty-text .city { margin-top: 3cqw; }
+
+/* RSVP card: "Replies are closed", the thank-you title under it */
+.rsvp-text .ty-kicker { max-width: 62cqw; line-height: 1.5; text-wrap: balance; overflow-wrap: break-word; }
