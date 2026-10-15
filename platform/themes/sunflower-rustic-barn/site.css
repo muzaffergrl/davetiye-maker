@@ -151,9 +151,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card { position: relative; aspect-ratio: 727 / 1100; container-type: inline-size; }
 .card > .photo-slot { left: 13.48%; top: 10.636%; width: 72.765%; height: 56.545%; } /* photo_slots.card */
 :is(.scene-bg, .page-bg) :is(picture, .scene-img), .card > .card-img, .print > .frame-img, .venue-photo .vframe, .table > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-/* free_zone 68–96 % */
+/* free_zone 71–97 % */
 .card-copy {
-  position: absolute; left: 7%; right: 7%; top: 69%; bottom: 4%;
+  position: absolute; left: 7%; right: 7%; top: 72%; bottom: 3.5%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2cqw;
 }
 .card-copy .script { font-size: 8.8cqw; line-height: 1.1; white-space: nowrap; color: var(--script-ink); }
@@ -192,6 +192,8 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 
 /* == page 1 — envelope (W1.1) */
 .page-envelope, .env-page { overflow-x: clip; }
+/* short phones: the comp's wood floor stays below the hint (theme-check backdrop) */
+.page-envelope .scene-bg picture { height: calc(100% + 14svh); }
 .skip {
   position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
@@ -360,8 +362,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* -- home: invitation card (no comp) */
 .invite-sec { padding: 34px 0 26px; }
-/* free_zone 20–47 % */
-.invite-text { padding: 30cqw 13% calc(var(--bot-h) - 4cqw); min-height: calc(100cqw / .7196); justify-content: flex-start; }
+/* free_zone 20–44 % (spray below) */
+.invite-text { padding: 30cqw 13% calc(var(--bot-h) + 2cqw); min-height: calc(100cqw / .7196); justify-content: flex-start; }
 .invite-text .host { max-width: 62cqw; font-size: max(11px, 2.8cqw); letter-spacing: .2em; line-height: 1.6; text-wrap: balance; color: var(--deep); }
 .invite-text .nm { font-size: 10cqw; line-height: 1.2; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .invite-text .host + .nm { margin-top: 3cqw; }
@@ -445,7 +447,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* GPT barnwood turned 90° */
 .wall::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("img/barnwall-640.webp") 50% 0 / max(100%, 640px) auto repeat-y;
     -webkit-mask: linear-gradient(transparent, #000 60px, #000 calc(100% - 60px), transparent);
-    mask: linear-gradient(transparent, #000 60px, #000 calc(100% - 60px), transparent); filter: sepia(.25) brightness(.86) contrast(1.04); }
+    mask: linear-gradient(transparent, #000 60px, #000 calc(100% - 60px), transparent); filter: sepia(.4) brightness(.72) contrast(1.08); }
 @media (min-resolution: 2dppx) { .wall::before { background-image: url("img/barnwall-1024.webp"); } }
 .line-row { position: relative; margin: 0; padding-top: 18px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .line-row + .line-row { margin-top: 26px; }
