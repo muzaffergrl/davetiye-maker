@@ -2,7 +2,7 @@
 id: G095
 baslik: Dükkân paneli v2 — Özet, Siparişler, Müşteriler, Tasarımlar, Yeni sipariş, site sayfasında yanıtlar/not/yayınla; satış sitesinde "My website"
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-entegrator
 oncelik: 1
 bagimli: [G087, G092]
@@ -44,3 +44,6 @@ duruma göre ekle/kaldır, detaylar. Siteye 'panele git' butonu." (K30'un devam�
 - Ekranlar `platform/previews/g087/` (a01b özet, a03b site bölümleri, a07 müşteriler, a08 tasarımlar, a09 yeni sipariş,
   a10–a11 /my, a12–a13 satış sitesi başlığı).
 - Denenmedi: canlıda (Vercel) — yayın yerel ajanın işi; gerçek telefon.
+
+## Günlük
+- 2026-10-15 entegratör onayladı
