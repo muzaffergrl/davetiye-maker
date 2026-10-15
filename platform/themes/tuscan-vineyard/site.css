@@ -513,7 +513,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .rsvp-text .sign { font-size: 13cqw; line-height: 1; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 /* the twine tie on its side across the card's base (closure 321 × 659 turned −90°: the strands run along the bottom, the
    cork in the middle, the leaves up and to the left); the strands end at the card's edges, as around the envelope */
-.card-tie { position: absolute; z-index: 2; left: 0; bottom: -7cqw; width: 100%; aspect-ratio: 659 / 321; pointer-events: none;
+.card-tie { position: absolute; z-index: 2; left: 1.4%; bottom: -7cqw; width: 97.2%; aspect-ratio: 659 / 321; pointer-events: none;
             filter: drop-shadow(0 6px 6px rgba(60, 32, 20, .26)); }
 .card-tie > img { position: absolute; left: 50%; top: 50%; width: 48.71%; height: auto; translate: -50% -50%; rotate: -90deg; display: block; }
 .reply-sec { padding: 46px 0 10px; }

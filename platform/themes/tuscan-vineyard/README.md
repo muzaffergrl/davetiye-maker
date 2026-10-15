@@ -111,7 +111,7 @@ Tasarıma özel preset'ler: `place` (etiket masaya), `settle` (meyve/yaprak), `r
 | isimler (şansölye yazısı) | `h1.names` | uzun isimde `site.js` küçültür |
 | kraft zarf, şarap rengi asma bordürlü V kapak | `.env-closed` + `.env-cflap` | |
 | sicim + mantar + iki zeytin yaprağı (V ucunda düğüm) | `.closure-wrap > .closure` | 1:1 sarılı; monogram yok (comp'ta da yok) |
-| "TAP TO OPEN" | `.env-hint` | comp'taki altındaki küçük süs çizgisi yok (sade) |
+| "TAP TO OPEN" | `.env-hint` | comp'taki altındaki minik süs yok: GPT `divider` bu boyda (≈ 60 px) okunmuyor, tepelerin hemen üstünde ek görsel gürültü olurdu |
 | — | `a.skip`, "Enter / Replay the opening" | platform gereği |
 
 ### home ← W1.2 `web_2_home.png`
@@ -126,7 +126,7 @@ Tasarıma özel preset'ler: `place` (etiket masaya), `settle` (meyve/yaprak), `r
 | şarap kırmızısı RSVP hapı | `.hero-cta .btn` | arayüz hapı; comp'taki hap içi yaprak süsleri yok |
 | tepeler + köşe kümeleri | hero `scene-bg` | tepelerin üstündeki metne `--halo` + kenarsız gün batımı ışığı (§5.7) |
 | alt gezinme | `.site-nav` | kâğıt rengine yumuşak geçiş, geçerli sayfada 1 px altın alt çizgi (comp'taki minik fleur yok) |
-| — (comp yok) | davet kartı (`invitation_card`, 3 dilim; metin salkımın sağında/altında), "Kindly reply by" + RSVP, takvime ekle, "Pour a glass, stay a while" + üç bağ sırası (story etiketi `story_1` · mekân etiketi `venue` + programın ilk 4 satırı · sicim düğümü), "Until then" + isimler + "Open the envelope again", tepe bandı | bu tasarımın parçaları; 01'in yelpaze üçlüsü / 03'ün blokları kullanılmadı |
+| — (comp yok) | davet kartı (`invitation_card`, 3 dilim; metin salkımın sağında/altında), "Kindly reply by" + RSVP, takvime ekle, "Pour a glass, stay a while" + üç bağ sırası (story etiketi `story_1` · mekân etiketi `venue` + programın ilk 4 satırı · sicim düğümü), "Until then" + isimler + "Open the envelope again", tepe bandı | bu tasarımın parçaları; bölüm **sırası** (davet kartı → yanıt satırı → takvim → üç sayfaya giriş → kapanış) platformun ortak home sırasıdır (01, 03 ve 10'da aynı), düzen ve süsler değil — 01'in yelpaze üçlüsü / 03'ün blokları kullanılmadı |
 
 ### story ← W1.3 `web_3_story.png`
 | W1 öğesi | Şablon | Not |
@@ -157,7 +157,7 @@ Tasarıma özel preset'ler: `place` (etiket masaya), `settle` (meyve/yaprak), `r
 | "KINDLY REPLY BY" + tarih (büyük harf) | `.kicker` + `.deadline` | |
 | şarap kırmızısı RSVP hapı | `.pill .btn` → `#reply` | |
 | süs çizgisi, "We can't wait to celebrate with you", "With love," + isimler | `.sprig`, `.wait`, `.love`, `.sign` | |
-| kartın tabanında sicim + mantar | `.card-tie` (GPT `closure`, −90° yatırılmış) | teller kartın kenarlarında biter (zarftaki gibi sarılı); yapraklar sola-yukarı |
+| kartın tabanında sicim + mantar | `.card-tie` (GPT `closure`, −90° yatırılmış) | teller kartın kâğıt kenarlarında biter (görselin 8 px şeffaf payı içeride; zarftaki gibi sarılı); yapraklar sola-yukarı |
 | — (comp yok) | yanıt formu (G042 + G051 soruları + G069 misafir adları), kapanış ("Thank you / for being part of our story", isimler · tarih, "Replay the envelope"), tepe bandı | |
 
 ## Düzenlenebilir metinler (G068)
