@@ -18,8 +18,8 @@ Chrome'una erişemez. Değerler İngilizce, açıklamalar Türkçe.
 
 ---
 
-**Karakter sayıları (2026-10-15, betikle):** shop title 53 · announcement 730 · message to buyers 248 · digital items 464 ·
-headline 38 · story 745 · iade ek metni 218 · gizlilik notu 341 · bölüm adları 15/17/20.
+**Karakter sayıları (2026-10-15, betikle):** shop title 53 · announcement 756 · message to buyers 248 · digital items 464 ·
+headline 38 · story 771 · iade ek metni 204 · gizlilik notu 341 · bölüm adları 15/17/20.
 
 ## 0. Kesin sınırlar (uygulayan oturum için)
 
