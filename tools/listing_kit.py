@@ -1,30 +1,33 @@
 #!/usr/bin/env python3
-"""Etsy listing kit + buyer START HERE guide for a platform theme (G059, K24 platform model).
+"""Etsy listing kit + buyer START HERE guide for a platform theme (G059, K24 platform model; images G065).
 
   python3 tools/listing_kit.py <step> --theme <id>|all [--base-url https://…] [--no-fonts]
 
-Steps (each one reads what the step before it wrote; `all` = qr, strips, images, video, pdf, check):
-  capture   real screenshots + the opening recording of the theme: runs tools/listing_templates/capture.ts against a
-            local production build of platform/ (`npm ci && npm run build` first; nothing is deployed)
-            → collections/<NN_*>/package/shots/
+Steps (each one reads what the step before it wrote; `all` = qr, images, video, pdf, check):
+  capture   real guest screenshots + the opening recording of the theme: runs tools/listing_templates/capture.ts against
+            a local production build of platform/ (`npm ci && npm run build` first; nothing is deployed)
+            → collections/<NN_*>/package/shots/ (the guide's cover screen and the listing video use them)
   qr        QR of the buyer's start link /start?theme=<id> (segno, error correction Q, like tools/make_qr.py)
             → package/customer/img/start_qr.png + .svg
-  strips    the guide's step pictures: 1–2 real screens side by side on white, each cut to the part the step is about
-            (each ≥ 42 % of the page's text width in the PDF) → package/customer/img/*.jpg
-  images    the Etsy listing images, 2000 × 2000 PNG, from tools/listing_templates/platform/*.html (Playwright Chromium;
-            layout + typography only, the theme's own GPT parts and real screens) → package/listing/images/
+  images    the 7 Etsy listing images, 2000 × 2000 PNG, in the BKE Studio GM03 layout (G065): runs
+            tools/listing_templates/gm03/build.py (which runs G067's tools/listing_v2/build.py for the cover, pages, how
+            it works and live demo, and builds the editor, RSVP and what's-included images itself) on the design's GPT
+            scenes (PAKET 3) with real screens of a local production build (guest pages and the current editor)
+            → package/listing_v2/ and package/listing/images/01..07. No QR code and no web address in any image
+            (docs/15 §1, off-platform): the live demo image says "demo link in the description".
   video     a short silent listing clip from the opening recording, 1080 × 1080 H.264 → package/listing/video.mp4
   pdf       START_HERE.md → START_HERE.pdf (a cover with the theme's own painted corners and its envelope screen,
             clickable start link + QR, every picture kept with its step and captioned) and listing.md →
             listing_<id>.pdf (all fields, image thumbnails, the cover at search-result size and as a 4:3 crop, video
             facts) with tools/md_to_pdf.py
   check     checks every output (sizes, counts, title/tag rules, video rules, the PDF's link, the QR's content)
-            --prepublish also: start link and demo answer 200 with the theme's name (live), the demo QR of image 8
-            encodes the demo link, and no [VERIFY …] or [COMMERCIAL PLACEHOLDER] is left in listing.md, START_HERE.md
-            or the PDFs. A kit is not sale_ready until `check --prepublish` passes (docs/05 §D).
+            --prepublish also: start link and demo answer 200 with the theme's name (live), and no [VERIFY …] or
+            [COMMERCIAL PLACEHOLDER] is left in listing_v3.md, START_HERE.md or the PDFs. A kit is not sale_ready until
+            `check --prepublish` passes (docs/05 §D).
 
-Text (START_HERE.md, listing.md) is written by hand; this tool only builds files from it. Commercial fields stay as
-placeholders ([SHOP NAME], [PRICE], …). Etsy rules used by `check` are in ETSY below with their source and status.
+Text (START_HERE.md, listing_v3.md — G091) is written by hand; this tool only builds files from it. Undecided commercial
+fields stay as placeholders ([PRICE], [RESPONSE TIME], …); the shop name is BKE Studio (K33). Etsy rules used by `check`
+are in ETSY below with their source and status. The guide has no step pictures since G091 (text + the start QR).
 Needs: Pillow, numpy, segno, pypdf (optional), ffmpeg/ffprobe, node + Playwright (NODE_PATH, /opt/pw-browsers).
 """
 from __future__ import annotations
@@ -46,8 +49,10 @@ from PIL import Image, ImageDraw
 
 TOOLS = Path(__file__).resolve().parent
 REPO = TOOLS.parent
-TEMPLATES = TOOLS / "listing_templates" / "platform"
+TEMPLATES = TOOLS / "listing_templates" / "platform"   # video_bg.html + kit.css (the listing video's frame)
 CAPTURE = TOOLS / "listing_templates" / "capture.ts"
+GM03 = TOOLS / "listing_templates" / "gm03" / "build.py"
+LISTING_MD = "listing_v3.md"   # G091 (the earlier listing.md stays as a record)
 sys.path.insert(0, str(TOOLS))
 
 BASE_URL = os.environ.get("LISTING_BASE_URL", "https://davetiye-platform-five.vercel.app")
@@ -90,28 +95,13 @@ THEMES: dict[str, Theme] = {
     ),
 }
 
-# Listing images, in upload order (file = <name>.png; template = tools/listing_templates/platform/<name>.html).
-IMAGES = ["01_cover", "02_guest_pages", "03_whats_included", "04_how_it_works", "05_editor", "06_rsvp",
-          "07_details", "08_live_demo"]
-# Screens each template / guide strip uses (from capture.ts).
+# Listing images, in upload order (file = <name>.png), built by tools/listing_templates/gm03/build.py (G065, GM03).
+IMAGES = ["01_cover", "02_pages", "03_how", "04_editor", "05_rsvp", "06_included", "07_demo"]
+# Guest screens capture.ts writes (the guide's cover uses g01_envelope; the video uses opening.webm). The editor screens
+# of the listing images come from gm03/capture.ts (current editor), not from here.
 SHOTS = ["g01_envelope", "g02_home_top", "g03_home_invitation", "g04_home_calendar", "g05_story", "g06_details_top",
          "g07_details_schedule", "g08_details_faq", "g09_rsvp_top", "g10_rsvp_form", "g11_rsvp_sent",
-         "g12_details_venue", "b01_start",
-         "b02_start_form", "b03_edit_link", "b04_panel_top", "b05_panel_date", "b06_panel_crop", "b07_panel_photos",
-         "b08_panel_preview", "b09_publish_notes", "b10_live_qr", "p01_panel_replies", "p02_panel_csv",
-         "p03_panel_questions", "d01_demo_home"]
-# START HERE pictures: file → at most two screens side by side (G059 review: a row of three or four small phones was
-# unreadable in the PDF), each with the part of it the step is about: None = the whole screen, (top, bottom) = CSS px
-# of the 390 px wide screen, "sheet" = a bottom sheet without the plain background above it.
-STRIPS: dict[str, list[tuple[str, object]]] = {
-    "step1_start": [("b01_start", None), ("b02_start_form", None)],
-    "step2_link": [("b03_edit_link", (0, 612))],
-    "step3_editor": [("b04_panel_top", None), ("b05_panel_date", None)],
-    "step4_photos": [("b06_panel_crop", "sheet"), ("b07_panel_photos", None)],
-    "step5_publish": [("b09_publish_notes", "sheet"), ("b10_live_qr", "sheet")],
-    "step7_replies": [("p01_panel_replies", None), ("p03_panel_questions", None)],
-    "guests": [("g01_envelope", None), ("g02_home_top", None)],
-}
+         "g12_details_venue", "d01_demo_home"]
 
 # Etsy rules checked by `check`. Source + status: help.etsy.com and etsy.com could NOT be opened from this environment
 # (2026-10-14: DNS/proxy refusal); the values come from web-search excerpts of Etsy's own help pages ("How to Create a
@@ -344,89 +334,18 @@ def step_qr(t: Theme, base: str) -> list[Path]:
     return [png, svg, page_png]
 
 
-def _rounded(im: Image.Image, r: int) -> Image.Image:
-    mask = Image.new("L", im.size, 0)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, im.width - 1, im.height - 1), r, fill=255)
-    out = Image.new("RGBA", im.size)
-    out.paste(im.convert("RGB"), (0, 0), mask)
-    return out
-
-
-def _sheet_top(im: Image.Image) -> int:
-    """First pixel row of a bottom sheet: rows above it are one plain colour (capture.ts puts the editor's background
-    behind the sheet)."""
-    a = np.asarray(im.convert("RGB")).astype(int)
-    ref = a[2, a.shape[1] // 2]
-    for y in range(a.shape[0]):  # the white sheet is only ≈ 9–17 levels from the editor's background
-        if np.abs(a[y] - ref).max() > 8:
-            return max(0, y - 6)
-    return 0
-
-
-def screen_part(path: Path, part: object) -> Image.Image:
-    """The part of a captured screen a guide picture shows (see STRIPS); screens are 390 CSS px wide at any scale."""
-    im = Image.open(path).convert("RGB")
-    k = im.width / 390
-    if part == "sheet":
-        return im.crop((0, _sheet_top(im), im.width, im.height))
-    if isinstance(part, tuple):
-        top, bottom = (round(v * k) for v in part)
-        return im.crop((0, min(top, im.height - 1), im.width, min(bottom, im.height)))
-    return im
-
-
-STRIP = {"w": 880, "gap": 132, "pad": 22}  # 880 px ≈ 300 dpi at 3 in
-
-
-def make_strip(screens: list[tuple[Path, object]], out: Path, w: int = STRIP["w"], gap: int = STRIP["gap"],
-               pad: int = STRIP["pad"]) -> Path:
-    """1–2 screens side by side on white, always two slots wide: in the PDF (the picture at 93.5 % of the text width,
-    GUIDE_CSS) every screen is then 42.5 % of the text width (≈ 3 in on US Letter). Rounded corners and a hairline
-    border (layout only)."""
-    if not 1 <= len(screens) <= 2:
-        raise ValueError(f"a guide picture holds 1 or 2 screens, not {len(screens)}")
-    parts = [screen_part(p, part) for p, part in screens]
-    parts = [im.resize((w, round(im.height * w / im.width)), Image.LANCZOS) for im in parts]
-    h = max(im.height for im in parts)
-    canvas = Image.new("RGB", (2 * w + gap + 2 * pad, h + 2 * pad), "white")
-    used = len(parts) * w + (len(parts) - 1) * gap
-    x = (canvas.width - used) // 2
-    r = round(w * 0.06)
-    for im in parts:
-        border = Image.new("RGBA", (w + 4, im.height + 4))
-        ImageDraw.Draw(border).rounded_rectangle((0, 0, w + 3, im.height + 3), r + 2, fill=(205, 200, 190, 255))
-        canvas.paste(border, (x - 2, pad - 2), border)
-        rim = _rounded(im, r)
-        canvas.paste(rim, (x, pad), rim)
-        x += w + gap
-    out.parent.mkdir(parents=True, exist_ok=True)
-    canvas.save(out, quality=82, optimize=True)
-    return out
-
-
-def step_strips(t: Theme) -> list[Path]:
-    shots = t.package / "shots"
-    return [make_strip([(shots / f"{s}.jpg", part) for s, part in parts], t.package / "customer" / "img" / f"{name}.jpg")
-            for name, parts in STRIPS.items()]
-
-
-def step_images(t: Theme, fonts: bool = True) -> list[Path]:
-    shots = t.package / "shots"
-    missing = [s for s in SHOTS if not (shots / f"{s}.jpg").exists()]
-    if missing:
-        raise RuntimeError(f"missing screens in {shots}: {missing} (run the capture step)")
+def step_images(t: Theme, capture: bool = True) -> list[Path]:
+    """The 7 GM03 listing images (G065): gm03/build.py for this design → package/listing/images/. Exit ≠ 0 of the
+    builder (its own check: size, no green left, exact text, nothing on a screen, no text overlap) is an error here."""
+    cmd = [sys.executable, str(GM03), "--design", t.no] + ([] if capture else ["--skip-capture"])
+    r = subprocess.run(cmd, cwd=REPO)
+    if r.returncode != 0:
+        raise RuntimeError(f"listing images for {t.id}: gm03/build.py failed (exit {r.returncode})")
     out_dir = t.package / "listing" / "images"
-    # the demo QR of image 8 is kept next to the images: `check --prepublish` decodes it (it must open demo_url)
-    pal = palette(t)
-    qr_png, _ = make_qr(demo_url(t), t.package / "listing" / "demo_qr", dark=pal["ink"], light=pal.get("ivory", "#FFFFFF"))
-    values = template_values(t, shots, {"qr.demo": qr_png.resolve().as_uri()})
-    pages = []
-    for name in IMAGES:
-        values["title"] = name
-        pages.append((fill((TEMPLATES / f"{name}.html").read_text(encoding="utf-8"), values),
-                      out_dir / f"{name}.png", 2000, 2000))
-    _render_pages(pages, fonts)
     outs = [out_dir / f"{n}.png" for n in IMAGES]
+    missing = [o.name for o in outs if not o.exists()]
+    if missing:
+        raise RuntimeError(f"listing images missing after the build: {missing}")
     for o in outs:  # lossless re-save: smaller file, same pixels
         Image.open(o).convert("RGB").save(o, optimize=True)
     return outs
@@ -551,7 +470,7 @@ def media_markdown(t: Theme, tmp: Path) -> str:
     rows += ["", "## The cover as buyers see it first (generated)", "",
              "Left: 300 px wide, about the size of a search result. Right: the centred 4:3 crop (2000 × 1500), in case "
              "Etsy shows the thumbnail cropped (not verified; the listing editor lets you adjust the thumbnail). The "
-             "theme name, \"Wedding Website · RSVP\", both phones and the three labels must stay readable in both.", "",
+             "title \"Wedding Website\", the phone and the three labels must stay readable in both.", "",
              "| 300 px | 4:3 centre crop |", "|---|---|",
              f"| ![cover 300 px]({small}) | ![cover 4:3]({crop}) |"]
     v = t.package / "listing" / "video.mp4"
@@ -686,7 +605,7 @@ def step_pdf(t: Theme, fonts: bool = True) -> list[Path]:
     pal_path = t.collection / "palette.json"
     guide_md = t.package / "customer" / "START_HERE.md"
     guide = guide_pdf(t, guide_md, t.package / "customer" / "START_HERE.pdf", fonts)
-    listing_md = t.package / "listing" / "listing.md"
+    listing_md = t.package / "listing" / LISTING_MD
     with tempfile.TemporaryDirectory(prefix="listing_pdf_") as tmp:
         tmp = Path(tmp)
         text = listing_md.read_text(encoding="utf-8")
@@ -750,8 +669,8 @@ def fetch(url: str, timeout: int = 20) -> tuple[int, str]:
 
 def prepublish_problems(t: Theme, base: str, get=fetch) -> list[str]:
     """What must be true before the listing goes up (docs/05 §D): the start link and the demo answer 200 on the live
-    site and name the theme, the demo QR of image 8 encodes the demo link, and no [VERIFY …] or commercial placeholder
-    is left in the texts or the PDFs."""
+    site and name the theme, and no [VERIFY …] or commercial placeholder is left in the texts or the PDFs. (The listing
+    images carry no QR since G065: the demo link is in the description.)"""
     p: list[str] = []
     for label, url in (("start link", start_url(t, base)), ("demo", demo_url(t, base))):
         status, body = get(url)
@@ -759,10 +678,7 @@ def prepublish_problems(t: Theme, base: str, get=fetch) -> list[str]:
             p.append(f"live {label} {url}: {'could not connect (' + body[:120] + ')' if status == 0 else status}")
         elif t.name not in body and html.escape(t.name) not in body:
             p.append(f"live {label} {url}: 200 but the page does not name {t.name}")
-    qr = t.package / "listing" / "demo_qr.png"
-    if not qr.exists() or not qr_matches(qr, demo_url(t, base)):
-        p.append(f"listing/demo_qr.png (image 8) does not encode {demo_url(t, base)} (run the images step)")
-    for f in (t.package / "listing" / "listing.md", t.package / "customer" / "START_HERE.md"):
+    for f in (t.package / "listing" / LISTING_MD, t.package / "customer" / "START_HERE.md"):
         left = open_markers(f.read_text(encoding="utf-8"))
         if left:
             p.append(f"{f.relative_to(t.package)}: {len(left)} still open: {', '.join(left[:8])}{' …' if len(left) > 8 else ''}")
@@ -781,7 +697,7 @@ def host_warnings(base: str) -> list[str]:
     from urllib.parse import urlparse
     host = urlparse(base).hostname or ""
     if host.endswith(".vercel.app"):
-        return [f"start links, QR codes and image 8 use {host}, a temporary Vercel address: choose the final domain "
+        return [f"start links and QR codes use {host}, a temporary Vercel address: choose the final domain "
                 "(or commit to a permanent redirect from this one) before the first sale; buyers print these QR codes "
                 "(docs/05 §C)"]
     return []
@@ -791,20 +707,24 @@ def step_check(t: Theme, base: str, prepublish: bool = False) -> list[str]:
     """Returns problems (empty = all good) and prints a short report; warnings are printed, not counted."""
     p: list[str] = []
     pk = t.package
-    md = (pk / "listing" / "listing.md").read_text(encoding="utf-8")
+    md = (pk / "listing" / LISTING_MD).read_text(encoding="utf-8")
     f = listing_fields(md)
     p += [f"title: {x}" for x in title_problems(f["title"])]
     p += [f"tags: {x}" for x in tag_problems(f["tags"])]
     if re.search(r"\b(TBD|lorem)\b", md, re.I):
         p.append("listing.md: TBD/lorem left")
     imgs = sorted((pk / "listing" / "images").glob("*.png"))
-    if len(imgs) < 7:
-        p.append(f"{len(imgs)} listing images (need ≥ 7)")
+    if [i.stem for i in imgs] != IMAGES:
+        p.append(f"listing images {[i.stem for i in imgs]} (want {IMAGES})")
     if len(imgs) > ETSY["photos_max"]:
         p.append(f"{len(imgs)} listing images (Etsy max {ETSY['photos_max']})")
     for i in imgs:
         if Image.open(i).size != (2000, 2000):
             p.append(f"{i.name}: {Image.open(i).size} (want 2000×2000)")
+    # docs/15 §1 (off-platform): no QR code in the listing images (G065 removed image 8's demo QR)
+    left_qr = sorted(x.name for x in (pk / "listing").rglob("*qr*"))
+    if left_qr:
+        p.append(f"QR files in package/listing/: {left_qr} (no QR in the listing since G065)")
     v = pk / "listing" / "video.mp4"
     if not v.exists():
         p.append("no listing/video.mp4")
@@ -821,9 +741,6 @@ def step_check(t: Theme, base: str, prepublish: bool = False) -> list[str]:
     guide = (pk / "customer" / "START_HERE.md").read_text(encoding="utf-8")
     if start_url(t, base) not in guide:
         p.append("START_HERE.md does not contain the start link")
-    for name in STRIPS:
-        if f"img/{name}.jpg" not in guide:
-            p.append(f"START_HERE.md does not show img/{name}.jpg")
     gpdf = pk / "customer" / "START_HERE.pdf"
     if not gpdf.exists():
         p.append("no START_HERE.pdf")
@@ -855,7 +772,7 @@ def pdf_link_problems(pdf: Path, url: str) -> list[str]:
     return []
 
 
-STEPS = ["capture", "qr", "strips", "images", "video", "pdf", "check"]
+STEPS = ["capture", "qr", "images", "video", "pdf", "check"]
 
 
 def main(argv=None) -> int:
@@ -865,12 +782,13 @@ def main(argv=None) -> int:
     ap.add_argument("--base-url", default=BASE_URL, help="public base URL of the platform (default: %(default)s)")
     ap.add_argument("--no-fonts", action="store_true", help="do not download Google Fonts (system fonts)")
     ap.add_argument("--prepublish", action="store_true",
-                    help="check: also the live start link and demo, image 8's demo QR and no open [VERIFY]/[PLACEHOLDER] "
-                         "markers (must pass before the listing goes up)")
+                    help="check: also the live start link and demo and no open [VERIFY]/[PLACEHOLDER] markers (must pass "
+                         "before the listing goes up)")
+    ap.add_argument("--skip-capture", action="store_true", help="images: use the screens cached by the last run")
     a = ap.parse_args(argv)
     check_url(a.base_url)
     themes = list(THEMES.values()) if a.theme == "all" else [theme_of(a.theme)]
-    steps = ["qr", "strips", "images", "video", "pdf", "check"] if a.step == "all" else [a.step]
+    steps = ["qr", "images", "video", "pdf", "check"] if a.step == "all" else [a.step]
     bad = 0
     for t in themes:
         for s in steps:
@@ -880,11 +798,8 @@ def main(argv=None) -> int:
             elif s == "qr":
                 for x in step_qr(t, a.base_url):
                     print(f"  {x.relative_to(REPO)}")
-            elif s == "strips":
-                for x in step_strips(t):
-                    print(f"  {x.relative_to(REPO)}")
             elif s == "images":
-                for x in step_images(t, not a.no_fonts):
+                for x in step_images(t, not a.skip_capture):
                     print(f"  {x.relative_to(REPO)}  {x.stat().st_size / 1_000_000:.1f} MB")
             elif s == "video":
                 x = step_video(t, not a.no_fonts)

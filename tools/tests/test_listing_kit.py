@@ -1,16 +1,18 @@
-"""tools/listing_kit.py tests (G059).
+"""tools/listing_kit.py tests (G059; listing images G065).
 
   python3 tools/tests/test_listing_kit.py
 
-Covered: listing.md field parsing and Etsy title/tag rules (also on the real 01 and 03 listings, plus the honesty rules
+Covered: listing field parsing and Etsy title/tag rules (also on the real 01 and 03 listing_v3.md, plus the honesty rules
 of the G059 review: no "personal start link", no "all text", no trademark tag, US spelling), the real QR of a start link
 (re-encoded and compared module by module; demo/placeholder hosts and http refused), template filling (every placeholder
-of every template has a value, unknown placeholders fail, text is escaped), guide strips (1–2 screens, same width, parts
-of a screen), the guide's HTML (cover, captioned figures, heading kept with its picture), the PDF link check (a PDF with
-no link fails), open-marker detection, `--prepublish` (offline: a fake fetch), the vercel.app warning, video rule checks,
-and — when the kit has been built — the full `check` of both themes. One template is rendered with Playwright when node +
-Playwright are available (skipped otherwise).
+of the video frame has a value, unknown placeholders fail, text is escaped), the G065 image set (the 7 GM03 images in the
+order gm03/build.py writes them, no QR or web address in their texts, every image listed in listing_v3.md §5), the guide's
+HTML (cover, captioned figures, heading kept with its picture), the PDF link check (a PDF with no link fails), open-marker
+detection, `--prepublish` (offline: a fake fetch), the vercel.app warning, video rule checks, and — when the kit has been
+built — the full `check` of both themes (7 images of 2000 × 2000, no QR file in package/listing/). The video frame is
+rendered with Playwright when node + Playwright are available (skipped otherwise).
 """
+import importlib.util
 import re
 import sys
 import tempfile
@@ -58,7 +60,7 @@ online rsvp
 
 def test_real_listings():
     for t in lk.THEMES.values():
-        p = t.package / "listing" / "listing.md"
+        p = t.package / "listing" / lk.LISTING_MD
         assert p.exists(), p
         md = p.read_text(encoding="utf-8")
         f = lk.listing_fields(md)
@@ -67,17 +69,20 @@ def test_real_listings():
         m = re.search(r"This title: (\d+) characters", md)
         assert m and int(m.group(1)) == len(f["title"]), (t.id, m and m.group(1), len(f["title"]))
         assert "<!-- listing-kit:media -->" in md
-        for ph in ("[PRICE]", "[SHOP NAME]", "[HOSTING PERIOD]", "[SUPPORT EMAIL]"):
+        for ph in ("[PRICE]", "[RESPONSE TIME]", "[REFUND POLICY]"):
             assert ph in md, (t.id, ph)
         guide = (t.package / "customer" / "START_HERE.md").read_text(encoding="utf-8")
         assert lk.start_url(t) in guide and f"({lk.start_url(t)})" in guide, t.id  # shown and clickable
         assert "img/start_qr_page.png" in guide
-        for name in lk.STRIPS:
-            assert f"img/{name}.jpg" in guide, (t.id, name)
+        # G065: the 7 images are listed in §5, image 7's "demo link in the description" is there, no QR image left
+        for n in lk.IMAGES:
+            assert f"`{n}.png`" in md, (t.id, n)
+        assert "08_live_demo" not in md and "image 8" not in md, t.id
+        assert lk.demo_url(t) in md.split("## 3. Tags")[0], (t.id, "demo link missing from the description")
         # the guide is buyer-facing: no internal markers
         assert "[VERIFY" not in guide and "TODO" not in guide, t.id
         # G059 review: honest product statements
-        for text, where in ((md, "listing.md"), (guide, "START_HERE.md")):
+        for text, where in ((md, lk.LISTING_MD), (guide, "START_HERE.md")):
             low = text.lower()
             assert "personal start link" not in low and "your start link is inside" not in low, (t.id, where)
             assert "all text" not in low and "all the text" not in low, (t.id, where)
@@ -86,7 +91,7 @@ def test_real_listings():
             assert "headings" in low and "english" in low, (t.id, where)
         assert "evite" not in " ".join(f["tags"]), t.id  # Evite is a trademark
         assert f["title"].count("Wedding") <= 1, (t.id, f["title"])
-        assert "registry links" not in guide and "**QR code**" in guide, t.id
+        assert "**QR code" in guide, t.id  # G091 rewrite: "**QR code for printed cards:**"; registry links exist since G068
 
 
 def test_qr(tmp: Path):
@@ -107,22 +112,19 @@ def test_qr(tmp: Path):
 def test_templates(tmp: Path):
     shots = tmp / "shots"
     for t in lk.THEMES.values():
-        values = lk.template_values(t, shots, {"qr.demo": "file:///x.png", "slot_x": "1", "slot_y": "2", "slot_w": "3",
-                                               "slot_h": "4", "slot_r": "5"}, title="t")
-        for f in list(lk.TEMPLATES.glob("*.html")):
+        values = lk.template_values(t, shots, {"slot_x": "1", "slot_y": "2", "slot_w": "3", "slot_h": "4", "slot_r": "5"},
+                                    title="t")
+        files = list(lk.TEMPLATES.glob("*.html"))
+        assert [f.name for f in files] == ["video_bg.html"], files  # G065: the 8 G059 image templates are gone
+        for f in files:
             out = lk.fill(f.read_text(encoding="utf-8"), values)
             assert "{{" not in out, (f.name, re.findall(r"\{\{[^}]*\}\}", out)[:3])
             assert t.name.replace("&", "&amp;") in out, (f.name, t.id)
-        for n in lk.IMAGES:
-            assert (lk.TEMPLATES / f"{n}.html").exists(), n
-        # every screen a template uses is one the capture step writes
-        used = set()
-        for f in lk.TEMPLATES.glob("*.html"):
-            used |= set(re.findall(r"\{\{\s*shot\.(\w+)\s*\}\}", f.read_text(encoding="utf-8")))
-        assert used <= set(lk.SHOTS), used - set(lk.SHOTS)
+        # every screen the kit uses is one the capture step writes, and the capture step writes no editor screens
         capture = lk.CAPTURE.read_text(encoding="utf-8")
         for s in lk.SHOTS:
             assert f"'{s}'" in capture, f"capture.ts does not write {s}"
+        assert "#section-" not in capture and "'b04_panel_top'" not in capture
     try:
         lk.fill("{{nope}}", {})
     except KeyError:
@@ -132,39 +134,27 @@ def test_templates(tmp: Path):
     assert lk.fill("<p>{{a}}</p>", {"a": "<b>&"}) == "<p>&lt;b&gt;&amp;</p>"
 
 
-def test_strip(tmp: Path):
-    shots = []
-    for i, c in enumerate([(200, 180, 170), (60, 90, 70), (240, 240, 230)]):
-        p = tmp / f"s{i}.jpg"
-        Image.new("RGB", (1170, 2532), c).save(p)
-        shots.append(p)
-    a = lk.make_strip([(shots[0], None)], tmp / "a.jpg")
-    b = lk.make_strip([(shots[0], None), (shots[1], None)], tmp / "b.jpg")
-    ia, ib = Image.open(a), Image.open(b)
-    assert ia.size == ib.size, (ia.size, ib.size)  # always two slots wide: every screen the same size in the PDF
-    assert ia.getpixel((5, 5)) == (255, 255, 255) or sum(ia.getpixel((5, 5))) > 750  # white margin
-    mid = ia.getpixel((ia.width // 2, ia.height // 2))
-    assert abs(mid[0] - 200) < 8, mid  # the single screen sits in the middle
-    # each screen ≥ 42 % of the text width (the PDF shows the picture at 93.5 % of the text width, GUIDE_CSS)
-    assert "width: 93.5%" in lk.GUIDE_CSS
-    assert lk.STRIP["w"] / ib.width * 0.935 >= 0.42, ib.width
-    try:
-        lk.make_strip([(s, None) for s in shots], tmp / "c.jpg")
-    except ValueError:
-        pass
-    else:
-        raise AssertionError("three screens accepted")
-    # a part of a screen: CSS px of the 390 px wide screen (here DPR 3)
-    part = lk.screen_part(shots[0], (0, 300))
-    assert part.size == (1170, 900), part.size
-    assert lk.screen_part(shots[0], (0, 2000)).height == 2532  # clamped to the screen
-    # a bottom sheet: the plain rows above it are dropped
-    sheet = Image.new("RGB", (1170, 2532), (246, 243, 238))
-    sheet.paste((255, 255, 255), (0, 600, 1170, 2532))
-    sp = tmp / "sheet.jpg"
-    sheet.save(sp, quality=95)
-    top = lk.screen_part(sp, "sheet")
-    assert 2532 - 600 <= top.height <= 2532 - 600 + 12, top.height
+def gm03():
+    """tools/listing_templates/gm03/build.py under its own name (it imports G067's build.py as `build`)."""
+    spec = importlib.util.spec_from_file_location("gm03_build", lk.GM03)
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+def test_gm03_set():
+    g = gm03()
+    assert [f.removesuffix(".png") for f, _ in g.KIT] == lk.IMAGES
+    g.kaydet_v2()
+    assert g.v2.SIRA == [a for _, a in g.KIT]
+    for _, anahtar in g.KIT:
+        texts = " ".join(g.v2.GORSELLER[anahtar]["metin"]).lower()
+        # docs/15 §1: no QR and no web address on any listing image
+        assert "qr" not in texts.split() and "http" not in texts and ".app" not in texts and ".com" not in texts, anahtar
+    assert "description" in " ".join(g.v2.GORSELLER["demo"]["metin"])
+    for f in (lk.GM03.parent).glob("*.html"):
+        low = f.read_text(encoding="utf-8").lower()
+        assert "qr" not in re.findall(r"[a-z]+", low) and "canva" not in low, f.name
 
 
 def test_guide_html():
@@ -212,20 +202,17 @@ def test_render(tmp: Path):
         print("  render: node/Playwright missing — skipped")
         return
     t = lk.THEMES["olive-ivory"]
-    shots = t.package / "shots"
-    if not (shots / "g03_home_invitation.jpg").exists():
-        print("  render: no captured screens — skipped")
-        return
-    values = lk.template_values(t, shots, {"qr.demo": "", "title": "t"})
-    out = tmp / "inc.png"
-    lk._render_pages([(lk.fill((lk.TEMPLATES / "03_whats_included.html").read_text(encoding="utf-8"), values), out, 2000, 2000)],
+    values = lk.template_values(t, tmp, {"slot_x": "1450", "slot_y": "520", "slot_w": "444", "slot_h": "960",
+                                         "slot_r": "40"}, title="video")
+    out = tmp / "frame.png"
+    lk._render_pages([(lk.fill((lk.TEMPLATES / "video_bg.html").read_text(encoding="utf-8"), values), out, 2000, 2000)],
                      fonts=False)
     im = Image.open(out).convert("RGB")
     assert im.size == (2000, 2000)
-    # the screenshot really is in the picture (not a broken image): the phone area is not flat background
-    crop = im.crop((1300, 700, 1800, 1500))
+    # the theme's painted corner parts really are in the frame (not broken images): the corner is not flat background
     import numpy as np
-    assert len(np.unique(np.asarray(crop.resize((50, 80))).reshape(-1, 3), axis=0)) > 200
+    crop = im.crop((0, 0, 500, 500))
+    assert len(np.unique(np.asarray(crop.resize((50, 50))).reshape(-1, 3), axis=0)) > 200
 
 
 def test_built_kits():
@@ -241,8 +228,8 @@ def test_built_kits():
         # --prepublish, offline: a fake live site that answers with the theme's name → only the open markers remain
         live = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (200, f"<title>{t.name}</title>"))
         assert not any(x.startswith("live ") for x in live), live
-        assert not any("demo_qr" in x for x in live), live  # image 8's QR encodes the demo link
-        assert any("[SHOP NAME]" in x for x in live) and any("[VERIFY" in x for x in live), live
+        assert any("[RESPONSE TIME]" in x for x in live) and any("[VERIFY" in x for x in live), live
+        assert not list((t.package / "listing").rglob("*qr*")), t.id  # G065: no QR in the listing
         down = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (0, "URLError: proxy"))
         assert sum("could not connect" in x for x in down) == 2, down
         md_open = next(x for x in live if x.startswith("customer/START_HERE.md"))
@@ -261,9 +248,11 @@ def main():
     print("  test_video_rules: ok")
     test_guide_html()
     print("  test_guide_html: ok")
+    test_gm03_set()
+    print("  test_gm03_set: ok")
     with tempfile.TemporaryDirectory() as d:
         d = Path(d)
-        for test in (test_qr, test_templates, test_strip, test_pdf_checks, test_render):
+        for test in (test_qr, test_templates, test_pdf_checks, test_render):
             test(d)
             print(f"  {test.__name__}: ok")
     test_built_kits()

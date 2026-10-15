@@ -1,16 +1,12 @@
 {
   "tool": "tools/listing_templates/capture.ts (G059)",
   "theme": "olive-ivory",
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "server": "next start (local production build of this checkout), local adapter, temp data folder",
   "public_url_shown": "https://davetiye-platform-five.vercel.app",
   "viewport": "390x844, isMobile, touch, DPR 3 (screens) / 390x844 (recording)",
   "demo_site": "/avery-and-jordan — the theme's demo record (fictional) + 3 sample Q&A + 1 RSVP question; sample photos: collections/01_Olive_Ivory/assets/gpt/photos (PAKET 2)",
-  "buyer_site": "Elena & Marco, order 5550012345, elena.demo@example.test (fictional)",
   "notes": [
-    "edit key masked in b03_edit_link.jpg",
-    "QR replaced by a labelled box in b10_live_qr.jpg (local-only site)",
-    "dimmed overlay behind the sheets of b06/b09/b10 replaced by the editor background",
     "stills: nothing cut at the top edge or by the bottom bar, nothing behind a see-through menu (clearEdges; a picture is cut shorter when no position works)",
     "guest who fills in the form: Sofia Martin (fictional)",
     "particle layers (.petal-layer, .accent-layer) hidden in the stills, not in the recording"
@@ -58,7 +54,7 @@
     },
     {
       "name": "g10_rsvp_form.jpg",
-      "what": "Guest: RSVP form with the couple's question (Meal choice) (cut at 17–769 px: nothing clean to show at the edges)"
+      "what": "Guest: RSVP form with the couple's question (Meal choice) (cut at 15–769 px: nothing clean to show at the edges)"
     },
     {
       "name": "g11_rsvp_sent.jpg",
@@ -67,58 +63,6 @@
     {
       "name": "d01_demo_home.jpg",
       "what": "Public demo of the design: home (sample names, placeholder photos)"
-    },
-    {
-      "name": "b01_start.jpg",
-      "what": "Buyer: /start page (design preview + the order number field with its hint)"
-    },
-    {
-      "name": "b02_start_form.jpg",
-      "what": "Buyer: /start form filled (fictional order number)"
-    },
-    {
-      "name": "b03_edit_link.jpg",
-      "what": "Buyer: \"Save this link\" (key masked in this picture)"
-    },
-    {
-      "name": "b04_panel_top.jpg",
-      "what": "Buyer: editor, top (draft, Couple section)"
-    },
-    {
-      "name": "b05_panel_date.jpg",
-      "what": "Buyer: editor, Date & time section"
-    },
-    {
-      "name": "b06_panel_crop.jpg",
-      "what": "Buyer: editor, cropping a photo to the design's shape (plain background behind the sheet)"
-    },
-    {
-      "name": "b07_panel_photos.jpg",
-      "what": "Buyer: editor, Photos section after the upload"
-    },
-    {
-      "name": "b08_panel_preview.jpg",
-      "what": "Buyer: editor, preview of the draft"
-    },
-    {
-      "name": "b09_publish_notes.jpg",
-      "what": "Buyer: \"Before you publish\" (sample text still in place; plain background behind the sheet)"
-    },
-    {
-      "name": "b10_live_qr.jpg",
-      "what": "Buyer: \"Your website is live\" + QR (the QR is replaced by a labelled box in this picture)"
-    },
-    {
-      "name": "p01_panel_replies.jpg",
-      "what": "Couple: editor, RSVP replies with counts"
-    },
-    {
-      "name": "p02_panel_csv.jpg",
-      "what": "Couple: editor, CSV download of all replies"
-    },
-    {
-      "name": "p03_panel_questions.jpg",
-      "what": "Couple: editor, questions for your guests"
     }
   ],
   "checks": [
@@ -153,30 +97,6 @@
     {
       "name": "demo: /start/demo/<theme>/home 200",
       "ok": true
-    },
-    {
-      "name": "buyer: /start 200",
-      "ok": true
-    },
-    {
-      "name": "buyer: edit link uses the public base URL",
-      "ok": true,
-      "detail": "https://davetiye-platform-five.vercel.app/edit/elena-and-marco?k=…"
-    },
-    {
-      "name": "buyer: live link = public base URL + address",
-      "ok": true,
-      "detail": "https://davetiye-platform-five.vercel.app/elena-and-marco"
-    },
-    {
-      "name": "panel: replies listed",
-      "ok": true,
-      "detail": "Replies Refresh 5 replies · 4 attending (9 guests) · 1 not attending Sofia Martin — yes, 2 guests Me"
-    },
-    {
-      "name": "panel: CSV export has the replies and the Meal choice column",
-      "ok": true,
-      "detail": "200"
     },
     {
       "name": "recording: opening.webm written",

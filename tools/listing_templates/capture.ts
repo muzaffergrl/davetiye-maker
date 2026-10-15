@@ -11,10 +11,7 @@
 //      sample questions & answers and one RSVP question ("Meal choice") so these features show. Posts four fictional
 //      guest replies through the public RSVP API.
 //   2. Guest screens at 390 × 844 (isMobile, touch, DPR 3): envelope, home, story, details (schedule, venue, Q&A), RSVP.
-//   3. Buyer screens (DPR 3): /start, form, edit link (the private key is masked in the picture), panel, photo crop,
-//      photos, preview, "Before you publish", live link + QR (the QR is replaced by a labelled box: it would point at a
-//      site that only exists in this local run), and the RSVP replies of the seeded site in its panel. Bottom sheets
-//      are shown on the editor's plain background instead of the dimmed page.
+//   3. The public demo of the design (d01). (Buyer/editor screens: G065 moved them to gm03/capture.ts, panel v2.)
 //   Every still is checked by clearEdges(): nothing cut by the top edge or by the bottom bar, nothing behind a
 //   see-through menu; the page is moved a little, or the picture cut shorter, when needed.
 //   4. The opening (tap → envelope opens → home → invitation card) recorded at 390 × 844 → opening.webm.
@@ -23,7 +20,7 @@
 // Exit code 1 when a step fails (the files written so far stay).
 
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -90,8 +87,6 @@ if (seed.status !== 0) {
   console.error(`seed failed:\n${seed.stdout}\n${seed.stderr}`);
   process.exit(1);
 }
-const keys = JSON.parse(readFileSync(path.join(dataDir, 'seed-keys.json'), 'utf8'));
-const DEMO_EDIT_KEY: string = keys.editKey;
 
 const server = startNext({ port: PORT, dataDir, env: { DATA_ADAPTER: 'local', PLATFORM_PUBLIC_URL: PUBLIC_URL } });
 const BASE = server.base;
@@ -236,18 +231,6 @@ async function shot(page: any, name: string, what: string, opts: EdgeOpts & { ed
   shots.push({ name: `${name}.jpg`, what: clip ? `${what} (cut at ${clip.y}–${clip.y + clip.height} px: nothing clean to show at the edges)` : what });
   console.log(`shot  ${name}.jpg — ${what}${clip ? ` [clip ${clip.y}–${clip.y + clip.height}]` : ''}`);
 }
-/** A bottom sheet (crop, "Before you publish", "Your website is live") without the dimmed page behind it: the
- *  editor's plain background takes the place of the dark overlay; the sheet itself is unchanged. */
-async function plainBehindSheet(page: any) {
-  await page.evaluate(() => {
-    // the open sheet (Sheet.tsx: role="dialog" + data-testid; the preview pane is a dialog too, always in the page)
-    const sheet = document.querySelector('[role="dialog"][data-testid]');
-    const overlay = sheet?.parentElement as HTMLElement | null;
-    if (!overlay) return;
-    const bg = getComputedStyle(document.querySelector('[data-panel]') ?? document.body).backgroundColor;
-    overlay.style.background = bg && bg !== 'rgba(0, 0, 0, 0)' ? bg : '#f6f3ee';
-  });
-}
 /** Scroll through the page so scroll-triggered entrances run, then back to the top. */
 async function revealAll(page: any) {
   await page.evaluate(async () => {
@@ -272,27 +255,12 @@ async function centerOn(page: any, sel: string, block: 'center' | 'start' = 'cen
   }, { s: sel, b: block, o: offset });
   await page.waitForTimeout(settle);
 }
-async function waitSaved(page: any) {
-  await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') !== 'saved', null, { timeout: 1500 }).catch(() => undefined);
-  await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
-}
-async function openSection(page: any, id: string) {
-  const button = page.locator(`#section-${id}`);
-  if ((await button.getAttribute('aria-expanded')) !== 'true') await button.click();
-  await page.evaluate((i: string) => {
-    const el = document.getElementById(`section-${i}`);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 8, behavior: 'instant' });
-  }, id);
-  await page.waitForTimeout(400);
-}
 
 let browser: any;
 let failed = false;
 const device = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true };
 /** The guest who fills in the RSVP form in the pictures (fictional; shown in the form and in the replies list). */
 const GUEST = 'Sofia Martin';
-const HERO = Object.hasOwn(env.manifest.photos, 'hero_portrait') ? 'hero_portrait' : Object.keys(env.manifest.photos)[0];
-const PHOTO = env.photoFiles[HERO] ?? Object.values(env.photoFiles)[0];
 try {
   await waitForServer(`${BASE}/`, 40_000, server);
   // /dev/shm is small in containers: DPR 3 pages of 03 crashed the renderer twice without this flag
@@ -410,123 +378,8 @@ try {
     await ctx.close();
   }
 
-  // ---------------------------------------------------------------- buyer: /start -> panel -> publish
-  {
-    const ctx = await browser.newContext(device);
-    ctx.setDefaultTimeout(12_000);
-    const page = await ctx.newPage();
-    const res = await page.goto(`${BASE}/start?theme=${THEME}`, { waitUntil: 'networkidle' });
-    check('buyer: /start 200', res.status() === 200);
-    await page.frameLocator('iframe').locator('body').waitFor();
-    await page.waitForTimeout(2600);
-    // down to the end of the order number's hint ("Find it in your Etsy order confirmation email, or on Etsy …"), with
-    // nothing cut at the top
-    await shot(page, 'b01_start', 'Buyer: /start page (design preview + the order number field with its hint)', {
-      keep: ['#start-order-hint'], deltas: Array.from({ length: 31 }, (_, i) => i * 10),
-    });
-    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-    await page.fill('#start-order', '5550012345');
-    await page.fill('#start-email', 'elena.demo@example.test');
-    await page.fill('#start-name1', 'Elena');
-    const two = (await page.locator('#start-name2').count()) > 0;
-    if (two) await page.fill('#start-name2', 'Marco');
-    await page.waitForSelector('[data-slug-available]');
-    await centerOn(page, '#start-email', 'start', -90, 600);
-    await shot(page, 'b02_start_form', 'Buyer: /start form filled (fictional order number)');
-    await page.click('button[type="submit"]');
-    await page.waitForSelector('[data-edit-link]', { timeout: 15_000 });
-    const editUrl: string = await page.inputValue('[data-edit-link]');
-    check('buyer: edit link uses the public base URL', editUrl.startsWith(`${PUBLIC_URL}/edit/`), editUrl.replace(/k=.*/, 'k=…'));
-    // mask the private key in the picture only
-    await page.evaluate(() => {
-      const el = document.querySelector('[data-edit-link]') as HTMLInputElement | HTMLTextAreaElement;
-      el.value = el.value.replace(/k=[A-Za-z0-9_-]+/, 'k=••••••••••••••••');
-    });
-    await shot(page, 'b03_edit_link', 'Buyer: "Save this link" (key masked in this picture)');
-    const localEdit = editUrl.replace(PUBLIC_URL, BASE);
-    await page.goto(localEdit, { waitUntil: 'load' });
-    await page.waitForSelector('[data-panel]');
-    await page.waitForTimeout(800);
-    await shot(page, 'b04_panel_top', 'Buyer: editor, top (draft, Couple section)', { scroll: false });
-    await openSection(page, 'date');
-    await shot(page, 'b05_panel_date', 'Buyer: editor, Date & time section', { keep: ['#section-date'], deltas: [0, -8, 8, 16, 24] });
-    await openSection(page, 'photos');
-    await page.setInputFiles(`input[data-slot="${HERO}"]`, PHOTO);
-    await page.waitForSelector('[data-testid="cropper"] img');
-    await page.waitForTimeout(900);
-    await plainBehindSheet(page);
-    await shot(page, 'b06_panel_crop', 'Buyer: editor, cropping a photo to the design\'s shape (plain background behind the sheet)', { edges: false });
-    await page.click('[data-crop-confirm]');
-    await page.waitForSelector(`[data-photo-slot="${HERO}"] img`, { timeout: 25_000 });
-    await waitSaved(page);
-    await openSection(page, 'photos');
-    await shot(page, 'b07_panel_photos', 'Buyer: editor, Photos section after the upload', { keep: ['#section-photos'], deltas: [0, -8, 8, 16, 24] });
-    await page.click('[data-open-preview]');
-    await page.waitForTimeout(4500);
-    await shot(page, 'b08_panel_preview', 'Buyer: editor, preview of the draft', { edges: false });
-    await page.click('[data-close-preview]').catch(() => page.keyboard.press('Escape'));
-    await page.waitForTimeout(600);
-    await page.click('[data-publish]');
-    await page.waitForSelector('[data-testid="live"], [data-testid="notes"]', { timeout: 15_000 });
-    if (await page.locator('[data-testid="notes"]').count()) {
-      await plainBehindSheet(page);
-      await shot(page, 'b09_publish_notes', 'Buyer: "Before you publish" (sample text still in place; plain background behind the sheet)', { edges: false });
-      const anyway = page.locator('[data-publish-anyway]');
-      await anyway.scrollIntoViewIfNeeded();
-      await anyway.click();
-    }
-    await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
-    const live = await page.locator('[data-live-link]').innerText();
-    check('buyer: live link = public base URL + address', live === `${PUBLIC_URL}/${two ? 'elena-and-marco' : 'elena'}`, live);
-    // the QR would open a site that exists only in this local run: a plain, labelled box takes its place in the picture
-    await page.evaluate(() => {
-      const svg = document.querySelector('[data-testid="live"] svg[role="img"]') as SVGElement | null;
-      if (!svg) return;
-      const r = svg.getBoundingClientRect();
-      const box = document.createElement('div');
-      box.textContent = 'QR code (hidden in this picture)';
-      box.setAttribute('data-lk-qr', '');
-      box.style.cssText = `width:${r.width}px;height:${r.height}px;display:grid;place-items:center;text-align:center;padding:16px;` +
-        'box-sizing:border-box;background:#eee9e1;border:1px solid #cbc1b2;border-radius:10px;color:#655f56;font:500 15px/1.4 system-ui,sans-serif;';
-      svg.replaceWith(box);
-    });
-    await page.locator('[data-lk-qr]').scrollIntoViewIfNeeded();
-    await plainBehindSheet(page);
-    await shot(page, 'b10_live_qr', 'Buyer: "Your website is live" + QR (the QR is replaced by a labelled box in this picture)', { edges: false });
-    await ctx.close();
-  }
-
-  // ---------------------------------------------------------------- panel of the seeded site: RSVP replies + questions
-  {
-    const ctx = await browser.newContext(device);
-    ctx.setDefaultTimeout(12_000);
-    const page = await ctx.newPage();
-    await page.goto(`${BASE}/edit/${SLUG}?k=${DEMO_EDIT_KEY}`, { waitUntil: 'load' });
-    await page.waitForSelector('[data-panel]');
-    await openSection(page, 'rsvp');
-    await page.click('[data-refresh-replies]').catch(() => undefined);
-    await page.waitForSelector('[data-replies] li', { timeout: 8000 }).catch(() => null);
-    await page.waitForTimeout(600);
-    await centerOn(page, '[data-replies]', 'start', -96, 500);
-    const listed = await page.locator('[data-replies]').innerText().catch(() => '');
-    check('panel: replies listed', listed.includes('Olivia Bennett') && listed.includes(GUEST), listed.replace(/\s+/g, ' ').slice(0, 100));
-    await shot(page, 'p01_panel_replies', 'Couple: editor, RSVP replies with counts', { keep: ['[data-replies] li'] });
-    const csv = page.getByText('Download all replies (CSV)');
-    if (await csv.count()) {
-      await csv.first().evaluate((el: Element) => el.setAttribute('data-lk-csv', ''));
-      await centerOn(page, '[data-lk-csv]', 'center', 120, 500);
-      await shot(page, 'p02_panel_csv', 'Couple: editor, CSV download of all replies', { keep: ['[data-lk-csv]'] });
-    }
-    if (await page.$('[data-rsvp-questions]')) {
-      await centerOn(page, '[data-rsvp-questions]', 'start', -12, 500);
-      await shot(page, 'p03_panel_questions', 'Couple: editor, questions for your guests', { deltas: [0, -8, 8, 16, 24, 32] });
-    }
-    const res = await fetch(`${BASE}/api/rsvp/${SLUG}/export`, { headers: { authorization: `Bearer ${DEMO_EDIT_KEY}` } });
-    const text = (await res.text()).replace(/^﻿/, '');
-    writeFileSync(path.join(OUT as string, 'replies_sample.csv'), text);
-    check('panel: CSV export has the replies and the Meal choice column', res.status === 200 && /"Meal choice"/.test(text) && text.includes('Olivia Bennett'), String(res.status));
-    await ctx.close();
-  }
+  // (G065) The buyer and panel screens of G059 (b01–b10, p01–p03) are gone: the editor changed (panel v2, hash views),
+  // START HERE has no step pictures since G091, and the listing's editor/RSVP screens come from gm03/capture.ts.
 
   // ---------------------------------------------------------------- opening recording (390 × 844)
   // Playwright records CSS pixels: a larger `size` (or a higher deviceScaleFactor) only pads the frames, it does not
@@ -582,8 +435,7 @@ writeFileSync(
       public_url_shown: PUBLIC_URL,
       viewport: '390x844, isMobile, touch, DPR 3 (screens) / 390x844 (recording)',
       demo_site: `/${SLUG} — the theme's demo record (fictional) + 3 sample Q&A + 1 RSVP question; sample photos: ${env.photosSource || 'none'}`,
-      buyer_site: 'Elena & Marco, order 5550012345, elena.demo@example.test (fictional)',
-      notes: ['edit key masked in b03_edit_link.jpg', 'QR replaced by a labelled box in b10_live_qr.jpg (local-only site)', 'dimmed overlay behind the sheets of b06/b09/b10 replaced by the editor background', `stills: nothing cut at the top edge or by the bottom bar, nothing behind a see-through menu (clearEdges; a picture is cut shorter when no position works)`, `guest who fills in the form: ${GUEST} (fictional)`, `particle layers (${PARTICLES}) hidden in the stills, not in the recording`, ...env.notes],
+      notes: [`stills: nothing cut at the top edge or by the bottom bar, nothing behind a see-through menu (clearEdges; a picture is cut shorter when no position works)`, `guest who fills in the form: ${GUEST} (fictional)`, `particle layers (${PARTICLES}) hidden in the stills, not in the recording`, ...env.notes],
       shots,
       checks,
     },

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LC5 rsvp</title>
+<style>{{fonts_css}}</style>
+<style>{{base_css}}</style>
+<style>
+  /* GM03 lc5_rsvp: başlık üstte ortada; iki gerçek ekran (dizüstünde yeni panelin Guests sayfası: sayılar, sorunun
+     yanıtları, Download list; telefonda misafirin RSVP sayfası), her birinin altında hap; altta not; logo altta ortada */
+  .h1 { top: {{h1_top}}px; font-size: 210px; }
+  .pill { position: absolute; top: {{pills_top}}px; transform: translateX(-50%); height: 124px; font-size: 54px; }
+  .pill.l { left: {{pill_l}}px; }
+  .pill.r { left: {{pill_r}}px; }
+  .note { position: absolute; top: {{foot_top}}px; width: max-content; white-space: nowrap;
+          font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 58px; color: var(--anchor);
+          padding: 18px 44px; border-radius: 999px; background: rgba(250, 247, 240, 0.86); }
+  .logo { left: 50%; transform: translateX(-50%); bottom: {{logo_bottom}}px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <img class="bg" src="{{bg}}" alt="">
+  <div class="h1 center-x" data-kutu="baslik" data-fit="1820">RSVPs in one place</div>
+  <span class="pill l" data-kutu="hap">You see every answer</span>
+  <span class="pill r" data-kutu="hap">Guests reply</span>
+  <div class="note center-x" data-kutu="not" data-fit="1700">Download your guest list anytime</div>
+  <div class="logo chip" data-kutu="logo">{{logo}}</div>
+</div>
+<script>{{fit_js}}</script>
+</body>
+</html>

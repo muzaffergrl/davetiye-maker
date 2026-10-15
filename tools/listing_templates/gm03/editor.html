@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LC4 editor</title>
+<style>{{fonts_css}}</style>
+<style>{{base_css}}</style>
+<style>
+  /* GM03 lc4_editor: iki satırlı başlık sol üstte (ağır + ince), solda dört hap (GPT LI ikonu + iş), telefon sağda
+     elde ve ekranında yeni panelin "Edit your website" sayfası; logo sol altta. Comp'taki haplardan telefona giden
+     ince bağlantı çizgileri çizilmedi (K21: çizgi süs olurdu; haplar telefonun yanında yeterince okunuyor). */
+  .h1 { left: {{pills_left}}px; top: {{h1_top}}px; font-size: 196px; text-align: left; }
+  .sub { left: {{pills_left}}px; top: {{sub_top}}px; font-size: 150px; }
+  .col { position: absolute; left: {{pills_left}}px; top: {{pills_top}}px; display: flex; flex-direction: column;
+         gap: {{pill_gap}}px; width: calc({{col_right}}px - {{pills_left}}px); align-items: flex-start; }
+  .pill { height: 150px; padding: 0 56px 0 26px; gap: 30px; font-size: 56px; justify-content: flex-start; }
+  .pill .ic { width: 98px; height: 98px; border-radius: 50%; background: var(--paper); padding: 10px; object-fit: contain; }
+  .logo { left: {{pills_left}}px; bottom: 84px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <img class="bg" src="{{bg}}" alt="">
+  <div class="h1" data-kutu="baslik" data-fit="1700">Edit everything</div>
+  <div class="sub" data-kutu="alt_satir" data-fit="1300">from your phone</div>
+  <div class="col">
+    {{pills}}
+  </div>
+  <div class="logo chip" data-kutu="logo">{{logo}}</div>
+</div>
+<script>{{fit_js}}</script>
+</body>
+</html>

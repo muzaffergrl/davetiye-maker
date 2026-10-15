@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LC6 included</title>
+<style>{{fonts_css}}</style>
+<style>{{base_css}}</style>
+<style>
+  /* GM03 lc6_included: başlık üstte, 4 × 2 kart (GPT LI ikonu + ad), logo altta ortada; zemin sitenin kendi sayfası
+     (süsler köşelerde, LC3 ile aynı kırpım). Sekiz özelliğin hepsi platformun bugün yaptığı (docs/05 §E). */
+  .h1 { top: {{h1_top}}px; font-size: 220px; }
+  .grid { position: absolute; top: {{grid_top}}px; left: 50%; transform: translateX(-50%);
+          display: grid; grid-template-columns: repeat(4, 400px); gap: 34px; }
+  .card { height: 500px; border-radius: 44px; background: rgba(253, 251, 247, 0.92);
+          box-shadow: 0 22px 56px rgba(43, 21, 38, 0.12), 0 2px 8px rgba(43, 21, 38, 0.05);
+          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 30px 18px; }
+  .card .ic { width: 230px; height: 230px; object-fit: contain; }
+  .label { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 58px; line-height: 1.08; letter-spacing: -0.02em;
+           color: var(--anchor); text-align: center; }
+  .logo { left: 50%; transform: translateX(-50%); bottom: {{logo_bottom}}px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <img class="bg" src="{{bg}}" alt="">
+  <div class="h1 center-x" data-kutu="baslik" data-fit="1700">What's included</div>
+  <div class="grid">
+    {{cards}}
+  </div>
+  <div class="logo chip" data-kutu="logo">{{logo}}</div>
+</div>
+<script>{{fit_js}}</script>
+</body>
+</html>

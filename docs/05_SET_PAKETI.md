@@ -30,8 +30,8 @@ Pakette **yok**: basılı davetiye, video, özel alan adı, müzik, yazı tipi d
 
 | # | Parça | Dosya | Not |
 |---|---|---|---|
-| B1 | İlan metni | `listing/listing.md` → güncel metin `listing/listing_v3.md` (G091; docs/19 §4 iskeleti; onaylanınca `listing_kit.py` ona geçer) | §0 durum tablosu · başlık (≤ 140) · açıklama · 13 etiket (≤ 20) · kategori/nitelikler · görsel sırası + alt metin · video · SSS · alıcı mesajı · yayın öncesi kontrol listesi. Doğrulanmamış iddia `[VERIFY]`, ticari alan `[PLACEHOLDER]` |
-| B2 | İlan görselleri | `listing/images/*.png` | ≥ 7, 2000 × 2000. Şu an 8: kapak, misafir sayfaları, What's included, How it works, editör, RSVP, Details, canlı demo QR (`listing/demo_qr.png`). Yalnız yerleşim + tipografi (K21); tema kendi GPT parçaları (kâğıt, köşe çiçekleri) ve gerçek ekran görüntüleri; çizilmiş dekor ve rakip görseli yok. Telefon çerçevesi GPT mockup'ı (Paket 3) gelene kadar çerçevesiz, yuvarlatılmış ekran. **Kapak** arama sonucu boyutunda (~300 px) okunmalı: tema adı + "Wedding Website · RSVP" (68 px) + üç etiket ("No Canva needed · RSVP built in · Live demo", 50 px), hepsi y = 250–1750 arasında (olası 4:3 orta kırpma); ilan PDF'inde kapağın 300 px ve 4:3 önizlemesi var. Yazılar telefonda okunur boyda (Etsy görseli ~390 px gösterir: alt yazı ≥ 40 px, not ≥ 38 px) |
+| B1 | İlan metni | `listing/listing_v3.md` (G091; docs/19 §4 iskeleti; `listing_kit.py` G065'ten beri bunu okur; `listing.md` eski kayıt) | §0 durum tablosu · başlık (≤ 140) · açıklama · 13 etiket (≤ 20) · kategori/nitelikler · görsel sırası + alt metin · video · SSS · alıcı mesajı · yayın öncesi kontrol listesi. Doğrulanmamış iddia `[VERIFY]`, ticari alan `[PLACEHOLDER]` |
+| B2 | İlan görselleri | `listing/images/01..07*.png` (kopyası + önizleme `listing_v2/`) | **7 görsel, 2000 × 2000, BKE Studio GM03 düzeni** (G067 + G065): 01 kapak (LC1), 02 sayfalar (LC2), 03 How it works (LC3), 04 editör (LC4), 05 RSVP (LC5: laptopta Guests görünümü + telefonda misafir RSVP), 06 What's included (LC6), 07 canlı demo (LC7). Sahneler tasarımın PAKET 3 GPT fotoğrafları; ekranlar yerel production build'den gerçek ekran (misafir sayfaları + güncel editör, kurgu isimler/yanıtlar). **Hiçbir görselde QR ya da web adresi yok** (docs/15 §1): 07 "Open the demo link in the description" der, demo linki açıklamada (`TRY THE LIVE DEMO`). Yazılar yalnız yerleşim + tipografi (K21); `gm03/build.py` denetimi: ölçü, yeşil kalıntı yok, metin birebir, yazı ekrana/çerçeveye binmez, yazılar birbirine binmez, kapak başlığı 4:3 kırpımın içinde. İlan PDF'inde kapağın 300 px ve 4:3 önizlemesi var |
 | B3 | İlan videosu | `listing/video.mp4` | Temanın açılış kaydından: 1080 × 1080, H.264, sessiz, 5–15 s, ≤ 100 MB |
 | B4 | İlan PDF'i | `listing/listing_<tema>.pdf` | B1'in tamamı + görsellerin küçükleri + video bilgisi (kare, süre, boyut, kural kontrolü) |
 | B5 | Kaynak ekranlar | `shots/` | `capture.ts` çıktısı: 26 ekran (JPEG, 390 px, DPR 3), `opening.webm`, `capture.json` (ayarlar + kontroller), örnek CSV |
@@ -42,31 +42,32 @@ Pakette **yok**: basılı davetiye, video, özel alan adı, müzik, yazı tipi d
 cd platform && npm ci && npm run build && cd ..          # bir kez (yerel üretim build'i; yayın yok)
 export NODE_PATH=/opt/node22/lib/node_modules PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers
 python3 tools/listing_kit.py capture --theme <tema>      # gerçek ekranlar + açılış kaydı → package/shots/
-python3 tools/listing_kit.py all --theme <tema>          # qr, strips, images, video, pdf, check
+python3 tools/listing_kit.py all --theme <tema>          # qr, images, video, pdf, check
 python3 tools/tests/test_listing_kit.py                  # araç testleri
 ```
 
 - `capture` (`tools/listing_templates/capture.ts`): yerel `next start`, geçici veri klasörü. Temanın demo kaydı (kurgu isimler,
-  PAKET 2 örnek fotoğrafları) + 3 örnek SSS + 1 RSVP sorusu yayında; 4 kurgu misafir yanıtı API'den. Misafir ekranları,
-  `/start` → panel → foto → önizleme → yayın akışı, panelde yanıtlar, tema demosu ve açılış kaydı. `PLATFORM_PUBLIC_URL` = canlı
-  taban adres (ekranlardaki adresler gerçek biçimde görünsün). Düzenleme anahtarı resimde maskelenir; yerel siteye giden QR
-  yerine "QR code (hidden in this picture)" kutusu konur; alt sayfaların (kırpma, "Before you publish", yayın) arkasındaki
-  karartma panelin düz zeminiyle değişir; parçacık katmanları (düşen yaprak) durağan resimlerde gizlenir. Her durağan ekran
-  `clearEdges()` denetiminden geçer: üst kenarda kesik yazı/alan yok, arkası görünen menünün (tema 01) arkasında yazı ya da
-  foto yok; temiz konum yoksa ekran menünün üst kenarından kısa kesilir (resim yanıltmaz, yalnız kısalır).
-- Metinler (`START_HERE.md`, `listing.md`) elle yazılır; araç yalnız dosya üretir. `listing.md` içindeki
+  PAKET 2 örnek fotoğrafları) + 3 örnek SSS + 1 RSVP sorusu yayında; 4 kurgu misafir yanıtı API'den. Misafir ekranları, tema demosu
+  ve açılış kaydı (kılavuz kapağı `g01`, ilan videosu `opening.webm`). G059'un alıcı/panel ekranları (`b01`–`b10`, `p01`–`p03`)
+  G065'te çıkarıldı (panel v2'de kırılıyordu); `shots/` içindeki eski kopyaları yalnız satış sitesi (`platform/lib/marketing/designs.ts`)
+  kullanıyor. Parçacık katmanları durağan resimlerde gizlenir; her durağan ekran `clearEdges()` denetiminden geçer.
+- `images` (`tools/listing_templates/gm03/build.py`, G065): G067'nin `tools/listing_v2/build.py`'sini (01/02/03/07) çalıştırır,
+  04/05/06'yı kendisi kurar; editör ve Guests ekranlarını `gm03/capture.ts` panel v2'den çeker (hash görünümleri, 5 kurgu yanıt +
+  "Meal choice" sorusu). `--skip-capture` önbellekteki ekranları kullanır.
+- Metinler (`START_HERE.md`, `listing_v3.md`) elle yazılır; araç yalnız dosya üretir. `listing_v3.md` içindeki
   `<!-- listing-kit:media -->` satırının yerine PDF'te görsel küçükleri ve video bilgisi gelir.
 - Başlat linki tabanı `LISTING_BASE_URL` (varsayılan `https://davetiye-platform-five.vercel.app`). **Alan adı ilk satıştan önce
   kesinleşmeli** (ya da bu adresten kalıcı yönlendirme taahhüt edilmeli; K26: alan adı şimdilik alınmıyor, yani ilk satışlar bu
   adresle olursa ileride alan adına geçerken bu adresten kalıcı yönlendirme şart): satılmış START HERE PDF'leri ve özellikle alıcıların
   kendi davetiyelerine bastırdığı QR'lar (kılavuz adım 6) `davetiye-platform-five.vercel.app/<adres>`'e bağlı; satıştan sonra alan
   adı değişirse yönlendirme olmadan hepsi kırılır. Adreste Türkçe "davetiye" ve markasız `vercel.app` var (alıcı güveni zayıf).
-  Alan adı değişince bütün START HERE PDF'leri, QR'lar ve 4./5./8. görseller yeniden üretilir. `check`, taban `*.vercel.app`
+  Alan adı değişince bütün START HERE PDF'leri ve QR'lar yeniden üretilir (ilan görsellerinde adres yok). `check`, taban `*.vercel.app`
   iken uyarı yazar.
 - `check`: başlık/etiket kuralları, görsel sayısı/ölçüsü, video kuralları (süre, boyut, ses yok, H.264), QR'ın başlat linkini
   modül modül kodladığı, PDF'te tıklanabilir başlat linki (linksiz PDF de hata), PDF ≤ 20 MB.
-- `check --prepublish` (ilan yüklenmeden önce): canlı başlat linki ve demo 200 + sayfada tema adı; 8. görselin demo QR'ı
-  (`listing/demo_qr.png`) demo linkini kodluyor; `listing.md`, `START_HERE.md` ve iki PDF'te `[VERIFY …]` ya da köşeli
+- `check` ayrıca: görseller tam olarak 7 GM03 dosyası; `package/listing/` altında `*qr*` dosyası yok (G065).
+- `check --prepublish` (ilan yüklenmeden önce): canlı başlat linki ve demo 200 + sayfada tema adı; `listing_v3.md`,
+  `START_HERE.md` ve iki PDF'te `[VERIFY …]` ya da köşeli
   parantezli ticari yer tutucu (`[SHOP NAME]`, `[PRICE]` …) kalmamış. Bu ortamda vercel.app'e proxy izin vermediği için canlı
   kısım burada "could not connect" ile düşer; canlı kontrol Vercel bağlayıcısıyla yapılıp §E'ye yazıldı.
 
@@ -77,7 +78,7 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
   uçtan uca denenmedi (§E).
 - [ ] `START_HERE.pdf`: link canlıda açılıyor, QR telefon kamerasıyla okutuldu, ekranlar güncel
 - [ ] `listing.md`: §0 durum tablosu güncel; `[VERIFY]` kalmadı ya da cümle silindi; ticari alanlar dolduruldu
-- [ ] `images/` ≥ 7, `video.mp4`, `listing_<tema>.pdf`; `listing_kit.py check` sorunsuz
+- [ ] `images/` 7 GM03 görseli (QR yok), `video.mp4`, `listing_<tema>.pdf`; `listing_kit.py check` sorunsuz
 - [ ] Alıcı yolculuğu gerçek bir iPhone (Safari) ve Android (Chrome) telefonda denendi
 - [ ] Etsy kuralları ilan düzenleyicisinde yeniden kontrol edildi (aşağıda §F)
 - [ ] **Son alan adı ilk satıştan önce seçildi** (ya da `davetiye-platform-five.vercel.app`'ten kalıcı yönlendirme taahhüt edildi);
