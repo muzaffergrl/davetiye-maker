@@ -66,7 +66,7 @@ Names, date and time, venue, schedule, your story, Q&A, RSVP questions, links, p
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped.
 • Your website stays online until 12 months after your wedding date.
-• Questions before or after you buy? Message us here on Etsy.
+• Questions before or after you buy? Message us here on Etsy. We reply within 24 hours.
 ```
 
 ### 1.4 Message to Buyers (makbuz + sipariş onay e-postası) [VERIFY sınır]
@@ -108,7 +108,7 @@ Each design is a complete look: artwork, colors and type are made to work togeth
 
 How we make it: our artwork is created with the help of AI image tools, then selected, refined and built into each website by us.
 
-Questions are always welcome. Message us here on Etsy.
+Questions are always welcome. Message us here on Etsy; we reply within 24 hours.
 ```
 
 ### 2.3 Shop members, social links, photos
@@ -135,14 +135,14 @@ eklenir.
 |---|---|---|
 | Processing / delivery | Digital: instant download | Etsy'nin dijital varsayılanı |
 | Returns & exchanges | **Not accepted** (digital items) | Etsy'nin dijital varsayılanı |
-| Ek iade metni | Aşağıdaki metin | **Karar: `[REFUND POLICY]`** (öneri) |
+| Ek iade metni | Aşağıdaki metin | Karar verildi (2026-10-15): iade yok, düzeltme sözü var |
 | Privacy | Etsy'nin standart gizlilik şablonu | Bizim platform verisi için ek not aşağıda |
 | Payment | Etsy Payments | Değiştirilmez |
 
-**Returns ek metni (öneri; kullanıcı onayı sonrası girilir):**
+**Returns ek metni (kullanıcı kararı, 2026-10-15: iade yok; para iadesi sözü verilmez, düzeltme sözü verilir):**
 
 ```text
-Because this is a digital product with instant access, we do not accept returns or exchanges. If your website does not work as described, message us on Etsy: we will fix it, and if we cannot, we will refund your order.
+Because this is a digital product with instant access, we do not accept returns, exchanges or cancellations. If something on your website does not work as described, message us on Etsy and we will fix it.
 ```
 
 **Privacy ek notu (öneri):**
@@ -201,8 +201,10 @@ No. It is a digital product.
 
 ## 6. Kullanıcıdan bekleyen kararlar (uygulama bunları beklemeden yapılır)
 
-1. **İade metni (§4):** öneri "çalışmazsa düzeltiriz, düzeltemezsek iade". Onaylanana kadar yalnız Etsy'nin dijital varsayılanı kalır.
-2. **Yanıt süresi `[RESPONSE TIME]`:** öneri 24 saat (Star Seller şartı). Hiçbir metne yazılmadı.
+1. ~~İade metni~~ **Karar (kullanıcı, 2026-10-15): iade yok.** §4 metni para iadesi sözü vermez; yalnız "çalışmazsa düzeltiriz"
+   der. Not: Etsy Purchase Protection'da alıcı "açıklamaya uymuyor" vakası yine açabilir; düzeltme sözü bu vakaları azaltmak içindir.
+2. ~~Yanıt süresi~~ **Karar (kullanıcı, 2026-10-15): 24 saat.** Duyuruya ve About'a yazıldı. `platform/lib/marketing/config.ts`
+   `responseTime` ve docs/19 `[RESPONSE TIME]` yer tutucuları ayrı görevde doldurulur (entegratör).
 3. **Fiyat ve lansman:** docs/15 §5. Bu belge fiyata dokunmaz.
 
 ## 7. Uygulama kaydı (uygulayan oturum doldurur)
