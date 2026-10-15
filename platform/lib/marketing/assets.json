@@ -672,6 +672,510 @@
         "seconds": 10,
         "bytes": 517711
       }
+    },
+    "lavender-provence": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/envelope-320.webp",
+            "480": "/marketing/designs/lavender-provence/envelope-480.webp",
+            "640": "/marketing/designs/lavender-provence/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/home-320.webp",
+            "480": "/marketing/designs/lavender-provence/home-480.webp",
+            "640": "/marketing/designs/lavender-provence/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/invitation-320.webp",
+            "480": "/marketing/designs/lavender-provence/invitation-480.webp",
+            "640": "/marketing/designs/lavender-provence/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/story-320.webp",
+            "480": "/marketing/designs/lavender-provence/story-480.webp",
+            "640": "/marketing/designs/lavender-provence/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/details-320.webp",
+            "480": "/marketing/designs/lavender-provence/details-480.webp",
+            "640": "/marketing/designs/lavender-provence/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/schedule-320.webp",
+            "480": "/marketing/designs/lavender-provence/schedule-480.webp",
+            "640": "/marketing/designs/lavender-provence/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/rsvp-320.webp",
+            "480": "/marketing/designs/lavender-provence/rsvp-480.webp",
+            "640": "/marketing/designs/lavender-provence/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/lavender-provence/form-320.webp",
+            "480": "/marketing/designs/lavender-provence/form-480.webp",
+            "640": "/marketing/designs/lavender-provence/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/lavender-provence/opening.mp4",
+        "poster": "/marketing/designs/lavender-provence/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 446571
+      }
+    },
+    "tuscan-vineyard": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/envelope-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/envelope-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/home-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/home-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/invitation-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/invitation-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1264,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/story-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/story-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/details-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/details-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1264,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/schedule-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/schedule-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/rsvp-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/rsvp-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1232,
+          "files": {
+            "320": "/marketing/designs/tuscan-vineyard/form-320.webp",
+            "480": "/marketing/designs/tuscan-vineyard/form-480.webp",
+            "640": "/marketing/designs/tuscan-vineyard/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/tuscan-vineyard/opening.mp4",
+        "poster": "/marketing/designs/tuscan-vineyard/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 459729
+      }
+    },
+    "boho-pampas-terracotta": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/envelope-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/envelope-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/home-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/home-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/invitation-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/invitation-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1269,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/story-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/story-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1269,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/details-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/details-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1269,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/schedule-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/schedule-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/rsvp-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/rsvp-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1231,
+          "files": {
+            "320": "/marketing/designs/boho-pampas-terracotta/form-320.webp",
+            "480": "/marketing/designs/boho-pampas-terracotta/form-480.webp",
+            "640": "/marketing/designs/boho-pampas-terracotta/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/boho-pampas-terracotta/opening.mp4",
+        "poster": "/marketing/designs/boho-pampas-terracotta/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 374881
+      }
+    },
+    "tropical-destination": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/envelope-320.webp",
+            "480": "/marketing/designs/tropical-destination/envelope-480.webp",
+            "640": "/marketing/designs/tropical-destination/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/home-320.webp",
+            "480": "/marketing/designs/tropical-destination/home-480.webp",
+            "640": "/marketing/designs/tropical-destination/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/invitation-320.webp",
+            "480": "/marketing/designs/tropical-destination/invitation-480.webp",
+            "640": "/marketing/designs/tropical-destination/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/story-320.webp",
+            "480": "/marketing/designs/tropical-destination/story-480.webp",
+            "640": "/marketing/designs/tropical-destination/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/details-320.webp",
+            "480": "/marketing/designs/tropical-destination/details-480.webp",
+            "640": "/marketing/designs/tropical-destination/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/schedule-320.webp",
+            "480": "/marketing/designs/tropical-destination/schedule-480.webp",
+            "640": "/marketing/designs/tropical-destination/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/rsvp-320.webp",
+            "480": "/marketing/designs/tropical-destination/rsvp-480.webp",
+            "640": "/marketing/designs/tropical-destination/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/tropical-destination/form-320.webp",
+            "480": "/marketing/designs/tropical-destination/form-480.webp",
+            "640": "/marketing/designs/tropical-destination/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/tropical-destination/opening.mp4",
+        "poster": "/marketing/designs/tropical-destination/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 456930
+      }
+    },
+    "enchanted-forest-storybook": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/envelope-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/envelope-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/home-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/home-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/invitation-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/invitation-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/story-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/story-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/details-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/details-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/schedule-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/schedule-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/rsvp-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/rsvp-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/enchanted-forest-storybook/form-320.webp",
+            "480": "/marketing/designs/enchanted-forest-storybook/form-480.webp",
+            "640": "/marketing/designs/enchanted-forest-storybook/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/enchanted-forest-storybook/opening.mp4",
+        "poster": "/marketing/designs/enchanted-forest-storybook/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 500512
+      }
+    },
+    "ivory-lace-pearls": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/envelope-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/envelope-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/home-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/home-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/invitation-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/invitation-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/story-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/story-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/details-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/details-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/schedule-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/schedule-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/rsvp-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/rsvp-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-lace-pearls/form-320.webp",
+            "480": "/marketing/designs/ivory-lace-pearls/form-480.webp",
+            "640": "/marketing/designs/ivory-lace-pearls/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/ivory-lace-pearls/opening.mp4",
+        "poster": "/marketing/designs/ivory-lace-pearls/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 400709
+      }
     }
   },
   "panel": {

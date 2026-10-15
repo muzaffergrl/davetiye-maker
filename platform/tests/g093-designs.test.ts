@@ -105,7 +105,8 @@ afterEach(() => {
 });
 
 test('06, 07 and 08 are live after the first five, named as their themes, with design pages and placeholder prices', async () => {
-  assert.deepEqual(liveDesigns().map((d) => d.id), EIGHT);
+  // G094: 09–14 follow (tests/g094-designs.test.ts)
+  assert.deepEqual(liveDesigns().map((d) => d.id).slice(0, 8), EIGHT);
   for (const n of NEW) {
     const d = liveDesign(n.id)!;
     assert.ok(d, `${n.id} listed`);
@@ -175,7 +176,7 @@ test('copy matches each theme: demo couple, fonts, palette tokens, collection, g
 
 test('real screens and opening clips of 06, 07, 08 are in assets.json and on disk; the five earlier entries are unchanged in front', () => {
   assert.deepEqual(checkManifest(manifest), []);
-  assert.deepEqual(Object.keys(manifest.designs), EIGHT);
+  assert.deepEqual(Object.keys(manifest.designs).slice(0, 8), EIGHT); // G094: 09–14 follow
   for (const n of NEW) {
     const m = manifest.designs[n.id];
     assert.ok(m, `no ${n.id} entry: node scripts/marketing-assets.ts --designs ${n.id} --shots <capture>`);
@@ -197,7 +198,7 @@ test('real screens and opening clips of 06, 07, 08 are in assets.json and on dis
     assert.ok(m.opening!.bytes > 50_000 && m.opening!.bytes <= 1_500_000, `${n.id} ${m.opening!.bytes}`);
   }
   // one folder per live design, nothing else
-  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), [...EIGHT].sort());
+  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), liveDesigns().map((d) => d.id).sort());
 });
 
 test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 06/07/08; ItemList of /designs has 8', () => {
@@ -217,7 +218,7 @@ test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject
     assert.equal((product(ready, cfg).offers as Record<string, string>).price, '29.40', 'Offer once a real price and link exist');
   }
   const list = itemList(liveDesigns().map((x) => ({ path: `/designs/${x.id}`, name: x.name })));
-  assert.equal((list.itemListElement as unknown[]).length, 8);
+  assert.equal((list.itemListElement as unknown[]).length, liveDesigns().length); // 8 in G093, 14 since G094
   assert.deepEqual(validateJsonLd(graph(list)), []);
 });
 
