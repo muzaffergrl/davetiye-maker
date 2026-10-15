@@ -19,6 +19,9 @@
 //    with the last row centered; the chip strip's right edge fades out (a chip visibly runs into the fade at every
 //    phone width, scrolled to the end the last chip is clear of it); wide screens: chips in ≤ 2 rows at 1280 px and
 //    the main button inside the first screen at 1280 × 800.
+//    G093 (eight designs): card rows exactly 2+2+2+2 on phones and 3+3+2 from 900 px (last row centered), the design
+//    pages' "other designs" 2+2+2+1 / 3+3+1 centered; the home chips sit right under the poster on phones and in the
+//    text column on wide screens (two rows, main button and chips inside the first screen at 1280 × 800).
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
 //    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
@@ -396,9 +399,87 @@ try {
     } else {
       check(`G085 home @${w}: no fade beside the text (chips wrap)`, !/gradient/.test(strip.mask), strip);
       if (w >= 1280) {
-        check(`G085 home @${w}: five chips in ≤ 2 rows, the main button inside the first screen (${strip.vh} px)`, strip.rows <= 2 && strip.cta <= strip.vh, strip);
+        check(`G085 home @${w}: ${designs.length} chips in ≤ 2 rows, the main button inside the first screen (${strip.vh} px)`, strip.rows <= 2 && strip.cta <= strip.vh, strip);
       } else {
         metrics[`G085 home chips @${w}`] = { rows: strip.rows, ctaBottom: strip.cta, viewportHeight: strip.vh };
+      }
+    }
+    await ctx.close();
+  }
+
+  // 1f. G093 layout with eight designs (06 Art Deco Black-Tie, 07 Burgundy Velvet Autumn, 08 Winter Evergreen joined):
+  // exact rows of /designs, the home strip and a design page's "other designs" (seven cards); the home chips are their
+  // own grid item — right under the poster on phones and tablets, in the text column between the intro and the main
+  // button on wide screens.
+  for (const w of [320, 360, 390, 430, 768, 900, 1024, 1280]) {
+    const mobile = w < 1024;
+    const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
+    const page = await ctx.newPage();
+    const eight = designs.length === 8;
+    for (const [p, want] of [
+      ['/designs', w < 900 ? '2+2+2+2' : '3+3+2'],
+      [`/designs/${designs[designs.length - 1].id}`, w < 900 ? '2+2+2+1' : '3+3+1'],
+      ['/', w < 900 ? '2+2+2+2' : '3+3+2'],
+    ] as const) {
+      await page.goto(BASE + p, { waitUntil: 'networkidle' });
+      const grid = await page.evaluate(() => {
+        const g = document.querySelector('main [class*="cardGrid"]')!;
+        const box = g.getBoundingClientRect();
+        const rows = new Map<number, DOMRect[]>();
+        for (const c of Array.from(g.children)) {
+          const r = c.getBoundingClientRect();
+          rows.set(Math.round(r.top), [...(rows.get(Math.round(r.top)) ?? []), r]);
+        }
+        const list = [...rows.values()];
+        const last = list[list.length - 1];
+        const widths = list.flat().map((r) => Math.round(r.width));
+        return {
+          rows: list.map((r) => r.length).join('+'),
+          lastOffset: Math.round(last[0].left - box.left - (box.right - last[last.length - 1].right)),
+          sameWidth: Math.max(...widths) - Math.min(...widths) <= 1,
+          pageScroll: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+        };
+      });
+      check(
+        `G093 ${p} @${w}: ${eight ? want : grid.rows} card rows, last row centered, cards the same width, no page scroll`,
+        (!eight || grid.rows === want) && Math.abs(grid.lastOffset) <= 2 && grid.sameWidth && !grid.pageScroll,
+        grid,
+      );
+    }
+    // the home page is loaded: where the chips are
+    const hero = await page.evaluate(() => {
+      const r = (sel: string) => {
+        const b = document.querySelector(sel)!.getBoundingClientRect();
+        return { top: Math.round(b.top), bottom: Math.round(b.bottom), left: Math.round(b.left), right: Math.round(b.right) };
+      };
+      const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
+      const chips = Array.from(box.querySelectorAll('button')).map((b) => b.getBoundingClientRect());
+      return {
+        poster: r('main a[aria-label^="Tap to open the live demo"]'),
+        chips: r('main [role="group"][aria-label="Choose a design"]'),
+        chipsRight: Math.round(Math.max(...chips.map((c) => c.right))),
+        rows: new Set(chips.map((c) => Math.round(c.top))).size,
+        h1: r('main h1'),
+        cta: r('main a[class*="btnLarge"]'),
+        vh: innerHeight,
+      };
+    });
+    if (mobile) {
+      check(
+        `G093 home @${w}: the chips sit right under the poster and above the main button`,
+        hero.chips.top >= hero.poster.bottom && hero.chips.top - hero.poster.bottom <= 24 && hero.cta.top >= hero.chips.bottom,
+        hero,
+      );
+    } else {
+      check(
+        `G093 home @${w}: the chips are in the text column (left edge with the H1, clear of the poster) above the main button`,
+        Math.abs(hero.chips.left - hero.h1.left) <= 2 && hero.chipsRight < hero.poster.left && hero.chips.top >= hero.h1.bottom && hero.cta.top >= hero.chips.bottom,
+        hero,
+      );
+      if (w >= 1280) {
+        check(`G093 home @${w}: ${designs.length} chips in ≤ 2 rows; chips and main button inside the first screen (${hero.vh} px)`, hero.rows <= 2 && hero.cta.bottom <= hero.vh, hero);
+      } else {
+        metrics[`G093 home hero @${w}`] = { chipRows: hero.rows, ctaBottom: hero.cta.bottom, viewportHeight: hero.vh };
       }
     }
     await ctx.close();
@@ -563,7 +644,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

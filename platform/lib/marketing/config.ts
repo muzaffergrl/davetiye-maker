@@ -162,5 +162,35 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
     },
+    {
+      // G406 approved (2026-10-15); on the sales site and open on /start since G093.
+      id: 'art-deco-black-tie',
+      name: 'Art Deco Black-Tie',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G407 approved (2026-10-15); on the sales site and open on /start since G093.
+      id: 'burgundy-velvet-autumn',
+      name: 'Burgundy Velvet Autumn',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G408 approved (2026-10-15); on the sales site and open on /start since G093.
+      id: 'winter-evergreen',
+      name: 'Winter Evergreen',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
   ],
 };

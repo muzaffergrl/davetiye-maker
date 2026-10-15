@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Charlotte",
+      "full_name": "Charlotte Anne"
+    },
+    {
+      "display_name": "William",
+      "full_name": "William George"
+    }
+  ],
+  "name_display": "Charlotte & William",
+  "initials": "C&W",
+  "host_line": "Together with their families",
+  "date": "2027-06-05",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Ashbury Manor",
+    "city": "Newport",
+    "region": "Rhode Island",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "St. Mary's Chapel Garden"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Pearl Room"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Ashbury Ballroom"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-04-24",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Tea for two, a rose garden and one promise we will always keep brought us to",
+    "items": [
+      {
+        "caption": "Afternoon tea"
+      },
+      {
+        "caption": "By the fountain"
+      },
+      {
+        "caption": "Pearls & promises"
+      }
+    ]
+  }
+}
