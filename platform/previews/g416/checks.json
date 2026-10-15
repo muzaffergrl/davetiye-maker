@@ -77,7 +77,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 486, nav top 314)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 207×46, rsvp \"Replay the envelope\" 172×46",
-  "envelope → /daisy-and-wyatt/home in 4566 ms, card transition flag set",
+  "envelope → /daisy-and-wyatt/home in 4554 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-08-28 16:00 America/Chicago = 2027-08-28 21:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-08-28T22:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-09-02T21:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (178 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (163 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -127,11 +127,11 @@
   "details@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 1190 KB",
+  "index first view (390×844, DPR 3, placeholders): 1191 KB",
   "home first view (390×844, DPR 3, placeholders): 889 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 1282 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1279 KB",
-  "recording: previews/g416/opening_390x844.mp4 (2476 KB, lead-in 0.54 s cut, first frame mean 223,195,154) — tap → opening → home → story → details"
+  "recording: previews/g416/opening_390x844.mp4 (2410 KB, lead-in 0.56 s cut, first frame mean 223,195,154) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -482,7 +482,7 @@
      "span.cd-lbl \"Days\" bottom 601",
      "span.cd-num \"06\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 601",
-     "span.cd-num \"21\" bottom 587",
+     "span.cd-num \"06\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 601",
      "span.cd-num \"54\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 601"
@@ -552,9 +552,9 @@
      "span.cd-lbl \"Days\" bottom 726",
      "span.cd-num \"06\" bottom 712",
      "span.cd-lbl \"Hours\" bottom 726",
-     "span.cd-num \"21\" bottom 712",
+     "span.cd-num \"06\" bottom 712",
      "span.cd-lbl \"Minutes\" bottom 726",
-     "span.cd-num \"35\" bottom 712",
+     "span.cd-num \"34\" bottom 712",
      "span.cd-lbl \"Seconds\" bottom 726",
      "a.btn \"RSVP\" bottom 786"
     ],
@@ -584,7 +584,7 @@
      "span.cd-lbl \"Days\" bottom 710",
      "span.cd-num \"06\" bottom 695",
      "span.cd-lbl \"Hours\" bottom 710",
-     "span.cd-num \"21\" bottom 695",
+     "span.cd-num \"06\" bottom 695",
      "span.cd-lbl \"Minutes\" bottom 710",
      "span.cd-num \"29\" bottom 695",
      "span.cd-lbl \"Seconds\" bottom 710",
@@ -614,9 +614,9 @@
      "span.cd-lbl \"Days\" bottom 441",
      "span.cd-num \"06\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 441",
-     "span.cd-num \"21\" bottom 424",
+     "span.cd-num \"06\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 441",
-     "span.cd-num \"23\" bottom 424",
+     "span.cd-num \"22\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
@@ -643,9 +643,9 @@
      "span.cd-lbl \"Days\" bottom 427",
      "span.cd-num \"06\" bottom 411",
      "span.cd-lbl \"Hours\" bottom 427",
-     "span.cd-num \"21\" bottom 411",
+     "span.cd-num \"06\" bottom 411",
      "span.cd-lbl \"Minutes\" bottom 427",
-     "span.cd-num \"17\" bottom 411",
+     "span.cd-num \"16\" bottom 411",
      "span.cd-lbl \"Seconds\" bottom 427",
      "a.btn \"RSVP\" bottom 486"
     ],
@@ -653,7 +653,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4566,
+  "envelope_to_home_ms": 4554,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -730,7 +730,7 @@
    "copy_keys_at_max": 71,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 1190,
+  "first_view_index_kb_placeholders": 1191,
   "first_view_index_files": [
    [
     "/themes/sunflower-rustic-barn/img/env_closed-880.webp",
@@ -793,7 +793,7 @@
    ],
    [
     "/themes/sunflower-rustic-barn/site.css",
-    45204
+    45292
    ],
    [
     "/themes/sunflower-rustic-barn/img/frame_landscape-960.webp",
@@ -823,7 +823,7 @@
     97106
    ],
    [
-    "/media/ba967786-8f18-4de8-bba7-3dd55bf4eecb/d1001b9d4a3b92410e7578ea05bb2f9a-640w.jpg",
+    "/media/e76835ad-4fb1-4db8-af84-5d17e428670f/b50b8b21268f43c8b1a2edadeaac44cb-640w.jpg",
     94561
    ],
    [
@@ -838,7 +838,7 @@
   "first_view_home_kb_photos": 1279,
   "first_view_home_files_photos": [
    [
-    "/media/ba967786-8f18-4de8-bba7-3dd55bf4eecb/663bb5b8656de7fb87d740c9e740e22b-1280w.jpg",
+    "/media/e76835ad-4fb1-4db8-af84-5d17e428670f/a0330558a2007b9f3f5a739a2d141668-1280w.jpg",
     210607
    ],
    [
@@ -846,7 +846,7 @@
     188980
    ],
    [
-    "/media/ba967786-8f18-4de8-bba7-3dd55bf4eecb/58db08a5f9f69daa1a966fc7a64e67f6-640w.jpg",
+    "/media/e76835ad-4fb1-4db8-af84-5d17e428670f/391f7d6292a724245a3cd81de7171ec2-640w.jpg",
     98848
    ],
    [
@@ -862,7 +862,7 @@
     97106
    ],
    [
-    "/media/ba967786-8f18-4de8-bba7-3dd55bf4eecb/d1001b9d4a3b92410e7578ea05bb2f9a-640w.jpg",
+    "/media/e76835ad-4fb1-4db8-af84-5d17e428670f/b50b8b21268f43c8b1a2edadeaac44cb-640w.jpg",
     94561
    ],
    [
@@ -870,9 +870,9 @@
     62674
    ]
   ],
-  "video_kb": 2476,
+  "video_kb": 2410,
   "video_first_frame": {
-   "lead_in_s": 0.54,
+   "lead_in_s": 0.56,
    "mean_rgb": [
     223,
     195,

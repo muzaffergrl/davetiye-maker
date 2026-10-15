@@ -54,9 +54,9 @@ tonlanmış kırpımlar. `build_images.py` her yer tutucunun en koyu pikselini (
   (`manifest.closure.anchor` "1:1 canvas overlay"). Gevşeme odağı = ayçiçeğinin koyu göbeği (`knot_pct_of_closure` 51,26 / 30,11).
   `previews/g416/compare_closure.jpg`: tema | comp.
 - **Ek parçalar:** `barnwood` (yatay soluk ahşap tahtalar) açılışta zarfın altındaki masa; aynı parça 90° döndürülerek
-  (`barnwall`, yalnız döndürme) story duvarının dikey tahtaları — CSS'te `sepia(.25) brightness(.86)` ışık ayarı (§5.7: parçaya
+  (`barnwall`, yalnız döndürme) story duvarının dikey tahtaları — CSS'te `saturate(1.7) brightness(.66) contrast(1.05)` ışık ayarı (comp'un koyu duvarına yaklaşır) (§5.7: parçaya
   filtre). `twine_line` alfa kutusuna kırpılır; sarkma `manifest.twine_line.sag` (uçlar %13 / %9, orta %94).
-- **Zeminler:** telefon `field` = `bg_page`'in iki çiçeksiz kırpımı (güneşli krem x 150–1000 y 250–1150 + sol alttaki ahşap
+- **Zeminler:** telefon `field` (iç sayfaların ilk ekranında `picture` +%34 svh uzar: alt kenardaki ahşap zemin ekran dışında kalır, sayfa ortasında şerit olmaz — qa-kontrol bulgusu) = `bg_page`'in iki çiçeksiz kırpımı (güneşli krem x 150–1000 y 250–1150 + sol alttaki ahşap
   zemin x 0–500 y 1330–1536, 110 px yumuşak geçiş); geniş ekran `field_wide`; uzun sayfaların sonu `wood_foot` (ahşap zemin).
   Ayçiçeği kümeleri hep ayrı katman (`florals_tl` / `florals_br`), düz çizgiyle kesilmez.
 - **Kartlar:** `free_zone` + 3 dilim (`slices`: davet kartı %24–45 — sağ üst ayçiçeği %20'ye, sol alt buket %44'ten başlar;
@@ -100,10 +100,10 @@ kalsın. Kısa yatay (en-boy ≥ 1, yükseklik ≤ 620 px) hero iki sütun.
 | güneşli krem zemin, ışık huzmeleri, altta ahşap | `.scene-bg` `field` / `field_wide` | bg_page 2:3 telefonda kümeleri keserdi: zemin çiçeksiz kırpımlardan |
 | ayçiçeği/buğday/papatya kümeleri sol üst, sağ alt | `florals_tl` / `florals_br` ayrı katman | ekranda bütün, kenarda taşar (comp gibi) |
 | süzülen yaprak, ayçiçeği başı | `.float` (accent_1, accent_2) + `accent_3` başak | üçüncü süs başak (comp'ta ikinci bir yaprak) — tasarımın üç accent'i |
-| "YOU ARE INVITED" | `.env-head .kicker` | |
+| "YOU ARE INVITED" + altında çizgi · ♥ · çizgi | `.env-head .kicker` | **sapma:** kalp süsü GPT parçası olarak yok; aynı yere divider konmadı — 375×553'te isimler + zarf + ipucu ilk ekrana sığmalı (§7.1), süs ipucunun altında bir kez |
 | isimler (fırça yazısı) | `h1.names` (+ `.amp` italik Merriweather) | uzun isimde `site.js` küçültür |
 | kraft zarf, yuvarlak köşeli kapak | `.env-closed` + `.env-cflap` | |
-| hardal kareli kurdele + fiyonk + ayçiçeği | `.closure-clip > .closure` (1:1) | |
+| hardal kareli kurdele + fiyonk + ayçiçeği; fiyonkun arkasında buğday–cipsofila–yaprak spreyi | `.closure-clip > .closure` (1:1) | **sapma:** GPT `closure.png` spreysiz geldi (prompt'ta sprey yok); kodla eklenmez (K21) — önerilen gpt-gorsel görevi Sonuç'ta |
 | "TAP TO OPEN" + altında çizgi · süs · çizgi | `.env-hint p` + `.env-hint .orn` (GPT divider + iki 1 px çizgi) | comp'taki süs küçük kalp; burada tasarımın GPT spreyi (kalp parçası yok) |
 | — | `a.skip`, "Enter / Replay the opening", ahşap masa (`.table`) | platform gereği / açılış cümlesi |
 

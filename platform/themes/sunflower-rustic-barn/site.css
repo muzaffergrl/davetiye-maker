@@ -5,10 +5,10 @@
   --page: #F9E7CB; /* manifest page_color */
   --cream: #FBF3E3;
   --ivory: #FFFBF0;
-  --ink: #3A2E1F; /* 11.6:1 on the cream */
-  --ink-soft: #5A4429; /* 7.9:1 */
-  --script-ink: #6A4520; /* brush script 7.1:1 */
-  --deep: #7A5A2E; /* 5.3:1 */
+  --ink: #3A2E1F; /* 10.9:1 on the cream */
+  --ink-soft: #5A4429; /* 7.5:1 */
+  --script-ink: #6A4520; /* brush script 7:1 */
+  --deep: #7A5A2E; /* 5.2:1 */
   --mustard: #E3A72F;
   --gold: #B88B3E;
   --leaf: #6E7D3A;
@@ -192,8 +192,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 
 /* == page 1 — envelope (W1.1) */
 .page-envelope, .env-page { overflow-x: clip; }
-/* short phones: the comp's wood floor stays below the hint (theme-check backdrop) */
+/* the wood floor: below the hint on the envelope, off the inner pages' first screen (it would sit mid-page) */
 .page-envelope .scene-bg picture { height: calc(100% + 14svh); }
+.page-long .page-bg picture { height: calc(100% + 34svh); }
 .skip {
   position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
@@ -447,7 +448,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* GPT barnwood turned 90° */
 .wall::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("img/barnwall-640.webp") 50% 0 / max(100%, 640px) auto repeat-y;
     -webkit-mask: linear-gradient(transparent, #000 60px, #000 calc(100% - 60px), transparent);
-    mask: linear-gradient(transparent, #000 60px, #000 calc(100% - 60px), transparent); filter: sepia(.4) brightness(.72) contrast(1.08); }
+    mask: linear-gradient(transparent, #000 60px, #000 calc(100% - 60px), transparent); filter: saturate(1.7) brightness(.66) contrast(1.05); }
 @media (min-resolution: 2dppx) { .wall::before { background-image: url("img/barnwall-1024.webp"); } }
 .line-row { position: relative; margin: 0; padding-top: 18px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .line-row + .line-row { margin-top: 26px; }
