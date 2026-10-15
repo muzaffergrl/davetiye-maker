@@ -259,7 +259,9 @@ test('summary, filter and search', async () => {
   assert.deepEqual(filterSites(list, 'all', a.site.ownerEmail!).map((s) => s.id), [a.site.id]);
   assert.deepEqual(filterSites(list, 'published', '').map((s) => s.id), [b.site.id]);
   assert.equal(themeName('blush-garden-rose'), 'Blush Garden Rose');
-  assert.equal(themeName('art-deco-black-tie'), 'Art Deco Black Tie');
+  // G093: 06 is on the sales site now, so it shows its marketing name; an unlisted id still reads as words
+  assert.equal(themeName('art-deco-black-tie'), 'Art Deco Black-Tie');
+  assert.equal(themeName('some-unlisted-theme'), 'Some Unlisted Theme');
   assert.ok(siteHistory(fresh).some((h) => h.text === 'İlk kez yayınlandı'));
 });
 

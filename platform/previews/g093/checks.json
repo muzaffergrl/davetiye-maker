@@ -1,0 +1,1122 @@
+{
+  "task": "G093 — 06 Art Deco Black-Tie, 07 Burgundy Velvet Autumn, 08 Winter Evergreen on the sales site; eight-design layout",
+  "date": "2026-10-15",
+  "server": "next start (local production build of this checkout), temp data folders, ports 3490/3491; nothing deployed",
+  "commands": {
+    "npm test": "793/794 — the one failure is tests/theme-lavender-provence.test.ts #4 ('Provence' hard-coded in the lavender-provence theme: another agent's unfinished G409 theme, not touched here)",
+    "npm run typecheck": "clean",
+    "npm run build": "ok (+ trace-check: 16 routes, 11 themes)",
+    "node scripts/marketing-assets.ts --check": "marketing assets: ok",
+    "tests/marketing-browser.ts": "494/494",
+    "tests/g080-browser.ts": "107/107 (THEME_APPROVAL=enforce + no-gate server; 06/07/08 /start 200 + POST 201)"
+  },
+  "assets": {
+    "commands": [
+      "node scripts/marketing-assets.ts --designs art-deco-black-tie --shots <temp>/shots06",
+      "node scripts/marketing-assets.ts --designs burgundy-velvet-autumn --shots <temp>/shots07",
+      "node scripts/marketing-assets.ts --designs winter-evergreen --shots <temp>/shots08"
+    ],
+    "capture": "tools/listing_templates/capture.ts --theme <id> --port 3490: temporary uncommitted copy without the buyer/panel sections (outdated panel selectors, G082/G083/G085 note) and with the platform path from an env variable; guest screens and recording code unchanged; PAKET 2 sample photos of each collection",
+    "captures": {
+      "art-deco-black-tie": {
+        "shots": [
+          "g01_envelope.jpg",
+          "g02_home_top.jpg",
+          "g03_home_invitation.jpg",
+          "g04_home_calendar.jpg",
+          "g05_story.jpg",
+          "g06_details_top.jpg",
+          "g07_details_schedule.jpg",
+          "g12_details_venue.jpg",
+          "g08_details_faq.jpg",
+          "g09_rsvp_top.jpg",
+          "g10_rsvp_form.jpg",
+          "g11_rsvp_sent.jpg",
+          "d01_demo_home.jpg"
+        ],
+        "checks": "8/8",
+        "demo_site": "/vivian-and-charles — the theme's demo record (fictional) + 3 sample Q&A + 1 RSVP question; sample photos: collections/06_Art_Deco_Noir/assets/gpt/photos (PAKET 2)",
+        "cut_shots": []
+      },
+      "burgundy-velvet-autumn": {
+        "shots": [
+          "g01_envelope.jpg",
+          "g02_home_top.jpg",
+          "g03_home_invitation.jpg",
+          "g04_home_calendar.jpg",
+          "g05_story.jpg",
+          "g06_details_top.jpg",
+          "g07_details_schedule.jpg",
+          "g12_details_venue.jpg",
+          "g08_details_faq.jpg",
+          "g09_rsvp_top.jpg",
+          "g10_rsvp_form.jpg",
+          "g11_rsvp_sent.jpg",
+          "d01_demo_home.jpg"
+        ],
+        "checks": "8/8",
+        "demo_site": "/rosalind-and-edward — the theme's demo record (fictional) + 3 sample Q&A + 1 RSVP question; sample photos: collections/07_Burgundy_Velvet/assets/gpt/photos (PAKET 2)",
+        "cut_shots": []
+      },
+      "winter-evergreen": {
+        "shots": [
+          "g01_envelope.jpg",
+          "g02_home_top.jpg",
+          "g03_home_invitation.jpg",
+          "g04_home_calendar.jpg",
+          "g05_story.jpg",
+          "g06_details_top.jpg",
+          "g07_details_schedule.jpg",
+          "g12_details_venue.jpg",
+          "g08_details_faq.jpg",
+          "g09_rsvp_top.jpg",
+          "g10_rsvp_form.jpg",
+          "g11_rsvp_sent.jpg",
+          "d01_demo_home.jpg"
+        ],
+        "checks": "8/8",
+        "demo_site": "/noelle-and-james — the theme's demo record (fictional) + 3 sample Q&A + 1 RSVP question; sample photos: collections/08_Winter_Evergreen/assets/gpt/photos (PAKET 2)",
+        "cut_shots": []
+      }
+    },
+    "new_entries": {
+      "art-deco-black-tie": {
+        "screens": {
+          "envelope": "640x1385",
+          "home": "640x1385",
+          "invitation": "640x1385",
+          "story": "640x1385",
+          "details": "640x1385",
+          "schedule": "640x1385",
+          "rsvp": "640x1385",
+          "form": "640x1385"
+        },
+        "opening": {
+          "file": "/marketing/designs/art-deco-black-tie/opening.mp4",
+          "poster": "/marketing/designs/art-deco-black-tie/opening-poster.webp",
+          "width": 390,
+          "height": 844,
+          "seconds": 10,
+          "bytes": 452586
+        }
+      },
+      "burgundy-velvet-autumn": {
+        "screens": {
+          "envelope": "640x1385",
+          "home": "640x1385",
+          "invitation": "640x1385",
+          "story": "640x1385",
+          "details": "640x1385",
+          "schedule": "640x1385",
+          "rsvp": "640x1385",
+          "form": "640x1385"
+        },
+        "opening": {
+          "file": "/marketing/designs/burgundy-velvet-autumn/opening.mp4",
+          "poster": "/marketing/designs/burgundy-velvet-autumn/opening-poster.webp",
+          "width": 390,
+          "height": 844,
+          "seconds": 10,
+          "bytes": 402245
+        }
+      },
+      "winter-evergreen": {
+        "screens": {
+          "envelope": "640x1385",
+          "home": "640x1385",
+          "invitation": "640x1385",
+          "story": "640x1385",
+          "details": "640x1385",
+          "schedule": "640x1385",
+          "rsvp": "640x1385",
+          "form": "640x1385"
+        },
+        "opening": {
+          "file": "/marketing/designs/winter-evergreen/opening.mp4",
+          "poster": "/marketing/designs/winter-evergreen/opening-poster.webp",
+          "width": 390,
+          "height": 844,
+          "seconds": 10,
+          "bytes": 517711
+        }
+      }
+    },
+    "unchanged": "public/marketing/: the 155 files of 01-05 and the panel have the same sha1 before and after (cmp of the sorted sha1 lists); assets.json: the five earlier design entries, the panel entry and the note hash the same (sha1 of their JSON) before and after; 78 new files (3 x 26)"
+  },
+  "layout_measurements": {
+    "/designs @320x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        137,
+        137
+      ],
+      "pageScroll": false
+    },
+    "/ @320x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        137,
+        137
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 1,
+        "intoFade": [
+          48
+        ],
+        "ctaBottom": 897,
+        "chipsBottom": 827,
+        "vh": 844
+      }
+    },
+    "/designs/winter-evergreen @320x844": {
+      "rows": "2+2+2+1",
+      "lastOffset": 0,
+      "cardW": [
+        137,
+        137
+      ],
+      "pageScroll": false
+    },
+    "/designs @360x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        157,
+        157
+      ],
+      "pageScroll": false
+    },
+    "/ @360x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        157,
+        157
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 1,
+        "intoFade": [
+          26,
+          12
+        ],
+        "ctaBottom": 864,
+        "chipsBottom": 794,
+        "vh": 844
+      }
+    },
+    "/designs/winter-evergreen @360x844": {
+      "rows": "2+2+2+1",
+      "lastOffset": 0,
+      "cardW": [
+        157,
+        157
+      ],
+      "pageScroll": false
+    },
+    "/designs @390x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        172,
+        172
+      ],
+      "pageScroll": false
+    },
+    "/ @390x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        172,
+        172
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 1,
+        "intoFade": [
+          42
+        ],
+        "ctaBottom": 841,
+        "chipsBottom": 771,
+        "vh": 844
+      }
+    },
+    "/designs/winter-evergreen @390x844": {
+      "rows": "2+2+2+1",
+      "lastOffset": 0,
+      "cardW": [
+        172,
+        172
+      ],
+      "pageScroll": false
+    },
+    "/designs @430x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        192,
+        192
+      ],
+      "pageScroll": false
+    },
+    "/ @430x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        192,
+        192
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 1,
+        "intoFade": [
+          48
+        ],
+        "ctaBottom": 856,
+        "chipsBottom": 786,
+        "vh": 844
+      }
+    },
+    "/designs/winter-evergreen @430x844": {
+      "rows": "2+2+2+1",
+      "lastOffset": 0,
+      "cardW": [
+        192,
+        192
+      ],
+      "pageScroll": false
+    },
+    "/designs @768x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        353,
+        353
+      ],
+      "pageScroll": false
+    },
+    "/ @768x844": {
+      "rows": "2+2+2+2",
+      "lastOffset": 0,
+      "cardW": [
+        353,
+        353
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 1,
+        "intoFade": [
+          48
+        ],
+        "ctaBottom": 987,
+        "chipsBottom": 917,
+        "vh": 844
+      }
+    },
+    "/designs/winter-evergreen @768x844": {
+      "rows": "2+2+2+1",
+      "lastOffset": 0,
+      "cardW": [
+        353,
+        353
+      ],
+      "pageScroll": false
+    },
+    "/designs @900x844": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        268,
+        268
+      ],
+      "pageScroll": false
+    },
+    "/ @900x844": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        268,
+        268
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 1,
+        "intoFade": [
+          48
+        ],
+        "ctaBottom": 947,
+        "chipsBottom": 877,
+        "vh": 844
+      }
+    },
+    "/designs/winter-evergreen @900x844": {
+      "rows": "3+3+1",
+      "lastOffset": 0,
+      "cardW": [
+        268,
+        268
+      ],
+      "pageScroll": false
+    },
+    "/designs @1024x800": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        299,
+        299
+      ],
+      "pageScroll": false
+    },
+    "/ @1024x800": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        299,
+        299
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 3,
+        "intoFade": [],
+        "ctaBottom": 898,
+        "chipsBottom": 806,
+        "vh": 800
+      }
+    },
+    "/designs/winter-evergreen @1024x800": {
+      "rows": "3+3+1",
+      "lastOffset": 0,
+      "cardW": [
+        299,
+        299
+      ],
+      "pageScroll": false
+    },
+    "/ @1024x900": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        299,
+        299
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 3,
+        "intoFade": [],
+        "ctaBottom": 898,
+        "chipsBottom": 806,
+        "vh": 900
+      }
+    },
+    "/designs @1280x800": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false
+    },
+    "/ @1280x800": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 2,
+        "intoFade": [],
+        "ctaBottom": 774,
+        "chipsBottom": 682,
+        "vh": 800
+      }
+    },
+    "/designs/winter-evergreen @1280x800": {
+      "rows": "3+3+1",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false
+    },
+    "/ @1280x900": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 2,
+        "intoFade": [],
+        "ctaBottom": 774,
+        "chipsBottom": 682,
+        "vh": 900
+      }
+    },
+    "/designs @1440x800": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false
+    },
+    "/ @1440x800": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 2,
+        "intoFade": [],
+        "ctaBottom": 774,
+        "chipsBottom": 682,
+        "vh": 800
+      }
+    },
+    "/designs/winter-evergreen @1440x800": {
+      "rows": "3+3+1",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false
+    },
+    "/ @1440x900": {
+      "rows": "3+3+2",
+      "lastOffset": 0,
+      "cardW": [
+        384,
+        384
+      ],
+      "pageScroll": false,
+      "chips": {
+        "n": 8,
+        "rows": 2,
+        "intoFade": [],
+        "ctaBottom": 774,
+        "chipsBottom": 682,
+        "vh": 900
+      }
+    }
+  },
+  "marketing_browser_metrics": {
+    "G085 home chips @1024": {
+      "rows": 3,
+      "ctaBottom": 898,
+      "viewportHeight": 800
+    },
+    "G093 home hero @1024": {
+      "chipRows": 3,
+      "ctaBottom": 898,
+      "viewportHeight": 800
+    },
+    "/": {
+      "lcp": 1456,
+      "lcpElement": "IMG http://127.0.0.1:3490/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1056,
+      "loadMs": 5405,
+      "transferredKB": 361,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 125
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1464,
+      "lcpElement": "IMG http://127.0.0.1:3490/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0.0003,
+      "fcp": 972,
+      "loadMs": 5511,
+      "transferredKB": 393,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 159
+    },
+    "/designs/winter-evergreen": {
+      "lcp": 1028,
+      "lcpElement": "P",
+      "cls": 0.0003,
+      "fcp": 1028,
+      "loadMs": 5636,
+      "transferredKB": 427,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 192
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 952,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 952,
+      "loadMs": 4842,
+      "transferredKB": 236,
+      "scriptKB": 139,
+      "fontKB": 67,
+      "imageKB": 3
+    }
+  },
+  "g093_browser_checks": [
+    {
+      "name": "G093 /designs @320: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @320: 2+2+2+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @320: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @320: the chips sit right under the poster and above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 484,
+          "bottom": 761,
+          "left": 96,
+          "right": 224
+        },
+        "chips": {
+          "top": 771,
+          "bottom": 827,
+          "left": 0,
+          "right": 320
+        },
+        "chipsRight": 1645,
+        "rows": 1,
+        "h1": {
+          "top": 139,
+          "bottom": 309,
+          "left": 16,
+          "right": 304
+        },
+        "cta": {
+          "top": 841,
+          "bottom": 897,
+          "left": 16,
+          "right": 304
+        },
+        "vh": 844
+      }
+    },
+    {
+      "name": "G093 /designs @360: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @360: 2+2+2+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @360: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @360: the chips sit right under the poster and above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 416,
+          "bottom": 728,
+          "left": 108,
+          "right": 252
+        },
+        "chips": {
+          "top": 738,
+          "bottom": 794,
+          "left": 0,
+          "right": 360
+        },
+        "chipsRight": 1645,
+        "rows": 1,
+        "h1": {
+          "top": 139,
+          "bottom": 241,
+          "left": 16,
+          "right": 344
+        },
+        "cta": {
+          "top": 808,
+          "bottom": 864,
+          "left": 16,
+          "right": 344
+        },
+        "vh": 844
+      }
+    },
+    {
+      "name": "G093 /designs @390: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @390: 2+2+2+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @390: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @390: the chips sit right under the poster and above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 368,
+          "bottom": 705,
+          "left": 117,
+          "right": 273
+        },
+        "chips": {
+          "top": 715,
+          "bottom": 771,
+          "left": 0,
+          "right": 390
+        },
+        "chipsRight": 1645,
+        "rows": 1,
+        "h1": {
+          "top": 118,
+          "bottom": 220,
+          "left": 16,
+          "right": 374
+        },
+        "cta": {
+          "top": 785,
+          "bottom": 841,
+          "left": 16,
+          "right": 374
+        },
+        "vh": 844
+      }
+    },
+    {
+      "name": "G093 /designs @430: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @430: 2+2+2+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @430: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @430: the chips sit right under the poster and above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 374,
+          "bottom": 720,
+          "left": 135,
+          "right": 295
+        },
+        "chips": {
+          "top": 730,
+          "bottom": 786,
+          "left": 0,
+          "right": 430
+        },
+        "chipsRight": 1645,
+        "rows": 1,
+        "h1": {
+          "top": 118,
+          "bottom": 226,
+          "left": 16,
+          "right": 414
+        },
+        "cta": {
+          "top": 800,
+          "bottom": 856,
+          "left": 16,
+          "right": 414
+        },
+        "vh": 844
+      }
+    },
+    {
+      "name": "G093 /designs @768: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @768: 2+2+2+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @768: 2+2+2+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+2+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @768: the chips sit right under the poster and above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 375,
+          "bottom": 851,
+          "left": 274,
+          "right": 494
+        },
+        "chips": {
+          "top": 861,
+          "bottom": 917,
+          "left": 0,
+          "right": 768
+        },
+        "chipsRight": 1653,
+        "rows": 1,
+        "h1": {
+          "top": 118,
+          "bottom": 283,
+          "left": 24,
+          "right": 744
+        },
+        "cta": {
+          "top": 931,
+          "bottom": 987,
+          "left": 183,
+          "right": 420
+        },
+        "vh": 844
+      }
+    },
+    {
+      "name": "G093 /designs @900: 3+3+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @900: 3+3+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @900: 3+3+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @900: the chips sit right under the poster and above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 335,
+          "bottom": 811,
+          "left": 340,
+          "right": 560
+        },
+        "chips": {
+          "top": 821,
+          "bottom": 877,
+          "left": 0,
+          "right": 900
+        },
+        "chipsRight": 1653,
+        "rows": 1,
+        "h1": {
+          "top": 118,
+          "bottom": 243,
+          "left": 24,
+          "right": 876
+        },
+        "cta": {
+          "top": 891,
+          "bottom": 947,
+          "left": 249,
+          "right": 486
+        },
+        "vh": 844
+      }
+    },
+    {
+      "name": "G093 /designs @1024: 3+3+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @1024: 3+3+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @1024: 3+3+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @1024: the chips are in the text column (left edge with the H1, clear of the poster) above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 184,
+          "bottom": 773,
+          "left": 674,
+          "right": 946
+        },
+        "chips": {
+          "top": 658,
+          "bottom": 806,
+          "left": 40,
+          "right": 563
+        },
+        "chipsRight": 501,
+        "rows": 3,
+        "h1": {
+          "top": 176,
+          "bottom": 523,
+          "left": 40,
+          "right": 563
+        },
+        "cta": {
+          "top": 842,
+          "bottom": 898,
+          "left": 40,
+          "right": 277
+        },
+        "vh": 800
+      }
+    },
+    {
+      "name": "G093 /designs @1280: 3+3+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 /designs/winter-evergreen @1280: 3+3+1 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+1",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 / @1280: 3+3+2 card rows, last row centered, cards the same width, no page scroll",
+      "ok": true,
+      "detail": {
+        "rows": "3+3+2",
+        "lastOffset": 0,
+        "sameWidth": true,
+        "pageScroll": false
+      }
+    },
+    {
+      "name": "G093 home @1280: the chips are in the text column (left edge with the H1, clear of the poster) above the main button",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 149,
+          "bottom": 738,
+          "left": 878,
+          "right": 1150
+        },
+        "chips": {
+          "top": 586,
+          "bottom": 682,
+          "left": 40,
+          "right": 717
+        },
+        "chipsRight": 698,
+        "rows": 2,
+        "h1": {
+          "top": 229,
+          "bottom": 451,
+          "left": 40,
+          "right": 717
+        },
+        "cta": {
+          "top": 718,
+          "bottom": 774,
+          "left": 40,
+          "right": 277
+        },
+        "vh": 800
+      }
+    },
+    {
+      "name": "G093 home @1280: 8 chips in ≤ 2 rows; chips and main button inside the first screen (800 px)",
+      "ok": true,
+      "detail": {
+        "poster": {
+          "top": 149,
+          "bottom": 738,
+          "left": 878,
+          "right": 1150
+        },
+        "chips": {
+          "top": 586,
+          "bottom": 682,
+          "left": 40,
+          "right": 717
+        },
+        "chipsRight": 698,
+        "rows": 2,
+        "h1": {
+          "top": 229,
+          "bottom": 451,
+          "left": 40,
+          "right": 717
+        },
+        "cta": {
+          "top": 718,
+          "bottom": 774,
+          "left": 40,
+          "right": 277
+        },
+        "vh": 800
+      }
+    }
+  ]
+}
