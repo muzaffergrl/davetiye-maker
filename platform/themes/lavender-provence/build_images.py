@@ -296,6 +296,21 @@ def dilimler(fz, kenar_bosluk=(8.0, 94.0), min_gen: float = 74.0, sol_maks: floa
 
 # ============================================================================= zemin, yer tutucu, tomurcuk
 
+def orta_bant(im: Image.Image, t: float, b: float, esik: float = 26, boy: int = 9):
+    """3 dilim kartın gerilen orta bandı (satır %t–%b), kâğıt liflerinden temizlenmiş: tam opak komşulukta (boy × boy)
+    yerel medyandan > esik uzak piksel (turuncu lif, nokta) medyanla değiştirilir. Gerilen bantta lifler uzayıp metnin altına
+    giriyordu (theme-check piksel testi, --stress). Temizlik; yeni şekil yok. (RGBA bant, değişen piksel payı)."""
+    H = im.height
+    band = im.crop((0, round(H * t / 100), im.width, round(H * b / 100))).convert("RGBA")
+    a = np.asarray(band).astype(np.float64)
+    med = np.asarray(band.convert("RGB").filter(ImageFilter.MedianFilter(boy))).astype(np.float64)
+    opak = np.asarray(band.getchannel("A").filter(ImageFilter.MinFilter(boy))) > 250
+    d = np.sqrt(((a[..., :3] - med) ** 2).sum(-1))
+    m = opak & (d > esik)
+    a[..., :3][m] = med[m]
+    return from_arr(a), round(float(m.mean()), 5)
+
+
 def kagit_bandi(bg: Image.Image):
     band = bg.crop(PAPER_BAND)
     lum = np.asarray(band.convert("L")).astype(np.float64)
@@ -544,9 +559,14 @@ def main():
         fz = tb.serbest_bolge(im, 0.5, ornek=(.6, .7))
         manifest[nm]["free_zone"] = fz
         t, b = dilimler(fz, sol_maks=6.0 if nm == "invitation_card" else 100.0)
+        mid, lif = orta_bant(im, t, b)
+        ad = nm.replace("_card", "_mid")
+        webp(mid, ad, [480, im.width])
+        manifest[ad].update({"rows_pct": [t, b], "despeckled_share": lif})
         manifest[nm]["slices"] = {"top_end_pct": t, "bottom_start_pct": b, "ratio": round(im.width / im.height, 5),
-                                  "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before "
-                                          "(dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"}
+                                  "mid": ad, "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı "
+                                  "::before = <ad>_mid (liften temizlenmiş aynı satırlar, dikey gerilir), alt dilim ::after — "
+                                  "docs/11 §9; site.css --t/--b"}
     manifest["card_small"]["free_zone"] = tb.serbest_bolge(Image.open(prep / "card_small.png"), 0.5, ornek=(.8, .86))
     # story çerçevesinin alt kâğıt bandı (başlık burada): pencere altından kartın alt kenarına free_zone
     manifest["frame_portrait"]["free_zone"] = tb.serbest_bolge(Image.open(prep / "frame_portrait.png"), 0.5, ornek=(.92, .96))

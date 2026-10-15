@@ -22,7 +22,7 @@ const MOTION = {
   scenes: {
     'home-hero': [['decor', 0], ['card', 100], ['names', 640], ['date', 1400], ['venue', 1620], ['countdown', 1880], ['cta', 2160]],
     'home-invite': [['card', 0], ['host', 480], ['name1', 680], ['amp', 1160], ['name2', 1300], ['request', 1820], ['divider', 2060], ['date', 2240], ['venue', 2480], ['cta', 2700], ['cal', 2900]],
-    'home-teasers': [['sprig', 0], ['teaser', 240]],
+    'home-teasers': [['sprig', 0], ['teaser', 240], ['words', 900]],
     'home-foot': [['decor', 0], ['sign', 180], ['links', 780]],
     'story-head': [['decor', 0], ['title', 120], ['kicker', 1000], ['lede', 1280]],
     'story-tile': [['card', 0], ['caption', 1350]],

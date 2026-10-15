@@ -1,5 +1,5 @@
 {
- "when": "2026-10-15T06:20:39.308Z",
+ "when": "2026-10-15T06:33:11.743Z",
  "checks": [
   {
    "name": "off: /admin answers 200 with an honest \"kapalı\" note",
@@ -16,7 +16,7 @@
   {
    "name": "/start gives an edit link",
    "ok": true,
-   "detail": "http://127.0.0.1:3399/edit/emma-and-liam?k=…"
+   "detail": "http://127.0.0.1:3395/edit/emma-and-liam?k=…"
   },
   {
    "name": "Home: the status card says the order is being confirmed",
@@ -103,7 +103,7 @@
   {
    "name": "a new edit link is shown once",
    "ok": true,
-   "detail": "http://127.0.0.1:3399/edit/emma-and-liam?k=…"
+   "detail": "http://127.0.0.1:3395/edit/emma-and-liam?k=…"
   },
   {
    "name": "the \"new editor link\" message holds the new link",

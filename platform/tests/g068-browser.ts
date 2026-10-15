@@ -20,6 +20,7 @@ import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { loadChromium, startNext, waitForServer } from '../scripts/lib/browser.ts';
+import { builtDesignThemes } from './design-themes.ts';
 import { loadThemeEnv, ROOT } from '../scripts/lib/theme-env.ts';
 
 const require = createRequire(import.meta.url);
@@ -68,7 +69,7 @@ const ONLY = (process.env.G068_THEMES ?? '').split(',').filter(Boolean);
 const PANEL = !ONLY.length;
 const panelSite = PANEL ? seed('olive-ivory', 'g068-panel') : null!;
 const guests = Object.fromEntries(
-  (['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter'] as const)
+  builtDesignThemes()
     .filter((t) => !ONLY.length || ONLY.includes(t))
     .map((t) => [t, seed(t, `g068-${t}`, (c) => void (c.copy = GUEST_COPY))]),
 );

@@ -46,24 +46,15 @@ import { renderTemplate } from '../lib/theme/engine.ts';
 import { clearThemeCache, loadTheme, parseManifest, readThemePage, PAGE_NAMES, type PageName } from '../lib/theme/theme.ts';
 import { changedCopyPages, changedPages, COPY_TITLE } from '../components/panel/pages.ts';
 import { PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
+import { builtDesignThemes, DESIGN_COLLECTIONS } from './design-themes.ts';
 
 const BASE = 'https://wedding.example';
-const THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter'] as const;
-type Theme = (typeof THEMES)[number];
-const COLLECTION: Record<Theme, string> = {
-  'olive-ivory': '01_Olive_Ivory',
-  'blush-garden-rose': '03_Blush_Garden_Rose',
-  'dusty-blue-champagne': '02_Dusty_Blue',
-  'mediterranean-lemon': '05_Lemon_Mediterranean',
-  'vintage-airmail-love-letter': '04_Vintage_Airmail',
-};
-/** Design keys outside the catalogue (docs/11 §3.7: theme.json gives them a label and a panel page). */
+const THEMES = builtDesignThemes();
+type Theme = string;
+const COLLECTION: Record<Theme, string> = Object.fromEntries(Object.entries(DESIGN_COLLECTIONS).map(([id, c]) => [id, c.dir]));
+/** Design keys outside the catalogue (docs/11 §3.7: theme.json gives them a label and a panel page). Default: none. */
 const DESIGN_KEYS: Record<Theme, string[]> = {
-  'olive-ivory': [],
-  'blush-garden-rose': [],
   'dusty-blue-champagne': ['home_day_sub'],
-  'mediterranean-lemon': [],
-  'vintage-airmail-love-letter': [],
 };
 const record = (theme: Theme = 'olive-ivory'): ContentRecord =>
   JSON.parse(readFileSync(path.join(REPO_ROOT, 'collections', COLLECTION[theme], 'content.demo.json'), 'utf8')) as ContentRecord;
@@ -245,8 +236,8 @@ test('01–05: theme.json copy = the templates; no unmarked visible text; standa
     assert.deepEqual(buildCopyManifest(scan, theme.manifest.copy), theme.manifest.copy, `${id}: the generator writes what is stored`);
     const keys = Object.keys(theme.manifest.copy);
     assert.ok(keys.length >= 70, `${id}: ${keys.length} keys`);
-    assert.deepEqual(keys.filter((k) => !STANDARD_COPY[k]), DESIGN_KEYS[id], `${id}: standard keys (+ its design keys)`);
-    for (const k of DESIGN_KEYS[id]) assert.ok(theme.manifest.copy[k].label && theme.manifest.copy[k].panel, `${id}: ${k} has a label and a panel page`);
+    assert.deepEqual(keys.filter((k) => !STANDARD_COPY[k]), DESIGN_KEYS[id] ?? [], `${id}: standard keys (+ its design keys)`);
+    for (const k of DESIGN_KEYS[id] ?? []) assert.ok(theme.manifest.copy[k].label && theme.manifest.copy[k].panel, `${id}: ${k} has a label and a panel page`);
     for (const k of ['envelope_kicker', 'card_line', 'invite_request', 'rsvp_title', 'rsvp_by', 'story_title', 'day_title', 'schedule_title', 'nav_home', 'nav_rsvp', 'form_send', 'rsvp_closed_title', 'ty_kicker'])
       assert.ok(theme.manifest.copy[k], `${id}: ${k}`);
     // every default fits its max; every max is within the schema ceiling

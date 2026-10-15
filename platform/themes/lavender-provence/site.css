@@ -90,7 +90,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   -webkit-mask: linear-gradient(transparent, #000 12px); mask: linear-gradient(transparent, #000 12px);
 }
 .site-nav .orn { margin: -10px auto -10px; }
-.site-nav ul { display: flex; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 6px; list-style: none; }
+.site-nav ul { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 6px; list-style: none; }
 .site-nav li { display: flex; align-items: center; }
 .site-nav li + li::before { content: "·"; content: "·" / ""; color: var(--deep-ink); font-size: 17px; }
 .site-nav a {
@@ -175,7 +175,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .corner { position: absolute; display: block; height: auto; pointer-events: none; filter: drop-shadow(0 7px 9px rgba(46, 36, 80, .14)); }
 .corner-tl { left: 0; top: 0; aspect-ratio: 1186 / 1087; }
 .corner-br { right: 0; bottom: 0; aspect-ratio: 1028 / 1180; }
-.scene-bg .corner-tl { --cw: min(62vw, 31svh, 340px); width: var(--cw); left: calc(var(--cw) * -.1); top: calc(var(--cw) * -.1); }
+.scene-bg .corner-tl { --cw: min(62vw, 31svh, 340px); width: var(--cw); left: calc(var(--cw) * -.1); top: 0; }
 .scene-bg .corner-br { --cw: min(58vw, 33svh, 330px); width: var(--cw); right: calc(var(--cw) * -.08); bottom: calc(var(--cw) * -.06); }
 @media (min-aspect-ratio: 3/4) {
   .scene-bg .corner-tl, .scene-bg .corner-br { --cw: min(34vw, 55vh, 520px); }
@@ -285,13 +285,14 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; }
 .hero-city { margin-top: 1px; font-size: clamp(17px, 4.8vw, 20px); line-height: 1.35; letter-spacing: .05em; color: var(--ink-soft); text-wrap: balance; }
 /* countdown: plain numerals and labels (K21: no drawn boxes, README) */
 .countdown { margin-top: clamp(14px, 3svh, 28px); }
-.cd-row { display: flex; justify-content: center; gap: clamp(18px, 6.4vw, 40px); }
-.cd-cell { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
+.cd-row { display: flex; justify-content: center; gap: clamp(10px, 5vw, 40px); max-width: calc(100vw - 24px); }
+.cd-cell { display: flex; flex-direction: column; align-items: center; min-width: 50px; max-width: 25%; }
 .cd-num { font: 500 clamp(32px, 9vw, 44px)/1 var(--serif); color: var(--script-ink); font-variant-numeric: lining-nums tabular-nums; }
-.cd-lbl { margin-top: 6px; font: 600 11px/1 var(--serif); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); }
+.cd-lbl { margin-top: 6px; font: 600 11px/1.15 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); text-align: center; overflow-wrap: anywhere; }
 .cd-done { font-style: italic; font-size: 21px; color: var(--script-ink); }
 .countdown.is-done .cd-row { display: none; }
-@media (max-width: 359px) { .cd-row { gap: 12px; } .cd-cell { min-width: 44px; } .cd-lbl { letter-spacing: .14em; } }
+@media (max-width: 359px) { .cd-row { gap: 10px; } .cd-cell { min-width: 44px; } .cd-lbl { letter-spacing: .14em; } }
+@media (max-width: 420px) { .site-nav a { padding: 0 8px; letter-spacing: .2em; } }
 .hero-cta { margin-top: clamp(16px, 3.2svh, 30px); }
 @media (min-aspect-ratio: 11/20) and (max-aspect-ratio: 3/4) and (max-width: 640px) {
   .hero { --hn: clamp(42px, min(13.6vw, 7.6svh), 82px); }
@@ -328,15 +329,15 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* invitation_card: plain full-width band 79–95 % (the bouquet runs down the left side above it) */
 .invite { --ar: .70724; --t: .79; --b: .95; }
 .invite::before, .invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-918.webp") 2x); }
-.invite::before { background-size: 100% 625%; background-position: 0 94.048%; } /* 1 / (.95 − .79); .79 / (1 − .16) */
+.invite::before { background-image: image-set(url("img/invitation_mid-480.webp") 1x, url("img/invitation_mid-918.webp") 2x); background-size: 100% 100%; } /* the same rows, fibres cleaned (manifest invitation_mid) */
 /* info_card: plain band 14–95 % */
 .info { --ar: .64627; --t: .14; --b: .95; }
 .info::before, .info::after { background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-771.webp") 2x); }
-.info::before { background-size: 100% 123.457%; background-position: 0 73.684%; } /* 1 / (.95 − .14); .14 / (1 − .81) */
+.info::before { background-image: image-set(url("img/info_mid-480.webp") 1x, url("img/info_mid-771.webp") 2x); background-size: 100% 100%; } /* manifest info_mid */
 
-/* -- home: invitation card (no comp). Text in the plain paper right of the bouquet (free_zone: x ≥ 24 % to y 48 %, ≥ 16 % below) */
+/* -- home: invitation card (no comp). Text in the plain paper right of the bouquet (free_zone: x ≥ 24 % from y 28 % = 40cqw) */
 .invite-sec { padding: 34px 0 26px; }
-.invite-text { padding: 25cqw 7% 15cqw 24%; min-height: calc(100cqw / .70724); justify-content: center; }
+.invite-text { padding: 41cqw 7% 15cqw 24%; min-height: calc(100cqw / .70724); justify-content: center; }
 .invite-text .host { max-width: 60cqw; font-size: max(11px, 3.1cqw); letter-spacing: .22em; line-height: 1.6; text-wrap: balance; color: var(--deep-ink); }
 .invite-text .nm { font-size: 10.6cqw; line-height: 1.1; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .invite-text .host + .nm { margin-top: 3cqw; }
@@ -355,7 +356,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .cal-links { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* -- home: pressed cards on the paper (no comp) */
-.teasers { padding: 40px 0 8px; text-align: center; }
+.teasers { padding: 40px 0 8px; text-align: center; overflow-x: clip; } /* the cards tumble in from the screen edge */
 .sprig { display: block; width: 170px; height: auto; margin: 0 auto; filter: drop-shadow(0 3px 3px rgba(46, 36, 80, .12)); }
 .teaser-list { display: flex; flex-direction: column; gap: 30px; margin-top: 26px; }
 .teaser { position: relative; display: flex; align-items: center; gap: 5vw; text-decoration: none; color: inherit; }
@@ -378,7 +379,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* -- closings: florals_br in the corner */
 .foot, .next-sec, .closing { --corner: min(54vw, 320px); position: relative; padding: 46px 16px calc(var(--corner) * .9 + var(--below, 0px)); text-align: center; }
-:is(.foot, .next-sec, .closing) > .page-corner { right: calc(var(--corner) * -.06); bottom: 0; width: var(--corner); }
+:is(.foot, .next-sec, .closing) > .page-corner { right: 0; bottom: 0; width: var(--corner); }
 :is(.foot, .next-sec, .closing) > :not(.page-corner, .accent-layer) { position: relative; z-index: 1; }
 .site-main:has(> :is(.foot, .next-sec, .closing):last-child) { padding-bottom: 0; }
 .site-main > :is(.foot, .next-sec, .closing):last-child { --below: calc(var(--nav-h) + env(safe-area-inset-bottom) + 22px); }
@@ -395,7 +396,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .page-head, .details-top, .rsvp-top { position: relative; text-align: center; }
 .page-bg { position: absolute; left: 0; right: 0; top: 0; height: 100svh; z-index: 0; overflow: hidden; pointer-events: none; }
 .page-bg .corner { width: var(--cw); }
-.page-bg .corner-tl { --cw: min(50vw, 300px); left: calc(var(--cw) * -.12); top: calc(var(--cw) * -.12); }
+.page-bg .corner-tl { --cw: min(50vw, 300px); left: calc(var(--cw) * -.12); top: 0; }
 @media (min-aspect-ratio: 3/4) { .page-bg .corner-tl { --cw: min(30vw, 48vh, 420px); } }
 .page-bg .f-bud1 { left: auto; right: 14%; top: 8%; }
 .page-bg .f-bud2 { left: 8%; top: 56%; }
@@ -519,8 +520,8 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .rsvp-text .sign { font-size: calc(12cqw * var(--sg)); line-height: calc(.74 + .4 * var(--sg)); text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .unit { display: flex; flex-direction: column; align-items: center; width: 100%; }
 .sig-unit { --sg: 1; position: relative; padding-bottom: calc(26cqw * var(--sg)); }
-/* the lavender bundle with its twine (W1.5) on the card's lower edge */
-.card-tie { position: absolute; z-index: 2; left: 50%; top: calc(100% - 16cqw * var(--sg)); width: calc(42cqw * var(--sg)); aspect-ratio: 550 / 590; translate: -48% 0; rotate: -4deg;
+/* the lavender bundle with its twine (W1.5) lying across the card's lower edge: flowers to the right, the bow's tails over the edge */
+.card-tie { position: absolute; z-index: 2; left: 50%; top: calc(100% - 14cqw * var(--sg)); width: calc(40cqw * var(--sg)); aspect-ratio: 550 / 590; translate: -50% 0; rotate: 80deg;
             filter: drop-shadow(0 7px 8px rgba(60, 45, 30, .24)) drop-shadow(0 1px 1px rgba(60, 45, 30, .2)); }
 .reply-sec { padding: 50px 0 10px; }
 .reply-box { position: relative; z-index: 1; padding: 26px 20px 24px; border-radius: 18px; background: rgba(250, 248, 243, .88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); text-align: center; }

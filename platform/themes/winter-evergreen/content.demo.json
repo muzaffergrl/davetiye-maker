@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Noelle",
+      "full_name": "Noelle Claire"
+    },
+    {
+      "display_name": "James",
+      "full_name": "James Robert"
+    }
+  ],
+  "name_display": "Noelle & James",
+  "initials": "N&J",
+  "host_line": "Together with their families",
+  "date": "2027-12-11",
+  "ceremony_time": "16:00",
+  "timezone": "America/Denver",
+  "venue": {
+    "name": "Pinecrest Lodge",
+    "city": "Aspen",
+    "region": "Colorado",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Snow Chapel"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Fireside Lounge"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Timber Hall"
+    }
+  ],
+  "dress_code": "Winter formal",
+  "rsvp": {
+    "deadline": "2027-10-30",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Hot cocoa, falling snow and one very happy winter evening brought us to",
+    "items": [
+      {
+        "caption": "First snowfall"
+      },
+      {
+        "caption": "Under the pines"
+      },
+      {
+        "caption": "Evergreen love"
+      }
+    ]
+  }
+}

@@ -167,7 +167,7 @@ try {
     await page.goto(`${J}#setup/1`);
     await page.waitForSelector('[data-setup="1"]');
     check('setup 1: opens at "#setup/1" with the names from /start', (await h1(page)).includes('Your names') && (await page.inputValue('#f-partners-0-display_name')) === 'Elena' && (await page.inputValue('#f-partners-1-display_name')) === 'Marco');
-    check('setup 1: rights rule shown before publishing', (await page.locator('main').innerText()).includes('After that you have 3 name and date changes in total'));
+    check('setup 1: rights rule shown before publishing', (await page.locator('main').innerText()).includes('After that, names and date can change 3 times'));
     check('setup 1: no character counters on short names (G060-fix)', !(await page.locator('main').innerText()).includes('/40'));
     check('setup: no bottom navigation in the wizard', (await page.locator('nav[aria-label="Editor"]').count()) === 0);
     check('setup: no horizontal scroll at 390 px', (await overflow(page)) <= 0, String(await overflow(page)));
@@ -183,7 +183,7 @@ try {
     await waitSaved(page);
     await pause(400);
     const s1 = await page.locator('main').innerText();
-    check('setup 1 (K29): the date is on the same step, no banners above it, the rule shown once', !s1.includes('These are still the sample details') && s1.split('name and date changes in total').length === 2 && (await page.locator('[data-sample-tag]').count()) >= 1, s1.slice(0, 200));
+    check('setup 1 (K29): the date is on the same step, no banners above it, the rule shown once', !s1.includes('These are still the sample details') && s1.split('names and date can change 3 times').length === 2 && (await page.locator('[data-sample-tag]').count()) >= 1, s1.slice(0, 200));
     check('setup 1 (K29): no venue in the setup (later, under Edit → Day & place)', (await page.locator('#f-venue-name').count()) === 0);
     await page.waitForSelector('[data-zone-from-phone]');
     check('setup 1: the time zone follows the phone ("We\u2019ll use London time, from your phone")', (await page.locator('[data-zone-from-phone]').innerText()).includes('London'));

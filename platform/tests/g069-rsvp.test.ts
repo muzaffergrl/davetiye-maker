@@ -21,6 +21,7 @@ import { parseCoupleReply, parseSubmission } from '../lib/rsvp/validate.ts';
 import { createSiteWithKeys, publishSite, setArchiveOverride } from '../lib/sites.ts';
 import { FakeBlobStore } from './fake-blob.ts';
 import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
+import { builtDesignThemes } from './design-themes.ts';
 
 const BASE = 'http://localhost:3000';
 type Keys = { id: string; slug: string; editKey: string };
@@ -413,9 +414,9 @@ test('blob adapter: party and source stored, updateRsvp corrects one reply (edit
 
 // ---------------------------------------------------------------------------------------------- theme form contract
 
-test('themes 01–05: the reply form carries the party template (one input, number, error slot) and no input name of its own', () => {
+test('every design theme: the reply form carries the party template (one input, number, error slot) and no input name of its own', () => {
   // G084: 02, 05 and (second round) 04 too
-  for (const id of ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter']) {
+  for (const id of builtDesignThemes()) {
     const html = readFileSync(path.join(PLATFORM_ROOT, 'themes', id, 'rsvp.html'), 'utf8');
     const $ = cheerio.load(html);
     const tpl = $('form[data-rsvp-form] template[data-rsvp-party]');

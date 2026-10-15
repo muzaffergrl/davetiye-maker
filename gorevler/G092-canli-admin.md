@@ -2,8 +2,8 @@
 id: G092
 baslik: Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol
 rol: claude-tarayici
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-1
 oncelik: 1
 bagimli: []
 yazar: [docs/10_SITE_PLATFORMU.md, docs/10_canli_test/, platform/README.md, docs/17_ADMIN_PANELI.md]
@@ -39,3 +39,4 @@ G091'in /start, panel yardımı ve satış sitesi metin düzeltmeleri.
 
 ## Günlük
 - 2026-10-15 açıldı (entegratör, kullanıcı K30/K33)
+- 2026-10-15 alindi: claude-local-1
