@@ -1,0 +1,27 @@
+/* Coastal Seaside (design 20) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">),
+   so the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
+
+/* the card's window: the couple's thank-you photo, else the sea mist and the scallop shell on its twine from the envelope
+   (decoration, not a placeholder) */
+.photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
+.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                          background: var(--mist) url("img/sea-570.webp") 50% 30% / cover; }
+.photo-slot > .ty-decor > img { width: 76%; height: auto; display: block; translate: 0 3%; rotate: -6deg;
+                                filter: drop-shadow(0 6px 7px rgba(40, 30, 20, .24)) drop-shadow(0 1px 1px rgba(40, 30, 20, .18)); }
+
+/* card copy: the thank-you title (≤ 60 characters) wraps in the script, the date under it */
+.card-copy .ty-title { font-family: var(--script); color: var(--script-ink); font-size: max(13px, 12.4cqw); line-height: .98;
+                       text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.card-copy[data-drop~="s"] .ty-title { font-size: max(13px, 9.4cqw); }   /* site.js fitCopy: smaller, never dropped */
+
+/* the thank-you card (invitation_card paper, 3-slice: the message lengthens it): title, message, signature, date */
+/* the title starts under the dune grass and stays inside its plain paper (free_zone: the grass reaches ~34 %) */
+.ty-text .ty-head { margin-top: 2cqw; max-width: 64cqw; font-size: 13.6cqw; line-height: 1; }
+.ty-text .ty-message { margin-top: 3.6cqw; font-style: italic; font-size: max(15px, 4.2cqw); line-height: 1.55; color: var(--ink);
+                       white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
+.ty-text .ty-love { margin-top: 4.4cqw; font-size: 11.6cqw; line-height: 1; color: var(--script-ink); }
+.ty-text .ty-love + .nm { font-size: 13.6cqw; }
+.ty-text .city { margin-top: 2.4cqw; }
+
+/* RSVP card: "Replies are closed", the thank-you title under it */
+.rsvp-text .ty-kicker { max-width: 66cqw; line-height: 1.5; text-wrap: balance; overflow-wrap: break-word; }
