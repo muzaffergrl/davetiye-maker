@@ -2164,21 +2164,6 @@
    }
   ]
  },
- "accent_3": {
-  "src_size": [
-   151,
-   200
-  ],
-  "ratio": 0.755,
-  "files": [
-   {
-    "file": "accent_3-151.webp",
-    "w": 151,
-    "h": 200,
-    "bytes": 8664
-   }
-  ]
- },
  "mist": {
   "src_size": [
    640,
@@ -2590,12 +2575,6 @@
    "core": 96,
    "reach_px": 3,
    "removed_px": 2448
-  },
-  "accent_3": {
-   "alpha_floor": 12,
-   "core": 96,
-   "reach_px": 3,
-   "removed_px": 3302
   }
  },
  "checks": {

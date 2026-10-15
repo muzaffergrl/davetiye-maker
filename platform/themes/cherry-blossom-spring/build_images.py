@@ -535,7 +535,9 @@ def main():
         webp(im, nm, WIDTHS[nm])
     for nm in ("florals_tl", "florals_br"):
         manifest[nm]["occupancy_16"] = doluluk_haritasi(out / manifest[nm]["files"][-1]["file"])
-    for i in (1, 2, 3):
+    # accent_1 = yaprak (süzülen, açılış girdabı, varış/kapanış), accent_2 = tek çiçek (çizgi · çiçek · çizgi, hap, yer
+    # tutucu işareti); accent_3 (tomurcuk) bu temada kullanılmıyor → yazılmaz (docs/11 §1: kullanılmayan görsel yok)
+    for i in (1, 2):
         im, temizlik[f"accent_{i}"] = hale_temizle(Image.open(prep / f"accent_{i}.png"), sert=False)
         im = im.crop(alfa_kutu(im))
         im.thumbnail((200, 200), Image.LANCZOS)
