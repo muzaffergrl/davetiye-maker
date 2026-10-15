@@ -1,0 +1,203 @@
+{
+  "base": "next start (production build), local adapter, seeded demo",
+  "viewport": "390x844 (isMobile, touch, DPR 2)",
+  "theme": "sunflower-rustic-barn",
+  "setup": {
+    "demo_record": "platform/themes/sunflower-rustic-barn/content.demo.json",
+    "photos": "collections/16_Sunflower_Rustic/assets/gpt/photos (PAKET 2)",
+    "notes": [],
+    "skipped": []
+  },
+  "checks": [
+    {
+      "name": "guest: envelope page 200",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "guest: envelope has no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "guest: envelope names from the content record",
+      "ok": true
+    },
+    {
+      "name": "guest: tap on the envelope opens /home",
+      "ok": true
+    },
+    {
+      "name": "guest: home shows names, date and venue",
+      "ok": true,
+      "detail": "We're getting married AUGUST 28, 2027 FRANKLIN Daisy & Wyatt SATURDAY · AUGUST 28, 2027 Golden Field Barn Franklin, Tenn"
+    },
+    {
+      "name": "guest: home has no broken images",
+      "ok": true
+    },
+    {
+      "name": "guest: home has no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "guest: no \"Your photo here\" label for guests",
+      "ok": true
+    },
+    {
+      "name": "guest: story page via the nav",
+      "ok": true
+    },
+    {
+      "name": "guest: story has no broken images / overflow",
+      "ok": true
+    },
+    {
+      "name": "guest: details shows the schedule time as \"4:00 PM\"-style",
+      "ok": true
+    },
+    {
+      "name": "guest: details has no broken images / overflow",
+      "ok": true
+    },
+    {
+      "name": "guest: RSVP page has the form",
+      "ok": true
+    },
+    {
+      "name": "guest: RSVP page has no overflow",
+      "ok": true
+    },
+    {
+      "name": "guest: \"thank you\" panel after sending",
+      "ok": true
+    },
+    {
+      "name": "guest: reply stored for this site",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "name": "guest: no console or page errors",
+      "ok": true
+    },
+    {
+      "name": "buyer: /start page 200 with title",
+      "ok": true
+    },
+    {
+      "name": "buyer: design name shown",
+      "ok": true,
+      "detail": "Sunflower Rustic Barn"
+    },
+    {
+      "name": "buyer: /start has no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "buyer: address follows the names",
+      "ok": true
+    },
+    {
+      "name": "buyer: edit link shown",
+      "ok": true,
+      "detail": "http://127.0.0.1:3321/edit/elena-and-marco?k=…"
+    },
+    {
+      "name": "buyer: site not public before Publish",
+      "ok": true
+    },
+    {
+      "name": "buyer: the editor opens the setup at step 1 with the names (G060)",
+      "ok": true
+    },
+    {
+      "name": "buyer: panel draft status",
+      "ok": true
+    },
+    {
+      "name": "buyer: setup has no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "buyer: Home shows the names",
+      "ok": true
+    },
+    {
+      "name": "buyer: panel has no horizontal overflow",
+      "ok": true
+    },
+    {
+      "name": "buyer: Publish button in the top bar, >= 44 px",
+      "ok": true,
+      "detail": "{\"x\":292.359375,\"y\":8,\"width\":85.640625,\"height\":44}"
+    },
+    {
+      "name": "buyer: photo uploaded (1 of 5 photos)",
+      "ok": true
+    },
+    {
+      "name": "buyer: \"Before you publish\" notes (sample text from the demo, empty photo places)",
+      "ok": true,
+      "detail": "Before you publish Your wedding date is still the design’s sample Guests would see Saturday, August 28, 2027. Set your real date before you publish. Set our date Saturday, August 28, 2027 really is ou"
+    },
+    {
+      "name": "buyer: \"Publish anyway\" reachable on the phone (sheet scrolls)",
+      "ok": true,
+      "detail": "{\"x\":16,\"y\":784,\"width\":216.40625,\"height\":48}"
+    },
+    {
+      "name": "buyer: the sample date holds the first publish until confirmed",
+      "ok": true
+    },
+    {
+      "name": "buyer: \"Your website is live\"",
+      "ok": true
+    },
+    {
+      "name": "buyer: public link shown",
+      "ok": true
+    },
+    {
+      "name": "buyer: QR decodes to the public URL",
+      "ok": true
+    },
+    {
+      "name": "buyer site: public envelope 200",
+      "ok": true
+    },
+    {
+      "name": "buyer site: home shows the buyer names",
+      "ok": true
+    },
+    {
+      "name": "buyer site: uploaded portrait is public after publishing",
+      "ok": true,
+      "detail": "/media/b33aaf1b-471b-470b-a746-5e255ddf0058/5c88b3796faa7bd80eb2aa5ff297d312-1024w.jpg"
+    },
+    {
+      "name": "buyer site: no \"Your photo here\" label",
+      "ok": true
+    },
+    {
+      "name": "buyer site: guest reply sent",
+      "ok": true
+    },
+    {
+      "name": "buyer site: no console or page errors",
+      "ok": true
+    },
+    {
+      "name": "buyer: the reply shows in the panel",
+      "ok": true,
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 275 days. Last day: Saturday, July 17, 2027 (UTC time). 1 new re"
+    },
+    {
+      "name": "buyer: panel has no overflow at the end",
+      "ok": true
+    },
+    {
+      "name": "buyer: no console or page errors",
+      "ok": true
+    }
+  ]
+}
