@@ -20,7 +20,7 @@
     },
     {
       "name": "guest: envelope names from the content record",
-      "ok": false
+      "ok": true
     },
     {
       "name": "guest: tap on the envelope opens /home",
@@ -28,7 +28,7 @@
     },
     {
       "name": "guest: home shows names, date and venue",
-      "ok": false,
+      "ok": true,
       "detail": "WE'RE GETTING MARRIED DECEMBER 18, 2027 CHICAGO VIVIAN & CHARLES SATURDAY · DECEMBER 18, 2027 THE GRAND LUMIÈRE HOTEL CH"
     },
     {
@@ -100,7 +100,7 @@
     {
       "name": "buyer: edit link shown",
       "ok": true,
-      "detail": "http://127.0.0.1:3460/edit/elena-and-marco?k=…"
+      "detail": "http://127.0.0.1:3395/edit/elena-and-marco?k=…"
     },
     {
       "name": "buyer: site not public before Publish",
@@ -167,12 +167,12 @@
     },
     {
       "name": "buyer site: home shows the buyer names",
-      "ok": false
+      "ok": true
     },
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/d5232325-b768-41ec-9681-36468e42b89b/e638db0d3395f8ede1e2aff9540bb7e3-1024w.jpg"
+      "detail": "/media/2a4f121e-efc5-4811-bdd1-3de16df0b49d/8cf68d71b8b3e3c3c32d989dd0098438-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
