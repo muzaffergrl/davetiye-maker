@@ -2,12 +2,14 @@
 // Shop admin — one website (G087, K30). Order: what to do now (confirm the order) → facts → ready Etsy messages →
 // support actions → delete → history. Every action calls /api/admin/sites/<id>/<action> (lib/admin/api.ts), which
 // runs the same lib/sites.ts functions the old terminal scripts used.
-import { ArrowLeft, Check, Copy, ExternalLink, Hourglass } from 'lucide-react';
+import { ArrowLeft, Check, Download, ExternalLink, Eye, Hourglass, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState, type ReactNode } from 'react';
 import { MESSAGE_TEMPLATES, renderMessage } from '../../lib/admin/messages.ts';
 import type { AdminHistoryEntry, AdminSiteSummary } from '../../lib/admin/view.ts';
+import type { AdminContentView, AdminRsvpView } from '../../lib/admin/api.ts';
+import { CopyButton } from './CopyButton.tsx';
 import styles from './admin.module.css';
 import { StateBadges } from './badges.tsx';
 import { day, stamp } from './format.ts';
@@ -20,43 +22,6 @@ type Status = { kind: 'ok' | 'err'; text: string } | null;
 function longEnglishDate(iso: string): string {
   const t = Date.parse(`${iso}T12:00:00Z`);
   return Number.isFinite(t) ? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(t) : iso;
-}
-
-async function copyText(value: string): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(value);
-    return true;
-  } catch {
-    const ta = document.createElement('textarea');
-    ta.value = value;
-    ta.setAttribute('readonly', '');
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    const ok = document.execCommand('copy');
-    ta.remove();
-    return ok;
-  }
-}
-
-function CopyButton({ value, label = 'Kopyala' }: { value: string; label?: string }) {
-  const [done, setDone] = useState(false);
-  return (
-    <button
-      type="button"
-      className={styles.btnSmall}
-      onClick={async () => {
-        if (await copyText(value)) {
-          setDone(true);
-          setTimeout(() => setDone(false), 1800);
-        }
-      }}
-    >
-      {done ? <Check size={16} aria-hidden /> : <Copy size={16} aria-hidden />}
-      {done ? 'Kopyalandı' : label}
-    </button>
-  );
 }
 
 function Fact({ label, children }: { label: string; children: ReactNode }) {
@@ -77,10 +42,24 @@ function StatusLine({ status }: { status: Status }) {
   );
 }
 
-export default function AdminSite(props: { summary: AdminSiteSummary; history: AdminHistoryEntry[]; origin: string }) {
+export default function AdminSite(props: {
+  summary: AdminSiteSummary;
+  history: AdminHistoryEntry[];
+  content: AdminContentView;
+  rsvp: AdminRsvpView;
+  previewPath: string;
+  origin: string;
+}) {
   const router = useRouter();
   const [s, setS] = useState(props.summary);
   const [history, setHistory] = useState(props.history);
+  const [content, setContent] = useState(props.content);
+  const [rsvp, setRsvp] = useState(props.rsvp);
+  const [previewPath, setPreviewPath] = useState(props.previewPath);
+  const [noteText, setNoteText] = useState(props.summary.note ?? '');
+  const [emailText, setEmailText] = useState(props.summary.ownerEmail ?? '');
+  const [editingEmail, setEditingEmail] = useState(false);
+  const [picked, setPicked] = useState<string[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
   const [status, setStatus] = useState<Record<string, Status>>({});
   const [editUrl, setEditUrl] = useState<string | null>(null);
@@ -130,12 +109,15 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
         return false;
       }
       if (data.deleted) {
-        router.push('/admin');
+        router.push('/admin/orders');
         router.refresh();
         return true;
       }
       setS(data.summary);
       setHistory(data.history);
+      if (data.content) setContent(data.content);
+      if (data.rsvp) setRsvp(data.rsvp);
+      if (data.previewPath) setPreviewPath(data.previewPath);
       if (data.editUrl) setEditUrl(data.editUrl);
       if (ok) setStatus((m) => ({ ...m, [action]: { kind: 'ok', text: ok } }));
       return true;
@@ -150,8 +132,8 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
 
   return (
     <>
-      <Link href="/admin" className={`${styles.link} ${styles.back}`}>
-        <ArrowLeft size={18} aria-hidden /> Bütün siteler
+      <Link href="/admin/orders" className={`${styles.link} ${styles.back}`}>
+        <ArrowLeft size={18} aria-hidden /> Siparişler
       </Link>
       <StateBadges summary={s} />
       <h1 className={styles.h1} style={{ marginTop: 10 }}>
@@ -159,15 +141,27 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
       </h1>
       <p className={styles.lead}>
         /{s.slug} · {s.themeName}
-        {s.state === 'published' ? (
-          <>
-            {' · '}
-            <a className={styles.link} href={siteUrl} target="_blank" rel="noreferrer">
-              Siteyi aç <ExternalLink size={14} aria-hidden style={{ verticalAlign: '-2px' }} />
-            </a>
-          </>
-        ) : null}
+        {s.orderRef ? ` · #${s.orderRef}` : ''}
       </p>
+      <div className={styles.quick} data-quick="">
+        {s.state === 'published' ? (
+          <a className={styles.btnSmall} href={siteUrl} target="_blank" rel="noreferrer" data-quick-site="">
+            Siteyi aç <ExternalLink size={14} aria-hidden />
+          </a>
+        ) : null}
+        <a className={styles.btnSmall} href={previewPath} target="_blank" rel="noreferrer" data-quick-preview="">
+          <Eye size={16} aria-hidden /> Taslağı gör
+        </a>
+        <a className={styles.btnSmall} href={ETSY_ORDERS_URL} target="_blank" rel="noreferrer">
+          Etsy siparişleri <ExternalLink size={14} aria-hidden />
+        </a>
+        <a className={styles.btnSmall} href="#msg-title">
+          <Send size={16} aria-hidden /> Mesaj
+        </a>
+        <a className={styles.btnSmall} href="#rsvp-title">
+          Misafir yanıtları ({s.replies})
+        </a>
+      </div>
 
       {s.needsAction ? (
         <section className={styles.callout} aria-labelledby="todo-title" data-todo="confirm">
@@ -229,8 +223,36 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
           <Fact label="Sipariş kontrolü">
             {s.order === 'pending' ? 'Onay bekliyor' : s.order === 'verified' ? `Onaylandı · ${stamp(s.orderCheckedAt)}` : 'Gerekmedi'}
           </Fact>
-          <Fact label="E-posta">{s.ownerEmail ? <>{s.ownerEmail} <CopyButton value={s.ownerEmail} /></> : '—'}</Fact>
+          <Fact label="E-posta">
+            {s.ownerEmail ? <>{s.ownerEmail} <CopyButton value={s.ownerEmail} /></> : '—'}
+            <button type="button" className={styles.btnSmall} onClick={() => setEditingEmail((x) => !x)} data-action="email-edit">
+              Değiştir
+            </button>
+          </Fact>
+          {editingEmail ? (
+            <div style={{ padding: '8px 0 12px' }}>
+              <label className={styles.label} htmlFor="email-edit">
+                Alıcının doğru e-postası
+              </label>
+              <input id="email-edit" className={styles.input} type="email" value={emailText} onChange={(e) => setEmailText(e.target.value)} autoComplete="off" />
+              <div className={styles.row} style={{ marginTop: 8 }}>
+                <button
+                  type="button"
+                  className={styles.btnGhost}
+                  disabled={busy !== null || !emailText.trim()}
+                  onClick={async () => {
+                    if (await run('email', { email: emailText }, 'E-posta kaydedildi.')) setEditingEmail(false);
+                  }}
+                  data-action="email"
+                >
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          ) : null}
+          <StatusLine status={status.email ?? null} />
           <Fact label="Tasarım">{s.themeName}</Fact>
+          <Fact label="Oluşturan">{s.madeByShop ? 'Dükkân (Yeni sipariş)' : 'Alıcı (/start)'}</Fact>
           <Fact label="Adres">
             {siteUrl.replace(/^https?:\/\//, '')} <CopyButton value={siteUrl} />
           </Fact>
@@ -243,6 +265,125 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
           <Fact label="İsim/tarih hakkı">{s.changes ? `${s.changes.left} / ${s.changes.total} kaldı` : 'İlk yayından sonra sayılır'}</Fact>
           <Fact label="Misafir şifresi">{s.guestPassword ? 'Açık' : 'Kapalı'}</Fact>
         </dl>
+      </section>
+
+      <section className={styles.card} aria-labelledby="note-title" data-note="">
+        <h2 id="note-title" className={styles.h2}>
+          Dükkân notu
+        </h2>
+        <p className={styles.actionText}>Yalnız siz görürsünüz (alıcı ve misafirler görmez). Örneğin Etsy&apos;deki özel istek, iade durumu, konuşma özeti.</p>
+        <label className={styles.visuallyHidden} htmlFor="note-text">
+          Not
+        </label>
+        <textarea id="note-text" className={styles.textarea} value={noteText} onChange={(e) => setNoteText(e.target.value)} maxLength={2000} placeholder="Not yazın…" />
+        <div className={styles.row} style={{ marginTop: 10 }}>
+          <button
+            type="button"
+            className={styles.btnGhost}
+            disabled={busy !== null || noteText.trim() === (s.note ?? '')}
+            onClick={() => run('note', { note: noteText }, noteText.trim() ? 'Not kaydedildi.' : 'Not silindi.')}
+            data-action="note"
+          >
+            Notu kaydet
+          </button>
+          {s.noteAt ? <span className={styles.hint}>Son: {stamp(s.noteAt)}</span> : null}
+        </div>
+        <StatusLine status={status.note ?? null} />
+      </section>
+
+      <section className={styles.card} aria-labelledby="content-title" data-content="">
+        <h2 id="content-title" className={styles.h2}>
+          Sitede ne var
+        </h2>
+        <p className={styles.actionText}>Alıcının taslağındaki bilgiler (salt okunur; alıcı panelinden değiştirir). Tamamını görmek için &quot;Taslağı gör&quot;.</p>
+        <dl className={styles.facts}>
+          <Fact label="İsimler">{s.names}</Fact>
+          <Fact label="Tarih / saat">
+            {day(content.date)}
+            {content.time ? ` · ${content.time}` : ''}
+          </Fact>
+          <Fact label="Mekân">{content.venue ?? '—'}</Fact>
+          {content.address ? <Fact label="Adres">{content.address}</Fact> : null}
+          <Fact label="Program">{content.schedule.length ? content.schedule.map((x) => `${x.time} ${x.label}`).join(' · ') : '—'}</Fact>
+          <Fact label="RSVP son günü">{day(content.rsvpDeadline)}</Fact>
+          {content.dressCode ? <Fact label="Kıyafet">{content.dressCode}</Fact> : null}
+          <Fact label="Fotoğraf">{content.photos}</Fact>
+          <Fact label="SSS">{content.faq}</Fact>
+          <Fact label="Saat dilimi">{content.timezone ?? '—'}</Fact>
+        </dl>
+      </section>
+
+      <section className={styles.card} aria-labelledby="rsvp-title" data-rsvp="">
+        <h2 id="rsvp-title" className={styles.h2}>
+          Misafir yanıtları
+        </h2>
+        <p className={styles.actionText}>
+          {rsvp.counts.responses} yanıt · {rsvp.counts.attending} katılıyor ({rsvp.counts.totalGuests} kişi) · {rsvp.counts.notAttending} katılmıyor
+          {rsvp.counts.held ? ` · ${rsvp.counts.held} beklemede (olağan dışı yoğunluk)` : ''}
+        </p>
+        <div className={styles.row} style={{ marginBottom: 6 }}>
+          <a className={styles.btnSmall} href={`/api/admin/sites/${encodeURIComponent(s.id)}/rsvps`} download data-rsvp-csv="">
+            <Download size={16} aria-hidden /> CSV indir
+          </a>
+          {picked.length ? (
+            confirming === 'rsvp-delete' ? (
+              <>
+                <button
+                  type="button"
+                  className={styles.btnDanger}
+                  style={{ minHeight: 36 }}
+                  disabled={busy !== null}
+                  onClick={async () => {
+                    if (await run('rsvp-delete', { ids: picked }, `${picked.length} yanıt silindi.`)) setPicked([]);
+                  }}
+                  data-action="rsvp-delete-confirm"
+                >
+                  Evet, {picked.length} yanıtı sil
+                </button>
+                <button type="button" className={styles.btnSmall} onClick={() => setConfirming(null)}>
+                  Vazgeç
+                </button>
+              </>
+            ) : (
+              <button type="button" className={styles.btnSmall} onClick={() => setConfirming('rsvp-delete')} data-action="rsvp-delete">
+                Seçilenleri sil ({picked.length})
+              </button>
+            )
+          ) : null}
+        </div>
+        <StatusLine status={status['rsvp-delete'] ?? null} />
+        {rsvp.responses.length === 0 ? (
+          <p className={styles.hint}>Henüz yanıt yok.</p>
+        ) : (
+          <ul className={styles.rows}>
+            {rsvp.responses.slice(0, 200).map((r) => (
+              <li key={r.id} className={styles.reply} data-reply={r.id}>
+                <input
+                  type="checkbox"
+                  aria-label={`${r.name} yanıtını seç`}
+                  checked={picked.includes(r.id)}
+                  onChange={(e) => setPicked((x) => (e.target.checked ? [...x, r.id] : x.filter((y) => y !== r.id)))}
+                />
+                <div className={styles.rowMain}>
+                  <p className={styles.rowTitle}>
+                    {r.name}{' '}
+                    <span className={r.attending ? styles.badgeOk : styles.badgeMuted}>{r.attending ? `Katılıyor · ${r.guests} kişi` : 'Katılmıyor'}</span>
+                    {r.held ? <span className={styles.badgeWarn}> Beklemede</span> : null}
+                  </p>
+                  <p className={styles.siteMeta}>
+                    {stamp(r.createdAt)}
+                    {r.email ? ` · ${r.email}` : ''}
+                    {r.source === 'couple' ? ' · çift ekledi' : ''}
+                    {r.party.length ? ` · ${r.party.join(', ')}` : ''}
+                  </p>
+                  {r.message ? <p className={styles.siteMeta} style={{ color: 'var(--c-text)' }}>“{r.message}”</p> : null}
+                  {r.answers.length ? <p className={styles.siteMeta}>{r.answers.map((a) => `${a.question}: ${a.answer}`).join(' · ')}</p> : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {rsvp.responses.length > 200 ? <p className={styles.hint}>İlk 200 yanıt gösteriliyor; hepsi CSV&apos;de.</p> : null}
       </section>
 
       <section className={styles.card} aria-labelledby="msg-title">
@@ -408,6 +549,32 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
             </>
           ) : null}
           <StatusLine status={status.archive ?? null} />
+        </div>
+
+        <div className={styles.action}>
+          <p className={styles.actionTitle}>{s.state === 'published' ? 'Değişiklikleri alıcı adına yayınla' : 'Alıcı adına yayınla'}</p>
+          <p className={styles.actionText}>
+            Alıcı isterse ya da Publish&apos;e basmayı unuttuysa: taslak, panelin kurallarıyla (eksik alan, isim/tarih hakkı) kontrol edilip yayınlanır.
+          </p>
+          {s.state === 'published' && !s.unpublishedChanges ? (
+            <p className={styles.hint}>Site yayında; yayınlanmamış değişiklik yok.</p>
+          ) : s.needsAction ? (
+            <p className={styles.hint}>Önce siparişi onaylayın.</p>
+          ) : confirming === 'publish' ? (
+            <div className={styles.row}>
+              <button type="button" className={styles.btn} disabled={busy !== null} onClick={() => run('publish', {}, 'Yayınlandı.')} data-action="publish-confirm">
+                Evet, yayınla
+              </button>
+              <button type="button" className={styles.btnGhost} onClick={() => setConfirming(null)}>
+                Vazgeç
+              </button>
+            </div>
+          ) : (
+            <button type="button" className={styles.btnGhost} disabled={busy !== null} onClick={() => setConfirming('publish')} data-action="publish">
+              Yayınla
+            </button>
+          )}
+          <StatusLine status={status.publish ?? null} />
         </div>
 
         <div className={styles.action}>

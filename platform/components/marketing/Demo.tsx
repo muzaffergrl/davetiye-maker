@@ -22,6 +22,8 @@ export interface DemoDesign {
   etsyUrl: string | null;
 }
 
+/** G094: design chips shown before "+N more" on wide screens when there are more than eight designs. */
+const CHIPS_WIDE = 7;
 const FRAME_W = 390;
 const FRAME_H = 844;
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
@@ -187,7 +189,12 @@ export function HeroDemo({
 }) {
   const [sel, setSel] = useState(0);
   const [inline, setInline] = useState<{ n: number } | null>(null);
+  const [allChips, setAllChips] = useState(false);
+  const chipsRef = useRef<HTMLDivElement>(null);
   const d = designs[sel];
+  // G094: up to eight names show in full on wide screens (two rows at 1280 px, G093); beyond that, the first
+  // CHIPS_WIDE and a "+N more" chip
+  const collapse = designs.length > 8 && !allChips;
 
   const start = (from: string) => {
     if (window.matchMedia('(min-width: 1024px)').matches) {
@@ -263,13 +270,36 @@ export function HeroDemo({
       {/* G093: the chips are their own grid item — under the poster on phones and tablets, in the text column above
           the main button on wide screens (eight names wrapped to four rows under the poster at 1280 px and pushed the
           button out of the first screen). */}
+      {/* G094: with more than eight designs, wide screens show the first CHIPS_WIDE names and a "+N more" chip that
+          reveals the rest (fourteen names wrapped to four rows and pushed the main button below the first screen at
+          1280 × 800). Phones and tablets keep every chip in the sideways strip; the more chip is hidden there. */}
       {designs.length > 1 ? (
-        <div className={s.chips} role="group" aria-label="Choose a design" data-scroll-x>
+        <div ref={chipsRef} className={s.chips} role="group" aria-label="Choose a design" data-scroll-x data-all={collapse ? undefined : ''}>
           {designs.map((x, i) => (
-            <button key={x.id} type="button" className={s.chip} aria-pressed={i === sel} onClick={() => choose(i)}>
+            <button
+              key={x.id}
+              type="button"
+              className={i >= CHIPS_WIDE ? `${s.chip} ${s.chipExtra}` : s.chip}
+              aria-pressed={i === sel}
+              onClick={() => choose(i)}
+            >
               {x.name}
             </button>
           ))}
+          {collapse ? (
+            <button
+              type="button"
+              className={`${s.chip} ${s.chipMore}`}
+              aria-label={`Show ${designs.length - CHIPS_WIDE} more designs`}
+              onClick={() => {
+                setAllChips(true);
+                // the more chip goes away: focus moves to the first name it revealed
+                requestAnimationFrame(() => chipsRef.current?.querySelectorAll('button')[CHIPS_WIDE]?.focus());
+              }}
+            >
+              +{designs.length - CHIPS_WIDE} more
+            </button>
+          ) : null}
         </div>
       ) : null}
       <div className={s.heroCta}>

@@ -293,6 +293,186 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'forest green envelope with a snowy deckle edge, sealed with a pine-and-berry bundle tied with a red bow; pine, juniper, winter berries, pine cones, falling snow and frosted window frames.',
     relatedGuides: ['when-to-send-your-wedding-website', 'digital-wedding-invitation-etiquette'],
   },
+  // G094: written against themes/lavender-provence/README.md (G409), the catalogue's opening line (docs/09 WEB 09) and
+  // its real screens and opening frames (390 × 844 capture).
+  'lavender-provence': {
+    id: 'lavender-provence',
+    collection: '09_Lavender_Provence',
+    demoCouple: 'Amélie & Louis',
+    style: 'Cream linen pouch tied with jute twine and a lavender bundle, pressed lavender, daisies and pressed-flower cards',
+    metaDescription:
+      'A linen pouch tied with twine and a lavender bundle opens into your wedding website: pressed lavender, daisies and wheat. Edit it on your phone.',
+    intro:
+      'A Provence lavender field on handmade lilac paper: pressed lavender, white daisies and wheat ears in two corners, loose lavender buds on the paper, and instead of an envelope a cream linen pouch tied with jute twine and a lavender bundle. Inside: deckle-edged cream cards, pressed-flower frames and a flowing script.',
+    opening:
+      'Your guests tap the pouch. The jute twine unties and slips away with its lavender bundle, the linen pouch loosens and opens, and a card with your portrait slides up out of it while dried lavender buds scatter on a summer breeze. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a deckle-edged cream card, your names, date, venue, a live countdown and a lavender RSVP button, then the invitation card and three pressed-flower cards dropped loosely on the paper that lead to Our Story, the day and the reply.',
+      story: 'Three photos on pressed-flower cards set at loose angles; as guests scroll, each one tumbles in on a breeze from its own side and settles, with a handwritten caption below.',
+      details: 'An "Order of the Day" card with lavender-and-daisy sprigs between the rows, add to calendar, the venue photo in a wide pressed-flower frame, dress code, links and questions and answers.',
+      rsvp: 'A "Will You Join Us?" card with your reply-by date, signed with your names, with a lavender bundle on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Lilac Paper', hex: '#D6CCE5' },
+      { name: 'Lavender', hex: '#9C8FC4' },
+      { name: 'Violet', hex: '#5D5287' },
+      { name: 'Ivory', hex: '#FAF8F3' },
+      { name: 'Ink', hex: '#2E2A3F' },
+    ],
+    fonts: ['Alex Brush', 'Cormorant Garamond'],
+    llmsLine: 'cream linen pouch tied with jute twine and a lavender bundle on lilac paper; pressed lavender, white daisies, wheat ears and pressed-flower cards.',
+    relatedGuides: ['how-to-make-a-wedding-website', 'what-to-put-on-your-wedding-website'],
+  },
+  // G094: written against themes/tuscan-vineyard/README.md (G410), the catalogue's opening line (docs/09 WEB 10) and its
+  // real screens and opening frames (390 × 844 capture).
+  'tuscan-vineyard': {
+    id: 'tuscan-vineyard',
+    collection: '10_Tuscan_Vineyard',
+    demoCouple: 'Giulia & Matteo',
+    style: 'Kraft envelope tied with twine, a cork and olive leaves, grape clusters, vine leaves and wine-label frames',
+    metaDescription:
+      'A kraft envelope tied with twine and a cork opens into your wedding website: Tuscan sunset, grapes, olive leaves and wine-label frames. Edit it on your phone.',
+    intro:
+      'A vineyard wedding at sunset: a Tuscan sky over soft hills, grape clusters, vine leaves and olive branches in two corners, and a kraft envelope with a wine-colored engraved vine border on its flap, wrapped in jute twine with a cork and two dried olive leaves. Inside: wine-label cards and frames with cut corners, an oak table and a flowing script.',
+    opening:
+      'Your guests tap the envelope. The twine unwinds upward off the flap tip with its cork and olive leaves, the kraft flap opens to reveal a wine-colored grape liner, and a card with your portrait rises from the pocket as a vine tendril curls in from the corner. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a wine-label card, your names, date, venue, a live countdown and a wine-red RSVP button, then the invitation card and three vineyard rows that lead to Our Story, the day and the reply.',
+      story: 'Three photos in wine-label frames laid one by one on an oak table; as guests scroll, each frame drops into place, its caption appears, and a grape cluster, an olive leaf and a vine leaf settle beside them.',
+      details: 'An "Order of the Day" card with small vine sprigs between the rows, add to calendar, the venue photo in a wide wine-label frame, dress code, links and questions and answers.',
+      rsvp: 'A "Will You Join Us?" card with your reply-by date, signed with your names and tied with the twine and cork at its base, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Wine', hex: '#5B2C3A' },
+      { name: 'Gold', hex: '#A9874F' },
+      { name: 'Sunset', hex: '#FDDDB4' },
+      { name: 'Peach Paper', hex: '#FAE6CF' },
+      { name: 'Ivory', hex: '#FBF6EC' },
+    ],
+    fonts: ['Italianno', 'Marcellus'],
+    llmsLine: 'kraft envelope wrapped in jute twine with a cork and olive leaves under a Tuscan sunset; grape clusters, vine leaves, olive branches, wine-label frames and an oak table.',
+    relatedGuides: ['wedding-website-wording', 'canva-wedding-website-template-vs-hosted-website'],
+  },
+  // G094: written against themes/boho-pampas-terracotta/README.md (G411), the catalogue's opening line (docs/09 WEB 11)
+  // and its real screens and opening frames (390 × 844 capture).
+  'boho-pampas-terracotta': {
+    id: 'boho-pampas-terracotta',
+    collection: '11_Boho_Pampas',
+    demoCouple: 'Luna & River',
+    style: 'Terracotta arch envelope tied with pampas and a palm spear, dried roses and arch frames on sunlit sand',
+    metaDescription:
+      'A terracotta arch envelope tied with pampas and palm opens into your wedding website: pampas plumes, dried roses and arch frames. Edit it on your phone.',
+    intro:
+      'A desert boho wedding on a sunlit sand wall with soft sun rays: pampas grass, dried palm spears and dried terracotta roses in two corners, and a terracotta envelope with a round arch flap and an arched front pocket, tied with pampas and palm. Inside: arch-windowed cards and frames in terracotta and sand, and a brush script.',
+    opening:
+      'Your guests tap the envelope. The pampas-and-palm tie slips off, the arch flap folds upward to show a liner of terracotta rainbows, and a card with your portrait slides slowly up out of the arch like a rising sun while a pampas plume sways in from the side. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in an arch-windowed card, your names, date, venue, a live countdown and a terracotta RSVP button, then the invitation card, an arch photo frame and an arched card with the first lines of your schedule that lead to Our Story and the day.',
+      story: 'Three photos in arch frames, the middle one a little taller and in front; as guests scroll, the arches open out from their base like a rainbow, the middle one first, and then the script captions appear.',
+      details: 'An arched "Order of the Day" card with pampas sprigs between the rows, add to calendar, the venue photo in a wide arch frame, dress code, links and questions and answers.',
+      rsvp: 'An arched "Will You Join Us?" card with your reply-by date, signed with your names and the pampas-and-palm tie on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Terracotta', hex: '#C9785B' },
+      { name: 'Rust', hex: '#9C5136' },
+      { name: 'Sand', hex: '#F3DEC6' },
+      { name: 'Gold', hex: '#C29A5B' },
+      { name: 'Ivory', hex: '#FBF5EC' },
+    ],
+    fonts: ['Sacramento', 'Josefin Slab'],
+    llmsLine: 'terracotta arch envelope tied with pampas and a dried palm spear on a sunlit sand wall; pampas plumes, dried terracotta roses and arch frames.',
+    relatedGuides: ['when-to-send-your-wedding-website', 'what-to-put-on-your-wedding-website'],
+  },
+  // G094: written against themes/tropical-destination/README.md (G412), the catalogue's opening line (docs/09 WEB 12)
+  // and its real screens and opening frames (390 × 844 capture).
+  'tropical-destination': {
+    id: 'tropical-destination',
+    collection: '12_Tropical_Destination',
+    demoCouple: 'Maya & Kai',
+    style: 'Travel wallet with a leather strap and a brass snap, plumeria, monstera, hibiscus and luggage-tag frames',
+    metaDescription:
+      'A travel wallet with a brass snap and a plumeria opens into your wedding website: monstera, hibiscus and string-tied luggage tags. Edit it on your phone.',
+    intro:
+      'A destination wedding on a soft sea-foam wash: monstera, palm leaves, hibiscus and plumeria in two corners, and a white travel wallet with a round flap and a leather strap, closed with a brass snap, twine and a white plumeria. Inside: a palm-leaf liner, luggage-tag and kraft-tag frames on strings and a flowing script.',
+    opening:
+      'Your guests tap the wallet. The brass snap pops open and the plumeria tab swings away, the round flap flips up with its strap to reveal the palm-leaf liner, and a luggage-tag card with your portrait slides up while a monstera leaf and a white plumeria drift across the screen. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a luggage-tag card, your names, date, venue, a live countdown and a teal RSVP button, then the invitation card with a travel-tag date line and two kraft tags that lead to Our Story and the details of the day.',
+      story: 'Three photos on string-tied kraft tags, each with a flower tucked in a corner; as guests scroll, each tag swings into place from the top of its string and keeps swaying gently, with a handwritten caption below.',
+      details: 'An "Order of the Day" card with palm-and-plumeria sprays between the rows, add to calendar, the venue photo on a wide kraft tag, dress code, links and questions and answers.',
+      rsvp: 'A "Will You Join Us?" card with your reply-by date, signed with your names and closed with the brass snap and plumeria on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Teal', hex: '#1F7C75' },
+      { name: 'Palm', hex: '#1F5843' },
+      { name: 'Gold', hex: '#C4963F' },
+      { name: 'Lagoon', hex: '#E8FCF8' },
+      { name: 'Ivory', hex: '#FFFCF5' },
+    ],
+    fonts: ['Dancing Script', 'Raleway'],
+    llmsLine: 'travel wallet with a leather strap, a brass snap and a white plumeria on a sea-foam wash; palm-leaf liner, monstera, hibiscus, plumeria and string-tied luggage tags.',
+    relatedGuides: ['digital-wedding-invitation-etiquette', 'how-to-make-a-wedding-website'],
+  },
+  // G094: written against themes/enchanted-forest-storybook/README.md (G413), the catalogue's opening line (docs/09
+  // WEB 13) and its real screens and opening frames (390 × 844 capture).
+  'enchanted-forest-storybook': {
+    id: 'enchanted-forest-storybook',
+    collection: '13_Enchanted_Forest',
+    demoCouple: 'Aurora & Rowan',
+    style: 'Moss-green storybook with a brass clasp, ferns, toadstools, fireflies and photo-cornered storybook pages',
+    metaDescription:
+      'A moss-green storybook with a brass clasp opens into your wedding website: a misty forest, ferns, toadstools and fireflies. Edit it on your phone.',
+    intro:
+      'A fairy-tale forest clearing in the mist, lit by fireflies: ivy, foxgloves, ferns, moss and little toadstools in two corners, and an old moss-green storybook with an embossed gold fern-and-mushroom border and a leaf-carved brass clasp. Inside: aged cream book pages with a fine ink border, photos held by black photo corners and a flowing script.',
+    opening:
+      'Your guests tap the book. The brass clasp unhooks and swings away, the moss-green cover swings open to the left like a storybook, the first page turns, and a card with your portrait rises from the page while tiny fireflies glow up around it. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a book-page card with four photo corners, your names, date, venue, a live countdown and a moss-green RSVP button, then the invitation card and two photo-cornered pictures that lead to Our Story and the details of the day.',
+      story: 'One long storybook page with three photo-cornered pictures in a zigzag; as guests scroll, each picture is pressed onto the page, a fern sprig and a firefly appear beside it, and its caption is written below.',
+      details: 'An "Order of the Day" page with ivy sprigs between the rows, add to calendar, the venue photo in a wide photo-cornered card, dress code, links and questions and answers.',
+      rsvp: "A \"Will You Join Us?\" page with your reply-by date, signed with your names and the book's brass clasp on its lower edge, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Moss', hex: '#4A5A3A' },
+      { name: 'Old Gold', hex: '#B7975A' },
+      { name: 'Sepia', hex: '#5E4517' },
+      { name: 'Parchment', hex: '#DED8B8' },
+      { name: 'Mist', hex: '#ECE9D6' },
+    ],
+    fonts: ['Tangerine', 'IM Fell English'],
+    llmsLine: 'moss-green storybook with an embossed gold border and a brass clasp in a misty forest; ferns, ivy, foxgloves, toadstools, fireflies and photo-cornered book pages.',
+    relatedGuides: ['wedding-website-wording', 'digital-wedding-invitation-etiquette'],
+  },
+  // G094: written against themes/ivory-lace-pearls/README.md (G414), the catalogue's opening line (docs/09 WEB 14) and
+  // its real screens and opening frames (390 × 844 capture).
+  'ivory-lace-pearls': {
+    id: 'ivory-lace-pearls',
+    collection: '14_Ivory_Lace_Pearl',
+    demoCouple: 'Charlotte & William',
+    style: 'Lace-covered ivory gatefold with a pearl brooch, white garden roses, pearl strands and carved oval frames',
+    metaDescription:
+      'A lace-covered ivory gatefold with a pearl brooch opens into your wedding website: white garden roses, pearl strands and oval frames. Edit it on your phone.',
+    intro:
+      'Regal ivory on pearly satin, lit from a window: ivory lace, strands of pearls and white garden roses in two corners, a pearl drop, rose petals and a satin bow, and a two-door ivory gatefold covered in lace, fastened over the center seam with a five-pearl silver-gold brooch. Inside: carved ivory oval frames, lace-edged cards and an engraved copperplate script.',
+    opening:
+      'Your guests tap the gatefold. The pearl brooch unhooks and slips away down the seam, the lace-covered doors part slowly to the sides like a lifted veil, and a card with your portrait rises from the satin center while a strand of tiny pearls glints. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in a carved oval frame on an ivory card, your names, date, venue, a live countdown and a champagne RSVP button, then the invitation card and two frames hung on pearl strands that lead to Our Story and the details of the day.',
+      story: 'Three oval frames hanging from pearl strands of different lengths; as guests scroll, each one comes down and sways gently on its strand before it settles, a band of light passes over the carved ivory and pearls, and its caption appears below.',
+      details: 'An "Order of the Day" card with pearl strands between the rows, add to calendar, the venue photo in a wide carved oval frame, dress code, links and questions and answers.',
+      rsvp: 'A lace-edged "Will You Join Us?" card with your reply-by date, signed with your names and the pearl brooch on its lower edge, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Satin', hex: '#F1E7DE' },
+      { name: 'Ivory', hex: '#FFFDF8' },
+      { name: 'Taupe', hex: '#7A6650' },
+      { name: 'Champagne Gold', hex: '#8C7350' },
+      { name: 'Ink', hex: '#3A3530' },
+    ],
+    fonts: ['Mrs Saint Delafield', 'Bodoni Moda'],
+    llmsLine: 'lace-covered ivory gatefold fastened with a pearl brooch on pearly satin; ivory lace, pearl strands, white garden roses and carved oval frames.',
+    relatedGuides: ['when-to-send-your-wedding-website', 'canva-wedding-website-template-vs-hosted-website'],
+  },
 };
 
 export interface Design extends DesignCommerce {

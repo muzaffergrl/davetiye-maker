@@ -1,0 +1,174 @@
+/* /my — "My website" (G095): the panel's BKE Studio language (one accent colour, warm paper, white cards). */
+.page {
+  --c-anchor: #2b1526;
+  --c-bg: #faf7f0;
+  --c-surface: #ffffff;
+  --c-text: #202020;
+  --c-muted: #5c5560;
+  --c-border: #ebe3d6;
+  --c-control: #8c7f8a;
+  --c-danger: #b0261e;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--bke-body, 'DM Sans'), system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.inner {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 28px 16px 64px;
+}
+
+.brand {
+  display: inline-flex;
+  margin-bottom: 28px;
+}
+
+.h1 {
+  font-family: var(--bke-display, 'Archivo'), 'Arial Black', Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 6vw + 8px, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--c-anchor);
+  margin: 0 0 10px;
+}
+
+.lead {
+  color: var(--c-muted);
+  margin: 0 0 22px;
+}
+
+.card {
+  background: var(--c-surface);
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(43, 21, 38, 0.06), 0 6px 18px rgba(43, 21, 38, 0.06);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.h2 {
+  font-weight: 750;
+  font-size: 18px;
+  color: var(--c-anchor);
+  margin: 0 0 8px;
+}
+
+.p {
+  margin: 0 0 12px;
+}
+
+.small {
+  font-size: 14px;
+  color: var(--c-muted);
+  margin: 8px 0 0;
+}
+
+.btn,
+.btnGhost,
+.btnText {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn {
+  width: 100%;
+  background: var(--c-anchor);
+  color: #fff;
+}
+
+.btnGhost {
+  background: var(--c-surface);
+  color: var(--c-anchor);
+  border-color: var(--c-control);
+}
+
+.btnText {
+  min-height: 44px;
+  padding: 0 4px;
+  background: none;
+  color: var(--c-muted);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.btn:focus-visible,
+.btnGhost:focus-visible,
+.btnText:focus-visible,
+.input:focus-visible {
+  outline: 3px solid var(--c-anchor);
+  outline-offset: 2px;
+}
+
+.editor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.editor:last-child {
+  border-bottom: 0;
+}
+
+.names {
+  font-weight: 750;
+  color: var(--c-anchor);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--c-control);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font: inherit;
+  margin-bottom: 10px;
+}
+
+.label {
+  display: block;
+  font-weight: 650;
+  margin: 0 0 6px;
+}
+
+.err {
+  color: var(--c-danger);
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.link {
+  color: var(--c-anchor);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}

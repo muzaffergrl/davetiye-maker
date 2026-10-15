@@ -56,6 +56,14 @@ export interface SiteRecord {
    * (the default). Private: never rendered into a page, never sent to guests; the couple sees it in the panel (Share).
    */
   guestAccess?: GuestAccessRecord | null;
+  /** The shop's private note about this site/order (shop admin, G095). Never shown to the buyer or guests. */
+  adminNote?: AdminNoteRecord | null;
+}
+
+/** Shop-only note on a site (lib/admin). */
+export interface AdminNoteRecord {
+  text: string;
+  at: string;
 }
 
 /** The website's guest password (G076). Kept with the site, deleted with it. */
@@ -134,9 +142,12 @@ export interface SitePatch {
   archiveOverrideAt?: string | null;
   orderCheck?: OrderCheckRecord | null;
   guestAccess?: GuestAccessRecord | null;
+  adminNote?: AdminNoteRecord | null;
+  /** Shop admin correction of the buyer's email (the order index is keyed by orderRef, not by email). */
+  ownerEmail?: string | null;
 }
 
-export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess'] as const satisfies ReadonlyArray<keyof SitePatch>;
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail'] as const satisfies ReadonlyArray<keyof SitePatch>;
 
 /** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
 export function applySitePatch(site: SiteRecord, patch: SitePatch): void {

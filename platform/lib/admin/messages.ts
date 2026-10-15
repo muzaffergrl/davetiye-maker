@@ -41,6 +41,7 @@ const TITLES_TR: Record<string, [string, string]> = {
   order_confirmed: ['Sipariş onaylandı — yayınlayabilir', 'Siparişi burada onayladıktan hemen sonra. Platform alıcıya kendiliğinden haber vermez.'],
   how_to_publish: ['Nasıl yayınlanır / misafirler değişikliği görmüyor', 'Alıcı nasıl yayınlayacağını soruyor ya da misafirlerin bir değişikliği görmediğini söylüyor.'],
   new_edit_link: ['Yeni düzenleme linki (kayıp link)', '"Yeni düzenleme linki"nden sonra. Yalnız bu siparişin kendi Etsy konuşmasında gönderin.'],
+  shop_created_site: ['Siteniz hazır (dükkân kurdu) + düzenleme linki', '"Yeni sipariş" ile siteyi siz oluşturduktan hemen sonra. Link yalnız o an gösterilir.'],
   order_already_used: ['"Bu siparişin zaten sitesi var" hatası', 'Alıcı başlatma sayfasında "This order already has a website" gördüğünü söylüyor.'],
   wrong_design_started: ['Başka tasarımla başlamış', 'Alıcı satın aldığından farklı bir tasarımla site açmış.'],
   extra_change_granted: ['Ek isim/tarih hakkı eklendi', 'Hak ekledikten sonra (ör. düğün gerçekten ertelendi).'],

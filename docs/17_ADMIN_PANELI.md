@@ -11,6 +11,14 @@ Adres: **`/admin`** (satış sitesiyle aynı alan adı). Dil: Türkçe (dükkân
   oturumlar düşer. Deneme sınırı: adres başına 15 dakikada 8, toplam saatte 40 (doğru ya da yanlış her deneme sayılır).
 - Sayfalar `noindex`, `no-store`, `no-referrer`, çerçeveye alınmaz (`frame-ancestors 'none'`). Yazma isteklerinde Origin kontrolü.
 
+## 1a. v2 (G095, 2026-10-15)
+Menü: **Özet · Siparişler · Müşteriler · Tasarımlar · + Yeni sipariş**. Özet = `/admin` (sayılar, Yapılacaklar, haftalık satış,
+en çok satanlar, yaklaşan düğünler, son siparişler); eski liste `/admin/orders`'a taşındı (+ sıralama, CSV). Müşteriler
+(e-postaya göre), Tasarımlar (satış/yayında/linkler), Yeni sipariş (dükkân alıcı adına site açar, link bir kez + mesaj).
+Site sayfasına: Taslağı gör, dükkân notu, sitede ne var, misafir yanıtları (sil, CSV), e-posta düzeltme, alıcı adına yayınla.
+Satış sitesinde **My website** → `/my` (alıcının bu cihazda açtığı düzenleyici; link yapıştırma; /start; kayıp link).
+Ayrıntı: `gorevler/G095-admin-v2.md`. Aşağıdaki §2 v1 ekranlarını anlatır; site sayfası aynen geçerlidir.
+
 ## 2. Ekranlar
 **Liste (`/admin`)** — "Satış sonrası nasıl işliyor?" açılır kutusu; filtre çipleri **Yapılacak · Hepsi · Yayında · Taslak · Arşiv**
 (sayılarla; onay bekleyen sipariş varsa Yapılacak seçili açılır); arama (sipariş no — `#3456` gibi —, e-posta, isimler, adres, tasarım);

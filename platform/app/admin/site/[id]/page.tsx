@@ -31,8 +31,15 @@ export default async function AdminSitePage({ params }: { params: Promise<{ id: 
   const detail = await adminSite(id);
   if (!detail) notFound();
   return (
-    <AdminShell signedIn narrow>
-      <AdminSite summary={detail.summary} history={detail.history} origin={publicOrigin(await headers())} />
+    <AdminShell signedIn narrow active="orders">
+      <AdminSite
+        summary={detail.summary}
+        history={detail.history}
+        content={detail.content}
+        rsvp={detail.rsvp}
+        previewPath={detail.previewPath}
+        origin={publicOrigin(await headers())}
+      />
     </AdminShell>
   );
 }

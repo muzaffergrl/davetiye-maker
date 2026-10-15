@@ -60,6 +60,9 @@ function otherTargetOk(href: string): boolean {
   if (u.pathname.startsWith('/marketing/') || u.pathname.startsWith('/brand/')) {
     return existsSync(path.join(PLATFORM_ROOT, 'public', decodeURIComponent(u.pathname)));
   }
+  // G095: the buyer's "My website" page and the shop login are app routes outside the marketing group.
+  if (u.pathname === '/my') return existsSync(path.join(PLATFORM_ROOT, 'app/my/page.tsx'));
+  if (u.pathname === '/admin') return existsSync(path.join(PLATFORM_ROOT, 'app/admin/page.tsx'));
   return ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt'].includes(u.pathname);
 }
 

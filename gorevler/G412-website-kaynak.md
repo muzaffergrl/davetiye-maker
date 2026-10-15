@@ -2,7 +2,7 @@
 id: G412
 baslik: Tasarım 12 Tropical Destination — platform teması
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-local-G412
 oncelik: 3
 bagimli: [G212, G038, G046, G052]
@@ -55,3 +55,4 @@ Tasarım 12'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-local-G412
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı

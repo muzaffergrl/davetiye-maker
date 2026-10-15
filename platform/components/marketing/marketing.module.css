@@ -915,6 +915,20 @@
     font-size: 13px;
   }
 }
+/* G094: more than eight designs — phones and tablets scroll through every name (the more chip is not needed there);
+   wide screens show the first seven names and "+N more" until it is pressed. A selected name always stays shown. */
+.chipMore {
+  display: none;
+  border-style: dashed;
+}
+@media (min-width: 1024px) {
+  .chipMore {
+    display: inline-block;
+  }
+  .chips:not([data-all]) > .chipExtra:not([aria-pressed='true']) {
+    display: none;
+  }
+}
 .heroCaption {
   display: none;
   font-size: 14px;
@@ -2376,5 +2390,69 @@
   .shell *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* "My website" (G095): the buyer's way back into their editor (/my). Visible at every width. */
+.myBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  margin-left: auto;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  color: var(--anchor);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.myBtn:hover {
+  background: rgba(43, 21, 38, 0.06);
+}
+
+.myBtn:focus-visible {
+  outline: 3px solid var(--anchor);
+  outline-offset: 2px;
+}
+
+.myBtn ~ .mobileMenu {
+  margin-left: 8px;
+}
+
+@media (max-width: 1023px) {
+  .headerInner {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 429px) {
+  .myBtn {
+    padding: 0 12px;
+    font-size: 13.5px;
+  }
+
+  .myBtn svg {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .myBtn {
+    margin-left: 16px;
+  }
+}
+
+@media (max-width: 379px) {
+  .headerInner {
+    gap: 4px;
+  }
+
+  .myBtn {
+    padding: 0 9px;
+    font-size: 12.5px;
   }
 }

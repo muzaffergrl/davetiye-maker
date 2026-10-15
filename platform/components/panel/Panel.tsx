@@ -36,6 +36,7 @@ import {
   WifiOff,
   type LucideIcon,
 } from 'lucide-react';
+import { rememberEditor } from '../../lib/panel/remember.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
@@ -296,6 +297,17 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     () => readiness({ sections: sectionIds, errors: validation.errors, notes, theme, content, published: meta.status === 'published' }),
     [sectionIds, validation.errors, notes, theme, content, meta.status],
   );
+  // "My website" on the sales site (/my) brings the buyer back here from this device (lib/panel/remember.ts).
+  useEffect(() => {
+    rememberEditor({
+      slug: initial.slug,
+      path: `/edit/${initial.slug}?k=${encodeURIComponent(editKey)}`,
+      names: content.name_display || content.partners.map((p) => p.display_name).filter(Boolean).join(' & '),
+      at: new Date().toISOString(),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once per open; the names are refreshed on the next visit
+  }, [initial.slug, editKey]);
+
   // Read after mount (localStorage), so the server's and the browser's first render match.
   const [storedStep, setStoredStep] = useState<number | null>(null);
   useEffect(() => setStoredStep(readSetupStep(initial.slug)), [initial.slug, route]);

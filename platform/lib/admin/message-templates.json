@@ -107,6 +107,25 @@
     "note": "Never paste {edit_url} into any other template, note or log. Tell the buyer to use the newest link if they asked twice."
   },
   {
+    "id": "shop_created_site",
+    "title": "Your website is ready (set up by the shop)",
+    "when": "Right after the shop creates the website in the admin for a buyer (for example, the buyer asked us to set it up).",
+    "placeholders": [
+      "names",
+      "design",
+      "edit_url",
+      "site_url",
+      "shop"
+    ],
+    "body": [
+      "Hi {names}, thank you for your order! We have set up your {design} wedding website for you.",
+      "Here is your private edit link:\n{edit_url}",
+      "It opens your editor, where you can change every text, add your photos and publish when you are ready. Your website starts as a private draft: nobody can see it until you publish it. Your website address will be {site_url}.",
+      "Please save the link now: copy it into your notes app or email it to yourself. Share it only with your partner. We will never ask you for it.",
+      "{shop}"
+    ]
+  },
+  {
     "id": "order_already_used",
     "title": "Start page says: this order already has a website",
     "when": "The buyer reports 'This order already has a website' on the start page.",
