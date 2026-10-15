@@ -75,19 +75,19 @@ toplanır — `clip-path` alttan —, düğüm uçtan kalkıp tırmanır, teller
 kraft kapak menteşesinde 0→90° açılır (`env_cflap`), açık kapak (astar yüzü) −90°→0 devralır ve şarap rengi üzüm astarı görünür
 (`env_closed` → `env_body` + `env_pocket`), kart cepten yükselirken **köşeden bir asma dalı kıvrılarak gelir** (accent_2 × 1,
 tasarıma özel `path: 'curl'`: sağ üst köşenin dışından ~1 tur kapanan sarmalla kartın yanına, dönerek; `go`'dan önce söner),
-kart olduğu yerde öne gelir (× 1,04, büyüyen gölge) ve home kartına uçar (view transition). Dokun → home 4,45 s.
+kart olduğu yerde öne gelir (× 1,04, büyüyen gölge) ve home kartına uçar (view transition). Dokun → home: `go` 3,95 s (+ sayfa geçişi; theme-check yüklü makinede 5,3–5,5 s ölçtü, bkz. G410 Sonuç).
 
 | Adım | ms (başlangıç, süre) |
 |---|---|
 | hint, tug | 0 / 300, 320 |
-| closure (sicim çözülür) | 0, 1050 |
+| closure (sicim çözülür) | 0, 950 |
 | head | 160, 620 |
-| lift (kapak 0→90°) | 820, 900 |
-| open (gövde takası) | 860, 420 |
-| flap (astar yüzü −90→0°) | 1720, 760 |
-| rise / accents (dal) | 2150, 1400 / 2050 |
-| forward | 3550, 650 |
-| go | 4450 |
+| lift (kapak 0→90°) | 760, 880 |
+| open (gövde takası) | 800, 420 |
+| flap (astar yüzü −90→0°) | 1640, 720 |
+| rise / accents (dal) | 2040, 1260 / 1950 |
+| forward | 3300, 560 |
+| go | 3950 |
 
 Kart yolu: `out` −90,015 % (alt köşeler cebin kenarını kartın %4'ü kadar aşar), `front` −87,015 % × 1,04 (aynı yerde öne; aşağı
 dönüş yok). Kart genişliği zarfın 0,54'ü (W1.2 kartı ÷ W1.1 zarfı ≈ 0,51).

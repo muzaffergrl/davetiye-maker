@@ -89,6 +89,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .site-nav ul { pointer-events: auto; display: flex; justify-content: center; align-items: center; width: fit-content; max-width: 100%; margin: 0 auto; padding: 0 4px; list-style: none; }
 .site-nav li { display: flex; align-items: center; }
 .site-nav li + li::before { content: "·"; content: "·" / ""; color: var(--gold); font-size: 16px; }
+@media (max-width: 400px) { .site-nav a { padding: 0 8px; letter-spacing: .15em; } }   /* Marcellus capitals are wide */
 .site-nav a {
   display: flex; align-items: center; min-height: var(--nav-h); padding: 0 11px; text-decoration: none;
   font: 400 12px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft);
@@ -122,8 +123,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="place"] { transform: translate3d(0, -26px, 0) scale(1.07) rotate(3deg); filter: drop-shadow(0 34px 26px rgba(40, 20, 10, .35)); --dur: 1150ms; }
 .js [data-a="place"].in { filter: drop-shadow(0 12px 10px rgba(40, 20, 10, .3)); }
 .js [data-a="settle"] { transform: translate3d(0, -14px, 0) rotate(-14deg); --dur: 900ms; }
-.js [data-a="row-l"] { transform: translate3d(-34px, 0, 0); --dur: 1200ms; }
-.js [data-a="row-r"] { transform: translate3d(34px, 0, 0); --dur: 1200ms; }
+.js [data-a="row-l"] { transform: translate3d(-12px, 0, 0); --dur: 1200ms; }   /* within the 16 px gutter */
+.js [data-a="row-r"] { transform: translate3d(12px, 0, 0); --dur: 1200ms; }
 
 /* -- photo slots (docs/11 §5.6, §9) */
 .photo-slot { position: absolute; overflow: hidden; background: #F3E3CC; }
@@ -198,9 +199,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
   text-align: center; padding: max(calc(46px + env(safe-area-inset-top)), calc(var(--w) * .80882 - 100px)) 16px calc(22px + env(safe-area-inset-bottom));
 }
-/* the leftover height: a quarter above, three quarters below (the hint stays above the hills) */
+/* the leftover height: a seventh above, the rest below (names near the comp's height, the hint above the hills) */
 .env-page::before { content: ""; flex: 1 1 0; }
-.env-page::after { content: ""; flex: 3 1 0; }
+.env-page::after { content: ""; flex: 6 1 0; }
 .env-head { position: relative; z-index: 3; width: min(100%, 560px); pointer-events: none; text-shadow: var(--halo); }
 .env-head .kicker { width: fit-content; margin-inline: auto; font-size: 13px; letter-spacing: .3em; }
 .names { margin-top: 6px; font-size: calc(var(--nm) * var(--names-scale, 1)); line-height: .98; text-wrap: balance; overflow-wrap: break-word; }
@@ -301,6 +302,23 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   .countdown, .hero-cta { margin-top: clamp(8px, 4svh - 12px, 26px); }
   .cd-num { font-size: clamp(26px, min(8.6vw, 5svh), 40px); }
   .hero-cta .btn { min-height: 46px; min-width: 150px; padding-inline: 32px; }
+}
+/* short phones (375×553 …): the tall label card beside the names, the countdown and the pill under both (all above the nav) */
+@media (max-aspect-ratio: 3/4) and (max-height: 600px) {
+  .hero-inner { display: grid; grid-template: 1fr repeat(4, auto) 1fr auto auto / auto minmax(0, 1fr); column-gap: 14px; align-items: center;
+                padding-top: calc(10px + env(safe-area-inset-top)); }
+  .hero-card { grid-area: 1 / 1 / 7 / 2; width: clamp(118px, 41svh * .5684, 150px); }
+  .hero .names { grid-area: 2 / 2; margin-top: 0; }
+  .hero-date { grid-area: 3 / 2; margin-top: 6px; line-height: 1.45; }
+  .hero-sprig { display: none; }
+  .hero-venue { grid-area: 4 / 2; margin-top: 4px; }
+  .hero-city { grid-area: 5 / 2; }
+  .countdown { grid-area: 7 / 1 / 8 / -1; margin-top: 10px; }
+  .hero-cta { grid-area: 8 / 1 / 9 / -1; margin-top: 10px; }
+  .hero.is-long .countdown { grid-row: 8; }
+  .hero.is-long .hero-cta { grid-row: 7; }
+  .env-page::before { flex-grow: 0; }
+  .hero .float { display: none; }   /* no room beside the names */
 }
 /* site.js fitNames */
 .hero.is-tight .hero-sprig { display: none; }

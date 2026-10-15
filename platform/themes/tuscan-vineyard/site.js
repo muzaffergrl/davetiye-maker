@@ -8,16 +8,16 @@ const MOTION = {
   envelope: {
     hint:    [0, 300],      // "Tap to open" fades
     tug:     [0, 320],      // the envelope gives under the finger
-    closure: [0, 1050],     // the twine unwinds upward off the flap tip: the lower strand gathers up, the knot (cork + two
+    closure: [0, 950],      // the twine unwinds upward off the flap tip: the lower strand gathers up, the knot (cork + two
                             // olive leaves) lifts off the tip, the strands slip over the edges, then it is gone (< 250 ms)
     head:    [160, 620],    // "You are invited" + names rise away
-    lift:    [820, 900],    // the kraft flap opens on its hinge, 0° → 90°
-    open:    [860, 420],    // closed body → open body (wine grape liner + pocket)
-    flap:    [1720, 760],   // the open flap (liner side) lies back from −90°
-    rise:    [2150, 1400],  // the card rises out of the pocket …
-    accents: 2050,          // … as a vine tendril curls in from the corner (accent_2, one)
-    forward: [3550, 650],   // the card comes forward where it is (× 1.04)
-    go:      4450,          // to home (the card flies into the hero card)
+    lift:    [760, 880],    // the kraft flap opens on its hinge, 0° → 90°
+    open:    [800, 420],    // closed body → open body (wine grape liner + pocket)
+    flap:    [1640, 720],   // the open flap (liner side) lies back from −90°
+    rise:    [2040, 1260],  // the card rises out of the pocket …
+    accents: 1950,          // … as a vine tendril curls in from the corner (accent_2, one)
+    forward: [3300, 560],   // the card comes forward where it is (× 1.04)
+    go:      3950,          // to home (the card flies into the hero card)
     fadeOut: 420            // fade without cross-document view transitions
   },
 
@@ -375,7 +375,8 @@ const DEV_CONTENT = {
       if (inner && nav) fold(hero);
     });
     run();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+    // fonts: once ready and again whenever a face arrives later (a slow Google Fonts answer changes the names' height)
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(run); document.fonts.addEventListener('loadingdone', run); }
     if (window.ResizeObserver) { const ro = new ResizeObserver(fitCopy); document.querySelectorAll('.card-copy').forEach((c) => ro.observe(c)); }
     let rt;
     window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(run, 150); });

@@ -1,0 +1,898 @@
+{
+ "base": "next start (production build)",
+ "theme": "tuscan-vineyard",
+ "errors": [
+  "draft preview: page.check: Timeout 10000ms exceeded."
+ ],
+ "warnings": [],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 75 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 2 families (Italianno, Marcellus), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections\\10_Tuscan_Vineyard\\assets\\gpt\\photos (PAKET 2))",
+  "index@360: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@360: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@360: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@360: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@390: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@430: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@430: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@430: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@430: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@768: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@768: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@768: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@768: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@1280: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@1280: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@1280: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@1280: no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@390 (no photos): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 16 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots preview-placeholder",
+  "envelope closed @360×640: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 3 texts (kicker, script, env-hint) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (22 pieces, CTA \"RSVP\" bottom 558, names 40 px) ends at 558, above the nav (top 566)",
+  "home@360×640: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553: home-hero (21 pieces, CTA \"RSVP\" bottom 409, names 46 px) ends at 409, above the nav (top 479)",
+  "home@375×553: no overflow, 27 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (design range): names 51.2 px (≥ 32); nothing partly under the nav (top 566): the first screen ends at 537, the hero goes on below it from 652 (≥ 640); CTA \"RSVP\" bottom 537",
+  "home@360×640 (design range): no overflow, 33 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (design range): names 40.5 px (≥ 32); nothing partly under the nav (top 479): the first screen ends at 441; CTA \"RSVP\" bottom 441",
+  "home@375×553 (design range): no overflow, 33 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @360×640 (stress record): names 40 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 907, nav top 566)",
+  "home@360×640 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "home @375×553 (stress record): names 40 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 851, nav top 479)",
+  "home@375×553 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 57×44, home \"Replay the envelope\" 220×48, rsvp \"Replay the envelope\" 177×48",
+  "envelope → /giulia-and-matteo/home in 5530 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (12 steps)",
+  "countdown target from the platform: 2027-09-25 16:00 Europe/Rome = 2027-09-25 14:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-09-25T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-09-30T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (449 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390 (changed content): no overflow, 29 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@390 (changed content): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 18 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@360 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 37 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 41 fields = content record, 28 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
+  "story@390 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 37 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 5 fields = content record, 29 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 7 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 35 fields = content record, 11 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 36 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 7 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 11 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 75 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 1238 KB",
+  "home first view (390×844, DPR 3, placeholders): 938 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 1331 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1201 KB"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections\\10_Tuscan_Vineyard",
+   "demo_record": "platform\\themes\\tuscan-vineyard\\content.demo.json",
+   "photos": "collections\\10_Tuscan_Vineyard\\assets\\gpt\\photos (PAKET 2)",
+   "w1_comps": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "compare": "w1",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (card_small, invitation_card, info_card)",
+   "fonts": [
+    "Italianno",
+    "Marcellus"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 75,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (198 KB, 1024×1379, variants 640)",
+   "story_1 → media.memory_photos.0 (198 KB, 1024×1398, variants 640)",
+   "story_2 → media.memory_photos.1 (261 KB, 1024×1398, variants 640)",
+   "story_3 → media.memory_photos.2 (148 KB, 1024×1398, variants 640)",
+   "venue → media.venue_image (372 KB, 1536×967, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.58,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.52,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.47,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.94,
+      "dark": 0.01
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.49,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.52,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 1.51,
+      "dark": 0.045
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.73,
+      "dark": 0.002
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.63,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.48,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.57,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 1.86,
+      "dark": 0.019
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "kicker",
+      "edge": 0.58,
+      "dark": 0
+     },
+     {
+      "box": "script names",
+      "edge": 0.44,
+      "dark": 0
+     },
+     {
+      "box": "env-hint",
+      "edge": 0.36,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "replay textlink",
+      "edge": 0.32,
+      "dark": 0
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 566,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 558,
+    "above": 558,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 558
+    },
+    "bad": [],
+    "partly": [],
+    "names": 40
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 479,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 409,
+    "above": 409,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 409
+    },
+    "bad": [],
+    "partly": [],
+    "names": 46
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 316,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 709,
+    "above": 288,
+    "below": 394,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 709
+    },
+    "bad": [
+     "span \"Giulia\" bottom 459",
+     "span.amp \"&\" bottom 459",
+     "span \"Matteo\" bottom 459",
+     "p.kicker.hero-date.in.done \"Saturday · September 25,\" bottom 481",
+     "span \"Saturday\" bottom 478",
+     "span.nowrap \"September 25, 2027\" bottom 478",
+     "p.hero-venue.in.done \"Tenuta del Sole\" bottom 550",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 576",
+     "span.cd-num \"345\" bottom 628",
+     "span.cd-lbl \"Days\" bottom 645",
+     "span.cd-num \"04\" bottom 628",
+     "span.cd-lbl \"Hours\" bottom 645",
+     "span.cd-num \"49\" bottom 628",
+     "span.cd-lbl \"Minutes\" bottom 645",
+     "span.cd-num \"00\" bottom 628",
+     "span.cd-lbl \"Seconds\" bottom 645",
+     "a.btn \"RSVP\" bottom 709"
+    ],
+    "partly": [],
+    "names": 52
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 301,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 694,
+    "above": 288,
+    "below": 379,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 694
+    },
+    "bad": [
+     "span \"Giulia\" bottom 444",
+     "span.amp \"&\" bottom 444",
+     "span \"Matteo\" bottom 444",
+     "p.kicker.hero-date.in.done \"Saturday · September 25,\" bottom 466",
+     "span \"Saturday\" bottom 463",
+     "span.nowrap \"September 25, 2027\" bottom 463",
+     "p.hero-venue.in.done \"Tenuta del Sole\" bottom 535",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 561",
+     "span.cd-num \"345\" bottom 613",
+     "span.cd-lbl \"Days\" bottom 630",
+     "span.cd-num \"04\" bottom 613",
+     "span.cd-lbl \"Hours\" bottom 630",
+     "span.cd-num \"48\" bottom 613",
+     "span.cd-lbl \"Minutes\" bottom 630",
+     "span.cd-num \"52\" bottom 613",
+     "span.cd-lbl \"Seconds\" bottom 630",
+     "a.btn \"RSVP\" bottom 694"
+    ],
+    "partly": [],
+    "names": 52
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 566,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 691,
+    "above": 537,
+    "below": 652,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 537
+    },
+    "bad": [
+     "span.cd-num \"349\" bottom 674",
+     "span.cd-lbl \"Days\" bottom 691",
+     "span.cd-num \"02\" bottom 674",
+     "span.cd-lbl \"Hours\" bottom 691",
+     "span.cd-num \"48\" bottom 674",
+     "span.cd-lbl \"Minutes\" bottom 691",
+     "span.cd-num \"44\" bottom 674",
+     "span.cd-lbl \"Seconds\" bottom 691"
+    ],
+    "partly": [],
+    "names": 51.2
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 479,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 441,
+    "above": 441,
+    "below": null,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 441
+    },
+    "bad": [],
+    "partly": [],
+    "names": 40.5
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 316,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 795,
+    "above": 288,
+    "below": 394,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 795
+    },
+    "bad": [
+     "span \"Alexandrina Rose\" bottom 459",
+     "span.amp \"&\" bottom 510",
+     "span \"Maximilian James\" bottom 510",
+     "p.kicker.hero-date.in.done \"Wednesday · 29 September\" bottom 532",
+     "span \"Wednesday\" bottom 529",
+     "span.nowrap \"29 September 2027\" bottom 529",
+     "p.hero-venue.in.done \"The Orangery and Walled \" bottom 636",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 662",
+     "span.cd-num \"349\" bottom 714",
+     "span.cd-lbl \"Days\" bottom 731",
+     "span.cd-num \"02\" bottom 714",
+     "span.cd-lbl \"Hours\" bottom 731",
+     "span.cd-num \"48\" bottom 714",
+     "span.cd-lbl \"Minutes\" bottom 731",
+     "span.cd-num \"27\" bottom 714",
+     "span.cd-lbl \"Seconds\" bottom 731",
+     "a.btn \"RSVP\" bottom 795"
+    ],
+    "partly": [],
+    "names": 52
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 301,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 780,
+    "above": 288,
+    "below": 379,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 780
+    },
+    "bad": [
+     "span \"Alexandrina Rose\" bottom 444",
+     "span.amp \"&\" bottom 495",
+     "span \"Maximilian James\" bottom 495",
+     "p.kicker.hero-date.in.done \"Wednesday · 29 September\" bottom 517",
+     "span \"Wednesday\" bottom 514",
+     "span.nowrap \"29 September 2027\" bottom 514",
+     "p.hero-venue.in.done \"The Orangery and Walled \" bottom 621",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 647",
+     "span.cd-num \"349\" bottom 699",
+     "span.cd-lbl \"Days\" bottom 716",
+     "span.cd-num \"02\" bottom 699",
+     "span.cd-lbl \"Hours\" bottom 716",
+     "span.cd-num \"48\" bottom 699",
+     "span.cd-lbl \"Minutes\" bottom 716",
+     "span.cd-num \"21\" bottom 699",
+     "span.cd-lbl \"Seconds\" bottom 716",
+     "a.btn \"RSVP\" bottom 780"
+    ],
+    "partly": [],
+    "names": 52
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 566,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 907,
+    "above": 471,
+    "below": 652,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 907
+    },
+    "bad": [
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 760",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 786",
+     "span.cd-num \"345\" bottom 831",
+     "span.cd-lbl \"Days\" bottom 848",
+     "span.cd-num \"02\" bottom 831",
+     "span.cd-lbl \"Hours\" bottom 848",
+     "span.cd-num \"48\" bottom 831",
+     "span.cd-lbl \"Minutes\" bottom 848",
+     "span.cd-num \"14\" bottom 831",
+     "span.cd-lbl \"Seconds\" bottom 848",
+     "a.btn \"RSVP\" bottom 907"
+    ],
+    "partly": [],
+    "names": 40
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 479,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 21,
+    "lowest": 851,
+    "above": 464,
+    "below": 565,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 851
+    },
+    "bad": [
+     "div.card.hero-card.in.done bottom 489",
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 715",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 741",
+     "span.cd-num \"345\" bottom 778",
+     "span.cd-lbl \"Days\" bottom 795",
+     "span.cd-num \"02\" bottom 778",
+     "span.cd-lbl \"Hours\" bottom 795",
+     "span.cd-num \"48\" bottom 778",
+     "span.cd-lbl \"Minutes\" bottom 795",
+     "span.cd-num \"05\" bottom 778",
+     "span.cd-lbl \"Seconds\" bottom 795",
+     "a.btn \"RSVP\" bottom 851"
+    ],
+    "partly": [
+     "div.card.hero-card.in.done 262–489"
+    ],
+    "names": 40
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 316,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 807,
+    "above": 288,
+    "below": 396,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 807
+    },
+    "bad": [
+     "span \"Charlotte-Elizabeth Anne\" bottom 446",
+     "span.amp \"&\" bottom 485",
+     "span \"Maximilian Alexander Fit\" bottom 485",
+     "p.kicker.hero-date.in.done \"Saturday · September 25,\" bottom 508",
+     "span \"Saturday\" bottom 506",
+     "span.nowrap \"September 25, 2027\" bottom 506",
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 648",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 674",
+     "span.cd-num \"345\" bottom 726",
+     "span.cd-lbl \"Days\" bottom 743",
+     "span.cd-num \"02\" bottom 726",
+     "span.cd-lbl \"Hours\" bottom 743",
+     "span.cd-num \"47\" bottom 726",
+     "span.cd-lbl \"Minutes\" bottom 743",
+     "span.cd-num \"57\" bottom 726",
+     "span.cd-lbl \"Seconds\" bottom 743",
+     "a.btn \"RSVP\" bottom 807"
+    ],
+    "partly": [],
+    "names": 40
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 301,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 22,
+    "lowest": 791,
+    "above": 288,
+    "below": 381,
+    "cta": {
+     "text": "RSVP",
+     "bottom": 791
+    },
+    "bad": [
+     "span \"Charlotte-Elizabeth Anne\" bottom 431",
+     "span.amp \"&\" bottom 470",
+     "span \"Maximilian Alexander Fit\" bottom 470",
+     "p.kicker.hero-date.in.done \"Saturday · September 25,\" bottom 493",
+     "span \"Saturday\" bottom 491",
+     "span.nowrap \"September 25, 2027\" bottom 491",
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 632",
+     "p.hero-city.in.done \"Montepulciano, Tuscany\" bottom 658",
+     "span.cd-num \"345\" bottom 710",
+     "span.cd-lbl \"Days\" bottom 727",
+     "span.cd-num \"02\" bottom 710",
+     "span.cd-lbl \"Hours\" bottom 727",
+     "span.cd-num \"47\" bottom 710",
+     "span.cd-lbl \"Minutes\" bottom 727",
+     "span.cd-num \"50\" bottom 710",
+     "span.cd-lbl \"Seconds\" bottom 727",
+     "a.btn \"RSVP\" bottom 791"
+    ],
+    "partly": [],
+    "names": 40
+   }
+  ],
+  "envelope_to_home_ms": 5530,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 75,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 1238,
+  "first_view_index_files": [
+   [
+    "/themes/tuscan-vineyard/img/decor_br-960.webp",
+    195494
+   ],
+   [
+    "/themes/tuscan-vineyard/img/decor_tl-960.webp",
+    190834
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_closed-880.webp",
+    151128
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_body-880.webp",
+    132834
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_pocket-880.webp",
+    84708
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_cflap-880.webp",
+    67106
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_flap-880.webp",
+    56146
+   ],
+   [
+    "/themes/tuscan-vineyard/img/card_small-640.webp",
+    44338
+   ]
+  ],
+  "first_view_home_kb_placeholders": 938,
+  "first_view_home_files": [
+   [
+    "/themes/tuscan-vineyard/img/decor_br-960.webp",
+    195494
+   ],
+   [
+    "/themes/tuscan-vineyard/img/decor_tl-960.webp",
+    190834
+   ],
+   [
+    "/themes/tuscan-vineyard/img/invitation_card-946.webp",
+    125256
+   ],
+   [
+    "/themes/tuscan-vineyard/img/card_small-640.webp",
+    44338
+   ],
+   [
+    "/themes/tuscan-vineyard/site.css",
+    43913
+   ],
+   [
+    "/themes/tuscan-vineyard/img/favicon.png",
+    41507
+   ],
+   [
+    "/themes/tuscan-vineyard/img/frame_portrait-640.webp",
+    37932
+   ],
+   [
+    "https://fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RXiJwo.woff2",
+    37499
+   ]
+  ],
+  "first_view_index_kb_photos": 1331,
+  "first_view_index_files_photos": [
+   [
+    "/themes/tuscan-vineyard/img/decor_br-960.webp",
+    195494
+   ],
+   [
+    "/themes/tuscan-vineyard/img/decor_tl-960.webp",
+    190834
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_closed-880.webp",
+    151128
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_body-880.webp",
+    132834
+   ],
+   [
+    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/e95de2e5a0308fea3cacaecb6a2badf2-640w.jpg",
+    97932
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_pocket-880.webp",
+    84708
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_cflap-880.webp",
+    67106
+   ],
+   [
+    "/themes/tuscan-vineyard/img/env_flap-880.webp",
+    56146
+   ]
+  ],
+  "first_view_home_kb_photos": 1201,
+  "first_view_home_files_photos": [
+   [
+    "/themes/tuscan-vineyard/img/decor_br-960.webp",
+    195494
+   ],
+   [
+    "/themes/tuscan-vineyard/img/decor_tl-960.webp",
+    190834
+   ],
+   [
+    "/themes/tuscan-vineyard/img/invitation_card-946.webp",
+    125256
+   ],
+   [
+    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/a1b8297d1a26280a87b40524d16ac8b5-640w.jpg",
+    99933
+   ],
+   [
+    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/e95de2e5a0308fea3cacaecb6a2badf2-640w.jpg",
+    97932
+   ],
+   [
+    "/media/ecb09b0c-de06-4014-8cc2-9626752eee73/c988de18284ecf08167d07ed58e4e46a-640w.jpg",
+    76570
+   ],
+   [
+    "/themes/tuscan-vineyard/img/card_small-640.webp",
+    44338
+   ],
+   [
+    "/themes/tuscan-vineyard/site.css",
+    43913
+   ]
+  ],
+  "compare": {
+   "source": "w1",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ]
+  }
+ }
+}

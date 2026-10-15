@@ -11,7 +11,8 @@
                        overflow-wrap: break-word; max-width: 100%; }
 .card-copy[data-drop~="s"] .ty-title { font-size: 9.6cqw; }   /* site.js fitCopy: smaller, never dropped */
 /* the thank-you card (invitation_card paper): title, message, signature */
-.ty-text { padding-inline: 13%; }
+/* the title starts below the grape cluster (free_zone: full width from ~48 % of the card) */
+.ty-text { padding: 74cqw 14% calc(var(--bot-h) + 6cqw); }
 .ty-text .ty-head { font-size: 14cqw; line-height: 1; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .ty-text .ty-message { margin-top: 4cqw; font-size: max(16px, 4.6cqw); line-height: 1.5; color: var(--ink-soft);
                        white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
