@@ -1,0 +1,23 @@
+/* Tuscan Vineyard (design 10) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">), so
+   the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
+
+/* the card's window: the couple's thank-you photo, else the paper and the twine tie of the envelope (decoration, not a placeholder) */
+.photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
+.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                          background: var(--ivory) url("img/bg_tile-640.webp") 50% 50% / 240% auto; }
+.ty-decor > img { width: 30%; height: auto; display: block; rotate: 6deg; filter: drop-shadow(0 6px 6px rgba(60, 32, 20, .24)); }
+/* card copy: the thank-you title (≤ 60 characters) wraps in the script, the date under it */
+.card-copy .ty-title { font-family: var(--script); color: var(--wine); font-size: 13cqw; line-height: .95; text-wrap: balance;
+                       overflow-wrap: break-word; max-width: 100%; }
+.card-copy[data-drop~="s"] .ty-title { font-size: 9.6cqw; }   /* site.js fitCopy: smaller, never dropped */
+/* the thank-you card (invitation_card paper): title, message, signature */
+.ty-text { padding-inline: 13%; }
+.ty-text .ty-head { font-size: 14cqw; line-height: 1; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.ty-text .ty-message { margin-top: 4cqw; font-size: max(16px, 4.6cqw); line-height: 1.5; color: var(--ink-soft);
+                       white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
+.ty-text .ty-love { margin-top: 5cqw; font-size: 11cqw; }
+.ty-text .nm { font-size: 13cqw; }
+.ty-text .city { margin-top: 2.6cqw; }
+@media (min-width: 960px) {
+  html[data-thank-you] .page-rsvp .site-main { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
+}

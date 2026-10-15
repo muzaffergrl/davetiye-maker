@@ -1,0 +1,94 @@
+<!doctype html>
+<!-- Tuscan Vineyard · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in the chancery script, "MOMENTS WE HOLD
+     DEAR", a small vine divider, then three nameless wine-label frames lined up on a rustic oak table, not overlapping, a few
+     grapes and a silvery olive leaf resting beside them. The table is the GPT oak_tile (top-down planks); the labels are laid
+     on it one after another, as if set down by hand. Phones: side by side each photo window would be ~100 px (< 38vw,
+     docs/11 §9) — the labels lie in a staggered column (window 50vw); from 720 px wide they line up side by side as drawn.
+     The GPT frame has no paper below its window (only the double border), so the caption sits under each label on the table
+     (comp deviation, README). Photo slots story_1..3 (theme.json → media.memory_photos.0..2), captions
+     story.items.0..2.caption. The whole page is off (404) when optional_blocks.our_story is false. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#FAE6CF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italianno&amp;family=Marcellus&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <img class="corner corner-tl page-corner" data-step="decor" data-a="drift-tl" src="img/decor_tl-480.webp" srcset="img/decor_tl-480.webp 480w, img/decor_tl-960.webp 960w" sizes="min(56vw, 340px)" alt="">
+    <h1 class="script page-title" data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="fade" data-copy="story_kicker">Moments we hold dear</p>
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="112px" alt="">
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the oak table (one scene): the labels are set down one after another, the captions written under them, then the grapes,
+       the olive leaf and a vine leaf (GPT accents) come to rest beside them -->
+  <section class="table" data-scene="story-table" aria-label="Our photos">
+    <figure class="wl wl-1">
+      <div class="frame" data-step="label" data-i="0" data-a="place">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) 168px, min(52vw, 246px)" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 204px, min(64vw, 300px)" alt="">
+      </div>
+      <figcaption class="script" data-step="caption" data-i="0" data-a="write" data-field="story.items.0.caption"></figcaption>
+      <img class="rest rest-grapes" data-step="rest" data-i="0" data-a="settle" src="img/accent_1-200.webp" srcset="img/accent_1-200.webp 200w, img/accent_1-400.webp 400w" sizes="min(22vw, 110px)" alt="" loading="lazy">
+    </figure>
+    <figure class="wl wl-2">
+      <div class="frame" data-step="label" data-i="1" data-a="place">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) 168px, min(52vw, 246px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 204px, min(64vw, 300px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-i="1" data-a="write" data-field="story.items.1.caption"></figcaption>
+      <img class="rest rest-olive" data-step="rest" data-i="1" data-a="settle" src="img/accent_3-200.webp" alt="" loading="lazy">
+    </figure>
+    <figure class="wl wl-3">
+      <div class="frame" data-step="label" data-i="2" data-a="place">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) 168px, min(52vw, 246px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="(min-width: 720px) 204px, min(64vw, 300px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-i="2" data-a="write" data-field="story.items.2.caption"></figcaption>
+      <img class="rest rest-vine" data-step="rest" data-i="2" data-a="settle" src="img/accent_2-200.webp" srcset="img/accent_2-200.webp 200w, img/accent_2-400.webp 400w" sizes="min(24vw, 120px)" alt="" loading="lazy">
+    </figure>
+  </section>
+
+  <section class="section next-sec" data-scene="story-next">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="112px" alt="" loading="lazy">
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Details page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
+    <div class="vista" data-step="decor" data-a="fade" aria-hidden="true"><img class="corner corner-br page-corner" src="img/decor_br-480.webp" srcset="img/decor_br-480.webp 480w, img/decor_br-960.webp 960w" sizes="min(54vw, 320px)" alt="" loading="lazy"></div>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
