@@ -915,6 +915,20 @@
     font-size: 13px;
   }
 }
+/* G094: more than eight designs — phones and tablets scroll through every name (the more chip is not needed there);
+   wide screens show the first seven names and "+N more" until it is pressed. A selected name always stays shown. */
+.chipMore {
+  display: none;
+  border-style: dashed;
+}
+@media (min-width: 1024px) {
+  .chipMore {
+    display: inline-block;
+  }
+  .chips:not([data-all]) > .chipExtra:not([aria-pressed='true']) {
+    display: none;
+  }
+}
 .heroCaption {
   display: none;
   font-size: 14px;

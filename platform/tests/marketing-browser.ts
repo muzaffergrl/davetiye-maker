@@ -22,6 +22,8 @@
 //    G093 (eight designs): card rows exactly 2+2+2+2 on phones and 3+3+2 from 900 px (last row centered), the design
 //    pages' "other designs" 2+2+2+1 / 3+3+1 centered; the home chips sit right under the poster on phones and in the
 //    text column on wide screens (two rows, main button and chips inside the first screen at 1280 × 800).
+//    G094 (fourteen designs): card rows 2×7 on phones and 3+3+3+3+2 from 900 px, "other designs" 2+…+1 / 3+3+3+3+1;
+//    every chip in the phone strip; wide screens seven names + "+7 more" (≤ 2 rows at 1280 × 800), which reveals the rest.
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
 //    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
@@ -291,8 +293,10 @@ try {
     // the home page is loaded: its design chips
     const chips = await page.evaluate(() => {
       const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
-      const tops = Array.from(box.querySelectorAll('button')).map((b) => Math.round(b.getBoundingClientRect().top));
-      return { n: tops.length, lines: new Set(tops).size, scroller: box.hasAttribute('data-scroll-x'), overflowX: getComputedStyle(box).overflowX };
+      // G094: design chips only (not the "+N more" chip); lines of the ones shown
+      const all = Array.from(box.querySelectorAll('button[aria-pressed]'));
+      const tops = all.map((b) => b.getBoundingClientRect()).filter((r) => r.width > 0).map((r) => Math.round(r.top));
+      return { n: all.length, lines: new Set(tops).size, scroller: box.hasAttribute('data-scroll-x'), overflowX: getComputedStyle(box).overflowX };
     });
     if (mobile) {
       check(`G083 home @${w}: the ${chips.n} design chips stay on one line`, chips.n === designs.length && chips.lines === 1 && chips.scroller && chips.overflowX === 'auto', chips);
@@ -300,7 +304,7 @@ try {
         const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
         box.scrollLeft = box.scrollWidth;
         await new Promise((r) => setTimeout(r, 150));
-        const lastChip = box.lastElementChild!.getBoundingClientRect();
+        const lastChip = Array.from(box.querySelectorAll('button[aria-pressed]')).pop()!.getBoundingClientRect();
         const r = { right: Math.round(lastChip.right), vw: document.documentElement.clientWidth, pageScroll: document.documentElement.scrollWidth };
         box.scrollLeft = 0;
         return r;
@@ -365,7 +369,8 @@ try {
     const strip = await page.evaluate(async (fade: number) => {
       const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
       const vw = document.documentElement.clientWidth;
-      const chips = () => Array.from(box.querySelectorAll('button')).map((b) => b.getBoundingClientRect());
+      // G094: the chips shown (wide screens hide names after the seventh until "+N more" is pressed)
+      const chips = () => Array.from(box.querySelectorAll('button')).map((b) => b.getBoundingClientRect()).filter((r) => r.width > 0);
       const mask = getComputedStyle(box).maskImage || getComputedStyle(box).getPropertyValue('-webkit-mask-image');
       box.scrollLeft = 0;
       await new Promise((r) => setTimeout(r, 100));
@@ -453,7 +458,7 @@ try {
         return { top: Math.round(b.top), bottom: Math.round(b.bottom), left: Math.round(b.left), right: Math.round(b.right) };
       };
       const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
-      const chips = Array.from(box.querySelectorAll('button')).map((b) => b.getBoundingClientRect());
+      const chips = Array.from(box.querySelectorAll('button')).map((b) => b.getBoundingClientRect()).filter((c) => c.width > 0); // G094: shown ones
       return {
         poster: r('main a[aria-label^="Tap to open the live demo"]'),
         chips: r('main [role="group"][aria-label="Choose a design"]'),
@@ -483,6 +488,89 @@ try {
       }
     }
     await ctx.close();
+  }
+
+  // 1g. G094 layout with fourteen designs (09–14 joined): exact rows of /designs, the home strip and a design page's
+  // "other designs" (thirteen cards); phones keep every design chip in the sideways strip (no "+N more" chip there);
+  // wide screens show seven names and "+7 more" in ≤ 2 rows at 1280 × 800 (main button inside the first screen), the
+  // more chip reveals the rest, moves focus to the first revealed name and goes away; a revealed name switches the poster.
+  if (designs.length > 8) {
+    const more = designs.length - 7;
+    for (const w of [320, 360, 390, 430, 768, 900, 1024, 1280, 1440]) {
+      const mobile = w < 1024;
+      const ctx = await browser.newContext({ viewport: { width: w, height: mobile ? 844 : 800 }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
+      const page = await ctx.newPage();
+      const fourteen = designs.length === 14;
+      for (const [p, want] of [
+        ['/designs', w < 900 ? '2+2+2+2+2+2+2' : '3+3+3+3+2'],
+        [`/designs/${designs[designs.length - 1].id}`, w < 900 ? '2+2+2+2+2+2+1' : '3+3+3+3+1'],
+        ['/', w < 900 ? '2+2+2+2+2+2+2' : '3+3+3+3+2'],
+      ] as const) {
+        await page.goto(BASE + p, { waitUntil: 'networkidle' });
+        const grid = await page.evaluate(() => {
+          const g = document.querySelector('main [class*="cardGrid"]')!;
+          const box = g.getBoundingClientRect();
+          const rows = new Map<number, DOMRect[]>();
+          for (const c of Array.from(g.children)) {
+            const r = c.getBoundingClientRect();
+            rows.set(Math.round(r.top), [...(rows.get(Math.round(r.top)) ?? []), r]);
+          }
+          const list = [...rows.values()];
+          const last = list[list.length - 1];
+          const widths = list.flat().map((r) => Math.round(r.width));
+          return {
+            rows: list.map((r) => r.length).join('+'),
+            lastOffset: Math.round(last[0].left - box.left - (box.right - last[last.length - 1].right)),
+            sameWidth: Math.max(...widths) - Math.min(...widths) <= 1,
+            pageScroll: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+          };
+        });
+        check(
+          `G094 ${p} @${w}: ${fourteen ? want : grid.rows} card rows, last row centered, cards the same width, no page scroll`,
+          (!fourteen || grid.rows === want) && Math.abs(grid.lastOffset) <= 2 && grid.sameWidth && !grid.pageScroll,
+          grid,
+        );
+      }
+      // the home page is loaded: the chips shown
+      const shown = () =>
+        page.evaluate(() => {
+          const box = document.querySelector<HTMLElement>('main [role="group"][aria-label="Choose a design"]')!;
+          const vis = Array.from(box.querySelectorAll('button')).filter((b) => b.getBoundingClientRect().width > 0);
+          return {
+            names: vis.filter((b) => b.hasAttribute('aria-pressed')).map((b) => b.textContent),
+            more: vis.filter((b) => !b.hasAttribute('aria-pressed')).map((b) => b.textContent),
+            rows: new Set(vis.map((b) => Math.round(b.getBoundingClientRect().top))).size,
+            cta: Math.round(document.querySelector('main a[class*="btnLarge"]')!.getBoundingClientRect().bottom),
+            vh: innerHeight,
+            focus: document.activeElement?.textContent ?? null,
+          };
+        });
+      const before = await shown();
+      if (mobile) {
+        check(`G094 home @${w}: all ${designs.length} design chips in the strip, no "+N more" chip`, before.names.length === designs.length && before.more.length === 0 && before.rows === 1, before);
+      } else {
+        check(
+          `G094 home @${w}: seven names and "+${more} more" shown`,
+          before.names.join('|') === designs.slice(0, 7).map((d) => d.name).join('|') && before.more.join('|') === `+${more} more`,
+          before,
+        );
+        if (w >= 1280) check(`G094 home @${w}: chips in ≤ 2 rows, the main button inside the first screen (${before.vh} px)`, before.rows <= 2 && before.cta <= before.vh, before);
+        else metrics[`G094 home hero @${w}`] = { chipRows: before.rows, ctaBottom: before.cta, viewportHeight: before.vh };
+        await page.getByRole('button', { name: `Show ${more} more designs` }).click();
+        await page.waitForTimeout(150);
+        const after = await shown();
+        check(
+          `G094 home @${w}: "+${more} more" shows all ${designs.length} names, goes away and focuses the first revealed name`,
+          after.names.length === designs.length && after.more.length === 0 && after.focus === designs[7].name,
+          after,
+        );
+        const newest = designs[designs.length - 1];
+        await page.getByRole('button', { name: newest.name, exact: true }).click();
+        const poster = await page.locator('a[aria-label^="Tap to open the live demo"] img').getAttribute('src');
+        check(`G094 home @${w}: the revealed ${newest.name} chip switches the poster`, !!poster && poster.includes(newest.id), poster);
+      }
+      await ctx.close();
+    }
   }
 
   // 2a. demo facade on a phone
@@ -644,7 +732,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093, G094)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

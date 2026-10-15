@@ -192,5 +192,65 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
     },
+    {
+      // G409 theme on main; on the sales site and open on /start since G094 (integrator's request, 2026-10-15).
+      id: 'lavender-provence',
+      name: 'Lavender Provence',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G410 theme on main; on the sales site and open on /start since G094 (integrator's request, 2026-10-15).
+      id: 'tuscan-vineyard',
+      name: 'Tuscan Vineyard',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G411 theme on main; on the sales site and open on /start since G094 (integrator's request, 2026-10-15).
+      id: 'boho-pampas-terracotta',
+      name: 'Boho Pampas Terracotta',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G412 theme on main; on the sales site and open on /start since G094 (integrator's request, 2026-10-15).
+      id: 'tropical-destination',
+      name: 'Tropical Destination',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G413 theme on main; on the sales site and open on /start since G094 (integrator's request, 2026-10-15).
+      id: 'enchanted-forest-storybook',
+      name: 'Enchanted Forest Storybook',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G414 theme on main; on the sales site and open on /start since G094 (integrator's request, 2026-10-15).
+      id: 'ivory-lace-pearls',
+      name: 'Ivory Lace & Pearls',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
   ],
 };
