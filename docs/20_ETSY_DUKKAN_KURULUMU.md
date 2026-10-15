@@ -294,3 +294,23 @@ Mini banner (`etsy_banner_mini_1600x213.jpg`) kullanılmadı; Big Banner mobilde
 Not: Kamera ve kalem ikonları doğrudan işletim sisteminin dosya penceresini açıyor; bu pencere tarayıcı otomasyonunu kilitliyor.
 Dosya, sayfadaki gizli `input[type=file]`'a doğrudan verildi (logo: `#image-manager-shop-icon-form`; banner: düzenleme modunda
 banner'ın üstündeki "Add an image" formu).
+
+## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
+
+Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.
+Fiyat şimdilik **USD 29.40**; nihai fiyat docs/15 §5'te açık.
+
+- Kaynak metin: her tasarımın `package/listing/listing_v3.md` dosyası. Yükleme verisi: aynı klasördeki `etsy_upload.json`.
+  Üreten: `python3 tools/etsy_upload.py`; yalnız denetim için `--check`. JSON'da başlık, açıklama, 13 etiket, kategori ve
+  nitelikler, fiyat, bölüm, dijital dosya (`START_HERE.pdf`), görsel listesi ve alt metinleri, GPT mockup sahneleri,
+  `open_checks` ve `blockers` bulunur.
+- Açıklamadaki `[VERIFY: …]` notları JSON'da metinden çıkarıldı ve cümlesiyle birlikte `open_checks`'e taşındı (tasarım başına 8).
+  Bunlar canlı site, gerçek telefon, sipariş doğrulaması ve Etsy'nin AI/"Designed by" kuralıyla ilgili. Test sonucu olumsuzsa
+  cümle `listing_v3.md`'den silinir ya da yeniden yazılır, sonra JSON yeniden üretilir.
+- Kurallar geçti (listing_kit kuralları): başlıklar 101–113/140, etiketler 13/13 (≤ 20 karakter, küçük harf).
+- **Görseller hazır değil.** 01 ve 03'ün 8 görseli eski editörle çekildi (G059), yeniden yapılmalı. 02, 04 ve 05'in görseli yok.
+  GPT'nin Etsy mockup sahneleri (PAKET 3, `assets/gpt/mockups/`) 5 tasarımda da mevcut. Bu yüzden şimdilik yeni GPT promptu
+  gerekmiyor. Kalan iş Claude'un: güncel editörden gerçek ekran çekmek ve bunları yeşil ekranlara yerleştirmek
+  (`tools/mockup_compose.py`). Ardından 8 ilan görselini kurmak. `listing_kit.py` şu an yalnız 01 ve 03'ü tanıyor.
+- Karar bekleyenler: adet (quantity), otomatik yenileme (her yenileme ilan ücreti), nihai fiyat.
+- Yayın öncesi kontrol listesi: her `listing_v3.md` §11.
