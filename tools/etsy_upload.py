@@ -33,7 +33,8 @@ DESIGNS = [
     ("05", "05_Lemon_Mediterranean", "mediterranean-lemon"),
 ]
 PRICE_USD = 29.40
-PRICE_NOTE = "Draft price from the user on 2026-10-15 ('for now'); final price is still a decision (docs/15 §5)."
+PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY "
+              "amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 IMAGES_STATUS = ("current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, "
                  "GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)")

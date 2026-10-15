@@ -130,7 +130,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 20 KB) |
-| Price | USD 29.40 (draft price from the user, 2026-10-15; the final price is still open, docs/15 §5) |
+| Price | Target USD 29.40 (draft price from the user, 2026-10-15). The shop currency is TRY, so Etsy gets the TRY amount; that amount and the final price are still open (docs/15 §5) |
 | Quantity | [QUANTITY] |
 | Shop section | Classic & Vintage (created in the shop on 2026-10-15, docs/20 §7) |
 | Renewal | [AUTO RENEW: yes/no] |
