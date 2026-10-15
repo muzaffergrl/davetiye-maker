@@ -1,0 +1,2748 @@
+{
+ "_note": "build_images.py çıktısı (sunflower-rustic-barn); ölçüler px, kutular [x, y, w, h], box_pct yüzde. stage.* yüzdeleri sahne kutusuna göre (docs/11 §7.1)",
+ "env_closed": {
+  "src_size": [
+   913,
+   587
+  ],
+  "ratio": 1.55537,
+  "files": [
+   {
+    "file": "env_closed-440.webp",
+    "w": 440,
+    "h": 283,
+    "bytes": 38424
+   },
+   {
+    "file": "env_closed-880.webp",
+    "w": 880,
+    "h": 566,
+    "bytes": 143976
+   }
+  ],
+  "canvas_box": [
+   57,
+   736,
+   970,
+   1323
+  ]
+ },
+ "env_cflap": {
+  "src_size": [
+   913,
+   247
+  ],
+  "ratio": 3.69636,
+  "files": [
+   {
+    "file": "env_cflap-440.webp",
+    "w": 440,
+    "h": 119,
+    "bytes": 16408
+   },
+   {
+    "file": "env_cflap-880.webp",
+    "w": 880,
+    "h": 238,
+    "bytes": 57152
+   }
+  ],
+  "canvas_box": [
+   57,
+   736,
+   970,
+   983
+  ]
+ },
+ "env_flap": {
+  "src_size": [
+   913,
+   280
+  ],
+  "ratio": 3.26071,
+  "files": [
+   {
+    "file": "env_flap-440.webp",
+    "w": 440,
+    "h": 135,
+    "bytes": 13660
+   },
+   {
+    "file": "env_flap-880.webp",
+    "w": 880,
+    "h": 270,
+    "bytes": 61772
+   }
+  ],
+  "canvas_box": [
+   57,
+   465,
+   970,
+   745
+  ]
+ },
+ "env_body": {
+  "src_size": [
+   913,
+   606
+  ],
+  "ratio": 1.5066,
+  "files": [
+   {
+    "file": "env_body-440.webp",
+    "w": 440,
+    "h": 292,
+    "bytes": 30098
+   },
+   {
+    "file": "env_body-880.webp",
+    "w": 880,
+    "h": 584,
+    "bytes": 103178
+   }
+  ],
+  "canvas_box": [
+   57,
+   739,
+   970,
+   1345
+  ]
+ },
+ "env_pocket": {
+  "src_size": [
+   913,
+   497
+  ],
+  "ratio": 1.83702,
+  "files": [
+   {
+    "file": "env_pocket-440.webp",
+    "w": 440,
+    "h": 240,
+    "bytes": 24400
+   },
+   {
+    "file": "env_pocket-880.webp",
+    "w": 880,
+    "h": 479,
+    "bytes": 78072
+   }
+  ],
+  "canvas_box": [
+   57,
+   848,
+   970,
+   1345
+  ]
+ },
+ "closure": {
+  "src_size": [
+   911,
+   435
+  ],
+  "ratio": 2.09425,
+  "files": [
+   {
+    "file": "closure-440.webp",
+    "w": 440,
+    "h": 210,
+    "bytes": 20904
+   },
+   {
+    "file": "closure-880.webp",
+    "w": 880,
+    "h": 420,
+    "bytes": 73106
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "anchor": "1:1 canvas overlay (wrapped ribbon drawn on the envelope's canvas, docs/11 §7.1 sarılı)",
+  "anchor_px": [
+   512.5,
+   1107.5
+  ],
+  "canvas_box": [
+   57,
+   890,
+   968,
+   1325
+  ],
+  "center_pct": [
+   49.891,
+   80.408
+  ],
+  "width_pct": 99.781,
+  "knot_pct_of_closure": [
+   51.26,
+   30.11
+  ],
+  "ends_vs_envelope": {
+   "kenarlar": [
+    {
+     "kenar": "kapanış sol uç",
+     "fark_px": -4.0,
+     "fark_pct": -0.39,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış sağ uç",
+     "fark_px": -1.0,
+     "fark_pct": -0.1,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    }
+   ],
+   "eksen": [
+    "yatay"
+   ],
+   "kapsama": {
+    "yatay": 1.008,
+    "dikey": 0.752
+   }
+  },
+  "measured_from": "parts/closure.png on the envelope_closed canvas (no comp scaling: wrapped closure)",
+  "carried_by_flap": false,
+  "motion": "the bow tugs loose (about the sunflower knot), then the ribbon slides off along its band to the right, turning behind the envelope's right edge (clip) — MOTION.envelope.tug/closure"
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "box": [
+   57,
+   132.8,
+   913,
+   1212.2
+  ],
+  "ratio": 0.75316,
+  "parts": {
+   "env_closed": [
+    0.0,
+    49.762,
+    100.0,
+    48.423
+   ],
+   "env_cflap": [
+    0.0,
+    49.762,
+    100.0,
+    20.376
+   ],
+   "env_flap": [
+    0.0,
+    27.406,
+    100.0,
+    23.098
+   ],
+   "env_body": [
+    0.0,
+    50.009,
+    100.0,
+    49.991
+   ],
+   "env_pocket": [
+    0.0,
+    59.001,
+    100.0,
+    40.999
+   ],
+   "closure": [
+    0.0,
+    62.466,
+    99.781,
+    35.884
+   ],
+   "card": [
+    25.027,
+    51.033,
+    49.836,
+    56.792
+   ]
+  },
+  "hinge_pct": 50.174,
+  "hinge_in_cflap_pct": 2.024,
+  "body_bottom_pct": 98.02,
+  "closed_obj": {
+   "box_pct": [
+    0.11,
+    49.844,
+    99.671,
+    48.176
+   ],
+   "aspect": 1.5582,
+   "frac_w": 0.99671,
+   "top_frac_of_stage_w": 0.6618,
+   "bottom_frac_of_stage_w": 0.02629
+  },
+  "card_path": {
+   "out_translate_pct": -89.86,
+   "front_translate_pct": -86.36,
+   "front_scale": 1.05,
+   "pocket_edge_at_card_corners": 848.8,
+   "card_w_of_env": 0.5,
+   "pocket_edge_mid": 849.1,
+   "photo_above_pocket": 0.06
+  },
+  "envelope_x_pct": [
+   0.11,
+   99.781
+  ],
+  "cuts": {
+   "cflap": {
+    "canvas": [
+     1024,
+     1536
+    ],
+    "rows": [
+     0,
+     1268
+    ],
+    "hinge_row": 741,
+    "curve": [
+     -63.9864,
+     1.4649,
+     -12.0699,
+     -1.7274,
+     980.939
+    ],
+    "curve_x": [
+     118.0,
+     936.0
+    ],
+    "points": 383,
+    "residual_sd": 0.95,
+    "tip": [
+     58.0,
+     1266.0
+    ],
+    "shape": "egri",
+    "method": "renk",
+    "completed": {
+     "left_corner": {
+      "side_x": 74,
+      "curve_from_x": 117,
+      "center_y": 844.0,
+      "rx": 43,
+      "ry": 93.0,
+      "note": "quarter ellipse fitted to the measured edge drop (x 80–116, ≤ 2 px)"
+     },
+     "flap_cols": [
+      74,
+      952
+     ]
+    }
+   },
+   "pocket": {
+    "method": "renk",
+    "detector": "kraft scan from the bottom (lum < 190, G − B < 64, R − G > 30) → 6 liner rows; deckle strip ≤ 9 px kept; straight line fitted over x 220–840",
+    "line": [
+     -0.00149,
+     850.86
+    ],
+    "points": 563,
+    "outliers": 58,
+    "residual_sd": 1.81,
+    "edge_at": {
+     "x220": 849.5,
+     "mid": 849.1,
+     "x840": 848.6
+    },
+    "side_wings": "kept in env_body (outside the card's path)",
+    "warnings": []
+   }
+  },
+  "checks": {
+   "open_layers_overlap_diff": 0.00529,
+   "cflap_outside_closed_px": 0
+  }
+ },
+ "card_small": {
+  "src_size": [
+   727,
+   1100
+  ],
+  "ratio": 0.66091,
+  "files": [
+   {
+    "file": "card_small-320.webp",
+    "w": 320,
+    "h": 484,
+    "bytes": 17304,
+    "window_visible_px": 0
+   },
+   {
+    "file": "card_small-640.webp",
+    "w": 640,
+    "h": 968,
+    "bytes": 62674,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   100,
+   119,
+   525,
+   618
+  ],
+  "leke_px": 0,
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    null,
+    null
+   ],
+   [
+    2.0,
+    1.79,
+    96.7
+   ],
+   [
+    3.0,
+    1.79,
+    97.25
+   ],
+   [
+    4.0,
+    1.93,
+    97.25
+   ],
+   [
+    5.0,
+    2.06,
+    97.52
+   ],
+   [
+    6.0,
+    2.06,
+    97.25
+   ],
+   [
+    7.0,
+    null,
+    null
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    null,
+    null
+   ],
+   [
+    10.0,
+    null,
+    null
+   ],
+   [
+    11.0,
+    null,
+    null
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    null,
+    null
+   ],
+   [
+    14.0,
+    null,
+    null
+   ],
+   [
+    15.0,
+    null,
+    null
+   ],
+   [
+    16.0,
+    null,
+    null
+   ],
+   [
+    17.0,
+    null,
+    null
+   ],
+   [
+    18.0,
+    null,
+    null
+   ],
+   [
+    19.0,
+    null,
+    null
+   ],
+   [
+    20.0,
+    null,
+    null
+   ],
+   [
+    21.0,
+    null,
+    null
+   ],
+   [
+    22.0,
+    null,
+    null
+   ],
+   [
+    23.0,
+    null,
+    null
+   ],
+   [
+    24.0,
+    null,
+    null
+   ],
+   [
+    25.0,
+    null,
+    null
+   ],
+   [
+    26.0,
+    null,
+    null
+   ],
+   [
+    27.0,
+    null,
+    null
+   ],
+   [
+    28.0,
+    null,
+    null
+   ],
+   [
+    29.0,
+    null,
+    null
+   ],
+   [
+    30.0,
+    null,
+    null
+   ],
+   [
+    31.0,
+    null,
+    null
+   ],
+   [
+    32.0,
+    null,
+    null
+   ],
+   [
+    33.0,
+    null,
+    null
+   ],
+   [
+    34.0,
+    null,
+    null
+   ],
+   [
+    35.0,
+    null,
+    null
+   ],
+   [
+    36.0,
+    null,
+    null
+   ],
+   [
+    37.0,
+    null,
+    null
+   ],
+   [
+    38.0,
+    null,
+    null
+   ],
+   [
+    39.0,
+    null,
+    null
+   ],
+   [
+    40.0,
+    null,
+    null
+   ],
+   [
+    41.0,
+    null,
+    null
+   ],
+   [
+    42.0,
+    null,
+    null
+   ],
+   [
+    43.0,
+    null,
+    null
+   ],
+   [
+    44.0,
+    null,
+    null
+   ],
+   [
+    45.0,
+    null,
+    null
+   ],
+   [
+    46.0,
+    null,
+    null
+   ],
+   [
+    47.0,
+    null,
+    null
+   ],
+   [
+    48.0,
+    null,
+    null
+   ],
+   [
+    49.0,
+    null,
+    null
+   ],
+   [
+    50.0,
+    null,
+    null
+   ],
+   [
+    51.0,
+    null,
+    null
+   ],
+   [
+    52.0,
+    null,
+    null
+   ],
+   [
+    53.0,
+    null,
+    null
+   ],
+   [
+    54.0,
+    null,
+    null
+   ],
+   [
+    55.0,
+    null,
+    null
+   ],
+   [
+    56.0,
+    null,
+    null
+   ],
+   [
+    57.0,
+    null,
+    null
+   ],
+   [
+    58.0,
+    null,
+    null
+   ],
+   [
+    59.0,
+    null,
+    null
+   ],
+   [
+    60.0,
+    null,
+    null
+   ],
+   [
+    61.0,
+    null,
+    null
+   ],
+   [
+    62.0,
+    null,
+    null
+   ],
+   [
+    63.0,
+    null,
+    null
+   ],
+   [
+    64.0,
+    null,
+    null
+   ],
+   [
+    65.0,
+    null,
+    null
+   ],
+   [
+    66.0,
+    null,
+    null
+   ],
+   [
+    67.0,
+    null,
+    null
+   ],
+   [
+    68.0,
+    null,
+    null
+   ],
+   [
+    69.0,
+    null,
+    null
+   ],
+   [
+    70.0,
+    null,
+    null
+   ],
+   [
+    71.0,
+    1.93,
+    98.07
+   ],
+   [
+    72.0,
+    2.34,
+    97.8
+   ],
+   [
+    73.0,
+    2.34,
+    97.8
+   ],
+   [
+    74.0,
+    2.06,
+    98.07
+   ],
+   [
+    75.0,
+    2.06,
+    97.66
+   ],
+   [
+    76.0,
+    2.2,
+    97.8
+   ],
+   [
+    77.0,
+    2.2,
+    97.8
+   ],
+   [
+    78.0,
+    2.06,
+    98.49
+   ],
+   [
+    79.0,
+    2.06,
+    98.21
+   ],
+   [
+    80.0,
+    2.61,
+    97.52
+   ],
+   [
+    81.0,
+    2.61,
+    97.25
+   ],
+   [
+    82.0,
+    2.34,
+    98.07
+   ],
+   [
+    83.0,
+    2.06,
+    98.07
+   ],
+   [
+    84.0,
+    2.06,
+    97.39
+   ],
+   [
+    85.0,
+    2.34,
+    97.52
+   ],
+   [
+    86.0,
+    2.48,
+    97.52
+   ],
+   [
+    87.0,
+    2.2,
+    98.07
+   ],
+   [
+    88.0,
+    2.06,
+    97.66
+   ],
+   [
+    89.0,
+    1.79,
+    96.97
+   ],
+   [
+    90.0,
+    1.93,
+    97.11
+   ],
+   [
+    91.0,
+    2.2,
+    97.8
+   ],
+   [
+    92.0,
+    2.2,
+    97.8
+   ],
+   [
+    93.0,
+    1.93,
+    97.66
+   ],
+   [
+    94.0,
+    2.34,
+    97.66
+   ],
+   [
+    95.0,
+    2.34,
+    97.66
+   ],
+   [
+    96.0,
+    1.79,
+    98.35
+   ],
+   [
+    97.0,
+    1.79,
+    97.39
+   ],
+   [
+    98.0,
+    null,
+    null
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ]
+ },
+ "frame_portrait": {
+  "src_size": [
+   703,
+   1002
+  ],
+  "ratio": 0.7016,
+  "files": [
+   {
+    "file": "frame_portrait-320.webp",
+    "w": 320,
+    "h": 456,
+    "bytes": 12976,
+    "window_visible_px": 0
+   },
+   {
+    "file": "frame_portrait-640.webp",
+    "w": 640,
+    "h": 912,
+    "bytes": 37812,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   70,
+   218,
+   559,
+   699
+  ],
+  "leke_px": 0
+ },
+ "frame_landscape": {
+  "src_size": [
+   1070,
+   796
+  ],
+  "ratio": 1.34422,
+  "files": [
+   {
+    "file": "frame_landscape-480.webp",
+    "w": 480,
+    "h": 357,
+    "bytes": 16466,
+    "window_visible_px": 0
+   },
+   {
+    "file": "frame_landscape-960.webp",
+    "w": 960,
+    "h": 714,
+    "bytes": 43654,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   70,
+   162,
+   932,
+   575
+  ],
+  "leke_px": 0
+ },
+ "photo_slots": {
+  "card": {
+   "box_pct": [
+    13.48,
+    10.636,
+    72.765,
+    56.545
+   ],
+   "aspect": 0.8505,
+   "box_px": [
+    529,
+    622
+   ],
+   "mask": "mask_card.png"
+  },
+  "portrait": {
+   "box_pct": [
+    9.673,
+    21.557,
+    80.085,
+    70.16
+   ],
+   "aspect": 0.8009,
+   "box_px": [
+    563,
+    703
+   ],
+   "mask": "mask_portrait.png"
+  },
+  "landscape": {
+   "box_pct": [
+    6.355,
+    20.101,
+    87.477,
+    72.739
+   ],
+   "aspect": 1.6166,
+   "box_px": [
+    936,
+    579
+   ],
+   "mask": "mask_landscape.png"
+  }
+ },
+ "invitation_card": {
+  "src_size": [
+   1006,
+   1398
+  ],
+  "ratio": 0.7196,
+  "files": [
+   {
+    "file": "invitation_card-480.webp",
+    "w": 480,
+    "h": 667,
+    "bytes": 64058
+   },
+   {
+    "file": "invitation_card-900.webp",
+    "w": 900,
+    "h": 1251,
+    "bytes": 188980
+   }
+  ],
+  "quality": [
+   76,
+   90
+  ],
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    null,
+    null
+   ],
+   [
+    2.0,
+    null,
+    null
+   ],
+   [
+    3.0,
+    null,
+    null
+   ],
+   [
+    4.0,
+    null,
+    null
+   ],
+   [
+    5.0,
+    null,
+    null
+   ],
+   [
+    6.0,
+    null,
+    null
+   ],
+   [
+    7.0,
+    33.9,
+    65.21
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    null,
+    null
+   ],
+   [
+    10.0,
+    null,
+    null
+   ],
+   [
+    11.0,
+    48.81,
+    50.7
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    null,
+    null
+   ],
+   [
+    14.0,
+    null,
+    null
+   ],
+   [
+    15.0,
+    33.3,
+    56.66
+   ],
+   [
+    16.0,
+    9.24,
+    66.4
+   ],
+   [
+    17.0,
+    9.94,
+    65.81
+   ],
+   [
+    18.0,
+    9.84,
+    65.81
+   ],
+   [
+    19.0,
+    9.44,
+    76.04
+   ],
+   [
+    20.0,
+    9.84,
+    77.24
+   ],
+   [
+    21.0,
+    10.04,
+    79.72
+   ],
+   [
+    22.0,
+    9.84,
+    83.7
+   ],
+   [
+    23.0,
+    9.44,
+    84.39
+   ],
+   [
+    24.0,
+    9.05,
+    85.39
+   ],
+   [
+    25.0,
+    9.64,
+    86.58
+   ],
+   [
+    26.0,
+    9.44,
+    87.57
+   ],
+   [
+    27.0,
+    9.64,
+    89.36
+   ],
+   [
+    28.0,
+    10.14,
+    89.07
+   ],
+   [
+    29.0,
+    10.04,
+    91.85
+   ],
+   [
+    30.0,
+    9.44,
+    91.45
+   ],
+   [
+    31.0,
+    9.34,
+    91.45
+   ],
+   [
+    32.0,
+    9.84,
+    91.75
+   ],
+   [
+    33.0,
+    9.84,
+    91.65
+   ],
+   [
+    34.0,
+    9.15,
+    91.35
+   ],
+   [
+    35.0,
+    9.84,
+    91.85
+   ],
+   [
+    36.0,
+    9.94,
+    91.85
+   ],
+   [
+    37.0,
+    9.74,
+    91.35
+   ],
+   [
+    38.0,
+    9.64,
+    90.95
+   ],
+   [
+    39.0,
+    9.34,
+    91.45
+   ],
+   [
+    40.0,
+    9.05,
+    91.75
+   ],
+   [
+    41.0,
+    9.54,
+    91.85
+   ],
+   [
+    42.0,
+    13.52,
+    91.95
+   ],
+   [
+    43.0,
+    14.71,
+    91.95
+   ],
+   [
+    44.0,
+    15.51,
+    92.05
+   ],
+   [
+    45.0,
+    23.16,
+    92.15
+   ],
+   [
+    46.0,
+    23.66,
+    91.95
+   ],
+   [
+    47.0,
+    23.36,
+    91.75
+   ],
+   [
+    48.0,
+    24.55,
+    91.55
+   ],
+   [
+    49.0,
+    24.85,
+    92.05
+   ],
+   [
+    50.0,
+    22.37,
+    92.25
+   ],
+   [
+    51.0,
+    27.93,
+    91.35
+   ],
+   [
+    52.0,
+    28.23,
+    91.65
+   ],
+   [
+    53.0,
+    28.43,
+    92.05
+   ],
+   [
+    54.0,
+    28.33,
+    91.95
+   ],
+   [
+    55.0,
+    34.1,
+    92.05
+   ],
+   [
+    56.0,
+    34.0,
+    92.05
+   ],
+   [
+    57.0,
+    33.6,
+    91.75
+   ],
+   [
+    58.0,
+    33.5,
+    91.85
+   ],
+   [
+    59.0,
+    33.4,
+    92.35
+   ],
+   [
+    60.0,
+    33.0,
+    92.15
+   ],
+   [
+    61.0,
+    32.31,
+    92.05
+   ],
+   [
+    62.0,
+    31.01,
+    92.15
+   ],
+   [
+    63.0,
+    39.56,
+    91.95
+   ],
+   [
+    64.0,
+    39.56,
+    91.95
+   ],
+   [
+    65.0,
+    45.33,
+    92.25
+   ],
+   [
+    66.0,
+    47.02,
+    92.05
+   ],
+   [
+    67.0,
+    47.02,
+    92.15
+   ],
+   [
+    68.0,
+    46.52,
+    92.25
+   ],
+   [
+    69.0,
+    44.33,
+    92.15
+   ],
+   [
+    70.0,
+    45.53,
+    92.15
+   ],
+   [
+    71.0,
+    46.92,
+    92.05
+   ],
+   [
+    72.0,
+    46.22,
+    92.45
+   ],
+   [
+    73.0,
+    null,
+    null
+   ],
+   [
+    74.0,
+    null,
+    null
+   ],
+   [
+    75.0,
+    49.9,
+    92.15
+   ],
+   [
+    76.0,
+    49.3,
+    92.54
+   ],
+   [
+    77.0,
+    49.4,
+    50.89
+   ],
+   [
+    78.0,
+    49.5,
+    50.1
+   ],
+   [
+    79.0,
+    49.7,
+    50.1
+   ],
+   [
+    80.0,
+    null,
+    null
+   ],
+   [
+    81.0,
+    null,
+    null
+   ],
+   [
+    82.0,
+    null,
+    null
+   ],
+   [
+    83.0,
+    null,
+    null
+   ],
+   [
+    84.0,
+    null,
+    null
+   ],
+   [
+    85.0,
+    null,
+    null
+   ],
+   [
+    86.0,
+    null,
+    null
+   ],
+   [
+    87.0,
+    null,
+    null
+   ],
+   [
+    88.0,
+    null,
+    null
+   ],
+   [
+    89.0,
+    null,
+    null
+   ],
+   [
+    90.0,
+    null,
+    null
+   ],
+   [
+    91.0,
+    null,
+    null
+   ],
+   [
+    92.0,
+    null,
+    null
+   ],
+   [
+    93.0,
+    null,
+    null
+   ],
+   [
+    94.0,
+    null,
+    null
+   ],
+   [
+    95.0,
+    null,
+    null
+   ],
+   [
+    96.0,
+    null,
+    null
+   ],
+   [
+    97.0,
+    null,
+    null
+   ],
+   [
+    98.0,
+    null,
+    null
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ],
+  "slices": {
+   "top_end_pct": 24.0,
+   "bottom_start_pct": 45.0,
+   "ratio": 0.7196,
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+  }
+ },
+ "info_card": {
+  "src_size": [
+   914,
+   1388
+  ],
+  "ratio": 0.6585,
+  "files": [
+   {
+    "file": "info_card-480.webp",
+    "w": 480,
+    "h": 729,
+    "bytes": 40820
+   },
+   {
+    "file": "info_card-900.webp",
+    "w": 900,
+    "h": 1367,
+    "bytes": 122980
+   }
+  ],
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    null,
+    null
+   ],
+   [
+    2.0,
+    null,
+    null
+   ],
+   [
+    3.0,
+    null,
+    null
+   ],
+   [
+    4.0,
+    null,
+    null
+   ],
+   [
+    5.0,
+    null,
+    null
+   ],
+   [
+    6.0,
+    null,
+    null
+   ],
+   [
+    7.0,
+    null,
+    null
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    null,
+    null
+   ],
+   [
+    10.0,
+    null,
+    null
+   ],
+   [
+    11.0,
+    null,
+    null
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    null,
+    null
+   ],
+   [
+    14.0,
+    null,
+    null
+   ],
+   [
+    15.0,
+    null,
+    null
+   ],
+   [
+    16.0,
+    null,
+    null
+   ],
+   [
+    17.0,
+    null,
+    null
+   ],
+   [
+    18.0,
+    null,
+    null
+   ],
+   [
+    19.0,
+    null,
+    null
+   ],
+   [
+    20.0,
+    null,
+    null
+   ],
+   [
+    21.0,
+    1.31,
+    97.92
+   ],
+   [
+    22.0,
+    1.42,
+    97.7
+   ],
+   [
+    23.0,
+    1.31,
+    97.7
+   ],
+   [
+    24.0,
+    1.53,
+    97.7
+   ],
+   [
+    25.0,
+    1.64,
+    97.59
+   ],
+   [
+    26.0,
+    1.97,
+    98.03
+   ],
+   [
+    27.0,
+    1.86,
+    98.03
+   ],
+   [
+    28.0,
+    1.31,
+    97.59
+   ],
+   [
+    29.0,
+    1.64,
+    97.59
+   ],
+   [
+    30.0,
+    1.75,
+    98.25
+   ],
+   [
+    31.0,
+    1.86,
+    97.92
+   ],
+   [
+    32.0,
+    1.86,
+    97.81
+   ],
+   [
+    33.0,
+    1.64,
+    97.48
+   ],
+   [
+    34.0,
+    1.2,
+    97.48
+   ],
+   [
+    35.0,
+    1.64,
+    97.81
+   ],
+   [
+    36.0,
+    1.64,
+    97.37
+   ],
+   [
+    37.0,
+    1.2,
+    97.48
+   ],
+   [
+    38.0,
+    1.42,
+    97.92
+   ],
+   [
+    39.0,
+    1.42,
+    97.48
+   ],
+   [
+    40.0,
+    1.75,
+    97.48
+   ],
+   [
+    41.0,
+    1.97,
+    97.92
+   ],
+   [
+    42.0,
+    1.97,
+    98.03
+   ],
+   [
+    43.0,
+    1.75,
+    97.81
+   ],
+   [
+    44.0,
+    1.31,
+    97.81
+   ],
+   [
+    45.0,
+    1.31,
+    97.92
+   ],
+   [
+    46.0,
+    1.64,
+    97.48
+   ],
+   [
+    47.0,
+    1.64,
+    97.48
+   ],
+   [
+    48.0,
+    1.86,
+    98.25
+   ],
+   [
+    49.0,
+    1.86,
+    97.7
+   ],
+   [
+    50.0,
+    1.53,
+    97.48
+   ],
+   [
+    51.0,
+    1.2,
+    97.48
+   ],
+   [
+    52.0,
+    1.53,
+    97.81
+   ],
+   [
+    53.0,
+    1.97,
+    97.59
+   ],
+   [
+    54.0,
+    1.86,
+    97.48
+   ],
+   [
+    55.0,
+    1.53,
+    97.7
+   ],
+   [
+    56.0,
+    2.08,
+    97.7
+   ],
+   [
+    57.0,
+    2.08,
+    97.37
+   ],
+   [
+    58.0,
+    1.97,
+    97.37
+   ],
+   [
+    59.0,
+    1.97,
+    97.81
+   ],
+   [
+    60.0,
+    1.64,
+    97.59
+   ],
+   [
+    61.0,
+    1.86,
+    97.81
+   ],
+   [
+    62.0,
+    1.86,
+    97.59
+   ],
+   [
+    63.0,
+    1.31,
+    97.37
+   ],
+   [
+    64.0,
+    1.75,
+    97.37
+   ],
+   [
+    65.0,
+    1.75,
+    97.92
+   ],
+   [
+    66.0,
+    1.75,
+    98.14
+   ],
+   [
+    67.0,
+    2.19,
+    97.81
+   ],
+   [
+    68.0,
+    1.75,
+    97.48
+   ],
+   [
+    69.0,
+    2.19,
+    97.37
+   ],
+   [
+    70.0,
+    2.19,
+    97.16
+   ],
+   [
+    71.0,
+    2.19,
+    97.16
+   ],
+   [
+    72.0,
+    1.86,
+    97.92
+   ],
+   [
+    73.0,
+    1.64,
+    97.81
+   ],
+   [
+    74.0,
+    1.75,
+    97.59
+   ],
+   [
+    75.0,
+    1.75,
+    97.59
+   ],
+   [
+    76.0,
+    1.64,
+    97.81
+   ],
+   [
+    77.0,
+    2.08,
+    97.7
+   ],
+   [
+    78.0,
+    1.86,
+    97.59
+   ],
+   [
+    79.0,
+    1.75,
+    97.7
+   ],
+   [
+    80.0,
+    1.42,
+    97.92
+   ],
+   [
+    81.0,
+    1.86,
+    98.03
+   ],
+   [
+    82.0,
+    2.08,
+    97.7
+   ],
+   [
+    83.0,
+    2.08,
+    97.37
+   ],
+   [
+    84.0,
+    1.64,
+    97.37
+   ],
+   [
+    85.0,
+    1.75,
+    97.92
+   ],
+   [
+    86.0,
+    1.75,
+    98.03
+   ],
+   [
+    87.0,
+    1.31,
+    97.59
+   ],
+   [
+    88.0,
+    2.3,
+    97.37
+   ],
+   [
+    89.0,
+    2.52,
+    97.48
+   ],
+   [
+    90.0,
+    1.97,
+    97.48
+   ],
+   [
+    91.0,
+    1.75,
+    97.48
+   ],
+   [
+    92.0,
+    1.75,
+    97.7
+   ],
+   [
+    93.0,
+    1.64,
+    97.7
+   ],
+   [
+    94.0,
+    1.97,
+    97.59
+   ],
+   [
+    95.0,
+    1.97,
+    97.59
+   ],
+   [
+    96.0,
+    2.19,
+    97.81
+   ],
+   [
+    97.0,
+    2.52,
+    97.59
+   ],
+   [
+    98.0,
+    null,
+    null
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ],
+  "slices": {
+   "top_end_pct": 21.0,
+   "bottom_start_pct": 95.0,
+   "ratio": 0.6585,
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (dikey gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+  }
+ },
+ "florals_tl": {
+  "src_size": [
+   1216,
+   1169
+  ],
+  "ratio": 1.04021,
+  "files": [
+   {
+    "file": "florals_tl-360.webp",
+    "w": 360,
+    "h": 346,
+    "bytes": 32648
+   },
+   {
+    "file": "florals_tl-540.webp",
+    "w": 540,
+    "h": 519,
+    "bytes": 62266
+   },
+   {
+    "file": "florals_tl-720.webp",
+    "w": 720,
+    "h": 692,
+    "bytes": 97106
+   }
+  ],
+  "quality": [
+   76,
+   60
+  ]
+ },
+ "florals_br": {
+  "src_size": [
+   1137,
+   1195
+  ],
+  "ratio": 0.95146,
+  "files": [
+   {
+    "file": "florals_br-360.webp",
+    "w": 360,
+    "h": 378,
+    "bytes": 33122
+   },
+   {
+    "file": "florals_br-540.webp",
+    "w": 540,
+    "h": 568,
+    "bytes": 62606
+   },
+   {
+    "file": "florals_br-720.webp",
+    "w": 720,
+    "h": 757,
+    "bytes": 98174
+   }
+  ],
+  "quality": [
+   76,
+   60
+  ]
+ },
+ "divider": {
+  "src_size": [
+   1378,
+   323
+  ],
+  "ratio": 4.26625,
+  "files": [
+   {
+    "file": "divider-300.webp",
+    "w": 300,
+    "h": 70,
+    "bytes": 12206
+   }
+  ]
+ },
+ "accent_1": {
+  "src_size": [
+   94,
+   200
+  ],
+  "ratio": 0.47,
+  "files": [
+   {
+    "file": "accent_1-94.webp",
+    "w": 94,
+    "h": 200,
+    "bytes": 4098
+   }
+  ]
+ },
+ "accent_2": {
+  "src_size": [
+   200,
+   190
+  ],
+  "ratio": 1.05263,
+  "files": [
+   {
+    "file": "accent_2-200.webp",
+    "w": 200,
+    "h": 190,
+    "bytes": 12410
+   }
+  ]
+ },
+ "accent_3": {
+  "src_size": [
+   52,
+   200
+  ],
+  "ratio": 0.26,
+  "files": [
+   {
+    "file": "accent_3-52.webp",
+    "w": 52,
+    "h": 200,
+    "bytes": 5444
+   }
+  ]
+ },
+ "twine_line": {
+  "src_size": [
+   1420,
+   231
+  ],
+  "ratio": 6.14719,
+  "files": [
+   {
+    "file": "twine_line-480.webp",
+    "w": 480,
+    "h": 78,
+    "bytes": 6752
+   },
+   {
+    "file": "twine_line-960.webp",
+    "w": 960,
+    "h": 156,
+    "bytes": 20030
+   }
+  ],
+  "sag": {
+   "ends_pct": [
+    13.26,
+    8.7
+   ],
+   "at_pct": {
+    "0.25": 73.16,
+    "0.5": 94.37,
+    "0.75": 73.81
+   },
+   "thickness_pct": 7.36
+  }
+ },
+ "field": {
+  "src_size": [
+   850,
+   1140
+  ],
+  "ratio": 0.74561,
+  "files": [
+   {
+    "file": "field-425.webp",
+    "w": 425,
+    "h": 570,
+    "bytes": 11622
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "top_crop": [
+   150,
+   250,
+   1000,
+   1150
+  ],
+  "bottom_crop": [
+   0,
+   1330,
+   500,
+   1536
+  ],
+  "blend_px": 110,
+  "tone_bottom": "#D7A97E"
+ },
+ "field_wide": {
+  "src_size": [
+   850,
+   560
+  ],
+  "ratio": 1.51786,
+  "files": [
+   {
+    "file": "field_wide-640.webp",
+    "w": 640,
+    "h": 422,
+    "bytes": 2720
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "crop": [
+   150,
+   300,
+   1000,
+   860
+  ]
+ },
+ "wood_foot": {
+  "src_size": [
+   500,
+   206
+  ],
+  "ratio": 2.42718,
+  "files": [
+   {
+    "file": "wood_foot-500.webp",
+    "w": 500,
+    "h": 206,
+    "bytes": 9980
+   }
+  ],
+  "quality": [
+   76,
+   90
+  ],
+  "crop": [
+   0,
+   1330,
+   500,
+   1536
+  ]
+ },
+ "barnwood": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "barnwood-480.webp",
+    "w": 480,
+    "h": 720,
+    "bytes": 30808
+   },
+   {
+    "file": "barnwood-800.webp",
+    "w": 800,
+    "h": 1200,
+    "bytes": 88536
+   }
+  ],
+  "quality": [
+   76,
+   90
+  ]
+ },
+ "barnwall": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "ratio": 1.5,
+  "files": [
+   {
+    "file": "barnwall-640.webp",
+    "w": 640,
+    "h": 427,
+    "bytes": 21088
+   },
+   {
+    "file": "barnwall-1024.webp",
+    "w": 1024,
+    "h": 683,
+    "bytes": 58266
+   }
+  ],
+  "quality": [
+   74,
+   90
+  ],
+  "note": "barnwood.png rotated 90° (vertical planks of W1.3); no other change"
+ },
+ "bg_tile": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bg_tile-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 4350
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "tone": [
+   248.9,
+   230.6,
+   203.0
+  ]
+ },
+ "page_color": "#F9E7CB",
+ "ph_hero_portrait": {
+  "src_size": [
+   640,
+   752
+  ],
+  "ratio": 0.85106,
+  "files": [
+   {
+    "file": "ph_hero_portrait-320.webp",
+    "w": 320,
+    "h": 376,
+    "bytes": 548
+   },
+   {
+    "file": "ph_hero_portrait-640.webp",
+    "w": 640,
+    "h": 752,
+    "bytes": 1690
+   }
+  ],
+  "aspect": 0.8505,
+  "crop": [
+   420,
+   420,
+   860,
+   880
+  ],
+  "min_lum": 233,
+  "max_sat": 41.0
+ },
+ "ph_story_1": {
+  "src_size": [
+   640,
+   799
+  ],
+  "ratio": 0.801,
+  "files": [
+   {
+    "file": "ph_story_1-320.webp",
+    "w": 320,
+    "h": 400,
+    "bytes": 556
+   },
+   {
+    "file": "ph_story_1-640.webp",
+    "w": 640,
+    "h": 799,
+    "bytes": 1684
+   }
+  ],
+  "aspect": 0.8009,
+  "crop": [
+   300,
+   500,
+   640,
+   960
+  ],
+  "min_lum": 235,
+  "max_sat": 40.0
+ },
+ "ph_story_2": {
+  "src_size": [
+   640,
+   799
+  ],
+  "ratio": 0.801,
+  "files": [
+   {
+    "file": "ph_story_2-320.webp",
+    "w": 320,
+    "h": 400,
+    "bytes": 602
+   },
+   {
+    "file": "ph_story_2-640.webp",
+    "w": 640,
+    "h": 799,
+    "bytes": 1824
+   }
+  ],
+  "aspect": 0.8009,
+  "crop": [
+   560,
+   380,
+   900,
+   840
+  ],
+  "min_lum": 230,
+  "max_sat": 43.0
+ },
+ "ph_story_3": {
+  "src_size": [
+   640,
+   799
+  ],
+  "ratio": 0.801,
+  "files": [
+   {
+    "file": "ph_story_3-320.webp",
+    "w": 320,
+    "h": 400,
+    "bytes": 564
+   },
+   {
+    "file": "ph_story_3-640.webp",
+    "w": 640,
+    "h": 799,
+    "bytes": 1744
+   }
+  ],
+  "aspect": 0.8009,
+  "crop": [
+   420,
+   700,
+   760,
+   1140
+  ],
+  "min_lum": 232,
+  "max_sat": 45.0
+ },
+ "ph_venue": {
+  "src_size": [
+   960,
+   594
+  ],
+  "ratio": 1.61616,
+  "files": [
+   {
+    "file": "ph_venue-480.webp",
+    "w": 480,
+    "h": 297,
+    "bytes": 710
+   },
+   {
+    "file": "ph_venue-960.webp",
+    "w": 960,
+    "h": 594,
+    "bytes": 2036
+   }
+  ],
+  "aspect": 1.6166,
+  "crop": [
+   220,
+   520,
+   960,
+   960
+  ],
+  "min_lum": 228,
+  "max_sat": 45.0
+ },
+ "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 141526
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   365,
+   435
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "source": "closure (bow + sunflower, middle 40 %)",
+  "file": "favicon.png",
+  "bytes": 49544
+ },
+ "align": {
+  "tip": "kapak",
+  "yontem": "tuval",
+  "tuval": [
+   1024,
+   1536
+  ],
+  "kenarlar": [
+   {
+    "kenar": "sol",
+    "kapali": 58.0,
+    "acik": 59.0,
+    "fark_px": 1.0,
+    "fark_pct": 0.1,
+    "durum": "tamam"
+   },
+   {
+    "kenar": "sağ",
+    "kapali": 969.0,
+    "acik": 967.0,
+    "fark_px": -2.0,
+    "fark_pct": -0.2,
+    "durum": "tamam"
+   },
+   {
+    "kenar": "alt",
+    "kapali": 1322.0,
+    "acik": 1344.0,
+    "fark_px": 22.0,
+    "fark_pct": 1.43,
+    "durum": "tamam"
+   }
+  ],
+  "uyarilar": [],
+  "esik": [
+   1.5,
+   4.0
+  ],
+  "kapanis": {
+   "kenarlar": [
+    {
+     "kenar": "kapanış sol uç",
+     "fark_px": -4.0,
+     "fark_pct": -0.39,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış sağ uç",
+     "fark_px": -1.0,
+     "fark_pct": -0.1,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    }
+   ],
+   "eksen": [
+    "yatay"
+   ],
+   "kapsama": {
+    "yatay": 1.008,
+    "dikey": 0.752
+   }
+  },
+  "durum": "tamam"
+ },
+ "cleanup": {
+  "envelope_closed": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 16497
+  },
+  "envelope_open": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 9999
+  },
+  "closure": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 21028
+  },
+  "card_small": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 14384
+  },
+  "frame_portrait": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 17953
+  },
+  "frame_landscape": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 28553
+  },
+  "invitation_card": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 42177
+  },
+  "info_card": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 31589
+  },
+  "florals_tl": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 130311
+  },
+  "florals_br": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 89956
+  },
+  "divider": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 56828
+  },
+  "accent_1": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 4310
+  },
+  "accent_2": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 9487
+  },
+  "accent_3": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 25853
+  },
+  "twine_line": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 23374
+  }
+ },
+ "checks": {
+  "envelope_open_overlap_diff": 0.00529,
+  "green_px": 0,
+  "green_check": {
+   "chroma_key_px": 0,
+   "tema_build_yesil_gorunur_foliage_px": {},
+   "note": "tema_build.yesil_gorunur yaprak yeşilini de sayar; parlak kroma şartı (G ≥ 190, fazla ≥ 60) ile 0 — kroma_yesil()"
+  },
+  "windows_transparent": {
+   "card": [
+    0,
+    0
+   ],
+   "portrait": [
+    0,
+    0
+   ],
+   "landscape": [
+    0,
+    0
+   ]
+  }
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": true,
+   "names_min_px": 36
+  }
+ }
+}

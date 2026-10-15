@@ -2,7 +2,7 @@
 id: G092
 baslik: Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol
 rol: claude-tarayici
-durum: inceleme
+durum: bitti
 alan: claude-local-1
 oncelik: 1
 bagimli: []
@@ -63,7 +63,31 @@ e-posta gösteriyor. Kalan (karar bekleyen) yer tutucular: `[ETSY SHOP URL]` (/,
 **Notlar:** admin listesi kullanıcının `/lily-and-theo` sitesini de gösteriyor (dokunulmadı). Vercel'de `BLOB_READ_WRITE_TOKEN` "Config" türünde (ekip üyeleri
 değeri görebilir) — öneri: Sensitive'e çevirmek (kullanıcı kararı; değiştirilmedi).
 
+## G096 yayını + K34
+**Tarih:** 2026-10-15 · `claude-local-1`.
+**Ortam değişkeni:** Vercel'e `CLAIM_ORDER_VERIFICATION=manual` (Production + Preview, düz değer) eklendi; değeri okunarak doğrulandı. Başka değişkene dokunulmadı.
+**Yayın:** production = main **`e63bab4`** (PR #6 dahil; platform ağacı `379814651d32`), **`dpl_8dFjoZ9Mbd9E5Sh4d33LPn6Jd8sQ`** (READY), arşiv yolu +
+`--meta gitCommit=e63bab4 --meta platformTree=379814651d32`. Önce temiz bir main worktree'sinde `npm ci` · `npm test` **940/940** (13 atlanan: Playwright'lı tema
+testleri + build'e bağlı) · typecheck · build yeşil.
+**Düzeltilen yanlış yayın:** aynı gün önce `dpl_25BxYAfXgTTZdqzJdT49vq6zSrpA` (`cfa6f9f`, ağaç `d60fa64749f4`) yayınlandı — yerel klasör başka oturumun
+`claude/dazzling-goldberg-y08us2` dalındaydı; o ağaç main'den yalnız `platform/lib/marketing/config.ts` ve `platform/lib/admin/message-templates.json`'da ayrılıyordu
+(o dalın Etsy kararları). Test edilen ağaçla aynıydı ama saf main değildi; ~20 dk sonra saf main yayınlandı. (Yerel rebase o dalın yerel kopyasını değiştirdi; uzaktaki dal sağlam.)
+**Canlı deneme (390 px, sipariş `20261018`, `test@example.com`, geçici `/g096-onay`):**
+- /start → alıcı panelinde **"Confirming your order"** kartı ✓. Üstteki **Publish düğmesi görünür ve tıklanabilir**; basınca "Not yet — We are still confirming your Etsy
+  order…" penceresi çıkıyor ve site dışarıdan açılmıyor (404) — yayın fiilen kapalı (ek geçici `/g096-bekleme`, sipariş `20261019` ile doğrulandı). Görevdeki "Publish
+  kapalı" ifadesine göre: düğme pasif değil, engel tıklamada ✓/kısmi.
+- /admin → **Özet** → Yapılacaklar'da sipariş (1 onay bekleyen) → site sayfası "Yapılacak: siparişi onayla" → **Siparişi onayla** → yapılacak kalkıyor, mesaj şablonu
+  `order_confirmed`, "Sipariş onaylandı. Alıcı artık yayınlayabilir." ✓
+- Alıcı panelini yenile → "Confirming your order" kalktı, Publish açık ✓.
+- Admin'den **Siteyi sil** → `/g096-onay` 404 ✓; `orders/20261018`, `orders/20261019`, `slugs/g096*` 0 dosya.
+- /admin **Özet, Siparişler, Müşteriler, Tasarımlar** 200 ✓. Satış sitesi 390 px: **"My website"** düğmesi ve menü düğmesi görünüyor ✓; **/my** açılıyor ✓.
+  **/designs: 14 tasarım.**
+**Gözlem:** "Not yet" penceresindeki metin kelime ortasından bölünüyor ("cha|nges", "yo|ur") — panel diyalog metninde `word-break` (düzeltilmedi).
+**Ekranlar:** `docs/10_canli_test/g096/` (alıcı onay bekliyor + "Not yet", admin Özet, onayla, onaylandı, alıcı onay sonrası, Siparişler/Müşteriler/Tasarımlar, satış 390, /my).
+Şifre ve düzenleme linkleri hiçbir yerde yok.
+
 ## Günlük
 - 2026-10-15 açıldı (entegratör, kullanıcı K30/K33)
 - 2026-10-15 alindi: claude-local-1
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-15 entegratör onayladı

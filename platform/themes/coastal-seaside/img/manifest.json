@@ -1,0 +1,2749 @@
+{
+ "_note": "build_images.py çıktısı (coastal-seaside); ölçüler px, kutular [x, y, w, h], box_pct yüzde. stage.* yüzdeleri sahne kutusuna göre (docs/11 §7.1)",
+ "env_closed": {
+  "src_size": [
+   873,
+   561
+  ],
+  "ratio": 1.55615,
+  "files": [
+   {
+    "file": "env_closed-440.webp",
+    "w": 440,
+    "h": 283,
+    "bytes": 16868
+   },
+   {
+    "file": "env_closed-873.webp",
+    "w": 873,
+    "h": 561,
+    "bytes": 69402
+   }
+  ],
+  "canvas_box": [
+   79,
+   794,
+   952,
+   1355
+  ]
+ },
+ "env_cflap": {
+  "src_size": [
+   873,
+   362
+  ],
+  "ratio": 2.4116,
+  "files": [
+   {
+    "file": "env_cflap-440.webp",
+    "w": 440,
+    "h": 182,
+    "bytes": 10092
+   },
+   {
+    "file": "env_cflap-873.webp",
+    "w": 873,
+    "h": 362,
+    "bytes": 30562
+   }
+  ],
+  "canvas_box": [
+   79,
+   794,
+   952,
+   1156
+  ]
+ },
+ "env_flap": {
+  "src_size": [
+   873,
+   403
+  ],
+  "ratio": 2.16625,
+  "files": [
+   {
+    "file": "env_flap-440.webp",
+    "w": 440,
+    "h": 203,
+    "bytes": 19368
+   },
+   {
+    "file": "env_flap-873.webp",
+    "w": 873,
+    "h": 403,
+    "bytes": 53888
+   }
+  ],
+  "canvas_box": [
+   79,
+   397,
+   952,
+   800
+  ]
+ },
+ "env_body": {
+  "src_size": [
+   873,
+   578
+  ],
+  "ratio": 1.51038,
+  "files": [
+   {
+    "file": "env_body-440.webp",
+    "w": 440,
+    "h": 291,
+    "bytes": 22832
+   },
+   {
+    "file": "env_body-873.webp",
+    "w": 873,
+    "h": 578,
+    "bytes": 66214
+   }
+  ],
+  "canvas_box": [
+   79,
+   794,
+   952,
+   1372
+  ]
+ },
+ "env_pocket": {
+  "src_size": [
+   873,
+   576
+  ],
+  "ratio": 1.51562,
+  "files": [
+   {
+    "file": "env_pocket-440.webp",
+    "w": 440,
+    "h": 290,
+    "bytes": 14396
+   },
+   {
+    "file": "env_pocket-873.webp",
+    "w": 873,
+    "h": 576,
+    "bytes": 51090
+   }
+  ],
+  "canvas_box": [
+   79,
+   796,
+   952,
+   1372
+  ]
+ },
+ "closure": {
+  "src_size": [
+   700,
+   361
+  ],
+  "ratio": 1.93906,
+  "files": [
+   {
+    "file": "closure-240.webp",
+    "w": 240,
+    "h": 124,
+    "bytes": 8332
+   },
+   {
+    "file": "closure-480.webp",
+    "w": 480,
+    "h": 248,
+    "bytes": 20144
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "anchor": "V flap tip (kapak_kes tip: intersection of the V lines along the foot of the wave-cut edge)",
+  "anchor_px": [
+   509.0,
+   1163.8
+  ],
+  "center_px": [
+   517.2,
+   1139.5
+  ],
+  "center_pct": [
+   50.196,
+   79.786
+  ],
+  "width_pct": 30.778,
+  "scale": 0.38385,
+  "env_w_px": 865,
+  "measured_from": "comps/web_1_envelope.png",
+  "comp": {
+   "env_box": [
+    145.0,
+    575.0,
+    879.0,
+    1038.0
+   ],
+   "closure_box": [
+    402.0,
+    800.0,
+    630.0,
+    912.0
+   ],
+   "tip_in_comp": [
+    509.0,
+    876.6
+   ],
+   "closure_w_over_env": 0.3106,
+   "closure_center_minus_tip_over_env_w": [
+    0.0095,
+    -0.0281
+   ]
+  },
+  "carried_by_flap": false,
+  "motion": "the wave sweeps across and carries the shell and twine away (MOTION.envelope.closure) before the flap lifts"
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "box": [
+   79,
+   221.9,
+   873,
+   1150.1
+  ],
+  "ratio": 0.75906,
+  "parts": {
+   "env_closed": [
+    0.0,
+    49.744,
+    100.0,
+    48.778
+   ],
+   "env_cflap": [
+    0.0,
+    49.744,
+    100.0,
+    31.475
+   ],
+   "env_flap": [
+    0.0,
+    15.225,
+    100.0,
+    35.04
+   ],
+   "env_body": [
+    0.0,
+    49.744,
+    100.0,
+    50.256
+   ],
+   "env_pocket": [
+    0.0,
+    49.918,
+    100.0,
+    50.082
+   ],
+   "closure": [
+    34.807,
+    73.762,
+    30.778,
+    12.048
+   ],
+   "card": [
+    23.895,
+    60.307,
+    51.523,
+    56.801
+   ]
+  },
+  "hinge_pct": 49.918,
+  "hinge_in_cflap_pct": 0.552,
+  "body_bottom_pct": 98.435,
+  "closed_obj": {
+   "box_pct": [
+    0.115,
+    49.831,
+    99.084,
+    48.604
+   ],
+   "aspect": 1.5474,
+   "frac_w": 0.99084,
+   "top_frac_of_stage_w": 0.65648,
+   "bottom_frac_of_stage_w": 0.02062
+  },
+  "card_path": {
+   "out_translate_pct": -106.174,
+   "front_translate_pct": -103.174,
+   "front_scale": 1.04,
+   "pocket_edge_at_card_corners": 901.3,
+   "card_w_of_env": 0.52,
+   "pocket_edge_mid": 1002.0,
+   "photo_above_pocket": 0.06
+  },
+  "cuts": {
+   "cflap": {
+    "canvas": [
+     1024,
+     1536
+    ],
+    "rows": [
+     0,
+     1158
+    ],
+    "hinge_row": 796,
+    "tip": [
+     509.0,
+     1163.8
+    ],
+    "left": [
+     0.649,
+     833.49,
+     202
+    ],
+    "right": [
+     -0.6266,
+     1482.74,
+     199
+    ],
+    "method": "renk"
+   },
+   "pocket": {
+    "method": "renk",
+    "detector": "vurgu çizgisi (yatay 11 sütun ortalamalı parlaklık − ±4 satır) + taban satırı + 2. derece aykırısız yan kanatlar",
+    "body": [
+     80,
+     796,
+     949,
+     1369
+    ],
+    "floor_row": 1003,
+    "floor_x": [
+     416,
+     614
+    ],
+    "floor_score": 32.68,
+    "edge_at": {
+     "x0+20": 796.0,
+     "x0+150": 859.6,
+     "mid": 1002.0,
+     "x1-150": 858.4,
+     "x1-20": 796.0
+    },
+    "sides": {
+     "left": {
+      "poly": [
+       0.000905,
+       0.2629856,
+       752.2674648
+      ],
+      "resid_median_px": 2.7,
+      "inliers": 264,
+      "cols": 328
+     },
+     "right": {
+      "poly": [
+       0.0009907,
+       -2.2585724,
+       2031.5832494
+      ],
+      "resid_median_px": 2.4,
+      "inliers": 263,
+      "cols": 327
+     }
+    },
+    "warnings": []
+   }
+  },
+  "checks": {
+   "open_layers_overlap_diff": 0.0043,
+   "cflap_outside_closed_px": 0
+  }
+ },
+ "card_small": {
+  "src_size": [
+   745,
+   1082
+  ],
+  "ratio": 0.68854,
+  "files": [
+   {
+    "file": "card_small-320.webp",
+    "w": 320,
+    "h": 465,
+    "bytes": 30734,
+    "window_visible_px": 0
+   },
+   {
+    "file": "card_small-640.webp",
+    "w": 640,
+    "h": 930,
+    "bytes": 112228,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   154,
+   117,
+   436,
+   438
+  ],
+  "leke_px": 0,
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    3.36,
+    97.05
+   ],
+   [
+    2.0,
+    2.01,
+    98.52
+   ],
+   [
+    3.0,
+    1.74,
+    98.52
+   ],
+   [
+    4.0,
+    1.88,
+    98.52
+   ],
+   [
+    5.0,
+    null,
+    null
+   ],
+   [
+    6.0,
+    null,
+    null
+   ],
+   [
+    7.0,
+    null,
+    null
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    null,
+    null
+   ],
+   [
+    10.0,
+    null,
+    null
+   ],
+   [
+    11.0,
+    null,
+    null
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    null,
+    null
+   ],
+   [
+    14.0,
+    null,
+    null
+   ],
+   [
+    15.0,
+    null,
+    null
+   ],
+   [
+    16.0,
+    null,
+    null
+   ],
+   [
+    17.0,
+    null,
+    null
+   ],
+   [
+    18.0,
+    null,
+    null
+   ],
+   [
+    19.0,
+    null,
+    null
+   ],
+   [
+    20.0,
+    null,
+    null
+   ],
+   [
+    21.0,
+    null,
+    null
+   ],
+   [
+    22.0,
+    null,
+    null
+   ],
+   [
+    23.0,
+    null,
+    null
+   ],
+   [
+    24.0,
+    null,
+    null
+   ],
+   [
+    25.0,
+    null,
+    null
+   ],
+   [
+    26.0,
+    null,
+    null
+   ],
+   [
+    27.0,
+    null,
+    null
+   ],
+   [
+    28.0,
+    null,
+    null
+   ],
+   [
+    29.0,
+    null,
+    null
+   ],
+   [
+    30.0,
+    null,
+    null
+   ],
+   [
+    31.0,
+    null,
+    null
+   ],
+   [
+    32.0,
+    null,
+    null
+   ],
+   [
+    33.0,
+    null,
+    null
+   ],
+   [
+    34.0,
+    null,
+    null
+   ],
+   [
+    35.0,
+    null,
+    null
+   ],
+   [
+    36.0,
+    null,
+    null
+   ],
+   [
+    37.0,
+    null,
+    null
+   ],
+   [
+    38.0,
+    null,
+    null
+   ],
+   [
+    39.0,
+    null,
+    null
+   ],
+   [
+    40.0,
+    null,
+    null
+   ],
+   [
+    41.0,
+    null,
+    null
+   ],
+   [
+    42.0,
+    null,
+    null
+   ],
+   [
+    43.0,
+    null,
+    null
+   ],
+   [
+    44.0,
+    null,
+    null
+   ],
+   [
+    45.0,
+    null,
+    null
+   ],
+   [
+    46.0,
+    null,
+    null
+   ],
+   [
+    47.0,
+    null,
+    null
+   ],
+   [
+    48.0,
+    null,
+    null
+   ],
+   [
+    49.0,
+    null,
+    null
+   ],
+   [
+    50.0,
+    null,
+    null
+   ],
+   [
+    51.0,
+    null,
+    null
+   ],
+   [
+    52.0,
+    null,
+    null
+   ],
+   [
+    53.0,
+    null,
+    null
+   ],
+   [
+    54.0,
+    null,
+    null
+   ],
+   [
+    55.0,
+    null,
+    null
+   ],
+   [
+    56.0,
+    null,
+    null
+   ],
+   [
+    57.0,
+    null,
+    null
+   ],
+   [
+    58.0,
+    null,
+    null
+   ],
+   [
+    59.0,
+    1.74,
+    98.52
+   ],
+   [
+    60.0,
+    1.74,
+    98.52
+   ],
+   [
+    61.0,
+    1.74,
+    98.52
+   ],
+   [
+    62.0,
+    1.88,
+    98.52
+   ],
+   [
+    63.0,
+    2.01,
+    98.52
+   ],
+   [
+    64.0,
+    2.15,
+    98.52
+   ],
+   [
+    65.0,
+    2.01,
+    98.52
+   ],
+   [
+    66.0,
+    2.01,
+    98.52
+   ],
+   [
+    67.0,
+    1.74,
+    98.52
+   ],
+   [
+    68.0,
+    1.74,
+    98.52
+   ],
+   [
+    69.0,
+    1.74,
+    98.52
+   ],
+   [
+    70.0,
+    1.74,
+    98.52
+   ],
+   [
+    71.0,
+    1.74,
+    98.52
+   ],
+   [
+    72.0,
+    1.74,
+    98.52
+   ],
+   [
+    73.0,
+    1.74,
+    98.52
+   ],
+   [
+    74.0,
+    1.74,
+    98.52
+   ],
+   [
+    75.0,
+    1.74,
+    98.52
+   ],
+   [
+    76.0,
+    1.74,
+    98.52
+   ],
+   [
+    77.0,
+    1.88,
+    98.52
+   ],
+   [
+    78.0,
+    1.88,
+    98.52
+   ],
+   [
+    79.0,
+    1.88,
+    98.52
+   ],
+   [
+    80.0,
+    1.88,
+    98.52
+   ],
+   [
+    81.0,
+    1.74,
+    98.52
+   ],
+   [
+    82.0,
+    1.74,
+    98.52
+   ],
+   [
+    83.0,
+    1.74,
+    98.52
+   ],
+   [
+    84.0,
+    1.74,
+    98.52
+   ],
+   [
+    85.0,
+    1.88,
+    98.52
+   ],
+   [
+    86.0,
+    1.74,
+    98.52
+   ],
+   [
+    87.0,
+    1.74,
+    98.52
+   ],
+   [
+    88.0,
+    1.88,
+    98.52
+   ],
+   [
+    89.0,
+    1.88,
+    98.52
+   ],
+   [
+    90.0,
+    1.88,
+    98.52
+   ],
+   [
+    91.0,
+    1.88,
+    98.52
+   ],
+   [
+    92.0,
+    2.01,
+    98.52
+   ],
+   [
+    93.0,
+    2.01,
+    98.52
+   ],
+   [
+    94.0,
+    1.88,
+    98.52
+   ],
+   [
+    95.0,
+    1.88,
+    98.52
+   ],
+   [
+    96.0,
+    1.88,
+    98.52
+   ],
+   [
+    97.0,
+    2.28,
+    98.26
+   ],
+   [
+    98.0,
+    null,
+    null
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ]
+ },
+ "frame_portrait": {
+  "src_size": [
+   834,
+   1041
+  ],
+  "ratio": 0.80115,
+  "files": [
+   {
+    "file": "frame_portrait-320.webp",
+    "w": 320,
+    "h": 399,
+    "bytes": 24806,
+    "window_visible_px": 0
+   },
+   {
+    "file": "frame_portrait-640.webp",
+    "w": 640,
+    "h": 799,
+    "bytes": 75580,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   97,
+   101,
+   638,
+   832
+  ],
+  "leke_px": 0
+ },
+ "frame_landscape": {
+  "src_size": [
+   1121,
+   790
+  ],
+  "ratio": 1.41899,
+  "files": [
+   {
+    "file": "frame_landscape-480.webp",
+    "w": 480,
+    "h": 338,
+    "bytes": 30704,
+    "window_visible_px": 0
+   },
+   {
+    "file": "frame_landscape-960.webp",
+    "w": 960,
+    "h": 677,
+    "bytes": 85816,
+    "window_visible_px": 0
+   }
+  ],
+  "window": [
+   112,
+   106,
+   898,
+   571
+  ],
+  "leke_px": 0
+ },
+ "photo_slots": {
+  "card": {
+   "box_pct": [
+    20.403,
+    10.628,
+    59.06,
+    40.85
+   ],
+   "aspect": 0.9955,
+   "box_px": [
+    440,
+    442
+   ],
+   "mask": "mask_card.png"
+  },
+  "portrait": {
+   "box_pct": [
+    11.391,
+    9.51,
+    76.978,
+    80.307
+   ],
+   "aspect": 0.7679,
+   "box_px": [
+    642,
+    836
+   ],
+   "mask": "mask_portrait.png"
+  },
+  "landscape": {
+   "box_pct": [
+    9.813,
+    13.165,
+    80.464,
+    72.785
+   ],
+   "aspect": 1.5687,
+   "box_px": [
+    902,
+    575
+   ],
+   "mask": "mask_landscape.png"
+  }
+ },
+ "invitation_card": {
+  "src_size": [
+   930,
+   1348
+  ],
+  "ratio": 0.68991,
+  "files": [
+   {
+    "file": "invitation_card-480.webp",
+    "w": 480,
+    "h": 696,
+    "bytes": 54524
+   },
+   {
+    "file": "invitation_card-914.webp",
+    "w": 914,
+    "h": 1325,
+    "bytes": 173186
+   }
+  ],
+  "quality": [
+   74,
+   90
+  ],
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    null,
+    null
+   ],
+   [
+    2.0,
+    46.34,
+    58.82
+   ],
+   [
+    3.0,
+    43.23,
+    62.04
+   ],
+   [
+    4.0,
+    null,
+    null
+   ],
+   [
+    5.0,
+    null,
+    null
+   ],
+   [
+    6.0,
+    null,
+    null
+   ],
+   [
+    7.0,
+    null,
+    null
+   ],
+   [
+    8.0,
+    null,
+    null
+   ],
+   [
+    9.0,
+    49.57,
+    98.82
+   ],
+   [
+    10.0,
+    50.0,
+    52.9
+   ],
+   [
+    11.0,
+    null,
+    null
+   ],
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    48.06,
+    51.08
+   ],
+   [
+    14.0,
+    44.62,
+    52.8
+   ],
+   [
+    15.0,
+    46.24,
+    98.82
+   ],
+   [
+    16.0,
+    47.2,
+    98.82
+   ],
+   [
+    17.0,
+    46.99,
+    98.82
+   ],
+   [
+    18.0,
+    43.44,
+    98.82
+   ],
+   [
+    19.0,
+    42.26,
+    98.82
+   ],
+   [
+    20.0,
+    29.68,
+    98.82
+   ],
+   [
+    21.0,
+    26.67,
+    98.82
+   ],
+   [
+    22.0,
+    19.46,
+    98.82
+   ],
+   [
+    23.0,
+    22.47,
+    98.82
+   ],
+   [
+    24.0,
+    22.47,
+    98.82
+   ],
+   [
+    25.0,
+    20.11,
+    98.82
+   ],
+   [
+    26.0,
+    21.08,
+    98.82
+   ],
+   [
+    27.0,
+    21.4,
+    98.82
+   ],
+   [
+    28.0,
+    21.29,
+    98.82
+   ],
+   [
+    29.0,
+    20.32,
+    98.82
+   ],
+   [
+    30.0,
+    15.81,
+    98.82
+   ],
+   [
+    31.0,
+    16.45,
+    98.82
+   ],
+   [
+    32.0,
+    16.34,
+    98.82
+   ],
+   [
+    33.0,
+    12.15,
+    98.82
+   ],
+   [
+    34.0,
+    10.97,
+    98.82
+   ],
+   [
+    35.0,
+    10.22,
+    98.82
+   ],
+   [
+    36.0,
+    8.6,
+    98.82
+   ],
+   [
+    37.0,
+    7.2,
+    98.82
+   ],
+   [
+    38.0,
+    6.67,
+    98.82
+   ],
+   [
+    39.0,
+    6.02,
+    98.82
+   ],
+   [
+    40.0,
+    3.01,
+    98.82
+   ],
+   [
+    41.0,
+    3.01,
+    98.82
+   ],
+   [
+    42.0,
+    2.37,
+    98.82
+   ],
+   [
+    43.0,
+    1.61,
+    98.82
+   ],
+   [
+    44.0,
+    1.61,
+    98.82
+   ],
+   [
+    45.0,
+    1.61,
+    98.82
+   ],
+   [
+    46.0,
+    1.61,
+    98.82
+   ],
+   [
+    47.0,
+    1.51,
+    98.82
+   ],
+   [
+    48.0,
+    1.51,
+    98.82
+   ],
+   [
+    49.0,
+    1.51,
+    98.82
+   ],
+   [
+    50.0,
+    1.51,
+    98.82
+   ],
+   [
+    51.0,
+    1.61,
+    98.82
+   ],
+   [
+    52.0,
+    1.61,
+    98.82
+   ],
+   [
+    53.0,
+    1.61,
+    98.82
+   ],
+   [
+    54.0,
+    1.61,
+    98.82
+   ],
+   [
+    55.0,
+    1.61,
+    98.82
+   ],
+   [
+    56.0,
+    1.61,
+    98.82
+   ],
+   [
+    57.0,
+    1.61,
+    98.82
+   ],
+   [
+    58.0,
+    1.61,
+    98.82
+   ],
+   [
+    59.0,
+    1.51,
+    98.82
+   ],
+   [
+    60.0,
+    1.61,
+    98.82
+   ],
+   [
+    61.0,
+    1.61,
+    98.28
+   ],
+   [
+    62.0,
+    1.61,
+    97.85
+   ],
+   [
+    63.0,
+    1.51,
+    97.42
+   ],
+   [
+    64.0,
+    1.51,
+    97.31
+   ],
+   [
+    65.0,
+    1.51,
+    97.31
+   ],
+   [
+    66.0,
+    1.61,
+    97.63
+   ],
+   [
+    67.0,
+    2.15,
+    98.06
+   ],
+   [
+    68.0,
+    5.05,
+    90.65
+   ],
+   [
+    69.0,
+    6.77,
+    88.92
+   ],
+   [
+    70.0,
+    10.0,
+    88.92
+   ],
+   [
+    71.0,
+    10.75,
+    93.23
+   ],
+   [
+    72.0,
+    15.38,
+    89.89
+   ],
+   [
+    73.0,
+    20.75,
+    84.62
+   ],
+   [
+    74.0,
+    27.74,
+    79.25
+   ],
+   [
+    75.0,
+    30.65,
+    76.67
+   ],
+   [
+    76.0,
+    38.28,
+    74.19
+   ],
+   [
+    77.0,
+    44.73,
+    70.43
+   ],
+   [
+    78.0,
+    49.14,
+    64.19
+   ],
+   [
+    79.0,
+    null,
+    null
+   ],
+   [
+    80.0,
+    null,
+    null
+   ],
+   [
+    81.0,
+    null,
+    null
+   ],
+   [
+    82.0,
+    null,
+    null
+   ],
+   [
+    83.0,
+    null,
+    null
+   ],
+   [
+    84.0,
+    null,
+    null
+   ],
+   [
+    85.0,
+    null,
+    null
+   ],
+   [
+    86.0,
+    null,
+    null
+   ],
+   [
+    87.0,
+    null,
+    null
+   ],
+   [
+    88.0,
+    47.2,
+    57.63
+   ],
+   [
+    89.0,
+    null,
+    null
+   ],
+   [
+    90.0,
+    null,
+    null
+   ],
+   [
+    91.0,
+    null,
+    null
+   ],
+   [
+    92.0,
+    null,
+    null
+   ],
+   [
+    93.0,
+    null,
+    null
+   ],
+   [
+    94.0,
+    null,
+    null
+   ],
+   [
+    95.0,
+    null,
+    null
+   ],
+   [
+    96.0,
+    null,
+    null
+   ],
+   [
+    97.0,
+    null,
+    null
+   ],
+   [
+    98.0,
+    null,
+    null
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ],
+  "slices": {
+   "top_end_pct": 47.0,
+   "bottom_start_pct": 51.0,
+   "ratio": 0.68991,
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (<ad>_band, repeat-y döşenir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+  }
+ },
+ "invitation_card_band": {
+  "src_size": [
+   930,
+   106
+  ],
+  "ratio": 8.77358,
+  "files": [
+   {
+    "file": "invitation_card_band-480.webp",
+    "w": 480,
+    "h": 55,
+    "bytes": 1186
+   },
+   {
+    "file": "invitation_card_band-914.webp",
+    "w": 914,
+    "h": 104,
+    "bytes": 5168
+   }
+  ],
+  "quality": [
+   74,
+   90
+  ],
+  "note": "düz kâğıt bandı + dikey aynası (dikişsiz), ::before repeat-y"
+ },
+ "info_card": {
+  "src_size": [
+   856,
+   1133
+  ],
+  "ratio": 0.75552,
+  "files": [
+   {
+    "file": "info_card-480.webp",
+    "w": 480,
+    "h": 635,
+    "bytes": 34468
+   },
+   {
+    "file": "info_card-840.webp",
+    "w": 840,
+    "h": 1112,
+    "bytes": 105288
+   }
+  ],
+  "free_zone": [
+   [
+    0.0,
+    null,
+    null
+   ],
+   [
+    1.0,
+    null,
+    null
+   ],
+   [
+    2.0,
+    46.26,
+    59.81
+   ],
+   [
+    3.0,
+    43.22,
+    62.73
+   ],
+   [
+    4.0,
+    39.72,
+    67.76
+   ],
+   [
+    5.0,
+    1.64,
+    98.83
+   ],
+   [
+    6.0,
+    1.4,
+    98.95
+   ],
+   [
+    7.0,
+    1.4,
+    98.83
+   ],
+   [
+    8.0,
+    1.4,
+    98.83
+   ],
+   [
+    9.0,
+    1.4,
+    98.95
+   ],
+   [
+    10.0,
+    1.4,
+    98.95
+   ],
+   [
+    11.0,
+    1.4,
+    98.83
+   ],
+   [
+    12.0,
+    1.4,
+    98.83
+   ],
+   [
+    13.0,
+    1.4,
+    98.83
+   ],
+   [
+    14.0,
+    1.4,
+    98.95
+   ],
+   [
+    15.0,
+    1.4,
+    98.95
+   ],
+   [
+    16.0,
+    1.4,
+    98.95
+   ],
+   [
+    17.0,
+    1.4,
+    98.95
+   ],
+   [
+    18.0,
+    1.4,
+    98.95
+   ],
+   [
+    19.0,
+    1.4,
+    98.83
+   ],
+   [
+    20.0,
+    1.4,
+    98.83
+   ],
+   [
+    21.0,
+    1.4,
+    98.83
+   ],
+   [
+    22.0,
+    1.4,
+    98.83
+   ],
+   [
+    23.0,
+    1.4,
+    98.95
+   ],
+   [
+    24.0,
+    1.4,
+    98.83
+   ],
+   [
+    25.0,
+    1.4,
+    98.95
+   ],
+   [
+    26.0,
+    1.4,
+    98.83
+   ],
+   [
+    27.0,
+    1.4,
+    98.83
+   ],
+   [
+    28.0,
+    1.4,
+    98.95
+   ],
+   [
+    29.0,
+    1.4,
+    98.95
+   ],
+   [
+    30.0,
+    1.4,
+    98.95
+   ],
+   [
+    31.0,
+    1.4,
+    98.95
+   ],
+   [
+    32.0,
+    1.4,
+    98.95
+   ],
+   [
+    33.0,
+    1.4,
+    98.95
+   ],
+   [
+    34.0,
+    1.4,
+    98.83
+   ],
+   [
+    35.0,
+    1.4,
+    98.83
+   ],
+   [
+    36.0,
+    1.4,
+    98.95
+   ],
+   [
+    37.0,
+    1.4,
+    98.95
+   ],
+   [
+    38.0,
+    1.4,
+    98.95
+   ],
+   [
+    39.0,
+    1.4,
+    98.95
+   ],
+   [
+    40.0,
+    1.4,
+    98.83
+   ],
+   [
+    41.0,
+    1.4,
+    98.83
+   ],
+   [
+    42.0,
+    1.4,
+    98.83
+   ],
+   [
+    43.0,
+    1.4,
+    98.95
+   ],
+   [
+    44.0,
+    1.4,
+    98.83
+   ],
+   [
+    45.0,
+    1.4,
+    98.95
+   ],
+   [
+    46.0,
+    1.4,
+    98.95
+   ],
+   [
+    47.0,
+    1.4,
+    98.95
+   ],
+   [
+    48.0,
+    1.4,
+    98.95
+   ],
+   [
+    49.0,
+    1.4,
+    98.95
+   ],
+   [
+    50.0,
+    1.4,
+    98.83
+   ],
+   [
+    51.0,
+    1.4,
+    98.95
+   ],
+   [
+    52.0,
+    1.4,
+    98.83
+   ],
+   [
+    53.0,
+    1.4,
+    98.83
+   ],
+   [
+    54.0,
+    1.4,
+    98.95
+   ],
+   [
+    55.0,
+    1.4,
+    98.83
+   ],
+   [
+    56.0,
+    1.4,
+    98.83
+   ],
+   [
+    57.0,
+    1.4,
+    98.83
+   ],
+   [
+    58.0,
+    1.4,
+    98.95
+   ],
+   [
+    59.0,
+    1.4,
+    98.95
+   ],
+   [
+    60.0,
+    1.4,
+    98.83
+   ],
+   [
+    61.0,
+    1.4,
+    98.95
+   ],
+   [
+    62.0,
+    1.4,
+    98.95
+   ],
+   [
+    63.0,
+    1.4,
+    98.95
+   ],
+   [
+    64.0,
+    1.4,
+    98.83
+   ],
+   [
+    65.0,
+    1.4,
+    98.95
+   ],
+   [
+    66.0,
+    1.4,
+    98.95
+   ],
+   [
+    67.0,
+    1.4,
+    98.95
+   ],
+   [
+    68.0,
+    1.4,
+    98.95
+   ],
+   [
+    69.0,
+    1.4,
+    98.95
+   ],
+   [
+    70.0,
+    1.4,
+    98.95
+   ],
+   [
+    71.0,
+    1.4,
+    98.95
+   ],
+   [
+    72.0,
+    1.4,
+    98.83
+   ],
+   [
+    73.0,
+    1.4,
+    98.83
+   ],
+   [
+    74.0,
+    1.4,
+    98.83
+   ],
+   [
+    75.0,
+    1.4,
+    98.83
+   ],
+   [
+    76.0,
+    1.4,
+    98.95
+   ],
+   [
+    77.0,
+    1.4,
+    98.95
+   ],
+   [
+    78.0,
+    1.4,
+    98.95
+   ],
+   [
+    79.0,
+    1.4,
+    98.95
+   ],
+   [
+    80.0,
+    1.52,
+    98.95
+   ],
+   [
+    81.0,
+    10.98,
+    98.95
+   ],
+   [
+    82.0,
+    15.42,
+    98.95
+   ],
+   [
+    83.0,
+    21.61,
+    98.95
+   ],
+   [
+    84.0,
+    22.9,
+    98.83
+   ],
+   [
+    85.0,
+    29.32,
+    87.27
+   ],
+   [
+    86.0,
+    32.13,
+    83.76
+   ],
+   [
+    87.0,
+    40.07,
+    79.79
+   ],
+   [
+    88.0,
+    42.87,
+    76.05
+   ],
+   [
+    89.0,
+    null,
+    null
+   ],
+   [
+    90.0,
+    null,
+    null
+   ],
+   [
+    91.0,
+    null,
+    null
+   ],
+   [
+    92.0,
+    null,
+    null
+   ],
+   [
+    93.0,
+    null,
+    null
+   ],
+   [
+    94.0,
+    null,
+    null
+   ],
+   [
+    95.0,
+    null,
+    null
+   ],
+   [
+    96.0,
+    null,
+    null
+   ],
+   [
+    97.0,
+    null,
+    null
+   ],
+   [
+    98.0,
+    null,
+    null
+   ],
+   [
+    99.0,
+    null,
+    null
+   ]
+  ],
+  "slices": {
+   "top_end_pct": 8.0,
+   "bottom_start_pct": 81.0,
+   "ratio": 0.75552,
+   "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (<ad>_band, repeat-y döşenir), alt dilim ::after — docs/11 §9; site.css --t/--b"
+  }
+ },
+ "info_card_band": {
+  "src_size": [
+   856,
+   1654
+  ],
+  "ratio": 0.51753,
+  "files": [
+   {
+    "file": "info_card_band-480.webp",
+    "w": 480,
+    "h": 927,
+    "bytes": 25286
+   },
+   {
+    "file": "info_card_band-840.webp",
+    "w": 840,
+    "h": 1623,
+    "bytes": 84754
+   }
+  ],
+  "quality": [
+   74,
+   90
+  ],
+  "note": "düz kâğıt bandı + dikey aynası (dikişsiz), ::before repeat-y"
+ },
+ "decor_tl": {
+  "src_size": [
+   1150,
+   1122
+  ],
+  "ratio": 1.02496,
+  "files": [
+   {
+    "file": "decor_tl-360.webp",
+    "w": 360,
+    "h": 351,
+    "bytes": 27718
+   },
+   {
+    "file": "decor_tl-540.webp",
+    "w": 540,
+    "h": 527,
+    "bytes": 52884
+   },
+   {
+    "file": "decor_tl-720.webp",
+    "w": 720,
+    "h": 702,
+    "bytes": 83740
+   }
+  ],
+  "quality": [
+   76,
+   60
+  ]
+ },
+ "decor_br": {
+  "src_size": [
+   946,
+   954
+  ],
+  "ratio": 0.99161,
+  "files": [
+   {
+    "file": "decor_br-360.webp",
+    "w": 360,
+    "h": 363,
+    "bytes": 27992
+   },
+   {
+    "file": "decor_br-540.webp",
+    "w": 540,
+    "h": 545,
+    "bytes": 50000
+   },
+   {
+    "file": "decor_br-720.webp",
+    "w": 720,
+    "h": 726,
+    "bytes": 75846
+   }
+  ],
+  "quality": [
+   76,
+   60
+  ]
+ },
+ "divider": {
+  "src_size": [
+   922,
+   248
+  ],
+  "ratio": 3.71774,
+  "files": [
+   {
+    "file": "divider-300.webp",
+    "w": 300,
+    "h": 81,
+    "bytes": 8082
+   }
+  ]
+ },
+ "wave": {
+  "src_size": [
+   1384,
+   442
+  ],
+  "ratio": 3.13122,
+  "files": [
+   {
+    "file": "wave-640.webp",
+    "w": 640,
+    "h": 204,
+    "bytes": 24510
+   },
+   {
+    "file": "wave-1200.webp",
+    "w": 1200,
+    "h": 383,
+    "bytes": 62428
+   }
+  ],
+  "quality": [
+   74,
+   64
+  ]
+ },
+ "accent_1": {
+  "src_size": [
+   200,
+   169
+  ],
+  "ratio": 1.18343,
+  "files": [
+   {
+    "file": "accent_1-200.webp",
+    "w": 200,
+    "h": 169,
+    "bytes": 6766
+   }
+  ]
+ },
+ "accent_2": {
+  "src_size": [
+   200,
+   131
+  ],
+  "ratio": 1.52672,
+  "files": [
+   {
+    "file": "accent_2-200.webp",
+    "w": 200,
+    "h": 131,
+    "bytes": 7128
+   }
+  ]
+ },
+ "accent_3": {
+  "src_size": [
+   200,
+   188
+  ],
+  "ratio": 1.06383,
+  "files": [
+   {
+    "file": "accent_3-200.webp",
+    "w": 200,
+    "h": 188,
+    "bytes": 11090
+   }
+  ]
+ },
+ "sea": {
+  "src_size": [
+   460,
+   981
+  ],
+  "ratio": 0.46891,
+  "files": [
+   {
+    "file": "sea-460.webp",
+    "w": 460,
+    "h": 981,
+    "bytes": 20916
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "top_crop": [
+   420,
+   230,
+   880,
+   1020
+  ],
+  "shore_crop": [
+   0,
+   1130,
+   600,
+   1536
+  ],
+  "blend_px": 120
+ },
+ "mist": {
+  "src_size": [
+   460,
+   790
+  ],
+  "ratio": 0.58228,
+  "files": [
+   {
+    "file": "mist-460.webp",
+    "w": 460,
+    "h": 790,
+    "bytes": 1564
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "crop": [
+   420,
+   230,
+   880,
+   1020
+  ]
+ },
+ "sea_wide": {
+  "src_size": [
+   1024,
+   550
+  ],
+  "ratio": 1.86182,
+  "files": [
+   {
+    "file": "sea_wide-640.webp",
+    "w": 640,
+    "h": 344,
+    "bytes": 3416
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "crop": [
+   0,
+   560,
+   1024,
+   1110
+  ]
+ },
+ "shore": {
+  "src_size": [
+   600,
+   406
+  ],
+  "ratio": 1.47783,
+  "files": [
+   {
+    "file": "shore-600.webp",
+    "w": 600,
+    "h": 406,
+    "bytes": 29294
+   }
+  ],
+  "quality": [
+   76,
+   90
+  ],
+  "crop": [
+   0,
+   1130,
+   600,
+   1536
+  ],
+  "tone_bottom": "#E2C5A8"
+ },
+ "bg_tile": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bg_tile-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 8362
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "tone": [
+   216.3,
+   238.1,
+   246.1
+  ]
+ },
+ "page_color": "#D8EEF6",
+ "ph_hero_portrait": {
+  "src_size": [
+   640,
+   643
+  ],
+  "ratio": 0.99533,
+  "files": [
+   {
+    "file": "ph_hero_portrait-320.webp",
+    "w": 320,
+    "h": 322,
+    "bytes": 492
+   },
+   {
+    "file": "ph_hero_portrait-640.webp",
+    "w": 640,
+    "h": 643,
+    "bytes": 1460
+   }
+  ],
+  "aspect": 0.9955,
+  "crop": [
+   420,
+   600,
+   800,
+   980
+  ],
+  "min_lum": 229,
+  "max_sat": 30.0
+ },
+ "ph_story_1": {
+  "src_size": [
+   640,
+   833
+  ],
+  "ratio": 0.76831,
+  "files": [
+   {
+    "file": "ph_story_1-320.webp",
+    "w": 320,
+    "h": 416,
+    "bytes": 570
+   },
+   {
+    "file": "ph_story_1-640.webp",
+    "w": 640,
+    "h": 833,
+    "bytes": 1836
+   }
+  ],
+  "aspect": 0.7679,
+  "crop": [
+   300,
+   560,
+   640,
+   1000
+  ],
+  "min_lum": 232,
+  "max_sat": 27.0
+ },
+ "ph_story_2": {
+  "src_size": [
+   640,
+   833
+  ],
+  "ratio": 0.76831,
+  "files": [
+   {
+    "file": "ph_story_2-320.webp",
+    "w": 320,
+    "h": 416,
+    "bytes": 616
+   },
+   {
+    "file": "ph_story_2-640.webp",
+    "w": 640,
+    "h": 833,
+    "bytes": 1892
+   }
+  ],
+  "aspect": 0.7679,
+  "crop": [
+   520,
+   600,
+   860,
+   1040
+  ],
+  "min_lum": 226,
+  "max_sat": 33.0
+ },
+ "ph_story_3": {
+  "src_size": [
+   640,
+   833
+  ],
+  "ratio": 0.76831,
+  "files": [
+   {
+    "file": "ph_story_3-320.webp",
+    "w": 320,
+    "h": 416,
+    "bytes": 584
+   },
+   {
+    "file": "ph_story_3-640.webp",
+    "w": 640,
+    "h": 833,
+    "bytes": 1888
+   }
+  ],
+  "aspect": 0.7679,
+  "crop": [
+   360,
+   640,
+   700,
+   1080
+  ],
+  "min_lum": 228,
+  "max_sat": 31.0
+ },
+ "ph_venue": {
+  "src_size": [
+   960,
+   612
+  ],
+  "ratio": 1.56863,
+  "files": [
+   {
+    "file": "ph_venue-480.webp",
+    "w": 480,
+    "h": 306,
+    "bytes": 686
+   },
+   {
+    "file": "ph_venue-960.webp",
+    "w": 960,
+    "h": 612,
+    "bytes": 1976
+   }
+  ],
+  "aspect": 1.5687,
+  "crop": [
+   240,
+   600,
+   900,
+   1000
+  ],
+  "min_lum": 228,
+  "max_sat": 33.0
+ },
+ "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 173200
+ },
+ "favicon": {
+  "src_box": [
+   164,
+   348,
+   700,
+   361
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "source": "closure",
+  "file": "favicon.png",
+  "bytes": 26698
+ },
+ "align": {
+  "tip": "kapak",
+  "yontem": "tuval",
+  "tuval": [
+   1024,
+   1536
+  ],
+  "kenarlar": [
+   {
+    "kenar": "sol",
+    "kapali": 79.0,
+    "acik": 80.0,
+    "fark_px": 1.0,
+    "fark_pct": 0.1,
+    "durum": "tamam"
+   },
+   {
+    "kenar": "sağ",
+    "kapali": 946.0,
+    "acik": 951.0,
+    "fark_px": 5.0,
+    "fark_pct": 0.49,
+    "durum": "tamam"
+   },
+   {
+    "kenar": "alt",
+    "kapali": 1354.0,
+    "acik": 1371.0,
+    "fark_px": 17.0,
+    "fark_pct": 1.11,
+    "durum": "tamam"
+   }
+  ],
+  "uyarilar": [],
+  "esik": [
+   1.5,
+   4.0
+  ],
+  "durum": "tamam"
+ },
+ "cleanup": {
+  "envelope_closed": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 8724
+  },
+  "envelope_open": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 11271
+  },
+  "closure": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 5623
+  },
+  "card_small": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 22975
+  },
+  "frame_portrait": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 7837
+  },
+  "frame_landscape": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 6242
+  },
+  "invitation_card": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 28433,
+   "speckles_filled_px": 115575
+  },
+  "info_card": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 1,
+   "removed_px": 19578,
+   "speckles_filled_px": 76602
+  },
+  "decor_tl": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 73471
+  },
+  "decor_br": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 64330
+  },
+  "divider": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 5786
+  },
+  "wave": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 59280
+  },
+  "accent_1": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 2328
+  },
+  "accent_2": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 2580
+  },
+  "accent_3": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 7959
+  }
+ },
+ "checks": {
+  "envelope_open_overlap_diff": 0.0043,
+  "green_px": 0,
+  "green_check": {
+   "chroma_key_px": 0,
+   "tema_build_yesil_gorunur_foliage_px": {
+    "decor_br-540.webp": 3,
+    "decor_br-720.webp": 1,
+    "decor_tl-360.webp": 14,
+    "decor_tl-540.webp": 7,
+    "decor_tl-720.webp": 20
+   },
+   "note": "tema_build.yesil_gorunur kumul otu / deniz camı yeşilini de sayabilir; parlak kroma şartı (G ≥ 190, fazla ≥ 60) ile 0 — kroma_yesil()"
+  },
+  "windows_transparent": {
+   "card": [
+    0,
+    0
+   ],
+   "portrait": [
+    0,
+    0
+   ],
+   "landscape": [
+    0,
+    0
+   ]
+  }
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": true,
+   "names_min_px": 36
+  }
+ }
+}

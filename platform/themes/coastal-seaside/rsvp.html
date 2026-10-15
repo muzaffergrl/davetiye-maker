@@ -1,0 +1,171 @@
+<!doctype html>
+<!-- Coastal Seaside · page 5 — RSVP (/<slug>/rsvp). W1.5 comp: the tall soft-white card with its wavy top edge and the
+     wave along the bottom (GPT info_card): "Will You Join Us?" in the breezy script, a row of shells and sea glass between
+     two hairlines (GPT divider), "KINDLY REPLY BY", the deadline, the ocean-blue RSVP pill, "WE CAN'T WAIT TO CELEBRATE
+     WITH YOU", "WITH LOVE," + the names, and the scallop shell from the envelope resting on the wave at the bottom of the
+     card (GPT closure). The card grows with long names (docs/11 §9 3-slice). Below: the platform reply form (G042
+     contract: /rsvp/form.js sends to /api/rsvp/<slug>, exactly one [data-rsvp-state] panel shows; nothing is sent in a
+     preview) with the couple's own questions (G051) and the names of the other guests (G069), and a quiet closing on the
+     shore. Personal text: none — filled on the server. Design texts: data-copy (G068). Thank-you mode (G075): the page
+     stays for old links, honestly closed — the card says "Replies are closed" with the thank-you title and a way home; no
+     form (the platform also refuses replies: 403 closed, reason thank_you). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.nav_rsvp} · {name_display}">RSVP</title>
+<meta name="description" data-attr-content="{copy.nav_rsvp} · {name_display} · {date|date-long}" content="RSVP">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.nav_rsvp} · {name_display}" content="RSVP">
+<meta property="og:description" data-attr-content="{name_display} · {date|date-long}" content="">
+<meta name="theme-color" content="#D8EEF6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allison&amp;family=Lora:ital,wght@0,400;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+<script src="/rsvp/form.js" defer></script>
+</head>
+<!-- replies collected another way (rsvp.method "none"): the whole page is off (404), like the links to it -->
+<body class="page-long page-rsvp" data-if="!rsvp.method" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <section class="rsvp-top" data-scene="rsvp-card" aria-label="RSVP">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/sea_wide-640.webp">
+        <img class="scene-img" src="img/mist-460.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="drift-tl" src="img/decor_tl-360.webp" srcset="img/decor_tl-360.webp 360w, img/decor_tl-540.webp 540w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 400px), min(50vw, 290px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="drift-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 48vh, 420px), min(50vw, 27svh, 300px)" alt="">
+      <img class="float f-glass" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
+      <img class="float f-star" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    </div>
+    <div class="wrap">
+      <div class="paper info rsvp-card" data-step="card" data-a="set">
+        <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-840.webp 840w" sizes="min(calc(100vw - 40px), 420px)" alt="">
+        <!-- [data-fold] = units that start below the first screen if the nav line would cut them (site.js folds) -->
+        <div class="paper-text rsvp-text">
+          <h1 class="script card-title" data-step="title" data-a="write" data-fold data-if="!thank_you_on" data-copy="rsvp_title">Will You Join Us?</h1>
+          <h1 class="script card-title" data-step="title" data-a="write" data-fold data-if="thank_you_on" data-copy="rsvp_closed_title">Replies are closed</h1>
+          <span class="orn title-orn" data-step="orn" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" alt=""></span>
+          <div class="unit" data-if="rsvp.deadline !thank_you_on" data-fold>
+            <p class="kicker" data-step="kicker" data-a="fade" data-copy="rsvp_by">Kindly reply by</p>
+            <p class="deadline" data-step="deadline" data-a="fade" data-field="rsvp.deadline"></p>
+          </div>
+          <p class="kicker ty-kicker" data-step="kicker" data-a="fade" data-if="thank_you_on" data-fold data-field="thank_you_title"></p>
+          <p class="pill" data-step="button" data-a="bloom" data-fold data-if="!thank_you_on"><a class="btn" href="#reply" data-copy="rsvp_button">RSVP</a></p>
+          <p class="pill" data-step="button" data-a="bloom" data-fold data-if="thank_you_on"><a class="btn" href="home.html" data-copy="home_link">Home</a></p>
+          <p class="kicker wait" data-step="wait" data-a="fade" data-fold data-if="!thank_you_on" data-copy="rsvp_wait">We can't wait to celebrate with you</p>
+          <!-- "With love," and the names stay together -->
+          <div class="unit sig-unit" data-fold>
+            <p class="kicker love" data-step="love" data-a="fade" data-copy="love_line">With love,</p>
+            <p class="script sign" data-step="sign" data-a="write"><span class="nowrap-pair"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></span></p>
+          </div>
+          <!-- the scallop shell from the envelope, resting on the wave at the bottom of the card (W1.5) -->
+          <div class="card-bundle" data-step="bundle" data-a="drop" data-fold aria-hidden="true">
+            <img src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(30vw, 130px)" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPLY FORM — platform contract (G042). Field names, data-rsvp-* hooks and method="post" are required; no action. -->
+  <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply" data-if="!thank_you_on">
+    <div class="wrap">
+      <div class="reply-box" data-rsvp data-step="form" data-a="rise">
+        <div data-fold>
+          <span class="orn" aria-hidden="true"><img src="img/divider-300.webp" alt="" loading="lazy"></span>
+          <h2 class="script" data-copy="form_title">Your reply</h2>
+        </div>
+        <form class="reply-form" data-rsvp-form method="post">
+          <label class="field" data-fold><span class="kicker" data-copy="form_name">Your name</span>
+            <input type="text" name="name" required maxlength="120" autocomplete="name">
+          </label>
+          <p class="field-error" data-rsvp-error-for="name"></p>
+          <label class="field" data-fold><span class="kicker"><span data-copy="form_email">Email</span> <span class="opt" data-copy="form_optional">(optional)</span></span>
+            <input type="email" name="email" maxlength="254" autocomplete="email">
+          </label>
+          <p class="field-error" data-rsvp-error-for="email"></p>
+          <fieldset class="choice" data-fold>
+            <legend class="kicker" data-copy="form_attend">Will you attend?</legend>
+            <label><input type="radio" name="attending" value="yes" required> <span data-copy="form_yes">Joyfully accepts</span></label>
+            <label><input type="radio" name="attending" value="no"> <span data-copy="form_no">Regretfully declines</span></label>
+          </fieldset>
+          <p class="field-error" data-rsvp-error-for="attending"></p>
+          <label class="field" data-rsvp-if-attending data-fold><span class="kicker"><span data-copy="form_guests">Number of guests</span> <span class="opt" data-copy="form_including">(including you)</span></span>
+            <input type="number" name="guests" min="1" value="1" inputmode="numeric">
+          </label>
+          <p class="field-error" data-rsvp-error-for="guests"></p>
+          <!-- names of the other guests (G069, optional): /rsvp/form.js puts one copy of this row before the template per
+               other guest when "Number of guests" is 2 or more (inputs named "party:<n>"); none for a "no", and the
+               template never shows by itself. The form's own field styles (G084): no new decoration. -->
+          <template data-rsvp-party>
+            <label class="field" data-fold><span class="kicker"><span data-copy="form_party">Name of guest</span> <span data-rsvp-party-number>2</span> <span class="opt" data-copy="form_optional">(optional)</span></span>
+              <input type="text" maxlength="120" autocomplete="off">
+            </label>
+            <p class="field-error" data-rsvp-error-for="party"></p>
+          </template>
+          <!-- the couple's own questions (content rsvp.questions, G051): asked of guests who accept; form.js names the
+               inputs "answer:<id>". Choice = the same pills as "Will you attend?", text = a short answer. -->
+          <div class="questions" data-rsvp-if-attending data-if="rsvp.questions" data-fold>
+            <fieldset class="choice question" data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">
+              <legend class="kicker" data-field=".label"></legend>
+              <div class="q-options" data-if=".options">
+                <label data-repeat=".options"><input type="radio" data-attr-value="."> <span data-field="."></span></label>
+              </div>
+              <textarea data-if="!.options" rows="2" maxlength="300" data-attr-aria-label=".label"></textarea>
+              <p class="field-error" data-attr-data-rsvp-error-for="answer:{.id}"></p>
+            </fieldset>
+          </div>
+          <label class="field" data-fold><span class="kicker"><span data-copy="form_note">A note for the couple</span> <span class="opt" data-copy="form_optional">(optional)</span></span>
+            <textarea name="message" rows="3" maxlength="500"></textarea>
+          </label>
+          <p class="field-error" data-rsvp-error-for="message"></p>
+          <p class="send" data-fold><button class="btn" type="submit" data-copy="form_send">Send reply</button></p>
+          <!-- a system sentence (shown only without JavaScript): fixed, docs/11 §3.7 -->
+          <p class="nojs-only note" data-copy-fixed>Please turn on JavaScript to send your reply.</p>
+        </form>
+        <div class="reply-panel" data-rsvp-state="success" hidden>
+          <p class="script" data-copy="rsvp_thanks">Thank you!</p>
+          <p class="note" data-rsvp-reply="yes" data-copy="rsvp_thanks_yes">Your reply is with us. We look forward to the day together.</p>
+          <p class="note" data-rsvp-reply="no" data-copy="rsvp_thanks_no">We'll miss you — thank you for letting us know.</p>
+          <p><button class="textlink" type="button" data-rsvp-again data-copy="rsvp_again">Send another reply</button></p>
+        </div>
+        <div class="reply-panel" data-rsvp-state="closed" hidden>
+          <p class="script" data-copy="rsvp_closed_title">Replies are closed</p>
+          <p class="note" data-rsvp-message>Please contact the couple directly.</p>
+        </div>
+        <div class="reply-panel" data-rsvp-state="error" hidden>
+          <p class="note" data-rsvp-message>We could not send your reply. Please try again.</p>
+        </div>
+        <div class="reply-panel" data-rsvp-state="preview" hidden>
+          <p class="note" data-rsvp-message>This is a preview, so replies are not sent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section closing shore-end" data-scene="rsvp-closing" data-accents="closing" aria-label="Thank you">
+    <img class="corner corner-br page-corner" data-step="decor" data-a="drift-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="min(54vw, 320px)" alt="" loading="lazy">
+    <!-- [data-fold]: in thank-you mode (no form) the closing follows the card on the first screen (G081) -->
+    <h2 class="script title" data-step="title" data-a="write" data-fold data-copy="closing_title">Thank you</h2>
+    <p class="line" data-step="line" data-a="fade" data-fold data-copy="closing_line">for being part of our story.</p>
+    <p class="kicker" data-step="meta" data-a="fade" data-fold><span data-field="name_display"></span> · <span class="nowrap" data-field="date"></span></p>
+    <p class="replay-line" data-step="meta" data-a="fade" data-fold><a class="textlink" href="index.html?replay=1" data-copy="rsvp_replay">Replay the envelope</a></p>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!thank_you_on"><a href="rsvp.html" aria-current="page"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
