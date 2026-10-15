@@ -14,9 +14,10 @@
    left edge (free_zone) */
 .card-copy .ty-title { max-width: 74cqw; font-family: var(--script); color: var(--pen); font-size: max(11px, 7.2cqw); line-height: 1.3;
                        text-wrap: balance; overflow-wrap: break-word; word-spacing: .08em; }
-/* site.js fitCopy "s" (a long title on a small card): typed instead of handwritten — this design's typewriter face is ~⅔ as
-   wide as the pen script at the 11 px floor — never dropped */
-.card-copy[data-drop~="s"] .ty-title { font: 400 max(11px, 4.6cqw)/1.15 var(--type); letter-spacing: .02em; word-spacing: 0; color: var(--ink); }
+/* site.js fitCopy on a small card: "s" lets the date go first (here the title is the message), "s c d" types a long title —
+   this design's typewriter face is ~⅔ as wide as the pen script at the 11 px floor; the title is never dropped */
+.card-copy[data-drop~="s"] [data-field="date"] { display: none; }
+.card-copy[data-drop~="s"][data-drop~="d"] .ty-title { font: 400 max(11px, 4.6cqw)/1.1 var(--type); letter-spacing: 0; word-spacing: 0; color: var(--ink); }
 
 /* the thank-you letter on the invitation_card sheet (3-slice like the invitation: the band repeats with the message) */
 .ty-text .ty-head { max-width: 64cqw; font-size: 7.6cqw; line-height: 1.5; }
