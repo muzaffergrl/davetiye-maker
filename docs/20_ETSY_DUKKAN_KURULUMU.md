@@ -259,7 +259,7 @@ Not: iptal politikası docs/20 tablosunda ayrı bir satır değildi. Kullanıcı
 | Saat dilimi | Türkiye / Istanbul (UTC+03) | Settings → Options |
 | Dükkân dili | Ekranda gösterilmiyor; ek çeviri yok | Settings → Languages and translations |
 | Automatic Listing Translation | **Enabled** | Options |
-| Para birimi | **TRY (₺)**: Offsite Ads sayfasının verisinde `shop_data.currency_code: "TRY"`, ülke Türkiye. docs/15 §5 USD öneriyordu; §5 gereği değiştirilmedi. **Önemli:** ilan fiyatı dükkân para biriminde girilir, yani `etsy_upload.json`'daki USD 29.40 Etsy'de TL karşılığıyla girilmeli. Para birimini değiştirmek ödeme ayarlarında yapılır; kullanıcı kararı | Offsite Ads sayfa verisi |
+| Para birimi | **TRY (₺), kullanıcı kararı 2026-10-15: TRY kalır** (USD önerisi konuşuldu, kullanıcı TRY'yi seçti). Kaynak: Offsite Ads sayfa verisi, `shop_data.currency_code: "TRY"`. Sonuçları: ödeme hesabı TL ise %2.5 döviz çevirme ücreti yok; fiyat kur değiştikçe elle güncellenir; yabancı alıcı fiyatı küsuratlı dolar karşılığıyla görür. İlan fiyatı TL girilir: USD 29.40'ın TL karşılığı henüz belirlenmedi (§8) | Offsite Ads sayfa verisi |
 | Offsite Ads | **Kapalı (opt out), 2026-10-15, kullanıcı onayıyla.** Ekran: "You opted out of Offsite Ads on October 15, 2026. It takes a few days to remove all ads with your items from our ad networks. You could see traffic from Offsite Ads up to two days after you've opted out. If those visits bring you a sale in the next 30 days, we'll apply the advertising fee to that order." Sayfa yenilendikten sonra veride `isOptedOut: true`, `optedOutDate: "October 15, 2026"`. Yeniden açma: "You can turn ads back on any time" (sayfada "Turn on Offsite Ads" butonu). Onay penceresi ("A few things to know before you opt out") yalnız çıkmayı onaylattı; para ya da bütçe sormadı. Not: önceki 3 deneme, sekme arka planda kaldığı için çalışmamıştı. Anahtar ("Opt out from Offsite Ads") açık konumdayken "katılım açık" anlamına geliyordu | Marketing → Offsite Ads |
 | Etsy Ads | Henüz kullanılamıyor: "13 days left until you can start advertising" (yeni dükkânda 15 gün bekleme) | Marketing → Etsy Ads |
 | Vacation mode | Kapalı | Options → Vacation Mode |
@@ -313,4 +313,5 @@ Fiyat şimdilik **USD 29.40**; nihai fiyat docs/15 §5'te açık.
   gerekmiyor. Kalan iş Claude'un: güncel editörden gerçek ekran çekmek ve bunları yeşil ekranlara yerleştirmek
   (`tools/mockup_compose.py`). Ardından 8 ilan görselini kurmak. `listing_kit.py` şu an yalnız 01 ve 03'ü tanıyor.
 - Karar bekleyenler: adet (quantity), otomatik yenileme (her yenileme ilan ücreti), nihai fiyat.
+- **Para birimi TRY (kullanıcı kararı, 2026-10-15).** Etsy ilan fiyatını dükkân para biriminde ister. `etsy_upload.json`'daki `price_usd: 29.40` bir hedef değerdir; Etsy'ye TL fiyat girilecek. TL tutar ve kur güncelleme sıklığı kullanıcı kararıdır (docs/15 §5).
 - Yayın öncesi kontrol listesi: her `listing_v3.md` §11.
