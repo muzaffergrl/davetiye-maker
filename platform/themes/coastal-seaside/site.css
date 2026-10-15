@@ -123,7 +123,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 /* the beach corners drift in like the tide settling */
 .js [data-a="drift-tl"] { transform: translate3d(-8%, -6%, 0); --dur: 1800ms; }
 .js [data-a="drift-br"] { transform: translate3d(8%, 6%, 0); --dur: 1800ms; }
-/* slide (20): a porthole slides in from its own edge of the screen and settles with a small roll (catalogue "kenardan kayar") */
+/* slide (20): a porthole slides in from its own edge, with a small roll (catalogue) */
 .js [data-a="slide-l"] { transform: translate3d(-70vw, 0, 0) rotate(-24deg); --dur: 1500ms; }
 .js [data-a="slide-r"] { transform: translate3d(70vw, 0, 0) rotate(24deg); --dur: 1500ms; }
 /* the shell drops onto the card */
@@ -150,9 +150,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card { position: relative; aspect-ratio: 745 / 1082; container-type: inline-size; }
 .card > .photo-slot { left: 20.403%; top: 10.628%; width: 59.06%; height: 40.85%; } /* photo_slots.card */
 :is(.scene-bg, .page-bg) :is(picture, .scene-img), .card > .card-img, .frame > .frame-img, .win-frame > .frame-img, .venue-photo .vframe, .card-bundle > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-/* free_zone: plain sand paper 58–91 % under the porthole */
+/* free_zone: plain sand paper 59–92 % under the porthole (speckles aside) */
 .card-copy {
-  position: absolute; left: 6%; right: 6%; top: 58%; bottom: 8%;
+  position: absolute; left: 6%; right: 6%; top: 60%; bottom: 8%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2.6cqw;
 }
 .card-copy .script { font-size: 13.4cqw; line-height: .95; white-space: nowrap; color: var(--script-ink); }
@@ -164,10 +164,14 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-copy[data-drop~="t"] .kicker { letter-spacing: .02em; }
 .card-copy[data-drop~="w"] .nowrap { white-space: normal; }
 
-/* -- backdrop: sea mist over the shoreline + whole decor_tl / decor_br + the comp's floating sea glass and starfish */
+/* -- backdrop: sea mist, shoreline, whole decor_tl / decor_br, floating accents */
 .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 :is(.scene-bg, .page-bg) .scene-img { object-fit: cover; object-position: 50% 100%; }
 .shore-band { display: none; }
+/* envelope page: the shoreline band under the hint (21svh kept free) */
+.page-envelope .scene-bg .shore-band { display: block; position: absolute; left: 0; bottom: 0; width: 100%; height: min(19svh, 46vw); object-fit: cover; object-position: 50% 70%;
+                                       -webkit-mask: linear-gradient(transparent, #000 40%); mask: linear-gradient(transparent, #000 40%); }
+.is-opened .scene-bg .shore-band { display: none; }
 .float { position: absolute; display: block; height: auto; filter: drop-shadow(0 4px 4px rgba(30, 50, 70, .16)); }
 .f-glass { right: 13%; top: 6.5%; width: clamp(30px, 9vw, 56px); rotate: 12deg; }
 .f-star { right: 3.5%; top: 10%; width: clamp(38px, 12vw, 70px); rotate: -8deg; }
@@ -181,8 +185,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .scene-bg .corner-br { --cw: min(54vw, 28svh, 300px); width: var(--cw); right: calc(var(--cw) * -.04); bottom: calc(var(--cw) * -.03); }
 @media (min-aspect-ratio: 3/4) {
   :is(.scene-bg, .page-bg) .scene-img { object-position: 50% 40%; }
-  .scene-bg .shore-band { display: block; position: absolute; left: 0; bottom: 0; width: 100%; height: min(34vh, 30vw); object-fit: cover; object-position: 50% 60%;
-                          -webkit-mask: linear-gradient(transparent, #000 40%); mask: linear-gradient(transparent, #000 40%); }
+  .page-envelope .scene-bg .shore-band { height: min(20vh, 18vw); }
   .scene-bg .corner-tl { --cw: min(30vw, 50vh, 460px); }
   .scene-bg .corner-br { --cw: min(28vw, 50vh, 440px); }
   .f-glass { right: 9%; top: 7%; width: clamp(36px, 4.4vw, 62px); }
@@ -231,7 +234,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 1% -45%); }
 .env .card { position: absolute; left: 23.895%; top: 60.307%; width: 51.523%; } /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 10px 16px rgba(20, 40, 60, .16)); }
-/* the opening wave: over the envelope, under the shell it carries; JS moves it across the screen */
+/* the opening wave: over the envelope, under the shell; JS moves it */
 .env-wave { z-index: 5; left: 0; top: 54%; width: min(max(150vw, 620px), 1700px); height: auto; aspect-ratio: 1384 / 442;
             visibility: hidden; pointer-events: none; filter: drop-shadow(0 10px 14px rgba(20, 60, 90, .18)); }
 /* the scallop shell on its twine (manifest closure) */
@@ -304,6 +307,8 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; } /* 
 .cd-row { display: flex; justify-content: center; gap: clamp(16px, 6vw, 36px); }
 .cd-cell { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
 .cd-num { font: 400 clamp(28px, 8vw, 38px)/1 var(--serif); color: var(--script-ink); font-variant-numeric: lining-nums tabular-nums; }
+/* a mist halo over the painted shoreline (W1.2) */
+.hero-inner > :not(.hero-card), .env-hint p { text-shadow: 0 0 10px rgba(236, 246, 250, .95), 0 0 3px rgba(236, 246, 250, .9); }
 .cd-lbl { margin-top: 7px; font: 400 10.5px/1 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
 .cd-done { font-style: italic; font-size: 18px; color: var(--script-ink); }
 .countdown.is-done .cd-row { display: none; }
@@ -342,19 +347,21 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .paper::before { top: calc(var(--top-h) - 1px); bottom: calc(var(--bot-h) - 1px); }
 .paper::after { bottom: 0; height: var(--bot-h); background-size: 100% auto; background-position: 0 100%; }
 .paper-text { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-/* invitation_card slices 38–66 % */
-.invite { --ar: .68991; --t: .38; --b: .66; }
-.invite::before, .invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-914.webp") 2x); }
-.invite::before { background-size: 100% 357.143%; background-position: 0 52.778%; } /* 1 / (.66 − .38); .38 / (1 − .28) */
-/* info_card: plain band 36–80 % */
-.info { --ar: .75552; --t: .36; --b: .8; }
-.info::before, .info::after { background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-840.webp") 2x); }
-.info::before { background-size: 100% 227.273%; background-position: 0 64.286%; } /* 1 / (.8 − .36); .36 / (1 − .44) */
+/* the plain band is tiled, never stretched (speckles would streak): <name>_band = band + mirror */
+.paper::before { background-size: 100% auto; background-repeat: repeat-y; background-position: 0 0; }
+/* invitation_card slices 47–51 % */
+.invite { --ar: .68991; --t: .47; --b: .51; }
+.invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-914.webp") 2x); }
+.invite::before { background-image: image-set(url("img/invitation_card_band-480.webp") 1x, url("img/invitation_card_band-914.webp") 2x); }
+/* info_card: plain band 8–81 % */
+.info { --ar: .75552; --t: .08; --b: .81; }
+.info::after { background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-840.webp") 2x); }
+.info::before { background-image: image-set(url("img/info_card_band-480.webp") 1x, url("img/info_card_band-840.webp") 2x); }
 
 /* -- home: invitation card (no comp) */
 .invite-sec { padding: 34px 0 26px; }
-/* free_zone: below the dune grass at the top-left (plain paper from 34 % of the card = 49cqw), above the shoreline slice (66 %) */
-.invite-text { padding: 50cqw 16% calc(var(--bot-h) + 3cqw); min-height: calc(100cqw / .68991); justify-content: center; }
+/* free_zone: under the dune grass (plain from 35 % = 51cqw) to the shoreline (66 % = bottom slice − 21cqw) */
+.invite-text { padding: 51cqw 16% calc(var(--bot-h) - 21cqw); min-height: calc(100cqw / .68991); justify-content: center; }
 .invite-text .host { max-width: 62cqw; font-size: max(11px, 3cqw); letter-spacing: .22em; line-height: 1.6; text-wrap: balance; color: var(--deep-ink); }
 .invite-text .nm { font-size: 15.6cqw; line-height: 1; text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
 .invite-text .host + .nm { margin-top: 3cqw; }
@@ -437,20 +444,23 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .next-sec .orn { margin: 0 auto 18px; }
 
 /* == story (W1.3): three brass portholes in a gentle zig-zag, sliding in from the edge */
-.windows-row { position: relative; z-index: 1; display: flex; flex-direction: column; padding: 30px 0 6px; --fw: min(58vw, 300px); overflow-x: clip; }
+.windows-row { position: relative; z-index: 1; display: flex; flex-direction: column; padding: 30px 0 6px; --fw: min(52vw, 280px); overflow-x: clip; }
 .pane { position: relative; width: var(--fw); margin: 0; text-align: center; }
 .pane.side-left { align-self: flex-start; margin-left: max(5vw, 50% - var(--fw) - 2vw); }
 .pane.side-right { align-self: flex-end; margin-right: max(5vw, 50% - var(--fw) - 2vw); }
 .pane + .pane { margin-top: 12px; }
 .pane .frame { position: relative; aspect-ratio: 834 / 1041; filter: drop-shadow(0 18px 20px rgba(20, 40, 60, .2)) drop-shadow(0 2px 2px rgba(20, 40, 60, .12)); }
-/* a shell, a piece of sea glass, a starfish beside each porthole (W1.3), on the side facing the page's middle */
+/* a beach find beside each porthole (W1.3), facing the middle */
 .beside { position: absolute; width: 23%; height: auto; display: block; filter: drop-shadow(0 4px 4px rgba(30, 50, 70, .18)); }
 .side-left .beside { right: -24%; bottom: 10%; rotate: -10deg; }
 .side-right .beside { left: -22%; top: 12%; rotate: 14deg; }
-.pane figcaption { margin-top: 8px; font-size: clamp(42px, 12vw, 56px); line-height: 1; text-wrap: balance; overflow-wrap: break-word; padding: 0 4px; }
+/* captions run toward the middle, never off screen */
+.side-left figcaption { margin-right: -14vw; }
+.side-right figcaption { margin-left: -14vw; }
+.pane figcaption { margin: 6px 0 0; font-size: clamp(38px, 10.6vw, 54px); line-height: 1; text-wrap: balance; overflow-wrap: break-word; padding: 0 4px; }
 @media (min-width: 720px) {
   /* the comp's zig-zag: each porthole half across the middle, the next one rising beside the caption above */
-  .windows-row { --fw: min(31vw, 350px); padding-top: 40px; }
+  .windows-row { --fw: min(26vw, 320px, 46svh * .8); padding-top: 34px; }
   .pane.side-left { margin-left: calc(50% - var(--fw) + 1vw); }
   .pane.side-right { margin-right: calc(50% - var(--fw) + 1vw); }
   .pane + .pane { margin-top: calc(var(--fw) * -.34); }
@@ -470,7 +480,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* the wavy top edge reaches ~ 8 % of the card: the title starts under it; the shoreline slice (80 %) stays clear */
 .day-card .info-text { padding: 13cqw 12% calc(var(--bot-h) + 3cqw); }
 .card-title { font-size: 15.4cqw; line-height: .98; text-wrap: balance; }
-.rsvp-text .card-title { font-size: 16.6cqw; line-height: .96; }
+.rsvp-text .card-title { font-size: 14.2cqw; line-height: .96; }
 .sched-list { list-style: none; margin: 3cqw 0 0; padding: 0; width: 100%; }
 .sched-row { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .sched-row + .sched-row { margin-top: 2.4cqw; }
@@ -610,7 +620,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 
   .env-page { --obj: min(78vw, calc(38svh * 1.5474), 440px); --nm: clamp(48px, min(16vw, 14svh), 96px); --pt0: 22px; padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
   .env-head { width: min(100% - 2 * min(12vw, 20svh), 560px); }
-  .env-hint .orn { display: none; }
+  .env-hint .orn, .page-envelope .scene-bg .shore-band { display: none; }
   .is-opened .env-page { --obj: min(60vw, calc((100svh - 30px) * .75906 * .99084), 440px); flex-direction: row; gap: clamp(24px, 6vw, 72px); padding: 15px 16px; }
   .is-opened .stage, .is-opened .env-after { margin-top: 0; }
 

@@ -24,7 +24,7 @@ const MOTION = {
   scenes: {
     'home-hero': [['decor', 0], ['card', 100], ['names', 620], ['date', 1380], ['venue', 1600], ['countdown', 1860], ['cta', 2140]],
     'home-invite': [['card', 0], ['host', 520], ['name1', 700], ['amp', 1180], ['name2', 1320], ['request', 1840], ['date', 2100], ['venue', 2400], ['cta', 2640], ['cal', 2860]],
-    'home-windows': [['orn', 0], ['win', 260]],
+    'home-windows': [['orn', 0], ['win', 260], ['label', 1200]],
     'home-foot': [['decor', 0], ['sign', 160], ['links', 760]],
     'story-head': [['decor', 0], ['title', 120], ['kicker', 1000], ['lede', 1300]],
     'story-window': [['frame', 0], ['caption', 1200]],

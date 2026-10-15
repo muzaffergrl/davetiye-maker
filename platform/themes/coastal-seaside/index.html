@@ -36,14 +36,14 @@
 </head>
 <body class="page-envelope" data-pending="This link will be added soon.">
 
-<!-- backdrop (W1.1): the sea mist over the shoreline (two cluster-free crops of bg_page) + the two GPT beach corners as
+<!-- backdrop (W1.1): the sea mist + the shoreline as its own bottom band (cluster-free crops of bg_page, never under text) + the two GPT beach corners as
      separate layers, each whole on screen; the comp's sea glass and starfish floating at the top-right -->
 <div class="scene-bg" aria-hidden="true">
   <picture>
     <source media="(min-aspect-ratio: 3/4)" srcset="img/sea_wide-640.webp">
-    <img class="scene-img" src="img/sea-570.webp" alt="" fetchpriority="high">
+    <img class="scene-img" src="img/mist-570.webp" alt="" fetchpriority="high">
   </picture>
-  <img class="shore-band" src="img/shore-690.webp" alt="" loading="lazy">
+  <img class="shore-band" src="img/shore-690.webp" alt="">
   <img class="corner corner-tl" src="img/decor_tl-360.webp" srcset="img/decor_tl-360.webp 360w, img/decor_tl-540.webp 540w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(30vw, 50vh, 460px), min(58vw, 30svh, 330px)" alt="" fetchpriority="high">
   <img class="corner corner-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 50vh, 440px), min(54vw, 28svh, 300px)" alt="">
   <img class="float f-glass" src="img/accent_2-200.webp" alt="">

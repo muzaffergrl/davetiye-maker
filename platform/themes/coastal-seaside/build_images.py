@@ -281,6 +281,38 @@ def cep_cizgi(eo: Image.Image, mentese: int, bant: int = 34):
 
 # ============================================================================= kart dilimleri (docs/11 §9)
 
+def benek_temizle(im: Image.Image, esik: float = 26, kagit_esik: float = 22):
+    """GPT kusuru onarımı (bilgi + davet kartı): katalog ve W1.4/W1.5 comp'ları düz yumuşak beyaz kâğıt istiyor, GPT kâğıda
+    renkli kum benekleri serpmiş (metin satırlarının altına düşüyor). Yalnız DÜZ KÂĞIT üzerindeki küçük benek pikselleri
+    (çevresinin medyanından renkçe > esik uzak, medyanı kâğıt rengine < kagit_esik yakın) o medyanla doldurulur; kabuk, ot,
+    dalga gibi büyük boyalı süsün medyanı kâğıt değildir → dokunulmaz. Çizim yok. (görüntü, değişen piksel sayısı)"""
+    from PIL import ImageFilter
+    im = im.convert("RGBA")
+    a = np.asarray(im).astype(np.float64)
+    k = 3
+    med = im.convert("RGB").resize((im.width // k, im.height // k), Image.BOX).filter(ImageFilter.MedianFilter(9))
+    med = np.asarray(med.resize(im.size, Image.BILINEAR)).astype(np.float64)
+    H, W = a.shape[:2]
+    kagit = np.median(a[int(H * .45):int(H * .55), int(W * .4):int(W * .6), :3].reshape(-1, 3), 0)
+    fark = np.sqrt(((a[..., :3] - med) ** 2).sum(-1))
+    duz = np.sqrt(((med - kagit) ** 2).sum(-1)) < kagit_esik
+    benek = genislet((fark > esik) & duz & (a[..., 3] > 250), 2) & duz & (a[..., 3] > 250)
+    a[..., :3][benek] = med[benek]
+    return Image.fromarray(np.clip(np.rint(a), 0, 255).astype(np.uint8), "RGBA"), int(benek.sum())
+
+
+def benek_sil(im: Image.Image) -> Image.Image:
+    """Yalnız ÖLÇÜM için: kâğıdın kendi küçük benekleri (kum kâğıdı "tiny speckles", ≤ ~16 px) medyan süzgeciyle silinir;
+    boyalı süs (kabuk, ot, dalga) büyük olduğu için kalır. serbest_bolge'ye verilir; görsel dosyalar değişmez."""
+    from PIL import ImageFilter
+    im = im.convert("RGBA")
+    k = 3   # ⅓ ölçekte 9 px medyan ≈ tam ölçekte 27 px pencere (≤ ~16 px benek silinir), hızlı
+    rgb = im.convert("RGB").resize((im.width // k, im.height // k), Image.BOX).filter(ImageFilter.MedianFilter(9))
+    rgb = rgb.resize(im.size, Image.BILINEAR)
+    out = rgb.convert("RGBA")
+    out.putalpha(im.getchannel("A"))
+    return out
+
 def dilimler(fz, kenar_bosluk=(8.0, 92.0), min_gen: float = 80.0):
     """free_zone → 3 dilim sınırları (yüzde): düz kağıt satırı = kartın bütün genişliğinde süs yok (açıklık ≥ min_gen).
     En uzun kesintisiz düz bant gerilir. (t, b)."""
@@ -502,20 +534,30 @@ def main():
         webp(im, parca, WIDTHS[parca])
         slots[ad] = tb.foto_alani(prep, win, parca, ad, manifest, out)
     manifest["photo_slots"] = slots
-    manifest["card_small"]["free_zone"] = tb.serbest_bolge(Image.open(prep / "card_small.png"), 0.5, ornek=(.8, .86))
+    manifest["card_small"]["free_zone"] = tb.serbest_bolge(benek_sil(Image.open(prep / "card_small.png")), 0.5, ornek=(.8, .86))
 
     # düz bant = kartın bütün genişliği süssüz (davet kartında sol üstte kumul otu, altta dalga + kabuklar; bilgi kartında
     # yalnız alttaki dalga)
-    for nm, gen in (("invitation_card", 88.0), ("info_card", 90.0)):
+    for nm, gen in (("invitation_card", 97.3), ("info_card", 97.0)):
         im = Image.open(prep / f"{nm}.png").convert("RGBA")
         im, temizlik[nm] = hale_temizle(im, sert=True)
+        im, temizlik[nm]["speckles_filled_px"] = benek_temizle(im)
         webp(im, nm, WIDTHS[nm])
-        fz = tb.serbest_bolge(im, 0.5, ornek=(.45, .55))
+        fz = tb.serbest_bolge(benek_sil(im), 0.5, ornek=(.45, .55))
         manifest[nm]["free_zone"] = fz
         t, b = dilimler(fz, min_gen=gen)
+        # orta bant GERİLMEZ (gerilen kum benekleri dikey çizgi olur): düz kâğıt bandı + dikey aynası = dikişsiz döşeme,
+        # site.css ::before repeat-y, doğal ölçekte
+        H_ = im.height
+        bant = im.crop((0, round(H_ * t / 100), im.width, round(H_ * b / 100)))
+        dos = Image.new("RGBA", (bant.width, bant.height * 2))
+        dos.paste(bant, (0, 0))
+        dos.paste(bant.transpose(Image.FLIP_TOP_BOTTOM), (0, bant.height))
+        webp(dos, f"{nm}_band", WIDTHS[nm], 74)
+        manifest[f"{nm}_band"]["note"] = "düz kâğıt bandı + dikey aynası (dikişsiz), ::before repeat-y"
         manifest[nm]["slices"] = {"top_end_pct": t, "bottom_start_pct": b, "ratio": round(im.width / im.height, 5),
-                                  "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (dikey "
-                                          "gerilir), alt dilim ::after — docs/11 §9; site.css --t/--b"}
+                                  "note": "üst dilim <img> (object-fit: cover, üstten), orta düz kağıt bandı ::before (<ad>_band, "
+                                          "repeat-y döşenir), alt dilim ::after — docs/11 §9; site.css --t/--b"}
 
     for nm in ("decor_tl", "decor_br", "divider", "wave"):
         im, temizlik[nm] = hale_temizle(Image.open(prep / f"{nm}.png"), sert=False)
@@ -532,6 +574,10 @@ def main():
     sea = deniz_zemini(bg)
     webp(sea, "sea", [sea.width], 78)
     manifest["sea"].update({"top_crop": list(SEA_TOP), "shore_crop": list(SEA_SHORE), "blend_px": SEA_BLEND})
+    # zarf sayfası (telefon): yalnız deniz sisi; kıyı ayrı alt bant (`shore`), yazıların altında kalmasın
+    mist = bg.crop(SEA_TOP)
+    webp(mist, "mist", [mist.width], 78)
+    manifest["mist"]["crop"] = list(SEA_TOP)
     wide = bg.crop(SEA_WIDE)
     webp(wide, "sea_wide", [640], 78)
     manifest["sea_wide"]["crop"] = list(SEA_WIDE)

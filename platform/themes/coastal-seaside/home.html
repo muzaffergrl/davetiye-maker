@@ -47,7 +47,6 @@
         <source media="(min-aspect-ratio: 3/4)" srcset="img/sea_wide-640.webp">
         <img class="scene-img" src="img/sea-570.webp" alt="" fetchpriority="high">
       </picture>
-      <img class="shore-band" src="img/shore-690.webp" alt="" loading="lazy">
       <img class="corner corner-tl" data-step="decor" data-a="drift-tl" src="img/decor_tl-360.webp" srcset="img/decor_tl-360.webp 360w, img/decor_tl-540.webp 540w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(30vw, 50vh, 460px), min(50vw, 26svh, 290px)" alt="">
       <img class="corner corner-br" data-step="decor" data-a="drift-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 50vh, 440px), min(50vw, 26svh, 280px)" alt="">
       <img class="float f-glass" data-step="decor" data-a="fade" src="img/accent_2-200.webp" alt="">
@@ -149,21 +148,21 @@
   <section class="section windows-sec" data-scene="home-windows" aria-label="More about the day">
     <span class="orn" data-step="orn" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" alt="" loading="lazy"></span>
     <div class="wrap windows">
-      <a class="win-link wl-story" data-optional="our_story" href="story.html" data-step="win" data-a="slide-l">
-        <span class="win-frame wf-portrait" aria-hidden="true">
+      <a class="win-link wl-story" data-optional="our_story" href="story.html">
+        <span class="win-frame wf-portrait" data-step="win" data-a="slide-l" aria-hidden="true">
           <span class="photo-slot mask-portrait" data-slot="story_1"><img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="min(38vw, 166px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span></span>
           <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w" sizes="min(50vw, 216px)" alt="" loading="lazy">
         </span>
-        <span class="win-text"><span class="script win-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
+        <span class="win-text" data-step="label" data-a="rise"><span class="script win-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
       </a>
-      <a class="win-link wl-day" href="details.html" data-if="!thank_you_hides_details" data-step="win" data-i="1" data-a="slide-r">
-        <span class="win-frame wf-landscape" aria-hidden="true">
+      <a class="win-link wl-day" href="details.html" data-if="!thank_you_hides_details">
+        <span class="win-frame wf-landscape" data-step="win" data-i="1" data-a="slide-r" aria-hidden="true">
           <span class="photo-slot mask-landscape" data-slot="venue"><img data-photo="venue" src="img/ph_venue-480.webp" srcset="img/ph_venue-480.webp 480w, img/ph_venue-960.webp 960w" sizes="min(66vw, 296px)" alt="" loading="lazy"><span class="ph-mark"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span></span>
           <img class="frame-img" src="img/frame_landscape-480.webp" srcset="img/frame_landscape-480.webp 480w, img/frame_landscape-960.webp 960w" sizes="min(84vw, 370px)" alt="" loading="lazy">
         </span>
-        <span class="win-text"><span class="script win-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span></span>
+        <span class="win-text" data-step="label" data-a="rise"><span class="script win-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span></span>
         <!-- the first four schedule rows (docs/11 §3.2; site.css shows four) -->
-        <span class="win-sched"><span class="win-row" data-repeat="schedule"><span data-field=".label"></span> · <span class="nowrap" data-field=".time"></span></span></span>
+        <span class="win-sched" data-step="label" data-i="1" data-a="rise"><span class="win-row" data-repeat="schedule"><span data-field=".label"></span> · <span class="nowrap" data-field=".time"></span></span></span>
       </a>
     </div>
   </section>

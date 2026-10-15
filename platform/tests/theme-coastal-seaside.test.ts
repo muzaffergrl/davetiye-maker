@@ -609,7 +609,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   // fade below the first screen, the shoreline fading in at the foot and on wide screens, the nav's soft ground, the button
   for (const [, sel, body] of rules) {
     if (!/gradient\(/.test(body)) continue;
-    assert.match(sel, /body::before|\.hero-bg picture|\.shore-end::before|\.scene-bg \.shore-band|^\s*\.site-nav\s*$|^\s*\.btn\s*$/, sel.trim());
+    assert.match(sel, /body::before|\.hero-bg picture|\.shore-end::before|\.page-envelope \.scene-bg \.shore-band|^\s*\.site-nav\s*$|^\s*\.btn\s*$/, sel.trim());
   }
   // the corner clusters are whole GPT parts: no mask / clip on them
   for (const [, sel, body] of rules) if (/corner|page-corner/.test(sel)) assert.doesNotMatch(body, /mask|clip-path/, sel.trim());
@@ -702,9 +702,11 @@ test('the card lands visibly on home; replay has no floating card; the opened st
 test('phone backdrop: the sea mist over the shoreline from cluster-free bg_page crops, both beach corners whole as layers, clean placeholders', () => {
   for (const page of ['index', 'home'] as PageName[]) {
     const { $ } = render(page);
-    assert.equal($('.scene-bg img.scene-img').attr('src'), `/themes/${ID}/img/sea-${MANIFEST.sea.files[0].w}.webp`);
+    // index: mist only, the shoreline its own band under the hint (never under text); home: mist + shoreline in one
+    const bgFile = page === 'index' ? `mist-${MANIFEST.mist.files[0].w}` : `sea-${MANIFEST.sea.files[0].w}`;
+    assert.equal($('.scene-bg img.scene-img').attr('src'), `/themes/${ID}/img/${bgFile}.webp`);
     assert.equal($('.scene-bg source').attr('srcset'), `/themes/${ID}/img/sea_wide-${MANIFEST.sea_wide.files[0].w}.webp`);
-    assert.equal($('.scene-bg img.shore-band').attr('loading'), 'lazy', `${page}: the wide-screen shoreline only loads where it shows`);
+    assert.equal($('.scene-bg img.shore-band').length, page === 'index' ? 1 : 0);
     for (const c of [$('.scene-bg img.corner-tl'), $('.scene-bg img.corner-br')]) {
       assert.equal(c.length, 1, `${page}: corner layer`);
       assert.equal(c.attr('loading'), undefined, `${page}: the corner is in the first view (no lazy)`);
@@ -739,8 +741,8 @@ test('story: three brass portholes in a zig-zag (left, right, left) that slide i
   assert.match(css, /\.js \[data-a="slide-l"\] \{ transform: translate3d\(-70vw, 0, 0\) rotate\(-24deg\); --dur: 1500ms; \}/);
   assert.match(css, /\.js \[data-a="slide-r"\] \{ transform: translate3d\(70vw, 0, 0\) rotate\(24deg\); --dur: 1500ms; \}/);
   assert.match(rule('.wf-portrait .photo-slot, .pane .photo-slot'), new RegExp(`left: ${MANIFEST.photo_slots.portrait.box_pct[0]}%; top: ${MANIFEST.photo_slots.portrait.box_pct[1]}%; width: ${MANIFEST.photo_slots.portrait.box_pct[2]}%`));
-  // phone: frame 58vw × window .76978 = 44.6vw ≥ 38vw (docs/11 §9)
-  assert.ok(58 * MANIFEST.photo_slots.portrait.box_pct[2] / 100 >= 38);
+  // phone: frame 52vw × window .76978 = 40vw ≥ 38vw (docs/11 §9)
+  assert.ok(52 * MANIFEST.photo_slots.portrait.box_pct[2] / 100 >= 38);
   assert.match(js(), /'story-window': \[\['frame', 0\], \['caption', \d+\]\]/, 'porthole, then the caption');
   function js() { return jsText(); }
 });
@@ -885,7 +887,7 @@ test('home: the comp hero, the invitation card with MONTH | day | YEAR, two port
   const home = render('home').$;
   assert.equal((home('body').text().match(/Kindly reply by/g) ?? []).length, 1, 'the deadline line once on home');
   assert.deepEqual(home('.win-link .win-title').map((_, el) => home(el).text()).get(), ['Our Story', 'The Day']);
-  assert.deepEqual(home('.win-link').map((_, el) => home(el).attr('data-a')).get(), ['slide-l', 'slide-r']);
+  assert.deepEqual(home('.win-link > .win-frame').map((_, el) => home(el).attr('data-a')).get(), ['slide-l', 'slide-r'], 'the portholes slide in; their text rises in place');
   assert.equal(home('.wl-day [data-slot="venue"]').length, 1);
   assert.equal(home('.paper.invite').attr('data-a'), 'set', 'a painted card is set down, always opaque');
   assert.equal(home('.hero-orn').length, 0, 'W1.2 has no ornament under the pill');
