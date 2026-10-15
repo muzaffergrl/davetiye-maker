@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 2 · inceleme 4 · blokaj 277 · bitti 101 · toplam 402
+Özet: hazir 17 · alindi 2 · inceleme 5 · blokaj 277 · bitti 101 · toplam 402
 
 ## claude-canva
 
@@ -157,10 +157,9 @@ Bağımlılık bekleyen: 1 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (14)**
+**Alınabilir (13)**
 
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G409` p3 — Tasarım 09 Lavender Provence — platform teması → `gorevler/G409-website-kaynak.md`
 - `G410` p3 — Tasarım 10 Tuscan Vineyard — platform teması → `gorevler/G410-website-kaynak.md`
@@ -174,7 +173,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `G419` p3 — Tasarım 19 Midnight Garden — platform teması → `gorevler/G419-website-kaynak.md`
 - `G420` p3 — Tasarım 20 Coastal Seaside — platform teması → `gorevler/G420-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (83)**
+**Üzerinde çalışılan / incelemede / blokaj (84)**
 
 - `G087` alindi · claude-G087 — Dükkân (admin) paneli + alıcı panelinde satın alma sonrası akış düzeltmeleri (K30)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
@@ -198,6 +197,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
+- `G406` inceleme · claude-G406 — Tasarım 06 Art Deco Black-Tie — platform teması
 - `G408` inceleme · claude-G408 — Tasarım 08 Winter Evergreen — platform teması
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları
