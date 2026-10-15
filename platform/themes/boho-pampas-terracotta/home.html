@@ -136,7 +136,7 @@
   </section>
 
   <!-- THE OTHER PAGES (no W1 screen): three arch tiles in a row, like the story's arches — the portrait arch frame with the
-       first story photo, the arch day card with the first rows of the day, the pampas-and-palm tie (GPT frame_portrait,
+       first story photo, the arch day card (its first rows of the day written beside it, never on the painted card), the pampas-and-palm tie (GPT frame_portrait,
        info_card, closure). Phones: one tile per row, the arch beside its title -->
   <section class="section more-sec" data-scene="home-more" aria-label="More about the day">
     <div class="wrap more-wrap">
@@ -151,13 +151,10 @@
           <span class="tile-text"><span class="script t-title" data-copy="story_title">Our Story</span><span class="kicker cue" data-copy="home_story_cue">Read</span></span>
         </a>
         <a class="tile t-day" href="details.html" aria-label="The Day: Details" data-attr-aria-label="{copy.day_title}: {copy.home_day_cue}" data-if="!thank_you_hides_details" data-step="tile" data-i="1" data-a="sunrise">
-          <span class="tile-art paper info day-mini" aria-hidden="true">
-            <img class="paper-top" src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-747.webp 747w" sizes="(min-width: 640px) 172px, 34vw" alt="" loading="lazy">
-            <span class="paper-text">
-              <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="l" data-field=".label"></span> <span class="dot">·</span> <span class="t" data-field=".time"></span></span></span>
-            </span>
-          </span>
-          <span class="tile-text"><span class="script t-title" data-copy="day_title">The Day</span><span class="kicker cue" data-copy="home_day_cue">Details</span></span>
+          <span class="tile-art mini-card" aria-hidden="true"><img src="img/info_card-480.webp" srcset="img/info_card-480.webp 480w, img/info_card-747.webp 747w" sizes="(min-width: 640px) 132px, 28vw" alt="" loading="lazy"></span>
+          <span class="tile-text"><span class="script t-title" data-copy="day_title">The Day</span>
+            <span class="sched"><span class="sched-line" data-repeat="schedule"><span class="l" data-field=".label"></span> <span class="dot">·</span> <span class="t" data-field=".time"></span></span></span>
+            <span class="kicker cue" data-copy="home_day_cue">Details</span></span>
         </a>
         <a class="tile t-rsvp" href="rsvp.html" data-if="!rsvp.method !thank_you_on" data-step="tile" data-i="2" data-a="sunrise">
           <span class="tile-art mini-tie" aria-hidden="true"><img src="img/closure-320.webp" srcset="img/closure-320.webp 320w, img/closure-640.webp 640w" sizes="(min-width: 640px) 110px, 22vw" alt="" loading="lazy"></span>

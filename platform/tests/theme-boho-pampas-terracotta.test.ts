@@ -748,7 +748,7 @@ test('home first screen and card copy: fold + fit logic, card height from the sc
   }
   // small text ≥ 11 px
   for (const sel of ['.card-copy .kicker', '.sched-line .t', '.rsvp-text .wait', '.invite-text .host', '.dateblock .wd']) {
-    const fs = /max\((\d+(?:\.\d+)?)px/.exec(rule(css, sel));
+    const fs = /max\((\d+(?:\.\d+)?)px/.exec(rule(css, sel)) ?? /font: \d+ (\d+(?:\.\d+)?)px/.exec(rule(css, sel));
     assert.ok(fs && Number(fs[1]) >= 11, `${sel}: ≥ 11 px`);
   }
   assert.match(rule(css, '.cd-lbl'), /font: 600 11px/);

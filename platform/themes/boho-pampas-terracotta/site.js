@@ -295,6 +295,14 @@ const DEV_CONTENT = {
     });
   }
 
+  /* -- the platform's preview bar (shared preview links: in the flow above the page) is off the first screen: CSS --bar */
+  const barHeight = () => { const b = document.querySelector('[data-platform-preview-bar]'); return b ? b.offsetHeight : 0; };
+  function initBar() {
+    const set = () => root.style.setProperty('--bar', barHeight() + 'px');
+    set();
+    window.addEventListener('resize', set);
+  }
+
   /* -- long names, the hero's first screen, card copy (README "Long names") */
   function fitNames() {
     const targets = [['.env-head .names', 2.15, 0.22, 0], ['.hero .names', 3.2, 0.3, 32]]
@@ -304,7 +312,8 @@ const DEV_CONTENT = {
     // layout boxes (no entrance transforms)
     const bottom = (el) => { let y = el.offsetHeight; for (let e = el; e; e = e.offsetParent) y += e.offsetTop; return y; };
     // the first screen = the small viewport (svh): collapsing toolbars move nothing
-    const sv = () => { const p = document.createElement('i'); p.style.cssText = 'position:fixed;height:100svh'; document.body.append(p); const h = p.offsetHeight; p.remove(); return h || innerHeight; };
+    // minus the platform's preview bar (in the flow above the page)
+    const sv = () => { const p = document.createElement('i'); p.style.cssText = 'position:fixed;height:100svh'; document.body.append(p); const h = p.offsetHeight; p.remove(); return (h || innerHeight) - barHeight(); };
     const low = (h1) => {
       const hero = h1.closest('.hero');
       if (!hero || !inner || !nav) return false;
@@ -506,6 +515,7 @@ const DEV_CONTENT = {
       if (st === 'success') root.setAttribute('data-rsvp-replied', '');
       else if (st === 'ready') root.removeAttribute('data-rsvp-replied');
     });
+    initBar();
     fitNames();
     initEnvelope();
     initScenes();

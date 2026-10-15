@@ -69,6 +69,7 @@ PLACEHOLDERS = {
     "story_3": ("portrait", [320, 640], (330, 380, 800, 1000)),
     "venue": ("landscape", [480, 960], (240, 720, 800, 1080)),
 }
+MIST_KUTU = (340, 260, 800, 950)   # bulanık geniş ekran zemini için bg_page kırpımı (kümeler dışında)
 PH_MIN_LUM = 175   # yer tutucuda en koyu piksel (gri ton) en az bu: kümeden yaprak/gül kırpıma girmez (çıkış ≠ 0)
 # comp W1.1 ölçümü (comps/web_1_envelope.png, 1024×1536): zarf gövdesi x 265–758 (493 px); kapanış (açık krem/bej
 # pikseller, zarf içinde en büyük bölge) kutusu x 422–645, y 620–980 (yükseklik 360); kemer kapağın kenarı kapanışın
@@ -533,7 +534,10 @@ def main():
     # ------------------------------------------------------------------ zemin
     bg = Image.open(PARTS / "bg_page.png").convert("RGB")
     webp(bg, "bg_page", [640, 1024], 76)
-    webp(tb.bulanik_fon(bg, (640, 960), 6), "mist", [640], 80)
+    # geniş ekran zemini: bg_page'in iki küme arasındaki dekorsuz, ışınlı bölgesi (x 340–800, y 260–950; 2:3), bulanık —
+    # sayfanın tamamı bulanıklaşınca kümeler köşe katmanlarının arkasında "hayalet" leke kalıyordu
+    webp(tb.bulanik_fon(bg.crop(MIST_KUTU), (640, 960), 6), "mist", [640], 80)
+    manifest["mist"]["crop"] = list(MIST_KUTU)
     # uzun sayfa zemini: bg_tile (dikişsiz kum kağıt), bg_page'in dekorsuz orta bölgesinin ortalama rengine çekilir
     tile = Image.open(PARTS / "bg_tile.png").convert("RGB").resize((640, 640), Image.LANCZOS)
     ta = np.asarray(tile).astype(np.float64)
@@ -583,8 +587,10 @@ def main():
                           "windows_transparent": {k: [f.get("window_visible_px") for f in manifest[p]["files"]]
                                                   for k, p in (("card", "card_small"), ("portrait", "frame_portrait"),
                                                                ("landscape", "frame_landscape"))}}
-    # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik; parçacık katmanı; boyalı köşe kümeleri
-    manifest["theme_check"] = {"particles": ".accent-layer", "clusters": ".corner",
+    # theme-check tablosu (scripts/lib/theme-env.ts): kartlar <img> ile otomatik; parçacık katmanı; zarf ve hero zeminindeki
+    # boyalı köşe kümeleri (sayfa sonu köşeleri .page-corner kaydırılan içerik: bölümleri kendi boylarında, sayfa sonunda
+    # nav'ın üstünde biter — README)
+    manifest["theme_check"] = {"particles": ".accent-layer", "clusters": ".scene-bg .corner",
                                "first_screen": {"landscape": False, "names_min_px": 32}}
     tb.manifest_yaz(out, manifest)
 
