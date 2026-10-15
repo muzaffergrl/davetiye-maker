@@ -2,8 +2,8 @@
 id: GM06
 baslik: Dükkân geneli güven ve albeni sahneleri — 6 GPT görseli (3 adım, misafir RSVP, çift düzenliyor, her cihaz, QR masa kartı, atölye)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: codex-gpt-gorsel-gm06
 oncelik: 2
 bagimli: []
 yazar: [brand/trust/]
@@ -20,3 +20,4 @@ her ilanda ortak kullanılacak 6 sahne. Prompt'lar: `brand/trust/GPT_PROMPTS.md`
 
 ## Günlük
 - 2026-10-15 açıldı (kullanıcı K32)
+- 2026-10-15 alindi: codex-gpt-gorsel-gm06
