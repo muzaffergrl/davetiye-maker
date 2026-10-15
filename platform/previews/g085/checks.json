@@ -1,0 +1,530 @@
+{
+  "task": "G085 — 04 Vintage Airmail Love Letter on the sales site; five-design layout",
+  "date": "2026-10-15",
+  "server": "next start (local production build of this checkout), temp data folders; nothing deployed",
+  "commands": {
+    "npm test": "579/579",
+    "npm run typecheck": "clean",
+    "npm run build": "ok (+ trace-check: 16 routes, 6 themes)",
+    "node scripts/marketing-assets.ts --check": "marketing assets: ok",
+    "tests/marketing-browser.ts": "407/407",
+    "tests/g080-browser.ts": "101/101 (THEME_APPROVAL=enforce + no-gate server, both on the review fixture themes folder)"
+  },
+  "assets": {
+    "command": "node scripts/marketing-assets.ts --designs vintage-airmail-love-letter --shots <temp>/shots04",
+    "capture": "tools/listing_templates/capture.ts --theme vintage-airmail-love-letter, temporary uncommitted copy without the buyer/panel sections (outdated panel selectors, G082/G083 note) and with the platform path from an env variable; guest screens and recording code unchanged",
+    "capture_shots": [
+      "g01_envelope.jpg",
+      "g02_home_top.jpg",
+      "g03_home_invitation.jpg",
+      "g04_home_calendar.jpg",
+      "g05_story.jpg",
+      "g06_details_top.jpg",
+      "g07_details_schedule.jpg",
+      "g12_details_venue.jpg",
+      "g08_details_faq.jpg",
+      "g09_rsvp_top.jpg",
+      "g10_rsvp_form.jpg",
+      "g11_rsvp_sent.jpg",
+      "d01_demo_home.jpg"
+    ],
+    "capture_checks": [
+      {
+        "name": "reply stored: Olivia Bennett",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "reply stored: Marcus Reed",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "reply stored: Hannah Clarke",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "reply stored: The Alvarez Family",
+        "ok": true,
+        "detail": "200"
+      },
+      {
+        "name": "guest: envelope page 200",
+        "ok": true
+      },
+      {
+        "name": "guest: reply sent (\"thank you\")",
+        "ok": true
+      },
+      {
+        "name": "demo: /start/demo/<theme>/home 200",
+        "ok": true
+      },
+      {
+        "name": "recording: opening.webm written",
+        "ok": true
+      }
+    ],
+    "others_unchanged": "sha1 of the 129 other files under public/marketing/ (01, 02, 03, 05, panel) identical before/after; assets.json entries of the four earlier designs and the panel identical",
+    "new_files": "26 files, 1.5 MB; opening.mp4 428947 bytes (390x844, 10 s), poster = first painted frame (script font loaded)",
+    "opening_frames_checked": "closed envelope → wax seal pops off → perforated strip torn left to right and flies off → cream card with the portrait slides up, a forget-me-not sprig flutters down beside it → card comes forward → home hero card, names written → invitation letter"
+  },
+  "layout": {
+    "cards": "phones (320–768): 2 + 2 + 1, last card centered, same width; ≥ 900 px: 3 + 2, last row centered (six tracks, a card spans two)",
+    "chips_phone": "one sideways row; right edge fades over 48 px (mask-image); at 320/360/390/430/768/900 a chip runs into the fade; scrolled to the end the last chip ends 48 px before the edge",
+    "chips_wide": "compact chips (14 px, 12 px padding, gap 8): 1280: 2 rows (3 + 2), main button bottom 769 px of 800; 1024: 4 rows, main button bottom 883 px of 800 (open point)"
+  },
+  "metrics": {
+    "G085 home chips @1024": {
+      "rows": 4,
+      "ctaBottom": 883,
+      "viewportHeight": 800
+    },
+    "/": {
+      "lcp": 1448,
+      "lcpElement": "IMG http://127.0.0.1:42096/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 984,
+      "loadMs": 5378,
+      "transferredKB": 359,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 125
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1472,
+      "lcpElement": "IMG http://127.0.0.1:42096/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1004,
+      "loadMs": 5555,
+      "transferredKB": 391,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 159
+    },
+    "/designs/vintage-airmail-love-letter": {
+      "lcp": 1068,
+      "lcpElement": "P",
+      "cls": 0.0004,
+      "fcp": 1068,
+      "loadMs": 5624,
+      "transferredKB": 420,
+      "scriptKB": 140,
+      "fontKB": 67,
+      "imageKB": 187
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 876,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 876,
+      "loadMs": 4740,
+      "transferredKB": 235,
+      "scriptKB": 139,
+      "fontKB": 67,
+      "imageKB": 3
+    }
+  },
+  "g085_browser_checks": [
+    {
+      "name": "G085 /designs @320: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @320: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @320: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)",
+      "ok": true,
+      "detail": {
+        "vw": 320,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 272,
+        "rows": 1,
+        "cta": 897,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 home @320: the first chip is not dimmed, the last one is clear of the fade at the end",
+      "ok": true,
+      "detail": {
+        "vw": 320,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 272,
+        "rows": 1,
+        "cta": 897,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 /designs @360: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @360: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @360: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)",
+      "ok": true,
+      "detail": {
+        "vw": 360,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          26,
+          12
+        ],
+        "lastRightAtEnd": 312,
+        "rows": 1,
+        "cta": 864,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 home @360: the first chip is not dimmed, the last one is clear of the fade at the end",
+      "ok": true,
+      "detail": {
+        "vw": 360,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          26,
+          12
+        ],
+        "lastRightAtEnd": 312,
+        "rows": 1,
+        "cta": 864,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 /designs @390: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @390: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @390: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)",
+      "ok": true,
+      "detail": {
+        "vw": 390,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          42
+        ],
+        "lastRightAtEnd": 342,
+        "rows": 1,
+        "cta": 841,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 home @390: the first chip is not dimmed, the last one is clear of the fade at the end",
+      "ok": true,
+      "detail": {
+        "vw": 390,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          42
+        ],
+        "lastRightAtEnd": 342,
+        "rows": 1,
+        "cta": 841,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 /designs @430: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @430: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @430: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)",
+      "ok": true,
+      "detail": {
+        "vw": 430,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 382,
+        "rows": 1,
+        "cta": 856,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 home @430: the first chip is not dimmed, the last one is clear of the fade at the end",
+      "ok": true,
+      "detail": {
+        "vw": 430,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 16,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 382,
+        "rows": 1,
+        "cta": 856,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 /designs @768: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @768: 2+2+1 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "2+2+1",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @768: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)",
+      "ok": true,
+      "detail": {
+        "vw": 768,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 24,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 720,
+        "rows": 1,
+        "cta": 987,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 home @768: the first chip is not dimmed, the last one is clear of the fade at the end",
+      "ok": true,
+      "detail": {
+        "vw": 768,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 24,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 720,
+        "rows": 1,
+        "cta": 987,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 /designs @900: 3+2 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "3+2",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @900: 3+2 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "3+2",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @900: the chip row fades out at the right edge and a chip runs into the fade (the row goes on)",
+      "ok": true,
+      "detail": {
+        "vw": 900,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 24,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 852,
+        "rows": 1,
+        "cta": 947,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 home @900: the first chip is not dimmed, the last one is clear of the fade at the end",
+      "ok": true,
+      "detail": {
+        "vw": 900,
+        "mask": "linear-gradient(to right, rgba(0, 0, 0, ",
+        "overflow": true,
+        "firstLeft": 24,
+        "intoFade": [
+          48
+        ],
+        "lastRightAtEnd": 852,
+        "rows": 1,
+        "cta": 947,
+        "vh": 844
+      }
+    },
+    {
+      "name": "G085 /designs @1024: 3+2 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "3+2",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @1024: 3+2 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "3+2",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @1024: no fade beside the text (chips wrap)",
+      "ok": true,
+      "detail": {
+        "vw": 1024,
+        "mask": "none",
+        "overflow": false,
+        "firstLeft": 676,
+        "intoFade": [],
+        "lastRightAtEnd": 911,
+        "rows": 4,
+        "cta": 883,
+        "vh": 800
+      }
+    },
+    {
+      "name": "G085 /designs @1280: 3+2 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "3+2",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 / @1280: 3+2 card rows, last row centered, cards the same width",
+      "ok": true,
+      "detail": {
+        "rows": "3+2",
+        "lastOffset": 0,
+        "sameWidth": true
+      }
+    },
+    {
+      "name": "G085 home @1280: no fade beside the text (chips wrap)",
+      "ok": true,
+      "detail": {
+        "vw": 1280,
+        "mask": "none",
+        "overflow": false,
+        "firstLeft": 792,
+        "intoFade": [
+          5
+        ],
+        "lastRightAtEnd": 1217,
+        "rows": 2,
+        "cta": 769,
+        "vh": 800
+      }
+    },
+    {
+      "name": "G085 home @1280: five chips in ≤ 2 rows, the main button inside the first screen (800 px)",
+      "ok": true,
+      "detail": {
+        "vw": 1280,
+        "mask": "none",
+        "overflow": false,
+        "firstLeft": 792,
+        "intoFade": [
+          5
+        ],
+        "lastRightAtEnd": 1217,
+        "rows": 2,
+        "cta": 769,
+        "vh": 800
+      }
+    }
+  ]
+}

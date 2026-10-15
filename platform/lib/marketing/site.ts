@@ -157,7 +157,8 @@ export function corePage(path: string, cfg: MarketingConfig = MARKETING): PageEn
 
 /**
  * Title of a design page: "<Name>: Envelope Wedding Website | <brand>" (docs/14 §6.3). A long design name (G083: "Dusty
- * Blue & Champagne" makes 61 characters) drops the colon, then "Envelope", so the title stays ≤ 60 characters.
+ * Blue & Champagne" makes 61 characters) drops the colon, then "Envelope", so the title stays ≤ 60 characters
+ * (G085: "Vintage Airmail Love Letter: Wedding Website | BKE Studio", 57).
  */
 export function designTitle(name: string, cfg: MarketingConfig = MARKETING): string {
   const options = [`${name}: Envelope Wedding Website`, `${name} Envelope Wedding Website`, `${name}: Wedding Website`];

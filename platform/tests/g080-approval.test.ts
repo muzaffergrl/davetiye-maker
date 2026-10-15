@@ -3,9 +3,11 @@
 // review is refused by POST /api/start (403 theme_in_review, nothing stored) and left out of the /start list; its demo
 // stays open. Everywhere else every claimable theme can be started (theme work is not blocked).
 // The /start page itself (404 + honest message) is checked in a real browser: tests/g080-browser.ts.
-import { afterEach, before, beforeEach, test } from 'node:test';
+// G085: 04 went live, so no real theme is in review any more; the gate is tested with a fixture design in review
+// (tests/review-fixture.ts: every real theme + REVIEW_FIXTURE_ID, through PLATFORM_THEMES_DIR).
+import { after, afterEach, before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import { POST as claimRoute } from '../app/api/start/route.ts';
 import { GET as demoIndexRoute } from '../app/start/demo/[theme]/route.ts';
@@ -25,24 +27,32 @@ import {
 } from '../lib/themes/approval.ts';
 import { offeredThemes } from '../lib/themes/offered.ts';
 import { PLATFORM_ROOT, tmpDir } from './helpers.ts';
+import { REVIEW_FIXTURE_ID, reviewFixtureThemesDir } from './review-fixture.ts';
 
 const BASE = 'http://localhost:3000';
 const PROD = { VERCEL_ENV: 'production' } as const;
 
-/** Every buyer-facing theme folder (not internal). */
+/** Every real buyer-facing theme folder (not internal). */
 const themeIds = readdirSync(path.join(PLATFORM_ROOT, 'themes'), { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .map((d) => JSON.parse(readFileSync(path.join(PLATFORM_ROOT, 'themes', d.name, 'theme.json'), 'utf8')) as { id: string; internal?: boolean })
   .filter((m) => !m.internal)
   .map((m) => m.id);
 const approved = approvedThemeIds();
-const inReview = themeIds.filter((id) => !approved.includes(id));
+/** Designs in review: the fixture, plus any real theme not listed as live (none since G085; a new one may come). */
+const inReview = [REVIEW_FIXTURE_ID, ...themeIds.filter((id) => !approved.includes(id))];
+let themesDir = '';
 
 before(() => {
-  delete process.env.PLATFORM_THEMES_DIR; // the real themes
+  themesDir = reviewFixtureThemesDir(); // the real themes + one design in review
+  process.env.PLATFORM_THEMES_DIR = themesDir;
   process.env.PLATFORM_DATA_DIR = tmpDir('g080-data-');
   delete process.env.PLATFORM_PUBLIC_URL;
   delete process.env.CLAIM_ORDER_VERIFICATION;
+});
+after(() => {
+  delete process.env.PLATFORM_THEMES_DIR;
+  rmSync(themesDir, { recursive: true, force: true });
 });
 
 let saved: Record<string, string | undefined> = {};
@@ -73,14 +83,13 @@ async function post(theme: string, names: [string, string]) {
   return { status: res.status, body: (await res.json()) as Record<string, any>, orderNumber };
 }
 
-test('one source: approved = the sales-site designs with status "live" (today 01, 03, 05 — G082 — and 02 — G083; 04 in review)', () => {
+test('one source: approved = the sales-site designs with status "live" (01, 03, 05 — G082 —, 02 — G083 — and 04 — G085)', () => {
   assert.deepEqual(approved, liveDesigns().map((d) => d.id));
   assert.ok(approved.includes('olive-ivory') && approved.includes('blush-garden-rose'), approved.join());
   assert.ok(approved.includes('mediterranean-lemon'), `G082: 05 is approved (${approved.join()})`);
   assert.ok(approved.includes('dusty-blue-champagne'), `G083: 02 is approved (${approved.join()})`);
-  for (const id of ['vintage-airmail-love-letter']) {
-    if (themeIds.includes(id) && !approved.includes(id)) assert.equal(themeApproval(id), 'review', id);
-  }
+  assert.ok(approved.includes('vintage-airmail-love-letter'), `G085: 04 is approved (${approved.join()})`);
+  for (const id of inReview) assert.equal(themeApproval(id), 'review', id);
   // 'coming' and not-listed designs are in review; a fixture config shows the rule without depending on today's list
   const cfg = { ...MARKETING, designs: [
     { ...MARKETING.designs[0], id: 'a', status: 'live' },
@@ -109,7 +118,7 @@ test('enforced only in production: VERCEL_ENV=production or THEME_APPROVAL=enfor
 });
 
 test('production: an approved design is claimed (201), a design in review gets 403 theme_in_review and nothing is stored', async () => {
-  assert.ok(inReview.length > 0, 'no theme in review to test with');
+  assert.ok(await claimableTheme(REVIEW_FIXTURE_ID), 'the fixture design in review is claimable (else the 403 below proves nothing)');
   process.env.VERCEL_ENV = 'production';
   const ok = await post(approved[0], ['Avery', 'Jordan']);
   assert.equal(ok.status, 201, JSON.stringify(ok.body));
@@ -141,7 +150,8 @@ test('the /start list offers only approved designs in production, every claimabl
   const prod = (await offeredThemes(PROD)).map((t) => t.id);
   assert.deepEqual([...prod].sort(), [...approved].sort());
   const dev = (await offeredThemes({})).map((t) => t.id);
-  for (const id of themeIds) if (await claimableTheme(id)) assert.ok(dev.includes(id), id);
+  for (const id of [...themeIds, REVIEW_FIXTURE_ID]) if (await claimableTheme(id)) assert.ok(dev.includes(id), id);
+  assert.ok(!prod.includes(REVIEW_FIXTURE_ID) && dev.includes(REVIEW_FIXTURE_ID), 'the design in review: hidden in production, offered elsewhere');
 });
 
 test('production: the demo of a design in review stays open (/start/demo/<theme>)', async () => {

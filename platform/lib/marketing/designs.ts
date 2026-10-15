@@ -173,6 +173,36 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: "ivory envelope with a champagne gold edge and a dusty blue wax seal with the couple's initials; cream roses, eucalyptus, baby's breath and instant-photo cards on dusty blue paper.",
     relatedGuides: ['wedding-website-wording', 'when-to-send-your-wedding-website'],
   },
+  // G085: written against themes/vintage-airmail-love-letter/README.md (G404, approved), the catalogue's opening line
+  // (docs/09 WEB 04) and its real screens and opening frames (390 × 844 capture).
+  'vintage-airmail-love-letter': {
+    id: 'vintage-airmail-love-letter',
+    collection: '04_Vintage_Airmail',
+    demoCouple: 'Margot & Henry',
+    style: 'Red and navy striped airmail envelope with a burgundy wax seal, postage stamps, postmarks and pressed flowers',
+    metaDescription:
+      'A striped airmail envelope sealed with burgundy wax opens into your wedding website: postage stamps, postmarks and pressed flowers. Edit it on your phone.',
+    intro:
+      'A vintage airmail envelope with red and navy striped edges and a perforated tear strip, closed with a burgundy wax seal that carries your initials, among postage stamps, pressed flowers and twine. Inside: airmail letter cards, stamp-edged photo frames, a fountain-pen script and typewriter lettering.',
+    opening:
+      'Your guests tap the envelope. The little wax seal pops off, the perforated tear strip rips away along the top edge from left to right, and a cream card with your portrait slides up out of the envelope while a pressed forget-me-not flutters down beside it. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on an airmail-striped card, your names, date, venue, a live countdown and an RSVP button, then the invitation letter and a stamp, a letter and a wax seal that lead to the other pages.',
+      story: 'Three photos in postage-stamp frames drop onto a wooden writing desk one by one; the first gets a postmark, and each has a handwritten caption.',
+      details: 'An "Order of the Day" letter with airmail stripes, add to calendar, the venue photo in a stamp-edged frame, dress code, links and questions and answers.',
+      rsvp: 'A "Will You Join Us?" letter with your reply-by date, signed with your names and sealed with burgundy wax and lavender, followed by the reply form.',
+    },
+    palette: [
+      { name: 'Airmail Red', hex: '#B5483E' },
+      { name: 'Navy', hex: '#2B3753' },
+      { name: 'Parchment', hex: '#E2CBAD' },
+      { name: 'Cream', hex: '#F6ECDA' },
+      { name: 'Ink', hex: '#4A1F1C' },
+    ],
+    fonts: ['Homemade Apple', 'Special Elite'],
+    llmsLine: "red and navy striped airmail envelope with a perforated tear strip and a burgundy wax seal with the couple's initials; postage stamps, postmarks, pressed flowers and airmail letter cards.",
+    relatedGuides: ['digital-wedding-invitation-etiquette', 'canva-wedding-website-template-vs-hosted-website'],
+  },
 };
 
 export interface Design extends DesignCommerce {

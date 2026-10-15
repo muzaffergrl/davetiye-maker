@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 4 · inceleme 6 · blokaj 277 · bitti 91 · toplam 396
+Özet: hazir 17 · alindi 4 · inceleme 6 · blokaj 277 · bitti 93 · toplam 397
 
 ## claude-canva
 
@@ -156,10 +156,9 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (10)**
+**Alınabilir (9)**
 
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G085` p2 — Tasarım 04 Vintage Airmail Love Letter satış sitesine eklenir (G082/G083 yöntemi) — 5 tasarımla düzen → `gorevler/G085-satis-04.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
@@ -255,7 +254,7 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 7 · Biten: 41
+Bağımlılık bekleyen: 7 · Biten: 43
 
 ## claude-metin
 

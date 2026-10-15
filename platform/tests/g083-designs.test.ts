@@ -1,7 +1,7 @@
 // G083: design 02 Dusty Blue & Champagne (theme dusty-blue-champagne, G402) goes on the sales site the way G082 added
 // 05. Listing it as 'live' in lib/marketing/config.ts is also its approval for /start (G080, lib/themes/approval.ts):
 // the sales-site entry (copy written against the theme, real captured screens, clip, JSON-LD, llms.txt, sitemap rule),
-// the ≤ 60-character title of a long design name, and the production gate that now lets buyers start it (04 still not).
+// the ≤ 60-character title of a long design name, and the production gate that now lets buyers start it (04: G085).
 // Layout of four cards / one row of chips: tests/marketing-browser.ts (G083 section).
 import { afterEach, before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -49,7 +49,8 @@ afterEach(() => {
 });
 
 test('02 Dusty Blue & Champagne is live: fourth after 03, 01 and 05, same name as its theme, page entry', async () => {
-  assert.deepEqual(liveDesigns().map((d) => d.id), ['blush-garden-rose', 'olive-ivory', 'mediterranean-lemon', ID]);
+  // (G085 added 04 after it: tests/g085-designs.test.ts)
+  assert.deepEqual(liveDesigns().map((d) => d.id).slice(0, 4), ['blush-garden-rose', 'olive-ivory', 'mediterranean-lemon', ID]);
   const d = liveDesign(ID)!;
   assert.ok(d, 'listed');
   assert.equal(d.name, 'Dusty Blue & Champagne');
@@ -61,8 +62,6 @@ test('02 Dusty Blue & Champagne is live: fourth after 03, 01 and 05, same name a
   assert.equal(d.price, '[PRICE]');
   assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
   assert.equal(d.compareAtPrice, null);
-  // 04 is still 'coming' and listed nowhere
-  assert.equal(MARKETING.designs.find((x) => x.id === 'vintage-airmail-love-letter')?.status, 'coming');
 });
 
 test('design page titles stay ≤ 60 characters: the long name drops the colon, then "Envelope" (12-character brand)', () => {
@@ -133,10 +132,10 @@ test('real screens and opening clip of 02 are in assets.json and on disk; 01 / 0
   assert.equal(m.opening!.height, 844);
   assert.equal(m.opening!.seconds, 10);
   assert.ok(m.opening!.bytes > 50_000 && m.opening!.bytes <= 1_500_000, String(m.opening!.bytes));
-  assert.deepEqual(Object.keys(manifest.designs), ['blush-garden-rose', 'olive-ivory', 'mediterranean-lemon', ID]);
+  assert.deepEqual(Object.keys(manifest.designs).slice(0, 4), ['blush-garden-rose', 'olive-ivory', 'mediterranean-lemon', ID]);
 });
 
-test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 02; ItemList of /designs has 4', () => {
+test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 02; ItemList of /designs lists every live design', () => {
   const d = liveDesign(ID)!;
   const p = product(d);
   assert.equal(p.name, 'Dusty Blue & Champagne Wedding Website');
@@ -151,7 +150,7 @@ test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject
   const ready = liveDesigns(cfg).find((x) => x.id === ID)!;
   assert.equal((product(ready, cfg).offers as Record<string, string>).price, '29.40', 'Offer once a real price and link exist');
   const list = itemList(liveDesigns().map((x) => ({ path: `/designs/${x.id}`, name: x.name })));
-  assert.equal((list.itemListElement as unknown[]).length, 4);
+  assert.equal((list.itemListElement as unknown[]).length, liveDesigns().length);
   assert.deepEqual(validateJsonLd(graph(list)), []);
 });
 
@@ -163,23 +162,19 @@ test('llms.txt / llms-full.txt name 02; the sitemap stays empty while not launch
   assert.ok(full.includes('### Dusty Blue & Champagne'));
   assert.ok(full.includes(`Opening: ${DESIGN_COPY[ID].opening}`));
   assert.ok(full.includes('- Fonts: Pinyon Script, Cormorant Garamond'));
-  assert.ok(!txt.includes('Vintage Airmail'), 'designs that are not live are still not mentioned');
   assert.equal(MARKETING.launched, false);
   assert.doesNotMatch(sitemapXml(guides), /<url>/, 'empty while launched is false');
   const cfg = readyConfig();
   assert.ok(sitemapEntries(guides, cfg).some((e) => e.loc === 'https://example.com/designs/dusty-blue-champagne' && e.lastmod === '2026-10-14'));
 });
 
-test('/start production gate: 02 is approved, listed and can be started (201); 04 stays in review (403)', async () => {
+test('/start production gate: 02 is approved, listed and can be started (201) (04 too since G085)', async () => {
   assert.ok(approvedThemeIds().includes(ID));
   assert.equal(themeApproval(ID), 'approved');
   assert.equal(themeOpenForClaims(ID, { env: PROD }), true);
   assert.equal(themeOpenForClaims(ID, { env: { THEME_APPROVAL: 'enforce' } }), true);
-  assert.equal(themeApproval('vintage-airmail-love-letter'), 'review');
-  assert.equal(themeOpenForClaims('vintage-airmail-love-letter', { env: PROD }), false);
   const offered = (await offeredThemes(PROD)).map((t) => t.id);
   assert.ok(offered.includes(ID), '/start list in production');
-  assert.ok(!offered.includes('vintage-airmail-love-letter'));
   process.env.VERCEL_ENV = 'production';
   const post = (theme: string, orderNumber: string, names: [string, string]) =>
     claimRoute(
@@ -193,10 +188,5 @@ test('/start production gate: 02 is approved, listed and can be started (201); 0
   const body = (await res.json()) as Record<string, unknown>;
   assert.equal(res.status, 201, JSON.stringify(body));
   assert.equal(typeof body.slug, 'string');
-  if (await claimableTheme('vintage-airmail-love-letter')) {
-    const no = await post('vintage-airmail-love-letter', '6100083004', ['Rowan', 'Sage']);
-    const nb = (await no.json()) as Record<string, unknown>;
-    assert.equal(no.status, 403, JSON.stringify(nb));
-    assert.equal(nb.code, 'theme_in_review');
-  }
+  // (a design in review is still refused with 403 theme_in_review: tests/g080-approval.test.ts, with a fixture design)
 });

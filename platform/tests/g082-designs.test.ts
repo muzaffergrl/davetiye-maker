@@ -49,7 +49,7 @@ afterEach(() => {
 });
 
 test('05 Mediterranean Lemon is live: third in the list after 03 and 01, same name as its theme, page entry', async () => {
-  // (G083 added 02 after it: tests/g083-designs.test.ts)
+  // (G083 added 02 after it, G085 04: tests/g083-designs.test.ts, tests/g085-designs.test.ts)
   assert.deepEqual(liveDesigns().map((d) => d.id).slice(0, 3), ['blush-garden-rose', 'olive-ivory', ID]);
   const d = liveDesign(ID)!;
   assert.ok(d, 'listed');
@@ -137,7 +137,6 @@ test('llms.txt / llms-full.txt name 05; the sitemap stays empty while not launch
   assert.ok(full.includes('### Mediterranean Lemon'));
   assert.ok(full.includes(`Opening: ${DESIGN_COPY[ID].opening}`));
   assert.ok(full.includes('- Fonts: Allura, Playfair Display'));
-  assert.ok(!txt.includes('Vintage Airmail'), "designs that are not live are still not mentioned");
   assert.equal(MARKETING.launched, false);
   assert.doesNotMatch(sitemapXml(guides), /<url>/, 'empty while launched is false');
   const cfg = readyConfig();
@@ -145,12 +144,11 @@ test('llms.txt / llms-full.txt name 05; the sitemap stays empty while not launch
   assert.match(sitemapXml(guides, cfg), /<loc>https:\/\/example\.com\/designs\/mediterranean-lemon<\/loc>/);
 });
 
-test('/start production gate: 05 is approved, listed and can be started (201); 04 stays in review (02: G083)', async () => {
+test('/start production gate: 05 is approved, listed and can be started (201) (02: G083, 04: G085)', async () => {
   assert.ok(approvedThemeIds().includes(ID));
   assert.equal(themeApproval(ID), 'approved');
   assert.equal(themeOpenForClaims(ID, { env: PROD }), true);
   assert.equal(themeOpenForClaims(ID, { env: { THEME_APPROVAL: 'enforce' } }), true);
-  assert.equal(themeOpenForClaims('vintage-airmail-love-letter', { env: PROD }), false, 'vintage-airmail-love-letter');
   assert.ok((await offeredThemes(PROD)).some((t) => t.id === ID), '/start list in production');
   process.env.VERCEL_ENV = 'production';
   const res = await claimRoute(
