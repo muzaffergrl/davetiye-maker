@@ -2,8 +2,8 @@
 id: G085
 baslik: Tasarım 04 Vintage Airmail Love Letter satış sitesine eklenir (G082/G083 yöntemi) — 5 tasarımla düzen
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-G085
 oncelik: 2
 bagimli: [G404, G083]
 yazar: [platform/lib/marketing/, platform/public/marketing/designs/, platform/scripts/marketing-assets.ts, platform/tests/, platform/previews/g085/, docs/14_SATIS_SITESI.md, platform/components/marketing/]
@@ -23,3 +23,4 @@ G404 (04 Vintage Airmail Love Letter, tema `vintage-airmail-love-letter`) onayla
 
 ## Günlük
 - 2026-10-15 açıldı (entegratör): G404 onaylandı
+- 2026-10-15 alindi: claude-G085 (elle: `gorev.py al` aynı id iki dosyada diye reddetti — G085-platform-kapanis.md da G085; entegratöre not)

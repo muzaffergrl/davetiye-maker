@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 18 · alindi 4 · inceleme 6 · blokaj 277 · bitti 91 · toplam 396
+Özet: hazir 17 · alindi 5 · inceleme 6 · blokaj 277 · bitti 91 · toplam 396
 
 ## claude-canva
 
@@ -156,10 +156,9 @@ Bağımlılık bekleyen: 0 · Biten: 4
 
 ## claude-kod
 
-**Alınabilir (10)**
+**Alınabilir (9)**
 
 - `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G085` p2 — Tasarım 04 Vintage Airmail Love Letter satış sitesine eklenir (G082/G083 yöntemi) — 5 tasarımla düzen → `gorevler/G085-satis-04.md`
 - `G406` p3 — Tasarım 06 Art Deco Black-Tie — platform teması → `gorevler/G406-website-kaynak.md`
 - `G407` p3 — Tasarım 07 Burgundy Velvet Autumn — platform teması → `gorevler/G407-website-kaynak.md`
 - `G408` p3 — Tasarım 08 Winter Evergreen — platform teması → `gorevler/G408-website-kaynak.md`
@@ -169,11 +168,12 @@ Bağımlılık bekleyen: 0 · Biten: 4
 - `G412` p3 — Tasarım 12 Tropical Destination — platform teması → `gorevler/G412-website-kaynak.md`
 - `G414` p3 — Tasarım 14 Ivory Lace & Pearls — platform teması → `gorevler/G414-website-kaynak.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (83)**
+**Üzerinde çalışılan / incelemede / blokaj (84)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G081` alindi · claude-G081 — 02, 04, 05 temalarına teşekkür hâli (docs/11 §3.6) ve düzenlenebilir metinler (§3.7 data-copy + manifest)
 - `G084` alindi · claude-G084 — 02, 04, 05 temalarına RSVP misafir adları satırı (G069 `data-rsvp-party` şablonu + `form_party` copy anahtarı)
+- `G085` alindi · claude-G085 — Tasarım 04 Vintage Airmail Love Letter satış sitesine eklenir (G082/G083 yöntemi) — 5 tasarımla düzen
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
