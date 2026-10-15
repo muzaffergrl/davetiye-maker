@@ -473,6 +473,96 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'lace-covered ivory gatefold fastened with a pearl brooch on pearly satin; ivory lace, pearl strands, white garden roses and carved oval frames.',
     relatedGuides: ['when-to-send-your-wedding-website', 'canva-wedding-website-template-vs-hosted-website'],
   },
+  // G097: written against themes/cherry-blossom-spring/README.md (G415), the catalogue's opening line (docs/09 WEB 15)
+  // and its real screens and opening frames (390 × 844 capture).
+  'cherry-blossom-spring': {
+    id: 'cherry-blossom-spring',
+    collection: '15_Cherry_Blossom',
+    demoCouple: 'Hana & Ethan',
+    style: 'Pale grey envelope with a round deckle-edged flap and a cherry blossom twig, watercolor blossoms and petals',
+    metaDescription:
+      'A pale grey envelope with a cherry blossom twig opens into your wedding website: watercolor blossom branches and drifting petals. Edit it on your phone.',
+    intro:
+      'Spring in a soft pink mist: watercolor cherry blossom branches reaching in from two corners, single petals drifting across the screen, and a pale grey handmade-paper envelope with a round, deckle-edged white flap, closed at its tip with a five-blossom cherry twig. Inside: deckle-edged ivory cards, blossom-wreathed round and oval frames and a formal script.',
+    opening:
+      'Your guests tap the envelope. The blossom twig trembles, loosens and drifts off the top of the screen, the curved grey flap lifts to show a cherry blossom liner, and a card with your portrait rises from the pocket as a gentle flurry of cherry petals swirls up and floats across the screen. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait in the round window of a blossom-wreathed card, your names, date, venue, a live countdown and a dusty rose RSVP button with a blossom at each end, then the invitation card and two blossom-framed ovals that lead to Our Story and the details of the day.',
+      story: 'Three blossom-framed ovals of different sizes set from side to side; as guests scroll, each one drifts down like a falling petal, swaying from side to side before it settles, then its caption is written and a small blossom opens below it.',
+      details: 'An "Order of the Day" card with small blossom sprigs between the rows, add to calendar, the venue photo in a wide blossom-framed oval, dress code, links and questions and answers.',
+      rsvp: "A \"Will You Join Us?\" card with your reply-by date, signed with your names, with the envelope's cherry blossom twig on its lower edge, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Blush Mist', hex: '#EEE3E6' },
+      { name: 'Ivory', hex: '#FFFCFB' },
+      { name: 'Dusty Rose', hex: '#7C5563' },
+      { name: 'Plum', hex: '#4A3D42' },
+      { name: 'Ink', hex: '#3A3438' },
+    ],
+    fonts: ['Petit Formal Script', 'Noto Serif Display'],
+    llmsLine: 'pale grey envelope with a deckle-edged round flap and a cherry blossom twig in a soft pink mist; watercolor cherry blossom branches, drifting petals and blossom-framed ovals.',
+    relatedGuides: ['what-to-put-on-your-wedding-website', 'how-to-make-a-wedding-website'],
+  },
+  // G097: written against themes/emerald-gold-estate/README.md (G417), the catalogue's opening line (docs/09 WEB 17) and
+  // its real screens and opening frames (390 × 844 capture).
+  'emerald-gold-estate': {
+    id: 'emerald-gold-estate',
+    collection: '17_Emerald_Gold_Estate',
+    demoCouple: 'Evelyn & Alexander',
+    style: 'Emerald velvet envelope with a gold seal, gold line-art monstera and ferns, white marble cards and gold frames',
+    metaDescription:
+      'An emerald velvet envelope with a gold seal opens into your wedding website: gold line-art monstera and ferns and white marble cards. Edit it on your phone.',
+    intro:
+      'An estate gala at night on deep emerald velvet dusted with gold at the edges: thin metallic gold line-art monstera, fern and eucalyptus in two corners, a gold fern leaf and a eucalyptus sprig drifting at the side, and an emerald velvet envelope with a tall bell-shaped flap, fine gold lines along its edges and a laurel-wreath gold seal carrying your initials. Inside: white Carrara marble cards with thin gold borders, gold frames and decorative Roman capitals.',
+    opening:
+      'Your guests tap the envelope. A glint of light runs over the gold seal and it lifts away, the emerald flap opens upward to show a gold leaf liner, thin gold botanical lines of fern, monstera and eucalyptus draw themselves across the screen, and the marble card with your portrait rises from the pocket. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a gold-framed marble card, your names, date, venue, a live countdown and a polished gold RSVP button, then the marble invitation card and two gold frames hung on the velvet that lead to Our Story and the details of the day.',
+      story: 'A gallery wall of three thin gold frames in three sizes on the emerald velvet; as guests scroll, each frame drops in as if hung on a nail, swings once and settles, its caption is written, and a gold eucalyptus sprig draws itself beside it.',
+      details: 'A marble "Order of the Day" card with small gold ferns between the rows, add to calendar, the venue photo in a wide gold frame, dress code, links and questions and answers.',
+      rsvp: "A marble \"Will You Join Us?\" card with your reply-by date, signed with your names, with the envelope's gold seal on its lower edge, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Velvet', hex: '#012314' },
+      { name: 'Emerald', hex: '#0B3528' },
+      { name: 'Gold', hex: '#C8A45A' },
+      { name: 'Marble Ivory', hex: '#F3EDDF' },
+      { name: 'Bronze', hex: '#74561F' },
+    ],
+    fonts: ['Cinzel Decorative', 'Cormorant Infant'],
+    llmsLine: 'emerald velvet envelope with gold-lined edges and a laurel-wreath gold seal; thin gold line-art monstera, ferns and eucalyptus, white marble cards and a gallery wall of gold frames.',
+    relatedGuides: ['wedding-website-wording', 'when-to-send-your-wedding-website'],
+  },
+  // G097: written against themes/wildflower-meadow-vellum/README.md (G418), the catalogue's opening line (docs/09 WEB 18)
+  // and its real screens and opening frames (390 × 844 capture).
+  'wildflower-meadow-vellum': {
+    id: 'wildflower-meadow-vellum',
+    collection: '18_Wildflower_Vellum',
+    demoCouple: 'Willow & Finn',
+    style: 'Frosted vellum sleeve with a wildflower label, colored-pencil poppies, cornflowers, daisies and veiled photo cards',
+    metaDescription:
+      'A frosted vellum sleeve with a wildflower label opens into your wedding website: colored-pencil poppies, cornflowers and daisies. Edit it on your phone.',
+    intro:
+      'A summer meadow in a soft cream-to-green haze with blurred wildflowers along the bottom: colored-pencil clusters of poppies, cornflowers, daisies, lupins and grasses in two corners, a poppy petal, a cornflower and a daisy drifting at the side, and instead of an envelope a frosted, see-through vellum sleeve with a round, deckle-edged wildflower label just below its opening. Inside: cotton paper cards with wildflower borders, photo cards under vellum veils and a relaxed handwritten script.',
+    opening:
+      'Your guests tap the sleeve. The wildflower label peels away, the frosted vellum sleeve opens, slides down off the card and fades as the card comes into focus, and the card with your portrait lifts up while colored-pencil poppy petals flutter across the screen. The card comes forward to become the first screen of your home page.',
+    pages: {
+      home: 'Your portrait on a card with a wildflower border, your names, date, venue, a live countdown and a cornflower-blue RSVP button, then the invitation card and two photo cards that lead to Our Story and the details of the day.',
+      story: 'Three photo cards set at slight angles, each under a vellum veil; as guests scroll, each card rises into place, its vellum veil lifts from the lower edge and floats away to show the photo, and its handwritten caption appears, with a cornflower or a daisy between the cards.',
+      details: 'An "Order of the Day" card with small poppy-and-cornflower sprays between the rows, add to calendar, the venue photo on a photo card with a wildflower border, dress code, links and questions and answers.',
+      rsvp: "A \"Will You Join Us?\" card with your reply-by date, signed with your names, with the sleeve's wildflower label at its base, followed by the reply form.",
+    },
+    palette: [
+      { name: 'Meadow Cream', hex: '#F1F0E1' },
+      { name: 'Ivory', hex: '#FFFEF8' },
+      { name: 'Leaf', hex: '#4F6A36' },
+      { name: 'Cornflower', hex: '#4466A6' },
+      { name: 'Poppy', hex: '#B8452C' },
+    ],
+    fonts: ['Satisfy', 'Spectral'],
+    llmsLine: 'frosted vellum sleeve with a deckle-edged wildflower label in a summer meadow; colored-pencil poppies, cornflowers, daisies and lupins, and photo cards under lifting vellum veils.',
+    relatedGuides: ['digital-wedding-invitation-etiquette', 'canva-wedding-website-template-vs-hosted-website'],
+  },
 };
 
 export interface Design extends DesignCommerce {

@@ -1176,6 +1176,258 @@
         "seconds": 10,
         "bytes": 400709
       }
+    },
+    "cherry-blossom-spring": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/envelope-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/envelope-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/home-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/home-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/invitation-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/invitation-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/story-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/story-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/details-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/details-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/schedule-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/schedule-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/rsvp-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/rsvp-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/cherry-blossom-spring/form-320.webp",
+            "480": "/marketing/designs/cherry-blossom-spring/form-480.webp",
+            "640": "/marketing/designs/cherry-blossom-spring/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/cherry-blossom-spring/opening.mp4",
+        "poster": "/marketing/designs/cherry-blossom-spring/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 384526
+      }
+    },
+    "emerald-gold-estate": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/envelope-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/envelope-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/home-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/home-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/invitation-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/invitation-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/story-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/story-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/details-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/details-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/schedule-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/schedule-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/rsvp-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/rsvp-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/emerald-gold-estate/form-320.webp",
+            "480": "/marketing/designs/emerald-gold-estate/form-480.webp",
+            "640": "/marketing/designs/emerald-gold-estate/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/emerald-gold-estate/opening.mp4",
+        "poster": "/marketing/designs/emerald-gold-estate/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 540491
+      }
+    },
+    "wildflower-meadow-vellum": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/envelope-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/envelope-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/home-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/home-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/invitation-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/invitation-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/story-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/story-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/details-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/details-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/schedule-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/schedule-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/rsvp-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/rsvp-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/wildflower-meadow-vellum/form-320.webp",
+            "480": "/marketing/designs/wildflower-meadow-vellum/form-480.webp",
+            "640": "/marketing/designs/wildflower-meadow-vellum/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/wildflower-meadow-vellum/opening.mp4",
+        "poster": "/marketing/designs/wildflower-meadow-vellum/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 461285
+      }
     }
   },
   "panel": {

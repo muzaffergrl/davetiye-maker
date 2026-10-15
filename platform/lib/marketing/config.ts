@@ -252,5 +252,37 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
     },
+    // G097: designs 15, 17 and 18 (approved theme tasks G415, G417, G418). A new design is one entry here in design-number
+    // order (16, 19, 20 go between / after these), plus its copy in designs.ts and its screens (marketing-assets.ts).
+    {
+      // G415 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'cherry-blossom-spring',
+      name: 'Cherry Blossom Spring',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G417 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'emerald-gold-estate',
+      name: 'Emerald & Gold Estate',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
+    {
+      // G418 approved (2026-10-15); on the sales site and open on /start since G097.
+      id: 'wildflower-meadow-vellum',
+      name: 'Wildflower Meadow Vellum',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-15',
+    },
   ],
 };
