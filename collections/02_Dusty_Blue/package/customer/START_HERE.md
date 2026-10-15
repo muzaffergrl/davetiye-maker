@@ -1,325 +1,203 @@
-<!--
-  INTERNAL NOTE (remove nothing below until reviewed; this comment is not shown in the PDF):
-  - Collection 02 — Dusty Blue & Champagne. Buyer guide (A5). Status: draft text, not buyer-tested.
-  - Every [VERIFY] marker must be tested in the real Canva interface (ideally with a second,
-    free Canva account) and either confirmed (remove the marker) or the sentence rewritten/removed
-    BEFORE this guide is exported to PDF and sold.
-  - [TEMPLATE_LINK_*], [BRAND], [SUPPORT_EMAIL], [LICENSE_TERMS] are placeholders: never invent values.
-  - Canva Help Center pages were located by web search on 2026-10-09; direct page fetch returned
-    HTTP 403, so menu names come from search-result excerpts of the official articles. Re-check
-    each "source:" link in a browser before sale.
--->
+# Start Here: Your Dusty Blue & Champagne Wedding Website
 
-# Start Here — Your Dusty Blue & Champagne Wedding Set
+Thank you for choosing BKE Studio. This guide takes you from this PDF to a live wedding website that your guests open on their phones. Keep this file: it is the only one you need.
 
-Thank you for choosing this set from [BRAND]. This guide walks you through every step, from opening
-your templates to sending your invitation to guests. You do not need any design experience.
+## Good to know before you begin
 
-**Please keep this PDF.** The template links below are how you open your designs. If you lose them,
-you can download this PDF again from your Etsy purchases page.
+- You do not need Canva, an app or an account. Everything works in the web browser of your phone or computer.
+- You fill in your website yourself, in a simple editor. Every change saves by itself.
+- Nobody sees your website until you publish it, and you can keep changing it after you publish.
+- Your guests need no app and no account either: they open your link and tap the envelope.
 
----
+## Start now: the first 5 steps
 
-## 1. What's included
+1. Open your start link: [Start your Dusty Blue & Champagne website](https://davetiye-platform-five.vercel.app/start?theme=dusty-blue-champagne). Or scan this QR code with your phone camera.
 
-All five designs share the same look: dusty blue, ivory paper and champagne gold details, with
-eucalyptus, white florals and a wax seal.
+![QR code of your start link](img/start_qr_page.png)
 
-| # | Design | Size | What you use it for |
-|---|---|---|---|
-| 1 | **Video invitation** | 1080 × 1920 px (vertical, phone screen) | Send by text message, WhatsApp, email or social media |
-| 2 | **Wedding website** | One long page (desktop and mobile) | Your story, event details, travel, registry, FAQ and online RSVP |
-| 3 | **Printable invitation** | 5 × 7 in | Print at home or at a print shop, or send as a PDF |
-| 4 | **Story image** | 1080 × 1920 px | Share on phone stories and status updates |
-| 5 | **Square image** | 1080 × 1080 px | Share in chats and social posts |
+2. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
+3. **Save your edit link.** Tap **Copy link** and paste it into your notes app, or tap **Email it to myself**. Do this before anything else.
+4. Tap **Open my editor**. Add your names and your wedding date (setup step 1 of 3).
+5. Add one photo (step 2 of 3). Publish now (step 3 of 3), or later when everything is ready.
 
-Everything is edited in **Canva**, a free online design tool. You change the names, dates, times,
-places, photos and links yourself, as many times as you like.
+## Save your edit link: it is your key
 
-**What is editable and what is not:**
+Your edit link opens your editor. There is no password and no account: the link is the key. We cannot email it to you yet, so please save it yourself, in at least one of these ways:
 
-- **Fully editable:** all text (names, date, times, venue, schedule, dress code, RSVP date, story
-  text), your photos, and links.
-- **Movable but not redrawable:** decorative pieces (envelope, wax seal, florals, paper textures) are
-  image layers. You can move, resize, hide or delete them, but you cannot change their drawing or
-  colour the way you change text.
-- **Not included:** music, font files, printing, and a custom web address (domain).
+- Tap **Copy link** and paste it into your notes app or password manager.
+- Tap **Email it to myself**. Your own email app opens with the link inside. Tap Send.
+- Once your editor is open, add it to your phone's Home Screen (from your browser's Share or menu button).
 
-The sample names, dates and places in the templates (for example *Eleanor & Theo*,
-*September 18, 2027*, *Rosewood Manor, Charleston*) are made up. Replace every one of them.
-The sample photos are placeholders: replace them with your own photos.
+Missed it? While your editor is open, you can copy the link again: **Share → Your private edit link → Copy edit link**.
 
----
+Anyone who has the link can change your website, so share it only with your partner. We will never ask you for it. If you lose it, message BKE Studio on Etsy with your order number. We send you a new link, and the old one stops working.
 
-## 2. Before you start
+## Step 1. Start your website
 
-1. **Create or log in to a Canva account** at canva.com. A free account is enough to open and edit
-   your templates. [VERIFY: open, edit, export MP4/PDF and publish the website with a Canva Free
-   account; confirm no paid element in the templates shows a watermark on Free.]
-   <!-- source: Share a template link — https://www.canva.com/help/share-template-link/ -->
-2. **Use a computer if you can.** All steps in this guide are written for Canva in a web browser
-   on a computer. The Canva phone app also works for small text changes. [VERIFY: Canva mobile app
-   steps for text and photo replacement.]
-3. **Have your details ready:** names, date, ceremony and reception times, venue name and address,
-   RSVP deadline, dress code, and 4–5 photos you love (one vertical portrait works best for the
-   cover).
-4. **Your templates open as your own copy.** When you click a template link, Canva makes a new copy
-   in *your* account. Your changes never affect anyone else, and nobody else can see your copy
-   unless you share it.
-   <!-- source: Share a template link — https://www.canva.com/help/share-template-link/ -->
+Open the start link. At the top you see a small live demo of your design (**Open the full demo** shows it full size). Below it, fill in **Your details**:
 
----
+- **Etsy order number:** in your Etsy order confirmation email, or on Etsy under Purchases and reviews. It has 8 to 12 digits. You can type it with or without "#".
+- **Email address:** we keep it with your website so we can recognise you if you need help. We do not send emails yet.
+- **Your first names:** as your guests know you. You can change them later in the editor.
+- **Website address:** made from your names, for example …/avery-and-jordan. "Available" means it is free. You can change it here, but **not later**, so check the spelling.
 
-## 3. Open your templates
+Tap **Create my website**. One order starts one website. Your website starts as a private draft: nobody can see it until you publish.
 
-Click each link below **once**. Every click makes a new copy, so you do not need to click again
-later; your copy stays in your Canva account under **Projects**.
+If your connection drops, tap **Create my website** again: you get your link back. If the page says your order already has a website, open it with your saved edit link, or message us on Etsy.
 
-| Design | Template link |
+## Step 2. Set up in three steps
+
+The editor starts with a short setup. The bar at the top shows **Step 1 of 3**. You can tap **Skip for now** on steps 1 and 2, and **Save & exit** at any time. Everything is saved.
+
+1. **Your names and date.** Your first names; **Full names for the invitation card** (optional); **How your names appear**, for example "Avery & Jordan"; a **Monogram** if your design shows one. Then the wedding date, ceremony time, **Time zone of the wedding** and the date style (Month first or Day first).
+2. **Add your photo.** One photo opens your website. **More photos** are optional; you can add them any time.
+3. **Publish your website.** Check the summary and the preview, read **Good to know before you publish**, then tap **Publish my website**. Or come back later: Home shows how ready your website is.
+
+If your date is still the design's sample date, the editor asks you to set your real date first.
+
+## If your editor says "We are confirming your Etsy order"
+
+We check each order in our Etsy shop before a website can go live. You can set up everything now; it is all saved. **Publish** opens as soon as your order is confirmed (usually within [ORDER CHECK TIME]). We tell you on Etsy; then reload your editor page. If it takes longer, message us on Etsy with your order number.
+
+## Step 3. Edit your website
+
+Use the buttons at the bottom of the screen (at the top on a computer):
+
+- **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until).
+- **Edit:** six pages with everything on your website.
+- **Guests:** your guests' replies.
+- **Share:** your link, QR code, guest password and your private edit link.
+
+| Edit page | What you change |
 |---|---|
-| Video invitation | [TEMPLATE_LINK_VIDEO] |
-| Wedding website | [TEMPLATE_LINK_WEBSITE] |
-| Printable invitation (5 × 7) | [TEMPLATE_LINK_INVITATION_PDF] |
-| Story image | [TEMPLATE_LINK_STORY] |
-| Square image | [TEMPLATE_LINK_SQUARE] |
+| Us | First names, full names for the invitation card, how your names appear, monogram |
+| Day & place | Date, ceremony time and time zone; venue, address, map link and venue photo; the order of the day (up to 10 rows); countdown on or off; After the wedding |
+| Photos | Invitation portrait, three story photos and the venue photo |
+| Our Story | Show or hide the page, an intro line and three captions |
+| Details | Host line, dress code, travel & stay and registry links, guest policy note, up to 12 questions and answers |
+| RSVP | Replies on or off, reply-by date, up to 3 questions for guests who are coming |
 
-**Steps:**
+**Your own wording.** At the end of every Edit page, open **Headings & labels on this page**. There you can rewrite the design's texts in your own words, for example "You are invited", "Will You Join Us?" or the menu. Leave a box empty to keep the design's text; **Reset to design text** brings it back. On **Us** you can also pick suggested wording for a vow renewal, an elopement party or a commitment ceremony. Wording changes never use a name or date change.
 
-1. Click a template link. Canva opens in your browser.
-2. If Canva asks you to log in, log in (or create a free account).
-3. Click **Use template for new design**. [VERIFY: exact button label on the template link page.]
-4. Your own copy opens in the Canva editor. Rename it at the top (for example "Our Wedding Video").
-5. To find it again later, go to the Canva home page and open **Projects**.
-   <!-- source: Share a template link — https://www.canva.com/help/share-template-link/ -->
-   <!-- source: Upload media (Projects → Uploads, finding files later) — https://www.canva.com/help/upload-media/ -->
+**What stays as designed:** the artwork, colors, fonts, page layout and the envelope animation.
 
-> **Tip:** Fill in the **printable invitation** first. Then copy your final wording into the other
-> designs so all five match exactly.
+**Sample text.** A small grey **Sample** tag means a box still holds the design's sample text. Replace it before you share your website. Home lists what is left.
 
----
+**Saving.** There is no Save button: every change saves as you type, and the cloud icon at the top shows it. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
 
-## 4. Edit text
+## Step 4. Add and crop photos
 
-1. **Double-click** any text box (for example the names).
-2. Delete the sample text and type your own.
-3. To change the font, colour or size, select the text and use the **toolbar** at the top of the
-   editor.
-4. Click outside the text box when you are done.
-<!-- source: Add and edit text — https://www.canva.com/help/add-and-edit-text/ -->
-<!-- source: Format text — https://www.canva.com/help/format-text/ -->
+Open **Edit → Photos**, choose a frame and tap **Add photo**. Drag to move the photo, zoom with the slider or two fingers, then tap **Use this photo**. Each frame has its own shape. You can replace or remove a photo any time.
 
-**Good to know**
+JPG, PNG, WebP, AVIF and HEIC photos up to 30 MB work. If a photo will not open, save a JPEG copy of it and choose that.
 
-- **Dates:** write the month as a word so guests in every country read it the same way, for example
-  *September 18, 2027* (US style) or *18 September 2027* (UK style). Avoid formats like 09/18/27.
-- **Long names or venues:** if text runs outside its box, make the font slightly smaller, or drag the
-  side handles of the text box to make it wider.
-  <!-- source: Format text — https://www.canva.com/help/format-text/ -->
-- **Monogram (initials on the wax seal and cards):** the letters are a separate text box on top of
-  the seal. Double-click and type your initials. [VERIFY: monogram is a live text layer in every
-  design of this set.]
-- **Fonts used:** Pinyon Script, Cormorant Garamond and Montserrat. They are available inside Canva;
-  you do not need to install anything. [VERIFY: all three fonts are free in Canva for a Free account.]
+No photos yet? Your website still works: empty frames show the design's soft placeholder image, and you can hide the Our Story page. Add your own photos before you share if you do not want guests to see placeholders.
 
----
+## Step 5. Preview and publish
 
-## 5. Replace photos
+Tap the eye icon at the top to preview Envelope, Home, Story, Details and RSVP; **Close** returns to editing. On a computer the preview stays on the right.
 
-Each photo sits in a **frame**, so your picture is cropped to the right shape automatically.
+**First publish:** tap **Publish**. The editor lists anything guests would still see from the design (sample text, empty photo frames, sections without a link). Tap an item to fix it, or publish anyway and fix it later. Then your link and QR code appear.
 
-1. Click **Uploads** in the left side panel, then **Upload files**, and choose photos from your
-   computer. (You can also drag photos from a folder straight onto the Uploads panel.)
-   <!-- source: Upload media — https://www.canva.com/help/upload-media/ -->
-2. **Drag** your photo from the Uploads panel onto a sample photo until it snaps into the frame.
-3. Or: **right-click** the sample photo and choose **Replace** (or **Replace image**), then pick your
-   photo.
-4. To change which part of the photo shows, **double-click** the photo inside the frame and drag it.
-   Click outside when it looks right.
-<!-- source: Using frames — https://www.canva.com/help/using-frames/ -->
+**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed, then **Publish changes**.
 
-**Good to know**
+## Name and date changes after publishing
 
-- Use clear, well-lit photos. Vertical photos suit the cover; square photos suit the "Our Story"
-  polaroids.
-- In the video, each photo appears at a set moment. Replacing a photo keeps that timing.
-  [VERIFY: replacing a framed photo keeps its animation and timing in the video template.]
+Before your first publish you can change everything freely. After it:
 
----
+- You have **3 changes in total** for your names, monogram and wedding date. Changing several at once counts as one.
+- Always free: fixing a small typo (up to 2 letters in a name), adding a surname, and moving your date by up to 7 days.
+- Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back.
+- Everything else (time, venue, schedule, story, photos, details, wording and replies) you can change as often as you like.
 
-## 6. Download the video (MP4)
+Your names and date show with a **Change** button and the changes you have left on the **Us** and **Day & place** pages. The editor tells you before you confirm whether a change is free. If your wedding moves and you have no changes left, message us on Etsy with your order number.
 
-The video invitation is a vertical, phone-sized design with separate moving parts: the envelope
-opens, the photos appear one by one, then the invitation, the schedule and the RSVP details.
-[VERIFY: animations are built into the video template (internal task GA02) and play in the
-downloaded MP4.]
+## Step 6. Share your website
 
-**Preview first**
+Open **Share**:
 
-1. Click the **Play** button above the editor to watch the whole video.
-2. To change when something appears, open the timeline at the bottom of the editor and drag the
-   edge of that item. To change how something moves, select it and click **Animate** in the toolbar.
-<!-- source: Animate designs — https://www.canva.com/help/animate-designs/ -->
-<!-- source: Edit element timing — https://www.canva.com/help/edit-element-timing/ -->
+- **Your website link:** **Copy** it and send it by text, WhatsApp or email, or tap **Open** to see it as a guest. Most messaging apps show a preview card with your names and date; send it to yourself first to check.
+- **QR code for printed cards:** **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
+- Your website is not listed on Google. Only people with your link or QR code can open it.
 
-**Download**
+**Guest password (optional).** Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
 
-1. Click **Share** (top right), then **Download**.
-2. Under **File type**, choose **MP4 Video**.
-3. Click **Download**. Canva saves an .mp4 file to your computer.
-<!-- source: Download as video — https://www.canva.com/help/download-as-video/ -->
+**Take the website offline** (at the bottom of Share) hides your website from guests: they see "Page not found" until you publish again. Your text, photos and replies are kept.
 
-**Good to know**
+## Step 7. Guest replies
 
-- The video has **no music**. If you add music from Canva's library, check its licence terms before
-  posting on social media.
-  <!-- source: Download as video (copyright note on paid audio) — https://www.canva.com/help/download-as-video/ -->
-- If you see **Pay and Download** instead of Download, a paid element is in your design. Remove it,
-  or check what it is before paying. [VERIFY: the template itself contains no paid elements.]
-- Links inside a video **cannot be clicked**. Put your website address as readable text, or send the
-  link in the same message as the video.
-  <!-- source: Add hyperlinks — https://www.canva.com/help/hyperlinks/ -->
+**What guests do:** on your RSVP page they enter their name, whether they are coming, how many people (up to 10 in one reply), the names of the others (optional), a message and your questions. They need no account, and an email address is optional. To change their answer, they send another reply.
 
----
+**What you do:** open **Guests** (not Edit → RSVP, which changes the form).
 
-## 7. Website: edit, RSVP form, publish
+- See how many are coming and not coming, and every reply. Tap a reply to see everyone in it.
+- Search by name, and see the answers to your questions.
+- **Download list** saves a CSV file for Excel, Numbers or Google Sheets, one row per person.
+- **Add a reply** you got by phone or in person; correct a reply; remove an old one.
+- **Print list**, or save it as a PDF from your browser's print menu.
+- **Refresh** loads new replies. We do not send email notifications yet; Home shows new replies.
+- Replies **Held for review** came in unusually fast. They are not counted until you keep them.
 
-Your wedding website is one long page that works on phones and computers. Sections: welcome (names
-and date), Our Story, Details (ceremony, cocktail hour, reception), Travel & Stay, Registry, RSVP and
-FAQ. [VERIFY: final section list matches the published website template.]
+Replies close at the end of your reply-by date, in your wedding's time zone. To close earlier, turn off **Accept replies on the website** in Edit → RSVP.
 
-### 7a. Edit the website
+## Step 8. After the wedding
 
-1. Edit text and photos exactly as in steps 4 and 5.
-2. **Links (buttons):** select a button or text, click **Link** in the toolbar, paste your web
-   address (for example your registry or a hotel booking page), and press Enter.
-   <!-- source: Add hyperlinks — https://www.canva.com/help/hyperlinks/ -->
-3. Delete any section you do not need (for example Registry): select the section and delete it.
-   [VERIFY: how a section/page is removed in the Canva website editor.]
+Open **Edit → Day & place → After the wedding** and choose a **Thank-you mode**:
 
-### 7b. RSVP form (Canva Form)
+- **Automatic:** your website becomes a thank-you page at midnight after your wedding day (wedding time zone).
+- **On now:** it shows right after you publish.
+- **Off:** keeps the invitation.
 
-The RSVP section uses a Canva **Form** element. Guests fill it in on your published website.
+Add a title, a message and a photo if you like, preview it and publish. In thank-you mode, replies close and the countdown and calendar buttons disappear. Your replies stay in **Guests**. You can choose to keep or hide The Day details.
 
-1. Click the form in the RSVP section to edit its questions (for example: *Full name*, *Will you
-   attend?*, *Number of guests*, *Dietary needs*).
-2. **Keep a "Full name" question.** Responses submitted on a published website may not show who sent
-   them, so ask guests to type their name. [VERIFY: whether Canva Website form responses are
-   anonymous; the question limit per form (search excerpt of the Help Center mentions up to 10).]
-3. **To see responses:** open your website design, select the form, then click **Responses**. To keep
-   a copy, choose **More → Download as CSV**.
-   <!-- source: Add forms and quizzes — https://www.canva.com/help/polls-quizzes/ -->
+## How long your website stays online
 
-Because the website is **your own copy**, RSVP responses go to **your** Canva account only.
-[VERIFY: tested with two separate Canva accounts (seller master vs. buyer copy) that responses reach
-only the buyer, and that the form is still present in a template-link copy.]
+Your website stays online until **12 months after your wedding date**. Home → Dates → **Online until** shows the exact day, and Home reminds you 30 days before. After that it closes for guests; in your editor you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY].
 
-> Prefer another RSVP tool (for example a form you already use)? Delete the Canva form and link the
-> RSVP button to your own form address instead (step 7a, item 2).
+## Quick answers
 
-### 7c. Publish the website
+**Can my partner edit too?** Yes. Share the edit link with your partner only.
 
-1. Click **Publish website** (top right of the editor).
-2. In the **Website** panel, choose a free web address. It ends in **.my.canva.site**. Pick a name
-   nobody has used before (for example *eleanorandtheo2027*).
-3. Check the **Mobile Preview** in the side panel, then click **Publish**.
-4. Copy your website address and test it on your phone.
-<!-- source: Publishing websites for free — https://www.canva.com/help/publishing-websites-for-free/ -->
-<!-- source: Publishing Canva websites (Mobile Preview panel) — https://www.canva.com/help/publishing-canva-websites/ -->
+**Can I use a computer?** Yes. The editor works on a computer too, with the preview beside it.
 
-**Good to know**
+**Can I change the website address?** No, it is fixed when you create your website. Your own domain (yournames.com) is not included.
 
-- **Changes are not live until you publish again.** After any edit, click **Publish website** again.
-  <!-- source: Publishing websites for free — https://www.canva.com/help/publishing-websites-for-free/ -->
-- On a **free** Canva plan, a small "Designed with Canva" footer appears at the bottom of the published
-  site, and a Free account can have up to 5 sites on the free domain.
-  <!-- source: Publishing websites for free — https://www.canva.com/help/publishing-websites-for-free/ -->
-  [VERIFY: publish this website template on the free domain from a Canva Free account.]
-- A custom web address (for example yournames.com) is a separate, paid service and is **not included**.
-- To show or hide the menu bar, or set the browser tab title, open the website **settings**.
-  <!-- source: Website settings — https://www.canva.com/help/website-settings/ -->
+**Can I change colors or fonts?** No. You change the content and the wording; the design stays as made.
 
----
+**Can it be in my language?** You can write your own texts and the design's headings in any language. Some built-in messages, such as reply form errors, stay in English. Accented Latin letters and Cyrillic use the design's fonts; other alphabets show in a plain standard font. Preview every page.
 
-## 8. Print and PDF (5 × 7 invitation)
+**How many guests can I invite?** As many as you like. One reply can include up to 10 people.
 
-### 8a. Print at home or at a print shop
+**Can guests see each other's replies?** No. Only you see them, in your private editor.
 
-1. Click **Share**, then **Download**.
-2. Under **File type**, choose **PDF Print**.
-3. Tick **Crop marks and bleed** if your print shop asks for it.
-4. Click **Download**.
-<!-- source: Margins, bleed and crop marks — https://www.canva.com/help/margins-bleed-crop-marks/ -->
+**Can I start a second website with my order?** No. One order starts one website.
 
-Tips: ask your print shop for a single proof first; heavy matte cardstock suits this design. Screen
-colours and printed colours can differ slightly. [VERIFY: template has bleed set for 5 × 7 print.]
+**Is there music, a printed invitation or a save the date?** No.
 
-### 8b. Send the invitation as a PDF
+## Troubleshooting
 
-Choose **PDF Standard** instead of PDF Print for a smaller file to send by email or message. Links
-you add to text or buttons stay **clickable in PDF files** (but not in images or videos).
-<!-- source: Add hyperlinks — https://www.canva.com/help/hyperlinks/ -->
-[VERIFY: website/RSVP link in the invitation is clickable after PDF Standard download.]
+**Guests cannot see my changes.** Tap **Review**, then **Publish changes**. Then reload your website.
 
-### 8c. Add a QR code (optional)
+**The Publish button does not work.** Check your internet connection. Then read the message near the button: your order may still be being confirmed, your date may still be the sample date, or a field needs fixing (the editor shows which one).
 
-A QR code lets guests scan your website or RSVP link from the printed card.
+**"This edit link no longer works."** A new link may have replaced it, or only part of the link was copied. Use the newest link we sent you, or message us on Etsy.
 
-1. **Publish your website first** (step 7c) so you have your real address.
-2. In the left side panel, open **Apps**, search **QR code**, and open the QR code app.
-3. Paste your website address, then click **Generate code**. Move and resize the code on the card.
-4. **Scan it with your phone** before printing to make sure it opens your site.
+**"This order already has a website."** Open your website with your saved edit link. No link? Message us on Etsy with your order number.
 
-[VERIFY: no official Canva Help Center article found for the QR code app on 2026-10-09; app name and
-button labels taken from third-party tutorials — test in the editor.]
+**My photo will not upload.** Try a JPEG copy of the photo, and check your connection.
 
----
+**The editor says I am offline or changes are not saved.** Wait until your connection is back and it says saved before you close the page.
 
-## 9. Share with your guests
+**A guest cannot open my website.** Check that Home says your website is live, that the link is complete, and whether the guest password is on.
 
-| What | How to download | How to send |
-|---|---|---|
-| Video | Share → Download → **MP4 Video** | Text, WhatsApp, email, social media. Add your website link in the message. |
-| Story image | Share → Download → **PNG** (or JPG) | Phone stories and status |
-| Square image | Share → Download → **PNG** (or JPG) | Group chats, social posts |
-| Invitation PDF | Share → Download → **PDF Standard** | Email or message |
-| Website | Your **.my.canva.site** address | Paste the link in every message |
+**The QR code does not scan.** Download it again from Share and print it larger, with white space around it. Always scan a printed proof before printing all cards.
 
-<!-- source: Download file types — https://www.canva.com/help/download-file-types/ -->
+**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place.
 
-**Before you send to everyone:** send everything to yourself first. Open the video on a phone, click
-the website link, submit one test RSVP and check that it appears under **Responses**, then delete
-your test answer if you wish.
+## Help and privacy
 
----
+Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **[RESPONSE TIME]**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
-## 10. Troubleshooting
+Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
 
-| Problem | Try this |
-|---|---|
-| The template link asks me to log in | Log in or create a free Canva account, then click the link again. |
-| I clicked the link twice and have two copies | That is fine. Use one and delete the other from **Projects**. |
-| The link says I need a paid plan | This can happen if your Canva login uses a work email domain. Log in with a personal email address (for example Gmail) and try again. <!-- source: Share a template link — https://www.canva.com/help/share-template-link/ --> |
-| Text goes outside its box | Make the font a little smaller or widen the text box. |
-| My photo is cut off | Double-click the photo inside its frame and drag it into position. |
-| I see "Pay and Download" | A paid element is in the design. Find and replace it, then download again. |
-| Upload button does not work | Refresh the page or try another browser. <!-- source: Upload media — https://www.canva.com/help/upload-media/ --> |
-| My website changes are not showing | Click **Publish website** again; changes need republishing. |
-| The web address I want is taken | Free addresses used before cannot be reused. Add the year or a word (e.g. *-wedding*). <!-- source: Publishing websites for free — https://www.canva.com/help/publishing-websites-for-free/ --> |
-| Links in my video or image do not click | Links only work in PDFs and on the website. Send the link as text in your message. |
-| No RSVP responses appear | Make sure the website is published, then send yourself a test RSVP from your phone. |
-
----
-
-## 11. Support
-
-Stuck on a step? Write to us at **[SUPPORT_EMAIL]** with your Etsy order number and a screenshot of
-the screen where you are stuck. [SUPPORT_RESPONSE_TIME]
-
-For help with your Canva account itself (login, billing, plan), please contact Canva directly through
-the Canva Help Center (canva.com/help).
-
-**Terms of use:** [LICENSE_TERMS]
-
-Thank you, and congratulations!
-
-[BRAND]
+The design's sample names, dates, places and photos are fictional. Replace them before you share your website.

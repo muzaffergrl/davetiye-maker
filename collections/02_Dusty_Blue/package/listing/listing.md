@@ -1,3 +1,6 @@
+> **OUT OF DATE (G091, 2026-10-15):** this is the Canva-era listing (video, Canva template, Canva Forms), retired by K22–K24.
+> The current listing text for this design is `listing_v3.md` in this folder. Do not publish this file.
+
 <!--
   INTERNAL — Etsy listing text for Collection 02, Dusty Blue & Champagne (B3 source).
   Status: draft text, 2026-10-09. Not published. Not buyer-tested.
