@@ -2,8 +2,8 @@
 id: G413
 baslik: Tasarım 13 Enchanted Forest Storybook — platform teması
 rol: claude-kod
-durum: hazir
-alan:
+durum: inceleme
+alan: claude-G413
 oncelik: 3
 bagimli: [G213, G038, G046, G052]
 yazar: [platform/themes/enchanted-forest-storybook/, platform/tests/theme-enchanted-forest-storybook.test.ts, platform/previews/g413/]
@@ -30,13 +30,78 @@ Tasarım 13'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 
 ## Bitti sayılması için
 - [ ] docs/11 §15 kontrol listesi tamam (atlanan madde Sonuç'ta gerekçesiyle)
-- [ ] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-enchanted-forest-storybook.test.ts` (§13.2)
+- [x] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-enchanted-forest-storybook.test.ts` (§13.2)
 - [ ] `theme-check --theme enchanted-forest-storybook` hatasız; `previews/g413/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
-- [ ] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
+- [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+**2026-10-15 · claude-G413 · durum `inceleme`** (dal `worktree-agent-adcb78bc67c2011e8`; main'e push yok, entegratör birleştirir).
+
+**Ne yapıldı.** `platform/themes/enchanted-forest-storybook/`: `theme.json` (71 copy anahtarı, foto alanları
+`hero_portrait` 565/559 · `story_1..3` 549/720 · `venue` 782/505), 5 sayfa (index, home, story, details, rsvp), `site.css`
+(45,7 KB), `site.js` (35,2 KB), `thank-you.css`, `content.demo.json`, `build_images.py`, `README.md` (sayfa başına comp öğe
+haritası + sapmalar, ölçümler), `img/` (WebP + srcset, 2,38 MB, manifest). Test `platform/tests/theme-enchanted-forest-storybook.test.ts`
+(38 test). Önizlemeler `platform/previews/g413/`. Yalnız G213 GPT parçaları (K21); yeni şekil/dekor çizilmedi, font dosyası
+yok (Google Fonts: Tangerine 700 + IM Fell English), görsel üretilmedi. `parts_prep` yalnız `/tmp/claude-0/G413/prep`'e.
+`kit_check --paket 5` 23/23 (kitap hizası: sırt +0,23 · üst −0,10 · alt +0,29 · sağ +0,20 %), `--paket 2` 5/5.
+
+**Açılış (kitap, docs/11 §7.1 + §7.5).** Dokununca pirinç toka menteşesinde kalkıp kancadan çıkar ve sağa savrulup düşer →
+yosun yeşili kapak sırtında sola açılır (0 → −90°, astarlı iç yüz −90 → 0°), bu sırada açık çift sayfa ortalanır ve sığacak
+kadar küçülür → ilk sayfa çevrilir (yaprak + aynası) → kart sayfadan kalkar, aynı anda 7 GPT ateş böceği kartın iki yanından
+yanıp sönerek yükselir → kart öne gelir (× 1,4) ve view transition ile home kartına uçar. Dokun → home 4,5 s (theme-check
+ölçümü 4806 ms); Skip her an. Katmanlar ayrı: `book-cover-in · book-page · card · book-turn (leaf + leaf-back) · book-cover ·
+closure`; toka yeri `manifest.closure` (comp ölçüsü, kesim geometrisine bağlı).
+
+**Story.** Uzun eski-krem kitap sayfası (info_card, 3 dilim) sayfa çevrilir gibi yerine oturur; üç köşelikli resim sırayla
+sayfaya bastırılır (sol, sağ, sol), her birinin yanında eğrelti filizi ve ateş böceği, sonra alt yazı. Telefonda resim
+sayfanın %62'si (foto penceresi 390 px'te ≈ 39,8vw ≥ 38vw), alt alta zikzak; ≥ 720 px'te comp'taki gibi üst üste biner.
+
+**Comp sapmaları** (ayrıntı README "Comp öğe haritası"): köşe kümeleri GPT'nin L biçimli kümeleri (comp'taki ağaç gövdesi
+parçalarda yok); toka comp'takinden ~%10 basık; geri sayım kutuları ve RSVP hapındaki dallar çizilmedi (sade rakam / arayüz
+hapı); story'de telefonda bindirme yerine alt alta zikzak; "küçük sarmaşık dalı" yerine eğrelti filizi (tek dal parçası yok);
+details'te mekân adı/yeri kartın altında (frame_landscape penceresi kartın %82'sine iniyor, yazı yeri yok); home'daki kasaba
+satırı `venue.city` (comp gibi; §3.2 `city_region` der, 05/08 ile aynı); nav her sayfada aynı sabit bant.
+
+**Komut sonuçları.**
+- `node --test tests/theme-enchanted-forest-storybook.test.ts`: 38/38 (npm test içinde)
+- `npm test`: 634/634 · `npm run typecheck`: temiz · `npm run build`: geçti (trace-check 7 tema)
+- `theme-check --theme enchanted-forest-storybook --stress`: 128 geçti · 0 hata · 0 uyarı (5 genişlik + kısa telefonlar + yatay, akışlar, stres kaydı, teşekkür hâli, ağırlık, MP4 `previews/g413/opening_390x844.mp4`)
+- İlk ekran ağırlığı (yer tutucu / örnek fotoğraflı): index 938 KB / home 993 KB (yer tutucu) · index 1043 KB / home 1304 KB (örnek fotoğraf); sınır 1536 KB
+- `g051-browser --theme` 44/44 · `final-smoke --theme` 45/45 (`previews/g413/final/`) — ikisi de son hâlde yeniden koşuldu
+- `copy-manifest --check` temiz (71 anahtar). Kontrast: mürekkep 10,1:1 (sis 10,9), ink-soft 7,1, el yazısı mürekkebi 6,2,
+  yosun 5,2, hap yazısı 5,0:1.
+- Kendi QA turu: 390 tüm sayfalar, 360 uzun ad/stres tüm sayfalar, 430 story, yatay 844×390 tüm sayfalar, 768/1280
+  index/home/details, açılış kareleri (390, 360×640, 844×390, MP4 karoları), teşekkür hâli stres ekranları. Düzeltilenler:
+  kart yazısının köşelik üstüne binmesi, 360'ta resim/mekân taşması, uzun davet metninin alt süse inmesi, story'de ilk ekranda
+  boş kâğıt bandı, köşe kümesinin kâğıt arkasında şerit kalması, aynalı geniş zeminin simetrik dikişleri, home ilk ekran
+  ağırlığı (1547 → 1304 KB).
+
+**Denenmeyenler.** Gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, `cqw`, belgeler arası view transition, 3B
+`rotateY` + `perspective`), Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ. qa-kontrol incelemesi
+yapılmadı (bekliyor).
+
+**Sorunlu GPT parçaları / önerilen gpt-gorsel görevleri** (hiçbiri blokaj değil; tema bugünkü parçalarla çalışıyor):
+1. `closure` comp'takinden ~%10 basık (genişlikle ölçeklendi). Prompt düzeltmesi: *"…brass leaf clasp, drawn large and
+   centred on a square transparent canvas, same proportions as the clasp in web_1_envelope.png (about 10 % taller relative
+   to its width than the current parts/closure.png), no shadow baked outside the metal…"*
+2. `frame_landscape` penceresi kartın altına kadar iniyor; comp'taki gibi mekân adı kartın içinde olamıyor. Prompt
+   düzeltmesi: *"…landscape aged-paper book-page card with four photo corners; the photo window occupies only the top 70 %
+   of the card, leaving a plain empty paper band (no text, no ornament) along the bottom 22 % for live text…"*
+3. Tek başına küçük sarmaşık dalı parçası yok (story'de resim yanı; eğrelti filizi kullanıldı). Prompt: *"…a single tiny
+   ivy sprig, 5–7 leaves on a thin curved stem, isolated on a transparent background, same painted storybook style…"*
+4. Yazı tipleri yalnız `latin` (ł, ő, ğ, ş, ı yedeğe düşer) — önerilen claude-kod görevi: başlık için latin-ext'li eş seçimi.
+
+**docs/11 §15.** Maddeler tamam; açık kalanlar: `compare_*` qa-kontrol incelemesi (yapılmadı, bekliyor) ve aksanlı isim fontu
+(kontrol edildi: Tangerine + IM Fell English latin-ext vermiyor → yukarıdaki 4. madde).
+
+**Entegratöre not (ortak dosyalar, dokunulmadı).** `platform/tests/g068-copy.test.ts` (`THEMES` 51. satır, `COLLECTION`
+53–59, `DESIGN_KEYS` 61–) ve `platform/tests/g075-thank-you.test.ts` (`THEMES` 49, `COLLECTION` 50–56) bu temayı
+listelemiyor; eklenecekler: THEMES'e `'enchanted-forest-storybook'`, COLLECTION'a `'enchanted-forest-storybook':
+'13_Enchanted_Forest'`, DESIGN_KEYS'e `[]` (tasarıma özel copy anahtarı yok). Tema kendi testinde G068 ve G075 kurallarını
+ayrıca sınıyor; ortak testler bugünkü hâliyle geçiyor (tema listede olmadığı için).
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
+- 2026-10-15 alindi: claude-G413
+- 2026-10-15 bitti, incelemeye gönderildi
