@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Hana",
+      "full_name": "Hana Grace"
+    },
+    {
+      "display_name": "Ethan",
+      "full_name": "Ethan Michael"
+    }
+  ],
+  "name_display": "Hana & Ethan",
+  "initials": "H&E",
+  "host_line": "Together with their families",
+  "date": "2027-04-03",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Blossom Hill Gardens",
+    "city": "Washington",
+    "region": "D.C.",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Blossom Walk"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Pavilion Terrace"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Garden Hall"
+    }
+  ],
+  "dress_code": "Spring formal",
+  "rsvp": {
+    "deadline": "2027-02-20",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Like the first blossoms of spring, our story unfolded slowly and led us to",
+    "items": [
+      {
+        "caption": "Our first spring"
+      },
+      {
+        "caption": "Under the blossoms"
+      },
+      {
+        "caption": "In full bloom"
+      }
+    ]
+  }
+}

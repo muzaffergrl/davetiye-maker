@@ -1,0 +1,27 @@
+/* Cherry Blossom Spring (design 15) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">),
+   so the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
+
+/* the card's round window: the couple's thank-you photo, else the blush mist and the blossom twig from the envelope
+   (decoration, not a placeholder) */
+.photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; display: block; }
+.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                          background: var(--mist) url("img/mist-640.webp") 50% 30% / cover; }
+.photo-slot > .ty-decor > img { width: 66%; height: auto; display: block; translate: 0 2%; rotate: -8deg;
+                                filter: drop-shadow(0 6px 7px rgba(90, 40, 55, .22)) drop-shadow(0 1px 1px rgba(90, 40, 55, .16)); }
+
+/* card copy: the thank-you title (≤ 60 characters) wraps in the script, the date under it */
+.card-copy .ty-title { font-family: var(--script); color: var(--script-ink); font-size: max(11px, 7.2cqw); line-height: 1.24;
+                       text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
+.card-copy[data-drop~="s"] .ty-title { font-size: max(11px, 5.6cqw); }   /* site.js fitCopy: smaller, never dropped */
+
+/* the thank-you card (invitation_card paper, 3-slice: the message lengthens it): title, message, signature, date — in the
+   card's centred column, clear of the garland and the lower-left branch */
+.ty-text .ty-head { margin-top: 1cqw; max-width: 52cqw; font-size: 7.4cqw; line-height: 1.3; }
+.ty-text .ty-message { margin-top: 3cqw; font-style: italic; font-size: max(15px, 4cqw); line-height: 1.55; color: var(--ink);
+                       white-space: pre-line; text-wrap: pretty; overflow-wrap: break-word; max-width: 100%; }
+.ty-text .ty-love { margin-top: 3.6cqw; font-style: italic; font-size: max(15px, 4.2cqw); line-height: 1.3; color: var(--ink-soft); }
+.ty-text .ty-love + .nm { font-size: 7.6cqw; }
+.ty-text .city { margin-top: 2cqw; }
+
+/* RSVP card: "Replies are closed", the thank-you title under it */
+.rsvp-text .ty-kicker { max-width: 66cqw; line-height: 1.5; text-wrap: balance; overflow-wrap: break-word; }
