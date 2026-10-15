@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 9 · alindi 7 · inceleme 3 · blokaj 277 · bitti 107 · toplam 403
+Özet: hazir 10 · alindi 7 · inceleme 3 · blokaj 277 · bitti 107 · toplam 404
 
 ## claude-canva
 
@@ -324,9 +324,9 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `GM06` p2 — Dükkân geneli güven ve albeni sahneleri — 6 GPT görseli (3 adım, misafir RSVP, çift düzenliyor, her cihaz, QR masa kartı, atölye) → `gorevler/GM06-guven-sahneleri.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (30)**
 
