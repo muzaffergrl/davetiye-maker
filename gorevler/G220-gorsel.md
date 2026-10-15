@@ -2,7 +2,7 @@
 id: G220
 baslik: Tasarım 20 Coastal Seaside — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: gpt-gorsel-F
 oncelik: 2
 bagimli: []
@@ -86,3 +86,4 @@ Görev `alindi`, sahibi `gpt-gorsel-F` kalır. Kalan: W2.12–W2.18 (`decor_br`,
 - 2026-10-14 ara kayıt: gpt-gorsel-F; kısım 3, 4/8 (closure yeniden, decor_br, accent_1, accent_2). Dört dosya 1024×1024 RGBA PNG ve kit_check.denetle GEÇTİ; closure görünür genişlik %68,26, accent_1 %35,64, accent_2 %39,16. Imagegen üretimi ardından yalnız teslim ölçüsü/tuvali ImageMagick ile boyutlandırıldı; çizim veya renk boyama yapılmadı.
 - 2026-10-14 ara kayıt: gpt-gorsel-F; kısım 3, 8/8 (son dört dosya: accent_3, divider, wave, web_hero). Son dört dosya kit_check.denetle GEÇTİ; web_hero düşen gölge nedeniyle imagegen ile bir kez düzeltildi. Şimdi iki paketin bütün kontrolü ve Sonuç özeti tamamlanacak.
 - 2026-10-14 bitti, incelemeye gönderildi: gpt-gorsel-F (kısım 3); PAKET 5 24/24 ve PAKET 2 5/5 GEÇTİ, closure kare tuvalde düzeltildi, önceki diğer dosyalar korundu. DUR.
+- 2026-10-15 entegratör onayladı

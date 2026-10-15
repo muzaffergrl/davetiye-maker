@@ -89,3 +89,4 @@ Devam — gpt-gorsel-N (2026-10-14), tamamlanan 8/8:
 - 2026-10-14 ara kayıt: gpt-gorsel-N; devam, 4/8: kare closure, info_card, frame_portrait ve frame_landscape kaydedildi; dosya denetimleri 4/4 GEÇTİ.
 - 2026-10-14 ara kayıt: gpt-gorsel-N; devam, 8/8: florals_tl, florals_br, accent_1 ve accent_2 kaydedildi; istenen sekiz dosya kontrolü GEÇTİ. Durum alindi.
 - 2026-10-14 devam bitti; kalan: accent_3, divider, web_hero
+- 2026-10-15 entegratör: kit_check P5 20/23 — eksik yalnız accent_3, divider, web_hero (W2.15–W2.17). Mevcut 20 dosya görsel olarak iyi; card_small/frame_portrait yeşilindeki koyu merkez tema build'inde maskeyle düzeltilir. Kalan 3 parçanın prompt'ları kullanıcıya iletildi.
