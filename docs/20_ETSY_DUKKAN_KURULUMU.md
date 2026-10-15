@@ -45,9 +45,9 @@ Yedek: `Digital Wedding Website Templates with Online RSVP`
 ### 1.2 Shop icon ve banner
 | Alan | Dosya | Not |
 |---|---|---|
-| Shop icon | `brand/etsy/etsy_shop_icon_1000.png` (500'lük de var) | Etsy'de "Logo" (Your shop → Shop basics). **Uygulanmadı, §7** |
-| Banner (büyük) | `brand/etsy/etsy_banner_big_3360x840.jpg` | Yazı logosu sağ tarafta. Yükleme önizlemesinde mobil kırpım kontrol edilir; logo kesiliyorsa yükleme yapılmaz, §7'ye yazılır |
-| Mini banner | `brand/etsy/etsy_banner_mini_1600x213.jpg` | Banner, Shop Home editor'de (kalem ikonu). **Uygulanmadı, §7** |
+| Shop icon | `brand/etsy/etsy_shop_icon_1000.png` (500'lük de var) | Etsy'de "Logo" (Your shop → Shop basics / Shop Home editor). **Uygulandı, §7.5** |
+| Banner (büyük) | `brand/etsy/etsy_banner_big_3360x840.jpg` | Yazı logosu sağ tarafta. Mobil kırpım ölçüldü (kırpım yok), **uygulandı, §7.5** |
+| Mini banner | `brand/etsy/etsy_banner_mini_1600x213.jpg` | Kullanılmadı: Etsy'de "Mini Banner" mobilde görünmüyor; Big Banner seçili kaldı (§7.5) |
 
 ### 1.3 Shop announcement (alanda sınır tanımlı değil) [doğrulandı]
 İlk 1–2 satır kısaltılmış önizlemede görünür. Bu yüzden ana değer başta.
@@ -235,17 +235,8 @@ Not: iptal politikası docs/20 tablosunda ayrı bir satır değildi. Kullanıcı
 "cancellations" ifadesiyle aynı olduğu için yayınlandı. Geri almak için: Policy settings → Cancellations → kalem ikonu.
 
 ### 7.2 Girilmeyen alanlar ve nedeni
-- **Shop icon (Logo) ve banner uygulanmadı.** Dükkânda kullanıcının daha önce yüklediği logo ve banner var (dashboard: "Logo
-  added", "Banner added"). İkisi de `brand/etsy/` dosyalarından farklı, eski bir tasarım. Logo, içinde "STUDIO · BKE · INVITATIONS"
-  yazan bir daire mühür. Banner'da "Digital Wedding Invitations / Animated Video & Website Templates" yazıyor. Logoyu değiştirmek
-  için önce mevcut logoyu kaldırmak gerekiyor (Shop basics → Logo → Edit → ×). Bu tıklama Claude Code izin denetimince engellendi.
-  Kullanıcının kendi yüklediği görseller açık onayı olmadan ezilmesin diye banner'a da dokunulmadı. Bu yüzden mobil kırpım
-  önizlemesi yapılmadı.
-  Mevcut görsellerin yedek URL'leri:
-  - logo: `https://i.etsystatic.com/68570726/r/isla/de861b/90028703/isla_500x500.90028703_r9emg7wh.jpg`
-  - banner: `https://i.etsystatic.com/68570726/r/isbl/4fd719/89080116/isbl_3360x840.89080116_nvqgkb5c.jpg`
-  Yeni görseller şuradan yüklenir. Banner: Shop Home editor → banner'ın sağ altındaki kalem ikonu. Logo: Shop Home editor'de
-  ikonun üstündeki kamera ya da Shop basics → Logo.
+- ~~Shop icon (Logo) ve banner~~ İlk turda uygulanmamıştı (eski görseller vardı, logoyu kaldırma tıklaması izin denetimine
+  takıldı). Kullanıcı onayıyla aynı gün uygulandı, bkz. §7.5.
 - **Returns ek metni için alan yok.** Policy settings → Returns & exchanges yalnız **fiziksel ürünler** için politika kuruyor
   ("return and exchange policies for non-digital items"). Dijital ürünlerde Etsy iadeyi zaten kapalı tutuyor. Vitrinde "See item
   details for return and exchange eligibility." yazıyor. Metin ilan açıklamasına konmalı (etsy-metin işi). İptal tarafı 7.1'de
@@ -276,7 +267,25 @@ Not: iptal politikası docs/20 tablosunda ayrı bir satır değildi. Kullanıcı
 
 ### 7.4 Beklenmedik bulgular
 - Dükkân adı `STUDIOBKE`, belgede ise `BKEStudio`. About metni "BKE Studio" diyor. Tutarlılık kararı kullanıcının.
-- Mevcut logo ve banner eski marka çalışmasından ("STUDIO BKE INVITATIONS" mührü). Banner'daki "Animated Video" vaadi şu an
-  vitrinde duruyor; oysa video ürünü K22'den beri askıda.
+- Önceki logo ve banner eski marka çalışmasındandı ("STUDIO BKE INVITATIONS" mührü). Banner "Animated Video" vaat ediyordu;
+  video ürünü K22'den beri askıda. §7.5'te değiştirildi.
 - Eski URL `/your/shops/me/edit` 404 veriyor. Info & Appearance: `/your/shops/me`; Your shop:
   `/your/shops/me/settings/your-shop/shop-basics`.
+
+### 7.5 Logo ve banner (kullanıcı onayı, 2026-10-15)
+Onay: "mevcut logo ve banner'ı brand/etsy dosyalarıyla değiştir; mobil kırpımda logo kesiliyorsa banner'ı yükleme."
+
+| Alan | Yer | Önceki (yedek URL) | Yüklenen | Doğrulama |
+|---|---|---|---|---|
+| Logo | Shop Home editor (`/shop/STUDIOBKE/edit`) → ikonun üstündeki kamera → "Adjust and crop your icon" → Save → "How's it look?" → Looks good | `https://i.etsystatic.com/68570726/r/isla/de861b/90028703/isla_500x500.90028703_r9emg7wh.jpg` | `brand/etsy/etsy_shop_icon_1000.png` → Etsy görseli `89092710` | Yenilemede vitrinde ve editörde yeni ikon. Etsy şartı: .jpg/.gif/.png, 10 MB altı, en az 500×500 |
+| Banner | Shop Home editor → banner sağ altı kalem → "You are editing your banner" modu → "Add an image" → Save. Stil: **Big Banner** (değiştirilmedi; "Choose a banner style": Big Banner / Mini Banner / None, Carousel ve Collage ücretli planda) | `https://i.etsystatic.com/68570726/r/isbl/4fd719/89080116/isbl_3360x840.89080116_nvqgkb5c.jpg` | `brand/etsy/etsy_banner_big_3360x840.jpg` → Etsy görseli `90041343` | Yenilemede vitrinde yeni banner, tam 4:1 |
+
+**Mobil kırpım kontrolü (kaydetmeden önce):** Editörde mobil önizleme yok. Vitrin, 360/390/430/768 px genişlikteki bir iframe'de
+ölçüldü. Banner `object-fit: fill` ile kabın tam genişliğinde, 4:1 oranında gösteriliyor (ör. 360 px → 343×86, 390 px →
+374×93). Kırpım yok. `min-height: 78px` kuralı yalnız 312 px'ten dar ekranlarda devreye girer. Sağdaki "BKE Studio" yazı logosu
+kesilmiyor. 360 px'te yazı logosu yaklaşık 15 px yüksekliğinde. Etsy mobil uygulaması bu yöntemle ölçülemedi.
+Mini banner (`etsy_banner_mini_1600x213.jpg`) kullanılmadı; Big Banner mobilde de görünüyor, Mini Banner görünmüyor.
+
+Not: Kamera ve kalem ikonları doğrudan işletim sisteminin dosya penceresini açıyor; bu pencere tarayıcı otomasyonunu kilitliyor.
+Dosya, sayfadaki gizli `input[type=file]`'a doğrudan verildi (logo: `#image-manager-shop-icon-form`; banner: düzenleme modunda
+banner'ın üstündeki "Add an image" formu).
