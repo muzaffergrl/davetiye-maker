@@ -28,10 +28,12 @@ Tasarım 16'in website tasarımını GPT olarak yapmak (K21–K24): 5 telefon ek
 
 ## Bitti sayılması için
 - [x] PAKET 5: 5 comp + 19 parça doğru yolda; `kit_check --paket 5` GEÇTİ (kalan varsa Sonuç'ta gerekçesi)
-- [ ] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
+- [x] PAKET 2: 5 fotoğraf doğru yolda; aynı çift tutarlı
 - [x] Sonuç'ta yeniden üretilen parçalar ve emin olunmayan noktalar yazılı
 
 ## Sonuç
+PAKET 2 tamam — gpt-gorsel, 2026-10-15: `photos/hero_portrait.jpg`, `story_1.jpg`, `story_2.jpg`, `story_3.jpg` (1024×1536) ve `venue.jpg` (1536×1024) bu tek sohbette 2.1–2.5 sırasıyla üretildi; 2.2–2.5'in her birinde ana portre doğrudan referans verildi. Aynı kurgusal çift/kıyafetler, doğal yüzler, eller/parmaklar ve yazı/logo/tabela yokluğu görsel olarak kontrol edildi. Mekân beş denemeden beşinci seçildi: önceki kadrajlar sağa kayıyor, çatıyı kesiyordu; son denemede 2.5 prompt metni aynen korunup ortak “konu ortada” kontrolü ayrıca belirtildi. `python3 tools/kit_check.py collections/16_Sunflower_Rustic --paket 2` → 5/5 GEÇTİ, çıkış 0. Belirgin görsel kusur görülmedi; durum geçişini entegratör yapar.
+
 Üç kısmın özeti — PAKET 5 tamam (2026-10-14):
 
 - Kısım 1: 5 W1 ekranı + W2 `bg_page`, `bg_tile`, `envelope_closed` (8 dosya).
@@ -86,3 +88,4 @@ Kısım 3 — gpt-gorsel-H, 2026-10-14 (8/8; W2 tamam):
 - 2026-10-14 gpt-gorsel-H: kısım 3 bitti; W2 tamam. Üç kısmın özeti Sonuç'a eklendi; PAKET 5 25/25 GEÇTİ. PAKET 2 gpt-gorsel-D'de; durumu entegratör incelemeye alır.
 - 2026-10-14 entegratör: W2 25/25 geçti, görsel olarak iyi (barnwood, twine_line, web_hero dahil). PAKET 2 bekleniyor (gpt-gorsel-D).
 - 2026-10-15 entegratör: PAKET 5 25/25 onaylı (görsel olarak iyi). PAKET 2 (5 fotoğraf) repoda yok — photos/ klasörü hiç oluşmamış; prompt'lar kullanıcıya yeniden iletildi.
+- 2026-10-15 gpt-gorsel: PAKET 2 tamam (5 JPEG); ana portre bütün sonraki fotoğraflara referans verildi, görsel kontroller yapıldı, kit_check 5/5 GEÇTİ. PAKET 2 kutusu işaretlendi; yeniden üretim notu Sonuç'a eklendi.
