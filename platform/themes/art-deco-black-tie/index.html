@@ -1,0 +1,108 @@
+<!doctype html>
+<!-- Art Deco Black-Tie · page 1 — envelope landing (/<slug>). W1.1 comp: a midnight-navy velvet ground with a fan of fine
+     gold rays from the top, gold art deco corner clusters (fan, pearls, crystals) top-left and bottom-right, a champagne
+     coupe, a starburst and a small fan top-right, "YOU ARE INVITED", the names in tall deco capitals, the navy gatefold
+     folder (two doors meeting at a centre seam under a stepped ziggurat top) with the gold medallion clasp on the seam,
+     "TAP TO OPEN" over a small gold divider. Opening (catalogue, docs/11 §7.4 gatefold): on tap the gold medallion clasp
+     turns and lifts away, the two navy doors swing open to the sides like ballroom doors, and the card rises from the
+     centre pocket as a thin band of gold light sweeps across the screen; the card comes forward and flies to home (view
+     transition). Personal text: none — [data-field] / [data-text] / [data-photo] are filled on the server
+     (platform/README.md). Thank-you mode (G075, data-if="thank_you_on"): the same folder and opening; the card carries
+     the couple's thank-you title and the date, its window the thank-you photo or — without one — the navy velvet and the
+     gold medallion (never a photo placeholder). Design texts: data-copy (G068, theme.json "copy").
+     Visuals: GPT parts only (img/, build_images.py). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{name_display} · {date}">Wedding invitation</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {name_display} · {date|date-long} · {venue.city_region}" content="Wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.share_invited} · {date|date-long} · {venue.city_region}" content="You're invited">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<meta name="theme-color" content="#0A1729">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&amp;family=Josefin+Sans:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-envelope" data-pending="This link will be added soon.">
+
+<!-- backdrop (W1.1): navy velvet (bg_tile), the fan of gold rays from the top (bg_page crop, screen-blended), the two GPT
+     corner clusters as separate layers (whole on screen) and the comp's three small pieces top-right -->
+<div class="scene-bg" aria-hidden="true">
+  <img class="rays" src="img/rays-1024.webp" alt="" fetchpriority="high">
+  <img class="corner corner-tl" src="img/decor_tl-320.webp" srcset="img/decor_tl-320.webp 320w, img/decor_tl-480.webp 480w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(24vw, 40vh, 340px), min(34vw, 19svh, 210px)" alt="" fetchpriority="high">
+  <img class="corner corner-br" src="img/decor_br-320.webp" srcset="img/decor_br-320.webp 320w, img/decor_br-480.webp 480w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(22vw, 40vh, 320px), min(34vw, 20svh, 210px)" alt="">
+  <img class="float f-coupe" src="img/accent_1-162.webp" alt="">
+  <img class="float f-star" src="img/accent_3-195.webp" alt="">
+  <img class="float f-fan" src="img/accent_2-194.webp" alt="">
+</div>
+<!-- "a thin band of gold light sweeps across the screen" (borderless light, docs/11 §5.7; MOTION.envelope.sweep) -->
+<div class="sweep" aria-hidden="true"><i></i></div>
+
+<a class="skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+
+<main class="env-page">
+  <header class="env-head">
+    <p class="kicker" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
+    <p class="kicker" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="deco names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </header>
+
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
+    <div class="env">
+      <!-- layers bottom → top (docs/11 §7.2 kapi): door insides · centre panel · card · pocket · doors · clasp -->
+      <img class="door-l-in" src="img/door_l_in-240.webp" srcset="img/door_l_in-240.webp 240w, img/door_l_in-349.webp 349w" sizes="min(43vw, 16.5svh, 215px)" alt="">
+      <img class="door-r-in" src="img/door_r_in-240.webp" srcset="img/door_r_in-240.webp 240w, img/door_r_in-348.webp 348w" sizes="min(43vw, 16.5svh, 215px)" alt="">
+      <img class="center" src="img/center-320.webp" srcset="img/center-320.webp 320w, img/center-640.webp 640w" sizes="min(80vw, 30.8svh, 400px)" alt="">
+      <div class="card-slot">
+        <div class="card" aria-hidden="true">
+          <div class="photo-slot mask-card" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(44vw, 17svh, 220px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_2-194.webp" alt=""><span>Your photo here</span></span>
+            <!-- thank-you mode: the couple's thank-you photo in the same window, else the navy velvet and the gold clasp (decoration) -->
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(44vw, 17svh, 220px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(26vw, 10svh, 130px)" alt=""></span>
+          </div>
+          <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(64vw, 24.6svh, 320px)" alt="">
+          <div class="card-copy">
+            <p class="deco card-line" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
+            <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+            <img class="card-orn" src="img/divider-300.webp" alt="">
+            <p class="kicker"><span class="nowrap" data-field="date"></span><span class="sep" aria-hidden="true" data-if="!thank_you_on"> · </span><span class="cc-city" data-if="!thank_you_on" data-field="venue.city"></span></p>
+          </div>
+        </div>
+      </div>
+      <img class="pocket" src="img/pocket-320.webp" srcset="img/pocket-320.webp 320w, img/pocket-640.webp 640w" sizes="min(80vw, 30.8svh, 400px)" alt="">
+      <img class="door-l" src="img/door_l-240.webp" srcset="img/door_l-240.webp 240w, img/door_l-326.webp 326w" sizes="min(40vw, 15.4svh, 200px)" alt="" fetchpriority="high">
+      <img class="door-r" src="img/door_r-240.webp" srcset="img/door_r-240.webp 240w, img/door_r-328.webp 328w" sizes="min(40vw, 15.4svh, 200px)" alt="" fetchpriority="high">
+    </div>
+    <!-- the gold medallion clasp: its own layer on the seam (outside .env: the stage's fit to the open folder does not move
+         it) — it turns and lifts away before the doors swing open -->
+    <div class="closure"><img src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(21vw, 8.2svh, 106px)" alt=""></div>
+  </div>
+
+  <p class="env-hint" aria-hidden="true"><span class="tap" data-copy="envelope_hint_tap">Tap to open</span><span class="click" data-copy="envelope_hint_click">Click to open</span></p>
+  <img class="hint-orn" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" aria-hidden="true">
+
+  <div class="env-after">
+    <a class="btn" href="home.html" data-enter data-copy="envelope_enter">Enter</a>
+    <button class="replay textlink" type="button" data-copy="envelope_replay">Replay the opening</button>
+  </div>
+
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html" data-copy="envelope_open">Open the invitation</a></p>
+</main>
+
+</body>
+</html>

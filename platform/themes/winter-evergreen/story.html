@@ -1,0 +1,108 @@
+<!doctype html>
+<!-- Winter Evergreen · page 3 — Our Story (/<slug>/story). W1.3 comp: "Our Story" in the graceful script, "MOMENTS WE
+     HOLD DEAR", a small pine sprig between two hairlines, then three frosted wooden window frames in a row like the
+     windows of a snowy mountain lodge (white-painted wood, frost on the corners, a little snow on each sill), a berry
+     sprig between the frames, a caption in the script under each; evergreen clusters in two corners. Catalogue: the photos
+     appear as the fog on the glass is wiped away (site.css preset "wipe": the GPT frost_overlay over each photo clears
+     from the centre outward and stays in the corners — "frost still clinging to their corners as if just wiped clear").
+     Phones: the windows one under another, centred (frame 66vw, photo window ≥ 38vw, docs/11 §9 — three in a row would be
+     ~ 22vw), captions under them, a berry sprig on the wall between them; from 720 px the comp's row of three. Photo
+     slots story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption. The whole page is off
+     (404) when optional_blocks.our_story is false. Kicker / title = design copy (data-copy, G068). Thank-you mode (G075):
+     unchanged; with the Day page hidden by the couple the closing link leads home. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<meta name="theme-color" content="#E3E8E7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Parisienne&amp;display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-long" data-optional="our_story" data-pending="This link will be added soon.">
+
+<main class="site-main">
+  <header class="page-head" data-scene="story-head">
+    <div class="page-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-aspect-ratio: 3/4)" srcset="img/snow_wide-640.webp">
+        <img class="scene-img" src="img/snow-420.webp" alt="">
+      </picture>
+      <img class="corner corner-tl" data-step="decor" data-a="sway-tl" src="img/decor_tl-360.webp" srcset="img/decor_tl-360.webp 360w, img/decor_tl-540.webp 540w, img/decor_tl-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 46vh, 400px), min(52vw, 300px)" alt="">
+      <img class="corner corner-br" data-step="decor" data-a="sway-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="(min-aspect-ratio: 3/4) min(28vw, 48vh, 420px), min(50vw, 27svh, 300px)" alt="">
+      <img class="float f-flake" data-step="decor" data-a="fade" src="img/accent_1-178.webp" alt="">
+      <img class="float f-cone" data-step="decor" data-a="fade" src="img/accent_2-185.webp" alt="">
+      <img class="float f-berry" data-step="decor" data-a="fade" src="img/accent_3-200.webp" alt="">
+    </div>
+    <h1 class="script page-title" data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
+    <p class="kicker" data-step="kicker" data-a="fade" data-fold data-copy="story_kicker">Moments we hold dear</p>
+    <span class="orn" data-step="kicker" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" alt=""></span>
+    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro" data-fold><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+
+  <!-- the lodge windows: one scene each — the window rises into place, then its fogged pane is wiped clear -->
+  <section class="windows-row" aria-label="Our photos">
+    <figure class="pane p-1" data-scene="story-window" data-fold>
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-portrait" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_story_1-320.webp" srcset="img/ph_story_1-320.webp 320w, img/ph_story_1-640.webp 640w" sizes="(min-width: 720px) min(16.6vw, 220px), min(43vw, 220px)" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-178.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frost" data-step="wipe" data-a="wipe" src="img/frost_overlay-320.webp" srcset="img/frost_overlay-320.webp 320w, img/frost_overlay-640.webp 640w" sizes="(min-width: 720px) min(16.6vw, 220px), min(43vw, 220px)" alt="">
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w, img/frame_portrait-857.webp 857w" sizes="(min-width: 720px) min(25.5vw, 340px), min(66vw, 340px)" alt="">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+    </figure>
+    <img class="between b-1" src="img/accent_3-200.webp" alt="" aria-hidden="true" loading="lazy">
+    <figure class="pane p-2" data-scene="story-window" data-fold>
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-portrait" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_story_2-320.webp" srcset="img/ph_story_2-320.webp 320w, img/ph_story_2-640.webp 640w" sizes="(min-width: 720px) min(16.6vw, 220px), min(43vw, 220px)" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-178.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frost" data-step="wipe" data-a="wipe" src="img/frost_overlay-320.webp" srcset="img/frost_overlay-320.webp 320w, img/frost_overlay-640.webp 640w" sizes="(min-width: 720px) min(16.6vw, 220px), min(43vw, 220px)" alt="" loading="lazy">
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w, img/frame_portrait-857.webp 857w" sizes="(min-width: 720px) min(25.5vw, 340px), min(66vw, 340px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+    </figure>
+    <img class="between b-2" src="img/accent_3-200.webp" alt="" aria-hidden="true" loading="lazy">
+    <figure class="pane p-3" data-scene="story-window" data-fold>
+      <div class="frame" data-step="frame" data-a="rise-lg">
+        <div class="photo-slot mask-portrait" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_story_3-320.webp" srcset="img/ph_story_3-320.webp 320w, img/ph_story_3-640.webp 640w" sizes="(min-width: 720px) min(16.6vw, 220px), min(43vw, 220px)" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><img src="img/accent_1-178.webp" alt=""><span>Your photo here</span></span>
+        </div>
+        <img class="frost" data-step="wipe" data-a="wipe" src="img/frost_overlay-320.webp" srcset="img/frost_overlay-320.webp 320w, img/frost_overlay-640.webp 640w" sizes="(min-width: 720px) min(16.6vw, 220px), min(43vw, 220px)" alt="" loading="lazy">
+        <img class="frame-img" src="img/frame_portrait-320.webp" srcset="img/frame_portrait-320.webp 320w, img/frame_portrait-640.webp 640w, img/frame_portrait-857.webp 857w" sizes="(min-width: 720px) min(25.5vw, 340px), min(66vw, 340px)" alt="" loading="lazy">
+      </div>
+      <figcaption class="script" data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+    </figure>
+  </section>
+
+  <section class="section next-sec snow-end" data-scene="story-next" data-fold>
+    <img class="corner corner-br page-corner" data-step="decor" data-a="sway-br" src="img/decor_br-360.webp" srcset="img/decor_br-360.webp 360w, img/decor_br-540.webp 540w, img/decor_br-720.webp 720w" sizes="min(54vw, 320px)" alt="" loading="lazy">
+    <span class="orn" data-step="orn" data-a="unfurl" aria-hidden="true"><img src="img/divider-300.webp" alt="" loading="lazy"></span>
+    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    <!-- thank-you mode with the Day page hidden (G075): back home instead of a link to a closed page -->
+    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

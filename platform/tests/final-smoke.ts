@@ -183,7 +183,8 @@ try {
     check('guest: envelope page 200', res.status() === 200, String(res.status()));
     await page.waitForTimeout(1500);
     check('guest: envelope has no horizontal overflow', (await overflow(page)) <= 0);
-    check('guest: envelope names from the content record', (await page.locator('body').innerText()).includes(names[0]));
+    // names may be set in capitals by the design (text-transform: 06 Art Deco): compare case-insensitively (G406 note)
+    check('guest: envelope names from the content record', (await page.locator('body').innerText()).toLowerCase().includes(names[0].toLowerCase()));
     await shot(page, '01_guest_envelope_390');
 
     await need(page, '.stage', 'the envelope stage (role=button, docs/11 §3.2)');
@@ -193,7 +194,7 @@ try {
     await page.waitForTimeout(5200); // card entrance
     await revealAll(page);
     const home = await page.locator('body').innerText();
-    check('guest: home shows names, date and venue', names.every((n) => home.includes(n)) && home.includes(year), home.replace(/\s+/g, ' ').slice(0, 120));
+    check('guest: home shows names, date and venue', names.every((n) => home.toLowerCase().includes(n.toLowerCase())) && home.includes(year), home.replace(/\s+/g, ' ').slice(0, 120));
     check('guest: home has no broken images', (await brokenImages(page)).length === 0, (await brokenImages(page)).join(', '));
     check('guest: home has no horizontal overflow', (await overflow(page)) <= 0);
     check('guest: no "Your photo here" label for guests', !/Your photo here/i.test(home));
@@ -349,7 +350,7 @@ try {
     await guest.waitForURL(`${PUBLIC_URL}/home`, { timeout: 6000 });
     await guest.waitForTimeout(800);
     const guestHome = await guest.locator('body').innerText();
-    check('buyer site: home shows the buyer names', /Elena/.test(guestHome) && (!two || /Marco/.test(guestHome)));
+    check('buyer site: home shows the buyer names', /Elena/i.test(guestHome) && (!two || /Marco/i.test(guestHome)));
     const heroSrc = await guest.evaluate((key: string) => (document.querySelector(`img[data-photo="${key}"]`) as HTMLImageElement | null)?.getAttribute('src') ?? null, HERO);
     check('buyer site: uploaded portrait is public after publishing', Boolean(heroSrc && heroSrc.startsWith('/media/') && !heroSrc.includes('preview=')), String(heroSrc));
     check('buyer site: no "Your photo here" label', !/Your photo here/i.test(guestHome));

@@ -64,7 +64,14 @@ function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows:
           </Button>
         )}
       </div>
-      {rights.archived ? <p className={styles.hint}>Your website is archived: names and date can no longer be changed.</p> : null}
+      {rights.archived ? (
+        <p className={styles.hint}>Your website is archived: names and date can no longer be changed.</p>
+      ) : (
+        // G087 (G079 note): say once why these are locked, next to the lock.
+        <p className={styles.hint} data-locked-why="">
+          Locked since you published, so they never change by accident. Tap Change to update them; small fixes are free.
+        </p>
+      )}
       {!online && !rights.archived ? <p className={styles.hint}>Connect to the internet to change your names or date.</p> : null}
     </div>
   );
@@ -263,7 +270,7 @@ function zoneOption(zone: string) {
 export const zoneCity = (zone: string | undefined) => (zone ? (zone.split('/').pop() ?? zone).replace(/_/g, ' ') : '');
 
 export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?: boolean }) {
-  const { content, edit, locked, rights } = usePanelContext();
+  const { content, edit, locked, rights, isSample, issuesAt } = usePanelContext();
   const zones = useTimeZones(content.timezone);
   const deviceZone = useDeviceZone();
   const [zoneOpen, setZoneOpen] = useState(false);
@@ -289,6 +296,24 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
   const counting = rights.phase !== 'before_publish';
   const fromPhone = setup && !zoneOpen && deviceZone !== null && content.timezone === deviceZone;
   const time = content.ceremony_time || '16:00';
+  const moreNeedsAttention = isSample('timezone') || issuesAt('timezone').length > 0 || issuesAt('locale').length > 0;
+  const zoneSelect = (
+    <>
+      <SelectField
+        path="timezone"
+        label="Time zone of the wedding"
+        hint={`The countdown, the reply deadline and guests’ calendars use ${zoneCity(content.timezone) || 'this'} time.`}
+        value={content.timezone}
+        options={zones.map(zoneOption)}
+        onChange={(v) => edit((c) => void (c.timezone = v))}
+      />
+      {deviceZone && deviceZone !== content.timezone ? (
+        <Button small variant="tertiary" icon={Shuffle} disabled={locked} onClick={() => edit((c) => void (c.timezone = deviceZone))}>
+          Use {zoneCity(deviceZone)} time (this phone)
+        </Button>
+      ) : null}
+    </>
+  );
   return (
     <>
       {counting ? (
@@ -327,38 +352,32 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
           </p>
           <p className={styles.hint}>The countdown, the reply deadline and guests&rsquo; calendars use it.</p>
         </div>
+      ) : setup ? (
+        zoneSelect
       ) : (
-        <>
-          <SelectField
-            path="timezone"
-            label="Time zone of the wedding"
-            hint={`The countdown, the reply deadline and guests’ calendars use ${zoneCity(content.timezone) || 'this'} time.`}
-            value={content.timezone}
-            options={zones.map(zoneOption)}
-            onChange={(v) => edit((c) => void (c.timezone = v))}
+        // G087 (G079 note "Day & place has ~20 fields"): the rarely changed settings sit one tap away. Opens by itself
+        // when one of them still needs attention (sample time zone, an issue), so a jump from Home lands on it.
+        <Disclosure
+          id="date-more"
+          title="More options"
+          status={`${zoneCity(content.timezone) || 'Time zone'} · ${locale === 'en-US' ? 'Month first' : 'Day first'}`}
+          defaultOpen={moreNeedsAttention}
+        >
+          {zoneSelect}
+          <Segmented<DateStyle>
+            id="f-locale"
+            label="Date style"
+            value={locale === 'en-US' ? 'en-US' : 'day'}
+            disabled={locked}
+            options={[
+              { value: 'en-US', label: 'Month first', hint: `${formatDate(sampleDate, 'en-US')} · ${formatTime(time, 'en-US')}` },
+              { value: 'day', label: 'Day first', hint: `${formatDate(sampleDate, 'en-GB')} · ${formatTime(time, 'en-GB')}` },
+            ]}
+            onChange={(v) => edit((c) => void (c.locale = v === 'en-US' ? 'en-US' : c.locale !== 'en-US' ? c.locale : 'en-GB'))}
           />
-          {deviceZone && deviceZone !== content.timezone ? (
-            <Button small variant="tertiary" icon={Shuffle} disabled={locked} onClick={() => edit((c) => void (c.timezone = deviceZone))}>
-              Use {zoneCity(deviceZone)} time (this phone)
-            </Button>
-          ) : null}
-        </>
+          {theme.optionalBlocks.includes('countdown') ? <BlockSwitch block="countdown" /> : null}
+        </Disclosure>
       )}
-      {/* The date style is set from the phone in the setup; it can be changed here in the editor (G060-fix). */}
-      {setup ? null : (
-        <Segmented<DateStyle>
-          id="f-locale"
-          label="Date style"
-          value={locale === 'en-US' ? 'en-US' : 'day'}
-          disabled={locked}
-          options={[
-            { value: 'en-US', label: 'Month first', hint: `${formatDate(sampleDate, 'en-US')} · ${formatTime(time, 'en-US')}` },
-            { value: 'day', label: 'Day first', hint: `${formatDate(sampleDate, 'en-GB')} · ${formatTime(time, 'en-GB')}` },
-          ]}
-          onChange={(v) => edit((c) => void (c.locale = v === 'en-US' ? 'en-US' : c.locale !== 'en-US' ? c.locale : 'en-GB'))}
-        />
-      )}
-      {!setup && theme.optionalBlocks.includes('countdown') ? <BlockSwitch block="countdown" /> : null}
     </>
   );
 }

@@ -64,7 +64,7 @@ export const FREE_CHANGES_TEXT = `Always free: fixing a small typo (up to ${TYPO
 export const UNDO_TEXT = 'Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back.';
 /** Before the first publish (names and date pages, Home). */
 export function beforePublishText(total: number = IDENTITY_CHANGE_LIMIT): string {
-  return `You can change these freely until you publish. After that you have ${total} name and date changes in total — small typo fixes, surnames and moving the date by up to a week are free.`;
+  return `Change these freely until you publish. After that, names and date can change ${total} times (small fixes are free).`;
 }
 /** What happens at the archive date (rules box, help, the reminder before it). */
 export const ARCHIVE_TEXT = 'Then your website closes for guests; you can still see your content and download your replies.';

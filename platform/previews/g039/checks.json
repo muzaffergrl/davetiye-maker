@@ -57,9 +57,9 @@
       "ok": true
     },
     {
-      "name": "panel: sticky Publish button visible at the bottom",
+      "name": "panel: Publish button visible in the top bar",
       "ok": true,
-      "detail": "{\"x\":260,\"y\":784,\"width\":114,\"height\":50}"
+      "detail": "{\"x\":292.359375,\"y\":8,\"width\":85.640625,\"height\":44}"
     },
     {
       "name": "couple: names-as-shown follows the first names",
@@ -70,15 +70,24 @@
       "ok": true
     },
     {
-      "name": "couple: header updates",
-      "ok": true
+      "name": "focus: a field reached with Tab is not under the fixed bar",
+      "ok": true,
+      "detail": "{\"id\":\"f-partners-0-full_name\",\"bottom\":567,\"barTop\":775}"
     },
     {
       "name": "autosave: \"All changes saved\"",
       "ok": true
     },
     {
-      "name": "date: shown as \"Saturday, May 15, 2027\" and \"4:00 PM\"",
+      "name": "couple: Home heading updates",
+      "ok": true
+    },
+    {
+      "name": "date: shown as \"Saturday, May 15, 2027\", time 4:00 PM",
+      "ok": true
+    },
+    {
+      "name": "date: rare settings folded under \"More options\"",
       "ok": true
     },
     {
@@ -90,11 +99,23 @@
       "ok": true
     },
     {
-      "name": "schedule: row moved up",
+      "name": "schedule: row moved up (menu \"Move up\")",
       "ok": true
     },
     {
-      "name": "schedule: shown as 9:30 PM",
+      "name": "schedule: time kept as 21:30",
+      "ok": true
+    },
+    {
+      "name": "schedule: focus follows the moved row",
+      "ok": true
+    },
+    {
+      "name": "schedule: Remove at once, with Undo",
+      "ok": true
+    },
+    {
+      "name": "schedule: Undo brings the row back",
       "ok": true
     },
     {
@@ -109,7 +130,16 @@
     {
       "name": "photo: uploaded and stored in the draft",
       "ok": true,
-      "detail": "/media/b8d8bfe9-3910-40e6-9b4e-aa964f11e74c/3707d48ac723e001123e9de86d03073b.jpg"
+      "detail": "/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg"
+    },
+    {
+      "name": "photo: the thumbnail is the small variant, with the preview key",
+      "ok": true,
+      "detail": "/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-640w.jpg?preview=1792087200.nsCGqYYnNF7hXKZGNony4c9cJ7UsE3gjCYOVqdoW2N4"
+    },
+    {
+      "name": "photo: not public before publishing",
+      "ok": true
     },
     {
       "name": "photo: server copy is a 4:5 JPEG without EXIF",
@@ -117,7 +147,7 @@
       "detail": "890x1114"
     },
     {
-      "name": "photos: section summary counts it",
+      "name": "photos: the page counts it",
       "ok": true
     },
     {
@@ -158,6 +188,28 @@
       "ok": true
     },
     {
+      "name": "preview: focus on Close (modal)",
+      "ok": true
+    },
+    {
+      "name": "preview: form behind is inert",
+      "ok": true
+    },
+    {
+      "name": "preview: Back closes it and stays in the editor",
+      "ok": true,
+      "detail": "http://127.0.0.1:3395/edit/clara-and-julian?k=KPkKoHczq9TgEqfQ6sDtmd9UiTQTicf3h6DnIKCj9lY#home"
+    },
+    {
+      "name": "preview: focus back on the Preview button",
+      "ok": true
+    },
+    {
+      "name": "publish: notes before publishing (empty photo places, sections without a link)",
+      "ok": true,
+      "detail": "Before you publish Good to know before you publish After you publish, you have 3 changes in total for your names, monogram and wedding date (changing several in"
+    },
+    {
       "name": "publish: \"Your website is live\"",
       "ok": true
     },
@@ -178,7 +230,7 @@
       "ok": true
     },
     {
-      "name": "bar: button says \"Share\" when up to date",
+      "name": "bar: a calm \"Live\" badge instead of Publish when up to date",
       "ok": true
     },
     {
@@ -190,9 +242,14 @@
       "ok": true
     },
     {
-      "name": "public page: uploaded photo loads",
+      "name": "public page: uploaded photo loads (public once published)",
       "ok": true,
-      "detail": "{\"src\":\"/media/b8d8bfe9-3910-40e6-9b4e-aa964f11e74c/3707d48ac723e001123e9de86d03073b.jpg\",\"w\":890}"
+      "detail": "{\"src\":\"/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg\",\"w\":390,\"srcset\":\"/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-640w.jpg 640w, /media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg 890w\",\"current\":\"http://127.0.0.1:3395/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg\"}"
+    },
+    {
+      "name": "public page: srcset with the 640 px variant (G055), the browser loads one of the files",
+      "ok": true,
+      "detail": "http://127.0.0.1:3395/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg"
     },
     {
       "name": "public page: no horizontal overflow",
@@ -204,13 +261,23 @@
       "detail": "200"
     },
     {
-      "name": "RSVP section: reply and counts listed",
+      "name": "Guests: reply and counts listed",
       "ok": true,
-      "detail": "Replies Refresh 1 reply · 1 attending (2 guests) · 0 not attending Ada Example — yes, 2 guests “See you there!” Download"
+      "detail": "2 Guests coming 0 Not coming 1 Replies Replies close in 170 days. Last day: Saturday, April 3, 2027 (New York time). 1 new reply since you last looked on this d"
     },
     {
-      "name": "bar: \"Publish changes\" after an edit",
+      "name": "Guests: a reply can be removed",
       "ok": true
+    },
+    {
+      "name": "bar (K29): \"Unpublished changes: 1 · Review · Publish\" after an edit",
+      "ok": true,
+      "detail": "Unpublished changes: 1 Review Publish"
+    },
+    {
+      "name": "review (K29): lists the changed page (Details) and offers \"Publish changes\"",
+      "ok": true,
+      "detail": "Unpublished changes Your guests still see the version you published last. Changes are saved as you type; they go live when you publish. Changed since then: Details Publish changes Keep editing"
     },
     {
       "name": "public page: unpublished edit not visible",
@@ -221,7 +288,25 @@
       "ok": true
     },
     {
+      "name": "lost save answer: no false conflict, saved",
+      "ok": true,
+      "detail": "saved"
+    },
+    {
+      "name": "slow publish: the bar's button says \"Publishing…\" meanwhile",
+      "ok": true
+    },
+    {
+      "name": "typing during a slow publish: saved after it, no false conflict",
+      "ok": true,
+      "detail": "saved / Typed during the publish"
+    },
+    {
       "name": "offline: public page is 404",
+      "ok": true
+    },
+    {
+      "name": "offline: the photo is not public any more",
       "ok": true
     },
     {
@@ -243,7 +328,7 @@
     {
       "name": "desktop: preview shown next to the form, 390 px wide",
       "ok": true,
-      "detail": "{\"x\":775,\"y\":147.015625,\"width\":390,\"height\":600}"
+      "detail": "{\"x\":817,\"y\":219.5,\"width\":390,\"height\":599.5}"
     },
     {
       "name": "desktop: no Preview button",

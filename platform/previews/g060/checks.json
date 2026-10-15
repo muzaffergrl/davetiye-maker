@@ -4,12 +4,13 @@
   "theme": "blush-garden-rose",
   "axe": {
     "setup 1": [],
-    "setup 6": [],
+    "setup 3": [],
     "home": [],
     "edit": [],
     "section: names": [],
     "identity sheet": [],
-    "setup 6 with sample date": [],
+    "review sheet": [],
+    "setup 3 with sample date": [],
     "first publish sheet": [],
     "section: story": [],
     "section: details": [],
@@ -45,24 +46,32 @@
       "ok": true
     },
     {
-      "name": "setup 2: \"When is the wedding?\", focus on the heading",
+      "name": "setup 1 (K29): full names folded, optional",
       "ok": true
     },
     {
-      "name": "setup 2: no banners above the date (sample tags on the fields instead; the rule is shown on step 1 and 6)",
+      "name": "setup 1 (K29): the date is on the same step, no banners above it, the rule shown once",
       "ok": true,
-      "detail": "Step 2 of 6:\nWhen is the wedding?\n\nThe date, the ceremony time and your time zone.\n\nWedding date\nSample\n\nSaturday, 15 May 2027\n\nCeremony time\nSample\n\nTime zone of the wedding\n\nWe’ll use London time, f"
+      "detail": "Step 1 of 3:\nYour names and date\n\nAs your guests know you, and the day itself. Everything else can wait until later.\n\nFirst name\n\nAs your guests know you, e.g. Clara.\n\nPartner’s first name\nFull names "
     },
     {
-      "name": "setup 2: the time zone follows the phone (\"We’ll use London time, from your phone\")",
+      "name": "setup 1 (K29): no venue in the setup (later, under Edit → Day & place)",
       "ok": true
     },
     {
-      "name": "setup 2: date style from the phone (en-GB), no country list in the setup",
+      "name": "setup 1: the time zone follows the phone (\"We’ll use London time, from your phone\")",
       "ok": true
     },
     {
-      "name": "setup 2: date written out (day first, from the phone)",
+      "name": "setup 1: date style from the phone (en-GB), no country list in the setup",
+      "ok": true
+    },
+    {
+      "name": "setup 1: date written out (day first, from the phone)",
+      "ok": true
+    },
+    {
+      "name": "setup 2: \"Add your photo\", focus on the heading",
       "ok": true
     },
     {
@@ -70,74 +79,51 @@
       "ok": true
     },
     {
-      "name": "setup 3: values still there after Back / Continue",
-      "ok": true
-    },
-    {
       "name": "setup: phone back = previous step",
       "ok": true
     },
     {
-      "name": "setup 4: photo counter \"0 of 5 photos\"",
+      "name": "setup 2: photo counter \"0 of 5 photos\"",
       "ok": true
     },
     {
-      "name": "setup 4: upload + crop, counter \"1 of 5 photos\"",
+      "name": "setup 2 (K29): one photo asked for (the portrait); the 4 others folded under \"More photos\", optional",
       "ok": true
     },
     {
-      "name": "setup 5: preview + \"Still sample text\" list",
+      "name": "setup 2: upload + crop, counter \"1 of 5 photos\"",
+      "ok": true
+    },
+    {
+      "name": "setup 3 (K29): preview + one calm line instead of a sample-text list or count",
       "ok": true,
-      "detail": "4"
+      "detail": "Some details — like the venue, the schedule or your story — still show the design’s sample text. You can change them any time, before or after you publish; Home shows what is left."
     },
     {
-      "name": "setup 5: one short line per section (\"Our Story: story intro and 3 captions\")",
-      "ok": true,
-      "detail": "Details: host line and dress code | Our Story: story intro and 3 captions | RSVP settings: reply-by date | Schedule: 3 event places"
-    },
-    {
-      "name": "setup 5: sample item opens its section with \"Done\"",
+      "name": "setup 3: the step bar says \"Step 3 of 3\" and Publish is the main action (no Skip)",
       "ok": true
     },
     {
-      "name": "setup 5: \"Done\" returns to the check step",
-      "ok": true
-    },
-    {
-      "name": "setup 5: sample text left -> primary \"Fix N items\", \"Publish anyway\" secondary, no \"Looks good\"",
-      "ok": true,
-      "detail": "10 / Fix 10 items"
-    },
-    {
-      "name": "setup 5: no horizontal scroll with the extra button",
+      "name": "setup 3: no horizontal scroll",
       "ok": true,
       "detail": "0"
     },
     {
-      "name": "setup 6: the publish step lists the sample text with its count",
-      "ok": true,
-      "detail": "Step 6 of 6: Publish your website You can keep editing after you publish. Elena & Marco On the invitation card: Elena Rossi & Marco Bianchi Saturday, 18 September 2027 Villa Aurelia, Rome 127.0.0.1:3341/elena-and-marco 10 things on your website are still sample text from the design. Your gues"
-    },
-    {
-      "name": "setup 6: a sample item opens its section and \"Done\" comes back to step 6",
-      "ok": true
-    },
-    {
-      "name": "setup 6: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)",
+      "name": "setup 3: rules box in plain words (3 in total, free fixes incl. a week for the date, undo, online until, closes for guests)",
       "ok": true,
       "detail": "Good to know before you publish After you publish, you have 3 changes in total for your names, monogram and wedding date (changing several in one go counts once). Always free: fixing a small typo (up to 2 letters in a name), adding a surname, and moving your date by up to 7 days. Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back. Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like. Your website stays online until 18 September 2028, 12 months after your wedding. Then your website closes for guests; you can still see your content and download your replies."
     },
     {
-      "name": "setup 6: summary shows names, the invitation-card names, date and address",
+      "name": "setup 3: summary shows names, the invitation-card names, date and address",
       "ok": true,
-      "detail": "Elena & Marco\n\nOn the invitation card: Elena Rossi & Marco Bianchi\n\nSaturday, 18 September 2027\n\nVilla Aurelia, Rome\n\n127.0.0.1:3341/elena-and-marco"
+      "detail": "Elena & Marco\n\nOn the invitation card: Elena Rossi & Marco Bianchi\n\nSaturday, 18 September 2027\n\nThe Rosewater Conservatory, Savannah\n\n127.0.0.1:3395/elena-and-marco"
     },
     {
-      "name": "setup 6: no sample-date gate once the real date is set",
+      "name": "setup 3: no sample-date gate once the real date is set",
       "ok": true
     },
     {
-      "name": "a11y (axe-core 4.13.0): setup 6 has no serious/critical violations",
+      "name": "a11y (axe-core 4.13.0): setup 3 has no serious/critical violations",
       "ok": true
     },
     {
@@ -147,7 +133,7 @@
     {
       "name": "publish: QR made from the public URL and decodes to it",
       "ok": true,
-      "detail": "http://127.0.0.1:3341/elena-and-marco / http://127.0.0.1:3341/elena-and-marco"
+      "detail": "http://127.0.0.1:3395/elena-and-marco / http://127.0.0.1:3395/elena-and-marco"
     },
     {
       "name": "publish: the address is a link, with an \"Open website\" button",
@@ -156,7 +142,7 @@
     {
       "name": "publish: \"Copy link\" -> button says \"Copied\", status \"Link copied\" (announced), clipboard holds the URL",
       "ok": true,
-      "detail": "http://127.0.0.1:3341/elena-and-marco"
+      "detail": "http://127.0.0.1:3395/elena-and-marco"
     },
     {
       "name": "publish: no snackbar over \"Go to my editor\" (there is no bottom navigation here)",
@@ -171,12 +157,21 @@
       "ok": true
     },
     {
-      "name": "editor: Live status names the sample text left instead of \"up to date\"",
+      "name": "home (K29): \"Your website is N% ready\" with at most 3 next steps, sample text among them",
       "ok": true,
-      "detail": "Live Your website is live — 10 things are still sample text from the design. 127.0.0.1:3341/elena-and-marco Copy Share"
+      "detail": "Your website is 52% ready Next steps: Venue: replace the sample venue name and city Details: replace the sample host line and dress code Our Story: replace the sample story intro and 3 captions"
     },
     {
-      "name": "editor: rights card \"3 of 3 changes left\"",
+      "name": "home (K29): a progress bar with its value",
+      "ok": true
+    },
+    {
+      "name": "editor: Live status, no \"up to date\" claim while sample text is left",
+      "ok": true,
+      "detail": "Live Your website is live. 127.0.0.1:3395/elena-and-marco Copy Share"
+    },
+    {
+      "name": "home (K29): the name & date changes are not on Home (only next to those fields)",
       "ok": true
     },
     {
@@ -190,19 +185,21 @@
     {
       "name": "preview (phone): full-screen layer, the editor behind is inert",
       "ok": true,
-      "detail": "{\"x\":0,\"y\":122,\"width\":390,\"height\":722}"
+      "detail": "{\"x\":0,\"y\":124.5,\"width\":390,\"height\":719.5}"
     },
     {
       "name": "preview (phone): back gesture closes it and stays on Home",
       "ok": true
     },
     {
-      "name": "edit: one badge for the shared budget (\"3 name & date changes left\" on Names, none on Date)",
-      "ok": true
+      "name": "edit (K29): six pages — Us, Day & place, Photos, Our Story, Details, RSVP",
+      "ok": true,
+      "detail": "us,day,photos,story,details,rsvp"
     },
     {
-      "name": "edit: Names has no \"Sample text\" badge once the names are set (host line lives under Details)",
-      "ok": true
+      "name": "edit (K29): no \"Sample\" and no \"changes left\" badges on the list",
+      "ok": true,
+      "detail": "Edit your website Us Elena & Marco Day & place 18 September 2027 · 4:30 pm · The Rosewater Conservatory Photos 1 of 5 added Our Story 3 moments Details Host line, Dress code RSVP Reply by 7 August 202"
     },
     {
       "name": "edit: no separate \"Optional sections\"",
@@ -214,6 +211,10 @@
     },
     {
       "name": "names: identity read only after publishing (no name inputs)",
+      "ok": true
+    },
+    {
+      "name": "Us (K29): the one place for the name & date changes: \"3 of 3 changes left\" next to the names",
       "ok": true
     },
     {
@@ -250,11 +251,20 @@
       "ok": true
     },
     {
-      "name": "home: rights card \"2 of 3 changes left\"",
+      "name": "home (K29): sticky bar \"Unpublished changes: 1 · Review · Publish\"",
+      "ok": true,
+      "detail": "Unpublished changes: 1 Review Publish"
+    },
+    {
+      "name": "home (K29): no second \"Publish changes\" in the status card",
       "ok": true
     },
     {
-      "name": "home: status says there are unpublished changes",
+      "name": "review (K29): the changed page is \"Us\"",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core 4.13.0): review sheet has no serious/critical violations",
       "ok": true
     },
     {
@@ -266,53 +276,57 @@
       "ok": true
     },
     {
-      "name": "resume: a fresh device opens the first unfinished step (2: the date is still sample)",
+      "name": "resume: a fresh device opens the first unfinished step (1: the date is still sample)",
       "ok": true
     },
     {
-      "name": "setup 2 (phone in the design's own zone): the zone stays New York, shown as the phone's",
+      "name": "setup 1 (phone in the design's own zone): the zone stays New York, shown as the phone's",
       "ok": true
     },
     {
-      "name": "setup 6: \"Your wedding date is still the design’s sample\" above Publish, Publish disabled",
+      "name": "old address #setup/6 opens the publish step (#setup/3)",
+      "ok": true
+    },
+    {
+      "name": "setup 3: \"Your wedding date is still the design’s sample\" above Publish, Publish disabled",
       "ok": true,
       "detail": "Your wedding date is still the design’s sample Guests would see Saturday, May 15, 2027. Set your real date before you publish. Set our date Saturday, May 15, 2027 really is our wedding date"
     },
     {
-      "name": "a11y (axe-core 4.13.0): setup 6 with sample date has no serious/critical violations",
+      "name": "a11y (axe-core 4.13.0): setup 3 with sample date has no serious/critical violations",
       "ok": true
     },
     {
-      "name": "setup 6 at 320 px: every control of the fixed bars stays on screen",
+      "name": "setup 3 at 320 px: every control of the fixed bars stays on screen",
       "ok": true
     },
     {
-      "name": "setup 6 at 360 px: every control of the fixed bars stays on screen",
+      "name": "setup 3 at 360 px: every control of the fixed bars stays on screen",
       "ok": true
     },
     {
-      "name": "setup 6 at 390 px: every control of the fixed bars stays on screen",
+      "name": "setup 3 at 390 px: every control of the fixed bars stays on screen",
       "ok": true
     },
     {
-      "name": "setup 6: \"… really is our wedding date\" unlocks Publish",
+      "name": "setup 3: \"… really is our wedding date\" unlocks Publish",
       "ok": true
     },
     {
-      "name": "setup 6: \"Set our date\" goes to the date step",
+      "name": "setup 3: \"Set our date\" goes to the date step (step 1)",
       "ok": true
     },
     {
-      "name": "setup 2 at 360 × 640: the date field starts well above the bar (no banners)",
+      "name": "setup 1 at 360 × 640: the first name field starts well above the bar (no banners)",
       "ok": true,
-      "detail": "{\"bar\":523,\"date\":228,\"time\":401}"
+      "detail": "{\"bar\":515,\"first\":285.015625,\"firstBottom\":337.015625}"
     },
     {
-      "name": "resume: reload returns to the step on this phone (3)",
+      "name": "resume: reload returns to the step on this phone (2)",
       "ok": true
     },
     {
-      "name": "save & exit: Home offers \"Continue setup · Step 3 of 6\"",
+      "name": "save & exit: Home offers \"Continue setup · Step 2 of 3\"",
       "ok": true
     },
     {
@@ -427,12 +441,12 @@
     {
       "name": "crop at 360 × 640: the zoom slider is not under \"Use this photo\"",
       "ok": true,
-      "detail": "{\"id\":\"crop-zoom\",\"top\":481,\"bottom\":525}"
+      "detail": "{\"id\":\"crop-zoom\",\"top\":490,\"bottom\":534}"
     },
     {
       "name": "guests: numbers (11 guests coming, 2 not coming, 8 replies)",
       "ok": true,
-      "detail": "Guests 11 Guests coming 2 Not coming 8 Replies Replies close at the end of Saturday, April 3, 2027 (New York time). All Coming Not coming Search replies by na"
+      "detail": "Guests 11 Guests coming 2 Not coming 8 Replies Replies close in 170 days. Last day: Saturday, April 3, 2027 (New York time). 8 new replies since you last look"
     },
     {
       "name": "guests: search shown from 8 replies",
@@ -467,13 +481,18 @@
       "ok": true
     },
     {
+      "name": "share (K29): link + QR on top; guest password and edit link folded",
+      "ok": true,
+      "detail": "password:false,edit-link:false"
+    },
+    {
       "name": "share: link + edit-link warning and tip; no \"Sign in by email\" card for a feature that does not exist",
       "ok": true
     },
     {
       "name": "share: the address does not break inside \"clara-and-julian\"",
       "ok": true,
-      "detail": "27"
+      "detail": "52"
     },
     {
       "name": "a11y (axe-core 4.13.0): share has no serious/critical violations",
@@ -498,9 +517,9 @@
       "detail": "This uses 1 of your 3 changes. You'll have 2 left. (Only date moves of up to 7 days are free.)"
     },
     {
-      "name": "rights 0: §11.8 text with [SUPPORT EMAIL] and [SHOP NAME]",
+      "name": "rights 0: §11.8 text with the support email and the shop name (K33)",
       "ok": true,
-      "detail": "You've used all 3 name and date changes. Small typo fixes, surnames and moving your date by up to 7 days are still free. If your wedding moved further or something else needs to change, contact us at [SUPPORT EMAIL] or message [SHOP NAME] on Etsy with your order number."
+      "detail": "You've used all 3 name and date changes. Small typo fixes, surnames and moving your date by up to 7 days are still free. If your wedding moved further or something else needs to change, contact us at bkestudio@gmail.com or message BKE Studio on Etsy with your order number."
     },
     {
       "name": "rights 0: the change button is disabled",
@@ -555,11 +574,11 @@
       "ok": true
     },
     {
-      "name": "archive: rights card says names and date can no longer be changed",
+      "name": "a11y (axe-core 4.13.0): archived home has no serious/critical violations",
       "ok": true
     },
     {
-      "name": "a11y (axe-core 4.13.0): archived home has no serious/critical violations",
+      "name": "archive: Us says names and date can no longer be changed (no Change button)",
       "ok": true
     },
     {
@@ -609,9 +628,9 @@
       "ok": true
     },
     {
-      "name": "1280: three columns (rail, content, sticky preview)",
+      "name": "1280 (K29): two columns — editing with the tabs above it, the sticky live preview on the right",
       "ok": true,
-      "detail": "{\"nav\":{\"x\":0,\"y\":57,\"width\":240,\"height\":804},\"main\":{\"x\":240,\"y\":57,\"width\":560,\"height\":1280},\"pv\":{\"x\":837.5,\"y\":204.5,\"width\":390,\"height\":630.5}}"
+      "detail": "{\"nav\":{\"x\":20,\"y\":117,\"width\":720,\"height\":68},\"main\":{\"x\":20,\"y\":185,\"width\":720,\"height\":1230.359375},\"pv\":{\"x\":817,\"y\":275.5,\"width\":390,\"height\":542.5}}"
     },
     {
       "name": "1280: no phone Preview button",
@@ -633,7 +652,7 @@
     {
       "name": "960–1279: tabs above the content + preview column",
       "ok": true,
-      "detail": "{\"mnav\":{\"x\":0,\"y\":57,\"width\":540,\"height\":68},\"mpv\":{\"x\":567.5,\"y\":204.5,\"width\":390,\"height\":590.5}}"
+      "detail": "{\"mnav\":{\"x\":0,\"y\":117,\"width\":540,\"height\":68},\"mpv\":{\"x\":570,\"y\":275.5,\"width\":388,\"height\":502.5}}"
     },
     {
       "name": "video: MP4 written",

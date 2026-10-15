@@ -1,0 +1,86 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Vivian",
+      "full_name": "Vivian Grace"
+    },
+    {
+      "display_name": "Charles",
+      "full_name": "Charles Edward"
+    }
+  ],
+  "name_display": "Vivian & Charles",
+  "initials": "V&C",
+  "host_line": "Together with their families",
+  "date": "2027-12-18",
+  "ceremony_time": "16:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "The Grand Lumière Hotel",
+    "city": "Chicago",
+    "region": "Illinois",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The Mirror Ballroom"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "17:00",
+      "location": "The Gold Bar"
+    },
+    {
+      "label": "Reception",
+      "time": "18:30",
+      "location": "The Grand Salon"
+    }
+  ],
+  "dress_code": "Black tie",
+  "rsvp": {
+    "deadline": "2027-11-06",
+    "method": null
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": false,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "It began with jazz and champagne, and every evening since has led us to",
+    "items": [
+      {
+        "caption": "Jazz night"
+      },
+      {
+        "caption": "On the staircase"
+      },
+      {
+        "caption": "Here's to us"
+      }
+    ]
+  }
+}

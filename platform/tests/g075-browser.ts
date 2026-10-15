@@ -20,6 +20,7 @@ import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { loadChromium, startNext, waitForServer } from '../scripts/lib/browser.ts';
+import { builtDesignThemes, collectionDir } from './design-themes.ts';
 import { loadThemeEnv, REPO, ROOT } from '../scripts/lib/theme-env.ts';
 
 const require = createRequire(import.meta.url);
@@ -35,18 +36,12 @@ const chromium = loadChromium();
 const dataDir = mkdtempSync(path.join(os.tmpdir(), 'g075-browser-data-'));
 mkdirSync(OUT, { recursive: true });
 
-const ALL_THEMES = ['olive-ivory', 'blush-garden-rose', 'dusty-blue-champagne', 'mediterranean-lemon', 'vintage-airmail-love-letter'] as const;
+const ALL_THEMES = builtDesignThemes();
 const ONLY = (process.env.G075_THEMES ?? '').split(',').filter(Boolean);
 const THEMES = ALL_THEMES.filter((t) => !ONLY.length || ONLY.includes(t));
 /** The couple's panel journey (03 + 01's automatic switch) runs in the full run only. */
 const PANEL = !ONLY.length;
-const PHOTO: Record<string, string> = {
-  'olive-ivory': path.join(REPO, 'collections/01_Olive_Ivory/assets/gpt/photos/story_2.jpg'),
-  'blush-garden-rose': path.join(REPO, 'collections/03_Blush_Garden_Rose/assets/gpt/photos/story_2.jpg'),
-  'dusty-blue-champagne': path.join(REPO, 'collections/02_Dusty_Blue/assets/gpt/photos/story_2.jpg'),
-  'mediterranean-lemon': path.join(REPO, 'collections/05_Lemon_Mediterranean/assets/gpt/photos/story_2.jpg'),
-  'vintage-airmail-love-letter': path.join(REPO, 'collections/04_Vintage_Airmail/assets/gpt/photos/story_2.jpg'),
-};
+const PHOTO: Record<string, string> = Object.fromEntries(ALL_THEMES.map((id) => [id, path.join(collectionDir(id), 'assets/gpt/photos/story_2.jpg')]));
 const MESSAGE = 'What a day! Thank you for the laughter, the dancing and every kind word.\nWe will treasure it always.';
 const DAY = 86_400_000;
 const isoDay = (ms: number) => new Date(ms).toISOString().slice(0, 10);

@@ -211,10 +211,12 @@ try {
   await openSection(page, 'couple');
   await shot(page, '02_couple_390');
 
-  // Date & time: dates are shown as "Saturday, May 15, 2027" and "4:00 PM".
+  // Date & time: the date reads "Saturday, May 15, 2027"; the ceremony time is 4:00 PM (G087: the date style with its
+  // "4:00 PM" example sits under "More options", closed while nothing there needs attention).
   await openSection(page, 'date');
   const dateBody = await page.locator('#section-date-body').innerText();
-  check('date: shown as "Saturday, May 15, 2027" and "4:00 PM"', dateBody.includes('Saturday, May 15, 2027') && dateBody.includes('4:00 PM'));
+  check('date: shown as "Saturday, May 15, 2027", time 4:00 PM', dateBody.includes('Saturday, May 15, 2027') && (await page.inputValue('#f-ceremony_time')) === '16:00');
+  check('date: rare settings folded under "More options"', (await page.locator('[data-disclosure="date-more"] button[aria-expanded]').getAttribute('aria-expanded')) === 'false');
   check('date: time zone list filled', (await page.locator('#f-timezone option').count()) > 100);
   await shot(page, '03_date_390');
 
