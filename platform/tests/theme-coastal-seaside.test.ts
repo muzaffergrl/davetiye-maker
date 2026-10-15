@@ -753,7 +753,8 @@ test('inner pages (story, details, rsvp): the sea mist of W1.3–W1.5 behind the
     const bg = $('.page-bg');
     assert.equal(bg.length, 1, page);
     assert.equal(bg.attr('aria-hidden'), 'true');
-    assert.equal(bg.find('img.scene-img').attr('src'), `/themes/${ID}/img/sea-${MANIFEST.sea.files[0].w}.webp`);
+    // the mist only: the shoreline stays at the page's end (W1.3–W1.5 keep it at the bottom; QA G420)
+    assert.equal(bg.find('img.scene-img').attr('src'), `/themes/${ID}/img/mist-${MANIFEST.mist.files[0].w}.webp`);
     assert.equal(bg.find('source').attr('srcset'), `/themes/${ID}/img/sea_wide-${MANIFEST.sea_wide.files[0].w}.webp`);
     const img = bg.find('img.corner-tl');
     assert.equal(img.length, 1, `${page}: corner-tl`);
@@ -1085,7 +1086,7 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
       assert.equal($('[data-slot="venue"]').attr('data-photo-state'), 'user');
     }
   }
-  for (const p of [['site.js'], ['site.css'], ['thank-you.css'], ['img', 'env_cflap-873.webp'], ['img', 'closure-480.webp'], ['img', 'mask_portrait.png'], ['img', 'og-1200x630.jpg'], ['img', 'sea-570.webp'], ['img', 'wave-1200.webp']]) {
+  for (const p of [['site.js'], ['site.css'], ['thank-you.css'], ['img', 'env_cflap-873.webp'], ['img', 'closure-480.webp'], ['img', 'mask_portrait.png'], ['img', 'og-1200x630.jpg'], ['img', 'sea-460.webp'], ['img', 'wave-1200.webp']]) {
     const res = await getAsset(req(`/themes/${ID}/${p.join('/')}`), { params: Promise.resolve({ theme: ID, path: p }) });
     assert.equal(res.status, 200, p.join('/'));
   }

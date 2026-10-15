@@ -5,7 +5,7 @@
    (decoration, not a placeholder) */
 .photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
 .photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-                          background: var(--mist) url("img/sea-570.webp") 50% 30% / cover; }
+                          background: var(--mist) url("img/mist-460.webp") 50% 30% / cover; }
 .photo-slot > .ty-decor > img { width: 76%; height: auto; display: block; translate: 0 3%; rotate: -6deg;
                                 filter: drop-shadow(0 6px 7px rgba(40, 30, 20, .24)) drop-shadow(0 1px 1px rgba(40, 30, 20, .18)); }
 

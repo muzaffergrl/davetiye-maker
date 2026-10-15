@@ -406,7 +406,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .shore-end { position: relative; overflow: hidden; isolation: isolate; }
 .shore-end::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: url("img/shore-690.webp") 50% 100% / cover no-repeat;
+  background: url("img/shore-600.webp") 50% 100% / cover no-repeat;
   -webkit-mask: linear-gradient(transparent, #000 56%); mask: linear-gradient(transparent, #000 56%);
 }
 .foot, .next-sec, .closing { --corner: min(54vw, 320px); padding: 46px 16px calc(var(--corner) * 1.02 + var(--below, 0px)); text-align: center; }

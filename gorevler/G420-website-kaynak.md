@@ -2,7 +2,7 @@
 id: G420
 baslik: Tasarım 20 Coastal Seaside — platform teması
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-G420
 oncelik: 3
 bagimli: [G220, G038, G046, G052]
@@ -65,15 +65,21 @@ oranlar manifest `box_px`'ten, 71 copy anahtarı), `content.demo.json` (koleksiy
 **Komutlar (2026-10-15, bu konteyner, Chromium/Playwright):**
 - `kit_check --paket 5` 24/24 (hiza geçti), `--paket 2` 5/5.
 - `build_images.py`: denetimler geçti (pencereler şeffaf, kroma yeşili 0, örtüşme ≤ 0,01), klasör 2,3 MB.
-- `npm test` 993/993 (theme-coastal-seaside 37/37, tarayıcı testi atlanmadı), `npm run typecheck` temiz, `npm run build` temiz
+- `npm test` 993/993 (theme-coastal-seaside 37/37, tarayıcı testi atlanmadı; QA sonrası tema testi yeniden 37/37), `npm run typecheck` temiz, `npm run build` temiz
   (trace-check 16 tema).
-- `theme-check --theme coastal-seaside --stress`: **128 geçti, 0 hata, 0 uyarı**. İlk görünüm 390×844 DPR 3: index 904 KB,
-  home 922 KB (yer tutucu); örnek fotoğraflarla index 988 KB, home 1347 KB (sınır 1,5 MB). Azaltılmış hareket 186 ms.
+- `theme-check --theme coastal-seaside --stress`: **128 geçti, 0 hata, 0 uyarı**. İlk görünüm 390×844 DPR 3: index 897 KB,
+  home 910 KB (yer tutucu); örnek fotoğraflarla index 981 KB, home 1335 KB (sınır 1,5 MB). Azaltılmış hareket 157 ms.
+  (QA düzeltmelerinden sonraki son tur; üç tarayıcı denetimi de yeniden koşuldu.)
 - `g051-browser --theme coastal-seaside` 44/44; `final-smoke --theme coastal-seaside` 45/45.
 - Kendi QA: 360×640, 390×844, 430×932, 844×390, 1280×800 ekran görüntülerine ve açılış karelerine (150–4300 ms) bakıldı;
   bulunan sorunlar düzeltildi (story başlığının ekran dışına taşması, masaüstünde kıyı bandının "Tap to open" ve sayacın altına
   girmesi, stretched kart bandında benek çizgileri, home lombozlarının kayarken yazıyı ekran dışına taşıması).
-- qa-kontrol incelemesi: @@QA@@
+- qa-kontrol incelemesi (salt okunur, `compare_*`, README, site.css): **GEÇTİ** — başka tema düzeni yok, kodla çizim yok,
+  atlanan comp öğesi gerekçeli. İki önemli bulgu düzeltildi: (1) `sea` kırpımının sağ kenarında kumul otu/kabuk kalıntısı →
+  kırpımlar daraltıldı (`mist` x 420–880, kıyı x 0–600); (2) iç sayfalarda ilk ekranın kıyısı içeriğin ortasından geçiyordu →
+  story/details/rsvp ilk ekranı yalnız sis, kıyı sayfa sonunda (README'de sapma). Küçük bulgular README'ye işlendi (home
+  kapanışında iki GPT dalgasının üst üste binmesi, lomboz biçimi, compare_closure yönü); index'te zarf ile kıyı arasındaki
+  ~100 px boşluk bilinçli (ipucu kıyının üstünde kalsın).
 
 **Denenmedi:** gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
 
@@ -92,3 +98,4 @@ oranlar manifest `box_px`'ten, 71 copy anahtarı), `content.demo.json` (koleksiy
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
 - 2026-10-15 alindi: claude-G420
+- 2026-10-15 bitti, incelemeye gönderildi

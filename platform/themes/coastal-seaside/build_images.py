@@ -83,8 +83,8 @@ PH_MIN_LUM = 200   # yer tutucuda en koyu piksel en az bu: kümeden kabuk/ot kı
 PH_MAX_SAT = 40    # ... ve renkli dekor yok (max − min kanal, %99,9; sis zaten açık mavi ≈ 30)
 # telefon zemini (bg_page 1024×1536 kaynak pikseli; ızgarayla ölçüldü: sol üst kumsal y < 560'ta x ≤ 500, üstte dalga
 # x ≤ 680 y < 210; alt kıyı y ≥ 1130 bütün genişlikte; sağ alt kabuk kümesi x ≥ 690 y ≥ 880)
-SEA_TOP = (430, 230, 1000, 1080)     # deniz sisi (açık suluboya)
-SEA_SHORE = (0, 1120, 690, 1536)     # alttaki kıyı: köpüklü dalga + kum (kabuk kümesi hariç)
+SEA_TOP = (420, 230, 880, 1020)      # deniz sisi (açık suluboya; sağdaki kumul otu uçları dışarıda)
+SEA_SHORE = (0, 1130, 600, 1536)     # alttaki kıyı: köpüklü dalga + kum (kabuk/deniz camı kümesi x ≥ 610 dışarıda)
 SEA_BLEND = 120                      # px — iki kırpımın yumuşak geçiş bandı
 SEA_WIDE = (0, 560, 1024, 1110)      # geniş ekran: kümesiz tek geniş sis (en/boy 1,86)
 # comp W1.1 ölçümü (comps/web_1_envelope.png, 1024×1536): zarfın kum gövdesi (zemin mavisinden R ≥ B ile ayrılır) x 145–879,

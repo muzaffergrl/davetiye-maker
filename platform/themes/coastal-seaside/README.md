@@ -17,7 +17,7 @@ için kart yolu hesabı); görünüş, renkler, süs konumları, açılış, sto
 | `theme.json` | ad "Coastal Seaside", 5 sayfa, 5 foto alanı (oranlar = `img/manifest.json` `photo_slots.*.box_px`), 71 copy anahtarı |
 | `content.demo.json` | `collections/20_Coastal_Seaside/content.demo.json`'ın birebir kopyası (servis edilmez) |
 | `index.html` | kapalı zarf → dokun → suluboya dalga (GPT `wave.png`) ekranı soldan sağa geçer ve kabuk + sicimi önünde taşıyıp götürür, dalgalı kapak yukarı açılır, kart gelgit gibi yükselir, öne gelir → home (view transition) |
-| `home.html` | hero (W1.2: kart + lomboz foto, isimler, gün · tarih, mekân, şehir/bölge, geri sayım, okyanus mavisi RSVP hapı), davet kartı (`invitation_card`, 3 dilim; AY \| gün \| YIL), tek "Kindly reply by" satırı, takvime ekle, iki lomboz (story_1 yuvarlak lombozda → Our Story; mekân geniş oval lombozda → The Day + programın ilk 4 satırı; ikisi kendi kenarından kayarak gelir), kapanış (kıyı + sağ alt küme) |
+| `home.html` | hero (W1.2: kart + lomboz foto, isimler, gün · tarih, mekân, şehir/bölge, geri sayım, okyanus mavisi RSVP hapı), davet kartı (`invitation_card`, 3 dilim; AY \| gün \| YIL), tek "Kindly reply by" satırı, takvime ekle, iki lomboz (story_1 dik oval lombozda → Our Story; mekân geniş oval lombozda → The Day + programın ilk 4 satırı; ikisi kendi kenarından kayarak gelir), kapanış (kıyı + sağ alt küme) |
 | `story.html` | W1.3: başlık + alt başlık + giriş cümlesi; üç pirinç lomboz zikzak (sol, sağ, sol), her biri kendi kenarından kayarak gelir ve hafifçe döner (`slide-l`/`slide-r`), yanında bir kumsal parçası (kabuk, deniz camı, deniz yıldızı), altında el yazısı başlık |
 | `details.html` | W1.4: Order of the Day kartı (`info_card`, 3 dilim; saat · ETKİNLİK · yer, satır aralarında GPT kabuk sırası + iki ince çizgi), takvime ekle, mekân (geniş oval lomboz), kabuk sırası + dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
 | `rsvp.html` | W1.5: RSVP kartı (`info_card`): başlık, kabuk sırası, son tarih, hap, bekleme satırı, "With love," + isimler, **kartın dibindeki dalgada zarfın kabuğu**; platform yanıt formu (G042 + G051 soruları + G069 misafir adları), kapanış |
@@ -53,11 +53,13 @@ zaten açık mavi) ölçer.
 - **Hiza**: `kit_check` geçiyor (sol +0,10 · sağ +0,49 · alt +1,11 %) — dönüşüm yok.
 - **Kapanış** (`closure.png`, kapakla **taşınmaz**): çapa = V kapağın ucu (`kapak_kes` `tip`); W1.1 comp'ta ölçülen zarf kutusu
   (x 145–879, y 575–1038) ve kabuk + sicim kutusu (x 402–630, y 800–912) → genişlik / zarf 0,3106, merkez uca göre
-  (+0,0095, −0,0281) × zarf genişliği (`manifest.closure.comp`); `previews/g420/compare_closure.jpg`: tema | comp.
+  (+0,0095, −0,0281) × zarf genişliği (`manifest.closure.comp`); `previews/g420/compare_closure.jpg`: solda tema (kapalı sahne), sağda W1.1 comp'un zarf bölgesi.
 - **Dalga** (`wave.png`, ek parça): alfa kutusuna kırpılır (1384 × 442), 640/1200; ilk görünümde yüklenir (açılışın parçası).
-- **Zeminler**: telefon `sea` = bg_page'in iki kümesiz kırpımı (deniz sisi x 430–1000 y 230–1080 + alttaki kıyı x 0–690
-  y 1120–1536, kabuk kümesi hariç) 120 px yumuşak geçişle; geniş ekran `sea_wide` (x 0–1024, y 560–1110) + zarf sayfasında
-  alt bantta `shore`; uzun sayfaların sonu `shore` (üstten maskeyle beliren). Kumsal kümeleri hep ayrı katman.
+- **Zeminler**: `mist` = bg_page'in kümesiz deniz sisi (x 420–880, y 230–1020; kumul otu uçları ve kabuk kümesi dışarıda —
+  qa-kontrol ilk kırpımda kalıntı buldu, daraltıldı); `sea` = `mist` + alttaki kıyı (x 0–600, y 1130–1536) 120 px yumuşak
+  geçişle, **yalnız home hero'su** (tek ekranlık W1.2); zarf sayfası `mist` + ayrı alt bant `shore`; iç sayfaların ilk ekranı
+  yalnız `mist` (kıyı içeriğin ortasından geçmesin, W1.3–W1.5'te kıyı sayfa dibinde), kıyı sayfa sonunda (`shore-end`);
+  geniş ekran `sea_wide` (x 0–1024, y 560–1110). Kumsal kümeleri hep ayrı katman.
 - **Kartlar**: `free_zone` kâğıdın kendi benekleri **ölçümden** silinerek (⅓ ölçekte 9 px medyan; görsel değişmez) — yoksa her
   benek "boyalı süs" sayılıyordu. 3 dilim: davet kartı %46–52, bilgi kartı %8–81 (kartın bütün genişliğinde temiz satırlar).
   **Orta bant gerilmez**: gerilen kum benekleri dikey çizgiye dönüşüyordu → `<ad>_band` = düz bant + dikey aynası (dikişsiz),
@@ -92,7 +94,7 @@ Kıyı dalgasının üstüne düşen hero yazıları (geri sayım, hap; W1.2 de 
 ### index ← W1.1 `web_1_envelope.png`
 | W1 öğesi | Şablon | Not |
 |---|---|---|
-| deniz sisi, altta köpüklü dalga + kum | `.scene-bg` `sea` (telefon) / `sea_wide` + `.shore-band` (geniş) | bg_page 2:3 telefonda kümeleri keserdi: zemin kümesiz kırpımlardan |
+| deniz sisi, altta köpüklü dalga + kum | `.scene-bg` `mist` + `.shore-band` (`shore`, ipucunun altında) / geniş: `sea_wide` | bg_page 2:3 telefonda kümeleri keserdi: zemin kümesiz kırpımlardan; kıyı yazının altına girmesin diye ayrı bant |
 | sol üst kumsal köşesi, sağ alt kabuk kümesi | `decor_tl` / `decor_br` ayrı katman | ekranda bütün |
 | sağ üstte deniz camı + deniz yıldızı | `.float.f-glass` (accent_2), `.float.f-star` (accent_3) | yavaş "nefes"; zarfa/yazıya değerse gizlenir |
 | "YOU ARE INVITED" | `.env-head .kicker` | |
@@ -123,7 +125,7 @@ Kıyı dalgasının üstüne düşen hero yazıları (geri sayım, hap; W1.2 de 
 | üç yuvarlak pirinç lomboz, zikzak (sol, sağ, sol) | `.windows-row .pane.side-left/right` (frame_portrait + foto) | **sapma (GPT parçası):** `frame_portrait` pencere oranı 0,77 — comp'taki gibi tam daire değil, dik oval; ölçekle daire yapılmadı (perçinler basık görünürdü). Telefonda da zikzak; çerçeve 52vw (pencere 40vw) |
 | lomboz yanında kabuk/mercan/deniz camı kümeleri | `.beside` (accent_1, accent_2, accent_3; her lombozun sayfa ortasına bakan yanında) | küme yerine tek parça (GPT accent'leri) |
 | el yazısı başlık lombozun altında | `figcaption` | sayfa ortasına doğru taşabilir, ekran dışına asla |
-| köşe kümeleri, kıyı | `.page-bg` ilk ekranda; `decor_br` + kıyı sayfa sonunda | |
+| köşe kümeleri, kıyı | `.page-bg` ilk ekranda (sis + sol üst küme); `decor_br` + kıyı sayfa sonunda | **sapma:** comp tek ekran; uzun sayfada kıyı ilk ekranın değil sayfanın dibinde (içeriğin ortasından geçmesin) |
 
 ### details ← W1.4 `web_4_details.png`
 | W1 öğesi | Şablon | Not |
@@ -164,6 +166,7 @@ Görünür her sabit metin `data-copy` taşır (71 standart anahtar, `theme.json
 coastal-seaside --check` temiz). Formda "Number of guests"in hemen altında `<template data-rsvp-party>`.
 
 ## Bilinen sınırlar
+- Home'un alt kapanışında `decor_br`'nin kendi dalga kenarı `shore` zemininin dalgasıyla üst üste biner (iki GPT dalgası; dikiş yok).
 - Story lombozları dik oval (GPT `frame_portrait` 0,77); comp'ta daire. Önerilen GPT düzeltmesi Sonuç'ta.
 - Davet kartının düz bandı dar (%46–52): uzun içerikte bant çok kez döşenir; ayna nedeniyle benekler simetrik çiftler yapar
   (yakından bakınca fark edilir).
