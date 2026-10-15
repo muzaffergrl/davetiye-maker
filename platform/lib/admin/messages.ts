@@ -1,151 +1,115 @@
-// Ready-to-send Etsy messages for the shop (G087, K30/K32). Titles and "when" are for the shop (Turkish, the admin's
-// language); the bodies go to buyers (English). The admin fills in the buyer's details and copies the text
-// into the Etsy conversation of the order (no e-mail is sent from the platform yet). English, plain text, short lines,
-// only features that work today (docs/05 §E). Undecided business facts stay visible placeholders ([SUPPORT EMAIL] …):
-// they come from lib/marketing/config.ts, so deciding them there updates every message.
-// G091 (buyer journey) owns the wording; keep ids stable — the admin and its tests refer to them.
+// Ready-to-send Etsy messages for the shop (G087 + G091, K30/K32/K33). The texts are G091's (buyer journey,
+// docs/19_ALICI_YOLCULUGU.md §4.5); their single source is ./message-templates.json — docs/19 carries a copy between
+// the g091:templates markers and tests/g087-admin.test.ts keeps the two identical. Bodies go to buyers (English); the
+// title and "when" the admin shows are Turkish (the shop's language, TITLES_TR below).
+//
+// A text that still holds an unfilled {placeholder} or an undecided [POLICY] cannot be copied from the admin (docs/19
+// §4.6): nothing half-written ever reaches a buyer. Decided business facts (shop name …) come from lib/marketing/config.ts.
 
 import { MARKETING } from '../marketing/config.ts';
+import RAW from './message-templates.json' with { type: 'json' };
 
-export interface MessageVars {
-  names: string;
-  order: string | null;
-  siteUrl: string;
-  /** Only right after a new link was made (shown once); otherwise the template asks for it to be filled in. */
-  editUrl?: string | null;
-  startUrl: string;
-  changesLeft?: number | null;
+export type MessagePlaceholder = 'order' | 'names' | 'design' | 'site_url' | 'edit_url' | 'start_url' | 'shop' | 'changes_left' | 'online_until';
+
+interface RawTemplate {
+  id: string;
+  title: string;
+  when: string;
+  placeholders: MessagePlaceholder[];
+  body: string[];
+  note?: string;
 }
 
 export interface MessageTemplate {
   id: string;
+  /** Turkish title for the shop (falls back to G091's English title). */
   title: string;
-  /** When to send it (shown to the shop in Turkish, not sent). */
+  /** When to send it (Turkish when known, else G091's English text). */
   when: string;
-  /** Needs a fresh edit link: only offered right after "New edit link". */
-  needsEditUrl?: boolean;
-  body: (v: MessageVars) => string;
+  placeholders: MessagePlaceholder[];
+  /** Needs a fresh edit link: offered only right after "Yeni düzenleme linki". */
+  needsEditUrl: boolean;
+  /** G091's note for the shop (never sent). */
+  note: string | null;
+  body: string[];
 }
 
-const sign = () => `Warmly,\n${/^\[.*\]$/.test(MARKETING.etsy.shopName) ? MARKETING.brand.name : MARKETING.etsy.shopName}`;
+const TITLES_TR: Record<string, [string, string]> = {
+  welcome_start: ['Hoş geldin + başlatma linki', 'İsteğe bağlı, siparişten hemen sonra (Etsy\'nin otomatik dijital ürün mesajı linki zaten veriyor) ya da alıcı başlamadan yazarsa.'],
+  start_link_reminder: ['Hatırlatma: sitenizi başlatın', 'Siparişten ~3 gün sonra bu siparişle site açılmadıysa, ya da alıcı PDF\'i/linki bulamıyorsa. Bir kez gönderin.'],
+  publish_blocked_pending: ['Sipariş onaylanıyor (Publish bekliyor)', 'Alıcı Publish\'in neden çalışmadığını soruyor; sipariş henüz onaylanmadı.'],
+  order_confirmed: ['Sipariş onaylandı — yayınlayabilir', 'Siparişi burada onayladıktan hemen sonra. Platform alıcıya kendiliğinden haber vermez.'],
+  how_to_publish: ['Nasıl yayınlanır / misafirler değişikliği görmüyor', 'Alıcı nasıl yayınlayacağını soruyor ya da misafirlerin bir değişikliği görmediğini söylüyor.'],
+  new_edit_link: ['Yeni düzenleme linki (kayıp link)', '"Yeni düzenleme linki"nden sonra. Yalnız bu siparişin kendi Etsy konuşmasında gönderin.'],
+  order_already_used: ['"Bu siparişin zaten sitesi var" hatası', 'Alıcı başlatma sayfasında "This order already has a website" gördüğünü söylüyor.'],
+  wrong_design_started: ['Başka tasarımla başlamış', 'Alıcı satın aldığından farklı bir tasarımla site açmış.'],
+  extra_change_granted: ['Ek isim/tarih hakkı eklendi', 'Hak ekledikten sonra (ör. düğün gerçekten ertelendi).'],
+  date_moved: ['Düğün tarihi değişti', 'Alıcı düğünün ertelendiğini/taşındığını söylüyor.'],
+  photo_upload_help: ['Fotoğraf yüklenmiyor', 'Alıcı bir fotoğrafın yüklenmediğini ya da açılmadığını söylüyor.'],
+  guest_access_help: ['Misafir siteyi açamıyor', 'Alıcı bir misafirin linki ya da QR kodu açamadığını söylüyor.'],
+  general_help: ['Genel yardım', 'Başka şablonun karşılamadığı her soru.'],
+  archive_notice: ['Site yakında kapanıyor', '"Yayında kalır" tarihinden ~30 gün önce (panelin Home\'u da hatırlatıyor; e-posta gitmiyor).'],
+  after_wedding_tip: ['Düğün sonrası: teşekkür sayfası', 'İsteğe bağlı, düğünden birkaç gün sonra. Yalnız sipariş/destek, reklam yok (Etsy mesaj kuralları).'],
+  review_request: ['Yorum isteği (bir kez)', 'Sipariş başına bir kez; site yayında, ilk yanıtlar gelmiş ve açık sorun yokken. Herkese aynı metin.'],
+  refund_or_problem: ['İade isteği / memnun olmayan alıcı', 'Alıcı iade istiyor ya da ürünün işine yaramadığını söylüyor.'],
+  delete_data: ['Sitemi ve verilerimi silin', 'Alıcı sitenin ya da misafir verilerinin silinmesini istiyor.'],
+};
 
-export const MESSAGE_TEMPLATES: MessageTemplate[] = [
-  {
-    id: 'order_confirmed',
-    title: 'Sipariş onaylandı — yayınlayabilir',
-    when: 'Siparişi burada onayladıktan hemen sonra.',
-    body: (v) =>
-      [
-        `Hi ${v.names}!`,
-        '',
-        `Thank you for your order${v.order ? ` (#${v.order})` : ''}. We have confirmed it, so your wedding website can now go live.`,
-        '',
-        'Open your editor with the private link you saved when you started, then tap Publish. If the editor was already open, refresh the page first.',
-        '',
-        `Your website address: ${v.siteUrl}`,
-        '',
-        'Lost your editor link? Just reply here and we will send you a new one.',
-        '',
-        sign(),
-      ].join('\n'),
-  },
-  {
-    id: 'start_link_reminder',
-    title: 'Nasıl başlanır (başlatma linki)',
-    when: 'Alıcı sipariş verdi ama siteyi henüz başlatmadı ya da nasıl başlayacağını soruyor.',
-    body: (v) =>
-      [
-        'Hi!',
-        '',
-        `Thank you for your order${v.order ? ` (#${v.order})` : ''}. You can set up your wedding website on your phone:`,
-        '',
-        `1. Open ${v.startUrl}`,
-        '2. Enter your Etsy order number and your email.',
-        '3. Save the private editor link it gives you (it is the key to your website).',
-        '4. Add your names, date and a photo, then press Publish.',
-        '',
-        'No app and no account needed. Your website stays private until you publish it.',
-        '',
-        sign(),
-      ].join('\n'),
-  },
-  {
-    id: 'new_edit_link',
-    title: 'Yeni düzenleme linki',
-    when: '"Yeni düzenleme linki"nden sonra — alıcı linkini kaybetti. Eski link artık çalışmaz.',
-    needsEditUrl: true,
-    body: (v) =>
-      [
-        `Hi ${v.names}!`,
-        '',
-        'Here is a new private link to edit your wedding website:',
-        v.editUrl ?? '[NEW EDIT LINK]',
-        '',
-        'Please save it somewhere safe (for example your notes app). Anyone with this link can edit your website, so keep it private. Your old link no longer works; your website, photos and RSVP replies are unchanged.',
-        '',
-        sign(),
-      ].join('\n'),
-  },
-  {
-    id: 'extra_change_granted',
-    title: 'Ek isim/tarih hakkı eklendi',
-    when: 'Alıcıya isim/tarih hakkı ekledikten sonra (ör. düğün ertelendi).',
-    body: (v) =>
-      [
-        `Hi ${v.names}!`,
-        '',
-        `We have added ${v.changesLeft === 1 ? 'a name/date change' : 'name/date changes'} to your website${typeof v.changesLeft === 'number' ? ` — you now have ${v.changesLeft} left` : ''}.`,
-        'Open your editor, go to Edit, then Us (names) or Day & place (date), tap Change, and publish.',
-        '',
-        sign(),
-      ].join('\n'),
-  },
-  {
-    id: 'how_to_publish',
-    title: 'Nasıl yayınlanır ve paylaşılır',
-    when: 'Alıcı siteyi nasıl yayına alacağını ya da misafirlere nasıl göndereceğini soruyor.',
-    body: (v) =>
-      [
-        `Hi ${v.names}!`,
-        '',
-        'To make your website live: open your editor and tap Publish at the top. After that every change you make is saved as a draft; tap "Publish changes" when you want guests to see it.',
-        '',
-        `To share it: open Share in the editor. You can copy the link (${v.siteUrl}) or show the QR code. Guests need no app or account; they open the link and can reply on the RSVP page.`,
-        '',
-        sign(),
-      ].join('\n'),
-  },
-  {
-    id: 'publish_blocked_pending',
-    title: 'Sipariş henüz onaylanmadı',
-    when: 'Alıcı Publish düğmesinin neden açılmadığını soruyor (sipariş onay bekliyor).',
-    body: (v) =>
-      [
-        `Hi ${v.names}!`,
-        '',
-        'Your website is safe and everything you set up is saved. Publishing opens as soon as we have confirmed your Etsy order — we are on it.',
-        'Meanwhile you can keep adding your details and photos; nothing is lost.',
-        '',
-        sign(),
-      ].join('\n'),
-  },
-  {
-    id: 'general_help',
-    title: 'Genel yardım',
-    when: 'Diğer sorular.',
-    body: (v) =>
-      [
-        `Hi ${v.names}!`,
-        '',
-        'Happy to help. Everything is done in your editor (the private link you saved): Edit for your details and photos, Guests for RSVP replies, Share for your link and QR code.',
-        '',
-        'If something does not look right, send us a screenshot here and we will sort it out.',
-        '',
-        sign(),
-      ].join('\n'),
-  },
-];
+export const MESSAGE_TEMPLATES: MessageTemplate[] = (RAW as RawTemplate[]).map((t) => ({
+  id: t.id,
+  title: TITLES_TR[t.id]?.[0] ?? t.title,
+  when: TITLES_TR[t.id]?.[1] ?? t.when,
+  placeholders: t.placeholders,
+  needsEditUrl: t.placeholders.includes('edit_url'),
+  note: t.note ?? null,
+  body: t.body,
+}));
+
+/** The raw G091 templates (tests compare them with the copy in docs/19). */
+export const RAW_MESSAGE_TEMPLATES = RAW as RawTemplate[];
 
 export function messageTemplate(id: string): MessageTemplate | null {
   return MESSAGE_TEMPLATES.find((t) => t.id === id) ?? null;
+}
+
+export interface MessageVars {
+  names: string;
+  order: string | null;
+  design: string;
+  siteUrl: string;
+  startUrl: string;
+  /** Only right after a new link was made (shown once). */
+  editUrl?: string | null;
+  changesLeft?: number | null;
+  /** Long date ("February 11, 2028"), once known. */
+  onlineUntil?: string | null;
+}
+
+export interface RenderedMessage {
+  text: string;
+  /** What still has to be decided or filled before it can be sent ({placeholder} or [POLICY]); empty = ready. */
+  missing: string[];
+}
+
+function shopName(): string {
+  return /^\[.*\]$/.test(MARKETING.etsy.shopName) ? MARKETING.brand.name : MARKETING.etsy.shopName;
+}
+
+export function renderMessage(t: MessageTemplate, v: MessageVars): RenderedMessage {
+  const values: Record<MessagePlaceholder, string | null> = {
+    order: v.order,
+    names: v.names || null,
+    design: v.design || null,
+    site_url: v.siteUrl || null,
+    edit_url: v.editUrl ?? null,
+    start_url: v.startUrl || null,
+    shop: shopName(),
+    changes_left: typeof v.changesLeft === 'number' ? String(v.changesLeft) : null,
+    online_until: v.onlineUntil ?? null,
+  };
+  const text = t.body
+    .join('\n\n')
+    .replace(/\{([a-z_]+)\}/g, (all, key: string) => (key in values && values[key as MessagePlaceholder] !== null ? values[key as MessagePlaceholder]! : all));
+  const missing = [...new Set([...(text.match(/\{[a-z_]+\}/g) ?? []), ...(text.match(/\[[A-Z][A-Z0-9 /&'.-]*\]/g) ?? [])])];
+  return { text, missing };
 }

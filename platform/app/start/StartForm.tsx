@@ -552,6 +552,7 @@ function ClaimForm({
         {busy ? 'Creating your website…' : 'Create my website'}
       </button>
       <p className={styles.small}>Your website starts as a private draft. Nobody can see it until you press Publish in the editor.</p>
+      <p className={styles.small}>Need help? Message us on Etsy with your order number.</p>
     </form>
   );
 }
@@ -684,6 +685,7 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
               </a>
             ) : null}
           </div>
+          <p className={styles.small} data-copy-later="">You can copy this link again later in your editor: Share → Your private edit link.</p>
           <p className={styles.copyStatus} aria-live="polite">
             {copy === 'copied' ? 'The link is copied. Paste it somewhere safe.' : copy === 'failed' ? 'Copying did not work. Select the link above and copy it.' : ''}
           </p>
@@ -703,8 +705,9 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
           </p>
         ) : null}
         <button type="button" className={styles.linkButton} onClick={onStartOver}>
-          Start another website
+          Start with a different order
         </button>
+        <p className={styles.small}>One order starts one website. Questions? Message us on Etsy with your order number.</p>
       </section>
     </div>
   );

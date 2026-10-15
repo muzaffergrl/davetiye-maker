@@ -531,11 +531,26 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
         </section>
         <section>
           <h3 className={styles.subTitle}>Can my partner edit too?</h3>
-          <p>Yes: share your edit link with your partner (Share → Your edit link). Anyone with that link can edit, so keep it private.</p>
+          <p>Yes: share your edit link with your partner (Share → Your private edit link → Copy). Anyone with that link can edit, so keep it private.</p>
+        </section>
+        <section>
+          <h3 className={styles.subTitle}>I lost my edit link</h3>
+          <p>
+            While this page is open, copy it again under Share → Your private edit link. If it is lost, message {PANEL_BRAND.shopName} on
+            Etsy with your order number: we send you a new link and the old one stops working.
+          </p>
         </section>
         <section>
           <h3 className={styles.subTitle}>Do guests see my changes right away?</h3>
-          <p>Your changes are saved as you type. Guests see them after you tap “Publish changes”.</p>
+          <p>Your changes are saved as you type. Guests see them after you publish: when you see “Unpublished changes”, tap Review, then Publish changes.</p>
+        </section>
+        <section>
+          <h3 className={styles.subTitle}>Can guests change their reply?</h3>
+          <p>Yes: they send the form again. You see both replies under Guests and can remove the old one.</p>
+        </section>
+        <section>
+          <h3 className={styles.subTitle}>Will I get an email when someone replies?</h3>
+          <p>Not yet: new replies show under Guests (with a “New” mark) the next time you open your editor.</p>
         </section>
         <section>
           <h3 className={styles.subTitle}>Need help?</h3>

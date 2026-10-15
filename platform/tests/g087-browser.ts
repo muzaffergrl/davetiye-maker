@@ -180,7 +180,7 @@ try {
     await phone.waitForSelector('[data-todo="confirm"]', { state: 'detached' });
     check('after confirm: the to-do box is gone', true);
     const msg = await phone.inputValue('#msg-text');
-    check('the "order confirmed" message is ready, filled in', /Hi Emma & Liam!/.test(msg) && /#3456789012/.test(msg) && msg.includes(`/${slug}`), msg.slice(0, 120));
+    check('the "order confirmed" message is ready, filled in', /Emma & Liam/.test(msg) && /3456789012/.test(msg) && msg.includes(`/${slug}`) && !/[{}]/.test(msg), msg.slice(0, 160));
     check('history shows the confirmation', (await phone.locator('section[aria-labelledby="history-title"]').innerText()).includes('Sipariş onaylandı'));
   });
 

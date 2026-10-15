@@ -74,7 +74,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'what-can-i-change',
           q: 'What can I change?',
-          a: `You can change all of your wedding details. That covers names, date, time and time zone, venue and map link, the order of the day (up to ${LIMITS.scheduleRows} rows), your story, ${LIMITS.photoSpots} photos, questions and answers, your RSVP deadline and up to ${LIMITS.rsvpQuestions} RSVP questions. You can also switch optional sections on or off. [Full list](/features#editing).`,
+          a: `You can change all of your wedding details. That covers names, date, time and time zone, venue and map link, the order of the day (up to ${LIMITS.scheduleRows} rows), your story, ${LIMITS.photoSpots} photos, questions and answers, your RSVP deadline and up to ${LIMITS.rsvpQuestions} RSVP questions. You can also switch optional sections on or off and put the design's headings in your own words. [Full list](/features#editing).`,
         },
         {
           id: 'colors-fonts',
@@ -94,7 +94,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'lost-link',
           q: 'What if I lose my edit link?',
-          a: `${cfg.policies.lostLink}. Your edit link is shown once, when you start your website, so save it somewhere safe right away: your notes app or an email to yourself. Anyone who has the link can edit your website. [Contact us](/contact) if it is lost.`,
+          a: `Message us on Etsy with your order number: we send you a new link and the old one stops working. ${cfg.policies.lostLink}. While your editor is open you can copy the link again under Share, so save it somewhere safe. Anyone who has the link can edit your website. [Contact us](/contact).`,
         },
         {
           id: 'two-editors',
@@ -178,7 +178,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'take-offline',
           q: 'Can we take our website offline?',
-          a: `Yes. Tap Unpublish in your panel and the website stops opening for guests right away; your content and replies stay in your panel. Publish again whenever you like. Photos of an unpublished website are not shown to anyone. [See the features](/features#editing).`,
+          a: `Yes. Open Share in your panel and tap Take the website offline: it stops opening for guests right away; your content and replies stay in your panel. Publish again whenever you like. Photos of an unpublished website are not shown to anyone. [See the features](/features#editing).`,
         },
         {
           id: 'delete-data',

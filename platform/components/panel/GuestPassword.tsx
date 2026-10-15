@@ -201,7 +201,7 @@ export function GuestPasswordCard({
               </Button>
             </div>
           ) : null}
-          <p className={own.tip}>Add the password to your invitation message, so your guests can open your website.</p>
+          <p className={own.tip}>Add the password to your invitation message, so your guests can open your website. Guests type it once; their browser remembers it.</p>
           <p className={styles.hint}>
             Guests see a page with your names and a password box — no date, place or photos. They enter it once per phone. Your
             editor and its preview always open without it.

@@ -3,7 +3,7 @@
 // wedding date while it is still the design's sample.
 import { before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpSync } from 'node:fs';
+import { cpSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { POST as sessionPost, DELETE as sessionDelete } from '../app/api/admin/session/route.ts';
 import { GET as sitesGet } from '../app/api/admin/sites/route.ts';
@@ -17,7 +17,7 @@ import {
   readCookie,
   verifySessionToken,
 } from '../lib/admin/auth.ts';
-import { MESSAGE_TEMPLATES, messageTemplate } from '../lib/admin/messages.ts';
+import { MESSAGE_TEMPLATES, messageTemplate, RAW_MESSAGE_TEMPLATES, renderMessage } from '../lib/admin/messages.ts';
 import { countSites, filterSites, siteHistory, summarizeSite, themeName } from '../lib/admin/summary.ts';
 import { setClaimRateLimiter } from '../lib/claim/limits.ts';
 import type { ContentRecord } from '../lib/content/types.ts';
@@ -30,7 +30,7 @@ import { MARKETING } from '../lib/marketing/config.ts';
 import { launchProblems } from '../lib/marketing/placeholders.ts';
 import { canEdit, createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { FakeBlobStore } from './fake-blob.ts';
-import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
+import { demoContent, PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
 
 const BASE = 'http://localhost:3000';
 const PASSWORD = 'correct horse battery staple';
@@ -263,19 +263,39 @@ test('summary, filter and search', async () => {
   assert.ok(siteHistory(fresh).some((h) => h.text === 'İlk kez yayınlandı'));
 });
 
-test('message templates: stable ids, filled in, no unverified promises', () => {
+test('message templates: G091 texts, one source (docs/19 copy identical), filled in, unsent while something is undecided', () => {
   const ids = MESSAGE_TEMPLATES.map((t) => t.id);
-  for (const id of ['order_confirmed', 'start_link_reminder', 'new_edit_link', 'extra_change_granted', 'how_to_publish', 'publish_blocked_pending', 'general_help']) {
+  for (const id of ['order_confirmed', 'start_link_reminder', 'new_edit_link', 'extra_change_granted', 'how_to_publish', 'publish_blocked_pending', 'general_help', 'delete_data']) {
     assert.ok(ids.includes(id), id);
   }
-  const vars = { names: 'Emma & Liam', order: '3456789012', siteUrl: 'https://x.example/emma-and-liam', startUrl: 'https://x.example/start?theme=t', editUrl: 'https://x.example/edit/emma-and-liam?k=abc', changesLeft: 2 };
+  // docs/19 §4.5 carries the same JSON between its markers (the platform file is the source)
+  const doc = readFileSync(path.join(REPO_ROOT, 'docs/19_ALICI_YOLCULUGU.md'), 'utf8');
+  const block = /<!-- g091:templates:start -->[\s\S]*?```json\n([\s\S]*?)```[\s\S]*?<!-- g091:templates:end -->/.exec(doc);
+  assert.ok(block, 'docs/19 template block');
+  assert.deepEqual(JSON.parse(block![1]), RAW_MESSAGE_TEMPLATES, 'docs/19 copy == platform/lib/admin/message-templates.json');
+  const vars = {
+    names: 'Emma & Liam',
+    order: '3456789012',
+    design: 'Blush Garden Rose',
+    siteUrl: 'https://x.example/emma-and-liam',
+    startUrl: 'https://x.example/start?theme=t',
+    editUrl: 'https://x.example/edit/emma-and-liam?k=abc',
+    changesLeft: 2,
+    onlineUntil: 'September 18, 2028',
+  };
   for (const t of MESSAGE_TEMPLATES) {
-    const text = t.body(vars);
-    assert.doesNotMatch(text, /\{[a-z_]+\}|undefined|null/, t.id);
-    assert.doesNotMatch(text, /within \d+ (minutes|hours)|24\/7|guarantee/i, `${t.id}: no SLA or guarantee`);
+    const { text, missing } = renderMessage(t, vars);
+    assert.doesNotMatch(text, /undefined|null/, t.id);
+    for (const m of missing) assert.match(m, /^\[[A-Z]/, `${t.id}: only undecided [POLICY] placeholders may be left (${m})`);
+    assert.doesNotMatch(text, /24\/7|guarantee/i, `${t.id}: no guarantee`);
+    assert.equal(t.needsEditUrl, t.placeholders.includes('edit_url'));
   }
-  assert.match(messageTemplate('new_edit_link')!.body(vars), /k=abc/);
-  assert.match(messageTemplate('order_confirmed')!.body(vars), /#3456789012/);
+  assert.match(renderMessage(messageTemplate('new_edit_link')!, vars).text, /k=abc/);
+  assert.match(renderMessage(messageTemplate('order_confirmed')!, vars).text, /3456789012/);
+  assert.match(renderMessage(messageTemplate('order_confirmed')!, vars).text, /BKE Studio/, 'K33 shop name');
+  // without the fresh link, the "new edit link" text cannot be sent
+  assert.deepEqual(renderMessage(messageTemplate('new_edit_link')!, { ...vars, editUrl: null }).missing, ['{edit_url}']);
+  assert.ok(MESSAGE_TEMPLATES.every((t) => !/[a-z]/.test(t.title.slice(0, 1)) || t.title.length > 0));
 });
 
 // --- adapters ---------------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@ import { ArrowLeft, Check, Copy, ExternalLink, Hourglass } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState, type ReactNode } from 'react';
-import { MESSAGE_TEMPLATES } from '../../lib/admin/messages.ts';
+import { MESSAGE_TEMPLATES, renderMessage } from '../../lib/admin/messages.ts';
 import type { AdminHistoryEntry, AdminSiteSummary } from '../../lib/admin/view.ts';
 import styles from './admin.module.css';
 import { StateBadges } from './badges.tsx';
@@ -15,6 +15,12 @@ import { day, stamp } from './format.ts';
 const ETSY_ORDERS_URL = 'https://www.etsy.com/your/orders/sold';
 
 type Status = { kind: 'ok' | 'err'; text: string } | null;
+
+/** "2028-09-18" → "September 18, 2028" (the buyer-facing messages are English, US style like the sites' default). */
+function longEnglishDate(iso: string): string {
+  const t = Date.parse(`${iso}T12:00:00Z`);
+  return Number.isFinite(t) ? new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(t) : iso;
+}
 
 async function copyText(value: string): Promise<boolean> {
   try {
@@ -93,7 +99,17 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
   const templates = useMemo(() => MESSAGE_TEMPLATES.filter((t) => !t.needsEditUrl || editUrl), [editUrl]);
   const [templateId, setTemplateId] = useState(s.needsAction ? 'publish_blocked_pending' : 'how_to_publish');
   const template = templates.find((t) => t.id === templateId) ?? templates[0];
-  const message = template.body({ names: s.names, order: s.orderRef, siteUrl, editUrl, startUrl, changesLeft: s.changes?.left ?? null });
+  const rendered = renderMessage(template, {
+    names: s.names,
+    order: s.orderRef,
+    design: s.themeName,
+    siteUrl,
+    startUrl,
+    editUrl,
+    changesLeft: s.changes?.left ?? null,
+    onlineUntil: s.onlineUntil ? longEnglishDate(s.onlineUntil) : null,
+  });
+  const message = rendered.text;
 
   async function run(action: string, body: Record<string, unknown> = {}, ok?: string): Promise<boolean> {
     setBusy(action);
@@ -245,13 +261,20 @@ export default function AdminSite(props: { summary: AdminSiteSummary; history: A
           ))}
         </select>
         <p className={styles.hint}>Ne zaman: {template.when}</p>
+        {template.note ? <p className={styles.hint}>Not: {template.note}</p> : null}
         <label className={styles.visuallyHidden} htmlFor="msg-text">
           Mesaj metni
         </label>
         <textarea id="msg-text" className={`${styles.textarea} ${styles.messageText}`} readOnly value={message} style={{ marginTop: 12 }} />
-        <div className={styles.row} style={{ marginTop: 10 }}>
-          <CopyButton value={message} label="Mesajı kopyala" />
-        </div>
+        {rendered.missing.length ? (
+          <p className={`${styles.status} ${styles.statusErr}`} role="status" data-message-missing="">
+            Bu mesaj henüz gönderilemez: {rendered.missing.join(', ')} karar bekliyor ya da bu site için bilinmiyor.
+          </p>
+        ) : (
+          <div className={styles.row} style={{ marginTop: 10 }}>
+            <CopyButton value={message} label="Mesajı kopyala" />
+          </div>
+        )}
       </section>
 
       <section className={styles.card} aria-labelledby="actions-title">

@@ -497,7 +497,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
           <BrandLogo height={28} className={styles.noticeBrand} />
           <TriangleAlert size={32} strokeWidth={1.5} aria-hidden="true" />
           <h1 className={styles.noticeTitle}>This edit link no longer works</h1>
-          <p>The link may have been replaced with a new one. If you did not change it, message {PANEL_BRAND.shopName} on Etsy with your order number.</p>
+          <p>
+            The link may have been replaced with a new one, or it was copied only in part. If we sent you a new link, use the newest one.
+            Otherwise message {PANEL_BRAND.shopName} on Etsy with your order number.
+          </p>
         </main>
       </div>
     );

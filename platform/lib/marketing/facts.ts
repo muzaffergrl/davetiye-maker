@@ -74,7 +74,7 @@ export const NOT_INCLUDED: readonly string[] = [
   'Changing the colors, fonts or layout of a design',
   'Sending invitations to guests by email',
   'Guest list import',
-  'Languages other than English',
+  'A translated website: built-in messages (reply form errors, calendar text) stay in English; your own texts and headings can be in any language',
   'Printed invitations',
   'A matching save the date (not yet)',
 ];
@@ -90,6 +90,7 @@ export const EDITABLE: readonly string[] = [
   `Questions and answers for guests (up to ${LIMITS.faqItems})`,
   `RSVP deadline and up to ${LIMITS.rsvpQuestions} questions of your own`,
   'Which optional sections show: Our Story, countdown, dress code, registry, travel and stay, questions and answers',
+  "The design's headings, labels and buttons, in your own words",
 ];
 
 /** What stays as designed. */
