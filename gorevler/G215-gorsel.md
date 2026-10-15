@@ -2,7 +2,7 @@
 id: G215
 baslik: Tasarım 15 Cherry Blossom Spring — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: bitti
 alan: gpt-gorsel-N
 oncelik: 2
 bagimli: []
@@ -90,3 +90,5 @@ Devam — gpt-gorsel-N (2026-10-14), tamamlanan 8/8:
 - 2026-10-14 ara kayıt: gpt-gorsel-N; devam, 8/8: florals_tl, florals_br, accent_1 ve accent_2 kaydedildi; istenen sekiz dosya kontrolü GEÇTİ. Durum alindi.
 - 2026-10-14 devam bitti; kalan: accent_3, divider, web_hero
 - 2026-10-15 entegratör: kit_check P5 20/23 — eksik yalnız accent_3, divider, web_hero (W2.15–W2.17). Mevcut 20 dosya görsel olarak iyi; card_small/frame_portrait yeşilindeki koyu merkez tema build'inde maskeyle düzeltilir. Kalan 3 parçanın prompt'ları kullanıcıya iletildi.
+- 2026-10-15 entegratör onayladı
+- 2026-10-15 entegratör: accent_3, divider, web_hero geldi; kit_check P5 23/23 GEÇTİ, görsel olarak iyi. G215 onaylandı → G415 açılabilir.
