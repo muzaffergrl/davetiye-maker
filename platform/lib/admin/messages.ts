@@ -29,7 +29,7 @@ export interface MessageTemplate {
   placeholders: MessagePlaceholder[];
   /** Needs a fresh edit link: offered only right after "Yeni düzenleme linki". */
   needsEditUrl: boolean;
-  /** G091's note for the shop (never sent). */
+  /** Turkish note for the shop (never sent; NOTES_TR below — not G091's developer note). */
   note: string | null;
   body: string[];
 }
@@ -56,13 +56,25 @@ const TITLES_TR: Record<string, [string, string]> = {
   delete_data: ['Sitemi ve verilerimi silin', 'Alıcı sitenin ya da misafir verilerinin silinmesini istiyor.'],
 };
 
+// The shop's note in Turkish (G098). G091's English notes are written for developers too (script commands, doc
+// sections); the admin shows these instead. A template without an entry here shows no note.
+const NOTES_TR: Record<string, string> = {
+  publish_blocked_pending:
+    'Önce Etsy\'de siparişi kontrol edin (ödenmiş mi, tasarım doğru mu). Doğruysa bu sayfada "Siparişi onayla"ya basın, sonra "Sipariş onaylandı — yayınlayabilir" mesajını gönderin.',
+  new_edit_link: 'Linki başka bir şablona, nota ya da yere yapıştırmayın. Alıcı iki kez istediyse en yeni linki kullanmasını söyleyin.',
+  order_already_used:
+    'Bu sipariş numarasıyla açılmış siteye bakın (e-posta, isimler, tasarım). Numarayı başkası yanlışlıkla kullandıysa duruma göre karar verin; numarayı serbest bırakan bir işlem henüz yok.',
+  wrong_design_started:
+    'Buradaki tasarım Etsy siparişindeki tasarımdır, başlatılan sitenin tasarımı değil. Bir sitenin tasarımını değiştiren bir işlem henüz yok; ilk satıştan önce politika belirlenmeli.',
+};
+
 export const MESSAGE_TEMPLATES: MessageTemplate[] = (RAW as RawTemplate[]).map((t) => ({
   id: t.id,
   title: TITLES_TR[t.id]?.[0] ?? t.title,
   when: TITLES_TR[t.id]?.[1] ?? t.when,
   placeholders: t.placeholders,
   needsEditUrl: t.placeholders.includes('edit_url'),
-  note: t.note ?? null,
+  note: NOTES_TR[t.id] ?? null,
   body: t.body,
 }));
 

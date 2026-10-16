@@ -43,7 +43,7 @@ export default function AdminHome() {
               </Link>
             </div>
             <p className={styles.lead}>
-              Bugün {d.sales.today} satış · bu ay {d.sales.thisMonth} · toplam {d.sales.total}. Satış = Etsy sipariş numarasıyla açılan site.
+              Bugün {d.sales.today} satış · bu ay {d.sales.thisMonth} · toplam {d.sales.total}. Satış = Etsy sipariş numarasıyla açılan site (&quot;Demo&quot; etiketli örnek siteler sayılmaz).
             </p>
 
             <div className={styles.kpis} data-kpis="">

@@ -531,7 +531,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "body": [
       "Hi, thank you for starting your website!",
       "Before any website goes live, we check the order in our Etsy shop: that it is paid and for the design you chose. Everything you set up is saved, so please keep going with your names, photos and details.",
-      "We usually confirm orders within [ORDER CHECK TIME]. We will message you here as soon as order {order} is confirmed; then reload your editor and tap Publish.",
+      "We will message you here as soon as order {order} is confirmed; then reload your editor and tap Publish.",
       "{shop}"
     ],
     "note": "Confirm with: node scripts/verify-order.ts --order {order} --reason \"...\" (or the admin panel action), then send order_confirmed."
@@ -806,7 +806,8 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
 3. Etsy mesajları yalnız sipariş ve destek içindir; reklam, kupon, Etsy dışı satın alma yönlendirmesi yok (docs/15 §4.1).
 4. `review_request`: sipariş başına bir kez, herkese aynı metin, teşviksiz, yıldız istemeden; açık sorun varken gönderilmez
    (FTC ve Etsy kuralları, docs/15 §4.6).
-5. Zaman vaadi (`[ORDER CHECK TIME]`, `[RESPONSE TIME]`) karar verilmeden doldurulmaz.
+5. Zaman vaadi (`[ORDER CHECK TIME]`, `[RESPONSE TIME]`) karar verilmeden doldurulmaz. `publish_blocked_pending` bu yüzden süre
+   vermeden yazılır (G098); süre kararı çıkarsa cümle geri eklenebilir.
 6. `order_confirmed` platform tarafından gönderilmez; `verify-order` sonrası dükkân gönderir (admin paneli bu ikisini tek
    eylemde birleştirebilir, §6 A2).
 

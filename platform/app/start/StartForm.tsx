@@ -96,7 +96,16 @@ function forgetClaimToken(): void {
     /* nothing stored */
   }
 }
-const FIELD_ORDER: ClaimField[] = ['orderNumber', 'email', 'name1', 'name2', 'slug'];
+/** This phone's IANA time zone, or null (the server checks it; lib/claim/claim.ts claimTimeZone). */
+function phoneTimeZone(): string | null {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || null;
+  } catch {
+    return null;
+  }
+}
+
+const FIELD_ORDER: ClaimField[] =['orderNumber', 'email', 'name1', 'name2', 'slug'];
 const FIELD_IDS: Record<ClaimField, string> = {
   orderNumber: 'start-order',
   email: 'start-email',
@@ -313,6 +322,8 @@ function ClaimForm({
       names,
       slug: normalizeSlugInput(slug),
       claimToken: tokenRef.current,
+      // G098: the draft starts in this phone's time zone (the server keeps the design's when it does not know it).
+      timeZone: phoneTimeZone(),
       website: honeypot.current?.value ?? '',
     });
     const send = () =>

@@ -1,10 +1,10 @@
 'use client';
 // "My website" (/my, G095). 1) Editors opened on this device (lib/panel/remember.ts) → one tap back into the
-// panel. 2) Paste the saved edit link. 3) Not started yet → /start. 4) Lost the link → message the shop on Etsy.
+// panel; ones that no longer open (website deleted, link replaced) are dropped after a check (G098). 2) Paste the saved edit link. 3) Not started yet → /start. 4) Lost the link → message the shop on Etsy.
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { BrandLogo } from '../panel/Brand.tsx';
-import { editPathFromLink, forgetEditor, readEditors, type RememberedEditor } from '../../lib/panel/remember.ts';
+import { dropGoneEditors, editPathFromLink, forgetEditor, readEditors, type RememberedEditor } from '../../lib/panel/remember.ts';
 import s from './my.module.css';
 
 export default function MyWebsite({ shopName, startPath }: { shopName: string; startPath: string }) {
@@ -12,7 +12,19 @@ export default function MyWebsite({ shopName, startPath }: { shopName: string; s
   const [editors, setEditors] = useState<RememberedEditor[] | null>(null);
   const [link, setLink] = useState('');
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => setEditors(readEditors()), []);
+  const [gone, setGone] = useState<RememberedEditor[]>([]);
+  useEffect(() => {
+    setEditors(readEditors());
+    let live = true;
+    void dropGoneEditors().then((r) => {
+      if (!live || !r.gone.length) return;
+      setEditors(r.editors);
+      setGone(r.gone);
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
 
   const shop = /^\[.*\]$/.test(shopName) ? 'the shop' : shopName;
 
@@ -56,6 +68,13 @@ export default function MyWebsite({ shopName, startPath }: { shopName: string; s
               </div>
             ))}
           </section>
+        ) : null}
+
+        {gone.length > 0 ? (
+          <p className={s.p} role="status" data-my-gone={gone.map((e) => e.slug).join(' ')}>
+            {gone.length === 1 ? `/${gone[0].slug} no longer opens` : `${gone.map((e) => `/${e.slug}`).join(', ')} no longer open`} with the link saved on this
+            device, so we removed it. The website was deleted or a new edit link was made. If you have a newer link, paste it below.
+          </p>
         ) : null}
 
         <section className={s.card} aria-labelledby="my-link">
