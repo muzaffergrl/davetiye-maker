@@ -129,6 +129,9 @@ düzenler. Bu belge platformun tek kaynağıdır.
 - **Yayın (2026-10-16, `claude-local-1`):** production = main `b952bc8` (platform ağacı `35ba50964db2`; PR #7: 15–20 temaları, satış sitesinde 20
   tasarım, panel mesaj penceresinde kelime bölünmesi düzeltmesi), `dpl_8ZNhkwSZueCgw7AioMrtoFg6ZixR`. Temiz main worktree'sinde `npm test` 1189/1189
   (19 atlanan: Playwright'lı tema testleri + build'e bağlı), typecheck, build yeşil; `live-check` 40/40, `blob-smoke` 12/12. Ortam değişkeni değişmedi.
+  Bir dakika sonra ayrı bir yerel oturum habersiz aynı ağacı yeniden yükledi → **şu anki production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW`** (içerik aynı; aynı
+  `--meta`). Ek kontrol: 20 tasarımın her biri için tasarım sayfası, `/start/demo/<id>` ve `/start?theme=<id>` formu 200; `live-check` yeni 6 temayla
+  (`LIVE_THEMES=` 15–20) **60/60**. (İki oturum aynı yayını iki kez yaptı: yayın işinin tek oturumda tutulması önerilir.)
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
