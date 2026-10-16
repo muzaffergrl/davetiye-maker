@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 2 · alindi 1 · inceleme 0 · blokaj 88 · bitti 131 · iptal 189 · toplam 411
+Özet: hazir 2 · alindi 0 · inceleme 0 · blokaj 88 · bitti 131 · iptal 190 · toplam 411
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -76,10 +76,9 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - `G089` p2 — React Bits Pro ile cila — satış sitesi, panel ve düğün sitelerini "yaşayan" hâle getir (K31) → `gorevler/G089-react-bits-cila.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (23)**
+**Üzerinde çalışılan / incelemede / blokaj (22)**
 
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
-- `G065` alindi · claude-local-G065 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo
 - `G040` blokaj · - — tools/make_variant.py — varyant hattı
 - `GP401` blokaj · - — Aşama 2 · Tasarım 01 — 5 palet ilan kitleri
 - `GP402` blokaj · - — Aşama 2 · Tasarım 02 — 5 palet ilan kitleri
@@ -102,7 +101,7 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 0 · Biten: 68 · İptal: 59
+Bağımlılık bekleyen: 0 · Biten: 68 · İptal: 60
 
 ## claude-metin
 
