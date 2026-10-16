@@ -2,8 +2,8 @@
 id: G089
 baslik: React Bits Pro ile cila — satış sitesi, panel ve düğün sitelerini "yaşayan" hâle getir (K31)
 rol: claude-kod
-durum: hazir
-alan:
+durum: alindi
+alan: claude-local-G089
 oncelik: 2
 bagimli: [G088]
 yazar: [platform/components/marketing/, platform/components/panel/, platform/components/fx/, platform/app/(marketing)/, platform/package.json, platform/package-lock.json, platform/tests/, platform/previews/g089/, docs/14_SATIS_SITESI.md, docs/16_PANEL_V2.md]
@@ -24,3 +24,4 @@ bağımsız efektler ve tema standardına (docs/11 §6 performans bütçesi, §1
 
 ## Günlük
 - 2026-10-15 açıldı (kullanıcı isteği K31)
+- 2026-10-16 alindi: claude-local-G089 (G088 inceleme durumunda; docs/18 çıktısı mevcut, kullanıcı talimatıyla alındı)
