@@ -1,8 +1,9 @@
 'use client';
 // Form building blocks of the panel: labelled inputs with inline validation, switches, repeatable items.
 // An input's errors are hidden while the buyer is typing in it and shown again on blur.
-// A field still holding the design's sample text shows a "Sample" tag; focusing it selects the whole text,
-// so typing replaces the sample (docs/16 §5.4).
+// A field still holding the design's sample text looks like a soft placeholder (G100, docs/18 §2: no "Sample" tag on
+// each field; the page says once how many are left, SampleLine); focusing it selects the whole text, so typing replaces
+// the sample (docs/16 §5.4). Screen readers hear "sample text" with the label.
 
 import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react';
 import { createContext, useContext, useEffect, useId, useState, type ReactNode } from 'react';
@@ -103,18 +104,15 @@ function FieldFrame({
 }: BaseFieldProps & { counter?: ReactNode; children: ReactNode; issues: ValidationIssue[] }) {
   const id = fieldId(path);
   const { isSample } = usePanelContext();
+  const sample = isSample(path);
   return (
-    <div className={styles.field}>
+    <div className={cx(styles.field, sample && styles.fieldSample)} data-sample-field={sample ? path : undefined}>
       <div className={styles.labelRow}>
         <label htmlFor={id} className={styles.label}>
           {label}
           {optional ? <span className={styles.optional}> (optional)</span> : null}
+          {sample ? <span className={styles.visuallyHidden}>, still the design’s sample text</span> : null}
         </label>
-        {isSample(path) ? (
-          <span className={styles.sampleTag} data-sample-tag>
-            Sample
-          </span>
-        ) : null}
         {counter}
       </div>
       {hint ? (
@@ -453,4 +451,38 @@ export function moveItem<T>(list: T[], from: number, to: number): T[] {
   const [item] = copy.splice(from, 1);
   copy.splice(to, 0, item);
   return copy;
+}
+
+/**
+ * G100 (docs/18 §2): one line at the top of a page instead of a "Sample" tag on every field — "3 fields still show sample
+ * text" + "Go to the first one". `count` comes from the panel's own sample detection (lib/panel/model.ts sampleNotes, the
+ * same notes Home and the first publish use). The jump finds the first soft sample field inside `scope` (opening a folded
+ * section around it); when none is on the page (e.g. a locked date), `onMissing` takes over.
+ */
+export function SampleLine({ count, scope, onMissing }: { count: number; scope: string; onMissing?: () => void }) {
+  if (!count) return null;
+  const jump = () => {
+    const root = document.querySelector(scope);
+    const field = root?.querySelector<HTMLElement>('[data-sample-field]');
+    const input = field?.querySelector<HTMLElement>('input, textarea, select, button:not([disabled])');
+    if (!field || !input) return onMissing?.();
+    const fold = field.closest('[data-disclosure]')?.querySelector<HTMLButtonElement>(':scope > h2 > button[aria-expanded="false"], :scope > h3 > button[aria-expanded="false"]');
+    fold?.click();
+    window.setTimeout(() => {
+      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      input.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      input.focus({ preventScroll: true });
+    }, fold ? 60 : 0);
+  };
+  return (
+    <p className={styles.sampleLine} data-sample-line>
+      <span className={styles.sampleLineDot} aria-hidden="true" />
+      <span className={styles.sampleLineText}>
+        {count} {count === 1 ? 'field still shows' : 'fields still show'} sample text
+      </span>
+      <button type="button" className={styles.sampleJump} onClick={jump} data-sample-jump>
+        {count === 1 ? 'Go to it' : 'Go to the first one'}
+      </button>
+    </p>
+  );
 }

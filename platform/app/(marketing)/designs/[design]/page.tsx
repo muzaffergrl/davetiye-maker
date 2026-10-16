@@ -23,7 +23,7 @@ import {
   TextLink,
 } from '../../../../components/marketing/ui.tsx';
 import { MARKETING } from '../../../../lib/marketing/config.ts';
-import { demoPath, designOgImage, liveDesign, liveDesigns, startPath } from '../../../../lib/marketing/designs.ts';
+import { demoPath, designOgImage, liveDesign, liveDesigns, openingObject, startPath } from '../../../../lib/marketing/designs.ts';
 import { EDITABLE, FIXED, included, LIMITS, NOT_INCLUDED, SITE_PAGES } from '../../../../lib/marketing/facts.ts';
 import { loadGuide } from '../../../../lib/marketing/guides.ts';
 import { realPrice } from '../../../../lib/marketing/placeholders.ts';
@@ -50,12 +50,12 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
-function designFaq(name: string) {
+function designFaq(name: string, thing: string) {
   return [
     {
       id: 'colors',
       q: `Can I change the colors of ${name}?`,
-      a: `No. The artwork, colors and fonts stay as designed, because the envelope, cards and frames are painted to match. You change the content: names, details, photos and questions. [See all designs](/designs) to compare palettes.`,
+      a: `No. The artwork, colors and fonts stay as designed, because the ${thing}, cards and frames are painted to match. You change the content: names, details, photos and questions. [See all designs](/designs) to compare palettes.`,
     },
     {
       id: 'photos',
@@ -85,7 +85,10 @@ export default async function DesignPage({ params }: Props) {
   const price = realPrice(d.price);
   const others = liveDesigns().filter((x) => x.id !== d.id);
   const related = d.copy.relatedGuides.map((g) => loadGuide(g)).filter((g) => !!g);
-  const faq = designFaq(d.name);
+  // G099: what guests tap first here (envelope, gatefold, pouch, wallet, book or sleeve), from the design's own opening
+  const thing = openingObject(d.copy);
+  const faq = designFaq(d.name, thing);
+  const etsyPrice = price ? displayPrice(price) : null;
 
   return (
     <>
@@ -98,12 +101,15 @@ export default async function DesignPage({ params }: Props) {
               { name: d.name, href: page.path },
             ]}
           />
+          {/* G099 (docs/18 §5 P1): large preview, a short summary and ONE primary action — Buy on Etsy ("Coming soon on
+              Etsy", not a link, while the listing link is a placeholder); the live demo is the secondary action. */}
           <HeroDemo
             designs={demo}
             placement="design-hero"
-            primaryLabel="Open the live demo"
-            className={s.heroStickyActions}
-            secondary={<EtsyButton design={d} placement="design-hero" variant="secondary" withPrice={price ? displayPrice(price) : null} />}
+            primaryLabel="View live demo"
+            demoVariant="secondary"
+            action={<EtsyButton design={d} placement="design-hero" className={s.btnLarge} withPrice={etsyPrice} />}
+            className={`${s.heroStickyActions} ${s.heroDesign}`}
             footnote={
               <p className={s.small}>
                 <a href={startPath(d.id)} data-track="start_click" data-track-design={d.id}>
@@ -113,7 +119,7 @@ export default async function DesignPage({ params }: Props) {
             }
           >
             <h1 className={s.h1}>{page.h1}</h1>
-            <p className={s.lead}>{d.copy.intro}</p>
+            <p className={s.lead}>{d.copy.style}.</p>
           </HeroDemo>
         </Container>
       </Section>
@@ -121,8 +127,9 @@ export default async function DesignPage({ params }: Props) {
       <Section labelledBy="pages" className={s.pagesSection}>
         <Container>
           <h2 id="pages" className={s.h2}>
-            What your guests see after the envelope
+            What your guests see after the {thing} opens
           </h2>
+          <p className={s.lead}>{d.copy.intro}</p>
           <ul className={s.thumbRow}>
             {SITE_PAGES.map((p) => {
               const file = designScreen(d.id, p.key);
@@ -171,7 +178,9 @@ export default async function DesignPage({ params }: Props) {
                 </div>
                 <div>
                   <dt>Pages</dt>
-                  <dd>Envelope opening, {SITE_PAGES.map((p) => p.name).join(', ')}</dd>
+                  <dd>
+                    {thing.charAt(0).toUpperCase() + thing.slice(1)} opening, {SITE_PAGES.map((p) => p.name).join(', ')}
+                  </dd>
                 </div>
                 <div>
                   <dt>Photos</dt>
@@ -197,7 +206,7 @@ export default async function DesignPage({ params }: Props) {
             <div className={s.splitMedia}>
               {video ? (
                 <div className={s.videoFrame}>
-                  <LoopVideo src={video.file} poster={video.poster} width={video.width} height={video.height} label={`Screen recording: the ${d.name} envelope opens`} />
+                  <LoopVideo src={video.file} poster={video.poster} width={video.width} height={video.height} label={`Screen recording: the ${d.name} ${thing} opens`} />
                 </div>
               ) : null}
             </div>
@@ -269,12 +278,13 @@ export default async function DesignPage({ params }: Props) {
         </Container>
       </Section>
 
+      {/* phones: the same order — Etsy (primary) first, the live demo second */}
       <div className={s.stickyBar}>
-        <a className={s.btn} href={demoPath(d.id)} data-demo={d.id} data-demo-placement="design-sticky">
+        <EtsyButton design={d} placement="design-sticky" />
+        <a className={`${s.btn} ${s.btnSecondary}`} href={demoPath(d.id)} data-demo={d.id} data-demo-placement="design-sticky">
           <Play aria-hidden size={16} strokeWidth={2} />
           Live demo
         </a>
-        <EtsyButton design={d} placement="design-sticky" variant="secondary" />
       </div>
 
       <JsonLd

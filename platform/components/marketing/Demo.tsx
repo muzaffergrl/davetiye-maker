@@ -169,11 +169,15 @@ export function DemoHost({ designs }: { designs: DemoDesign[] }) {
  * the poster open the selected design: in place on wide screens (≥ 1024 px), in the dialog on phones and tablets.
  * Layout (G066 comps): phone = text, poster + design chips, buttons, fact strip; wide = text, design chips (G093) and
  * buttons beside the poster, the fact strip across the bottom.
+ * G099: `action` (a design page's Etsy button) comes first and is the one primary action; `demoVariant="secondary"` then
+ * draws the demo button as the secondary one (docs/18 §5: one primary action per design page).
  */
 export function HeroDemo({
   designs,
   placement,
   primaryLabel,
+  action,
+  demoVariant = 'primary',
   secondary,
   footnote,
   className,
@@ -182,6 +186,8 @@ export function HeroDemo({
   designs: DemoDesign[];
   placement: string;
   primaryLabel: string;
+  action?: ReactNode;
+  demoVariant?: 'primary' | 'secondary';
   secondary?: ReactNode;
   footnote?: ReactNode;
   className?: string;
@@ -303,8 +309,9 @@ export function HeroDemo({
         </div>
       ) : null}
       <div className={s.heroCta}>
+        {action}
         <a
-          className={`${s.btn} ${s.btnLarge}`}
+          className={demoVariant === 'secondary' ? `${s.btn} ${s.btnSecondary} ${s.btnLarge}` : `${s.btn} ${s.btnLarge}`}
           href={d.demoPath}
           onClick={(e) => {
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;

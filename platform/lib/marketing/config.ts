@@ -17,6 +17,11 @@ export interface DesignCommerce {
   name: string;
   /** Only 'live' designs are listed anywhere; 'coming' ones are never shown or promised. */
   status: DesignStatus;
+  /**
+   * G099: shown in the home page's design showcase (the rest are one tap away on /designs). Pick a spread of styles and
+   * light and dark designs; the home page shows every featured live design, in config order, whatever their number.
+   */
+  featured?: boolean;
   /** The sale price buyers see on Etsy right now, e.g. "29.40" (number as text, no currency sign). */
   price: string;
   /** Etsy's crossed-out list price while a sale runs, or null. */
@@ -110,7 +115,7 @@ export const MARKETING: MarketingConfig = {
   analytics: { provider: 'none' },
   social: { pinterest: null, instagram: null, tiktok: null },
   aiTrainingBots: 'allow',
-  copyUpdated: '2026-10-14',
+  copyUpdated: '2026-10-16',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
   verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
   designs: [
@@ -118,6 +123,7 @@ export const MARKETING: MarketingConfig = {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -127,6 +133,7 @@ export const MARKETING: MarketingConfig = {
       id: 'olive-ivory',
       name: 'Olive & Ivory',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -137,6 +144,7 @@ export const MARKETING: MarketingConfig = {
       id: 'mediterranean-lemon',
       name: 'Mediterranean Lemon',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -167,6 +175,7 @@ export const MARKETING: MarketingConfig = {
       id: 'art-deco-black-tie',
       name: 'Art Deco Black-Tie',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -237,6 +246,7 @@ export const MARKETING: MarketingConfig = {
       id: 'enchanted-forest-storybook',
       name: 'Enchanted Forest Storybook',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -259,6 +269,7 @@ export const MARKETING: MarketingConfig = {
       id: 'cherry-blossom-spring',
       name: 'Cherry Blossom Spring',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -299,6 +310,7 @@ export const MARKETING: MarketingConfig = {
       id: 'midnight-garden',
       name: 'Midnight Garden',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -309,6 +321,7 @@ export const MARKETING: MarketingConfig = {
       id: 'coastal-seaside',
       name: 'Coastal Seaside',
       status: 'live',
+      featured: true,
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',

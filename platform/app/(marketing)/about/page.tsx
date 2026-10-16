@@ -58,7 +58,7 @@ export default function AboutPage() {
               <CheckList
                 items={[
                   'The artwork (envelopes, paper, flowers, frames) is created with AI image tools.',
-                  'We cut it into separate layers, so the envelope flap, the seal or bow, the card and the flowers can move on their own.',
+                  'We cut it into separate layers, so the envelope flap or cover, the seal or bow, the card and the flowers can move on their own.',
                   'Layout, typography and the opening animation are built separately for each design, not from a shared template.',
                   'Your names, dates and photos are live text and images, never painted into the artwork, so every change shows right away.',
                   'Every design is checked at five screen widths, from small phones to computers, before release.',

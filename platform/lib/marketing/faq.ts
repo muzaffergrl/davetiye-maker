@@ -48,7 +48,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
           // claimed about any named competitor (only what we checked about our own product).
           id: 'why-pay',
           q: 'Why pay for a design when free wedding websites exist?',
-          a: `Free wedding website builders are a good choice for many couples, especially if you want registry and planning tools in the same place. What you pay for here is the design: artwork that opens from a sealed envelope into your own pages. You buy it once on Etsy, with no subscription and no account to create, and you edit it from your phone. [Try a live demo](/designs).`,
+          a: `Free wedding website builders are a good choice for many couples, especially if you want registry and planning tools in the same place. What you pay for here is the design: artwork that opens from a sealed envelope or keepsake into your own pages. You buy it once on Etsy, with no subscription and no account to create, and you edit it from your phone. [Try a live demo](/designs).`,
         },
         {
           id: 'refund',
@@ -146,7 +146,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'link-preview',
           q: 'What do guests see when we send the link?',
-          a: `Most messaging apps show a preview card with your names and wedding date and the design's artwork. Guests tap it and land on the sealed envelope, which opens into your website. Send the link to yourself first to see the preview before you share it with everyone.`,
+          a: `Most messaging apps show a preview card with your names and wedding date and the design's artwork. Guests tap it and land on the sealed invitation, which opens into your website. Send the link to yourself first to see the preview before you share it with everyone.`,
         },
         {
           id: 'print-qr',
@@ -194,17 +194,17 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'ai-artwork',
           q: 'Is the artwork made with AI?',
-          a: `Yes. The artwork of each design is created with AI image tools. We then cut it into separate layers so the envelope, cards and flowers can move on their own, write the layout and animation by hand, and test every design at five screen widths before release. [About how we make designs](/about).`,
+          a: `Yes. The artwork of each design is created with AI image tools. We then cut it into separate layers so the envelope or cover, cards and flowers can move on their own, write the layout and animation by hand, and test every design at five screen widths before release. [About how we make designs](/about).`,
         },
         {
           id: 'save-the-date',
           q: 'Is there a matching save the date?',
-          a: `Not yet. Today each design is a wedding website with an opening envelope, a home page, Our Story, Details and RSVP. If you need a save the date now, you can share your website link early and add the full details later; your guests will always see the latest version.`,
+          a: `Not yet. Today each design is a wedding website with an opening scene, a home page, Our Story, Details and RSVP. If you need a save the date now, you can share your website link early and add the full details later; your guests will always see the latest version.`,
         },
         {
           id: 'printed',
           q: 'Do you sell printed invitations?',
-          a: `No. We only make wedding websites. If some guests prefer paper, you can print your own simple card with your website's QR code at home or at a local print shop, so they can still open the envelope and reply online. [Read about digital invitation etiquette](/guides/digital-wedding-invitation-etiquette).`,
+          a: `No. We only make wedding websites. If some guests prefer paper, you can print your own simple card with your website's QR code at home or at a local print shop, so they can still open the invitation and reply online. [Read about digital invitation etiquette](/guides/digital-wedding-invitation-etiquette).`,
         },
       ],
     },

@@ -404,25 +404,34 @@ try {
 
     const stats = (await page.locator('[data-stat]').allInnerTexts()).map((t: string) => t.replace(/\s+/g, ' ').trim()).join(' · ');
     check('Guests: 10 guests coming · 1 not coming · 6 replies', stats === '10 Guests coming · 1 Not coming · 6 Replies', stats);
-    const deadline = await text(page, '[data-deadline]');
-    check('Guests: days left to reply ("Replies close in 30 days. Last day: …")', /Replies close in (29|30) days\. Last day: /.test(deadline), deadline);
-    check('Guests: "1 new reply" banner', (await text(page, '[data-new-banner]')).includes('1 new reply'));
+    // G100: the list first; the "New" tab carries the count and, opened, the "1 new reply · Mark as seen" line.
+    check('Guests: the "New" tab shows the count (1)', (await text(page, '[data-filter="new"]')).replace(/\s+/g, '') === 'New1');
+    await page.click('[data-filter="new"]');
+    check('Guests: "1 new reply" line on the New tab', (await text(page, '[data-new-banner]')).includes('1 new reply') && (await page.locator('[data-reply]').count()) === 1);
+    await page.click('[data-filter="all"]');
     await shot(page, '04_guests_summary_390');
+    // G100: the answers live in a separate Results view (#guests/results), with the days left to reply.
+    await page.click('[data-guests-tab="results"]');
+    await page.waitForSelector('[data-results]');
+    const deadline = await text(page, '[data-deadline]');
+    check('Results: days left to reply ("Replies close in 30 days. Last day: …")', /Replies close in (29|30) days\. Last day: /.test(deadline), deadline);
 
     const mealCard = page.locator('[data-question-insight="meal"]');
     const mealText = (await mealCard.innerText()).replace(/\s+/g, ' ');
-    check('Answers: meal choices counted (Chicken 2 · Fish 1 · Vegetarian 2) with bars', /Chicken 2/.test(mealText) && /Fish 1/.test(mealText) && /Vegetarian 2/.test(mealText) && (await mealCard.locator('[data-answer-option]').count()) === 3, mealText);
+    check('Answers: meal choices counted (Chicken 2 · Fish 1 · Vegetarian 2, with percentages) with bars', /Chicken 2 · 40%/.test(mealText) && /Fish 1/.test(mealText) && /Vegetarian 2/.test(mealText) && (await mealCard.locator('[data-answer-option]').count()) === 3, mealText);
     const shuttleText = (await page.locator('[data-question-insight="shuttle"]').innerText()).replace(/\s+/g, ' ');
     check('Answers: a yes/no question as percentages (Yes 80% (4) · No 20% (1))', /Yes, please 80% \(4\)/.test(shuttleText) && /No, thank you 20% \(1\)/.test(shuttleText), shuttleText);
     const widths = await mealCard.locator('[data-answer-option]').evaluateAll((els: Element[]) => els.map((b) => Math.round((b.querySelector('span[aria-hidden] > span') as HTMLElement).getBoundingClientRect().width)));
     check('Answers: bar lengths follow the counts (Chicken = Vegetarian = 2 × Fish)', widths[0] > 0 && Math.abs(widths[0] - widths[2]) <= 1 && Math.abs(widths[0] - 2 * widths[1]) <= 2, JSON.stringify(widths));
-    await toTop(page, '[data-answers]');
+    await toTop(page, '[data-results]');
     await shot(page, '05_guests_breakdown_390');
     const diet = (await page.locator('[data-dietary]').innerText()).replace(/\s+/g, ' ');
     check('Food & allergy notes: answers and a message that mentions an allergy, "None" left out', diet.includes('James: no nuts, please') && diet.includes('Gluten-free, please') && diet.includes('allergic to peanuts') && !/Grace Hopper/.test(diet), diet);
     await toTop(page, '[data-dietary]');
     await page.waitForTimeout(200);
     await page.locator('[data-dietary]').screenshot({ path: path.join(OUT, '06_guests_dietary_390.png') });
+    await page.click('[data-guests-tab="list"]');
+    await page.waitForSelector('[data-replies]');
 
     const first = page.locator('[data-reply]').first();
     check('List: newest first, Margaret\'s card has "New" and her party ("With James Hamilton and Ada Hamilton")', (await first.getAttribute('data-reply-name')) === 'Margaret Hamilton' && (await first.locator('[data-new-badge]').count()) === 1 && (await first.locator('[data-reply-party]').innerText()).includes('With James Hamilton and Ada Hamilton'));
@@ -435,7 +444,9 @@ try {
     await page.waitForTimeout(200);
     await first.screenshot({ path: path.join(OUT, '07_guest_card_party_390.png') });
 
-    // filter by an answer, sort
+    // filter by an answer (from Results, G100: the tap opens the list), sort
+    await page.click('[data-guests-tab="results"]');
+    await page.waitForSelector('[data-results]');
     await mealCard.locator('[data-answer-option="Vegetarian"]').click();
     await page.waitForSelector('[data-answer-filter]');
     const vegNames = await page.locator('[data-reply]').evaluateAll((els: Element[]) => els.map((e) => e.getAttribute('data-reply-name')));
@@ -455,10 +466,12 @@ try {
     check('Guests: touch targets ≥ 44 px', small.length === 0, small.join('; '));
     check('Guests: no horizontal scroll at 390 px', (await overflow(page)) <= 0);
 
-    // mark as seen
+    // mark as seen (the head of the New tab, G100)
+    await page.click('[data-filter="new"]');
     await page.click('[data-mark-seen]');
     await page.waitForFunction(() => !document.querySelector('[data-new-badge]') && !document.querySelector('[data-new-banner]'));
     check('Mark as seen: "New" badges and banner gone, Guests tab without a count', (await page.locator('[data-nav="guests"]').innerText()).trim() === 'Guests');
+    await page.click('[data-filter="all"]');
     await page.reload();
     await page.waitForSelector('[data-reply]');
     check('Mark as seen: still seen after a reload (this device)', (await page.locator('[data-new-badge]').count()) === 0);

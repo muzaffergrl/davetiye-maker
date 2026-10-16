@@ -46,7 +46,7 @@ const NEW = [
   {
     id: 'lavender-provence',
     name: 'Lavender Provence',
-    title: 'Lavender Provence: Envelope Wedding Website | BKE Studio',
+    title: 'Lavender Provence: Wedding Website | BKE Studio',
     collection: '09_Lavender_Provence',
     couple: 'Amélie & Louis',
     fonts: ['Alex Brush', 'Cormorant Garamond'],
@@ -99,7 +99,7 @@ const NEW = [
   {
     id: 'tropical-destination',
     name: 'Tropical Destination',
-    title: 'Tropical Destination: Envelope Wedding Website | BKE Studio',
+    title: 'Tropical Destination: Wedding Website | BKE Studio',
     collection: '12_Tropical_Destination',
     couple: 'Maya & Kai',
     fonts: ['Dancing Script', 'Raleway'],
@@ -134,7 +134,7 @@ const NEW = [
   {
     id: 'ivory-lace-pearls',
     name: 'Ivory Lace & Pearls',
-    title: 'Ivory Lace & Pearls: Envelope Wedding Website | BKE Studio',
+    title: 'Ivory Lace & Pearls: Wedding Website | BKE Studio',
     collection: '14_Ivory_Lace_Pearl',
     couple: 'Charlotte & William',
     fonts: ['Mrs Saint Delafield', 'Bodoni Moda'],

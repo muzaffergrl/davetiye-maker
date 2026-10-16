@@ -334,6 +334,7 @@ try {
     const PUBLIC_URL = `${BASE}/${SLUG}`;
     check('buyer: "Your website is live"', (await page.locator('[data-testid="live"] h2').innerText()) === 'Your website is live');
     check('buyer: public link shown', (await page.locator('[data-live-link]').getAttribute('href')) === PUBLIC_URL);
+    await page.click('[data-testid="live"] [data-disclosure="more-ways"] button[aria-expanded]'); // G100: the QR is folded
     const qr = page.locator('[data-testid="live"] svg[role="img"]');
     check('buyer: QR decodes to the public URL', (await decodeQrFrom(qr)) === PUBLIC_URL);
     await qr.scrollIntoViewIfNeeded();

@@ -2,7 +2,7 @@
 // sitemap.xml, llms.txt, the link check and the page tests all read this list, so a page exists in one place.
 
 import { MARKETING, type MarketingConfig } from './config.ts';
-import { liveDesigns } from './designs.ts';
+import { liveDesigns, openingObject } from './designs.ts';
 import { hasPlaceholder } from './placeholders.ts';
 
 /** Origin for absolute URLs. A placeholder siteUrl ("https://[DOMAIN]") falls back to localhost (dev/preview builds). */
@@ -54,7 +54,7 @@ export function corePages(cfg: MarketingConfig = MARKETING): PageEntry[] {
       title: withBrand('Digital Envelope Wedding Invitation Websites', cfg),
       h1: 'Envelope wedding websites that open like a real invitation',
       description:
-        'A digital wedding invitation website with RSVP that opens from a sealed envelope. Edit it on your phone, no Canva needed. Try the live demo first.',
+        'A digital wedding invitation website with RSVP that opens from a sealed envelope or keepsake. Edit it on your phone, no Canva needed. Try the live demo.',
       kind: 'WebPage',
       updated: u,
     },
@@ -64,7 +64,7 @@ export function corePages(cfg: MarketingConfig = MARKETING): PageEntry[] {
       title: withBrand('Wedding Website Designs with Envelope Opening', cfg),
       h1: 'Wedding website designs',
       description:
-        'Browse wedding website designs that open from a sealed envelope. Each one has Home, Our Story, Details and RSVP pages. Try every demo live on your phone.',
+        'Browse wedding website designs that open from a sealed envelope or keepsake. Each has Home, Our Story, Details and RSVP pages. Try every demo on your phone.',
       kind: 'CollectionPage',
       updated: u,
     },
@@ -160,8 +160,11 @@ export function corePage(path: string, cfg: MarketingConfig = MARKETING): PageEn
  * Blue & Champagne" makes 61 characters) drops the colon, then "Envelope", so the title stays ≤ 60 characters
  * (G085: "Vintage Airmail Love Letter: Wedding Website | BKE Studio", 57).
  */
-export function designTitle(name: string, cfg: MarketingConfig = MARKETING): string {
-  const options = [`${name}: Envelope Wedding Website`, `${name} Envelope Wedding Website`, `${name}: Wedding Website`];
+export function designTitle(name: string, cfg: MarketingConfig = MARKETING, envelope = true): string {
+  // G099: a design that opens as a book, a sleeve, a gatefold … is not called an envelope in its title.
+  const options = envelope
+    ? [`${name}: Envelope Wedding Website`, `${name} Envelope Wedding Website`, `${name}: Wedding Website`]
+    : [`${name}: Wedding Website`];
   return withBrand(options.find((t) => withBrand(t, cfg).length <= 60) ?? options[options.length - 1], cfg);
 }
 
@@ -171,7 +174,7 @@ export function designPage(id: string, cfg: MarketingConfig = MARKETING): PageEn
   return {
     path: `/designs/${d.id}`,
     label: d.name,
-    title: designTitle(d.name, cfg),
+    title: designTitle(d.name, cfg, openingObject(d.copy) === 'envelope'),
     h1: `${d.name} wedding website`,
     description: d.copy.metaDescription,
     kind: 'WebPage',

@@ -223,7 +223,7 @@ test('design page titles ≤ 60 characters (also with a 12-character brand)', ()
     assert.ok(designPage(d.id)!.title.length <= 60, d.id);
     assert.ok(designPage(d.id, brand12)!.title.length <= 60, `${d.id} with a 12-character brand`);
   }
-  assert.equal(designPage('ivory-lace-pearls')!.title, 'Ivory Lace & Pearls: Envelope Wedding Website | BKE Studio');
+  assert.equal(designPage('ivory-lace-pearls')!.title, 'Ivory Lace & Pearls: Wedding Website | BKE Studio');
 });
 
 test('copy matches each theme: demo couple, fonts, palette tokens, collection, guides, README and catalogue opening', async () => {

@@ -337,6 +337,9 @@ try {
   check('publish: notes before publishing (empty photo places, sections without a link)', /Photo places without a photo/.test(notes) && /Sections without a link/.test(notes), notes.replace(/\s+/g, ' ').slice(0, 160));
   check('publish: "Your website is live"', (await page.locator('[data-testid="live"] h2').innerText()) === 'Your website is live');
   check('publish: public link shown', (await page.locator('[data-live-link]').getAttribute('href')) === PUBLIC_URL);
+  // G100: the QR code folds under "More ways to share" (the link and Copy / Open come first).
+  check('publish: the QR code is folded under "More ways to share"', (await page.getAttribute('[data-testid="live"] [data-disclosure="more-ways"] button[aria-expanded]', 'aria-expanded')) === 'false');
+  await page.click('[data-testid="live"] [data-disclosure="more-ways"] button[aria-expanded]');
   const qr = page.locator('[data-testid="live"] svg[role="img"]');
   check('QR: generated from the public URL', (await qr.getAttribute('data-qr-text')) === PUBLIC_URL);
   check('QR: screenshot decodes to the public URL', (await decodeQrFrom(qr)) === PUBLIC_URL);

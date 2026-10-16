@@ -24,7 +24,7 @@ export const LIMITS = {
   storyCaptionChars: 60,
 } as const;
 
-/** The four pages after the envelope, in order. `short` = the 2-line card caption on the home page (G066). */
+/** The four pages after the opening, in order. `short` = the 2-line card caption on the home page (G066). */
 export const SITE_PAGES = [
   { key: 'home', name: 'Home', short: 'Your names, date and venue', summary: 'Your names, the date and venue, an optional countdown and your invitation card with add to calendar.' },
   { key: 'story', name: 'Our Story', short: 'Three photos with captions', summary: 'Three photos with captions and a short intro line, in the frames of the design.' },
@@ -52,7 +52,7 @@ export const REPLIES_SCREEN_ALT = `Replies in the couple's panel: totals, each r
 /** What one purchase includes (pricing, design pages, llms.txt). */
 export function included(cfg: MarketingConfig = MARKETING): string[] {
   return [
-    'An envelope opening page and four pages: Home, Our Story, Details and RSVP',
+    'An opening page (an envelope or keepsake that opens) and four pages: Home, Our Story, Details and RSVP',
     'A private editing panel designed for phone screens, with a preview before you publish',
     'Online RSVP: replies, head counts and a CSV download in your panel',
     `Up to ${LIMITS.rsvpQuestions} RSVP questions of your own, such as a meal choice`,
@@ -142,7 +142,7 @@ export function definition(cfg: MarketingConfig = MARKETING): { short: string; l
   return {
     short: cfg.brand.shortDescription,
     long:
-      `${b} is a wedding website you buy once on Etsy. Your guests tap a sealed envelope that opens into your site: ` +
+      `${b} is a wedding website you buy once on Etsy. Your guests tap a sealed envelope or keepsake that opens into your site: ` +
       'Home, Our Story, Details and RSVP. You edit names, date, venue, schedule, photos and RSVP questions from your ' +
       'phone, preview, and publish. Guest replies appear in your private panel and can be downloaded as a CSV. No Canva ' +
       `account or app is needed, and your website stays online until ${cfg.hosting.monthsAfterWedding} months after your wedding date.`,

@@ -1,5 +1,10 @@
 'use client';
-// Guests (G060 -> G069, docs/16 §6.4): the couple's replies, organised.
+// Guests (G060 -> G069 -> G100, docs/16 §6.4, docs/18 §4): the couple's replies, organised.
+//
+//   G100 (Hitchd / Luma): two views. "Guest list" = numbers · search + status tabs (All · Coming · Not coming · New) ·
+//   the replies (on a 390 × 844 phone the first one is on the first screen). "Results" (#guests/results, Typeform) =
+//   coming / not coming and the answers to the couple's questions as count + percent, the food notes; a tap on a line
+//   opens the list filtered to it. Below, the G069 parts as they were:
 //
 //   numbers (people coming · not coming · replies) and the days left to reply · "N new replies" + Mark as seen ·
 //   the answers to the couple's questions (counts with bars; yes/no as percentages; tap an answer to see who chose
@@ -15,8 +20,8 @@
 import {
   BellDot,
   CalendarClock,
+  ChartBar,
   Download,
-  Mail,
   Pencil,
   Plus,
   Printer,
@@ -188,6 +193,8 @@ export function GuestsView({
   onShare,
   onSettings,
   onPrint,
+  tab = 'list',
+  onTab = () => undefined,
 }: {
   api: PanelApi;
   replies: Replies;
@@ -198,6 +205,9 @@ export function GuestsView({
   onShare: () => void;
   onSettings: () => void;
   onPrint: () => void;
+  /** G100: the list (numbers, search, status tabs, replies) or the separate Results view (#guests/results). */
+  tab?: 'list' | 'results';
+  onTab?: (tab: 'list' | 'results') => void;
 }) {
   const [filter, setFilter] = useState<Filter>('all');
   const [sort, setSort] = useState<Sort>('newest');
@@ -270,25 +280,33 @@ export function GuestsView({
   const insights = data.insights;
   const held = data.responses.filter((r) => r.held).length;
   const newCount = replies.newCount;
-  const chips: Array<{ id: Filter; label: string }> = [
+  // G100 (docs/18 §4, Luma / Hitchd): the status tabs, always in the same places; "Held for review" only when there is one.
+  const chips: Array<{ id: Filter; label: string; count?: number }> = [
     { id: 'all', label: 'All' },
     { id: 'coming', label: 'Coming' },
     { id: 'not', label: 'Not coming' },
-    ...(newCount ? [{ id: 'new' as Filter, label: `New (${newCount})` }] : []),
-    ...(held ? [{ id: 'held' as Filter, label: `Held for review (${held})` }] : []),
+    { id: 'new', label: 'New', count: newCount },
+    ...(held ? [{ id: 'held' as Filter, label: 'Held', count: held }] : []),
   ];
   const questions = (insights?.questions ?? []).filter((q) => q.current || q.answered);
-  const showAnswers = counts.responses > 0 && questions.length > 0;
   const hasDietQuestion = (insights?.questions ?? []).some((q) => q.current && q.dietary);
 
+  /** From Results: the list of the replies that chose this answer. */
   const pickAnswer = (q: QuestionInsight, value: string) => {
     const same = answer?.id === q.id && answer.value === value;
     setAnswer(same ? null : { id: q.id, label: q.label, value });
     if (!same) {
       setFilter((f) => (f === 'held' || f === 'not' ? 'all' : f));
-      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-      window.requestAnimationFrame(() => listRef.current?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+      setQuery('');
+      onTab('list');
     }
+  };
+  /** From Results: coming / not coming. */
+  const pickStatus = (f: Filter) => {
+    setAnswer(null);
+    setQuery('');
+    setFilter(f);
+    onTab('list');
   };
 
   const toggle = (id: string, open: boolean) =>
@@ -299,48 +317,119 @@ export function GuestsView({
       return next;
     });
 
+  const viewTabs = (
+    <nav className={styles.viewTabs} aria-label="Guests">
+      {(
+        [
+          ['list', 'Guest list', '#guests'],
+          ['results', 'Results', '#guests/results'],
+        ] as const
+      ).map(([id, label, href]) => (
+        <a
+          key={id}
+          href={href}
+          className={cx(styles.viewTab, tab === id && styles.viewTabOn)}
+          aria-current={tab === id ? 'page' : undefined}
+          onClick={(e) => {
+            e.preventDefault();
+            if (tab !== id) onTab(id);
+          }}
+          data-guests-tab={id}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  );
+
+  // ------------------------------------------------------------------------------------------- Results
+  if (tab === 'results') {
+    const pct = (n: number) => (counts.responses ? Math.round((100 * n) / counts.responses) : 0);
+    return (
+      <div className={styles.stack} data-results>
+        {viewTabs}
+        <DeadlineLine insights={insights} content={content} canAdd={!archived} />
+        {!counts.responses ? (
+          <EmptyState icon={ChartBar} action={<Button variant="primary" icon={Share2} onClick={onShare}>Share</Button>}>
+            No replies yet. The results of your reply form show here as guests answer.
+          </EmptyState>
+        ) : (
+          <>
+            <p className={styles.hint}>Tap a line to see who is in it.</p>
+            <Card title="Coming?" titleId="results-attending" data-results-attending>
+              <ul className={styles.bars} aria-labelledby="results-attending">
+                {(
+                  [
+                    ['coming', 'Coming', counts.attending],
+                    ['not', 'Not coming', counts.notAttending],
+                  ] as const
+                ).map(([f, label, n]) => (
+                  <li key={f}>
+                    <button type="button" className={styles.barRow} onClick={() => pickStatus(f)} data-results-status={f}>
+                      <span className={styles.barLabel}>{label}</span>
+                      <span className={styles.bar} aria-hidden="true">
+                        <span className={styles.barFill} style={{ width: `${pct(n)}%` }} />
+                      </span>
+                      <span className={styles.barValue}>
+                        {n} · {pct(n)}%<span className={styles.visuallyHidden}> {n === 1 ? 'reply' : 'replies'}</span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <p className={cx(styles.hint, styles.cardFootHint)}>
+                {plural(counts.responses, 'reply', 'replies')} · {plural(counts.totalGuests, 'person', 'people')} coming in all
+              </p>
+            </Card>
+            {questions.length ? (
+              <>
+                <h2 className={styles.sectionHeading}>Your questions</h2>
+                <p className={styles.hint}>From guests who are coming; one answer per reply.</p>
+                {questions.map((q) => (
+                  <QuestionCard key={q.id} q={q} active={answer?.id === q.id ? answer.value : null} onPick={pickAnswer} />
+                ))}
+              </>
+            ) : (
+              <p className={styles.hint} data-no-questions>
+                Your reply form has no questions of your own yet (for example a meal choice).
+                {archived ? null : (
+                  <>
+                    {' '}
+                    <button type="button" className={styles.inlineLink} onClick={onSettings}>
+                      Add one in Reply settings
+                    </button>
+                    .
+                  </>
+                )}
+              </p>
+            )}
+            <DietaryCard insights={insights} hasQuestion={hasDietQuestion} archived={archived} onSettings={onSettings} />
+          </>
+        )}
+      </div>
+    );
+  }
+
+  // ------------------------------------------------------------------------------------------- the list
   return (
     <div className={styles.stack} data-replies>
+      {viewTabs}
+      {/* G100 (docs/18 §4): numbers → search + status tabs → the list; the answers live under Results. */}
       <div className={styles.stats}>
         <div className={styles.stat} data-stat="coming">
-          <span className={styles.statIcon} aria-hidden="true">
-            <Users size={18} strokeWidth={1.75} />
-          </span>
           <span className={styles.statNum}>{counts.totalGuests}</span>
           <span className={styles.statLabel}>Guests coming</span>
         </div>
         <div className={styles.stat} data-stat="not">
-          <span className={styles.statIcon} aria-hidden="true">
-            <UserX size={18} strokeWidth={1.75} />
-          </span>
           <span className={styles.statNum}>{counts.notAttending}</span>
           <span className={styles.statLabel}>Not coming</span>
         </div>
         <div className={styles.stat} data-stat="replies">
-          <span className={styles.statIcon} aria-hidden="true">
-            <Mail size={18} strokeWidth={1.75} />
-          </span>
           <span className={styles.statNum}>{counts.responses}</span>
           <span className={styles.statLabel}>Replies</span>
         </div>
       </div>
-      <DeadlineLine insights={insights} content={content} canAdd={!archived} />
 
-
-      {newCount ? (
-        <Banner
-          tone="info"
-          icon={BellDot}
-          data-new-banner
-          actions={
-            <Button small onClick={replies.markSeen} data-mark-seen>
-              Mark as seen
-            </Button>
-          }
-        >
-          {newCount === 1 ? '1 new reply' : `${newCount} new replies`} since you last looked on this device.
-        </Banner>
-      ) : null}
       {held ? (
         <Banner tone="warning" data-held-replies>
           {held} {held === 1 ? 'reply' : 'replies'} arrived during an unusual number of replies in a short time, so {held === 1 ? 'it is' : 'they are'} held
@@ -348,65 +437,49 @@ export function GuestsView({
         </Banner>
       ) : null}
 
-      {showAnswers ? (
-        <section className={styles.stack} aria-labelledby="answers-title" data-answers>
-          <div>
-            <h2 id="answers-title" className={styles.sectionHeading}>
-              Answers
-            </h2>
-            <p className={styles.hint}>From guests who are coming; one answer per reply. Tap an answer to see who chose it.</p>
-          </div>
-          {questions.map((q) => (
-            <QuestionCard key={q.id} q={q} active={answer?.id === q.id ? answer.value : null} onPick={pickAnswer} />
-          ))}
-        </section>
-      ) : null}
-
-      {counts.responses ? <DietaryCard insights={insights} hasQuestion={hasDietQuestion} archived={archived} onSettings={onSettings} /> : null}
-
-      <section className={styles.stack} aria-labelledby="replies-title">
-        <div className={styles.sectionHead}>
-          <h2 id="replies-title" ref={listRef} tabIndex={-1} className={styles.sectionHeading}>
-            Replies{' '}
-            <span className={styles.headingCount}>
-              {list.length === data.responses.length ? data.responses.length : `${list.length} of ${data.responses.length}`}
-            </span>
-          </h2>
-          {counts.responses ? (
-            <Button small variant="tertiary" icon={Printer} onClick={onPrint} data-print-list>
-              Print list
-            </Button>
-          ) : null}
-        </div>
+      <section className={styles.listBlock} aria-labelledby="replies-title">
+        <h2 id="replies-title" ref={listRef} tabIndex={-1} className={styles.visuallyHidden}>
+          Replies
+        </h2>
         {data.responses.length ? (
           <>
-            <div className={styles.chips} role="group" aria-label="Show">
+            <div className={styles.search}>
+              <Search size={18} aria-hidden="true" />
+              <label className={styles.visuallyHidden} htmlFor="reply-search">
+                Search replies by name
+              </label>
+              <input id="reply-search" type="search" className={styles.searchInput} placeholder="Search by name" value={query} onChange={(e) => setQuery(e.target.value)} />
+            </div>
+            <div className={cx(styles.chips, styles.statusTabs)} role="group" aria-label="Show">
               {chips.map((c) => (
-                <button key={c.id} type="button" className={cx(styles.chip, filter === c.id && styles.chipOn)} aria-pressed={filter === c.id} onClick={() => setFilter(c.id)} data-filter={c.id}>
+                <button
+                  key={c.id}
+                  type="button"
+                  className={cx(styles.chip, filter === c.id && styles.chipOn)}
+                  aria-pressed={filter === c.id}
+                  aria-label={c.count ? `${c.label} (${c.count})` : undefined}
+                  onClick={() => setFilter(c.id)}
+                  data-filter={c.id}
+                >
                   {c.label}
+                  {c.count ? (
+                    <span className={styles.chipCount} aria-hidden="true">
+                      {c.count}
+                    </span>
+                  ) : null}
                 </button>
               ))}
             </div>
-            <div className={styles.sortRow}>
-              <label htmlFor="reply-sort" className={styles.label}>
-                Sort
-              </label>
-              <select id="reply-sort" className={styles.select} value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
-                {SORTS.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {data.responses.length >= 8 ? (
-              <div className={styles.search}>
-                <Search size={18} aria-hidden="true" />
-                <label className={styles.visuallyHidden} htmlFor="reply-search">
-                  Search replies by name
-                </label>
-                <input id="reply-search" type="search" className={styles.searchInput} placeholder="Search by name" value={query} onChange={(e) => setQuery(e.target.value)} />
-              </div>
+            {newCount && filter === 'new' ? (
+              <p className={styles.newLine} data-new-banner>
+                <BellDot size={18} strokeWidth={1.75} aria-hidden="true" />
+                <span>
+                  <strong>{newCount === 1 ? '1 new reply' : `${newCount} new replies`}</strong> since you last looked
+                </span>
+                <button type="button" className={styles.newLineButton} onClick={replies.markSeen} data-mark-seen>
+                  Mark as seen
+                </button>
+              </p>
             ) : null}
             {answer ? (
               <div className={styles.activeFilter} data-answer-filter>
@@ -418,6 +491,21 @@ export function GuestsView({
                 </Button>
               </div>
             ) : null}
+            <div className={styles.listHead}>
+              <p className={styles.listCount} aria-live="polite">
+                {list.length === data.responses.length ? plural(data.responses.length, 'reply', 'replies') : `${list.length} of ${plural(data.responses.length, 'reply', 'replies')}`}
+              </p>
+              <label htmlFor="reply-sort" className={styles.visuallyHidden}>
+                Sort
+              </label>
+              <select id="reply-sort" className={cx(styles.select, styles.sortSelect)} value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
+                {SORTS.map((s) => (
+                  <option key={s.value} value={s.value}>
+                    {s.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </>
         ) : null}
 
@@ -433,10 +521,12 @@ export function GuestsView({
                 <Button onClick={() => setQuery('')}>Clear search</Button>
               ) : answer ? (
                 <Button onClick={() => setAnswer(null)}>Show all replies</Button>
+              ) : filter !== 'all' ? (
+                <Button onClick={() => setFilter('all')}>Show all replies</Button>
               ) : undefined
             }
           >
-            {query ? `No replies match “${query}”.` : answer ? `No replies chose “${answer.value}” here.` : 'No replies here.'}
+            {query ? `No replies match “${query}”.` : answer ? `No replies chose “${answer.value}” here.` : filter === 'new' ? 'No new replies since you last looked.' : 'No replies here.'}
           </EmptyState>
         ) : (
           <ul className={styles.replyList}>
@@ -461,6 +551,11 @@ export function GuestsView({
         <Button icon={RefreshCw} onClick={replies.refresh} busy={replies.loading} busyLabel="Refreshing…" data-refresh-replies>
           Refresh
         </Button>
+        {counts.responses ? (
+          <Button variant="tertiary" icon={Printer} onClick={onPrint} data-print-list>
+            Print list
+          </Button>
+        ) : null}
         {!archived ? (
           <Button variant="tertiary" onClick={onSettings}>
             Reply settings
@@ -604,18 +699,17 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
                     <span className={styles.barFill} style={{ width: `${o.percent}%` }} />
                   </span>
                   <span className={styles.barValue}>
-                      {q.kind === 'yesno' ? (
-                        <>
-                          {o.percent}% <span className={styles.barCount}>({o.count})</span>
-                        </>
-                      ) : (
-                        o.count
-                      )}
-                      <span className={styles.visuallyHidden}>
-                        {' '}
-                        {o.count === 1 ? 'reply' : 'replies'}
-                        {q.kind === 'yesno' ? '' : `, ${o.percent}%`}
-                      </span>
+                    {/* G100 (Typeform): count and percent; yes / no reads percent first. */}
+                    {q.kind === 'yesno' ? (
+                      <>
+                        {o.percent}% <span className={styles.barCount}>({o.count})</span>
+                      </>
+                    ) : (
+                      <>
+                        {o.count} · {o.percent}%
+                      </>
+                    )}
+                    <span className={styles.visuallyHidden}> {o.count === 1 ? 'reply' : 'replies'}</span>
                   </span>
                 </button>
               </li>

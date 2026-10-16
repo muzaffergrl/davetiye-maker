@@ -167,7 +167,8 @@ try {
     await page.goto(`${J}#setup/1`);
     await page.waitForSelector('[data-setup="1"]');
     check('setup 1: opens at "#setup/1" with the names from /start', (await h1(page)).includes('Your names') && (await page.inputValue('#f-partners-0-display_name')) === 'Elena' && (await page.inputValue('#f-partners-1-display_name')) === 'Marco');
-    check('setup 1: rights rule shown before publishing', (await page.locator('main').innerText()).includes('After that, names and date can change 3 times'));
+    // G100: the rule in one line ("After publishing you can change names or the date 3 times.") + "Learn more".
+    check('setup 1: rights rule shown before publishing (one line + "Learn more")', (await page.locator('main').innerText()).includes('After publishing you can change names or the date 3 times.') && (await page.locator('[data-rights-note] [data-rights-more]').count()) === 1);
     check('setup 1: no character counters on short names (G060-fix)', !(await page.locator('main').innerText()).includes('/40'));
     check('setup: no bottom navigation in the wizard', (await page.locator('nav[aria-label="Editor"]').count()) === 0);
     check('setup: no horizontal scroll at 390 px', (await overflow(page)) <= 0, String(await overflow(page)));
@@ -183,7 +184,8 @@ try {
     await waitSaved(page);
     await pause(400);
     const s1 = await page.locator('main').innerText();
-    check('setup 1 (K29): the date is on the same step, no banners above it, the rule shown once', !s1.includes('These are still the sample details') && s1.split('names and date can change 3 times').length === 2 && (await page.locator('[data-sample-tag]').count()) >= 1, s1.slice(0, 200));
+    // G100: one sample-text line instead of a "Sample" tag per field; no "How your names appear" in the first step.
+    check('setup 1 (K29, G100): the date is on the same step, no banners above it, the rule shown once, one sample line and no tags', !s1.includes('These are still the sample details') && s1.split('change names or the date 3 times').length === 2 && (await page.locator('[data-sample-line]').count()) === 1 && (await page.locator('[data-sample-tag]').count()) === 0 && (await page.locator('#f-name_display').count()) === 0, s1.slice(0, 200));
     check('setup 1 (K29): no venue in the setup (later, under Edit → Day & place)', (await page.locator('#f-venue-name').count()) === 0);
     await page.waitForSelector('[data-zone-from-phone]');
     check('setup 1: the time zone follows the phone ("We\u2019ll use London time, from your phone")', (await page.locator('[data-zone-from-phone]').innerText()).includes('London'));
@@ -248,6 +250,9 @@ try {
     await page.click('[data-setup-publish]');
     await page.waitForSelector('[data-setup-done]', { timeout: 20_000 });
     check('publish: "Your website is live"', (await h1(page)).includes('Your website is live'));
+    // G100: the QR code folds under "More ways to share" (the link and Share / Copy / Open come first).
+    check('publish (G100): the QR code is folded under "More ways to share"', (await page.getAttribute('[data-setup-done] [data-disclosure="more-ways"] button[aria-expanded]', 'aria-expanded')) === 'false');
+    await page.click('[data-setup-done] [data-disclosure="more-ways"] button[aria-expanded]');
     const qrText = await page.locator('[data-setup-done] svg[role="img"]').getAttribute('data-qr-text');
     const decoded = await decodeQr(page.locator('[data-setup-done] svg[role="img"]'));
     check('publish: QR made from the public URL and decodes to it', qrText === PUBLIC && decoded === PUBLIC, `${qrText} / ${decoded}`);

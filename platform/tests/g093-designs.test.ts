@@ -34,7 +34,7 @@ const NEW = [
   {
     id: 'art-deco-black-tie',
     name: 'Art Deco Black-Tie',
-    title: 'Art Deco Black-Tie: Envelope Wedding Website | BKE Studio',
+    title: 'Art Deco Black-Tie: Wedding Website | BKE Studio',
     collection: '06_Art_Deco_Noir',
     couple: 'Vivian & Charles',
     fonts: ['Italiana', 'Josefin Sans'],

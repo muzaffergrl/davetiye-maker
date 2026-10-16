@@ -820,3 +820,10 @@ adımlarına göre), ilan metni (hak ve arşiv cümleleri §11.7'den, aynen).
 - Alt sayfa: [bottom sheet vs modal](https://www.dolfy.ai/blog/bottom-sheet-or-modal-mobile-interruption-pattern), [bottom sheet UI](https://www.eleken.co/blog-posts/bottom-sheet-ui)
 - Magic link: [LoginRadius](https://www.loginradius.com/glossary/magic-link), [Zoho ZeptoMail](https://www.zoho.com/zeptomail/articles/magic-links.html), [WIP tartışması](https://wip.co/posts/what-are-some-of-the-best-practices-for-implementing-magic-links-jqtu55)
 - Pazar verisi: `docs/13_ETSY_ARASTIRMA.md`
+
+## G100 (2026-10-16) — Refero P1 sadeleştirme
+Kurulum 1. adım yalnız iki ad + tarih/saat (hak notu tek satır + "Learn more", `rightsOneLine()`); yayın başarı ekranı
+`Published.tsx` (link + Copy/Share/Open önde, QR "More ways to share" altında, 2–3 isteğe bağlı sonraki adım); alan başına "Sample"
+rozeti yerine sayfa başında "N fields still show sample text · Go to the first one" (örnek alan soluk/italik); Guests iki görünüm:
+**Guest list** (sayılar → arama → All · Coming · Not coming · New → liste) ve **Results** (`#guests/results`: kapanış günü, dağılım,
+soru başına sayı + yüzde, yiyecek/alerji notları). Ayrıntı ve ekranlar: `gorevler/G100-panel-sadelestirme.md`, `platform/previews/g100/`.
