@@ -279,7 +279,10 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   .hero .scene-bg .corner-br { --cw: min(48vw, 25svh, 270px); right: calc(var(--cw) * -.16); }
 }
 /* the mist fades out */
-.hero-bg picture, .page-bg picture { -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
+.hero-bg picture { -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
+/* inner pages: only the pale mist of the first screen — the blurred meadow (lower ~38 % of meadow-580) sat mid-page behind the
+   second frame; it now closes the page only (.meadow-end, like 20's shoreline; qa-kontrol 2026-10-16) */
+.page-bg picture { -webkit-mask-image: linear-gradient(#000 36%, transparent 58%); mask-image: linear-gradient(#000 36%, transparent 58%); }
 .hero .f-petal { top: 9%; }
 .hero .f-corn { top: 15.5%; }
 .hero .f-daisy { top: 22%; }
@@ -401,6 +404,9 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
   background: url("img/meadow_foot-580.webp") 0 100% / cover no-repeat;
   -webkit-mask: linear-gradient(transparent, #000 60%); mask: linear-gradient(transparent, #000 60%);
 }
+/* rsvp: the meadow starts under the closing's words; "Replay the opening" on a soft mist halo (qa-kontrol 2026-10-16) */
+.closing.meadow-end::before { -webkit-mask: linear-gradient(transparent 46%, #000 82%); mask: linear-gradient(transparent 46%, #000 82%); }
+.closing .textlink { text-shadow: 0 0 8px #F7F6EC, 0 0 3px #F7F6EC; }
 .foot, .next-sec, .closing { --corner: min(52vw, 300px); padding: 46px 16px calc(var(--corner) * 1.02 + var(--below, 0px)); text-align: center; }
 :is(.foot, .next-sec, .closing) > .page-corner { right: calc(var(--corner) * -.06); bottom: 0; width: var(--corner); }
 :is(.foot, .next-sec, .closing) > :not(.page-corner, .accent-layer) { position: relative; z-index: 1; }

@@ -199,7 +199,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .env-page {
   --obj: min(84vw, calc(38svh * 1.5644), 440px); --w: calc(var(--obj) * var(--ok, 1) / .99551); --nm: clamp(32px, 9.4vw, 60px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; text-align: center;
+  justify-content: center; text-align: center; overflow-x: clip;
   padding: max(calc(var(--pt0, 40px) + env(safe-area-inset-top)), var(--pt, calc(var(--w) * .68288 - var(--nm) * 1.12 - 34px))) 16px max(calc(26px + env(safe-area-inset-bottom)), 17svh);
 }
 .env-head { position: relative; z-index: 3; width: min(100%, 720px); pointer-events: none; }
@@ -356,7 +356,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .paper::before { top: calc(var(--top-h) - 1px); bottom: calc(var(--bot-h) - 1px); }
 .paper::after { bottom: 0; height: var(--bot-h); background-size: 100% auto; background-position: 0 100%; }
 .paper-text { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-/* invitation_card: clean band 48.2–50.4 % repeats at its own height (invitation_card_band) */
+/* invitation_card: band 48.2–50.4 % repeats (invitation_card_band) */
 .invite { --ar: .69745; --t: .48174; --b: .50379; }
 .invite::before, .invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-960.webp") 2x); }
 .invite::before { background-image: image-set(url("img/invitation_card_band-480.webp") 1x, url("img/invitation_card_band-960.webp") 2x); background-size: 100% auto; background-repeat: repeat-y; background-position: 0 0; }
@@ -391,7 +391,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .cal-links { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* -- home: two gilded frames on the black wall (no comp) */
-.frames-sec { padding: 40px 0 10px; text-align: center; }
+.frames-sec { padding: 40px 0 10px; text-align: center; overflow-x: clip; } /* glow */
 .frames { display: flex; flex-direction: column; align-items: center; gap: 30px; margin-top: 22px; }
 .fr-link { position: relative; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; }
 .fr-text { display: flex; flex-direction: column; align-items: center; margin-top: 12px; }
