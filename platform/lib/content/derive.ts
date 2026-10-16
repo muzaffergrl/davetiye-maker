@@ -51,7 +51,21 @@ export function buildView(content: unknown, opts: ViewOptions = {}): Record<stri
     v.city_region_country = joinParts([v.city, v.region, v.country]);
   }
   Object.assign(view, thankYouViewFields(content, opts.now ?? new Date(), opts.thankYou === true));
+  yesNoOptions(view);
   return view;
+}
+
+/**
+ * G128: a "yes / no" RSVP question shows as two choices (Yes, No) in every theme's existing choice markup
+ * (data-repeat=".options"); the other non-choice types keep no options (the theme's answer box; /rsvp/form.js turns it
+ * into the right input from the site-data "rsvp_form").
+ */
+function yesNoOptions(view: Record<string, unknown>): void {
+  const questions = (view.rsvp as { questions?: unknown } | undefined)?.questions;
+  if (!Array.isArray(questions)) return;
+  for (const q of questions as Array<Record<string, unknown>>) {
+    if (q && typeof q === 'object' && q.type === 'yesno') q.options = ['Yes', 'No'];
+  }
 }
 
 /** Value at a dotted path (`schedule.0.time`). Own properties only — no prototype access. */

@@ -7,9 +7,12 @@
 //   guests    attending: integer 1..maxGuests (empty -> 1); not attending: stored as 0
 //   message   optional, at most MESSAGE_MAX characters
 //   answers   optional {<question id>: "<answer>"} for the couple's custom questions (content
-//             rsvp.questions, G051): "choice" = one of its options, "text" = at most ANSWER_MAX
-//             characters. Questions are for guests who accept: a "no" reply stores no answers.
-//             Unanswered questions are fine (not required); unknown ids are ignored.
+//             rsvp.questions, G051/G128): "choice" = one of its options, "text" = at most ANSWER_MAX
+//             characters, "long" = at most LONG_ANSWER_MAX, "yesno" = yes / no (stored "Yes" / "No"),
+//             "number" = a whole number 0 … 9999. Questions are for guests who accept: a "no" reply stores
+//             no answers. A question marked required (G128) must be answered; others may stay empty.
+//             Unknown ids are ignored.
+//   G128: content rsvp.required {email, message} makes those fields required for guests.
 //   party     optional ["<name of guest 2>", "<name of guest 3>", …] (G069): the names of the other people in
 //             an attending reply, each at most PARTY_NAME_MAX characters. Only the first guests − 1 count;
 //             empty ones are fine (a name is never required) and are not stored. A "no" stores none.
@@ -26,7 +29,8 @@
 import type { RsvpQuestion } from '../content/types.ts';
 import type { RsvpAnswer, RsvpInput } from '../data/types.ts';
 import { CONTROL_RE, normalizeLine } from '../content/text.ts';
-import { ANSWER_MAX, EMAIL_MAX, HONEYPOT_FIELD, MESSAGE_MAX, NAME_MAX, PARTY_NAME_MAX } from './config.ts';
+import { ANSWER_MAX, EMAIL_MAX, HONEYPOT_FIELD, LONG_ANSWER_MAX, MESSAGE_MAX, NAME_MAX, PARTY_NAME_MAX } from './config.ts';
+import { numberAnswer, QUESTION_TYPES, rsvpFormConfig, yesNoAnswer, type RequirableField } from './form-config.ts';
 
 export type RsvpField = 'name' | 'email' | 'attending' | 'guests' | 'message' | `answer:${string}` | `party:${number}`;
 
@@ -95,8 +99,13 @@ export function formQuestions(content: unknown): RsvpQuestion[] {
   if (!Array.isArray(list)) return [];
   return list.filter(
     (q): q is RsvpQuestion =>
-      Boolean(q) && typeof q === 'object' && typeof q.id === 'string' && typeof q.label === 'string' && (q.type === 'choice' || q.type === 'text'),
+      Boolean(q) && typeof q === 'object' && typeof q.id === 'string' && typeof q.label === 'string' && QUESTION_TYPES.includes(q.type),
   );
+}
+
+/** Built-in fields the guest must fill in (G128, content rsvp.required). */
+export function requiredFields(content: unknown): Record<RequirableField, boolean> {
+  return rsvpFormConfig(content).required;
 }
 
 /** Answers of an attending guest: {ok: answers in question order} or {errors by "answer:<id>"}. */
@@ -104,26 +113,58 @@ function parseAnswers(
   raw: unknown,
   questions: readonly RsvpQuestion[],
   existing: readonly RsvpAnswer[] = [],
+  enforceRequired = false,
 ): { answers: RsvpAnswer[]; errors: Record<string, string> } {
   const answers: RsvpAnswer[] = [];
   const errors: Record<string, string> = {};
   const given = raw && typeof raw === 'object' && !Array.isArray(raw) ? (raw as Record<string, unknown>) : {};
   for (const q of questions) {
-    if (!Object.hasOwn(given, q.id)) continue;
     const field = answerField(q.id);
+    const missing = () => {
+      if (enforceRequired && q.required === true) errors[field] = q.type === 'choice' || q.type === 'yesno' ? 'Please choose an answer.' : 'Please answer this question.';
+    };
+    if (!Object.hasOwn(given, q.id) || given[q.id] === null || given[q.id] === undefined) {
+      missing();
+      continue;
+    }
     // A correction by the couple keeps a stored answer as it was (the option may have been renamed since).
     const before = existing.find((a) => a.id === q.id);
-    if (q.type === 'choice') {
+    if (q.type === 'yesno') {
+      const raw = given[q.id];
+      if (typeof raw === 'string' && !raw.trim()) {
+        missing();
+        continue;
+      }
+      const value = yesNoAnswer(raw);
+      if (value) answers.push({ id: q.id, question: cleanLine(q.label), answer: value });
+      else errors[field] = 'Please choose Yes or No.';
+    } else if (q.type === 'number') {
+      const raw = cleanLine(given[q.id]);
+      if (!raw) {
+        missing();
+        continue;
+      }
+      const value = numberAnswer(raw);
+      if (value !== null) answers.push({ id: q.id, question: cleanLine(q.label), answer: value });
+      else errors[field] = 'Please enter a whole number from 0 to 9999.';
+    } else if (q.type === 'choice') {
       const value = cleanLine(given[q.id]);
-      if (!value) continue;
+      if (!value) {
+        missing();
+        continue;
+      }
       const match = (q.options ?? []).find((o) => cleanLine(o) === value);
       if (match !== undefined) answers.push({ id: q.id, question: cleanLine(q.label), answer: cleanLine(match) });
       else if (before && cleanLine(before.answer) === value) answers.push({ ...before });
       else errors[field] = 'Please choose one of the options.';
     } else {
       const value = cleanBlock(given[q.id]);
-      if (!value) continue;
-      if ([...value].length > ANSWER_MAX) errors[field] = `Please keep your answer to ${ANSWER_MAX} characters or fewer.`;
+      if (!value) {
+        missing();
+        continue;
+      }
+      const max = q.type === 'long' ? LONG_ANSWER_MAX : ANSWER_MAX;
+      if ([...value].length > max) errors[field] = `Please keep your answer to ${max} characters or fewer.`;
       else answers.push({ id: q.id, question: cleanLine(q.label), answer: value });
     }
   }
@@ -151,8 +192,13 @@ function parseParty(raw: unknown, guests: number): { party: string[]; errors: Re
  * Validates a guest reply. `maxGuests` is the theme's cap (config.themeMaxGuests); `questions` are the
  * couple's custom questions of the published content (formQuestions).
  */
-export function parseSubmission(body: unknown, maxGuests: number, questions: readonly RsvpQuestion[] = []): ParsedSubmission {
-  return parseReply(body, maxGuests, questions, []);
+export function parseSubmission(
+  body: unknown,
+  maxGuests: number,
+  questions: readonly RsvpQuestion[] = [],
+  required: Partial<Record<RequirableField, boolean>> = {},
+): ParsedSubmission {
+  return parseReply(body, maxGuests, questions, [], required, true);
 }
 
 /**
@@ -165,11 +211,19 @@ export function parseCoupleReply(
   questions: readonly RsvpQuestion[] = [],
   existing: { answers?: readonly RsvpAnswer[] } | null = null,
 ): ParsedSubmission {
-  const parsed = parseReply(body, maxGuests, questions, existing?.answers ?? []);
+  // The couple types in what they were told: a required field the guest left out is not theirs to invent (G128).
+  const parsed = parseReply(body, maxGuests, questions, existing?.answers ?? [], {}, false);
   return { ...parsed, spam: false } as ParsedSubmission;
 }
 
-function parseReply(body: unknown, maxGuests: number, questions: readonly RsvpQuestion[], existingAnswers: readonly RsvpAnswer[]): ParsedSubmission {
+function parseReply(
+  body: unknown,
+  maxGuests: number,
+  questions: readonly RsvpQuestion[],
+  existingAnswers: readonly RsvpAnswer[],
+  required: Partial<Record<RequirableField, boolean>>,
+  enforceRequired: boolean,
+): ParsedSubmission {
   if (!body || typeof body !== 'object' || Array.isArray(body)) {
     return { ok: false, errors: { name: 'Please enter your name.' }, spam: false };
   }
@@ -184,6 +238,8 @@ function parseReply(body: unknown, maxGuests: number, questions: readonly RsvpQu
   const emailRaw = cleanLine(b.email);
   if (emailRaw && (emailRaw.length > EMAIL_MAX || !EMAIL_RE.test(emailRaw))) {
     errors.email = 'Please check your email address.';
+  } else if (!emailRaw && required.email === true) {
+    errors.email = 'Please enter your email address.';
   }
 
   const attending = parseAttending(b.attending);
@@ -199,11 +255,12 @@ function parseReply(body: unknown, maxGuests: number, questions: readonly RsvpQu
 
   const message = cleanBlock(b.message);
   if (message.length > MESSAGE_MAX) errors.message = `Please keep your message to ${MESSAGE_MAX} characters or fewer.`;
+  else if (!message && required.message === true) errors.message = 'Please write a note for the couple.';
 
   // Questions are asked of guests who accept (the theme shows them with the guest count).
   let answers: RsvpAnswer[] = [];
   if (attending === true && (questions.length || existingAnswers.length)) {
-    const parsed = parseAnswers(b.answers, questions, existingAnswers);
+    const parsed = parseAnswers(b.answers, questions, existingAnswers, enforceRequired);
     answers = parsed.answers;
     Object.assign(errors, parsed.errors);
   }

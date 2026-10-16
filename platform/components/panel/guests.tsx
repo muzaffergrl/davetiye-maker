@@ -48,6 +48,7 @@ import { zoneCity } from './sections.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, EmptyState, OverflowMenu, Segmented, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
+import { SheetsCard } from './SheetsCard.tsx';
 
 // ---------------------------------------------------------------------------------------------
 // Data (shared by Home and Guests)
@@ -556,12 +557,21 @@ export function GuestsView({
             Print list
           </Button>
         ) : null}
+        {counts.responses ? (
+          <a className={cx(styles.btn, styles.btn_tertiary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
+            <span>Download CSV</span>
+            <span className={styles.visuallyHidden}> (one row per guest)</span>
+          </a>
+        ) : null}
         {!archived ? (
           <Button variant="tertiary" onClick={onSettings}>
             Reply settings
           </Button>
         ) : null}
       </div>
+
+      {/* G128: a live copy of the replies in the couple's Google Drive */}
+      <SheetsCard api={api} online={online} archived={archived} />
 
       {/* Always in reach while scrolling the list (comp u2_guests_390): add a phone reply, download the list. */}
       {!archived || counts.responses ? (
@@ -572,10 +582,10 @@ export function GuestsView({
             </Button>
           ) : null}
           {counts.responses ? (
-            <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
+            <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesExcelUrl()} download rel="noreferrer" data-excel>
               <Download size={18} strokeWidth={1.75} aria-hidden="true" />
-              <span>Download list</span>
-              <span className={styles.visuallyHidden}> (CSV, opens in Excel or Google Sheets)</span>
+              <span>Download Excel</span>
+              <span className={styles.visuallyHidden}> (replies and a summary; opens in Excel, Numbers or Google Sheets)</span>
             </a>
           ) : null}
           {!archived && !online ? <p className={styles.guestBarNote}>Connect to the internet to add or change replies.</p> : null}
@@ -1090,14 +1100,16 @@ function ReplySheet({
               const key = `answer:${q.id}`;
               const value = d.answers[q.id] ?? '';
               const onChange = (v: string) => (set({ answers: { ...d.answers, [q.id]: v } }), clear(key));
-              const options = q.type === 'choice' ? [...(q.options ?? [])] : [];
-              if (q.type === 'choice' && value && !options.some((o) => norm(o) === norm(value))) options.push(value);
+              // G128: a yes / no question is a choice of Yes and No here too; long / number answers are text boxes.
+              const picks = q.type === 'choice' || q.type === 'yesno';
+              const options = q.type === 'choice' ? [...(q.options ?? [])] : q.type === 'yesno' ? ['Yes', 'No'] : [];
+              if (picks && value && !options.some((o) => norm(o) === norm(value))) options.push(value);
               return (
                 <div key={q.id} className={styles.field}>
                   <label htmlFor={fieldDomId(key)} className={styles.label}>
                     {q.label} <span className={styles.optional}>(optional)</span>
                   </label>
-                  {q.type === 'choice' ? (
+                  {picks ? (
                     <select
                       id={fieldDomId(key)}
                       className={styles.select}
@@ -1117,8 +1129,9 @@ function ReplySheet({
                     <textarea
                       id={fieldDomId(key)}
                       className={styles.textarea}
-                      rows={2}
-                      maxLength={300}
+                      rows={q.type === 'long' ? 4 : q.type === 'number' ? 1 : 2}
+                      maxLength={q.type === 'long' ? 1000 : q.type === 'number' ? 4 : 300}
+                      inputMode={q.type === 'number' ? 'numeric' : undefined}
                       value={value}
                       aria-invalid={Boolean(errors[key]) || undefined}
                       aria-describedby={describe(key)}

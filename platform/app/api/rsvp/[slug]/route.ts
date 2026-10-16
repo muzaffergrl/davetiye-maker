@@ -3,7 +3,9 @@
 //   POST  one reply, JSON body {name, email, attending, guests, message, answers?{<question id>: value} (G051), website(honeypot)}
 // A password-protected website (G076) answers both with 401 password_required unless the request has its guest cookie.
 // Used by /rsvp/form.js (the theme form contract, README "RSVP").
+import { after } from 'next/server.js'; // .js: node:test loads route files directly (no exports map in next)
 import { getDataAdapter } from '../../../../lib/data/index.ts';
+import { scheduleSheetSync } from '../../../../lib/google/sync.ts';
 import { BODY_MAX_BYTES } from '../../../../lib/rsvp/config.ts';
 import { errorResult, getRsvpStatus, submitRsvp } from '../../../../lib/rsvp/guest.ts';
 import { BodyTooLargeError, clientIp, isJsonRequest, jsonResponse, readLimitedText } from '../../../../lib/rsvp/http.ts';
@@ -36,7 +38,10 @@ export async function POST(req: Request, ctx: Ctx): Promise<Response> {
     return jsonResponse(errorResult(400, 'unsupported'));
   }
   try {
-    return jsonResponse(await submitRsvp({ adapter: getDataAdapter(), ip: clientIp(req), cookie: req.headers.get('cookie') }, slug, body));
+    const adapter = getDataAdapter();
+    // G128: a counted reply goes on to the couple's Google Sheet after the answer (after(): the guest never waits).
+    const onStored = (site: { id: string }) => scheduleSheetSync(adapter, site.id, after);
+    return jsonResponse(await submitRsvp({ adapter, ip: clientIp(req), cookie: req.headers.get('cookie'), onStored }, slug, body));
   } catch (e) {
     console.error(`[rsvp] submit ${slug}:`, e);
     return jsonResponse(errorResult(500, 'server'));

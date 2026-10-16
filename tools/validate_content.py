@@ -134,7 +134,7 @@ def rule_errors(record: dict) -> tuple[list[str], list[str]]:
     if blocks.get("faq") and not faq:
         warnings.append("faq bloğu açık ama hiç soru yok")
 
-    # G051 — RSVP özel soruları: kalıcı id, okunur soru, choice = en az 2 farklı seçenek, text = seçeneksiz.
+    # G051/G128 — RSVP özel soruları: kalıcı id, okunur soru, choice = en az 2 farklı seçenek, diğer türler (text, long, yesno, number) seçeneksiz.
     seen = set()
     for i, q in enumerate((record.get("rsvp") or {}).get("questions") or []):
         at = f"rsvp.questions.{i}"
@@ -157,7 +157,7 @@ def rule_errors(record: dict) -> tuple[list[str], list[str]]:
             elif len(set(filled)) != len(filled):
                 errors.append(f"{at}.options: aynı seçenek iki kez")
         elif options:
-            errors.append(f"{at}.options: kısa yanıtlı soruda seçenek olmaz")
+            errors.append(f"{at}.options: seçeneksiz soru türünde seçenek olmaz")
     return errors, warnings
 
 

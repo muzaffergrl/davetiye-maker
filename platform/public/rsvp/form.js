@@ -15,6 +15,12 @@
  * "party:<n>") and sends {party: ["<name>", …]} in guest order ("" = no name). For a "no" or one guest the rows are
  * out of the form and nothing is sent; without JavaScript the template never shows.
  *
+ * Required fields and answer types (G128): the page's #site-data carries "rsvp_form" {required: {email, message},
+ * questions: [{id, type, required}]} (lib/rsvp/form-config.ts). The script marks those inputs required (aria-required;
+ * the theme's "(optional)" mark of email / note is hidden when the couple made it required, and an optional question
+ * gets the same mark), shapes the answer box of a question by its type (number: one line, numeric keypad; long: a
+ * taller box; yes / no: the theme's choice pills, written by the server) and checks them with the server's messages.
+ *
  * Full contract: platform/README.md, section "RSVP". No dependencies, no inline handlers (CSP).
  * The script reads the slug from the page's #site-data block and talks to /api/rsvp/<slug>.
  * The browser's own validation bubbles are turned off (form.noValidate): the same English messages
@@ -32,6 +38,8 @@
   var PARTY_MAX = 20; // platform ceiling of guests in one reply (lib/rsvp/config.ts MAX_GUESTS_CEILING)
   var slotSeq = 0;
   var HONEYPOT = 'website';
+  var NUMBER_RE = /^\d{1,4}$/;
+  var LONG_MAX = 1000; // lib/rsvp/config.ts LONG_ANSWER_MAX
   var TEXT = {
     success: 'Thank you! Your reply has been sent.',
     closed: 'Replies are closed. If you still need to reply, please contact the couple directly.',
@@ -182,10 +190,76 @@
     };
   }
 
+  /** The theme's "(optional)" mark inside a field's label, or null. */
+  function optionalMark(el) {
+    return el ? el.querySelector('[data-copy="form_optional"], .opt') : null;
+  }
+
+  /** G128: a built-in field the couple made required — required + aria-required, its "(optional)" mark hidden. */
+  function requireField(form, name) {
+    var f = form.elements.namedItem(name);
+    if (!f || isRadioList(f)) return;
+    f.required = true;
+    f.setAttribute('aria-required', 'true');
+    var mark = optionalMark(f.closest('label, .field'));
+    if (mark) mark.hidden = true;
+  }
+
+  /** G128: the shape of a question's answer box and its required / optional mark. */
+  function shapeQuestion(form, wrap, cfg) {
+    var controls = wrap.querySelectorAll('input, select, textarea');
+    wrap.setAttribute('data-rsvp-type', cfg.type);
+    each(controls, function (c) {
+      if (c.tagName !== 'TEXTAREA') return;
+      if (cfg.type === 'number') {
+        c.rows = 1;
+        c.maxLength = 4;
+        c.setAttribute('inputmode', 'numeric');
+        c.setAttribute('enterkeyhint', 'next');
+        c.style.minHeight = '48px';
+        c.style.resize = 'none';
+      } else if (cfg.type === 'long') {
+        c.rows = 5;
+        c.maxLength = LONG_MAX;
+        c.style.minHeight = '140px';
+      }
+    });
+    if (cfg.required) {
+      var first = controls[0];
+      if (first) {
+        first.required = true; // one radio of a group is enough for the browser's check
+        if (first.type !== 'radio') first.setAttribute('aria-required', 'true');
+      }
+      wrap.setAttribute('aria-required', 'true');
+      return;
+    }
+    // An optional question says so like the form's other optional fields: the theme's own mark, copied.
+    var legend = wrap.querySelector('legend') || wrap.querySelector('label');
+    if (!legend || legend.querySelector('[data-rsvp-optional]')) return;
+    var model = optionalMark(form);
+    var mark = model ? model.cloneNode(true) : document.createElement('span');
+    if (!model) {
+      mark.className = 'opt';
+      mark.textContent = '(optional)';
+    }
+    mark.hidden = false;
+    mark.removeAttribute('id');
+    mark.setAttribute('data-rsvp-optional', '');
+    legend.appendChild(document.createTextNode(' '));
+    legend.appendChild(mark);
+  }
+
   function setup(form, ctx) {
     var root = form.closest('[data-rsvp]');
     var scope = root || document;
     var busy = false;
+    var config = ctx.form || {};
+    var types = {};
+    each(config.questions || [], function (q) {
+      if (q && typeof q.id === 'string') types[q.id] = q;
+    });
+    if (config.required && config.required.email) requireField(form, 'email');
+    if (config.required && config.required.message) requireField(form, 'message');
     // Custom questions: name their inputs "answer:<id>" (a theme cannot write names from content).
     var questions = [];
     each(form.querySelectorAll('[data-rsvp-question]'), function (q) {
@@ -195,8 +269,14 @@
       each(q.querySelectorAll('input, select, textarea'), function (c) {
         if (!c.name) c.name = name;
       });
-      questions.push({ id: id, name: name });
+      var cfg = types[id] || { id: id, type: q.querySelector('input[type="radio"]') ? 'choice' : 'text', required: false };
+      shapeQuestion(form, q, cfg);
+      questions.push({ id: id, name: name, type: cfg.type, required: Boolean(cfg.required) });
     });
+    function questionOf(name) {
+      for (var i = 0; i < questions.length; i++) if (questions[i].name === name) return questions[i];
+      return null;
+    }
     var party = partyRows(form);
     function fieldNames() {
       return FIELDS.concat(
@@ -342,6 +422,17 @@
         var f = form.elements.namedItem(name);
         if (!f) return;
         var list = isRadioList(f) ? Array.prototype.slice.call(f) : [f];
+        var q = questionOf(name);
+        var c0 = list[0];
+        // A number answer (G128): a whole number 0–9999 (the answer box is a one-line textarea, no browser check).
+        if (q && q.type === 'number' && c0 && c0.willValidate) {
+          var nv = String(c0.value || '').trim();
+          if (nv && !NUMBER_RE.test(nv)) {
+            out = out || {};
+            out[name] = 'Please enter a whole number from 0 to 9999.';
+            return;
+          }
+        }
         var bad = list.filter(function (c) {
           return c.willValidate && c.validity && !c.validity.valid;
         })[0];
@@ -349,11 +440,14 @@
         var v = bad.validity;
         var msg;
         if (name === 'name') msg = v.tooLong ? 'Please keep your name to ' + bad.maxLength + ' characters or fewer.' : 'Please enter your name.';
-        else if (name === 'email') msg = 'Please check your email address.';
+        else if (name === 'email') msg = v.valueMissing ? 'Please enter your email address.' : 'Please check your email address.';
         else if (name === 'attending') msg = 'Please let us know if you can attend.';
         else if (name === 'guests') msg = 'Please enter a number of guests from ' + (bad.min || 1) + (bad.max ? ' to ' + bad.max : '') + '.';
-        else if (name.indexOf(ANSWER_PREFIX) === 0) msg = v.tooLong ? 'Please keep your answer to ' + bad.maxLength + ' characters or fewer.' : 'Please check your answer.';
-        else if (name.indexOf(PARTY_PREFIX) === 0) msg = 'Please keep each name to ' + (bad.maxLength > 0 ? bad.maxLength : 120) + ' characters or fewer.';
+        else if (name.indexOf(ANSWER_PREFIX) === 0) {
+          if (v.valueMissing) msg = q && (q.type === 'choice' || q.type === 'yesno') ? 'Please choose an answer.' : 'Please answer this question.';
+          else msg = v.tooLong ? 'Please keep your answer to ' + bad.maxLength + ' characters or fewer.' : 'Please check your answer.';
+        } else if (name.indexOf(PARTY_PREFIX) === 0) msg = 'Please keep each name to ' + (bad.maxLength > 0 ? bad.maxLength : 120) + ' characters or fewer.';
+        else if (v.valueMissing) msg = 'Please write a note for the couple.';
         else msg = 'Please keep your message to ' + (bad.maxLength > 0 ? bad.maxLength : 500) + ' characters or fewer.';
         out = out || {};
         out[name] = msg;
@@ -551,6 +645,7 @@
       endpoint: '/api/rsvp/' + encodeURIComponent(data.slug),
       preview: Boolean(data.preview),
       previewKey: data.preview ? previewKey : null,
+      form: data.rsvp_form && typeof data.rsvp_form === 'object' ? data.rsvp_form : null,
       // A theme demo (/start/demo/<theme>, slug "start/demo/…") has no site to ask: it only previews.
       statusCheck: PLAIN_SLUG.test(String(data.slug))
     };

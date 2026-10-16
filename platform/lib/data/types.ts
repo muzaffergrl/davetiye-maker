@@ -388,7 +388,22 @@ export interface DataAdapter {
   hitCounter?(key: string, windowMs: number): Promise<{ count: number; resetAt: number }>;
   /** The live window of a hitCounter key without adding a hit (null: no live window). G076. */
   readCounter?(key: string): Promise<{ count: number; resetAt: number } | null>;
+  /**
+   * G128: a small private JSON document kept next to a site but OUTSIDE its record (e.g. the Google Sheets connection),
+   * so writing it never moves the site's updatedAt (the panel's autosave would see a conflict). Deleted with the site.
+   * `name` matches SITE_DOC_NAME_RE. Null when there is none.
+   */
+  readSiteDoc(siteId: string, name: string): Promise<unknown | null>;
+  /**
+   * Read-modify-write of a site document: `change` gets the current value (null when none) and returns the new one, or
+   * null to delete it. Serialised per document in one process; the blob adapter also makes the write conditional on
+   * the version read (ETag) and retries on a concurrent write. Returns what was stored (null: deleted / nothing).
+   */
+  updateSiteDoc<T>(siteId: string, name: string, change: (current: T | null) => T | null): Promise<T | null>;
 }
+
+/** Name of a site document (G128): a short lower-case word. */
+export const SITE_DOC_NAME_RE = /^[a-z][a-z0-9-]{0,31}$/;
 
 /**
  * A new updatedAt that is always later than the previous one (two writes in the same millisecond

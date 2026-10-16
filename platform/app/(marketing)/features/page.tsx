@@ -54,7 +54,7 @@ export default function FeaturesPage() {
       title: 'Replies that land in one place',
       items: [
         'Guests reply with their name, coming or not, party size and a note; no account needed',
-        `Up to ${LIMITS.rsvpQuestions} questions of your own: multiple choice (up to ${LIMITS.questionOptions} options) or a short answer`,
+        `Up to ${LIMITS.rsvpQuestions} questions of your own: multiple choice (up to ${LIMITS.questionOptions} options), yes or no, a number or a written answer, each required or optional`,
         'Questions are shown only to guests who are coming',
         'A reply-by date: the form closes on its own after it, and you can also close it yourself',
         'Every reply and the totals in your panel, and a CSV download for spreadsheets',

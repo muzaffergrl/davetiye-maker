@@ -246,6 +246,8 @@ test('G051 schema limits: 12 questions & answers, lengths, 3 RSVP questions, 8 c
     { id: 'b', label: 'B', type: 'choice', options: Array.from({ length: 9 }, (_, i) => `o${i}`) },
     { id: 'c', label: 'C', type: 'choice', options: ['x'.repeat(61), 'y'] },
     { id: 'd', label: 'D', type: 'text' },
+    // G128: up to 10 questions (11 here)
+    ...Array.from({ length: 7 }, (_, i) => ({ id: `e${i}`, label: 'E', type: 'text' })),
   ];
   const r = validateContent(c);
   const byPath = Object.fromEntries(r.errors.map((e) => [e.path, e.code]));
@@ -338,7 +340,7 @@ test('G051 pass/fail parity with tools/validate_content.py (FAQ and RSVP questio
   add('faq-long', (c) => (c.faq[0].a = 'a'.repeat(601)));
   add('faq-13', (c) => (c.faq = Array.from({ length: 13 }, () => ({ q: 'Q', a: 'A' }))));
   add('faq-missing-a', (c) => delete c.faq[0].a);
-  add('q-4', (c) => c.rsvp.questions.push({ id: 'x', label: 'X', type: 'text' }, { id: 'y', label: 'Y', type: 'text' }));
+  add('q-11', (c) => c.rsvp.questions.push(...Array.from({ length: 11 - c.rsvp.questions.length }, (_, i) => ({ id: `x${i}`, label: 'X', type: 'text' })))); // G128: 10 at most
   add('q-bad-id', (c) => (c.rsvp.questions[0].id = 'Meal'));
   add('q-id-newline', (c) => (c.rsvp.questions[0].id = 'meal\n'));
   add('q-dup-id', (c) => (c.rsvp.questions[1].id = 'meal'));
@@ -355,7 +357,7 @@ test('G051 pass/fail parity with tools/validate_content.py (FAQ and RSVP questio
   add('q-text-options', (c) => (c.rsvp.questions[1].options = ['x']));
   add('q-type', (c) => (c.rsvp.questions[0].type = 'menu'));
   add('q-9-options', (c) => (c.rsvp.questions[0].options = Array.from({ length: 9 }, (_, i) => `o${i}`)));
-  add('q-unknown-field', (c) => (c.rsvp.questions[0].required = true));
+  add('q-unknown-field', (c) => (c.rsvp.questions[0].mandatory = true)); // G128: "required" is a real field now
   for (const [name, record] of cases) {
     const file = path.join(dir, `g051-${name}.json`);
     writeFileSync(file, JSON.stringify(record));

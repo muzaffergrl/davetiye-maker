@@ -311,7 +311,7 @@ test('request format: JSON only, size-capped, malformed JSON rejected', async ()
   assert.equal(form.status, 415);
   assert.equal((await form.json()).code, 'unsupported');
   assert.equal((await post('open-site', null, { raw: '{"name": "A",' })).status, 400);
-  const big = await post('open-site', { name: 'A', attending: 'yes', message: 'x'.repeat(9000) });
+  const big = await post('open-site', { name: 'A', attending: 'yes', message: 'x'.repeat(33000) }); // G128: body cap 32 KB
   assert.equal(big.status, 413);
   assert.equal((await big.json()).code, 'too_large');
 });
@@ -476,7 +476,7 @@ test('questions: answers stored with the reply, listed for the couple, one CSV c
   const res = await csv('questions-site', { bearer: site.editKey });
   assert.equal(res.status, 200);
   const lines = new TextDecoder().decode(new Uint8Array(await res.arrayBuffer())).split('\r\n');
-  assert.equal(lines[0], '"Name","Party of","Attending","Party size","Email","Submitted (America/New_York)","Source","Message","Dinner","Song request"');
+  assert.equal(lines[0], '"Name","Party of","Attending","Party size","Email","Submitted (America/New_York)","Source","Message","Dinner","Song request (removed)"'); // G128: a removed question's column says so
   const cells = (line: string) => line.slice(1, -1).split('","');
   const noDate = (line: string) => cells(line).filter((_, i) => i !== 5);
   assert.deepEqual(noDate(lines[1]), ['Early Bird', 'Early Bird', 'Yes', '1', '', 'Website', '', '', '']);

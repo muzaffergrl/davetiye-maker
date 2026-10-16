@@ -14,7 +14,7 @@ export const CONTENT_LIMITS = {
   faqItems: 12,
   faqQuestion: 120,
   faqAnswer: 600,
-  rsvpQuestions: 3,
+  rsvpQuestions: 10,
   questionLabel: 120,
   questionOptions: 8,
   questionOption: 60,

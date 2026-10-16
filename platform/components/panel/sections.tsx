@@ -7,13 +7,15 @@
 import { CalendarDays, Lock, Pencil, Plus, Shuffle } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
-import type { ContentRecord, Locale, RsvpQuestion } from '../../lib/content/types.ts';
+import type { ContentRecord, Locale } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
-import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, openingPlace, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
+import { defaultNameDisplay, OPTIONAL_BLOCK_LABELS, openingPlace, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
 import { beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, rightsOneLine, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { MapFields, venueMapLinkChange } from './MapFields.tsx';
+import { RsvpFormFields } from './RsvpFormFields.tsx';
+import type { PanelCopyEntry } from '../../lib/theme/copy.ts';
 import { Button, cx, Disclosure, EmptyState, RightsMeter, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
 
@@ -744,102 +746,7 @@ export function FaqFields() {
 // ---------------------------------------------------------------------------------------------
 // RSVP settings
 
-const QUESTION_TYPES = [
-  { value: 'choice', label: 'Guests pick one choice' },
-  { value: 'text', label: 'Guests write a short answer' },
-];
-
-/**
- * The couple's own questions in the reply form (content rsvp.questions, G051), e.g. a meal choice.
- * Each question keeps its id for good: answers are stored under it, so editing or reordering
- * questions never mixes up answers already received.
- */
-function QuestionFields() {
-  const { content, edit, issuesAt, locked } = usePanelContext();
-  const questions = content.rsvp?.questions ?? [];
-  const off = content.rsvp?.method === 'none';
-  const change = (i: number, fn: (q: RsvpQuestion) => void) => edit((c) => void fn(c.rsvp.questions![i]));
-  const add = () =>
-    edit((c) => {
-      const list = c.rsvp.questions ?? [];
-      c.rsvp = { ...c.rsvp, questions: [...list, { id: newQuestionId(list.map((q) => q.id)), label: '', type: 'choice', options: ['', ''] }] };
-    });
-  return (
-    <div data-rsvp-questions>
-      <h2 className={styles.subTitle}>Questions for your guests</h2>
-      <p className={styles.hint}>
-        Optional, up to {CONTENT_LIMITS.rsvpQuestions}: for example a meal choice. Guests who accept answer them in the reply form; you see the answers
-        under Guests and in the CSV.
-      </p>
-      {off ? <p className={styles.note}>Replies on the website are off, so guests do not see these questions.</p> : null}
-      {questions.map((q, i) => (
-        <RepeatableItem<RsvpQuestion>
-          key={q.id || i}
-          index={i}
-          count={questions.length}
-          noun="form question"
-          title={`Question ${i + 1}`}
-          select={(c) => c.rsvp?.questions ?? []}
-          assign={(c, list) => void (c.rsvp = { ...c.rsvp, questions: list })}
-          data-question-row={i}
-        >
-          <TextField
-            path={`rsvp.questions.${i}.label`}
-            label="Question"
-            maxLength={CONTENT_LIMITS.questionLabel}
-            placeholder="Meal choice"
-            value={q.label}
-            onChange={(v) => change(i, (x) => void (x.label = v))}
-          />
-          <SelectField
-            path={`rsvp.questions.${i}.type`}
-            label="Answer"
-            value={q.type}
-            options={QUESTION_TYPES}
-            onChange={(v) =>
-              change(i, (x) => {
-                x.type = v === 'text' ? 'text' : 'choice';
-                if (x.type === 'text') delete x.options;
-                else if (!x.options?.length) x.options = ['', ''];
-              })
-            }
-          />
-          {q.type === 'choice'
-            ? (q.options ?? []).map((o, j) => (
-                <div key={j} className={styles.choiceRow}>
-                  <TextField
-                    path={`rsvp.questions.${i}.options.${j}`}
-                    label={`Choice ${j + 1}`}
-                    maxLength={CONTENT_LIMITS.questionOption}
-                    value={o}
-                    onChange={(v) => change(i, (x) => void (x.options![j] = v))}
-                  />
-                  <Button small variant="tertiary" disabled={locked} aria-label={`Remove choice ${j + 1} of question ${i + 1}`} onClick={() => change(i, (x) => void x.options!.splice(j, 1))}>
-                    Remove
-                  </Button>
-                </div>
-              ))
-            : null}
-          <IssueList issues={[...issuesAt(`rsvp.questions.${i}.options`), ...issuesAt(`rsvp.questions.${i}.id`)]} />
-          {q.type === 'choice' && (q.options?.length ?? 0) < CONTENT_LIMITS.questionOptions ? (
-            <Button small variant="secondary" icon={Plus} disabled={locked} onClick={() => change(i, (x) => void (x.options = [...(x.options ?? []), '']))}>
-              Add a choice
-            </Button>
-          ) : null}
-        </RepeatableItem>
-      ))}
-      <IssueList issues={issuesAt('rsvp.questions')} />
-      {questions.length < CONTENT_LIMITS.rsvpQuestions ? (
-        <Button variant="secondary" icon={Plus} disabled={locked} onClick={add} data-add-question>
-          Add a question
-        </Button>
-      ) : null}
-      {questions.length ? <p className={styles.hint}>Changing or removing a question later keeps the answers you already have.</p> : null}
-    </div>
-  );
-}
-
-export function RsvpFields({ onOpenGuests }: { onOpenGuests: () => void }) {
+export function RsvpFields({ onOpenGuests, copy = [] }: { onOpenGuests: () => void; copy?: readonly PanelCopyEntry[] }) {
   const { content, edit, fields } = usePanelContext();
   const deadline = content.rsvp?.deadline;
   const long = formatDateLong(deadline, content.locale);
@@ -860,7 +767,8 @@ export function RsvpFields({ onOpenGuests }: { onOpenGuests: () => void }) {
         display={long ? `Replies close at the end of ${long} (${zoneCity(content.timezone)} time).` : undefined}
         onChange={(v) => edit((c) => void (c.rsvp = { ...c.rsvp, deadline: v }))}
       />
-      {fields.rsvpQuestions ? <QuestionFields /> : null}
+      {/* G128: the reply form's fields (labels, required / optional) and the couple's own questions */}
+      <RsvpFormFields copy={copy} questionsShown={fields.rsvpQuestions} />
       <Button variant="tertiary" onClick={onOpenGuests}>
         See the replies under Guests
       </Button>

@@ -15,7 +15,7 @@
 //   9. store                                               -> 200 success
 // Responses never contain other guests' data, ids or counts, and never say a reply was held.
 
-import type { DataAdapter, RsvpInput, RsvpRecord } from '../data/types.ts';
+import type { DataAdapter, RsvpInput, RsvpRecord, SiteRecord } from '../data/types.ts';
 import { isArchived } from '../panel/rights.ts';
 import { guestMayEnter, isProtected } from '../site/access.ts';
 import { previewAccess } from '../sites.ts';
@@ -23,7 +23,7 @@ import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
 import { closedMessage, rsvpWindow } from './deadline.ts';
 import { getRsvpRateLimiter, ipBucket, type RateLimiter } from './rate-limit.ts';
-import { formQuestions, parseSubmission, isHoneypotFilled } from './validate.ts';
+import { formQuestions, parseSubmission, isHoneypotFilled, requiredFields } from './validate.ts';
 
 export type RsvpState = 'success' | 'closed' | 'error';
 export type RsvpErrorCode = 'not_found' | 'invalid' | 'rate_limited' | 'busy' | 'too_large' | 'unsupported' | 'server' | 'password_required';
@@ -44,6 +44,8 @@ export interface GuestContext {
   ip?: string | null;
   /** The request's Cookie header: a password-protected site needs its guest cookie (G076, lib/site/access.ts). */
   cookie?: string | null;
+  /** G128: called after a counted reply is stored (the route schedules the Google Sheets sync with after()). */
+  onStored?: (site: SiteRecord) => void;
 }
 
 export const MESSAGES = {
@@ -157,7 +159,7 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   const fields = body && typeof body === 'object' && !Array.isArray(body) ? (body as Record<string, unknown>) : {};
   if (isHoneypotFilled(fields)) return success(); // looks the same as a real reply; nothing stored
 
-  const parsed = parseSubmission(fields, await themeMaxGuests(site.theme), formQuestions(site.publishedContent));
+  const parsed = parseSubmission(fields, await themeMaxGuests(site.theme), formQuestions(site.publishedContent), requiredFields(site.publishedContent));
   if (!parsed.ok) {
     const first = Object.values(parsed.errors)[0];
     return { status: 400, body: { ok: false, state: 'error', code: 'invalid', message: first, fields: parsed.errors } };
@@ -178,5 +180,7 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   }
 
   await ctx.adapter.saveRsvp(site.id, held ? { ...parsed.value, held: true } : parsed.value);
+  // G128: a counted reply goes on to the couple's Google Sheet (after the answer, never holding the guest up).
+  if (!held) ctx.onStored?.(site);
   return success();
 }

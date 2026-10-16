@@ -377,7 +377,8 @@ try {
       await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
       const q = (await adapter.getSiteById(seeded.site.id))!.content.rsvp.questions ?? [];
       check('panel: a third question is saved with a fresh id and its choices', q.length === 3 && /^q[a-z0-9]{6}$/.test(q[2].id) && q[2].options?.join('|') === 'Yes, please|No, thank you', JSON.stringify(q[2]));
-      check('panel: at most three questions (no "Add a question" now)', (await page.locator('[data-add-question]').count()) === 0);
+      // G128: up to 10 questions now, so "Add a question" stays after the third
+      check('panel: "Add a question" still offered below the limit (10, G128)', (await page.locator('[data-add-question]').count()) === 1);
       check('panel: no horizontal overflow (RSVP section)', (await overflowX(page)) <= 0);
       await page.locator('[data-rsvp-questions]').screenshot({ path: path.join(shots, 'panel_questions_390.png') });
     }

@@ -40,6 +40,7 @@ import * as cheerio from 'cheerio';
 import { Text, hasChildren, isTag, type AnyNode, type Element } from 'domhandler';
 import { calendarEvent, googleCalendarUrl, type CalendarEvent } from '../calendar.ts';
 import { buildView, fieldKind, getPath } from '../content/derive.ts';
+import { formScriptConfig } from '../rsvp/form-config.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
 import { THANK_YOU_DEFAULT_TITLE } from '../content/thank-you.ts';
 import { MAP_FRAME_ORIGIN, mapPlaces } from '../maps.ts';
@@ -738,6 +739,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       // G075: theme JS may skip what has no place after the wedding (countdown, accents of the invitation)
       thank_you_on: view.thank_you_on === true,
     },
+    // G128: the reply form's required fields and answer types for /rsvp/form.js (ids and flags only, no texts)
+    rsvp_form: formScriptConfig(view),
   };
   $('#site-data').remove();
   const dataScript = $('<script type="application/json" id="site-data"></script>');

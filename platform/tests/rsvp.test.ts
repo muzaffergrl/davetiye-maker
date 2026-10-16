@@ -304,7 +304,7 @@ test('CSV: one column per question after Message, removed questions keep theirs,
     { timeZone: 'UTC', bom: false, questions: [{ id: 'meal', label: 'Meal choice' }, { id: 'song', label: '-Song "request"' }] },
   );
   const lines = csv.split('\r\n');
-  assert.equal(lines[0], `"Name","Party of","Attending","Party size","Email","Submitted (UTC)","Source","Message","Meal choice","'-Song ""request""","'+Removed question"`);
+  assert.equal(lines[0], `"Name","Party of","Attending","Party size","Email","Submitted (UTC)","Source","Message","Meal choice","'-Song ""request""","'+Removed question (removed)"`); // G128
   assert.equal(lines[1], '"Old Reply","Old Reply","Yes","1","","March 1, 2027 10:00 AM","Website","","","",""');
   assert.equal(lines[2], `"With Answers","With Answers","Yes","1","","March 2, 2027 10:00 AM","Website","","Fish","'=HYPERLINK(""http://x.example"",""go"")","'@cmd"`);
   assert.equal(lines[3], '"Declined","Declined","No","0","","March 3, 2027 10:00 AM","Website","","","",""');

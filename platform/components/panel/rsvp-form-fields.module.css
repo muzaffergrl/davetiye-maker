@@ -1,0 +1,37 @@
+/* "Reply form" editor (G128, RsvpFormFields.tsx). Panel v2 tokens only (panel.module.css :root of the panel). */
+.wrap {
+  display: grid;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.list {
+  display: grid;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.row {
+  display: grid;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.subhead {
+  margin: var(--s-4) 0 0;
+  color: var(--c-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.fixedLabel {
+  margin: 0;
+}
+
+.always {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0;
+}

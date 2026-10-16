@@ -71,7 +71,7 @@ test('home page targets the docs/14 §2.1 cluster: envelope, digital, wedding in
 });
 
 test('facts: numbers come from the content limits; "not included" is explicit', () => {
-  assert.equal(LIMITS.rsvpQuestions, 3);
+  assert.equal(LIMITS.rsvpQuestions, 10);
   assert.equal(LIMITS.scheduleRows, 10);
   assert.equal(LIMITS.faqItems, 12);
   assert.ok(included().some((x) => x.includes('12 months')));

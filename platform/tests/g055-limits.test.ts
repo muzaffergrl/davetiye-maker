@@ -87,7 +87,7 @@ test('limits come from the schema: names 40, names line 85, venue 80, schedule 1
   assert.equal(schema.properties.schedule.maxItems, 10);
   assert.deepEqual(
     [CONTENT_LIMITS.faqItems, CONTENT_LIMITS.faqQuestion, CONTENT_LIMITS.faqAnswer, CONTENT_LIMITS.rsvpQuestions, CONTENT_LIMITS.questionLabel],
-    [12, 120, 600, 3, 120],
+    [12, 120, 600, 10, 120], // G128: 10 RSVP questions
   );
 });
 
