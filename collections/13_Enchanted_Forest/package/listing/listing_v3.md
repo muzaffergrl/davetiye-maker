@@ -15,6 +15,7 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G41
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Live** since G079 (2026-10-15). This design is open on `/start` and on the sales site since G094 (`platform/lib/marketing/config.ts`); the current production release `b952bc8` (2026-10-16, docs/10 §2) serves it. The editor features were not re-tried on the live site in this task. |
 | Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Decided on (K34, 2026-10-15), but the records disagree: docs/10 (G092) says the variable is not set in production, docs/18 §4 says it was added on 2026-10-15 and reported off again on 2026-10-16. Not read in this task. The listing keeps "We confirm each order in our shop before a website can go live" with [VERIFY: manual order check on in production]: read the value in Vercel, or delete the sentence before publishing. |
 | Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
+| Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository since 2026-10-16; described in the description and FAQ (G132) and in the START HERE guide (G131). **Not on production yet** and not tried on the live site. The 4 music tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128), so the description and FAQ keep a VERIFY note on it. Image 8 now reads "Up to 10 questions, download as Excel" (G132). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation (theme README, "Bilinen sınırlar"). |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). The listing says so. |
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
@@ -53,9 +54,12 @@ Copy the link into your phone's browser.
 WHAT YOU GET
 • Your wedding website in the Enchanted Forest Storybook design: storybook opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page [VERIFY: real iPhone Safari and Android Chrome]
-• Online RSVP: replies, head counts and up to 3 questions of your own (for example a meal choice) [VERIFY: try on the live site]; download the list as a spreadsheet (CSV)
+• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required [VERIFY: try on the live site]
+• Download every reply as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
 • Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
-• 5 photo spots with cropping, a countdown, map, dress code, travel & stay and registry buttons, and up to 12 questions & answers [VERIFY: try on the live site]
+• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers [VERIFY: try on the live site]
+• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one [VERIFY: try on the live site]
+• Soft background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and gentle sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap [VERIFY: tracks listened to and approved; try on the live site]
 • A QR code of your website (PNG or SVG) for printed cards and signs
 • An optional guest password, and a thank-you page for after the wedding
 • A START HERE guide (PDF) with your start link and every step explained
@@ -69,11 +73,11 @@ HOW IT WORKS IN 3 STEPS
 WHAT YOU CAN CHANGE
 • Your names, how they appear, and a monogram where the design shows one
 • Date, ceremony time and time zone; month-first or day-first date style
-• Venue, address, map link and the order of the day (up to 10 rows)
-• Your story: an intro line and three captions
+• Venue, address, map and directions, a separate reception place, and the order of the day (up to 10 rows)
+• Your story: an intro line, three captions and its music (one of 4 tracks, your own file or none)
 • 5 photos: a portrait, 3 story photos and the venue, each cropped to its frame
 • Questions & answers (up to 12), dress code, travel & stay and registry links
-• RSVP deadline and up to 3 questions for your guests
+• RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Will You Join Us?")
 • Which optional sections show
 What stays as designed: the artwork, colors, fonts, page layout and the storybook opening animation.
@@ -94,7 +98,7 @@ GOOD TO KNOW
 • We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; Western European accents (é, ñ, ü) use the design's fonts, while some other accented letters (for example ł, ő, ş) and other alphabets show in a simpler fallback font.
-• No music. Colors and fonts do not change.
+• Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
@@ -155,7 +159,7 @@ The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (G124, `
 | 2 | `02_opening.png` | It opens like a real invitation: three phones show the storybook closed, its cover and first page turning, and the invitation card rising from the page |
 | 3 | `03_pages.png` | Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page |
 | 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed |
-| 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download list button |
+| 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download Excel button |
 | 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
 | 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
 | 8 | `08_included.png` | What is included: the storybook opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
@@ -192,10 +196,16 @@ Yes. Every page of the editor has "Headings & labels". The artwork, colors and f
 You can write your own texts and headings in any language. Built-in messages such as reply form errors stay in English.
 
 **How do my guests reply?**
-On your RSVP page, with no app or account. You see every reply in your editor and can download them as a spreadsheet (CSV).
+On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply. [VERIFY: Google Sheets connection tested live]
 
 **How many guests can I invite?**
 As many as you like. One reply can include up to 10 people.
+
+**Is there music?**
+Yes, if you like: soft music on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and gentle sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
+
+**Can guests find the venue?**
+Yes. Your Details page can show a map of the venue (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze. If the reception is somewhere else, add it as a second place.
 
 **Can I add a password?**
 Yes, optional: one shared password that you send to your guests with the link.
@@ -251,6 +261,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G122, 2026-10-16)
 - [ ] Questions & answers and RSVP questions tried on the live site
+- [ ] Music, map and directions, the reply form and Excel download (G126–G128) live and tried on the live site; the 4 tracks listened to and approved; Google Sheets connected with a real Google account
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
