@@ -77,7 +77,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 488, nav top 319)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 62×44, home \"Replay the envelope\" 252×47, rsvp \"Replay the envelope\" 185×47",
-  "envelope → /willow-and-finn/home in 4110 ms, card transition flag set",
+  "envelope → /willow-and-finn/home in 4242 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-06-26 16:00 America/New_York = 2027-06-26 20:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-26T21:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-07-01T20:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (306 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (270 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -127,11 +127,11 @@
   "details@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 587 KB",
-  "home first view (390×844, DPR 3, placeholders): 929 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 710 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 1454 KB",
-  "recording: previews/g418/opening_390x844.mp4 (2814 KB, lead-in 0.47 s cut, first frame mean 222,210,189) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, placeholders): 588 KB",
+  "home first view (390×844, DPR 3, placeholders): 930 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 711 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1455 KB",
+  "recording: previews/g418/opening_390x844.mp4 (2774 KB, lead-in 0.45 s cut, first frame mean 222,210,189) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -210,8 +210,8 @@
      },
      {
       "box": "script names",
-      "edge": 1.03,
-      "dark": 0.021
+      "edge": 0.89,
+      "dark": 0.02
      },
      {
       "box": "P",
@@ -242,7 +242,7 @@
      },
      {
       "box": "script names",
-      "edge": 1.06,
+      "edge": 1.07,
       "dark": 0.012
      },
      {
@@ -478,13 +478,13 @@
      "bottom": 479
     },
     "bad": [
-     "span.cd-num \"349\" bottom 588",
+     "span.cd-num \"348\" bottom 588",
      "span.cd-lbl \"Days\" bottom 604",
-     "span.cd-num \"05\" bottom 588",
+     "span.cd-num \"08\" bottom 588",
      "span.cd-lbl \"Hours\" bottom 604",
-     "span.cd-num \"12\" bottom 588",
+     "span.cd-num \"39\" bottom 588",
      "span.cd-lbl \"Minutes\" bottom 604",
-     "span.cd-num \"02\" bottom 588",
+     "span.cd-num \"14\" bottom 588",
      "span.cd-lbl \"Seconds\" bottom 604"
     ],
     "partly": [],
@@ -547,13 +547,13 @@
      "bottom": 756
     },
     "bad": [
-     "span.cd-num \"254\" bottom 681",
+     "span.cd-num \"253\" bottom 681",
      "span.cd-lbl \"Days\" bottom 697",
-     "span.cd-num \"05\" bottom 681",
+     "span.cd-num \"08\" bottom 681",
      "span.cd-lbl \"Hours\" bottom 697",
-     "span.cd-num \"11\" bottom 681",
+     "span.cd-num \"38\" bottom 681",
      "span.cd-lbl \"Minutes\" bottom 697",
-     "span.cd-num \"43\" bottom 681",
+     "span.cd-num \"55\" bottom 681",
      "span.cd-lbl \"Seconds\" bottom 697",
      "a.btn \"RSVP\" bottom 756"
     ],
@@ -579,13 +579,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 635",
      "p.hero-city.in.done \"Lancaster, Pennsylvania\" bottom 659",
-     "span.cd-num \"254\" bottom 696",
+     "span.cd-num \"253\" bottom 696",
      "span.cd-lbl \"Days\" bottom 712",
-     "span.cd-num \"05\" bottom 696",
+     "span.cd-num \"08\" bottom 696",
      "span.cd-lbl \"Hours\" bottom 712",
-     "span.cd-num \"11\" bottom 696",
+     "span.cd-num \"38\" bottom 696",
      "span.cd-lbl \"Minutes\" bottom 712",
-     "span.cd-num \"37\" bottom 696",
+     "span.cd-num \"49\" bottom 696",
      "span.cd-lbl \"Seconds\" bottom 712",
      "a.btn \"RSVP\" bottom 768"
     ],
@@ -609,13 +609,13 @@
      "bottom": 308
     },
     "bad": [
-     "span.cd-num \"254\" bottom 425",
+     "span.cd-num \"253\" bottom 425",
      "span.cd-lbl \"Days\" bottom 442",
-     "span.cd-num \"05\" bottom 425",
+     "span.cd-num \"08\" bottom 425",
      "span.cd-lbl \"Hours\" bottom 442",
-     "span.cd-num \"11\" bottom 425",
+     "span.cd-num \"38\" bottom 425",
      "span.cd-lbl \"Minutes\" bottom 442",
-     "span.cd-num \"31\" bottom 425",
+     "span.cd-num \"43\" bottom 425",
      "span.cd-lbl \"Seconds\" bottom 442"
     ],
     "partly": [],
@@ -638,13 +638,13 @@
      "bottom": 488
     },
     "bad": [
-     "span.cd-num \"254\" bottom 412",
+     "span.cd-num \"253\" bottom 412",
      "span.cd-lbl \"Days\" bottom 429",
-     "span.cd-num \"05\" bottom 412",
+     "span.cd-num \"08\" bottom 412",
      "span.cd-lbl \"Hours\" bottom 429",
-     "span.cd-num \"11\" bottom 412",
+     "span.cd-num \"38\" bottom 412",
      "span.cd-lbl \"Minutes\" bottom 429",
-     "span.cd-num \"25\" bottom 412",
+     "span.cd-num \"37\" bottom 412",
      "span.cd-lbl \"Seconds\" bottom 429",
      "a.btn \"RSVP\" bottom 488"
     ],
@@ -652,7 +652,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4110,
+  "envelope_to_home_ms": 4242,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -729,7 +729,7 @@
    "copy_keys_at_max": 71,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 587,
+  "first_view_index_kb_placeholders": 588,
   "first_view_index_files": [
    [
     "/themes/wildflower-meadow-vellum/img/florals_br-720.webp",
@@ -745,11 +745,11 @@
    ],
    [
     "/themes/wildflower-meadow-vellum/site.css",
-    45078
+    45769
    ],
    [
     "/themes/wildflower-meadow-vellum/site.js",
-    35357
+    35584
    ],
    [
     "https://fonts.gstatic.com/s/satisfy/v22/rP2Hp2yn6lkG50LoCZOIHQ.woff2",
@@ -764,7 +764,7 @@
     21696
    ]
   ],
-  "first_view_home_kb_placeholders": 929,
+  "first_view_home_kb_placeholders": 930,
   "first_view_home_files": [
    [
     "/themes/wildflower-meadow-vellum/img/invitation_card-900.webp",
@@ -796,17 +796,17 @@
    ],
    [
     "/themes/wildflower-meadow-vellum/site.css",
-    45078
+    45769
    ]
   ],
-  "first_view_index_kb_photos": 710,
+  "first_view_index_kb_photos": 711,
   "first_view_index_files_photos": [
    [
     "/themes/wildflower-meadow-vellum/img/florals_br-720.webp",
     130534
    ],
    [
-    "/media/8a0e5dee-7890-4fab-bb90-aeba73226f15/aeae74d2ad4457c20f9168992f0caee0-640w.jpg",
+    "/media/77b3f7e0-ddec-4ce9-ab16-51313d0f70e6/ca600bc783c05b3a7c1925e7e0b4f48d-640w.jpg",
     127140
    ],
    [
@@ -819,11 +819,11 @@
    ],
    [
     "/themes/wildflower-meadow-vellum/site.css",
-    45078
+    45769
    ],
    [
     "/themes/wildflower-meadow-vellum/site.js",
-    35357
+    35584
    ],
    [
     "https://fonts.gstatic.com/s/satisfy/v22/rP2Hp2yn6lkG50LoCZOIHQ.woff2",
@@ -834,10 +834,10 @@
     22712
    ]
   ],
-  "first_view_home_kb_photos": 1454,
+  "first_view_home_kb_photos": 1455,
   "first_view_home_files_photos": [
    [
-    "/media/8a0e5dee-7890-4fab-bb90-aeba73226f15/00bd77e8aa8feb943c447e3559577180-1280w.jpg",
+    "/media/77b3f7e0-ddec-4ce9-ab16-51313d0f70e6/928e5f869194867ca095c2abf11fc92e-1280w.jpg",
     292305
    ],
    [
@@ -849,11 +849,11 @@
     130534
    ],
    [
-    "/media/8a0e5dee-7890-4fab-bb90-aeba73226f15/aeae74d2ad4457c20f9168992f0caee0-640w.jpg",
+    "/media/77b3f7e0-ddec-4ce9-ab16-51313d0f70e6/ca600bc783c05b3a7c1925e7e0b4f48d-640w.jpg",
     127140
    ],
    [
-    "/media/8a0e5dee-7890-4fab-bb90-aeba73226f15/9721108bdcdea78b2794e9a8c92a7bb8-640w.jpg",
+    "/media/77b3f7e0-ddec-4ce9-ab16-51313d0f70e6/8f6ed33d0ef30f500b48a1dc71e5f0b2-640w.jpg",
     121179
    ],
    [
@@ -869,9 +869,9 @@
     70492
    ]
   ],
-  "video_kb": 2814,
+  "video_kb": 2774,
   "video_first_frame": {
-   "lead_in_s": 0.47,
+   "lead_in_s": 0.45,
    "mean_rgb": [
     222,
     210,
