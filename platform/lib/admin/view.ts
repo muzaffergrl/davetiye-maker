@@ -1,6 +1,8 @@
 // Admin view types and the list's filter (G087). Pure, no server imports: the browser list (components/admin)
 // filters with these; lib/admin/summary.ts builds the summaries on the server.
 
+import { normalizeOrderNumber } from '../claim/fields.ts';
+
 export type AdminSiteState = 'draft' | 'published' | 'archived';
 export type AdminOrderState = 'pending' | 'verified' | 'not_required';
 
@@ -318,4 +320,27 @@ export function ordersCsv(list: readonly AdminSiteSummary[], origin: string): st
     s.note ?? '',
   ]);
   return '\ufeff' + [head, ...rows].map((r) => r.map(cell).join(',')).join('\r\n') + '\r\n';
+}
+
+/**
+ * The template the message box opens with (G121, docs/19 §6 A2/A5): an order waiting for confirmation → "Publish is
+ * waiting"; a live site closing within 30 days → "closing soon"; otherwise "how to publish".
+ */
+export function defaultTemplateId(s: Pick<AdminSiteSummary, 'needsAction' | 'state' | 'onlineUntil'>, now: number = Date.now()): string {
+  if (s.needsAction) return 'publish_blocked_pending';
+  if (s.state === 'published' && s.onlineUntil) {
+    const left = (Date.parse(`${s.onlineUntil}T00:00:00Z`) - now) / DAY_MS;
+    if (left >= -1 && left <= CLOSING_WITHIN_DAYS) return 'archive_notice';
+  }
+  return 'how_to_publish';
+}
+
+/**
+ * G121 (docs/19 §6 A4): the search is an Etsy order number (the /start rule, lib/claim/fields.ts)
+ * and no website was started with it → that number (the admin then suggests the start-link reminder). Else null.
+ */
+export function orderWithoutSite(list: readonly Pick<AdminSiteSummary, 'orderRef'>[], query: string): string | null {
+  const order = normalizeOrderNumber(query);
+  if (!order) return null;
+  return list.some((s) => s.orderRef === order) ? null : order;
 }

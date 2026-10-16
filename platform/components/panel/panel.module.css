@@ -606,19 +606,20 @@
 /* Home: the couple's names, large. */
 .homeTitle {
   margin: 0;
-  font-size: clamp(34px, 9.5vw + 4px, 54px);
-  line-height: 1;
+  /* G121 (docs/18 §3 P2): smaller than before (34–54 px) — the progress card is the screen's anchor. */
+  font-size: clamp(28px, 5vw + 10px, 40px);
+  line-height: 1.05;
   letter-spacing: -0.03em;
   overflow-wrap: anywhere;
 }
 
 /* Under the names: the date in the brand's light, wide line. */
 .pageSub {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   color: var(--c-text);
   font-family: var(--font-wide);
   font-weight: 300;
-  font-size: clamp(18px, 2.4vw + 9px, 22px);
+  font-size: clamp(16px, 1.2vw + 12px, 19px);
   line-height: 1.3;
 }
 
@@ -986,24 +987,32 @@
 /* Status card (comp "Your website is live"): badge, one sentence, the link in a paper field with Copy, one action. */
 .status {
   display: grid;
-  gap: var(--s-4);
-  padding: var(--s-6) var(--s-5);
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
   border-radius: var(--r-card);
   background: var(--c-surface);
   border: 0;
   box-shadow: var(--e-1);
 }
 
+/* G121: the status label and its one action on one row (the action wraps under a long label on small phones). */
 .statusTop {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--s-2);
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-3);
+}
+
+.statusAction {
+  flex: 0 1 auto;
+  margin-left: auto;
 }
 
 .statusText {
   margin: 0;
-  font-size: 21px;
-  line-height: 1.2;
+  font-size: 17px;
+  line-height: 1.3;
 }
 
 .statusLink {
@@ -1234,6 +1243,60 @@
   margin: 0;
   font-weight: 600;
   text-align: right;
+}
+
+/* G121: Home → Settings (value rows, each opens where it is changed). */
+.settingsCard {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-5) var(--s-5) var(--s-3);
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+}
+
+.settingsCard > .cardTitle {
+  margin: 0;
+}
+
+.settingsList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.settingsList > li + li {
+  border-top: 1px solid var(--c-border);
+}
+
+.settingsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  min-height: 52px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: var(--c-heading);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.settingsLabel {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--c-text-muted);
+}
+
+.settingsValue {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-weight: 600;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 /* ================================================================== edit list */
@@ -1964,6 +2027,11 @@
 
 .save_warning {
   color: var(--c-warning);
+}
+
+/* G121: "Saved" in words for a moment after an autosave, in the success colour. */
+.saveFlash {
+  color: var(--c-success);
 }
 
 .save_danger {
@@ -3475,21 +3543,12 @@
   margin-right: auto;
 }
 
-.skip {
-  display: block;
-  min-height: 44px;
-  margin-bottom: 4px;
-  padding: 0 4px;
-  border: 0;
-  background: none;
+/* G121: the publish step's one sentence above the buttons (what publishing does). */
+.publishExplain {
+  margin: 0 0 8px;
   color: var(--c-heading);
-  font: inherit;
   font-size: 15px;
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 4px;
-  cursor: pointer;
+  line-height: 21px;
 }
 
 .setupBarRow {
@@ -3710,6 +3769,13 @@
   .setupBarPublish [data-setup-back] {
     padding: 0 12px;
     flex: none;
+  }
+  /* G121: steps 1–2 — "Skip for now" and "Continue" share the row equally. */
+  .setupBarPublish [data-setup-skip] {
+    flex: 1 1 0;
+  }
+  .setupBarPublish [data-setup-skip] ~ .btn_primary {
+    flex: 1 1 0;
   }
 }
 
@@ -4031,6 +4097,22 @@
   list-style: none;
 }
 
+/* G121: a changed page and its preview button side by side. */
+.reviewRow {
+  display: flex;
+  align-items: stretch;
+  gap: var(--s-2);
+}
+
+.reviewPreview {
+  flex: none;
+  align-self: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+}
+
 .reviewItem {
   display: flex;
   align-items: center;
@@ -4088,23 +4170,10 @@
   line-height: 22px;
 }
 
-/* Share: the QR code under the link, in the same card. */
+/* Share: the QR code, folded under "QR code for printed cards" (G121). */
 .shareQr {
   display: grid;
   gap: var(--s-2);
-  margin-top: var(--s-6);
-  padding-top: var(--s-5);
-  border-top: 1px solid var(--c-border);
-}
-
-.shareQrTitle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-  color: var(--c-heading);
-  font-size: 16px;
-  font-weight: 700;
 }
 
 /* ================================================================== motion */

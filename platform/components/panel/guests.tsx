@@ -511,7 +511,7 @@ export function GuestsView({
 
         {!data.responses.length ? (
           <EmptyState icon={Users} action={<Button variant="primary" icon={Share2} onClick={onShare}>Share</Button>}>
-            No replies yet. Share your website so guests can reply.
+            No replies yet. Share your website so guests can reply. New replies show here; we don&rsquo;t send email notifications yet.
           </EmptyState>
         ) : !list.length ? (
           <EmptyState

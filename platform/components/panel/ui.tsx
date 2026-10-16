@@ -8,6 +8,7 @@ import {
   CircleAlert,
   CircleCheckBig,
   Cloud,
+  CloudCheck,
   CloudOff,
   Ellipsis,
   Info,
@@ -444,6 +445,9 @@ export function Segmented<T extends string>({
 // ---------------------------------------------------------------------------------------------
 // Save indicator (docs/16 §9.1)
 
+/** How long "Saved" stays in words after an autosave (G121). */
+export const SAVED_FLASH_MS = 2500;
+
 const SAVE_UI: Record<SaveState, { icon: LucideIcon | null; text: string; tone: Tone }> = {
   saved: { icon: Cloud, text: 'Saved', tone: 'neutral' },
   pending: { icon: null, text: 'Unsaved changes', tone: 'neutral' },
@@ -469,18 +473,31 @@ export function SaveIndicator({ state, message, onSaveNow, compact }: { state: S
     const t = setTimeout(() => setShown('saving'), 300);
     return () => clearTimeout(t);
   }, [state]);
+  // G121 (docs/18 §2 P2, Medium/Notion): right after an autosave lands, "Saved" shows in words for a moment (also on a
+  // phone, where the bar otherwise has room for the icon only), then it goes back to the quiet cloud.
+  const [flash, setFlash] = useState(false);
+  const previous = useRef<SaveState>(state);
+  useEffect(() => {
+    const was = previous.current;
+    previous.current = state;
+    if (state !== 'saved' || was === 'saved') return;
+    setFlash(true);
+    const t = setTimeout(() => setFlash(false), SAVED_FLASH_MS);
+    return () => clearTimeout(t);
+  }, [state]);
+  const flashing = flash && shown === 'saved';
   const ui = SAVE_UI[shown];
   const text = shown === 'refused' && message ? message : ui.text;
-  const Icon = ui.icon;
+  const Icon = flashing ? CloudCheck : ui.icon;
   const clickable = shown === 'pending' || shown === 'retrying';
   const inner = (
     <>
       {Icon ? <Icon size={18} strokeWidth={1.75} className={shown === 'saving' ? styles.spin : undefined} aria-hidden="true" /> : <span className={styles.pendingDot} aria-hidden="true" />}
-      <span className={cx(styles.saveText, compact && styles.visuallyHiddenNarrow)}>{text}</span>
+      <span className={cx(styles.saveText, compact && !flashing && styles.visuallyHiddenNarrow)}>{text}</span>
     </>
   );
   return (
-    <div className={cx(styles.save, styles[`save_${ui.tone}`])} data-save-state={state} title={text}>
+    <div className={cx(styles.save, styles[`save_${ui.tone}`], flashing && styles.saveFlash)} data-save-state={state} data-save-flash={flashing || undefined} title={text}>
       {/* Only the saved <-> unsaved transitions are announced, not every keystroke. */}
       <span className={styles.visuallyHidden} role="status" aria-live="polite">
         {state === 'saved' ? 'All changes saved' : state === 'pending' || state === 'saving' ? '' : text}

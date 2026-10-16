@@ -5,6 +5,7 @@ import type { SiteRecord } from '../data/types.ts';
 import { MARKETING } from '../marketing/config.ts';
 import { orderPending } from '../sites.ts';
 import { rightsView, siteArchiveDates } from '../panel/rights.ts';
+import { messageTemplate } from './messages.ts';
 import type { AdminHistoryEntry, AdminSiteState, AdminSiteSummary } from './view.ts';
 
 export * from './view.ts';
@@ -93,6 +94,10 @@ export function siteHistory(site: SiteRecord): AdminHistoryEntry[] {
   };
   for (const e of site.identity?.log ?? []) {
     out.push({ at: e.at, text: `${KIND[e.kind] ?? e.kind}${e.note ? ` — ${e.note}` : ''}`, by: e.by });
+  }
+  // G121: Etsy messages copied from the admin (template + time; the text is never kept).
+  for (const m of site.messageLog ?? []) {
+    out.push({ at: m.at, text: `Etsy mesajı kopyalandı: ${messageTemplate(m.id)?.title ?? m.id}`, by: 'support' });
   }
   return out.sort((a, b) => b.at.localeCompare(a.at));
 }

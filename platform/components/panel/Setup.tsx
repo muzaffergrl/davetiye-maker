@@ -26,7 +26,7 @@ import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane, useSettledVersion } from './PreviewPane.tsx';
 import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
 import { DateFields, NamesFields, RIGHTS_HINT_BEFORE, RightsNote, SetupFullNames } from './sections.tsx';
-import { Banner, Button, cx, Disclosure, SaveIndicator } from './ui.tsx';
+import { Banner, Button, cx, SaveIndicator } from './ui.tsx';
 import type { PanelController } from './usePanel.ts';
 import { UrlText } from './views.tsx';
 import styles from './panel.module.css';
@@ -40,7 +40,7 @@ export const SETUP_STEPS = [
     paths: ['partners', 'name_display', 'initials', 'date', 'ceremony_time', 'timezone', 'locale'],
   },
   { title: 'Add your photo', help: 'One photo is enough to start: it opens your website. The others are optional.', paths: ['media'] },
-  { title: 'Publish your website', help: 'Check it once, then publish. You can keep editing after you publish.', paths: [] },
+  { title: 'Publish your website', help: 'Check it once, then publish.', paths: [] },
 ] as const;
 
 
@@ -264,13 +264,12 @@ export function Setup({
               · Each photo is cropped to the shape the design uses.
             </p>
             {hero ? <PhotoSlots slots={[hero]} /> : <PhotoSlots />}
+            {/* G121 (docs/18 §1 P2): the setup asks for the one opening photo only; the other places are in Edit → Photos. */}
             {hero && otherSlots.length ? (
-              <Disclosure id="more-photos" title="More photos" status="Optional">
-                <div className={styles.stack}>
-                  <p className={styles.hint}>Until you add a photo, your guests see a soft placeholder image. You can add these any time under Edit → Photos.</p>
-                  <PhotoSlots slots={otherSlots} />
-                </div>
-              </Disclosure>
+              <p className={styles.hint} data-more-photos-later>
+                Your website has {otherSlots.length} more photo {otherSlots.length === 1 ? 'place' : 'places'}. Add them any time under Edit → Photos; until
+                then guests see a soft placeholder image.
+              </p>
             ) : null}
           </>
         ) : null}
@@ -321,11 +320,13 @@ export function Setup({
         ) : null}
       </main>
 
-      <footer className={cx(styles.setupBar, step === SETUP_STEP_COUNT && styles.setupBarPublish)}>
-        {step < SETUP_STEP_COUNT ? (
-          <button type="button" className={styles.skip} onClick={() => onStep(step + 1)} data-setup-skip>
-            Skip for now
-          </button>
+      {/* G121 (docs/18 §1 P2): "Skip for now" sits beside the main button with the same weight (was a small link above it);
+          on the publish step one sentence says what publishing does (Notion). */}
+      <footer className={cx(styles.setupBar, styles.setupBarPublish)}>
+        {step === SETUP_STEP_COUNT ? (
+          <p className={styles.publishExplain} data-publish-explain>
+            Guests can open your website with the link. You can keep editing after.
+          </p>
         ) : null}
         <div className={styles.setupBarRow}>
           <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
@@ -333,6 +334,11 @@ export function Setup({
             {step > 1 ? (
               <Button icon={ArrowLeft} onClick={() => onStep(step - 1)} aria-label="Back" data-setup-back>
                 <span className={styles.backLabel}>Back</span>
+              </Button>
+            ) : null}
+            {step < SETUP_STEP_COUNT ? (
+              <Button onClick={() => onStep(step + 1)} data-setup-skip>
+                Skip for now
               </Button>
             ) : null}
             {step < SETUP_STEP_COUNT ? (
@@ -374,7 +380,8 @@ function cardNames(content: ContentRecord): string {
 export function OrderPendingNote() {
   return (
     <Banner tone="info" icon={Hourglass} data-order-pending>
-      We are confirming your Etsy order. Everything you set up is saved; you can publish as soon as the order is confirmed.
+      We are confirming your Etsy order. Everything you set up is saved; you can publish as soon as the order is confirmed. Reload this
+      page to check.
     </Banner>
   );
 }

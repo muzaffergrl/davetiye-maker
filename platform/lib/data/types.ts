@@ -58,6 +58,14 @@ export interface SiteRecord {
   guestAccess?: GuestAccessRecord | null;
   /** The shop's private note about this site/order (shop admin, G095). Never shown to the buyer or guests. */
   adminNote?: AdminNoteRecord | null;
+  /** Etsy messages the shop copied from the admin (G121): template id + time only, never the text. Newest last. */
+  messageLog?: AdminMessageLogEntry[] | null;
+}
+
+/** One copied Etsy message (lib/admin/messages.ts template id). */
+export interface AdminMessageLogEntry {
+  id: string;
+  at: string;
 }
 
 /** Shop-only note on a site (lib/admin). */
@@ -145,9 +153,10 @@ export interface SitePatch {
   adminNote?: AdminNoteRecord | null;
   /** Shop admin correction of the buyer's email (the order index is keyed by orderRef, not by email). */
   ownerEmail?: string | null;
+  messageLog?: AdminMessageLogEntry[] | null;
 }
 
-export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail'] as const satisfies ReadonlyArray<keyof SitePatch>;
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail', 'messageLog'] as const satisfies ReadonlyArray<keyof SitePatch>;
 
 /** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
 export function applySitePatch(site: SiteRecord, patch: SitePatch): void {

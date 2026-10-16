@@ -36,6 +36,8 @@ export interface PanelContextValue {
   photoSlots: PanelPhotoSlot[];
   uploadPhoto: (slot: PanelPhotoSlot, blob: Blob) => Promise<{ ok: boolean; message?: string }>;
   removePhoto: (slot: PanelPhotoSlot) => void;
+  /** G121: the last jump to a field (Home → Settings): a folded part holding that field opens for it (a new object each jump). */
+  jump?: { path: string } | null;
 }
 
 export const PanelContext = createContext<PanelContextValue | null>(null);

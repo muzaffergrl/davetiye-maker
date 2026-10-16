@@ -1,6 +1,6 @@
 'use client';
 // Panel v2 views (G060, docs/16 §6; K29 simpler panel): Home (status, progress + next three tasks, replies, dates),
-// Edit (the six pages), Guests (replies, guests.tsx), Share (link + QR; password and edit link folded), the help sheet.
+// Edit (the six pages), Guests (replies, guests.tsx), Share (the link; QR, password and edit link folded — G121), the help sheet.
 
 import {
   Archive,
@@ -47,6 +47,7 @@ import type { AccessOutcome } from './usePanel.ts';
 import { QrCode } from './QrCode.tsx';
 import { GuestPasswordCard } from './GuestPassword.tsx';
 import { Sheet } from './Sheet.tsx';
+import { zoneCity } from './sections.tsx';
 import { Badge, Banner, Button, Card, cx, Disclosure, ProgressBar } from './ui.tsx';
 import styles from './panel.module.css';
 
@@ -245,10 +246,61 @@ export function HomeView({
         </dl>
       </Card>
 
+      {!r.archived ? <SettingsCard content={content} meta={meta} onGo={onGo} onHelp={onHelp} /> : null}
+
       <Button variant="tertiary" icon={MessageCircleQuestionMark} onClick={() => onHelp()}>
         Help &amp; questions
       </Button>
     </div>
+  );
+}
+
+/**
+ * G121 (docs/18 §3 P2, Poppy/Notion value rows): the rarely changed settings, one tap from Home — each row shows its
+ * value and opens the place where it is changed (the time zone and date style under Day & place → More options, the
+ * name & date rule in Help, the guest password under Share).
+ */
+function SettingsCard({
+  content,
+  meta,
+  onGo,
+  onHelp,
+}: {
+  content: ContentRecord;
+  meta: PanelMeta;
+  onGo: (path: string) => void;
+  onHelp: (topic?: string) => void;
+}) {
+  const r = meta.rights;
+  const total = r.limit + r.granted;
+  const rows: Array<{ key: string; label: string; value: string; run: () => void }> = [
+    { key: 'timezone', label: 'Time zone', value: zoneCity(content.timezone) || '—', run: () => onGo('timezone') },
+    { key: 'locale', label: 'Date style', value: content.locale === 'en-US' ? 'Month first' : 'Day first', run: () => onGo('locale') },
+    {
+      key: 'changes',
+      label: 'Name & date changes left',
+      value: r.phase === 'before_publish' ? `${total} (free until you publish)` : `${r.remaining} of ${total}`,
+      run: () => onHelp('changes'),
+    },
+    { key: 'password', label: 'Guest password', value: meta.guestAccess.enabled ? 'On' : 'Off', run: () => onGo('#share') },
+  ];
+  return (
+    <section className={styles.settingsCard} aria-labelledby="settings-card" data-settings-card>
+      <h2 id="settings-card" className={styles.cardTitle}>
+        Settings
+      </h2>
+      <ul className={styles.settingsList}>
+        {rows.map((row) => (
+          <li key={row.key}>
+            <button type="button" className={styles.settingsRow} onClick={row.run} data-setting={row.key}>
+              <span className={styles.settingsLabel}>{row.label}</span>
+              <span className={styles.settingsValue}>{row.value}</span>
+              <ChevronRight size={18} aria-hidden="true" className={styles.chev} />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
@@ -303,12 +355,19 @@ function StatusCard({
         ? { label: `Continue setup · Step ${setupStep} of 3`, run: onContinueSetup, variant: 'primary', icon: Sparkles }
         : { label: 'Publish', run: onPublish, variant: 'primary', icon: Send };
   }
+  // G121 (docs/18 §3 P2, Notion/Monday): one calm status label with its direct action beside it (the bar does not repeat
+  // "Live" on Home); a short sentence and, when live, the link under it. The progress card below stays the anchor.
   return (
     <section className={styles.status} aria-labelledby="status-title" data-status-card>
       <div className={styles.statusTop}>
         <Badge tone={badge.tone} icon={badge.icon}>
           {badge.text}
         </Badge>
+        {action ? (
+          <Button variant={action.variant} icon={action.icon} onClick={action.run} className={styles.statusAction} data-status-action>
+            {action.label}
+          </Button>
+        ) : null}
       </div>
       <h2 id="status-title" className={styles.statusText}>
         {text}
@@ -322,11 +381,6 @@ function StatusCard({
             Copy
           </Button>
         </div>
-      ) : null}
-      {action ? (
-        <Button variant={action.variant} icon={action.icon} block onClick={action.run} data-status-action>
-          {action.label}
-        </Button>
       ) : null}
     </section>
   );
@@ -395,7 +449,8 @@ export function EditListView({
 }
 
 // ---------------------------------------------------------------------------------------------
-// Share (K29): the link and the QR code first; the guest password and the private edit link fold away below.
+// Share (K29, G121): the link with Copy / Open / Share first; the QR code, the guest password and the private edit link fold
+// away below; "Take the website offline" last, as a danger action.
 
 export function ShareView({
   url,
@@ -457,16 +512,18 @@ export function ShareView({
             </Button>
           ) : null}
         </div>
-        {live ? (
+      </Card>
+
+      {/* G121 (docs/18 §4 P2, Linktree): the first screen is the link + Copy + Share; the QR code folds away like the
+          password and the edit link (same title as before). */}
+      {live ? (
+        <Disclosure id="qr" title="QR code for printed cards" icon={QrIcon}>
           <div className={styles.shareQr} data-share-qr>
-            <h3 className={styles.shareQrTitle}>
-              <QrIcon size={18} strokeWidth={1.75} aria-hidden="true" /> QR code for printed cards
-            </h3>
             <QrCode url={url} fileBase={slug} />
             <p className={styles.hint}>Scan it once with your phone camera before you print it.</p>
           </div>
-        ) : null}
-      </Card>
+        </Disclosure>
+      ) : null}
 
       {!archived ? (
         <Disclosure id="password" title="Guest password" status={meta.guestAccess.enabled ? 'On' : 'Off'} icon={LockKeyhole}>
@@ -531,7 +588,7 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
         </section>
         <section>
           <h3 className={styles.subTitle}>Can my partner edit too?</h3>
-          <p>Yes: share your edit link with your partner (Share → Your private edit link → Copy). Anyone with that link can edit, so keep it private.</p>
+          <p>Yes: share your edit link with your partner (Share → Your private edit link → Copy edit link). Anyone with that link can edit, so keep it private.</p>
         </section>
         <section>
           <h3 className={styles.subTitle}>I lost my edit link</h3>

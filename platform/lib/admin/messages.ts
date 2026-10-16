@@ -6,6 +6,7 @@
 // A text that still holds an unfilled {placeholder} or an undecided [POLICY] cannot be copied from the admin (docs/19
 // §4.6): nothing half-written ever reaches a buyer. Decided business facts (shop name …) come from lib/marketing/config.ts.
 
+import type { AdminMessageLogEntry } from '../data/types.ts';
 import { MARKETING } from '../marketing/config.ts';
 import RAW from './message-templates.json' with { type: 'json' };
 
@@ -111,6 +112,24 @@ export function renderMessage(t: MessageTemplate, v: MessageVars): RenderedMessa
   const text = t.body
     .join('\n\n')
     .replace(/\{([a-z_]+)\}/g, (all, key: string) => (key in values && values[key as MessagePlaceholder] !== null ? values[key as MessagePlaceholder]! : all));
-  const missing = [...new Set([...(text.match(/\{[a-z_]+\}/g) ?? []), ...(text.match(/\[[A-Z][A-Z0-9 /&'.-]*\]/g) ?? [])])];
-  return { text, missing };
+  return { text, missing: messageMissing(text) };
+}
+
+/**
+ * What still has to be filled in a message text: an unfilled {placeholder} or an undecided [POLICY] (docs/19 §4.6).
+ * G121: the admin may edit the text before copying it (docs/19 §6 A1), so the check runs on the edited text too.
+ */
+export function messageMissing(text: string): string[] {
+  return [...new Set([...(text.match(/\{[a-z_]+\}/g) ?? []), ...(text.match(/\[[A-Z][A-Z0-9 /&'.-]*\]/g) ?? [])])];
+}
+
+/** A copied Etsy message as the site's history keeps it: which template and when — never the text (docs/19 §6 A1). */
+export type MessageLogEntry = AdminMessageLogEntry;
+
+/** At most this many copied-message entries are kept per site (newest last). */
+export const MESSAGE_LOG_LIMIT = 50;
+
+/** The site's message log with one more entry (unknown template ids are refused by the caller). */
+export function withMessageLog(log: readonly MessageLogEntry[] | null | undefined, id: string, at: string): MessageLogEntry[] {
+  return [...(log ?? []), { id, at }].slice(-MESSAGE_LOG_LIMIT);
 }

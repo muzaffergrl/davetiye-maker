@@ -699,6 +699,10 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
           Your website address will be <strong className={styles.breakAll}>{result.siteUrl}</strong>. It stays a private draft until you
           press Publish in the editor.
         </p>
+        {/* G121 (docs/19 §6 B2): the editor is a web page; a Home Screen icon brings the buyer back to it. */}
+        <p className={styles.small} data-home-screen-tip="">
+          Tip: once your editor is open, add it to your Home Screen.
+        </p>
         {result.orderPending ? (
           <p className={styles.small} data-order-pending="">
             We are confirming your Etsy order. You can set up everything now; Publish opens as soon as the order is confirmed.

@@ -11,6 +11,7 @@ import { normalizeEmail } from '../claim/fields.ts';
 import { rsvpCsvForSite, rsvpSummary, type RsvpCounts, type RsvpEntry } from '../rsvp/couple.ts';
 import { confirmOrder, grantIdentityChanges, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
 import { adminCreateSite } from './create.ts';
+import { messageTemplate, withMessageLog } from './messages.ts';
 import {
   adminConfig,
   clearedSessionCookie,
@@ -232,7 +233,7 @@ export async function listRoute(req: Request): Promise<Response> {
 
 // --- actions --------------------------------------------------------------------------------------------------
 
-export const ADMIN_ACTIONS = ['confirm', 'reissue', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'rsvp-delete', 'delete'] as const;
+export const ADMIN_ACTIONS = ['confirm', 'reissue', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
 export type AdminAction = (typeof ADMIN_ACTIONS)[number];
 
 /** Turkish words for the errors lib/sites.ts throws (the admin speaks Turkish). */
@@ -306,6 +307,13 @@ export async function siteAction(req: Request, id: string, action: string): Prom
       case 'note': {
         const note = text(body.note, 2000);
         updated = await adapter.patchSite(site.id, { adminNote: note ? { text: note, at: new Date().toISOString() } : null });
+        break;
+      }
+      case 'message-log': {
+        // G121 (docs/19 §6 A1): "Mesajı kopyala" leaves a line in the site's history — the template and the time, not the text.
+        const id = text(body.template, 64);
+        if (!messageTemplate(id)) return fail(400, 'bad_template', 'Bilinmeyen şablon.');
+        updated = await adapter.patchSite(site.id, { messageLog: withMessageLog(site.messageLog, id, new Date().toISOString()) });
         break;
       }
       case 'email': {

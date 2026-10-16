@@ -1,15 +1,16 @@
 'use client';
-// Shop admin — one website (G087, K30). Order: what to do now (confirm the order) → facts → ready Etsy messages →
-// support actions → delete → history. Every action calls /api/admin/sites/<id>/<action> (lib/admin/api.ts), which
+// Shop admin — one website (G087, K30). Order (G121, docs/18 §6 P2 — Programa/Zendesk): what to do now (confirm the
+// order) → the customer's facts and the shop note → ready Etsy messages beside them → support actions that can be undone →
+// what is on the site, guest replies → high-impact actions apart (take offline, delete) → history. Every action calls /api/admin/sites/<id>/<action> (lib/admin/api.ts), which
 // runs the same lib/sites.ts functions the old terminal scripts used.
-import { ArrowLeft, Check, Download, ExternalLink, Eye, Hourglass, Send } from 'lucide-react';
+import { ArrowLeft, Check, Copy, Download, ExternalLink, Eye, Hourglass, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState, type ReactNode } from 'react';
-import { MESSAGE_TEMPLATES, renderMessage } from '../../lib/admin/messages.ts';
-import type { AdminHistoryEntry, AdminSiteSummary } from '../../lib/admin/view.ts';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { MESSAGE_TEMPLATES, messageMissing, renderMessage } from '../../lib/admin/messages.ts';
+import { defaultTemplateId, type AdminHistoryEntry, type AdminSiteSummary } from '../../lib/admin/view.ts';
 import type { AdminContentView, AdminRsvpView } from '../../lib/admin/api.ts';
-import { CopyButton } from './CopyButton.tsx';
+import { CopyButton, copyText } from './CopyButton.tsx';
 import styles from './admin.module.css';
 import { StateBadges } from './badges.tsx';
 import { day, stamp } from './format.ts';
@@ -76,8 +77,11 @@ export default function AdminSite(props: {
   const startUrl = `${props.origin}/start?theme=${encodeURIComponent(s.theme)}`;
 
   const templates = useMemo(() => MESSAGE_TEMPLATES.filter((t) => !t.needsEditUrl || editUrl), [editUrl]);
-  const [templateId, setTemplateId] = useState(s.needsAction ? 'publish_blocked_pending' : 'how_to_publish');
+  const [templateId, setTemplateId] = useState(() => defaultTemplateId(props.summary));
   const template = templates.find((t) => t.id === templateId) ?? templates[0];
+  // G121 (docs/19 §6 A1): the filled text can be edited before copying; another template (or a new link) starts again from it.
+  const [edited, setEdited] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const rendered = renderMessage(template, {
     names: s.names,
     order: s.orderRef,
@@ -88,7 +92,20 @@ export default function AdminSite(props: {
     changesLeft: s.changes?.left ?? null,
     onlineUntil: s.onlineUntil ? longEnglishDate(s.onlineUntil) : null,
   });
-  const message = rendered.text;
+  const message = edited ?? rendered.text;
+  const missing = messageMissing(message);
+  useEffect(() => setEdited(null), [templateId, editUrl]);
+
+  /** Copies the message and notes it in the site's history (template + time, never the text). */
+  async function copyMessage() {
+    if (!(await copyText(message))) {
+      setStatus((m) => ({ ...m, 'message-log': { kind: 'err', text: 'Kopyalanamadı: metni seçip elle kopyalayın.' } }));
+      return;
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+    await run('message-log', { template: template.id });
+  }
 
   async function run(action: string, body: Record<string, unknown> = {}, ok?: string): Promise<boolean> {
     setBusy(action);
@@ -291,106 +308,14 @@ export default function AdminSite(props: {
         <StatusLine status={status.note ?? null} />
       </section>
 
-      <section className={styles.card} aria-labelledby="content-title" data-content="">
-        <h2 id="content-title" className={styles.h2}>
-          Sitede ne var
-        </h2>
-        <p className={styles.actionText}>Alıcının taslağındaki bilgiler (salt okunur; alıcı panelinden değiştirir). Tamamını görmek için &quot;Taslağı gör&quot;.</p>
-        <dl className={styles.facts}>
-          <Fact label="İsimler">{s.names}</Fact>
-          <Fact label="Tarih / saat">
-            {day(content.date)}
-            {content.time ? ` · ${content.time}` : ''}
-          </Fact>
-          <Fact label="Mekân">{content.venue ?? '—'}</Fact>
-          {content.address ? <Fact label="Adres">{content.address}</Fact> : null}
-          <Fact label="Program">{content.schedule.length ? content.schedule.map((x) => `${x.time} ${x.label}`).join(' · ') : '—'}</Fact>
-          <Fact label="RSVP son günü">{day(content.rsvpDeadline)}</Fact>
-          {content.dressCode ? <Fact label="Kıyafet">{content.dressCode}</Fact> : null}
-          <Fact label="Fotoğraf">{content.photos}</Fact>
-          <Fact label="SSS">{content.faq}</Fact>
-          <Fact label="Saat dilimi">{content.timezone ?? '—'}</Fact>
-        </dl>
-      </section>
-
-      <section className={styles.card} aria-labelledby="rsvp-title" data-rsvp="">
-        <h2 id="rsvp-title" className={styles.h2}>
-          Misafir yanıtları
-        </h2>
-        <p className={styles.actionText}>
-          {rsvp.counts.responses} yanıt · {rsvp.counts.attending} katılıyor ({rsvp.counts.totalGuests} kişi) · {rsvp.counts.notAttending} katılmıyor
-          {rsvp.counts.held ? ` · ${rsvp.counts.held} beklemede (olağan dışı yoğunluk)` : ''}
-        </p>
-        <div className={styles.row} style={{ marginBottom: 6 }}>
-          <a className={styles.btnSmall} href={`/api/admin/sites/${encodeURIComponent(s.id)}/rsvps`} download data-rsvp-csv="">
-            <Download size={16} aria-hidden /> CSV indir
-          </a>
-          {picked.length ? (
-            confirming === 'rsvp-delete' ? (
-              <>
-                <button
-                  type="button"
-                  className={styles.btnDanger}
-                  style={{ minHeight: 36 }}
-                  disabled={busy !== null}
-                  onClick={async () => {
-                    if (await run('rsvp-delete', { ids: picked }, `${picked.length} yanıt silindi.`)) setPicked([]);
-                  }}
-                  data-action="rsvp-delete-confirm"
-                >
-                  Evet, {picked.length} yanıtı sil
-                </button>
-                <button type="button" className={styles.btnSmall} onClick={() => setConfirming(null)}>
-                  Vazgeç
-                </button>
-              </>
-            ) : (
-              <button type="button" className={styles.btnSmall} onClick={() => setConfirming('rsvp-delete')} data-action="rsvp-delete">
-                Seçilenleri sil ({picked.length})
-              </button>
-            )
-          ) : null}
-        </div>
-        <StatusLine status={status['rsvp-delete'] ?? null} />
-        {rsvp.responses.length === 0 ? (
-          <p className={styles.hint}>Henüz yanıt yok.</p>
-        ) : (
-          <ul className={styles.rows}>
-            {rsvp.responses.slice(0, 200).map((r) => (
-              <li key={r.id} className={styles.reply} data-reply={r.id}>
-                <input
-                  type="checkbox"
-                  aria-label={`${r.name} yanıtını seç`}
-                  checked={picked.includes(r.id)}
-                  onChange={(e) => setPicked((x) => (e.target.checked ? [...x, r.id] : x.filter((y) => y !== r.id)))}
-                />
-                <div className={styles.rowMain}>
-                  <p className={styles.rowTitle}>
-                    {r.name}{' '}
-                    <span className={r.attending ? styles.badgeOk : styles.badgeMuted}>{r.attending ? `Katılıyor · ${r.guests} kişi` : 'Katılmıyor'}</span>
-                    {r.held ? <span className={styles.badgeWarn}> Beklemede</span> : null}
-                  </p>
-                  <p className={styles.siteMeta}>
-                    {stamp(r.createdAt)}
-                    {r.email ? ` · ${r.email}` : ''}
-                    {r.source === 'couple' ? ' · çift ekledi' : ''}
-                    {r.party.length ? ` · ${r.party.join(', ')}` : ''}
-                  </p>
-                  {r.message ? <p className={styles.siteMeta} style={{ color: 'var(--c-text)' }}>“{r.message}”</p> : null}
-                  {r.answers.length ? <p className={styles.siteMeta}>{r.answers.map((a) => `${a.question}: ${a.answer}`).join(' · ')}</p> : null}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-        {rsvp.responses.length > 200 ? <p className={styles.hint}>İlk 200 yanıt gösteriliyor; hepsi CSV&apos;de.</p> : null}
-      </section>
-
       <section className={styles.card} aria-labelledby="msg-title">
         <h2 id="msg-title" className={styles.h2}>
           Etsy mesajı
         </h2>
-        <p className={styles.actionText}>Şablonu seçin, kopyalayın ve Etsy&apos;de bu siparişin konuşmasına yapıştırın. Metin alıcının bilgileriyle doldu.</p>
+        <p className={styles.actionText}>
+          Şablonu seçin, gerekirse metni düzeltin, kopyalayın ve Etsy&apos;de bu siparişin konuşmasına yapıştırın. Metin alıcının bilgileriyle doldu; kopyaladığınız
+          şablon Geçmiş&apos;e yazılır (metin saklanmaz).
+        </p>
         <label className={styles.label} htmlFor="msg-template">
           Şablon
         </label>
@@ -406,22 +331,42 @@ export default function AdminSite(props: {
         <label className={styles.visuallyHidden} htmlFor="msg-text">
           Mesaj metni
         </label>
-        <textarea id="msg-text" className={`${styles.textarea} ${styles.messageText}`} readOnly value={message} style={{ marginTop: 12 }} />
-        {rendered.missing.length ? (
+        <textarea
+          id="msg-text"
+          className={`${styles.textarea} ${styles.messageText}`}
+          value={message}
+          onChange={(e) => setEdited(e.target.value)}
+          maxLength={4000}
+          style={{ marginTop: 12 }}
+          data-message-text=""
+        />
+        {missing.length ? (
           <p className={`${styles.status} ${styles.statusErr}`} role="status" data-message-missing="">
-            Bu mesaj henüz gönderilemez: {rendered.missing.join(', ')} karar bekliyor ya da bu site için bilinmiyor.
+            Bu mesaj henüz gönderilemez: {missing.join(', ')} karar bekliyor ya da bu site için bilinmiyor.
+            {edited !== null ? ' Metinde doldurabilirsiniz.' : ''}
           </p>
-        ) : (
-          <div className={styles.row} style={{ marginTop: 10 }}>
-            <CopyButton value={message} label="Mesajı kopyala" />
-          </div>
-        )}
+        ) : null}
+        <div className={styles.row} style={{ marginTop: 10 }}>
+          {missing.length ? null : (
+            <button type="button" className={styles.btnSmall} disabled={busy !== null} onClick={() => void copyMessage()} data-action="copy-message">
+              {copied ? <Check size={16} aria-hidden /> : <Copy size={16} aria-hidden />}
+              {copied ? 'Kopyalandı' : 'Mesajı kopyala'}
+            </button>
+          )}
+          {edited !== null ? (
+            <button type="button" className={styles.btnSmall} onClick={() => setEdited(null)} data-action="message-reset">
+              Şablona dön
+            </button>
+          ) : null}
+        </div>
+        <StatusLine status={status['message-log'] ?? null} />
       </section>
 
       <section className={styles.card} aria-labelledby="actions-title">
         <h2 id="actions-title" className={styles.h2}>
           Destek işlemleri
         </h2>
+        <p className={styles.actionText}>Geri alınabilir ya da sonradan düzeltilebilir işlemler. Yayından kaldırma ve silme en altta, ayrı.</p>
 
         <div className={styles.action}>
           <p className={styles.actionTitle}>Yeni düzenleme linki</p>
@@ -577,7 +522,109 @@ export default function AdminSite(props: {
           <StatusLine status={status.publish ?? null} />
         </div>
 
-        <div className={styles.action}>
+      </section>
+
+      <section className={styles.card} aria-labelledby="content-title" data-content="">
+        <h2 id="content-title" className={styles.h2}>
+          Sitede ne var
+        </h2>
+        <p className={styles.actionText}>Alıcının taslağındaki bilgiler (salt okunur; alıcı panelinden değiştirir). Tamamını görmek için &quot;Taslağı gör&quot;.</p>
+        <dl className={styles.facts}>
+          <Fact label="İsimler">{s.names}</Fact>
+          <Fact label="Tarih / saat">
+            {day(content.date)}
+            {content.time ? ` · ${content.time}` : ''}
+          </Fact>
+          <Fact label="Mekân">{content.venue ?? '—'}</Fact>
+          {content.address ? <Fact label="Adres">{content.address}</Fact> : null}
+          <Fact label="Program">{content.schedule.length ? content.schedule.map((x) => `${x.time} ${x.label}`).join(' · ') : '—'}</Fact>
+          <Fact label="RSVP son günü">{day(content.rsvpDeadline)}</Fact>
+          {content.dressCode ? <Fact label="Kıyafet">{content.dressCode}</Fact> : null}
+          <Fact label="Fotoğraf">{content.photos}</Fact>
+          <Fact label="SSS">{content.faq}</Fact>
+          <Fact label="Saat dilimi">{content.timezone ?? '—'}</Fact>
+        </dl>
+      </section>
+
+      <section className={styles.card} aria-labelledby="rsvp-title" data-rsvp="">
+        <h2 id="rsvp-title" className={styles.h2}>
+          Misafir yanıtları
+        </h2>
+        <p className={styles.actionText}>
+          {rsvp.counts.responses} yanıt · {rsvp.counts.attending} katılıyor ({rsvp.counts.totalGuests} kişi) · {rsvp.counts.notAttending} katılmıyor
+          {rsvp.counts.held ? ` · ${rsvp.counts.held} beklemede (olağan dışı yoğunluk)` : ''}
+        </p>
+        <div className={styles.row} style={{ marginBottom: 6 }}>
+          <a className={styles.btnSmall} href={`/api/admin/sites/${encodeURIComponent(s.id)}/rsvps`} download data-rsvp-csv="">
+            <Download size={16} aria-hidden /> CSV indir
+          </a>
+          {picked.length ? (
+            confirming === 'rsvp-delete' ? (
+              <>
+                <button
+                  type="button"
+                  className={styles.btnDanger}
+                  style={{ minHeight: 36 }}
+                  disabled={busy !== null}
+                  onClick={async () => {
+                    if (await run('rsvp-delete', { ids: picked }, `${picked.length} yanıt silindi.`)) setPicked([]);
+                  }}
+                  data-action="rsvp-delete-confirm"
+                >
+                  Evet, {picked.length} yanıtı sil
+                </button>
+                <button type="button" className={styles.btnSmall} onClick={() => setConfirming(null)}>
+                  Vazgeç
+                </button>
+              </>
+            ) : (
+              <button type="button" className={styles.btnSmall} onClick={() => setConfirming('rsvp-delete')} data-action="rsvp-delete">
+                Seçilenleri sil ({picked.length})
+              </button>
+            )
+          ) : null}
+        </div>
+        <StatusLine status={status['rsvp-delete'] ?? null} />
+        {rsvp.responses.length === 0 ? (
+          <p className={styles.hint}>Henüz yanıt yok.</p>
+        ) : (
+          <ul className={styles.rows}>
+            {rsvp.responses.slice(0, 200).map((r) => (
+              <li key={r.id} className={styles.reply} data-reply={r.id}>
+                <input
+                  type="checkbox"
+                  aria-label={`${r.name} yanıtını seç`}
+                  checked={picked.includes(r.id)}
+                  onChange={(e) => setPicked((x) => (e.target.checked ? [...x, r.id] : x.filter((y) => y !== r.id)))}
+                />
+                <div className={styles.rowMain}>
+                  <p className={styles.rowTitle}>
+                    {r.name}{' '}
+                    <span className={r.attending ? styles.badgeOk : styles.badgeMuted}>{r.attending ? `Katılıyor · ${r.guests} kişi` : 'Katılmıyor'}</span>
+                    {r.held ? <span className={styles.badgeWarn}> Beklemede</span> : null}
+                  </p>
+                  <p className={styles.siteMeta}>
+                    {stamp(r.createdAt)}
+                    {r.email ? ` · ${r.email}` : ''}
+                    {r.source === 'couple' ? ' · çift ekledi' : ''}
+                    {r.party.length ? ` · ${r.party.join(', ')}` : ''}
+                  </p>
+                  {r.message ? <p className={styles.siteMeta} style={{ color: 'var(--c-text)' }}>“{r.message}”</p> : null}
+                  {r.answers.length ? <p className={styles.siteMeta}>{r.answers.map((a) => `${a.question}: ${a.answer}`).join(' · ')}</p> : null}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {rsvp.responses.length > 200 ? <p className={styles.hint}>İlk 200 yanıt gösteriliyor; hepsi CSV&apos;de.</p> : null}
+      </section>
+
+      <section className={`${styles.card} ${styles.danger}`} aria-labelledby="danger-title" data-danger="">
+        <h2 id="danger-title" className={styles.h2}>
+          Dikkat: yüksek etkili işlemler
+        </h2>
+        <p className={styles.actionText}>Misafirler siteyi açamaz hâle gelir ya da her şey kalıcı silinir. Önce alıcıyla Etsy&apos;den konuşun.</p>
+        <div className={styles.action} data-unpublish="">
           <p className={styles.actionTitle}>Yayından kaldır</p>
           <p className={styles.actionText}>Site misafirlere kapanır (sayfa bulunamadı). Hiçbir şey silinmez; alıcı panelden yeniden yayınlayabilir.</p>
           {s.state !== 'published' ? (
@@ -598,30 +645,39 @@ export default function AdminSite(props: {
           )}
           <StatusLine status={status.unpublish ?? null} />
         </div>
-      </section>
-
-      <section className={`${styles.card} ${styles.danger}`} aria-labelledby="delete-title">
-        <h2 id="delete-title" className={styles.h2}>
-          Siteyi sil
-        </h2>
-        <p className={styles.actionText}>
-          İçerik, fotoğraflar ve bütün RSVP yanıtları <strong>kalıcı olarak</strong> silinir; geri alınamaz. Örneğin iade edilmiş ya da başkasına ait çıkan bir sipariş için.
-        </p>
-        <label className={styles.label} htmlFor="delete-confirm">
-          Onay için adresi yazın: <strong>{s.slug}</strong>
-        </label>
-        <input id="delete-confirm" className={styles.input} value={deleteSlug} onChange={(e) => setDeleteSlug(e.target.value)} autoComplete="off" autoCapitalize="none" spellCheck={false} />
-        <button
-          type="button"
-          className={styles.btnDanger}
-          style={{ marginTop: 12 }}
-          disabled={busy !== null || deleteSlug.trim().toLowerCase() !== s.slug}
-          onClick={() => run('delete', { confirm: deleteSlug })}
-          data-action="delete"
-        >
-          Kalıcı olarak sil
-        </button>
-        <StatusLine status={status.delete ?? null} />
+        <div className={styles.action} data-delete="">
+          <p className={styles.actionTitle}>Siteyi sil</p>
+          <p className={styles.actionText}>
+            İçerik, fotoğraflar ve bütün RSVP yanıtları <strong>kalıcı olarak</strong> silinir; geri alınamaz. Örneğin iade edilmiş ya da başkasına ait çıkan bir sipariş
+            için. Sipariş numarası serbest kalır.
+          </p>
+          {s.state === 'draft' && !s.firstPublishedAt ? (
+            <p className={styles.hint} data-wrong-design="">
+              Alıcı yanlış tasarımla mı başladı? Bu taslağı silin; sonra <Link className={styles.link} href="/admin/new">Yeni sipariş</Link> ile aynı sipariş numarasıyla
+              doğru tasarımı açın (ya da alıcı başlatma sayfasından yeniden başlasın). Taslaktaki yazılar ve fotoğraflar yeni siteye taşınmaz.
+            </p>
+          ) : null}
+          <label className={styles.label} htmlFor="delete-confirm">
+            Onay için adresi yazın: <strong>{s.slug}</strong>
+          </label>
+          <input id="delete-confirm" className={styles.input} value={deleteSlug} onChange={(e) => setDeleteSlug(e.target.value)} autoComplete="off" autoCapitalize="none" spellCheck={false} />
+          {/* G121 (docs/18 §6 P3, Fibery/Shuttle): "Vazgeç" on the left, the permanent action on the right. */}
+          <div className={styles.dangerRow}>
+            <button type="button" className={styles.btnGhost} disabled={!deleteSlug} onClick={() => setDeleteSlug('')} data-action="delete-cancel">
+              Vazgeç
+            </button>
+            <button
+              type="button"
+              className={styles.btnDanger}
+              disabled={busy !== null || deleteSlug.trim().toLowerCase() !== s.slug}
+              onClick={() => run('delete', { confirm: deleteSlug })}
+              data-action="delete"
+            >
+              Kalıcı olarak sil
+            </button>
+          </div>
+          <StatusLine status={status.delete ?? null} />
+        </div>
       </section>
 
       <section className={styles.card} aria-labelledby="history-title">

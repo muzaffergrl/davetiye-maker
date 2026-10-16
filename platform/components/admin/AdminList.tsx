@@ -5,7 +5,7 @@
 import { Download, Search, StickyNote } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { filterSites, SORT_LABELS, sortSites, type AdminCounts, type AdminFilter, type AdminSiteSummary, type AdminSort } from '../../lib/admin/view.ts';
+import { filterSites, orderWithoutSite, SORT_LABELS, sortSites, type AdminCounts, type AdminFilter, type AdminSiteSummary, type AdminSort } from '../../lib/admin/view.ts';
 import styles from './admin.module.css';
 import { day, stamp } from './format.ts';
 import { StateBadges } from './badges.tsx';
@@ -33,6 +33,8 @@ export default function AdminList({
   const [query, setQuery] = useState(initialQuery);
   const [sort, setSort] = useState<AdminSort>('newest');
   const shown = useMemo(() => sortSites(filterSites(sites, filter, query), sort), [sites, filter, query, sort]);
+  // G121 (docs/19 §6 A4): an Etsy order number with no website yet — "never started" is known only by searching for it.
+  const notStarted = useMemo(() => orderWithoutSite(sites, query), [sites, query]);
 
   return (
     <>
@@ -80,7 +82,19 @@ export default function AdminList({
       <p className={styles.visuallyHidden} role="status">
         {shown.length} site
       </p>
-      {shown.length === 0 ? (
+      {notStarted ? (
+        <div className={styles.empty} data-not-started={notStarted}>
+          #{notStarted} numaralı siparişle açılmış site yok: alıcı henüz başlatmamış olabilir. Hatırlatmak için{' '}
+          <Link className={styles.link} href="/admin/designs">
+            Tasarımlar
+          </Link>{' '}
+          sayfasından tasarımın başlatma linkini kopyalayıp Etsy&apos;den yazın; ya da{' '}
+          <Link className={styles.link} href="/admin/new">
+            Yeni sipariş
+          </Link>{' '}
+          ile siteyi siz açın.
+        </div>
+      ) : shown.length === 0 ? (
         <div className={styles.empty} data-admin-empty="">
           {filter === 'action' && !query
             ? 'Yapılacak bir şey yok. Onay bekleyen yeni siparişler burada görünür.'

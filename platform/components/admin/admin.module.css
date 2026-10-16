@@ -501,6 +501,15 @@
   border: 1px solid #f1c9c4;
 }
 
+/* G121: delete — "Vazgeç" left, "Kalıcı olarak sil" right (docs/18 §6 P3). */
+.dangerRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
 .history {
   list-style: none;
   margin: 0;

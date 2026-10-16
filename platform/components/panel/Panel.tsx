@@ -409,6 +409,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wide, openPage, openFocus]);
 
+  /** G121: a jump to a field (Home → Settings): opens the folded part that holds it ("More options"). */
+  const [fieldJump, setFieldJump] = useState<{ path: string } | null>(null);
   const ctx: PanelContextValue = useMemo(
     () => ({
       content,
@@ -424,8 +426,9 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       photoSlots: theme.photos,
       uploadPhoto: panel.uploadPhoto,
       removePhoto: panel.removePhoto,
+      jump: fieldJump,
     }),
-    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto],
+    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, fieldJump],
   );
 
   /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */
@@ -444,6 +447,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         setCopyJump({ path });
         go({ view: 'section', page: copyPage, focus: null });
       } else {
+        setFieldJump({ path });
         const section = sectionForPath(path) ?? 'names';
         const page = pageOf(section);
         go({ view: 'section', page, focus: PAGE_SECTIONS[page][0] === section ? null : section });
@@ -467,8 +471,16 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   };
 
   const upToDate = meta.status === 'published' && !meta.hasUnpublishedChanges && saveState === 'saved';
-  /** The live website is behind the draft: the one sticky bar says so (K29). */
-  const showChanges = meta.status === 'published' && !rights.archived && !upToDate;
+  /**
+   * The live website is behind the draft: the one sticky bar says so (K29). G121 (docs/18 §2 P2, Medium/Notion): only
+   * while the draft really differs from the live copy (the server's flag, or this page's own comparison while a save is
+   * on its way) — a save in progress alone no longer brings the bar; the save indicator says "Saved" instead.
+   */
+  const differsFromLive =
+    meta.status === 'published' && (meta.hasUnpublishedChanges || (publishedCopy !== null ? changes.length > 0 : saveState !== 'saved'));
+  const showChanges = !rights.archived && differsFromLive;
+  /** Live and nothing to publish: the calm "Live" label. */
+  const liveCalm = meta.status === 'published' && !rights.archived && !showChanges;
 
   /** Snackbar "Undo" after a counted change: back to what it was, free, the change is given back (G060-fix). */
   const undoChange = async (previous: Identity) => {
@@ -604,6 +616,15 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     />
   );
 
+  /** G121 (docs/18 §2 P2): Review → one changed page's preview (the draft as guests will see it after publishing). */
+  const previewChanged = (id: PageId) => {
+    const page = previewPageFor(id, null);
+    setDialog(null);
+    setPreviewThanks(false);
+    setPreviewPage(visiblePages.includes(page) ? page : null);
+    setPreviewOpen(true);
+  };
+
   const sheets = (
     <>
       {dialog?.kind === 'issues' ? (
@@ -635,7 +656,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         <Sheet title="Unpublished changes" onClose={() => setDialog(null)} closeLabel="Keep editing" testId="review">
           <p>
             Your guests still see the version you published last. Changes are saved as you type; they go live when you publish.
-            {changes.length ? ' Changed since then:' : ''}
+            {changes.length ? ' Changed since then (tap the eye to preview a page):' : ''}
           </p>
           {changes.length ? (
             <ul className={styles.reviewList}>
@@ -652,7 +673,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                       : [];
                 const parts = [...own, ...(copied ? [COPY_TITLE] : [])];
                 return (
-                  <li key={id}>
+                  <li key={id} className={styles.reviewRow}>
                     <button type="button" className={styles.reviewItem} onClick={() => go({ view: 'section', page: id, focus: null })} data-review-item={id}>
                       <span className={styles.rowIcon} aria-hidden="true">
                         <Icon size={20} strokeWidth={1.75} />
@@ -663,6 +684,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                       </span>
                       <ChevronRight size={20} aria-hidden="true" className={styles.chev} />
                     </button>
+                    <IconButton icon={Eye} label={`Preview ${PAGE_TITLES[id]}`} className={styles.reviewPreview} onClick={() => previewChanged(id)} data-review-preview={id} />
                   </li>
                 );
               })}
@@ -781,8 +803,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   // date; nothing while the changes bar below it carries "Publish"; "Archived" at the end.
   let publishControl: React.ReactNode = null;
   if (rights.archived) publishControl = <Badge icon={Archive}>Archived</Badge>;
-  else if (upToDate)
-    publishControl = (
+  else if (liveCalm)
+    // G121 (docs/18 §3 P2): Home's status card already says "Live" with its action; the bar does not repeat it there.
+    publishControl =
+      route.view === 'home' ? null : (
       <button type="button" className={styles.liveBadge} onClick={() => go({ view: 'share' })} data-live-badge>
         <span className={styles.liveDot} aria-hidden="true" />
         Live
@@ -892,7 +916,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             A wide Publish button leaves no room for the full logo on a phone: the small monogram stands in (Brand.tsx). */}
         <header className={styles.appBar} inert={(previewOpen && !wide) || undefined}>
           <div className={styles.appBarInner}>
-            <BrandLogo compact={!upToDate && !showChanges} className={cx(styles.appBarBrand, sectionPage && styles.appBarBrandSection)} />
+            <BrandLogo compact={!liveCalm && !showChanges} className={cx(styles.appBarBrand, sectionPage && styles.appBarBrandSection)} />
             {sectionPage ? (
               <>
                 <button type="button" className={styles.backBtn} onClick={back} aria-label="Back to Edit">

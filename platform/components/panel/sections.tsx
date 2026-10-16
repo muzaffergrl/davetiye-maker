@@ -309,7 +309,7 @@ function zoneOption(zone: string) {
 export const zoneCity = (zone: string | undefined) => (zone ? (zone.split('/').pop() ?? zone).replace(/_/g, ' ') : '');
 
 export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?: boolean }) {
-  const { content, edit, locked, rights, isSample, issuesAt } = usePanelContext();
+  const { content, edit, locked, rights, isSample, issuesAt, jump } = usePanelContext();
   const zones = useTimeZones(content.timezone);
   const deviceZone = useDeviceZone();
   const [zoneOpen, setZoneOpen] = useState(false);
@@ -401,6 +401,7 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
           title="More options"
           status={`${zoneCity(content.timezone) || 'Time zone'} · ${locale === 'en-US' ? 'Month first' : 'Day first'}`}
           defaultOpen={moreNeedsAttention}
+          openRequest={jump && (jump.path === 'timezone' || jump.path === 'locale') ? jump : null}
         >
           {zoneSelect}
           <Segmented<DateStyle>
