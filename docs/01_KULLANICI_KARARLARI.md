@@ -45,6 +45,7 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K39 | (2026-10-15) Etsy **Offsite Ads kapatılır** (opt out; kullanıcı onayıyla uygulandı ve doğrulandı) | docs/20 §6, §5, §7.3 |
 | K40 | (2026-10-15) Etsy **logo ve banner** `brand/etsy/` dosyalarıyla değiştirilir; mobil kırpımda logo kesiliyorsa banner yüklenmez (kırpım yoktu, ikisi de yüklendi; Big Banner) | docs/20 §7.5 |
 | K41 | (2026-10-15) İlanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz); önce testler yapılır | docs/20 §8 |
+| K42 | (2026-10-16) **Ek hizmetler, Etsy'de ayrı ilan:** (1) **"We set it up for you"** — alıcının yapacağı düzenlemeyi biz yaparız, **yaklaşık +500 TL, tek seferlik**; yeni düzenleme turu isterse yeniden satın alır (her tur ayrı satın alma). (2) **Özel tasarım** — mevcut şablon fiyatı **+ yaklaşık 1500 TL**. TL tutarı kura göre ajan ayarlar. **Onay (2026-10-16):** tasarım **1.460 TL**, kurulum **500 TL**, özel tasarım **2.960 TL** (kur 49,53); dükkân sitesi fiyatı TRY gösterir. Teslim **3 gün**; özel tasarımda **2 revizyon**, sonrası **tur başı 500 TL** (ayrı "Extra design revision" ilanı); özel tasarım **başkasına satılmaz**; stok **sınırsız** (Etsy'de 999) | docs/23, G130 |
 
 ## Geçersizleşenler
 

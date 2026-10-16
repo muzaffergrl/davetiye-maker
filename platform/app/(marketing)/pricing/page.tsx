@@ -1,5 +1,6 @@
 // /pricing (docs/14 §6.6): one card per design from config; the price is the one Etsy shows ([PRICE] until decided).
 // No Offer markup here: the Offer lives on the design page only (one product, one place).
+import { ExtraServices } from '../../../components/marketing/ExtraServices.tsx';
 import s from '../../../components/marketing/marketing.module.css';
 import { designScreen } from '../../../components/marketing/media.ts';
 import { CheckList, Container, EtsyButton, Eyebrow, FaqList, JsonLd, LastUpdated, Screen, Section, TextLink } from '../../../components/marketing/ui.tsx';
@@ -122,6 +123,8 @@ export default function PricingPage() {
           <TextLink href="/features">Every feature in detail</TextLink>
         </Container>
       </Section>
+
+      <ExtraServices />
 
       <Section labelledBy="pricing-faq">
         <Container narrow>

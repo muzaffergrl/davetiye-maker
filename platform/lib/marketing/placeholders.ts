@@ -92,6 +92,10 @@ export function launchProblems(cfg: MarketingConfig, env: Record<string, string 
   if (!cfg.verified.orderCheck) {
     out.push('verified.orderCheck is false: /start accepts any order number (set CLAIM_ORDER_VERIFICATION=manual or build the Etsy check, G060-fix)');
   }
+  // K42 services are optional: only one with a real Etsy listing must carry a real price.
+  for (const sv of cfg.services ?? []) {
+    if (realEtsyUrl(sv.etsyListingUrl) && !realPrice(sv.price)) out.push(`services.${sv.id}.price is not a real price`);
+  }
   const live = cfg.designs.filter((d) => d.status === 'live');
   if (!live.length) out.push('no live design');
   for (const d of live) out.push(...designLaunchProblems(d));

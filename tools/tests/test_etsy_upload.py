@@ -7,7 +7,7 @@ config.ts, every theme folder), the opening object read from designs.ts (six des
 an envelope), the text rules (design name in the title, its own demo link, no other design's demo, no "envelope" for a
 gatefold/pouch/wallet/book/sleeve design), `--designs` parsing, and every real listing_v3.md: Etsy's title and tag
 rules, the honesty rules of test_listing_kit (US spelling, no trademark tag, one "Wedding" in the title, headings and
-English named, quantity left open), the eight editorial image rows in order, VERIFY notes moved out of the
+English named, the approved price and quantity), the eight editorial image rows in order, VERIFY notes moved out of the
 description, and the committed etsy_upload.json equal to what the tool builds now. Nothing is written.
 """
 import json
@@ -98,11 +98,12 @@ def test_real_listings():
         low = md.lower()
         assert "colour" not in low and "personalis" not in low, (no, "US spelling")
         assert "headings" in low and "english" in low, no
-        assert "[QUANTITY]" in md, no  # undecided commercial field stays a placeholder
+        assert "[QUANTITY]" not in md and "| Quantity | 999" in md, no  # decided 2026-10-16: no stock limit
         assert "[VERIFY" not in data["description"] and data["open_checks"], no
         assert f"/start/demo/{theme}" in data["description"], no
         assert [i["file"].rsplit("/", 1)[1] for i in data["images"]] == [f"{n}.png" for n in lk.UPLOAD_IMAGES], no
-        assert data["ready_to_publish"] is False and data["price_usd"] == eu.PRICE_USD, no
+        assert data["ready_to_publish"] is False and data["price_try"] == eu.PRICE_TRY == 1460, no
+        assert data["quantity"] == 999 and "| Price | **1,460 TL**" in md, no
         if theme in NOT_ENVELOPE:
             text = " ".join([f["title"], *f["tags"], data["description"], *(i["alt"] for i in data["images"])])
             assert "envelope" not in text.lower(), no
@@ -111,6 +112,34 @@ def test_real_listings():
         assert missing_guide == any(b.startswith("digital file missing") for b in data["blockers"]), no
         committed = json.loads((listing / "etsy_upload.json").read_text(encoding="utf-8"))
         assert committed == data, (no, "etsy_upload.json is out of date: python3 tools/etsy_upload.py --designs " + no)
+
+
+def test_services():
+    """G130 (K42): the two service listings — Etsy rules, TRY proposal, undecided fields kept as open checks."""
+    assert [sid for sid, _ in eu.SERVICES] == ["setup-service", "custom-design", "extra-revision"]
+    for sid, price in eu.SERVICES:
+        listing = REPO / "collections" / "_services" / sid / "package" / "listing"
+        md = (listing / "listing_v3.md").read_text(encoding="utf-8")
+        data, problems = eu.build_service(sid, price)
+        assert problems == [], (sid, problems)
+        f = lk.listing_fields(md)
+        m = re.search(r"This title: (\d+) characters", md)
+        assert m and int(m.group(1)) == len(f["title"]) <= 140, sid
+        assert f["title"].count("Wedding") <= 1, (sid, f["title"])
+        assert len(f["tags"]) == 13 and all(len(t) <= 20 for t in f["tags"]), (sid, f["tags"])
+        assert "/start/demo/" not in data["description"] and "[VERIFY" not in data["description"], sid
+        assert not eu.PLACEHOLDER.search(data["description"]), sid  # K42 decisions filled in (2026-10-16)
+        assert "within 3 days" in data["description"] and data["quantity"] == 999, sid
+        assert "No returns" in data["description"] and "24 hours" in data["description"], sid  # K36, K37
+        assert data["price_try"] == price and abs(data["price_usd_approx"] - price / eu.USD_TRY) < 0.01, sid
+        assert data["ready_to_publish"] is False and "renewal not decided" in data["blockers"], sid
+        committed = json.loads((listing / "etsy_upload.json").read_text(encoding="utf-8"))
+        assert committed == data, (sid, "etsy_upload.json is out of date: python3 tools/etsy_upload.py --designs services")
+    custom = eu.build_service("custom-design", 2960)[0]["description"]
+    assert "2 rounds of changes" in custom and "500 TL" in custom and "includes the design" in custom
+    assert "never sell it" in custom  # exclusive (2026-10-16)
+    extra = eu.build_service("extra-revision", 500)[0]["description"]
+    assert "only for couples who already ordered a custom design" in extra and "One purchase = one round" in extra
 
 
 def test_check_exit():
@@ -122,7 +151,7 @@ def test_check_exit():
 
 def main():
     for test in (test_design_table, test_opening_object, test_text_rules, test_select, test_real_listings,
-                 test_check_exit):
+                 test_services, test_check_exit):
         test()
         print(f"  {test.__name__}: ok")
     print("test_etsy_upload: ok")

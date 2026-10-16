@@ -67,9 +67,10 @@ def test_real_listings():
         m = re.search(r"This title: (\d+) characters", md)
         assert m and int(m.group(1)) == len(f["title"]), (t.id, m and m.group(1), len(f["title"]))
         assert "<!-- listing-kit:media -->" in md
-        # Undecided commercial fields stay placeholders. Shop name, support email (K33), hosting period (K25) and the
-        # draft price (USD 29.40) are filled in listing_v3.md (2026-10-15); quantity is still the user's decision.
-        assert "[QUANTITY]" in md, (t.id, "[QUANTITY]")
+        # Shop name, support email (K33), hosting period (K25), price (1,460 TL) and quantity (999, no stock limit) are
+        # decided (2026-10-16) and filled in listing_v3.md; renewal is still the user's decision.
+        assert "[QUANTITY]" not in md and "1,460 TL" in md, t.id
+        assert "[AUTO RENEW" in md, (t.id, "[AUTO RENEW]")
         guide = (t.package / "customer" / "START_HERE.md").read_text(encoding="utf-8")
         assert lk.start_url(t) in guide and f"({lk.start_url(t)})" in guide, t.id  # shown and clickable
         assert "img/start_qr_page.png" in guide

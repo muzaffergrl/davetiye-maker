@@ -53,6 +53,11 @@ const TITLES_TR: Record<string, [string, string]> = {
   archive_notice: ['Site yakında kapanıyor', '"Yayında kalır" tarihinden ~30 gün önce (panelin Home\'u da hatırlatıyor; e-posta gitmiyor).'],
   after_wedding_tip: ['Düğün sonrası: teşekkür sayfası', 'İsteğe bağlı, düğünden birkaç gün sonra. Yalnız sipariş/destek, reklam yok (Etsy mesaj kuralları).'],
   review_request: ['Yorum isteği (bir kez)', 'Sipariş başına bir kez; site yayında, ilk yanıtlar gelmiş ve açık sorun yokken. Herkese aynı metin.'],
+  setup_service_details: ['Kurulum hizmeti: bilgilerinizi gönderin', '"Biz kuralım" siparişi gelir gelmez (K42), 24 saat içinde. Gereken her şeyi bir kerede isteyin; teslim 3 gün.'],
+  setup_service_done: ['Kurulum bitti: düzenleme linki', 'Alıcının bilgilerini girdikten sonra, "Yeni sipariş" ya da "Yeni düzenleme linki"nden hemen sonra. Turu sitenin notuna yazın.'],
+  custom_design_brief: ['Özel tasarım: fikrinizi anlatın', 'Özel tasarım siparişi gelir gelmez, tasarıma başlamadan (K42). İlk sürüm 3 gün, 2 revizyon, sonrası tur başı 500 TL.'],
+  custom_design_ready: ['Özel tasarım hazır: başlatın', 'Özel tema /start\'ta açıldığında; alıcı sitesini başlatabilir.'],
+  custom_design_extra_round: ['Özel tasarım: ek revizyon turu', '3. (ve sonraki) revizyon isteğinde ya da "Extra design revision" ilanı satın alındıktan sonra. Tur başı 500 TL; sitenin notuna yazın.'],
   refund_or_problem: ['İade isteği / memnun olmayan alıcı', 'Alıcı iade istiyor ya da ürünün işine yaramadığını söylüyor.'],
   delete_data: ['Sitemi ve verilerimi silin', 'Alıcı sitenin ya da misafir verilerinin silinmesini istiyor.'],
 };

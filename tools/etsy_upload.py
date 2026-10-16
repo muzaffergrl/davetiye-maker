@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Upload-ready Etsy listing data for designs 01–20, built from each design's listing_v3.md (2026-10-15; 06–20: G123).
+"""Upload-ready Etsy listing data for designs 01–20 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130).
 
   python3 tools/etsy_upload.py                      # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
   python3 tools/etsy_upload.py --designs 06-20      # only these designs ("06-20", "07,12", "all")
   python3 tools/etsy_upload.py --check              # writes nothing; exit 1 if a title/tag/text rule fails
   python3 tools/etsy_upload.py --check --strict     # … or if a file Etsy needs (guide PDF, images, video) is missing
+  python3 tools/etsy_upload.py --designs services   # only the two service listings (collections/_services/, K42)
+
+Services (G130, K42): "We set it up for you", custom design and the extra design revision are their own listings in collections/_services/<id>/.
+They have no theme and no demo; their TRY prices were approved on 2026-10-16 (docs/23 §1), and any undecided
+[PLACEHOLDER] left in a description becomes an open check. "all" builds the designs and the services.
 
 The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §8). Nothing is sent to Etsy here.
 - `description` is §2 of listing_v3.md with the "[VERIFY: …]" notes taken out; each note goes to `open_checks` with
   its sentence, so the claim stays visible until it is tested. `ready_to_publish` stays false while any check is open.
-- Price is the draft price the user gave on 2026-10-15 (USD 29.40, "for now"); quantity and renewal stay null:
-  they are the user's decision (renewal costs a listing fee).
+- Price: 1,460 TL, approved by the user on 2026-10-16 (shop currency TRY, K38; about USD 29.48, docs/23 §1);
+  quantity 999, Etsy's maximum (user: no stock limit). Renewal stays null: the user's decision (each renewal costs a fee).
 - Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
   2026-10-16, tools/listing_editorial.py, docs/21).
 - Rules (`rule_problems`, `--check` fails): Etsy's title and tag rules (tools/listing_kit.py), the design's name in the
@@ -56,9 +61,15 @@ DESIGNS = [
     ("19", "19_Midnight_Garden", "midnight-garden"),
     ("20", "20_Coastal_Seaside", "coastal-seaside"),
 ]
-PRICE_USD = 29.40
-PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY "
-              "amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).")
+PRICE_TRY = 1460
+QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
+# K42 services (G130): (id, TRY price approved 2026-10-16). Rate: 49.53 TRY per USD, BloombergHT 2026-10-16 09:30 (docs/23 §1).
+SERVICES = [("setup-service", 500), ("custom-design", 2960), ("extra-revision", 500)]
+USD_TRY = 49.53
+USD_TRY_SOURCE = "BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell)"
+SERVICE_DIGITAL_FILE = {"setup-service": "SETUP_SERVICE.pdf", "custom-design": "CUSTOM_DESIGN.pdf",
+                        "extra-revision": "EXTRA_REVISION.pdf"}
+PLACEHOLDER = re.compile(r"\[(?!VERIFY)[A-Z][A-Z /:-]*\]")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 IMAGES_STATUS = ("current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 "
                  "editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)")
@@ -190,9 +201,10 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         "category": attrs.get("Category"),
         "attributes": {k: v for k, v in attrs.items() if k not in {"Category", "Price", "Quantity", "Shop section",
                                                                    "Renewal", "Digital file"}},
-        "price_usd": PRICE_USD,
-        "price_note": PRICE_NOTE,
-        "quantity": None,
+        "price_try": PRICE_TRY,
+        "price_usd_approx": round(PRICE_TRY / USD_TRY, 2),
+        "price_note": price_note(),
+        "quantity": QUANTITY,
         "renewal": None,
         "shop_section": re.sub(r"\s*\(.*\)$", "", attrs.get("Shop section", "")),
         "digital_files": [{"file": f"collections/{folder}/package/customer/START_HERE.pdf",
@@ -201,7 +213,60 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         "gpt_mockup_scenes": [f"collections/{folder}/assets/gpt/mockups/{m}" for m in mockups],
         "video": {"file": f"collections/{folder}/package/listing/video.mp4", "exists": video.exists()},
         "open_checks": checks,
-        "blockers": blockers + ["quantity and renewal not decided", "final price not decided"],
+        "blockers": blockers + ["renewal not decided"],
+        "ready_to_publish": False,
+        "rule_problems": problems,
+    }
+    return data, problems
+
+
+def price_note() -> str:
+    return (f"Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD "
+            f"is approximate, at {USD_TRY} TRY per USD, {USD_TRY_SOURCE}.")
+
+
+def build_service(sid: str, price_try: int) -> tuple[dict, list[str]]:
+    """One K42 service listing (collections/_services/<sid>/): Etsy's title/tag rules, no design demo link, and every
+    undecided [PLACEHOLDER] of the description as an open check."""
+    listing = REPO / "collections" / "_services" / sid / "package" / "listing"
+    md = (listing / "listing_v3.md").read_text(encoding="utf-8")
+    f = listing_fields(md)
+    desc, checks = description(md)
+    attrs, more = attributes(md)
+    imgs, img_checks = images(md, listing)
+    checks += more + img_checks
+    for ph in sorted(set(PLACEHOLDER.findall(desc))):
+        checks.append({"where": "description", "check": f"decide {ph}", "text": ""})
+    problems = [f"title: {p}" for p in title_problems(f["title"])] + [f"tags: {p}" for p in tag_problems(f["tags"])]
+    if f["title"] and PLACEHOLDER.search(f["title"]):
+        problems.append("text: title holds a placeholder")
+    if DEMO_LINK.search(desc):
+        problems.append("text: a service listing links a design demo")
+    pdf = listing.parent / "customer" / SERVICE_DIGITAL_FILE[sid]
+    missing = [i["file"] for i in imgs if not i["exists"]]
+    blockers = [f"listing images missing: {', '.join(missing)}"] if missing else []
+    if not pdf.exists():
+        blockers.append(f"digital file missing: {pdf.relative_to(REPO).as_posix()}")
+    data = {
+        "service": sid,
+        "source": f"collections/_services/{sid}/package/listing/listing_v3.md",
+        "title": f["title"],
+        "title_length": len(f["title"] or ""),
+        "description": desc,
+        "tags": f["tags"],
+        "category": attrs.get("Category"),
+        "attributes": {k: v for k, v in attrs.items() if k not in {"Category", "Price", "Quantity", "Shop section",
+                                                                   "Renewal", "Digital file"}},
+        "price_try": price_try,
+        "price_usd_approx": round(price_try / USD_TRY, 2),
+        "price_note": price_note(),
+        "quantity": QUANTITY,
+        "renewal": None,
+        "shop_section": re.sub(r"\s*\(.*\)$", "", attrs.get("Shop section", "")),
+        "digital_files": [{"file": pdf.relative_to(REPO).as_posix(), "bytes": pdf.stat().st_size if pdf.exists() else None}],
+        "images": imgs,
+        "open_checks": checks,
+        "blockers": blockers + ["renewal not decided"],
         "ready_to_publish": False,
         "rule_problems": problems,
     }
@@ -230,10 +295,21 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true", help="write nothing; exit 1 on a rule problem")
     ap.add_argument("--strict", action="store_true", help="with --check: a missing guide PDF, image or video fails too")
-    ap.add_argument("--designs", default="all", help="'all' (default), '06-20', '07,12' …")
+    ap.add_argument("--designs", default="all", help="'all' (default, designs + services), 'services', '06-20', '07,12' …")
     a = ap.parse_args(argv)
     bad = False
-    for no, folder, theme in select(a.designs):
+    spec = a.designs.strip().lower()
+    for sid, price in SERVICES if spec in {"all", "services"} else []:
+        data, problems = build_service(sid, price)
+        out = REPO / "collections" / "_services" / sid / "package" / "listing" / "etsy_upload.json"
+        if not a.check:
+            out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+        files = [b for b in data["blockers"] if b.startswith(("listing images", "digital file"))]
+        print(f"{sid}: title {data['title_length']}/140 · tags {len(data['tags'])}/13 · {price} TL "
+              f"(~USD {data['price_usd_approx']}) · open checks {len(data['open_checks'])} · "
+              f"{'OK' if not problems else 'PROBLEMS: ' + '; '.join(problems)}")
+        bad |= bool(problems) or (a.strict and bool(files))
+    for no, folder, theme in ([] if spec == "services" else select(a.designs)):
         data, problems = build(no, folder, theme)
         out = REPO / "collections" / folder / "package" / "listing" / "etsy_upload.json"
         if not a.check:
