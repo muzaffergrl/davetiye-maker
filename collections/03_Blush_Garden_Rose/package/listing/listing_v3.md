@@ -9,7 +9,7 @@ the platform does today. Product language: English (US spelling). It replaces `l
 | Item | Status on 2026-10-15 |
 |---|---|
 | Start link `https://davetiye-platform-five.vercel.app/start?theme=blush-garden-rose` | **Live** on 2026-10-14 (G059 check through the Vercel connector; not opened on a phone). |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/blush-garden-rose` (image 8) | Same as the start link. |
+| Live demo `https://davetiye-platform-five.vercel.app/start/demo/blush-garden-rose` (in the description under TRY THE LIVE DEMO, and named in image 8) | Same as the start link. |
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Not yet.** The last checked live release is G078 (`2dc812b`, editor in the old look). This text and the START HERE guide describe the current editor; publish only after G079 is live and checked. |
 | Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Stated by the integrator on 2026-10-15; not checked in this task. The listing says "We confirm each order in our shop before a website can go live". [VERIFY: manual order check on in production] |
 | Questions & answers, RSVP questions | Tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
@@ -39,6 +39,11 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 A wedding website that opens like a real envelope, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
 Blush peonies, garden roses and a soft pink envelope tied with a silk bow. Your guests tap the envelope, it opens, and your invitation follows: Home, Our Story, Details and RSVP.
+
+TRY THE LIVE DEMO
+See the envelope open on your own phone before you buy (sample names and photos):
+https://davetiye-platform-five.vercel.app/start/demo/blush-garden-rose
+Copy the link into your phone's browser.
 
 WHAT YOU GET
 • Your wedding website in the Blush Garden Rose design: envelope opening, Home, Our Story, Details and RSVP pages
@@ -137,20 +142,22 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-The 10 images in `images/` were rebuilt on 2026-10-15 (9 and 10 added on 2026-10-16) with the current editor (K29): `python3 tools/listing_kit.py capture --theme blush-garden-rose` then `images`. Every phone shows a real screen, captured from a local production build of the platform (this repository's code; the addresses on the screens are the live base URL; sample names and photos). Images 1, 2 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`: `cover_hand.png`, `three_phones.png`, `flatlay_phone.png`); images 3–7, 9 and 10 lay them out with the theme's own painted corners. Image 3 says "Your start link, its QR code and every step explained" (no "every step in pictures"); images 4 and 5 show the 3-step setup and the six-page editor. Image 8's QR code encodes the demo link (`listing/demo_qr.png`, checked by `check --prepublish`). Alt texts below describe these files.
+The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (`python3 tools/listing_editorial.py --theme blush-garden-rose`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); images 3, 5, 6 and 7 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The earlier G059 kit stays in `images/` for comparison and is not uploaded. Alt texts below describe these files.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Blush Garden Rose wedding website with RSVP on a phone held in a hand: the opening page with a pink envelope tied with a silk bow. Labels: no Canva needed, RSVP built in, live demo |
-| 2 | `02_guest_pages.png` | Three phones on a styled table with the pages guests see: home, our story and RSVP (the website also has the envelope opening and a details page) |
-| 3 | `03_whats_included.png` | What is included: website, online editor, RSVP with your own questions, add to calendar, questions and answers, QR code, START HERE guide |
-| 4 | `04_how_it_works.png` | Three steps: start with your Etsy order number, add your names, date and a photo in a short 3-step setup, publish and share your link or QR code |
-| 5 | `05_editor.png` | The online editor on a phone: the six pages to edit, Headings & labels for your own wording, cropping a photo to its frame |
-| 6 | `06_rsvp.png` | RSVP: the guest reply form with a meal question, the editor's Guests page with head counts and a Download list button (CSV), the questions you ask your guests |
-| 7 | `07_details.png` | Details page: order of the day with add to calendar buttons, the venue, questions and answers |
-| 8 | `08_live_demo.png` | A phone on a styled table showing the live demo of the Blush Garden Rose design, next to a QR code that opens it. [VERIFY: Etsy policy on QR codes and links in listing photos] |
-| 9 | `09_what_you_change.png` | What you can change in the Blush Garden Rose design: names, date and time, venue and schedule, story and 5 photos, questions and answers, RSVP questions, headings and labels. What stays as designed: artwork, colors, fonts, layout and the envelope animation. The editor's six pages on a phone |
-| 10 | `10_good_to_know.png` | Good to know: no Canva, no app, no account; online until 12 months after the wedding; save your edit link; names and date can change 3 times after publishing, typo fixes free; optional guest password; a thank-you page after the wedding |
+| 1 | `01_cover.png` | Blush Garden Rose wedding website with online RSVP on a phone held in a hand, among pink peonies and a satin ribbon: the opening page with a blush envelope tied with a pink satin bow and the names Clara & Julian |
+| 2 | `02_opening.png` | It opens like a real invitation: three phones show the envelope closed, the envelope opening, and the invitation card rising out of it |
+| 3 | `03_pages.png` | Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page |
+| 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed |
+| 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download list button |
+| 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
+| 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
+| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
+
+Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
+- 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
+- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Save your private edit link", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
 
 ## 6. Video
 
@@ -237,11 +244,11 @@ link; one review request per order, the same text for everyone, never with an in
 ## 11. Before you publish this listing
 
 - [ ] Current platform release (G079) live and checked; start link and demo of this design open on the live site
-- [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf and the QR of image 8 scanned with a phone camera
+- [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
-- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf, its QR and image 8 rebuilt
+- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [ ] Response time, price, refund policy and hosting extension decided and filled in (guide + listing + docs/19 templates)
 - [x] Images rebuilt with the current editor (see §5); video present (2026-10-15)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")

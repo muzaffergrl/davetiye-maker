@@ -9,8 +9,8 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   its sentence, so the claim stays visible until it is tested. `ready_to_publish` stays false while any check is open.
 - Price is the draft price the user gave on 2026-10-15 (USD 29.40, "for now"); quantity and renewal stay null:
   they are the user's decision (renewal costs a listing fee).
-- Images: the rows of §5 with the file's real state. All five designs were rebuilt on 2026-10-15 with the current
-  editor (K29) by `tools/listing_kit.py capture` + `images`: real screens, in GPT's mockup scenes for images 1, 2, 8.
+- Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
+  2026-10-16, tools/listing_editorial.py, docs/21).
 """
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 sys.path.insert(0, str(TOOLS))
+import listing_kit as lk  # noqa: E402
 from listing_kit import listing_fields, tag_problems, title_problems  # noqa: E402
 
 REPO = TOOLS.parent
@@ -36,8 +37,8 @@ PRICE_USD = 29.40
 PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY "
               "amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
-IMAGES_STATUS = ("current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, "
-                 "GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)")
+IMAGES_STATUS = ("current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 "
+                 "editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)")
 
 
 def section(md: str, no: int) -> str:
@@ -85,7 +86,7 @@ def images(md: str, listing: Path) -> tuple[list[dict], list[dict]]:
         if len(row) < 3 or not row[0].isdigit():
             continue
         name = row[1].strip("`")
-        path = listing / "images" / name
+        path = listing / lk.UPLOAD_DIR / name
         for note in VERIFY.findall(row[2]):
             checks.append({"where": f"image {row[0]}", "check": note.strip(), "text": ""})
         rows.append({
