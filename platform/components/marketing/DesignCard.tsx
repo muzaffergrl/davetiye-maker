@@ -28,8 +28,8 @@ export function DesignCard({
   const price = realPrice(design.price);
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
-    <article className={s.designCard} data-styles={styles?.length ? styles.join(' ') : undefined}>
-      <a href={`/designs/${design.id}`} className={s.designCardMedia} aria-hidden tabIndex={-1}>
+    <article className={s.designCard} data-fx-spot data-styles={styles?.length ? styles.join(' ') : undefined}>
+      <a href={`/designs/${design.id}`} className={s.designCardMedia} aria-hidden tabIndex={-1} data-fx-tilt>
         {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
         {home ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
       </a>

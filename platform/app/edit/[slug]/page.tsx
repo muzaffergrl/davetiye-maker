@@ -4,6 +4,7 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
+import '../../../components/fx/panel-fx.css';
 import Panel from '../../../components/panel/Panel.tsx';
 import { getDataAdapter } from '../../../lib/data/index.ts';
 import { publicOrigin } from '../../../lib/panel/http.ts';

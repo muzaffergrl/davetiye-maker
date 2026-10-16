@@ -1,0 +1,338 @@
+/* G089 (K31): motion layer of the sales site — "alive", but quiet. Global CSS keyed on data-fx-* attributes (set in the
+   markup or by components/fx/MotionRoot.tsx), so it never edits the page modules. Rules:
+   - The first screen paints final: no entrance on the hero text or the main button (LCP and CLS untouched). Effects
+     there are overlays or transforms only (light band, glow, float, sheen).
+   - Only opacity and transform animate (compositor only, no layout), so nothing shifts (CLS 0).
+   - prefers-reduced-motion: every effect here is off (inside `no-preference`, and marketing.module.css already stops
+     all animation and transition in .shell); nothing waits for a reveal, because MotionRoot then marks nothing.
+   Effects follow open-source React Bits (MIT) ideas: ShinyText (ported, components/fx/ShinyText.tsx), AnimatedContent /
+   FadeContent (reveal), SpotlightCard + TiltedCard (cards), written as CSS so no animation library ships. */
+
+:root {
+  --fx-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --fx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- ShinyText (hero eyebrow): a dark-gold band (5.0:1 on paper light) passes over ink text, then rests ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    [data-fx-shiny] {
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(110deg, #202020 0 44%, #86652a 50%, #202020 56% 100%);
+      background-size: 250% 100%;
+      background-position: 0% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: fx-shine var(--fx-shiny-speed, 6s) ease-in-out 0.8s infinite;
+    }
+  }
+}
+@keyframes fx-shine {
+  0% {
+    background-position: 100% 0;
+  }
+  45%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ---------- page to page: a soft cross-document view transition (Chromium; other browsers just navigate) ------ */
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root) {
+    animation: fx-vt-out 160ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+  ::view-transition-new(root) {
+    animation: fx-vt-in 340ms var(--fx-ease-out) both;
+  }
+  /* the header stays put while the page under it changes */
+  [data-fx-header] {
+    view-transition-name: fx-header;
+  }
+  ::view-transition-old(fx-header),
+  ::view-transition-new(fx-header) {
+    animation: none;
+  }
+
+  /* ---------- hero: a soft light behind the phone, the phone floats, a sheen crosses the main button ------------- */
+  [data-fx-glow] {
+    position: relative;
+    isolation: isolate;
+  }
+  [data-fx-glow]::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    width: min(100%, 440px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(208 174 106 / 0.32), rgb(159 132 167 / 0.14) 58%, rgb(250 247 240 / 0) 100%);
+    transform: translate(-50%, -50%) scale(0.94);
+    animation: fx-breathe 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  [data-fx-glow] > * {
+    animation: fx-float 6.5s ease-in-out infinite;
+  }
+  /* the live demo playing in place does not float */
+  [data-fx-glow] > :has(iframe) {
+    animation: none;
+  }
+  /* a new design chosen from the chips: its poster eases in (never the first poster: that one is the LCP image) */
+  [data-fx-swap] img {
+    animation: fx-poster-in 520ms var(--fx-ease-out) both;
+  }
+
+  [data-fx-sheen] {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  [data-fx-sheen]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, rgb(255 255 255 / 0) 30%, rgb(255 255 255 / 0.22) 48%, rgb(208 174 106 / 0.3) 52%, rgb(255 255 255 / 0) 70%);
+    transform: translateX(-110%);
+    animation: fx-sheen 6s ease-in-out 1.6s infinite;
+    pointer-events: none;
+  }
+
+  /* ---------- reveal on scroll (sections below the first screen; MotionRoot) ----------------------------------- */
+  [data-fx-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 0.7s var(--fx-ease),
+      transform 0.85s var(--fx-ease-out);
+  }
+  [data-fx-reveal][data-fx-in] {
+    opacity: 1;
+    transform: none;
+  }
+  /* staggered children; `backwards` (not `both`) so hover transforms work once the entrance is over */
+  [data-fx-in] [data-fx-stagger] > * {
+    animation: fx-rise 0.7s var(--fx-ease-out) backwards;
+    animation-delay: calc(var(--fx-i, 0) * var(--fx-gap, 80ms) + 120ms);
+  }
+
+  /* how it works: the steps light up one after another and the gold line draws on to the next */
+  [data-fx-steps] {
+    --fx-gap: 260ms;
+  }
+  [data-fx-in] [data-fx-steps] > li > :first-child {
+    animation: fx-pop 0.6s var(--fx-ease-out) backwards;
+    animation-delay: calc(var(--fx-i, 0) * var(--fx-gap) + 160ms);
+  }
+  [data-fx-in] [data-fx-steps] > li::after {
+    transform-origin: 0 0;
+    animation: fx-draw 0.55s var(--fx-ease) backwards;
+    animation-delay: calc(var(--fx-i, 0) * var(--fx-gap) + 420ms);
+  }
+
+  /* the opening, sealed → opening → website: the arrows nudge forward in turn, like a flow */
+  [data-fx-in] [data-fx-flow] > li > svg {
+    animation: fx-nudge 3.2s ease-in-out 1.4s infinite;
+  }
+  [data-fx-in] [data-fx-flow] > li:nth-child(2) > svg {
+    animation-delay: 2s;
+  }
+
+  /* design page screens: a fan of the real screens (our own take on a "card spread"). At rest the four screens hang
+     from their bottom edge on a gentle arc; the one under the pointer or finger lifts out and straightens, its
+     neighbours lean away. On entry they are dealt out of one stack into the fan. Static transforms + :has(), no JS. */
+  [data-fx-deal] {
+    padding-inline: 10px;
+    padding-top: 14px;
+  }
+  [data-fx-deal] > * {
+    --fan-a: 0deg;
+    --fan-y: 0px;
+    --fan-lift: 0px;
+    --fan-push: 0deg;
+    position: relative;
+    transform-origin: 50% 100%;
+    transform: translateY(calc(var(--fan-y) - var(--fan-lift))) rotate(calc(var(--fan-a) + var(--fan-push)));
+    transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  [data-fx-deal] > :nth-child(1) { --fan-a: -6deg; --fan-y: 10px; }
+  [data-fx-deal] > :nth-child(2) { --fan-a: -2deg; --fan-y: 2px; }
+  [data-fx-deal] > :nth-child(3) { --fan-a: 2deg; --fan-y: 2px; }
+  [data-fx-deal] > :nth-child(4) { --fan-a: 6deg; --fan-y: 10px; }
+  [data-fx-deal] > * > :first-child {
+    transition: box-shadow 0.45s var(--fx-ease);
+  }
+  [data-fx-deal] > :is(:hover, :active) {
+    --fan-lift: 18px;
+    --fan-push: calc(var(--fan-a) * -0.7);
+    z-index: 2;
+  }
+  [data-fx-deal] > :is(:hover, :active) > :first-child {
+    box-shadow: 0 34px 50px -26px rgb(43 21 38 / 0.6);
+  }
+  [data-fx-deal] > :has(+ :is(:hover, :active)) {
+    --fan-push: -2.5deg;
+  }
+  [data-fx-deal] > :is(:hover, :active) + * {
+    --fan-push: 2.5deg;
+  }
+  [data-fx-in] [data-fx-deal] > * {
+    animation: fx-deal 0.9s var(--fx-ease-out) backwards;
+    animation-delay: calc(var(--fx-i, 0) * 90ms + 150ms);
+  }
+
+  /* ---------- design cards: light under the pointer, a small tilt, the opened screen rises (opening preview) ---- */
+  [data-fx-spot] {
+    position: relative;
+    isolation: isolate;
+    transition:
+      border-color 0.35s var(--fx-ease),
+      box-shadow 0.35s var(--fx-ease);
+  }
+  [data-fx-spot]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(260px circle at var(--fx-x, 50%) var(--fx-y, 30%), rgb(208 174 106 / 0.2), rgb(208 174 106 / 0) 70%);
+    opacity: 0;
+    transition: opacity 0.35s var(--fx-ease);
+    pointer-events: none;
+  }
+  [data-fx-tilt] {
+    transform: perspective(800px) rotateX(var(--fx-rx, 0deg)) rotateY(var(--fx-ry, 0deg));
+    transition: transform 0.5s var(--fx-ease-out);
+  }
+  [data-fx-tilt] > * {
+    transition:
+      transform 0.5s var(--fx-ease-out),
+      opacity 0.35s ease,
+      box-shadow 0.4s var(--fx-ease);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    [data-fx-spot]:hover {
+      border-color: var(--gold, #d0ae6a);
+      box-shadow: 0 1px 2px rgb(43 21 38 / 0.06), 0 22px 40px -26px rgb(43 21 38 / 0.45);
+    }
+    [data-fx-spot]:hover::before {
+      opacity: 1;
+    }
+    [data-fx-spot]:hover [data-fx-tilt] {
+      transition-duration: 0.15s;
+    }
+    [data-fx-spot]:hover [data-fx-tilt] > :first-child {
+      box-shadow: 0 26px 44px -26px rgb(43 21 38 / 0.6);
+    }
+    /* the second screen (the opened home page) rises out of the envelope */
+    [data-fx-tilt] > :nth-child(2) {
+      transform: translateY(10px) scale(0.97);
+    }
+    [data-fx-spot]:hover [data-fx-tilt] > :nth-child(2) {
+      transform: none;
+    }
+  }
+  /* touch: a press that follows the finger */
+  @media (hover: none) {
+    [data-fx-spot]:active [data-fx-tilt] {
+      transform: scale(0.965);
+      transition-duration: 0.12s;
+    }
+  }
+
+  /* ---------- /designs: after the filter is used, newly shown cards ease in ---------------------------------- */
+  [data-fx-touched] [data-styles] {
+    animation: fx-rise 0.45s var(--fx-ease-out) backwards;
+    animation-delay: calc(var(--fx-i, 0) * 40ms);
+  }
+}
+
+@keyframes fx-vt-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fx-vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes fx-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.94);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.04);
+    opacity: 1;
+  }
+}
+@keyframes fx-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes fx-poster-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+}
+@keyframes fx-sheen {
+  0% {
+    transform: translateX(-110%);
+  }
+  28%,
+  100% {
+    transform: translateX(110%);
+  }
+}
+@keyframes fx-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.98);
+  }
+}
+@keyframes fx-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+@keyframes fx-draw {
+  from {
+    transform: scale(0);
+  }
+}
+@keyframes fx-nudge {
+  0%,
+  70%,
+  100% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+@keyframes fx-deal {
+  from {
+    opacity: 0;
+    transform: translateX(calc((1.5 - var(--fx-i, 0)) * 100%)) rotate(calc((var(--fx-i, 0) - 1.5) * 5deg)) scale(0.9);
+  }
+}

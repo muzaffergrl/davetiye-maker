@@ -53,7 +53,7 @@ export default function DesignsPage() {
                 ))}
               </fieldset>
             ) : null}
-            <div className={s.cardGrid}>
+            <div className={s.cardGrid} data-fx-stagger>
               {designs.map((d) => (
                 <DesignCard key={d.id} design={d} placement="gallery" headingLevel={2} styles={chips.length ? designStyles(d.id) : undefined} />
               ))}

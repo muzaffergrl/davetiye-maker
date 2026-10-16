@@ -5,6 +5,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Archivo, DM_Sans, Montserrat } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { MotionRoot } from '../../components/fx/MotionRoot.tsx';
+import '../../components/fx/fx.css';
 import { DemoHost } from '../../components/marketing/Demo.tsx';
 import { demoDesigns } from '../../components/marketing/demo-data.ts';
 import s from '../../components/marketing/marketing.module.css';
@@ -55,6 +57,8 @@ export default function MarketingLayout({ children }: { children: ReactNode }) {
       <JsonLd data={graph(organization(), website())} />
       <DemoHost designs={demoDesigns()} />
       <Tracker />
+      {/* G089 (K31): reveal on scroll and pointer depth; styles in components/fx/fx.css */}
+      <MotionRoot />
     </div>
   );
 }
