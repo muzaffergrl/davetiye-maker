@@ -420,6 +420,7 @@ test('links: a missing URL removes its button (no dead buttons for guests); real
   const c = demoContent();
   c.record_kind = 'customer';
   c.urls.map = 'https://maps.example.org/?q=larkspur';
+  c.maps = { venue: { show_map: false, show_directions: false } }; // G127: the old 'View map' link (map block off)
   const set = render('details', c).$;
   const a = set('a[data-field="urls.map"]');
   assert.equal(a.attr('href'), 'https://maps.example.org/?q=larkspur');

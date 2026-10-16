@@ -355,6 +355,7 @@ test('8 links: a missing URL removes its button; real URLs get rel="noopener nor
   const c = demo();
   c.record_kind = 'customer';
   c.urls.map = 'https://maps.example.org/?q=harbor';
+  c.maps = { venue: { show_map: false, show_directions: false } }; // G127: the old 'View map' link (map block off)
   const a = render('details', c).$('a[data-field="urls.map"]');
   assert.equal(a.attr('href'), 'https://maps.example.org/?q=harbor');
   assert.equal(a.attr('rel'), 'noopener noreferrer');

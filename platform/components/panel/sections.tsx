@@ -13,6 +13,7 @@ import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, openingPlace,
 import { beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, rightsOneLine, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
+import { MapFields, venueMapLinkChange } from './MapFields.tsx';
 import { Button, cx, Disclosure, EmptyState, RightsMeter, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
 
@@ -455,8 +456,9 @@ export function VenueFields({ setup = false }: { setup?: boolean }) {
         optional
         hint="Paste a Google Maps or Apple Maps link to the venue."
         value={content.urls?.map}
-        onChange={(x) => edit((c) => void (c.urls = { ...(c.urls ?? {}), map: x }))}
+        onChange={(x) => edit((c) => venueMapLinkChange(c, x))}
       />
+      {setup ? null : <MapFields />}
       {venueSlots.length ? (
         <Group title="Venue photo">
           <PhotoSlots slots={venueSlots} compact />

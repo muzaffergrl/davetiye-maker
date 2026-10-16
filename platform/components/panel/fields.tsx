@@ -40,6 +40,8 @@ export interface PanelContextValue {
   jump?: { path: string } | null;
   /** G121: what guests tap first in this design ("envelope", "book" …; PanelTheme.opening), for the panel's sentences. */
   opening?: string | null;
+  /** G127: reads a short map share link on the server (lib/panel/map-link.ts); absent = the address is used. */
+  resolveMapLink?: (url: string) => Promise<{ ok: boolean; body: { lat?: number | null; lng?: number | null; message?: string } }>;
 }
 
 export const PanelContext = createContext<PanelContextValue | null>(null);

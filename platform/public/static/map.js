@@ -1,4 +1,4 @@
-/* Platform map block script (G127). Served at /site/map.js; the theme engine links it on a page with a
+/* Platform map block script (G127). Served at /static/map.js; the theme engine links it on a page with a
  * <div data-map> block (lib/theme/map-block.ts). "Show map" swaps the static card for the Google Maps frame named in
  * the card's data-map-embed (nothing is loaded from Google before the tap). Without this script "Show map" stays a plain
  * link to Google Maps. No dependencies, no inline handlers (CSP: the page allows the frame's origin).

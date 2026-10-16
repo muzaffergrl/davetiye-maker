@@ -23,7 +23,7 @@
 //   data-map                       G127: the shared map + directions block (lib/theme/map-block.ts) for the content's places
 //                                  (lib/maps.ts); data-map-btn="btn btn-ghost" / data-map-btn-sm = the theme's classes for "Show map" /
 //                                  the directions links. Removed
-//                                  when no place is on or in thank-you mode. The page then links /site/map.css + /site/map.js
+//                                  when no place is on or in thank-you mode. The page then links /static/map.css + /static/map.js
 //                                  and its CSP allows the Google Maps frame. View values: map_on (a place is switched on —
 //                                  hide the old "View map" link), map_block (the block or the old link has something to show).
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.

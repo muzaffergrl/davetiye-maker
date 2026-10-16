@@ -1,12 +1,12 @@
 // The shared map + directions block of the Details page (G127): one markup for every theme, filled by the engine into
-// the template's <div data-map> marker. Styles: /site/map.css (theme fonts and colours through inherit/currentColor,
-// overridable with --pmap-* tokens); behaviour: /site/map.js ("Show map" swaps the card for the Google Maps frame).
+// the template's <div data-map> marker. Styles: /static/map.css (theme fonts and colours through inherit/currentColor,
+// overridable with --pmap-* tokens); behaviour: /static/map.js ("Show map" swaps the card for the Google Maps frame).
 // Without JavaScript "Show map" is a plain link to Google Maps. Nothing is loaded from Google before the tap.
 
 import { directionLinks, mapEmbedUrl, mapSearchUrl, type MapPlace } from '../maps.ts';
 
-export const MAP_CSS = '/site/map.css';
-export const MAP_JS = '/site/map.js';
+export const MAP_CSS = '/static/map.css';
+export const MAP_JS = '/static/map.js';
 
 function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

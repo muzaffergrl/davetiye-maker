@@ -1,0 +1,13 @@
+/* G127: Day & place → Map & directions (MapFields.tsx). Panel tokens from panel.module.css (:root). */
+.preview { display: grid; gap: 8px; }
+.card {
+  display: grid; justify-items: center; gap: 4px; padding: 16px 12px; border: 1px solid var(--c-border, #ebe3d6);
+  border-radius: 12px; background: var(--c-surface-sunken, #f3eee5); color: var(--c-text-muted, #5c5560); text-align: center;
+}
+.name { color: var(--c-text, #202020); font-weight: 600; overflow-wrap: anywhere; }
+.address { font-size: 14px; overflow-wrap: anywhere; }
+.frame { display: block; width: 100%; height: 180px; border: 0; border-radius: 12px; }
+.links { margin: 0; font-size: 14px; color: var(--c-text-muted, #5c5560); }
+.second { display: grid; gap: var(--s-4, 16px); padding-top: var(--s-4, 16px); border-top: 1px solid var(--c-border, #ebe3d6); }
+.subhead { margin: 0; color: var(--c-heading, #2b1526); font-weight: 700; }
+.links a { color: var(--c-accent, #2b1526); }

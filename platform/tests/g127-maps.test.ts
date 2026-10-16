@@ -84,8 +84,8 @@ test('engine: the shared block replaces the old link, loads its files and opens 
   assert.equal($('[data-directions]').length, 3);
   assert.equal($('[data-directions]').first().attr('class'), 'pmap-dir-link btn btn-ghost btn-sm');
   assert.equal($('iframe').length, 0, 'no map frame before the tap');
-  assert.equal($('link[href="/site/map.css"]').length, 1);
-  assert.equal($('script[src="/site/map.js"]').length, 1);
+  assert.equal($('link[href="/static/map.css"]').length, 1);
+  assert.equal($('script[src="/static/map.js"]').length, 1);
   assert.deepEqual(frameSources, ['https://www.google.com']);
   assert.ok(!html.includes('data-map-btn'));
   assert.match(siteCsp([], frameSources), /frame-src 'self' https:\/\/www\.google\.com;/);
@@ -103,7 +103,7 @@ test('engine: switched off / no address -> the old "View map" link stays; thank-
   const a = render(off, new Date('2020-01-01T00:00:00Z'));
   assert.equal(a.$('[data-map]').length, 0);
   assert.equal(a.$('a[data-field="urls.map"]').length, 1);
-  assert.equal(a.$('link[href="/site/map.css"]').length, 0);
+  assert.equal(a.$('link[href="/static/map.css"]').length, 0);
   const none = render(demoContent(), new Date('2020-01-01T00:00:00Z'));
   assert.equal(none.$('.action').length, 0, 'nothing to show: the wrapper goes too');
   const after = render(withVenue(), new Date('2099-01-01T00:00:00Z'));
