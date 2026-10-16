@@ -1,15 +1,13 @@
 {
  "base": "next start (production build)",
  "theme": "tropical-destination",
- "errors": [
-  "content change: node.exe (inline module) failed (exit 1): Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'c:'\r |   code: 'ERR_UNSUPPORTED_ESM_URL_SCHEME'\r | }\r | Node.js v22.23.2"
- ],
+ "errors": [],
  "warnings": [],
  "passed": [
   "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
   "editable texts (G068): 71 copy keys = theme.json \"copy\", no unmarked visible text",
   "fonts: Google Fonts link with 2 families (Dancing Script, Raleway), display=swap",
-  "seed: 5 sample photos uploaded to the demo site (collections\\12_Tropical_Destination\\assets\\gpt\\photos (PAKET 2))",
+  "seed: 5 sample photos uploaded to the demo site (collections/12_Tropical_Destination/assets/gpt/photos (PAKET 2))",
   "index@360: no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
   "home@360: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "story@360: no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
@@ -62,8 +60,8 @@
   "home@360×640 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @375×553 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 678, nav top 478)",
   "home@375×553 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 230×47, rsvp \"Replay the envelope\" 191×47",
-  "envelope → /maya-and-kai/home in 4819 ms, card transition flag set",
+  "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 210×47, rsvp \"Replay the envelope\" 179×47",
+  "envelope → /maya-and-kai/home in 4403 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (13 steps)",
   "countdown target from the platform: 2027-06-19 16:00 Pacific/Honolulu = 2027-06-20 02:00 UTC",
@@ -85,9 +83,15 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-06-20T03:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-25T02:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (417 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (216 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "home@390 (changed content): no overflow, 29 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
+  "story@390 (changed content): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 17 fields = content record, 11 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 8 fields = content record, 30 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
   "index@360 (stress record): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot placeholder",
   "home@360 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots placeholder",
   "story@360 (stress record): no overflow, 5 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
@@ -107,16 +111,17 @@
   "details@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 7 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 852 KB",
-  "home first view (390×844, DPR 3, placeholders): 758 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 945 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 940 KB"
+  "index first view (390×844, DPR 3, placeholders): 815 KB",
+  "home first view (390×844, DPR 3, placeholders): 772 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 908 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1037 KB",
+  "recording: previews/g412/opening_390x844.mp4 (2418 KB, lead-in 0.89 s cut, first frame mean 198,220,210) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
-   "collection": "collections\\12_Tropical_Destination",
-   "demo_record": "platform\\themes\\tropical-destination\\content.demo.json",
-   "photos": "collections\\12_Tropical_Destination\\assets\\gpt\\photos (PAKET 2)",
+   "collection": "collections/12_Tropical_Destination",
+   "demo_record": "platform/themes/tropical-destination/content.demo.json",
+   "photos": "collections/12_Tropical_Destination/assets/gpt/photos (PAKET 2)",
    "w1_comps": [
     "index",
     "home",
@@ -152,17 +157,17 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.11,
+      "edge": 0.12,
       "dark": 0
      },
      {
       "box": "script names",
-      "edge": 0.36,
+      "edge": 0.37,
       "dark": 0.001
      },
      {
       "box": "env-hint",
-      "edge": 0.46,
+      "edge": 0.45,
       "dark": 0.001
      }
     ]
@@ -184,12 +189,12 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.15,
+      "edge": 0.17,
       "dark": 0
      },
      {
       "box": "script names",
-      "edge": 0.3,
+      "edge": 0.31,
       "dark": 0.001
      },
      {
@@ -205,7 +210,7 @@
     "boxes": [
      {
       "box": "replay textlink",
-      "edge": 0.44,
+      "edge": 0.43,
       "dark": 0.005
      }
     ]
@@ -216,12 +221,12 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.12,
+      "edge": 0.13,
       "dark": 0
      },
      {
       "box": "script names",
-      "edge": 0.37,
+      "edge": 0.38,
       "dark": 0.001
      },
      {
@@ -237,8 +242,8 @@
     "boxes": [
      {
       "box": "replay textlink",
-      "edge": 0.56,
-      "dark": 0.006
+      "edge": 0.64,
+      "dark": 0.007
      }
     ]
    },
@@ -248,17 +253,17 @@
     "boxes": [
      {
       "box": "kicker",
-      "edge": 0.09,
+      "edge": 0.12,
       "dark": 0
      },
      {
       "box": "script names",
-      "edge": 0.22,
+      "edge": 0.24,
       "dark": 0.001
      },
      {
       "box": "env-hint",
-      "edge": 0.44,
+      "edge": 0.43,
       "dark": 0.001
      }
     ]
@@ -269,7 +274,7 @@
     "boxes": [
      {
       "box": "replay textlink",
-      "edge": 0.23,
+      "edge": 0.24,
       "dark": 0.002
      }
     ]
@@ -474,13 +479,13 @@
      "bottom": 678
     },
     "bad": [
-     "span.cd-num \"247\" bottom 595",
+     "span.cd-num \"246\" bottom 595",
      "span.cd-lbl \"Days\" bottom 612",
-     "span.cd-num \"14\" bottom 595",
+     "span.cd-num \"12\" bottom 595",
      "span.cd-lbl \"Hours\" bottom 612",
-     "span.cd-num \"29\" bottom 595",
+     "span.cd-num \"03\" bottom 595",
      "span.cd-lbl \"Minutes\" bottom 612",
-     "span.cd-num \"50\" bottom 595",
+     "span.cd-num \"12\" bottom 595",
      "span.cd-lbl \"Seconds\" bottom 612",
      "a.btn \"RSVP\" bottom 678"
     ],
@@ -524,13 +529,13 @@
      "bottom": 506
     },
     "bad": [
-     "span.cd-num \"247\" bottom 425",
+     "span.cd-num \"246\" bottom 425",
      "span.cd-lbl \"Days\" bottom 442",
-     "span.cd-num \"14\" bottom 425",
+     "span.cd-num \"12\" bottom 425",
      "span.cd-lbl \"Hours\" bottom 442",
-     "span.cd-num \"29\" bottom 425",
+     "span.cd-num \"02\" bottom 425",
      "span.cd-lbl \"Minutes\" bottom 442",
-     "span.cd-num \"36\" bottom 425",
+     "span.cd-num \"59\" bottom 425",
      "span.cd-lbl \"Seconds\" bottom 442",
      "a.btn \"RSVP\" bottom 506"
     ],
@@ -538,7 +543,7 @@
     "names": 33.8
    }
   ],
-  "envelope_to_home_ms": 4819,
+  "envelope_to_home_ms": 4403,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -615,7 +620,7 @@
    "copy_keys_at_max": 71,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 852,
+  "first_view_index_kb_placeholders": 815,
   "first_view_index_files": [
    [
     "/themes/tropical-destination/img/florals_tl-800.webp",
@@ -639,7 +644,7 @@
    ],
    [
     "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
-    48813
+    48264
    ],
    [
     "/themes/tropical-destination/site.css",
@@ -650,7 +655,7 @@
     40716
    ]
   ],
-  "first_view_home_kb_placeholders": 758,
+  "first_view_home_kb_placeholders": 772,
   "first_view_home_files": [
    [
     "/themes/tropical-destination/img/florals_tl-800.webp",
@@ -669,23 +674,23 @@
     59894
    ],
    [
+    "/themes/tropical-destination/img/frame_landscape-960.webp",
+    50070
+   ],
+   [
     "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
-    48813
+    48264
    ],
    [
     "/themes/tropical-destination/site.css",
     44184
    ],
    [
-    "/themes/tropical-destination/img/favicon.png",
-    39750
-   ],
-   [
     "/themes/tropical-destination/img/divider-600.webp",
     38204
    ]
   ],
-  "first_view_index_kb_photos": 945,
+  "first_view_index_kb_photos": 908,
   "first_view_index_files_photos": [
    [
     "/themes/tropical-destination/img/florals_tl-800.webp",
@@ -696,7 +701,7 @@
     130906
    ],
    [
-    "/media/0da35dd2-62bc-43a4-9b4e-df38e60f2902/4cf154f07de519779dd5745fb9bb9319-640w.jpg",
+    "/media/de399067-e79f-4e99-a33d-67c422e84299/04de8563550caaf5c0e7ec23d4272197-640w.jpg",
     96047
    ],
    [
@@ -713,14 +718,14 @@
    ],
    [
     "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
-    48398
+    48264
    ],
    [
     "/themes/tropical-destination/site.css",
     44184
    ]
   ],
-  "first_view_home_kb_photos": 940,
+  "first_view_home_kb_photos": 1037,
   "first_view_home_files_photos": [
    [
     "/themes/tropical-destination/img/florals_tl-800.webp",
@@ -731,12 +736,16 @@
     130906
    ],
    [
-    "/media/0da35dd2-62bc-43a4-9b4e-df38e60f2902/4cf154f07de519779dd5745fb9bb9319-640w.jpg",
+    "/media/de399067-e79f-4e99-a33d-67c422e84299/04de8563550caaf5c0e7ec23d4272197-640w.jpg",
     96047
    ],
    [
-    "/media/0da35dd2-62bc-43a4-9b4e-df38e60f2902/420a5f104a228cb19c569caf9c72659f-640w.jpg",
+    "/media/de399067-e79f-4e99-a33d-67c422e84299/ea3cf11f9ebf928b218bd33e6ae9a303-640w.jpg",
     92808
+   ],
+   [
+    "/media/de399067-e79f-4e99-a33d-67c422e84299/cbf2da96193a2cc54a54283d1b39169a-640w.jpg",
+    85877
    ],
    [
     "/themes/tropical-destination/img/frame_portrait-607.webp",
@@ -747,14 +756,20 @@
     59894
    ],
    [
-    "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0ITw.woff2",
-    48398
-   ],
-   [
-    "/themes/tropical-destination/site.css",
-    44184
+    "/themes/tropical-destination/img/frame_landscape-960.webp",
+    50070
    ]
   ],
+  "video_kb": 2418,
+  "video_first_frame": {
+   "lead_in_s": 0.89,
+   "mean_rgb": [
+    198,
+    220,
+    210
+   ],
+   "stdev": 62
+  },
   "compare": {
    "source": "w1",
    "pages": [
