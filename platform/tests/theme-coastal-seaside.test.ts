@@ -609,7 +609,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   // fade below the first screen, the shoreline fading in at the foot and on wide screens, the nav's soft ground, the button
   for (const [, sel, body] of rules) {
     if (!/gradient\(/.test(body)) continue;
-    assert.match(sel, /body::before|\.hero-bg picture|\.shore-end::before|\.page-envelope \.scene-bg \.shore-band|^\s*\.site-nav\s*$|^\s*\.btn\s*$/, sel.trim());
+    assert.match(sel, /body::before|\.hero-bg picture|^\s*\.hero-bg\s*$|\.shore-end::before|\.page-envelope \.scene-bg \.shore-band|^\s*\.site-nav\s*$|^\s*\.btn\s*$/, sel.trim());
   }
   // the corner clusters are whole GPT parts: no mask / clip on them
   for (const [, sel, body] of rules) if (/corner|page-corner/.test(sel)) assert.doesNotMatch(body, /mask|clip-path/, sel.trim());
@@ -766,7 +766,8 @@ test('inner pages (story, details, rsvp): the sea mist of W1.3–W1.5 behind the
   assert.match(js, /const MAP = \{ tl: '[0-9a-f]{64}', br: '[0-9a-f]{64}' \}/, 'decor never under mist text');
   const d = render('details').$;
   assert.equal(d('.day-card h1.card-title[data-fold]').length, 1);
-  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, demo().schedule.length, 'each schedule row');
+  // schedule rows are not fold units: a pushed row left a blank hole in the painted card (qa-kontrol 2026-10-16, as 19)
+  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, 0);
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 6, 'title, reply-by, pill, the wait line, the signature, the shell');
@@ -1138,4 +1139,12 @@ test('15 privacy: sections the couple switched off leave nothing in any page sou
     const html = await res.text();
     for (const secret of secrets) assert.ok(!html.includes(secret), `${page}: "${secret}" is in the page source`);
   }
+});
+
+test('qa-kontrol 2026-10-16: the closed envelope hides the card; the shoreline stays under the words', () => {
+  // the card slot is clipped above env_closed's soft bottom edge (98.5 % of the stage): no ~3 px strip of card text under it
+  const m = rule('.card-slot').match(/clip-path: inset\(-140% -45% ([\d.]+)% -45%\)/);
+  assert.ok(m && Number(m[1]) >= 3, rule('.card-slot'));
+  assert.match(jsText(), /const shore = \(\) =>/, 'site.js slides the hero shoreline under long hero text');
+  assert.match(rule('.shore-end::before'), /100% auto/, 'closings: a fixed-height shoreline band at the foot');
 });

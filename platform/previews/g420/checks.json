@@ -77,7 +77,7 @@
   "home @667×375 (stress record): names 40 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 293, nav top 314)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 59×44, home \"Replay the envelope\" 218×46, rsvp \"Replay the envelope\" 180×46",
-  "envelope → /marina-and-oliver/home in 4682 ms, card transition flag set",
+  "envelope → /marina-and-oliver/home in 4714 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (11 steps)",
   "countdown target from the platform: 2027-07-17 16:00 America/New_York = 2027-07-17 20:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-07-17T21:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-07-22T20:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (157 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (208 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -128,10 +128,10 @@
   "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
   "index first view (390×844, DPR 3, placeholders): 897 KB",
-  "home first view (390×844, DPR 3, placeholders): 910 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 981 KB",
+  "home first view (390×844, DPR 3, placeholders): 911 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 982 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1335 KB",
-  "recording: previews/g420/opening_390x844.mp4 (2716 KB, lead-in 0.66 s cut, first frame mean 214,222,218) — tap → opening → home → story → details"
+  "recording: previews/g420/opening_390x844.mp4 (2674 KB, lead-in 0.54 s cut, first frame mean 214,222,219) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -478,13 +478,13 @@
      "bottom": 475
     },
     "bad": [
-     "span.cd-num \"349\" bottom 587",
+     "span.cd-num \"348\" bottom 587",
      "span.cd-lbl \"Days\" bottom 603",
-     "span.cd-num \"04\" bottom 587",
+     "span.cd-num \"08\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 603",
-     "span.cd-num \"57\" bottom 587",
+     "span.cd-num \"56\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 603",
-     "span.cd-num \"49\" bottom 587",
+     "span.cd-num \"24\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 603"
     ],
     "partly": [],
@@ -547,13 +547,13 @@
      "bottom": 561
     },
     "bad": [
-     "span.cd-num \"275\" bottom 674",
+     "span.cd-num \"274\" bottom 674",
      "span.cd-lbl \"Days\" bottom 690",
-     "span.cd-num \"04\" bottom 674",
+     "span.cd-num \"08\" bottom 674",
      "span.cd-lbl \"Hours\" bottom 690",
-     "span.cd-num \"57\" bottom 674",
+     "span.cd-num \"56\" bottom 674",
      "span.cd-lbl \"Minutes\" bottom 690",
-     "span.cd-num \"30\" bottom 674",
+     "span.cd-num \"05\" bottom 674",
      "span.cd-lbl \"Seconds\" bottom 690"
     ],
     "partly": [],
@@ -577,13 +577,13 @@
     },
     "bad": [
      "p.hero-city.in.done \"Chatham, Massachusetts\" bottom 587",
-     "span.cd-num \"275\" bottom 624",
+     "span.cd-num \"274\" bottom 624",
      "span.cd-lbl \"Days\" bottom 639",
-     "span.cd-num \"04\" bottom 624",
+     "span.cd-num \"08\" bottom 624",
      "span.cd-lbl \"Hours\" bottom 639",
-     "span.cd-num \"57\" bottom 624",
+     "span.cd-num \"55\" bottom 624",
      "span.cd-lbl \"Minutes\" bottom 639",
-     "span.cd-num \"24\" bottom 624",
+     "span.cd-num \"58\" bottom 624",
      "span.cd-lbl \"Seconds\" bottom 639",
      "a.btn \"RSVP\" bottom 695"
     ],
@@ -607,13 +607,13 @@
      "bottom": 308
     },
     "bad": [
-     "span.cd-num \"275\" bottom 424",
+     "span.cd-num \"274\" bottom 424",
      "span.cd-lbl \"Days\" bottom 441",
-     "span.cd-num \"04\" bottom 424",
+     "span.cd-num \"08\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 441",
-     "span.cd-num \"57\" bottom 424",
+     "span.cd-num \"55\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 441",
-     "span.cd-num \"18\" bottom 424",
+     "span.cd-num \"51\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
@@ -636,20 +636,20 @@
      "bottom": 293
     },
     "bad": [
-     "span.cd-num \"275\" bottom 409",
+     "span.cd-num \"274\" bottom 409",
      "span.cd-lbl \"Days\" bottom 426",
-     "span.cd-num \"04\" bottom 409",
+     "span.cd-num \"08\" bottom 409",
      "span.cd-lbl \"Hours\" bottom 426",
-     "span.cd-num \"57\" bottom 409",
+     "span.cd-num \"55\" bottom 409",
      "span.cd-lbl \"Minutes\" bottom 426",
-     "span.cd-num \"12\" bottom 409",
+     "span.cd-num \"45\" bottom 409",
      "span.cd-lbl \"Seconds\" bottom 426"
     ],
     "partly": [],
     "names": 40
    }
   ],
-  "envelope_to_home_ms": 4682,
+  "envelope_to_home_ms": 4714,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -761,7 +761,7 @@
     51090
    ]
   ],
-  "first_view_home_kb_placeholders": 910,
+  "first_view_home_kb_placeholders": 911,
   "first_view_home_files": [
    [
     "/themes/coastal-seaside/img/invitation_card-914.webp",
@@ -789,21 +789,21 @@
    ],
    [
     "/themes/coastal-seaside/site.css",
-    45987
+    46055
    ],
    [
     "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
     37788
    ]
   ],
-  "first_view_index_kb_photos": 981,
+  "first_view_index_kb_photos": 982,
   "first_view_index_files_photos": [
    [
     "/themes/coastal-seaside/img/card_small-640.webp",
     112228
    ],
    [
-    "/media/32eb4088-add9-4246-9733-a370c60ae7f7/95996c1bcdaa2bd6e4f0fe633811a16f-640w.jpg",
+    "/media/e2785124-d9be-4840-8e22-fb27b7bec525/186ea53e427e30638bf854bee862abed-640w.jpg",
     85864
    ],
    [
@@ -834,7 +834,7 @@
   "first_view_home_kb_photos": 1335,
   "first_view_home_files_photos": [
    [
-    "/media/32eb4088-add9-4246-9733-a370c60ae7f7/57d7869310de617c0643d9e8934b6d59-1280w.jpg",
+    "/media/e2785124-d9be-4840-8e22-fb27b7bec525/71b6bad534e246e7bc00630a4e7e99b3-1280w.jpg",
     246615
    ],
    [
@@ -846,11 +846,11 @@
     112228
    ],
    [
-    "/media/32eb4088-add9-4246-9733-a370c60ae7f7/12cefd8cb0082956030c168d9126d59b-640w.jpg",
+    "/media/e2785124-d9be-4840-8e22-fb27b7bec525/6cc5e24f1051364bad2d4de26548804e-640w.jpg",
     105303
    ],
    [
-    "/media/32eb4088-add9-4246-9733-a370c60ae7f7/95996c1bcdaa2bd6e4f0fe633811a16f-640w.jpg",
+    "/media/e2785124-d9be-4840-8e22-fb27b7bec525/186ea53e427e30638bf854bee862abed-640w.jpg",
     85864
    ],
    [
@@ -866,13 +866,13 @@
     75846
    ]
   ],
-  "video_kb": 2716,
+  "video_kb": 2674,
   "video_first_frame": {
-   "lead_in_s": 0.66,
+   "lead_in_s": 0.54,
    "mean_rgb": [
     214,
     222,
-    218
+    219
    ],
    "stdev": 42
   },

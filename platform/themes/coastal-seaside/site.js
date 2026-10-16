@@ -42,7 +42,7 @@ const MOTION = {
   batchGap: 380,  // scenes entering together
   arriveDelay: 0,
 
-  // particles (docs/11 §8): the catalogue's opening has none — the wave (its own GPT part) is the moving water
+  // particles (docs/11 §8): none — the GPT wave is the moving water
   accents: { open: [], arrive: [], closing: [] }
 };
 
@@ -311,8 +311,8 @@ function fitNames() {
     for (let w = g.querySelector('.pane').offsetWidth; w > 140 && bottom(g) > sv() - navH() - 8;) g.style.setProperty('--fw', `${w -= 6}px`);
     return g;
   };
-  // [data-fold] in order (story row = one): a unit crossing the nav line starts below the first screen; the first may
-  // lift the page; signature / bundle shrink (--sg ≥ .72) first
+  // [data-fold] in order (story row = one): a unit crossing the nav line starts below the first screen;
+  // signature / bundle shrink (--sg ≥ .72) first
   const folds = () => {
     const f = $('.page-bg + *'), a = [...$$('[data-fold], .windows-row')];
     [f, ...a].forEach((e) => e && ['margin-top', '--sg'].forEach((p) => e.style.removeProperty(p)));
@@ -343,7 +343,7 @@ function fitNames() {
       if (k < .6 || (top(st) >= -0.5 && bottom(hint) <= sv() - 6)) return;
     }
   };
-  // decor: a cluster never under mist text (16 × 16 needle map: shrinks, else hides); a floating accent on text hides
+  // decor: a cluster never under text (16 × 16 map: shrinks, else hides); a floating accent on text hides
   const MAP = { tl: '7f807ffe7ff9fffcfffafffaffe0ffc0ff80fe00fc00fc00f800f80070005000', br: '000c001e000f001f003f00ff01ff01ff03ff03ff03ff0fff1fff7fffffffffff' };
   const textBox = (el) => {
     const rg = document.createRange();
@@ -383,6 +383,14 @@ function fitNames() {
       if (solid.some((t) => { const [x0, y0, x1, y1] = meet(lay(f), t); return x0 < x1 && y0 < y1; })) f.style.visibility = 'hidden';
     });
   });
+  // phones: the shoreline (lower 27 % of sea-460) slides under long hero text
+  const shore = () => $$('.hero-bg picture').forEach((p) => {
+    p.style.translate = '';
+    const b = p.getBoundingClientRect(), s = b.bottom - Math.max(b.height, b.width * 2.133) * .27;
+    let t = 0;
+    $$('.hero-inner > :not(.hero-card, .hero-cta)').forEach((e) => { const r = e.getBoundingClientRect(); if (r.height && r.top < b.bottom) t = Math.max(t, r.bottom); });
+    if (!/wide/.test(p.querySelector('img').currentSrc) && t > s) p.style.translate = `0 ${Math.round(t - s + 10)}px`;
+  });
   // hero: names ≤ 30 %, tight, ≥ 36 px, countdown last, else it scrolls; fold
   const run = () => {
     fitCopy();
@@ -400,6 +408,7 @@ function fitNames() {
     });
     folds();
     decor();
+    shore();
   };
   refit = run;
   run();
@@ -455,8 +464,7 @@ function initEnvelope() {
     if (reduce || !Element.prototype.animate) { go(false); return; }
     A(el.hint, [{ opacity: 1 }, { opacity: 0 }], E.hint, 'ease-out', 'forwards');
     A(el.env, [{ transform: 'scale(1)' }, { transform: 'scale(.988)', offset: .4 }, { transform: 'scale(1)' }], E.tug, 'ease-out', 'none');
-    // the wave sweeps across the screen (stage px: from just off the left edge to just off the right edge); the shell
-    // lifts as the water arrives, then rides the wave's front off screen — same speed, a little bob and roll
+    // the wave crosses the screen (stage px, edge to edge); the shell lifts and rides its front off screen
     const sr = stage.getBoundingClientRect(), cr = el.closure.getBoundingClientRect(), ww = el.wave.offsetWidth, wh = el.wave.offsetHeight;
     const x0 = -sr.left - ww, x1 = innerWidth - sr.left + 12, wy = cr.top + cr.height * .5 - sr.top - wh * .2 - el.wave.offsetTop;
     const WT = (x) => ({ transform: `translate(${x.toFixed(1)}px, ${wy.toFixed(1)}px)`, visibility: 'visible' });

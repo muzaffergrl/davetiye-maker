@@ -77,7 +77,7 @@
   "home @667×375 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 489, nav top 314)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 60×44, home \"Replay the envelope\" 223×49, rsvp \"Replay the envelope\" 184×49",
-  "envelope → /celeste-and-damien/home in 4762 ms, card transition flag set",
+  "envelope → /celeste-and-damien/home in 4796 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-11-06 18:00 America/Chicago = 2027-11-06 23:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-11-07T00:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-11-11T23:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (182 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (191 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -131,7 +131,7 @@
   "home first view (390×844, DPR 3, placeholders): 949 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 808 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1423 KB",
-  "recording: previews/g419/opening_390x844.mp4 (2696 KB, lead-in 0.85 s cut, first frame mean 30,21,19) — tap → opening → home → story → details"
+  "recording: previews/g419/opening_390x844.mp4 (2780 KB, lead-in 0.78 s cut, first frame mean 30,21,19) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -479,13 +479,13 @@
      "bottom": 451
     },
     "bad": [
-     "span.cd-num \"349\" bottom 589",
+     "span.cd-num \"348\" bottom 589",
      "span.cd-lbl \"Days\" bottom 606",
-     "span.cd-num \"05\" bottom 589",
+     "span.cd-num \"09\" bottom 589",
      "span.cd-lbl \"Hours\" bottom 606",
-     "span.cd-num \"55\" bottom 589",
+     "span.cd-num \"47\" bottom 589",
      "span.cd-lbl \"Minutes\" bottom 606",
-     "span.cd-num \"33\" bottom 589",
+     "span.cd-num \"44\" bottom 589",
      "span.cd-lbl \"Seconds\" bottom 606"
     ],
     "partly": [],
@@ -550,13 +550,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 725",
      "p.hero-city.in.done \"New Orleans, Louisiana\" bottom 749",
-     "span.cd-num \"387\" bottom 792",
+     "span.cd-num \"386\" bottom 792",
      "span.cd-lbl \"Days\" bottom 809",
-     "span.cd-num \"05\" bottom 792",
+     "span.cd-num \"09\" bottom 792",
      "span.cd-lbl \"Hours\" bottom 809",
-     "span.cd-num \"55\" bottom 792",
+     "span.cd-num \"47\" bottom 792",
      "span.cd-lbl \"Minutes\" bottom 809",
-     "span.cd-num \"14\" bottom 792",
+     "span.cd-num \"24\" bottom 792",
      "span.cd-lbl \"Seconds\" bottom 809",
      "a.btn \"RSVP\" bottom 868"
     ],
@@ -582,13 +582,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 611",
      "p.hero-city.in.done \"New Orleans, Louisiana\" bottom 636",
-     "span.cd-num \"387\" bottom 672",
+     "span.cd-num \"386\" bottom 672",
      "span.cd-lbl \"Days\" bottom 689",
-     "span.cd-num \"05\" bottom 672",
+     "span.cd-num \"09\" bottom 672",
      "span.cd-lbl \"Hours\" bottom 689",
-     "span.cd-num \"55\" bottom 672",
+     "span.cd-num \"47\" bottom 672",
      "span.cd-lbl \"Minutes\" bottom 689",
-     "span.cd-num \"08\" bottom 672",
+     "span.cd-num \"18\" bottom 672",
      "span.cd-lbl \"Seconds\" bottom 689",
      "a.btn \"RSVP\" bottom 745"
     ],
@@ -612,13 +612,13 @@
      "bottom": 309
     },
     "bad": [
-     "span.cd-num \"387\" bottom 426",
+     "span.cd-num \"386\" bottom 426",
      "span.cd-lbl \"Days\" bottom 445",
-     "span.cd-num \"05\" bottom 426",
+     "span.cd-num \"09\" bottom 426",
      "span.cd-lbl \"Hours\" bottom 445",
-     "span.cd-num \"55\" bottom 426",
+     "span.cd-num \"47\" bottom 426",
      "span.cd-lbl \"Minutes\" bottom 445",
-     "span.cd-num \"01\" bottom 426",
+     "span.cd-num \"12\" bottom 426",
      "span.cd-lbl \"Seconds\" bottom 445"
     ],
     "partly": [],
@@ -641,13 +641,13 @@
      "bottom": 489
     },
     "bad": [
-     "span.cd-num \"387\" bottom 412",
+     "span.cd-num \"386\" bottom 412",
      "span.cd-lbl \"Days\" bottom 431",
-     "span.cd-num \"05\" bottom 412",
+     "span.cd-num \"09\" bottom 412",
      "span.cd-lbl \"Hours\" bottom 431",
-     "span.cd-num \"54\" bottom 412",
+     "span.cd-num \"47\" bottom 412",
      "span.cd-lbl \"Minutes\" bottom 431",
-     "span.cd-num \"55\" bottom 412",
+     "span.cd-num \"05\" bottom 412",
      "span.cd-lbl \"Seconds\" bottom 431",
      "a.btn \"RSVP\" bottom 489"
     ],
@@ -655,7 +655,7 @@
     "names": 32
    }
   ],
-  "envelope_to_home_ms": 4762,
+  "envelope_to_home_ms": 4796,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -752,7 +752,7 @@
    ],
    [
     "/themes/midnight-garden/site.css",
-    46040
+    46063
    ],
    [
     "/themes/midnight-garden/img/env_flap-880.webp",
@@ -795,7 +795,7 @@
    ],
    [
     "/themes/midnight-garden/site.css",
-    46040
+    46063
    ],
    [
     "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
@@ -805,7 +805,7 @@
   "first_view_index_kb_photos": 808,
   "first_view_index_files_photos": [
    [
-    "/media/8defda42-a460-4576-86d5-75ee3ea600e7/921f54d799081f924695776b527b425a-640w.jpg",
+    "/media/ff96f6f8-45d0-482f-b2a0-5effdf4751e1/6ccc5b636741ab3489ba744eab916eff-640w.jpg",
     94231
    ],
    [
@@ -826,7 +826,7 @@
    ],
    [
     "/themes/midnight-garden/site.css",
-    46040
+    46063
    ],
    [
     "/themes/midnight-garden/img/env_flap-880.webp",
@@ -840,7 +840,7 @@
   "first_view_home_kb_photos": 1423,
   "first_view_home_files_photos": [
    [
-    "/media/8defda42-a460-4576-86d5-75ee3ea600e7/d811357c13fdca2b23eff1312e080918-1280w.jpg",
+    "/media/ff96f6f8-45d0-482f-b2a0-5effdf4751e1/a630f6d07c6ac3b58ed4be04ce985a19-1280w.jpg",
     319141
    ],
    [
@@ -852,7 +852,7 @@
     120928
    ],
    [
-    "/media/8defda42-a460-4576-86d5-75ee3ea600e7/921f54d799081f924695776b527b425a-640w.jpg",
+    "/media/ff96f6f8-45d0-482f-b2a0-5effdf4751e1/6ccc5b636741ab3489ba744eab916eff-640w.jpg",
     94231
    ],
    [
@@ -860,7 +860,7 @@
     92678
    ],
    [
-    "/media/8defda42-a460-4576-86d5-75ee3ea600e7/d8e9d17cba17587345f81b50fac80802-640w.jpg",
+    "/media/ff96f6f8-45d0-482f-b2a0-5effdf4751e1/72ae403d3bb2578cddbd682ba6ad5858-640w.jpg",
     87165
    ],
    [
@@ -872,9 +872,9 @@
     74512
    ]
   ],
-  "video_kb": 2696,
+  "video_kb": 2780,
   "video_first_frame": {
-   "lead_in_s": 0.85,
+   "lead_in_s": 0.78,
    "mean_rgb": [
     30,
     21,

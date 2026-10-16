@@ -355,7 +355,9 @@ function fitNames() {
     const rs = [...rg.getClientRects()].filter((r) => r.width && r.height), b = el.getBoundingClientRect(), L = lay(el);
     if (!rs.length) return null;
     const dx = L.x - b.left, dy = L.y - b.top, x = Math.min(...rs.map((r) => r.left)) + dx, y = Math.min(...rs.map((r) => r.top)) + dy;
-    return { x: x - 4, y: y - 4, w: Math.max(...rs.map((r) => r.right)) + dx - x + 8, h: Math.max(...rs.map((r) => r.bottom)) + dy - y + 8 };
+    // a script h1's swashes ink past its line box (the "y" of "Story" reached the cornflower — qa-kontrol 2026-10-16)
+    const px = el.matches('h1') ? Math.max(4, parseFloat(getComputedStyle(el).fontSize) * .15) : 4;
+    return { x: x - px, y: y - 4, w: Math.max(...rs.map((r) => r.right)) + dx - x + 2 * px, h: Math.max(...rs.map((r) => r.bottom)) + dy - y + 8 };
   };
   const meet = (c, t) => [Math.max(c.x, t.x), Math.max(c.y, t.y), Math.min(c.x + c.w, t.x + t.w), Math.min(c.y + c.h, t.y + t.h)];
   const under = (c, t, m) => {

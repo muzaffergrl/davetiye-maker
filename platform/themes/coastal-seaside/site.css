@@ -231,7 +231,8 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* hinge: stage.hinge_in_cflap_pct */
 .env-cflap { left: 0; top: 49.744%; width: 100%; height: 31.475%; z-index: 4; transform-origin: 50% .552%; backface-visibility: hidden; } /* stage.parts.env_cflap */
 
-.card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 1% -45%); }
+/* above env_closed's soft bottom (98.5 %) */
+.card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 4% -45%); }
 .env .card { position: absolute; left: 23.895%; top: 60.307%; width: 51.523%; } /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 10px 16px rgba(20, 40, 60, .16)); }
 /* the opening wave: over the envelope, under the shell; JS moves it */
@@ -406,7 +407,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .shore-end { position: relative; overflow: hidden; isolation: isolate; }
 .shore-end::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: url("img/shore-600.webp") 50% 100% / cover no-repeat;
+  background: url("img/shore-600.webp") 50% 100% / 100% auto no-repeat; /* text stays above the foam */
   -webkit-mask: linear-gradient(transparent, #000 56%); mask: linear-gradient(transparent, #000 56%);
 }
 .foot, .next-sec, .closing { --corner: min(54vw, 320px); padding: 46px 16px calc(var(--corner) * 1.02 + var(--below, 0px)); text-align: center; }
@@ -428,6 +429,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .page-head, .details-top, .rsvp-top { position: relative; text-align: center; }
 .page-bg { position: absolute; left: 0; right: 0; top: 0; height: 100svh; z-index: 0; overflow: hidden; pointer-events: none; }
 /* the sea fades out below the first screen (its shoreline stays) */
+.hero-bg { background: linear-gradient(#E7F5F7 50%, #0000 0); }
 .hero-bg picture, .page-bg picture { -webkit-mask-image: linear-gradient(#000 86%, transparent); mask-image: linear-gradient(#000 86%, transparent); }
 .page-bg .corner { width: var(--cw); }
 .page-bg .corner-tl { --cw: min(50vw, 290px); left: calc(var(--cw) * -.1); top: calc(var(--cw) * -.08); }
@@ -484,7 +486,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .sched-list { list-style: none; margin: 3cqw 0 0; padding: 0; width: 100%; }
 .sched-row { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .sched-row + .sched-row { margin-top: 2.4cqw; }
-/* W1.4: shells and sea glass (GPT divider) between two hairlines between rows (the first row has none; 6+ rows: space only) */
+/* W1.4: GPT divider between two hairlines between rows (not before the first; 6+ rows: space only) */
 .row-orn { width: 70cqw; gap: 2.4cqw; margin-bottom: 2.4cqw; }
 .row-orn img { width: 26cqw; }
 .sched-row:first-child .row-orn, .sched-list:has(> .sched-row:nth-child(6)) .row-orn { display: none; }
@@ -589,7 +591,6 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .page-head { padding-top: 150px; }
   .windows { flex-direction: row; align-items: flex-start; justify-content: center; gap: 44px; width: min(100% - 40px, 760px); }
   .wl-day { margin-top: 64px; }
-  .shore-end::before { background-size: 100% auto; }
 }
 @media (min-width: 1024px) and (min-height: 621px) {
   .hero-card { width: clamp(140px, 42svh * .6885, 268px); }

@@ -172,7 +172,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/ad84d4ba-dff1-46fd-9275-192271903562/d71afa1fbc22f19c8e86032af02d5785-1024w.jpg"
+      "detail": "/media/fa8a075a-3125-4f81-98a7-333f51f2d2b5/3243395d6eb75ee67ec529a4312795c0-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
@@ -189,7 +189,7 @@
     {
       "name": "buyer: the reply shows in the panel",
       "ok": true,
-      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 345 days. Last day: Saturday, September 25, 2027 (UTC time). 1 n"
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 344 days. Last day: Saturday, September 25, 2027 (UTC time). 1 n"
     },
     {
       "name": "buyer: panel has no overflow at the end",
