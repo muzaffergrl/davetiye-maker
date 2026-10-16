@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 10 · alindi 7 · inceleme 3 · blokaj 277 · bitti 107 · toplam 404
+Özet: hazir 1 · alindi 3 · inceleme 5 · blokaj 278 · bitti 121 · toplam 408
 
 ## claude-canva
 
@@ -110,9 +110,9 @@ Bağımlılık bekleyen: 0 · Biten: 2
 
 - `G063` inceleme · claude-local-1 — Canlıda çapraz tarayıcı testi (Firefox, Edge, Chrome; telefon emülasyonu) — 01 ve 03, alıcı + misafir yolculuğu
 - `G079` inceleme · claude-local-1 — Canlıya güncel main — sade ve BKE Studio görünümlü panel (G066-B, K29); canlı kontrol + panel ekranları
-- `G092` alindi · claude-local-1 — Canlıya güncel main — dükkân paneli /admin (G087), K33 değerleri, G091 metinleri; ADMIN_PASSWORD + canlı kontrol
 - `GA02` blokaj · - — Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 - `GV02B` blokaj · - — Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
+- `G088` inceleme · claude-local-1 — Refero Pro ile tasarım turu — satış sitesi, alıcı paneli ve admin ekranları en iyi örneklere göre (K31)
 - `GB02` blokaj · - — Tasarım 02 Dusty Blue — website Form + yayın testi + set template link'leri (pilot)
 - `G007` blokaj · - — Tasarım 02 — kılavuz ve ilandaki [VERIFY] maddelerini gerçek arayüzde kapat
 - `GA01` blokaj · - — Tasarım 01 Olive & Ivory — video animasyonu + video template link (Canva arayüzü)
@@ -154,23 +154,19 @@ Bağımlılık bekleyen: 0 · Biten: 2
 - `GB19` blokaj · - — Tasarım 19 Midnight Garden — website Form + yayın testi + set template link'leri (Canva arayüzü)
 - `GB20` blokaj · - — Tasarım 20 Coastal Seaside — website Form + yayın testi + set template link'leri (Canva arayüzü)
 
-Bağımlılık bekleyen: 1 · Biten: 4
+Bağımlılık bekleyen: 0 · Biten: 5
 
 ## claude-kod
 
-**Alınabilir (6)**
+**Alınabilir (0)**
 
-- `G065` p2 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo → `gorevler/G065-ilan-kiti-yenileme.md`
-- `G415` p3 — Tasarım 15 Cherry Blossom Spring — platform teması → `gorevler/G415-website-kaynak.md`
-- `G417` p3 — Tasarım 17 Emerald & Gold Estate — platform teması → `gorevler/G417-website-kaynak.md`
-- `G418` p3 — Tasarım 18 Wildflower Meadow Vellum — platform teması → `gorevler/G418-website-kaynak.md`
-- `G419` p3 — Tasarım 19 Midnight Garden — platform teması → `gorevler/G419-website-kaynak.md`
-- `G420` p3 — Tasarım 20 Coastal Seaside — platform teması → `gorevler/G420-website-kaynak.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (86)**
+**Üzerinde çalışılan / incelemede / blokaj (83)**
 
 - `G087` alindi · claude-G087 — Dükkân (admin) paneli + alıcı panelinde satın alma sonrası akış düzeltmeleri (K30)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
+- `G065` alindi · claude-local-G065 — İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo
 - `G101` blokaj · claude-kod-7 — Tasarım 01 Olive & Ivory — HTML sahne kaynağı + katmanlar
 - `G104` blokaj · claude-kod-8 — Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 - `G105` blokaj · - — Tasarım 05 Mediterranean Lemon — HTML sahne kaynağı + katmanlar
@@ -191,10 +187,6 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `G120` blokaj · - — Tasarım 20 Coastal Seaside — HTML sahne kaynağı + katmanlar
 - `G006` blokaj · - — Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 - `G403` blokaj · - — Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
-- `G409` alindi · claude-local-G409 — Tasarım 09 Lavender Provence — platform teması
-- `G410` alindi · claude-local-G410 — Tasarım 10 Tuscan Vineyard — platform teması
-- `G411` alindi · claude-local-G411 — Tasarım 11 Boho Pampas Terracotta — platform teması
-- `G412` alindi · claude-local-G412 — Tasarım 12 Tropical Destination — platform teması
 - `G501` blokaj · - — Tasarım 01 Olive & Ivory — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G503` blokaj · - — Tasarım 03 Blush Garden Rose — A3 5×7 davetiye + A4 story/kare kaynakları
 - `G504` blokaj · - — Tasarım 04 Vintage Airmail Love Letter — A3 5×7 davetiye + A4 story/kare kaynakları
@@ -256,7 +248,7 @@ Bağımlılık bekleyen: 1 · Biten: 4
 - `GP419` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet ilan kitleri
 - `GP420` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet ilan kitleri
 
-Bağımlılık bekleyen: 2 · Biten: 51
+Bağımlılık bekleyen: 1 · Biten: 64
 
 ## claude-metin
 
@@ -324,18 +316,20 @@ Bağımlılık bekleyen: 0 · Biten: 0
 
 ## gpt-gorsel
 
-**Alınabilir (1)**
+**Alınabilir (0)**
 
-- `GM06` p2 — Dükkân geneli güven ve albeni sahneleri — 6 GPT görseli (3 adım, misafir RSVP, çift düzenliyor, her cihaz, QR masa kartı, atölye) → `gorevler/GM06-guven-sahneleri.md`
+- (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (30)**
+**Üzerinde çalışılan / incelemede / blokaj (32)**
 
 - `G010` blokaj · - — V01 Paket 1 — dokular ve dekor (6 görsel)
 - `G011` blokaj · - — V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
 - `GV02A` blokaj · gpt-video-1 — Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 - `G203` blokaj · - — Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 - `G216` alindi · gpt-gorsel-H — Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
+- `GM06` inceleme · codex-gpt-gorsel-gm06 — Dükkân geneli güven ve albeni sahneleri — 6 GPT görseli (3 adım, misafir RSVP, çift düzenliyor, her cihaz, QR masa kartı, atölye)
 - `G013` blokaj · - — V01 Paket 3 — Etsy mockup'ları (3 görsel)
+- `GM07` blokaj · gpt-gorsel-GM07 — Tasarım 15–20 rötuş parçaları — tema ajanlarının önerdiği 6 GPT parçası (yuvarlak çerçeveler, fiyonk, geri sayım kutusu, hap dalı, yatay çerçeve)
 - `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
 - `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
 - `G072` blokaj · - — V04_navy_gold — Paket 1 + Paket 3 görselleri
