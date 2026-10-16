@@ -257,7 +257,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 |---|---|---|---|---|
 | 48 | Where do I change X? | Edit has six pages: Us, Day & place, Photos, Our Story, Details, RSVP. Home also lists the next things to do. | SH | ✓ |
 | 49 | Is there a Save button? | No need: every change saves by itself. The cloud icon at the top shows it. | SH | ✓ |
-| 50 | What does the grey "Sample" tag mean? | That box still holds the design's sample text. Replace it before you share your website. | SH | ✓ |
+| 50 | What does "N fields still show sample text" mean? | Some boxes on that page still hold the design's sample text (they look faded, in italics). Tap **Go to the first one** and replace it before you share your website. | SH | ✓ |
 | 51 | Which photo formats work? | JPG, PNG, WebP, AVIF and HEIC, up to 30 MB. If a photo will not open, save a JPEG copy and try again. | SH | ✓ (HEIC iPhone V) |
 | 52 | How do I crop a photo? | After choosing it, drag to move it, zoom with the slider or two fingers, then tap Use this photo. | SH | ✓ |
 | 53 | Can I hide parts I don't need? | Yes: Our Story, the countdown, dress code, travel & stay, registry, guest policy note and questions & answers can each be switched off. | SH | ✓ |
@@ -1035,7 +1035,7 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 
 **What stays as designed:** the artwork, colors, fonts, page layout and the envelope animation.
 
-**Sample text.** A small grey **Sample** tag means a box still holds the design's sample text. Replace it before you share your website. Home lists what is left.
+**Sample text.** Boxes that still hold the design's sample text look faded (in italics), and the top of the page says how many are left, for example "3 fields still show sample text". Tap **Go to the first one** and replace it before you share your website. Home lists what is left.
 
 **Saving.** There is no Save button: every change saves as you type, and the cloud icon at the top shows it. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
 
@@ -1051,7 +1051,7 @@ No photos yet? Your website still works: empty frames show the design's soft pla
 
 Tap the eye icon at the top to preview Envelope, Home, Story, Details and RSVP; **Close** returns to editing. On a computer the preview stays on the right.
 
-**First publish:** tap **Publish**. The editor lists anything guests would still see from the design (sample text, empty photo frames, sections without a link). Tap an item to fix it, or publish anyway and fix it later. Then your link and QR code appear.
+**First publish:** tap **Publish**. The editor lists anything guests would still see from the design (sample text, empty photo frames, sections without a link). Tap an item to fix it, or publish anyway and fix it later. Then your link appears with **Copy link** (and **Share** on phones); the QR code is under **More ways to share**, and Share has it too.
 
 **After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed, then **Publish changes**.
 

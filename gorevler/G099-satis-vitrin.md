@@ -2,7 +2,7 @@
 id: G099
 baslik: Satış sitesi — 20 tasarımlı vitrin (8 öne çıkan + See all), açılış metinleri, tasarım sayfasında tek birincil eylem
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G099
 oncelik: 1
 bagimli: []
@@ -96,3 +96,4 @@ bozuktu (G095'ten beri "How it works" üç satıra kırılıyor, "See designs" s
 - 2026-10-16 alindi: claude-G099
 - 2026-10-16 claude-G099: vitrin 8 öne çıkan + See all 20 (config `featured`), açılış metinleri (`openingObject`), tasarım sayfasında tek birincil eylem, 1024 × 800 ana düğme 767 px + başlık çubuğu, 16 story yeniden çekildi (yalnız 3 dosya); npm test 1212/1212, marketing-browser 843/843
 - 2026-10-16 bitti, incelemeye gönderildi
+- 2026-10-16 entegratör onayladı

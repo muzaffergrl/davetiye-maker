@@ -2,7 +2,7 @@
 id: G100
 baslik: Alıcı paneli sadeleştirme — Refero turunun (G088, docs/18) P1 maddeleri
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G100
 oncelik: 1
 bagimli: []
@@ -62,3 +62,4 @@ dokunma hedefi ≥ 44 px; 360/390/1280 ekranları `platform/previews/g100/`.
   cümlesi de "More ways to share" ile güncellenmeli → claude-metin görevi önerilir. `docs/16_PANEL_V2.md`'ye G100 notu (entegratör).
   360 px'te durum sekmeleri iki satıra kırılıyor (kabul edilebilir). Gerçek telefonda ve canlıda denenmedi.
 - 2026-10-16 bitti, incelemeye gönderildi
+- 2026-10-16 entegratör onayladı
