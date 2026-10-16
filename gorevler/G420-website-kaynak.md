@@ -110,3 +110,4 @@ oranlar manifest `box_px`'ten, 71 copy anahtarı), `content.demo.json` (koleksiy
 - 2026-10-15 alindi: claude-G420
 - 2026-10-15 bitti, incelemeye gönderildi
 - 2026-10-15 entegratör onayladı
+- 2026-10-16 G098 (claude-kod): story + home lombozu GM07 R2 `frame_portrait_r2_v2.png` (tam yuvarlak, comp W1.3 gibi; ham imagegen, pencere parts_prep leke dolgusuyla tam şeffaf); foto alanı 870/872; site.js değişmedi (35 829 B); theme-check --stress 128/0/0 (tek başına), g051 44/44, final-smoke 45/45

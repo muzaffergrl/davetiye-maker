@@ -119,3 +119,4 @@ tam olduğundan durum dosyada elle `alindi` yapıldı (Günlük). Ortak test/dos
 - 2026-10-15 alindi: claude-G416 (G216 durumu alindi ama PAKET 5 W1/W2 + PAKET 2 dosyalari main'de tam; gorev oturuma dogrudan verildi)
 - 2026-10-15 bitti, incelemeye gönderildi
 - 2026-10-15 entegratör onayladı
+- 2026-10-16 G098 (claude-kod): zarf kapanışı GM07 R3 `closure_r2_v3.png` (buğday spreyli fiyonk, comp W1.1 gibi; ham imagegen, bant −44 px yerleşimle telafi, hiza tamam); RSVP kartı kurdelesi spreysiz eski closure (`card_ribbon`, sprey ilk ekrana sığmıyordu); home `fold` isimleri itmez (15/17'deki G101 düzeltmesi; 320×568 zorlamada h1 ekran altına itiliyordu); theme-check --stress 128/0/0, g051 44/44, final-smoke 45/45
