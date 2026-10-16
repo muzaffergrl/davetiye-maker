@@ -24,7 +24,7 @@ interface Status {
   reconnect: boolean;
 }
 
-/** Key of this tab's sessionStorage that takes the couple back here after Google (public/google/return.js). */
+/** Key of this tab's sessionStorage that takes the couple back here after Google (public/rsvp/google-return.js). */
 const RETURN_KEY = 'bke:google-return';
 
 function when(iso: string | null): string | null {

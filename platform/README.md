@@ -1392,6 +1392,27 @@ Testler: `tests/g055-share-tracing.test.ts` (8), `tests/g055-photos.test.ts` (6)
 `tests/panel.test.ts` (yükleme adı/türevleri), `tests/panel-browser.ts` (küçük resim = 640 türevi, yayındaki sayfada `srcset`);
 tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
 
+## RSVP form alanları, Excel ve Google Sheets (G128)
+
+- **Alan yapılandırması** (`lib/rsvp/form-config.ts`, tek okuma): içerik `rsvp.required {email, message}` (ad ve katılım hep zorunlu,
+  kişi sayısı hep sorulur) + `rsvp.questions[]` türleri `choice | text | long | yesno | number`, `required: true` (≤ 10 soru; şema
+  `docs/03`). Eski kayıtlar değişmeden okunur (bayrak yok = isteğe bağlı). Etiketler: hazır alanlar G068 `copy.form_*` anahtarları,
+  sorular `label`. Panel: RSVP sayfasında "Reply form" (`components/panel/RsvpFormFields.tsx`).
+- **Misafir formu**: motor site-data'ya `rsvp_form {required, questions:[{id,type,required}]}` yazar (metin yok); `yesno` temanın
+  seçenek hapları olarak çizilir (`buildView` Yes/No ekler), `number` tek satır sayısal klavye, `long` uzun kutu. `/rsvp/form.js`
+  zorunlu alanlara `required`/`aria-required` koyar, e-posta/not zorunluysa temanın "(optional)" işaretini gizler, isteğe bağlı
+  soruya aynı işareti kopyalar; mesajlar sunucuyla aynı (`lib/rsvp/validate.ts`). Gövde sınırı 32 KB, uzun yanıt ≤ 1000.
+  Çiftin panelden eklediği yanıtta zorunluluk aranmaz.
+- **Tablo modeli** (`lib/rsvp/table.ts`): Excel, Google Sheet ve CSV'nin cevap sütunları aynı: güncel sorular (metniyle), sonra
+  silinmiş soruların cevapları "<soru> (removed)" sağda. Excel: `GET /api/rsvp/<slug>/excel?k=` (`lib/rsvp/xlsx.ts`, exceljs):
+  Replies (marka başlığı #2B1526, dondurulmuş başlık, filtre, #EDE5D7 şerit, tarih site saat diliminde, sayılar sayı) + Summary.
+- **Google Sheets** (`lib/google/`, kurulum `docs/22_GOOGLE_SHEETS.md`): env `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`,
+  `GOOGLE_TOKEN_KEY`; yoksa panelde "coming soon", uçlar 503. `/api/edit/<slug>/google` (Bearer: durum / connect / sync /
+  disconnect), `/api/google/callback`. Bağlantı site kaydının DIŞINDA site belgesinde (`DataAdapter.readSiteDoc/updateSiteDoc`,
+  `docs/<siteId>/google-sheets.json`; blob'da ETag'li) — senkron `updatedAt`'i oynatmaz, otomatik kaydetme çakışmaz. Senkron =
+  tablonun tamamı tek `batchUpdate` ile; tetikler: sayılan misafir yanıtı, çiftin ekle/düzelt/sil/tut işlemi, yayınlama
+  (`after()`), "Sync now". Testler: `tests/g128-rsvp-sheets.test.ts` (sahte Google sunucusu), `tests/g128-browser.ts` (3 tema, 390 px).
+
 ## Güvenlik özeti
 
 - İçerik → HTML: yalnız metin düğümü/öznitelik değeri (parse5 serileştirici kaçışlar); `<script>`/`<style>` içine

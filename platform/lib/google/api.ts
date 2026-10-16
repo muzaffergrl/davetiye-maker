@@ -9,7 +9,7 @@
 //        has not set Google up (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / GOOGLE_TOKEN_KEY).
 //   GET  /api/google/callback?code&state         Google's redirect: checks state (cookie = parameter, stored hash, 10 min),
 //                                                stores the encrypted refresh token, writes the sheet, then a small page
-//                                                sends the couple back to their panel (/google/return.js).
+//                                                sends the couple back to their panel (/rsvp/google-return.js).
 // CSRF: the POSTs need the Bearer header (no cookie auth); the callback's state ties Google's answer to the browser that
 // started it (cookie) AND to the site whose editor started it (hash stored with the site), and is used once.
 
@@ -116,7 +116,7 @@ a{display:inline-block;margin-top:1.25rem;padding:14px 22px;border-radius:999px;
 <h1>${esc(t.title)}</h1><p>${esc(t.body)}</p>
 <a href="#" data-google-back hidden>Back to your editing page</a>
 <p class="small" data-google-manual>You can close this tab and open your editing link again.</p>
-</main><script src="/google/return.js" defer></script></body></html>`;
+</main><script src="/rsvp/google-return.js" defer></script></body></html>`;
 }
 
 export async function googleCallback(req: Request): Promise<Response> {

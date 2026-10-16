@@ -81,7 +81,7 @@ function FixedRow({ f, entry }: { f: FixedField; entry: PanelCopyEntry | undefin
       )}
       {f.requirable ? (
         <Segmented<Need>
-          label={`${(typeof raw === 'string' && raw.trim()) || label}: required or optional`}
+          label="Guests must fill this in?"
           value={required ? 'required' : 'optional'}
           options={NEED_OPTIONS}
           disabled={locked}
