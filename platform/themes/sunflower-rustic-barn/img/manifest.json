@@ -137,19 +137,110 @@
  },
  "closure": {
   "src_size": [
+   922,
+   600
+  ],
+  "ratio": 1.53667,
+  "files": [
+   {
+    "file": "closure-440.webp",
+    "w": 440,
+    "h": 286,
+    "bytes": 29342
+   },
+   {
+    "file": "closure-880.webp",
+    "w": 880,
+    "h": 573,
+    "bytes": 95498
+   }
+  ],
+  "quality": [
+   78,
+   90
+  ],
+  "anchor": "1:1 canvas overlay (wrapped ribbon drawn on the envelope's canvas, docs/11 §7.1 sarılı)",
+  "anchor_px": [
+   517.0,
+   1033.0
+  ],
+  "canvas_box": [
+   56,
+   733,
+   978,
+   1333
+  ],
+  "center_pct": [
+   50.383,
+   74.262
+  ],
+  "width_pct": 100.986,
+  "knot_pct_of_closure": [
+   49.78,
+   41.67
+  ],
+  "ends_vs_envelope": {
+   "kenarlar": [
+    {
+     "kenar": "kapanış sol uç",
+     "fark_px": -6.0,
+     "fark_pct": -0.59,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış sağ uç",
+     "fark_px": -12.0,
+     "fark_pct": -1.17,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış üst uç",
+     "fark_px": 22.0,
+     "fark_pct": 1.43,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış alt uç",
+     "fark_px": 2.0,
+     "fark_pct": 0.13,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    }
+   ],
+   "eksen": [
+    "yatay",
+    "dikey"
+   ],
+   "kapsama": {
+    "yatay": 1.02,
+    "dikey": 1.031
+   }
+  },
+  "measured_from": "parts/closure_r2_v3.png on the envelope_closed canvas (no comp scaling: wrapped closure)",
+  "source": "parts/closure_r2_v3.png",
+  "placement_dy_px": -44,
+  "placement_note": "GM07 R3 (G098): ham imagegen; bant parts/closure.png'ye göre ölçülen dy kadar kaydırılarak yerleştirildi (yalnız konum, piksel değişmedi)",
+  "carried_by_flap": false,
+  "motion": "the bow tugs loose (about the sunflower knot), then the ribbon slides off along its band to the right, turning behind the envelope's right edge (clip) — MOTION.envelope.tug/closure"
+ },
+ "card_ribbon": {
+  "src_size": [
    911,
    435
   ],
   "ratio": 2.09425,
   "files": [
    {
-    "file": "closure-440.webp",
+    "file": "card_ribbon-440.webp",
     "w": 440,
     "h": 210,
     "bytes": 20904
    },
    {
-    "file": "closure-880.webp",
+    "file": "card_ribbon-880.webp",
     "w": 880,
     "h": 420,
     "bytes": 73106
@@ -159,54 +250,7 @@
    78,
    90
   ],
-  "anchor": "1:1 canvas overlay (wrapped ribbon drawn on the envelope's canvas, docs/11 §7.1 sarılı)",
-  "anchor_px": [
-   512.5,
-   1107.5
-  ],
-  "canvas_box": [
-   57,
-   890,
-   968,
-   1325
-  ],
-  "center_pct": [
-   49.891,
-   80.408
-  ],
-  "width_pct": 99.781,
-  "knot_pct_of_closure": [
-   51.26,
-   30.11
-  ],
-  "ends_vs_envelope": {
-   "kenarlar": [
-    {
-     "kenar": "kapanış sol uç",
-     "fark_px": -4.0,
-     "fark_pct": -0.39,
-     "durum": "tamam",
-     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
-    },
-    {
-     "kenar": "kapanış sağ uç",
-     "fark_px": -1.0,
-     "fark_pct": -0.1,
-     "durum": "tamam",
-     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
-    }
-   ],
-   "eksen": [
-    "yatay"
-   ],
-   "kapsama": {
-    "yatay": 1.008,
-    "dikey": 0.752
-   }
-  },
-  "measured_from": "parts/closure.png on the envelope_closed canvas (no comp scaling: wrapped closure)",
-  "carried_by_flap": false,
-  "motion": "the bow tugs loose (about the sunflower knot), then the ribbon slides off along its band to the right, turning behind the envelope's right edge (clip) — MOTION.envelope.tug/closure"
+  "source": "parts/closure.png"
  },
  "stage": {
   "canvas": [
@@ -252,10 +296,10 @@
     40.999
    ],
    "closure": [
-    0.0,
-    62.466,
-    99.781,
-    35.884
+    -0.11,
+    49.514,
+    100.986,
+    49.496
    ],
    "card": [
     25.027,
@@ -2546,8 +2590,8 @@
   "src_box": [
    0,
    0,
-   365,
-   435
+   370,
+   600
   ],
   "size": [
    180,
@@ -2556,7 +2600,7 @@
   "pad": 0.04,
   "source": "closure (bow + sunflower, middle 40 %)",
   "file": "favicon.png",
-  "bytes": 49544
+  "bytes": 40611
  },
  "align": {
   "tip": "kapak",
@@ -2600,25 +2644,40 @@
    "kenarlar": [
     {
      "kenar": "kapanış sol uç",
-     "fark_px": -4.0,
-     "fark_pct": -0.39,
+     "fark_px": -6.0,
+     "fark_pct": -0.59,
      "durum": "tamam",
      "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
     },
     {
      "kenar": "kapanış sağ uç",
-     "fark_px": -1.0,
-     "fark_pct": -0.1,
+     "fark_px": -12.0,
+     "fark_pct": -1.17,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış üst uç",
+     "fark_px": 22.0,
+     "fark_pct": 1.43,
+     "durum": "tamam",
+     "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
+    },
+    {
+     "kenar": "kapanış alt uç",
+     "fark_px": 2.0,
+     "fark_pct": 0.13,
      "durum": "tamam",
      "not": "+ boşluk, − taşma (zarfın aynı satır/sütundaki kenarına göre)"
     }
    ],
    "eksen": [
-    "yatay"
+    "yatay",
+    "dikey"
    ],
    "kapsama": {
-    "yatay": 1.008,
-    "dikey": 0.752
+    "yatay": 1.02,
+    "dikey": 1.031
    }
   },
   "durum": "tamam"
@@ -2637,6 +2696,12 @@
    "removed_px": 9999
   },
   "closure": {
+   "alpha_floor": 12,
+   "core": 96,
+   "reach_px": 3,
+   "removed_px": 28557
+  },
+  "card_ribbon": {
    "alpha_floor": 12,
    "core": 96,
    "reach_px": 3,

@@ -19,9 +19,12 @@ Bu tasarıma özgü (docs/11 §7.1, §7.3 — kapaklı zarf, köşeleri yuvarlak
     doğru uydurulur (düz kenar); yan kanatlar (sol/sağ kraft kulaklar) gövde katmanında kalır — kart onların arasından
     geçer, üstlerine binmez.
   * Hiza: kit_check geçiyor (sol +0,10 · sağ −0,20 · alt +1,43 %; kurdele uçları −0,39 / −0,10 %) — dönüşüm yok.
-  * Kapanış (closure.png = hardal kareli kurdele + fiyonk + küçük ayçiçeği) zarfla aynı 1024 × 1536 tuvalde, 1:1 üst
-    üste: yeri kendi alfa kutusu (manifest.closure, anchor "1:1 canvas overlay"). Açılışta fiyonk gevşer, kurdele
-    ayçiçeğiyle birlikte bant boyunca sağa kayıp zarfın sağ kenarında arkaya döner (CSS clip, site.js).
+  * Kapanış (G098: GM07 R3 `closure_r2_v3.png` = hardal kareli kurdele + fiyonk + küçük ayçiçeği + arkasında buğday
+    başakları, çiçek ve iki yaprak; ham imagegen, kaynakta piksel düzenlemesi yok) zarfla aynı 1024 × 1536 tuvalde,
+    1:1 üst üste: yeri kendi alfa kutusu (manifest.closure, anchor "1:1 canvas overlay"). GPT bandı ~43 px aşağı
+    çizdi: kayma eski closure.png'nin bandıyla ölçülür (bant_kaymasi, x 100 / 900 sütunlarında opak satırlar) ve yalnız
+    YERLEŞİME uygulanır (alfa kutusu yukarı taşınır; görüntü aynı). Açılışta fiyonk gevşer, kurdele ayçiçeğiyle
+    birlikte bant boyunca sağa kayıp zarfın sağ kenarında arkaya döner (CSS clip, site.js).
   * Ekler: barnwood (ahşap masa: açılışta zarfın altında beliren masa; story duvarı: 90° döndürülmüş, comp W1.3'ün dikey
     tahtaları) ve twine_line (story ipi; alfa kutusuna kırpılır, sarkma ölçülür: manifest.twine_line.sag).
   * Telefon zemini (`field`): bg_page 2:3, telefonda köşe kümelerini keserdi. Zemin bg_page'in iki çiçeksiz bölgesinden
@@ -56,7 +59,7 @@ WIDTHS = {
     "info_card": [480, 900], "frame_portrait": [320, 640], "frame_landscape": [480, 960], "florals_tl": [360, 540, 720],
     "florals_br": [360, 540, 720], "divider": [300], "twine_line": [480, 960],
 }
-QUALITY = {"florals_tl": 76, "florals_br": 76, "closure": 78, "invitation_card": 76}
+QUALITY = {"florals_tl": 76, "florals_br": 76, "closure": 78, "card_ribbon": 78, "invitation_card": 76}
 ALPHA_Q = {"florals_tl": 60, "florals_br": 60}
 CARD_W_OF_ENV = 0.50       # kart genişliği / zarf genişliği (W1.2 kartı zarftan dar)
 CARD_PHOTO_ABOVE = 0.06    # cepte bekleyen kart: foto penceresinin en çok bu kadarı cep kenarının üstünde
@@ -81,6 +84,8 @@ FIELD_BOTTOM = (0, 1330, 500, 1536)    # sol alttaki ahşap zemin (comp'ların a
 FIELD_BLEND = 110
 FIELD_WIDE = (150, 300, 1000, 860)     # geniş ekran: çiçeksiz tek geniş kırpım
 TWINE_SAG_X = (0.25, 0.5, 0.75)
+CLOSURE_SRC = "closure_r2_v3.png"   # GM07 R3 (G098); closure.png yalnız bant hizası referansı
+BANT_X = (100, 900)                 # bant kayması bu sütunlarda ölçülür (fiyonk/buğday dışı, kurdelenin düz bandı)
 def uyar(ad, bilgi):
     for u in bilgi.get("warnings", []) + bilgi.get("uyarilar", []):
         print(f"UYARI  {ad}: {u}")
@@ -111,6 +116,18 @@ def hale_temizle(im: Image.Image, sert: bool, esik: int = 12, cekirdek: int = 96
     sonra = int((yeni > 0).sum())
     return Image.fromarray(np.clip(np.rint(a), 0, 255).astype(np.uint8), "RGBA"), {
         "alpha_floor": esik, "core": cekirdek, "reach_px": 1 if sert else 3, "removed_px": once - sonra}
+
+
+def bant_kaymasi(ref: Image.Image, yeni: Image.Image) -> int:
+    """Sarılı kurdelenin düz bandı (BANT_X sütunlarında alfa > 200 satırların ortası) yeni parçada referansa göre kaç
+    px aşağıda/yukarıda → dikey yerleşim farkı (− = yukarı taşı). İki sütun ±2 px içinde aynı kaymayı vermeli."""
+    def orta(im, x):
+        r = np.flatnonzero(np.asarray(im)[:, x, 3] > 200)
+        return (r.min() + r.max()) / 2
+    dys = [orta(ref, x) - orta(yeni, x) for x in BANT_X]
+    if max(dys) - min(dys) > 2:
+        sys.exit(f"kapanış bandı eğik/kayık: sütun kaymaları {dys}")
+    return int(round(sum(dys) / len(dys)))
 
 
 def renk_tasir(im: Image.Image) -> Image.Image:
@@ -383,14 +400,18 @@ def main():
     k_y0, k_alt = int(kr.min()), int(kr.max()) + 1
 
     # ------------------------------------------------------------------ kapanış (sarılı kurdele, 1:1 tuval)
-    cl_raw = Image.open(PARTS / "closure.png").convert("RGBA")
+    cl_raw = Image.open(PARTS / CLOSURE_SRC).convert("RGBA")
     cl, temizlik["closure"] = hale_temizle(cl_raw, sert=False)
     if cl.size != ec.size:
-        sys.exit(f"closure.png tuvali {cl.size} ≠ envelope_closed {ec.size} (sarılı kapanış 1:1 olmalı)")
+        sys.exit(f"{CLOSURE_SRC} tuvali {cl.size} ≠ envelope_closed {ec.size} (sarılı kapanış 1:1 olmalı)")
+    dy = bant_kaymasi(Image.open(PARTS / "closure.png").convert("RGBA"), cl_raw)
     ck = alfa_kutu(cl)
     cl_crop = cl.crop(ck)
+    ck = [ck[0], ck[1] + dy, ck[2], ck[3] + dy]   # yerleşim: tuvalde dy kadar (görüntü değişmez)
     closure_box = list(map(float, ck))
-    clh = tb.kapanis_hiza(ec_raw, cl_raw)
+    yerinde = Image.new("RGBA", cl_raw.size)
+    yerinde.paste(cl_raw, (0, dy))                 # yalnız hiza ölçümü için (yazılmaz)
+    clh = tb.kapanis_hiza(ec_raw, yerinde)
     # fiyonk düğümü: ayçiçeğinin koyu kahve göbeği (kurdelenin hardal karelerinde yok) — dönme/gevşeme odağı
     ca = np.asarray(cl_crop).astype(np.float64)
     gobek = (ca[..., 3] > 200) & (ca[..., 0] < 130) & (ca[..., 1] < 90) & (ca[..., 2] < 60)
@@ -418,8 +439,10 @@ def main():
     fr_w, fr_h = card_w * FRONT_SCALE, card_h * FRONT_SCALE
     front_box = [card_x - (fr_w - card_w) / 2, front_top - (fr_h - card_h) / 2,
                  card_x + card_w + (fr_w - card_w) / 2, front_top + card_h + (fr_h - card_h) / 2]
-    X0 = min(cb_box[0], ob_box[0], closure_box[0], front_box[0])
-    X1 = max(cb_box[2], ob_box[2], closure_box[2], front_box[2])
+    # kurdele zarfın sütunlarında kırpılır (.closure-clip = envelope_x_pct): o sütunların dışına taşan uç (GM07 R3'te
+    # sağda ~8 px) sahne kutusunu genişletmez
+    X0 = min(cb_box[0], ob_box[0], max(closure_box[0], cb_box[0]), front_box[0])
+    X1 = max(cb_box[2], ob_box[2], min(closure_box[2], cb_box[2]), front_box[2])
     Y0 = min(cb_box[1], ob_box[1], out_top, front_box[1], closure_box[1])
     Y1 = max(cb_box[3], ob_box[3], closure_box[3])
     SW, SH = X1 - X0, Y1 - Y0
@@ -440,6 +463,12 @@ def main():
         katman[ad] = pct(k)
         manifest[ad]["canvas_box"] = k
     webp(cl_crop, "closure", WIDTHS["closure"])
+    # RSVP kartının tabanındaki kurdele (W1.5) eski spreysiz closure.png'den kalır: GM07 R3'ün buğday spreyi kurdeleyi kart
+    # genişliğinde ~17cqw uzatıyor → 390×844'te ya imzanın üstüne biniyor ya da ilk ekranın altına itilip kartta boşluk
+    # bırakıyor (G098 denemesi). Zarfta ve teşekkür kartında yeni kapanış.
+    eski, temizlik["card_ribbon"] = hale_temizle(Image.open(PARTS / "closure.png").convert("RGBA"), sert=False)
+    webp(eski.crop(alfa_kutu(eski)), "card_ribbon", WIDTHS["closure"])
+    manifest["card_ribbon"]["source"] = "parts/closure.png"
     katman["closure"] = pct(closure_box)
     katman["card"] = pct(card_box_hidden)
     stage["parts"] = katman
@@ -463,7 +492,10 @@ def main():
         "anchor_px": [round((ck[0] + ck[2]) / 2, 1), round((ck[1] + ck[3]) / 2, 1)], "canvas_box": ck,
         "center_pct": [round(katman["closure"][0] + katman["closure"][2] / 2, 3), round(katman["closure"][1] + katman["closure"][3] / 2, 3)],
         "width_pct": katman["closure"][2], "knot_pct_of_closure": knot, "ends_vs_envelope": clh,
-        "measured_from": "parts/closure.png on the envelope_closed canvas (no comp scaling: wrapped closure)",
+        "measured_from": f"parts/{CLOSURE_SRC} on the envelope_closed canvas (no comp scaling: wrapped closure)",
+        "source": f"parts/{CLOSURE_SRC}", "placement_dy_px": dy,
+        "placement_note": "GM07 R3 (G098): ham imagegen; bant parts/closure.png'ye göre ölçülen dy kadar kaydırılarak "
+                          "yerleştirildi (yalnız konum, piksel değişmedi)",
         "carried_by_flap": False,
         "motion": "the bow tugs loose (about the sunflower knot), then the ribbon slides off along its band to the right, "
                   "turning behind the envelope's right edge (clip) — MOTION.envelope.tug/closure",
@@ -563,7 +595,7 @@ def main():
 
     # ------------------------------------------------------------------ hiza (ham GPT dosyaları, Kaydet tuvali)
     olcu = tb.kaydet_olculeri(COL)
-    hz = tb.hiza_olc(ec_raw, eo_raw, "kapak", olcu.get("envelope_closed"), olcu.get("envelope_open"), kapanis=cl_raw,
+    hz = tb.hiza_olc(ec_raw, eo_raw, "kapak", olcu.get("envelope_closed"), olcu.get("envelope_open"), kapanis=yerinde,
                      kapanis_tuval=olcu.get("closure"))
     manifest["align"] = hz
     print(f"hiza ({hz['durum']}): {tb.hiza_ozet(hz)}")

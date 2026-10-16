@@ -798,7 +798,7 @@ test('inner pages: nothing half under the nav on the first screen — fold units
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 6, 'title, reply-by, pill, the wait line, the signature, the ribbon');
-  assert.equal(r('.rsvp-text > .card-ribbon[data-fold] > img[src$="closure-440.webp"]').length, 1, 'W1.5: the envelope\'s ribbon on the base of the card');
+  assert.equal(r('.rsvp-text > .card-ribbon[data-fold] > img[src$="card_ribbon-440.webp"]').length, 1, 'W1.5: the envelope\'s ribbon on the base of the card (G098: the sprayless closure.png — the GM07 spray would not fit the first screen)');
   assert.equal(r('.rsvp-text > .unit[data-fold] > .deadline[data-field="rsvp.deadline"]').length, 1);
   assert.equal(r('.reply-box > [data-fold] > h2').length, 1);
   assert.ok(r('.reply-form > [data-fold]').length >= 6, 'form rows fold one by one');
