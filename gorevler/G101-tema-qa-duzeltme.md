@@ -51,5 +51,30 @@ qa-kontrol (2026-10-16) altı temada comp kapısını GEÇTİ dedi; her birinde 
 
 ## Sonuç
 
+### Oturum B (18, 19, 20)
+Dal `claude/g101b-qa`. Ayrıntı her temanın görev dosyasında ("qa-kontrol 2026-10-16").
+
+| Bulgu | Durum |
+|---|---|
+| 20 kapalı zarfta kart şeridi (öncelik 1) | **kapandı** — `.card-slot` alt kırpma %1 → %4 (`env_closed` %98,5'te bitiyor, alt kenarı yumuşak); 7 ekran boyu + teşekkür + stres büyütülüp bakıldı |
+| 19 home yatay taşma | **kapandı** — `.frames-sec { overflow-x: clip }`; ek: stres/teşekkür zarf sayfasında ipucu hâlesi taşması → `.env-page { overflow-x: clip }`. 5 sayfa × 360/390/430/768 × demo/stres/teşekkür: `documentElement.scrollWidth` ve `body.scrollWidth` = `innerWidth` |
+| 20 yazı kıyı köpüğünde | **kapandı** — home: `site.js` `shore()` kıyıyı uzun yazının altına kaydırır; kapanışlar: sabit yükseklikli kıyı bandı |
+| 18, 20 fold boşluğu | **kapandı** — `.sched-row` `data-fold` değil (19'daki gibi) |
+| 18 story accent / başlık | **kapandı** — `decor()` h1 kutusu script kuyrukları için yatayda 0,15em genişler (accent başlık yanında gizlenir) |
+| 18 çayır bandı sayfa ortasında; RSVP "Replay" kontrastı | **kapandı** — iç sayfa `.page-bg` yalnız sis; çayır sayfa sonunda; kapanış çayırı yazının altından başlar + sis hâlesi |
+| 19, 20 doğrulanamayan "qa geçti" | **düzeltildi** (G419/G420 Sonuç, 19 README tablosu) |
+
+Komutlar (üç tema ayrı ayrı): `theme-check --stress` 128/0/0 (×3) · `g051-browser` 44/44 (×3) · `final-smoke` 45/45 (×3) · `npm test`
+1210/1210 · `typecheck` temiz · `build` + trace-check temiz. Önizlemeler `previews/g418|g419|g420/` yeniden üretildi.
+Açık: 20'nin `site.js`'i 35 829 B (bütçe 35 840) — sonraki değişiklik yorum kısaltmadan sığmaz. Gerçek iOS Safari denenmedi.
+
+**Entegratöre not — theme-check 19'daki taşmayı neden yakalamadı (ortak dosyaya dokunulmadı):**
+1. `hscroll` = `document.documentElement.scrollWidth - innerWidth` (`scripts/theme-check.cjs` 343, 389). Tema `html { overflow-x: clip }`
+   koyunca bu değer her zaman 0; taşan kutu `body.scrollWidth`'te (446 vs 360) ve Playwright `fullPage` görüntüsünün eninde görünüyor.
+2. "Kırpılmamış taşan öğe" (`bleed`) taraması `querySelectorAll('body *')` ile yalnız öğeleri gezer; taşan şey bir **sözde öğe**
+   (`.fr-box::before`), listede yok. (Görünür öğelerden taşan köşe süsleri `overflow:hidden` atalarla kırpıldığı için doğru sayılıyor.)
+3. Öneri (claude-kod): `hscroll`'a `document.body.scrollWidth` (ve `scrollingElement`) ekle ya da `fullPage` görüntü eni ≠ viewport → hata;
+   gerekirse `scrollTo(9999, y)` sonrası `scrollX > 0`. Bu tek denetim 19'u ve zarf sayfasındaki ipucu hâlesini yakalardı.
+
 ## Günlük
 - 2026-10-16 açıldı (entegratör; qa-kontrol raporu)

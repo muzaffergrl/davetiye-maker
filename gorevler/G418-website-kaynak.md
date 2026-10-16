@@ -66,6 +66,15 @@ Tasarım 18'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 
 **Entegratöre not:** `tools/tema_build.kilif_serit` yalnız alfa farkına bakıyor; 18'in GPT kılıflarında fark RGB'de. Ortak modüle RGB farkı eklemek (önerilen claude-kod görevi) — tema kendi `serit_bul`'unu kullanıyor, acil değil. Ortak dosyada değişiklik yapılmadı.
 
+### qa-kontrol 2026-10-16 (G101 oturum B)
+- **Program satırı fold boşluğu (orta, ortak):** `.sched-row`'dan `data-fold` kaldırıldı (19'daki çözüm) → `stress_details_360.png`'de satırlar arasında boş kâğıt yok (Read ile bakıldı).
+- **Story accent "Story"nin "y"sine değiyor (düşük):** `site.js` `decor()` gizleme kuralı zaten h1'i kapsıyordu ama satır kutusunu ölçüyordu; script h1'in kuyrukları kutunun dışına taşıyor → h1 kutusu yatayda `0,15em` genişletildi. Sonuç: başlığın yanındaki peygamber çiçeği 360/390/430'da gizli, gelincik 390'da görünür (başlıktan uzak), 768'de üçü de görünür.
+- **Story'de bulanık çayır bandı sayfa ortasında (düşük):** iç sayfaların (story/details/rsvp) `.page-bg` görseli yalnız üstteki açık sis kalacak şekilde maskelendi (`#000 36% → transparent 58%`); çayır yalnız sayfa sonunda (`.meadow-end`, 20'deki gibi). Home hero değişmedi.
+- **RSVP kapanışında "Replay the opening" düşük kontrast (düşük):** kapanışın çayırı yazıların altından başlıyor (`.closing.meadow-end::before` maskesi 46→82 %) + bağlantıya kenarsız sis hâlesi (`text-shadow`). Demo ve stres/teşekkür 360'ta bağlantı düz zeminde.
+- Test: `theme-wildflower-meadow-vellum.test.ts` yeni kurallara göre (program satırı fold birimi değil; `.page-bg picture` maskesi). Dosya boyları: site.js 35 584 B, site.css 45 769 B (bütçe içinde).
+- Komutlar (2026-10-16, düzeltmelerden sonra): `theme-check --theme wildflower-meadow-vellum --stress` **128 geçti / 0 hata / 0 uyarı**; `g051-browser` **44/44**; `final-smoke` **45/45**; `npm test` **1210/1210**, `typecheck` temiz, `build` + trace-check temiz. İlk görünüm 390×844 DPR 3: index 588 KB, home 930 KB (yer tutucu); örnek fotoğrafla 711 / 1455 KB.
+- **Denenmedi:** gerçek iPhone/Safari ve Android Chrome (özellikle `overflow-x: clip` ve yatay kaydırma), Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ. Düzeltmeler qa-kontrol'e yeniden incelettirilmedi (alt-ajan bu oturumda kullanılmadı).
+
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)

@@ -95,6 +95,15 @@ oranlar manifest `box_px`'ten, 71 copy anahtarı), `content.demo.json` (koleksiy
 **Entegratöre notlar:** `PROJECT_STATE.json` / `COLLECTION_STATUS.md` güncellenmedi (entegratör dosyası). `platform/previews/g420/`
 ≈ 43 MB (g408 41 MB ile benzer).
 
+### qa-kontrol 2026-10-16 (G101 oturum B)
+- **Kapalı zarfta kart yazısı zarfın altından görünüyor (orta, öncelik 1):** `.card-slot` kırpması `inset(… 1% …)` idi; `env_closed` %98,52'de bitiyor ve alt kenarı yumuşak → 390'da y≈503–508 arasında kart yazısı şeridi. Kırpma %4'e çekildi (kart cebin içinde; açılırken cep zaten %49,9–100'ü örtüyor). 360×640, 375×553, 390×844, 430×932, 768, 1280, teşekkür ve stres kayıtlarında zarfın alt kenarı büyütülüp bakıldı: şerit yok. Açılış kareleri (0,8–3,5 s) bozulmadı.
+- **Stres/teşekkür hâlinde yazı kıyı köpüğüne biniyor (orta):** home hero: `site.js` `shore()` — telefonda hero yazılarının en altı kıyının üstünü (sea-460'ın alt %27'si) geçerse zemin resmi o kadar aşağı kayar; açılan üst şerit görselin kendi üst rengiyle (`.hero-bg` yarı yükseklik zemini) dikişsiz. Demo hâli değişmedi. Kapanışlar: `.shore-end::before` telefonda da `100% auto` (sabit yükseklikli kıyı bandı sayfa dibinde; uzun metin üstte kalır). `stress_home_360`, `stress_ty_home_360`, `stress_rsvp_360` Read ile bakıldı: yazı köpükte değil.
+- **Fold boşluğu (orta, ortak):** `.sched-row`'dan `data-fold` kaldırıldı.
+- **"qa GEÇTİ" iddiası (düşük):** yukarıdaki Sonuç'ta "oturum içi, raporu repoda yok, doğrulanamadı" olarak düzeltildi.
+- Test: `theme-coastal-seaside.test.ts` yeni kurallar + kırpma/kıyı testi. Dosya boyları: site.js 35 829 B (bütçe 35 840 — yorumlar kısaltıldı, sınırda), site.css 46 055 B.
+- Komutlar (2026-10-16, düzeltmelerden sonra): `theme-check --theme coastal-seaside --stress` **128 geçti / 0 hata / 0 uyarı**; `g051-browser` **44/44**; `final-smoke` **45/45**; `npm test` **1210/1210**, `typecheck` temiz, `build` + trace-check temiz. İlk görünüm 390×844 DPR 3: index 897 KB, home 911 KB (yer tutucu); örnek fotoğrafla 982 / 1335 KB.
+- **Denenmedi:** gerçek iPhone/Safari ve Android Chrome (özellikle `overflow-x: clip` ve yatay kaydırma), Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ. Düzeltmeler qa-kontrol'e yeniden incelettirilmedi (alt-ajan bu oturumda kullanılmadı).
+
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)

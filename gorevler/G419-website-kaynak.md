@@ -85,6 +85,14 @@ kıvrımlar arasında yalnız ~32 px temiz bant var (tekrarla çözüldü); öne
 **Entegratöre notlar:** ortak dosyaya dokunulmadı; tema sayısını sayan ortak testler kırılmadı (düzeltme gerekmedi).
 `gorevler/PANO.md` commit'lenmedi.
 
+### qa-kontrol 2026-10-16 (G101 oturum B)
+- **Home yatay taşma (orta):** kaynak `.fr-box::before` mum ışığı (±%38) — yatay çerçeve 84vw olunca ışık ekrandan ~%24 taşıyordu. `html { overflow-x: clip }` Chrome'da gizliyordu (`documentElement.scrollWidth` zaten = `innerWidth` idi, bu yüzden istenen ölçüm taşmayı **göstermiyordu**), ama `body.scrollWidth` 446/483/533/852 idi (tam sayfa görüntülerinin eni de bu). Düzeltme: `.frames-sec { overflow-x: clip }`. Ek bulgu: stres/teşekkür kaydıyla zarf sayfasında uzun "Tap to open" ipucunun hâlesi (`.env-hint::before`, −%12) aynı biçimde taşıyordu (body 383/417/462) → `.env-page { overflow-x: clip }`.
+- Doğrulama (Playwright, 5 sayfa × 360/390/430/768, demo + stres + teşekkür kayıtları): `documentElement.scrollWidth === innerWidth` **ve** `body.scrollWidth === innerWidth` her yerde; `scrollTo(500, …)` sonrası `scrollX` 0. `home_360/390/430/768.png` artık ekran eninde (360/390/430/768). Mum ışığı görünür kalıyor, yalnız ekran kenarında kesiliyor.
+- **"qa-kontrol KABUL" iddiası (düşük):** yukarıdaki Sonuç ve README tablosunda "oturum içi, raporu repoda yok, doğrulanamadı" olarak düzeltildi.
+- Test: `theme-midnight-garden.test.ts`'e taşma kuralı testi eklendi. site.css 46 063 B (bütçe 46 080; bir yorum kısaltıldı).
+- Komutlar (2026-10-16, düzeltmelerden sonra): `theme-check --theme midnight-garden --stress` **128 geçti / 0 hata / 0 uyarı**; `g051-browser` **44/44**; `final-smoke` **45/45**; `npm test` **1210/1210**, `typecheck` temiz, `build` + trace-check temiz. İlk görünüm 390×844 DPR 3: index 718 KB, home 949 KB (yer tutucu); örnek fotoğrafla 808 / 1423 KB.
+- **Denenmedi:** gerçek iPhone/Safari ve Android Chrome (özellikle `overflow-x: clip` ve yatay kaydırma), Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ. Düzeltmeler qa-kontrol'e yeniden incelettirilmedi (alt-ajan bu oturumda kullanılmadı).
+
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
