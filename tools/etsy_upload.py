@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Upload-ready Etsy listing data for designs 01–05, built from each design's listing_v3.md (2026-10-15).
+"""Upload-ready Etsy listing data for designs 01–20, built from each design's listing_v3.md (2026-10-15; 06–20: G123).
 
-  python3 tools/etsy_upload.py            # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
-  python3 tools/etsy_upload.py --check    # writes nothing; exit 1 if a title/tag rule fails or a file is missing
+  python3 tools/etsy_upload.py                      # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
+  python3 tools/etsy_upload.py --designs 06-20      # only these designs ("06-20", "07,12", "all")
+  python3 tools/etsy_upload.py --check              # writes nothing; exit 1 if a title/tag/text rule fails
+  python3 tools/etsy_upload.py --check --strict     # … or if a file Etsy needs (guide PDF, images, video) is missing
 
 The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §8). Nothing is sent to Etsy here.
 - `description` is §2 of listing_v3.md with the "[VERIFY: …]" notes taken out; each note goes to `open_checks` with
@@ -11,6 +13,12 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   they are the user's decision (renewal costs a listing fee).
 - Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
   2026-10-16, tools/listing_editorial.py, docs/21).
+- Rules (`rule_problems`, `--check` fails): Etsy's title and tag rules (tools/listing_kit.py), the design's name in the
+  title, its own demo link in the description and no other design's, and — for the designs that do not open from an
+  envelope (the gatefold, pouch, wallet, book and sleeve of platform/lib/marketing/designs.ts, `openingObject`) — no
+  "envelope" in the title, tags, description or alt texts.
+- Missing files (the START HERE PDF that Etsy delivers, the listing images, the video) are `blockers`: they keep
+  `ready_to_publish` false and fail `--check` only with `--strict` (designs 06–20 have none of them yet, G123).
 """
 from __future__ import annotations
 
@@ -32,6 +40,21 @@ DESIGNS = [
     ("03", "03_Blush_Garden_Rose", "blush-garden-rose"),
     ("04", "04_Vintage_Airmail", "vintage-airmail-love-letter"),
     ("05", "05_Lemon_Mediterranean", "mediterranean-lemon"),
+    ("06", "06_Art_Deco_Noir", "art-deco-black-tie"),
+    ("07", "07_Burgundy_Velvet", "burgundy-velvet-autumn"),
+    ("08", "08_Winter_Evergreen", "winter-evergreen"),
+    ("09", "09_Lavender_Provence", "lavender-provence"),
+    ("10", "10_Tuscan_Vineyard", "tuscan-vineyard"),
+    ("11", "11_Boho_Pampas", "boho-pampas-terracotta"),
+    ("12", "12_Tropical_Destination", "tropical-destination"),
+    ("13", "13_Enchanted_Forest", "enchanted-forest-storybook"),
+    ("14", "14_Ivory_Lace_Pearl", "ivory-lace-pearls"),
+    ("15", "15_Cherry_Blossom", "cherry-blossom-spring"),
+    ("16", "16_Sunflower_Rustic", "sunflower-rustic-barn"),
+    ("17", "17_Emerald_Gold_Estate", "emerald-gold-estate"),
+    ("18", "18_Wildflower_Vellum", "wildflower-meadow-vellum"),
+    ("19", "19_Midnight_Garden", "midnight-garden"),
+    ("20", "20_Coastal_Seaside", "coastal-seaside"),
 ]
 PRICE_USD = 29.40
 PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY "
@@ -39,6 +62,8 @@ PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The s
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 IMAGES_STATUS = ("current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 "
                  "editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)")
+DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
+DEMO_LINK = re.compile(r"/start/demo/([a-z0-9-]+)")
 
 
 def section(md: str, no: int) -> str:
@@ -99,6 +124,40 @@ def images(md: str, listing: Path) -> tuple[list[dict], list[dict]]:
     return rows, checks
 
 
+def theme_name(theme: str) -> str:
+    """The design's name as the platform shows it ("Design: <name>" on /start): platform/themes/<id>/theme.json."""
+    return json.loads((REPO / "platform" / "themes" / theme / "theme.json").read_text(encoding="utf-8"))["name"]
+
+
+def opening_object(theme: str, copy: str | None = None) -> str:
+    """What guests tap first ("envelope", "gatefold", "pouch", "wallet", "book", "sleeve"): the opening sentence of the
+    design in platform/lib/marketing/designs.ts ("Your guests tap the <thing>.", the sales site's openingObject)."""
+    copy = DESIGN_COPY.read_text(encoding="utf-8") if copy is None else copy
+    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?\bopening:\s*'Your guests tap the ([a-z]+)\.", copy, re.S | re.M)
+    if not m:
+        raise SystemExit(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme}'")
+    return m.group(1)
+
+
+def text_problems(theme: str, name: str, obj: str, title: str | None, tags: list[str], desc: str,
+                  alts: list[str]) -> list[str]:
+    """Rules beyond Etsy's own: the right design in the title and demo link, and no envelope where there is none."""
+    p = []
+    if title and name not in title:
+        p.append(f"title does not name the design '{name}'")
+    demos = set(DEMO_LINK.findall(desc))
+    if theme not in demos:
+        p.append(f"description has no live demo link /start/demo/{theme}")
+    if demos - {theme}:
+        p.append(f"description links another design's demo: {', '.join(sorted(demos - {theme}))}")
+    if obj != "envelope":
+        for where, text in [("title", title or ""), ("tags", " ".join(tags)), ("description", desc)] + \
+                [(f"image {i} alt text", a) for i, a in enumerate(alts, 1)]:
+            if re.search(r"envelope", text, re.I):
+                p.append(f"{where} says 'envelope' but this design opens from a {obj}")
+    return p
+
+
 def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     coll = REPO / "collections" / folder
     listing = coll / "package" / "listing"
@@ -112,12 +171,14 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     video = listing / "video.mp4"
     mockups = sorted(p.name for p in (coll / "assets" / "gpt" / "mockups").glob("*.png"))
     problems = [f"title: {p}" for p in title_problems(f["title"])] + [f"tags: {p}" for p in tag_problems(f["tags"])]
-    if not pdf.exists():
-        problems.append(f"missing digital file {pdf.relative_to(REPO)}")
+    problems += [f"text: {p}" for p in text_problems(theme, theme_name(theme), opening_object(theme), f["title"],
+                                                      f["tags"], desc, [i["alt"] for i in imgs])]
     missing = [i["file"] for i in imgs if not i["exists"]]
     blockers = [f"listing images missing: {', '.join(missing)}"] if missing else []
     if not video.exists():
         blockers.append("listing video missing")
+    if not pdf.exists():
+        blockers.append(f"digital file missing: {pdf.relative_to(REPO).as_posix()} (the START HERE guide Etsy delivers)")
     data = {
         "design": no,
         "theme": theme,
@@ -147,21 +208,43 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     return data, problems
 
 
-def main() -> int:
+def select(spec: str) -> list[tuple[str, str, str]]:
+    """'all', '06-20', '07,12' or a mix ('01,06-08') → rows of DESIGNS, in design order."""
+    if spec.strip().lower() == "all":
+        return list(DESIGNS)
+    known = {no for no, _, _ in DESIGNS}
+    want: set[str] = set()
+    for part in filter(None, (p.strip() for p in spec.split(","))):
+        m = re.fullmatch(r"(\d{1,2})(?:-(\d{1,2}))?", part)
+        if not m:
+            raise SystemExit(f"--designs: cannot read '{part}' (use e.g. 06-20 or 07,12)")
+        lo, hi = int(m.group(1)), int(m.group(2) or m.group(1))
+        for n in range(lo, hi + 1):
+            if f"{n:02d}" not in known:
+                raise SystemExit(f"--designs: no design {n:02d} (known: 01–{len(DESIGNS):02d})")
+            want.add(f"{n:02d}")
+    return [d for d in DESIGNS if d[0] in want]
+
+
+def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true", help="write nothing; exit 1 on a rule problem")
-    a = ap.parse_args()
+    ap.add_argument("--strict", action="store_true", help="with --check: a missing guide PDF, image or video fails too")
+    ap.add_argument("--designs", default="all", help="'all' (default), '06-20', '07,12' …")
+    a = ap.parse_args(argv)
     bad = False
-    for no, folder, theme in DESIGNS:
+    for no, folder, theme in select(a.designs):
         data, problems = build(no, folder, theme)
         out = REPO / "collections" / folder / "package" / "listing" / "etsy_upload.json"
         if not a.check:
             out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         have = sum(i["exists"] for i in data["images"])
+        files = [b for b in data["blockers"] if b.startswith(("listing images", "listing video", "digital file"))]
         print(f"{no} {theme}: title {data['title_length']}/140 · tags {len(data['tags'])}/13 · "
-              f"images {have}/{len(data['images'])} · mockups {len(data['gpt_mockup_scenes'])} · "
+              f"images {have}/{len(data['images'])} · video {'yes' if data['video']['exists'] else 'no'} · "
+              f"guide {'yes' if data['digital_files'][0]['bytes'] else 'no'} · mockups {len(data['gpt_mockup_scenes'])} · "
               f"open checks {len(data['open_checks'])} · {'OK' if not problems else 'PROBLEMS: ' + '; '.join(problems)}")
-        bad |= bool(problems)
+        bad |= bool(problems) or (a.strict and bool(files))
     return 1 if bad else 0
 
 
