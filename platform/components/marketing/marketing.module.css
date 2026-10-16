@@ -556,6 +556,21 @@
     display: none;
   }
 }
+/* G099: 1024–1279 px — logo, six links, "My website" and "See designs" did not fit one row (at 1024 "How it works"
+   wrapped to three lines and "See designs" ran off the screen, since G095). Here the links stay on one line with less
+   padding and the header "See designs" button is left out ("Designs" is the first link); "My website" stays. */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .headerInner {
+    gap: 12px;
+  }
+  .nav a {
+    padding: 0 9px;
+    white-space: nowrap;
+  }
+  .headerCta {
+    display: none !important;
+  }
+}
 
 /* ---------- footer ---------- */
 .footer {
@@ -747,6 +762,13 @@
   }
   .heroFoot {
     margin-top: 56px;
+  }
+}
+/* G099: 1024–1279 px (e.g. 1024 × 800): the H1 took five lines at 69 px and pushed the main button below the first
+   screen (898 px, G093). It now grows linearly from 52 px at 1024 to the 74 px it has from 1280 on (unchanged there). */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .heroText .h1 {
+    font-size: calc(8.6vw - 36px);
   }
 }
 .heroStage {
@@ -1623,6 +1645,22 @@
     grid-column: 3 / span 2;
   }
 }
+/* G099: the home showcase of eight featured designs is two rows of four on wide screens (3 + 3 + 2 at 900–1199 px). */
+@media (min-width: 1200px) {
+  .cardGrid:has(> :nth-child(8):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  /* beats the G085 "centered last row" spans above (higher specificity) */
+  .cardGrid:has(> :nth-child(8):last-child) > :nth-child(n):nth-last-child(n) {
+    grid-column: auto;
+  }
+}
+/* G099: "See all N designs" under the home showcase, centered like the grid. */
+.seeAll {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
 .designCard {
   container-type: inline-size;
   display: flex;
@@ -2376,6 +2414,16 @@
 }
 .pagesSection {
   padding-top: 40px;
+}
+/* G099: design pages show a larger preview (docs/18 §5: large preview + short summary + one primary action); the short
+   style line instead of the long intro leaves room for it in the first screen of a phone. */
+.heroDesign .heroScreen {
+  width: min(52vw, 240px);
+}
+@media (min-width: 600px) {
+  .heroDesign .heroScreen {
+    width: 250px;
+  }
 }
 /* Design pages: on phones the two actions live in the sticky bar (comp u1_design_detail_390), not twice on screen. */
 @media (max-width: 767.98px) {

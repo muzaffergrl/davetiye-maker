@@ -1,6 +1,6 @@
 // Serializable props for the client demo components (Demo.tsx), built on the server from config + assets.
 import { MARKETING, type MarketingConfig } from '../../lib/marketing/config.ts';
-import { demoPath, liveDesigns } from '../../lib/marketing/designs.ts';
+import { demoPath, liveDesigns, openingObject } from '../../lib/marketing/designs.ts';
 import { realEtsyUrl } from '../../lib/marketing/placeholders.ts';
 import type { DemoDesign } from './Demo.tsx';
 import { designScreen, largest, srcSet } from './media.ts';
@@ -18,7 +18,7 @@ export function demoDesigns(cfg: MarketingConfig = MARKETING): DemoDesign[] {
         srcSet: srcSet(poster),
         width: poster.width,
         height: poster.height,
-        alt: `${d.name}: the sealed envelope page your guests see first, with the demo couple's names, ${d.copy.demoCouple}`,
+        alt: `${d.name}: the sealed ${openingObject(d.copy)} your guests see first, with the demo couple's names, ${d.copy.demoCouple}`,
       },
       demoPath: demoPath(d.id),
       designPath: `/designs/${d.id}`,

@@ -4,7 +4,7 @@ import s from '../../../components/marketing/marketing.module.css';
 import { designScreen, panelScreen } from '../../../components/marketing/media.ts';
 import { CheckList, Container, Eyebrow, JsonLd, LastUpdated, Screen, Section, TextLink } from '../../../components/marketing/ui.tsx';
 import { MARKETING } from '../../../lib/marketing/config.ts';
-import { liveDesigns, startPath } from '../../../lib/marketing/designs.ts';
+import { liveDesigns, openingObject, startPath } from '../../../lib/marketing/designs.ts';
 import { editRightsText, LIMITS } from '../../../lib/marketing/facts.ts';
 import { breadcrumbs, graph, webPage } from '../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../lib/marketing/seo.ts';
@@ -25,12 +25,12 @@ export default function HowItWorksPage() {
       time: 'A few minutes',
       body: (
         <p>
-          Open any design on your phone and tap the envelope. The demo is the real website with fictional names, so you see
+          Open any design on your phone and tap to open it. The demo is the real website with fictional names, so you see
           exactly what guests will see. <a href="/designs">Browse the designs</a>.
         </p>
       ),
       screen: designScreen(first.id, 'envelope'),
-      alt: `${first.name}: the sealed envelope page of the live demo`,
+      alt: `${first.name}: the sealed ${openingObject(first.copy)} page of the live demo`,
     },
     {
       id: 'buy',

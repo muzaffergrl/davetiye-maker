@@ -54,7 +54,7 @@ export function corePages(cfg: MarketingConfig = MARKETING): PageEntry[] {
       title: withBrand('Digital Envelope Wedding Invitation Websites', cfg),
       h1: 'Envelope wedding websites that open like a real invitation',
       description:
-        'A digital wedding invitation website with RSVP that opens from a sealed envelope. Edit it on your phone, no Canva needed. Try the live demo first.',
+        'A digital wedding invitation website with RSVP that opens from a sealed envelope or keepsake. Edit it on your phone, no Canva needed. Try the live demo.',
       kind: 'WebPage',
       updated: u,
     },
@@ -64,7 +64,7 @@ export function corePages(cfg: MarketingConfig = MARKETING): PageEntry[] {
       title: withBrand('Wedding Website Designs with Envelope Opening', cfg),
       h1: 'Wedding website designs',
       description:
-        'Browse wedding website designs that open from a sealed envelope. Each one has Home, Our Story, Details and RSVP pages. Try every demo live on your phone.',
+        'Browse wedding website designs that open from a sealed envelope or keepsake. Each has Home, Our Story, Details and RSVP pages. Try every demo on your phone.',
       kind: 'CollectionPage',
       updated: u,
     },

@@ -674,6 +674,27 @@ export function liveDesign(id: string, cfg: MarketingConfig = MARKETING): Design
   return liveDesigns(cfg).find((d) => d.id === id) ?? null;
 }
 
+/**
+ * G099: the home page's design showcase — the live designs marked `featured` in config.ts, in config order. With none
+ * marked, every live design (the home page never shows an empty showcase).
+ */
+export function featuredDesigns(cfg: MarketingConfig = MARKETING): Design[] {
+  const live = liveDesigns(cfg);
+  const featured = live.filter((d) => d.featured);
+  return featured.length ? featured : live;
+}
+
+/**
+ * G099: what the guests tap first in this design, from its opening sentence ("Your guests tap the book. …" -> "book"):
+ * an envelope in most designs, a gatefold, pouch, wallet, book or sleeve in others. Design-specific copy on shared
+ * templates ("after the book opens") uses it, so no page says "envelope" for a design that is not one.
+ */
+export function openingObject(copy: Pick<DesignCopy, 'id' | 'opening'>): string {
+  const m = /^Your guests tap the ([a-z]+)\./.exec(copy.opening);
+  if (!m) throw new Error(`lib/marketing/designs.ts: the opening of "${copy.id}" must start with "Your guests tap the <thing>."`);
+  return m[1];
+}
+
 /** /start/demo/<id>: the theme's own live demo (fictional content), same origin (frame-ancestors 'self'). */
 export function demoPath(id: string): string {
   return `/start/demo/${encodeURIComponent(id)}`;
