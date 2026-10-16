@@ -1,0 +1,45 @@
+{
+  "theme": "mediterranean-lemon",
+  "dpr": 3,
+  "size": "390x844",
+  "stills": [
+    {
+      "file": "o01.jpg",
+      "ms": 0
+    },
+    {
+      "file": "o02.jpg",
+      "ms": 1200
+    },
+    {
+      "file": "o03.jpg",
+      "ms": 1800
+    },
+    {
+      "file": "o04.jpg",
+      "ms": 2400
+    },
+    {
+      "file": "o05.jpg",
+      "ms": 3000
+    },
+    {
+      "file": "o06.jpg",
+      "ms": 3600
+    },
+    {
+      "file": "o07.jpg",
+      "ms": 4800
+    }
+  ],
+  "chosen": {
+    "open_mid": {
+      "still": "o04",
+      "ms_after_tap": 2400
+    },
+    "open_card": {
+      "still": "o06",
+      "ms_after_tap": 3600
+    }
+  }
+}

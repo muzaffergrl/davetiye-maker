@@ -66,15 +66,15 @@ No Canva account, no app and no design skills needed. Your guests need no app an
 - You change your names, date, times, venue, schedule, dress code, story captions, questions & answers, RSVP questions, links and photos. The design's headings (for example "You are invited", "Order of the Day", "Will You Join Us?"), the painted design and the colors stay as they are.
 - The website's headings, buttons and RSVP form are in English. You can write your own texts (names, schedule, story captions, Q&A) in another language: letters with accents (é, ñ, ü) and Cyrillic use the design's fonts; other alphabets (for example Greek, Arabic or Chinese) may show in a plain standard font.
 - One website per order. The web address cannot be changed after you start.
-- Your website stays online for [HOSTING PERIOD].
+- Your website stays online until 12 months after your wedding date.
 - A custom domain (for example yournames.com) is not included.
 - No music is included.
 - The sample names, dates, places and photos are fictional and are not part of your website.
 - The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting]
-- [REFUND POLICY]
+- No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 **QUESTIONS?**
-Message [SHOP NAME] on Etsy or write to [SUPPORT EMAIL]. We answer within [SUPPORT RESPONSE TIME].
+Message BKE Studio on Etsy or write to bkestudio@gmail.com. We answer within 24 hours.
 
 ---
 
@@ -117,7 +117,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each) |
 | Price | [PRICE] |
 | Quantity | [QUANTITY] |
-| Shop section | [SHOP SECTION] |
+| Shop section | Floral & Garden |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text
@@ -166,7 +166,7 @@ Yes. Edit, then press Publish changes.
 Not at the moment. Your address is a link with your names.
 
 **How long does my website stay online?**
-[HOSTING PERIOD]
+Until 12 months after your wedding date.
 
 **Is it printed or shipped?**
 No. It is a digital product.

@@ -1,0 +1,215 @@
+{
+  "tool": "tools/listing_templates/capture.ts (G059)",
+  "theme": "vintage-airmail-love-letter",
+  "date": "2026-10-15",
+  "server": "next start (local production build of this checkout), local adapter, temp data folder",
+  "public_url_shown": "https://davetiye-platform-five.vercel.app",
+  "viewport": "390x844, isMobile, touch, DPR 3 (screens) / 390x844 (recording)",
+  "demo_site": "/margot-and-henry — the theme's demo record (fictional) + 3 sample Q&A + 1 RSVP question; sample photos: collections\\04_Vintage_Airmail\\assets\\gpt\\photos (PAKET 2)",
+  "buyer_site": "Elena & Marco, order 5550012345, elena.demo@example.test (fictional)",
+  "notes": [
+    "edit key masked in b03_edit_link.jpg",
+    "QR replaced by a labelled box in b10_live_qr.jpg (local-only site)",
+    "dimmed overlay behind the sheets of b06/b09/b10 replaced by the editor background",
+    "stills: nothing cut at the top edge or by the bottom bar, nothing behind a see-through menu (clearEdges; a picture is cut shorter when no position works)",
+    "guest who fills in the form: Sofia Martin (fictional)",
+    "particle layers (.petal-layer, .accent-layer) hidden in the stills, not in the recording"
+  ],
+  "shots": [
+    {
+      "name": "g01_envelope.jpg",
+      "what": "Guest: the closed envelope page (/<names>)"
+    },
+    {
+      "name": "g02_home_top.jpg",
+      "what": "Guest: home, first screen after the envelope opens"
+    },
+    {
+      "name": "g03_home_invitation.jpg",
+      "what": "Guest: home, the invitation card"
+    },
+    {
+      "name": "g04_home_calendar.jpg",
+      "what": "Guest: home, reply-by + add to calendar (cut at 0–771 px: nothing clean to show at the edges)"
+    },
+    {
+      "name": "g05_story.jpg",
+      "what": "Guest: Our Story page"
+    },
+    {
+      "name": "g06_details_top.jpg",
+      "what": "Guest: Details page, first screen"
+    },
+    {
+      "name": "g07_details_schedule.jpg",
+      "what": "Guest: Details, order of the day + add to calendar (cut at 0–771 px: nothing clean to show at the edges)"
+    },
+    {
+      "name": "g12_details_venue.jpg",
+      "what": "Guest: Details, the venue (photo, name, address) (cut at 0–771 px: nothing clean to show at the edges)"
+    },
+    {
+      "name": "g08_details_faq.jpg",
+      "what": "Guest: Details, questions & answers (first one open)"
+    },
+    {
+      "name": "g09_rsvp_top.jpg",
+      "what": "Guest: RSVP page, first screen"
+    },
+    {
+      "name": "g10_rsvp_form.jpg",
+      "what": "Guest: RSVP form with the couple's question (Meal choice) (cut at 20–771 px: nothing clean to show at the edges)"
+    },
+    {
+      "name": "g11_rsvp_sent.jpg",
+      "what": "Guest: RSVP sent"
+    },
+    {
+      "name": "d01_demo_home.jpg",
+      "what": "Public demo of the design: home (sample names, placeholder photos)"
+    },
+    {
+      "name": "b01_start.jpg",
+      "what": "Buyer: /start page (design preview + the order number field with its hint)"
+    },
+    {
+      "name": "b02_start_form.jpg",
+      "what": "Buyer: /start form filled (fictional order number)"
+    },
+    {
+      "name": "b03_edit_link.jpg",
+      "what": "Buyer: \"Save this link\" (key masked in this picture)"
+    },
+    {
+      "name": "b04_setup_names.jpg",
+      "what": "Buyer: setup step 1 of 3, names and date"
+    },
+    {
+      "name": "b06_panel_crop.jpg",
+      "what": "Buyer: cropping a photo to the design's frame (plain background behind the sheet)"
+    },
+    {
+      "name": "b05_setup_photo.jpg",
+      "what": "Buyer: setup step 2 of 3, the photo in place"
+    },
+    {
+      "name": "b07_setup_publish.jpg",
+      "what": "Buyer: setup step 3 of 3, preview before publishing"
+    },
+    {
+      "name": "b10_live_qr.jpg",
+      "what": "Buyer: \"Your website is live\" with link + QR (the QR is replaced by a labelled box in this picture)"
+    },
+    {
+      "name": "b08_home.jpg",
+      "what": "Buyer: editor Home, \"Your website is N% ready\" and the next steps (cut at 20–844 px: nothing clean to show at the edges)"
+    },
+    {
+      "name": "e01_edit_pages.jpg",
+      "what": "Buyer: Edit, the six pages to edit"
+    },
+    {
+      "name": "e02_day_place.jpg",
+      "what": "Buyer: Edit → Day & place (date and time, venue, schedule)"
+    },
+    {
+      "name": "e03_copy_labels.jpg",
+      "what": "Buyer: Edit → Us → \"Headings & labels on this page\" (the design's own texts, editable)"
+    },
+    {
+      "name": "b09_panel_preview.jpg",
+      "what": "Buyer: editor, preview of the website"
+    },
+    {
+      "name": "s01_share.jpg",
+      "what": "Buyer: Share, link + QR on top (the QR is replaced by a labelled box in this picture)"
+    },
+    {
+      "name": "p01_panel_replies.jpg",
+      "what": "Couple: editor → Guests, RSVP replies with counts"
+    },
+    {
+      "name": "p02_panel_reply_list.jpg",
+      "what": "Couple: editor → Guests, the replies one by one"
+    },
+    {
+      "name": "p03_panel_questions.jpg",
+      "what": "Couple: editor → RSVP, questions for your guests (cut at 22–844 px: nothing clean to show at the edges)"
+    }
+  ],
+  "checks": [
+    {
+      "name": "reply stored: Olivia Bennett",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "reply stored: Marcus Reed",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "reply stored: Hannah Clarke",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "reply stored: The Alvarez Family",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "guest: envelope page 200",
+      "ok": true
+    },
+    {
+      "name": "guest: reply sent (\"thank you\")",
+      "ok": true
+    },
+    {
+      "name": "demo: /start/demo/<theme>/home 200",
+      "ok": true
+    },
+    {
+      "name": "buyer: /start 200",
+      "ok": true
+    },
+    {
+      "name": "buyer: edit link uses the public base URL",
+      "ok": true,
+      "detail": "https://davetiye-platform-five.vercel.app/edit/elena-and-marco?k=…"
+    },
+    {
+      "name": "buyer: live link = public base URL + address",
+      "ok": true,
+      "detail": "https://davetiye-platform-five.vercel.app/elena-and-marco"
+    },
+    {
+      "name": "buyer: QR masked in the \"live\" picture",
+      "ok": true
+    },
+    {
+      "name": "buyer: Edit lists six pages",
+      "ok": true,
+      "detail": "us,day,photos,story,details,rsvp"
+    },
+    {
+      "name": "editor: Guests lists the replies",
+      "ok": true,
+      "detail": "9 Guests coming 1 Not coming 5 Replies Replies close in 310 days. Last day: Saturday, August 21, 202"
+    },
+    {
+      "name": "editor: \"Download list\" (CSV) on Guests",
+      "ok": true
+    },
+    {
+      "name": "editor: CSV export has the replies and the Meal choice column",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "name": "recording: opening.webm written",
+      "ok": true
+    }
+  ]
+}

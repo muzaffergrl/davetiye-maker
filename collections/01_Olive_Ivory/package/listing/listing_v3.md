@@ -2,14 +2,14 @@
 
 Internal listing kit for the seller (G091, 2026-10-15). Not published on Etsy. Theme `olive-ivory`. Written from the common skeleton in
 `docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32): every sentence answers a buyer question from docs/19 §3 and promises only what
-the platform does today. Product language: English (US spelling). It replaces `listing.md` after review; `listing.md` stays as the earlier record, and `tools/listing_kit.py` still reads `listing.md` until it is switched.
+the platform does today. Product language: English (US spelling). It replaces `listing.md` after review; `listing.md` stays as the earlier record, and `tools/listing_kit.py` reads this file (since 2026-10-15).
 
 ## 0. Status before publishing
 
 | Item | Status on 2026-10-15 |
 |---|---|
 | Start link `https://davetiye-platform-five.vercel.app/start?theme=olive-ivory` | **Live** on 2026-10-14 (G059 check through the Vercel connector; not opened on a phone). |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/olive-ivory` (image 8) | Same as the start link. |
+| Live demo `https://davetiye-platform-five.vercel.app/start/demo/olive-ivory` (in the description under TRY THE LIVE DEMO, and named in image 8) | Same as the start link. |
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Not yet.** The last checked live release is G078 (`2dc812b`, editor in the old look). This text and the START HERE guide describe the current editor; publish only after G079 is live and checked. |
 | Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Stated by the integrator on 2026-10-15; not checked in this task. The listing says "We confirm each order in our shop before a website can go live". [VERIFY: manual order check on in production] |
 | Questions & answers, RSVP questions | Tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
@@ -39,6 +39,11 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 A wedding website that opens like a real envelope, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
 Olive branches, ivory roses and a sage envelope with lace and a gold wax seal. Your guests tap the envelope, it opens, and your invitation follows: Home, Our Story, Details and RSVP.
+
+TRY THE LIVE DEMO
+See the envelope open on your own phone before you buy (sample names and photos):
+https://davetiye-platform-five.vercel.app/start/demo/olive-ivory
+Copy the link into your phone's browser.
 
 WHAT YOU GET
 • Your wedding website in the Olive & Ivory design: envelope opening, Home, Our Story, Details and RSVP pages
@@ -86,10 +91,10 @@ GOOD TO KNOW
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
 • No music. Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
-• [REFUND POLICY]
+• No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
-Message us here on Etsy. We reply within [RESPONSE TIME].
+Message us here on Etsy. We reply within 24 hours.
 
 ---
 
@@ -130,25 +135,25 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 20 KB) |
-| Price | [PRICE] |
+| Price | Target USD 29.40 (draft price from the user, 2026-10-15). The shop currency is TRY, so Etsy gets the TRY amount; that amount and the final price are still open (docs/15 §5) |
 | Quantity | [QUANTITY] |
-| Shop section | [SHOP SECTION] |
+| Shop section | Floral & Garden (created in the shop on 2026-10-15, docs/20 §7) |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text
 
-The 8 images in `images/` were made on 2026-10-14 (G059), **before** the simpler editor (K29). Before publishing, rebuild them after the current release is live (G079): `python3 tools/listing_kit.py capture --theme olive-ivory` then `all`. Known problems in the current files: image 3 says "START HERE guide (PDF): your start link and every step in pictures" (the guide explains every step in text, with a QR code; it has no pictures) → new line: "Your start link, its QR code and every step explained"; images 4 and 5 show the old editor ("Couple" section, Save / Preview / Publish buttons) → retake with the six-page editor. Alt texts below are for the rebuilt images.
+The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (`python3 tools/listing_editorial.py --theme olive-ivory`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); images 3, 5, 6 and 7 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The earlier G059 kit stays in `images/` for comparison and is not uploaded. Alt texts below describe these files.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Olive & Ivory wedding website with RSVP on two phone screens: a sage envelope with lace and a gold wax seal, and the home page with the couple's photo. Labels: no Canva needed, RSVP built in, live demo |
-| 2 | `02_guest_pages.png` | The five pages guests see: envelope, home, our story, details and RSVP |
-| 3 | `03_whats_included.png` | What is included: website, online editor, RSVP with your own questions, add to calendar, questions and answers, QR code, START HERE guide |
-| 4 | `04_how_it_works.png` | Three steps: start with your Etsy order number, personalize in the editor, publish and share |
-| 5 | `05_editor.png` | The online editor on a phone: the six pages to edit, cropping a photo, previewing the website |
-| 6 | `06_rsvp.png` | RSVP: the guest reply form with a meal question, the replies in the editor with a Download list button (CSV) |
-| 7 | `07_details.png` | Details page: order of the day with add to calendar buttons, the venue, questions and answers |
-| 8 | `08_live_demo.png` | QR code that opens the live demo of the Olive & Ivory design. [VERIFY: Etsy policy on QR codes and links in listing photos] |
+| 1 | `01_cover.png` | Olive & Ivory wedding website with online RSVP on a phone held in a hand, among olive branches, olives and ivory linen: the opening page with a sage envelope with lace and a gold wax seal and the names Avery & Jordan |
+| 2 | `02_opening.png` | It opens like a real invitation: three phones show the envelope closed, the envelope opening, and the invitation card rising out of it |
+| 3 | `03_pages.png` | Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page |
+| 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed |
+| 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download list button |
+| 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
+| 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
+| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
 
 Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
 - 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
@@ -239,15 +244,15 @@ link; one review request per order, the same text for everyone, never with an in
 ## 11. Before you publish this listing
 
 - [ ] Current platform release (G079) live and checked; start link and demo of this design open on the live site
-- [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf and the QR of image 8 scanned with a phone camera
+- [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
-- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf, its QR and image 8 rebuilt
+- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [ ] Response time, price, refund policy and hosting extension decided and filled in (guide + listing + docs/19 templates)
-- [ ] Images rebuilt with the current editor (see §5); video present
+- [x] Images rebuilt with the current editor (see §5); video present (2026-10-15)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] Shop-wide Etsy messages (docs/19 §4.4) entered in Shop Manager
-- [ ] `python3 tools/listing_kit.py check --theme olive-ivory --prepublish` passes (the tool reads `listing.md`: switch it to this file first)
+- [ ] `python3 tools/listing_kit.py check --theme olive-ivory --prepublish` passes (the tool reads this file)
 
 <!-- listing-kit:media -->

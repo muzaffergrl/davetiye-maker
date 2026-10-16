@@ -96,15 +96,16 @@ export const MARKETING: MarketingConfig = {
   // MARKETING_SITE_URL (the brand domain, once decided) wins; then PLATFORM_PUBLIC_URL (set on Vercel); else the
   // placeholder — siteOrigin() falls back to http://localhost:3000 for building URLs while it is a placeholder.
   siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://[DOMAIN]',
-  // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time and the Etsy
-  // shop URL are still open.
-  support: { email: 'bkestudio@gmail.com', responseTime: '[RESPONSE TIME]' },
+  // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time 24 hours (user,
+  // 2026-10-15). The Etsy shop URL is still open.
+  support: { email: 'bkestudio@gmail.com', responseTime: '24 hours' },
   etsy: { shopUrl: '[ETSY SHOP URL]', shopName: 'BKE Studio' },
   currency: 'USD',
   hosting: { monthsAfterWedding: 12 },
   editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2, dateFreeDays: 7 },
   policies: {
-    refund: '[REFUND POLICY]',
+    refund:
+      'no returns, exchanges or refunds, because you get instant access to a digital product. If something on your website does not work as described, we fix it',
     lostLink: '[LOST LINK POLICY]',
     extension: '[EXTENSION POLICY]',
     deletion: '[DELETION PROCESS]',

@@ -26,12 +26,12 @@ import { spawnSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PLATFORM = path.resolve(HERE, '../../platform');
-const { loadChromium, startNext, waitForServer } = await import(path.join(PLATFORM, 'scripts/lib/browser.ts'));
-const { loadThemeEnv, demoSlug } = await import(path.join(PLATFORM, 'scripts/lib/theme-env.ts'));
+const { loadChromium, startNext, waitForServer } = await import(pathToFileURL(path.join(PLATFORM, 'scripts/lib/browser.ts')).href);
+const { loadThemeEnv, demoSlug } = await import(pathToFileURL(path.join(PLATFORM, 'scripts/lib/theme-env.ts')).href);
 
 function arg(name: string, def: string | null = null): string | null {
   const i = process.argv.indexOf(`--${name}`);
@@ -230,6 +230,9 @@ async function clearEdges(page: any, opts: EdgeOpts = {}): Promise<Clip | null> 
 }
 async function shot(page: any, name: string, what: string, opts: EdgeOpts & { edges?: boolean } = {}) {
   await page.evaluate((sel: string) => document.querySelectorAll(sel).forEach((e) => ((e as HTMLElement).style.visibility = 'hidden')), PARTICLES);
+  // the editor's "You're offline" band after a dropped request to the local server is not what a buyer sees: wait it out
+  const offline = await page.waitForSelector('[data-offline-banner]', { state: 'detached', timeout: 15_000 }).then(() => false, () => true);
+  if (offline) check(`${name}: no "You're offline" band`, false);
   const clip = opts.edges === false ? null : await clearEdges(page, opts);
   await page.waitForTimeout(350);
   await page.screenshot({ path: path.join(OUT as string, `${name}.jpg`), type: 'jpeg', quality: 88, ...(clip ? { clip } : {}) });
@@ -276,19 +279,20 @@ async function waitSaved(page: any) {
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') !== 'saved', null, { timeout: 1500 }).catch(() => undefined);
   await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
 }
-async function openSection(page: any, id: string) {
-  const button = page.locator(`#section-${id}`);
-  if ((await button.getAttribute('aria-expanded')) !== 'true') await button.click();
-  await page.evaluate((i: string) => {
-    const el = document.getElementById(`section-${i}`);
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 8, behavior: 'instant' });
-  }, id);
-  await page.waitForTimeout(400);
+/** Goes to another editor page without reloading (K29: #edit/<page>, docs/16 §0b). */
+async function editPage(page: any, id: string) {
+  await page.evaluate((h: string) => void (location.hash = h), `#edit/${id}`);
+  await page.waitForSelector(`[data-page="${id}"]`);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page.waitForTimeout(600);
 }
 
 let browser: any;
 let failed = false;
-const device = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true };
+// a US phone: the buyer's setup takes the time zone and date style from the phone (K29), and the listing is for US buyers
+const device = { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, locale: 'en-US', timezoneId: 'America/New_York' };
+/** The editor's top bar is sticky (≈ 72 px): a heading scrolled to the very top would sit under it. */
+const UNDER_BAR = -84;
 /** The guest who fills in the RSVP form in the pictures (fictional; shown in the form and in the replies list). */
 const GUEST = 'Sofia Martin';
 const HERO = Object.hasOwn(env.manifest.photos, 'hero_portrait') ? 'hero_portrait' : Object.keys(env.manifest.photos)[0];
@@ -356,13 +360,20 @@ try {
     const sched = await page.$('[data-repeat-item^="schedule."]');
     if (sched) {
       // the order of the day with its add-to-calendar buttons, both above the menu
-      const cal = (await page.$('.cal a[data-calendar]')) ? '.cal a[data-calendar]' : '[data-repeat-item^="schedule."]';
+      let cal = (await page.$('.cal a[data-calendar]')) ? '.cal a[data-calendar]' : '[data-repeat-item^="schedule."]';
+      // where the calendar buttons sit far below the order of the day (02: after the venue), the order of the day wins
+      const far = await page.evaluate((s: string) => {
+        const items = [...document.querySelectorAll('[data-repeat-item^="schedule."]')];
+        items[items.length - 1].setAttribute('data-lk-last-event', '');
+        return document.querySelector(s)!.getBoundingClientRect().bottom - items[0].getBoundingClientRect().top > innerHeight - 200;
+      }, cal);
+      if (far) cal = '[data-lk-last-event]';
       await page.evaluate((s: string) => {
         const r = document.querySelector(s)!.getBoundingClientRect();
         window.scrollTo({ top: Math.max(0, r.bottom + scrollY - innerHeight + 130), behavior: 'instant' });
       }, cal);
       await page.waitForTimeout(2600);
-      await shot(page, 'g07_details_schedule', 'Guest: Details, order of the day + add to calendar', { keep: [cal, '[data-repeat-item="schedule.0"]'] });
+      await shot(page, 'g07_details_schedule', `Guest: Details, order of the day${far ? '' : ' + add to calendar'}`, { keep: [cal, '[data-repeat-item="schedule.0"]'] });
     }
     if (await page.$('[data-slot="venue"]')) {
       await centerOn(page, '[data-slot="venue"]', 'center', 90, 2400);
@@ -410,7 +421,8 @@ try {
     await ctx.close();
   }
 
-  // ---------------------------------------------------------------- buyer: /start -> panel -> publish
+  // ---------------------------------------------------------------- buyer: /start -> setup (3 steps) -> live -> editor
+  // K29 editor (docs/16 §0b): a 3-step setup (names + date → photo → publish), then Home · Edit (6 pages) · Guests · Share.
   {
     const ctx = await browser.newContext(device);
     ctx.setDefaultTimeout(12_000);
@@ -443,88 +455,124 @@ try {
       el.value = el.value.replace(/k=[A-Za-z0-9_-]+/, 'k=••••••••••••••••');
     });
     await shot(page, 'b03_edit_link', 'Buyer: "Save this link" (key masked in this picture)');
-    const localEdit = editUrl.replace(PUBLIC_URL, BASE);
-    await page.goto(localEdit, { waitUntil: 'load' });
-    await page.waitForSelector('[data-panel]');
-    await page.waitForTimeout(800);
-    await shot(page, 'b04_panel_top', 'Buyer: editor, top (draft, Couple section)', { scroll: false });
-    await openSection(page, 'date');
-    await shot(page, 'b05_panel_date', 'Buyer: editor, Date & time section', { keep: ['#section-date'], deltas: [0, -8, 8, 16, 24] });
-    await openSection(page, 'photos');
+    const localEdit = editUrl.replace(PUBLIC_URL, BASE).replace(/#.*$/, '');
+    // setup 1: names (from /start) + date and time
+    await page.goto(`${localEdit}#setup/1`, { waitUntil: 'load' });
+    await page.waitForSelector('[data-setup="1"]');
+    await page.fill('#f-date', '2027-09-18');
+    await page.fill('#f-ceremony_time', '16:30');
+    await waitSaved(page);
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await shot(page, 'b04_setup_names', 'Buyer: setup step 1 of 3, names and date', { scroll: false });
+    // setup 2: the portrait, cropped to the design's frame
+    await page.click('[data-setup-next]');
+    await page.waitForSelector('[data-setup="2"]');
     await page.setInputFiles(`input[data-slot="${HERO}"]`, PHOTO);
     await page.waitForSelector('[data-testid="cropper"] img');
     await page.waitForTimeout(900);
     await plainBehindSheet(page);
-    await shot(page, 'b06_panel_crop', 'Buyer: editor, cropping a photo to the design\'s shape (plain background behind the sheet)', { edges: false });
+    await shot(page, 'b06_panel_crop', 'Buyer: cropping a photo to the design\'s frame (plain background behind the sheet)', { edges: false });
     await page.click('[data-crop-confirm]');
-    await page.waitForSelector(`[data-photo-slot="${HERO}"] img`, { timeout: 25_000 });
+    await page.waitForSelector(`[data-photo-slot="${HERO}"] img`, { timeout: 30_000 });
     await waitSaved(page);
-    await openSection(page, 'photos');
-    await shot(page, 'b07_panel_photos', 'Buyer: editor, Photos section after the upload', { keep: ['#section-photos'], deltas: [0, -8, 8, 16, 24] });
-    await page.click('[data-open-preview]');
-    await page.waitForTimeout(4500);
-    await shot(page, 'b08_panel_preview', 'Buyer: editor, preview of the draft', { edges: false });
-    await page.click('[data-close-preview]').catch(() => page.keyboard.press('Escape'));
-    await page.waitForTimeout(600);
-    await page.click('[data-publish]');
-    await page.waitForSelector('[data-testid="live"], [data-testid="notes"]', { timeout: 15_000 });
-    if (await page.locator('[data-testid="notes"]').count()) {
-      await plainBehindSheet(page);
-      await shot(page, 'b09_publish_notes', 'Buyer: "Before you publish" (sample text still in place; plain background behind the sheet)', { edges: false });
-      const anyway = page.locator('[data-publish-anyway]');
-      await anyway.scrollIntoViewIfNeeded();
-      await anyway.click();
-    }
-    await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
-    const live = await page.locator('[data-live-link]').innerText();
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await shot(page, 'b05_setup_photo', 'Buyer: setup step 2 of 3, the photo in place', { scroll: false });
+    // setup 3: the real preview, a summary and the rules, then Publish
+    await page.click('[data-setup-next]');
+    await page.waitForSelector('[data-setup="3"]');
+    await page.frameLocator('[data-setup="3"] iframe').locator('body').waitFor();
+    await page.waitForTimeout(2500);
+    await shot(page, 'b07_setup_publish', 'Buyer: setup step 3 of 3, preview before publishing', { scroll: false });
+    if (await page.locator('[data-confirm-sample-date]').count()) await page.click('[data-confirm-sample-date]');
+    await page.click('[data-setup-publish]');
+    await page.waitForSelector('[data-setup-done]', { timeout: 20_000 });
+    // (the link text leaves out "https://"; its href is the full address)
+    const live = (await page.locator('[data-live-link]').getAttribute('href')) ?? '';
     check('buyer: live link = public base URL + address', live === `${PUBLIC_URL}/${two ? 'elena-and-marco' : 'elena'}`, live);
     // the QR would open a site that exists only in this local run: a plain, labelled box takes its place in the picture
-    await page.evaluate(() => {
-      const svg = document.querySelector('[data-testid="live"] svg[role="img"]') as SVGElement | null;
-      if (!svg) return;
-      const r = svg.getBoundingClientRect();
-      const box = document.createElement('div');
-      box.textContent = 'QR code (hidden in this picture)';
-      box.setAttribute('data-lk-qr', '');
-      box.style.cssText = `width:${r.width}px;height:${r.height}px;display:grid;place-items:center;text-align:center;padding:16px;` +
-        'box-sizing:border-box;background:#eee9e1;border:1px solid #cbc1b2;border-radius:10px;color:#655f56;font:500 15px/1.4 system-ui,sans-serif;';
-      svg.replaceWith(box);
+    const maskQr = () => page.evaluate(() => {
+      for (const svg of document.querySelectorAll('svg[role="img"]')) {
+        const r = svg.getBoundingClientRect();
+        if (r.width < 80 || Math.abs(r.width - r.height) > 4) continue;
+        const box = document.createElement('div');
+        box.textContent = 'QR code (hidden in this picture)';
+        box.setAttribute('data-lk-qr', '');
+        box.style.cssText = `width:${r.width}px;height:${r.height}px;display:grid;place-items:center;text-align:center;padding:16px;` +
+          'box-sizing:border-box;background:#eee9e1;border:1px solid #cbc1b2;border-radius:10px;color:#655f56;font:500 15px/1.4 system-ui,sans-serif;';
+        svg.replaceWith(box);
+      }
     });
-    await page.locator('[data-lk-qr]').scrollIntoViewIfNeeded();
-    await plainBehindSheet(page);
-    await shot(page, 'b10_live_qr', 'Buyer: "Your website is live" + QR (the QR is replaced by a labelled box in this picture)', { edges: false });
+    await maskQr();
+    check('buyer: QR masked in the "live" picture', (await page.locator('[data-lk-qr]').count()) > 0);
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await shot(page, 'b10_live_qr', 'Buyer: "Your website is live" with link + QR (the QR is replaced by a labelled box in this picture)', { keep: ['[data-live-link]'] });
+    // the editor: Home (how ready, next 3 things), Edit (six pages), a page, Headings & labels, preview, Share
+    await page.click('[data-go-editor]');
+    await page.waitForSelector('[data-status-card]');
+    await page.waitForTimeout(800);
+    await centerOn(page, '[data-readiness]', 'start', UNDER_BAR - 140, 600);
+    await shot(page, 'b08_home', 'Buyer: editor Home, "Your website is N% ready" and the next steps', { scroll: false });
+    await page.click('[data-nav="edit"]');
+    await page.waitForSelector('[data-section-row="us"]');
+    await page.waitForTimeout(600);
+    const rows = await page.locator('[data-section-row]').evaluateAll((els: Element[]) => els.map((e) => e.getAttribute('data-section-row')));
+    check('buyer: Edit lists six pages', rows.join() === 'us,day,photos,story,details,rsvp', rows.join());
+    await shot(page, 'e01_edit_pages', 'Buyer: Edit, the six pages to edit', { scroll: false });
+    await editPage(page, 'day');
+    await shot(page, 'e02_day_place', 'Buyer: Edit → Day & place (date and time, venue, schedule)', { scroll: false });
+    await editPage(page, 'us');
+    const copyFold = page.locator('[data-disclosure="copy-us"] button[aria-expanded]');
+    if (await copyFold.count()) {
+      for (let i = 0; i < 4 && (await copyFold.getAttribute('aria-expanded')) !== 'true'; i++) {
+        await copyFold.scrollIntoViewIfNeeded();
+        await copyFold.click();
+        await page.waitForTimeout(300);
+      }
+      await page.locator('[data-copy-fields="us"]').waitFor();
+      await centerOn(page, '[data-disclosure="copy-us"]', 'start', UNDER_BAR, 600);
+      await shot(page, 'e03_copy_labels', 'Buyer: Edit → Us → "Headings & labels on this page" (the design\'s own texts, editable)', { scroll: false });
+    } else check('buyer: "Headings & labels" on the Us page', false);
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await page.click('[data-open-preview]');
+    await page.waitForTimeout(4500);
+    await shot(page, 'b09_panel_preview', 'Buyer: editor, preview of the website', { edges: false });
+    await page.click('[data-close-preview]').catch(() => page.keyboard.press('Escape'));
+    await page.waitForTimeout(600);
+    await page.click('[data-nav="share"]');
+    await page.waitForSelector('[data-share-url]');
+    await page.waitForTimeout(600);
+    await maskQr();
+    await shot(page, 's01_share', 'Buyer: Share, link + QR on top (the QR is replaced by a labelled box in this picture)', { scroll: false });
     await ctx.close();
   }
 
-  // ---------------------------------------------------------------- panel of the seeded site: RSVP replies + questions
+  // ---------------------------------------------------------------- editor of the seeded site: Guests (RSVP replies) + questions
   {
     const ctx = await browser.newContext(device);
     ctx.setDefaultTimeout(12_000);
     const page = await ctx.newPage();
-    await page.goto(`${BASE}/edit/${SLUG}?k=${DEMO_EDIT_KEY}`, { waitUntil: 'load' });
-    await page.waitForSelector('[data-panel]');
-    await openSection(page, 'rsvp');
-    await page.click('[data-refresh-replies]').catch(() => undefined);
-    await page.waitForSelector('[data-replies] li', { timeout: 8000 }).catch(() => null);
+    await page.goto(`${BASE}/edit/${SLUG}?k=${DEMO_EDIT_KEY}#guests`, { waitUntil: 'load' });
+    await page.waitForSelector('[data-replies]');
+    await page.waitForSelector('[data-reply-name="Olivia Bennett"]', { timeout: 8000 }).catch(() => null);
     await page.waitForTimeout(600);
-    await centerOn(page, '[data-replies]', 'start', -96, 500);
     const listed = await page.locator('[data-replies]').innerText().catch(() => '');
-    check('panel: replies listed', listed.includes('Olivia Bennett') && listed.includes(GUEST), listed.replace(/\s+/g, ' ').slice(0, 100));
-    await shot(page, 'p01_panel_replies', 'Couple: editor, RSVP replies with counts', { keep: ['[data-replies] li'] });
-    const csv = page.getByText('Download all replies (CSV)');
-    if (await csv.count()) {
-      await csv.first().evaluate((el: Element) => el.setAttribute('data-lk-csv', ''));
-      await centerOn(page, '[data-lk-csv]', 'center', 120, 500);
-      await shot(page, 'p02_panel_csv', 'Couple: editor, CSV download of all replies', { keep: ['[data-lk-csv]'] });
-    }
+    check('editor: Guests lists the replies', listed.includes('Olivia Bennett') && listed.includes(GUEST), listed.replace(/\s+/g, ' ').slice(0, 100));
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await shot(page, 'p01_panel_replies', 'Couple: editor → Guests, RSVP replies with counts', { scroll: false });
+    check('editor: "Download list" (CSV) on Guests', await page.$('[data-csv]'));
+    if (await page.$('[data-reply]')) {
+      await centerOn(page, '[data-reply]', 'start', UNDER_BAR, 500);
+      await shot(page, 'p02_panel_reply_list', 'Couple: editor → Guests, the replies one by one', { scroll: false });
+    } else check('editor: reply cards on Guests', false);
+    await editPage(page, 'rsvp');
     if (await page.$('[data-rsvp-questions]')) {
-      await centerOn(page, '[data-rsvp-questions]', 'start', -12, 500);
-      await shot(page, 'p03_panel_questions', 'Couple: editor, questions for your guests', { deltas: [0, -8, 8, 16, 24, 32] });
-    }
+      await centerOn(page, '[data-rsvp-questions]', 'start', UNDER_BAR, 500);
+      await shot(page, 'p03_panel_questions', 'Couple: editor → RSVP, questions for your guests', { scroll: false });
+    } else check('editor: RSVP questions', false);
     const res = await fetch(`${BASE}/api/rsvp/${SLUG}/export`, { headers: { authorization: `Bearer ${DEMO_EDIT_KEY}` } });
     const text = (await res.text()).replace(/^﻿/, '');
     writeFileSync(path.join(OUT as string, 'replies_sample.csv'), text);
-    check('panel: CSV export has the replies and the Meal choice column', res.status === 200 && /"Meal choice"/.test(text) && text.includes('Olivia Bennett'), String(res.status));
+    check('editor: CSV export has the replies and the Meal choice column', res.status === 200 && /"Meal choice"/.test(text) && text.includes('Olivia Bennett'), String(res.status));
     await ctx.close();
   }
 

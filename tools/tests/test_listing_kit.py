@@ -2,7 +2,7 @@
 
   python3 tools/tests/test_listing_kit.py
 
-Covered: listing.md field parsing and Etsy title/tag rules (also on the real 01 and 03 listings, plus the honesty rules
+Covered: listing_v3.md field parsing and Etsy title/tag rules (also on the real 01 and 03 listings, plus the honesty rules
 of the G059 review: no "personal start link", no "all text", no trademark tag, US spelling), the real QR of a start link
 (re-encoded and compared module by module; demo/placeholder hosts and http refused), template filling (every placeholder
 of every template has a value, unknown placeholders fail, text is escaped), guide strips (1–2 screens, same width, parts
@@ -58,7 +58,7 @@ online rsvp
 
 def test_real_listings():
     for t in lk.THEMES.values():
-        p = t.package / "listing" / "listing.md"
+        p = t.package / "listing" / lk.LISTING_MD
         assert p.exists(), p
         md = p.read_text(encoding="utf-8")
         f = lk.listing_fields(md)
@@ -67,17 +67,16 @@ def test_real_listings():
         m = re.search(r"This title: (\d+) characters", md)
         assert m and int(m.group(1)) == len(f["title"]), (t.id, m and m.group(1), len(f["title"]))
         assert "<!-- listing-kit:media -->" in md
-        for ph in ("[PRICE]", "[SHOP NAME]", "[HOSTING PERIOD]", "[SUPPORT EMAIL]"):
-            assert ph in md, (t.id, ph)
+        # Undecided commercial fields stay placeholders. Shop name, support email (K33), hosting period (K25) and the
+        # draft price (USD 29.40) are filled in listing_v3.md (2026-10-15); quantity is still the user's decision.
+        assert "[QUANTITY]" in md, (t.id, "[QUANTITY]")
         guide = (t.package / "customer" / "START_HERE.md").read_text(encoding="utf-8")
         assert lk.start_url(t) in guide and f"({lk.start_url(t)})" in guide, t.id  # shown and clickable
         assert "img/start_qr_page.png" in guide
-        for name in lk.STRIPS:
-            assert f"img/{name}.jpg" in guide, (t.id, name)
         # the guide is buyer-facing: no internal markers
         assert "[VERIFY" not in guide and "TODO" not in guide, t.id
         # G059 review: honest product statements
-        for text, where in ((md, "listing.md"), (guide, "START_HERE.md")):
+        for text, where in ((md, lk.LISTING_MD), (guide, "START_HERE.md")):
             low = text.lower()
             assert "personal start link" not in low and "your start link is inside" not in low, (t.id, where)
             assert "all text" not in low and "all the text" not in low, (t.id, where)
@@ -86,7 +85,7 @@ def test_real_listings():
             assert "headings" in low and "english" in low, (t.id, where)
         assert "evite" not in " ".join(f["tags"]), t.id  # Evite is a trademark
         assert f["title"].count("Wedding") <= 1, (t.id, f["title"])
-        assert "registry links" not in guide and "**QR code**" in guide, t.id
+        assert "QR code" in guide and "img/start_qr_page.png" in guide, t.id  # G091 guide: text + the start QR
 
 
 def test_qr(tmp: Path):
@@ -104,11 +103,17 @@ def test_qr(tmp: Path):
         raise AssertionError(f"accepted {bad}")
 
 
+# what listing_kit.scene_background gives the scene templates (01, 02, 08)
+SCENE_VALUES = {"scene.bg": "file:///bg.png", "below_screens": "1600", "above_screens": "600", "col_left": "120",
+                "col_w": "800", "col_mid": "1000",
+                **{f"s{i}_{k}": "500" for i in (1, 2, 3) for k in ("cx", "left", "top", "bottom")}}
+
+
 def test_templates(tmp: Path):
     shots = tmp / "shots"
     for t in lk.THEMES.values():
         values = lk.template_values(t, shots, {"qr.demo": "file:///x.png", "slot_x": "1", "slot_y": "2", "slot_w": "3",
-                                               "slot_h": "4", "slot_r": "5"}, title="t")
+                                               "slot_h": "4", "slot_r": "5", **SCENE_VALUES}, title="t")
         for f in list(lk.TEMPLATES.glob("*.html")):
             out = lk.fill(f.read_text(encoding="utf-8"), values)
             assert "{{" not in out, (f.name, re.findall(r"\{\{[^}]*\}\}", out)[:3])
@@ -206,6 +211,22 @@ def test_video_rules():
     assert lk.video_problems({**ok, "width": 400, "height": 400}) and lk.video_problems({**ok, "codec": "vp9"})
 
 
+def test_scenes():
+    """Every theme has the GPT scene of each scene image with as many green screens as real screens go into it, and a
+    screen is cut to a green screen's shape from its top (taller) or evenly from both sides (wider)."""
+    sys.path.insert(0, str(TOOLS / "listing_v2"))
+    import kompozit as kz
+    for t in lk.THEMES.values():
+        for name, (file, shots) in lk.SCENES.items():
+            assert name in lk.IMAGES and set(shots) <= set(lk.SHOTS), name
+            scene = t.collection / "assets" / "gpt" / "mockups" / file
+            assert scene.exists(), scene
+            assert len(kz.ekran_bolgeleri(Image.open(scene))) == len(shots), (t.id, file)
+    im = Image.new("RGB", (390, 844), "white")
+    assert lk._screen_for(im, 0.5).size == (390, 780)
+    assert lk._screen_for(Image.new("RGB", (390, 700)), 0.5).size == (350, 700)
+
+
 def test_render(tmp: Path):
     import md_to_pdf as m2p
     if not m2p.playwright_hazir():
@@ -242,7 +263,9 @@ def test_built_kits():
         live = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (200, f"<title>{t.name}</title>"))
         assert not any(x.startswith("live ") for x in live), live
         assert not any("demo_qr" in x for x in live), live  # image 8's QR encodes the demo link
-        assert any("[SHOP NAME]" in x for x in live) and any("[VERIFY" in x for x in live), live
+        live = [x.replace("\\", "/") for x in live]  # (relative paths print with \ on Windows)
+        assert any(x.startswith(f"listing/{lk.LISTING_MD}: ") and "still open" in x for x in live), live
+        assert any("[VERIFY" in x for x in live), live
         down = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (0, "URLError: proxy"))
         assert sum("could not connect" in x for x in down) == 2, down
         md_open = next(x for x in live if x.startswith("customer/START_HERE.md"))
@@ -261,6 +284,8 @@ def main():
     print("  test_video_rules: ok")
     test_guide_html()
     print("  test_guide_html: ok")
+    test_scenes()
+    print("  test_scenes: ok")
     with tempfile.TemporaryDirectory() as d:
         d = Path(d)
         for test in (test_qr, test_templates, test_strip, test_pdf_checks, test_render):
