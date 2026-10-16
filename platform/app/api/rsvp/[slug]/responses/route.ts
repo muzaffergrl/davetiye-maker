@@ -7,7 +7,9 @@
 //         got another way ("Added by you"); {action: "update", id, reply: {...}} -> the couple's correction of a reply.
 //         Same fields and messages as the guest form: 400 {code: "invalid", message, fields} · 404 not_found (reply
 //         gone). Answers with {ok, reply, …summary}. An archived site: 403 like every other change.
+import { after } from 'next/server';
 import { getDataAdapter } from '../../../../../lib/data/index.ts';
+import { scheduleSheetSync } from '../../../../../lib/google/sync.ts';
 import { addCoupleReply, authorizeEditor, manageRsvps, MAX_RSVP_ACTION_IDS, rsvpSummary, updateCoupleReply } from '../../../../../lib/rsvp/couple.ts';
 import { errorResult } from '../../../../../lib/rsvp/guest.ts';
 import { BodyTooLargeError, editKeyFrom, isJsonRequest, jsonResponse, readLimitedText, unauthorized } from '../../../../../lib/rsvp/http.ts';
@@ -55,6 +57,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ slug: string }
         const code = result.status === 404 ? 'not_found' : 'invalid';
         return jsonResponse({ status: result.status, body: { ok: false, code, message: result.message, ...(result.fields ? { fields: result.fields } : {}) } });
       }
+      scheduleSheetSync(adapter, site.id, after); // G128: the Google Sheet follows
       return jsonResponse({ status: 200, body: { ok: true, reply: result.reply, ...(await rsvpSummary(adapter, site)) } });
     }
     const ids = body?.ids;
@@ -63,6 +66,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ slug: string }
       return bad('Choose the replies first.');
     }
     const changed = await manageRsvps(adapter, site, action, ids as string[]);
+    if (changed) scheduleSheetSync(adapter, site.id, after);
     return jsonResponse({ status: 200, body: { ok: true, changed, ...(await rsvpSummary(adapter, site)) } });
   } catch (e) {
     console.error(`[rsvp] responses ${slug} POST:`, e);

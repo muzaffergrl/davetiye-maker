@@ -4,6 +4,7 @@
 //   <dir>/slugs/<slug>.json      {"id": "<id>"}  (created with O_EXCL -> unique slugs)
 //   <dir>/rsvps/<siteId>.json    RsvpRecord[]
 //   <dir>/uploads/<siteId>/<random>.<ext>          (or <random>-<width>w.<ext> + size variants, G055)
+//   <dir>/docs/<siteId>/<name>.json  site documents outside the record (G128: Google Sheets connection)
 //
 // Writes are atomic (temp file + rename) and serialised per record inside one process.
 // Not meant for multiple server processes sharing one folder.
@@ -34,6 +35,7 @@ import {
   type SiteRecord,
   type StoredFile,
   type WriteOptions,
+  SITE_DOC_NAME_RE,
 } from '../types.ts';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -60,6 +62,9 @@ export class LocalAdapter implements DataAdapter {
   }
   private rsvpPath(siteId: string) {
     return path.join(this.dir, 'rsvps', `${siteId}.json`);
+  }
+  private docPath(siteId: string, name: string) {
+    return path.join(this.dir, 'docs', siteId, `${name}.json`);
   }
   private uploadDir(siteId: string) {
     return path.join(/*turbopackIgnore: true*/ this.dir, 'uploads', siteId);
@@ -250,6 +255,7 @@ export class LocalAdapter implements DataAdapter {
       await fs.rm(this.sitePath(id), { force: true });
       await fs.rm(this.rsvpPath(id), { force: true });
       await fs.rm(this.uploadDir(id), { recursive: true, force: true });
+      await fs.rm(path.join(this.dir, 'docs', id), { recursive: true, force: true });
     });
   }
 
@@ -349,6 +355,22 @@ export class LocalAdapter implements DataAdapter {
       if ((e as NodeJS.ErrnoException).code === 'ENOENT') return 0;
       throw e;
     }
+  }
+
+  async readSiteDoc(siteId: string, name: string): Promise<unknown | null> {
+    if (!UUID_RE.test(siteId) || !SITE_DOC_NAME_RE.test(name)) return null;
+    return this.readJson<unknown>(this.docPath(siteId, name));
+  }
+
+  updateSiteDoc<T>(siteId: string, name: string, change: (current: T | null) => T | null): Promise<T | null> {
+    if (!UUID_RE.test(siteId) || !SITE_DOC_NAME_RE.test(name)) return Promise.resolve(null);
+    const file = this.docPath(siteId, name);
+    return this.withLock(`doc:${siteId}:${name}`, async () => {
+      const next = change(structuredClone(await this.readJson<T>(file)));
+      if (next === null) await fs.rm(file, { force: true });
+      else await this.writeJson(file, next);
+      return next === null ? null : structuredClone(next);
+    });
   }
 
   async readPhoto(rel: string): Promise<StoredFile | null> {

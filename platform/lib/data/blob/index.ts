@@ -6,6 +6,7 @@
 //   orders/<ref>.json                        {"id"}  same rule -> one site per order reference
 //   rsvps/<siteId>/<ms>-<seq>-<rsvpId>.json  one file per RSVP (no read-modify-write, no contention)
 //   media/<siteId>/<random>.<ext>            photos; the app serves them at /media/<siteId>/<file> (readPhoto)
+//   docs/<siteId>/<name>.json                site documents outside the record (G128: Google Sheets connection), ETag-checked
 //                                            (G055: <random>-<width>w.<ext> + its 640/1280 px variants)
 //
 // Consistency:
@@ -74,6 +75,7 @@ import {
   type SiteRecord,
   type StoredFile,
   type WriteOptions,
+  SITE_DOC_NAME_RE,
 } from '../types.ts';
 
 /** The part of the @vercel/blob API this adapter uses (tests pass an in-memory fake). */
@@ -507,6 +509,7 @@ export class BlobAdapter implements DataAdapter {
     await this.withLock(`site:${id}`, async () => {
       await this.deletePrefix(this.rsvpPrefix(id));
       await this.deletePrefix(this.mediaPrefix(id));
+      await this.deletePrefix(`docs/${id}/`);
       await this.releaseIndexIfOwned(this.slugPath(site.slug), id);
       if (site.orderRef !== null) await this.releaseIndexIfOwned(this.orderPath(site.orderRef), id);
       // Last, so a deletion interrupted half-way can simply be run again.
@@ -659,6 +662,37 @@ export class BlobAdapter implements DataAdapter {
     const current = await this.readJson<{ count?: unknown; resetAt?: unknown }>(pathname);
     if (!current || typeof current.data.count !== 'number' || typeof current.data.resetAt !== 'number') return null;
     return current.data.resetAt > this.#now() ? { count: current.data.count, resetAt: current.data.resetAt } : null;
+  }
+
+  async readSiteDoc(siteId: string, name: string): Promise<unknown | null> {
+    if (!UUID_RE.test(siteId) || !SITE_DOC_NAME_RE.test(name)) return null;
+    return (await this.readJson<unknown>(`docs/${siteId}/${name}.json`))?.data ?? null;
+  }
+
+  /** Read (ETag) -> change -> conditional put / delete; a concurrent write makes it start again on fresh data. */
+  updateSiteDoc<T>(siteId: string, name: string, change: (current: T | null) => T | null): Promise<T | null> {
+    if (!UUID_RE.test(siteId) || !SITE_DOC_NAME_RE.test(name)) return Promise.resolve(null);
+    const pathname = `docs/${siteId}/${name}.json`;
+    return this.withLock(`doc:${pathname}`, async () => {
+      for (let attempt = 1; ; attempt++) {
+        const current = await this.readJson<T>(pathname);
+        const next = change(current ? structuredClone(current.data) : null);
+        try {
+          if (next === null) {
+            if (current) await this.del(pathname, current.etag);
+          } else {
+            await this.putJson(pathname, next, current ? { ifMatch: current.etag } : { allowOverwrite: false });
+          }
+          return next;
+        } catch (e) {
+          let conflict = e instanceof BlobPreconditionFailedError || looksLikeConcurrentWrite(e) || looksLikeAlreadyExists(e);
+          if (!conflict && !current && e instanceof BlobError) conflict = Boolean(await this.readJson(pathname));
+          if (!conflict) throw e;
+          if (attempt >= this.#maxWriteAttempts) throw new WriteConflictError(`document ${pathname}`);
+          await sleep(this.#retryDelayMs(attempt));
+        }
+      }
+    });
   }
 
   async readPhoto(rel: string): Promise<StoredFile | null> {
