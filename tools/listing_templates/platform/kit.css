@@ -9,7 +9,7 @@ body {
   color: var(--ink);
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   background-color: var(--mist-top);
-  background-image: var(--bg-image), radial-gradient(ellipse at 50% 38%, var(--ivory) 0%, var(--mist-top) 58%, var(--mist-bottom) 130%);
+  background-image: var(--bg-image), radial-gradient(ellipse at 50% 38%, var(--glow, var(--ivory)) 0%, var(--mist-top) 58%, var(--mist-bottom) 130%);
   background-size: cover;
   background-position: center;
   -webkit-font-smoothing: antialiased;

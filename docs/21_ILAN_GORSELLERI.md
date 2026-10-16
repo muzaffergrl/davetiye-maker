@@ -1,11 +1,35 @@
-# İlan görselleri — editoryal sistem (v4, 2026-10-16)
+# İlan görselleri — editoryal sistem (v4, 2026-10-16; 20 tasarım: G124)
 
 Kullanıcı (2026-10-16): ilan görselleri satışın en önemli parçası; önceki iki tarz (GM03 GPT kompozisyonları ve G059
 şablon kiti) istenmiyor, "çok daha şık ve özenli" iş isteniyor.
 
-**Araç:** `tools/listing_editorial.py --theme <id>` → `collections/<NN>/package/listing/images_editorial/` (8 × 2000 px).
-Eski kit `images/` klasöründe kalır; seçim yapılınca ilan paketi (`etsy_upload.json`) yeni klasöre bağlanır.
-Açılış kareleri: `tools/listing_editorial/capture_opening.ts` (DPR 3, yerel üretim derlemesi; canlıya bir şey gitmez).
+**Araç:** `tools/listing_editorial.py --theme <id|NN|aralık|all>` → `collections/<NN>/package/listing/images_editorial/`
+(8 × 2000 px PNG). `--video` aynı çekimden ilan videosunu da yapar (`tools/listing_kit.py video`:
+`package/listing/video.mp4`, 1080 × 1080, H.264, sessiz, 5–15 sn, kapalı açılış nesnesiyle başlar, son yarım saniye ilk
+kareye erir → dikişsiz döngü). Eski kit `images/` klasöründe kalır (yüklenmez).
+
+## Yeniden üretim (20 tasarım)
+
+```bash
+cd platform && npm ci && npm run build && cd ..          # yerel üretim derlemesi; canlıya bir şey gitmez
+python3 tools/listing_editorial.py --theme all --capture --video
+python3 tools/etsy_upload.py && python3 tools/etsy_upload.py --check
+```
+
+- `--capture` = `tools/listing_templates/capture.ts` (misafir sayfaları, /start, K29/G121 editörü, Guests, açılış kaydı
+  `opening.webm`) + `tools/listing_editorial/capture_opening.ts` (DPR 3 iki açılış karesi). Ekranlar repoya girmez:
+  `--shots-root` (varsayılan `$BKE_LISTING_SHOTS` ya da `<temp>/bke-listing-shots/<NN_klasör>/`, tasarım başına ~10 MB).
+  `package/shots/` (yalnız 01–05) G059'un eski çekimidir (G100/G121 öncesi editör); ilan seti artık onu okumaz.
+- `--capture stills` yalnız iki açılış karesini yeniden çeker (ekranlar duruyorsa).
+- Açılış kareleri tasarım başına gözle seçilir: `tools/listing_editorial/opening_stills.json` (`open_mid` = nesne
+  açılıyor, `open_card` = kart çıktı; dokunuştan sonra ms). Yeni tasarımda aday kareler:
+  `NODE_PATH=/opt/node22/lib/node_modules node tools/listing_editorial/capture_opening.ts --theme <id> --out <klasör> --at 600,1200,1800,2400,3000,3600,4000`
+  (≈ 4 sn'den sonra sayfa ana sayfaya geçer; o kareler kullanılmaz). Zamanlar makine yüküne göre birkaç yüz ms kayabilir:
+  her üretimden sonra 2. görsele bakılır.
+- Tek görsel: `--only 02_opening` (ekranlar `--shots-root` altında duruyorsa çekim gerekmez).
+- G124 (2026-10-16) 20 tasarımın 8'er görselini bu araçla, depo tabanı `6181730` (G098 + G121 editörü) üzerinde üretti;
+  videoları 06–20 için yaptı. 01–05'in videoları G059/G122'den (aynı tarif) olduğu gibi duruyor; `--video` onları da
+  yeniden yazar, o zaman listing_v3 §6'daki süreler güncellenir.
 
 ## Önceki tarzlarda neyi bırakıyoruz
 
@@ -22,26 +46,51 @@ Açılış kareleri: `tools/listing_editorial/capture_opening.ts` (DPR 3, yerel 
 
 1. Çizim yok (K21): resim yalnız GPT sahnesi, GPT tema parçası (kâğıt dokusu) ya da platformun gerçek ekranı.
 2. Kutu, rozet, hap, ikon yok. Ayırıcı gerekiyorsa 1.5 px altın-mürekkep çizgi.
-3. Yazı hiçbir telefonun üstüne binmez. Sahne üstündeki yazı, sahnenin sakin bölgesinde ve hafif kâğıt rengi geçişle durur.
-4. Kapak yazısı Etsy arama kırpımının (4:3, y 250–1750) içinde kalır.
+3. Yazı hiçbir telefonun üstüne binmez. Sahne üstündeki yazı, sahnenin sakin bölgesinde ve hafif kâğıt rengi geçişle durur
+   (2. görselde adım etiketleri telefonların hemen altında başlayan kâğıt geçişinin üstünde: 07'nin koyu ahşabı, 13'ün
+   patikası; 7. görselde adım yazıları sıkı bir geçişle).
+4. Kapak yazısı Etsy arama kırpımının (4:3, y 250–1750) içinde kalır. 16 karakterden uzun ad iki satır.
 5. İddialar docs/19 ve docs/05 §E'deki dürüst listeyle aynı: "Artwork, colors and fonts stay as designed", "Up to 3 questions",
    "Online until 12 months after your wedding".
 6. Renkler temanın `palette.json`'undan; altın metin rengi olarak mürekkebe doğru karıştırılır (açık zeminde okunur).
+   **Koyu tasarımlar** (06 lacivert, 17 zümrüt, 19 siyah: `ink` açık renk) kendi koyu zemininde (`mist_top` + kâğıt
+   dokusu), açık yazı, siyah gölge ve açık logo (`bke-logo-horizontal-reverse.svg`) ile; 7. görselin açık keten
+   fotoğrafında mürekkep temanın koyu `primary` rengi olur. Video arka planı da koyu tasarımda kendi koyu tonunda.
+7. **Açılış nesnesi** (G099/G124): `platform/lib/marketing/designs.ts`'teki "Your guests tap the <nesne>." cümlesinden
+   (`listing_kit.Theme.opening`). 06 ve 14 gatefold, 09 pouch ("linen pouch"), 12 wallet ("travel wallet"), 13 book
+   ("storybook"), 18 sleeve ("vellum sleeve"); diğerleri envelope. 2. görselin orta etiketi ("The gatefold opens"),
+   3. görselin alt satırı ("Storybook, home, …"), 8. görselin ilk maddesi ("Travel wallet opening and four pages") ve
+   videonun cümlesi ("Guests tap the pouch and it opens.") bundan gelir; zarfsız tasarımda görsellerde "envelope" geçmez
+   (`tools/tests/test_listing_editorial.py`, `tools/etsy_upload.py --check` alt metinleri de denetler).
 
 ## Sekiz görsel
 
 | # | Ad | Düzen | Malzeme |
 |---|---|---|---|
-| 1 | Cover | Tam sahne, üstte tür satırı + tasarım adı (italik) | `cover_hand_v2` + zarf ekranı |
-| 2 | The opening | Üç telefon: kapalı → açılıyor → kart | `three_phones` + DPR 3 açılış kareleri |
+| 1 | Cover | Tam sahne, üstte tür satırı + tasarım adı (italik) | `cover_hand_v2` + açılış sayfası ekranı (`g01_envelope`) |
+| 2 | The opening | Üç telefon: kapalı → açılıyor → kart | `three_phones` + DPR 3 açılış kareleri (`opening_stills.json`) |
 | 3 | Every page | Kâğıt üstünde 5 ekran, kademeli | gerçek misafir ekranları |
-| 4 | Your editor | Solda kâğıt panel + liste, sağda elde telefon | `hand_phone_edit` + editör ekranı |
-| 5 | RSVP | İki büyük ekran: misafirin formu / çiftin listesi | gerçek ekranlar |
+| 4 | Your editor | Solda kâğıt panel + liste, sağda elde telefon | `hand_phone_edit(_v2)` + editör "Edit your website" (`e01_edit_pages`) |
+| 5 | RSVP | İki büyük ekran: misafirin formu / çiftin Guests sayfası | `g10_rsvp_form` + `p01_panel_replies` (G121 Guests: sayılar, arama, yanıtlar, Download list) |
 | 6 | The details | Program, mekân, S&C | gerçek ekranlar |
-| 7 | How it works | Üç adım, roma rakamları | başlangıç, kurulum, yayındaki site |
+| 7 | How it works | Üç adım, roma rakamları | **GM06 T1** `brand/trust/t1_three_steps.png` (keten üstünde üç telefon) + `b01_start`, `b04_setup_names`, `g02_home_top` |
 | 8 | What's included | Masa üstü sahne + liste | `flatlay_phone(_v2)` + demo ekranı |
+
+### GM06 güven sahneleri (brand/trust/, G124 kararı)
+
+| Sahne | Kullanıldı mı | Gerekçe |
+|---|---|---|
+| T1 üç telefon (başlat · düzenle · paylaş) | **Evet, 7. görsel** (20 tasarımın hepsinde) | Tam bu iş için üretildi; üç yeşil ekrana gerçek /start, kurulum ve yayındaki site ekranı oturur; alt metin 7 değişmeden doğru. Dükkân geneli ortak sahne; yazı rengi temanın paletinden. |
+| T2 misafir RSVP, T3 çift düzenliyor | Hayır | Telefon karede küçük (genişliğin ~%15'i): gerçek ekran Etsy boyutunda okunmaz; 5. ve 4. görsel ekranı büyük gösteriyor ve alt metinleri buna göre. |
+| T4 telefon + tablet + dizüstü | Hayır | Sekiz görsel listesinde "her cihaz" karesi yok; 4. görselin alt metni "a phone held in two hands" diyor. Dokuzuncu görsel olarak uygun (listing_v3 §5 önerileri), kullanıcı kararı. |
+| T5 masa kartında QR | Hayır | İlan görsellerinde QR yok (Etsy Off-Platform, "QR'sız demo"). |
+| T6 atölye masası | Hayır | Ekran yok; ürün özelliği anlatmıyor (dükkân "Hakkında" görseli için). |
 
 ## Bilinen sınır
 
-GPT sahneleri 1254 px (kare) ya da 1536 px (yatay). 2000 px tuvalde fotoğraf kısmı ~1.6× büyütülür; ekranlar ve yazılar
-keskin, sahnenin dokusu hafif yumuşak. Daha yüksek çözünürlüklü sahne ya da büyütme (upscale) kullanıcı kararıdır.
+GPT sahneleri 1254 px (kare) ya da 1536 px (yatay); GM06 T1 1254 px'ten 2000 px'e büyütülmüş. 2000 px tuvalde fotoğraf
+kısmı ~1.6× büyütülür; ekranlar ve yazılar keskin, sahnenin dokusu hafif yumuşak. Daha yüksek çözünürlüklü sahne ya da
+büyütme (upscale) kullanıcı kararıdır.
+
+Ekranlar depodaki platform kodundan (yerel derleme) çekilir; canlı site daha eski bir sürümse görseldeki editör canlıdakinden
+yeni olabilir (docs/10). Etsy'ye hiçbir şey yüklenmez (K41).

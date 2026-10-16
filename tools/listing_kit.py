@@ -56,6 +56,23 @@ BASE_URL = os.environ.get("LISTING_BASE_URL", "https://davetiye-platform-five.ve
 PLACEHOLDER_HOSTS = {"example.com", "example.org", "averyandjordan.com", "www.averyandjordan.com", "localhost", "127.0.0.1"}
 
 
+DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
+_OPENINGS: dict[str, str] = {}
+
+
+def opening_object(theme_id: str) -> str:
+    """What guests tap first ("envelope", "gatefold", "pouch", "wallet", "book", "sleeve"): the design's opening sentence
+    in platform/lib/marketing/designs.ts ("Your guests tap the <thing>.", the sales site's openingObject; the same rule
+    as tools/etsy_upload.py)."""
+    if theme_id not in _OPENINGS:
+        copy = DESIGN_COPY.read_text(encoding="utf-8")
+        m = re.search(rf"^  '{re.escape(theme_id)}': \{{.*?\bopening:\s*'Your guests tap the ([a-z]+)\.", copy, re.S | re.M)
+        if not m:
+            raise RuntimeError(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme_id}'")
+        _OPENINGS[theme_id] = m.group(1)
+    return _OPENINGS[theme_id]
+
+
 @dataclass(frozen=True)
 class Theme:
     id: str
@@ -66,6 +83,9 @@ class Theme:
     corner_tl: str
     corner_br: str
     bg: str | None = None
+    # G124: how the listing names the opening object when the bare word from designs.ts is not enough (the alt texts
+    # of listing_v3 §5 say "storybook", "linen pouch", "travel wallet", "vellum sleeve")
+    opening_name: str | None = None
 
     @property
     def collection(self) -> Path:
@@ -74,6 +94,19 @@ class Theme:
     @property
     def package(self) -> Path:
         return self.collection / "package"
+
+    @property
+    def opening(self) -> str:
+        """The opening object's word on the design's own site ("envelope", "gatefold", "book" …)."""
+        return opening_object(self.id)
+
+    @property
+    def opening_words(self) -> dict[str, str]:
+        """The opening object in listing texts: `short` in a step ("The gatefold opens"), `long` in a list ("Travel
+        wallet opening and four pages"). Never "envelope" for a design that is not one (G099/G124)."""
+        short = "storybook" if self.opening == "book" else self.opening
+        long = self.opening_name or short
+        return {"short": short, "long": long, "Long": long[:1].upper() + long[1:]}
 
 
 THEMES: dict[str, Theme] = {
@@ -108,6 +141,70 @@ THEMES: dict[str, Theme] = {
         corner_tl="platform/themes/mediterranean-lemon/img/decor_tl-960.webp",
         corner_br="platform/themes/mediterranean-lemon/img/decor_br-960.webp",
     ),
+    # G124: designs 06–20 (taglines = the style line of platform/lib/marketing/designs.ts; corners = the theme's
+    # largest painted corner files)
+    **{t.id: t for t in (
+        Theme(id="art-deco-black-tie", no="06", folder="06_Art_Deco_Noir", name="Art Deco Black-Tie",
+              tagline="A navy two-door gatefold with a gold art deco medallion, gold fan rays and pearls",
+              corner_tl="platform/themes/art-deco-black-tie/img/decor_tl-720.webp",
+              corner_br="platform/themes/art-deco-black-tie/img/decor_br-720.webp"),
+        Theme(id="burgundy-velvet-autumn", no="07", folder="07_Burgundy_Velvet", name="Burgundy Velvet Autumn",
+              tagline="An ivory envelope wrapped in burgundy velvet ribbon, dahlias, blackberries and copper leaves",
+              corner_tl="platform/themes/burgundy-velvet-autumn/img/florals_tl-900.webp",
+              corner_br="platform/themes/burgundy-velvet-autumn/img/florals_br-900.webp"),
+        Theme(id="winter-evergreen", no="08", folder="08_Winter_Evergreen", name="Winter Evergreen",
+              tagline="A forest green envelope with a snowy deckle edge, a pine-and-berry bundle and pine cones",
+              corner_tl="platform/themes/winter-evergreen/img/decor_tl-720.webp",
+              corner_br="platform/themes/winter-evergreen/img/decor_br-720.webp"),
+        Theme(id="lavender-provence", no="09", folder="09_Lavender_Provence", name="Lavender Provence",
+              tagline="A cream linen pouch tied with jute twine and a lavender bundle, pressed lavender and daisies",
+              corner_tl="platform/themes/lavender-provence/img/florals_tl-820.webp",
+              corner_br="platform/themes/lavender-provence/img/florals_br-820.webp", opening_name="linen pouch"),
+        Theme(id="tuscan-vineyard", no="10", folder="10_Tuscan_Vineyard", name="Tuscan Vineyard",
+              tagline="A kraft envelope tied with twine, a cork and olive leaves, grape clusters and vine leaves",
+              corner_tl="platform/themes/tuscan-vineyard/img/decor_tl-960.webp",
+              corner_br="platform/themes/tuscan-vineyard/img/decor_br-960.webp"),
+        Theme(id="boho-pampas-terracotta", no="11", folder="11_Boho_Pampas", name="Boho Pampas Terracotta",
+              tagline="A terracotta arch envelope tied with pampas and a palm spear, dried roses on sunlit sand",
+              corner_tl="platform/themes/boho-pampas-terracotta/img/decor_tl-960.webp",
+              corner_br="platform/themes/boho-pampas-terracotta/img/decor_br-940.webp"),
+        Theme(id="tropical-destination", no="12", folder="12_Tropical_Destination", name="Tropical Destination",
+              tagline="A travel wallet with a leather strap and a brass snap, plumeria, monstera and hibiscus",
+              corner_tl="platform/themes/tropical-destination/img/florals_tl-960.webp",
+              corner_br="platform/themes/tropical-destination/img/florals_br-960.webp", opening_name="travel wallet"),
+        Theme(id="enchanted-forest-storybook", no="13", folder="13_Enchanted_Forest", name="Enchanted Forest Storybook",
+              tagline="A moss-green storybook with a brass clasp, ferns, toadstools and fireflies",
+              corner_tl="platform/themes/enchanted-forest-storybook/img/decor_tl-720.webp",
+              corner_br="platform/themes/enchanted-forest-storybook/img/decor_br-720.webp", opening_name="storybook"),
+        Theme(id="ivory-lace-pearls", no="14", folder="14_Ivory_Lace_Pearl", name="Ivory Lace & Pearls",
+              tagline="A lace-covered ivory gatefold with a pearl brooch, white garden roses and pearl strands",
+              corner_tl="platform/themes/ivory-lace-pearls/img/decor_tl-720.webp",
+              corner_br="platform/themes/ivory-lace-pearls/img/decor_br-720.webp"),
+        Theme(id="cherry-blossom-spring", no="15", folder="15_Cherry_Blossom", name="Cherry Blossom Spring",
+              tagline="A pale grey envelope with a cherry blossom twig, watercolor blossoms and petals",
+              corner_tl="platform/themes/cherry-blossom-spring/img/florals_tl-720.webp",
+              corner_br="platform/themes/cherry-blossom-spring/img/florals_br-720.webp"),
+        Theme(id="sunflower-rustic-barn", no="16", folder="16_Sunflower_Rustic", name="Sunflower Rustic Barn",
+              tagline="A kraft envelope tied with a mustard gingham bow and a sunflower, sunflowers and wheat",
+              corner_tl="platform/themes/sunflower-rustic-barn/img/florals_tl-720.webp",
+              corner_br="platform/themes/sunflower-rustic-barn/img/florals_br-720.webp"),
+        Theme(id="emerald-gold-estate", no="17", folder="17_Emerald_Gold_Estate", name="Emerald & Gold Estate",
+              tagline="An emerald velvet envelope with a gold seal, gold line-art ferns and white marble cards",
+              corner_tl="platform/themes/emerald-gold-estate/img/decor_tl-720.webp",
+              corner_br="platform/themes/emerald-gold-estate/img/decor_br-720.webp"),
+        Theme(id="wildflower-meadow-vellum", no="18", folder="18_Wildflower_Vellum", name="Wildflower Meadow Vellum",
+              tagline="A frosted vellum sleeve with a wildflower label, colored-pencil poppies and cornflowers",
+              corner_tl="platform/themes/wildflower-meadow-vellum/img/florals_tl-720.webp",
+              corner_br="platform/themes/wildflower-meadow-vellum/img/florals_br-720.webp", opening_name="vellum sleeve"),
+        Theme(id="midnight-garden", no="19", folder="19_Midnight_Garden", name="Midnight Garden",
+              tagline="A matte black envelope with a silver seal, oil-painted roses, peonies and gilded frames",
+              corner_tl="platform/themes/midnight-garden/img/florals_tl-720.webp",
+              corner_br="platform/themes/midnight-garden/img/florals_br-720.webp"),
+        Theme(id="coastal-seaside", no="20", folder="20_Coastal_Seaside", name="Coastal Seaside",
+              tagline="A speckled sand envelope with a wave-edged flap and a scallop shell, watercolor sea and shells",
+              corner_tl="platform/themes/coastal-seaside/img/decor_tl-720.webp",
+              corner_br="platform/themes/coastal-seaside/img/decor_br-720.webp"),
+    )},
 }
 # The listing text each tool reads (G091: listing_v3.md replaced listing.md, which stays as the earlier record).
 LISTING_MD = "listing_v3.md"
@@ -194,6 +291,19 @@ def demo_url(t: Theme, base: str = BASE_URL) -> str:
 
 def palette(t: Theme) -> dict:
     return json.loads((t.collection / "palette.json").read_text(encoding="utf-8"))
+
+
+def luminance(hex_colour: str) -> float:
+    h = hex_colour.lstrip("#")
+    r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def is_dark(t: Theme) -> bool:
+    """A dark design (06 navy, 17 emerald, 19 black): its palette's text colour (`ink`) is light and `ivory` is that
+    same light colour, so light paper behind dark ink would be wrong. Listing layouts then use the dark `mist_top` as
+    paper."""
+    return luminance(palette(t)["ink"]) > 0.5
 
 
 def check_url(url: str) -> None:
@@ -290,6 +400,10 @@ def root_css(t: Theme) -> str:
     lines = [f"  --{k.replace('_', '-')}: {pal[k]};" for k in keys if k in pal]
     bg = f"url('{(REPO / t.bg).resolve().as_uri()}')" if t.bg else "none"
     lines.append(f"  --bg-image: {bg};")
+    # the light centre of the background's radial wash: ivory, or for a dark design (light ink) a slightly lighter
+    # shade of its own dark ground, so light text keeps its contrast (G124)
+    if is_dark(t):
+        lines.append(f"  --glow: color-mix(in srgb, {pal['mist_top']} 88%, {pal['ivory']});")
     return ":root {\n" + "\n".join(lines) + "\n}"
 
 
@@ -326,6 +440,8 @@ def template_values(t: Theme, shots: Path, extra: dict[str, str] | None = None, 
         "demo_path": "/" + demo_url(t).split("://", 1)[1].split("/", 1)[1],
         "part.corner_tl": (REPO / t.corner_tl).resolve().as_uri(),
         "part.corner_br": (REPO / t.corner_br).resolve().as_uri(),
+        # what guests tap first, as the listing names it ("envelope", "gatefold", "storybook" …)
+        "opening": t.opening_words["short"], "opening_long": t.opening_words["long"], "Opening": t.opening_words["Long"],
     }
     for s in SHOTS:
         v[f"shot.{s}"] = (shots / f"{s}.jpg").resolve().as_uri()
@@ -358,15 +474,15 @@ def _render_pages(pages: list[tuple[str, Path, int, int]], fonts: bool) -> None:
 
 # ----------------------------------------------------------------------------- steps
 
-def step_capture(t: Theme, base: str) -> None:
+def step_capture(t: Theme, base: str, out: Path | None = None) -> None:
     env = dict(os.environ)
     env.setdefault("NODE_PATH", "/opt/node22/lib/node_modules")
     env.setdefault("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
     # Headless Chromium sometimes loses a renderer ("Target crashed") on the DPR 3 pages of 03 (3 of 8 runs on
     # 2026-10-14, at different steps): the whole capture is repeated, up to 3 times.
     for attempt in range(1, 4):
-        r = subprocess.run(["node", str(CAPTURE), "--theme", t.id, "--out", str(t.package / "shots"), "--public-url", base],
-                           cwd=REPO, env=env)
+        r = subprocess.run(["node", str(CAPTURE), "--theme", t.id, "--out", str(out or t.package / "shots"),
+                            "--public-url", base], cwd=REPO, env=env)
         if r.returncode == 0:
             return
         print(f"capture attempt {attempt} failed for {t.id} (exit {r.returncode})", file=sys.stderr)
@@ -578,8 +694,14 @@ def video_problems(f: dict) -> list[str]:
     return p
 
 
-def step_video(t: Theme, fonts: bool = True) -> Path:
-    shots = t.package / "shots"
+def shots_dir(t: Theme, root: Path | None = None) -> Path:
+    """The theme's captured screens: package/shots/ (G059), or <root>/<folder>/ when the capture was written outside the
+    repository (G124: tools/listing_editorial.py --capture keeps the 30-odd MB of screens per design out of the repo)."""
+    return Path(root) / t.folder if root else t.package / "shots"
+
+
+def step_video(t: Theme, fonts: bool = True, shots: Path | None = None) -> Path:
+    shots = shots or t.package / "shots"
     src = shots / "opening.webm"
     meta = json.loads((shots / "opening.json").read_text())
     size, slot_h = VIDEO["size"], VIDEO["slot_h"]
@@ -980,6 +1102,9 @@ def main(argv=None) -> int:
     ap.add_argument("--theme", required=True, help=f"theme id or 'all' ({', '.join(THEMES)})")
     ap.add_argument("--base-url", default=BASE_URL, help="public base URL of the platform (default: %(default)s)")
     ap.add_argument("--no-fonts", action="store_true", help="do not download Google Fonts (system fonts)")
+    ap.add_argument("--shots-root", type=Path, default=None,
+                    help="video: read <root>/<NN_folder>/ (opening.webm + opening.json) instead of package/shots/ "
+                         "(the folder tools/listing_editorial.py --capture writes)")
     ap.add_argument("--prepublish", action="store_true",
                     help="check: also the live start link and demo, image 8's demo QR and no open [VERIFY]/[PLACEHOLDER] "
                          "markers (must pass before the listing goes up)")
@@ -1003,7 +1128,7 @@ def main(argv=None) -> int:
                 for x in step_images(t, not a.no_fonts):
                     print(f"  {x.relative_to(REPO)}  {x.stat().st_size / 1_000_000:.1f} MB")
             elif s == "video":
-                x = step_video(t, not a.no_fonts)
+                x = step_video(t, not a.no_fonts, shots_dir(t, a.shots_root))
                 print(f"  {x.relative_to(REPO)}  {video_facts(x)}")
             elif s == "pdf":
                 for x in step_pdf(t, not a.no_fonts):

@@ -462,6 +462,8 @@ try {
     await page.fill('#f-date', '2027-09-18');
     await page.fill('#f-ceremony_time', '16:30');
     await waitSaved(page);
+    // G124: no focused field in the picture (the time field kept its hour selected, a blue highlight on "04")
+    await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.());
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
     await shot(page, 'b04_setup_names', 'Buyer: setup step 1 of 3, names and date', { scroll: false });
     // setup 2: the portrait, cropped to the design's frame
@@ -503,7 +505,13 @@ try {
       }
     });
     await maskQr();
-    check('buyer: QR masked in the "live" picture', (await page.locator('[data-lk-qr]').count()) > 0);
+    // G124: since G100/G121 the QR sits folded under "More ways to share" (nothing to mask until it is opened); what
+    // matters is that no real QR is left visible in the picture
+    const qrLeft = await page.evaluate(() => [...document.querySelectorAll('svg[role="img"]')].filter((svg) => {
+      const r = svg.getBoundingClientRect();
+      return r.width >= 80 && Math.abs(r.width - r.height) <= 4 && (svg as any).checkVisibility?.() !== false;
+    }).length);
+    check('buyer: no real QR in the "live" picture', qrLeft === 0, `${await page.locator('[data-lk-qr]').count()} masked`);
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
     await shot(page, 'b10_live_qr', 'Buyer: "Your website is live" with link + QR (the QR is replaced by a labelled box in this picture)', { keep: ['[data-live-link]'] });
     // the editor: Home (how ready, next 3 things), Edit (six pages), a page, Headings & labels, preview, Share
