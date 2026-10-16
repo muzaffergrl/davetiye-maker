@@ -405,10 +405,11 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* -- closings: wood floor + florals_br */
 .wood-end { position: relative; overflow: hidden; isolation: isolate; }
+/* the mask is the wood's own box (qa-kontrol 2026-10-16: a section taller than the image left its top edge opaque) */
 .wood-end::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: url("img/wood_foot-500.webp") 0 100% / 100% auto no-repeat;
-  -webkit-mask: linear-gradient(transparent 40%, #000 82%); mask: linear-gradient(transparent 40%, #000 82%);
+  content: ""; position: absolute; inset: auto 0 0; aspect-ratio: 500 / 206; max-height: 100%; z-index: -1; pointer-events: none;
+  background: url("img/wood_foot-500.webp") 50% 100% / cover no-repeat;
+  -webkit-mask: linear-gradient(transparent, #000 58%); mask: linear-gradient(transparent, #000 58%);
 }
 .foot, .next-sec, .closing { --corner: min(54vw, 320px); padding: 46px 16px calc(var(--corner) * 1.02 + var(--below, 0px)); text-align: center; }
 :is(.foot, .next-sec, .closing) > .page-corner { right: calc(var(--corner) * -.04); bottom: 0; width: var(--corner); }
@@ -456,6 +457,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .line-row .twine { position: absolute; left: 50%; top: 0; width: max(100%, 600px); height: auto; translate: -50% 0; pointer-events: none;
     filter: drop-shadow(0 4px 3px rgba(40, 25, 10, .35)); }
 .line-row .print { width: var(--fw); margin-top: calc(min(100vw, 600px) / 6.147 * .82); }
+.lr-1 .print { width: calc(var(--fw) * var(--sg, 1)); } /* site.js folds (qa-kontrol 2026-10-16) */
 .lr-l .print { translate: -5vw 0; } .lr-r .print { translate: 5vw 0; }
 /* GPT accent beside the print (W1.3) */
 .tuck { position: absolute; display: block; height: auto; pointer-events: none; filter: drop-shadow(0 3px 3px rgba(40, 25, 10, .3)); }

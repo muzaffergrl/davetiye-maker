@@ -111,6 +111,18 @@ arası view transition), temanın Vercel'de yayını, gerçek alıcı fotoğrafl
   `platform/tests/design-themes.ts:25` listesi `emerald-gold-estate`'i zaten içeriyor; G068/G069/G075 ortak testleri tema
   klasörü gelince kendiliğinden kapsıyor — liste düzenlemesi gerekmez. Satış sitesine (G093 benzeri) 17'nin eklenmesi ayrı görev.
 
+### qa-kontrol 2026-10-16: bulgular + düzeltmeler (G101 oturum A)
+- **Ortak (orta) — program satırı fold boşluğu:** `details.html`'de `.sched-row`'lar `data-fold` birimi olmaktan çıktı (19'daki çözüm); itilen satır boyalı kartta ~130 px yazısız delik bırakıyordu. `stress_details_360.png`: 10 satır eşit aralıklı, boşluk yok. Test: `sched-row[data-fold]` = 0.
+- **Düşük — h1 (stres) ve RSVP (tasarım aralığı) 375×553'te ilk ekranın altında:** 15'teki gibi. `fold` isimleri (h1) artık hiç itmiyor (`cut` `.names`'i atlar) → zorlama kaydında h1 ilk ekranda başlar (uzun hâli kaydırılır, §12 kaydında izinli); `fitNames`'e `is-short` adımı eklendi: dikey kısa telefonda kart küçülür (`clamp(100px, 20svh × .612, 126px)`), ardından `is-long` (sayaç hapın altına, kaydırınca). Taban 34 px kaldı (isimler zaten 3 satır). Sonuç: `range_home_375x553` RSVP alt 445 (nav 491); `stress_home_375x553` h1 223'te başlıyor. `site.js` 35 822 B (≤ 35 KiB; bir yorum kısaltıldı).
+- **Düşük — "TOGETꞪER" — kalıyor (gerekçeli):** bu bir bağ (ligatür) değil, **Cinzel Decorative'in küçük harf `h` glifinin kendisi** (fontun süslü harfi; "The" de "TꞪE" çizilir). `font-variant-ligatures: no-common-ligatures / no-discretionary-ligatures / none` ve `font-feature-settings: "liga" 0, "calt" 0, "dlig" 0, "salt" 0` tek tek denendi: hiçbiri glifi değiştirmiyor (izole sayfada görüntülendi). Tek harfi sade Cinzel'den almak (`text=h` alt kümesi / span) denendi: Cinzel'in küçük `h`'si daha kısa, "ThE" gibi boy uyuşmazlığı çıkıyor → uygulanmadı. Gerçek çözüm başlık fontu kararıdır (ör. tamamen Cinzel'e geçmek, tasarım değişir) → entegratör/kullanıcı kararı.
+- **Önerilen görev (entegratör açar):** 17 başlık fontu kararı — Cinzel Decorative'in süslü `h`'si ("TꞪE", "TOGETꞪER") istenmiyorsa başlıkları sade Cinzel'e (aynı aile, süssüz) geçirip comp ile yeniden karşılaştırma.
+- Komutlar (2026-10-16, dal `claude/g101a-qa`): `theme-check --theme emerald-gold-estate --stress` **128 geçti, 0 hata, 0 uyarı**
+  (`previews/g417/checks.json`) · `g051-browser` **44/44** · `final-smoke` **45/45** · `npm test` **1208/1208** · `typecheck` temiz ·
+  `build` + trace-check temiz (21 tema). Zarf → home 4628 ms; ilk görünüm 390×844 DPR 3: index 858 / home 563 KB yer tutucu, 923 / 962 KB örnek fotoğrafla.
+- Bakılan görüntüler (Read): `stress_details_360`, `range_home_375x553`, `stress_home_375x553`, TH test görüntüleri.
+- Denenmedi: gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ. Bu bölüm qa-kontrol
+  alt-ajanının yeniden incelemesi **değildir**; yeniden inceleme entegratörde.
+
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)

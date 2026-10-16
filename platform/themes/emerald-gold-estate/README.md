@@ -93,13 +93,16 @@ payını denetler (≤ %0,05, `manifest.ph_*.gold_share`).
 - Süreler (docs/11 §8): her sahnenin son adımı ≤ 3000 ms, tek giriş 600–1800 ms.
 
 ## İlk ekranlar ve yatay telefon
-Önceki temaların çözülmüş adımları korunur: `fitNames` (isimler küçülür → `.is-tight` + isimler **34 px tabanı** → `.is-long` (sayaç
-hapın altına) → hero kaydırılır), ardından `fold`. Bu tasarıma özgü: card_small uzun (0,612) — 9:16'dan basık telefonlarda kart
+Önceki temaların çözülmüş adımları korunur: `fitNames` (isimler küçülür → `.is-tight` + isimler **34 px tabanı** → `.is-short` (dikey kısa
+telefonda kart `clamp(100px, 20svh × .612, 126px)`) → `.is-long` (sayaç hapın altına) → hero kaydırılır), ardından `fold` (isimler/h1
+hiç itilmez). qa-kontrol 2026-10-16: 375×553'te tasarım aralığında RSVP ilk ekranın altındaydı → artık ilk ekranda; zorlama kaydında
+h1 tamamen ilk ekranın altındaydı → ilk ekranda başlıyor (uzun hâli nav'ın altından kayar, §12 kaydında izinli). Bu tasarıma özgü: card_small uzun (0,612) — 9:16'dan basık telefonlarda kart
 `clamp(126px, 30svh × .612, …)`; yüksekliği ≤ 600 px ekranlarda nav'ın eğrelti süsü gizlenir (yalnız etiketler) → 375×553 ve 360×640'ta
 demo hero'nun tamamı nav'ın üstünde. Kısa yatay (`min-aspect-ratio: 1/1` ve yükseklik ≤ 620 px) ızgara: kart solda, isimler · tarih ·
 mekân · şehir · sayaç · hap sağda. **İç sayfalar** (`folds`): her ilk ekran öğesi ya nav'ın üstünde biter ya da ilk ekranın tamamen
 altında başlar (`[data-fold]`: story'de alt başlık, giriş cümlesi, her çerçeve — ≥ 720 px'te duvar bir bütün —, sonraki bölüm;
-details'te kart başlığı, her program satırı, takvim çifti, mekân çerçevesi; rsvp'de başlık, son tarih, hap, bekleme satırı, imza birimi,
+details'te kart başlığı, takvim çifti, mekân çerçevesi — program satırları birim değil (itilen satır kartta delik bırakıyordu,
+qa-kontrol 2026-10-16); rsvp'de başlık, son tarih, hap, bekleme satırı, imza birimi,
 form satırları). İmza katlanmadan önce `--sg` 1 → 0,72 küçülür. **Zarf sayfası** (`envFit`): sahnenin boş üstü (`.6806 × --w`) ölçülen
 başlığın altına girer; "Tap to open" ilk ekranda bitmiyorsa sahne küçülür (`--ok`, en az 0,6).
 

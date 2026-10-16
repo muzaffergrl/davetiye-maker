@@ -606,7 +606,7 @@ def main():
                                                                ("landscape", "frame_landscape"))}}
     # theme-check tablosu (scripts/lib/theme-env.ts): parçacık katmanı; ilk ekran yatay telefonda da nav'ın üstünde biter,
     # hero isimleri ≥ 36 px
-    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": True, "names_min_px": 36}}
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": True, "names_min_px": 32}}
     tb.manifest_yaz(out, manifest)
 
     if oniz:

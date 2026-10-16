@@ -825,7 +825,8 @@ test('inner pages (story, details, rsvp): the velvet of W1.3–W1.5 behind the f
 test('inner pages: nothing half under the nav on the first screen — fold units, one small lift, the desktop wall row', () => {
   const d = render('details').$;
   assert.equal(d('.day-card h1.card-title[data-fold]').length, 1);
-  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, demo().schedule.length, 'each schedule row');
+  assert.equal(d('.sched-list > li.sched-row').length, demo().schedule.length);
+  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, 0, 'schedule rows are not fold units: a pushed row left a blank hole in the painted card (qa-kontrol 2026-10-16)');
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 5, 'title, reply-by, pill, the wait line, the signature');
@@ -990,7 +991,10 @@ test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 34 p
   assert.ok(floor && Number(floor[1]) >= 34);
   assert.equal(MANIFEST.theme_check.first_screen.names_min_px, Number(floor![1]));
   assert.equal(MANIFEST.theme_check.first_screen.landscape, true);
-  assert.match(js, /for \(const \[cls, navFloor\] of \[\[\[\], 0\.76\], \[\['is-tight'\], 0\], \[\['is-tight', 'is-long'\], 0\], \[\[\], 1\]\]\)/);
+  assert.match(js, /for \(const \[cls, navFloor\] of \[\[\[\], 0\.76\], \[\['is-tight'\], 0\], \[\['is-tight', 'is-short'\], 0\], \[\['is-tight', 'is-short', 'is-long'\], 0\], \[\[\], 1\]\]\)/);
+  // qa-kontrol 2026-10-16: on a short phone the card shrinks so the RSVP stays on the first screen; the names are never pushed
+  assert.match(css, /@media \(max-aspect-ratio: 3\/4\) \{ \.hero\.is-short \.hero-card \{ width: clamp\(/);
+  assert.match(js, /const cut = \(\) => pieces\(\)\.filter\(\(c\) => !c\.matches\('\.names'\) && bottom\(c\) > limit\)/);
   assert.match(js, /p\.style\.cssText = 'position:fixed;height:100svh'/);
   assert.match(js, /const v = sv\(\), limit = v - navH\(\) - 8, below = v \+ 12/);
   assert.match(css, /\.hero \.scene-bg \{ position: absolute; z-index: 0; bottom: var\(--fold, 0px\); overflow: clip visible; \}/, 'no straight cut under a preview bar');
@@ -1001,7 +1005,8 @@ test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 34 p
   for (const [sel, row] of [['.hero .names', 2], ['.hero-date', 3], ['.hero-venue', 4], ['.hero-city', 5], ['.countdown', 6], ['.hero-cta', 7]] as const) {
     assert.match(land![1], new RegExp(`\\n  ${sel.replace(/\./g, '\\.')} \\{ grid-area: ${row} \\/ 2;`), `${sel} in row ${row} beside the card`);
   }
-  const widths = [...css.matchAll(/\.hero-card \{ width: (clamp\((\d+)px[^;]+);/g)];
+  const widths = [...css.matchAll(/(?<!is-short )\.hero-card \{ width: (clamp\((\d+)px[^;]+);/g)];
+  assert.match(css, /\.hero\.is-short \.hero-card \{ width: clamp\(100px, /, 'short phones only (fitNames is-short): ≥ 100 px, the card copy still ≥ 11 px (fitCopy)');
   assert.ok(widths.length >= 4 && widths.every((w) => Number(w[2]) >= 126), widths.map((w) => w[1]).join(' | '));
   for (const sel of ['.card-copy .kicker', '.cd-lbl', '.cue', '.invite-text .host', '.dateblock .wd', '.sched-row .time', '.dline .mon, .dline .yr', '.kicker', '.site-nav a', '.sig-unit .love']) {
     const r = rule(sel);

@@ -100,7 +100,7 @@
     {
       "name": "buyer: edit link shown",
       "ok": true,
-      "detail": "http://127.0.0.1:3470/edit/elena-and-marco?k=…"
+      "detail": "http://127.0.0.1:3321/edit/elena-and-marco?k=…"
     },
     {
       "name": "buyer: site not public before Publish",
@@ -172,7 +172,7 @@
     {
       "name": "buyer site: uploaded portrait is public after publishing",
       "ok": true,
-      "detail": "/media/edfebc87-9f59-4c47-a94d-3fd30b371932/dfe4d319f9e90584fa84f4e5e58c71cc-1024w.jpg"
+      "detail": "/media/23d17136-991b-4d8c-8302-3facce66611c/f77fab8da5aee0c1c01a00d914ddfb20-1024w.jpg"
     },
     {
       "name": "buyer site: no \"Your photo here\" label",
@@ -189,7 +189,7 @@
     {
       "name": "buyer: the reply shows in the panel",
       "ok": true,
-      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 184 days. Last day: Saturday, April 17, 2027 (UTC time). 1 new r"
+      "detail": "0 Guests coming 1 Not coming 1 Replies Replies close in 183 days. Last day: Saturday, April 17, 2027 (UTC time). 1 new r"
     },
     {
       "name": "buyer: panel has no overflow at the end",

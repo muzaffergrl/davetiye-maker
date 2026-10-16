@@ -798,7 +798,8 @@ test('inner pages (story, details, rsvp): the blush mist of W1.3–W1.5 behind t
 test('inner pages: nothing half under the nav on the first screen — fold units, one small lift', () => {
   const d = render('details').$;
   assert.equal(d('.day-card h1.card-title[data-fold]').length, 1);
-  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, demo().schedule.length, 'each schedule row');
+  assert.equal(d('.sched-list > li.sched-row').length, demo().schedule.length);
+  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, 0, 'schedule rows are not fold units: a pushed row left a blank hole in the painted card (qa-kontrol 2026-10-16)');
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 5, 'title, reply-by, pill, the wait line, the signature');
@@ -952,14 +953,17 @@ test('home: the comp hero, the invitation card with MONTH | day | YEAR, two blos
   }
 });
 
-test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 36 px, landscape grid, ≥ 11 px text, sizes', () => {
+test('lessons kept: first screen above the nav (fitNames + fold), names ≥ 32 px, landscape grid, ≥ 11 px text, sizes', () => {
   const css = cssText().replace(/\/\*[\s\S]*?\*\//g, '');
   const js = jsText();
   assert.match(css, /a, button, summary, label, \[role="button"\] \{ -webkit-tap-highlight-color: transparent; \}/);
   const floor = /\['\.hero \.names', 3\.2, 0\.3, (\d+)\]/.exec(js);
-  assert.ok(floor && Number(floor[1]) >= 36);
+  assert.ok(floor && Number(floor[1]) >= 32, 'qa-kontrol 2026-10-16: 32 px so long names take 2–3 lines on 375×553');
   assert.deepEqual(MANIFEST.theme_check.first_screen, { landscape: true, names_min_px: Number(floor![1]) });
-  assert.match(js, /for \(const \[cls, navFloor\] of \[\[\[\], 0\.76\], \[\['is-tight'\], 0\], \[\['is-tight', 'is-long'\], 0\], \[\[\], 1\]\]\)/);
+  assert.match(js, /for \(const \[cls, navFloor\] of \[\[\[\], 0\.76\], \[\['is-tight'\], 0\], \[\['is-tight', 'is-short'\], 0\], \[\['is-tight', 'is-short', 'is-long'\], 0\], \[\[\], 1\]\]\)/);
+  // qa-kontrol 2026-10-16: on a short phone the card shrinks so the RSVP stays on the first screen; the names are never pushed
+  assert.match(css, /@media \(max-aspect-ratio: 3\/4\) \{ \.hero\.is-short \.hero-card \{ width: clamp\(/);
+  assert.match(js, /const cut = \(\) => pieces\(\)\.filter\(\(c\) => !c\.matches\('\.names'\) && bottom\(c\) > limit\)/);
   assert.match(js, /p\.style\.cssText = 'position:fixed;height:100svh'/);
   assert.match(js, /const v = sv\(\), limit = v - navH\(\) - 8, below = v \+ 12/);
   assert.match(css, /\.hero \.scene-bg \{ position: absolute; z-index: 0; bottom: var\(--fold, 0px\); \}/);

@@ -60,9 +60,9 @@
   "home@844×390: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @667×375: home-hero (22 pieces, CTA \"RSVP\" bottom 281, names 37.5 px) ends at 295, above the nav (top 319)",
   "home@667×375: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @360×640 (design range): names 34 px (≥ 34); nothing partly under the nav (top 571): the first screen ends at 530, the hero goes on below it from 652 (≥ 640); CTA \"RSVP\" bottom 530",
+  "home @360×640 (design range): names 34 px (≥ 34); nothing partly under the nav (top 571): the first screen ends at 550; CTA \"RSVP\" bottom 550",
   "home@360×640 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553 (design range): names 34 px (≥ 34); nothing partly under the nav (top 491): the first screen ends at 439, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 664",
+  "home @375×553 (design range): names 34 px (≥ 34); nothing partly under the nav (top 491): the first screen ends at 445, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 445",
   "home@375×553 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @844×390 (design range): names 36.7 px (≥ 34); nothing partly under the nav (top 334): the first screen ends at 322; CTA \"RSVP\" bottom 322",
   "home@844×390 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
@@ -70,14 +70,14 @@
   "home@667×375 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @360×640 (stress record): names 34 px (≥ 34); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 872, nav top 571)",
   "home@360×640 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553 (stress record): names 34 px (≥ 34); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 1073, nav top 491)",
+  "home @375×553 (stress record): names 34 px (≥ 34); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 772, nav top 491)",
   "home@375×553 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @844×390 (stress record): names 34 px (≥ 34); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 505, nav top 334)",
   "home@844×390 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @667×375 (stress record): names 34 px (≥ 34); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 488, nav top 319)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 230×48, rsvp \"Replay the envelope\" 189×48",
-  "envelope → /evelyn-and-alexander/home in 4660 ms, card transition flag set",
+  "envelope → /evelyn-and-alexander/home in 4628 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-05-29 16:00 America/Chicago = 2027-05-29 21:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-05-29T22:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-06-03T21:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (236 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (156 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 5 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -131,7 +131,7 @@
   "home first view (390×844, DPR 3, placeholders): 563 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 923 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 962 KB",
-  "recording: previews/g417/opening_390x844.mp4 (2840 KB, lead-in 0.86 s cut, first frame mean 16,42,24) — tap → opening → home → story → details"
+  "recording: previews/g417/opening_390x844.mp4 (2966 KB, lead-in 0.48 s cut, first frame mean 16,42,23) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -178,7 +178,7 @@
      },
      {
       "box": "display names",
-      "edge": 1.88,
+      "edge": 1.87,
       "dark": 0.013
      },
      {
@@ -450,23 +450,14 @@
     "screen": 640,
     "bottomNav": true,
     "items": 20,
-    "lowest": 690,
-    "above": 530,
-    "below": 652,
+    "lowest": 550,
+    "above": 550,
+    "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 530
+     "bottom": 550
     },
-    "bad": [
-     "span.cd-num \"349\" bottom 674",
-     "span.cd-lbl \"Days\" bottom 690",
-     "span.cd-num \"10\" bottom 674",
-     "span.cd-lbl \"Hours\" bottom 690",
-     "span.cd-num \"05\" bottom 674",
-     "span.cd-lbl \"Minutes\" bottom 690",
-     "span.cd-num \"15\" bottom 674",
-     "span.cd-lbl \"Seconds\" bottom 690"
-    ],
+    "bad": [],
     "partly": [],
     "names": 34
    },
@@ -479,23 +470,22 @@
     "screen": 553,
     "bottomNav": true,
     "items": 20,
-    "lowest": 664,
-    "above": 439,
+    "lowest": 603,
+    "above": 445,
     "below": 565,
     "cta": {
      "text": "RSVP",
-     "bottom": 664
+     "bottom": 445
     },
     "bad": [
-     "span.cd-num \"349\" bottom 591",
-     "span.cd-lbl \"Days\" bottom 607",
-     "span.cd-num \"10\" bottom 591",
-     "span.cd-lbl \"Hours\" bottom 607",
-     "span.cd-num \"05\" bottom 591",
-     "span.cd-lbl \"Minutes\" bottom 607",
-     "span.cd-num \"09\" bottom 591",
-     "span.cd-lbl \"Seconds\" bottom 607",
-     "a.btn \"RSVP\" bottom 664"
+     "span.cd-num \"348\" bottom 587",
+     "span.cd-lbl \"Days\" bottom 603",
+     "span.cd-num \"09\" bottom 587",
+     "span.cd-lbl \"Hours\" bottom 603",
+     "span.cd-num \"34\" bottom 587",
+     "span.cd-lbl \"Minutes\" bottom 603",
+     "span.cd-num \"00\" bottom 587",
+     "span.cd-lbl \"Seconds\" bottom 603"
     ],
     "partly": [],
     "names": 34
@@ -559,13 +549,13 @@
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 730",
      "p.hero-city.in.done \"Lake Geneva, Wisconsin\" bottom 754",
-     "span.cd-num \"226\" bottom 796",
+     "span.cd-num \"225\" bottom 796",
      "span.cd-lbl \"Days\" bottom 812",
-     "span.cd-num \"10\" bottom 796",
+     "span.cd-num \"09\" bottom 796",
      "span.cd-lbl \"Hours\" bottom 812",
-     "span.cd-num \"04\" bottom 796",
+     "span.cd-num \"33\" bottom 796",
      "span.cd-lbl \"Minutes\" bottom 812",
-     "span.cd-num \"50\" bottom 796",
+     "span.cd-num \"42\" bottom 796",
      "span.cd-lbl \"Seconds\" bottom 812",
      "a.btn \"RSVP\" bottom 872"
     ],
@@ -581,33 +571,33 @@
     "screen": 553,
     "bottomNav": true,
     "items": 22,
-    "lowest": 1073,
-    "above": 216,
-    "below": 560,
+    "lowest": 772,
+    "above": 374,
+    "below": 565,
     "cta": {
      "text": "RSVP",
-     "bottom": 1073
+     "bottom": 772
     },
     "bad": [
-     "span \"Charlotte-Elizabeth Anne\" bottom 716",
-     "span.amp \"&\" bottom 712",
-     "span \"Maximilian Alexander Fit\" bottom 863",
-     "p.kicker.hero-date.in.done \"Saturday · May 29, 2027\" bottom 887",
-     "span \"Saturday\" bottom 884",
-     "span.nowrap \"May 29, 2027\" bottom 884",
-     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 939",
-     "p.hero-city.in.done \"Lake Geneva, Wisconsin\" bottom 964",
-     "span.cd-num \"226\" bottom 1001",
-     "span.cd-lbl \"Days\" bottom 1017",
-     "span.cd-num \"10\" bottom 1001",
-     "span.cd-lbl \"Hours\" bottom 1017",
-     "span.cd-num \"04\" bottom 1001",
-     "span.cd-lbl \"Minutes\" bottom 1017",
-     "span.cd-num \"44\" bottom 1001",
-     "span.cd-lbl \"Seconds\" bottom 1017",
-     "a.btn \"RSVP\" bottom 1073"
+     "span \"Maximilian Alexander Fit\" bottom 521",
+     "p.kicker.hero-date.in.done \"Saturday · May 29, 2027\" bottom 586",
+     "span \"Saturday\" bottom 583",
+     "span.nowrap \"May 29, 2027\" bottom 583",
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 638",
+     "p.hero-city.in.done \"Lake Geneva, Wisconsin\" bottom 663",
+     "span.cd-num \"225\" bottom 700",
+     "span.cd-lbl \"Days\" bottom 716",
+     "span.cd-num \"09\" bottom 700",
+     "span.cd-lbl \"Hours\" bottom 716",
+     "span.cd-num \"33\" bottom 700",
+     "span.cd-lbl \"Minutes\" bottom 716",
+     "span.cd-num \"36\" bottom 700",
+     "span.cd-lbl \"Seconds\" bottom 716",
+     "a.btn \"RSVP\" bottom 772"
     ],
-    "partly": [],
+    "partly": [
+     "span \"Maximilian Alexander Fit\" 365–521"
+    ],
     "names": 34
    },
    {
@@ -627,13 +617,13 @@
      "bottom": 505
     },
     "bad": [
-     "span.cd-num \"226\" bottom 427",
+     "span.cd-num \"225\" bottom 427",
      "span.cd-lbl \"Days\" bottom 445",
-     "span.cd-num \"10\" bottom 427",
+     "span.cd-num \"09\" bottom 427",
      "span.cd-lbl \"Hours\" bottom 445",
-     "span.cd-num \"04\" bottom 427",
+     "span.cd-num \"33\" bottom 427",
      "span.cd-lbl \"Minutes\" bottom 445",
-     "span.cd-num \"38\" bottom 427",
+     "span.cd-num \"30\" bottom 427",
      "span.cd-lbl \"Seconds\" bottom 445",
      "a.btn \"RSVP\" bottom 505"
     ],
@@ -657,13 +647,13 @@
      "bottom": 488
     },
     "bad": [
-     "span.cd-num \"226\" bottom 412",
+     "span.cd-num \"225\" bottom 412",
      "span.cd-lbl \"Days\" bottom 430",
-     "span.cd-num \"10\" bottom 412",
+     "span.cd-num \"09\" bottom 412",
      "span.cd-lbl \"Hours\" bottom 430",
-     "span.cd-num \"04\" bottom 412",
+     "span.cd-num \"33\" bottom 412",
      "span.cd-lbl \"Minutes\" bottom 430",
-     "span.cd-num \"32\" bottom 412",
+     "span.cd-num \"24\" bottom 412",
      "span.cd-lbl \"Seconds\" bottom 430",
      "a.btn \"RSVP\" bottom 488"
     ],
@@ -671,7 +661,7 @@
     "names": 34
    }
   ],
-  "envelope_to_home_ms": 4660,
+  "envelope_to_home_ms": 4628,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -776,7 +766,7 @@
    ],
    [
     "/themes/emerald-gold-estate/site.css",
-    45817
+    45969
    ],
    [
     "/themes/emerald-gold-estate/img/env_cflap-869.webp",
@@ -799,7 +789,7 @@
    ],
    [
     "/themes/emerald-gold-estate/site.css",
-    45817
+    45969
    ],
    [
     "https://fonts.gstatic.com/s/cormorantinfant/v22/HhyJU44g9vKiM1sORYSiWeAsLN997_Il2xME.woff2",
@@ -807,7 +797,7 @@
    ],
    [
     "/themes/emerald-gold-estate/site.js",
-    35783
+    35822
    ],
    [
     "https://fonts.gstatic.com/s/cormorantinfant/v22/HhyPU44g9vKiM1sORYSiWeAsLN997_cV2Q.woff2",
@@ -841,7 +831,7 @@
     80084
    ],
    [
-    "/media/345125bf-ee0c-44e9-a069-b9b2dc267da4/5235d4e3dbaaf872b5b7f3c14454f5db-640w.jpg",
+    "/media/9d48f614-93e6-4274-8cdb-d486026da690/416012a9cbd9ab464e14c433777d4c9f-640w.jpg",
     67978
    ],
    [
@@ -850,13 +840,13 @@
    ],
    [
     "/themes/emerald-gold-estate/site.css",
-    45817
+    45969
    ]
   ],
   "first_view_home_kb_photos": 962,
   "first_view_home_files_photos": [
    [
-    "/media/345125bf-ee0c-44e9-a069-b9b2dc267da4/99ba5ec5c700b4ad9e7c7f9e53564817-1280w.jpg",
+    "/media/9d48f614-93e6-4274-8cdb-d486026da690/f018534f97d9d5c0e3cc4ca07aa87055-1280w.jpg",
     275077
    ],
    [
@@ -868,11 +858,11 @@
     80084
    ],
    [
-    "/media/345125bf-ee0c-44e9-a069-b9b2dc267da4/3b33e11ac2a018a4f805be2d98d85a24-640w.jpg",
+    "/media/9d48f614-93e6-4274-8cdb-d486026da690/a3b21ae4c49055a4ae70761990488a60-640w.jpg",
     72191
    ],
    [
-    "/media/345125bf-ee0c-44e9-a069-b9b2dc267da4/5235d4e3dbaaf872b5b7f3c14454f5db-640w.jpg",
+    "/media/9d48f614-93e6-4274-8cdb-d486026da690/416012a9cbd9ab464e14c433777d4c9f-640w.jpg",
     67978
    ],
    [
@@ -881,22 +871,22 @@
    ],
    [
     "/themes/emerald-gold-estate/site.css",
-    45817
+    45969
    ],
    [
     "https://fonts.gstatic.com/s/cormorantinfant/v22/HhyJU44g9vKiM1sORYSiWeAsLN997_Il2xME.woff2",
     36832
    ]
   ],
-  "video_kb": 2840,
+  "video_kb": 2966,
   "video_first_frame": {
-   "lead_in_s": 0.86,
+   "lead_in_s": 0.48,
    "mean_rgb": [
     16,
     42,
-    24
+    23
    ],
-   "stdev": 45
+   "stdev": 43
   },
   "compare": {
    "source": "w1",

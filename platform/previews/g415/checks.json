@@ -60,24 +60,24 @@
   "home@844×390: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "home @667×375: home-hero (23 pieces, CTA \"RSVP\" bottom 278, names 37.5 px) ends at 299, above the nav (top 314)",
   "home@667×375: no overflow, 27 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @360×640 (design range): names 36 px (≥ 36); nothing partly under the nav (top 571): the first screen ends at 519, the hero goes on below it from 652 (≥ 640); CTA \"RSVP\" bottom 756",
+  "home @360×640 (design range): names 32.5 px (≥ 32); nothing partly under the nav (top 571): the first screen ends at 556; CTA \"RSVP\" bottom 556",
   "home@360×640 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553 (design range): names 36 px (≥ 36); nothing partly under the nav (top 484): the first screen ends at 431, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 744",
+  "home @375×553 (design range): names 32.1 px (≥ 32); nothing partly under the nav (top 484): the first screen ends at 432, the hero goes on below it from 565 (≥ 553); CTA \"RSVP\" bottom 432",
   "home@375×553 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @844×390 (design range): names 39 px (≥ 36); nothing partly under the nav (top 329): the first screen ends at 314; CTA \"RSVP\" bottom 311",
+  "home @844×390 (design range): names 34.3 px (≥ 32); nothing partly under the nav (top 329): the first screen ends at 319; CTA \"RSVP\" bottom 319",
   "home@844×390 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @667×375 (design range): names 36 px (≥ 36); nothing partly under the nav (top 314): the first screen ends at 300; CTA \"RSVP\" bottom 300",
+  "home @667×375 (design range): names 35.3 px (≥ 32); nothing partly under the nav (top 314): the first screen ends at 299; CTA \"RSVP\" bottom 299",
   "home@667×375 (design range): no overflow, 33 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @360×640 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 1254, nav top 571)",
+  "home @360×640 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 865, nav top 571)",
   "home@360×640 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @375×553 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 1156, nav top 484)",
+  "home @375×553 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 789, nav top 484)",
   "home@375×553 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @844×390 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 542, nav top 329)",
+  "home @844×390 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 318, nav top 329)",
   "home@844×390 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
-  "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 600, nav top 314)",
+  "home @667×375 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 599, nav top 314)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 60×44, home \"Replay the envelope\" 219×46, rsvp \"Replay the envelope\" 181×46",
-  "envelope → /hana-and-ethan/home in 4917 ms, card transition flag set",
+  "envelope → /hana-and-ethan/home in 4671 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (13 steps)",
   "countdown target from the platform: 2027-04-03 16:00 America/New_York = 2027-04-03 20:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-04-03T21:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-04-08T20:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (254 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (181 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -131,7 +131,7 @@
   "home first view (390×844, DPR 3, placeholders): 803 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 847 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1322 KB",
-  "recording: previews/g415/opening_390x844.mp4 (2839 KB, lead-in 0.55 s cut, first frame mean 220,196,199) — tap → opening → home → story → details"
+  "recording: previews/g415/opening_390x844.mp4 (2758 KB, lead-in 0.54 s cut, first frame mean 220,196,199) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -450,27 +450,16 @@
     "screen": 640,
     "bottomNav": true,
     "items": 23,
-    "lowest": 756,
-    "above": 519,
-    "below": 652,
+    "lowest": 556,
+    "above": 556,
+    "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 756
+     "bottom": 556
     },
-    "bad": [
-     "span.cd-num \"349\" bottom 680",
-     "span.cd-lbl \"Days\" bottom 696",
-     "span.cd-num \"05\" bottom 680",
-     "span.cd-lbl \"Hours\" bottom 696",
-     "span.cd-num \"57\" bottom 680",
-     "span.cd-lbl \"Minutes\" bottom 696",
-     "span.cd-num \"19\" bottom 680",
-     "span.cd-lbl \"Seconds\" bottom 696",
-     "a.btn.btn-bloom bottom 756",
-     "span \"RSVP\" bottom 740"
-    ],
+    "bad": [],
     "partly": [],
-    "names": 36
+    "names": 32.5
    },
    {
     "at": "375x553",
@@ -480,30 +469,26 @@
     "navTop": 484,
     "screen": 553,
     "bottomNav": true,
-    "items": 23,
-    "lowest": 744,
-    "above": 431,
+    "items": 21,
+    "lowest": 603,
+    "above": 432,
     "below": 565,
     "cta": {
      "text": "RSVP",
-     "bottom": 744
+     "bottom": 432
     },
     "bad": [
-     "p.hero-venue.in.done \"The Orangery and Walled \" bottom 612",
-     "p.hero-city.in.done \"Washington, D.C.\" bottom 636",
-     "span.cd-num \"349\" bottom 672",
-     "span.cd-lbl \"Days\" bottom 688",
-     "span.cd-num \"05\" bottom 672",
-     "span.cd-lbl \"Hours\" bottom 688",
-     "span.cd-num \"57\" bottom 672",
-     "span.cd-lbl \"Minutes\" bottom 688",
-     "span.cd-num \"12\" bottom 672",
-     "span.cd-lbl \"Seconds\" bottom 688",
-     "a.btn.btn-bloom bottom 744",
-     "span \"RSVP\" bottom 728"
+     "span.cd-num \"348\" bottom 587",
+     "span.cd-lbl \"Days\" bottom 603",
+     "span.cd-num \"08\" bottom 587",
+     "span.cd-lbl \"Hours\" bottom 603",
+     "span.cd-num \"53\" bottom 587",
+     "span.cd-lbl \"Minutes\" bottom 603",
+     "span.cd-num \"07\" bottom 587",
+     "span.cd-lbl \"Seconds\" bottom 603"
     ],
     "partly": [],
-    "names": 36
+    "names": 32.1
    },
    {
     "at": "844x390",
@@ -514,16 +499,16 @@
     "screen": 390,
     "bottomNav": true,
     "items": 23,
-    "lowest": 314,
-    "above": 314,
+    "lowest": 319,
+    "above": 319,
     "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 311
+     "bottom": 319
     },
     "bad": [],
     "partly": [],
-    "names": 39
+    "names": 34.3
    },
    {
     "at": "667x375",
@@ -534,16 +519,16 @@
     "screen": 375,
     "bottomNav": true,
     "items": 23,
-    "lowest": 300,
-    "above": 300,
+    "lowest": 299,
+    "above": 299,
     "below": null,
     "cta": {
      "text": "RSVP",
-     "bottom": 300
+     "bottom": 299
     },
     "bad": [],
     "partly": [],
-    "names": 36
+    "names": 35.3
    },
    {
     "at": "360x640",
@@ -554,35 +539,29 @@
     "screen": 640,
     "bottomNav": true,
     "items": 23,
-    "lowest": 1254,
-    "above": 231,
+    "lowest": 865,
+    "above": 545,
     "below": 652,
     "cta": {
      "text": "RSVP",
-     "bottom": 1254
+     "bottom": 865
     },
     "bad": [
-     "span \"Charlotte-Elizabeth Anne\" bottom 833",
-     "span.amp \"&\" bottom 827",
-     "span \"Maximilian Alexander Fit\" bottom 1015",
-     "p.kicker.hero-date.in.done \"Saturday · April 3, 2027\" bottom 1037",
-     "span \"Saturday\" bottom 1035",
-     "span.nowrap \"April 3, 2027\" bottom 1035",
-     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 1114",
-     "p.hero-city.in.done \"Washington, D.C.\" bottom 1137",
-     "span.cd-num \"170\" bottom 1179",
-     "span.cd-lbl \"Days\" bottom 1195",
-     "span.cd-num \"05\" bottom 1179",
-     "span.cd-lbl \"Hours\" bottom 1195",
-     "span.cd-num \"56\" bottom 1179",
-     "span.cd-lbl \"Minutes\" bottom 1195",
-     "span.cd-num \"53\" bottom 1179",
-     "span.cd-lbl \"Seconds\" bottom 1195",
-     "a.btn.btn-bloom bottom 1254",
-     "span \"RSVP\" bottom 1238"
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 724",
+     "p.hero-city.in.done \"Washington, D.C.\" bottom 747",
+     "span.cd-num \"169\" bottom 789",
+     "span.cd-lbl \"Days\" bottom 805",
+     "span.cd-num \"08\" bottom 789",
+     "span.cd-lbl \"Hours\" bottom 805",
+     "span.cd-num \"52\" bottom 789",
+     "span.cd-lbl \"Minutes\" bottom 805",
+     "span.cd-num \"49\" bottom 789",
+     "span.cd-lbl \"Seconds\" bottom 805",
+     "a.btn.btn-bloom bottom 865",
+     "span \"RSVP\" bottom 849"
     ],
     "partly": [],
-    "names": 36
+    "names": 32
    },
    {
     "at": "375x553",
@@ -593,35 +572,32 @@
     "screen": 553,
     "bottomNav": true,
     "items": 23,
-    "lowest": 1156,
-    "above": 221,
+    "lowest": 789,
+    "above": 470,
     "below": 565,
     "cta": {
      "text": "RSVP",
-     "bottom": 1156
+     "bottom": 789
     },
     "bad": [
-     "span \"Charlotte-Elizabeth Anne\" bottom 746",
-     "span.amp \"&\" bottom 740",
-     "span \"Maximilian Alexander Fit\" bottom 927",
-     "p.kicker.hero-date.in.done \"Saturday · April 3, 2027\" bottom 950",
-     "span \"Saturday\" bottom 947",
-     "span.nowrap \"April 3, 2027\" bottom 947",
-     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 1024",
-     "p.hero-city.in.done \"Washington, D.C.\" bottom 1048",
-     "span.cd-num \"170\" bottom 1084",
-     "span.cd-lbl \"Days\" bottom 1100",
-     "span.cd-num \"05\" bottom 1084",
-     "span.cd-lbl \"Hours\" bottom 1100",
-     "span.cd-num \"56\" bottom 1084",
-     "span.cd-lbl \"Minutes\" bottom 1100",
-     "span.cd-num \"46\" bottom 1084",
-     "span.cd-lbl \"Seconds\" bottom 1100",
-     "a.btn.btn-bloom bottom 1156",
-     "span \"RSVP\" bottom 1140"
+     "p.kicker.hero-date.in.done \"Saturday · April 3, 2027\" bottom 583",
+     "span \"Saturday\" bottom 581",
+     "span.nowrap \"April 3, 2027\" bottom 581",
+     "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 657",
+     "p.hero-city.in.done \"Washington, D.C.\" bottom 681",
+     "span.cd-num \"169\" bottom 718",
+     "span.cd-lbl \"Days\" bottom 733",
+     "span.cd-num \"08\" bottom 718",
+     "span.cd-lbl \"Hours\" bottom 733",
+     "span.cd-num \"52\" bottom 718",
+     "span.cd-lbl \"Minutes\" bottom 733",
+     "span.cd-num \"43\" bottom 718",
+     "span.cd-lbl \"Seconds\" bottom 733",
+     "a.btn.btn-bloom bottom 789",
+     "span \"RSVP\" bottom 773"
     ],
     "partly": [],
-    "names": 36
+    "names": 32
    },
    {
     "at": "844x390",
@@ -632,28 +608,25 @@
     "screen": 390,
     "bottomNav": true,
     "items": 23,
-    "lowest": 542,
+    "lowest": 441,
     "above": 318,
     "below": 402,
     "cta": {
      "text": "RSVP",
-     "bottom": 542
+     "bottom": 318
     },
     "bad": [
-     "p.hero-city.in.done \"Washington, D.C.\" bottom 428",
-     "span.cd-num \"170\" bottom 465",
-     "span.cd-lbl \"Days\" bottom 483",
-     "span.cd-num \"05\" bottom 465",
-     "span.cd-lbl \"Hours\" bottom 483",
-     "span.cd-num \"56\" bottom 465",
-     "span.cd-lbl \"Minutes\" bottom 483",
-     "span.cd-num \"39\" bottom 465",
-     "span.cd-lbl \"Seconds\" bottom 483",
-     "a.btn.btn-bloom bottom 542",
-     "span \"RSVP\" bottom 526"
+     "span.cd-num \"169\" bottom 424",
+     "span.cd-lbl \"Days\" bottom 441",
+     "span.cd-num \"08\" bottom 424",
+     "span.cd-lbl \"Hours\" bottom 441",
+     "span.cd-num \"52\" bottom 424",
+     "span.cd-lbl \"Minutes\" bottom 441",
+     "span.cd-num \"37\" bottom 424",
+     "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
-    "names": 36
+    "names": 32
    },
    {
     "at": "667x375",
@@ -664,32 +637,32 @@
     "screen": 375,
     "bottomNav": true,
     "items": 23,
-    "lowest": 600,
-    "above": 306,
+    "lowest": 599,
+    "above": 293,
     "below": 387,
     "cta": {
      "text": "RSVP",
-     "bottom": 600
+     "bottom": 599
     },
     "bad": [
      "p.hero-venue.in.done \"The Grand Rosewater Cons\" bottom 460",
      "p.hero-city.in.done \"Washington, D.C.\" bottom 487",
-     "span.cd-num \"170\" bottom 523",
-     "span.cd-lbl \"Days\" bottom 541",
-     "span.cd-num \"05\" bottom 523",
-     "span.cd-lbl \"Hours\" bottom 541",
-     "span.cd-num \"56\" bottom 523",
-     "span.cd-lbl \"Minutes\" bottom 541",
-     "span.cd-num \"33\" bottom 523",
-     "span.cd-lbl \"Seconds\" bottom 541",
-     "a.btn.btn-bloom bottom 600",
-     "span \"RSVP\" bottom 584"
+     "span.cd-num \"169\" bottom 523",
+     "span.cd-lbl \"Days\" bottom 540",
+     "span.cd-num \"08\" bottom 523",
+     "span.cd-lbl \"Hours\" bottom 540",
+     "span.cd-num \"52\" bottom 523",
+     "span.cd-lbl \"Minutes\" bottom 540",
+     "span.cd-num \"31\" bottom 523",
+     "span.cd-lbl \"Seconds\" bottom 540",
+     "a.btn.btn-bloom bottom 599",
+     "span \"RSVP\" bottom 583"
     ],
     "partly": [],
-    "names": 36
+    "names": 32
    }
   ],
-  "envelope_to_home_ms": 4917,
+  "envelope_to_home_ms": 4671,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -798,7 +771,7 @@
    ],
    [
     "/themes/cherry-blossom-spring/site.css",
-    45671
+    45824
    ]
   ],
   "first_view_home_kb_placeholders": 803,
@@ -833,13 +806,13 @@
    ],
    [
     "/themes/cherry-blossom-spring/site.css",
-    45671
+    45824
    ]
   ],
   "first_view_index_kb_photos": 847,
   "first_view_index_files_photos": [
    [
-    "/media/ea729bb8-e642-4090-9732-9ec9dc66257d/51d7a95cc911d1a13d1ab217a1cdb80d-640w.jpg",
+    "/media/6bca14e1-2764-4607-8d31-82e52de8111e/56f56c8ec2c0d0694643ee6169accd26-640w.jpg",
     99404
    ],
    [
@@ -874,11 +847,11 @@
   "first_view_home_kb_photos": 1322,
   "first_view_home_files_photos": [
    [
-    "/media/ea729bb8-e642-4090-9732-9ec9dc66257d/004799400e3b31de76c77aab1f47b3db-1280w.jpg",
+    "/media/6bca14e1-2764-4607-8d31-82e52de8111e/8f46940a306b37ab1d9619fadd5bfa6c-1280w.jpg",
     305893
    ],
    [
-    "/media/ea729bb8-e642-4090-9732-9ec9dc66257d/8392b10d7a100f90b6a3daff908eea3c-640w.jpg",
+    "/media/6bca14e1-2764-4607-8d31-82e52de8111e/03f9a5b37e707ebbee13ae1cc5426e1c-640w.jpg",
     130081
    ],
    [
@@ -886,7 +859,7 @@
     115560
    ],
    [
-    "/media/ea729bb8-e642-4090-9732-9ec9dc66257d/51d7a95cc911d1a13d1ab217a1cdb80d-640w.jpg",
+    "/media/6bca14e1-2764-4607-8d31-82e52de8111e/56f56c8ec2c0d0694643ee6169accd26-640w.jpg",
     99404
    ],
    [
@@ -906,15 +879,15 @@
     71992
    ]
   ],
-  "video_kb": 2839,
+  "video_kb": 2758,
   "video_first_frame": {
-   "lead_in_s": 0.55,
+   "lead_in_s": 0.54,
    "mean_rgb": [
     220,
     196,
     199
    ],
-   "stdev": 37
+   "stdev": 38
   },
   "compare": {
    "source": "w1",

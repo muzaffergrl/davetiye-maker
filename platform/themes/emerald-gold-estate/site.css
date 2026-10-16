@@ -346,6 +346,7 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; } /* 
 .hero.is-tight .cd-num { font-size: 22px; }
 .hero.is-tight .countdown, .hero.is-tight .hero-cta { margin-top: 8px; }
 .hero.is-tight .hero-orn { display: none; }
+@media (max-aspect-ratio: 3/4) { .hero.is-short .hero-card { width: clamp(100px, 20svh * .612, 126px); } } /* short phones: RSVP on the first screen */
 .hero.is-long .countdown { order: 1; grid-row: 8; margin-top: 22px; } /* site.js fold */
 .hero.is-long .hero-cta { grid-row: 6; }
 .hero.is-long .hero-card { grid-row: 1 / 8; }

@@ -32,11 +32,11 @@ Tasarım 16'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 ## Bitti sayılması için
 - [x] docs/11 §15 kontrol listesi tamam (atlanan madde Sonuç'ta gerekçesiyle)
 - [x] `npm test`, `npm run typecheck`, `npm run build` (trace-check) geçti; `tests/theme-sunflower-rustic-barn.test.ts` (§13.2)
-- [x] `theme-check --theme sunflower-rustic-barn` hatasız; `previews/g416/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti
+- [ ] `theme-check --theme sunflower-rustic-barn` hatasız; `previews/g416/` + `compare_<sayfa>_390.jpg` qa-kontrol incelemesinden geçti (theme-check hatasız; qa yeniden inceleme bekliyor, G101)
 - [x] Sonuç dürüst: açılış ve story tarifi, comp sapmaları, denenmeyenler (gerçek iPhone/Safari, yayın), sorunlu GPT parçaları
 
 ## Sonuç
-**Durum: tema çalışıyor, bütün komutlar hatasız, qa-kontrol karşılaştırma kapısı geçti.** Dal `claude/g416-tema` (claude-G416,
+**Durum: tema çalışıyor, bütün komutlar hatasız. qa-kontrol karşılaştırma kapısı: aşağıdaki "3 tur geçti" kaydı doğrulanamadı (inceleme raporları dosyada yok); qa-kontrol 2026-10-16 incelemesi orta/düşük bulgular buldu → G101 ile düzeltildi, yeniden inceleme bekliyor.** Dal `claude/g416-tema` (claude-G416,
 2026-10-15).
 
 **Ne yapıldı (dosyalar).** `platform/themes/sunflower-rustic-barn/`: `theme.json` (5 sayfa, 5 foto anahtarı, 71 standart copy
@@ -84,7 +84,7 @@ parçalarıyla.
   son zemin maskesinden önceki CSS ile koştu (maske yalnız dekor görünümünü değiştirir).
 
 **qa-kontrol (docs/11 §13.4).** İlk inceleme: home ve rsvp geçti; ret gerekçeleri (iç sayfalarda ahşap şerit sayfa ortasında,
-index'te iki comp öğesinin README'de yazılmaması, duvar tonu) düzeltildi; ikinci tur: index ve story geçti, details/rsvp'de zemin uzatmasının bıraktığı sert kenar bulundu → maske düzeltildi; üçüncü tur: **inceleme geçti** (5 sayfa). İnceleme ekran görüntülerine dayanır; MP4'ü ve kendi QA'mda kareleri ben izledim.
+index'te iki comp öğesinin README'de yazılmaması, duvar tonu) düzeltildi; ikinci tur: index ve story geçti, details/rsvp'de zemin uzatmasının bıraktığı sert kenar bulundu → maske düzeltildi; üçüncü tur: inceleme geçti (5 sayfa) — **doğrulanamadı** (G101, 2026-10-16: raporlar kayıtlı değil; 2026-10-16 qa-kontrol'ü bu temada story ilk ekran boşluğu, details fold boşluğu ve masa bandı kenarı buldu). İnceleme ekran görüntülerine dayanır; MP4'ü ve kendi QA'mda kareleri ben izledim.
 
 **Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, kesişen belge view transition), temanın Vercel'de
 yayını (bu görevin işi değil), gerçek alıcı fotoğrafları (farklı oran/ışık), yavaş ağ.
@@ -100,6 +100,18 @@ yayını (bu görevin işi değil), gerçek alıcı fotoğrafları (farklı oran
 
 **Entegratöre notlar.** `gorevler/PANO.md` commit'lenmedi. G416 `al` komutu G216 `alindi` olduğu için reddetti; parçalar main'de
 tam olduğundan durum dosyada elle `alindi` yapıldı (Günlük). Ortak test/dosya değiştirilmedi; tema sayan testler yeni temayla geçti.
+
+### qa-kontrol 2026-10-16: bulgular + düzeltmeler (G101 oturum A)
+- **Ortak (orta) — program satırı fold boşluğu:** `details.html`'de `.sched-row`'lar `data-fold` birimi olmaktan çıktı (19'daki çözüm); itilen satır boyalı kartta ~130 px yazısız delik bırakıyordu. `stress_details_360.png`: 10 satır eşit aralıklı, boşluk yok. Test: `sched-row[data-fold]` = 0.
+- **Orta — story 390×844 ilk ekranın yarısı boş krem:** `folds` ilk satırı (`.lr-1`) katlayınca boşluğu **duvara** veriyordu. Artık: önce sayfa en çok 60 px kalkar (story başlığında), sonra ilk baskı küçülür (`--sg` ≥ 0,76; foto penceresi 152 px = **39vw** ≥ 38vw), yine sığmazsa yalnız satır itilir, duvar girişin altında kalır. Sonuç: 390×844'te ip giriş cümlesinin hemen altında, ilk baskı + yazı nav'ın üstünde biter (766 < 767); 430×932'de de; 360×640'ta duvar girişin altında başlar, satır ilk ekranın altına geçer (temanın "nav çizgisinde yarım satır yok" testi korunur).
+- **Düşük — kapanışta ahşap masa bandının sert üst kenarı:** maske bölüm boyuna göreydi (%40→%82); görüntü bölümden kısa olunca üst kenarı opak bölgede kalıyordu. `.wood-end::before` artık görüntünün kendi kutusu (`aspect-ratio: 500/206`, `max-height: 100%`, `cover`), maske şeffaftan %58'de açılır → home/story/details/rsvp'de yumuşak.
+- **Düşük — "qa-kontrol karşılaştırma kapısı geçti (3 tur)" doğrulanamadı:** Sonuç'un başındaki ve qa-kontrol paragrafındaki iddia düzeltildi (aşağıdaki not); bu oturumda yeniden qa incelemesi yapılmadı.
+- Komutlar (2026-10-16, dal `claude/g101a-qa`): `theme-check --theme sunflower-rustic-barn --stress` **128 geçti, 0 hata, 0 uyarı**
+  (`previews/g416/checks.json`) · `g051-browser` **44/44** · `final-smoke` **45/45** · `npm test` **1208/1208** · `typecheck` temiz ·
+  `build` + trace-check temiz (21 tema). Zarf → home 4494 ms; ilk görünüm 390×844 DPR 3: index 1191 / home 890 KB yer tutucu, 1283 / 1280 KB örnek fotoğrafla.
+- Bakılan görüntüler (Read): `story_390`, `stress_details_360`, story/home/details/rsvp kapanış bandı (390, DPR 3), story 360×640.
+- Denenmedi: gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ. Bu bölüm qa-kontrol
+  alt-ajanının yeniden incelemesi **değildir**; yeniden inceleme entegratörde.
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak

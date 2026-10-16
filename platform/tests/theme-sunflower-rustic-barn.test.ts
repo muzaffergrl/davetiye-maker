@@ -760,6 +760,10 @@ test('story: three twine lines on the barn-wood wall, a print pegged on each one
   assert.ok(fw * win >= 38, `phone photo window ${(fw * win).toFixed(1)}vw ≥ 38vw (docs/11 §9)`);
   assert.match(jsText(), /'story-line': \[\['line', 0\], \['print', \d+\], \['caption', \d+\]\]/, 'the line, then the print is pegged, then the caption');
   assert.equal($('.wall > .line-row[data-fold]').length, 3, 'a line crossing the nav line starts below the first screen');
+  // qa-kontrol 2026-10-16: the wood starts under the lede — the first print shrinks (photo window ≥ 38vw), else only the line goes below
+  assert.match(jsText(), /lo = el\.matches\('\.lr-1'\) \? \.77 : \.73; d > lift && k > lo && el\.matches\('\.sig-unit, \.card-ribbon, \.lr-1'\)/);
+  assert.match(jsText(), /const \[e, m\] = d <= lift \? \[f, -d\] : \[el, v \+ 6 - t\];/);
+  assert.match(cssText(), /\.lr-1 \.print \{ width: calc\(var\(--fw\) \* var\(--sg, 1\)\); \}/);
   assert.ok(MANIFEST.twine_line.sag.at_pct['0.5'] > MANIFEST.twine_line.sag.ends_pct[0], 'the twine sags in the middle');
 });
 
@@ -786,10 +790,11 @@ test('inner pages (story, details, rsvp): the sunlit cream of W1.3–W1.5 behind
   assert.equal(render('details').$('.cal[data-fold]').length, 1);
 });
 
-test('inner pages: nothing half under the nav on the first screen — fold units, one small lift, the story wall starts below', () => {
+test('inner pages: nothing half under the nav on the first screen — fold units, one small lift, the story wall starts under the lede', () => {
   const d = render('details').$;
   assert.equal(d('.day-card h1.card-title[data-fold]').length, 1);
-  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, demo().schedule.length, 'each schedule row');
+  assert.equal(d('.sched-list > li.sched-row').length, demo().schedule.length);
+  assert.equal(d('.sched-list > li.sched-row[data-fold]').length, 0, 'schedule rows are not fold units: a pushed row left a blank hole in the painted card (qa-kontrol 2026-10-16)');
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 6, 'title, reply-by, pill, the wait line, the signature, the ribbon');
@@ -803,9 +808,7 @@ test('inner pages: nothing half under the nav on the first screen — fold units
   assert.equal(s('section.next-sec[data-fold]').length, 1);
   const js = jsText();
   assert.match(js, /const f = \$\('\.page-bg \+ \*'\), u = \[\.\.\.\$\$\('\[data-fold\]'\)\]/);
-  assert.match(js, /Math\.min\(40, parseFloat\(getComputedStyle\(f\.parentElement\)\.paddingTop\) \* \.34\)/);
-  assert.match(js, /d <= lift \? \[f, -d\] : \[el\.matches\('\.lr-1'\) \? el\.parentElement : el, v \+ 6 - t\]/, 'the first line moves the wall with it');
-  assert.match(js, /for \(let k = 1; d > lift && k > \.73 && el\.matches\('\.sig-unit, \.card-ribbon'\); d = D\(\)\) el\.style\.setProperty\('--sg', k -= \.04\);/);
+  assert.match(js, /Math\.min\(f\.closest\('\.page-head'\) \? 60 : 40, parseFloat\(getComputedStyle\(f\.parentElement\)\.paddingTop\) \* \.34 \* \(f\.closest\('\.page-head'\) \? 1\.5 : 1\)\)/, 'one small lift (story head: up to 60 px)');
 });
 
 // ---------------------------------------------------------------- the first-screen rules, measured in a browser
