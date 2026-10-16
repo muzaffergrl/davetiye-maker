@@ -847,6 +847,11 @@ soru başına sayı + yüzde, yiyecek/alerji notları). Ayrıntı ve ekranlar: `
   "Take the website offline" en altta tehlike görünümünde (değişmedi).
 - **Metinler:** Help "Can my partner edit too?" → "(Share → Your private edit link → Copy edit link)" (C1); Guests boş durumu sonuna
   "New replies show here; we don’t send email notifications yet." (C6).
+- **Tasarımın kendi açılışı** (koordinatör eki): önizlemenin ilk sekmesi her tasarımda "Envelope" değil, tasarımın açılış nesnesi —
+  Envelope (14 tasarım) · Gatefold (06, 14) · Pouch (09) · Wallet (12) · Book (13) · Sleeve (18); satış kopyası olmayan tasarımda
+  "Opening". Kaynak `lib/marketing/designs.ts` `openingObject` (sunucuda, `panelTheme` → `PanelTheme.opening`); aynı ad "Change names
+  or date" ve "How your names appear" ipuçlarında, teşekkür modu metninde, kurulum 1. adımın önizleme adında ve Headings & labels satır
+  etiketlerinde ("Above your names on the book", "Open the book again (book page)").
 - Bilinçli olarak yapılmayan: "Headings & labels on this page" → "Advanced: change headings & labels" adı (P2): bölüm zaten kapalı
   açılır; ad START HERE rehberlerinde, docs/19 Ek A'da ve Review satırlarında ("Us · Headings & labels") geçtiği için değiştirilmedi —
   karar koordinatörün. Ayrıntı: `gorevler/G121-panel-satis-kalanlar.md`, ekranlar `platform/previews/g121/`.

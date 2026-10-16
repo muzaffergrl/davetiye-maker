@@ -172,7 +172,7 @@ try {
       page.on('pageerror', (e: any) => errors.push(String(e)));
       const res = await page.goto(`${BASE}/${after.slug}`, { waitUntil: 'networkidle' });
       check(`${theme}: two days after the wedding the envelope page is the thank-you version by itself`, res.status() === 200 && (await page.locator('html[data-thank-you]').count()) === 1);
-      check(`${theme}: envelope kicker + card title`, (await page.locator('.env-head .kicker').first().innerText()).toLowerCase().includes('thank') && (await page.locator('.card-copy').innerText()).includes('Thank you for celebrating with us'));
+      check(`${theme}: envelope kicker + card title`, (await page.locator('.env-head .kicker').first().innerText()).toLowerCase().includes('thank') && (await page.locator('.card-copy').innerText()).toLowerCase().includes('thank you for celebrating with us'));
       check(`${theme}: the thank-you photo is in the card window`, (await page.locator('.card img.ty-photo').count()) === 1 && (await page.locator('.card img.ty-photo').evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)));
       await shot(page, `01_envelope_${theme}`);
       // tap: the opening show is the same; the card flies to home
@@ -191,7 +191,7 @@ try {
       check(`${theme}: home has no countdown, RSVP link or calendar`, (await page.locator('[data-countdown], a[href*="/rsvp"], [data-calendar]').count()) === 0);
       await shot(page, `03_home_${theme}`, true);
       const rsvp = await page.goto(`${BASE}/${after.slug}/rsvp`, { waitUntil: 'networkidle' });
-      check(`${theme}: RSVP page answers old links (200) with "Replies are closed", no form`, rsvp.status() === 200 && (await page.locator('h1').innerText()).includes('Replies are closed') && (await page.locator('form').count()) === 0);
+      check(`${theme}: RSVP page answers old links (200) with "Replies are closed", no form`, rsvp.status() === 200 && (await page.locator('h1').innerText()).toLowerCase().includes('replies are closed') && (await page.locator('form').count()) === 0);
       // through the context's request API (a refused fetch in the page would log a console error)
       const r = await page.request.post(`${BASE}/api/rsvp/${after.slug}`, { data: { name: 'Ada', attending: 'yes', guests: 1 } });
       const api = { status: r.status(), body: await r.json() };

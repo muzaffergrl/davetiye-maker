@@ -330,8 +330,12 @@ try {
     await page.click('[data-disclosure="copy-us"] button[aria-expanded]');
     const labels: string[] = await page.locator('[data-copy-row] label').allInnerTexts();
     check('opening name: the editable-text rows say "on the book"', labels.some((l) => l.includes('Above your names on the book')) && !labels.some((l) => /envelope/i.test(l)), labels.slice(0, 4).join(' | '));
-    const hint = await text(page, '[data-section="names"]');
-    check('opening name: "How your names appear" hint says "On the book"', hint.includes('On the book, the page titles'), hint.slice(0, 160));
+    // a published site: the names sit behind "Change" — its sheet says where they appear
+    await page.click('[data-change-identity="names"]');
+    await page.waitForSelector('[data-testid="identity"]');
+    const hint = await text(page, '[data-testid="identity"]');
+    check('opening name: "Change names or date" says the names are "on the book"', hint.includes('Your names and date are on the book, the page titles'), hint.slice(0, 160));
+    await page.keyboard.press('Escape');
     await ctx.close();
     // an envelope design keeps "Envelope"
     const c2 = await browser.newContext(PHONE);

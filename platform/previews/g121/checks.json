@@ -1,0 +1,362 @@
+{
+  "when": "2026-10-16T11:14:00.945Z",
+  "passed": 82,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "setup 2: one photo place (the opening photo); no \"More photos\" fold",
+      "ok": true
+    },
+    {
+      "name": "setup 2: the other photo places are named and left to Edit → Photos",
+      "ok": true,
+      "detail": "Your website has 4 more photo places. Add them any time under Edit → Photos; until then guests see a soft placeholder image."
+    },
+    {
+      "name": "setup 2: \"Skip for now\" beside \"Continue\", same row and same weight (a button, not a small link)",
+      "ok": true,
+      "detail": "{\"skip\":{\"x\":76,\"y\":778,\"width\":145,\"height\":52},\"next\":{\"x\":229,\"y\":778,\"width\":145,\"height\":52}}"
+    },
+    {
+      "name": "setup 2: Skip is no longer underlined text",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): setup 2 has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "setup 2: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "setup 2: no horizontal scroll at 390",
+      "ok": true
+    },
+    {
+      "name": "setup 3: one sentence on what publishing does, right above \"Publish my website\"",
+      "ok": true,
+      "detail": "Guests can open your website with the link. You can keep editing after."
+    },
+    {
+      "name": "setup 3: no Skip on the publish step",
+      "ok": true
+    },
+    {
+      "name": "setup 2 at 320 px: Back, Skip and Continue stay on screen; no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "home: one status label with its action beside it (\"Live\" · Share)",
+      "ok": true,
+      "detail": "{\"badge\":{\"x\":36,\"y\":196.65625,\"width\":64.171875,\"height\":26},\"action\":{\"x\":243.0625,\"y\":185.65625,\"width\":110.9375,\"height\":48}}"
+    },
+    {
+      "name": "home: the bar does not repeat \"Live\"",
+      "ok": true
+    },
+    {
+      "name": "home: the names heading is smaller (≤ 40 px)",
+      "ok": true,
+      "detail": "29.5"
+    },
+    {
+      "name": "home: Settings rows — time zone, date style, name & date changes left, guest password",
+      "ok": true,
+      "detail": "timezone=Time zone New York | locale=Date style Month first | changes=Name & date changes left 3 of 3 | password=Guest password Off"
+    },
+    {
+      "name": "a11y (axe-core): home has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "home: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Settings → Time zone: Day & place with \"More options\" open, the time zone field focused",
+      "ok": true,
+      "detail": "http://127.0.0.1:3490/edit/nora-and-sam?k=ZmHqRskaOD_60NNkynkSjH1bVsq9QjjCzrNJ8_Al1GA#edit/day"
+    },
+    {
+      "name": "Settings → Date style: the date style choice is on screen",
+      "ok": true
+    },
+    {
+      "name": "Settings → Guest password: Share (where the password is)",
+      "ok": true
+    },
+    {
+      "name": "Settings → Name & date changes: Help opens on the change rule",
+      "ok": true
+    },
+    {
+      "name": "home at 320 px: no horizontal scroll",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "home at 1280: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "home (draft): \"Continue setup · Step n of 3\" on its own full-width row",
+      "ok": true,
+      "detail": "Continue setup · Step 1 of 3 318/358"
+    },
+    {
+      "name": "editor: up to date — no changes bar, the calm \"Live\" label in the bar",
+      "ok": true
+    },
+    {
+      "name": "editor: a real change brings the \"Unpublished changes\" bar at once",
+      "ok": true
+    },
+    {
+      "name": "editor: after the autosave \"Saved\" shows in words on a phone",
+      "ok": true,
+      "detail": "{\"on\":true,\"text\":\"Saved\",\"w\":40}"
+    },
+    {
+      "name": "editor: \"Saved\" goes back to the quiet icon after a moment",
+      "ok": true
+    },
+    {
+      "name": "Review: every changed page has its own preview button",
+      "ok": true,
+      "detail": "1/1"
+    },
+    {
+      "name": "Review: the preview button is a 44 px+ target",
+      "ok": true,
+      "detail": "{\"x\":322,\"y\":682.4664916992188,\"width\":52,\"height\":52}"
+    },
+    {
+      "name": "a11y (axe-core): Review sheet has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Review → preview: the phone preview opens (the review sheet closes)",
+      "ok": true
+    },
+    {
+      "name": "editor: back to the published text — the changes bar goes away, \"Live\" returns",
+      "ok": true
+    },
+    {
+      "name": "opening name: a book design's first preview tab says \"Book\" (not \"Envelope\")",
+      "ok": true,
+      "detail": "Book | Home | Story | Details | RSVP"
+    },
+    {
+      "name": "opening name: the editable-text rows say \"on the book\"",
+      "ok": true,
+      "detail": "Above your names on the book | On the small card | Invitation card: the line after your names | Invitation card: before the time"
+    },
+    {
+      "name": "opening name: \"Change names or date\" says the names are \"on the book\"",
+      "ok": true,
+      "detail": "Change names or date Your names and date are on the book, the page titles and the link preview. Changes show after you publish them. First partner First name Fu"
+    },
+    {
+      "name": "opening name: an envelope design's first tab stays \"Envelope\"",
+      "ok": true
+    },
+    {
+      "name": "Share: the link first; QR code, guest password and edit link folded",
+      "ok": true,
+      "detail": "qr:false,password:false,edit-link:false"
+    },
+    {
+      "name": "Share: the QR fold keeps its name \"QR code for printed cards\"",
+      "ok": true
+    },
+    {
+      "name": "Share: Copy is on the first screen",
+      "ok": true
+    },
+    {
+      "name": "Share: \"Take the website offline\" is the last action",
+      "ok": true,
+      "detail": "Take the website offline"
+    },
+    {
+      "name": "a11y (axe-core): Share has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Share: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Share: the opened fold shows the QR code of the public address",
+      "ok": true
+    },
+    {
+      "name": "Guests (no replies): says new replies show here and no e-mail notifications are sent yet",
+      "ok": true,
+      "detail": "Guests Guest list Results 0 Guests coming 0 Not coming 0 Replies Replies No replies yet. Share your website so guests can reply. New replies show here; we don’t send email notifications yet. Share Ref"
+    },
+    {
+      "name": "/start: \"Tip: once your editor is open, add it to your Home Screen.\"",
+      "ok": true
+    },
+    {
+      "name": "/start: the tip sits under \"Open my editor\"",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): /start result has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "admin site: facts → note → Etsy message → support actions → content → replies → high-impact → history",
+      "ok": true,
+      "detail": "todo-title > facts-title > note-title > msg-title > actions-title > content-title > rsvp-title > danger-title > history-title"
+    },
+    {
+      "name": "admin site: \"Yayından kaldır\" left the support actions; it is in the high-impact card with \"Siteyi sil\"",
+      "ok": true
+    },
+    {
+      "name": "admin site: the message box opens with \"Publish is waiting\" for a waiting order",
+      "ok": true
+    },
+    {
+      "name": "admin site: a text with an undecided policy cannot be copied",
+      "ok": true
+    },
+    {
+      "name": "admin site: the shop fills the policy in by hand → the message can be copied, \"Şablona dön\" appears",
+      "ok": true
+    },
+    {
+      "name": "admin site: copying writes the template (not the text) into Geçmiş",
+      "ok": true,
+      "detail": "Geçmiş 16 Eki 2026 14:13 · Dükkân Etsy mesajı kopyalandı: Sipariş onaylanıyor (Publish bekliyor) 16 Eki 2026 14:13 · Alıcı Site oluşturuldu (sipariş #3456789012)"
+    },
+    {
+      "name": "admin site: \"Şablona dön\" brings the template text back",
+      "ok": true
+    },
+    {
+      "name": "admin site: the wrong-design hint on an unpublished draft (delete → Yeni sipariş)",
+      "ok": true
+    },
+    {
+      "name": "admin site: \"Vazgeç\" on the left, \"Kalıcı olarak sil\" on the right",
+      "ok": true,
+      "detail": "{\"cancel\":{\"x\":35,\"y\":868.96875,\"width\":97.59375,\"height\":48},\"del\":{\"x\":199.21875,\"y\":868.96875,\"width\":155.78125,\"height\":48}}"
+    },
+    {
+      "name": "admin site: \"Vazgeç\" clears the typed address",
+      "ok": true
+    },
+    {
+      "name": "admin site 390: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): admin site has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "admin site: touch targets ≥ 36 px",
+      "ok": true
+    },
+    {
+      "name": "admin site: a live site closing within 30 days opens with \"Site yakında kapanıyor\"",
+      "ok": true
+    },
+    {
+      "name": "admin orders: an order number with no website says so and points to the start-link reminder / Yeni sipariş",
+      "ok": true
+    },
+    {
+      "name": "admin orders: a number that has a website shows the site, not the hint",
+      "ok": true
+    },
+    {
+      "name": "admin site 1280: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "/designs 390: style filter with \"All\" + 6 styles",
+      "ok": true,
+      "detail": "7"
+    },
+    {
+      "name": "/designs 390: \"All\" shows every design",
+      "ok": true
+    },
+    {
+      "name": "/designs 390: \"seasonal\" shows its 4 designs only",
+      "ok": true,
+      "detail": "4"
+    },
+    {
+      "name": "/designs 390: no horizontal scroll with a style chosen",
+      "ok": true
+    },
+    {
+      "name": "/designs 390: back to \"All\"",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): /designs with the filter has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "/designs: filter chips are 44 px tall",
+      "ok": true
+    },
+    {
+      "name": "/designs: arrow keys move through the styles (radio group)",
+      "ok": true
+    },
+    {
+      "name": "/designs 1280: style filter with \"All\" + 6 styles",
+      "ok": true,
+      "detail": "7"
+    },
+    {
+      "name": "/designs 1280: \"All\" shows every design",
+      "ok": true
+    },
+    {
+      "name": "/designs 1280: \"classic\" shows its 6 designs only",
+      "ok": true,
+      "detail": "6"
+    },
+    {
+      "name": "/designs 1280: no horizontal scroll with a style chosen",
+      "ok": true
+    },
+    {
+      "name": "/designs 1280: back to \"All\"",
+      "ok": true
+    },
+    {
+      "name": "/designs without JavaScript: the filter still works",
+      "ok": true
+    },
+    {
+      "name": "home 390: hero, then the designs, then \"What is BKE Studio?\"",
+      "ok": true,
+      "detail": "hero > designs > what-is > opening > pages"
+    },
+    {
+      "name": "home 390: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "home 1280: hero, then the designs, then \"What is BKE Studio?\"",
+      "ok": true,
+      "detail": "hero > designs > what-is > opening > pages"
+    },
+    {
+      "name": "home 1280: no horizontal scroll",
+      "ok": true
+    }
+  ]
+}
