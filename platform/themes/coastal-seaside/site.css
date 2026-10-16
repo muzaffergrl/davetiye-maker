@@ -231,7 +231,9 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* hinge: stage.hinge_in_cflap_pct */
 .env-cflap { left: 0; top: 49.744%; width: 100%; height: 31.475%; z-index: 4; transform-origin: 50% .552%; backface-visibility: hidden; } /* stage.parts.env_cflap */
 
-.card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 1% -45%); }
+/* the card is clipped well above the closed body's bottom edge (stage.parts.env_closed ends at 98.522 %; its soft lower edge let the
+   card's script descenders show as a ~3 px strip — qa-kontrol 2026-10-16); once the pocket fades in it covers 49.9–100 % anyway */
+.card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 4% -45%); }
 .env .card { position: absolute; left: 23.895%; top: 60.307%; width: 51.523%; } /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 10px 16px rgba(20, 40, 60, .16)); }
 /* the opening wave: over the envelope, under the shell; JS moves it */
