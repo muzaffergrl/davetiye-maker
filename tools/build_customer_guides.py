@@ -13,6 +13,7 @@ change Ek A and run this again. Placeholders filled per design ({…} left over 
   {PRIVACY_URL}    <base>/privacy               (route: platform/app/(marketing)/privacy/page.tsx)
   {OPENING}        what guests tap first: envelope, gatefold, pouch, wallet, book or sleeve
                    (platform/lib/marketing/designs.ts, "Your guests tap the <thing>.")
+  {OPENING_TAB}    the same word capitalised: the panel's first preview tab (G121, lib/panel/model.ts openingTabLabel)
   {LANGUAGE_FONTS} one of LANGUAGE_LINES, from the design's fonts (designs.ts `fonts`) and FONT_SUBSETS below
 
 Writes per design, in collections/<NN_*>/package/customer/:
@@ -26,7 +27,8 @@ Writes per design, in collections/<NN_*>/package/customer/:
 
 Checks (always after a build, or alone with --check):
   - START_HERE.md is exactly Ek A filled in now (stale copies fail), holds the start link and no {…};
-    a design that does not open from an envelope has no "envelope" in it (only the panel's preview tab "Envelope")
+    a design that does not open from an envelope has no "envelope" in it (any case: since G121 the preview tab is named
+    after the design's opening too)
   - every **bold** panel label and every "quoted" panel text of the guide exists in the platform source
     (platform/components/panel, platform/app/start, platform/lib/{panel,claim,theme}, the design's theme.json):
     a renamed button fails here first (run this after a panel change, e.g. G121)
@@ -171,8 +173,14 @@ def values(theme: str, base: str = BASE_URL) -> dict[str, str]:
         "START_URL": start_url(theme, base),
         "PRIVACY_URL": privacy_url(base),
         "OPENING": eu.opening_object(theme),
+        "OPENING_TAB": opening_tab(eu.opening_object(theme)),
         "LANGUAGE_FONTS": LANGUAGE_LINES[language_class(design_fonts(theme))],
     }
+
+
+def opening_tab(opening: str) -> str:
+    """The panel's first preview tab (G121): lib/panel/model.ts openingTabLabel — the opening word, first letter capital."""
+    return opening[:1].upper() + opening[1:]
 
 
 def fill(text: str, vals: dict[str, str]) -> str:
@@ -381,6 +389,7 @@ def _source_text(theme: str) -> str:
 def label_problems(md: str, theme: str) -> list[str]:
     """Bold labels must appear as a UI string (between quotes or JSX > … <) and quoted texts somewhere in the source."""
     src = _source_text(theme)
+    tab = opening_tab(eu.opening_object(theme))
     out = []
     body = re.split(r"^## Quick answers$", md, flags=re.M)[0]  # Quick answers + Troubleshooting: bold = questions
     for run in re.findall(r"\*\*(.+?)\*\*", body):
@@ -389,6 +398,11 @@ def label_problems(md: str, theme: str) -> list[str]:
             continue
         for label in (s.strip().rstrip(":.") for s in run.split("→")):
             if not label or label in NOT_LABELS:
+                continue
+            if label == tab:  # computed in the panel from designs.ts (G121), not a string in the source
+                if "export function openingTabLabel" not in src:
+                    out.append(f"preview tab **{label}**: the panel no longer names it after the design's opening "
+                               "(lib/panel/model.ts openingTabLabel)")
                 continue
             pat = rf"(?:^|['\"`>}}“])\s*{re.escape(label)}\s*(?:$|['\"`<{{”])"
             if not re.search(pat, src, re.M):
@@ -496,7 +510,7 @@ def check(no: str, folder: str, theme: str, base: str = BASE_URL, raster: bool =
         p.append(f"START_HERE.md has no clickable {url}")
     if PLACEHOLDER.search(md):
         p.append("START_HERE.md has {…} left")
-    if vals["OPENING"] != "envelope" and re.search(r"\benvelope\b", md):
+    if vals["OPENING"] != "envelope" and re.search(r"\benvelope\b", md, re.I):
         p.append(f"'envelope' in the guide of a {vals['OPENING']} design")
     p += label_problems(md, theme)
     # QR: module by module (segno re-encode), and the page strip holds the same pixels

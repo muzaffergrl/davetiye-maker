@@ -27,8 +27,8 @@ headline 38 · story 771 · iade ek metni 204 · gizlilik notu 341 · bölüm ad
 - **Dokunulmaz:** dükkân adı (`BKEStudio`; Etsy'de ad değişikliği sınırlı), ödeme/banka, kimlik doğrulama, vergi, fatura,
   yasal ad/adres, şifre, 2FA, Etsy Ads bütçesi, Etsy Plus/abonelik. Para harcatan hiçbir şey yok.
 - **İlan yayınlanmaz.** İlanlar canlı kontrole ve fiyat kararına bağlı (docs/19 §0). G079 2026-10-15'ten beri canlı; ama
-  START HERE rehberleri (G122) G100 panelini anlatıyor ve 2026-10-16 production'ı (`b952bc8`) G100'ü içermiyor: önce G100'lü
-  yayın. Dükkân "açık" duruma alınmaz.
+  START HERE rehberleri (G122) G100 + G121 panelini anlatıyor ve 2026-10-16 production'ı (`b952bc8`) ikisini de içermiyor: önce
+  G100 + G121'li yayın. Dükkân "açık" duruma alınmaz.
   Taslak ilan varsa dokunulmaz.
 - **Önce yedek:** her alanın mevcut değeri, üzerine yazılmadan önce §7'ye kopyalanır.
 - Kullanıcı çıkış yapmışsa yalnız "Etsy'de oturum açık değil" denir. Şifre istenmez, yazılmaz.

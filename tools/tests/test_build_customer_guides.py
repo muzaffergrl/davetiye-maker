@@ -39,11 +39,14 @@ def expect_exit(fn, *args):
 def test_template():
     t = b.template()
     assert t.startswith("# Start Here: Your {DESIGN_NAME} Wedding Website\n"), t[:60]
-    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{OPENING}", "{LANGUAGE_FONTS}"}
+    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{OPENING}", "{OPENING_TAB}",
+                                             "{LANGUAGE_FONTS}"}
     assert "img/start_qr_page.png" in t and "({START_URL})" in t
-    assert "envelope" not in t.replace("{OPENING}", ""), "a design-specific 'envelope' left in Ek A"
+    assert "envelope" not in t.lower(), "a design-specific 'envelope' left in Ek A (use {OPENING} / {OPENING_TAB})"
     # G100: no per-field "Sample" tag, the QR under "More ways to share", Guests in two views
     assert "Sample** tag" not in t and "More ways to share" in t and "**Results:**" in t
+    # G121: no "More photos" fold in the setup; the preview tab is the design's own opening
+    assert "**More photos**" not in t and "**{OPENING_TAB}** is the opening page" in t
     expect_exit(b.fill, t + "{NEW_THING}", b.values("olive-ivory"))
 
 
@@ -54,6 +57,7 @@ def test_values():
         assert v["START_URL"] == f"https://davetiye-platform-five.vercel.app/start?theme={theme}", v
         assert v["PRIVACY_URL"] == "https://davetiye-platform-five.vercel.app/privacy"
         assert v["OPENING"] == NOT_ENVELOPE.get(theme, "envelope"), (no, v["OPENING"])
+        assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
         assert b.language_class(b.design_fonts(theme)) == LANGUAGE[no], (no, b.design_fonts(theme))
         assert v["LANGUAGE_FONTS"] == b.LANGUAGE_LINES[LANGUAGE[no]]
         dark = b.qr_dark(folder)
@@ -71,6 +75,9 @@ def test_labels():
     bad = md.replace("**Mark as seen**", "**Mark all as read**").replace('"Page not found"', '"No page here"')
     found = b.label_problems(bad, "olive-ivory")
     assert any("Mark all as read" in x for x in found) and any("No page here" in x for x in found), found
+    # G121: the preview tab is computed (openingTabLabel), so "Book" passes for the book design only through that rule
+    book = b.fill(b.template(), b.values("enchanted-forest-storybook"))
+    assert "**Book** is the opening page" in book and b.label_problems(book, "enchanted-forest-storybook") == []
 
 
 def test_pdf(tmp: Path):
@@ -83,8 +90,9 @@ def test_pdf(tmp: Path):
     assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"]}, uris
     assert 5 <= b.pdf_page_count(pdf) <= 9, b.pdf_page_count(pdf)
     text = b.eu.lk.pdf_text(pdf) or ""
-    # only the panel's preview tab "Envelope" (capital E) may name an envelope in a wallet design's guide
-    assert "Tropical Destination" in text and "tap the wallet" in text and "envelope" not in text, text[:200]
+    # since G121 even the preview tab names the wallet: no "envelope" in any case
+    assert "Tropical Destination" in text and "tap the wallet" in text and "envelope" not in text.lower(), text[:200]
+    assert "Wallet is the opening page" in " ".join(text.split()), "preview tab not named after the opening"
 
 
 def test_committed():

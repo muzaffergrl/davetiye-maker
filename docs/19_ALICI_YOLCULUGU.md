@@ -815,7 +815,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
 ## 5. START HERE rehberi
 
 **Ortak kaynak:** Ek A (bu belgenin sonunda, iki işaret satırı arasında: `g091:start-here:start` … `end`). Yer tutucular
-(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{OPENING}`, `{LANGUAGE_FONTS}`) Ek A'nın başındaki tabloda. **Üretim tek
+(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{OPENING}`, `{OPENING_TAB}`, `{LANGUAGE_FONTS}`) Ek A'nın başındaki tabloda. **Üretim tek
 komut (G122):** `python3 tools/build_customer_guides.py` — 20 tasarımın her biri için `package/customer/START_HERE.md`,
 `START_HERE.pdf`, `img/start_qr.{png,svg}` (yalnız `tools/make_qr.py`, gerçek başlat linkinden), `img/start_qr_page.png`; sonra
 denetim. `--designs 06-20` seçim, `--check` yalnız denetim, `--base-url` / `GUIDE_BASE_URL` başka alan adı (karar gelince).
@@ -847,9 +847,9 @@ Taban `https://davetiye-platform-five.vercel.app` (geçici Vercel adresi; alan a
 basılı kartlara gireceği için satıştan önce, docs/05 §C). QR koyu rengi tasarımın `palette.json`'undaki en koyu renk (06, 17, 19'da
 `ink` açık renk olduğu için), beyaz zeminde kontrast ≥ 7:1.
 
-**Canlıyla fark (2026-10-16):** rehber depodaki paneli (G100) anlatıyor. Production `b952bc8` (`dpl_HKT1…`, docs/10 §2) G100'ü
-içermiyor (`git merge-base --is-ancestor 368ebb1 b952bc8` → hayır). G100'lü yayın canlıya çıkıp `--check` yeniden geçmeden rehber
-alıcıya verilmez. 20 başlat linki (`/start?theme=<id>`, "Design: <ad>" + form) ve `/privacy` aynı gün canlıda `200` (Vercel
+**Canlıyla fark (2026-10-16):** rehber depodaki paneli (G100 + G121) anlatıyor. Production `b952bc8` (`dpl_HKT1…`, docs/10 §2)
+ikisini de içermiyor (`git merge-base --is-ancestor 368ebb1 b952bc8` → hayır). G100 + G121'li yayın canlıya çıkıp `--check` yeniden geçmeden
+rehber alıcıya verilmez. 20 başlat linki (`/start?theme=<id>`, "Design: <ad>" + form) ve `/privacy` aynı gün canlıda `200` (Vercel
 bağlayıcısı; bu ortamdan `curl` vekil sunucuda 403).
 
 **Yapı (alıcının sırasıyla):** Good to know before you begin → **Start now: the first 5 steps** (QR + link) → **Save your edit
@@ -864,8 +864,10 @@ Results, Held) → Step 8 After the wedding → Online süresi → Quick answers
   (`platform/components/panel`, `platform/app/start`, `platform/lib/{panel,claim,theme}`, tasarımın `theme.json`'u); 2026-10-16'da
   hepsi bulundu. G100 ile gelenler: Learn more, Your website is live, Copy link, Open website, Share, More ways to share,
   Next, if you like, Go to my editor, Go to the first one, Guest list, Results, All / Coming / Not coming / New, Mark as seen,
-  Held, Keep this reply, Edit reply, Remove reply. Önizleme sekmesi her tasarımda **Envelope** (`lib/panel/model.ts`
-  `PAGE_LABELS`); zarfsız 6 tasarımda rehber "Envelope is the opening page, where guests tap the {OPENING}" diye açıklar.
+  Held, Keep this reply, Edit reply, Remove reply. G121 ile gelenler: Continue (Skip for now yanında), Settings, Time zone,
+  Saved. Önizlemenin ilk sekmesi G121'den beri tasarımın kendi açılışı (`{OPENING_TAB}`: Envelope, Gatefold, Pouch, Wallet,
+  Book, Sleeve; `lib/panel/model.ts` `openingTabLabel`); kaynakta düz metin olmadığı için `--check` bu etiketi
+  `openingTabLabel`'ın varlığıyla doğrular. Zarfsız 6 tasarımın rehberinde "envelope" hiçbir biçimde geçmez.
 - K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
 - Ekran görüntüsü yok: ekranlar K29/G100 panelinden yeniden alınmadı. Canlı tabanla `capture` yeniden alınınca rehbere görsel
   eklenebilir (önerilen görev, §7).
@@ -988,6 +990,7 @@ metni burada değiştir, komutu yeniden koş. Yer tutucular (araç doldurur; dol
 | `{START_URL}` | `https://davetiye-platform-five.vercel.app/start?theme=<id>` | `--base-url` / `GUIDE_BASE_URL`; rota `platform/app/start/page.tsx` |
 | `{PRIVACY_URL}` | `https://davetiye-platform-five.vercel.app/privacy` | aynı taban; rota `platform/app/(marketing)/privacy/page.tsx` |
 | `{OPENING}` | Misafirin ilk dokunduğu nesne: `envelope`; 06 ve 14 `gatefold`, 09 `pouch`, 12 `wallet`, 13 `book`, 18 `sleeve` | `platform/lib/marketing/designs.ts` `opening` ("Your guests tap the …") |
+| `{OPENING_TAB}` | Aynı kelime büyük harfle: panelin ilk önizleme sekmesi (`Envelope`, `Gatefold`, `Pouch`, `Wallet`, `Book`, `Sleeve`) | G121: `platform/lib/panel/model.ts` `openingTabLabel` (aynı `designs.ts` cümlesinden) |
 | `{LANGUAGE_FONTS}` | Tasarım fontlarının dil kapsamı (3 cümleden biri, aşağıda) | `designs.ts` `fonts` + aracın `FONT_SUBSETS` tablosu (Google Fonts CSS, 2026-10-16) |
 
 `{LANGUAGE_FONTS}`: bütün fontlar latin-ext + Kiril (01, 03, 19) → "Accented Latin letters and Cyrillic use the design's fonts;
@@ -1002,7 +1005,9 @@ Panel etiketleri (kalın) kaynak koddan birebir: `--check` her kalın etiketi `p
 Biçim aracın desteklediği öğelerle sınırlı (başlık, paragraf, `- ` madde, numaralı satır, 2 sütunlu tablo, `![…](…)` = QR,
 `**kalın**`, link). Değişiklik geçmişi: G091 (ilk metin), G100 entegrasyonu (Sample satırı, yayın ekranı), **G122** (kurulum 1. adım
 yalnız adlar + tarih, yayın sonrası "Your website is live" ekranı, Guests'in Guest list / Results görünümleri, Held yanıtlar,
-önizleme sekmeleri, `{OPENING}` ve `{LANGUAGE_FONTS}`, Home → Help & questions).
+önizleme sekmeleri, `{OPENING}` ve `{LANGUAGE_FONTS}`, Home → Help & questions), **G121 uyarlaması** (kurulum 2. adımda
+"More photos" yok → Edit → Photos; Skip for now düğmesi; önizleme sekmesi `{OPENING_TAB}`; Home'da Settings kartı; "Saved";
+Review'da göz düğmesi; Share'de QR katlı bölüm).
 
 <!-- g091:start-here:start -->
 ````markdown
@@ -1055,10 +1060,10 @@ If your connection drops, tap **Create my website** again: you get your link bac
 
 ## Step 2. Set up in three steps
 
-The editor starts with a short setup. The bar at the top shows **Step 1 of 3**. You can tap **Skip for now** on steps 1 and 2, and **Save & exit** at any time. Everything is saved.
+The editor starts with a short setup. The bar at the top shows **Step 1 of 3**. On steps 1 and 2, **Skip for now** sits next to **Continue**; **Save & exit** works at any time. Everything is saved.
 
 1. **Your names and date.** Your two first names, then the wedding date and the ceremony time. The **Time zone of the wedding** comes from your phone; tap **Change** if the wedding is in another time zone. **Full names for the invitation card** are optional. One line says how often you can change your names or date after you publish; **Learn more** explains what is always free.
-2. **Add your photo.** One photo opens your website. **More photos** are optional; you can add them any time.
+2. **Add your photo.** One photo is enough to start: it opens your website. The editor tells you how many more photo places your design has; add them any time under **Edit → Photos**. Until then guests see a soft placeholder image.
 3. **Publish your website.** Check the summary and the preview, read **Good to know before you publish**, then tap **Publish my website**. Or come back later: Home shows how ready your website is.
 
 How your names appear, the monogram (if your design shows one) and the date style (Month first or Day first) are not part of the setup: you find them later under **Edit**.
@@ -1075,7 +1080,7 @@ We check each order in our Etsy shop before a website can go live. You can set u
 
 Use the buttons at the bottom of the screen (at the top on a computer):
 
-- **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until).
+- **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until). Under **Settings** you see your time zone, date style, name and date changes left and guest password; tap a row to change it.
 - **Edit:** six pages with everything on your website.
 - **Guests:** your guests' replies.
 - **Share:** your link, QR code, guest password and your private edit link.
@@ -1095,7 +1100,7 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 
 **Sample text.** Boxes that still hold the design's sample text look faded (in italics, with a dashed border), and the top of the page says how many are left, for example "3 fields still show sample text". Tap **Go to the first one** and type your own text before you share your website. Home lists what is left.
 
-**Saving.** There is no Save button: every change saves as you type, and the cloud icon at the top shows it. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
+**Saving.** There is no Save button: every change saves as you type. **Saved** shows for a moment at the top, then a small cloud icon stays. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
 
 ## Step 4. Add and crop photos
 
@@ -1107,11 +1112,11 @@ No photos yet? Your website still works: empty frames show the design's soft pla
 
 ## Step 5. Preview and publish
 
-Tap the eye icon at the top to preview your pages: **Envelope**, **Home**, **Story**, **Details** and **RSVP**. **Envelope** is the opening page, where guests tap the {OPENING}. The X at the top closes the preview. On a computer the preview stays on the right.
+Tap the eye icon at the top to preview your pages: **{OPENING_TAB}**, **Home**, **Story**, **Details** and **RSVP**. **{OPENING_TAB}** is the opening page, where guests tap the {OPENING}. The X at the top closes the preview. On a computer the preview stays on the right.
 
 **First publish:** tap **Publish**. **Before you publish** lists anything guests would still see from the design (sample text, photo places without a photo, sections without a link). Tap an item to fix it, or tap **Publish my website** and fix it later. Then **Your website is live** shows your link with **Copy link**, **Open website** and, on a phone, **Share**; the QR code is under **More ways to share**. You find both again under **Share** at any time.
 
-**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed, then **Publish changes** (or tap **Publish** in the bar).
+**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed (the eye next to a page previews it), then **Publish changes** (or tap **Publish** in the bar).
 
 ## Name and date changes after publishing
 
@@ -1129,7 +1134,7 @@ Your names and date show with a **Change** button and the changes you have left 
 Open **Share**:
 
 - **Your website link:** **Copy** it and send it by text, WhatsApp or email, or tap **Open** to see it as a guest. Most messaging apps show a preview card with your names and date; send it to yourself first to check.
-- **QR code for printed cards** (shown once your website is live): **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
+- **QR code for printed cards** (shown once your website is live): tap it to open, then **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
 - Your website is not listed on Google. Only people with your link or QR code can open it.
 
 **Guest password** (optional). Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
@@ -1208,7 +1213,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The QR code does not scan.** Download it again from Share and print it larger, with white space around it. Always scan a printed proof before printing all cards.
 
-**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options**.
+**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options** (or tap **Time zone** under **Settings** on Home).
 
 ## Help and privacy
 

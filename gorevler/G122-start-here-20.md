@@ -34,7 +34,8 @@ listesi, bölüm önerisi), docs/01 K33–K37, docs/10 §2, docs/20.
 - [x] 20 PDF'in bütün sayfaları görüntüye çevrilip gözle okundu (75 dpi, 2×2 temas sayfaları, 140 sayfa); jsQR okuması 150 dpi
 - [x] `python3 tools/tests/test_build_customer_guides.py`, `test_listing_kit.py` yeşil
 - [x] `python3 tools/etsy_upload.py --check` 20/20 kural sorunu yok
-- [ ] `python3 tools/tests/test_etsy_upload.py` — 06–20 `etsy_upload.json` eskidi (yazma alanım dışında; aşağıda)
+- [x] `python3 tools/tests/test_etsy_upload.py` (06–20 JSON'u koordinatör yeniledi; G121 sonrası 20'si yeniden üretildi)
+- [x] G121 uyarlaması: Ek A + 20 rehber + 20 `etsy_upload.json`, `--check` 20/20
 - [ ] Gerçek telefonla QR okutma ve G100'lü canlı yayında rehber adımlarının denenmesi
 
 ## Sonuç
@@ -72,15 +73,25 @@ kare karşılaştırıldı). §4 dijital dosya boyutu güncel. §11 yeni satırl
 karakter sayıları 759 / 819; §1.1 tagline'a not (değişmedi, kullanıcı kararı); §3 06–20 G123 önerisiyle (10/5/5); §0 G100 notu;
 yeni §7.6: iki alan Etsy'de yeniden girilmeli (`claude-tarayici`).
 
+**G121 uyarlaması (2026-10-16, koordinatör dalı `d875863` birleştirildi).** Ek A: kurulum 2. adımda "More photos" yok → kalan foto
+yerleri **Edit → Photos**'ta, o zamana kadar yumuşak yer tutucu; **Skip for now** **Continue**'nun yanında; önizlemenin ilk sekmesi
+yeni yer tutucu `{OPENING_TAB}` (Envelope 14 tasarım, Gatefold 06/14, Pouch 09, Wallet 12, Book 13, Sleeve 18 — G121'in eşlemesiyle
+aynı); Home'da **Settings** (Time zone, Date style, Name & date changes left, Guest password); kayıtta **Saved**; Review'da sayfa
+yanındaki göz; Share'de QR katlı ("tap it to open"); sorun gidermede **Time zone** → **Settings**. "Copy edit link" zaten vardı.
+Araç: `{OPENING_TAB}` = `openingTabLabel` (kaynakta düz metin olmadığı için `--check` fonksiyonun varlığını arar); zarfsız tasarım
+rehberinde "envelope" artık hiçbir harf biçiminde geçmez. 20 PDF yine 7 sayfa, 49–56 KB; `--check` 20/20 (jsQR dahil);
+`etsy_upload.py` 20 JSON yeniden, `--check` 20/20; testler (`test_build_customer_guides`, `test_etsy_upload`, `test_listing_kit`)
+yeşil. 01–05 §0/§11 "G100 + G121" ve PDF boyutu güncellendi.
+
 **Açık kalanlar.**
-- 06–20 `etsy_upload.json`: PDF artık var → `digital_files.bytes` ve "digital file missing" blocker'ı eskidi;
-  `python3 tools/etsy_upload.py --designs 06-20` koşulmalı (yazma alanım dışı). O zamana kadar `test_etsy_upload.py` 06'da düşer.
 - 06–20 `listing_v3.md` §0 "START HERE guide: Not produced" satırı ve §11 kutusu eskidi (G123 alanı).
 - docs/19 §0 (G079 notu) ve §1 tablo dil satırı Ek A/§5 dışında, güncellenmedi.
-- Önizleme sekmesinin adı her tasarımda **Envelope** (`PAGE_LABELS`); zarfsız 6 tasarımda rehber açıklıyor. Tema 12'nin `home_replay`
-  metni "Open the envelope again" (G123 bulgusu).
+- Tema 12'nin `home_replay` metni "Open the envelope again" (G123 bulgusu; misafir görür, rehberi etkilemez).
+- Production (`b952bc8`) G100 ve G121'i içermiyor: rehber ancak ikisini içeren yayından sonra alıcıya verilir.
 - Gerçek telefonla QR okutma yapılmadı; alan adı geçici (karar sonrası `--base-url` ile yeniden üretim).
 
 ## Günlük
 - 2026-10-16 alındı (claude-G122, alt-ajan, worktree; taban `claude/zealous-fermi-hy1o40` `9a90aa2`: G123, G125, G100 içinde) ve
   incelemeye gönderildi.
+- 2026-10-16 koordinatör: G121 birleşti → dal `claude/zealous-fermi-hy1o40` (`d875863`) birleştirildi, Ek A G121'e uyarlandı, 20 rehber
+  ve 20 `etsy_upload.json` yeniden üretildi.

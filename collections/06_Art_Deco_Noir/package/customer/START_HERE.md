@@ -47,10 +47,10 @@ If your connection drops, tap **Create my website** again: you get your link bac
 
 ## Step 2. Set up in three steps
 
-The editor starts with a short setup. The bar at the top shows **Step 1 of 3**. You can tap **Skip for now** on steps 1 and 2, and **Save & exit** at any time. Everything is saved.
+The editor starts with a short setup. The bar at the top shows **Step 1 of 3**. On steps 1 and 2, **Skip for now** sits next to **Continue**; **Save & exit** works at any time. Everything is saved.
 
 1. **Your names and date.** Your two first names, then the wedding date and the ceremony time. The **Time zone of the wedding** comes from your phone; tap **Change** if the wedding is in another time zone. **Full names for the invitation card** are optional. One line says how often you can change your names or date after you publish; **Learn more** explains what is always free.
-2. **Add your photo.** One photo opens your website. **More photos** are optional; you can add them any time.
+2. **Add your photo.** One photo is enough to start: it opens your website. The editor tells you how many more photo places your design has; add them any time under **Edit → Photos**. Until then guests see a soft placeholder image.
 3. **Publish your website.** Check the summary and the preview, read **Good to know before you publish**, then tap **Publish my website**. Or come back later: Home shows how ready your website is.
 
 How your names appear, the monogram (if your design shows one) and the date style (Month first or Day first) are not part of the setup: you find them later under **Edit**.
@@ -67,7 +67,7 @@ We check each order in our Etsy shop before a website can go live. You can set u
 
 Use the buttons at the bottom of the screen (at the top on a computer):
 
-- **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until).
+- **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until). Under **Settings** you see your time zone, date style, name and date changes left and guest password; tap a row to change it.
 - **Edit:** six pages with everything on your website.
 - **Guests:** your guests' replies.
 - **Share:** your link, QR code, guest password and your private edit link.
@@ -87,7 +87,7 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 
 **Sample text.** Boxes that still hold the design's sample text look faded (in italics, with a dashed border), and the top of the page says how many are left, for example "3 fields still show sample text". Tap **Go to the first one** and type your own text before you share your website. Home lists what is left.
 
-**Saving.** There is no Save button: every change saves as you type, and the cloud icon at the top shows it. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
+**Saving.** There is no Save button: every change saves as you type. **Saved** shows for a moment at the top, then a small cloud icon stays. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
 
 ## Step 4. Add and crop photos
 
@@ -99,11 +99,11 @@ No photos yet? Your website still works: empty frames show the design's soft pla
 
 ## Step 5. Preview and publish
 
-Tap the eye icon at the top to preview your pages: **Envelope**, **Home**, **Story**, **Details** and **RSVP**. **Envelope** is the opening page, where guests tap the gatefold. The X at the top closes the preview. On a computer the preview stays on the right.
+Tap the eye icon at the top to preview your pages: **Gatefold**, **Home**, **Story**, **Details** and **RSVP**. **Gatefold** is the opening page, where guests tap the gatefold. The X at the top closes the preview. On a computer the preview stays on the right.
 
 **First publish:** tap **Publish**. **Before you publish** lists anything guests would still see from the design (sample text, photo places without a photo, sections without a link). Tap an item to fix it, or tap **Publish my website** and fix it later. Then **Your website is live** shows your link with **Copy link**, **Open website** and, on a phone, **Share**; the QR code is under **More ways to share**. You find both again under **Share** at any time.
 
-**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed, then **Publish changes** (or tap **Publish** in the bar).
+**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed (the eye next to a page previews it), then **Publish changes** (or tap **Publish** in the bar).
 
 ## Name and date changes after publishing
 
@@ -121,7 +121,7 @@ Your names and date show with a **Change** button and the changes you have left 
 Open **Share**:
 
 - **Your website link:** **Copy** it and send it by text, WhatsApp or email, or tap **Open** to see it as a guest. Most messaging apps show a preview card with your names and date; send it to yourself first to check.
-- **QR code for printed cards** (shown once your website is live): **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
+- **QR code for printed cards** (shown once your website is live): tap it to open, then **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
 - Your website is not listed on Google. Only people with your link or QR code can open it.
 
 **Guest password** (optional). Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
@@ -200,7 +200,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The QR code does not scan.** Download it again from Share and print it larger, with white space around it. Always scan a printed proof before printing all cards.
 
-**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options**.
+**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options** (or tap **Time zone** under **Settings** on Home).
 
 ## Help and privacy
 
