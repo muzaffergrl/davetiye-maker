@@ -1,6 +1,7 @@
 // BKE Studio brand kit as the platform uses it (G066, K27; source: brand/README.md, brand/tokens.json).
-// Files live in public/brand/: the logos are copies of brand/svg/ (never re-typeset with a font), the icons were drawn
-// from the small monogram SVG (GM02), pattern_tile.png is GPT's brand pattern, unchanged (K21).
+// Files live in public/brand/: the logos are copies of brand/svg/ (never re-typeset with a font). G129 (2026-10-16): the
+// symbol is the S (traced from GPT's brand/assets/gpt/final_s/, K21); tab icons from the small S monogram, app icons from
+// the traced S shop icon (brand/etsy/bke-shop-icon.svg); pattern_tile.png keeps GPT's tile grid with the S symbol.
 import type { Metadata } from 'next';
 
 export const BRAND_FILES = {
@@ -8,11 +9,11 @@ export const BRAND_FILES = {
   logo: '/brand/bke-logo-horizontal-anchor.svg',
   /** Horizontal logo for dark (aubergine) backgrounds: site footer. */
   logoReverse: '/brand/bke-logo-horizontal-reverse.svg',
-  /** viewBox of both horizontal logos (width / height = 6.02). */
-  logoBox: { width: 1305.83, height: 216.88 },
-  /** Square app icon (aubergine square, paper monogram) — also the Organization logo in JSON-LD. */
+  /** viewBox of both horizontal logos (width / height = 5.81). */
+  logoBox: { width: 1308.08, height: 225 },
+  /** Square app icon (aubergine square, paper S with the gold wedge) — also the Organization logo in JSON-LD. */
   icon512: '/brand/icon-512.png',
-  /** GPT brand pattern (gold K tiles on paper), used as a background image only. */
+  /** Brand pattern (gold S symbols on paper, GPT's tile grid), used as a background image only. */
   pattern: '/brand/pattern_tile.png',
   manifest: '/brand/site.webmanifest',
 } as const;
