@@ -9,6 +9,9 @@ import { resolveShortMapLink } from '../lib/panel/map-link.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
 import { validateContent } from '../lib/content/validate.ts';
 import { siteCsp } from '../lib/site/render.ts';
+import { draftFromDemo } from '../lib/claim/claim.ts';
+import { DEMO_CITY_PINS, withDemoMap } from '../lib/claim/demo-map.ts';
+import { handleDemoPage } from '../lib/claim/demo-page.ts';
 import { demoContent } from './helpers.ts';
 
 const THEMES = path.resolve(import.meta.dirname, '../themes');
@@ -153,4 +156,19 @@ test('short map links: only Google / Apple redirectors, the target is read from 
   assert.equal(calls.length, 1, 'other hosts are never requested');
   const evil = async () => new Response(null, { status: 302, headers: { location: 'https://evil.example/maps' } });
   assert.equal(await resolveShortMapLink('https://maps.app.goo.gl/x', evil as typeof fetch), null);
+});
+
+test('the live demo shows the map at the demo city centre; demo records and buyer drafts carry no pin', async () => {
+  const ids = readdirSync(THEMES).filter((d) => !d.startsWith('_') && existsSync(path.join(THEMES, d, 'details.html')));
+  assert.deepEqual(Object.keys(DEMO_CITY_PINS).sort(), ids.sort(), 'one pin per theme');
+  const res = await handleDemoPage(new Request('http://localhost/start/demo/olive-ivory/details'), 'olive-ivory', 'details');
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get('content-security-policy') ?? '', /frame-src 'self' https:\/\/www\.google\.com;/);
+  const $ = cheerio.load(await res.text());
+  assert.match($('.pmap-card').attr('data-map-embed') ?? '', /q=38\.2975%2C-122\.2869/);
+  assert.equal($('[data-directions]').length, 3);
+  const demo = JSON.parse(readFileSync(path.join(THEMES, 'olive-ivory', 'content.demo.json'), 'utf8'));
+  assert.equal(demo.maps, undefined, 'the record itself has no pin');
+  assert.deepEqual(mapPlaces(draftFromDemo(demo, ['Ada', 'Bo'])), [], 'a buyer draft starts without a map');
+  assert.deepEqual(withDemoMap('olive-ivory', { maps: { venue: { show_map: false } } }).maps, { venue: { show_map: false } });
 });

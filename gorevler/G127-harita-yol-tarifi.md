@@ -60,5 +60,11 @@ or a map link so guests can find the place." Misafir sitesi — "Ceremony", "Rec
 Maps when you tap.", "Open in Google Maps", "Get directions", "Google Maps", "Apple Maps", "Waze". Değişen: mevcut "Map link"
 alanı artık haritanın pinini de belirliyor; eski "View map" düğmesi yalnız harita/yol tarifi kapalıyken görünür.
 
-**Açık:** demo içeriklerde adres olmadığından satış demolarında blok görünmüyor (istenirse demo kayda kurgusal olmayan bir şehir
-merkezi pini eklenebilir — karar entegratörde). Gizlilik politikasına "harita dokununca Google'dan yüklenir" cümlesi eklenmeli (docs/20 §7.2).
+**Demo (kullanıcı isteği, 2026-10-16):** canlı demo (`/start/demo/<tema>`) harita bloğunu demo şehrinin merkezindeki pinle
+gösteriyor: `lib/claim/demo-map.ts` (20 tema → şehir merkezi koordinatı), pin yalnız demo sayfası render edilirken eklenir.
+Demo kayıtları (`content.demo.json`, koleksiyon kopyaları, `site.js` DEV_CONTENT) değişmedi; alıcının ilk taslağı
+(`draftFromDemo`) pin almaz, haritası kendi mekânını izler (test edildi). 390 px: olive-ivory, winter-evergreen,
+lavender-provence demo details — taşma/hata yok (`previews/g127/demo_details_390.jpg`; winter-evergreen'de büyük düğme yazısı
+yüzünden "Waze" ikinci satırda). Testler 1234/1234, build temiz.
+
+**Açık:** Gizlilik politikasına "harita dokununca Google'dan yüklenir" cümlesi eklenmeli (docs/20 §7.2).

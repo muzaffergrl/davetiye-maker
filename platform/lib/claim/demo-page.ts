@@ -12,6 +12,7 @@ import { icsResponse } from '../site/ics.ts';
 import { siteCsp, isSitePage } from '../site/render.ts';
 import { renderTemplate } from '../theme/engine.ts';
 import { readThemePage } from '../theme/theme.ts';
+import { withDemoMap } from './demo-map.ts';
 import { claimableTheme } from './themes.ts';
 
 /** Marks demo renders as previews (the value is not a key; demo pages accept no keys). */
@@ -51,7 +52,8 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
     const { html, disabled, scriptHashes, frameSources } = renderTemplate({
       html: template,
       // The demo always shows the invitation (G075): its fictional wedding date passing must not turn it into a thank-you.
-      content: { ...theme.demo, thank_you: { ...(theme.demo.thank_you ?? {}), mode: 'off' } },
+      // G127: the map block with a pin at the demo city's centre (lib/claim/demo-map.ts).
+      content: withDemoMap(theme.id, { ...theme.demo, thank_you: { ...(theme.demo.thank_you ?? {}), mode: 'off' } }),
       theme: theme.manifest,
       page,
       // pageRoute() builds "/<slug>/<page>": this keeps the demo's page links under /start/demo/<theme>.
