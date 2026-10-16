@@ -144,24 +144,47 @@
     animation-delay: 2s;
   }
 
-  /* design page screens: dealt out of one stack into a row */
+  /* design page screens: a fan of the real screens (our own take on a "card spread"). At rest the four screens hang
+     from their bottom edge on a gentle arc; the one under the pointer or finger lifts out and straightens, its
+     neighbours lean away. On entry they are dealt out of one stack into the fan. Static transforms + :has(), no JS. */
+  [data-fx-deal] {
+    padding-inline: 10px;
+    padding-top: 14px;
+  }
+  [data-fx-deal] > * {
+    --fan-a: 0deg;
+    --fan-y: 0px;
+    --fan-lift: 0px;
+    --fan-push: 0deg;
+    position: relative;
+    transform-origin: 50% 100%;
+    transform: translateY(calc(var(--fan-y) - var(--fan-lift))) rotate(calc(var(--fan-a) + var(--fan-push)));
+    transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  [data-fx-deal] > :nth-child(1) { --fan-a: -6deg; --fan-y: 10px; }
+  [data-fx-deal] > :nth-child(2) { --fan-a: -2deg; --fan-y: 2px; }
+  [data-fx-deal] > :nth-child(3) { --fan-a: 2deg; --fan-y: 2px; }
+  [data-fx-deal] > :nth-child(4) { --fan-a: 6deg; --fan-y: 10px; }
+  [data-fx-deal] > * > :first-child {
+    transition: box-shadow 0.45s var(--fx-ease);
+  }
+  [data-fx-deal] > :is(:hover, :active) {
+    --fan-lift: 18px;
+    --fan-push: calc(var(--fan-a) * -0.7);
+    z-index: 2;
+  }
+  [data-fx-deal] > :is(:hover, :active) > :first-child {
+    box-shadow: 0 34px 50px -26px rgb(43 21 38 / 0.6);
+  }
+  [data-fx-deal] > :has(+ :is(:hover, :active)) {
+    --fan-push: -2.5deg;
+  }
+  [data-fx-deal] > :is(:hover, :active) + * {
+    --fan-push: 2.5deg;
+  }
   [data-fx-in] [data-fx-deal] > * {
     animation: fx-deal 0.9s var(--fx-ease-out) backwards;
     animation-delay: calc(var(--fx-i, 0) * 90ms + 150ms);
-  }
-  [data-fx-deal] > * > :first-child {
-    transition:
-      transform 0.45s var(--fx-ease-out),
-      box-shadow 0.45s var(--fx-ease);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    [data-fx-deal] > *:hover > :first-child {
-      transform: translateY(-8px) rotate(-1.2deg);
-      box-shadow: 0 30px 50px -28px rgb(43 21 38 / 0.55);
-    }
-    [data-fx-deal] > *:nth-child(even):hover > :first-child {
-      transform: translateY(-8px) rotate(1.2deg);
-    }
   }
 
   /* ---------- design cards: light under the pointer, a small tilt, the opened screen rises (opening preview) ---- */

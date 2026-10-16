@@ -44,3 +44,8 @@ bileşeniyle yazıldı (`platform/components/fx/`). Ayrıntı: docs/14 §14.5, d
 ## Günlük
 - 2026-10-15 açıldı (kullanıcı isteği K31)
 - 2026-10-16 claude-kod (G089 oturumu): açık kaynak React Bits ile uygulandı, ölçüldü → inceleme
+- 2026-10-16 React Bits Pro: kullanıcı lisans anahtarı verdi, ağ izni açıldı; kayıt sunucusundan katalog okundu. Pro kaynağını repoya
+  kopyalama oturum güvenlik denetiminde engellendi; koordinatör kararı: kendin yaz. Seçilen iki fikir kendi kodumuzla yazıldı:
+  tasarım sayfasında ekran yelpazesi ("card-spread" fikri, CSS) ve yayın ekranında konfeti ("celebration-cursor" fikri, canvas,
+  `components/fx/Confetti.tsx`; önceki CSS `Celebrate` kaldırıldı). Pro kaynağı ve anahtar repoda yok; `motion` eklenmedi.
+  three.js'li arka planlar (aurora, dappled-light vb.) mobil bütçe nedeniyle alınmadı. g089-browser 33/33, 390/1280 taşma 0.

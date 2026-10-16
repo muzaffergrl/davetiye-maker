@@ -7,10 +7,10 @@
   "failed": 0,
   "metrics": {
     "/": {
-      "lcp": 1408,
+      "lcp": 1748,
       "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/blush-garden-rose/envelope-480.webp",
       "cls": 0,
-      "fcp": 1048,
+      "fcp": 1356,
       "first": {
         "h1": {
           "o": "1",
@@ -21,14 +21,14 @@
           "t": "none"
         }
       },
-      "transferredKB": 462,
+      "transferredKB": 463,
       "scriptKB": 141
     },
     "/designs": {
-      "lcp": 808,
+      "lcp": 864,
       "lcpElement": "P",
       "cls": 0,
-      "fcp": 808,
+      "fcp": 864,
       "first": {
         "h1": {
           "o": "1",
@@ -39,14 +39,14 @@
           "t": "none"
         }
       },
-      "transferredKB": 425,
+      "transferredKB": 426,
       "scriptKB": 140
     },
     "/designs/olive-ivory": {
-      "lcp": 1396,
+      "lcp": 1436,
       "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/olive-ivory/envelope-480.webp",
       "cls": 0,
-      "fcp": 1044,
+      "fcp": 1024,
       "first": {
         "h1": {
           "o": "1",
@@ -61,10 +61,10 @@
       "scriptKB": 141
     },
     "/designs/coastal-seaside": {
-      "lcp": 1368,
+      "lcp": 1388,
       "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/coastal-seaside/envelope-480.webp",
       "cls": 0,
-      "fcp": 968,
+      "fcp": 1012,
       "first": {
         "h1": {
           "o": "1",
@@ -79,10 +79,10 @@
       "scriptKB": 141
     },
     "/guides/how-to-make-a-wedding-website": {
-      "lcp": 856,
+      "lcp": 884,
       "lcpElement": "P",
       "cls": 0,
-      "fcp": 856,
+      "fcp": 884,
       "first": {
         "h1": {
           "o": "1",
@@ -102,7 +102,7 @@
       "name": "perf /: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
       "ok": true,
       "detail": {
-        "lcp": 1408,
+        "lcp": 1748,
         "el": "IMG http://127.0.0.1:3489/marketing/designs/blush-garden-rose/envelope-480.webp"
       }
     },
@@ -115,7 +115,7 @@
       "name": "perf /: first load ≤ 600 KB transferred",
       "ok": true,
       "detail": {
-        "total": 462,
+        "total": 463,
         "script": 141
       }
     },
@@ -137,7 +137,7 @@
       "name": "perf /designs: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
       "ok": true,
       "detail": {
-        "lcp": 808,
+        "lcp": 864,
         "el": "P"
       }
     },
@@ -150,7 +150,7 @@
       "name": "perf /designs: first load ≤ 600 KB transferred",
       "ok": true,
       "detail": {
-        "total": 425,
+        "total": 426,
         "script": 140
       }
     },
@@ -172,7 +172,7 @@
       "name": "perf /designs/olive-ivory: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
       "ok": true,
       "detail": {
-        "lcp": 1396,
+        "lcp": 1436,
         "el": "IMG http://127.0.0.1:3489/marketing/designs/olive-ivory/envelope-480.webp"
       }
     },
@@ -207,7 +207,7 @@
       "name": "perf /designs/coastal-seaside: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
       "ok": true,
       "detail": {
-        "lcp": 1368,
+        "lcp": 1388,
         "el": "IMG http://127.0.0.1:3489/marketing/designs/coastal-seaside/envelope-480.webp"
       }
     },
@@ -242,7 +242,7 @@
       "name": "perf /guides/how-to-make-a-wedding-website: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
       "ok": true,
       "detail": {
-        "lcp": 856,
+        "lcp": 884,
         "el": "P"
       }
     },

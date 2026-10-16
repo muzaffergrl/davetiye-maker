@@ -1648,7 +1648,8 @@ React Bits Pro lisansı yok; açık kaynak React Bits (MIT) fikirleri kütüphan
 - Tasarım kartları: imleç altında yumuşak ışık (SpotlightCard), küçük 3B eğim (TiltedCard), açılmış ana sayfa ekranı zarftan yükselir;
   dokunmatikte basma etkisi. Hero'da çipten tasarım değişince yeni afiş yumuşakça gelir (ilk afiş LCP olduğu için asla).
 - "How it works": numaralar sırayla belirir, altın çizgi bir sonraki adıma çizilir. "How the opening works" okları sırayla ilerler.
-- Tasarım sayfası: sayfa ekranları tek desteden sıraya "dağıtılır"; imleçle hafif kalkar. /designs: filtre kullanılınca yeni görünen
+- Tasarım sayfası: dört gerçek ekran yay biçiminde bir yelpaze olur (tek desteden dağıtılarak açılır); imleç ya da parmak altındaki
+  ekran kalkıp düzleşir, komşuları kenara yaslanır (CSS + `:has()`, JS yok; React Bits Pro "card-spread" fikri, kod bizim). /designs: filtre kullanılınca yeni görünen
   kartlar yumuşakça gelir. Sayfalar arası: çapraz belge görünüm geçişi (Chromium; başlık sabit kalır).
 - `prefers-reduced-motion`: hepsi kapalı, hiçbir bölüm gizlenmez. JavaScript yoksa sayfa statik hâliyle görünür.
 - Ölçüm `tests/g089-browser.ts` (marketing-browser bütçesiyle aynı kısıtlama): önce/sonra LCP / → 1516/1408 ms, design 1460/1396 ms,

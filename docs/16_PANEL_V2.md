@@ -862,7 +862,8 @@ Yalnız görsel katman; panel mantığına, alanlara ve etiketlere dokunulmadı.
 içe aktarır): görünüm değişince içerik yumuşakça gelir (yalnız opaklık: yapışkan çubuklar oynamaz), düğmelerde daha belirgin basma,
 açılır bölümler aşağı doğru açılır, "Saved" bulut işareti zıplar, hazır olma çubuğu soldan dolar, önizleme yüklenirken sayfa biçimli
 iskelet + ışık bandı (`data-fx-skeleton`, PreviewPane'de tek öznitelik) ve sayfa yüklenince yumuşak geçiş, "Your website is live"
-ekranında onay işareti + bir kez marka renkli kâğıt patlaması (`components/fx/Celebrate.tsx`, Setup.tsx'te tek satır). Admin:
+ekranında onay işareti + bir kez iki köşeden marka renkli konfeti (`components/fx/Confetti.tsx`, ~3,4 s, kendi yazdığımız canvas;
+React Bits Pro "celebration-cursor" fikri; Setup.tsx'te tek satır). Admin:
 `components/fx/admin-fx.css` (sayfa yumuşak açılır, site kartları sırayla gelir, imleçle hafif kalkar). Hepsi `prefers-reduced-motion`'da
 kapalı. Ekranlar `platform/previews/g089/`.
 
