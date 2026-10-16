@@ -116,7 +116,7 @@ def test_real_listings():
 
 def test_services():
     """G130 (K42): the two service listings — Etsy rules, TRY proposal, undecided fields kept as open checks."""
-    assert [sid for sid, _ in eu.SERVICES] == ["setup-service", "custom-design"]
+    assert [sid for sid, _ in eu.SERVICES] == ["setup-service", "custom-design", "extra-revision"]
     for sid, price in eu.SERVICES:
         listing = REPO / "collections" / "_services" / sid / "package" / "listing"
         md = (listing / "listing_v3.md").read_text(encoding="utf-8")
@@ -138,6 +138,8 @@ def test_services():
     custom = eu.build_service("custom-design", 2960)[0]["description"]
     assert "2 rounds of changes" in custom and "500 TL" in custom and "includes the design" in custom
     assert "never sell it" in custom  # exclusive (2026-10-16)
+    extra = eu.build_service("extra-revision", 500)[0]["description"]
+    assert "only for couples who already ordered a custom design" in extra and "One purchase = one round" in extra
 
 
 def test_check_exit():

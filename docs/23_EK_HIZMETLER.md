@@ -7,11 +7,12 @@ Fiyatı kura göre ajan ayarladı; **kullanıcı 2026-10-16'da onayladı** ve ka
 
 Dosyalar:
 - İlanlar: `collections/_services/setup-service/package/listing/listing_v3.md` + `etsy_upload.json`,
-  `collections/_services/custom-design/package/listing/listing_v3.md` + `etsy_upload.json` (`python3 tools/etsy_upload.py --designs services`).
+  `collections/_services/custom-design/package/listing/listing_v3.md` + `etsy_upload.json`,
+  `collections/_services/extra-revision/package/listing/listing_v3.md` + `etsy_upload.json` (`python3 tools/etsy_upload.py --designs services`).
 - Satış sitesi: `/pricing` → "Extras" bölümü (`platform/components/marketing/ExtraServices.tsx`); fiyat ve Etsy linki
   `platform/lib/marketing/config.ts` `services` alanından. Link yer tutucuyken "Coming soon on Etsy"; fiyat (TRY) görünür.
 - Panel: Help → "Need help?" altında tek satır "Prefer us to do it? …" (`platform/components/panel/views.tsx`).
-- Admin mesajları: `setup_service_details`, `setup_service_done`, `custom_design_brief`, `custom_design_ready`
+- Admin mesajları: `setup_service_details`, `setup_service_done`, `custom_design_brief`, `custom_design_ready`, `custom_design_extra_round`
   (`platform/lib/admin/message-templates.json`; docs/19 §4.5'teki kopya aynı).
 
 ## 1. Fiyatlar (kullanıcı onayı, 2026-10-16)
@@ -25,7 +26,7 @@ birimi TRY (K38), Etsy'ye TL girilir. Çıkış noktası şablonun taslak fiyat�
 | "We set it up for you" (kurulum, bir tur) | K42: ~500 TL | **500 TL** | 10.09 | onaylı (2026-10-16) |
 | Özel tasarım (şablon dahil) | 1.460 + 1.500 | **2.960 TL** | 59.76 | onaylı (2026-10-16) |
 | Tasarım + kurulum (iki ayrı satın alma) | 1.460 + 500 | 1.960 TL | 39.57 | bilgi |
-| Özel tasarımda ek revizyon turu (2 turdan sonra) | kullanıcı | **500 TL** | 10.09 | onaylı (2026-10-16); Etsy'de nasıl satılacağı açık (§4.7) |
+| Ek tasarım revizyonu (2 turdan sonra, tur başı) | kullanıcı | **500 TL** | 10.09 | onaylı (2026-10-16); ayrı ilan (§4.7) |
 
 Adet: bütün ilanlarda **999** (Etsy'nin üst sınırı; kullanıcı: stok sınırı yok). Otomatik yenileme hâlâ açık.
 
@@ -98,9 +99,11 @@ alınmaz. İsim/foto/metni alıcı girer (ya da kurulum hizmeti alır).
    `Özel tasarım: tema <id>, Etsy #<no>, revizyon n/2`.
 6. **Münhasırlık (karar 2026-10-16):** özel tema **başkasına satılmaz**; satış listesine (`config.ts designs[]`) ve renk varyantı
    olarak da girmez. Görselleri başka tasarımda kullanılmaz.
-7. **Ek revizyon (3. tur ve sonrası, 500 TL):** Etsy üzerinden ödenmeli (site dışı ödeme yok). Henüz ilanı yok. Öneri: ayrı bir
-   "Extra design revision" ilanı (500 TL) ya da alıcıya özel Etsy teklifi. Karar ve ilan metni ayrı iş; o zamana dek 3. tur istenirse
-   kullanıcıya sorulur.
+7. **Ek revizyon (3. tur ve sonrası, 500 TL; karar 2026-10-16: ayrı ilan):** `collections/_services/extra-revision/package/listing/`
+   ("Extra Design Revision …", 500 TL, 3 gün, adet 999). Yalnız özel tasarım alıcıları için; Etsy alıcıyı sınırlayamaz, ilan bunu
+   açıkça söyler ve özel tasarım siparişi olmayan bir alıcının siparişinde önce ona yazılır. Akış: alıcı 3. tur isterse
+   `custom_design_extra_round` → alıcı ilanı satın alır → Etsy'de siparişi gör → değişiklikleri tek mesajda al → 3 gün içinde
+   güncel tasarım → sitenin notuna `revizyon 3` (4, 5 …). Özel tasarım ilanıyla birlikte yayınlanır.
 
 ## 5. Etsy mesaj şablonları (İngilizce; tek kaynak `platform/lib/admin/message-templates.json`)
 
@@ -110,6 +113,7 @@ alınmaz. İsim/foto/metni alıcı girer (ya da kurulum hizmeti alır).
 | `setup_service_done` | Bilgiler girildikten sonra, taze linkle | `{names}`, `{design}`, `{edit_url}`, `{site_url}` |
 | `custom_design_brief` | Özel tasarım siparişinden hemen sonra | `{order}` |
 | `custom_design_ready` | Özel tema /start'ta açılınca | `{start_url}`, `{order}` |
+| `custom_design_extra_round` | 3. (ve sonraki) revizyon isteği / ek revizyon ilanı satın alınınca | — |
 
 Admin'de Türkçe başlık + "ne zaman" metni `platform/lib/admin/messages.ts` `TITLES_TR`.
 
@@ -124,7 +128,6 @@ aracıyla; QR ya da web adresi yok. Dijital dosya önerisi: tek sayfalık `SETUP
 Karara bağlananlar (2026-10-16): fiyatlar (1.460 / 500 / 2.960 TL), teslim 3 gün, 2 revizyon + tur başı 500 TL, münhasırlık,
 adet 999.
 
-1. Ek revizyon turunun (500 TL) Etsy'de satış biçimi (§4.7).
-2. Özel temayı tek alıcıya açma yolu (§4.4) ve "linki değiştirmeden düzenle" admin işi (§3.3) — iki geliştirme görevi önerisi.
-3. Otomatik yenileme (bütün ilanlar gibi).
-4. Etsy'nin hizmet ilanı politikası okunacak (`[VERIFY]`).
+1. Özel temayı tek alıcıya açma yolu (§4.4) ve "linki değiştirmeden düzenle" admin işi (§3.3) — iki geliştirme görevi önerisi.
+2. Otomatik yenileme (bütün ilanlar gibi).
+3. Etsy'nin hizmet ilanı politikası okunacak (`[VERIFY]`).

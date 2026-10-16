@@ -51,7 +51,7 @@ HOW IT WORKS
 WHAT IS NOT INCLUDED
 • Entering your details for you (add our setup service if you would like us to do it)
 • Music, printed invitations, a custom domain (yournames.com)
-• Changes beyond the 2 included rounds: each further round of design changes is 500 TL, as a separate Etsy purchase
+• Changes beyond the 2 included rounds: each further round is 500 TL, through our Extra design revision listing
 
 GOOD TO KNOW
 • The artwork is created with the help of AI image tools from our own descriptions, then selected, refined and built into your website by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting]
@@ -147,7 +147,7 @@ within 24 hours (docs/23 §4).
 
 - [x] Price approved: 2,960 TL (2026-10-16)
 - [x] Revisions (2, then 500 TL a round), turnaround (3 days) and exclusivity decided (2026-10-16), here and in the admin messages
-- [ ] How a buyer pays for an extra 500 TL round on Etsy (docs/23 §4)
+- [x] Extra rounds: own listing `collections/_services/extra-revision/` (500 TL, 2026-10-16); publish both together
 - [ ] A custom theme made once end to end for one buyer (only that order can start it on /start), docs/23 §4
 - [ ] Etsy's policy on custom design listings read; category and digital-file setup checked in the listing editor
 - [ ] `CUSTOM_DESIGN.pdf` made; images made (§5)

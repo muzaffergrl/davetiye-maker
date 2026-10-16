@@ -357,6 +357,21 @@
     "note": "The custom theme must be claimable on /start before this is sent (docs/23 §4)."
   },
   {
+    "id": "custom_design_extra_round",
+    "title": "Custom design: extra round of changes",
+    "when": "A custom design buyer asks for a third (or later) round of design changes, or has just bought the Extra design revision listing.",
+    "placeholders": [
+      "shop"
+    ],
+    "body": [
+      "Hi, thank you! We are happy to make more changes to your custom design.",
+      "Your custom design included 2 rounds of changes, and both are used. Each further round is 500 TL, through the Extra design revision listing in our shop. If you have already bought it, thank you: please send us all the changes for this round together in one message.",
+      "We send you the updated design within 3 days of receiving your changes. Your names, dates, photos and texts you can still change yourself in your editor at any time, free.",
+      "{shop}"
+    ],
+    "note": "docs/23 §4.7. Before a third round, check the Etsy order for the Extra design revision listing; record the round in the site note (revision n)."
+  },
+  {
     "id": "refund_or_problem",
     "title": "Refund request / unhappy buyer",
     "when": "The buyer asks for a refund or says the product does not work for them.",

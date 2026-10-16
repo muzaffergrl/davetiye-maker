@@ -7,7 +7,7 @@
   python3 tools/etsy_upload.py --check --strict     # … or if a file Etsy needs (guide PDF, images, video) is missing
   python3 tools/etsy_upload.py --designs services   # only the two service listings (collections/_services/, K42)
 
-Services (G130, K42): "We set it up for you" and custom design are their own listings in collections/_services/<id>/.
+Services (G130, K42): "We set it up for you", custom design and the extra design revision are their own listings in collections/_services/<id>/.
 They have no theme and no demo; their TRY prices were approved on 2026-10-16 (docs/23 §1), and any undecided
 [PLACEHOLDER] left in a description becomes an open check. "all" builds the designs and the services.
 
@@ -64,10 +64,11 @@ DESIGNS = [
 PRICE_TRY = 1460
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
 # K42 services (G130): (id, TRY price approved 2026-10-16). Rate: 49.53 TRY per USD, BloombergHT 2026-10-16 09:30 (docs/23 §1).
-SERVICES = [("setup-service", 500), ("custom-design", 2960)]
+SERVICES = [("setup-service", 500), ("custom-design", 2960), ("extra-revision", 500)]
 USD_TRY = 49.53
 USD_TRY_SOURCE = "BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell)"
-SERVICE_DIGITAL_FILE = {"setup-service": "SETUP_SERVICE.pdf", "custom-design": "CUSTOM_DESIGN.pdf"}
+SERVICE_DIGITAL_FILE = {"setup-service": "SETUP_SERVICE.pdf", "custom-design": "CUSTOM_DESIGN.pdf",
+                        "extra-revision": "EXTRA_REVISION.pdf"}
 PLACEHOLDER = re.compile(r"\[(?!VERIFY)[A-Z][A-Z /:-]*\]")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 IMAGES_STATUS = ("current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 "

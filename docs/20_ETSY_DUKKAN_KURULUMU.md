@@ -139,8 +139,8 @@ Lansmanda 5 tasarım (01–05); 06–20'nin ilan metinleri G123'te yazıldı. B�
 İlan yoksa bölümler boş görünür. Bölümler açılır, ilanlar yayınlanınca atanır. Save the Date ürünü gelince `Save the Date` bölümü
 eklenir.
 
-**Hizmetler bölümü (G130, K42; öneri — kullanıcı kararı):** `Services` (8 karakter) adlı dördüncü bölüm. İçinde iki ilan:
-"We set it up for you" kurulum hizmeti ve özel tasarım (`collections/_services/*/package/listing/listing_v3.md`, akış
+**Hizmetler bölümü (G130, K42; öneri — kullanıcı kararı):** `Services` (8 karakter) adlı dördüncü bölüm. İçinde üç ilan:
+"We set it up for you" kurulum hizmeti, özel tasarım ve ek tasarım revizyonu (`collections/_services/*/package/listing/listing_v3.md`, akış
 `docs/23_EK_HIZMETLER.md`). Tasarım ilanlarından ayrı durur, alıcı vitrinde tasarımlarla karıştırmaz. Bölüm yalnız ilanlar
 yayınlanınca açılır (boş bölüm vitrinde görünmez ama gereksiz); ad alternatifi `Add-ons & Custom` (16).
 

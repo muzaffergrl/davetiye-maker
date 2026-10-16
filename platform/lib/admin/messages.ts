@@ -57,6 +57,7 @@ const TITLES_TR: Record<string, [string, string]> = {
   setup_service_done: ['Kurulum bitti: düzenleme linki', 'Alıcının bilgilerini girdikten sonra, "Yeni sipariş" ya da "Yeni düzenleme linki"nden hemen sonra. Turu sitenin notuna yazın.'],
   custom_design_brief: ['Özel tasarım: fikrinizi anlatın', 'Özel tasarım siparişi gelir gelmez, tasarıma başlamadan (K42). İlk sürüm 3 gün, 2 revizyon, sonrası tur başı 500 TL.'],
   custom_design_ready: ['Özel tasarım hazır: başlatın', 'Özel tema /start\'ta açıldığında; alıcı sitesini başlatabilir.'],
+  custom_design_extra_round: ['Özel tasarım: ek revizyon turu', '3. (ve sonraki) revizyon isteğinde ya da "Extra design revision" ilanı satın alındıktan sonra. Tur başı 500 TL; sitenin notuna yazın.'],
   refund_or_problem: ['İade isteği / memnun olmayan alıcı', 'Alıcı iade istiyor ya da ürünün işine yaramadığını söylüyor.'],
   delete_data: ['Sitemi ve verilerimi silin', 'Alıcı sitenin ya da misafir verilerinin silinmesini istiyor.'],
 };

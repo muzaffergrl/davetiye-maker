@@ -1,0 +1,78 @@
+{
+  "service": "extra-revision",
+  "source": "collections/_services/extra-revision/package/listing/listing_v3.md",
+  "title": "Extra Design Revision for Custom Wedding Website, One More Round of Changes, Add On for Our Custom Design Orders, Digital",
+  "title_length": 121,
+  "description": "One more round of changes to your custom wedding website design.\n\nThis listing is only for couples who already ordered a custom design from our shop. Your custom design includes 2 rounds of changes; buy this listing for each further round you would like. If you have not ordered a custom design, please message us before you buy.\n\nWHAT YOU GET (ONE ROUND)\n• One more round of changes to your custom design: the opening, artwork, colors or fonts\n• Send us all the changes for this round together in one Etsy message\n• We send you the updated design within 3 days of receiving your changes\n\nWHAT IS NOT INCLUDED\n• Your names, dates, photos and texts: you change those yourself in your editor at any time, free (or with our setup service)\n• A completely new design idea: that is a new custom design order\n\nGOOD TO KNOW\n• One purchase = one round of changes. Buy it again for another round.\n• Your design stays yours alone: we never sell it to anyone else.\n• Digital service: nothing is printed or shipped.\n• No returns, exchanges or cancellations once we have started your changes. If a change we made does not match what you asked for, message us on Etsy and we will fix it.\n\nQUESTIONS?\nMessage us here on Etsy. We reply within 24 hours.",
+  "tags": [
+    "design revision",
+    "extra revision",
+    "custom design",
+    "custom invitation",
+    "wedding website",
+    "revision add on",
+    "design changes",
+    "custom wedding site",
+    "digital invitation",
+    "invitation website",
+    "rsvp website",
+    "e invitation",
+    "add on service"
+  ],
+  "category": "Paper & Party Supplies › Paper › Invitations & Announcements › Invitations (the same as the custom design)",
+  "attributes": {
+    "Type": "Digital files",
+    "Who made it": "I did",
+    "What is it": "A finished product",
+    "When was it made": "Made to order",
+    "Occasion": "Wedding",
+    "Personalization": "Off (the buyer sends the changes in an Etsy message)"
+  },
+  "price_try": 500,
+  "price_usd_approx": 10.09,
+  "price_note": "Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
+  "quantity": 999,
+  "renewal": null,
+  "shop_section": "Services",
+  "digital_files": [
+    {
+      "file": "collections/_services/extra-revision/package/customer/EXTRA_REVISION.pdf",
+      "bytes": null
+    }
+  ],
+  "images": [
+    {
+      "n": 1,
+      "file": "collections/_services/extra-revision/package/listing/images_editorial/01_cover.png",
+      "alt": "Extra design revision: one more round of changes to your custom wedding website design, ready within 3 days",
+      "exists": false,
+      "status": "missing"
+    },
+    {
+      "n": 2,
+      "file": "collections/_services/extra-revision/package/listing/images_editorial/02_how.png",
+      "alt": "How it works: buy this listing, send all your changes in one Etsy message, get your updated design within 3 days",
+      "exists": false,
+      "status": "missing"
+    }
+  ],
+  "open_checks": [
+    {
+      "where": "description",
+      "check": "Etsy's policy on service listings",
+      "text": "• Digital service: nothing is printed or shipped."
+    },
+    {
+      "where": "attributes",
+      "check": "every row in the listing editor, and that Etsy allows this listing as a digital service",
+      "text": ""
+    }
+  ],
+  "blockers": [
+    "listing images missing: collections/_services/extra-revision/package/listing/images_editorial/01_cover.png, collections/_services/extra-revision/package/listing/images_editorial/02_how.png",
+    "digital file missing: collections/_services/extra-revision/package/customer/EXTRA_REVISION.pdf",
+    "renewal not decided"
+  ],
+  "ready_to_publish": false,
+  "rule_problems": []
+}

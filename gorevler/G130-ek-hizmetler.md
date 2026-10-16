@@ -65,3 +65,10 @@ tasarım **başkasına satılmaz**; stok **sınırsız** (Etsy'de 999). İşlene
 - Admin mesajları (JSON + docs/19 kopyası) ve Türkçe başlıkları; docs/23, K42, docs/20 §8, docs/15 §3 notu.
 Açık: ek revizyonun Etsy'de satış biçimi (docs/23 §4.7), özel temayı tek alıcıya açma, linki değiştirmeden düzenleme, auto-renew,
 Etsy hizmet politikası. Risk: özel tasarımda 3 günde ilk sürüm, tema üretiminin hemen başlamasını gerektirir.
+
+### Güncelleme — ek revizyon ilanı (2026-10-16)
+Kullanıcı: "ayrı extra revision ilanı aç, 500 TL". `collections/_services/extra-revision/package/listing/listing_v3.md` +
+`etsy_upload.json`: "Extra Design Revision for Custom Wedding Website, One More Round of Changes, Add On for Our Custom Design Orders,
+Digital" (121), 500 TL (≈ $10.09), 3 gün, adet 999; yalnız özel tasarım alıcıları için olduğu açıkça yazılı. `etsy_upload.py`
+üç hizmeti tanır (+ test). Özel tasarım ilanı bu ilana yönlendirir. Yeni admin mesajı `custom_design_extra_round` (JSON + docs/19
+kopyası + Türkçe başlık). docs/23 §4.7, docs/20 §3 (Services: üç ilan), K42 güncellendi.
