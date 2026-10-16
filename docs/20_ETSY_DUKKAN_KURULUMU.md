@@ -19,13 +19,16 @@ Chrome'una erişemez. Değerler İngilizce, açıklamalar Türkçe.
 ---
 
 **Karakter sayıları (2026-10-15, betikle):** shop title 53 · announcement 756 · message to buyers 248 · digital items 464 ·
-headline 38 · story 771 · iade ek metni 204 · gizlilik notu 341 · bölüm adları 15/17/20.
+headline 38 · story 771 · iade ek metni 204 · gizlilik notu 341 · bölüm adları 15/17/20. **G122 (2026-10-16):** announcement
+759 · story 819 (zarfsız tasarımlar için kapsayıcı cümle; Etsy'de yeniden girilmeli, §7.6).
 
 ## 0. Kesin sınırlar (uygulayan oturum için)
 
 - **Dokunulmaz:** dükkân adı (`BKEStudio`; Etsy'de ad değişikliği sınırlı), ödeme/banka, kimlik doğrulama, vergi, fatura,
   yasal ad/adres, şifre, 2FA, Etsy Ads bütçesi, Etsy Plus/abonelik. Para harcatan hiçbir şey yok.
-- **İlan yayınlanmaz.** İlanlar G079 canlı kontrolüne ve fiyat kararına bağlı (docs/19 §0). Dükkân "açık" duruma alınmaz.
+- **İlan yayınlanmaz.** İlanlar canlı kontrole ve fiyat kararına bağlı (docs/19 §0). G079 2026-10-15'ten beri canlı; ama
+  START HERE rehberleri (G122) G100 panelini anlatıyor ve 2026-10-16 production'ı (`b952bc8`) G100'ü içermiyor: önce G100'lü
+  yayın. Dükkân "açık" duruma alınmaz.
   Taslak ilan varsa dokunulmaz.
 - **Önce yedek:** her alanın mevcut değeri, üzerine yazılmadan önce §7'ye kopyalanır.
 - Kullanıcı çıkış yapmışsa yalnız "Etsy'de oturum açık değil" denir. Şifre istenmez, yazılmaz.
@@ -41,6 +44,10 @@ Wedding Websites with RSVP & Envelope Opening Invites
 ```
 
 Yedek: `Digital Wedding Website Templates with Online RSVP`
+
+Not (G122, 2026-10-16): 20 tasarımın 6'sı zarfla açılmıyor (06 ve 14 gatefold, 09 pouch, 12 wallet, 13 book, 18 sleeve;
+`platform/lib/marketing/designs.ts`). Tagline arama kelimesi olarak böyle bırakıldı (14 tasarım zarflı); zarf demeyen değer
+istenirse yedek kullanılır. Kullanıcı kararı.
 
 ### 1.2 Shop icon ve banner
 | Alan | Dosya | Not |
@@ -58,7 +65,7 @@ Wedding websites you edit yourself in your browser: no Canva, no app, no account
 HOW IT WORKS
 1. Buy and download your START HERE guide (PDF).
 2. Open the start link, enter your Etsy order number, then add your names, date and photos.
-3. Publish and share your link. Guests open the envelope and reply on your RSVP page; you see every reply in your editor.
+3. Publish and share your link. Guests open your invitation and reply on your RSVP page; you see every reply in your editor.
 
 WHAT YOU CAN CHANGE
 Names, date and time, venue, schedule, your story, Q&A, RSVP questions, links, photos, headings and labels. The artwork, colors and fonts stay as designed.
@@ -100,7 +107,7 @@ Wedding websites you can edit yourself
 Kişisel bilgi uydurulmaz. AI beyanı Etsy'nin yaratıcılık kuralı ve K21 gereği (docs/15 §4.1).
 
 ```text
-BKE Studio makes wedding websites that open like a real invitation: your guests tap a closed envelope, it opens, and your invitation, story, details and RSVP page follow.
+BKE Studio makes wedding websites that open like a real invitation: your guests tap a closed envelope, gatefold or keepsake (each design has its own), it opens, and your invitation, story, details and RSVP page follow.
 
 We built our own editor so you never need Canva or design skills. You fill in your names, date, venue and photos in your browser, publish, and share one link. Guest replies arrive in your editor, and you can download them as a spreadsheet.
 
@@ -118,13 +125,16 @@ Questions are always welcome. Message us here on Etsy; we reply within 24 hours.
 
 ## 3. Shop sections (Listings → Sections → Organize your listings; başlık 24, en çok 20) [doğrulandı]
 
-Lansmanda 5 tasarım (01–05). Bölümler stile göre:
+Lansmanda 5 tasarım (01–05); 06–20'nin ilan metinleri G123'te yazıldı. Bölümler stile göre:
 
-| Bölüm | Tasarımlar |
-|---|---|
-| `Floral & Garden` | 01 Olive & Ivory, 03 Blush Garden Rose |
-| `Classic & Vintage` | 02 Dusty Blue, 04 Vintage Airmail Love Letter |
-| `Summer & Destination` | 05 Mediterranean Lemon |
+| Bölüm | 01–05 (lansman) | 06–20 (G123 önerisi, kullanıcı kararı) | Toplam |
+|---|---|---|---|
+| `Floral & Garden` | 01 Olive & Ivory, 03 Blush Garden Rose | 07 Burgundy Velvet Autumn, 08 Winter Evergreen, 09 Lavender Provence, 13 Enchanted Forest Storybook, 15 Cherry Blossom Spring, 16 Sunflower Rustic Barn, 18 Wildflower Meadow Vellum, 19 Midnight Garden | 10 |
+| `Classic & Vintage` | 02 Dusty Blue, 04 Vintage Airmail Love Letter | 06 Art Deco Black-Tie, 14 Ivory Lace & Pearls, 17 Emerald & Gold Estate | 5 |
+| `Summer & Destination` | 05 Mediterranean Lemon | 10 Tuscan Vineyard, 11 Boho Pampas Terracotta, 12 Tropical Destination, 20 Coastal Seaside | 5 |
+
+06–20'nin bölümü her `listing_v3.md` §4 "Shop section" satırından (G123) alındı; Etsy'de yeni bölüm açılmaz, üç bölüm yeter
+(sınır 20). `Floral & Garden` 10 tasarımla kalabalık olursa ayrı bölüm (ör. `Seasonal`) kullanıcı kararıdır.
 
 İlan yoksa bölümler boş görünür. Bölümler açılır, ilanlar yayınlanınca atanır. Save the Date ürünü gelince `Save the Date` bölümü
 eklenir.
@@ -294,6 +304,19 @@ Mini banner (`etsy_banner_mini_1600x213.jpg`) kullanılmadı; Big Banner mobilde
 Not: Kamera ve kalem ikonları doğrudan işletim sisteminin dosya penceresini açıyor; bu pencere tarayıcı otomasyonunu kilitliyor.
 Dosya, sayfadaki gizli `input[type=file]`'a doğrudan verildi (logo: `#image-manager-shop-icon-form`; banner: düzenleme modunda
 banner'ın üstündeki "Add an image" formu).
+
+### 7.6 Etsy'de yeniden girilmesi gereken alanlar (G122, 2026-10-16)
+§1.3 ve §2.2 metni 2026-10-15'te Etsy'ye girildikten sonra değişti. Belgedeki metin Etsy'yi güncellemez: aşağıdaki alanlar
+Shop Manager'da **yeniden girilmeli** (eski değer §7.1'deki 2026-10-15 girişi), kaydedilip sayfa yenilenerek okunmalı. Bu bulut
+oturumu Etsy'ye erişemez; iş `claude-tarayici` rolündedir. Yapılana kadar Etsy'deki metin eskidir.
+
+| Alan | Yer (§7.1) | Değişen | Yeni karakter |
+|---|---|---|---|
+| Shop announcement | Info & Appearance → Shop Announcement | HOW IT WORKS 3. madde: "Guests open the envelope" → "Guests open your invitation" | 759 |
+| About story | Your shop → Shop basics → About your shop → Your story | 1. paragraf: "tap a closed envelope" → "tap a closed envelope, gatefold or keepsake (each design has its own)" | 819 |
+
+Değişmeyenler: Tagline (§1.1 notu), Message to Buyers (§1.4, §1.5), Headline, bölüm adları (06–20 yalnız ilanlar yayınlanınca
+atanır, §3), SSS (§4.1).
 
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
