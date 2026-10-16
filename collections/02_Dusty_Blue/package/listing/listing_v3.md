@@ -9,7 +9,7 @@ the platform does today. Product language: English (US spelling). It replaces `l
 | Item | Status on 2026-10-15 |
 |---|---|
 | Start link `https://davetiye-platform-five.vercel.app/start?theme=dusty-blue-champagne` | On sale in the sales configuration since G083; **not checked on the live site** in this task (G079 pending). |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/dusty-blue-champagne` (not in the description or the images yet; adding it is a decision, docs/21) | Demo page exists for every theme (`/start/demo/<theme>`); not checked live in this task. |
+| Live demo `https://davetiye-platform-five.vercel.app/start/demo/dusty-blue-champagne` (in the description under TRY THE LIVE DEMO, and named in image 8) | Demo page exists for every theme (`/start/demo/<theme>`); not checked live in this task. |
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Not yet.** The last checked live release is G078 (`2dc812b`, editor in the old look). This text and the START HERE guide describe the current editor; publish only after G079 is live and checked. |
 | Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Stated by the integrator on 2026-10-15; not checked in this task. The listing says "We confirm each order in our shop before a website can go live". [VERIFY: manual order check on in production] |
 | Questions & answers, RSVP questions | Tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
@@ -39,6 +39,11 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 A wedding website that opens like a real envelope, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
 An ivory envelope with a champagne-gold edged flap and a dusty blue wax seal with eucalyptus, on soft dusty blue paper, with cream roses, eucalyptus and gold ferns in the corners. Your guests tap the envelope, it opens, and your invitation follows: Home, Our Story, Details and RSVP.
+
+TRY THE LIVE DEMO
+See the envelope open on your own phone before you buy (sample names and photos):
+https://davetiye-platform-five.vercel.app/start/demo/dusty-blue-champagne
+Copy the link into your phone's browser.
 
 WHAT YOU GET
 • Your wedding website in the Dusty Blue & Champagne design: envelope opening, Home, Our Story, Details and RSVP pages
@@ -148,7 +153,7 @@ The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (`python
 | 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download list button |
 | 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
 | 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
-| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding; a digital product, nothing is printed or shipped |
+| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
 
 Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
 - 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
