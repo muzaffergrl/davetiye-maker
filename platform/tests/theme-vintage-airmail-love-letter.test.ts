@@ -947,7 +947,7 @@ test('qa lessons: clean placeholders, first screen above the nav, uncut clusters
   for (const page of PAGES) {
     render(page).$('script[src]').each((_, el) => {
       const src = (el as unknown as { attribs: Record<string, string> }).attribs.src;
-      assert.ok(src === '/rsvp/form.js' || src === `/themes/${ID}/site.js`, `${page}: ${src}`);
+      assert.ok(src === '/rsvp/form.js' || src === '/audio/audio.js' || src === `/themes/${ID}/site.js`, `${page}: ${src}`); // G126: the platform sound script
     });
   }
   // reduced motion: every entrance visible at once, the hint and floats still
