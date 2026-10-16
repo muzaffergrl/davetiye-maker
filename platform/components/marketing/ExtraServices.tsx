@@ -1,8 +1,8 @@
 // K42 (G130): the two paid extras on /pricing — "We set it up for you" and custom design (docs/23_EK_HIZMETLER.md).
 // Each is its own Etsy listing (lib/marketing/config.ts `services`). Until a listing is live the card says
-// "Coming soon on Etsy" (EtsyButton) and shows no price; no placeholder text reaches the page.
+// "Coming soon on Etsy" (EtsyButton); a price shows only when it is real (no placeholder text reaches the page).
 import { MARKETING, type ServiceCommerce } from '../../lib/marketing/config.ts';
-import { realEtsyUrl, realPrice } from '../../lib/marketing/placeholders.ts';
+import { realPrice } from '../../lib/marketing/placeholders.ts';
 import { displayPrice } from '../../lib/marketing/site.ts';
 import x from './extra-services.module.css';
 import s from './marketing.module.css';
@@ -20,13 +20,13 @@ const COPY: Record<ServiceCommerce['id'], { title: string; text: string[] }> = {
     title: 'Custom design',
     text: [
       'A new design made for you on our platform: your own look, opening and colors, with the same editor, RSVP and pages as every design.',
-      'The price includes the design itself. How many revision rounds and how long it takes are written on the listing.',
+      'The price includes the design itself, 2 rounds of changes and a first version within 3 days. Your design is never sold to anyone else.',
     ],
   },
 };
 
 function ServicePrice({ service }: { service: ServiceCommerce }) {
-  const price = realEtsyUrl(service.etsyListingUrl) ? realPrice(service.price) : null;
+  const price = realPrice(service.price);
   if (!price) return null;
   return (
     <p className={x.price}>

@@ -326,7 +326,7 @@ atanır, §3), SSS (§4.1).
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.
-Fiyat şimdilik **USD 29.40**; nihai fiyat docs/15 §5'te açık.
+Fiyat **1.460 TL** (kullanıcı onayı 2026-10-16, ≈ $29.48; docs/23 §1); adet 999 (stok sınırı yok).
 
 - Kaynak metin: her tasarımın `package/listing/listing_v3.md` dosyası. Yükleme verisi: aynı klasördeki `etsy_upload.json`.
   Üreten: `python3 tools/etsy_upload.py`; yalnız denetim için `--check`. JSON'da başlık, açıklama, 13 etiket, kategori ve
@@ -340,6 +340,6 @@ Fiyat şimdilik **USD 29.40**; nihai fiyat docs/15 §5'te açık.
   GPT'nin Etsy mockup sahneleri (PAKET 3, `assets/gpt/mockups/`) 5 tasarımda da mevcut. Bu yüzden şimdilik yeni GPT promptu
   gerekmiyor. Kalan iş Claude'un: güncel editörden gerçek ekran çekmek ve bunları yeşil ekranlara yerleştirmek
   (`tools/mockup_compose.py`). Ardından 8 ilan görselini kurmak. `listing_kit.py` şu an yalnız 01 ve 03'ü tanıyor.
-- Karar bekleyenler: adet (quantity), otomatik yenileme (her yenileme ilan ücreti), nihai fiyat.
-- **Para birimi TRY (kullanıcı kararı, 2026-10-15).** Etsy ilan fiyatını dükkân para biriminde ister. `etsy_upload.json`'daki `price_usd: 29.40` bir hedef değerdir; Etsy'ye TL fiyat girilecek. TL tutar ve kur güncelleme sıklığı kullanıcı kararıdır (docs/15 §5).
+- Karar bekleyenler: otomatik yenileme (her yenileme ilan ücreti). Fiyat (1.460 TL) ve adet (999) 2026-10-16'da karara bağlandı.
+- **Para birimi TRY (kullanıcı kararı, 2026-10-15).** Etsy ilan fiyatını dükkân para biriminde ister. `etsy_upload.json`'da `price_try: 1460` (onaylı, 2026-10-16) ve yaklaşık `price_usd_approx`. Kur güncelleme sıklığı hâlâ kullanıcı kararıdır.
 - Yayın öncesi kontrol listesi: her `listing_v3.md` §11.

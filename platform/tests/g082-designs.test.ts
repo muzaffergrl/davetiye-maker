@@ -59,8 +59,8 @@ test('05 Mediterranean Lemon is live: third in the list after 03 and 01, same na
   assert.equal(page.path, `/designs/${ID}`);
   assert.equal(page.h1, 'Mediterranean Lemon wedding website');
   assert.ok(page.title.length <= 60, page.title);
-  // no price or Etsy link invented: the same placeholders as the other designs until G062 decides them
-  assert.equal(d.price, '[PRICE]');
+  // K42 (2026-10-16): the user-approved price, the same for every design; no Etsy link invented yet
+  assert.equal(d.price, '1460');
   assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
   assert.equal(d.compareAtPrice, null);
 });

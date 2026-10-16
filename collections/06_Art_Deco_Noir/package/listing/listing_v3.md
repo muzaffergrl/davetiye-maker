@@ -20,7 +20,7 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G40
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, hosting extension, Etsy shop URL | Not decided: placeholders (§4). |
+| Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Hosting extension, renewal and the Etsy shop URL are still open. |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Italiana (latin only; its fallback is the design's Josefin Sans) and Josefin Sans (latin-ext); no Cyrillic. The language line in GOOD TO KNOW is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G122 (2026-10-16, `python3 tools/build_customer_guides.py`, from docs/19 Ek A): 7 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=art-deco-black-tie` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. |
 | Listing images and video | **Not produced** (§5, §6). The GPT mockup scenes of this design exist in `assets/gpt/mockups/`. |
@@ -140,8 +140,8 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Art deco, Glam (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/`: **not produced yet** for this design (Etsy: up to 5 files, 20 MB each) |
-| Price | Target USD 29.40 (draft price from the user, 2026-10-15). The shop currency is TRY, so Etsy gets the TRY amount; that amount and the final price are still open (docs/15 §5) |
-| Quantity | [QUANTITY] |
+| Price | **1,460 TL** (approved by the user on 2026-10-16; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38) |
+| Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Classic & Vintage (an existing section, docs/20 §3, which lists 01–05 only; the section for designs 06–20, or a new one, is the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
 
@@ -254,7 +254,8 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [ ] Price (TRY amount), hosting extension, quantity and renewal decided and filled in
+- [x] Price (1,460 TL) and quantity (999) decided and filled in (2026-10-16)
+- [ ] Hosting extension and renewal decided
 - [ ] Images (editorial set, with the opening object in images 2, 3 and 8) and video produced; alt texts read against them
 - [ ] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")

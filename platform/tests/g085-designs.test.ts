@@ -61,8 +61,8 @@ test('04 Vintage Airmail Love Letter is live: fifth after 03, 01, 05 and 02, sam
   const page = designPage(ID)!;
   assert.equal(page.path, `/designs/${ID}`);
   assert.equal(page.h1, 'Vintage Airmail Love Letter wedding website');
-  // no price or Etsy link invented: the same placeholders as the other designs until G062 decides them
-  assert.equal(d.price, '[PRICE]');
+  // K42 (2026-10-16): the user-approved price, the same for every design; no Etsy link invented yet
+  assert.equal(d.price, '1460');
   assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
   assert.equal(d.compareAtPrice, null);
   // every design the sales site knows is live now: nothing is 'coming'

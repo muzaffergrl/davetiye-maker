@@ -32,9 +32,10 @@
     "Style / theme": "Classic, Romantic (if offered)",
     "Personalization": "Off (nothing to fill in at checkout; the buyer fills in the website)"
   },
-  "price_usd": 29.4,
-  "price_note": "Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).",
-  "quantity": null,
+  "price_try": 1460,
+  "price_usd_approx": 29.48,
+  "price_note": "Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
+  "quantity": 999,
   "renewal": null,
   "shop_section": "Floral & Garden",
   "digital_files": [
@@ -149,11 +150,15 @@
       "where": "attributes.Who made it",
       "check": "the \"Designed by\" option for designs made with AI image tools",
       "text": ""
+    },
+    {
+      "where": "attributes.Quantity",
+      "check": "whether Etsy lowers a digital listing's quantity on each sale",
+      "text": ""
     }
   ],
   "blockers": [
-    "quantity and renewal not decided",
-    "final price not decided"
+    "renewal not decided"
   ],
   "ready_to_publish": false,
   "rule_problems": []

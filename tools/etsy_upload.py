@@ -8,14 +8,14 @@
   python3 tools/etsy_upload.py --designs services   # only the two service listings (collections/_services/, K42)
 
 Services (G130, K42): "We set it up for you" and custom design are their own listings in collections/_services/<id>/.
-They have no theme and no demo; their price is a TRY proposal (docs/23 §1) awaiting the user's approval, and every
-undecided [PLACEHOLDER] in the description becomes an open check. "all" builds the designs and the services.
+They have no theme and no demo; their TRY prices were approved on 2026-10-16 (docs/23 §1), and any undecided
+[PLACEHOLDER] left in a description becomes an open check. "all" builds the designs and the services.
 
 The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §8). Nothing is sent to Etsy here.
 - `description` is §2 of listing_v3.md with the "[VERIFY: …]" notes taken out; each note goes to `open_checks` with
   its sentence, so the claim stays visible until it is tested. `ready_to_publish` stays false while any check is open.
-- Price is the draft price the user gave on 2026-10-15 (USD 29.40, "for now"); quantity and renewal stay null:
-  they are the user's decision (renewal costs a listing fee).
+- Price: 1,460 TL, approved by the user on 2026-10-16 (shop currency TRY, K38; about USD 29.48, docs/23 §1);
+  quantity 999, Etsy's maximum (user: no stock limit). Renewal stays null: the user's decision (each renewal costs a fee).
 - Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
   2026-10-16, tools/listing_editorial.py, docs/21).
 - Rules (`rule_problems`, `--check` fails): Etsy's title and tag rules (tools/listing_kit.py), the design's name in the
@@ -61,10 +61,9 @@ DESIGNS = [
     ("19", "19_Midnight_Garden", "midnight-garden"),
     ("20", "20_Coastal_Seaside", "coastal-seaside"),
 ]
-PRICE_USD = 29.40
-PRICE_NOTE = ("Draft target price from the user on 2026-10-15 ('for now'). The shop currency is TRY: Etsy gets the TRY "
-              "amount, which is still a decision, as is the final price (docs/15 §5, docs/20 §8).")
-# K42 services (G130): (id, proposed TRY price). Rate: 49.53 TRY per USD, BloombergHT 2026-10-16 09:30 (docs/23 §1).
+PRICE_TRY = 1460
+QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
+# K42 services (G130): (id, TRY price approved 2026-10-16). Rate: 49.53 TRY per USD, BloombergHT 2026-10-16 09:30 (docs/23 §1).
 SERVICES = [("setup-service", 500), ("custom-design", 2960)]
 USD_TRY = 49.53
 USD_TRY_SOURCE = "BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell)"
@@ -201,9 +200,10 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         "category": attrs.get("Category"),
         "attributes": {k: v for k, v in attrs.items() if k not in {"Category", "Price", "Quantity", "Shop section",
                                                                    "Renewal", "Digital file"}},
-        "price_usd": PRICE_USD,
-        "price_note": PRICE_NOTE,
-        "quantity": None,
+        "price_try": PRICE_TRY,
+        "price_usd_approx": round(PRICE_TRY / USD_TRY, 2),
+        "price_note": price_note(),
+        "quantity": QUANTITY,
         "renewal": None,
         "shop_section": re.sub(r"\s*\(.*\)$", "", attrs.get("Shop section", "")),
         "digital_files": [{"file": f"collections/{folder}/package/customer/START_HERE.pdf",
@@ -212,11 +212,16 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         "gpt_mockup_scenes": [f"collections/{folder}/assets/gpt/mockups/{m}" for m in mockups],
         "video": {"file": f"collections/{folder}/package/listing/video.mp4", "exists": video.exists()},
         "open_checks": checks,
-        "blockers": blockers + ["quantity and renewal not decided", "final price not decided"],
+        "blockers": blockers + ["renewal not decided"],
         "ready_to_publish": False,
         "rule_problems": problems,
     }
     return data, problems
+
+
+def price_note() -> str:
+    return (f"Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD "
+            f"is approximate, at {USD_TRY} TRY per USD, {USD_TRY_SOURCE}.")
 
 
 def build_service(sid: str, price_try: int) -> tuple[dict, list[str]]:
@@ -253,15 +258,14 @@ def build_service(sid: str, price_try: int) -> tuple[dict, list[str]]:
                                                                    "Renewal", "Digital file"}},
         "price_try": price_try,
         "price_usd_approx": round(price_try / USD_TRY, 2),
-        "price_note": (f"Proposal (G130, K42), awaiting the user's approval. Shop currency TRY (K38); USD at {USD_TRY} "
-                       f"TRY per USD, {USD_TRY_SOURCE}. docs/23 §1."),
-        "quantity": None,
+        "price_note": price_note(),
+        "quantity": QUANTITY,
         "renewal": None,
         "shop_section": re.sub(r"\s*\(.*\)$", "", attrs.get("Shop section", "")),
         "digital_files": [{"file": pdf.relative_to(REPO).as_posix(), "bytes": pdf.stat().st_size if pdf.exists() else None}],
         "images": imgs,
         "open_checks": checks,
-        "blockers": blockers + ["quantity and renewal not decided", "price not approved"],
+        "blockers": blockers + ["renewal not decided"],
         "ready_to_publish": False,
         "rule_problems": problems,
     }

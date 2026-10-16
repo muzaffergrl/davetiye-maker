@@ -183,8 +183,8 @@ test('09–14 are live after the first eight, named as their themes, with design
     const page = designPage(n.id)!;
     assert.equal(page.path, `/designs/${n.id}`);
     assert.equal(page.h1, `${n.name} wedding website`);
-    // no price or Etsy link invented: the same placeholders as the other designs until G062 decides them
-    assert.equal(d.price, '[PRICE]');
+    // K42 (2026-10-16): the user-approved price, the same for every design; no Etsy link invented yet
+    assert.equal(d.price, '1460');
     assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
     assert.equal(d.compareAtPrice, null);
   }

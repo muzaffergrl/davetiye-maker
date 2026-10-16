@@ -52,3 +52,16 @@ Panel Help → "Need help?" altına tek satır. 4 yeni İngilizce Etsy mesajı (
 
 **Kullanıcı kararı bekleyenler:** fiyatlar (1.460 / 500 / 2.960 TL), teslim süresi, revizyon sayısı ve ek tur fiyatı, özel tasarımın
 münhasırlığı, quantity/renewal.
+
+### Güncelleme — kullanıcı kararları (2026-10-16)
+Fiyatlar onaylandı (1.460 / 500 / 2.960 TL); teslim **3 gün**; özel tasarımda **2 revizyon**, sonrası **tur başı 500 TL**; özel
+tasarım **başkasına satılmaz**; stok **sınırsız** (Etsy'de 999). İşlenen yerler:
+- İki hizmet ilanı + `etsy_upload.json`: yer tutucular dolduruldu (yalnız `[AUTO RENEW]` açık), `quantity: 999`.
+- 20 tasarım `listing_v3.md` §0/§4/§11: fiyat **1,460 TL**, adet 999 (`[VERIFY]`: Etsy dijital ilanda adedi düşürüyor mu);
+  `etsy_upload.py` `price_try: 1460` + `price_usd_approx`, 22 JSON yeniden üretildi.
+- `config.ts`: `currency: 'TRY'`, 20 tasarım `'1460'`, hizmetler `'500'`/`'2960'`; `displayPrice` "1,460 TRY". `/pricing` Extras
+  kartı fiyatı gösterir. Testler buna göre güncellendi (g082–g097 `[PRICE]` → `'1460'`, şema `priceCurrency: 'TRY'`,
+  test_listing_kit, test_etsy_upload).
+- Admin mesajları (JSON + docs/19 kopyası) ve Türkçe başlıkları; docs/23, K42, docs/20 §8, docs/15 §3 notu.
+Açık: ek revizyonun Etsy'de satış biçimi (docs/23 §4.7), özel temayı tek alıcıya açma, linki değiştirmeden düzenleme, auto-renew,
+Etsy hizmet politikası. Risk: özel tasarımda 3 günde ilk sürüm, tema üretiminin hemen başlamasını gerektirir.

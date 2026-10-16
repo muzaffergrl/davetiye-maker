@@ -52,7 +52,7 @@ test('decided config: Organization has name, email, contactPoint, sameAs; Produc
     const offer = p.offers as Record<string, string>;
     assert.equal(offer['@type'], 'Offer');
     assert.equal(offer.price, '29.40');
-    assert.equal(offer.priceCurrency, 'USD');
+    assert.equal(offer.priceCurrency, 'TRY'); // K38 shop currency
     assert.match(offer.url, /^https:\/\/www\.etsy\.com\/listing\//);
     assert.deepEqual((p.brand as Record<string, string>)['@id'], 'https://example.com/#org');
     assert.deepEqual(validateJsonLd(graph(p, videoObject(d, cfg))), []);

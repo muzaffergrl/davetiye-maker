@@ -195,6 +195,10 @@ Risk: L = düşük, M = orta, H = yüksek.
 
 ## 3. Fiyat (Etsy merkezli)
 
+> **Karar (kullanıcı, 2026-10-16, K42 / docs/23 §1):** dükkân TRY'de (K38). Tasarım **1.460 TL** (≈ $29.48, kur 49,53
+> BloombergHT 2026-10-16), kurulum hizmeti **500 TL**, özel tasarım **2.960 TL**; stok sınırı yok (Etsy'de 999). Aşağıdaki USD
+> hesapları karar öncesi analizdir; lansman indirimi ve yorum sonrası fiyat artışı ayrıca karar ister.
+
 ### 3.1 Kaynak durumu ve senaryo
 - Etsy ve Vercel rakamları resmi sayfaların arama özetlerinden [R-özet] ya da üçüncü taraf rehberlerden [İkincil]. **Fiyat
   yayınlanmadan önce Etsy Shop Manager'daki ücret ekranında ve Vercel panelinde doğrulanmalı.**

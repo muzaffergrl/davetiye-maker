@@ -18,7 +18,7 @@ the platform does today. Product language: English (US spelling). It replaces `l
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (K37, K36; docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. The description says both (GOOD TO KNOW, QUESTIONS?); the START HERE guide gives the 24 hours. |
-| Price, hosting extension, quantity, renewal | Not decided: §4 has the user's draft target price (USD 29.40, docs/15 §5); the TRY amount, the hosting extension, quantity and renewal (§4) are open. |
+| Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Hosting extension and renewal are still open (§4). |
 | Etsy shop | Open as **STUDIOBKE** (docs/20 §7). The listing text does not link the shop. |
 | Design fonts and other languages | Checked on 2026-10-16 (G122) from the Google Fonts CSS of the fonts this theme loads: EB Garamond and Great Vibes (both latin-ext and Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G122 (2026-10-16, `python3 tools/build_customer_guides.py`, from docs/19 Ek A, G100 + G121 editor): 7 pages, about 50 KB. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=olive-ivory` (jsQR on every rendered page; module by module against a fresh encoding). It describes the editor in the repository, which is newer than production (see above). |
@@ -138,8 +138,8 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 50 KB) |
-| Price | Target USD 29.40 (draft price from the user, 2026-10-15). The shop currency is TRY, so Etsy gets the TRY amount; that amount and the final price are still open (docs/15 §5) |
-| Quantity | [QUANTITY] |
+| Price | **1,460 TL** (approved by the user on 2026-10-16; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38) |
+| Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Floral & Garden (created in the shop on 2026-10-15, docs/20 §7) |
 | Renewal | [AUTO RENEW: yes/no] |
 
@@ -254,7 +254,8 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [x] Response time and refund policy decided (K37, K36) and in the description; the guide gives the 24 hours
-- [ ] Price (TRY amount), hosting extension, quantity and renewal decided and filled in
+- [x] Price (1,460 TL) and quantity (999) decided and filled in (2026-10-16)
+- [ ] Hosting extension and renewal decided
 - [x] Images rebuilt with the current editor (see §5); video present (2026-10-15)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] Shop-wide Etsy messages (docs/19 §4.4) entered in Shop Manager

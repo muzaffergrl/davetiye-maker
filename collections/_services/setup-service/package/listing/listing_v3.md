@@ -9,8 +9,8 @@ sale: `docs/23_EK_HIZMETLER.md`. Product language: English (US spelling).
 | Item | Status on 2026-10-16 |
 |---|---|
 | Decision | K42 (user, 2026-10-16): about +500 TL, one-time; another round of changes is a new purchase. Sold as its own Etsy listing |
-| Price | **Proposal, needs the user's approval:** 500 TL (about USD 10.09 at 49.53 TRY per USD, BloombergHT 2026-10-16 09:30). docs/23 §1 |
-| Turnaround | **Not decided** → `[TURNAROUND]` in the description and in the Etsy messages (the admin will not copy a message while it is open) |
+| Price | **500 TL**, approved by the user on 2026-10-16 (about USD 10.09 at 49.53 TRY per USD, BloombergHT 2026-10-16 09:30). docs/23 §1 |
+| Turnaround | **3 days** after we have everything (user, 2026-10-16) |
 | Etsy rule on services | **Not checked.** Etsy's prohibited items policy limits pure services; a service that results in a digital item (here: the buyer's set-up website) is the usual exception. [VERIFY] in §4: read Etsy's current policy before publishing |
 | Digital file | Etsy delivers a file for a digital listing. Proposal: a one-page `SETUP_SERVICE.pdf` (what to send us, in the same words as §2). **Not made yet** (blocker in `etsy_upload.json`) |
 | Shop editing a buyer's website | The admin can create a website for a buyer ("Yeni sipariş") or issue a new edit link ("Yeni düzenleme linki", the old link stops working). There is no way to edit an existing website without replacing the buyer's link. The description says so (GOOD TO KNOW). docs/23 §3 |
@@ -44,7 +44,7 @@ WHAT WE DO FOR YOU (ONE ROUND)
 HOW IT WORKS
 1. Buy this listing together with your design (or after it).
 2. We message you on Etsy and ask for everything we need. Send your texts in the Etsy message and your photos as a share link (Google Drive, Dropbox or iCloud).
-3. We set up your website within [TURNAROUND] of receiving everything, and send you your private edit link.
+3. We set up your website within 3 days of receiving everything, and send you your private edit link.
 4. You check it, change anything you like yourself, and tap Publish.
 
 WHAT IS NOT INCLUDED
@@ -100,8 +100,8 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Occasion | Wedding |
 | Personalization | Off (we ask for the details in an Etsy message after the order; Etsy's box is too short for photos and a schedule) |
 | Digital file | `SETUP_SERVICE.pdf` (one page: what to send us; not made yet) |
-| Price | **Proposal: 500 TL** (about USD 10.09; K42 "about +500 TL"; docs/23 §1). User approval needed |
-| Quantity | [QUANTITY] |
+| Price | **500 TL** (about USD 10.09; K42, approved 2026-10-16; docs/23 §1) |
+| Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
 | Renewal | [AUTO RENEW: yes/no] |
 
@@ -132,7 +132,7 @@ Yes. This listing is the setup only; the design is its own listing in our shop.
 Your texts in an Etsy message and up to 5 photos as a share link. We send you the list right after your order.
 
 **How long does it take?**
-Within [TURNAROUND] of receiving everything.
+Within 3 days of receiving everything.
 
 **Can I change things afterwards?**
 Yes, everything, as often as you like, in your editor. If you want us to make the changes, buy this listing again.
@@ -148,9 +148,10 @@ gets that text too. Proposal: no change; the shop sends `setup_service_details` 
 
 ## 10. Before you publish this listing
 
-- [ ] Price approved (TRY amount) — K42 proposal in docs/23 §1
-- [ ] `[TURNAROUND]` decided and filled in here and in the two admin messages
+- [x] Price approved: 500 TL (2026-10-16)
+- [x] Turnaround decided: 3 days (2026-10-16), here and in the admin messages
 - [ ] Etsy's policy on service listings read; category and digital-file setup checked in the listing editor
 - [ ] `SETUP_SERVICE.pdf` made
 - [ ] Images made (§5)
-- [ ] Quantity and renewal decided
+- [x] Quantity decided: 999 (no stock limit)
+- [ ] Renewal decided

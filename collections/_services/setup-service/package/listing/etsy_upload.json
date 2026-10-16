@@ -3,7 +3,7 @@
   "source": "collections/_services/setup-service/package/listing/listing_v3.md",
   "title": "Wedding Website Setup Service, We Enter Your Details for You, Add On for Our Website Designs, Done for You RSVP and Photo Setup",
   "title_length": 127,
-  "description": "Short on time? We set up your wedding website for you. You send us your details in an Etsy message, we enter them in your editor, and you only check and publish.\n\nThis is an add-on service for our wedding website designs. It does not include a design: please buy the design you love from our shop too (before, together with, or after this listing).\n\nWHAT WE DO FOR YOU (ONE ROUND)\n• We enter the details you send us in your website's editor: your names, date, time and time zone, venue and address, the order of the day, your story, questions and answers, dress code, travel and registry links\n• We add up to 5 photos you send us and crop each one to its frame\n• We set up your RSVP page: reply deadline and up to 3 questions for your guests (for example a meal choice)\n• We change headings and wording you ask for, in your words\n• We send you your private edit link, so you can check every page and publish when you are happy\n\nHOW IT WORKS\n1. Buy this listing together with your design (or after it).\n2. We message you on Etsy and ask for everything we need. Send your texts in the Etsy message and your photos as a share link (Google Drive, Dropbox or iCloud).\n3. We set up your website within [TURNAROUND] of receiving everything, and send you your private edit link.\n4. You check it, change anything you like yourself, and tap Publish.\n\nWHAT IS NOT INCLUDED\n• Writing your texts for you: we enter the words you send us\n• Changing the design's artwork, colors, fonts or layout (see our Custom design listing)\n• A second round of changes: after we send your link you can change everything yourself, as often as you like; if you want us to make more changes for you, that is a new purchase of this listing\n• Sending your invitation to your guests\n\nGOOD TO KNOW\n• One purchase = one round of setup for one website.\n• If you already started your website, we send you a new edit link when we are done and your old link stops working. Please use the new one.\n• If your website is already published, name and date changes we make count toward the same 3 changes after publishing as your own (typo fixes and moving the date by up to 7 days stay free).\n• We never ask for your edit link.\n• Digital service: nothing is printed or shipped.\n• No returns, exchanges or cancellations once we have started your setup. If something we set up does not match what you sent us, message us on Etsy and we will fix it.\n\nQUESTIONS?\nMessage us here on Etsy. We reply within 24 hours.",
+  "description": "Short on time? We set up your wedding website for you. You send us your details in an Etsy message, we enter them in your editor, and you only check and publish.\n\nThis is an add-on service for our wedding website designs. It does not include a design: please buy the design you love from our shop too (before, together with, or after this listing).\n\nWHAT WE DO FOR YOU (ONE ROUND)\n• We enter the details you send us in your website's editor: your names, date, time and time zone, venue and address, the order of the day, your story, questions and answers, dress code, travel and registry links\n• We add up to 5 photos you send us and crop each one to its frame\n• We set up your RSVP page: reply deadline and up to 3 questions for your guests (for example a meal choice)\n• We change headings and wording you ask for, in your words\n• We send you your private edit link, so you can check every page and publish when you are happy\n\nHOW IT WORKS\n1. Buy this listing together with your design (or after it).\n2. We message you on Etsy and ask for everything we need. Send your texts in the Etsy message and your photos as a share link (Google Drive, Dropbox or iCloud).\n3. We set up your website within 3 days of receiving everything, and send you your private edit link.\n4. You check it, change anything you like yourself, and tap Publish.\n\nWHAT IS NOT INCLUDED\n• Writing your texts for you: we enter the words you send us\n• Changing the design's artwork, colors, fonts or layout (see our Custom design listing)\n• A second round of changes: after we send your link you can change everything yourself, as often as you like; if you want us to make more changes for you, that is a new purchase of this listing\n• Sending your invitation to your guests\n\nGOOD TO KNOW\n• One purchase = one round of setup for one website.\n• If you already started your website, we send you a new edit link when we are done and your old link stops working. Please use the new one.\n• If your website is already published, name and date changes we make count toward the same 3 changes after publishing as your own (typo fixes and moving the date by up to 7 days stay free).\n• We never ask for your edit link.\n• Digital service: nothing is printed or shipped.\n• No returns, exchanges or cancellations once we have started your setup. If something we set up does not match what you sent us, message us on Etsy and we will fix it.\n\nQUESTIONS?\nMessage us here on Etsy. We reply within 24 hours.",
   "tags": [
     "wedding website",
     "website setup",
@@ -30,8 +30,8 @@
   },
   "price_try": 500,
   "price_usd_approx": 10.09,
-  "price_note": "Proposal (G130, K42), awaiting the user's approval. Shop currency TRY (K38); USD at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell). docs/23 §1.",
-  "quantity": null,
+  "price_note": "Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
+  "quantity": 999,
   "renewal": null,
   "shop_section": "Services",
   "digital_files": [
@@ -80,18 +80,12 @@
       "where": "attributes",
       "check": "every row in the listing editor, and that Etsy allows this listing as a digital service",
       "text": ""
-    },
-    {
-      "where": "description",
-      "check": "decide [TURNAROUND]",
-      "text": ""
     }
   ],
   "blockers": [
     "listing images missing: collections/_services/setup-service/package/listing/images_editorial/01_cover.png, collections/_services/setup-service/package/listing/images_editorial/02_steps.png, collections/_services/setup-service/package/listing/images_editorial/03_what_we_enter.png, collections/_services/setup-service/package/listing/images_editorial/04_not_included.png",
     "digital file missing: collections/_services/setup-service/package/customer/SETUP_SERVICE.pdf",
-    "quantity and renewal not decided",
-    "price not approved"
+    "renewal not decided"
   ],
   "ready_to_publish": false,
   "rule_problems": []

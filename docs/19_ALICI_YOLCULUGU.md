@@ -778,7 +778,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
       "Hi, thank you for choosing our setup service! We will enter your details into your {design} wedding website for you.",
       "Please reply here with:\n• Your first names as they should appear, and your Etsy order number for the design (if it is not {order})\n• Wedding date, ceremony time and time zone\n• Venue name and address (and a map link if you have one)\n• The order of the day, your story, questions and answers, dress code, travel and registry links: whatever you want to show\n• Your RSVP deadline and up to 3 questions for your guests (for example a meal choice)\n• Any headings or wording you want changed",
       "Photos: send up to 5 as a share link (Google Drive, Dropbox or iCloud), and tell us which one goes where (portrait, 3 story photos, venue).",
-      "This is one round of setup. When we are done we send you your edit link; you can change anything yourself after that, and you decide when to publish. We finish within [TURNAROUND] of receiving everything.",
+      "This is one round of setup. When we are done we send you your edit link; you can change anything yourself after that, and you decide when to publish. We finish within 3 days of receiving everything.",
       "{shop}"
     ],
     "note": "docs/23 §3: one round per purchase. Not started yet → admin 'Yeni sipariş' with the DESIGN order number; already started → 'Yeni düzenleme linki' (the buyer's old link stops working, say so). Write the setup order number in the site note."
@@ -815,11 +815,11 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "body": [
       "Hi, thank you for your custom design order ({order})! We are excited to make a wedding website just for you.",
       "To start, please reply here with:\n• Your wedding date and the feel you want (for example classic, romantic, garden, coastal)\n• Two or three colors you love, and anything you do not want\n• Pictures that inspire you (a share link to photos or a Pinterest board is fine)\n• What guests should open first, if you have an idea (an envelope, a card, a book …)",
-      "Your custom design includes everything our designs include: the editor, RSVP and every page. It includes [REVISIONS] rounds of changes to the design, and the first version is ready within [TURNAROUND] of receiving your answers.",
+      "Your custom design includes everything our designs include: the editor, RSVP and every page. It includes 2 rounds of changes to the design (each further round is 500 TL), and the first version is ready within 3 days of receiving your answers. The design is made only for you: we never sell it to anyone else.",
       "Your own names, photos and texts go in through the editor as usual (or with our setup service).",
       "{shop}"
     ],
-    "note": "docs/23 §4. Revisions and turnaround are undecided: the text cannot be copied until [REVISIONS] and [TURNAROUND] are filled."
+    "note": "docs/23 §4. Decided 2026-10-16: 2 revision rounds, then 500 TL a round; first version in 3 days; exclusive."
   },
   {
     "id": "custom_design_ready",
@@ -834,7 +834,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
       "Hi, your custom design is ready!",
       "Start your website here: {start_url}",
       "Enter your Etsy order number ({order}), your email and your first names, and choose your web address. Then save your private edit link when it appears: it opens your editor.",
-      "If anything in the design should change, reply here; that counts as one of your [REVISIONS] revision rounds.",
+      "If anything in the design should change, reply here; that counts as one of your 2 revision rounds (each further round is 500 TL).",
       "{shop}"
     ],
     "note": "The custom theme must be claimable on /start before this is sent (docs/23 §4)."
