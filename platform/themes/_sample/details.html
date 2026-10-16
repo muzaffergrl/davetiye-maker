@@ -21,7 +21,8 @@
       </ul>
       <div class="photo-bg" data-photo="venue" role="img" aria-label="Venue"></div>
       <p><span data-field="venue.name">Venue</span>, <span data-field="venue.city_region">City, Region</span></p>
-      <p><a class="button" href="#" data-field="urls.map" target="_blank">View map</a></p>
+      <p data-if="urls.map !map_on"><a class="button" href="#" data-field="urls.map" target="_blank">View map</a></p>
+      <div data-map data-map-btn="button"></div>
     </section>
     <section data-optional="dress_code" data-section="dress-code">
       <h3>Dress code</h3>

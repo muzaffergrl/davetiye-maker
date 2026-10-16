@@ -55,6 +55,32 @@ export interface ThankYou {
   details?: 'keep' | 'hide';
 }
 
+/** Map + directions settings of one place (G127). Missing show_* = on when the place can be found (address / pin). */
+export interface MapPlaceSettings {
+  /** Heading while two places are shown; empty = "Ceremony" / "Reception". */
+  label?: string | null;
+  show_map?: boolean;
+  show_directions?: boolean;
+  /** The pin read from the map link (WGS 84); missing = searched by the address text. */
+  lat?: number | null;
+  lng?: number | null;
+}
+
+/** A separate reception place (G127). */
+export interface ReceptionPlace extends MapPlaceSettings {
+  name: string;
+  address?: string | null;
+  city?: string | null;
+  /** Google Maps / Apple Maps link of the place. */
+  link?: string | null;
+}
+
+/** Details page map and directions (G127): venue = the main venue (venue.* + urls.map), reception = a second place. */
+export interface Maps {
+  venue?: MapPlaceSettings;
+  reception?: ReceptionPlace | null;
+}
+
 /** One question and answer of the FAQ block (G051). */
 export interface FaqItem {
   q: string;
@@ -95,6 +121,8 @@ export interface ContentRecord {
   };
   /** Optional questions & answers (shown while optional_blocks.faq is on). */
   faq?: FaqItem[];
+  /** Map and directions on the Details page (G127). */
+  maps?: Maps;
   /** After the wedding (G075): thank-you mode settings. */
   thank_you?: ThankYou;
   /**

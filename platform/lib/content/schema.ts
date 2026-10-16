@@ -408,6 +408,114 @@ export const CONTENT_SCHEMA = {
         }
       }
     },
+    "maps": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "İsteğe bağlı (G127): Details sayfasında mekân haritası ve yol tarifi. venue = ana mekânın (venue.* + urls.map linki) ayarları; reception = ayrı bir resepsiyon mekânı (yoksa null). show_map / show_directions yoksa: adres, koordinat ya da çözülebilen harita linki varsa açık. lat/lng: harita linkinden çözülen konum (yoksa adres metniyle aranır). label: iki mekân varken başlık (boşsa 'Ceremony' / 'Reception'). Harita misafir 'Show map'e dokununca yüklenir (Google Maps embed, API anahtarı yok); teşekkür modunda gösterilmez.",
+      "properties": {
+        "venue": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 40
+            },
+            "show_map": {
+              "type": "boolean"
+            },
+            "show_directions": {
+              "type": "boolean"
+            },
+            "lat": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": -90,
+              "maximum": 90
+            },
+            "lng": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": -180,
+              "maximum": 180
+            }
+          }
+        },
+        "reception": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "address": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 200
+            },
+            "city": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 80
+            },
+            "link": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri"
+            },
+            "label": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 40
+            },
+            "show_map": {
+              "type": "boolean"
+            },
+            "show_directions": {
+              "type": "boolean"
+            },
+            "lat": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": -90,
+              "maximum": 90
+            },
+            "lng": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": -180,
+              "maximum": 180
+            }
+          }
+        }
+      }
+    },
     "copy": {
       "type": "object",
       "maxProperties": 200,

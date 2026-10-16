@@ -1,0 +1,34 @@
+/* Platform map block (G127): lib/theme/map-block.ts + /site/map.js. Fonts and colours come from the theme (inherit,
+ * currentColor); buttons use the theme's own classes (data-map-btn / data-map-btn-sm). A theme may tune it with
+ * --pmap-radius, --pmap-line, --pmap-paper, --pmap-gap, --pmap-height. */
+[data-map] { display: grid; gap: var(--pmap-gap, 22px); width: 100%; max-width: 520px; margin-inline: auto; text-align: center; }
+.pmap-place { display: grid; gap: 12px; justify-items: center; min-width: 0; }
+.pmap-label { margin: 0; font-size: .8em; letter-spacing: .18em; text-transform: uppercase; opacity: .8; }
+.pmap-card, .pmap-text { box-sizing: border-box; width: 100%; min-width: 0; }
+.pmap-card {
+  display: grid; justify-items: center; align-content: center; gap: 6px; min-height: 196px; padding: 22px 18px 16px;
+  border: 1px solid var(--pmap-line, color-mix(in srgb, currentColor 30%, transparent));
+  border-radius: var(--pmap-radius, 14px);
+  background:
+    repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, currentColor 4%, transparent) 14px 15px),
+    var(--pmap-paper, color-mix(in srgb, currentColor 4%, transparent));
+}
+.pmap-pin { width: 30px; height: 30px; opacity: .75; }
+.pmap-name { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.pmap-addr { margin: 0; font-size: .92em; opacity: .85; overflow-wrap: anywhere; }
+.pmap-show { margin-top: 10px; }
+.pmap-note { margin: 4px 0 0; font-size: .74em; opacity: .7; }
+.pmap-card.is-open { display: block; min-height: 0; padding: 0; overflow: hidden; background: none; }
+.pmap-frame { position: relative; width: 100%; height: var(--pmap-height, 260px); }
+.pmap-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.pmap-open { display: inline-block; margin: 10px 0 12px; font-size: .85em; color: inherit; }
+.pmap-dir { display: grid; gap: 8px; justify-items: center; width: 100%; }
+.pmap-dir-title { margin: 0; font-size: .8em; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+.pmap-dir-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.pmap-dir-link { flex: 0 1 auto; }
+/* without the theme's small button class: a plain outlined pill */
+.pmap-dir-link:not([class*=" "]) {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; color: inherit;
+  border: 1px solid color-mix(in srgb, currentColor 40%, transparent); text-decoration: none;
+}
+@media (max-width: 380px) { .pmap-dir-links .btn-sm { padding-inline: 14px; } }

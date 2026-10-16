@@ -20,6 +20,12 @@
 //                                  key's theme.json max) replaces the element's text; empty = the template's text stays
 //   data-copy-attr="aria-label:k"  the same for attributes (alt, title, content, aria-label, placeholder)
 //   {copy.<key>}                   inside data-text / data-attr-* templates: the couple's text, else theme.json's default
+//   data-map                       G127: the shared map + directions block (lib/theme/map-block.ts) for the content's places
+//                                  (lib/maps.ts); data-map-btn="btn btn-ghost" / data-map-btn-sm = the theme's classes for "Show map" /
+//                                  the directions links. Removed
+//                                  when no place is on or in thank-you mode. The page then links /site/map.css + /site/map.js
+//                                  and its CSP allows the Google Maps frame. View values: map_on (a place is switched on —
+//                                  hide the old "View map" link), map_block (the block or the old link has something to show).
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.
 // Buyer photos with size variants (lib/photo-variants.ts) get srcset (+ the template's sizes).
 // Share image and tab icon (G055): when the theme has img/og-1200x630.jpg / img/favicon.png
@@ -36,7 +42,9 @@ import { calendarEvent, googleCalendarUrl, type CalendarEvent } from '../calenda
 import { buildView, fieldKind, getPath } from '../content/derive.ts';
 import { formatDate, formatDateLong, formatTime, monthName, parseIsoDate, weekdayName } from '../content/format.ts';
 import { THANK_YOU_DEFAULT_TITLE } from '../content/thank-you.ts';
+import { MAP_FRAME_ORIGIN, mapPlaces } from '../maps.ts';
 import { photoCandidates } from '../photo-variants.ts';
+import { MAP_CSS, MAP_JS, mapBlockHtml } from './map-block.ts';
 import { COPY_ATTRS, ownCopy, parseCopyAttr, resolveCopy, type CopyManifest } from './copy.ts';
 import type { ThemeShareFiles } from './share.ts';
 import { OG_IMAGE_SIZE } from './share.ts';
@@ -81,6 +89,8 @@ export interface RenderResult {
   disabled: boolean;
   /** CSP hashes ('sha256-…') of the theme's inline scripts, for script-src. */
   scriptHashes: string[];
+  /** Origins the page may frame (G127: the Google Maps embed behind "Show map"), for frame-src. */
+  frameSources: string[];
 }
 
 const RAW_TEXT = new Set(['script', 'style', 'xmp', 'iframe', 'noembed', 'noframes', 'plaintext', 'noscript']);
@@ -102,6 +112,9 @@ const ENGINE_ATTRS = new Set([
   'data-copy',
   'data-copy-attr',
   'data-copy-fixed',
+  'data-map',
+  'data-map-btn',
+  'data-map-btn-sm',
 ]);
 const SRC_ELEMENTS = new Set(['img', 'script', 'source', 'video', 'audio', 'track', 'embed', 'iframe', 'input']);
 const OG_IMAGE = new Set(['og:image', 'og:image:url', 'twitter:image']);
@@ -230,6 +243,13 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   view.copy = resolveCopy(opts.content, copyManifest);
   const locale = typeof view.locale === 'string' ? view.locale : 'en-US';
   const blocks = (view.optional_blocks ?? {}) as Record<string, unknown>;
+  // G127: places with a map / directions. After the wedding the block is not shown (no one travels there any more).
+  const placesOn = mapPlaces(opts.content);
+  const placesShown = view.thank_you_on === true ? [] : placesOn;
+  view.map_on = placesOn.length > 0;
+  view.map_block = placesShown.length > 0 || (!view.map_on && isPresent(getPath(view, 'urls.map')));
+  let mapUsed = false;
+  let mapFrame = false;
 
   const resolvePath = (expr: string, scope: string | null): string => {
     const e = expr.trim();
@@ -537,6 +557,19 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       $(el).remove();
       return;
     }
+    if ('data-map' in a) {
+      if (!placesShown.length) {
+        $(el).remove();
+        return;
+      }
+      $(el).html(mapBlockHtml(placesShown, { buttonClass: a['data-map-btn'], smallButtonClass: a['data-map-btn-sm'] }));
+      delete a['data-map-btn'];
+      delete a['data-map-btn-sm'];
+      a['data-map'] = String(placesShown.length);
+      mapUsed = true;
+      mapFrame = placesShown.some((p) => p.showMap);
+      return;
+    }
     if ('data-repeat' in a) {
       const abs = resolvePath(a['data-repeat'], scope);
       const items = getPath(view, abs);
@@ -581,7 +614,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     delete n.attribs['data-optional'];
     delete n.attribs['data-if'];
   }
-  if (disabled) return { html: '', warnings: [...warnings], disabled: true, scriptHashes: [] };
+  if (disabled) return { html: '', warnings: [...warnings], disabled: true, scriptHashes: [], frameSources: [] };
 
   for (const node of [...$.root()[0].children]) {
     if (isTag(node)) walk(node, null);
@@ -661,6 +694,13 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? `${names} wedding invitation` : 'Wedding invitation');
   if (opts.guestOnlyMeta) guestOnlyMeta($, names || 'Our wedding', view.thank_you_on === true ? THANKED : INVITED);
 
+  // G127: the shared map block's stylesheet and script (platform files, script-src 'self'), only on a page that has it.
+  if (mapUsed) {
+    const head = $('head').first();
+    head.append($('<link rel="stylesheet">').attr('href', MAP_CSS));
+    head.append($('<script defer></script>').attr('src', MAP_JS));
+  }
+
   // Theme inline scripts are trusted template code (content can never create a <script>:
   // every inserted value is text). Their hashes go into the page CSP.
   const scriptHashes = new Set<string>();
@@ -724,5 +764,11 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   // CSS hook of thank-you mode (G075): html[data-thank-you] (the content itself switches with data-if="thank_you_on").
   if (view.thank_you_on === true) html.attr('data-thank-you', '');
 
-  return { html: $.html(), warnings: [...warnings], disabled: false, scriptHashes: [...scriptHashes] };
+  return {
+    html: $.html(),
+    warnings: [...warnings],
+    disabled: false,
+    scriptHashes: [...scriptHashes],
+    frameSources: mapFrame ? [MAP_FRAME_ORIGIN] : [],
+  };
 }
