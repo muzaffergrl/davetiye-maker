@@ -46,59 +46,59 @@
   "images": [
     {
       "n": 1,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/01_cover.png",
-      "alt": "Blush Garden Rose wedding website with RSVP on a phone held in a hand: the opening page with a pink envelope tied with a silk bow. Labels: no Canva needed, RSVP built in, live demo",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/01_cover.png",
+      "alt": "Blush Garden Rose wedding website with online RSVP on a phone held in a hand, among pink peonies and a satin ribbon: the opening page with a blush envelope tied with a pink satin bow and the names Clara & Julian",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 2,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/02_guest_pages.png",
-      "alt": "Three phones on a styled table with the pages guests see: home, our story and RSVP (the website also has the envelope opening and a details page)",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/02_opening.png",
+      "alt": "It opens like a real invitation: three phones show the envelope closed, the envelope opening, and the invitation card rising out of it",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 3,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/03_whats_included.png",
-      "alt": "What is included: website, online editor, RSVP with your own questions, add to calendar, questions and answers, QR code, START HERE guide",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/03_pages.png",
+      "alt": "Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 4,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/04_how_it_works.png",
-      "alt": "Three steps: start with your Etsy order number, add your names, date and a photo in a short 3-step setup, publish and share your link or QR code",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/04_edit.png",
+      "alt": "Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 5,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/05_editor.png",
-      "alt": "The online editor on a phone: the six pages to edit, Headings & labels for your own wording, cropping a photo to its frame",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/05_rsvp.png",
+      "alt": "Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download list button",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 6,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/06_rsvp.png",
-      "alt": "RSVP: the guest reply form with a meal question, the editor's Guests page with head counts and a Download list button (CSV), the questions you ask your guests",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/06_details.png",
+      "alt": "Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 7,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/07_details.png",
-      "alt": "Details page: order of the day with add to calendar buttons, the venue, questions and answers",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/07_how.png",
+      "alt": "Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 8,
-      "file": "collections/03_Blush_Garden_Rose/package/listing/images/08_live_demo.png",
-      "alt": "A phone on a styled table showing the live demo of the Blush Garden Rose design, next to a QR code that opens it.",
+      "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/08_included.png",
+      "alt": "What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding; a digital product, nothing is printed or shipped",
       "exists": true,
-      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     }
   ],
   "gpt_mockup_scenes": [
@@ -147,11 +147,6 @@
     {
       "where": "attributes.Who made it",
       "check": "the \"Designed by\" option for designs made with AI image tools",
-      "text": ""
-    },
-    {
-      "where": "image 8",
-      "check": "Etsy policy on QR codes and links in listing photos",
       "text": ""
     }
   ],

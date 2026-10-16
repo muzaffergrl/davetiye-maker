@@ -16,7 +16,7 @@ Açılış kareleri: `tools/listing_editorial/capture_opening.ts` (DPR 3, yerel 
 | Her görselde aynı köşe süsü | Süs yok; tema kimliği GPT sahnesi, kâğıt dokusu ve gerçek ekranlardan gelir |
 | Bulanık açılış videosundan kare (390 px) | DPR 3 net açılış kareleri (1170 × 2532) |
 | 25 px açıklama yazıları | En küçük yazı 28–30 px (telefonda Etsy görseli ~600 px'e iner) |
-| 8. görselde demo QR'ı | QR yok (Etsy Off-Platform politikası, docs/15 §4.1); "Live demo: link in the description" |
+| 8. görselde demo QR'ı | QR yok (Etsy Off-Platform politikası, docs/15 §4.1). İlan açıklamasında demo linki olmadığı için görsel demo vaat etmez; demo linkini açıklamaya koymak kullanıcı kararı |
 
 ## Kurallar
 

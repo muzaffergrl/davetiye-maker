@@ -33,7 +33,7 @@ HERE = TOOLS / "listing_editorial"
 TPL = HERE / "templates"
 REPO = TOOLS.parent
 BRAND_MARK = REPO / "brand" / "svg" / "bke-logo-horizontal-anchor.svg"
-IMAGES = ["01_cover", "02_opening", "03_pages", "04_edit", "05_rsvp", "06_details", "07_how", "08_included"]
+IMAGES = lk.UPLOAD_IMAGES  # the Etsy upload order
 FONTS = {"Cormorant Garamond": "ital,wght@0,300;0,400;0,500;1,300;1,400;1,500", "Montserrat": "wght@400;500"}
 # the opening in three phones: the closed envelope (g01_envelope), then two DPR 3 stills from capture_opening.ts chosen
 # by eye per theme (each theme's opening has its own timing) and saved in package/shots/ as open_mid.jpg (flap open, the
