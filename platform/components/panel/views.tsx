@@ -624,6 +624,7 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
             )}
             .
           </p>
+          <p>Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.</p>
         </section>
       </div>
     </Sheet>

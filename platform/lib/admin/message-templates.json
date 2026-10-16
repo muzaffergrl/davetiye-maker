@@ -283,6 +283,80 @@
     ]
   },
   {
+    "id": "setup_service_details",
+    "title": "Setup service: send us your details",
+    "when": "Right after a 'We set it up for you' order (K42). Ask once for everything we need; the buyer may also already have written.",
+    "placeholders": [
+      "order",
+      "design",
+      "shop"
+    ],
+    "body": [
+      "Hi, thank you for choosing our setup service! We will enter your details into your {design} wedding website for you.",
+      "Please reply here with:\n• Your first names as they should appear, and your Etsy order number for the design (if it is not {order})\n• Wedding date, ceremony time and time zone\n• Venue name and address (and a map link if you have one)\n• The order of the day, your story, questions and answers, dress code, travel and registry links: whatever you want to show\n• Your RSVP deadline and up to 3 questions for your guests (for example a meal choice)\n• Any headings or wording you want changed",
+      "Photos: send up to 5 as a share link (Google Drive, Dropbox or iCloud), and tell us which one goes where (portrait, 3 story photos, venue).",
+      "This is one round of setup. When we are done we send you your edit link; you can change anything yourself after that, and you decide when to publish. We finish within [TURNAROUND] of receiving everything.",
+      "{shop}"
+    ],
+    "note": "docs/23 §3: one round per purchase. Not started yet → admin 'Yeni sipariş' with the DESIGN order number; already started → 'Yeni düzenleme linki' (the buyer's old link stops working, say so). Write the setup order number in the site note."
+  },
+  {
+    "id": "setup_service_done",
+    "title": "Setup service done: your edit link",
+    "when": "After the shop has entered the buyer's details (setup service). Send in this order's Etsy conversation; it carries a fresh edit link.",
+    "placeholders": [
+      "names",
+      "design",
+      "edit_url",
+      "site_url",
+      "shop"
+    ],
+    "body": [
+      "Hi {names}, your {design} wedding website is set up with the details you sent us.",
+      "Here is your private edit link:\n{edit_url}",
+      "Please open it and check every page: names, date, venue, photos and RSVP. Your website is still a private draft; tap Publish when you are happy, and your guests can open it at {site_url}.",
+      "Save this link now (copy it into your notes app or email it to yourself). If you had an earlier edit link, it no longer works: use this one. Share it only with your partner; we will never ask you for it.",
+      "You can change anything yourself from now on. If you would like us to make another round of changes for you, that is a new setup purchase in our shop.",
+      "{shop}"
+    ],
+    "note": "Only right after 'Yeni sipariş' or 'Yeni düzenleme linki' (fresh link). Record the round in the site note (date + setup order number)."
+  },
+  {
+    "id": "custom_design_brief",
+    "title": "Custom design: tell us your idea",
+    "when": "Right after a custom design order (K42), before any design work starts.",
+    "placeholders": [
+      "order",
+      "shop"
+    ],
+    "body": [
+      "Hi, thank you for your custom design order ({order})! We are excited to make a wedding website just for you.",
+      "To start, please reply here with:\n• Your wedding date and the feel you want (for example classic, romantic, garden, coastal)\n• Two or three colors you love, and anything you do not want\n• Pictures that inspire you (a share link to photos or a Pinterest board is fine)\n• What guests should open first, if you have an idea (an envelope, a card, a book …)",
+      "Your custom design includes everything our designs include: the editor, RSVP and every page. It includes [REVISIONS] rounds of changes to the design, and the first version is ready within [TURNAROUND] of receiving your answers.",
+      "Your own names, photos and texts go in through the editor as usual (or with our setup service).",
+      "{shop}"
+    ],
+    "note": "docs/23 §4. Revisions and turnaround are undecided: the text cannot be copied until [REVISIONS] and [TURNAROUND] are filled."
+  },
+  {
+    "id": "custom_design_ready",
+    "title": "Custom design ready to start",
+    "when": "When the custom design is live on the platform as the buyer's own design and they can start their website.",
+    "placeholders": [
+      "start_url",
+      "order",
+      "shop"
+    ],
+    "body": [
+      "Hi, your custom design is ready!",
+      "Start your website here: {start_url}",
+      "Enter your Etsy order number ({order}), your email and your first names, and choose your web address. Then save your private edit link when it appears: it opens your editor.",
+      "If anything in the design should change, reply here; that counts as one of your [REVISIONS] revision rounds.",
+      "{shop}"
+    ],
+    "note": "The custom theme must be claimable on /start before this is sent (docs/23 §4)."
+  },
+  {
     "id": "refund_or_problem",
     "title": "Refund request / unhappy buyer",
     "when": "The buyer asks for a refund or says the product does not work for them.",

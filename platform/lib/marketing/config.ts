@@ -32,6 +32,20 @@ export interface DesignCommerce {
   updated: string;
 }
 
+/**
+ * K42 (2026-10-16): paid extras sold as their own Etsy listings (G130, docs/23_EK_HIZMETLER.md). They are not designs:
+ * no theme, no /start. While `etsyListingUrl` is a placeholder the sales site shows "Coming soon on Etsy" and no price;
+ * a service with a real listing URL needs a real price before launch (launchProblems).
+ */
+export interface ServiceCommerce {
+  id: 'setup-service' | 'custom-design';
+  name: string;
+  /** The price Etsy shows, number as text without currency sign (the same rule as DesignCommerce.price). */
+  price: string;
+  /** The listing's Etsy Share & Save link, no query parameters added. */
+  etsyListingUrl: string;
+}
+
 export interface MarketingConfig {
   /** true: indexing + sitemap on. Requires every placeholder below (required fields) to be filled. */
   launched: boolean;
@@ -79,6 +93,8 @@ export interface MarketingConfig {
    * each order, scripts/verify-order.ts) or a real Etsy check is live, so "one order = one website" is enforced.
    */
   verified: { editRights: boolean; archive: boolean; realDevices: boolean; privacyText: boolean; orderCheck: boolean };
+  /** K42 extras (G130): "We set it up for you" and custom design. Optional for launch while their listing is not live. */
+  services: ServiceCommerce[];
   designs: DesignCommerce[];
 }
 
@@ -119,6 +135,12 @@ export const MARKETING: MarketingConfig = {
   copyUpdated: '2026-10-16',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
   verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
+  // K42 (2026-10-16): proposed Etsy prices in TRY (shop currency, K38) are in docs/23 §1 and wait for the user's approval;
+  // `currency` above is still 'USD' for the designs, so the prices stay placeholders until both are decided.
+  services: [
+    { id: 'setup-service', name: 'We set it up for you', price: '[PRICE]', etsyListingUrl: '[ETSY LISTING URL]' },
+    { id: 'custom-design', name: 'Custom design', price: '[PRICE]', etsyListingUrl: '[ETSY LISTING URL]' },
+  ],
   designs: [
     {
       id: 'blush-garden-rose',

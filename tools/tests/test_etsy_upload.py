@@ -113,6 +113,31 @@ def test_real_listings():
         assert committed == data, (no, "etsy_upload.json is out of date: python3 tools/etsy_upload.py --designs " + no)
 
 
+def test_services():
+    """G130 (K42): the two service listings — Etsy rules, TRY proposal, undecided fields kept as open checks."""
+    assert [sid for sid, _ in eu.SERVICES] == ["setup-service", "custom-design"]
+    for sid, price in eu.SERVICES:
+        listing = REPO / "collections" / "_services" / sid / "package" / "listing"
+        md = (listing / "listing_v3.md").read_text(encoding="utf-8")
+        data, problems = eu.build_service(sid, price)
+        assert problems == [], (sid, problems)
+        f = lk.listing_fields(md)
+        m = re.search(r"This title: (\d+) characters", md)
+        assert m and int(m.group(1)) == len(f["title"]) <= 140, sid
+        assert f["title"].count("Wedding") <= 1, (sid, f["title"])
+        assert len(f["tags"]) == 13 and all(len(t) <= 20 for t in f["tags"]), (sid, f["tags"])
+        assert "/start/demo/" not in data["description"] and "[VERIFY" not in data["description"], sid
+        assert "[TURNAROUND]" in data["description"] and "[QUANTITY]" in md, sid  # undecided stays visible
+        assert any(c["check"] == "decide [TURNAROUND]" for c in data["open_checks"]), sid
+        assert "No returns" in data["description"] and "24 hours" in data["description"], sid  # K36, K37
+        assert data["price_try"] == price and abs(data["price_usd_approx"] - price / eu.USD_TRY) < 0.01, sid
+        assert data["ready_to_publish"] is False and "price not approved" in data["blockers"], sid
+        committed = json.loads((listing / "etsy_upload.json").read_text(encoding="utf-8"))
+        assert committed == data, (sid, "etsy_upload.json is out of date: python3 tools/etsy_upload.py --designs services")
+    custom = eu.build_service("custom-design", 2960)[0]["description"]
+    assert "[REVISIONS]" in custom and "includes the design" in custom
+
+
 def test_check_exit():
     assert eu.main(["--check"]) == 0
     files_missing = any(b.startswith(("listing images", "listing video", "digital file"))
@@ -122,7 +147,7 @@ def test_check_exit():
 
 def main():
     for test in (test_design_table, test_opening_object, test_text_rules, test_select, test_real_listings,
-                 test_check_exit):
+                 test_services, test_check_exit):
         test()
         print(f"  {test.__name__}: ok")
     print("test_etsy_upload: ok")
