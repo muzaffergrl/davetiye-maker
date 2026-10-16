@@ -42,6 +42,8 @@ export interface DesignSound {
  * Per theme id. `step` names in the comments = the MOTION.envelope key whose start the cue uses.
  */
 export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
+  // Crimson Rose Atelier: botanical seal, flap, card, chime.
+  'crimson-rose-atelier': { music: 'evening-strings', opening: [[0, 'seal'], [400, 'paper'], [1600, 'slide'], [3000, 'chime']] },
   // 01 bow · lift · rise · forward
   'blush-garden-rose': { music: 'first-light', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // 02 wax seal (closure) · lift · rise · forward
@@ -139,3 +141,4 @@ export function customMusicFile(content: unknown): string | null {
   if (a.music !== 'custom') return null;
   return typeof a.music_file === 'string' && a.music_file.trim() ? a.music_file.trim() : null;
 }
+

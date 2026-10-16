@@ -35,7 +35,7 @@ before(() => {
 
 test('every design has its sounds; tracks ≤ 1.5 MB, effects ≤ 40 KB, all in LICENSES.md', () => {
   const themes = readdirSync(THEMES_DIR).filter((t) => t !== '_sample' && statSync(path.join(THEMES_DIR, t)).isDirectory());
-  assert.equal(themes.length, 20);
+  assert.deepEqual(new Set(themes), new Set(Object.keys(DESIGN_SOUND)), 'every theme has one sound entry');
   for (const t of themes) assert.ok(DESIGN_SOUND[t], `${t} has no sound entry`);
   const licences = readFileSync(path.join(AUDIO_DIR, 'LICENSES.md'), 'utf8');
   for (const track of MUSIC_TRACKS) {
@@ -223,3 +223,4 @@ test('music upload: one part, several parts, refusals; the file is served only w
   const story = await call(pageRoute, '/g126-upload/story', { slug: 'g126-upload', page: 'story' });
   assert.equal(siteData(story.text).sound.music, one.data.url);
 });
+
