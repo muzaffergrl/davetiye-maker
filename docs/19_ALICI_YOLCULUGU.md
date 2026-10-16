@@ -814,34 +814,65 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
 
 ## 5. START HERE rehberi
 
-**Ortak kaynak:** Ek A (bu belgenin sonunda, `<!-- g091:start-here:start -->` … `end` işaretleri arasında). Yalnız
-`{DESIGN_NAME}` ve `{START_URL}` değişir. Kopyalar:
+**Ortak kaynak:** Ek A (bu belgenin sonunda, iki işaret satırı arasında: `g091:start-here:start` … `end`). Yer tutucular
+(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{OPENING}`, `{LANGUAGE_FONTS}`) Ek A'nın başındaki tabloda. **Üretim tek
+komut (G122):** `python3 tools/build_customer_guides.py` — 20 tasarımın her biri için `package/customer/START_HERE.md`,
+`START_HERE.pdf`, `img/start_qr.{png,svg}` (yalnız `tools/make_qr.py`, gerçek başlat linkinden), `img/start_qr_page.png`; sonra
+denetim. `--designs 06-20` seçim, `--check` yalnız denetim, `--base-url` / `GUIDE_BASE_URL` başka alan adı (karar gelince).
 
-| Tasarım | Dosya | Başlat linki |
-|---|---|---|
-| 01 Olive & Ivory | `collections/01_Olive_Ivory/package/customer/START_HERE.md` + `.pdf` | `…/start?theme=olive-ivory` |
-| 02 Dusty Blue & Champagne | `collections/02_Dusty_Blue/package/customer/START_HERE.md` + `.pdf` | `…/start?theme=dusty-blue-champagne` |
-| 03 Blush Garden Rose | `collections/03_Blush_Garden_Rose/package/customer/START_HERE.md` + `.pdf` | `…/start?theme=blush-garden-rose` |
-| 04 Vintage Airmail Love Letter | `collections/04_Vintage_Airmail/package/customer/START_HERE.md` + `.pdf` | `…/start?theme=vintage-airmail-love-letter` |
-| 05 Mediterranean Lemon | `collections/05_Lemon_Mediterranean/package/customer/START_HERE.md` + `.pdf` | `…/start?theme=mediterranean-lemon` |
+| Tasarım | Klasör (`collections/<…>/package/customer/`) | Başlat linki | `{OPENING}` | Fontlar → `{LANGUAGE_FONTS}` |
+|---|---|---|---|---|
+| 01 Olive & Ivory | `01_Olive_Ivory` | `…/start?theme=olive-ivory` | envelope | Great Vibes, EB Garamond → Kiril dahil |
+| 02 Dusty Blue & Champagne | `02_Dusty_Blue` | `…/start?theme=dusty-blue-champagne` | envelope | Pinyon Script, Cormorant Garamond → Kiril kısmen/yok |
+| 03 Blush Garden Rose | `03_Blush_Garden_Rose` | `…/start?theme=blush-garden-rose` | envelope | Great Vibes, Cormorant Garamond, Lora → Kiril dahil |
+| 04 Vintage Airmail Love Letter | `04_Vintage_Airmail` | `…/start?theme=vintage-airmail-love-letter` | envelope | Homemade Apple, Special Elite → bir font yalnız latin |
+| 05 Mediterranean Lemon | `05_Lemon_Mediterranean` | `…/start?theme=mediterranean-lemon` | envelope | Allura, Playfair Display → Kiril kısmen/yok |
+| 06 Art Deco Black-Tie | `06_Art_Deco_Noir` | `…/start?theme=art-deco-black-tie` | gatefold | Italiana, Josefin Sans → bir font yalnız latin |
+| 07 Burgundy Velvet Autumn | `07_Burgundy_Velvet` | `…/start?theme=burgundy-velvet-autumn` | envelope | Pinyon Script, Cinzel, Cormorant Garamond → Kiril kısmen/yok |
+| 08 Winter Evergreen | `08_Winter_Evergreen` | `…/start?theme=winter-evergreen` | envelope | Parisienne, Libre Baskerville → Kiril kısmen/yok |
+| 09 Lavender Provence | `09_Lavender_Provence` | `…/start?theme=lavender-provence` | pouch | Alex Brush, Cormorant Garamond → Kiril kısmen/yok |
+| 10 Tuscan Vineyard | `10_Tuscan_Vineyard` | `…/start?theme=tuscan-vineyard` | envelope | Italianno, Marcellus → Kiril kısmen/yok |
+| 11 Boho Pampas Terracotta | `11_Boho_Pampas` | `…/start?theme=boho-pampas-terracotta` | envelope | Sacramento, Josefin Slab → bir font yalnız latin |
+| 12 Tropical Destination | `12_Tropical_Destination` | `…/start?theme=tropical-destination` | wallet | Dancing Script, Raleway → Kiril kısmen/yok |
+| 13 Enchanted Forest Storybook | `13_Enchanted_Forest` | `…/start?theme=enchanted-forest-storybook` | book | Tangerine, IM Fell English → bir font yalnız latin |
+| 14 Ivory Lace & Pearls | `14_Ivory_Lace_Pearl` | `…/start?theme=ivory-lace-pearls` | gatefold | Mrs Saint Delafield, Bodoni Moda → Kiril kısmen/yok |
+| 15 Cherry Blossom Spring | `15_Cherry_Blossom` | `…/start?theme=cherry-blossom-spring` | envelope | Petit Formal Script, Noto Serif Display → Kiril kısmen/yok |
+| 16 Sunflower Rustic Barn | `16_Sunflower_Rustic` | `…/start?theme=sunflower-rustic-barn` | envelope | Kaushan Script, Merriweather → Kiril kısmen/yok |
+| 17 Emerald & Gold Estate | `17_Emerald_Gold_Estate` | `…/start?theme=emerald-gold-estate` | envelope | Cinzel Decorative, Cormorant Infant → Kiril kısmen/yok |
+| 18 Wildflower Meadow Vellum | `18_Wildflower_Vellum` | `…/start?theme=wildflower-meadow-vellum` | sleeve | Satisfy, Spectral → bir font yalnız latin |
+| 19 Midnight Garden | `19_Midnight_Garden` | `…/start?theme=midnight-garden` | envelope | Playfair Display SC, Cormorant SC, Cormorant Garamond → Kiril dahil |
+| 20 Coastal Seaside | `20_Coastal_Seaside` | `…/start?theme=coastal-seaside` | envelope | Allison, Lora → Kiril kısmen/yok |
+
+Taban `https://davetiye-platform-five.vercel.app` (geçici Vercel adresi; alan adı kararıyla `--base-url` ile yeniden üretilir — QR'lar
+basılı kartlara gireceği için satıştan önce, docs/05 §C). QR koyu rengi tasarımın `palette.json`'undaki en koyu renk (06, 17, 19'da
+`ink` açık renk olduğu için), beyaz zeminde kontrast ≥ 7:1.
+
+**Canlıyla fark (2026-10-16):** rehber depodaki paneli (G100) anlatıyor. Production `b952bc8` (`dpl_HKT1…`, docs/10 §2) G100'ü
+içermiyor (`git merge-base --is-ancestor 368ebb1 b952bc8` → hayır). G100'lü yayın canlıya çıkıp `--check` yeniden geçmeden rehber
+alıcıya verilmez. 20 başlat linki (`/start?theme=<id>`, "Design: <ad>" + form) ve `/privacy` aynı gün canlıda `200` (Vercel
+bağlayıcısı; bu ortamdan `curl` vekil sunucuda 403).
 
 **Yapı (alıcının sırasıyla):** Good to know before you begin → **Start now: the first 5 steps** (QR + link) → **Save your edit
-link: it is your key** → Step 1 Start → Step 2 three-step setup → bekleyen sipariş onayı → Step 3 Edit (6 sayfa tablosu,
-Headings & labels, Sample, otomatik kayıt) → Step 4 Photos → Step 5 Preview & publish → isim/tarih hakkı → Step 6 Share (QR,
-şifre, çevrim dışı) → Step 7 Guest replies → Step 8 After the wedding → Online süresi → Quick answers → Troubleshooting → Help and
-privacy.
+link: it is your key** → Step 1 Start → Step 2 three-step setup (G100: 1. adım yalnız adlar + tarih; yayın sonrası "Your website is
+live" ekranı) → bekleyen sipariş onayı → Step 3 Edit (6 sayfa tablosu, Headings & labels, sample satırı, otomatik kayıt) → Step 4
+Photos → Step 5 Preview & publish → isim/tarih hakkı → Step 6 Share (QR, şifre, çevrim dışı) → Step 7 Guest replies (Guest list /
+Results, Held) → Step 8 After the wedding → Online süresi → Quick answers → Troubleshooting → Help and privacy.
 
 **Bilinçli seçimler:**
 - "İlk 5 dakika" yerine **"Start now: the first 5 steps"**: süre ölçülmedi (docs/05 §E "süre yazılmaz"); 5 = adım sayısı.
-- Panel düğme ve başlık adları kaynaktan birebir (kalın): Create my website, Copy link, Email it to myself, Open my editor,
-  Skip for now, Save & exit, Continue, Publish my website, Unpublished changes, Review, Publish changes, Headings & labels on this
-  page, Reset to design text, Use this photo, Copy edit link, Guest password, Suggest a password, Turn on password, Copy password,
-  Take the website offline, Download list, Add a reply, Print list, Refresh, After the wedding, Automatic / On now / Off.
+- Panel düğme ve başlık adları kaynaktan birebir (kalın). `--check` her kalın etiketi ve tırnaklı panel metnini kaynakta arar
+  (`platform/components/panel`, `platform/app/start`, `platform/lib/{panel,claim,theme}`, tasarımın `theme.json`'u); 2026-10-16'da
+  hepsi bulundu. G100 ile gelenler: Learn more, Your website is live, Copy link, Open website, Share, More ways to share,
+  Next, if you like, Go to my editor, Go to the first one, Guest list, Results, All / Coming / Not coming / New, Mark as seen,
+  Held, Keep this reply, Edit reply, Remove reply. Önizleme sekmesi her tasarımda **Envelope** (`lib/panel/model.ts`
+  `PAGE_LABELS`); zarfsız 6 tasarımda rehber "Envelope is the opening page, where guests tap the {OPENING}" diye açıklar.
 - K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
-- Ekran görüntüsü yok: mevcut ekranlar ya yerel adres (127.0.0.1) ya da K29 öncesi panel gösteriyor. G079 sonrası canlı tabanla
-  `capture` yeniden alınınca rehbere görsel eklenebilir (önerilen görev, §7).
-- PDF: `tools/build_customer_guides.py` biçimi (reportlab; başlık, paragraf, `- ` madde, 2 sütunlu tablo, link, QR = başlat linki).
-  Araç yalnız 01/03'ü üretiyor; bu görevde aynı kod kazıma alanında 5 tasarım için koşuldu (`tools/` yazma alanı dışında).
+- Ekran görüntüsü yok: ekranlar K29/G100 panelinden yeniden alınmadı. Canlı tabanla `capture` yeniden alınınca rehbere görsel
+  eklenebilir (önerilen görev, §7).
+- PDF: reportlab, US Letter, standart PDF fontları (font dosyası gömülmez ya da pakete konmaz); QR = `img/start_qr.png`'nin kendisi
+  (1,6 inç, tıklanabilir); `invariant` (aynı girdi → bayt bayt aynı PDF). Denetim: Markdown = Ek A'nın doldurulmuş hâli (eski kopya
+  hata), QR modül modül (segno) ve jsQR ile raster (PNG'ler + PDF'in bütün sayfaları, tam bir QR), PDF linkleri yalnız başlat linki
+  + gizlilik metni, zarfsız tasarımda "envelope" yok.
 
 ---
 
@@ -947,8 +978,31 @@ sınırı; AI beyanı ve "Designed by"; ilan görselinde QR/link politikası.
 
 ## Ek A — START HERE ortak kaynağı (İngilizce)
 
-Kopyalarda `{DESIGN_NAME}` ve `{START_URL}` doldurulur; başka değişiklik yapılmaz. Biçim `tools/build_customer_guides.py`'nin
-desteklediği öğelerle sınırlı (başlık, paragraf, `- ` madde, numaralı satır, 2 sütunlu tablo, `![…](…)` = QR, `**kalın**`, link).
+**Tek kaynak, tek komut (G122):** 20 tasarımın `START_HERE.md` + `START_HERE.pdf` + başlat QR'ı bu metinden üretilir:
+`python3 tools/build_customer_guides.py` (hepsi; `--designs 06-20` seçim, `--check` yalnız denetim). Kopyalar elle düzeltilmez:
+metni burada değiştir, komutu yeniden koş. Yer tutucular (araç doldurur; doldurulmamış `{…}` kalırsa durur):
+
+| Yer tutucu | Değer | Kaynak |
+|---|---|---|
+| `{DESIGN_NAME}` | Tasarımın adı ("Olive & Ivory") | `platform/themes/<id>/theme.json` `name` (= `/start`'taki "Design: …") |
+| `{START_URL}` | `https://davetiye-platform-five.vercel.app/start?theme=<id>` | `--base-url` / `GUIDE_BASE_URL`; rota `platform/app/start/page.tsx` |
+| `{PRIVACY_URL}` | `https://davetiye-platform-five.vercel.app/privacy` | aynı taban; rota `platform/app/(marketing)/privacy/page.tsx` |
+| `{OPENING}` | Misafirin ilk dokunduğu nesne: `envelope`; 06 ve 14 `gatefold`, 09 `pouch`, 12 `wallet`, 13 `book`, 18 `sleeve` | `platform/lib/marketing/designs.ts` `opening` ("Your guests tap the …") |
+| `{LANGUAGE_FONTS}` | Tasarım fontlarının dil kapsamı (3 cümleden biri, aşağıda) | `designs.ts` `fonts` + aracın `FONT_SUBSETS` tablosu (Google Fonts CSS, 2026-10-16) |
+
+`{LANGUAGE_FONTS}`: bütün fontlar latin-ext + Kiril (01, 03, 19) → "Accented Latin letters and Cyrillic use the design's fonts;
+other alphabets show in a plain standard font." · hepsi latin-ext, en az biri Kiril'siz (02, 05, 07–10, 12, 14–17, 20) → "Accented
+Latin letters use the design's fonts; Cyrillic and other alphabets show in a plain standard font in some or all places." · en az
+bir font yalnız `latin` (04, 06, 11, 13, 18) → "Western European accents (such as é, ñ and ü) use the design's fonts; some other
+accented letters (for example in Polish, Czech or Turkish) and other alphabets show in a simpler fallback font." (İlanlardaki
+"ł, ő, ş" örnekleri PDF'in standart Helvetica'sında basılamadığı için rehberde dil adlarıyla yazıldı.)
+
+Panel etiketleri (kalın) kaynak koddan birebir: `--check` her kalın etiketi `platform/components/panel`, `platform/app/start`,
+`platform/lib/{panel,claim,theme}` içinde arar, bulamazsa hata verir (G121 gibi panel değişikliklerinden sonra önce bu denetim).
+Biçim aracın desteklediği öğelerle sınırlı (başlık, paragraf, `- ` madde, numaralı satır, 2 sütunlu tablo, `![…](…)` = QR,
+`**kalın**`, link). Değişiklik geçmişi: G091 (ilk metin), G100 entegrasyonu (Sample satırı, yayın ekranı), **G122** (kurulum 1. adım
+yalnız adlar + tarih, yayın sonrası "Your website is live" ekranı, Guests'in Guest list / Results görünümleri, Held yanıtlar,
+önizleme sekmeleri, `{OPENING}` ve `{LANGUAGE_FONTS}`, Home → Help & questions).
 
 <!-- g091:start-here:start -->
 ````markdown
@@ -961,7 +1015,7 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 - You do not need Canva, an app or an account. Everything works in the web browser of your phone or computer.
 - You fill in your website yourself, in a simple editor. Every change saves by itself.
 - Nobody sees your website until you publish it, and you can keep changing it after you publish.
-- Your guests need no app and no account either: they open your link and tap the envelope.
+- Your guests need no app and no account either: they open your link and tap the {OPENING}.
 
 ## Start now: the first 5 steps
 
@@ -971,7 +1025,7 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 
 2. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
 3. **Save your edit link.** Tap **Copy link** and paste it into your notes app, or tap **Email it to myself**. Do this before anything else.
-4. Tap **Open my editor**. Add your names and your wedding date (setup step 1 of 3).
+4. Tap **Open my editor**. Add your first names and your wedding date (setup step 1 of 3).
 5. Add one photo (step 2 of 3). Publish now (step 3 of 3), or later when everything is ready.
 
 ## Save your edit link: it is your key
@@ -991,7 +1045,7 @@ Anyone who has the link can change your website, so share it only with your part
 Open the start link. At the top you see a small live demo of your design (**Open the full demo** shows it full size). Below it, fill in **Your details**:
 
 - **Etsy order number:** in your Etsy order confirmation email, or on Etsy under Purchases and reviews. It has 8 to 12 digits. You can type it with or without "#".
-- **Email address:** we keep it with your website so we can recognise you if you need help. We do not send emails yet.
+- **Email address:** we keep it with your website so we can recognize you if you need help. We do not send emails yet.
 - **Your first names:** as your guests know you. You can change them later in the editor.
 - **Website address:** made from your names, for example …/avery-and-jordan. "Available" means it is free. You can change it here, but **not later**, so check the spelling.
 
@@ -1003,11 +1057,15 @@ If your connection drops, tap **Create my website** again: you get your link bac
 
 The editor starts with a short setup. The bar at the top shows **Step 1 of 3**. You can tap **Skip for now** on steps 1 and 2, and **Save & exit** at any time. Everything is saved.
 
-1. **Your names and date.** Your first names; **Full names for the invitation card** (optional); **How your names appear**, for example "Avery & Jordan"; a **Monogram** if your design shows one. Then the wedding date, ceremony time, **Time zone of the wedding** and the date style (Month first or Day first).
+1. **Your names and date.** Your two first names, then the wedding date and the ceremony time. The **Time zone of the wedding** comes from your phone; tap **Change** if the wedding is in another time zone. **Full names for the invitation card** are optional. One line says how often you can change your names or date after you publish; **Learn more** explains what is always free.
 2. **Add your photo.** One photo opens your website. **More photos** are optional; you can add them any time.
 3. **Publish your website.** Check the summary and the preview, read **Good to know before you publish**, then tap **Publish my website**. Or come back later: Home shows how ready your website is.
 
+How your names appear, the monogram (if your design shows one) and the date style (Month first or Day first) are not part of the setup: you find them later under **Edit**.
+
 If your date is still the design's sample date, the editor asks you to set your real date first.
+
+When your website is live, **Your website is live** shows your link with **Copy link**, **Open website** and, on a phone, **Share**. The QR code for printed cards is under **More ways to share**. **Next, if you like** suggests a few optional next steps, and **Go to my editor** takes you to Home.
 
 ## If your editor says "We are confirming your Etsy order"
 
@@ -1024,18 +1082,18 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 
 | Edit page | What you change |
 |---|---|
-| Us | First names, full names for the invitation card, how your names appear, monogram |
-| Day & place | Date, ceremony time and time zone; venue, address, map link and venue photo; the order of the day (up to 10 rows); countdown on or off; After the wedding |
+| Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one) |
+| Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link and venue photo; the order of the day (up to 10 rows); After the wedding |
 | Photos | Invitation portrait, three story photos and the venue photo |
-| Our Story | Show or hide the page, an intro line and three captions |
-| Details | Host line, dress code, travel & stay and registry links, guest policy note, up to 12 questions and answers |
+| Our Story | Show or hide the page, an intro line and a caption for each story moment |
+| Details | Host line, dress code, travel & stay and registry links, guest policy note (in some designs), up to 12 questions and answers |
 | RSVP | Replies on or off, reply-by date, up to 3 questions for guests who are coming |
 
 **Your own wording.** At the end of every Edit page, open **Headings & labels on this page**. There you can rewrite the design's texts in your own words, for example "You are invited", "Will You Join Us?" or the menu. Leave a box empty to keep the design's text; **Reset to design text** brings it back. On **Us** you can also pick suggested wording for a vow renewal, an elopement party or a commitment ceremony. Wording changes never use a name or date change.
 
-**What stays as designed:** the artwork, colors, fonts, page layout and the envelope animation.
+**What stays as designed:** the artwork, colors, fonts, page layout and the {OPENING} animation.
 
-**Sample text.** Boxes that still hold the design's sample text look faded (in italics), and the top of the page says how many are left, for example "3 fields still show sample text". Tap **Go to the first one** and replace it before you share your website. Home lists what is left.
+**Sample text.** Boxes that still hold the design's sample text look faded (in italics, with a dashed border), and the top of the page says how many are left, for example "3 fields still show sample text". Tap **Go to the first one** and type your own text before you share your website. Home lists what is left.
 
 **Saving.** There is no Save button: every change saves as you type, and the cloud icon at the top shows it. If you are offline, your changes are kept on this phone and saved when you are back online; wait until it says saved before you close the page. If the editor says your website was changed on another device, reload the page to get the latest version.
 
@@ -1049,11 +1107,11 @@ No photos yet? Your website still works: empty frames show the design's soft pla
 
 ## Step 5. Preview and publish
 
-Tap the eye icon at the top to preview Envelope, Home, Story, Details and RSVP; **Close** returns to editing. On a computer the preview stays on the right.
+Tap the eye icon at the top to preview your pages: **Envelope**, **Home**, **Story**, **Details** and **RSVP**. **Envelope** is the opening page, where guests tap the {OPENING}. The X at the top closes the preview. On a computer the preview stays on the right.
 
-**First publish:** tap **Publish**. The editor lists anything guests would still see from the design (sample text, empty photo frames, sections without a link). Tap an item to fix it, or publish anyway and fix it later. Then your link appears with **Copy link** (and **Share** on phones); the QR code is under **More ways to share**, and Share has it too.
+**First publish:** tap **Publish**. **Before you publish** lists anything guests would still see from the design (sample text, photo places without a photo, sections without a link). Tap an item to fix it, or tap **Publish my website** and fix it later. Then **Your website is live** shows your link with **Copy link**, **Open website** and, on a phone, **Share**; the QR code is under **More ways to share**. You find both again under **Share** at any time.
 
-**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed, then **Publish changes**.
+**After that:** your changes save to a draft, and guests see the last version you published. When you change something, a bar shows **Unpublished changes**. Tap **Review** to see which pages changed, then **Publish changes** (or tap **Publish** in the bar).
 
 ## Name and date changes after publishing
 
@@ -1071,10 +1129,10 @@ Your names and date show with a **Change** button and the changes you have left 
 Open **Share**:
 
 - **Your website link:** **Copy** it and send it by text, WhatsApp or email, or tap **Open** to see it as a guest. Most messaging apps show a preview card with your names and date; send it to yourself first to check.
-- **QR code for printed cards:** **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
+- **QR code for printed cards** (shown once your website is live): **Download PNG** or **Download SVG**. Scan it once with your phone camera before you print.
 - Your website is not listed on Google. Only people with your link or QR code can open it.
 
-**Guest password (optional).** Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
+**Guest password** (optional). Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
 
 **Take the website offline** (at the bottom of Share) hides your website from guests: they see "Page not found" until you publish again. Your text, photos and replies are kept.
 
@@ -1082,15 +1140,19 @@ Open **Share**:
 
 **What guests do:** on your RSVP page they enter their name, whether they are coming, how many people (up to 10 in one reply), the names of the others (optional), a message and your questions. They need no account, and an email address is optional. To change their answer, they send another reply.
 
-**What you do:** open **Guests** (not Edit → RSVP, which changes the form).
+**What you do:** open **Guests** (not Edit → RSVP, which changes the form). It has two views:
 
-- See how many are coming and not coming, and every reply. Tap a reply to see everyone in it.
-- Search by name, and see the answers to your questions.
-- **Download list** saves a CSV file for Excel, Numbers or Google Sheets, one row per person.
-- **Add a reply** you got by phone or in person; correct a reply; remove an old one.
+- **Guest list:** how many guests are coming and not coming, then every reply. Search by name, or tap **All**, **Coming**, **Not coming** or **New** to filter. Tap a reply to see everyone in it, their answers and their message.
+- **Results:** how many replies say coming and not coming, and the answers to your questions, each with a number and a percentage. Tap a line to see who is in it.
+
+In the Guest list you can also:
+
+- **Download list** to save a CSV file for Excel, Numbers or Google Sheets, one row per person.
+- **Add a reply** you got by phone or in person. On each reply, **Edit reply** corrects it and **Remove reply** deletes it.
 - **Print list**, or save it as a PDF from your browser's print menu.
-- **Refresh** loads new replies. We do not send email notifications yet; Home shows new replies.
-- Replies **Held for review** came in unusually fast. They are not counted until you keep them.
+- **Refresh** to load new replies.
+
+We do not send email notifications yet: new replies show on Home and under **New**, where **Mark as seen** clears them. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
 
 Replies close at the end of your reply-by date, in your wedding's time zone. To close earlier, turn off **Accept replies on the website** in Edit → RSVP.
 
@@ -1102,7 +1164,7 @@ Open **Edit → Day & place → After the wedding** and choose a **Thank-you mod
 - **On now:** it shows right after you publish.
 - **Off:** keeps the invitation.
 
-Add a title, a message and a photo if you like, preview it and publish. In thank-you mode, replies close and the countdown and calendar buttons disappear. Your replies stay in **Guests**. You can choose to keep or hide The Day details.
+Add a title, a message and a photo if you like, preview it and publish. In thank-you mode, replies close and the countdown and calendar buttons disappear. Your replies stay in **Guests**. Under **The Day page**, choose **Keep it** (schedule and venue as a keepsake) or **Hide it**.
 
 ## How long your website stays online
 
@@ -1118,7 +1180,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can I change colors or fonts?** No. You change the content and the wording; the design stays as made.
 
-**Can it be in my language?** You can write your own texts and the design's headings in any language. Some built-in messages, such as reply form errors, stay in English. Accented Latin letters and Cyrillic use the design's fonts; other alphabets show in a plain standard font. Preview every page.
+**Can it be in my language?** You can write your own texts and the design's headings in any language. Some built-in messages, such as reply form errors, stay in English. {LANGUAGE_FONTS} Preview every page.
 
 **How many guests can I invite?** As many as you like. One reply can include up to 10 people.
 
@@ -1146,13 +1208,15 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The QR code does not scan.** Download it again from Share and print it larger, with white space around it. Always scan a printed proof before printing all cards.
 
-**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place.
+**The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options**.
 
 ## Help and privacy
 
+In your editor, **Help & questions** at the bottom of Home answers the most common questions.
+
 Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
-Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
+Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}).
 
 The design's sample names, dates, places and photos are fictional. Replace them before you share your website.
 ````

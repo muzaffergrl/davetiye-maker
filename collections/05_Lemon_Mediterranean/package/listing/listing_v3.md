@@ -6,19 +6,22 @@ the platform does today. Product language: English (US spelling). This design ha
 
 ## 0. Status before publishing
 
-| Item | Status on 2026-10-15 |
+| Item | Status on 2026-10-16 |
 |---|---|
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=mediterranean-lemon` | On sale in the sales configuration since G082; **not checked on the live site** in this task (G079 pending). |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/mediterranean-lemon` (in the description under TRY THE LIVE DEMO, and named in image 8) | Demo page exists for every theme (`/start/demo/<theme>`); not checked live in this task. |
-| Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Not yet.** The last checked live release is G078 (`2dc812b`, editor in the old look). This text and the START HERE guide describe the current editor; publish only after G079 is live and checked. |
-| Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Stated by the integrator on 2026-10-15; not checked in this task. The listing says "We confirm each order in our shop before a website can go live". [VERIFY: manual order check on in production] |
+| Start link `https://davetiye-platform-five.vercel.app/start?theme=mediterranean-lemon` | **Live**: answered `200` on 2026-10-16 and the page names the design ("Design: Mediterranean Lemon", with the "Create my website" form). Checked through the Vercel connector on production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW` (G122); a direct `curl` from this environment is refused by its proxy. Not opened on a phone. |
+| Live demo `https://davetiye-platform-five.vercel.app/start/demo/mediterranean-lemon` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Live**: answered `200` on 2026-10-16; the page is this design's opening (`data-theme="mediterranean-lemon"`, sample couple Isabella & Marco). Same check, not opened on a phone. |
+| Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Live** since G079 (2026-10-15, docs/10 §2). Production on 2026-10-16 is `b952bc8` (`dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW`). It does **not** yet have the G100 editor changes (one-job first setup step, link-first "Your website is live" screen with the QR under "More ways to share", Guests list and Results) that the START HERE guide describes since G122: publish only after a release with G100 (and G121, if merged) is live and the guide re-checked against it. The editor features were not re-tried on the live site in this task. |
+| Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Decided on (K34, 2026-10-15), but the records disagree: docs/10 (G092) says the variable is not set in production, docs/18 §4 says it was added on 2026-10-15 and reported off again on 2026-10-16. Not read in this task. The listing keeps "We confirm each order in our shop before a website can go live" with [VERIFY: manual order check on in production]: read the value in Vercel, or delete the sentence before publishing. |
 | Questions & answers, RSVP questions | Tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation. |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). The listing and guide say so. |
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
-| Response time, price, refund policy, hosting extension, Etsy shop URL | Not decided: placeholders. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rewritten in G091 (7 pages, from docs/19 Ek A). Start link and privacy link are clickable; the QR code decodes to `https://davetiye-platform-five.vercel.app/start?theme=mediterranean-lemon` (jsqr, rendered PDF page). |
+| Response time, refund policy | Decided on 2026-10-15 (K37, K36; docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. The description says both (GOOD TO KNOW, QUESTIONS?); the START HERE guide gives the 24 hours. |
+| Price, hosting extension, quantity, renewal | Not decided: §4 has the user's draft target price (USD 29.40, docs/15 §5); the TRY amount, the hosting extension, quantity and renewal (§4) are open. |
+| Etsy shop | Open as **STUDIOBKE** (docs/20 §7). The listing text does not link the shop. |
+| Design fonts and other languages | Checked on 2026-10-16 (G122) from the Google Fonts CSS of the fonts this theme loads: Allura (latin-ext, no Cyrillic; its fallback is a system script font) and Playfair Display (latin-ext and Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G122 (2026-10-16, `python3 tools/build_customer_guides.py`, from docs/19 Ek A): 7 pages, about 49 KB. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=mediterranean-lemon` (jsQR on every rendered page; module by module against a fresh encoding). It describes the editor in the repository, which is newer than production (see above). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/listing_kit.py check --theme mediterranean-lemon --prepublish` fails while any VERIFY or placeholder is left.
 
@@ -88,7 +91,7 @@ GOOD TO KNOW
 • Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
 • We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
-• The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
+• The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
 • No music. Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
@@ -134,7 +137,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Secondary color | Blue |
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
-| Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 20 KB) |
+| Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 49 KB) |
 | Price | Target USD 29.40 (draft price from the user, 2026-10-15). The shop currency is TRY, so Etsy gets the TRY amount; that amount and the final price are still open (docs/15 §5) |
 | Quantity | [QUANTITY] |
 | Shop section | Summer & Destination (created in the shop on 2026-10-15, docs/20 §7) |
@@ -161,7 +164,7 @@ Suggested extra images (answer the most common questions before purchase; layout
 
 ## 6. Video
 
-**Not produced yet** (G905). Same recipe as 01 and 03: the envelope opening recorded from the real website, 1080 × 1080, H.264, silent, 5–15 s. [VERIFY: Etsy video rules in the listing editor]
+`package/listing/video.mp4`: the envelope opening, recorded from the real website (sample names). Silent, square (1080 × 1080, H.264), 13.2 seconds; it starts on the closed envelope and its last half second dissolves back into it, so Etsy's loop has no black flash (first and last frame compared on 2026-10-16, G122). Etsy's video rules come from web-search excerpts of Etsy's help pages (2026-10-14: 5–15 s, up to 100 MB, at least 500 px, no sound). [VERIFY: in the listing editor]
 
 ## 7. FAQ (end of the description, or the shop FAQ)
 
@@ -243,13 +246,15 @@ link; one review request per order, the same text for everyone, never with an in
 
 ## 11. Before you publish this listing
 
-- [ ] Current platform release (G079) live and checked; start link and demo of this design open on the live site
+- [x] Start link and demo of this design answer on the live site (2026-10-16, `200`, design named)
+- [ ] A release with the G100 editor (and G121, if merged) live; START HERE re-checked against it (`python3 tools/build_customer_guides.py --check`)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [ ] Response time, price, refund policy and hosting extension decided and filled in (guide + listing + docs/19 templates)
+- [x] Response time and refund policy decided (K37, K36) and in the description; the guide gives the 24 hours
+- [ ] Price (TRY amount), hosting extension, quantity and renewal decided and filled in
 - [x] Images and video produced (G905; rebuilt 2026-10-15 with the current editor, see §5)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] Shop-wide Etsy messages (docs/19 §4.4) entered in Shop Manager

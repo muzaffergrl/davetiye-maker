@@ -1,0 +1,117 @@
+"""tools/build_customer_guides.py tests (G122: START HERE for designs 01–20 from docs/19 Ek A).
+
+  python3 tools/tests/test_build_customer_guides.py
+
+Covered: Ek A is found and holds exactly the placeholders the tool fills; the design values (20 designs, the six that
+open from something other than an envelope, the language line from the fonts, a dark QR colour with ≥ 7:1 contrast);
+an unknown placeholder or font stops the build; the label check finds a renamed button and a changed quoted text; a
+guide PDF built in a temporary folder has the clickable start link, the privacy link and nothing else, and its QR is
+the make_qr.py picture; and every committed guide passes `check` (links, QR module by module, Ek A equality, labels;
+the jsQR raster reading for two designs when node + jsqr are there). Nothing in the repository is written.
+"""
+import sys
+import tempfile
+from pathlib import Path
+
+TOOLS = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(TOOLS))
+import build_customer_guides as b  # noqa: E402
+import etsy_upload as eu  # noqa: E402
+
+NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
+                "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
+                "wildflower-meadow-vellum": "sleeve"}
+# G123's listing language lines (2026-10-16): latin-only font → "latin", all Cyrillic → "cyrillic", else "latin-ext".
+LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin", "05": "latin-ext", "06": "latin",
+            "07": "latin-ext", "08": "latin-ext", "09": "latin-ext", "10": "latin-ext", "11": "latin", "12": "latin-ext",
+            "13": "latin", "14": "latin-ext", "15": "latin-ext", "16": "latin-ext", "17": "latin-ext", "18": "latin",
+            "19": "cyrillic", "20": "latin-ext"}
+
+
+def expect_exit(fn, *args):
+    try:
+        fn(*args)
+    except SystemExit:
+        return
+    raise AssertionError(f"{fn.__name__} did not stop")
+
+
+def test_template():
+    t = b.template()
+    assert t.startswith("# Start Here: Your {DESIGN_NAME} Wedding Website\n"), t[:60]
+    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{OPENING}", "{LANGUAGE_FONTS}"}
+    assert "img/start_qr_page.png" in t and "({START_URL})" in t
+    assert "envelope" not in t.replace("{OPENING}", ""), "a design-specific 'envelope' left in Ek A"
+    # G100: no per-field "Sample" tag, the QR under "More ways to share", Guests in two views
+    assert "Sample** tag" not in t and "More ways to share" in t and "**Results:**" in t
+    expect_exit(b.fill, t + "{NEW_THING}", b.values("olive-ivory"))
+
+
+def test_values():
+    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 21)]
+    for no, folder, theme in eu.DESIGNS:
+        v = b.values(theme)
+        assert v["START_URL"] == f"https://davetiye-platform-five.vercel.app/start?theme={theme}", v
+        assert v["PRIVACY_URL"] == "https://davetiye-platform-five.vercel.app/privacy"
+        assert v["OPENING"] == NOT_ENVELOPE.get(theme, "envelope"), (no, v["OPENING"])
+        assert b.language_class(b.design_fonts(theme)) == LANGUAGE[no], (no, b.design_fonts(theme))
+        assert v["LANGUAGE_FONTS"] == b.LANGUAGE_LINES[LANGUAGE[no]]
+        dark = b.qr_dark(folder)
+        assert 1.05 / (b._luminance(dark) + 0.05) >= 7, (no, dark)
+    assert b.values("olive-ivory", "https://example.org/")["START_URL"] == "https://example.org/start?theme=olive-ivory"
+    expect_exit(b.language_class, ["Great Vibes", "A Font Nobody Checked"])
+    assert b.language_class(["Great Vibes", "EB Garamond"]) == "cyrillic"
+    assert b.language_class(["Pinyon Script", "Cormorant Garamond"]) == "latin-ext"
+    assert b.language_class(["Homemade Apple", "Special Elite"]) == "latin"
+
+
+def test_labels():
+    md = b.fill(b.template(), b.values("olive-ivory"))
+    assert b.label_problems(md, "olive-ivory") == []
+    bad = md.replace("**Mark as seen**", "**Mark all as read**").replace('"Page not found"', '"No page here"')
+    found = b.label_problems(bad, "olive-ivory")
+    assert any("Mark all as read" in x for x in found) and any("No page here" in x for x in found), found
+
+
+def test_pdf(tmp: Path):
+    v = b.values("tropical-destination")
+    md = b.fill(b.template(), v)
+    png, svg, page = b.make_start_qr(v["START_URL"], tmp / "img", b.qr_dark("12_Tropical_Destination"))
+    assert b.eu.lk.qr_matches(png, v["START_URL"], scale=b.QR_SCALE) and "segno" in svg.read_text(encoding="utf-8")
+    pdf = b.build_pdf(md, tmp / "START_HERE.pdf", png, v["START_URL"], v["DESIGN_NAME"])
+    uris = b.pdf_uris(pdf)
+    assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"]}, uris
+    assert 5 <= b.pdf_page_count(pdf) <= 9, b.pdf_page_count(pdf)
+    text = b.eu.lk.pdf_text(pdf) or ""
+    # only the panel's preview tab "Envelope" (capital E) may name an envelope in a wallet design's guide
+    assert "Tropical Destination" in text and "tap the wallet" in text and "envelope" not in text, text[:200]
+
+
+def test_committed():
+    raster = {"01", "06"}  # the jsQR reading takes a few seconds per design: one envelope and one gatefold design
+    for no, folder, theme in eu.DESIGNS:
+        if not (b.customer_dir(folder) / "START_HERE.pdf").exists():
+            raise AssertionError(f"{no}: no guide — python3 tools/build_customer_guides.py --designs {no}")
+        problems, facts = b.check(no, folder, theme, raster=no in raster)
+        assert problems == [], (no, problems)
+        if no in raster and isinstance(facts.get("raster"), dict):
+            assert facts["raster"]["pdf"] == [b.start_url(theme)], facts["raster"]
+
+
+def main():
+    test_template()
+    print("  test_template: ok")
+    test_values()
+    print("  test_values: ok")
+    test_labels()
+    print("  test_labels: ok")
+    with tempfile.TemporaryDirectory() as d:
+        test_pdf(Path(d))
+    print("  test_pdf: ok")
+    test_committed()
+    print("  test_committed: ok")
+    print("test_build_customer_guides: ok")
+
+
+if __name__ == "__main__":
+    main()
