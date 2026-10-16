@@ -332,6 +332,7 @@ export function sectionForPath(path: string): SectionId | null {
     case 'locale':
       return 'date';
     case 'venue':
+    case 'maps': // G127
       return 'venue';
     case 'schedule':
       return 'schedule';

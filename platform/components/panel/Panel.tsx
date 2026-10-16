@@ -429,8 +429,9 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       removePhoto: panel.removePhoto,
       jump: fieldJump,
       opening: theme.opening ?? null,
+      resolveMapLink: panel.api.mapLink,
     }),
-    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, fieldJump, theme.opening],
+    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, fieldJump, theme.opening, panel.api],
   );
 
   /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */

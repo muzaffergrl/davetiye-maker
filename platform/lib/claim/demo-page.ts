@@ -48,7 +48,7 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
     if (!theme) return demoNotFound();
     const template = await readThemePage(theme.loaded, page);
     if (template === null) return demoNotFound();
-    const { html, disabled, scriptHashes } = renderTemplate({
+    const { html, disabled, scriptHashes, frameSources } = renderTemplate({
       html: template,
       // The demo always shows the invitation (G075): its fictional wedding date passing must not turn it into a thank-you.
       content: { ...theme.demo, thank_you: { ...(theme.demo.thank_you ?? {}), mode: 'off' } },
@@ -66,7 +66,7 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       status: 200,
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
-        'Content-Security-Policy': siteCsp(scriptHashes),
+        'Content-Security-Policy': siteCsp(scriptHashes, frameSources),
         'X-Content-Type-Options': 'nosniff',
         'X-Robots-Tag': 'noindex, nofollow',
         'Referrer-Policy': 'strict-origin-when-cross-origin',

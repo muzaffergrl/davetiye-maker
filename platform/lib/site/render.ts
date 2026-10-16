@@ -18,7 +18,7 @@ import { loadTheme, readThemePage, SUB_PAGES, type PageName } from '../theme/the
  * inline scripts of the theme template (by SHA-256 hash, computed per page by the engine).
  * Inline event handlers (onclick=…) are not allowed. The site-data JSON block is not executed.
  */
-export function siteCsp(scriptHashes: readonly string[] = []): string {
+export function siteCsp(scriptHashes: readonly string[] = [], frameSources: readonly string[] = []): string {
   return [
     "default-src 'self'",
     ["script-src 'self'", ...scriptHashes].join(' '),
@@ -27,7 +27,8 @@ export function siteCsp(scriptHashes: readonly string[] = []): string {
     "img-src 'self' data: blob: https:",
     "media-src 'self' blob: https:",
     "connect-src 'self'",
-    "frame-src 'self'",
+    // G127: the map frame's origin only on a page with a map (it is loaded only when a guest taps "Show map")
+    ["frame-src 'self'", ...frameSources].join(' '),
     "frame-ancestors 'self'",
     "object-src 'none'",
     "base-uri 'none'",
@@ -43,13 +44,19 @@ export function siteCsp(scriptHashes: readonly string[] = []): string {
  */
 export const COUPLE_SITE_ROBOTS = 'noindex';
 
-function htmlHeaders(opts: { preview: boolean; status: number; scriptHashes?: readonly string[]; guestOnly?: boolean }): Headers {
+function htmlHeaders(opts: {
+  preview: boolean;
+  status: number;
+  scriptHashes?: readonly string[];
+  frameSources?: readonly string[];
+  guestOnly?: boolean;
+}): Headers {
   // guestOnly (G076): a password-protected site seen with the guest cookie — never stored by a shared cache (Vercel's
   // CDN, a proxy): another visitor must never get it from there.
   const closed = opts.preview || opts.status !== 200 || opts.guestOnly;
   const h = new Headers({
     'Content-Type': 'text/html; charset=utf-8',
-    'Content-Security-Policy': siteCsp(opts.scriptHashes),
+    'Content-Security-Policy': siteCsp(opts.scriptHashes, opts.frameSources),
     'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': opts.preview ? 'no-referrer' : 'strict-origin-when-cross-origin',
     'Cache-Control': closed ? 'private, no-store' : 'public, max-age=0, must-revalidate',
@@ -162,7 +169,7 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     const template = await readThemePage(theme, page);
     if (template === null) return notFound();
 
-    const { html, warnings, disabled, scriptHashes } = renderTemplate({
+    const { html, warnings, disabled, scriptHashes, frameSources } = renderTemplate({
       html: template,
       content,
       theme: theme.manifest,
@@ -186,7 +193,7 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     if (disabled) return notFound(); // e.g. story page while optional_blocks.our_story is off
     // A shared preview link (not the panel) always says it is a preview, so it cannot pass for the real website.
     const body = access === 'shared' ? withPreviewBar(html, site.status === 'published') : html;
-    return new Response(body, { status: 200, headers: htmlHeaders({ preview, status: 200, scriptHashes, guestOnly }) });
+    return new Response(body, { status: 200, headers: htmlHeaders({ preview, status: 200, scriptHashes, frameSources, guestOnly }) });
   } catch (e) {
     console.error(`[site] ${slug}/${page}:`, e);
     return serverError();

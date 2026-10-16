@@ -85,7 +85,7 @@
       <span class="orn" aria-hidden="true"><img src="img/divider-300.webp" alt="" loading="lazy"></span>
       <p><span class="kicker" data-copy="dress_label">Dress code</span> <span class="dot" aria-hidden="true">·</span> <em data-field="dress_code"></em></p>
     </div>
-    <p class="action" data-step="action" data-a="rise" data-if="urls.map"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank" data-copy="view_map">View map</a></p>
+    <div class="action" data-step="action" data-a="rise" data-if="map_block"><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank" data-copy="view_map" data-if="urls.map !map_on">View map</a><div data-map data-map-btn="btn btn-ghost" data-map-btn-sm="btn btn-ghost btn-sm"></div></div>
   </section>
 
   <!-- link blocks are shown only with their link (no dead buttons on a live site) -->

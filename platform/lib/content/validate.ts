@@ -153,6 +153,16 @@ function checkSchema(schema: Schema, value: unknown, path: string, out: Validati
     }
   }
 
+  // G127 (maps.*.lat / lng): numeric range
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) {
+      err('schema_type', 'Expected a finite number.');
+      return;
+    }
+    if (typeof schema.minimum === 'number' && value < schema.minimum) err('schema_minimum', `Must be at least ${schema.minimum}.`);
+    if (typeof schema.maximum === 'number' && value > schema.maximum) err('schema_maximum', `Must be at most ${schema.maximum}.`);
+  }
+
   if (Array.isArray(value)) {
     if (typeof schema.minItems === 'number' && value.length < schema.minItems) {
       err('schema_min_items', `Needs at least ${schema.minItems} item(s).`);

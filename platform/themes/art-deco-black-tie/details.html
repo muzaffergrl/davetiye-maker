@@ -81,7 +81,7 @@
       <img class="dress-orn" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="190px" alt="" loading="lazy">
       <p><span class="kicker" data-copy="dress_label">Dress code</span> <span class="dot" aria-hidden="true">·</span> <span class="kicker dress-val" data-field="dress_code"></span></p>
     </div>
-    <p class="action" data-step="action" data-a="rise" data-if="urls.map" data-fold><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank" data-copy="view_map">View map</a></p>
+    <div class="action" data-step="action" data-a="rise" data-if="map_block" data-fold><a class="btn btn-ghost" href="#" data-field="urls.map" target="_blank" data-copy="view_map" data-if="urls.map !map_on">View map</a><div data-map data-map-btn="btn btn-ghost" data-map-btn-sm="btn btn-ghost btn-sm"></div></div>
   </section>
 
   <!-- link blocks are shown only with their link (no dead buttons on a live site) -->

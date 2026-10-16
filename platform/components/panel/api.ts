@@ -65,6 +65,9 @@ export function panelApi(slug: string, editKey: string) {
     /** Guest password (G076): on/off, or a new password. */
     access: (enabled: boolean, password?: string) =>
       call<Record<string, unknown>>(`${base}/access`, jsonInit('POST', password === undefined ? { enabled } : { enabled, password })),
+    /** G127: the place behind a short Google / Apple Maps share link ({url, lat, lng, place}). */
+    mapLink: (url: string) =>
+      call<{ url: string; lat: number | null; lng: number | null; place: string | null }>(`${base}/map-link`, jsonInit('POST', { url })),
     replies: () => call<Record<string, unknown>>(`/api/rsvp/${encodeURIComponent(slug)}/responses`, { headers: auth }),
     /** "remove" deletes replies for good; "keep" releases replies held for review. Answers with the new summary. */
     manageReplies: (action: 'remove' | 'keep', ids: string[]) =>
