@@ -1,0 +1,233 @@
+{
+  "when": "2026-10-16T09:07:35.349Z",
+  "passed": 52,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "setup 1 (390 × 844): both first names and the wedding date on the first screen, above the bar",
+      "ok": true,
+      "detail": "{\"bar\":719,\"date\":640}"
+    },
+    {
+      "name": "setup 1: one job — the two first names and the date; no \"How your names appear\"",
+      "ok": true
+    },
+    {
+      "name": "setup 1: the change rule in one line, the number from lib/panel/rights.ts",
+      "ok": true,
+      "detail": "Step 1 of 3: Your names and date As your guests know you, and the day itself. Everything else can wait until later. First name As your guests know you, e.g. Clara. Partner’s first name 2 fields still show sample text Go to the first one Wed"
+    },
+    {
+      "name": "setup 1: \"Learn more\" closed at first (the details hidden)",
+      "ok": true
+    },
+    {
+      "name": "setup 1: \"Learn more\" opens the details (3 in total, the free fixes, undo)",
+      "ok": true,
+      "detail": "After publishing you can change names or the date 3 times. Learn more Until you publish, you can change them as often as you like. After you publish, you have 3 changes in total for your names, monogram and wedding date (changing several in one go counts once). Always free: fixing a small typo (up to 2 letters in a name), adding a surname, and moving your date by up to 7 days. Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back."
+    },
+    {
+      "name": "setup 1: no \"Sample\" tags on the fields",
+      "ok": true
+    },
+    {
+      "name": "setup 1: one sample-text line (\"2 fields still show sample text\": date, ceremony time)",
+      "ok": true,
+      "detail": "2 fields still show sample text Go to the first one"
+    },
+    {
+      "name": "setup 1: the sample fields look like soft placeholders",
+      "ok": true
+    },
+    {
+      "name": "setup 1: \"Go to the first one\" focuses the date",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): setup 1 has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "setup 1: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "setup 1: no horizontal scroll at 390 px",
+      "ok": true
+    },
+    {
+      "name": "setup 1 at 360 × 640: the date is reached with less than one screen of scrolling",
+      "ok": true,
+      "detail": "{\"bar\":515,\"date\":637.015625}"
+    },
+    {
+      "name": "setup 1: no horizontal scroll at 360 px",
+      "ok": true
+    },
+    {
+      "name": "success: the link and Copy / Open come first, then \"More ways to share\", then the next steps",
+      "ok": true,
+      "detail": "{\"link\":276.734375,\"copy\":326.734375,\"more\":386.734375,\"next\":474.734375}"
+    },
+    {
+      "name": "success: the link is the public address, \"Open website\" too",
+      "ok": true
+    },
+    {
+      "name": "success (390 × 844): Copy link on the first screen",
+      "ok": true,
+      "detail": "{\"x\":40.46875,\"y\":326.734375,\"width\":136.859375,\"height\":48}"
+    },
+    {
+      "name": "success: the QR code folded under \"More ways to share\" (closed)",
+      "ok": true
+    },
+    {
+      "name": "success: \"More ways to share\" opens the QR (from the public URL) with PNG / SVG downloads",
+      "ok": true
+    },
+    {
+      "name": "success: 2–3 optional next steps, only to real parts of the editor",
+      "ok": true,
+      "detail": "photos,sample,guests"
+    },
+    {
+      "name": "a11y (axe-core): success screen has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "success screen: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "success: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "success: \"Add your photos\" opens Edit → Photos",
+      "ok": true
+    },
+    {
+      "name": "success: back from there is Home, not the setup",
+      "ok": true
+    },
+    {
+      "name": "Day & place: no \"Sample\" tags on the fields",
+      "ok": true
+    },
+    {
+      "name": "Day & place: one line \"7 fields still show sample text\" at the top",
+      "ok": true,
+      "detail": "7 fields still show sample text Go to the first one / date,ceremony_time,venue.name,venue.city,host_line,dress_code,story.intro,rsvp.deadline,schedule.0.location,schedule.1.location,schedule.2.location,story.items.0.caption,story.items.1.caption,story.items.2.caption"
+    },
+    {
+      "name": "Day & place: the line is the first thing on the page",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "Day & place: as many soft sample fields as the line counts",
+      "ok": true
+    },
+    {
+      "name": "Day & place: \"Go to the first one\" focuses the first sample field",
+      "ok": true,
+      "detail": "{\"id\":\"\",\"sample\":true}"
+    },
+    {
+      "name": "Day & place: sub-headings Date & time · Venue · Schedule · After the wedding; More options folded",
+      "ok": true,
+      "detail": "Date & time | More options\nNew York · Month first | Venue | Schedule | After the wedding\nAutomatic | Headings & labels on this page"
+    },
+    {
+      "name": "a11y (axe-core): Day & place has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Day & place: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Details: the line and the soft fields agree (or neither is shown)",
+      "ok": true,
+      "detail": "1 / 2"
+    },
+    {
+      "name": "Day & place: no horizontal scroll at 360 px",
+      "ok": true
+    },
+    {
+      "name": "Guests (390 × 844): the first reply is on the first screen, above the bars",
+      "ok": true,
+      "detail": "{\"x\":16,\"y\":494.46875,\"width\":358,\"height\":151.59375} / 698"
+    },
+    {
+      "name": "Guests: numbers → search → status tabs → list",
+      "ok": true,
+      "detail": "{\"stats\":215.171875,\"search\":325.46875,\"tabs\":386.46875,\"list\":494.46875}"
+    },
+    {
+      "name": "Guests: status tabs All · Coming · Not coming · New",
+      "ok": true,
+      "detail": "All · Coming · Not coming · New\n6"
+    },
+    {
+      "name": "Guests: the answer breakdown is not on the list view",
+      "ok": true
+    },
+    {
+      "name": "Guests: search finds a name",
+      "ok": true
+    },
+    {
+      "name": "Guests: \"Not coming\" tab",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): Guests has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Guests: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Guests: no horizontal scroll",
+      "ok": true
+    },
+    {
+      "name": "Results: its own view (#guests/results)",
+      "ok": true
+    },
+    {
+      "name": "Results: counts and percentages per choice (Chicken 2 · 40%, Vegetarian 2 · 40%, Fish 1 · 20%)",
+      "ok": true,
+      "detail": "Meal choice Chicken 2 · 40% replies Fish 1 · 20% reply Vegetarian 2 · 40% replies 5 replies answered"
+    },
+    {
+      "name": "Results: food & allergy notes here too",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): Results has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "Results: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Results: tapping \"Vegetarian\" lists who chose it (back on the list)",
+      "ok": true,
+      "detail": "Margaret Hamilton,Alan Turing"
+    },
+    {
+      "name": "Guests: no horizontal scroll at 360 px",
+      "ok": true
+    },
+    {
+      "name": "Guests at 1280: no horizontal scroll",
+      "ok": true
+    }
+  ]
+}

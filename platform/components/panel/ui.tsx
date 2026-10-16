@@ -179,6 +179,7 @@ export function Disclosure({
   icon: Icon,
   defaultOpen = false,
   openRequest,
+  level = 2,
   children,
 }: {
   id: string;
@@ -188,16 +189,19 @@ export function Disclosure({
   defaultOpen?: boolean;
   /** Opens the section when this value changes to something truthy (e.g. a jump to a field inside it). */
   openRequest?: unknown;
+  /** Heading level of the title (3 inside a sheet, whose own title is the h2). */
+  level?: 2 | 3;
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const bodyId = useId();
+  const Heading = level === 3 ? 'h3' : 'h2';
   useEffect(() => {
     if (openRequest) setOpen(true);
   }, [openRequest]);
   return (
     <section className={cx(styles.disclosure, open && styles.disclosureOpen)} data-disclosure={id}>
-      <h2 className={styles.disclosureHeading}>
+      <Heading className={styles.disclosureHeading}>
         <button type="button" className={styles.disclosureButton} aria-expanded={open} aria-controls={bodyId} onClick={() => setOpen((v) => !v)}>
           {Icon ? (
             <span className={styles.cardIcon} aria-hidden="true">
@@ -208,7 +212,7 @@ export function Disclosure({
           {status ? <span className={styles.disclosureStatus}>{status}</span> : null}
           <ChevronDown size={22} strokeWidth={1.75} aria-hidden="true" className={styles.disclosureChev} />
         </button>
-      </h2>
+      </Heading>
       <div id={bodyId} className={styles.disclosureBody} hidden={!open}>
         {children}
       </div>

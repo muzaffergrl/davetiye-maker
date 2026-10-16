@@ -1476,17 +1476,6 @@
   white-space: nowrap;
 }
 
-.sampleTag {
-  flex: none;
-  padding: 2px 10px;
-  border-radius: var(--r-pill);
-  /* K29: a quiet marker, not a warning (one accent; reminders live on Home). */
-  background: var(--c-surface-sunken);
-  color: var(--c-text-muted);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
 
 .input,
 .select,
@@ -2199,18 +2188,13 @@
   gap: var(--s-2);
 }
 
-/* Number tiles (comp u2_guests_390): big heavy numeral, its icon disc beside it, the label under both. The DOM order
-   stays icon · number · label, so the tile still reads "12 Guests coming". */
+/* Number tiles (comp u2_guests_390; G100 compact: numeral over its label, no icon disc, so the list starts on the first
+   screen of a phone). The tile reads "12 Guests coming". */
 .stat {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    'num icon'
-    'label label';
-  align-items: center;
-  column-gap: 6px;
-  row-gap: 2px;
-  padding: var(--s-3) var(--s-3) var(--s-4) var(--s-4);
+  align-content: start;
+  gap: 2px;
+  padding: 10px var(--s-3) 12px;
   border: 1px solid var(--c-border);
   border-radius: var(--r-card);
   background: var(--c-surface);
@@ -2218,37 +2202,17 @@
 }
 
 .statNum {
-  grid-area: num;
-  font-size: clamp(30px, 6vw + 8px, 40px);
+  font-size: clamp(26px, 4vw + 10px, 34px);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 
 .statLabel {
-  grid-area: label;
   color: var(--c-text);
   font-size: 14px;
   line-height: 18px;
   font-weight: 600;
-}
-
-/* Phones: three tiles of ~100 px — the disc goes above the numeral, so 3-digit numbers never touch it. */
-@media (max-width: 479px) {
-  .stat {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      'icon'
-      'num'
-      'label';
-    justify-items: start;
-    row-gap: 4px;
-  }
-  .statIcon {
-    width: 34px;
-    height: 34px;
-    margin-bottom: 2px;
-  }
 }
 
 .search {
@@ -2379,25 +2343,13 @@
     var(--e-1);
 }
 
-.statIcon {
-  grid-area: icon;
-  display: inline-grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--c-surface-sunken);
-  color: var(--c-heading);
-}
 
-/* Deadline strip: "Replies close in 30 days" (comp u2_guests_390): a lavender tint, aubergine text. */
+/* Deadline: "Replies close in 30 days. Last day: …" (comp u2_guests_390; G100: one quiet line under the numbers). */
 .deadline {
   display: flex;
-  align-items: center;
-  gap: var(--s-3);
-  padding: var(--s-3) var(--s-4);
-  border-radius: var(--r-card);
-  background: var(--c-accent-soft);
+  align-items: flex-start;
+  gap: var(--s-2);
+  padding: 0 2px;
   color: var(--c-heading);
 }
 
@@ -2405,28 +2357,24 @@
   display: inline-grid;
   flex: none;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--c-surface);
+  padding-top: 1px;
   color: var(--c-heading);
 }
 
 .deadlineText {
-  display: grid;
-  gap: 2px;
   margin: 0;
   min-width: 0;
+  font-size: 15px;
+  line-height: 21px;
 }
 
 .deadlineHead {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 15px;
 }
 
 .deadlineDetail {
+  color: var(--c-text-muted);
   font-size: 14px;
-  line-height: 20px;
 }
 
 .sectionHead {
@@ -4289,4 +4237,369 @@
   font-size: 17px;
   line-height: 24px;
   font-weight: 700;
+}
+
+/* ================================================================== G100 (docs/18 P1): simpler first run, success,
+   sample text and guests. Tokens only; GM04/GM05 look unchanged. */
+
+/* A field still holding the design's sample text: a soft placeholder look (no tag); typing replaces it. */
+.fieldSample .input,
+.fieldSample .textarea,
+.fieldSample .select {
+  border-style: dashed;
+  background-color: var(--c-surface-sunken);
+  color: var(--c-text-muted);
+  font-style: italic;
+}
+
+.fieldSample .input:focus,
+.fieldSample .textarea:focus {
+  font-style: normal;
+  color: var(--c-text);
+  background-color: var(--c-surface);
+}
+
+.lockedSample .lockedValue {
+  color: var(--c-text-muted);
+  font-style: italic;
+}
+
+/* "3 fields still show sample text · Go to the first one" — once, at the top of the page. */
+.sampleLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--s-2);
+  row-gap: 0;
+  margin: 0;
+  padding: 2px 4px 2px var(--s-4);
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+  color: var(--c-heading);
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.sampleLineDot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-anchor);
+}
+
+.sampleLineText {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 10px 0 0;
+  font-weight: 600;
+}
+
+.sampleJump {
+  flex: none;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: var(--c-heading);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.sampleJump:hover {
+  background: var(--c-accent-soft);
+}
+
+/* The change rule in one line + "Learn more" (setup step 1, names / date before the first publish). */
+.rightsNote {
+  display: grid;
+  gap: var(--s-2);
+  padding: 2px var(--s-2) 2px var(--s-4);
+  border-left: 3px solid var(--c-anchor);
+  border-radius: 0 var(--r-control) var(--r-control) 0;
+  background: var(--c-accent-soft);
+  color: var(--c-heading);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.rightsNoteLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--s-2);
+  margin: 0;
+}
+
+.rightsNoteLine > span {
+  flex: 1 1 14em;
+  padding: 10px 0;
+}
+
+.rightsMore {
+  flex: none;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: var(--c-heading);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.rightsMore[aria-expanded='true'] {
+  text-decoration-style: dotted;
+}
+
+.rightsNoteMore {
+  display: grid;
+  gap: var(--s-2);
+  padding: 0 var(--s-2) var(--s-3) 0;
+}
+
+.rightsNoteMore p {
+  margin: 0;
+}
+
+.rightsNoteMore[hidden] {
+  display: none;
+}
+
+/* The success screen: link + Share first, the QR folded, then optional next steps. */
+.liveShare {
+  display: grid;
+  gap: var(--s-3);
+  width: 100%;
+  justify-items: center;
+}
+
+.liveShareLink {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.liveShareButtons {
+  justify-content: center;
+}
+
+.liveShare .disclosure {
+  width: 100%;
+  text-align: left;
+}
+
+.liveShare .qrBlock {
+  justify-items: center;
+}
+
+[data-testid='live'] .liveShare {
+  justify-items: start;
+}
+
+[data-testid='live'] .liveShareButtons {
+  justify-content: flex-start;
+}
+
+.afterPublish {
+  display: grid;
+  gap: var(--s-2);
+  width: 100%;
+  text-align: left;
+}
+
+.afterTitle {
+  margin: var(--s-2) 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--c-heading);
+  letter-spacing: -0.015em;
+}
+
+.afterList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--r-card);
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+}
+
+.afterList > li + li {
+  border-top: 1px solid var(--c-border);
+}
+
+.afterItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 60px;
+  padding: 10px var(--s-3) 10px var(--s-4);
+  border: 0;
+  border-radius: var(--r-card);
+  background: transparent;
+  color: var(--c-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.afterItem:hover {
+  background: var(--c-surface-sunken);
+}
+
+.afterItemText {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+.afterItemTitle {
+  color: var(--c-heading);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.afterItemSub {
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Guests: "Guest list | Results" (two views), then numbers → search + status tabs → the list. */
+.viewTabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+}
+
+.viewTab {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  border-radius: 9px;
+  color: var(--c-heading);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.viewTab:hover {
+  background: rgb(255 255 255 / 0.6);
+}
+
+.viewTabOn,
+.viewTabOn:hover {
+  background: var(--c-surface);
+  box-shadow: var(--e-1);
+  font-weight: 700;
+}
+
+.listBlock {
+  display: grid;
+  gap: 10px;
+}
+
+.statusTabs {
+  gap: 6px;
+}
+
+.statusTabs .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+}
+
+.chipCount {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--c-anchor);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chipOn .chipCount {
+  background: #fff;
+  color: var(--c-anchor);
+}
+
+.newLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--s-2);
+  margin: 0;
+  padding: 0 4px 0 var(--s-3);
+  border-radius: var(--r-control);
+  background: var(--c-accent-soft);
+  color: var(--c-heading);
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.newLine > span {
+  flex: 1 1 12em;
+  padding: 10px 0;
+}
+
+.newLineButton {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: var(--c-heading);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.listHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.listCount {
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.sortSelect {
+  width: auto;
+  min-width: 0;
+  max-width: 60%;
+  min-height: 44px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
 }

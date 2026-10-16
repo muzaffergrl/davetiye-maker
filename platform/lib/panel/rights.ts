@@ -66,6 +66,10 @@ export const UNDO_TEXT = 'Changed something by mistake? Undo it right away (befo
 export function beforePublishText(total: number = IDENTITY_CHANGE_LIMIT): string {
   return `Change these freely until you publish. After that, names and date can change ${total} times (small fixes are free).`;
 }
+/** The rule in one line, before the first publish (setup step 1 and the names / date pages; G100, docs/18 §1). */
+export function rightsOneLine(total: number = IDENTITY_CHANGE_LIMIT): string {
+  return `After publishing you can change names or the date ${total} ${total === 1 ? 'time' : 'times'}.`;
+}
 /** What happens at the archive date (rules box, help, the reminder before it). */
 export const ARCHIVE_TEXT = 'Then your website closes for guests; you can still see your content and download your replies.';
 /** Answer of every write endpoint once a site is archived (403 archived). */
