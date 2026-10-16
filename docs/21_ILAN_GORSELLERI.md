@@ -30,6 +30,37 @@ python3 tools/etsy_upload.py && python3 tools/etsy_upload.py --check
 - G124 (2026-10-16) 20 tasarımın 8'er görselini bu araçla, depo tabanı `6181730` (G098 + G121 editörü) üzerinde üretti;
   videoları 06–20 için yaptı. 01–05'in videoları G059/G122'den (aynı tarif) olduğu gibi duruyor; `--video` onları da
   yeniden yazar, o zaman listing_v3 §6'daki süreler güncellenir.
+- Tek tasarım ya da aralık: `--theme 13`, `--theme 06-11`, `--theme tropical-destination`. Görsel ya da video değişince
+  `listing_v3.md` §5/§6 ve `python3 tools/etsy_upload.py` (JSON) yenilenir.
+
+### 20 tasarım (G124, 2026-10-16)
+
+| # | Tema id | Açılış nesnesi (2./3./8. görsel, video) | Zemin | Video |
+|---|---|---|---|---|
+| 01 | `olive-ivory` | envelope | açık | 14.5 sn (G059/G122) |
+| 02 | `dusty-blue-champagne` | envelope | açık | 12.5 sn (G059/G122) |
+| 03 | `blush-garden-rose` | envelope | açık | 12.9 sn (G059/G122) |
+| 04 | `vintage-airmail-love-letter` | envelope | açık | 14.5 sn (G059/G122) |
+| 05 | `mediterranean-lemon` | envelope | açık | 13.2 sn (G059/G122) |
+| 06 | `art-deco-black-tie` | gatefold | **koyu** | 13.1 sn |
+| 07 | `burgundy-velvet-autumn` | envelope | açık | 14.2 sn |
+| 08 | `winter-evergreen` | envelope | açık | 14.0 sn |
+| 09 | `lavender-provence` | linen pouch | açık | 13.1 sn |
+| 10 | `tuscan-vineyard` | envelope | açık | 14.5 sn |
+| 11 | `boho-pampas-terracotta` | envelope | açık | 14.0 sn |
+| 12 | `tropical-destination` | travel wallet | açık | 13.5 sn |
+| 13 | `enchanted-forest-storybook` | storybook | açık | 14.4 sn |
+| 14 | `ivory-lace-pearls` | gatefold | açık | 13.4 sn |
+| 15 | `cherry-blossom-spring` | envelope | açık | 13.8 sn |
+| 16 | `sunflower-rustic-barn` | envelope | açık | 13.7 sn |
+| 17 | `emerald-gold-estate` | envelope | **koyu** | 13.9 sn |
+| 18 | `wildflower-meadow-vellum` | vellum sleeve | açık | 13.5 sn |
+| 19 | `midnight-garden` | envelope | **koyu** | 14.2 sn |
+| 20 | `coastal-seaside` | envelope | açık | 14.0 sn |
+
+Hepsi 8/8 görsel (2000 × 2000 PNG) + `video.mp4` (1080 × 1080, H.264, sessiz; ilk ve son kare 2026-10-16'da karşılaştırıldı,
+ortalama fark < 4/255). Denetim (G124): 20 temas sayfası ve video kareleri gözle; `tools/tests/test_listing_editorial.py`,
+`python3 tools/etsy_upload.py --check --strict` 20/20 OK.
 
 ## Önceki tarzlarda neyi bırakıyoruz
 

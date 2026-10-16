@@ -145,7 +145,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (`python3 tools/listing_editorial.py --theme vintage-airmail-love-letter`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); images 3, 5, 6 and 7 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The earlier G059 kit stays in `images/` for comparison and is not uploaded. Alt texts below describe these files.
+The 8 images in `images_editorial/` are the editorial set, rebuilt on 2026-10-16 in G124 (`python3 tools/listing_editorial.py --theme vintage-airmail-love-letter`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (repository base `6181730`: G098 themes and the G121 editor; sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); image 7 places them into the shop-wide GPT linen scene with three phones (`brand/trust/t1_three_steps.png`, GM06); images 3, 5 and 6 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The earlier G059 kit stays in `images/` for comparison and is not uploaded. Alt texts below describe these files.
 
 | # | File | Alt text |
 |---|---|---|
@@ -255,7 +255,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [x] Response time and refund policy decided (K37, K36) and in the description; the guide gives the 24 hours
 - [ ] Price (TRY amount), hosting extension, quantity and renewal decided and filled in
-- [x] Images and video produced (G904; rebuilt 2026-10-15 with the current editor, see §5)
+- [x] Images and video produced (G904; rebuilt 2026-10-15 with the current editor; images rebuilt again in G124 on 2026-10-16, see §5)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] Shop-wide Etsy messages (docs/19 §4.4) entered in Shop Manager
 - [ ] `python3 tools/listing_kit.py check --theme vintage-airmail-love-letter --prepublish` passes (the tool reads this file)

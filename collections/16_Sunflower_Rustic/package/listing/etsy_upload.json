@@ -48,57 +48,57 @@
       "n": 1,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/01_cover.png",
       "alt": "Sunflower Rustic Barn wedding website with online RSVP on a phone held in a hand, among sunflowers, wheat, daisies and a mustard gingham ribbon on a barn-wood table: the opening page with a kraft envelope with a gingham bow and a sunflower and the names Daisy & Wyatt",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 2,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/02_opening.png",
       "alt": "It opens like a real invitation: three phones show the envelope closed, the envelope opening, and the invitation card rising out of it",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 3,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/03_pages.png",
       "alt": "Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 4,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/04_edit.png",
       "alt": "Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 5,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/05_rsvp.png",
       "alt": "Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download list button",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 6,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/06_details.png",
       "alt": "Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 7,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/07_how.png",
       "alt": "Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     },
     {
       "n": 8,
       "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/08_included.png",
       "alt": "What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     }
   ],
   "gpt_mockup_scenes": [
@@ -112,7 +112,7 @@
   ],
   "video": {
     "file": "collections/16_Sunflower_Rustic/package/listing/video.mp4",
-    "exists": false
+    "exists": true
   },
   "open_checks": [
     {
@@ -149,16 +149,9 @@
       "where": "attributes.Who made it",
       "check": "the \"Designed by\" option for designs made with AI image tools",
       "text": ""
-    },
-    {
-      "where": "image 1",
-      "check": "matches the finished cover",
-      "text": ""
     }
   ],
   "blockers": [
-    "listing images missing: collections/16_Sunflower_Rustic/package/listing/images_editorial/01_cover.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/02_opening.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/03_pages.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/04_edit.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/05_rsvp.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/06_details.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/07_how.png, collections/16_Sunflower_Rustic/package/listing/images_editorial/08_included.png",
-    "listing video missing",
     "quantity and renewal not decided",
     "final price not decided"
   ],

@@ -23,7 +23,7 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G40
 | Price, hosting extension, Etsy shop URL | Not decided: placeholders (§4). |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Pinyon Script and Cinzel (latin-ext, no Cyrillic), Cormorant Garamond (latin-ext + Cyrillic). The language line in GOOD TO KNOW is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G122 (2026-10-16, `python3 tools/build_customer_guides.py`, from docs/19 Ek A): 7 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=burgundy-velvet-autumn` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. |
-| Listing images and video | **Not produced** (§5, §6). The GPT mockup scenes of this design exist in `assets/gpt/mockups/`. |
+| Listing images and video | **Produced** on 2026-10-16 (G124): 8 images in `images_editorial/` (§5) and `video.mp4` (14.2 s, §6), from a local production build of the repository, so the editor in images 4, 5 and 7 is newer than production until the next deploy. Nothing uploaded to Etsy. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (guide, images, video) and every open VERIFY keep `ready_to_publish` false.
 
@@ -147,11 +147,11 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-**Not produced yet.** The 8 images will be the editorial set (`tools/listing_editorial.py`, rules in `docs/21_ILAN_GORSELLERI.md`) in `images_editorial/`, in the order and with the file names below, the same as 01–05. `tools/listing_editorial.py` and `tools/listing_kit.py` know only designs 01–05 today, so this design has to be added there first. Its GPT mockup scenes are ready in `assets/gpt/mockups/` (`cover_hand_v2.png`, `three_phones.png`, `hand_phone_edit.png`, `flatlay_phone.png` for images 1, 2, 4 and 8). No image may carry a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The alt texts below are written for the planned images; read each one again against the finished file.
+The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (G124, `python3 tools/listing_editorial.py --theme burgundy-velvet-autumn`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (repository base `6181730`: G098 themes and the G121 editor; sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); image 7 places them into the shop-wide GPT linen scene with three phones (`brand/trust/t1_three_steps.png`, GM06); images 3, 5 and 6 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The alt texts below were read against these files on 2026-10-16.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Burgundy Velvet Autumn wedding website with online RSVP on a phone held in a hand, among burgundy dahlias, roses, blackberries, a velvet ribbon and a candle on a walnut table: the opening page with an ivory envelope tied with burgundy velvet ribbon and the names Rosalind & Edward [VERIFY: matches the finished cover] |
+| 1 | `01_cover.png` | Burgundy Velvet Autumn wedding website with online RSVP on a phone held in a hand, among burgundy dahlias, roses, blackberries, a velvet ribbon and a candle on a walnut table: the opening page with an ivory envelope tied with burgundy velvet ribbon and the names Rosalind & Edward |
 | 2 | `02_opening.png` | It opens like a real invitation: three phones show the envelope closed, the envelope opening, and the invitation card rising out of it |
 | 3 | `03_pages.png` | Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page |
 | 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed |
@@ -166,7 +166,7 @@ Suggested extra images (answer the most common questions before purchase; layout
 
 ## 6. Video
 
-**Not produced yet.** Same recipe as 01–05: the envelope opening recorded from the real website (sample names), 1080 × 1080, H.264, silent, 5–15 s, starting on the closed envelope so Etsy's loop has no black flash. `tools/listing_kit.py video` knows 01–05 only. [VERIFY: Etsy video rules in the listing editor]
+`package/listing/video.mp4` (G124, 2026-10-16, `python3 tools/listing_editorial.py --theme burgundy-velvet-autumn --video`): the envelope opening, recorded from the real website (sample names). Silent, square (1080 × 1080, H.264), 14.2 seconds; it starts on the closed envelope and its last half second dissolves back into it, so Etsy's loop has no black flash (first and last frame compared on 2026-10-16). Etsy's video rules come from web-search excerpts of Etsy's help pages (2026-10-14: 5–15 s, up to 100 MB, at least 500 px, no sound). [VERIFY: Etsy video rules in the listing editor]
 
 ## 7. FAQ (end of the description, or the shop FAQ)
 
@@ -255,7 +255,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [ ] Price (TRY amount), hosting extension, quantity and renewal decided and filled in
-- [ ] Images (editorial set) and video produced; alt texts read against them
+- [x] Images (editorial set) and video produced; alt texts read against them (G124, 2026-10-16)
 - [ ] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file
