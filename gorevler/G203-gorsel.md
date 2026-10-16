@@ -2,7 +2,7 @@
 id: G203
 baslik: Tasarım 03 Blush Garden Rose — GPT görselleri (Paket 1)
 rol: gpt-gorsel
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 2
 bagimli: []
@@ -30,3 +30,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-09 blokaj: K21: Paket 1 (yalnız doku/dekor) yerine Paket 4 (GPT tasarlar). G203 yerine G030; diğerleri G033 ile Paket 4'e çevrilecek
+- 2026-10-16 iptal: K22/K24 — 03 Paket 1 (Canva dönemi doku/dekor); 03 tasarımı → G030/G036

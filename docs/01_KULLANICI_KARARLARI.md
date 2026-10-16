@@ -38,6 +38,13 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K32 | (2026-10-15) **Etsy alıcı yolculuğu baştan sona tasarlanır:** ilanı incelerken, satın alırken ve sonrasında alıcıda hiçbir soru işareti/endişe kalmamalı, kolayca düzenleyebileceğine ikna olmalı; satış sonrası bütün bilgilendirmeler ve rehberler hazır olmalı, düzenleme en kolay hâlde olmalı (G091 yolculuk + metinler, G087 panel/admin) | sohbet |
 | K33 | (2026-10-15) Dükkân adı **BKE Studio**; destek e-postası şimdilik **bkestudio@gmail.com** (`lib/marketing/config.ts`). Admin paneli için kullanıcı **geçici kısa bir şifre** verdi (değeri repoya yazılmaz): lansmandan önce kısa şifre kabul edilir, `launched: true` build'i 12 karakterden kısa `ADMIN_PASSWORD` ile durur. Yanıt süresi, Etsy dükkân URL'si, fiyat ve politikalar hâlâ açık | sohbet |
 | K34 | (2026-10-15) **Sipariş onayı canlıda açılır** (`CLAIM_ORDER_VERIFICATION=manual`): alıcının sitesi dükkân Etsy'de siparişi kontrol edip admin'den onaylayana kadar yayınlanamaz (düzenleme serbest). 20 tasarımın hepsi platform teması olup satış sitesine eklenir (15–20 dahil). Lansmandan önce kullanıcı ve ekibi **kapsamlı elle test** yapacak — liste `docs/20_ELLE_TEST_PLANI.md` | sohbet |
+| K35 | (2026-10-15) Etsy dükkân adı **`STUDIOBKE`** kalır (Etsy'deki gerçek ad; belgelerdeki `BKEStudio` değil). Metinlerdeki marka adı "BKE Studio" değişmez | docs/20 §7.4, §6 |
+| K36 | (2026-10-15) **İade yok:** dijital ürün, anında erişim; iade/değişim/iptal kabul edilmez, para iadesi sözü verilmez. Yerine "açıklandığı gibi çalışmazsa Etsy'den yazın, düzeltiriz" sözü verilir. (Etsy'de iptal politikası buna göre "not accepted" yayınlandı, §7.1) | docs/20 §6.1, §4 |
+| K37 | (2026-10-15) Mesajlara **yanıt süresi 24 saat** (K33'teki açık madde) | docs/20 §6.2 |
+| K38 | (2026-10-15) Dükkân **para birimi TRY** kalır (USD önerisi yerine). İlan fiyatı TL girilir; TL tutar ve kur güncelleme sıklığı hâlâ açık | docs/20 §5, §7.3, §8 |
+| K39 | (2026-10-15) Etsy **Offsite Ads kapatılır** (opt out; kullanıcı onayıyla uygulandı ve doğrulandı) | docs/20 §6, §5, §7.3 |
+| K40 | (2026-10-15) Etsy **logo ve banner** `brand/etsy/` dosyalarıyla değiştirilir; mobil kırpımda logo kesiliyorsa banner yüklenmez (kırpım yoktu, ikisi de yüklendi; Big Banner) | docs/20 §7.5 |
+| K41 | (2026-10-15) İlanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz); önce testler yapılır | docs/20 §8 |
 
 ## Geçersizleşenler
 

@@ -2,7 +2,7 @@
 id: G216
 baslik: Tasarım 16 Sunflower Rustic Barn — website tasarım paketi (Paket 5 + Paket 2 fotoğraflar)
 rol: gpt-gorsel
-durum: alindi
+durum: bitti
 alan: gpt-gorsel-H
 oncelik: 2
 bagimli: []
@@ -89,3 +89,4 @@ Kısım 3 — gpt-gorsel-H, 2026-10-14 (8/8; W2 tamam):
 - 2026-10-14 entegratör: W2 25/25 geçti, görsel olarak iyi (barnwood, twine_line, web_hero dahil). PAKET 2 bekleniyor (gpt-gorsel-D).
 - 2026-10-15 entegratör: PAKET 5 25/25 onaylı (görsel olarak iyi). PAKET 2 (5 fotoğraf) repoda yok — photos/ klasörü hiç oluşmamış; prompt'lar kullanıcıya yeniden iletildi.
 - 2026-10-15 gpt-gorsel: PAKET 2 tamam (5 JPEG); ana portre bütün sonraki fotoğraflara referans verildi, görsel kontroller yapıldı, kit_check 5/5 GEÇTİ. PAKET 2 kutusu işaretlendi; yeniden üretim notu Sonuç'a eklendi.
+- 2026-10-16 entegratör onayladı (G125: `alindi`'den doğrudan; `kit_check --paket 5` 25/25, `--paket 2` 5/5 yeniden koşuldu; tema G416 bitti)

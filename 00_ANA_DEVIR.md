@@ -1,3 +1,5 @@
+> **Güncel durum için `docs/18_GUNCEL_DURUM.md`'yi oku** (bu belge 9 Ekim tarihli; Canva/video bölümleri K22/K24 ile geçersiz).
+
 # DİJİTAL DAVETİYE VE ÖZEL GÜN ŞABLON İŞİ
 ## Baştan sona amaç, gerekçeler, karar geçmişi, üretim sistemi ve Codex / Astra devri
 

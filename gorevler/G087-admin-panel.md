@@ -2,7 +2,7 @@
 id: G087
 baslik: Dükkân (admin) paneli + alıcı panelinde satın alma sonrası akış düzeltmeleri (K30)
 rol: claude-kod
-durum: alindi
+durum: bitti
 alan: claude-G087
 oncelik: 1
 bagimli: []
@@ -49,3 +49,4 @@ tarihi, yayından kaldır, adres yazarak silme, geçmiş). Türkçe arayüz; al�
 
 ## Günlük
 - 2026-10-15 açıldı ve alındı (claude-G087, kullanıcı isteği K30)
+- 2026-10-16 entegratör onayladı (G125: `alindi`'den doğrudan; Sonuç tam, iş main'de ve canlıda — G092/G096 canlı denemesi, sonra admin v2 G095)

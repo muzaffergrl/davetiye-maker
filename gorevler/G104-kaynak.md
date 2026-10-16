@@ -2,7 +2,7 @@
 id: G104
 baslik: Tasarım 04 Vintage Airmail Love Letter — HTML sahne kaynağı + katmanlar
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan: claude-kod-8
 oncelik: 2
 bagimli: []
@@ -39,3 +39,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-09 alindi: claude-kod-8
 - 2026-10-09 blokaj: K21 (kullanıcı): tasarımı GPT yapar; kodla çizilmiş sahne kaynağı yapılmaz. Pilot G030/G031 sonrası yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — (K21) kodla çizilmiş video sahne kaynağı + Canva katmanları; video yok → G404

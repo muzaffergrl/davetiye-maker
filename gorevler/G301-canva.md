@@ -2,7 +2,7 @@
 id: G301
 baslik: Tasarım 01 Olive & Ivory — Canva video master
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 3
 bagimli: [G101, G201, G002]
@@ -31,3 +31,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — Canva video master; video ve Canva teslimi yok → G401

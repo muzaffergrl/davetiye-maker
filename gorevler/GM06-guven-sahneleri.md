@@ -2,7 +2,7 @@
 id: GM06
 baslik: Dükkân geneli güven ve albeni sahneleri — 6 GPT görseli (3 adım, misafir RSVP, çift düzenliyor, her cihaz, QR masa kartı, atölye)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: codex-gpt-gorsel-gm06
 oncelik: 2
 bagimli: []
@@ -58,3 +58,4 @@ ham çıktılar çalışma ortamındaki `generated_images/` klasöründe korundu
 - 2026-10-15 alindi: codex-gpt-gorsel-gm06
 - 2026-10-15 T1–T6 üretildi; 987792f ile main'e push edildi.
 - 2026-10-15 Sonuç ve kullanıcı yeşil tonu kararı kaydedildi; incelemeye gönderildi.
+- 2026-10-16 entegratör onayladı

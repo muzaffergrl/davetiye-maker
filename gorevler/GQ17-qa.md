@@ -2,7 +2,7 @@
 id: GQ17
 baslik: Tasarım 17 Emerald & Gold Estate — QA raporu
 rol: claude-qa
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 5
 bagimli: [G917, GA17, GB17]
@@ -28,3 +28,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — Canva seti (A1–A5, B1–B3) QA raporu → G090
