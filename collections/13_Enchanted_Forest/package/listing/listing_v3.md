@@ -22,7 +22,7 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G41
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, hosting extension, Etsy shop URL | Not decided: placeholders (§4). |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Tangerine and IM Fell English (latin only, no Cyrillic). The language line in GOOD TO KNOW is written from this. |
-| START HERE guide | **Not produced** for this design: `package/customer/` does not exist yet, and `tools/build_customer_guides.py` builds 01–05 only. The description, the FAQ and Etsy's messages promise it, so `START_HERE.md` (from docs/19 Ek A, with this design's start link and opening object) and `START_HERE.pdf` with its start QR must exist before publishing. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G122 (2026-10-16, `python3 tools/build_customer_guides.py`, from docs/19 Ek A): 7 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=enchanted-forest-storybook` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. |
 | Listing images and video | **Not produced** (§5, §6). The GPT mockup scenes of this design exist in `assets/gpt/mockups/`. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (guide, images, video) and every open VERIFY keep `ready_to_publish` false.
@@ -249,7 +249,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 - [x] Start link and demo of this design answer on the live site (2026-10-16, `200`, design named)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
-- [ ] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR)
+- [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G122, 2026-10-16)
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
