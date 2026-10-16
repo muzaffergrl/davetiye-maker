@@ -25,6 +25,11 @@ screen and carries the seashell and twine away"):
     kesim geometrisine bağlı: çapa = V kapağın ucu (kapak_kes tip); W1.1 comp'ta ölçülen kabuk+sicim genişliği / zarf
     genişliği ve merkezin uca göre kayması (manifest.closure; COMP).
   * Açılış dalgası (wave.png, ek parça): alfa kutusuna kırpılır, iki genişlik; site ekranı soldan sağa geçirir.
+  * Lomboz (G098, GM07 R2): story ve home lombozu `frame_portrait_r2_v2.png` — tam yuvarlak pirinç lomboz, sekiz perçin
+    (comp W1.3 gibi; eski frame_portrait dik ovaldi). Ham imagegen çıktısı (kaynakta düzenleme yok): penceresi düz değil
+    (kenarda koyulaşan yeşil, ortada alfa deliği = GPT "bulut lekesi") → olağan hat: GPT_PROMPTS.md'de Kaydet satırı
+    olmadığından parts_prep.parca_isle elle çağrılır (geçici klasör `gm07/`); leke dolgusu pencereyi tam şeffaf yapar,
+    foto_alani her WebP'de denetler.
   * Telefon zemini (`sea`): bg_page 2:3 telefonda (en/boy ≈ 0,46) cover ile köşe kümelerini keserdi. Zemin bg_page'in
     iki kümesiz bölgesinden kurulur (deniz sisi + alttaki kıyı: dalga ve kum, sağdaki kabuk kümesi hariç), 120 px yumuşak
     geçiş; kumsal kümeleri ayrı katman (decor_tl / decor_br), ekranda bütün. Geniş ekran: `sea_wide` (kümesiz geniş
@@ -49,6 +54,7 @@ ROOT = THEME.parents[2]
 COL = ROOT / "collections/20_Coastal_Seaside"
 PARTS = COL / "assets/gpt/parts"
 COMPS = COL / "assets/gpt/comps"
+GM07_PORTRAIT = "frame_portrait_r2_v2.png"   # GM07 R2 yuvarlak lomboz (G098)
 sys.dont_write_bytecode = True  # tools/ klasörüne __pycache__ yazma
 sys.path.insert(0, str(ROOT / "tools"))
 import tema_build as tb  # noqa: E402
@@ -375,6 +381,19 @@ def main():
     if oniz and (oniz == THEME or oniz.is_relative_to(THEME)):
         sys.exit("--onizleme tema klasörünün içinde olamaz")
     prep, win, tmp = tb.prep_hazirla(COL, args.prep_dir, yasak=[THEME], onek="cs-prep-")
+    # GM07 R2 lombozu (G098): ayrı alt klasörde parts_prep.parca_isle → frame_portrait.png + pencere kaydı
+    import hashlib
+    import parts_prep
+    gm = prep / "gm07"
+    (gm / "masks").mkdir(parents=True, exist_ok=True)
+    gm_kayit, gm_pen, _, gm_uy = parts_prep.parca_isle({"seffaf": True}, PARTS / GM07_PORTRAIT, gm, 150, 8)
+    for u in gm_uy:
+        print(f"UYARI  {GM07_PORTRAIT}: {u}")
+    if len(gm_pen) != 1:
+        sys.exit(f"{GM07_PORTRAIT}: tek pencere bekleniyordu ({len(gm_pen)})")
+    (gm / gm_kayit["dosyalar"][0]["dosya"]).replace(gm / "frame_portrait.png")
+    gm_pen[0]["katman"] = "frame_portrait.png"
+    gm_win = {"frame_portrait": gm_pen}
     out.mkdir(parents=True, exist_ok=True)
     if oniz:
         oniz.mkdir(parents=True, exist_ok=True)
@@ -529,10 +548,15 @@ def main():
     # ------------------------------------------------------------------ çerçeveli parçalar + foto alanları
     slots = {}
     for ad, parca in (("card", "card_small"), ("portrait", "frame_portrait"), ("landscape", "frame_landscape")):
-        im = Image.open(prep / f"{parca}.png").convert("RGBA")
+        kok, pw = (gm, gm_win) if parca == "frame_portrait" else (prep, win)
+        im = Image.open(kok / f"{parca}.png").convert("RGBA")
         im, temizlik[parca] = hale_temizle(im, sert=True)
         webp(im, parca, WIDTHS[parca])
-        slots[ad] = tb.foto_alani(prep, win, parca, ad, manifest, out)
+        slots[ad] = tb.foto_alani(kok, pw, parca, ad, manifest, out)
+    manifest["frame_portrait"].update({"source": f"parts/{GM07_PORTRAIT}", "source_canvas": gm_kayit["kaynak_olcu"],
+                                       "crop": gm_kayit["kirpma"],
+                                       "source_sha256": hashlib.sha256((PARTS / GM07_PORTRAIT).read_bytes()).hexdigest(),
+                                       "note": "GM07 R2 ham imagegen (G098): yuvarlak lomboz; pencere parts_prep leke dolgusuyla"})
     manifest["photo_slots"] = slots
     manifest["card_small"]["free_zone"] = tb.serbest_bolge(benek_sil(Image.open(prep / "card_small.png")), 0.5, ornek=(.8, .86))
 

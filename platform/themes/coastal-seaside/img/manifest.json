@@ -895,33 +895,46 @@
  },
  "frame_portrait": {
   "src_size": [
-   834,
-   1041
+   1130,
+   1136
   ],
-  "ratio": 0.80115,
+  "ratio": 0.99472,
   "files": [
    {
     "file": "frame_portrait-320.webp",
     "w": 320,
-    "h": 399,
-    "bytes": 24806,
+    "h": 322,
+    "bytes": 22758,
     "window_visible_px": 0
    },
    {
     "file": "frame_portrait-640.webp",
     "w": 640,
-    "h": 799,
-    "bytes": 75580,
+    "h": 643,
+    "bytes": 68510,
     "window_visible_px": 0
    }
   ],
   "window": [
-   97,
-   101,
-   638,
-   832
+   131,
+   131,
+   866,
+   868
   ],
-  "leke_px": 0
+  "leke_px": 400394,
+  "source": "parts/frame_portrait_r2_v2.png",
+  "source_canvas": [
+   1254,
+   1254
+  ],
+  "crop": [
+   59,
+   49,
+   1130,
+   1136
+  ],
+  "source_sha256": "2225657dc1550f33b780c9a2e1efa101d652b35da925231b716e8672333d19b1",
+  "note": "GM07 R2 ham imagegen (G098): yuvarlak lomboz; pencere parts_prep leke dolgusuyla"
  },
  "frame_landscape": {
   "src_size": [
@@ -970,15 +983,15 @@
   },
   "portrait": {
    "box_pct": [
-    11.391,
-    9.51,
-    76.978,
-    80.307
+    11.416,
+    11.356,
+    76.991,
+    76.761
    ],
-   "aspect": 0.7679,
+   "aspect": 0.9977,
    "box_px": [
-    642,
-    836
+    870,
+    872
    ],
    "mask": "mask_portrait.png"
   },
@@ -2424,92 +2437,92 @@
  "ph_story_1": {
   "src_size": [
    640,
-   833
+   641
   ],
-  "ratio": 0.76831,
+  "ratio": 0.99844,
   "files": [
    {
     "file": "ph_story_1-320.webp",
     "w": 320,
-    "h": 416,
-    "bytes": 570
+    "h": 320,
+    "bytes": 458
    },
    {
     "file": "ph_story_1-640.webp",
     "w": 640,
-    "h": 833,
-    "bytes": 1836
+    "h": 641,
+    "bytes": 1456
    }
   ],
-  "aspect": 0.7679,
+  "aspect": 0.9977,
   "crop": [
    300,
    560,
    640,
    1000
   ],
-  "min_lum": 232,
-  "max_sat": 27.0
+  "min_lum": 233,
+  "max_sat": 26.0
  },
  "ph_story_2": {
   "src_size": [
    640,
-   833
+   641
   ],
-  "ratio": 0.76831,
+  "ratio": 0.99844,
   "files": [
    {
     "file": "ph_story_2-320.webp",
     "w": 320,
-    "h": 416,
-    "bytes": 616
+    "h": 320,
+    "bytes": 492
    },
    {
     "file": "ph_story_2-640.webp",
     "w": 640,
-    "h": 833,
-    "bytes": 1892
+    "h": 641,
+    "bytes": 1490
    }
   ],
-  "aspect": 0.7679,
+  "aspect": 0.9977,
   "crop": [
    520,
    600,
    860,
    1040
   ],
-  "min_lum": 226,
-  "max_sat": 33.0
+  "min_lum": 228,
+  "max_sat": 31.0
  },
  "ph_story_3": {
   "src_size": [
    640,
-   833
+   641
   ],
-  "ratio": 0.76831,
+  "ratio": 0.99844,
   "files": [
    {
     "file": "ph_story_3-320.webp",
     "w": 320,
-    "h": 416,
-    "bytes": 584
+    "h": 320,
+    "bytes": 464
    },
    {
     "file": "ph_story_3-640.webp",
     "w": 640,
-    "h": 833,
-    "bytes": 1888
+    "h": 641,
+    "bytes": 1432
    }
   ],
-  "aspect": 0.7679,
+  "aspect": 0.9977,
   "crop": [
    360,
    640,
    700,
    1080
   ],
-  "min_lum": 228,
-  "max_sat": 31.0
+  "min_lum": 229,
+  "max_sat": 28.0
  },
  "ph_venue": {
   "src_size": [
@@ -2645,7 +2658,7 @@
    "alpha_floor": 12,
    "core": 96,
    "reach_px": 1,
-   "removed_px": 7837
+   "removed_px": 9395
   },
   "frame_landscape": {
    "alpha_floor": 12,
