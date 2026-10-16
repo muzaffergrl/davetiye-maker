@@ -3,7 +3,7 @@
 Kullanıcı (2026-10-16): ilan görselleri satışın en önemli parçası; önceki iki tarz (GM03 GPT kompozisyonları ve G059
 şablon kiti) istenmiyor, "çok daha şık ve özenli" iş isteniyor.
 
-**Araç:** `tools/listing_editorial.py --theme <id>` → `collections/<NN>/package/listing/images_editorial/` (8 × 2000 px).
+**Araç:** `tools/listing_editorial.py --theme <id>` → `collections/<NN>/package/listing/images_editorial/` (9 × 2000 px).
 Eski kit `images/` klasöründe kalır; seçim yapılınca ilan paketi (`etsy_upload.json`) yeni klasöre bağlanır.
 Açılış kareleri: `tools/listing_editorial/capture_opening.ts` (DPR 3, yerel üretim derlemesi; canlıya bir şey gitmez).
 
@@ -28,7 +28,7 @@ Açılış kareleri: `tools/listing_editorial/capture_opening.ts` (DPR 3, yerel 
    "Online until 12 months after your wedding".
 6. Renkler temanın `palette.json`'undan; altın metin rengi olarak mürekkebe doğru karıştırılır (açık zeminde okunur).
 
-## Sekiz görsel
+## Görseller (8 + 9. Good to know)
 
 | # | Ad | Düzen | Malzeme |
 |---|---|---|---|
@@ -40,6 +40,7 @@ Açılış kareleri: `tools/listing_editorial/capture_opening.ts` (DPR 3, yerel 
 | 6 | The details | Program, mekân, S&C | gerçek ekranlar |
 | 7 | How it works | Üç adım, roma rakamları | başlangıç, kurulum, yayındaki site |
 | 8 | What's included | Masa üstü sahne + liste | `flatlay_phone(_v2)` + demo ekranı |
+| 9 | Good to know | Kâğıt üstünde yalnız yazı: altı soru-cevap, roma rakamları, saç çizgileri (2026-10-16, kullanıcı isteği) | — (yazı + kâğıt dokusu) |
 
 ## Bilinen sınır
 

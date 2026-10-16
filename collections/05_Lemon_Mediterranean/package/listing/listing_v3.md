@@ -142,7 +142,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (`python3 tools/listing_editorial.py --theme mediterranean-lemon`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); images 3, 5, 6 and 7 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The earlier G059 kit stays in `images/` for comparison and is not uploaded. Alt texts below describe these files.
+The 9 images in `images_editorial/` are the editorial set of 2026-10-16 (`python3 tools/listing_editorial.py --theme mediterranean-lemon`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); images 3, 5, 6 and 7 lay them out on paper, and image 9 is type on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The earlier G059 kit stays in `images/` for comparison and is not uploaded. Alt texts below describe these files.
 
 | # | File | Alt text |
 |---|---|---|
@@ -154,10 +154,7 @@ The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (`python
 | 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
 | 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
 | 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
-
-Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
-- 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
-- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Save your private edit link", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
+| 9 | `09_good_to_know.png` | Good to know before you buy: no Canva, no app, no account; online until 12 months after your wedding date; save your edit link; names and date can change 3 times after publishing, typo fixes always free; an optional guest password; a thank-you page after the wedding |
 
 ## 6. Video
 

@@ -99,6 +99,13 @@
       "alt": "What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description",
       "exists": true,
       "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 9,
+      "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/09_good_to_know.png",
+      "alt": "Good to know before you buy: no Canva, no app, no account; online until 12 months after your wedding date; save your edit link; names and date can change 3 times after publishing, typo fixes always free; an optional guest password; a thank-you page after the wedding",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
     }
   ],
   "gpt_mockup_scenes": [

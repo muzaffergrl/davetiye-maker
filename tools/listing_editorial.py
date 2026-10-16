@@ -1,4 +1,4 @@
-"""Editorial Etsy listing images (v4): 8 × 2000 px, layout + typography only (K21).
+"""Editorial Etsy listing images (v4): 9 × 2000 px, layout + typography only (K21).
 
   python3 tools/listing_editorial.py --theme olive-ivory [--only 01_cover 03_pages] [--opening <dir>]
 

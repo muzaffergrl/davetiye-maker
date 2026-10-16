@@ -118,7 +118,8 @@ IMAGES = ["01_cover", "02_guest_pages", "03_whats_included", "04_how_it_works", 
 # The images that go on Etsy (docs/21, 2026-10-16): the editorial set from tools/listing_editorial.py. IMAGES above is
 # the earlier G059 kit that the `images` step still builds into images/ (kept for comparison, not uploaded).
 UPLOAD_DIR = "images_editorial"
-UPLOAD_IMAGES = ["01_cover", "02_opening", "03_pages", "04_edit", "05_rsvp", "06_details", "07_how", "08_included"]
+UPLOAD_IMAGES = ["01_cover", "02_opening", "03_pages", "04_edit", "05_rsvp", "06_details", "07_how", "08_included",
+                 "09_good_to_know"]
 UPLOAD_SCENES = ["01_cover", "02_opening", "04_edit", "08_included"]  # built on GPT mockup scenes (green screens)
 # Screens each template / guide strip uses (from capture.ts; b*/e*/s*/p* = the K29 editor, docs/16 §0b).
 SHOTS = ["g01_envelope", "g02_home_top", "g03_home_invitation", "g04_home_calendar", "g05_story", "g06_details_top",
