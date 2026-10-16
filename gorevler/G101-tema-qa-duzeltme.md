@@ -51,5 +51,24 @@ qa-kontrol (2026-10-16) altı temada comp kapısını GEÇTİ dedi; her birinde 
 
 ## Sonuç
 
+### Oturum A (15, 16, 17)
+**2026-10-16 · claude-kod · dal `claude/g101a-qa`** (push; main'e push ve PR yok). Yazılan yollar: üç temanın klasörü, testleri,
+`previews/g415–g417/`, `G415–G417` görev dosyaları.
+
+| Bulgu | Ne yapıldı | Doğrulama |
+|---|---|---|
+| Ortak (orta): details program satırı fold boşluğu (15, 16, 17) | `.sched-row`'lardan `data-fold` kalktı (19'daki çözüm); testler `sched-row[data-fold]` = 0 bekliyor | `stress_details_360.png` ×3: satırlar eşit aralıklı |
+| 15 düşük: 375×553 tasarım aralığında isimler 4 satır, RSVP altta | isim tabanı 36 → 32 px (manifest `names_min_px` dahil); `fitNames`'e `is-short` (kısa dikey telefonda kart küçülür) | `range_home_375x553`: 3 satır, RSVP alt 432 < nav 484 |
+| 15 düşük: stres h1 ilk ekranın altında | `fold` isimleri (h1) hiç itmiyor | `stress_home_375x553`: h1 228'de başlıyor |
+| 16 orta: story ilk ekranın yarısı boş | ilk satır katlanınca boşluk duvara değil satıra; önce ≤ 60 px kaldırma + ilk baskı `--sg` ≥ 0,76 (pencere ≥ 38vw) | `story_390`: ip girişin altında, ilk baskı + yazı nav'ın üstünde |
+| 16 düşük: masa bandının sert üst kenarı | `.wood-end::before` maskesi görüntünün kendi kutusunda | 4 sayfanın kapanış bandı DPR 3'te yumuşak |
+| 16 düşük: "qa geçti (3 tur)" doğrulanamadı | G416 Sonuç'u + kontrol kutusu düzeltildi | — |
+| 17 düşük: stres h1 / aralık RSVP 375×553'te altta | 15'teki `fold` + `is-short` (taban 34 px kaldı) | `range_home_375x553` RSVP alt 445 < 491; `stress_home_375x553` h1 223 |
+| 17 düşük: "TOGETꞪER" | **kalıyor (gerekçeli):** ligatür değil, Cinzel Decorative'in küçük `h` glifi; `no-common-ligatures` ve 5 `font-feature-settings` varyantı etkisiz (denendi); tek harfi Cinzel'den almak boy uyuşmazlığı → font kararı entegratöre (G417 Sonuç'unda öneri) | izole görüntü testi |
+
+**Komutlar:** her tema `theme-check --stress` 128/0/0 · `g051-browser` 44/44 · `final-smoke` 45/45; `npm test` 1208/1208, `typecheck`
+temiz, `build` + trace-check temiz. **Açık:** qa-kontrol alt-ajanının yeniden incelemesi (entegratör); 17 başlık fontu kararı; gerçek
+cihaz/Safari denenmedi. **Entegratöre not:** 16'nın `fold`'u (home) isim itme düzeltmesini almadı (bulgu yoktu); aynı risk orada da var.
+
 ## Günlük
 - 2026-10-16 açıldı (entegratör; qa-kontrol raporu)

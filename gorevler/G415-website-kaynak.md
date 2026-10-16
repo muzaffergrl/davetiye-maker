@@ -106,6 +106,17 @@ yapılmadı** (bu oturumda alt-ajan başlatma aracı yok; `compare_*` ve README 
 sayısı sayan bir ortak test kırılmadı. Disk: `platform/.next` silindi; `platform/node_modules` ana checkout'tan hardlink
 (`cp -al`) ile kuruldu.
 
+### qa-kontrol 2026-10-16: bulgular + düzeltmeler (G101 oturum A)
+- **Ortak (orta) — program satırı fold boşluğu:** `details.html`'de `.sched-row`'lar `data-fold` birimi olmaktan çıktı (19'daki çözüm); itilen satır boyalı kartta ~130 px yazısız delik bırakıyordu. `stress_details_360.png`: 10 satır eşit aralıklı, boşluk yok. Test: `sched-row[data-fold]` = 0.
+- **Düşük — `range_home_375x553` isimler 4 satır, RSVP ilk ekranın altında:** 36 px'te "Alexandrina Rose & Maximilian James" en az 4 satır ("Alexandrina" tek başına ~255 px) → isim tabanı **36 → 32 px** (`site.js` `targets`, `build_images.py` + `img/manifest.json` `names_min_px`). `fold` isimleri (h1) artık hiç itmiyor (`cut` `.names`'i atlar) → zorlama kaydında h1 ilk ekranda başlar (uzun hâli kaydırılır, §12 kaydında izinli); `fitNames`'e `is-short` adımı eklendi: dikey kısa telefonda kart küçülür (`clamp(108px, 22svh × .7116, 150px)`), ardından `is-long` (sayaç hapın altına, kaydırınca). Sonuç: isimler 32 px'te **3 satır**, tarih · mekân · şehir · **RSVP ilk ekranda** (alt 432, nav 484); kart kopyası `fitCopy` ile kısalır (tarih iki satır), kâğıtta.
+- **Düşük — `stress_home_375x553` h1 tamamen ilk ekranın altında:** yukarıdaki `fold` düzeltmesiyle h1 228'de, kartın hemen altında başlıyor.
+- Komutlar (2026-10-16, dal `claude/g101a-qa`): `theme-check --theme cherry-blossom-spring --stress` **128 geçti, 0 hata, 0 uyarı**
+  (`previews/g415/checks.json`) · `g051-browser` **44/44** · `final-smoke` **45/45** · `npm test` **1208/1208** · `typecheck` temiz ·
+  `build` + trace-check temiz (21 tema). Zarf → home 4671 ms; ilk görünüm 390×844 DPR 3: index 750 / home 803 KB yer tutucu, 847 / 1322 KB örnek fotoğrafla.
+- Bakılan görüntüler (Read): `stress_details_360`, `range_home_375x553`, `stress_home_375x553`.
+- Denenmedi: gerçek iPhone/Safari ve Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ. Bu bölüm qa-kontrol
+  alt-ajanının yeniden incelemesi **değildir**; yeniden inceleme entegratörde.
+
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-13 yeniden tanımlandı (K22–K24, G033)
