@@ -200,7 +200,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 | 5 | Can I do everything on my phone? | The editor is designed for phone screens and also works on a computer. | İ, İS | V (gerçek telefon testi yok) |
 | 6 | Is it hard? I'm not good with technology. | You type into labelled boxes and tap Publish. A 3-step setup asks only for your names, date and one photo; Home shows what is left. Every change saves by itself, and you can preview before guests see anything. | İ, SH | ✓ (süre iddiası yok) |
 | 7 | Can I see it before I buy? | Yes. Open the live demo (link in the listing photos) and tap the envelope. It is the real website with sample names. | İ, İG8 | ✓ (İG8 QR politikası V) |
-| 8 | What can I change? | Names, date, time and time zone, venue and map link, the order of the day (up to 10 rows), your story, 5 photos, questions and answers (up to 12), RSVP deadline and up to 3 RSVP questions, and the design's headings, labels and buttons in your own words. | İ, İS, SH | ✓ |
+| 8 | What can I change? | Names, date, time and time zone, venue and map link, the order of the day (up to 10 rows), your story, 5 photos, questions and answers (up to 12), RSVP deadline, which reply fields are required and up to 10 questions of your own, map and directions, story music, and the design's headings, labels and buttons in your own words. | İ, İS, SH | ✓ |
 | 9 | What can't I change? | The artwork, colors, fonts, page layout and the envelope animation stay as designed. | İ, İS | ✓ |
 | 10 | Can I change the wording, like "You are invited"? | Yes. Every page of the editor has "Headings & labels" where you can rewrite the design's texts or reset them. | İ, SH | ✓ |
 | 11 | Is it only for weddings? | It is made for weddings. Suggested wording is built in for a vow renewal, an elopement party or a commitment ceremony, and you can rewrite the headings yourself. | İS | ✓ |
@@ -210,7 +210,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 | 15 | Is there a monthly fee or subscription? | No. You pay once on Etsy. | İ, İS, SS | ✓ |
 | 16 | What will my link look like? | Your names on our web address, for example …/avery-and-jordan. You choose it when you start; it cannot be changed later. | İ, İS | ✓ (alan adı `[DOMAIN]` K) |
 | 17 | Can I use my own domain (yournames.com)? | Not at the moment. | İ, İS | — |
-| 18 | Is there music? | No. | İ | — |
+| 18 | Is there music? | Yes, if you like: soft music on your Our Story page (four tracks or your own MP3/M4A), and soft sounds when the invitation opens. Guests can turn the sound off. | İ | — |
 | 19 | Do you print or ship anything? | No. This is a digital product. You can print your QR code on your own cards. | İ | — |
 | 20 | Is there a matching save the date? | Not yet. You can share your website early and add details later. | İS, SS | — |
 | 21 | Can I send the invitations from the website by email? | No. You share your link yourself by text, WhatsApp, email or a printed QR code. | İ, İS | — |
@@ -288,7 +288,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 | 68 | How many guests can I invite? | We do not limit how many people you invite or how many replies you get. One reply can include up to 10 people. | İS, SH | ✓ |
 | 69 | Can a guest change their reply? | They send another reply. You see both in Guests and can remove the old one. | SH | ✓ |
 | 70 | Do I get notified about new replies? | Not by email yet. New replies show in your editor (Home and Guests). | SH | ✓ |
-| 71 | Can I ask for meal choices or allergies? | Yes, up to 3 questions of your own (multiple choice or a short answer). Only guests who are coming see them. | İ, SH | ✓ (canlı V) |
+| 71 | Can I ask for meal choices or allergies? | Yes, up to 10 questions of your own (choices, yes/no, short or long answer, number), each required or optional. Only guests who are coming see them. | İ, SH | ✓ (canlı V) |
 | 72 | Can I get the list into Excel? | Guests → Download list saves a CSV file for Excel, Numbers or Google Sheets, one row per person. | İ, SH | ✓ |
 | 73 | Someone replied by phone. | Guests → Add a reply. It counts like any other and is marked "Added by you". | SH | ✓ |
 | 74 | When do replies close? | At the end of your reply-by date, in your wedding's time zone. You can also turn replies off. | SH | ✓ |
@@ -320,7 +320,9 @@ A wedding website that opens like a real envelope, with online RSVP built in. Yo
 WHAT YOU GET
 • Your wedding website in the {DESIGN} design: envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
-• Online RSVP: replies, head counts and up to 3 questions of your own (for example a meal choice); download the list as a spreadsheet (CSV)
+• Online RSVP: replies, head counts and up to 10 questions of your own (for example a meal choice), each required or optional; download the replies as Excel (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
+• Map and directions to your venue (Google Maps, Apple Maps, Waze)
+• Soft music on your Our Story page (four tracks or your own file) and gentle opening sounds [VERIFY: tracks listened to and approved]
 • Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
 • 5 photo spots with cropping, a countdown, map, dress code, travel & stay and registry buttons, and up to 12 questions & answers
 • A QR code of your website (PNG or SVG) for printed cards and signs
@@ -340,7 +342,9 @@ WHAT YOU CAN CHANGE
 • Your story: an intro line and three captions
 • 5 photos: a portrait, 3 story photos and the venue, each cropped to its frame
 • Questions & answers (up to 12), dress code, travel & stay and registry links
-• RSVP deadline and up to 3 questions for your guests
+• RSVP deadline, required or optional reply fields and up to 10 questions for your guests
+• Story music: one of four tracks, your own MP3/M4A, or none
+• Map and directions for your venue (and a reception place)
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Will You Join Us?")
 • Which optional sections show
 What stays as designed: the artwork, colors, fonts, page layout and the envelope animation.
@@ -361,7 +365,7 @@ GOOD TO KNOW
 • We confirm each order in our shop before a website can go live. You can set everything up in the meantime.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
-• No music. Colors and fonts do not change.
+• Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
@@ -409,7 +413,7 @@ Can it be in another language?
 You can write your own texts and headings in any language. Built-in messages such as reply form errors stay in English.
 
 How do my guests reply?
-On your RSVP page, with no app or account. You see every reply in your editor and can download them as a spreadsheet (CSV).
+On your RSVP page, with no app or account. You see every reply in your editor and can download them as Excel (or CSV) in one tap, or connect a Google Sheet that updates by itself.
 
 How many guests can I invite?
 As many as you like. One reply can include up to 10 people.
