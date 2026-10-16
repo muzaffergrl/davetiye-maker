@@ -74,7 +74,8 @@ oranlar manifest `box_px`'ten, 71 copy anahtarı), `content.demo.json` (koleksiy
 - Kendi QA: 360×640, 390×844, 430×932, 844×390, 1280×800 ekran görüntülerine ve açılış karelerine (150–4300 ms) bakıldı;
   bulunan sorunlar düzeltildi (story başlığının ekran dışına taşması, masaüstünde kıyı bandının "Tap to open" ve sayacın altına
   girmesi, stretched kart bandında benek çizgileri, home lombozlarının kayarken yazıyı ekran dışına taşıması).
-- qa-kontrol incelemesi (salt okunur, `compare_*`, README, site.css): **GEÇTİ** — başka tema düzeni yok, kodla çizim yok,
+- qa-kontrol incelemesi (oturum içi, salt okunur, `compare_*`, README, site.css; raporu repoda yok — 2026-10-16 qa-kontrol bu
+  "geçti"yi doğrulayamadı ve orta bulgular buldu, aşağıda "qa-kontrol 2026-10-16"): oturum notuna göre başka tema düzeni yok, kodla çizim yok,
   atlanan comp öğesi gerekçeli. İki önemli bulgu düzeltildi: (1) `sea` kırpımının sağ kenarında kumul otu/kabuk kalıntısı →
   kırpımlar daraltıldı (`mist` x 420–880, kıyı x 0–600); (2) iç sayfalarda ilk ekranın kıyısı içeriğin ortasından geçiyordu →
   story/details/rsvp ilk ekranı yalnız sis, kıyı sayfa sonunda (README'de sapma). Küçük bulgular README'ye işlendi (home

@@ -70,8 +70,8 @@ Azaltılmış hareket 201 ms. site.js 35 550 B, site.css 46 041 B.
 karelerine baktım; düzeltilenler: rsvp mührü kart öğesinin dışına (monogram "kart metni" sayılıyordu), ışık katmanı ekran
 kenarından taşıyordu, "Tap to open" kısa telefonda mum ışığı üstündeydi (zemin yeniden kuruldu + hâle), teşekkür başlığı
 360'ta kart kâğıdından taşıyordu (`fitCopy` son adım: tarih düşer), home 375×553'te isim 31 px, masaüstü story ızgarasında
-itilen çerçeve öncekini yukarı çekiyordu (yayılan öğe kaldırıldı). **qa-kontrol incelemesi:** 5 sayfa + kapanış KABUL, ret sebebi
-yok; önemli bulgu (details kartında fold'un bıraktığı boşluk) → program satırları fold birimi olmaktan çıkarıldı; küçük not
+itilen çerçeve öncekini yukarı çekiyordu (yayılan öğe kaldırıldı). **qa-kontrol incelemesi (oturum içi; raporu repoda yok, 2026-10-16 qa-kontrol "KABUL"ü doğrulayamadı —
+aşağıda "qa-kontrol 2026-10-16"):** oturum notuna göre ret sebebi yok; önemli bulgu (details kartında fold'un bıraktığı boşluk) → program satırları fold birimi olmaktan çıkarıldı; küçük not
 (story başlığı 3. çerçeveye yakın) → aralık açıldı; diğer küçük notlar (kümelerin kart/panel arkasından taşması) kabul.
 
 **Denenmedi:** gerçek iPhone/Safari ve Android Chrome (`svh`, `mask`, `:has`, `mix-blend-mode`, çapraz belge VT), Vercel

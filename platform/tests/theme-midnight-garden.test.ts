@@ -1172,3 +1172,9 @@ test('15 privacy: sections the couple switched off leave nothing in any page sou
     for (const secret of secrets) assert.ok(!html.includes(secret), `${page}: "${secret}" is in the page source`);
   }
 });
+
+test('qa-kontrol 2026-10-16: wide candle glows and the hint halo are clipped by their own section (no wider page box)', () => {
+  // .fr-box::before reaches ±38 % past an 84vw frame; html's overflow-x clip hid it in Chrome, body.scrollWidth stayed ~24 % wider
+  assert.match(rule('.frames-sec'), /overflow-x: clip/);
+  assert.match(rule('.env-page'), /overflow-x: clip/);
+});

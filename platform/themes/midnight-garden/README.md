@@ -207,4 +207,4 @@ hemen altında `<template data-rsvp-party>`.
 | açılış kaydı | `previews/g419/opening_390x844.mp4` (dokun → açılış → home → story → details) |
 | dosya boyları | site.js 35 550 B (≤ 35 KiB), site.css 46 041 B (≤ 45 KiB), thank-you.css 2285 B; tema klasörü ~1,9 MB |
 | kit uyumu (`kit_check`) | paket 5 23/23 (hiza sol +0,00, sağ −0,10, alt +0,13 %), paket 2 5/5 |
-| qa-kontrol (§13.4) | 5 sayfa + kapanış KABUL; önemli bulgu (details kartında fold boşluğu) ve story başlık aralığı düzeltildi |
+| qa-kontrol (§13.4) | oturum içi inceleme "KABUL" dedi (rapor repoda yok, doğrulanamadı); 2026-10-16 qa-kontrol bulguları (home yatay taşma) düzeltildi — G419 Sonuç |
