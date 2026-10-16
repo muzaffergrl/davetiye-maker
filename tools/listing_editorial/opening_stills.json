@@ -1,0 +1,23 @@
+{
+  "_about": "G124: the two opening stills of image 2 (02_opening), in ms after the tap, chosen by eye per design from capture_opening.ts candidates (--at 600,1200,…,4000): open_mid = the object opening, open_card = the card risen out of it (after about 4 s the page goes on to the home page). 01–05 as chosen in the v4 set (2026-10-16). tools/listing_editorial.py --capture takes these.",
+  "olive-ivory": {"open_mid": 2400, "open_card": 3600},
+  "dusty-blue-champagne": {"open_mid": 1800, "open_card": 3000},
+  "blush-garden-rose": {"open_mid": 2400, "open_card": 3600},
+  "vintage-airmail-love-letter": {"open_mid": 1800, "open_card": 3000},
+  "mediterranean-lemon": {"open_mid": 2400, "open_card": 3600},
+  "art-deco-black-tie": {"open_mid": 1200, "open_card": 3600},
+  "burgundy-velvet-autumn": {"open_mid": 2400, "open_card": 3600},
+  "winter-evergreen": {"open_mid": 2400, "open_card": 3600},
+  "lavender-provence": {"open_mid": 1200, "open_card": 2400},
+  "tuscan-vineyard": {"open_mid": 1800, "open_card": 3000},
+  "boho-pampas-terracotta": {"open_mid": 1800, "open_card": 3600},
+  "tropical-destination": {"open_mid": 1800, "open_card": 3600},
+  "enchanted-forest-storybook": {"open_mid": 1800, "open_card": 4000},
+  "ivory-lace-pearls": {"open_mid": 1800, "open_card": 3600},
+  "cherry-blossom-spring": {"open_mid": 2400, "open_card": 3600},
+  "sunflower-rustic-barn": {"open_mid": 2400, "open_card": 3600},
+  "emerald-gold-estate": {"open_mid": 2400, "open_card": 3600},
+  "wildflower-meadow-vellum": {"open_mid": 1800, "open_card": 3000},
+  "midnight-garden": {"open_mid": 2400, "open_card": 3600},
+  "coastal-seaside": {"open_mid": 2400, "open_card": 3600}
+}

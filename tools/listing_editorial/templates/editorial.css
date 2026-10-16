@@ -1,5 +1,6 @@
 /* Editorial listing images (2000 × 2000). Layout + typography only (K21): every picture is a GPT scene, a GPT theme
-   part or a real screen. Colours come from the theme's palette.json (--ink, --deep, --gold, --ivory, --mist).
+   part or a real screen. Colours come from the theme's palette.json (--ink, --deep, --gold, --ivory, --mist); --shade is
+   the shadow colour (the ink on light paper, black under the dark designs 06, 17, 19).
    Rules: no boxes, badges, pills or icons; one display face (Cormorant Garamond) with one quiet sans for small caps
    (Montserrat); hairlines instead of frames; lots of air. */
 @import url("fonts.css");
@@ -27,6 +28,13 @@ body {
 .veil-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: var(--h, 520px);
   background: linear-gradient(to top, color-mix(in srgb, var(--paper) 90%, transparent) 0%,
               color-mix(in srgb, var(--paper) 50%, transparent) 60%, transparent 100%); }
+/* image 2: the step labels under the phones sit on paper whatever the scene's table is (07's dark wood, 13's path):
+   the wash starts at the phones' lower edge and is firm 130 px below it */
+.veil-bottom.under { background: linear-gradient(to top, color-mix(in srgb, var(--paper) 95%, transparent) 0%,
+              color-mix(in srgb, var(--paper) 90%, transparent) calc(100% - 130px), transparent 100%); }
+/* a busy photograph under small text (image 7's steps over ribbon and flowers): a firmer wash */
+.veil-bottom.firm { background: linear-gradient(to top, color-mix(in srgb, var(--paper) 94%, transparent) 0%,
+              color-mix(in srgb, var(--paper) 88%, transparent) 62%, transparent 100%); }
 .veil-left { position: absolute; top: 0; bottom: 0; left: 0; width: var(--w, 1100px);
   background: linear-gradient(to right, color-mix(in srgb, var(--paper) 94%, transparent) 0%,
               color-mix(in srgb, var(--paper) 86%, transparent) 70%, transparent 100%); }
@@ -56,10 +64,10 @@ body {
 .screen {
   position: absolute; overflow: hidden; border-radius: var(--r, 44px); background: var(--ivory);
   box-shadow:
-    0 1px 0 color-mix(in srgb, var(--ink) 10%, transparent),
+    0 1px 0 color-mix(in srgb, var(--shade, var(--ink)) 10%, transparent),
     0 0 0 1.5px color-mix(in srgb, var(--ink) 9%, transparent),
-    0 18px 30px -12px color-mix(in srgb, var(--ink) 28%, transparent),
-    0 60px 90px -40px color-mix(in srgb, var(--ink) 34%, transparent);
+    0 18px 30px -12px color-mix(in srgb, var(--shade, var(--ink)) 28%, transparent),
+    0 60px 90px -40px color-mix(in srgb, var(--shade, var(--ink)) 34%, transparent);
 }
 .screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .label { position: absolute; text-align: center; }
