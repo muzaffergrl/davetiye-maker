@@ -1090,14 +1090,16 @@ function ReplySheet({
               const key = `answer:${q.id}`;
               const value = d.answers[q.id] ?? '';
               const onChange = (v: string) => (set({ answers: { ...d.answers, [q.id]: v } }), clear(key));
-              const options = q.type === 'choice' ? [...(q.options ?? [])] : [];
-              if (q.type === 'choice' && value && !options.some((o) => norm(o) === norm(value))) options.push(value);
+              // G128: a yes / no question is a choice of Yes and No here too; long / number answers are text boxes.
+              const picks = q.type === 'choice' || q.type === 'yesno';
+              const options = q.type === 'choice' ? [...(q.options ?? [])] : q.type === 'yesno' ? ['Yes', 'No'] : [];
+              if (picks && value && !options.some((o) => norm(o) === norm(value))) options.push(value);
               return (
                 <div key={q.id} className={styles.field}>
                   <label htmlFor={fieldDomId(key)} className={styles.label}>
                     {q.label} <span className={styles.optional}>(optional)</span>
                   </label>
-                  {q.type === 'choice' ? (
+                  {picks ? (
                     <select
                       id={fieldDomId(key)}
                       className={styles.select}
@@ -1117,8 +1119,9 @@ function ReplySheet({
                     <textarea
                       id={fieldDomId(key)}
                       className={styles.textarea}
-                      rows={2}
-                      maxLength={300}
+                      rows={q.type === 'long' ? 4 : q.type === 'number' ? 1 : 2}
+                      maxLength={q.type === 'long' ? 1000 : q.type === 'number' ? 4 : 300}
+                      inputMode={q.type === 'number' ? 'numeric' : undefined}
                       value={value}
                       aria-invalid={Boolean(errors[key]) || undefined}
                       aria-describedby={describe(key)}

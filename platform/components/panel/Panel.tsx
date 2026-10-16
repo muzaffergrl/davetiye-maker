@@ -859,7 +859,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       case 'faq':
         return <FaqFields />;
       case 'rsvp':
-        return <RsvpFields onOpenGuests={() => go({ view: 'guests' })} />;
+        return <RsvpFields onOpenGuests={() => go({ view: 'guests' })} copy={theme.copy} />;
       case 'photos':
         return <PhotoSlots intro />;
       case 'thankyou':

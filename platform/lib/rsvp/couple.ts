@@ -18,6 +18,7 @@ import { themeMaxGuests } from './config.ts';
 import { rsvpWindow, type RsvpWindow } from './deadline.ts';
 import { replyPeople, rsvpInsights, type RsvpInsights } from './insights.ts';
 import { formQuestions, parseCoupleReply, type RsvpField } from './validate.ts';
+import { answerColumns, sourceText } from './table.ts';
 
 export interface RsvpCounts {
   /** Number of replies (held ones not included). */
@@ -223,24 +224,6 @@ export interface CsvOptions {
   questions?: ReadonlyArray<{ id: string; label: string }>;
 }
 
-/** Answer columns: current questions in order, then removed ones in the order they first appear. */
-function answerColumns(list: readonly RsvpRecord[], questions: CsvOptions['questions'] = []): Array<{ id: string; header: string }> {
-  const columns = questions.map((q) => ({ id: q.id, header: q.label.trim() || q.id }));
-  const known = new Set(columns.map((c) => c.id));
-  const removed = new Map<string, string>();
-  for (const r of list) {
-    for (const a of r.answers ?? []) if (!known.has(a.id)) removed.set(a.id, a.question || a.id);
-  }
-  for (const [id, header] of removed) columns.push({ id, header });
-  return columns;
-}
-
-/** Where a reply came from, in the CSV's words (G069). */
-function sourceText(r: RsvpRecord): string {
-  if (r.source === 'couple') return 'Added by you';
-  return r.editedAt ? 'Website, edited by you' : 'Website';
-}
-
 /** CSV header (G069): the person first, then the reply they belong to. */
 export const CSV_COLUMNS = ['Name', 'Party of', 'Attending', 'Party size', 'Email', 'Submitted', 'Source', 'Message'] as const;
 
@@ -255,7 +238,9 @@ export function rsvpCsv(list: readonly RsvpRecord[], opts: CsvOptions = {}): str
   const tz = opts.timeZone && isValidTimeZone(opts.timeZone) ? opts.timeZone : 'UTC';
   const locale = opts.locale ?? 'en-US';
   const sorted = list.filter((r) => !r.held).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-  const columns = answerColumns(sorted, opts.questions);
+  // G128: the same answer columns as the Excel file and the Google Sheet (lib/rsvp/table.ts): current questions by their
+  // text, then answers to removed questions headed "<question> (removed)".
+  const columns = answerColumns(sorted, (opts.questions ?? []).map((q) => ({ id: q.id, label: q.label, type: 'text' as const })));
   const header = CSV_COLUMNS.map((c) => (c === 'Submitted' ? `Submitted (${tz})` : c));
   const rows: unknown[][] = [[...header, ...columns.map((c) => c.header)]];
   for (const r of sorted) {
