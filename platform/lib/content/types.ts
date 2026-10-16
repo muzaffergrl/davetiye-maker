@@ -97,6 +97,8 @@ export interface ContentRecord {
   faq?: FaqItem[];
   /** After the wedding (G075): thank-you mode settings. */
   thank_you?: ThankYou;
+  /** Sound (G126): story music ('off', 'custom' = music_file, or a track id of lib/audio/catalog.ts) and sound effects. */
+  audio?: { music?: string; music_file?: string | null; music_name?: string | null; effects?: boolean };
   /**
    * The couple's words for the design's fixed texts (G068): key → text; empty / null = the design's text. Keys, defaults
    * and the longest text each carries are in the theme's theme.json "copy" (lib/theme/copy.ts).
