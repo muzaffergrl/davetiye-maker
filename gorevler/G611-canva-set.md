@@ -2,7 +2,7 @@
 id: G611
 baslik: Tasarım 11 Boho Pampas Terracotta — Canva website + PDF + story/kare
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 4
 bagimli: [G311, G411, G511, G021, G023]
@@ -29,3 +29,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — Canva website + PDF + story/kare seti; teslim platformda (K24) → G411

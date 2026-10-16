@@ -2,7 +2,7 @@
 id: GV02B
 baslik: Video pilotu · Tasarım 02 — GPT kliplerini Canva'da master kopyasına yerleştir (hibrit)
 rol: claude-tarayici
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 1
 bagimli: [GV02A]
@@ -34,3 +34,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-09 İPTAL (kullanıcı kararı K19): GPT video aracı yok, Higgsfield kullanılmayacak; animasyon Canva-yerel (GA02). Alınmaz.
+- 2026-10-16 iptal: K22/K24 — GPT klipleriyle Canva video hibriti (K19 ile zaten iptal notu vardı); video yok

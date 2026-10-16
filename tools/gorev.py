@@ -2,14 +2,19 @@
 
 Protokol: gorevler/README.md. Bağımlılık yok (yalnız standart kütüphane).
 
-  python3 tools/gorev.py liste [--rol ROL]
+  python3 tools/gorev.py liste [--rol ROL] [--hepsi]   # --hepsi: iptal edilenleri de göster
   python3 tools/gorev.py siradaki --rol ROL
   python3 tools/gorev.py al GXXX --ajan AD
   python3 tools/gorev.py bitir GXXX            # durum: inceleme
   python3 tools/gorev.py onayla GXXX           # durum: bitti (entegratör)
   python3 tools/gorev.py blokaj GXXX "neden"
+  python3 tools/gorev.py iptal GXXX "neden"    # durum: iptal (entegratör; anlamını yitirmiş görev)
   python3 tools/gorev.py kontrol
   python3 tools/gorev.py pano                  # gorevler/PANO.md'yi yeniden üretir
+
+İptal edilmiş bir dosya, aynı ID'yi taşıyan etkin bir görevi engellemez (etkin olan geçerlidir).
+Aynı ID'de belirli bir dosyayı hedeflemek için ID yerine dosya adı (uzantısız) verilebilir:
+`python3 tools/gorev.py iptal G101-kaynak "neden"`.
 """
 import argparse
 import re
@@ -20,7 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DIR = ROOT / "gorevler"
 ROLLER = {"claude-canva", "claude-tarayici", "gpt-gorsel", "claude-kod", "claude-metin", "claude-qa"}
-DURUMLAR = ["hazir", "alindi", "inceleme", "blokaj", "bitti"]
+DURUMLAR = ["hazir", "alindi", "inceleme", "blokaj", "bitti", "iptal"]
 ALANLAR = ["id", "baslik", "rol", "durum", "alan", "oncelik", "bagimli", "yazar"]
 
 
@@ -54,19 +59,29 @@ def dump(meta):
     meta["_path"].write_text("\n".join(lines) + "\n" + meta["_body"])
 
 
-TEKRAR = {}  # aynı id'yi taşıyan birden çok dosya: id -> [dosya adları]
+TEKRAR = {}  # aynı id'yi taşıyan birden çok etkin (iptal olmayan) dosya: id -> [dosya adları]
+TUMU = []    # bütün görev dosyaları (iptal ile gölgelenenler dahil) — sayımlar için
 
 
 def load():
-    tasks = {}
+    gruplar = {}
     for m in (parse(p) for p in sorted(DIR.glob("G*.md"))):
-        if m["id"] in tasks:
-            TEKRAR.setdefault(m["id"], [tasks[m["id"]]["_path"].name]).append(m["_path"].name)
-        tasks[m["id"]] = m
+        TUMU.append(m)
+        gruplar.setdefault(m["id"], []).append(m)
+    tasks = {}
+    for tid, liste in gruplar.items():
+        etkin = [m for m in liste if m.get("durum") != "iptal"]
+        if len(etkin) > 1:
+            TEKRAR[tid] = [m["_path"].name for m in etkin]
+        # etkin görev varsa o geçerlidir; iptal edilmiş eş dosyalar onu gölgelemez
+        tasks[tid] = (etkin or liste)[-1]
     return tasks
 
 
 def get(tasks, tid):
+    dosya = DIR / f"{tid}.md"
+    if tid not in tasks and dosya.exists():  # dosya adıyla hedefleme (aynı id'li dosyalar için)
+        return parse(dosya)
     if tid not in tasks:
         sys.exit(f"görev yok: {tid}")
     if tid in TEKRAR:
@@ -86,12 +101,17 @@ def log(t, msg):
 
 
 def cmd_liste(a, tasks):
-    rows = [t for t in tasks.values() if not a.rol or t["rol"] == a.rol]
+    rows = [t for t in TUMU if not a.rol or t["rol"] == a.rol]
+    gizli = 0 if a.hepsi else sum(1 for t in rows if t["durum"] == "iptal")
+    if not a.hepsi:
+        rows = [t for t in rows if t["durum"] != "iptal"]
     rows.sort(key=lambda t: (DURUMLAR.index(t["durum"]), int(t.get("oncelik") or 9), t["id"]))
     for t in rows:
         hazir = "" if t["durum"] != "hazir" or deps_done(t, tasks) else " (bağımlılık bekliyor)"
         alan = f" · {t['alan']}" if t.get("alan") else ""
         print(f"{t['id']}  {t['durum']:<8} {t['rol']:<12} p{t.get('oncelik','-')}  {t['baslik']}{alan}{hazir}")
+    if gizli:
+        print(f"(iptal edilmiş {gizli} görev gizlendi; göstermek için --hepsi)")
 
 
 def cmd_siradaki(a, tasks):
@@ -118,6 +138,8 @@ def cmd_al(a, tasks):
 
 def set_durum(tasks, tid, durum, msg):
     t = get(tasks, tid)
+    if durum == "iptal" and t["durum"] == "bitti":
+        sys.exit(f"{t['id']} bitti; bitmiş görev iptal edilmez")
     t["durum"] = durum
     log(t, msg)
     dump(t)
@@ -129,6 +151,12 @@ def cmd_kontrol(a, tasks):
     for tid, adlar in TEKRAR.items():
         print(f"{tid}: aynı id birden çok dosyada: {', '.join(adlar)}"); hata += 1
     for t in tasks.values():
+        if t["durum"] in ("iptal", "bitti"):
+            continue
+        iptaller = [d for d in t.get("bagimli", []) if tasks.get(d, {}).get("durum") == "iptal"]
+        if iptaller:
+            print(f"uyarı: {t['id']} iptal edilmiş göreve bağımlı: {', '.join(iptaller)}")
+    for t in TUMU:
         for k in ALANLAR:
             if k not in t:
                 print(f"{t['id']}: '{k}' alanı eksik"); hata += 1
@@ -158,11 +186,15 @@ def cmd_pano(a, tasks):
            "`python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk",
            "çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.", ""]
     say = {d: 0 for d in DURUMLAR}
-    for t in tasks.values():
+    for t in TUMU:
         say[t["durum"]] += 1
-    out.append("Özet: " + " · ".join(f"{d} {n}" for d, n in say.items()) + f" · toplam {len(tasks)}")
+    out.append("Özet: " + " · ".join(f"{d} {n}" for d, n in say.items()) + f" · toplam {len(TUMU)}")
+    out.append("")
+    out.append("İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.")
     for rol in roller:
-        rt = sorted((t for t in tasks.values() if t["rol"] == rol), key=lambda t: (int(t.get("oncelik") or 9), t["id"]))
+        iptal = sum(1 for t in TUMU if t["rol"] == rol and t["durum"] == "iptal")
+        rt = sorted((t for t in tasks.values() if t["rol"] == rol and t["durum"] != "iptal"),
+                    key=lambda t: (int(t.get("oncelik") or 9), t["id"]))
         alinabilir = [t for t in rt if t["durum"] == "hazir" and deps_done(t, tasks)]
         calisan = [t for t in rt if t["durum"] in ("alindi", "inceleme", "blokaj")]
         bekleyen = [t for t in rt if t["durum"] == "hazir" and not deps_done(t, tasks)]
@@ -171,7 +203,7 @@ def cmd_pano(a, tasks):
         out += [f"- `{t['id']}` p{t.get('oncelik')} — {t['baslik']} → `{t['_path'].relative_to(ROOT)}`" for t in alinabilir] or ["- (yok)"]
         out += ["", f"**Üzerinde çalışılan / incelemede / blokaj ({len(calisan)})**", ""]
         out += [f"- `{t['id']}` {t['durum']} · {t.get('alan') or '-'} — {t['baslik']}" for t in calisan] or ["- (yok)"]
-        out += ["", f"Bağımlılık bekleyen: {len(bekleyen)} · Biten: {len(biten)}"]
+        out += ["", f"Bağımlılık bekleyen: {len(bekleyen)} · Biten: {len(biten)} · İptal: {iptal}"]
     (DIR / "PANO.md").write_text("\n".join(out) + "\n")
     print("gorevler/PANO.md yazıldı")
 
@@ -179,12 +211,13 @@ def cmd_pano(a, tasks):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    p = sub.add_parser("liste"); p.add_argument("--rol")
+    p = sub.add_parser("liste"); p.add_argument("--rol"); p.add_argument("--hepsi", action="store_true")
     p = sub.add_parser("siradaki"); p.add_argument("--rol", required=True)
     p = sub.add_parser("al"); p.add_argument("id"); p.add_argument("--ajan", required=True)
     p = sub.add_parser("bitir"); p.add_argument("id")
     p = sub.add_parser("onayla"); p.add_argument("id")
     p = sub.add_parser("blokaj"); p.add_argument("id"); p.add_argument("neden")
+    p = sub.add_parser("iptal"); p.add_argument("id"); p.add_argument("neden")
     sub.add_parser("kontrol")
     sub.add_parser("pano")
     a = ap.parse_args()
@@ -201,6 +234,8 @@ def main():
         set_durum(tasks, a.id, "bitti", "entegratör onayladı")
     elif a.cmd == "blokaj":
         set_durum(tasks, a.id, "blokaj", f"blokaj: {a.neden}")
+    elif a.cmd == "iptal":
+        set_durum(tasks, a.id, "iptal", f"iptal: {a.neden}")
     elif a.cmd == "kontrol":
         cmd_kontrol(a, tasks)
     elif a.cmd == "pano":

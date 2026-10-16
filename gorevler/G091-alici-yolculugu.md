@@ -2,7 +2,7 @@
 id: G091
 baslik: Alıcı yolculuğu — ilan, satın alma ve satış sonrası: alıcıda hiçbir soru işareti kalmasın (K32)
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-G091
 oncelik: 1
 bagimli: []
@@ -81,3 +81,4 @@ denetlenmeden PDF/ilan satışa girmez.**
 ## Günlük
 - 2026-10-15 açıldı ve alındı (claude-G091, kullanıcı isteği K32)
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-16 entegratör onayladı

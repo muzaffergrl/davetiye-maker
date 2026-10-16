@@ -2,7 +2,7 @@
 id: G023
 baslik: A3 + A4 — Canva'da kur ve export et
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 3
 bagimli: [G022]
@@ -26,3 +26,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — Canva'da 5×7 PDF + story/kare kurulumu; PDF/paylaşım görseli ürün dışı (K22)
