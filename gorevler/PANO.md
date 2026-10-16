@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 2 · alindi 0 · inceleme 0 · blokaj 88 · bitti 131 · iptal 190 · toplam 411
+Özet: hazir 3 · alindi 0 · inceleme 4 · blokaj 88 · bitti 131 · iptal 190 · toplam 416
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -76,9 +76,11 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - `G089` p2 — React Bits Pro ile cila — satış sitesi, panel ve düğün sitelerini "yaşayan" hâle getir (K31) → `gorevler/G089-react-bits-cila.md`
 
-**Üzerinde çalışılan / incelemede / blokaj (22)**
+**Üzerinde çalışılan / incelemede / blokaj (24)**
 
+- `G121` inceleme · claude-G121 — Panel, /start, admin ve satış sitesi — Refero turunun kalan P2'leri (docs/18) ve alıcı yolculuğu §6 kalanları (docs/19)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
+- `G098` inceleme · claude-G098 — Tema rötuşları — GM07 parçalarını 16/17/20'ye takma, theme-check yatay taşma açığı, 16 home fold, 17 başlık "TOGETꞪER", 12 cüzdan metinleri
 - `G040` blokaj · - — tools/make_variant.py — varyant hattı
 - `GP401` blokaj · - — Aşama 2 · Tasarım 01 — 5 palet ilan kitleri
 - `GP402` blokaj · - — Aşama 2 · Tasarım 02 — 5 palet ilan kitleri
@@ -109,8 +111,10 @@ Bağımlılık bekleyen: 0 · Biten: 68 · İptal: 60
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (1)**
+**Üzerinde çalışılan / incelemede / blokaj (3)**
 
+- `G122` inceleme · claude-G122 — START HERE rehberi 20 tasarım (docs/19 Ek A, G100 paneli) + 01–05 ilan durum düzeltmeleri + docs/20 kapsayıcı metin
+- `G123` inceleme · claude-G123 — 06–20 Etsy ilan metinleri (listing_v3.md) ve yükleme verisi (etsy_upload.json)
 - `G050` blokaj · - — Etkinlik türü metin setleri (Save the Date, Engagement, Bridal Shower)
 
 Bağımlılık bekleyen: 0 · Biten: 6 · İptal: 20
@@ -129,9 +133,9 @@ Bağımlılık bekleyen: 0 · Biten: 0 · İptal: 20
 
 ## gpt-gorsel
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `GM08` p1 — BKE Studio sembolünde K yerine S — 5 GPT logo dosyası (sembol, favicon, yatay, dikey, dükkân ikonu) → `gorevler/GM08-logo-s.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (25)**
 

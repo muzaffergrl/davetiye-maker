@@ -160,3 +160,52 @@ Kontrol: yazı yok; telefonda marka logosu yok; sağ %45 boş ve sakin; önemli 
 The final BKE Studio brand board for the chosen direction (reference image), refined: the horizontal logo large at the top left; below it the symbol in a circular avatar and at favicon size; a row of five large, perfectly flat square color swatches with no texture and no labels, in this order from left to right: anchor, accent, paper neutral, near-black, secondary; a strip of the brand pattern; the wax seal badge. Warm paper background, generous white space. The only text anywhere is "BKE Studio": no labels, no color codes, no other words.
 ```
 Kontrol: harf harf "BKE Studio"; renk kartları düz, etiketsiz ve doğru sırada; B2 dosyalarıyla aynı sembol ve renkler.
+
+---
+
+## B3 — Sembolde K yerine S (GM08, kullanıcı isteği 2026-10-16)
+
+Kullanıcı: "BKE Studio logosunu değiştireceğiz. Logoda K yerine S harfi olacak." Yalnız **sembol** değişir; "BKE Studio" yazısı,
+renkler ve "The Reveal" fikri (harfin bir ucu zarf kapağı gibi kalkar, arkasından altın şerit görünür) aynı kalır.
+**Her prompt'ta referans olarak iki görsel ver:** `brand/assets/gpt/final/logo_horizontal.png` ve `brand/assets/gpt/final/monogram.png`.
+Eski dosyaların üstüne yazma; yeni dosyalar `brand/assets/gpt/final_s/` altına. Bitince commit + push: `GM08: S sembolü`.
+
+### B3.1 Sembol (S)
+**Kaydet:** `brand/assets/gpt/final_s/monogram_s.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Redraw the BKE Studio symbol from the reference images with one change: the letter inside the square is a capital S instead of a K. Keep everything else identical to the reference symbol: the same solid square in the deep aubergine anchor color (#2B1526), the same proportions and margins, a bold geometric capital S cut out of the square as clean negative space (white in the reference), the same heavy stroke weight as the reference K. Keep the "Reveal" idea: the upper-right end of the S lifts away like an envelope flap opening, with a thin straight cut line, revealing a narrow wedge of flat champagne-gold (#D0AE6A) behind it, at the same angle and size as the gold wedge in the reference. The S must read instantly as an S at small sizes. Centered, filling about 70% of the canvas. No other letters and no text. Flat vector style: crisp edges; no gradient, texture, shadow, glow or 3D. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: harf açıkça **S**; kare, oran ve kalınlık eski sembolle aynı; altın kama var ve düz renk; gerçek alfa; başka yazı yok.
+
+### B3.2 Küçük boy sembol (favicon)
+**Kaydet:** `brand/assets/gpt/final_s/monogram_small_s.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+A simplified version of the new S symbol (use the B3.1 result as the main reference), designed to read at 16 to 32 pixels as a browser favicon: the same square and the same capital S cut out, but thicker strokes, a wider flap gap and a larger gold wedge, no thin hairlines and no small gaps. Anchor color #2B1526 and flat gold #D0AE6A only. Centered, filling about 80% of the canvas. No other text. Flat vector style: crisp edges; no gradient, texture, shadow, glow or 3D. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: 32 px'e küçültünce S okunuyor; ince çizgi yok; iki düz renk; gerçek alfa.
+
+### B3.3 Yatay logo (S)
+**Kaydet:** `brand/assets/gpt/final_s/logo_horizontal_s.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The BKE Studio horizontal logo lockup exactly as in the reference logo_horizontal image, with only the symbol on the left replaced by the new S symbol (B3.1 result): the S symbol on the left, then a heavy, tightly spaced "BKE" and a light, widely spaced "Studio" on one line, vertically centered, the same spacing and proportions as the reference, the whole lockup about 85% of the canvas width. The wordmark text stays exactly "BKE Studio", spelled B, K, E, space, S, t, u, d, i, o. Colors: anchor #2B1526 and flat gold #D0AE6A only. No other text. Flat vector style: crisp edges; no gradient, texture, shadow, glow or 3D. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: sembolde S; yazı harf harf "BKE Studio" (yazıdaki K duruyor); referansla aynı yerleşim; iki düz renk; gerçek alfa.
+
+### B3.4 Dikey logo (S)
+**Kaydet:** `brand/assets/gpt/final_s/logo_stacked_s.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+The BKE Studio stacked logo lockup with the new S symbol (B3.1 result) centered on top and the wordmark "BKE Studio" (heavy "BKE", light widely spaced "Studio", exactly as in the reference) centered below it, balanced spacing, the whole lockup about 75% of the canvas. Colors: anchor #2B1526 and flat gold #D0AE6A only. No other text. Flat vector style: crisp edges; no gradient, texture, shadow, glow or 3D. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+Kontrol: sembol üstte ortada ve S; yazı harf harf "BKE Studio"; iki düz renk; gerçek alfa.
+
+### B3.5 Dükkân / profil ikonu (S)
+**Kaydet:** `brand/assets/gpt/final_s/shop_icon_s.png` · 1024×1024
+
+```
+A shop and social profile icon for BKE Studio: the new S symbol (B3.1 result) in the paper-neutral color (#EDE5D7) with its flat gold wedge (#D0AE6A), centered on a solid flat square of the anchor color (#2B1526). Everything stays inside a central circle whose diameter is 70% of the canvas, because platforms crop the icon to a circle. Flat vector style: crisp edges; no gradient, texture, shadow, glow or 3D; no text.
+```
+Kontrol: daire kırpımında sembol tam; S okunuyor; tek düz zemin; yazı yok.
