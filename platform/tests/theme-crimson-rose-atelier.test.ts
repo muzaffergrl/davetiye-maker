@@ -1,3 +1,4 @@
+import {Script} from 'node:vm';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';
@@ -63,4 +64,16 @@ test('Every demo photo is a bundled theme asset, with no external photo dependen
  for(const url of [media.hero_portrait,...(media.memory_photos??[]),media.venue_image]){
   assert.ok(url);assert.ok(url.startsWith('/themes/'+id+'/img/'));const file=path.join(theme.loaded.dir,url.split('/img/')[1]?('img/'+url.split('/img/')[1]):'');assert.ok((await stat(file)).size>0);
  }
+});
+
+test('RSVP demo keeps the shared handler external and deferred, with preview state and field errors',async()=>{
+ const response=await handleDemoPage(new Request('https://preview.example/start/demo/'+id+'/rsvp'),id,'rsvp');
+ assert.equal(response.status,200);const $=cheerio.load(await response.text());
+ const handler=$('script[src="/rsvp/form.js"]');assert.equal(handler.length,1);assert.ok(handler.is('[defer]'));
+ assert.equal($('form[data-rsvp-form][method="post"]').length,1);
+ assert.equal($('[data-rsvp-state="preview"][hidden]').length,1);
+ for(const field of ['name','email','attending','guests','message'])assert.equal($('[data-rsvp-error-for="'+field+'"]').length,1,field);
+ const data=JSON.parse($('#site-data').text());assert.equal(data.preview,true);assert.match(data.slug,/^start\/demo\//);
+ const source=await readFile(path.join(process.cwd(),'public/rsvp/form.js'),'utf8');assert.doesNotThrow(()=>new Script(source));
+ assert.equal($('script:not([src])').toArray().some(el=>$(el).text().includes('function onSubmit(e)')),false,'handler must not be inserted unescaped into HTML');
 });
