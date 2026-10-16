@@ -81,6 +81,31 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      {/* G121 (docs/18 §5 P2, mobile order): the designs right after the hero — hero preview → designs → what they do
+          (opening, pages, editing, RSVP) → how it works → price → questions → try it. */}
+      <Section labelledBy="designs">
+        <Container>
+          <Eyebrow>Designs</Eyebrow>
+          <h2 id="designs" className={s.h2}>
+            Choose the design your guests will open
+          </h2>
+          <div className={s.cardGrid}>
+            {featured.map((d) => (
+              <DesignCard key={d.id} design={d} placement="home-strip" />
+            ))}
+          </div>
+          {featured.length < designs.length ? (
+            <div className={s.seeAll}>
+              <a className={`${s.btn} ${s.btnSecondary}`} href="/designs" data-see-all>
+                See all {designs.length} designs
+              </a>
+            </div>
+          ) : (
+            <TextLink href="/designs">See all designs</TextLink>
+          )}
+        </Container>
+      </Section>
+
       <Section labelledBy="what-is">
         <Container narrow>
           <h2 id="what-is" className={s.h2}>
@@ -260,29 +285,6 @@ export default function HomePage() {
             ))}
           </ol>
           <TextLink href="/how-it-works">See every step</TextLink>
-        </Container>
-      </Section>
-
-      <Section labelledBy="designs">
-        <Container>
-          <Eyebrow>Designs</Eyebrow>
-          <h2 id="designs" className={s.h2}>
-            Choose the design your guests will open
-          </h2>
-          <div className={s.cardGrid}>
-            {featured.map((d) => (
-              <DesignCard key={d.id} design={d} placement="home-strip" />
-            ))}
-          </div>
-          {featured.length < designs.length ? (
-            <div className={s.seeAll}>
-              <a className={`${s.btn} ${s.btnSecondary}`} href="/designs" data-see-all>
-                See all {designs.length} designs
-              </a>
-            </div>
-          ) : (
-            <TextLink href="/designs">See all designs</TextLink>
-          )}
         </Container>
       </Section>
 

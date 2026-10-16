@@ -620,9 +620,19 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const previewChanged = (id: PageId) => {
     const page = previewPageFor(id, null);
     setDialog(null);
-    setPreviewThanks(false);
-    setPreviewPage(visiblePages.includes(page) ? page : null);
-    setPreviewOpen(true);
+    // The sheet drops its own history entry when it closes (Sheet.tsx, deferred); the phone preview pushes its entry
+    // only after that — else that "back" would close the preview again at once.
+    let opened = false;
+    const open = () => {
+      if (opened) return;
+      opened = true;
+      window.removeEventListener('popstate', open);
+      setPreviewThanks(false);
+      setPreviewPage(visiblePages.includes(page) ? page : null);
+      setPreviewOpen(true);
+    };
+    window.addEventListener('popstate', open);
+    window.setTimeout(open, 400);
   };
 
   const sheets = (

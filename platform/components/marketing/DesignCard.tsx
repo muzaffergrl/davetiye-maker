@@ -10,14 +10,25 @@ import { designScreen } from './media.ts';
 import s from './marketing.module.css';
 import { Screen } from './ui.tsx';
 
-export function DesignCard({ design, placement, headingLevel = 3 }: { design: Design; placement: string; headingLevel?: 2 | 3 }) {
+export function DesignCard({
+  design,
+  placement,
+  headingLevel = 3,
+  styles,
+}: {
+  design: Design;
+  placement: string;
+  headingLevel?: 2 | 3;
+  /** G121: the design's styles for the /designs filter (data-styles; CSS hides the cards of other styles). */
+  styles?: readonly string[];
+}) {
   const env = designScreen(design.id, 'envelope');
   const home = designScreen(design.id, 'home');
   const H = headingLevel === 2 ? 'h2' : 'h3';
   const price = realPrice(design.price);
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
-    <article className={s.designCard}>
+    <article className={s.designCard} data-styles={styles?.length ? styles.join(' ') : undefined}>
       <a href={`/designs/${design.id}`} className={s.designCardMedia} aria-hidden tabIndex={-1}>
         {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
         {home ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}

@@ -1661,6 +1661,96 @@
   justify-content: center;
   margin-top: 24px;
 }
+/* G121 (docs/14 §6.2, docs/18 §5 P2): /designs style filter — radio chips, CSS only. Phones: one sideways-scrolling row
+   (like the hero chips); wide screens: wrapped and centered. A chosen style hides the other cards; the grid then fills
+   plainly (the "no lone card" / centered-row rules above count every card, hidden ones too). */
+.styleFilter {
+  display: flex;
+  gap: 8px;
+  margin: 8px calc(-1 * var(--gutter, 16px)) 0;
+  padding: 6px var(--gutter, 16px);
+  border: 0;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.styleFilter::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 900px) {
+  .styleFilter {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 8px 0 0;
+    padding: 6px 0;
+    overflow: visible;
+  }
+}
+.filterItem {
+  position: relative;
+  flex: none;
+}
+.filterInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--gold);
+  background: transparent;
+  color: var(--ink);
+  font: 500 15px var(--sans);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.filterCount {
+  color: var(--muted);
+  font-size: 13px;
+}
+.filterInput:checked + .filterChip {
+  background: var(--anchor);
+  border-color: var(--anchor);
+  color: var(--paper-light);
+}
+.filterInput:checked + .filterChip .filterCount {
+  color: inherit;
+}
+.filterInput:focus-visible + .filterChip {
+  outline: 3px solid var(--anchor);
+  outline-offset: 2px;
+}
+.gallery:has(.filterInput[value='floral']:checked) [data-styles]:not([data-styles~='floral']),
+.gallery:has(.filterInput[value='classic']:checked) [data-styles]:not([data-styles~='classic']),
+.gallery:has(.filterInput[value='rustic']:checked) [data-styles]:not([data-styles~='rustic']),
+.gallery:has(.filterInput[value='destination']:checked) [data-styles]:not([data-styles~='destination']),
+.gallery:has(.filterInput[value='seasonal']:checked) [data-styles]:not([data-styles~='seasonal']),
+.gallery:has(.filterInput[value='storybook']:checked) [data-styles]:not([data-styles~='storybook']) {
+  display: none;
+}
+/* A filtered grid: no centering spans (they count hidden cards); every card takes its plain place. */
+.gallery:has(.filterInput:not([value='all']):checked) .cardGrid > :nth-child(n):nth-last-child(n) {
+  grid-column: auto;
+  justify-self: stretch;
+  width: auto;
+}
+@media (min-width: 900px) {
+  .gallery:has(.filterInput:not([value='all']):checked) .cardGrid > :nth-child(n):nth-last-child(n) {
+    grid-column: span 2;
+  }
+}
 .designCard {
   container-type: inline-size;
   display: flex;

@@ -323,13 +323,13 @@ export function Setup({
       {/* G121 (docs/18 §1 P2): "Skip for now" sits beside the main button with the same weight (was a small link above it);
           on the publish step one sentence says what publishing does (Notion). */}
       <footer className={cx(styles.setupBar, styles.setupBarPublish)}>
-        {step === SETUP_STEP_COUNT ? (
-          <p className={styles.publishExplain} data-publish-explain>
-            Guests can open your website with the link. You can keep editing after.
-          </p>
-        ) : null}
         <div className={styles.setupBarRow}>
           <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
+          {step === SETUP_STEP_COUNT ? (
+            <p className={styles.publishExplain} data-publish-explain>
+              Guests can open your website with the link. You can keep editing after.
+            </p>
+          ) : null}
           <div className={styles.setupButtons}>
             {step > 1 ? (
               <Button icon={ArrowLeft} onClick={() => onStep(step - 1)} aria-label="Back" data-setup-back>

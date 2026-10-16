@@ -211,8 +211,8 @@ try {
     await page.goForward();
     await page.waitForSelector('[data-setup="2"]');
     check('setup 2: photo counter "0 of 5 photos"', (await page.locator('[data-photo-count]').innerText()).includes('0 of 5 photos'));
-    const morePhotos = page.locator('[data-disclosure="more-photos"] button[aria-expanded]');
-    check('setup 2 (K29): one photo asked for (the portrait); the 4 others folded under "More photos", optional', (await page.locator('[data-setup="2"] [data-photo-slot]:visible').count()) === 1 && (await morePhotos.getAttribute('aria-expanded')) === 'false' && (await morePhotos.innerText()).includes('Optional'));
+    // G121 (docs/18 §1 P2): only the portrait; the 4 other places are named and left to Edit → Photos (no "More photos" fold).
+    check('setup 2 (K29, G121): one photo asked for (the portrait); the 4 others under Edit → Photos, no "More photos" in the setup', (await page.locator('[data-setup="2"] [data-photo-slot]').count()) === 1 && (await page.locator('[data-disclosure="more-photos"]').count()) === 0 && (await page.locator('[data-more-photos-later]').innerText()).includes('4 more photo places'));
     await shot(page, '04_setup2_photos');
     await page.setInputFiles('input[data-slot="hero_portrait"]', PHOTO);
     await page.waitForSelector('[data-testid="cropper"] img');
@@ -367,7 +367,13 @@ try {
     await page.waitForSelector('[data-testid="live"]', { timeout: 15_000 });
     await pause(1200);
     await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();
-    check('publish changes: the Live badge replaces the Publish button', (await page.locator('[data-live-badge]').count()) === 1);
+    // G121 (docs/18 §3 P2): on Home the status card is the one "Live" label; the bar shows it on the other views.
+    check('publish changes: no Publish left; Home\'s status card says Live (not repeated in the bar)', (await page.locator('[data-publish]').count()) === 0 && (await page.locator('[data-live-badge]').count()) === 0 && (await page.locator('[data-status-card]').innerText()).includes('Live'));
+    await page.click('[data-nav="edit"]');
+    await page.waitForSelector('[data-live-badge]');
+    check('publish changes: the Live badge replaces the Publish button (bar, outside Home)', (await page.locator('[data-live-badge]').count()) === 1);
+    await page.click('[data-nav="home"]');
+    await page.waitForSelector('[data-status-card]');
     const pub = await ctx.newPage();
     await pub.goto(PUBLIC);
     check('public page shows the new name', (await pub.locator('body').innerText()).includes('Sofia'));
@@ -549,11 +555,11 @@ try {
     // Share
     await page.click('[data-nav="share"]');
     await page.waitForSelector('[data-share-url]');
-    // K29: the link and the QR code first; the guest password and the private edit link fold away below.
+    // K29 + G121 (docs/18 §4 P2): the link first; the QR code, the guest password and the private edit link fold away below.
     const folds = await page.locator('[data-disclosure] button[aria-expanded]').evaluateAll((els: Element[]) =>
       els.map((e) => `${e.closest('[data-disclosure]')!.getAttribute('data-disclosure')}:${e.getAttribute('aria-expanded')}`),
     );
-    check('share (K29): link + QR on top; guest password and edit link folded', (await page.locator('[data-share-qr] svg[role="img"]').count()) === 1 && folds.join(',') === 'password:false,edit-link:false', folds.join(','));
+    check('share (K29, G121): link on top; QR code, guest password and edit link folded', (await page.locator('[data-share-qr] svg[role="img"]').count()) === 1 && folds.join(',') === 'qr:false,password:false,edit-link:false', folds.join(','));
     await page.click('[data-disclosure="edit-link"] button[aria-expanded]');
     await page.waitForSelector('[data-copy-edit-link]');
     const share = await page.locator('main').innerText();

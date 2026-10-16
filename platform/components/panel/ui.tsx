@@ -493,7 +493,9 @@ export function SaveIndicator({ state, message, onSaveNow, compact }: { state: S
   const inner = (
     <>
       {Icon ? <Icon size={18} strokeWidth={1.75} className={shown === 'saving' ? styles.spin : undefined} aria-hidden="true" /> : <span className={styles.pendingDot} aria-hidden="true" />}
-      <span className={cx(styles.saveText, compact && !flashing && styles.visuallyHiddenNarrow)}>{text}</span>
+      <span className={cx(styles.saveText, compact && !flashing && styles.visuallyHiddenNarrow)} data-save-text>
+        {text}
+      </span>
     </>
   );
   return (

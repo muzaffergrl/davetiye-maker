@@ -132,7 +132,7 @@ export function canvaComparison(cfg: MarketingConfig = MARKETING): Array<{ label
     { label: 'Account needed', canva: 'A Canva account', ours: 'None: you keep a private edit link' },
     { label: 'RSVP', canva: 'A separate form tool, set up by you', ours: 'Built in; replies and CSV in your panel' },
     { label: 'Your link', canva: "Canva's free site address (custom domain on a paid Canva plan)", ours: `${cfg.domain}/your-names` },
-    { label: 'Changing the design', canva: 'Full freedom to move and restyle everything', ours: 'The design stays as made; you change the content' },
+    { label: 'Changing the design', canva: 'Full freedom to move and restyle everything', ours: 'The design stays as made; you change the content and the wording' },
   ];
 }
 

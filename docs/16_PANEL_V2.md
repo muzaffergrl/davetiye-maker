@@ -827,3 +827,27 @@ Kurulum 1. adım yalnız iki ad + tarih/saat (hak notu tek satır + "Learn more"
 rozeti yerine sayfa başında "N fields still show sample text · Go to the first one" (örnek alan soluk/italik); Guests iki görünüm:
 **Guest list** (sayılar → arama → All · Coming · Not coming · New → liste) ve **Results** (`#guests/results`: kapanış günü, dağılım,
 soru başına sayı + yüzde, yiyecek/alerji notları). Ayrıntı ve ekranlar: `gorevler/G100-panel-sadelestirme.md`, `platform/previews/g100/`.
+
+## G121 (2026-10-16) — Refero P2'ler ve docs/19 §6 kalanları
+- **Kurulum:** 2. adım yalnız açılış fotoğrafı; öteki yerler "Your website has N more photo places. Add them any time under Edit →
+  Photos…" satırıyla Edit → Photos'a bırakıldı ("More photos" katlaması kurulumdan kalktı). "Skip for now" artık altta küçük link değil,
+  **Continue'nun yanında aynı ağırlıkta ikincil düğme** (telefonda Back ok, Skip ve Continue eşit). 3. adım: kayıt simgesinin yanında
+  tek cümle "Guests can open your website with the link. You can keep editing after." (adım yardımı "Check it once, then publish.").
+  `OrderPendingNote` sonuna "Reload this page to check." (docs/19 C3; süre `[ORDER CHECK TIME]` karar bekliyor).
+- **Home:** durum kartı sakin tek etiket + yanında doğrudan eylem ("Live" · Share; uzun eylem — "Continue setup · Step n of 3" — kendi
+  satırında), cümle 17 px; **çubuk Home'da "Live"ı tekrar etmez** (öteki görünümlerde eder). İsim başlığı küçüldü (34–54 → 28–40 px).
+  Yeni **Settings** kartı (değer satırları): Time zone → Day & place "More options" açık + alan odakta (yeni `PanelContext.jump`),
+  Date style → aynı yer, Name & date changes left ("3 (free until you publish)" / "2 of 3") → Help'in kural bölümü, Guest password
+  (On/Off) → Share.
+- **Şerit ve kayıt:** "Unpublished changes" şeridi yalnız taslak canlıdan gerçekten farklıyken (sunucunun bayrağı ya da panelin kendi
+  karşılaştırması); yalnız kaydın sürmesi şeridi getirmez, eski metne dönülünce şerit kendiliğinden kalkar. Otomatik kayıt bitince
+  "Saved" ~2,5 sn yazıyla (telefonda da) ve yeşil `CloudCheck` ile görünür, sonra sessiz bulut. **Review:** değişen her sayfanın yanında
+  göz düğmesi → o sayfanın önizlemesi (sheet kapanır; tarihçe girdisi sırasıyla).
+- **Share:** ilk ekranda link + Copy/Open/Share; QR "QR code for printed cards" adıyla **katlı** (şifre ve düzenleme linki gibi);
+  "Take the website offline" en altta tehlike görünümünde (değişmedi).
+- **Metinler:** Help "Can my partner edit too?" → "(Share → Your private edit link → Copy edit link)" (C1); Guests boş durumu sonuna
+  "New replies show here; we don’t send email notifications yet." (C6).
+- Bilinçli olarak yapılmayan: "Headings & labels on this page" → "Advanced: change headings & labels" adı (P2): bölüm zaten kapalı
+  açılır; ad START HERE rehberlerinde, docs/19 Ek A'da ve Review satırlarında ("Us · Headings & labels") geçtiği için değiştirilmedi —
+  karar koordinatörün. Ayrıntı: `gorevler/G121-panel-satis-kalanlar.md`, ekranlar `platform/previews/g121/`.
+

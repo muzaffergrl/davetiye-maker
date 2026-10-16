@@ -357,21 +357,25 @@ function StatusCard({
   }
   // G121 (docs/18 §3 P2, Notion/Monday): one calm status label with its direct action beside it (the bar does not repeat
   // "Live" on Home); a short sentence and, when live, the link under it. The progress card below stays the anchor.
+  // A short action ("Share", "Publish") sits beside the label; a long one ("Continue setup · Step 2 of 3") gets its own row.
+  const inline = action !== null && action.label.length <= 16;
+  const actionButton = action ? (
+    <Button variant={action.variant} icon={action.icon} block={!inline} onClick={action.run} className={inline ? styles.statusAction : undefined} data-status-action>
+      {action.label}
+    </Button>
+  ) : null;
   return (
     <section className={styles.status} aria-labelledby="status-title" data-status-card>
       <div className={styles.statusTop}>
         <Badge tone={badge.tone} icon={badge.icon}>
           {badge.text}
         </Badge>
-        {action ? (
-          <Button variant={action.variant} icon={action.icon} onClick={action.run} className={styles.statusAction} data-status-action>
-            {action.label}
-          </Button>
-        ) : null}
+        {inline ? actionButton : null}
       </div>
       <h2 id="status-title" className={styles.statusText}>
         {text}
       </h2>
+      {!inline ? actionButton : null}
       {meta.status === 'published' && !r.archived ? (
         <div className={styles.statusLink}>
           <a href={url} target="_blank" rel="noopener noreferrer" data-public-link className={styles.url}>

@@ -1,9 +1,10 @@
-// /designs — gallery (docs/14 §6.2; G066 comp u1_designs_390). Only live designs; the style filter appears from 6
-// designs on.
+// /designs — gallery (docs/14 §6.2; G066 comp u1_designs_390). Only live designs. G121 (docs/18 §5 P2): the style filter
+// appears from 6 designs on — radio chips and CSS only (:has), so it works without JavaScript and never writes the URL;
+// "All" is the default and shows every card.
 import { DesignCard } from '../../../components/marketing/DesignCard.tsx';
 import s from '../../../components/marketing/marketing.module.css';
 import { CheckList, Container, JsonLd, LastUpdated, Section, TextLink } from '../../../components/marketing/ui.tsx';
-import { liveDesigns } from '../../../lib/marketing/designs.ts';
+import { designStyles, liveDesigns, STYLE_FILTER_MIN_DESIGNS, styleFilterChips } from '../../../lib/marketing/designs.ts';
 import { FIXED, SITE_PAGES } from '../../../lib/marketing/facts.ts';
 import { breadcrumbs, graph, itemList, webPage } from '../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../lib/marketing/seo.ts';
@@ -16,6 +17,7 @@ export const metadata = pageMetadata(PAGE);
 
 export default function DesignsPage() {
   const designs = liveDesigns();
+  const chips = designs.length >= STYLE_FILTER_MIN_DESIGNS ? styleFilterChips(designs) : [];
   return (
     <>
       <Section className={s.pageHead}>
@@ -31,10 +33,31 @@ export default function DesignsPage() {
       </Section>
       <Section>
         <Container>
-          <div className={s.cardGrid}>
-            {designs.map((d) => (
-              <DesignCard key={d.id} design={d} placement="gallery" headingLevel={2} />
-            ))}
+          <div className={s.gallery} data-gallery="">
+            {chips.length ? (
+              <fieldset className={s.styleFilter} data-style-filter="" data-scroll-x="">
+                <legend className={s.visuallyHidden}>Show designs by style</legend>
+                <span className={s.filterItem}>
+                  <input type="radio" name="style" id="style-all" value="all" defaultChecked className={s.filterInput} />
+                  <label htmlFor="style-all" className={s.filterChip}>
+                    All <span className={s.filterCount}>{designs.length}</span>
+                  </label>
+                </span>
+                {chips.map((c) => (
+                  <span key={c.id} className={s.filterItem}>
+                    <input type="radio" name="style" id={`style-${c.id}`} value={c.id} className={s.filterInput} />
+                    <label htmlFor={`style-${c.id}`} className={s.filterChip}>
+                      {c.label} <span className={s.filterCount}>{c.count}</span>
+                    </label>
+                  </span>
+                ))}
+              </fieldset>
+            ) : null}
+            <div className={s.cardGrid}>
+              {designs.map((d) => (
+                <DesignCard key={d.id} design={d} placement="gallery" headingLevel={2} styles={chips.length ? designStyles(d.id) : undefined} />
+              ))}
+            </div>
           </div>
         </Container>
       </Section>

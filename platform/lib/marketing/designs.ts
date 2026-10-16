@@ -709,3 +709,56 @@ export function startPath(id?: string): string {
 export function designOgImage(id: string): string {
   return `/themes/${encodeURIComponent(id)}/img/og-1200x630.jpg`;
 }
+
+// ---------------------------------------------------------------------------------------------
+// G121 (docs/14 §6.2, docs/18 §5 P2 — Craft: categories): the style filter of /designs. Every live design has at least
+// one style (tests/g121-designs.test.ts); a design can be in more than one. Descriptive only, from each design's own
+// style line (above).
+
+export const STYLE_FILTERS = [
+  { id: 'floral', label: 'Romantic floral' },
+  { id: 'classic', label: 'Classic & elegant' },
+  { id: 'rustic', label: 'Rustic & boho' },
+  { id: 'destination', label: 'Destination' },
+  { id: 'seasonal', label: 'Seasonal' },
+  { id: 'storybook', label: 'Storybook & vintage' },
+] as const;
+export type StyleId = (typeof STYLE_FILTERS)[number]['id'];
+
+export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
+  'blush-garden-rose': ['floral'],
+  'olive-ivory': ['classic'],
+  'mediterranean-lemon': ['destination'],
+  'dusty-blue-champagne': ['floral', 'classic'],
+  'vintage-airmail-love-letter': ['storybook'],
+  'art-deco-black-tie': ['classic'],
+  'burgundy-velvet-autumn': ['floral', 'seasonal'],
+  'winter-evergreen': ['seasonal'],
+  'lavender-provence': ['rustic', 'destination'],
+  'tuscan-vineyard': ['rustic', 'destination'],
+  'boho-pampas-terracotta': ['rustic'],
+  'tropical-destination': ['destination'],
+  'enchanted-forest-storybook': ['storybook'],
+  'ivory-lace-pearls': ['classic', 'floral'],
+  'cherry-blossom-spring': ['floral', 'seasonal'],
+  'sunflower-rustic-barn': ['rustic', 'seasonal'],
+  'emerald-gold-estate': ['classic'],
+  'wildflower-meadow-vellum': ['floral', 'rustic'],
+  'midnight-garden': ['floral', 'classic'],
+  'coastal-seaside': ['destination'],
+};
+
+/** The styles of a design ([] when it has none yet: it then shows under "All" only). */
+export function designStyles(id: string): readonly StyleId[] {
+  return DESIGN_STYLES[id] ?? [];
+}
+
+/** The style filter shows from this many live designs on (docs/14 §6.2: hidden below six). */
+export const STYLE_FILTER_MIN_DESIGNS = 6;
+
+/** The filter chips with their counts among the given designs; a style no design has is left out. */
+export function styleFilterChips(designs: readonly Pick<Design, 'id'>[]): Array<{ id: StyleId; label: string; count: number }> {
+  return STYLE_FILTERS.map((f) => ({ id: f.id, label: f.label, count: designs.filter((d) => designStyles(d.id).includes(f.id)).length })).filter(
+    (c) => c.count > 0,
+  );
+}

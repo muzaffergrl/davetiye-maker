@@ -19,6 +19,25 @@ Site sayfasına: Taslağı gör, dükkân notu, sitede ne var, misafir yanıtlar
 Satış sitesinde **My website** → `/my` (alıcının bu cihazda açtığı düzenleyici; link yapıştırma; /start; kayıp link).
 Ayrıntı: `gorevler/G095-admin-v2.md`. Aşağıdaki §2 v1 ekranlarını anlatır; site sayfası aynen geçerlidir.
 
+## 1b. G121 (2026-10-16) — site sayfası niyete göre, düzenlenebilir mesaj (docs/18 §6 P2, docs/19 §6 A1–A6)
+- **Site sayfası sırası:** (Yapılacak: siparişi onayla) → **Bilgiler** → **Dükkân notu** → **Etsy mesajı** (müşteri bağlamının hemen
+  yanında, Zendesk makroları gibi) → **Destek işlemleri** (geri alınabilir: yeni link, hak ekle, yayında kalma süresi, alıcı adına yayınla)
+  → Sitede ne var → Misafir yanıtları → **Dikkat: yüksek etkili işlemler** (Yayından kaldır + Siteyi sil, ayrı kırmızı çerçeveli kart) →
+  Geçmiş. Silmede **"Vazgeç" solda, "Kalıcı olarak sil" sağda** (adres yazma kilidi aynı); silmenin sipariş numarasını serbest
+  bıraktığı yazılı. Yayınlanmamış taslakta **yanlış tasarım ipucu**: sil → aynı numarayla "Yeni sipariş" (ya da alıcı /start'tan
+  yeniden); taslaktaki içerik taşınmaz (A6; tasarım değiştirme aracı ve `[DESIGN SWITCH POLICY]` karar bekliyor).
+- **Etsy mesajı:** metin artık **düzenlenebilir**; "henüz gönderilemez" denetimi düzenlenmiş metinde de çalışır (`messageMissing`) —
+  karar bekleyen `[POLICY]` elle doldurulursa kopyalanabilir; "Şablona dön" geri alır; başka şablon/yeni link seçilince metin şablondan
+  yeniden başlar. **"Mesajı kopyala" Geçmiş'e satır yazar** ("Etsy mesajı kopyalandı: <şablon>"; yalnız şablon id + zaman,
+  `SiteRecord.messageLog`, en çok 50; metin saklanmaz, alıcı paneline gitmez). Yeni eylem `message-log`.
+- **Açılış şablonu:** onay bekleyen sipariş → "Sipariş onaylanıyor"; yayındaki site 30 gün içinde kapanıyorsa → **"Site yakında
+  kapanıyor"** (`archive_notice`, A5); öteki → "Nasıl yayınlanır" (`defaultTemplateId`, `lib/admin/view.ts`).
+- **Siparişler araması (A4):** arama bir Etsy sipariş numarasıysa (/start kuralı) ve o numarayla site yoksa: "#… numaralı siparişle
+  açılmış site yok … Tasarımlar sayfasından başlatma linkini kopyalayıp Etsy'den yazın; ya da Yeni sipariş ile siteyi siz açın"
+  (`orderWithoutSite`). "Hiç başlatılmadı" Etsy API'siz ancak böyle bilinir.
+- Testler: `tests/g121.test.ts` (mesaj denetimi, günlük, eylem, açılış şablonu, numara), `tests/g121-browser.ts` (admin bölümü);
+  ekranlar `platform/previews/g121/09_*`, `10_*`.
+
 ## 2. Ekranlar
 **Liste (`/admin`)** — "Satış sonrası nasıl işliyor?" açılır kutusu; filtre çipleri **Yapılacak · Hepsi · Yayında · Taslak · Arşiv**
 (sayılarla; onay bekleyen sipariş varsa Yapılacak seçili açılır); arama (sipariş no — `#3456` gibi —, e-posta, isimler, adres, tasarım);

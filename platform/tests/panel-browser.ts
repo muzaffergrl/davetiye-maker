@@ -347,7 +347,13 @@ try {
   await shot(page, '09_live_qr_390');
   await page.locator('[data-testid="live"]').getByRole('button', { name: 'Close' }).click();
   check('status card: live with link', (await page.locator('[data-public-link]').getAttribute('href')) === PUBLIC_URL);
-  check('bar: a calm "Live" badge instead of Publish when up to date', (await page.locator('[data-live-badge]').count()) === 1 && (await page.locator('[data-publish]').count()) === 0);
+  // G121 (docs/18 §3 P2): Home's status card is the one "Live" label there; the bar shows it on the other views.
+  check('home: no Publish when up to date; the status card says Live, the bar does not repeat it', (await page.locator('[data-live-badge]').count()) === 0 && (await page.locator('[data-publish]').count()) === 0 && (await page.locator('[data-status-card]').innerText()).includes('Live'));
+  await page.click('[data-nav="edit"]');
+  await page.waitForSelector('[data-live-badge]');
+  check('bar: a calm "Live" badge instead of Publish when up to date (outside Home)', (await page.locator('[data-live-badge]').count()) === 1 && (await page.locator('[data-publish]').count()) === 0);
+  await page.click('[data-nav="home"]');
+  await page.waitForSelector('[data-status-card]');
 
   // Public page shows names and photo.
   const pub = await ctx.newPage();

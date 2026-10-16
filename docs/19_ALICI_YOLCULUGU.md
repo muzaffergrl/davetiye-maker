@@ -851,73 +851,73 @@ Biçim: **dosya** · mevcut metin → önerilen metin · gerekçe. Kod bu görev
 
 ### A. Admin paneli (G087)
 
-- **A1. Şablonlar:** §4.5 JSON'u (`<!-- g091:templates:start -->` … `end`) tek kaynak olarak okunsun ya da derleme anında
+- **A1. Şablonlar:** *[durum 2026-10-16: vardı (tek kaynak JSON + test, Copy) · G121: metin düzenlenebilir, kopyalama Geçmiş'e yazılır (şablon + zaman)]* §4.5 JSON'u (`<!-- g091:templates:start -->` … `end`) tek kaynak olarak okunsun ya da derleme anında
   `lib/admin/templates.ts`'e kopyalansın (test: bu belgeyle aynı). Liste: `title`, `when` görünür; seçilince siteden yer tutucular
   dolar, metin düzenlenebilir kutuda, "Copy message" düğmesi (Etsy'ye yapıştırmak için). Gönderim kaydı site günlüğüne (şablon
   `id` + zaman; metin değil).
-- **A2. Eylem + mesaj birleşik:** "Confirm order" (verify-order) bitince `order_confirmed`'ı hazır açsın; "New edit link"
+- **A2. Eylem + mesaj birleşik:** *[durum 2026-10-16: vardı (G087)]* "Confirm order" (verify-order) bitince `order_confirmed`'ı hazır açsın; "New edit link"
   (reissue) bitince `new_edit_link`'i `{edit_url}` ile **yalnız o ekranda** göstersin (sayfa kapanınca kaybolur; kaydedilmez);
   "Add name/date change" (grant) bitince `extra_change_granted`'ı `{changes_left}` ile açsın.
-- **A3. Güvenlik ağı:** metinde çözülmemiş `{…}` ya da `[…]` (karar bekleyen politika) varsa "Copy message" uyarı versin.
+- **A3. Güvenlik ağı:** *[durum 2026-10-16: vardı (G087) · G121: denetim düzenlenmiş metinde de]* metinde çözülmemiş `{…}` ya da `[…]` (karar bekleyen politika) varsa "Copy message" uyarı versin.
   `{edit_url}` `new_edit_link` dışındaki şablonda hiç çözülmesin.
-- **A4. Sipariş görünümü:** bekleyen siparişler listesi (orderCheck `pending`, oluşturma zamanı, tema, e-posta, isimler) ve
+- **A4. Sipariş görünümü:** *[durum 2026-10-16: vardı (Yapılacak süzgeci; 5 günden uzun yayınlanmamış satış Yapılacaklar'da) · G121: numara aramasında "bu numarayla site yok" ipucu]* bekleyen siparişler listesi (orderCheck `pending`, oluşturma zamanı, tema, e-posta, isimler) ve
   "3 gündür yayınlanmadı / hiç başlatılmadı" filtreleri (`start_link_reminder` için; Etsy siparişleri API'siz bilinmediğinden
   "hiç başlatılmadı" yalnız dükkânın girdiği numarayla aranır).
-- **A5. Arşiv yaklaşanlar:** Online until ≤ 30 gün olan yayındaki siteler → `archive_notice`.
-- **A6. Eksik araçlar (karar + kod):** (a) yanlış tasarımla başlatılmış ve **yayınlanmamış** taslağın temasını değiştirme ya da
+- **A5. Arşiv yaklaşanlar:** *[durum 2026-10-16: vardı (Özet Yapılacaklar "kapanıyor") · G121: site sayfası `archive_notice` ile açılır]* Online until ≤ 30 gün olan yayındaki siteler → `archive_notice`.
+- **A6. Eksik araçlar (karar + kod):** *[durum 2026-10-16: kısmen G121: silme sipariş numarasını serbest bırakır (yazıldı) + taslakta "yanlış tasarım" ipucu (sil → Yeni sipariş); tasarım değiştirme aracı ve (b) numara taşıma karar bekliyor (`[DESIGN SWITCH POLICY]`)]* (a) yanlış tasarımla başlatılmış ve **yayınlanmamış** taslağın temasını değiştirme ya da
   taslağı silip sipariş numarasını serbest bırakma; (b) sipariş numarası başkası tarafından alınmışsa taşıma. Bugün yalnız
   reissue var; `wrong_design_started` ve `order_already_used` bu yüzden politika yer tutucusu taşıyor.
 
 ### B. `/start` (`platform/app/start/StartForm.tsx`)
 
-- **B1 (öneri 4).** Sonuç ekranı, "Save this link" kutusunun altına bir satır: (yok) → "You can copy this link again later
+- **B1 (öneri 4).** *[durum 2026-10-16: vardı]* Sonuç ekranı, "Save this link" kutusunun altına bir satır: (yok) → "You can copy this link again later
   in your editor: Share → Your private edit link." — gerekçe: "tek şans" paniğini azaltır; davranış zaten var.
-- **B2.** `Open my editor` altındaki `small` metne ek (yok) → "Tip: once your editor is open, add it to your Home Screen."
-- **B3 (öneri 5).** "Start another website" düğmesi → "Start with a different order" ve altına küçük satır "One order starts one
+- **B2.** *[durum 2026-10-16: yapıldı (G121)]* `Open my editor` altındaki `small` metne ek (yok) → "Tip: once your editor is open, add it to your Home Screen."
+- **B3 (öneri 5).** *[durum 2026-10-16: vardı]* "Start another website" düğmesi → "Start with a different order" ve altına küçük satır "One order starts one
   website." — gerekçe: mevcut ad "bir siparişle ikinci site" sanılıyor.
-- **B4 (öneri 6).** Form kartının altına (yok) → "Need help? Message us on Etsy with your order number." — gerekçe: sayfada
+- **B4 (öneri 6).** *[durum 2026-10-16: vardı]* Form kartının altına (yok) → "Need help? Message us on Etsy with your order number." — gerekçe: sayfada
   yardım yolu yok.
-- **B5.** `order_used` mesajı iyi; ek öneri yok.
+- **B5.** *[durum 2026-10-16: değişiklik yok]* `order_used` mesajı iyi; ek öneri yok.
 
 ### C. Panel metinleri
 
-- **C1.** `components/panel/views.tsx` HelpSheet "Can my partner edit too?": "Yes: share your edit link with your partner (Share →
+- **C1.** *[durum 2026-10-16: yapıldı (G121)]* `components/panel/views.tsx` HelpSheet "Can my partner edit too?": "Yes: share your edit link with your partner (Share →
   Your edit link)." → "Yes: share your edit link with your partner (Share → Your private edit link → Copy edit link)." —
   gerekçe: bölümün gerçek adı "Your private edit link".
-- **C2.** HelpSheet'e üç bölüm daha (başlık → metin):
+- **C2.** *[durum 2026-10-16: vardı (başlık "Do guests see my changes right away?" korundu, ek cümle var)]* HelpSheet'e üç bölüm daha (başlık → metin):
   - "I lost my edit link" → "While this page is open, copy it again: Share → Your private edit link → Copy edit link. If it is
     lost, message us on Etsy with your order number. A new link replaces the old one."
   - "Why can't guests see my changes?" (mevcut "Do guests see my changes right away?" yerine aynı metin + ) "When you see
     “Unpublished changes”, tap Review, then Publish changes."
   - "Can guests change their reply?" → "Yes: they send another reply. You see both under Guests and can remove the old one."
-- **C3 (öneri 7).** `components/panel/Setup.tsx` `OrderPendingNote` ve `lib/panel/brand.ts` `ORDER_PENDING_TEXT`: "…you can
+- **C3 (öneri 7).** *[durum 2026-10-16: kısmen: `ORDER_PENDING_TEXT`'te vardı; G121 `OrderPendingNote`'a "Reload this page to check."; süre `[ORDER CHECK TIME]` karar bekliyor]* `components/panel/Setup.tsx` `OrderPendingNote` ve `lib/panel/brand.ts` `ORDER_PENDING_TEXT`: "…you can
   publish as soon as the order is confirmed." → "…you can publish as soon as the order is confirmed (usually within [ORDER CHECK
   TIME]). Reload this page to check." — gerekçe: onay alıcıya bildirilmiyor; süre karar gelince config'ten.
-- **C4.** `components/panel/Panel.tsx` "This edit link no longer works" metni: "The link may have been replaced with a new one. If
+- **C4.** *[durum 2026-10-16: vardı]* `components/panel/Panel.tsx` "This edit link no longer works" metni: "The link may have been replaced with a new one. If
   you did not change it, message … on Etsy with your order number." → "The link may have been replaced with a new one, or it was
   copied only in part. If we sent you a new link, use the newest one. Otherwise message us on Etsy with your order number." —
   gerekçe: kısmi kopyalama en sık neden olabilir; ikinci istek sonrası eski linkle girme.
-- **C5.** `GuestPassword.tsx` ipucu: "Add the password to your invitation message, so your guests can open your website." →
+- **C5.** *[durum 2026-10-16: vardı]* `GuestPassword.tsx` ipucu: "Add the password to your invitation message, so your guests can open your website." →
   ek cümle "Guests type it once; their browser remembers it." — gerekçe: misafir her açışta soracak mı endişesi (90 gün çerez,
   `lib/site/access.ts`).
-- **C6.** Guests boş durumu / Home yanıt kartı: e-posta bildirimi olmadığı açıkça söylensin: (yok) → "New replies show here.
+- **C6.** *[durum 2026-10-16: Help'te vardı · G121: Guests boş durumunda da]* Guests boş durumu / Home yanıt kartı: e-posta bildirimi olmadığı açıkça söylensin: (yok) → "New replies show here.
   We don't send email notifications yet." (yalnız ilk açılışta ya da Help'te).
 
 ### D. Satış sitesi (`lib/marketing/*`)
 
-- **D1 (öneri 3).** `lib/marketing/facts.ts` `NOT_INCLUDED`: "Languages other than English" → "A translated website: built-in
+- **D1 (öneri 3).** *[durum 2026-10-16: NOT_INCLUDED ve EDITABLE vardı · G121: Canva karşılaştırmasında "you change the content and the wording"]* `lib/marketing/facts.ts` `NOT_INCLUDED`: "Languages other than English" → "A translated website: built-in
   messages (reply form errors, calendar text) stay in English; you can write your own texts and headings in any language" —
   gerekçe: G068 sonrası başlıklar değişiyor; madde artık yanıltıcı. `EDITABLE`'a "The design's headings, labels and buttons, in
   your own words" eklenmeli; `canvaComparison` "Changing the design" satırı da "you change the content and the wording".
-- **D2.** `lib/marketing/faq.ts` `take-offline`: "Tap Unpublish in your panel…" → "Open Share in your panel and tap Take the
+- **D2.** *[durum 2026-10-16: vardı]* `lib/marketing/faq.ts` `take-offline`: "Tap Unpublish in your panel…" → "Open Share in your panel and tap Take the
   website offline…" — gerekçe: panelde "Unpublish" adlı düğme yok.
-- **D3.** `faq.ts` `what-can-i-change`: sona "…and the design's headings and labels in your own words." eklenmeli.
-- **D4.** `faq.ts` `lost-link`: `[LOST LINK POLICY]`'nin önüne davranış: "While your editor is open you can copy the link again
+- **D3.** *[durum 2026-10-16: vardı]* `faq.ts` `what-can-i-change`: sona "…and the design's headings and labels in your own words." eklenmeli.
+- **D4.** *[durum 2026-10-16: vardı]* `faq.ts` `lost-link`: `[LOST LINK POLICY]`'nin önüne davranış: "While your editor is open you can copy the link again
   under Share. If it is lost, message us on Etsy with your order number: we send a new link and the old one stops working."
-- **D5.** `app/(marketing)/how-it-works/page.tsx` "After the wedding": "After that: [EXTENSION POLICY]." → "After that your website
+- **D5.** *[durum 2026-10-16: vardı]* `app/(marketing)/how-it-works/page.tsx` "After the wedding": "After that: [EXTENSION POLICY]." → "After that your website
   closes for guests; you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY]." (`ARCHIVE_TEXT`
   ile aynı).
-- **D6.** `/help` (docs/14 §5.1 "ileride"): START HERE'in Ek A metni `/help` altında yayınlansın (tasarımsız, tek sayfa,
+- **D6.** *[durum 2026-10-16: karar bekliyor (alan adı; Ek A'nın web uyarlaması claude-metin işi)]* `/help` (docs/14 §5.1 "ileride"): START HERE'in Ek A metni `/help` altında yayınlansın (tasarımsız, tek sayfa,
   `noindex` değil); START HERE ve şablonlar "full guide: [DOMAIN]/help" diyebilir. Alan adı kararıyla birlikte.
 
 ---
