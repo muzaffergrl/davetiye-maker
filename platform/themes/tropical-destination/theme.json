@@ -28,7 +28,7 @@
     "envelope_hint_click": { "default": "Click to open", "max": 24, "pages": ["index"] },
     "envelope_enter": { "default": "Enter", "max": 20, "pages": ["index"] },
     "envelope_replay": { "default": "Replay the opening", "max": 30, "pages": ["index"] },
-    "home_replay": { "default": "Open the envelope again", "max": 30, "pages": ["home"] },
+    "home_replay": { "default": "Open the wallet again", "max": 30, "pages": ["home"] },
     "envelope_skip": { "default": "Skip", "max": 12, "pages": ["index"] },
     "envelope_open": { "default": "Open the invitation", "max": 30, "pages": ["index"] },
     "day_title": { "default": "The Day", "max": 24, "pages": ["home", "story", "details"] },
@@ -87,6 +87,6 @@
     "rsvp_closed_title": { "default": "Replies are closed", "max": 30, "pages": ["rsvp"] },
     "closing_title": { "default": "Thank you", "max": 30, "pages": ["rsvp"] },
     "closing_line": { "default": "for being part of our story.", "max": 60, "pages": ["rsvp"] },
-    "rsvp_replay": { "default": "Replay the envelope", "max": 30, "pages": ["rsvp"] }
+    "rsvp_replay": { "default": "Replay the opening", "max": 30, "pages": ["rsvp"] }
   }
 }

@@ -377,7 +377,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .cal-links { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* -- home trio (no comp): frame (Story) · day card · seal (RSVP), sides 7° */
-.more-sec { padding: 34px 0 6px; }
+.more-sec { padding: 34px 0 6px; overflow-x: clip; } /* tilt (G098) */
 .trio-wrap { width: min(100% - 20px, 640px); }
 .more-title { text-align: center; font-size: 12px; letter-spacing: .32em; }
 .trio { display: flex; justify-content: center; align-items: flex-start; margin-top: 16px; }
@@ -498,7 +498,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .venue-text .note { margin-top: 10px; }
 .dress { display: flex; align-items: center; gap: 12px; margin-top: 22px; color: var(--ink); }
 .dress::before, .dress::after { content: ""; flex: 1 1 24px; min-width: 18px; height: 1px; background: rgba(179, 154, 99, .7); }
-.dress .kicker { flex: none; }
+.dress .kicker { flex: 0 1 auto; min-width: 0; }
 .dress .dot { color: var(--gold); flex: none; }
 .dress em { font-size: 19px; flex: 0 1 auto; overflow-wrap: break-word; min-width: 0; }
 .action { margin-top: 22px; }
