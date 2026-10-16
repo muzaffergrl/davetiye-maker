@@ -11,9 +11,9 @@
   },
   "photos": {
     "hero_portrait": { "label": "Portrait on the invitation card", "source": "media.hero_portrait", "aspect": "440/442" },
-    "story_1": { "label": "Our Story photo 1", "source": "media.memory_photos.0", "aspect": "642/836" },
-    "story_2": { "label": "Our Story photo 2", "source": "media.memory_photos.1", "aspect": "642/836" },
-    "story_3": { "label": "Our Story photo 3", "source": "media.memory_photos.2", "aspect": "642/836" },
+    "story_1": { "label": "Our Story photo 1", "source": "media.memory_photos.0", "aspect": "870/872" },
+    "story_2": { "label": "Our Story photo 2", "source": "media.memory_photos.1", "aspect": "870/872" },
+    "story_3": { "label": "Our Story photo 3", "source": "media.memory_photos.2", "aspect": "870/872" },
     "venue": { "label": "Venue photo", "source": "media.venue_image", "aspect": "902/575" }
   },
   "copy": {

@@ -129,3 +129,4 @@ arası view transition), temanın Vercel'de yayını, gerçek alıcı fotoğrafl
 - 2026-10-15 alindi: claude-G417
 - 2026-10-15 bitti, incelemeye gönderildi
 - 2026-10-15 entegratör onayladı
+- 2026-10-16 G098 (claude-kod): GM07 `countdown_box_r2` (W1.2 sayaç kutuları, iki yarım, yüksekliğe ölçekli) + `pill_sprig_r2` (hero hapının dalları) takıldı — comp sapmaları kapandı; "TOGETꞪER"/"TꞪE" = Cinzel Decorative'in h–e kerning çifti (ligatür değil) → `.display { font-kerning: none }` (previews/g417/g098_kerning_before_after.png); theme-check --stress 128/0/0, g051 44/44, final-smoke 45/45

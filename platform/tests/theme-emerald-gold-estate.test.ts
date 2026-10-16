@@ -626,7 +626,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
   assert.doesNotMatch(nav, /border-top/, '.site-nav: no hard band');
   assert.match(nav, /mask: linear-gradient\(transparent, #000 \d+px\)/, 'the top edge fades');
-  const alphas = [...nav.matchAll(/rgba\(1, 35, 20, (\.\d+)\) \d+px, rgba\(1, 35, 20, (\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+  const alphas = [...nav.matchAll(/rgba\(1, ?35, ?20, ?(\.\d+)\) \d+px, rgba\(1, ?35, ?20, ?(\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
   assert.ok(alphas.length === 2 && alphas.every((a) => a >= 0.96), `label row ≥ .96 (${alphas})`);
   assert.match(nav, /backdrop-filter: blur\(\d+px\)/);
   // the only lines are 1 px interface dividers: the W1 hairlines beside the GPT fern (.orn), the dress-code hairlines, the
@@ -1205,6 +1205,25 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
     const res = await getAsset(req(`/themes/${ID}/${p.join('/')}`), { params: Promise.resolve({ theme: ID, path: p }) });
     assert.equal(res.status, 404, `${p.join('/')} must not be served`);
   }
+});
+
+// ---------------------------------------------------------------- G098: GM07 parts, display kerning
+
+test('G098 W1.2 countdown boxes and pill sprigs are the raw GM07 GPT parts (cut / scaled / mirrored in CSS only); display lines unkerned', () => {
+  for (const [nm, file] of [['countdown_box', 'countdown_box_r2.png'], ['pill_sprig', 'pill_sprig_r2.png']] as const) {
+    const m = MANIFEST[nm];
+    assert.equal(m.source, `parts/${file}`, `${nm}: built from the GM07 part`);
+    assert.match(m.source_sha256, /^[0-9a-f]{64}$/);
+    for (const f of m.files) assert.ok(existsSync(path.join(DIR, 'img', f.file)), f.file);
+  }
+  const esc = (s: string) => s.replace(/[.]/g, '\\.');
+  // two halves of the same GPT box, each scaled to the cell's height: the straight double line meets in the middle
+  assert.match(rule('.cd-cell::before, .cd-cell::after'), new RegExp(`background: url\\("img/${esc(MANIFEST.countdown_box.files[0].file)}"\\) 0 50% / auto 100% no-repeat`));
+  assert.match(rule('.cd-cell::after'), /background-position: 100%/);
+  assert.match(rule('.hero-cta .btn::before, .hero-cta .btn::after'), new RegExp(`url\\("img/${esc(MANIFEST.pill_sprig.files[0].file)}"\\)`));
+  assert.match(rule('.hero-cta .btn::before, .hero-cta .btn::after'), /transform: scaleX\(-1\)/, 'the left sprig mirrored');
+  // Cinzel Decorative kerns e under the stem of h ("TOGETꞪER", "TꞪE DAY"): no kerning in display lines
+  assert.match(rule('.display'), /font-kerning: none/);
 });
 
 test('15 privacy: sections the couple switched off leave nothing in any page source (site-data included)', async () => {

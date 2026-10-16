@@ -798,7 +798,7 @@ test('inner pages: nothing half under the nav on the first screen — fold units
   assert.equal(d('.venue-photo[data-fold]').length, 1);
   const r = render('rsvp').$;
   assert.equal(r('.rsvp-text > [data-fold]').length, 6, 'title, reply-by, pill, the wait line, the signature, the ribbon');
-  assert.equal(r('.rsvp-text > .card-ribbon[data-fold] > img[src$="closure-440.webp"]').length, 1, 'W1.5: the envelope\'s ribbon on the base of the card');
+  assert.equal(r('.rsvp-text > .card-ribbon[data-fold] > img[src$="card_ribbon-440.webp"]').length, 1, 'W1.5: the envelope\'s ribbon on the base of the card (G098: the sprayless closure.png — the GM07 spray would not fit the first screen)');
   assert.equal(r('.rsvp-text > .unit[data-fold] > .deadline[data-field="rsvp.deadline"]').length, 1);
   assert.equal(r('.reply-box > [data-fold] > h2').length, 1);
   assert.ok(r('.reply-form > [data-fold]').length >= 6, 'form rows fold one by one');
@@ -1145,6 +1145,17 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
     const res = await getAsset(req(`/themes/${ID}/${p.join('/')}`), { params: Promise.resolve({ theme: ID, path: p }) });
     assert.equal(res.status, 404, `${p.join('/')} must not be served`);
   }
+});
+
+test('G098 the wrapped closure is the raw GM07 R3 part placed by its measured band shift; the card ribbon stays the sprayless closure; names never pushed', () => {
+  const cl = MANIFEST.closure;
+  assert.equal(cl.source, 'parts/closure_r2_v3.png');
+  assert.ok(cl.placement_dy_px < -30 && cl.placement_dy_px > -60, `band shift ${cl.placement_dy_px} px (GM07: ~43 px low)`);
+  assert.ok(cl.ends_vs_envelope.kenarlar.every((k: { durum: string }) => k.durum === 'tamam'), 'ribbon ends on the envelope edges');
+  assert.equal(MANIFEST.card_ribbon.source, 'parts/closure.png');
+  const [, , cw, ch] = [0, 0, ...MANIFEST.card_ribbon.src_size];
+  assert.match(rule('.card-ribbon'), new RegExp(`aspect-ratio: ${(cw / ch).toFixed(5)}`), 'the card ribbon ratio = card_ribbon');
+  assert.match(jsText(), /const cut = \(\) => pieces\(\)\.filter\(\(c\) => !c\.matches\('\.names'\) && bottom\(c\) > limit\)/, 'fold never pushes the names');
 });
 
 test('15 privacy: sections the couple switched off leave nothing in any page source (site-data included)', async () => {

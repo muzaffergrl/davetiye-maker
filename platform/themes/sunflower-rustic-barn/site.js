@@ -277,7 +277,7 @@ function fitNames() {
       if (fits(c) && (wrap || oneLine(c))) break;
     }
   });
-  // fold: a piece crossing the nav line starts below the first screen; a pill above keeps the mist (--fold)
+  // fold: a piece crossing the nav line starts below the first screen (never the names, G098); a pill above keeps the mist
   const pieces = () => [...inner.children].filter((c) => c.offsetParent && !c.matches('.hero-card'));
   const unfold = (hero) => {
     pieces().forEach((c) => c.style.removeProperty('margin-top'));
@@ -286,7 +286,7 @@ function fitNames() {
   };
   const fold = (hero) => {
     const v = sv(), limit = v - navH() - 8, below = v + 12, cs = getComputedStyle(hero);
-    const cut = () => pieces().filter((c) => bottom(c) > limit).sort((a, b) => top(a) - top(b))[0];
+    const cut = () => pieces().filter((c) => !c.matches('.names') && bottom(c) > limit).sort((a, b) => top(a) - top(b))[0];
     let c = cut();
     if (!c || top(c) >= below - 0.5) return;
     const cta = inner.querySelector('.hero-cta'), keep = cta && cta.offsetParent && bottom(cta) <= limit;

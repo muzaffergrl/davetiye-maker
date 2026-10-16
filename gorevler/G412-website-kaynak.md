@@ -56,3 +56,4 @@ Tasarım 12'i platformda tema olarak kurmak (K24, `docs/10_SITE_PLATFORMU.md`): 
 - 2026-10-15 alindi: claude-local-G412
 - 2026-10-15 bitti, incelemeye gönderildi
 - 2026-10-15 entegratör onayladı
+- 2026-10-16 G098 (claude-kod, koordinatör eki): cüzdanla açılan temada misafirin gördüğü iki metin "envelope" diyordu → home "Open the wallet again", rsvp "Replay the opening" (şablon + theme.json varsayılanı, max 30 içinde); test: görünen metin/aria-label/copy varsayılanlarında "envelope" yok

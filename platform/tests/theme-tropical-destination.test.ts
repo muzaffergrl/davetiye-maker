@@ -984,6 +984,18 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
   }
 });
 
+test('G098 the opening object is a wallet: no guest-visible text says "envelope" (design texts and their defaults)', () => {
+  for (const page of PAGES) {
+    const { $ } = render(page);
+    $('script, style, noscript').remove();
+    assert.doesNotMatch($('body').text(), /envelope/i, `${page}: visible text`);
+    $('[aria-label]').each((_, el) => assert.doesNotMatch($(el).attr('aria-label') ?? '', /envelope/i, `${page}: aria-label`));
+  }
+  for (const [key, e] of Object.entries(theme.manifest.copy ?? {})) assert.doesNotMatch(e.default, /envelope/i, `copy ${key}`);
+  assert.equal(theme.manifest.copy!.home_replay.default, 'Open the wallet again');
+  assert.equal(theme.manifest.copy!.rsvp_replay.default, 'Replay the opening');
+});
+
 test('15 privacy: sections the couple switched off leave nothing in any page source (site-data included)', async () => {
   const { getDataAdapter } = await import('../lib/data/index.ts');
   const { createSiteWithKeys, publishSite } = await import('../lib/sites.ts');
