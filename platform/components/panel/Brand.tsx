@@ -8,8 +8,8 @@ import { BRAND_FILES, logoWidth } from '../../lib/marketing/brand.ts';
 import styles from './panel.module.css';
 
 const MARK = '/brand/bke-monogram-small-anchor.svg';
-/** viewBox of the small monogram (818.59 × 794.89). */
-const MARK_RATIO = 818.59 / 794.89;
+/** viewBox of the small monogram (780.5 × 722, the S symbol, G129). */
+const MARK_RATIO = 780.5 / 722;
 
 export function BrandLogo({ height = 24, compact = false, className }: { height?: number; compact?: boolean; className?: string }) {
   const mark = Math.round(height * 1.25);

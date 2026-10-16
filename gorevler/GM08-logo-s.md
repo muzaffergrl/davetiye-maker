@@ -54,3 +54,4 @@ Dal geçmişi korundu. `git pull --rebase origin main` denemesi mevcut birleşim
 - 2026-10-16 açıldı (koordinatör; kullanıcı isteği)
 - 2026-10-16 alindi: codex-gpt-gorsel
 - 2026-10-16 bitti, incelemeye gönderildi
+- 2026-10-16 teslim alındı, G129'da kullanıldı (5 PNG izlendi: `brand/svg/`, favicon/uygulama ikonları, Etsy dükkân ikonu)

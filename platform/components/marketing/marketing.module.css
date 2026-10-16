@@ -1,6 +1,6 @@
 /* Marketing site UI — BKE Studio (G066; comps brand/ui/site/u1_*, tokens brand/tokens.json). Interface only: spacing,
    type, color, hairlines and UI icons (lucide-react, pinned). No drawn decor (K21): every picture is a real product
-   screen or a GPT image (the brand pattern behind the desktop hero is GPT's pattern_tile.png, unchanged).
+   screen or a GPT image (the brand pattern behind the desktop hero is pattern_tile.png: GPT's tile grid, G129 S symbol).
    Color rules: aubergine (anchor) for headlines and primary buttons; paper / paper light / white backgrounds; ink for
    text; gold and lavender ONLY as accents (hairlines, chip borders, check marks) — never as text on a light background.
    Text contrast (WCAG 2.x, computed): ink on paper light 15.2:1, on paper 13.0:1 · anchor on paper light 15.9:1 ·
@@ -776,7 +776,8 @@
   justify-content: center;
   width: 100%;
 }
-/* Wide screens: the poster stands on a block of the GPT brand pattern (brand/assets/gpt/final/pattern_tile.png). */
+/* Wide screens: the poster stands on a block of the brand pattern (public/brand/pattern_tile.png; G129: GPT's
+   brand/assets/gpt/final/pattern_tile.png grid with the traced S symbol in place of the K). */
 @media (min-width: 1024px) {
   .heroStage {
     position: relative;
