@@ -69,6 +69,11 @@ const closingSite = await createSiteWithKeys(adapter, { slug: 'ada-and-grace', t
 await publishSite(adapter, closingSite.site.id);
 await setArchiveOverride(adapter, closingSite.site.id, isoDay(15), 'test: closing soon');
 
+// E: a design that opens from a book (13): the panel names its opening "Book", not "Envelope".
+const bookDemo = JSON.parse(readFileSync(path.join(ROOT, 'themes/enchanted-forest-storybook/content.demo.json'), 'utf8')) as ContentRecord;
+const bookSite = await createSiteWithKeys(adapter, { slug: 'aurora-and-rowan', theme: 'enchanted-forest-storybook', content: draftFromDemo(bookDemo, ['Aurora', 'Rowan']) });
+await publishSite(adapter, bookSite.site.id);
+
 const editUrl = (slug: string, key: string, hash = '') => `${BASE}/edit/${slug}?k=${encodeURIComponent(key)}${hash}`;
 const SETUP = editUrl('elena-and-marco', setupSite.editKey);
 const LIVE = editUrl('nora-and-sam', liveSite.editKey);
@@ -305,6 +310,38 @@ try {
     await page.waitForSelector('[data-changes-bar]', { state: 'detached', timeout: 10_000 }).catch(() => undefined);
     check('editor: back to the published text — the changes bar goes away, "Live" returns', (await page.locator('[data-changes-bar]').count()) === 0 && (await page.locator('[data-live-badge]').count()) === 1);
     await ctx.close();
+  });
+
+  // =========================================================================== 3b. the design's own opening name
+  await block('opening name', async () => {
+    const ctx = await browser.newContext(PHONE);
+    const page = await ctx.newPage();
+    const book = editUrl('aurora-and-rowan', bookSite.editKey);
+    await page.goto(`${book}#edit/us`);
+    await page.waitForSelector('[data-open-preview]');
+    await page.waitForTimeout(500);
+    await page.click('[data-open-preview]');
+    await page.waitForSelector('[data-preview] [role="tab"]');
+    const tabs = await page.locator('[data-preview] [role="tab"]').allInnerTexts();
+    check('opening name: a book design\'s first preview tab says "Book" (not "Envelope")', tabs[0]?.trim() === 'Book', tabs.join(' | '));
+    await shot(page, '05c_preview_tab_book_390');
+    await page.goBack();
+    await page.waitForTimeout(400);
+    await page.click('[data-disclosure="copy-us"] button[aria-expanded]');
+    const labels: string[] = await page.locator('[data-copy-row] label').allInnerTexts();
+    check('opening name: the editable-text rows say "on the book"', labels.some((l) => l.includes('Above your names on the book')) && !labels.some((l) => /envelope/i.test(l)), labels.slice(0, 4).join(' | '));
+    const hint = await text(page, '[data-section="names"]');
+    check('opening name: "How your names appear" hint says "On the book"', hint.includes('On the book, the page titles'), hint.slice(0, 160));
+    await ctx.close();
+    // an envelope design keeps "Envelope"
+    const c2 = await browser.newContext(PHONE);
+    const p2 = await c2.newPage();
+    await p2.goto(`${LIVE}#home`);
+    await p2.waitForSelector('[data-open-preview]');
+    await p2.click('[data-open-preview]');
+    await p2.waitForSelector('[data-preview] [role="tab"]');
+    check('opening name: an envelope design\'s first tab stays "Envelope"', (await p2.locator('[data-preview] [role="tab"]').first().innerText()).trim() === 'Envelope');
+    await c2.close();
   });
 
   // =========================================================================== 4. Share, Guests, /start

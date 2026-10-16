@@ -14,7 +14,8 @@ import { defaultTemplateId, orderWithoutSite } from '../lib/admin/view.ts';
 import { setClaimRateLimiter } from '../lib/claim/limits.ts';
 import { getDataAdapter } from '../lib/data/index.ts';
 import { DESIGN_STYLES, designStyles, liveDesigns, STYLE_FILTER_MIN_DESIGNS, STYLE_FILTERS, styleFilterChips } from '../lib/marketing/designs.ts';
-import { panelState } from '../lib/panel/state.ts';
+import { openingPlace, openingTabLabel } from '../lib/panel/model.ts';
+import { panelState, panelTheme, themeOpening, withOpeningWords } from '../lib/panel/state.ts';
 import { MemoryRateLimiter } from '../lib/rsvp/rate-limit.ts';
 import { createSiteWithKeys } from '../lib/sites.ts';
 import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
@@ -141,3 +142,36 @@ test('/designs style filter: every live design has a known style; chips with cou
     assert.ok(css.includes(`.gallery:has(.filterInput[value='${f.id}']:checked) [data-styles]:not([data-styles~='${f.id}'])`), `CSS hides the other cards for ${f.id}`);
   }
 });
+
+test('panel names the design\'s own opening: preview tab, sentences, editable-text labels (not "Envelope" everywhere)', async () => {
+  const want: Record<string, string> = {
+    'art-deco-black-tie': 'gatefold',
+    'ivory-lace-pearls': 'gatefold',
+    'lavender-provence': 'pouch',
+    'tropical-destination': 'wallet',
+    'enchanted-forest-storybook': 'book',
+    'wildflower-meadow-vellum': 'sleeve',
+    'blush-garden-rose': 'envelope',
+    'olive-ivory': 'envelope',
+  };
+  for (const [id, noun] of Object.entries(want)) assert.equal(themeOpening(id), noun, id);
+  for (const d of liveDesigns()) assert.ok(themeOpening(d.id), `${d.id} has an opening noun`);
+  assert.equal(themeOpening('_sample'), null);
+  assert.equal(openingTabLabel('book'), 'Book');
+  assert.equal(openingTabLabel('envelope'), 'Envelope');
+  assert.equal(openingTabLabel(null), 'Opening');
+  assert.equal(openingPlace('wallet'), 'wallet');
+  assert.equal(openingPlace(null), 'opening page');
+  const entries = [
+    { key: 'envelope_kicker', label: 'Above your names on the envelope' },
+    { key: 'envelope_replay', label: 'Open the envelope again (envelope page)' },
+    { key: 'story_title', label: 'Our Story heading' },
+  ] as Parameters<typeof withOpeningWords>[0];
+  assert.deepEqual(
+    withOpeningWords(entries, 'book').map((e) => e.label),
+    ['Above your names on the book', 'Open the book again (book page)', 'Our Story heading'],
+  );
+  assert.equal(withOpeningWords(entries, 'envelope'), entries, 'envelope designs keep their labels');
+  assert.equal((await panelTheme('_sample')).opening, null, 'a design without sales copy: "Opening"');
+});
+

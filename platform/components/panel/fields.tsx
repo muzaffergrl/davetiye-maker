@@ -38,6 +38,8 @@ export interface PanelContextValue {
   removePhoto: (slot: PanelPhotoSlot) => void;
   /** G121: the last jump to a field (Home → Settings): a folded part holding that field opens for it (a new object each jump). */
   jump?: { path: string } | null;
+  /** G121: what guests tap first in this design ("envelope", "book" …; PanelTheme.opening), for the panel's sentences. */
+  opening?: string | null;
 }
 
 export const PanelContext = createContext<PanelContextValue | null>(null);

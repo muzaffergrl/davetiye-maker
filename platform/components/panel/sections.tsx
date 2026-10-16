@@ -9,7 +9,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
 import type { ContentRecord, Locale, RsvpQuestion } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
-import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
+import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, openingPlace, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
 import { beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, rightsOneLine, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
@@ -106,7 +106,7 @@ function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows:
 // Names
 
 export function NamesFields({ setup = false }: { setup?: boolean }) {
-  const { content, edit, locked, fields, rights } = usePanelContext();
+  const { content, edit, locked, fields, rights, opening } = usePanelContext();
   const partners = content.partners ?? [];
   const counting = rights.phase !== 'before_publish';
   const auto = defaultNameDisplay(partners);
@@ -169,7 +169,7 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           <TextField
             path="name_display"
             label="How your names appear"
-            hint="On the envelope, the page titles and when the link is shared."
+            hint={`On the ${openingPlace(opening)}, the page titles and when the link is shared.`}
             maxLength={CONTENT_LIMITS.nameDisplay}
             value={content.name_display}
             onChange={(v) => edit((c) => void (c.name_display = v))}

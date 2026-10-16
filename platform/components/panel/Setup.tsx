@@ -11,6 +11,8 @@ import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import {
   fieldId,
+  openingPlace,
+  openingTabLabel,
   pageShown,
   photoAt,
   prePublishNotes,
@@ -250,8 +252,8 @@ export function Setup({
             <DateFields theme={theme} setup />
             <SetupFullNames />
             <RightsNote />
-            <div className={styles.miniPreview} aria-label="Your envelope page" role="img">
-              <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} />
+            <div className={styles.miniPreview} aria-label={`Your ${openingPlace(theme.opening)} page`} role="img">
+              <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} title={`Your ${openingPlace(theme.opening)} page`} />
             </div>
           </>
         ) : null}
@@ -288,7 +290,16 @@ export function Setup({
               </p>
             </div>
             <div className={styles.setupPreview}>
-              <PreviewPane slug={initial.slug} previewToken={panel.meta.previewToken} pages={visiblePages} version={panel.previewVersion} open wide onClose={() => undefined} />
+              <PreviewPane
+                slug={initial.slug}
+                previewToken={panel.meta.previewToken}
+                pages={visiblePages}
+                version={panel.previewVersion}
+                open
+                wide
+                onClose={() => undefined}
+                indexLabel={openingTabLabel(theme.opening)}
+              />
             </div>
             {/* K29: no list or count of sample text here — one calm, honest line; Home shows what is left. */}
             <p className={styles.calmNote} data-calm-note>
@@ -425,8 +436,8 @@ export function SampleDateGate({
   );
 }
 
-/** The envelope page of the real theme, scaled down (step 1 only). */
-function PreviewMini({ slug, previewToken, version: raw }: { slug: string; previewToken: string; version: number }) {
+/** The opening page of the real theme (envelope, book …), scaled down (step 1 only). */
+function PreviewMini({ slug, previewToken, version: raw, title }: { slug: string; previewToken: string; version: number; title: string }) {
   const ref = useRef<HTMLIFrameElement>(null);
   // Reload once typing has settled, not after every save (G060-fix).
   const version = useSettledVersion(raw);
@@ -443,7 +454,7 @@ function PreviewMini({ slug, previewToken, version: raw }: { slug: string; previ
     <iframe
       ref={ref}
       src={`/${slug}?preview=${encodeURIComponent(previewToken)}`}
-      title="Your envelope page"
+      title={title}
       tabIndex={-1}
       aria-hidden="true"
       className={styles.miniFrame}

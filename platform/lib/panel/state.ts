@@ -6,9 +6,11 @@ import { panelPreviewToken } from '../keys.ts';
 import { guestAccessView } from '../site/access.ts';
 import { orderPending } from '../sites.ts';
 import { loadTheme, PAGE_NAMES, readThemePage, type LoadedTheme, type PageName } from '../theme/theme.ts';
+import { DESIGN_COPY, openingObject } from '../marketing/designs.ts';
 import {
   isEditablePhotoSource,
   OPTIONAL_BLOCK_KEYS,
+  openingPlace,
   parseAspect,
   sameContent,
   THANK_YOU_PHOTO_KEY,
@@ -21,7 +23,7 @@ import {
   type ThemeFieldUse,
 } from './model.ts';
 import { rightsView } from './rights.ts';
-import { panelCopyEntries } from '../theme/copy.ts';
+import { panelCopyEntries, type PanelCopyEntry } from '../theme/copy.ts';
 
 const OPTIONAL_RE = /\bdata-optional\s*=\s*["']?([a-z_]+)/g;
 /** Values of the engine markers that name content paths (data-field, data-if, data-text, data-attr-*, data-repeat). */
@@ -99,10 +101,32 @@ export function themeFieldUse(htmlPages: readonly string[]): ThemeFieldUse {
   };
 }
 
+/**
+ * G121: what guests tap first in a design ("envelope", "book", "gatefold" …), from the design's own opening sentence on the
+ * sales site (lib/marketing/designs.ts); null for a design without it (the test scaffold, a design not on sale yet).
+ */
+export function themeOpening(themeId: string): string | null {
+  const copy = DESIGN_COPY[themeId];
+  if (!copy) return null;
+  try {
+    return openingObject(copy);
+  } catch {
+    return null;
+  }
+}
+
+/** The editable-text row labels name the design's own opening ("Above your names on the book"), not always "envelope". */
+export function withOpeningWords(entries: PanelCopyEntry[], opening: string | null): PanelCopyEntry[] {
+  const word = openingPlace(opening);
+  if (word === 'envelope') return entries;
+  return entries.map((e) => ({ ...e, label: e.label.replace(/\benvelope\b/g, word) }));
+}
+
 export async function panelTheme(themeId: string): Promise<PanelTheme> {
   const theme = await loadTheme(themeId);
   if (!theme) throw new Error(`theme "${themeId}" not found`);
   const m = theme.manifest;
+  const opening = themeOpening(m.id);
   const photos = Object.entries(m.photos)
     .filter(([key, slot]) => {
       const ok = isEditablePhotoSource(slot.source);
@@ -134,7 +158,8 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     optionalBlocks: themeOptionalBlocks(pages),
     fields,
     thankYou,
-    copy: panelCopyEntries(m.copy),
+    copy: withOpeningWords(panelCopyEntries(m.copy), opening),
+    opening,
     sample: (await claimableTheme(m.id))?.demo ?? null,
   };
 }

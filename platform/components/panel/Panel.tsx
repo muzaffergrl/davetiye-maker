@@ -47,6 +47,7 @@ import { ORDER_PENDING_TEXT, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import {
   defaultNameDisplay,
   fieldId,
+  openingTabLabel,
   pageShown,
   photoAt,
   prePublishNotes,
@@ -427,8 +428,9 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       uploadPhoto: panel.uploadPhoto,
       removePhoto: panel.removePhoto,
       jump: fieldJump,
+      opening: theme.opening ?? null,
     }),
-    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, fieldJump],
+    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, fieldJump, theme.opening],
   );
 
   /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */
@@ -611,6 +613,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       page={previewPage}
       thanks={previewThanks}
       onThanksOff={() => setPreviewThanks(false)}
+      indexLabel={openingTabLabel(theme.opening)}
       // the frame is left as it is while closed (changing it during the close would leave the preview's history entry)
       onClose={() => setPreviewOpen(false)}
     />
@@ -752,6 +755,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
           onClose={() => setDialog(null)}
           sampleDate={theme.sample?.date ?? null}
           undo={rights.undo}
+          opening={theme.opening ?? null}
           onSubmit={async (identity, intent) => {
             const previous = identityOf(content);
             const res = await panel.changeIdentity(identity, intent);

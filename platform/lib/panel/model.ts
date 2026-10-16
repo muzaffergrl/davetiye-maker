@@ -94,6 +94,12 @@ export interface PanelTheme {
    * Values still equal to it are flagged as sample text before publishing.
    */
   sample: ContentRecord | null;
+  /**
+   * G121: what guests tap first in this design — "envelope", "gatefold", "pouch", "wallet", "book", "sleeve" (the design's
+   * own opening sentence, lib/marketing/designs.ts openingObject). Null for a design without that copy: the panel then says
+   * "Opening" / "the opening page".
+   */
+  opening?: string | null;
 }
 
 export interface PanelMeta {
@@ -706,8 +712,19 @@ export function previewTokenExpiry(token: unknown): number | null {
   return m ? Number(m[1]) * 1000 : null;
 }
 
+/** G121: the preview tab of the first page — the design's own opening ("Envelope", "Book", "Gatefold" …), else "Opening". */
+export function openingTabLabel(opening: string | null | undefined): string {
+  return opening ? opening.charAt(0).toUpperCase() + opening.slice(1) : 'Opening';
+}
+
+/** G121: the first page in a sentence — "envelope" / "book" …, else "opening page" ("On the envelope, …"). */
+export function openingPlace(opening: string | null | undefined): string {
+  return opening || 'opening page';
+}
+
+/** Preview tab labels; the first page ("index") is named after the design's opening (openingTabLabel). */
 export const PAGE_LABELS: Record<string, string> = {
-  index: 'Envelope',
+  index: 'Opening',
   home: 'Home',
   story: 'Story',
   details: 'Details',

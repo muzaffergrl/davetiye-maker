@@ -10,7 +10,7 @@ import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { formatDateLong } from '../../lib/content/format.ts';
 import { THANK_YOU_DEFAULT_TITLE, thankYouDay, thankYouMode, thankYouState, withThankYou } from '../../lib/content/thank-you.ts';
 import type { ThankYou, ThankYouMode } from '../../lib/content/types.ts';
-import type { PanelPhotoSlot } from '../../lib/panel/model.ts';
+import { openingPlace, type PanelPhotoSlot } from '../../lib/panel/model.ts';
 import { IssueList, TextField, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { zoneCity } from './sections.tsx';
@@ -20,7 +20,7 @@ import styles from './panel.module.css';
 export const THANK_YOU_MODE_LABELS: Record<ThankYouMode, string> = { auto: 'Automatic', on: 'On now', off: 'Off' };
 
 export function ThankYouFields({ slot, defaultOpen = false, onPreview }: { slot: PanelPhotoSlot | null; defaultOpen?: boolean; onPreview: () => void }) {
-  const { content, edit, locked, issuesAt, rights } = usePanelContext();
+  const { content, edit, locked, issuesAt, rights, opening } = usePanelContext();
   const t = content.thank_you ?? {};
   const mode = thankYouMode(content);
   const state = thankYouState(content);
@@ -43,8 +43,8 @@ export function ThankYouFields({ slot, defaultOpen = false, onPreview }: { slot:
     <Disclosure id="thank-you" title="After the wedding" status={THANK_YOU_MODE_LABELS[mode]} icon={Heart} defaultOpen={defaultOpen}>
       <div className={styles.stack} data-thank-you-settings>
         <p className={styles.hint}>
-          When your wedding is over, the same link becomes a thank-you page: your note, a photo, your names and the date. The envelope still opens;
-          your story stays.
+          When your wedding is over, the same link becomes a thank-you page: your note, a photo, your names and the date. The{' '}
+          {openingPlace(opening)} still opens; your story stays.
         </p>
         <Segmented<ThankYouMode>
           id="f-thank_you-mode"

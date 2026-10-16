@@ -11,7 +11,7 @@ import { formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { PANEL_BRAND } from '../../lib/panel/brand.ts';
-import { withPartnerName } from '../../lib/panel/model.ts';
+import { openingPlace, withPartnerName } from '../../lib/panel/model.ts';
 import {
   classifyIdentityChange,
   DATE_FREE_DAYS,
@@ -57,6 +57,7 @@ export function IdentitySheet({
   undo = null,
   onClose,
   onSubmit,
+  opening = null,
 }: {
   content: ContentRecord;
   anchor: Identity;
@@ -70,6 +71,8 @@ export function IdentitySheet({
   undo?: { from: Identity; until: string | null } | null;
   onClose: () => void;
   onSubmit: (identity: Identity, intent: 'fix' | 'change') => Promise<IdentityOutcome>;
+  /** G121: what guests tap first in this design ("envelope", "book" …). */
+  opening?: string | null;
 }) {
   const uid = useId();
   const current = useMemo(() => identityOf(content), [content]);
@@ -162,7 +165,9 @@ export function IdentitySheet({
   const partners = draft.partners ?? [];
   return (
     <Sheet title="Change names or date" onClose={onClose} testId="identity">
-      <p className={styles.hint}>Your names and date are on the envelope, the page titles and the link preview. Changes show after you publish them.</p>
+      <p className={styles.hint}>
+        Your names and date are on the {openingPlace(opening)}, the page titles and the link preview. Changes show after you publish them.
+      </p>
       {partners.map((p, i) => (
         <fieldset key={i} className={styles.group}>
           <legend className={styles.groupTitle}>{i === 0 ? 'First partner' : 'Second partner'}</legend>

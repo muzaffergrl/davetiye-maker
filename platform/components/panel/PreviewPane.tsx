@@ -41,6 +41,7 @@ export function PreviewPane({
   thanks = false,
   onThanksOff,
   onClose,
+  indexLabel,
 }: {
   slug: string;
   previewToken: string;
@@ -54,6 +55,8 @@ export function PreviewPane({
   thanks?: boolean;
   onThanksOff?: () => void;
   onClose: () => void;
+  /** G121: the first page's tab, named after the design's opening ("Envelope", "Book" …; openingTabLabel). */
+  indexLabel?: string;
 }) {
   const version = useSettledVersion(rawVersion);
   const [chosen, setChosen] = useState(wanted ?? pages[0] ?? 'index');
@@ -195,7 +198,7 @@ export function PreviewPane({
               setChosen(p);
             }}
           >
-            {PAGE_LABELS[p] ?? p}
+            {p === 'index' && indexLabel ? indexLabel : (PAGE_LABELS[p] ?? p)}
           </button>
         ))}
       </div>
