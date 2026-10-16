@@ -305,9 +305,13 @@ def main(argv: list[str] | None = None) -> int:
         if not a.check:
             out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         files = [b for b in data["blockers"] if b.startswith(("listing images", "digital file"))]
+        have = sum(i["exists"] for i in data["images"])
+        # G131: the service's own files show in the line, so a --strict failure is never silent
         print(f"{sid}: title {data['title_length']}/140 · tags {len(data['tags'])}/13 · {price} TL "
-              f"(~USD {data['price_usd_approx']}) · open checks {len(data['open_checks'])} · "
-              f"{'OK' if not problems else 'PROBLEMS: ' + '; '.join(problems)}")
+              f"(~USD {data['price_usd_approx']}) · images {have}/{len(data['images'])} · "
+              f"file {'yes' if data['digital_files'][0]['bytes'] else 'no'} · open checks {len(data['open_checks'])} · "
+              f"{'OK' if not problems else 'PROBLEMS: ' + '; '.join(problems)}"
+              f"{' · strict: files missing' if a.strict and files else ''}")
         bad |= bool(problems) or (a.strict and bool(files))
     for no, folder, theme in ([] if spec == "services" else select(a.designs)):
         data, problems = build(no, folder, theme)

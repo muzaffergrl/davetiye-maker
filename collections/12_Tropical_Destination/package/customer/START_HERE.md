@@ -75,11 +75,11 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 | Edit page | What you change |
 |---|---|
 | Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one) |
-| Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link and venue photo; the order of the day (up to 10 rows); After the wedding |
+| Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link, map and directions, a reception place and venue photo; the order of the day (up to 10 rows); After the wedding |
 | Photos | Invitation portrait, three story photos and the venue photo |
-| Our Story | Show or hide the page, an intro line and a caption for each story moment |
+| Our Story | Show or hide the page, an intro line, a caption for each story moment, music and sound effects |
 | Details | Host line, dress code, travel & stay and registry links, guest policy note (in some designs), up to 12 questions and answers |
-| RSVP | Replies on or off, reply-by date, up to 3 questions for guests who are coming |
+| RSVP | Replies on or off, reply-by date, the reply form: which fields are required and up to 10 questions of your own |
 
 **Your own wording.** At the end of every Edit page, open **Headings & labels on this page**. There you can rewrite the design's texts in your own words, for example "You are invited", "Will You Join Us?" or the menu. Leave a box empty to keep the design's text; **Reset to design text** brings it back. On **Us** you can also pick suggested wording for a vow renewal, an elopement party or a commitment ceremony. Wording changes never use a name or date change.
 
@@ -96,6 +96,25 @@ Open **Edit → Photos**, choose a frame and tap **Add photo**. Drag to move the
 JPG, PNG, WebP, AVIF and HEIC photos up to 30 MB work. If a photo will not open, save a JPEG copy of it and choose that.
 
 No photos yet? Your website still works: empty frames show the design's soft placeholder image, and you can hide the Our Story page. Add your own photos before you share if you do not want guests to see placeholders.
+
+## Map and directions
+
+Open **Edit → Day & place → Venue**. Type the street address, or paste a Google Maps or Apple Maps link to the place into **Map link**. Below it, **Map & directions** has two switches:
+
+- **Show map:** guests see a card with the place and tap **Show map** to load Google Maps. Nothing loads from Google before that tap.
+- **Show directions:** guests get directions with Google Maps, Apple Maps or Waze.
+
+The editor shows what guests' maps will find (the pin of your link, or your address); tap **Preview map** to check it. Is the reception somewhere else? Tap **Add a reception place** and add its name, address and map link: guests then see both places. **Remove this place** takes it away again.
+
+## Music and sound
+
+Open **Edit → Our Story** and scroll to **Music & sound** at the end of the page.
+
+- **Story music:** choose one of four tracks made for your website (**First Light**, **Garden Waltz**, **Evening Strings**, **Music Box**; one is marked as suggested for your design), **Your own music** or **No music**. Tap **Listen** to hear it.
+- **Your own music:** tap **Choose a file** and upload an MP3 or M4A file of up to 10 MB. Only upload music you have the right to use (your own recording or a licence that allows it).
+- **Sound effects:** soft sounds when guests open the wallet, move between pages and send their reply. Turn it off for a quiet website.
+
+Guests hear the music softly on your Our Story page (no Our Story page, no music). A small sound button at the top left of every page turns the sound off or on. Some phones wait for a tap before music starts: then guests see a "Play music" button.
 
 ## Step 5. Preview and publish
 
@@ -130,7 +149,9 @@ Open **Share**:
 
 ## Step 7. Guest replies
 
-**What guests do:** on your RSVP page they enter their name, whether they are coming, how many people (up to 10 in one reply), the names of the others (optional), a message and your questions. They need no account, and an email address is optional. To change their answer, they send another reply.
+**What guests do:** on your RSVP page they enter their name, whether they are coming, how many people (up to 10 in one reply), the names of the others (optional), a message and your questions. They need no account, and an email address is optional unless you make it required. To change their answer, they send another reply.
+
+**Reply form.** In **Edit → RSVP**, the reply form shows what guests fill in. Their name and whether they are coming are **Always required**. Email and the message can be **Required** or **Optional**. Under **Your questions**, tap **Add a question** (up to 10, for example a meal choice) and pick the answer type: **Choices**, **Yes / No**, **Short answer**, **Long answer** or **Number**. Each question can be required or optional too. Guests who are coming answer your questions. Changing or removing a question later keeps the answers you already have.
 
 **What you do:** open **Guests** (not Edit → RSVP, which changes the form). It has two views:
 
@@ -139,10 +160,12 @@ Open **Share**:
 
 In the Guest list you can also:
 
-- **Download list** to save a CSV file for Excel, Numbers or Google Sheets, one row per person.
+- **Download Excel** (at the bottom of the screen) to save every reply and a summary in one Excel file. It opens in Excel, Numbers and Google Sheets too. **Download CSV** saves a plain list, one row per person.
 - **Add a reply** you got by phone or in person. On each reply, **Edit reply** corrects it and **Remove reply** deletes it.
 - **Print list**, or save it as a PDF from your browser's print menu.
 - **Refresh** to load new replies.
+
+**Google Sheets** (optional): in **Guests**, tap **Connect Google Sheets** and allow access in Google. Your editor makes a spreadsheet in your own Google Drive and adds every new reply by itself; the columns follow your reply form. Google lets it see only the files it makes, nothing else in your Drive. **Open sheet** opens it, **Sync now** updates it at once, and **Disconnect** stops it (the spreadsheet stays in your Drive). If you see "Google Sheets: coming soon", this connection is not switched on yet: use **Download Excel** instead.
 
 We do not send email notifications yet: new replies show on Home and under **New**, where **Mark as seen** clears them. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
 
@@ -180,7 +203,9 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can I start a second website with my order?** No. One order starts one website.
 
-**Is there music, a printed invitation or a save the date?** No.
+**Is there music?** Yes, if you like: soft music on your Our Story page (see Music and sound above). Choose **No music** to turn it off.
+
+**Is there a printed invitation or a save the date?** No.
 
 ## Troubleshooting
 
@@ -200,6 +225,10 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The QR code does not scan.** Download it again from Share and print it larger, with white space around it. Always scan a printed proof before printing all cards.
 
+**Guests hear no music.** Some phones wait for a tap: guests tap "Play music". Check that your Our Story page is shown and a track is chosen under **Music & sound**.
+
+**Google Sheets says "Sync failed".** Tap **Sync now**. If it shows **Connect again**, tap it and allow access in Google again.
+
 **The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options** (or tap **Time zone** under **Settings** on Home).
 
 ## Help and privacy
@@ -207,6 +236,8 @@ Your website stays online until **12 months after your wedding date**. Home → 
 In your editor, **Help & questions** at the bottom of Home answers the most common questions.
 
 Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
+
+Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 
 Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
 

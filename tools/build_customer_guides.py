@@ -30,7 +30,8 @@ Checks (always after a build, or alone with --check):
     a design that does not open from an envelope has no "envelope" in it (any case: since G121 the preview tab is named
     after the design's opening too)
   - every **bold** panel label and every "quoted" panel text of the guide exists in the platform source
-    (platform/components/panel, platform/app/start, platform/lib/{panel,claim,theme}, the design's theme.json):
+    (platform/components/panel, platform/app/start, platform/lib/{panel,claim,theme,audio,rsvp}, lib/maps.ts, the guest
+    scripts public/audio/audio.js + public/static/map.js, the design's theme.json):
     a renamed button fails here first (run this after a panel change, e.g. G121)
   - start_qr.png encodes exactly the start URL (re-encoded and compared module by module), start_qr_page.png holds the
     same pixels, and both — plus every rendered page of the PDF — decode with jsQR (platform's devDependency, run with
@@ -359,7 +360,11 @@ def build(no: str, folder: str, theme: str, base: str = BASE_URL, tmpl: str | No
 # ----------------------------------------------------------------------------- checks
 
 LABEL_SOURCES = [REPO / "platform" / "components" / "panel", REPO / "platform" / "app" / "start",
-                 REPO / "platform" / "lib" / "panel", REPO / "platform" / "lib" / "claim", REPO / "platform" / "lib" / "theme"]
+                 REPO / "platform" / "lib" / "panel", REPO / "platform" / "lib" / "claim", REPO / "platform" / "lib" / "theme",
+                 # G131: labels the panel reads from shared modules (G126 track names, G128 answer types) and the guest
+                 # site's shared scripts (G126 "Play music", G127 map card)
+                 REPO / "platform" / "lib" / "audio", REPO / "platform" / "lib" / "rsvp", REPO / "platform" / "lib" / "maps.ts",
+                 REPO / "platform" / "public" / "audio" / "audio.js", REPO / "platform" / "public" / "static" / "map.js"]
 # Bold text in the guide that is emphasis, not a panel label (checked by hand against the source, 2026-10-16).
 NOT_LABELS = {"First publish", "After that", "What stays as designed", "What guests do", "What you do", "not later",
               "3 changes in total", "12 months after your wedding date", "24 hours", "bkestudio@gmail.com",
@@ -374,6 +379,9 @@ def _source_text(theme: str) -> str:
         if "" not in _corpus:
             parts = []
             for d in LABEL_SOURCES:
+                if d.is_file():  # a single module or a guest-site script (.js)
+                    parts.append(d.read_text(encoding="utf-8"))
+                    continue
                 for p in sorted(d.rglob("*")):
                     if p.suffix in {".ts", ".tsx"} and ".test." not in p.name:
                         parts.append(p.read_text(encoding="utf-8"))

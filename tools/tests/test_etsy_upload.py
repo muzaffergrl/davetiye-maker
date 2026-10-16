@@ -144,9 +144,15 @@ def test_services():
 
 def test_check_exit():
     assert eu.main(["--check"]) == 0
-    files_missing = any(b.startswith(("listing images", "listing video", "digital file"))
-                        for _, folder, theme in eu.DESIGNS for b in eu.build(_, folder, theme)[0]["blockers"])
-    assert eu.main(["--check", "--strict"]) == (1 if files_missing else 0)
+    # --strict counts the files Etsy needs of every listing that "all" builds: the 20 designs and (G130) the services
+    files = ("listing images", "listing video", "digital file")
+    designs_missing = any(b.startswith(files) for no, folder, theme in eu.DESIGNS
+                          for b in eu.build(no, folder, theme)[0]["blockers"])
+    services_missing = any(b.startswith(files) for sid, price in eu.SERVICES
+                           for b in eu.build_service(sid, price)[0]["blockers"])
+    assert eu.main(["--check", "--strict"]) == (1 if designs_missing or services_missing else 0)
+    assert eu.main(["--check", "--strict", "--designs", "01-20"]) == (1 if designs_missing else 0)
+    assert eu.main(["--check", "--strict", "--designs", "services"]) == (1 if services_missing else 0)
 
 
 def main():
