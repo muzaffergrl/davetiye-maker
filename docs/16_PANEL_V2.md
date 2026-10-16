@@ -856,3 +856,13 @@ soru başına sayı + yüzde, yiyecek/alerji notları). Ayrıntı ve ekranlar: `
   açılır; ad START HERE rehberlerinde, docs/19 Ek A'da ve Review satırlarında ("Us · Headings & labels") geçtiği için değiştirilmedi —
   karar koordinatörün. Ayrıntı: `gorevler/G121-panel-satis-kalanlar.md`, ekranlar `platform/previews/g121/`.
 
+## G089 (2026-10-16) — mikro etkileşimler (K31)
+Yalnız görsel katman; panel mantığına, alanlara ve etiketlere dokunulmadı. `platform/components/fx/panel-fx.css` (global, panelin mevcut
+`data-panel`, `data-disclosure`, `data-save-flash`, `data-setup-done`, `data-preview` özniteliklerine bağlı; `app/edit/[slug]/page.tsx`
+içe aktarır): görünüm değişince içerik yumuşakça gelir (yalnız opaklık: yapışkan çubuklar oynamaz), düğmelerde daha belirgin basma,
+açılır bölümler aşağı doğru açılır, "Saved" bulut işareti zıplar, hazır olma çubuğu soldan dolar, önizleme yüklenirken sayfa biçimli
+iskelet + ışık bandı (`data-fx-skeleton`, PreviewPane'de tek öznitelik) ve sayfa yüklenince yumuşak geçiş, "Your website is live"
+ekranında onay işareti + bir kez marka renkli kâğıt patlaması (`components/fx/Celebrate.tsx`, Setup.tsx'te tek satır). Admin:
+`components/fx/admin-fx.css` (sayfa yumuşak açılır, site kartları sırayla gelir, imleçle hafif kalkar). Hepsi `prefers-reduced-motion`'da
+kapalı. Ekranlar `platform/previews/g089/`.
+

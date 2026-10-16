@@ -1637,6 +1637,23 @@ Sayfalar: `/`, `/designs`, `/designs/blush-garden-rose`, `/designs/olive-ivory`,
 5. `launched: true` yap. Build, eksik karar kalmışsa durur.
 6. §9.14 adımlarını uygula: Search Console, Bing Webmaster Tools, IndexNow, Rich Results Test, Vercel Firewall bot kuralları.
 
+### 14.5 Hareket katmanı (G089, K31, 2026-10-16)
+
+React Bits Pro lisansı yok; açık kaynak React Bits (MIT) fikirleri kütüphanesiz yazıldı. Kod `platform/components/fx/`:
+`MotionRoot.tsx` (tek istemci bileşeni, ~1 KB: kaydırmada belirme, imleç ışığı/eğimi, filtre geçişi), `fx.css` (global, `data-fx-*`
+özniteliklerine bağlı), `ShinyText.tsx` (React Bits ShinyText'in MIT başlıklı uyarlaması). Sayfa modüllerine yalnız öznitelik eklendi.
+- Hero: üst satırda ışık bandı (ShinyText, koyu altın #86652a, 5.0:1), telefonun arkasında nefes alan yumuşak ışık, telefon hafif
+  süzülür, ana düğmenin üstünden ara ara parıltı geçer. Hero metni ve ana düğme ilk karede son hâlinde (giriş animasyonu yok).
+- İlk ekranın altındaki bölümler kaydırınca yukarı doğru belirir; kart ızgaraları, sayfa kartları, RSVP sayıları kademeli gelir.
+- Tasarım kartları: imleç altında yumuşak ışık (SpotlightCard), küçük 3B eğim (TiltedCard), açılmış ana sayfa ekranı zarftan yükselir;
+  dokunmatikte basma etkisi. Hero'da çipten tasarım değişince yeni afiş yumuşakça gelir (ilk afiş LCP olduğu için asla).
+- "How it works": numaralar sırayla belirir, altın çizgi bir sonraki adıma çizilir. "How the opening works" okları sırayla ilerler.
+- Tasarım sayfası: sayfa ekranları tek desteden sıraya "dağıtılır"; imleçle hafif kalkar. /designs: filtre kullanılınca yeni görünen
+  kartlar yumuşakça gelir. Sayfalar arası: çapraz belge görünüm geçişi (Chromium; başlık sabit kalır).
+- `prefers-reduced-motion`: hepsi kapalı, hiçbir bölüm gizlenmez. JavaScript yoksa sayfa statik hâliyle görünür.
+- Ölçüm `tests/g089-browser.ts` (marketing-browser bütçesiyle aynı kısıtlama): önce/sonra LCP / → 1516/1408 ms, design 1460/1396 ms,
+  CLS 0, script 140 → 141 KB; `platform/previews/g089/checks_{before,after}.json`. Fiyat/hizmet bölümüne dokunulmadı (G130).
+
 ---
 
 ## Ek A — GPT prompt'ları (İngilizce, aynen kullanılır)
