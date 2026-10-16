@@ -36,6 +36,10 @@ export interface PanelContextValue {
   photoSlots: PanelPhotoSlot[];
   uploadPhoto: (slot: PanelPhotoSlot, blob: Blob) => Promise<{ ok: boolean; message?: string }>;
   removePhoto: (slot: PanelPhotoSlot) => void;
+  /** G126: upload the couple's own story music (content.audio is set when it is stored). */
+  uploadMusic?: (file: File, onProgress?: (share: number) => void) => Promise<{ ok: boolean; message?: string }>;
+  /** G126: the design's id (its default music track, lib/audio/catalog.ts). */
+  themeId?: string;
   /** G121: the last jump to a field (Home → Settings): a folded part holding that field opens for it (a new object each jump). */
   jump?: { path: string } | null;
   /** G121: what guests tap first in this design ("envelope", "book" …; PanelTheme.opening), for the panel's sentences. */

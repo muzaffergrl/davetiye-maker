@@ -572,6 +572,34 @@ export const CONTENT_SCHEMA = {
           }
         }
       }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "İsteğe bağlı (G126): ses. music: varsayılan parça kimliği (platform/lib/audio/catalog.ts MUSIC_TRACKS), 'custom' = çiftin yüklediği music_file, 'off' = müzik yok; yoksa tasarımın varsayılan parçası. Müzik yalnız Our Story sayfasında çalar. music_name = yüklenen dosyanın adı (panelde gösterilir). effects: zarf açılışı, sayfa geçişi, RSVP gönderimi ses efektleri (yoksa açık).",
+      "properties": {
+        "music": {
+          "type": "string",
+          "pattern": "^(off|custom|[a-z0-9-]{1,40})$"
+        },
+        "music_file": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "music_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "effects": {
+          "type": "boolean"
+        }
+      }
     }
   }
 } as const;

@@ -1449,3 +1449,25 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   **gizlilik metni** yok — RSVP formu, `/start` (e-posta) ve panel için kısa bir metin + link gerekli; ticari/hukuki kimlik
   kullanıcıdan gelmeli (uydurulmaz) → önerilen görev (claude-metin), G044'ün ya da ilk gerçek alıcının önünde blokaj. Google Fonts
   isteği ziyaretçi IP'sini Google'a gönderir (fontları kendimiz barındırmak düşünülebilir).
+
+## Ses: Story müziği ve efektler (G126)
+
+- **Dosyalar:** `public/audio/music/*.mp3` (4 parça, 490–700 KB, döngü) ve `public/audio/fx/*.mp3` (10 efekt, 2–11 KB) —
+  `tools/audio_synth.py` ile koddan sentezlendi (dış kaynak yok; kayıt `public/audio/LICENSES.md`). Tema eşlemesi, varsayılan
+  parça ve açılış zamanlamaları: `lib/audio/catalog.ts` (`DESIGN_SOUND`; zamanlar temanın `site.js` `MOTION.envelope` adımlarıyla
+  aynı — `tests/g126-audio.test.ts` denetler).
+- **İçerik:** `content.audio` (docs/03): `music` = parça kimliği | `custom` | `off` (yoksa tasarımın parçası), `music_file`,
+  `music_name`, `effects` (yoksa açık). Müzik yalnız Our Story sayfasında; çiftin dosyası yalnız seçiliyken ve Story açıkken
+  herkese açık `/media/` dosyasıdır (`customMusicFile`), önizlemede `?preview=` ile.
+- **Motor:** ses varsa `site-data`'ya `sound` ({music, effects, fx, opening}) ve `<head>`'e tek `<script src="/audio/audio.js" defer>`
+  (`lib/audio/site-sound.ts`); çalacak bir şey yoksa ikisi de yok. CSP değişmedi (`media-src 'self' blob: https:` zaten vardı).
+- **audio.js:** efektler Web Audio ile, ilk ses misafirin dokunuşundan sonra (`.stage` dokunuşu → açılış dizisi, `.replay` →
+  yeniden, `[data-skip]`/linkler → hafif tık, `rsvp:state` success → çan). Story'de yüklenince `play()` denenir; engellenirse
+  "♪ Play music" düğmesi; panel önizlemesinde (iframe) ve Data Saver'da otomatik denenmez. Her sayfada sol üstte ses düğmesi;
+  tercih `sessionStorage` `invite:sound:<slug>`, müzik konumu `invite:sound-at:<slug>`. Gizli sekmede durur.
+- **Yükleme:** `POST /api/edit/<slug>/music` (`lib/panel/music.ts`): MP3 / M4A / AAC, ≤ 10 MB, MIME + dosya imzası
+  (`lib/uploads.ts` `assertAudioUpload`); Vercel'in 4,5 MB istek sınırı yüzünden ≤ 3,5 MB parçalar (`X-Upload-Id/Part/Parts/Type`),
+  parçalar adaptörde (`putUploadPart` / `takeUploadParts`), dosya fotoğraflarla aynı yerde (`saveAudio`). `/media/` ses dosyalarına
+  `Range` (206) yanıtı verir (Safari bunu ister).
+- **Panel:** Our Story sayfasının sonunda "Music & sound" (`components/panel/MusicFields.tsx`): parça seç / kendi dosyan / kapalı,
+  "Listen" önizlemesi, "Sound effects" anahtarı.

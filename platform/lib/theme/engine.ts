@@ -46,6 +46,7 @@ import { THANK_YOU_DEFAULT_TITLE } from '../content/thank-you.ts';
 import { MAP_FRAME_ORIGIN, mapPlaces } from '../maps.ts';
 import { photoCandidates } from '../photo-variants.ts';
 import { MAP_CSS, MAP_JS, mapBlockHtml } from './map-block.ts';
+import { AUDIO_SCRIPT_SRC, siteSound } from '../audio/site-sound.ts';
 import { COPY_ATTRS, ownCopy, parseCopyAttr, resolveCopy, type CopyManifest } from './copy.ts';
 import type { ThemeShareFiles } from './share.ts';
 import { OG_IMAGE_SIZE } from './share.ts';
@@ -742,12 +743,22 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     // G128: the reply form's required fields and answer types for /rsvp/form.js (ids and flags only, no texts)
     rsvp_form: formScriptConfig(view),
   };
+  // G126: music (story page) and sound effects for public/audio/audio.js; the music URL must be safe like a photo's.
+  const sound = siteSound(opts.content, theme.id, page, (u) => {
+    const safe = safePhotoUrl(u);
+    return safe ? withPhotoKey(safe) : '';
+  });
+  if (sound) {
+    if (sound.music === '') sound.music = null;
+    (payload as Record<string, unknown>).sound = sound;
+  }
   $('#site-data').remove();
   const dataScript = $('<script type="application/json" id="site-data"></script>');
   dataScript.text(safeJsonForScript(payload));
   const firstHeadScript = $('head script').first();
   if (firstHeadScript.length) firstHeadScript.before(dataScript);
   else $('head').append(dataScript);
+  if (sound && !$(`script[src="${AUDIO_SCRIPT_SRC}"]`).length) $('head').append(`<script src="${AUDIO_SCRIPT_SRC}" defer></script>`);
 
   // Template comments are notes for theme developers (task ids, build steps), not for guests.
   const dropComments = (nodes: readonly AnyNode[]) => {

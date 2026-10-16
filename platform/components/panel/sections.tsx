@@ -12,6 +12,7 @@ import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { defaultNameDisplay, OPTIONAL_BLOCK_LABELS, openingPlace, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
 import { beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, rightsOneLine, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
+import { MusicFields } from './MusicFields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { MapFields, venueMapLinkChange } from './MapFields.tsx';
 import { RsvpFormFields } from './RsvpFormFields.tsx';
@@ -625,6 +626,7 @@ export function StoryFields() {
           <PhotoSlots slots={storySlots} compact />
         </Group>
       ) : null}
+      <MusicFields />
     </>
   );
 }

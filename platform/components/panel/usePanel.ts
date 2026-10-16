@@ -23,6 +23,7 @@ import { followWeddingDate, panelIssues, previewTokenExpiry, sameContent, withPh
 import { archivingDateIssue, withIdentity, type Identity, type RightsView } from '../../lib/panel/rights.ts';
 import { NO_GUEST_ACCESS, type GuestAccessView } from '../../lib/panel/guest-access.ts';
 import { panelApi } from './api.ts';
+import { uploadMusicFile } from './music-upload.ts';
 
 export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'offline' | 'conflict' | 'unauthorized' | 'refused';
 
@@ -381,6 +382,21 @@ export function usePanel(initial: PanelState, editKey: string) {
     [api, edit, flush, saveMessage],
   );
 
+  // G126: the couple's own story music (sent in parts), then content.audio points to it.
+  const uploadMusic = useCallback(
+    async (file: File, onProgress?: (share: number) => void): Promise<{ ok: boolean; message?: string }> => {
+      if (stopped.current) return { ok: false, message: saveMessage ?? 'Saving is paused. Please reload the page.' };
+      const res = await uploadMusicFile(initial.slug, editKey, file, onProgress);
+      if (!res.ok || !res.url) return { ok: false, message: res.message };
+      const url = res.url;
+      const name = file.name.slice(0, 120);
+      edit((c) => void (c.audio = { ...(c.audio ?? {}), music: 'custom', music_file: url, music_name: name }));
+      void flush();
+      return { ok: true };
+    },
+    [initial.slug, editKey, edit, flush, saveMessage],
+  );
+
   const removePhoto = useCallback(
     (slot: PanelPhotoSlot) => {
       edit((c) => withPhoto(c, slot.source, null));
@@ -516,6 +532,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     changeIdentity,
     setGuestAccess,
     uploadPhoto,
+    uploadMusic,
     removePhoto,
     restoreBackup,
     discardBackup,

@@ -427,11 +427,13 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       photoSlots: theme.photos,
       uploadPhoto: panel.uploadPhoto,
       removePhoto: panel.removePhoto,
+      uploadMusic: panel.uploadMusic,
+      themeId: theme.id,
       jump: fieldJump,
       opening: theme.opening ?? null,
       resolveMapLink: panel.api.mapLink,
     }),
-    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, fieldJump, theme.opening, panel.api],
+    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, panel.uploadMusic, theme.id, fieldJump, theme.opening, panel.api],
   );
 
   /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */

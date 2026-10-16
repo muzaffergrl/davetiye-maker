@@ -79,7 +79,7 @@ test('data-field escapes HTML in content (XSS attempts)', () => {
   assert.equal($('#n').text(), content.name_display);
   assert.equal($('#v').text(), content.venue.name);
   assert.equal($('#h').text(), content.host_line);
-  assert.equal($('script:not(#site-data)').length, 0);
+  assert.equal($('script:not(#site-data):not([src="/audio/audio.js"])').length, 0); // G126: the platform sound script only
   assert.equal($('iframe').length, 0);
   assert.equal($('body img').length, 0);
   assert.ok(!html.includes('<script>alert'));
@@ -359,9 +359,11 @@ test('site-data JSON is injected before the first head script and cannot break o
   const data = siteData($);
   assert.equal(data.derived.venue_city_region, `${content.venue.city}, Georgia`);
   // Only what theme JS needs: never the content record or the photo map (sections switched off would leak).
-  assert.deepEqual(Object.keys(data).sort(), ['derived', 'page', 'pages', 'preview', 'rsvp_form', 'slug', 'theme', 'variant']);
+  // G126: + sound (the platform's sound settings: track URL, effects on/off, opening cues — no content)
+  assert.deepEqual(Object.keys(data).sort(), ['derived', 'page', 'pages', 'preview', 'rsvp_form', 'slug', 'sound', 'theme', 'variant']);
   // G128: the reply form's ids, types and flags only (no question texts)
   assert.deepEqual(Object.keys(data.rsvp_form).sort(), ['questions', 'required']);
+  assert.deepEqual(Object.keys(data.sound).sort(), ['effects', 'fx', 'music', 'opening']);
   assert.equal(data.slug, 'clara-and-julian');
   assert.equal(data.page, 'home');
   assert.equal(data.derived.countdown_target_utc, '2027-05-15T20:00:00.000Z');

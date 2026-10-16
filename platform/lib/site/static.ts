@@ -2,6 +2,7 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { customMusicFile } from '../audio/catalog.ts';
 import { isThankYouOn, thankYouPhoto } from '../content/thank-you.ts';
 import { getDataAdapter } from '../data/index.ts';
 import type { SiteRecord } from '../data/types.ts';
@@ -89,6 +90,9 @@ function mediaUrls(content: unknown, now: Date = new Date()): string[] {
     .filter((v): v is string => typeof v === 'string' && v !== '');
   const thanks = thankYouPhoto(content);
   if (thanks && isThankYouOn(content, now)) urls.push(thanks);
+  // G126: the couple's own story music, while it is the chosen music and the story page is on
+  const music = customMusicFile(content);
+  if (music) urls.push(music);
   return urls;
 }
 
@@ -147,11 +151,19 @@ export async function serveLocalMedia(segments: string[] | undefined, req?: Requ
   }
   const file = await adapter.readPhoto(rel);
   if (!file) return notFound();
-  return new Response(new Uint8Array(file.bytes), {
-    status: 200,
+  // G126: music files are fetched in byte ranges (Safari plays <audio> only from a server that answers Range requests)
+  const range = file.contentType.startsWith('audio/') ? byteRange(req?.headers.get('range') ?? null, file.bytes.length) : null;
+  if (range === 'invalid') {
+    return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${file.bytes.length}`, 'Cache-Control': 'private, no-store' } });
+  }
+  const body = range ? file.bytes.subarray(range.start, range.end + 1) : file.bytes;
+  return new Response(new Uint8Array(body), {
+    status: range ? 206 : 200,
     headers: {
       'Content-Type': file.contentType,
-      'Content-Length': String(file.bytes.length),
+      'Content-Length': String(body.length),
+      ...(file.contentType.startsWith('audio/') ? { 'Accept-Ranges': 'bytes' } : {}),
+      ...(range ? { 'Content-Range': `bytes ${range.start}-${range.end}/${file.bytes.length}` } : {}),
       'X-Content-Type-Options': 'nosniff',
       'Content-Security-Policy': FILE_CSP,
       'Cache-Control': preview ? 'private, no-store' : guestOnly ? MEDIA_GUEST_CACHE : MEDIA_PUBLIC_CACHE,
@@ -159,4 +171,27 @@ export async function serveLocalMedia(segments: string[] | undefined, req?: Requ
       ...(guestOnly ? { Vary: 'Cookie', 'X-Robots-Tag': 'noindex' } : {}),
     },
   });
+}
+
+/**
+ * One byte range of a `Range: bytes=…` header (G126, music files): {start, end} inclusive, null = no (usable) range →
+ * the whole file, 'invalid' = 416. Several ranges are answered with the whole file (allowed by RFC 9110).
+ */
+export function byteRange(header: string | null, size: number): { start: number; end: number } | null | 'invalid' {
+  if (!header) return null;
+  const m = /^bytes=(\d*)-(\d*)$/.exec(header.trim());
+  if (!m || (m[1] === '' && m[2] === '')) return null;
+  let start: number;
+  let end: number;
+  if (m[1] === '') {
+    const suffix = Number(m[2]);
+    if (suffix === 0) return 'invalid';
+    start = Math.max(0, size - suffix);
+    end = size - 1;
+  } else {
+    start = Number(m[1]);
+    end = m[2] === '' ? size - 1 : Math.min(Number(m[2]), size - 1);
+  }
+  if (start >= size || start > end) return 'invalid';
+  return { start, end };
 }

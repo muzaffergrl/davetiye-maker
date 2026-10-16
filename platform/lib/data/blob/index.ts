@@ -51,7 +51,7 @@ import {
   type PutCommandOptions,
 } from '@vercel/blob';
 import type { ContentRecord } from '../../content/types.ts';
-import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
+import { assertAudioUpload, MEDIA_CONTENT_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
   applyRsvpUpdate,
@@ -135,7 +135,8 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 const SLUG_RE = /^[a-z0-9-]{1,64}$/;
 const SIMPLE_REF_RE = /^[A-Za-z0-9_-]{1,64}$/;
 /** <site>/<random>.<ext> (older uploads) or <site>/<random>-<width>w.<ext> (photo and size variants, G055). */
-const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32}(?:-[1-9]\d{0,4}w)?)\.(jpg|png|webp|avif)$/;
+const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32}(?:-[1-9]\d{0,4}w)?)\.(jpg|png|webp|avif|mp3|m4a|aac)$/;
+const UPLOAD_ID_RE = /^[0-9a-f]{32}$/;
 const READ_CONCURRENCY = 8;
 const DELETE_BATCH = 100;
 
@@ -236,6 +237,9 @@ export class BlobAdapter implements DataAdapter {
   }
   private mediaPrefix(siteId: string) {
     return `media/${siteId}/`;
+  }
+  private partsPrefix(siteId: string) {
+    return `parts/${siteId}/`;
   }
 
   // --- low level --------------------------------------------------------------------------------
@@ -510,6 +514,7 @@ export class BlobAdapter implements DataAdapter {
       await this.deletePrefix(this.rsvpPrefix(id));
       await this.deletePrefix(this.mediaPrefix(id));
       await this.deletePrefix(`docs/${id}/`);
+      await this.deletePrefix(this.partsPrefix(id));
       await this.releaseIndexIfOwned(this.slugPath(site.slug), id);
       if (site.orderRef !== null) await this.releaseIndexIfOwned(this.orderPath(site.orderRef), id);
       // Last, so a deletion interrupted half-way can simply be run again.
@@ -625,6 +630,52 @@ export class BlobAdapter implements DataAdapter {
     };
   }
 
+  async saveAudio(siteId: string, input: { bytes: Uint8Array; contentType?: string | null }): Promise<SavedPhoto> {
+    const type = assertAudioUpload(input.bytes, input.contentType ?? null);
+    if (!(await this.getSiteById(siteId))) throw new NotFoundError(`site ${siteId}`);
+    const name = `${randomBytes(16).toString('hex')}.${type.ext}`;
+    const b = input.bytes;
+    await this.#client.put(`${this.mediaPrefix(siteId)}${name}`, Buffer.from(b.buffer, b.byteOffset, b.byteLength), {
+      access: ACCESS,
+      token: this.#token,
+      contentType: type.contentType,
+      addRandomSuffix: false,
+      allowOverwrite: false,
+      cacheControlMaxAge: PHOTO_CACHE_SECONDS,
+    });
+    const rel = `${siteId}/${name}`;
+    return { url: `${this.mediaBaseUrl}/${rel}`, path: rel, contentType: type.contentType, size: b.length, variants: [] };
+  }
+
+  async putUploadPart(siteId: string, uploadId: string, index: number, bytes: Uint8Array): Promise<void> {
+    if (!UUID_RE.test(siteId) || !UPLOAD_ID_RE.test(uploadId) || !Number.isInteger(index) || index < 0 || index > 99) throw new Error('invalid upload part');
+    await this.#client.put(`${this.partsPrefix(siteId)}${uploadId}-${index}`, Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength), {
+      access: ACCESS,
+      token: this.#token,
+      contentType: 'application/octet-stream',
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      cacheControlMaxAge: JSON_CACHE_SECONDS,
+    });
+  }
+
+  async takeUploadParts(siteId: string, uploadId: string, count: number): Promise<Uint8Array[] | null> {
+    if (!UUID_RE.test(siteId) || !UPLOAD_ID_RE.test(uploadId)) return null;
+    const names = Array.from({ length: count }, (_, i) => `${this.partsPrefix(siteId)}${uploadId}-${i}`);
+    try {
+      const parts: Uint8Array[] = [];
+      for (const n of names) {
+        // parts are written just before: read past the CDN copy
+        const res = await this.#client.get(n, { access: ACCESS, token: this.#token, useCache: false });
+        if (!res || res.statusCode !== 200) return null;
+        parts.push(await readAll(res.stream));
+      }
+      return parts;
+    } finally {
+      await Promise.all(names.map((n) => this.del(n).catch(() => undefined)));
+    }
+  }
+
   async countPhotos(siteId: string): Promise<number> {
     if (!UUID_RE.test(siteId)) return 0;
     return (await this.listAll(this.mediaPrefix(siteId))).length;
@@ -701,6 +752,6 @@ export class BlobAdapter implements DataAdapter {
     // Photos never change (random names), so the CDN copy is fine here.
     const res = await this.#client.get(`media/${rel}`, { access: ACCESS, token: this.#token });
     if (!res || res.statusCode !== 200) return null;
-    return { bytes: await readAll(res.stream), contentType: IMAGE_TYPES[m[3] as keyof typeof IMAGE_TYPES].contentType };
+    return { bytes: await readAll(res.stream), contentType: MEDIA_CONTENT_TYPES[m[3]] };
   }
 }

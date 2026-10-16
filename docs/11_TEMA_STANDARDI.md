@@ -711,7 +711,11 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   koyu token (03: `--ink-soft`, `--gold-ink`) ve `text-shadow` hâlesi. Koyu tasarımlarda (06, 19) açık metin.
 - `prefers-reduced-motion: reduce`: dokununca animasyonsuz doğrudan home (kart uçuşu yok), sahneler anında görünür, parçacık yok,
   sonsuz döngülü animasyon (ipucu nabzı, ok) yok, VT süreleri ~0, `scroll-behavior: smooth` kapalı.
-- Geri sayım `role="timer"` (canlı bölge değil), bitince metin. Ses/otomatik oynatma yok. İçerik yalnız görselde değil.
+- Geri sayım `role="timer"` (canlı bölge değil), bitince metin. İçerik yalnız görselde değil. Tema kendi sesini/otomatik oynatmasını
+  yazmaz; ses yalnız platformun ortak betiğindendir (G126: `platform/public/audio/audio.js` — açılış efektleri temanın
+  `MOTION.envelope` zamanlamasına göre `lib/audio/catalog.ts`'de; ilk ses misafirin dokunuşundan sonra; Story müziği engellenirse
+  "Play music" düğmesi; her sayfada sol üstte ses düğmesi). Yeni temada `.stage` / `.replay` / `[data-skip]` sınıfları korunur ve
+  `catalog.ts`'ye tema satırı eklenir (`tests/g126-audio.test.ts` zamanlamayı `site.js` ile karşılaştırır).
 - CSS `content` ile eklenen işaretler (SSS "+"/"×", oklar) erişilebilir ada girmez: `content: "+" / ""` (önce yedek olarak
   `content: "+"`) ya da şablonda `aria-hidden="true"` span. Denetim: SSS sorusunun erişilebilir adı = soru metni (CDP
   `Accessibility.getFullAXTree`; `tests/g051-browser.ts`).
@@ -721,7 +725,8 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
 - `site.css`: `@view-transition { navigation: auto; }`. Kart (index `.card` ve home hero kartı) aynı `view-transition-name`
   (`invite-card`), nav `site-nav`. **Her ad sayfada tek öğede** (iki öğe aynı adı alırsa geçiş düşer).
 - `sessionStorage` (try/catch; gizli kipte sessizce yok sayılır), **site başına**: `invite:opened:<slug>`,
-  `invite:arrive:<slug>` (`<slug>` = `site-data.slug`; statik önizlemede ek yok). Başka anahtar, `localStorage`, çerez yok.
+  `invite:arrive:<slug>` (`<slug>` = `site-data.slug`; statik önizlemede ek yok). Başka anahtar, `localStorage`, çerez yok
+  (platformun ses betiği ayrıca `invite:sound:<slug>` ve `invite:sound-at:<slug>` kullanır, G126).
 - index `<head>` betiği `opened` varsa `is-opened` (açık zarf, kart dışarıda, "Enter" + "Replay the opening"); `?replay=1`
   kapalı başlatır. home `<head>` betiği `arrive`'ı okuyup siler → `from-envelope`; çapraz belge VT yoksa `arrive-fade` (solma).
 - `go(withCard)`: `opened` yazar; kartla geçişte `arrive` ve kartın `view-transition-name = 'invite-card'`; Skip'te `'none'`.
