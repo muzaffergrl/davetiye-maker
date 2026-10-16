@@ -375,6 +375,18 @@ export interface DataAdapter {
    * the photo last). Throws UploadRejectedError / NotFoundError.
    */
   savePhoto(siteId: string, photo: PhotoInput): Promise<SavedPhoto>;
+  /**
+   * G126: the couple's music file (assertAudioUpload: MP3 / AAC, <= 10 MB), stored next to the photos as
+   * "<random>.<mp3|m4a|aac>" and served by readPhoto like them. Throws UploadRejectedError / NotFoundError.
+   */
+  saveAudio?(siteId: string, input: { bytes: Uint8Array; contentType?: string | null }): Promise<SavedPhoto>;
+  /**
+   * G126: one part of a music upload sent in several requests (a Vercel function takes at most 4.5 MB per request).
+   * `uploadId` = 32 hex characters chosen by the browser, `index` 0-based. Parts are not served.
+   */
+  putUploadPart?(siteId: string, uploadId: string, index: number, bytes: Uint8Array): Promise<void>;
+  /** G126: the parts 0..count-1 of an upload, removed from storage; null when one is missing. */
+  takeUploadParts?(siteId: string, uploadId: string, count: number): Promise<Uint8Array[] | null>;
   /** Only adapters that serve photos through /media/... implement this (local, blob). */
   readPhoto?(path: string): Promise<StoredFile | null>;
   /** Number of photo files stored for the site (photos and their size variants), for the per-site cap (G060-fix). */

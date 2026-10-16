@@ -12,7 +12,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { randomBytes, randomUUID } from 'node:crypto';
 import type { ContentRecord } from '../../content/types.ts';
-import { IMAGE_TYPES, photoSetFiles } from '../../uploads.ts';
+import { assertAudioUpload, MEDIA_CONTENT_TYPES, photoSetFiles } from '../../uploads.ts';
 import {
   NotFoundError,
   applyRsvpUpdate,
@@ -39,7 +39,8 @@ import {
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const SLUG_FILE_RE = /^[a-z0-9-]{1,64}$/;
 /** <site>/<random>.<ext> (older uploads) or <site>/<random>-<width>w.<ext> (photo and size variants, G055). */
-const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32}(?:-[1-9]\d{0,4}w)?)\.(jpg|png|webp|avif)$/;
+const PHOTO_PATH_RE = /^([0-9a-f-]{36})\/([0-9a-f]{32}(?:-[1-9]\d{0,4}w)?)\.(jpg|png|webp|avif|mp3|m4a|aac)$/;
+const UPLOAD_ID_RE = /^[0-9a-f]{32}$/;
 
 export class LocalAdapter implements DataAdapter {
   readonly kind = 'local' as const;
@@ -63,6 +64,9 @@ export class LocalAdapter implements DataAdapter {
   }
   private uploadDir(siteId: string) {
     return path.join(/*turbopackIgnore: true*/ this.dir, 'uploads', siteId);
+  }
+  private partsDir(siteId: string) {
+    return path.join(/*turbopackIgnore: true*/ this.dir, 'upload-parts', siteId);
   }
 
   /** Serialises async work per key (read-modify-write safety within this process). */
@@ -250,6 +254,7 @@ export class LocalAdapter implements DataAdapter {
       await fs.rm(this.sitePath(id), { force: true });
       await fs.rm(this.rsvpPath(id), { force: true });
       await fs.rm(this.uploadDir(id), { recursive: true, force: true });
+      await fs.rm(this.partsDir(id), { recursive: true, force: true });
     });
   }
 
@@ -341,6 +346,38 @@ export class LocalAdapter implements DataAdapter {
     };
   }
 
+  async saveAudio(siteId: string, input: { bytes: Uint8Array; contentType?: string | null }): Promise<SavedPhoto> {
+    const type = assertAudioUpload(input.bytes, input.contentType ?? null);
+    if (!(await this.getSiteById(siteId))) throw new NotFoundError(`site ${siteId}`);
+    const dir = this.uploadDir(siteId);
+    await fs.mkdir(dir, { recursive: true });
+    const name = `${randomBytes(16).toString('hex')}.${type.ext}`;
+    await fs.writeFile(path.join(/*turbopackIgnore: true*/ dir, name), input.bytes, { flag: 'wx' });
+    const rel = `${siteId}/${name}`;
+    return { url: `${this.mediaBaseUrl}/${rel}`, path: rel, contentType: type.contentType, size: input.bytes.length, variants: [] };
+  }
+
+  async putUploadPart(siteId: string, uploadId: string, index: number, bytes: Uint8Array): Promise<void> {
+    if (!UUID_RE.test(siteId) || !UPLOAD_ID_RE.test(uploadId) || !Number.isInteger(index) || index < 0 || index > 99) throw new Error('invalid upload part');
+    const dir = this.partsDir(siteId);
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(path.join(/*turbopackIgnore: true*/ dir, `${uploadId}-${index}`), bytes);
+  }
+
+  async takeUploadParts(siteId: string, uploadId: string, count: number): Promise<Uint8Array[] | null> {
+    if (!UUID_RE.test(siteId) || !UPLOAD_ID_RE.test(uploadId)) return null;
+    const files = Array.from({ length: count }, (_, i) => path.join(/*turbopackIgnore: true*/ this.partsDir(siteId), `${uploadId}-${i}`));
+    try {
+      const parts = await Promise.all(files.map(async (f) => new Uint8Array(await fs.readFile(f))));
+      return parts;
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') return null;
+      throw e;
+    } finally {
+      await Promise.all(files.map((f) => fs.rm(f, { force: true })));
+    }
+  }
+
   async countPhotos(siteId: string): Promise<number> {
     if (!UUID_RE.test(siteId)) return 0;
     try {
@@ -356,7 +393,7 @@ export class LocalAdapter implements DataAdapter {
     if (!m || !UUID_RE.test(m[1])) return null;
     try {
       const bytes = await fs.readFile(path.join(/*turbopackIgnore: true*/ this.uploadDir(m[1]), `${m[2]}.${m[3]}`));
-      return { bytes: new Uint8Array(bytes), contentType: IMAGE_TYPES[m[3] as keyof typeof IMAGE_TYPES].contentType };
+      return { bytes: new Uint8Array(bytes), contentType: MEDIA_CONTENT_TYPES[m[3]] };
     } catch (e) {
       if ((e as NodeJS.ErrnoException).code === 'ENOENT') return null;
       throw e;

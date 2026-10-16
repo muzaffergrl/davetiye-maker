@@ -96,3 +96,61 @@ export function photoSetFiles(
   files.push({ name: photoFileName(base, width, type.ext), bytes: photo.bytes, width });
   return { type, files };
 }
+
+// ---------------------------------------------------------------------------------------------------- music (G126)
+
+/** The couple's own music file (G126): MP3 or AAC (.m4a / ADTS .aac), at most 10 MB. */
+export const MAX_AUDIO_BYTES = 10 * 1024 * 1024;
+
+export interface AudioType {
+  ext: 'mp3' | 'm4a' | 'aac';
+  contentType: 'audio/mpeg' | 'audio/mp4' | 'audio/aac';
+}
+
+export const AUDIO_TYPES: Record<AudioType['ext'], AudioType> = {
+  mp3: { ext: 'mp3', contentType: 'audio/mpeg' },
+  m4a: { ext: 'm4a', contentType: 'audio/mp4' },
+  aac: { ext: 'aac', contentType: 'audio/aac' },
+};
+
+/** Browser-reported types accepted for a music upload (the bytes still decide; empty = the browser did not say). */
+export const AUDIO_MIME_TYPES = ['audio/mpeg', 'audio/mp3', 'audio/mpeg3', 'audio/x-mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/m4a', 'audio/aac', 'audio/x-aac', 'audio/aacp'];
+
+const M4A_BRANDS = new Set(['M4A ', 'M4B ', 'mp42', 'mp41', 'isom', 'iso2', 'dash', 'M4V ']);
+
+/** MP3 (ID3 tag or an MPEG audio frame), MP4/M4A audio (ftyp box) or ADTS AAC, from the first bytes. */
+export function detectAudioType(bytes: Uint8Array): AudioType | null {
+  if (bytes.length >= 10 && ascii(bytes, 0, 3) === 'ID3') return AUDIO_TYPES.mp3;
+  if (bytes.length >= 12 && ascii(bytes, 4, 8) === 'ftyp' && M4A_BRANDS.has(ascii(bytes, 8, 12))) return AUDIO_TYPES.m4a;
+  if (bytes.length >= 4 && bytes[0] === 0xff) {
+    // ADTS AAC: sync 0xFFF, layer 00
+    if ((bytes[1] & 0xf6) === 0xf0) return AUDIO_TYPES.aac;
+    // MPEG-1/2/2.5 audio frame: sync 11 bits, layer III (01) or II (10), bitrate index not 1111, sample rate not 11
+    const version = (bytes[1] >> 3) & 0x3;
+    const layer = (bytes[1] >> 1) & 0x3;
+    const bitrate = (bytes[2] >> 4) & 0xf;
+    const rate = (bytes[2] >> 2) & 0x3;
+    if ((bytes[1] & 0xe0) === 0xe0 && version !== 1 && (layer === 1 || layer === 2) && bitrate !== 0xf && rate !== 3) return AUDIO_TYPES.mp3;
+  }
+  return null;
+}
+
+/** Throws UploadRejectedError unless the bytes are an MP3 / AAC file within the size limit and the browser's type fits. */
+export function assertAudioUpload(bytes: Uint8Array, declaredType: string | null = null, maxBytes = MAX_AUDIO_BYTES): AudioType {
+  if (!bytes.length) throw new UploadRejectedError('empty', 'The file is empty.');
+  if (bytes.length > maxBytes) {
+    throw new UploadRejectedError('too_large', `The music file is larger than ${Math.round(maxBytes / 1024 / 1024)} MB.`);
+  }
+  const declared = (declaredType ?? '').split(';')[0].trim().toLowerCase();
+  const type = detectAudioType(bytes);
+  if (!type || (declared && !AUDIO_MIME_TYPES.includes(declared))) {
+    throw new UploadRejectedError('unsupported_type', 'Please upload an MP3 or M4A (AAC) music file.');
+  }
+  return type;
+}
+
+/** Stored media file types by extension (photos + music), for the adapters' readPhoto. */
+export const MEDIA_CONTENT_TYPES: Record<string, string> = {
+  ...Object.fromEntries(Object.values(IMAGE_TYPES).map((t) => [t.ext, t.contentType])),
+  ...Object.fromEntries(Object.values(AUDIO_TYPES).map((t) => [t.ext, t.contentType])),
+};
