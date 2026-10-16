@@ -130,7 +130,7 @@ export default async function DesignPage({ params }: Props) {
             What your guests see after the {thing} opens
           </h2>
           <p className={s.lead}>{d.copy.intro}</p>
-          <ul className={s.thumbRow}>
+          <ul className={s.thumbRow} data-fx-deal>
             {SITE_PAGES.map((p) => {
               const file = designScreen(d.id, p.key);
               return (
@@ -260,7 +260,7 @@ export default async function DesignPage({ params }: Props) {
             {others.length ? 'Other designs' : 'Keep planning'}
           </h2>
           {others.length ? (
-            <div className={s.cardGrid}>
+            <div className={s.cardGrid} data-fx-stagger>
               {others.map((o) => (
                 <DesignCard key={o.id} design={o} placement="design-related" />
               ))}

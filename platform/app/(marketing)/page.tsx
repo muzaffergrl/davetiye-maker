@@ -1,6 +1,7 @@
 // / — home (docs/14 §6.1; G066 layout from the BKE Studio comps brand/ui/site/u1_home_*). Static. The live demo loads
 // only after a tap (DemoFacade, §9.7). Every picture is a REAL theme or panel screen (or the real opening recording).
 import { ArrowRight } from 'lucide-react';
+import { ShinyText } from '../../components/fx/ShinyText.tsx';
 import { HeroDemo } from '../../components/marketing/Demo.tsx';
 import { DesignCard } from '../../components/marketing/DesignCard.tsx';
 import { demoDesigns } from '../../components/marketing/demo-data.ts';
@@ -71,7 +72,9 @@ export default function HomePage() {
               </ul>
             }
           >
-            <Eyebrow>Wedding websites · edit on your phone</Eyebrow>
+            <Eyebrow>
+              <ShinyText>Wedding websites · edit on your phone</ShinyText>
+            </Eyebrow>
             <h1 className={s.h1}>{PAGE.h1}</h1>
             <p className={s.lead}>
               Your guests tap a sealed envelope or keepsake and your wedding website opens: your story, the details and RSVP. You
@@ -89,7 +92,7 @@ export default function HomePage() {
           <h2 id="designs" className={s.h2}>
             Choose the design your guests will open
           </h2>
-          <div className={s.cardGrid}>
+          <div className={s.cardGrid} data-fx-stagger>
             {featured.map((d) => (
               <DesignCard key={d.id} design={d} placement="home-strip" />
             ))}
@@ -121,7 +124,7 @@ export default function HomePage() {
           <h2 id="opening" className={s.h2}>
             How the opening works
           </h2>
-          <ol className={s.flowRow} aria-label={`The ${second.name} ${secondThing}, from sealed to open`}>
+          <ol className={s.flowRow} data-fx-stagger data-fx-flow aria-label={`The ${second.name} ${secondThing}, from sealed to open`}>
             <li className={s.flowItem}>
               {sealed ? <Screen file={sealed} alt={`${second.name}: the sealed ${secondThing} with the demo couple's names`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
               <p className={s.flowLabel}>Sealed</p>
@@ -175,7 +178,7 @@ export default function HomePage() {
           <h2 id="pages" className={s.h2}>
             Four pages your guests will actually use
           </h2>
-          <ul className={s.pageCards}>
+          <ul className={s.pageCards} data-fx-stagger>
             {SITE_PAGES.map((p) => {
               const file = designScreen(first.id, p.key);
               return (
@@ -235,7 +238,7 @@ export default function HomePage() {
               <h2 id="rsvp" className={s.h2}>
                 RSVPs without the spreadsheet chaos
               </h2>
-              <dl className={s.tiles}>
+              <dl className={s.tiles} data-fx-stagger>
                 {totals.map((t) => (
                   <div key={t.label} className={s.tile}>
                     <dt className={s.tileLabel}>{t.label}</dt>
@@ -271,7 +274,7 @@ export default function HomePage() {
           <h2 id="how" className={s.h2}>
             How it works
           </h2>
-          <ol className={s.stepRow}>
+          <ol className={s.stepRow} data-fx-stagger data-fx-steps>
             {STEPS.map((st, i) => (
               <li key={st.title}>
                 <span className={s.stepNum} aria-hidden>

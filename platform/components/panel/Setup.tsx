@@ -32,6 +32,7 @@ import { Banner, Button, cx, SaveIndicator } from './ui.tsx';
 import type { PanelController } from './usePanel.ts';
 import { UrlText } from './views.tsx';
 import styles from './panel.module.css';
+import { Celebrate } from '../fx/Celebrate.tsx';
 
 
 
@@ -191,6 +192,7 @@ export function Setup({
             <span className={styles.successIcon} aria-hidden="true">
               <CircleCheckBig size={40} strokeWidth={1.5} />
             </span>
+            <Celebrate />
             <h1 ref={headingRef} tabIndex={-1} className={styles.setupTitle}>
               Your website is live
             </h1>

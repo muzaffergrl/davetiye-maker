@@ -221,7 +221,7 @@ export function PreviewPane({
             />
           ) : null}
           {!loaded ? (
-            <div className={styles.previewSkeleton} aria-hidden={!slow}>
+            <div className={styles.previewSkeleton} aria-hidden={!slow} data-fx-skeleton={slow ? undefined : ''}>
               {slow ? (
                 <>
                   <p>The preview is taking longer than usual.</p>

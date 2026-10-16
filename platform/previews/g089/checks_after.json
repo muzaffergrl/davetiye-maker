@@ -1,0 +1,342 @@
+{
+  "tool": "tests/g089-browser.ts (G089)",
+  "label": "after",
+  "date": "2026-10-16",
+  "throttling": "perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2",
+  "passed": 33,
+  "failed": 0,
+  "metrics": {
+    "/": {
+      "lcp": 1408,
+      "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1048,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 462,
+      "scriptKB": 141
+    },
+    "/designs": {
+      "lcp": 808,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 808,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 425,
+      "scriptKB": 140
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1396,
+      "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1044,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 404,
+      "scriptKB": 141
+    },
+    "/designs/coastal-seaside": {
+      "lcp": 1368,
+      "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/coastal-seaside/envelope-480.webp",
+      "cls": 0,
+      "fcp": 968,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 400,
+      "scriptKB": 141
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 856,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 856,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 243,
+      "scriptKB": 140
+    }
+  },
+  "checks": [
+    {
+      "name": "perf /: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1408,
+        "el": "IMG http://127.0.0.1:3489/marketing/designs/blush-garden-rose/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 462,
+        "script": 141
+      }
+    },
+    {
+      "name": "perf /: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /designs: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 808,
+        "el": "P"
+      }
+    },
+    {
+      "name": "perf /designs: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /designs: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 425,
+        "script": 140
+      }
+    },
+    {
+      "name": "perf /designs: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1396,
+        "el": "IMG http://127.0.0.1:3489/marketing/designs/olive-ivory/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /designs/olive-ivory: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 404,
+        "script": 141
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1368,
+        "el": "IMG http://127.0.0.1:3489/marketing/designs/coastal-seaside/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /designs/coastal-seaside: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 400,
+        "script": 141
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 856,
+        "el": "P"
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 243,
+        "script": 140
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "reduced motion: no section waits for a reveal on /",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/ @390: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/ @390: every section revealed after scrolling through",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs @390: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs @390: every section revealed after scrolling through",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory @390: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory @390: every section revealed after scrolling through",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/ @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/ @1280: every section revealed after scrolling through",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs @1280: every section revealed after scrolling through",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory @1280: every section revealed after scrolling through",
+      "ok": true,
+      "detail": 0
+    }
+  ]
+}

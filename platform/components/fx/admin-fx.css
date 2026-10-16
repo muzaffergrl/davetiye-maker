@@ -1,0 +1,42 @@
+/* G089 (K31, low priority): small polish in the shop admin — the page fades in (opacity only), site cards come in one
+   after another (first ten) and lift a little under a fine pointer. Keyed on data-admin / data-site; off with
+   prefers-reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-admin] main {
+    animation: fx-admin-fade 220ms ease-out backwards;
+  }
+  [data-admin] [data-site] {
+    animation: fx-admin-in 380ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+  [data-admin] [data-site]:nth-child(2) { animation-delay: 30ms; }
+  [data-admin] [data-site]:nth-child(3) { animation-delay: 60ms; }
+  [data-admin] [data-site]:nth-child(4) { animation-delay: 90ms; }
+  [data-admin] [data-site]:nth-child(5) { animation-delay: 120ms; }
+  [data-admin] [data-site]:nth-child(6) { animation-delay: 150ms; }
+  [data-admin] [data-site]:nth-child(7) { animation-delay: 180ms; }
+  [data-admin] [data-site]:nth-child(8) { animation-delay: 210ms; }
+  [data-admin] [data-site]:nth-child(9) { animation-delay: 240ms; }
+  [data-admin] [data-site]:nth-child(n + 10) { animation-delay: 270ms; }
+  @media (hover: hover) and (pointer: fine) {
+    [data-admin] [data-site]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -18px rgb(43 21 38 / 0.45);
+    }
+  }
+}
+@keyframes fx-admin-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fx-admin-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

@@ -14,7 +14,7 @@ const HEADER_LOGO_H = 36;
 
 export function Header() {
   return (
-    <header className={s.header}>
+    <header className={s.header} data-fx-header>
       <div className={s.headerInner}>
         <a href="/" className={s.logoLink}>
           <img

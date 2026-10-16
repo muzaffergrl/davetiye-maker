@@ -1,0 +1,282 @@
+{
+  "tool": "tests/g089-browser.ts (G089)",
+  "label": "before",
+  "date": "2026-10-16",
+  "throttling": "perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2",
+  "passed": 21,
+  "failed": 0,
+  "metrics": {
+    "/": {
+      "lcp": 1516,
+      "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1268,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 460,
+      "scriptKB": 140
+    },
+    "/designs": {
+      "lcp": 852,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 852,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 423,
+      "scriptKB": 139
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1460,
+      "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0.0003,
+      "fcp": 1040,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 401,
+      "scriptKB": 140
+    },
+    "/designs/coastal-seaside": {
+      "lcp": 1400,
+      "lcpElement": "IMG http://127.0.0.1:3489/marketing/designs/coastal-seaside/envelope-480.webp",
+      "cls": 0.0003,
+      "fcp": 992,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 397,
+      "scriptKB": 140
+    },
+    "/guides/how-to-make-a-wedding-website": {
+      "lcp": 904,
+      "lcpElement": "P",
+      "cls": 0,
+      "fcp": 904,
+      "first": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      },
+      "transferredKB": 240,
+      "scriptKB": 139
+    }
+  },
+  "checks": [
+    {
+      "name": "perf /: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1516,
+        "el": "IMG http://127.0.0.1:3489/marketing/designs/blush-garden-rose/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 460,
+        "script": 140
+      }
+    },
+    {
+      "name": "perf /: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /designs: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 852,
+        "el": "P"
+      }
+    },
+    {
+      "name": "perf /designs: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /designs: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 423,
+        "script": 139
+      }
+    },
+    {
+      "name": "perf /designs: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1460,
+        "el": "IMG http://127.0.0.1:3489/marketing/designs/olive-ivory/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0.0003
+    },
+    {
+      "name": "perf /designs/olive-ivory: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 401,
+        "script": 140
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1400,
+        "el": "IMG http://127.0.0.1:3489/marketing/designs/coastal-seaside/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0.0003
+    },
+    {
+      "name": "perf /designs/coastal-seaside: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 397,
+        "script": 140
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 904,
+        "el": "P"
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 240,
+        "script": 139
+      }
+    },
+    {
+      "name": "perf /guides/how-to-make-a-wedding-website: h1 and first button final in the first frame",
+      "ok": true,
+      "detail": {
+        "h1": {
+          "o": "1",
+          "t": "none"
+        },
+        "btn": {
+          "o": "1",
+          "t": "none"
+        }
+      }
+    },
+    {
+      "name": "reduced motion: no section waits for a reveal on /",
+      "ok": true,
+      "detail": 0
+    }
+  ]
+}

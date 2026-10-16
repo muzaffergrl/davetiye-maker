@@ -1,0 +1,169 @@
+/* G089 (K31): micro-interactions of the buyer panel. Global CSS keyed on attributes the panel already has (data-panel,
+   data-disclosure, data-save-flash, data-setup-done, data-preview, role="progressbar") plus two small hooks
+   (data-fx-skeleton on the preview loader, <Celebrate /> on the live screen), so the panel's logic, fields and labels
+   stay untouched. Opacity and transform only, short (≤ 400 ms, the celebration 1.4 s once); no transform on wrappers
+   that hold fixed or sticky bars. With prefers-reduced-motion everything here is off. */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* a new view (Home, Edit, Share, Guests, an edit page) fades in — opacity only: the sticky footers stay put */
+  [data-panel-root] main > * {
+    animation: fx-panel-fade 240ms ease-out backwards;
+  }
+
+  /* buttons: a slightly deeper press, and a soft lift on a fine pointer */
+  [data-panel] button:not(:disabled) {
+    -webkit-tap-highlight-color: transparent;
+  }
+  [data-panel] button:not(:disabled):active {
+    transform: scale(0.97);
+  }
+
+  /* sections that open ("More options", "Guest password", …): the body eases down */
+  [data-disclosure] > div:not([hidden]) {
+    animation: fx-panel-open 260ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  }
+
+  /* "Saved": the check pops and the word slides in */
+  [data-save-flash] svg {
+    animation: fx-saved-pop 520ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  }
+  [data-save-flash] [data-save-text] {
+    animation: fx-saved-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  }
+
+  /* progress ("Your website is 32% ready"): the bar fills from the left */
+  [data-panel] [role='progressbar'] > span {
+    transform-origin: 0 50%;
+    animation: fx-fill 900ms cubic-bezier(0.16, 1, 0.3, 1) 120ms backwards;
+  }
+
+  /* preview: a page-shaped skeleton with a light band while the frame loads, then the page fades in */
+  [data-fx-skeleton]::before {
+    content: '';
+    width: min(240px, 70%);
+    height: 260px;
+    border-radius: 14px;
+    background:
+      linear-gradient(#e6ddcf, #e6ddcf) 50% 0 / 60% 14px no-repeat,
+      linear-gradient(#e6ddcf, #e6ddcf) 50% 26px / 40% 10px no-repeat,
+      linear-gradient(#ece4d6, #ece4d6) 0 56px / 100% 120px no-repeat,
+      linear-gradient(#e6ddcf, #e6ddcf) 0 196px / 100% 10px no-repeat,
+      linear-gradient(#e6ddcf, #e6ddcf) 0 216px / 80% 10px no-repeat,
+      linear-gradient(#e6ddcf, #e6ddcf) 0 236px / 90% 10px no-repeat;
+    -webkit-mask: linear-gradient(100deg, #000 40%, rgb(0 0 0 / 0.45) 50%, #000 60%) 0 0 / 300% 100%;
+    mask: linear-gradient(100deg, #000 40%, rgb(0 0 0 / 0.45) 50%, #000 60%) 0 0 / 300% 100%;
+    animation: fx-skeleton 1.4s linear infinite;
+  }
+  [data-preview] div:not(:has(> [data-fx-skeleton])) > iframe {
+    animation: fx-preview-in 380ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* the live screen: the check pops, the burst plays once */
+  [data-setup-done] main > div:has(> [data-fx-burst]) {
+    position: relative;
+  }
+  [data-setup-done] main > div:has(> [data-fx-burst]) > span:first-child {
+    animation: fx-live-pop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  }
+  [data-fx-burst] {
+    position: absolute;
+    left: 50%;
+    top: 76px; /* the middle of the 72 px icon under a 40 px top padding */
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+  [data-fx-burst] > span {
+    position: absolute;
+    left: calc(var(--w) / -2);
+    top: calc(var(--h) / -2);
+    width: var(--w);
+    height: var(--h);
+    border-radius: 2px;
+    background: var(--c);
+    opacity: 0;
+    animation: fx-burst 1400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--t) + 180ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-fx-burst] {
+    display: none;
+  }
+}
+
+@keyframes fx-panel-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fx-panel-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes fx-saved-pop {
+  0% {
+    transform: scale(0.4) rotate(-20deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+@keyframes fx-saved-in {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+}
+@keyframes fx-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes fx-skeleton {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+@keyframes fx-preview-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+@keyframes fx-live-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes fx-burst {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--a)) translateY(0) rotate(0deg) scale(0.4);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateY(calc(var(--d) * -1)) rotate(var(--r)) scale(1);
+  }
+}

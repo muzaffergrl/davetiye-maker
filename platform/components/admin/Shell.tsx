@@ -7,6 +7,7 @@ import { BrandLogo } from '../panel/Brand.tsx';
 import { PANEL_FONTS } from '../panel/fonts.ts';
 import { SignOutButton } from './AdminLogin.tsx';
 import styles from './admin.module.css';
+import '../fx/admin-fx.css';
 
 export type AdminSection = 'dashboard' | 'orders' | 'customers' | 'designs' | 'new';
 

@@ -196,6 +196,8 @@ export function HeroDemo({
   const [sel, setSel] = useState(0);
   const [inline, setInline] = useState<{ n: number } | null>(null);
   const [allChips, setAllChips] = useState(false);
+  // G089: set once a chip changes the design, so the new poster eases in (the first poster is the LCP image: never)
+  const [swapped, setSwapped] = useState(false);
   const chipsRef = useRef<HTMLDivElement>(null);
   const d = designs[sel];
   // G094: up to eight names show in full on wide screens (two rows at 1280 px, G093); beyond that, the first
@@ -212,6 +214,7 @@ export function HeroDemo({
   };
 
   const choose = (i: number) => {
+    setSwapped(true);
     setSel(i);
     setInline(null);
   };
@@ -220,8 +223,8 @@ export function HeroDemo({
     <div className={className ? `${s.hero} ${className}` : s.hero}>
       <div className={s.heroText}>{children}</div>
       <div className={s.heroVisual}>
-        <div className={s.heroStage}>
-          <div className={s.heroScreen}>
+        <div className={s.heroStage} data-fx-glow>
+          <div className={s.heroScreen} data-fx-swap={swapped || undefined}>
             {inline ? (
               <ScaledFrame key={`${d.id}-${inline.n}`} src={d.demoPath} title={`Live demo: ${d.name}`} fit="width" />
             ) : (
@@ -313,6 +316,7 @@ export function HeroDemo({
         <a
           className={demoVariant === 'secondary' ? `${s.btn} ${s.btnSecondary} ${s.btnLarge}` : `${s.btn} ${s.btnLarge}`}
           href={d.demoPath}
+          data-fx-sheen={demoVariant === 'secondary' ? undefined : ''}
           onClick={(e) => {
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
             e.preventDefault();
