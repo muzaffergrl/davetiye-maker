@@ -27,6 +27,9 @@ body {
 .veil-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: var(--h, 520px);
   background: linear-gradient(to top, color-mix(in srgb, var(--paper) 90%, transparent) 0%,
               color-mix(in srgb, var(--paper) 50%, transparent) 60%, transparent 100%); }
+.veil-left { position: absolute; top: 0; bottom: 0; left: 0; width: var(--w, 1100px);
+  background: linear-gradient(to right, color-mix(in srgb, var(--paper) 94%, transparent) 0%,
+              color-mix(in srgb, var(--paper) 86%, transparent) 70%, transparent 100%); }
 .panel { position: absolute; top: 0; bottom: 0; background: var(--paper-img, none) center / cover, var(--paper); }
 .panel::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--paper) 55%, transparent); }
 

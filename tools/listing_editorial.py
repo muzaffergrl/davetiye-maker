@@ -123,9 +123,16 @@ def build(t: lk.Theme, only: list[str] | None) -> list[Path]:
                 scene = Image.open(scene_file(t, "cover_hand_v2.png", "cover_hand.png"))
                 r0 = kz.ekran_bolgeleri(scene)[0]
                 k = 2000 / scene.width
-                place(scene, k, 0, 700 - r0["kutu"][1] * k, [shot(shots, "g01_envelope")], bg)
-                v.update({"scene.bg": bg.resolve().as_uri(), "veil_h": "820", "text_top": "330",
-                          "title_px": str(min(170, round(170 * 13 / max(13, len(t.name)))))})
+                # names up to 16 characters on one line; longer ones on two lines ("Vintage Airmail / Love Letter")
+                words = t.name.split()
+                if len(t.name) <= 16:
+                    title, size, screen_top = t.name, 170, 700
+                else:
+                    cut = min(range(1, len(words)), key=lambda i: abs(len(" ".join(words[:i])) - len(t.name) / 2))
+                    title, size, screen_top = " ".join(words[:cut]) + "\n" + " ".join(words[cut:]), 140, 820
+                place(scene, k, 0, screen_top - r0["kutu"][1] * k, [shot(shots, "g01_envelope")], bg)
+                v.update({"scene.bg": bg.resolve().as_uri(), "veil_h": str(screen_top + 120), "text_top": "330",
+                          "title": title, "title_px": str(size)})
             elif name == "02_opening":
                 scene = Image.open(scene_file(t, "three_phones.png"))
                 regs = kz.ekran_bolgeleri(scene)
@@ -182,8 +189,9 @@ def build(t: lk.Theme, only: list[str] | None) -> list[Path]:
                 col_w = placed[0]["kutu"][0] - 120 - 110
                 if col_w < 700:
                     raise RuntimeError(f"{t.folder}: only {col_w} px left of the phone for the text column (need 700)")
+                # a paper wash behind the text column, ending before the phone (dark tables: 04's wood)
                 v.update({"scene.bg": bg.resolve().as_uri(), "col_left": "120", "col_top": "250",
-                          "col_w": str(min(820, col_w))})
+                          "col_w": str(min(820, col_w)), "veil_w": str(placed[0]["kutu"][0] - 40)})
             body = lk.fill((TPL / f"{name}.html").read_text(encoding="utf-8"), v,
                            raw=frozenset({"screens", "steps"}))
             page = ("<!doctype html><html><head><meta charset='utf-8'><link rel='stylesheet' href='editorial.css'>"

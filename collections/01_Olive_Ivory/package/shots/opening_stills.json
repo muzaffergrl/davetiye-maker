@@ -31,5 +31,15 @@
       "file": "o07.jpg",
       "ms": 4800
     }
-  ]
+  ],
+  "chosen": {
+    "open_mid": {
+      "still": "o04",
+      "ms_after_tap": 2400
+    },
+    "open_card": {
+      "still": "o06",
+      "ms_after_tap": 3600
+    }
+  }
 }
