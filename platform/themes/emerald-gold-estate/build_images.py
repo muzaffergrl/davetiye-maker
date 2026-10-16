@@ -102,6 +102,14 @@ FZ_NOTE = ("serbest_mermer: dolu = şeffaf ya da altın (R − B > 40 ve kağıt
 # 0,46 px), en alt nokta (510,9; 886,2). Mühür (altın, R > G + 10, R > 120; sütun/satır payı > %5) x 442–576, y 816–953:
 # genişlik 135 → / zarf = 0,1862; merkez (509, 884,5) − uç = (−1,9; −1,7) px = (−0,0026; −0,0023) × zarf genişliği.
 COMP = {"env_w": 725.0, "tip": (510.9, 886.2), "closure_w_over_env": 0.1862, "closure_c_minus_tip": (-0.0026, -0.0023)}
+# GM07 rötuş parçaları (G098): ham imagegen çıktıları (kullanıcı kararı: kaynak PNG'de piksel/alfa/boyut düzenlemesi yok;
+# ham tuval 1254 × 1254, istenen 1024 değil). GPT_PROMPTS.md'de Kaydet satırları yok → aynı hat elle çağrılır:
+# parts_prep.parca_isle (alfa > 8 kutusu + 8 px pay) geçici klasöre, sonra yalnız ölçekleme + WebP. Ölçek / konum CSS'te.
+#   countdown_box: W1.2'nin dört altın çerçeveli sayaç kutusu (§5.7: CSS kutusu değil GPT parçası). Parça 4:5 dik, comp'un
+#     kutuları ~6:5 yatık → site.css iki yarım kullanır (::before sol yarı, ::after sağ yarı, yükseklikle ölçekli): düz çift
+#     çizgi ortada birleşir, köşe süsleri bozulmaz (§5.7 "parçayı kesmek").
+#   pill_sprig: W1.2'deki RSVP hapının iki yanındaki küçük dallar (sap solda, uç sağda; sol dal aynalanır).
+GM07 = {"countdown_box": ("countdown_box_r2.png", [240]), "pill_sprig": ("pill_sprig_r2.png", [120])}
 
 
 def uyar(ad, bilgi):
@@ -614,6 +622,19 @@ def main():
         k400.thumbnail((400, 400), Image.LANCZOS)
         webp_yaz(k400, f"accent_{i}_lg", [k400.width], q, manifest, out)
         manifest[f"accent_{i}"]["aspect"] = round(im.width / im.height, 4)
+
+    # ------------------------------------------------------------------ GM07 rötuş parçaları (ham imagegen, G098)
+    import hashlib
+    import parts_prep
+    for nm, (dosya, gen) in GM07.items():
+        kayit, _, _, pu = parts_prep.parca_isle({"seffaf": True}, PARTS / dosya, prep, 150, 8)
+        for u in pu:
+            print(f"UYARI  {nm}: {u}")
+        im = Image.open(prep / kayit["dosyalar"][0]["dosya"]).convert("RGBA")
+        webp(im, nm, gen)
+        manifest[nm].update({"source": f"parts/{dosya}", "source_canvas": kayit["kaynak_olcu"], "crop": kayit["kirpma"],
+                             "source_sha256": hashlib.sha256((PARTS / dosya).read_bytes()).hexdigest(),
+                             "note": "GM07 ham imagegen çıktısı; yalnız parts_prep kırpımı + ölçek (G098)"})
 
     # ------------------------------------------------------------------ zemin
     bg = Image.open(PARTS / "bg_page.png").convert("RGB")

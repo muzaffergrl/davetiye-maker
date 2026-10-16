@@ -2414,6 +2414,62 @@
    }
   ]
  },
+ "countdown_box": {
+  "src_size": [
+   782,
+   975
+  ],
+  "ratio": 0.80205,
+  "files": [
+   {
+    "file": "countdown_box-240.webp",
+    "w": 240,
+    "h": 299,
+    "bytes": 9116
+   }
+  ],
+  "source": "parts/countdown_box_r2.png",
+  "source_canvas": [
+   1254,
+   1254
+  ],
+  "crop": [
+   236,
+   136,
+   782,
+   975
+  ],
+  "source_sha256": "8ac097b59639bea00ccc1ab56030642297f9747b216205646a45d2be10feeaa8",
+  "note": "GM07 ham imagegen çıktısı; yalnız parts_prep kırpımı + ölçek (G098)"
+ },
+ "pill_sprig": {
+  "src_size": [
+   784,
+   327
+  ],
+  "ratio": 2.39755,
+  "files": [
+   {
+    "file": "pill_sprig-120.webp",
+    "w": 120,
+    "h": 50,
+    "bytes": 3568
+   }
+  ],
+  "source": "parts/pill_sprig_r2.png",
+  "source_canvas": [
+   1254,
+   1254
+  ],
+  "crop": [
+   242,
+   468,
+   784,
+   327
+  ],
+  "source_sha256": "5a7650e3ec0e342dc8f256cf248e88763d50e8dc0a9d33e548d2f02e420270f6",
+  "note": "GM07 ham imagegen çıktısı; yalnız parts_prep kırpımı + ölçek (G098)"
+ },
  "velvet": {
   "src_size": [
    600,
