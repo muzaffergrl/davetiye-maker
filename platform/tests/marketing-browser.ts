@@ -27,6 +27,9 @@
 //    G097 (15–20 joined, twenty designs): the G094 rows follow the live count (20: 2×10 / 3×6+2); each of the
 //    six has its card and loaded screen on /designs and the home strip, a chip that switches the poster (after
 //    "+N more" on wide screens) and a design page whose "Other designs" lists every other live design (390 and 1280).
+//    G099: the home showcase = featured designs (config.ts) + "See all N designs"; home main button inside the first
+//    screen and a one-row header at 1024/1100/1280 × 800; design pages: one primary action (Etsy), the live demo
+//    secondary, their own opening named ("after the book opens"); 16's retaken Our Story thumbnail loads.
 // 3. Lab performance at 390 px with Lighthouse-like throttling (CPU 4×, 150 ms RTT, 1.6 Mbps down): LCP, CLS,
 //    transferred bytes, script bytes — home, the second and the newest design page, a guide.
 // Playwright from NODE_PATH and /opt/pw-browsers (never `playwright install`). Exit 1 when a check fails.
@@ -38,7 +41,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { loadChromium, startNext, waitForServer } from '../scripts/lib/browser.ts';
 import { ROOT } from '../scripts/lib/theme-env.ts';
-import { liveDesigns } from '../lib/marketing/designs.ts';
+import { featuredDesigns, liveDesigns, openingObject } from '../lib/marketing/designs.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { corePages } from '../lib/marketing/site.ts';
 
@@ -78,6 +81,9 @@ const rowsOf = (n: number, per: number) => Array.from({ length: Math.ceil(n / pe
 try {
   await waitForServer(`${BASE}/robots.txt`, 60_000, server);
   const designs = liveDesigns();
+  // G099: the home showcase shows the featured designs (config.ts), /designs every live design
+  const featured = featuredDesigns();
+  const cardsOn = (p: string) => (p === '/' ? featured.length : designs.length);
   const guides = loadGuides();
   const pagePaths = [...corePages().map((p) => p.path), ...designs.map((d) => `/designs/${d.id}`), ...guides.map((g) => g.path)];
   const shotName = (p: string) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '_'));
@@ -291,7 +297,7 @@ try {
       const rows = grid.perRow;
       check(
         `G083 ${p} @${w}: ${grid.cards} cards, no lone card in the last row (rows ${rows.join('+')})`,
-        grid.cards === designs.length && (rows.length === 1 || rows[rows.length - 1] === rows[0] || grid.centered),
+        grid.cards === cardsOn(p) && (rows.length === 1 || rows[rows.length - 1] === rows[0] || grid.centered),
         grid,
       );
     }
@@ -510,7 +516,8 @@ try {
       for (const [p, want] of [
         ['/designs', rowsOf(designs.length, per)],
         [`/designs/${designs[designs.length - 1].id}`, rowsOf(designs.length - 1, per)],
-        ['/', rowsOf(designs.length, per)],
+        // G099: the home showcase (eight featured) is 2 a row on phones, 3+3+2 at 900–1199 px and 4 + 4 from 1200 px
+        ['/', rowsOf(featured.length, featured.length === 8 && w >= 1200 ? 4 : per)],
       ] as const) {
         await page.goto(BASE + p, { waitUntil: 'networkidle' });
         const grid = await page.evaluate(() => {
@@ -607,6 +614,7 @@ try {
       for (const [p, shot] of [['/designs', 'designs_cards'], ['/', 'home_designs']] as const) {
         await page.goto(BASE + p, { waitUntil: 'networkidle' });
         await loadAll(page);
+        const ids = p === '/' ? added.filter((id) => featured.some((f) => f.id === id)) : added;
         const cards = await page.evaluate((ids: string[]) => {
           const grid = document.querySelector('main [class*="cardGrid"]')!;
           return {
@@ -618,10 +626,10 @@ try {
               return { id, card: !!card, screen: !!img && img.complete && img.naturalWidth > 0 };
             }),
           };
-        }, added);
+        }, ids);
         check(
-          `G097 ${p} @${w}: ${cards.n} cards, one for each of 15–20 with its real envelope screen loaded, no page scroll`,
-          cards.n === designs.length && cards.added.every((c: { card: boolean; screen: boolean }) => c.card && c.screen) && !cards.pageScroll,
+          `G097 ${p} @${w}: ${cards.n} cards, one for each of 15–20${p === '/' ? ' that is featured' : ''} with its real envelope screen loaded, no page scroll`,
+          cards.n === cardsOn(p) && cards.added.every((c: { card: boolean; screen: boolean }) => c.card && c.screen) && !cards.pageScroll,
           cards,
         );
         if (SHOTS) await page.locator('main [class*="cardGrid"]').first().screenshot({ path: path.join(OUT, `${shot}_${w}.jpg`), quality: 70, style: HIDE_BARS });
@@ -679,6 +687,121 @@ try {
     }
   }
 
+  // 1i. G099: the home showcase is the featured designs (config.ts) plus "See all N designs" (→ /designs); at 1024,
+  // 1100 and 1280 × 800 the home main button is inside the first screen and the header is one row inside the screen
+  // (no wrapped link, nothing cut at the right edge); a design page has ONE primary action — the Etsy button ("Coming
+  // soon on Etsy", not a link, while the listing link is a placeholder), the live demo is the secondary button, the
+  // phone bar has the same order; every design page names its own opening ("after the book opens"); Sunflower Rustic
+  // Barn's Our Story thumbnail is the retaken screen with the first print. With --out, previews (previews/g099).
+  {
+    const G099_SHOTS = SHOTS && OUT.includes('g099');
+    const HIDE_BARS = 'header[class*="header"], [class*="stickyBar"] { visibility: hidden !important; }';
+    for (const [w, h] of [[390, 844], [1024, 800], [1100, 800], [1280, 800]]) {
+      const mobile = w < 1024;
+      const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, isMobile: mobile, hasTouch: mobile });
+      const page = await ctx.newPage();
+      await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+      const home = await page.evaluate(() => {
+        const grid = document.querySelector('section[aria-labelledby="designs"] [class*="cardGrid"]')!;
+        const all = document.querySelector<HTMLAnchorElement>('section[aria-labelledby="designs"] a[data-see-all]');
+        const vw = document.documentElement.clientWidth;
+        const header = document.querySelector('header')!;
+        const items = Array.from(header.querySelectorAll('a, summary')).filter((e) => e.getBoundingClientRect().width > 0);
+        const links = Array.from(header.querySelectorAll('nav[aria-label="Main"] a')).filter((e) => e.getBoundingClientRect().width > 0);
+        return {
+          cards: Array.from(grid.querySelectorAll('article h3 a')).map((a) => a.getAttribute('href')),
+          seeAll: all ? { href: all.getAttribute('href'), text: all.textContent?.trim() } : null,
+          cta: Math.round(document.querySelector('main a[class*="btnLarge"]')!.getBoundingClientRect().bottom),
+          vh: innerHeight,
+          headerCut: items.filter((e) => e.getBoundingClientRect().right > vw + 1).map((e) => e.textContent?.trim()),
+          wrapped: links.filter((e) => e.getBoundingClientRect().height > 48).map((e) => e.textContent?.trim()),
+          pageScroll: document.documentElement.scrollWidth > vw,
+        };
+      });
+      check(
+        `G099 home @${w}: showcase = the ${featured.length} featured designs in order + "See all ${designs.length} designs" → /designs`,
+        home.cards.join('|') === featured.map((d) => `/designs/${d.id}`).join('|') && home.seeAll?.href === '/designs' && home.seeAll.text === `See all ${designs.length} designs`,
+        home,
+      );
+      check(`G099 home @${w}: header in one row inside the screen, no page scroll`, home.headerCut.length === 0 && home.wrapped.length === 0 && !home.pageScroll, home);
+      if (!mobile) check(`G099 home @${w}×${h}: the main button is inside the first screen (${home.cta} ≤ ${home.vh})`, home.cta <= home.vh, home);
+      else metrics[`G099 home @${w}`] = { ctaBottom: home.cta, viewportHeight: home.vh };
+      if (G099_SHOTS) {
+        await page.screenshot({ path: path.join(OUT, `home_first_screen_${w}.png`) });
+        if (w === 390 || w === 1280) {
+          const sec = page.locator('section[aria-labelledby="designs"]');
+          await sec.scrollIntoViewIfNeeded();
+          await page.evaluate(async () => {
+            for (let y = 0; y < document.body.scrollHeight; y += 400) {
+              window.scrollTo(0, y);
+              await new Promise((r) => setTimeout(r, 40));
+            }
+          });
+          await sec.scrollIntoViewIfNeeded();
+          await page.waitForTimeout(500);
+          await sec.screenshot({ path: path.join(OUT, `home_showcase_${w}.jpg`), quality: 70, style: HIDE_BARS } as any);
+        }
+      }
+      if (w === 1100) {
+        await ctx.close();
+        continue;
+      }
+      for (const d of designs) {
+        if (w !== 390 && !['sunflower-rustic-barn', 'enchanted-forest-storybook', 'wildflower-meadow-vellum'].includes(d.id)) continue;
+        await page.goto(`${BASE}/designs/${d.id}`, { waitUntil: 'networkidle' });
+        const info = await page.evaluate(() => {
+          const cta = document.querySelector('main [class*="heroCta"]')!;
+          const kids = Array.from(cta.children) as HTMLElement[];
+          const bar = Array.from(document.querySelector('[class*="stickyBar"]')?.children ?? []) as HTMLElement[];
+          const filled = (e: HTMLElement) => !/btnSecondary/.test(e.className);
+          return {
+            first: kids[0] ? { tag: kids[0].tagName, pending: kids[0].hasAttribute('data-etsy-pending'), text: kids[0].textContent?.trim(), href: kids[0].getAttribute('href') } : null,
+            demo: kids[1] ? { text: kids[1].textContent?.trim(), secondary: /btnSecondary/.test(kids[1].className), href: kids[1].getAttribute('href') } : null,
+            filledButtons: kids.filter((e) => /\bbtn/.test(e.className) && filled(e) && !e.hasAttribute('data-etsy-pending')).length,
+            bar: bar.map((e) => ({ text: e.textContent?.trim(), pending: e.hasAttribute('data-etsy-pending'), secondary: /btnSecondary/.test(e.className) })),
+            lead: document.querySelector('main [class*="heroText"] p')?.textContent?.trim(),
+            pagesH2: document.querySelector('#pages')?.textContent?.trim(),
+            story: document.querySelector<HTMLImageElement>('section[aria-labelledby="pages"] img[src*="/story-"]')?.getAttribute('src') ?? null,
+          };
+        });
+        const thing = openingObject(d.copy);
+        check(
+          `G099 /designs/${d.id} @${w}: one primary action (Etsy, "Coming soon on Etsy" while a placeholder), "View live demo" secondary, short summary, "${info.pagesH2}"`,
+          !!info.first && (d.etsyListingUrl.startsWith('[') ? info.first.pending && info.first.text === 'Coming soon on Etsy' && info.first.href === null : info.first.tag === 'A') &&
+            info.demo?.text === 'View live demo' && info.demo.secondary && info.demo.href === `/start/demo/${d.id}` && info.filledButtons === (d.etsyListingUrl.startsWith('[') ? 0 : 1) &&
+            info.lead === `${d.copy.style}.` && info.pagesH2 === `What your guests see after the ${thing} opens`,
+          info,
+        );
+        if (mobile) {
+          check(
+            `G099 /designs/${d.id} @${w}: phone bar — Etsy first, Live demo second (outlined)`,
+            info.bar.length === 2 && (info.bar[0].pending || !info.bar[0].secondary) && info.bar[1].text === 'Live demo' && info.bar[1].secondary,
+            info.bar,
+          );
+        }
+        if (d.id === 'sunflower-rustic-barn') {
+          const img = page.locator('section[aria-labelledby="pages"] img[src*="/story-"]');
+          await img.scrollIntoViewIfNeeded();
+          await page.waitForTimeout(400);
+          const ok = await img.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0);
+          check(`G099 /designs/${d.id} @${w}: the Our Story thumbnail (retaken: first print) loads`, ok && !!info.story?.includes('/marketing/designs/sunflower-rustic-barn/story-'), info.story);
+        }
+        if (G099_SHOTS && ['sunflower-rustic-barn', 'enchanted-forest-storybook', 'wildflower-meadow-vellum'].includes(d.id)) {
+          await page.evaluate(() => window.scrollTo(0, 0));
+          await page.waitForTimeout(300);
+          await page.screenshot({ path: path.join(OUT, `design_${d.id}_${w}.png`) });
+          if (d.id === 'sunflower-rustic-barn') {
+            const pages = page.locator('section[aria-labelledby="pages"]');
+            await pages.scrollIntoViewIfNeeded();
+            await page.waitForTimeout(500);
+            await pages.screenshot({ path: path.join(OUT, `design_${d.id}_pages_${w}.png`), style: HIDE_BARS } as any);
+          }
+        }
+      }
+      await ctx.close();
+    }
+  }
+
   // 2a. demo facade on a phone
   {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
@@ -721,7 +844,9 @@ try {
     const poster = await page.locator('a[aria-label^="Tap to open the live demo"] img').getAttribute('src');
     check('demo: a design chip switches the poster', !!poster && poster.includes(designs[1].id), poster);
 
-    // card button opens the dialog for its design (every design after the first; G082: the newest too)
+    // card button opens the dialog for its design (every design after the first; G082: the newest too). G099: the home
+    // shows the featured designs only, so every card is tried on /designs
+    await page.goto(BASE + '/designs', { waitUntil: 'networkidle' });
     for (const d of designs.slice(1)) {
       await page.locator(`a[data-demo="${d.id}"]`).first().click();
       await page.locator('dialog[open]').waitFor({ timeout: 5000 });
@@ -730,7 +855,8 @@ try {
       check(`demo: the close button closes it (${d.id})`, (await page.locator('dialog[open]').count()) === 0);
     }
 
-    // mobile menu and FAQ
+    // mobile menu and FAQ (home)
+    await page.goto(BASE + '/', { waitUntil: 'networkidle' });
     await page.locator('summary', { hasText: 'Menu' }).click();
     check('mobile menu opens', await page.getByRole('navigation', { name: 'Main (mobile)' }).getByRole('link', { name: 'Pricing' }).isVisible());
     await page.locator('summary', { hasText: 'Menu' }).click();
@@ -838,7 +964,7 @@ writeFileSync(
   path.join(OUT, 'checks.json'),
   JSON.stringify(
     {
-      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093, G094, G097)',
+      tool: 'tests/marketing-browser.ts (G061, G066, G082, G083, G085, G093, G094, G097, G099)',
       date: new Date().toISOString().slice(0, 10),
       server: 'next start (local production build), temp data folder',
       throttling: 'perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2',

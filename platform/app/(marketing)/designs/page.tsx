@@ -22,9 +22,9 @@ export default function DesignsPage() {
         <Container>
           <h1 className={s.h1}>{PAGE.h1}</h1>
           <p className={s.lead}>
-            Every design opens from a sealed envelope and has the same four pages: {SITE_PAGES.map((p) => p.name).join(', ')}.
-            Each one has its own envelope, opening, artwork and fonts. Open a live demo on your phone and tap the envelope,
-            the way your guests will.
+            Every design opens from a sealed envelope or keepsake and has the same four pages:{' '}
+            {SITE_PAGES.map((p) => p.name).join(', ')}. Each one has its own opening, artwork and fonts. Open a live demo on
+            your phone and tap to open it, the way your guests will.
           </p>
           <LastUpdated day={PAGE.updated} />
         </Container>
@@ -47,7 +47,7 @@ export default function DesignsPage() {
               </h2>
               <CheckList
                 items={[
-                  'The envelope opening page, then Home, Our Story, Details and RSVP',
+                  'The opening page, then Home, Our Story, Details and RSVP',
                   'The editing panel, designed for phone screens',
                   'Online RSVP with your own questions, replies and CSV',
                   'Add to calendar, link preview and QR code',
@@ -56,7 +56,7 @@ export default function DesignsPage() {
             </div>
             <div>
               <h2 className={s.h2}>What makes each one different</h2>
-              <CheckList items={['The envelope and how it opens', 'The painted artwork and frames', 'Colors and fonts']} />
+              <CheckList items={['The envelope or keepsake and how it opens', 'The painted artwork and frames', 'Colors and fonts']} />
               <p className={s.small}>
                 {FIXED.join(', ')} stay as designed; you change the content. Not sure which to pick? Read{' '}
                 <a href="/guides/what-to-put-on-your-wedding-website">what to put on your wedding website</a> or see{' '}

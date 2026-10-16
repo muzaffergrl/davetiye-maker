@@ -96,7 +96,7 @@ If a listing leaves any of these unclear, message the seller before you buy. A c
 
 ## How our hosted websites answer those questions
 
-Our designs open from a sealed envelope into four pages: Home, Our Story, Details and RSVP. You can try every design as a [live demo](/designs) first. You edit names, date, venue, schedule, {{photoSpots}} photos, questions and answers and up to {{rsvpQuestions}} RSVP questions in a panel designed for phone screens; the artwork, colors and fonts stay as designed. Replies, totals and a CSV download are in your panel. Your website stays online until {{months}} months after your wedding date. The [features page](/features) has the full list, including what is not included.
+Our designs open from a sealed envelope or keepsake into four pages: Home, Our Story, Details and RSVP. You can try every design as a [live demo](/designs) first. You edit names, date, venue, schedule, {{photoSpots}} photos, questions and answers and up to {{rsvpQuestions}} RSVP questions in a panel designed for phone screens; the artwork, colors and fonts stay as designed. Replies, totals and a CSV download are in your panel. Your website stays online until {{months}} months after your wedding date. The [features page](/features) has the full list, including what is not included.
 
 ## FAQ
 

@@ -9,7 +9,7 @@ import s from '../../components/marketing/marketing.module.css';
 import { designScreen, openingVideo, panelScreen } from '../../components/marketing/media.ts';
 import { CheckList, Container, Eyebrow, FaqList, JsonLd, Screen, Section, TextLink } from '../../components/marketing/ui.tsx';
 import { MARKETING } from '../../lib/marketing/config.ts';
-import { liveDesigns } from '../../lib/marketing/designs.ts';
+import { featuredDesigns, liveDesigns, openingObject } from '../../lib/marketing/designs.ts';
 import { DEMO_REPLY_TOTALS, definition, editRightsText, factStrip, LIMITS, phoneClaim, REPLIES_SCREEN_ALT, SITE_PAGES } from '../../lib/marketing/facts.ts';
 import { faqItems, HOME_FAQ_IDS } from '../../lib/marketing/faq.ts';
 import { loadGuides } from '../../lib/marketing/guides.ts';
@@ -24,7 +24,7 @@ const PAGE = corePage('/');
 export const metadata = pageMetadata(PAGE);
 
 const STEPS = [
-  { title: 'Try a design on your phone', text: 'Open the live demo and tap the envelope, exactly as your guests will.' },
+  { title: 'Try a design on your phone', text: 'Open the live demo and tap to open the invitation, exactly as your guests will.' },
   { title: 'Buy it on Etsy', text: 'One payment. Your download holds the link to start your website.' },
   { title: 'Edit, preview, publish', text: 'Add your names, date, venue, photos and RSVP questions in your private panel.' },
   { title: 'Share your link', text: 'Send it by text or email, or print the QR code. Replies arrive in your panel.' },
@@ -32,10 +32,13 @@ const STEPS = [
 
 export default function HomePage() {
   const designs = liveDesigns();
+  // G099: the design showcase shows the featured designs (config.ts); the rest are on /designs ("See all N designs").
+  const featured = featuredDesigns();
   const demo = demoDesigns();
   const first = designs[0];
-  // The hero shows the first design; the opening row shows the next one, so visitors see two envelopes.
+  // The hero shows the first design; the opening row shows the next one, so visitors see two openings.
   const second = designs[1] ?? first;
+  const secondThing = openingObject(second.copy);
   const video = openingVideo(second.id);
   const sealed = designScreen(second.id, 'envelope');
   const opened = designScreen(second.id, 'home');
@@ -71,8 +74,8 @@ export default function HomePage() {
             <Eyebrow>Wedding websites · edit on your phone</Eyebrow>
             <h1 className={s.h1}>{PAGE.h1}</h1>
             <p className={s.lead}>
-              Your guests tap a sealed envelope, it opens, and your wedding website appears: your story, the details and RSVP.
-              You edit everything from your phone.
+              Your guests tap a sealed envelope or keepsake and your wedding website opens: your story, the details and RSVP. You
+              edit everything from your phone.
             </p>
           </HeroDemo>
         </Container>
@@ -93,9 +96,9 @@ export default function HomePage() {
           <h2 id="opening" className={s.h2}>
             How the opening works
           </h2>
-          <ol className={s.flowRow} aria-label={`The ${second.name} envelope, from sealed to open`}>
+          <ol className={s.flowRow} aria-label={`The ${second.name} ${secondThing}, from sealed to open`}>
             <li className={s.flowItem}>
-              {sealed ? <Screen file={sealed} alt={`${second.name}: the sealed envelope with the demo couple's names`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
+              {sealed ? <Screen file={sealed} alt={`${second.name}: the sealed ${secondThing} with the demo couple's names`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
               <p className={s.flowLabel}>Sealed</p>
               <ArrowRight aria-hidden className={s.flowArrow} size={28} strokeWidth={1.5} />
             </li>
@@ -107,7 +110,7 @@ export default function HomePage() {
                     poster={video.poster}
                     width={video.width}
                     height={video.height}
-                    label={`Screen recording: the ${second.name} envelope opens into the home page`}
+                    label={`Screen recording: the ${second.name} ${secondThing} opens into the home page`}
                   />
                 </div>
               ) : null}
@@ -115,18 +118,19 @@ export default function HomePage() {
               <ArrowRight aria-hidden className={s.flowArrow} size={28} strokeWidth={1.5} />
             </li>
             <li className={s.flowItem}>
-              {opened ? <Screen file={opened} alt={`${second.name}: the home page after the envelope opens`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
+              {opened ? <Screen file={opened} alt={`${second.name}: the home page after the ${secondThing} opens`} sizes="(min-width: 1024px) 220px, 27vw" /> : null}
               <p className={s.flowLabel}>Your website</p>
             </li>
           </ol>
           <div className={s.flowText}>
             <ol className={s.steps}>
               <li>
-                <strong>Your link opens on a sealed envelope</strong> with your names, the way a paper invitation arrives.
+                <strong>Your link opens on a sealed envelope</strong> with your names, the way a paper invitation arrives. Some
+                designs use a gatefold, a linen pouch, a travel wallet, a storybook or a vellum sleeve instead.
               </li>
               <li>
-                <strong>Guests tap it.</strong> The envelope opens in the order of its design: a bow slides, a seal lifts, a card
-                rises.
+                <strong>Guests tap it.</strong> It opens in the order of its design: a bow slides, a seal lifts, a cover swings
+                open, a card rises.
               </li>
               <li>
                 <strong>The card becomes your home page.</strong> From there guests read your story, the details and reply.
@@ -142,7 +146,7 @@ export default function HomePage() {
 
       <Section labelledBy="pages">
         <Container>
-          <Eyebrow>After the envelope</Eyebrow>
+          <Eyebrow>After the opening</Eyebrow>
           <h2 id="pages" className={s.h2}>
             Four pages your guests will actually use
           </h2>
@@ -263,14 +267,22 @@ export default function HomePage() {
         <Container>
           <Eyebrow>Designs</Eyebrow>
           <h2 id="designs" className={s.h2}>
-            Choose the envelope your guests will open
+            Choose the design your guests will open
           </h2>
           <div className={s.cardGrid}>
-            {designs.map((d) => (
+            {featured.map((d) => (
               <DesignCard key={d.id} design={d} placement="home-strip" />
             ))}
           </div>
-          <TextLink href="/designs">See all designs</TextLink>
+          {featured.length < designs.length ? (
+            <div className={s.seeAll}>
+              <a className={`${s.btn} ${s.btnSecondary}`} href="/designs" data-see-all>
+                See all {designs.length} designs
+              </a>
+            </div>
+          ) : (
+            <TextLink href="/designs">See all designs</TextLink>
+          )}
         </Container>
       </Section>
 
@@ -284,7 +296,7 @@ export default function HomePage() {
               {fromPrice ? `${fromPrice} per design. ` : ''}No subscription and nothing to renew: your website stays online until{' '}
               {MARKETING.hosting.monthsAfterWedding} months after your wedding date.
             </p>
-            <CheckList items={['Envelope opening and four pages', 'Editing panel and online RSVP', 'Add to calendar and QR code']} />
+            <CheckList items={['The opening and four pages', 'Editing panel and online RSVP', 'Add to calendar and QR code']} />
             <TextLink href="/pricing">See pricing</TextLink>
           </div>
         </Container>
@@ -306,7 +318,7 @@ export default function HomePage() {
             <h2 id="final" className={s.h2}>
               Try it on your phone first
             </h2>
-            <p className={s.lead}>Open a live demo, tap the envelope and read it the way your guests will.</p>
+            <p className={s.lead}>Open a live demo, tap the invitation and read it the way your guests will.</p>
             <div className={s.ctaRow}>
               <a className={`${s.btn} ${s.btnLight}`} href={`/designs/${first.id}`} data-demo={first.id} data-demo-placement="home-final">
                 Open a live demo
@@ -329,7 +341,8 @@ export default function HomePage() {
       <JsonLd
         data={graph(
           webPage(PAGE),
-          itemList(designs.map((d) => ({ path: `/designs/${d.id}`, name: d.name }))),
+          // the designs shown on this page (the full list: /designs)
+          itemList(featured.map((d) => ({ path: `/designs/${d.id}`, name: d.name }))),
         )}
       />
     </>

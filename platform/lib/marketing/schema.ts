@@ -6,7 +6,7 @@
 
 import assets from './assets.json' with { type: 'json' };
 import { MARKETING, type MarketingConfig } from './config.ts';
-import type { Design } from './designs.ts';
+import { openingObject, type Design } from './designs.ts';
 import type { FaqItem } from './faq.ts';
 import { plainAnswer } from './faq.ts';
 import type { Guide } from './guides.ts';
@@ -111,7 +111,7 @@ export function videoObject(design: Design, cfg: MarketingConfig = MARKETING): J
   return {
     '@type': 'VideoObject',
     '@id': `${absUrl(`/designs/${design.id}`, cfg)}#video`,
-    name: `${design.name} wedding website: envelope opening`,
+    name: `${design.name} wedding website: ${openingObject(design.copy)} opening`,
     description: design.copy.opening,
     thumbnailUrl: [absUrl(v.poster, cfg)],
     contentUrl: absUrl(v.file, cfg),

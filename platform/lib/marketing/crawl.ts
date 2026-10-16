@@ -101,7 +101,7 @@ export function llmsTxt(guides: Guide[], cfg: MarketingConfig = MARKETING): stri
   out.push(`- What it is: ${definition(cfg).long}`);
   out.push(`- Price: ${priceLine}, a one-time purchase on Etsy. No subscription.`);
   out.push(`- Hosting: ${hostingText(cfg).toLowerCase()}.`);
-  out.push(`- Pages: an envelope opening page, then ${SITE_PAGES.map((p) => p.name).join(', ')}.`);
+  out.push(`- Pages: an opening page (an envelope, or in some designs a gatefold, pouch, wallet, storybook or sleeve), then ${SITE_PAGES.map((p) => p.name).join(', ')}.`);
   out.push(`- Included: ${included(cfg).join('; ')}.`);
   out.push(`- Not included: ${NOT_INCLUDED.join('; ')}.`);
   out.push(`- Changes after publishing: ${rights.long} ${rights.rest}`);

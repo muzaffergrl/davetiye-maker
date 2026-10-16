@@ -3,7 +3,7 @@ import s from '../../../components/marketing/marketing.module.css';
 import { designScreen, panelScreen } from '../../../components/marketing/media.ts';
 import { CheckList, Container, Eyebrow, JsonLd, LastUpdated, Screen, Section, TextLink } from '../../../components/marketing/ui.tsx';
 import { MARKETING } from '../../../lib/marketing/config.ts';
-import { liveDesigns } from '../../../lib/marketing/designs.ts';
+import { liveDesigns, openingObject } from '../../../lib/marketing/designs.ts';
 import { canvaComparison, editRightsText, LIMITS, NOT_INCLUDED, phoneClaim } from '../../../lib/marketing/facts.ts';
 import { breadcrumbs, graph, webPage } from '../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../lib/marketing/seo.ts';
@@ -23,15 +23,15 @@ export default function FeaturesPage() {
     {
       id: 'opening',
       eyebrow: 'Opening',
-      title: 'A sealed envelope that opens',
+      title: 'A sealed envelope or keepsake that opens',
       items: [
-        'Your link opens on a sealed envelope with your names',
-        'A tap plays the opening in the order of the design: bow, seal, flap, card',
+        'Your link opens on a sealed envelope with your names (in some designs a gatefold, pouch, wallet, storybook or sleeve)',
+        'A tap plays the opening in the order of the design: bow, seal, flap or cover, card',
         'The card becomes the first screen of your home page',
         'A Skip link for guests in a hurry; with reduced motion on, a tap goes straight to the home page',
       ],
       screen: designScreen(b.id, 'envelope'),
-      alt: `${b.name}: the sealed envelope page`,
+      alt: `${b.name}: the sealed ${openingObject(b.copy)} page`,
     },
     {
       id: 'guests',
@@ -111,7 +111,7 @@ export default function FeaturesPage() {
           <Eyebrow>Features</Eyebrow>
           <h1 className={s.h1}>{PAGE.h1}</h1>
           <p className={s.lead}>
-            An envelope that opens, four pages for your guests, RSVP with your own questions and an editing panel for your
+            An envelope or keepsake that opens, four pages for your guests, RSVP with your own questions and an editing panel for your
             phone. And a plain list of what is not included, so you know before you buy.
           </p>
           <nav aria-label="On this page" className={s.toc}>

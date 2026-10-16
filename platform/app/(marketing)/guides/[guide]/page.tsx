@@ -72,7 +72,7 @@ export default async function GuidePage({ params }: Props) {
               See how it looks
             </h2>
             <p>
-              Our wedding websites open from a sealed envelope and are edited from your phone. Open a live demo:{' '}
+              Our wedding websites open from a sealed envelope or keepsake and are edited from your phone. Open a live demo:{' '}
               {designs.map((d, i) => (
                 <span key={d.id}>
                   {i ? ' or ' : ''}
