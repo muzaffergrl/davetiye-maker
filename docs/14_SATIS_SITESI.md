@@ -1214,6 +1214,20 @@ için. Yayından sonra PageSpeed Insights.
 
 - WCAG 2.2 AA: kontrast ≥ 4.5:1 (metin), görünür odak, `Skip to content`, landmark'lar, 44 px dokunma alanı.
 - `prefers-reduced-motion`: video oynamaz, demo diyaloğu animasyonsuz açılır.
+- **G089 hareketleri (K31, `components/fx/`):** hepsi `prefers-reduced-motion: no-preference` içinde; azaltılmış hareket,
+  JavaScript'siz veya CSS animasyonsuz durumda içerik hemen ve tam görünür. Yalnız opacity/transform/filter değişir (CLS 0).
+  - Giriş: ana sayfa, `/designs` ve tasarım sayfalarında H1 kelime kelime iner (`StaggeredText`, React Bits Pro "Staggered
+    Text"ten uyarlama, `motion` yerine CSS; sunucu bileşeni, istemci JS'i yok). Ardından eyebrow, giriş metni, çipler, düğmeler ve
+    bilgi şeridi sırayla yükselir. Poster (telefonda LCP görseli) hareket etmez.
+  - Kaydırma: ilk bölümden sonraki bölümlerin bloklarından **yalnız ilk ekranın altında kalanlar** hidrasyondan sonra gizlenir ve
+    ekrana girince bir kez yükselir (`RevealOnScroll`, IntersectionObserver; geri kaydırınca kaybolmaz).
+  - Tasarım kartları: fareyle hafif 3D eğim (`DepthTilt`, React Bits Pro "Depth Card"tan uyarlama; 6°, yalnız fare + hover,
+    yerleşince döngü durur); dokunmatikte kısa basma geri bildirimi (scale 0.98).
+  - Başlık yazı tipi Archivo `display: 'optional'` (önce `swap`): geç gelen yazı tipi birçok H1'i yeniden sardırıyordu (CLS
+    `/designs` 0,048; kelimeler ayrı kutu olunca 0,118). Şimdi 0,003. Bedeli: Lighthouse FCP ~150 ms geç; LCP kötüleşmedi.
+    Yazı tipi ilk boyamadan ~100 ms içinde gelmezse o görünümde yedek yazı tipi kalır (önbellekten sonra hep Archivo).
+  - Yeni npm bağımlılığı yok. Tarayıcı denetimi: `tests/g089-browser.ts`; birim: `tests/g089-fx.test.ts`; ölçüm
+    `previews/g089/perf_before_after.json`.
 - Her görselde anlamlı alt metin. Süs görselinde `alt=""`. Videoda açıklayıcı metin sayfada bulunur.
 
 ### 9.12 `llms.txt` ve `llms-full.txt`

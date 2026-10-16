@@ -37,6 +37,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { rememberEditor } from '../../lib/panel/remember.ts';
+import { useViewFade } from '../fx/useViewFade.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
@@ -380,6 +381,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const openFocus = route.view === 'section' ? route.focus : null;
   // The thank-you preview lasts until the editor moves to another page or the preview is opened for something else.
   useEffect(() => setPreviewThanks(false), [openPage, route.view]);
+  // G089: a short, calm opacity fade when the view (or the setup step) changes; never on the first paint, never with
+  // reduced motion (components/fx/useViewFade.ts).
+  const mainRef = useRef<HTMLElement>(null);
+  const setupRef = useRef<HTMLDivElement>(null);
+  useViewFade(mainRef, route.view === 'section' ? `edit/${route.page}` : route.view);
+  useViewFade(setupRef, route.view === 'setup' ? `setup/${route.step}` : '-');
   useEffect(() => {
     if (!wide || !openPage) return;
     const page = previewPageFor(openPage, openFocus);
@@ -737,7 +744,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   if (route.view === 'setup') {
     return (
       <PanelContext.Provider value={ctx}>
-        <div className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status} data-panel-root>
+        <div ref={setupRef} className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status} data-panel-root>
           {banners}
           <Setup
             step={route.step}
@@ -982,7 +989,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
           </nav>
 
           {/* While the phone preview covers the screen, the editor behind it is out of reach (focus, Tab, screen readers). */}
-          <main id="main" className={styles.main} inert={(previewOpen && !wide) || undefined}>
+          <main ref={mainRef} id="main" className={styles.main} inert={(previewOpen && !wide) || undefined}>
             {banners}
             <div className={styles.pageHead}>
               {sectionPage ? (

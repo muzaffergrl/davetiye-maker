@@ -1,6 +1,7 @@
 // / — home (docs/14 §6.1; G066 layout from the BKE Studio comps brand/ui/site/u1_home_*). Static. The live demo loads
 // only after a tap (DemoFacade, §9.7). Every picture is a REAL theme or panel screen (or the real opening recording).
 import { ArrowRight } from 'lucide-react';
+import { StaggeredText } from '../../components/fx/StaggeredText.tsx';
 import { HeroDemo } from '../../components/marketing/Demo.tsx';
 import { DesignCard } from '../../components/marketing/DesignCard.tsx';
 import { demoDesigns } from '../../components/marketing/demo-data.ts';
@@ -69,7 +70,9 @@ export default function HomePage() {
             }
           >
             <Eyebrow>Wedding websites · edit on your phone</Eyebrow>
-            <h1 className={s.h1}>{PAGE.h1}</h1>
+            <h1 className={s.h1}>
+              <StaggeredText text={PAGE.h1} />
+            </h1>
             <p className={s.lead}>
               Your guests tap a sealed envelope, it opens, and your wedding website appears: your story, the details and RSVP.
               You edit everything from your phone.

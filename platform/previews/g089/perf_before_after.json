@@ -1,0 +1,211 @@
+{
+  "method": {
+    "lab": "tests/g089-browser.ts --perf-only: Playwright 1.56.1 Chromium, 390x844 DPR2 mobile, CPU 4x, 150 ms RTT, 1.6 Mbps, cache off; 3 loads per build, median. Before and after measured back to back on the same machine (2026-10-16).",
+    "lighthouse": "Lighthouse 13.5.0, mobile default (simulated throttling), performance only, 3 runs per page, median; next start on 127.0.0.1.",
+    "firstLoadJs": "sum of the <script src> chunks in .next/server/app/<page>.html"
+  },
+  "lab": {
+    "before": {
+      "/": {
+        "lcpMs_median": 1980,
+        "lcpRuns": [
+          1980,
+          2244,
+          1972
+        ],
+        "cls": 0,
+        "lcpElement": "IMG http://127.0.0.1:3389/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "transferredKB": 369,
+        "scriptKB": 140
+      },
+      "/designs": {
+        "lcpMs_median": 1428,
+        "lcpRuns": [
+          1492,
+          1412,
+          1428
+        ],
+        "cls": 0,
+        "lcpElement": "P",
+        "transferredKB": 469,
+        "scriptKB": 139
+      },
+      "/designs/blush-garden-rose": {
+        "lcpMs_median": 1940,
+        "lcpRuns": [
+          1940,
+          2000,
+          1888
+        ],
+        "cls": 0,
+        "lcpElement": "IMG http://127.0.0.1:3389/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "transferredKB": 403,
+        "scriptKB": 140
+      }
+    },
+    "after": {
+      "/": {
+        "lcpMs_median": 2104,
+        "lcpRuns": [
+          2104,
+          2160,
+          2096
+        ],
+        "cls": 0,
+        "lcpElement": "IMG http://127.0.0.1:3389/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "transferredKB": 371,
+        "scriptKB": 141
+      },
+      "/designs": {
+        "lcpMs_median": 1388,
+        "lcpRuns": [
+          1388,
+          1460,
+          1332
+        ],
+        "cls": 0,
+        "lcpElement": "P",
+        "transferredKB": 472,
+        "scriptKB": 140
+      },
+      "/designs/blush-garden-rose": {
+        "lcpMs_median": 2072,
+        "lcpRuns": [
+          1904,
+          2092,
+          2072
+        ],
+        "cls": 0,
+        "lcpElement": "IMG http://127.0.0.1:3389/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "transferredKB": 406,
+        "scriptKB": 141
+      }
+    }
+  },
+  "lighthouse": {
+    "before": {
+      "/": {
+        "score": 77,
+        "fcp": 1091,
+        "lcp": 3362,
+        "cls": 0.0002,
+        "tbt": 583
+      },
+      "/designs": {
+        "score": 88,
+        "fcp": 1091,
+        "lcp": 3304,
+        "cls": 0.0476,
+        "tbt": 225
+      },
+      "/designs/art-deco-black-tie": {
+        "score": 82,
+        "fcp": 1082,
+        "lcp": 3469,
+        "cls": 0.0001,
+        "tbt": 390
+      },
+      "/designs/burgundy-velvet-autumn": {
+        "score": 80,
+        "fcp": 1081,
+        "lcp": 3508,
+        "cls": 0.0296,
+        "tbt": 447
+      }
+    },
+    "after": {
+      "/": {
+        "score": 87,
+        "fcp": 1242,
+        "lcp": 2608,
+        "cls": 0.0001,
+        "tbt": 412
+      },
+      "/designs": {
+        "score": 90,
+        "fcp": 1240,
+        "lcp": 3058,
+        "cls": 0.003,
+        "tbt": 224
+      },
+      "/designs/art-deco-black-tie": {
+        "score": 86,
+        "fcp": 1230,
+        "lcp": 3497,
+        "cls": 0.0001,
+        "tbt": 259
+      },
+      "/designs/burgundy-velvet-autumn": {
+        "score": 87,
+        "fcp": 1236,
+        "lcp": 3448,
+        "cls": 0.0001,
+        "tbt": 275
+      }
+    }
+  },
+  "firstLoadJs": {
+    "before": {
+      "index.html": {
+        "chunks": 8,
+        "rawKB": 573.2,
+        "gzipKB": 175.2,
+        "brotliKB": 151.3
+      },
+      "designs.html": {
+        "chunks": 7,
+        "rawKB": 572.4,
+        "gzipKB": 174.7,
+        "brotliKB": 150.9
+      },
+      "designs/art-deco-black-tie.html": {
+        "chunks": 8,
+        "rawKB": 573.2,
+        "gzipKB": 175.2,
+        "brotliKB": 151.3
+      },
+      "pricing.html": {
+        "chunks": 7,
+        "rawKB": 572.4,
+        "gzipKB": 174.7,
+        "brotliKB": 150.9
+      }
+    },
+    "after": {
+      "index.html": {
+        "chunks": 8,
+        "rawKB": 575.9,
+        "gzipKB": 176.2,
+        "brotliKB": 152.2
+      },
+      "designs.html": {
+        "chunks": 8,
+        "rawKB": 575.2,
+        "gzipKB": 176,
+        "brotliKB": 152
+      },
+      "designs/art-deco-black-tie.html": {
+        "chunks": 8,
+        "rawKB": 575.9,
+        "gzipKB": 176.2,
+        "brotliKB": 152.2
+      },
+      "pricing.html": {
+        "chunks": 7,
+        "rawKB": 573.7,
+        "gzipKB": 175.2,
+        "brotliKB": 151.3
+      }
+    },
+    "panelChunk": {
+      "beforeBytes": 229217,
+      "afterBytes": 229721,
+      "beforeGzip": 70282,
+      "afterGzip": 70442
+    }
+  },
+  "notes": [
+    "Archivo display swap -> optional (G089): the late swap re-wrapped H1s; /designs CLS 0.048 before, 0.118 with split H1 words and swap, 0.003 with optional.",
+    "Lighthouse FCP is ~150 ms later after (1081-1091 -> 1230-1242 ms) on every page; LCP did not get worse."
+  ]
+}

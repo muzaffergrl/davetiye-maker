@@ -1,11 +1,14 @@
 // A design card (home strip, /designs, related designs; G066 comp u1_designs_390): the REAL envelope screen (the home
 // screen fades in on hover), the name (link to the design page), the style line on wide cards, the Etsy price once it
 // is real, and "Live demo" (opens the demo dialog; a plain link to the demo without JavaScript).
+// G089: the picture tilts gently under the mouse (components/fx/DepthTilt; nothing on touch screens or with reduced
+// motion); the tilt box carries the media class, the link fills it.
 import { ArrowRight } from 'lucide-react';
 import type { Design } from '../../lib/marketing/designs.ts';
 import { demoPath } from '../../lib/marketing/designs.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
 import { displayPrice } from '../../lib/marketing/site.ts';
+import { DepthTilt } from '../fx/DepthTilt.tsx';
 import { designScreen } from './media.ts';
 import s from './marketing.module.css';
 import { Screen } from './ui.tsx';
@@ -18,10 +21,12 @@ export function DesignCard({ design, placement, headingLevel = 3 }: { design: De
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
     <article className={s.designCard}>
-      <a href={`/designs/${design.id}`} className={s.designCardMedia} aria-hidden tabIndex={-1}>
-        {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
-        {home ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
-      </a>
+      <DepthTilt className={s.designCardMedia}>
+        <a href={`/designs/${design.id}`} className={s.designCardLink} aria-hidden tabIndex={-1}>
+          {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
+          {home ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
+        </a>
+      </DepthTilt>
       <H className={s.designCardTitle}>
         <a href={`/designs/${design.id}`}>{design.name}</a>
       </H>

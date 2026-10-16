@@ -411,6 +411,9 @@ metin, çoğu zaman ikon/nokta).
 - Yükseklik: üst çubuk 60 px, alt gezinme 68 px; birincil düğme 48 px (tam genişlikte 52), diğerleri ≥ 44 px, alan 52 px,
   Edit satırı 88 px, açılır bölüm başlığı 72 px.
 - Hareket aynı (`--m-fast` 120 ms, `--m-base` 200 ms; `prefers-reduced-motion` → ~0).
+- G089 (K31): görünüm (hash) ya da kurulum adımı değişince ana sütun 180 ms'lik sakin bir **opacity** geçişiyle gelir
+  (`components/fx/useViewFade.ts`; dönüşüm/kayma yok, böylece yapışkan yayın şeridi ve sabit katmanlar etkilenmez). İlk açılışta
+  ve `prefers-reduced-motion` açıkken yok. Panelde başka gösteriş efekti yok.
 - Odak: `outline: 2px solid #2B1526; outline-offset: 2px` (patlıcan çubukta beyaz); alanlarda patlıcan çerçeve + soluk hale.
 
 ### 8.4 Düzen ayrıntıları (G066, comp'lara göre; K29 ile)

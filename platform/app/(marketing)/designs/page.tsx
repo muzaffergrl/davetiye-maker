@@ -1,5 +1,6 @@
 // /designs — gallery (docs/14 §6.2; G066 comp u1_designs_390). Only live designs; the style filter appears from 6
 // designs on.
+import { StaggeredText } from '../../../components/fx/StaggeredText.tsx';
 import { DesignCard } from '../../../components/marketing/DesignCard.tsx';
 import s from '../../../components/marketing/marketing.module.css';
 import { CheckList, Container, JsonLd, LastUpdated, Section, TextLink } from '../../../components/marketing/ui.tsx';
@@ -20,7 +21,9 @@ export default function DesignsPage() {
     <>
       <Section className={s.pageHead}>
         <Container>
-          <h1 className={s.h1}>{PAGE.h1}</h1>
+          <h1 className={s.h1}>
+            <StaggeredText text={PAGE.h1} />
+          </h1>
           <p className={s.lead}>
             Every design opens from a sealed envelope and has the same four pages: {SITE_PAGES.map((p) => p.name).join(', ')}.
             Each one has its own envelope, opening, artwork and fonts. Open a live demo on your phone and tap the envelope,

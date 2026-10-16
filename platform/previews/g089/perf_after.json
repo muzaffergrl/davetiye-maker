@@ -1,0 +1,29 @@
+{
+  "cls_scroll_390_/": 0,
+  "cls_scroll_390_/designs": 0,
+  "cls_scroll_390_/designs/blush-garden-rose": 0,
+  "cls_scroll_1280_/": 0.0008,
+  "cls_scroll_1280_/designs": 0,
+  "cls_scroll_1280_/designs/blush-garden-rose": 0,
+  "/": {
+    "lcp": 2192,
+    "lcpElement": "IMG http://127.0.0.1:3389/marketing/designs/blush-garden-rose/envelope-480.webp",
+    "cls": 0,
+    "transferredKB": 371,
+    "scriptKB": 141
+  },
+  "/designs": {
+    "lcp": 1432,
+    "lcpElement": "P",
+    "cls": 0,
+    "transferredKB": 472,
+    "scriptKB": 140
+  },
+  "/designs/blush-garden-rose": {
+    "lcp": 1876,
+    "lcpElement": "IMG http://127.0.0.1:3389/marketing/designs/blush-garden-rose/envelope-480.webp",
+    "cls": 0,
+    "transferredKB": 406,
+    "scriptKB": 141
+  }
+}

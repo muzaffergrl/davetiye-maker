@@ -2,6 +2,7 @@
 // else is a 404.
 import { Play } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import { StaggeredText } from '../../../../components/fx/StaggeredText.tsx';
 import { HeroDemo } from '../../../../components/marketing/Demo.tsx';
 import { DesignCard } from '../../../../components/marketing/DesignCard.tsx';
 import { demoDesigns } from '../../../../components/marketing/demo-data.ts';
@@ -112,7 +113,9 @@ export default async function DesignPage({ params }: Props) {
               </p>
             }
           >
-            <h1 className={s.h1}>{page.h1}</h1>
+            <h1 className={s.h1}>
+              <StaggeredText text={page.h1} />
+            </h1>
             <p className={s.lead}>{d.copy.intro}</p>
           </HeroDemo>
         </Container>
