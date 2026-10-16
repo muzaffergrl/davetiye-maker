@@ -75,6 +75,14 @@ def test_labels():
     bad = md.replace("**Mark as seen**", "**Mark all as read**").replace('"Page not found"', '"No page here"')
     found = b.label_problems(bad, "olive-ivory")
     assert any("Mark all as read" in x for x in found) and any("No page here" in x for x in found), found
+    # G131: labels from lib/audio (track names), lib/rsvp (answer types) and the guest scripts ("Play music") are found,
+    # and a renamed one still fails
+    for label in ("**Music & sound**", "**Evening Strings**", "**Yes / No**", "**Preview map**", "**Connect Google Sheets**",
+                  '"Play music"', '"Google Sheets: coming soon"', "Prefer us to do it?"):
+        assert label in md, label
+    bad = md.replace("**Evening Strings**", "**Evening Song**").replace('"Play music"', '"Start the music"')
+    found = b.label_problems(bad, "olive-ivory")
+    assert any("Evening Song" in x for x in found) and any("Start the music" in x for x in found), found
     # G121: the preview tab is computed (openingTabLabel), so "Book" passes for the book design only through that rule
     book = b.fill(b.template(), b.values("enchanted-forest-storybook"))
     assert "**Book** is the opening page" in book and b.label_problems(book, "enchanted-forest-storybook") == []

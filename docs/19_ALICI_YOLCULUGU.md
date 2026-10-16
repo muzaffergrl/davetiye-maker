@@ -939,13 +939,16 @@ basılı kartlara gireceği için satıştan önce, docs/05 §C). QR koyu rengi 
 **Canlıyla fark (2026-10-16):** rehber depodaki paneli (G100 + G121) anlatıyor. Production `b952bc8` (`dpl_HKT1…`, docs/10 §2)
 ikisini de içermiyor (`git merge-base --is-ancestor 368ebb1 b952bc8` → hayır). G100 + G121'li yayın canlıya çıkıp `--check` yeniden geçmeden
 rehber alıcıya verilmez. 20 başlat linki (`/start?theme=<id>`, "Design: <ad>" + form) ve `/privacy` aynı gün canlıda `200` (Vercel
-bağlayıcısı; bu ortamdan `curl` vekil sunucuda 403).
+bağlayıcısı; bu ortamdan `curl` vekil sunucuda 403). **G131:** rehber artık G126 (müzik), G127 (harita), G128 (yanıt formu, Excel,
+Google Sheets) ve G130'u (Help'teki "Prefer us to do it?") da anlatıyor; bunlar canlıya çıkmadan rehber verilmez. Google Sheets
+bağlantısı gerçek Google hesabıyla denenmedi (G128): rehber düğmeyi ve "coming soon" hâlini anlatıyor, çalıştığını iddia etmiyor.
 
 **Yapı (alıcının sırasıyla):** Good to know before you begin → **Start now: the first 5 steps** (QR + link) → **Save your edit
 link: it is your key** → Step 1 Start → Step 2 three-step setup (G100: 1. adım yalnız adlar + tarih; yayın sonrası "Your website is
 live" ekranı) → bekleyen sipariş onayı → Step 3 Edit (6 sayfa tablosu, Headings & labels, sample satırı, otomatik kayıt) → Step 4
-Photos → Step 5 Preview & publish → isim/tarih hakkı → Step 6 Share (QR, şifre, çevrim dışı) → Step 7 Guest replies (Guest list /
-Results, Held) → Step 8 After the wedding → Online süresi → Quick answers → Troubleshooting → Help and privacy.
+Photos → Map and directions (G127) → Music and sound (G126) → Step 5 Preview & publish → isim/tarih hakkı → Step 6 Share (QR,
+şifre, çevrim dışı) → Step 7 Guest replies (Reply form, Guest list / Results, Download Excel / CSV, Google Sheets, Held) → Step 8
+After the wedding → Online süresi → Quick answers → Troubleshooting → Help and privacy (G130 ek hizmet satırı).
 
 **Bilinçli seçimler:**
 - "İlk 5 dakika" yerine **"Start now: the first 5 steps"**: süre ölçülmedi (docs/05 §E "süre yazılmaz"); 5 = adım sayısı.
@@ -957,6 +960,9 @@ Results, Held) → Step 8 After the wedding → Online süresi → Quick answers
   Saved. Önizlemenin ilk sekmesi G121'den beri tasarımın kendi açılışı (`{OPENING_TAB}`: Envelope, Gatefold, Pouch, Wallet,
   Book, Sleeve; `lib/panel/model.ts` `openingTabLabel`); kaynakta düz metin olmadığı için `--check` bu etiketi
   `openingTabLabel`'ın varlığıyla doğrular. Zarfsız 6 tasarımın rehberinde "envelope" hiçbir biçimde geçmez.
+  G131 ile kaynak listesine `platform/lib/{audio,rsvp}`, `lib/maps.ts` ve misafir betikleri `public/audio/audio.js`,
+  `public/static/map.js` eklendi (parça adları, cevap türleri, "Play music"). Misafirin düğmesi "♪ Play music"; rehberde ♪ yok,
+  çünkü PDF'in standart Helvetica'sı bu işareti basamaz.
 - K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
 - Ekran görüntüsü yok: ekranlar K29/G100 panelinden yeniden alınmadı. Canlı tabanla `capture` yeniden alınınca rehbere görsel
   eklenebilir (önerilen görev, §7).
@@ -1090,13 +1096,16 @@ accented letters (for example in Polish, Czech or Turkish) and other alphabets s
 "ł, ő, ş" örnekleri PDF'in standart Helvetica'sında basılamadığı için rehberde dil adlarıyla yazıldı.)
 
 Panel etiketleri (kalın) kaynak koddan birebir: `--check` her kalın etiketi `platform/components/panel`, `platform/app/start`,
-`platform/lib/{panel,claim,theme}` içinde arar, bulamazsa hata verir (G121 gibi panel değişikliklerinden sonra önce bu denetim).
+`platform/lib/{panel,claim,theme,audio,rsvp}`, `lib/maps.ts` ve misafir betikleri `public/audio/audio.js` + `public/static/map.js`
+içinde arar, bulamazsa hata verir (G121 gibi panel değişikliklerinden sonra önce bu denetim).
 Biçim aracın desteklediği öğelerle sınırlı (başlık, paragraf, `- ` madde, numaralı satır, 2 sütunlu tablo, `![…](…)` = QR,
 `**kalın**`, link). Değişiklik geçmişi: G091 (ilk metin), G100 entegrasyonu (Sample satırı, yayın ekranı), **G122** (kurulum 1. adım
 yalnız adlar + tarih, yayın sonrası "Your website is live" ekranı, Guests'in Guest list / Results görünümleri, Held yanıtlar,
 önizleme sekmeleri, `{OPENING}` ve `{LANGUAGE_FONTS}`, Home → Help & questions), **G121 uyarlaması** (kurulum 2. adımda
 "More photos" yok → Edit → Photos; Skip for now düğmesi; önizleme sekmesi `{OPENING_TAB}`; Home'da Settings kartı; "Saved";
-Review'da göz düğmesi; Share'de QR katlı bölüm).
+Review'da göz düğmesi; Share'de QR katlı bölüm), **G131** (Map and directions, Music and sound, Reply form, Download Excel /
+CSV, Google Sheets ve "coming soon" hâli, Quick answers'ta müzik "Yes", iki sorun giderme satırı, Help'te G130 ek hizmet satırı;
+Edit tablosunda Day & place / Our Story / RSVP satırları).
 
 <!-- g091:start-here:start -->
 ````markdown
@@ -1177,11 +1186,11 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 | Edit page | What you change |
 |---|---|
 | Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one) |
-| Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link and venue photo; the order of the day (up to 10 rows); After the wedding |
+| Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link, map and directions, a reception place and venue photo; the order of the day (up to 10 rows); After the wedding |
 | Photos | Invitation portrait, three story photos and the venue photo |
-| Our Story | Show or hide the page, an intro line and a caption for each story moment |
+| Our Story | Show or hide the page, an intro line, a caption for each story moment, music and sound effects |
 | Details | Host line, dress code, travel & stay and registry links, guest policy note (in some designs), up to 12 questions and answers |
-| RSVP | Replies on or off, reply-by date, up to 3 questions for guests who are coming |
+| RSVP | Replies on or off, reply-by date, the reply form: which fields are required and up to 10 questions of your own |
 
 **Your own wording.** At the end of every Edit page, open **Headings & labels on this page**. There you can rewrite the design's texts in your own words, for example "You are invited", "Will You Join Us?" or the menu. Leave a box empty to keep the design's text; **Reset to design text** brings it back. On **Us** you can also pick suggested wording for a vow renewal, an elopement party or a commitment ceremony. Wording changes never use a name or date change.
 
@@ -1198,6 +1207,25 @@ Open **Edit → Photos**, choose a frame and tap **Add photo**. Drag to move the
 JPG, PNG, WebP, AVIF and HEIC photos up to 30 MB work. If a photo will not open, save a JPEG copy of it and choose that.
 
 No photos yet? Your website still works: empty frames show the design's soft placeholder image, and you can hide the Our Story page. Add your own photos before you share if you do not want guests to see placeholders.
+
+## Map and directions
+
+Open **Edit → Day & place → Venue**. Type the street address, or paste a Google Maps or Apple Maps link to the place into **Map link**. Below it, **Map & directions** has two switches:
+
+- **Show map:** guests see a card with the place and tap **Show map** to load Google Maps. Nothing loads from Google before that tap.
+- **Show directions:** guests get directions with Google Maps, Apple Maps or Waze.
+
+The editor shows what guests' maps will find (the pin of your link, or your address); tap **Preview map** to check it. Is the reception somewhere else? Tap **Add a reception place** and add its name, address and map link: guests then see both places. **Remove this place** takes it away again.
+
+## Music and sound
+
+Open **Edit → Our Story** and scroll to **Music & sound** at the end of the page.
+
+- **Story music:** choose one of four tracks made for your website (**First Light**, **Garden Waltz**, **Evening Strings**, **Music Box**; one is marked as suggested for your design), **Your own music** or **No music**. Tap **Listen** to hear it.
+- **Your own music:** tap **Choose a file** and upload an MP3 or M4A file of up to 10 MB. Only upload music you have the right to use (your own recording or a licence that allows it).
+- **Sound effects:** soft sounds when guests open the {OPENING}, move between pages and send their reply. Turn it off for a quiet website.
+
+Guests hear the music softly on your Our Story page (no Our Story page, no music). A small sound button at the top left of every page turns the sound off or on. Some phones wait for a tap before music starts: then guests see a "Play music" button.
 
 ## Step 5. Preview and publish
 
@@ -1232,7 +1260,9 @@ Open **Share**:
 
 ## Step 7. Guest replies
 
-**What guests do:** on your RSVP page they enter their name, whether they are coming, how many people (up to 10 in one reply), the names of the others (optional), a message and your questions. They need no account, and an email address is optional. To change their answer, they send another reply.
+**What guests do:** on your RSVP page they enter their name, whether they are coming, how many people (up to 10 in one reply), the names of the others (optional), a message and your questions. They need no account, and an email address is optional unless you make it required. To change their answer, they send another reply.
+
+**Reply form.** In **Edit → RSVP**, the reply form shows what guests fill in. Their name and whether they are coming are **Always required**. Email and the message can be **Required** or **Optional**. Under **Your questions**, tap **Add a question** (up to 10, for example a meal choice) and pick the answer type: **Choices**, **Yes / No**, **Short answer**, **Long answer** or **Number**. Each question can be required or optional too. Guests who are coming answer your questions. Changing or removing a question later keeps the answers you already have.
 
 **What you do:** open **Guests** (not Edit → RSVP, which changes the form). It has two views:
 
@@ -1241,10 +1271,12 @@ Open **Share**:
 
 In the Guest list you can also:
 
-- **Download list** to save a CSV file for Excel, Numbers or Google Sheets, one row per person.
+- **Download Excel** (at the bottom of the screen) to save every reply and a summary in one Excel file. It opens in Excel, Numbers and Google Sheets too. **Download CSV** saves a plain list, one row per person.
 - **Add a reply** you got by phone or in person. On each reply, **Edit reply** corrects it and **Remove reply** deletes it.
 - **Print list**, or save it as a PDF from your browser's print menu.
 - **Refresh** to load new replies.
+
+**Google Sheets** (optional): in **Guests**, tap **Connect Google Sheets** and allow access in Google. Your editor makes a spreadsheet in your own Google Drive and adds every new reply by itself; the columns follow your reply form. Google lets it see only the files it makes, nothing else in your Drive. **Open sheet** opens it, **Sync now** updates it at once, and **Disconnect** stops it (the spreadsheet stays in your Drive). If you see "Google Sheets: coming soon", this connection is not switched on yet: use **Download Excel** instead.
 
 We do not send email notifications yet: new replies show on Home and under **New**, where **Mark as seen** clears them. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
 
@@ -1282,7 +1314,9 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can I start a second website with my order?** No. One order starts one website.
 
-**Is there music, a printed invitation or a save the date?** No.
+**Is there music?** Yes, if you like: soft music on your Our Story page (see Music and sound above). Choose **No music** to turn it off.
+
+**Is there a printed invitation or a save the date?** No.
 
 ## Troubleshooting
 
@@ -1302,6 +1336,10 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The QR code does not scan.** Download it again from Share and print it larger, with white space around it. Always scan a printed proof before printing all cards.
 
+**Guests hear no music.** Some phones wait for a tap: guests tap "Play music". Check that your Our Story page is shown and a track is chosen under **Music & sound**.
+
+**Google Sheets says "Sync failed".** Tap **Sync now**. If it shows **Connect again**, tap it and allow access in Google again.
+
 **The countdown or calendar time is wrong.** Check **Time zone of the wedding** in Edit → Day & place → **More options** (or tap **Time zone** under **Settings** on Home).
 
 ## Help and privacy
@@ -1309,6 +1347,8 @@ Your website stays online until **12 months after your wedding date**. Home → 
 In your editor, **Help & questions** at the bottom of Home answers the most common questions.
 
 Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
+
+Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 
 Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}).
 
