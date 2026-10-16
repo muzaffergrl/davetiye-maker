@@ -34,9 +34,23 @@ export interface RsvpQuestion {
   id: string;
   /** The question as guests read it, e.g. "Meal choice". */
   label: string;
-  /** "choice": pick one of `options` (at least 2); "text": a short written answer (no options). */
-  type: 'choice' | 'text';
+  /**
+   * "choice": pick one of `options` (at least 2) · "text": a short written answer · "long": a longer written answer ·
+   * "yesno": Yes or No · "number": a whole number 0–9999 (G128). Only "choice" has options.
+   */
+  type: RsvpQuestionType;
   options?: string[];
+  /** G128: true = a guest who accepts must answer before sending. Missing = optional. */
+  required?: boolean;
+}
+
+/** Answer types of a custom RSVP question (G051: choice, text; G128: long, yesno, number). */
+export type RsvpQuestionType = 'choice' | 'text' | 'long' | 'yesno' | 'number';
+
+/** G128: which built-in fields of the reply form are required (name and attending always are). Missing = optional. */
+export interface RsvpRequired {
+  email?: boolean;
+  message?: boolean;
 }
 
 /** Thank-you mode after the wedding (G075): auto = from 00:00 the day after the wedding (site time zone). */
@@ -77,7 +91,7 @@ export interface ContentRecord {
   venue: Venue;
   schedule: ScheduleItem[];
   dress_code?: string | null;
-  rsvp: { deadline: string; method?: RsvpMethod; questions?: RsvpQuestion[] };
+  rsvp: { deadline: string; method?: RsvpMethod; required?: RsvpRequired; questions?: RsvpQuestion[] };
   urls: Partial<Record<UrlKey, string | null>>;
   media: {
     hero_portrait?: string | null;

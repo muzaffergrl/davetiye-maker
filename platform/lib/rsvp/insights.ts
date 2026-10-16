@@ -224,8 +224,9 @@ export function rsvpInsights(list: readonly ReplyLike[], questions: readonly Rsv
   const asked: Array<{ id: string; label: string; type: 'choice' | 'text' | null; options: string[]; current: boolean }> = questions.map((q) => ({
     id: q.id,
     label: normalizeLine(q.label) || q.id,
-    type: q.type,
-    options: q.type === 'choice' ? (q.options ?? []).map(normalizeLine).filter(Boolean) : [],
+    // G128: a yes / no question counts like a choice of Yes and No; long and number answers are listed like text.
+    type: q.type === 'choice' || q.type === 'yesno' ? 'choice' : 'text',
+    options: q.type === 'choice' ? (q.options ?? []).map(normalizeLine).filter(Boolean) : q.type === 'yesno' ? ['Yes', 'No'] : [],
     current: true,
   }));
   const known = new Set(asked.map((q) => q.id));

@@ -120,7 +120,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING): FaqGroup[] {
         {
           id: 'meal-choice',
           q: 'Can we ask for a meal choice?',
-          a: `Yes. You can add up to ${LIMITS.rsvpQuestions} questions of your own to the RSVP form, either multiple choice (up to ${LIMITS.questionOptions} options) or a short answer. A meal choice, a song request or dietary needs are typical examples. Only guests who say they are coming see the questions. [See RSVP features](/features#rsvp).`,
+          a: `Yes. You can add up to ${LIMITS.rsvpQuestions} questions of your own to the RSVP form, as multiple choice (up to ${LIMITS.questionOptions} options), yes or no, a number, or a written answer, and mark each one required or optional. A meal choice, a song request or dietary needs are typical examples. Only guests who say they are coming see the questions. [See RSVP features](/features#rsvp).`,
         },
         {
           id: 'where-replies',

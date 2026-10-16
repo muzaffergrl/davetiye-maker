@@ -194,10 +194,23 @@ export const CONTENT_SCHEMA = {
             null
           ]
         },
+        "required": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "İsteğe bağlı (G128): formun hazır alanlarından zorunlu olanlar. Ad ve katılım her zaman zorunludur; e-posta ve çifte not varsayılan olarak isteğe bağlıdır.",
+          "properties": {
+            "email": {
+              "type": "boolean"
+            },
+            "message": {
+              "type": "boolean"
+            }
+          }
+        },
         "questions": {
           "type": "array",
-          "maxItems": 3,
-          "description": "İsteğe bağlı (G051): misafir yanıt formundaki özel sorular (ör. menü seçimi). id kalıcıdır (yanıtlar id ile saklanır); choice = seçenekli (en az 2 seçenek), text = kısa yanıt (seçeneksiz). İş kuralları validate_content.py'de.",
+          "maxItems": 10,
+          "description": "İsteğe bağlı (G051, G128): misafir yanıt formundaki özel sorular (ör. menü seçimi). id kalıcıdır (yanıtlar id ile saklanır); choice = seçenekli (en az 2 seçenek), text = kısa yanıt, long = uzun yanıt, yesno = evet/hayır, number = tam sayı (0–9999); choice dışındakiler seçeneksiz. required: true = katılan misafir yanıtlamadan gönderemez. İş kuralları validate_content.py'de.",
           "items": {
             "type": "object",
             "required": [
@@ -219,8 +232,14 @@ export const CONTENT_SCHEMA = {
               "type": {
                 "enum": [
                   "choice",
-                  "text"
+                  "text",
+                  "long",
+                  "yesno",
+                  "number"
                 ]
+              },
+              "required": {
+                "type": "boolean"
               },
               "options": {
                 "type": "array",

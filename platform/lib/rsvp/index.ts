@@ -5,6 +5,7 @@ export * from './config.ts';
 export * from './deadline.ts';
 export * from './rate-limit.ts';
 export * from './validate.ts';
+export * from './form-config.ts';
 export * from './guest.ts';
 export * from './couple.ts';
 export * from './http.ts';

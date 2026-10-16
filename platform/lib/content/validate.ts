@@ -288,7 +288,7 @@ function ruleIssues(record: Record<string, any>, opts: ValidateOptions): Validat
       if (filled.length < 2) error('rsvp_question_options_missing', `${at}.options`, 'Add at least two choices.');
       else if (new Set(filled).size !== filled.length) error('rsvp_question_option_duplicate', `${at}.options`, 'Each choice must be different.');
     } else if (options.length) {
-      error('rsvp_question_text_options', `${at}.options`, 'A short-answer question has no choices.');
+      error('rsvp_question_text_options', `${at}.options`, 'Only a question with choices has choices.');
     }
   });
 
