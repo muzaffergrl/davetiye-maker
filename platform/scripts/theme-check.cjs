@@ -23,7 +23,8 @@
 //   0 setup: the 5 standard photo slots and their seeded sample photos, <title data-text> on every page, Google Fonts
 //     (≤ 3 families, display=swap)
 //   each page at 360/390/430/768/1280:
-//   1 no horizontal scroll, no text outside the viewport, no element past the edge that nothing clips
+//   1 no horizontal scroll (the widest of documentElement / body / scrollingElement scrollWidth and the full-page content
+//     width ≤ the viewport, G098), no text outside the viewport, no element past the edge that nothing clips
 //   2 every <img> loaded, no console/CSP error, no failed request
 //   3 every [data-field] / <title> equals the site's content record (formatted here, independently of the engine)
 //   4 card text stays on the plain paper of the GPT card, never over painted decor: a card at its image's size maps each
@@ -331,7 +332,30 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
   // the closed object: img/manifest.json stage.closed_obj.box_pct inside the .stage box when the build wrote it (the
   // stage's empty card room above it may pass the screen's top edge, e.g. 02 on its side, G402), else the whole .stage
   const CLOSED_BOX = env.images?.stage?.closed_obj?.box_pct ?? null;
-  const envelopeFit = (page) => page.evaluate(({ REPLAY, CLOSED_BOX }) => {
+  // horizontal overflow (G098, G101 note): the root's scrollWidth alone misses a page whose <html> clips (overflow-x:
+  // clip / hidden: 19's candle light gave documentElement 360 but body 446 and a 446 px wide full-page screenshot, and iOS
+  // Safari may still pan it) → the widest of the root, <body>, the scrolling element and the layout's content width (what
+  // a full-page screenshot captures, CDP Page.getLayoutMetrics) against the viewport.
+  async function hscrollOf(page) {
+    const m = await page.evaluate(() => {
+      const d = document.documentElement, b = document.body, s = document.scrollingElement || d;
+      return { vw: innerWidth, root: d.scrollWidth, body: b ? b.scrollWidth : 0, scroller: s.scrollWidth };
+    });
+    let content = 0;
+    try {
+      const cdp = await page.context().newCDPSession(page);
+      content = Math.round((await cdp.send('Page.getLayoutMetrics')).cssContentSize.width);
+      await cdp.detach();
+    } catch { /* no CDP (not Chromium): the DOM widths only */ }
+    const px = Math.max(0, Math.max(m.root, m.body, m.scroller, content) - m.vw);
+    return { px, detail: px ? ` (html ${m.root} · body ${m.body} · content ${content} · viewport ${m.vw})` : '' };
+  }
+  const envelopeFit = async (page) => {
+    const fit = await envelopeFitDom(page);
+    const h = await hscrollOf(page);
+    return { ...fit, hscroll: h.px, hscrollDetail: h.detail };
+  };
+  const envelopeFitDom = (page) => page.evaluate(({ REPLAY, CLOSED_BOX }) => {
     const vis = (el) => { const cs = getComputedStyle(el); const b = el.getBoundingClientRect(); return b.width > 0 && cs.display !== 'none' && cs.visibility !== 'hidden' ? b : null; };
     const stage = document.querySelector('.stage');
     const st = stage && vis(stage);
@@ -340,7 +364,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     const hb = hint && hint.getBoundingClientRect();
     // effective opacity (a running CSS animation can keep a hint visible that the opened state means to hide)
     const alpha = (el) => { let a = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) a *= Number(getComputedStyle(n).opacity); return a; };
-    return { hscroll: document.documentElement.scrollWidth - innerWidth, stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
+    return { stage: sb ? sb.top >= -1 && sb.bottom <= innerHeight + 1 : null,
       hint: hb ? hb.top >= 0 && hb.bottom <= innerHeight + 1 : null, hintShown: Boolean(hint && alpha(hint) > 0.05),
       replay: [...document.querySelectorAll(REPLAY)].map(vis).filter(Boolean).every((b) => b.top >= 0 && b.bottom <= innerHeight + 1) };
   }, { REPLAY: PROFILE.envelopeText.opened, CLOSED_BOX });
@@ -386,7 +410,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     content = shown(content);
     await markCards(page, PROFILE);
     const r = await page.evaluate(({ FZ, PARTICLES }) => {
-      const out = { hscroll: document.documentElement.scrollWidth - window.innerWidth, offscreen: [], bleed: [], zone: [] };
+      const out = { offscreen: [], bleed: [], zone: [] };
       const vw = window.innerWidth;
       for (const el of document.querySelectorAll('body *')) {
         const hasText = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
@@ -510,9 +534,11 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       return out;
     }, { FZ: PROFILE.freeZones, PARTICLES: PROFILE.particles });
 
+    const hs = await hscrollOf(page);
+    r.hscroll = hs.px;
     const bad = [];
     const name = tag.split('@')[0];
-    if (r.hscroll > 0) bad.push(`horizontal scroll ${r.hscroll}px`);
+    if (r.hscroll > 0) bad.push(`horizontal scroll ${r.hscroll}px${hs.detail}`);
     r.offscreen.forEach((x) => bad.push(`text off screen ${x}`));
     r.bleed.slice(0, 6).forEach((x) => bad.push(`element past the edge ${x}`));
     r.broken.forEach((x) => bad.push(`image not loaded ${x}`));
@@ -689,7 +715,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
           // docs/11 §13.3: no horizontal scroll (an opened gatefold/book must not widen the page); closed: the envelope
           // and its "Tap to open" hint on screen
           const fit = await envelopeFit(page);
-          if (fit.hscroll > 0) err(`envelope ${state} @${w}×${h}: horizontal scroll ${fit.hscroll}px`);
+          if (fit.hscroll > 0) err(`envelope ${state} @${w}×${h}: horizontal scroll ${fit.hscroll}px${fit.hscrollDetail}`);
           if (state === 'closed' && fit.stage === false) err(`envelope closed @${w}×${h}: the closed envelope (.stage) is not entirely on screen`);
           if (state === 'closed' && fit.hint === false) err(`envelope closed @${w}×${h}: "Tap to open" is below the screen`);
           if (state === 'closed' && fit.hint === null && once('hint')) warn('envelope: no visible "Tap to open" / "Click to open" hint found on the index page');
@@ -1323,7 +1349,7 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
         await page.evaluate(() => document.fonts.ready);
         await page.waitForTimeout(900);
         const fit = await envelopeFit(page);
-        if (fit.hscroll > 0) err(`envelope closed @${w}×${h} (stress record): horizontal scroll ${fit.hscroll}px`);
+        if (fit.hscroll > 0) err(`envelope closed @${w}×${h} (stress record): horizontal scroll ${fit.hscroll}px${fit.hscrollDetail}`);
         if (fit.stage === false) err(`envelope closed @${w}×${h} (stress record): the closed envelope (.stage) is not entirely on screen`);
         if (fit.hint === false) err(`envelope closed @${w}×${h} (stress record): "Tap to open" is below the screen`);
         const all = await backdropBusy(page, PROFILE.envelopeText.closed);
