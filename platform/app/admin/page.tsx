@@ -46,6 +46,37 @@ export default function AdminHome() {
               Bugün {d.sales.today} satış · bu ay {d.sales.thisMonth} · toplam {d.sales.total}. Satış = Etsy sipariş numarasıyla açılan site.
             </p>
 
+            <section className={styles.card} aria-labelledby="todo-h" data-todos="">
+              <h2 id="todo-h" className={styles.h2}>
+                Yapılacaklar
+              </h2>
+              {d.todos.length === 0 ? (
+                <p className={styles.actionText} style={{ margin: 0 }}>
+                  Şu an yapılacak bir şey yok. Onay bekleyen siparişler, uzun süredir yayınlanmamış siteler ve kapanmak üzere olanlar burada görünür.
+                </p>
+              ) : (
+                <ul className={styles.rows}>
+                  {d.todos.map((t) => (
+                    <li key={`${t.kind}-${t.site.id}`} className={styles.rowItem} data-todo={t.kind}>
+                      <Link href={`/admin/site/${t.site.id}`} className={styles.rowLink}>
+                        <span className={styles.rowMain}>
+                          <span className={styles.rowTitle} style={{ display: 'block' }}>
+                            {t.site.names}
+                          </span>
+                          <span className={styles.siteMeta} style={{ display: 'block' }}>
+                            {t.text}
+                          </span>
+                        </span>
+                        <span className={t.kind === 'confirm' ? styles.badgeWarn : styles.badge}>
+                          {TODO_LABEL[t.kind]} <ChevronRight size={14} aria-hidden />
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+
             <div className={styles.kpis} data-kpis="">
               <Link href="/admin/orders?f=action" className={`${styles.kpi} ${d.sites.needsAction ? styles.kpiWarn : ''}`} data-kpi="action">
                 <p className={styles.kpiNum}>{d.sites.needsAction}</p>
@@ -83,36 +114,7 @@ export default function AdminHome() {
 
             <div className={styles.dash}>
               <div>
-                <section className={styles.card} aria-labelledby="todo-h" data-todos="">
-                  <h2 id="todo-h" className={styles.h2}>
-                    Yapılacaklar
-                  </h2>
-                  {d.todos.length === 0 ? (
-                    <p className={styles.actionText} style={{ margin: 0 }}>
-                      Şu an yapılacak bir şey yok. Onay bekleyen siparişler, uzun süredir yayınlanmamış siteler ve kapanmak üzere olanlar burada görünür.
-                    </p>
-                  ) : (
-                    <ul className={styles.rows}>
-                      {d.todos.map((t) => (
-                        <li key={`${t.kind}-${t.site.id}`} className={styles.rowItem} data-todo={t.kind}>
-                          <Link href={`/admin/site/${t.site.id}`} className={styles.rowLink}>
-                            <span className={styles.rowMain}>
-                              <span className={styles.rowTitle} style={{ display: 'block' }}>
-                                {t.site.names}
-                              </span>
-                              <span className={styles.siteMeta} style={{ display: 'block' }}>
-                                {t.text}
-                              </span>
-                            </span>
-                            <span className={t.kind === 'confirm' ? styles.badgeWarn : styles.badge}>
-                              {TODO_LABEL[t.kind]} <ChevronRight size={14} aria-hidden />
-                            </span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
+
 
                 <section className={styles.card} aria-labelledby="recent-h">
                   <div className={styles.row} style={{ justifyContent: 'space-between', marginBottom: 4 }}>

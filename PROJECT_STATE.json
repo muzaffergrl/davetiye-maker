@@ -5,7 +5,7 @@
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-14",
+  "last_updated": "2026-10-16",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -534,7 +534,7 @@
       "region": "iad1",
       "production_url": "https://davetiye-platform-five.vercel.app",
       "git_integration": false,
-      "deployed_commit": "c5f512a (pre-review); review fixes edca755+ NOT yet deployed (G049)"
+      "deployed_commit": "e63bab4 (G096, 2026-10-15: admin v2, 14 designs on sales site, CLAIM_ORDER_VERIFICATION=manual); main b952bc8+ (20 designs) waits for G098 deploy"
     },
     "data": {
       "adapter": "blob",
@@ -542,21 +542,133 @@
       "supabase": "not used (docs/10 §2c)"
     },
     "themes": {
-      "blush-garden-rose": {
-        "design": "03",
-        "status": "functional_pilot",
-        "demo_site": "/clara-and-julian"
-      },
       "olive-ivory": {
         "design": "01",
         "status": "functional_pilot",
-        "qa": "qa-kontrol 2026-10-14 KOŞULLU → 3 tur düzeltme, son kontrol geçti",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "dusty-blue-champagne": {
+        "design": "02",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "blush-garden-rose": {
+        "design": "03",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true,
+        "demo_site": "/clara-and-julian"
+      },
+      "mediterranean-lemon": {
+        "design": "04",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "vintage-airmail-love-letter": {
+        "design": "05",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "art-deco-black-tie": {
+        "design": "06",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "burgundy-velvet-autumn": {
+        "design": "07",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "winter-evergreen": {
+        "design": "08",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "lavender-provence": {
+        "design": "09",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "tuscan-vineyard": {
+        "design": "10",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "boho-pampas-terracotta": {
+        "design": "11",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "tropical-destination": {
+        "design": "12",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "enchanted-forest-storybook": {
+        "design": "13",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "ivory-lace-pearls": {
+        "design": "14",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": true
+      },
+      "cherry-blossom-spring": {
+        "design": "15",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": false
+      },
+      "sunflower-rustic-barn": {
+        "design": "16",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": false
+      },
+      "emerald-gold-estate": {
+        "design": "17",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": false
+      },
+      "wildflower-meadow-vellum": {
+        "design": "18",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": false
+      },
+      "midnight-garden": {
+        "design": "19",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": false
+      },
+      "coastal-seaside": {
+        "design": "20",
+        "status": "functional_pilot",
+        "sales_site": "live",
         "deployed": false
       }
     },
     "tests": {
-      "platform_npm_test": "197/197 (2026-10-13)",
-      "live_e2e": "30/30 by claude-local-1 on pre-review build"
+      "platform_npm_test": "1206/1206 (2026-10-15, PR #7)",
+      "admin_browser": "g087-browser 65/65",
+      "marketing_browser": "783/783 (G097)",
+      "live": "G096 canlı: başlat → onayla → yayınla akışı geçti"
     },
     "not_tested": [
       "real iPhone/Android",
@@ -564,14 +676,22 @@
       "cost/load"
     ],
     "presale_blockers": [
-      "brand name",
-      "support email",
+      "price",
+      "Etsy shop/listing URLs",
+      "response time / refund policy",
       "privacy notice (needs shop legal identity)",
       "hosting duration/renewal policy",
-      "price",
-      "Etsy order verification (order-number squatting)"
+      "real-device manual test (docs/20_ELLE_TEST_PLANI.md)",
+      "12+ char ADMIN_PASSWORD before launch"
     ],
-    "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)"
+    "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)",
+    "admin": {
+      "doc": "docs/17_ADMIN_PANELI.md",
+      "url": "/admin",
+      "version": "v2 (G095)",
+      "password": "ADMIN_PASSWORD env (temporary short, K33; never in repo)",
+      "order_verification": "manual (K34)"
+    }
   },
   "brand": {
     "name": "BKE Studio",
