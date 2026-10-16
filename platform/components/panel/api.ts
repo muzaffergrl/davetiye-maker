@@ -77,5 +77,10 @@ export function panelApi(slug: string, editKey: string) {
       ),
     /** CSV download (a plain link cannot send a header, so this one carries the key; same origin, no-referrer). */
     repliesCsvUrl: () => `/api/rsvp/${encodeURIComponent(slug)}/export?k=${encodeURIComponent(editKey)}`,
+    /** G128: Excel download (Replies + Summary sheets); a plain link, like the CSV. */
+    repliesExcelUrl: () => `/api/rsvp/${encodeURIComponent(slug)}/excel?k=${encodeURIComponent(editKey)}`,
+    /** G128: the Google Sheets connection — status, and "connect" (-> {url}) / "sync" / "disconnect". */
+    googleStatus: () => call<Record<string, unknown>>(`${base}/google`, { headers: auth }),
+    googleAction: (action: 'connect' | 'sync' | 'disconnect') => call<Record<string, unknown>>(`${base}/google`, jsonInit('POST', { action })),
   };
 }

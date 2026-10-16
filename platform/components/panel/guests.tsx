@@ -48,6 +48,7 @@ import { zoneCity } from './sections.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, EmptyState, OverflowMenu, Segmented, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
+import { SheetsCard } from './SheetsCard.tsx';
 
 // ---------------------------------------------------------------------------------------------
 // Data (shared by Home and Guests)
@@ -556,12 +557,21 @@ export function GuestsView({
             Print list
           </Button>
         ) : null}
+        {counts.responses ? (
+          <a className={cx(styles.btn, styles.btn_tertiary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
+            <span>Download CSV</span>
+            <span className={styles.visuallyHidden}> (one row per guest)</span>
+          </a>
+        ) : null}
         {!archived ? (
           <Button variant="tertiary" onClick={onSettings}>
             Reply settings
           </Button>
         ) : null}
       </div>
+
+      {/* G128: a live copy of the replies in the couple's Google Drive */}
+      <SheetsCard api={api} online={online} archived={archived} />
 
       {/* Always in reach while scrolling the list (comp u2_guests_390): add a phone reply, download the list. */}
       {!archived || counts.responses ? (
@@ -572,10 +582,10 @@ export function GuestsView({
             </Button>
           ) : null}
           {counts.responses ? (
-            <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
+            <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesExcelUrl()} download rel="noreferrer" data-excel>
               <Download size={18} strokeWidth={1.75} aria-hidden="true" />
-              <span>Download list</span>
-              <span className={styles.visuallyHidden}> (CSV, opens in Excel or Google Sheets)</span>
+              <span>Download Excel</span>
+              <span className={styles.visuallyHidden}> (replies and a summary; opens in Excel, Numbers or Google Sheets)</span>
             </a>
           ) : null}
           {!archived && !online ? <p className={styles.guestBarNote}>Connect to the internet to add or change replies.</p> : null}

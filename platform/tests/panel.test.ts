@@ -780,7 +780,7 @@ test('G051 drafts: a half-written question is stored (it only blocks publishing)
     { ...demoContent(), faq: Array.from({ length: 13 }, () => ({ q: 'Q', a: 'A' })) },
     { ...demoContent(), faq: [{ q: 'Only a question' }] },
     { ...demoContent(), rsvp: { deadline: '2027-04-03', questions: [{ id: 'm', label: 'M', type: 'menu' }] } },
-    { ...demoContent(), rsvp: { deadline: '2027-04-03', questions: Array.from({ length: 4 }, (_, i) => ({ id: `q${i}`, label: 'Q', type: 'text' })) } },
+    { ...demoContent(), rsvp: { deadline: '2027-04-03', questions: Array.from({ length: 11 }, (_, i) => ({ id: `q${i}`, label: 'Q', type: 'text' })) } },
   ]) {
     assert.throws(() => prepareDraft(demoContent(), bad), DraftShapeError);
   }

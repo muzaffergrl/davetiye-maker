@@ -7,7 +7,7 @@
 //         got another way ("Added by you"); {action: "update", id, reply: {...}} -> the couple's correction of a reply.
 //         Same fields and messages as the guest form: 400 {code: "invalid", message, fields} · 404 not_found (reply
 //         gone). Answers with {ok, reply, …summary}. An archived site: 403 like every other change.
-import { after } from 'next/server';
+import { after } from 'next/server.js'; // .js: node:test loads route files directly (no exports map in next)
 import { getDataAdapter } from '../../../../../lib/data/index.ts';
 import { scheduleSheetSync } from '../../../../../lib/google/sync.ts';
 import { addCoupleReply, authorizeEditor, manageRsvps, MAX_RSVP_ACTION_IDS, rsvpSummary, updateCoupleReply } from '../../../../../lib/rsvp/couple.ts';

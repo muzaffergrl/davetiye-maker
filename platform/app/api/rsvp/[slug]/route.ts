@@ -3,7 +3,7 @@
 //   POST  one reply, JSON body {name, email, attending, guests, message, answers?{<question id>: value} (G051), website(honeypot)}
 // A password-protected website (G076) answers both with 401 password_required unless the request has its guest cookie.
 // Used by /rsvp/form.js (the theme form contract, README "RSVP").
-import { after } from 'next/server';
+import { after } from 'next/server.js'; // .js: node:test loads route files directly (no exports map in next)
 import { getDataAdapter } from '../../../../lib/data/index.ts';
 import { scheduleSheetSync } from '../../../../lib/google/sync.ts';
 import { BODY_MAX_BYTES } from '../../../../lib/rsvp/config.ts';

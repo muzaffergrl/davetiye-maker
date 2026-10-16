@@ -1,5 +1,5 @@
 // /api/edit/<slug>/publish — publish the saved draft (refused with 422 + issues when invalid).
-import { after } from 'next/server';
+import { after } from 'next/server.js'; // .js: node:test loads route files directly (no exports map in next)
 import { getDataAdapter } from '../../../../../lib/data/index.ts';
 import { googleAvailable } from '../../../../../lib/google/config.ts';
 import { syncSheet } from '../../../../../lib/google/sync.ts';
