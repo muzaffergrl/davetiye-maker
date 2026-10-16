@@ -2,7 +2,7 @@
 id: G079
 baslik: Canlıya güncel main — sade ve BKE Studio görünümlü panel (G066-B, K29); canlı kontrol + panel ekranları
 rol: claude-tarayici
-durum: inceleme
+durum: bitti
 alan: claude-local-1
 oncelik: 1
 bagimli: []
@@ -87,3 +87,4 @@ tutucusu; Windows test notu (symlink).
 - 2026-10-14 açıldı (entegratör): G066-B main'de (31e82ab)
 - 2026-10-15 alindi: claude-local-1
 - 2026-10-15 bitti, incelemeye gönderildi
+- 2026-10-16 entegratör onayladı

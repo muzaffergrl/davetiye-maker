@@ -2,7 +2,7 @@
 id: G006
 baslik: Tasarım 02 — polaroid_frame katmanını geniş kenarla yeniden çıkar (gölge kesik)
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 3
 bagimli: []
@@ -30,3 +30,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — 02'nin Canva video katmanı (polaroid gölgesi); video ve Canva teslimi yok

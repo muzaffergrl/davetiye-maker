@@ -2,7 +2,7 @@
 id: G013
 baslik: V01 Paket 3 — Etsy mockup'ları (3 görsel)
 rol: gpt-gorsel
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 3
 bagimli: []
@@ -26,3 +26,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22–K24: eski V01 mockup'ları; ilan mockup'ları website temaları bitince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — V01 Canva dönemi Etsy mockup'ları; 02'nin ilan sahneleri G802'de

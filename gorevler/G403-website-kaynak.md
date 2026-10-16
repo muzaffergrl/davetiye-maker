@@ -2,7 +2,7 @@
 id: G403
 baslik: Tasarım 03 Blush Garden Rose — A2 website HTML kaynağı
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 3
 bagimli: [G020]
@@ -31,3 +31,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — 03 için Canva'ya aktarılacak website HTML kaynağı; 03 platform teması → G038

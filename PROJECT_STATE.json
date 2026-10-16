@@ -16,15 +16,14 @@
     "sale_ready"
   ],
   "undecided": [
-    "brand_name",
-    "pricing",
+    "pricing (TRY amount + update cadence, K38; target USD 29.40)",
+    "etsy_listing_upload (K41: after manual tests)",
     "subscription_budget",
-    "support_email_and_sla",
     "revision_scope",
     "real_domain",
-    "rsvp_account_and_target",
-    "sale_template_links",
-    "commercial_music",
+    "email_provider (edit link / RSVP notifications)",
+    "privacy_policy_controller_identity (docs/20 §7.2)",
+    "order_check_time / extension / deletion policies",
     "next_product_after_collection_01",
     "launch_date"
   ],
@@ -33,7 +32,7 @@
       "id": "01_Olive_Ivory",
       "working_name": "Olive & Ivory",
       "is_brand_decision": false,
-      "status": "editable_draft",
+      "status": "functional_pilot",
       "content_record": "collections/01_Olive_Ivory/content.demo.json",
       "canva_designs": [
         {
@@ -126,18 +125,28 @@
         "buyer_ab_data_isolation_test": "not_done",
         "sale_template_links": null,
         "guest_pdf_export": "not_done",
-        "start_here_pdf": "not_started",
+        "start_here_pdf": "done for platform (G091)",
         "canva_free_buyer_test": "not_done",
-        "etsy_listing": "not_started"
+        "etsy_listing": "prepared, not uploaded (K41)"
       },
       "phase1_design_no": 1,
-      "phase1_note": "Aşama 1'de yeni hatta (G101/G201/G301) yeniden kurulur; mevcut Canva dosyaları silinmez."
+      "phase1_note": "Aşama 1'de yeni hatta (G101/G201/G301) yeniden kurulur; mevcut Canva dosyaları silinmez.",
+      "theme": "olive-ivory",
+      "listing_package": {
+        "listing": "collections/01_Olive_Ivory/package/listing/listing_v3.md",
+        "etsy_upload": "collections/01_Olive_Ivory/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/01_Olive_Ivory/package/listing/images_editorial/ (v4, 8 × 2000 px)",
+        "start_here": "collections/01_Olive_Ivory/package/customer/START_HERE.md + START_HERE.pdf (G091)",
+        "uploaded_to_etsy": false,
+        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+      },
+      "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes"
     },
     {
       "id": "02_Dusty_Blue",
       "working_name": "Dusty Blue & Champagne",
       "is_brand_decision": false,
-      "status": "editable_draft",
+      "status": "functional_pilot",
       "purpose": "Grafik kalite örneği (kodla çizim); Claude vs GPT görsel üretim kararı için",
       "content_record": "collections/02_Dusty_Blue/content.demo.json",
       "sources": {
@@ -222,283 +231,471 @@
           "status": "prompts_ready"
         }
       ],
-      "phase1_design_no": 2
+      "phase1_design_no": 2,
+      "theme": "dusty-blue-champagne",
+      "listing_package": {
+        "listing": "collections/02_Dusty_Blue/package/listing/listing_v3.md",
+        "etsy_upload": "collections/02_Dusty_Blue/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/02_Dusty_Blue/package/listing/images_editorial/ (v4, 8 × 2000 px)",
+        "start_here": "collections/02_Dusty_Blue/package/customer/START_HERE.md + START_HERE.pdf (G091)",
+        "uploaded_to_etsy": false,
+        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+      },
+      "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes"
     },
     {
       "id": "03_Blush_Garden_Rose",
       "working_name": "Blush Garden Rose",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 3,
       "content_record": "collections/03_Blush_Garden_Rose/content.demo.json",
       "design_brief": "collections/03_Blush_Garden_Rose/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G103",
-        "G203",
-        "G303"
-      ]
+        "G030",
+        "G036",
+        "G038",
+        "G803"
+      ],
+      "theme": "blush-garden-rose",
+      "listing_package": {
+        "listing": "collections/03_Blush_Garden_Rose/package/listing/listing_v3.md",
+        "etsy_upload": "collections/03_Blush_Garden_Rose/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/ (v4, 8 × 2000 px)",
+        "start_here": "collections/03_Blush_Garden_Rose/package/customer/START_HERE.md + START_HERE.pdf (G091)",
+        "uploaded_to_etsy": false,
+        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+      }
     },
     {
       "id": "04_Vintage_Airmail",
       "working_name": "Vintage Airmail Love Letter",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 4,
       "content_record": "collections/04_Vintage_Airmail/content.demo.json",
       "design_brief": "collections/04_Vintage_Airmail/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G104",
         "G204",
-        "G304"
-      ]
+        "G404",
+        "G804"
+      ],
+      "theme": "vintage-airmail-love-letter",
+      "listing_package": {
+        "listing": "collections/04_Vintage_Airmail/package/listing/listing_v3.md",
+        "etsy_upload": "collections/04_Vintage_Airmail/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/04_Vintage_Airmail/package/listing/images_editorial/ (v4, 8 × 2000 px)",
+        "start_here": "collections/04_Vintage_Airmail/package/customer/START_HERE.md + START_HERE.pdf (G091)",
+        "uploaded_to_etsy": false,
+        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+      }
     },
     {
       "id": "05_Lemon_Mediterranean",
       "working_name": "Mediterranean Lemon",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 5,
       "content_record": "collections/05_Lemon_Mediterranean/content.demo.json",
       "design_brief": "collections/05_Lemon_Mediterranean/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G105",
         "G205",
-        "G305"
-      ]
+        "G405",
+        "G805"
+      ],
+      "theme": "mediterranean-lemon",
+      "listing_package": {
+        "listing": "collections/05_Lemon_Mediterranean/package/listing/listing_v3.md",
+        "etsy_upload": "collections/05_Lemon_Mediterranean/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/ (v4, 8 × 2000 px)",
+        "start_here": "collections/05_Lemon_Mediterranean/package/customer/START_HERE.md + START_HERE.pdf (G091)",
+        "uploaded_to_etsy": false,
+        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+      }
     },
     {
       "id": "06_Art_Deco_Noir",
       "working_name": "Art Deco Black-Tie",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 6,
       "content_record": "collections/06_Art_Deco_Noir/content.demo.json",
       "design_brief": "collections/06_Art_Deco_Noir/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G106",
         "G206",
-        "G306"
-      ]
+        "G406",
+        "G806"
+      ],
+      "theme": "art-deco-black-tie",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "07_Burgundy_Velvet",
       "working_name": "Burgundy Velvet Autumn",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 7,
       "content_record": "collections/07_Burgundy_Velvet/content.demo.json",
       "design_brief": "collections/07_Burgundy_Velvet/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G107",
         "G207",
-        "G307"
-      ]
+        "G407",
+        "G807"
+      ],
+      "theme": "burgundy-velvet-autumn",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "08_Winter_Evergreen",
       "working_name": "Winter Evergreen",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 8,
       "content_record": "collections/08_Winter_Evergreen/content.demo.json",
       "design_brief": "collections/08_Winter_Evergreen/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G108",
         "G208",
-        "G308"
-      ]
+        "G408",
+        "G808"
+      ],
+      "theme": "winter-evergreen",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "09_Lavender_Provence",
       "working_name": "Lavender Provence",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 9,
       "content_record": "collections/09_Lavender_Provence/content.demo.json",
       "design_brief": "collections/09_Lavender_Provence/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G109",
         "G209",
-        "G309"
-      ]
+        "G409",
+        "G809"
+      ],
+      "theme": "lavender-provence",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "10_Tuscan_Vineyard",
       "working_name": "Tuscan Vineyard",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 10,
       "content_record": "collections/10_Tuscan_Vineyard/content.demo.json",
       "design_brief": "collections/10_Tuscan_Vineyard/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G110",
         "G210",
-        "G310"
-      ]
+        "G410",
+        "G810"
+      ],
+      "theme": "tuscan-vineyard",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "11_Boho_Pampas",
       "working_name": "Boho Pampas Terracotta",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 11,
       "content_record": "collections/11_Boho_Pampas/content.demo.json",
       "design_brief": "collections/11_Boho_Pampas/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G111",
         "G211",
-        "G311"
-      ]
+        "G411",
+        "G811"
+      ],
+      "theme": "boho-pampas-terracotta",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "12_Tropical_Destination",
       "working_name": "Tropical Destination",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 12,
       "content_record": "collections/12_Tropical_Destination/content.demo.json",
       "design_brief": "collections/12_Tropical_Destination/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G112",
         "G212",
-        "G312"
-      ]
+        "G412",
+        "G812"
+      ],
+      "theme": "tropical-destination",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "13_Enchanted_Forest",
       "working_name": "Enchanted Forest Storybook",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 13,
       "content_record": "collections/13_Enchanted_Forest/content.demo.json",
       "design_brief": "collections/13_Enchanted_Forest/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G113",
         "G213",
-        "G313"
-      ]
+        "G413",
+        "G813"
+      ],
+      "theme": "enchanted-forest-storybook",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "14_Ivory_Lace_Pearl",
       "working_name": "Ivory Lace & Pearls",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 14,
       "content_record": "collections/14_Ivory_Lace_Pearl/content.demo.json",
       "design_brief": "collections/14_Ivory_Lace_Pearl/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G114",
         "G214",
-        "G314"
-      ]
+        "G414",
+        "G814"
+      ],
+      "theme": "ivory-lace-pearls",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "15_Cherry_Blossom",
       "working_name": "Cherry Blossom Spring",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 15,
       "content_record": "collections/15_Cherry_Blossom/content.demo.json",
       "design_brief": "collections/15_Cherry_Blossom/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G115",
         "G215",
-        "G315"
-      ]
+        "G415",
+        "G815"
+      ],
+      "theme": "cherry-blossom-spring",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "16_Sunflower_Rustic",
       "working_name": "Sunflower Rustic Barn",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 16,
       "content_record": "collections/16_Sunflower_Rustic/content.demo.json",
       "design_brief": "collections/16_Sunflower_Rustic/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G116",
         "G216",
-        "G316"
-      ]
+        "G416",
+        "G816"
+      ],
+      "theme": "sunflower-rustic-barn",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "17_Emerald_Gold_Estate",
       "working_name": "Emerald & Gold Estate",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 17,
       "content_record": "collections/17_Emerald_Gold_Estate/content.demo.json",
       "design_brief": "collections/17_Emerald_Gold_Estate/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G117",
         "G217",
-        "G317"
-      ]
+        "G417",
+        "G817"
+      ],
+      "theme": "emerald-gold-estate",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "18_Wildflower_Vellum",
       "working_name": "Wildflower Meadow Vellum",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 18,
       "content_record": "collections/18_Wildflower_Vellum/content.demo.json",
       "design_brief": "collections/18_Wildflower_Vellum/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G118",
         "G218",
-        "G318"
-      ]
+        "G418",
+        "G818"
+      ],
+      "theme": "wildflower-meadow-vellum",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "19_Midnight_Garden",
       "working_name": "Midnight Garden",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 19,
       "content_record": "collections/19_Midnight_Garden/content.demo.json",
       "design_brief": "collections/19_Midnight_Garden/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G119",
         "G219",
-        "G319"
-      ]
+        "G419",
+        "G819"
+      ],
+      "theme": "midnight-garden",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     },
     {
       "id": "20_Coastal_Seaside",
       "working_name": "Coastal Seaside",
       "is_brand_decision": false,
-      "status": "concept",
+      "status": "functional_pilot",
       "phase1_design_no": 20,
       "content_record": "collections/20_Coastal_Seaside/content.demo.json",
       "design_brief": "collections/20_Coastal_Seaside/DESIGN_BRIEF.md",
       "canva_designs": [],
       "tasks": [
-        "G120",
         "G220",
-        "G320"
-      ]
+        "G420",
+        "G820"
+      ],
+      "theme": "coastal-seaside",
+      "listing_package": {
+        "status": "in_progress",
+        "tasks": [
+          "G122 (START HERE)",
+          "G123 (listing text)",
+          "G124 (listing images)"
+        ],
+        "uploaded_to_etsy": false
+      }
     }
   ],
   "task_board": "gorevler/ (tools/gorev.py, PANO.md, roller/)",
   "plan": {
     "phase1": "20 farklı tasarım (docs/09_TASARIM_KATALOGU.md)",
-    "phase2": "her tasarıma orijinale ek 5 renk paleti → 20 + 100 = 120 ürün (kapı: G090)",
+    "phase2": "her tasarıma orijinale ek 5 renk paleti → 20 + 100 = 120 ürün (K16 geçerli; kapı: G090). Eski GP1–GP4, G040, G041, G070–G074 Canva dönemine göre yazıldı, blokajda; kullanıcının yeni iş listesiyle yeniden tanımlanacak",
     "doc": "docs/06_FABRIKA_PLANI.md"
   },
   "test_designs_not_for_sale": [
@@ -520,7 +717,7 @@
     }
   ],
   "blockers": {
-    "canva_ui": "Karar A (2026-10-09, hesap Pro): Claude kullanıcının bilgisayarında tarayıcıyla yapar — rol claude-tarayici, GA/GB görevleri. Kanıtlar: docs/08_CANVA_UI_BLOKAJ.md"
+    "canva_ui": "Geçersiz (K24: Canva teslimi yok). GA/GB görevleri 2026-10-16'da iptal edildi. Eski kayıt: Karar A (2026-10-09) — claude-tarayici, docs/08_CANVA_UI_BLOKAJ.md"
   },
   "canva_account_plan": "Pro (kullanıcı beyanı 2026-10-09)",
   "platform": {
@@ -534,7 +731,8 @@
       "region": "iad1",
       "production_url": "https://davetiye-platform-five.vercel.app",
       "git_integration": false,
-      "deployed_commit": "e63bab4 (G096, 2026-10-15: admin v2, 14 designs on sales site, CLAIM_ORDER_VERIFICATION=manual); main b952bc8+ (20 designs) waits for G098 deploy"
+      "deployed_commit": "b952bc8 (2026-10-16; platform tree 35ba50964db2; PR #7: 20 designs on sales site, admin v2, panel K29) — dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW",
+      "undeployed_branch": "claude/zealous-fermi-hy1o40: G099 showcase, G100 panel simplification, admin Özet to-dos first, G101-A/B 15–20 QA fixes, Etsy shop setup + listing package 01–05 (v4 images, tools/etsy_upload.py) — not on main, not deployed"
     },
     "data": {
       "adapter": "blob",
@@ -562,13 +760,13 @@
         "demo_site": "/clara-and-julian"
       },
       "mediterranean-lemon": {
-        "design": "04",
+        "design": "05",
         "status": "functional_pilot",
         "sales_site": "live",
         "deployed": true
       },
       "vintage-airmail-love-letter": {
-        "design": "05",
+        "design": "04",
         "status": "functional_pilot",
         "sales_site": "live",
         "deployed": true
@@ -631,44 +829,45 @@
         "design": "15",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": false
+        "deployed": true
       },
       "sunflower-rustic-barn": {
         "design": "16",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": false
+        "deployed": true
       },
       "emerald-gold-estate": {
         "design": "17",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": false
+        "deployed": true
       },
       "wildflower-meadow-vellum": {
         "design": "18",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": false
+        "deployed": true
       },
       "midnight-garden": {
         "design": "19",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": false
+        "deployed": true
       },
       "coastal-seaside": {
         "design": "20",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": false
+        "deployed": true
       }
     },
     "tests": {
-      "platform_npm_test": "1206/1206 (2026-10-15, PR #7)",
+      "platform_npm_test": "1189/1189 on production tree b952bc8 (2026-10-16, docs/10); branch sessions G101-A 1208/1208, G101-B 1210/1210; merged integrator branch not run",
       "admin_browser": "g087-browser 65/65",
       "marketing_browser": "783/783 (G097)",
-      "live": "G096 canlı: başlat → onayla → yayınla akışı geçti"
+      "themes_15_20": "theme-check --stress 128/0/0, g051-browser 44/44, final-smoke 45/45 each (G101, branch)",
+      "live": "2026-10-16 live-check 60/60 (LIVE_THEMES 15–20 included), blob-smoke 12/12; 20 design pages + /start forms 200 (docs/10)"
     },
     "not_tested": [
       "real iPhone/Android",
@@ -676,13 +875,15 @@
       "cost/load"
     ],
     "presale_blockers": [
-      "price",
-      "Etsy shop/listing URLs",
-      "response time / refund policy",
-      "privacy notice (needs shop legal identity)",
-      "hosting duration/renewal policy",
+      "price (TRY amount, K38)",
+      "Etsy listings upload + listing URLs (K41: after tests); [ETSY SHOP URL] placeholder on site",
+      "CLAIM_ORDER_VERIFICATION=manual live value to re-verify (K34; recorded on 2026-10-15, reported off on 2026-10-16)",
+      "email provider (edit link / RSVP notifications)",
+      "privacy notice (needs data controller name/contact, docs/20 §7.2)",
+      "hosting extension / deletion policies",
       "real-device manual test (docs/20_ELLE_TEST_PLANI.md)",
-      "12+ char ADMIN_PASSWORD before launch"
+      "12+ char ADMIN_PASSWORD before launch",
+      "merged integrator branch: full npm test/build + deploy"
     ],
     "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)",
     "admin": {
@@ -690,8 +891,9 @@
       "url": "/admin",
       "version": "v2 (G095)",
       "password": "ADMIN_PASSWORD env (temporary short, K33; never in repo)",
-      "order_verification": "manual (K34)"
-    }
+      "order_verification": "manual (K34) — added to Vercel and tested live on 2026-10-15 (G092 Sonuç, G096); reported not active on 2026-10-16, not re-read: verify before launch"
+    },
+    "last_live_check": "2026-10-16 (claude-local-1; docs/10 'Yayın (2026-10-16)' notu)"
   },
   "brand": {
     "name": "BKE Studio",
@@ -700,7 +902,17 @@
     "assets": "brand/assets/gpt/final/",
     "domain": null,
     "domain_note": "not purchased (K26); bkestudio.com available on 2026-10-14",
-    "support_email": "Gmail address (to be opened)",
-    "etsy_shop_name": "BKEStudio (not opened yet)"
+    "support_email": "bkestudio@gmail.com (K33); response time 24 hours (K37)",
+    "etsy_shop_name": "STUDIOBKE (K35; Etsy's real shop name, brand in copy stays BKE Studio)",
+    "etsy_shop": {
+      "url": "https://studiobke.etsy.com",
+      "doc": "docs/20_ETSY_DUKKAN_KURULUMU.md",
+      "settings_applied": "2026-10-15: tagline, announcement, buyer messages, About, 10 FAQ, 3 sections, cancellations not accepted, logo + big banner (K40)",
+      "currency": "TRY (K38)",
+      "offsite_ads": "off (K39)",
+      "refunds": "none; 'we will fix it' promise (K36)",
+      "listings": "0 active / 0 draft — packages 01–05 prepared, not uploaded (K41)",
+      "privacy_policy": "not published (needs data controller identity)"
+    }
   }
 }

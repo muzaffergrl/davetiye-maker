@@ -2,7 +2,7 @@
 id: G031
 baslik: Tasarım 03 — GPT parçalarından Canva video master'ı kur (metin + foto alanları) · PİLOT
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 1
 bagimli: [G030, G032]
@@ -40,3 +40,4 @@ _(görevi yapan ajan doldurur)_
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — 03'ün Canva video master'ı; video yok, 03 platform teması → G038

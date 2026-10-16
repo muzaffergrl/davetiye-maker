@@ -2,7 +2,7 @@
 id: GV02C
 baslik: Video pilotu · Karşılaştırma ve karar (Canva animasyonu vs GPT hibrit)
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 2
 bagimli: [GV02B, GA02]
@@ -30,3 +30,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-09 İPTAL (kullanıcı kararı K19): GPT video aracı yok, Higgsfield kullanılmayacak; animasyon Canva-yerel (GA02). Alınmaz.
+- 2026-10-16 iptal: K22/K24 — video yolu kararı (K19 ile zaten iptal notu vardı); video yok

@@ -2,7 +2,7 @@
 id: G011
 baslik: V01 Paket 2 — örnek fotoğraflar (5 görsel, tüm varyantlarda ortak)
 rol: gpt-gorsel
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 1
 bagimli: []
@@ -28,3 +28,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22–K24: eski video dönemi ortak fotoğrafları; her tasarımın kendi Paket 2 fotoğrafları G2NN içinde (02 için G202)
+- 2026-10-16 iptal: K22/K24 — V01 ortak video fotoğrafları; 02'nin fotoğrafları G202'de
