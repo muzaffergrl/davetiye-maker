@@ -2,7 +2,7 @@
 id: GV02A
 baslik: Video pilotu · Tasarım 02 — GPT sahne videoları (6 klip, yazısız)
 rol: gpt-gorsel
-durum: blokaj
+durum: iptal
 alan: gpt-video-1
 oncelik: 1
 bagimli: []
@@ -73,3 +73,4 @@ değiştirilmedi; GV02A için biçim veya yazma alanı hatası raporlanmadı.
 - 2026-10-09 alindi: gpt-video-1
 - 2026-10-09 blokaj: Bu oturumda çağrılabilir GPT video üretim aracı yok; 0/6 MP4, ayrıntılar Sonuç bölümünde.
 - 2026-10-09 İPTAL (kullanıcı kararı K19): GPT video aracı yok, Higgsfield kullanılmayacak; animasyon Canva-yerel (GA02). Alınmaz.
+- 2026-10-16 iptal: K22/K24 — GPT video pilotu (K19 ile zaten iptal notu vardı); video yok

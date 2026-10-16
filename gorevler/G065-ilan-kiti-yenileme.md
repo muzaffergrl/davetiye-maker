@@ -2,7 +2,7 @@
 id: G065
 baslik: İlan kiti yenileme (01, 03) — GPT sahneleri + ortak şablon (GM03) üstüne gerçek ekranlar, panel v2, BKE Studio, QR'sız demo
 rol: claude-kod
-durum: alindi
+durum: iptal
 alan: claude-local-G065
 oncelik: 2
 bagimli: [G060, GM02, GM03, G801, G803]
@@ -37,3 +37,4 @@ G059 kiti onaylandı; üç değişiklik birikti, bir kerede yeniden üretilir:
 - 2026-10-14 entegratör (G080 Sonuç): 01/03 START_HERE.md hâlâ "Refresh" ve "Download all replies (CSV)" diyor → K29 paneline göre (3 adım, 6 sayfa, Unpublished changes şeridi, Download list, şifre, teşekkür modu) yeniden yazılmalı; tools/listing_templates/capture.ts eski panel seçicilerini kullanıyor → güncellenmeli. Kalan v2 ilan görselleri (editör, RSVP, dahil olanlar) yeni panelden çekilir.
 - 2026-10-14 entegratör: G068 ile 01/03'te neredeyse her başlık/etiket panelden değişiyor (meta ve aria hariç) → ilan metni ve START_HERE bunu dürüstçe söyleyebilir ("almost every heading and label"); 05 için G081 sonrası.
 - 2026-10-15 alindi: claude-local-G065
+- 2026-10-16 iptal: Kullanıcı kararı (2026-10-16): 01–05 ilan görsellerinde yerini editoryal v4 seti aldı (docs/21); claude/g065-ilan dalı birleştirilmedi

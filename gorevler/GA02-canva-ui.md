@@ -2,7 +2,7 @@
 id: GA02
 baslik: Tasarım 02 Dusty Blue — video animasyonu + video template link (Canva arayüzü, pilot)
 rol: claude-tarayici
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 1
 bagimli: [G004, G001]
@@ -32,3 +32,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — Canva arayüzünde video animasyonu + template link; video ve Canva teslimi yok

@@ -2,7 +2,7 @@
 id: G101
 baslik: Tasarım 15–20 temaları — qa-kontrol bulgularının düzeltilmesi (docs/11 §13.4)
 rol: claude-kod
-durum: hazir
+durum: bitti
 alan:
 oncelik: 1
 bagimli: [G415, G416, G417, G418, G419, G420]
@@ -97,3 +97,5 @@ Açık: 20'nin `site.js`'i 35 829 B (bütçe 35 840) — sonraki değişiklik yo
 
 ## Günlük
 - 2026-10-16 açıldı (entegratör; qa-kontrol raporu)
+- 2026-10-16 oturum A (`claude/g101a-qa`) ve B (`claude/g101b-qa`) entegratör dalına birleşti (main'de/canlıda değil)
+- 2026-10-16 entegratör onayladı (G125: Sonuç iki oturumda tam). Açık kalanlar: qa-kontrol yeniden incelemesi; 17 başlık fontu ("TOGETꞪER") kararı; theme-check'in `body.scrollWidth`/sözde öğe taşmasını yakalamaması (öneri Sonuç'ta); 20'nin `site.js` bütçesi dolu; gerçek iOS Safari denenmedi

@@ -1,37 +1,54 @@
-# Güncel durum — 15 Ekim 2026
+# Güncel durum — 16 Ekim 2026
 
-Bu dosya K22–K29 kararları ile güncel kaynak kodunu özetler. Eski Canva/video kayıtları geçmiş içindir; tamamlanma, katalog onayı ve canlı yayın ayrı değerlendirilir.
+Ürün (K22/K24): Etsy alıcısının **bizim platformumuzda panelden düzenlediği website**. Canva, video, PDF davetiye ve paylaşım
+görseli teslimi yok. Kararlar: `docs/01_KULLANICI_KARARLARI.md` · görevler: `gorevler/PANO.md` · platform: `docs/10_SITE_PLATFORMU.md`.
 
-## Tamamlanan temel
-- BKE Studio marka kiti, satış sitesi, 3 adımlı kurulum ve 6 sayfalık editör.
-- Taslak/yayın ayrımı, fotoğraf kırpma, düzenleme hakkı/arşiv, takvim, RSVP yönetimi/CSV, şifre ve teşekkür modu.
-- Katalog onaylı: 01 Olive & Ivory, 02 Dusty Blue, 03 Blush Garden Rose, 05 Mediterranean Lemon.
-- 04 Vintage Airmail tema kodu var; kabul/G081/G084 kapanışı bekliyor. 06–20 tema üretimi tamam değil.
-- G085: RSVP, veri adaptöründe ortak sayaç varsa bunu kullanıyor. Yerel bellek ve test override davranışı korunuyor. G085 testleri iki ayrı Blob adaptörü, paralel istek ve süreç belleği sıfırlanmasını kapsıyor.
-- 01/03 START_HERE.md ve dört sayfalık START_HERE.pdf yeni panelin gerçek Us / Day & place / Photos / Our Story / Details / RSVP sayfaları, Guests ve Download list, Review, QR düğmeleri, şifre/teşekkür modu ile eşitlendi. Eski panel ekran görüntüleri çıkarıldı. PDF'lerin bütün sayfaları render edilip gözle kontrol edildi; iki bağlantı/PDF doğrulandı; QR kodları raster çıktılardan jsqr ile çözülüp gerçek tema başlangıç URL'leriyle eşleştirildi. Tekrar üretim: `python tools/build_customer_guides.py` (reportlab). Destek adresi/SLA yer tutucuları duruyor; rehberler ticari teslim onayı değildir.
+## 1. Canlıda
+- https://davetiye-platform-five.vercel.app — main `b952bc8` (platform ağacı `35ba50964db2`), yayın `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW`
+  (aynı ağacın ikinci yüklemesi). Kontroller (docs/10): `npm test` 1189/1189 (19 atlanan), typecheck, build; `live-check` 60/60 (15–20
+  dahil), `blob-smoke` 12/12; 20 tasarımın sayfası, `/start/demo/<id>` ve `/start?theme=<id>` 200.
+- **20 platform teması** (01–20), satış sitesinde `/designs` 20 tasarım. Alıcı paneli (K29: 3 adımlı kurulum, 6 sayfalık Edit, Share,
+  Guests/RSVP v2, şifre, teşekkür modu, isim/tarih hakkı). Dükkân paneli `/admin` v2 (G095).
+- Satış sitesi `launched: false` (noindex). Fiyat, Etsy dükkân/ilan linki ve alan adı sitede yer tutucu.
+- `ADMIN_PASSWORD` geçici kısa şifre (K33). Sipariş onayı ortam değişkeni için §4'e bak.
 
-## Bu turdaki doğrulama
-- Yerel tam Node paketi: 570 test, 559 geçti, 0 hata, 11 atlandı (production build öncesi; Python/tarayıcı/build önkoşulları).
-- Hedef RSVP/claim paketi: 45/45.
-- TypeScript typecheck temiz.
-- Yerel Webpack production derlemesi geçti; derlenmiş satış sayfaları 2/2.
-- Varsayılan Turbopack derlemesi Windows korumalı ortamda gerçek yol çözümleme erişimi nedeniyle çalışmadı. Webpack çıktısı trace-check'te 16 dosya-paketleme hatası verdi; bu çıktı canlıya gönderilmeyecek. Yerel ortamın fs.realpath/mkdir hataları için yalnız çalışma alanında uyumluluk yardımcısı kullanıldı; ürün kaynaklarına eklenmedi.
-- GitHub Actions #1 başarılı: [koşu 38653122309](https://github.com/muzaffergrl/davetiye-maker/actions/runs/38653122309). Linux/Node 22: 570 test, 564 geçti, 0 hata, 6 atlandı; varsayılan Turbopack production build + trace-check temiz, typecheck temiz, derlenmiş satış sayfaları 2/2. Tarayıcıya bağlı kontroller bu koşuda çalıştırılmadı.
+## 2. Entegratör dalında birleşti — main'de ve canlıda değil
+Dal `claude/zealous-fermi-hy1o40`:
+- **G099** satış vitrini: 8 öne çıkan + "See all" 20, açılış metinleri, tasarım sayfasında tek birincil eylem.
+- **G100** alıcı paneli sadeleştirme (Refero P1): tek işli kurulum 1. adımı, link + Share önde başarı ekranı, tek "Sample" satırı,
+  Guests liste + ayrı Results. Alıcı rehberi (docs/19) buna göre güncellendi.
+- Admin Özet: Yapılacaklar en üstte.
+- **G101-A/B**: 15–20 temalarında qa-kontrol bulguları düzeltildi (her tema `theme-check --stress` 128/0/0, g051 44/44, final-smoke 45/45).
+- **Etsy dükkânı** (docs/20): STUDIOBKE'de tagline, duyuru, alıcı mesajları, About, 10 SSS, 3 bölüm, iptal politikası, logo/banner
+  uygulandı; Offsite Ads kapalı. Kararlar K35–K41. `config.ts`: yanıt 24 saat, iade yok.
+- **İlan paketi 01–05**: `listing_v3.md` + `etsy_upload.json` (`tools/etsy_upload.py`), ilan görselleri v4 editoryal (8 × 2000 px,
+  `images_editorial/`, docs/21). **Etsy'ye yüklenmedi** (K41).
+- Birleşik dalda toplu `npm test`/build ve canlı yayın kaydı yok (oturumlar ayrı ayrı yeşildi: G101-A 1208/1208, G101-B 1210/1210).
+  Yayından önce birleşik ağaçta koşulmalı.
 
-## Canlı durum
-Son doğrulanmış görev kaydı G078: 2dc812b. 15 Ekim ilk incelemede canlı ana sayfa iki temayı (01/03) gösteriyordu; kaynak katalog dört temayı içeriyor. G079 sonuç kaydı boş. Güncel sürümün Vercel'de başarılı yayını ve canlı kontrolü henüz bu turda tamamlanmadı.
+## 3. Sürmekte olan işler
+| Görev | İş | Durum |
+|---|---|---|
+| G098 | 15–20 tema rötuşları (GM07 parçaları: R4/R5 → 17, R2 v2 → 20, R3 v3 → 16; R1/R6 reddedildi) | alt-ajanda |
+| G121 | Panel ve satış sitesi kalanları | alt-ajanda |
+| G123 | 06–20 Etsy ilan metinleri | alt-ajanda |
+| G122 | START HERE (MD + PDF, gerçek QR) — 20 tasarım | açılacak |
+| G124 | 06–20 ilan görselleri | açılacak |
+| G090 | Aşama 1 kapanışı: 20 tasarım × (tema, satış sayfası, START HERE, ilan metni, ilan görselleri) + QA | G098, G121–G124'ü bekliyor |
+| G065 | 01/03 ilan kiti (kullanıcının yerel ajanında `alindi`) | v4 görseller büyük olasılıkla yerini aldı; sahibi kapatmalı |
 
-## Devam eden işler ve bağımlılıklar
-| İş | Sonraki somut adım |
-|---|---|
-| G079 güncel yayın | Uzak build/trace-check yeşil; doğru Vercel ekip/proje erişimi; test yayını + live-check/blob-smoke |
-| G065 ilan/teslim | Rehber kaynakları/PDF'leri G085'te yenilendi ve QR/link/görsel kontrolü yapıldı. İlan görsellerinin güncel panel çekimleri ve gerçek ticari alanları hâlâ G065'te |
-| G404/G081/G084 04 | Mevcut tema QA kapanışı, teşekkür/düzenlenebilir metinler/misafir adları; ardından katalog onayı |
-| 06–20 | Önce alınmış/incelemedeki GPT parçalarının kabulü; sonra tasarıma özgü tema montajı ve QA |
-| Gerçek sipariş | Manuel doğrulama canlıda sınanmalı veya Etsy API ile gerçek doğrulama tamamlanmalı; varsayılan yalnız biçim kontrolü |
-| E-posta/destek | Destek adresi ve SLA kararı; sağlayıcı hesabı ve gönderim yetkisi; link teslimi/kurtarma uçtan uca |
-| Ticari alanlar | Fiyat, Etsy mağaza/ilan URL'leri, destek, politikalar gerçek değerlerle doldurulmalı; uydurulmaz |
-| Cihaz/işletim | Gerçek iPhone/Safari ve Android, yedekleme/geri yükleme, yük/maliyet; otomatik testlerle aynı değildir |
-| 120 ürün | 20 ana tasarım kapanışı (G090) sonrası ek 5 renk; henüz tamamlanmış 120 ürün yok |
+Aşama 2 (K16: her tasarıma ek 5 renk → 120 ürün) geçerli. Eski GP görevleri Canva dönemine göre yazılmış, blokajda; kullanıcının
+yeni iş listesiyle yeniden tanımlanacak. Canva/video/PDF dönemi görevleri (189 adet) 16 Ekim'de `iptal` edildi.
 
-Vercel eklentisi kurulu olarak doğrulandı. Bu oturumda hesap yönetim araçları henüz sunulmadı; tarayıcıdaki Vercel proje adresi giriş ekranına yönlendi. Kullanıcının başka tarayıcıda giriş yapması bu oturumda erişim olduğunu kanıtlamaz. Hesap bilgisi/anahtarlar GitHub'a yazılmaz.
+## 4. Lansmanı bekleten kararlar
+- **Fiyat:** hedef USD 29.40 (docs/20 §8). TL tutar ve kur güncelleme sıklığı (K38), liste fiyatı/indirim (docs/15 §5) açık. Sitede `[PRICE]`.
+- **Etsy ilanları:** testlerden sonra yüklenecek (K41). İlan linkleri yok (`[ETSY LISTING URL]`). Dükkân adresi (studiobke.etsy.com) belli;
+  sitede `[ETSY SHOP URL]` hâlâ yer tutucu.
+- **Sipariş onayı (K34):** kayıtlara göre `CLAIM_ORDER_VERIFICATION=manual` 15 Ekim'de Vercel'e eklendi ve canlıda denendi (G092 Sonuç'u,
+  "G096 yayını + K34"); `b952bc8` yayınında değişmedi. 16 Ekim'de ise canlıda açık olmadığı bildirildi; değer bu turda okunmadı.
+  Yayından önce Vercel'de okunmalı ve K34'e göre `manual` olmalı.
+- **E-posta altyapısı:** düzenleme linki, kayıp link ve RSVP bildirimi e-postayla gitmiyor (sağlayıcı yok).
+- **Gerçek telefon testi:** `docs/20_ELLE_TEST_PLANI.md` (iPhone Safari, Android Chrome). Otomatik testler gerçek cihazı kapsamıyor.
+- **React Bits Pro lisansı (G089, K31):** erişim ve lisans kapsamı doğrulanmadı. G088 bitti; G089 alınabilir.
+- Diğer: gizlilik politikası (veri sorumlusunun adı ve iletişim bilgisi, docs/20 §7.2), `[ORDER CHECK TIME]`, `[EXTENSION POLICY]`,
+  `[DELETION PROCESS]`, alan adı, lansmanda ≥ 12 karakterli `ADMIN_PASSWORD`.

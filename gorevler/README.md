@@ -24,21 +24,21 @@ Yalnız kendi rolündeki görevi al.
 
 | ID | Ne | Rol |
 |---|---|---|
-| G0xx | Ortak araçlar, pilotlar (G030–G047: tasarım 03 + platform), kapılar (G090) | çeşitli |
-| G1NN | (askıda, K21) Tasarım NN — kodla çizilmiş sahne kaynağı | — |
+| G0xx–G1xx | Ortak araçlar, pilotlar (G030–G047: tasarım 03 + platform), kapılar (G090); G099'dan sonra genel görevler G1xx ile sürer (G101 tema QA, G121–G124) | çeşitli |
+| G1NN | (iptal, K21/K22) Tasarım NN — kodla çizilmiş video sahne kaynağı; G101 numarası iptal edilen `G101-kaynak.md` ile ortak, etkin olan geçerli | — |
 | G2NN | Tasarım NN — **website tasarım paketi** (Paket 5 comp + parçalar, Paket 2 fotoğraflar) | gpt-gorsel |
-| G3NN | (askıda, K22) Tasarım NN — Canva video master | — |
+| G3NN | (iptal, K22/K24) Tasarım NN — Canva video master | — |
 | G4NN | Tasarım NN — **platform teması** (`platform/themes/<slug>/`, G2NN parçalarıyla) | claude-kod |
-| G5NN | (askıda, K22) Tasarım NN — 5×7 davetiye + story/kare | — |
-| G6NN | (askıda, K24) Tasarım NN — Canva set | — |
-| G7NN | Tasarım NN — kılavuz + Etsy ilan metni | claude-metin |
+| G5NN | (iptal, K22/K24) Tasarım NN — 5×7 davetiye + story/kare | — |
+| G6NN | (iptal, K22/K24) Tasarım NN — Canva set | — |
+| G7NN | (iptal, K22/K24) Tasarım NN — Canva dönemi kılavuz + ilan metni; yerine G122 (START HERE), G123 (ilan metni) | — |
 | G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
-| G9NN | Tasarım NN — Etsy ilan kiti montajı | claude-kod |
+| G9NN | (iptal, K22/K24) Tasarım NN — Canva seti ilan kiti; yerine ilan görselleri v4 (01–05) ve G124 (06–20) | — |
 | GMNN | Marka kimliği (BKE Studio, K26): GM01 GPT görselleri, GM02 marka kiti, GM03 ortak ilan şablonu (GPT), GM04/GM05 satış sitesi ve panel arayüz comp'ları (GPT) | gpt-gorsel / claude-kod |
-| GANN | (askıda, K22) Tasarım NN — video animasyonu | — |
-| GBNN | (askıda, K24) Tasarım NN — Canva website Form/yayın | — |
-| GQNN | Tasarım NN — QA raporu | claude-qa |
-| GP1NN–GP4NN | Aşama 2: ek 5 palet (prompt, görsel, Canva, ilan) — G090'dan sonra | çeşitli |
+| GANN | (iptal, K22/K24) Tasarım NN — video animasyonu | — |
+| GBNN | (iptal, K22/K24) Tasarım NN — Canva website Form/yayın | — |
+| GQNN | (iptal, K22/K24) Tasarım NN — Canva seti QA raporu; yerine G090 | — |
+| GP1NN–GP4NN | Aşama 2 (K16): ek 5 palet (prompt, görsel, Canva, ilan) — Canva dönemine göre yazıldı, blokajda; yeniden tanımlanacak (G090 notu) | çeşitli |
 
 NN = tasarım numarası (01–20, `docs/09_TASARIM_KATALOGU.md`). Tasarım 02'nin set görevleri pilot
 numaralarındadır (G013, G020–G027, G902, GA02, GB02).
@@ -62,7 +62,7 @@ yazar: [collections/02_Dusty_Blue/assets/gpt/textures/, collections/02_Dusty_Blu
 
 | Alan | Anlamı |
 |---|---|
-| `durum` | `hazir` · `alindi` · `inceleme` · `bitti` · `blokaj` |
+| `durum` | `hazir` · `alindi` · `inceleme` · `bitti` · `blokaj` · `iptal` (anlamını yitirmiş görev; yalnız entegratör `gorev.py iptal GXXX "neden"` ile koyar; panoda yalnız sayı, `liste --hepsi` gösterir) |
 | `alan` | Görevi alan ajanın adı (ör. `codex-1`, `chatgpt-gorsel-2`, `claude-session-x`) |
 | `oncelik` | 1 en acil |
 | `bagimli` | Önce `bitti` olması gereken görevler |
@@ -125,6 +125,7 @@ python3 tools/gorev.py siradaki --rol gpt-gorsel
 python3 tools/gorev.py al G020 --ajan codex-1
 python3 tools/gorev.py bitir G020
 python3 tools/gorev.py blokaj G020 "neden"
+python3 tools/gorev.py iptal G020 "neden"      # entegratör; aynı id'li dosyada dosya adı verilebilir
 python3 tools/gorev.py kontrol               # biçim, bağımlılık, yazma alanı çakışması
 python3 tools/gorev.py pano                  # gorevler/PANO.md'yi yeniden üret
 ```

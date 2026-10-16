@@ -100,3 +100,4 @@ Kontrol: pencere oranı 2,1–2,3; düz yeşil; çerçeve süsleri pencereye gir
 - 2026-10-15 açıldı (entegratör; G415–G420 önerileri)
 - 2026-10-16 alindi: gpt-gorsel-GM07 (kullanıcının doğrudan görevlendirmesi)
 - 2026-10-16 blokaj: 16 ham imagegen denemesi kaydedildi; R4/R5 görsel adayları seçildi ancak ölçüleri farklı; R1/R2/R3/R6 kontrolleri geçmedi. Kullanıcı yalnız imagegen çıktısı istedi; teknik son işlem uygulanmadı.
+- 2026-10-16 entegratör (G125): R4/R5 (17), R2 v2 (20), R3 v3 (16) G098'de takılıyor; R1 (15) ve R6 (19) reddedildi. Blokajda kalır.

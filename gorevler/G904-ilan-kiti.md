@@ -2,7 +2,7 @@
 id: G904
 baslik: Tasarım 04 Vintage Airmail Love Letter — B1–B3 Etsy ilan kiti montajı
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 4
 bagimli: [G604, G704, G804, G026, G028]
@@ -30,3 +30,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-16 iptal: K22/K24 — Canva seti ilan kiti (video/PDF mockup'ları); 01–05 ilan görselleri v4 (images_editorial, docs/21) dalda
