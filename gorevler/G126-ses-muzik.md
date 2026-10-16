@@ -82,7 +82,7 @@ Var olan hiçbir etiket değişmedi.
   (dokunuştan +122/+373/+1732/+3113 ms; beklenen 0/260/1620/3000 + ~110 ms tıklama gecikmesi); Story'de müzik başladı (headless
   Chromium izin verdi), düğmeyle durdu → "Play music"; panelde parça seçimi, "Listen", kendi MP3'ünü yükleme ve önizleme sayfasının
   yüklenen dosyayı çalması; 19 midnight-garden (koyu) ve 13 enchanted-forest düğme görünümü. Görüntüler depoya konmadı.
-- Son toplu koşu (birleşik dalda, bu turun sonunda): `npm test` **1232/1232** (0 atlanan), `npm run build` temiz (trace-check dahil).
+- Son toplu koşu (`claude/g126-ses` dalında, bu turun sonunda): `npm test` **1232/1232** (0 atlanan), `npm run build` temiz (trace-check dahil).
 - **Yapılmadı:** gerçek iPhone/Android'de dinleme (iOS sessiz anahtarı Web Audio efektlerini susturur — beklenen davranış),
   Vercel Blob'da gerçek yükleme (yalnız birim testindeki sahte istemci yok; Blob yolu kodda, canlıda denenmedi), tam Playwright
   süitleri ve `theme-check --stress` (kullanıcı isteğiyle).
