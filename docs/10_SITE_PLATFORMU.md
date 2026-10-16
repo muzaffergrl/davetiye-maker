@@ -126,6 +126,9 @@ düzenler. Bu belge platformun tek kaynağıdır.
   şifre) eklendi. `npm test` 651/651, typecheck, build yeşil; `live-check` 40/40, beş tema 41/41, `blob-smoke` 12/12. Canlı admin: giriş + "Geçici kısa
   şifre" uyarısı, liste, site sayfası, mesaj kopyalama, yeni düzenleme linki (eski 404, yeni açılır), adres yazarak silme (404).
   `CLAIM_ORDER_VERIFICATION` tanımlı değil (= biçim kontrolü) → sipariş onayı adımı canlıda yok. Ekranlar `docs/10_canli_test/g092/`.
+- **Yayın (2026-10-16, `claude-local-1`):** production = main `b952bc8` (platform ağacı `35ba50964db2`; PR #7: 15–20 temaları, satış sitesinde 20
+  tasarım, panel mesaj penceresinde kelime bölünmesi düzeltmesi), `dpl_8ZNhkwSZueCgw7AioMrtoFg6ZixR`. Temiz main worktree'sinde `npm test` 1189/1189
+  (19 atlanan: Playwright'lı tema testleri + build'e bağlı), typecheck, build yeşil; `live-check` 40/40, `blob-smoke` 12/12. Ortam değişkeni değişmedi.
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
