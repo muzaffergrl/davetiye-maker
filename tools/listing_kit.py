@@ -115,7 +115,7 @@ LISTING_MD = "listing_v3.md"
 
 # Listing images, in upload order (file = <name>.png; template = tools/listing_templates/platform/<name>.html).
 IMAGES = ["01_cover", "02_guest_pages", "03_whats_included", "04_how_it_works", "05_editor", "06_rsvp",
-          "07_details", "08_live_demo"]
+          "07_details", "08_live_demo", "09_what_you_change", "10_good_to_know"]
 # Screens each template / guide strip uses (from capture.ts; b*/e*/s*/p* = the K29 editor, docs/16 §0b).
 SHOTS = ["g01_envelope", "g02_home_top", "g03_home_invitation", "g04_home_calendar", "g05_story", "g06_details_top",
          "g07_details_schedule", "g08_details_faq", "g09_rsvp_top", "g10_rsvp_form", "g11_rsvp_sent",

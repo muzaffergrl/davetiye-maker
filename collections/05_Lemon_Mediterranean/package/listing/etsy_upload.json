@@ -99,6 +99,20 @@
       "alt": "A phone on a styled table showing the live demo of the Mediterranean Lemon design, next to a QR code that opens it.",
       "exists": true,
       "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 9,
+      "file": "collections/05_Lemon_Mediterranean/package/listing/images/09_what_you_change.png",
+      "alt": "What you can change in the Mediterranean Lemon design: names, date and time, venue and schedule, story and 5 photos, questions and answers, RSVP questions, headings and labels. What stays as designed: artwork, colors, fonts, layout and the envelope animation. The editor's six pages on a phone",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 10,
+      "file": "collections/05_Lemon_Mediterranean/package/listing/images/10_good_to_know.png",
+      "alt": "Good to know: no Canva, no app, no account; online until 12 months after the wedding; save your edit link; names and date can change 3 times after publishing, typo fixes free; optional guest password; a thank-you page after the wedding",
+      "exists": true,
+      "status": "current: rebuilt 2026-10-15 with the K29 editor (tools/listing_kit.py capture + images; real screens, GPT mockup scenes for images 1, 2 and 8; listing_v3 §5)"
     }
   ],
   "gpt_mockup_scenes": [
