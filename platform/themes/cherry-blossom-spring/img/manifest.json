@@ -2599,7 +2599,7 @@
   "particles": ".accent-layer",
   "first_screen": {
    "landscape": true,
-   "names_min_px": 36
+   "names_min_px": 32
   }
  }
 }

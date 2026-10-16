@@ -82,10 +82,14 @@ Foto çerçevenin **altında**, kutusu pencere + 2 px, maske `mask_<şekil>.png`
 - Süreler (docs/11 §8): her sahnenin son adımı ≤ 3000 ms, tek giriş 600–1800 ms.
 
 ## İlk ekranlar ve yatay telefon
-08'in çözülmüş adımları: `fitNames` (isimler en çok %24 küçülür → `.is-tight` + 36 px taban → `.is-long` → hero kaydırılır),
-`fold` (nav'ın altında yarım parça yok), kısa yatay (`min-aspect-ratio: 1/1`, yükseklik ≤ 620 px) ızgara: kart solda, isimler ·
+08'in çözülmüş adımları: `fitNames` (isimler en çok %24 küçülür → `.is-tight` + **32 px taban** → `.is-short` (dikey kısa telefonda
+kart `clamp(108px, 22svh × .7116, 150px)`'e iner) → `.is-long` → hero kaydırılır), `fold` (nav'ın altında yarım parça yok; isimler
+(h1) hiçbir zaman itilmez, en az ilk satırıyla ilk ekranda başlar). qa-kontrol 2026-10-16: 375×553'te tasarım aralığı isimleri
+36 px'te 4 satırdı ve RSVP ilk ekranın altındaydı → 32 px tabanla 3 satır, RSVP ilk ekranda (sayaç hapın altında, kaydırınca);
+zorlama kaydında h1 tamamen ilk ekranın altına itiliyordu → artık ilk ekranda başlıyor. kısa yatay (`min-aspect-ratio: 1/1`, yükseklik ≤ 620 px) ızgara: kart solda, isimler ·
 tarih · mekân · şehir · sayaç · hap sağda. İç sayfalar `folds` (`[data-fold]`: story'de alt başlık, giriş cümlesi, her çerçeve,
-sonraki bölüm; details'te kart başlığı, her program satırı, takvim çifti, mekân çerçevesi; rsvp'de başlık, son tarih, hap,
+sonraki bölüm; details'te kart başlığı, takvim çifti, mekân çerçevesi — program satırları birim **değil**: boyalı kartın içinde itilen satır yazısız
+~130 px delik bırakıyordu, qa-kontrol 2026-10-16; rsvp'de başlık, son tarih, hap,
 bekleme satırı, imza, form satırları). İmza katlanmadan önce `--sg` 1 → 0,72 küçülür. Zarf sayfası `envFit`: sahnenin boş
 üstü (`.52334 × --w`) ölçülen başlığın altına girer; "Tap to open" ilk ekranda bitmiyorsa sahne küçülür (`--ok` ≥ 0,6).
 

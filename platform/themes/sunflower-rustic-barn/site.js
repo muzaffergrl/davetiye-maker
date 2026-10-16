@@ -296,19 +296,20 @@ function fitNames() {
     if (keep) hero.style.setProperty('--fold', `${Math.max(0, hero.offsetHeight - end)}px`);
   };
   // [data-fold] in order: a unit crossing the nav line starts below the first screen; the first may lift the page;
-  // signature / ribbon shrink (--sg ≥ .72) first
+  // signature / ribbon / the first story print shrink (--sg) first
   const folds = () => {
     const f = $('.page-bg + *'), u = [...$$('[data-fold]')];
     [f, ...u].forEach((e) => e && ['margin-top', '--sg'].forEach((p) => e.style.removeProperty(p)));
-    let lift = f ? Math.min(40, parseFloat(getComputedStyle(f.parentElement).paddingTop) * .34) : 0;
+    let lift = f ? Math.min(f.closest('.page-head') ? 60 : 40, parseFloat(getComputedStyle(f.parentElement).paddingTop) * .34 * (f.closest('.page-head') ? 1.5 : 1)) : 0;
     u.forEach((el) => {
       const v = sv(), t = top(el), D = () => bottom(el) - v + navH() + 8;
       let d = D();
       if (!el.offsetParent || d <= 0 || t >= v) return;
-      for (let k = 1; d > lift && k > .73 && el.matches('.sig-unit, .card-ribbon'); d = D()) el.style.setProperty('--sg', k -= .04);
+      // story: the first print shrinks (--sg ≥ .76: photo window ≥ 38vw) so the wall's first line ends above the nav
+      for (let k = 1, lo = el.matches('.lr-1') ? .77 : .73; d > lift && k > lo && el.matches('.sig-unit, .card-ribbon, .lr-1'); d = D()) el.style.setProperty('--sg', k -= .04);
       if (d <= 0) return;
       if (d > lift) el.style.removeProperty('--sg');
-      const [e, m] = d <= lift ? [f, -d] : [el.matches('.lr-1') ? el.parentElement : el, v + 6 - t]; // story: the wall starts below
+      const [e, m] = d <= lift ? [f, -d] : [el, v + 6 - t]; // story: the wood starts under the lede, only the line goes below
       lift = 0;
       e.style.marginTop = `${parseFloat(getComputedStyle(e).marginTop) + m}px`;
     });

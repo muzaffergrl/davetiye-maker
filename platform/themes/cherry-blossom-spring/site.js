@@ -254,7 +254,7 @@ function initPlaceholders() {
 /* -- long names, first screens, card copy, decor vs text (README) */
 let refit = () => {};
 function fitNames() {
-  const targets = [['.env-head .names', 2.15, 0.22, 0], ['.hero .names', 3.2, 0.3, 36]]
+  const targets = [['.env-head .names', 2.15, 0.22, 0], ['.hero .names', 3.2, 0.3, 32]]
     .map(([sel, ...a]) => [$(sel), ...a]).filter(([el]) => el);
   const inner = $('.hero-inner'), nav = $('.site-nav');
   const lay = (el) => { let x = 0, y = 0; for (let e = el; e; e = e.offsetParent) { x += e.offsetLeft; y += e.offsetTop; } return { x, y, w: el.offsetWidth, h: el.offsetHeight }; };
@@ -301,7 +301,7 @@ function fitNames() {
   };
   const fold = (hero) => {
     const v = sv(), limit = v - navH() - 8, below = v + 12, cs = getComputedStyle(hero);
-    const cut = () => pieces().filter((c) => bottom(c) > limit).sort((a, b) => top(a) - top(b))[0];
+    const cut = () => pieces().filter((c) => !c.matches('.names') && bottom(c) > limit).sort((a, b) => top(a) - top(b))[0];
     let c = cut();
     if (!c || top(c) >= below - 0.5) return;
     const cta = inner.querySelector('.hero-cta'), keep = cta && cta.offsetParent && bottom(cta) <= limit;
@@ -388,8 +388,8 @@ function fitNames() {
       const hero = h1.closest('.hero');
       if (!hero) return envFit(h1);
       if (inner && nav) unfold(hero);
-      for (const [cls, navFloor] of [[[], 0.76], [['is-tight'], 0], [['is-tight', 'is-long'], 0], [[], 1]]) {
-        hero.classList.remove('is-tight', 'is-long');
+      for (const [cls, navFloor] of [[[], 0.76], [['is-tight'], 0], [['is-tight', 'is-short'], 0], [['is-tight', 'is-short', 'is-long'], 0], [[], 1]]) {
+        hero.classList.remove('is-tight', 'is-short', 'is-long');
         hero.classList.add(...cls);
         fit(h1, maxLines, maxShare, minPx, navFloor);
         if (!low(h1)) break;

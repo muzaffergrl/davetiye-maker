@@ -57,7 +57,8 @@ tonlanmış kırpımlar. `build_images.py` her yer tutucunun en koyu pikselini (
   (`barnwall`, yalnız döndürme) story duvarının dikey tahtaları — CSS'te `saturate(1.7) brightness(.66) contrast(1.05)` ışık ayarı (comp'un koyu duvarına yaklaşır) (§5.7: parçaya
   filtre). `twine_line` alfa kutusuna kırpılır; sarkma `manifest.twine_line.sag` (uçlar %13 / %9, orta %94).
 - **Zeminler:** telefon `field` (iç sayfaların ilk ekranında `picture` +%34 svh uzar: alt kenardaki ahşap zemin ekran dışında kalır, sayfa ortasında şerit olmaz — qa-kontrol bulgusu) = `bg_page`'in iki çiçeksiz kırpımı (güneşli krem x 150–1000 y 250–1150 + sol alttaki ahşap
-  zemin x 0–500 y 1330–1536, 110 px yumuşak geçiş); geniş ekran `field_wide`; uzun sayfaların sonu `wood_foot` (ahşap zemin).
+  zemin x 0–500 y 1330–1536, 110 px yumuşak geçiş); geniş ekran `field_wide`; uzun sayfaların sonu `wood_foot` (ahşap zemin; maske görüntünün kendi kutusunda — `aspect-ratio: 500/206`, `max-height: 100%` —,
+üst kenar şeffaftan açılır: qa-kontrol 2026-10-16'da bölüm boyuna göre maske, kısa görüntünün üst kenarını sert bırakıyordu).
   Ayçiçeği kümeleri hep ayrı katman (`florals_tl` / `florals_br`), düz çizgiyle kesilmez.
 - **Kartlar:** `free_zone` + 3 dilim (`slices`: davet kartı %24–45 — sağ üst ayçiçeği %20'ye, sol alt buket %44'ten başlar;
   bilgi kartı %21–95). og: `web_hero` alt hizalı 1,91:1; favicon: kurdelenin fiyonk + ayçiçeği bölgesi. Tema klasörü ~2,5 MB.
@@ -87,9 +88,11 @@ tonlanmış kırpımlar. `build_images.py` her yer tutucunun en koyu pikselini (
 ## İlk ekranlar ve yatay telefon
 08'in çözülmüş adımları korunur: `fitNames` (isimler küçülür → `.is-tight` + isimler 36 px tabanı → `.is-long` → hero kaydırılır),
 ardından `fold`. İç sayfalarda `[data-fold]` birimleri: nav çizgisini kesen birim ilk ekranın altından başlar. Bu tasarıma özgü:
-**story** — ilk ip+baskı birimi (≈ 470 px) başlık bloğuyla ilk ekrana sığmaz (390 × 844'te de); katlanınca kenar boşluğu birime
-değil **duvara** verilir (`.lr-1` → `.wall`), böylece ilk ekran yarım duvar değil krem bir başlık sayfasıdır ve ahşap duvar ilk
-ipiyle birlikte aşağıda başlar. **RSVP** yatayda kart `(100svh − 128px) × 1,5` genişliğe iner ki başlık ve sprey nav'ın üstünde
+**story** — ahşap duvar her zaman giriş cümlesinin hemen altında, ilk ekranda başlar (qa-kontrol 2026-10-16: eskiden ilk satır
+katlanınca boşluk duvara verilip ilk ekranın yarısı boş krem kalıyordu). İlk ip+baskı birimi (≈ 478 px) sığmazsa önce sayfa en çok
+60 px kalkar ve ilk baskı küçülür (`--sg` ≥ 0,76 → foto penceresi ≥ 38vw); 390 × 844 ve 430 × 932'de böylece ip, baskı ve yazı ilk
+ekranda, nav'ın üstünde biter. Yine sığmazsa (360 × 640) yalnız **satır** ilk ekranın altına geçer, duvar girişin altında kalır.
+Details'te program satırları birim değil (itilen satır kartta delik bırakıyordu). **RSVP** yatayda kart `(100svh − 128px) × 1,5` genişliğe iner ki başlık ve sprey nav'ın üstünde
 kalsın. Kısa yatay (en-boy ≥ 1, yükseklik ≤ 620 px) hero iki sütun.
 
 ## Comp öğe haritası (docs/11 §8)
