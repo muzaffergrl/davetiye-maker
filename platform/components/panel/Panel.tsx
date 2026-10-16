@@ -2,7 +2,7 @@
 // The buyer's edit panel, v2 (G039 -> G060, docs/16_PANEL_V2.md). Phone first.
 //
 // Views are hash routes on the one /edit/<slug>?k=… page (the key stays in the query; back/forward and
-// bookmarks work):  #setup/1…3 · #home · #edit · #edit/<page> · #guests · #guests/print (G069) · #share.
+// bookmarks work):  #setup/1…3 · #home · #edit · #edit/<page> · #guests · #guests/results (G100) · #guests/print (G069) · #share.
 // A site that was never published opens the setup wizard (until it is finished or closed on this phone);
 // everything else opens Home. Autosave, the live preview, publish and the edit-rights rules work the same
 // in every view (usePanel.ts). G066: dressed in the BKE Studio brand (logo SVG, panel.module.css tokens, fonts.ts); the
@@ -13,6 +13,9 @@
 // fields; one sticky "Unpublished changes: n · Review · Publish" bar while the live website is behind the draft (autosave
 // still saves the draft; publish is unchanged on the server); Home = progress + the next three tasks; on wide screens
 // two columns (editing, live preview).
+// G100 (docs/18 P1): setup step 1 = names + date only (the change rule in one line + "Learn more"); the success screen puts
+// the link and Share first, the QR under "More ways to share", then 2–3 optional next steps (Published.tsx); one sample-text
+// line per editor page instead of a tag per field; Guests = list (numbers, search, status tabs) and a separate Results.
 
 import {
   Archive,
@@ -21,8 +24,6 @@ import {
   CalendarDays,
   ChevronRight,
   CircleCheckBig,
-  Copy,
-  ExternalLink,
   Eye,
   House,
   Image as ImageIcon,
@@ -64,11 +65,11 @@ import { BrandLogo } from './Brand.tsx';
 import { CopyFields } from './CopyFields.tsx';
 import { PANEL_FONTS } from './fonts.ts';
 import { IdentitySheet } from './IdentitySheet.tsx';
-import { PanelContext, useDeviceZone, type PanelContextValue } from './fields.tsx';
+import { PanelContext, SampleLine, useDeviceZone, type PanelContextValue } from './fields.tsx';
 import { BLOCK_TITLES, changedCopyPages, changedPages, changedSections, COPY_TITLE, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
-import { QrCode } from './QrCode.tsx';
+import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
 import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
 import { ThankYouFields } from './ThankYou.tsx';
 import { firstOpenStep, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
@@ -84,6 +85,7 @@ type Route =
   | { view: 'edit' }
   | { view: 'section'; page: PageId; focus: SectionId | null }
   | { view: 'guests' }
+  | { view: 'results' }
   | { view: 'print' }
   | { view: 'share' };
 
@@ -100,6 +102,7 @@ function parseHash(hash: string): Route | null {
   }
   if (h === 'guests') return { view: 'guests' };
   if (h === 'guests/print') return { view: 'print' };
+  if (h === 'guests/results') return { view: 'results' };
   if (h === 'share') return { view: 'share' };
   return null;
 }
@@ -112,6 +115,8 @@ function hashOf(r: Route): string {
       return `#edit/${r.focus ?? r.page}`;
     case 'print':
       return '#guests/print';
+    case 'results':
+      return '#guests/results';
     default:
       return `#${r.view}`;
   }
@@ -195,6 +200,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const [route, setRoute] = useState<Route>(() => defaultRoute());
   const [ready, setReady] = useState(false);
   const navCount = useRef(0);
+  const publishedRef = useRef(!neverPublished);
+  publishedRef.current = !neverPublished;
 
   useEffect(() => {
     const fromHash = parseHash(window.location.hash);
@@ -210,6 +217,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     const onHash = () => {
       const r = parseHash(window.location.hash);
       if (!r) return;
+      // Back from the editor to a setup step of a site published since (G100: the success screen's next steps): Home.
+      if (r.view === 'setup' && publishedRef.current) {
+        window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#home`);
+        setRoute({ view: 'home' });
+        return;
+      }
       // An old wizard address (#setup/6) shows as the step it opens (#setup/3).
       if (r.view === 'setup' && hashOf(r) !== window.location.hash) {
         window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}${hashOf(r)}`);
@@ -238,7 +251,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const firstFocus = useRef(true);
   useEffect(() => {
     if (!ready || route.view === 'setup') return;
-    const label = route.view === 'section' ? PAGE_TITLES[route.page] : route.view === 'print' ? 'Guest list' : ROOT_VIEWS.find((v) => v.view === route.view)?.label;
+    const label = route.view === 'section' ? PAGE_TITLES[route.page] : route.view === 'print' ? 'Guest list' : route.view === 'results' ? 'Results' : ROOT_VIEWS.find((v) => v.view === route.view)?.label;
     document.title = `${label} · ${names}`;
     if (firstFocus.current) firstFocus.current = false;
     else {
@@ -287,6 +300,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     () => theme.pages.filter((p) => pageShown(theme.pageRules[p], content, { thankYou: previewThanks })),
     [theme, content, previewThanks],
   );
+  /** The sample-text notes of an editor page (G100: the page's one sample line counts them). */
+  const pageSample = (page: PageId) =>
+    notes.sample.filter((n) => {
+      const s = sectionForPath(n.path);
+      return s !== null && pageSections(page).includes(s);
+    });
   const pageErrors = (page: PageId) => validation.errors.filter((i) => {
     const s = sectionForPath(i.path);
     return (s !== null && PAGE_SECTIONS[page].includes(s)) || copyPanelPage(i.path, theme.copy) === page;
@@ -364,13 +383,15 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const [dateConfirmed, setDateConfirmed] = useState(false);
   const firstPublishDateBlocked = rights.phase === 'before_publish' && sampleDateLeft(content, theme.sample) && !dateConfirmed;
 
-  const replies = useReplies(panel.api, initial.slug, ready && (route.view === 'home' || route.view === 'guests' || route.view === 'print') && !neverPublished, meta.status === 'published');
+  const guestViews = route.view === 'guests' || route.view === 'results' || route.view === 'print';
+  const replies = useReplies(panel.api, initial.slug, ready && (route.view === 'home' || guestViews) && !neverPublished, meta.status === 'published');
   // Leaving Guests marks the replies seen on this device (G069: "New" = since the last look; also "Mark as seen").
   const lastView = useRef(route.view);
   useEffect(() => {
     const was = lastView.current;
     lastView.current = route.view;
-    if ((was === 'guests' || was === 'print') && route.view !== 'guests' && route.view !== 'print') replies.markSeen();
+    const guestView = (v: string) => v === 'guests' || v === 'results' || v === 'print';
+    if (guestView(was) && !guestView(route.view)) replies.markSeen();
     // markSeen reads the replies of this render
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route.view]);
@@ -659,6 +680,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       ) : null}
       {dialog?.kind === 'live' ? (
         <Sheet title={dialog.justPublished ? 'Your website is live' : 'Share your website'} onClose={() => setDialog(null)} testId="live">
+          {/* G100 (docs/18 §1): the link and Share first; the QR code under "More ways to share"; then optional steps. */}
           {dialog.justPublished ? (
             <p className={styles.liveLead}>
               <CircleCheckBig size={22} strokeWidth={1.75} aria-hidden="true" /> Guests can open your website at:
@@ -666,22 +688,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
           ) : (
             <p>Guests can open your website at:</p>
           )}
-          <p>
-            <a href={url} target="_blank" rel="noopener noreferrer" className={styles.bigUrl} data-live-link>
-              <UrlText url={url} />
-            </a>
-          </p>
-          <div className={styles.buttonRow}>
-            <Button icon={Copy} onClick={() => void copy(url)}>
-              Copy link
-            </Button>
-            <a href={url} target="_blank" rel="noopener noreferrer" className={cx(styles.btn, styles.btn_secondary)}>
-              <ExternalLink size={18} strokeWidth={1.75} aria-hidden="true" />
-              <span>Open website</span>
-            </a>
-          </div>
-          <QrCode url={url} fileBase={initial.slug} />
-          <p className={styles.hint}>This QR code opens {url}. Scan it once with your phone camera before you print it.</p>
+          <LiveShare url={url} fileBase={initial.slug} level={3} />
+          {dialog.justPublished ? <AfterPublish steps={afterPublishSteps(content, theme, notes.sample)} onGo={goTo} level={3} /> : null}
         </Sheet>
       ) : null}
       {dialog?.kind === 'offline' ? (
@@ -752,6 +760,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
               go({ view: 'home' });
             }}
             onPublished={() => go({ view: 'home' }, true)}
+            onAfter={goTo}
             onIssues={(issues, message) => setDialog({ kind: 'issues', issues, message })}
           />
         </div>
@@ -762,7 +771,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
 
   // ---------------------------------------------------------------- editor
   const sectionPage = route.view === 'section' ? route.page : null;
-  const rootView = route.view === 'section' ? 'edit' : route.view === 'print' ? 'guests' : route.view;
+  const rootView = route.view === 'section' ? 'edit' : route.view === 'print' || route.view === 'results' ? 'guests' : route.view;
   const back = () => {
     if (navCount.current > 0) window.history.back();
     else go({ view: 'edit' }, true);
@@ -861,7 +870,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         ? 'Your website'
         : route.view === 'edit'
           ? 'Edit your website'
-          : route.view === 'guests'
+          : route.view === 'guests' || route.view === 'results'
             ? 'Guests'
             : route.view === 'print'
               ? 'Guest list'
@@ -1032,6 +1041,15 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             ) : null}
             {sectionPage ? (
               <div className={styles.sectionPage} data-page={sectionPage}>
+                {/* G100 (docs/18 §2): one line for the page's sample text instead of a tag on every field. */}
+                <SampleLine
+                  count={pageSample(sectionPage).length}
+                  scope={`[data-page="${sectionPage}"]`}
+                  onMissing={() => {
+                    const first = pageSample(sectionPage)[0];
+                    if (first) goTo(first.path);
+                  }}
+                />
                 {pageSections(sectionPage).map((id) => {
                   const title = pageSections(sectionPage).length > 1 ? BLOCK_TITLES[id] : undefined;
                   return (
@@ -1060,8 +1078,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 ) : null}
               </div>
             ) : null}
-            {route.view === 'guests' ? (
+            {route.view === 'guests' || route.view === 'results' ? (
               <GuestsView
+                tab={route.view === 'results' ? 'results' : 'list'}
+                onTab={(t) => go({ view: t === 'results' ? 'results' : 'guests' })}
                 api={panel.api}
                 replies={replies}
                 content={content}

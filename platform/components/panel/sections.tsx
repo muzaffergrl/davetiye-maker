@@ -5,12 +5,12 @@
 // Each on/off switch sits next to the content it controls (no separate "Optional sections").
 
 import { CalendarDays, Lock, Pencil, Plus, Shuffle } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
 import type { ContentRecord, Locale, RsvpQuestion } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { defaultNameDisplay, newQuestionId, OPTIONAL_BLOCK_LABELS, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
-import { beforePublishText, IDENTITY_CHANGE_LIMIT } from '../../lib/panel/rights.ts';
+import { beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, rightsOneLine, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { Button, cx, Disclosure, EmptyState, RightsMeter, Segmented } from './ui.tsx';
@@ -21,10 +21,32 @@ const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
 /** The rule as the buyer reads it before the first publish (docs/16 §11.7). */
 export const RIGHTS_HINT_BEFORE = beforePublishText(IDENTITY_CHANGE_LIMIT);
 
-function RightsLine() {
+/**
+ * G100 (docs/18 §1): the rule before the first publish in one line — "After publishing you can change names or the date
+ * 3 times." — and "Learn more" for the details (what is free, undo). The number comes from lib/panel/rights.ts.
+ */
+export function RightsNote() {
   const { rights } = usePanelContext();
-  if (rights.phase === 'before_publish') return <p className={styles.rightsHint}>{RIGHTS_HINT_BEFORE}</p>;
-  return null;
+  const [open, setOpen] = useState(false);
+  const moreId = useId();
+  if (rights.phase !== 'before_publish') return null;
+  const total = rights.limit + rights.granted;
+  return (
+    <div className={styles.rightsNote} data-rights-note>
+      <p className={styles.rightsNoteLine}>
+        <span>{rightsOneLine(total)}</span>{' '}
+        <button type="button" className={styles.rightsMore} aria-expanded={open} aria-controls={moreId} onClick={() => setOpen((v) => !v)} data-rights-more>
+          Learn more
+        </button>
+      </p>
+      <div id={moreId} className={styles.rightsNoteMore} hidden={!open}>
+        <p>Until you publish, you can change them as often as you like.</p>
+        <p>{changesRuleText(total)}</p>
+        <p>{FREE_CHANGES_TEXT}</p>
+        <p>{UNDO_TEXT}</p>
+      </div>
+    </div>
+  );
 }
 
 /**
@@ -32,11 +54,14 @@ function RightsLine() {
  * one place the name & date changes left are shown (Us and Day & place pages), never as badges on the Edit list.
  */
 function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows: Array<{ label: string; value: string; id?: string }>; paths: string[] }) {
-  const { rights, openIdentity, locked, online, issuesAt } = usePanelContext();
+  const { rights, openIdentity, locked, online, issuesAt, isSample } = usePanelContext();
   const total = rights.limit + rights.granted;
   const issues = paths.flatMap((p) => issuesAt(p));
+  // G100: a locked value that is still the design's sample (the date) counts in the page's sample line; its jump lands on
+  // "Change" here.
+  const sample = paths.find((p) => isSample(p));
   return (
-    <div className={styles.locked} data-locked-identity={focus} data-rights-card>
+    <div className={cx(styles.locked, sample && styles.lockedSample)} data-locked-identity={focus} data-rights-card data-sample-field={sample}>
       {issues.length ? (
         <>
           <IssueList issues={issues} />
@@ -103,13 +128,11 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
         />
       ) : (
         <>
-          {/* First run: the rule comes under the names, so the first field is the first thing on a small phone (K29). */}
-          {setup ? null : <RightsLine />}
+          {/* First run (G100): only the two first names here; the setup puts the date right under them and the optional full
+              names and the change rule after it (Setup.tsx), so names and date are the first screen. */}
+          {setup ? null : <RightsNote />}
           {setup ? (
-            <>
-              <SetupNames />
-              <RightsLine />
-            </>
+            <SetupNames />
           ) : (
             partners.map((p, i) => (
             <Group key={i} title={i === 0 ? 'First partner' : 'Second partner'}>
@@ -139,6 +162,10 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
               Add a second name
             </Button>
           ) : null}
+          {/* G100 (docs/18 §1): the first-run step is the names and the date only; the names line follows the first names
+              (withPartnerName) and stays one tap away under Edit → Us. */}
+          {setup ? null : (
+          <>
           <TextField
             path="name_display"
             label="How your names appear"
@@ -163,6 +190,8 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
               ))}
             </div>
           ) : null}
+          </>
+          )}
           {/* Only when the design shows a monogram (a field that changes nothing would mislead). It follows the names until
               edited, so the first-run setup leaves it for later (K29). */}
           {fields.initials && !setup ? (
@@ -182,13 +211,12 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
 }
 
 /**
- * First run (K29): the two first names, then — folded, optional — the full names for the invitation card. Same fields
- * and ids as the editor (#f-partners-<n>-display_name / -full_name).
+ * First run (K29): the two first names; the full names for the invitation card fold away (SetupFullNames, after the date).
+ * Same fields and ids as the editor (#f-partners-<n>-display_name / -full_name).
  */
 function SetupNames() {
   const { content, edit } = usePanelContext();
   const partners = content.partners ?? [];
-  const anyFull = partners.some((p) => (p.full_name ?? '').trim());
   return (
     <>
       {partners.map((p, i) => (
@@ -203,6 +231,17 @@ function SetupNames() {
           onChange={(v) => edit((c) => withPartnerName(c, i, 'display_name', v))}
         />
       ))}
+    </>
+  );
+}
+
+/** First run: the full names for the invitation card — folded, optional (open when one is filled in). */
+export function SetupFullNames() {
+  const { content, edit } = usePanelContext();
+  const partners = content.partners ?? [];
+  const anyFull = partners.some((p) => (p.full_name ?? '').trim());
+  return (
+    <>
       <Disclosure id="full-names" title="Full names for the invitation card" status="Optional" defaultOpen={anyFull}>
         <div className={styles.stack}>
           <p className={styles.hint}>Empty: the card shows the first names. Adding a surname later is free.</p>
@@ -321,7 +360,7 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
       ) : (
         <>
           {/* In the setup the rule is shown once, on step 1 and before publishing (G060-fix). */}
-          {setup ? null : <RightsLine />}
+          {setup ? null : <RightsNote />}
           <DateField path="date" label="Wedding date" value={content.date} locale={locale} onChange={(v) => edit((c) => void (c.date = v))} />
         </>
       )}

@@ -4,7 +4,7 @@
 // Back never loses anything (it is all autosaved), steps 1–2 can be skipped, and the step to resume is worked out
 // from the content (another phone finds it too).
 
-import { ArrowLeft, CalendarDays, Check, CircleCheckBig, Copy, ExternalLink, Hourglass, Share2, Sparkles, TriangleAlert } from 'lucide-react';
+import { ArrowLeft, CalendarDays, CircleCheckBig, Hourglass, Sparkles, TriangleAlert } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
@@ -20,12 +20,12 @@ import {
 } from '../../lib/panel/model.ts';
 import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
 import { BrandLogo } from './Brand.tsx';
-import { useDeviceZone, usePanelContext } from './fields.tsx';
+import { SampleLine, useDeviceZone, usePanelContext } from './fields.tsx';
 import { heroSlot, SETUP_STEP_COUNT } from './pages.ts';
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane, useSettledVersion } from './PreviewPane.tsx';
-import { QrCode } from './QrCode.tsx';
-import { DateFields, NamesFields, RIGHTS_HINT_BEFORE } from './sections.tsx';
+import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
+import { DateFields, NamesFields, RIGHTS_HINT_BEFORE, RightsNote, SetupFullNames } from './sections.tsx';
 import { Banner, Button, cx, Disclosure, SaveIndicator } from './ui.tsx';
 import type { PanelController } from './usePanel.ts';
 import { UrlText } from './views.tsx';
@@ -109,6 +109,7 @@ export function Setup({
   onStep,
   onExit,
   onPublished,
+  onAfter,
   onIssues,
 }: {
   step: number;
@@ -120,6 +121,8 @@ export function Setup({
   onStep: (n: number) => void;
   onExit: () => void;
   onPublished: () => void;
+  /** A next step of the success screen (G100): a view ("#edit/photos") or a content path. */
+  onAfter: (path: string) => void;
   onIssues: (issues: ValidationIssue[], message?: string) => void;
 }) {
   const { content, validation, meta, saveState } = panel;
@@ -128,11 +131,6 @@ export function Setup({
   const [publishing, setPublishing] = useState(false);
   const [published, setPublished] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [canShare, setCanShare] = useState(false);
-  // Copy feedback stays on this screen (button says "Copied" + a status line): the panel's snackbar would sit on top
-  // of "Go to my editor" here, where there is no bottom navigation, and catch taps on it for 6 s.
-  const [copyState, setCopyState] = useState<'copied' | 'failed' | null>(null);
-  const copied = copyState === 'copied';
   const def = SETUP_STEPS[step - 1];
   const deviceZone = useDeviceZone();
   const notes = prePublishNotes(content, theme, { deviceZone });
@@ -147,12 +145,6 @@ export function Setup({
     headingRef.current?.focus();
     document.title = `Step ${step} of ${SETUP_STEP_COUNT} · ${def.title}`;
   }, [step, initial.slug, def.title]);
-  useEffect(() => setCanShare(typeof navigator !== 'undefined' && typeof navigator.share === 'function'), []);
-  useEffect(() => {
-    if (!copied) return;
-    const t = window.setTimeout(() => setCopyState(null), 2000);
-    return () => window.clearTimeout(t);
-  }, [copied]);
 
   const stepIssues = validation.errors.filter((i) => def.paths.some((p) => i.path === p || i.path.startsWith(`${p}.`)));
 
@@ -180,15 +172,6 @@ export function Setup({
     setError(res.message ?? 'Your website could not be published. Please try again.');
   };
 
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopyState('copied');
-    } catch {
-      setCopyState('failed');
-    }
-  };
-
   const hero = heroSlot(theme.photos);
   const otherSlots = theme.photos.filter((s) => s !== hero);
   const filledPhotos = theme.photos.filter((s) => photoAt(content, s.source)).length;
@@ -209,30 +192,10 @@ export function Setup({
             <h1 ref={headingRef} tabIndex={-1} className={styles.setupTitle}>
               Your website is live
             </h1>
-            <p className={styles.setupHelp}>Guests can open it now. Share the link or print the QR code.</p>
-            <p>
-              <a href={url} target="_blank" rel="noopener noreferrer" className={styles.bigUrl} data-live-link>
-                <UrlText url={url} />
-              </a>
-            </p>
-            <div className={styles.buttonRow}>
-              <Button icon={copied ? Check : Copy} onClick={() => void copy()} data-copy-link>
-                {copied ? 'Copied' : 'Copy link'}
-              </Button>
-              <a href={url} target="_blank" rel="noopener noreferrer" className={cx(styles.btn, styles.btn_secondary)} data-open-site>
-                <ExternalLink size={18} strokeWidth={1.75} aria-hidden="true" />
-                <span>Open website</span>
-              </a>
-              {canShare ? (
-                <Button icon={Share2} onClick={() => void navigator.share({ url }).catch(() => undefined)}>
-                  Share
-                </Button>
-              ) : null}
-            </div>
-            <p role="status" className={copyState === 'failed' ? styles.hint : styles.visuallyHidden} data-copy-status>
-              {copyState === 'copied' ? 'Link copied' : copyState === 'failed' ? 'Could not copy. Press and hold the link above to copy it.' : ''}
-            </p>
-            <QrCode url={url} fileBase={initial.slug} />
+            <p className={styles.setupHelp}>Guests can open it now. Send them the link.</p>
+            {/* G100 (docs/18 §1): the link and Share first; the QR code under "More ways to share"; then optional steps. */}
+            <LiveShare url={url} fileBase={initial.slug} />
+            <AfterPublish steps={afterPublishSteps(content, theme, notes.sample)} onGo={onAfter} />
             <Button variant="primary" block onClick={onPublished} data-go-editor>
               Go to my editor
             </Button>
@@ -280,9 +243,13 @@ export function Setup({
 
         {step === 1 ? (
           <>
+            {/* G100 (docs/18 §1): one job — the two first names and the date; the optional full names and the change rule
+                (one line + "Learn more") come after them. One sample line instead of a "Sample" tag per field. */}
             <NamesFields setup />
-            <h2 className={styles.setupSubTitle}>The wedding day</h2>
+            <SampleLine count={notes.sample.filter((n) => def.paths.some((p) => n.path === p || n.path.startsWith(p + '.'))).length} scope='[data-setup="1"] main' />
             <DateFields theme={theme} setup />
+            <SetupFullNames />
+            <RightsNote />
             <div className={styles.miniPreview} aria-label="Your envelope page" role="img">
               <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} />
             </div>
