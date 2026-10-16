@@ -21,7 +21,7 @@ görünüş, aralıklar, süs konumları, zamanlama, kart oranları ve bölümle
 | `home.html` | hero (W1.2), davet kartı (invitation_card, 3 dilim), "Kindly reply by" + RSVP, takvime ekle, jüt ipe mandallı iki baskı (story_1 → Our Story, mekân → The Day + programın ilk 4 satırı), ahşap zeminde kapanış |
 | `story.html` | W1.3: başlık + alt başlık + sprey + giriş cümlesi; ahşap duvar (GPT barnwood, 90° döndürülmüş) üstünde üç sarkık jüt ip, her birine bir eski baskı mandallanır, yanında küçük ayçiçeği/başak, alt yazı |
 | `details.html` | W1.4: Order of the Day (info_card, 3 dilim; SAAT \| ETKİNLİK / yer, satır aralarında GPT sprey), takvime ekle, mekân (GPT yatay baskı + mandal + ip), mekân adı, şehir/bölge/ülke, dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
-| `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim): başlık, sprey, son tarih, hap, bekleme satırı, "With love," + isimler, kartın tabanında zarfın kurdelesi (closure); platform yanıt formu (G042 + G051 + G069), kapanış |
+| `rsvp.html` | W1.5: RSVP kartı (info_card, 3 dilim): başlık, sprey, son tarih, hap, bekleme satırı, "With love," + isimler, kartın tabanında zarfın kurdelesi (`card_ribbon`, spreysiz eski closure); platform yanıt formu (G042 + G051 + G069), kapanış |
 | `site.css` | palet token'ları, giriş ön ayarları (`sway-tl/br`, `set`, **`peg`**, **`tie`** bu tasarımın), foto alanı + maske, zarf/kurdele/masa katman yüzdeleri, kart 3 dilim, sayfa yerleşimleri (45 039 B) |
 | `thank-you.css` | teşekkür hâli (yalnız düğünden sonra yüklenir) |
 | `site.js` | `MOTION`, `ENVELOPE_GEOMETRY`, ilk ekran/uzun isim (`fitNames`, `fold`, `folds`, `envFit`), `decor` (16 × 16 küme haritası), `fitCopy`, geri sayım, zarf, `DEV_CONTENT` + `devRender` (≈ 34 KB) |
@@ -50,9 +50,15 @@ tonlanmış kırpımlar. `build_images.py` her yer tutucunun en koyu pikselini (
   her sütunda gövdenin altından yukarı çıkılır: kraft (lum < 190, G − B < 64, R − G > 30) bitip 6 satır kareli astar görülen yer
   kenardır, üstteki açık yırtık şerit cebe dahildir; ortadaki sütunlardan (x 220–840) doğru uydurulur (y ≈ 850, sapma 1,8 px).
   Yan kraft kulakları gövde katmanında kalır (kart onların arasından geçer). Kesilen katmanlar açık zarfı birebir kurar.
-- **Kapanış = sarılı kurdele** (`closure.png`, zarfla aynı 1024 × 1536 tuval, 1:1; kapakla taşınmaz): yeri kendi alfa kutusu
-  (`manifest.closure.anchor` "1:1 canvas overlay"). Gevşeme odağı = ayçiçeğinin koyu göbeği (`knot_pct_of_closure` 51,26 / 30,11).
-  `previews/g416/compare_closure.jpg`: tema | comp.
+- **Kapanış = sarılı kurdele** (G098: GM07 R3 `closure_r2_v3.png` — kurdele + fiyonk + ayçiçeği + arkasında buğday, cipsofila,
+  iki yaprak; ham imagegen, kaynakta düzenleme yok; zarfla aynı 1024 × 1536 tuval, 1:1; kapakla taşınmaz): yeri kendi alfa
+  kutusu (`manifest.closure.anchor` "1:1 canvas overlay"). GPT bandı ~44 px aşağı çizdi → `bant_kaymasi` eski `closure.png`'nin
+  bandıyla (x 100 / 900 sütunları) ölçer, `manifest.closure.placement_dy_px` = −44 yalnız yerleşime uygulanır (görüntü aynı);
+  hiza: uçlar −0,54 / −1,17 %, üst +1,43 %, alt +0,13 % (tamam). Sağ uç zarf sütununu ~8 px aşıyor: `.closure-clip` (zarfın
+  sütunları) keser, sahne kutusu bu yüzden genişlemez. Gevşeme odağı = ayçiçeğinin koyu göbeği (`knot_pct_of_closure`
+  49,78 / 41,67). `previews/g416/compare_closure.jpg`: tema | comp.
+- **RSVP kartının kurdelesi** (`card_ribbon-*`) eski spreysiz `closure.png`'den kalır (G098): spreyli kapanış kart genişliğinde
+  ~17cqw uzun; 390×844'te ya imzanın üstüne biniyor ya da `folds` onu ilk ekranın altına itip kartta boşluk bırakıyordu.
 - **Ek parçalar:** `barnwood` (yatay soluk ahşap tahtalar) açılışta zarfın altındaki masa; aynı parça 90° döndürülerek
   (`barnwall`, yalnız döndürme) story duvarının dikey tahtaları — CSS'te `saturate(1.7) brightness(.66) contrast(1.05)` ışık ayarı (comp'un koyu duvarına yaklaşır) (§5.7: parçaya
   filtre). `twine_line` alfa kutusuna kırpılır; sarkma `manifest.twine_line.sag` (uçlar %13 / %9, orta %94).
@@ -87,7 +93,7 @@ tonlanmış kırpımlar. `build_images.py` her yer tutucunun en koyu pikselini (
 
 ## İlk ekranlar ve yatay telefon
 08'in çözülmüş adımları korunur: `fitNames` (isimler küçülür → `.is-tight` + isimler 36 px tabanı → `.is-long` → hero kaydırılır),
-ardından `fold`. İç sayfalarda `[data-fold]` birimleri: nav çizgisini kesen birim ilk ekranın altından başlar. Bu tasarıma özgü:
+ardından `fold` (isimler/h1 hiç itilmez — G098, 15/17'deki G101 düzeltmesi: 320×568 zorlamada h1 ilk ekranın altına itiliyordu). İç sayfalarda `[data-fold]` birimleri: nav çizgisini kesen birim ilk ekranın altından başlar. Bu tasarıma özgü:
 **story** — ahşap duvar her zaman giriş cümlesinin hemen altında, ilk ekranda başlar (qa-kontrol 2026-10-16: eskiden ilk satır
 katlanınca boşluk duvara verilip ilk ekranın yarısı boş krem kalıyordu). İlk ip+baskı birimi (≈ 478 px) sığmazsa önce sayfa en çok
 60 px kalkar ve ilk baskı küçülür (`--sg` ≥ 0,76 → foto penceresi ≥ 38vw); 390 × 844 ve 430 × 932'de böylece ip, baskı ve yazı ilk
@@ -106,7 +112,7 @@ kalsın. Kısa yatay (en-boy ≥ 1, yükseklik ≤ 620 px) hero iki sütun.
 | "YOU ARE INVITED" + altında çizgi · ♥ · çizgi | `.env-head .kicker` | **sapma:** kalp süsü GPT parçası olarak yok; aynı yere divider konmadı — 375×553'te isimler + zarf + ipucu ilk ekrana sığmalı (§7.1), süs ipucunun altında bir kez |
 | isimler (fırça yazısı) | `h1.names` (+ `.amp` italik Merriweather) | uzun isimde `site.js` küçültür |
 | kraft zarf, yuvarlak köşeli kapak | `.env-closed` + `.env-cflap` | |
-| hardal kareli kurdele + fiyonk + ayçiçeği; fiyonkun arkasında buğday–cipsofila–yaprak spreyi | `.closure-clip > .closure` (1:1) | **sapma:** GPT `closure.png` spreysiz geldi (prompt'ta sprey yok); kodla eklenmez (K21) — önerilen gpt-gorsel görevi Sonuç'ta |
+| hardal kareli kurdele + fiyonk + ayçiçeği; fiyonkun arkasında buğday–cipsofila–yaprak spreyi | `.closure-clip > .closure` (1:1) | G098: GM07 R3 spreyli kapanış (önceki sapma kapandı) |
 | "TAP TO OPEN" + altında çizgi · süs · çizgi | `.env-hint p` + `.env-hint .orn` (GPT divider + iki 1 px çizgi) | comp'taki süs küçük kalp; burada tasarımın GPT spreyi (kalp parçası yok) |
 | — | `a.skip`, "Enter / Replay the opening", ahşap masa (`.table`) | platform gereği / açılış cümlesi |
 

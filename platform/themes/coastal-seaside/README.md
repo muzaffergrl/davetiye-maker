@@ -17,7 +17,7 @@ için kart yolu hesabı); görünüş, renkler, süs konumları, açılış, sto
 | `theme.json` | ad "Coastal Seaside", 5 sayfa, 5 foto alanı (oranlar = `img/manifest.json` `photo_slots.*.box_px`), 71 copy anahtarı |
 | `content.demo.json` | `collections/20_Coastal_Seaside/content.demo.json`'ın birebir kopyası (servis edilmez) |
 | `index.html` | kapalı zarf → dokun → suluboya dalga (GPT `wave.png`) ekranı soldan sağa geçer ve kabuk + sicimi önünde taşıyıp götürür, dalgalı kapak yukarı açılır, kart gelgit gibi yükselir, öne gelir → home (view transition) |
-| `home.html` | hero (W1.2: kart + lomboz foto, isimler, gün · tarih, mekân, şehir/bölge, geri sayım, okyanus mavisi RSVP hapı), davet kartı (`invitation_card`, 3 dilim; AY \| gün \| YIL), tek "Kindly reply by" satırı, takvime ekle, iki lomboz (story_1 dik oval lombozda → Our Story; mekân geniş oval lombozda → The Day + programın ilk 4 satırı; ikisi kendi kenarından kayarak gelir), kapanış (kıyı + sağ alt küme) |
+| `home.html` | hero (W1.2: kart + lomboz foto, isimler, gün · tarih, mekân, şehir/bölge, geri sayım, okyanus mavisi RSVP hapı), davet kartı (`invitation_card`, 3 dilim; AY \| gün \| YIL), tek "Kindly reply by" satırı, takvime ekle, iki lomboz (story_1 yuvarlak lombozda → Our Story; mekân geniş oval lombozda → The Day + programın ilk 4 satırı; ikisi kendi kenarından kayarak gelir), kapanış (kıyı + sağ alt küme) |
 | `story.html` | W1.3: başlık + alt başlık + giriş cümlesi; üç pirinç lomboz zikzak (sol, sağ, sol), her biri kendi kenarından kayarak gelir ve hafifçe döner (`slide-l`/`slide-r`), yanında bir kumsal parçası (kabuk, deniz camı, deniz yıldızı), altında el yazısı başlık |
 | `details.html` | W1.4: Order of the Day kartı (`info_card`, 3 dilim; saat · ETKİNLİK · yer, satır aralarında GPT kabuk sırası + iki ince çizgi), takvime ekle, mekân (geniş oval lomboz), kabuk sırası + dress code, harita / Travel & Stay / Registry (yalnız linkle), SSS |
 | `rsvp.html` | W1.5: RSVP kartı (`info_card`): başlık, kabuk sırası, son tarih, hap, bekleme satırı, "With love," + isimler, **kartın dibindeki dalgada zarfın kabuğu**; platform yanıt formu (G042 + G051 soruları + G069 misafir adları), kapanış |
@@ -31,7 +31,7 @@ için kart yolu hesabı); görünüş, renkler, süs konumları, açılış, sto
 | Anahtar | İçerik yolu | Oran (px) | Yer |
 |---|---|---|---|
 | `hero_portrait` | `media.hero_portrait` | 440/442 | card_small'ın yuvarlak lombozu (index kartı = home hero kartı) |
-| `story_1..3` | `media.memory_photos.0..2` | 642/836 | frame_portrait (story; `story_1` home lombozunda da) |
+| `story_1..3` | `media.memory_photos.0..2` | 870/872 | frame_portrait = GM07 yuvarlak lomboz (story; `story_1` home lombozunda da) |
 | `venue` | `media.venue_image` | 902/575 | frame_landscape (details; home lombozunda da) |
 
 Foto çerçevenin **altında**, kutusu pencere + 2 px, maske `mask_<şekil>.png` (CSS `border-radius` yok). `object-position` 50% 45%
@@ -77,7 +77,7 @@ zaten açık mavi) ölçer.
   view transition ile home kartına. Dokun → home 4,48 s (Skip her an). Parçacık yok: cümle yalnız dalgayı anıyor (docs/11 §8).
 - **Story:** her lomboz kendi sahnesi: görünüme girince kendi kenarından (sol / sağ / sol) kayarak gelir, −24° / +24°'den
   dönerek yerine oturur (`slide-l` / `slide-r`, 1,5 s), sonra başlığı yazılır. Telefonda zikzak korunur: çerçeve 52vw, foto
-  penceresi 52 × 0,77 = **40vw** ≥ 38vw; ≥ 720 px comp gibi daha sıkı zikzak (sonraki lomboz bir öncekinin başlığı hizasında
+  penceresi 52 × 0,77 = **40vw** ≥ 38vw (G098 yuvarlak lombozda da 52 × 0,7699 = 40vw); ≥ 720 px comp gibi daha sıkı zikzak (sonraki lomboz bir öncekinin başlığı hizasında
   başlar).
 - **Boyalı kartlar** (davet, Order of the Day, RSVP): `set` girişi — hep opak. RSVP kartındaki kabuk `drop` ile karta düşer.
 - Süreler (docs/11 §8): her sahnenin son adımı ≤ 3000 ms, tek giriş 600–1800 ms.
@@ -122,7 +122,7 @@ Kıyı dalgasının üstüne düşen hero yazıları (geri sayım, hap; W1.2 de 
 |---|---|---|
 | "Our Story", "MOMENTS WE HOLD DEAR" | `h1.page-title`, `.page-head .kicker` | |
 | — | `.lede` (story.intro + tarih) | standart zorunlu |
-| üç yuvarlak pirinç lomboz, zikzak (sol, sağ, sol) | `.windows-row .pane.side-left/right` (frame_portrait + foto) | **sapma (GPT parçası):** `frame_portrait` pencere oranı 0,77 — comp'taki gibi tam daire değil, dik oval; ölçekle daire yapılmadı (perçinler basık görünürdü). Telefonda da zikzak; çerçeve 52vw (pencere 40vw) |
+| üç yuvarlak pirinç lomboz, zikzak (sol, sağ, sol) | `.windows-row .pane.side-left/right` (frame_portrait + foto) | G098: GM07 R2 `frame_portrait_r2_v2.png` tam yuvarlak (pencere 870 × 872, sekiz perçin) — önceki dik oval sapması kapandı. Telefonda da zikzak; çerçeve 52vw (pencere 40vw) |
 | lomboz yanında kabuk/mercan/deniz camı kümeleri | `.beside` (accent_1, accent_2, accent_3; her lombozun sayfa ortasına bakan yanında) | küme yerine tek parça (GPT accent'leri) |
 | el yazısı başlık lombozun altında | `figcaption` | sayfa ortasına doğru taşabilir, ekran dışına asla |
 | köşe kümeleri, kıyı | `.page-bg` ilk ekranda (sis + sol üst küme); `decor_br` + kıyı sayfa sonunda | **sapma:** comp tek ekran; uzun sayfada kıyı ilk ekranın değil sayfanın dibinde (içeriğin ortasından geçmesin) |
@@ -167,7 +167,10 @@ coastal-seaside --check` temiz). Formda "Number of guests"in hemen altında `<te
 
 ## Bilinen sınırlar
 - Home'un alt kapanışında `decor_br`'nin kendi dalga kenarı `shore` zemininin dalgasıyla üst üste biner (iki GPT dalgası; dikiş yok).
-- Story lombozları dik oval (GPT `frame_portrait` 0,77); comp'ta daire. Önerilen GPT düzeltmesi Sonuç'ta.
+- Story/home lombozu G098'den beri GM07 R2'nin yuvarlak lombozu (`frame_portrait_r2_v2.png`, ham imagegen). Penceresi düz yeşil
+  değil (kenarda koyulaşan yeşil, ortada alfa deliği); olağan hat (`parts_prep.parca_isle` leke dolgusu, `build_images.py`
+  `gm07/` geçici alt klasörü) pencereyi tam şeffaf yapıyor — `foto_alani` her WebP'de 0 görünür piksel. Eski oval
+  `frame_portrait.png` kullanılmıyor.
 - Davet kartının düz bandı dar (%46–52): uzun içerikte bant çok kez döşenir; ayna nedeniyle benekler simetrik çiftler yapar
   (yakından bakınca fark edilir).
 - Program en çok 10 satır (şema); Order of the Day kartı uzar (3 dilim, döşenen bant).

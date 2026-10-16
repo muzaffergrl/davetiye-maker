@@ -26,7 +26,15 @@ zamanlama, kart oranları ve bölüm sırası bu tasarımın.
 | `thank-you.css` | teşekkür hâli (yalnız düğünden sonra yüklenir) |
 | `site.js` | `MOTION` (açılış, sahneler, `accents` — `draw` yolu bu tasarımın), `ENVELOPE_GEOMETRY`, uzun isim + ilk ekranlar (`fitNames`, `fold`, `folds`, `wall`, zarf sayfası `envFit`), dekor–metin (`decor`), kart kopyası (`fitCopy`), geri sayım, zarf, `DEV_CONTENT` + `devRender` |
 | `build_images.py` | GPT parçaları → `img/` (servis edilmez); `tools/tema_build.py` + bu tasarımın kesimleri |
-| `img/` | WebP katmanlar, `decor_*` 360/540/720, `accent_N` (200) + `accent_N_lg` (400, açılış çizgileri), `velvet` / `velvet_wide` zeminleri, `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` (servis edilmez) |
+| `img/` | WebP katmanlar, `decor_*` 360/540/720, `accent_N` (200) + `accent_N_lg` (400, açılış çizgileri), `velvet` / `velvet_wide` zeminleri, `countdown_box-240` + `pill_sprig-120` (GM07, G098), `ph_*` yer tutucular, `mask_{card,portrait,landscape}.png`, `og-1200x630.jpg`, `favicon.png`, `manifest.json` (servis edilmez) |
+
+## Tipografi ve kontrast
+- `.display` (Cinzel Decorative) `font-kerning: none` (G098): fontun h–e kerning çifti e'yi h'nin sağ sapının altına sokuyor,
+  "The" / "Together" "TꞪE" / "TOGETꞪER" okunuyordu (qa-kontrol; G417'de ligatür sanıldı, `font-variant-ligatures` ve
+  `font-feature-settings` etkisizdi). Kerning kapalıyken diğer çiftlerde fark gözle seçilmiyor; önce/sonra:
+  `previews/g417/g098_kerning_before_after.png`.
+- Kontrast (token'lar, site.css'ten taşındı): `--gold-lt` kadifede 10,7:1 · `--ivory` 15:1 · `--ivory-soft` 11:1 · mermerde
+  `--ink` 13,9:1 · `--ink-soft` 8,6:1 · `--bronze` (mermerdeki display satırları) 5,9:1.
 
 ## Foto alanları
 | Anahtar | İçerik yolu | Oran (px) | Yer |
@@ -67,6 +75,14 @@ payını denetler (≤ %0,05, `manifest.ph_*.gold_share`).
   theme-check her satırın altını kağıt rengiyle karşılaştırır (> 45 RGB uzaklığı %0,5'ten fazla = "boyalı dekor"); koyu damarlar imza
   satırında tam %0,5'e değiyordu. (3) 3 dilim bandı: kartın orta %93'ünde (altın kenarın içi) damarsız/süssüz en uzun bant
   (`slices`: davet kartı %45–57, bilgi kartı %24–88).
+- **GM07 rötuş parçaları (G098)**: `countdown_box_r2.png` (W1.2'nin altın çerçeveli sayaç kutusu) ve `pill_sprig_r2.png`
+  (hapın iki yanındaki dal) — ham imagegen çıktıları (kullanıcı kararı: kaynakta piksel/alfa/boyut düzenlemesi yok; ham
+  tuval 1254 × 1254). GPT_PROMPTS.md'de Kaydet satırları olmadığından `build_images.py` olağan hattı elle çağırır
+  (`parts_prep.parca_isle`: alfa > 8 kutusu + 8 px pay, geçici klasör) → yalnız ölçek + WebP (`countdown_box-240`,
+  `pill_sprig-120`; `manifest.*.source_sha256` ham dosyanın özeti). Kutu 4:5 dik geldi, comp'un kutuları ~6:5 yatık: site.css
+  kutuyu iki yarım olarak gösterir (`.cd-cell::before` sol yarı, `::after` sağ yarı; ikisi de hücre yüksekliğine ölçekli)
+  — düz çift çizgi ortada birleşir, köşe süsleri bozulmaz (§5.7 "parçayı kesmek"; CSS çerçeve yok). Dal: `.hero-cta .btn`
+  `::before` (aynalı) / `::after`, −20° (uç yukarı-dışa, comp gibi), `brightness(.72)` (altın hapın üstünde kabartma).
 - **Ağırlık**: tema klasörü ~1,8 MB (≤ 3 MB); en büyük WebP `env_body-869` ≈ 104 KB, kümeler 720 px 78–89 KB (alfa kalitesi 70).
   `divider` tek 300 px dosya. og: `web_hero` alt hizalı 1.91:1; favicon: closure.
 
@@ -137,8 +153,8 @@ başlığın altına girer; "Tap to open" ilk ekranda bitmiyorsa sahne küçül�
 | isimler | `h1.names` | |
 | "SATURDAY · MAY 29, 2027" | `.hero-date` | |
 | "Emerald Court Estate" / "Lake Geneva, Wisconsin" (italik) | `.hero-venue` / `.hero-city` (`venue.city_region`) | |
-| dört altın çizgili geri sayım kutusu | `.countdown` sade rakam (Cinzel Decorative) + etiket | **sapma:** kutular CSS çerçeve olurdu (K21, §5.7) |
-| cilalı altın RSVP hapı, iki yanında küçük dal | `.hero-cta .btn` (altın degrade arayüz hapı, zümrüt yazı) | **sapma:** hapın içindeki dallar yok (GPT parçası değil) |
+| dört altın çizgili geri sayım kutusu | `.countdown` `.cd-cell` + GPT `countdown_box` (iki yarım, yüksekliğe ölçekli) | G098: GM07 parçası (önceki sapma — sade rakam — kapandı); etiket ≥ 11 px, kutu ≥ 64 px |
+| cilalı altın RSVP hapı, iki yanında küçük dal | `.hero-cta .btn` (altın degrade arayüz hapı, zümrüt yazı) + GPT `pill_sprig` (`::before` aynalı, `::after`) | G098: dallar GM07 parçası (yalnız hero hapında; diğer haplar sade) |
 | alt gezinme, üstünde çizgi · eğrelti · çizgi | `.site-nav` + `.nav-orn` (GPT divider + iki 1 px çizgi) | yüksekliği ≤ 600 px ekranda eğrelti gizli |
 | köşe kümeleri, süzülen parçalar | `decor_tl` / `decor_br`, `.float` | |
 | — (comp yok) | mermer davet kartı (`invitation_card` 3 dilim: köşelerde altın çizgi monstera/eğrelti; AY \| gün \| YIL iki 1 px ayraçla), "Kindly reply by" + hap, takvime ekle, kadifeye asılı iki altın çerçeve (`frame_portrait` + story_1 → Our Story, `frame_landscape` + mekân → The Day + programın ilk 4 satırı), "With love" + isimler + "Open the envelope again" (`decor_br`) | bu tasarımın parçaları; galeri duvarı fikri ana sayfada da |

@@ -1147,6 +1147,17 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
   }
 });
 
+test('G098 the wrapped closure is the raw GM07 R3 part placed by its measured band shift; the card ribbon stays the sprayless closure; names never pushed', () => {
+  const cl = MANIFEST.closure;
+  assert.equal(cl.source, 'parts/closure_r2_v3.png');
+  assert.ok(cl.placement_dy_px < -30 && cl.placement_dy_px > -60, `band shift ${cl.placement_dy_px} px (GM07: ~43 px low)`);
+  assert.ok(cl.ends_vs_envelope.kenarlar.every((k: { durum: string }) => k.durum === 'tamam'), 'ribbon ends on the envelope edges');
+  assert.equal(MANIFEST.card_ribbon.source, 'parts/closure.png');
+  const [, , cw, ch] = [0, 0, ...MANIFEST.card_ribbon.src_size];
+  assert.match(rule('.card-ribbon'), new RegExp(`aspect-ratio: ${(cw / ch).toFixed(5)}`), 'the card ribbon ratio = card_ribbon');
+  assert.match(jsText(), /const cut = \(\) => pieces\(\)\.filter\(\(c\) => !c\.matches\('\.names'\) && bottom\(c\) > limit\)/, 'fold never pushes the names');
+});
+
 test('15 privacy: sections the couple switched off leave nothing in any page source (site-data included)', async () => {
   const { getDataAdapter } = await import('../lib/data/index.ts');
   const { createSiteWithKeys, publishSite } = await import('../lib/sites.ts');

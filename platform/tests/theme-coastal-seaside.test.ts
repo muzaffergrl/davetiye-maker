@@ -1108,6 +1108,20 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
   }
 });
 
+test('G098 the portholes are the raw GM07 round porthole: window found and fully transparent, photo slot ≈ 1:1, CSS from the manifest', () => {
+  const fp = MANIFEST.frame_portrait;
+  assert.equal(fp.source, 'parts/frame_portrait_r2_v2.png');
+  assert.match(fp.source_sha256, /^[0-9a-f]{64}$/);
+  assert.ok(fp.leke_px > 0, 'the GPT cloud spot in the window was filled by parts_prep');
+  for (const f of fp.files) assert.equal(f.window_visible_px, 0, f.file);
+  const slot = MANIFEST.photo_slots.portrait;
+  assert.ok(Math.abs(slot.aspect - 1) <= 0.01, `round window (${slot.aspect})`);
+  for (const k of ['story_1', 'story_2', 'story_3']) assert.equal(theme.manifest.photos[k].aspect, `${slot.box_px[0]}/${slot.box_px[1]}`);
+  const [w, h] = fp.src_size;
+  assert.match(rule('.wf-portrait'), new RegExp(`aspect-ratio: ${w} / ${h}`));
+  assert.match(cssText(), new RegExp(`\\.pane \\.frame \\{[^}]*aspect-ratio: ${w} / ${h}`));
+});
+
 test('15 privacy: sections the couple switched off leave nothing in any page source (site-data included)', async () => {
   const { getDataAdapter } = await import('../lib/data/index.ts');
   const { createSiteWithKeys, publishSite } = await import('../lib/sites.ts');
