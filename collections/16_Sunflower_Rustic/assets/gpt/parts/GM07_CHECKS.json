@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-16",
+  "raw_images_modified": false,
+  "pieces": [
+    {
+      "piece": "R3",
+      "task": "gorevler/GM07-rotus-parcalari.md",
+      "technical_postprocessing": "Not applied; user explicitly requested imagegen outputs only.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "collections/16_Sunflower_Rustic/assets/gpt/parts/closure_r2_v1.png",
+          "sha256": "282ab42c72deea1afe558d632d9f956071fa16af93db796d2b2ae479dcfbb1de",
+          "size": [
+            1024,
+            1536
+          ],
+          "expected_size": [
+            1024,
+            1536
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            253,
+            172,
+            28,
+            253
+          ],
+          "opaque_bbox": [
+            2,
+            451,
+            1022,
+            1144
+          ],
+          "border_10px_fully_transparent_fraction": 0.9275,
+          "selected_visual_candidate": false,
+          "band_opaque_y_at_x_100_900": {
+            "100": [
+              665,
+              840
+            ],
+            "900": [
+              666,
+              840
+            ]
+          }
+        },
+        {
+          "attempt": 2,
+          "path": "collections/16_Sunflower_Rustic/assets/gpt/parts/closure_r2_v2.png",
+          "sha256": "c4b320d59c8d6599d635edf6d03207a3d9994e02123947ec8aa689ea74900e10",
+          "size": [
+            1024,
+            1536
+          ],
+          "expected_size": [
+            1024,
+            1536
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            202,
+            201,
+            167,
+            252
+          ],
+          "opaque_bbox": [
+            60,
+            687,
+            966,
+            1282
+          ],
+          "border_10px_fully_transparent_fraction": 1.0,
+          "selected_visual_candidate": false,
+          "band_opaque_y_at_x_100_900": {
+            "100": [
+              858,
+              1010
+            ],
+            "900": [
+              859,
+              1010
+            ]
+          }
+        },
+        {
+          "attempt": 3,
+          "path": "collections/16_Sunflower_Rustic/assets/gpt/parts/closure_r2_v3.png",
+          "sha256": "1766cc67fad0069a8627e09c7dd1132c3a5bd43fc230e73ecddfde948a2e768c",
+          "size": [
+            1024,
+            1536
+          ],
+          "expected_size": [
+            1024,
+            1536
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            73,
+            64,
+            40,
+            0
+          ],
+          "opaque_bbox": [
+            57,
+            800,
+            977,
+            1376
+          ],
+          "border_10px_fully_transparent_fraction": 0.999785,
+          "selected_visual_candidate": false,
+          "band_opaque_y_at_x_100_900": {
+            "100": [
+              1012,
+              1153
+            ],
+            "900": [
+              1013,
+              1153
+            ]
+          }
+        },
+        {
+          "attempt": 4,
+          "path": "collections/16_Sunflower_Rustic/assets/gpt/parts/closure_r2_v4.png",
+          "sha256": "9bec40499fad89c309ef02dd6f1edd1736a8b049a94a010bc3f5976d0832cb2e",
+          "size": [
+            1024,
+            1536
+          ],
+          "expected_size": [
+            1024,
+            1536
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            254,
+            233,
+            126,
+            253
+          ],
+          "opaque_bbox": [
+            54,
+            471,
+            975,
+            1061
+          ],
+          "border_10px_fully_transparent_fraction": 0.999961,
+          "selected_visual_candidate": false,
+          "band_opaque_y_at_x_100_900": {
+            "100": [
+              682,
+              827
+            ],
+            "900": [
+              682,
+              827
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

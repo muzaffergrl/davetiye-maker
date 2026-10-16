@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-16",
+  "raw_images_modified": false,
+  "pieces": [
+    {
+      "piece": "R4",
+      "task": "gorevler/GM07-rotus-parcalari.md",
+      "technical_postprocessing": "Not applied; user explicitly requested imagegen outputs only.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/countdown_box_r2_v1.png",
+          "sha256": "d5c70b7693035a43d3170c5a1053a0d517dc16ed998ca9fa3519725b85a0cafd",
+          "size": [
+            1122,
+            1402
+          ],
+          "expected_size": [
+            1024,
+            1024
+          ],
+          "exact_size_ok": false,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opaque_bbox": [
+            110,
+            110,
+            1012,
+            1292
+          ],
+          "border_10px_fully_transparent_fraction": 0.999069,
+          "selected_visual_candidate": false,
+          "central_interior_max_alpha": 1,
+          "opaque_bbox_ratio": 0.763113
+        },
+        {
+          "attempt": 2,
+          "path": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/countdown_box_r2_v2.png",
+          "sha256": "8ac097b59639bea00ccc1ab56030642297f9747b216205646a45d2be10feeaa8",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1024,
+            1024
+          ],
+          "exact_size_ok": false,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opaque_bbox": [
+            247,
+            145,
+            1008,
+            1101
+          ],
+          "border_10px_fully_transparent_fraction": 1.0,
+          "selected_visual_candidate": true,
+          "central_interior_max_alpha": 1,
+          "opaque_bbox_ratio": 0.796025
+        }
+      ]
+    },
+    {
+      "piece": "R5",
+      "task": "gorevler/GM07-rotus-parcalari.md",
+      "technical_postprocessing": "Not applied; user explicitly requested imagegen outputs only.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/pill_sprig_r2_v1.png",
+          "sha256": "5a7650e3ec0e342dc8f256cf248e88763d50e8dc0a9d33e548d2f02e420270f6",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1024,
+            1024
+          ],
+          "exact_size_ok": false,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opaque_bbox": [
+            252,
+            478,
+            1017,
+            786
+          ],
+          "border_10px_fully_transparent_fraction": 1.0,
+          "selected_visual_candidate": true,
+          "visual_control": "Single horizontal sprig, stem left, tip right; square native canvas."
+        }
+      ]
+    }
+  ]
+}

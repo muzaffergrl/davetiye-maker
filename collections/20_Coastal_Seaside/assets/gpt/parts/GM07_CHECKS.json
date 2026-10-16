@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-16",
+  "raw_images_modified": false,
+  "pieces": [
+    {
+      "piece": "R2",
+      "task": "gorevler/GM07-rotus-parcalari.md",
+      "technical_postprocessing": "Not applied; user explicitly requested imagegen outputs only.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "collections/20_Coastal_Seaside/assets/gpt/parts/frame_portrait_r2_v1.png",
+          "sha256": "c6469555149ae880fb723fb86f730d32273e89dc34754282000b021b5aa54f89",
+          "size": [
+            1245,
+            1263
+          ],
+          "expected_size": [
+            1254,
+            1254
+          ],
+          "exact_size_ok": false,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            48,
+            0,
+            21
+          ],
+          "opaque_bbox": [
+            86,
+            74,
+            1149,
+            1151
+          ],
+          "border_10px_fully_transparent_fraction": 0.99703,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            198,
+            189,
+            1038,
+            1034
+          ],
+          "green_bbox_ratio": 0.994083,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            66,
+            255,
+            19
+          ]
+        },
+        {
+          "attempt": 2,
+          "path": "collections/20_Coastal_Seaside/assets/gpt/parts/frame_portrait_r2_v2.png",
+          "sha256": "2225657dc1550f33b780c9a2e1efa101d652b35da925231b716e8672333d19b1",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1254,
+            1254
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            2
+          ],
+          "opaque_bbox": [
+            70,
+            59,
+            1180,
+            1176
+          ],
+          "border_10px_fully_transparent_fraction": 0.998545,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            190,
+            180,
+            1056,
+            1048
+          ],
+          "green_bbox_ratio": 0.997696,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            79,
+            249,
+            38
+          ]
+        }
+      ]
+    }
+  ]
+}

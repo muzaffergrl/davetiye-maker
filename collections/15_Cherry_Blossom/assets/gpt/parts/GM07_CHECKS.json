@@ -1,0 +1,201 @@
+{
+  "date": "2026-10-16",
+  "raw_images_modified": false,
+  "pieces": [
+    {
+      "piece": "R1",
+      "task": "gorevler/GM07-rotus-parcalari.md",
+      "technical_postprocessing": "Not applied; user explicitly requested imagegen outputs only.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "collections/15_Cherry_Blossom/assets/gpt/parts/frame_portrait_r2_v1.png",
+          "sha256": "1cfa6903426cafb2ebc659ca5eb2a11cf3c668123709dbe5a5d238f7aaa42441",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1254,
+            1254
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opaque_bbox": [
+            34,
+            58,
+            1226,
+            1149
+          ],
+          "border_10px_fully_transparent_fraction": 0.999402,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            227,
+            233,
+            1026,
+            1042
+          ],
+          "green_bbox_ratio": 0.987639,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            79,
+            253,
+            76
+          ]
+        },
+        {
+          "attempt": 2,
+          "path": "collections/15_Cherry_Blossom/assets/gpt/parts/frame_portrait_r2_v2.png",
+          "sha256": "004d2531e6071752fb2c200d3f1eb71317f0ccb48b52b95ca0d03ace838229b6",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1254,
+            1254
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opaque_bbox": [
+            54,
+            66,
+            1214,
+            1146
+          ],
+          "border_10px_fully_transparent_fraction": 0.997628,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            245,
+            261,
+            1006,
+            1031
+          ],
+          "green_bbox_ratio": 0.988312,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            79,
+            255,
+            74
+          ]
+        },
+        {
+          "attempt": 3,
+          "path": "collections/15_Cherry_Blossom/assets/gpt/parts/frame_portrait_r2_v3.png",
+          "sha256": "584c39feb83c953c350788d54bcadaff0a9c568205dc202d018f4b1050e08b6a",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1254,
+            1254
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opaque_bbox": [
+            30,
+            32,
+            1233,
+            1122
+          ],
+          "border_10px_fully_transparent_fraction": 0.998345,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            232,
+            226,
+            1019,
+            1030
+          ],
+          "green_bbox_ratio": 0.978856,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            78,
+            249,
+            91
+          ]
+        },
+        {
+          "attempt": 4,
+          "path": "collections/15_Cherry_Blossom/assets/gpt/parts/frame_portrait_r2_v4.png",
+          "sha256": "fe3713992f2dda4bb0383c8398b06c0800b9729a49077daede3c33c7a5babcc0",
+          "size": [
+            1254,
+            1254
+          ],
+          "expected_size": [
+            1254,
+            1254
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "opaque_bbox": [
+            42,
+            56,
+            1232,
+            1163
+          ],
+          "border_10px_fully_transparent_fraction": 0.998485,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            212,
+            290,
+            1040,
+            1132
+          ],
+          "green_bbox_ratio": 0.983373,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            79,
+            255,
+            97
+          ]
+        }
+      ]
+    }
+  ]
+}
