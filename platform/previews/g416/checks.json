@@ -77,7 +77,7 @@
   "home @667×375 (stress record): names 36 px (≥ 36); the first screen scrolls (allowed for the §12 record; CTA \"RSVP\" bottom 486, nav top 314)",
   "home@667×375 (stress record): no overflow, 41 fields = content record, 25 design texts, title ok, images loaded, text on 2 cards on paper, 3 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 61×44, home \"Replay the envelope\" 207×46, rsvp \"Replay the envelope\" 172×46",
-  "envelope → /daisy-and-wyatt/home in 4494 ms, card transition flag set",
+  "envelope → /daisy-and-wyatt/home in 4603 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (12 steps)",
   "countdown target from the platform: 2027-08-28 16:00 America/Chicago = 2027-08-28 21:00 UTC",
@@ -99,7 +99,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-08-28T22:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-09-02T21:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (150 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (282 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 4 fields = content record, 8 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot user",
@@ -127,11 +127,11 @@
   "details@390 (stress record, thank-you mode): no overflow, 35 fields = content record, 5 design texts, title ok, images loaded, text on 1 card on paper, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 5 fields = content record, 9 design texts, title ok, images loaded, text on 1 card on paper, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 71 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 1191 KB",
+  "index first view (390×844, DPR 3, placeholders): 1213 KB",
   "home first view (390×844, DPR 3, placeholders): 890 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 1283 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 1304 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 1280 KB",
-  "recording: previews/g416/opening_390x844.mp4 (2652 KB, lead-in 0.53 s cut, first frame mean 223,195,154) — tap → opening → home → story → details"
+  "recording: previews/g416/opening_390x844.mp4 (2582 KB, lead-in 0.59 s cut, first frame mean 223,195,154) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -480,11 +480,11 @@
     "bad": [
      "span.cd-num \"348\" bottom 587",
      "span.cd-lbl \"Days\" bottom 601",
-     "span.cd-num \"09\" bottom 587",
+     "span.cd-num \"07\" bottom 587",
      "span.cd-lbl \"Hours\" bottom 601",
-     "span.cd-num \"43\" bottom 587",
+     "span.cd-num \"33\" bottom 587",
      "span.cd-lbl \"Minutes\" bottom 601",
-     "span.cd-num \"31\" bottom 587",
+     "span.cd-num \"01\" bottom 587",
      "span.cd-lbl \"Seconds\" bottom 601"
     ],
     "partly": [],
@@ -550,11 +550,11 @@
      "p.hero-city.in.done \"Franklin, Tennessee\" bottom 672",
      "span.cd-num \"316\" bottom 712",
      "span.cd-lbl \"Days\" bottom 726",
-     "span.cd-num \"09\" bottom 712",
+     "span.cd-num \"07\" bottom 712",
      "span.cd-lbl \"Hours\" bottom 726",
-     "span.cd-num \"43\" bottom 712",
+     "span.cd-num \"32\" bottom 712",
      "span.cd-lbl \"Minutes\" bottom 726",
-     "span.cd-num \"13\" bottom 712",
+     "span.cd-num \"42\" bottom 712",
      "span.cd-lbl \"Seconds\" bottom 726",
      "a.btn \"RSVP\" bottom 786"
     ],
@@ -582,11 +582,11 @@
      "p.hero-city.in.done \"Franklin, Tennessee\" bottom 660",
      "span.cd-num \"316\" bottom 695",
      "span.cd-lbl \"Days\" bottom 710",
-     "span.cd-num \"09\" bottom 695",
-     "span.cd-lbl \"Hours\" bottom 710",
-     "span.cd-num \"43\" bottom 695",
-     "span.cd-lbl \"Minutes\" bottom 710",
      "span.cd-num \"07\" bottom 695",
+     "span.cd-lbl \"Hours\" bottom 710",
+     "span.cd-num \"32\" bottom 695",
+     "span.cd-lbl \"Minutes\" bottom 710",
+     "span.cd-num \"36\" bottom 695",
      "span.cd-lbl \"Seconds\" bottom 710",
      "a.btn \"RSVP\" bottom 766"
     ],
@@ -612,11 +612,11 @@
     "bad": [
      "span.cd-num \"316\" bottom 424",
      "span.cd-lbl \"Days\" bottom 441",
-     "span.cd-num \"09\" bottom 424",
+     "span.cd-num \"07\" bottom 424",
      "span.cd-lbl \"Hours\" bottom 441",
-     "span.cd-num \"43\" bottom 424",
+     "span.cd-num \"32\" bottom 424",
      "span.cd-lbl \"Minutes\" bottom 441",
-     "span.cd-num \"01\" bottom 424",
+     "span.cd-num \"30\" bottom 424",
      "span.cd-lbl \"Seconds\" bottom 441"
     ],
     "partly": [],
@@ -641,11 +641,11 @@
     "bad": [
      "span.cd-num \"316\" bottom 411",
      "span.cd-lbl \"Days\" bottom 427",
-     "span.cd-num \"09\" bottom 411",
+     "span.cd-num \"07\" bottom 411",
      "span.cd-lbl \"Hours\" bottom 427",
-     "span.cd-num \"42\" bottom 411",
+     "span.cd-num \"32\" bottom 411",
      "span.cd-lbl \"Minutes\" bottom 427",
-     "span.cd-num \"55\" bottom 411",
+     "span.cd-num \"24\" bottom 411",
      "span.cd-lbl \"Seconds\" bottom 427",
      "a.btn \"RSVP\" bottom 486"
     ],
@@ -653,7 +653,7 @@
     "names": 36
    }
   ],
-  "envelope_to_home_ms": 4494,
+  "envelope_to_home_ms": 4603,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -730,7 +730,7 @@
    "copy_keys_at_max": 71,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 1191,
+  "first_view_index_kb_placeholders": 1213,
   "first_view_index_files": [
    [
     "/themes/sunflower-rustic-barn/img/env_closed-880.webp",
@@ -753,16 +753,16 @@
     97106
    ],
    [
+    "/themes/sunflower-rustic-barn/img/closure-880.webp",
+    95498
+   ],
+   [
     "/themes/sunflower-rustic-barn/img/barnwood-800.webp",
     88536
    ],
    [
     "/themes/sunflower-rustic-barn/img/env_pocket-880.webp",
     78072
-   ],
-   [
-    "/themes/sunflower-rustic-barn/img/closure-880.webp",
-    73106
    ]
   ],
   "first_view_home_kb_placeholders": 890,
@@ -793,14 +793,14 @@
    ],
    [
     "/themes/sunflower-rustic-barn/site.css",
-    45671
+    45680
    ],
    [
     "/themes/sunflower-rustic-barn/img/frame_landscape-960.webp",
     43654
    ]
   ],
-  "first_view_index_kb_photos": 1283,
+  "first_view_index_kb_photos": 1304,
   "first_view_index_files_photos": [
    [
     "/themes/sunflower-rustic-barn/img/env_closed-880.webp",
@@ -823,22 +823,22 @@
     97106
    ],
    [
-    "/media/3402f312-5d43-417d-8d78-bcaf376f0664/0118c170b2dd738125c36ebff9ec2dbe-640w.jpg",
+    "/themes/sunflower-rustic-barn/img/closure-880.webp",
+    95498
+   ],
+   [
+    "/media/14203fc2-224f-472c-9991-bf57e8886423/a7d47a7f7aa788553c4b987d88a2b4c2-640w.jpg",
     94561
    ],
    [
     "/themes/sunflower-rustic-barn/img/barnwood-800.webp",
     88536
-   ],
-   [
-    "/themes/sunflower-rustic-barn/img/env_pocket-880.webp",
-    78072
    ]
   ],
   "first_view_home_kb_photos": 1280,
   "first_view_home_files_photos": [
    [
-    "/media/3402f312-5d43-417d-8d78-bcaf376f0664/26372939e09401ed1272f13b240b62d4-1280w.jpg",
+    "/media/14203fc2-224f-472c-9991-bf57e8886423/e1c34ef01270676ee63c4aee5a2ecfac-1280w.jpg",
     210607
    ],
    [
@@ -846,7 +846,7 @@
     188980
    ],
    [
-    "/media/3402f312-5d43-417d-8d78-bcaf376f0664/bf1e2f992a221a68151df8d9fe8f1232-640w.jpg",
+    "/media/14203fc2-224f-472c-9991-bf57e8886423/5352bead3311b5b48e30032abef4e120-640w.jpg",
     98848
    ],
    [
@@ -862,7 +862,7 @@
     97106
    ],
    [
-    "/media/3402f312-5d43-417d-8d78-bcaf376f0664/0118c170b2dd738125c36ebff9ec2dbe-640w.jpg",
+    "/media/14203fc2-224f-472c-9991-bf57e8886423/a7d47a7f7aa788553c4b987d88a2b4c2-640w.jpg",
     94561
    ],
    [
@@ -870,15 +870,15 @@
     62674
    ]
   ],
-  "video_kb": 2652,
+  "video_kb": 2582,
   "video_first_frame": {
-   "lead_in_s": 0.53,
+   "lead_in_s": 0.59,
    "mean_rgb": [
     223,
     195,
     154
    ],
-   "stdev": 61
+   "stdev": 62
   },
   "compare": {
    "source": "w1",
