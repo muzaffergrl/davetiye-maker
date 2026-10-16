@@ -2,8 +2,8 @@
 id: GM07
 baslik: Tasarım 15–20 rötuş parçaları — tema ajanlarının önerdiği 6 GPT parçası (yuvarlak çerçeveler, fiyonk, geri sayım kutusu, hap dalı, yatay çerçeve)
 rol: gpt-gorsel
-durum: hazir
-alan: gpt-gorsel-R
+durum: alindi
+alan: gpt-gorsel-GM07
 oncelik: 3
 bagimli: []
 yazar: [collections/15_Cherry_Blossom/assets/gpt/parts/, collections/16_Sunflower_Rustic/assets/gpt/parts/, collections/17_Emerald_Gold_Estate/assets/gpt/parts/, collections/19_Midnight_Garden/assets/gpt/parts/, collections/20_Coastal_Seaside/assets/gpt/parts/]
@@ -69,3 +69,4 @@ Kontrol: pencere oranı 2,1–2,3; düz yeşil; çerçeve süsleri pencereye gir
 
 ## Günlük
 - 2026-10-15 açıldı (entegratör; G415–G420 önerileri)
+- 2026-10-16 alindi: gpt-gorsel-GM07 (kullanıcının doğrudan görevlendirmesi)
