@@ -92,9 +92,10 @@ iki kez birleştirildi, çakışma yok). Yayın yok, push yok.
 - `npm test` **1221/1221** (0 atlanan); yeni `tests/g121.test.ts` 7 test. `npm run typecheck` temiz; `npm run build` + trace-check yeşil.
 - Tarayıcı (yerel `next start`, Chromium): yeni `tests/g121-browser.ts` **82/82** (390/1280/320, axe serious/critical 0, dokunma
   hedefi ≥ 44 px panel / ≥ 36 px admin, JS'siz süzgeç); `g060-browser` 153/153, `panel-browser` 80/80, `g100-browser` 52/52,
-  `g087-browser` 65/65, `g068-browser` 192/192, `g069-browser` 403/403, `g076-browser` 51/51, `final-smoke` 45/45; g075 ve
-  marketing-browser sonuçları Günlük'te. Güncellenen eski testler: g060 (More photos yok, QR katlı, Home'da Live çubukta değil),
-  panel-browser (aynı Live kuralı). Öteki görevlerin `previews/` klasörlerine yazılmadı (çıktılar geçici klasöre).
+  `g087-browser` 65/65, `g068-browser` 192/192, `g069-browser` 403/403, `g075-browser` 421/421, `g076-browser` 51/51,
+  `final-smoke` 45/45, `marketing-browser` 843/843 (perf bütçesi dahil). Güncellenen eski testler: g060 (More photos yok, QR katlı,
+  Home'da Live çubukta değil), panel-browser (aynı Live kuralı), g075 (art-deco'nun büyük harfli başlıkları için metin denetimi
+  büyük/küçük harften bağımsız — G406'dan kalma, G121 değişikliğiyle ilgisiz; ilk koşu 419/421 bu yüzdendi). Öteki görevlerin `previews/` klasörlerine yazılmadı (çıktılar geçici klasöre).
 - Ekranlar `platform/previews/g121/` (bakıldı): kurulum 2–3, Home + Settings, şerit + Saved, Review + önizleme, Book sekmesi, Share,
   Guests boş, /start, admin site + sipariş araması, /designs süzgeci, ana sayfa tasarımlar.
 - Denenmedi: Vercel/canlı, gerçek telefon, ekran okuyucu.
