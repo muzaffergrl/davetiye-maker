@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-16",
+  "raw_images_modified": false,
+  "pieces": [
+    {
+      "piece": "R6",
+      "task": "gorevler/GM07-rotus-parcalari.md",
+      "technical_postprocessing": "Not applied; user explicitly requested imagegen outputs only.",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "collections/19_Midnight_Garden/assets/gpt/parts/frame_landscape_r2_v1.png",
+          "sha256": "b7e3ae23b036c0b87814cf3be2074db2731f5e6a9b16a0a0f34c72b51bcab7bc",
+          "size": [
+            1860,
+            845
+          ],
+          "expected_size": [
+            1536,
+            1024
+          ],
+          "exact_size_ok": false,
+          "mode": "RGBA",
+          "center_rgba": [
+            1,
+            197,
+            3,
+            160
+          ],
+          "opaque_bbox": [
+            15,
+            2,
+            1845,
+            753
+          ],
+          "border_10px_fully_transparent_fraction": 0.98976,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            242,
+            220,
+            1618,
+            567
+          ],
+          "green_bbox_ratio": 3.965418,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            79,
+            255,
+            22
+          ]
+        },
+        {
+          "attempt": 2,
+          "path": "collections/19_Midnight_Garden/assets/gpt/parts/frame_landscape_r2_v2.png",
+          "sha256": "e689d8d9cccb2441812fb171f71bf29d0e6a770e05fbe2394b43ef529672d779",
+          "size": [
+            1536,
+            1024
+          ],
+          "expected_size": [
+            1536,
+            1024
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            7,
+            240,
+            3,
+            253
+          ],
+          "opaque_bbox": [
+            26,
+            95,
+            1510,
+            897
+          ],
+          "border_10px_fully_transparent_fraction": 0.997305,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            207,
+            317,
+            1330,
+            693
+          ],
+          "green_bbox_ratio": 2.986702,
+          "green_rgb_min": [
+            2,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            79,
+            252,
+            22
+          ]
+        },
+        {
+          "attempt": 3,
+          "path": "collections/19_Midnight_Garden/assets/gpt/parts/frame_landscape_r2_v3.png",
+          "sha256": "52a4de5b008b1bb5d88f1e2cf7bed4f761e98d63a6e23b4d5323ad599e8687c0",
+          "size": [
+            1536,
+            1024
+          ],
+          "expected_size": [
+            1536,
+            1024
+          ],
+          "exact_size_ok": true,
+          "mode": "RGBA",
+          "center_rgba": [
+            1,
+            79,
+            2,
+            3
+          ],
+          "opaque_bbox": [
+            35,
+            62,
+            1502,
+            903
+          ],
+          "border_10px_fully_transparent_fraction": 0.991074,
+          "selected_visual_candidate": false,
+          "exact_green_opaque_pixel_count": 0,
+          "green_bbox": [
+            234,
+            300,
+            1303,
+            697
+          ],
+          "green_bbox_ratio": 2.692695,
+          "green_rgb_min": [
+            0,
+            181,
+            0
+          ],
+          "green_rgb_max": [
+            45,
+            255,
+            23
+          ]
+        }
+      ]
+    }
+  ]
+}

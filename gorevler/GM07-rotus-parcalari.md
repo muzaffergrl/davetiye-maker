@@ -2,7 +2,7 @@
 id: GM07
 baslik: Tasarım 15–20 rötuş parçaları — tema ajanlarının önerdiği 6 GPT parçası (yuvarlak çerçeveler, fiyonk, geri sayım kutusu, hap dalı, yatay çerçeve)
 rol: gpt-gorsel
-durum: alindi
+durum: blokaj
 alan: gpt-gorsel-GM07
 oncelik: 3
 bagimli: []
@@ -65,8 +65,38 @@ The same ornate baroque gilded frame as the reference frame_landscape.png, but w
 Kontrol: pencere oranı 2,1–2,3; düz yeşil; çerçeve süsleri pencereye girmiyor.
 
 ## Sonuç
-(GPT doldurur)
+
+**Tamamlanamadı — durum: blokaj.** 2026-10-16 tarihinde R1–R6 tek sohbette sırayla imagegen ile üretildi; toplam **16 deneme** yapıldı. Kullanıcı, teknik son işlem sorusuna **“Hayır, yalnız imagegen çıktıları kullan”** yanıtını verdi. Bu nedenle alfa/pencere düzeltmesi, yeniden boyutlandırma, kırpma, öteleme veya kodla çizim uygulanmadı. Mevcut görseller değişmedi; bütün kaydedilen PNG'ler ham imagegen çıktılarıyla bayt bayt aynıdır.
+
+| Parça | Deneme sayısı | Seçim | Kontrol sonucu / kalan sorun |
+|---|---:|---|---|
+| R1 — Cherry Blossom yuvarlak çerçeve | 4 | Seçilmedi; sade `_r2` yok | Bütün merkezlerde alfa deliği var; yeşil düz/opak değil. Ölçülen yeşil sınır oranları 0,9789–0,9883; ±%1 tam daire koşulu da sağlanmadı. Bazı çiçekler pencereye taşıyor. |
+| R2 — Coastal lombar | 2 | Seçilmedi; sade `_r2` yok | İkinci denemenin pencere sınır oranı 0,9977; perçinler düzenli. Ancak merkez alfa=2 ve yeşil düz/opak değil. |
+| R3 — Sunflower kapanış | 4 | Seçilmedi; sade `_r2` yok | Bütün denemeler 1024×1536 RGBA, zarf çizilmemiş, buğday fiyonkun arkasında. Piksel hizası tutmadı. En yakın üçüncü denemede x=100'de bant y=1012–1153; mevcut closure.png y=969–1108: yaklaşık +43 px aşağıda. x=900'de de +43 px. |
+| R4 — Emerald geri sayım kutusu | 2 | **2. deneme görsel olarak seçildi:** `countdown_box_r2.png` | Şeffaf iç, ince çift altın çerçeve ve köşe süsleri uygun; dış oran 0,7960 (yaklaşık 4:5), merkez iç bölgede alfa=0. **Ham tuval 1254×1254; istenen 1024×1024 sağlanmadı.** |
+| R5 — Emerald hap dalı | 1 | **1. deneme görsel olarak seçildi:** `pill_sprig_r2.png` | Tek yatay dal, sap solda ve uç sağda; şeffaf zemin. **Ham tuval 1254×1254; istenen 1024×1024 sağlanmadı.** |
+| R6 — Midnight yatay çerçeve | 3 | Seçilmedi; sade `_r2` yok | Son iki deneme 1536×1024 RGBA. Pencere oranları sırasıyla 3,9654 / 2,9867 / 2,6927; hiçbiri 2,1–2,3 aralığında değil. Yeşilde doku/ton ve alfa düzensizliği de var. |
+
+### Kaydedilenler
+
+- Seçilen görsel adayları: `collections/17_Emerald_Gold_Estate/assets/gpt/parts/countdown_box_r2.png` ve `collections/17_Emerald_Gold_Estate/assets/gpt/parts/pill_sprig_r2.png`. Yukarıdaki ölçü uyumsuzluğu nedeniyle **tüm teslim koşullarını geçmiş final değildirler**.
+- R1: `collections/15_Cherry_Blossom/assets/gpt/parts/frame_portrait_r2_v1.png` … `_v4.png`.
+- R2: `collections/20_Coastal_Seaside/assets/gpt/parts/frame_portrait_r2_v1.png` … `_v2.png`.
+- R3: `collections/16_Sunflower_Rustic/assets/gpt/parts/closure_r2_v1.png` … `_v4.png`.
+- R4/R5 hamları: `collections/17_Emerald_Gold_Estate/assets/gpt/parts/countdown_box_r2_v1.png`, `_v2.png` ve `pill_sprig_r2_v1.png`.
+- R6: `collections/19_Midnight_Garden/assets/gpt/parts/frame_landscape_r2_v1.png` … `_v3.png`.
+- İlgili beş koleksiyonun izinli `assets/gpt/parts/` klasörlerinde `GM07_PROMPTS.md` (ana prompt ve referans/deneme kaydı) ile `GM07_CHECKS.json` (gerçek ölçüler, alfa/yeşil/pencere/hiza ölçümleri ve SHA-256) bulunur. İzinli yazma alanı dışında kalan ana `GPT_PROMPTS.md` dosyaları değiştirilmedi.
+
+### Kontrol ve emin olunmayanlar
+
+- W1 comp ve mevcut parça her üretim çağrısında referans olarak verildi. **İstisna:** R4 için `countdown_box.png`, R5 için `pill_sprig.png` repoda bulunmuyor; W1 home'a ek olarak R4'te `info_card.png`, R5'te `accent_3.png` kullanıldı. Bu yüzden aynı adlı eski parçayla doğrudan eşleştirme yapılamadı.
+- Kontroller bu görevin yeni dosyalarına uygulandı: PNG/RGBA ve gerçek alfa, istenen tam ölçü, pencere renk/alfa örnekleri ve sınır oranları, R3'ün mevcut kapanışla üst üste karşılaştırması. Önizleme için alfa ile birleştirme yalnız `/tmp` altında yapıldı; teslim PNG'leri değiştirilmedi.
+- Ham önizlemelerdeki altın hâle, saydam piksellerin RGB'sinde de bulunuyor; gerçek alfa ile zemin üzerine birleştirmede bu geniş hâle görünmüyor. Önizlemedeki RGB görünümü tek başına hâle hatası sayılmadı.
+- Yazı/harf/rakam/monogram ve dış gölge görsel olarak denetlendi; OCR kullanılmadı. R4/R5'te belirgin dış hâle görülmedi; çok düşük alfa kenar pikselleri ham hâliyle korundu.
+- Sıfırdan website/tema montajı, animasyon veya canlı site testi yapılmadı. Bu iş yalnız GM07 parçalarıdır.
+- Sonuç: iki **görsel aday** kaydedildi; dört parçada seçim yok. Altı parçanın bütün teslim koşulları sağlanmadığından görev `inceleme`/`bitti` olarak işaretlenmedi.
 
 ## Günlük
 - 2026-10-15 açıldı (entegratör; G415–G420 önerileri)
 - 2026-10-16 alindi: gpt-gorsel-GM07 (kullanıcının doğrudan görevlendirmesi)
+- 2026-10-16 blokaj: 16 ham imagegen denemesi kaydedildi; R4/R5 görsel adayları seçildi ancak ölçüleri farklı; R1/R2/R3/R6 kontrolleri geçmedi. Kullanıcı yalnız imagegen çıktısı istedi; teknik son işlem uygulanmadı.
