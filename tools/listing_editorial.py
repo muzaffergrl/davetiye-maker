@@ -1,4 +1,4 @@
-"""Editorial Etsy listing images (v4): 8 × 2000 px, layout + typography only (K21). Designs 01–20 (G124).
+"""Editorial Etsy listing images (v4): 8 × 2000 px, layout + typography only (K21). Designs 01–21 (G124; 21: G137).
 
   python3 tools/listing_editorial.py --theme olive-ivory [--only 01_cover 03_pages]
   python3 tools/listing_editorial.py --theme 06-11 13-15 18 19 --capture --video     (numbers, ranges, ids or 'all')
@@ -115,8 +115,10 @@ def root_css(t: lk.Theme, ground: str = "theme") -> str:
     designs their dark `mist_top` with the paper texture); ground="light": a light photograph behind the text (image 7's
     linen), where a dark design takes its dark `primary` as ink."""
     p = lk.palette(t)
-    tile = t.collection / "assets" / "gpt" / "parts" / "bg_tile.png"
-    paper_img = f"url('{tile.resolve().as_uri()}')" if tile.exists() else "none"
+    gpt = t.collection / "assets" / "gpt"
+    # the paper texture: PAKET 5's bg_tile, or (G137, design 21 has no parts/) its GPT paper texture
+    tile = next((p for p in (gpt / "parts" / "bg_tile.png", gpt / "textures" / "paper-background.png") if p.exists()), None)
+    paper_img = f"url('{tile.resolve().as_uri()}')" if tile else "none"
     ink, deep, gold, paper, shade = p["ink"], p["deep"], p["gold"], p["ivory"], p["ink"]
     if lk.is_dark(t):
         if ground == "light":
@@ -324,7 +326,7 @@ def select(specs: list[str]) -> list[lk.Theme]:
                         raise SystemExit(f"no design {n:02d}")
                     want.append(by_no[f"{n:02d}"])
             else:
-                raise SystemExit(f"unknown theme '{part}' (ids: {', '.join(lk.THEMES)}; or 01–20, 06-11, all)")
+                raise SystemExit(f"unknown theme '{part}' (ids: {', '.join(lk.THEMES)}; or 01–21, 06-11, all)")
     seen: dict[str, lk.Theme] = {}
     for t in sorted(want, key=lambda t: t.no):
         seen.setdefault(t.id, t)

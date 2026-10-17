@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""START HERE guides for designs 01–20 (G122): Markdown + PDF + the real start QR, from ONE source text.
+"""START HERE guides for designs 01–21 (G122; 21: G137): Markdown + PDF + the real start QR, from ONE source text.
 
   python3 tools/build_customer_guides.py                   # all 20 designs: build, then check
   python3 tools/build_customer_guides.py --designs 06-20   # only these ("06-20", "07,12", "01,06-08", "all")
@@ -92,6 +92,7 @@ FONT_SUBSETS: dict[str, set[str]] = {
     "Kaushan Script": {"latin", "latin-ext"},
     "Libre Baskerville": {"latin", "latin-ext"},
     "Lora": {"latin", "latin-ext", "cyrillic"},
+    "Manrope": {"latin", "latin-ext", "cyrillic"},  # G137 (design 21), fonts.googleapis.com/css2 on 2026-10-17
     "Marcellus": {"latin", "latin-ext"},
     "Merriweather": {"latin", "latin-ext", "cyrillic"},
     "Mrs Saint Delafield": {"latin", "latin-ext"},
@@ -143,10 +144,11 @@ def design_block(theme: str, copy: str | None = None) -> str:
 
 
 def design_fonts(theme: str, copy: str | None = None) -> list[str]:
-    m = re.search(r"\bfonts:\s*\[([^\]]*)\]", design_block(theme, copy))
+    # G137: quoted keys and strings ("fonts": ["…"], design 21) as well as fonts: ['…']
+    m = re.search(r"(?:\bfonts|\"fonts\"):\s*\[([^\]]*)\]", design_block(theme, copy))
     if not m:
         raise SystemExit(f"{DESIGN_COPY.relative_to(REPO)}: no fonts for '{theme}'")
-    return re.findall(r"'([^']+)'", m.group(1))
+    return re.findall(r"['\"]([^'\"]+)['\"]", m.group(1))
 
 
 def language_class(fonts: list[str]) -> str:

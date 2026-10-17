@@ -81,9 +81,13 @@ const SLUG = demoSlug(demo);
 const dataDir = mkdtempSync(path.join(os.tmpdir(), 'listing-capture-data-'));
 const contentFile = path.join(dataDir, 'demo-content.json');
 writeFileSync(contentFile, JSON.stringify(demo));
+// G137: a demo record that carries the theme's own sample photos (/themes/<id>/img/…, design 21) keeps them, as its
+// live demo does; the 03 fallback photos then serve only the upload steps of the editor
+const ownPhotos = String((demo.media as Record<string, unknown> | undefined)?.hero_portrait ?? '').startsWith(`/themes/${THEME}/`);
+const seedPhotos = env.photosDir && !(ownPhotos && env.photosSource.includes('fallback')) ? ['--photos', env.photosDir] : ['--no-photos'];
 const seed = spawnSync(
   process.execPath,
-  [path.join(PLATFORM, 'scripts/seed.ts'), '--theme', THEME, '--slug', SLUG, '--content', contentFile, ...(env.photosDir ? ['--photos', env.photosDir] : ['--no-photos'])],
+  [path.join(PLATFORM, 'scripts/seed.ts'), '--theme', THEME, '--slug', SLUG, '--content', contentFile, ...seedPhotos],
   { cwd: PLATFORM, env: { ...process.env, PLATFORM_DATA_DIR: dataDir, DATA_ADAPTER: 'local', PLATFORM_PUBLIC_URL: PUBLIC_URL }, encoding: 'utf8' },
 );
 if (seed.status !== 0) {
@@ -375,9 +379,12 @@ try {
       await page.waitForTimeout(2600);
       await shot(page, 'g07_details_schedule', `Guest: Details, order of the day${far ? '' : ' + add to calendar'}`, { keep: [cal, '[data-repeat-item="schedule.0"]'] });
     }
-    if (await page.$('[data-slot="venue"]')) {
-      await centerOn(page, '[data-slot="venue"]', 'center', 90, 2400);
-      await shot(page, 'g12_details_venue', 'Guest: Details, the venue (photo, name, address)', { keep: ['[data-slot="venue"]'] });
+    // the venue photo's slot; a theme without data-slot wrappers (G137: 21) by its data-photo image
+    const venue = (await page.$('[data-slot="venue"]')) ? '[data-slot="venue"]'
+      : (await page.$('img[data-photo="venue"]')) ? 'img[data-photo="venue"]' : null;
+    if (venue) {
+      await centerOn(page, venue, 'center', 90, 2400);
+      await shot(page, 'g12_details_venue', 'Guest: Details, the venue (photo, name, address)', { keep: [venue] });
     } else check('guest: venue block on details', false);
     const faq = 'details[data-repeat-item^="faq."]';
     if (await page.$(faq)) {
