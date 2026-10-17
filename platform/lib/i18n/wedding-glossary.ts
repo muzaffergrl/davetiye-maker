@@ -191,6 +191,12 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   // ---- thanks
   ['Thank you', 'Teşekkürler', 'Gracias', 'Danke', 'Merci'],
   ['Thank you for celebrating with us', 'Bizimle kutladığınız için teşekkürler', 'Gracias por celebrar con nosotros', 'Danke, dass Sie mit uns gefeiert haben', 'Merci d’avoir célébré avec nous'],
+  // G166 Maison Pâtisserie demo texts
+  ['Cocktail attire in soft pastels', 'Pastel tonlarda kokteyl kıyafeti', 'Vestimenta de cóctel en tonos pastel', 'Cocktailkleidung in sanften Pastelltönen', 'Tenue de cocktail aux tons pastel'],
+  ['Ceremony in the orangery', 'Limonlukta tören', 'Ceremonia en el invernadero', 'Trauung in der Orangerie', "Cérémonie dans l'orangerie"],
+  ['Champagne & macarons on the lawn', 'Çimenlikte şampanya ve makaron', 'Champán y macarons en el césped', 'Champagner & Macarons auf dem Rasen', 'Champagne et macarons sur la pelouse'],
+  ['Will there be dessert for guests with allergies?', 'Alerjisi olan misafirler için tatlı olacak mı?', '¿Habrá postre para los invitados con alergias?', 'Gibt es Dessert für Gäste mit Allergien?', 'Y aura-t-il un dessert pour les invités allergiques ?'],
+  ['Yes. Tell us about your allergies in your reply and our pâtissier will prepare something just for you.', 'Evet. Alerjilerinizi yanıtınızda bize bildirin, pastacımız size özel bir şey hazırlasın.', 'Sí. Cuéntanos tus alergias en tu respuesta y nuestro pastelero preparará algo solo para ti.', 'Ja. Nennen Sie uns Ihre Allergien in Ihrer Antwort, und unser Pâtissier bereitet etwas nur für Sie zu.', "Oui. Indiquez-nous vos allergies dans votre réponse et notre pâtissier préparera quelque chose rien que pour vous."],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

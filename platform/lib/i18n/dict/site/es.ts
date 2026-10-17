@@ -227,6 +227,11 @@ const dict: Dict = {
   'View our photographs': 'Ver nuestras fotografías',
   'at {time}': 'a las {time}',
   'invite you to celebrate with them': 'les invitan a celebrar con ellos',
+  // G166 Maison Pâtisserie
+  'A sweet invitation': 'Una dulce invitación',
+  'Our sweetest moments': 'Nuestros momentos más dulces',
+  'Tap to open the box': 'Toca para abrir la caja',
+  'Untie the bow again': 'Deshacer el lazo de nuevo',
 };
 
 export default dict;

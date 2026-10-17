@@ -833,6 +833,17 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Davetiye siteni oluştur',
   'Create your website or continue editing': 'Davetiye siteni oluştur ya da düzenlemeye devam et',
+  // G166 Maison Pâtisserie
+  'A pistachio pâtisserie box tied with a rose satin bow, photos on display-case shelves and a menu set out like a pastry counter': 'Gül rengi saten fiyonkla bağlı fıstık yeşili bir pasta kutusu, vitrin raflarında fotoğraflar ve pastane tezgâhı gibi dizilmiş bir menü',
+  'A pistachio pâtisserie box with a satin bow opens into your wedding website: photos on display-case shelves. Personalize it in your online editor.': 'Saten fiyonklu fıstık yeşili bir pasta kutusu düğün sitenize açılır: fotoğraflar vitrin raflarında. Çevrim içi düzenleyicinizde kişiselleştirin.',
+  'A reply card with macaron-coloured choices; a light shower of sugar pearls when a reply is sent.': 'Makaron renkli seçenekleri olan bir yanıt kartı; yanıt gönderilince hafif bir şeker inci yağmuru.',
+  'Pistachio': 'Fıstık yeşili',
+  'Pistachio, rose and cream with a little gold, like the window of a Paris pâtisserie. Your invitation waits inside a ribbon-tied box, your photos stand on glass shelves.': 'Biraz altınla fıstık yeşili, gül ve krem; bir Paris pastanesinin vitrini gibi. Davetiyeniz kurdeleli bir kutuda bekler, fotoğraflarınız cam raflarda durur.',
+  'The card from the box with your portrait, names and date, then the invitation, a countdown and calendar links.': 'Kutudan çıkan kart: portreniz, isimleriniz ve tarih; ardından davet, geri sayım ve takvim bağlantıları.',
+  'The order of the day on card paper beside the venue photo, an optional map, dress code, travel and a menu set out like a display case.': 'Kart kâğıdında günün akışı ve yanında mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ve vitrin gibi dizilmiş bir menü.',
+  'Three photos on a display-case shelf: guests swipe or drag them along, and the photo in the middle steps forward.': 'Vitrin rafında üç fotoğraf: misafirler kaydırır ya da sürükler, ortadaki fotoğraf öne çıkar.',
+  'Your guests tap the box. The satin bow unties, the ribbon slides away and the lid lifts off. The tissue paper parts and a separate card with your photo comes forward to become your home page.': 'Misafirleriniz kutuya dokunur. Saten fiyonk çözülür, kurdele kayar ve kapak kalkar. İpek kâğıt aralanır ve fotoğraflı ayrı bir kart öne gelip ana sayfanız olur.',
+  'box': 'kutu',
 };
 
 export default dict;

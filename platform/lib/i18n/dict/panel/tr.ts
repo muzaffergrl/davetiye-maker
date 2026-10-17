@@ -1285,6 +1285,16 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Sipariş numaranız ve e-postanız sonraki sayfada doldurulmuş olur.',
   'since {date}': '{date} tarihinden beri',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} bu cihazda artık açılmıyor, bu yüzden kaldırdık. Yeniden açmak için aşağıya sipariş numaranızı ve e-postanızı girin.|{addresses} bu cihazda artık açılmıyor, bu yüzden kaldırdık. Yeniden açmak için aşağıya sipariş numaranızı ve e-postanızı girin.',
+  // G166 Maison Pâtisserie
+  'Above your names on the box': 'Kutuda isimlerinizin üstünde',
+  'Box': 'Kutu',
+  'Button after the box opens': 'Kutu açıldıktan sonraki düğme',
+  'Open the box again (RSVP page)': 'Kutuyu yeniden aç (Katılım sayfası)',
+  'Open the box again (box page)': 'Kutuyu yeniden aç (kutu sayfası)',
+  'Open the box again (home page)': 'Kutuyu yeniden aç (ana sayfa)',
+  'Under the box, on computers': 'Kutunun altında, bilgisayarlarda',
+  'Under the box, on phones': 'Kutunun altında, telefonlarda',
+  'box': 'kutu',
 };
 
 export default dict;

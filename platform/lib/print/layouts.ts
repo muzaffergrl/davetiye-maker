@@ -209,6 +209,20 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: '#11120F', images: [sealAt('top')] },
     },
   },
+  // 28 (G166): composed until its card parts arrive (GPT_PROMPTS.md PAKET 6) — front = the website's cream paper with the
+  // rose satin bow at the top; back = the same paper with the bow small at the top. Both images come from the theme
+  // build (interim crops of repository GPT pictures, see themes/maison-patisserie/build_images.py).
+  'maison-patisserie': {
+    collection: '28_Maison_Patisserie',
+    sources: { paper: 'platform/themes/maison-patisserie/img/bg_page-1024.webp', bow: 'platform/themes/maison-patisserie/img/bow-480.webp' },
+    fonts: gf('family=Italiana&family=Parisienne'),
+    script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
+    ink: '#3E3A32', accent: '#9B4F5A', front: [27, 13, 12, 13], back: [21, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:5%;left:50%;width:42%;transform:translateX(-50%)' }] },
+      back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

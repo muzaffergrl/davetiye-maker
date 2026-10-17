@@ -402,7 +402,35 @@ D = [
 EK_TEMALAR = [
     dict(no=21, klasor="21_Crimson_Rose_Atelier", ad="Crimson Rose Atelier"),
     dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
+    # Yeni tasarım dalgası 23–28 (docs/24): 6 eksen + hareket imzası; `dalga_ayirt` (kontrol) D'deki 20 tasarım ve dalganın
+    # diğer kayıtlarıyla karşılaştırır. ad ASCII (tema_slug → platform tema kimliği), görünen ad theme.json'da.
+    dict(no=28, klasor="28_Maison_Patisserie", ad="Maison Patisserie",
+         zarf="Fıstık yeşili pasta kutusu (üstten), gül saten fiyonk; fiyonk çözülür, kurdele kolları kayar, kapak kalkar, ipek kâğıt aralanır, kart öne gelir.",
+         foto="Pastane vitrini rafları: fotoğraflar cam rafta durur, kaydırılır (sürükle, yasla, ok tuşları); ortadaki öne çıkar.",
+         dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
+         font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
+         hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
 ]
+
+
+def dalga_ayirt():
+    """docs/24: dalga kayıtları (EK_TEMALAR'da `zarf` taşıyanlar) her tasarımdan 6 eksenin ≥ 4'ünde farklı, hareket imzası dolu."""
+    sorun = []
+    dalga = [t for t in EK_TEMALAR if "zarf" in t]
+    for a in dalga:
+        if not a.get("hareket"):
+            sorun.append(f"{a['no']:02d}: hareket imzası yok")
+        for b in D + [t for t in dalga if t["no"] != a["no"]]:
+            ayni = [e for e in EKSENLER if
+                    (e == "zarf" and a["zarf"][:25] == b["zarf"][:25]) or
+                    (e == "foto" and a["foto"][:25] == b["foto"][:25]) or
+                    (e == "dekor" and a["dekor"] == b["dekor"]) or
+                    (e == "teknik" and a["teknik"] == b["teknik"]) or
+                    (e == "font" and (set(a["font"]) & set(b["font"]))) or
+                    (e == "palet" and a["palet_adi"] == b["palet_adi"])]
+            if len(EKSENLER) - len(ayni) < 4:
+                sorun.append(f"{a['no']:02d}–{b['no']:02d}: yalnız {len(EKSENLER) - len(ayni)} eksende farklı ({', '.join(ayni)} aynı)")
+    return sorun
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
 # no → (intro, (başlık 1, başlık 2, başlık 3)). Intro bir cümle parçasıdır, sayfada tarihle biter ("… led us to" +
@@ -2351,7 +2379,9 @@ def main(a):
         print("\n".join(w) if w else f"website (WEB): {len(WEB)} tasarım tam (03 elle yazıldı)")
         h = story_kontrol()
         print("\n".join(h) if h else f"story (STORY): {len(STORY)} tasarım; content.demo.json kayıtlarıyla aynı")
-        sys.exit(1 if s or w or h else 0)
+        g = dalga_ayirt()
+        print("\n".join(g) if g else f"yeni dalga (docs/24): {sum('zarf' in t for t in EK_TEMALAR)} tasarım, her biri ≥4 eksende farklı + hareket imzası")
+        sys.exit(1 if s or w or h or g else 0)
     if a and a[0] == "paket5":
         return cmd_paket5(a[1:])
     if a and a[0] == "gorev5":

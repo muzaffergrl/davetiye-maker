@@ -114,6 +114,30 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'black tie by Lake Como: a black envelope with a gold wax seal, names over the lake at dusk and an asymmetric photo gallery.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  'maison-patisserie': {
+    id: 'maison-patisserie',
+    collection: '28_Maison_Patisserie',
+    demoCouple: 'Camille & Oliver',
+    style: msg('A pistachio pâtisserie box tied with a rose satin bow, photos on display-case shelves and a menu set out like a pastry counter'),
+    metaDescription: msg('A pistachio pâtisserie box with a satin bow opens into your wedding website: photos on display-case shelves. Personalize it in your online editor.'),
+    intro: msg('Pistachio, rose and cream with a little gold, like the window of a Paris pâtisserie. Your invitation waits inside a ribbon-tied box, your photos stand on glass shelves.'),
+    opening: msg('Your guests tap the box. The satin bow unties, the ribbon slides away and the lid lifts off. The tissue paper parts and a separate card with your photo comes forward to become your home page.'),
+    pages: {
+      home: msg('The card from the box with your portrait, names and date, then the invitation, a countdown and calendar links.'),
+      story: msg('Three photos on a display-case shelf: guests swipe or drag them along, and the photo in the middle steps forward.'),
+      details: msg('The order of the day on card paper beside the venue photo, an optional map, dress code, travel and a menu set out like a display case.'),
+      rsvp: msg('A reply card with macaron-coloured choices; a light shower of sugar pearls when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Pistachio'), hex: '#A9C49C' },
+      { name: msg('Rose'), hex: '#E8B4B8' },
+      { name: msg('Cream'), hex: '#FBF5EC' },
+      { name: msg('Gold'), hex: '#B8995A' },
+    ],
+    fonts: ['Italiana', 'Parisienne'],
+    llmsLine: 'a pistachio pâtisserie box tied with a rose satin bow; photos on display-case shelves and a menu like a pastry counter.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'blush-garden-rose': {
     id: 'blush-garden-rose',
     collection: '03_Blush_Garden_Rose',
@@ -793,6 +817,7 @@ export type StyleId = (typeof STYLE_FILTERS)[number]['id'];
 export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'crimson-rose-atelier': ['floral', 'classic'],
   'nocturne-lake-estate': ['classic', 'destination'],
+  'maison-patisserie': ['classic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],
