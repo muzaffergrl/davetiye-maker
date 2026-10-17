@@ -13,6 +13,7 @@ import { LocalAdapter } from '../lib/data/local/index.ts';
 import { parseAspect } from '../lib/panel/model.ts';
 import { photoCandidates } from '../lib/photo-variants.ts';
 import { loadTheme } from '../lib/theme/theme.ts';
+import { DEMO_CITY_PINS } from '../lib/claim/demo-map.ts';
 import { seedSite } from '../scripts/seed.ts';
 import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
 
@@ -100,6 +101,18 @@ test('seed: the seeded site renders srcset with the variants and keeps the templ
   const details = cheerio.load(await (await pageRoute(new Request(`${BASE}/seeded-srcset/details`), { params: Promise.resolve({ slug: 'seeded-srcset', page: 'details' }) })).text());
   const venue = details('img[data-photo="venue"]');
   assert.match(venue.attr('srcset') ?? '', /-640w\.jpg 640w, .+-1280w\.jpg 1280w, .+-1536w\.jpg 1536w$/);
+});
+
+test('seed: a seeded demo gets the demo city map pin, like /start/demo (Show map + directions on Details)', async () => {
+  await seedSite(adapter, opts('seeded-map'));
+  const site = (await adapter.getSiteBySlug('seeded-map'))!;
+  assert.deepEqual(site.publishedContent?.maps, { venue: DEMO_CITY_PINS[THEME] });
+  const details = cheerio.load(await (await pageRoute(new Request(`${BASE}/seeded-map/details`), { params: Promise.resolve({ slug: 'seeded-map', page: 'details' }) })).text());
+  const { lat, lng } = DEMO_CITY_PINS[THEME]!;
+  assert.ok(details(`a[href*="destination=${lat}%2C${lng}"]`).length, 'Google Maps directions link');
+  // A record that sets its own maps keeps them.
+  await seedSite(adapter, opts('seeded-own-map', { content: { ...demoContent(), maps: { venue: { lat: 1, lng: 2 } } } }));
+  assert.deepEqual((await adapter.getSiteBySlug('seeded-own-map'))!.publishedContent?.maps, { venue: { lat: 1, lng: 2 } });
 });
 
 test('seed: photoMax shrinks the sample first; photoMax 0 keeps the original file (no variants, no srcset)', async () => {
