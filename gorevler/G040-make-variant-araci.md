@@ -2,7 +2,7 @@
 id: G040
 baslik: tools/make_variant.py — varyant hattı
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 4
 bagimli: [G002, G003]
@@ -30,3 +30,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 iptal: K24: Canva varyant hattı yerine platform varyant altyapısı G153
