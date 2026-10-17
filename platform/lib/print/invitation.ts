@@ -152,7 +152,7 @@ function cardRect(g: ReturnType<typeof sheetGeometry>) {
 
 function sheetCss(l: PrintLayout, g: ReturnType<typeof sheetGeometry>, cardW: number): string {
   const caps = l.caps ?? l.serif;
-  const paper = l.paper.mode === 'tile' ? `url(paper.webp) repeat 0 0 / ${l.paper.tile ?? 2.5}in` : 'url(paper.webp) center / cover no-repeat';
+  const paper = !l.paper ? 'none' : l.paper.mode === 'tile' ? `url(paper.webp) repeat 0 0 / ${l.paper.tile ?? 2.5}in` : 'url(paper.webp) center / cover no-repeat';
   return `
 @page { size: ${g.pageW}in ${g.pageH}in; margin: 0 }
 * { box-sizing: border-box; margin: 0; padding: 0 }
@@ -187,10 +187,8 @@ html, body { width: ${g.pageW}in; background: #fff; -webkit-print-color-adjust: 
 .dress .host { font-size: .75em }
 .qr { display: block; width: 26em; height: 26em; padding: 1.2em; background: #fff; border-radius: .8em; flex: none }
 .qr svg { display: block; width: 100%; height: 100% }
-.branch { position: absolute; width: 62%; pointer-events: none }
-.branch.tl { top: -2%; left: -6% }
-.branch.br { bottom: -2%; right: -6%; transform: rotate(180deg) }
-.seal { position: absolute; left: 50%; width: 17%; transform: translateX(-50%) }
+.deco { position: absolute; pointer-events: none }${l.frontShadow ? `
+.front .text { text-shadow: ${l.frontShadow} }` : ''}
 .marks { position: absolute; inset: 0; width: 100%; height: 100% }
 `;
 }
@@ -201,22 +199,19 @@ export function invitationHtml(themeId: string, content: unknown, siteUrl: strin
   if (!l) throw new Error(`no print layout for theme ${themeId}`);
   const g = sheetGeometry({ size: o.size, bleed: o.bleed, marks: o.marks && o.bleed });
   const t = invitationText(content, siteUrl);
-  const composed = Boolean(l.composed);
-  // a composed sheet (21) uses the whole trim as its card
+  const composed = l.composed;
+  // a composed sheet (21, 22) uses the whole trim as its card
   const rect = composed ? { x: g.trimX, y: g.trimY, w: g.trimW, h: g.trimH } : cardRect(g);
   const pos = `left:${rect.x}in;top:${rect.y}in;width:${rect.w}in;height:${rect.h}in`;
   const side = (which: 'front' | 'back') => {
-    const inner =
-      which === 'front'
-        ? composed
-          ? `<img class="branch tl" src="branch.webp" alt=""><img class="branch br" src="branch.webp" alt=""><img class="seal" style="bottom:4%" src="seal.webp" alt="">`
-          : `<img class="part" src="card.webp" alt="">`
-        : composed
-          ? `<img class="seal" style="top:4%" src="seal.webp" alt="">`
-          : `<img class="part" src="back.webp" alt="">`;
+    const c = composed?.[which];
+    const paper = c ? `<div class="paper" style="background:${esc(c.bg)}"></div>` : '<div class="paper"></div>';
+    const inner = c
+      ? c.images.map((i) => `<img class="deco" src="${esc(i.src)}.webp" style="${esc(i.style)}" alt="">`).join('')
+      : `<img class="part" src="${which === 'front' ? 'card' : 'back'}.webp" alt="">`;
     const text = which === 'front' ? frontText(t, l, !o.back) : backText(t);
     return (
-      `<section class="sheet ${which}"><div class="paper"></div><div class="card" style="${pos}">${inner}` +
+      `<section class="sheet ${which}">${paper}<div class="card" style="${pos}">${inner}` +
       `<div class="text" style="${boxStyle(which === 'front' ? l.front : l.back)}"><div class="inner">${text}</div></div></div>${cropMarks(g)}</section>`
     );
   };

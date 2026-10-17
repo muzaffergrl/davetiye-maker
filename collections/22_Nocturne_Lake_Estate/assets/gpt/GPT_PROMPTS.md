@@ -133,3 +133,38 @@ Landscape 4:3: a long candlelit dinner table on the lake terrace at night, ivory
 ```
 Landscape 16:9: an elegant lakeside villa with a stone balustrade terrace and cypress trees, seen from the water at dusk, warm windows and candle lights, mountains behind. No people, no signs, no text. Photorealistic, same palette.
 ```
+
+---
+
+## G139 — Basılı davetiye parçaları (yeni; şu an göl manzarası + mühürle geçici düzen)
+
+> Görev `G139`. Panelden indirilen 5×7 in / A5 basılı davetiye bu tasarımın kendi kart parçalarını ister. Şu an
+> `hero.png` (ön yüz: göl manzarası, yazı gökyüzünde) ve temanın zarftan kestiği mühür (`env_seal`, arka yüz: gece siyahı
+> `#11120F`) ile geçici düzen kuruldu (`platform/lib/print/layouts.ts`, `composed`). İki parça gelince layouts.ts'te
+> `composed` yerine `card`/`back` kaynakları (kâğıt: W2.5 `parts/bg_page.png`, `paper: { mode: 'cover' }`) yazılır ve `node scripts/build-print-assets.ts --theme nocturne-lake-estate`
+> çalıştırılır. W2.2 `closure.png` gelirse geçici düzendeki mühür de ona geçer.
+
+### P1 — invitation_card (ön yüz)
+Kaydet: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/invitation_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+A flat printed wedding invitation card, front side, seen straight on, portrait 2:3, on a fully transparent background.
+Thick premium black textured cotton paper with a fine visible grain, the same nearly black charcoal paper as the
+Nocturne Lake Estate envelope (envelope.png), with a crisp straight edge and a soft natural contact shade on the card
+itself. A thin champagne-gold foil hairline frame inset from the edge. A slender olive twig in brushed champagne gold
+leaf (the same olive motif as the wax seal's relief) at the top centre and a smaller mirrored twig at the bottom
+centre. Soft light from the top-left. The whole centre (about 70% of the width, 60% of the height) is EMPTY black
+paper for light ivory text. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp details
+at 2048 × 3072 px.
+```
+Kontrol: siyah dokulu kâğıt (zarfla aynı); altın çerçeve ince; orta %70 × %60 boş; yazı yok; gerçek alfa.
+
+### P2 — info_card (arka yüz)
+Kaydet: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/info_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+The back side of the same black Nocturne Lake Estate wedding invitation card: portrait 2:3 on a fully transparent
+background, the same black textured cotton paper, crisp edge, soft contact shade and thin champagne-gold foil hairline
+frame. Only one small brushed champagne-gold olive twig centred at the top edge. Everything below the twig is EMPTY
+black paper for a schedule and a QR code. No text, letters, numbers, logos or watermarks. Print quality,
+2048 × 3072 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; yalnız üstte küçük dal; geri kalanı boş; yazı yok; gerçek alfa.
