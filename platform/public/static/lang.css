@@ -1,11 +1,12 @@
 /* G144: the language switcher of a couple's website in several languages (lib/theme/engine.ts writes the markup).
-   A small pill in the top-left corner (the theme's own corner buttons: Skip at the top right, the sound button at the
-   top left — the switcher goes under it). Theme font and ink through inherit/currentColor; --plang-* to override. */
+   A small pill in the top-right corner, the row the themes keep free for their corner buttons (the sound button sits at
+   the top left; the envelope page's "Skip" at the top right — there the switcher goes under it). Theme font and ink
+   through inherit/currentColor; --plang-* to override. */
 .pl-lang {
-  position: fixed; z-index: 56; top: calc(8px + env(safe-area-inset-top)); left: 8px;
+  position: fixed; z-index: 56; top: calc(8px + env(safe-area-inset-top)); right: 8px;
   font: inherit; font-size: 12px; line-height: 1; letter-spacing: .08em; color: var(--plang-ink, inherit);
 }
-body:has(.snd) .pl-lang { top: calc(58px + env(safe-area-inset-top)); }
+body:has(.skip) .pl-lang { top: calc(56px + env(safe-area-inset-top)); }
 .pl-lang details { position: relative; }
 .pl-lang summary {
   list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; min-width: 44px;
@@ -22,7 +23,7 @@ body:has(.snd) .pl-lang { top: calc(58px + env(safe-area-inset-top)); }
 .pl-lang-globe::before { content: ''; position: absolute; inset: -1px 3px; border: 1.3px solid currentColor; border-radius: 50%; }
 .pl-lang-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .pl-lang ul {
-  position: absolute; top: calc(100% + 6px); left: 0; margin: 0; padding: 6px; list-style: none; min-width: 150px;
+  position: absolute; top: calc(100% + 6px); right: 0; margin: 0; padding: 6px; list-style: none; min-width: 150px;
   background: var(--plang-bg-solid, #fffcf6); border: 1px solid var(--plang-line, rgba(0, 0, 0, .14)); border-radius: 12px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, .16);
 }

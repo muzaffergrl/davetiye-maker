@@ -4,7 +4,7 @@
 // read content/guides/<lang>/<slug>.md when it exists.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync, cpSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync, cpSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import nextConfig from '../next.config.ts';
 import { scanSource } from '../lib/i18n/scan.ts';
@@ -128,6 +128,8 @@ test('guides: a translation in content/guides/<lang>/<slug>.md is used; otherwis
     const en = loadGuides();
     const g = en[0];
     assert.ok(loadGuidesIn('es').every((x) => x.translated === existsSync(path.join(dir, 'guides', 'es', `${x.slug}.md`))));
+    // start from no German translations (the real ones would make every guide translated)
+    rmSync(path.join(dir, 'guides', 'de'), { recursive: true, force: true });
     mkdirSync(path.join(dir, 'guides', 'de'), { recursive: true });
     const src = readFileSync(path.join(dir, 'guides', `${g.slug}.md`), 'utf8').replace(/^title: .*$/m, 'title: Deutscher Titel');
     writeFileSync(path.join(dir, 'guides', 'de', `${g.slug}.md`), src);

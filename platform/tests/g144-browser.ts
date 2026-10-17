@@ -94,7 +94,14 @@ const overflow = (page: any) =>
       const own = Array.from(el.childNodes).some((n) => n.nodeType === 3 && n.textContent!.trim());
       if (!own) continue;
       const r = el.getBoundingClientRect();
-      if (!r.width) continue;
+      // visually hidden text (screen readers only) and items of a sideways-scrolling strip are not overflow
+      if (r.width <= 2 || el.clientWidth <= 2) continue;
+      let strip = false;
+      for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+        const ox = getComputedStyle(a).overflowX;
+        if (ox === 'auto' || ox === 'scroll') strip = true;
+      }
+      if (strip) continue;
       const cs = getComputedStyle(el);
       if (cs.position === 'fixed' && cs.visibility === 'hidden') continue;
       if (r.right > window.innerWidth + 1 || r.left < -1) out.push(`"${el.textContent!.trim().slice(0, 30)}" outside the screen (${Math.round(r.left)}…${Math.round(r.right)})`);
