@@ -8,6 +8,7 @@ import { demoDesigns } from '../../../../components/marketing/demo-data.ts';
 import { LoopVideo } from '../../../../components/marketing/LoopVideo.tsx';
 import s from '../../../../components/marketing/marketing.module.css';
 import { designScreen, openingVideo } from '../../../../components/marketing/media.ts';
+import { DesignScreens } from '../../../../components/marketing/Showcase.tsx';
 import {
   Breadcrumbs,
   CheckList,
@@ -26,6 +27,7 @@ import { MARKETING } from '../../../../lib/marketing/config.ts';
 import { demoPath, designOgImage, liveDesign, liveDesigns, openingObject, startPath } from '../../../../lib/marketing/designs.ts';
 import { EDITABLE, FIXED, included, LIMITS, NOT_INCLUDED, SITE_PAGES } from '../../../../lib/marketing/facts.ts';
 import { loadGuide } from '../../../../lib/marketing/guides.ts';
+import { DESIGN_GALLERY_COPY } from '../../../../lib/marketing/showcase.ts';
 import { realPrice } from '../../../../lib/marketing/placeholders.ts';
 import { breadcrumbs, graph, product, videoObject, webPage } from '../../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../../lib/marketing/seo.ts';
@@ -149,6 +151,17 @@ export default async function DesignPage({ params }: Props) {
               </div>
             ))}
           </dl>
+        </Container>
+      </Section>
+
+      {/* G141 (K45 item 7): every real screen of the design, then the panel that edits it */}
+      <Section labelledBy="screens" band>
+        <Container>
+          <h2 id="screens" className={s.h2}>
+            {DESIGN_GALLERY_COPY.title(thing)}
+          </h2>
+          <DesignScreens design={d} />
+          <TextLink href="/#edit">{DESIGN_GALLERY_COPY.tourLink}</TextLink>
         </Container>
       </Section>
 
