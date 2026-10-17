@@ -1,13 +1,117 @@
 {
-  "_not": "G167 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0, y0, x1, y1]. Kapılar: 74 % genişlik, alt kenar 94 %, oran 0,76 → üst 29,1 %. Kapı çerçevesi kapıları çevreler (deneme görseli opak dikdörtgen: açıklığı şeffaf olamaz, kapıları örter — deneme artefaktı).",
-  "doors_closed.png": {"kutu": [13, 29.1, 87, 94]},
-  "doorway.png": {"kutu": [3, 8, 97, 97]},
-  "card_small.png": {"kutu": [15, 16.7, 85, 83.3], "pencere": [32.5, 22, 67.5, 51]},
-  "lantern.png": {"kutu": [36, 0, 64, 62]},
-  "frame_arch.png": {"kutu": [20, 20, 80, 80], "pencere": [29, 27, 71, 74]},
-  "frame_landscape.png": {"kutu": [10, 15, 90, 85], "pencere": [15, 20.5, 85, 79.5]},
-  "bougainvillea_tl.png": {"kutu": [0, 0, 58, 58]},
-  "bougainvillea_br.png": {"kutu": [42, 42, 100, 100]},
-  "divider.png": {"kutu": [8, 45, 92, 55]},
-  "accent_1.png": {"kutu": [22, 20, 78, 80]}
+  "_not": "G167 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0, y0, x1, y1]. Kapılar: 74 % genişlik, alt kenar 94 %, oran 0,76 → üst 29,1 %. Kapı çerçevesi kapıları çevreler (deneme görseli opak dikdörtgen: açıklığı şeffaf olamaz, kapıları örter — deneme artefaktı). bg_page / bg_tile: gece teali, düşük gren (prompt: orta sakin, düz sıva) — yoksa rastgele renk + gren theme-check'in zemin denetimine takılır (deneme artefaktı).",
+  "doors_closed.png": {
+    "kutu": [
+      13,
+      29.1,
+      87,
+      94
+    ]
+  },
+  "doorway.png": {
+    "kutu": [
+      3,
+      8,
+      97,
+      97
+    ]
+  },
+  "card_small.png": {
+    "kutu": [
+      15,
+      16.7,
+      85,
+      83.3
+    ],
+    "pencere": [
+      32.5,
+      22,
+      67.5,
+      51
+    ]
+  },
+  "lantern.png": {
+    "kutu": [
+      36,
+      0,
+      64,
+      62
+    ]
+  },
+  "frame_arch.png": {
+    "kutu": [
+      20,
+      20,
+      80,
+      80
+    ],
+    "pencere": [
+      29,
+      27,
+      71,
+      74
+    ]
+  },
+  "frame_landscape.png": {
+    "kutu": [
+      10,
+      15,
+      90,
+      85
+    ],
+    "pencere": [
+      15,
+      20.5,
+      85,
+      79.5
+    ]
+  },
+  "bougainvillea_tl.png": {
+    "kutu": [
+      0,
+      0,
+      58,
+      58
+    ]
+  },
+  "bougainvillea_br.png": {
+    "kutu": [
+      42,
+      42,
+      100,
+      100
+    ]
+  },
+  "divider.png": {
+    "kutu": [
+      8,
+      45,
+      92,
+      55
+    ]
+  },
+  "accent_1.png": {
+    "kutu": [
+      22,
+      20,
+      78,
+      80
+    ]
+  },
+  "bg_page.png": {
+    "ton": [
+      15,
+      47,
+      49
+    ],
+    "gren": 0.15
+  },
+  "bg_tile.png": {
+    "ton": [
+      15,
+      47,
+      49
+    ],
+    "gren": 0.15
+  }
 }

@@ -76,7 +76,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening-heading{position:relative;z-index:3;max-width:100%}
 .opening-heading>.eyebrow:first-child{margin-bottom:12px}
 .opening .names{font-size:clamp(36px,10.5vw,60px);text-shadow:0 2px 18px #000}
-.opening-date{margin-top:10px}
+.opening-date{margin-top:10px;overflow-wrap:anywhere}
 /* stage = the stage box (manifest stage.box); width ≤ 34svh keeps names + stage + hint on a 360×640 screen */
 .stage{--obj:min(84vw,34svh,360px);position:relative;z-index:2;width:var(--obj);margin:22px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent}
 .theatre{position:relative;width:100%;aspect-ratio:var(--stage-ar);isolation:isolate}
