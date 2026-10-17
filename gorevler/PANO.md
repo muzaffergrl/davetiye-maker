@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 1 · alindi 0 · inceleme 12 · blokaj 88 · bitti 131 · iptal 190 · toplam 422
+Özet: hazir 2 · alindi 0 · inceleme 13 · blokaj 88 · bitti 131 · iptal 190 · toplam 424
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -76,7 +76,7 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (30)**
+**Üzerinde çalışılan / incelemede / blokaj (31)**
 
 - `G121` inceleme · claude-G121 — Panel, /start, admin ve satış sitesi — Refero turunun kalan P2'leri (docs/18) ve alıcı yolculuğu §6 kalanları (docs/19)
 - `G124` inceleme · claude-G124 — 20 tasarımın Etsy ilan görselleri (editoryal set, 8 × 2000 px) ve ilan videoları
@@ -84,6 +84,7 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 - `G127` inceleme · claude-G127 — Harita ve yol tarifi — misafir sitesinde mekân haritası + "Get directions", panelde Day & place ayarları
 - `G128` inceleme · claude-G128 — Düzenlenebilir RSVP alanları (Required/Optional, 5 soru türü) + tek tuş Google Sheets (canlı) + Excel indirme
 - `G129` inceleme · claude-G129 — BKE Studio logosunda K sembolü yerine S — SVG izleme, site/panel/favicon/uygulama ikonları, Etsy ikonu, rozet, desen
+- `G131` inceleme · claude-G131 — Yayın öncesi son yenileme — START HERE rehberleri (G126–G130 panel bölümleri) + ilan görselleri (G129 S logosu)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G089` inceleme · - — React Bits Pro ile cila — satış sitesi, panel ve düğün sitelerini "yaşayan" hâle getir (K31)
 - `G098` inceleme · claude-G098 — Tema rötuşları — GM07 parçalarını 16/17/20'ye takma, theme-check yatay taşma açığı, 16 home fold, 17 başlık "TOGETꞪER", 12 cüzdan metinleri
@@ -173,4 +174,4 @@ Bağımlılık bekleyen: 0 · Biten: 0 · İptal: 20
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 0 · Biten: 47 · İptal: 5
+Bağımlılık bekleyen: 1 · Biten: 47 · İptal: 5
