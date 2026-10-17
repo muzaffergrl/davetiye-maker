@@ -29,12 +29,13 @@
     <p class="body-text intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
   <!-- the zellige row lays itself under the heading (preset "tile") -->
-  <div class="zellige" aria-hidden="true" data-scene="story-tiles"><img src="img/tile_2-76.webp" alt="" data-step="tile" data-a="tile" data-i="0"><img src="img/tile_3-76.webp" alt="" data-step="tile" data-a="tile" data-i="1"><img src="img/tile_1-76.webp" alt="" data-step="tile" data-a="tile" data-i="2"><img src="img/tile_3-76.webp" alt="" data-step="tile" data-a="tile" data-i="3"><img src="img/tile_2-76.webp" alt="" data-step="tile" data-a="tile" data-i="4"></div>
+  <div class="zellige" aria-hidden="true" data-scene="story-tiles"><img src="img/tile_2-76.webp" srcset="img/tile_2-76.webp 76w, img/tile_2-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="0"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="1"><img src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="2"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="3"><img src="img/tile_2-76.webp" srcset="img/tile_2-76.webp 76w, img/tile_2-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="4"></div>
   <section class="gallery-grid" aria-label="Photographs" data-scene="story-frame">
     <figure class="gallery-item item-1" data-step="frame" data-a="light" data-i="0">
       <button class="photo-slot window" data-slot="story_1" type="button" data-gallery-open="0">
         <img data-photo="story_1" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="(min-width: 760px) 300px, min(76vw, 340px)" fetchpriority="high">
         <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        <span class="arch" aria-hidden="true"></span>
       </button>
       <figcaption><span class="num" aria-hidden="true">01</span> <span data-field="story.items.0.caption"></span></figcaption>
     </figure>
@@ -42,6 +43,7 @@
       <button class="photo-slot window" data-slot="story_2" type="button" data-gallery-open="1">
         <img data-photo="story_2" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="(min-width: 760px) 300px, calc(50vw - 30px)" loading="lazy">
         <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        <span class="arch" aria-hidden="true"></span>
       </button>
       <figcaption><span class="num" aria-hidden="true">02</span> <span data-field="story.items.1.caption"></span></figcaption>
     </figure>
@@ -49,6 +51,7 @@
       <button class="photo-slot window" data-slot="story_3" type="button" data-gallery-open="2">
         <img data-photo="story_3" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="(min-width: 760px) 300px, calc(50vw - 30px)" loading="lazy">
         <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        <span class="arch" aria-hidden="true"></span>
       </button>
       <figcaption><span class="num" aria-hidden="true">03</span> <span data-field="story.items.2.caption"></span></figcaption>
     </figure>

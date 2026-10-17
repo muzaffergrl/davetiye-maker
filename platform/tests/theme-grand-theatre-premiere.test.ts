@@ -243,6 +243,48 @@ test('opening sounds start with steps of MOTION.envelope', () => {
 test('img/manifest.json names og + favicon and both files exist; the build is the theme\'s own', () => {
   const m = JSON.parse(read('img/manifest.json'));
   for (const k of ['og', 'favicon']) assert.ok(existsSync(path.join(ROOT, 'themes', id, 'img', m[k].file)), k);
-  assert.equal(m.stage.box.join('x'), '72x96x880x1344');
+  if (m.stage.method !== 'gpt') assert.equal(m.stage.box.join('x'), '72x96x880x1344');   // the stand-in stage
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
+});
+
+test('G167: the stage geometry in site.css is the build\'s measurement (manifest stage.css), used by the stage CSS', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const block = /\/\* stage:begin[^\n]*\*\/\n:root\{([^}]*)\}\n\/\* stage:end \*\//.exec(css);
+  assert.ok(block, 'site.css has the stage:begin … stage:end block');
+  assert.deepEqual(Object.fromEntries(block[1].split(';').map((d) => [d.slice(0, d.indexOf(':')), d.slice(d.indexOf(':') + 1)])), m.stage.css);
+  const [l, t, w, h] = m.stage.card.box_pct;
+  assert.equal(m.stage.css['--card-l'], `${l}%`);
+  assert.equal(m.stage.css['--card-t'], `${t}%`);
+  assert.equal(m.stage.css['--card-w'], `${w}%`);
+  assert.equal(m.stage.css['--card-h'], `${h}%`);
+  assert.equal(m.stage.css['--win-l'], `${m.stage.card.window_pct[0]}%`);
+  assert.equal(m.stage.css['--gather'], String(m.stage.gather));
+  assert.equal(`${m.stage.css['--cl-o']} 50%`, m.stage.curtain_l.origin);
+  assert.equal(`${m.stage.css['--cr-o']} 50%`, m.stage.curtain_r.origin);
+  assert.equal(m.stage.css['--stage-ar'], `${m.stage.box[2]}/${m.stage.box[3]}`);
+  // the stage rules read the variables (no hand-copied percentage left behind)
+  for (const rule of [/\.theatre\{[^}]*aspect-ratio:var\(--stage-ar\)/, /\.curtain-l\{transform-origin:var\(--cl-o\) 50%\}/,
+    /\.curtain-r\{transform-origin:var\(--cr-o\) 50%\}/, /\.swag-l\{transform-origin:var\(--swl-o\)\}/,
+    /\.theatre>\.card\{left:var\(--card-l\);top:var\(--card-t\);width:var\(--card-w\);height:var\(--card-h\)/,
+    /\.theatre \.card-photo\{position:absolute;left:var\(--win-l\);top:var\(--win-t\);width:var\(--win-w\);height:var\(--win-h\);z-index:var\(--photo-z\)\}/,
+    /100%\{transform:scaleX\(var\(--gather\)\)/, /\.hero-card\{[^}]*aspect-ratio:var\(--hero-ar\)/,
+    /\.ticket-stub\{[^}]*aspect-ratio:var\(--stub-ar\)[^}]*border-top:var\(--stub-rule\)/]) assert.match(css, rule);
+  assert.doesNotMatch(css, /aspect-ratio:880\/1344|scaleX\(\.34\)/);
+  assert.doesNotMatch(js, /880 \/ 1344/);
+  // the card's photo sits in the window, outside the text column
+  const $ = cheerio.load(html.index);
+  assert.equal($('.theatre > .card > .card-photo[data-slot="hero_portrait"]').length, 1);
+  assert.equal($('.card-copy .card-photo').length, 0);
+  assert.equal(cheerio.load(html.home)('.hero-card > img.card-img[src="img/card_plain-320.webp"]').length, 1);
+});
+
+test('G167: every PAKET 5 part GPT_PROMPTS.md orders is used by build_images.py (no orphan prompt); sources recorded', () => {
+  const prompts = readFileSync(path.join(ROOT, '..', 'collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md'), 'utf8');
+  const parts = [...prompts.matchAll(/\*\*Kaydet:\*\* `collections\/24_Grand_Theatre_Premiere\/assets\/gpt\/parts\/([a-z_]+)\.png`/g)].map((x) => x[1]);
+  assert.equal(parts.length, 14);
+  const build = read('build_images.py');
+  for (const name of parts) assert.ok(build.includes(`"${name}"`), name);
+  const m = JSON.parse(read('img/manifest.json'));
+  assert.deepEqual(m.waiting_for_gpt, Object.keys(m.sources).filter((k) => !m.sources[k].startsWith('gpt:')).sort());
+  assert.deepEqual(m.checks.green, {});
 });

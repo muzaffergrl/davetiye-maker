@@ -1,0 +1,7 @@
+{
+ "_note": "G167 dry-run shapes (tools/gpt_kuru_deneme.py --sekil): where each W2 part sits on its canvas per GPT_PROMPTS.md, % of the canvas [x0, y0, x1, y1]. Test geometry only, not a product file.",
+ "box_closed.png": {"kutu": [14, 50, 86, 80]},
+ "box_open.png": {"kutu": [14, 22, 86, 80]},
+ "closure.png": {"kutu": [38.5, 52, 61.5, 62]},
+ "card_small.png": {"kutu": [5, 35, 95, 65], "pencere": [9, 39, 36, 61]}
+}

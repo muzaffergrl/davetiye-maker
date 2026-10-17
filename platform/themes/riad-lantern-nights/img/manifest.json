@@ -1,5 +1,4 @@
 {
- "_note": "G165 interim build: layers cut and toned from GPT pixels of 10 (oak) and 05 (plaster, tile border) — see build_images.py; the design's own PAKET 5 parts are ordered in GPT_PROMPTS.md.",
  "door_l": {
   "src_size": [
    477,
@@ -132,6 +131,13 @@
     "w": 76,
     "h": 76,
     "bytes": 1810
+   },
+   {
+    "file": "tile_1-152.webp",
+    "w": 152,
+    "h": 152,
+    "bytes": 3362,
+    "upscaled": true
    }
   ]
  },
@@ -147,6 +153,13 @@
     "w": 76,
     "h": 76,
     "bytes": 1778
+   },
+   {
+    "file": "tile_2-152.webp",
+    "w": 152,
+    "h": 152,
+    "bytes": 3380,
+    "upscaled": true
    }
   ]
  },
@@ -162,6 +175,35 @@
     "w": 76,
     "h": 76,
     "bytes": 2168
+   },
+   {
+    "file": "tile_3-152.webp",
+    "w": 152,
+    "h": 152,
+    "bytes": 3780,
+    "upscaled": true
+   }
+  ]
+ },
+ "tile_4": {
+  "src_size": [
+   76,
+   76
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_4-76.webp",
+    "w": 76,
+    "h": 76,
+    "bytes": 1812
+   },
+   {
+    "file": "tile_4-152.webp",
+    "w": 152,
+    "h": 152,
+    "bytes": 3482,
+    "upscaled": true
    }
   ]
  },
@@ -235,13 +277,25 @@
   "file": "favicon.png",
   "bytes": 24405
  },
+ "_note": "G165/G167 build: every PAKET 5 part that exists is used (see 'sources'); the others are stand-ins cut and toned from GPT pixels of 10 (oak) and 05 (plaster, tile border) — see build_images.py.",
+ "sources": {
+  "bg_tile": "interim (05 plaster toned teal)",
+  "card_small": "interim (05 plaster toned ivory)",
+  "courtyard": "interim (05 plaster toned saffron)",
+  "doors_closed": "interim (10 oak_tile, toned cedar)",
+  "tile_1": "interim (05 frame_portrait border tile, teal)",
+  "tile_2": "interim (05 frame_portrait border tile, teal)",
+  "tile_3": "interim (05 frame_portrait border tile, teal)",
+  "tile_4": "interim (05 frame_portrait border tile, teal)"
+ },
  "stage": {
   "leaf_aspect": 0.38,
   "pair_aspect": 0.76,
   "hinges": "outer edges",
-  "swing": "inwards, away from the guest (rotateY ±78deg)",
+  "swing": "inwards, away from the guest (rotateY ±76deg)",
   "method": "interim"
  },
+ "gpt_layers": {},
  "checks": {
   "green": {}
  },
@@ -258,5 +312,5 @@
    "light_above": 110
   }
  },
- "bytes_total": 465024
+ "bytes_total": 612376
 }

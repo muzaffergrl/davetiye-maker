@@ -1,5 +1,5 @@
 {
- "_note": "G162 INTERIM build: stage layers toned/cropped from two GPT textures already in the repository (06 velvet tile, 21 paper). The design's PAKET 5 / 2 / 6 parts are ordered in collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md.",
+ "_note": "G162 build on stand-in pieces toned/cropped from two GPT textures already in the repository (06 velvet tile, 21 paper) until the PAKET 5 parts of GPT_PROMPTS.md arrive.",
  "th_back": {
   "src_size": [
    880,
@@ -147,53 +147,26 @@
    }
   ]
  },
- "stage": {
-  "canvas": [
+ "card_plain": {
+  "src_size": [
    1024,
    1536
   ],
-  "box": [
-   72,
-   96,
-   880,
-   1344
-  ],
-  "objAspect": 0.6548,
-  "method": "interim",
-  "opening_pct": [
-   0,
-   0,
-   100,
-   100
-  ],
-  "curtain_l": {
-   "box_pct": [
-    0,
-    0,
-    51.477,
-    100
-   ],
-   "origin": "0% 50%"
-  },
-  "curtain_r": {
-   "box_pct": [
-    48.523,
-    0,
-    51.477,
-    100
-   ],
-   "origin": "100% 50%"
-  },
-  "gather": 0.34,
-  "valance_pct": 8.482,
-  "card": {
-   "box_pct": [
-    25.0,
-    40.923,
-    50.0,
-    49.107
-   ]
-  }
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "card_plain-320.webp",
+    "w": 320,
+    "h": 480,
+    "bytes": 1370
+   },
+   {
+    "file": "card_plain-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 15244
+   }
+  ]
  },
  "velvet": {
   "src_size": [
@@ -310,8 +283,8 @@
   }
  },
  "og": {
+  "source": "assembled stand-in: velvet + paper",
   "file": "og-1200x630.jpg",
-  "source": "assembled (interim): velvet + paper",
   "bytes": 132298
  },
  "favicon": {
@@ -329,6 +302,123 @@
   "file": "favicon.png",
   "bytes": 41597
  },
+ "stage": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "box": [
+   72,
+   96,
+   880,
+   1344
+  ],
+  "objAspect": 0.6548,
+  "method": "stand-in",
+  "opening_pct": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "curtain_l": {
+   "box_pct": [
+    0,
+    0,
+    51.477,
+    100
+   ],
+   "origin": "0% 50%"
+  },
+  "curtain_r": {
+   "box_pct": [
+    48.523,
+    0,
+    51.477,
+    100
+   ],
+   "origin": "100% 50%"
+  },
+  "gather": 0.34,
+  "valance_pct": 8.482,
+  "card": {
+   "box_pct": [
+    25.0,
+    40.923,
+    50.0,
+    49.107
+   ],
+   "window_pct": [
+    17,
+    8,
+    66,
+    55
+   ],
+   "window": "stand-in (the photo on plain paper)"
+  },
+  "css": {
+   "--stage-ar": "880/1344",
+   "--cl-o": "0%",
+   "--cr-o": "100%",
+   "--gather": "0.34",
+   "--swl-o": "6% 0",
+   "--swr-o": "94% 0",
+   "--spot-l": "5%",
+   "--spot-t": "24%",
+   "--card-l": "25%",
+   "--card-t": "40.923%",
+   "--card-w": "50%",
+   "--card-h": "49.107%",
+   "--win-l": "17%",
+   "--win-t": "8%",
+   "--win-w": "66%",
+   "--win-h": "55%",
+   "--photo-z": "2",
+   "--hero-ar": "auto",
+   "--hero-fit": "cover",
+   "--hero-pad": "30px 22px 28px",
+   "--hero-pad-short": "22px 18px 20px",
+   "--stub-ar": "auto",
+   "--stub-fit": "cover",
+   "--stub-rule": "1px dashed #6e5119b3"
+  }
+ },
+ "sources": {
+  "th_back": "stand-in",
+  "curtain_l": "stand-in",
+  "curtain_r": "stand-in",
+  "curtain_gl": "stand-in",
+  "curtain_gr": "stand-in",
+  "th_arch": "stand-in",
+  "card_paper": "stand-in",
+  "card_plain": "stand-in",
+  "velvet": "stand-in",
+  "room": "stand-in",
+  "paper": "stand-in",
+  "stub_paper": "stand-in",
+  "ph_portrait": "stand-in",
+  "ph_land": "stand-in",
+  "og": "stand-in",
+  "favicon": "stand-in"
+ },
+ "waiting_for_gpt": [
+  "card_paper",
+  "card_plain",
+  "curtain_gl",
+  "curtain_gr",
+  "curtain_l",
+  "curtain_r",
+  "favicon",
+  "og",
+  "paper",
+  "ph_land",
+  "ph_portrait",
+  "room",
+  "stub_paper",
+  "th_arch",
+  "th_back",
+  "velvet"
+ ],
  "checks": {
   "green": {}
  },
@@ -345,5 +435,5 @@
    "light_above": 110
   }
  },
- "bytes_total": 765724
+ "bytes_total": 802865
 }

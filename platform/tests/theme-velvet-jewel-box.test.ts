@@ -143,6 +143,20 @@ test('the box page: bow, lid, inner lid, cushion, base and card are separate lay
     assert.match(css, rule, piece);
   }
   assert.ok(css.includes(`translateY(${images.stage.card.rise_pct}%)`), 'card rise = manifest stage.card.rise_pct');
+  // G167: the whole stage block is written by build_images.py from the manifest (GPT parts drop in without a hand copy)
+  const st = images.stage;
+  assert.ok(css.includes(`/* stage:begin`) && css.includes('/* stage:end */'), 'generated stage block');
+  assert.ok(css.includes(`aspect-ratio:${st.box[2]}/${st.box[3]}`), 'stage aspect = manifest stage.box');
+  const [cl, ct, cw, ch] = st.card.box_pct;
+  assert.ok(css.includes(`.box>.card{left:${cl}%;top:${ct}%;width:${cw}%;height:${ch}%}`), 'card = manifest stage.card');
+  const [wl, wt, ww, wh] = st.card.window_pct;
+  assert.ok(css.includes(`.card-photo{left:${wl}%;top:${wt}%;width:${ww}%;height:${wh}%}`), 'card photo = the card window');
+  assert.ok(css.includes(`translateY(${st.lid.drop_pct}%) perspective`), 'lid drop = manifest stage.lid.drop_pct');
+  assert.ok(css.includes(`translateY(${st.card.forward_pct}%) scale(1.1)`), 'card forward = manifest stage.card.forward_pct');
+  // output names never depend on the source size (GPT parts of any size give the files the pages name)
+  for (const [piece, sizes] of Object.entries({ box_lid: [440, 732], box_base: [440, 716], box_inner: [440, 680], box_well: [440, 704], closure: [160, 236], card_paper: [480, 860] })) {
+    assert.deepEqual(images[piece].files.map((f: { w: number }) => f.w), sizes, piece);
+  }
 });
 
 test('MOTION.envelope (the box) = the CSS keyframe timings; tap → home 3.2–5 s', () => {

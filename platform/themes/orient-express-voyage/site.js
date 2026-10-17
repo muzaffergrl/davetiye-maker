@@ -41,7 +41,8 @@ const MOTION = {
   stagger: 220,             // the stations of the home journey arrive one by one
   batchGap: 380,
   arriveDelay: 150,
-  route: { start: 0.82, span: 0.9 },   // fallback: the line starts when the section's top passes 82% of the screen
+  route: { start: 0.82, span: 0.9,     // fallback (home): the line starts when the section's top passes 82% of the screen
+           stops: [0.8, 0.55] },        // details: from the first station at 80% of the screen to the last one at 55%
   scenery: 7                           // carriage-window photos travel ±7% of their width through the glass
 };
 
@@ -124,6 +125,27 @@ function initCountdown() {
 }
 
 /* -- the ticket wallet */
+function fitStage() {
+  // closed: kicker, names, wallet and "Tap to unbuckle" share one screen. Very long names (or a short phone) would push
+  // the hint below the fold, so the wallet gives up the overflow (never below 120 px wide; its height is 1.5 × width)
+  const stage = $('.stage'), hint = $('.tap-hint');
+  if (!stage || !hint || root.classList.contains('is-opened') || root.classList.contains('is-opening')) return;
+  stage.style.removeProperty('--obj');
+  const over = hint.getBoundingClientRect().bottom + scrollY - (innerHeight - 8);
+  if (over > 0) stage.style.setProperty('--obj', Math.max(120, stage.offsetWidth - over / 1.5).toFixed(1) + 'px');
+}
+function fitTicket() {
+  // the ticket's free band (under its portrait window, above the perforation) takes any names: the type steps down
+  // (--fit, never below half), then the "First class to forever" line gives way; nothing leaves the card
+  const copy = $('.ticket-copy');
+  if (!copy || !copy.clientHeight) return;
+  copy.classList.remove('is-tight');
+  let fit = 1;
+  copy.style.setProperty('--fit', '1');
+  const over = () => copy.scrollHeight > copy.clientHeight + 1 || [...copy.children].some((n) => n.scrollWidth > n.clientWidth + 1);
+  while (over() && fit > 0.5) { fit = Math.round((fit - 0.05) * 100) / 100; copy.style.setProperty('--fit', String(fit)); }
+  if (over()) copy.classList.add('is-tight');
+}
 function fitSpread() {
   // the open wallet is two wallets wide (cover to the left of the hinge): scale it to 94% of the screen
   const stage = $('.stage'), wallet = $('.wallet');
@@ -135,8 +157,10 @@ function initWallet() {
   const stage = $('.stage');
   if (!stage) return;
   const ticket = $('.wallet .ticket'), E = MOTION.envelope;
-  fitSpread();
-  addEventListener('resize', fitSpread, { passive: true });
+  const fit = () => { fitStage(); fitSpread(); fitTicket(); };
+  fit();
+  document.fonts?.ready.then(fit);
+  addEventListener('resize', fit, { passive: true });
   if (/[?&]replay=1(&|$)/.test(location.search)) root.classList.remove('is-opened');
   let state = root.classList.contains('is-opened') ? 'opened' : 'closed';
   const timers = [];
@@ -183,9 +207,11 @@ function initScrollMotion() {
     queued = false;
     const vh = innerHeight;
     routes.forEach((fig) => {
-      const track = fig.closest('section') || fig;
-      const r = track.getBoundingClientRect();
-      fig.style.setProperty('--route', clamp((vh * MOTION.route.start - r.top) / Math.max(1, r.height * MOTION.route.span)).toFixed(3));
+      const track = fig.closest('section') || fig, stops = track.querySelector('.stations');
+      const r = (stops || track).getBoundingClientRect(), [a, z] = MOTION.route.stops;
+      const t = stops ? (vh * a - r.top) / Math.max(1, r.height + vh * (a - z))
+        : (vh * MOTION.route.start - r.top) / Math.max(1, r.height * MOTION.route.span);
+      fig.style.setProperty('--route', clamp(t).toFixed(3));
     });
     panes.forEach((p) => {
       const r = p.getBoundingClientRect();
@@ -207,7 +233,11 @@ function initSwing() {
   const io = new IntersectionObserver((entries) => {
     entries.filter((e) => e.isIntersecting).forEach((e) => { io.unobserve(e.target); setTimeout(() => swing(e.target), 900); });
   }, { threshold: 0.6 });
-  tags.forEach((t) => { io.observe(t); t.closest('.portrait-column')?.addEventListener('pointerenter', () => swing(t)); });
+  tags.forEach((t) => {
+    io.observe(t);
+    t.closest('.portrait-column')?.addEventListener('pointerenter', () => swing(t));
+    t.addEventListener('focus', () => swing(t));          // keyboard users see it swing too
+  });
 }
 
 function boot() {

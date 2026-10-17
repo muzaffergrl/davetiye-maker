@@ -26,10 +26,11 @@
   <header class="page-heading" data-scene="details-head">
     <p class="eyebrow" data-step="date"><span data-field="date" data-format="weekday"></span>, <span class="nowrap" data-field="date"></span></p>
     <h1 data-copy="day_title" data-step="title">The evening unfolds</h1>
+    <span class="divider" aria-hidden="true" data-step="title"></span>
     <p class="venue-name" data-field="venue.name" data-step="venue"></p>
     <p class="eyebrow" data-field="venue.city_region_country" data-step="venue" data-i="1"></p>
   </header>
-  <div class="zellige" aria-hidden="true" data-scene="details-tiles"><img src="img/tile_1-76.webp" alt="" data-step="tile" data-a="tile" data-i="0"><img src="img/tile_2-76.webp" alt="" data-step="tile" data-a="tile" data-i="1"><img src="img/tile_3-76.webp" alt="" data-step="tile" data-a="tile" data-i="2"><img src="img/tile_2-76.webp" alt="" data-step="tile" data-a="tile" data-i="3"><img src="img/tile_1-76.webp" alt="" data-step="tile" data-a="tile" data-i="4"></div>
+  <div class="zellige" aria-hidden="true" data-scene="details-tiles"><img src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="0"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="1"><img src="img/tile_1-76.webp" srcset="img/tile_1-76.webp 76w, img/tile_1-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="2"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="3"><img src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="4"></div>
   <section class="details-split" data-scene="details-card">
     <div class="programme" data-step="programme">
       <h2 data-copy="schedule_title">Order of the evening</h2>
@@ -50,6 +51,7 @@
       <div class="venue-photo photo-slot" data-slot="venue" data-a="light">
         <img data-photo="venue" src="img/ph_wide-640.webp" alt="" data-attr-alt="{venue.name}" sizes="(min-width: 760px) 500px, calc(100vw - 56px)" loading="lazy">
         <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        <span class="frame" aria-hidden="true"></span>
       </div>
       <p class="venue-line"><span data-field="venue.name"></span><span data-if="venue.address"> · </span><span data-if="venue.address" data-field="venue.address"></span></p>
       <div class="map-section" data-if="map_block">

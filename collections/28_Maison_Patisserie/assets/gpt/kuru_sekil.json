@@ -1,0 +1,14 @@
+{
+ "_not": "G167 kuru deneme (tools/gpt_kuru_deneme.py --sekil): her parçanın GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0,y0,x1,y1]. Ürün değil.",
+ "box_base.png": {"kutu": [3.125, 3.125, 96.875, 96.875]},
+ "lid.png": {"kutu": [3.125, 3.125, 96.875, 96.875]},
+ "tissue_left.png": {"kutu": [5.3, 5.3, 53.5, 94.7]},
+ "tissue_right.png": {"kutu": [46.5, 5.3, 94.7, 94.7]},
+ "ribbon_cross.png": {"kutu": [44.9, 3.125, 55.1, 96.875]},
+ "bow_left.png": {"kutu": [20.7, 32.2, 50.0, 65.4]},
+ "bow_right.png": {"kutu": [50.0, 32.2, 79.3, 65.4]},
+ "bow_knot.png": {"kutu": [45.6, 43.5, 54.4, 54.3]},
+ "card_small.png": {"kutu": [15.0, 19.2, 85.0, 80.8]},
+ "shelf.png": {"kutu": [2.0, 47.5, 98.0, 52.5]},
+ "accent_1.png": {"kutu": [25.0, 25.0, 75.0, 75.0]}
+}

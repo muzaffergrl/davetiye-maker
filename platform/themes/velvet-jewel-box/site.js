@@ -64,7 +64,7 @@ function fitNames() {
     const parts = [...el.querySelectorAll('[data-field]')];
     const long = parts.some((n) => n.textContent.length > 14);
     el.classList.toggle('long-names', long);
-        parts.forEach((n) => { n.style.whiteSpace = 'nowrap'; });
+    parts.forEach((n) => { n.style.whiteSpace = 'nowrap'; });
     const min = el.closest('.velvet-hero') ? 40 : 34;
     let size = parseFloat(getComputedStyle(el).fontSize);
     const wide = () => Math.max(...parts.map((n) => n.scrollWidth)) > el.clientWidth + 1;
@@ -167,7 +167,12 @@ function initCarousel() {
   const count = $('[data-carousel-count]');
   const prev = $('[data-carousel-prev]'), next = $('[data-carousel-next]');
   let pos = 0;
-  const label = (i) => { if (count) count.textContent = (i + 1) + ' / ' + n; if (prev) prev.disabled = i <= 0; if (next) next.disabled = i >= n - 1; };
+  // at the ends the arrow is aria-disabled, not disabled: a disabled button would drop keyboard focus to <body>
+  const label = (i) => {
+    if (count) count.textContent = (i + 1) + ' / ' + n;
+    prev?.setAttribute('aria-disabled', String(i <= 0));
+    next?.setAttribute('aria-disabled', String(i >= n - 1));
+  };
   if (reduce || n < 2) {
     const width = () => gems[0].getBoundingClientRect().width + 16;
     const at = () => Math.max(0, Math.min(n - 1, Math.round(track.scrollLeft / width())));
@@ -242,7 +247,13 @@ function initCarousel() {
 }
 
 function boot() {
-  document.addEventListener('rsvp:state', (e) => { const st = e.detail && e.detail.state; if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success'); });
+  document.addEventListener('rsvp:state', (e) => {
+    const st = e.detail && e.detail.state;
+    if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success');
+    // sent: the satin light crosses the reply card once more (the foil of "Thank you!" is CSS: site.css .is-sent)
+    const card = $('.reply-card[data-scene]');
+    if (card) { card.classList.remove('is-sent'); if (st === 'success' && !reduce) { void card.offsetWidth; card.classList.add('is-sent'); } }
+  });
   fitNames();
   document.fonts?.ready.then(fitNames);
   addEventListener('resize', fitNames, { passive: true });
