@@ -47,6 +47,10 @@ export function FeaturesPage({ m }: { m: Market }) {
         t('Travel and stay and registry links, as buttons'),
         t('Questions and answers (up to {n})', { n: LIMITS.faqItems }),
         t('An optional live countdown to the day'),
+        // G154: G127 map, G126 music, G144 languages (the same words as "What's included", facts.ts)
+        t('A map of your venue and directions with Google Maps, Apple Maps or Waze'),
+        t('Music on your Our Story page (one of four tracks made for your website, or your own file) and sound effects; you can turn each off'),
+        t('Your website in English, Spanish, French, German or Turkish, or in several: built-in texts come translated, and your own texts can be translated automatically as a draft you check'),
       ],
       screen: designScreen(a.id, 'schedule'),
       alt: t('{name}: the order of the day on the Details page', { name: a.name }),
@@ -63,7 +67,7 @@ export function FeaturesPage({ m }: { m: Market }) {
         ),
         t('Questions are shown only to guests who are coming'),
         t('A reply-by date: the form closes on its own after it, and you can also close it yourself'),
-        t('Every reply and the totals in your panel, and a CSV download for spreadsheets'),
+        t('Every reply and the totals in your panel, and an Excel or CSV download for spreadsheets'),
       ],
       screen: panelScreen('questions'),
       alt: t('The panel section where the couple adds their own RSVP questions'),
@@ -73,7 +77,8 @@ export function FeaturesPage({ m }: { m: Market }) {
       eyebrow: t('Editing'),
       title: phoneClaim() === 'Designed for phone screens' ? t('A panel designed for phone screens') : t('A panel for your phone'),
       items: [
-        t('A private edit link: no account, no password to remember, no app'),
+        // G154 (G146/K46): the order number + email open the editor on any device; the edit link is a shortcut
+        t('Your Etsy order number and email open your editor on any phone or computer: no account, no password'),
         t('Changes save on their own; preview any page before you publish'),
         t('{n} photos, each cropped to its frame on your phone', { n: LIMITS.photoSpots }),
         t('Switch optional sections on or off: Our Story, countdown, dress code, registry, travel and stay, questions and answers'),
@@ -91,6 +96,8 @@ export function FeaturesPage({ m }: { m: Market }) {
         t('Your address is your names on our domain'),
         t('Link previews in messaging apps show your names and wedding date'),
         t('A QR code to download as PNG or SVG, for printed cards'),
+        // G154: G139 downloads (Share → Downloads)
+        t('Downloads: your website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with bleed and crop marks for a print shop)'),
       ],
       screen: panelScreen('share'),
       alt: t('The share screen with the website link and the QR code (blurred in this picture)'),
@@ -103,7 +110,8 @@ export function FeaturesPage({ m }: { m: Market }) {
         t('Only you see the replies, in your private panel'),
         t('We do not sell or share guest information'),
         t('Photos of an unpublished website are not shown to anyone'),
-        t('No cookies, ads or analytics on your wedding website'),
+        // G154: the guest password cookie (lib/site/access.ts) is the one cookie a wedding website can set
+        t('No ads or analytics on your wedding website; its only cookie remembers a guest’s password when you turn one on'),
       ],
       screen: null,
       alt: '',

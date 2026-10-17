@@ -401,7 +401,9 @@ LABEL_SOURCES = [REPO / "platform" / "components" / "panel", REPO / "platform" /
                  REPO / "platform" / "lib" / "audio", REPO / "platform" / "lib" / "rsvp", REPO / "platform" / "lib" / "maps.ts",
                  REPO / "platform" / "public" / "audio" / "audio.js", REPO / "platform" / "public" / "static" / "map.js",
                  # G148: /my ("Open or start your website", G146) and the sales site's "Create your website" button
-                 REPO / "platform" / "components" / "my", REPO / "platform" / "components" / "marketing" / "Shell.tsx"]
+                 REPO / "platform" / "components" / "my", REPO / "platform" / "components" / "marketing" / "Shell.tsx",
+                 # G154: Share → Downloads (G139): the card reads its words from lib/print/labels.ts
+                 REPO / "platform" / "lib" / "print" / "labels.ts"]
 # Bold text in the guide that is emphasis, not a panel label (checked by hand against the source, 2026-10-16).
 NOT_LABELS = {"First publish", "After that", "What stays as designed", "What guests do", "What you do", "not later",
               "3 changes in total", "12 months after your wedding date", "24 hours", "bkestudio@gmail.com",

@@ -16,6 +16,8 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 
 ![QR code of your start link](img/start_qr_page.png)
 
+Link and QR code not working? Type this address into your browser: [https://davetiye-platform-five.vercel.app/start?theme=dusty-blue-champagne](https://davetiye-platform-five.vercel.app/start?theme=dusty-blue-champagne)
+
 2. Find your Etsy order number: on Etsy, go to You → Purchases and reviews, or look for "Order #…" in your Etsy confirmation email.
 3. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
 4. Tap **Copy link** to keep your private edit link as a shortcut, then tap **Open my editor**. Add your first names and your wedding date (setup step 1 of 3).
@@ -66,7 +68,7 @@ When your website is live, **Your website is live** shows your link with **Copy 
 
 ## If your editor says "We are confirming your Etsy order"
 
-We check each order in our Etsy shop before a website can go live. You can set up everything now; it is all saved. **Publish** opens as soon as your order is confirmed (usually within [ORDER CHECK TIME]). We tell you on Etsy; then reload your editor page. If it takes longer, message us on Etsy with your order number.
+Your order has to be confirmed in our Etsy shop before your website can go live. You can set up everything now; it is all saved. **Publish** opens as soon as your order is confirmed, usually within 24 hours. Reload your editor page to check. If it takes longer, message us on Etsy with your order number.
 
 ## Step 3. Edit your website
 
@@ -75,11 +77,11 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 - **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until). Under **Settings** you see your time zone, date style, name and date changes left and guest password; tap a row to change it.
 - **Edit:** six pages with everything on your website.
 - **Guests:** your guests' replies.
-- **Share:** your link, QR code, guest password, your private edit link and how to open your editor on another device.
+- **Share:** your link, QR code, guest password, downloads (your website as a PDF and a printable invitation), your private edit link and how to open your editor on another device.
 
 | Edit page | What you change |
 |---|---|
-| Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one) |
+| Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one), the languages of your website |
 | Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link, map and directions, a reception place and venue photo; the order of the day (up to 10 rows); After the wedding |
 | Photos | Invitation portrait, three story photos and the venue photo |
 | Our Story | Show or hide the page, an intro line, a caption for each story moment, music and sound effects |
@@ -121,6 +123,18 @@ Open **Edit → Our Story** and scroll to **Music & sound** at the end of the pa
 
 Guests hear the music softly on your Our Story page (no Our Story page, no music). A small sound button at the top left of every page turns the sound off or on. Some phones wait for a tap before music starts: then guests see a "Play music" button.
 
+## Languages
+
+Your website can be in English, Spanish, French, German or Turkish, or in several of them. Open **Edit → Us → Languages**:
+
+- **Main language:** the language you write your texts in. Guests see it first.
+- **Also show my website in:** tick the other languages. Guests then get a small language button on every page.
+- The design's headings, buttons, reply form and dates come translated for you.
+- Your own texts (story, details, questions and answers, your own headings) are listed under each language. **Translate automatically** makes a first draft: with your browser's own translator if it has one, otherwise with the free MyMemory translation service (your texts are sent to it). Read each translation and correct it if needed, then tap **Approve** or **Approve all**. Guests see a translation only after you approve it; until then they see your main language.
+- **Language of this editor** changes the language of the editor itself.
+
+Machine translation is only a first draft: if you can, ask someone who speaks the language to read it.
+
 ## Step 5. Preview and publish
 
 Tap the eye icon at the top to preview your pages: **Envelope**, **Home**, **Story**, **Details** and **RSVP**. **Envelope** is the opening page, where guests tap the envelope. The X at the top closes the preview. On a computer the preview stays on the right.
@@ -150,6 +164,13 @@ Open **Share**:
 
 **Guest password** (optional). Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
 
+**Downloads** (in **Share**):
+
+- **Download website as PDF:** every page of your website in your design, with a QR code to your link on the last page.
+- **Printable invitation:** a classic invitation card in your design, with your names, date and venue. Choose **5 × 7 in** or **A5 (148 × 210 mm)**. **Add a back side with the details and a QR code** is ticked at first. For a print shop, tick **For a print shop: add bleed (1/8 in / 3 mm)** and then **Add crop marks**. Tap **Download printable invitation**.
+
+Both use your latest saved changes, and making a PDF can take up to a minute. Publish your website first: the QR code opens it only once it is live. Print one copy and scan its QR code with your phone before you print them all.
+
 **Take the website offline** (at the bottom of Share) hides your website from guests: they see "Page not found" until you publish again. Your text, photos and replies are kept.
 
 ## Step 7. Guest replies
@@ -172,7 +193,7 @@ In the Guest list you can also:
 
 **Google Sheets** (optional): in **Guests**, tap **Connect Google Sheets** and allow access in Google. Your editor makes a spreadsheet in your own Google Drive and adds every new reply by itself; the columns follow your reply form. Google lets it see only the files it makes, nothing else in your Drive. **Open sheet** opens it, **Sync now** updates it at once, and **Disconnect** stops it (the spreadsheet stays in your Drive). If you see "Google Sheets: coming soon", this connection is not switched on yet: use **Download Excel** instead.
 
-We do not send email notifications yet: new replies show on Home and under **New**, where **Mark as seen** clears them. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
+New replies show on Home and under **New**, where **Mark as seen** clears them. If **Guests** offers **Email me when a guest replies**, you can turn it on to get a short email for each new reply. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
 
 Replies close at the end of your reply-by date, in your wedding's time zone. To close earlier, turn off **Accept replies on the website** in Edit → RSVP.
 
@@ -188,7 +209,7 @@ Add a title, a message and a photo if you like, preview it and publish. In thank
 
 ## How long your website stays online
 
-Your website stays online until **12 months after your wedding date**. Home → Dates → **Online until** shows the exact day, and Home reminds you 30 days before. After that it closes for guests; in your editor you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY].
+Your website stays online until **12 months after your wedding date**. Home → Dates → **Online until** shows the exact day, and Home reminds you 30 days before. After that it closes for guests; in your editor you can still see your content and download your replies. Need it online longer? Message us on Etsy before your **Online until** date and we can extend it. 12 months after your website closes, we delete it with its photos and replies, so download your replies before then.
 
 ## Quick answers
 
@@ -200,7 +221,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can I change colors or fonts?** No. You change the content and the wording; the design stays as made.
 
-**Can it be in my language?** You can write your own texts and the design's headings in any language. Some built-in messages, such as reply form errors, stay in English. Accented Latin letters use the design's fonts; Cyrillic and other alphabets show in a plain standard font in some or all places. Preview every page.
+**Can it be in my language?** Yes, in English, Spanish, French, German or Turkish, or in several of them (see Languages above). Your own texts can be in any language; the design's built-in texts come in one of these five. Accented Latin letters use the design's fonts; Cyrillic and other alphabets show in a plain standard font in some or all places. Preview every page.
 
 **How many guests can I invite?** As many as you like. One reply can include up to 10 people.
 
@@ -210,7 +231,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Is there music?** Yes, if you like: soft music on your Our Story page (see Music and sound above). Choose **No music** to turn it off.
 
-**Is there a printed invitation or a save the date?** No.
+**Can I print invitations? Is there a save the date?** You print them yourself: **Share → Downloads** makes a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks). We do not print or ship anything, and there is no separate save the date.
 
 ## Troubleshooting
 
@@ -246,6 +267,6 @@ Message BKE Studio on Etsy (in the conversation of your order), or write to **bk
 
 Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 
-Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
+Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
 
 The design's sample names, dates, places and photos are fictional. Replace them before you share your website.

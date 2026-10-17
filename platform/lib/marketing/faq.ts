@@ -7,6 +7,7 @@ import { MARKETING, type MarketingConfig } from './config.ts';
 import { editRightsText, LIMITS } from './facts.ts';
 import { enT, type T } from './i18n.ts';
 import { inlineText, parseInline } from './markdown.ts';
+import { siteHost } from './site.ts';
 
 export interface FaqItem {
   id: string;
@@ -42,7 +43,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'subscription',
           q: t('Is it a subscription?'),
-          a: t('No. You pay once on Etsy and there is nothing to renew, no monthly fee and no per-guest fee. Your website stays online until {months} months after your wedding date. After that: {extension}. There are no upgrades to buy inside the panel. [See pricing](/pricing).', { months: m, extension: t(cfg.policies.extension) }),
+          a: t('No. You pay once on Etsy and there is nothing to renew, no monthly fee and no per-guest fee. Your website stays online until {months} months after your wedding date. {extension} There are no upgrades to buy inside the panel. [See pricing](/pricing).', { months: m, extension: t(cfg.policies.extension) }),
         },
         {
           // docs/14 §2.2 #18 and docs/15: the most likely objection. Free builders are not belittled, and nothing is
@@ -93,14 +94,21 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
           a: t('Change the date in your panel. Moving it by up to {days} days is free; a bigger move uses one of your name and date changes. If you have used all of them, [contact us](/contact) at {email} with your Etsy order number and tell us what happened, so we can look at it with you.', { days: cfg.editRights.dateFreeDays, email: cfg.support.email }),
         },
         {
+          // G154 (K48): the G146 way back (/my, order number + email on any device), not a support message
           id: 'lost-link',
           q: t('What if I lose my edit link?'),
-          a: t('Message us on Etsy with your order number: we send you a new link and the old one stops working. {lostLink}. While your editor is open you can copy the link again under Share, so save it somewhere safe. Anyone who has the link can edit your website. [Contact us](/contact).', { lostLink: t(cfg.policies.lostLink) }),
+          a: t('You do not need it to get back in. {lostLink} There is no account or password; the edit link is only a shortcut. Anyone with your order number and email, or with the link, can edit your website, so share them only with your partner.', { lostLink: t(cfg.policies.lostLink) }),
         },
         {
           id: 'two-editors',
           q: t('Can two people edit the website?'),
-          a: t('Yes. Anyone who has your edit link can open the panel, so you can share it with your partner. Keep it between the two of you: the link is the key to your website and to your guests\' replies. Never post it publicly. [About privacy](/privacy).'),
+          a: t('Yes. Give your partner your Etsy order number and email, or your private edit link: either one opens your editor on their phone or computer. Keep them between the two of you, because they also open your guests\' replies. Never post them publicly. [About privacy](/privacy).'),
+        },
+        {
+          // G154: G144's five languages (the sales site said "built-in messages stay in English" before)
+          id: 'languages',
+          q: t('Can our website be in another language?'),
+          a: t('Yes: English, Spanish, French, German or Turkish, or several of them with a language button for guests. The design\'s headings, buttons, reply form and dates come translated. Your own texts can be translated automatically as a first draft, which you check and approve before guests see it. You can also write your own texts in any other language. [See the features](/features#guests).'),
         },
       ],
     },
@@ -126,7 +134,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'where-replies',
           q: t('Where do we see the replies?'),
-          a: t('Replies appear in your private panel, with the totals: how many replied, how many are coming and how many guests in all. You can download every reply as a CSV file for a spreadsheet or your caterer. Guests cannot see each other\'s replies. [See RSVP features](/features#rsvp).'),
+          a: t('Replies appear in your private panel, with the totals: how many replied, how many are coming and how many guests in all. You can download every reply as an Excel file (or CSV) for a spreadsheet or your caterer. Guests cannot see each other\'s replies. [See RSVP features](/features#rsvp).'),
         },
         {
           id: 'rsvp-deadline',
@@ -142,7 +150,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'how-to-share',
           q: t('How do we share our website?'),
-          a: t('Copy your link from the panel and send it by text, WhatsApp or email, or download your QR code for printed cards. Your address is your names on our domain, for example {domain}/clara-and-julian, and you choose it when you start. [See the sharing features](/features#sharing).', { domain: cfg.domain }),
+          a: t('Copy your link from the panel and send it by text, WhatsApp or email, or download your QR code for printed cards. Your address is your names on our domain, for example {domain}/clara-and-julian, and you choose it when you start. [See the sharing features](/features#sharing).', { domain: siteHost(cfg) }),
         },
         {
           id: 'link-preview',
@@ -163,7 +171,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'how-long-online',
           q: t('How long is our website online?'),
-          a: t('Your website stays online until {months} months after your wedding date, so guests can come back to it after the day. What happens after that: {extension}. You can also take it offline yourself at any time from the panel. [See pricing](/pricing).', { months: m, extension: t(cfg.policies.extension) }),
+          a: t('Your website stays online until {months} months after your wedding date, so guests can come back to it after the day. {extension} You can also take it offline yourself at any time from the panel. [See pricing](/pricing).', { months: m, extension: t(cfg.policies.extension) }),
         },
         {
           id: 'who-sees-replies',
@@ -184,7 +192,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'delete-data',
           q: t('How do we delete our data?'),
-          a: t('{deletion}. Until then, write to {email} from the email address you used when you started your website and include your Etsy order number and website address, so we can confirm it is you before we delete anything. [Read our privacy notice](/privacy).', { deletion: t(cfg.policies.deletion), email: cfg.support.email }),
+          a: t('{deletion} You can also write to {email} from the email address you used when you started your website. We confirm it is you before we delete anything. Deleting cannot be undone, so download your replies first. [Read our privacy notice](/privacy).', { deletion: t(cfg.policies.deletion), email: cfg.support.email }),
         },
       ],
     },
@@ -205,7 +213,8 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'printed',
           q: t('Do you sell printed invitations?'),
-          a: t('No. We only make wedding websites. If some guests prefer paper, you can print your own simple card with your website\'s QR code at home or at a local print shop, so they can still open the invitation and reply online. [Read about digital invitation etiquette](/guides/digital-wedding-invitation-etiquette).'),
+          // G154: G139's printable invitation (Share → Downloads) is part of every website; we still print nothing
+          a: t('No, we do not print or ship anything. Your panel makes a printable invitation in your design instead: under Share, Downloads, choose 5 × 7 in or A5, add a back side with the details and a QR code, and bleed and crop marks for a print shop. Print it at home or at a local print shop. [See the features](/features#sharing).'),
         },
       ],
     },

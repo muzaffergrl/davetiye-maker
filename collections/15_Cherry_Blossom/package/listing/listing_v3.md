@@ -13,17 +13,18 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G41
 | Start link `https://davetiye-platform-five.vercel.app/start?theme=cherry-blossom-spring` | **Live**: answered `200` on 2026-10-16 and the page names the design ("Design: Cherry Blossom Spring"). Checked through the Vercel connector on production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW` (docs/10); a direct `curl` from this environment is refused by its proxy. Not opened on a phone. |
 | Live demo `https://davetiye-platform-five.vercel.app/start/demo/cherry-blossom-spring` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Live**: answered `200` on 2026-10-16; the page is this design's opening (`data-theme="cherry-blossom-spring"`, sample couple Hana & Ethan). Same check, not opened on a phone. |
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Live** since G079 (2026-10-15). This design is open on `/start` and on the sales site since G097 (`platform/lib/marketing/config.ts`); the current production release `b952bc8` (2026-10-16, docs/10 §2) serves it. The editor features were not re-tried on the live site in this task. |
-| Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Decided on (K34, 2026-10-15), but the records disagree: docs/10 (G092) says the variable is not set in production, docs/18 §4 says it was added on 2026-10-15 and reported off again on 2026-10-16. Not read in this task. The listing keeps "We confirm each order in our shop before a website can go live" with [VERIFY: manual order check on in production]: read the value in Vercel, or delete the sentence before publishing. |
+| Order check (`CLAIM_ORDER_VERIFICATION`) | Decided on (K34, 2026-10-15), but the records disagree on whether it is on in production (docs/10 G092, docs/18 §4); not read in G154 either (no access to the live settings). Since G154 (2026-10-17, K48) the description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode. Read the mode before publishing (§11). |
 | Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
-| Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository since 2026-10-16; described in the description and FAQ (G132) and in the START HERE guide (G131). **Not on production yet** and not tried on the live site. The 4 music tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128), so the description and FAQ keep a VERIFY note on it. Image 8 now reads "Up to 10 questions, download as Excel" (G132). |
+| Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository since 2026-10-16; described in the description and FAQ (G132) and in the START HERE guide (G131). **Not on production yet** and not tried on the live site. The 4 music tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128), so since G154 the description and FAQ only say that a Google Sheet can be connected (the feature), not how it behaves; whether Google sign-in is set up in production is not known (G090: "Google Sheets: coming soon" in a local build without it). Image 8 now reads "Up to 10 questions, download as Excel" (G132). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation (theme README, "Bilinen sınırlar"). |
+| Description claims (G154, 2026-10-17) | Every sentence of §2 describes a feature that exists in the platform and passed G090's local production-build checks (guest site 21/21; buyer flow 6/6 with RSVP, Excel and CSV, map card, sound button, Downloads and a Spanish website). No VERIFY note is left in §2; the live-site and real-device tests that are still open are in §11 (and in `etsy_upload.json` `open_checks`). The demo line "(sample names and photos)" depends on G090 P1-02 (sample photos in the demos). |
 | Edit link by email | **Off.** Sending is built (G147) but stays off until the owner sets up SMTP; the listing and the START HERE guide promise no email. Since G146 (K46) the buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. Listing and guide say so since G148 (2026-10-17). |
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Hosting extension, renewal and the Etsy shop URL are still open. |
+| Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Renewal is still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised) and the Etsy shop URL (`https://www.etsy.com/shop/STUDIOBKE`): K48, 2026-10-17. |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Petit Formal Script (latin-ext, no Cyrillic), Noto Serif Display (latin-ext + Cyrillic). The language line in GOOD TO KNOW is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 63 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=cherry-blossom-spring` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 63 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=cherry-blossom-spring` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 | Listing images and video | **Produced** on 2026-10-16 (G124): 8 images in `images_editorial/` (§5) and `video.mp4` (13.8 s, §6), from a local production build of the repository, so the editor in images 4, 5 and 7 is newer than production until the next deploy. Nothing uploaded to Etsy. |
 
@@ -54,14 +55,16 @@ Copy the link into your phone's browser.
 
 WHAT YOU GET
 • Your wedding website in the Cherry Blossom Spring design: envelope opening, Home, Our Story, Details and RSVP pages
-• A private online editor, designed for phone screens and also working on a computer, with a preview of every page [VERIFY: real iPhone Safari and Android Chrome]
-• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required [VERIFY: try on the live site]
-• Download every reply as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
+• A private online editor, designed for phone screens and also working on a computer, with a preview of every page
+• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
+• Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
 • Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
-• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers [VERIFY: try on the live site]
-• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one [VERIFY: try on the live site]
-• Soft background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and gentle sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap [VERIFY: tracks listened to and approved; try on the live site]
+• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers
+• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one
+• Background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap
+• Your website in English, Spanish, French, German or Turkish, or in several with a language button for guests: the design's headings, buttons, reply form and dates come translated, and your own texts can be translated automatically as a draft that you check and approve
 • A QR code of your website (PNG or SVG) for printed cards and signs
+• Downloads: your whole website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks for a print shop)
 • An optional guest password, and a thank-you page for after the wedding
 • A START HERE guide (PDF) with your start link and every step explained
 • Your website stays online until 12 months after your wedding date
@@ -96,11 +99,11 @@ GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start (for example …/hana-and-ethan); it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
-• We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
+• If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
-• The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
+• Automatic translation is a machine-made first draft: read each text before you approve it. Your own texts can also be in any other language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
-• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
+• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
@@ -197,16 +200,16 @@ Yes, as often as you like. Names and date can be changed 3 times in total after 
 Yes. Every page of the editor has "Headings & labels". The artwork, colors and fonts stay as designed.
 
 **Can it be in another language?**
-You can write your own texts and headings in any language. Built-in messages such as reply form errors stay in English.
+Yes. Your website can be in English, Spanish, French, German or Turkish, or in several of them: the design's built-in texts come translated, and your own texts can be translated automatically (check each translation before you approve it). You can write your own texts in any other language too.
 
 **How do my guests reply?**
-On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply. [VERIFY: Google Sheets connection tested live]
+On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect your own Google Sheet.
 
 **How many guests can I invite?**
 As many as you like. One reply can include up to 10 people.
 
 **Is there music?**
-Yes, if you like: soft music on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and gentle sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
+Yes, if you like: music on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
 
 **Can guests find the venue?**
 Yes. Your Details page can show a map of the venue (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze. If the reception is somewhere else, add it as a second place.
@@ -215,13 +218,13 @@ Yes. Your Details page can show a map of the venue (Google Maps loads only when 
 Yes, optional: one shared password that you send to your guests with the link.
 
 **How long does my website stay online?**
-Until 12 months after your wedding date. After the wedding it can turn into a thank-you page.
+Until 12 months after your wedding date. After the wedding it can turn into a thank-you page. Need it longer? Message us on Etsy before your "Online until" date and we can extend it.
 
 **Can I use my own domain?**
 Not at the moment. Your address is your names on our web address.
 
 **Is anything printed or shipped?**
-No. It is a digital product.
+No. It is a digital product. Your editor makes a printable invitation in your design (5 × 7 in or A5) that you can print at home or at a print shop.
 
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
@@ -266,12 +269,16 @@ link; one review request per order, the same text for everyone, never with an in
 - [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G122, 2026-10-16)
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Music, map and directions, the reply form and Excel download (G126–G128) live and tried on the live site; the 4 tracks listened to and approved; Google Sheets connected with a real Google account
-- [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
+- [x] Order sentence true in every order-check mode (G154, K48: only if the editor says it is confirming the order; "usually within 24 hours")
+- [ ] Order check mode read in production (`CLAIM_ORDER_VERIFICATION`: off, manual or etsy)
 - [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE (G148) re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [x] Price (1,460 TL) and quantity (999) decided and filled in (2026-10-16)
-- [ ] Hosting extension and renewal decided
+- [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
+- [ ] Renewal decided
+- [ ] Languages (G144) and Share → Downloads (G139) tried on the live site
+- [ ] Printable invitation: decor no longer over the text (G090 P1-01, G155) and one printed copy checked
 - [x] Images (editorial set) and video produced; alt texts read against them (G124, 2026-10-16)
 - [ ] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
