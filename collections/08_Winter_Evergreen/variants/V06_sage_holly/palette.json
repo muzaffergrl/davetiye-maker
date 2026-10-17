@@ -1,0 +1,23 @@
+{
+  "id": "V06_sage_holly",
+  "slug": "sage-holly",
+  "name": "Sage & Holly",
+  "ink": "#1F2E26",
+  "deep": "#4A5F48",
+  "primary": "#8C9F87",
+  "mist_top": "#EEF2F1",
+  "mist_bottom": "#C9D6D2",
+  "gold": "#B79B5E",
+  "gold_light": "#DCC895",
+  "ivory": "#FAFAF6",
+  "leaf": "#3E6B53",
+  "swatch": [
+    "#FAFAF6",
+    "#8C9F87",
+    "#8C1D26"
+  ],
+  "status": "coming",
+  "families": {
+    "envelope": "primary"
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "theme": "vintage-airmail-love-letter",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). Only the red of the airmail stripes and the wax seal changes; navy stripes, parchment, wood, pressed flowers and stamps stay (the airmail look is red/colour + navy).",
+  "families": {
+    "red": {
+      "anchor": "#9F342D",
+      "sigma": 12,
+      "cmin": 0.06,
+      "cfull": 0.09
+    }
+  },
+  "groups": {
+    "airmail": [
+      "red"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "pressed flowers, stamps, twine: natural colours in every palette"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "pressed flowers, stamps, twine: natural colours in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "postmark: brown ink"
+    },
+    "bg_desk_pair": {
+      "recolor": "keep",
+      "why": "wooden desk: natural wood"
+    },
+    "bg_desk_pair_2x": {
+      "recolor": "keep",
+      "why": "wooden desk: natural wood"
+    },
+    "bg_page": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "decor_br": {
+      "recolor": "keep",
+      "why": "pressed flowers, stamps, twine: natural colours in every palette"
+    },
+    "decor_tl": {
+      "recolor": "keep",
+      "why": "pressed flowers, stamps, twine: natural colours in every palette"
+    },
+    "divider": {
+      "recolor": "keep",
+      "why": "pressed flowers, stamps, twine: natural colours in every palette"
+    },
+    "env_open": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "env_strip": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "env_torn": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "info_card_band": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "invitation_card_band": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "mist": {
+      "recolor": "keep",
+      "why": "aged parchment paper: neutral"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: parchment"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: parchment"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: parchment"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: parchment"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: parchment"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "airmail"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "aged parchment paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#2E3B5E",
+    "accent": "#8C2F27",
+    "paper": "#F2EADB"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "red"
+    ],
+    "keep": [
+      "--pen",
+      "--ink",
+      "--ink-soft",
+      "--navy",
+      "--navy-ink",
+      "--gold",
+      "--cream",
+      "--paper",
+      "--ivory",
+      "--page"
+    ],
+    "contrast": [
+      [
+        "--red-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--red-ink",
+        "--paper",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--navy-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--cream",
+        "--navy",
+        4.5
+      ]
+    ]
+  }
+}

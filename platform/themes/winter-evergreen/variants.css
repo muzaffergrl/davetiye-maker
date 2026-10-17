@@ -1,0 +1,101 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 08
+   (kaynak: collections/08_Winter_Evergreen/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-0a1810: 10 24 16;
+  --c-141e14: 20 30 20;
+  --c-14281e: 20 40 30;
+  --c-1c382c: 28 56 44;
+  --c-1e3228: 30 50 40;
+  --c-1f2e26: 31 46 38;
+  --c-284636: 40 70 54;
+  --c-2f5240: 47 82 64;
+  --c-3e6b53: 62 107 83;
+}
+
+/* V03_burgundy_wine · Burgundy Wine & Pine */
+html[data-variant="burgundy-wine"] {
+  --c-0a1810: 33 3 5;
+  --c-141e14: 35 16 17;
+  --c-14281e: 56 8 10;
+  --c-1c382c: 74 25 19;
+  --c-1e3228: 66 21 20;
+  --c-1f2e26: 55 27 24;
+  --c-284636: 100 20 27;
+  --c-2f5240: 116 28 33;
+  --c-3e6b53: 156 33 46;
+  --green: #741C21;
+  --green-ink: #681A1E;
+  --hair: rgba(116, 28, 33, 0.4);
+  --script-ink: #600016;
+}
+
+/* V05_frost_blue · Frost Blue & Pine */
+html[data-variant="frost-blue"] {
+  --c-0a1810: 22 39 50;
+  --c-141e14: 25 42 45;
+  --c-14281e: 34 56 73;
+  --c-1c382c: 43 69 88;
+  --c-1e3228: 45 66 83;
+  --c-1f2e26: 44 60 69;
+  --c-284636: 53 87 115;
+  --c-2f5240: 60 98 129;
+  --c-3e6b53: 72 124 165;
+  --green: #315775;
+  --green-ink: #365873;
+  --hair: rgba(60, 98, 129, 0.4);
+  --script-ink: #2D526F;
+}
+
+/* V04_ivory_pine · Ivory & Pine */
+html[data-variant="ivory-pine"] {
+  --c-0a1810: 9 33 23;
+  --c-141e14: 22 36 24;
+  --c-14281e: 16 50 38;
+  --c-1c382c: 20 66 52;
+  --c-1e3228: 28 60 48;
+  --c-1f2e26: 32 54 45;
+  --c-284636: 30 83 63;
+  --c-2f5240: 34 95 74;
+  --c-3e6b53: 41 122 93;
+  --green: #225F4A;
+  --green-ink: #215643;
+  --hair: rgba(34, 95, 74, 0.4);
+  --script-ink: #154D38;
+}
+
+/* V02_midnight_navy · Midnight Navy & Holly */
+html[data-variant="midnight-navy"] {
+  --c-0a1810: 5 13 25;
+  --c-141e14: 11 23 28;
+  --c-14281e: 17 26 45;
+  --c-1c382c: 29 41 63;
+  --c-1e3228: 26 36 55;
+  --c-1f2e26: 26 35 47;
+  --c-284636: 37 51 84;
+  --c-2f5240: 46 62 98;
+  --c-3e6b53: 62 83 132;
+  --green: #2E3E62;
+  --green-ink: #293757;
+  --hair: rgba(46, 62, 98, 0.4);
+  --script-ink: #1E2C50;
+}
+
+/* V06_sage_holly · Sage & Holly */
+html[data-variant="sage-holly"] {
+  --c-0a1810: 27 42 29;
+  --c-141e14: 34 44 30;
+  --c-14281e: 39 61 44;
+  --c-1c382c: 45 75 56;
+  --c-1e3228: 49 71 55;
+  --c-1f2e26: 47 63 51;
+  --c-284636: 62 94 68;
+  --c-2f5240: 69 106 77;
+  --c-3e6b53: 86 134 94;
+  --green: #375C3F;
+  --green-ink: #3B5C42;
+  --hair: rgba(69, 106, 77, 0.4);
+  --script-ink: #39593C;
+}

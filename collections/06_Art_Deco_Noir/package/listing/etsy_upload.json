@@ -208,5 +208,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Art Deco Black-Tie)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=art-deco-black-tie"
+      },
+      {
+        "name": "Onyx Black & Gold",
+        "variant": "onyx-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=art-deco-black-tie&variant=onyx-gold"
+      },
+      {
+        "name": "Emerald & Gold",
+        "variant": "emerald-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=art-deco-black-tie&variant=emerald-gold"
+      },
+      {
+        "name": "Burgundy & Gold",
+        "variant": "burgundy-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=art-deco-black-tie&variant=burgundy-gold"
+      },
+      {
+        "name": "Amethyst & Gold",
+        "variant": "amethyst-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=art-deco-black-tie&variant=amethyst-gold"
+      },
+      {
+        "name": "Navy & Silver",
+        "variant": "navy-silver",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=art-deco-black-tie&variant=navy-silver"
+      }
+    ],
+    "offered": [
+      "Original (Art Deco Black-Tie)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

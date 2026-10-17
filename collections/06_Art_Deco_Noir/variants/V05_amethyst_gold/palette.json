@@ -1,0 +1,24 @@
+{
+  "id": "V05_amethyst_gold",
+  "slug": "amethyst-gold",
+  "name": "Amethyst & Gold",
+  "ink": "#F5EEDC",
+  "deep": "#C9A55C",
+  "primary": "#2E1A42",
+  "mist_top": "#3A2452",
+  "mist_bottom": "#1C1029",
+  "gold": "#C9A55C",
+  "gold_light": "#E6CF8F",
+  "ivory": "#F5EEDC",
+  "leaf": "#C9A55C",
+  "swatch": [
+    "#2E1A42",
+    "#C9A55C",
+    "#F5EEDC"
+  ],
+  "status": "coming",
+  "families": {
+    "ground": "primary",
+    "gold": null
+  }
+}

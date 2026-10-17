@@ -214,5 +214,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Mediterranean Lemon)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=mediterranean-lemon"
+      },
+      {
+        "name": "Terracotta & Lemon",
+        "variant": "terracotta-lemon",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=mediterranean-lemon&variant=terracotta-lemon"
+      },
+      {
+        "name": "Sage & Lemon",
+        "variant": "sage-lemon",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=mediterranean-lemon&variant=sage-lemon"
+      },
+      {
+        "name": "Lavender & Lemon",
+        "variant": "lavender-lemon",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=mediterranean-lemon&variant=lavender-lemon"
+      },
+      {
+        "name": "Capri Turquoise & Lemon",
+        "variant": "capri-turquoise",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=mediterranean-lemon&variant=capri-turquoise"
+      },
+      {
+        "name": "Dusty Blue & Lemon",
+        "variant": "dusty-blue-lemon",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=mediterranean-lemon&variant=dusty-blue-lemon"
+      }
+    ],
+    "offered": [
+      "Original (Mediterranean Lemon)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

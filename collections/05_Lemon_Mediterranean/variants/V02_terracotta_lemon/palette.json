@@ -1,0 +1,24 @@
+{
+  "id": "V02_terracotta_lemon",
+  "slug": "terracotta-lemon",
+  "name": "Terracotta & Lemon",
+  "ink": "#5A2E1E",
+  "deep": "#A9512F",
+  "primary": "#F2C94C",
+  "mist_top": "#F7F4EC",
+  "mist_bottom": "#EFDCCB",
+  "gold": "#C9A04A",
+  "gold_light": "#E8D18F",
+  "ivory": "#FFFDF7",
+  "leaf": "#5E8C4A",
+  "swatch": [
+    "#FFFDF7",
+    "#F2C94C",
+    "#A9512F"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "deep",
+    "wash": "mist_bottom"
+  }
+}

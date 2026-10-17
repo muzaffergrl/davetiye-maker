@@ -1,0 +1,23 @@
+{
+  "id": "V02_dusty_rose",
+  "slug": "dusty-rose",
+  "name": "Dusty Rose & Navy",
+  "ink": "#2A2A35",
+  "deep": "#8C4E58",
+  "primary": "#B5727C",
+  "mist_top": "#F2EADB",
+  "mist_bottom": "#DCCDB2",
+  "gold": "#A88A5A",
+  "gold_light": "#D2BE95",
+  "ivory": "#FAF4E8",
+  "leaf": "#8A9474",
+  "swatch": [
+    "#FAF4E8",
+    "#B5727C",
+    "#3D4F7A"
+  ],
+  "status": "coming",
+  "families": {
+    "red": "primary"
+  }
+}
