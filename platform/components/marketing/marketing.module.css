@@ -1777,6 +1777,24 @@
 .cardScreen {
   border-radius: 14px;
 }
+.cardArtwork {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: var(--shadow-screen);
+}
+.designCard[data-status='preview'] .designCardMedia {
+  width: min(100%, 340px);
+}
+.designCardStatus {
+  margin: 0 0 6px !important;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
 .cardScreenHover {
   display: none;
 }
