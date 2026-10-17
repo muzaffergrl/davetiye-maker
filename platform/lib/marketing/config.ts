@@ -187,6 +187,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 28 (G166, docs/24): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'maison-patisserie',
+      name: 'Maison Pâtisserie',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

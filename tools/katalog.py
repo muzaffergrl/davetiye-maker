@@ -422,6 +422,12 @@ EK_TEMALAR = [
          dekor="Altın kintsugi damarları, washi dokuları, mürekkep fırçası darbeleri", teknik="sumi mürekkep + altın varak",
          font=("Allura", "Shippori Mincho"), palet_adi="indigo-gold-rice",
          hareket="Kat kat 3B açılma (dört kat ayrı menteşede), altın damar parıltısı, mürekkep yayılımıyla foto, süzülen altın varak pulları"),
+    dict(no=28, klasor="28_Maison_Patisserie", ad="Maison Patisserie",
+         zarf="Fıstık yeşili pasta kutusu (üstten), gül saten fiyonk; fiyonk çözülür, kurdele kolları kayar, kapak kalkar, ipek kâğıt aralanır, kart öne gelir.",
+         foto="Pastane vitrini rafları: fotoğraflar cam rafta durur, kaydırılır (sürükle, yasla, ok tuşları); ortadaki öne çıkar.",
+         dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
+         font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
+         hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

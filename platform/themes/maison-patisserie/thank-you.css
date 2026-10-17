@@ -1,0 +1,9 @@
+/* Maison Pâtisserie — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
+   The same box and pages; the card and the invitation carry the couple's thank-you. No new artwork: without a
+   thank-you photo the card window shows the satin bow. */
+.ty-title{font:400 clamp(14px,4.2vw,22px)/1.2 var(--script)}
+.card-photo.ty-decor,.card-photo .ty-decor{background:transparent;display:grid;place-items:center}
+.hero-card .card-photo.ty-decor{aspect-ratio:auto;padding:12px 0}
+.thank-you-copy .body-text{white-space:pre-line;margin:0 auto 18px;max-width:420px}
+.thank-you-copy .love{font-size:30px;margin-top:10px;color:var(--rose-deep)}
+.reply-card.thank-you-copy .btn{margin-top:6px}

@@ -230,6 +230,11 @@ const dict: Dict = {
   'invite you to celebrate with them': 'sizi kutlamalarına davet ediyor',
   'Open the box again': 'Kutuyu yeniden aç',
   'Treasured moments': 'Değerli anlarımız',
+  // G166 Maison Pâtisserie
+  'A sweet invitation': 'Tatlı bir davet',
+  'Our sweetest moments': 'En tatlı anlarımız',
+  'Tap to open the box': 'Kutuyu açmak için dokunun',
+  'Untie the bow again': 'Fiyonku yeniden çöz',
   // G163 Orient Express Voyage
   'All aboard': 'Herkes trene',
   'Board': 'Bin',

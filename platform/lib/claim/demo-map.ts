@@ -20,6 +20,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'ivory-lace-pearls': { lat: 41.4901, lng: -71.3128 }, // Newport, RI
   'kintsugi-washi': { lat: 45.7054, lng: -121.5215 }, // Hood River, Oregon
   'lavender-provence': { lat: 43.9116, lng: 5.2003 }, // Gordes
+  'maison-patisserie': { lat: 32.0809, lng: -81.0912 }, // Savannah, GA
   'mediterranean-lemon': { lat: 40.6263, lng: 14.3758 }, // Sorrento
   'midnight-garden': { lat: 29.9511, lng: -90.0715 }, // New Orleans
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)

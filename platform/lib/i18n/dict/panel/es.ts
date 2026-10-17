@@ -1285,6 +1285,7 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Tu número de pedido y tu correo aparecerán ya rellenados en la página siguiente.',
   'since {date}': 'desde el {date}',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} ya no se abre en este dispositivo, así que lo hemos quitado. Introduce abajo tu número de pedido y tu correo para volver a abrirlo.|{addresses} ya no se abren en este dispositivo, así que los hemos quitado. Introduce abajo tu número de pedido y tu correo para volver a abrirlos.',
+  // G166 Maison Pâtisserie
   'Above your names on the box': 'Sobre tus nombres en la caja',
   'Box': 'Caja',
   'Button after the box opens': 'Botón tras abrirse la caja',

@@ -54,6 +54,7 @@ export const OPENING_THINGS: Readonly<Record<string, string>> = {
   wallet: msg('wallet'),
   book: msg('book'),
   sleeve: msg('sleeve'),
+  box: msg('box'),
 };
 
 /** The opening object in the page language. */
