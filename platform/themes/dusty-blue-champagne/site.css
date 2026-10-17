@@ -1,5 +1,4 @@
 /* Dusty Blue & Champagne (02): GPT parts only; README.md */
-
 /* -- tokens (palette.json V01_dusty_blue) */
 :root {
   --page: #CCDCEC; --ivory: #FBF7EF; --ink: #2B3A4E; --ink-soft: #3A4A60; --blue-ink: #44597A; --blue: #4E6782;
@@ -8,9 +7,7 @@
   --ease: cubic-bezier(.22, .61, .36, 1); --ease-soft: cubic-bezier(.33, 0, .2, 1);
   --settle: cubic-bezier(.17, 1.16, .38, 1); --nav-h: 54px;
 }
-
 @view-transition { navigation: auto; }
-
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; background: var(--page); scroll-behavior: smooth; }
 body {
@@ -26,7 +23,6 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .nowrap { white-space: nowrap; }
 [data-empty] { display: none; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
-
 /* -- bokeh paper; wide / landscape: over bg_tile */
 .page-bg, .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .page-bg img, .scene-bg .paper { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -57,7 +53,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   font: 600 12.5px/1.6 var(--serif); letter-spacing: .24em; text-transform: uppercase; color: var(--ink);
   text-decoration: underline 1px; text-decoration-color: var(--gold); text-underline-offset: 6px;
 }
-.textlink::after { content: ""; position: absolute; inset: -14px -10px; }
+.textlink::after{content:"";position:absolute;inset:-14px -10px}
+:is(.foot,.closing,.reply-panel) .textlink{padding:14px 0;margin:-14px 0}
 .wrap { position: relative; width: min(100% - 28px, 470px); margin-inline: auto; }
 .section { position: relative; }
 
@@ -397,7 +394,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
   filter: drop-shadow(0 8px 12px #1e2d4624); }
 .foot .love { font-size: 34px; }
 .foot .sign { font-size: calc(46px * var(--fit, 1)); margin-top: 2px; overflow-wrap: anywhere; text-wrap: balance; }
-.foot .textlink { margin-top: 20px; }
+.foot .textlink { margin-top: 6px; }
 
 /* == long pages: corners + headings */
 .page-long .site-main { padding-top: env(safe-area-inset-top); }
@@ -530,7 +527,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel { margin-top: 10px; }
 .reply-panel .script { font-size: 50px; color: var(--gold-card); text-shadow: none; }
 .reply-panel .note { margin-top: 6px; }
-.reply-panel .textlink { margin-top: 18px; }
+.reply-panel .textlink { margin-top: 4px; }
 .closing .sprig { margin: 0 auto 8px; }
 .closing > h2, .closing > p { width: fit-content; margin-inline: auto; }
 .closing .title { font-size: 60px; }

@@ -375,3 +375,34 @@ legend{margin:0 0 6px;padding:0;width:100%;overflow-wrap:anywhere}
 .faq details[open] summary::after{content:"\00d7";content:"\00d7" / ""}
 .faq details p{white-space:pre-line}
 #reply{scroll-margin-top:64px}
+
+/* G155 (G090 P2-02): no text under 12 px on a phone (the tracked sans labels were 7–10 px: dates, places, countdown and
+   calendar labels, buttons, the nav). They start at 12 px with a little less tracking; the narrow boxes that held them
+   are a little wider so they keep their line count (hero request, programme date column). */
+.eyebrow { font-size: 12px; letter-spacing: .16em; }
+.small { font-size: 12px; }
+.btn { font-size: 12px; letter-spacing: .1em; }
+.btn-sm { font-size: 12px; }
+.map-section .btn { letter-spacing: .04em; }
+.textlink { font-size: 12px; }
+.site-nav a { font-size: 12px; }
+.cd-row small { font-size: 12px; letter-spacing: .04em; }
+.ph-mark { font-size: 12px; }
+.card-oval .ph-mark { font-size: 12px; }
+.opening-heading > .eyebrow:last-child { font-size: 12px; }
+.is-opened .replay { font-size: 12px; }
+.tap-hint { font-size: 12px; }
+.home-hero > .eyebrow { font-size: 12px; }
+.hero-request { font-size: 12px; letter-spacing: .12em; line-height: 1.8; max-width: 150px; }
+.hero-bottom-date small { font-size: 12px; letter-spacing: .1em; max-width: 170px; }
+.date-block > span { font-size: 12px; letter-spacing: .08em; }
+.chapter-no { font-size: 12px; letter-spacing: .08em; }
+.signature .textlink { font-size: 12px; }
+.album-heading > .eyebrow { font-size: 12px; }
+.album-status { font-size: 12px; letter-spacing: .12em; }
+.programme-date { width: 112px; }
+.programme-date > span { font-size: 12px; letter-spacing: .1em; }
+.schedule time { font-size: 12px; }
+.rsvp-heading .eyebrow { font-size: 12px; }
+.field-error { font-size: 12px; }
+@media (min-width: 700px) { .hero-request { max-width: 240px; } }

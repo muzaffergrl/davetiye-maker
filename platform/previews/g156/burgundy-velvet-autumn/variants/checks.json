@@ -2,9 +2,9 @@
  "theme": "burgundy-velvet-autumn",
  "summary": {
   "original": {
-   "measured": 115,
+   "measured": 117,
    "low": 0,
-   "as_original": 3
+   "as_original": 1
   },
   "emerald-velvet": {
    "measured": 117,
@@ -34,7 +34,7 @@
  },
  "errors": [],
  "warnings": [
-  "original palette: 3 text(s) below the contrast minimum on the painted ground: home \"RSVP\" 1.58:1 < 4.5:1; home \"RSVP\" 1.21:1 < 4.5:1; details \"RSVP\" 1.25:1 < 4.5:1"
+  "original palette: 1 text(s) below the contrast minimum on the painted ground: index \"Click to open\" 3.95:1 < 4.5:1"
  ],
  "passed": [
   "palette emerald-velvet (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",

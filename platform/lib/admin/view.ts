@@ -144,7 +144,7 @@ export function isSale(s: AdminSiteSummary): boolean {
 }
 
 export interface AdminTodo {
-  kind: 'confirm' | 'shop_edit' | 'not_published' | 'closing' | 'unpublished_changes';
+  kind: 'confirm' | 'shop_edit' | 'not_published' | 'closing' | 'unpublished_changes' | 'retention';
   site: AdminSiteSummary;
   /** Turkish one-liner for the shop. */
   text: string;
@@ -168,6 +168,39 @@ export interface AdminDashboard {
 export const NOT_PUBLISHED_AFTER_DAYS = 5;
 /** Published sites closing (archive day) within this many days. */
 export const CLOSING_WITHIN_DAYS = 30;
+
+/**
+ * K48 (5): after its last online day a website stays this many months in the archive (offline, read-only; the buyer can
+ * still download replies), then the shop deletes it (site, photos, guest replies) — the "Yapılacaklar" list says when.
+ */
+export const RETENTION_AFTER_ARCHIVE_MONTHS = 12;
+
+/** "YYYY-MM-DD" + n days / months (UTC calendar; a month end is clamped: 2027-01-31 + 1 month = 2027-02-28). */
+function addDaysIso(day: string, n: number): string {
+  return new Date(Date.parse(`${day}T00:00:00Z`) + n * DAY_MS).toISOString().slice(0, 10);
+}
+function addMonthsIso(day: string, n: number): string {
+  const [y, m, d] = day.split('-').map(Number);
+  const first = new Date(Date.UTC(y, m - 1 + n, 1));
+  const last = new Date(Date.UTC(first.getUTCFullYear(), first.getUTCMonth() + 1, 0)).getUTCDate();
+  return new Date(Date.UTC(first.getUTCFullYear(), first.getUTCMonth(), Math.min(d, last))).toISOString().slice(0, 10);
+}
+
+/**
+ * K48: for an archived website, its archive day (the day after "Online until") and the day the shop deletes it
+ * (archive day + RETENTION_AFTER_ARCHIVE_MONTHS); null for a site that is not archived (online, draft, never published).
+ */
+export function retentionDates(s: Pick<AdminSiteSummary, 'state' | 'onlineUntil'>): { archivedOn: string; deleteFrom: string } | null {
+  if (s.state !== 'archived' || !s.onlineUntil || !/^\d{4}-\d{2}-\d{2}$/.test(s.onlineUntil)) return null;
+  const archivedOn = addDaysIso(s.onlineUntil, 1);
+  return { archivedOn, deleteFrom: addMonthsIso(archivedOn, RETENTION_AFTER_ARCHIVE_MONTHS) };
+}
+
+/** K48: the archived website has been offline for more than RETENTION_AFTER_ARCHIVE_MONTHS (shop day `today`): delete it. */
+export function retentionDue(s: Pick<AdminSiteSummary, 'state' | 'onlineUntil'>, today: string): boolean {
+  const r = retentionDates(s);
+  return Boolean(r && today >= r.deleteFrom);
+}
 
 export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = new Date()): AdminDashboard {
   const sales = list.filter(isSale);
@@ -215,6 +248,13 @@ export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = ne
   for (const s of list) {
     if (s.unpublishedChanges && t - Date.parse(s.contentUpdatedAt || s.updatedAt) > 2 * DAY_MS) {
       todos.push({ kind: 'unpublished_changes', site: s, text: 'Yayınlanmamış değişiklikleri var (alıcı Publish\'e basmamış olabilir)' });
+    }
+  }
+  // K48 (5): archived for more than 12 months → delete (site, photos, guest replies; the site page's "Siteyi sil").
+  for (const s of list) {
+    const r = retentionDates(s);
+    if (r && today >= r.deleteFrom) {
+      todos.push({ kind: 'retention', site: s, text: `${r.archivedOn} tarihinden beri arşivde (${RETENTION_AFTER_ARCHIVE_MONTHS} aydan uzun) — saklama süresi doldu, siteyi silin` });
     }
   }
 

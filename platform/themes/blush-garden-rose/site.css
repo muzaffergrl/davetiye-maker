@@ -1,8 +1,6 @@
 /* Blush Garden Rose — platform theme (design 03), styles of all pages; from the G035 demo. Visuals: GPT parts only
    (img/, build_images.py); code does layout, type, motion — no drawn decor. Fonts: Google Fonts link (no files). */
-
 @view-transition { navigation: auto; }
-
 :root {
   /* palette.json */
   --ink: #3F2A2E;
@@ -18,17 +16,14 @@
   --ink-soft: #5E4146;
   --gold-ink: #A27C47;
   --page: #F2D8D7;
-
   --script: 'Great Vibes', 'Pinyon Script', 'Snell Roundhand', 'Apple Chancery', cursive;
   --display: 'Cormorant Garamond', 'Cormorant', 'EB Garamond', Garamond, 'Times New Roman', serif;
   --body: 'Lora', Georgia, 'Times New Roman', serif;
-
   --ease-out: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);
   --nav-h: 64px;
   --safe-b: env(safe-area-inset-bottom, 0px);
 }
-
 *, *::before, *::after { box-sizing: border-box; }
 /* overflow-x clip on the root: animated parts (bow sliding off, petals) must never widen the mobile layout viewport */
 html { -webkit-text-size-adjust: 100%; background: var(--page); overflow-x: clip; }
@@ -52,12 +47,11 @@ button { font: inherit; color: inherit; }
 .js .nojs-only { display: none; }
 .nojs-only { margin-top: 20px; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
 /* ---------------------------------------------------------------- type */
 .kicker {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
   letter-spacing: .3em;
   text-transform: uppercase;
@@ -69,7 +63,6 @@ button { font: inherit; color: inherit; }
 .serif { font-family: var(--display); }
 .it { font-style: italic; }
 .nowrap { white-space: nowrap; }
-
 /* ---------------------------------------------------------------- backdrops */
 .scene-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .scene-bg > picture, .scene-bg > picture img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
@@ -89,7 +82,6 @@ button { font: inherit; color: inherit; }
   .land-only { display: block; }
   .port-only { display: none; }
 }
-
 /* ---------------------------------------------------------------- buttons, links */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5em;
@@ -115,7 +107,8 @@ button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--deep); outline-offset: 3px; }
 /* small text links keep their look but get a 44 px touch area */
 .textlink.replay, .closing .textlink { position: relative; }
-.textlink.replay::after, .closing .textlink::after { content: ""; position: absolute; inset: -14px -8px; }
+.textlink.replay::after, .closing .textlink::after { content: ""; position: absolute; inset: 0 -8px; }
+.closing .textlink{display:inline-block;padding-top:23px;margin:-23px 0 -3px}
 
 /* ==========================================================================
    Motion presets: data-step (order, site.js MOTION) + data-a (how it enters); without JS all visible
@@ -232,10 +225,11 @@ button { font: inherit; color: inherit; }
 .env-page .card { view-transition-name: none; }
 .card > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .card .photo-slot { left: 14.677%; top: 9.569%; width: 70.522%; height: 47.448%; }   /* manifest photo_slots.card */
-.card-copy { position: absolute; left: 8%; right: 8%; top: 64%; text-align: center; }
+.card-copy { position: absolute; left: 8%; right: 8%; top: 60.5%; text-align: center; }
 .card-copy .script { font-size: 11.6cqw; line-height: 1.1; }
-.card-copy .kicker { font-size: max(8.5px, 4.9cqw); letter-spacing: .24em; margin-top: 4cqw; color: var(--ink-soft); }
-.card-copy .kicker + .kicker { margin-top: 1.2cqw; font-size: max(8px, 4.2cqw); }
+.card-copy .kicker { font-size: max(12px, 4.9cqw); letter-spacing: .04em; line-height: 1.2; margin-top: 2.5cqw; color: var(--ink-soft); }
+.card-copy .kicker + .kicker { margin-top: 1.2cqw; font-size: max(12px, 4.2cqw); }
+@container (max-width:160px){.card-copy .kicker+.kicker{display:none}}
 
 /* ==========================================================================
    Photo slot (data-slot = photo key; img[data-photo] is the swappable photo; .ph-mark = GPT petal + label)
@@ -255,7 +249,7 @@ button { font: inherit; color: inherit; }
 }
 .ph-mark img { width: 20cqw; min-width: 18px; height: auto; transform: rotate(-18deg); filter: drop-shadow(0 3px 4px rgb(var(--c-3f2a2e)/.18)); }
 .ph-mark span {
-  font-family: var(--display); font-weight: 600; font-size: max(7.5px, 6.4cqw); line-height: 1.3;
+  font-family: var(--display); font-weight: 600; font-size: max(12px, 6.4cqw); line-height: 1.3;
   letter-spacing: .26em; text-transform: uppercase; color: var(--deep);
   text-shadow: 0 0 8px #fbedecf2;
 }
@@ -300,12 +294,12 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .cd-grid { display: flex; justify-content: center; gap: clamp(14px, 5vw, 34px); }
 .cd-cell { display: flex; flex-direction: column; align-items: center; min-width: 52px; }
 .cd-num { font-family: var(--display); font-weight: 500; font-size: clamp(30px, 8.6vw, 44px); line-height: 1; color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
-.cd-lbl { font-size: 10px; letter-spacing: .26em; margin-top: 6px; }
+.cd-lbl { font-size: 12px; letter-spacing: .12em; margin-top: 6px; }
 .cd-done { display: none; font-family: var(--display); font-style: italic; font-size: 20px; color: var(--deep); }
 .countdown.is-done .cd-grid { display: none; }
 .countdown.is-done .cd-done:not([hidden]) { display: block; }
 .cue { margin-top: max(12px, 2svh); display: inline-flex; flex-direction: column; align-items: center; gap: 2px; text-decoration: none;
-       font-family: var(--display); font-weight: 600; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
+       font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
 .cue span[aria-hidden] { font-size: 18px; letter-spacing: 0; animation: cue 2.2s var(--ease-soft) infinite; }
 @keyframes cue { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(5px); opacity: 1; } }
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
@@ -318,19 +312,19 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .invite > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* text column centred on the card face (paper centre 48.7%); free-zone map in README */
 .invite-text { position: absolute; left: 12.7%; width: 72%; top: 35.2%; display: flex; flex-direction: column; align-items: center; color: var(--ink); }
-.invite-text .kicker { font-size: max(9.5px, 2.7cqw); letter-spacing: .21em; }
+.invite-text .kicker { font-size: max(12px, 2.7cqw); letter-spacing: .16em; }
 .invite-text .nm { font-size: 10.6cqw; line-height: 1.04; }
 .invite-text .nm1 { margin-top: 1.2cqw; }
 .invite-text > .amp { font-size: 6.4cqw; line-height: .9; margin: .4cqw 0 0; }
 .invite-text .request { margin-top: 2.4cqw; font-family: var(--body); font-style: italic; font-size: max(12px, 3.55cqw); line-height: 1.34; color: var(--ink-soft); max-width: 92%; }
-.dateblock { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-top: 2.4cqw; width: 78%; }
-.dateblock .side { font-family: var(--display); font-weight: 600; font-size: max(9.5px, 2.75cqw); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft);
+.dateblock { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-top: 2.4cqw; width: 84%; }
+.dateblock .side { font-family: var(--display); font-weight: 600; font-size: max(12px, 2.75cqw); letter-spacing: .12em; white-space: nowrap; text-transform: uppercase; color: var(--ink-soft);
                    padding: 1.1cqw 0; border-block: 1px solid rgb(var(--c-c8a46e)/.75); }
 .dateblock .mid { padding: 0 3.6cqw; line-height: 1; }
-.dateblock .mon, .dateblock .yr { display: block; text-transform: uppercase; font-family: var(--display); font-weight: 600; font-size: max(9.5px, 2.75cqw); letter-spacing: .26em; color: var(--ink-soft); }
+.dateblock .mon, .dateblock .yr { display: block; text-transform: uppercase; font-family: var(--display); font-weight: 600; font-size: max(12px, 2.75cqw); letter-spacing: .18em; color: var(--ink-soft); }
 .dateblock .day { display: block; font-family: var(--display); font-weight: 500; font-size: 8.8cqw; line-height: 1.02; color: var(--deep); }
-.invite-text .venue { margin-top: 2.4cqw; font-family: var(--body); font-style: italic; font-size: max(11.5px, 3.2cqw); color: var(--ink); }
-.invite-text .city { margin-top: .3cqw; font-size: max(9px, 2.5cqw); letter-spacing: .22em; }
+.invite-text .venue { margin-top: 2.4cqw; font-family: var(--body); font-style: italic; font-size: max(12px, 3.2cqw); color: var(--ink); }
+.invite-text .city { margin-top: .3cqw; font-size: max(12px, 2.5cqw); letter-spacing: .16em; }
 /* Long names/host line/venue: the card grows (docs/11 §9 3-slice, as .info below; nothing drawn). <img> = rows 0–42 %,
    ::before = plain band 42–66 % stretched (free_zone 41–68), ::after = 66–100 %. Image height 158.966cqw. Text from row
    35.2 %; column ≤ 88 % (inside the arch florals), venue + city ≤ 64 % (between the bottom florals); last line ≤ row 81.5 %
@@ -365,12 +359,12 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .teaser .art > .bow { width: 112px; }
 .teaser .tx { display: block; min-width: 0; overflow-wrap: break-word; }
 .teaser h3 { font-size: 38px; line-height: 1.05; }
-.teaser .kicker { display: block; font-size: 10.5px; letter-spacing: .2em; margin-top: 4px; }
+.teaser .kicker { display: block; font-size: 12px; letter-spacing: .2em; margin-top: 4px; }
 .teaser .sched { display: block; margin-top: 4px; font-family: var(--display); font-style: italic; font-size: 16.5px; line-height: 1.35; color: var(--ink-soft); }
 /* one item per line; a long label wraps under itself (hanging indent) */
 .teaser .sched-line { display: block; padding-left: .9em; text-indent: -.9em; }
 .teaser .sched-line:nth-child(n+5) { display: none; }   /* teaser: first four items; all of them on the Details page */
-.teaser .more { display: inline-block; margin-top: 10px; font-size: 11.5px; }
+.teaser .more { display: inline-block; margin-top: 10px; font-size: 12px; }
 
 /* ---------------------------------------------------------------- page heads (story/details/rsvp) */
 .page-head { position: relative; isolation: isolate; padding: max(132px, 17svh) 16px 24px; text-align: center; overflow: clip; }
@@ -408,7 +402,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .sched-list { list-style: none; margin: 2.6cqw 0 0; padding: 0; width: 100%; }
 .sched-row { display: grid; grid-template-columns: 31% 1fr; align-items: center; text-align: left; }
 .sched-row + .sched-row { margin-top: .8cqw; }
-.sched-row .time { font-family: var(--display); font-weight: 600; font-size: max(10px, 3.1cqw); letter-spacing: .18em; color: var(--ink-soft);
+.sched-row .time { font-family: var(--display); font-weight: 600; font-size: max(12px, 3.1cqw); letter-spacing: .14em; color: var(--ink-soft);
                    text-align: right; padding: 1.5cqw 4cqw 1.5cqw 0; border-right: 1px solid rgb(var(--c-c8a46e)/.8); }
 .sched-row .what { padding-left: 4.2cqw; }
 .sched-row .label { display: block; font-family: var(--display); font-weight: 600; font-size: max(12px, 3.9cqw); letter-spacing: .2em; text-transform: uppercase; color: var(--ink); line-height: 1.25; }
@@ -422,9 +416,9 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .sched-list:has(> .sched-row:nth-child(4)) .sched-row + .sched-row { margin-top: 1.6cqw; }
 .sched-list:has(> .sched-row:nth-child(4)) { margin-top: 2cqw; }
 .sched-list:has(> .sched-row:nth-child(5)) .sched-row + .sched-row { margin-top: .4cqw; }
-.sched-list:has(> .sched-row:nth-child(5)) .sched-row .time { padding-block: .7cqw; font-size: max(9.5px, 2.8cqw); }
-.sched-list:has(> .sched-row:nth-child(5)) .sched-row .label { font-size: max(11px, 3.3cqw); line-height: 1.15; }
-.sched-list:has(> .sched-row:nth-child(5)) .sched-row .loc { font-size: max(11px, 3cqw); line-height: 1.25; }
+.sched-list:has(> .sched-row:nth-child(5)) .sched-row .time { padding-block: .7cqw; font-size: max(12px, 2.8cqw); }
+.sched-list:has(> .sched-row:nth-child(5)) .sched-row .label { font-size: max(12px, 3.3cqw); line-height: 1.15; }
+.sched-list:has(> .sched-row:nth-child(5)) .sched-row .loc { font-size: max(12px, 3cqw); line-height: 1.25; }
 .info-text:has(.sched-row:nth-child(5)) .title { font-size: 9cqw; }
 .info-text:has(.sched-row:nth-child(5)) .dress { margin-top: 1.8cqw; }
 /* G055/G056 — Order of the Day and RSVP cards ("tall") grow by the docs/11 §9 3-slice cut, nothing drawn: <img> rows
@@ -447,17 +441,17 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
   padding: 44.71cqw 0 43.32cqw; min-height: 66.68cqw; box-sizing: content-box; }
 /* RSVP: text from 34 % of the image (52.6cqw) to row 72 % at most */
 .info.tall > .rsvp-text { padding-top: 52.6cqw; min-height: 58.79cqw; }
-.dress { margin-top: 3cqw; font-family: var(--display); font-weight: 600; font-size: max(9.5px, 2.8cqw); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft); }
+.dress { margin-top: 3cqw; font-family: var(--display); font-weight: 600; font-size: max(12px, 2.8cqw); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
 .dress em { font-family: var(--body); font-weight: 400; letter-spacing: .02em; text-transform: none; font-size: max(12px, 3.4cqw); color: var(--ink); }
 
 .rsvp-sec { padding-top: 36px; overflow: clip; }
 .rsvp-sec > .florals-tl { position: absolute; top: -12px; left: -44px; width: min(50vw, 300px); z-index: 0; }
 .rsvp-sec .wrap { position: relative; z-index: 1; }
 .rsvp-text { top: 34%; }   /* G035: 31% with the extra preview note; centred on the paper without it */
-.rsvp-text .kicker { margin-top: 3.2cqw; font-size: max(10px, 3cqw); }
+.rsvp-text .kicker { margin-top: 3.2cqw; font-size: max(12px, 3cqw); }
 .rsvp-text .deadline { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 6.4cqw; color: var(--ink); line-height: 1.15; }
 .rsvp-text .btn { margin-top: 3.4cqw; }
-.rsvp-text .love { margin-top: 3.4cqw; font-size: max(9.5px, 2.8cqw); }
+.rsvp-text .love { margin-top: 3.4cqw; font-size: max(12px, 2.8cqw); }
 .rsvp-text .title { font-size: 8.6cqw; }
 /* long names wrap (balanced) and shrink to 2.5 lines at most (site.js fitText); the card grows (3-slice above) */
 .rsvp-text .sign { font-size: calc(8.4cqw * var(--fit, 1)); max-width: 100%; text-wrap: balance; overflow-wrap: anywhere; }
@@ -473,7 +467,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .reply-box > .script { font-size: clamp(40px, 11vw, 52px); margin-top: 2px; }
 .reply-form { display: grid; gap: 16px; margin-top: 18px; text-align: left; }
 .reply-form .field { display: grid; gap: 6px; }
-.reply-form .kicker { font-size: 11px; letter-spacing: .22em; }
+.reply-form .kicker { font-size: 12px; letter-spacing: .22em; }
 .reply-form .opt { letter-spacing: .08em; text-transform: none; font-style: italic; font-weight: 500; }
 .reply-form input[type="text"], .reply-form input[type="email"], .reply-form input[type="number"], .reply-form textarea {
   display: block; width: 100%; min-height: 48px; padding: 10px 14px; border: 0; border-radius: 10px 10px 2px 2px;
@@ -521,7 +515,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
    Two small ghost pills; the platform writes the links (data-calendar). UI only, no drawn decor. */
 .btn-sm { min-height: 44px; padding: 0 18px; font-size: 12.5px; letter-spacing: .22em; }
 .cal { margin-top: 26px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-.cal .kicker { font-size: 10.5px; }
+.cal .kicker { font-size: 12px; }
 .cal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
 /* ---------------------------------------------------------------- questions & answers (G051; details)
@@ -561,7 +555,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 /* ---------------------------------------------------------------- footer */
 .foot { text-align: center; padding: 40px 16px 8px; }
 .foot .script { font-size: 34px; }
-.foot .replay { margin-top: 16px; display: inline-block; }
+.foot .replay { margin-top: -6px; padding-top: 22px; display: inline-block; }
 
 /* ---------------------------------------------------------------- nav (bottom bar on phones, top on wide) */
 .site-nav {
@@ -578,7 +572,7 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 .site-nav a {
   height: var(--nav-h); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
   text-decoration: none; color: var(--ink-soft);
-  font-family: var(--display); font-weight: 600; font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
+  font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
 }
 .site-nav a .ini { font-family: var(--script); font-size: 22px; letter-spacing: 0; text-transform: none; line-height: 1; color: var(--deep); }
 .site-nav a[aria-current="page"] { color: var(--deep); }

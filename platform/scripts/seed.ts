@@ -3,8 +3,10 @@
 // Creates (or re-creates) a demo site from a collection's content.demo.json and publishes it, in the storage
 // DATA_ADAPTER selects: local (default; PLATFORM_DATA_DIR, default platform/.data) or blob (Vercel Blob;
 // needs BLOB_READ_WRITE_TOKEN in the environment).
-// Default: theme blush-garden-rose (design 03) with collections/03_Blush_Garden_Rose/content.demo.json and the
-// fictional sample photos of collections/03_Blush_Garden_Rose/assets/gpt/photos/.
+// Default: theme blush-garden-rose (design 03). G155: without --content / --photos the THEME's own demo record and its own
+// fictional PAKET 2 sample photos are used (collections/<NN>/assets/gpt/photos/, found as theme-check finds them:
+// scripts/lib/theme-env.ts); a theme without sample photos of its own is seeded in the placeholder state (never with
+// another design's photos). Before G155 every theme got the 03 record and the 03 photos unless both were passed.
 //
 // Photos (G056): for every photo slot in the theme's theme.json, <photos>/<slot key>.(jpg|jpeg|png|webp) goes the panel
 // upload's way (lib/panel/api.ts uploadPhoto): preparePhoto (sharp: EXIF rotation, metadata dropped, centre crop to the
@@ -27,10 +29,10 @@ import { PHOTO_MAX_EDGE, preparePhoto } from '../lib/panel/photos.ts';
 import { withDemoMap } from '../lib/claim/demo-map.ts';
 import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { loadTheme } from '../lib/theme/theme.ts';
+import { demoSlug, loadThemeEnv } from './lib/theme-env.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const platformRoot = path.resolve(here, '..');
-const collection03 = path.resolve(platformRoot, '../collections/03_Blush_Garden_Rose');
 
 export interface SeedOptions {
   theme: string;
@@ -162,6 +164,20 @@ export async function seedSite(adapter: DataAdapter, opts: SeedOptions): Promise
   };
 }
 
+/**
+ * G155: what `npm run seed -- --theme <id>` uses without --content / --photos: the theme's demo record (theme folder,
+ * bundled copy, collection; the 03 record only as theme-check's last fallback) and the theme's OWN PAKET 2 photos —
+ * null (placeholder state) when its collection has none, never the 03 photos of another design.
+ */
+export function defaultSources(theme: string): { content: ContentRecord; photosDir: string | null; notes: string[] } {
+  const env = loadThemeEnv({ theme });
+  const own = env.collectionDir ? path.join(env.collectionDir, 'assets/gpt/photos') : null;
+  const ownPhotos = own !== null && env.photosDir === own && Object.keys(env.photoFiles).length > 0;
+  const notes = [`demo record: ${env.demoSource}`];
+  notes.push(ownPhotos ? `photos: ${path.relative(path.resolve(platformRoot, '..'), own!)}` : `no sample photos of its own (PAKET 2): seeded with placeholders (--photos <dir> to add some)`);
+  return { content: env.demo, photosDir: ownPhotos ? own : null, notes };
+}
+
 function photoMaxArg(value: string): number {
   const n = Number(value);
   if (!/^\d+$/.test(value.trim()) || !Number.isSafeInteger(n)) {
@@ -175,26 +191,33 @@ async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
       theme: { type: 'string', default: 'blush-garden-rose' },
-      slug: { type: 'string', default: 'clara-and-julian' },
-      content: { type: 'string', default: path.join(collection03, 'content.demo.json') },
-      photos: { type: 'string', default: path.join(collection03, 'assets/gpt/photos') },
+      slug: { type: 'string' },
+      content: { type: 'string' },
+      photos: { type: 'string' },
       'no-photos': { type: 'boolean', default: false },
       'photo-max': { type: 'string', default: String(PHOTO_MAX_EDGE) },
       draft: { type: 'boolean', default: false },
     },
   });
 
+  // G155: the theme's own demo record and PAKET 2 photos unless given (defaultSources).
+  const defaults = values.content && (values.photos || values['no-photos']) ? null : defaultSources(values.theme!);
+  for (const note of defaults?.notes ?? []) console.log(`  note: ${note}`);
   const adapter = getDataAdapter();
-  const content = JSON.parse(await fs.readFile(path.resolve(values.content!), 'utf8')) as ContentRecord;
+  const content = values.content
+    ? (JSON.parse(await fs.readFile(path.resolve(values.content), 'utf8')) as ContentRecord)
+    : structuredClone(defaults!.content);
+  const photosDir = values['no-photos'] ? null : (values.photos ?? defaults!.photosDir);
   // --no-photos = the placeholder state, also for a demo record that links bundled sample photos (21 Crimson, G142)
   if (values['no-photos'] && content.media) content.media = { ...content.media, hero_portrait: null, memory_photos: [], venue_image: null };
   const info = await seedSite(adapter, {
     theme: values.theme!,
-    slug: values.slug!,
+    // 03's demo keeps its long-standing address; another theme's demo gets one from its own names (as /start suggests)
+    slug: values.slug ?? (values.theme === 'blush-garden-rose' ? 'clara-and-julian' : demoSlug(content)),
     content,
     draft: values.draft!,
     baseUrl: process.env.SEED_BASE_URL || 'http://localhost:3000',
-    photosDir: values['no-photos'] ? null : values.photos!,
+    photosDir,
     photoMax: photoMaxArg(values['photo-max']!),
   });
 

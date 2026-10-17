@@ -106,7 +106,7 @@ img/variants: 15 8.1 MB, 16 4.0 MB, 17 3.7 MB, 18 7.2 MB, 19 5.2 MB, 20 6.0 MB; 
 pilotla aynı ayar).
 
 ### Notlar / açık
-- `tools/gorev.py` çalışmıyor (`gorevler/G090-qa-raporu.md` başlık bloğu yok) → GP115–GP120 elle `inceleme` yapıldı.
+- `tools/gorev.py` çalışmıyor (`gorevler/qa/G090-qa-raporu.md` başlık bloğu yok) → GP115–GP120 elle `inceleme` yapıldı.
 - 20'de menü etiket satırının sabit `#f0f7f9` zemini her palette aynı kalır (hiçbir palette kontrast sorunu yok).
 - Denenmedi: gerçek iPhone/Android, yayın, Etsy ilan düzenleyicisinde varyasyon.
 

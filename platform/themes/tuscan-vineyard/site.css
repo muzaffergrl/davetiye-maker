@@ -58,7 +58,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   font: 400 12.5px/1.6 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--wine);
   text-decoration: underline 1px; text-decoration-color: #a9874fe6; text-underline-offset: 6px;
 }
-.textlink::after { content: ""; position: absolute; inset: -14px -10px; }   /* ≥ 44 px touch target */
+.textlink::after { content: ""; position: absolute; inset: -14px -10px; }
+:is(.foot,.closing,.reply-panel) .textlink{padding:14px 0;margin:-14px 0} /* G155 */
 .wrap { position: relative; width: min(100% - 32px, 460px); margin-inline: auto; }
 .section { position: relative; }
 .sprig { display: block; width: 112px; height: auto; margin: 14px auto 0; }
@@ -395,7 +396,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .foot, .next-sec, .closing { position: relative; z-index: 1; text-align: center; }
 .foot { padding: 34px 16px 0; }
 .foot .sign { font-size: 50px; margin-top: 2px; overflow-wrap: break-word; }
-.foot .textlink { margin-top: 18px; }
+.foot .textlink { margin-top: 4px; }
 /* the hills at the end of a page (the sky crop of bg_page, faded into the paper) + the bottom-right cluster */
 .vista {
   position: relative; height: clamp(190px, 54vw, 340px); margin: 26px -16px calc(-1 * (var(--nav-h) + env(safe-area-inset-bottom) + 18px));
@@ -546,7 +547,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel { margin-top: 10px; }
 .reply-panel .script { font-size: 58px; }
 .reply-panel .note { margin-top: 6px; }
-.reply-panel .textlink { margin-top: 18px; }
+.reply-panel .textlink { margin-top: 4px; }
 .closing { padding: 40px 16px 0; }
 .closing .title { font-size: 68px; }
 .closing .line { margin-top: 4px; font-size: 19px; color: var(--ink-soft); }

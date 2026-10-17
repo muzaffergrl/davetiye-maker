@@ -13,6 +13,11 @@
 export const PHOTO_VARIANT_WIDTHS = [640, 1280] as const;
 
 const MEDIA_RE = /^(\/media\/[0-9a-f-]{36}\/[0-9a-f]{32})-([1-9]\d{0,4})w\.(jpg|png|webp|avif)$/;
+/**
+ * G155: the live demo's fictional sample photos (public/demo/<theme>/<slot key>-<W>w.webp, scripts/build-demo-photos.ts)
+ * follow the same naming, so the demo pages get the same srcset as a buyer's photos.
+ */
+const DEMO_RE = /^(\/demo\/[a-z0-9][a-z0-9-]{0,63}\/[a-z0-9_]{1,40})-([1-9]\d{0,4})w\.(jpg|png|webp|avif)$/;
 
 /** Variant widths that go with a photo `width` px wide (ascending). */
 export function variantWidths(width: number): number[] {
@@ -37,7 +42,7 @@ export interface PhotoCandidate {
  */
 export function photoCandidates(url: unknown): PhotoCandidate[] | null {
   if (typeof url !== 'string') return null;
-  const m = MEDIA_RE.exec(url);
+  const m = MEDIA_RE.exec(url) ?? DEMO_RE.exec(url);
   if (!m) return null;
   const [, base, w, ext] = m;
   const width = Number(w);

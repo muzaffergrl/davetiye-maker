@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { MESSAGE_TEMPLATES, messageMissing, renderMessage } from '../../lib/admin/messages.ts';
-import { defaultTemplateId, type AdminHistoryEntry, type AdminSiteSummary } from '../../lib/admin/view.ts';
+import { defaultTemplateId, retentionDue, retentionDates, RETENTION_AFTER_ARCHIVE_MONTHS, shopDay, type AdminHistoryEntry, type AdminSiteSummary } from '../../lib/admin/view.ts';
 import type { AdminContentView, AdminDeviceView, AdminRsvpView } from '../../lib/admin/api.ts';
 import { CopyButton, copyText } from './CopyButton.tsx';
 import styles from './admin.module.css';
@@ -753,12 +753,26 @@ export default function AdminSite(props: {
           )}
           <StatusLine status={status.unpublish ?? null} />
         </div>
-        <div className={styles.action} data-delete="">
+        <div className={styles.action} data-delete="" id="delete">
           <p className={styles.actionTitle}>Siteyi sil</p>
           <p className={styles.actionText}>
             İçerik, fotoğraflar ve bütün RSVP yanıtları <strong>kalıcı olarak</strong> silinir; geri alınamaz. Örneğin iade edilmiş ya da başkasına ait çıkan bir sipariş
-            için. Sipariş numarası serbest kalır.
+            için, alıcının silme/gizlilik talebinde (K48: 30 gün içinde; sonra hazır &quot;Delete my website and data&quot; mesajı) ya da saklama süresi dolunca. Sipariş
+            numarası serbest kalır.
           </p>
+          {(() => {
+            // K48 (5): archived for more than 12 months → the site is due for deletion.
+            const r = retentionDates(s);
+            if (!r) return null;
+            const due = retentionDue(s, shopDay(new Date().toISOString())); // the shop's day, as the overview's to-do
+            return (
+              <p className={due ? styles.hintWarn : styles.hint} data-retention={due ? 'due' : 'later'}>
+                {due
+                  ? `Saklama süresi doldu: site ${r.archivedOn} tarihinden beri arşivde (${RETENTION_AFTER_ARCHIVE_MONTHS} aydan uzun). Siteyi silin.`
+                  : `Arşivde (${r.archivedOn} tarihinden beri). Saklama süresi ${r.deleteFrom} tarihinde dolar; o gün Yapılacaklar'a "Sil" olarak düşer.`}
+              </p>
+            );
+          })()}
           {s.state === 'draft' && !s.firstPublishedAt ? (
             <p className={styles.hint} data-wrong-design="">
               Alıcı yanlış tasarımla mı başladı? Bu taslağı silin; sonra <Link className={styles.link} href="/admin/new">Yeni sipariş</Link> ile aynı sipariş numarasıyla
