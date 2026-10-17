@@ -54,7 +54,7 @@ Her cevap bu tabloya dayanır. "Kaynak" sütunu kodun yeri; "Doğrulama" docs/05
 | Bağlantı koparsa | Form aynı belirteçle bir kez kendisi yeniden dener; site açıldı ama cevap gelmediyse yeni link verir (24 saat içinde, yayınlanmamış taslak) | `claim.ts` §6 | Birim testleri |
 | Düzenleme linki | Ekranda **bir kez**, büyük kutuda; **Copy link**, **Email it to myself** (alıcının kendi posta uygulaması, `mailto:`); "We cannot email it to you yet". Panelde sonra: **Share → Your private edit link → Copy edit link** | `StartForm.tsx`, `views.tsx` | Test edildi |
 | E-posta | Platform e-posta göndermez (düzenleme linki, RSVP bildirimi, hatırlatma yok); `/signin` kapalı | `lib/claim/mailer.ts`, `lib/panel/signin.ts` | Doğru |
-| Kayıp link | Dükkân `scripts/reissue-edit-key.ts` ile yeni link üretir; **eski link hemen ölür**; içerik/foto/yanıt aynı kalır | `scripts/reissue-edit-key.ts` | Yerel test; canlı depoda denenmedi; politika `[LOST LINK POLICY]` |
+| Kayıp link | **G146'dan beri önce `/my`:** Etsy sipariş no + başlatırken verilen e-posta her cihazda editörü açar (cihaz anahtarı; rehber G148). Gerekirse dükkân `scripts/reissue-edit-key.ts` ile yeni link üretir; **eski link hemen ölür**; içerik/foto/yanıt aynı kalır | `scripts/reissue-edit-key.ts` | Yerel test; canlı depoda denenmedi; politika `[LOST LINK POLICY]` |
 | Sipariş onayı (manuel mod) | Taslak hemen açılır; dükkân Etsy'de kontrol edip `verify-order.ts` ile onaylayana kadar **Publish kapalı**; panelde "We are confirming your Etsy order…"; onaydan sonra sayfa yenilenince Publish açılır | `Setup.tsx` `OrderPendingNote`, `lib/panel/brand.ts`, `scripts/verify-order.ts` | Kod + test; canlıda açık olduğu görev tanımında (2026-10-15) bildirildi |
 | Kurulum | 3 adım: **Your names and date** → **Add your photo** → **Publish your website**; 1–2 "Skip for now", her an "Save & exit"; örnek tarih kapısı ("Your wedding date is still the design's sample") | `Setup.tsx`, `pages.ts` | Test edildi (G066-B tarayıcı testleri) |
 | Panel | Alt sekmeler **Home · Edit · Guests · Share** (masaüstünde üstte, sağda sabit önizleme); üstte kayıt durumu (bulut), önizleme (göz), Publish/Live | `Panel.tsx`, `views.tsx` | Test edildi (Chromium 390/1280) |
@@ -132,6 +132,10 @@ Yer kodları: **İ** ilan açıklaması · **İG** ilan görseli · **İS** ilan
 - **Boşluk:** linkin panelden yeniden kopyalanabildiği hiçbir yerde söylenmiyor (alıcı "tek şans" sanıp paniğe kapılıyor);
   ana ekrana ekleme ipucu yalnız Share'in içinde.
 - **Kapanış:** SH "Save your edit link: it is your key" bölümü; §6 öneri 4 (`/start` sonuç ekranına bir satır).
+- **G148 (2026-10-17, G146/K46):** link artık tek yol değil: sipariş no + e-posta her cihazda `/my`'dan editörü açar. SH bölümü
+  **Come back on any device** + "Continue on another device" kutusu oldu; link "kısayol". Açık kalan (platform işi): `/start`
+  sonuç ekranı hâlâ "Save this link — It is the only way to open your editor" diyor (`StartForm.tsx`), §4.5 şablonları
+  (`welcome_start`, `new_edit_link`, `order_already_used`, `setup_service_done_same_link`) eski kayıp-link yolunu anlatıyor.
 
 ### A7. Kurulum (3 adım)
 - **Sorular:** Hepsini şimdi doldurmam gerekir mi? Saat dilimi nedir? Tam ad zorunlu mu? Fotoğrafım yoksa?
@@ -354,14 +358,14 @@ Your link opens a sealed envelope. One tap opens it into your pages. Guests repl
 
 WHAT YOU NEED
 • A phone or computer with a web browser
-• Your Etsy order number (in your Etsy order confirmation)
+• Your Etsy order number (on Etsy under You → Purchases and reviews, or in your Etsy confirmation email)
 • Your wedding details; photos are optional
 No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start; it cannot be changed later. A custom domain (yournames.com) is not included.
-• Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
+• Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • We confirm each order in our shop before a website can go live. You can set everything up in the meantime.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
@@ -380,6 +384,10 @@ Notlar:
 - "We confirm each order in our shop…" yalnız `CLAIM_ORDER_VERIFICATION=manual` canlıda açıkken doğru → ilan dosyasında
   `[VERIFY: manual order check on in production]`.
 - "Instant download / anında" ifadesi kullanılmadı: indirme anında, ama yayın sipariş onayını bekleyebilir.
+- G148 (2026-10-17, G146/K46): "Save your private edit link… we cannot email it to you yet" maddesi yerine erişim satırı
+  ("Your Etsy order number is your key…"): editör **hemen** açılır (taslak), yayının sipariş onayını bekleyebileceğini bir sonraki
+  madde söyler. E-posta gönderimi ve otomatik Etsy doğrulaması vaat edilmez (SMTP ve `etsy` modu sahibin kurulumunu bekliyor).
+  SSS'de "account/password" ve "lose my edit link" cevapları, §4.4'te iki Etsy mesajı aynı yola (`/my`) çevrildi.
 
 ### 4.2 Başlık ve etiket kalıbı
 
@@ -398,10 +406,10 @@ How do I start after buying?
 Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number. You can also use the start link in our Etsy message.
 
 Do I need an account or a password?
-No. You get a private edit link that opens your editor. Save it right away; we cannot email it to you yet.
+No. Your Etsy order number and the email you start with open your editor on any phone or computer. You also get a private edit link as a shortcut.
 
 What if I lose my edit link?
-If your editor is still open, copy it again under Share. Otherwise message us on Etsy with your order number: we send you a new link and the old one stops working.
+No problem: on any phone or computer, open the "Create your website" page of our website (the address is in your START HERE guide) and enter your Etsy order number and the email you started with. Your editor opens where you left off.
 
 Can I change things after I publish?
 Yes, as often as you like. Names and date can be changed 3 times in total after publishing; typo fixes and moving the date by up to 7 days are free.
@@ -436,7 +444,7 @@ No. It is a digital product.
 Etsy'de iki alan var (docs/15 §4.2, Shop Manager → ayarlar; API yok → `claude-tarayici` girer): **Message to Buyers** (makbuz +
 sipariş onay e-postası) ve **Message to Buyers for Digital Items** (indirme sayfası; **bütün dijital ilanlara aynı metin**).
 Bu yüzden tasarıma özel link konamaz: temasız `/start` adresi alıcıya aldığı tasarımı seçtirir (G080 "Choose your design").
-`{START_BASE}` = `https://davetiye-platform-five.vercel.app/start` (alan adı kesinleşince değişir, docs/05 §C).
+`{START_BASE}` = `https://davetiye-platform-five.vercel.app/start`, `{MY_PAGE}` = `https://davetiye-platform-five.vercel.app/my` (G148: sipariş no + e-postayla her cihazdan devam, G146) (alan adı kesinleşince değişir, docs/05 §C).
 
 **Message to Buyers for Digital Items** (indirme sayfası):
 
@@ -445,7 +453,7 @@ Thank you for your order! Your download is your START HERE guide (PDF). Open it 
 
 Can't open the PDF? Start here instead and choose the design you bought: {START_BASE}
 
-You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open {MY_PAGE} and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -453,7 +461,7 @@ Questions? Message us here on Etsy with your order number.
 **Message to Buyers** (makbuz ve onay e-postası; kısa):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at {START_BASE} (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at {START_BASE} (choose the design you bought). To continue later on any device, open {MY_PAGE} with the same order number and email. Questions? Message us on Etsy.
 ```
 
 Notlar: Etsy mesajlarında alıcı Etsy dışında satın almaya yönlendirilmez; bu metinler yalnız teslimattır (docs/15 §4.1).
@@ -500,7 +508,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
       "Hi, thank you for your order!",
       "Your {design} wedding website is ready for you to start. Open this link on your phone or computer: {start_url}",
       "You will enter your Etsy order number ({order}), your email address and your first names, and choose your website address. Your website starts as a private draft: nobody can see it until you publish it.",
-      "Important: the next screen shows your private edit link. Please save it right away (tap Copy link and paste it into your notes, or tap Email it to myself). It opens your editor, and we cannot email it to you yet.",
+      "Your Etsy order number and email are your key: on any phone or computer, open the \"Create your website\" page of our shop site and enter them to continue where you left off. No account or password. The next screen also shows a private edit link as a shortcut.",
       "The START HERE guide in your Etsy download explains every step. If you have any question, just reply here.",
       "{shop}"
     ]
@@ -577,7 +585,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
   {
     "id": "new_edit_link",
     "title": "New edit link (lost link)",
-    "when": "After the shop has made a new link with reissue-edit-key (lost link, or the link was shared by mistake). Only inside this order's own Etsy conversation, or after the buyer wrote from the email address used on /start with the order number.",
+    "when": "After the shop has made a new link with reissue-edit-key (the link was shared by mistake, or the buyer can't get in with order number + email). Only inside this order's own Etsy conversation, or after the buyer wrote from the email address used on /start with the order number.",
     "placeholders": [
       "names",
       "edit_url",
@@ -587,8 +595,8 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "body": [
       "Hi {names}, here is your new private edit link:",
       "{edit_url}",
-      "Your old edit link no longer works, so only this new link can open your editor. Your website, photos and guest replies are exactly as before, and your website address stays {site_url}.",
-      "Please save it now: copy it into your notes app or email it to yourself. Share it only with your partner. We will never ask you for it.",
+      "Your old edit link no longer works and every device you were signed in on has been signed out. Your website, photos and guest replies are exactly as before, and your website address stays {site_url}.",
+      "You can always get back in on any device with your Etsy order number and the email you used, on the \"Create your website\" page of our shop site. Keep this link private and share it only with your partner. We will never ask you for it.",
       "{shop}"
     ],
     "note": "Never paste {edit_url} into any other template, note or log. Tell the buyer to use the newest link if they asked twice."
@@ -622,8 +630,8 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     ],
     "body": [
       "Hi, thanks for letting us know.",
-      "This message means a website has already been started with order {order}, maybe by you earlier or by your partner. If you saved an edit link, please open it: that is your website.",
-      "If you don't have the link, tell us here and we will check the order and send you a new edit link to that website. Please don't start a second order.",
+      "This message means a website has already been started with order {order}, maybe by you earlier or by your partner. Enter the same order number together with the email address that was used when the website was started, and your editor opens on any device.",
+      "If that email doesn't work, tell us here and we will check the order and help you back in. Please don't start a second order.",
       "{shop}"
     ],
     "note": "Check the site for this order (email, names, theme). If someone else claimed the number by mistake, decide case by case; there is no 'release order' tool yet (docs/19 §6 A6)."
@@ -820,8 +828,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     ],
     "body": [
       "Hi {names}, your {design} wedding website is set up with the details you sent us.",
-      "Open it with the same private edit link you already have and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
-      "Lost your edit link? Just reply here with your order number and we will send you a new one.",
+      "Open it with the same private edit link you already have (or with your Etsy order number and email on any device) and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
       "You can change anything yourself from now on. If you would like us to make another round of changes for you, that is a new setup purchase in our shop.",
       "{shop}"
     ],
@@ -967,8 +974,9 @@ bağlayıcısı; bu ortamdan `curl` vekil sunucuda 403). **G131:** rehber artık
 Google Sheets) ve G130'u (Help'teki "Prefer us to do it?") da anlatıyor; bunlar canlıya çıkmadan rehber verilmez. Google Sheets
 bağlantısı gerçek Google hesabıyla denenmedi (G128): rehber düğmeyi ve "coming soon" hâlini anlatıyor, çalıştığını iddia etmiyor.
 
-**Yapı (alıcının sırasıyla):** Good to know before you begin → **Start now: the first 5 steps** (QR + link) → **Save your edit
-link: it is your key** → Step 1 Start → Step 2 three-step setup (G100: 1. adım yalnız adlar + tarih; yayın sonrası "Your website is
+**Yapı (alıcının sırasıyla):** Good to know before you begin → **Start now: the first 5 steps** (QR + link; G148: 2. adım sipariş
+numarasının yeri) → **Come back on any device** (G148: "Continue on another device" kutusu = `/my` + aynı sipariş no + e-posta;
+düzenleme linki kısayol; Share → Use on another device) → Step 1 Start → Step 2 three-step setup (G100: 1. adım yalnız adlar + tarih; yayın sonrası "Your website is
 live" ekranı) → bekleyen sipariş onayı → Step 3 Edit (6 sayfa tablosu, Headings & labels, sample satırı, otomatik kayıt) → Step 4
 Photos → Map and directions (G127) → Music and sound (G126) → Step 5 Preview & publish → isim/tarih hakkı → Step 6 Share (QR,
 şifre, çevrim dışı) → Step 7 Guest replies (Reply form, Guest list / Results, Download Excel / CSV, Google Sheets, Held) → Step 8
@@ -986,14 +994,19 @@ After the wedding → Online süresi → Quick answers → Troubleshooting → H
   `openingTabLabel`'ın varlığıyla doğrular. Zarfsız 6 tasarımın rehberinde "envelope" hiçbir biçimde geçmez.
   G131 ile kaynak listesine `platform/lib/{audio,rsvp}`, `lib/maps.ts` ve misafir betikleri `public/audio/audio.js`,
   `public/static/map.js` eklendi (parça adları, cevap türleri, "Play music"). Misafirin düğmesi "♪ Play music"; rehberde ♪ yok,
-  çünkü PDF'in standart Helvetica'sı bu işareti basamaz.
+  çünkü PDF'in standart Helvetica'sı bu işareti basamaz. G148 ile `platform/components/my` (/my: "Open or start your website",
+  "Etsy order number", "Email address", "Continue") ve satış sitesinin `components/marketing/Shell.tsx`'i ("Create your website")
+  eklendi; kutunun başlığı "Continue on another device" rehberin kendi başlığı (`NOT_LABELS`).
+- G148 (K46): Etsy'nin indirmesi herkese aynı PDF → rehberde alıcıya özel kod yok; anahtar Etsy sipariş numarası + e-posta. Rehber
+  e-posta gönderimi vaat etmez (SMTP kapalı, G147) ve otomatik Etsy doğrulaması iddia etmez; "We are confirming your Etsy order"
+  bölümü `manual` modda doğru olduğu için kaldı. "Lost your link? Message us on Etsy" ana yol değil, en son çare.
 - K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
 - Ekran görüntüsü yok: ekranlar K29/G100 panelinden yeniden alınmadı. Canlı tabanla `capture` yeniden alınınca rehbere görsel
   eklenebilir (önerilen görev, §7).
 - PDF: reportlab, US Letter, standart PDF fontları (font dosyası gömülmez ya da pakete konmaz); QR = `img/start_qr.png`'nin kendisi
   (1,6 inç, tıklanabilir); `invariant` (aynı girdi → bayt bayt aynı PDF). Denetim: Markdown = Ek A'nın doldurulmuş hâli (eski kopya
   hata), QR modül modül (segno) ve jsQR ile raster (PNG'ler + PDF'in bütün sayfaları, tam bir QR), PDF linkleri yalnız başlat linki
-  + gizlilik metni, zarfsız tasarımda "envelope" yok.
+  + `/my` (G148, en az bir kez) + gizlilik metni, zarfsız tasarımda "envelope" yok. 9 sayfa (G148 sonrası da).
 
 ---
 
@@ -1108,6 +1121,7 @@ metni burada değiştir, komutu yeniden koş. Yer tutucular (araç doldurur; dol
 | `{DESIGN_NAME}` | Tasarımın adı ("Olive & Ivory") | `platform/themes/<id>/theme.json` `name` (= `/start`'taki "Design: …") |
 | `{START_URL}` | `https://davetiye-platform-five.vercel.app/start?theme=<id>` | `--base-url` / `GUIDE_BASE_URL`; rota `platform/app/start/page.tsx` |
 | `{PRIVACY_URL}` | `https://davetiye-platform-five.vercel.app/privacy` | aynı taban; rota `platform/app/(marketing)/privacy/page.tsx` |
+| `{MY_URL}` | `https://davetiye-platform-five.vercel.app/my` | G148: aynı taban; rota `platform/app/my/page.tsx` (satış sitesinin "Create your website" düğmesi; sipariş no + e-posta → editör, G146/K46) |
 | `{OPENING}` | Misafirin ilk dokunduğu nesne: `envelope`; 06 ve 14 `gatefold`, 09 `pouch`, 12 `wallet`, 13 `book`, 18 `sleeve` | `platform/lib/marketing/designs.ts` `opening` ("Your guests tap the …") |
 | `{OPENING_TAB}` | Aynı kelime büyük harfle: panelin ilk önizleme sekmesi (`Envelope`, `Gatefold`, `Pouch`, `Wallet`, `Book`, `Sleeve`) | G121: `platform/lib/panel/model.ts` `openingTabLabel` (aynı `designs.ts` cümlesinden) |
 | `{LANGUAGE_FONTS}` | Tasarım fontlarının dil kapsamı (3 cümleden biri, aşağıda) | `designs.ts` `fonts` + aracın `FONT_SUBSETS` tablosu (Google Fonts CSS, 2026-10-16) |
@@ -1123,13 +1137,19 @@ Panel etiketleri (kalın) kaynak koddan birebir: `--check` her kalın etiketi `p
 `platform/lib/{panel,claim,theme,audio,rsvp}`, `lib/maps.ts` ve misafir betikleri `public/audio/audio.js` + `public/static/map.js`
 içinde arar, bulamazsa hata verir (G121 gibi panel değişikliklerinden sonra önce bu denetim).
 Biçim aracın desteklediği öğelerle sınırlı (başlık, paragraf, `- ` madde, numaralı satır, 2 sütunlu tablo, `![…](…)` = QR,
-`**kalın**`, link). Değişiklik geçmişi: G091 (ilk metin), G100 entegrasyonu (Sample satırı, yayın ekranı), **G122** (kurulum 1. adım
+`**kalın**`, link, G148'den beri `> ` satırları = tek çerçeveli kutu; yalnız kalın satır kutunun başlığı). Değişiklik geçmişi: G091 (ilk metin), G100 entegrasyonu (Sample satırı, yayın ekranı), **G122** (kurulum 1. adım
 yalnız adlar + tarih, yayın sonrası "Your website is live" ekranı, Guests'in Guest list / Results görünümleri, Held yanıtlar,
 önizleme sekmeleri, `{OPENING}` ve `{LANGUAGE_FONTS}`, Home → Help & questions), **G121 uyarlaması** (kurulum 2. adımda
 "More photos" yok → Edit → Photos; Skip for now düğmesi; önizleme sekmesi `{OPENING_TAB}`; Home'da Settings kartı; "Saved";
 Review'da göz düğmesi; Share'de QR katlı bölüm), **G131** (Map and directions, Music and sound, Reply form, Download Excel /
 CSV, Google Sheets ve "coming soon" hâli, Quick answers'ta müzik "Yes", iki sorun giderme satırı, Help'te G130 ek hizmet satırı;
-Edit tablosunda Day & place / Our Story / RSVP satırları).
+Edit tablosunda Day & place / Our Story / RSVP satırları), **G148** (G146/K46 erişimi: "Save your edit link: it is your key"
+bölümü kalktı → **Come back on any device** + "Continue on another device" kutusu (`{MY_URL}` + aynı sipariş no + e-posta, /my'ın
+etiketleri "Open or start your website", "Continue"); ilk 5 adımda sipariş numarasının yeri (Etsy → You → Purchases and reviews,
+onay e-postasında "Order #…"); düzenleme linki "kısayol"; Share → Use on another device / Sign out other devices; e-posta alanı
+"we do not send emails yet" demiyor (SMTP açılınca da doğru kalsın) ve e-posta vaat etmiyor; ortak düzenleme, bilgisayar/çok cihaz
+cevabı; sorun gidermede "This edit link no longer works" → **Continue with your order number**, "This order already has a website"
+→ `{MY_URL}`, yeni "My order number and email do not open my editor").
 
 <!-- g091:start-here:start -->
 ````markdown
@@ -1140,6 +1160,7 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 ## Good to know before you begin
 
 - You do not need Canva, an app or an account. Everything works in the web browser of your phone or computer.
+- Your Etsy order number and your email address are your way in: they open your editor on any phone or computer. There is no password.
 - You fill in your website yourself, in a simple editor. Every change saves by itself.
 - Nobody sees your website until you publish it, and you can keep changing it after you publish.
 - Your guests need no app and no account either: they open your link and tap the {OPENING}.
@@ -1150,35 +1171,39 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 
 ![QR code of your start link](img/start_qr_page.png)
 
-2. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
-3. **Save your edit link.** Tap **Copy link** and paste it into your notes app, or tap **Email it to myself**. Do this before anything else.
-4. Tap **Open my editor**. Add your first names and your wedding date (setup step 1 of 3).
+2. Find your Etsy order number: on Etsy, go to You → Purchases and reviews, or look for "Order #…" in your Etsy confirmation email.
+3. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
+4. Tap **Copy link** to keep your private edit link as a shortcut, then tap **Open my editor**. Add your first names and your wedding date (setup step 1 of 3).
 5. Add one photo (step 2 of 3). Publish now (step 3 of 3), or later when everything is ready.
 
-## Save your edit link: it is your key
+## Come back on any device
 
-Your edit link opens your editor. There is no password and no account: the link is the key. We cannot email it to you yet, so please save it yourself, in at least one of these ways:
+There is no account and no password. Your Etsy order number and the email address you entered on the start page open your editor again, on this phone or on any other phone or computer:
 
-- Tap **Copy link** and paste it into your notes app or password manager.
-- Tap **Email it to myself**. Your own email app opens with the link inside. Tap Send.
-- Once your editor is open, add it to your phone's Home Screen (from your browser's Share or menu button).
+> **Continue on another device**
+>
+> 1. Open [{MY_URL}]({MY_URL}), or tap **Create your website** on our website.
+> 2. Under **Open or start your website**, enter the same **Etsy order number** and **Email address**, then tap **Continue**.
+> 3. Your editor opens where you left off: every change is saved online.
 
-Missed it? While your editor is open, you can copy the link again: **Share → Your private edit link → Copy edit link**.
+Your private edit link is a shortcut to the same editor. Tap **Copy link** and paste it into your notes app, or tap **Email it to myself** (your own email app opens with the link inside; tap Send). Once your editor is open, you can also add it to your phone's Home Screen. Copy the link again any time under **Share → Your private edit link → Copy edit link**.
 
-Anyone who has the link can change your website, so share it only with your partner. We will never ask you for it. If you lose it, message BKE Studio on Etsy with your order number. We send you a new link, and the old one stops working.
+In your editor, **Share → Use on another device** shows this address with a QR code to scan with your other phone, the devices signed in with your order number, and **Sign out other devices**.
+
+Anyone who has your edit link, or your order number together with your email, can change your website: share them only with your partner. We will never ask you for your edit link.
 
 ## Step 1. Start your website
 
 Open the start link. At the top you see a small live demo of your design (**Open the full demo** shows it full size). Below it, fill in **Your details**:
 
-- **Etsy order number:** in your Etsy order confirmation email, or on Etsy under Purchases and reviews. It has 8 to 12 digits. You can type it with or without "#".
-- **Email address:** we keep it with your website so we can recognize you if you need help. We do not send emails yet.
+- **Etsy order number:** on Etsy under You → Purchases and reviews, or "Order #…" in your Etsy confirmation email. It has 8 to 12 digits. You can type it with or without "#".
+- **Email address:** we keep it with your website. Together with your order number it opens your editor on any phone or computer, so use one you will remember.
 - **Your first names:** as your guests know you. You can change them later in the editor.
 - **Website address:** made from your names, for example …/avery-and-jordan. "Available" means it is free. You can change it here, but **not later**, so check the spelling.
 
 Tap **Create my website**. One order starts one website. Your website starts as a private draft: nobody can see it until you publish.
 
-If your connection drops, tap **Create my website** again: you get your link back. If the page says your order already has a website, open it with your saved edit link, or message us on Etsy.
+If your connection drops, tap **Create my website** again: you get your link back. If your order already has a website and you enter the email you started with, the page opens it for you. With another email it says "This order already has a website": see Troubleshooting.
 
 ## Step 2. Set up in three steps
 
@@ -1205,7 +1230,7 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 - **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until). Under **Settings** you see your time zone, date style, name and date changes left and guest password; tap a row to change it.
 - **Edit:** six pages with everything on your website.
 - **Guests:** your guests' replies.
-- **Share:** your link, QR code, guest password and your private edit link.
+- **Share:** your link, QR code, guest password, your private edit link and how to open your editor on another device.
 
 | Edit page | What you change |
 |---|---|
@@ -1322,9 +1347,9 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 ## Quick answers
 
-**Can my partner edit too?** Yes. Share the edit link with your partner only.
+**Can my partner edit too?** Yes. Give your partner your order number and email, or your edit link, and nobody else.
 
-**Can I use a computer?** Yes. The editor works on a computer too, with the preview beside it.
+**Can I use a computer, or more than one phone?** Yes. On each one, open [{MY_URL}]({MY_URL}) and enter your order number and email. On a computer the preview stays beside the editor.
 
 **Can I change the website address?** No, it is fixed when you create your website. Your own domain (yournames.com) is not included.
 
@@ -1348,9 +1373,11 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The Publish button does not work.** Check your internet connection. Then read the message near the button: your order may still be being confirmed, your date may still be the sample date, or a field needs fixing (the editor shows which one).
 
-**"This edit link no longer works."** A new link may have replaced it, or only part of the link was copied. Use the newest link we sent you, or message us on Etsy.
+**"This edit link no longer works."** A new link may have replaced it, or only part of the link was copied. Tap **Continue with your order number** and enter your Etsy order number and email: your editor opens again.
 
-**"This order already has a website."** Open your website with your saved edit link. No link? Message us on Etsy with your order number.
+**"This order already has a website."** Open [{MY_URL}]({MY_URL}) and enter your order number with the email you used when you started (your partner's, if they started it).
+
+**My order number and email do not open my editor.** Check both: use the email you entered on the start page. Still stuck? Message us on Etsy with your order number.
 
 **My photo will not upload.** Try a JPEG copy of the photo, and check your connection.
 

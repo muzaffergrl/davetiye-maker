@@ -1,0 +1,68 @@
+/* "Use on another device" (G146, Share → DevicesCard.tsx): the /my QR beside its note, then the signed-in devices. */
+
+.qrRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+}
+
+.qrRow > p {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+
+.qr {
+  display: block;
+  flex: none;
+  width: 132px;
+  height: 132px;
+  padding: 4px;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.devices {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--c-border);
+}
+
+.title {
+  margin: 0;
+  color: var(--c-heading);
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.list {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-control);
+  background: var(--c-surface);
+}
+
+.name {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  color: var(--c-text-muted);
+  font-size: 14px;
+}

@@ -7,6 +7,7 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
+import { DocumentLang } from '../../components/i18n/DocumentLang.tsx';
 import { demoBase } from '../../lib/claim/demo-page.ts';
 import { getEditLinkMailer } from '../../lib/claim/mailer.ts';
 import { claimableTheme } from '../../lib/claim/themes.ts';
@@ -44,6 +45,7 @@ export default async function StartPage({ searchParams }: Props) {
     const themes = await offeredThemes();
     return (
       <StartShell>
+        <DocumentLang lang={lang} />
         <div className={styles.narrow}>
           <p className={styles.eyebrow}>{t('Your wedding website')}</p>
           <h1 className={styles.title}>{requested ? t('This start link is not valid') : t('Choose your design')}</h1>
@@ -60,12 +62,15 @@ export default async function StartPage({ searchParams }: Props) {
   }
 
   return (
-    <StartForm
-      theme={{ id: found.id, name: found.name, partnerCount: found.partnerCount, demoUrl: demoBase(found.id) }}
-      origin={publicOrigin(await headers())}
-      emailEnabled={getEditLinkMailer().enabled}
-      lang={lang}
-      dict={dict}
-    />
+    <>
+      <DocumentLang lang={lang} />
+      <StartForm
+        theme={{ id: found.id, name: found.name, partnerCount: found.partnerCount, demoUrl: demoBase(found.id) }}
+        origin={publicOrigin(await headers())}
+        emailEnabled={getEditLinkMailer().enabled}
+        lang={lang}
+        dict={dict}
+      />
+    </>
   );
 }

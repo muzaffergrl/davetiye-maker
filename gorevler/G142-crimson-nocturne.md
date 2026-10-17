@@ -6,7 +6,7 @@ durum: inceleme
 alan: claude-G142
 oncelik: 1
 bagimli: [G133, G134]
-yazar: [platform/themes/crimson-rose-atelier/, platform/themes/nocturne-lake-estate/, collections/21_Crimson_Rose_Atelier/, collections/22_Nocturne_Lake_Estate/, platform/tests/theme-crimson-rose-atelier.test.ts, platform/tests/theme-nocturne-lake-estate.test.ts, platform/tests/g142-crimson-nocturne.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/scripts/seed.ts, platform/scripts/lib/theme-env.ts, tools/katalog.py, tools/tests/test_etsy_upload.py, gorevler/G142-crimson-nocturne.md]
+yazar: [platform/themes/crimson-rose-atelier/, platform/themes/nocturne-lake-estate/, collections/21_Crimson_Rose_Atelier/, collections/22_Nocturne_Lake_Estate/, platform/tests/theme-crimson-rose-atelier.test.ts, platform/tests/theme-nocturne-lake-estate.test.ts, platform/tests/g142-crimson-nocturne.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/scripts/seed.ts, platform/scripts/lib/theme-env.ts, platform/lib/marketing/assets.json, platform/public/marketing/designs/crimson-rose-atelier/, tools/listing_templates/capture.ts, tools/etsy_upload.py, tools/katalog.py, tools/tests/test_etsy_upload.py, gorevler/G142-crimson-nocturne.md]
 ---
 
 ## Amaç
@@ -104,6 +104,17 @@ theme-check `--stress` Crimson 112/0/25, Nocturne 112/0/12; final-smoke 45/45 + 
 
 **Denenmedi:** gerçek iPhone/Safari ve Android Chrome, Vercel yayını (görev dışı), gerçek alıcı fotoğrafları, yavaş ağ,
 qa-kontrol karşılaştırma kapısı (W1 comp yok). Fontlar test makinesinde kısmen yüklenmedi (ağ) — yedek fontla ölçüldü.
+
+### Satışa açılış (kullanıcı, 2026-10-17)
+Kullanıcı: "Crimson'u satışa aç, durumu live yap". `config.ts` → `live` (tasarım numarası sırasında, Coastal'dan sonra);
+fiyat kararı yok → `[PRICE]` sitede görünür kalır (uydurulmadı). Canlı tasarım şartı olan gerçek ekranlar + açılış videosu:
+`tools/listing_templates/capture.ts` ile güncel tema yerelde çekildi (30 ekran + opening.webm), `scripts/marketing-assets.ts
+--designs crimson-rose-atelier --shots …` → `public/marketing/designs/crimson-rose-atelier/` (8 ekran × 3 genişlik, 10 s
+açılış + poster), `assets.json`. Çekim aracında RSVP formu ekranı ad etiketini sabit ses düğmesinin altına koyuyordu → form
+24 yerine 120 px yukarıdan çerçeveleniyor (tüm temalar için; mevcut çekimler yeniden üretilmedi). Testler: "coming" listeleri
+(g085/093/094/097) yalnız Nocturne, Crimson tema testi `live` + üretimde `/start` açık, `test_etsy_upload` COMING boş.
+`npm test` 1299/1299, typecheck, build ✓; tools testleri ✓. Yayın (Vercel) yapılmadı — main'e birleşip deploy edilince görünür.
+Açık: fiyat, Etsy ilan URL'si; G137 ilan görselleri G142 öncesi temayı gösteriyor (albüm şeridi), yeniden çekilebilir.
 
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G142 (koordinatör isteği)

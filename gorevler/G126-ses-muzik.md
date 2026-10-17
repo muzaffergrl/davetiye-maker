@@ -2,7 +2,7 @@
 id: G126
 baslik: Story fon müziği (panelden değiştirilebilir, kendi dosyası) + açılış/sayfa/RSVP ses efektleri
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G126
 oncelik: 1
 bagimli: []
@@ -91,3 +91,6 @@ Var olan hiçbir etiket değişmedi.
 - START HERE rehberine "Music & sound" adımı (G122).
 - Gerçek telefon testi (`docs/20_ELLE_TEST_PLANI.md`'ye "Story müziği + zarf sesi" satırı eklenebilir).
 - Yarım kalan parça yüklemeleri Blob'da `parts/<site>/` altında kalır (site silinince gider); temizlik işi istenirse eklenir.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

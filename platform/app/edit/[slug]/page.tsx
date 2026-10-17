@@ -1,16 +1,17 @@
 // /edit/<slug>?k=<edit key> — the buyer's edit panel (G039).
-// The key is checked against the stored hash (lib/rsvp/couple.ts authorizeEditor). A wrong key,
-// a preview key, a missing key and an unknown slug all render the same generic 404 (not-found.tsx).
+// The key is checked against the stored hash (lib/rsvp/couple.ts editorAccess: the edit key, the shop's key or a
+// device key, G146). A wrong key, a preview key, a missing key and an unknown slug all render the same generic 404
+// (not-found.tsx).
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import '../../../components/fx/panel-fx.css';
+import { DocumentLang } from '../../../components/i18n/DocumentLang.tsx';
 import Panel from '../../../components/panel/Panel.tsx';
 import { getDataAdapter } from '../../../lib/data/index.ts';
 import { publicOrigin } from '../../../lib/panel/http.ts';
 import { panelState } from '../../../lib/panel/state.ts';
-import { authorizeEditor } from '../../../lib/rsvp/couple.ts';
-import { isShopEditKey } from '../../../lib/sites.ts';
+import { editorAccess } from '../../../lib/rsvp/couple.ts';
 import { uiLocale } from '../../../lib/i18n/server.ts';
 
 export const dynamic = 'force-dynamic';
@@ -31,12 +32,27 @@ export default async function EditPage({ params, searchParams }: Props) {
   const { slug } = await params;
   const { k } = await searchParams;
   const key = typeof k === 'string' ? k : null;
-  const site = key ? await authorizeEditor(getDataAdapter(), slug, key) : null;
-  if (!site || !key) notFound();
+  const opened = key ? await editorAccess(getDataAdapter(), slug, key) : null;
+  if (!opened || !key) notFound();
+  const { site, access } = opened;
   const state = await panelState(site, publicOrigin(await headers()));
   // K29: the published copy too, so the panel can say which parts of the draft guests do not see yet (Review).
   const { lang, dict } = await uiLocale();
   // G145: opened with the shop's own time-limited link (admin "Dükkân olarak düzenle"), not the buyer's.
-  const shopUntil = isShopEditKey(site, key) ? (site.shopEdit?.expiresAt ?? null) : null;
-  return <Panel initial={state} editKey={key} published={site.publishedContent ?? null} lang={lang} dict={dict} shopUntil={shopUntil} />;
+  const shopUntil = access.kind === 'shop' ? (site.shopEdit?.expiresAt ?? null) : null;
+  // G146: opened with a device key ("continue with your order number" on /my), not the private edit link.
+  return (
+    <>
+      <DocumentLang lang={lang} />
+      <Panel
+        initial={state}
+        editKey={key}
+        published={site.publishedContent ?? null}
+        lang={lang}
+        dict={dict}
+        shopUntil={shopUntil}
+        deviceSession={access.kind === 'device'}
+      />
+    </>
+  );
 }

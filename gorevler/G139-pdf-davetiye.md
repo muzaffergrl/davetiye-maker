@@ -2,7 +2,7 @@
 id: G139
 baslik: Tek butonla tüm siteyi PDF indirme + her tasarıma özel klasik basılı davetiye (5×7 in / A5, taşma payı, kesim işaretleri)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G139
 oncelik: 1
 bagimli: [K45]
@@ -147,3 +147,6 @@ gözle kontrol edildi · site PDF'i 6 tasarımda (olive, crimson, midnight, art 
   canlıda bir site + bir davetiye indirilip süre ve bellek (önerilen fonksiyon belleği ≥ 1 GB) kontrol edilmeli.
 - Website PDF'i taslak içeriği kullanır; ileride "yalnız yayındaki" seçeneği istenirse `api.ts`'te tek satır.
 - 300 ppi için GPT 2× parçaları (yukarıda) bekleniyor.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

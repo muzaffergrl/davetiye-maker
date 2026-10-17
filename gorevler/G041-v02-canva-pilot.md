@@ -2,7 +2,7 @@
 id: G041
 baslik: V02 Canva varyantı (pilot)
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 5
 bagimli: [G001, G070, G040, G090]
@@ -28,3 +28,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 iptal: K24: Canva teslimi bırakıldı; varyantlar platformda (G153)

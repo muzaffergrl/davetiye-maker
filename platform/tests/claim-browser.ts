@@ -193,7 +193,7 @@ try {
   const editUrl = await page.inputValue('[data-edit-link]');
   check('result: edit link shown', /^http:\/\/127\.0\.0\.1:\d+\/edit\/avery-and-jordan\?k=[A-Za-z0-9_-]{43}$/.test(editUrl), editUrl.replace(/k=.*/, 'k=…'));
   const resultText = await page.locator('main').innerText();
-  check('result: "Save this link" warning', resultText.includes('Save this link') && resultText.includes('only way to open your editor'));
+  check('result: "Save this link" warning', resultText.includes('Save this link') && resultText.includes('shortcut to your editor'));
   check('result: says email is not sent yet', resultText.includes('We cannot email it to you yet'));
   check('result: focus on the heading', (await page.evaluate(() => document.activeElement?.id)) === 'start-result-title');
   const fontSize = await page.locator('[data-edit-link]').evaluate((el: Element) => parseFloat(getComputedStyle(el).fontSize));

@@ -2,7 +2,7 @@
 id: G141
 baslik: Satış sitesi — şablonlar hep ön planda, etkileşimli vitrin, "nasıl düzenlenir" görsel turu (K45 madde 7)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G141
 oncelik: 1
 bagimli: [G089, G099, G121]
@@ -71,3 +71,4 @@ GPT'den görsel gerekmedi: bütün görseller gerçek tema/panel ekranları ve g
 
 ## Günlük
 - 2026-10-17 claude-G141: uygulandı, ölçüldü → inceleme
+- 2026-10-17 entegratör onayladı

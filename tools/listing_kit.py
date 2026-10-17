@@ -66,8 +66,8 @@ def opening_object(theme_id: str) -> str:
     as tools/etsy_upload.py)."""
     if theme_id not in _OPENINGS:
         copy = DESIGN_COPY.read_text(encoding="utf-8")
-        # G137: quoted keys ("opening": "…", design 21) as well as bare ones
-        m = re.search(rf"^  '{re.escape(theme_id)}': \{{.*?(?:\bopening|\"opening\"):\s*['\"]Your guests tap the ([a-z]+)\.",
+        # G137: quoted keys ("opening": "…", design 21) as well as bare ones; G144: msg('…') around the sentence
+        m = re.search(rf"^  '{re.escape(theme_id)}': \{{.*?(?:\bopening|\"opening\"):\s*(?:msg\(\s*)?['\"]Your guests tap the ([a-z]+)\.",
                       copy, re.S | re.M)
         if not m:
             raise RuntimeError(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme_id}'")
@@ -223,7 +223,8 @@ IMAGES = ["01_cover", "02_guest_pages", "03_whats_included", "04_how_it_works", 
 # The images that go on Etsy (docs/21, 2026-10-16): the editorial set from tools/listing_editorial.py. IMAGES above is
 # the earlier G059 kit that the `images` step still builds into images/ (kept for comparison, not uploaded).
 UPLOAD_DIR = "images_editorial"
-UPLOAD_IMAGES = ["01_cover", "02_opening", "03_pages", "04_edit", "05_rsvp", "06_details", "07_how", "08_included"]
+UPLOAD_IMAGES = ["01_cover", "02_opening", "03_pages", "04_edit", "05_rsvp", "06_details", "07_how", "08_included",
+                 "09_devices"]  # G148 (K47): "continue on any device" (Etsy order number + email, G146)
 UPLOAD_SCENES = ["01_cover", "02_opening", "04_edit", "08_included"]  # built on GPT mockup scenes (green screens)
 # Screens each template / guide strip uses (from capture.ts; b*/e*/s*/p* = the K29 editor, docs/16 §0b).
 SHOTS = ["g01_envelope", "g02_home_top", "g03_home_invitation", "g04_home_calendar", "g05_story", "g06_details_top",

@@ -34,6 +34,7 @@ const ROUTES = [
   'api/rsvp/[slug]/export/route',
   'api/rsvp/[slug]/responses/route',
   'start/page',
+  'my/page',
   'start/demo/[theme]/route',
   'start/demo/[theme]/[page]/route',
   'start/demo/[theme]/event.ics/route',

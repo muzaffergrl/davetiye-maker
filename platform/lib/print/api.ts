@@ -18,6 +18,7 @@ import { INVITATION_SIZES, invitationPdf, type InvitationSize } from './invitati
 import { printLabel } from './labels.ts';
 import { msg } from '../i18n/translate.ts';
 import { printLayout } from './layouts.ts';
+import { PrintBrowserError } from './browser.ts';
 import { sitePdf } from './site-pdf.ts';
 
 export const PDF_LIMITS = {
@@ -88,6 +89,13 @@ export async function download(req: Request, slug: string): Promise<Response> {
       },
     });
   } catch (e) {
+    // G150: the browser closed on both tries (lib/print/browser.ts) — a passing server problem: 503 + Retry-After and
+    // the panel's "try again in a moment". The quota hit above stays one hit for this request (the internal retry
+    // does not count).
+    if (e instanceof PrintBrowserError) {
+      console.error(`[pdf] ${slug} ${d.kind}: ${e.message}`, e.cause);
+      return json(503, { ok: false, code: 'pdf_unavailable', message: printLabel('panel_failed') }, { 'Retry-After': '30' });
+    }
     console.error(`[pdf] ${slug} ${d.kind}:`, e);
     return fail(500, 'pdf_failed', printLabel('panel_failed'));
   }

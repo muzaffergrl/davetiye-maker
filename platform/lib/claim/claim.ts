@@ -10,16 +10,22 @@
 //   4. field checks (fields.ts, same rules as the browser)  -> 400 invalid (+ fields)
 //   --- serialised per order number (in this process) ---
 //   5. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
-//      ("manual": accepted, the site is stored with orderCheck "pending": no publishing until the shop confirms it)
+//      ("manual": accepted, the site is stored with orderCheck "pending": no publishing until the shop confirms it;
+//       "etsy": the receipt is read from Etsy — G147; not connected yet -> "pending" like manual)
 //      (before the "used" check: with verification on, a stranger gets the same 403 for used and unused numbers)
 //   6. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
 //      … unless it is a RETRY of the same claim: same claim token (the form sends one random token
 //      and repeats it on every retry), same email, still an unpublished draft, created < 24 h ago.
 //      The first answer was lost on the way (phone changed network), so the buyer never saw the
 //      link: the keys are reissued (the unseen old link stops working) -> 201 with the new link.
+//      … or (G146) the email is the one the website was started with (lib/claim/continue.ts sameOwnerEmail): the buyer
+//      is signed in on this device with a new DEVICE KEY (lib/device-keys.ts; the edit link is untouched)
+//      -> 200 {existing: true, slug, editPath}. These sign-ins count against the order number's attempts (shared with
+//      /my, lib/claim/limits.ts DEFAULT_CONTINUE_LIMITS.perOrder) -> 429 rate_limited.
 //   7. website address: typed one must be free             -> 409 slug_taken (+ suggestion); otherwise the first free one from the names
 //   8. per-IP and global "sites created" limits             -> 429 rate_limited / busy
-//   9. create the draft (createSiteWithKeys), email stub    -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
+//   9. create the draft (createSiteWithKeys), emails        -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
+//      (G147: the edit link to the buyer when SMTP is set; a NEW pending site is also announced to the shop)
 //
 // One website per order number is enforced here with findSitesByOrderRef + an in-process lock.
 // Several server instances (Vercel) need a storage guarantee as well: the blob adapter (G048) keeps
@@ -47,8 +53,12 @@ import {
   suggestSlugBase,
   type ClaimField,
 } from './fields.ts';
-import { DEFAULT_CLAIM_LIMITS, getClaimRateLimiter, type ClaimLimits } from './limits.ts';
+import { deviceEditPath, ownedSite, siteNames } from './continue.ts';
+import { deviceLabel, mintDeviceKey } from '../device-keys.ts';
+import { msg } from '../i18n/translate.ts';
+import { DEFAULT_CLAIM_LIMITS, DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ClaimLimits, type ContinueLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
+import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
 import { THEME_IN_REVIEW, themeOpenForClaims, type ApprovalEnv } from '../themes/approval.ts';
 import { getOrderVerifier, type OrderVerifier } from './verify.ts';
@@ -63,9 +73,15 @@ export interface ClaimContext {
   limits?: ClaimLimits;
   verifier?: OrderVerifier;
   mailer?: EditLinkMailer;
+  /** Shop notice when a new site waits for an order check (G147; default: SMTP when configured, else off). */
+  notifier?: ShopNotifier;
   now?: () => number;
   /** Where the theme approval gate reads VERCEL_ENV / THEME_APPROVAL (default process.env; G080). */
   approvalEnv?: ApprovalEnv;
+  /** G146: the browser's user agent (a short device label for a sign-in with an order that already has a website). */
+  userAgent?: string | null;
+  /** G146: limits of signing in with an order number (default DEFAULT_CONTINUE_LIMITS). */
+  continueLimits?: ContinueLimits;
 }
 
 /** How long a lost /start answer can be recovered by retrying with the same claim token. */
@@ -108,9 +124,10 @@ export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
   invalid: 'Please check the highlighted fields.',
   theme_unavailable: 'This design is not available. Please open the start link from your Etsy download again.',
   theme_in_review: THEME_IN_REVIEW.message,
-  order_used:
-    'A website has already been started with this order number. Open it with the edit link you saved when you created it. ' +
-    'If you have lost the link, message the shop on Etsy and include your order number.',
+  // G146: the order has a website and the email is not the one it was started with (the same email signs in instead).
+  order_used: msg(
+    'A website has already been started with this order number. To open it, go to /my and enter this order number with the email you used when you started it.',
+  ),
   order_not_verified: 'We could not confirm this order. Please check your Etsy order number and email address.',
   verification_unavailable: 'We could not check your order right now. Please try again in a few minutes.',
   slug_taken: 'This website address is already taken. Please choose another one.',
@@ -244,6 +261,21 @@ export interface ClaimSuccessBody {
   orderPending: boolean;
 }
 
+/**
+ * G146: the order already has a website started with this email — it is opened on this device (a device key in
+ * `editPath`; the private edit link is not shown or changed).
+ */
+export interface ClaimExistingBody {
+  ok: true;
+  existing: true;
+  slug: string;
+  /** Root-relative panel path with this device's key. */
+  editPath: string;
+  siteUrl: string;
+  names: string;
+  orderPending: boolean;
+}
+
 /** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?, website? (honeypot)}. */
 export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>): Promise<ClaimResult> {
   const { adapter } = ctx;
@@ -272,31 +304,62 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
   const claimToken = claimTokenOf(raw.claimToken);
   const now = ctx.now ?? Date.now;
 
-  const answer = async (slug: string, editKey: string, pending: boolean): Promise<ClaimResult> => {
+  /** `created`: a NEW site (not a retry): a pending one is announced to the shop by email (G147; never blocks the claim). */
+  const answer = async (slug: string, editKey: string, pending: boolean, created: { siteId: string } | null = null): Promise<ClaimResult> => {
     const origin = ctx.origin.replace(/\/+$/, '');
     const editPath = `/edit/${slug}?k=${encodeURIComponent(editKey)}`;
     const editUrl = `${origin}${editPath}`;
     const siteUrl = `${origin}/${slug}`;
     let emailSent = false;
     const mailer = ctx.mailer ?? getEditLinkMailer();
-    if (mailer.enabled) {
+    const notifier = ctx.notifier ?? getShopNotifier();
+    const buyerMail = async () => {
       try {
-        emailSent = (await mailer.send({ to: email, editUrl, siteUrl, themeName: theme.name, orderNumber })).sent === true;
+        emailSent = (await mailer.send({ to: email, editUrl, siteUrl, themeName: theme.name, orderNumber, kind: 'created' })).sent === true;
       } catch (e) {
         // Never log the message (it holds the secret link).
         console.error(`[claim] edit link email for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
       }
-    }
+    };
+    const shopNotice = async () => {
+      try {
+        // No secret in it: the order number, the design and the admin page of the site.
+        await notifier.pendingOrder({ orderNumber, themeName: theme.name, adminUrl: `${origin}/admin/site/${encodeURIComponent(created!.siteId)}` });
+      } catch (e) {
+        console.error(`[claim] shop notice for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
+      }
+    };
+    await Promise.all([mailer.enabled ? buyerMail() : null, created && pending && notifier.enabled ? shopNotice() : null]);
     const body: ClaimSuccessBody = { ok: true, slug, status: 'draft', editUrl, editPath, siteUrl, emailSent, orderPending: pending };
     return { status: 201, body: body as unknown as Record<string, unknown> };
   };
 
-  /** "Order used", or the recovered link when this request repeats a claim whose answer was lost. */
+  /**
+   * "Order used"; the recovered link when this request repeats a claim whose answer was lost; or (G146) the buyer's own
+   * website, opened on this device with a device key, when the email is the one it was started with.
+   */
   const usedOrRetry = async (sites: SiteRecord[]): Promise<ClaimResult> => {
     const mine = sites.find((s) => isClaimRetry(s, claimToken, email, now()));
-    if (!mine) return claimError(409, 'order_used');
-    const reissued = await reissueKeys(adapter, mine.id);
-    return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
+    if (mine) {
+      const reissued = await reissueKeys(adapter, mine.id);
+      return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
+    }
+    const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
+    if (!perOrder.allowed) return claimError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
+    const owned = ownedSite(sites, email);
+    if (!owned) return claimError(409, 'order_used');
+    const { key } = await mintDeviceKey(adapter, owned, { label: deviceLabel(ctx.userAgent), via: 'start', now: new Date(now()) });
+    const origin = ctx.origin.replace(/\/+$/, '');
+    const body: ClaimExistingBody = {
+      ok: true,
+      existing: true,
+      slug: owned.slug,
+      editPath: deviceEditPath(owned.slug, key),
+      siteUrl: `${origin}/${owned.slug}`,
+      names: siteNames(owned),
+      orderPending: orderPending(owned),
+    };
+    return { status: 200, body: body as unknown as Record<string, unknown> };
   };
 
   return withOrderLock(orderNumber, async () => {
@@ -360,7 +423,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
       }
     }
 
-    return answer(slug, created.editKey, orderPending(created.site));
+    return answer(slug, created.editKey, orderPending(created.site), { siteId: created.site.id });
   });
 }
 

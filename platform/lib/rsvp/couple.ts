@@ -12,7 +12,7 @@
 import { formatDate, formatTime, isValidTimeZone } from '../content/format.ts';
 import type { RsvpQuestion } from '../content/types.ts';
 import type { DataAdapter, RsvpAnswer, RsvpRecord, SiteRecord } from '../data/types.ts';
-import { canEdit } from '../sites.ts';
+import { editAccess, type EditAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { themeMaxGuests } from './config.ts';
 import { rsvpWindow, type RsvpWindow } from './deadline.ts';
@@ -67,11 +67,21 @@ export interface RsvpSummary {
   responses: RsvpEntry[];
 }
 
-/** The site, when `editKey` is its edit key; otherwise null (unknown slug and wrong key look the same). */
-export async function authorizeEditor(adapter: DataAdapter, slug: string, editKey: unknown): Promise<SiteRecord | null> {
+/**
+ * The site and who is editing it, when `editKey` opens it: the edit key, the shop's key (G145) or a device key (G146,
+ * lib/sites.ts editAccess). Otherwise null (unknown slug and wrong key look the same).
+ */
+export async function editorAccess(adapter: DataAdapter, slug: string, editKey: unknown): Promise<{ site: SiteRecord; access: EditAccess } | null> {
   if (!isValidSlugFormat(slug) || isReservedSlug(slug)) return null;
   const site = await adapter.getSiteBySlug(slug);
-  return site && canEdit(site, editKey) ? site : null;
+  if (!site) return null;
+  const access = await editAccess(adapter, site, editKey);
+  return access ? { site, access } : null;
+}
+
+/** The site, when `editKey` opens it (editorAccess); otherwise null (unknown slug and wrong key look the same). */
+export async function authorizeEditor(adapter: DataAdapter, slug: string, editKey: unknown): Promise<SiteRecord | null> {
+  return (await editorAccess(adapter, slug, editKey))?.site ?? null;
 }
 
 export function rsvpCounts(list: readonly RsvpRecord[]): RsvpCounts {

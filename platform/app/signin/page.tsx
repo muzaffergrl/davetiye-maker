@@ -2,6 +2,7 @@
 // text only. ("signin" is a reserved slug, lib/slug.ts, so no couple can take this address.)
 // G080: the BKE Studio look of the panel's "edit link not valid" page (logo, panel fonts and tokens).
 import type { Metadata } from 'next';
+import { DocumentLang } from '../../components/i18n/DocumentLang.tsx';
 import { BrandLogo } from '../../components/panel/Brand.tsx';
 import { PANEL_FONTS } from '../../components/panel/fonts.ts';
 import styles from '../../components/panel/panel.module.css';
@@ -26,14 +27,17 @@ export default async function SignInPage() {
   return (
     <div className={`${styles.app} ${PANEL_FONTS}`}>
       <main className={styles.notice}>
+        <DocumentLang lang={lang} />
         <BrandLogo height={28} className={styles.noticeBrand} />
         <h1 className={styles.noticeTitle}>{t('Open your editor')}</h1>
-        {/* SIGN_IN_UNAVAILABLE (lib/panel/signin.ts), as one translatable sentence */}
+        {/* SIGN_IN_UNAVAILABLE (lib/panel/signin.ts), as translatable sentences; G146: /my is the way in. */}
+        <p>{t('Enter your Etsy order number and the email you used when you started your website. It works on any phone or computer — no account or password.')}</p>
         <p>
-          {t("Email sign-in isn't available yet. Open your editor with the edit link you saved. Lost it? Message {shop} on Etsy with your order number.", {
-            shop: PANEL_BRAND.shopName,
-          })}
+          <a className={`${styles.btn} ${styles.btn_primary} ${styles.btnBlock}`} href="/my#continue" data-continue-order="">
+            {t('Continue with your order number')}
+          </a>
         </p>
+        <p>{t('Still stuck? Message {shop} on Etsy with your order number.', { shop: PANEL_BRAND.shopName })}</p>
       </main>
     </div>
   );

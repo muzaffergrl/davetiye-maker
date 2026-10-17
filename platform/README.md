@@ -896,7 +896,7 @@ fotoğrafları ve marka logosu.
   `orderCheck: {status: "pending"}` ile saklanır; yayın `403 order_pending`, paylaşılan önizleme 404 (panel önizlemesi çalışır),
   panelde ve `/start` sonucunda açık not. Dükkân siparişi Etsy'de kontrol edip `node scripts/verify-order.ts (--order <no> | --slug
   <adres>) --reason "…"` (`--show`) ile onaylar. Satış sitesi kapısı: `MARKETING.verified.orderCheck` false iken `launched: true`
-  reddedilir. Gerçek `EtsyOrderVerifier` yapılmadı (mağazanın Etsy API uygulaması + onay gerekir).
+  reddedilir. G147: `CLAIM_ORDER_VERIFICATION=etsy` → `EtsyOrderVerifier` (`lib/etsy/`; kurulum `docs/10` §3).
 - **Paylaşılan sayaç:** blob adaptörü `hitCounter` (`limits/<sha256>.json`, ETag'li koşullu yazım) → `/start` ve yükleme limitleri
   bütün Vercel örneklerinde aynı pencereyi sayar (`AdapterRateLimiter`); `local` süreç içi bellekte kalır. **Foto sınırları:** site
   başına günde 60 yükleme (`429 upload_limit`), toplam 450 dosya (`countPhotos`, `429 photo_limit`).
@@ -1206,6 +1206,10 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
 |---|---|
 | `POST /api/start` `application/json`, ≤ 4 KB: `{theme, orderNumber, email, names: [a, b], slug?, claimToken?, website?}` | `201 {ok, slug, status:"draft", editUrl, editPath, siteUrl, emailSent}` · `400 invalid (+fields: orderNumber/email/name1/name2/slug)` · `400 bad_json` · `403 order_not_verified` · `404 theme_unavailable` · `409 order_used` · `409 slug_taken (+fields.slug, suggestion)` · `413` · `415` · `429 rate_limited/busy (+Retry-After)` · `503 verification_unavailable` · `500` |
 | `GET /api/start/slug?value=<adres>` | `200 {ok, value, available, reason: null\|missing\|format\|reserved\|taken, message, suggestion}` · `429` |
+| G146: aynı sipariş + **sitenin e-postası** ile `POST /api/start` | `200 {ok, existing:true, slug, editPath (cihaz anahtarı), siteUrl, names, orderPending}` (link değişmez); başka e-posta → `409 order_used` (mesaj `/my`'ı gösterir) |
+| `POST /api/my/continue` `application/json`, ≤ 1 KB: `{orderNumber, email, website?}` | `200 {next:"edit", slug, editPath, names}` (cihaz anahtarı) · `200 {next:"start"}` (sipariş için site yok) · `403 no_match` (tek genel mesaj) · `400 invalid (+fields)` · `413` · `415` · `429 (+Retry-After)` · `500` |
+| `POST /api/my/signin-link` (aynı gövde) | e-posta sağlayıcısı yoksa `503 unavailable`; varsa her zaman `200 {ok, message}` — eşleşirse kayıtlı sahip adresine `kind:"signin"` link |
+| `GET/POST /api/edit/<slug>/devices` (Bearer) | `{access: owner\|shop\|device, devices:[{id,label,createdAt,via,current}]}` · `POST {action:"sign-out-others"}` → `{removed, …}` (dükkân linki `403`) |
 | `GET /start/demo/<tema>[/<sayfa>]` | temanın sayfası demo içerikle (HTML); `internal`/bilinmeyen/demo'suz tema, `index` alt yolu → 404 |
 
 Sıra (`lib/claim/claim.ts`): IP deneme sınırı → honeypot (`website` doluysa 400, kayıt yok) → tema → alan kontrolleri →
@@ -1229,12 +1233,15 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob
   `CLAIM_ORDER_VERIFICATION=manual` (G060-fix, `ManualOrderVerifier`): taslak açılır, `orderCheck.status = "pending"`; yayın
   `403 order_pending` ve paylaşılan önizleme kapalı, ta ki dükkân `node scripts/verify-order.ts --order <no> --reason "…"` ile
   onaylayana kadar (`confirmOrder`). Satış sitesi kapısı `MARKETING.verified.orderCheck` ister.
-  `CLAIM_ORDER_VERIFICATION=etsy` **uygulanmadı**: bilinçli olarak hata verir (sessizce atlamak yerine 500). Uygularken
-  doğrulanacaklar dosyanın başında (mağazanın makbuzu, ödenmiş mi, alıcı e-postası erişilebilir mi, ilan → tema eşlemesi,
-  çok ürünlü sipariş). Kodda `setOrderVerifier()` ile takılır.
-- **Düzenleme linkini e-postayla gönderme** (`mailer.ts`, `docs/10` §3): `EditLinkMailer` + `DisabledMailer` (varsayılan,
-  `enabled: false`). Sağlayıcı seçilince `setEditLinkMailer()`; arayüz "We will email your edit link" metnine kendiliğinden geçer.
-  Gönderim hatası sahiplenmeyi bozmaz (site var, link ekranda) ve link log'a yazılmaz (test).
+  `CLAIM_ORDER_VERIFICATION=etsy` (G147, `lib/etsy/verify.ts`): makbuz mağazanın tek seferlik OAuth bağlantısıyla (admin →
+  Bağlantılar, PKCE, tokenlar `GOOGLE_TOKEN_KEY`'den HKDF ile türetilen anahtarla AES-GCM, site belgesi `00000000-…/etsy-shop`)
+  okunur: ödenmiş → `verified` (by `etsy`), iptal/tam iade/başka mağaza/e-posta farkı/ilan başka tasarım → `rejected`, ödenmemiş →
+  `pending`, Etsy yok/429 → `unavailable`. Ayar yok / bağlı değil → `pending` (manual gibi, 500 yok). Bekleyenler admin
+  düğmesi, panel yoklaması (2 dk) ve Publish (15 sn) ile yeniden kontrol edilir (`lib/etsy/recheck.ts`). Kodda `setOrderVerifier()`.
+- **Düzenleme linkini e-postayla gönderme** (`mailer.ts`, `lib/mail/`, G147): `SMTP_HOST` + `SMTP_USER` + `SMTP_PASS` varsa
+  `getEditLinkMailer()` = `SmtpEditLinkMailer` (nodemailer, Gmail uygulama şifresiyle çalışır; `kind`: `created` | `signin`), yoksa
+  `DisabledMailer`. Onay bekleyen yeni sitede dükkâna bildirim (`ADMIN_NOTIFY_EMAIL`). Gönderim hatası sahiplenmeyi bozmaz (site var,
+  link ekranda); içerik, link ve adres log'a yazılmaz (yalnız `EAUTH` gibi kod). Test: `tests/g147-etsy-mail.test.ts`.
 
 ### Testler
 - `tests/claim.test.ts` (node:test, 19 test; ayrıca `claimToken` ile kayıp yanıtın kurtarılması, link yenileme aracı, doğrulayıcı sırası): sipariş no / e-posta / isim / adres kuralları; tema + demo kaynağı (kendi dosyası,
@@ -1266,6 +1273,10 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob
   `/start/demo/…`, `/api/start…`) `next.config.ts` `outputFileTracingIncludes`'ta; G055'ten beri yalnız `themes/**/*.html` ve
   `*.json` ile. Tema görselleri/CSS/JS yalnız tema varlık rotasına (`/themes/[theme]/[...path]`) izlenir. Ayrıntı ve
   `trace-check` denetimleri aşağıda "Platform cilası (G055)".
+- **G146 — her cihazdan sipariş no + e-posta:** `/my` formu → `POST /api/my/continue`; eşleşince **cihaz anahtarı**
+  (`lib/device-keys.ts`, site belgesi `devices`, yalnız hash, en çok 10, düzenleme anahtarının kuşağına bağlı). Her anahtar kontrolü
+  `lib/sites.ts editAccess` (owner · shop · device) üzerinden. Anahtar yeniden üretimi (aşağıdaki araç dahil) tüm cihaz anahtarlarını
+  düşürür. Ayrıntı: `docs/10_SITE_PLATFORMU.md` §3a.
 - **Kayıp link — operatör aracı:** `node scripts/reissue-edit-key.ts --order <no> --origin https://<host>` (ya da `--slug <adres>`):
   siteyi bulur, yeni düzenleme + önizleme anahtarı üretir (yalnız hash saklanır; eski linkler hemen ölür), yeni linki **bir kez**
   ekrana yazar; içerik/foto/yanıt/yayın durumuna dokunmaz. `DATA_ADAPTER` deposunda çalışır (blob için token gerekir). Mağaza alıcıyı

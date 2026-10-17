@@ -2,7 +2,7 @@
 id: G089
 baslik: React Bits Pro ile cila — satış sitesi, panel ve düğün sitelerini "yaşayan" hâle getir (K31)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 2
 bagimli: [G088]
@@ -49,3 +49,4 @@ bileşeniyle yazıldı (`platform/components/fx/`). Ayrıntı: docs/14 §14.5, d
   tasarım sayfasında ekran yelpazesi ("card-spread" fikri, CSS) ve yayın ekranında konfeti ("celebration-cursor" fikri, canvas,
   `components/fx/Confetti.tsx`; önceki CSS `Celebrate` kaldırıldı). Pro kaynağı ve anahtar repoda yok; `motion` eklenmedi.
   three.js'li arka planlar (aurora, dappled-light vb.) mobil bütçe nedeniyle alınmadı. g089-browser 33/33, 390/1280 taşma 0.
+- 2026-10-17 entegratör onayladı

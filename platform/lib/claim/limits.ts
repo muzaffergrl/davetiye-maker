@@ -5,6 +5,7 @@
 // another instance answers. When the data adapter offers a shared counter (blob: DataAdapter.hitCounter) the
 // limits are counted there; the local adapter (one process) keeps the in-memory limiter.
 
+import { createHash } from 'node:crypto';
 import { getDataAdapter } from '../data/index.ts';
 import { AdapterRateLimiter, MemoryRateLimiter, type RateLimitRule, type RateLimiter } from '../rsvp/rate-limit.ts';
 
@@ -28,6 +29,34 @@ export const DEFAULT_CLAIM_LIMITS: ClaimLimits = {
   sitesGlobal: { limit: 300, windowMs: 60 * MINUTE },
   slugChecksPerIp: { limit: 120, windowMs: 15 * MINUTE },
 };
+
+/**
+ * G146: "continue with your Etsy order number + email" (/my, POST /api/my/continue) and an order that already has a
+ * website on /start. Each attempt counts, right or wrong. The per-order window is shared by both ways in, so guessing
+ * the email of one order number stays slow however many addresses try.
+ */
+export interface ContinueLimits {
+  /** POST /api/my/continue from one address. */
+  perIp: RateLimitRule;
+  /** Sign-in attempts for one order number (/my and /start together). */
+  perOrder: RateLimitRule;
+  /** POST /api/my/signin-link from one address. */
+  signInLinksPerIp: RateLimitRule;
+  /** Sign-in emails for one order number. */
+  signInLinksPerOrder: RateLimitRule;
+}
+
+export const DEFAULT_CONTINUE_LIMITS: ContinueLimits = {
+  perIp: { limit: 10, windowMs: 15 * MINUTE },
+  perOrder: { limit: 6, windowMs: 60 * MINUTE },
+  signInLinksPerIp: { limit: 5, windowMs: 60 * MINUTE },
+  signInLinksPerOrder: { limit: 3, windowMs: 60 * MINUTE },
+};
+
+/** Limiter key of one order number (a hash: the full number is never kept in a counter name). */
+export function orderLimitKey(prefix: string, orderNumber: string): string {
+  return `${prefix}:${createHash('sha256').update(`order:${orderNumber}`).digest('hex').slice(0, 32)}`;
+}
 
 /**
  * Photo uploads per site (G060-fix): a site holds its photos and their size variants; replaced photos stay in

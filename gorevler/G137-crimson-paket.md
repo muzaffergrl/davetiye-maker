@@ -2,7 +2,7 @@
 id: G137
 baslik: 21 Crimson Rose Atelier — Etsy paketi (ilan metni, START HERE, ilan görselleri, video)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G137
 oncelik: 1
 bagimli: [G133]
@@ -52,3 +52,4 @@ açıkça istisna (`test_listing_editorial` 8'den eksik yalnız sahneli dört g�
 ## Günlük
 - 2026-10-17 alındı (claude-G137, alt-ajan, dal `g137-crimson-paket`); 4/8 görsel + video + metin + rehber; incelemeye gönderildi.
 - 2026-10-17 ikinci tur (claude-G137, alt-ajan, dal `g137b-crimson-gorseller`): G821 sahneleriyle 01, 02, 04, 08 üretildi; 8/8, `--check --strict --designs 21` çıkış 0.
+- 2026-10-17 entegratör onayladı

@@ -1,5 +1,8 @@
 // Generic answer for /edit/<slug> with a wrong, missing or preview key, or an unknown slug.
 // Identical in every case, so it never tells whether a site exists. BKE Studio look (G066): logo, panel fonts.
+// G146: two ways back — "Continue with your order number" (/my: order number + email, any device) and "Paste your
+// edit link" (/my, the saved link).
+import { DocumentLang } from '../../../components/i18n/DocumentLang.tsx';
 import { BrandLogo } from '../../../components/panel/Brand.tsx';
 import { PANEL_FONTS } from '../../../components/panel/fonts.ts';
 import styles from '../../../components/panel/panel.module.css';
@@ -12,20 +15,28 @@ export default async function EditLinkNotValid() {
   const { t } = makeTranslator(lang, dict);
   return (
     <main className={`${styles.notice} ${PANEL_FONTS}`}>
+      <DocumentLang lang={lang} />
       <BrandLogo height={28} className={styles.noticeBrand} />
       <h1 className={styles.noticeTitle}>{t('This edit link is not valid')}</h1>
       <p>
         {t('Please open the full edit link you received when you created your website. Copy the whole link, including the part after')}{' '}
         <code>?k=</code>.
       </p>
-      <section className={styles.noticeCard} aria-labelledby="lost-link">
-        <h2 id="lost-link">{t('Lost your edit link?')}</h2>
-        {/* SIGN_IN_UNAVAILABLE (lib/panel/signin.ts), as one translatable sentence */}
+      {/* G146: the way back that always works — the Etsy order number + email on /my, on any device. */}
+      <section className={styles.noticeCard} aria-labelledby="lost-link" data-continue-with-order="">
+        <h2 id="lost-link">{t('Open your editor with your order number')}</h2>
         <p>
-          {t("Email sign-in isn't available yet. Open your editor with the edit link you saved. Lost it? Message {shop} on Etsy with your order number.", {
-            shop: PANEL_BRAND.shopName,
-          })}
+          {t('Enter your Etsy order number and the email you used when you started your website. It works on any phone or computer — no account or password.')}
         </p>
+        <div className={styles.noticeActions}>
+          <a className={`${styles.btn} ${styles.btn_primary} ${styles.btnBlock}`} href="/my#continue" data-continue-order="">
+            {t('Continue with your order number')}
+          </a>
+          <a className={`${styles.btn} ${styles.btn_secondary} ${styles.btnBlock}`} href="/my#link" data-paste-link="">
+            {t('Paste your edit link')}
+          </a>
+        </div>
+        <p className={styles.hint}>{t('Still stuck? Message {shop} on Etsy with your order number.', { shop: PANEL_BRAND.shopName })}</p>
       </section>
     </main>
   );

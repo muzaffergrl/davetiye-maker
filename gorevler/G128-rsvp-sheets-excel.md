@@ -2,7 +2,7 @@
 id: G128
 baslik: Düzenlenebilir RSVP alanları (Required/Optional, 5 soru türü) + tek tuş Google Sheets (canlı) + Excel indirme
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G128
 oncelik: 1
 bagimli: [G051, G069, G068]
@@ -88,3 +88,4 @@ Satış sitesi: `lib/marketing/faq.ts` ve `/features` cümlesi yeni türler + Re
 
 ## Günlük
 - 2026-10-16 claude-G128: kodlandı, testler (Sonuç), incelemeye
+- 2026-10-17 entegratör onayladı

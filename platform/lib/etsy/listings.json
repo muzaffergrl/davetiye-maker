@@ -1,0 +1,4 @@
+{
+  "note": "G147: Etsy listing_id (digits, as text) -> theme id (platform/themes/<id>). Filled when the design listings are published on Etsy. A purchase whose listings are not here is never rejected for its design; a mapped listing for another design than the one the buyer starts -> theme_mismatch.",
+  "listings": {}
+}

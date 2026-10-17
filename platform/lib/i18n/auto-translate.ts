@@ -10,8 +10,12 @@
 //
 // Neither is available → the panel falls back to "write it yourself" (every field stays editable). Results are drafts:
 // the couple approves each field (or all) before guests see it (lib/i18n/content.ts).
+//
+// G150: both go behind a curated wedding glossary (lib/i18n/wedding-glossary.ts): wedding labels such as "Reception"
+// (the free service gave Turkish "Alım") are translated by hand and never sent to the machine.
 
 import type { Lang } from './langs.ts';
+import { translateWithGlossary } from './wedding-glossary.ts';
 
 export type TranslateEngine = 'browser' | 'service';
 
@@ -159,12 +163,16 @@ export async function openTranslator(source: Lang, target: Lang, opts: { allowSe
   if (api && (await browserCanTranslate(source, target))) {
     try {
       const tr = await withTimeout(api.create({ sourceLanguage: source, targetLanguage: target }), BROWSER_PREPARE_MS);
-      return { engine: 'browser', translate: (text) => tr.translate(text), close: () => tr.destroy?.() };
+      return { engine: 'browser', translate: (text) => translateWithGlossary(text, source, target, (t) => tr.translate(t)), close: () => tr.destroy?.() };
     } catch {
       /* the device could not prepare it: try the service */
     }
   }
   if (!opts.allowService) throw new TranslateUnavailable('none');
   const fetcher = opts.fetcher ?? fetch.bind(globalThis);
-  return { engine: 'service', translate: (text) => serviceTranslate(text, source, target, fetcher), close: () => {} };
+  return {
+    engine: 'service',
+    translate: (text) => translateWithGlossary(text, source, target, (t) => serviceTranslate(t, source, target, fetcher)),
+    close: () => {},
+  };
 }

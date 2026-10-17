@@ -377,3 +377,18 @@ Recreate the attached info_card.png of this collection exactly — same card sha
 its position, same empty area — at 2048 × 3072 px for print. Fully transparent background around the card. Crisp,
 print-quality detail; no new elements. No text, letters, numbers, logos or watermarks.
 ```
+
+### P1b — invitation_card_print, geniş yazı alanı (G149 revizyonu — P1 yerine bunu üretin)
+> G149: bugünkü kartta dekor yazı alanına girdiği için basılı davetiyede yazı ×0.5'e kadar küçülüyor. Aynı kart, dekor
+> kenarlara çekilmiş hâliyle istenir. Gelince `node scripts/build-print-assets.ts --theme <tema>` ve `lib/print/layouts.ts`
+> kutusu/bantları yeniden ölçülür (test `tests/g149-print-layout.test.ts`).
+
+Kaydet: `collections/11_Boho_Pampas/assets/gpt/parts/invitation_card_print.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+Recreate the attached invitation_card.png of this collection in the same style — same card shape, paper, colours and
+decor family — at 2048 × 3072 px for print, but keep ALL decor inside the outer border zone: no leaf, flower, frame
+element or ornament may reach further than 13% of the card width from the left/right edges or 14% of the card height
+from the top/bottom edges. The central area (at least 74% of the card width and 62% of the card height, centred)
+must be completely empty, plain paper of the card, so the invitation text can be printed large. Fully transparent
+background around the card. Crisp, print-quality detail. No text, letters, numbers, logos or watermarks.
+```

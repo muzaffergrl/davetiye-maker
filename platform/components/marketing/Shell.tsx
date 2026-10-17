@@ -40,9 +40,10 @@ export function Header({ m = enMarket }: { m?: Market }) {
             ))}
           </ul>
         </nav>
+        {/* G146: /my explains Etsy → PDF → order number + email, and opens the editor on any device. */}
         <a href="/my" className={s.myBtn} data-track="nav_my_website" data-my-website="">
           <UserRound aria-hidden size={18} strokeWidth={1.75} />
-          {t('My website')}
+          <span>{t('Create your website')}</span>
         </a>
         <a href={m.href('/designs')} className={`${s.btn} ${s.btnSmall} ${s.headerCta}`} data-track="nav_designs">
           {t('See designs')}
@@ -76,7 +77,7 @@ export function Header({ m = enMarket }: { m?: Market }) {
               </li>
               <li>
                 <a href="/my" data-track="nav_my_website">
-                  {t('My website — open your editor')}
+                  {t('Create your website or continue editing')}
                   <ArrowRight aria-hidden size={20} strokeWidth={1.75} />
                 </a>
               </li>
@@ -146,7 +147,7 @@ export function Footer({ guides, m = enMarket }: { guides: Guide[]; m?: Market }
               </li>
               <li>
                 <a href="/my" data-track="nav_my_website">
-                  {t('My website')}
+                  {t('Create your website')}
                 </a>
               </li>
               <li>

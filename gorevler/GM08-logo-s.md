@@ -2,7 +2,7 @@
 id: GM08
 baslik: BKE Studio sembolünde K yerine S — 5 GPT logo dosyası (sembol, favicon, yatay, dikey, dükkân ikonu)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: codex-gpt-gorsel
 oncelik: 1
 bagimli: []
@@ -55,3 +55,4 @@ Dal geçmişi korundu. `git pull --rebase origin main` denemesi mevcut birleşim
 - 2026-10-16 alindi: codex-gpt-gorsel
 - 2026-10-16 bitti, incelemeye gönderildi
 - 2026-10-16 teslim alındı, G129'da kullanıldı (5 PNG izlendi: `brand/svg/`, favicon/uygulama ikonları, Etsy dükkân ikonu)
+- 2026-10-17 entegratör onayladı

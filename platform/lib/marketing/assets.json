@@ -1680,6 +1680,90 @@
         "seconds": 10,
         "bytes": 473459
       }
+    },
+    "crimson-rose-atelier": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/envelope-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/envelope-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/home-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/home-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/invitation-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/invitation-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/story-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/story-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/details-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/details-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/schedule-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/schedule-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/rsvp-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/rsvp-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/crimson-rose-atelier/form-320.webp",
+            "480": "/marketing/designs/crimson-rose-atelier/form-480.webp",
+            "640": "/marketing/designs/crimson-rose-atelier/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/crimson-rose-atelier/opening.mp4",
+        "poster": "/marketing/designs/crimson-rose-atelier/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 244888
+      }
     }
   },
   "panel": {

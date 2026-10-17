@@ -2,7 +2,7 @@
 id: GM09
 baslik: Etsy banner sahnesi — mum mühürlerde S sembolü (1 GPT görseli)
 rol: gpt-gorsel
-durum: inceleme
+durum: bitti
 alan: codex-gpt-gorsel
 oncelik: 2
 bagimli: [GM08]
@@ -43,3 +43,4 @@ bu görevde üretilmedi, Etsy'ye yükleme yapılmadı. Entegratör incelemesine 
 - 2026-10-17 alindi: codex-gpt-gorsel
 - 2026-10-17 bitti, incelemeye gönderildi: codex-gpt-gorsel
 - 2026-10-17 bitti (koordinatör: banner'lar üretildi)
+- 2026-10-17 entegratör onayladı

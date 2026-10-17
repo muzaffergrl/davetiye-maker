@@ -2,7 +2,7 @@
 id: G133
 baslik: Crimson Rose Atelier — yeni ürün ve gezinilebilir demo
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: codex-crimson-rose-atelier
 oncelik: 1
 bagimli: []
@@ -33,3 +33,4 @@ Gerçek telefon, gerçek Blob/müzik yükleme, gerçek Google hesabı/Sheets ve 
 ## Günlük
 - 2026-10-17: kullanıcı ayrı ürün üretimini istedi; yerel taslak ve kontroller tamamlandı.
 - 2026-10-17: GitHub'a ekleme onayı alındı; kullanıcı şimdilik yalnız yerel demoyu seçti.
+- 2026-10-17 entegratör onayladı

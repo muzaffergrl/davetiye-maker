@@ -2,7 +2,7 @@
 id: G140
 baslik: Link/QR paylaşımını kolaylaştır + katılımcı listesi tek butonla Excel
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G140
 oncelik: 1
 bagimli: [G128, G076, G075, G121]
@@ -68,3 +68,6 @@ Mesaj metinleri (misafirin gördüğü): "We’re getting married on <date>! …
   dokunmatik bilgisini geçirmedi, bu yüzden SMS/Messenger düğmeleri ekranda görülmedi (filtre mantığı birim testinde).
 - Kart PDF'inin fiziksel baskısı denenmedi. Kart yazısı sistem serif/sans fontuyla (font dosyası paketlenmez).
 - `Published.tsx` (ilk yayın ekranı) eski hâliyle; START HERE rehberleri (G131) bu etiketlerle henüz güncellenmedi.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

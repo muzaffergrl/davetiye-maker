@@ -2,7 +2,7 @@
 id: G130
 baslik: Ek hizmetler — "We set it up for you" kurulum hizmeti + özel tasarım (Etsy ilanları, satış sitesi, satış sonrası akış)
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-G130
 oncelik: 1
 bagimli: [G091, G123]
@@ -72,3 +72,6 @@ Kullanıcı: "ayrı extra revision ilanı aç, 500 TL". `collections/_services/e
 Digital" (121), 500 TL (≈ $10.09), 3 gün, adet 999; yalnız özel tasarım alıcıları için olduğu açıkça yazılı. `etsy_upload.py`
 üç hizmeti tanır (+ test). Özel tasarım ilanı bu ilana yönlendirir. Yeni admin mesajı `custom_design_extra_round` (JSON + docs/19
 kopyası + Türkçe başlık). docs/23 §4.7, docs/20 §3 (Services: üç ilan), K42 güncellendi.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

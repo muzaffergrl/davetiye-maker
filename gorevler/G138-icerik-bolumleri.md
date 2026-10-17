@@ -2,7 +2,7 @@
 id: G138
 baslik: Yeni içerik bölümleri — Ulaşım & Konaklama, Yemekli mi? + Menü, The Day/Details'te 0–10 içerik bloğu
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G138
 oncelik: 1
 bagimli: [G127, G128, G068]
@@ -78,3 +78,6 @@ doğrulanmadığını not ediyorum. Details sayfası iki temada da 360/390 + str
 
 **Açık:** START HERE rehberleri (G131 hattı) yeni bölümleri anlatmalı; 5 dil (i18n) işinde 13 yeni copy anahtarı + panel etiketleri
 çevrilecek; crimson-rose-atelier'in `copy-manifest --check`'i bu görevden önce de 3 kullanılmayan anahtar bildiriyordu (G142).
+
+## Günlük
+- 2026-10-17 entegratör onayladı

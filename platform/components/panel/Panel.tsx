@@ -37,7 +37,7 @@ import {
   WifiOff,
   type LucideIcon,
 } from 'lucide-react';
-import { rememberEditor } from '../../lib/panel/remember.ts';
+import { rememberEditor, takeOpenedExisting } from '../../lib/panel/remember.ts';
 import { msg, setUiLocale, t, tn } from '../../lib/i18n/client.ts';
 import type { Lang } from '../../lib/i18n/langs.ts';
 import type { Dict } from '../../lib/i18n/translate.ts';
@@ -194,6 +194,8 @@ export default function Panel({
   lang?: Lang;
   dict?: Dict;
   shopUntil?: string | null;
+  /** G146: opened with a device key (order number + email on /my or /start), not the private edit link. */
+  deviceSession?: boolean;
 }) {
   // G144: the interface language (chosen on the server: cookie, else Accept-Language) before any text renders
   setUiLocale(lang, dict);
@@ -209,12 +211,14 @@ function PanelApp({
   editKey,
   published = null,
   shopUntil = null,
+  deviceSession = false,
 }: {
   initial: PanelState;
   editKey: string;
   published?: ContentRecord | null;
   /** G145: opened with the shop's own time-limited link (admin), not the buyer's; until when it works. */
   shopUntil?: string | null;
+  deviceSession?: boolean;
 }) {
   const panel = usePanel(initial, editKey);
   const { content, meta, saveState, validation, locked, online } = panel;
@@ -382,6 +386,11 @@ function PanelApp({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once per open; the names are refreshed on the next visit
   }, [initial.slug, editKey]);
+  // G146: /start found that this order already has a website and opened it here (lib/panel/remember.ts).
+  useEffect(() => {
+    if (takeOpenedExisting(initial.slug)) snack(t('This order already has a website — we opened it for you.'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once per open
+  }, [initial.slug]);
 
   // Read after mount (localStorage), so the server's and the browser's first render match.
   const [storedStep, setStoredStep] = useState<number | null>(null);
@@ -570,7 +579,7 @@ function PanelApp({
   const startPublish = async () => {
     if (!online) return setDialog({ kind: 'message', title: t('You’re offline'), text: t('Connect to the internet to publish. Your changes are kept on this phone.') });
     if (upToDate) return go({ view: 'share' });
-    if (meta.orderPending) return setDialog({ kind: 'message', title: t('Not yet'), text: t(ORDER_PENDING_MSG, { shop: PANEL_BRAND.shopName }) });
+    if (meta.orderPending && !(await panel.recheckOrder())) return setDialog({ kind: 'message', title: t('Not yet'), text: t(ORDER_PENDING_MSG, { shop: PANEL_BRAND.shopName }) });
     if (validation.errors.length) {
       setShowAllErrors(true);
       return setDialog({ kind: 'issues', issues: validation.errors });
@@ -606,9 +615,20 @@ function PanelApp({
           <TriangleAlert size={32} strokeWidth={1.5} aria-hidden="true" />
           <h1 className={styles.noticeTitle}>{t('This edit link no longer works')}</h1>
           <p>
-            {t('The link may have been replaced with a new one, or it was copied only in part. If we sent you a new link, use the newest one.')}{' '}
-            {t('Otherwise message {shop} on Etsy with your order number.', { shop: PANEL_BRAND.shopName })}
+            {t('The link may have been replaced with a new one, or it was copied only in part. If we sent you a new link, use the newest one.')}
           </p>
+          {/* G146: the way back that always works (any device): the Etsy order number + email on /my. */}
+          {shopUntil ? null : (
+            <section className={styles.noticeCard} data-continue-with-order="">
+              <p>{t('Enter your Etsy order number and the email you used when you started your website. It works on any phone or computer — no account or password.')}</p>
+              <div className={styles.noticeActions}>
+                <a className={cx(styles.btn, styles.btn_primary, styles.btnBlock)} href="/my#continue" data-continue-order="">
+                  {t('Continue with your order number')}
+                </a>
+              </div>
+            </section>
+          )}
+          <p>{t('Still stuck? Message {shop} on Etsy with your order number.', { shop: PANEL_BRAND.shopName })}</p>
         </main>
       </div>
     );
@@ -1230,6 +1250,9 @@ function PanelApp({
                 slug={initial.slug}
                 editKey={editKey}
                 hideEditLink={Boolean(shopUntil)}
+                deviceSession={deviceSession}
+                origin={initial.origin}
+                onNotice={(text) => snack(text)}
                 meta={meta}
                 orderRef={initial.orderRef}
                 online={online}

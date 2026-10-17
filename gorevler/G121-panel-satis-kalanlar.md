@@ -2,7 +2,7 @@
 id: G121
 baslik: Panel, /start, admin ve satış sitesi — Refero turunun kalan P2'leri (docs/18) ve alıcı yolculuğu §6 kalanları (docs/19)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G121
 oncelik: 1
 bagimli: [G088, G091, G100]
@@ -109,3 +109,4 @@ iki kez birleştirildi, çakışma yok). Yayın yok, push yok.
 ## Günlük
 - 2026-10-16 açıldı ve alındı (claude-G121, koordinatör isteği)
 - 2026-10-16 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

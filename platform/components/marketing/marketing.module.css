@@ -2554,6 +2554,11 @@
   .myBtn {
     padding: 0 12px;
     font-size: 13.5px;
+    /* G146: "Create your website" (TR "Davetiye siteni oluştur") may take two short lines on a phone. */
+    white-space: normal;
+    text-align: center;
+    line-height: 1.12;
+    max-width: 168px;
   }
 
   .myBtn svg {

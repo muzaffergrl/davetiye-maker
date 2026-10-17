@@ -2,7 +2,7 @@
 id: G135
 baslik: G096 canlı testinin 4 küçük hatası — demo satış sayımı, /my silinen site, "Sipariş onaylanıyor" şablonu, saat dilimi
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G135
 oncelik: 2
 bagimli: []
@@ -69,3 +69,4 @@ değişmedi). Main'e uyarlama: docs/19 §4.6 kural 5 (main'in "yanıt süresi 24
 - 2026-10-16 açıldı ve alındı: claude-G135 (G096 bulguları, başlatan oturumun isteğiyle)
 - 2026-10-16 bitti, incelemeye gönderildi
 - 2026-10-17 G134 entegrasyonunda main'e birleştirildi; kimlik G098 → G135
+- 2026-10-17 entegratör onayladı

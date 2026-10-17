@@ -2,7 +2,7 @@
 id: G098
 baslik: Tema rötuşları — GM07 parçalarını 16/17/20'ye takma, theme-check yatay taşma açığı, 16 home fold, 17 başlık "TOGETꞪER", 12 cüzdan metinleri
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G098
 oncelik: 2
 bagimli: [GM07, G101]
@@ -102,3 +102,4 @@ varsayılanlarında "envelope" yok.
 ## Günlük
 - 2026-10-16 açıldı ve alindi: claude-G098 (koordinatörün doğrudan görevlendirmesi; worktree, dal `g098-tema-rotuslari`)
 - 2026-10-16 bitti, incelemeye gönderildi (koordinatöre rapor; push yok)
+- 2026-10-17 entegratör onayladı
