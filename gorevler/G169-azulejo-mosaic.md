@@ -50,7 +50,7 @@ sırt/duvar/badana 05'in düz sıvası, kart 18'in pamuk kâğıdı tonlandı; f
 Saksılar yok (yedek çizilmedi). Bütün parçalar dosya adıyla kendiliğinden girer.
 
 ### Kontroller (Linux, Node 22)
-- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `I18N_STRICT=1 npm test` (birleştirme sonrası sayılar aşağıda) — ilk koşuda
+- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `I18N_STRICT=1 npm test` **1591/1591 geçti** (taban `claude/zealous-fermi-hy1o40` ile birleştirme sonrası; tabanda yeni commit yoktu) — ilk koşuda
   tek hata `marketing-content` "hand-painted" yasaklı iddia (görseller AI üretimi): satış metni, site metni ve ilan "painted"
   olarak düzeltildi; `npm run build` ✓ (trace-check 30 tema).
 - `theme-check --theme azulejo-mosaic --stress --compare none --no-video`: **111 geçti, 0 hata**, 61 uyarı (60'ı "Google font
