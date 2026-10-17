@@ -188,7 +188,7 @@ test('09–14 are live after the first eight, named as their themes, with design
     assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
     assert.equal(d.compareAtPrice, null);
   }
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['crimson-rose-atelier', 'nocturne-lake-estate']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate']);
 });
 
 test('design page titles ≤ 60 characters (also with a 12-character brand); the earlier titles did not change', () => {

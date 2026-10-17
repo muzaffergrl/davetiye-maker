@@ -24,7 +24,7 @@ REPO = TOOLS.parent
 NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
                 "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
                 "wildflower-meadow-vellum": "sleeve"}
-COMING = {"crimson-rose-atelier"}  # G137: design 21 has a listing kit but is not open for sale (config.ts "coming")
+COMING: set[str] = set()  # G142: design 21 opened for sale (config.ts "live"); add a design here while it is "coming"
 
 
 def test_design_table():
