@@ -52,8 +52,8 @@ istenirse yedek kullanılır. Kullanıcı kararı.
 ### 1.2 Shop icon ve banner
 | Alan | Dosya | Not |
 |---|---|---|
-| Shop icon | `brand/etsy/etsy_shop_icon_1000.png` (500'lük de var) | Etsy'de "Logo" (Your shop → Shop basics / Shop Home editor). **Uygulandı, §7.5** |
-| Banner (büyük) | `brand/etsy/etsy_banner_big_3360x840.jpg` | Yazı logosu sağ tarafta. Mobil kırpım ölçüldü (kırpım yok), **uygulandı, §7.5** |
+| Shop icon | `brand/etsy/etsy_shop_icon_1000.png` (500'lük de var) | Etsy'de "Logo" (Your shop → Shop basics / Shop Home editor). **Uygulandı, §7.5; S sembolü 2026-10-17, §7.7** |
+| Banner (büyük) | `brand/etsy/etsy_banner_big_3360x840.jpg` | Yazı logosu sağ tarafta. Mobil kırpım ölçüldü (kırpım yok), **uygulandı, §7.5; S mühürlü 2026-10-17, §7.7** |
 | Mini banner | `brand/etsy/etsy_banner_mini_1600x213.jpg` | Kullanılmadı: Etsy'de "Mini Banner" mobilde görünmüyor; Big Banner seçili kaldı (§7.5) |
 
 ### 1.3 Shop announcement (alanda sınır tanımlı değil) [doğrulandı]
@@ -313,7 +313,7 @@ banner'ın üstündeki "Add an image" formu).
 ### 7.6 Etsy'de yeniden girilmesi gereken alanlar (G122, 2026-10-16)
 §1.3 ve §2.2 metni 2026-10-15'te Etsy'ye girildikten sonra değişti. Belgedeki metin Etsy'yi güncellemez: aşağıdaki alanlar
 Shop Manager'da **yeniden girilmeli** (eski değer §7.1'deki 2026-10-15 girişi), kaydedilip sayfa yenilenerek okunmalı. Bu bulut
-oturumu Etsy'ye erişemez; iş `claude-tarayici` rolündedir. Yapılana kadar Etsy'deki metin eskidir.
+oturumu Etsy'ye erişemez; iş `claude-tarayici` rolündedir. Yapılana kadar Etsy'deki metin eskidir. **Yapıldı: 2026-10-17, §7.7.**
 
 | Alan | Yer (§7.1) | Değişen | Yeni karakter |
 |---|---|---|---|
@@ -322,6 +322,26 @@ oturumu Etsy'ye erişemez; iş `claude-tarayici` rolündedir. Yapılana kadar Et
 
 Değişmeyenler: Tagline (§1.1 notu), Message to Buyers (§1.4, §1.5), Headline, bölüm adları (06–20 yalnız ilanlar yayınlanınca
 atanır, §3), SSS (§4.1).
+
+### 7.7 Uygulandı: §7.6 metinleri + S logosu ve banner (2026-10-17, Claude in Chrome)
+Her alan kaydedildi, sayfa yenilendi, değer okundu. Yenilemede değer belgeyle birebir aynıydı. Dokunulmayanlar: ilan (Active 0),
+dükkân durumu, fiyat, ödeme, diğer alanlar (Message to Buyers 248/464, Headline 38 değişmeden okundu).
+
+| Alan | Yer | Yedek (önceki) | Girilen | Doğrulama |
+|---|---|---|---|---|
+| Shop announcement | Info & Appearance → Shop Announcement → Save Changes | §7.1 girişi (756, "Guests open the envelope") | §1.3 (759) | Yenilemede `===` eşit; vitrinde "Guests open your invitation" |
+| About story | Your shop → Shop basics → About your shop → Your story → Save ("About your shop saved") | §7.1 girişi (771, "tap a closed envelope, it opens") | §2.2 (819) | Editör yeniden açıldı, `===` eşit; vitrinde görünüyor |
+| Logo | Shop Home editor → ikon kamerası → "Adjust and crop your icon" → Save → "How's it look?" → Looks good | Etsy `89092710` (K sembolü, §7.5) | `brand/etsy/etsy_shop_icon_1000.png`, **S sembolü** (G129, blob `f6ba71cc`) → Etsy `89149754` | Yenilemede editörde ve vitrinde `89149754` |
+| Banner (Big) | Shop Home editor → banner kalemi → "You are editing your banner" → görsel → Save | Etsy `90041343` (K mühürlü, §7.5) | `brand/etsy/etsy_banner_big_3360x840.jpg`, **S mühürlü** (GM09, blob `9bf6f80c`) → Etsy `89149772` | Yenilemede vitrinde `89149772`, 4:1 |
+
+- **Ara adım hatası, düzeltildi:** bu oturumun dalı eskiydi (G129/GM09 öncesi), ilk turda eski K dosyaları yüklendi (Etsy `89149594`,
+  `90097761`). S dosyaları `origin/main`'den alınıp aynı gün yeniden yüklendi; tabloda son durum var. Kullanılmayan görseller Etsy
+  görsel deposunda kalabilir, vitrinde görünmez.
+- **Logo akışı:** dosyayı gizli `#image-manager-shop-icon-form` girdisine vermek tek başına kaydetmiyor. Yenilemede eski ikon geri
+  geldi. Önce `button[data-action="upload-shop-icon"]` tetiklenmeli; işletim sistemi dosya penceresini engellemek için
+  `HTMLInputElement.prototype.click`, file girdileri için no-op yapıldı. Sonra kırpma penceresi açılıyor. Banner'da düzenleme modundaki
+  büyük file girdisi doğrudan çalışıyor.
+- Mobil kırpım yeniden ölçülmedi. Banner oranı ve yazı logosunun yeri §7.5'teki sürümle aynı (4:1, sağda "BKE Studio").
 
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 

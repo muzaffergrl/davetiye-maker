@@ -67,46 +67,52 @@ export interface DesignCopy {
 
 export const DESIGN_COPY: Record<string, DesignCopy> = {
   'crimson-rose-atelier': {
-    "id": "crimson-rose-atelier",
-    "collection": "21_Crimson_Rose_Atelier",
-    "demoCouple": "Olivia & James",
-    "style": msg("Crimson roses, a burgundy envelope with a gold botanical wax seal, an offset oval portrait and a landscape chapter album"),
-    "metaDescription": msg("A burgundy rose wedding website with a wax-sealed opening, an offset oval portrait and a landscape story album. Personalize it in your online editor."),
-    "intro": msg("Deep crimson roses, warm gold and ivory paper. An oversized name composition opens into a side-set oval portrait, a landscape chapter album and an elegant celebration programme."),
-    "opening": msg("Your guests tap the envelope. The gold botanical seal lifts away, the flap opens and a separate ivory invitation card rises from its pocket. The invitation then opens on your home page."),
-    "pages": {
-      "home": msg("Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a horizontal memory strip."),
-      "story": msg("A landscape chapter album with three photos, captions, thumbnails and previous/next controls. Guests can swipe or use the keyboard."),
-      "details": msg("A typographic celebration programme, a wide venue photo, optional map and directions, calendar links, dress code and questions and answers."),
-      "rsvp": msg("A cream reply card on burgundy, with your reply-by date and the shared configurable reply form.")
+    id: 'crimson-rose-atelier',
+    collection: '21_Crimson_Rose_Atelier',
+    demoCouple: 'Olivia & James',
+    style: msg('Crimson roses, a burgundy envelope with a gold botanical wax seal, an offset oval portrait and a landscape chapter album'),
+    metaDescription: msg('A burgundy rose wedding website with a wax-sealed opening, an offset oval portrait and a landscape story album. Personalize it in your online editor.'),
+    intro: msg('Deep crimson roses, warm gold and ivory paper. An oversized name composition opens into a side-set oval portrait, a landscape chapter album and an elegant celebration programme.'),
+    opening: msg('Your guests tap the envelope. The gold botanical seal lifts away, the flap opens and a separate ivory invitation card rises from its pocket. The invitation then opens on your home page.'),
+    pages: {
+      home: msg('Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.'),
+      story: msg('A landscape chapter album with three photos, captions, thumbnails and previous/next controls. Guests can swipe or use the keyboard.'),
+      details: msg('A typographic celebration programme, a wide venue photo, optional map and directions, calendar links, dress code and questions and answers.'),
+      rsvp: msg('A cream reply card on burgundy, with your reply-by date and the shared configurable reply form.'),
     },
-    "palette": [
-      {
-        "name": msg("Burgundy"),
-        "hex": "#4B0C17"
-      },
-      {
-        "name": msg("Oxblood"),
-        "hex": "#29070B"
-      },
-      {
-        "name": msg("Cream"),
-        "hex": "#F8EFDF"
-      },
-      {
-        "name": msg("Gold"),
-        "hex": "#C9A66D"
-      }
+    palette: [
+      { name: msg('Burgundy'), hex: '#4B0C17' },
+      { name: msg('Oxblood'), hex: '#29070B' },
+      { name: msg('Cream'), hex: '#F8EFDF' },
+      { name: msg('Gold'), hex: '#C9A66D' },
     ],
-    "fonts": [
-      "Cormorant Garamond",
-      "Manrope"
+    fonts: ['Cormorant Garamond', 'Manrope'],
+    llmsLine: 'crimson roses and a gold-sealed burgundy envelope; an offset oval portrait and a landscape chapter album on ivory paper.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
+  'nocturne-lake-estate': {
+    id: 'nocturne-lake-estate',
+    collection: '22_Nocturne_Lake_Estate',
+    demoCouple: 'Eleanor & Luca',
+    style: msg('Black tie by the lake: a black envelope with a gold wax seal, Lake Como at dusk and an asymmetric photo gallery'),
+    metaDescription: msg('A black-tie wedding website with a gold-sealed black envelope, Lake Como at dusk and a photo gallery. Personalize it in your online editor.'),
+    intro: msg('Black paper, champagne gold and candlelight by the water. Your names rise over a lake at dusk, then the invitation, a quiet gallery and the evening, hour by hour.'),
+    opening: msg('Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.'),
+    pages: {
+      home: msg('Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.'),
+      story: msg('An asymmetric gallery: one tall photo and two landscape frames with captions. Each opens larger in a quiet viewer.'),
+      details: msg('The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.'),
+      rsvp: msg('A dark reply card with your reply-by date and the shared configurable reply form.'),
+    },
+    palette: [
+      { name: msg('Night'), hex: '#11120F' },
+      { name: msg('Charcoal'), hex: '#1C1D15' },
+      { name: msg('Champagne'), hex: '#E0C7A4' },
+      { name: msg('Gold'), hex: '#C7A978' },
     ],
-    "llmsLine": "crimson roses and a gold-sealed burgundy envelope; an offset oval portrait and a landscape chapter album on ivory paper.",
-    "relatedGuides": [
-      "wedding-website-wording",
-      "what-to-put-on-your-wedding-website"
-    ]
+    fonts: ['Cinzel', 'Cormorant Garamond', 'Jost'],
+    llmsLine: 'black tie by Lake Como: a black envelope with a gold wax seal, names over the lake at dusk and an asymmetric photo gallery.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
   'blush-garden-rose': {
     id: 'blush-garden-rose',
@@ -786,6 +792,7 @@ export type StyleId = (typeof STYLE_FILTERS)[number]['id'];
 
 export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'crimson-rose-atelier': ['floral', 'classic'],
+  'nocturne-lake-estate': ['classic', 'destination'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],

@@ -153,9 +153,9 @@ function readJson(file: string): any {
   return JSON.parse(readFileSync(file, 'utf8'));
 }
 
-/** tools/katalog.py: theme slug → [design number, collection folder]. Null when python/katalog is not usable. */
+/** tools/katalog.py: theme slug → [design number, collection folder] (D + EK_TEMALAR, G142). Null when python/katalog is not usable. */
 function catalogMap(): Record<string, [number, string]> | null {
-  const code = 'import json,sys\nsys.path.insert(0, sys.argv[1])\nimport katalog as k\nprint(json.dumps({k.tema_slug(t): [t["no"], t["klasor"]] for t in k.D}))';
+  const code = 'import json,sys\nsys.path.insert(0, sys.argv[1])\nimport katalog as k\nprint(json.dumps({k.tema_slug(t): [t["no"], t["klasor"]] for t in k.D + getattr(k, "EK_TEMALAR", [])}))';
   const r = spawnSync('python3', ['-I', '-c', code, path.join(REPO, 'tools')], { encoding: 'utf8' });
   if (r.status !== 0) return null;
   try {

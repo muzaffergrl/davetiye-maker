@@ -29,6 +29,7 @@ const ROUTES = [
   'api/edit/[slug]/photo/route',
   'api/edit/[slug]/publish/route',
   'api/edit/[slug]/unpublish/route',
+  'api/edit/[slug]/download/route',
   'api/rsvp/[slug]/route',
   'api/rsvp/[slug]/export/route',
   'api/rsvp/[slug]/responses/route',

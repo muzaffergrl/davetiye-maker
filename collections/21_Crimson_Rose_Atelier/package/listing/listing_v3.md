@@ -25,7 +25,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Price, quantity | The shop price of designs 01–20, decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). For this design `config.ts` still says `[PRICE]`: confirm the price with the sale decision. Hosting extension, renewal and the Etsy shop URL are still open. |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: Cormorant Garamond and Manrope (both latin-ext + Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G137 (2026-10-17, `python3 tools/build_customer_guides.py --designs 21`, from docs/19 Ek A): 9 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. |
-| Listing images and video | **Partly produced** on 2026-10-17 (G137), from a local production build of the repository: images 3, 5, 6 and 7 in `images_editorial/` (§5) and `video.mp4` (12 s, §6). **Images 1, 2, 4 and 8 are not produced**: they are built on this design's GPT mockup scenes, and `assets/gpt/mockups/` holds only the design board (G133). The prompts are in `assets/gpt/GPT_PROMPTS.md` (PAKET 3) and the GPT task is G821; then `python3 tools/listing_editorial.py --theme 21 --capture --video` builds the full set. Nothing uploaded to Etsy. |
+| Listing images and video | **Produced** on 2026-10-17 from local production builds of the repository: images 3, 5, 6 and 7 and `video.mp4` (12 s, §6) in G137; images 1, 2, 4 and 8 in G137 (second pass) on this design's GPT mockup scenes (G821, `assets/gpt/mockups/`). All 8 in `images_editorial/` (§5). Nothing uploaded to Etsy. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (guide, images, video) and every open VERIFY keep `ready_to_publish` false.
 
@@ -152,18 +152,18 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-The editorial set (`python3 tools/listing_editorial.py --theme crimson-rose-atelier`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured on 2026-10-17 (G137) from a local production build of the platform (main `8d51815` + G133; sample names and the theme's own sample photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Image 7 places them into the shop-wide GPT linen scene with three phones (`brand/trust/t1_three_steps.png`, GM06); images 3, 5 and 6 lay them out on this design's GPT paper texture. Images 1, 2, 4 and 8 need this design's GPT mockup scenes (`assets/gpt/mockups/`, task G821) and are **not produced yet**: their alt texts describe the planned image and keep a VERIFY note. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The alt texts of images 3, 5, 6 and 7 were read against the files on 2026-10-17.
+The 8 images in `images_editorial/` are the editorial set (`python3 tools/listing_editorial.py --theme crimson-rose-atelier`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured on 2026-10-17 from a local production build of the platform (sample names and the theme's own sample photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`): images 3, 5, 6 and 7 in G137 (main `8d51815` + G133), images 1, 2, 4 and 8 in a second capture of the same day (branch `claude/zealous-fermi-hy1o40`, G133 + G138, G140, G141). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`, G821: crimson roses, a burgundy envelope with a gold wax seal, cream silk ribbon, travertine); image 7 places them into the shop-wide GPT linen scene with three phones (`brand/trust/t1_three_steps.png`, GM06); images 3, 5 and 6 lay them out on this design's GPT paper texture. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The alt texts below were read against these files on 2026-10-17.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Crimson Rose Atelier wedding website with online RSVP on a phone held in a hand, among crimson roses: the opening page with a burgundy envelope with a gold wax seal and the names Olivia & James [VERIFY: matches the finished cover (GPT scene, G821)] |
-| 2 | `02_opening.png` | It opens like a real invitation: three phones show the envelope closed with its gold wax seal, the envelope opening, and the invitation card rising out of it [VERIFY: matches the finished image (GPT scene, G821)] |
+| 1 | `01_cover.png` | Crimson Rose Atelier wedding website with online RSVP on a phone held in a hand, among crimson roses: the opening page with a burgundy envelope with a gold wax seal and the names Olivia & James |
+| 2 | `02_opening.png` | It opens like a real invitation: three phones show the envelope closed with its gold wax seal, the envelope opening, and the invitation card rising out of it |
 | 3 | `03_pages.png` | Every page guests need, on five phone screens: home with the names and an oval portrait, the story album, the invitation card with a countdown, the order of the day and the RSVP page |
-| 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed [VERIFY: matches the finished image (GPT scene, G821)] |
+| 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed |
 | 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download Excel button |
 | 6 | `06_details.png` | Everything guests ask: the celebration programme with the order of the day, the venue photo with add-to-calendar buttons, and the dress code with questions and answers |
 | 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
-| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description [VERIFY: matches the finished image (GPT scene, G821)] |
+| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
 
 Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
 - 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
@@ -256,7 +256,6 @@ link; one review request per order, the same text for everyone, never with an in
 - The guests' first view is "a sealed envelope" (as 01–05: this envelope carries a gold wax seal); Our Story is a landscape photo album the guests swipe through, so the description names it "Our Story as a photo album".
 - "What you can change" has no monogram line (this design shows none) and gives "A little book of us", this design's story heading, as the second example of your own wording.
 - Language line from this theme's real fonts (§0): both have Cyrillic.
-- The listing images are a partial set: images 1, 2, 4 and 8 wait for this design's GPT mockup scenes (G821).
 
 ## 11. Before you publish this listing
 
@@ -271,7 +270,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [ ] Price (1,460 TL) confirmed for this design and filled in; quantity 999
 - [ ] Hosting extension and renewal decided
-- [ ] GPT mockup scenes (G821) made; images 1, 2, 4 and 8 built; all 8 alt texts read against the files
+- [x] GPT mockup scenes (G821) made; images 1, 2, 4 and 8 built; all 8 alt texts read against the files (2026-10-17)
 - [x] Video produced (G137, 2026-10-17)
 - [ ] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")

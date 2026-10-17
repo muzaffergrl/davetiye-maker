@@ -22,13 +22,13 @@ G133'ün yeni tasarımı 21 Crimson Rose Atelier için 01–20'deki Etsy paketin
 - [x] `listing_v3.md` (başlık 113/140, 13 etiket ≤ 20) ve `etsy_upload.json`; §0'da "tasarım satışa açılmadı (coming)"
 - [x] START HERE: `build_customer_guides.py --designs 21` ve `--check` OK (9 sayfa, jsQR başlat URL'sini okuyor)
 - [x] Araçlar 21'i tanıyor (`etsy_upload.DESIGNS`, `listing_kit.THEMES`, `opening_stills.json`, `FONT_SUBSETS` Manrope)
-- [ ] 8 ilan görseli: **4/8** (3, 5, 6, 7); 1, 2, 4, 8 GPT sahnelerini bekliyor (G821)
+- [x] 8 ilan görseli: **8/8** (3, 5, 6, 7 ilk turda; 1, 2, 4, 8 G821 sahneleriyle ikinci turda)
 - [x] Video (1080 × 1080, H.264, sessiz, 12.1 sn)
-- [ ] `etsy_upload.py --check --strict --designs 21`: **çıkış 1** (yalnız 4 eksik görsel); `--check` çıkış 0
+- [x] `etsy_upload.py --check --strict --designs 21`: **çıkış 0** (images 8/8, video, guide)
 - [x] `test_etsy_upload.py`, `test_build_customer_guides.py`, `test_listing_editorial.py` (+ `test_listing_kit.py`) yeşil
 
 ## Sonuç
-**Blokaj (görseller 1, 2, 4, 8).** Bu dört görsel tasarımın kendi GPT sahnelerine (elde telefon, üç telefon, iki elde telefon, masa
+**Görseller 1, 2, 4, 8 (ikinci tur, 2026-10-17).** G821 sahneleri gelince `listing_editorial.py --theme 21 --capture --only 01_cover 02_opening 04_edit 08_included` (yerel üretim derlemesi, dal `claude/zealous-fermi-hy1o40`; video yeniden üretilmedi); dördü gözle: ekranlar yeşil alanlara oturuyor, yazı taşması yok, adlar Olivia & James. listing_v3 §0/§5/§10/§11 güncellendi, VERIFY notları kalktı; `test_listing_kit` `pending` istisnası silindi. Önceki blokaj notu: bu dört görsel tasarımın kendi GPT sahnelerine (elde telefon, üç telefon, iki elde telefon, masa
 üstü; `assets/gpt/mockups/`, yeşil ekranlı) kurulur; 21'de yalnız `design-board.png` var. Claude sahne çizmez (K21); 07'nin bordo
 sahnelerini (dalya, böğürtlen, kadife) kullanmak 21'i 07'ye benzetirdi, kullanılmadı. PAKET 3 prompt'ları
 `tools/paket3_sahne.py`'nin metniyle `GPT_PROMPTS.md`'ye eklendi (zemin/süs elle: krem pamuk kâğıt örtü, traverten, kızıl güller,
@@ -51,3 +51,4 @@ açıkça istisna (`test_listing_editorial` 8'den eksik yalnız sahneli dört g�
 
 ## Günlük
 - 2026-10-17 alındı (claude-G137, alt-ajan, dal `g137-crimson-paket`); 4/8 görsel + video + metin + rehber; incelemeye gönderildi.
+- 2026-10-17 ikinci tur (claude-G137, alt-ajan, dal `g137b-crimson-gorseller`): G821 sahneleriyle 01, 02, 04, 08 üretildi; 8/8, `--check --strict --designs 21` çıkış 0.
