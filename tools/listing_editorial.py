@@ -1,4 +1,4 @@
-"""Editorial Etsy listing images (v4): 8 × 2000 px, layout + typography only (K21). Designs 01–21 (G124; 21: G137).
+"""Editorial Etsy listing images (v4): 9 × 2000 px (image 9: G148), layout + typography only (K21). Designs 01–21 (G124; 21: G137).
 
   python3 tools/listing_editorial.py --theme olive-ivory [--only 01_cover 03_pages]
   python3 tools/listing_editorial.py --theme 06-11 13-15 18 19 --capture --video     (numbers, ranges, ids or 'all')
@@ -6,10 +6,11 @@
 Pictures come only from: the design's GPT mockup scenes (assets/gpt/mockups/, #00FF00 screens), the theme's GPT parts
 (paper texture), the shop-wide GPT trust scene of image 7 (brand/trust/t1_three_steps.png, GM06) and real screens of the
 platform, captured from a local production build (`cd platform && npm run build` first; nothing is deployed):
-  --capture   runs tools/listing_templates/capture.ts (guest pages, /start, the editor, the RSVP list, opening.webm) and
+  --capture   runs tools/listing_templates/capture.ts (guest pages, /start, the editor, the RSVP list, opening.webm),
               tools/listing_editorial/capture_opening.ts (two DPR 3 stills of the opening, at the times chosen by eye per
-              design in tools/listing_editorial/opening_stills.json) into <shots-root>/<NN_folder>/; `--capture stills`
-              only the two stills (after a change in opening_stills.json).
+              design in tools/listing_editorial/opening_stills.json) and tools/listing_editorial/capture_devices.ts (G148:
+              /my and Share → "Use on another device" for image 9) into <shots-root>/<NN_folder>/; `--capture stills`
+              only the two stills (after a change in opening_stills.json), `--capture devices` only image 9's screens.
   --shots-root  where the screens are (default $BKE_LISTING_SHOTS or <temp>/bke-listing-shots): about 30 MB per design,
               kept out of the repository; package/shots/ of 01–05 is the older G059 capture (before G100/G121's editor).
   --video     also builds package/listing/video.mp4 from the capture's opening.webm (tools/listing_kit.py video).
@@ -52,6 +53,8 @@ BRAND_MARK_DARK = REPO / "brand" / "svg" / "bke-logo-horizontal-reverse.svg"  # 
 # GM06 (brand/trust/, GPT): three phones on linen, made for "start · edit · share" — image 7's scene for every design
 TRUST_STEPS = REPO / "brand" / "trust" / "t1_three_steps.png"
 CAPTURE_OPENING = HERE / "capture_opening.ts"
+CAPTURE_DEVICES = HERE / "capture_devices.ts"  # G148: image 9's two screens (m01_my_form, m02_devices)
+DEVICES = ["m01_my_form", "m02_devices"]
 OPENING_STILLS = HERE / "opening_stills.json"
 IMAGES = lk.UPLOAD_IMAGES  # the Etsy upload order
 FONTS = {"Cormorant Garamond": "ital,wght@0,300;0,400;0,500;1,300;1,400;1,500", "Montserrat": "wght@400;500"}
@@ -147,9 +150,24 @@ def node_env() -> dict:
     return env
 
 
+def capture_devices(t: lk.Theme, shots: Path) -> None:
+    """G148: image 9's screens (capture_devices.ts: /my on a phone, Share → "Use on another device" with three
+    devices), from the local production build."""
+    for attempt in range(1, 4):
+        r = subprocess.run(["node", str(CAPTURE_DEVICES), "--theme", t.id, "--out", str(shots)], cwd=REPO, env=node_env())
+        if r.returncode == 0:
+            return
+        print(f"capture_devices attempt {attempt} failed for {t.id} (exit {r.returncode})", file=sys.stderr)
+    raise RuntimeError(f"capture_devices failed for {t.id}")
+
+
 def capture(t: lk.Theme, shots: Path, base: str = lk.BASE_URL, what: str = "all") -> None:
-    """Real screens of the design from the local production build: capture.ts (what="all"), then the two opening
-    stills (always)."""
+    """Real screens of the design from the local production build: capture.ts and image 9's screens (what="all"),
+    then the two opening stills (all, stills); what="devices": only image 9's screens."""
+    if what in ("all", "devices"):
+        capture_devices(t, shots)
+    if what == "devices":
+        return
     if what == "all":
         lk.step_capture(t, base, shots)
     times = opening_still_times(t)
@@ -170,9 +188,13 @@ def capture(t: lk.Theme, shots: Path, base: str = lk.BASE_URL, what: str = "all"
 
 
 def build(t: lk.Theme, only: list[str] | None, shots: Path) -> list[Path]:
-    missing = [n for n in OPENING if not (shots / f"{n}.jpg").exists()]
+    names = only or IMAGES
+    # the screens each image needs (G148: image 9 alone needs only its own two)
+    need = (OPENING if {"01_cover", "02_opening"} & set(names) else []) + (DEVICES if "09_devices" in names else [])
+    missing = [n for n in need if not (shots / f"{n}.jpg").exists()]
     if missing:
-        raise RuntimeError(f"missing opening stills in {shots}: {missing} (run with --capture)")
+        raise RuntimeError(f"missing screens in {shots}: {missing} (run with --capture, or --capture devices for "
+                           "image 9)")
     out_dir = t.package / "listing" / "images_editorial"
     out_dir.mkdir(parents=True, exist_ok=True)
     dark = lk.is_dark(t)
@@ -182,7 +204,7 @@ def build(t: lk.Theme, only: list[str] | None, shots: Path) -> list[Path]:
     pages = []
     with tempfile.TemporaryDirectory(prefix="listing_editorial_") as tmp:
         tmp = Path(tmp)
-        for name in only or IMAGES:
+        for name in names:
             v = dict(base)
             bg = tmp / f"{name}_bg.png"
             ground = "theme"
@@ -237,6 +259,12 @@ def build(t: lk.Theme, only: list[str] | None, shots: Path) -> list[Path]:
                 # first screen; the scrolled list (p02) lost its header to the sticky bar
                 v["screens"] = paper_screens([("g10_rsvp_form", "", "What your guests see"),
                                               ("p01_panel_replies", "", "What you see")],
+                                             shots, w=560, gap=140, top=520)
+            elif name == "09_devices":
+                # G148 (K47): the /my form on one phone, the editor's signed-in devices on another (real screens,
+                # capture_devices.ts; no web address or QR in them); the same layout as image 5
+                v["screens"] = paper_screens([("m01_my_form", "", "Order number + email"),
+                                              ("m02_devices", "", "Every device, one editor")],
                                              shots, w=560, gap=140, top=520)
             elif name == "06_details":
                 v["screens"] = paper_screens([("g07_details_schedule", "", "Order of the day"),
@@ -339,8 +367,9 @@ def main() -> None:
     ap.add_argument("--only", nargs="*", choices=IMAGES)
     ap.add_argument("--shots-root", type=Path, default=DEFAULT_SHOTS_ROOT,
                     help="captured screens: <root>/<NN_folder>/ (default: %(default)s)")
-    ap.add_argument("--capture", nargs="?", const="all", choices=["all", "stills"],
-                    help="capture first (local production build): all screens + the opening stills, or only the stills")
+    ap.add_argument("--capture", nargs="?", const="all", choices=["all", "stills", "devices"],
+                    help="capture first (local production build): all screens + the opening stills, only the stills, "
+                         "or only image 9's screens (devices)")
     ap.add_argument("--video", action="store_true", help="also build package/listing/video.mp4 (listing_kit video)")
     ap.add_argument("--base-url", default=lk.BASE_URL, help="public base URL shown in the captured screens")
     a = ap.parse_args()

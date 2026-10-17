@@ -5,6 +5,7 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 ## Good to know before you begin
 
 - You do not need Canva, an app or an account. Everything works in the web browser of your phone or computer.
+- Your Etsy order number and your email address are your way in: they open your editor on any phone or computer. There is no password.
 - You fill in your website yourself, in a simple editor. Every change saves by itself.
 - Nobody sees your website until you publish it, and you can keep changing it after you publish.
 - Your guests need no app and no account either: they open your link and tap the gatefold.
@@ -15,35 +16,39 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 
 ![QR code of your start link](img/start_qr_page.png)
 
-2. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
-3. **Save your edit link.** Tap **Copy link** and paste it into your notes app, or tap **Email it to myself**. Do this before anything else.
-4. Tap **Open my editor**. Add your first names and your wedding date (setup step 1 of 3).
+2. Find your Etsy order number: on Etsy, go to You → Purchases and reviews, or look for "Order #…" in your Etsy confirmation email.
+3. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
+4. Tap **Copy link** to keep your private edit link as a shortcut, then tap **Open my editor**. Add your first names and your wedding date (setup step 1 of 3).
 5. Add one photo (step 2 of 3). Publish now (step 3 of 3), or later when everything is ready.
 
-## Save your edit link: it is your key
+## Come back on any device
 
-Your edit link opens your editor. There is no password and no account: the link is the key. We cannot email it to you yet, so please save it yourself, in at least one of these ways:
+There is no account and no password. Your Etsy order number and the email address you entered on the start page open your editor again, on this phone or on any other phone or computer:
 
-- Tap **Copy link** and paste it into your notes app or password manager.
-- Tap **Email it to myself**. Your own email app opens with the link inside. Tap Send.
-- Once your editor is open, add it to your phone's Home Screen (from your browser's Share or menu button).
+> **Continue on another device**
+>
+> 1. Open [https://davetiye-platform-five.vercel.app/my](https://davetiye-platform-five.vercel.app/my), or tap **Create your website** on our website.
+> 2. Under **Open or start your website**, enter the same **Etsy order number** and **Email address**, then tap **Continue**.
+> 3. Your editor opens where you left off: every change is saved online.
 
-Missed it? While your editor is open, you can copy the link again: **Share → Your private edit link → Copy edit link**.
+Your private edit link is a shortcut to the same editor. Tap **Copy link** and paste it into your notes app, or tap **Email it to myself** (your own email app opens with the link inside; tap Send). Once your editor is open, you can also add it to your phone's Home Screen. Copy the link again any time under **Share → Your private edit link → Copy edit link**.
 
-Anyone who has the link can change your website, so share it only with your partner. We will never ask you for it. If you lose it, message BKE Studio on Etsy with your order number. We send you a new link, and the old one stops working.
+In your editor, **Share → Use on another device** shows this address with a QR code to scan with your other phone, the devices signed in with your order number, and **Sign out other devices**.
+
+Anyone who has your edit link, or your order number together with your email, can change your website: share them only with your partner. We will never ask you for your edit link.
 
 ## Step 1. Start your website
 
 Open the start link. At the top you see a small live demo of your design (**Open the full demo** shows it full size). Below it, fill in **Your details**:
 
-- **Etsy order number:** in your Etsy order confirmation email, or on Etsy under Purchases and reviews. It has 8 to 12 digits. You can type it with or without "#".
-- **Email address:** we keep it with your website so we can recognize you if you need help. We do not send emails yet.
+- **Etsy order number:** on Etsy under You → Purchases and reviews, or "Order #…" in your Etsy confirmation email. It has 8 to 12 digits. You can type it with or without "#".
+- **Email address:** we keep it with your website. Together with your order number it opens your editor on any phone or computer, so use one you will remember.
 - **Your first names:** as your guests know you. You can change them later in the editor.
 - **Website address:** made from your names, for example …/avery-and-jordan. "Available" means it is free. You can change it here, but **not later**, so check the spelling.
 
 Tap **Create my website**. One order starts one website. Your website starts as a private draft: nobody can see it until you publish.
 
-If your connection drops, tap **Create my website** again: you get your link back. If the page says your order already has a website, open it with your saved edit link, or message us on Etsy.
+If your connection drops, tap **Create my website** again: you get your link back. If your order already has a website and you enter the email you started with, the page opens it for you. With another email it says "This order already has a website": see Troubleshooting.
 
 ## Step 2. Set up in three steps
 
@@ -70,7 +75,7 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 - **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until). Under **Settings** you see your time zone, date style, name and date changes left and guest password; tap a row to change it.
 - **Edit:** six pages with everything on your website.
 - **Guests:** your guests' replies.
-- **Share:** your link, QR code, guest password and your private edit link.
+- **Share:** your link, QR code, guest password, your private edit link and how to open your editor on another device.
 
 | Edit page | What you change |
 |---|---|
@@ -187,9 +192,9 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 ## Quick answers
 
-**Can my partner edit too?** Yes. Share the edit link with your partner only.
+**Can my partner edit too?** Yes. Give your partner your order number and email, or your edit link, and nobody else.
 
-**Can I use a computer?** Yes. The editor works on a computer too, with the preview beside it.
+**Can I use a computer, or more than one phone?** Yes. On each one, open [https://davetiye-platform-five.vercel.app/my](https://davetiye-platform-five.vercel.app/my) and enter your order number and email. On a computer the preview stays beside the editor.
 
 **Can I change the website address?** No, it is fixed when you create your website. Your own domain (yournames.com) is not included.
 
@@ -213,9 +218,11 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **The Publish button does not work.** Check your internet connection. Then read the message near the button: your order may still be being confirmed, your date may still be the sample date, or a field needs fixing (the editor shows which one).
 
-**"This edit link no longer works."** A new link may have replaced it, or only part of the link was copied. Use the newest link we sent you, or message us on Etsy.
+**"This edit link no longer works."** A new link may have replaced it, or only part of the link was copied. Tap **Continue with your order number** and enter your Etsy order number and email: your editor opens again.
 
-**"This order already has a website."** Open your website with your saved edit link. No link? Message us on Etsy with your order number.
+**"This order already has a website."** Open [https://davetiye-platform-five.vercel.app/my](https://davetiye-platform-five.vercel.app/my) and enter your order number with the email you used when you started (your partner's, if they started it).
+
+**My order number and email do not open my editor.** Check both: use the email you entered on the start page. Still stuck? Message us on Etsy with your order number.
 
 **My photo will not upload.** Try a JPEG copy of the photo, and check your connection.
 

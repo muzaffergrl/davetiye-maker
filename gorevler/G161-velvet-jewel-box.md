@@ -84,6 +84,14 @@ PAKET 5 W2.1–W2.11 (asıl kadife kutu ve bütün dekor), PAKET 2 (5 foto), PAK
 **Denenmedi:** gerçek iPhone/Android, Vercel yayını, gerçek GPT kutusu ve fotoğraflar, yavaş ağ, qa-kontrol karşılaştırma
 kapısı (W1 comp yok). Fontlar test makinesinde Google Fonts'tan yüklendi mi ayrıca doğrulanmadı (uyarı çıkmadı).
 
+### Taban birleştirme (koordinatör isteği, 2026-10-17)
+`origin/claude/zealous-fermi-hy1o40` birleştirildi (25 Orient Express Voyage, 26 Kintsugi & Washi). Çakışmalar ekleyerek
+çözüldü: config "coming" sırası nocturne → velvet → orient → kintsugi (g085/093/094/097 listeleri buna göre), g138
+`THEMES.length` 25, audio/print/designs/i18n ikisi de korundu (yinelenen sözlük anahtarı yok), katalog: tabanın `ek_ayirt`
+sürümü alındı (benimkiyle aynı işi yapıyor), 23 kaydı 25–26'nın önüne eklendi; theme-check harita düzeltmesi tabanınki (G163,
+aynı satır). Birleşme sonrası: `tsc` ✓, `I18N_STRICT=1 npm test` **1451/1453** (0 hata, 2 atlanan; G149 baskı testi dahil),
+`npm run build` ✓ (26 tema), theme-check `--stress` 111/0/1 (video kapalı), `katalog.py kontrol` ✓ (3 ek kayıt).
+
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G161 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi

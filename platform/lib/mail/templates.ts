@@ -136,6 +136,80 @@ export function signinEmail(m: EditLinkMessage): MailContent {
   return { subject, text, html };
 }
 
+/** G152: one guest reply, for the couple's "Email me when a guest replies" (lib/rsvp/notify.ts). No secret in it. */
+export interface RsvpReplyNotice {
+  /** The couple's names as the panel shows them ("" when unknown). */
+  names: string;
+  guestName: string;
+  attending: boolean;
+  /** People in the reply (the guest included); 0 for a "no". */
+  guests: number;
+  /** Short answers to the couple's questions (question → answer), already cut to size. */
+  answers: Array<{ question: string; answer: string }>;
+  /** The guest's note, already cut to size; null when none. */
+  message: string | null;
+  /** Replies that came after the daily email limit and were not emailed on their own (0 = none). */
+  moreReplies: number;
+  /** Most reply emails a site gets per day (shown when moreReplies > 0). */
+  dailyLimit: number;
+  /** <origin>/my — the editor is opened there with the order number + email (no key in this email). */
+  myUrl: string;
+  /** The website's public address. */
+  siteUrl: string;
+}
+
+/** Subject text from guest input: one line, short. */
+const oneLine = (v: string, max: number) => v.replace(/[\r\n\t]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
+
+/** To the couple (G152): a guest replied. English like every buyer email; the guest's own words are escaped. */
+export function rsvpReplyEmail(n: RsvpReplyNotice): MailContent {
+  const myUrl = safeUrl(n.myUrl);
+  const siteUrl = safeUrl(n.siteUrl);
+  const guest = oneLine(n.guestName, 80) || 'A guest';
+  const answer = n.attending ? 'Attending' : 'Not attending';
+  const party = n.attending ? `${n.guests} ${n.guests === 1 ? 'person' : 'people'}` : null;
+  const subject = `New RSVP: ${guest} — ${n.attending ? 'attending' : 'not attending'}`;
+  const title = 'A guest replied';
+  const more =
+    n.moreReplies > 0
+      ? `${n.moreReplies} more ${n.moreReplies === 1 ? 'reply' : 'replies'} arrived since our last email (we send at most ${n.dailyLimit} reply emails a day).`
+      : null;
+  const pairs: Array<[string, string]> = [
+    ['Guest', guest],
+    ['Answer', answer],
+    ...(party ? [['Party size', party] as [string, string]] : []),
+    ...n.answers.map((a) => [oneLine(a.question, 80), oneLine(a.answer, 160)] as [string, string]),
+  ];
+  const lines = pairs.map(([k, v]) => `${k}: ${v}`);
+  const text = [
+    title,
+    '',
+    n.names ? `A guest replied on ${n.names}’s wedding website (${siteUrl}).` : `A guest replied on your wedding website (${siteUrl}).`,
+    '',
+    ...lines,
+    ...(n.message ? ['', `Note: ${n.message}`] : []),
+    ...(more ? ['', more] : []),
+    '',
+    `See every reply in your editor, under Guests: open ${myUrl} and sign in with your Etsy order number and email.`,
+    '',
+    'You get this email because you turned on “Email me when a guest replies” in your editor. To stop, turn it off under Guests.',
+    '',
+    `— ${BRAND()}`,
+  ].join('\n');
+  const rows = pairs.map(([k, v]) => `<strong>${esc(k)}:</strong> ${esc(v)}`);
+  const html = page('en', title, [
+    { p: n.names ? `A guest replied on <strong>${esc(n.names)}</strong>’s wedding website.` : 'A guest replied on your wedding website.' },
+    { p: rows.join('<br>') },
+    ...(n.message ? [{ p: `<strong>Note:</strong> ${esc(n.message)}` }] : []),
+    ...(more ? [{ small: esc(more) }] : []),
+    { button: { label: 'Open your editor', href: myUrl } },
+    { small: 'Sign in with your Etsy order number and email, then open Guests to see every reply.' },
+    { link: { label: siteUrl.replace(/^https?:\/\//, ''), href: siteUrl } },
+    { small: 'You get this email because you turned on “Email me when a guest replies” in your editor. To stop, turn it off under Guests.' },
+  ]);
+  return { subject, text, html };
+}
+
 export interface PendingOrderNotice {
   orderNumber: string;
   themeName: string;

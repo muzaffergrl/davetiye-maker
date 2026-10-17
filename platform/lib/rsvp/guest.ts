@@ -44,8 +44,11 @@ export interface GuestContext {
   ip?: string | null;
   /** The request's Cookie header: a password-protected site needs its guest cookie (G076, lib/site/access.ts). */
   cookie?: string | null;
-  /** G128: called after a counted reply is stored (the route schedules the Google Sheets sync with after()). */
-  onStored?: (site: SiteRecord) => void;
+  /**
+   * G128: called after a counted reply is stored (the route schedules the Google Sheets sync with after()); G152: with the
+   * stored reply (the couple's "Email me when a guest replies").
+   */
+  onStored?: (site: SiteRecord, reply: RsvpRecord) => void;
 }
 
 export const MESSAGES = {
@@ -179,8 +182,9 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
     if (!room.allowed) return errorResult(429, 'busy', {}, retryAfter(room.retryAfterMs));
   }
 
-  await ctx.adapter.saveRsvp(site.id, held ? { ...parsed.value, held: true } : parsed.value);
-  // G128: a counted reply goes on to the couple's Google Sheet (after the answer, never holding the guest up).
-  if (!held) ctx.onStored?.(site);
+  const saved = await ctx.adapter.saveRsvp(site.id, held ? { ...parsed.value, held: true } : parsed.value);
+  // G128: a counted reply goes on to the couple's Google Sheet (after the answer, never holding the guest up); G152: and
+  // to the couple's email when they asked for it.
+  if (!held) ctx.onStored?.(site, saved);
   return success();
 }

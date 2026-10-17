@@ -155,7 +155,13 @@ düzenler. Bu belge platformun tek kaynağıdır.
     reddedilir; henüz ödenmemiş ("payment processing") → site açılır, bekler, ödeme gelince kendiliğinden onaylanır; Etsy alıcı
     e-postasını veriyorsa (çoğu zaman vermez, Etsy'nin ayrıca onayı gerekir) ve farklıysa → reddedilir; ilan → tasarım eşlemesi
     `platform/lib/etsy/listings.json` (ilanlar yayınlanınca `listing_id → tema id` doldurulur; eşlenmemiş ilan tasarım yüzünden
-    reddedilmez); Etsy cevap vermez / yoğun (429) → alıcıya "birkaç dakika sonra tekrar deneyin". Bir sipariş = bir site kuralı aynen.
+    reddedilmez); Etsy cevap vermez / yoğun (429) → alıcıya "birkaç dakika sonra tekrar deneyin".
+  - **Çok ürünlü sipariş (G152):** `etsy` modunda bir sipariş **N site** açabilir; N = makbuzdaki tasarım birimleri (tasarım
+    satırlarının adetleri toplamı; eşlenmemiş satır da tasarım sayılır; `listings.json` → `services` altındaki kurulum / özel tasarım /
+    ek revizyon ilanları **hiç sayılmaz**; en az 1, en çok 10). `/start`'ta boş birim varsa yeni site açılır; hepsi doluysa eski davranış
+    (aynı e-posta → giriş, o tasarımın sitesi; başka e-posta → `order_used`). `off`/`manual`'de ve Etsy bağlı değilken bir sipariş = bir
+    site. Blob'da birim başına ayrı sipariş dizini (`orders/<no>.json`, `orders/<no>~2.json` …; iki örnek aynı birimi alamaz, yarışı
+    kaybeden bir sonraki birimi alır). Satışa çıkmadan ilanlar yayınlanınca `services` doldurulmalı.
   - **Güvenli geri düşüş:** `etsy` modunda ayarlar eksik, mağaza bağlı değil ya da Etsy bağlantıyı reddediyorsa `/start` hata vermez,
     `manual` gibi davranır (site bekler) ve admin → Özet → **Bağlantılar** kartı uyarı gösterir. Bağlantı kurulunca bekleyen siteler
     "Bekleyen siparişleri Etsy'de kontrol et" ile, ayrıca alıcı paneli açıkken ve alıcı Publish'e basınca kendiliğinden onaylanır.
@@ -175,7 +181,10 @@ düzenler. Bu belge platformun tek kaynağıdır.
   `/start` sonrası alıcıya özel düzenleme linki + "başka cihazda `<site>/my` adresinden sipariş no + e-postayla devam" e-postası;
   `/my`'den istenen giriş linki (G146, "Email me a sign-in link"); site **onay bekleyerek** açıldığında dükkâna "New website started — order needs a
   check" bildirimi (yalnız sipariş no, tasarım, admin linki; alıcının linki yok). Gönderim hatası siteyi açmayı bozmaz, link ekranda
-  kalır; e-posta içeriği, link ve adresler log'a yazılmaz. RSVP bildirimi henüz yok.
+  kalır; e-posta içeriği, link ve adresler log'a yazılmaz. **RSVP bildirimi (G152):** panel → Guests → "Email me when a guest
+  replies" (varsayılan kapalı, yalnız SMTP açıkken görünür) → her sayılan misafir yanıtında kayıtlı sahip adresine kısa e-posta (misafir
+  adı, katılım, kişi sayısı, en çok 5 cevap, not; panele **anahtarsız** `<site>/my` linki). Site başına günde en çok 20; fazlası sayılır,
+  bir sonraki e-posta "N more replies" der. Ayar `docs/<site>/rsvp-notify.json`; gönderim hatası yanıtı etkilemez.
   - **Sahibin kurulumu (Gmail, bir kez):**
     1. Google hesabında **2 Adımlı Doğrulama** açık olmalı (Google Hesabı → Güvenlik).
     2. Google Hesabı → Güvenlik → **Uygulama şifreleri** → bir ad yazın (ör. "Vercel site") → Oluştur → 16 harfli şifreyi kopyalayın
@@ -223,9 +232,39 @@ e-posta = her cihazdan erişim.** Hesap yok, şifre yok, dükkânın işi yok. �
   sipariş numarası loglanmaz.
 - Bilinen sınır: Etsy doğrulaması kapalıyken (biçim kontrolü) sipariş no + e-postayı bilen herkes girer — K46 kararının bilinçli
   bedeli; G147'nin Etsy doğrulayıcısı açıldığında `/start` önce siparişi doğrular. Gerçek e-posta gönderimi G147'de.
+- **G152 ekleri:** çok ürünlü siparişte aynı e-postanın birden çok sitesi varsa `/my` rastgele birini açmaz, küçük bir seçici
+  ("Which website do you want to open?" — isimler + adres; anahtar yalnız seçilen site için) gösterir; "Email me a sign-in link" her
+  site için ayrı e-posta yollar. Admin site sayfası → Destek işlemleri → **Giriş yapılan cihazlar** (sayı, etiket, tarih; salt okunur) +
+  **Tüm cihazlarda oturumu kapat** (cihaz anahtarları silinir; alıcının özel linki ve dükkân linki kalır). Alıcı ekranlarının (`/start`,
+  `/my`, `/signin`, `/edit/...`, bunların not-found sayfaları) **sunucu HTML'i** artık doğru `<html lang>`'i taşır: `app/layout.tsx`
+  kaldırıldı; satış sitesi (`app/(marketing)/layout.tsx`, statik kaldı), admin (`app/admin/layout.tsx`, `tr`) ve her alıcı ekranı
+  (`app/{edit,my,signin,start}/layout.tsx` → `components/i18n/RootDocument.tsx BuyerRootLayout`, `bke_lang` çerezi / Accept-Language)
+  ayrı kök layout; eşleşmeyen adresler `app/global-not-found.tsx` (`experimental.globalNotFound`). Kök layout'lar arası geçiş tam
+  sayfa yüklemesidir.
 - **Destek notu:** siparişi başkası kendi e-postasıyla kapmışsa (doğrulama kapalıyken) dükkân **önce admin'de e-postayı gerçek
   alıcınınkiyle düzeltir, sonra "Yeni link" (reissue)** yapar: reissue cihaz anahtarlarını düşürür, düzeltilmiş e-posta da yeni
   girişi gerçek alıcıya bağlar. (E-posta düzeltmesi tek başına cihazları kapatmaz.)
+
+## 3b. Özel tasarımı yalnız o alıcıya açma (G151, K42/K47 — 2026-10-17)
+"Custom design" hizmetinde alıcıya yaptığımız tasarım **başkasına satılmaz**. Tema klasörüne konur ve `theme.json`'a sipariş
+numarası yazılır — başka hiçbir yere dokunulmaz:
+```json
+"private": { "orders": ["4815162342"] }
+```
+- Numara Etsy'deki gibi yazılabilir (`"#4815 162342"` de olur; `/start` gibi rakamlara indirgenir, 8–12 rakam). Birden çok sipariş
+  (ör. ek tur, ikinci site) için listeye eklenir. Boş liste `[]` = henüz kimse başlatamaz, yalnız dükkân.
+- **Gizli olduğu her yer:** `listThemes`, `/start` ve `/my` tasarım seçicisi, üretim listesi, satış sitesi (liste, tasarım sayfası,
+  vitrin, sitemap, llms.txt — bunlar yalnız `lib/marketing/config.ts designs[]`'tan beslenir: **özel tema oraya eklenmez**;
+  `tests/g151.test.ts` gerçek tema klasörlerini tarayıp yakalar).
+- **Alıcının linki:** `/start?theme=<id>&order=<sipariş no>` (sipariş no formda dolu gelir). Ayrıca alıcı `/my`'da sipariş no +
+  e-postasını yazınca site yoksa doğrudan bu linke gider. Listede olmayan numara / numarasız link / başka tema: bilinmeyen temayla
+  **aynı cevap** ("This start link is not valid"; `POST /api/start` → 404 `theme_unavailable`) — tasarımın varlığı sızmaz. Satış
+  sitesinde olmadığı için üretimdeki onay kapısı (G080) özel temaya uygulanmaz; sipariş numarası yeterli.
+- **Dükkân:** Admin → **Yeni sipariş** özel temayı her zaman ("(özel tasarım)") ve her sipariş numarasıyla başlatır; Tasarımlar
+  sayfası rozet + sipariş numaraları + numaralı başlatma linki gösterir. **Demo** (`/start/demo/<id>`) yalnız admin oturumuyla açılır
+  (`Cache-Control: private, no-store`); alıcının `/start` sayfasında demo önizlemesi yoktur. Başlatılmış sitenin paneli, örnek tarih
+  ve yayını normal çalışır.
+- `scripts/theme-check.cjs` özel temada `/start` demo kontrolünü atlar (uyarı), diğer kontroller aynı.
 
 ## 4. Görevler
 | ID | İş | Bağımlı |

@@ -937,9 +937,10 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       await page.goto(url(demo.slug, 'details'), { waitUntil: 'load' });
       await revealAll(page);
       let before = reqs.length;
+      // the platform map block ([data-map], G127) is live without urls.map: seed.ts gives every demo its city pin (72f2f26)
       const dead = await page.evaluate(() => ({ missing: document.querySelectorAll('a[data-url-missing]').length,
         buttons: [...document.querySelectorAll('.btn')].filter((b) => !b.closest('[data-map]')).map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
-      // the map block's own buttons ([data-map], G127) come from the venue pin the seeded demo carries (seed.ts withDemoMap), not from a link
+      // G127: the map block ([data-map]) shows "Show map" / directions from the venue itself, not from a link (G163)
       if (dead.missing || dead.buttons.length) err(`details without links: dead buttons ${JSON.stringify(dead)}`);
       else ok('details without map / hotel / registry links: no dead buttons for guests');
       if (!rsvpOn) {
@@ -1007,8 +1008,8 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
         else ok('RSVP: "Send another reply" reopens the form');
       }
       // the theme demo on /start: its RSVP page asks no status from a site that does not exist (no 404, no console error)
-      if (env.internal) {
-        warn('theme demo RSVP page (/start/demo/…/rsvp): skipped — internal themes are not on /start');
+      if (env.internal || env.private) {
+        warn(`theme demo RSVP page (/start/demo/…/rsvp): skipped — ${env.internal ? 'internal themes are not on /start' : 'a private theme\'s demo is admin-only (G151)'}`);
       } else {
         const demoPage = await ctx.newPage();
         const demoProblems = watch(demoPage);
