@@ -2,7 +2,7 @@
 id: G090
 baslik: Aşama 1 kapanışı — 20 tasarımın eksiksiz paketi (platform teması, satış sayfası, START HERE, Etsy ilanı, ilan görselleri) QA'dan geçti
 rol: claude-canva
-durum: hazir
+durum: bitti
 alan:
 oncelik: 2
 bagimli: [G098, G121, G122, G123, G124]
@@ -48,3 +48,4 @@ _(entegratör doldurur)_
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-16 yeniden tanımlandı (G125, K22/K24): paket = platform teması + satış sayfası + START HERE + Etsy ilan metni + ilan görselleri + QA; bağımlılıklar G098, G121–G124; durum hazir
+- 2026-10-17 entegratör onayladı

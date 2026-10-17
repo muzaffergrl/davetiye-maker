@@ -2,7 +2,7 @@
 id: G155
 baslik: G090 QA kod düzeltmeleri — demo örnek fotoğrafları, basılı davetiye yeniden denetim, dokunma alanı + küçük yazı, K48 saklama/silme, ilan görseli 8
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G155
 oncelik: 1
 bagimli: [G090, G149]
@@ -143,3 +143,6 @@ kontroller birleşmiş kodda:
 - Kısa telefonda 03'ün zarf kartında şehir gizlenir (yukarıda); 21'in zarf minyatür kartı 7 px; ortak harita bloğu 11 px.
 - 19 MB demo fotoğrafı repoya eklendi (CDN'den; fonksiyon boyutunu etkilemez).
 - `PROJECT_STATE.json` / `COLLECTION_STATUS.md` güncellenmedi (entegratörde).
+
+## Günlük
+- 2026-10-17 entegratör onayladı

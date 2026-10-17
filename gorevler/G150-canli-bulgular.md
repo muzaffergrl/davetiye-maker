@@ -2,7 +2,7 @@
 id: G150
 baslik: 477589f canlı yayın bulguları — PDF tarayıcısı ilk istekte 500, çeviri sayfalarında <html lang>, otomatik çeviri kalitesi
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G150
 oncelik: 1
 bagimli: [G139, G144, G145]
@@ -83,3 +83,6 @@ birleştirme, PR yok.
 - Yayından sonra canlıda: ilk davetiye isteği (soğuk + sıcak örnek) 200 mü; Vercel günlüğünde `[print] browser closed during render`
   satırı görülürse yeniden denemenin işlediği anlaşılır.
 - `/tr`, `/de/designs` kaynağında `<html lang>`; panelde TR ile `document.documentElement.lang`.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

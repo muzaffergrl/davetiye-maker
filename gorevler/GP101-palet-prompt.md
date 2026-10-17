@@ -2,7 +2,7 @@
 id: GP101
 baslik: Aşama 2 · Tasarım 01 — 5 ek palet + prompt dosyaları
 rol: claude-canva
-durum: blokaj
+durum: bitti
 alan:
 oncelik: 6
 bagimli: [G090]
@@ -28,3 +28,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 entegratör onayladı

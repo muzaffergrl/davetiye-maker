@@ -2,7 +2,7 @@
 id: G158
 baslik: Aşama 2 renk paletleri parti C — 15, 16, 17, 18, 19, 20 (GP115–GP120)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G158
 oncelik: 2
 bagimli: [G153]
@@ -112,3 +112,4 @@ pilotla aynı ayar).
 
 ## Günlük
 - 2026-10-17 claude-G158: alındı → 30 palet, araç eki, testler; durum inceleme.
+- 2026-10-17 entegratör onayladı
