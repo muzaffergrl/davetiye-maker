@@ -10,7 +10,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 
 | Item | Status on 2026-10-17 |
 |---|---|
-| Sale status | **Coming: the design is not open for sale** (tasarım satışa açılmadı, coming). `platform/lib/marketing/config.ts` lists it as `coming` with price `[PRICE]`; the user has not approved its sale yet (G133). This listing waits for that decision. |
+| Sale status | **Live: open for sale** (kullanıcı 2026-10-17'de satışa açtı, G142). `platform/lib/marketing/config.ts` lists it as `live` with price `1460`. |
 | Start link `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` | **Not live**: the design is in the repository (G133, branch `codex/crimson-rose-atelier`) and has not been deployed; the user asked for a local demo only. Opened only in a local production build (2026-10-17, G137 capture: /start shows "Design: Crimson Rose Atelier"). Not opened on a phone. |
 | Live demo `https://davetiye-platform-five.vercel.app/start/demo/crimson-rose-atelier` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Not live**, for the same reason. In the local production build the demo route opens this design's envelope with the sample couple Olivia & James (G133 test, G137 capture). |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were tried only in the local production build of this task (setup, Edit, Guests, Share screens of the capture). |
@@ -22,7 +22,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | The shop price of designs 01–20, decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). For this design `config.ts` still says `[PRICE]`: confirm the price with the sale decision. Hosting extension, renewal and the Etsy shop URL are still open. |
+| Price, quantity | 1,460 TL, the shop price of designs 01–20 (decided 2026-10-16), approved for this design by the user on 2026-10-17; no stock limit (999, Etsy's maximum). Hosting extension, renewal and the Etsy shop URL are still open. |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: Cormorant Garamond and Manrope (both latin-ext + Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G137 (2026-10-17, `python3 tools/build_customer_guides.py --designs 21`, from docs/19 Ek A): 9 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. |
 | Listing images and video | **Produced** on 2026-10-17 from local production builds of the repository: images 3, 5, 6 and 7 and `video.mp4` (12 s, §6) in G137; images 1, 2, 4 and 8 in G137 (second pass) on this design's GPT mockup scenes (G821, `assets/gpt/mockups/`). All 8 in `images_editorial/` (§5). Nothing uploaded to Etsy. |
@@ -145,7 +145,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (G137, 2026-10-17; Etsy: up to 5 files, 20 MB each) |
-| Price | **1,460 TL** (the shop price approved by the user on 2026-10-16 for designs 01–20; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). This design's sale and price are not approved yet (`config.ts`: `coming`, `[PRICE]`) |
+| Price | **1,460 TL** (the shop price approved by the user on 2026-10-16 for designs 01–20 and on 2026-10-17 for this design; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). Approved for this design on 2026-10-17 (`config.ts`: `live`, `1460`) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Floral & Garden (an existing section, docs/20 §3, which lists 01–05 only; the section for designs 06–21, or a new one, is the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |

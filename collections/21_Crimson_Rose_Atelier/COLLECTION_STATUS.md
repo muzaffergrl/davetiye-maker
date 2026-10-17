@@ -1,7 +1,7 @@
 # Koleksiyon 21 — Crimson Rose Atelier (çalışma adı)
 
-**Durum:** satışta — `platform/lib/marketing/config.ts` `live` (kullanıcı kararı, 2026-10-17). Fiyat henüz yok: `[PRICE]`
-yer tutucusu sitede görünür kalır. Tema standardında (G142: theme-check `--stress` 0 hata, final-smoke 45/45, g051 44/44).
+**Durum:** satışta — `platform/lib/marketing/config.ts` `live` (kullanıcı kararı, 2026-10-17). Fiyat 1460 TL (diğer
+tasarımlarla aynı, kullanıcı 2026-10-17). Tema standardında (G142: theme-check `--stress` 0 hata, final-smoke 45/45, g051 44/44).
 Satış sitesi ekranları + açılış videosu: `platform/public/marketing/designs/crimson-rose-atelier/` (G142 gerçek çekimi).
 Tasarım özeti: `DESIGN_BRIEF.md`. Çalışma adı marka değildir.
 

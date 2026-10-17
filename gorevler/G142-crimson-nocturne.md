@@ -116,6 +116,9 @@ açılış + poster), `assets.json`. Çekim aracında RSVP formu ekranı ad etik
 `npm test` 1299/1299, typecheck, build ✓; tools testleri ✓. Yayın (Vercel) yapılmadı — main'e birleşip deploy edilince görünür.
 Açık: fiyat, Etsy ilan URL'si; G137 ilan görselleri G142 öncesi temayı gösteriyor (albüm şeridi), yeniden çekilebilir.
 
+Fiyat (kullanıcı, 2026-10-17: "1460 yap, diğerleriyle aynı"): `config.ts` `price: '1460'`; `listing_v3.md` satış durumu ve
+fiyat satırları güncellendi (`etsy_upload.json` zaten 1460; yeniden üretim değişiklik vermedi). `npm test` 1299/1299, build ✓.
+
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G142 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
