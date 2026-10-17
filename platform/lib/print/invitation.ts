@@ -6,7 +6,8 @@
 //
 // Look: the design's own GPT parts (lib/print/layouts.ts): the invitation_card part on the design's paper, the
 // couple's text set in the design's web fonts and colours on the part's free area. Text that would not fit is made
-// smaller in the page itself (fitText), never cut.
+// smaller in the page itself (fitText), never cut, and never set on the art: lines near decoration are kept narrower
+// (G149, layouts.ts bands).
 
 import type { Page } from 'playwright-core';
 import { qrSvg } from '../qr.ts';
@@ -54,6 +55,13 @@ function esc(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 }
 
+/** The text escaped, with `part` (a date) kept on one line: a narrow line breaks before the date, never inside it. */
+function keepTogether(text: string, part: string): string {
+  const at = part ? text.indexOf(part) : -1;
+  if (at < 0) return esc(text);
+  return `${esc(text.slice(0, at))}<span class="nw">${esc(part)}</span>${esc(text.slice(at + part.length))}`;
+}
+
 function str(v: unknown): string {
   return typeof v === 'string' ? v.trim() : '';
 }
@@ -82,6 +90,7 @@ export function invitationText(content: unknown, siteUrl: string) {
     venue: str(c.venue?.name),
     place: [c.venue?.city, c.venue?.region].map(str).filter(Boolean).join(', '),
     replyBy: deadline ? printLabel('reply_by', { date: deadline }, dict) : '',
+    replyDate: deadline ?? '',
     schedule: schedule as Array<{ label: string; time: string; location: string }>,
     dressCode: c.optional_blocks?.dress_code !== false ? str(c.dress_code) : '',
     lang,
@@ -107,7 +116,7 @@ function frontText(t: Text, l: PrintLayout, withUrl: boolean): string {
     t.time ? `<p class="time">${esc(t.time)}</p>` : '',
     t.venue ? `<p class="venue">${esc(t.venue)}</p>` : '',
     t.place ? `<p class="place">${esc(t.place)}</p>` : '',
-    t.replyBy ? `<p class="reply">${esc(t.replyBy)}</p>` : '',
+    t.replyBy ? `<p class="reply">${keepTogether(t.replyBy, t.replyDate)}</p>` : '',
     withUrl ? `<p class="url" data-fit>${esc(t.siteLabel)}</p>` : '',
   ].join('');
   void l;
@@ -118,7 +127,7 @@ function backText(t: Text): string {
     .map((s) => `<li><span class="s-time">${esc(s.time)}</span><span class="s-label">${esc(s.label)}</span>${s.location ? `<span class="s-loc">${esc(s.location)}</span>` : ''}</li>`)
     .join('');
   return [
-    `<h2 class="b-title">${esc(printLabel('details_title', {}, t.dict))}</h2>`,
+    `<h2 class="b-title" data-fit>${esc(printLabel('details_title', {}, t.dict))}</h2>`,
     t.date ? `<p class="date" data-fit>${esc(t.date)}</p>` : '',
     t.venue ? `<p class="venue">${esc(t.venue)}</p>` : '',
     t.place ? `<p class="place">${esc(t.place)}</p>` : '',
@@ -127,7 +136,7 @@ function backText(t: Text): string {
     `<a class="qr" href="${esc(t.siteUrl)}">${qrSvg(t.siteUrl, { border: 2, pixels: 200 })}</a>`,
     `<p class="scan">${esc(printLabel('scan_to_visit', {}, t.dict))}</p>`,
     `<p class="url" data-fit>${esc(t.siteLabel)}</p>`,
-    t.replyBy ? `<p class="reply">${esc(t.replyBy)}</p>` : '',
+    t.replyBy ? `<p class="reply">${keepTogether(t.replyBy, t.replyDate)}</p>` : '',
   ].join('');
 }
 
@@ -181,6 +190,7 @@ html, body { width: ${g.pageW}in; background: #fff; -webkit-print-color-adjust: 
 .date { font-size: 2.9em; line-height: 1.4; color: ${l.ink} }
 .time, .place { font-family: ${l.serif}; font-size: 3.3em; line-height: 1.35 }
 .venue { font-family: ${l.serif}; font-size: 3.9em; line-height: 1.3; font-weight: 500 }
+.nw { white-space: nowrap }
 .reply, .scan { font-family: ${l.serif}; font-style: italic; font-size: 3em; line-height: 1.4; color: ${l.accent} }
 .url { font-family: ${l.serif}; font-size: 2.6em; letter-spacing: .04em }
 .b-title { font-size: 3.6em; letter-spacing: .22em }
@@ -215,9 +225,11 @@ export function invitationHtml(themeId: string, content: unknown, siteUrl: strin
       ? c.images.map((i) => `<img class="deco" src="${esc(i.src)}.webp" style="${esc(i.style)}" alt="">`).join('')
       : `<img class="part" src="${which === 'front' ? 'card' : 'back'}.webp" alt="">`;
     const text = which === 'front' ? frontText(t, l, !o.back) : backText(t);
+    const bands = l.bands?.[which] ?? [];
+    const bandAttr = bands.length ? ` data-bands="${esc(JSON.stringify(bands))}"` : '';
     return (
       `<section class="sheet ${which}">${paper}<div class="card" style="${pos}">${inner}` +
-      `<div class="text" style="${boxStyle(which === 'front' ? l.front : l.back)}"><div class="inner">${text}</div></div></div>${cropMarks(g)}</section>`
+      `<div class="text" style="${boxStyle(l[which])}"${bandAttr}><div class="inner">${text}</div></div></div>${cropMarks(g)}</section>`
     );
   };
   return (
@@ -227,19 +239,95 @@ export function invitationHtml(themeId: string, content: unknown, siteUrl: strin
   );
 }
 
-/** Makes every text block fit its box: the whole block shrinks until its height fits, then each one-line item to its width. */
+/** Smallest size the whole text block may take (share of the design's type size) before fitText stops shrinking it. */
+export const FIT_MIN_SCALE = 0.45;
+
+/**
+ * Makes every text block fit its free area (G149): the box, narrower where decoration reaches in (data-bands, see
+ * layouts.ts Band). Each block of text (a line item: host line, each name, date, venue, a schedule row…) gets the width
+ * free at its height: wrapping items wrap, one-line items ([data-fit]) get smaller type, the QR must fit as it is. The
+ * whole block shrinks (3 % steps) until it fits the box's height, nothing is wider than the art leaves free at its
+ * place, and no one-line item had to shrink much more for a band than the box alone would ask (then a smaller block,
+ * which sits further from the decorated corners, looks better than one tiny line).
+ */
 export async function fitText(page: Page): Promise<void> {
-  await page.evaluate(() => {
+  await page.evaluate((minScale) => {
     for (const box of Array.from(document.querySelectorAll<HTMLElement>('.text'))) {
+      const card = box.parentElement as HTMLElement;
       const inner = box.firstElementChild as HTMLElement;
+      const bands = JSON.parse(box.dataset.bands || '[]') as Array<[number, number, number]>;
+      const items = Array.from(inner.children).flatMap((el) => (el.matches('.names, .schedule') ? Array.from(el.children) : [el])) as HTMLElement[];
       const base = parseFloat(getComputedStyle(box).fontSize);
-      for (let s = 1; s > 0.45 && inner.offsetHeight > box.clientHeight + 1; s -= 0.03) box.style.fontSize = `${base * s}px`;
-      for (const el of Array.from(box.querySelectorAll<HTMLElement>('[data-fit]'))) {
-        const avail = box.clientWidth;
-        for (let f = parseFloat(getComputedStyle(el).fontSize); f > 4 && el.scrollWidth > avail + 0.5; f *= 0.96) el.style.fontSize = `${f}px`;
+      const range = document.createRange();
+      /** Width free at the element's current height (px): the element's box and its glyphs (a script font's swashes reach past a tight line height). */
+      const free = (el: HTMLElement): number => {
+        const c = card.getBoundingClientRect();
+        const r = el.getBoundingClientRect();
+        range.selectNodeContents(el);
+        const g = range.getBoundingClientRect();
+        const top = ((Math.min(r.top, g.height ? g.top : r.top) - c.top) / c.height) * 100;
+        const bottom = ((Math.max(r.bottom, g.height ? g.bottom : r.bottom) - c.top) / c.height) * 100;
+        let w = box.clientWidth;
+        for (const [bt, bb, bw] of bands) if (bt < bottom && bb > top) w = Math.min(w, (bw / 100) * c.width);
+        return w;
+      };
+      const limit = (el: HTMLElement) => (el.style.maxWidth ? parseFloat(el.style.maxWidth) : box.clientWidth);
+      // the names' ink (a script's swashes and long descenders reach past its tight line box): padding (in em, so it
+      // follows the type size) keeps every glyph inside the name's own box, off the next line and inside the free area
+      const ctx = document.createElement('canvas').getContext('2d');
+      for (const el of Array.from(inner.querySelectorAll<HTMLElement>('.names > [data-fit]'))) {
+        const cs = getComputedStyle(el);
+        const size = parseFloat(cs.fontSize);
+        if (!ctx || !size) continue;
+        ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${size}px ${cs.fontFamily}`;
+        const m = ctx.measureText(cs.textTransform === 'uppercase' ? el.textContent!.toUpperCase() : el.textContent!);
+        const half = (el.getBoundingClientRect().height - m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2;
+        const top = Math.max(0, m.actualBoundingBoxAscent - m.fontBoundingBoxAscent - half);
+        const bottom = Math.max(0, m.actualBoundingBoxDescent - m.fontBoundingBoxDescent - half);
+        const side = Math.max(0, m.actualBoundingBoxLeft, m.actualBoundingBoxRight - m.width);
+        el.style.padding = `${top / size}em ${side / size}em ${bottom / size}em`;
+      }
+      for (let s = 1; ; s -= 0.03) {
+        box.style.fontSize = `${base * s}px`;
+        for (const el of items) {
+          el.style.maxWidth = '';
+          el.style.fontSize = '';
+        }
+        // too tall even at the box's full width: bands only add lines, go smaller at once
+        if (inner.offsetHeight > box.clientHeight + 1 && s - 0.03 >= minScale) continue;
+        // one-line items: their type size and the shrink the box width alone asks (before any band)
+        const natural = new Map<HTMLElement, { size: number; boxShrink: number }>();
+        for (const el of items) {
+          if (el.hasAttribute('data-fit')) {
+            natural.set(el, { size: parseFloat(getComputedStyle(el).fontSize), boxShrink: Math.min(1, box.clientWidth / Math.max(1, el.scrollWidth)) });
+          }
+        }
+        // narrow the items in bands until nothing changes (narrowing moves items: a few passes)
+        for (let pass = 0; pass < 8; pass++) {
+          let changed = false;
+          for (const el of items) {
+            if (el.classList.contains('qr')) continue;
+            const w = Math.floor(free(el));
+            if (w < limit(el) - 0.5) {
+              el.style.maxWidth = `${w}px`;
+              changed = true;
+            }
+            if (el.hasAttribute('data-fit')) {
+              for (let f = parseFloat(getComputedStyle(el).fontSize); f > 4 && el.scrollWidth > limit(el) + 0.5; f *= 0.96) el.style.fontSize = `${f}px`;
+            }
+          }
+          if (!changed) break;
+        }
+        range.selectNodeContents(inner);
+        const glyphs = range.getBoundingClientRect();
+        const area = box.getBoundingClientRect();
+        const fitsHeight = inner.offsetHeight <= box.clientHeight + 1 && glyphs.top >= area.top - 1 && glyphs.bottom <= area.bottom + 1;
+        const fitsBands = items.every((el) => el.getBoundingClientRect().width <= free(el) + 0.5 && el.scrollWidth <= Math.max(el.clientWidth, limit(el)) + 0.5);
+        const noTinyLine = Array.from(natural).every(([el, n]) => parseFloat(getComputedStyle(el).fontSize) >= 0.65 * n.boxShrink * n.size);
+        if ((fitsHeight && fitsBands && noTinyLine) || s - 0.03 < minScale) break;
       }
     }
-  });
+  }, FIT_MIN_SCALE);
 }
 
 export interface InvitationInput extends InvitationOptions {
