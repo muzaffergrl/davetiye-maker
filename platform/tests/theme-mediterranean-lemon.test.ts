@@ -136,7 +136,9 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
 });
@@ -596,7 +598,10 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
   assert.doesNotMatch(nav, /border-top/, '.site-nav: no hard band');
   assert.match(nav, /mask: linear-gradient\(transparent, #000 \d+px\)/, 'the top edge fades');
-  const alphas = [...nav.matchAll(/rgba\(246, 241, 233, (\.\d+)\) \d+px, rgba\(246, 241, 233, (\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+  // G156: the colour may be rgba(), #rrggbbaa or the palette channel token rgb(var(--c-…)/a) (tools/recolor_parts.py)
+  const col = String.raw`(?:rgba\(246, 241, 233, (\.\d+)\)|#f6f1e9([0-9a-f]{2})|rgb\(var\(--c-f6f1e9\)\/(\.\d+)\))`;
+  const alpha = (m: RegExpMatchArray, i: number) => (m[i] ? Number(m[i]) : m[i + 1] ? parseInt(m[i + 1], 16) / 255 : Number(m[i + 2]));
+  const alphas = [...nav.matchAll(new RegExp(`${col} \\d+px, ${col}`, 'g'))].flatMap((m) => [alpha(m, 1), alpha(m, 4)]);
   assert.ok(alphas.length === 2 && alphas.every((a) => a >= 0.96), `label row ≥ .96 (${alphas})`);
   assert.match(nav, /backdrop-filter: blur\(\d+px\)/);
   // the only lines are 1 px interface dividers (the tile-flower hairline of nav and dress code, the RSVP card's two

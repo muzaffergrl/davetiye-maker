@@ -159,7 +159,9 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.match(MANIFEST.favicon.source, /^closure/);
   // docs/11 §1: no GPT sources / prep output / previews in the theme folder; total ≤ 3 MB
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', 'prep']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // docs/11 §6: single WebP ≤ 250 KB (≤ 200 KB in a first view: the envelope, hero, story desk)
