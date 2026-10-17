@@ -2,7 +2,7 @@
 id: G043
 baslik: Supabase adaptörü — şema, RLS, storage (canlı veri)
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 2
 bagimli: [G037]
@@ -22,3 +22,4 @@ _(görevi yapan ajan doldurur)_
 
 ## Günlük
 - 2026-10-13 blokaj: yeni Supabase projesi için kullanıcı onayı bekleniyor (mevcut iki ilgisiz projeye dokunulmaz)
+- 2026-10-17 iptal: Veri Vercel Blob adaptöründe (docs/10 §2c); Supabase kullanılmıyor

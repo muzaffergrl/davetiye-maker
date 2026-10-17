@@ -2,7 +2,7 @@
 id: G164
 baslik: 26 Kintsugi & Washi — yeni tasarım, platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G164
 oncelik: 1
 bagimli: [G138, G139, G142, G144]
@@ -74,3 +74,4 @@ görünüm, qa-kontrol karşılaştırma kapısı (W1 comp yok), g051-browser ve
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G164 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

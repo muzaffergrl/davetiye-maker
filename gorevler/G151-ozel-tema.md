@@ -2,7 +2,7 @@
 id: G151
 baslik: Özel tasarım yalnız o alıcıya + Dress code kısa yolu kalkar + contentUpdatedAt (K47)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G151
 oncelik: 1
 bagimli: [G145, G146]
@@ -58,3 +58,6 @@ K47 (2026-10-17) onaylı üç madde; öneri ve kırık listesi `gorevler/G145-pa
 - Satış sitesi config'ine özel tema eklenmesini build durdurmaz; yalnız `npm test` yakalar.
 - Özel tema linkinde sipariş numarası URL'de durur (`/start` noindex + no-referrer); G146'daki sessionStorage aktarımı yalnız
   genel temalar için.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

@@ -2,7 +2,7 @@
 id: G162
 baslik: Yeni tasarım 24 Grand Theatre Premiere — platform teması (GPT parçalarından önce), coming kaydı, GPT istekleri, basılı davetiye, ilan taslağı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G162
 oncelik: 1
 bagimli: [G138, G139, G144]
@@ -112,3 +112,4 @@ Gelince: `kit_check --paket 5/2` → `build_images.py` kaynak geçişi → `site
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G162 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

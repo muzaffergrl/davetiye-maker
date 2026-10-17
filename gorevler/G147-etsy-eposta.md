@@ -2,7 +2,7 @@
 id: G147
 baslik: Tam otomatik sipariş kontrolü (Etsy API) + gerçek e-posta gönderimi (SMTP)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G147
 oncelik: 1
 bagimli: [G045, G060, G087, G128, G145]
@@ -106,3 +106,6 @@ C. `docs/10` §3 kurulum adımları, bu dosya, testler.
 - **`/my` girişi (G146):** "created" e-postası `<origin>/my` ile sipariş no + e-postayla devam etmeyi anlatıyor; bu G146 birleşince doğru
   olur. `signin` türü G146'nın göndermesi için hazır.
 - RSVP bildirimi e-postası yok (kapsam dışı). Gmail kişisel hesap günlük gönderim sınırı; büyürse aynı değişkenlerle SMTP servisi.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

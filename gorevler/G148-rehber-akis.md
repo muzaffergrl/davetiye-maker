@@ -2,7 +2,7 @@
 id: G148
 baslik: Alıcı rehberi (Etsy'nin verdiği START HERE PDF'i) + ilan metinleri + 9. ilan görseli yeni erişim akışına (sipariş no + e-posta, her cihaz)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G148
 oncelik: 1
 bagimli: [G122, G123, G124, G146, G147]
@@ -75,3 +75,6 @@ yeniden kuruldu). Yayın/merge/PR yok; `platform/` koduna dokunulmadı (yalnız 
   `order_already_used`, `setup_service_done_same_link` eski kayıp-link yolunu anlatıyor; `/my` + sipariş no + e-posta eklenmeli.
 - Rehber ve 9. görsel G146'yı anlatıyor: canlıya çıkmadan (sonraki deploy) PDF'ler Etsy'ye yüklenmemeli; sonra `build_customer_guides.py --check`.
 - Gerçek telefon denemesi, canlı `/my` denemesi yok.
+
+## Günlük
+- 2026-10-17 entegratör onayladı
