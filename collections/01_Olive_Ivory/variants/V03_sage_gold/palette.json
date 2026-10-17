@@ -1,0 +1,28 @@
+{
+  "id": "V03_sage_gold",
+  "slug": "sage-gold",
+  "name": "Sage & Gold",
+  "ink": "#2C352B",
+  "deep": "#5D6B53",
+  "primary": "#9AA88E",
+  "mist_top": "#F1F2EC",
+  "mist_bottom": "#DCE0D3",
+  "gold": "#B39A63",
+  "gold_light": "#D7C79F",
+  "ivory": "#FBF8F0",
+  "leaf": "#A3B096",
+  "swatch": [
+    "#FBF8F0",
+    "#9AA88E",
+    "#A3B096"
+  ],
+  "status": "coming",
+  "families": {
+    "envelope": "primary",
+    "leaf": "leaf",
+    "gold": null,
+    "seal_gold": null,
+    "pale_gold": null,
+    "stamen": null
+  }
+}

@@ -889,6 +889,10 @@ const dict: Dict = {
   'Velvet, antique gold and an ivory playbill. The curtain rises on your names, your story plays in the spotlight and the evening reads like a theatre programme, act by act.': 'Terciopelo, oro antiguo y un programa de mano marfil. El telón se alza sobre tus nombres, tu historia brilla bajo el foco y la velada se lee como un programa de teatro, acto por acto.',
   'Your guests tap the curtain. The house lights dim, the two velvet panels part one after the other and a spotlight sweeps the stage to a separate programme card with your photo. The card then opens into your home page.': 'Tus invitados tocan el telón. Las luces de la sala se atenúan, las dos hojas de terciopelo se abren una tras otra y un foco recorre el escenario hasta una tarjeta de programa aparte con tu foto. Después la tarjeta se abre en tu página de inicio.',
   'Your names on a programme card standing on the open stage, then the invitation beside your portrait, a countdown to curtain-up and calendar links.': 'Tus nombres en una tarjeta de programa sobre el escenario abierto, luego la invitación junto a tu retrato, una cuenta atrás hasta que se alce el telón y enlaces de calendario.',
+  "Original": "Original",
+  "Color palette": "Paleta de colores",
+  "Live demo in {name}": "Demo en vivo en {name}",
+  "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Sí, dentro del diseño: {name} viene en sus colores originales y en {n} paletas más, cada una con {thing}, tarjetas y marcos pintados a juego. Eliges una paleta al empezar y puedes cambiarla en tu editor cuando quieras; tus textos y fotos se quedan como están.",
 };
 
 export default dict;

@@ -1,0 +1,29 @@
+{
+  "id": "V04_champagne_ivory",
+  "slug": "champagne-ivory",
+  "name": "Champagne & Ivory",
+  "ink": "#3A3128",
+  "deep": "#8A7255",
+  "primary": "#EADBC4",
+  "mist_top": "#FBF6EE",
+  "mist_bottom": "#EEE2D0",
+  "gold": "#C8A46E",
+  "gold_light": "#E5CFA4",
+  "ivory": "#FFF9F6",
+  "leaf": "#9DAE93",
+  "swatch": [
+    "#FBF6EE",
+    "#EADBC4",
+    "#C8A46E"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "primary",
+    "petal": "primary",
+    "envelope": "#EFE3D0",
+    "blush_paper": "mist_bottom",
+    "leaf": null,
+    "gold": null,
+    "cream": null
+  }
+}

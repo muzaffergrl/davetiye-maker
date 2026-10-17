@@ -44,6 +44,8 @@ type Message = { tone: 'error' | 'notice'; text: string } | null;
 export interface MyDesign {
   id: string;
   name: string;
+  /** G153: a live colour palette from the link (/my?theme=…&variant=…), handed on to /start. */
+  variant?: string | null;
 }
 
 export default function MyWebsite({
@@ -318,7 +320,7 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
         return;
       }
       if (theme) {
-        window.location.assign(`/start?theme=${encodeURIComponent(theme.id)}`);
+        window.location.assign(`/start?theme=${encodeURIComponent(theme.id)}${theme.variant ? `&variant=${encodeURIComponent(theme.variant)}` : ''}`);
         return;
       }
       setPick(true);

@@ -182,5 +182,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Crimson Rose Atelier)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=crimson-rose-atelier"
+      },
+      {
+        "name": "Midnight Navy & Wine",
+        "variant": "midnight-navy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=crimson-rose-atelier&variant=midnight-navy"
+      },
+      {
+        "name": "Plum & Gold",
+        "variant": "plum-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=crimson-rose-atelier&variant=plum-gold"
+      },
+      {
+        "name": "Dusty Rose & Mauve",
+        "variant": "dusty-rose",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=crimson-rose-atelier&variant=dusty-rose"
+      },
+      {
+        "name": "Emerald & Ruby",
+        "variant": "emerald-ruby",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=crimson-rose-atelier&variant=emerald-ruby"
+      },
+      {
+        "name": "Terracotta & Rust",
+        "variant": "terracotta-rust",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=crimson-rose-atelier&variant=terracotta-rust"
+      }
+    ],
+    "offered": [
+      "Original (Crimson Rose Atelier)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

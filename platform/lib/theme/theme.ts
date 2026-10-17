@@ -6,6 +6,7 @@ import path from 'node:path';
 import { normalizeOrderNumber } from '../claim/fields.ts';
 import { parseCopyManifest, type CopyManifest } from './copy.ts';
 import { findShareFiles, type ThemeShareFiles } from './share.ts';
+import { parseSwatch, parseVariants, type ThemeVariant } from './variants.ts';
 
 export const PAGE_NAMES = ['index', 'home', 'story', 'details', 'rsvp'] as const;
 export type PageName = (typeof PAGE_NAMES)[number];
@@ -41,6 +42,10 @@ export interface ThemeManifest {
    * G068: its fixed texts stay fixed; theme-check warns).
    */
   copy: CopyManifest;
+  /** G153: extra colour palettes (lib/theme/variants.ts); [] = the design has only its original palette. */
+  variants: ThemeVariant[];
+  /** G153: the original palette's swatch colours (theme.json "swatch"); absent = not given. */
+  swatch?: string[];
 }
 
 export interface LoadedTheme {
@@ -119,6 +124,10 @@ export function parseManifest(raw: unknown, folderId: string): ThemeManifest {
   }
   const copy = parseCopyManifest(m.copy);
   if (copy.problems.length) throw new ThemeError(`${folderId}: theme.json ${copy.problems.join('; ')}`);
+  const variants = parseVariants(m.variants);
+  if (variants.problems.length) throw new ThemeError(`${folderId}: theme.json ${variants.problems.join('; ')}`);
+  const swatch = parseSwatch(m.swatch);
+  if (swatch.problem) throw new ThemeError(`${folderId}: theme.json ${swatch.problem}`);
   return {
     id: folderId,
     name: m.name,
@@ -128,6 +137,8 @@ export function parseManifest(raw: unknown, folderId: string): ThemeManifest {
     pages,
     photos,
     copy: copy.manifest,
+    variants: variants.variants,
+    ...(swatch.swatch ? { swatch: swatch.swatch } : {}),
   };
 }
 

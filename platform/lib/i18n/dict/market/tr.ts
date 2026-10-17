@@ -889,6 +889,10 @@ const dict: Dict = {
   'Velvet, antique gold and an ivory playbill. The curtain rises on your names, your story plays in the spotlight and the evening reads like a theatre programme, act by act.': 'Kadife, antik altın ve fildişi bir tiyatro programı. Perde isimlerinizle açılır, hikâyeniz spot ışığında oynar ve akşam perde perde bir tiyatro programı gibi okunur.',
   'Your guests tap the curtain. The house lights dim, the two velvet panels part one after the other and a spotlight sweeps the stage to a separate programme card with your photo. The card then opens into your home page.': 'Davetlileriniz perdeye dokunur. Salon ışıkları kısılır, iki kadife kanat birbiri ardına aralanır ve spot ışığı sahneyi tarayıp fotoğrafınızın olduğu ayrı bir program kartına ulaşır. Kart ardından ana sayfanıza açılır.',
   'Your names on a programme card standing on the open stage, then the invitation beside your portrait, a countdown to curtain-up and calendar links.': 'Açık sahnede duran bir program kartında isimleriniz, ardından portrenizin yanında davetiye, perde açılışına geri sayım ve takvim bağlantıları.',
+  "Original": "Orijinal",
+  "Color palette": "Renk paleti",
+  "Live demo in {name}": "{name} renklerinde canlı demo",
+  "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Evet, tasarımın içinde kalarak: {name} orijinal renklerinin yanında {n} palet daha sunar; her birinde {thing}, kartlar ve çerçeveler uyumlu boyanmıştır. Paleti başlarken seçersiniz ve düzenleyicinizde istediğiniz zaman değiştirebilirsiniz; metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
 };
 
 export default dict;

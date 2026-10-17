@@ -642,3 +642,16 @@
     transform: none;
   }
 }
+
+/* G153: the design's colour palettes above the demo (the choice recolours the demo and is stored with the site). */
+.palette {
+  margin: 0 0 var(--s-5);
+  text-align: center;
+}
+
+.paletteTitle {
+  margin: 0 0 var(--s-3);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-heading);
+}

@@ -57,6 +57,7 @@ import { COPY_ATTRS, ownCopy, parseCopyAttr, resolveCopy, type CopyManifest } fr
 import type { ThemeShareFiles } from './share.ts';
 import { OG_IMAGE_SIZE } from './share.ts';
 import type { PageName, ThemeManifest } from './theme.ts';
+import { resolveVariant, VARIANTS_CSS, type ThemeVariant } from './variants.ts';
 import { localizedContent, siteLangs } from '../i18n/content.ts';
 import { dateIn, dateLongIn, monthIn, timeIn, weekdayIn } from '../i18n/format.ts';
 import { LANG_NAMES, type Lang } from '../i18n/langs.ts';
@@ -69,10 +70,17 @@ export interface RenderOptions {
   html: string;
   content: unknown;
   /** `copy` (G068): the theme's editable texts; absent = none (data-copy elements keep their template text). */
-  theme: Pick<ThemeManifest, 'id' | 'pages' | 'photos'> & { copy?: CopyManifest };
+  theme: Pick<ThemeManifest, 'id' | 'pages' | 'photos'> & { copy?: CopyManifest; variants?: readonly ThemeVariant[] };
   page: PageName;
   slug: string;
+  /**
+   * G153: the colour palette (lib/theme/variants.ts), used only when the theme declares it (live or coming; callers decide
+   * who may pick a coming one). Sets html[data-variant], links the theme's variants.css and points theme assets at the
+   * variant's folder /themes/<theme>/~<id>/… (image overrides, else the originals). Unknown / null = the original palette.
+   */
   variant?: string | null;
+  /** G153: links between pages keep ?variant=<id> (the demo, where the palette comes from the address, not a site). */
+  variantInLinks?: boolean;
   /** When set, links between theme pages keep ?preview=<key> so draft navigation works. */
   previewKey?: string | null;
   /**
@@ -162,8 +170,19 @@ export function pageRoute(slug: string, page: PageName): string {
 /** Query value that shows the thank-you version in a preview (G075): /<slug>?preview=<key>&thanks=1. */
 export const THANK_YOU_PREVIEW_PARAM = 'thanks';
 
-function withPreview(route: string, previewKey: string | null | undefined, extraQuery = '', thanks = false, lang: string | null = null): string {
+/** Query parameter of the demo's colour palette (G153): /start/demo/<theme>?variant=<id>. */
+export const VARIANT_PARAM = 'variant';
+
+function withPreview(
+  route: string,
+  previewKey: string | null | undefined,
+  extraQuery = '',
+  thanks = false,
+  lang: string | null = null,
+  variant: string | null = null,
+): string {
   const params = new URLSearchParams(extraQuery.replace(/^\?/, ''));
+  if (variant) params.set(VARIANT_PARAM, variant);
   if (lang) params.set(LANG_PARAM, lang);
   if (previewKey) params.set('preview', previewKey);
   if (previewKey && thanks) params.set(THANK_YOU_PREVIEW_PARAM, '1');
@@ -197,7 +216,14 @@ function isPresent(v: unknown): boolean {
  * <meta> of <head>. A tag the template already has is left as it is (no duplicates). og:image needs an
  * absolute URL, so it is written only with an origin; the icon is a root-relative link.
  */
-function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShareFiles | null, origin: string | null, alt: string): void {
+function writeShareTags(
+  $: cheerio.CheerioAPI,
+  themeId: string,
+  share: ThemeShareFiles | null,
+  origin: string | null,
+  alt: string,
+  variant: string | null = null,
+): void {
   const head = $('head').first();
   if (!share || !head.length) return;
   const tags: AnyNode[] = [];
@@ -207,7 +233,7 @@ function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShar
     el.attr('content', content);
     tags.push(el[0]);
   };
-  const ogUrl = share.ogImage ? themeAssetUrl(themeId, share.ogImage) : null;
+  const ogUrl = share.ogImage ? themeAssetUrl(themeId, share.ogImage, variant) : null;
   if (ogUrl && origin && !$('meta[property="og:image"], meta[property="og:image:url"]').length) {
     meta('property', 'og:image', `${origin}${ogUrl}`);
     meta('property', 'og:image:type', 'image/jpeg');
@@ -218,7 +244,7 @@ function writeShareTags($: cheerio.CheerioAPI, themeId: string, share: ThemeShar
     if (!$('meta[name="twitter:card"]').length) meta('name', 'twitter:card', 'summary_large_image');
     if (!$('meta[name="twitter:image:alt"]').length) meta('name', 'twitter:image:alt', alt);
   }
-  const iconUrl = share.icon ? themeAssetUrl(themeId, share.icon) : null;
+  const iconUrl = share.icon ? themeAssetUrl(themeId, share.icon, variant) : null;
   if (iconUrl && !$('link[rel~="icon"]').length) {
     const link = $('<link>');
     link.attr('rel', 'icon');
@@ -284,6 +310,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   const content = localizedContent(opts.content, lang);
   // The thank-you preview (G075) needs a preview key: a guest's ?thanks=1 changes nothing.
   const thanksPreview = Boolean(opts.thankYouPreview && opts.previewKey);
+  // G153: a palette the theme declares, else the original
+  const variant = resolveVariant(theme.variants, opts.variant, { includeComing: true });
+  const linkVariant = opts.variantInLinks ? variant : null;
   const view = buildView(content, { now: opts.now, thankYou: thanksPreview });
   // G068: {copy.<key>} in templates reads the text the site shows (the couple's, else the design's), never the raw record
   const copyManifest: CopyManifest = theme.copy ?? {};
@@ -741,7 +770,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   for (const [p, file] of Object.entries(theme.pages)) if (file) fileToPage.set(file, p as PageName);
 
   const rewriteAsset = (value: string): string | null => {
-    const out = themeAssetUrl(theme.id, value);
+    const out = themeAssetUrl(theme.id, value, variant);
     if (!out) warn(`asset path "${value}" leaves the theme folder and was removed`);
     return out;
   };
@@ -753,7 +782,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       const hashAt = suffix.indexOf('#');
       const query = hashAt === -1 ? suffix : suffix.slice(0, hashAt);
       const hash = hashAt === -1 ? '' : suffix.slice(hashAt);
-      return withPreview(pageRoute(slug, target), opts.previewKey, query, thanksPreview, langParam) + hash;
+      return withPreview(pageRoute(slug, target), opts.previewKey, query, thanksPreview, langParam, linkVariant) + hash;
     }
     if (file.endsWith('.html')) warn(`link to "${file}" is not a declared theme page`);
     return rewriteAsset(value);
@@ -807,14 +836,24 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   });
 
   const names = typeof view.name_display === 'string' ? view.name_display.trim() : '';
-  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? t('{names} wedding invitation', { names }) : t('Wedding invitation'));
+  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? t('{names} wedding invitation', { names }) : t('Wedding invitation'), variant);
+
+  // G153: a theme with palettes: variants.css (:root = the colour channels site.css uses, html[data-variant="<id>"] = each
+  // palette's tokens), after the theme's own stylesheets — on every page of the theme, the original palette too
+  if (variant || theme.variants?.length) {
+    const href = themeAssetUrl(theme.id, VARIANTS_CSS, variant);
+    const sheets = $('head link[rel~="stylesheet"]');
+    const link = $('<link rel="stylesheet">').attr('href', href ?? '');
+    if (sheets.length) sheets.last().after(link);
+    else $('head').first().append(link);
+  }
   if (opts.guestOnlyMeta) guestOnlyMeta($, names || t('Our wedding'), t(view.thank_you_on === true ? THANKED : INVITED));
 
   // G144: a site in several languages — hreflang alternates (needs the public origin), the switcher and its suggestion
   if (langs.all.length > 1) {
     const head = $('head').first();
     const hrefOf = (l: Lang, absolute: boolean) =>
-      `${absolute ? (opts.origin ?? '') : ''}${withPreview(pageRoute(slug, page), opts.previewKey, '', thanksPreview, l === langs.primary ? null : l)}`;
+      `${absolute ? (opts.origin ?? '') : ''}${withPreview(pageRoute(slug, page), opts.previewKey, '', thanksPreview, l === langs.primary ? null : l, linkVariant)}`;
     if (opts.origin && !opts.previewKey) {
       for (const l of langs.all) head.append($('<link rel="alternate">').attr('hreflang', l).attr('href', hrefOf(l, true)));
       head.append($('<link rel="alternate" hreflang="x-default">').attr('href', hrefOf(langs.primary, true)));
@@ -865,11 +904,11 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   const payload = {
     slug,
     theme: theme.id,
-    variant: opts.variant ?? null,
+    variant,
     page,
     preview: Boolean(opts.previewKey),
     pages: Object.fromEntries(
-      Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey, '', thanksPreview, langParam)]),
+      Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey, '', thanksPreview, langParam, linkVariant)]),
     ),
     // G144: the page's language, the site's languages and the guest scripts' texts in this language (null = English)
     lang,
@@ -922,7 +961,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   html.attr('lang', lang);
   html.attr('data-theme', theme.id);
   html.attr('data-page', page);
-  if (opts.variant) html.attr('data-variant', opts.variant);
+  if (variant) html.attr('data-variant', variant);
   if (opts.previewKey) html.attr('data-preview', 'true');
   // CSS hook of thank-you mode (G075): html[data-thank-you] (the content itself switches with data-if="thank_you_on").
   if (view.thank_you_on === true) html.attr('data-thank-you', '');

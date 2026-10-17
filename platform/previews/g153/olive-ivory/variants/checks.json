@@ -1,0 +1,46 @@
+{
+ "theme": "olive-ivory",
+ "summary": {
+  "original": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 1
+  },
+  "dusty-blue": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "sage-gold": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "navy-gold": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "burgundy-sage": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "blush-sage": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 1 text(s) below the contrast minimum on the painted ground: home \"A & J\" 2.67:1 < 3:1"
+ ],
+ "passed": [
+  "palette dusty-blue (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette sage-gold (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette navy-gold (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette burgundy-sage (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette blush-sage (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

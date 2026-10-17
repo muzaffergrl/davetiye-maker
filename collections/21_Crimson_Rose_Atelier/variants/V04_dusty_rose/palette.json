@@ -1,0 +1,27 @@
+{
+  "id": "V04_dusty_rose",
+  "slug": "dusty-rose",
+  "name": "Dusty Rose & Mauve",
+  "ink": "#3A2128",
+  "deep": "#5A2A36",
+  "primary": "#8A3A4E",
+  "mist_top": "#EBDFCF",
+  "mist_bottom": "#D8C6B0",
+  "gold": "#C9A66D",
+  "gold_light": "#DDC8A7",
+  "ivory": "#F8EFDF",
+  "leaf": "#695C52",
+  "swatch": [
+    "#F8EFDF",
+    "#5A2A36",
+    "#8A3A4E"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "#8A3A4E",
+    "envelope": "deep",
+    "wine": "deep",
+    "leaf": null,
+    "gold": null
+  }
+}

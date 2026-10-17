@@ -188,9 +188,11 @@ export interface SitePatch {
   messageLog?: AdminMessageLogEntry[] | null;
   shopEdit?: ShopEditRecord | null;
   shopEditLog?: ShopEditLogEntry[] | null;
+  /** G153: the design's colour palette (theme.json variants id; null = the original). Never touches the content. */
+  variant?: string | null;
 }
 
-export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail', 'messageLog', 'shopEdit', 'shopEditLog'] as const satisfies ReadonlyArray<keyof SitePatch>;
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail', 'messageLog', 'shopEdit', 'shopEditLog', 'variant'] as const satisfies ReadonlyArray<keyof SitePatch>;
 
 /** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
 export function applySitePatch(site: SiteRecord, patch: SitePatch): void {

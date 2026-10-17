@@ -1,0 +1,161 @@
+{
+  "theme": "crimson-rose-atelier",
+  "note": "G153 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). Groups say which families a part may take.",
+  "families": {
+    "rose": {
+      "anchor": "#5F0306",
+      "sigma": 22,
+      "cmin": 0.04,
+      "cfull": 0.07
+    },
+    "envelope": {
+      "anchor": "#581015",
+      "sigma": 28
+    },
+    "wine": {
+      "anchor": "#4B0C17",
+      "sigma": 26
+    },
+    "leaf": {
+      "anchor": "#3B2E10",
+      "sigma": 18
+    },
+    "gold": {
+      "anchor": "#C9A66D",
+      "sigma": 12
+    }
+  },
+  "groups": {
+    "rose": [
+      "rose",
+      "leaf",
+      "gold"
+    ],
+    "envelope": [
+      "envelope",
+      "gold"
+    ]
+  },
+  "parts": {
+    "couple-photo": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "story_2": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "story_3": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "venue": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "envelope-closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "envelope-open": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "gold wax seal"
+    },
+    "seal": {
+      "recolor": "keep",
+      "why": "gold wax seal"
+    },
+    "paper-background": {
+      "recolor": "keep",
+      "why": "ivory paper"
+    },
+    "ph_land": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "rose-branch": {
+      "recolor": "auto",
+      "group": "rose"
+    }
+  },
+  "print": {
+    "branch": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "seal": {
+      "recolor": "keep",
+      "why": "gold wax seal"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "ivory paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#411C23",
+    "accent": "#4B0C17",
+    "paper": "#F8EFDF"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "wine",
+      "gold"
+    ],
+    "roles": {
+      "wine": "deep"
+    },
+    "keep": [
+      "--gold",
+      "--cream",
+      "--line"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--muted",
+        "--cream",
+        5.0
+      ],
+      [
+        "--wine",
+        "--cream",
+        4.5
+      ],
+      [
+        "--cream",
+        "--wine",
+        4.5
+      ],
+      [
+        "--cream",
+        "--deep",
+        4.5
+      ]
+    ]
+  }
+}

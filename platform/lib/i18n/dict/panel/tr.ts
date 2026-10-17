@@ -1327,6 +1327,12 @@ const dict: Dict = {
   'Under the curtain, on computers': 'Perdenin altında, bilgisayarlarda',
   'Under the curtain, on phones': 'Perdenin altında, telefonlarda',
   'curtain': 'perde',
+  "Color palette": "Renk paleti",
+  "Original": "Orijinal",
+  "Color palette changed. Your texts and photos stay as they are.": "Renk paleti değişti. Metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
+  "The color palette could not be changed. Please try again.": "Renk paleti değiştirilemedi. Lütfen tekrar deneyin.",
+  "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "Aynı tasarım, başka renklerde. Seçiminiz web sitenizde hemen görünür; metinleriniz ve fotoğraflarınız değişmez.",
+  "You can change the colors later in your editor.": "Renkleri daha sonra düzenleyicinizde değiştirebilirsiniz.",
 };
 
 export default dict;

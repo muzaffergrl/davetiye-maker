@@ -1327,6 +1327,12 @@ const dict: Dict = {
   'Under the curtain, on computers': 'Bajo el telón, en ordenadores',
   'Under the curtain, on phones': 'Bajo el telón, en teléfonos',
   'curtain': 'el telón',
+  "Color palette": "Paleta de colores",
+  "Original": "Original",
+  "Color palette changed. Your texts and photos stay as they are.": "Paleta de colores cambiada. Tus textos y fotos se quedan como están.",
+  "The color palette could not be changed. Please try again.": "No se pudo cambiar la paleta de colores. Inténtalo de nuevo.",
+  "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "El mismo diseño en otros colores. El cambio se ve en tu web al instante; tus textos y fotos no cambian.",
+  "You can change the colors later in your editor.": "Puedes cambiar los colores más tarde en tu editor.",
 };
 
 export default dict;

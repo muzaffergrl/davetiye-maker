@@ -1,0 +1,254 @@
+{
+  "theme": "blush-garden-rose",
+  "note": "G153 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). Groups say which families a part may take.",
+  "families": {
+    "rose": {
+      "anchor": "#E99493",
+      "sigma": 16,
+      "cmin": 0.06,
+      "cfull": 0.085
+    },
+    "petal": {
+      "anchor": "#E99493",
+      "sigma": 30
+    },
+    "envelope": {
+      "anchor": "#DDB9AE",
+      "sigma": 18
+    },
+    "blush_paper": {
+      "anchor": "#F2D8D7",
+      "sigma": 22
+    },
+    "leaf": {
+      "anchor": "#6A6848",
+      "sigma": 18,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "gold": {
+      "anchor": "#D9B177",
+      "sigma": 9
+    },
+    "cream": {
+      "anchor": "#F3D2B0",
+      "sigma": 10
+    }
+  },
+  "groups": {
+    "floral": [
+      "rose",
+      "leaf",
+      "gold",
+      "cream"
+    ],
+    "envelope": [
+      "envelope",
+      "rose",
+      "leaf",
+      "gold",
+      "cream"
+    ],
+    "scene": [
+      "rose",
+      "blush_paper",
+      "leaf",
+      "gold",
+      "cream"
+    ],
+    "petal": [
+      "petal",
+      "cream",
+      "gold"
+    ]
+  },
+  "parts": {
+    "arch_frame": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "bg_scene": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "ivory arch card"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "envelope_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "mist": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "mist_tile": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "petal1": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "petal2": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "petal3": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "petal4": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "petal5": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "petal6": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ribbon_bow": {
+      "recolor": "auto",
+      "group": "envelope"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "scene"
+    }
+  },
+  "print_colors": {
+    "ink": "#3F2A2E",
+    "accent": "#A27C47",
+    "paper": "#FFF6F2"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "rose",
+      "envelope",
+      "blush_paper",
+      "gold"
+    ],
+    "roles": {
+      "rose": "deep"
+    },
+    "keep": [
+      "--gold",
+      "--gold-light",
+      "--gold-ink",
+      "--ivory"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--mist-top",
+        4.5
+      ],
+      [
+        "--deep",
+        "--page",
+        3
+      ],
+      [
+        "--gold-ink",
+        "--ivory",
+        3
+      ]
+    ]
+  }
+}

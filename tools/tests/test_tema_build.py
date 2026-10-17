@@ -455,12 +455,12 @@ def test_03_yeniden():
         r = subprocess.run([sys.executable, "-B", str(tema / "build_images.py"), "--out", str(out)], cwd=ROOT,
                            capture_output=True, text=True)
         assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
-        ref = sorted(p.name for p in (tema / "img").iterdir())
+        ref = sorted(p.name for p in (tema / "img").iterdir() if p.name != "variants")  # G153: palet görselleri build_images.py'nin değil
         yeni = sorted(p.name for p in out.iterdir())
         assert ref == yeni, (set(ref) ^ set(yeni))
         _, farkli, hata = filecmp.cmpfiles(tema / "img", out, ref, shallow=False)
         assert not farkli and not hata, (farkli, hata)
-    boyut = tb.klasor_boyutu(tema)
+    boyut = tb.klasor_boyutu(tema)  # G153: img/variants/ (renk paletleri) sayılmaz
     assert boyut <= tb.TEMA_BUTCE, boyut
     og = Image.open(tema / "img/og-1200x630.jpg")
     fav = Image.open(tema / "img/favicon.png")

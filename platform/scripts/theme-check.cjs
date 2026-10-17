@@ -68,6 +68,9 @@
 //   pageChecks, and no hero piece partly under the nav on the first view — each ends above the nav or starts below the
 //   first screen (top ≥ innerHeight; the hero may scroll; qa-kontrol 2026-10-14, G401 third round). --stress: names
 //   minimum + pageChecks with the §12 stress record (it may scroll).
+// G153 colour palettes (theme.json "variants", scripts/lib/variant-check.ts; alone: scripts/variant-check.cjs): every
+//   palette's demo pages at 390×844 — html[data-variant], no failed request, text contrast on the real painted ground
+//   (≥ 4.5:1 body, ≥ 3:1 large / script; a failure the original has too is a warning); <out>/variants/<palette>_<page>_390.png.
 // Recording: the blank lead-in before the first paint is cut; a white first frame is an error.
 // Output: <out>/<page>_390.png (+ index/home at every width, details_1280), *_placeholder.png,
 //   details_390_changed_content.png, compare_<page>_390.jpg, opening_390x844.mp4, checks.json.
@@ -1510,6 +1513,12 @@ s.thumbnail((900, 4000)); s.save(sys.argv[3], quality=84, optimize=True)
       compared.push(name);
     }
     results.info.compare = { source: COMPARE, pages: compared };
+
+    // ---------------------------------------------------------------- G153: colour palettes (theme.json "variants")
+    if (env.manifest.variants && env.manifest.variants.length) {
+      const { checkVariants } = await import('./lib/variant-check.ts');
+      results.info.variants = await checkVariants({ browser, base: BASE, themeId: THEME, variants: env.manifest.variants, pages: PAGES.filter((p) => env.manifest.pages[p]), out: OUT, err, warn, ok });
+    }
   } catch (e) {
     err('run: ' + (e && e.stack || e));
   } finally {
