@@ -57,10 +57,17 @@ python3 tools/etsy_upload.py && python3 tools/etsy_upload.py --check
 | 18 | `wildflower-meadow-vellum` | vellum sleeve | açık | 13.5 sn |
 | 19 | `midnight-garden` | envelope | **koyu** | 14.2 sn |
 | 20 | `coastal-seaside` | envelope | açık | 14.0 sn |
+| 21 | `crimson-rose-atelier` | envelope | açık | 12.1 sn (G137; **4/8 görsel**, satış durumu `coming`) |
 
-Hepsi 8/8 görsel (2000 × 2000 PNG) + `video.mp4` (1080 × 1080, H.264, sessiz; ilk ve son kare 2026-10-16'da karşılaştırıldı,
+01–20: hepsi 8/8 görsel (2000 × 2000 PNG) + `video.mp4` (1080 × 1080, H.264, sessiz; ilk ve son kare 2026-10-16'da karşılaştırıldı,
 ortalama fark < 4/255). Denetim (G124): 20 temas sayfası ve video kareleri gözle; `tools/tests/test_listing_editorial.py`,
 `python3 tools/etsy_upload.py --check --strict` 20/20 OK.
+
+**21 (G137, 2026-10-17):** 3, 5, 6, 7 ve video var; 1, 2, 4, 8 tasarımın GPT sahnelerini bekliyor (`assets/gpt/mockups/`
+yalnız tasarım panosu; PAKET 3 prompt'ları `GPT_PROMPTS.md`'de, görev G821). Sahneler gelince:
+`python3 tools/listing_editorial.py --theme 21 --capture --video`, sonra listing_v3 §0/§5/§11 ve `python3 tools/etsy_upload.py --designs 21`.
+21'de `parts/` yok: kâğıt dokusu `assets/gpt/textures/paper-background.png`; `data-slot` sarmalayıcısı olmadığından çekim
+mekân ekranını `img[data-photo="venue"]` ile bulur, örnek fotoğraflar temanın demo kaydından gelir (03'ün yedeği değil).
 
 ## Önceki tarzlarda neyi bırakıyoruz
 

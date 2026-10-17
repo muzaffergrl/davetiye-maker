@@ -217,7 +217,12 @@ def test_scenes():
     screen is cut to a green screen's shape from its top (taller) or evenly from both sides (wider)."""
     sys.path.insert(0, str(TOOLS / "listing_v2"))
     import kompozit as kz
+    pending = {"crimson-rose-atelier": "G821"}  # G137: design 21's GPT scenes are not made yet
     for t in lk.THEMES.values():
+        if t.id in pending:
+            assert not (t.collection / "assets" / "gpt" / "mockups" / "cover_hand.png").exists(), \
+                f"{t.id}: scenes are there now ({pending[t.id]}): remove it from `pending`"
+            continue
         for name, (file, shots) in lk.SCENES.items():
             assert name in lk.IMAGES and set(shots) <= set(lk.SHOTS), name
             scene = t.collection / "assets" / "gpt" / "mockups" / file
