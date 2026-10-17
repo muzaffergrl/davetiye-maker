@@ -6,7 +6,7 @@ durum: inceleme
 alan: claude-G142
 oncelik: 1
 bagimli: [G133, G134]
-yazar: [platform/themes/crimson-rose-atelier/, platform/themes/nocturne-lake-estate/, collections/21_Crimson_Rose_Atelier/, collections/22_Nocturne_Lake_Estate/, platform/tests/theme-crimson-rose-atelier.test.ts, platform/tests/theme-nocturne-lake-estate.test.ts, platform/tests/g142-crimson-nocturne.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/scripts/seed.ts, gorevler/G142-crimson-nocturne.md]
+yazar: [platform/themes/crimson-rose-atelier/, platform/themes/nocturne-lake-estate/, collections/21_Crimson_Rose_Atelier/, collections/22_Nocturne_Lake_Estate/, platform/tests/theme-crimson-rose-atelier.test.ts, platform/tests/theme-nocturne-lake-estate.test.ts, platform/tests/g142-crimson-nocturne.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/scripts/seed.ts, gorevler/G142-crimson-nocturne.md]
 ---
 
 ## Amaç
@@ -19,7 +19,7 @@ Dal `claude/g142-crimson-nocturne` (taban `main` d5bbc39); main'e push/PR/Vercel
 ## Sonuç (2026-10-17, claude-G142)
 
 ### 21 Crimson Rose Atelier
-- **theme-check `--stress`: 111 geçti, 0 hata**, 34 uyarı (33'ü "Manrope yüklenmedi" — test makinesinin ağı; 1'i katalog kaydı
+- **theme-check `--stress`: 112 geçti, 0 hata**, 25 uyarı (24'ü "Manrope yüklenmedi" — test makinesinin ağı; 1'i katalog kaydı
   yok → W1 comp yok). G134'te 36 / 109 / 35 idi. `final-smoke` 45/45, `g051-browser` 44/44 (FAQ "+/×" ve satır sonu
   düzeltmesinden sonra; ilk koşu 42/44).
 - G134 kümeleri: (a) copy manifest yeniden üretildi (70 anahtar; `details_title` yerine details `<title>` `day_title`
@@ -74,9 +74,16 @@ Dal `claude/g142-crimson-nocturne` (taban `main` d5bbc39); main'e push/PR/Vercel
   state" anlamı). Crimson ve Nocturne demo kayıtları tema içi örnek fotoğraflara bağlı olduğu için theme-check'in
   fotoğrafsız sitesi aksi hâlde yer tutucu göremiyordu. Diğer temaların demo medyası zaten `null` (etki yok).
 
+### Main ile birleşme (rebase `e849c4e`)
+G138 (Details içerik bölümleri: `data-blocks`, `data-travel`, `data-menu`) main'de Crimson'un eski details.html'ine
+eklenmişti; çakışmada bu üç blok yeni Crimson details'ine ve Nocturne details'ine aynı sözleşmeyle taşındı, copy
+anahtarları (travel_*, menu_*, blocks_more) G138'in `max` değerleriyle manifeste geçti (Crimson 83, Nocturne 86 anahtar).
+`tests/g138-extras.test.ts` tema sayısı 21 → 22. theme-check rebase'ten önce koşuldu (demo kaydında bu bloklar boş; yapı
+`g138-extras` testinde iki tema için de geçiyor).
+
 ### Testler (Linux, Node 22)
-`npm run typecheck` ✓; `npm run build` ✓ (trace-check 23 tema); `npm test` **1284/1284**, 0 hata, 0 atlandı;
-theme-check `--stress` Crimson 111/0/34, Nocturne 112/0/12; final-smoke 45/45 + 45/45; g051-browser 44/44 + 44/44.
+`npm run typecheck` ✓; `npm run build` ✓ (trace-check 23 tema); `npm test` **1298/1298** (main `e849c4e` üstüne rebase sonrası), 0 hata, 0 atlandı;
+theme-check `--stress` Crimson 112/0/25, Nocturne 112/0/12; final-smoke 45/45 + 45/45; g051-browser 44/44 + 44/44.
 390 px görüntülere (zarf açılış kareleri, home/story/details/rsvp, 375×553 / 360×640) gözle bakıldı.
 
 **Denenmedi:** gerçek iPhone/Safari ve Android Chrome, Vercel yayını (görev dışı), gerçek alıcı fotoğrafları, yavaş ağ,
