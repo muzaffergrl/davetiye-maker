@@ -12,6 +12,7 @@ import { Group, Switch, TextField, UrlField, usePanelContext } from './fields.ts
 import { Button } from './ui.tsx';
 import styles from './panel.module.css';
 import own from './map-fields.module.css';
+import { t } from '../../lib/i18n/client.ts';
 
 type Change = (c: ContentRecord) => void;
 
@@ -60,19 +61,19 @@ function useShortLink(key: MapPlaceKey, link: string | null | undefined) {
 }
 
 function FoundBy({ place, short }: { place: MapPlace | undefined; short: ReturnType<typeof useShortLink> }) {
-  if (!place) return <p className={styles.hint}>Add a street address or a map link so guests can find the place.</p>;
-  if (short?.status === 'busy') return <p className={styles.hint}>Reading your map link…</p>;
+  if (!place) return <p className={styles.hint}>{t('Add a street address or a map link so guests can find the place.')}</p>;
+  if (short?.status === 'busy') return <p className={styles.hint}>{t('Reading your map link…')}</p>;
   if (place.coords) {
     return (
       <p className={styles.hint} data-map-found="pin">
-        Guests&rsquo; maps go to the map pin ({place.coords.lat.toFixed(5)}, {place.coords.lng.toFixed(5)}).
+        {t('Guests’ maps go to the map pin ({lat}, {lng}).', { lat: place.coords.lat.toFixed(5), lng: place.coords.lng.toFixed(5) })}
       </p>
     );
   }
   return (
     <p className={styles.hint} data-map-found="address">
-      {short?.status === 'failed' ? 'We could not read the pin of this link. ' : ''}
-      Guests&rsquo; maps search for: <strong>{place.destination}</strong>
+      {short?.status === 'failed' ? `${t('We could not read the pin of this link.')} ` : ''}
+      {t('Guests’ maps search for:')} <strong>{place.destination}</strong>
     </p>
   );
 }
@@ -84,7 +85,7 @@ function Preview({ place }: { place: MapPlace }) {
   return (
     <div className={own.preview} data-map-preview={place.key}>
       {open === src ? (
-        <iframe className={own.frame} src={src} title={`Map preview of ${place.name || 'the place'}`} referrerPolicy="no-referrer" loading="lazy" />
+        <iframe className={own.frame} src={src} title={place.name ? t('Map preview of {place}', { place: place.name }) : t('Map preview of the place')} referrerPolicy="no-referrer" loading="lazy" />
       ) : (
         <div className={own.card}>
           <MapPin size={22} strokeWidth={1.5} aria-hidden="true" />
@@ -92,14 +93,14 @@ function Preview({ place }: { place: MapPlace }) {
           {place.address ? <span className={own.address}>{place.address}</span> : null}
           {place.showMap ? (
             <Button small variant="secondary" onClick={() => setOpen(src)} data-map-preview-open>
-              Preview map
+              {t('Preview map')}
             </Button>
           ) : null}
         </div>
       )}
       {place.showDirections ? (
         <p className={own.links}>
-          Test directions:{' '}
+          {t('Test directions:')}{' '}
           {directionLinks(place).map((l, i) => (
             <span key={l.id}>
               {i ? ' · ' : ''}
@@ -123,15 +124,15 @@ function PlaceSwitches({ keyName, place, setting }: { keyName: MapPlaceKey; plac
     <>
       <Switch
         id={`map-${keyName}-show`}
-        label="Show map"
-        hint="Guests tap “Show map” to load Google Maps. Nothing loads before."
+        label={t('Show map')}
+        hint={t('Guests tap “Show map” to load Google Maps. Nothing loads before.')}
         checked={showMap}
         onChange={(on) => set('show_map', on)}
       />
       <Switch
         id={`map-${keyName}-directions`}
-        label="Show directions"
-        hint="Get directions with Google Maps, Apple Maps or Waze."
+        label={t('Show directions')}
+        hint={t('Get directions with Google Maps, Apple Maps or Waze.')}
         checked={showDir}
         onChange={(on) => set('show_directions', on)}
       />
@@ -155,14 +156,14 @@ export function MapFields() {
       change(s);
     }) as Change);
   return (
-    <Group title="Map & directions" data-map-fields>
+    <Group title={t('Map & directions')} data-map-fields>
       <FoundBy place={venue} short={venueShort} />
       <PlaceSwitches keyName="venue" place={venue} setting={content.maps?.venue} />
       {venue && (venue.showMap || venue.showDirections) ? <Preview place={venue} /> : null}
       {two ? (
         <TextField
           path="maps.venue.label"
-          label="Heading for this place"
+          label={t('Heading for this place')}
           optional
           placeholder={DEFAULT_LABELS.venue}
           maxLength={40}
@@ -173,31 +174,31 @@ export function MapFields() {
 
       {r ? (
         <div className={own.second} data-map-reception>
-          <p className={own.subhead}>Reception at another place</p>
+          <p className={own.subhead}>{t('Reception at another place')}</p>
           <TextField
             path="maps.reception.label"
-            label="Heading"
+            label={t('Heading')}
             optional
             placeholder={DEFAULT_LABELS.reception}
             maxLength={40}
             value={r.label}
             onChange={(x) => upd((s) => void (s.label = x.trim() ? x : null))}
           />
-          <TextField path="maps.reception.name" label="Place name" maxLength={80} value={r.name} onChange={(x) => upd((s) => void (s.name = x))} />
+          <TextField path="maps.reception.name" label={t('Place name')} maxLength={80} value={r.name} onChange={(x) => upd((s) => void (s.name = x))} />
           <TextField
             path="maps.reception.address"
-            label="Street address"
+            label={t('Street address')}
             optional
             maxLength={200}
             value={r.address}
             onChange={(x) => upd((s) => void (s.address = x.trim() ? x : null))}
           />
-          <TextField path="maps.reception.city" label="City" optional maxLength={80} value={r.city} onChange={(x) => upd((s) => void (s.city = x.trim() ? x : null))} />
+          <TextField path="maps.reception.city" label={t('City')} optional maxLength={80} value={r.city} onChange={(x) => upd((s) => void (s.city = x.trim() ? x : null))} />
           <UrlField
             path="maps.reception.link"
-            label="Map link"
+            label={t('Map link')}
             optional
-            hint="Paste a Google Maps or Apple Maps link to the place."
+            hint={t('Paste a Google Maps or Apple Maps link to the place.')}
             value={r.link}
             onChange={(x) =>
               upd((s) => {
@@ -211,7 +212,7 @@ export function MapFields() {
           {reception && (reception.showMap || reception.showDirections) ? <Preview place={reception} /> : null}
           <div className={styles.buttonRow}>
             <Button variant="dangerText" icon={Trash2} disabled={locked} onClick={() => edit((c) => void (c.maps = { ...(c.maps ?? {}), reception: null }))} data-map-reception-remove>
-              Remove this place
+              {t('Remove this place')}
             </Button>
           </div>
         </div>
@@ -224,7 +225,7 @@ export function MapFields() {
             onClick={() => edit((c) => void (c.maps = { ...(c.maps ?? {}), reception: { name: '', address: null, city: null, link: null } }))}
             data-map-reception-add
           >
-            Add a reception place
+            {t('Add a reception place')}
           </Button>
         </div>
       )}

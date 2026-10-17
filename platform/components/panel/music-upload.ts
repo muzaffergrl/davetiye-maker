@@ -1,6 +1,8 @@
 // Browser side of POST /api/edit/<slug>/music (G126, lib/panel/music.ts): the file goes in parts of at most 3.5 MB.
 // The part size and limits are repeated here (not imported) so the panel bundle does not pull server modules.
 
+import { t } from '../../lib/i18n/client.ts';
+
 export const MUSIC_MAX_BYTES = 10 * 1024 * 1024;
 const PART_BYTES = 3.5 * 1024 * 1024;
 export const MUSIC_ACCEPT = 'audio/mpeg,audio/mp3,audio/mp4,audio/x-m4a,audio/aac,.mp3,.m4a,.aac';
@@ -14,10 +16,10 @@ export interface MusicUploadResult {
 
 /** A first check in the browser (the server checks the bytes again). */
 export function musicFileProblem(file: File): string | null {
-  if (!file.size) return 'The file is empty.';
-  if (file.size > MUSIC_MAX_BYTES) return 'The music file is larger than 10 MB. Please choose a shorter or smaller file.';
+  if (!file.size) return t('The file is empty.');
+  if (file.size > MUSIC_MAX_BYTES) return t('The music file is larger than 10 MB. Please choose a shorter or smaller file.');
   const typeOk = !file.type || /^audio\/(mpeg|mp3|mpeg3|x-mpeg|mp4|x-m4a|m4a|aac|x-aac|aacp)$/i.test(file.type);
-  if (!typeOk || (!EXT_RE.test(file.name) && !file.type)) return 'Please choose an MP3 or M4A (AAC) music file.';
+  if (!typeOk || (!EXT_RE.test(file.name) && !file.type)) return t('Please choose an MP3 or M4A (AAC) music file.');
   return null;
 }
 
@@ -51,7 +53,7 @@ export async function uploadMusicFile(slug: string, editKey: string, file: File,
         body: chunk,
       });
     } catch {
-      return { ok: false, message: 'No connection. Please try again when you are back online.' };
+      return { ok: false, message: t('No connection. Please try again when you are back online.') };
     }
     let body: { ok?: boolean; url?: string; message?: string } = {};
     try {
@@ -59,9 +61,9 @@ export async function uploadMusicFile(slug: string, editKey: string, file: File,
     } catch {
       /* not JSON */
     }
-    if (!res.ok || body.ok === false) return { ok: false, message: body.message ?? 'The music could not be uploaded.' };
+    if (!res.ok || body.ok === false) return { ok: false, message: body.message ? t(body.message) : t('The music could not be uploaded.') };
     onProgress?.((i + 1) / parts);
-    if (i === parts - 1) return typeof body.url === 'string' ? { ok: true, url: body.url } : { ok: false, message: 'The music could not be uploaded.' };
+    if (i === parts - 1) return typeof body.url === 'string' ? { ok: true, url: body.url } : { ok: false, message: t('The music could not be uploaded.') };
   }
-  return { ok: false, message: 'The music could not be uploaded.' };
+  return { ok: false, message: t('The music could not be uploaded.') };
 }

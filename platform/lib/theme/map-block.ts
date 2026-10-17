@@ -20,16 +20,21 @@ export interface MapBlockOptions {
   buttonClass?: string;
   /** The theme's small button classes for the directions links (data-map-btn-sm), e.g. "btn btn-ghost btn-sm". */
   smallButtonClass?: string;
+  /** G144: the page's translator (English when absent). */
+  t?: (en: string, vars?: Record<string, string>) => string;
 }
+
+const english = (en: string, vars?: Record<string, string>) => en.replace(/\{(\w+)\}/g, (m, k: string) => vars?.[k] ?? m);
 
 function classes(base: string, extra: string | undefined): string {
   return [base, ...(extra ?? '').split(/\s+/).filter((c) => /^[A-Za-z0-9_-]+$/.test(c))].join(' ');
 }
 
 function placeMarkup(place: MapPlace, labelled: boolean, opts: MapBlockOptions): string {
+  const t = opts.t ?? english;
   const parts: string[] = [];
-  const title = place.name || place.address || 'the venue';
-  if (labelled) parts.push(`<p class="pmap-label">${esc(place.label)}</p>`);
+  const title = place.name || place.address || t('the venue');
+  if (labelled) parts.push(`<p class="pmap-label">${esc(t(place.label))}</p>`);
   // the venue's name and address are on the page already (directions alone need no card); a map card or a second
   // place names its own
   const card = place.showMap;
@@ -38,10 +43,10 @@ function placeMarkup(place: MapPlace, labelled: boolean, opts: MapBlockOptions):
   if (card) {
     const btn = classes('pmap-show', opts.buttonClass);
     parts.push(
-      `<div class="pmap-card" data-map-embed="${esc(mapEmbedUrl(place))}" data-map-title="${esc(`Map of ${title}`)}">` +
+      `<div class="pmap-card" data-map-embed="${esc(mapEmbedUrl(place))}" data-map-title="${esc(t('Map of {place}', { place: title }))}">` +
         `${PIN}${text}` +
-        `<a class="${esc(btn)}" href="${esc(mapSearchUrl(place))}" target="_blank" rel="noopener noreferrer" data-map-show>Show map</a>` +
-        `<p class="pmap-note">The map is loaded from Google Maps when you tap.</p>` +
+        `<a class="${esc(btn)}" href="${esc(mapSearchUrl(place))}" target="_blank" rel="noopener noreferrer" data-map-show>${esc(t('Show map'))}</a>` +
+        `<p class="pmap-note">${esc(t('The map is loaded from Google Maps when you tap.'))}</p>` +
         `</div>`,
     );
   } else if (place.key !== 'venue' && text) {
@@ -51,10 +56,10 @@ function placeMarkup(place: MapPlace, labelled: boolean, opts: MapBlockOptions):
     const links = directionLinks(place)
       .map(
         (l) =>
-          `<a class="${esc(classes('pmap-dir-link', opts.smallButtonClass))}" href="${esc(l.href)}" target="_blank" rel="noopener noreferrer" data-directions="${l.id}" aria-label="${esc(`Directions to ${title} in ${l.label}`)}">${esc(l.label)}</a>`,
+          `<a class="${esc(classes('pmap-dir-link', opts.smallButtonClass))}" href="${esc(l.href)}" target="_blank" rel="noopener noreferrer" data-directions="${l.id}" aria-label="${esc(t('Directions to {place} in {app}', { place: title, app: l.label }))}">${esc(l.label)}</a>`,
       )
       .join('');
-    parts.push(`<div class="pmap-dir"><p class="pmap-dir-title">Get directions</p><div class="pmap-dir-links">${links}</div></div>`);
+    parts.push(`<div class="pmap-dir"><p class="pmap-dir-title">${esc(t('Get directions'))}</p><div class="pmap-dir-links">${links}</div></div>`);
   }
   return `<div class="pmap-place" data-map-place="${place.key}">${parts.join('')}</div>`;
 }

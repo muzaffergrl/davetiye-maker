@@ -1,0 +1,48 @@
+/* G144: the language switcher of a couple's website in several languages (lib/theme/engine.ts writes the markup).
+   A small pill in the top-left corner (the theme's own corner buttons: Skip at the top right, the sound button at the
+   top left — the switcher goes under it). Theme font and ink through inherit/currentColor; --plang-* to override. */
+.pl-lang {
+  position: fixed; z-index: 56; top: calc(8px + env(safe-area-inset-top)); left: 8px;
+  font: inherit; font-size: 12px; line-height: 1; letter-spacing: .08em; color: var(--plang-ink, inherit);
+}
+body:has(.snd) .pl-lang { top: calc(58px + env(safe-area-inset-top)); }
+.pl-lang details { position: relative; }
+.pl-lang summary {
+  list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; min-width: 44px;
+  padding: 0 11px; border-radius: 999px; box-sizing: border-box;
+  background: var(--plang-bg, rgba(255, 252, 246, .82)); border: 1px solid var(--plang-line, rgba(0, 0, 0, .14));
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 1px 6px rgba(0, 0, 0, .08);
+  color: var(--plang-ink, #2b2622); font-weight: 600;
+}
+.pl-lang summary::-webkit-details-marker { display: none; }
+.pl-lang summary:focus-visible, .pl-lang a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.pl-lang-globe {
+  width: 14px; height: 14px; border-radius: 50%; border: 1.3px solid currentColor; position: relative; box-sizing: border-box;
+}
+.pl-lang-globe::before { content: ''; position: absolute; inset: -1px 3px; border: 1.3px solid currentColor; border-radius: 50%; }
+.pl-lang-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.pl-lang ul {
+  position: absolute; top: calc(100% + 6px); left: 0; margin: 0; padding: 6px; list-style: none; min-width: 150px;
+  background: var(--plang-bg-solid, #fffcf6); border: 1px solid var(--plang-line, rgba(0, 0, 0, .14)); border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .16);
+}
+.pl-lang a {
+  display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 8px; text-decoration: none;
+  color: var(--plang-ink, #2b2622); font-size: 15px; letter-spacing: 0;
+}
+.pl-lang a[aria-current] { font-weight: 700; background: rgba(0, 0, 0, .06); }
+.pl-lang a:hover { background: rgba(0, 0, 0, .06); }
+/* the first-visit suggestion (lang.js) */
+.pl-lang-tip {
+  position: fixed; z-index: 70; left: 50%; translate: -50% 0; top: calc(12px + env(safe-area-inset-top));
+  display: flex; align-items: center; gap: 4px; max-width: calc(100vw - 24px); box-sizing: border-box; padding: 4px 4px 4px 14px;
+  border-radius: 999px; background: #2b2622; color: #fff; font: 600 14px/1.25 system-ui, -apple-system, sans-serif;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+}
+.pl-lang-tip a { color: inherit; text-decoration: underline; text-underline-offset: 3px; padding: 8px 4px; }
+.pl-lang-tip button {
+  flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: inherit; font-size: 20px;
+  line-height: 1; cursor: pointer;
+}
+@media (prefers-reduced-motion: no-preference) { .pl-lang-tip { animation: pl-lang-in .3s ease-out; } }
+@keyframes pl-lang-in { from { opacity: 0; translate: -50% -8px; } }

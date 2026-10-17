@@ -59,6 +59,20 @@ const config: NextConfig = {
     ...Object.fromEntries(THEME_ROUTES.map((r) => [r, THEME_TEMPLATES])),
     [THEME_ASSET_ROUTE]: THEME_ASSETS,
   },
+  // G144: the sales site in Turkish, Spanish, German and French lives at /tr, /es, /de, /fr (+ /<lang>/designs …). The
+  // pages are app/(marketing)/i18n/[lang]/…: a dynamic [lang] folder at the root would clash with the couple sites at
+  // /[slug] (slugs are 3+ characters, so two-letter prefixes are free; lib/slug.ts reserves them and "i18n" anyway).
+  // beforeFiles: before the filesystem routes, so /tr never reaches app/[slug].
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/:lang(tr|es|de|fr)', destination: '/i18n/:lang' },
+        { source: '/:lang(tr|es|de|fr)/:path*', destination: '/i18n/:lang/:path*' },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async headers() {
     return [
       { source: '/edit/:path*', headers: SECRET_PAGE_HEADERS },

@@ -57,6 +57,12 @@ import { COPY_ATTRS, ownCopy, parseCopyAttr, resolveCopy, type CopyManifest } fr
 import type { ThemeShareFiles } from './share.ts';
 import { OG_IMAGE_SIZE } from './share.ts';
 import type { PageName, ThemeManifest } from './theme.ts';
+import { localizedContent, siteLangs } from '../i18n/content.ts';
+import { dateIn, dateLongIn, monthIn, timeIn, weekdayIn } from '../i18n/format.ts';
+import { LANG_NAMES, type Lang } from '../i18n/langs.ts';
+import { scriptTexts } from '../i18n/site.ts';
+import { interpolate, type Dict, type Vars } from '../i18n/translate.ts';
+import { translateTemplateSpec, visitTemplateTexts } from '../i18n/template-texts.ts';
 import { cssUrl, isRelativeReference, safeLinkUrl, safePhotoUrl, splitSuffix, themeAssetUrl } from './urls.ts';
 
 export interface RenderOptions {
@@ -88,7 +94,21 @@ export interface RenderOptions {
    * the mode and the date, and links between pages keep thanks=1. Ignored without a previewKey (guests never get it).
    */
   thankYouPreview?: boolean;
+  /**
+   * G144: the page's language (?lang=; one of the site's content.languages, else its primary language) and the site
+   * dictionary of that language (lib/i18n/site.ts siteDict). Fixed texts are looked up there by their English text;
+   * the couple's own text comes from content.translations (approved, up to date) or stays in the primary language.
+   */
+  lang?: Lang | null;
+  dict?: Dict;
 }
+
+/** Query parameter of a page's language (G144): /<slug>/details?lang=de. Absent = the site's primary language. */
+export const LANG_PARAM = 'lang';
+
+/** Platform files of the language switcher (only on a site with more than one language). */
+export const LANG_CSS = '/static/lang.css';
+export const LANG_JS = '/static/lang.js';
 
 export interface RenderResult {
   html: string;
@@ -142,8 +162,9 @@ export function pageRoute(slug: string, page: PageName): string {
 /** Query value that shows the thank-you version in a preview (G075): /<slug>?preview=<key>&thanks=1. */
 export const THANK_YOU_PREVIEW_PARAM = 'thanks';
 
-function withPreview(route: string, previewKey: string | null | undefined, extraQuery = '', thanks = false): string {
+function withPreview(route: string, previewKey: string | null | undefined, extraQuery = '', thanks = false, lang: string | null = null): string {
   const params = new URLSearchParams(extraQuery.replace(/^\?/, ''));
+  if (lang) params.set(LANG_PARAM, lang);
   if (previewKey) params.set('preview', previewKey);
   if (previewKey && thanks) params.set(THANK_YOU_PREVIEW_PARAM, '1');
   const q = params.toString();
@@ -158,6 +179,10 @@ export function safeJsonForScript(value: unknown): string {
     .replace(/&/g, '\\u0026')
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
+}
+
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function isPresent(v: unknown): boolean {
@@ -248,25 +273,39 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   const warnings = new Set<string>();
   const warn = (msg: string) => warnings.add(msg);
   const $ = cheerio.load(opts.html);
+  // G144: the page's language. The couple's words: approved translations (lib/i18n/content.ts); fixed words: the dictionary.
+  const langs = siteLangs(opts.content);
+  const lang: Lang = opts.lang && langs.all.includes(opts.lang) ? opts.lang : langs.primary;
+  /** ?lang= that page links carry (none for the primary language). */
+  const langParam = lang === langs.primary ? null : lang;
+  const dict: Dict = lang === 'en' ? {} : (opts.dict ?? {});
+  const lookup = (en: string): string | null => dict[en.replace(/\s+/g, ' ').trim()] ?? null;
+  const t = (en: string, vars?: Vars): string => interpolate(lookup(en) ?? en, vars);
+  const content = localizedContent(opts.content, lang);
   // The thank-you preview (G075) needs a preview key: a guest's ?thanks=1 changes nothing.
   const thanksPreview = Boolean(opts.thankYouPreview && opts.previewKey);
-  const view = buildView(opts.content, { now: opts.now, thankYou: thanksPreview });
+  const view = buildView(content, { now: opts.now, thankYou: thanksPreview });
   // G068: {copy.<key>} in templates reads the text the site shows (the couple's, else the design's), never the raw record
   const copyManifest: CopyManifest = theme.copy ?? {};
-  view.copy = resolveCopy(opts.content, copyManifest);
+  view.copy = Object.fromEntries(Object.entries(resolveCopy(content, copyManifest)).map(([k, v]) => [k, v === copyManifest[k].default ? t(v) : v]));
   const locale = typeof view.locale === 'string' ? view.locale : 'en-US';
+  if (lang !== 'en') {
+    view.date_long = dateLongIn(view.date, lang, locale);
+    view.date_weekday = weekdayIn(view.date, lang);
+    if (view.thank_you_title === THANK_YOU_DEFAULT_TITLE) view.thank_you_title = t(THANK_YOU_DEFAULT_TITLE);
+  }
   const blocks = (view.optional_blocks ?? {}) as Record<string, unknown>;
   // G127: places with a map / directions. After the wedding the block is not shown (no one travels there any more).
-  const placesOn = mapPlaces(opts.content);
+  const placesOn = mapPlaces(content);
   const placesShown = view.thank_you_on === true ? [] : placesOn;
   view.map_on = placesOn.length > 0;
   view.map_block = placesShown.length > 0 || (!view.map_on && isPresent(getPath(view, 'urls.map')));
   let mapUsed = false;
   let mapFrame = false;
   // G138: travel & stay, the menu and the free Details blocks (none after the wedding)
-  const travel = travelData(opts.content);
-  const menu = view.thank_you_on === true ? null : menuData(opts.content);
-  const infos = view.thank_you_on === true ? [] : infoBlocks(opts.content);
+  const travel = travelData(content);
+  const menu = view.thank_you_on === true ? null : menuData(content);
+  const infos = view.thank_you_on === true ? [] : infoBlocks(content);
   const travelOn = view.thank_you_on !== true && (travel.transport.length > 0 || travel.stays.length > 0);
   view.travel_block = travelOn || isPresent(getPath(view, 'urls.accommodation'));
   view.menu_block = menu !== null;
@@ -300,19 +339,19 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     const iso = parseIsoDate(s);
     switch (format) {
       case 'date':
-        return formatDate(s, locale) ?? s;
+        return dateIn(s, lang, locale) ?? s;
       case 'date-long':
-        return formatDateLong(s, locale) ?? s;
+        return dateLongIn(s, lang, locale) ?? s;
       case 'weekday':
-        return weekdayName(s) ?? s;
+        return weekdayIn(s, lang) ?? s;
       case 'month':
-        return monthName(s) ?? s;
+        return monthIn(s, lang) ?? s;
       case 'day':
         return iso ? String(iso.day) : s;
       case 'year':
         return iso ? String(iso.year) : s;
       case 'time':
-        return formatTime(s, locale) ?? s;
+        return timeIn(s, lang, locale) ?? s;
       default:
         return s;
     }
@@ -427,7 +466,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       return true;
     }
     const formats = (el.attribs['data-format'] ?? '').split(/\s+/).filter(Boolean);
-    setText(el, formatValue(value, abs, formats), formats);
+    // G144: the Yes / No choices of a yes-no RSVP question are the platform's words (their value stays "Yes" / "No")
+    const yesNo = /^rsvp\.questions\.\d+\.options\.\d+$/.test(abs) && getPath(view, abs.replace(/\.options\.\d+$/, '.type')) === 'yesno';
+    setText(el, yesNo && typeof value === 'string' ? t(value) : formatValue(value, abs, formats), formats);
     return true;
   };
 
@@ -448,7 +489,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       if (theme.copy) warn(`copy key "${key}" is not in theme.json copy`);
       return '';
     }
-    return ownCopy(opts.content, key, entry.max);
+    return ownCopy(content, key, entry.max);
   };
 
   /** data-copy: the couple's text replaces the element's (true); without one the template's text stays (false). */
@@ -498,7 +539,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   let calendar: CalendarEvent | null | undefined;
   const getCalendar = (): CalendarEvent | null => {
     if (calendar === undefined) {
-      calendar = calendarEvent(opts.content, { siteUrl: opts.origin ? `${opts.origin}${pageRoute(slug, 'index')}` : null });
+      calendar = calendarEvent(content, { siteUrl: opts.origin ? `${opts.origin}${withPreview(pageRoute(slug, 'index'), null, '', false, langParam)}` : null });
     }
     return calendar;
   };
@@ -517,7 +558,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     const event = getCalendar();
     if (!event) return false;
     if (kind === 'ics') {
-      el.attribs.href = withPreview(`${pageRoute(slug, 'index')}/event.ics`, opts.previewKey);
+      el.attribs.href = withPreview(`${pageRoute(slug, 'index')}/event.ics`, opts.previewKey, '', false, langParam);
     } else {
       el.attribs.href = googleCalendarUrl(event);
       if (el.attribs.target) el.attribs.rel = 'noopener noreferrer';
@@ -584,7 +625,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
         $(el).remove();
         return;
       }
-      $(el).html(mapBlockHtml(placesShown, { buttonClass: a['data-map-btn'], smallButtonClass: a['data-map-btn-sm'] }));
+      $(el).html(mapBlockHtml(placesShown, { buttonClass: a['data-map-btn'], smallButtonClass: a['data-map-btn-sm'], t }));
       delete a['data-map-btn'];
       delete a['data-map-btn-sm'];
       a['data-map'] = String(placesShown.length);
@@ -602,7 +643,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
           const key = n.attribs['data-copy'].trim();
           labels.set(key, ownText(key) || $(n).text().trim());
         });
-      const label = (key: ExtrasLabel) => labels.get(key) || EXTRAS_LABELS[key];
+      const label = (key: ExtrasLabel) => labels.get(key) || t(EXTRAS_LABELS[key]);
       const o = { buttonClass: a['data-pex-btn'], titleClass: a['data-pex-title'] };
       const html =
         'data-travel' in a
@@ -671,6 +712,26 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   }
   if (disabled) return { html: '', warnings: [...warnings], disabled: true, scriptHashes: [], frameSources: [] };
 
+  // G144: the template's fixed English words in the page's language (before the content goes in: the couple's own
+  // text replaces a data-copy element later, so it always wins)
+  if (lang !== 'en') {
+    visitTemplateTexts($, (key) => copyManifest[key]?.default, {
+      text: (el, en) => {
+        const tr = lookup(en);
+        if (!tr) return;
+        if ($(el).find('.amp').length) setAmpText(el, tr);
+        else $(el).text(tr);
+      },
+      attr: (el, name, en) => {
+        const tr = lookup(en);
+        if (tr) el.attribs[name] = tr;
+      },
+      template: (el, name, spec) => {
+        el.attribs[name] = translateTemplateSpec(spec, lookup);
+      },
+    });
+  }
+
   for (const node of [...$.root()[0].children]) {
     if (isTag(node)) walk(node, null);
   }
@@ -692,7 +753,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       const hashAt = suffix.indexOf('#');
       const query = hashAt === -1 ? suffix : suffix.slice(0, hashAt);
       const hash = hashAt === -1 ? '' : suffix.slice(hashAt);
-      return withPreview(pageRoute(slug, target), opts.previewKey, query, thanksPreview) + hash;
+      return withPreview(pageRoute(slug, target), opts.previewKey, query, thanksPreview, langParam) + hash;
     }
     if (file.endsWith('.html')) warn(`link to "${file}" is not a declared theme page`);
     return rewriteAsset(value);
@@ -746,8 +807,34 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   });
 
   const names = typeof view.name_display === 'string' ? view.name_display.trim() : '';
-  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? `${names} wedding invitation` : 'Wedding invitation');
-  if (opts.guestOnlyMeta) guestOnlyMeta($, names || 'Our wedding', view.thank_you_on === true ? THANKED : INVITED);
+  writeShareTags($, theme.id, opts.share ?? null, opts.origin ?? null, names ? t('{names} wedding invitation', { names }) : t('Wedding invitation'));
+  if (opts.guestOnlyMeta) guestOnlyMeta($, names || t('Our wedding'), t(view.thank_you_on === true ? THANKED : INVITED));
+
+  // G144: a site in several languages — hreflang alternates (needs the public origin), the switcher and its suggestion
+  if (langs.all.length > 1) {
+    const head = $('head').first();
+    const hrefOf = (l: Lang, absolute: boolean) =>
+      `${absolute ? (opts.origin ?? '') : ''}${withPreview(pageRoute(slug, page), opts.previewKey, '', thanksPreview, l === langs.primary ? null : l)}`;
+    if (opts.origin && !opts.previewKey) {
+      for (const l of langs.all) head.append($('<link rel="alternate">').attr('hreflang', l).attr('href', hrefOf(l, true)));
+      head.append($('<link rel="alternate" hreflang="x-default">').attr('href', hrefOf(langs.primary, true)));
+    }
+    head.append($('<link rel="stylesheet">').attr('href', LANG_CSS));
+    head.append($('<script defer></script>').attr('src', LANG_JS));
+    const items = langs.all
+      .map((l) => {
+        const current = l === lang ? ' aria-current="true"' : '';
+        return `<li><a href="${esc(hrefOf(l, false))}" hreflang="${l}" lang="${l}"${current} data-lang="${l}">${esc(LANG_NAMES[l])}</a></li>`;
+      })
+      .join('');
+    $('body')
+      .first()
+      .append(
+        `<nav class="pl-lang" aria-label="${esc(t('Language'))}" data-pl-lang><details><summary><span class="pl-lang-globe" aria-hidden="true"></span>` +
+          `<span class="pl-lang-code">${lang.toUpperCase()}</span><span class="pl-lang-sr">${esc(t('Language'))}: ${esc(LANG_NAMES[lang])}</span></summary>` +
+          `<ul>${items}</ul></details></nav>`,
+      );
+  }
 
   // G127: the shared map block's stylesheet and script (platform files, script-src 'self'), only on a page that has it.
   if (mapUsed) {
@@ -782,14 +869,19 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     page,
     preview: Boolean(opts.previewKey),
     pages: Object.fromEntries(
-      Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey, '', thanksPreview)]),
+      Object.keys(theme.pages).map((p) => [p, withPreview(pageRoute(slug, p as PageName), opts.previewKey, '', thanksPreview, langParam)]),
     ),
+    // G144: the page's language, the site's languages and the guest scripts' texts in this language (null = English)
+    lang,
+    langs: langs.all,
+    lang_primary: langs.primary,
+    i18n: scriptTexts(dict, lang),
     derived: {
-      date_display: formatDate(view.date, locale),
+      date_display: dateIn(view.date, lang, locale),
       date_long: view.date_long ?? null,
       date_weekday: view.date_weekday ?? null,
-      ceremony_time_display: formatTime(view.ceremony_time, locale),
-      rsvp_deadline_display: formatDate(rsvp.deadline, locale),
+      ceremony_time_display: timeIn(view.ceremony_time, lang, locale),
+      rsvp_deadline_display: dateIn(rsvp.deadline, lang, locale),
       venue_city_region: venue.city_region ?? null,
       venue_city_region_country: venue.city_region_country ?? null,
       countdown_target_utc: view.countdown_target_utc ?? null,
@@ -800,7 +892,7 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     rsvp_form: formScriptConfig(view),
   };
   // G126: music (story page) and sound effects for public/audio/audio.js; the music URL must be safe like a photo's.
-  const sound = siteSound(opts.content, theme.id, page, (u) => {
+  const sound = siteSound(content, theme.id, page, (u) => {
     const safe = safePhotoUrl(u);
     return safe ? withPhotoKey(safe) : '';
   });
@@ -826,7 +918,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   dropComments([...$.root()[0].children]);
 
   const html = $('html');
-  if (!html.attr('lang')) html.attr('lang', 'en');
+  // G144: the page's language (the template's lang="en" is the design's default)
+  html.attr('lang', lang);
   html.attr('data-theme', theme.id);
   html.attr('data-page', page);
   if (opts.variant) html.attr('data-variant', opts.variant);

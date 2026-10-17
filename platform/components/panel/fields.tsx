@@ -15,6 +15,7 @@ import type { RightsView } from '../../lib/panel/rights.ts';
 import { cx, OverflowMenu, useSnackbar } from './ui.tsx';
 import type { Change } from './usePanel.ts';
 import styles from './panel.module.css';
+import { msg, t, tn } from '../../lib/i18n/client.ts';
 
 export interface PanelContextValue {
   content: ContentRecord;
@@ -76,8 +77,8 @@ export function IssueList({ issues, id }: { issues: ValidationIssue[]; id?: stri
     <div id={id} className={styles.issues}>
       {issues.map((i, n) => (
         <p key={`${i.code}-${n}`} className={i.level === 'error' ? styles.issueError : styles.issueWarning}>
-          <span className={styles.visuallyHidden}>{i.level === 'error' ? 'Error: ' : 'Note: '}</span>
-          {i.message}
+          <span className={styles.visuallyHidden}>{i.level === 'error' ? `${t('Error:')} ` : `${t('Note:')} `}</span>
+          {t(i.message)}
         </p>
       ))}
     </div>
@@ -120,8 +121,8 @@ function FieldFrame({
       <div className={styles.labelRow}>
         <label htmlFor={id} className={styles.label}>
           {label}
-          {optional ? <span className={styles.optional}> (optional)</span> : null}
-          {sample ? <span className={styles.visuallyHidden}>, still the design’s sample text</span> : null}
+          {optional ? <span className={styles.optional}> {t('(optional)')}</span> : null}
+          {sample ? <span className={styles.visuallyHidden}>{t(', still the design’s sample text')}</span> : null}
         </label>
         {counter}
       </div>
@@ -264,7 +265,7 @@ export function TimeField(props: BaseFieldProps & { value: string | undefined; l
   const siteUses12h = locale === 'en-US' || locale === 'en-CA' || locale === 'en-AU';
   const written = deviceUses12h === siteUses12h ? null : formatTime(value, locale);
   return (
-    <FieldFrame {...props} display={props.display ?? (written ? `On your website: ${written}` : null)} issues={issues}>
+    <FieldFrame {...props} display={props.display ?? (written ? t('On your website: {time}', { time: written }) : null)} issues={issues}>
       <input
         id={fieldId(path)}
         type="time"
@@ -387,6 +388,20 @@ export function Group({ title, children, className, ...rest }: { title?: ReactNo
  * Remove). Remove happens at once with a 6 s Undo (autosave stores it within a second; Undo puts it back).
  * No drag and drop (hard on touch and with screen readers, WCAG 2.5.7).
  */
+/**
+ * The list nouns (RepeatableItem `noun`) with their "removed" message and menu label, so each language words them whole.
+ * A noun missing here falls back to the English pattern.
+ */
+const ITEM_TEXTS: Record<string, { removed: string; options: string }> = {
+  event: { removed: msg('Event removed'), options: msg('Options for event {n}') },
+  moment: { removed: msg('Moment removed'), options: msg('Options for moment {n}') },
+  question: { removed: msg('Question removed'), options: msg('Options for question {n}') },
+  'form question': { removed: msg('Form question removed'), options: msg('Options for form question {n}') },
+  block: { removed: msg('Block removed'), options: msg('Options for block {n}') },
+  'place to stay': { removed: msg('Place to stay removed'), options: msg('Options for place to stay {n}') },
+  'menu heading': { removed: msg('Menu heading removed'), options: msg('Options for menu heading {n}') },
+};
+
 export function RepeatableItem<T>({
   index,
   count,
@@ -409,8 +424,10 @@ export function RepeatableItem<T>({
   const { locked, edit } = usePanelContext();
   const snack = useSnackbar();
   const capital = noun.charAt(0).toUpperCase() + noun.slice(1);
+  const texts = ITEM_TEXTS[noun];
+  const optionsLabel = (n: number) => (texts ? t(texts.options, { n }) : `Options for ${noun} ${n}`);
   const focusMoved = (to: number) =>
-    window.setTimeout(() => document.querySelector<HTMLButtonElement>(`[aria-label="Options for ${noun} ${to + 1}"]`)?.focus(), 0);
+    window.setTimeout(() => document.querySelector<HTMLButtonElement>(`[aria-label="${optionsLabel(to + 1)}"]`)?.focus(), 0);
   const move = (to: number) => {
     edit((c) => assign(c, moveItem(select(c), index, to)));
     focusMoved(to);
@@ -422,8 +439,8 @@ export function RepeatableItem<T>({
       removed = list[index];
       assign(c, list.filter((_, i) => i !== index));
     });
-    snack(`${capital} removed`, {
-      label: 'Undo',
+    snack(texts ? t(texts.removed) : `${capital} removed`, {
+      label: t('Undo'),
       run: () =>
         edit((c) => {
           if (removed === undefined) return;
@@ -441,12 +458,12 @@ export function RepeatableItem<T>({
           {title}
         </span>
         <OverflowMenu
-          label={`Options for ${noun} ${index + 1}`}
+          label={optionsLabel(index + 1)}
           disabled={locked}
           items={[
-            { label: 'Move up', icon: ArrowUp, disabled: index === 0, onSelect: () => move(index - 1) },
-            { label: 'Move down', icon: ArrowDown, disabled: index === count - 1, onSelect: () => move(index + 1) },
-            { label: 'Remove', icon: Trash2, danger: true, onSelect: remove },
+            { label: t('Move up'), icon: ArrowUp, disabled: index === 0, onSelect: () => move(index - 1) },
+            { label: t('Move down'), icon: ArrowDown, disabled: index === count - 1, onSelect: () => move(index + 1) },
+            { label: t('Remove'), icon: Trash2, danger: true, onSelect: remove },
           ]}
         />
       </div>
@@ -488,10 +505,10 @@ export function SampleLine({ count, scope, onMissing }: { count: number; scope: 
     <p className={styles.sampleLine} data-sample-line>
       <span className={styles.sampleLineDot} aria-hidden="true" />
       <span className={styles.sampleLineText}>
-        {count} {count === 1 ? 'field still shows' : 'fields still show'} sample text
+        {tn(count, '{n} field still shows sample text', '{n} fields still show sample text')}
       </span>
       <button type="button" className={styles.sampleJump} onClick={jump} data-sample-jump>
-        {count === 1 ? 'Go to it' : 'Go to the first one'}
+        {count === 1 ? t('Go to it') : t('Go to the first one')}
       </button>
     </p>
   );

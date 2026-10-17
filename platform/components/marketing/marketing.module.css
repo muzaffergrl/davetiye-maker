@@ -3153,3 +3153,95 @@
     grid-column: auto;
   }
 }
+
+/* ---------- G144: language switcher (header) ---------- */
+/* A <details> list (LangSwitch.tsx): globe + language code as the button, the endonyms in a small card under it.
+   Phones: between "My website" and the menu button; wide screens: after the header buttons. */
+.lang {
+  position: relative;
+  flex: none;
+}
+.langButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 8px;
+  border-radius: 999px;
+  color: var(--anchor);
+  font-size: 13.5px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.langButton::-webkit-details-marker {
+  display: none;
+}
+.langButton:hover,
+.lang[open] .langButton {
+  background: rgb(43 21 38 / 0.07);
+}
+.langButton:focus-visible {
+  outline: 3px solid var(--anchor);
+  outline-offset: 2px;
+}
+.langList {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 45;
+  min-width: 176px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--paper-light);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 18px 36px -20px rgb(43 21 38 / 0.45);
+}
+.langList a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 16px;
+  text-decoration: none;
+}
+.langList a:hover {
+  background: rgb(43 21 38 / 0.06);
+}
+.langList a[aria-current] {
+  color: var(--anchor);
+  font-weight: 650;
+}
+.myBtn ~ .lang {
+  margin-left: 0;
+}
+.lang ~ .mobileMenu {
+  margin-left: 0;
+}
+@media (max-width: 379px) {
+  .langButton {
+    padding: 0 4px;
+  }
+  .langButton svg {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .lang {
+    margin-left: 4px;
+  }
+}
+
+/* G144: the page-language wrapper (MarketShell.tsx) carries only the `lang` attribute; it adds no box. */
+.langRoot {
+  display: contents;
+}

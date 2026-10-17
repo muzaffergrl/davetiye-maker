@@ -9,6 +9,8 @@
 // When a decision comes in (docs/15, G062; user decisions docs/14 §13.4) change ONLY this file. START HERE PDFs and the
 // Etsy listing text are separate files (docs/05 §C) and are updated together with it.
 
+import { msg } from '../i18n/translate.ts';
+
 export type DesignStatus = 'live' | 'coming';
 
 export interface DesignCommerce {
@@ -105,8 +107,10 @@ export const MARKETING: MarketingConfig = {
   // support email are still open, so they stay placeholders below; nothing is indexed while `launched` is false.
   brand: {
     name: 'BKE Studio',
-    shortDescription:
+    // G144: msg() marks texts the sales site translates where it shows them (lib/marketing/i18n.ts)
+    shortDescription: msg(
       'BKE Studio makes wedding websites that open like a real invitation. Buy a design on Etsy, edit it on your phone and collect RSVPs online.',
+    ),
     logo: '/brand/icon-512.png',
   },
   domain: '[DOMAIN]',
@@ -115,14 +119,15 @@ export const MARKETING: MarketingConfig = {
   siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://[DOMAIN]',
   // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time 24 hours (user,
   // 2026-10-15). The Etsy shop URL is still open.
-  support: { email: 'bkestudio@gmail.com', responseTime: '24 hours' },
+  support: { email: 'bkestudio@gmail.com', responseTime: msg('24 hours') },
   etsy: { shopUrl: '[ETSY SHOP URL]', shopName: 'BKE Studio' },
   currency: 'TRY',
   hosting: { monthsAfterWedding: 12 },
   editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2, dateFreeDays: 7 },
   policies: {
-    refund:
+    refund: msg(
       'no returns, exchanges or refunds, because you get instant access to a digital product. If something on your website does not work as described, we fix it',
+    ),
     lostLink: '[LOST LINK POLICY]',
     extension: '[EXTENSION POLICY]',
     deletion: '[DELETION PROCESS]',

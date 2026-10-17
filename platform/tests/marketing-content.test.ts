@@ -138,7 +138,8 @@ test('claims we never make (docs/14 §3, §4.4–§4.5)', () => {
     const text = readFileSync(file, 'utf8');
     for (const [re, what] of banned) {
       // facts.ts documents the rule itself, and phoneClaim() switches only on config.verified.realDevices.
-      if (file.endsWith(path.join('lib', 'marketing', 'facts.ts')) || file.endsWith(path.join('app', '(marketing)', 'about', 'page.tsx'))) continue;
+      // G144: the about page's body is components/marketing/pages/AboutPage.tsx.
+      if (file.endsWith(path.join('lib', 'marketing', 'facts.ts')) || file.endsWith(path.join('components', 'marketing', 'pages', 'AboutPage.tsx'))) continue;
       assert.ok(!re.test(text), `${path.relative(PLATFORM_ROOT, file)}: ${what}`);
     }
   }

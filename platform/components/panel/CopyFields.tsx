@@ -15,6 +15,7 @@ import { TextField, usePanelContext } from './fields.tsx';
 import type { PageId } from './pages.ts';
 import { Button, cx, Disclosure, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
+import { t, tn, uiLang } from '../../lib/i18n/client.ts';
 
 /** The panel's entries as the manifest shape the pure helpers take (default + max is all they read). */
 export function entriesManifest(entries: readonly PanelCopyEntry[]): CopyManifest {
@@ -58,8 +59,15 @@ export function CopyFields({
       return r.content;
     });
     if (!changedKeys.length) return; // already this wording
-    snack(`${p.id === 'wedding' ? 'Back to the design’s wording' : `Wording for a ${p.label.toLowerCase()}`}: ${changedKeys.length} ${changedKeys.length === 1 ? 'text' : 'texts'} changed.`, {
-      label: 'Undo',
+    const n = changedKeys.length;
+    // German keeps the noun's capital; the other languages read it in lower case (as English always did).
+    const kind = uiLang() === 'de' ? t(p.label) : t(p.label).toLowerCase();
+    const message =
+      p.id === 'wedding'
+        ? tn(n, 'Back to the design’s wording: {n} text changed.', 'Back to the design’s wording: {n} texts changed.')
+        : tn(n, 'Wording for a {kind}: {n} text changed.', 'Wording for a {kind}: {n} texts changed.', { kind });
+    snack(message, {
+      label: t('Undo'),
       run: () =>
         edit((c: ContentRecord) => {
           if (previous) c.copy = previous;
@@ -75,7 +83,7 @@ export function CopyFields({
       <div key={e.key} className={styles.copyRow} data-copy-row={e.key} onFocusCapture={() => onFocusKey?.(e)}>
         <TextField
           path={`copy.${e.key}`}
-          label={e.label}
+          label={t(e.label)}
           placeholder={e.default}
           maxLength={e.max}
           multiline={e.multiline}
@@ -87,18 +95,18 @@ export function CopyFields({
         {own ? (
           <p className={styles.copyDefault}>
             <span className={styles.copyDefaultText}>
-              Design text: <q>{e.default}</q>
+              {t('Design text:')} <q>{e.default}</q>
             </span>
             <Button
               small
               variant="tertiary"
               icon={RotateCcw}
               disabled={locked}
-              aria-label={`Reset to design text: ${e.default}`}
+              aria-label={t('Reset to design text: {text}', { text: e.default })}
               onClick={() => edit((c) => withCopy(c, e.key, null))}
               data-copy-reset={e.key}
             >
-              Reset to design text
+              {t('Reset to design text')}
             </Button>
           </p>
         ) : null}
@@ -109,19 +117,19 @@ export function CopyFields({
   return (
     <Disclosure
       id={`copy-${page}`}
-      title="Headings & labels on this page"
-      status={changed ? `${changed} changed` : undefined}
+      title={t('Headings & labels on this page')}
+      status={changed ? t('{count} changed', { count: changed }) : undefined}
       icon={Type}
       openRequest={open}
     >
       <div className={styles.stack} data-copy-fields={page}>
         <p className={styles.hint}>
-          Change any heading, label or button of your website in your own words. Leave a box empty to keep the design’s text (in grey).
+          {t('Change any heading, label or button of your website in your own words. Leave a box empty to keep the design’s text (in grey).')}
         </p>
         {presetOn ? (
           <div className={styles.field} data-copy-presets>
             <p className={styles.label} id={`copy-preset-${page}`}>
-              Suggested wording <span className={styles.optional}>(optional)</span>
+              {t('Suggested wording')} <span className={styles.optional}>{t('(optional)')}</span>
             </p>
             <div className={styles.chips} role="group" aria-labelledby={`copy-preset-${page}`}>
               {COPY_PRESETS.map((p) => (
@@ -134,18 +142,18 @@ export function CopyFields({
                   onClick={() => choosePreset(p.id)}
                   data-copy-preset={p.id}
                 >
-                  {p.label}
+                  {t(p.label)}
                 </button>
               ))}
             </div>
-            <p className={styles.hint}>Fills a few lines below for you; you can still change each one.</p>
+            <p className={styles.hint}>{t('Fills a few lines below for you; you can still change each one.')}</p>
           </div>
         ) : null}
         {before.map(row)}
         {after.length ? (
           <>
-            <h3 className={styles.copyGroupTitle}>After the wedding</h3>
-            <p className={styles.hint}>Shown once your website switches to its thank-you page.</p>
+            <h3 className={styles.copyGroupTitle}>{t('After the wedding')}</h3>
+            <p className={styles.hint}>{t('Shown once your website switches to its thank-you page.')}</p>
             {after.map(row)}
           </>
         ) : null}

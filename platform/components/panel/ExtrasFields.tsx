@@ -11,6 +11,7 @@ import { Group, IssueList, RepeatableItem, SelectField, TextField, UrlField, use
 import { BlockSwitch } from './sections.tsx';
 import { Button, EmptyState, Segmented, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
+import { msg, t } from '../../lib/i18n/client.ts';
 
 const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
 const L = CONTENT_LIMITS;
@@ -19,27 +20,28 @@ const L = CONTENT_LIMITS;
 // Good to know (details_blocks)
 
 const ICON_OPTIONS: Array<{ value: DetailsBlockIcon | ''; label: string }> = [
-  { value: '', label: 'No icon' },
-  { value: 'info', label: 'Info' },
-  { value: 'dress', label: 'Dress' },
-  { value: 'kids', label: 'Children' },
-  { value: 'gift', label: 'Gift' },
-  { value: 'car', label: 'Car' },
-  { value: 'weather', label: 'Weather' },
-  { value: 'camera', label: 'Camera' },
-  { value: 'music', label: 'Music' },
-  { value: 'glass', label: 'Glass' },
-  { value: 'heart', label: 'Heart' },
+  { value: '', label: msg('No icon') },
+  { value: 'info', label: msg('Info') },
+  { value: 'dress', label: msg('Dress') },
+  { value: 'kids', label: msg('Children') },
+  { value: 'gift', label: msg('Gift') },
+  { value: 'car', label: msg('Car') },
+  { value: 'weather', label: msg('Weather') },
+  { value: 'camera', label: msg('Camera') },
+  { value: 'music', label: msg('Music') },
+  { value: 'glass', label: msg('Glass') },
+  { value: 'heart', label: msg('Heart') },
 ];
 
-/** One-tap starters: a title and an icon (the couple writes the text). */
+/** One-tap starters: a title and an icon (the couple writes the text). The chip is shown in the panel's language; the
+ *  title it adds is website content and stays English, as before. */
 const BLOCK_IDEAS: Array<{ title: string; icon: DetailsBlockIcon }> = [
-  { title: 'Dress code', icon: 'dress' },
-  { title: 'Children', icon: 'kids' },
-  { title: 'Gifts', icon: 'gift' },
-  { title: 'Parking', icon: 'car' },
-  { title: 'Weather', icon: 'weather' },
-  { title: 'Photos', icon: 'camera' },
+  { title: msg('Dress code'), icon: 'dress' },
+  { title: msg('Children'), icon: 'kids' },
+  { title: msg('Gifts'), icon: 'gift' },
+  { title: msg('Parking'), icon: 'car' },
+  { title: msg('Weather'), icon: 'weather' },
+  { title: msg('Photos'), icon: 'camera' },
 ];
 
 export function DetailsBlocksFields() {
@@ -51,20 +53,20 @@ export function DetailsBlocksFields() {
   return (
     <>
       <p className={styles.hint}>
-        Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {L.detailsBlocks}.
+        {t('Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {max}.', { max: L.detailsBlocks })}
       </p>
       {room ? (
-        <div className={styles.chips} role="group" aria-label="Add a block about">
+        <div className={styles.chips} role="group" aria-label={t('Add a block about')}>
           {BLOCK_IDEAS.map((idea) => (
             <button key={idea.title} type="button" className={styles.chip} disabled={locked} onClick={() => add({ title: idea.title, icon: idea.icon })} data-add-block-idea={idea.icon}>
-              + {idea.title}
+              + {t(idea.title)}
             </button>
           ))}
         </div>
       ) : null}
       {!items.length ? (
-        <EmptyState icon={Plus} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={() => add()} data-add-block>Add a block</Button>}>
-          Nothing here yet: guests see no extra blocks.
+        <EmptyState icon={Plus} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={() => add()} data-add-block>{t('Add a block')}</Button>}>
+          {t('Nothing here yet: guests see no extra blocks.')}
         </EmptyState>
       ) : null}
       {items.map((b, i) => (
@@ -73,39 +75,39 @@ export function DetailsBlocksFields() {
           index={i}
           count={items.length}
           noun="block"
-          title={`Block ${i + 1}`}
+          title={t('Block {n}', { n: i + 1 })}
           select={(c) => c.details_blocks ?? []}
           assign={(c, list) => void (c.details_blocks = list)}
           data-block-row={i}
         >
-          <TextField path={`details_blocks.${i}.title`} label="Title" maxLength={L.blockTitle} placeholder="Children" value={b.title} onChange={(v) => set(i, { title: v })} />
+          <TextField path={`details_blocks.${i}.title`} label={t('Title')} maxLength={L.blockTitle} placeholder={t('Children')} value={b.title} onChange={(v) => set(i, { title: v })} />
           <TextField
             path={`details_blocks.${i}.text`}
-            label="Text"
+            label={t('Text')}
             optional
             multiline
             rows={3}
             maxLength={L.blockText}
-            placeholder="We love your little ones, but our celebration is adults only."
+            placeholder={t('We love your little ones, but our celebration is adults only.')}
             value={b.text}
             onChange={(v) => set(i, { text: nullIfEmpty(v) })}
           />
           <SelectField
             path={`details_blocks.${i}.icon`}
-            label="Icon"
+            label={t('Icon')}
             optional
             value={b.icon ?? ''}
-            options={ICON_OPTIONS}
+            options={ICON_OPTIONS.map((o) => ({ value: o.value, label: t(o.label) }))}
             onChange={(v) => set(i, { icon: (v || null) as DetailsBlockIcon | null })}
           />
-          <UrlField path={`details_blocks.${i}.link`} label="Link" optional value={b.link} onChange={(v) => set(i, { link: v })} />
+          <UrlField path={`details_blocks.${i}.link`} label={t('Link')} optional value={b.link} onChange={(v) => set(i, { link: v })} />
           {b.link ? (
             <TextField
               path={`details_blocks.${i}.link_label`}
-              label="Link text"
+              label={t('Link text')}
               optional
               maxLength={L.blockLinkLabel}
-              placeholder="Learn more"
+              placeholder={t('Learn more')}
               value={b.link_label}
               onChange={(v) => set(i, { link_label: nullIfEmpty(v) })}
             />
@@ -115,10 +117,10 @@ export function DetailsBlocksFields() {
       <IssueList issues={issuesAt('details_blocks')} />
       {items.length && room ? (
         <Button variant="secondary" icon={Plus} disabled={locked} data-add-block onClick={() => add()}>
-          Add a block
+          {t('Add a block')}
         </Button>
       ) : items.length ? (
-        <p className={styles.hint}>This section holds {L.detailsBlocks} blocks at most.</p>
+        <p className={styles.hint}>{t('This section holds {max} blocks at most.', { max: L.detailsBlocks })}</p>
       ) : null}
     </>
   );
@@ -129,10 +131,10 @@ export function DetailsBlocksFields() {
 
 type TransportKey = 'airport' | 'parking' | 'shuttle' | 'taxi';
 const TRANSPORT: Array<{ key: TransportKey; label: string; placeholder: string }> = [
-  { key: 'airport', label: 'Airport & station', placeholder: 'Fly into Florence (FLR), 40 minutes by car.' },
-  { key: 'parking', label: 'Parking', placeholder: 'Free parking next to the venue.' },
-  { key: 'shuttle', label: 'Shuttle', placeholder: 'A shuttle leaves the hotel at 3:15 PM.' },
-  { key: 'taxi', label: 'Taxi & rideshare', placeholder: 'Please book a ride home in advance.' },
+  { key: 'airport', label: msg('Airport & station'), placeholder: msg('Fly into Florence (FLR), 40 minutes by car.') },
+  { key: 'parking', label: msg('Parking'), placeholder: msg('Free parking next to the venue.') },
+  { key: 'shuttle', label: msg('Shuttle'), placeholder: msg('A shuttle leaves the hotel at 3:15 PM.') },
+  { key: 'taxi', label: msg('Taxi & rideshare'), placeholder: msg('Please book a ride home in advance.') },
 ];
 
 function setTransport(c: ContentRecord, key: TransportKey, patch: Partial<TravelNote>) {
@@ -147,63 +149,65 @@ export function TravelFields({ showSwitch }: { showSwitch: boolean }) {
   const setStay = (i: number, patch: Partial<TravelStay>) => edit((c) => void (c.travel!.stays![i] = { ...c.travel!.stays![i], ...patch }));
   return (
     <>
-      {showSwitch ? <BlockSwitch block="travel_stay" label="Show travel & stay" hint="Guests see it on the Details page. Empty parts are not shown." /> : null}
+      {showSwitch ? <BlockSwitch block="travel_stay" label={t('Show travel & stay')} hint={t('Guests see it on the Details page. Empty parts are not shown.')} /> : null}
       <UrlField
         path="urls.accommodation"
-        label="Travel & stay link"
+        label={t('Travel & stay link')}
         optional
-        hint="A hotel block or accommodation page for guests."
+        hint={t('A hotel block or accommodation page for guests.')}
         value={content.urls?.accommodation}
         onChange={(v) => edit((c) => void (c.urls = { ...(c.urls ?? {}), accommodation: v }))}
       />
-      <Group title="Getting here">
-        {TRANSPORT.map((t) => {
-          const note = content.travel?.[t.key];
+      <Group title={t('Getting here')}>
+        {TRANSPORT.map((tr) => {
+          const note = content.travel?.[tr.key];
           return (
-            <div key={t.key} className={styles.fieldPair} data-transport={t.key}>
+            <div key={tr.key} className={styles.fieldPair} data-transport={tr.key}>
               <TextField
-                path={`travel.${t.key}.text`}
-                label={t.label}
+                path={`travel.${tr.key}.text`}
+                label={t(tr.label)}
                 optional
                 multiline
                 rows={2}
                 maxLength={L.travelText}
-                placeholder={t.placeholder}
+                placeholder={t(tr.placeholder)}
                 value={note?.text}
-                onChange={(v) => edit((c) => setTransport(c, t.key, { text: nullIfEmpty(v) }))}
+                onChange={(v) => edit((c) => setTransport(c, tr.key, { text: nullIfEmpty(v) }))}
               />
-              <UrlField path={`travel.${t.key}.link`} label={`${t.label}: link`} optional value={note?.link} onChange={(v) => edit((c) => setTransport(c, t.key, { link: v }))} />
+              <UrlField path={`travel.${tr.key}.link`} label={t('{what}: link', { what: t(tr.label) })} optional value={note?.link} onChange={(v) => edit((c) => setTransport(c, tr.key, { link: v }))} />
             </div>
           );
         })}
       </Group>
-      <Group title="Places to stay">
-        <p className={styles.hint}>Hotels or rentals near the venue, up to {L.travelStays}. A booking code or room block name helps guests get your rate.</p>
+      <Group title={t('Places to stay')}>
+        <p className={styles.hint}>
+          {t('Hotels or rentals near the venue, up to {max}. A booking code or room block name helps guests get your rate.', { max: L.travelStays })}
+        </p>
         {stays.map((s, i) => (
           <RepeatableItem<TravelStay>
             key={i}
             index={i}
             count={stays.length}
             noun="place to stay"
-            title={`Place to stay ${i + 1}`}
+            title={t('Place to stay {n}', { n: i + 1 })}
             select={(c) => c.travel?.stays ?? []}
             assign={(c, list) => void (c.travel = { ...(c.travel ?? {}), stays: list })}
             data-stay-row={i}
           >
-            <TextField path={`travel.stays.${i}.name`} label="Name" maxLength={L.stayName} placeholder="Hotel Villa Rosa" value={s.name} onChange={(v) => setStay(i, { name: v })} />
-            <TextField path={`travel.stays.${i}.distance`} label="Distance" optional maxLength={L.stayDistance} placeholder="10 min drive" value={s.distance} onChange={(v) => setStay(i, { distance: nullIfEmpty(v) })} />
-            <TextField path={`travel.stays.${i}.address`} label="Address" optional maxLength={L.stayAddress} value={s.address} onChange={(v) => setStay(i, { address: nullIfEmpty(v) })} />
-            <UrlField path={`travel.stays.${i}.link`} label="Booking link" optional value={s.link} onChange={(v) => setStay(i, { link: v })} />
-            <TextField path={`travel.stays.${i}.code`} label="Booking code or room block" optional maxLength={L.stayCode} placeholder="SMITHWEDDING" value={s.code} onChange={(v) => setStay(i, { code: nullIfEmpty(v) })} />
-            <TextField path={`travel.stays.${i}.note`} label="Note" optional multiline rows={2} maxLength={L.stayNote} placeholder="Book by May 1 for the group rate." value={s.note} onChange={(v) => setStay(i, { note: nullIfEmpty(v) })} />
+            <TextField path={`travel.stays.${i}.name`} label={t('Name')} maxLength={L.stayName} placeholder="Hotel Villa Rosa" value={s.name} onChange={(v) => setStay(i, { name: v })} />
+            <TextField path={`travel.stays.${i}.distance`} label={t('Distance')} optional maxLength={L.stayDistance} placeholder={t('10 min drive')} value={s.distance} onChange={(v) => setStay(i, { distance: nullIfEmpty(v) })} />
+            <TextField path={`travel.stays.${i}.address`} label={t('Address')} optional maxLength={L.stayAddress} value={s.address} onChange={(v) => setStay(i, { address: nullIfEmpty(v) })} />
+            <UrlField path={`travel.stays.${i}.link`} label={t('Booking link')} optional value={s.link} onChange={(v) => setStay(i, { link: v })} />
+            <TextField path={`travel.stays.${i}.code`} label={t('Booking code or room block')} optional maxLength={L.stayCode} placeholder="SMITHWEDDING" value={s.code} onChange={(v) => setStay(i, { code: nullIfEmpty(v) })} />
+            <TextField path={`travel.stays.${i}.note`} label={t('Note')} optional multiline rows={2} maxLength={L.stayNote} placeholder={t('Book by May 1 for the group rate.')} value={s.note} onChange={(v) => setStay(i, { note: nullIfEmpty(v) })} />
           </RepeatableItem>
         ))}
         {stays.length < L.travelStays ? (
           <Button variant="secondary" icon={Plus} disabled={locked} data-add-stay onClick={addStay}>
-            Add a place to stay
+            {t('Add a place to stay')}
           </Button>
         ) : (
-          <p className={styles.hint}>This section holds {L.travelStays} places at most.</p>
+          <p className={styles.hint}>{t('This section holds {max} places at most.', { max: L.travelStays })}</p>
         )}
       </Group>
       <IssueList issues={[...issuesAt('travel'), ...issuesAt('travel.stays')]} />
@@ -245,20 +249,20 @@ export function MealFields() {
     <>
       <Segmented<Served>
         id="meal-served"
-        label="Is a meal served?"
+        label={t('Is a meal served?')}
         value={served}
         disabled={locked}
         options={[
-          { value: 'unset', label: 'Not shown' },
-          { value: 'yes', label: 'Yes' },
-          { value: 'no', label: 'No' },
+          { value: 'unset', label: t('Not shown') },
+          { value: 'yes', label: t('Yes') },
+          { value: 'no', label: t('No') },
         ]}
         onChange={setServed}
       />
       <p className={styles.hint}>
         {served === 'yes'
-          ? 'Guests see a menu card on the Details page. Without a menu it says a meal will be served.'
-          : 'Nothing about the meal is shown to guests.'}
+          ? t('Guests see a menu card on the Details page. Without a menu it says a meal will be served.')
+          : t('Nothing about the meal is shown to guests.')}
       </p>
       {served === 'yes' ? (
         <>
@@ -267,11 +271,11 @@ export function MealFields() {
               icon={Plus}
               action={
                 <Button variant="primary" icon={Plus} disabled={locked} data-start-menu onClick={() => edit((c) => setCourses(c, structuredClone(STARTER_MENU)))}>
-                  Start a menu
+                  {t('Start a menu')}
                 </Button>
               }
             >
-              Add your menu if you like: headings such as Starter, Main and Dessert, with the dishes under each.
+              {t('Add your menu if you like: headings such as Starter, Main and Dessert, with the dishes under each.')}
             </EmptyState>
           ) : null}
           {courses.map((course, i) => (
@@ -280,51 +284,53 @@ export function MealFields() {
               index={i}
               count={courses.length}
               noun="menu heading"
-              title={`Menu heading ${i + 1}`}
+              title={t('Menu heading {n}', { n: i + 1 })}
               select={(c) => c.meal?.courses ?? []}
               assign={setCourses}
               data-course-row={i}
             >
-              <TextField path={`meal.courses.${i}.title`} label="Heading" maxLength={L.courseTitle} placeholder="Main" value={course.title} onChange={(v) => setTitle(i, v)} />
+              <TextField path={`meal.courses.${i}.title`} label={t('Heading')} maxLength={L.courseTitle} placeholder={t('Main')} value={course.title} onChange={(v) => setTitle(i, v)} />
               {course.items.map((dish, j) => (
                 <div key={j} className={styles.inlineRow} data-dish={`${i}.${j}`}>
-                  <TextField path={`meal.courses.${i}.items.${j}`} label={`Dish ${j + 1}`} maxLength={L.courseItem} value={dish} onChange={(v) => setDish(i, j, v)} />
-                  <Button variant="tertiary" small icon={X} disabled={locked} aria-label={`Remove dish ${j + 1} of ${course.title || `heading ${i + 1}`}`} onClick={() => removeDish(i, j)} />
+                  <TextField path={`meal.courses.${i}.items.${j}`} label={t('Dish {n}', { n: j + 1 })} maxLength={L.courseItem} value={dish} onChange={(v) => setDish(i, j, v)} />
+                  <Button variant="tertiary" small icon={X} disabled={locked} aria-label={t('Remove dish {n} of {heading}', { n: j + 1, heading: course.title || t('heading {n}', { n: i + 1 }) })} onClick={() => removeDish(i, j)} />
                 </div>
               ))}
               {course.items.length < L.courseItems ? (
                 <Button variant="tertiary" small icon={Plus} disabled={locked} data-add-dish={i} onClick={() => addDish(i)}>
-                  Add a dish
+                  {t('Add a dish')}
                 </Button>
               ) : null}
             </RepeatableItem>
           ))}
           {courses.length && courses.length < L.mealCourses ? (
             <Button variant="secondary" icon={Plus} disabled={locked} data-add-course onClick={() => edit((c) => setCourses(c, [...(c.meal?.courses ?? []), { title: '', items: [] }]))}>
-              Add a menu heading
+              {t('Add a menu heading')}
             </Button>
           ) : null}
           <TextField
             path="meal.note"
-            label="Dietary note"
+            label={t('Dietary note')}
             optional
             multiline
             rows={2}
             maxLength={L.mealNote}
-            placeholder="Vegetarian and gluten-free options on request."
+            placeholder={t('Vegetarian and gluten-free options on request.')}
             value={meal.note}
             onChange={(v) => edit((c) => void (c.meal = { ...(c.meal ?? {}), note: nullIfEmpty(v) }))}
           />
           <Group title="RSVP">
             {question === 'exists' ? (
               <p className={styles.hint} data-meal-question="exists">
-                Your reply form already asks “{asked?.label}”. Change it under RSVP.
+                {t('Your reply form already asks “{question}”. Change it under RSVP.', { question: asked?.label ?? '' })}
               </p>
             ) : question === 'full' ? (
-              <p className={styles.hint}>Your reply form holds {L.rsvpQuestions} questions already.</p>
+              <p className={styles.hint}>{t('Your reply form holds {max} questions already.', { max: L.rsvpQuestions })}</p>
             ) : (
               <>
-                <p className={styles.hint}>Let guests choose their meal when they reply: {mealChoices(content).join(', ')}. You can change the choices under RSVP.</p>
+                <p className={styles.hint}>
+                  {t('Let guests choose their meal when they reply: {choices}. You can change the choices under RSVP.', { choices: mealChoices(content).join(', ') })}
+                </p>
                 <Button
                   variant="secondary"
                   icon={Plus}
@@ -332,10 +338,10 @@ export function MealFields() {
                   data-add-meal-question
                   onClick={() => {
                     edit((c) => void addMealQuestion(c));
-                    snack('Meal choice added to your RSVP form');
+                    snack(t('Meal choice added to your RSVP form'));
                   }}
                 >
-                  Add a meal choice question to RSVP
+                  {t('Add a meal choice question to RSVP')}
                 </Button>
               </>
             )}

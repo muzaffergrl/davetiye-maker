@@ -7,6 +7,18 @@ import { errorResult } from '../../../../../lib/rsvp/guest.ts';
 import { editKeyFrom, jsonResponse, unauthorized } from '../../../../../lib/rsvp/http.ts';
 import { rsvpXlsxForSite } from '../../../../../lib/rsvp/xlsx.ts';
 
+import { loadDict } from '../../../../../lib/i18n/dicts.ts';
+import { DEFAULT_LANG, isLang, negotiateLang } from '../../../../../lib/i18n/langs.ts';
+import { makeTranslator } from '../../../../../lib/i18n/translate.ts';
+
+/** G144: the panel's language (its cookie, else the browser's) for the headings and fixed words of the file. */
+async function panelTranslator(req: Request) {
+  const cookie = /(?:^|;\s*)bke_lang=([a-z]{2})/.exec(req.headers.get('cookie') ?? '')?.[1];
+  const lang = isLang(cookie) ? cookie : (negotiateLang(req.headers.get('accept-language')) ?? DEFAULT_LANG);
+  return makeTranslator(lang, await loadDict('panel', lang)).t;
+}
+
+
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
@@ -18,7 +30,7 @@ export async function GET(req: Request, ctx: { params: Promise<{ slug: string }>
     const adapter = getDataAdapter();
     const site = await authorizeEditor(adapter, slug, editKeyFrom(req));
     if (!site) return unauthorized();
-    const { bytes, filename } = await rsvpXlsxForSite(adapter, site);
+    const { bytes, filename } = await rsvpXlsxForSite(adapter, site, new Date(), await panelTranslator(req));
     return new Response(bytes as unknown as BodyInit, {
       status: 200,
       headers: {

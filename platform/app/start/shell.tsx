@@ -22,15 +22,18 @@ export function StartShell({ children, wide = false }: { children: ReactNode; wi
   );
 }
 
-/** The designs a buyer can start here, one big link each. */
-export function DesignList({ themes }: { themes: Array<{ id: string; name: string }> }) {
-  if (!themes.length) return <p className={styles.muted}>No designs are available yet.</p>;
+/**
+ * The designs a buyer can start here, one big link each. `t`: the page's translator (G144; server pages build their own
+ * with makeTranslator, this module also runs on the server), English without it.
+ */
+export function DesignList({ themes, t = (en: string) => en }: { themes: Array<{ id: string; name: string }>; t?: (en: string) => string }) {
+  if (!themes.length) return <p className={styles.muted}>{t('No designs are available yet.')}</p>;
   return (
     <ul className={styles.themeList}>
-      {themes.map((t) => (
-        <li key={t.id}>
-          <a className={styles.themeLink} href={`/start?theme=${encodeURIComponent(t.id)}`}>
-            {t.name}
+      {themes.map((theme) => (
+        <li key={theme.id}>
+          <a className={styles.themeLink} href={`/start?theme=${encodeURIComponent(theme.id)}`}>
+            {theme.name}
           </a>
         </li>
       ))}

@@ -38,12 +38,15 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { rememberEditor } from '../../lib/panel/remember.ts';
+import { msg, setUiLocale, t, tn } from '../../lib/i18n/client.ts';
+import type { Lang } from '../../lib/i18n/langs.ts';
+import type { Dict } from '../../lib/i18n/translate.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
 import { isThankYouOn } from '../../lib/content/thank-you.ts';
-import { ORDER_PENDING_TEXT, PANEL_BRAND } from '../../lib/panel/brand.ts';
+import { ORDER_PENDING_MSG, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import {
   defaultNameDisplay,
   fieldId,
@@ -74,6 +77,7 @@ import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
 import { DetailsBlocksFields, MealFields, TravelFields } from './ExtrasFields.tsx';
 import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
 import { ThankYouFields } from './ThankYou.tsx';
+import { LanguagesFields } from './Languages.tsx';
 import { firstOpenStep, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
@@ -158,26 +162,28 @@ export const PAGE_ICONS: Record<PageId, LucideIcon> = {
 
 /** The snackbar text after a names / date save, in the buyer's words (G060-fix: "Date moved — free", not "Fixed"). */
 export function identityOutcomeText(result: string, anchor: Identity | null, next: Identity, previous: Identity): string {
-  if (result === 'undo') return 'Change undone — you got it back.';
-  if (result === 'sample_date') return 'Wedding date set — free.';
+  if (result === 'undo') return t('Change undone — you got it back.');
+  if (result === 'sample_date') return t('Wedding date set — free.');
   if (result === 'change') {
     const date = next.date !== previous.date;
     const names = !sameIdentity({ ...next, date: '' }, { ...previous, date: '' });
-    return names && date ? 'Names and date changed.' : date ? 'Date changed.' : 'Names changed.';
+    return names && date ? t('Names and date changed.') : date ? t('Date changed.') : t('Names changed.');
   }
   const free = anchor ? classifyIdentityChange(anchor, next).free : [];
-  const parts = [free.includes('date') ? 'Date moved' : '', free.includes('surname') ? 'Surname saved' : '', free.includes('typo') ? 'Fixed' : ''].filter(Boolean);
-  return `${parts.join(', ') || 'Saved'} — free.`;
+  const parts = [free.includes('date') ? t('Date moved') : '', free.includes('surname') ? t('Surname saved') : '', free.includes('typo') ? t('Fixed') : ''].filter(Boolean);
+  return t('{what} — free.', { what: parts.join(', ') || t('Saved') });
 }
 
 const ROOT_VIEWS: Array<{ view: 'home' | 'edit' | 'guests' | 'share'; label: string; icon: LucideIcon }> = [
-  { view: 'home', label: 'Home', icon: House },
-  { view: 'edit', label: 'Edit', icon: Pencil },
-  { view: 'guests', label: 'Guests', icon: Users },
-  { view: 'share', label: 'Share', icon: Share2 },
+  { view: 'home', label: msg('Home'), icon: House },
+  { view: 'edit', label: msg('Edit'), icon: Pencil },
+  { view: 'guests', label: msg('Guests'), icon: Users },
+  { view: 'share', label: msg('Share'), icon: Share2 },
 ];
 
-export default function Panel(props: { initial: PanelState; editKey: string; published?: ContentRecord | null }) {
+export default function Panel({ lang = 'en', dict, ...props }: { initial: PanelState; editKey: string; published?: ContentRecord | null; lang?: Lang; dict?: Dict }) {
+  // G144: the interface language (chosen on the server: cookie, else Accept-Language) before any text renders
+  setUiLocale(lang, dict);
   return (
     <SnackbarProvider>
       <PanelApp {...props} />
@@ -193,7 +199,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const wide = useMedia('(min-width: 960px)');
   const snack = useSnackbar();
   const url = publicSiteUrl(initial.origin, initial.slug);
-  const names = content.name_display || defaultNameDisplay(content.partners ?? []) || 'Your website';
+  const names = content.name_display || defaultNameDisplay(content.partners ?? []) || t('Your website');
   const neverPublished = !meta.publishedAt && meta.status !== 'published' && rights.phase === 'before_publish';
   const deviceZone = useDeviceZone();
 
@@ -253,7 +259,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const firstFocus = useRef(true);
   useEffect(() => {
     if (!ready || route.view === 'setup') return;
-    const label = route.view === 'section' ? PAGE_TITLES[route.page] : route.view === 'print' ? 'Guest list' : route.view === 'results' ? 'Results' : ROOT_VIEWS.find((v) => v.view === route.view)?.label;
+    const rootLabel = ROOT_VIEWS.find((v) => v.view === route.view)?.label;
+    const label = route.view === 'section' ? t(PAGE_TITLES[route.page]) : route.view === 'print' ? t('Guest list') : route.view === 'results' ? t('Results') : rootLabel ? t(rootLabel) : rootLabel;
     document.title = `${label} · ${names}`;
     if (firstFocus.current) firstFocus.current = false;
     else {
@@ -263,8 +270,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     // An address that names a section inside a page (#edit/venue): that part of the page, under the bars.
     if (route.view === 'section' && route.focus) {
       const id = `section-${route.focus}-body`;
-      const t = window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }), 40);
-      return () => window.clearTimeout(t);
+      const timer = window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }), 40);
+      return () => window.clearTimeout(timer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route, ready]);
@@ -352,27 +359,27 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
 
   const summaries: Record<PageId, string> = {
     us: names,
-    day: [formatDate(content.date, content.locale), formatTime(content.ceremony_time, content.locale), content.venue?.name].filter(Boolean).join(' · ') || 'Add the date and the venue',
-    photos: `${theme.photos.filter((s) => photoAt(content, s.source)).length} of ${theme.photos.length} added`,
+    day: [formatDate(content.date, content.locale), formatTime(content.ceremony_time, content.locale), content.venue?.name].filter(Boolean).join(' · ') || t('Add the date and the venue'),
+    photos: t('{added} of {total} added', { added: theme.photos.filter((s) => photoAt(content, s.source)).length, total: theme.photos.length }),
     story:
       blocks.our_story === true
-        ? `${content.story?.items?.length ?? 0} ${content.story?.items?.length === 1 ? 'moment' : 'moments'}`
-        : 'Off · guests do not see this page',
+        ? tn(content.story?.items?.length ?? 0, '{n} moment', '{n} moments')
+        : t('Off · guests do not see this page'),
     details:
       [
-        content.host_line ? 'Host line' : '',
-        content.dress_code ? 'Dress code' : '',
-        content.urls?.accommodation ? 'Travel & stay' : '',
-        content.urls?.registry ? 'Registry' : '',
-        theme.fields.faq && blocks.faq === true && content.faq?.length ? `${content.faq.length} ${content.faq.length === 1 ? 'question' : 'questions'}` : '',
+        content.host_line ? t('Host line') : '',
+        content.dress_code ? t('Dress code') : '',
+        content.urls?.accommodation ? t('Travel & stay') : '',
+        content.urls?.registry ? t('Registry') : '',
+        theme.fields.faq && blocks.faq === true && content.faq?.length ? tn(content.faq.length, '{n} question', '{n} questions') : '',
       ]
         .filter(Boolean)
-        .join(', ') || 'Dress code, travel, registry, questions',
+        .join(', ') || t('Dress code, travel, registry, questions'),
     rsvp:
       content.rsvp?.method === 'none'
-        ? 'Replies off'
-        : `Reply by ${formatDate(content.rsvp?.deadline, content.locale) ?? '…'}${
-            content.rsvp?.questions?.length ? ` · ${content.rsvp.questions.length} ${content.rsvp.questions.length === 1 ? 'question' : 'questions'}` : ''
+        ? t('Replies off')
+        : `${t('Reply by {date}', { date: formatDate(content.rsvp?.deadline, content.locale) ?? '…' })}${
+            content.rsvp?.questions?.length ? ` · ${tn(content.rsvp.questions.length, '{n} question', '{n} questions')}` : ''
           }`,
   };
 
@@ -467,12 +474,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     [go, theme.copy],
   );
 
-  const copy = async (text: string, done = 'Link copied') => {
+  const copy = async (text: string, done = t('Link copied')) => {
     try {
       await navigator.clipboard.writeText(text);
       snack(done);
     } catch {
-      setDialog({ kind: 'message', title: 'Copy the link', text });
+      setDialog({ kind: 'message', title: t('Copy the link'), text });
     }
   };
 
@@ -493,10 +500,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     const res = await panel.changeIdentity(previous, 'fix');
     if (res.ok && res.result === 'undo') {
       const left = res.remaining;
-      snack(`Change undone — you got it back.${typeof left === 'number' ? ` ${left} name & date ${left === 1 ? 'change' : 'changes'} left.` : ''}`);
+      snack(`${t('Change undone — you got it back.')}${typeof left === 'number' ? ` ${tn(left, '{n} name & date change left.', '{n} name & date changes left.')}` : ''}`);
     }
-    else if (!res.ok) snack(res.message ?? 'This could not be undone. Please try again.');
-    else if (res.result === 'change') snack('Changed back. This used a change: the first one could no longer be undone.');
+    else if (!res.ok) snack(t(res.message ?? msg('This could not be undone. Please try again.')));
+    else if (res.result === 'change') snack(t('Changed back. This used a change: the first one could no longer be undone.'));
   };
 
   const doPublish = async () => {
@@ -510,13 +517,13 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       return setDialog({ kind: 'live', justPublished: true });
     }
     if (res.issues?.length) return setDialog({ kind: 'issues', issues: res.issues, message: res.message });
-    setDialog({ kind: 'message', title: 'Not published', text: res.message ?? 'The website could not be published. Please try again.' });
+    setDialog({ kind: 'message', title: t('Not published'), text: t(res.message ?? msg('The website could not be published. Please try again.')) });
   };
 
   const startPublish = async () => {
-    if (!online) return setDialog({ kind: 'message', title: 'You’re offline', text: 'Connect to the internet to publish. Your changes are kept on this phone.' });
+    if (!online) return setDialog({ kind: 'message', title: t('You’re offline'), text: t('Connect to the internet to publish. Your changes are kept on this phone.') });
     if (upToDate) return go({ view: 'share' });
-    if (meta.orderPending) return setDialog({ kind: 'message', title: 'Not yet', text: ORDER_PENDING_TEXT });
+    if (meta.orderPending) return setDialog({ kind: 'message', title: t('Not yet'), text: t(ORDER_PENDING_MSG, { shop: PANEL_BRAND.shopName }) });
     if (validation.errors.length) return setDialog({ kind: 'issues', issues: validation.errors });
     // The first publish shows the rules (docs/16 §11.7) and what still is sample text. Later publishes go straight
     // out (K29): the reminders live on Home, and "Review" in the changes bar shows what goes live.
@@ -530,13 +537,13 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     setBusy(false);
     if (res.ok) {
       setDialog(null);
-      snack('Your website is offline');
-    } else setDialog({ kind: 'message', title: 'Still online', text: res.message ?? 'Please try again.' });
+      snack(t('Your website is offline'));
+    } else setDialog({ kind: 'message', title: t('Still online'), text: t(res.message ?? msg('Please try again.')) });
   };
 
   // The server kept the stored names/date over an autosave (e.g. another tab): say so once.
   useEffect(() => {
-    if (panel.identityKeptAt) snack('Names and date stay as published. Use “Change” to update them.');
+    if (panel.identityKeptAt) snack(t('Names and date stay as published. Use “Change” to update them.'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [panel.identityKeptAt]);
 
@@ -547,10 +554,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         <main className={styles.notice}>
           <BrandLogo height={28} className={styles.noticeBrand} />
           <TriangleAlert size={32} strokeWidth={1.5} aria-hidden="true" />
-          <h1 className={styles.noticeTitle}>This edit link no longer works</h1>
+          <h1 className={styles.noticeTitle}>{t('This edit link no longer works')}</h1>
           <p>
-            The link may have been replaced with a new one, or it was copied only in part. If we sent you a new link, use the newest one.
-            Otherwise message {PANEL_BRAND.shopName} on Etsy with your order number.
+            {t('The link may have been replaced with a new one, or it was copied only in part. If we sent you a new link, use the newest one.')}{' '}
+            {t('Otherwise message {shop} on Etsy with your order number.', { shop: PANEL_BRAND.shopName })}
           </p>
         </main>
       </div>
@@ -568,39 +575,39 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             <>
               {panel.foundBackup.sameBase ? (
                 <Button small variant="primary" onClick={panel.restoreBackup}>
-                  Restore
+                  {t('Restore')}
                 </Button>
               ) : null}
               <Button small onClick={panel.discardBackup}>
-                Discard
+                {t('Discard')}
               </Button>
             </>
           }
         >
           {panel.foundBackup.sameBase
-            ? 'You have unsaved changes from this phone.'
-            : 'This phone has older unsaved changes, but your website was changed since (maybe on another device). They can’t be added safely.'}
+            ? t('You have unsaved changes from this phone.')
+            : t('This phone has older unsaved changes, but your website was changed since (maybe on another device). They can’t be added safely.')}
         </Banner>
       ) : null}
       {!online ? (
         <Banner tone="warning" icon={WifiOff} role="status" data-offline-banner>
-          You&rsquo;re offline. {panel.backedUp ? 'Your changes are kept on this phone and saved when you’re back online.' : 'Changes are saved when you’re back online.'}
+          {t('You’re offline.')} {panel.backedUp ? t('Your changes are kept on this phone and saved when you’re back online.') : t('Changes are saved when you’re back online.')}
         </Banner>
       ) : null}
       {saveState === 'conflict' ? (
-        <Banner tone="danger" role="alert" actions={<Button small variant="primary" onClick={() => window.location.reload()}>Reload</Button>}>
-          {panel.saveMessage ?? 'This website was changed on another device. Reload to get the latest version.'}
+        <Banner tone="danger" role="alert" actions={<Button small variant="primary" onClick={() => window.location.reload()}>{t('Reload')}</Button>}>
+          {t(panel.saveMessage ?? msg('This website was changed on another device. Reload to get the latest version.'))}
         </Banner>
       ) : null}
       {saveState === 'refused' && !rights.archived ? (
-        <Banner tone="danger" role="alert" actions={<Button small onClick={() => window.location.reload()}>Reload</Button>}>
-          {panel.saveMessage ?? 'These changes could not be saved. Please reload the page.'}
+        <Banner tone="danger" role="alert" actions={<Button small onClick={() => window.location.reload()}>{t('Reload')}</Button>}>
+          {t(panel.saveMessage ?? msg('These changes could not be saved. Please reload the page.'))}
         </Banner>
       ) : null}
       {rights.archived && route.view !== 'home' ? (
         <Banner tone="info" icon={Archive} data-archived-banner>
-          Your website closed for guests on {rights.archiveAt ? formatDate(rights.archiveAt.slice(0, 10), content.locale) : 'its archive date'}. You can still see your
-          content and download your replies.
+          {t('Your website closed for guests on {date}.', { date: rights.archiveAt ? (formatDate(rights.archiveAt.slice(0, 10), content.locale) ?? '') : t('its archive date') })}{' '}
+          {t('You can still see your content and download your replies.')}
         </Banner>
       ) : null}
     </>
@@ -645,35 +652,35 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   const sheets = (
     <>
       {dialog?.kind === 'issues' ? (
-        <Sheet title="Before you publish" onClose={() => setDialog(null)} testId="issues">
-          <p>{dialog.message ?? 'Please fix these first:'}</p>
+        <Sheet title={t('Before you publish')} onClose={() => setDialog(null)} testId="issues">
+          <p>{t(dialog.message ?? msg('Please fix these first:'))}</p>
           <IssueJumps notes={dialog.issues.map((i) => ({ path: i.path, message: i.message }))} onJump={goTo} tone="danger" />
         </Sheet>
       ) : null}
       {dialog?.kind === 'prepublish' ? (
-        <Sheet title="Before you publish" onClose={() => setDialog(null)} closeLabel="Keep editing" testId="notes">
+        <Sheet title={t('Before you publish')} onClose={() => setDialog(null)} closeLabel={t('Keep editing')} testId="notes">
           {rights.phase === 'before_publish' ? (
             <SampleDateGate content={content} sample={theme.sample} confirmed={dateConfirmed} onConfirm={setDateConfirmed} onFix={() => goTo('date')} />
           ) : null}
           {rights.phase === 'before_publish' ? <RulesBox rights={rights} locale={content.locale} /> : null}
-          {noteCount ? <p>Your guests will see these. Check them, or publish anyway and change them later.</p> : null}
-          <NoteGroup title="Still sample text from the design" notes={notes.sample} onJump={goTo} />
-          <NoteGroup title="Photo places without a photo" notes={notes.photos} onJump={goTo} />
-          <NoteGroup title="Sections without a link" notes={notes.links} onJump={goTo} />
-          <NoteGroup title="Sections without content" notes={notes.empty} onJump={goTo} />
+          {noteCount ? <p>{t('Your guests will see these. Check them, or publish anyway and change them later.')}</p> : null}
+          <NoteGroup title={t('Still sample text from the design')} notes={notes.sample} onJump={goTo} />
+          <NoteGroup title={t('Photo places without a photo')} notes={notes.photos} onJump={goTo} />
+          <NoteGroup title={t('Sections without a link')} notes={notes.links} onJump={goTo} />
+          <NoteGroup title={t('Sections without content')} notes={notes.empty} onJump={goTo} />
           <div className={cx(styles.buttonRow, styles.stickyActions)}>
-            <Button variant="primary" icon={Send} busy={busy} busyLabel="Publishing…" disabled={firstPublishDateBlocked} onClick={() => void doPublish()} data-publish-anyway>
-              {rights.phase === 'before_publish' ? 'Publish my website' : 'Publish anyway'}
+            <Button variant="primary" icon={Send} busy={busy} busyLabel={t('Publishing…')} disabled={firstPublishDateBlocked} onClick={() => void doPublish()} data-publish-anyway>
+              {rights.phase === 'before_publish' ? t('Publish my website') : t('Publish anyway')}
             </Button>
-            <Button onClick={() => setDialog(null)}>Keep editing</Button>
+            <Button onClick={() => setDialog(null)}>{t('Keep editing')}</Button>
           </div>
         </Sheet>
       ) : null}
       {dialog?.kind === 'review' ? (
-        <Sheet title="Unpublished changes" onClose={() => setDialog(null)} closeLabel="Keep editing" testId="review">
+        <Sheet title={t('Unpublished changes')} onClose={() => setDialog(null)} closeLabel={t('Keep editing')} testId="review">
           <p>
-            Your guests still see the version you published last. Changes are saved as you type; they go live when you publish.
-            {changes.length ? ' Changed since then (tap the eye to preview a page):' : ''}
+            {t('Your guests still see the version you published last. Changes are saved as you type; they go live when you publish.')}
+            {changes.length ? ` ${t('Changed since then (tap the eye to preview a page):')}` : ''}
           </p>
           {changes.length ? (
             <ul className={styles.reviewList}>
@@ -684,11 +691,11 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 const copied = copyChanges.includes(id);
                 const own =
                   pageSections(id).length > 1
-                    ? changedParts.filter((s) => PAGE_SECTIONS[id].includes(s)).map((s) => SECTION_TITLES[s])
+                    ? changedParts.filter((s) => PAGE_SECTIONS[id].includes(s)).map((s) => t(SECTION_TITLES[s]))
                     : copied && contentChanges.includes(id)
-                      ? pageSections(id).map((s) => SECTION_TITLES[s])
+                      ? pageSections(id).map((s) => t(SECTION_TITLES[s]))
                       : [];
-                const parts = [...own, ...(copied ? [COPY_TITLE] : [])];
+                const parts = [...own, ...(copied ? [t(COPY_TITLE)] : [])];
                 return (
                   <li key={id} className={styles.reviewRow}>
                     <button type="button" className={styles.reviewItem} onClick={() => go({ view: 'section', page: id, focus: null })} data-review-item={id}>
@@ -696,49 +703,49 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                         <Icon size={20} strokeWidth={1.75} />
                       </span>
                       <span className={styles.reviewItemText}>
-                        {PAGE_TITLES[id]}
+                        {t(PAGE_TITLES[id])}
                         {parts.length ? <span className={styles.reviewItemSub}>{parts.join(', ')}</span> : null}
                       </span>
                       <ChevronRight size={20} aria-hidden="true" className={styles.chev} />
                     </button>
-                    <IconButton icon={Eye} label={`Preview ${PAGE_TITLES[id]}`} className={styles.reviewPreview} onClick={() => previewChanged(id)} data-review-preview={id} />
+                    <IconButton icon={Eye} label={t('Preview {page}', { page: t(PAGE_TITLES[id]) })} className={styles.reviewPreview} onClick={() => previewChanged(id)} data-review-preview={id} />
                   </li>
                 );
               })}
             </ul>
           ) : (
-            <p className={styles.hint}>Some settings of your website changed.</p>
+            <p className={styles.hint}>{t('Some settings of your website changed.')}</p>
           )}
           <div className={cx(styles.buttonRow, styles.stickyActions)}>
-            <Button variant="primary" icon={Send} busy={busy} busyLabel="Publishing…" disabled={locked || !online} onClick={() => void startPublish()} data-review-publish>
-              Publish changes
+            <Button variant="primary" icon={Send} busy={busy} busyLabel={t('Publishing…')} disabled={locked || !online} onClick={() => void startPublish()} data-review-publish>
+              {t('Publish changes')}
             </Button>
-            <Button onClick={() => setDialog(null)}>Keep editing</Button>
+            <Button onClick={() => setDialog(null)}>{t('Keep editing')}</Button>
           </div>
         </Sheet>
       ) : null}
       {dialog?.kind === 'live' ? (
-        <Sheet title={dialog.justPublished ? 'Your website is live' : 'Share your website'} onClose={() => setDialog(null)} testId="live">
+        <Sheet title={dialog.justPublished ? t('Your website is live') : t('Share your website')} onClose={() => setDialog(null)} testId="live">
           {/* G100 (docs/18 §1): the link and Share first; the QR code under "More ways to share"; then optional steps. */}
           {dialog.justPublished ? (
             <p className={styles.liveLead}>
-              <CircleCheckBig size={22} strokeWidth={1.75} aria-hidden="true" /> Guests can open your website at:
+              <CircleCheckBig size={22} strokeWidth={1.75} aria-hidden="true" /> {t('Guests can open your website at:')}
             </p>
           ) : (
-            <p>Guests can open your website at:</p>
+            <p>{t('Guests can open your website at:')}</p>
           )}
           <LiveShare url={url} fileBase={initial.slug} level={3} />
           {dialog.justPublished ? <AfterPublish steps={afterPublishSteps(content, theme, notes.sample)} onGo={goTo} level={3} /> : null}
         </Sheet>
       ) : null}
       {dialog?.kind === 'offline' ? (
-        <Sheet title="Take your website offline?" onClose={() => setDialog(null)} closeLabel="Cancel" testId="offline">
-          <p>Guests will see “Page not found” until you publish again. Your text, photos and replies are kept.</p>
+        <Sheet title={t('Take your website offline?')} onClose={() => setDialog(null)} closeLabel={t('Cancel')} testId="offline">
+          <p>{t('Guests will see “Page not found” until you publish again. Your text, photos and replies are kept.')}</p>
           <div className={styles.buttonRow}>
-            <Button variant="danger" busy={busy} busyLabel="Working…" onClick={() => void onUnpublish()} data-confirm-offline>
-              Take offline
+            <Button variant="danger" busy={busy} busyLabel={t('Working…')} onClick={() => void onUnpublish()} data-confirm-offline>
+              {t('Take offline')}
             </Button>
-            <Button onClick={() => setDialog(null)}>Keep it online</Button>
+            <Button onClick={() => setDialog(null)}>{t('Keep it online')}</Button>
           </div>
         </Sheet>
       ) : null}
@@ -765,12 +772,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             const res = await panel.changeIdentity(identity, intent);
             if (res.ok && res.result && res.result !== 'unchanged') {
               const left = res.remaining ?? rights.remaining;
-              const text = `${identityOutcomeText(res.result, rights.anchor, identity, previous)} ${left} name & date ${left === 1 ? 'change' : 'changes'} left.`;
+              const text = `${identityOutcomeText(res.result, rights.anchor, identity, previous)} ${tn(left, '{n} name & date change left.', '{n} name & date changes left.')}`;
               const actions = [
                 // A counted change can be taken back for free right away (G060-fix).
-                ...(res.result === 'change' ? [{ label: 'Undo', run: () => void undoChange(previous) }] : []),
+                ...(res.result === 'change' ? [{ label: t('Undo'), run: () => void undoChange(previous) }] : []),
                 // On a live site the change shows after publishing: offer it right here.
-                ...(meta.status === 'published' ? [{ label: 'Publish', run: () => void startPublish() }] : []),
+                ...(meta.status === 'published' ? [{ label: t('Publish'), run: () => void startPublish() }] : []),
               ];
               snack(text, actions);
             }
@@ -820,14 +827,14 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   // The bar's main action: Publish (draft) / Publish again (taken offline); a calm "Live" badge when the website is up to
   // date; nothing while the changes bar below it carries "Publish"; "Archived" at the end.
   let publishControl: React.ReactNode = null;
-  if (rights.archived) publishControl = <Badge icon={Archive}>Archived</Badge>;
+  if (rights.archived) publishControl = <Badge icon={Archive}>{t('Archived')}</Badge>;
   else if (liveCalm)
     // G121 (docs/18 §3 P2): Home's status card already says "Live" with its action; the bar does not repeat it there.
     publishControl =
       route.view === 'home' ? null : (
       <button type="button" className={styles.liveBadge} onClick={() => go({ view: 'share' })} data-live-badge>
         <span className={styles.liveDot} aria-hidden="true" />
-        Live
+        {t('Live')}
       </button>
     );
   else if (!showChanges)
@@ -836,13 +843,13 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         variant="primary"
         small
         busy={busy}
-        busyLabel="Publishing…"
+        busyLabel={t('Publishing…')}
         disabled={locked || !online}
-        title={online ? undefined : 'Connect to the internet to publish.'}
+        title={online ? undefined : t('Connect to the internet to publish.')}
         onClick={() => void startPublish()}
         data-publish
       >
-        {meta.publishedAt ? 'Publish again' : 'Publish'}
+        {meta.publishedAt ? t('Publish again') : t('Publish')}
       </Button>
     );
 
@@ -913,16 +920,16 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
 
   const viewTitle =
     route.view === 'section'
-      ? PAGE_TITLES[route.page]
+      ? t(PAGE_TITLES[route.page])
       : route.view === 'home'
-        ? 'Your website'
+        ? t('Your website')
         : route.view === 'edit'
-          ? 'Edit your website'
+          ? t('Edit your website')
           : route.view === 'guests' || route.view === 'results'
-            ? 'Guests'
+            ? t('Guests')
             : route.view === 'print'
-              ? 'Guest list'
-              : 'Share';
+              ? t('Guest list')
+              : t('Share');
 
   return (
     <PanelContext.Provider value={ctx}>
@@ -934,7 +941,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         data-panel-root
       >
         <a href="#main" className={styles.skipLink}>
-          Skip to content
+          {t('Skip to content')}
         </a>
         {/* Bar (comps u2_*): logo · [back + page title] · names (where there is room) · save state · Preview · Publish.
             A wide Publish button leaves no room for the full logo on a phone: the small monogram stands in (Brand.tsx). */}
@@ -943,11 +950,11 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             <BrandLogo compact={!liveCalm && !showChanges} className={cx(styles.appBarBrand, sectionPage && styles.appBarBrandSection)} />
             {sectionPage ? (
               <>
-                <button type="button" className={styles.backBtn} onClick={back} aria-label="Back to Edit">
+                <button type="button" className={styles.backBtn} onClick={back} aria-label={t('Back to Edit')}>
                   <ArrowLeft size={22} strokeWidth={1.75} aria-hidden="true" />
                 </button>
-                <p className={cx(styles.appBarTitle, !scrolled && styles.appBarTitleNarrow)} title={PAGE_TITLES[sectionPage]}>
-                  {PAGE_TITLES[sectionPage]}
+                <p className={cx(styles.appBarTitle, !scrolled && styles.appBarTitleNarrow)} title={t(PAGE_TITLES[sectionPage])}>
+                  {t(PAGE_TITLES[sectionPage])}
                 </p>
               </>
             ) : null}
@@ -960,7 +967,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             </p>
             <div className={styles.appBarActions}>
               <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
-              {!wide ? <IconButton icon={Eye} label="Preview" onClick={() => (sectionPage ? pagePreview(sectionPage) : openPreview(null))} data-open-preview /> : null}
+              {!wide ? <IconButton icon={Eye} label={t('Preview')} onClick={() => (sectionPage ? pagePreview(sectionPage) : openPreview(null))} data-open-preview /> : null}
               {publishControl}
             </div>
           </div>
@@ -971,7 +978,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 <p className={styles.changesText} role="status">
                   <span className={styles.changesDot} aria-hidden="true" />
                   <span>
-                    Unpublished changes
+                    {t('Unpublished changes')}
                     {changes.length ? (
                       <>
                         : <strong data-changes-count>{changes.length}</strong>
@@ -981,19 +988,19 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 </p>
                 <div className={styles.changesActions}>
                   <button type="button" className={styles.changesReview} onClick={() => setDialog({ kind: 'review' })} data-changes-review>
-                    Review
+                    {t('Review')}
                   </button>
                   <Button
                     small
                     className={styles.changesPublish}
                     busy={busy}
-                    busyLabel="Publishing…"
+                    busyLabel={t('Publishing…')}
                     disabled={locked || !online}
-                    title={online ? undefined : 'Connect to the internet to publish.'}
+                    title={online ? undefined : t('Connect to the internet to publish.')}
                     onClick={() => void startPublish()}
                     data-publish
                   >
-                    Publish
+                    {t('Publish')}
                   </Button>
                 </div>
               </div>
@@ -1002,7 +1009,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         </header>
 
         <div className={styles.shell}>
-          <nav className={styles.nav} aria-label="Editor" inert={(previewOpen && !wide) || undefined}>
+          <nav className={styles.nav} aria-label={t('Editor')} inert={(previewOpen && !wide) || undefined}>
             <ul className={styles.navList}>
               {ROOT_VIEWS.map((v) => {
                 const Icon = v.icon;
@@ -1028,8 +1035,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                         ) : null}
                       </span>
                       <span className={styles.navLabel}>
-                        {v.label}
-                        {v.view === 'guests' && replies.newCount ? <span className={styles.visuallyHidden}> ({replies.newCount} new)</span> : null}
+                        {t(v.label)}
+                        {v.view === 'guests' && replies.newCount ? <span className={styles.visuallyHidden}> {t('({n} new)', { n: replies.newCount })}</span> : null}
                       </span>
                     </a>
                   </li>
@@ -1105,13 +1112,19 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                     <section key={id} id={`section-${id}-body`} className={styles.sectionBlock} data-section={id} aria-labelledby={title ? `block-${id}` : undefined}>
                       {title ? (
                         <h2 id={`block-${id}`} className={styles.blockTitle}>
-                          {title}
+                          {t(title)}
                         </h2>
                       ) : null}
                       {sectionBody(id)}
                     </section>
                   );
                 })}
+                {/* G144: the website's languages and the couple's translations (Us) */}
+                {sectionPage === 'us' ? (
+                  <section id="section-languages-body" className={styles.sectionBlock} data-section="languages">
+                    <LanguagesFields copyLabel={(key) => theme.copy.find((e) => e.key === key)?.label ?? null} />
+                  </section>
+                ) : null}
                 {/* G068: the design's texts of this page, folded at its end (K29: no seventh "Wording" page) */}
                 {theme.copy.some((e) => e.panel === sectionPage) ? (
                   <section id="section-copy-body" className={styles.sectionBlock} data-section="copy">
@@ -1121,7 +1134,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 {!wide ? (
                   <div className={styles.sectionFoot}>
                     <Button block icon={Eye} onClick={() => pagePreview(sectionPage)}>
-                      Preview this page
+                      {t('Preview this page')}
                     </Button>
                   </div>
                 ) : null}
@@ -1130,7 +1143,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             {route.view === 'guests' || route.view === 'results' ? (
               <GuestsView
                 tab={route.view === 'results' ? 'results' : 'list'}
-                onTab={(t) => go({ view: t === 'results' ? 'results' : 'guests' })}
+                onTab={(tab) => go({ view: tab === 'results' ? 'results' : 'guests' })}
                 api={panel.api}
                 replies={replies}
                 content={content}
@@ -1175,7 +1188,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
             ) : null}
           </main>
 
-          <aside className={styles.previewColumn} aria-label="Preview">
+          <aside className={styles.previewColumn} aria-label={t('Preview')}>
             {preview}
           </aside>
         </div>
@@ -1199,8 +1212,8 @@ function IssueJumps({ notes, onJump, tone }: { notes: PublishNote[]; onJump: (pa
         return (
           <li key={`${n.path}-${i}`}>
             <button type="button" className={cx(styles.issueJump, tone === 'warning' && styles.noteJump)} onClick={() => onJump(n.path)}>
-              <span className={styles.issueJumpSection}>{section ? SECTION_TITLES[section] : 'General'}</span>
-              <span>{n.message}</span>
+              <span className={styles.issueJumpSection}>{section ? t(SECTION_TITLES[section]) : t('General')}</span>
+              <span>{t(n.message)}</span>
             </button>
           </li>
         );

@@ -294,19 +294,26 @@
   btn.className = 'snd';
   btn.setAttribute('data-sound-ui', '');
 
+  // G144: the page's language (#site-data "i18n"; keys = the English text)
+  var I18N = (data && data.i18n) || null;
+  function T(text) {
+    return (I18N && I18N[text]) || text;
+  }
+
   function render() {
     var withMusic = Boolean(S.music);
     var pill = withMusic && !playing;
     btn.classList.toggle('snd--pill', pill);
     if (pill) {
-      btn.innerHTML = '<span aria-hidden="true">♪</span> Play music';
-      btn.setAttribute('aria-label', 'Play music');
+      btn.innerHTML = '<span aria-hidden="true">♪</span> ';
+      btn.appendChild(document.createTextNode(T('Play music')));
+      btn.setAttribute('aria-label', T('Play music'));
     } else if (withMusic) {
       btn.innerHTML = ICON_ON;
-      btn.setAttribute('aria-label', 'Turn music off');
+      btn.setAttribute('aria-label', T('Turn music off'));
     } else {
       btn.innerHTML = muted ? ICON_OFF : ICON_ON;
-      btn.setAttribute('aria-label', muted ? 'Turn sound on' : 'Turn sound off');
+      btn.setAttribute('aria-label', muted ? T('Turn sound on') : T('Turn sound off'));
     }
     btn.setAttribute('aria-pressed', String(!muted && (!withMusic || playing)));
   }

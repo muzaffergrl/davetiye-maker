@@ -1,28 +1,54 @@
 // Serializable props for the client demo components (Demo.tsx), built on the server from config + assets.
+// G144: in the page language (`m`); the design links keep its prefix.
 import { MARKETING, type MarketingConfig } from '../../lib/marketing/config.ts';
 import { demoPath, liveDesigns, openingObject } from '../../lib/marketing/designs.ts';
+import { enMarket, thingIn, type Market, type T } from '../../lib/marketing/i18n.ts';
 import { realEtsyUrl } from '../../lib/marketing/placeholders.ts';
-import type { DemoDesign } from './Demo.tsx';
+import type { DemoCopy, DemoDesign } from './Demo.tsx';
 import { designScreen, largest, srcSet } from './media.ts';
 
-export function demoDesigns(cfg: MarketingConfig = MARKETING): DemoDesign[] {
+export function demoDesigns(cfg: MarketingConfig = MARKETING, m: Market = enMarket): DemoDesign[] {
+  const { t } = m;
   return liveDesigns(cfg).map((d) => {
     const poster = designScreen(d.id, 'envelope');
     if (!poster) throw new Error(`no envelope screen for ${d.id} (run node scripts/marketing-assets.ts)`);
     return {
       id: d.id,
       name: d.name,
-      style: d.copy.style,
+      style: t(d.copy.style),
       poster: {
         src: largest(poster),
         srcSet: srcSet(poster),
         width: poster.width,
         height: poster.height,
-        alt: `${d.name}: the sealed ${openingObject(d.copy)} your guests see first, with the demo couple's names, ${d.copy.demoCouple}`,
+        alt: t("{name}: the sealed {thing} your guests see first, with the demo couple's names, {couple}", {
+          name: d.name,
+          thing: thingIn(t, openingObject(d.copy)),
+          couple: d.copy.demoCouple,
+        }),
       },
       demoPath: demoPath(d.id),
-      designPath: `/designs/${d.id}`,
+      designPath: m.href(`/designs/${d.id}`),
       etsyUrl: realEtsyUrl(d.etsyListingUrl),
     };
   });
+}
+
+/** G144: the demo's words in the page language ({name} / {n} are filled in the browser). */
+export function demoCopy(t: T = enMarket.t): DemoCopy {
+  return {
+    dialogTitle: t('Live demo · {name}'),
+    close: t('Close the demo'),
+    frameTitle: t('Live demo: {name}'),
+    seeDesign: t('See this design'),
+    comingSoon: t('Coming soon on Etsy'),
+    buy: t('Buy on Etsy'),
+    posterLabel: t('Tap to open the live demo of {name}'),
+    tapToOpen: t('Tap to open'),
+    replay: t('Replay'),
+    closeInline: t('Close demo'),
+    chooseDesign: t('Choose a design'),
+    showMore: t('Show {n} more designs'),
+    more: t('+{n} more'),
+  };
 }

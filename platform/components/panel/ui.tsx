@@ -28,6 +28,7 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from 'react';
+import { msg, t } from '../../lib/i18n/client.ts';
 import { PANEL_FONTS } from './fonts.ts';
 import type { SaveState } from './usePanel.ts';
 import styles from './panel.module.css';
@@ -449,14 +450,14 @@ export function Segmented<T extends string>({
 export const SAVED_FLASH_MS = 2500;
 
 const SAVE_UI: Record<SaveState, { icon: LucideIcon | null; text: string; tone: Tone }> = {
-  saved: { icon: Cloud, text: 'Saved', tone: 'neutral' },
-  pending: { icon: null, text: 'Unsaved changes', tone: 'neutral' },
-  saving: { icon: LoaderCircle, text: 'Saving…', tone: 'neutral' },
-  retrying: { icon: CloudOff, text: 'Not saved yet. Trying again…', tone: 'warning' },
-  offline: { icon: WifiOff, text: 'Offline', tone: 'warning' },
-  conflict: { icon: TriangleAlert, text: 'Saving paused', tone: 'danger' },
-  unauthorized: { icon: TriangleAlert, text: 'Saving paused', tone: 'danger' },
-  refused: { icon: CircleAlert, text: 'Not saved', tone: 'danger' },
+  saved: { icon: Cloud, text: msg('Saved'), tone: 'neutral' },
+  pending: { icon: null, text: msg('Unsaved changes'), tone: 'neutral' },
+  saving: { icon: LoaderCircle, text: msg('Saving…'), tone: 'neutral' },
+  retrying: { icon: CloudOff, text: msg('Not saved yet. Trying again…'), tone: 'warning' },
+  offline: { icon: WifiOff, text: msg('Offline'), tone: 'warning' },
+  conflict: { icon: TriangleAlert, text: msg('Saving paused'), tone: 'danger' },
+  unauthorized: { icon: TriangleAlert, text: msg('Saving paused'), tone: 'danger' },
+  refused: { icon: CircleAlert, text: msg('Not saved'), tone: 'danger' },
 };
 
 /**
@@ -470,8 +471,8 @@ export function SaveIndicator({ state, message, onSaveNow, compact }: { state: S
       setShown(state);
       return;
     }
-    const t = setTimeout(() => setShown('saving'), 300);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setShown('saving'), 300);
+    return () => clearTimeout(timer);
   }, [state]);
   // G121 (docs/18 §2 P2, Medium/Notion): right after an autosave lands, "Saved" shows in words for a moment (also on a
   // phone, where the bar otherwise has room for the icon only), then it goes back to the quiet cloud.
@@ -482,12 +483,12 @@ export function SaveIndicator({ state, message, onSaveNow, compact }: { state: S
     previous.current = state;
     if (state !== 'saved' || was === 'saved') return;
     setFlash(true);
-    const t = setTimeout(() => setFlash(false), SAVED_FLASH_MS);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setFlash(false), SAVED_FLASH_MS);
+    return () => clearTimeout(timer);
   }, [state]);
   const flashing = flash && shown === 'saved';
   const ui = SAVE_UI[shown];
-  const text = shown === 'refused' && message ? message : ui.text;
+  const text = shown === 'refused' && message ? t(message) : t(ui.text);
   const Icon = flashing ? CloudCheck : ui.icon;
   const clickable = shown === 'pending' || shown === 'retrying';
   const inner = (
@@ -502,10 +503,10 @@ export function SaveIndicator({ state, message, onSaveNow, compact }: { state: S
     <div className={cx(styles.save, styles[`save_${ui.tone}`], flashing && styles.saveFlash)} data-save-state={state} data-save-flash={flashing || undefined} title={text}>
       {/* Only the saved <-> unsaved transitions are announced, not every keystroke. */}
       <span className={styles.visuallyHidden} role="status" aria-live="polite">
-        {state === 'saved' ? 'All changes saved' : state === 'pending' || state === 'saving' ? '' : text}
+        {state === 'saved' ? t('All changes saved') : state === 'pending' || state === 'saving' ? '' : text}
       </span>
       {clickable ? (
-        <button type="button" className={styles.saveButton} onClick={onSaveNow} aria-label={`${text}. Save now`}>
+        <button type="button" className={styles.saveButton} onClick={onSaveNow} aria-label={t('{status}. Save now', { status: text })}>
           {inner}
         </button>
       ) : (
@@ -528,10 +529,10 @@ export function RightsMeter({ remaining, total }: { remaining: number; total: nu
         ))}
       </span>
       <span className={styles.visuallyHidden}>
-        {remaining} of {total} name and date changes left
+        {t('{remaining} of {total} name and date changes left', { remaining, total })}
       </span>
       <span aria-hidden="true" className={styles.meterText}>
-        {remaining} of {total} changes left
+        {t('{remaining} of {total} changes left', { remaining, total })}
       </span>
     </span>
   );

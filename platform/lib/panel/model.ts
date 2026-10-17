@@ -331,6 +331,8 @@ export function sectionForPath(path: string): SectionId | null {
     case 'partners':
     case 'name_display':
     case 'initials':
+    case 'languages': // G144: the website's languages and translations live on Us
+    case 'translations':
       return 'names';
     case 'host_line':
       return 'details';

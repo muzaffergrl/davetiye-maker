@@ -33,17 +33,18 @@ import type { PanelController } from './usePanel.ts';
 import { UrlText } from './views.tsx';
 import styles from './panel.module.css';
 import { Confetti } from '../fx/Confetti.tsx';
+import { msg, t, tn } from '../../lib/i18n/client.ts';
 
 
 
 export const SETUP_STEPS = [
   {
-    title: 'Your names and date',
-    help: 'As your guests know you, and the day itself. Everything else can wait until later.',
+    title: msg('Your names and date'),
+    help: msg('As your guests know you, and the day itself. Everything else can wait until later.'),
     paths: ['partners', 'name_display', 'initials', 'date', 'ceremony_time', 'timezone', 'locale'],
   },
-  { title: 'Add your photo', help: 'One photo is enough to start: it opens your website. The others are optional.', paths: ['media'] },
-  { title: 'Publish your website', help: 'Check it once, then publish.', paths: [] },
+  { title: msg('Add your photo'), help: msg('One photo is enough to start: it opens your website. The others are optional.'), paths: ['media'] },
+  { title: msg('Publish your website'), help: msg('Check it once, then publish.'), paths: [] },
 ] as const;
 
 
@@ -87,15 +88,16 @@ export function RulesBox({ rights, locale, total = IDENTITY_CHANGE_LIMIT }: { ri
   const until = rights.onlineUntil ? formatDate(rights.onlineUntil, locale) : null;
   return (
     <div className={styles.rules} data-rules>
-      <h3 className={styles.rulesTitle}>Good to know before you publish</h3>
+      <h3 className={styles.rulesTitle}>{t('Good to know before you publish')}</h3>
       <ul>
         <li>{changesRuleText(total)}</li>
-        <li>{FREE_CHANGES_TEXT}</li>
-        <li>{UNDO_TEXT}</li>
-        <li>Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.</li>
+        <li>{t(FREE_CHANGES_TEXT)}</li>
+        <li>{t(UNDO_TEXT)}</li>
+        <li>{t('Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.')}</li>
         <li>
-          Your website stays online until <strong>{until ?? `${ARCHIVE_AFTER_MONTHS} months after your wedding`}</strong>
-          {until ? `, ${ARCHIVE_AFTER_MONTHS} months after your wedding` : ''}. {ARCHIVE_TEXT}
+          {t('Your website stays online until')}{' '}
+          <strong>{until ?? t('{months} months after your wedding', { months: ARCHIVE_AFTER_MONTHS })}</strong>
+          {until ? t(', {months} months after your wedding', { months: ARCHIVE_AFTER_MONTHS }) : ''}. {t(ARCHIVE_TEXT)}
         </li>
       </ul>
     </div>
@@ -146,7 +148,7 @@ export function Setup({
     writeSetup(initial.slug, { step });
     setError(null);
     headingRef.current?.focus();
-    document.title = `Step ${step} of ${SETUP_STEP_COUNT} · ${def.title}`;
+    document.title = `${t('Step {step} of {total}', { step, total: SETUP_STEP_COUNT })} · ${t(def.title)}`;
   }, [step, initial.slug, def.title]);
 
   const stepIssues = validation.errors.filter((i) => def.paths.some((p) => i.path === p || i.path.startsWith(`${p}.`)));
@@ -155,7 +157,11 @@ export function Setup({
     if (stepIssues.length) {
       const el = document.getElementById(fieldId(stepIssues[0].path));
       el?.focus();
-      setError(stepIssues.length === 1 ? 'Please fix the field marked below, or skip this step for now.' : `Please fix the ${stepIssues.length} fields marked below, or skip this step for now.`);
+      setError(
+        stepIssues.length === 1
+          ? t('Please fix the field marked below, or skip this step for now.')
+          : t('Please fix the {n} fields marked below, or skip this step for now.', { n: stepIssues.length }),
+      );
       return;
     }
     onStep(step + 1);
@@ -172,7 +178,7 @@ export function Setup({
       return;
     }
     if (res.issues?.length) return onIssues(res.issues, res.message);
-    setError(res.message ?? 'Your website could not be published. Please try again.');
+    setError(t(res.message ?? msg('Your website could not be published. Please try again.')));
   };
 
   const hero = heroSlot(theme.photos);
@@ -194,14 +200,14 @@ export function Setup({
             </span>
             <Confetti />
             <h1 ref={headingRef} tabIndex={-1} className={styles.setupTitle}>
-              Your website is live
+              {t('Your website is live')}
             </h1>
-            <p className={styles.setupHelp}>Guests can open it now. Send them the link.</p>
+            <p className={styles.setupHelp}>{t('Guests can open it now. Send them the link.')}</p>
             {/* G100 (docs/18 §1): the link and Share first; the QR code under "More ways to share"; then optional steps. */}
             <LiveShare url={url} fileBase={initial.slug} />
             <AfterPublish steps={afterPublishSteps(content, theme, notes.sample)} onGo={onAfter} />
             <Button variant="primary" block onClick={onPublished} data-go-editor>
-              Go to my editor
+              {t('Go to my editor')}
             </Button>
           </div>
         </main>
@@ -216,7 +222,7 @@ export function Setup({
         <div className={styles.setupTopRow}>
           <BrandLogo />
           <Button small variant="tertiary" onClick={onExit} data-setup-exit>
-            Save &amp; exit
+            {t('Save & exit')}
           </Button>
         </div>
         <div className={styles.setupProgressRow}>
@@ -226,7 +232,7 @@ export function Setup({
             ))}
           </div>
           <p className={styles.setupStep} aria-hidden="true">
-            Step {step} of {SETUP_STEP_COUNT}
+            {t('Step {step} of {total}', { step, total: SETUP_STEP_COUNT })}
           </p>
         </div>
       </header>
@@ -234,11 +240,11 @@ export function Setup({
       <main className={styles.setupMain} id="main">
         <h1 ref={headingRef} tabIndex={-1} className={styles.setupTitle}>
           <span className={styles.visuallyHidden}>
-            Step {step} of {SETUP_STEP_COUNT}:{' '}
+            {t('Step {step} of {total}:', { step, total: SETUP_STEP_COUNT })}{' '}
           </span>
-          {def.title}
+          {t(def.title)}
         </h1>
-        <p className={styles.setupHelp}>{def.help}</p>
+        <p className={styles.setupHelp}>{t(def.help)}</p>
         {error ? (
           <Banner tone="danger" role="alert">
             {error}
@@ -254,25 +260,23 @@ export function Setup({
             <DateFields theme={theme} setup />
             <SetupFullNames />
             <RightsNote />
-            <div className={styles.miniPreview} aria-label={`Your ${openingPlace(theme.opening)} page`} role="img">
-              <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} title={`Your ${openingPlace(theme.opening)} page`} />
+            <div className={styles.miniPreview} aria-label={t('Your {place} page', { place: t(openingPlace(theme.opening)) })} role="img">
+              <PreviewMini slug={initial.slug} previewToken={panel.meta.previewToken} version={panel.previewVersion} title={t('Your {place} page', { place: t(openingPlace(theme.opening)) })} />
             </div>
           </>
         ) : null}
         {step === 2 ? (
           <>
             <p className={styles.hint} data-photo-count>
-              <strong className={styles.counterInline}>
-                {filledPhotos} of {theme.photos.length} photos
-              </strong>{' '}
-              · Each photo is cropped to the shape the design uses.
+              <strong className={styles.counterInline}>{t('{filled} of {total} photos', { filled: filledPhotos, total: theme.photos.length })}</strong>{' '}
+              · {t('Each photo is cropped to the shape the design uses.')}
             </p>
             {hero ? <PhotoSlots slots={[hero]} /> : <PhotoSlots />}
             {/* G121 (docs/18 §1 P2): the setup asks for the one opening photo only; the other places are in Edit → Photos. */}
             {hero && otherSlots.length ? (
               <p className={styles.hint} data-more-photos-later>
-                Your website has {otherSlots.length} more photo {otherSlots.length === 1 ? 'place' : 'places'}. Add them any time under Edit → Photos; until
-                then guests see a soft placeholder image.
+                {tn(otherSlots.length, 'Your website has {n} more photo place.', 'Your website has {n} more photo places.')}{' '}
+                {t('Add them any time under Edit → Photos; until then guests see a soft placeholder image.')}
               </p>
             ) : null}
           </>
@@ -284,7 +288,7 @@ export function Setup({
             {meta.orderPending ? <OrderPendingNote /> : null}
             <div className={styles.summary} data-publish-summary>
               <p className={styles.summaryNames}>{content.name_display || '—'}</p>
-              <p data-card-names>On the invitation card: {cardNames(content)}</p>
+              <p data-card-names>{t('On the invitation card: {names}', { names: cardNames(content) })}</p>
               <p>{formatDateLong(content.date, content.locale) ?? '—'}</p>
               <p>{[content.venue?.name, content.venue?.city].filter(Boolean).join(', ') || '—'}</p>
               <p className={styles.summaryUrl}>
@@ -306,26 +310,28 @@ export function Setup({
             {/* K29: no list or count of sample text here — one calm, honest line; Home shows what is left. */}
             <p className={styles.calmNote} data-calm-note>
               {sampleCount
-                ? 'Some details — like the venue, the schedule or your story — still show the design’s sample text. You can change them any time, before or after you publish; Home shows what is left.'
+                ? t('Some details — like the venue, the schedule or your story — still show the design’s sample text. You can change them any time, before or after you publish; Home shows what is left.')
                 : filledPhotos < theme.photos.length
-                  ? 'You can add more photos and details any time, before or after you publish.'
-                  : 'Everything is filled in. You can still change it all after you publish.'}
+                  ? t('You can add more photos and details any time, before or after you publish.')
+                  : t('Everything is filled in. You can still change it all after you publish.')}
             </p>
             {(content.partners ?? []).some((p) => !(p.full_name ?? '').trim()) ? (
               <p className={styles.hint}>
-                Want surnames on the invitation card? Add them under{' '}
+                {t('Want surnames on the invitation card? Add them under')}{' '}
                 <button type="button" className={styles.inlineLink} onClick={() => onStep(1)}>
-                  Your names and date
+                  {t('Your names and date')}
                 </button>{' '}
-                — now or later; adding a surname is always free.
+                {t('— now or later; adding a surname is always free.')}
               </p>
             ) : null}
             <RulesBox rights={meta.rights} locale={content.locale} />
             {validation.errors.length ? (
               <Banner tone="danger">
-                {validation.errors.length === 1 ? 'One thing needs fixing before you publish.' : `${validation.errors.length} things need fixing before you publish.`}{' '}
+                {validation.errors.length === 1
+                  ? t('One thing needs fixing before you publish.')
+                  : t('{n} things need fixing before you publish.', { n: validation.errors.length })}{' '}
                 <button type="button" className={styles.inlineLink} onClick={() => onIssues(validation.errors)}>
-                  Show me
+                  {t('Show me')}
                 </button>
               </Banner>
             ) : null}
@@ -340,43 +346,43 @@ export function Setup({
           <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
           {step === SETUP_STEP_COUNT ? (
             <p className={styles.publishExplain} data-publish-explain>
-              Guests can open your website with the link. You can keep editing after.
+              {t('Guests can open your website with the link. You can keep editing after.')}
             </p>
           ) : null}
           <div className={styles.setupButtons}>
             {step > 1 ? (
-              <Button icon={ArrowLeft} onClick={() => onStep(step - 1)} aria-label="Back" data-setup-back>
-                <span className={styles.backLabel}>Back</span>
+              <Button icon={ArrowLeft} onClick={() => onStep(step - 1)} aria-label={t('Back')} data-setup-back>
+                <span className={styles.backLabel}>{t('Back')}</span>
               </Button>
             ) : null}
             {step < SETUP_STEP_COUNT ? (
               <Button onClick={() => onStep(step + 1)} data-setup-skip>
-                Skip for now
+                {t('Skip for now')}
               </Button>
             ) : null}
             {step < SETUP_STEP_COUNT ? (
               <Button variant="primary" onClick={next} data-setup-next>
-                Continue
+                {t('Continue')}
               </Button>
             ) : (
               <Button
                 variant="primary"
                 icon={Sparkles}
                 busy={publishing}
-                busyLabel="Publishing…"
+                busyLabel={t('Publishing…')}
                 disabled={!ctx.online || ctx.locked || dateBlocked || meta.orderPending}
                 onClick={() => void publish()}
                 data-setup-publish
               >
-                Publish my website
+                {t('Publish my website')}
               </Button>
             )}
           </div>
         </div>
-        {step === SETUP_STEP_COUNT && !ctx.online ? <p className={styles.hint}>Connect to the internet to publish.</p> : null}
+        {step === SETUP_STEP_COUNT && !ctx.online ? <p className={styles.hint}>{t('Connect to the internet to publish.')}</p> : null}
         {step === SETUP_STEP_COUNT && ctx.online && dateBlocked ? (
           <p className={styles.hint} data-publish-blocked>
-            Set your wedding date first (or confirm the sample date is yours).
+            {t('Set your wedding date first (or confirm the sample date is yours).')}
           </p>
         ) : null}
       </footer>
@@ -393,8 +399,7 @@ function cardNames(content: ContentRecord): string {
 export function OrderPendingNote() {
   return (
     <Banner tone="info" icon={Hourglass} data-order-pending>
-      We are confirming your Etsy order. Everything you set up is saved; you can publish as soon as the order is confirmed. Reload this
-      page to check.
+      {t('We are confirming your Etsy order. Everything you set up is saved; you can publish as soon as the order is confirmed. Reload this page to check.')}
     </Banner>
   );
 }
@@ -422,17 +427,17 @@ export function SampleDateGate({
     <div className={styles.dateGate} role="group" aria-labelledby="date-gate-title" data-sample-date-gate>
       <p id="date-gate-title" className={styles.dateGateTitle}>
         <TriangleAlert size={20} strokeWidth={1.75} aria-hidden="true" />
-        Your wedding date is still the design&rsquo;s sample
+        {t('Your wedding date is still the design’s sample')}
       </p>
       <p>
-        Guests would see <strong>{when}</strong>. Set your real date before you publish.
+        {t('Guests would see')} <strong>{when}</strong>. {t('Set your real date before you publish.')}
       </p>
       <Button variant="secondary" icon={CalendarDays} onClick={onFix} data-fix-date>
-        Set our date
+        {t('Set our date')}
       </Button>
       <label className={styles.checkRow}>
         <input type="checkbox" checked={confirmed} onChange={(e) => onConfirm(e.target.checked)} data-confirm-sample-date />
-        <span>{when} really is our wedding date</span>
+        <span>{t('{date} really is our wedding date', { date: when })}</span>
       </label>
     </div>
   );

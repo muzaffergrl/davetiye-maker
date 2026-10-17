@@ -1,7 +1,9 @@
 // Server components of the marketing site (G061). No client JavaScript here: links, <details>, images, JSON-LD.
+// G144: components with text of their own take the page's `m` (lib/marketing/i18n.ts; English when left out).
 import { ArrowRight, Check, Minus } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { Design } from '../../lib/marketing/designs.ts';
+import { enMarket, type Market } from '../../lib/marketing/i18n.ts';
 import type { Block, Inline } from '../../lib/marketing/markdown.ts';
 import { parseInline } from '../../lib/marketing/markdown.ts';
 import { realEtsyUrl } from '../../lib/marketing/placeholders.ts';
@@ -86,25 +88,28 @@ export function EtsyButton({
   variant = 'primary',
   withPrice,
   className,
+  m = enMarket,
 }: {
   design: Pick<Design, 'id' | 'etsyListingUrl' | 'price'>;
   placement: string;
   variant?: 'primary' | 'secondary';
   withPrice?: string | null;
   className?: string;
+  m?: Market;
 }) {
+  const { t } = m;
   const url = realEtsyUrl(design.etsyListingUrl);
   const cls = cx(s.btn, variant === 'secondary' && s.btnSecondary, className);
   if (!url) {
     return (
       <span className={cx(cls, s.btnDisabled)} aria-disabled="true" data-etsy-pending={design.id}>
-        Coming soon on Etsy
+        {t('Coming soon on Etsy')}
       </span>
     );
   }
   return (
     <a className={cls} href={url} data-track="etsy_click" data-track-design={design.id} data-track-placement={placement}>
-      {withPrice ? `Buy on Etsy — ${withPrice}` : 'Buy on Etsy'}
+      {withPrice ? t('Buy on Etsy — {price}', { price: withPrice }) : t('Buy on Etsy')}
     </a>
   );
 }
@@ -118,9 +123,9 @@ export function TextLink({ href, children, track, className }: { href: string; c
   );
 }
 
-export function Breadcrumbs({ items }: { items: Array<{ name: string; href: string }> }) {
+export function Breadcrumbs({ items, m = enMarket }: { items: Array<{ name: string; href: string }>; m?: Market }) {
   return (
-    <nav aria-label="Breadcrumb" className={s.breadcrumbs}>
+    <nav aria-label={m.t('Breadcrumb')} className={s.breadcrumbs}>
       <ol>
         {items.map((it, i) => (
           <li key={it.href}>
@@ -132,10 +137,10 @@ export function Breadcrumbs({ items }: { items: Array<{ name: string; href: stri
   );
 }
 
-export function LastUpdated({ day, label = 'Last updated' }: { day: string; label?: string }) {
+export function LastUpdated({ day, label, m = enMarket }: { day: string; label?: string; m?: Market }) {
   return (
     <p className={s.updated}>
-      {label} <time dateTime={day}>{formatDay(day)}</time>
+      {label ?? m.t('Last updated')} <time dateTime={day}>{formatDay(day, m.lang)}</time>
     </p>
   );
 }
@@ -169,27 +174,29 @@ export function CheckList({
 
 /* ---------------- Markdown subset → React (guides, FAQ answers) ---------------- */
 
-function inline(nodes: Inline[], key = 'i'): ReactNode[] {
+/** `m.href` keeps a site link in the page language ("](/faq)" → /tr/faq on a Turkish page). */
+function inline(nodes: Inline[], key = 'i', m: Market = enMarket): ReactNode[] {
   return nodes.map((n, i) => {
     const k = `${key}.${i}`;
     if (n.t === 'text') return n.v;
     if (n.t === 'code') return <code key={k}>{n.v}</code>;
-    if (n.t === 'strong') return <strong key={k}>{inline(n.c, k)}</strong>;
-    if (n.t === 'em') return <em key={k}>{inline(n.c, k)}</em>;
+    if (n.t === 'strong') return <strong key={k}>{inline(n.c, k, m)}</strong>;
+    if (n.t === 'em') return <em key={k}>{inline(n.c, k, m)}</em>;
     const external = /^https?:\/\//.test(n.href);
     return (
-      <a key={k} href={n.href} {...(external ? { rel: 'noopener' } : {})}>
-        {inline(n.c, k)}
+      <a key={k} href={m.href(n.href)} {...(external ? { rel: 'noopener' } : {})}>
+        {inline(n.c, k, m)}
       </a>
     );
   });
 }
 
-export function InlineMd({ text }: { text: string }) {
-  return <>{inline(parseInline(text))}</>;
+export function InlineMd({ text, m = enMarket }: { text: string; m?: Market }) {
+  return <>{inline(parseInline(text), 'i', m)}</>;
 }
 
-export function Prose({ blocks, className }: { blocks: Block[]; className?: string }) {
+export function Prose({ blocks, className, m = enMarket }: { blocks: Block[]; className?: string; m?: Market }) {
+  const inline_ = (nodes: Inline[]) => inline(nodes, 'i', m);
   return (
     <div className={cx(s.prose, className)}>
       {blocks.map((b, i) => {
@@ -197,22 +204,22 @@ export function Prose({ blocks, className }: { blocks: Block[]; className?: stri
           case 'h2':
             return (
               <h2 key={i} id={b.id}>
-                {inline(b.c)}
+                {inline_(b.c)}
               </h2>
             );
           case 'h3':
             return (
               <h3 key={i} id={b.id}>
-                {inline(b.c)}
+                {inline_(b.c)}
               </h3>
             );
           case 'p':
-            return <p key={i}>{inline(b.c)}</p>;
+            return <p key={i}>{inline_(b.c)}</p>;
           case 'ul':
             return (
               <ul key={i} className={b.checklist ? s.mdChecklist : undefined}>
                 {b.items.map((it, j) => (
-                  <li key={j}>{inline(it)}</li>
+                  <li key={j}>{inline_(it)}</li>
                 ))}
               </ul>
             );
@@ -220,7 +227,7 @@ export function Prose({ blocks, className }: { blocks: Block[]; className?: stri
             return (
               <ol key={i}>
                 {b.items.map((it, j) => (
-                  <li key={j}>{inline(it)}</li>
+                  <li key={j}>{inline_(it)}</li>
                 ))}
               </ol>
             );
@@ -228,19 +235,19 @@ export function Prose({ blocks, className }: { blocks: Block[]; className?: stri
             return (
               <aside key={i} className={s.callout}>
                 {b.c.map((p, j) => (
-                  <p key={j}>{inline(p)}</p>
+                  <p key={j}>{inline_(p)}</p>
                 ))}
               </aside>
             );
           case 'table':
             return (
-              <div key={i} className={s.tableWrap} role="region" aria-label="Table" tabIndex={0}>
+              <div key={i} className={s.tableWrap} role="region" aria-label={m.t('Table')} tabIndex={0}>
                 <table>
                   <thead>
                     <tr>
                       {b.head.map((c, j) => (
                         <th key={j} scope="col">
-                          {inline(c)}
+                          {inline_(c)}
                         </th>
                       ))}
                     </tr>
@@ -251,10 +258,10 @@ export function Prose({ blocks, className }: { blocks: Block[]; className?: stri
                         {r.map((c, k) =>
                           k === 0 ? (
                             <th key={k} scope="row">
-                              {inline(c)}
+                              {inline_(c)}
                             </th>
                           ) : (
-                            <td key={k}>{inline(c)}</td>
+                            <td key={k}>{inline_(c)}</td>
                           ),
                         )}
                       </tr>
@@ -271,7 +278,15 @@ export function Prose({ blocks, className }: { blocks: Block[]; className?: stri
   );
 }
 
-export function FaqList({ items, headingLevel = 3 }: { items: Array<{ id: string; q: string; a: string }>; headingLevel?: 2 | 3 }) {
+export function FaqList({
+  items,
+  headingLevel = 3,
+  m = enMarket,
+}: {
+  items: Array<{ id: string; q: string; a: string }>;
+  headingLevel?: 2 | 3;
+  m?: Market;
+}) {
   const H = headingLevel === 2 ? 'h2' : 'h3';
   return (
     <div className={s.faqList}>
@@ -282,7 +297,7 @@ export function FaqList({ items, headingLevel = 3 }: { items: Array<{ id: string
           </summary>
           <div className={s.faqA}>
             <p>
-              <InlineMd text={it.a} />
+              <InlineMd text={it.a} m={m} />
             </p>
           </div>
         </details>
@@ -291,13 +306,13 @@ export function FaqList({ items, headingLevel = 3 }: { items: Array<{ id: string
   );
 }
 
-export function Swatches({ palette }: { palette: Array<{ name: string; hex: string }> }) {
+export function Swatches({ palette, m = enMarket }: { palette: Array<{ name: string; hex: string }>; m?: Market }) {
   return (
-    <ul className={s.swatches} aria-label="Colors">
+    <ul className={s.swatches} aria-label={m.t('Colors')}>
       {palette.map((c) => (
         <li key={c.hex}>
           <span className={s.swatch} style={{ background: c.hex }} aria-hidden />
-          {c.name}
+          {m.t(c.name)}
         </li>
       ))}
     </ul>

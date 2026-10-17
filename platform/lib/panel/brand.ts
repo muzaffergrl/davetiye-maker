@@ -3,6 +3,7 @@
 // value there stays a visible placeholder ("[…]"); nothing is invented here.
 
 import { MARKETING } from '../marketing/config.ts';
+import { msg } from '../i18n/translate.ts';
 
 export const PANEL_BRAND = {
   /** Shown as "message BKE Studio on Etsy". */
@@ -12,7 +13,11 @@ export const PANEL_BRAND = {
 } as const;
 
 /** Publishing while the shop has not confirmed the Etsy order yet (CLAIM_ORDER_VERIFICATION=manual, G060-fix). */
-export const ORDER_PENDING_TEXT = `We are still confirming your Etsy order. Your changes are saved; you can publish as soon as the order is confirmed (reload this page to check). Questions? Message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+/** G144: the same text with a {shop} placeholder; the panel shows it as t(ORDER_PENDING_MSG, { shop }). */
+export const ORDER_PENDING_MSG = msg(
+  'We are still confirming your Etsy order. Your changes are saved; you can publish as soon as the order is confirmed (reload this page to check). Questions? Message {shop} on Etsy with your order number.',
+);
+export const ORDER_PENDING_TEXT = ORDER_PENDING_MSG.replace('{shop}', PANEL_BRAND.shopName);
 
 /** True while a value is still a "[PLACEHOLDER]" (then it is shown as text, never as a mailto: link). */
 export function isPlaceholder(value: string): boolean {

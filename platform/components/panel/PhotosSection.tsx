@@ -12,18 +12,22 @@ import { PhotoCropper } from './PhotoCropper.tsx';
 import { usePanelContext } from './fields.tsx';
 import { Button, cx, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
+import { msg, t } from '../../lib/i18n/client.ts';
+
+/** The texts of lib/panel/model.ts shapeLabel(), marked for translation (shown below as t(shapeLabel(…))). */
+export const SHAPE_LABEL_TEXTS = [msg('Any shape'), msg('Tall (portrait)'), msg('Almost square'), msg('Slightly wide'), msg('Wide (landscape)')];
 
 /** Largest original the browser will open for cropping (the cropped upload itself is far smaller). */
 export const MAX_ORIGINAL_BYTES = 30 * 1024 * 1024;
 
 /** Client-side first check of a chosen file. Null = fine. */
 export function checkChosenFile(file: { size: number; type: string; name: string }): string | null {
-  if (!file.size) return 'This file is empty.';
-  if (file.size > MAX_ORIGINAL_BYTES) return `This photo is larger than ${MAX_ORIGINAL_BYTES / 1024 / 1024} MB. Please choose a smaller one.`;
+  if (!file.size) return t('This file is empty.');
+  if (file.size > MAX_ORIGINAL_BYTES) return t('This photo is larger than {mb} MB. Please choose a smaller one.', { mb: MAX_ORIGINAL_BYTES / 1024 / 1024 });
   const type = file.type.toLowerCase();
   const byName = /\.(jpe?g|png|webp|avif|heic|heif)$/i.test(file.name);
   if (type === 'image/svg+xml' || (type && !type.startsWith('image/')) || (!type && !byName)) {
-    return 'Please choose a photo (JPG, PNG, WebP, AVIF or HEIC).';
+    return t('Please choose a photo (JPG, PNG, WebP, AVIF or HEIC).');
   }
   return null;
 }
@@ -38,7 +42,7 @@ export function PhotoSlots({ slots: only, intro = false, compact = false }: { sl
   const [status, setStatus] = useState<Record<string, SlotStatus>>({});
   const set = (key: string, s: SlotStatus) => setStatus((all) => ({ ...all, [key]: s }));
 
-  if (!slots.length) return <p className={styles.hint}>This design has no photo places.</p>;
+  if (!slots.length) return <p className={styles.hint}>{t('This design has no photo places.')}</p>;
 
   const choose = (slot: PanelPhotoSlot, file: File) => {
     const problem = checkChosenFile(file);
@@ -51,13 +55,13 @@ export function PhotoSlots({ slots: only, intro = false, compact = false }: { sl
     setCropping(null);
     set(slot.key, { busy: true });
     const res = await uploadPhoto(slot, blob);
-    set(slot.key, res.ok ? {} : { error: res.message ?? 'The photo could not be uploaded.' });
+    set(slot.key, res.ok ? {} : { error: res.message ? t(res.message) : t('The photo could not be uploaded.') });
   };
 
   const remove = (slot: PanelPhotoSlot, url: string) => {
     removePhoto(slot);
     // Undo puts the same stored photo back (no new upload).
-    snack('Photo removed', { label: 'Undo', run: () => edit((c) => withPhoto(c, slot.source, url)) });
+    snack(t('Photo removed'), { label: t('Undo'), run: () => edit((c) => withPhoto(c, slot.source, url)) });
   };
 
   const filled = slots.filter((s) => photoAt(content, s.source)).length;
@@ -66,17 +70,13 @@ export function PhotoSlots({ slots: only, intro = false, compact = false }: { sl
     <>
       {intro === 'count' ? (
         <p className={styles.hint} data-photo-count>
-          <strong className={styles.counterInline}>
-            {filled} of {slots.length} photos
-          </strong>{' '}
-          · Each photo is cropped to the shape the design uses.
+          <strong className={styles.counterInline}>{t('{filled} of {total} photos', { filled, total: slots.length })}</strong>{' '}
+          · {t('Each photo is cropped to the shape the design uses.')}
         </p>
       ) : intro ? (
         <p className={styles.hint}>
-          Each photo is cropped to the shape the design uses. Until you add a photo, your guests see a soft placeholder image.{' '}
-          <strong className={styles.counterInline}>
-            {filled} of {slots.length} photos
-          </strong>
+          {t('Each photo is cropped to the shape the design uses. Until you add a photo, your guests see a soft placeholder image.')}{' '}
+          <strong className={styles.counterInline}>{t('{filled} of {total} photos', { filled, total: slots.length })}</strong>
         </p>
       ) : null}
       <div className={cx(styles.photoGrid, compact && styles.photoGridCompact)}>
@@ -85,28 +85,29 @@ export function PhotoSlots({ slots: only, intro = false, compact = false }: { sl
           const s = status[slot.key] ?? {};
           const inputId = `photo-input-${slot.key}`;
           const disabled = locked || s.busy || !online;
+          const label = t(slot.label);
           return (
             <div key={slot.key} className={styles.photoCard} data-photo-slot={slot.key}>
               <div className={cx(styles.photoThumb, !url && styles.photoThumbEmpty)} style={{ aspectRatio: String(slot.ratio ?? 4 / 3) }}>
                 {url ? (
                   // The 640 px variant when the photo has one (G055): a thumbnail does not need the full photo.
-                  <img src={previewPhotoUrl(smallestPhotoUrl(url), previewToken)} alt={`${slot.label}: current photo`} className={styles.photoImg} />
+                  <img src={previewPhotoUrl(smallestPhotoUrl(url), previewToken)} alt={t('{photo}: current photo', { photo: label })} className={styles.photoImg} />
                 ) : (
                   <span className={styles.photoEmpty}>
                     <ImagePlus size={24} strokeWidth={1.5} aria-hidden="true" />
-                    No photo yet
+                    {t('No photo yet')}
                   </span>
                 )}
                 {s.busy ? (
                   <span className={styles.photoBusy} role="status">
                     <span className={styles.progress} aria-hidden="true" />
-                    Uploading…
+                    {t('Uploading…')}
                   </span>
                 ) : null}
               </div>
               <div className={styles.photoInfo}>
-                <p className={styles.photoLabel}>{slot.label}</p>
-                <p className={styles.hint}>{shapeLabel(slot.ratio)}</p>
+                <p className={styles.photoLabel}>{label}</p>
+                <p className={styles.hint}>{t(shapeLabel(slot.ratio))}</p>
                 <div className={styles.photoActions}>
                   <input
                     id={inputId}
@@ -123,19 +124,19 @@ export function PhotoSlots({ slots: only, intro = false, compact = false }: { sl
                   />
                   <label htmlFor={inputId} className={cx(styles.btn, url ? styles.btn_secondary : styles.btn_primary, styles.btnSmall)} aria-disabled={disabled || undefined}>
                     {url ? <RefreshCw size={16} strokeWidth={1.75} aria-hidden="true" /> : <ImagePlus size={16} strokeWidth={1.75} aria-hidden="true" />}
-                    <span>{url ? 'Replace' : 'Add photo'}</span>
-                    <span className={styles.visuallyHidden}>: {slot.label}</span>
+                    <span>{url ? t('Replace') : t('Add photo')}</span>
+                    <span className={styles.visuallyHidden}>: {label}</span>
                   </label>
                   {url ? (
-                    <Button small variant="tertiary" icon={Trash2} disabled={locked || s.busy} onClick={() => remove(slot, url)} aria-label={`Remove ${slot.label}`}>
-                      Remove
+                    <Button small variant="tertiary" icon={Trash2} disabled={locked || s.busy} onClick={() => remove(slot, url)} aria-label={t('Remove {photo}', { photo: label })}>
+                      {t('Remove')}
                     </Button>
                   ) : null}
                 </div>
-                {!online ? <p className={styles.hint}>Connect to the internet to add photos.</p> : null}
+                {!online ? <p className={styles.hint}>{t('Connect to the internet to add photos.')}</p> : null}
                 {s.error ? (
                   <p className={styles.issueError} role="alert">
-                    {s.error} Choose another photo.
+                    {s.error} {t('Choose another photo.')}
                   </p>
                 ) : null}
               </div>

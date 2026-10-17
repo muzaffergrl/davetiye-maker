@@ -10,7 +10,7 @@ import { formatDate, formatDateLong, formatTime } from '../../lib/content/format
 import type { ContentRecord, Locale } from '../../lib/content/types.ts';
 import { CONTENT_LIMITS } from '../../lib/content/limits.ts';
 import { defaultNameDisplay, OPTIONAL_BLOCK_LABELS, openingPlace, withPartnerName, type OptionalBlockKey, type PanelTheme } from '../../lib/panel/model.ts';
-import { beforePublishText, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, rightsOneLine, UNDO_TEXT } from '../../lib/panel/rights.ts';
+import { beforePublishText, DATE_FREE_DAYS, IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE } from '../../lib/panel/rights.ts';
 import { DateField, Group, IssueList, RepeatableItem, SelectField, Switch, TextField, TimeField, UrlField, useDeviceZone, usePanelContext } from './fields.tsx';
 import { MusicFields } from './MusicFields.tsx';
 import { PhotoSlots } from './PhotosSection.tsx';
@@ -19,6 +19,7 @@ import { RsvpFormFields } from './RsvpFormFields.tsx';
 import type { PanelCopyEntry } from '../../lib/theme/copy.ts';
 import { Button, cx, Disclosure, EmptyState, RightsMeter, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
+import { t, tn, uiLang } from '../../lib/i18n/client.ts';
 
 const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
 
@@ -38,16 +39,27 @@ export function RightsNote() {
   return (
     <div className={styles.rightsNote} data-rights-note>
       <p className={styles.rightsNoteLine}>
-        <span>{rightsOneLine(total)}</span>{' '}
+        <span>{tn(total, 'After publishing you can change names or the date {n} time.', 'After publishing you can change names or the date {n} times.')}</span>{' '}
         <button type="button" className={styles.rightsMore} aria-expanded={open} aria-controls={moreId} onClick={() => setOpen((v) => !v)} data-rights-more>
-          Learn more
+          {t('Learn more')}
         </button>
       </p>
       <div id={moreId} className={styles.rightsNoteMore} hidden={!open}>
-        <p>Until you publish, you can change them as often as you like.</p>
-        <p>{changesRuleText(total)}</p>
-        <p>{FREE_CHANGES_TEXT}</p>
-        <p>{UNDO_TEXT}</p>
+        <p>{t('Until you publish, you can change them as often as you like.')}</p>
+        <p>
+          {tn(
+            total,
+            'After you publish, you have {n} change in total for your names, monogram and wedding date (changing several in one go counts once).',
+            'After you publish, you have {n} changes in total for your names, monogram and wedding date (changing several in one go counts once).',
+          )}
+        </p>
+        <p>
+          {t('Always free: fixing a small typo (up to {letters} letters in a name), adding a surname, and moving your date by up to {days} days.', {
+            letters: TYPO_MAX_DISTANCE,
+            days: DATE_FREE_DAYS,
+          })}
+        </p>
+        <p>{t('Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back.')}</p>
       </div>
     </div>
   );
@@ -69,7 +81,7 @@ function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows:
       {issues.length ? (
         <>
           <IssueList issues={issues} />
-          <p className={styles.hint}>Use “Change” to fix it. Fixing a small typo is free.</p>
+          <p className={styles.hint}>{t('Use “Change” to fix it. Fixing a small typo is free.')}</p>
         </>
       ) : null}
       <dl className={styles.lockedList}>
@@ -89,19 +101,19 @@ function LockedIdentity({ focus, rows, paths }: { focus: 'names' | 'date'; rows:
         </span>
         {rights.archived ? null : (
           <Button small variant="secondary" icon={Pencil} disabled={locked || !online} onClick={() => openIdentity(focus)} data-change-identity={focus}>
-            Change
+            {t('Change')}
           </Button>
         )}
       </div>
       {rights.archived ? (
-        <p className={styles.hint}>Your website is archived: names and date can no longer be changed.</p>
+        <p className={styles.hint}>{t('Your website is archived: names and date can no longer be changed.')}</p>
       ) : (
         // G087 (G079 note): say once why these are locked, next to the lock.
         <p className={styles.hint} data-locked-why="">
-          Locked since you published, so they never change by accident. Tap Change to update them; small fixes are free.
+          {t('Locked since you published, so they never change by accident. Tap Change to update them; small fixes are free.')}
         </p>
       )}
-      {!online && !rights.archived ? <p className={styles.hint}>Connect to the internet to change your names or date.</p> : null}
+      {!online && !rights.archived ? <p className={styles.hint}>{t('Connect to the internet to change your names or date.')}</p> : null}
     </div>
   );
 }
@@ -114,6 +126,7 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
   const partners = content.partners ?? [];
   const counting = rights.phase !== 'before_publish';
   const auto = defaultNameDisplay(partners);
+  // The couple's own names line (content, in English like the website): not translated.
   const withAnd = partners.map((p) => (p.display_name ?? '').trim()).filter(Boolean).join(' and ');
   return (
     <>
@@ -123,11 +136,11 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           paths={[...partners.flatMap((_, i) => [`partners.${i}.display_name`, `partners.${i}.full_name`]), 'partners', 'name_display', 'initials']}
           rows={[
             ...partners.map((p, i) => ({
-              label: i === 0 ? 'First partner' : 'Second partner',
+              label: i === 0 ? t('First partner') : t('Second partner'),
               value: [p.display_name, p.full_name && p.full_name !== p.display_name ? `(${p.full_name})` : ''].filter(Boolean).join(' '),
             })),
-            { label: 'Names as shown', value: content.name_display ?? '' },
-            ...(fields.initials ? [{ label: 'Monogram', value: content.initials ?? '' }] : []),
+            { label: t('Names as shown'), value: content.name_display ?? '' },
+            ...(fields.initials ? [{ label: t('Monogram'), value: content.initials ?? '' }] : []),
           ]}
         />
       ) : (
@@ -139,11 +152,11 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
             <SetupNames />
           ) : (
             partners.map((p, i) => (
-            <Group key={i} title={i === 0 ? 'First partner' : 'Second partner'}>
+            <Group key={i} title={i === 0 ? t('First partner') : t('Second partner')}>
               <TextField
                 path={`partners.${i}.display_name`}
-                label="First name"
-                hint={i === 0 ? 'As your guests know you, e.g. Clara.' : undefined}
+                label={t('First name')}
+                hint={i === 0 ? t('As your guests know you, e.g. Clara.') : undefined}
                 maxLength={CONTENT_LIMITS.name}
                 value={p.display_name}
                 autoComplete="off"
@@ -151,9 +164,9 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
               />
               <TextField
                 path={`partners.${i}.full_name`}
-                label="Full name"
+                label={t('Full name')}
                 optional
-                hint="For the invitation card. Empty: the card shows the first name. Adding a surname later is free."
+                hint={t('For the invitation card. Empty: the card shows the first name. Adding a surname later is free.')}
                 maxLength={CONTENT_LIMITS.fullName}
                 value={p.full_name}
                 onChange={(v) => edit((c) => withPartnerName(c, i, 'full_name', v))}
@@ -163,7 +176,7 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           )}
           {partners.length < 2 ? (
             <Button variant="secondary" icon={Plus} disabled={locked} onClick={() => edit((c) => void c.partners.push({ display_name: '', full_name: null }))}>
-              Add a second name
+              {t('Add a second name')}
             </Button>
           ) : null}
           {/* G100 (docs/18 §1): the first-run step is the names and the date only; the names line follows the first names
@@ -172,14 +185,14 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           <>
           <TextField
             path="name_display"
-            label="How your names appear"
-            hint={`On the ${openingPlace(opening)}, the page titles and when the link is shared.`}
+            label={t('How your names appear')}
+            hint={t('On the {place}, the page titles and when the link is shared.', { place: t(openingPlace(opening)) })}
             maxLength={CONTENT_LIMITS.nameDisplay}
             value={content.name_display}
             onChange={(v) => edit((c) => void (c.name_display = v))}
           />
           {partners.length === 2 && auto && withAnd ? (
-            <div className={styles.chips} role="group" aria-label="Quick choices for how your names appear">
+            <div className={styles.chips} role="group" aria-label={t('Quick choices for how your names appear')}>
               {[auto, withAnd].map((v) => (
                 <button
                   key={v}
@@ -201,8 +214,8 @@ export function NamesFields({ setup = false }: { setup?: boolean }) {
           {fields.initials && !setup ? (
             <TextField
               path="initials"
-              label="Monogram"
-              hint="Up to 9 characters, e.g. C&J."
+              label={t('Monogram')}
+              hint={t('Up to 9 characters, e.g. C&J.')}
               maxLength={9}
               value={content.initials}
               onChange={(v) => edit((c) => void (c.initials = v))}
@@ -227,8 +240,8 @@ function SetupNames() {
         <TextField
           key={i}
           path={`partners.${i}.display_name`}
-          label={i === 0 ? 'First name' : 'Partner’s first name'}
-          hint={i === 0 ? 'As your guests know you, e.g. Clara.' : undefined}
+          label={i === 0 ? t('First name') : t('Partner’s first name')}
+          hint={i === 0 ? t('As your guests know you, e.g. Clara.') : undefined}
           maxLength={CONTENT_LIMITS.name}
           value={p.display_name}
           autoComplete="off"
@@ -246,14 +259,14 @@ export function SetupFullNames() {
   const anyFull = partners.some((p) => (p.full_name ?? '').trim());
   return (
     <>
-      <Disclosure id="full-names" title="Full names for the invitation card" status="Optional" defaultOpen={anyFull}>
+      <Disclosure id="full-names" title={t('Full names for the invitation card')} status={t('Optional')} defaultOpen={anyFull}>
         <div className={styles.stack}>
-          <p className={styles.hint}>Empty: the card shows the first names. Adding a surname later is free.</p>
+          <p className={styles.hint}>{t('Empty: the card shows the first names. Adding a surname later is free.')}</p>
           {partners.map((p, i) => (
             <TextField
               key={i}
               path={`partners.${i}.full_name`}
-              label={`Full name${p.display_name ? ` of ${p.display_name}` : i === 0 ? ' (first partner)' : ' (partner)'}`}
+              label={p.display_name ? t('Full name of {name}', { name: p.display_name }) : i === 0 ? t('Full name (first partner)') : t('Full name (partner)')}
               optional
               maxLength={CONTENT_LIMITS.fullName}
               value={p.full_name}
@@ -305,7 +318,7 @@ function useTimeZones(current: string): string[] {
 
 function zoneOption(zone: string) {
   const i = zone.indexOf('/');
-  const group = i > 0 ? zone.slice(0, i) : 'Other';
+  const group = i > 0 ? zone.slice(0, i) : t('Other');
   const label = (i > 0 ? zone.slice(i + 1) : zone).replace(/_/g, ' ').replace(/\//g, ' – ');
   return { value: zone, label, group };
 }
@@ -342,20 +355,26 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
   const counting = rights.phase !== 'before_publish';
   const fromPhone = setup && !zoneOpen && deviceZone !== null && content.timezone === deviceZone;
   const time = content.ceremony_time || '16:00';
+  // One sentence for translators; the city sits where {city} is.
+  const [zoneBefore, zoneAfter = ''] = t('We’ll use {city} time, from your phone.').split('{city}');
   const moreNeedsAttention = isSample('timezone') || issuesAt('timezone').length > 0 || issuesAt('locale').length > 0;
   const zoneSelect = (
     <>
       <SelectField
         path="timezone"
-        label="Time zone of the wedding"
-        hint={`The countdown, the reply deadline and guests’ calendars use ${zoneCity(content.timezone) || 'this'} time.`}
+        label={t('Time zone of the wedding')}
+        hint={
+          zoneCity(content.timezone)
+            ? t('The countdown, the reply deadline and guests’ calendars use {city} time.', { city: zoneCity(content.timezone) })
+            : t('The countdown, the reply deadline and guests’ calendars use this time.')
+        }
         value={content.timezone}
         options={zones.map(zoneOption)}
         onChange={(v) => edit((c) => void (c.timezone = v))}
       />
       {deviceZone && deviceZone !== content.timezone ? (
         <Button small variant="tertiary" icon={Shuffle} disabled={locked} onClick={() => edit((c) => void (c.timezone = deviceZone))}>
-          Use {zoneCity(deviceZone)} time (this phone)
+          {t('Use {city} time (this phone)', { city: zoneCity(deviceZone) })}
         </Button>
       ) : null}
     </>
@@ -363,17 +382,17 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
   return (
     <>
       {counting ? (
-        <LockedIdentity focus="date" paths={['date']} rows={[{ label: 'Wedding date', value: formatDateLong(content.date, locale) ?? content.date }]} />
+        <LockedIdentity focus="date" paths={['date']} rows={[{ label: t('Wedding date'), value: formatDateLong(content.date, locale) ?? content.date }]} />
       ) : (
         <>
           {/* In the setup the rule is shown once, on step 1 and before publishing (G060-fix). */}
           {setup ? null : <RightsNote />}
-          <DateField path="date" label="Wedding date" value={content.date} locale={locale} onChange={(v) => edit((c) => void (c.date = v))} />
+          <DateField path="date" label={t('Wedding date')} value={content.date} locale={locale} onChange={(v) => edit((c) => void (c.date = v))} />
         </>
       )}
       <TimeField
         path="ceremony_time"
-        label="Ceremony time"
+        label={t('Ceremony time')}
         value={content.ceremony_time}
         locale={locale}
         onChange={(v) =>
@@ -387,16 +406,18 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
       />
       {fromPhone ? (
         <div className={styles.field} data-zone-from-phone>
-          <p className={styles.label}>Time zone of the wedding</p>
+          <p className={styles.label}>{t('Time zone of the wedding')}</p>
           <p className={styles.zoneLine}>
             <span>
-              We&rsquo;ll use <strong>{zoneCity(content.timezone)}</strong> time, from your phone.
+              {zoneBefore}
+              <strong>{zoneCity(content.timezone)}</strong>
+              {zoneAfter}
             </span>
             <Button small variant="tertiary" disabled={locked} onClick={() => setZoneOpen(true)} data-change-zone>
-              Change
+              {t('Change')}
             </Button>
           </p>
-          <p className={styles.hint}>The countdown, the reply deadline and guests&rsquo; calendars use it.</p>
+          <p className={styles.hint}>{t('The countdown, the reply deadline and guests’ calendars use it.')}</p>
         </div>
       ) : setup ? (
         zoneSelect
@@ -405,20 +426,20 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
         // when one of them still needs attention (sample time zone, an issue), so a jump from Home lands on it.
         <Disclosure
           id="date-more"
-          title="More options"
-          status={`${zoneCity(content.timezone) || 'Time zone'} · ${locale === 'en-US' ? 'Month first' : 'Day first'}`}
+          title={t('More options')}
+          status={`${zoneCity(content.timezone) || t('Time zone')} · ${locale === 'en-US' ? t('Month first') : t('Day first')}`}
           defaultOpen={moreNeedsAttention}
           openRequest={jump && (jump.path === 'timezone' || jump.path === 'locale') ? jump : null}
         >
           {zoneSelect}
           <Segmented<DateStyle>
             id="f-locale"
-            label="Date style"
+            label={t('Date style')}
             value={locale === 'en-US' ? 'en-US' : 'day'}
             disabled={locked}
             options={[
-              { value: 'en-US', label: 'Month first', hint: `${formatDate(sampleDate, 'en-US')} · ${formatTime(time, 'en-US')}` },
-              { value: 'day', label: 'Day first', hint: `${formatDate(sampleDate, 'en-GB')} · ${formatTime(time, 'en-GB')}` },
+              { value: 'en-US', label: t('Month first'), hint: `${formatDate(sampleDate, 'en-US')} · ${formatTime(time, 'en-US')}` },
+              { value: 'day', label: t('Day first'), hint: `${formatDate(sampleDate, 'en-GB')} · ${formatTime(time, 'en-GB')}` },
             ]}
             onChange={(v) => edit((c) => void (c.locale = v === 'en-US' ? 'en-US' : c.locale !== 'en-US' ? c.locale : 'en-GB'))}
           />
@@ -428,13 +449,16 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
     </>
   );
 }
+/** A block's name inside "Show …": lower case like before, except in German (nouns keep their capital). */
+const blockName = (label: string) => (uiLang() === 'de' ? t(label) : t(label).toLowerCase());
+
 export function BlockSwitch({ block, label, hint }: { block: OptionalBlockKey; label?: string; hint?: string }) {
   const { content, edit } = usePanelContext();
   return (
     <Switch
       id={`optional-${block}`}
-      label={label ?? `Show ${OPTIONAL_BLOCK_LABELS[block].label.toLowerCase()}`}
-      hint={hint ?? OPTIONAL_BLOCK_LABELS[block].hint}
+      label={label ?? t('Show {thing}', { thing: blockName(OPTIONAL_BLOCK_LABELS[block].label) })}
+      hint={hint ?? t(OPTIONAL_BLOCK_LABELS[block].hint)}
       checked={content.optional_blocks?.[block] === true}
       onChange={(on) => edit((c) => void (c.optional_blocks = { ...(c.optional_blocks ?? {}), [block]: on }))}
     />
@@ -451,22 +475,22 @@ export function VenueFields({ setup = false }: { setup?: boolean }) {
   const venueSlots = setup ? [] : photoSlots.filter((s) => s.source === 'media.venue_image');
   return (
     <>
-      <TextField path="venue.name" label="Venue name" maxLength={CONTENT_LIMITS.venueName} value={v.name} onChange={(x) => edit((c) => void (c.venue.name = x))} />
-      <TextField path="venue.city" label="City" value={v.city} onChange={(x) => edit((c) => void (c.venue.city = x))} />
-      <TextField path="venue.region" label="State or region" optional value={v.region} onChange={(x) => edit((c) => void (c.venue.region = nullIfEmpty(x)))} />
-      <TextField path="venue.country" label="Country" optional value={v.country} onChange={(x) => edit((c) => void (c.venue.country = nullIfEmpty(x)))} />
-      <TextField path="venue.address" label="Street address" optional value={v.address} onChange={(x) => edit((c) => void (c.venue.address = nullIfEmpty(x)))} />
+      <TextField path="venue.name" label={t('Venue name')} maxLength={CONTENT_LIMITS.venueName} value={v.name} onChange={(x) => edit((c) => void (c.venue.name = x))} />
+      <TextField path="venue.city" label={t('City')} value={v.city} onChange={(x) => edit((c) => void (c.venue.city = x))} />
+      <TextField path="venue.region" label={t('State or region')} optional value={v.region} onChange={(x) => edit((c) => void (c.venue.region = nullIfEmpty(x)))} />
+      <TextField path="venue.country" label={t('Country')} optional value={v.country} onChange={(x) => edit((c) => void (c.venue.country = nullIfEmpty(x)))} />
+      <TextField path="venue.address" label={t('Street address')} optional value={v.address} onChange={(x) => edit((c) => void (c.venue.address = nullIfEmpty(x)))} />
       <UrlField
         path="urls.map"
-        label="Map link"
+        label={t('Map link')}
         optional
-        hint="Paste a Google Maps or Apple Maps link to the venue."
+        hint={t('Paste a Google Maps or Apple Maps link to the venue.')}
         value={content.urls?.map}
         onChange={(x) => edit((c) => venueMapLinkChange(c, x))}
       />
       {setup ? null : <MapFields />}
       {venueSlots.length ? (
-        <Group title="Venue photo">
+        <Group title={t('Venue photo')}>
           <PhotoSlots slots={venueSlots} compact />
         </Group>
       ) : null}
@@ -487,10 +511,10 @@ export function ScheduleFields() {
   const add = () => edit((c) => void c.schedule.push({ label: '', time: '', location: null }));
   return (
     <>
-      <p className={styles.hint}>The order of the day, from the ceremony on. Up to {CONTENT_LIMITS.scheduleItems} events.</p>
+      <p className={styles.hint}>{t('The order of the day, from the ceremony on. Up to {max} events.', { max: CONTENT_LIMITS.scheduleItems })}</p>
       {!schedule.length ? (
-        <EmptyState icon={CalendarDays} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={add}>Add an event</Button>}>
-          Add the order of the day: ceremony, dinner, dancing.
+        <EmptyState icon={CalendarDays} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={add}>{t('Add an event')}</Button>}>
+          {t('Add the order of the day: ceremony, dinner, dancing.')}
         </EmptyState>
       ) : null}
       {schedule.map((row, i) => (
@@ -499,28 +523,28 @@ export function ScheduleFields() {
           index={i}
           count={schedule.length}
           noun="event"
-          title={`Event ${i + 1}${row.label ? ` · ${row.label}` : ''}`}
+          title={`${t('Event {n}', { n: i + 1 })}${row.label ? ` · ${row.label}` : ''}`}
           select={(c) => c.schedule ?? []}
           assign={(c, list) => void (c.schedule = list)}
           data-schedule-row={i}
         >
-          <TimeField path={`schedule.${i}.time`} label="Time" value={row.time} locale={content.locale} onChange={(v) => edit((c) => void (c.schedule[i].time = v))} />
-          <TextField path={`schedule.${i}.label`} label="What happens" placeholder="Ceremony" value={row.label} onChange={(v) => edit((c) => void (c.schedule[i].label = v))} />
-          <TextField path={`schedule.${i}.location`} label="Where" optional value={row.location} onChange={(v) => edit((c) => void (c.schedule[i].location = nullIfEmpty(v)))} />
+          <TimeField path={`schedule.${i}.time`} label={t('Time')} value={row.time} locale={content.locale} onChange={(v) => edit((c) => void (c.schedule[i].time = v))} />
+          <TextField path={`schedule.${i}.label`} label={t('What happens')} placeholder={t('Ceremony')} value={row.label} onChange={(v) => edit((c) => void (c.schedule[i].label = v))} />
+          <TextField path={`schedule.${i}.location`} label={t('Where')} optional value={row.location} onChange={(v) => edit((c) => void (c.schedule[i].location = nullIfEmpty(v)))} />
         </RepeatableItem>
       ))}
       <IssueList issues={listIssues} />
       {/* exactly at the limit; over it (a site saved before the limit) the error above says what to do */}
       {schedule.length === CONTENT_LIMITS.scheduleItems ? (
         <p className={styles.hint} data-schedule-full>
-          {schedule.length} of {CONTENT_LIMITS.scheduleItems} events: the most your website can show.
+          {t('{count} of {max} events: the most your website can show.', { count: schedule.length, max: CONTENT_LIMITS.scheduleItems })}
         </p>
       ) : null}
       {schedule.length ? (
         <div className={styles.buttonRow}>
           {schedule.length < CONTENT_LIMITS.scheduleItems ? (
             <Button variant="secondary" icon={Plus} disabled={locked} onClick={add}>
-              Add an event
+              {t('Add an event')}
             </Button>
           ) : null}
           {unsorted ? (
@@ -529,7 +553,7 @@ export function ScheduleFields() {
               disabled={locked}
               onClick={() => edit((c) => void (c.schedule = [...c.schedule].sort((a, b) => (a.time || '99').localeCompare(b.time || '99'))))}
             >
-              Sort by time
+              {t('Sort by time')}
             </Button>
           ) : null}
         </div>
@@ -557,12 +581,12 @@ export function StoryFields() {
     });
   return (
     <>
-      <BlockSwitch block="our_story" label="Show the Our Story page" hint="A page with your story photos and captions." />
-      {!storyOn ? <p className={styles.note}>The Our Story page is off: guests do not see it. You can still prepare it here.</p> : null}
+      <BlockSwitch block="our_story" label={t('Show the Our Story page')} hint={t('A page with your story photos and captions.')} />
+      {!storyOn ? <p className={styles.note}>{t('The Our Story page is off: guests do not see it. You can still prepare it here.')}</p> : null}
       <TextField
         path="story.intro"
-        label="Intro line"
-        hint="Your wedding date follows this line on the Our Story page, e.g. “… led us to May 15, 2027.”"
+        label={t('Intro line')}
+        hint={t('Your wedding date follows this line on the Our Story page, e.g. “… led us to May 15, 2027.”')}
         optional
         multiline
         rows={2}
@@ -577,13 +601,15 @@ export function StoryFields() {
         }
       />
       {shown ? (
-        <p className={styles.hint}>This design shows {shown === 1 ? 'one moment' : `up to ${shown} moments`}, each with a short caption and a photo.</p>
+        <p className={styles.hint}>
+          {tn(shown, 'This design shows one moment, each with a short caption and a photo.', 'This design shows up to {n} moments, each with a short caption and a photo.')}
+        </p>
       ) : (
-        <p className={styles.hint}>This design does not show story moments.</p>
+        <p className={styles.hint}>{t('This design does not show story moments.')}</p>
       )}
       {shown && !items.length ? (
-        <EmptyState icon={Plus} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={add}>Add a moment</Button>}>
-          Add up to {shown} moments with a photo and a short title.
+        <EmptyState icon={Plus} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={add}>{t('Add a moment')}</Button>}>
+          {t('Add up to {n} moments with a photo and a short title.', { n: shown })}
         </EmptyState>
       ) : null}
       {items.map((item, i) => (
@@ -592,16 +618,16 @@ export function StoryFields() {
           index={i}
           count={items.length}
           noun="moment"
-          title={`Moment ${i + 1}`}
+          title={t('Moment {n}', { n: i + 1 })}
           select={(c) => c.story?.items ?? []}
           assign={(c, list) => void (c.story = { ...(c.story ?? {}), items: list })}
         >
-          {i >= shown ? <p className={styles.note}>This design shows only {shown === 1 ? 'one moment' : `${shown} moments`}: guests do not see this one.</p> : null}
-          <TextField path={`story.items.${i}.caption`} label="Caption" maxLength={60} value={item.caption} onChange={(v) => edit((c) => void (c.story!.items![i].caption = v))} />
+          {i >= shown ? <p className={styles.note}>{tn(shown, 'This design shows only one moment: guests do not see this one.', 'This design shows only {n} moments: guests do not see this one.')}</p> : null}
+          <TextField path={`story.items.${i}.caption`} label={t('Caption')} maxLength={60} value={item.caption} onChange={(v) => edit((c) => void (c.story!.items![i].caption = v))} />
           {fields.storyText ? (
             <TextField
               path={`story.items.${i}.text`}
-              label="A few words"
+              label={t('A few words')}
               optional
               multiline
               rows={3}
@@ -621,11 +647,11 @@ export function StoryFields() {
       <IssueList issues={[...issuesAt('story'), ...issuesAt('story.items')]} />
       {items.length && items.length < shown ? (
         <Button variant="secondary" icon={Plus} disabled={locked} onClick={add}>
-          Add a moment
+          {t('Add a moment')}
         </Button>
       ) : null}
       {storySlots.length ? (
-        <Group title="Story photos">
+        <Group title={t('Story photos')}>
           <PhotoSlots slots={storySlots} compact />
         </Group>
       ) : null}
@@ -650,23 +676,23 @@ export function DetailsFields({ optionalBlocks }: { optionalBlocks: readonly Opt
       {/* Not part of the names (G060-fix): it is free text, so it never uses a name change and never marks Names as "sample". */}
       <TextField
         path="host_line"
-        label="Host line"
+        label={t('Host line')}
         optional
-        hint="A line above your names on the invitation, for example: Together with their families."
+        hint={t('A line above your names on the invitation, for example: Together with their families.')}
         value={content.host_line}
         onChange={(v) => edit((c) => void (c.host_line = nullIfEmpty(v)))}
       />
-      <Group title="Dress code">
-        {has('dress_code') ? <BlockSwitch block="dress_code" label="Show the dress code" hint="Guests see it on the Details page." /> : null}
-        <TextField path="dress_code" label="Dress code" optional placeholder="Garden formal" value={content.dress_code} onChange={(v) => edit((c) => void (c.dress_code = nullIfEmpty(v)))} />
+      <Group title={t('Dress code')}>
+        {has('dress_code') ? <BlockSwitch block="dress_code" label={t('Show the dress code')} hint={t('Guests see it on the Details page.')} /> : null}
+        <TextField path="dress_code" label={t('Dress code')} optional placeholder={t('Garden formal')} value={content.dress_code} onChange={(v) => edit((c) => void (c.dress_code = nullIfEmpty(v)))} />
       </Group>
-      <Group title="Registry">
-        {has('registry') ? <BlockSwitch block="registry" label="Show the registry" hint="A button to your registry." /> : null}
-        <UrlField path="urls.registry" label="Registry link" optional value={urls.registry} onChange={setUrl('registry')} />
+      <Group title={t('Registry')}>
+        {has('registry') ? <BlockSwitch block="registry" label={t('Show the registry')} hint={t('A button to your registry.')} /> : null}
+        <UrlField path="urls.registry" label={t('Registry link')} optional value={urls.registry} onChange={setUrl('registry')} />
       </Group>
       {has('guest_policy') ? (
-        <Group title="Guest policy">
-          <BlockSwitch block="guest_policy" label="Show the guest policy note" hint="The design's short note about who is invited." />
+        <Group title={t('Guest policy')}>
+          <BlockSwitch block="guest_policy" label={t('Show the guest policy note')} hint={t("The design's short note about who is invited.")} />
         </Group>
       ) : null}
       <IssueList issues={issuesAt('urls')} />
@@ -689,17 +715,17 @@ export function FaqFields() {
     <>
       <Switch
         id="faq-show"
-        label="Show on the website"
-        hint={on ? 'Guests see these on the Details page.' : 'Turn on to show your questions and answers to guests.'}
+        label={t('Show on the website')}
+        hint={on ? t('Guests see these on the Details page.') : t('Turn on to show your questions and answers to guests.')}
         checked={on}
         onChange={(v) => edit((c) => void (c.optional_blocks = { ...(c.optional_blocks ?? {}), faq: v }))}
       />
       <p className={styles.hint}>
-        Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {CONTENT_LIMITS.faqItems} questions.
+        {t('Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {max} questions.', { max: CONTENT_LIMITS.faqItems })}
       </p>
       {!items.length ? (
-        <EmptyState icon={Plus} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={add} data-add-faq>Add a question</Button>}>
-          Answer what guests often ask, such as parking or children.
+        <EmptyState icon={Plus} action={<Button variant="primary" icon={Plus} disabled={locked} onClick={add} data-add-faq>{t('Add a question')}</Button>}>
+          {t('Answer what guests often ask, such as parking or children.')}
         </EmptyState>
       ) : null}
       {items.map((item, i) => (
@@ -708,22 +734,22 @@ export function FaqFields() {
           index={i}
           count={items.length}
           noun="question"
-          title={`Question ${i + 1}`}
+          title={t('Question {n}', { n: i + 1 })}
           select={(c) => c.faq ?? []}
           assign={(c, list) => void (c.faq = list)}
           data-faq-row={i}
         >
           <TextField
             path={`faq.${i}.q`}
-            label="Question"
+            label={t('Question')}
             maxLength={CONTENT_LIMITS.faqQuestion}
-            placeholder="Is there parking at the venue?"
+            placeholder={t('Is there parking at the venue?')}
             value={item.q}
             onChange={(v) => edit((c) => void (c.faq![i].q = v))}
           />
           <TextField
             path={`faq.${i}.a`}
-            label="Answer"
+            label={t('Answer')}
             multiline
             rows={3}
             maxLength={CONTENT_LIMITS.faqAnswer}
@@ -735,10 +761,10 @@ export function FaqFields() {
       <IssueList issues={issuesAt('faq')} />
       {items.length && items.length < CONTENT_LIMITS.faqItems ? (
         <Button variant="secondary" icon={Plus} disabled={locked} data-add-faq onClick={add}>
-          Add a question
+          {t('Add a question')}
         </Button>
       ) : items.length ? (
-        <p className={styles.hint}>This section holds {CONTENT_LIMITS.faqItems} questions at most.</p>
+        <p className={styles.hint}>{t('This section holds {max} questions at most.', { max: CONTENT_LIMITS.faqItems })}</p>
       ) : null}
     </>
   );
@@ -755,23 +781,23 @@ export function RsvpFields({ onOpenGuests, copy = [] }: { onOpenGuests: () => vo
     <>
       <Switch
         id="rsvp-accept"
-        label="Accept replies on the website"
-        hint="Turn off if you collect replies another way; the form then shows as closed."
+        label={t('Accept replies on the website')}
+        hint={t('Turn off if you collect replies another way; the form then shows as closed.')}
         checked={content.rsvp?.method !== 'none'}
         onChange={(on) => edit((c) => void (c.rsvp = { ...c.rsvp, method: on ? null : 'none' }))}
       />
       <DateField
         path="rsvp.deadline"
-        label="Reply by"
+        label={t('Reply by')}
         value={deadline}
         locale={content.locale}
-        display={long ? `Replies close at the end of ${long} (${zoneCity(content.timezone)} time).` : undefined}
+        display={long ? t('Replies close at the end of {date} ({city} time).', { date: long, city: zoneCity(content.timezone) }) : undefined}
         onChange={(v) => edit((c) => void (c.rsvp = { ...c.rsvp, deadline: v }))}
       />
       {/* G128: the reply form's fields (labels, required / optional) and the couple's own questions */}
       <RsvpFormFields copy={copy} questionsShown={fields.rsvpQuestions} />
       <Button variant="tertiary" onClick={onOpenGuests}>
-        See the replies under Guests
+        {t('See the replies under Guests')}
       </Button>
     </>
   );
