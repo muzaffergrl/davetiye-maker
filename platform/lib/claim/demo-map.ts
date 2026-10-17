@@ -12,6 +12,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'boho-pampas-terracotta': { lat: 34.1347, lng: -116.3131 }, // Joshua Tree
   'burgundy-velvet-autumn': { lat: 35.5951, lng: -82.5515 }, // Asheville
   'crimson-rose-atelier': { lat: 45.8081, lng: 9.0852 }, // Como (Lake Como)
+  'celestial-observatory': { lat: 35.1983, lng: -111.6513 }, // Flagstaff, AZ (the venue is fictional)
   'cherry-blossom-spring': { lat: 38.9072, lng: -77.0369 }, // Washington, D.C.
   'coastal-seaside': { lat: 41.6821, lng: -69.9597 }, // Chatham, MA
   'dusty-blue-champagne': { lat: 32.7765, lng: -79.9311 }, // Charleston, SC

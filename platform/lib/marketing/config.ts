@@ -230,6 +230,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 29 (G168, docs/24 2nd wave): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'celestial-observatory',
+      name: 'Celestial Observatory',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

@@ -919,6 +919,7 @@ export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'orient-express-voyage': ['classic', 'destination'],
   'riad-lantern-nights': ['classic', 'destination'],
   'maison-patisserie': ['classic'],
+  'celestial-observatory': ['classic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],

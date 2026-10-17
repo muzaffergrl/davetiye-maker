@@ -286,6 +286,9 @@ const dict: Dict = {
   'Tonight\'s programme': 'El programa de esta noche',
   'You are invited to a premiere': 'Están invitados a un estreno',
   'Your seat is saved. We look forward to the evening together.': 'Su asiento está reservado. Esperamos con ilusión compartir la velada.',
+  // G168 Celestial Observatory
+  'Open the dome': 'Abrir la cúpula',
+  'Written in the stars': 'Escrito en las estrellas',
 };
 
 export default dict;

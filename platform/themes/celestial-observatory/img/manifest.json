@@ -1,0 +1,210 @@
+{
+ "sources": {
+  "night_sky": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png",
+  "chart_paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
+  "brass": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48), darkened)"
+ },
+ "sky": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "sky-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 6038
+   },
+   {
+    "file": "sky-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 79324
+   }
+  ]
+ },
+ "night": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "night-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1100
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 16872
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 61520
+   }
+  ]
+ },
+ "brass": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "brass-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 5012
+   }
+  ]
+ },
+ "ph_round": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ph_round-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1210
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 750
+   }
+  ]
+ },
+ "placeholders": {
+  "round": "ph_round-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "1/1"
+  },
+  "story_1": {
+   "aspect": "1/1"
+  },
+  "story_2": {
+   "aspect": "1/1"
+  },
+  "story_3": {
+   "aspect": "1/1"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "aspect": 0.82,
+  "slit_pct": [
+   39,
+   4,
+   22,
+   62
+  ],
+  "card_pct": [
+   14,
+   6,
+   72,
+   82
+  ],
+  "ring_window_pct": [
+   13,
+   13,
+   74,
+   74
+  ],
+  "_note": "% of the closed observatory (left, top, width, height); GPT dome.png measures its own slit"
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed observatory (brass + sky) on the night ground",
+  "bytes": 51390
+ },
+ "favicon": {
+  "src_box": [
+   31,
+   35,
+   354,
+   426
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 28829
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "dome",
+   "shutter",
+   "star_1",
+   "star_2",
+   "star_3",
+   "star_chart",
+   "planisphere_ring",
+   "astrolabe",
+   "moon_phases",
+   "orbits",
+   "card_small",
+   "web_hero",
+   "night_sky",
+   "chart_paper"
+  ]
+ },
+ "_note": "G168 interim build: sky, paper and brass cut and toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 386226
+}

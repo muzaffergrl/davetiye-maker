@@ -56,6 +56,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'kintsugi-washi': { music: 'first-light', opening: [[0, 'ribbon'], [550, 'paper'], [1100, 'paper'], [1650, 'paper'], [2100, 'paper'], [2900, 'slide'], [3500, 'chime']] },
   // Riad Lantern Nights: a knock on the doors (tug) · the leaves swing in (doors) · the card comes out (rise) · forward
   'riad-lantern-nights': { music: 'evening-strings', opening: [[0, 'tap'], [300, 'whoosh'], [1900, 'slide'], [3100, 'chime']] },
+  // Celestial Observatory: dome latch (head) · shutter halves part (shutters) · constellation chime · card rises (rise) · forward
+  'celestial-observatory': { music: 'evening-strings', opening: [[0, 'clasp'], [450, 'whoosh'], [1700, 'chime'], [3000, 'slide'], [3600, 'chime']] },
   // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward
   'grand-theatre-premiere': { music: 'evening-strings', opening: [[0, 'tap'], [400, 'whoosh'], [2000, 'slide'], [2900, 'chime']] },
   // 01 bow · lift · rise · forward

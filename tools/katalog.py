@@ -440,6 +440,13 @@ EK_TEMALAR = [
          dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
          font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
          hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
+    # 2. dalga (29–32, docs/24): aynı kurallar; GPT parçalarından önce kuruldu.
+    dict(no=29, klasor="29_Celestial_Observatory", ad="Celestial Observatory",
+         zarf="Pirinç gözlemevi kubbesi; yarık kapağının iki yarısı ayrılır, gece göğü görünür, yıldızlar yanar, kart yarıktan yükselir.",
+         foto="Döner yıldız haritası (planisfer) yuvarlak çerçeveler; kadran süpürmesiyle belirir, kaydırınca pirinç halka ve gök döner.",
+         dekor="Yıldız haritası, pirinç usturlap, gezegen yörüngeleri, ay evreleri", teknik="gravür + altın varak",
+         font=("Imperial Script", "Forum"), palet_adi="midnight-silver-gold",
+         hareket="Kubbe yarığının açılması (iki kapak yarısı), yıldızların sırayla yanması, takımyıldız çizgisinin çiftin baş harflerini birleştirmesi (UI çizgi), kaydırmayla dönen gök ve planisfer halkaları, kadran süpürmesiyle foto"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
