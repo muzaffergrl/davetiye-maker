@@ -54,13 +54,14 @@ function act(id: string, action: string, cookie: string, json: unknown = {}) {
 }
 
 test('editable message: the "cannot be sent yet" check runs on the edited text too', () => {
-  const t = messageTemplate('publish_blocked_pending')!;
+  // G135 took the undecided time out of publish_blocked_pending; date_moved still waits for a decision.
+  const t = messageTemplate('date_moved')!;
   const r = renderMessage(t, { names: 'Ada & Grace', order: '1234567890', design: 'Blush Garden Rose', siteUrl: 'https://x/ada', startUrl: 'https://x/start' });
-  // the template still waits for a decision ([ORDER CHECK TIME])
+  // the template still waits for a decision ([POSTPONEMENT POLICY])
   assert.deepEqual(r.missing, messageMissing(r.text));
-  assert.ok(r.missing.includes('[ORDER CHECK TIME]'));
-  // the shop writes the time in by hand: the edited text can be copied
-  const edited = r.text.replace('[ORDER CHECK TIME]', '24 hours');
+  assert.ok(r.missing.includes('[POSTPONEMENT POLICY]'));
+  // the shop writes the policy in by hand: the edited text can be copied
+  const edited = r.text.replace('[POSTPONEMENT POLICY]', 'We can move it once for free.');
   assert.deepEqual(messageMissing(edited), []);
   // a half-written edit is caught
   assert.deepEqual(messageMissing('Hi {names}, see [EXTENSION POLICY].'), ['{names}', '[EXTENSION POLICY]']);

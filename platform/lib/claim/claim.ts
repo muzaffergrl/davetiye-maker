@@ -27,6 +27,7 @@
 // "order_used" below; G043 (Supabase) should do the same with a unique index on sites(order_ref).
 
 import { randomInt } from 'node:crypto';
+import { isValidTimeZone } from '../content/format.ts';
 import type { ContentRecord } from '../content/types.ts';
 import { OrderRefTakenError, SlugTakenError, type DataAdapter, type SiteRecord } from '../data/types.ts';
 import { defaultInitials, defaultNameDisplay } from '../panel/model.ts';
@@ -145,10 +146,13 @@ const text = (v: unknown): string => (typeof v === 'string' ? v : '');
  * is typed, and a surname added later is never counted as a name change (G060-fix; a full name that
  * started as a copy of the first name made the first surname look like a new name). Everything else
  * stays demo content until they edit it. Demo URLs are null, photos empty (theme placeholders).
+ * The time zone is the buyer's phone's when /start sent one (G135, docs/16 §5.3), so the draft, the setup and the
+ * shop admin show the same zone from the start (before, only the setup's first step switched it, later).
  */
-export function draftFromDemo(demo: ContentRecord, names: readonly string[]): ContentRecord {
+export function draftFromDemo(demo: ContentRecord, names: readonly string[], timeZone: string | null = null): ContentRecord {
   const content = structuredClone(demo);
   content.record_kind = 'customer';
+  if (timeZone) content.timezone = timeZone;
   const given = names.map(cleanName);
   if (!given.some(Boolean)) return content;
   const spaced = (content.initials ?? '').includes(' & ');
@@ -162,6 +166,11 @@ export function draftFromDemo(demo: ContentRecord, names: readonly string[]): Co
   content.name_display = defaultNameDisplay(content.partners);
   content.initials = defaultInitials(content.partners, spaced).slice(0, 9);
   return content;
+}
+
+/** The phone's time zone sent by /start: an IANA "Area/City" name this server knows, else null (the sample stays). */
+export function claimTimeZone(v: unknown): string | null {
+  return typeof v === 'string' && v.length <= 64 && /^[A-Za-z]+(?:\/[A-Za-z0-9_+-]+)+$/.test(v) && isValidTimeZone(v) ? v : null;
 }
 
 async function slugIsFree(adapter: DataAdapter, slug: string): Promise<boolean> {
@@ -233,7 +242,7 @@ export interface ClaimSuccessBody {
   orderPending: boolean;
 }
 
-/** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, website? (honeypot)}. */
+/** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?, website? (honeypot)}. */
 export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>): Promise<ClaimResult> {
   const { adapter } = ctx;
   const limiter = ctx.limiter ?? getClaimRateLimiter();
@@ -316,7 +325,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     const global = await limiter.hit('claim:sites:all', limits.sitesGlobal);
     if (!global.allowed) return claimError(429, 'busy', {}, retryAfter(global.retryAfterMs));
 
-    const content = draftFromDemo(theme.demo, buyerNames);
+    const content = draftFromDemo(theme.demo, buyerNames, claimTimeZone(raw.timeZone));
     // Manual order checks (G060-fix): the draft is made now, publishing waits for the shop (scripts/verify-order.ts).
     const at = new Date(now()).toISOString();
     const orderCheck =

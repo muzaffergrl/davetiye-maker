@@ -319,14 +319,17 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
   const [zoneOpen, setZoneOpen] = useState(false);
   // First run (G060-fix, docs/16 §5.3): while the date and the time zone are still the design's sample, the time zone
   // and the date style follow this phone (a UK couple must not get a New York ceremony time in guests' calendars).
+  // G135: /start already stores the phone's zone with the claim; then only the date style is left to follow here.
+  // Sites the shop starts in the admin keep the design's zone until the buyer's own phone opens this step.
   const sample = theme.sample;
   const followed = useRef(false);
   useEffect(() => {
     if (!setup || locked || followed.current || !deviceZone || !sample) return;
-    if (content.date !== sample.date || content.timezone !== sample.timezone) return;
+    const zoneIsSample = content.timezone === sample.timezone;
+    if (content.date !== sample.date || (!zoneIsSample && content.timezone !== deviceZone)) return;
     followed.current = true;
     const loc = phoneLocale();
-    const zone = deviceZone !== content.timezone ? deviceZone : null;
+    const zone = zoneIsSample && deviceZone !== content.timezone ? deviceZone : null;
     const style = loc && content.locale === sample.locale && loc !== content.locale ? loc : null;
     if (zone || style)
       edit((c) => {
