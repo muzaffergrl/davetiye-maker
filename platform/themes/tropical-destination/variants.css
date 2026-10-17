@@ -1,0 +1,116 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 12
+   (kaynak: collections/12_Tropical_Destination/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-062824: 6 40 36;
+  --c-0e3c38: 14 60 56;
+  --c-14463c: 20 70 60;
+  --c-17635d: 23 99 93;
+  --c-1e3a3a: 30 58 58;
+  --c-1f7c75: 31 124 117;
+  --c-cdebe6: 205 235 230;
+  --c-e2f4f0: 226 244 240;
+  --c-e8fcf8: 232 252 248;
+  --c-f0fdfa: 240 253 250;
+}
+
+/* V06_blush_paradise · Blush Paradise */
+html[data-variant="blush-paradise"] {
+  --c-062824: 44 27 32;
+  --c-0e3c38: 68 42 48;
+  --c-14463c: 80 49 61;
+  --c-17635d: 113 71 81;
+  --c-1e3a3a: 60 47 47;
+  --c-1f7c75: 141 91 102;
+  --c-cdebe6: 236 220 224;
+  --c-e2f4f0: 238 236 237;
+  --c-e8fcf8: 247 243 244;
+  --c-f0fdfa: 246 249 248;
+  --ink: #3C2F2F;
+  --ink-soft: #543F42;
+  --page: #F7F3F4;
+  --script-ink: #584551;
+  --teal: #8D5B66;
+  --teal-ink: #6E4650;
+}
+
+/* V02_coral_sunset · Coral Sunset */
+html[data-variant="coral-sunset"] {
+  --c-062824: 44 23 17;
+  --c-0e3c38: 69 38 29;
+  --c-14463c: 84 44 40;
+  --c-17635d: 116 67 52;
+  --c-1e3a3a: 58 43 34;
+  --c-1f7c75: 146 85 67;
+  --c-cdebe6: 235 215 207;
+  --c-e2f4f0: 237 232 228;
+  --c-e8fcf8: 245 238 233;
+  --c-f0fdfa: 244 246 243;
+  --ink: #3A2B22;
+  --ink-soft: #533B31;
+  --page: #F5EEE9;
+  --script-ink: #60413E;
+  --teal: #925543;
+  --teal-ink: #724134;
+}
+
+/* V03_fuchsia_orchid · Fuchsia Orchid */
+html[data-variant="fuchsia-orchid"] {
+  --c-062824: 35 15 27;
+  --c-0e3c38: 58 26 43;
+  --c-14463c: 68 30 56;
+  --c-17635d: 104 51 78;
+  --c-1e3a3a: 53 37 44;
+  --c-1f7c75: 133 69 101;
+  --c-cdebe6: 227 210 221;
+  --c-e2f4f0: 232 230 234;
+  --c-e8fcf8: 241 237 242;
+  --c-f0fdfa: 242 245 246;
+  --ink: #35252C;
+  --ink-soft: #4B323D;
+  --page: #F1EDF2;
+  --script-ink: #4E354F;
+  --teal: #854565;
+  --teal-ink: #65334C;
+}
+
+/* V05_golden_sand · Golden Hibiscus & Sand */
+html[data-variant="golden-sand"] {
+  --c-062824: 37 25 9;
+  --c-0e3c38: 56 41 17;
+  --c-14463c: 69 47 21;
+  --c-17635d: 97 73 35;
+  --c-1e3a3a: 53 46 31;
+  --c-1f7c75: 123 94 47;
+  --c-cdebe6: 231 219 204;
+  --c-e2f4f0: 237 235 227;
+  --c-e8fcf8: 245 242 233;
+  --c-f0fdfa: 244 248 243;
+  --ink: #352E1F;
+  --ink-soft: #493E2B;
+  --page: #F5F2E9;
+  --script-ink: #524227;
+  --teal: #7B5E2F;
+  --teal-ink: #5F4823;
+}
+
+/* V04_ocean_blue · Ocean Blue & Red Hibiscus */
+html[data-variant="ocean-blue"] {
+  --c-062824: 7 26 36;
+  --c-0e3c38: 16 42 58;
+  --c-14463c: 11 50 66;
+  --c-17635d: 35 77 102;
+  --c-1e3a3a: 33 46 56;
+  --c-1f7c75: 49 99 131;
+  --c-cdebe6: 203 222 230;
+  --c-e2f4f0: 224 237 239;
+  --c-e8fcf8: 230 244 247;
+  --ink: #212E38;
+  --ink-soft: #2B3E4B;
+  --page: #E6F4F7;
+  --script-ink: #00484F;
+  --teal: #316383;
+  --teal-ink: #234B64;
+}

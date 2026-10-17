@@ -1,0 +1,25 @@
+{
+  "id": "V03_dusty_rose",
+  "slug": "dusty-rose",
+  "name": "Dusty Rose & Cream",
+  "ink": "#3A2629",
+  "deep": "#8A5A5E",
+  "primary": "#C08A86",
+  "mist_top": "#F6EDE3",
+  "mist_bottom": "#E5CDB5",
+  "gold": "#C29A5B",
+  "gold_light": "#E2C79A",
+  "ivory": "#FBF5EC",
+  "leaf": "#B5707A",
+  "swatch": [
+    "#F3DEC6",
+    "#C08A86",
+    "#B5707A"
+  ],
+  "status": "coming",
+  "families": {
+    "terra": "primary",
+    "rose": "leaf",
+    "terra_css": "primary"
+  }
+}

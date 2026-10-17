@@ -1,0 +1,25 @@
+{
+  "id": "V04_ocean_blue",
+  "slug": "ocean-blue",
+  "name": "Ocean Blue & Red Hibiscus",
+  "ink": "#1C2C3D",
+  "deep": "#1F5A85",
+  "primary": "#D8303C",
+  "mist_top": "#F2F9FD",
+  "mist_bottom": "#D3ECFA",
+  "gold": "#D4A44C",
+  "gold_light": "#EBCB8B",
+  "ivory": "#FFFCF5",
+  "leaf": "#2E7D4F",
+  "swatch": [
+    "#D3ECFA",
+    "#1F5A85",
+    "#D8303C"
+  ],
+  "status": "coming",
+  "families": {
+    "hibiscus": "primary",
+    "lagoon": "mist_bottom",
+    "teal_css": "deep"
+  }
+}

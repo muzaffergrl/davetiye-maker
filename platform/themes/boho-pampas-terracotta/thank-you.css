@@ -6,7 +6,7 @@
 .photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
                           background: var(--sand) url("img/bg_tile-640.webp") 50% 50% / 260% auto; }
 .ty-decor > img { width: 64%; height: auto; display: block; translate: -4% 4%;
-                  filter: drop-shadow(0 6px 7px rgba(80, 40, 15, .22)) drop-shadow(0 1px 1px rgba(80, 40, 15, .18)); }
+                  filter: drop-shadow(0 6px 7px rgb(var(--c-50280f)/.22)) drop-shadow(0 1px 1px rgb(var(--c-50280f)/.18)); }
 /* card copy: the thank-you title (≤ 60 characters) wraps in the brush script, the date under it */
 .card-copy .ty-title { font-family: var(--script); color: var(--rust); font-size: 9.6cqw; line-height: 1.02; text-wrap: balance;
                        overflow-wrap: break-word; max-width: 100%; }

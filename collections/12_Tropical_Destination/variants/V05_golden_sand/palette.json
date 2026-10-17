@@ -1,0 +1,25 @@
+{
+  "id": "V05_golden_sand",
+  "slug": "golden-sand",
+  "name": "Golden Hibiscus & Sand",
+  "ink": "#3A3020",
+  "deep": "#7A5A1E",
+  "primary": "#F2B53A",
+  "mist_top": "#FFF9EE",
+  "mist_bottom": "#F6E7CF",
+  "gold": "#D4A44C",
+  "gold_light": "#EBCB8B",
+  "ivory": "#FFFCF5",
+  "leaf": "#2E7D4F",
+  "swatch": [
+    "#F6E7CF",
+    "#F2B53A",
+    "#2E7D4F"
+  ],
+  "status": "coming",
+  "families": {
+    "hibiscus": "primary",
+    "lagoon": "mist_bottom",
+    "teal_css": "deep"
+  }
+}
