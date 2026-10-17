@@ -2,7 +2,7 @@
 // sitemap.xml, llms.txt, the link check and the page tests all read this list, so a page exists in one place.
 
 import { MARKETING, type MarketingConfig } from './config.ts';
-import { liveDesigns, openingObject } from './designs.ts';
+import { catalogDesign, liveDesigns, openingObject } from './designs.ts';
 import { enT, LANG_TAGS, msg, type Lang, type T } from './i18n.ts';
 import { hasPlaceholder, real } from './placeholders.ts';
 
@@ -190,7 +190,7 @@ export function designTitle(name: string, cfg: MarketingConfig = MARKETING, enve
 }
 
 export function designPage(id: string, cfg: MarketingConfig = MARKETING, t: T = enT): PageEntry | null {
-  const d = liveDesigns(cfg).find((x) => x.id === id);
+  const d = catalogDesign(id, cfg);
   if (!d) return null;
   return {
     path: `/designs/${d.id}`,
