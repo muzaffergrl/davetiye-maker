@@ -13,12 +13,12 @@
 
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import type { Page } from 'playwright-core';
+import type { Browser, Page } from 'playwright-core';
 import { PDFDocument } from 'pdf-lib';
 import sharp from 'sharp';
 import { getDataAdapter } from '../data/index.ts';
 import { serveThemeAsset } from '../site/static.ts';
-import { printBrowser } from './browser.ts';
+import { withPrintBrowser } from './browser.ts';
 
 type PdfOptions = NonNullable<Parameters<Page['pdf']>[0]>;
 
@@ -118,7 +118,11 @@ export async function settle(page: Page): Promise<void> {
 
 /** Renders each document to its own PDF (same options), in order. */
 export async function renderPdfs(docs: readonly PrintDocument[], run: PrintRun): Promise<Uint8Array[]> {
-  const browser = await printBrowser();
+  // A dead cached browser (an idle Vercel instance thawed) fails in newContext/newPage; then all of it runs once more.
+  return withPrintBrowser((browser) => renderIn(browser, docs, run));
+}
+
+async function renderIn(browser: Browser, docs: readonly PrintDocument[], run: PrintRun): Promise<Uint8Array[]> {
   const context = await browser.newContext({ viewport: run.viewport, deviceScaleFactor: 1, javaScriptEnabled: true });
   try {
     const out: Uint8Array[] = [];
