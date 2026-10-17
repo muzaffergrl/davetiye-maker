@@ -12,6 +12,7 @@ import { BodyTooLargeError, mediaType, readLimitedBytes, requestOrigin } from '.
 import { ipBucket } from '../rsvp/rate-limit.ts';
 import { clientIp } from '../rsvp/http.ts';
 import { claimError, claimSite, slugAvailability, type ClaimResult } from './claim.ts';
+import { continueError, continueWithOrder, emailSignInLink } from './continue.ts';
 import { DEFAULT_CLAIM_LIMITS, getClaimRateLimiter } from './limits.ts';
 
 /** POST /api/start body cap. */
@@ -29,21 +30,25 @@ export function claimResponse(result: ClaimResult): Response {
   return new Response(JSON.stringify(result.body), { status: result.status, headers: { ...HEADERS, ...(result.headers ?? {}) } });
 }
 
-async function readJson(req: Request): Promise<{ value: Record<string, unknown> } | { error: ClaimResult }> {
-  if (mediaType(req) !== 'application/json') return { error: claimError(415, 'unsupported') };
+async function readJson(
+  req: Request,
+  fail: (status: number, code: 'unsupported' | 'too_large' | 'bad_json') => ClaimResult = (status, code) => claimError(status, code),
+  maxBytes: number = MAX_CLAIM_BYTES,
+): Promise<{ value: Record<string, unknown> } | { error: ClaimResult }> {
+  if (mediaType(req) !== 'application/json') return { error: fail(415, 'unsupported') };
   let body: string;
   try {
-    body = new TextDecoder('utf-8', { fatal: true }).decode(await readLimitedBytes(req, MAX_CLAIM_BYTES));
+    body = new TextDecoder('utf-8', { fatal: true }).decode(await readLimitedBytes(req, maxBytes));
   } catch (e) {
-    if (e instanceof BodyTooLargeError) return { error: claimError(413, 'too_large') };
-    return { error: claimError(400, 'bad_json') };
+    if (e instanceof BodyTooLargeError) return { error: fail(413, 'too_large') };
+    return { error: fail(400, 'bad_json') };
   }
   try {
     const value = JSON.parse(body) as unknown;
     if (typeof value !== 'object' || value === null || Array.isArray(value)) throw new Error('not an object');
     return { value: value as Record<string, unknown> };
   } catch {
-    return { error: claimError(400, 'bad_json') };
+    return { error: fail(400, 'bad_json') };
   }
 }
 
@@ -52,7 +57,7 @@ export async function handleClaim(req: Request): Promise<Response> {
     const parsed = await readJson(req);
     if ('error' in parsed) return claimResponse(parsed.error);
     const result = await claimSite(
-      { adapter: getDataAdapter(), origin: requestOrigin(req), ip: clientIp(req) },
+      { adapter: getDataAdapter(), origin: requestOrigin(req), ip: clientIp(req), userAgent: req.headers.get('user-agent') },
       parsed.value,
     );
     return claimResponse(result);
@@ -78,4 +83,41 @@ export async function handleSlugCheck(req: Request): Promise<Response> {
     console.error('[claim] GET /api/start/slug failed:', e);
     return claimResponse(claimError(500, 'server'));
   }
+}
+
+// ---------------------------------------------------------------------------------------------
+// G146: /my — continue with the Etsy order number + email (lib/claim/continue.ts)
+//
+//   POST /api/my/continue      {orderNumber, email, website?}  -> {next: "edit", slug, editPath, names} | {next: "start"}
+//   POST /api/my/signin-link   {orderNumber, email, website?}  -> always the same "if it matches, we sent it" (503 while
+//                                                                no email provider is set up)
+// Same JSON-only, size-capped, no-store, no-referrer answers as /api/start (the "edit" answer holds a device key).
+
+/** POST /api/my/* body cap. */
+export const MAX_CONTINUE_BYTES = 1024;
+
+const continueFail = (status: number, code: 'unsupported' | 'too_large' | 'bad_json'): ClaimResult => continueError(status, code);
+
+async function continueRequest(req: Request, run: typeof continueWithOrder, where: string): Promise<Response> {
+  try {
+    const parsed = await readJson(req, continueFail, MAX_CONTINUE_BYTES);
+    if ('error' in parsed) return claimResponse(parsed.error);
+    const result = await run(
+      { adapter: getDataAdapter(), origin: requestOrigin(req), ip: clientIp(req), userAgent: req.headers.get('user-agent') },
+      parsed.value,
+    );
+    return claimResponse(result);
+  } catch (e) {
+    // Only the error's name: never the order number, the email or a key.
+    console.error(`[my] ${where} failed: ${e instanceof Error ? e.name : 'error'}`);
+    return claimResponse(continueError(500, 'server'));
+  }
+}
+
+export function handleContinue(req: Request): Promise<Response> {
+  return continueRequest(req, continueWithOrder, 'continue');
+}
+
+export function handleSignInLink(req: Request): Promise<Response> {
+  return continueRequest(req, emailSignInLink, 'sign-in link');
 }

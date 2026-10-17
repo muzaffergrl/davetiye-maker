@@ -24,6 +24,7 @@ import {
   NAME_MAX,
   type ClaimField,
 } from '../../lib/claim/fields.ts';
+import { markOpenedExisting, rememberEditor, takeStartPrefill } from '../../lib/panel/remember.ts';
 import { StartShell } from './shell.tsx';
 import styles from './start.module.css';
 
@@ -55,7 +56,7 @@ type SlugStatus =
   | { kind: 'unavailable'; message: string; suggestion: string | null }
   | { kind: 'unknown' };
 
-type FormMessage = { tone: 'error' | 'notice'; title?: string; text: string } | null;
+type FormMessage = { tone: 'error' | 'notice'; title?: string; text: string; link?: { href: string; label: string } } | null;
 
 const STORE_KEY = 'start:claim-result:v1';
 const TOKEN_KEY = 'start:claim-token:v1';
@@ -234,6 +235,14 @@ function ClaimForm({
   const checkSeq = useRef(0);
   const tokenRef = useRef<string | null>(null);
 
+  // G146: the order number and email typed on /my (handed over in this tab's sessionStorage, never in the URL).
+  useEffect(() => {
+    const prefill = takeStartPrefill();
+    if (!prefill) return;
+    setOrderNumber(prefill.orderNumber);
+    setEmail(prefill.email);
+  }, []);
+
   const values = { orderNumber, email, names, slug };
   const clientErrors = claimFieldErrors(values, theme.partnerCount);
   // Field errors come in English from lib/claim/fields.ts and the server; shown in the interface language.
@@ -358,6 +367,16 @@ function ClaimForm({
       } catch {
         /* handled below */
       }
+      // G146: this order already has a website, started with this email: it is opened on this device (a device key).
+      if (res.status === 200 && body.ok && body.existing && typeof body.editPath === 'string' && typeof body.slug === 'string') {
+        forgetClaimToken();
+        tokenRef.current = null;
+        rememberEditor({ slug: body.slug, path: body.editPath, names: typeof body.names === 'string' ? body.names : '', at: new Date().toISOString() });
+        markOpenedExisting(body.slug);
+        showMessage({ tone: 'notice', title: t('This order already has a website'), text: t('This order already has a website — we opened it for you.') });
+        window.location.assign(body.editPath);
+        return;
+      }
       if (res.status === 201 && body.ok) {
         forgetClaimToken();
         tokenRef.current = null;
@@ -384,7 +403,13 @@ function ClaimForm({
         }
         case 'order_used':
           setServerErrors({ orderNumber: t('This order number already has a website.') });
-          showMessage({ tone: 'notice', title: t('This order already has a website'), text: t(String(body.message)) });
+          // G146: the same order number with the email it was started with opens it on any device (/my).
+          showMessage({
+            tone: 'notice',
+            title: t('This order already has a website'),
+            text: t(String(body.message)),
+            link: { href: '/my#continue', label: t('Continue with your order number') },
+          });
           break;
         case 'slug_taken':
           setSlugAuto(false);
@@ -437,6 +462,13 @@ function ClaimForm({
         >
           {message.title ? <p className={styles.alertTitle}>{message.title}</p> : null}
           <p>{message.text}</p>
+          {message.link ? (
+            <p>
+              <a className={styles.textLink} href={message.link.href} data-start-my-link="">
+                {message.link.label}
+              </a>
+            </p>
+          ) : null}
         </div>
       ) : null}
 

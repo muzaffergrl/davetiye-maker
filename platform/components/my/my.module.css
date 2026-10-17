@@ -172,3 +172,173 @@
   font-weight: 600;
   text-underline-offset: 3px;
 }
+
+/* ---------------------------------------------------------------- G146: "Create your invitation website" */
+
+.editorActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.steps {
+  list-style: none;
+  margin: 4px 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.stepNo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--c-anchor);
+  color: #fff;
+  font-weight: 750;
+  font-size: 15px;
+}
+
+.stepTitle {
+  margin: 4px 0 2px;
+  font-weight: 750;
+  color: var(--c-anchor);
+}
+
+.stepText {
+  margin: 0;
+  color: var(--c-muted);
+  overflow-wrap: anywhere;
+}
+
+.note {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-size: 15px;
+}
+
+.hint {
+  font-size: 14px;
+  color: var(--c-muted);
+  margin: -4px 0 12px;
+}
+
+.alert,
+.notice {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+.alert {
+  background: #fbeceb;
+  color: var(--c-danger);
+}
+
+.notice {
+  background: #eef5ee;
+  color: #24562d;
+}
+
+.alert:focus,
+.notice:focus {
+  outline: 3px solid var(--c-anchor);
+  outline-offset: 2px;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.btn:disabled,
+.btnText:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.btn + .btnText {
+  display: flex;
+  margin: 8px auto 0;
+}
+
+.pick {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--c-border);
+}
+
+.h3 {
+  font-weight: 750;
+  font-size: 17px;
+  color: var(--c-anchor);
+  margin: 0 0 6px;
+}
+
+.h3:focus {
+  outline: none;
+}
+
+.details {
+  background: var(--c-surface);
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(43, 21, 38, 0.06), 0 6px 18px rgba(43, 21, 38, 0.06);
+  margin-bottom: 16px;
+}
+
+.summary {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 18px;
+  font-weight: 700;
+  color: var(--c-anchor);
+  cursor: pointer;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::after {
+  content: '+';
+  margin-left: auto;
+  padding-left: 12px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.details[open] .summary::after {
+  content: '−';
+}
+
+.summary:focus-visible {
+  outline: 3px solid var(--c-anchor);
+  outline-offset: 2px;
+  border-radius: 18px;
+}
+
+.detailsBody {
+  padding: 0 18px 18px;
+}

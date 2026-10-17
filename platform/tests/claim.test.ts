@@ -333,9 +333,14 @@ test('claim: a retry with the same claim token recovers a lost answer (new link)
     assert.equal(r.status, 409, JSON.stringify(over));
     assert.deepEqual(Object.keys(r.body).sort(), ['code', 'message', 'ok']);
   }
-  // Once published (the buyer clearly has the link) or after the retry window, the token no longer works.
+  // Once published (the buyer clearly has the link) or after the retry window, the token no longer reissues the link.
+  // G146: the same email then signs this device in instead (a device key; the edit link is NOT replaced).
   await publishSite(getDataAdapter(), site.id);
-  assert.equal((await postClaim(form({ orderNumber: order, claimToken: token, email: 'rowan@example.test' }))).status, 409);
+  const after = await postClaim(form({ orderNumber: order, claimToken: token, email: 'rowan@example.test' }));
+  assert.equal(after.status, 200, JSON.stringify(after.body));
+  assert.equal(after.body.existing, true);
+  assert.equal(after.body.editUrl, undefined, 'no edit link in the answer');
+  assert.ok(await authorizeEditor(getDataAdapter(), site.slug, keyOf(retry.body.editUrl)), 'the edit link still works');
 
   const late = freshOrder();
   const lateToken = 'aaaaaaaa-1b2c-4d3e-9f00-123456789abc';
@@ -343,7 +348,10 @@ test('claim: a retry with the same claim token recovers a lost answer (new link)
   const body = form({ orderNumber: late, claimToken: lateToken, names: ['Late', 'Pair'] });
   assert.equal((await claimSite(ctx(Date.now()), body)).status, 201);
   assert.equal((await claimSite(ctx(Date.now() + 60_000), body)).status, 201, 'within the window');
-  assert.equal((await claimSite(ctx(Date.now() + CLAIM_RETRY_WINDOW_MS + 60_000), body)).status, 409, 'after the window');
+  const lateLogin = await claimSite(ctx(Date.now() + CLAIM_RETRY_WINDOW_MS + 60_000), body);
+  assert.equal(lateLogin.status, 200, 'after the window: the same email signs in (no new link)');
+  assert.equal(lateLogin.body.existing, true);
+  assert.equal((await claimSite(ctx(Date.now() + CLAIM_RETRY_WINDOW_MS + 60_000), { ...body, email: 'other@example.test' })).status, 409, 'another email: order used');
 });
 
 test('reissue tool: the shop gives a buyer who lost the link a new one (by order or address); old link stops working', async () => {
@@ -367,11 +375,18 @@ test('reissue tool: the shop gives a buyer who lost the link a new one (by order
 test('claim: parallel attempts with one order number create exactly one site', async () => {
   const order = freshOrder();
   const results = await Promise.all(
-    Array.from({ length: 6 }, (_, i) => postClaim(form({ orderNumber: order, names: [`Pat${'abcdef'[i]}`, 'Sam'] }))),
+    Array.from({ length: 6 }, (_, i) => postClaim(form({ orderNumber: order, email: `pat${i}@example.test`, names: [`Pat${'abcdef'[i]}`, 'Sam'] }))),
   );
   const statuses = results.map((r) => r.status).sort();
   assert.deepEqual(statuses, [201, 409, 409, 409, 409, 409]);
   assert.equal((await getDataAdapter().findSitesByOrderRef(order)).length, 1);
+  // G146: the same email from several tabs at once: one website, the other tabs are signed in to it.
+  const same = freshOrder();
+  const tabs = await Promise.all(Array.from({ length: 4 }, () => postClaim(form({ orderNumber: same, email: 'pat@example.test' }))));
+  assert.deepEqual(tabs.map((r) => r.status).sort(), [200, 200, 200, 201]);
+  const slug = tabs.find((r) => r.status === 201)!.body.slug;
+  assert.ok(tabs.filter((r) => r.status === 200).every((r) => r.body.existing === true && r.body.slug === slug));
+  assert.equal((await getDataAdapter().findSitesByOrderRef(same)).length, 1);
 });
 
 test('claim: website address — typed one must be free; automatic one gets a number', async () => {

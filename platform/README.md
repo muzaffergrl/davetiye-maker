@@ -1206,6 +1206,10 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
 |---|---|
 | `POST /api/start` `application/json`, ≤ 4 KB: `{theme, orderNumber, email, names: [a, b], slug?, claimToken?, website?}` | `201 {ok, slug, status:"draft", editUrl, editPath, siteUrl, emailSent}` · `400 invalid (+fields: orderNumber/email/name1/name2/slug)` · `400 bad_json` · `403 order_not_verified` · `404 theme_unavailable` · `409 order_used` · `409 slug_taken (+fields.slug, suggestion)` · `413` · `415` · `429 rate_limited/busy (+Retry-After)` · `503 verification_unavailable` · `500` |
 | `GET /api/start/slug?value=<adres>` | `200 {ok, value, available, reason: null\|missing\|format\|reserved\|taken, message, suggestion}` · `429` |
+| G146: aynı sipariş + **sitenin e-postası** ile `POST /api/start` | `200 {ok, existing:true, slug, editPath (cihaz anahtarı), siteUrl, names, orderPending}` (link değişmez); başka e-posta → `409 order_used` (mesaj `/my`'ı gösterir) |
+| `POST /api/my/continue` `application/json`, ≤ 1 KB: `{orderNumber, email, website?}` | `200 {next:"edit", slug, editPath, names}` (cihaz anahtarı) · `200 {next:"start"}` (sipariş için site yok) · `403 no_match` (tek genel mesaj) · `400 invalid (+fields)` · `413` · `415` · `429 (+Retry-After)` · `500` |
+| `POST /api/my/signin-link` (aynı gövde) | e-posta sağlayıcısı yoksa `503 unavailable`; varsa her zaman `200 {ok, message}` — eşleşirse kayıtlı sahip adresine `kind:"signin"` link |
+| `GET/POST /api/edit/<slug>/devices` (Bearer) | `{access: owner\|shop\|device, devices:[{id,label,createdAt,via,current}]}` · `POST {action:"sign-out-others"}` → `{removed, …}` (dükkân linki `403`) |
 | `GET /start/demo/<tema>[/<sayfa>]` | temanın sayfası demo içerikle (HTML); `internal`/bilinmeyen/demo'suz tema, `index` alt yolu → 404 |
 
 Sıra (`lib/claim/claim.ts`): IP deneme sınırı → honeypot (`website` doluysa 400, kayıt yok) → tema → alan kontrolleri →
@@ -1269,6 +1273,10 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob
   `/start/demo/…`, `/api/start…`) `next.config.ts` `outputFileTracingIncludes`'ta; G055'ten beri yalnız `themes/**/*.html` ve
   `*.json` ile. Tema görselleri/CSS/JS yalnız tema varlık rotasına (`/themes/[theme]/[...path]`) izlenir. Ayrıntı ve
   `trace-check` denetimleri aşağıda "Platform cilası (G055)".
+- **G146 — her cihazdan sipariş no + e-posta:** `/my` formu → `POST /api/my/continue`; eşleşince **cihaz anahtarı**
+  (`lib/device-keys.ts`, site belgesi `devices`, yalnız hash, en çok 10, düzenleme anahtarının kuşağına bağlı). Her anahtar kontrolü
+  `lib/sites.ts editAccess` (owner · shop · device) üzerinden. Anahtar yeniden üretimi (aşağıdaki araç dahil) tüm cihaz anahtarlarını
+  düşürür. Ayrıntı: `docs/10_SITE_PLATFORMU.md` §3a.
 - **Kayıp link — operatör aracı:** `node scripts/reissue-edit-key.ts --order <no> --origin https://<host>` (ya da `--slug <adres>`):
   siteyi bulur, yeni düzenleme + önizleme anahtarı üretir (yalnız hash saklanır; eski linkler hemen ölür), yeni linki **bir kez**
   ekrana yazar; içerik/foto/yanıt/yayın durumuna dokunmaz. `DATA_ADAPTER` deposunda çalışır (blob için token gerekir). Mağaza alıcıyı

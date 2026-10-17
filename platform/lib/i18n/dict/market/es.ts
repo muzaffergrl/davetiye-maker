@@ -830,6 +830,9 @@ const dict: Dict = {
   'The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'La velada como línea de tiempo junto a una foto amplia del lugar, con mapa e indicaciones opcionales, enlaces de calendario, código de vestimenta y preguntas frecuentes.',
   'Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.': 'Tus invitados tocan el sobre. El sello de lacre dorado se levanta, la solapa negra se abre y una tarjeta carbón con tu foto sale del bolsillo. Después, la tarjeta se abre en tu página de inicio.',
   'Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.': 'Los nombres de la pareja en mayúsculas sobre el lago de Como al anochecer; después, la invitación junto a su retrato, la cuenta atrás y enlaces de calendario.',
+  // G146: "Create your website" + continue on any device with the Etsy order number + email
+  'Create your website': 'Crea tu web',
+  'Create your website or continue editing': 'Crea tu web o sigue editándola',
 };
 
 export default dict;

@@ -28,12 +28,14 @@ export default async function SignInPage() {
       <main className={styles.notice}>
         <BrandLogo height={28} className={styles.noticeBrand} />
         <h1 className={styles.noticeTitle}>{t('Open your editor')}</h1>
-        {/* SIGN_IN_UNAVAILABLE (lib/panel/signin.ts), as one translatable sentence */}
+        {/* SIGN_IN_UNAVAILABLE (lib/panel/signin.ts), as translatable sentences; G146: /my is the way in. */}
+        <p>{t('Enter your Etsy order number and the email you used when you started your website. It works on any phone or computer — no account or password.')}</p>
         <p>
-          {t("Email sign-in isn't available yet. Open your editor with the edit link you saved. Lost it? Message {shop} on Etsy with your order number.", {
-            shop: PANEL_BRAND.shopName,
-          })}
+          <a className={`${styles.btn} ${styles.btn_primary} ${styles.btnBlock}`} href="/my#continue" data-continue-order="">
+            {t('Continue with your order number')}
+          </a>
         </p>
+        <p>{t('Still stuck? Message {shop} on Etsy with your order number.', { shop: PANEL_BRAND.shopName })}</p>
       </main>
     </div>
   );

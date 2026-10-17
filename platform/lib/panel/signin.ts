@@ -10,7 +10,8 @@
 import { PANEL_BRAND } from './brand.ts';
 
 /** Shown wherever sign-in by e-mail would be (lost-link page, Share, /signin). */
-export const SIGN_IN_UNAVAILABLE = `Email sign-in isn't available yet. Open your editor with the edit link you saved. Lost it? Message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+// G146: the way in that always works is the Etsy order number + email on /my (any device).
+export const SIGN_IN_UNAVAILABLE = `Open your editor on /my with your Etsy order number and the email you used when you started your website. Still stuck? Message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
 
 export interface SignInMailer {
   readonly enabled: boolean;

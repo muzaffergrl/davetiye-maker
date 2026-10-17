@@ -703,14 +703,15 @@ try {
     await reissueKeys(adapter, fresh.site.id);
     await page.fill('#f-host_line', 'after the link changed');
     await page.waitForSelector('text=This edit link no longer works', { timeout: 15_000 });
-    check('401: full-screen "This edit link no longer works" + shop text', (await page.locator('main').innerText()).includes('BKE Studio on Etsy'));
+    check('401: full-screen "This edit link no longer works" + order number way back + shop text', (await page.locator('main').innerText()).includes('BKE Studio on Etsy') && (await page.locator('[data-continue-order]').count()) === 1);
     await page.goto(`${BASE}/edit/lost-link?k=wrong`);
     const nf = await page.locator('main').innerText();
-    check('bad link page: "Lost your edit link?" with the honest sign-in text', nf.includes('Lost your edit link?') && nf.includes("Email sign-in isn't available yet"));
+    // G146: the bad-link page sends the buyer to /my (order number + email) or to paste the saved link.
+    check('bad link page: "Continue with your order number" + "Paste your edit link"', nf.includes('Continue with your order number') && nf.includes('Paste your edit link'));
     const signin = await page.request.post(`${BASE}/api/signin`, { data: { email: 'someone@example.com' } });
     check('sign-in API: 503 "unavailable" (no e-mail provider)', signin.status() === 503 && (await signin.json()).code === 'unavailable');
     await page.goto(`${BASE}/signin`);
-    check('/signin: no form, honest text', (await page.locator('form').count()) === 0 && (await page.locator('main').innerText()).includes("isn't available yet"));
+    check('/signin: no form, the way in is /my', (await page.locator('form').count()) === 0 && (await page.locator('main a[href="/my#continue"]').count()) === 1);
     await ctx.close();
   });
 

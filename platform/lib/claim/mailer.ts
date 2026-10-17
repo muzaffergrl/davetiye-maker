@@ -20,7 +20,7 @@ export interface EditLinkMessage {
   orderNumber: string;
   /**
    * Which email: 'created' (default) right after /start — the private edit link and how to continue on another device;
-   * 'signin' — a sign-in link the buyer asked for on /my.
+   * 'signin' (G146) — a sign-in link the buyer asked for on /my: `editUrl` then opens the editor with a new device key.
    */
   kind?: 'created' | 'signin';
 }

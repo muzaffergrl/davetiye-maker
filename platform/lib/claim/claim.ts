@@ -18,6 +18,10 @@
 //      and repeats it on every retry), same email, still an unpublished draft, created < 24 h ago.
 //      The first answer was lost on the way (phone changed network), so the buyer never saw the
 //      link: the keys are reissued (the unseen old link stops working) -> 201 with the new link.
+//      … or (G146) the email is the one the website was started with (lib/claim/continue.ts sameOwnerEmail): the buyer
+//      is signed in on this device with a new DEVICE KEY (lib/device-keys.ts; the edit link is untouched)
+//      -> 200 {existing: true, slug, editPath}. These sign-ins count against the order number's attempts (shared with
+//      /my, lib/claim/limits.ts DEFAULT_CONTINUE_LIMITS.perOrder) -> 429 rate_limited.
 //   7. website address: typed one must be free             -> 409 slug_taken (+ suggestion); otherwise the first free one from the names
 //   8. per-IP and global "sites created" limits             -> 429 rate_limited / busy
 //   9. create the draft (createSiteWithKeys), emails        -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
@@ -49,7 +53,10 @@ import {
   suggestSlugBase,
   type ClaimField,
 } from './fields.ts';
-import { DEFAULT_CLAIM_LIMITS, getClaimRateLimiter, type ClaimLimits } from './limits.ts';
+import { deviceEditPath, ownedSite, siteNames } from './continue.ts';
+import { deviceLabel, mintDeviceKey } from '../device-keys.ts';
+import { msg } from '../i18n/translate.ts';
+import { DEFAULT_CLAIM_LIMITS, DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ClaimLimits, type ContinueLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
@@ -71,6 +78,10 @@ export interface ClaimContext {
   now?: () => number;
   /** Where the theme approval gate reads VERCEL_ENV / THEME_APPROVAL (default process.env; G080). */
   approvalEnv?: ApprovalEnv;
+  /** G146: the browser's user agent (a short device label for a sign-in with an order that already has a website). */
+  userAgent?: string | null;
+  /** G146: limits of signing in with an order number (default DEFAULT_CONTINUE_LIMITS). */
+  continueLimits?: ContinueLimits;
 }
 
 /** How long a lost /start answer can be recovered by retrying with the same claim token. */
@@ -113,9 +124,10 @@ export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
   invalid: 'Please check the highlighted fields.',
   theme_unavailable: 'This design is not available. Please open the start link from your Etsy download again.',
   theme_in_review: THEME_IN_REVIEW.message,
-  order_used:
-    'A website has already been started with this order number. Open it with the edit link you saved when you created it. ' +
-    'If you have lost the link, message the shop on Etsy and include your order number.',
+  // G146: the order has a website and the email is not the one it was started with (the same email signs in instead).
+  order_used: msg(
+    'A website has already been started with this order number. To open it, go to /my and enter this order number with the email you used when you started it.',
+  ),
   order_not_verified: 'We could not confirm this order. Please check your Etsy order number and email address.',
   verification_unavailable: 'We could not check your order right now. Please try again in a few minutes.',
   slug_taken: 'This website address is already taken. Please choose another one.',
@@ -249,6 +261,21 @@ export interface ClaimSuccessBody {
   orderPending: boolean;
 }
 
+/**
+ * G146: the order already has a website started with this email — it is opened on this device (a device key in
+ * `editPath`; the private edit link is not shown or changed).
+ */
+export interface ClaimExistingBody {
+  ok: true;
+  existing: true;
+  slug: string;
+  /** Root-relative panel path with this device's key. */
+  editPath: string;
+  siteUrl: string;
+  names: string;
+  orderPending: boolean;
+}
+
 /** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?, website? (honeypot)}. */
 export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>): Promise<ClaimResult> {
   const { adapter } = ctx;
@@ -307,12 +334,32 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     return { status: 201, body: body as unknown as Record<string, unknown> };
   };
 
-  /** "Order used", or the recovered link when this request repeats a claim whose answer was lost. */
+  /**
+   * "Order used"; the recovered link when this request repeats a claim whose answer was lost; or (G146) the buyer's own
+   * website, opened on this device with a device key, when the email is the one it was started with.
+   */
   const usedOrRetry = async (sites: SiteRecord[]): Promise<ClaimResult> => {
     const mine = sites.find((s) => isClaimRetry(s, claimToken, email, now()));
-    if (!mine) return claimError(409, 'order_used');
-    const reissued = await reissueKeys(adapter, mine.id);
-    return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
+    if (mine) {
+      const reissued = await reissueKeys(adapter, mine.id);
+      return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
+    }
+    const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
+    if (!perOrder.allowed) return claimError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
+    const owned = ownedSite(sites, email);
+    if (!owned) return claimError(409, 'order_used');
+    const { key } = await mintDeviceKey(adapter, owned, { label: deviceLabel(ctx.userAgent), via: 'start', now: new Date(now()) });
+    const origin = ctx.origin.replace(/\/+$/, '');
+    const body: ClaimExistingBody = {
+      ok: true,
+      existing: true,
+      slug: owned.slug,
+      editPath: deviceEditPath(owned.slug, key),
+      siteUrl: `${origin}/${owned.slug}`,
+      names: siteNames(owned),
+      orderPending: orderPending(owned),
+    };
+    return { status: 200, body: body as unknown as Record<string, unknown> };
   };
 
   return withOrderLock(orderNumber, async () => {
