@@ -2,7 +2,7 @@
 
 Independent wedding website theme (not a Burgundy Velvet Autumn replacement): crimson roses, a burgundy envelope with a
 gold botanical wax seal, an offset oval portrait, a paged chapter album and an ivory reply card on oxblood. Codex G133;
-brought to the theme standard in G142. Status: **coming** (`lib/marketing/config.ts`) — sale and price wait for approval.
+brought to the theme standard in G142. Status: **live** (`lib/marketing/config.ts`, opened by the user on 2026-10-17); price still `[PRICE]`.
 
 ## Files (docs/11 §1)
 

@@ -147,16 +147,6 @@ export const MARKETING: MarketingConfig = {
     { id: 'custom-design', name: 'Custom design', price: '2960', etsyListingUrl: '[ETSY LISTING URL]' },
   ],
   designs: [
-    // New product: demo available; sale approval and price remain pending.
-    {
-      id: 'crimson-rose-atelier',
-      name: 'Crimson Rose Atelier',
-      status: 'coming',
-      price: '[PRICE]',
-      compareAtPrice: null,
-      etsyListingUrl: '[ETSY LISTING URL]',
-      updated: '2026-10-17',
-    },
     // New product (G142): platform theme ready for review; sale approval and price remain pending.
     {
       id: 'nocturne-lake-estate',
@@ -374,6 +364,16 @@ export const MARKETING: MarketingConfig = {
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
+    },
+    // Opened for sale by the user on 2026-10-17 (G142); price still to be decided ([PRICE] until then).
+    {
+      id: 'crimson-rose-atelier',
+      name: 'Crimson Rose Atelier',
+      status: 'live',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
     },
   ],
 };

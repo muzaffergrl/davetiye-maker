@@ -60,7 +60,7 @@ DESIGNS = [
     ("18", "18_Wildflower_Vellum", "wildflower-meadow-vellum"),
     ("19", "19_Midnight_Garden", "midnight-garden"),
     ("20", "20_Coastal_Seaside", "coastal-seaside"),
-    ("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier"),  # G137; sale status "coming" (config.ts)
+    ("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier"),  # G137; on sale since 2026-10-17 (config.ts "live", G142)
 ]
 PRICE_TRY = 1460
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)

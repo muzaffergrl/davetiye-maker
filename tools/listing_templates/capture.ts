@@ -401,8 +401,9 @@ try {
     await page.fill('[data-rsvp-form] [name="guests"]', '2');
     const meal = page.locator('fieldset[data-rsvp-question="meal"] label').filter({ hasText: 'Fish' });
     if (await meal.count()) await meal.first().click();
-    // from the name field's label (24 px above it) down: no field without its label at the top edge
-    await centerOn(page, '[data-rsvp-form] label.field', 'start', -24, 1200);
+    // from the name field's label (120 px above it: the form's title too clears the platform's fixed sound button, 6–50 px; G142) down:
+    // no field without its label at the top edge
+    await centerOn(page, '[data-rsvp-form] label.field', 'start', -120, 1200);
     await shot(page, 'g10_rsvp_form', 'Guest: RSVP form with the couple\'s question (Meal choice)', {
       keep: ['[data-rsvp-form] label.field'], deltas: [0, -8, 8, -16, 16, -24, 24, -32, -40, -48, -56, -64, -72, -80, -96, -112],
     });
