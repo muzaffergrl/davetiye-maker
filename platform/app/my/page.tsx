@@ -4,6 +4,7 @@
 // ("my" cannot be a couple's address: addresses have at least 3 characters, lib/slug.ts.)
 // Reads the startable designs (theme folders), so it is a theme-reading route (next.config.ts THEME_ROUTES).
 import type { Metadata } from 'next';
+import { DocumentLang } from '../../components/i18n/DocumentLang.tsx';
 import MyWebsite from '../../components/my/MyWebsite.tsx';
 import { PANEL_FONTS } from '../../components/panel/fonts.ts';
 import { getEditLinkMailer } from '../../lib/claim/mailer.ts';
@@ -37,6 +38,7 @@ export default async function MyPage({ searchParams }: Props) {
   const startTheme = found && themeOpenForClaims(found.id) ? { id: found.id, name: found.name } : null;
   return (
     <div className={PANEL_FONTS}>
+      <DocumentLang lang={lang} />
       <MyWebsite
         shopName={MARKETING.etsy.shopName}
         lang={lang}

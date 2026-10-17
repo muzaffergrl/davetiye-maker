@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import '../../../components/fx/panel-fx.css';
+import { DocumentLang } from '../../../components/i18n/DocumentLang.tsx';
 import Panel from '../../../components/panel/Panel.tsx';
 import { getDataAdapter } from '../../../lib/data/index.ts';
 import { publicOrigin } from '../../../lib/panel/http.ts';
@@ -41,14 +42,17 @@ export default async function EditPage({ params, searchParams }: Props) {
   const shopUntil = access.kind === 'shop' ? (site.shopEdit?.expiresAt ?? null) : null;
   // G146: opened with a device key ("continue with your order number" on /my), not the private edit link.
   return (
-    <Panel
-      initial={state}
-      editKey={key}
-      published={site.publishedContent ?? null}
-      lang={lang}
-      dict={dict}
-      shopUntil={shopUntil}
-      deviceSession={access.kind === 'device'}
-    />
+    <>
+      <DocumentLang lang={lang} />
+      <Panel
+        initial={state}
+        editKey={key}
+        published={site.publishedContent ?? null}
+        lang={lang}
+        dict={dict}
+        shopUntil={shopUntil}
+        deviceSession={access.kind === 'device'}
+      />
+    </>
   );
 }

@@ -13,12 +13,12 @@
 
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import type { Page } from 'playwright-core';
+import type { Browser, Page } from 'playwright-core';
 import { PDFDocument } from 'pdf-lib';
 import sharp from 'sharp';
 import { getDataAdapter } from '../data/index.ts';
 import { serveThemeAsset } from '../site/static.ts';
-import { printBrowser } from './browser.ts';
+import { withPrintBrowser } from './browser.ts';
 
 type PdfOptions = NonNullable<Parameters<Page['pdf']>[0]>;
 
@@ -116,49 +116,70 @@ export async function settle(page: Page): Promise<void> {
   });
 }
 
-/** Renders each document to its own PDF (same options), in order. */
+/** Waits at most `ms` for a close (a page or context of a browser that died may never answer). Never throws. */
+async function closeQuietly(close: () => Promise<unknown>, ms = 5_000): Promise<void> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  await Promise.race([close().catch(() => undefined), new Promise<void>((r) => (timer = setTimeout(r, ms)))]);
+  clearTimeout(timer);
+}
+
+/**
+ * Renders each document to its own PDF (same options), in order. G150: when the shared browser turns out to be dead
+ * (closed between serverless invocations) the whole render runs once more in a new browser (withPrintBrowser); each
+ * try has its own context, closed with its pages whatever happens.
+ */
 export async function renderPdfs(docs: readonly PrintDocument[], run: PrintRun): Promise<Uint8Array[]> {
-  const browser = await printBrowser();
+  return withPrintBrowser((browser) => renderIn(browser, docs, run));
+}
+
+async function renderIn(browser: Browser, docs: readonly PrintDocument[], run: PrintRun): Promise<Uint8Array[]> {
   const context = await browser.newContext({ viewport: run.viewport, deviceScaleFactor: 1, javaScriptEnabled: true });
   try {
     const out: Uint8Array[] = [];
     for (const doc of docs) {
       const page = await context.newPage();
-      const docUrl = new URL(doc.path, PRINT_ORIGIN).href;
-      await page.route('**/*', async (route) => {
-        const req = route.request();
-        const url = new URL(req.url());
-        if (url.href === docUrl) return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: doc.html });
-        if (url.origin === PRINT_ORIGIN && req.method() === 'GET') {
-          const res = (await localAsset(url, run.siteId)) ?? (await remoteAsset(url, run.publicOrigin));
-          if (!res) return route.fulfill({ status: 404, body: '' });
-          if (run.images) {
-            const { type, body } = await compact(res, run.images);
-            return route.fulfill({ status: 200, contentType: type, body });
-          }
-          return route.fulfill({
-            status: 200,
-            contentType: res.headers.get('content-type') ?? 'application/octet-stream',
-            body: Buffer.from(await res.arrayBuffer()),
-          });
-        }
-        if (url.protocol === 'https:' && FONT_HOSTS.has(url.hostname)) return route.continue();
-        return route.abort();
-      });
-      await page.goto(docUrl, { waitUntil: 'load', timeout: 30_000 });
-      await settle(page);
-      if (run.prepare) await run.prepare(page);
-      const options = typeof run.pdf === 'function' ? await run.pdf(page) : run.pdf;
-      let pdf = new Uint8Array(await page.pdf({ printBackground: true, ...options }));
-      for (let tries = 1; run.singlePage && tries < 4 && (await PDFDocument.load(pdf)).getPageCount() > 1; tries += 1) {
-        const height = `${Math.ceil(parseFloat(String(options.height)) * (1 + 0.1 * tries))}px`;
-        pdf = new Uint8Array(await page.pdf({ printBackground: true, ...options, height }));
+      try {
+        out.push(await renderPage(page, doc, run));
+      } finally {
+        await closeQuietly(() => page.close());
       }
-      out.push(pdf);
-      await page.close();
     }
     return out;
   } finally {
-    await context.close();
+    await closeQuietly(() => context.close());
   }
+}
+
+async function renderPage(page: Page, doc: PrintDocument, run: PrintRun): Promise<Uint8Array> {
+  const docUrl = new URL(doc.path, PRINT_ORIGIN).href;
+  await page.route('**/*', async (route) => {
+    const req = route.request();
+    const url = new URL(req.url());
+    if (url.href === docUrl) return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: doc.html });
+    if (url.origin === PRINT_ORIGIN && req.method() === 'GET') {
+      const res = (await localAsset(url, run.siteId)) ?? (await remoteAsset(url, run.publicOrigin));
+      if (!res) return route.fulfill({ status: 404, body: '' });
+      if (run.images) {
+        const { type, body } = await compact(res, run.images);
+        return route.fulfill({ status: 200, contentType: type, body });
+      }
+      return route.fulfill({
+        status: 200,
+        contentType: res.headers.get('content-type') ?? 'application/octet-stream',
+        body: Buffer.from(await res.arrayBuffer()),
+      });
+    }
+    if (url.protocol === 'https:' && FONT_HOSTS.has(url.hostname)) return route.continue();
+    return route.abort();
+  });
+  await page.goto(docUrl, { waitUntil: 'load', timeout: 30_000 });
+  await settle(page);
+  if (run.prepare) await run.prepare(page);
+  const options = typeof run.pdf === 'function' ? await run.pdf(page) : run.pdf;
+  let pdf = new Uint8Array(await page.pdf({ printBackground: true, ...options }));
+  for (let tries = 1; run.singlePage && tries < 4 && (await PDFDocument.load(pdf)).getPageCount() > 1; tries += 1) {
+    const height = `${Math.ceil(parseFloat(String(options.height)) * (1 + 0.1 * tries))}px`;
+    pdf = new Uint8Array(await page.pdf({ printBackground: true, ...options, height }));
+  }
+  return pdf;
 }

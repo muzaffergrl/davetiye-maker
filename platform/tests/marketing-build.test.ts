@@ -4,6 +4,7 @@
 // Per page: one H1, title ≤ 60, description 120–160, absolute canonical, robots noindex until launch, Open Graph and
 // Twitter cards, valid JSON-LD (types, required fields, no placeholders, no ratings) whose names and FAQ text are
 // visible on the page, every internal link and #anchor resolves, images have alt, and no indexable page is an orphan.
+// G150: <html lang> is the page's language (en at the root URLs, tr/es/de/fr under their prefix).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -29,7 +30,9 @@ function newestSource(): number {
       else newest = Math.max(newest, statSync(p).mtimeMs);
     }
   };
-  for (const d of ['app/(marketing)', 'components/marketing', 'lib/marketing', 'content']) walk(path.join(PLATFORM_ROOT, d));
+  for (const d of ['app/(marketing)', 'components/marketing', 'lib/marketing', 'content', 'components/i18n']) walk(path.join(PLATFORM_ROOT, d));
+  // G150: the root layout and the module behind <html lang>
+  for (const f of ['app/layout.tsx', 'lib/i18n/document-lang.ts']) newest = Math.max(newest, statSync(path.join(PLATFORM_ROOT, f)).mtimeMs);
   return newest;
 }
 
@@ -95,9 +98,10 @@ test('built marketing pages: head, headings, JSON-LD, links, images, orphans', {
     if (!/^https?:\/\//.test(og)) say(`og:image ${og}`);
     if (!$('meta[property="og:image:alt"]').attr('content')) say('og:image:alt');
     if ($('meta[name="twitter:card"]').attr('content') !== 'summary_large_image') say('twitter:card');
-    if ($('html').attr('lang') !== 'en') say('lang');
-    // G144: the page language on the wrapper around header, main and footer (the root <html> is the platform's)
+    // G144: the page language on the wrapper around header, main and footer; G150: and on <html> itself (the root
+    // layout's DocumentHtml reads it from the route: /tr/designs → i18n/tr/designs → "tr")
     const lang = langOfPath(p);
+    if ($('html').attr('lang') !== lang) say(`<html lang="${$('html').attr('lang')}"> (expected ${lang})`);
     if ($('main').closest('[lang]').attr('lang') !== lang) say(`page language ${$('main').closest('[lang]').attr('lang')} (expected ${lang})`);
     const alternates = $('link[rel="alternate"][hreflang]')
       .map((_, el) => `${$(el).attr('hreflang')} ${new URL($(el).attr('href')!).pathname}`)

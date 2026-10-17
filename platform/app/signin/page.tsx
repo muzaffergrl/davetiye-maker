@@ -2,6 +2,7 @@
 // text only. ("signin" is a reserved slug, lib/slug.ts, so no couple can take this address.)
 // G080: the BKE Studio look of the panel's "edit link not valid" page (logo, panel fonts and tokens).
 import type { Metadata } from 'next';
+import { DocumentLang } from '../../components/i18n/DocumentLang.tsx';
 import { BrandLogo } from '../../components/panel/Brand.tsx';
 import { PANEL_FONTS } from '../../components/panel/fonts.ts';
 import styles from '../../components/panel/panel.module.css';
@@ -26,6 +27,7 @@ export default async function SignInPage() {
   return (
     <div className={`${styles.app} ${PANEL_FONTS}`}>
       <main className={styles.notice}>
+        <DocumentLang lang={lang} />
         <BrandLogo height={28} className={styles.noticeBrand} />
         <h1 className={styles.noticeTitle}>{t('Open your editor')}</h1>
         {/* SIGN_IN_UNAVAILABLE (lib/panel/signin.ts), as translatable sentences; G146: /my is the way in. */}

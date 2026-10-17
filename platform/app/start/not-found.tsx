@@ -3,6 +3,7 @@
 // from it here — plus the designs that can be started. Nothing else under /start calls notFound(): an unknown theme
 // keeps its friendly "This start link is not valid" page (page.tsx).
 import type { Metadata } from 'next';
+import { DocumentLang } from '../../components/i18n/DocumentLang.tsx';
 import { THEME_IN_REVIEW } from '../../lib/themes/approval.ts';
 import { offeredThemes } from '../../lib/themes/offered.ts';
 import { DesignList, StartShell } from './shell.tsx';
@@ -28,6 +29,7 @@ export default async function DesignNotAvailable() {
   const { t } = makeTranslator(lang, dict);
   return (
     <StartShell>
+      <DocumentLang lang={lang} />
       <div className={styles.narrow} data-theme-in-review>
         <p className={styles.eyebrow}>{t('Your wedding website')}</p>
         <h1 className={styles.title}>{t(THEME_IN_REVIEW.title)}</h1>

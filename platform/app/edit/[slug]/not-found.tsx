@@ -2,6 +2,7 @@
 // Identical in every case, so it never tells whether a site exists. BKE Studio look (G066): logo, panel fonts.
 // G146: two ways back — "Continue with your order number" (/my: order number + email, any device) and "Paste your
 // edit link" (/my, the saved link).
+import { DocumentLang } from '../../../components/i18n/DocumentLang.tsx';
 import { BrandLogo } from '../../../components/panel/Brand.tsx';
 import { PANEL_FONTS } from '../../../components/panel/fonts.ts';
 import styles from '../../../components/panel/panel.module.css';
@@ -14,6 +15,7 @@ export default async function EditLinkNotValid() {
   const { t } = makeTranslator(lang, dict);
   return (
     <main className={`${styles.notice} ${PANEL_FONTS}`}>
+      <DocumentLang lang={lang} />
       <BrandLogo height={28} className={styles.noticeBrand} />
       <h1 className={styles.noticeTitle}>{t('This edit link is not valid')}</h1>
       <p>
