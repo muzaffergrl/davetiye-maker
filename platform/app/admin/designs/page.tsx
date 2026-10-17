@@ -7,6 +7,7 @@ import { adminCreatableThemes } from '../../../lib/admin/create.ts';
 import { adminDesigns } from '../../../lib/admin/view.ts';
 import { MARKETING } from '../../../lib/marketing/config.ts';
 import { demoPath } from '../../../lib/marketing/designs.ts';
+import { displayPrice } from '../../../lib/marketing/site.ts';
 import { publicOrigin } from '../../../lib/panel/http.ts';
 import { AdminPage } from '../../../components/admin/Guard.tsx';
 import { CopyButton } from '../../../components/admin/CopyButton.tsx';
@@ -59,8 +60,8 @@ export default function DesignsPage() {
                     </p>
                     <p className={styles.siteMeta}>Son satış: {stamp(r.lastSaleAt)}</p>
                     <p className={styles.siteMeta}>
-                      Fiyat: {c && decided(c.price) ? `$${c.price}` : 'girilmedi'}
-                      {c && decided(c.compareAtPrice ?? '') ? ` (indirimsiz $${c.compareAtPrice})` : ''}
+                      Fiyat: {c && decided(c.price) ? displayPrice(c.price) : 'girilmedi'}
+                      {c && decided(c.compareAtPrice ?? '') ? ` (indirimsiz ${displayPrice(c.compareAtPrice ?? '')})` : ''}
                     </p>
                     <div className={styles.row} style={{ marginTop: 10 }}>
                       {r.live ? (

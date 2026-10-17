@@ -38,6 +38,21 @@ Ayrıntı: `gorevler/G095-admin-v2.md`. Aşağıdaki §2 v1 ekranlarını anlat�
 - Testler: `tests/g121.test.ts` (mesaj denetimi, günlük, eylem, açılış şablonu, numara), `tests/g121-browser.ts` (admin bölümü);
   ekranlar `platform/previews/g121/09_*`, `10_*`.
 
+## 1c. G145 (2026-10-17) — denetim, linki bozmadan düzenleme
+- **Linki değiştirmeden düzenle** (site sayfası üst satırında **Düzenle**, Destek işlemlerinde kart): dükkânın kendi 72 saatlik
+  düzenleme linki (`SiteRecord.shopEdit` = yalnız hash + süre; `lib/sites.ts` `issueShopEditKey` / `endShopEditKey`; `canEdit` iki
+  anahtarı da kabul eder). Editör yeni sekmede açılır, üstte Türkçe dükkân şeridi, Share'de alıcının "edit link" kartı gizli, /my'a
+  kaydedilmez. Alıcının linki, önizleme anahtarı ve her şey aynen kalır. **Dükkân linkini kapat** → link 404 + mesaj şablonu
+  `setup_service_done_same_link`. Geçmiş'e "açıldı/kapatıldı" yazılır; Özet → Yapılacaklar açık kalan linki listeler (`shop_edit`).
+  Eylemler `shop-edit`, `shop-edit-end`.
+- Alıcının açık paneli, dükkân bir şey yazınca (not, mesaj kaydı, onay, hak) artık kilitlenmiyor: taslak değişmediyse panel yeni
+  sürümü alıp kaydı yeniden gönderir (`components/panel/usePanel.ts`). Önceden alıcı "changed in another window" görüp yeniden
+  yüklemek zorundaydı.
+- **Özet'te arama kutusu** → Siparişler `?q=` (aramada filtre "Hepsi"; Yapılacak filtresinde yazmaya başlayınca Hepsi'ne geçer).
+- Tasarımlar sayfası fiyatı dükkân para biriminde (`1,460 TRY`; önce `$1460` yazıyordu).
+- "Alıcı adına yayınla" hatalı taslakta hangi alanların sorunlu olduğunu söyler (ilk 3).
+- Testler: `tests/g145.test.ts`, `tests/g145-browser.ts` (ekranlar `platform/previews/g145/`). Denetim tablosu: `gorevler/G145-panel-denetim.md`.
+
 ## 2. Ekranlar
 **Liste (`/admin`)** — "Satış sonrası nasıl işliyor?" açılır kutusu; filtre çipleri **Yapılacak · Hepsi · Yayında · Taslak · Arşiv**
 (sayılarla; onay bekleyen sipariş varsa Yapılacak seçili açılır); arama (sipariş no — `#3456` gibi —, e-posta, isimler, adres, tasarım);
@@ -72,7 +87,8 @@ her site bir kart: durum rozetleri, isimler, adres + tasarım, sipariş no, olu�
   betiklerle aynı fonksiyonları), `summary.ts` (sunucu: SiteRecord → özet, geçmiş), `view.ts` (tarayıcı: tipler, filtre, sayılar),
   `messages.ts` (Etsy şablonları), `page.ts` (sayfa kapısı).
 - Rotalar: `app/admin/page.tsx`, `app/admin/site/[id]/page.tsx`, `app/api/admin/session` (POST/DELETE), `app/api/admin/sites` (GET),
-  `app/api/admin/sites/[id]/[action]` (POST: confirm, reissue, grant, archive, unpublish, delete).
+  `app/api/admin/sites/[id]/[action]` (POST: confirm, reissue, shop-edit, shop-edit-end, grant, archive, unpublish, publish, note, email,
+  message-log, rsvp-delete, delete).
 - Bileşenler: `components/admin/` (Shell, Gate, AdminLogin, AdminList, AdminSite, badges, format, admin.module.css — panelin
   BKE dili, tek vurgu rengi).
 - Veri adaptörü: `listSites()` (en yeni önce) ve `rsvpCounts()` (blob'da tek listeleme, okuma yok) — local + blob.
