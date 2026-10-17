@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 1
+ },
+ "coral-sunset": {
+  "measured": 120,
+  "low": 0,
+  "as_original": 0
+ },
+ "fuchsia-orchid": {
+  "measured": 120,
+  "low": 0,
+  "as_original": 0
+ },
+ "ocean-blue": {
+  "measured": 120,
+  "low": 0,
+  "as_original": 0
+ },
+ "golden-sand": {
+  "measured": 120,
+  "low": 0,
+  "as_original": 0
+ },
+ "blush-paradise": {
+  "measured": 120,
+  "low": 0,
+  "as_original": 0
+ }
+}

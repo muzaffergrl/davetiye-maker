@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 115,
+  "low": 0,
+  "as_original": 3
+ },
+ "burgundy-storybook": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "midnight-navy": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "plum-twilight": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "autumn-russet": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "deep-teal": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ }
+}

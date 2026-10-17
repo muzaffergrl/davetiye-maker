@@ -1,0 +1,44 @@
+{
+ "theme": "tuscan-vineyard",
+ "summary": {
+  "original": {
+   "measured": 121,
+   "low": 0,
+   "as_original": 0
+  },
+  "plum-gold": {
+   "measured": 121,
+   "low": 0,
+   "as_original": 0
+  },
+  "rose-blush": {
+   "measured": 121,
+   "low": 0,
+   "as_original": 0
+  },
+  "olive-burgundy": {
+   "measured": 121,
+   "low": 0,
+   "as_original": 0
+  },
+  "navy-burgundy": {
+   "measured": 121,
+   "low": 0,
+   "as_original": 0
+  },
+  "terracotta-merlot": {
+   "measured": 121,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [],
+ "passed": [
+  "palette plum-gold (coming): 121 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette rose-blush (coming): 121 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette olive-burgundy (coming): 121 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette navy-burgundy (coming): 121 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette terracotta-merlot (coming): 121 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}
