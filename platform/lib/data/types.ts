@@ -425,6 +425,11 @@ export interface DataAdapter {
   putUploadPart?(siteId: string, uploadId: string, index: number, bytes: Uint8Array): Promise<void>;
   /** G126: the parts 0..count-1 of an upload, removed from storage; null when one is missing. */
   takeUploadParts?(siteId: string, uploadId: string, count: number): Promise<Uint8Array[] | null>;
+  /**
+   * G174: removes the site's upload parts stored before `before` (epoch ms): a music upload that was never assembled.
+   * Parts newer than that (an upload in progress) are kept. Returns how many were removed.
+   */
+  pruneUploadParts?(siteId: string, before: number): Promise<number>;
   /** Only adapters that serve photos through /media/... implement this (local, blob). */
   readPhoto?(path: string): Promise<StoredFile | null>;
   /** Number of photo files stored for the site (photos and their size variants), for the per-site cap (G060-fix). */
