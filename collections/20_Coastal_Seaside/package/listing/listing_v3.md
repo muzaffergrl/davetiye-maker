@@ -17,13 +17,14 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G42
 | Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
 | Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository since 2026-10-16; described in the description and FAQ (G132) and in the START HERE guide (G131). **Not on production yet** and not tried on the live site. The 4 music tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128), so the description and FAQ keep a VERIFY note on it. Image 8 now reads "Up to 10 questions, download as Excel" (G132). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation (theme README, "Bilinen sınırlar"). |
-| Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). The listing says so. |
+| Edit link by email | **Off.** Sending is built (G147) but stays off until the owner sets up SMTP; the listing and the START HERE guide promise no email. Since G146 (K46) the buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. Listing and guide say so since G148 (2026-10-17). |
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Hosting extension, renewal and the Etsy shop URL are still open. |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Allison (latin-ext, no Cyrillic), Lora (latin-ext + Cyrillic). The language line in GOOD TO KNOW is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G122 (2026-10-16, `python3 tools/build_customer_guides.py`, from docs/19 Ek A): 7 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=coastal-seaside` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=coastal-seaside` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. |
+| Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 | Listing images and video | **Produced** on 2026-10-16 (G124): 8 images in `images_editorial/` (§5) and `video.mp4` (14 s, §6), from a local production build of the repository, so the editor in images 4, 5 and 7 is newer than production until the next deploy. Nothing uploaded to Etsy. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (guide, images, video) and every open VERIFY keep `ready_to_publish` false.
@@ -87,14 +88,14 @@ Your link opens a closed envelope. One tap opens it into your pages. Guests repl
 
 WHAT YOU NEED
 • A phone or computer with a web browser
-• Your Etsy order number (in your Etsy order confirmation)
+• Your Etsy order number (on Etsy under You → Purchases and reviews, or in your Etsy confirmation email)
 • Your wedding details; photos are optional
 No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start (for example …/marina-and-oliver); it cannot be changed later. A custom domain (yournames.com) is not included.
-• Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
+• Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
@@ -153,6 +154,8 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (G124, `python3 tools/listing_editorial.py --theme coastal-seaside`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured from a local production build of the platform (repository base `6181730`: G098 themes and the G121 editor; sample names and photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`); image 7 places them into the shop-wide GPT linen scene with three phones (`brand/trust/t1_three_steps.png`, GM06); images 3, 5 and 6 lay them out on paper. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The alt texts below were read against these files on 2026-10-16.
 
+Image 9 (G148, K47, 2026-10-17) answers "Can I continue on another phone or computer?": `python3 tools/listing_editorial.py --theme coastal-seaside --capture devices --only 09_devices`, laid out like image 5 with two real screens from a local production build (`tools/listing_editorial/capture_devices.ts`: /my on a phone, then the editor's Share → "Use on another device" after three sign-ins with the same order number; fictional order, email and devices). The card's /my address line, its QR row and the Share cards above it are hidden in the picture (no web address or QR in listing images).
+
 | # | File | Alt text |
 |---|---|---|
 | 1 | `01_cover.png` | Coastal Seaside wedding website with online RSVP on a phone held in a hand, among shells, a starfish, sea glass and dune grass on beach sand by the sea: the opening page with a sand-colored envelope with a scallop shell and the names Marina & Oliver |
@@ -163,10 +166,11 @@ The 8 images in `images_editorial/` are the editorial set of 2026-10-16 (G124, `
 | 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
 | 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
 | 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
+| 9 | `09_devices.png` | Start on your phone, continue on any device: one phone shows the "Open or start your website" form with an Etsy order number and email filled in; another shows the editor's "Use on another device" card with three devices signed in with the same order number (an iPhone, an Android phone and a Mac) and a "Sign out other devices" button. No account or password |
 
-Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
-- 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
-- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Save your private edit link", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
+Suggested extra image (Etsy allows 10 photos, so one more fits after image 9; answers a common question before purchase; layout and type only, K21; real screens), one of:
+- 10 `10_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
+- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Order number + email open your editor on any device", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
 
 ## 6. Video
 
@@ -181,10 +185,10 @@ No. You edit your website in your web browser, on your phone or computer. Your g
 Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number. You can also use the start link in our Etsy message.
 
 **Do I need an account or a password?**
-No. You get a private edit link that opens your editor. Save it right away; we cannot email it to you yet.
+No. Your Etsy order number and the email you start with open your editor on any phone or computer. You also get a private edit link as a shortcut.
 
 **What if I lose my edit link?**
-If your editor is still open, copy it again under Share. Otherwise message us on Etsy with your order number: we send you a new link and the old one stops working.
+No problem: on any phone or computer, open the "Create your website" page of our website (the address is in your START HERE guide) and enter your Etsy order number and the email you started with. Your editor opens where you left off.
 
 **Can I change things after I publish?**
 Yes, as often as you like. Names and date can be changed 3 times in total after publishing; typo fixes and moving the date by up to 7 days are free.
@@ -232,7 +236,7 @@ Thank you for your order! Your download is your START HERE guide (PDF). Open it 
 
 Can't open the PDF? Start here instead and choose the design you bought: https://davetiye-platform-five.vercel.app/start
 
-You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://davetiye-platform-five.vercel.app/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -240,7 +244,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). To continue later on any device, open https://davetiye-platform-five.vercel.app/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale
@@ -263,6 +267,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Music, map and directions, the reply form and Excel download (G126–G128) live and tried on the live site; the 4 tracks listened to and approved; Google Sheets connected with a real Google account
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
+- [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE (G148) re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [x] Price (1,460 TL) and quantity (999) decided and filled in (2026-10-16)

@@ -101,7 +101,7 @@ mekân ekranını `img[data-photo="venue"]` ile bulur, örnek fotoğraflar teman
    videonun cümlesi ("Guests tap the pouch and it opens.") bundan gelir; zarfsız tasarımda görsellerde "envelope" geçmez
    (`tools/tests/test_listing_editorial.py`, `tools/etsy_upload.py --check` alt metinleri de denetler).
 
-## Sekiz görsel
+## Sekiz görsel (+ 9. görsel, G148)
 
 | # | Ad | Düzen | Malzeme |
 |---|---|---|---|
@@ -113,6 +113,7 @@ mekân ekranını `img[data-photo="venue"]` ile bulur, örnek fotoğraflar teman
 | 6 | The details | Program, mekân, S&C | gerçek ekranlar |
 | 7 | How it works | Üç adım, roma rakamları | **GM06 T1** `brand/trust/t1_three_steps.png` (keten üstünde üç telefon) + `b01_start`, `b04_setup_names`, `g02_home_top` |
 | 8 | What's included | Masa üstü sahne + liste | `flatlay_phone(_v2)` + demo ekranı |
+| 9 | Any device (G148, K47) | 5'in düzeni: kâğıt üstünde iki büyük ekran; "Start on your phone" / "Continue *on any device*" | gerçek ekranlar, `tools/listing_editorial/capture_devices.ts`: `m01_my_form` (/my, sipariş no + e-posta dolu) + `m02_devices` (Share → Use on another device, aynı siparişle 3 cihaz). Web adresi/QR yok: kartın /my satırı, QR satırı ve üstteki Share kartları resimde gizli. `--capture devices --only 09_devices` |
 
 ### GM06 güven sahneleri (brand/trust/, G124 kararı)
 

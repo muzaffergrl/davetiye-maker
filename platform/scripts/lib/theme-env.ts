@@ -90,6 +90,8 @@ export interface ThemeEnv {
   dir: string;
   manifest: ThemeManifest;
   internal: boolean;
+  /** G151: a private custom design (theme.json "private"): its /start demo is admin-only, so that check is skipped. */
+  private: boolean;
   /** img/manifest.json (null when the theme has none). */
   images: Record<string, any> | null;
   catalog: { no: number; folder: string } | null;
@@ -353,10 +355,11 @@ export function loadThemeEnv(args: Partial<ThemeArgs> & { theme: string }): Them
   const siteJs = existsSync(path.join(dir, 'site.js')) ? readFileSync(path.join(dir, 'site.js'), 'utf8') : '';
   const jsReadyFlag = /dataset\.js\s*=\s*['"]ready['"]|setAttribute\(\s*['"]data-js['"]\s*,\s*['"]ready['"]/.test(siteJs);
   if (!jsReadyFlag) notes.push('site.js does not set html[data-js="ready"]: the end of its boot is not checked (page errors still are)');
+  if (manifest.private) notes.push('private theme (theme.json "private", G151): a custom design for one buyer; its /start demo is admin-only, so the demo check is skipped');
   if (manifest.internal) notes.push('internal theme (theme.json "internal": true): not offered on /start, so the /start demo and buyer checks are skipped');
 
   return {
-    id, dir, manifest, internal: Boolean(manifest.internal), images, catalog, collectionDir, demo, demoSource, photosDir, photosSource,
+    id, dir, manifest, internal: Boolean(manifest.internal), private: Boolean(manifest.private), images, catalog, collectionDir, demo, demoSource, photosDir, photosSource,
     photoFiles, comps, titles, fonts, jsReadyFlag, profile: profileFor(images, notes), notes,
   };
 }

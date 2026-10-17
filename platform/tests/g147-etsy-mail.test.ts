@@ -253,23 +253,24 @@ test('evaluateReceipt: paid / cancelled / refunded / unpaid / email / listing �
   const input = { orderNumber: '123456', email: 'Avery@Example.test', theme: 'sample-design' };
   const map = new Map([['555', 'sample-design'], ['777', 'other-design']]);
   const r = (over: Json = {}) => evaluateReceipt(paidReceipt('123456', over) as never, input, { listings: map, sellerUserId: USER_ID });
-  assert.deepEqual(r(), { result: 'verified' });
-  assert.deepEqual(r({ status: 'completed' }), { result: 'verified' });
-  assert.deepEqual(r({ status: 'partially refunded' }), { result: 'verified' }, 'a partial refund still counts as paid');
+  assert.deepEqual(r(), { result: 'verified', units: 1 });
+  assert.deepEqual(r({ status: 'completed' }), { result: 'verified', units: 1 });
+  assert.deepEqual(r({ status: 'partially refunded' }), { result: 'verified', units: 1 }, 'a partial refund still counts as paid');
   assert.deepEqual(r({ status: 'canceled', is_paid: false }), { result: 'rejected', reason: 'not_paid' });
   assert.deepEqual(r({ status: 'fully refunded' }), { result: 'rejected', reason: 'not_paid' });
-  assert.deepEqual(r({ status: 'payment processing', is_paid: false }), { result: 'pending' }, 'not paid yet: wait, re-check later');
-  assert.deepEqual(r({ status: 'open', is_paid: false }), { result: 'pending' });
+  assert.deepEqual(r({ status: 'payment processing', is_paid: false }), { result: 'pending', units: 1 }, 'not paid yet: wait, re-check later');
+  assert.deepEqual(r({ status: 'open', is_paid: false }), { result: 'pending', units: 1 });
   // buyer_email: compared only when Etsy gives one
-  assert.deepEqual(r({ buyer_email: null }), { result: 'verified' });
-  assert.deepEqual(r({ buyer_email: '' }), { result: 'verified' });
-  assert.deepEqual(r({ buyer_email: 'avery@example.TEST' }), { result: 'verified' }, 'case-insensitive');
+  assert.deepEqual(r({ buyer_email: null }), { result: 'verified', units: 1 });
+  assert.deepEqual(r({ buyer_email: '' }), { result: 'verified', units: 1 });
+  assert.deepEqual(r({ buyer_email: 'avery@example.TEST' }), { result: 'verified', units: 1 }, 'case-insensitive');
   assert.deepEqual(r({ buyer_email: 'someone@else.test' }), { result: 'rejected', reason: 'email_mismatch' });
   // listing -> design
   assert.deepEqual(r({ transactions: [{ listing_id: 777 }] }), { result: 'rejected', reason: 'theme_mismatch' });
-  assert.deepEqual(r({ transactions: [{ listing_id: 999 }] }), { result: 'verified' }, 'unmapped listing: no design check');
-  assert.deepEqual(r({ transactions: [{ listing_id: 999 }, { listing_id: 555 }] }), { result: 'verified' }, 'an add-on listing next to the design');
-  assert.deepEqual(r({ transactions: [] }), { result: 'verified' });
+  assert.deepEqual(r({ transactions: [{ listing_id: 999 }] }), { result: 'verified', units: 1 }, 'unmapped listing: no design check');
+  // G152: an unmapped line counts as a design too (two lines = two websites) unless it is listed as a service
+  assert.deepEqual(r({ transactions: [{ listing_id: 999 }, { listing_id: 555 }] }), { result: 'verified', units: 2 }, 'two design lines');
+  assert.deepEqual(r({ transactions: [] }), { result: 'verified', units: 1 });
   // not ours
   assert.deepEqual(r({ receipt_id: 999 }), { result: 'rejected', reason: 'not_found' });
   assert.deepEqual(r({ seller_user_id: 4242 }), { result: 'rejected', reason: 'not_found' });
@@ -418,7 +419,7 @@ test('EtsyOrderVerifier: paid → verified (headers right); 404 → not_found; 4
     out.notDigits = await check('12ab');
     return out;
   });
-  assert.deepEqual(value.paid, { result: 'verified' });
+  assert.deepEqual(value.paid, { result: 'verified', units: 1 });
   assert.deepEqual(value.missing, { result: 'rejected', reason: 'not_found' });
   assert.deepEqual(value.foreign, { result: 'rejected', reason: 'not_found' }, '403 on one receipt while receipts can be read: not ours');
   assert.deepEqual(value.refused, { result: 'pending' }, 'the app may not read receipts: wait for the shop');
@@ -446,7 +447,7 @@ test('EtsyOrderVerifier: paid → verified (headers right); 404 → not_found; 4
     }
     return realFetch(input, init);
   });
-  assert.deepEqual(await check(paid), { result: 'verified' });
+  assert.deepEqual(await check(paid), { result: 'verified', units: 1 });
   assert.ok(refused);
   assert.ok(fake.state.calls.some((c) => c.body?.get('grant_type') === 'refresh_token'));
   assert.notEqual((await readEtsyDoc(getDataAdapter()))?.access, doc?.access, 'the new access token is stored');

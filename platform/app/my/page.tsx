@@ -14,8 +14,7 @@ import { href } from '../../lib/marketing/lang-path.ts';
 import { realEtsyUrl } from '../../lib/marketing/placeholders.ts';
 import { uiLocale } from '../../lib/i18n/server.ts';
 import { makeTranslator } from '../../lib/i18n/translate.ts';
-import { themeOpenForClaims } from '../../lib/themes/approval.ts';
-import { offeredThemes } from '../../lib/themes/offered.ts';
+import { offeredThemes, themeStartable } from '../../lib/themes/offered.ts';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,9 +32,10 @@ type Props = { searchParams: Promise<Record<string, string | string[] | undefine
 
 export default async function MyPage({ searchParams }: Props) {
   const { lang, dict } = await uiLocale();
-  const { theme } = await searchParams;
-  const found = typeof theme === 'string' && theme ? await claimableTheme(theme) : null;
-  const startTheme = found && themeOpenForClaims(found.id) ? { id: found.id, name: found.name } : null;
+  const { theme, order } = await searchParams;
+  // G151: a private theme (custom design) only with &order=<a listed number>; else it is unknown here too.
+  const found = typeof theme === 'string' && theme ? await claimableTheme(theme, { order }) : null;
+  const startTheme = found && themeStartable(found) ? { id: found.id, name: found.name } : null;
   return (
     <div className={PANEL_FONTS}>
       <DocumentLang lang={lang} />

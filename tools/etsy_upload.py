@@ -74,6 +74,9 @@ PLACEHOLDER = re.compile(r"\[(?!VERIFY)[A-Z][A-Z /:-]*\]")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 IMAGES_STATUS = ("current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 "
                  "editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)")
+# G148 (K47): image 9, "continue on any device" (G146), added to the editorial set later
+IMAGE9_STATUS = ("current: image 9 of 2026-10-17 (G148; tools/listing_editorial.py --capture devices, real screens of /my "
+                 "and Share → Use on another device from a local build with G146; no web address or QR)")
 SERVICE_IMAGES_STATUS = ("current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real "
                          "screens of the editor and of our ready designs' openings, no price, QR or web address)")
 DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
@@ -133,7 +136,8 @@ def images(md: str, listing: Path, status: str = IMAGES_STATUS) -> tuple[list[di
             "file": str(path.relative_to(REPO)).replace("\\", "/"),
             "alt": VERIFY.sub("", row[2]).strip(),
             "exists": path.exists(),
-            "status": status if path.exists() else "missing",
+            "status": (IMAGE9_STATUS if name == "09_devices.png" and status == IMAGES_STATUS else status)
+            if path.exists() else "missing",
         })
     return rows, checks
 
@@ -147,8 +151,9 @@ def opening_object(theme: str, copy: str | None = None) -> str:
     """What guests tap first ("envelope", "gatefold", "pouch", "wallet", "book", "sleeve"): the opening sentence of the
     design in platform/lib/marketing/designs.ts ("Your guests tap the <thing>.", the sales site's openingObject)."""
     copy = DESIGN_COPY.read_text(encoding="utf-8") if copy is None else copy
-    # G137: 21's entry is written with quoted keys ("opening": "…"), the others with bare keys (opening: '…')
-    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?(?:\bopening|\"opening\"):\s*['\"]Your guests tap the ([a-z]+)\.", copy,
+    # G137: 21's entry was written with quoted keys ("opening": "…"), the others with bare keys (opening: '…');
+    # G144: the sentence is wrapped for translation (opening: msg('…'))
+    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?(?:\bopening|\"opening\"):\s*(?:msg\(\s*)?['\"]Your guests tap the ([a-z]+)\.", copy,
                   re.S | re.M)
     if not m:
         raise SystemExit(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme}'")

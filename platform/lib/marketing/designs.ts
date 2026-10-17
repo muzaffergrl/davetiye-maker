@@ -114,6 +114,30 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'black tie by Lake Como: a black envelope with a gold wax seal, names over the lake at dusk and an asymmetric photo gallery.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  'orient-express-voyage': {
+    id: 'orient-express-voyage',
+    collection: '25_Orient_Express_Voyage',
+    demoCouple: 'Amelia & Rafael',
+    style: msg('A vintage rail journey: a bottle-green leather ticket wallet, a first-class ticket, an antique route map and carriage-window photos'),
+    metaDescription: msg('A vintage rail journey wedding website: a leather ticket wallet opens to a first-class ticket, and a route map draws itself. Edit it in your online editor.'),
+    intro: msg('Bottle green, brass and ivory, in the style of an old travel poster. Your names rise over the poster, then the invitation with a swinging luggage tag, a departure countdown and a route that draws itself across an antique map.'),
+    opening: msg('Your guests tap the wallet. The leather strap unbuckles, the cover swings open and a separate first-class ticket with your photo slides out of its pocket. The ticket then opens into your home page.'),
+    pages: {
+      home: msg('Your names over a travel poster, the invitation beside your portrait with a luggage tag, a departure countdown and a map whose route draws itself as guests scroll.'),
+      story: msg('Three photos in carriage windows on green panelling. As guests scroll, each photo glides past its window like passing scenery.'),
+      details: msg('The day as stations along a route on an antique map, one by one, then the venue, an optional map and directions, calendar links, dress code and questions and answers.'),
+      rsvp: msg('A boarding pass with your reply-by date and the shared configurable reply form; a sent reply gets a boarding stamp.'),
+    },
+    palette: [
+      { name: msg('Bottle green'), hex: '#1E3A2C' },
+      { name: msg('Brass'), hex: '#B8914B' },
+      { name: msg('Ivory'), hex: '#F3EBD9' },
+      { name: msg('Route red'), hex: '#8C2F39' },
+    ],
+    fonts: ['Limelight', 'Cormorant Garamond'],
+    llmsLine: 'a vintage rail journey: a leather ticket wallet opens to a first-class ticket; a route line draws across an antique map; carriage-window photos.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'maison-patisserie': {
     id: 'maison-patisserie',
     collection: '28_Maison_Patisserie',
@@ -817,6 +841,7 @@ export type StyleId = (typeof STYLE_FILTERS)[number]['id'];
 export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'crimson-rose-atelier': ['floral', 'classic'],
   'nocturne-lake-estate': ['classic', 'destination'],
+  'orient-express-voyage': ['classic', 'destination'],
   'maison-patisserie': ['classic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],

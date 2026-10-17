@@ -13,7 +13,7 @@ sale: `docs/23_EK_HIZMETLER.md`. Product language: English (US spelling).
 | Turnaround | **3 days** after we have everything (user, 2026-10-16) |
 | Etsy rule on services | **Not checked.** Etsy's prohibited items policy limits pure services; a service that results in a digital item (here: the buyer's set-up website) is the usual exception. [VERIFY] in §4: read Etsy's current policy before publishing |
 | Digital file | `package/customer/SETUP_SERVICE.pdf` (G136, 2026-10-17; `tools/build_service_guides.py`): what was bought, the list of what to send us (word for word from the admin message `setup_service_details`), 3 days, one round, no returns + we fix it, support |
-| Shop editing a buyer's website | The admin can create a website for a buyer ("Yeni sipariş") or issue a new edit link ("Yeni düzenleme linki", the old link stops working). There is no way to edit an existing website without replacing the buyer's link. The description says so (GOOD TO KNOW). docs/23 §3 |
+| Shop editing a buyer's website | The admin can create a website for a buyer ("Yeni sipariş"), or edit a buyer's existing website with the shop's own 72-hour link without changing the buyer's ("Linki değiştirmeden düzenle", G145); "Yeni düzenleme linki" (the old link stops working) is only for a lost link. Since G146 the buyer also opens the editor on any device with the Etsy order number + email (`/my`). The description says so (GOOD TO KNOW, G148). docs/23 §3 |
 | Images, video | 4 images made (G136, 2026-10-17; `tools/listing_services.py`, §5). No video |
 
 ## 1. Title
@@ -39,12 +39,12 @@ WHAT WE DO FOR YOU (ONE ROUND)
 • We add up to 5 photos you send us and crop each one to its frame
 • We set up your RSVP page: reply deadline and up to 3 questions for your guests (for example a meal choice)
 • We change headings and wording you ask for, in your words
-• We send you your private edit link, so you can check every page and publish when you are happy
+• You check every page in your own editor and publish when you are happy
 
 HOW IT WORKS
 1. Buy this listing together with your design (or after it).
 2. We message you on Etsy and ask for everything we need. Send your texts in the Etsy message and your photos as a share link (Google Drive, Dropbox or iCloud).
-3. We set up your website within 3 days of receiving everything, and send you your private edit link.
+3. We set up your website within 3 days of receiving everything, and tell you on Etsy when it is ready (with your private edit link if we started the website for you).
 4. You check it, change anything you like yourself, and tap Publish.
 
 WHAT IS NOT INCLUDED
@@ -55,7 +55,7 @@ WHAT IS NOT INCLUDED
 
 GOOD TO KNOW
 • One purchase = one round of setup for one website.
-• If you already started your website, we send you a new edit link when we are done and your old link stops working. Please use the new one.
+• If you already started your website, we set it up in that same website: your edit link, and your Etsy order number with your email, keep working.
 • If your website is already published, name and date changes we make count toward the same 3 changes after publishing as your own (typo fixes and moving the date by up to 7 days stay free).
 • We never ask for your edit link.
 • Digital service: nothing is printed or shipped. [VERIFY: Etsy's policy on service listings]

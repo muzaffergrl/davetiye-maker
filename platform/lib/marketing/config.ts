@@ -157,6 +157,26 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // G163 (docs/24): 25 Orient Express Voyage, built before its GPT parts; sale approval and price remain pending.
+    {
+      id: 'orient-express-voyage',
+      name: 'Orient Express Voyage',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
+    // New design 26 (G164): theme built before its GPT parts (interim paper); sale approval and price remain pending.
+    {
+      id: 'kintsugi-washi',
+      name: 'Kintsugi & Washi',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     // New design 28 (G166, docs/24): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
     {
       id: 'maison-patisserie',

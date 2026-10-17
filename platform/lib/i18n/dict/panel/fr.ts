@@ -421,7 +421,7 @@ const dict: Dict = {
   'Is a meal served?': 'Un repas est-il servi ?',
   'Is there parking at the venue?': 'Y a-t-il un parking sur place ?',
   'It is still right': 'C’est toujours correct',
-  'It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.': 'C’est le seul moyen d’ouvrir votre éditeur. Toute personne qui a ce lien peut modifier votre site : gardez-le privé.',
+  'It is a shortcut to your editor. On any other device you can also continue with your Etsy order number and email. Anyone who has this link can edit your website, so keep it private.': 'C’est un raccourci vers votre éditeur. Sur tout autre appareil, vous pouvez aussi continuer avec votre numéro de commande Etsy et votre e-mail. Toute personne qui a ce lien peut modifier votre site : gardez-le privé.',
   'It opens your website link. Scan it once with your phone camera before you print it.': 'Il ouvre le lien de votre site. Scannez-le une fois avec l’appareil photo de votre téléphone avant d’imprimer.',
   'It takes the place of your portrait on the card. Without one, the card shows the design’s own decoration.': 'Elle remplace votre portrait sur la carte. Sans elle, la carte affiche la décoration du modèle.',
   'Just bought a design?': 'Vous venez d’acheter un modèle ?',
@@ -800,7 +800,7 @@ const dict: Dict = {
   'Share…': 'Partager…',
   'Short answer': 'Réponse courte',
   'Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {max} questions.': 'Des réponses courtes aux questions fréquentes, comme le stationnement, les enfants ou le plan en cas de pluie. Jusqu’à {max} questions.',
-  'Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {max}.': 'De courts blocs sur votre page Détails, comme la tenue, les enfants, les cadeaux, le stationnement ou la météo. Aucun, quelques-uns ou jusqu’à {max}.',
+  'Short blocks on your Details page, such as children, gifts, parking or the weather. None, a few or up to {max}.': 'De courts blocs sur votre page Détails, comme les enfants, les cadeaux, le stationnement ou la météo. Aucun, quelques-uns ou jusqu’à {max}.',
   'Show': 'Afficher',
   'Show all replies': 'Afficher toutes les réponses',
   'Show all {n} answers': 'Afficher les {n} réponses',
@@ -1295,6 +1295,19 @@ const dict: Dict = {
   'Under the box, on computers': 'Sous la boîte, sur ordinateur',
   'Under the box, on phones': 'Sous la boîte, sur téléphone',
   'box': 'la boîte',
+  // G152: multi-item orders (/my chooser), reply emails
+  'Which website do you want to open?': 'Quel site voulez-vous ouvrir ?',
+  'This order has more than one website.': 'Cette commande comprend plusieurs sites.',
+  'We will email you when a guest replies.': 'Nous vous enverrons un e-mail quand un invité répondra.',
+  'Reply emails turned off.': 'E-mails de réponse désactivés.',
+  'Reply emails': 'E-mails de réponse',
+  'Email me when a guest replies': 'M’envoyer un e-mail quand un invité répond',
+  'Sent to {email}, the address you started your website with.': 'Envoyé à {email}, l’adresse avec laquelle vous avez créé votre site.',
+  'Your website has no email address yet. Please message the shop.': 'Votre site n’a pas encore d’adresse e-mail. Écrivez à la boutique.',
+  'Each email has the guest’s name and answer. At most 20 a day; after that, the next email counts the rest.': 'Chaque e-mail indique le nom et la réponse de l’invité. 20 au maximum par jour ; ensuite, l’e-mail suivant compte les autres.',
+  'The shop\'s edit link cannot change the couple\'s reply emails.': 'Le lien d’édition de la boutique ne peut pas modifier les e-mails de réponse du couple.',
+  'Reply emails are not available yet.': 'Les e-mails de réponse ne sont pas encore disponibles.',
+  'This website has no email address to send to. Please message the shop.': 'Ce site n’a pas d’adresse e-mail à laquelle écrire. Écrivez à la boutique.',
 };
 
 export default dict;

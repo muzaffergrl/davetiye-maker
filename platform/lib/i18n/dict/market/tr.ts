@@ -844,6 +844,18 @@ const dict: Dict = {
   'Three photos on a display-case shelf: guests swipe or drag them along, and the photo in the middle steps forward.': 'Vitrin rafında üç fotoğraf: misafirler kaydırır ya da sürükler, ortadaki fotoğraf öne çıkar.',
   'Your guests tap the box. The satin bow unties, the ribbon slides away and the lid lifts off. The tissue paper parts and a separate card with your photo comes forward to become your home page.': 'Misafirleriniz kutuya dokunur. Saten fiyonk çözülür, kurdele kayar ve kapak kalkar. İpek kâğıt aralanır ve fotoğraflı ayrı bir kart öne gelip ana sayfanız olur.',
   'box': 'kutu',
+  // G163 Orient Express Voyage
+  'A boarding pass with your reply-by date and the shared configurable reply form; a sent reply gets a boarding stamp.': 'Yanıt son tarihinizi ve ortak, ayarlanabilir yanıt formunu taşıyan bir biniş kartı; gönderilen yanıt bir biniş damgası alır.',
+  'A vintage rail journey wedding website: a leather ticket wallet opens to a first-class ticket, and a route map draws itself. Edit it in your online editor.': 'Vintage bir tren yolculuğu düğün websitesi: deri bilet cüzdanı açılır, birinci sınıf bilet çıkar ve rota haritası kendini çizer. Çevrimiçi editörünüzde düzenleyin.',
+  'A vintage rail journey: a bottle-green leather ticket wallet, a first-class ticket, an antique route map and carriage-window photos': 'Vintage bir tren yolculuğu: şişe yeşili deri bilet cüzdanı, birinci sınıf bilet, eski bir rota haritası ve vagon penceresinde fotoğraflar',
+  'Bottle green': 'Şişe yeşili',
+  'Bottle green, brass and ivory, in the style of an old travel poster. Your names rise over the poster, then the invitation with a swinging luggage tag, a departure countdown and a route that draws itself across an antique map.': 'Eski bir seyahat afişi tarzında şişe yeşili, pirinç ve fildişi. İsimleriniz afişin üzerinde yükselir; ardından sallanan bir bagaj etiketiyle davetiye, kalkış geri sayımı ve eski bir haritada kendini çizen bir rota gelir.',
+  'Brass': 'Pirinç',
+  'Route red': 'Rota kırmızısı',
+  'The day as stations along a route on an antique map, one by one, then the venue, an optional map and directions, calendar links, dress code and questions and answers.': 'Gün, eski bir haritadaki rotanın durakları olarak tek tek; ardından mekân, isteğe bağlı harita ve yol tarifi, takvim bağlantıları, kıyafet kuralı ve sorular-cevaplar.',
+  'Three photos in carriage windows on green panelling. As guests scroll, each photo glides past its window like passing scenery.': 'Yeşil ahşap panellerde vagon pencerelerinde üç fotoğraf. Misafirler kaydırdıkça her fotoğraf, geçen bir manzara gibi penceresinin ardından kayar.',
+  'Your guests tap the wallet. The leather strap unbuckles, the cover swings open and a separate first-class ticket with your photo slides out of its pocket. The ticket then opens into your home page.': 'Misafirleriniz cüzdana dokunur. Deri kayışın tokası açılır, kapak yana açılır ve fotoğrafınızı taşıyan ayrı bir birinci sınıf bilet cebinden kayarak çıkar. Bilet ardından ana sayfanıza açılır.',
+  'Your names over a travel poster, the invitation beside your portrait with a luggage tag, a departure countdown and a map whose route draws itself as guests scroll.': 'Bir seyahat afişinin üzerinde isimleriniz, bagaj etiketiyle portrenizin yanında davetiye, kalkış geri sayımı ve misafirler kaydırdıkça rotası kendini çizen bir harita.',
 };
 
 export default dict;
