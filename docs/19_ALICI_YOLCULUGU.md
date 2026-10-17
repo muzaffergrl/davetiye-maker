@@ -756,7 +756,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "body": [
       "Hi {names}, a short note: your wedding website stays online until {online_until}.",
       "After that it closes for guests. In your editor you can still see your content and download your replies (Guests → Download list). If you want a copy of your replies, it is easiest to download them before then.",
-      "[EXTENSION POLICY]",
+      "Need it online longer? Reply here before that date and we can extend it.",
       "{shop}"
     ]
   },
@@ -920,7 +920,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     ],
     "body": [
       "Hi, of course. To hide your website from guests right away, open your editor and go to Share → Take the website offline.",
-      "To delete your website, photos and guest replies for good: [DELETION PROCESS]. Before we delete anything we confirm it is you (order {order}, website {site_url}). Deleting cannot be undone, so download your replies first if you want a copy (Guests → Download list).",
+      "To delete your website, photos and guest replies for good, just reply here and we delete everything within 30 days (usually much sooner). Before we delete anything we confirm it is you (order {order}, website {site_url}). Deleting cannot be undone, so download your replies first if you want a copy (Guests → Download list).",
       "{shop}"
     ]
   }
