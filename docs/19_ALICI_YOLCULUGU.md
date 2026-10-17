@@ -508,7 +508,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
       "Hi, thank you for your order!",
       "Your {design} wedding website is ready for you to start. Open this link on your phone or computer: {start_url}",
       "You will enter your Etsy order number ({order}), your email address and your first names, and choose your website address. Your website starts as a private draft: nobody can see it until you publish it.",
-      "Important: the next screen shows your private edit link. Please save it right away (tap Copy link and paste it into your notes, or tap Email it to myself). It opens your editor, and we cannot email it to you yet.",
+      "Your Etsy order number and email are your key: on any phone or computer, open the \"Create your website\" page of our shop site and enter them to continue where you left off. No account or password. The next screen also shows a private edit link as a shortcut.",
       "The START HERE guide in your Etsy download explains every step. If you have any question, just reply here.",
       "{shop}"
     ]
@@ -585,7 +585,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
   {
     "id": "new_edit_link",
     "title": "New edit link (lost link)",
-    "when": "After the shop has made a new link with reissue-edit-key (lost link, or the link was shared by mistake). Only inside this order's own Etsy conversation, or after the buyer wrote from the email address used on /start with the order number.",
+    "when": "After the shop has made a new link with reissue-edit-key (the link was shared by mistake, or the buyer can't get in with order number + email). Only inside this order's own Etsy conversation, or after the buyer wrote from the email address used on /start with the order number.",
     "placeholders": [
       "names",
       "edit_url",
@@ -595,8 +595,8 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "body": [
       "Hi {names}, here is your new private edit link:",
       "{edit_url}",
-      "Your old edit link no longer works, so only this new link can open your editor. Your website, photos and guest replies are exactly as before, and your website address stays {site_url}.",
-      "Please save it now: copy it into your notes app or email it to yourself. Share it only with your partner. We will never ask you for it.",
+      "Your old edit link no longer works and every device you were signed in on has been signed out. Your website, photos and guest replies are exactly as before, and your website address stays {site_url}.",
+      "You can always get back in on any device with your Etsy order number and the email you used, on the \"Create your website\" page of our shop site. Keep this link private and share it only with your partner. We will never ask you for it.",
       "{shop}"
     ],
     "note": "Never paste {edit_url} into any other template, note or log. Tell the buyer to use the newest link if they asked twice."
@@ -630,8 +630,8 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     ],
     "body": [
       "Hi, thanks for letting us know.",
-      "This message means a website has already been started with order {order}, maybe by you earlier or by your partner. If you saved an edit link, please open it: that is your website.",
-      "If you don't have the link, tell us here and we will check the order and send you a new edit link to that website. Please don't start a second order.",
+      "This message means a website has already been started with order {order}, maybe by you earlier or by your partner. Enter the same order number together with the email address that was used when the website was started, and your editor opens on any device.",
+      "If that email doesn't work, tell us here and we will check the order and help you back in. Please don't start a second order.",
       "{shop}"
     ],
     "note": "Check the site for this order (email, names, theme). If someone else claimed the number by mistake, decide case by case; there is no 'release order' tool yet (docs/19 §6 A6)."
@@ -828,8 +828,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     ],
     "body": [
       "Hi {names}, your {design} wedding website is set up with the details you sent us.",
-      "Open it with the same private edit link you already have and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
-      "Lost your edit link? Just reply here with your order number and we will send you a new one.",
+      "Open it as before (your private edit link, or your Etsy order number and email on any device) and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
       "You can change anything yourself from now on. If you would like us to make another round of changes for you, that is a new setup purchase in our shop.",
       "{shop}"
     ],

@@ -421,7 +421,7 @@ const dict: Dict = {
   'Is a meal served?': 'Gibt es ein Essen?',
   'Is there parking at the venue?': 'Gibt es Parkplätze an der Location?',
   'It is still right': 'Es stimmt so',
-  'It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.': 'Nur mit ihm öffnen Sie Ihren Editor. Wer diesen Link hat, kann Ihre Website bearbeiten – halten Sie ihn also privat.',
+  'It is a shortcut to your editor. On any other device you can also continue with your Etsy order number and email. Anyone who has this link can edit your website, so keep it private.': 'Er ist eine Abkürzung zu Ihrem Editor. Auf jedem anderen Gerät können Sie auch mit Ihrer Etsy-Bestellnummer und Ihrer E-Mail-Adresse weitermachen. Wer diesen Link hat, kann Ihre Website bearbeiten – halten Sie ihn also privat.',
   'It opens your website link. Scan it once with your phone camera before you print it.': 'Er öffnet den Link Ihrer Website. Scannen Sie ihn vor dem Drucken einmal mit Ihrer Handykamera.',
   'It takes the place of your portrait on the card. Without one, the card shows the design’s own decoration.': 'Es ersetzt Ihr Porträt auf der Karte. Ohne Foto zeigt die Karte die Verzierung des Designs.',
   'Just bought a design?': 'Gerade ein Design gekauft?',

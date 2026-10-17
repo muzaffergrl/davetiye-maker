@@ -706,7 +706,7 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
 
         <div className={styles.saveBox}>
           <h2 className={styles.saveTitle}>{t('Save this link')}</h2>
-          <p>{t('It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.')}</p>
+          <p>{t('It is a shortcut to your editor. On any other device you can also continue with your Etsy order number and email. Anyone who has this link can edit your website, so keep it private.')}</p>
           {result.emailSent ? (
             <p>{t('We have also emailed it to {email}.', { email: result.email })}</p>
           ) : (

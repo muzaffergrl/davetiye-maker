@@ -421,7 +421,7 @@ const dict: Dict = {
   'Is a meal served?': 'Yemek servis ediliyor mu?',
   'Is there parking at the venue?': 'Mekânda otopark var mı?',
   'It is still right': 'Hâlâ doğru',
-  'It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.': 'Düzenleyicinizi açmanın tek yolu budur. Bu bağlantıya sahip herkes websitenizi düzenleyebilir; bu yüzden gizli tutun.',
+  'It is a shortcut to your editor. On any other device you can also continue with your Etsy order number and email. Anyone who has this link can edit your website, so keep it private.': 'Düzenleyicinize giden kısayoldur. Başka bir cihazda Etsy sipariş numaranız ve e-postanızla da devam edebilirsiniz. Bu bağlantıya sahip herkes websitenizi düzenleyebilir; bu yüzden gizli tutun.',
   'It opens your website link. Scan it once with your phone camera before you print it.': 'Website bağlantınızı açar. Basmadan önce telefon kameranızla bir kez okutun.',
   'It takes the place of your portrait on the card. Without one, the card shows the design’s own decoration.': 'Kartta portrenizin yerini alır. Yoksa kartta tasarımın kendi süslemesi görünür.',
   'Just bought a design?': 'Yeni mi tasarım satın aldınız?',
