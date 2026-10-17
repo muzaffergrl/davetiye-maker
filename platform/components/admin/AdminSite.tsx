@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { MESSAGE_TEMPLATES, messageMissing, renderMessage } from '../../lib/admin/messages.ts';
 import { defaultTemplateId, type AdminHistoryEntry, type AdminSiteSummary } from '../../lib/admin/view.ts';
-import type { AdminContentView, AdminRsvpView } from '../../lib/admin/api.ts';
+import type { AdminContentView, AdminDeviceView, AdminRsvpView } from '../../lib/admin/api.ts';
 import { CopyButton, copyText } from './CopyButton.tsx';
 import styles from './admin.module.css';
 import { StateBadges } from './badges.tsx';
@@ -49,6 +49,8 @@ export default function AdminSite(props: {
   content: AdminContentView;
   rsvp: AdminRsvpView;
   previewPath: string;
+  /** G152: devices signed in with the order number (read-only list; "Tüm cihazlarda oturumu kapat"). */
+  devices?: AdminDeviceView[];
   origin: string;
 }) {
   const router = useRouter();
@@ -57,6 +59,7 @@ export default function AdminSite(props: {
   const [content, setContent] = useState(props.content);
   const [rsvp, setRsvp] = useState(props.rsvp);
   const [previewPath, setPreviewPath] = useState(props.previewPath);
+  const [devices, setDevices] = useState<AdminDeviceView[]>(props.devices ?? []);
   const [noteText, setNoteText] = useState(props.summary.note ?? '');
   const [emailText, setEmailText] = useState(props.summary.ownerEmail ?? '');
   const [editingEmail, setEditingEmail] = useState(false);
@@ -154,6 +157,7 @@ export default function AdminSite(props: {
       if (data.content) setContent(data.content);
       if (data.rsvp) setRsvp(data.rsvp);
       if (data.previewPath) setPreviewPath(data.previewPath);
+      if (Array.isArray(data.devices)) setDevices(data.devices);
       if (data.editUrl) setEditUrl(data.editUrl);
       if (action === 'shop-edit-end') setShopEditUrl(null);
       if (data.shopEditUrl) setShopEditUrl(data.shopEditUrl);
@@ -427,6 +431,49 @@ export default function AdminSite(props: {
           ) : null}
           {s.state === 'archived' ? <p className={styles.hint}>Site arşivde; önce yayında kalma süresini uzatın.</p> : null}
           <StatusLine status={status['shop-edit'] ?? status['shop-edit-end'] ?? null} />
+        </div>
+
+        <div className={styles.action} data-devices={devices.length}>
+          <p className={styles.actionTitle}>Giriş yapılan cihazlar</p>
+          <p className={styles.actionText}>
+            Alıcının sipariş no + e-postayla (/my) giriş yaptığı cihazlar. Tümünde oturumu kapatmak alıcının özel düzenleme linkini değiştirmez; alıcı /my&apos;den
+            yeniden girebilir. Hesap ele geçirilmişse önce e-postayı düzeltin, sonra &quot;Yeni link oluştur&quot;.
+          </p>
+          {devices.length ? (
+            <ul className={styles.history} data-device-list="">
+              {devices.map((d, i) => (
+                <li key={`${d.createdAt}-${i}`}>
+                  <span className={styles.historyWhen}>{stamp(d.createdAt)}</span>
+                  {d.label || 'Bilinmeyen cihaz'} · {d.via === 'email' ? 'e-postadaki giriş linki' : d.via === 'start' ? 'başlatma sayfası' : '/my formu'}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.hint}>Sipariş numarasıyla giriş yapılmış cihaz yok.</p>
+          )}
+          {devices.length ? (
+            confirming === 'devices-signout' ? (
+              <div className={styles.row}>
+                <button
+                  type="button"
+                  className={styles.btn}
+                  disabled={busy !== null}
+                  onClick={() => run('devices-signout', {}, 'Tüm cihazlarda oturum kapatıldı.')}
+                  data-action="devices-signout-confirm"
+                >
+                  Evet, tümünde kapat
+                </button>
+                <button type="button" className={styles.btnGhost} onClick={() => setConfirming(null)}>
+                  Vazgeç
+                </button>
+              </div>
+            ) : (
+              <button type="button" className={styles.btnGhost} disabled={busy !== null} onClick={() => setConfirming('devices-signout')} data-action="devices-signout">
+                Tüm cihazlarda oturumu kapat ({devices.length})
+              </button>
+            )
+          ) : null}
+          <StatusLine status={status['devices-signout'] ?? null} />
         </div>
 
         <div className={styles.action}>

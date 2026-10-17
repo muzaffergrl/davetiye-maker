@@ -7,6 +7,8 @@
 //       the order's website, started with this email → a device key, straight into the editor (any device, no password);
 //       no website for the order yet → /start (?theme= from this page's link, else "Which design did you buy?"), the order
 //       number and email handed over in sessionStorage (never in the URL);
+//       several websites of a multi-item order started with this email (G152) → "Which website?" (names + address),
+//       the chosen one is posted again with its slug;
 //       anything else → one generic message.
 //     "Email me a sign-in link" only while the platform can send email (getEditLinkMailer().enabled, from the server).
 //  4. "Have your private edit link?" (folded): paste the saved link. 5. Last resort: message the shop on Etsy.
@@ -212,14 +214,19 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
   const [message, setMessage] = useState<Message>(null);
   const [busy, setBusy] = useState<'continue' | 'signin' | null>(null);
   const [pick, setPick] = useState(false);
+  const [choices, setChoices] = useState<Array<{ slug: string; names: string }> | null>(null);
   const [design, setDesign] = useState(designs[0]?.id ?? '');
   const honeypot = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
   const pickRef = useRef<HTMLHeadingElement>(null);
+  const chooseRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (pick) pickRef.current?.focus();
   }, [pick]);
+  useEffect(() => {
+    if (choices) chooseRef.current?.focus();
+  }, [choices]);
 
   const show = (m: Message) => {
     setMessage(m);
@@ -239,14 +246,14 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
     return !first;
   }
 
-  async function post(url: string): Promise<{ status: number; body: Record<string, any> } | null> {
+  async function post(url: string, slug?: string): Promise<{ status: number; body: Record<string, any> } | null> {
     try {
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
         cache: 'no-store',
-        body: JSON.stringify({ orderNumber, email, website: honeypot.current?.value ?? '' }),
+        body: JSON.stringify({ orderNumber, email, website: honeypot.current?.value ?? '', ...(slug ? { slug } : {}) }),
       });
       let body: Record<string, any> = {};
       try {
@@ -275,9 +282,15 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
     if (busy) return;
     setMessage(null);
     setPick(false);
+    setChoices(null);
     if (!check()) return;
+    await open();
+  }
+
+  /** POST /api/my/continue; `slug`: the website picked in "Which website?" (G152). */
+  async function open(slug?: string) {
     setBusy('continue');
-    const r = await post('/api/my/continue');
+    const r = await post('/api/my/continue', slug);
     if (!r) {
       setBusy(null);
       return;
@@ -289,6 +302,14 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
       return; // stays busy while the editor loads
     }
     setBusy(null);
+    if (status === 200 && body.ok && body.next === 'choose' && Array.isArray(body.sites)) {
+      setChoices(
+        (body.sites as Array<Record<string, unknown>>)
+          .filter((x) => typeof x?.slug === 'string')
+          .map((x) => ({ slug: String(x.slug), names: typeof x.names === 'string' ? x.names : '' })),
+      );
+      return;
+    }
     if (status === 200 && body.ok && body.next === 'start') {
       saveStartPrefill({ orderNumber, email });
       // G151: a custom design made for this order (a private theme) — the server names its start link.
@@ -350,6 +371,7 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
             setOrderNumber(ev.target.value);
             setErrors((p) => ({ ...p, orderNumber: undefined }));
             setPick(false);
+            setChoices(null);
           }}
         />
         <p className={s.hint} id="my-order-hint">
@@ -378,6 +400,7 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
             setEmail(ev.target.value);
             setErrors((p) => ({ ...p, email: undefined }));
             setPick(false);
+            setChoices(null);
           }}
         />
         <p className={s.hint} id="my-email-hint">
@@ -406,6 +429,30 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
           </button>
         ) : null}
       </form>
+
+      {choices && choices.length ? (
+        <div className={s.pick} data-my-choose="">
+          <h3 className={s.h3} ref={chooseRef} tabIndex={-1}>
+            {t('Which website do you want to open?')}
+          </h3>
+          <p className={s.p}>{t('This order has more than one website.')}</p>
+          {choices.map((c) => (
+            <div key={c.slug} className={s.editor}>
+              <div>
+                <p className={s.names}>{c.names || c.slug}</p>
+                <p className={s.small} style={{ marginTop: 0 }}>
+                  /{c.slug}
+                </p>
+              </div>
+              <div className={s.editorActions}>
+                <button type="button" className={s.btnGhost} disabled={busy !== null} onClick={() => void open(c.slug)} data-my-choose-open={c.slug}>
+                  {t('Open editor')} <ArrowRight size={18} aria-hidden />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       {pick ? (
         <div className={s.pick} data-my-pick="">

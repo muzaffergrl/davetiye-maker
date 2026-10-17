@@ -75,6 +75,11 @@ export interface SiteRecord {
   shopEdit?: ShopEditRecord | null;
   /** Shop edit sessions that were opened, newest last (admin history; no keys). */
   shopEditLog?: ShopEditLogEntry[] | null;
+  /**
+   * G152: which design unit of a multi-item Etsy order this site uses (2, 3 …). Absent: unit 1 (every other site). The
+   * blob adapter's order index has one file per unit, so several instances cannot give two sites the same unit.
+   */
+  orderSlot?: number;
 }
 
 export interface ShopEditRecord {
@@ -213,6 +218,8 @@ export interface NewSite {
   claimTokenHash?: string | null;
   /** Written with the site (G060-fix): a manual order check starts as "pending" in the same write. */
   orderCheck?: OrderCheckRecord | null;
+  /** G152: design unit of the order (1 when absent). Adapters with an order index refuse a unit that is taken. */
+  orderSlot?: number;
 }
 
 /** New key hashes for a site (edit link reissued: the old link stops working). */
@@ -363,7 +370,7 @@ export interface DataAdapter {
   /**
    * Throws SlugTakenError if the slug exists. Status starts as "draft".
    * Adapters with an order index (blob) also throw OrderRefTakenError when another site already
-   * has this orderRef; `local` does not check (lib/claim serialises claims per order in-process).
+   * has this orderRef and orderSlot (G152); `local` does not check (lib/claim serialises claims per order in-process).
    */
   createSite(input: NewSite): Promise<SiteRecord>;
   /** Replaces the draft content (autosave). Does not touch publishedContent. Throws NotFoundError. */

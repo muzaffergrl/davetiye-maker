@@ -1285,6 +1285,19 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Sipariş numaranız ve e-postanız sonraki sayfada doldurulmuş olur.',
   'since {date}': '{date} tarihinden beri',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} bu cihazda artık açılmıyor, bu yüzden kaldırdık. Yeniden açmak için aşağıya sipariş numaranızı ve e-postanızı girin.|{addresses} bu cihazda artık açılmıyor, bu yüzden kaldırdık. Yeniden açmak için aşağıya sipariş numaranızı ve e-postanızı girin.',
+  // G152: multi-item orders (/my chooser), reply emails
+  'Which website do you want to open?': 'Hangi websiteyi açmak istiyorsunuz?',
+  'This order has more than one website.': 'Bu siparişin birden fazla websitesi var.',
+  'We will email you when a guest replies.': 'Bir misafir yanıt verdiğinde size e-posta göndereceğiz.',
+  'Reply emails turned off.': 'Yanıt e-postaları kapatıldı.',
+  'Reply emails': 'Yanıt e-postaları',
+  'Email me when a guest replies': 'Bir misafir yanıt verince bana e-posta gönder',
+  'Sent to {email}, the address you started your website with.': 'Websitenizi başlattığınız adrese, {email} adresine gönderilir.',
+  'Your website has no email address yet. Please message the shop.': 'Websitenizin henüz bir e-posta adresi yok. Lütfen mağazaya mesaj gönderin.',
+  'Each email has the guest’s name and answer. At most 20 a day; after that, the next email counts the rest.': 'Her e-postada misafirin adı ve yanıtı olur. Günde en çok 20 e-posta; sonrası bir sonraki e-postada toplu sayılır.',
+  'The shop\'s edit link cannot change the couple\'s reply emails.': 'Mağazanın düzenleme bağlantısı çiftin yanıt e-postalarını değiştiremez.',
+  'Reply emails are not available yet.': 'Yanıt e-postaları henüz kullanılamıyor.',
+  'This website has no email address to send to. Please message the shop.': 'Bu websitenin gönderilecek bir e-posta adresi yok. Lütfen mağazaya mesaj gönderin.',
 };
 
 export default dict;

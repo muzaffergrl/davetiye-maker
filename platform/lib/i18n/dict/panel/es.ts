@@ -1285,6 +1285,19 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Tu número de pedido y tu correo aparecerán ya rellenados en la página siguiente.',
   'since {date}': 'desde el {date}',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} ya no se abre en este dispositivo, así que lo hemos quitado. Introduce abajo tu número de pedido y tu correo para volver a abrirlo.|{addresses} ya no se abren en este dispositivo, así que los hemos quitado. Introduce abajo tu número de pedido y tu correo para volver a abrirlos.',
+  // G152: multi-item orders (/my chooser), reply emails
+  'Which website do you want to open?': '¿Qué web quieres abrir?',
+  'This order has more than one website.': 'Este pedido tiene más de una web.',
+  'We will email you when a guest replies.': 'Te enviaremos un email cuando un invitado responda.',
+  'Reply emails turned off.': 'Emails de respuestas desactivados.',
+  'Reply emails': 'Emails de respuestas',
+  'Email me when a guest replies': 'Avísame por email cuando responda un invitado',
+  'Sent to {email}, the address you started your website with.': 'Se envía a {email}, la dirección con la que empezaste tu web.',
+  'Your website has no email address yet. Please message the shop.': 'Tu web aún no tiene dirección de email. Escribe a la tienda.',
+  'Each email has the guest’s name and answer. At most 20 a day; after that, the next email counts the rest.': 'Cada email incluye el nombre y la respuesta del invitado. Como máximo 20 al día; después, el siguiente email cuenta el resto.',
+  'The shop\'s edit link cannot change the couple\'s reply emails.': 'El enlace de edición de la tienda no puede cambiar los emails de respuestas de la pareja.',
+  'Reply emails are not available yet.': 'Los emails de respuestas aún no están disponibles.',
+  'This website has no email address to send to. Please message the shop.': 'Esta web no tiene una dirección de email a la que enviar. Escribe a la tienda.',
 };
 
 export default dict;

@@ -86,5 +86,8 @@ export function panelApi(slug: string, editKey: string) {
     /** G128: the Google Sheets connection — status, and "connect" (-> {url}) / "sync" / "disconnect". */
     googleStatus: () => call<Record<string, unknown>>(`${base}/google`, { headers: auth }),
     googleAction: (action: 'connect' | 'sync' | 'disconnect') => call<Record<string, unknown>>(`${base}/google`, jsonInit('POST', { action })),
+    /** G152: "Email me when a guest replies" — {notify: {available, enabled, to}}; POST turns it on or off. */
+    notifyStatus: () => call<Record<string, unknown>>(`${base}/notify`, { headers: auth }),
+    setNotify: (enabled: boolean) => call<Record<string, unknown>>(`${base}/notify`, jsonInit('POST', { enabled })),
   };
 }

@@ -9,7 +9,7 @@
 import { createHash } from 'node:crypto';
 import type { EditLinkMailer, EditLinkMessage } from '../claim/mailer.ts';
 import { mailSetup, type SmtpConfig } from './config.ts';
-import { createdEmail, pendingOrderEmail, signinEmail, testEmail, type MailContent, type PendingOrderNotice } from './templates.ts';
+import { createdEmail, pendingOrderEmail, rsvpReplyEmail, signinEmail, testEmail, type MailContent, type PendingOrderNotice, type RsvpReplyNotice } from './templates.ts';
 import { MailSendError, SmtpTransport, toMailSendError, type MailTransport } from './transport.ts';
 
 export { MailSendError } from './transport.ts';
@@ -79,11 +79,50 @@ export class SmtpShopNotifier implements ShopNotifier {
 }
 
 // ---------------------------------------------------------------------------------------------
+// G152: "Email me when a guest replies" — to the couple (lib/rsvp/notify.ts decides when)
+
+export type { RsvpReplyNotice } from './templates.ts';
+
+export interface RsvpNotifier {
+  /** False without SMTP: the panel does not offer the switch. */
+  readonly enabled: boolean;
+  /** Never throws; `to` is the site's owner email on record. */
+  reply(to: string, notice: RsvpReplyNotice): Promise<{ sent: boolean }>;
+}
+
+export class DisabledRsvpNotifier implements RsvpNotifier {
+  readonly enabled = false;
+  async reply(): Promise<{ sent: boolean }> {
+    return { sent: false };
+  }
+}
+
+export class SmtpRsvpNotifier implements RsvpNotifier {
+  readonly enabled = true;
+  readonly #transport: MailTransport;
+  constructor(transport: MailTransport) {
+    this.#transport = transport;
+  }
+
+  async reply(to: string, notice: RsvpReplyNotice): Promise<{ sent: boolean }> {
+    const c = rsvpReplyEmail(notice);
+    try {
+      await this.#transport.send({ to, subject: c.subject, text: c.text, html: c.html });
+      return { sent: true };
+    } catch (e) {
+      const err = toMailSendError(e);
+      console.error(`[mail] rsvp notice: ${err.code}${err.responseCode ? ` ${err.responseCode}` : ''}`);
+      return { sent: false };
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
 // Env choice (cached per configuration; tests reset with setMailTransportFactory)
 
 type TransportFactory = (cfg: SmtpConfig) => MailTransport;
 let factory: TransportFactory = (cfg) => new SmtpTransport(cfg);
-let cache: { key: string; mailer: SmtpEditLinkMailer; notifier: SmtpShopNotifier; transport: MailTransport } | null = null;
+let cache: { key: string; mailer: SmtpEditLinkMailer; notifier: SmtpShopNotifier; rsvp: SmtpRsvpNotifier; transport: MailTransport } | null = null;
 
 /** Tests: build transports with a fake (null restores SMTP). */
 export function setMailTransportFactory(f: TransportFactory | null): void {
@@ -99,7 +138,7 @@ function configured(env: Record<string, string | undefined> = process.env) {
   const key = JSON.stringify([c.host, c.port, c.secure, c.user, c.from, c.notifyTo, createHash('sha256').update(c.pass).digest('hex')]);
   if (!cache || cache.key !== key) {
     const transport = factory(c);
-    cache = { key, transport, mailer: new SmtpEditLinkMailer(transport), notifier: new SmtpShopNotifier(transport, c.notifyTo) };
+    cache = { key, transport, mailer: new SmtpEditLinkMailer(transport), notifier: new SmtpShopNotifier(transport, c.notifyTo), rsvp: new SmtpRsvpNotifier(transport) };
   }
   return { config: c, ...cache };
 }
@@ -118,6 +157,18 @@ export function getShopNotifier(): ShopNotifier {
 /** Tests: a fake notifier (null restores the env choice). */
 export function setShopNotifier(n: ShopNotifier | null): void {
   notifierOverride = n;
+}
+
+let rsvpOverride: RsvpNotifier | null = null;
+
+/** The couple's reply emails: SMTP when configured, else off (G152). */
+export function getRsvpNotifier(): RsvpNotifier {
+  return rsvpOverride ?? configured()?.rsvp ?? new DisabledRsvpNotifier();
+}
+
+/** Tests: a fake notifier (null restores the env choice). */
+export function setRsvpNotifier(n: RsvpNotifier | null): void {
+  rsvpOverride = n;
 }
 
 // ---------------------------------------------------------------------------------------------

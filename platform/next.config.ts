@@ -65,6 +65,9 @@ const config: NextConfig = {
   // `next dev` would otherwise write platform/AGENTS.md + CLAUDE.md; the repo keeps its own agent rules at the root.
   agentRules: false,
   serverExternalPackages: ['@sparticuz/chromium', 'playwright-core'],
+  // G152: no app/layout.tsx (separate root layouts: components/i18n/RootDocument.tsx) → app/global-not-found.tsx answers
+  // addresses no route matches.
+  experimental: { globalNotFound: true },
   // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel). Images: asset route only (G055).
   outputFileTracingIncludes: {
     ...Object.fromEntries(THEME_ROUTES.map((r) => [r, r === PDF_ROUTE ? [...THEME_TEMPLATES, ...CHROMIUM_FILES] : THEME_TEMPLATES])),

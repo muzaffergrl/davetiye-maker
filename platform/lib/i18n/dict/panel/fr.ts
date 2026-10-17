@@ -1285,6 +1285,19 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Votre numéro de commande et votre e-mail seront déjà remplis sur la page suivante.',
   'since {date}': 'depuis le {date}',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} ne s’ouvre plus sur cet appareil, nous l’avons donc retiré. Saisissez ci-dessous votre numéro de commande et votre e-mail pour le rouvrir.|{addresses} ne s’ouvrent plus sur cet appareil, nous les avons donc retirés. Saisissez ci-dessous votre numéro de commande et votre e-mail pour les rouvrir.',
+  // G152: multi-item orders (/my chooser), reply emails
+  'Which website do you want to open?': 'Quel site voulez-vous ouvrir ?',
+  'This order has more than one website.': 'Cette commande comprend plusieurs sites.',
+  'We will email you when a guest replies.': 'Nous vous enverrons un e-mail quand un invité répondra.',
+  'Reply emails turned off.': 'E-mails de réponse désactivés.',
+  'Reply emails': 'E-mails de réponse',
+  'Email me when a guest replies': 'M’envoyer un e-mail quand un invité répond',
+  'Sent to {email}, the address you started your website with.': 'Envoyé à {email}, l’adresse avec laquelle vous avez créé votre site.',
+  'Your website has no email address yet. Please message the shop.': 'Votre site n’a pas encore d’adresse e-mail. Écrivez à la boutique.',
+  'Each email has the guest’s name and answer. At most 20 a day; after that, the next email counts the rest.': 'Chaque e-mail indique le nom et la réponse de l’invité. 20 au maximum par jour ; ensuite, l’e-mail suivant compte les autres.',
+  'The shop\'s edit link cannot change the couple\'s reply emails.': 'Le lien d’édition de la boutique ne peut pas modifier les e-mails de réponse du couple.',
+  'Reply emails are not available yet.': 'Les e-mails de réponse ne sont pas encore disponibles.',
+  'This website has no email address to send to. Please message the shop.': 'Ce site n’a pas d’adresse e-mail à laquelle écrire. Écrivez à la boutique.',
 };
 
 export default dict;

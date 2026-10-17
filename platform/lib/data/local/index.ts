@@ -193,6 +193,7 @@ export class LocalAdapter implements DataAdapter {
       publishedAt: null,
       ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
       ...(input.orderCheck ? { orderCheck: structuredClone(input.orderCheck) } : {}),
+      ...(input.orderRef && input.orderSlot && input.orderSlot > 1 ? { orderSlot: input.orderSlot } : {}),
     };
     await this.writeJson(this.sitePath(id), site);
     return structuredClone(site);

@@ -50,12 +50,17 @@ test('<html lang> of the buyer screens: the page reports its language, leaving i
   }
 });
 
-test('the root layout renders <html> through DocumentHtml; buyer pages report their language', () => {
-  const layout = readFileSync(path.join(PLATFORM_ROOT, 'app/layout.tsx'), 'utf8');
-  assert.match(layout, /<DocumentHtml>/);
-  assert.doesNotMatch(layout, /<html lang="en">/);
+test('root layouts render <html> with the right language; buyer pages report their language (G152: separate roots)', () => {
+  const read = (f: string) => readFileSync(path.join(PLATFORM_ROOT, f), 'utf8');
+  // G152: no shared root layout any more: the sales site, the admin and each buyer screen have their own
+  assert.equal(existsSync(path.join(PLATFORM_ROOT, 'app/layout.tsx')), false);
+  assert.match(read('app/(marketing)/layout.tsx'), /<DocumentHtml scope="\(marketing\)">/);
+  assert.match(read('app/admin/layout.tsx'), /<html lang=\{ADMIN_LANG\}>/);
+  for (const d of ['edit', 'my', 'signin', 'start']) assert.match(read(`app/${d}/layout.tsx`), /export default BuyerRootLayout;/, d);
+  assert.match(read('components/i18n/RootDocument.tsx'), /<DocumentHtml fallback=\{lang\}>/);
+  assert.match(read('app/global-not-found.tsx'), /<html lang="en">/);
   for (const page of ['app/edit/[slug]/page.tsx', 'app/edit/[slug]/not-found.tsx', 'app/my/page.tsx', 'app/start/page.tsx', 'app/start/not-found.tsx', 'app/signin/page.tsx']) {
-    assert.match(readFileSync(path.join(PLATFORM_ROOT, page), 'utf8'), /<DocumentLang lang=\{lang\} \/>/, page);
+    assert.match(read(page), /<DocumentLang lang=\{lang\} \/>/, page);
   }
 });
 
