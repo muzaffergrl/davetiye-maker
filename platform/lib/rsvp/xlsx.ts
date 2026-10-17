@@ -9,7 +9,7 @@
 
 import ExcelJS from 'exceljs';
 import type { DataAdapter, SiteRecord } from '../data/types.ts';
-import { replyTable, summaryRows, type Cell, type ReplyTable, type SummaryRow, type TableReply } from './table.ts';
+import { replyTable, summaryRows, type Cell, type ReplyTable, type SummaryRow, type TableOptions, type TableReply } from './table.ts';
 
 /** BKE Studio brand colours (docs/14): anchor (deep plum) and paper. */
 export const BRAND = { anchor: 'FF2B1526', paper: 'FFEDE5D7', paperText: 'FFFBF8F2', ink: 'FF2B1526', line: 'FFD9CDB8' } as const;
@@ -86,21 +86,21 @@ function writeSummary(ws: ExcelJS.Worksheet, rows: readonly SummaryRow[]): void 
 }
 
 /** The workbook of a list of replies (pure input: replies + the content record giving questions, zone, names). */
-export async function rsvpWorkbook(list: readonly TableReply[], content: unknown, now: Date = new Date()): Promise<Uint8Array> {
+export async function rsvpWorkbook(list: readonly TableReply[], content: unknown, now: Date = new Date(), t?: TableOptions['t']): Promise<Uint8Array> {
   const wb = new ExcelJS.Workbook();
   wb.creator = 'BKE Studio';
   wb.created = now;
-  const table = replyTable(list, { content, now });
+  const table = replyTable(list, { content, now, t });
   wb.title = table.title;
   writeReplies(wb.addWorksheet('Replies', { properties: { tabColor: { argb: BRAND.anchor } } }), table);
-  writeSummary(wb.addWorksheet('Summary', { properties: { tabColor: { argb: BRAND.paper } } }), summaryRows(list, { content, now }));
+  writeSummary(wb.addWorksheet('Summary', { properties: { tabColor: { argb: BRAND.paper } } }), summaryRows(list, { content, now, t }));
   const buf = await wb.xlsx.writeBuffer();
   return new Uint8Array(buf as ArrayBuffer);
 }
 
 /** Excel file of a site's replies (published content's form when there is one) and its download file name. */
-export async function rsvpXlsxForSite(adapter: DataAdapter, site: SiteRecord, now: Date = new Date()): Promise<{ bytes: Uint8Array; filename: string }> {
+export async function rsvpXlsxForSite(adapter: DataAdapter, site: SiteRecord, now: Date = new Date(), t?: TableOptions['t']): Promise<{ bytes: Uint8Array; filename: string }> {
   const content = site.publishedContent ?? site.content;
   const list = await adapter.listRsvps(site.id);
-  return { bytes: await rsvpWorkbook(list, content, now), filename: `rsvps-${site.slug}-${now.toISOString().slice(0, 10)}.xlsx` };
+  return { bytes: await rsvpWorkbook(list, content, now, t), filename: `rsvps-${site.slug}-${now.toISOString().slice(0, 10)}.xlsx` };
 }

@@ -9,9 +9,10 @@
 // smaller in the page itself (fitText), never cut.
 
 import type { Page } from 'playwright-core';
-import { formatDate, formatDateLong, formatTime } from '../content/format.ts';
 import { qrSvg } from '../qr.ts';
 import { printLabel } from './labels.ts';
+import { printLocale } from './lang.ts';
+import { dateIn, dateLongIn, timeIn } from '../i18n/format.ts';
 import { printLayout, type Box, type PrintLayout } from './layouts.ts';
 import { PDFDocument } from 'pdf-lib';
 import { jpegImages } from './compact.ts';
@@ -61,26 +62,30 @@ function str(v: unknown): string {
 export function invitationText(content: unknown, siteUrl: string) {
   const c = (content ?? {}) as Record<string, any>;
   const locale = str(c.locale) || 'en-US';
+  // G144: the website's main language (labels, dates, times)
+  const { lang, dict } = printLocale(content);
   const partners = Array.isArray(c.partners) ? c.partners : [];
   const a = str(partners[0]?.display_name);
   const b = str(partners[1]?.display_name);
-  const time = formatTime(c.ceremony_time, locale);
-  const deadline = formatDate(c.rsvp?.deadline, locale);
+  const time = timeIn(c.ceremony_time, lang, locale);
+  const deadline = dateIn(c.rsvp?.deadline, lang, locale);
   const schedule = (Array.isArray(c.schedule) ? c.schedule : [])
-    .map((s: any) => ({ label: str(s?.label), time: formatTime(s?.time, locale) ?? '', location: str(s?.location) }))
+    .map((s: any) => ({ label: str(s?.label), time: timeIn(s?.time, lang, locale) ?? '', location: str(s?.location) }))
     .filter((s: { label: string }) => s.label);
   return {
     host: str(c.host_line),
     names: a && b ? ([a, b] as const) : null,
     nameDisplay: str(c.name_display),
-    invite: printLabel(c.event_type && c.event_type !== 'wedding' ? 'invite_other' : 'invite_wedding'),
-    date: formatDateLong(c.date, locale) ?? '',
-    time: time ? printLabel('at_time', { time }) : '',
+    invite: printLabel(c.event_type && c.event_type !== 'wedding' ? 'invite_other' : 'invite_wedding', {}, dict),
+    date: dateLongIn(c.date, lang, locale) ?? '',
+    time: time ? printLabel('at_time', { time }, dict) : '',
     venue: str(c.venue?.name),
     place: [c.venue?.city, c.venue?.region].map(str).filter(Boolean).join(', '),
-    replyBy: deadline ? printLabel('reply_by', { date: deadline }) : '',
+    replyBy: deadline ? printLabel('reply_by', { date: deadline }, dict) : '',
     schedule: schedule as Array<{ label: string; time: string; location: string }>,
     dressCode: c.optional_blocks?.dress_code !== false ? str(c.dress_code) : '',
+    lang,
+    dict,
     siteUrl,
     siteLabel: siteUrl.replace(/^https?:\/\//, ''),
   };
@@ -113,14 +118,14 @@ function backText(t: Text): string {
     .map((s) => `<li><span class="s-time">${esc(s.time)}</span><span class="s-label">${esc(s.label)}</span>${s.location ? `<span class="s-loc">${esc(s.location)}</span>` : ''}</li>`)
     .join('');
   return [
-    `<h2 class="b-title">${esc(printLabel('details_title'))}</h2>`,
+    `<h2 class="b-title">${esc(printLabel('details_title', {}, t.dict))}</h2>`,
     t.date ? `<p class="date" data-fit>${esc(t.date)}</p>` : '',
     t.venue ? `<p class="venue">${esc(t.venue)}</p>` : '',
     t.place ? `<p class="place">${esc(t.place)}</p>` : '',
     rows ? `<ul class="schedule">${rows}</ul>` : '',
-    t.dressCode ? `<p class="dress"><span class="host">${esc(printLabel('dress_code'))}</span><br>${esc(t.dressCode)}</p>` : '',
+    t.dressCode ? `<p class="dress"><span class="host">${esc(printLabel('dress_code', {}, t.dict))}</span><br>${esc(t.dressCode)}</p>` : '',
     `<a class="qr" href="${esc(t.siteUrl)}">${qrSvg(t.siteUrl, { border: 2, pixels: 200 })}</a>`,
-    `<p class="scan">${esc(printLabel('scan_to_visit'))}</p>`,
+    `<p class="scan">${esc(printLabel('scan_to_visit', {}, t.dict))}</p>`,
     `<p class="url" data-fit>${esc(t.siteLabel)}</p>`,
     t.replyBy ? `<p class="reply">${esc(t.replyBy)}</p>` : '',
   ].join('');
@@ -216,7 +221,7 @@ export function invitationHtml(themeId: string, content: unknown, siteUrl: strin
     );
   };
   return (
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(t.nameDisplay || 'Invitation')}</title>` +
+    `<!doctype html><html lang="${t.lang}"><head><meta charset="utf-8"><title>${esc(t.nameDisplay || 'Invitation')}</title>` +
     `<link rel="stylesheet" href="${esc(l.fonts)}"><style>${sheetCss(l, g, rect.w)}</style></head>` +
     `<body>${side('front')}${o.back ? side('back') : ''}</body></html>`
   );

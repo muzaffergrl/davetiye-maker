@@ -47,7 +47,7 @@ test('showcase components take their copy from lib/marketing/showcase.ts', () =>
   for (const f of ['components/marketing/CardOpening.tsx', 'components/marketing/Compare.tsx', 'components/marketing/EditTour.tsx']) {
     assert.match(read(f), /lib\/marketing\/showcase\.ts/, f);
   }
-  const home = read('app/(marketing)/page.tsx');
+  const home = read('components/marketing/pages/HomePage.tsx');
   assert.match(home, /<DesignGallery /);
   assert.match(home, /<EditTour /);
 });

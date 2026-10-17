@@ -207,4 +207,24 @@ export interface ContentRecord {
    * and the longest text each carries are in the theme's theme.json "copy" (lib/theme/copy.ts).
    */
   copy?: Record<string, string | null>;
+  /** G144: the website's languages (primary = the language of the couple's own text; missing = English only). */
+  languages?: SiteLanguages;
+  /** G144: the couple's text in the other languages — lang → content path → translation (lib/i18n/content.ts). */
+  translations?: Partial<Record<'en' | 'tr' | 'es' | 'de' | 'fr', Record<string, FieldTranslation>>>;
+}
+
+/** G144: languages of a couple's website. */
+export interface SiteLanguages {
+  primary: 'en' | 'tr' | 'es' | 'de' | 'fr';
+  extra?: Array<'en' | 'tr' | 'es' | 'de' | 'fr'>;
+}
+
+/** G144: one translated field. `src` = hash of the source text it was made from (stale when the source changes). */
+export interface FieldTranslation {
+  text: string;
+  src: string;
+  /** The couple approved it (only approved translations reach guests). */
+  ok?: boolean;
+  /** Made automatically: by the browser's on-device translator or the free service. */
+  auto?: 'browser' | 'service';
 }

@@ -8,8 +8,30 @@
 
 import { Play, RotateCcw, X } from 'lucide-react';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { interpolate } from '../../lib/i18n/translate.ts';
 import { track } from '../../lib/marketing/analytics.ts';
 import s from './marketing.module.css';
+
+/**
+ * G144: the demo's own words, translated on the server (demoCopy in demo-data.ts) — the browser gets only the page
+ * language. {name} / {n} are filled here.
+ */
+export type DemoCopy = Record<
+  | 'dialogTitle'
+  | 'close'
+  | 'frameTitle'
+  | 'seeDesign'
+  | 'comingSoon'
+  | 'buy'
+  | 'posterLabel'
+  | 'tapToOpen'
+  | 'replay'
+  | 'closeInline'
+  | 'chooseDesign'
+  | 'showMore'
+  | 'more',
+  string
+>;
 
 export interface DemoDesign {
   id: string;
@@ -61,22 +83,22 @@ function ScaledFrame({ src, title, fit }: { src: string; title: string; fit: 'wi
   );
 }
 
-function EtsyAction({ d, placement }: { d: DemoDesign; placement: string }) {
+function EtsyAction({ d, placement, copy }: { d: DemoDesign; placement: string; copy: DemoCopy }) {
   if (!d.etsyUrl) {
     return (
       <span className={`${s.btn} ${s.btnDisabled}`} aria-disabled="true">
-        Coming soon on Etsy
+        {copy.comingSoon}
       </span>
     );
   }
   return (
     <a className={s.btn} href={d.etsyUrl} onClick={() => track('etsy_click', { design: d.id, placement })}>
-      Buy on Etsy
+      {copy.buy}
     </a>
   );
 }
 
-export function DemoHost({ designs }: { designs: DemoDesign[] }) {
+export function DemoHost({ designs, copy }: { designs: DemoDesign[]; copy: DemoCopy }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const [current, setCurrent] = useState<{ d: DemoDesign; placement: string; n: number } | null>(null);
@@ -139,24 +161,24 @@ export function DemoHost({ designs }: { designs: DemoDesign[] }) {
         <div className={s.dialogBody}>
           <div className={s.dialogBar}>
             <p id="mk-demo-title" className={s.dialogTitle}>
-              Live demo · {current.d.name}
+              {interpolate(copy.dialogTitle, { name: current.d.name })}
             </p>
-            <button type="button" className={s.iconButton} onClick={close} aria-label="Close the demo" autoFocus>
+            <button type="button" className={s.iconButton} onClick={close} aria-label={copy.close} autoFocus>
               <X aria-hidden size={22} strokeWidth={1.75} />
             </button>
           </div>
           <div className={s.dialogStage}>
             {wide ? (
-              <ScaledFrame key={current.n} src={current.d.demoPath} title={`Live demo: ${current.d.name}`} fit="contain" />
+              <ScaledFrame key={current.n} src={current.d.demoPath} title={interpolate(copy.frameTitle, { name: current.d.name })} fit="contain" />
             ) : (
-              <iframe key={current.n} className={s.fullFrame} src={current.d.demoPath} title={`Live demo: ${current.d.name}`} />
+              <iframe key={current.n} className={s.fullFrame} src={current.d.demoPath} title={interpolate(copy.frameTitle, { name: current.d.name })} />
             )}
           </div>
           <div className={s.dialogActions}>
             <a className={`${s.btn} ${s.btnSecondary}`} href={current.d.designPath}>
-              See this design
+              {copy.seeDesign}
             </a>
-            <EtsyAction d={current.d} placement={`dialog-${current.placement}`} />
+            <EtsyAction d={current.d} placement={`dialog-${current.placement}`} copy={copy} />
           </div>
         </div>
       ) : null}
@@ -181,9 +203,11 @@ export function HeroDemo({
   secondary,
   footnote,
   className,
+  copy,
   children,
 }: {
   designs: DemoDesign[];
+  copy: DemoCopy;
   placement: string;
   primaryLabel: string;
   action?: ReactNode;
@@ -226,7 +250,7 @@ export function HeroDemo({
         <div className={s.heroStage} data-fx-glow>
           <div className={s.heroScreen} data-fx-swap={swapped || undefined}>
             {inline ? (
-              <ScaledFrame key={`${d.id}-${inline.n}`} src={d.demoPath} title={`Live demo: ${d.name}`} fit="width" />
+              <ScaledFrame key={`${d.id}-${inline.n}`} src={d.demoPath} title={interpolate(copy.frameTitle, { name: d.name })} fit="width" />
             ) : (
               <a
                 className={s.posterButton}
@@ -236,7 +260,7 @@ export function HeroDemo({
                   e.preventDefault();
                   start('poster');
                 }}
-                aria-label={`Tap to open the live demo of ${d.name}`}
+                aria-label={interpolate(copy.posterLabel, { name: d.name })}
               >
                 <img
                   key={d.id}
@@ -252,7 +276,7 @@ export function HeroDemo({
                 />
                 <span className={s.tapLabel}>
                   <Play aria-hidden size={14} strokeWidth={2} />
-                  Tap to open
+                  {copy.tapToOpen}
                 </span>
               </a>
             )}
@@ -262,11 +286,11 @@ export function HeroDemo({
           <div className={s.inlineControls}>
             <button type="button" className={s.smallButton} onClick={() => setInline((x) => ({ n: (x?.n ?? 0) + 1 }))}>
               <RotateCcw aria-hidden size={16} strokeWidth={1.75} />
-              Replay
+              {copy.replay}
             </button>
             <button type="button" className={s.smallButton} onClick={() => setInline(null)}>
               <X aria-hidden size={16} strokeWidth={1.75} />
-              Close demo
+              {copy.closeInline}
             </button>
           </div>
         ) : null}
@@ -283,7 +307,7 @@ export function HeroDemo({
           reveals the rest (fourteen names wrapped to four rows and pushed the main button below the first screen at
           1280 × 800). Phones and tablets keep every chip in the sideways strip; the more chip is hidden there. */}
       {designs.length > 1 ? (
-        <div ref={chipsRef} className={s.chips} role="group" aria-label="Choose a design" data-scroll-x data-all={collapse ? undefined : ''}>
+        <div ref={chipsRef} className={s.chips} role="group" aria-label={copy.chooseDesign} data-scroll-x data-all={collapse ? undefined : ''}>
           {designs.map((x, i) => (
             <button
               key={x.id}
@@ -299,14 +323,14 @@ export function HeroDemo({
             <button
               type="button"
               className={`${s.chip} ${s.chipMore}`}
-              aria-label={`Show ${designs.length - CHIPS_WIDE} more designs`}
+              aria-label={interpolate(copy.showMore, { n: designs.length - CHIPS_WIDE })}
               onClick={() => {
                 setAllChips(true);
                 // the more chip goes away: focus moves to the first name it revealed
                 requestAnimationFrame(() => chipsRef.current?.querySelectorAll('button')[CHIPS_WIDE]?.focus());
               }}
             >
-              +{designs.length - CHIPS_WIDE} more
+              {interpolate(copy.more, { n: designs.length - CHIPS_WIDE })}
             </button>
           ) : null}
         </div>

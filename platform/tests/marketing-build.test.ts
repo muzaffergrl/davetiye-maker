@@ -12,6 +12,7 @@ import * as cheerio from 'cheerio';
 import { MARKETING } from '../lib/marketing/config.ts';
 import { liveDesigns } from '../lib/marketing/designs.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
+import { href as langHref, LANGS, PREFIXED_LANGS } from '../lib/marketing/i18n.ts';
 import { corePages } from '../lib/marketing/site.ts';
 import { PLATFORM_ROOT } from './helpers.ts';
 import { validateJsonLd } from './marketing-helpers.ts';
@@ -38,14 +39,17 @@ const skip = !existsSync(BUILD_ID) || !existsSync(path.join(APP, 'index.html'))
     ? 'the build is older than the marketing sources (run npm run build)'
     : false;
 
-/** path -> built HTML file */
+/** path -> built HTML file. G144: the other languages are built under i18n/<lang>/ (next.config.ts rewrites /<lang>/…). */
 function pages(): Map<string, string> {
   const m = new Map<string, string>();
-  for (const p of corePages()) m.set(p.path, path.join(APP, p.path === '/' ? 'index.html' : `${p.path.slice(1)}.html`));
-  for (const d of liveDesigns()) m.set(`/designs/${d.id}`, path.join(APP, 'designs', `${d.id}.html`));
-  for (const g of loadGuides()) m.set(g.path, path.join(APP, 'guides', `${g.slug}.html`));
+  const en = [...corePages().map((p) => p.path), ...liveDesigns().map((d) => `/designs/${d.id}`), ...loadGuides().map((g) => g.path)];
+  for (const p of en) m.set(p, path.join(APP, p === '/' ? 'index.html' : `${p.slice(1)}.html`));
+  for (const l of PREFIXED_LANGS) for (const p of en) m.set(langHref(l, p), path.join(APP, 'i18n', `${langHref(l, p).slice(1)}.html`));
   return m;
 }
+
+/** The page language from its path ("/tr/designs" → "tr"). */
+const langOfPath = (p: string) => PREFIXED_LANGS.find((l) => p === `/${l}` || p.startsWith(`/${l}/`)) ?? 'en';
 
 const live = new Set(liveDesigns().map((d) => d.id));
 
@@ -92,6 +96,15 @@ test('built marketing pages: head, headings, JSON-LD, links, images, orphans', {
     if (!$('meta[property="og:image:alt"]').attr('content')) say('og:image:alt');
     if ($('meta[name="twitter:card"]').attr('content') !== 'summary_large_image') say('twitter:card');
     if ($('html').attr('lang') !== 'en') say('lang');
+    // G144: the page language on the wrapper around header, main and footer (the root <html> is the platform's)
+    const lang = langOfPath(p);
+    if ($('main').closest('[lang]').attr('lang') !== lang) say(`page language ${$('main').closest('[lang]').attr('lang')} (expected ${lang})`);
+    const alternates = $('link[rel="alternate"][hreflang]')
+      .map((_, el) => `${$(el).attr('hreflang')} ${new URL($(el).attr('href')!).pathname}`)
+      .get();
+    const base = lang === 'en' ? p : p.replace(/^\/[a-z]{2}(?=\/|$)/, '') || '/';
+    const want = [...LANGS.map((l) => `${l} ${langHref(l, base)}`), `x-default ${base}`];
+    if (JSON.stringify(alternates) !== JSON.stringify(want)) say(`hreflang ${alternates.join(', ')}`);
 
     // JSON-LD
     const types = new Set<string>();
@@ -114,9 +127,9 @@ test('built marketing pages: head, headings, JSON-LD, links, images, orphans', {
     collect(ld);
     for (const pr of validateJsonLd(ld)) say(pr);
     for (const t of ['Organization', 'WebSite']) if (!types.has(t)) say(`no ${t}`);
-    if (p !== '/' && !types.has('BreadcrumbList')) say('no BreadcrumbList');
-    if (p.startsWith('/designs/') && !(types.has('Product') && types.has('VideoObject'))) say('design page needs Product + VideoObject');
-    if (p.startsWith('/guides/') && !types.has('Article')) say('guide needs Article');
+    if (base !== '/' && !types.has('BreadcrumbList')) say('no BreadcrumbList');
+    if (base.startsWith('/designs/') && !(types.has('Product') && types.has('VideoObject'))) say('design page needs Product + VideoObject');
+    if (base.startsWith('/guides/') && !types.has('Article')) say('guide needs Article');
     if (types.has('AggregateRating') || types.has('Review')) say('ratings/reviews in JSON-LD');
     const visible = $('main').text().replace(/\s+/g, ' ').toLowerCase();
     const walk = (v: unknown) => {

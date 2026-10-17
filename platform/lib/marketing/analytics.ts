@@ -4,7 +4,7 @@
 // - "vercel": also sent to Vercel Web Analytics through its global queue (window.va, injected by @vercel/analytics
 //   once that package is added — not installed yet). No personal data is ever part of an event.
 
-export type MarketingEvent = 'demo_open' | 'etsy_click' | 'start_click' | 'guide_cta' | 'contact_email_click' | 'nav_designs';
+export type MarketingEvent = 'demo_open' | 'etsy_click' | 'start_click' | 'guide_cta' | 'contact_email_click' | 'nav_designs' | 'lang_switch';
 
 export function track(name: MarketingEvent, data: Record<string, string> = {}): void {
   if (typeof window === 'undefined') return;

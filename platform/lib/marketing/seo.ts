@@ -3,6 +3,7 @@
 
 import type { Metadata } from 'next';
 import { MARKETING, type MarketingConfig } from './config.ts';
+import { DEFAULT_LANG, enT, href, LANG_TAGS, LANGS, msg, type Lang, type T } from './i18n.ts';
 import { real } from './placeholders.ts';
 import { absUrl, type PageEntry } from './site.ts';
 
@@ -11,8 +12,19 @@ export const DEFAULT_OG = {
   url: '/themes/blush-garden-rose/img/og-1200x630.jpg',
   width: 1200,
   height: 630,
-  alt: 'A blush pink wedding envelope tied with a ribbon bow among painted peonies and garden roses',
+  alt: msg('A blush pink wedding envelope tied with a ribbon bow among painted peonies and garden roses'),
 };
+
+/**
+ * G144: canonical + hreflang of a marketing page (its English path): every language's address and x-default = English.
+ * The canonical is the page language's public address (/tr/designs), also when the page is reached at /i18n/tr/designs.
+ */
+export function languageAlternates(path: string, lang: Lang = DEFAULT_LANG, cfg: MarketingConfig = MARKETING) {
+  const languages: Record<string, string> = {};
+  for (const l of LANGS) languages[l] = absUrl(href(l, path), cfg);
+  languages['x-default'] = absUrl(path, cfg);
+  return { canonical: absUrl(href(lang, path), cfg), languages };
+}
 
 export interface OgImage {
   url: string;
@@ -28,23 +40,27 @@ export function robotsFor(cfg: MarketingConfig = MARKETING): Metadata['robots'] 
 
 export function pageMetadata(
   page: Pick<PageEntry, 'path' | 'title' | 'description'>,
-  opts: { image?: OgImage; type?: 'website' | 'article'; published?: string; modified?: string } = {},
+  opts: { image?: OgImage; type?: 'website' | 'article'; published?: string; modified?: string; lang?: Lang; t?: T } = {},
   cfg: MarketingConfig = MARKETING,
 ): Metadata {
-  const image = opts.image ?? DEFAULT_OG;
-  const url = absUrl(page.path, cfg);
+  // `page.path` is the English path; `lang` the page language (G144). The default share image's alt is translated.
+  const lang = opts.lang ?? DEFAULT_LANG;
+  const t = opts.t ?? enT;
+  const image = opts.image ?? { ...DEFAULT_OG, alt: t(DEFAULT_OG.alt) };
+  const alternates = languageAlternates(page.path, lang, cfg);
+  const url = alternates.canonical;
   const siteName = real(cfg.brand.name) ?? undefined;
   return {
     title: { absolute: page.title },
     description: page.description,
-    alternates: { canonical: url },
+    alternates,
     openGraph: {
       type: opts.type ?? 'website',
       url,
       title: page.title,
       description: page.description,
       siteName,
-      locale: 'en_US',
+      locale: LANG_TAGS[lang].replace('-', '_'),
       images: [{ url: absUrl(image.url, cfg), width: image.width, height: image.height, alt: image.alt }],
       ...(opts.type === 'article' ? { publishedTime: opts.published, modifiedTime: opts.modified } : {}),
     },

@@ -3,6 +3,7 @@
 
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { Identity } from '../../lib/panel/rights.ts';
+import { t } from '../../lib/i18n/client.ts';
 
 export interface ApiResult<T = Record<string, unknown>> {
   ok: boolean;
@@ -24,11 +25,11 @@ export function panelApi(slug: string, editKey: string) {
       try {
         body = (await res.json()) as ApiResult<T>['body'];
       } catch {
-        body = { message: 'Unexpected answer from the server.' } as ApiResult<T>['body'];
+        body = { message: t('Unexpected answer from the server.') } as ApiResult<T>['body'];
       }
       return { ok: res.ok && body.ok !== false, status: res.status, body };
     } catch {
-      return { ok: false, status: 0, body: { message: 'No connection. Your changes will be saved when you are back online.' } as ApiResult<T>['body'] };
+      return { ok: false, status: 0, body: { message: t('No connection. Your changes will be saved when you are back online.') } as ApiResult<T>['body'] };
     }
   }
 

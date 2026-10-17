@@ -16,6 +16,7 @@ import type { RateLimitRule } from '../rsvp/rate-limit.ts';
 import { loadTheme } from '../theme/theme.ts';
 import { INVITATION_SIZES, invitationPdf, type InvitationSize } from './invitation.ts';
 import { printLabel } from './labels.ts';
+import { msg } from '../i18n/translate.ts';
 import { printLayout } from './layouts.ts';
 import { sitePdf } from './site-pdf.ts';
 
@@ -55,8 +56,8 @@ export async function download(req: Request, slug: string): Promise<Response> {
     body = null;
   }
   const d = parseDownload(body);
-  if (!d) return fail(400, 'bad_request', 'Choose what to download.');
-  if (d.kind === 'invitation' && !printLayout(site.theme)) return fail(404, 'no_invitation', 'This design has no printable invitation yet.');
+  if (!d) return fail(400, 'bad_request', msg('Choose what to download.'));
+  if (d.kind === 'invitation' && !printLayout(site.theme)) return fail(404, 'no_invitation', msg('This design has no printable invitation yet.'));
   const rate = await getClaimRateLimiter().hit(`pdf:site:${site.id}`, PDF_LIMITS.perSitePerDay);
   if (!rate.allowed) {
     return json(

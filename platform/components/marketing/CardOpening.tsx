@@ -5,7 +5,7 @@
 // prefers-reduced-motion hover never plays it (the button still does: that is the visitor's own choice).
 import { Pause, Play } from 'lucide-react';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { SHOWCASE_COPY } from '../../lib/marketing/showcase.ts';
+import type { CardCopy } from '../../lib/marketing/showcase.ts';
 import s from './marketing.module.css';
 
 export interface CardVideo {
@@ -15,7 +15,20 @@ export interface CardVideo {
   height: number;
 }
 
-export function CardOpening({ href, name, video, children }: { href: string; name: string; video: CardVideo | null; children: ReactNode }) {
+/** G144: `copy` (play / stop) arrives translated from the server card. */
+export function CardOpening({
+  href,
+  name,
+  video,
+  copy,
+  children,
+}: {
+  href: string;
+  name: string;
+  video: CardVideo | null;
+  copy: CardCopy;
+  children: ReactNode;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -79,7 +92,7 @@ export function CardOpening({ href, name, video, children }: { href: string; nam
         >
           {playing ? <Pause aria-hidden size={16} strokeWidth={2} /> : <Play aria-hidden size={16} strokeWidth={2} />}
           <span className={s.visuallyHidden}>
-            {playing ? SHOWCASE_COPY.stop : SHOWCASE_COPY.play}: {name}
+            {playing ? copy.stop : copy.play}: {name}
           </span>
         </button>
       ) : null}

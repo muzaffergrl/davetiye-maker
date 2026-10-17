@@ -5,7 +5,8 @@
 // Without JavaScript the first step and the full list of steps are shown.
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { TOUR_COPY as T } from '../../lib/marketing/showcase.ts';
+import { interpolate } from '../../lib/i18n/translate.ts';
+import type { TourCopy } from '../../lib/marketing/showcase.ts';
 import s from './marketing.module.css';
 
 export interface TourStepData {
@@ -18,7 +19,8 @@ export interface TourStepData {
 
 const STEP_MS = 3800;
 
-export function EditTour({ steps }: { steps: TourStepData[] }) {
+/** G144: `steps` and `copy` arrive translated (tourSteps / tourCopy in showcase-data.ts and lib/marketing/showcase.ts). */
+export function EditTour({ steps, copy: T }: { steps: TourStepData[]; copy: TourCopy }) {
   const [i, setI] = useState(0);
   const [auto, setAuto] = useState(false);
   const [stopped, setStopped] = useState(false);
@@ -81,7 +83,7 @@ export function EditTour({ steps }: { steps: TourStepData[] }) {
       </div>
       <div className={s.tourSide}>
         <div className={s.tourCaption} aria-live={running ? 'off' : 'polite'}>
-          <p className={s.tourCount}>{T.stepOf(i + 1, steps.length)}</p>
+          <p className={s.tourCount}>{interpolate(T.stepOf, { i: i + 1, n: steps.length })}</p>
           <h3 className={s.tourTitle}>{step.title}</h3>
           <p className={s.tourText}>{step.text}</p>
         </div>

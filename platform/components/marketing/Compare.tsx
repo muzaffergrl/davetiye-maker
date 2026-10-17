@@ -2,10 +2,11 @@
 // G141: compare designs side by side. The cards of a gallery carry <input type="checkbox" data-compare="<id>">; this
 // host (one per gallery) listens to them, shows a tray with the picked names once one is ticked, and opens a <dialog>
 // with the picked designs' REAL opening recordings playing together, their four pages and their live demo links.
-// Up to SHOWCASE_COPY.compareMax designs: a further tick drops the oldest pick. Nothing loads before the dialog opens.
+// Up to SHOWCASE_COPY.compareMax designs (`max`): a further tick drops the oldest pick. Nothing loads before the dialog opens.
 import { RotateCcw, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { SHOWCASE_COPY as C } from '../../lib/marketing/showcase.ts';
+import { interpolate } from '../../lib/i18n/translate.ts';
+import type { CompareCopy } from '../../lib/marketing/showcase.ts';
 import s from './marketing.module.css';
 
 export interface CompareDesign {
@@ -19,7 +20,8 @@ export interface CompareDesign {
   pages: Array<{ name: string; src: string; srcSet: string; width: number; height: number }>;
 }
 
-export function CompareHost({ designs, gallery }: { designs: CompareDesign[]; gallery: string }) {
+/** G144: `copy` arrives translated from the server (compareCopy); `thing` and the page names too. */
+export function CompareHost({ designs, gallery, copy: C, max }: { designs: CompareDesign[]; gallery: string; copy: CompareCopy; max: number }) {
   const [picked, setPicked] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -39,12 +41,12 @@ export function CompareHost({ designs, gallery }: { designs: CompareDesign[]; ga
       setPicked((p) => {
         if (!el.checked) return p.filter((x) => x !== id);
         const next = [...p.filter((x) => x !== id), id];
-        return next.length > C.compareMax ? next.slice(next.length - C.compareMax) : next;
+        return next.length > max ? next.slice(next.length - max) : next;
       });
     };
     root.addEventListener('change', onChange);
     return () => root.removeEventListener('change', onChange);
-  }, [gallery]);
+  }, [gallery, max]);
 
   useEffect(() => {
     const root = document.querySelector(`[data-gallery="${gallery}"]`);
@@ -71,7 +73,7 @@ export function CompareHost({ designs, gallery }: { designs: CompareDesign[]; ga
     <>
       <div className={s.compareTray} role="region" aria-label={C.compareTitle} data-compare-tray>
         <p className={s.compareTrayText} aria-live="polite">
-          <strong>{C.compareTray(list.length)}</strong>
+          <strong>{list.length === 1 ? C.compareTrayOne : interpolate(C.compareTrayMany, { n: list.length })}</strong>
           <span className={s.compareTrayNames}>{list.map((d) => d.name).join(' · ')}</span>
         </p>
         <div className={s.compareTrayActions}>
@@ -110,7 +112,7 @@ export function CompareHost({ designs, gallery }: { designs: CompareDesign[]; ga
               <p id={`${gallery}-compare-title`} className={s.dialogTitle}>
                 {C.compareTitle}
               </p>
-              <button type="button" className={s.iconButton} onClick={replay} aria-label="Replay the openings">
+              <button type="button" className={s.iconButton} onClick={replay} aria-label={C.replay}>
                 <RotateCcw aria-hidden size={20} strokeWidth={1.75} />
               </button>
               <button type="button" className={s.iconButton} onClick={() => dialog.current?.close()} aria-label={C.compareClose} autoFocus>
@@ -134,7 +136,7 @@ export function CompareHost({ designs, gallery }: { designs: CompareDesign[]; ga
                         playsInline
                         autoPlay={!reduced}
                         controls={reduced}
-                        aria-label={`Screen recording: the ${d.name} ${d.thing} opens`}
+                        aria-label={interpolate(C.recording, { name: d.name, thing: d.thing })}
                       />
                     </div>
                   ) : null}

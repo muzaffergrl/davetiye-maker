@@ -44,9 +44,9 @@ test('home showcase: the featured live designs from config.ts, in config order; 
   assert.equal(featuredDesigns(none).length, liveDesigns(none).length);
   // the page reads the list (no count in the code) and links the gallery. G141 (K45 item 7): the home page shows every
   // live design, the featured ones first (showcaseDesigns, tests/g141-showcase.test.ts).
-  const home = read('app/(marketing)/page.tsx');
+  const home = read('components/marketing/pages/HomePage.tsx');
   assert.match(home, /showcaseDesigns\(\)/);
-  assert.match(home, /See all \{designs\.length\} designs/);
+  assert.match(home, /See all \{n\} designs/);
   assert.doesNotMatch(home, /\.slice\(0,\s*\d+\)/);
 });
 
@@ -68,12 +68,12 @@ test('openingObject: every live design starts its opening with "Your guests tap 
 
 test('shared copy: no "every design is an envelope" generalization left; the home page keeps "envelope" (docs/14 §2.1)', () => {
   const files = [
-    'app/(marketing)/page.tsx',
-    'app/(marketing)/designs/page.tsx',
-    'app/(marketing)/designs/[design]/page.tsx',
-    'app/(marketing)/features/page.tsx',
-    'app/(marketing)/how-it-works/page.tsx',
-    'app/(marketing)/guides/[guide]/page.tsx',
+    'components/marketing/pages/HomePage.tsx',
+    'components/marketing/pages/DesignsPage.tsx',
+    'components/marketing/pages/DesignPage.tsx',
+    'components/marketing/pages/FeaturesPage.tsx',
+    'components/marketing/pages/HowItWorksPage.tsx',
+    'components/marketing/pages/GuidePage.tsx',
     'components/marketing/demo-data.ts',
     'lib/marketing/facts.ts',
     'lib/marketing/crawl.ts',
@@ -110,7 +110,7 @@ test('shared copy: no "every design is an envelope" generalization left; the hom
   const homePage = corePages().find((p) => p.path === '/')!;
   assert.match(homePage.title + homePage.h1 + homePage.description, /envelope/i);
   assert.ok(homePage.description.length >= 120 && homePage.description.length <= 160);
-  assert.match(read('app/(marketing)/page.tsx'), /sealed envelope/);
+  assert.match(read('components/marketing/pages/HomePage.tsx'), /sealed envelope/);
 });
 
 test('Sunflower Rustic Barn: the Our Story screen is a whole 640 × 1385 phone screen (retaken at the first print)', () => {

@@ -6,6 +6,7 @@ import { liveDesigns } from './designs.ts';
 import { definition, editRightsText, hostingText, included, NOT_INCLUDED, SITE_PAGES } from './facts.ts';
 import { faqGroups, plainAnswer } from './faq.ts';
 import type { Guide } from './guides.ts';
+import { href, LANGS, PREFIXED_LANGS, type Lang } from './i18n.ts';
 import { realPrice } from './placeholders.ts';
 import { absUrl, corePages, designPage, displayPrice, siteOrigin } from './site.ts';
 
@@ -34,6 +35,8 @@ export function trainingAllowPaths(cfg: MarketingConfig = MARKETING): string[] {
     if (p === '/') out.push('/$');
     else out.push(`${p}$`, `${p}/`); // "/designs/<id>", "/guides/<slug>"
   }
+  // G144: the other languages' pages (/tr, /tr/designs …); two letters are never a couple slug (≥ 3 characters)
+  for (const l of PREFIXED_LANGS) out.push(`/${l}$`, `/${l}/`);
   for (const f of MARKETING_FILES) out.push(`${f}$`);
   out.push(...MARKETING_ASSET_DIRS);
   return out;
@@ -62,26 +65,41 @@ export interface SitemapEntry {
   loc: string;
   lastmod: string;
   images?: string[];
+  /** G144: the page language and the addresses of the same page in every language (hreflang). */
+  lang?: Lang;
+  alternates?: Partial<Record<Lang | 'x-default', string>>;
 }
 
-/** Every indexable marketing URL (also the link check's page list). */
+/** Every indexable marketing URL in every language (also the link check's page list). English first per page. */
 export function sitemapEntries(guides: Guide[], cfg: MarketingConfig = MARKETING): SitemapEntry[] {
-  const entries: SitemapEntry[] = corePages(cfg).map((p) => ({ loc: absUrl(p.path, cfg), lastmod: p.updated }));
+  const pages: Array<{ path: string; lastmod: string }> = corePages(cfg).map((p) => ({ path: p.path, lastmod: p.updated }));
   for (const d of liveDesigns(cfg)) {
     const p = designPage(d.id, cfg)!;
-    entries.splice(2 + liveDesigns(cfg).indexOf(d), 0, { loc: absUrl(p.path, cfg), lastmod: p.updated });
+    pages.splice(2 + liveDesigns(cfg).indexOf(d), 0, { path: p.path, lastmod: p.updated });
   }
-  for (const g of guides) entries.push({ loc: absUrl(g.path, cfg), lastmod: g.updated });
-  return entries;
+  for (const g of guides) pages.push({ path: g.path, lastmod: g.updated });
+  return pages.flatMap(({ path, lastmod }) => {
+    const alternates: Partial<Record<Lang | 'x-default', string>> = {};
+    for (const l of LANGS) alternates[l] = absUrl(href(l, path), cfg);
+    alternates['x-default'] = absUrl(path, cfg);
+    return LANGS.map((lang) => ({ loc: absUrl(href(lang, path), cfg), lastmod, lang, alternates }));
+  });
 }
 
 const xmlEscape = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** sitemap.xml. Empty <urlset> while not launched (docs/14 §9.4). No changefreq/priority (Google ignores them). */
+/**
+ * sitemap.xml. Empty <urlset> while not launched (docs/14 §9.4). No changefreq/priority (Google ignores them).
+ * G144: every page in five languages, each with xhtml:link alternates (hreflang, x-default = English).
+ */
 export function sitemapXml(guides: Guide[], cfg: MarketingConfig = MARKETING): string {
   const entries = cfg.launched ? sitemapEntries(guides, cfg) : [];
-  const body = entries.map((e) => `  <url>\n    <loc>${xmlEscape(e.loc)}</loc>\n    <lastmod>${e.lastmod}</lastmod>\n  </url>`).join('\n');
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}${body ? '\n' : ''}</urlset>\n`;
+  const alt = (e: SitemapEntry) =>
+    Object.entries(e.alternates ?? {})
+      .map(([l, u]) => `\n    <xhtml:link rel="alternate" hreflang="${l}" href="${xmlEscape(u!)}"/>`)
+      .join('');
+  const body = entries.map((e) => `  <url>\n    <loc>${xmlEscape(e.loc)}</loc>\n    <lastmod>${e.lastmod}</lastmod>${alt(e)}\n  </url>`).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${body}${body ? '\n' : ''}</urlset>\n`;
 }
 
 /** llms.txt (llmstxt.org format): H1, blockquote summary, key facts, sections of links. */

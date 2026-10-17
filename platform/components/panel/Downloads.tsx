@@ -6,7 +6,11 @@
 
 import { Download, FileText, Mail } from 'lucide-react';
 import { useState } from 'react';
-import { printLabel } from '../../lib/print/labels.ts';
+import { PRINT_LABELS, type PrintLabelKey } from '../../lib/print/labels.ts';
+import { t } from '../../lib/i18n/client.ts';
+
+/** G144: the card's words in the panel's language (keys = the English labels, lib/print/labels.ts). */
+const printLabel = (key: PrintLabelKey) => t(PRINT_LABELS.en[key]);
 import { Banner, Button, Card, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
 import own from './downloads.module.css';
@@ -52,7 +56,7 @@ export function DownloadsCard({ slug, editKey, live, online }: { slug: string; e
       });
       if (!res.ok || res.headers.get('content-type') !== 'application/pdf') {
         const data = (await res.json().catch(() => null)) as { message?: string } | null;
-        setError(data?.message ?? printLabel('panel_failed'));
+        setError(data?.message ? t(data.message) : printLabel('panel_failed'));
         return;
       }
       saveBlob(await res.blob(), fileName(res, `${slug}.pdf`));

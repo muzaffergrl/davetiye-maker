@@ -28,6 +28,7 @@ import { QR_BORDER, qrMatrix } from '../../lib/qr.ts';
 import { Switch } from './fields.tsx';
 import { download, QrCode } from './QrCode.tsx';
 import { Button, Segmented } from './ui.tsx';
+import { t } from '../../lib/i18n/client.ts';
 import styles from './panel.module.css';
 import own from './share-kit.module.css';
 
@@ -38,6 +39,9 @@ const APP_ICONS: Record<ShareApp, LucideIcon> = {
   messenger: MessagesSquare,
   telegram: Send,
 };
+
+/** App names that are brands: shown as they are, in every language. */
+const BRAND_APPS: ReadonlySet<ShareApp> = new Set(['whatsapp', 'messenger', 'telegram']);
 
 const KIND_LABELS: Record<MessageKind, string> = { invite: L.kindInvite, reminder: L.kindReminder, thanks: L.kindThanks };
 
@@ -81,18 +85,18 @@ export function ShareMessage({ facts, onCopy }: { facts: ShareFacts; onCopy: (te
   const text = edited ?? ready;
   // A new kind or the password switch writes a fresh message (the couple's edits were for the other one).
   useEffect(() => setEdited(null), [current, withPassword]);
-  const subject = facts.thankYouOn ? L.emailSubjectThanks : L.emailSubject;
+  const subject = t(facts.thankYouOn ? L.emailSubjectThanks : L.emailSubject);
   const links = shareAppLinks(text, facts.url, subject).filter((l) => phone || !l.phoneOnly);
   return (
     <div className={styles.stack} data-share-message>
-      <p className={styles.cardText}>{L.messageLead}</p>
-      {kinds.length > 1 ? <Segmented label="Message" value={current} options={kinds.map((k) => ({ value: k, label: KIND_LABELS[k] }))} onChange={setKind} /> : null}
+      <p className={styles.cardText}>{t(L.messageLead)}</p>
+      {kinds.length > 1 ? <Segmented label={t('Message')} value={current} options={kinds.map((k) => ({ value: k, label: t(KIND_LABELS[k]) }))} onChange={setKind} /> : null}
       <div className={styles.field}>
         <label htmlFor={`${ids}-msg`} className={styles.label}>
-          {L.messageLabel}
+          {t(L.messageLabel)}
         </label>
         <span id={`${ids}-msg-help`} className={styles.hint}>
-          {L.messageHelp}
+          {t(L.messageHelp)}
         </span>
         <textarea
           id={`${ids}-msg`}
@@ -105,24 +109,24 @@ export function ShareMessage({ facts, onCopy }: { facts: ShareFacts; onCopy: (te
         />
       </div>
       {facts.password ? (
-        <Switch id={`${ids}-pw`} label={L.includePassword} hint={L.includePasswordHelp} checked={withPassword} onChange={setWithPassword} />
+        <Switch id={`${ids}-pw`} label={t(L.includePassword)} hint={t(L.includePasswordHelp)} checked={withPassword} onChange={setWithPassword} />
       ) : null}
       {edited !== null && edited !== ready ? (
         <div className={own.messageFoot}>
           <Button small variant="tertiary" icon={RotateCcw} onClick={() => setEdited(null)} data-reset-message>
-            {L.resetMessage}
+            {t(L.resetMessage)}
           </Button>
         </div>
       ) : null}
-      <h3 className={own.sub}>{L.sendWith}</h3>
+      <h3 className={own.sub}>{t(L.sendWith)}</h3>
       <div className={styles.buttonRow} style={{ marginTop: 0 }}>
         {canShare ? (
           <Button variant="primary" icon={Share2} onClick={() => void navigator.share({ title: subject, text }).catch(() => undefined)} data-share-system>
-            {L.shareSystem}
+            {t(L.shareSystem)}
           </Button>
         ) : null}
-        <Button variant={canShare ? 'secondary' : 'primary'} icon={Copy} onClick={() => onCopy(text, L.messageCopied)} data-copy-message>
-          {L.copyMessage}
+        <Button variant={canShare ? 'secondary' : 'primary'} icon={Copy} onClick={() => onCopy(text, t(L.messageCopied))} data-copy-message>
+          {t(L.copyMessage)}
         </Button>
       </div>
       <ul className={own.apps} data-share-apps>
@@ -135,7 +139,7 @@ export function ShareMessage({ facts, onCopy }: { facts: ShareFacts; onCopy: (te
                 <span className={own.appMark} aria-hidden="true">
                   <Icon size={16} strokeWidth={2} />
                 </span>
-                <span>{L[l.label]}</span>
+                <span>{BRAND_APPS.has(l.app) ? L[l.label] : t(L[l.label])}</span>
               </a>
             </li>
           );
@@ -157,23 +161,23 @@ export function ShareQr({ facts, fileBase, themeColor, shareImage }: { facts: Sh
   const px = QR_PNG_SIZES.find((s) => s.key === size)?.px ?? 1200;
   return (
     <div className={styles.stack} data-share-qr>
-      <p className={styles.hint}>{L.qrLead}</p>
+      <p className={styles.hint}>{t(L.qrLead)}</p>
       <div className={styles.shareQr}>
         <QrCode url={facts.url} fileBase={fileBase} ink={ink} pngPx={px}>
           <div className={own.options}>
             {designInk ? (
               <Segmented
-                label={L.qrColour}
+                label={t(L.qrColour)}
                 value={colour}
                 onChange={setColour}
                 options={[
-                  { value: 'black', label: L.qrBlack },
-                  { value: 'design', label: L.qrDesign },
+                  { value: 'black', label: t(L.qrBlack) },
+                  { value: 'design', label: t(L.qrDesign) },
                 ]}
               />
             ) : null}
-            <Segmented label={`${L.qrSize} (PNG)`} value={size} onChange={setSize} options={QR_PNG_SIZES.map((s) => ({ value: s.key, label: s.label }))} />
-            <p className={styles.hint}>{L.svgHelp}</p>
+            <Segmented label={`${t(L.qrSize)} (PNG)`} value={size} onChange={setSize} options={QR_PNG_SIZES.map((s) => ({ value: s.key, label: t(s.label) }))} />
+            <p className={styles.hint}>{t(L.svgHelp)}</p>
           </div>
         </QrCode>
       </div>
@@ -287,7 +291,7 @@ export async function drawCard(o: {
     }
     y = qy + qrPx + 12 + 70;
     ctx.fillStyle = fg;
-    const scan = o.facts.thankYouOn ? L.cardScanThanks : L.cardScan;
+    const scan = t(o.facts.thankYouOn ? L.cardScanThanks : L.cardScan);
     fit(ctx, scan, serif, 46, 26, width);
     put(scan, cx, y);
     y += 56;
@@ -298,7 +302,7 @@ export async function drawCard(o: {
     ctx.globalAlpha = 1;
     if (o.password) {
       y += 60;
-      const line = `${L.cardPasswordLine}: ${o.password}`;
+      const line = `${t(L.cardPasswordLine)}: ${o.password}`;
       fit(ctx, line, sans, 34, 18, width);
       put(line, cx, y);
     }
@@ -354,7 +358,7 @@ function QrCard({
     setFailed(false);
     try {
       const jpeg = new Uint8Array(await (await drawCard(input)).arrayBuffer());
-      const pdf = jpegPdf(jpeg, CARD_W, CARD_H, 288, 432, `${facts.names} — QR card`);
+      const pdf = jpegPdf(jpeg, CARD_W, CARD_H, 288, 432, t('{names} — QR card', { names: facts.names }));
       download(`${fileBase}-qr-card.pdf`, new Blob([pdf as BlobPart], { type: 'application/pdf' }));
     } catch {
       setFailed(true);
@@ -365,19 +369,19 @@ function QrCard({
   return (
     <section className={own.card} aria-labelledby={`${ids}-card`} data-qr-card>
       <h3 id={`${ids}-card`} className={own.sub} style={{ margin: 0 }}>
-        {L.cardTitle}
+        {t(L.cardTitle)}
       </h3>
       <div className={own.cardRow}>
         {preview ? <img src={preview} alt="" className={own.cardPreview} width={180} height={270} data-card-preview /> : null}
         <div className={styles.stack}>
-          <p className={styles.cardText}>{L.cardText}</p>
-          {facts.password ? <Switch id={`${ids}-card-pw`} label={L.cardPassword} checked={withPassword} onChange={setWithPassword} /> : null}
-          <Button variant="primary" icon={busy ? undefined : FileDown} busy={busy} busyLabel={L.cardBusy} onClick={() => void make()} data-download-card>
-            {L.downloadCard}
+          <p className={styles.cardText}>{t(L.cardText)}</p>
+          {facts.password ? <Switch id={`${ids}-card-pw`} label={t(L.cardPassword)} checked={withPassword} onChange={setWithPassword} /> : null}
+          <Button variant="primary" icon={busy ? undefined : FileDown} busy={busy} busyLabel={t(L.cardBusy)} onClick={() => void make()} data-download-card>
+            {t(L.downloadCard)}
           </Button>
           {failed ? (
             <p role="alert" className={styles.hint}>
-              {L.cardFailed}
+              {t(L.cardFailed)}
             </p>
           ) : null}
         </div>
