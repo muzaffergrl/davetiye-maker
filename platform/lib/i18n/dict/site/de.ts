@@ -286,6 +286,10 @@ const dict: Dict = {
   'Tonight\'s programme': 'Das Programm des Abends',
   'You are invited to a premiere': 'Sie sind zu einer Premiere eingeladen',
   'Your seat is saved. We look forward to the evening together.': 'Ihr Platz ist reserviert. Wir freuen uns auf den gemeinsamen Abend.',
+  // G171 Music Box Ballerina
+  'Turn the key': 'Schlüssel drehen',
+  'Wind the music box again': 'Spieluhr erneut aufziehen',
+  'Reflections': 'Spiegelbilder',
 };
 
 export default dict;

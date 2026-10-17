@@ -911,6 +911,16 @@ const dict: Dict = {
   "Color palette": "Farbpalette",
   "Live demo in {name}": "Live-Demo in {name}",
   "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Ja, innerhalb des Designs: {name} gibt es in den Originalfarben und in {n} weiteren Paletten, jeweils mit passend gemaltem {thing}, Karten und Rahmen. Sie wählen eine Palette beim Start und können sie jederzeit in Ihrem Editor wechseln; Ihre Texte und Fotos bleiben, wie sie sind.",
+  // G171 Music Box Ballerina
+  'A rose-quartz music box with a brass wind-up key, a little ballerina and your photos in its oval mirror': 'Eine rosenquarzfarbene Spieluhr mit Aufziehschlüssel aus Messing, einer kleinen Ballerina und Ihren Fotos im ovalen Spiegel',
+  'A rose-quartz music box opens into your wedding website: a ballerina turns and your photos appear in its mirror. Personalize it in your online editor.': 'Eine rosenquarzfarbene Spieluhr öffnet sich zu Ihrer Hochzeitswebsite: Eine Ballerina dreht sich und Ihre Fotos erscheinen im Spiegel. Gestalten Sie sie in Ihrem Online-Editor.',
+  'Rose quartz, blush satin and soft gold, like a keepsake music box. Your invitation waits inside, a little ballerina turns, and your photos appear in the mirror of the lid.': 'Rosenquarz, zartrosa Satin und sanftes Gold, wie eine Spieluhr zum Aufbewahren. Ihre Einladung wartet darin, eine kleine Ballerina dreht sich, und Ihre Fotos erscheinen im Spiegel des Deckels.',
+  'Your guests tap the box. The brass key turns, the lid swings up and its mirror shows your portrait, a ballerina rises and turns slowly while a few rose petals drift down, and a separate card comes forward to become your home page.': 'Ihre Gäste tippen auf die Spieluhr. Der Messingschlüssel dreht sich, der Deckel klappt auf und sein Spiegel zeigt Ihr Porträt, eine Ballerina hebt sich und dreht sich langsam, während ein paar Rosenblätter herabschweben, und eine eigene Karte kommt nach vorn und wird zu Ihrer Startseite.',
+  'The card from the music box with your names and date, then the invitation beside your portrait in an oval mirror, a countdown and calendar links.': 'Die Karte aus der Spieluhr mit Ihren Namen und dem Datum, dann die Einladung neben Ihrem Porträt in einem ovalen Spiegel, ein Countdown und Kalenderlinks.',
+  'Your three photos appear one at a time in the music box mirror: guests swipe or tap the arrows, and the little ballerina turns with each photo.': 'Ihre drei Fotos erscheinen nacheinander im Spiegel der Spieluhr: Die Gäste wischen oder tippen auf die Pfeile, und die kleine Ballerina dreht sich mit jedem Foto.',
+  'The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.': 'Der Tagesablauf auf zartrosa Satin neben dem Foto der Location, eine optionale Karte, Dresscode, Anreise und das Menü.',
+  'A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.': 'Eine Antwortkarte auf zartrosa Satin; wenn eine Antwort gesendet wird, schweben ein paar Rosenblätter herab und die Ballerina dreht sich einmal.',
+  'Rose quartz': 'Rosenquarz',
 };
 
 export default dict;

@@ -375,6 +375,22 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },
     },
   },
+  // 32 (G171): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — front = the website's blush paper with
+  // a rose petal at the top; back = the same paper with the petal small at the foot. Both images come from the theme
+  // build (interim crops of repository GPT pictures, see themes/music-box-ballerina/build_images.py). On arrival:
+  // sources -> print/invitation_front.png + print/invitation_back.png, composed -> cover('front') / cover('back') with
+  // no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6 "Gelince".
+  'music-box-ballerina': {
+    collection: '32_Music_Box_Ballerina',
+    sources: { paper: 'platform/themes/music-box-ballerina/img/bg_page-1024.webp', petal: 'platform/themes/music-box-ballerina/img/petal_1-480.webp' },
+    fonts: gf('family=Ballet:opsz@16..72&family=Gilda+Display'),
+    script: "'Ballet', cursive", serif: "'Gilda Display', Georgia, serif",
+    ink: '#4A2F35', accent: '#8A4A55', front: [24, 13, 14, 13], back: [12, 12, 20, 12],
+    composed: {
+      front: { bg: cover('paper'), images: [{ src: 'petal', style: 'top:6%;left:50%;width:14%;transform:translateX(-50%) rotate(-18deg)' }] },
+      back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

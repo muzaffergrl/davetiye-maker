@@ -440,6 +440,12 @@ EK_TEMALAR = [
          dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
          font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
          hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
+    dict(no=32, klasor="32_Music_Box_Ballerina", ad="Music Box Ballerina",
+         zarf="Gül kuvarsı lake müzik kutusu, yan tarafta pirinç kurma anahtarı; anahtar döner, kapak arka menteşede kalkar, aynalı iç kapak dikilir, balerin yükselip yavaşça döner, kart öne gelir.",
+         foto="Kapağın oval aynasında yansıyan fotoğraflar: tek tek, cam üstünde ışık parıltısıyla değişir; balerin her fotoğrafta çeyrek döner.",
+         dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
+         font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
+         hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

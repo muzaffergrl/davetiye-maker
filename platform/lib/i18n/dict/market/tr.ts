@@ -911,6 +911,16 @@ const dict: Dict = {
   "Color palette": "Renk paleti",
   "Live demo in {name}": "{name} renklerinde canlı demo",
   "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Evet, tasarımın içinde kalarak: {name} orijinal renklerinin yanında {n} palet daha sunar; her birinde {thing}, kartlar ve çerçeveler uyumlu boyanmıştır. Paleti başlarken seçersiniz ve düzenleyicinizde istediğiniz zaman değiştirebilirsiniz; metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
+  // G171 Music Box Ballerina
+  'A rose-quartz music box with a brass wind-up key, a little ballerina and your photos in its oval mirror': 'Pirinç kurma anahtarlı gül kuvarsı bir müzik kutusu, küçük bir balerin ve oval aynasında fotoğraflarınız',
+  'A rose-quartz music box opens into your wedding website: a ballerina turns and your photos appear in its mirror. Personalize it in your online editor.': 'Gül kuvarsı bir müzik kutusu düğün sitenize açılır: bir balerin döner ve fotoğraflarınız aynasında belirir. Çevrim içi düzenleyicinizde kişiselleştirin.',
+  'Rose quartz, blush satin and soft gold, like a keepsake music box. Your invitation waits inside, a little ballerina turns, and your photos appear in the mirror of the lid.': 'Gül kuvarsı, pudra saten ve yumuşak altın; saklanacak bir müzik kutusu gibi. Davetiyeniz içinde bekler, küçük bir balerin döner ve fotoğraflarınız kapağın aynasında belirir.',
+  'Your guests tap the box. The brass key turns, the lid swings up and its mirror shows your portrait, a ballerina rises and turns slowly while a few rose petals drift down, and a separate card comes forward to become your home page.': 'Misafirleriniz kutuya dokunur. Pirinç anahtar döner, kapak kalkar ve aynası portrenizi gösterir, bir balerin yükselip yavaşça döner, birkaç gül yaprağı süzülür ve ayrı bir kart öne gelip ana sayfanız olur.',
+  'The card from the music box with your names and date, then the invitation beside your portrait in an oval mirror, a countdown and calendar links.': 'Müzik kutusundan çıkan kart: isimleriniz ve tarih; ardından oval bir aynadaki portrenizin yanında davet, geri sayım ve takvim bağlantıları.',
+  'Your three photos appear one at a time in the music box mirror: guests swipe or tap the arrows, and the little ballerina turns with each photo.': 'Üç fotoğrafınız müzik kutusunun aynasında tek tek belirir: misafirler kaydırır ya da oklara dokunur, küçük balerin her fotoğrafla döner.',
+  'The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.': 'Pudra satende günün akışı ve yanında mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ve menü.',
+  'A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.': 'Pudra saten üstünde bir yanıt kartı; yanıt gönderilince birkaç gül yaprağı süzülür ve balerin bir kez döner.',
+  'Rose quartz': 'Gül kuvarsı',
 };
 
 export default dict;

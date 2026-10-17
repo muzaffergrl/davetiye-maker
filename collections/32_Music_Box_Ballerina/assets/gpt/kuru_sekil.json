@@ -1,0 +1,124 @@
+{
+ "_not": "G171 kuru deneme (tools/gpt_kuru_deneme.py --sekil): her parçanın GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0,y0,x1,y1]. Ürün değil. \"ton\": prompt'un istediği açık pudra zemin (W2.11 orta/üst sakin ve açık; W2.12 saten; W2.9 kart).",
+ "lid_open.png": {
+  "kutu": [
+   14.648,
+   13.021,
+   85.352,
+   58.919
+  ],
+  "pencere": [
+   30.469,
+   18.88,
+   69.531,
+   51.432
+  ]
+ },
+ "interior.png": {
+  "kutu": [
+   14.648,
+   57.292,
+   85.352,
+   65.755
+  ]
+ },
+ "box_body.png": {
+  "kutu": [
+   10.938,
+   64.453,
+   89.062,
+   91.146
+  ]
+ },
+ "lid_closed.png": {
+  "kutu": [
+   9.766,
+   57.292,
+   90.234,
+   66.406
+  ]
+ },
+ "key.png": {
+  "kutu": [
+   87.5,
+   72.396,
+   99.023,
+   82.552
+  ]
+ },
+ "dancer.png": {
+  "kutu": [
+   38,
+   7,
+   62,
+   92
+  ]
+ },
+ "dancer_turn_a.png": {
+  "kutu": [
+   3,
+   5,
+   97,
+   94
+  ]
+ },
+ "dancer_turn_b.png": {
+  "kutu": [
+   3,
+   5,
+   97,
+   94
+  ]
+ },
+ "card_small.png": {
+  "kutu": [
+   10.9,
+   32.8,
+   89.1,
+   67.2
+  ],
+  "ton": [
+   250,
+   240,
+   236
+  ]
+ },
+ "petal_1.png": {
+  "kutu": [
+   25,
+   25,
+   75,
+   75
+  ]
+ },
+ "petal_2.png": {
+  "kutu": [
+   25,
+   25,
+   75,
+   75
+  ]
+ },
+ "petal_3.png": {
+  "kutu": [
+   25,
+   25,
+   75,
+   75
+  ]
+ },
+ "bg_page.png": {
+  "ton": [
+   247,
+   228,
+   226
+  ]
+ },
+ "satin_bg.png": {
+  "ton": [
+   250,
+   236,
+   233
+  ]
+ }
+}
