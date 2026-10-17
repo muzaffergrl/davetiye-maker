@@ -5,6 +5,18 @@ diskte var, hangileri eksik. Prompt metni ve kayıt yolu ilgili `GPT_PROMPTS.md`
 bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py` / `build-print-assets.ts` komutu çalıştırılır
 (prompt dosyasında yazar).
 
+## GPT görselleri gelince (G176)
+
+Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
+
+1. Claude görsellere bakar, `{"<gelen dosya>": "<aşağıdaki listeden hedef yol>"}` haritasını yazar (JSON).
+2. `python3 tools/gpt_yerlestir.py --eslestir harita.json` — KURU: her hedefin bir prompt'ta istendiğini, oran /
+   şeffaflık / `#00FF00` pencere şartlarını ve var olan farklı dosyanın ezilmediğini denetler; tek red = hiçbir dosya yazılmaz.
+3. Aynı komut `--uygula` ile: kopyalar, sonra her etkilenen tasarımda sırayla `build_images.py` → `build-print-assets.ts`
+   → palet (`recolor_parts.py build/check`) → img/ referans + manifest denetimi → (`--theme-check`, `--ilan`: üretim
+   build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
+   Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
+
 **Toplam eksik: 270**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
