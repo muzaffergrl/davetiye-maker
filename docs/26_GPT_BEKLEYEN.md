@@ -5,7 +5,7 @@ diskte var, hangileri eksik. Prompt metni ve kayıt yolu ilgili `GPT_PROMPTS.md`
 bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py` / `build-print-assets.ts` komutu çalıştırılır
 (prompt dosyasında yazar).
 
-**Toplam eksik: 194**
+**Toplam eksik: 270**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
@@ -51,6 +51,18 @@ bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py`
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 14 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 3 |
+| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 12 |
+| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 11 |
+| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi) | 0 | 2 |
+| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — website katmanları (YAZI YOK) | 0 | 12 |
+| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) | 0 | 5 |
+| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK) | 0 | 2 |
+| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 13 |
+| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 2 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`) | 0 | 5 |
@@ -318,6 +330,94 @@ bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py`
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 - `collections/28_Maison_Patisserie/assets/gpt/public/print/maison-patisserie/front.webp` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+
+### `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/29_Celestial_Observatory/assets/gpt/parts/night_sky.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/chart_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/dome.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/shutter.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/star_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/star_chart.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/planisphere_ring.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/astrolabe.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/moon_phases.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/orbits.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
+- `collections/29_Celestial_Observatory/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/29_Celestial_Observatory/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+
+### `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_4.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_back.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/cobalt_wall.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/lime_wash.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/card_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/frieze.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/pot_left.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
+- `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi)
+- `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi)
+
+### `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/hands.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_dark.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_lit.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/sky_dusk.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/star_dust.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_far.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/card_small.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/bg_tile.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/frame_paper.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/frame_landscape.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/divider.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/web_hero.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_1.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_2.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_3.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/venue.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_front.png` — PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_back.png` — PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
+
+### `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_open.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/interior.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/box_body.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_closed.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/key.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer_turn_a.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer_turn_b.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/bg_page.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/satin_bg.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
+- `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 
 ### `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md`
 

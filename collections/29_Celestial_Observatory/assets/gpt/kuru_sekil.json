@@ -1,0 +1,16 @@
+{
+ "_not": "G168 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "night_sky.png": {"ton": [17, 25, 58], "gren": 0.4},
+ "chart_paper.png": {"ton": [238, 235, 227], "gren": 0.3},
+ "dome.png": {"kutu": [0, 0, 100, 100], "pencere": [39, 4, 61, 66], "ton": [155, 122, 60]},
+ "shutter.png": {"kutu": [1, 1, 99, 99], "ton": [120, 95, 48]},
+ "star_1.png": {"kutu": [28, 28, 72, 72], "ton": [230, 232, 240]},
+ "star_2.png": {"kutu": [32, 32, 68, 68], "ton": [230, 232, 240]},
+ "star_3.png": {"kutu": [36, 36, 64, 64], "ton": [230, 232, 240]},
+ "star_chart.png": {"kutu": [4, 4, 96, 96], "ton": [201, 207, 220]},
+ "planisphere_ring.png": {"kutu": [0, 0, 100, 100], "pencere": [13, 13, 87, 87], "ton": [155, 122, 60]},
+ "astrolabe.png": {"kutu": [5, 5, 95, 95], "ton": [155, 122, 60]},
+ "moon_phases.png": {"kutu": [3, 20, 97, 80], "ton": [201, 207, 220]},
+ "orbits.png": {"kutu": [2, 2, 98, 98], "ton": [201, 207, 220]},
+ "card_small.png": {"kutu": [0, 0, 100, 100], "pencere": [19, 9, 81, 54], "ton": [238, 235, 227]}
+}

@@ -34,3 +34,18 @@ döndüğünde GPT ile üretilip yerleştirilir.
 | 28 | maison-patisserie | Maison Pâtisserie | Fıstık yeşili pasta kutusu, saten fiyonk; fiyonk çözülür, kapak kalkar, ipek kâğıt aralanır | Pastane vitrini rafları (kartlar raflarda kayar) | Makaron, tül, şeker inci, altın kenar tabak | pastel suluboya + fotogerçekçi pasta | Italiana + Parisienne | pistachio-rose-cream | Fiyonk çözülmesi, kapak kalkışı, raf kaydırma bileşeni, gönderimde şeker inci yağmuru |
 
 Ayrıntı: her koleksiyonun `DESIGN_BRIEF.md` dosyası (oturum açar). İş görevleri: G161–G166.
+
+## 2. dalga — 29–32 (2026-10-17)
+
+Kurallar aynı (yukarıda). Ek: GPT parçaları gelmeden kurulur; `tools/gpt_kuru_deneme.py` (G167) ile bırak-çalıştır provası
+geçmeli; baskı ara zemini G149 serbest alan testini geçmeli; statik tema dosyaları (G159) otomatik.
+
+| # | id | Ad | Kapalı nesne / açılış | Foto sunumu | Dekor ailesi | Teknik | Font hedefi | Ana palet | Hareket imzası |
+|---|---|---|---|---|---|---|---|---|---|
+| 29 | celestial-observatory | Celestial Observatory | Pirinç teleskop / gözlemevi kubbesi; kubbe yarığı açılır, gece göğü görünür | Döner yıldız haritası (planisfer) çerçeveleri; kaydırınca gök döner | Yıldız haritası, pirinç usturlap, gezegen yörüngeleri, ay evreleri | gravür + altın varak | Cormorant Unicorn? yerine Cinzel Decorative + EB Garamond | midnight-silver-gold | Kubbe açılışı, yıldızların sırayla parlaması, takımyıldız çizgisinin çiftin baş harflerini birleştirmesi (UI çizgi), döner gök |
+| 30 | azulejo-mosaic | Azulejo Mosaic | Mavi-beyaz çini duvar; çiniler tek tek 3B döner, arkadan davet çıkar | Çini mozaiği: fotoğraf çini karolarının dönmesiyle beliren | Kobalt azulejo desenleri, terrakota saksı, limon dalı yok (05'ten ayrı) | el boyaması seramik | Playfair Display + Montserrat? yerine Cormorant + Josefin Sans | cobalt-white-terracotta | Karo karo 3B çevirme ızgarası, dalga hâlinde açılan çini yüzeyi |
+| 31 | sky-lantern-festival | Sky Lantern Festival | Kâğıt fener avuçlarda; dokununca ışır ve yükselir | Yükselen fenerlerin ışığında beliren fotoğraflar | Pirinç kâğıdı fenerler, alacakaranlık gökyüzü, yıldız tozu | suluboya + ışık | Marcellus + Allura | dusk-amber-violet | Fener yükselişi (paralaks katmanlar), sıcak ışık hâlesi, kaydırmayla süzülen fenerler |
+| 32 | music-box-ballerina | Music Box Ballerina | Lake müzik kutusu; kapak açılır, balerin döner, tarak melodisi | Kutunun ayna kapağında yansıyan fotoğraflar | Saten astar, pirinç kurma anahtarı, tül, gül yaprakları | fotogerçekçi + pastel | Bodoni Moda yerine Playfair Display SC + Great Vibes | rose-quartz-gold | Kapak menteşesi, balerinin yavaş dönüşü (GPT kare dizisi/2B döndürme), kurma anahtarıyla müzik başlatma |
+
+Not: font sütunundaki "yerine" ifadeleri ilk akla geleni eler; oturum tasarıma en uygun Google Fonts çiftini seçer ve
+22+6 tasarımdan farklı olmasına dikkat eder.

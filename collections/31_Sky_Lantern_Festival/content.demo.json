@@ -1,0 +1,117 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Sophie",
+      "full_name": "Sophie Marie Laurent"
+    },
+    {
+      "display_name": "Daniel",
+      "full_name": "Daniel Thomas Reed"
+    }
+  ],
+  "name_display": "Sophie & Daniel",
+  "initials": "S&D",
+  "host_line": "Together with their families",
+  "date": "2027-09-18",
+  "ceremony_time": "18:30",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "The Meadowlark Terrace",
+    "city": "Santa Barbara",
+    "region": "California",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "18:30",
+      "location": "The hilltop lawn"
+    },
+    {
+      "label": "Champagne at golden hour",
+      "time": "19:15",
+      "location": "The upper terrace"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "20:15",
+      "location": "The lantern garden"
+    }
+  ],
+  "dress_code": "Formal attire",
+  "rsvp": {
+    "deadline": "2027-08-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Long summer evenings, a sky full of lanterns and one wish we made together led us to",
+    "items": [
+      {
+        "caption": "Our first evening"
+      },
+      {
+        "caption": "A wish in the sky"
+      },
+      {
+        "caption": "Yes, at dusk"
+      }
+    ]
+  },
+  "audio": {
+    "music": "first-light",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

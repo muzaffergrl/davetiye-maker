@@ -55,6 +55,7 @@ const dict: Dict = {
   'Kindly respond': 'Yanıtınızı bekliyoruz',
   'Language': 'Dil',
   'Learn more': 'Daha fazla bilgi',
+  'Light the lantern again': 'Feneri yeniden yakın',
   'Look back with us': 'Bizimle geriye bakın',
   'Map': 'Harita',
   'Map of {place}': '{place} haritası',
@@ -166,6 +167,7 @@ const dict: Dict = {
   'Turn music off': 'Müziği kapat',
   'Turn sound off': 'Sesi kapat',
   'Turn sound on': 'Sesi aç',
+  'Under the evening sky': 'Akşam göğünün altında',
   'Until then': 'O güne dek',
   'Until then, with love': 'O güne dek, sevgiyle',
   'Venue and travel': 'Mekân ve ulaşım',
@@ -286,6 +288,15 @@ const dict: Dict = {
   'Tonight\'s programme': 'Bu akşamın programı',
   'You are invited to a premiere': 'Bir galaya davetlisiniz',
   'Your seat is saved. We look forward to the evening together.': 'Yeriniz ayrıldı. O akşamı birlikte geçirmeyi dört gözle bekliyoruz.',
+  // G168 Celestial Observatory
+  'Open the dome': 'Kubbeyi açın',
+  'Written in the stars': 'Yıldızlarda yazılı',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Çini çini döşendi, sevgiyle gönderildi',
+  // G171 Music Box Ballerina
+  'Turn the key': 'Anahtarı çevirin',
+  'Wind the music box again': 'Müzik kutusunu yeniden kurun',
+  'Reflections': 'Yansımalar',
 };
 
 export default dict;

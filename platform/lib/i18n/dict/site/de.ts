@@ -55,6 +55,7 @@ const dict: Dict = {
   'Kindly respond': 'Um Antwort wird gebeten',
   'Language': 'Sprache',
   'Learn more': 'Mehr erfahren',
+  'Light the lantern again': 'Die Laterne erneut entzünden',
   'Look back with us': 'Erinnern Sie sich mit uns',
   'Map': 'Karte',
   'Map of {place}': 'Karte: {place}',
@@ -166,6 +167,7 @@ const dict: Dict = {
   'Turn music off': 'Musik ausschalten',
   'Turn sound off': 'Ton ausschalten',
   'Turn sound on': 'Ton einschalten',
+  'Under the evening sky': 'Unter dem Abendhimmel',
   'Until then': 'Bis dahin',
   'Until then, with love': 'Bis dahin, in Liebe',
   'Venue and travel': 'Location und Anreise',
@@ -286,6 +288,15 @@ const dict: Dict = {
   'Tonight\'s programme': 'Das Programm des Abends',
   'You are invited to a premiere': 'Sie sind zu einer Premiere eingeladen',
   'Your seat is saved. We look forward to the evening together.': 'Ihr Platz ist reserviert. Wir freuen uns auf den gemeinsamen Abend.',
+  // G168 Celestial Observatory
+  'Open the dome': 'Die Kuppel öffnen',
+  'Written in the stars': 'In den Sternen geschrieben',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Fliese für Fliese gelegt, mit Liebe gesendet',
+  // G171 Music Box Ballerina
+  'Turn the key': 'Schlüssel drehen',
+  'Wind the music box again': 'Spieluhr erneut aufziehen',
+  'Reflections': 'Spiegelbilder',
 };
 
 export default dict;

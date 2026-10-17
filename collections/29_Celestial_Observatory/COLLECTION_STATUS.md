@@ -1,0 +1,18 @@
+# Koleksiyon 29 — Celestial Observatory (çalışma adı)
+
+**Durum:** `editable_draft` — platform teması tema standardında kuruldu (G168), ama tasarımın kendi GPT parçaları **yok**;
+görseller geçici (başka tasarımların düz dokuları tonlandı, pirinç = 17'nin mührünün düz metal yüzeyi; çizim yok). Satış
+durumu `coming` (`platform/lib/marketing/config.ts`); fiyat `[PRICE]`, onay entegratörde. Tasarım özeti: `DESIGN_BRIEF.md`.
+
+| Parça | Durum |
+|---|---|
+| Website teması | `platform/themes/celestial-observatory/` — 5 sayfa, açılış (kubbe + yarık göğü + iki kapak yarısı + ışık + yıldızlar + takımyıldız + kart), planisfer fotoğraflar ve kadran süpürmesi, kaydırmayla dönen gök, teşekkür modu, G138/G127/G126/G144 |
+| GPT PAKET 5 (gece göğü, harita kâğıdı, kubbe, yarık kapağı, yıldızlar, yıldız haritası, planisfer halkası, usturlap, ay evreleri, yörüngeler, kart, web_hero) | bekliyor — `assets/gpt/GPT_PROMPTS.md`; bırak-çalıştır provası GEÇTİ 14/16 (yalnız PAKET 6 elle) |
+| GPT PAKET 2 örnek fotoğraflar (kurgu Celeste & Rowan) | bekliyor |
+| GPT PAKET 6 basılı davetiye ön/arka | bekliyor; şimdilik geçici düzen (`lib/print/layouts.ts`, harita kâğıdı + gece göğü şeritleri, ~195 ppi) |
+| Demo | `/start/demo/celestial-observatory` (demo harita pini Flagstaff, AZ) |
+| Etsy ilan metni | taslak: `package/listing/listing_v3.md` (yayınlanmadı, K41; ilan görselleri/video GPT parçalarından sonra) |
+| Alıcı rehberi (START HERE) | başlanmadı |
+
+**Denenmedi:** gerçek telefon, Vercel yayını, gerçek alıcı fotoğrafları, GPT parçalarıyla görünüm.
+Son kontrol: 2026-10-17 (G168).

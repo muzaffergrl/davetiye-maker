@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Celeste",
+      "full_name": "Celeste Marie Vance"
+    },
+    {
+      "display_name": "Rowan",
+      "full_name": "Rowan James Ashby"
+    }
+  ],
+  "name_display": "Celeste & Rowan",
+  "initials": "C&R",
+  "host_line": "Together with their families",
+  "date": "2027-08-14",
+  "ceremony_time": "19:00",
+  "timezone": "America/Phoenix",
+  "venue": {
+    "name": "Starlight Ridge Observatory Gardens",
+    "city": "Flagstaff",
+    "region": "Arizona",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Welcome drinks",
+      "time": "18:30",
+      "location": "The telescope terrace"
+    },
+    {
+      "label": "Ceremony",
+      "time": "19:00",
+      "location": "The meridian lawn"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "20:00",
+      "location": "The dome pavilion"
+    },
+    {
+      "label": "Late-night snacks",
+      "time": "23:00",
+      "location": "Under the stars"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-07-10",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A shared telescope, one clear night by the lake and a question under the dome led us to",
+    "items": [
+      {
+        "caption": "A shared telescope"
+      },
+      {
+        "caption": "Night by the lake"
+      },
+      {
+        "caption": "Under the dome"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}
