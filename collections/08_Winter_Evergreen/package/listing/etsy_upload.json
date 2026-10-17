@@ -184,5 +184,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Winter Evergreen)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=winter-evergreen"
+      },
+      {
+        "name": "Midnight Navy & Holly",
+        "variant": "midnight-navy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=winter-evergreen&variant=midnight-navy"
+      },
+      {
+        "name": "Burgundy Wine & Pine",
+        "variant": "burgundy-wine",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=winter-evergreen&variant=burgundy-wine"
+      },
+      {
+        "name": "Ivory & Pine",
+        "variant": "ivory-pine",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=winter-evergreen&variant=ivory-pine"
+      },
+      {
+        "name": "Frost Blue & Pine",
+        "variant": "frost-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=winter-evergreen&variant=frost-blue"
+      },
+      {
+        "name": "Sage & Holly",
+        "variant": "sage-holly",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=winter-evergreen&variant=sage-holly"
+      }
+    ],
+    "offered": [
+      "Original (Winter Evergreen)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

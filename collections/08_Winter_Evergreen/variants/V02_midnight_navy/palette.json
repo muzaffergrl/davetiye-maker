@@ -1,0 +1,23 @@
+{
+  "id": "V02_midnight_navy",
+  "slug": "midnight-navy",
+  "name": "Midnight Navy & Holly",
+  "ink": "#1F2E26",
+  "deep": "#26344F",
+  "primary": "#26344F",
+  "mist_top": "#EEF2F1",
+  "mist_bottom": "#C9D6D2",
+  "gold": "#B79B5E",
+  "gold_light": "#DCC895",
+  "ivory": "#FAFAF6",
+  "leaf": "#3E6B53",
+  "swatch": [
+    "#FAFAF6",
+    "#26344F",
+    "#8C1D26"
+  ],
+  "status": "coming",
+  "families": {
+    "envelope": "primary"
+  }
+}

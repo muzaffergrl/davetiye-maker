@@ -184,5 +184,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Burgundy Velvet Autumn)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=burgundy-velvet-autumn"
+      },
+      {
+        "name": "Emerald Velvet & Burgundy",
+        "variant": "emerald-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=emerald-velvet"
+      },
+      {
+        "name": "Plum Velvet",
+        "variant": "plum-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=plum-velvet"
+      },
+      {
+        "name": "Navy Velvet & Burgundy",
+        "variant": "navy-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=navy-velvet"
+      },
+      {
+        "name": "Rust & Copper Velvet",
+        "variant": "rust-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=rust-velvet"
+      },
+      {
+        "name": "Dusty Rose Velvet",
+        "variant": "dusty-rose-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=dusty-rose-velvet"
+      }
+    ],
+    "offered": [
+      "Original (Burgundy Velvet Autumn)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

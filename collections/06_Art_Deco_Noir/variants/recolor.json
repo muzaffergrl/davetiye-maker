@@ -1,0 +1,209 @@
+{
+  "theme": "art-deco-black-tie",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). ground = the deep navy lacquer (doors, cards, page, placeholders) → another deep jewel tone or black (light text stays readable); gold = the metal, changes only in the silver palette. Ivory card and pearls stay.",
+  "families": {
+    "ground": {
+      "anchor": "#14283F",
+      "sigma": 28,
+      "cmin": 0.008,
+      "cfull": 0.022,
+      "lmax": 0.55
+    },
+    "gold": {
+      "anchor": "#C19350",
+      "sigma": 26,
+      "cmin": 0.05,
+      "cfull": 0.07
+    }
+  },
+  "groups": {
+    "deco": [
+      "ground",
+      "gold"
+    ],
+    "gilt": [
+      "gold"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "accent_3": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "center": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "decor_br": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "decor_tl": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "door_l": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "door_l_in": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "door_r": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "door_r_in": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "gilt"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "pocket": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "rays": {
+      "recolor": "auto",
+      "group": "gilt"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "deco"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "deco"
+    }
+  },
+  "print_colors": {
+    "ink": "#E4DCC8",
+    "accent": "#E6CF8F",
+    "paper": "#101F33"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "ground",
+      "gold"
+    ],
+    "keep": [
+      "--ivory",
+      "--ink-soft",
+      "--c-f4b7a9"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--gold",
+        "--page",
+        4.5
+      ],
+      [
+        "--gold-light",
+        "--page",
+        4.5
+      ],
+      [
+        "--card-ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--bronze",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--navy",
+        4.5
+      ]
+    ]
+  }
+}

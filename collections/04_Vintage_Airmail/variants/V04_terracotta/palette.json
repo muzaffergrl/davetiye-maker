@@ -1,0 +1,23 @@
+{
+  "id": "V04_terracotta",
+  "slug": "terracotta",
+  "name": "Terracotta & Navy",
+  "ink": "#2A2A35",
+  "deep": "#8E4628",
+  "primary": "#B8653F",
+  "mist_top": "#F2EADB",
+  "mist_bottom": "#DCCDB2",
+  "gold": "#A88A5A",
+  "gold_light": "#D2BE95",
+  "ivory": "#FAF4E8",
+  "leaf": "#8A9474",
+  "swatch": [
+    "#FAF4E8",
+    "#B8653F",
+    "#3D4F7A"
+  ],
+  "status": "coming",
+  "families": {
+    "red": "primary"
+  }
+}

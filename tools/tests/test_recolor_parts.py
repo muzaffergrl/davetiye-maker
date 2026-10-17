@@ -61,6 +61,14 @@ def test_texture_and_cmin():
     assert np.abs(kept - paper).max() < 1
 
 
+def test_lightness_gate():
+    dark, pale = rp.hex_rgb("#5E7591"), rp.hex_rgb("#CBDCEB")
+    fams = [fam("#5E7591", "#A86F72", sigma=20, lmax=0.72), fam("#CBDCEB", "#F3E4E1", sigma=20, cmin=0.005, cfull=0.015, lmin=0.78)]
+    out = rp.transfer(np.array([dark, pale]), fams)
+    assert np.abs(out[0] - rp.hex_rgb("#A86F72")).max() < 3   # dark seal → only the seal family
+    assert np.abs(out[1] - rp.hex_rgb("#F3E4E1")).max() < 3   # pale paper → only the paper family
+
+
 def test_recolor_image_keeps_alpha(tmp_path):
     from PIL import Image
     arr = np.zeros((8, 8, 4), np.uint8)

@@ -184,5 +184,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Vintage Airmail Love Letter)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=vintage-airmail-love-letter"
+      },
+      {
+        "name": "Dusty Rose & Navy",
+        "variant": "dusty-rose",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=dusty-rose"
+      },
+      {
+        "name": "Sage & Navy",
+        "variant": "sage-navy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=sage-navy"
+      },
+      {
+        "name": "Terracotta & Navy",
+        "variant": "terracotta",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=terracotta"
+      },
+      {
+        "name": "Dusty Blue Airmail",
+        "variant": "dusty-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=dusty-blue"
+      },
+      {
+        "name": "Lavender & Navy",
+        "variant": "lavender",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=lavender"
+      }
+    ],
+    "offered": [
+      "Original (Vintage Airmail Love Letter)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

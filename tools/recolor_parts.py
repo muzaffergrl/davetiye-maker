@@ -111,8 +111,9 @@ def contrast(a, b):
 
 
 def transfer(rgb, families, cmin=0.012, cfull=0.035):
-    """rgb (..., 3) → yeni rgb. families: [{anchor: lab, target: lab | None, sigma: derece, lk: float, cmin?, cfull?}]
-    (cmin/cfull: ailenin kroma eşiği — bu kromanın altındaki pikseller o aileye girmez; kağıt gibi soluk tonları korur)."""
+    """rgb (..., 3) → yeni rgb. families: [{anchor: lab, target: lab | None, sigma: derece, lk: float, cmin?, cfull?, lmin?, lmax?}]
+    (cmin/cfull: ailenin kroma eşiği — bu kromanın altındaki pikseller o aileye girmez; kağıt gibi soluk tonları korur;
+    lmin/lmax: OKLab L eşiği — aynı tonda koyu mühür ile açık kağıdı ayrı ailelere verir)."""
     lab = rgb_to_oklab(rgb)
     L, C, h = _lch(lab)
     sat = np.clip((C - cmin) / (cfull - cmin), 0, 1)
@@ -121,6 +122,10 @@ def transfer(rgb, families, cmin=0.012, cfull=0.035):
         La, Ca, ha = _lch(f["anchor"])
         s = sat if "cmin" not in f else np.clip((C - f["cmin"]) / (f.get("cfull", f["cmin"] + 0.02) - f["cmin"]), 0, 1)
         w = np.exp(-0.5 * (_wrap(h - ha) / np.radians(f.get("sigma", 20))) ** 2) * s
+        if "lmin" in f:  # G156: optional OKLab lightness gate (soft, ±0.03) — same hue, different part (dark seal / pale paper)
+            w = w * np.clip((L - f["lmin"]) / 0.06 + 0.5, 0, 1)
+        if "lmax" in f:
+            w = w * np.clip((f["lmax"] - L) / 0.06 + 0.5, 0, 1)
         weights.append(w)
         if f["target"] is None:
             outs.append(lab)
@@ -243,7 +248,7 @@ def family_map(spec, pal, members, roles=None):
         else:
             target = rgb_to_oklab(hex_rgb(pal[t] if t in ROLES else t))
         fam = {"anchor": rgb_to_oklab(hex_rgb(f["anchor"])), "target": target, "sigma": f.get("sigma", 20), "lk": lk}
-        for k in ("cmin", "cfull"):
+        for k in ("cmin", "cfull", "lmin", "lmax"):
             if k in f:
                 fam[k] = f[k]
         out.append(fam)
@@ -465,7 +470,7 @@ def contact_sheet(rows, tokens, title, path, cell=220):
             bg = checker.copy()
             bg.alpha_composite(t, ((bg.width - t.width) // 2, (bg.height - t.height) // 2))
             sheet.paste(bg.convert("RGB"), (x0 + j * cell + 4, y0 + 4))
-        colour = {"auto": (30, 110, 60), "gpt": (170, 60, 30), "keep": (90, 90, 90)}[status]
+        colour = {"auto": (30, 110, 60), "gpt": (170, 60, 30), "keep": (90, 90, 90), "same": (90, 90, 90)}[status]
         d.text((x0 + 6, y0 + cell + 4), f"{name} · {status}{' (original until GPT)' if status == 'gpt' else ''}", fill=colour)
     y = 40 + ((n + 1) // 2) * rh
     for k, (name, before, after) in enumerate(tokens):
@@ -547,8 +552,10 @@ def build(design, only=None, sheet=True, write=True, images=True):
             p = spec["parts"][key]
             status = p["recolor"]
             src = Image.open(path)
+            fams = family_map(spec, pal, spec["groups"][p["group"]]) if status == "auto" else []
+            if status == "auto" and all(f["target"] is None for f in fams):
+                status = "same"  # G156: no family of the group changes in this palette → the original serves (no copy)
             if status == "auto":
-                fams = family_map(spec, pal, spec["groups"][p["group"]])
                 im, mode = recolor_image(path, fams)
                 if write:
                     save_like(im, mode, tdir / "img/variants" / slug / path.name)
@@ -562,7 +569,10 @@ def build(design, only=None, sheet=True, write=True, images=True):
             if p["recolor"] != "auto":
                 continue
             src = PRINT / theme / f"{name}.webp"
-            im, mode = recolor_image(src, family_map(spec, pal, spec["groups"][p["group"]]))
+            fams = family_map(spec, pal, spec["groups"][p["group"]])
+            if all(f["target"] is None for f in fams):
+                continue
+            im, mode = recolor_image(src, fams)
             if write:
                 save_like(im, mode, PRINT / theme / "variants" / slug / f"{name}.webp")
             art.append(name)

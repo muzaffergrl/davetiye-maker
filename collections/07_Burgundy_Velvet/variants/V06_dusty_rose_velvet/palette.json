@@ -1,0 +1,24 @@
+{
+  "id": "V06_dusty_rose_velvet",
+  "slug": "dusty-rose-velvet",
+  "name": "Dusty Rose Velvet",
+  "ink": "#3B1A20",
+  "deep": "#985262",
+  "primary": "#A25A6B",
+  "mist_top": "#F4E7E1",
+  "mist_bottom": "#D9B9AE",
+  "gold": "#B88A4A",
+  "gold_light": "#DDBE8A",
+  "ivory": "#FBF5EE",
+  "leaf": "#7A6A3A",
+  "swatch": [
+    "#F4E7E1",
+    "#985262",
+    "#A25A6B"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "deep",
+    "bloom": "primary"
+  }
+}

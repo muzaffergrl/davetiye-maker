@@ -183,5 +183,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Dusty Blue & Champagne)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=dusty-blue-champagne"
+      },
+      {
+        "name": "Blush & Champagne",
+        "variant": "blush-champagne",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=dusty-blue-champagne&variant=blush-champagne"
+      },
+      {
+        "name": "Terracotta & Cream",
+        "variant": "terracotta-cream",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=dusty-blue-champagne&variant=terracotta-cream"
+      },
+      {
+        "name": "Navy & Gold",
+        "variant": "navy-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=dusty-blue-champagne&variant=navy-gold"
+      },
+      {
+        "name": "Burgundy & Blush",
+        "variant": "burgundy-blush",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=dusty-blue-champagne&variant=burgundy-blush"
+      },
+      {
+        "name": "Lavender & Silver",
+        "variant": "lavender-silver",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=dusty-blue-champagne&variant=lavender-silver"
+      }
+    ],
+    "offered": [
+      "Original (Dusty Blue & Champagne)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

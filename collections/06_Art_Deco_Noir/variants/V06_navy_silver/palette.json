@@ -1,0 +1,24 @@
+{
+  "id": "V06_navy_silver",
+  "slug": "navy-silver",
+  "name": "Navy & Silver",
+  "ink": "#F5EEDC",
+  "deep": "#B9B9BD",
+  "primary": "#14213D",
+  "mist_top": "#1B2A4A",
+  "mist_bottom": "#0E1626",
+  "gold": "#B9B9BD",
+  "gold_light": "#DCDCE0",
+  "ivory": "#F5EEDC",
+  "leaf": "#B9B9BD",
+  "swatch": [
+    "#14213D",
+    "#B9B9BD",
+    "#F5EEDC"
+  ],
+  "status": "coming",
+  "families": {
+    "ground": "primary",
+    "gold": "#B9B9BD"
+  }
+}

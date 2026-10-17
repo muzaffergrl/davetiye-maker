@@ -1,0 +1,227 @@
+{
+  "theme": "burgundy-velvet-autumn",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). velvet = the ribbons, bows, swag and envelope liner; bloom = the dahlias/roses and petal (same hue, split by part group so flowers keep natural colours: they stay burgundy in the emerald and navy palettes). og follows the flowers. Autumn leaves, berries, gold and peach paper stay.",
+  "families": {
+    "velvet": {
+      "anchor": "#5C0206",
+      "sigma": 11,
+      "cmin": 0.06,
+      "cfull": 0.09
+    },
+    "bloom": {
+      "anchor": "#5C0206",
+      "sigma": 11,
+      "cmin": 0.06,
+      "cfull": 0.09
+    }
+  },
+  "groups": {
+    "velvet": [
+      "velvet"
+    ],
+    "floral": [
+      "bloom"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "autumn maple leaf: natural colours"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "blackberries: natural colours"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "bow": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "charm": {
+      "recolor": "keep",
+      "why": "gold leaf charm: metal"
+    },
+    "cl_c": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "cl_l": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "cl_r": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "env_cflap": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "env_closed": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "env_pocket": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "info_card": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: peach wash"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: peach wash"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: peach wash"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: peach wash"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: peach wash"
+    },
+    "velvet_swag": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "wall": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    },
+    "wall_wide": {
+      "recolor": "keep",
+      "why": "warm peach / cream paper and wall: neutral to every palette"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "back": {
+      "recolor": "keep",
+      "why": "cream card with gold corners"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "peach paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#3B1A20",
+    "accent": "#74212F",
+    "paper": "#FBF5EE"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "velvet"
+    ],
+    "keep": [
+      "--page",
+      "--ivory",
+      "--gold",
+      "--c-8a1e2b"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--copper",
+        "--page",
+        4.5
+      ],
+      [
+        "--wine",
+        "--page",
+        4.5
+      ],
+      [
+        "--wine-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--wine-ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--wine",
+        4.5
+      ]
+    ]
+  }
+}

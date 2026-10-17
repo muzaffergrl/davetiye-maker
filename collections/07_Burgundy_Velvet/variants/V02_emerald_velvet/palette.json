@@ -1,0 +1,24 @@
+{
+  "id": "V02_emerald_velvet",
+  "slug": "emerald-velvet",
+  "name": "Emerald Velvet & Burgundy",
+  "ink": "#3B1A20",
+  "deep": "#0F4A36",
+  "primary": "#8C2A3C",
+  "mist_top": "#F4E7E1",
+  "mist_bottom": "#D9B9AE",
+  "gold": "#B88A4A",
+  "gold_light": "#DDBE8A",
+  "ivory": "#FBF5EE",
+  "leaf": "#7A6A3A",
+  "swatch": [
+    "#F4E7E1",
+    "#0F4A36",
+    "#8C2A3C"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "deep",
+    "bloom": null
+  }
+}

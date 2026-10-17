@@ -1,5 +1,6 @@
 {
   "id": "V04_navy_gold",
+  "slug": "navy-gold",
   "name": "Navy & Gold",
   "ink": "#1E2C47",
   "deep": "#2E4266",
@@ -9,5 +10,16 @@
   "gold": "#C5A059",
   "gold_light": "#E0C78F",
   "ivory": "#FBF8F1",
-  "leaf": "#8FA59A"
+  "leaf": "#8FA59A",
+  "swatch": [
+    "#FBF8F1",
+    "#3B5279",
+    "#C5A059"
+  ],
+  "status": "coming",
+  "families": {
+    "seal": "deep",
+    "sky": "mist_top",
+    "gold": null
+  }
 }

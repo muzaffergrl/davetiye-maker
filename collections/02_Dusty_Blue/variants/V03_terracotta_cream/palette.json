@@ -1,5 +1,6 @@
 {
   "id": "V03_terracotta_cream",
+  "slug": "terracotta-cream",
   "name": "Terracotta & Cream",
   "ink": "#3A2A22",
   "deep": "#8E4A36",
@@ -9,5 +10,16 @@
   "gold": "#C29A5B",
   "gold_light": "#DFC497",
   "ivory": "#FAF5EC",
-  "leaf": "#8C9A6E"
+  "leaf": "#8C9A6E",
+  "swatch": [
+    "#FAF5EC",
+    "#C1694F",
+    "#C29A5B"
+  ],
+  "status": "coming",
+  "families": {
+    "seal": "deep",
+    "sky": "mist_top",
+    "gold": null
+  }
 }

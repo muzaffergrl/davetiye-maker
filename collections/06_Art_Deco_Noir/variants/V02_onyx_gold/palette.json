@@ -1,0 +1,24 @@
+{
+  "id": "V02_onyx_gold",
+  "slug": "onyx-gold",
+  "name": "Onyx Black & Gold",
+  "ink": "#F5EEDC",
+  "deep": "#C9A55C",
+  "primary": "#161616",
+  "mist_top": "#202020",
+  "mist_bottom": "#0C0C0C",
+  "gold": "#C9A55C",
+  "gold_light": "#E6CF8F",
+  "ivory": "#F5EEDC",
+  "leaf": "#C9A55C",
+  "swatch": [
+    "#161616",
+    "#C9A55C",
+    "#F5EEDC"
+  ],
+  "status": "coming",
+  "families": {
+    "ground": "primary",
+    "gold": null
+  }
+}

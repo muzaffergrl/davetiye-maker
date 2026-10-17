@@ -1,0 +1,222 @@
+{
+  "theme": "mediterranean-lemon",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). The cobalt majolica (tiles, ribbon, scallops, liner) and the pale blue wall wash change; lemons, blossom and leaves stay natural. cobalt / wash share a hue and are split by lightness.",
+  "families": {
+    "cobalt": {
+      "anchor": "#1D4EAA",
+      "sigma": 20,
+      "cmin": 0.03,
+      "cfull": 0.06,
+      "lmax": 0.72
+    },
+    "wash": {
+      "anchor": "#B9D5F0",
+      "sigma": 22,
+      "cmin": 0.01,
+      "cfull": 0.025,
+      "lmin": 0.72
+    }
+  },
+  "groups": {
+    "tile": [
+      "cobalt"
+    ],
+    "wash": [
+      "wash"
+    ],
+    "scene": [
+      "cobalt",
+      "wash"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "lemons, blossom, leaves: natural colours in every palette"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "lemons, blossom, leaves: natural colours in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "lemons, blossom, leaves: natural colours in every palette"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "white plaster paper: neutral"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "decor_br": {
+      "recolor": "keep",
+      "why": "lemons, blossom, leaves: natural colours in every palette"
+    },
+    "decor_tl": {
+      "recolor": "keep",
+      "why": "lemons, blossom, leaves: natural colours in every palette"
+    },
+    "divider": {
+      "recolor": "keep",
+      "why": "lemons, blossom, leaves: natural colours in every palette"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: neutral plaster"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: neutral plaster"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: neutral plaster"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "wash"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: neutral plaster"
+    },
+    "tile_flower": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "wall": {
+      "recolor": "auto",
+      "group": "wash"
+    },
+    "wall_wide": {
+      "recolor": "auto",
+      "group": "wash"
+    },
+    "wash": {
+      "recolor": "auto",
+      "group": "wash"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "tile"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "white plaster paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#1F3557",
+    "accent": "#24508F",
+    "paper": "#FFFDF7"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "cobalt",
+      "wash"
+    ],
+    "keep": [
+      "--ivory",
+      "--page",
+      "--lemon",
+      "--c-8a2e2e"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--azure-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--azure",
+        "--page",
+        4.5
+      ],
+      [
+        "--script-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--azure-ink",
+        "--ivory",
+        4.5
+      ]
+    ]
+  }
+}

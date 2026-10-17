@@ -1,0 +1,105 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 07
+   (kaynak: collections/07_Burgundy_Velvet/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3c0a14: 60 10 20;
+  --c-3c0a16: 60 10 22;
+  --c-3c140a: 60 20 10;
+  --c-46190f: 70 25 15;
+  --c-561322: 86 19 34;
+  --c-6e1f2e: 110 31 46;
+  --c-74212f: 116 33 47;
+  --c-7a2236: 122 34 54;
+  --c-9b3448: 155 52 72;
+}
+
+/* V06_dusty_rose_velvet · Dusty Rose Velvet */
+html[data-variant="dusty-rose-velvet"] {
+  --c-3c0a14: 76 29 39;
+  --c-3c0a16: 72 25 36;
+  --c-3c140a: 69 29 21;
+  --c-46190f: 89 45 39;
+  --c-561322: 110 49 65;
+  --c-6e1f2e: 138 67 85;
+  --c-74212f: 148 75 94;
+  --c-7a2236: 143 63 85;
+  --c-9b3448: 179 86 111;
+  --copper: #8E4E39;
+  --hair: rgba(151, 91, 87, 0.42);
+  --ink-soft: #734342;
+  --wine: #8A4355;
+  --wine-ink: #91485B;
+}
+
+/* V02_emerald_velvet · Emerald Velvet & Burgundy */
+html[data-variant="emerald-velvet"] {
+  --c-3c0a14: 55 26 25;
+  --c-3c0a16: 57 23 25;
+  --c-3c140a: 58 27 17;
+  --c-46190f: 63 40 29;
+  --c-561322: 74 46 40;
+  --c-6e1f2e: 91 65 54;
+  --c-74212f: 92 73 58;
+  --c-7a2236: 106 64 59;
+  --c-9b3448: 131 89 79;
+  --copper: #6C4C35;
+  --hair: rgba(81, 82, 67, 0.42);
+  --ink-soft: #4B3B30;
+  --wine: #5B4136;
+  --wine-ink: #5C493A;
+}
+
+/* V04_navy_velvet · Navy Velvet & Burgundy */
+html[data-variant="navy-velvet"] {
+  --c-3c0a14: 50 20 29;
+  --c-3c0a16: 52 18 28;
+  --c-3c140a: 56 23 18;
+  --c-46190f: 59 31 32;
+  --c-561322: 66 36 50;
+  --c-6e1f2e: 82 52 69;
+  --c-74212f: 81 57 76;
+  --c-7a2236: 98 54 73;
+  --c-9b3448: 122 77 98;
+  --copper: #6C4139;
+  --hair: rgba(79, 62, 75, 0.42);
+  --ink-soft: #452F34;
+  --wine: #523445;
+  --wine-ink: #51394C;
+}
+
+/* V03_plum_velvet · Plum Velvet */
+html[data-variant="plum-velvet"] {
+  --c-3c0a14: 57 15 30;
+  --c-3c0a16: 58 14 29;
+  --c-3c140a: 59 21 16;
+  --c-46190f: 68 28 29;
+  --c-561322: 79 28 52;
+  --c-6e1f2e: 101 42 70;
+  --c-74212f: 105 46 77;
+  --c-7a2236: 114 44 75;
+  --c-9b3448: 143 64 100;
+  --copper: #783B31;
+  --hair: rgba(105, 54, 66, 0.42);
+  --ink-soft: #532A32;
+  --wine: #652A46;
+  --wine-ink: #692E4D;
+}
+
+/* V05_rust_velvet · Rust & Copper Velvet */
+html[data-variant="rust-velvet"] {
+  --c-3c0a14: 68 19 25;
+  --c-3c0a16: 66 17 26;
+  --c-46190f: 79 35 22;
+  --c-561322: 99 33 41;
+  --c-6e1f2e: 125 48 53;
+  --c-74212f: 134 53 55;
+  --c-7a2236: 134 48 59;
+  --c-9b3448: 169 68 78;
+  --copper: #834422;
+  --hair: rgba(129, 70, 44, 0.42);
+  --ink-soft: #643428;
+  --wine: #7D3035;
+  --wine-ink: #863537;
+}
