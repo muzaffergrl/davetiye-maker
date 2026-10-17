@@ -23,7 +23,7 @@ design goes live).
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Price not decided for this design** ([PRICE]; designs 01–21 sell at 1,460 TL). Quantity: 999, Etsy's maximum (the shop's rule for every design). |
-| Design fonts and other languages | Gilda Display and Corinthia (Google Fonts). [VERIFY: latin-ext / Cyrillic coverage read from the Google Fonts CSS of these two families before the language line in GOOD TO KNOW is final] |
+| Design fonts and other languages | Bellefair and Corinthia (Google Fonts). [VERIFY: latin-ext / Cyrillic coverage read from the Google Fonts CSS of these two families before the language line in GOOD TO KNOW is final] |
 | START HERE guide | **Not produced** for this design (`python3 tools/build_customer_guides.py` once it is live). |
 | Listing images and video | **Not produced.** They must show real screens of this design with its own GPT parts (K21, docs/21), so they wait for PAKET 5 and PAKET 2. |
 

@@ -33,7 +33,7 @@ Riad'a benzememeli. Koordinatör: session_01HP9ZrJ8mhZnigbvsvUQ4pR. Dal `claude/
   durağan). RSVP gönderilince hâle parlar ve bir fener göğe yükselir. Hareket azaltmada hepsi kapalı.
 - **Sayfalar:** home (gökte kart, davet, geri sayım, takvim, fotoğraflar, alacakaranlık bandında program, imza), story,
   details (G127 harita, G138 blokları, travel, menü, registry, SSS), rsvp (G128 form, G069 misafir adları, G051 sorular),
-  teşekkür modu (G075). Fontlar Gilda Display + Corinthia (28 tasarımın hiçbirinde yok). Yeni site metni iki tane: "Under the
+  teşekkür modu (G075). Fontlar Bellefair + Corinthia (23–32 dahil hiçbir tasarımda yok; ilk seçim Gilda Display'di, 32 Music Box da onu aldığı için birleştirmede Bellefair'e geçildi). Yeni site metni iki tane: "Under the
   evening sky", "Light the lantern again" (4 dil, `lib/i18n/dict/site/*`).
 - **Demo:** Sophie & Daniel, The Meadowlark Terrace (kurgu), Santa Barbara, California, September 18, 2027; URL/medya `null`;
   demo pini Santa Barbara (başka temada yok). Program/SSS ifadeleri G150 sözlüğünde olanlar.
@@ -55,13 +55,18 @@ tozu, pirinç kâğıdı paspartu, yatay çerçeve, ayırıcı ve PAKET 2 fotoğ
 `build_images.py` `@gpt-layers` bloğuyla açar). Fener şimdilik düz kâğıt dikdörtgen: "avuçlarda fener" anı GPT parçalarıyla
 anlaşılır; satış öncesi göz kontrolü şart.
 
+### Birleştirme
+`origin/claude/zealous-fermi-hy1o40` (30 Azulejo + 32 Music Box) birleştirildi: config / designs / `DESIGN_STYLES` /
+`OPENING_THINGS` (`wall`, `lantern`) / baskı düzenleri / katalog / coming listeleri 30 → 31 → 32 sırasıyla, tema sayısı 31,
+sözlüklerde iki taraf korundu (yinelenen anahtar yok).
+
 ### Kontroller (Linux, Node 22)
-- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `npm run build` ✓ (trace-check 30 tema); `I18N_STRICT=1 npm test` — aşağıda.
+- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `npm run build` ✓ (trace-check 30 tema); `I18N_STRICT=1 npm test` **1594/1594** (birleştirmeden önce) ve birleşik dalda **1623/1623** (0 hata, 0 atlanan).
 - `theme-check --theme sky-lantern-festival --stress --compare none`: **112 geçti, 0 hata**, 12 uyarı (11 "Google font not
   loaded (Corinthia)": el yazısı kullanmayan details'te font tembel yüklenir; 1 PAKET 2 yok → 03 fotoğrafları). İlk görünüm
-  DPR 3: index 339 KB, home 298 KB (yer tutucu); fotoğraflı 428 / 804 KB. İlk koşuda 10 hata vardı (açılış sayfasında açık renk
+  DPR 3: index 335 KB, home 295 KB (yer tutucu); fotoğraflı 425 / 801 KB. İlk koşuda 10 hata vardı (açılış sayfasında açık renk
   "Tap to open"/"Replay" parlak kehribar ufkun üstünde) → göğün altına alacakaranlık geçişi (CSS ışık) eklendi, ikinci koşu
-  temiz.
+  temiz; birleştirme + font değişikliğinden sonra üçüncü koşu da 112/0.
 - `python3 tools/gpt_kuru_deneme.py --tema sky-lantern-festival --sekil …/kuru_sekil.json`: **GEÇTİ** 12/14 (okunmayan yalnız
   PAKET 6, bilerek elle).
 - `python3 tools/katalog.py kontrol` ✓; `copy-manifest --check` ✓; `node scripts/i18n-missing.ts` 0 eksik; `validate_content.py` ✓.

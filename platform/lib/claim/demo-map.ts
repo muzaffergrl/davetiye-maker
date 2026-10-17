@@ -8,6 +8,7 @@ import type { ContentRecord } from '../content/types.ts';
 /** theme id -> centre of its demo city (WGS 84). */
 export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number }>> = {
   'art-deco-black-tie': { lat: 41.8781, lng: -87.6298 }, // Chicago
+  'azulejo-mosaic': { lat: 38.8029, lng: -9.3817 }, // Sintra, Portugal
   'blush-garden-rose': { lat: 32.0809, lng: -81.0912 }, // Savannah
   'boho-pampas-terracotta': { lat: 34.1347, lng: -116.3131 }, // Joshua Tree
   'burgundy-velvet-autumn': { lat: 35.5951, lng: -82.5515 }, // Asheville
@@ -22,6 +23,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'lavender-provence': { lat: 43.9116, lng: 5.2003 }, // Gordes
   'maison-patisserie': { lat: 32.0809, lng: -81.0912 }, // Savannah, GA
   'mediterranean-lemon': { lat: 40.6263, lng: 14.3758 }, // Sorrento
+  'music-box-ballerina': { lat: 43.0831, lng: -73.7846 }, // Saratoga Springs, NY (the pavilion is fictional)
   'midnight-garden': { lat: 29.9511, lng: -90.0715 }, // New Orleans
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)
   'orient-express-voyage': { lat: 45.4408, lng: 12.3155 }, // Venice

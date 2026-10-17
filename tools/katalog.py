@@ -441,12 +441,24 @@ EK_TEMALAR = [
          font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
          hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
     # docs/24 2. dalga (29–32)
+    dict(no=30, klasor="30_Azulejo_Mosaic", ad="Azulejo Mosaic",
+         zarf="Mavi-beyaz el boyaması azulejo çini paneli (4 × 6; köşe, bordür, alan çinileri); dokunulan çiniden başlayan dalgayla çiniler tek tek 3B döner, arkadaki kart çıkar.",
+         foto="Çini mozaiği: fotoğraf küçük çinilerin altında bekler, sahnesine gelince çiniler çapraz dalgayla dönüp kalkar.",
+         dekor="Kobalt azulejo desenleri, terrakota saksılar, badana sıva, çini friz", teknik="el boyaması seramik",
+         font=("Arizonia", "Cormorant Upright"), palet_adi="cobalt-white-terracotta",
+         hareket="Karo karo 3B çevirme ızgarası: dokunulan noktadan yayılan dalga, her çini terrakota sırtını gösterip kalkar; fotoğraflar çini mozaiğiyle açılır; RSVP teşekkürü çinilerle belirir; metin çini gibi üst kenarından yatarak yerleşir."),
     dict(no=31, klasor="31_Sky_Lantern_Festival", ad="Sky Lantern Festival",
          zarf="Avuçlarda tutulan pirinç kâğıdı dilek feneri; dokununca ışır, eller bırakır, fener alacakaranlık göğüne yükselir, ışığında kart belirir.",
          foto="Yükselen fenerlerin ışığında beliren fotoğraflar: küçük bir fener yanından geçer, ışığı fotoğrafı alttan açar; fener yolu boyunca sol–sağ–sol.",
          dekor="Pirinç kâğıdı fenerler, alacakaranlık gökyüzü, yıldız tozu", teknik="suluboya + ışık",
-         font=("Corinthia", "Gilda Display"), palet_adi="dusk-amber-violet",
+         font=("Corinthia", "Bellefair"), palet_adi="dusk-amber-violet",
          hareket="Fener yükselişi (paralaks katmanlar: gök, yıldız tozu, uzak fenerler), sıcak ışık hâlesi, kaydırmayla süzülen fenerler, programda sırayla yanan fenerler, RSVP'de göğe bırakılan tek fener"),
+    dict(no=32, klasor="32_Music_Box_Ballerina", ad="Music Box Ballerina",
+         zarf="Gül kuvarsı lake müzik kutusu, yan tarafta pirinç kurma anahtarı; anahtar döner, kapak arka menteşede kalkar, aynalı iç kapak dikilir, balerin yükselip yavaşça döner, kart öne gelir.",
+         foto="Kapağın oval aynasında yansıyan fotoğraflar: tek tek, cam üstünde ışık parıltısıyla değişir; balerin her fotoğrafta çeyrek döner.",
+         dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
+         font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
+         hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

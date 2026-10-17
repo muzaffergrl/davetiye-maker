@@ -18,9 +18,9 @@ the second 29–32 wave (docs/24 row 31, G170), built **before its GPT parts exi
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Santa Barbara), G138
 blocks (`data-blocks`, `data-travel`, `data-menu`), music + opening sounds (`lib/audio/catalog.ts`: First Light; tap 0 · paper
 700 · whoosh 900 · slide 2000 · chime 3200 ms), calendar, thank-you mode, editable texts, languages (G144: the only new site
-texts "Under the evening sky" and "Light the lantern again" are in the four site dictionaries). Fonts: Gilda Display (headings,
-body, capitals) and Corinthia (names, the "&", a few script lines) — Google Fonts, no font files; neither is used by the
-other 28 designs. Printable invitation (G139): `lib/print/layouts.ts` `composed` (cotton paper + the theme's dusk band and one
+texts "Under the evening sky" and "Light the lantern again" are in the four site dictionaries). Fonts: Bellefair (headings,
+body, capitals) and Corinthia (names, the "&", a few script lines) — Google Fonts, no font files; neither is used by any
+other design (23–32 included). Printable invitation (G139): `lib/print/layouts.ts` `composed` (cotton paper + the theme's dusk band and one
 lantern) until PAKET 6.
 
 ## Opening (docs/24 row 31 — a lantern lift-off)

@@ -923,7 +923,29 @@ const dict: Dict = {
   "Color palette": "Farbpalette",
   "Live demo in {name}": "Live-Demo in {name}",
   "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Ja, innerhalb des Designs: {name} gibt es in den Originalfarben und in {n} weiteren Paletten, jeweils mit passend gemaltem {thing}, Karten und Rahmen. Sie wählen eine Palette beim Start und können sie jederzeit in Ihrem Editor wechseln; Ihre Texte und Fotos bleiben, wie sie sind.",
+  // G169 Azulejo Mosaic
+  'A wall of blue-and-white azulejo tiles that turn over one by one, terracotta and whitewash, and photos revealed tile by tile': 'Eine Wand aus blau-weißen Azulejo-Fliesen, die sich eine nach der anderen umdrehen, Terrakotta und Kalkweiß, und Fotos, die Fliese für Fliese erscheinen',
+  'A wall of painted azulejo tiles turns over, tile by tile, into your wedding website. Personalize it in your online editor.': 'Eine Wand aus bemalten Azulejo-Fliesen dreht sich Fliese für Fliese um und wird zu Ihrer Hochzeitswebsite. Gestalten Sie sie in Ihrem Online-Editor.',
+  'A white reply card under a frieze of tiles; when a reply is sent, the thank-you is revealed tile by tile.': 'Eine weiße Antwortkarte unter einem Fliesenfries; ist eine Antwort gesendet, erscheint der Dank Fliese für Fliese.',
+  'Cobalt and white painted tiles, warm terracotta and sunlit whitewash. Your invitation waits behind a wall of azulejos, and every photo is uncovered tile by tile.': 'Bemalte Fliesen in Kobalt und Weiß, warme Terrakotta und sonniges Kalkweiß. Ihre Einladung wartet hinter einer Wand aus Azulejos, und jedes Foto wird Fliese für Fliese enthüllt.',
+  'Night blue': 'Nachtblau',
+  'The order of the day on a white card, a venue photo uncovered tile by tile, an optional map, dress code, travel and questions and answers.': 'Der Tagesablauf auf einer weißen Karte, ein Foto des Ortes, das Fliese für Fliese erscheint, eine optionale Karte, Dresscode, Anreise sowie Fragen und Antworten.',
+  'Three photos, each hidden under a small mosaic of tiles that turn over in a wave as guests scroll to it.': 'Drei Fotos, jedes unter einem kleinen Fliesenmosaik verborgen, das sich wie eine Welle umdreht, sobald die Gäste dorthin scrollen.',
+  'Whitewash': 'Kalkweiß',
+  'Your guests tap the wall. The blue-and-white tiles turn over one by one in a wave that starts where they touched, each showing its terracotta back as it lifts away. The card that was behind them comes forward to become your home page.': 'Ihre Gäste tippen auf die Wand. Die blau-weißen Fliesen drehen sich eine nach der anderen um, in einer Welle, die dort beginnt, wo getippt wurde, und jede zeigt beim Abheben ihre Rückseite aus Terrakotta. Die Karte dahinter kommt nach vorn und wird zu Ihrer Startseite.',
+  'Your portrait and names on a card on the cobalt wall, a frieze of tiles, then the invitation, a countdown and calendar links.': 'Ihr Porträt und Ihre Namen auf einer Karte an der kobaltblauen Wand, ein Fliesenfries, dann die Einladung, ein Countdown und Kalenderlinks.',
+  'wall': 'Wand',
   'lantern': 'Laterne',
+  // G171 Music Box Ballerina
+  'A rose-quartz music box with a brass wind-up key, a little ballerina and your photos in its oval mirror': 'Eine rosenquarzfarbene Spieluhr mit Aufziehschlüssel aus Messing, einer kleinen Ballerina und Ihren Fotos im ovalen Spiegel',
+  'A rose-quartz music box opens into your wedding website: a ballerina turns and your photos appear in its mirror. Personalize it in your online editor.': 'Eine rosenquarzfarbene Spieluhr öffnet sich zu Ihrer Hochzeitswebsite: Eine Ballerina dreht sich und Ihre Fotos erscheinen im Spiegel. Gestalten Sie sie in Ihrem Online-Editor.',
+  'Rose quartz, blush satin and soft gold, like a keepsake music box. Your invitation waits inside, a little ballerina turns, and your photos appear in the mirror of the lid.': 'Rosenquarz, zartrosa Satin und sanftes Gold, wie eine Spieluhr zum Aufbewahren. Ihre Einladung wartet darin, eine kleine Ballerina dreht sich, und Ihre Fotos erscheinen im Spiegel des Deckels.',
+  'Your guests tap the box. The brass key turns, the lid swings up and its mirror shows your portrait, a ballerina rises and turns slowly while a few rose petals drift down, and a separate card comes forward to become your home page.': 'Ihre Gäste tippen auf die Spieluhr. Der Messingschlüssel dreht sich, der Deckel klappt auf und sein Spiegel zeigt Ihr Porträt, eine Ballerina hebt sich und dreht sich langsam, während ein paar Rosenblätter herabschweben, und eine eigene Karte kommt nach vorn und wird zu Ihrer Startseite.',
+  'The card from the music box with your names and date, then the invitation beside your portrait in an oval mirror, a countdown and calendar links.': 'Die Karte aus der Spieluhr mit Ihren Namen und dem Datum, dann die Einladung neben Ihrem Porträt in einem ovalen Spiegel, ein Countdown und Kalenderlinks.',
+  'Your three photos appear one at a time in the music box mirror: guests swipe or tap the arrows, and the little ballerina turns with each photo.': 'Ihre drei Fotos erscheinen nacheinander im Spiegel der Spieluhr: Die Gäste wischen oder tippen auf die Pfeile, und die kleine Ballerina dreht sich mit jedem Foto.',
+  'The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.': 'Der Tagesablauf auf zartrosa Satin neben dem Foto der Location, eine optionale Karte, Dresscode, Anreise und das Menü.',
+  'A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.': 'Eine Antwortkarte auf zartrosa Satin; wenn eine Antwort gesendet wird, schweben ein paar Rosenblätter herab und die Ballerina dreht sich einmal.',
+  'Rose quartz': 'Rosenquarz',
 };
 
 export default dict;

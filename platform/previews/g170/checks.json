@@ -19,7 +19,7 @@
  "passed": [
   "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
   "editable texts (G068): 86 copy keys = theme.json \"copy\", no unmarked visible text",
-  "fonts: Google Fonts link with 2 families (Corinthia, Gilda Display), display=swap",
+  "fonts: Google Fonts link with 2 families (Bellefair, Corinthia), display=swap",
   "seed: 5 sample photos uploaded to the demo site (collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback)))",
   "index@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
   "home@360: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
@@ -73,8 +73,8 @@
   "home@360×640 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
   "home @375×553 (stress record): names 30 px (≥ 30); the first screen ends at 489, above the nav (top 492)",
   "home@375×553 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
-  "touch targets ≥ 44 px: envelope Skip 64×44, home \"Replay the envelope\" 233×44, rsvp \"Replay the envelope\" 184×44",
-  "envelope → /sophie-and-daniel/home in 3927 ms, card transition flag set",
+  "touch targets ≥ 44 px: envelope Skip 62×44, home \"Replay the envelope\" 221×44, rsvp \"Replay the envelope\" 174×44",
+  "envelope → /sophie-and-daniel/home in 3923 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (1 steps)",
   "countdown target from the platform: 2027-09-18 18:30 America/Los_Angeles = 2027-09-19 01:30 UTC",
@@ -96,7 +96,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-09-19T02:30:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-09-24T01:30:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (174 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (190 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
@@ -124,11 +124,11 @@
   "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
   "rsvp@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
   "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 86 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
-  "index first view (390×844, DPR 3, placeholders): 339 KB",
-  "home first view (390×844, DPR 3, placeholders): 298 KB",
-  "index first view (390×844, DPR 3, seeded sample photos): 428 KB",
-  "home first view (390×844, DPR 3, seeded sample photos): 804 KB",
-  "recording: previews/g170/opening_390x844.mp4 (2111 KB, lead-in 0.49 s cut, first frame mean 85,58,92) — tap → opening → home → story → details"
+  "index first view (390×844, DPR 3, placeholders): 335 KB",
+  "home first view (390×844, DPR 3, placeholders): 295 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 425 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 801 KB",
+  "recording: ../../../../tmp/claude-0/-home-user-davetiye-maker/010eeb13-ac1b-511d-aaad-e21ab6205fde/scratchpad/g170b/opening_390x844.mp4 (2097 KB, lead-in 0.50 s cut, first frame mean 86,58,92) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -140,8 +140,8 @@
    "checks_table": "img/manifest.json theme_check",
    "cards": "auto (no free_zone in img/manifest.json)",
    "fonts": [
-    "Corinthia",
-    "Gilda Display"
+    "Bellefair",
+    "Corinthia"
    ]
   },
   "thank_you": "complete",
@@ -164,7 +164,7 @@
     "boxes": [
      {
       "box": "eyebrow",
-      "edge": 0.9,
+      "edge": 0.92,
       "dark": 0
      },
      {
@@ -179,7 +179,7 @@
      },
      {
       "box": "eyebrow tap-hint",
-      "edge": 0.49,
+      "edge": 0.48,
       "dark": 0
      }
     ]
@@ -201,7 +201,7 @@
     "boxes": [
      {
       "box": "eyebrow",
-      "edge": 1.1,
+      "edge": 1.13,
       "dark": 0
      },
      {
@@ -211,12 +211,12 @@
      },
      {
       "box": "opening-date eyebrow",
-      "edge": 1.76,
+      "edge": 1.77,
       "dark": 0
      },
      {
       "box": "eyebrow tap-hint",
-      "edge": 0.47,
+      "edge": 0.46,
       "dark": 0
      }
     ]
@@ -253,7 +253,7 @@
      },
      {
       "box": "eyebrow tap-hint",
-      "edge": 0.45,
+      "edge": 0.46,
       "dark": 0
      }
     ]
@@ -275,7 +275,7 @@
     "boxes": [
      {
       "box": "eyebrow",
-      "edge": 0.79,
+      "edge": 0.8,
       "dark": 0
      },
      {
@@ -285,12 +285,12 @@
      },
      {
       "box": "opening-date eyebrow",
-      "edge": 1.09,
+      "edge": 1.08,
       "dark": 0
      },
      {
       "box": "eyebrow tap-hint",
-      "edge": 0.49,
+      "edge": 0.5,
       "dark": 0
      }
     ]
@@ -406,8 +406,8 @@
     "partly": [
      "div.hero-card 26–388",
      "small \"The Meadowlark Terrace ·\" 318–356",
-     "span \"The Meadowlark Terrace\" 320–334",
-     "span \"Santa Barbara, Californi\" 320–353"
+     "span \"The Meadowlark Terrace\" 321–334",
+     "span \"Santa Barbara, Californi\" 321–353"
     ],
     "names": 66
    },
@@ -559,15 +559,15 @@
     "screen": 390,
     "bottomNav": true,
     "items": 14,
-    "lowest": 753,
+    "lowest": 733,
     "above": 0,
     "below": 451,
     "cta": {
      "text": "A celebration to rem",
-     "bottom": 753
+     "bottom": 733
     },
     "bad": [
-     "div.hero-card bottom 683",
+     "div.hero-card bottom 663",
      "div.hero-photo.photo-slot bottom 348",
      "p.eyebrow \"Our wedding\" bottom 382",
      "span \"Charlotte-Elizabeth Anne\" bottom 446",
@@ -576,14 +576,14 @@
      "span \"Saturday, September 18, \" bottom 562",
      "span \"Saturday\" bottom 559",
      "span.nowrap \"September 18, 2027\" bottom 559",
-     "small \"The Grand Rosewater Cons\" bottom 643",
+     "small \"The Grand Rosewater Cons\" bottom 623",
      "span \"The Grand Rosewater Cons\" bottom 620",
-     "span \"Santa Barbara, Californi\" bottom 639",
-     "a.btn.btn-ghost bottom 753",
-     "span \"A celebration to remembe\" bottom 738"
+     "span \"Santa Barbara, Californi\" bottom 620",
+     "a.btn.btn-ghost bottom 733",
+     "span \"A celebration to remembe\" bottom 719"
     ],
     "partly": [
-     "div.hero-card 58–683",
+     "div.hero-card 58–663",
      "div.hero-photo.photo-slot 94–348",
      "p.eyebrow \"Our wedding\" 362–382",
      "span \"Charlotte-Elizabeth Anne\" 386–446"
@@ -599,29 +599,29 @@
     "screen": 375,
     "bottomNav": true,
     "items": 12,
-    "lowest": 511,
+    "lowest": 492,
     "above": 311,
     "below": 375,
     "cta": null,
     "bad": [
-     "div.hero-card bottom 511",
+     "div.hero-card bottom 492",
      "span \"Maximilian Alexander Fit\" bottom 372",
      "span \"Saturday, September 18, \" bottom 398",
      "span \"Saturday\" bottom 395",
      "span.nowrap \"September 18, 2027\" bottom 395",
-     "small \"The Grand Rosewater Cons\" bottom 479",
+     "small \"The Grand Rosewater Cons\" bottom 460",
      "span \"The Grand Rosewater Cons\" bottom 456",
-     "span \"Santa Barbara, Californi\" bottom 476"
+     "span \"Santa Barbara, Californi\" bottom 456"
     ],
     "partly": [
-     "div.hero-card 26–511",
+     "div.hero-card 26–492",
      "span \"Maximilian Alexander Fit\" 312–372",
      "span \"Saturday, September 18, \" 374–398"
     ],
     "names": 30
    }
   ],
-  "envelope_to_home_ms": 3927,
+  "envelope_to_home_ms": 3923,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -698,7 +698,7 @@
    "copy_keys_at_max": 86,
    "thank_you": true
   },
-  "first_view_index_kb_placeholders": 339,
+  "first_view_index_kb_placeholders": 335,
   "first_view_index_files": [
    [
     "/themes/sky-lantern-festival/img/sky-1080.webp",
@@ -721,8 +721,8 @@
     20276
    ],
    [
-    "https://fonts.gstatic.com/s/gildadisplay/v20/t5tmIRoYMoaYG0WEOh7HwMeR3T7Prw.woff2",
-    20204
+    "https://fonts.gstatic.com/s/bellefair/v15/kJExBuYY6AAuhiXUxG1N-Po3.woff2",
+    16536
    ],
    [
     "/audio/fx/chime.mp3",
@@ -733,7 +733,7 @@
     10455
    ]
   ],
-  "first_view_home_kb_placeholders": 298,
+  "first_view_home_kb_placeholders": 295,
   "first_view_home_files": [
    [
     "/themes/sky-lantern-festival/img/sky-1080.webp",
@@ -752,12 +752,12 @@
     28972
    ],
    [
-    "https://fonts.gstatic.com/s/gildadisplay/v20/t5tmIRoYMoaYG0WEOh7HwMeR3T7Prw.woff2",
-    20204
+    "https://fonts.gstatic.com/s/bellefair/v15/kJExBuYY6AAuhiXUxG1N-Po3.woff2",
+    16536
    ],
    [
     "/no-photos/home",
-    15326
+    15322
    ],
    [
     "/themes/sky-lantern-festival/site.css",
@@ -768,10 +768,10 @@
     5535
    ]
   ],
-  "first_view_index_kb_photos": 428,
+  "first_view_index_kb_photos": 425,
   "first_view_index_files_photos": [
    [
-    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/9189c34361bc4b28d7862f1b4fc2d054-640w.jpg",
+    "/media/8a200fd8-9179-444a-8364-19f8f5a9707d/20d90057ae37446c472ca4e848e851c1-640w.jpg",
     93978
    ],
    [
@@ -795,30 +795,30 @@
     20276
    ],
    [
-    "https://fonts.gstatic.com/s/gildadisplay/v20/t5tmIRoYMoaYG0WEOh7HwMeR3T7Prw.woff2",
-    20204
+    "https://fonts.gstatic.com/s/bellefair/v15/kJExBuYY6AAuhiXUxG1N-Po3.woff2",
+    16536
    ],
    [
     "/audio/fx/chime.mp3",
     10924
    ]
   ],
-  "first_view_home_kb_photos": 804,
+  "first_view_home_kb_photos": 801,
   "first_view_home_files_photos": [
    [
-    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/9189c34361bc4b28d7862f1b4fc2d054-1024w.jpg",
+    "/media/8a200fd8-9179-444a-8364-19f8f5a9707d/20d90057ae37446c472ca4e848e851c1-1024w.jpg",
     198076
    ],
    [
-    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/e0774aa9327966e92b4c7a445f1a0420-640w.jpg",
+    "/media/8a200fd8-9179-444a-8364-19f8f5a9707d/b0ff473ec8815c64983ac4ebe576cd68-640w.jpg",
     118102
    ],
    [
-    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/48d6c0316721cd4587afaefe86f3b5f6-640w.jpg",
+    "/media/8a200fd8-9179-444a-8364-19f8f5a9707d/4b699afc4941cdc6820d538def452242-640w.jpg",
     110158
    ],
    [
-    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/084068485e44cadd917f5ad4a0f69cf4-640w.jpg",
+    "/media/8a200fd8-9179-444a-8364-19f8f5a9707d/c97df6c720155c07d71b852bdf4b7b72-640w.jpg",
     94091
    ],
    [
@@ -838,11 +838,11 @@
     28972
    ]
   ],
-  "video_kb": 2111,
+  "video_kb": 2097,
   "video_first_frame": {
-   "lead_in_s": 0.49,
+   "lead_in_s": 0.5,
    "mean_rgb": [
-    85,
+    86,
     58,
     92
    ],

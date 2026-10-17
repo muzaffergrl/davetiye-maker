@@ -1341,6 +1341,16 @@ const dict: Dict = {
   "The color palette could not be changed. Please try again.": "Renk paleti değiştirilemedi. Lütfen tekrar deneyin.",
   "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "Aynı tasarım, başka renklerde. Seçiminiz web sitenizde hemen görünür; metinleriniz ve fotoğraflarınız değişmez.",
   "You can change the colors later in your editor.": "Renkleri daha sonra düzenleyicinizde değiştirebilirsiniz.",
+  // G169 Azulejo Mosaic
+  'Above your names on the wall': 'Duvarda isimlerinizin üstünde',
+  'Button after the wall opens': 'Duvar açıldıktan sonraki düğme',
+  'Open the wall again (RSVP page)': 'Duvarı yeniden aç (Katılım sayfası)',
+  'Open the wall again (home page)': 'Duvarı yeniden aç (ana sayfa)',
+  'Open the wall again (wall page)': 'Duvarı yeniden aç (duvar sayfası)',
+  'Under the wall, on computers': 'Duvarın altında, bilgisayarlarda',
+  'Under the wall, on phones': 'Duvarın altında, telefonlarda',
+  'Wall': 'Duvar',
+  'wall': 'duvar',
   'lantern': 'fener',
 };
 

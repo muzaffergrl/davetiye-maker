@@ -288,6 +288,12 @@ const dict: Dict = {
   'Tonight\'s programme': 'Bu akşamın programı',
   'You are invited to a premiere': 'Bir galaya davetlisiniz',
   'Your seat is saved. We look forward to the evening together.': 'Yeriniz ayrıldı. O akşamı birlikte geçirmeyi dört gözle bekliyoruz.',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Çini çini döşendi, sevgiyle gönderildi',
+  // G171 Music Box Ballerina
+  'Turn the key': 'Anahtarı çevirin',
+  'Wind the music box again': 'Müzik kutusunu yeniden kurun',
+  'Reflections': 'Yansımalar',
 };
 
 export default dict;

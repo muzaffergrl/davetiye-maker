@@ -15,7 +15,7 @@ kostüm, kalabalık yok); fener sade, yuvarlak hatlı, desensiz.
 | Fotoğraf sunumu | Fener yolu: fotoğraflar karanlıkta bekler, küçük bir fener yanından yükselir ve ışığı fotoğrafı alttan yukarı açar (yumuşak ışık dairesi büyür); telefonda sol–sağ–sol, geniş ekranda üçlü (ortadaki yukarıda) |
 | Dekor ailesi | Pirinç kâğıdı fenerler, alacakaranlık gökyüzü, yıldız tozu |
 | Teknik | suluboya + ışık |
-| Font | Corinthia (isimler, el yazısı) + Gilda Display (başlık, gövde, büyük harf etiketler) — Google Fonts, pakete konmaz; 28 tasarımın hiçbirinde yok |
+| Font | Corinthia (isimler, el yazısı) + Bellefair (başlık, gövde, büyük harf etiketler) — Google Fonts, pakete konmaz; 23–32 dahil hiçbir tasarımda yok (Gilda Display ilk seçimdi; 32 Music Box da onu aldığı için birleştirmede değiştirildi) |
 | Ana palet | dusk violet `#2B1F45` · deep `#1B1430` · lantern amber `#F2A65A` · glow `#FFD08A` · dusky rose `#E7B4A6` · rice paper `#F7EEDD` · ink `#3B2A4A` |
 | Hareket imzası | fener yükselişi (paralaks katmanlar: gök, yıldız tozu, uzak fenerler) · sıcak ışık hâlesi (nefes alır gibi) · kaydırdıkça süzülen birkaç fener (az, hafif; hareket azaltmada yok) · programda satır satır yanan fenerler · RSVP'de göğe bırakılan tek fener |
 
