@@ -83,6 +83,7 @@ function metaFrom(body: Record<string, unknown>, fallback: PanelMeta): PanelMeta
     previewToken: typeof body.previewToken === 'string' && body.previewToken ? body.previewToken : fallback.previewToken,
     orderPending: typeof body.orderPending === 'boolean' ? body.orderPending : fallback.orderPending,
     guestAccess: guestAccessFrom(body.guestAccess) ?? fallback.guestAccess,
+    variant: typeof body.variant === 'string' || body.variant === null ? (body.variant as string | null) : fallback.variant,
   };
 }
 
@@ -136,6 +137,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     previewToken: initial.previewToken,
     orderPending: initial.orderPending,
     guestAccess: initial.guestAccess ?? NO_GUEST_ACCESS,
+    variant: initial.variant ?? null,
   });
   const [saveState, setSaveState] = useState<SaveState>('saved');
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
@@ -381,6 +383,24 @@ export function usePanel(initial: PanelState, editKey: string) {
     [api, enqueue],
   );
 
+  /**
+   * G153: the design's colour palette (POST /variant; null = the original colours). In the save queue like the guest
+   * password (it changes updatedAt); applies at once to the preview and the live website, the content is not touched.
+   */
+  const setVariant = useCallback(
+    async (variant: string | null): Promise<{ ok: boolean; message?: string }> => {
+      const res = await enqueue(() => api.variant(variant));
+      const body = res.body as Record<string, unknown> & { code?: string; message?: string };
+      if (res.ok) {
+        setPreviewVersion((n) => n + 1);
+        return { ok: true };
+      }
+      stopOn(res.status, body);
+      return { ok: false, message: res.status === 0 ? t('No connection. Please try again when you are back online.') : body.message };
+    },
+    [api, enqueue],
+  );
+
   const uploadPhoto = useCallback(
     async (slot: PanelPhotoSlot, blob: Blob): Promise<{ ok: boolean; message?: string }> => {
       if (stopped.current) return { ok: false, message: saveMessage ?? t('Saving is paused. Please reload the page.') };
@@ -583,6 +603,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     unpublish,
     changeIdentity,
     setGuestAccess,
+    setVariant,
     uploadPhoto,
     uploadMusic,
     removePhoto,

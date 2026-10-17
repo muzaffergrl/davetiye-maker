@@ -16,6 +16,7 @@ import { uiLocale } from '../../lib/i18n/server.ts';
 import { makeTranslator } from '../../lib/i18n/translate.ts';
 import { themeOpenForClaims } from '../../lib/themes/approval.ts';
 import { offeredThemes } from '../../lib/themes/offered.ts';
+import { resolveVariant } from '../../lib/theme/variants.ts';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,9 +34,10 @@ type Props = { searchParams: Promise<Record<string, string | string[] | undefine
 
 export default async function MyPage({ searchParams }: Props) {
   const { lang, dict } = await uiLocale();
-  const { theme } = await searchParams;
+  const { theme, variant } = await searchParams;
   const found = typeof theme === 'string' && theme ? await claimableTheme(theme) : null;
-  const startTheme = found && themeOpenForClaims(found.id) ? { id: found.id, name: found.name } : null;
+  // G153: /my?theme=<id>&variant=<palette> hands a live colour palette on to /start
+  const startTheme = found && themeOpenForClaims(found.id) ? { id: found.id, name: found.name, variant: resolveVariant(found.manifest.variants, variant) } : null;
   return (
     <div className={PANEL_FONTS}>
       <DocumentLang lang={lang} />

@@ -20,6 +20,7 @@ import {
 import { isAvailableSlugShape } from './slug.ts';
 import { copyIssues } from './theme/copy.ts';
 import { loadTheme } from './theme/theme.ts';
+import { resolveVariant } from './theme/variants.ts';
 
 export class InvalidSlugError extends Error {
   constructor(slug: string) {
@@ -104,14 +105,16 @@ export interface CreatedSite {
 /** Creates a draft site with fresh keys. Throws InvalidSlugError, UnknownThemeError, ContentInvalidError, SlugTakenError. */
 export async function createSiteWithKeys(adapter: DataAdapter, input: CreateSiteInput): Promise<CreatedSite> {
   if (!isAvailableSlugShape(input.slug)) throw new InvalidSlugError(input.slug);
-  if (!(await loadTheme(input.theme))) throw new UnknownThemeError(input.theme);
+  const theme = await loadTheme(input.theme);
+  if (!theme) throw new UnknownThemeError(input.theme);
   const result = validateContent(input.content);
   if (!result.ok) throw new ContentInvalidError(result.errors);
   const keys = newSiteKeys();
   const site = await adapter.createSite({
     slug: input.slug,
     theme: input.theme,
-    variant: input.variant ?? null,
+    // G153: only a palette buyers can pick (live); anything else starts with the original
+    variant: resolveVariant(theme.manifest.variants, input.variant),
     content: input.content,
     editKeyHash: keys.editKeyHash,
     previewKeyHash: keys.previewKeyHash,

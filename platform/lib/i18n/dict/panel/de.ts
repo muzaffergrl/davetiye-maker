@@ -1285,6 +1285,12 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Bestellnummer und E-Mail-Adresse sind auf der nächsten Seite schon eingetragen.',
   'since {date}': 'seit {date}',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} lässt sich auf diesem Gerät nicht mehr öffnen, daher haben wir es entfernt. Geben Sie unten Bestellnummer und E-Mail-Adresse ein, um es wieder zu öffnen.|{addresses} lassen sich auf diesem Gerät nicht mehr öffnen, daher haben wir sie entfernt. Geben Sie unten Bestellnummer und E-Mail-Adresse ein, um sie wieder zu öffnen.',
+  "Color palette": "Farbpalette",
+  "Original": "Original",
+  "Color palette changed. Your texts and photos stay as they are.": "Farbpalette geändert. Ihre Texte und Fotos bleiben, wie sie sind.",
+  "The color palette could not be changed. Please try again.": "Die Farbpalette konnte nicht geändert werden. Bitte versuchen Sie es erneut.",
+  "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "Dasselbe Design in anderen Farben. Ihre Änderung erscheint sofort auf Ihrer Website; Ihre Texte und Fotos bleiben unverändert.",
+  "You can change the colors later in your editor.": "Sie können die Farben später in Ihrem Editor ändern.",
 };
 
 export default dict;

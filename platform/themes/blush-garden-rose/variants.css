@@ -1,0 +1,95 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 03
+   (kaynak: collections/03_Blush_Garden_Rose/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3f2a2e: 63 42 46;
+  --c-5e4146: 94 65 70;
+  --c-8b505a: 139 80 90;
+  --c-9b2c3a: 155 44 58;
+  --c-9b5d66: 155 93 102;
+  --c-c8a46e: 200 164 110;
+  --c-eed7d6: 238 215 214;
+}
+
+/* V04_champagne_ivory · Champagne & Ivory */
+html[data-variant="champagne-ivory"] {
+  --c-3f2a2e: 68 53 43;
+  --c-5e4146: 98 80 63;
+  --c-8b505a: 112 82 53;
+  --c-9b2c3a: 112 66 0;
+  --c-9b5d66: 125 94 64;
+  --c-c8a46e: 199 168 116;
+  --c-eed7d6: 246 235 223;
+  --deep: #7D5E40;
+  --ink: #44352B;
+  --ink-soft: #62503F;
+  --mist-bottom: #F4E3D1;
+  --page: #FAEDDF;
+  --primary: #D2B496;
+}
+
+/* V06_dusty_blue_blush · Dusty Blue & Blush */
+html[data-variant="dusty-blue-blush"] {
+  --c-5e4146: 88 69 74;
+  --c-8b505a: 130 86 95;
+  --c-9b2c3a: 137 65 75;
+  --c-9b5d66: 146 99 108;
+  --c-c8a46e: 198 165 119;
+  --c-eed7d6: 229 219 221;
+  --deep: #92636C;
+  --ink-soft: #58454A;
+  --mist-bottom: #E4D4D7;
+  --page: #E8DDDF;
+  --primary: #D5B0B6;
+}
+
+/* V05_dusty_mauve · Dusty Mauve */
+html[data-variant="dusty-mauve"] {
+  --c-3f2a2e: 55 40 48;
+  --c-5e4146: 84 63 74;
+  --c-8b505a: 98 62 82;
+  --c-9b2c3a: 103 34 68;
+  --c-9b5d66: 112 73 93;
+  --c-eed7d6: 230 213 218;
+  --deep: #70495D;
+  --ink: #372830;
+  --ink-soft: #543F4A;
+  --mist-bottom: #E4CDD6;
+  --page: #E9D6DC;
+  --primary: #C49CAE;
+}
+
+/* V03_lilac_gold · Lilac & Gold */
+html[data-variant="lilac-gold"] {
+  --c-3f2a2e: 52 46 60;
+  --c-5e4146: 78 71 92;
+  --c-8b505a: 86 71 109;
+  --c-9b2c3a: 85 48 113;
+  --c-9b5d66: 98 83 121;
+  --c-c8a46e: 202 164 119;
+  --c-eed7d6: 230 221 235;
+  --deep: #625379;
+  --ink: #342E3C;
+  --ink-soft: #4E475C;
+  --mist-bottom: #E0D6EB;
+  --page: #E8DFEF;
+  --primary: #B7A7CC;
+}
+
+/* V02_peach_cream · Peach & Cream */
+html[data-variant="peach-cream"] {
+  --c-3f2a2e: 67 43 35;
+  --c-5e4146: 100 66 53;
+  --c-8b505a: 124 65 43;
+  --c-9b2c3a: 134 29 0;
+  --c-9b5d66: 138 77 53;
+  --c-eed7d6: 244 221 208;
+  --deep: #8A4D35;
+  --ink: #432B23;
+  --ink-soft: #644235;
+  --mist-bottom: #F6D3C3;
+  --page: #F8DECF;
+  --primary: #DEA288;
+}

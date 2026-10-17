@@ -171,6 +171,8 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     sample: (await claimableTheme(m.id))?.demo ?? null,
     color: themeColor(pages.find(([p]) => p === 'index')?.[1]),
     shareImage: theme.share.ogImage ? themeAssetUrl(m.id, theme.share.ogImage) : null,
+    variants: m.variants.map((v) => ({ id: v.id, name: v.name, swatch: [...v.swatch], live: v.status === 'live' })),
+    swatch: m.swatch ? [...m.swatch] : null,
   };
 }
 
@@ -186,6 +188,7 @@ export function panelMeta(site: SiteRecord, now: Date = new Date()): PanelMeta {
     orderPending: orderPending(site),
     // The couple's own password (shown in Share); the cookie secret and version stay on the server.
     guestAccess: guestAccessView(site),
+    variant: site.variant ?? null,
   };
 }
 

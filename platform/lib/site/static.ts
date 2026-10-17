@@ -11,6 +11,7 @@ import { isArchived } from '../panel/rights.ts';
 import { previewAccess } from '../sites.ts';
 import { guestMayEnter, isProtected } from './access.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
+import { VARIANT_ID_RE, VARIANT_SEGMENT_PREFIX, variantOverridePath } from '../theme/variants.ts';
 
 /** Only these theme files are public. Templates (.html), theme.json and anything else are not served. */
 export const THEME_ASSET_TYPES: Readonly<Record<string, string>> = {
@@ -46,16 +47,30 @@ function safeSegments(segments: string[] | undefined): string[] | null {
   return segments;
 }
 
+/**
+ * GET /themes/<theme>/<path>. G153: /themes/<theme>/~<variant>/<path> is a colour variant's virtual folder — an image
+ * with an override in img/variants/<variant>/ is served from there, every other file (and an image without one) is
+ * the original, so a variant page's relative references (site.css url(img/…), theme JS) need no change.
+ */
 export async function serveThemeAsset(themeId: string, segments: string[] | undefined): Promise<Response> {
-  const parts = safeSegments(segments);
+  let parts = safeSegments(segments);
   if (!THEME_ID_RE.test(themeId) || !parts) return notFound();
+  let variant: string | null = null;
+  if (parts[0].startsWith(VARIANT_SEGMENT_PREFIX)) {
+    variant = parts[0].slice(VARIANT_SEGMENT_PREFIX.length);
+    parts = parts.slice(1);
+    if (!VARIANT_ID_RE.test(variant) || !parts.length) return notFound();
+  }
   const ext = path.extname(parts[parts.length - 1]).slice(1).toLowerCase();
   const type = THEME_ASSET_TYPES[ext];
   if (!type) return notFound();
   const root = path.join(themesDir(), themeId);
   try {
     const realRoot = await fs.realpath(root);
-    const real = await fs.realpath(path.join(root, ...parts));
+    // G153: the variant's own image first (img/variants/<id>/…), else the original
+    const override = variant ? variantOverridePath(variant, parts.join('/')) : null;
+    const own = override ? await fs.realpath(path.join(root, ...override.split('/'))).catch(() => null) : null;
+    const real = own && own.startsWith(realRoot + path.sep) && (await fs.stat(own)).isFile() ? own : await fs.realpath(path.join(root, ...parts));
     if (!real.startsWith(realRoot + path.sep)) return notFound();
     const stat = await fs.stat(real);
     if (!stat.isFile()) return notFound();

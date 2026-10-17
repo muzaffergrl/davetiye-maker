@@ -4,8 +4,8 @@
 /* the card's arch: the couple's thank-you photo, else the blush mist and the ribbon bow (decoration, not a placeholder) */
 [data-slot="hero_portrait"] > img.ty-photo { object-position: 50% 38%; }
 .photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 12%;
-                          background: #F4E2E0 url("img/mist_tile-640.webp") 50% 30% / 260% auto; }
-.photo-slot > .ty-decor > img { width: 86%; height: auto; display: block; rotate: -4deg; filter: drop-shadow(0 6px 8px rgba(63, 42, 46, .2)); }
+                          background: rgb(var(--c-f4e2e0)) url("img/mist_tile-640.webp") 50% 30% / 260% auto; }
+.photo-slot > .ty-decor > img { width: 86%; height: auto; display: block; rotate: -4deg; filter: drop-shadow(0 6px 8px rgb(var(--c-3f2a2e)/.2)); }
 /* card copy: the thank-you title (≤ 60 characters) wraps in the calligraphy, the date under it */
 .card-copy .ty-title { font-size: 8.8cqw; line-height: 1.06; text-wrap: balance; overflow-wrap: break-word; }
 /* the thank-you card (invitation card paper, 3-slice): title, message, signature */

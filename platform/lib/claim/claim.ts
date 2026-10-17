@@ -276,7 +276,7 @@ export interface ClaimExistingBody {
   orderPending: boolean;
 }
 
-/** POST /api/start body: {theme, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?, website? (honeypot)}. */
+/** POST /api/start body: {theme, variant?, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?, website? (honeypot)}. */
 export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>): Promise<ClaimResult> {
   const { adapter } = ctx;
   const limiter = ctx.limiter ?? getClaimRateLimiter();
@@ -405,6 +405,8 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
         created = await createSiteWithKeys(adapter, {
           slug,
           theme: theme.id,
+          // G153: the colour palette picked on /start (createSiteWithKeys keeps only a live palette of the design)
+          variant: typeof raw.variant === 'string' ? raw.variant : null,
           content,
           orderRef: orderNumber,
           ownerEmail: email,

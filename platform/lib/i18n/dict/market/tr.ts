@@ -833,6 +833,10 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Davetiye siteni oluştur',
   'Create your website or continue editing': 'Davetiye siteni oluştur ya da düzenlemeye devam et',
+  "Original": "Orijinal",
+  "Color palette": "Renk paleti",
+  "Live demo in {name}": "{name} renklerinde canlı demo",
+  "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Evet, tasarımın içinde kalarak: {name} orijinal renklerinin yanında {n} palet daha sunar; her birinde {thing}, kartlar ve çerçeveler uyumlu boyanmıştır. Paleti başlarken seçersiniz ve düzenleyicinizde istediğiniz zaman değiştirebilirsiniz; metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
 };
 
 export default dict;

@@ -7,6 +7,7 @@
 //   POST /api/edit/<slug>/unpublish   take the site offline
 //   POST /api/edit/<slug>/identity    change names / date after the first publish {identity, baseUpdatedAt?, intent} (G060)
 //   POST /api/edit/<slug>/access      guest password on/off or a new one {enabled, password?} (G076)
+//   POST /api/edit/<slug>/variant     the design's color palette {variant: id | null} (G153; applies at once, content untouched)
 //
 // Every request needs "Authorization: Bearer <edit key>". A wrong key, a preview key, another
 // site's key and an unknown slug all get the same 401, so the API never tells whether a slug exists.
@@ -56,6 +57,7 @@ import { panelMeta, panelState, panelTheme } from './state.ts';
 import { GuestPasswordError, setGuestAccess } from '../site/access.ts';
 import { copyIssues, unknownNewCopyKeys } from '../theme/copy.ts';
 import { loadTheme } from '../theme/theme.ts';
+import { resolveVariant } from '../theme/variants.ts';
 
 type Authorized = { site: SiteRecord; key: string };
 
@@ -329,6 +331,36 @@ export async function setAccess(req: Request, slug: string): Promise<Response> {
   } catch (e) {
     if (e instanceof NotFoundError) return unauthorized();
     return serverError(`access ${slug}`, e);
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Color palette (G153)
+
+/**
+ * POST /api/edit/<slug>/variant {variant: string | null}: the design's color palette — one of the design's live palettes,
+ * or null for its original colours. Applies at once to the draft preview and the published website (like the design
+ * itself, it is not part of the content: nothing to publish, the couple's texts and photos are never touched). Keeping
+ * the current palette is always allowed (a palette taken back into review stays on the sites that use it).
+ */
+export async function setVariant(req: Request, slug: string): Promise<Response> {
+  try {
+    const auth = await authorize(req, slug);
+    if (!auth) return unauthorized();
+    if (isArchived(auth.site)) return archived();
+    const body = await readJsonBody(req, 1024);
+    if ('error' in body) return body.error;
+    const asked = body.value.variant;
+    if (!(asked === null || typeof asked === 'string')) return fail(400, 'invalid_shape', 'This change could not be read. Please reload the page.');
+    const theme = await loadTheme(auth.site.theme);
+    if (!theme) return serverError(`variant ${slug}`, new Error(`theme ${auth.site.theme} missing`));
+    const variant = asked === null ? null : asked === auth.site.variant ? asked : resolveVariant(theme.manifest.variants, asked);
+    if (asked !== null && variant === null) return fail(422, 'unknown_variant', 'This color palette is not available for your design.');
+    const site = variant === auth.site.variant ? auth.site : await getDataAdapter().patchSite(auth.site.id, { variant });
+    return json(200, { ok: true, ...panelMeta(site) });
+  } catch (e) {
+    if (e instanceof NotFoundError) return unauthorized();
+    return serverError(`variant ${slug}`, e);
   }
 }
 

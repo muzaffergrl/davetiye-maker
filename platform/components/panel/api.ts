@@ -66,6 +66,8 @@ export function panelApi(slug: string, editKey: string) {
     /** Guest password (G076): on/off, or a new password. */
     access: (enabled: boolean, password?: string) =>
       call<Record<string, unknown>>(`${base}/access`, jsonInit('POST', password === undefined ? { enabled } : { enabled, password })),
+    /** G153: the design's colour palette (an id from the theme's live palettes, or null for the original colours). */
+    variant: (variant: string | null) => call<Record<string, unknown>>(`${base}/variant`, jsonInit('POST', { variant })),
     /** G127: the place behind a short Google / Apple Maps share link ({url, lat, lng, place}). */
     mapLink: (url: string) =>
       call<{ url: string; lat: number | null; lng: number | null; place: string | null }>(`${base}/map-link`, jsonInit('POST', { url })),

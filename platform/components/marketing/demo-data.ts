@@ -3,6 +3,7 @@
 import { MARKETING, type MarketingConfig } from '../../lib/marketing/config.ts';
 import { demoPath, liveDesigns, openingObject } from '../../lib/marketing/designs.ts';
 import { enMarket, thingIn, type Market, type T } from '../../lib/marketing/i18n.ts';
+import { designPalettes } from '../../lib/marketing/palettes.ts';
 import { realEtsyUrl } from '../../lib/marketing/placeholders.ts';
 import type { DemoCopy, DemoDesign } from './Demo.tsx';
 import { designScreen, largest, srcSet } from './media.ts';
@@ -30,6 +31,8 @@ export function demoDesigns(cfg: MarketingConfig = MARKETING, m: Market = enMark
       demoPath: demoPath(d.id),
       designPath: m.href(`/designs/${d.id}`),
       etsyUrl: realEtsyUrl(d.etsyListingUrl),
+      // G153: the design's live color palettes (the original first; translated name), [] when it has none
+      palettes: designPalettes(d.id, d.copy.palette.map((c) => c.hex)).map((p) => (p.id === null ? { ...p, name: t('Original') } : p)),
     };
   });
 }
@@ -50,5 +53,7 @@ export function demoCopy(t: T = enMarket.t): DemoCopy {
     chooseDesign: t('Choose a design'),
     showMore: t('Show {n} more designs'),
     more: t('+{n} more'),
+    palette: t('Color palette'),
+    paletteShown: t('Live demo in {name}'),
   };
 }

@@ -175,5 +175,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Blush Garden Rose)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=blush-garden-rose"
+      },
+      {
+        "name": "Peach & Cream",
+        "variant": "peach-cream",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=blush-garden-rose&variant=peach-cream"
+      },
+      {
+        "name": "Lilac & Gold",
+        "variant": "lilac-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=blush-garden-rose&variant=lilac-gold"
+      },
+      {
+        "name": "Champagne & Ivory",
+        "variant": "champagne-ivory",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=blush-garden-rose&variant=champagne-ivory"
+      },
+      {
+        "name": "Dusty Mauve",
+        "variant": "dusty-mauve",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=blush-garden-rose&variant=dusty-mauve"
+      },
+      {
+        "name": "Dusty Blue & Blush",
+        "variant": "dusty-blue-blush",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=blush-garden-rose&variant=dusty-blue-blush"
+      }
+    ],
+    "offered": [
+      "Original (Blush Garden Rose)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

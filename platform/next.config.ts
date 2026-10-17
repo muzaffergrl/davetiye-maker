@@ -35,6 +35,8 @@ export const THEME_ROUTES = [
   '/api/edit/\\[slug\\]/photo',
   '/api/edit/\\[slug\\]/publish',
   '/api/edit/\\[slug\\]/unpublish',
+  // G153: the colour palette is checked against theme.json
+  '/api/edit/\\[slug\\]/variant',
   '/api/edit/\\[slug\\]/download',
   '/api/rsvp/\\[slug\\]',
   '/api/rsvp/\\[slug\\]/export',

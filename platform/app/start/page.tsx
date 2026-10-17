@@ -9,6 +9,7 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { DocumentLang } from '../../components/i18n/DocumentLang.tsx';
 import { demoBase } from '../../lib/claim/demo-page.ts';
+import { liveVariants, resolveVariant } from '../../lib/theme/variants.ts';
 import { getEditLinkMailer } from '../../lib/claim/mailer.ts';
 import { claimableTheme } from '../../lib/claim/themes.ts';
 import { publicOrigin } from '../../lib/panel/http.ts';
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 export default async function StartPage({ searchParams }: Props) {
-  const { theme } = await searchParams;
+  const { theme, variant } = await searchParams;
   const requested = typeof theme === 'string' && theme ? theme : null;
   const found = requested ? await claimableTheme(requested) : null;
 
@@ -65,7 +66,16 @@ export default async function StartPage({ searchParams }: Props) {
     <>
       <DocumentLang lang={lang} />
       <StartForm
-        theme={{ id: found.id, name: found.name, partnerCount: found.partnerCount, demoUrl: demoBase(found.id) }}
+        theme={{
+          id: found.id,
+          name: found.name,
+          partnerCount: found.partnerCount,
+          demoUrl: demoBase(found.id),
+          // G153: the design's live colour palettes; ?variant=<id> (the Etsy start link of a colour) preselects one
+          swatch: found.manifest.swatch ?? null,
+          variants: liveVariants(found.manifest.variants).map((v) => ({ id: v.id, name: v.name, swatch: v.swatch })),
+          variant: resolveVariant(found.manifest.variants, variant),
+        }}
         origin={publicOrigin(await headers())}
         emailEnabled={getEditLinkMailer().enabled}
         lang={lang}

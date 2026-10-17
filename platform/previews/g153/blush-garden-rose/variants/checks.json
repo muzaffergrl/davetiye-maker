@@ -1,0 +1,47 @@
+{
+ "theme": "blush-garden-rose",
+ "summary": {
+  "original": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 15
+  },
+  "peach-cream": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "lilac-gold": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "champagne-ivory": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "dusty-mauve": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 0
+  },
+  "dusty-blue-blush": {
+   "measured": 123,
+   "low": 0,
+   "as_original": 15
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 15 text(s) below the contrast minimum on the painted ground: index \"Click to open\" 4.38:1 < 4.5:1; home \"Apple / Outlook\" 4.29:1 < 4.5:1; home \"Google\" 4.16:1 < 4.5:1; home \"Read our story\" 3.94:1 < 4.5:1; home \"Schedule & venue\" 3.92:1 < 4.5:1; home \"Reply now\" 3.76:1 < 4.5:1",
+  "palette dusty-blue-blush: 15 text(s) below the minimum as in the original design: index \"Click to open\" 4.30:1 < 4.5:1; home \"Apple / Outlook\" 4.21:1 < 4.5:1; home \"Google\" 4.09:1 < 4.5:1; home \"Read our story\" 3.86:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette peach-cream (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette lilac-gold (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette champagne-ivory (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-mauve (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-blue-blush (coming): 123 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

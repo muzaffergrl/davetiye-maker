@@ -10,7 +10,7 @@ import { calendarEvent } from '../calendar.ts';
 import { publicOrigin } from '../panel/http.ts';
 import { icsResponse } from '../site/ics.ts';
 import { siteCsp, isSitePage } from '../site/render.ts';
-import { renderTemplate } from '../theme/engine.ts';
+import { renderTemplate, VARIANT_PARAM } from '../theme/engine.ts';
 import { readThemePage } from '../theme/theme.ts';
 import { withDemoMap } from './demo-map.ts';
 import { claimableTheme } from './themes.ts';
@@ -58,7 +58,10 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       page,
       // pageRoute() builds "/<slug>/<page>": this keeps the demo's page links under /start/demo/<theme>.
       slug: demoBase(theme.id).slice(1),
-      variant: null,
+      // G153: ?variant=<id> shows one of the design's palettes (live ones, and ones still in review for the review itself);
+      // page links keep it
+      variant: new URL(req.url).searchParams.get(VARIANT_PARAM),
+      variantInLinks: true,
       previewKey: DEMO_PREVIEW_MARK,
       origin: publicOrigin(req.headers, new URL(req.url).origin),
       share: theme.loaded.share,

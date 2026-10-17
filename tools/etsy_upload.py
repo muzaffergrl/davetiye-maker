@@ -147,8 +147,9 @@ def opening_object(theme: str, copy: str | None = None) -> str:
     """What guests tap first ("envelope", "gatefold", "pouch", "wallet", "book", "sleeve"): the opening sentence of the
     design in platform/lib/marketing/designs.ts ("Your guests tap the <thing>.", the sales site's openingObject)."""
     copy = DESIGN_COPY.read_text(encoding="utf-8") if copy is None else copy
-    # G137: 21's entry is written with quoted keys ("opening": "…"), the others with bare keys (opening: '…')
-    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?(?:\bopening|\"opening\"):\s*['\"]Your guests tap the ([a-z]+)\.", copy,
+    # G137: 21's entry is written with quoted keys ("opening": "…"), the others with bare keys (opening: '…');
+    # G144 wrapped the texts in msg('…') (G153: the pattern accepts it)
+    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?(?:\bopening|\"opening\"):\s*(?:msg\(\s*)?['\"]Your guests tap the ([a-z]+)\.", copy,
                   re.S | re.M)
     if not m:
         raise SystemExit(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme}'")
@@ -195,6 +196,10 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         blockers.append("listing video missing")
     if not pdf.exists():
         blockers.append(f"digital file missing: {pdf.relative_to(REPO).as_posix()} (the START HERE guide Etsy delivers)")
+    variations, palette_problems = palette_variations(theme)
+    problems += [f"variations: {p}" for p in palette_problems]
+    if variations and len(variations["offered"]) > 1:
+        checks.append({"where": "variations", "check": PALETTE_CHECK, "text": ""})
     data = {
         "design": no,
         "theme": theme,
@@ -222,7 +227,52 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         "ready_to_publish": False,
         "rule_problems": problems,
     }
+    if variations:  # G153 (docs/25 §5): only for a design with color palettes
+        data["variations"] = variations
     return data, problems
+
+
+PALETTE_PROPERTY = "Color palette"
+PALETTE_DOC = "docs/25_PALET_VARYANTLARI.md §5"
+PALETTE_CHECK = ("Etsy listing editor: confirm a digital listing accepts the custom variation 'Color palette' (same price "
+                 "for every option); if it does not, use the fallback of docs/25 §5 (no variation, palette chosen on /start)")
+
+
+def palette_variations(theme: str) -> tuple[dict | None, list[str]]:
+    """G153: one listing per design with a "Color palette" variation (docs/25 §5). Options come from the theme's own
+    theme.json "variants": the original first, every palette after it; only "live" ones are offered on Etsy, "coming" ones
+    are listed (offered: false) so the structure is ready when the coordinator flips them. None without palettes."""
+    tj = REPO / "platform" / "themes" / theme / "theme.json"
+    data = json.loads(tj.read_text(encoding="utf-8")) if tj.exists() else {}
+    variants = data.get("variants") or []
+    if not variants:
+        return None, []
+    original = f"Original ({data.get('name', theme)})"
+    options = [{"name": original, "variant": None, "status": "live", "offered": True,
+                "start_link": f"/start?theme={theme}"}]
+    for v in variants:
+        options.append({"name": v.get("name"), "variant": v.get("id"), "status": v.get("status"),
+                        "offered": v.get("status") == "live",
+                        "start_link": f"/start?theme={theme}&variant={v.get('id')}"})
+    problems = []
+    names = [o["name"] for o in options]
+    if len(set(n.lower() for n in names if n)) != len(names):
+        problems.append("palette option names repeat")
+    for o in options:
+        if not o["name"] or len(o["name"]) > 40:
+            problems.append(f"palette option name must be 1–40 characters: {o['name']!r}")
+        if o["status"] not in ("live", "coming"):
+            problems.append(f"palette {o['variant']}: status must be live or coming")
+    return {
+        "structure": "one listing, variation 'Color palette' (same price)",
+        "doc": PALETTE_DOC,
+        "property": PALETTE_PROPERTY,
+        "price_varies": False,
+        "options": options,
+        "offered": [o["name"] for o in options if o["offered"]],
+        "fallback": ("No variation: the listing names the palettes in the description and shows them on one image; the "
+                     "buyer picks the palette on /start (the START HERE link) and can switch it in the editor."),
+    }, problems
 
 
 def price_note() -> str:

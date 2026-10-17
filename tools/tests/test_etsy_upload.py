@@ -172,3 +172,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def test_palette_variations_g153():
+    """G153: one listing + 'Colour palette' variation from theme.json; only live palettes are offered."""
+    import etsy_upload as m
+    v, problems = m.palette_variations("crimson-rose-atelier")
+    assert problems == []
+    assert v["property"] == "Color palette" and v["price_varies"] is False
+    assert v["options"][0] == {"name": "Original (Crimson Rose Atelier)", "variant": None, "status": "live", "offered": True,
+                               "start_link": "/start?theme=crimson-rose-atelier"}
+    assert len(v["options"]) == 6
+    assert v["offered"] == [o["name"] for o in v["options"] if o["status"] == "live"]
+    assert all(o["start_link"].endswith(f"&variant={o['variant']}") for o in v["options"][1:])
+    assert m.palette_variations("art-deco-black-tie") == (None, [])  # no palettes yet
+    data, _ = m.build("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier")
+    assert data["variations"]["options"] == v["options"]

@@ -833,6 +833,10 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Crea tu web',
   'Create your website or continue editing': 'Crea tu web o sigue editándola',
+  "Original": "Original",
+  "Color palette": "Paleta de colores",
+  "Live demo in {name}": "Demo en vivo en {name}",
+  "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Sí, dentro del diseño: {name} viene en sus colores originales y en {n} paletas más, cada una con {thing}, tarjetas y marcos pintados a juego. Eliges una paleta al empezar y puedes cambiarla en tu editor cuando quieras; tus textos y fotos se quedan como están.",
 };
 
 export default dict;

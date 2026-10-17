@@ -82,8 +82,11 @@ def manifest_yaz(out: Path, manifest: dict) -> Path:
 
 
 def klasor_boyutu(klasor: Path) -> int:
-    """Klasördeki bütün dosyaların toplam baytı (__pycache__ hariç)."""
-    return sum(f.stat().st_size for f in Path(klasor).rglob("*") if f.is_file() and "__pycache__" not in f.parts)
+    """Klasördeki bütün dosyaların toplam baytı (__pycache__ ve G153 renk paleti görselleri img/variants/ hariç — onlar
+    tasarımın kendi bütçesine girmez, docs/25 §4)."""
+    kok = Path(klasor)
+    return sum(f.stat().st_size for f in kok.rglob("*")
+               if f.is_file() and "__pycache__" not in f.parts and "variants" not in f.relative_to(kok).parts[:-1])
 
 
 # ============================================================================= hazırlık

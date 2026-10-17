@@ -3,6 +3,8 @@
 // before it reaches an attribute. Anything else is dropped.
 // No Node imports: content validation (which uses this file) may also run in the browser panel.
 
+import { VARIANT_ID_RE, VARIANT_SEGMENT_PREFIX } from './variants.ts';
+
 const LINK_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:']);
 const WEB_PROTOCOLS = new Set(['http:', 'https:']);
 const LOCAL_BASE = 'http://local.invalid';
@@ -88,13 +90,17 @@ export function normalizeThemePath(rel: string): string | null {
   return out.length ? out.join('/') : null;
 }
 
-/** Public URL of a theme asset: /themes/<theme>/<path>. */
-export function themeAssetUrl(themeId: string, rel: string): string | null {
+/**
+ * Public URL of a theme asset: /themes/<theme>/<path>. With a colour variant (G153): /themes/<theme>/~<variant>/<path>,
+ * the variant's virtual folder (its image override, else the original; lib/site/static.ts).
+ */
+export function themeAssetUrl(themeId: string, rel: string, variant: string | null = null): string | null {
   const { path: p, suffix } = splitSuffix(rel);
   const normalized = normalizeThemePath(p);
   if (!normalized) return null;
   const encoded = normalized.split('/').map((seg) => encodeURIComponent(decodeURIComponentSafe(seg))).join('/');
-  return `/themes/${encodeURIComponent(themeId)}/${encoded}${suffix}`;
+  const folder = variant && VARIANT_ID_RE.test(variant) ? `${VARIANT_SEGMENT_PREFIX}${variant}/` : '';
+  return `/themes/${encodeURIComponent(themeId)}/${folder}${encoded}${suffix}`;
 }
 
 function decodeURIComponentSafe(s: string): string {

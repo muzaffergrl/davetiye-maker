@@ -1285,6 +1285,12 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Sipariş numaranız ve e-postanız sonraki sayfada doldurulmuş olur.',
   'since {date}': '{date} tarihinden beri',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} bu cihazda artık açılmıyor, bu yüzden kaldırdık. Yeniden açmak için aşağıya sipariş numaranızı ve e-postanızı girin.|{addresses} bu cihazda artık açılmıyor, bu yüzden kaldırdık. Yeniden açmak için aşağıya sipariş numaranızı ve e-postanızı girin.',
+  "Color palette": "Renk paleti",
+  "Original": "Orijinal",
+  "Color palette changed. Your texts and photos stay as they are.": "Renk paleti değişti. Metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
+  "The color palette could not be changed. Please try again.": "Renk paleti değiştirilemedi. Lütfen tekrar deneyin.",
+  "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "Aynı tasarım, başka renklerde. Seçiminiz web sitenizde hemen görünür; metinleriniz ve fotoğraflarınız değişmez.",
+  "You can change the colors later in your editor.": "Renkleri daha sonra düzenleyicinizde değiştirebilirsiniz.",
 };
 
 export default dict;
