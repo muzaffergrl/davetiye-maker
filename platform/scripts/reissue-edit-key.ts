@@ -12,7 +12,9 @@
 //
 // Exit codes: 0 done, 1 site not found / several sites for one order, 2 bad arguments.
 
+import path from 'node:path';
 import { parseArgs } from 'node:util';
+import { fileURLToPath } from 'node:url';
 import { normalizeOrderNumber } from '../lib/claim/fields.ts';
 import { getDataAdapter, type DataAdapter, type SiteRecord } from '../lib/data/index.ts';
 import { reissueKeys } from '../lib/sites.ts';
@@ -78,6 +80,6 @@ async function main(): Promise<number> {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   main().then((code) => process.exit(code));
 }
