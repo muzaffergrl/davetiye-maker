@@ -29,7 +29,7 @@ the title, the description, the tags and the alt texts never name any other open
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | `config.ts`: `[PRICE]` — not decided for this design (01–21: 1,460 TL, K42/K47). No stock limit (999). |
 | Design fonts and other languages | **Not checked.** The theme loads **Ballet** (names, script) and **Gilda Display** (headings and text) from Google Fonts. On 2026-10-17 the Google Fonts CSS answered without subset labels (single `.ttf` files), so the subsets could not be read. The language line in GOOD TO KNOW is kept conservative. [VERIFY: Ballet and Gilda Display subsets from the Google Fonts CSS (woff2 response)] |
-| START HERE guide | **Not built** for this design (`python3 tools/build_customer_guides.py --designs 32` needs the design in its table first). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 32`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not made** (they need the real artwork). |
 | Etsy rules (digital items, AI disclosure, title, tags, images, video) | **Not re-checked on Etsy's official pages in this task** (2026-10-17). Re-check them from the links in `00_ANA_DEVIR.md` §34 before publishing and write the date here. |
 

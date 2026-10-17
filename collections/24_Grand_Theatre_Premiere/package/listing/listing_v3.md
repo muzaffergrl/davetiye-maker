@@ -14,7 +14,8 @@ Internal listing kit for the seller (G162, 2026-10-17). **Draft — not publishe
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** The page-turn transition between pages needs cross-document view transitions (Chrome; Safari 18.2+); other browsers show a simpler page entrance. |
 | Shop name, support email | K33: **BKE Studio**, **bkestudio@gmail.com**. |
 | Price, quantity | [PRICE] — not decided for this design. Quantity 999 like the other designs once decided. |
-| START HERE guide, listing images, video | **Not produced.** |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 24`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
+| Listing images, video | **Not produced** (they need the GPT mockup scenes, `assets/gpt/GPT_PROMPTS.md` PAKET 3). |
 | Design fonts and other languages | Abril Fatface and Playfair Display (both latin-ext, checked from their Google Fonts families). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.

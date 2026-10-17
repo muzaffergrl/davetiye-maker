@@ -30,7 +30,7 @@ the description below keeps to that copy.
 | Price, quantity | `config.ts`: `[PRICE]` — not decided for this design (01–21: 1,460 TL, K42/K47). No stock limit (999). |
 | Design fonts and other languages | The theme loads **Arizonia** (names, headings) and **Cormorant Upright** (text) from Google Fonts. Subsets **not confirmed in this task**: the Google Fonts CSS fetched on 2026-10-17 carried no subset labels and fonts.google.com could not be reached. Expected (from the family listings, not checked): Arizonia latin + latin-ext; Cormorant Upright latin + latin-ext + vietnamese; neither has Cyrillic. [VERIFY: subsets in the live Google Fonts CSS] |
 | Etsy and platform rules | Not re-checked on Etsy's official pages in this task (00_ANA_DEVIR.md §34). Re-check before publishing and write the date here. |
-| START HERE guide | **Not built** for this design (`package/customer/`). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 30`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not made** — they wait for the GPT parts (no image of the interim look is to be sold). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.
@@ -55,8 +55,8 @@ Cobalt and white painted azulejo tiles, warm terracotta and sunlit whitewash. Yo
 
 TRY THE LIVE DEMO
 See the tiles turn on your own phone before you buy (sample names):
-[DEMO LINK: https://davetiye-platform-five.vercel.app/start/demo/azulejo-mosaic — after deployment]
-Copy the link into your phone's browser.
+https://davetiye-platform-five.vercel.app/start/demo/azulejo-mosaic
+Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
 • Your wedding website in the Azulejo Mosaic design: tile wall opening, Home, Our Story, Details and RSVP pages
