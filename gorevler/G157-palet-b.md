@@ -87,7 +87,8 @@ docs/25 §4'teki CDN kararı artık gerekli). site.css hepsinde ≤ 45,6 KB.
   0 hata** (1510; 2 atlanan); build + trace-check temiz.
 - `node scripts/variant-check.cjs --theme <id>` (6 tema): **30/30 palet geçti** (ilk turda 09 mauve ve 14'ün 4 paletinde buton
   etiketi 3,8–4,45 → buton gradyan kanalları kontrast çiftine eklendi, yeniden koşuldu).
-- `theme-check --stress`: aşağıda.
+- `node scripts/theme-check.cjs --theme <id> --stress` (6 tema): hepsi **0 hata** — 09 133 geçti, 10 117, 11 117, 12 117,
+  13 133, 14 133; uyarılar yalnız orijinal tasarımdan gelen kontrast notları.
 - `python3 -m pytest tools/tests -q`: 64 geçti; 20 hata **önceden var olan** betik tarzı testler (kit_check, listing_kit,
   md_to_pdf, mockup_compose, parts_prep*, build_customer_guides — pytest fixture arıyor; G153'te de aynı).
 - Gerçek render özeti: `platform/previews/g153/<tema>/variants_sheet.jpg` (her palet: index/home/details/rsvp) + checks/summary.
