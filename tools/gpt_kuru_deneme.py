@@ -141,7 +141,10 @@ def tema_refs(tema_dir: Path) -> set[str]:
     refs = set()
     for f in list(tema_dir.glob("*.html")) + list(tema_dir.glob("*.css")) + list(tema_dir.glob("*.js")) + [tema_dir / "theme.json"]:
         if f.exists():
-            refs |= set(IMG_REF.findall(f.read_text(encoding="utf-8")))
+            t = re.sub(r"/\*.*?\*/|<!--.*?-->", "", f.read_text(encoding="utf-8"), flags=re.S)
+            if f.suffix == ".js":
+                t = re.sub(r"(?m)^\s*//.*$|(?<=[;{}),])\s*//.*$", "", t)  # satır yorumları (URL'lerdeki // kalır)
+            refs |= set(IMG_REF.findall(t))
     return refs
 
 
@@ -181,6 +184,12 @@ def main() -> int:
     prompts = KOK / "collections" / kol / "assets/gpt/GPT_PROMPTS.md"
     liste = beklenenler(prompts)
     sekil = json.loads(Path(a.sekil).read_text()) if a.sekil else {}
+    if a.theme_check:
+        import socket
+        with socket.socket() as so:
+            if so.connect_ex(("127.0.0.1", a.port)) == 0:
+                print(f"port {a.port} kullanımda — başka bir --port ver")
+                return 1
     gecici = Path(tempfile.mkdtemp(prefix=f"kuru-{a.tema}-"))
     kok = gecici / "repo"
     sorun, uyari = [], []
@@ -217,7 +226,9 @@ def main() -> int:
         if kayip:
             uyari.append("geçici çıktıda olup GPT çıktısında olmayan (hiçbir sayfa istemiyorsa sorun değil): " + ", ".join(kayip))
         mf = yeni_img / "manifest.json"
-        if mf.exists() and re.search(r"interim|geçici|INTERIM", mf.read_text(encoding="utf-8")):
+        notlar = [v for k, v in (json.loads(mf.read_text(encoding="utf-8")).items() if mf.exists() else [])
+                  if k in ("_note", "note", "mode", "_mode") and isinstance(v, str)]
+        if any(re.search(r"interim|geçici", v, re.I) for v in notlar):
             uyari.append("yeni manifest.json'da 'interim/geçici' izi var — GPT yoluna tam geçilmemiş olabilir")
 
         # hangi parça okundu: build_images (denetim kancası) + baskı kaynakları (layouts → build-print-assets çıktısı)

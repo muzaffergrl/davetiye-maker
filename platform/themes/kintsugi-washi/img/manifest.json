@@ -1,10 +1,8 @@
 {
- "_note": "G164 interim build: papers toned from other designs' plain GPT textures until the design's own PAKET 5 parts arrive (GPT_PROMPTS.md). Nothing drawn.",
  "sources": {
   "washi_indigo": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png",
   "rice_paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
-  "washi_inner": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png (toned lighter)",
-  "interim": true
+  "washi_inner": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png (toned lighter)"
  },
  "washi_indigo": {
   "src_size": [
@@ -211,6 +209,24 @@
   "file": "favicon.png",
   "bytes": 27638
  },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "kintsugi_veins",
+   "ink_bleed",
+   "sumi_stroke",
+   "gold_flake_1",
+   "gold_flake_2",
+   "gold_flake_3",
+   "obi_band",
+   "card_small",
+   "web_hero",
+   "washi_indigo",
+   "rice_paper"
+  ]
+ },
+ "_note": "G164 interim build: papers toned from other designs' plain GPT textures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
  "checks": {
   "green": {}
  },
@@ -227,5 +243,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 350389
+ "bytes_total": 457341
 }
