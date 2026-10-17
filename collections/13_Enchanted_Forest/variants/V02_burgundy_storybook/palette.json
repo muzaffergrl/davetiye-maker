@@ -1,0 +1,25 @@
+{
+  "id": "V02_burgundy_storybook",
+  "slug": "burgundy-storybook",
+  "name": "Burgundy Storybook",
+  "ink": "#2B2A1F",
+  "deep": "#6A2E3A",
+  "primary": "#8A4452",
+  "mist_top": "#EDEFE3",
+  "mist_bottom": "#BFC7A8",
+  "gold": "#B7975A",
+  "gold_light": "#DCC58F",
+  "ivory": "#F8F4E6",
+  "leaf": "#55703F",
+  "swatch": [
+    "#F8F4E6",
+    "#4E1A26",
+    "#B7975A"
+  ],
+  "status": "coming",
+  "families": {
+    "cover": "#4E1A26",
+    "moss_css": "deep",
+    "paper": null
+  }
+}

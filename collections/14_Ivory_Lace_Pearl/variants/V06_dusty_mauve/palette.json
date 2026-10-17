@@ -1,0 +1,27 @@
+{
+  "id": "V06_dusty_mauve",
+  "slug": "dusty-mauve",
+  "name": "Dusty Mauve & Lace",
+  "ink": "#3A3530",
+  "deep": "#85606A",
+  "primary": "#D4B3B9",
+  "mist_top": "#F0E2E3",
+  "mist_bottom": "#D4B3B9",
+  "gold": "#BFA67A",
+  "gold_light": "#DED0B0",
+  "ivory": "#FFFDF8",
+  "leaf": "#A3A58F",
+  "swatch": [
+    "#FFFDF8",
+    "#D7B5B9",
+    "#85606A"
+  ],
+  "status": "coming",
+  "families": {
+    "lace": "#D7B5B9",
+    "leaf": null,
+    "satin": "mist_top",
+    "scene_satin": "mist_top",
+    "taupe": "deep"
+  }
+}

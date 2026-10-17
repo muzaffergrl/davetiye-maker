@@ -1,0 +1,80 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 14
+   (kaynak: collections/14_Ivory_Lace_Pearl/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-6e5c47: 110 92 71;
+  --c-7a6650: 122 102 80;
+  --c-8c7a63: 140 122 99;
+  --c-ede3d8: 237 227 216;
+  --c-f6f0e9: 246 240 233;
+}
+
+/* V02_blush_pearl · Blush & Pearl */
+html[data-variant="blush-pearl"] {
+  --c-6e5c47: 125 84 80;
+  --c-7a6650: 138 94 90;
+  --c-8c7a63: 157 114 107;
+  --c-ede3d8: 240 220 212;
+  --c-f6f0e9: 247 234 229;
+  --hair: rgba(156, 116, 110, 0.42);
+  --ink-soft: #624A43;
+  --page: #F3E0DB;
+  --taupe: #845854;
+  --taupe-dark: #764C49;
+}
+
+/* V03_champagne_gold · Champagne & Gold */
+html[data-variant="champagne-gold"] {
+  --c-6e5c47: 125 102 64;
+  --c-7a6650: 138 112 72;
+  --c-8c7a63: 155 133 92;
+  --c-ede3d8: 237 228 209;
+  --hair: rgba(155, 134, 97, 0.42);
+  --ink-soft: #64533D;
+  --page: #F2E8D8;
+  --taupe: #7E643D;
+  --taupe-dark: #765E37;
+}
+
+/* V04_dusty_blue · Dusty Blue & Ivory Lace */
+html[data-variant="dusty-blue"] {
+  --c-6e5c47: 85 104 123;
+  --c-7a6650: 94 115 135;
+  --c-8c7a63: 116 134 154;
+  --c-ede3d8: 219 225 232;
+  --c-f6f0e9: 233 237 241;
+  --hair: rgba(117, 135, 154, 0.42);
+  --ink-soft: #505458;
+  --page: #DFE5EB;
+  --taupe: #53677B;
+  --taupe-dark: #4C6073;
+}
+
+/* V06_dusty_mauve · Dusty Mauve & Lace */
+html[data-variant="dusty-mauve"] {
+  --c-6e5c47: 121 86 95;
+  --c-7a6650: 133 96 106;
+  --c-8c7a63: 153 116 123;
+  --c-ede3d8: 237 222 221;
+  --hair: rgba(152, 117, 124, 0.42);
+  --ink-soft: #604B4A;
+  --page: #F0E2E3;
+  --taupe: #7F5A64;
+  --taupe-dark: #714E58;
+}
+
+/* V05_sage_pearl · Sage & Pearl */
+html[data-variant="sage-pearl"] {
+  --c-6e5c47: 99 111 89;
+  --c-7a6650: 110 122 98;
+  --c-8c7a63: 128 142 119;
+  --c-ede3d8: 224 228 216;
+  --c-f6f0e9: 237 240 232;
+  --hair: rgba(130, 142, 121, 0.42);
+  --ink-soft: #585848;
+  --page: #E5E8DD;
+  --taupe: #606B54;
+  --taupe-dark: #5C6750;
+}

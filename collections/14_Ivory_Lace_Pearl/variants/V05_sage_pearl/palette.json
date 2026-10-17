@@ -1,0 +1,27 @@
+{
+  "id": "V05_sage_pearl",
+  "slug": "sage-pearl",
+  "name": "Sage & Pearl",
+  "ink": "#3A3530",
+  "deep": "#6E7A62",
+  "primary": "#B9C2AA",
+  "mist_top": "#E5E8DD",
+  "mist_bottom": "#B9C2AA",
+  "gold": "#BFA67A",
+  "gold_light": "#DED0B0",
+  "ivory": "#FFFDF8",
+  "leaf": "#A3A58F",
+  "swatch": [
+    "#FFFDF8",
+    "#E5E8DD",
+    "#6E7A62"
+  ],
+  "status": "coming",
+  "families": {
+    "lace": null,
+    "leaf": null,
+    "satin": "mist_top",
+    "scene_satin": null,
+    "taupe": "deep"
+  }
+}
