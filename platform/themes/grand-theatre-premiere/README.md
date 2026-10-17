@@ -14,7 +14,7 @@ GPT parts: the theme runs on interim pieces (below) until PAKET 5 / 2 / 6 arrive
 | `index.html` … `rsvp.html` | curtain · home · story (intermission) · details (the programme) · RSVP (the ticket) |
 | `site.css` / `thank-you.css` | tokens, layout, the curtain keyframes, the spotlight, the page turn, the ticket / thank-you mode (G075) |
 | `site.js` | `MOTION` (curtain steps, scenes), long names, scenes, countdown (`data-target-utc` from the platform), curtain, story spotlight, ticket stub |
-| `build_images.py` | interim build: GPT textures → stage layers, grounds, placeholders, og, favicon, `img/manifest.json` |
+| `build_images.py` | GPT parts (when present, measured) or interim pieces → stage layers, grounds, placeholders, og, favicon, `img/manifest.json`, and the `/* stage:begin … stage:end */` geometry block of `site.css` |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Richmond),
 music + opening sounds (`lib/audio/catalog.ts`: Evening Strings; tap 0 · whoosh 400 · slide 2000 · chime 2900 ms),
@@ -67,6 +67,7 @@ Nav: fixed bottom bar (the platform's sound button sits top-left).
 | `th_arch` | a deeper velvet band across the top of the opening | W2.1 `proscenium.png` (gilded arch + valance, #00FF00 opening) |
 | `th_back` | the velvet blurred and darkened | W2.6 `stage_back.png` |
 | `card_paper` | `21_Crimson_Rose_Atelier/textures/paper-background.png`, toned to playbill ivory | W2.7 `card_small.png` (#00FF00 window) |
+| `card_plain` (home's card) | the same paper card | W2.7b `card_plain.png` (no window) |
 | `paper`, `stub_paper` | the same paper | W2.9 `playbill_tile.png`, W2.10 `ticket_stub.png` |
 | `velvet`, `room` | the velvet, mirrored 2×2 (seamless) / blurred and darkened | W2.8 `velvet_tile.png`, W2.11 `bg_page.png` |
 | `ph_portrait`, `ph_land` | the velvet, soft and toned | built from W2.11 `bg_page.png` |
@@ -74,10 +75,14 @@ Nav: fixed bottom bar (the platform's sound button sits top-left).
 
 The interim stage reads as flat velvet blocks: no folds, no fringe, no gold. That is the honest state until the parts
 arrive; the motion, the layering and every page contract are final. When the PAKET 5 files arrive, `build_images.py`
-switches its sources to them (same output names; the stage box, the curtain origins, the gathered width and the card
-box come from the parts' alpha boxes and the #00FF00 windows via `tools/parts_prep.py`) and the `site.css` percentages
-marked `/* manifest stage.… */` are updated from `img/manifest.json`. The photo aspects (`theme.json`) then come from
-the frame windows (`manifest.photo_slots.box_px`).
+switches to them by itself (same output names): the stage as a set once `proscenium` + `curtain_left` + `curtain_right`
+exist, every other piece on its own. The stage box, the curtain origins, the gathered width, the swag pivots, the card
+box and its photo window, home's card proportion and the stub proportion are measured from the parts' alpha boxes and
+#00FF00 windows (`tools/parts_prep.py`) and written to `img/manifest.json` → `stage` (`stage.css`) and to the
+`/* stage:begin … stage:end */` block of `site.css` (CSS custom properties the stage rules and keyframes read) — no
+percentage is copied by hand (`tests/theme-grand-theatre-premiere.test.ts` pins block = manifest). `manifest.sources` /
+`waiting_for_gpt` say which pieces are still stand-ins. Drop-in rehearsal: `python3 tools/gpt_kuru_deneme.py --tema
+grand-theatre-premiere --sekil collections/24_Grand_Theatre_Premiere/assets/gpt/kuru_sekil.json`.
 
 ## Deviations from the standard (docs/11)
 

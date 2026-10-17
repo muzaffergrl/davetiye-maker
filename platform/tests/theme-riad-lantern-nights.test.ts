@@ -129,7 +129,7 @@ test('motion signature: zellige rows lay tile by tile, windows are lit by a beam
   assert.match(css, /@keyframes flicker/);
   assert.match(css, /@keyframes beam/);
   assert.match(css, /animation-timeline:view\(\)/);
-  assert.match(css, /@media\(prefers-reduced-motion:reduce\)\{[^]*\.lantern-glow\{animation:none!important\}/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)\{[^]*\.lantern-glow(,\.lantern)?\{animation:none!important\}/);
 });
 
 test('K21: no drawn frames — no border, outline or box-shadow on the countdown or the content blocks', () => {
@@ -188,4 +188,55 @@ test('the printable invitation is composed from GPT pixels, and its parts are bu
   assert.equal(layout.collection, '27_Riad_Lantern_Nights');
   for (const name of Object.keys(layout.sources)) assert.ok(existsSync(path.join(ROOT, 'public', 'print', id, `${name}.webp`)), name);
   assert.ok(layout.composed.front.images.length >= 5);
+});
+
+// G167: the GPT branch of build_images.py writes the measured numbers to img/manifest.json AND to the generated
+// "@gpt-layers" block at the end of site.css — they must agree, and every file the block names must exist.
+test('G167: site.css @gpt-layers = img/manifest.json (card window, frames, GPT-only layers); doorway = DOORWAY_EXT', () => {
+  const manifest = JSON.parse(read('img/manifest.json'));
+  const blocks = [...css.matchAll(/\/\* @gpt-layers[^]*?\/\* @end gpt-layers \*\/\n?/g)];
+  assert.equal(blocks.length, 1, 'exactly one generated block');
+  const block = blocks[0][0];
+  assert.ok(css.trimEnd().endsWith('/* @end gpt-layers */'), 'the block is the last rule (it overrides the base layout)');
+  const layers: Record<string, { file: string; window_pct?: number[]; aspect?: string }> = manifest.gpt_layers ?? {};
+  const win = manifest.stage?.card?.window_pct as number[] | null | undefined;
+  if (!Object.keys(layers).length && !win) assert.match(block, /no GPT layer yet/);
+  for (const [name, l] of Object.entries(layers)) {
+    assert.ok(block.includes(`url(img/${l.file})`), `${name} named in the block`);
+    assert.ok(existsSync(path.join(DIR, 'img', l.file)), l.file);
+  }
+  const at = ([x, y, w, h]: number[]) => `left:${x}%;top:${y}%;width:${w}%;height:${h}%`;
+  if (win) {
+    assert.ok(block.includes(at(win)), 'card window');
+    const [pt, ps, pb] = manifest.stage.card.pad_pct_of_width;
+    assert.ok(block.includes(`padding:${pt}% ${ps}% ${pb}%`), 'card text padding');
+    assert.ok(Array.isArray(manifest.card_paper.free_zone), 'theme-check free_zone of the GPT card');
+  }
+  for (const [name, sel] of [['frame_arch', '.window>img'], ['frame_landscape', '.venue-photo>img']] as const) {
+    const l = layers[name];
+    if (l?.window_pct) assert.ok(block.includes(`${sel}{position:absolute;${at(l.window_pct)}}`), name);
+  }
+  // the doorway cut (build_images.py DOORWAY_EXT, fractions of the opening) = its fixed place in site.css
+  const ext = /DOORWAY_EXT = \(([^)]+)\)/.exec(read('build_images.py'))![1].split(',').map(Number);
+  const [l, t, r, b] = ext.map((v) => Math.round(v * 100));
+  assert.match(css, new RegExp(`\\.riad>\\.doorway\\{position:absolute;left:-${l}%;top:-${t}%;width:${100 + l + r}%;height:${100 + t + b}%;`));
+  if (layers.doorway) assert.deepEqual((layers.doorway as any).box_pct_of_opening, [-l, -t, 100 + l + r, 100 + t + b]);
+  // GPT-only layers are in the pages but hidden until the block switches them on; never a drawn shape (K21)
+  for (const [p, sel] of [['index', '.riad>.doorway'], ['index', '.stage>.lantern'], ['home', '.lantern-hero>.bloom-tl'], ['home', '.divider'], ['story', '.window>.arch'], ['details', '.venue-photo>.frame'], ['rsvp', '.rsvp-page>.lantern']] as const) {
+    assert.ok(cheerio.load(html[p])(sel).length >= 1, `${p} ${sel}`);
+  }
+  assert.match(css, /\.doorway,\.lantern,\.bloom,\.divider,\.window>\.arch,\.venue-photo>\.frame\{display:none;/);
+});
+
+test('G167: four zellige tiles at 76 + 152 px (srcset), the reply flares the lantern and (with GPT) drifts bracts', () => {
+  for (const n of [1, 2, 3, 4]) for (const w of [76, 152]) assert.ok(existsSync(path.join(DIR, 'img', `tile_${n}-${w}.webp`)), `tile_${n}-${w}`);
+  for (const p of ['home', 'story', 'details'] as const) {
+    const imgs = cheerio.load(html[p])('.zellige img');
+    imgs.each((_, el) => assert.match(String(el.attribs.srcset), /-76\.webp 76w, img\/tile_\d-152\.webp 152w/));
+    assert.ok(imgs.filter((_, el) => /tile_4/.test(String(el.attribs.src))).length >= 2, p);
+  }
+  assert.match(css, /html\[data-rsvp-replied\] \.rsvp-page>\.lantern-glow\{animation:reply-glow/);
+  assert.match(js, /if \(st === 'success'\) petals\(\)/);
+  assert.match(js, /getPropertyValue\('--petal'\)/);
+  assert.match(css, /@media\(prefers-reduced-motion:reduce\)\{[^]*\.lantern-glow,\.lantern\{animation:none!important\}[^]*\.accent-layer\{display:none\}/);
 });

@@ -1,5 +1,5 @@
 {
- "_note": "G166 build. INTERIM layers (no Maison Pâtisserie GPT part exists yet): rectangular crops of repository GPT paper/satin toned to the palette, the ivory bow toned rose and cut at its knot (see build_images.py). PAKET 5 parts in collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md replace them layer by layer.",
+ "_note": "G166 build. INTERIM layers (no Maison Pâtisserie GPT part exists yet): rectangular crops of repository GPT paper/satin toned to the palette, the ivory bow toned rose and cut at its knot (see build_images.py). PAKET 5 parts in collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md replace them layer by layer. Still waiting for: accent_1, bg_page, bg_tile, bow_knot, bow_l, bow_r, box_base, card_small, lid, ribbon_cross, shelf, tissue_left, tissue_right, web_hero.",
  "box_base": {
   "src_size": [
    1024,
@@ -534,6 +534,7 @@
  },
  "checks": {
   "green": {},
+  "green_hue_info": {},
   "bow_cut_overlap": 0.0
  },
  "theme_check": {
@@ -543,5 +544,5 @@
    "names_min_px": 32
   }
  },
- "bytes_total": 587832
+ "bytes_total": 594772
 }

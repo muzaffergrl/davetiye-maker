@@ -34,9 +34,12 @@ passes over the lid every 4 s (the tap invitation; none with reduced motion). Re
 toned champagne, 01's ivory paper for the card, 14's satin bow toned champagne for the closure) — and cuts it exactly as
 it will cut GPT's `box_closed` / `box_open` (seam = lid/base, hinge = lining/cushion). The stand-in reads as a placeholder
 box on purpose. When `parts/box_closed.png` and `parts/box_open.png` exist the build switches to them (and to
-`closure`, `card_small`, `bg_page`, `satin_bg`, `divider`, `web_hero`), measures seam and hinge (override `SEAM_PCT` /
-`HINGE_PCT`) and writes the new percentages to `img/manifest.json` `stage`; the `/* manifest stage.* */` numbers in
-`site.css` and the `translateY(…)` of `lid-up` / `card-rise` are then copied from it (the theme test compares them).
+`closure`, `card_small`, `bg_page`, `satin_bg`, `web_hero`), measures seam and hinge (a reading off the prompt's
+geometry falls back to it with a warning; override `SEAM_PCT` / `HINGE_PCT`), keys out and measures the card's #00FF00
+window, and writes `img/manifest.json` `stage` **and** the `/* stage:begin … stage:end */` block of `site.css` (piece
+places, stage proportions, lid drop, card rise/forward, the card photo on the window) — no hand copy; the theme test
+compares CSS and manifest. Output file names are fixed (`SIZES`), whatever size GPT delivers. Dry run without the art:
+`python3 tools/gpt_kuru_deneme.py --tema velvet-jewel-box --sekil collections/23_Velvet_Jewel_Box/assets/gpt/kuru_sekil.json`.
 
 ## Pages
 
@@ -45,10 +48,12 @@ box on purpose. When `parts/box_closed.png` and `parts/box_open.png` exist the b
   countdown (plain numerals), calendar; story teaser; the day band on satin; bow + "Open the box again".
 - **Story:** the turning display: three 4:5 photos on a cylinder (38° apart, radius 1.45 × the photo width); drag or swipe
   (vertical drags still scroll the page), snap to the nearest, arrow buttons, ←/→/Home/End keys, a tap on a side photo
-  turns to it; only the front caption shows. Reduced motion or no JavaScript: the same figures as a scroll-snap slider.
+  turns to it; only the front caption shows; at the ends the arrows are `aria-disabled` (they keep keyboard focus);
+  the "2 / 3" count is a polite live region. Reduced motion or no JavaScript: the same figures as a scroll-snap slider.
 - **Details:** order of the day on satin beside the venue photo; map, calendar, dress code, blocks, travel, menu,
   registry, FAQ (`+`/`×` outside the accessible name).
-- **RSVP:** reply card on velvet (a faint sweep), the shared form, closing bow, "Open the box again".
+- **RSVP:** reply card on velvet (a faint sweep), the shared form; when a reply is sent the satin light crosses the
+  card again and "Thank you!" gets the foil shimmer; closing bow, "Open the box again".
 
 Page change (all pages): the new page is drawn across the old one like satin — a feathered diagonal mask wipe while the
 old page dims and slides back a little (`::view-transition-new(root)`); scene steps settle like fabric laid down (tilted
@@ -57,7 +62,8 @@ back, then flat), "drape" steps unroll from the top. The other 22 themes cross-f
 ## Deviations
 
 - No W1 comps (wave 23–28 is built before its GPT parts) → `theme-check --compare none`.
-- No particles (accents): the brief's pearls are a GPT accent part (W2.8) that is not wired yet.
+- No particles (accents), no pearl divider, rings or display plinth: their prompts were dropped from GPT_PROMPTS.md
+  (G167 — nothing used them); they come back only together with a page that uses them.
 - The carousel has no photo viewer: the display is the large view.
 
 ## Not tried

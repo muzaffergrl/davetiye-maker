@@ -42,6 +42,7 @@ PENCERE_MIN_PAY = 0.003
 KAYDET = re.compile(r"\*\*Kaydet:\*\*\s*`([^`]+)`(.*)")
 OLCU = re.compile(r"(\d{3,5})\s*[×x]\s*(\d{3,5})")
 PAKET = re.compile(r"^##\s+PAKET\s+(\d)", re.I)
+EK_DOSYA = re.compile(r"`([^`\s]+\.(?:png|jpg|jpeg|webp))`")
 EKRAN = re.compile(r"(\d+)\s*ekran", re.I)  # mockup Kaydet satırı: "· 3 ekran" = beklenen yeşil ekran sayısı
 EKRAN_MIN_PAY = 0.01  # her yeşil ekran görselin ≥%1'i
 EKRAN_DISBUKEY = 0.985  # bölge / dışbükey gövde; yuvarlak köşeli düz ekran ≈ 0.995+
@@ -61,26 +62,33 @@ def beklenenler(prompts: Path):
             continue
         m = KAYDET.search(line)
         if not m:
-            if cur is not None and "#00FF00" in line.upper():
-                cur["pencere"] = True
-            if cur is not None and "wrap" in line.lower():
-                cur["sarma"] = True
+            for b in cur or ():
+                if "#00FF00" in line.upper():
+                    b["pencere"] = True
+                if "wrap" in line.lower():
+                    b["sarma"] = True
             continue
         yol, kalan = m.group(1), m.group(2)
         o = OLCU.search(kalan)
         e = EKRAN.search(kalan)
-        out.append({
-            "yol": yol,
-            "olcu": (int(o.group(1)), int(o.group(2))) if o else None,
-            "seffaf": "Şeffaf" in kalan or "seffaf" in kalan.lower(),
-            "mockup": "/mockups/" in yol,
-            "ekran": int(e.group(1)) if e else None,
-            "paket": paket,
-            "pencere": False,
-            "sarma": False,
-            "baslik": baslik,
-        })
-        cur = out[-1]
+        # bir satırda birden çok dosya: `tile_1.png`, `tile_2.png` … — yalın adlar ilk yolun klasöründen (G167)
+        klasor = yol.rsplit("/", 1)[0] + "/" if "/" in yol else ""
+        ekler = [a if "/" in a else klasor + a for a in EK_DOSYA.findall(kalan.split("·", 1)[0])]
+        grup = []
+        for y in [yol, *ekler]:
+            grup.append({
+                "yol": y,
+                "olcu": (int(o.group(1)), int(o.group(2))) if o else None,
+                "seffaf": "Şeffaf" in kalan or "seffaf" in kalan.lower(),
+                "mockup": "/mockups/" in y,
+                "ekran": int(e.group(1)) if e else None,
+                "paket": paket,
+                "pencere": False,
+                "sarma": False,
+                "baslik": baslik,
+            })
+        out.extend(grup)
+        cur = grup
     return out
 
 

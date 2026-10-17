@@ -10,7 +10,9 @@ boxes written to manifest.json → stage.
 
 GPT parts (collections/28_Maison_Patisserie/assets/gpt/parts/, PAKET 5 in GPT_PROMPTS.md) — used as soon as they exist:
   box_base.png  lid.png  ribbon_cross.png  bow_left.png  bow_right.png  bow_knot.png  tissue_left.png  tissue_right.png
-  card_small.png  bg_page.png  bg_tile.png  shelf.png  accent_1.png (sugar pearl)  decor_macarons.png  web_hero.png
+  card_small.png  bg_page.png  bg_tile.png  shelf.png  accent_1.png (sugar pearl)  web_hero.png
+Every output keeps the SAME file names and widths whatever size GPT delivers (G167 drop-in rehearsal,
+tools/gpt_kuru_deneme.py): each part is scaled to the canvas / width the pages ask for (img/<name>-<w>.webp in the HTML).
 INTERIM (none of them exist yet, 2026-10-17): until they arrive each layer is cut, toned, mirrored or masked from GPT
 pictures that are already in this repository — nothing is drawn (K21, docs/11 §5.7):
   paper    collections/21_Crimson_Rose_Atelier/assets/gpt/textures/paper-background.png  (plain cream paper)
@@ -59,12 +61,39 @@ TISSUE_L, TISSUE_R = (54, 54, 548, 970), (476, 54, 970, 970)
 used: dict[str, str] = {}
 
 
-def gpt(name: str) -> Image.Image | None:
+def gpt(name: str, canvas: bool = False) -> Image.Image | None:
+    """The GPT part, or None. canvas=True: a stage layer, scaled to the shared C × C canvas (PAKET 5: 1024 × 1024)."""
     p = PARTS / f"{name}.png"
     if p.exists():
         used[name] = f"gpt parts/{name}.png"
-        return Image.open(p).convert("RGBA")
+        im = Image.open(p).convert("RGBA")
+        if canvas and im.size != (C, C):
+            print(f"note: {name}.png is {im.size[0]}×{im.size[1]}, scaled to the {C}×{C} stage canvas", file=sys.stderr)
+            im = im.resize((C, C), Image.LANCZOS)
+        return im
     return None
+
+
+def at_width(im: Image.Image, w: int) -> Image.Image:
+    """At least `w` px wide (the widest file the pages name): tb.webp never upscales and would name a narrower piece
+    <name>-<its width>.webp, which no page asks for (a broken image). Wider pieces are left to tb.webp."""
+    if im.width >= w:
+        return im
+    print(f"note: a {im.width} px wide piece is scaled UP to {w} px (ask GPT for a larger one)", file=sys.stderr)
+    return im.resize((w, max(1, round(im.height * w / im.width))), Image.LANCZOS)
+
+
+def pure_green(out: Path) -> dict:
+    """Residue of a #00FF00 key window: near-pure green pixels only. No Maison part has a window (GPT_PROMPTS.md), and
+    tb.yesil_denetle's hue test also fires on a deep, saturated pistachio (e.g. 50,100,45) — the box's own colour — so
+    that test is recorded as information and this stricter one decides."""
+    bad = {}
+    for f in sorted(Path(out).glob("*.webp")):
+        a = np.asarray(Image.open(f).convert("RGBA")).astype(np.int16)
+        n = int(((a[..., 1] >= 200) & (a[..., 0] <= 90) & (a[..., 2] <= 90) & (a[..., 3] > 25)).sum())
+        if n:
+            bad[f.name] = n
+    return bad
 
 
 def tone(src: Image.Image, colour, strength: float = .55) -> Image.Image:
@@ -128,9 +157,7 @@ def main() -> int:
     satin = Image.open(INTERIM["satin"]).convert("RGB")        # 1254 × 1254
 
     def layer(name: str, interim, widths=(440, 880), q=82):
-        im = gpt(name) or interim()
-        if im.size != (C, C):
-            im = im.resize((C, C), Image.LANCZOS)
+        im = gpt(name, canvas=True) or interim()
         used.setdefault(name, "interim")
         tb.webp(im, name, list(widths), q, manifest, out=OUT)
         return im
@@ -143,7 +170,7 @@ def main() -> int:
     lid = layer("lid", lambda: on_canvas(tone(paper.crop((32, 260, 992, 1220)), PISTACHIO, .6), LID))
 
     # ribbon: one cross over the lid (GPT ribbon_cross.png), cut into four arms at the middle so each slides away
-    cross = gpt("ribbon_cross")
+    cross = gpt("ribbon_cross", canvas=True)
     if cross is None:
         band = tone(satin.crop((100, 0, 100 + BAND * 2, 1254)), ROSE, .9)
         cross = Image.new("RGBA", (C, C), (0, 0, 0, 0))
@@ -164,7 +191,7 @@ def main() -> int:
 
     # bow: two loops + the knot (GPT bow_left / bow_right / bow_knot, or the interim bow cut at its knot)
     if all((PARTS / f"{n}.png").exists() for n in ("bow_left", "bow_right", "bow_knot")):
-        bows = {"bow_l": gpt("bow_left"), "bow_knot": gpt("bow_knot"), "bow_r": gpt("bow_right")}
+        bows = {"bow_l": gpt("bow_left", True), "bow_knot": gpt("bow_knot", True), "bow_r": gpt("bow_right", True)}
         knot = None
     else:
         src = Image.open(INTERIM["bow"]).convert("RGBA")
@@ -187,7 +214,7 @@ def main() -> int:
         tb.webp(im, n, [440, 880], 84, manifest, out=OUT)
     whole = Image.alpha_composite(Image.alpha_composite(bows["bow_l"], bows["bow_knot"]), bows["bow_r"])
     wb = tb.alfa_kutusu(np.asarray(whole)[..., 3], esik=8)
-    tb.webp(whole.crop((wb[0] - 4, wb[1] - 4, wb[2] + 4, wb[3] + 4)), "bow", [240, 480], 84, manifest, out=OUT)  # footer, thank-you card
+    tb.webp(at_width(whole.crop((wb[0] - 4, wb[1] - 4, wb[2] + 4, wb[3] + 4)), 480), "bow", [240, 480], 84, manifest, out=OUT)  # footer, thank-you card
     knot_ok = tb.ortusme(np.asarray(Image.alpha_composite(Image.alpha_composite(bows["bow_l"], bows["bow_knot"]), bows["bow_r"])),
                          [np.asarray(b) for b in bows.values()])
 
@@ -198,6 +225,10 @@ def main() -> int:
         used["card_small"] = "interim"
     else:
         card_src = card_src.crop(tb.alfa_kutusu(np.asarray(card_src)[..., 3], esik=24))   # the card alone, its own edge kept
+        want = (CARD[2] - CARD[0]) / (CARD[3] - CARD[1])
+        if abs(card_src.width / card_src.height / want - 1) > .04:   # the HTML card is 560:740; > 4 % = visibly stretched
+            print(f"WARNING: card_small.png card is {card_src.width}×{card_src.height} (ratio {card_src.width / card_src.height:.3f}), "
+                  f"the stage card is 560:740 ({want:.3f}) — it is stretched; ask GPT again", file=sys.stderr)
     card_src = card_src.resize((CARD[2] - CARD[0], CARD[3] - CARD[1]), Image.LANCZOS)
     tb.webp(card_src, "card_paper", [320, 560], 80, manifest, out=OUT)
 
@@ -216,7 +247,18 @@ def main() -> int:
 
     # ---------------------------------------------------------------- page ground, shelf, sugar pearl
     bg = gpt("bg_page")
-    bg = bg.convert("RGB") if bg is not None else tone(paper, CREAM, .5)
+    bg = at_width(bg.convert("RGB"), 1024) if bg is not None else tone(paper, CREAM, .5)
+    if used.get("bg_page", "").startswith("gpt"):
+        # the box page's kicker, names, date and hint sit straight on this ground: theme-check "text over painted decor"
+        # fails at a mean horizontal grey gradient > 2.2 on screen (scripts/lib/theme-env.ts backdrop.edge_max). Same
+        # measure on the middle 70 % at phone size (640 px wide); interim: mean 247, gradient 0.77.
+        g = bg.convert("L").resize((640, round(bg.height * 640 / bg.width)), Image.LANCZOS)
+        mid = np.asarray(g.crop((96, int(g.height * .15), 544, int(g.height * .85))), float)
+        lum, grad = float(mid.mean()), float(np.abs(np.diff(mid, axis=1)).mean())
+        manifest["bg_page_middle"] = {"mean": round(lum, 1), "gradient": round(grad, 2)}
+        if lum < 215 or grad > 1.8:
+            print(f"WARNING: bg_page.png middle is not calm/light enough for the box page's dark text (mean {lum:.0f}, "
+                  f"want >= 215; gradient {grad:.2f}, theme-check fails > 2.2) — ask GPT again (W2.10)", file=sys.stderr)
     used.setdefault("bg_page", "interim")
     tb.webp(bg, "bg_page", [640, 1024], 76, manifest, out=OUT)
     tile = gpt("bg_tile")
@@ -225,7 +267,7 @@ def main() -> int:
     tb.webp(tile, "bg_tile", [640], 74, manifest, out=OUT)
     shelf = gpt("shelf")
     if shelf is not None:
-        shelf = shelf.crop(tb.alfa_kutusu(np.asarray(shelf)[..., 3], esik=24))
+        shelf = at_width(shelf.crop(tb.alfa_kutusu(np.asarray(shelf)[..., 3], esik=24)), 1200)   # pages: shelf-600 / -1200
     else:
         shelf = tone(satin.crop((0, 600, 1254, 660)), PLATE, .8).resize((1200, 44))
         used["shelf"] = "interim"
@@ -238,7 +280,7 @@ def main() -> int:
         pearl = Image.fromarray(a, "RGBA")
         used["accent_1"] = "interim (14 accent_1, pearl body only)"
     pb = tb.alfa_kutusu(np.asarray(pearl)[..., 3], esik=8)
-    tb.webp(pearl.crop(pb), "accent_1", [200], 84, manifest, out=OUT)
+    tb.webp(at_width(pearl.crop(pb), 200), "accent_1", [200], 84, manifest, out=OUT)
 
     # ---------------------------------------------------------------- placeholders, share image, icon
     slots = {}
@@ -270,7 +312,11 @@ def main() -> int:
 
     # ---------------------------------------------------------------- checks + manifest
     manifest["sources"] = used
-    manifest["checks"] = {"green": tb.yesil_denetle(OUT), "bow_cut_overlap": stage["bow_cut_overlap"]}
+    waiting = sorted(n for n, v in used.items() if not v.startswith("gpt"))
+    manifest["_note"] = ("G166/G167 build from the PAKET 5 GPT parts (collections/28_Maison_Patisserie/assets/gpt/parts/)."
+                         if not waiting else manifest["_note"] + " Still waiting for: " + ", ".join(waiting) + ".")
+    manifest["checks"] = {"green": pure_green(OUT), "green_hue_info": tb.yesil_denetle(OUT),
+                          "bow_cut_overlap": stage["bow_cut_overlap"]}
     manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)

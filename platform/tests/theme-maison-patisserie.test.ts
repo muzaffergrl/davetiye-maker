@@ -219,3 +219,24 @@ test('RSVP keeps the shared form contract', async () => {
   assert.equal($('a[href="#reply"]').length, 1);
   assert.equal($('[name="website"]').length, 0);
 });
+
+test('G167 drop-in: GPT parts keep the file names the pages ask for; PAKET 6 prompts match the print boxes', () => {
+  const build = read('build_images.py');
+  // a GPT piece narrower than the widest file a page names is scaled to it (tb.webp would otherwise name it by its width)
+  assert.match(build, /at_width\(shelf\.crop\([^\n]*1200\)/);
+  assert.match(build, /at_width\(pearl\.crop\(pb\), 200\)/);
+  assert.match(build, /"bow", \[240, 480\]/);
+  for (const n of ['ribbon_cross', 'bow_left', 'bow_right', 'bow_knot']) assert.match(build, new RegExp(`gpt\\("${n}", (canvas=)?True\\)`), n);
+  const prompts = readFileSync(path.join(ROOT, '..', 'collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md'), 'utf8');
+  const saved = [...prompts.matchAll(/\*\*Kaydet:\*\*\s*`([^`]+)`/g)].map((m) => m[1]);
+  assert.ok(!saved.some((f) => /decor_/.test(f)), 'decor parts are deferred (not read by the build)');
+  assert.deepEqual(saved.filter((f) => f.includes('/print/')).map((f) => path.basename(f)), ['invitation_front.png', 'invitation_back.png']);
+  const l = printLayout(id)!;
+  assert.deepEqual([l.front, l.back], [[27, 13, 16, 13], [21, 12, 10, 12]], 'the boxes the PAKET 6 prompts keep empty');
+});
+
+test('G167 keyboard: focus clears the bottom nav, chips carry the ring, the shelf is a tab stop only when it slides', () => {
+  assert.match(css, /html\{[^}]*scroll-padding:16px 0 calc\(var\(--nav-h\)/);
+  assert.match(css, /\.choice label:has\(input:focus-visible\)\{outline:2px solid/);
+  assert.match(js, /track\.tabIndex = !reduce && track\.scrollWidth > track\.clientWidth \+ 1 \? 0 : -1/);
+});

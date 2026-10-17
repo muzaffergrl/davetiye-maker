@@ -31,6 +31,9 @@
 <main>
 <section class="lantern-hero" data-scene="home-hero">
   <span class="lantern-glow" aria-hidden="true"></span>
+  <span class="lantern" aria-hidden="true"></span>
+  <span class="bloom bloom-tl" aria-hidden="true"></span>
+  <span class="bloom bloom-br" aria-hidden="true"></span>
   <div class="hero-card">
     <img class="card-img" src="img/card_paper-480.webp" srcset="img/card_paper-480.webp 480w, img/card_paper-878.webp 878w" sizes="min(84vw, 400px)" alt="" fetchpriority="high">
     <div class="hero-copy">
@@ -41,6 +44,8 @@
       <div class="hero-photo" data-if="thank_you_on thank_you.photo">
         <img data-field="thank_you.photo" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="min(56vw, 260px)">
       </div>
+      <!-- the GPT card's arch window is a hole: without a thank-you photo a zellige tile fills it (as on the doors' card) -->
+      <div class="hero-photo ty-fill" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><span class="ty-decor"><img src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="120px" alt=""></span></div>
       <p class="eyebrow" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
       <p class="eyebrow" data-if="thank_you_on" data-field="thank_you_title"></p>
       <h1 class="names" data-fit><span data-field="partners.0.display_name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name"></span></h1>
@@ -52,7 +57,7 @@
 
 <!-- the zellige row: tiles lay themselves one by one, left to right (MOTION.scenes home-tiles, preset "tile") -->
 <div class="zellige" aria-hidden="true" data-scene="home-tiles">
-  <img src="img/tile_1-76.webp" alt="" data-step="tile" data-a="tile" data-i="0"><img src="img/tile_2-76.webp" alt="" data-step="tile" data-a="tile" data-i="1"><img src="img/tile_3-76.webp" alt="" data-step="tile" data-a="tile" data-i="2"><img src="img/tile_1-76.webp" alt="" data-step="tile" data-a="tile" data-i="3"><img src="img/tile_2-76.webp" alt="" data-step="tile" data-a="tile" data-i="4"><img src="img/tile_3-76.webp" alt="" data-step="tile" data-a="tile" data-i="5"><img src="img/tile_1-76.webp" alt="" data-step="tile" data-a="tile" data-i="6">
+  <img src="img/tile_1-76.webp" srcset="img/tile_1-76.webp 76w, img/tile_1-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="0"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="1"><img src="img/tile_2-76.webp" srcset="img/tile_2-76.webp 76w, img/tile_2-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="2"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="3"><img src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="4"><img src="img/tile_4-76.webp" srcset="img/tile_4-76.webp 76w, img/tile_4-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="5"><img src="img/tile_1-76.webp" srcset="img/tile_1-76.webp 76w, img/tile_1-152.webp 152w" sizes="(min-width: 760px) 50px, 38px" alt="" data-step="tile" data-a="tile" data-i="6">
 </div>
 
 <section class="invitation" id="invitation" data-scene="home-invite">
@@ -67,6 +72,7 @@
       <p data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
     </div>
     <p class="body-text" data-copy="invite_request" data-step="names" data-i="1">request the pleasure of your company at their wedding</p>
+    <span class="divider" aria-hidden="true" data-step="date"></span>
     <div class="date-block" data-step="date">
       <span data-field="date" data-format="weekday"></span>
       <b><span data-field="date" data-format="month"></span> <span data-field="date" data-format="day"></span></b>
@@ -111,9 +117,9 @@
     <h2 data-copy="story_title" data-step="head" data-i="1">Our Story</h2>
   </div>
   <a class="teaser-windows" href="story.html" data-step="photo" data-copy-attr="aria-label:album_open" aria-label="View our photographs">
-    <span class="window photo-slot" data-slot="story_1" data-a="light"><img data-photo="story_1" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(26vw, 150px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></span>
-    <span class="window photo-slot" data-slot="story_2" data-a="light"><img data-photo="story_2" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="min(26vw, 150px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></span>
-    <span class="window photo-slot" data-slot="story_3" data-a="light"><img data-photo="story_3" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="min(26vw, 150px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></span>
+    <span class="window photo-slot" data-slot="story_1" data-a="light"><img data-photo="story_1" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(26vw, 150px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span><span class="arch" aria-hidden="true"></span></span>
+    <span class="window photo-slot" data-slot="story_2" data-a="light"><img data-photo="story_2" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="min(26vw, 150px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span><span class="arch" aria-hidden="true"></span></span>
+    <span class="window photo-slot" data-slot="story_3" data-a="light"><img data-photo="story_3" src="img/ph_window-480.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="min(26vw, 150px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span><span class="arch" aria-hidden="true"></span></span>
   </a>
   <p data-step="link"><a class="textlink" href="story.html"><span data-copy="album_open">View our photographs</span> <span aria-hidden="true">↗</span></a></p>
 </section>
@@ -129,7 +135,7 @@
 </section>
 
 <footer class="signature" data-scene="home-foot">
-  <img class="foot-tile" src="img/tile_3-76.webp" alt="" loading="lazy" data-step="seal">
+  <img class="foot-tile" src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="44px" alt="" loading="lazy" data-step="seal">
   <p class="eyebrow" data-copy="foot_kicker" data-step="names">Until then, with love</p>
   <p class="sig-names" data-field="name_display" data-step="names" data-i="1"></p>
   <p data-step="links"><a class="textlink" href="index.html?replay=1"><span data-copy="home_replay">Open the doors again</span></a></p>

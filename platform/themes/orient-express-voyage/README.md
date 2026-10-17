@@ -21,6 +21,10 @@ thank-you mode, editable texts, languages (G144 dictionaries carry this theme's 
 
 ## Opening (own type "cuzdan" — a ticket wallet; docs/11 §7)
 
+Long names (G167): site.js `fitStage` shrinks the closed wallet (never below 120 px wide) when the kicker + names would
+push "Tap to unbuckle" below the screen (360 × 640 with the §12 stress record), and `fitTicket` steps the ticket's type
+down (`--fit`, not below half; then the "First class to forever" line gives way) so nothing leaves the card.
+
 Tap → the strap unbuckles: the buckle end slides right and the tail left (0–700 ms) → the cover swings open on its left
 hinge to −180° (600–1500; its inside `wallet_cover_in` is the back face, so the hand-over happens at 90°) while the wallet
 scales to `--open-scale` and moves right by half its width so the two-wallet-wide spread is centred (site.js: 94 % of the
@@ -34,7 +38,9 @@ production build, Chromium 390×844).
 - **Route line:** an `<svg>` path (`pathLength="1"`, dash offset 1 → 0) laid over the GPT map — an interface line, not decor.
   CSS scroll-driven animation (`view-timeline: --trip`, `animation-timeline`) where supported; elsewhere site.js sets
   `--route` from the scroll. Home: the journey band; details: the map stays in view (sticky) while the stations pass and the
-  line reaches the end with the last one. Reduced motion: drawn at once.
+  line follows the list of stations (`view-timeline: --stops` on `.stations`, `timeline-scope` on the section): it starts
+  as the first station rises to 80 % of the screen and arrives as the last one passes 55 % (G167; before, the range was
+  the whole section and the line jumped from 0 to 100 % within ~60 px of scroll). Reduced motion: drawn at once.
 - **Stations:** each schedule row is its own scene on details (arrives as it scrolls in); on home the first four arrive one
   by one (`MOTION.stagger`).
 - **Luggage tag** (home, RSVP link + reply-by date on its face) swings from its eyelet when it comes into view.
@@ -46,7 +52,12 @@ production build, Chromium 390×844).
 Every image in `img/` is currently a flat palette tone with a soft light fall-off (`img/manifest.json` → `interim` lists
 the 16 waiting parts); the carriage-window frame is transparent (the photo stands alone). No shape, line, ornament or
 texture is drawn (K21). The prompts are in `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md`; when parts
-arrive run `build_images.py` and align the `/* manifest stage.* */` percentages in `site.css` with the new manifest.
+arrive run `build_images.py`: it measures the strap (on the closed wallet's own box) and its buckle cut, the ticket and its
+portrait window, the carriage glass and frame proportion, and writes them into `site.css` between `/* stage:begin` and
+`stage:end */` (CSS custom properties read by `.strap-l/-r`, `.wallet>.ticket`, `.ticket-photo`, `.glass`,
+`.carriage-window`) — no percentages to copy by hand (G167). Dry run without GPT: `python3 tools/gpt_kuru_deneme.py --tema
+orient-express-voyage --sekil collections/25_Orient_Express_Voyage/assets/gpt/kuru_sekil.json`. The printable invitation
+does not switch by itself: see the `orient-express-voyage` comment in `lib/print/layouts.ts`.
 
 ## Not tried
 

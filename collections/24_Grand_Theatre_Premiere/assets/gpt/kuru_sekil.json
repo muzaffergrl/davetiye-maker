@@ -1,0 +1,12 @@
+{
+  "_not": "tools/gpt_kuru_deneme.py --sekil: GPT_PROMPTS.md'deki yerler (tuval yüzdesi x0,y0,x1,y1). Deneme görseli içindir, ürün değildir.",
+  "proscenium.png": {"kutu": [4, 3, 96, 97], "pencere": [12, 14, 88, 92]},
+  "curtain_left.png": {"kutu": [11, 12, 51, 93]},
+  "curtain_right.png": {"kutu": [49, 12, 89, 93]},
+  "curtain_left_open.png": {"kutu": [11, 12, 27, 93]},
+  "curtain_right_open.png": {"kutu": [73, 12, 89, 93]},
+  "card_small.png": {"kutu": [12, 12, 88, 88], "pencere": [29.5, 18.8, 70.5, 51.5]},
+  "card_plain.png": {"kutu": [12, 12, 88, 88]},
+  "ticket_stub.png": {"kutu": [7, 28.5, 93, 71.5]},
+  "tassel.png": {"kutu": [30, 14, 70, 86]}
+}

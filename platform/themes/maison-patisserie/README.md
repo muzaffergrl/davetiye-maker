@@ -67,9 +67,21 @@ orders the real parts; the script switches **layer by layer** as each file appea
 
 - No W1 comps (the design starts from docs/24, not from a PAKET 5 W1 run) → no comp map; `theme-check --compare none`.
 - Decor family (macarons, tulle, gold-rimmed plates) is not on the pages yet: those parts do not exist; the interim pages
-  use only the bow, the pearls and the shelf. GPT_PROMPTS.md asks for them with their places.
+  use only the bow, the pearls and the shelf. G167: their prompts (W2.14–W2.15) are **deferred** in GPT_PROMPTS.md (no
+  save path, GPT skips them) until a theme task designs their places and wires them into `build_images.py` together.
 - No demo map pin: `lib/claim/demo-map.ts` was outside this task's write area (coordinator: add `'maison-patisserie':
   { lat: 41.4901, lng: -71.3128 }` — Newport, RI).
+
+## When the GPT parts arrive (G167 drop-in rehearsal)
+
+`python3 tools/gpt_kuru_deneme.py --tema maison-patisserie --sekil collections/28_Maison_Patisserie/assets/gpt/kuru_sekil.json`
+fills every prompted path with a test image in a temp copy and runs the builds: **passes** (every `img/` file the pages
+name is produced; no interim trace in the manifest). `build_images.py` scales each part to what the pages ask for
+(stage layers 1024², `shelf-1200`, `bow-480`, `accent_1-200`, `bg_page-1024`; a smaller part is upscaled with a note on
+stderr), warns when `card_small`'s card is off 560:740 by > 4 %, and fails only on near-pure #00FF00 (no Maison part
+has a key window; the shared hue test also fires on deep pistachio and is kept as `checks.green_hue_info`). Then compare
+`.tissue-l/.tissue-r/.bow` `transform-origin` with `manifest.stage.layers`. The printed invitation stays composed until
+PAKET 6 arrives — switch steps in GPT_PROMPTS.md PAKET 6 "Gelince" (its prompts keep the `layouts.ts` text boxes empty).
 
 ## Not tried
 

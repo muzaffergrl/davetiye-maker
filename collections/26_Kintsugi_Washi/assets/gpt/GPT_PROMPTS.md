@@ -14,11 +14,15 @@ katlar, kuşak ve kart bu kâğıtların dikdörtgen kırpımları. Parçalar ge
 for GPT".
 
 ## Nereye?
-- Repo `muzaffergrl/davetiye-maker`; klasör `collections/26_Kintsugi_Washi/assets/gpt/` altındaki `parts/` (PAKET 5,
-  PAKET 6) ve `photos/` (PAKET 2). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme işi verme.
-- Sonra (Claude): `python3 platform/themes/kintsugi-washi/build_images.py` (img/ yeniden üretilir; W2.1–W2.3 otomatik
-  devralınır), `python3 tools/kit_check.py collections/26_Kintsugi_Washi --paket 2`, basılı davetiye için
-  `cd platform && node scripts/build-print-assets.ts --theme kintsugi-washi`.
+- Repo `muzaffergrl/davetiye-maker`; klasör `collections/26_Kintsugi_Washi/assets/gpt/` altındaki `parts/` (PAKET 5),
+  `photos/` (PAKET 2) ve `print/` (PAKET 6). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya
+  yükleme işi verme.
+- Sonra (Claude): `python3 platform/themes/kintsugi-washi/build_images.py` — PAKET 5'in **her parçası geldiği anda
+  kendiliğinden** kullanılır (G167): img/ yeniden üretilir, `platform/themes/kintsugi-washi/parts.css` o parçaların
+  kurallarıyla yazılır; gelmeyen parçanın kuralı yazılmaz, sayfa geçici görünümünde kalır (`img/manifest.json` →
+  `parts.used` / `parts.waiting_for_gpt`). Sonra `python3 tools/kit_check.py collections/26_Kintsugi_Washi --paket 2`,
+  `python3 tools/gpt_kuru_deneme.py --tema kintsugi-washi` (prova; gerçek parçalarla da koşulabilir) ve göz kontrolü.
+  PAKET 6 için aşağıdaki "Gelince" adımı (elle, tek blok).
 
 ## Stil ve renk
 - Teknik: **sumi ink + gold leaf** on real handmade paper — photorealistic paper texture, ink and leaf; quiet, elegant,
@@ -45,6 +49,7 @@ döner.
 A seamless, tileable, perfectly flat top-down texture of handmade Japanese-style washi paper dyed deep indigo (#242E58), filling the whole square edge to edge: long soft paper fibres slightly lighter than the paper, a gentle uneven dye with very subtle darker clouds, a fine matte grain. Evenly lit from the top-left, no shadow, no vignette, no fold, no crease, no object, no pattern, no gold. The left/right and top/bottom edges must tile without a visible seam. No text, letters or symbols.
 ```
 Kontrol: dikişsiz (yan yana 2×2 konunca ek yeri yok); renk `#242E58` civarı; lifler görünür ama sakin; desen/yazı yok.
+Kullanım: katların dış yüzü (`washi_indigo-640/1024`), og/favicon montajı, basılı davetiyenin geçici şeridi.
 
 #### W2.2 Çivit washi — katın içi
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/washi_inner.png` · 1536×1536 · opak, dikişsiz
@@ -69,8 +74,10 @@ Kontrol: sakin (üstüne koyu yazı her yerde okunur); fildişi; dikişsiz; leke
 Only fine lines of real gold leaf in the kintsugi manner, on a fully transparent background, for a vertical 0.70:1 sheet (the image IS the sheet; no paper, no background): two or three slender, organic, branching gold veins that wander across the whole sheet like the mended cracks of a ceramic bowl — one crossing the sheet's upper part, one crossing the middle from the left edge to the right edge, one running down through the lower part; the lines are 2–6 px wide, with a soft metallic highlight from the top-left, slightly raised like applied leaf, irregular thickness, a few tiny gold dots along them. They must cross the horizontal lines at 40% and 62% of the height and the vertical centre line, so the paper folds can be cut along them. Nothing else: no paper, no shadow, no glow or halo outside the gold. No text, letters or symbols. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: yalnız altın çizgiler (kâğıt yok); %40 ve %62 yatay çizgilerini ve dikey orta çizgiyi kesiyor; parıltı/hâle yok; gerçek alfa.
-Kullanım: Claude kat sınırlarından keser (üst 0–%40, alt %62–%100, orta bantta sol/sağ); her parça kendi katının dış
-yüzünde; açılışta "altın damar parıltısı" = bu katmanla maskelenen kenarsız ışık.
+Kullanım (build_images.py, otomatik): görüntü 0,70:1 paketin kendisi sayılır, 1078×1540'a ölçeklenir ve kat sınırlarından
+kesilir → `vein_top/bottom-760`, `vein_left/right-380` (her biri kendi katının dış yüzünde, katla birlikte döner);
+kuşak bandı (%45–%56) çıkarılmış tamamı → `vein_glint-540` = `.sheen` ışığının maskesi: kapalı pakette ve açılışın ilk
+430 ms'sinde altın ışık yalnız damarların üstünde gezer.
 
 #### W2.5 Mürekkep lekesi (foto maskesi)
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/ink_bleed.png` · 1024×1024 · **Şeffaf zemin**
@@ -79,6 +86,8 @@ yüzünde; açılışta "altın damar parıltısı" = bu katmanla maskelenen ken
 A single bloom of black sumi ink spreading on wet rice paper, seen from above, on a fully transparent background: a solid, fully opaque black centre filling about 70% of the square, with an organic, feathered, softly irregular edge — fine capillary tendrils and soft bleeding fringes, a few small satellite droplets near the edge — like ink that has just soaked into absorbent paper. Pure black only (no grey wash in the centre, no paper texture, no colour). Centered, not cropped, generous empty margin. No text, letters or symbols. True transparent background PNG (real alpha channel — not white, not a checkerboard).
 ```
 Kontrol: merkez tam opak siyah; kenar organik ve tüylü; kâğıt dokusu yok; gerçek alfa (CSS maske olarak büyütülecek).
+Kullanım: alfa kutusuna kırpılır, kareye tamamlanır → `ink-640` = `.ink` maskesinin üç katmanı (geçici yumuşak
+disklerin yerine; büyüme süresi ve konumlar aynı). Görünen kısım yalnız kenar (merkez opak olduğu için).
 
 #### W2.6 Sumi fırça darbesi (başlık altı / ayırıcı)
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/sumi_stroke.png` · 1536×384 · **Şeffaf zemin**
@@ -87,6 +96,9 @@ Kontrol: merkez tam opak siyah; kenar organik ve tüylü; kâğıt dokusu yok; g
 One single horizontal brush stroke of sumi ink in deep indigo-black (#1D2340), on a fully transparent background: about 75% of the image width, starting with a confident pressed head on the left and fading into a dry, split, feathered tail on the right, with natural dry-brush texture. No other mark, no letter, no character, no seal, no gold. Centered, not cropped, generous empty margin. No text. True transparent background PNG (real alpha channel).
 ```
 Kontrol: tek yatay darbe; harf/karakter gibi okunmuyor; gerçek alfa.
+Kullanım: pirinç kâğıdı üzerindeki başlıkların altında (`.paper-band h2` — home davet ve gün, details program —
+ve RSVP form başlığı); sahnede başlık yükseldikten sonra soldan sağa "boyanır" (clip-path; reduced motion'da sabit).
+Koyu çivit zemindeki başlıklarda kullanılmaz (koyu mürekkep orada okunmaz).
 
 #### W2.7 Altın varak pulları (süzülen parçacık) — üç ayrı dosya
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_1.png`, `gold_flake_2.png`, `gold_flake_3.png` · her biri 512×512 · **Şeffaf zemin**
@@ -94,7 +106,10 @@ Kontrol: tek yatay darbe; harf/karakter gibi okunmuyor; gerçek alfa.
 ```
 A single small torn flake of real gold leaf, alone, slightly crinkled, with a soft metallic highlight from the top-left, irregular torn edges, filling about 55% of the square. Centered, not cropped. No shadow, no glow or sparkle outside the flake. No text. True transparent background PNG (real alpha channel). (Make three different flakes: 1 = a roughly square flake, 2 = a long narrow sliver, 3 = a small crumpled piece.)
 ```
-Kontrol: tek pul; üç dosya farklı biçimde; gölge/ışıltı yok; alfa (açılışta karttan 3 pul düşer, home'a varışta 2).
+Kontrol: tek pul; üç dosya farklı biçimde; gölge/ışıltı yok; alfa.
+Kullanım: `flake_1..3-200` (alfa kutusu, kare); `parts.css` `--kw-flakes` ile site.js'e bildirilir: açılışta son panel
+açılırken paketten 3 pul (2500 ms), home'a varışta kartın üstünde 2, RSVP gönderilince teşekkür panelinden 5 pul
+süzülür (bir yana salınarak). Dosya yoksa pul yok (çizilmiş yedek yok).
 
 #### W2.8 Pirinç kâğıdı kuşak (kapanış)
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/obi_band.png` · 1600×240 · **Şeffaf zemin**
@@ -103,6 +118,8 @@ Kontrol: tek pul; üç dosya farklı biçimde; gölge/ışıltı yok; alfa (aç�
 A flat, straight horizontal band of the same ivory rice paper as rice_paper.png, seen straight on, like a paper belly band wrapped round a folded invitation: a long rectangle about 6.7:1, its two long edges softly torn (natural deckle), a few scattered flecks of real gold leaf on it, the two short ends cut straight. Lit from the top-left; a very soft contact shade on the band itself only. No cast shadow, no knot, no seal, no ribbon. No text, letters or symbols. True transparent background PNG (real alpha channel).
 ```
 Kontrol: düz yatay bant (~6,7:1); yırtık uzun kenarlar; altın pullar seyrek; düğüm/mühür yok; alfa.
+Kullanım: alfa kutusuna kırpılır → `obi-800` = `.band` (paketin %45–%56'sı, iki yana %3 taşar; 100% × 100% gerilir —
+oran 6,7:1'den çok saparsa bant basık/uzun görünür).
 
 #### W2.9 Katların içindeki kart (boş, foto penceresi)
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/card_small.png` · 1078×1540 · **Şeffaf zemin**
@@ -111,6 +128,9 @@ Kontrol: düz yatay bant (~6,7:1); yırtık uzun kenarlar; altın pullar seyrek;
 A flat vertical invitation card of the same ivory rice paper as rice_paper.png, exactly 0.70:1, filling the image edge to edge (the card IS the image), seen straight on, with softly deckled edges and a very soft contact shade on the card itself. In its upper part a portrait photo window, 64% of the card's width, 4:5 tall, horizontally centered, its top edge at 9% of the card's height, filled with flat pure green #00FF00 (no texture, no shading, straight edges). Below the window the rice paper is EMPTY (the website sets the names and the date there). No gold line, no frame, no text, letters or symbols. True transparent background PNG (real alpha channel) around the deckled edge.
 ```
 Kontrol: pencere düz `#00FF00`, ölçü/konum tarif gibi; altı boş kâğıt; yazı yok.
+Kullanım: alfa kutusuna kırpılır; yeşil pencere ölçülür (manifest `card_small.window_pct`) ve şeffaf yapılır →
+`card_small-860` = katların içindeki kart; portre alanı ölçülen pencereye oturur, isim/tarih pencerenin altından başlar.
+Pencere bulunamazsa build uyarır ve kart pirinç kâğıdı kalır.
 
 #### W2.10 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
@@ -119,37 +139,43 @@ Kontrol: pencere düz `#00FF00`, ölçü/konum tarif gibi; altı boş kâğıt; 
 Wide horizontal still life, photorealistic, soft light from the top-left: the closed folded invitation — indigo washi paper (as washi_indigo.png) folded over an ivory rice-paper card like origami, a top and a bottom fold, two side panels meeting in the middle, an ivory rice-paper band with gold-leaf flecks round its middle (as obi_band.png), fine gold kintsugi veins crossing the folds (as kintsugi_veins.png) — lying slightly below the centre on a surface of the same rice paper, with three small torn gold-leaf flakes near it and a single sumi brush stroke far at the right edge. The top 20% of the image is calm, empty paper. This image is cropped to 1200×630 for link previews: keep the whole packet visible with at least 5% empty margin below it. No people, no text, no letters, no calligraphy, no seal with characters.
 ```
 Kontrol: paket bütün ve altta boşluklu; üst %20 boş; yazı/hat yok.
+Kullanım: `og-1200x630.jpg` (`tema_build.og_kirp`, alta hizalı: üstten ~%21 kırpılır).
 
 ---
 
 ## PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
 
 Ortak: photorealistic fine-art wedding photography, soft natural light, a calm indigo, ivory and warm gold palette,
-subtle film grain; a fictional couple in their early thirties (they must not resemble any real person or celebrity);
-modern, elegant clothing (no costume). No text, no frame, no watermark.
+subtle film grain; ONE fictional couple in their early thirties, the same two people in every photo (they must not
+resemble any real person or celebrity): Naomi — shoulder-length wavy dark-brown hair, warm light-brown skin, a slim gold
+ring; Kai — short black hair, a neat short beard, light skin. Modern, elegant clothing (no costume). No text, no frame,
+no watermark.
+
+Not: beş fotoğraf aynı sohbette sırayla üretilir; 2.1 sonrakilerin kişi referansıdır (yüz, saç, ten aynı kalsın).
+Gerçek bir kişiye/ünlüye benzerse yeniden üretilir.
 
 #### 2.1 Ana portre
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/photos/hero_portrait.jpg` · Dikey 1024×1280 (4:5)
 ```
-Vertical 4:5 wedding portrait of the fictional couple Naomi and Kai in an autumn garden: she in a simple ivory silk gown, he in a deep indigo suit, standing close under a red-gold maple, smiling at each other, three-quarter length, faces in the upper third, soft afternoon light from the left, a still pond and a cedar pavilion softly out of focus behind. Photorealistic, calm indigo, ivory and gold palette, subtle grain. No text, no frame.
+Vertical 4:5 wedding portrait of the fictional couple Naomi and Kai (as described above; not resembling any real person) in an autumn garden: she in a simple ivory silk gown, he in a deep indigo suit, standing close under a red-gold maple, smiling at each other, three-quarter length, faces in the upper third, soft afternoon light from the left, a still pond and a cedar pavilion softly out of focus behind. Photorealistic, calm indigo, ivory and gold palette, subtle grain. No text, no frame.
 ```
 
 #### 2.2 Story 1 — "A borrowed umbrella"
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/photos/story_1.jpg` · Dikey 1024×1280 (4:5)
 ```
-Vertical 4:5 candid photo: the same couple laughing under one shared dark umbrella on a quiet rainy street at dusk, warm shop lights blurred behind, wet stones reflecting the light, her hand on his arm. Photorealistic, same palette and grain. No readable signs, no text.
+Vertical 4:5 candid photo: the same couple as hero_portrait.jpg (same faces, hair and skin), laughing under one shared dark umbrella on a quiet rainy street at dusk, warm shop lights blurred behind, wet stones reflecting the light, her hand on his arm. Photorealistic, same palette and grain. No readable signs, no text.
 ```
 
 #### 2.3 Story 2 — "Tea by the river"
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/photos/story_2.jpg` · Yatay 1280×1024 (5:4)
 ```
-Landscape 5:4: the same couple sitting side by side on a wooden deck by a wide river in the early morning, two simple handmade ceramic cups between them, mist over the water and forested hills, seen from slightly behind and to the side. Photorealistic, same palette and grain. No text.
+Landscape 5:4: the same couple as hero_portrait.jpg sitting side by side on a wooden deck by a wide river in the early morning, two simple handmade ceramic cups between them, mist over the water and forested hills, seen from slightly behind and to the side. Photorealistic, same palette and grain. No text.
 ```
 
 #### 2.4 Story 3 — "The promise"
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/photos/story_3.jpg` · Dikey 1024×1280 (4:5)
 ```
-Vertical 4:5 close-up: the couple's hands, her hand with a slim gold engagement ring resting in his, beside a small ceramic tea bowl mended with gold kintsugi seams, on indigo linen, soft window light from the top-left, shallow depth of field. Photorealistic, same palette and grain. No text.
+Vertical 4:5 close-up: the hands of the same couple as hero_portrait.jpg (same skin tones), her hand with a slim gold engagement ring resting in his, beside a small ceramic tea bowl mended with gold kintsugi seams, on indigo linen, soft window light from the top-left, shallow depth of field. Photorealistic, same palette and grain. No text.
 ```
 
 #### 2.5 Mekân
@@ -160,24 +186,39 @@ Landscape 16:9: an elegant open garden pavilion of warm cedar wood beside a stil
 
 ---
 
-## PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi)
+## PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
 
-> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`). Şu an geçici: pirinç kâğıdı + üstte ve altta çivit
-> washi şeridi (temanın tonladığı kâğıtlar, ~195 ppi). İki sayfa gelince `composed` arka planları bunlara geçer
-> (`bg: url(print_front.webp) center / cover`) ve `node scripts/build-print-assets.ts --theme kintsugi-washi` koşulur.
-> Ölçü: 2250×3150 px (5:7) = 5×7 in + 3 mm taşmayla ≥ 428 ppi, A5 + 3 mm taşmayla ≥ 370 ppi (A5'te kenarlardan ~%1 kırpılır).
-> Güvenli alan: her kenardan %8 içeride önemli öğe yok.
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, blok `'kintsugi-washi'`). Şu an geçici
+> (`composed`): pirinç kâğıdı + üstte ve altta çivit washi şeridi (temanın tonladığı kâğıtlar, ~195 ppi).
+> **Dosya adı ve ölçü (G167):** dalganın öteki tasarımlarıyla aynı — `print/invitation_front_5x7.png`,
+> `print/invitation_back_5x7.png`, **1575×2175 px** = 5×7 in + 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez:
+> `layouts.ts` her yüz için tek zemin taşır (`cover`); A5 + 3 mm taşma (154×216 mm, oran 0,713) aynı sayfadan yanlardan
+> ~%0,8 kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
+> **Yazı alanı:** metin kutuları `layouts.ts`'teki ölçülerdir (ön `[21, 13, 19, 13]` = yükseklikte %21–%81, genişlikte
+> %13–%87; arka `[17, 12, 10, 12]` = %17–%90 × %12–%88, yüzde: üst, sağ, alt, sol). Prompt'lar bu alanı ~%3 payla boş
+> ister; alan aynı kalırsa kutular değişmeden kullanılır.
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. `layouts.ts` `'kintsugi-washi'` bloğunda `sources` → `{ front: 'print/invitation_front_5x7.png', back:
+>    'print/invitation_back_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
+>    cover('back'), images: [] } }`.
+> 2. Kutuları görselde ölç (süslemenin ~%2 dışında kalsın); taşma varsa `front`/`back` ya da `bands` düzelt
+>    (`tests/g149-print-layout.test.ts`).
+> 3. `cd platform && node scripts/build-print-assets.ts --theme kintsugi-washi` (artık kullanılmayan `rice.webp`/`washi.webp` dosyalarını
+>    `public/print/kintsugi-washi/`'den sil) ve `node scripts/print-sample.ts --theme kintsugi-washi --invite 5x7
+>    --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
 
 #### P1 — Ön yüz
-**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/print_front.png` · 2250×3150 · opak
+**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 · opak
 ```
-The front of a printed wedding invitation, full bleed, portrait 5:7, seen perfectly flat: the whole sheet is the ivory rice paper of rice_paper.png. Along the top edge a band of the indigo washi of washi_indigo.png about 12% of the height, its lower edge softly torn like hand-torn washi; along the bottom edge a matching indigo band about 11% of the height, its upper edge softly torn; one slender gold kintsugi vein (as kintsugi_veins.png) runs from the top band down the left margin and fades out before the centre; a few tiny gold-leaf flecks. The whole centre (about 74% of the width, 62% of the height) is EMPTY rice paper for dark text. Nothing important within 8% of any edge except the bands. No text, letters, numbers, calligraphy, monograms, seals, logos or watermarks. Print quality, sharp at 2250×3150 px.
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the ivory rice paper of rice_paper.png. Along the top edge a band of the indigo washi of washi_indigo.png about 12% of the height, its lower edge softly torn like hand-torn washi (the torn edge stays above 15% of the height); along the bottom edge a matching indigo band about 11% of the height, its upper edge softly torn (staying below 86%); one slender gold kintsugi vein (as kintsugi_veins.png) runs inside the top band and down the left margin only, within 8% of the left edge, fading out by the middle of the height; a few tiny gold-leaf flecks only near the bands. The rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm rice paper (the names, date and venue are set there): no vein, no fleck, no shadow, no stain in it. No text, letters, numbers, calligraphy, monograms, seals, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: tam taşma (kenara kadar kâğıt); orta %74 × %62 boş; yazı yok; çivit bantlar yırtık kenarlı.
+Kontrol: tam taşma (kenara kadar kâğıt); %18–%84 × %10–%90 tamamen boş; yazı yok; çivit bantlar yırtık kenarlı; damar yalnız
+bantta ve sol kenarın %8'inde.
 
 #### P2 — Arka yüz
-**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/print_back.png` · 2250×3150 · opak
+**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 · opak
 ```
-The back of the same printed wedding invitation, full bleed, portrait 5:7, perfectly flat: the same ivory rice paper, only a narrow indigo washi band along the top edge (about 7% of the height, its lower edge softly torn) and a few tiny gold-leaf flecks near it. Everything below the band is EMPTY rice paper for a schedule and a QR code. No text, letters, numbers, logos or watermarks. Print quality, 2250×3150 px.
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same ivory rice paper, only a narrow indigo washi band along the top edge (about 7% of the height, its lower edge softly torn, staying above 10% of the height) and a few tiny gold-leaf flecks within that top 12%. Everything below 14% of the height, and everything between 9% and 91% of the width, is COMPLETELY EMPTY rice paper (a schedule and a QR code are set there): no fleck, no vein, no shadow, no stain. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt; yalnız üstte dar çivit bant; geri kalanı boş; yazı yok.
+Kontrol: ön yüzle aynı kâğıt; yalnız üstte dar çivit bant (yırtık kenar %10'un üstünde); %14'ün altı boş; yazı yok.
