@@ -24,7 +24,7 @@ ortam değişkeni yok.
 - Bunun yerine bütün sesler **koddan sentezlendi**: `tools/audio_synth.py` (numpy/scipy + ffmpeg). Örnek (sample), kayıt ya da
   başkasının bestesi yok; tını toplamsal sentez, notalar sabit tohumlu kurallarla. BKE Studio'nun kendi eseri, atıfsız.
   Kayıt: `platform/public/audio/LICENSES.md` (her dosya: tür, süre, boyut, kaynak, lisans, tarih).
-- **Kulakla dinlenmedi** (ortamda ses çıkışı yok). Yalnız nesnel kontroller yapıldı: seviye (tepe −3 dBFS, ortalama −16…−19 dB),
+- **2026-10-16: kullanıcı sesleri dinledi ve onayladı** ("sesler okey sıkıntı yok"). Ajan kulakla dinleyemedi (ortamda ses çıkışı yok). Yalnız nesnel kontroller yapıldı: seviye (tepe −3 dBFS, ortalama −16…−19 dB),
   spektrogram, dalga biçimi, süre/boyut. **Kullanıcının dinleyip onaylaması gerekiyor**; beğenilmezse ya parametreler değişir ya
   da kullanıcının erişebildiği CC0 kaynaktan dosya eklenir (LICENSES.md'deki kurala göre).
 
@@ -88,7 +88,6 @@ Var olan hiçbir etiket değişmedi.
   süitleri ve `theme-check --stress` (kullanıcı isteğiyle).
 
 ### Açık kalanlar
-- Seslerin kulakla onayı (kullanıcı). İstenirse farklı tempo/tını/parça sayısı.
 - START HERE rehberine "Music & sound" adımı (G122).
 - Gerçek telefon testi (`docs/20_ELLE_TEST_PLANI.md`'ye "Story müziği + zarf sesi" satırı eklenebilir).
 - Yarım kalan parça yüklemeleri Blob'da `parts/<site>/` altında kalır (site silinince gider); temizlik işi istenirse eklenir.

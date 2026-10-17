@@ -61,11 +61,11 @@ test('a fully decided config launches; one leftover placeholder or a vercel.app 
   assert.deepEqual(launchProblems(readyConfig()), []);
   assert.doesNotThrow(() => assertLaunchReady(readyConfig()));
   const p = readyConfig();
-  p.designs[0].price = '[PRICE]';
+  p.designs.find((d) => d.status === 'live')!.price = '[PRICE]';
   assert.throws(() => assertLaunchReady(p), /price/);
   assert.ok(launchProblems(readyConfig({ siteUrl: 'https://davetiye-platform-five.vercel.app' })).some((x) => x.includes('not the brand domain')));
   const utm = readyConfig();
-  utm.designs[0].etsyListingUrl += '&utm_source=site';
+  utm.designs.find((d) => d.status === 'live')!.etsyListingUrl += '&utm_source=site';
   assert.ok(launchProblems(utm).some((x) => x.includes('utm_')));
   assert.ok(launchProblems(readyConfig({ support: { email: 'not-an-email', responseTime: '24 hours' } })).some((x) => x.includes('support.email')));
 });

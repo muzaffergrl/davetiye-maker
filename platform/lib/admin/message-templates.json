@@ -48,7 +48,7 @@
     "body": [
       "Hi, thank you for starting your website!",
       "Before any website goes live, we check the order in our Etsy shop: that it is paid and for the design you chose. Everything you set up is saved, so please keep going with your names, photos and details.",
-      "We usually confirm orders within [ORDER CHECK TIME]. We will message you here as soon as order {order} is confirmed; then reload your editor and tap Publish.",
+      "We will message you here as soon as order {order} is confirmed; then reload your editor and tap Publish.",
       "{shop}"
     ],
     "note": "Confirm with: node scripts/verify-order.ts --order {order} --reason \"...\" (or the admin panel action), then send order_confirmed."

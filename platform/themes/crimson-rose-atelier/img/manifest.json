@@ -1,0 +1,13 @@
+{
+  "_note": "G134 integration: minimal manifest so the page routes see the share image and the tab icon on Vercel (lib/theme/share.ts, scripts/trace-check.cjs). The theme has no build_images.py yet; both files were made by Codex (G133).",
+  "og": {
+    "size": [1200, 630],
+    "file": "og-1200x630.jpg",
+    "bytes": 45060
+  },
+  "favicon": {
+    "size": [180, 180],
+    "file": "favicon.png",
+    "bytes": 56509
+  }
+}

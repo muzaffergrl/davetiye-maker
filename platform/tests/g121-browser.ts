@@ -425,14 +425,17 @@ try {
     check('admin site: facts → note → Etsy message → support actions → content → replies → high-impact → history', JSON.stringify(order) === JSON.stringify(want), order.join(' > '));
     check('admin site: "Yayından kaldır" left the support actions; it is in the high-impact card with "Siteyi sil"', (await page.locator('section[aria-labelledby="actions-title"] [data-unpublish], section[aria-labelledby="actions-title"] [data-action^="unpublish"]').count()) === 0 && (await page.locator('[data-danger] [data-unpublish]').count()) === 1 && (await page.locator('[data-danger] [data-delete]').count()) === 1);
     check('admin site: the message box opens with "Publish is waiting" for a waiting order', (await page.inputValue('#msg-template')) === 'publish_blocked_pending');
+    // G135: "Publish is waiting" no longer holds an undecided time → copyable as it is; date_moved still waits for a policy.
+    check('admin site: "Publish is waiting" can be copied as it is (G135)', (await page.locator('[data-message-missing]').count()) === 0 && (await page.locator('[data-action="copy-message"]').count()) === 1);
+    await page.selectOption('#msg-template', 'date_moved');
     check('admin site: a text with an undecided policy cannot be copied', (await page.locator('[data-message-missing]').count()) === 1 && (await page.locator('[data-action="copy-message"]').count()) === 0);
     const original = await page.inputValue('#msg-text');
-    await page.fill('#msg-text', original.replace('[ORDER CHECK TIME]', '24 hours'));
+    await page.fill('#msg-text', original.replace('[POSTPONEMENT POLICY]', '24 hours'));
     check('admin site: the shop fills the policy in by hand → the message can be copied, "Şablona dön" appears', (await page.locator('[data-message-missing]').count()) === 0 && (await page.locator('[data-action="copy-message"]').count()) === 1 && (await page.locator('[data-action="message-reset"]').count()) === 1);
     await page.click('[data-action="copy-message"]');
     await page.waitForFunction(() => document.querySelector('section[aria-labelledby="history-title"]')?.textContent?.includes('Etsy mesajı kopyalandı'), null, { timeout: 10_000 });
     const hist = await text(page, 'section[aria-labelledby="history-title"]');
-    check('admin site: copying writes the template (not the text) into Geçmiş', hist.includes('Etsy mesajı kopyalandı: Sipariş onaylanıyor') && !hist.includes('24 hours'), hist.slice(0, 200));
+    check('admin site: copying writes the template (not the text) into Geçmiş', hist.includes('Etsy mesajı kopyalandı: Düğün tarihi değişti') && !hist.includes('24 hours'), hist.slice(0, 200));
     await page.click('[data-action="message-reset"]');
     check('admin site: "Şablona dön" brings the template text back', (await page.inputValue('#msg-text')) === original);
     check('admin site: the wrong-design hint on an unpublished draft (delete → Yeni sipariş)', (await text(page, '[data-wrong-design]')).includes('Yeni sipariş'));
