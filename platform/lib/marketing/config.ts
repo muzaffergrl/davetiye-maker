@@ -157,6 +157,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 23 (G161): platform theme with interim box pieces until its GPT parts arrive; not for sale yet.
+    {
+      id: 'velvet-jewel-box',
+      name: 'Velvet Jewel Box',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

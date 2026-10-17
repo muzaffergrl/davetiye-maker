@@ -227,6 +227,8 @@ const dict: Dict = {
   'View our photographs': 'Ver nuestras fotografías',
   'at {time}': 'a las {time}',
   'invite you to celebrate with them': 'les invitan a celebrar con ellos',
+  'Open the box again': 'Abrir la caja de nuevo',
+  'Treasured moments': 'Momentos atesorados',
 };
 
 export default dict;

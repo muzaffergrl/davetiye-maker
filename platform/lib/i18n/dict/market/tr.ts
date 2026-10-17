@@ -833,6 +833,16 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Davetiye siteni oluştur',
   'Create your website or continue editing': 'Davetiye siteni oluştur ya da düzenlemeye devam et',
+  'A plum velvet ring box opens into your wedding website: champagne satin, shimmering script names and a turning photo display. Edit it in your online editor.': 'Mürdüm rengi kadife bir yüzük kutusu düğün sitenize açılır: şampanya saten, parıldayan el yazısı isimler ve dönen bir fotoğraf vitrini. Çevrim içi düzenleyicinizde düzenleyin.',
+  'A velvet reply card with your reply-by date and the shared configurable reply form.': 'Yanıt son tarihiniz ve ortak, ayarlanabilir yanıt formuyla kadife bir yanıt kartı.',
+  'An aubergine velvet ring box with a satin bow, champagne satin, foil script names and a turning photo display': 'Saten fiyonklu patlıcan moru kadife yüzük kutusu, şampanya saten, varak parıltılı el yazısı isimler ve dönen bir fotoğraf vitrini',
+  'Aubergine': 'Patlıcan moru',
+  'Aubergine velvet, champagne satin and a touch of rose gold. Your names shimmer like foil, your photos turn on a display like fine jewelry, and every page glides in like satin.': 'Patlıcan moru kadife, şampanya saten ve bir dokunuş rose gold. İsimleriniz varak gibi parıldar, fotoğraflarınız değerli bir mücevher gibi vitrinde döner ve her sayfa saten gibi süzülerek gelir.',
+  'Rose gold': 'Rose gold',
+  'The order of the day on satin beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'Geniş bir mekân fotoğrafının yanında satende günün programı; isteğe bağlı harita ve yol tarifi, takvim bağlantıları, kıyafet kuralı ve sorular-yanıtlar.',
+  'Three photos with captions on a turning display, like jewelry in a case. Guests swipe or drag it, or use the arrows or the keyboard.': 'Dönen bir vitrinde, mücevher kutusundaki takılar gibi açıklamalı üç fotoğraf. Konuklar kaydırır ya da sürükler; oklar ve klavye de çalışır.',
+  'Your guests tap the box. The satin bow slides away, the velvet lid lifts on its hinge to show the satin lining and a separate invitation card with your photo rises out of the box. The card then opens into your home page.': 'Konuklarınız kutuya dokunur. Saten fiyonk kayarak çözülür, kadife kapak menteşesinden kalkıp saten astarı gösterir ve fotoğrafınızın olduğu ayrı bir davet kartı kutudan yükselir. Kart sonra ana sayfanıza açılır.',
+  'Your names in a shimmering script over plum velvet, then the invitation beside your portrait on champagne satin, a countdown and calendar links.': 'Mürdüm kadife üzerinde parıldayan el yazısıyla isimleriniz; ardından şampanya saten üzerinde portrenizin yanında davet, geri sayım ve takvim bağlantıları.',
 };
 
 export default dict;

@@ -209,6 +209,20 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: '#11120F', images: [sealAt('top')] },
     },
   },
+  // 23: interim until the PAKET 6 grounds arrive (GPT_PROMPTS.md): both sides on the website's aubergine velvet ground
+  // (img/bg_velvet, toned from a GPT texture by the theme build) with the satin bow (img/closure) — at the top of the
+  // front above the text, and at the bottom of the back under the schedule and QR. Text in champagne, away from the bow.
+  'velvet-jewel-box': {
+    collection: '23_Velvet_Jewel_Box',
+    sources: { velvet: 'platform/themes/velvet-jewel-box/img/bg_velvet-1024.webp', bow: 'platform/themes/velvet-jewel-box/img/closure-236.webp' },
+    fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script'),
+    script: "'Pinyon Script', cursive", serif: "'Bodoni Moda', Georgia, serif",
+    ink: '#F8EDE0', accent: '#E8D3B0', front: [27, 13, 14, 13], back: [12, 12, 22, 12],
+    composed: {
+      front: { bg: cover('velvet'), images: [{ src: 'bow', style: 'top:7%;left:50%;width:24%;transform:translateX(-50%)' }] },
+      back: { bg: cover('velvet'), images: [{ src: 'bow', style: 'bottom:5%;left:50%;width:18%;transform:translateX(-50%)' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

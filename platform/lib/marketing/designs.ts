@@ -114,6 +114,30 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'black tie by Lake Como: a black envelope with a gold wax seal, names over the lake at dusk and an asymmetric photo gallery.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  'velvet-jewel-box': {
+    id: 'velvet-jewel-box',
+    collection: '23_Velvet_Jewel_Box',
+    demoCouple: 'Isabelle & Julian',
+    style: msg('An aubergine velvet ring box with a satin bow, champagne satin, foil script names and a turning photo display'),
+    metaDescription: msg('A plum velvet ring box opens into your wedding website: champagne satin, shimmering script names and a turning photo display. Edit it in your online editor.'),
+    intro: msg('Aubergine velvet, champagne satin and a touch of rose gold. Your names shimmer like foil, your photos turn on a display like fine jewelry, and every page glides in like satin.'),
+    opening: msg('Your guests tap the box. The satin bow slides away, the velvet lid lifts on its hinge to show the satin lining and a separate invitation card with your photo rises out of the box. The card then opens into your home page.'),
+    pages: {
+      home: msg('Your names in a shimmering script over plum velvet, then the invitation beside your portrait on champagne satin, a countdown and calendar links.'),
+      story: msg('Three photos with captions on a turning display, like jewelry in a case. Guests swipe or drag it, or use the arrows or the keyboard.'),
+      details: msg('The order of the day on satin beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.'),
+      rsvp: msg('A velvet reply card with your reply-by date and the shared configurable reply form.'),
+    },
+    palette: [
+      { name: msg('Aubergine'), hex: '#2A1328' },
+      { name: msg('Plum'), hex: '#4A2142' },
+      { name: msg('Champagne'), hex: '#E8D3B0' },
+      { name: msg('Rose gold'), hex: '#C99A86' },
+    ],
+    fonts: ['Bodoni Moda', 'Pinyon Script'],
+    llmsLine: 'an aubergine velvet ring box with a satin bow; champagne satin, foil script names and a turning 3D photo display.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'blush-garden-rose': {
     id: 'blush-garden-rose',
     collection: '03_Blush_Garden_Rose',
@@ -793,6 +817,7 @@ export type StyleId = (typeof STYLE_FILTERS)[number]['id'];
 export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'crimson-rose-atelier': ['floral', 'classic'],
   'nocturne-lake-estate': ['classic', 'destination'],
+  'velvet-jewel-box': ['classic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],

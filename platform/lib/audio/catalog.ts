@@ -46,6 +46,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'crimson-rose-atelier': { music: 'evening-strings', opening: [[0, 'seal'], [400, 'paper'], [1600, 'slide'], [3000, 'chime']] },
   // Nocturne Lake Estate: gold seal lifts off (closure) · flap turns up (lift) · card rises (rise) · forward
   'nocturne-lake-estate': { music: 'evening-strings', opening: [[0, 'seal'], [450, 'paper'], [1700, 'slide'], [3000, 'chime']] },
+  // Velvet Jewel Box: satin bow slides off (closure) · lid on its hinge (lid) · card rises (rise) · forward
+  'velvet-jewel-box': { music: 'music-box', opening: [[0, 'ribbon'], [650, 'clasp'], [1900, 'slide'], [3100, 'chime']] },
   // 01 bow · lift · rise · forward
   'blush-garden-rose': { music: 'first-light', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // 02 wax seal (closure) · lift · rise · forward

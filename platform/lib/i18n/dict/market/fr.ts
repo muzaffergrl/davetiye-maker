@@ -833,6 +833,16 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Créez votre site',
   'Create your website or continue editing': 'Créez votre site ou continuez à le modifier',
+  'A plum velvet ring box opens into your wedding website: champagne satin, shimmering script names and a turning photo display. Edit it in your online editor.': 'Un écrin à bague en velours prune s’ouvre sur votre site de mariage : satin champagne, prénoms calligraphiés scintillants et une vitrine photo tournante. Modifiez-le dans votre éditeur en ligne.',
+  'A velvet reply card with your reply-by date and the shared configurable reply form.': 'Une carte-réponse en velours avec votre date limite et le formulaire de réponse commun et configurable.',
+  'An aubergine velvet ring box with a satin bow, champagne satin, foil script names and a turning photo display': 'Un écrin à bague en velours aubergine noué d’un ruban de satin, satin champagne, prénoms calligraphiés dorés et une vitrine photo tournante',
+  'Aubergine': 'Aubergine',
+  'Aubergine velvet, champagne satin and a touch of rose gold. Your names shimmer like foil, your photos turn on a display like fine jewelry, and every page glides in like satin.': 'Velours aubergine, satin champagne et une touche d’or rose. Vos prénoms scintillent comme une dorure, vos photos tournent dans une vitrine comme des bijoux précieux et chaque page glisse comme du satin.',
+  'Rose gold': 'Or rose',
+  'The order of the day on satin beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'Le programme de la journée sur satin à côté d’une large photo du lieu, avec carte et itinéraire en option, liens d’agenda, code vestimentaire et questions-réponses.',
+  'Three photos with captions on a turning display, like jewelry in a case. Guests swipe or drag it, or use the arrows or the keyboard.': 'Trois photos légendées sur une vitrine tournante, comme des bijoux dans un écrin. Les invités la font glisser ou utilisent les flèches ou le clavier.',
+  'Your guests tap the box. The satin bow slides away, the velvet lid lifts on its hinge to show the satin lining and a separate invitation card with your photo rises out of the box. The card then opens into your home page.': 'Vos invités touchent l’écrin. Le ruban de satin glisse, le couvercle de velours se soulève sur sa charnière et révèle la doublure de satin, et une carte d’invitation séparée avec votre photo s’élève de l’écrin. La carte s’ouvre ensuite sur votre page d’accueil.',
+  'Your names in a shimmering script over plum velvet, then the invitation beside your portrait on champagne satin, a countdown and calendar links.': 'Vos prénoms en calligraphie scintillante sur velours prune, puis l’invitation à côté de votre portrait sur satin champagne, un compte à rebours et des liens d’agenda.',
 };
 
 export default dict;

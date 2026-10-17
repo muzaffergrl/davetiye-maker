@@ -833,6 +833,16 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Crea tu web',
   'Create your website or continue editing': 'Crea tu web o sigue editándola',
+  'A plum velvet ring box opens into your wedding website: champagne satin, shimmering script names and a turning photo display. Edit it in your online editor.': 'Un estuche de anillo de terciopelo ciruela se abre en tu web de boda: satén champán, nombres caligráficos que brillan y una vitrina de fotos giratoria. Edítala en tu editor en línea.',
+  'A velvet reply card with your reply-by date and the shared configurable reply form.': 'Una tarjeta de respuesta de terciopelo con tu fecha límite y el formulario de respuesta configurable común.',
+  'An aubergine velvet ring box with a satin bow, champagne satin, foil script names and a turning photo display': 'Un estuche de anillo de terciopelo berenjena con lazo de satén, satén champán, nombres caligráficos dorados y una vitrina de fotos giratoria',
+  'Aubergine': 'Berenjena',
+  'Aubergine velvet, champagne satin and a touch of rose gold. Your names shimmer like foil, your photos turn on a display like fine jewelry, and every page glides in like satin.': 'Terciopelo berenjena, satén champán y un toque de oro rosa. Vuestros nombres brillan como lámina dorada, vuestras fotos giran en una vitrina como joyas finas y cada página llega deslizándose como el satén.',
+  'Rose gold': 'Oro rosa',
+  'The order of the day on satin beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'El programa del día sobre satén junto a una amplia foto del lugar, con mapa e indicaciones opcionales, enlaces de calendario, código de vestimenta y preguntas y respuestas.',
+  'Three photos with captions on a turning display, like jewelry in a case. Guests swipe or drag it, or use the arrows or the keyboard.': 'Tres fotos con pie en una vitrina giratoria, como joyas en un estuche. Los invitados la deslizan o arrastran, o usan las flechas o el teclado.',
+  'Your guests tap the box. The satin bow slides away, the velvet lid lifts on its hinge to show the satin lining and a separate invitation card with your photo rises out of the box. The card then opens into your home page.': 'Tus invitados tocan la caja. El lazo de satén se desliza, la tapa de terciopelo se levanta sobre su bisagra y deja ver el forro de satén, y una tarjeta de invitación aparte con tu foto sube desde la caja. Luego la tarjeta se abre en tu página de inicio.',
+  'Your names in a shimmering script over plum velvet, then the invitation beside your portrait on champagne satin, a countdown and calendar links.': 'Vuestros nombres en una caligrafía brillante sobre terciopelo ciruela, luego la invitación junto a vuestro retrato sobre satén champán, una cuenta atrás y enlaces de calendario.',
 };
 
 export default dict;
