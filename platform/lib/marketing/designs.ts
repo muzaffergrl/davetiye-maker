@@ -64,46 +64,28 @@ export interface DesignCopy {
 
 export const DESIGN_COPY: Record<string, DesignCopy> = {
   'crimson-rose-atelier': {
-    "id": "crimson-rose-atelier",
-    "collection": "21_Crimson_Rose_Atelier",
-    "demoCouple": "Olivia & James",
-    "style": "Crimson roses, a burgundy envelope with a gold botanical wax seal, an offset oval portrait and a landscape chapter album",
-    "metaDescription": "A burgundy rose wedding website with a wax-sealed opening, an offset oval portrait and a landscape story album. Personalize it in your online editor.",
-    "intro": "Deep crimson roses, warm gold and ivory paper. An oversized name composition opens into a side-set oval portrait, a landscape chapter album and an elegant celebration programme.",
-    "opening": "Your guests tap the envelope. The gold botanical seal lifts away, the flap opens and a separate ivory invitation card rises from its pocket. The invitation then opens on your home page.",
-    "pages": {
-      "home": "Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.",
-      "story": "A landscape chapter album with three photos, captions, thumbnails and previous/next controls. Guests can swipe or use the keyboard.",
-      "details": "A typographic celebration programme, a wide venue photo, optional map and directions, calendar links, dress code and questions and answers.",
-      "rsvp": "A cream reply card on burgundy, with your reply-by date and the shared configurable reply form."
+    id: 'crimson-rose-atelier',
+    collection: '21_Crimson_Rose_Atelier',
+    demoCouple: 'Olivia & James',
+    style: 'Crimson roses, a burgundy envelope with a gold botanical wax seal, an offset oval portrait and a landscape chapter album',
+    metaDescription: 'A burgundy rose wedding website with a wax-sealed opening, an offset oval portrait and a landscape story album. Personalize it in your online editor.',
+    intro: 'Deep crimson roses, warm gold and ivory paper. An oversized name composition opens into a side-set oval portrait, a landscape chapter album and an elegant celebration programme.',
+    opening: 'Your guests tap the envelope. The gold botanical seal lifts away, the flap opens and a separate ivory invitation card rises from its pocket. The invitation then opens on your home page.',
+    pages: {
+      home: 'Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.',
+      story: 'A landscape chapter album with three photos, captions, thumbnails and previous/next controls. Guests can swipe or use the keyboard.',
+      details: 'A typographic celebration programme, a wide venue photo, optional map and directions, calendar links, dress code and questions and answers.',
+      rsvp: 'A cream reply card on burgundy, with your reply-by date and the shared configurable reply form.',
     },
-    "palette": [
-      {
-        "name": "Burgundy",
-        "hex": "#4B0C17"
-      },
-      {
-        "name": "Oxblood",
-        "hex": "#29070B"
-      },
-      {
-        "name": "Cream",
-        "hex": "#F8EFDF"
-      },
-      {
-        "name": "Gold",
-        "hex": "#C9A66D"
-      }
+    palette: [
+      { name: 'Burgundy', hex: '#4B0C17' },
+      { name: 'Oxblood', hex: '#29070B' },
+      { name: 'Cream', hex: '#F8EFDF' },
+      { name: 'Gold', hex: '#C9A66D' },
     ],
-    "fonts": [
-      "Cormorant Garamond",
-      "Manrope"
-    ],
-    "llmsLine": "crimson roses and a gold-sealed burgundy envelope; an offset oval portrait and a landscape chapter album on ivory paper.",
-    "relatedGuides": [
-      "wedding-website-wording",
-      "what-to-put-on-your-wedding-website"
-    ]
+    fonts: ['Cormorant Garamond', 'Manrope'],
+    llmsLine: 'crimson roses and a gold-sealed burgundy envelope; an offset oval portrait and a landscape chapter album on ivory paper.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
   'nocturne-lake-estate': {
     id: 'nocturne-lake-estate',

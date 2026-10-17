@@ -6,7 +6,7 @@ durum: inceleme
 alan: claude-G142
 oncelik: 1
 bagimli: [G133, G134]
-yazar: [platform/themes/crimson-rose-atelier/, platform/themes/nocturne-lake-estate/, collections/21_Crimson_Rose_Atelier/, collections/22_Nocturne_Lake_Estate/, platform/tests/theme-crimson-rose-atelier.test.ts, platform/tests/theme-nocturne-lake-estate.test.ts, platform/tests/g142-crimson-nocturne.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/scripts/seed.ts, gorevler/G142-crimson-nocturne.md]
+yazar: [platform/themes/crimson-rose-atelier/, platform/themes/nocturne-lake-estate/, collections/21_Crimson_Rose_Atelier/, collections/22_Nocturne_Lake_Estate/, platform/tests/theme-crimson-rose-atelier.test.ts, platform/tests/theme-nocturne-lake-estate.test.ts, platform/tests/g142-crimson-nocturne.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/scripts/seed.ts, platform/scripts/lib/theme-env.ts, tools/katalog.py, tools/tests/test_etsy_upload.py, gorevler/G142-crimson-nocturne.md]
 ---
 
 ## Amaç
@@ -80,6 +80,22 @@ eklenmişti; çakışmada bu üç blok yeni Crimson details'ine ve Nocturne deta
 anahtarları (travel_*, menu_*, blocks_more) G138'in `max` değerleriyle manifeste geçti (Crimson 83, Nocturne 86 anahtar).
 `tests/g138-extras.test.ts` tema sayısı 21 → 22. theme-check rebase'ten önce koşuldu (demo kaydında bu bloklar boş; yapı
 `g138-extras` testinde iki tema için de geçiyor).
+
+### Koordinatörün ek bulguları (2026-10-17, ikinci tur)
+1. `designs.ts` / `config.ts`: 21 (ve 22) girdileri diğer 20'yle aynı TS biçiminde (tırnaksız anahtar, tek tırnak).
+   `tools/tests/test_etsy_upload.py`'nin "coming" regex'i yeni biçime çevrildi; `test_etsy_upload`, `test_listing_kit`,
+   `test_listing_editorial`, `test_build_customer_guides`, `test_tema_build` geçti.
+2. `data-slot`: ilk turda eklenmişti (5 alan, index kartı dahil); motor `data-photo-state` yazıyor (theme-check foto durumu geçiyor).
+3. Katalog: `tools/katalog.py` → `EK_TEMALAR` (21, 22) ve `theme-env.ts` bunu D ile birlikte okuyor. **D'ye eklenmedi:** D'deki
+   kayıt `ayirt` (her çift ≥ 4 eksen), `WEB`, `STORY` denetimlerine ve `yaz`/`paket5`/`gorev5`/`ozet` üreteçlerine girer (21/22 için
+   görev dosyası, DESIGN_BRIEF ve content.demo.json'u yeniden yazar — Crimson demo medyası silinirdi); tam katalog kaydı ayrı bir
+   karar/görev. `katalog.py kontrol` değişmedi (20 tasarım). theme-check artık koleksiyonu buluyor: Crimson kendi PAKET 2
+   fotoğraflarıyla koşuyor (`photos/couple-photo.png` → `hero_portrait.png`, aynı dosya `story_1.png` — git'te tek blob);
+   Nocturne'de PAKET 2 henüz yok → 03 fotoğrafları (uyarı).
+4. RSVP: `#reply` atlamasında form sabit ses düğmesinin altına düşmüyor (`scroll-margin-top: 64px`, iki tema; ölçüm: düğme 6–50 px,
+   "Your name" ~150 px).
+5. `COLLECTION_STATUS.md` + `DESIGN_BRIEF.md` 21 ve 22 için yazıldı (kısa, website dönemi).
+Yeniden koşum: theme-check `--stress` Crimson 111/0/24, Nocturne 111/0/12 (video kapalı); `npm test` 1298/1298; typecheck, build ✓.
 
 ### Testler (Linux, Node 22)
 `npm run typecheck` ✓; `npm run build` ✓ (trace-check 23 tema); `npm test` **1298/1298** (main `e849c4e` üstüne rebase sonrası), 0 hata, 0 atlandı;
