@@ -132,6 +132,7 @@ düzenler. Bu belge platformun tek kaynağıdır.
   Bir dakika sonra ayrı bir yerel oturum habersiz aynı ağacı yeniden yükledi → **şu anki production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW`** (içerik aynı; aynı
   `--meta`). Ek kontrol: 20 tasarımın her biri için tasarım sayfası, `/start/demo/<id>` ve `/start?theme=<id>` formu 200; `live-check` yeni 6 temayla
   (`LIVE_THEMES=` 15–20) **60/60**. (İki oturum aynı yayını iki kez yaptı: yayın işinin tek oturumda tutulması önerilir.)
+- **Yayın (2026-10-17, `claude-local-1`):** production = main `d5bbc39` (platform ağacı `4ee213627e67`), `dpl_GcQSunZSKxDhGo1yp4KYStztSPjN`; build yeşil, 6 env adı Production'da; `live-check` 20 satış temasıyla **130/130**, `blob-smoke` **12/12**, 5 demo yeniden tohumlandı; 390 px göz kontrolü geçti (geçici `/start` sitesi açıldı, sipariş onayı `verify-order.ts` ile, yayın + Excel + Sheets izin ekranı görüldü; admin şifresi olmadığından silme `adapter.deleteSite` ile, Admin Özet `adminDashboard` ile: 5 Demo satış sayılmıyor).
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 
