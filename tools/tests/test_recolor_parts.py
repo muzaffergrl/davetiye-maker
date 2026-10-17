@@ -211,3 +211,15 @@ def test_unchanged_parts_are_not_copied():
         fams = pal["families"]
         if part["recolor"] == "auto" and all(fams.get(f) is None for f in spec["groups"][part["group"]]):
             assert not list(out.glob(f"{name}-*")), name
+
+
+@pytest.mark.parametrize("theme", ["olive-ivory", "dusty-blue-champagne", "blush-garden-rose", "vintage-airmail-love-letter",
+                                   "mediterranean-lemon", "art-deco-black-tie", "burgundy-velvet-autumn", "winter-evergreen",
+                                   "crimson-rose-atelier"])
+def test_variants_css_header_comment_closes_once(theme):
+    """G156: a '*/' inside the generated header (e.g. 'variants/*/palette.json') closed the comment early and the browser
+    dropped the :root channel defaults — the original palette then lost every rgb(var(--c-…)) colour."""
+    css = (ROOT / "platform/themes" / theme / "variants.css").read_text()
+    head, _, rest = css.partition("*/")
+    assert head.startswith("/*") and "/*" not in head[2:]
+    assert rest.lstrip().startswith(":root {"), rest[:80]

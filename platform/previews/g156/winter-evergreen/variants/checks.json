@@ -1,0 +1,46 @@
+{
+ "theme": "winter-evergreen",
+ "summary": {
+  "original": {
+   "measured": 115,
+   "low": 0,
+   "as_original": 3
+  },
+  "midnight-navy": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "burgundy-wine": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "ivory-pine": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "frost-blue": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "sage-holly": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 3 text(s) below the contrast minimum on the painted ground: home \"RSVP\" 1.34:1 < 4.5:1; home \"RSVP\" 1.17:1 < 4.5:1; details \"RSVP\" 1.24:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette midnight-navy (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette burgundy-wine (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette ivory-pine (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette frost-blue (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette sage-holly (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

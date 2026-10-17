@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 115,
+  "low": 0,
+  "as_original": 3
+ },
+ "emerald-velvet": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "plum-velvet": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "navy-velvet": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "rust-velvet": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "dusty-rose-velvet": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ }
+}

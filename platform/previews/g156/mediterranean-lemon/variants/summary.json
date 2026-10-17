@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 112,
+  "low": 0,
+  "as_original": 1
+ },
+ "terracotta-lemon": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "sage-lemon": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "lavender-lemon": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "capri-turquoise": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "dusty-blue-lemon": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ }
+}
