@@ -39,8 +39,13 @@ def expect_exit(fn, *args):
 def test_template():
     t = b.template()
     assert t.startswith("# Start Here: Your {DESIGN_NAME} Wedding Website\n"), t[:60]
-    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{OPENING}", "{OPENING_TAB}",
-                                             "{LANGUAGE_FONTS}"}
+    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{MY_URL}", "{OPENING}",
+                                             "{OPENING_TAB}", "{LANGUAGE_FONTS}"}
+    # G148 (G146/K46): the order number + email on /my are the way back; the edit link is a shortcut, not "the key"
+    assert "> **Continue on another device**" in t and "[{MY_URL}]({MY_URL})" in t, "no /my box"
+    assert "Purchases and reviews" in t and '"Order #…"' in t, "where the order number is"
+    assert "it is your key" not in t and "If you lose it, message" not in t and "We do not send emails yet" not in t
+    assert "**Continue with your order number**" in t and "**Sign out other devices**" in t
     assert "img/start_qr_page.png" in t and "({START_URL})" in t
     assert "envelope" not in t.lower(), "a design-specific 'envelope' left in Ek A (use {OPENING} / {OPENING_TAB})"
     # G100: no per-field "Sample" tag, the QR under "More ways to share", Guests in two views
@@ -56,6 +61,7 @@ def test_values():
         v = b.values(theme)
         assert v["START_URL"] == f"https://davetiye-platform-five.vercel.app/start?theme={theme}", v
         assert v["PRIVACY_URL"] == "https://davetiye-platform-five.vercel.app/privacy"
+        assert v["MY_URL"] == "https://davetiye-platform-five.vercel.app/my"
         assert v["OPENING"] == NOT_ENVELOPE.get(theme, "envelope"), (no, v["OPENING"])
         assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
         assert b.language_class(b.design_fonts(theme)) == LANGUAGE[no], (no, b.design_fonts(theme))
@@ -80,6 +86,11 @@ def test_labels():
     for label in ("**Music & sound**", "**Evening Strings**", "**Yes / No**", "**Preview map**", "**Connect Google Sheets**",
                   '"Play music"', '"Google Sheets: coming soon"', "Prefer us to do it?"):
         assert label in md, label
+    # G148: the /my labels (components/my) and the sales site's button (marketing/Shell.tsx) are found; a renamed one fails
+    for label in ("**Open or start your website**", "**Create your website**", "**Share → Use on another device**"):
+        assert label in md, label
+    bad = md.replace("**Open or start your website**", "**Open your website**")
+    assert any("Open your website" in x for x in b.label_problems(bad, "olive-ivory"))
     bad = md.replace("**Evening Strings**", "**Evening Song**").replace('"Play music"', '"Start the music"')
     found = b.label_problems(bad, "olive-ivory")
     assert any("Evening Song" in x for x in found) and any("Start the music" in x for x in found), found
@@ -95,12 +106,15 @@ def test_pdf(tmp: Path):
     assert b.eu.lk.qr_matches(png, v["START_URL"], scale=b.QR_SCALE) and "segno" in svg.read_text(encoding="utf-8")
     pdf = b.build_pdf(md, tmp / "START_HERE.pdf", png, v["START_URL"], v["DESIGN_NAME"])
     uris = b.pdf_uris(pdf)
-    assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"]}, uris
+    assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"], v["MY_URL"]}, uris
     assert 5 <= b.pdf_page_count(pdf) <= 9, b.pdf_page_count(pdf)
     text = b.eu.lk.pdf_text(pdf) or ""
     # since G121 even the preview tab names the wallet: no "envelope" in any case
     assert "Tropical Destination" in text and "tap the wallet" in text and "envelope" not in text.lower(), text[:200]
     assert "Wallet is the opening page" in " ".join(text.split()), "preview tab not named after the opening"
+    # G148: the box is in the PDF, with its title and the /my address
+    flat = " ".join(text.split())
+    assert "Continue on another device" in flat and "davetiye-platform-five.vercel.app/my" in flat, flat[:300]
 
 
 def test_committed():

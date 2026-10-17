@@ -10,7 +10,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 
 | Item | Status on 2026-10-17 |
 |---|---|
-| Sale status | **Coming: the design is not open for sale** (tasarım satışa açılmadı, coming). `platform/lib/marketing/config.ts` lists it as `coming` with price `[PRICE]`; the user has not approved its sale yet (G133). This listing waits for that decision. |
+| Sale status | **On sale** (K47, user, 2026-10-17): `platform/lib/marketing/config.ts` lists it as `live`, price 1460 (G142 `76fe0dc`, coordinator `ce62d11`). Same flow, guide and listing text as 01–20 (G148). |
 | Start link `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` | **Not live**: the design is in the repository (G133, branch `codex/crimson-rose-atelier`) and has not been deployed; the user asked for a local demo only. Opened only in a local production build (2026-10-17, G137 capture: /start shows "Design: Crimson Rose Atelier"). Not opened on a phone. |
 | Live demo `https://davetiye-platform-five.vercel.app/start/demo/crimson-rose-atelier` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Not live**, for the same reason. In the local production build the demo route opens this design's envelope with the sample couple Olivia & James (G133 test, G137 capture). |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were tried only in the local production build of this task (setup, Edit, Guests, Share screens of the capture). |
@@ -18,13 +18,14 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size; G133 and this capture). **Not tried on the live site.** |
 | Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository since 2026-10-16; described in the description and FAQ (G132) and in the START HERE guide (G131). **Not on production yet** and not tried on the live site. This design's default track is Evening Strings (`platform/lib/audio/catalog.ts`, G133). The 4 music tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128), so the description and FAQ keep a VERIFY note on it. |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation (theme README). |
-| Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). The listing says so. |
+| Edit link by email | **Off.** Sending is built (G147) but stays off until the owner sets up SMTP; the listing and the START HERE guide promise no email. Since G146 (K46) the buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. Listing and guide say so since G148 (2026-10-17). |
 | Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | The shop price of designs 01–20, decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). For this design `config.ts` still says `[PRICE]`: confirm the price with the sale decision. Hosting extension, renewal and the Etsy shop URL are still open. |
+| Price, quantity | 1,460 TL, the same as 01–20 (K47, 2026-10-17; `config.ts` price 1460); no stock limit (999, Etsy's maximum). Hosting extension, renewal and the Etsy listing URL are still open. |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: Cormorant Garamond and Manrope (both latin-ext + Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` built in G137 (2026-10-17, `python3 tools/build_customer_guides.py --designs 21`, from docs/19 Ek A): 9 pages. Its only links are the start link (in the text and on the QR) and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. |
+| Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 | Listing images and video | **Produced** on 2026-10-17 from local production builds of the repository: images 3, 5, 6 and 7 and `video.mp4` (12 s, §6) in G137; images 1, 2, 4 and 8 in G137 (second pass) on this design's GPT mockup scenes (G821, `assets/gpt/mockups/`). All 8 in `images_editorial/` (§5). Nothing uploaded to Etsy. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (guide, images, video) and every open VERIFY keep `ready_to_publish` false.
@@ -88,14 +89,14 @@ Your link opens a sealed envelope. One tap opens it into your pages. Guests repl
 
 WHAT YOU NEED
 • A phone or computer with a web browser
-• Your Etsy order number (in your Etsy order confirmation)
+• Your Etsy order number (on Etsy under You → Purchases and reviews, or in your Etsy confirmation email)
 • Your wedding details; photos are optional
 No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start (for example …/olivia-and-james); it cannot be changed later. A custom domain (yournames.com) is not included.
-• Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
+• Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
 • The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
@@ -145,7 +146,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (G137, 2026-10-17; Etsy: up to 5 files, 20 MB each) |
-| Price | **1,460 TL** (the shop price approved by the user on 2026-10-16 for designs 01–20; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). This design's sale and price are not approved yet (`config.ts`: `coming`, `[PRICE]`) |
+| Price | **1,460 TL** (the shop price approved by the user on 2026-10-16 for designs 01–20; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). Approved for this design with its sale on 2026-10-17 (K47) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Floral & Garden (an existing section, docs/20 §3, which lists 01–05 only; the section for designs 06–21, or a new one, is the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -153,6 +154,8 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 ## 5. Images and alt text
 
 The 8 images in `images_editorial/` are the editorial set (`python3 tools/listing_editorial.py --theme crimson-rose-atelier`, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone shows a real screen of this design, captured on 2026-10-17 from a local production build of the platform (sample names and the theme's own sample photos; the opening stills at 3× density by `tools/listing_editorial/capture_opening.ts`): images 3, 5, 6 and 7 in G137 (main `8d51815` + G133), images 1, 2, 4 and 8 in a second capture of the same day (branch `claude/zealous-fermi-hy1o40`, G133 + G138, G140, G141). Images 1, 2, 4 and 8 place those screens into this design's GPT mockup scenes (`assets/gpt/mockups/`, G821: crimson roses, a burgundy envelope with a gold wax seal, cream silk ribbon, travertine); image 7 places them into the shop-wide GPT linen scene with three phones (`brand/trust/t1_three_steps.png`, GM06); images 3, 5 and 6 lay them out on this design's GPT paper texture. No image carries a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). The alt texts below were read against these files on 2026-10-17.
+
+Image 9 (G148, K47, 2026-10-17) answers "Can I continue on another phone or computer?": `python3 tools/listing_editorial.py --theme crimson-rose-atelier --capture devices --only 09_devices`, laid out like image 5 with two real screens from a local production build (`tools/listing_editorial/capture_devices.ts`: /my on a phone, then the editor's Share → "Use on another device" after three sign-ins with the same order number; fictional order, email and devices). The card's /my address line, its QR row and the Share cards above it are hidden in the picture (no web address or QR in listing images).
 
 | # | File | Alt text |
 |---|---|---|
@@ -164,10 +167,11 @@ The 8 images in `images_editorial/` are the editorial set (`python3 tools/listin
 | 6 | `06_details.png` | Everything guests ask: the celebration programme with the order of the day, the venue photo with add-to-calendar buttons, and the dress code with questions and answers |
 | 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
 | 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
+| 9 | `09_devices.png` | Start on your phone, continue on any device: one phone shows the "Open or start your website" form with an Etsy order number and email filled in; another shows the editor's "Use on another device" card with three devices signed in with the same order number (an iPhone, an Android phone and a Mac) and a "Sign out other devices" button. No account or password |
 
-Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
-- 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
-- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Save your private edit link", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
+Suggested extra image (Etsy allows 10 photos, so one more fits after image 9; answers a common question before purchase; layout and type only, K21; real screens), one of:
+- 10 `10_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, envelope animation).
+- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Order number + email open your editor on any device", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
 
 ## 6. Video
 
@@ -182,10 +186,10 @@ No. You edit your website in your web browser, on your phone or computer. Your g
 Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number. You can also use the start link in our Etsy message.
 
 **Do I need an account or a password?**
-No. You get a private edit link that opens your editor. Save it right away; we cannot email it to you yet.
+No. Your Etsy order number and the email you start with open your editor on any phone or computer. You also get a private edit link as a shortcut.
 
 **What if I lose my edit link?**
-If your editor is still open, copy it again under Share. Otherwise message us on Etsy with your order number: we send you a new link and the old one stops working.
+No problem: on any phone or computer, open the "Create your website" page of our website (the address is in your START HERE guide) and enter your Etsy order number and the email you started with. Your editor opens where you left off.
 
 **Can I change things after I publish?**
 Yes, as often as you like. Names and date can be changed 3 times in total after publishing; typo fixes and moving the date by up to 7 days are free.
@@ -233,7 +237,7 @@ Thank you for your order! Your download is your START HERE guide (PDF). Open it 
 
 Can't open the PDF? Start here instead and choose the design you bought: https://davetiye-platform-five.vercel.app/start
 
-You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://davetiye-platform-five.vercel.app/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -241,7 +245,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). To continue later on any device, open https://davetiye-platform-five.vercel.app/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale
@@ -252,23 +256,24 @@ link; one review request per order, the same text for everyone, never with an in
 
 ## 10. What differs from the 01–20 listings
 
-- A new design (G133), not on the live site and not open for sale (`coming`): the start link, the demo and the editor screens were seen only in a local production build.
+- A new design (G133), opened for sale on 2026-10-17 (K47, `live`, 1,460 TL); its start link and demo answer on the live site only after the next deploy (not checked in G148). The editor screens were seen in a local production build.
 - The guests' first view is "a sealed envelope" (as 01–05: this envelope carries a gold wax seal); Our Story is a landscape photo album the guests swipe through, so the description names it "Our Story as a photo album".
 - "What you can change" has no monogram line (this design shows none) and gives "A little book of us", this design's story heading, as the second example of your own wording.
 - Language line from this theme's real fonts (§0): both have Cyrillic.
 
 ## 11. Before you publish this listing
 
-- [ ] The user approves this design's sale and price (`config.ts`: `coming` → `live`)
+- [x] The user approves this design's sale and price (K47, 2026-10-17: `config.ts` `live`, 1460)
 - [ ] Design deployed; start link and demo of this design answer on the live site (`200`, design named)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G137, 2026-10-17)
 - [ ] Questions & answers and RSVP questions tried on the live site
 - [ ] Music, map and directions, the reply form and Excel download (G126–G128) live and tried on the live site; the 4 tracks listened to and approved; Google Sheets connected with a real Google account
 - [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
+- [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE (G148) re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [ ] Price (1,460 TL) confirmed for this design and filled in; quantity 999
+- [x] Price (1,460 TL) confirmed for this design (K47) and filled in; quantity 999
 - [ ] Hosting extension and renewal decided
 - [x] GPT mockup scenes (G821) made; images 1, 2, 4 and 8 built; all 8 alt texts read against the files (2026-10-17)
 - [x] Video produced (G137, 2026-10-17)

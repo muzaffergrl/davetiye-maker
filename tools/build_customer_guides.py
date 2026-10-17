@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""START HERE guides for designs 01–21 (G122; 21: G137): Markdown + PDF + the real start QR, from ONE source text.
+"""START HERE guides for designs 01–21 (G122; 21: G137; G148): Markdown + PDF + the real start QR, from ONE source text.
 
   python3 tools/build_customer_guides.py                   # all 20 designs: build, then check
   python3 tools/build_customer_guides.py --designs 06-20   # only these ("06-20", "07,12", "01,06-08", "all")
@@ -11,6 +11,8 @@ change Ek A and run this again. Placeholders filled per design ({…} left over 
   {DESIGN_NAME}    platform/themes/<id>/theme.json "name" (what /start shows as "Design: …")
   {START_URL}      <base>/start?theme=<id>      (route: platform/app/start/page.tsx)
   {PRIVACY_URL}    <base>/privacy               (route: platform/app/(marketing)/privacy/page.tsx)
+  {MY_URL}         <base>/my                    (G146/G148: the Etsy order number + email open the editor on any
+                                                 device; route platform/app/my/page.tsx, "Create your website")
   {OPENING}        what guests tap first: envelope, gatefold, pouch, wallet, book or sleeve
                    (platform/lib/marketing/designs.ts, "Your guests tap the <thing>.")
   {OPENING_TAB}    the same word capitalised: the panel's first preview tab (G121, lib/panel/model.ts openingTabLabel)
@@ -23,7 +25,8 @@ Writes per design, in collections/<NN_*>/package/customer/:
   img/start_qr_page.png    the same pixels centred on a white strip 4× as wide (what START_HERE.md shows; md_to_pdf and
                            tools/listing_kit.py scale pictures to the text width)
   START_HERE.pdf           US Letter, reportlab, standard PDF fonts (no font file is embedded or shipped); the QR is
-                           img/start_qr.png itself and is a clickable link to the start URL
+                           img/start_qr.png itself and is a clickable link to the start URL; consecutive "> " lines
+                           of Ek A are one framed box (G148: "Continue on another device")
 
 Checks (always after a build, or alone with --check):
   - START_HERE.md is exactly Ek A filled in now (stale copies fail), holds the start link and no {…};
@@ -36,7 +39,8 @@ Checks (always after a build, or alone with --check):
   - start_qr.png encodes exactly the start URL (re-encoded and compared module by module), start_qr_page.png holds the
     same pixels, and both — plus every rendered page of the PDF — decode with jsQR (platform's devDependency, run with
     node) to the start URL; the PDF holds exactly one QR
-  - the PDF's links are the start URL (at least once) and the privacy notice, nothing else
+  - the PDF's links are the start URL (at least once), the /my page (at least once, G148) and the privacy notice,
+    nothing else
 Needs: reportlab, segno, Pillow, numpy, pypdf, pdftoppm (poppler) and node + jsqr for the raster check (looked up in
 platform/node_modules, then in the main checkout of a git worktree, or JSQR_DIR); without node/jsqr the raster check is
 reported as skipped, never as passed.
@@ -170,11 +174,17 @@ def privacy_url(base: str = BASE_URL) -> str:
     return f"{base.rstrip('/')}/privacy"
 
 
+def my_url(base: str = BASE_URL) -> str:
+    """G148: the page where the Etsy order number + email open the editor on any device (G146, K46)."""
+    return f"{base.rstrip('/')}/my"
+
+
 def values(theme: str, base: str = BASE_URL) -> dict[str, str]:
     return {
         "DESIGN_NAME": eu.theme_name(theme),
         "START_URL": start_url(theme, base),
         "PRIVACY_URL": privacy_url(base),
+        "MY_URL": my_url(base),
         "OPENING": eu.opening_object(theme),
         "OPENING_TAB": opening_tab(eu.opening_object(theme)),
         "LANGUAGE_FONTS": LANGUAGE_LINES[language_class(design_fonts(theme))],
@@ -250,6 +260,10 @@ def _pdf_parts():
         "h3": ParagraphStyle("GuideH3", fontName="Helvetica-Bold", fontSize=11, leading=16, spaceBefore=10, spaceAfter=6,
                              textColor=ink, keepWithNext=True),
         "cell": ParagraphStyle("GuideCell", fontName="Helvetica", fontSize=9, leading=13, textColor=ink),
+        # G148: the framed box ("> " lines of Ek A)
+        "box": ParagraphStyle("GuideBox", fontName="Helvetica", fontSize=10, leading=15, spaceAfter=5, textColor=ink),
+        "boxtitle": ParagraphStyle("GuideBoxTitle", fontName="Helvetica-Bold", fontSize=11, leading=16, spaceAfter=6,
+                                   textColor=ink),
     }
 
     class WholeParagraph(Paragraph):
@@ -324,6 +338,25 @@ def build_pdf(markdown: str, out: Path, qr_png: Path, url: str, name: str) -> Pa
                 ("LINEBELOW", (0, 0), (-1, -1), 0.5, gold)]))
             flow.extend([table, Spacer(1, 10)])
             continue
+        if line.startswith(">"):
+            # G148: consecutive "> " lines = one framed box on paper; a line that is only **bold** is its title
+            box = [line]
+            while i < len(lines) and lines[i].startswith(">"):
+                box.append(lines[i])
+                i += 1
+            inner = []
+            for b in (x[1:].strip() for x in box):
+                if not b:
+                    continue
+                m = re.fullmatch(r"\*\*([^*]+)\*\*", b)
+                inner.append(Paragraph(_inline(m.group(1) if m else b), styles["boxtitle" if m else "box"]))
+            frame = Table([[inner]], colWidths=[504], hAlign="LEFT")  # the text column (516 less the frame's 2 × 6 pt)
+            frame.setStyle(TableStyle([
+                ("BACKGROUND", (0, 0), (-1, -1), paper), ("BOX", (0, 0), (-1, -1), 1, gold),
+                ("LEFTPADDING", (0, 0), (-1, -1), 14), ("RIGHTPADDING", (0, 0), (-1, -1), 14),
+                ("TOPPADDING", (0, 0), (-1, -1), 10), ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
+            flow.extend([frame, Spacer(1, 12)])
+            continue
         if line.startswith("!["):
             # The start QR of tools/make_qr.py, 1.6 in, clickable.
             flow.extend([LinkedImage(qr_png, 115, url), Spacer(1, 12)])
@@ -366,12 +399,15 @@ LABEL_SOURCES = [REPO / "platform" / "components" / "panel", REPO / "platform" /
                  # G131: labels the panel reads from shared modules (G126 track names, G128 answer types) and the guest
                  # site's shared scripts (G126 "Play music", G127 map card)
                  REPO / "platform" / "lib" / "audio", REPO / "platform" / "lib" / "rsvp", REPO / "platform" / "lib" / "maps.ts",
-                 REPO / "platform" / "public" / "audio" / "audio.js", REPO / "platform" / "public" / "static" / "map.js"]
+                 REPO / "platform" / "public" / "audio" / "audio.js", REPO / "platform" / "public" / "static" / "map.js",
+                 # G148: /my ("Open or start your website", G146) and the sales site's "Create your website" button
+                 REPO / "platform" / "components" / "my", REPO / "platform" / "components" / "marketing" / "Shell.tsx"]
 # Bold text in the guide that is emphasis, not a panel label (checked by hand against the source, 2026-10-16).
 NOT_LABELS = {"First publish", "After that", "What stays as designed", "What guests do", "What you do", "not later",
               "3 changes in total", "12 months after your wedding date", "24 hours", "bkestudio@gmail.com",
               "Save your edit link", "Your own wording", "Sample text", "Saving",
-              "Step 1 of 3"}  # "Step {step} of {SETUP_STEP_COUNT}" in Setup.tsx
+              "Step 1 of 3",  # "Step {step} of {SETUP_STEP_COUNT}" in Setup.tsx
+              "Continue on another device"}  # G148: the title of the guide's own box, not a UI label
 NOT_QUOTES = {"#", "3 fields still show sample text"}  # a sample of SampleLine's "{count} fields still show sample text"
 _corpus: dict[str, str] = {}
 
@@ -518,6 +554,8 @@ def check(no: str, folder: str, theme: str, base: str = BASE_URL, raster: bool =
         p.append("START_HERE.md is not Ek A of docs/19 filled in (stale copy: run this tool)")
     if f"({url})" not in md:
         p.append(f"START_HERE.md has no clickable {url}")
+    if f"({vals['MY_URL']})" not in md:  # G148: the way back on any device
+        p.append(f"START_HERE.md has no clickable {vals['MY_URL']}")
     if PLACEHOLDER.search(md):
         p.append("START_HERE.md has {…} left")
     if vals["OPENING"] != "envelope" and re.search(r"\benvelope\b", md, re.I):
@@ -539,7 +577,9 @@ def check(no: str, folder: str, theme: str, base: str = BASE_URL, raster: bool =
     facts["links"] = uris
     if url not in uris:
         p.append(f"START_HERE.pdf has no clickable {url}")
-    other = sorted(set(uris) - {url, vals["PRIVACY_URL"]})
+    if vals["MY_URL"] not in uris:
+        p.append(f"START_HERE.pdf has no clickable {vals['MY_URL']}")
+    other = sorted(set(uris) - {url, vals["PRIVACY_URL"], vals["MY_URL"]})
     if other:
         p.append(f"START_HERE.pdf links elsewhere: {other}")
     facts["pages"] = pdf_page_count(pdf)

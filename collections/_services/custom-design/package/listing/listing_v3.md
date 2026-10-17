@@ -46,7 +46,7 @@ HOW IT WORKS
 1. Buy this listing. We message you on Etsy and ask about your wedding, the colors you love and pictures that inspire you.
 2. We send you the first version within 3 days of receiving your answers.
 3. You tell us what to change (2 rounds included).
-4. When you are happy, you get your start link: enter your Etsy order number, add your names, date and photos, and publish.
+4. When you are happy, you get your start link: enter your Etsy order number, add your names, date and photos, and publish. The same order number and your email open your editor again on any phone or computer.
 
 WHAT IS NOT INCLUDED
 • Entering your details for you (add our setup service if you would like us to do it)
