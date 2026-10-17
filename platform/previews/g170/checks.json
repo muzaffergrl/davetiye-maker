@@ -1,0 +1,856 @@
+{
+ "base": "next start (production build)",
+ "theme": "sky-lantern-festival",
+ "errors": [],
+ "warnings": [
+  "setup: no PAKET 2 photos in collections/31_Sky_Lantern_Festival/assets/gpt/photos: using the 03 sample photos",
+  "details@360: Google font not loaded (Corinthia) — fallback font shown",
+  "details@390: Google font not loaded (Corinthia) — fallback font shown",
+  "details@430: Google font not loaded (Corinthia) — fallback font shown",
+  "details@768: Google font not loaded (Corinthia) — fallback font shown",
+  "details@1280: Google font not loaded (Corinthia) — fallback font shown",
+  "details@390 (no photos): Google font not loaded (Corinthia) — fallback font shown",
+  "details@390 (changed content): Google font not loaded (Corinthia) — fallback font shown",
+  "details@360 (stress record): Google font not loaded (Corinthia) — fallback font shown",
+  "details@390 (stress record): Google font not loaded (Corinthia) — fallback font shown",
+  "details@360 (stress record, thank-you mode): Google font not loaded (Corinthia) — fallback font shown",
+  "details@390 (stress record, thank-you mode): Google font not loaded (Corinthia) — fallback font shown"
+ ],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 86 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 2 families (Corinthia, Gilda Display), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback)))",
+  "index@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@360: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@360: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@430: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@430: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@768: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@768: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@1280: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@1280: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots placeholder",
+  "story@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots preview-placeholder",
+  "envelope closed @360×640: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (12 pieces, no CTA in the hero, names 46.8 px) ends at 470, above the nav (top 579)",
+  "home@360×640: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @375×553: home-hero (12 pieces, no CTA in the hero, names 48.8 px) ends at 401, above the nav (top 492)",
+  "home@375×553: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @360×640 (design range): names 46.8 px (≥ 30); nothing partly under the nav (top 579): the first screen ends at 536",
+  "home@360×640 (design range): no overflow, 31 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @375×553 (design range): names 48.8 px (≥ 30); nothing partly under the nav (top 492): the first screen ends at 445",
+  "home@375×553 (design range): no overflow, 31 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @360×640 (stress record): names 30 px (≥ 30); the first screen ends at 551, above the nav (top 579)",
+  "home@360×640 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @375×553 (stress record): names 30 px (≥ 30); the first screen ends at 489, above the nav (top 492)",
+  "home@375×553 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 64×44, home \"Replay the envelope\" 233×44, rsvp \"Replay the envelope\" 184×44",
+  "envelope → /sophie-and-daniel/home in 3927 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (1 steps)",
+  "countdown target from the platform: 2027-09-18 18:30 America/Los_Angeles = 2027-09-19 01:30 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-09-19T02:30:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-09-24T01:30:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (174 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390 (changed content): no overflow, 27 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots placeholder",
+  "story@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 41 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots placeholder",
+  "story@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 41 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 33 fields = content record, 12 design texts, title ok, images loaded, no painted card, 3 photo slots thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 36 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 33 fields = content record, 12 design texts, title ok, images loaded, no painted card, 3 photo slots thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 86 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 339 KB",
+  "home first view (390×844, DPR 3, placeholders): 298 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 428 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 804 KB",
+  "recording: previews/g170/opening_390x844.mp4 (2111 KB, lead-in 0.49 s cut, first frame mean 85,58,92) — tap → opening → home → story → details"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections/31_Sky_Lantern_Festival",
+   "demo_record": "platform/themes/sky-lantern-festival/content.demo.json",
+   "photos": "collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback))",
+   "w1_comps": [],
+   "compare": "none",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (no free_zone in img/manifest.json)",
+   "fonts": [
+    "Corinthia",
+    "Gilda Display"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 86,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (193 KB, 1024×1280, variants 640)",
+   "story_1 → media.memory_photos.0 (223 KB, 1024×1365, variants 640)",
+   "story_2 → media.memory_photos.1 (238 KB, 1024×1365, variants 640)",
+   "story_3 → media.memory_photos.2 (201 KB, 1024×1365, variants 640)",
+   "venue → media.venue_image (375 KB, 1536×864, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.9,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 1.1,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 1.4,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.49,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.65,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 1.1,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 1.32,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 1.76,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.47,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.66,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.89,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 1.03,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 1.29,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.45,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.64,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.79,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.85,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 1.09,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.49,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.6,
+      "dark": 0.022
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 470,
+    "above": 470,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 46.8
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 401,
+    "above": 401,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 48.8
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 14,
+    "lowest": 630,
+    "above": 0,
+    "below": 396,
+    "cta": {
+     "text": "A celebration to rem",
+     "bottom": 630
+    },
+    "bad": [
+     "div.hero-card bottom 560",
+     "div.hero-photo.photo-slot bottom 348",
+     "p.eyebrow \"Our wedding\" bottom 382",
+     "span \"Sophie\" bottom 452",
+     "span.amp \"&\" bottom 449",
+     "span \"Daniel\" bottom 452",
+     "span \"Saturday, September 18, \" bottom 478",
+     "span \"Saturday\" bottom 475",
+     "span.nowrap \"September 18, 2027\" bottom 475",
+     "small \"The Meadowlark Terrace ·\" bottom 520",
+     "span \"The Meadowlark Terrace\" bottom 498",
+     "span \"Santa Barbara, Californi\" bottom 517",
+     "a.btn.btn-ghost bottom 630",
+     "span \"A celebration to remembe\" bottom 616"
+    ],
+    "partly": [
+     "div.hero-card 58–560",
+     "div.hero-photo.photo-slot 94–348",
+     "p.eyebrow \"Our wedding\" 362–382",
+     "span \"Sophie\" 386–452",
+     "span \"Daniel\" 386–452"
+    ],
+    "names": 66
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 388,
+    "above": 314,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 388",
+     "small \"The Meadowlark Terrace ·\" bottom 356",
+     "span \"The Meadowlark Terrace\" bottom 334",
+     "span \"Santa Barbara, Californi\" bottom 353"
+    ],
+    "partly": [
+     "div.hero-card 26–388",
+     "small \"The Meadowlark Terrace ·\" 318–356",
+     "span \"The Meadowlark Terrace\" 320–334",
+     "span \"Santa Barbara, Californi\" 320–353"
+    ],
+    "names": 66
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 536,
+    "above": 536,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 46.8
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 445,
+    "above": 445,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 48.8
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 14,
+    "lowest": 769,
+    "above": 0,
+    "below": 459,
+    "cta": {
+     "text": "A celebration to rem",
+     "bottom": 769
+    },
+    "bad": [
+     "div.hero-card bottom 699",
+     "div.hero-photo.photo-slot bottom 348",
+     "p.eyebrow \"Our wedding\" bottom 382",
+     "span \"Alexandrina Rose\" bottom 448",
+     "span.amp \"&\" bottom 509",
+     "span \"Maximilian James\" bottom 572",
+     "span \"Wednesday, 29 September \" bottom 598",
+     "span \"Wednesday\" bottom 595",
+     "span.nowrap \"29 September 2027\" bottom 595",
+     "small \"The Orangery and Walled \" bottom 659",
+     "span \"The Orangery and Walled \" bottom 637",
+     "span \"Santa Barbara, Californi\" bottom 656",
+     "a.btn.btn-ghost bottom 769",
+     "span \"A celebration to remembe\" bottom 755"
+    ],
+    "partly": [
+     "div.hero-card 58–699",
+     "div.hero-photo.photo-slot 94–348",
+     "p.eyebrow \"Our wedding\" 362–382",
+     "span \"Alexandrina Rose\" 386–448"
+    ],
+    "names": 62
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 534,
+    "above": 286,
+    "below": 416,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 534",
+     "span.amp \"&\" bottom 348",
+     "span \"Maximilian James\" bottom 414",
+     "span \"Wednesday, 29 September \" bottom 440",
+     "span \"Wednesday\" bottom 437",
+     "span.nowrap \"29 September 2027\" bottom 437",
+     "small \"The Orangery and Walled \" bottom 502",
+     "span \"The Orangery and Walled \" bottom 479",
+     "span \"Santa Barbara, Californi\" bottom 498"
+    ],
+    "partly": [
+     "div.hero-card 26–534",
+     "span.amp \"&\" 296–348",
+     "span \"Maximilian James\" 350–414"
+    ],
+    "names": 64
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 551,
+    "above": 551,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 489,
+    "above": 489,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 14,
+    "lowest": 753,
+    "above": 0,
+    "below": 451,
+    "cta": {
+     "text": "A celebration to rem",
+     "bottom": 753
+    },
+    "bad": [
+     "div.hero-card bottom 683",
+     "div.hero-photo.photo-slot bottom 348",
+     "p.eyebrow \"Our wedding\" bottom 382",
+     "span \"Charlotte-Elizabeth Anne\" bottom 446",
+     "span.amp \"&\" bottom 475",
+     "span \"Maximilian Alexander Fit\" bottom 536",
+     "span \"Saturday, September 18, \" bottom 562",
+     "span \"Saturday\" bottom 559",
+     "span.nowrap \"September 18, 2027\" bottom 559",
+     "small \"The Grand Rosewater Cons\" bottom 643",
+     "span \"The Grand Rosewater Cons\" bottom 620",
+     "span \"Santa Barbara, Californi\" bottom 639",
+     "a.btn.btn-ghost bottom 753",
+     "span \"A celebration to remembe\" bottom 738"
+    ],
+    "partly": [
+     "div.hero-card 58–683",
+     "div.hero-photo.photo-slot 94–348",
+     "p.eyebrow \"Our wedding\" 362–382",
+     "span \"Charlotte-Elizabeth Anne\" 386–446"
+    ],
+    "names": 30
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 511,
+    "above": 311,
+    "below": 375,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 511",
+     "span \"Maximilian Alexander Fit\" bottom 372",
+     "span \"Saturday, September 18, \" bottom 398",
+     "span \"Saturday\" bottom 395",
+     "span.nowrap \"September 18, 2027\" bottom 395",
+     "small \"The Grand Rosewater Cons\" bottom 479",
+     "span \"The Grand Rosewater Cons\" bottom 456",
+     "span \"Santa Barbara, Californi\" bottom 476"
+    ],
+    "partly": [
+     "div.hero-card 26–511",
+     "span \"Maximilian Alexander Fit\" 312–372",
+     "span \"Saturday, September 18, \" 374–398"
+    ],
+    "names": 30
+   }
+  ],
+  "envelope_to_home_ms": 3927,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 86,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 339,
+  "first_view_index_files": [
+   [
+    "/themes/sky-lantern-festival/img/sky-1080.webp",
+    85082
+   ],
+   [
+    "/themes/sky-lantern-festival/img/card_paper-878.webp",
+    80050
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ],
+   [
+    "/themes/sky-lantern-festival/img/lantern_dark-800.webp",
+    23648
+   ],
+   [
+    "/themes/sky-lantern-festival/img/lantern_lit-800.webp",
+    20276
+   ],
+   [
+    "https://fonts.gstatic.com/s/gildadisplay/v20/t5tmIRoYMoaYG0WEOh7HwMeR3T7Prw.woff2",
+    20204
+   ],
+   [
+    "/audio/fx/chime.mp3",
+    10924
+   ],
+   [
+    "/audio/fx/whoosh.mp3",
+    10455
+   ]
+  ],
+  "first_view_home_kb_placeholders": 298,
+  "first_view_home_files": [
+   [
+    "/themes/sky-lantern-festival/img/sky-1080.webp",
+    85082
+   ],
+   [
+    "/themes/sky-lantern-festival/img/card_paper-878.webp",
+    80050
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ],
+   [
+    "/themes/sky-lantern-festival/img/sky_band-1024.webp",
+    28972
+   ],
+   [
+    "https://fonts.gstatic.com/s/gildadisplay/v20/t5tmIRoYMoaYG0WEOh7HwMeR3T7Prw.woff2",
+    20204
+   ],
+   [
+    "/no-photos/home",
+    15326
+   ],
+   [
+    "/themes/sky-lantern-festival/site.css",
+    8478
+   ],
+   [
+    "/themes/sky-lantern-festival/site.js",
+    5535
+   ]
+  ],
+  "first_view_index_kb_photos": 428,
+  "first_view_index_files_photos": [
+   [
+    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/9189c34361bc4b28d7862f1b4fc2d054-640w.jpg",
+    93978
+   ],
+   [
+    "/themes/sky-lantern-festival/img/sky-1080.webp",
+    85082
+   ],
+   [
+    "/themes/sky-lantern-festival/img/card_paper-878.webp",
+    80050
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ],
+   [
+    "/themes/sky-lantern-festival/img/lantern_dark-800.webp",
+    23648
+   ],
+   [
+    "/themes/sky-lantern-festival/img/lantern_lit-800.webp",
+    20276
+   ],
+   [
+    "https://fonts.gstatic.com/s/gildadisplay/v20/t5tmIRoYMoaYG0WEOh7HwMeR3T7Prw.woff2",
+    20204
+   ],
+   [
+    "/audio/fx/chime.mp3",
+    10924
+   ]
+  ],
+  "first_view_home_kb_photos": 804,
+  "first_view_home_files_photos": [
+   [
+    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/9189c34361bc4b28d7862f1b4fc2d054-1024w.jpg",
+    198076
+   ],
+   [
+    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/e0774aa9327966e92b4c7a445f1a0420-640w.jpg",
+    118102
+   ],
+   [
+    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/48d6c0316721cd4587afaefe86f3b5f6-640w.jpg",
+    110158
+   ],
+   [
+    "/media/f87120dc-7594-4010-9054-28a9ce4877f1/084068485e44cadd917f5ad4a0f69cf4-640w.jpg",
+    94091
+   ],
+   [
+    "/themes/sky-lantern-festival/img/sky-1080.webp",
+    85082
+   ],
+   [
+    "/themes/sky-lantern-festival/img/card_paper-878.webp",
+    80050
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ],
+   [
+    "/themes/sky-lantern-festival/img/sky_band-1024.webp",
+    28972
+   ]
+  ],
+  "video_kb": 2111,
+  "video_first_frame": {
+   "lead_in_s": 0.49,
+   "mean_rgb": [
+    85,
+    58,
+    92
+   ],
+   "stdev": 32
+  },
+  "compare": {
+   "source": "none",
+   "pages": []
+  }
+ }
+}

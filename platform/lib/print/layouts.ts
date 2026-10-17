@@ -375,6 +375,35 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },
     },
   },
+  // 31 (G170, before its GPT parts): both sides on plain cotton paper (18's seamless bg_tile at full size, reached from this
+  // collection's assets/gpt/ by ../../../) with a band of the theme's dusk sky (img/sky_band, cut and toned by the theme
+  // build from GPT pixels; no shape drawn) — front: a band at the top with one lit lantern in it and a thin amber band at
+  // the bottom, back: a narrow band at the top. When PAKET 6 arrives (GPT_PROMPTS.md: print/print_front.png +
+  // print/print_back.png, 1819×2551, one ground per side for 5×7 and A5): sources → { front: 'print/print_front.png',
+  // back: 'print/print_back.png' }, composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'),
+  // images: [] } }, then build-print-assets + tests/g149-print-layout.test.ts (re-measure the boxes).
+  'sky-lantern-festival': {
+    collection: '31_Sky_Lantern_Festival',
+    sources: {
+      paper: '../../../18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png',
+      sky: 'platform/themes/sky-lantern-festival/img/sky_band-1024.webp',
+      lantern: 'platform/themes/sky-lantern-festival/img/lantern_far-144.webp',
+    },
+    fonts: gf('family=Corinthia&family=Gilda+Display'),
+    script: "'Corinthia', cursive", serif: "'Gilda Display', Georgia, serif",
+    ink: '#3B2A4A', accent: '#9A5A26', front: [18, 12, 13, 12], back: [12, 12, 8, 12],
+    composed: {
+      front: {
+        bg: cover('paper'),
+        images: [
+          { src: 'sky', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover;object-position:50% 30%' },
+          { src: 'lantern', style: 'top:3%;left:50%;width:5%;transform:translateX(-50%)' },
+          { src: 'sky', style: 'bottom:0;left:0;width:100%;height:7%;object-fit:cover;object-position:50% 100%' },
+        ],
+      },
+      back: { bg: cover('paper'), images: [{ src: 'sky', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover;object-position:50% 30%' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

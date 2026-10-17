@@ -440,6 +440,13 @@ EK_TEMALAR = [
          dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
          font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
          hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
+    # docs/24 2. dalga (29–32)
+    dict(no=31, klasor="31_Sky_Lantern_Festival", ad="Sky Lantern Festival",
+         zarf="Avuçlarda tutulan pirinç kâğıdı dilek feneri; dokununca ışır, eller bırakır, fener alacakaranlık göğüne yükselir, ışığında kart belirir.",
+         foto="Yükselen fenerlerin ışığında beliren fotoğraflar: küçük bir fener yanından geçer, ışığı fotoğrafı alttan açar; fener yolu boyunca sol–sağ–sol.",
+         dekor="Pirinç kâğıdı fenerler, alacakaranlık gökyüzü, yıldız tozu", teknik="suluboya + ışık",
+         font=("Corinthia", "Gilda Display"), palet_adi="dusk-amber-violet",
+         hareket="Fener yükselişi (paralaks katmanlar: gök, yıldız tozu, uzak fenerler), sıcak ışık hâlesi, kaydırmayla süzülen fenerler, programda sırayla yanan fenerler, RSVP'de göğe bırakılan tek fener"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

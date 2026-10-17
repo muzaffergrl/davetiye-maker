@@ -1,0 +1,249 @@
+{
+ "lantern_dark": {
+  "src_size": [
+   800,
+   1200
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "lantern_dark-400.webp",
+    "w": 400,
+    "h": 600,
+    "bytes": 6604
+   },
+   {
+    "file": "lantern_dark-800.webp",
+    "w": 800,
+    "h": 1200,
+    "bytes": 23648
+   }
+  ]
+ },
+ "lantern_lit": {
+  "src_size": [
+   800,
+   1200
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "lantern_lit-400.webp",
+    "w": 400,
+    "h": 600,
+    "bytes": 4766
+   },
+   {
+    "file": "lantern_lit-800.webp",
+    "w": 800,
+    "h": 1200,
+    "bytes": 20276
+   }
+  ]
+ },
+ "sky": {
+  "src_size": [
+   1080,
+   1920
+  ],
+  "ratio": 0.5625,
+  "files": [
+   {
+    "file": "sky-540.webp",
+    "w": 540,
+    "h": 960,
+    "bytes": 25052
+   },
+   {
+    "file": "sky-1080.webp",
+    "w": 1080,
+    "h": 1920,
+    "bytes": 85082
+   }
+  ]
+ },
+ "sky_band": {
+  "src_size": [
+   1024,
+   576
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "sky_band-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 14100
+   },
+   {
+    "file": "sky_band-1024.webp",
+    "w": 1024,
+    "h": 576,
+    "bytes": 28972
+   }
+  ]
+ },
+ "bg_wall": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bg_wall-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 2978
+   }
+  ]
+ },
+ "lantern_far": {
+  "src_size": [
+   144,
+   216
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "lantern_far-72.webp",
+    "w": 72,
+    "h": 108,
+    "bytes": 620
+   },
+   {
+    "file": "lantern_far-144.webp",
+    "w": 144,
+    "h": 216,
+    "bytes": 3070
+   }
+  ]
+ },
+ "card_paper": {
+  "src_size": [
+   878,
+   1254
+  ],
+  "ratio": 0.70016,
+  "files": [
+   {
+    "file": "card_paper-480.webp",
+    "w": 480,
+    "h": 686,
+    "bytes": 19656
+   },
+   {
+    "file": "card_paper-878.webp",
+    "w": 878,
+    "h": 1254,
+    "bytes": 80050
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 2346
+   }
+  ]
+ },
+ "ph_story": {
+  "src_size": [
+   480,
+   640
+  ],
+  "ratio": 0.75,
+  "files": [
+   {
+    "file": "ph_story-480.webp",
+    "w": 480,
+    "h": 640,
+    "bytes": 1640
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 1178
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_story-480.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "og": {
+  "composed": "sky + lantern_lit (centre) + two lantern_far",
+  "file": "og-1200x630.jpg",
+  "bytes": 91259
+ },
+ "favicon": {
+  "src_box": [
+   248,
+   324,
+   304,
+   480
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.12,
+  "file": "favicon.png",
+  "bytes": 23521
+ },
+ "_note": "G170 build: every PAKET 5 part that exists is used (see 'sources'); the others are stand-ins cut and toned from GPT pixels of 02 (watercolor wash) and 18 (paper) — see build_images.py.",
+ "sources": {
+  "bg_tile": "interim (02 watercolor wash toned dusk violet)",
+  "card_small": "interim (18 paper toned rice-paper ivory)",
+  "lantern_dark": "interim (18 paper toned dusky rose)",
+  "lantern_far": "interim (18 paper toned amber, small)",
+  "lantern_lit": "interim (18 paper toned amber, lit)",
+  "sky_dusk": "interim (02 watercolor wash toned violet → rose → amber)"
+ },
+ "stage": {
+  "canvas": "2:3 scene (hands + lantern on one canvas)",
+  "lantern_box_pct": [
+   31.0,
+   27.0,
+   69.0,
+   67.0
+  ]
+ },
+ "gpt_layers": {},
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer,.drift",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 30
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 110
+  }
+ },
+ "bytes_total": 572541
+}

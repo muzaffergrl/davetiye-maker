@@ -1,0 +1,139 @@
+{
+  "_not": "gpt_kuru_deneme (tools/gpt_kuru_deneme.py --sekil): parçaların GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0, y0, x1, y1]. Avuçlar, sönük ve yanan fener aynı 1024×1536 tuvalde: fener x 31–69 %, y 27–67 %; avuçlar x 14–86 %, y 58–100 %. Yıldız tozu küçük bir üst bölgeye kondu (deneme görseli opak dikdörtgen: tam tuval olsa gökyüzünü ve metni örterdi — deneme artefaktı). sky_dusk / bg_tile: alacakaranlık moru, düşük gren (prompt: orta sakin) — yoksa rastgele renk + gren theme-check'in zemin denetimine takılır (deneme artefaktı).",
+  "hands.png": {
+    "kutu": [
+      14,
+      58,
+      86,
+      100
+    ]
+  },
+  "lantern_dark.png": {
+    "kutu": [
+      31,
+      27,
+      69,
+      67
+    ],
+    "ton": [
+      206,
+      168,
+      160
+    ]
+  },
+  "lantern_lit.png": {
+    "kutu": [
+      31,
+      27,
+      69,
+      67
+    ],
+    "ton": [
+      255,
+      200,
+      120
+    ]
+  },
+  "lantern_far.png": {
+    "kutu": [
+      30,
+      20,
+      70,
+      80
+    ],
+    "ton": [
+      255,
+      200,
+      120
+    ]
+  },
+  "star_dust.png": {
+    "kutu": [
+      40,
+      4,
+      60,
+      12
+    ]
+  },
+  "card_small.png": {
+    "kutu": [
+      15,
+      16.7,
+      85,
+      83.3
+    ],
+    "pencere": [
+      32.5,
+      22,
+      67.5,
+      51
+    ],
+    "ton": [
+      247,
+      238,
+      221
+    ]
+  },
+  "frame_paper.png": {
+    "kutu": [
+      20,
+      20,
+      80,
+      80
+    ],
+    "pencere": [
+      28.4,
+      30,
+      71.6,
+      70
+    ],
+    "ton": [
+      247,
+      238,
+      221
+    ]
+  },
+  "frame_landscape.png": {
+    "kutu": [
+      10,
+      15,
+      90,
+      85
+    ],
+    "pencere": [
+      15,
+      20.5,
+      85,
+      79.5
+    ],
+    "ton": [
+      247,
+      238,
+      221
+    ]
+  },
+  "divider.png": {
+    "kutu": [
+      8,
+      45,
+      92,
+      55
+    ]
+  },
+  "sky_dusk.png": {
+    "ton": [
+      74,
+      52,
+      102
+    ],
+    "gren": 0.1
+  },
+  "bg_tile.png": {
+    "ton": [
+      36,
+      26,
+      62
+    ],
+    "gren": 0.15
+  }
+}

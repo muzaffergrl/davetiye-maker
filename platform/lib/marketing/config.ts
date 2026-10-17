@@ -230,6 +230,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 31 (G170, docs/24 wave 2): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'sky-lantern-festival',
+      name: 'Sky Lantern Festival',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',
