@@ -1,0 +1,825 @@
+{
+ "base": "next start (production build)",
+ "theme": "orient-express-voyage",
+ "errors": [],
+ "warnings": [
+  "setup: no PAKET 2 photos in collections/25_Orient_Express_Voyage/assets/gpt/photos: using the 03 sample photos",
+  "index@360: Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@390: Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@430: Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@768: Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@1280: Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@390 (no photos): Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "envelope: no visible \"Tap to open\" / \"Click to open\" hint found on the index page",
+  "index@390 (changed content): Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@360 (stress record): Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@390 (stress record): Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@360 (stress record, thank-you mode): Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "index@390 (stress record, thank-you mode): Google font not loaded (Cormorant Garamond) — fallback font shown",
+  "compare_index_390.jpg not written: no W1 comp web_1_envelope.png in collections/25_Orient_Express_Voyage/assets/gpt/comps",
+  "compare_home_390.jpg not written: no W1 comp web_2_home.png in collections/25_Orient_Express_Voyage/assets/gpt/comps",
+  "compare_story_390.jpg not written: no W1 comp web_3_story.png in collections/25_Orient_Express_Voyage/assets/gpt/comps",
+  "compare_details_390.jpg not written: no W1 comp web_4_details.png in collections/25_Orient_Express_Voyage/assets/gpt/comps",
+  "compare_rsvp_390.jpg not written: no W1 comp web_5_rsvp.png in collections/25_Orient_Express_Voyage/assets/gpt/comps"
+ ],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 88 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 2 families (Limelight, Cormorant Garamond), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback)))",
+  "index@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@360: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 26 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@360: no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 26 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390: no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@430: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 26 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@430: no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@768: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 26 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@768: no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@1280: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 26 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@1280: no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots placeholder",
+  "story@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 26 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots preview-placeholder",
+  "envelope closed @360×640: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (9 pieces, no CTA in the hero, names 36 px) ends at 324, above the nav (top 579)",
+  "home@360×640: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @375×553: home-hero (9 pieces, no CTA in the hero, names 37.5 px) ends at 329, above the nav (top 492)",
+  "home@375×553: no overflow, 29 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @360×640 (design range): names 32 px (≥ 32); nothing partly under the nav (top 579): the first screen ends at 382",
+  "home@360×640 (design range): no overflow, 31 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @375×553 (design range): names 32 px (≥ 32); nothing partly under the nav (top 492): the first screen ends at 347",
+  "home@375×553 (design range): no overflow, 31 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @360×640 (stress record): names 32 px (≥ 32); the first screen ends at 563, above the nav (top 579)",
+  "home@360×640 (stress record): no overflow, 39 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @375×553 (stress record): names 32 px (≥ 32); the first screen scrolls (allowed for the §12 record)",
+  "home@375×553 (stress record): no overflow, 39 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 56×44, home \"Replay the envelope\" 183×44, rsvp \"Replay the envelope\" 154×44",
+  "envelope → /amelia-and-rafael/home in 3295 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (4 steps)",
+  "countdown target from the platform: 2027-09-25 16:00 Europe/Rome = 2027-09-25 14:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-09-25T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-09-30T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (239 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390 (changed content): no overflow, 27 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 22 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 39 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots placeholder",
+  "story@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 41 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 39 fields = content record, 31 design texts, title ok, images loaded, no painted card, 2 photo slots placeholder",
+  "story@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 41 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 8 fields = content record, 28 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 33 fields = content record, 12 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 36 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 33 fields = content record, 12 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 88 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 190 KB",
+  "home first view (390×844, DPR 3, placeholders): 170 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 280 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 467 KB",
+  "recording: previews/g425/opening_390x844.mp4 (1543 KB, lead-in 0.52 s cut, first frame mean 32,51,40) — tap → opening → home → story → details"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections/25_Orient_Express_Voyage",
+   "demo_record": "platform/themes/orient-express-voyage/content.demo.json",
+   "photos": "collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback))",
+   "w1_comps": [],
+   "compare": "w1",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (no free_zone in img/manifest.json)",
+   "fonts": [
+    "Limelight",
+    "Cormorant Garamond 400/500/600/italic 400"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 88,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (193 KB, 1024×1280, variants 640)",
+   "story_1 → media.memory_photos.0 (223 KB, 1024×1365, variants 640)",
+   "story_2 → media.memory_photos.1 (238 KB, 1024×1365, variants 640)",
+   "story_3 → media.memory_photos.2 (201 KB, 1024×1365, variants 640)",
+   "venue → media.venue_image (416 KB, 1536×1024, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.1,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.09,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.11,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.11,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.1,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.09,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.09,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.18,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.05,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.06,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.1,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.09,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.1,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.11,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.09,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.13,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.06,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.08,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.09,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.09,
+      "dark": 0
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 324,
+    "above": 324,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 36
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 329,
+    "above": 329,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 37.5
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 434,
+    "above": 295,
+    "below": 413,
+    "cta": null,
+    "bad": [
+     "span \"invite you aboard to cel\" bottom 356",
+     "span \"Saturday, September 25, \" bottom 409",
+     "span \"Saturday\" bottom 406",
+     "span.nowrap \"September 25, 2027\" bottom 406",
+     "small \"Venice, Veneto, Italy\" bottom 434"
+    ],
+    "partly": [
+     "span \"invite you aboard to cel\" 318–356",
+     "span \"Saturday, September 25, \" 379–409",
+     "span \"Saturday\" 381–406",
+     "span.nowrap \"September 25, 2027\" 381–406"
+    ],
+    "names": 64
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 365,
+    "above": 287,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "span \"Saturday, September 25, \" bottom 340",
+     "span \"Saturday\" bottom 337",
+     "span.nowrap \"September 25, 2027\" bottom 337",
+     "small \"Venice, Veneto, Italy\" bottom 365"
+    ],
+    "partly": [
+     "span \"Saturday, September 25, \" 310–340",
+     "span \"Saturday\" 312–337",
+     "span.nowrap \"September 25, 2027\" 312–337",
+     "small \"Venice, Veneto, Italy\" 344–365"
+    ],
+    "names": 50
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 382,
+    "above": 382,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 347,
+    "above": 347,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 405,
+    "above": 327,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "span \"Wednesday, 29 September \" bottom 379",
+     "span \"Wednesday\" bottom 377",
+     "span.nowrap \"29 September 2027\" bottom 377",
+     "small \"Venice, Veneto, Italy\" bottom 405"
+    ],
+    "partly": [
+     "span \"Wednesday, 29 September \" 350–379",
+     "span \"Wednesday\" 352–377",
+     "span.nowrap \"29 September 2027\" 352–377",
+     "small \"Venice, Veneto, Italy\" 383–405"
+    ],
+    "names": 54
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 365,
+    "above": 287,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "span \"Wednesday, 29 September \" bottom 340",
+     "span \"Wednesday\" bottom 337",
+     "span.nowrap \"29 September 2027\" bottom 337",
+     "small \"Venice, Veneto, Italy\" bottom 365"
+    ],
+    "partly": [
+     "span \"Wednesday, 29 September \" 310–340",
+     "span \"Wednesday\" 312–337",
+     "span.nowrap \"29 September 2027\" 312–337",
+     "small \"Venice, Veneto, Italy\" 344–365"
+    ],
+    "names": 50
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 563,
+    "above": 563,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 32
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 528,
+    "above": 450,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "span \"Saturday, September 25, \" bottom 503",
+     "span \"Saturday\" bottom 500",
+     "span.nowrap \"September 25, 2027\" bottom 500",
+     "small \"Venice, Veneto, Italy\" bottom 528"
+    ],
+    "partly": [
+     "span \"Saturday, September 25, \" 473–503",
+     "span \"Saturday\" 475–500",
+     "span.nowrap \"September 25, 2027\" 475–500",
+     "small \"Venice, Veneto, Italy\" 507–528"
+    ],
+    "names": 32
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 453,
+    "above": 314,
+    "below": 398,
+    "cta": null,
+    "bad": [
+     "span \"invite you aboard to cel\" bottom 375",
+     "span \"Saturday, September 25, \" bottom 427",
+     "span \"Saturday\" bottom 425",
+     "span.nowrap \"September 25, 2027\" bottom 425",
+     "small \"Venice, Veneto, Italy\" bottom 453"
+    ],
+    "partly": [
+     "span \"invite you aboard to cel\" 337–375"
+    ],
+    "names": 32
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 425,
+    "above": 286,
+    "below": 403,
+    "cta": null,
+    "bad": [
+     "span \"invite you aboard to cel\" bottom 347",
+     "span \"Saturday, September 25, \" bottom 399",
+     "span \"Saturday\" bottom 397",
+     "span.nowrap \"September 25, 2027\" bottom 397",
+     "small \"Venice, Veneto, Italy\" bottom 425"
+    ],
+    "partly": [
+     "span \"invite you aboard to cel\" 309–347",
+     "span \"Saturday, September 25, \" 370–399",
+     "span \"Saturday\" 372–397",
+     "span.nowrap \"September 25, 2027\" 372–397"
+    ],
+    "names": 32
+   }
+  ],
+  "envelope_to_home_ms": 3295,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 88,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 190,
+  "first_view_index_files": [
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "/themes/orient-express-voyage/site.css",
+    26226
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jD-iNM8.woff2",
+    23660
+   ],
+   [
+    "https://fonts.gstatic.com/s/limelight/v21/XLYkIZL7aopJVbZJHDuoOulH.woff2",
+    23080
+   ],
+   [
+    "/themes/orient-express-voyage/site.js",
+    12740
+   ],
+   [
+    "/audio/fx/chime.mp3",
+    10924
+   ],
+   [
+    "/audio/fx/slide.mp3",
+    8259
+   ],
+   [
+    "/no-photos",
+    7931
+   ]
+  ],
+  "first_view_home_kb_placeholders": 170,
+  "first_view_home_files": [
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "/themes/orient-express-voyage/site.css",
+    26226
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jD-iNM8.woff2",
+    23660
+   ],
+   [
+    "https://fonts.gstatic.com/s/limelight/v21/XLYkIZL7aopJVbZJHDuoOulH.woff2",
+    23080
+   ],
+   [
+    "/no-photos/home",
+    14563
+   ],
+   [
+    "/themes/orient-express-voyage/site.js",
+    12740
+   ],
+   [
+    "/themes/orient-express-voyage/img/poster-1024.webp",
+    5990
+   ],
+   [
+    "/themes/orient-express-voyage/img/map-1536.webp",
+    4784
+   ]
+  ],
+  "first_view_index_kb_photos": 280,
+  "first_view_index_files_photos": [
+   [
+    "/media/c50dd605-1b3d-4a86-81fc-1c8a6f081208/c830e6f5c758099297f2d89ae4ba7c17-640w.jpg",
+    93978
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "/themes/orient-express-voyage/site.css",
+    26226
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jD-iNM8.woff2",
+    23660
+   ],
+   [
+    "https://fonts.gstatic.com/s/limelight/v21/XLYkIZL7aopJVbZJHDuoOulH.woff2",
+    23080
+   ],
+   [
+    "/themes/orient-express-voyage/site.js",
+    12740
+   ],
+   [
+    "/audio/fx/chime.mp3",
+    10924
+   ],
+   [
+    "/audio/fx/slide.mp3",
+    8259
+   ]
+  ],
+  "first_view_home_kb_photos": 467,
+  "first_view_home_files_photos": [
+   [
+    "/media/c50dd605-1b3d-4a86-81fc-1c8a6f081208/c830e6f5c758099297f2d89ae4ba7c17-1024w.jpg",
+    198076
+   ],
+   [
+    "/media/c50dd605-1b3d-4a86-81fc-1c8a6f081208/40694cd5bcdfff8434910c5dc35c7a4d-640w.jpg",
+    110158
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "/themes/orient-express-voyage/site.css",
+    26226
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jD-iNM8.woff2",
+    23660
+   ],
+   [
+    "https://fonts.gstatic.com/s/limelight/v21/XLYkIZL7aopJVbZJHDuoOulH.woff2",
+    23080
+   ],
+   [
+    "/amelia-and-rafael/home",
+    14839
+   ],
+   [
+    "/themes/orient-express-voyage/site.js",
+    12740
+   ]
+  ],
+  "video_kb": 1543,
+  "video_first_frame": {
+   "lead_in_s": 0.52,
+   "mean_rgb": [
+    32,
+    51,
+    40
+   ],
+   "stdev": 27
+  },
+  "compare": {
+   "source": "w1",
+   "pages": []
+  }
+ }
+}
