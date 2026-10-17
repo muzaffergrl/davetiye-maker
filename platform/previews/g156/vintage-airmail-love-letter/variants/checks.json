@@ -1,0 +1,51 @@
+{
+ "theme": "vintage-airmail-love-letter",
+ "summary": {
+  "original": {
+   "measured": 122,
+   "low": 0,
+   "as_original": 3
+  },
+  "dusty-rose": {
+   "measured": 122,
+   "low": 0,
+   "as_original": 3
+  },
+  "sage-navy": {
+   "measured": 122,
+   "low": 0,
+   "as_original": 3
+  },
+  "terracotta": {
+   "measured": 122,
+   "low": 0,
+   "as_original": 3
+  },
+  "dusty-blue": {
+   "measured": 122,
+   "low": 0,
+   "as_original": 3
+  },
+  "lavender": {
+   "measured": 122,
+   "low": 0,
+   "as_original": 3
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 3 text(s) below the contrast minimum on the painted ground: index \"M&H\" 1.18:1 < 3:1; home \"M&H\" 1.18:1 < 3:1; rsvp \"M&H\" 1.18:1 < 3:1",
+  "palette dusty-rose: 3 text(s) below the minimum as in the original design: index \"M&H\" 2.58:1 < 3:1; home \"M&H\" 1.94:1 < 3:1; rsvp \"M&H\" 2.64:1 < 3:1",
+  "palette sage-navy: 3 text(s) below the minimum as in the original design: index \"M&H\" 2.46:1 < 3:1; home \"M&H\" 1.82:1 < 3:1; rsvp \"M&H\" 2.53:1 < 3:1",
+  "palette terracotta: 3 text(s) below the minimum as in the original design: index \"M&H\" 2.60:1 < 3:1; home \"M&H\" 1.99:1 < 3:1; rsvp \"M&H\" 2.68:1 < 3:1",
+  "palette dusty-blue: 3 text(s) below the minimum as in the original design: index \"M&H\" 2.56:1 < 3:1; home \"M&H\" 1.86:1 < 3:1; rsvp \"M&H\" 2.62:1 < 3:1",
+  "palette lavender: 3 text(s) below the minimum as in the original design: index \"M&H\" 2.54:1 < 3:1; home \"M&H\" 1.91:1 < 3:1; rsvp \"M&H\" 2.59:1 < 3:1"
+ ],
+ "passed": [
+  "palette dusty-rose (coming): 122 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette sage-navy (coming): 122 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette terracotta (coming): 122 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-blue (coming): 122 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette lavender (coming): 122 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "theme": "dusty-blue-champagne",
+ "summary": {
+  "original": {
+   "measured": 125,
+   "low": 0,
+   "as_original": 0
+  },
+  "blush-champagne": {
+   "measured": 125,
+   "low": 0,
+   "as_original": 0
+  },
+  "terracotta-cream": {
+   "measured": 125,
+   "low": 0,
+   "as_original": 0
+  },
+  "navy-gold": {
+   "measured": 125,
+   "low": 0,
+   "as_original": 0
+  },
+  "burgundy-blush": {
+   "measured": 125,
+   "low": 0,
+   "as_original": 0
+  },
+  "lavender-silver": {
+   "measured": 125,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [],
+ "passed": [
+  "palette blush-champagne (coming): 125 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette terracotta-cream (coming): 125 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette navy-gold (coming): 125 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette burgundy-blush (coming): 125 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette lavender-silver (coming): 125 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

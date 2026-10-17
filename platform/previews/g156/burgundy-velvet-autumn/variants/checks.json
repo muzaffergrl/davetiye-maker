@@ -1,0 +1,46 @@
+{
+ "theme": "burgundy-velvet-autumn",
+ "summary": {
+  "original": {
+   "measured": 115,
+   "low": 0,
+   "as_original": 3
+  },
+  "emerald-velvet": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "plum-velvet": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "navy-velvet": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "rust-velvet": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "dusty-rose-velvet": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 3 text(s) below the contrast minimum on the painted ground: home \"RSVP\" 1.58:1 < 4.5:1; home \"RSVP\" 1.21:1 < 4.5:1; details \"RSVP\" 1.25:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette emerald-velvet (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette plum-velvet (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette navy-velvet (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette rust-velvet (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-rose-velvet (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

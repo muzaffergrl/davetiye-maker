@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 1
+ },
+ "onyx-gold": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 0
+ },
+ "emerald-gold": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 0
+ },
+ "burgundy-gold": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 0
+ },
+ "amethyst-gold": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 0
+ },
+ "navy-silver": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 0
+ }
+}
