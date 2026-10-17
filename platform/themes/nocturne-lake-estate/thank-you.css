@@ -1,0 +1,7 @@
+/* Nocturne Lake Estate — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
+   The same envelope and pages; the card and the invitation carry the couple's thank-you. No new artwork. */
+.ty-title{font:italic 400 clamp(14px,4vw,22px)/1.2 var(--serif);letter-spacing:0}
+.card-photo .ty-decor{background:#1d1f19}
+.thank-you-copy .body-text{white-space:pre-line;margin:0 auto 18px;max-width:420px}
+.thank-you-copy .love{font-style:italic;font-size:22px;margin-top:10px;color:var(--gold)}
+.reply-card.thank-you-copy .btn{margin-top:6px}
