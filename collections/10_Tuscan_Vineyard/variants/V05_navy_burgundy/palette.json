@@ -1,0 +1,26 @@
+{
+  "id": "V05_navy_burgundy",
+  "slug": "navy-burgundy",
+  "name": "Navy & Burgundy",
+  "ink": "#232633",
+  "deep": "#29344F",
+  "primary": "#76839C",
+  "mist_top": "#F4ECE2",
+  "mist_bottom": "#DCC7AE",
+  "gold": "#A9874F",
+  "gold_light": "#D2B98A",
+  "ivory": "#FBF6EC",
+  "leaf": "#6F7A4C",
+  "swatch": [
+    "#FBF6EC",
+    "#29344F",
+    "#5B2C3A"
+  ],
+  "status": "coming",
+  "families": {
+    "wine": "deep",
+    "rule": "primary",
+    "grape": null,
+    "wine_ink": "deep"
+  }
+}

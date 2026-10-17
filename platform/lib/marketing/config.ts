@@ -58,7 +58,11 @@ export interface MarketingConfig {
     /** Absolute path under public/ of a square logo (≥ 112 px) for JSON-LD, or null. Site header/footer logos: lib/marketing/brand.ts. */
     logo: string | null;
   };
-  /** The domain shown in copy ("[DOMAIN]/<your-names>"), without protocol. */
+  /**
+   * The brand domain, without protocol. Still an open decision (K48), so it stays a placeholder and blocks `launched`.
+   * Copy never shows it while it is undecided: address examples ("<host>/<your-names>") use the host the site really
+   * runs on (siteHost() in lib/marketing/site.ts, from MARKETING_SITE_URL / PLATFORM_PUBLIC_URL), G154.
+   */
   domain: string;
   /** Absolute origin of the marketing site (canonical URLs, sitemap, JSON-LD). See siteOrigin() in lib/marketing/site.ts. */
   siteUrl: string;
@@ -118,9 +122,9 @@ export const MARKETING: MarketingConfig = {
   // placeholder — siteOrigin() falls back to http://localhost:3000 for building URLs while it is a placeholder.
   siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://[DOMAIN]',
   // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time 24 hours (user,
-  // 2026-10-15). The Etsy shop URL is still open.
+  // 2026-10-15). K48 (2026-10-17): the Etsy shop link is the shop STUDIOBKE (K35: Etsy's real shop name; copy says BKE Studio).
   support: { email: 'bkestudio@gmail.com', responseTime: msg('24 hours') },
-  etsy: { shopUrl: '[ETSY SHOP URL]', shopName: 'BKE Studio' },
+  etsy: { shopUrl: 'https://www.etsy.com/shop/STUDIOBKE', shopName: 'BKE Studio' },
   currency: 'TRY',
   hosting: { monthsAfterWedding: 12 },
   editRights: { identityChangesAfterPublish: 3, typoFreeChars: 2, dateFreeDays: 7 },
@@ -128,17 +132,27 @@ export const MARKETING: MarketingConfig = {
     refund: msg(
       'no returns, exchanges or refunds, because you get instant access to a digital product. If something on your website does not work as described, we fix it',
     ),
-    lostLink: '[LOST LINK POLICY]',
-    extension: '[EXTENSION POLICY]',
-    deletion: '[DELETION PROCESS]',
-    retention: '[RETENTION AFTER ARCHIVE]',
+    // K48 (2026-10-17): the coordinator's defaults for G090's open policies, worded only from what the system does today
+    // (the user may change them). Each is one whole sentence; pages put it after sentences of their own (G154).
+    // Lost link = the G146 way back: /my ("Create your website") with the Etsy order number + email, on any device.
+    // (inline Markdown: the FAQ renders it; /my stays unprefixed in every language, lib/marketing/lang-path.ts)
+    lostLink: msg(
+      'Open [Create your website](/my) on any phone or computer and enter your Etsy order number and the email you started with: your editor opens where you left off.',
+    ),
+    // Extension: on request before the "Online until" date (the shop moves the date in the admin); no price is promised.
+    extension: msg('Need it online longer? Message us on Etsy before your “Online until” date and we can extend it.'),
+    // Deletion: on request with the order number; website, photos and guest replies within 30 days.
+    deletion: msg('Message us on Etsy with your order number and we delete your website, its photos and your guests’ replies within 30 days.'),
+    // Retention: archived for 12 months after the website goes offline at its "Online until" date, then deleted (the
+    // admin's to-do list shows them).
+    retention: msg('After your “Online until” date, we keep your website archived for 12 months, then we delete it with its photos and replies.'),
   },
   bundles: null,
   checkout: { mode: 'etsy' },
   analytics: { provider: 'none' },
   social: { pinterest: null, instagram: null, tiktok: null },
   aiTrainingBots: 'allow',
-  copyUpdated: '2026-10-16',
+  copyUpdated: '2026-10-17',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
   verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
   // K42: prices approved by the user on 2026-10-16 (TRY, docs/23 §1). The listings are not on Etsy yet (K41).

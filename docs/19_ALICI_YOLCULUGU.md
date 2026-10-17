@@ -9,7 +9,9 @@ kullanacağı satış sonrası mesaj şablonları** (§4), START HERE rehberinin
 satış sitesi için metin önerileri (§6) ve açık kalanlar (§7).
 
 **Kurallar** (AGENTS, docs/05 §E): yalnız kodda olan ve test edilmiş özellik vaat edilir; doğrulanmamış iddia `[VERIFY …]`;
-karar verilmemiş ticari alan köşeli parantezli yer tutucu (`[ORDER CHECK TIME]`, `[EXTENSION POLICY]` …) kalır; tarih `June 12, 2027`;
+karar verilmemiş ticari alan köşeli parantezli yer tutucu (`[ORDER CHECK TIME]`, `[EXTENSION POLICY]` …) kalır (**K48, 2026-10-17:**
+G154 bunları koordinatör varsayılanlarıyla doldurdu — sipariş onayı "usually within 24 hours", uzatma Online until'dan önce
+Etsy'den istenir, silme 30 gün, arşiv 12 ay; yalnız §4.5 şablonları admin kopyasıyla birlikte G155'te); tarih `June 12, 2027`;
 rakip metni kopyalanmaz. **K33 (2026-10-15):** dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com** (şimdilik);
 bütün alıcı metinlerinde bu değerler kullanılır. Ürün metni İngilizce, açıklamalar Türkçe.
 
@@ -32,9 +34,9 @@ satışa girmez (§7).
 | 1 | "Satın aldım, şimdi ne yapacağım? Dosya nerede?" | İlanda 4 adım; Etsy'nin dijital ürün mesajı yalnız taslak (docs/15 §4.2) | Dükkân geneli **Message to Buyers / Digital Items** metni `…/start` (tasarım seçici) linkiyle (§4.4); START HERE'de "Start now: the first 5 steps" | Metinler Shop Manager'a girilmeli (tarayıcı işi) |
 | 2 | "Düzenleme linkini kaybedersem ne olur?" — en büyük destek riski | `/start` "Save this link" uyarısı; e-posta yok | Rehberde ayrı "Save your edit link" bölümü, 3 kaydetme yolu, **panel içinden yeniden kopyalama** (Share → Your private edit link) ve kayıp link süreci; `new_edit_link` şablonu | E-posta gönderimi (P0, docs/15 §4.8) |
 | 3 | "Neyi değiştirebilirim? Başlıklar da değişir mi?" | Eski ilan "headings stay as they are" diyor — **artık yanlış** (G068 Headings & labels, 5 temada manifest var) | `listing_v3.md` + rehber düzeltildi: başlıklar/etiketler değişir; sanat, renk, font, yerleşim, zarf animasyonu sabit | Satış sitesinde "Languages other than English" maddesi (§6 öneri 3) |
-| 4 | "Siteyi ne kadar süre açık kalır?" | Eski ilan `[HOSTING PERIOD]` | K25 kararı yazıldı: düğünden 12 ay sonrasına kadar; panelde **Online until** tarihi | Uzatma politikası `[EXTENSION POLICY]` |
+| 4 | "Siteyi ne kadar süre açık kalır?" | Eski ilan `[HOSTING PERIOD]` | K25 kararı yazıldı: düğünden 12 ay sonrasına kadar; panelde **Online until** tarihi | ~~`[EXTENSION POLICY]`~~ K48/G154: Online until'dan önce Etsy'den yazana uzatılabilir (ücret sözü yok); 12 ay arşiv, sonra silme |
 | 5 | "İsim/tarih yanlış girersem? Düğün ertelenirse?" | Panel kuralı var; ilanda yok | İlanda, rehberde ve SSS'de 3 hak + bedava düzeltmeler + geri alma; `date_moved`, `extra_change_granted` şablonları | Erteleme politikası `[POSTPONEMENT POLICY]` |
-| 6 | "Yayınla düğmesi neden çalışmıyor?" (manuel sipariş onayı) | Panelde "We are confirming your Etsy order" | Rehberde ayrı bölüm; `publish_blocked_pending` + `order_confirmed` şablonları | Onay süresi `[ORDER CHECK TIME]` |
+| 6 | "Yayınla düğmesi neden çalışmıyor?" (manuel sipariş onayı) | Panelde "We are confirming your Etsy order" | Rehberde ayrı bölüm; `publish_blocked_pending` + `order_confirmed` şablonları | ~~`[ORDER CHECK TIME]`~~ K48/G154: "usually within 24 hours" (rehber + ilan); şablonlar G155 |
 | 7 | "Misafirlerim nasıl cevap verir, uygulama/hesap gerekir mi, kaç kişi?" | Satış sitesi SSS'sinde kısmen | İlanda "What your guests see", rehberde misafir tarafı (≤ 10 kişi/yanıt, "Send another reply") | — |
 | 8 | "Telefonumda olur mu?" | "Designed for phone screens"; gerçek telefon testi yok | Aynı dürüst ifade; ilanda `[VERIFY]` korunur | Gerçek iPhone/Android testi |
 | 9 | İlan görselleri eski paneli gösteriyor; 3. görsel "every step in pictures" diyor | Görseller K29 öncesi (Couple bölümü, Save/Preview/Publish) | `listing_v3.md` §5'te uyarı + görsel önerileri | `listing_kit capture` G079 sonrası yeniden (önerilen görev) |
@@ -54,7 +56,7 @@ Her cevap bu tabloya dayanır. "Kaynak" sütunu kodun yeri; "Doğrulama" docs/05
 | Bağlantı koparsa | Form aynı belirteçle bir kez kendisi yeniden dener; site açıldı ama cevap gelmediyse yeni link verir (24 saat içinde, yayınlanmamış taslak) | `claim.ts` §6 | Birim testleri |
 | Düzenleme linki | Ekranda **bir kez**, büyük kutuda; **Copy link**, **Email it to myself** (alıcının kendi posta uygulaması, `mailto:`); "We cannot email it to you yet". Panelde sonra: **Share → Your private edit link → Copy edit link** | `StartForm.tsx`, `views.tsx` | Test edildi |
 | E-posta | Platform e-posta göndermez (düzenleme linki, RSVP bildirimi, hatırlatma yok); `/signin` kapalı | `lib/claim/mailer.ts`, `lib/panel/signin.ts` | Doğru |
-| Kayıp link | **G146'dan beri önce `/my`:** Etsy sipariş no + başlatırken verilen e-posta her cihazda editörü açar (cihaz anahtarı; rehber G148). Gerekirse dükkân `scripts/reissue-edit-key.ts` ile yeni link üretir; **eski link hemen ölür**; içerik/foto/yanıt aynı kalır | `scripts/reissue-edit-key.ts` | Yerel test; canlı depoda denenmedi; politika `[LOST LINK POLICY]` |
+| Kayıp link | **G146'dan beri önce `/my`:** Etsy sipariş no + başlatırken verilen e-posta her cihazda editörü açar (cihaz anahtarı; rehber G148). Gerekirse dükkân `scripts/reissue-edit-key.ts` ile yeni link üretir; **eski link hemen ölür**; içerik/foto/yanıt aynı kalır | `scripts/reissue-edit-key.ts` | Yerel test; canlı depoda denenmedi; politika K48 = `/my` akışı (G154: satış sitesi SSS'si ve config `policies.lostLink`) |
 | Sipariş onayı (manuel mod) | Taslak hemen açılır; dükkân Etsy'de kontrol edip `verify-order.ts` ile onaylayana kadar **Publish kapalı**; panelde "We are confirming your Etsy order…"; onaydan sonra sayfa yenilenince Publish açılır | `Setup.tsx` `OrderPendingNote`, `lib/panel/brand.ts`, `scripts/verify-order.ts` | Kod + test; canlıda açık olduğu görev tanımında (2026-10-15) bildirildi |
 | Kurulum | 3 adım: **Your names and date** → **Add your photo** → **Publish your website**; 1–2 "Skip for now", her an "Save & exit"; örnek tarih kapısı ("Your wedding date is still the design's sample") | `Setup.tsx`, `pages.ts` | Test edildi (G066-B tarayıcı testleri) |
 | Panel | Alt sekmeler **Home · Edit · Guests · Share** (masaüstünde üstte, sağda sabit önizleme); üstte kayıt durumu (bulut), önizleme (göz), Publish/Live | `Panel.tsx`, `views.tsx` | Test edildi (Chromium 390/1280) |
@@ -181,9 +183,11 @@ Yer kodları: **İ** ilan açıklaması · **İG** ilan görseli · **İS** ilan
 
 ### A15. Arşiv ve veri
 - **Sorular:** Ne zaman kapanır? Uzatabilir miyim? Verilerimi nasıl silerim? Misafir verisi kimde?
-- **Bugün:** panelde Online until + 30 gün uyarısı; uzatma ve silme politikası karar bekliyor.
-- **Kapanış:** SH "How long your website stays online"; `archive_notice`, `delete_data` şablonları; yer tutucular
-  `[EXTENSION POLICY]`, `[DELETION PROCESS]`.
+- **Bugün:** panelde Online until + 30 gün uyarısı. **K48 (G154):** uzatma Online until'dan önce Etsy'den istenir (ücret sözü
+  yok); silme Etsy'den sipariş numarasıyla, site + fotoğraflar + misafir yanıtları 30 gün içinde; site çevrimdışı olduktan sonra
+  12 ay arşiv, sonra silinir.
+- **Kapanış:** SH "How long your website stays online" + "Help and privacy" (G154), satış sitesi `/privacy`, `/faq`, `/pricing`;
+  `archive_notice`, `delete_data` şablonlarında `[EXTENSION POLICY]`, `[DELETION PROCESS]` admin kopyasıyla birlikte G155'te.
 
 ---
 
@@ -253,7 +257,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 | 44 | Do I have to fill in everything now? | No. Setup asks for your names, date and one photo; you can skip steps and come back. Everything is saved. | SH | ✓ |
 | 45 | What is "Time zone of the wedding"? | The time zone where the wedding happens. The countdown, the reply deadline and guests' calendars use it. | SH | ✓ |
 | 46 | Can I start with the sample date? | The editor asks you to set your real date before the first publish (or to confirm the sample date really is yours). | SH | ✓ |
-| 47 | Why can't I publish? It says you are confirming my order. | We check each order in our Etsy shop before a website can go live. Everything you set up is saved. Publish opens when the order is confirmed (usually within [ORDER CHECK TIME]); reload your editor then. | SH, P, M | ✓ (süre K) |
+| 47 | Why can't I publish? It says you are confirming my order. | We check each order in our Etsy shop before a website can go live. Everything you set up is saved. Publish opens when the order is confirmed (usually within 24 hours); reload your editor then. | SH, P, M | ✓ (süre K48) |
 
 ### 3.4 Düzenleme
 
@@ -303,7 +307,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 | # | Soru | Cevap | Yer | D |
 |---|---|---|---|---|
 | 76 | What happens after the wedding? | You can turn your website into a thank-you page (automatically the day after, or right away), with your own message and photo. Replies close. | İ, SH | ✓ |
-| 77 | What happens after it closes? Can I extend it? | Your website closes for guests; in your editor you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY]. Deleting your data: [DELETION PROCESS]. | SH, M | ✓ / K |
+| 77 | What happens after it closes? Can I extend it? | Your website closes for guests; in your editor you can still see your content and download your replies. Need it longer? Message us on Etsy before your Online until date and we can extend it. To delete your data sooner, message us on Etsy with your order number: we delete your website, photos and guest replies within 30 days. | SH, M | ✓ (K48) |
 | 78 | How do I get help, and how fast? | Message BKE Studio on Etsy with your order number (or email bkestudio@gmail.com). We reply within 24 hours. We never ask for your edit link. | İ, SH, P | ✓ (K33; süre 2026-10-15) |
 
 ---
@@ -324,12 +328,14 @@ A wedding website that opens like a real envelope, with online RSVP built in. Yo
 WHAT YOU GET
 • Your wedding website in the {DESIGN} design: envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
-• Online RSVP: replies, head counts and up to 10 questions of your own (for example a meal choice), each required or optional; download the replies as Excel (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
+• Online RSVP: replies, head counts and up to 10 questions of your own (for example a meal choice), each required or optional; download the replies as Excel (or CSV) in one tap, or connect your own Google Sheet
 • Map and directions to your venue (Google Maps, Apple Maps, Waze)
-• Soft music on your Our Story page (four tracks or your own file) and gentle opening sounds [VERIFY: tracks listened to and approved]
+• Background music on your Our Story page (four tracks or your own file) and sound effects as the invitation opens
+• Your website in English, Spanish, French, German or Turkish, or in several with a language button for guests: built-in texts come translated, your own texts can be translated automatically as a draft that you check and approve
 • Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
 • 5 photo spots with cropping, a countdown, map, dress code, travel & stay and registry buttons, and up to 12 questions & answers
 • A QR code of your website (PNG or SVG) for printed cards and signs
+• Downloads: your whole website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks for a print shop)
 • An optional guest password, and a thank-you page for after the wedding
 • A START HERE guide (PDF) with your start link and every step explained
 • Your website stays online until 12 months after your wedding date
@@ -366,9 +372,9 @@ GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start; it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
-• We confirm each order in our shop before a website can go live. You can set everything up in the meantime.
+• If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
-• The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
+• Automatic translation is a machine-made first draft: read each text before you approve it. Your own texts can also be in any other language; accented Latin letters and Cyrillic use the design's fonts, other alphabets a plain standard font.
 • Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
@@ -383,6 +389,12 @@ Notlar:
 - Q&A ve RSVP soruları canlıda uçtan uca denenmedi → ilan dosyasında `[VERIFY: try on the live site]`.
 - "We confirm each order in our shop…" yalnız `CLAIM_ORDER_VERIFICATION=manual` canlıda açıkken doğru → ilan dosyasında
   `[VERIFY: manual order check on in production]`.
+- **G154 (2026-10-17, G090 P0-03, K48):** açıklamada artık hiç `[VERIFY]` yok: yalnız var olan ve G090'ın yerel üretim
+  derlemesinde geçen özellikler yazılır. Sipariş cümlesi her modda doğru olacak biçimde koşullu ("If your editor says it is
+  confirming your Etsy order … usually within 24 hours"); Google Sheets yalnız özellik olarak ("connect your own Google Sheet"),
+  nasıl davrandığı değil; müzik için "soft/gentle" gibi dinlenmemiş nitelemeler çıktı; dil satırı G144'e (5 dil, otomatik
+  çeviri taslağı), Downloads satırı G139'a göre. Canlı site / gerçek telefon / gerçek Google hesabı denemeleri ilanın §11
+  kutularında durur ve `tools/etsy_upload.py` onları `open_checks`'e ("before publishing") taşır.
 - "Instant download / anında" ifadesi kullanılmadı: indirme anında, ama yayın sipariş onayını bekleyebilir.
 - G148 (2026-10-17, G146/K46): "Save your private edit link… we cannot email it to you yet" maddesi yerine erişim satırı
   ("Your Etsy order number is your key…"): editör **hemen** açılır (taslak), yayının sipariş onayını bekleyebileceğini bir sonraki
@@ -418,10 +430,10 @@ Can I change the headings and wording?
 Yes. Every page of the editor has "Headings & labels". The artwork, colors and fonts stay as designed.
 
 Can it be in another language?
-You can write your own texts and headings in any language. Built-in messages such as reply form errors stay in English.
+Yes. Your website can be in English, Spanish, French, German or Turkish, or in several of them: the design's built-in texts come translated, and your own texts can be translated automatically (check each translation before you approve it). You can write your own texts in any other language too.
 
 How do my guests reply?
-On your RSVP page, with no app or account. You see every reply in your editor and can download them as Excel (or CSV) in one tap, or connect a Google Sheet that updates by itself.
+On your RSVP page, with no app or account. You see every reply in your editor and can download them as Excel (or CSV) in one tap, or connect your own Google Sheet.
 
 How many guests can I invite?
 As many as you like. One reply can include up to 10 people.
@@ -430,13 +442,13 @@ Can I add a password?
 Yes, optional: one shared password that you send to your guests with the link.
 
 How long does my website stay online?
-Until 12 months after your wedding date. After the wedding it can turn into a thank-you page.
+Until 12 months after your wedding date. After the wedding it can turn into a thank-you page. Need it longer? Message us on Etsy before your "Online until" date and we can extend it.
 
 Can I use my own domain?
 Not at the moment. Your address is your names on our web address.
 
 Is anything printed or shipped?
-No. It is a digital product.
+No. It is a digital product. Your editor makes a printable invitation in your design (5 × 7 in or A5) that you can print at home or at a print shop.
 ```
 
 ### 4.4 Etsy'nin otomatik alıcı metinleri (dükkân geneli)
@@ -744,7 +756,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     "body": [
       "Hi {names}, a short note: your wedding website stays online until {online_until}.",
       "After that it closes for guests. In your editor you can still see your content and download your replies (Guests → Download list). If you want a copy of your replies, it is easiest to download them before then.",
-      "[EXTENSION POLICY]",
+      "Need it online longer? Reply here before that date and we can extend it.",
       "{shop}"
     ]
   },
@@ -908,7 +920,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
     ],
     "body": [
       "Hi, of course. To hide your website from guests right away, open your editor and go to Share → Take the website offline.",
-      "To delete your website, photos and guest replies for good: [DELETION PROCESS]. Before we delete anything we confirm it is you (order {order}, website {site_url}). Deleting cannot be undone, so download your replies first if you want a copy (Guests → Download list).",
+      "To delete your website, photos and guest replies for good, just reply here and we delete everything within 30 days (usually much sooner). Before we delete anything we confirm it is you (order {order}, website {site_url}). Deleting cannot be undone, so download your replies first if you want a copy (Guests → Download list).",
       "{shop}"
     ]
   }
@@ -1055,7 +1067,8 @@ Biçim: **dosya** · mevcut metin → önerilen metin · gerekçe. Kod bu görev
   - "Why can't guests see my changes?" (mevcut "Do guests see my changes right away?" yerine aynı metin + ) "When you see
     “Unpublished changes”, tap Review, then Publish changes."
   - "Can guests change their reply?" → "Yes: they send another reply. You see both under Guests and can remove the old one."
-- **C3 (öneri 7).** *[durum 2026-10-16: kısmen: `ORDER_PENDING_TEXT`'te vardı; G121 `OrderPendingNote`'a "Reload this page to check."; süre `[ORDER CHECK TIME]` karar bekliyor]* `components/panel/Setup.tsx` `OrderPendingNote` ve `lib/panel/brand.ts` `ORDER_PENDING_TEXT`: "…you can
+- **C3 (öneri 7).** *[durum 2026-10-17: süre K48'de "usually within 24 hours"; START HERE (G154) bunu yazıyor, panel metni
+  (`OrderPendingNote` / `ORDER_PENDING_TEXT`) G154'ün kapsamı dışında]* *[durum 2026-10-16: kısmen: `ORDER_PENDING_TEXT`'te vardı; G121 `OrderPendingNote`'a "Reload this page to check."; süre `[ORDER CHECK TIME]` karar bekliyor]* `components/panel/Setup.tsx` `OrderPendingNote` ve `lib/panel/brand.ts` `ORDER_PENDING_TEXT`: "…you can
   publish as soon as the order is confirmed." → "…you can publish as soon as the order is confirmed (usually within [ORDER CHECK
   TIME]). Reload this page to check." — gerekçe: onay alıcıya bildirilmiyor; süre karar gelince config'ten.
 - **C4.** *[durum 2026-10-16: vardı]* `components/panel/Panel.tsx` "This edit link no longer works" metni: "The link may have been replaced with a new one. If
@@ -1077,9 +1090,11 @@ Biçim: **dosya** · mevcut metin → önerilen metin · gerekçe. Kod bu görev
 - **D2.** *[durum 2026-10-16: vardı]* `lib/marketing/faq.ts` `take-offline`: "Tap Unpublish in your panel…" → "Open Share in your panel and tap Take the
   website offline…" — gerekçe: panelde "Unpublish" adlı düğme yok.
 - **D3.** *[durum 2026-10-16: vardı]* `faq.ts` `what-can-i-change`: sona "…and the design's headings and labels in your own words." eklenmeli.
-- **D4.** *[durum 2026-10-16: vardı]* `faq.ts` `lost-link`: `[LOST LINK POLICY]`'nin önüne davranış: "While your editor is open you can copy the link again
+- **D4.** *[durum 2026-10-17, G154: K48 — cevap artık G146 akışı ("You do not need it to get back in." + `policies.lostLink`:
+  /my'da sipariş no + e-posta); yer tutucu ve "we send a new link" kalktı]* *[durum 2026-10-16: vardı]* `faq.ts` `lost-link`: `[LOST LINK POLICY]`'nin önüne davranış: "While your editor is open you can copy the link again
   under Share. If it is lost, message us on Etsy with your order number: we send a new link and the old one stops working."
-- **D5.** *[durum 2026-10-16: vardı]* `app/(marketing)/how-it-works/page.tsx` "After the wedding": "After that: [EXTENSION POLICY]." → "After that your website
+- **D5.** *[durum 2026-10-17, G154: K48 — "Longer hosting: …" yerine `policies.extension` tam cümle: "Need it online longer?
+  Message us on Etsy before your “Online until” date and we can extend it."]* *[durum 2026-10-16: vardı]* `app/(marketing)/how-it-works/page.tsx` "After the wedding": "After that: [EXTENSION POLICY]." → "After that your website
   closes for guests; you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY]." (`ARCHIVE_TEXT`
   ile aynı).
 - **D6.** *[durum 2026-10-16: karar bekliyor (alan adı; Ek A'nın web uyarlaması claude-metin işi)]* `/help` (docs/14 §5.1 "ileride"): START HERE'in Ek A metni `/help` altında yayınlansın (tasarımsız, tek sayfa,
@@ -1089,10 +1104,13 @@ Biçim: **dosya** · mevcut metin → önerilen metin · gerekçe. Kod bu görev
 
 ## 7. Açık kalanlar
 
-**Karar bekleyen (kullanıcı):** ~~destek yanıt süresi~~ (2026-10-15: 24 saat; dükkân adı ve e-posta K33), Etsy dükkân linki, fiyat, ~~iade politikası~~ (2026-10-15: iade yok, "çalışmazsa düzeltiriz"; docs/20 §4), kayıp link
-politikası (süre), sipariş onay süresi (`[ORDER CHECK TIME]`), erteleme politikası (`[POSTPONEMENT POLICY]`; docs/16 §15 öneri:
-ertelemede 1 hak), yanlış tasarım politikası (`[DESIGN SWITCH POLICY]`), uzatma (`[EXTENSION POLICY]`), silme süreci
-(`[DELETION PROCESS]`), 48 aylık tavan (kodda açık, karar yok), alan adı.
+**Karar bekleyen (kullanıcı):** ~~destek yanıt süresi~~ (2026-10-15: 24 saat; dükkân adı ve e-posta K33), ~~Etsy dükkân linki~~
+(K48: `https://www.etsy.com/shop/STUDIOBKE`), ~~fiyat~~ (K42: 1.460 TL), ~~iade politikası~~ (2026-10-15: iade yok, "çalışmazsa düzeltiriz"; docs/20 §4), ~~kayıp link
+politikası~~ (K48: `/my` akışı), ~~sipariş onay süresi~~ (K48: "usually within 24 hours"), erteleme politikası (`[POSTPONEMENT POLICY]`; docs/16 §15 öneri:
+ertelemede 1 hak), yanlış tasarım politikası (`[DESIGN SWITCH POLICY]`), ~~uzatma~~ (K48: Online until'dan önce Etsy'den istenir,
+ücret sözü yok), ~~silme süreci~~ (K48: Etsy'den sipariş no ile, 30 gün içinde; arşivden 12 ay sonra silinir), 48 aylık tavan (kodda
+açık, karar yok), **alan adı ve barındırma planı** (K48'de de açık). K48 değerleri G154'te START HERE'e, ilanlara ve satış sitesine
+girdi; §4.5 şablonları (admin kopyası `platform/lib/admin/message-templates.json` ile birlikte) G155'te.
 
 **Doğrulanmamış iddialar (`[VERIFY]`):** gerçek iPhone/Android'de düzenleme ve misafir yolculuğu; HEIC; Q&A ve RSVP sorularının
 canlıda uçtan uca denenmesi; QR'ın telefon kamerasıyla okutulması; manuel sipariş onayının canlıda açık olması; Etsy menü adları
@@ -1149,7 +1167,14 @@ etiketleri "Open or start your website", "Continue"); ilk 5 adımda sipariş num
 onay e-postasında "Order #…"); düzenleme linki "kısayol"; Share → Use on another device / Sign out other devices; e-posta alanı
 "we do not send emails yet" demiyor (SMTP açılınca da doğru kalsın) ve e-posta vaat etmiyor; ortak düzenleme, bilgisayar/çok cihaz
 cevabı; sorun gidermede "This edit link no longer works" → **Continue with your order number**, "This order already has a website"
-→ `{MY_URL}`, yeni "My order number and email do not open my editor").
+→ `{MY_URL}`, yeni "My order number and email do not open my editor"), **G154** (G090 QA + K48: "We are confirming your Etsy
+order" bölümü "usually within 24 hours" + sayfayı yenile; **Languages** bölümü (G144: Edit → Us → Languages, Main language, Also
+show my website in, Translate automatically + MyMemory notu, Approve / Approve all, Language of this editor); Share'de **Downloads**
+(G139: site PDF'i, 5 × 7 in / A5 basılabilir davetiye, arka yüz, taşma payı, kesim işaretleri; etiketler `lib/print/labels.ts`'ten
+denetlenir); Guests'te "Email me when a guest replies" yalnız panel sunuyorsa (G152; "we do not send email notifications yet"
+kalktı); süre bölümünde uzatma (Online until'dan önce Etsy'den yazın, ücret sözü yok) ve 12 ay arşiv sonrası silme; Help'te 30
+günde silme; Quick answers'ta dil (5 dil) ve basılı davetiye ("No" yerine Share → Downloads); s. 1'de başlat adresi QR'ın altında
+düz metin olarak da yazılı (G090 P2-04)).
 
 <!-- g091:start-here:start -->
 ````markdown
@@ -1170,6 +1195,8 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 1. Open your start link: [Start your {DESIGN_NAME} website]({START_URL}). Or scan this QR code with your phone camera.
 
 ![QR code of your start link](img/start_qr_page.png)
+
+Link and QR code not working? Type this address into your browser: [{START_URL}]({START_URL})
 
 2. Find your Etsy order number: on Etsy, go to You → Purchases and reviews, or look for "Order #…" in your Etsy confirmation email.
 3. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
@@ -1221,7 +1248,7 @@ When your website is live, **Your website is live** shows your link with **Copy 
 
 ## If your editor says "We are confirming your Etsy order"
 
-We check each order in our Etsy shop before a website can go live. You can set up everything now; it is all saved. **Publish** opens as soon as your order is confirmed (usually within [ORDER CHECK TIME]). We tell you on Etsy; then reload your editor page. If it takes longer, message us on Etsy with your order number.
+Your order has to be confirmed in our Etsy shop before your website can go live. You can set up everything now; it is all saved. **Publish** opens as soon as your order is confirmed, usually within 24 hours. Reload your editor page to check. If it takes longer, message us on Etsy with your order number.
 
 ## Step 3. Edit your website
 
@@ -1230,11 +1257,11 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 - **Home:** your website's status and link, how ready it is, the next things to do, new replies and your dates (Wedding, Replies close, Online until). Under **Settings** you see your time zone, date style, name and date changes left and guest password; tap a row to change it.
 - **Edit:** six pages with everything on your website.
 - **Guests:** your guests' replies.
-- **Share:** your link, QR code, guest password, your private edit link and how to open your editor on another device.
+- **Share:** your link, QR code, guest password, downloads (your website as a PDF and a printable invitation), your private edit link and how to open your editor on another device.
 
 | Edit page | What you change |
 |---|---|
-| Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one) |
+| Us | First names, full names for the invitation card, how your names appear, monogram (if your design shows one), the languages of your website |
 | Day & place | Date and ceremony time (time zone, date style and countdown under More options); venue, address, map link, map and directions, a reception place and venue photo; the order of the day (up to 10 rows); After the wedding |
 | Photos | Invitation portrait, three story photos and the venue photo |
 | Our Story | Show or hide the page, an intro line, a caption for each story moment, music and sound effects |
@@ -1276,6 +1303,18 @@ Open **Edit → Our Story** and scroll to **Music & sound** at the end of the pa
 
 Guests hear the music softly on your Our Story page (no Our Story page, no music). A small sound button at the top left of every page turns the sound off or on. Some phones wait for a tap before music starts: then guests see a "Play music" button.
 
+## Languages
+
+Your website can be in English, Spanish, French, German or Turkish, or in several of them. Open **Edit → Us → Languages**:
+
+- **Main language:** the language you write your texts in. Guests see it first.
+- **Also show my website in:** tick the other languages. Guests then get a small language button on every page.
+- The design's headings, buttons, reply form and dates come translated for you.
+- Your own texts (story, details, questions and answers, your own headings) are listed under each language. **Translate automatically** makes a first draft: with your browser's own translator if it has one, otherwise with the free MyMemory translation service (your texts are sent to it). Read each translation and correct it if needed, then tap **Approve** or **Approve all**. Guests see a translation only after you approve it; until then they see your main language.
+- **Language of this editor** changes the language of the editor itself.
+
+Machine translation is only a first draft: if you can, ask someone who speaks the language to read it.
+
 ## Step 5. Preview and publish
 
 Tap the eye icon at the top to preview your pages: **{OPENING_TAB}**, **Home**, **Story**, **Details** and **RSVP**. **{OPENING_TAB}** is the opening page, where guests tap the {OPENING}. The X at the top closes the preview. On a computer the preview stays on the right.
@@ -1305,6 +1344,13 @@ Open **Share**:
 
 **Guest password** (optional). Open **Guest password** and turn on **Password protect your website**. Type a password of 4 to 40 characters (capital letters do not matter) or tap **Suggest a password**, then **Turn on password**. Use **Copy password** to send it with your link. It is one shared password for all guests, not a login for each person. Guests type it once; their browser remembers it. If you change it, guests are asked for the new one. Turned off, anyone with the link can open your website.
 
+**Downloads** (in **Share**):
+
+- **Download website as PDF:** every page of your website in your design, with a QR code to your link on the last page.
+- **Printable invitation:** a classic invitation card in your design, with your names, date and venue. Choose **5 × 7 in** or **A5 (148 × 210 mm)**. **Add a back side with the details and a QR code** is ticked at first. For a print shop, tick **For a print shop: add bleed (1/8 in / 3 mm)** and then **Add crop marks**. Tap **Download printable invitation**.
+
+Both use your latest saved changes, and making a PDF can take up to a minute. Publish your website first: the QR code opens it only once it is live. Print one copy and scan its QR code with your phone before you print them all.
+
 **Take the website offline** (at the bottom of Share) hides your website from guests: they see "Page not found" until you publish again. Your text, photos and replies are kept.
 
 ## Step 7. Guest replies
@@ -1327,7 +1373,7 @@ In the Guest list you can also:
 
 **Google Sheets** (optional): in **Guests**, tap **Connect Google Sheets** and allow access in Google. Your editor makes a spreadsheet in your own Google Drive and adds every new reply by itself; the columns follow your reply form. Google lets it see only the files it makes, nothing else in your Drive. **Open sheet** opens it, **Sync now** updates it at once, and **Disconnect** stops it (the spreadsheet stays in your Drive). If you see "Google Sheets: coming soon", this connection is not switched on yet: use **Download Excel** instead.
 
-We do not send email notifications yet: new replies show on Home and under **New**, where **Mark as seen** clears them. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
+New replies show on Home and under **New**, where **Mark as seen** clears them. If **Guests** offers **Email me when a guest replies**, you can turn it on to get a short email for each new reply. Replies that arrive in an unusual rush go to **Held**: they are not counted until you tap **Keep this reply**.
 
 Replies close at the end of your reply-by date, in your wedding's time zone. To close earlier, turn off **Accept replies on the website** in Edit → RSVP.
 
@@ -1343,7 +1389,7 @@ Add a title, a message and a photo if you like, preview it and publish. In thank
 
 ## How long your website stays online
 
-Your website stays online until **12 months after your wedding date**. Home → Dates → **Online until** shows the exact day, and Home reminds you 30 days before. After that it closes for guests; in your editor you can still see your content and download your replies. Longer hosting: [EXTENSION POLICY].
+Your website stays online until **12 months after your wedding date**. Home → Dates → **Online until** shows the exact day, and Home reminds you 30 days before. After that it closes for guests; in your editor you can still see your content and download your replies. Need it online longer? Message us on Etsy before your **Online until** date and we can extend it. 12 months after your website closes, we delete it with its photos and replies, so download your replies before then.
 
 ## Quick answers
 
@@ -1355,7 +1401,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can I change colors or fonts?** No. You change the content and the wording; the design stays as made.
 
-**Can it be in my language?** You can write your own texts and the design's headings in any language. Some built-in messages, such as reply form errors, stay in English. {LANGUAGE_FONTS} Preview every page.
+**Can it be in my language?** Yes, in English, Spanish, French, German or Turkish, or in several of them (see Languages above). Your own texts can be in any language; the design's built-in texts come in one of these five. {LANGUAGE_FONTS} Preview every page.
 
 **How many guests can I invite?** As many as you like. One reply can include up to 10 people.
 
@@ -1365,7 +1411,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Is there music?** Yes, if you like: soft music on your Our Story page (see Music and sound above). Choose **No music** to turn it off.
 
-**Is there a printed invitation or a save the date?** No.
+**Can I print invitations? Is there a save the date?** You print them yourself: **Share → Downloads** makes a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks). We do not print or ship anything, and there is no separate save the date.
 
 ## Troubleshooting
 
@@ -1401,7 +1447,7 @@ Message BKE Studio on Etsy (in the conversation of your order), or write to **bk
 
 Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 
-Your guests' replies are visible only in your private editor, not on your website. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}).
+Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}).
 
 The design's sample names, dates, places and photos are fictional. Replace them before you share your website.
 ````

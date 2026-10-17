@@ -1,0 +1,25 @@
+{
+  "id": "V02_sage_lavender",
+  "slug": "sage-lavender",
+  "name": "Sage & Lavender",
+  "ink": "#2E2A3F",
+  "deep": "#5D5287",
+  "primary": "#9C8FC4",
+  "mist_top": "#EEF1E8",
+  "mist_bottom": "#D3DAC6",
+  "gold": "#B5A27A",
+  "gold_light": "#D8CBA8",
+  "ivory": "#FAF8F3",
+  "leaf": "#8A9A78",
+  "swatch": [
+    "#D3DAC6",
+    "#9C8FC4",
+    "#8A9A78"
+  ],
+  "status": "coming",
+  "families": {
+    "lavender": null,
+    "paper": "mist_bottom",
+    "lav_ink": null
+  }
+}

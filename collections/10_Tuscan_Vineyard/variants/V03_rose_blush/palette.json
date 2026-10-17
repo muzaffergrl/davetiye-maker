@@ -1,0 +1,26 @@
+{
+  "id": "V03_rose_blush",
+  "slug": "rose-blush",
+  "name": "Rosé & Blush",
+  "ink": "#3A2428",
+  "deep": "#8A4452",
+  "primary": "#C48C90",
+  "mist_top": "#F7EDEA",
+  "mist_bottom": "#E6CFCB",
+  "gold": "#A9874F",
+  "gold_light": "#D2B98A",
+  "ivory": "#FBF6EC",
+  "leaf": "#6F7A4C",
+  "swatch": [
+    "#FBF6EC",
+    "#C48C90",
+    "#8A4452"
+  ],
+  "status": "coming",
+  "families": {
+    "wine": "deep",
+    "rule": "primary",
+    "grape": "#9C4A5C",
+    "wine_ink": "deep"
+  }
+}

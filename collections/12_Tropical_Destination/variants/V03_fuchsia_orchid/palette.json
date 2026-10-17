@@ -1,0 +1,25 @@
+{
+  "id": "V03_fuchsia_orchid",
+  "slug": "fuchsia-orchid",
+  "name": "Fuchsia Orchid",
+  "ink": "#3A1F2E",
+  "deep": "#8E2D5C",
+  "primary": "#D9407E",
+  "mist_top": "#FCF4F8",
+  "mist_bottom": "#F4DDEA",
+  "gold": "#D4A44C",
+  "gold_light": "#EBCB8B",
+  "ivory": "#FFFCF5",
+  "leaf": "#2E7D4F",
+  "swatch": [
+    "#F4DDEA",
+    "#D9407E",
+    "#2E7D4F"
+  ],
+  "status": "coming",
+  "families": {
+    "hibiscus": "primary",
+    "lagoon": "mist_bottom",
+    "teal_css": "deep"
+  }
+}

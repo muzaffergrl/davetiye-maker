@@ -1,0 +1,204 @@
+{
+  "theme": "boho-pampas-terracotta",
+  "note": "G157 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). Groups say which families a part may take.",
+  "families": {
+    "terra": {
+      "anchor": "#C26C4D",
+      "sigma": 14,
+      "cmin": 0.085,
+      "cfull": 0.105
+    },
+    "rose": {
+      "anchor": "#BF5537",
+      "sigma": 14,
+      "cmin": 0.085,
+      "cfull": 0.105
+    },
+    "terra_css": {
+      "anchor": "#C26C4D",
+      "sigma": 18
+    }
+  },
+  "groups": {
+    "envelope": [
+      "terra"
+    ],
+    "floral": [
+      "rose"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "pampas / dried palm: natural beige in every palette"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "pampas / dried palm: natural beige in every palette"
+    },
+    "accent_3": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "bg_page": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "sand paper: the painted ground stays (text contrast)"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "pampas / dried palm: natural beige in every palette"
+    },
+    "decor_br": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "decor_tl": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "divider": {
+      "recolor": "keep",
+      "why": "pampas / dried palm: natural beige in every palette"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "pampas / dried palm: natural beige in every palette"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "mist": {
+      "recolor": "keep",
+      "why": "sand paper: the painted ground stays (text contrast)"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: sand paper"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: sand paper"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: sand paper"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: sand paper"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: sand paper"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "cream paper texture"
+    }
+  },
+  "print_colors": {
+    "ink": "#3A2A22",
+    "accent": "#6C4A2A",
+    "paper": "#F5E6D6"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "terra_css"
+    ],
+    "keep": [
+      "--page",
+      "--sand",
+      "--ivory",
+      "--ink",
+      "--ink-soft",
+      "--gold",
+      "--gold-ink"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--rust",
+        "--page",
+        4.5
+      ],
+      [
+        "--rust-btn",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--page",
+        4.5
+      ]
+    ]
+  }
+}

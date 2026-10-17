@@ -75,8 +75,13 @@ test('facts: numbers come from the content limits; "not included" is explicit', 
   assert.equal(LIMITS.scheduleRows, 10);
   assert.equal(LIMITS.faqItems, 12);
   assert.ok(included().some((x) => x.includes('12 months')));
-  for (const must of ['custom domain', 'Music', 'colors, fonts', 'email', 'Printed']) {
+  for (const must of ['custom domain', 'colors, fonts', 'email', 'Printing and shipping']) {
     assert.ok(NOT_INCLUDED.some((x) => x.toLowerCase().includes(must.toLowerCase())), must);
+  }
+  // G154: G126 music, G144 five languages and G139's printable invitation are features now: included, never "not included"
+  assert.ok(!NOT_INCLUDED.some((x) => /^music$|^a translated website|^printed invitations$/i.test(x)), 'music, languages and the printable invitation are features');
+  for (const feature of [/music/i, /Spanish, French, German or Turkish/, /printable invitation/i, /order number and email/i]) {
+    assert.ok(included().some((x) => feature.test(x)), String(feature));
   }
   // G076 guest password and G075 thank-you mode exist: listed as included, never as "not included"
   assert.ok(!NOT_INCLUDED.some((x) => /password/i.test(x)), 'password is a feature now (G076)');

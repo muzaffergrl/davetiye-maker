@@ -1,0 +1,27 @@
+{
+  "id": "V04_dusty_blue",
+  "slug": "dusty-blue",
+  "name": "Dusty Blue & Ivory Lace",
+  "ink": "#3A3530",
+  "deep": "#5E7387",
+  "primary": "#AFC0CF",
+  "mist_top": "#DFE5EB",
+  "mist_bottom": "#AFC0CF",
+  "gold": "#BFA67A",
+  "gold_light": "#DED0B0",
+  "ivory": "#FFFDF8",
+  "leaf": "#A3A58F",
+  "swatch": [
+    "#FFFDF8",
+    "#DFE5EB",
+    "#5E7387"
+  ],
+  "status": "coming",
+  "families": {
+    "lace": null,
+    "leaf": null,
+    "satin": "mist_top",
+    "scene_satin": null,
+    "taupe": "deep"
+  }
+}

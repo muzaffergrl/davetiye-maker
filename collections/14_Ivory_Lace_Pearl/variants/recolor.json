@@ -1,0 +1,242 @@
+{
+  "theme": "ivory-lace-pearls",
+  "note": "G157 recolour manifest (tools/recolor_parts.py, docs/25). Two families share the ivory hue and are told apart by chroma: lace (lace, roses, satin bow, petal; chroma >= .025) and satin (the painted satin ground and mist; groups satin only). A palette either tints the lace (blush, champagne, mauve) or keeps it ivory on a tinted satin ground (dusty blue, sage). The antique gold brooch and pearl drop never change; photo placeholders stay ivory. leaf = the green of the baby's breath sprigs (always kept); scene_satin = the satin of the share image, tinted only with tinted lace (an ivory-lace palette keeps the share image ivory so its roses stay ivory).",
+  "families": {
+    "lace": {
+      "anchor": "#D8C0A4",
+      "sigma": 28,
+      "cmin": 0.025,
+      "cfull": 0.04
+    },
+    "satin": {
+      "anchor": "#F1E7DE",
+      "sigma": 40,
+      "cmin": 0.004,
+      "cfull": 0.01
+    },
+    "taupe": {
+      "anchor": "#7A6650",
+      "sigma": 30,
+      "cmin": 0.022,
+      "cfull": 0.035
+    },
+    "leaf": {
+      "anchor": "#6E6228",
+      "sigma": 14,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "scene_satin": {
+      "anchor": "#F1E7DE",
+      "sigma": 40,
+      "cmin": 0.004,
+      "cfull": 0.01
+    }
+  },
+  "groups": {
+    "lace": [
+      "lace",
+      "leaf"
+    ],
+    "satin": [
+      "satin"
+    ],
+    "scene": [
+      "lace",
+      "leaf",
+      "scene_satin"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "pearl drop with antique gold cap (metal + pearl)"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "accent_3": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "satin"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "center": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "antique gold brooch with pearls (metal)"
+    },
+    "decor_br": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "decor_tl": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "door_l": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "door_l_in": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "door_r": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "door_r_in": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "antique gold brooch with pearls (metal)"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "mist": {
+      "recolor": "auto",
+      "group": "satin"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory satin"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory satin"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory satin"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory satin"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory satin"
+    },
+    "pocket": {
+      "recolor": "auto",
+      "group": "lace"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "lace"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "ivory paper texture"
+    }
+  },
+  "print_colors": {
+    "ink": "#3A3530",
+    "accent": "#8C7350",
+    "paper": "#F3ECE5"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "taupe"
+    ],
+    "roles": {
+      "taupe": "deep"
+    },
+    "tokens": {
+      "--page": "satin",
+      "--c-f6f0e9": "satin",
+      "--c-ede3d8": "satin"
+    },
+    "keep": [
+      "--ivory",
+      "--ink",
+      "--gold-ink",
+      "--c-bfa67a",
+      "--c-fffcf0",
+      "--c-fffdf8",
+      "--c-9a3b2b"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--taupe",
+        "--page",
+        4.5
+      ],
+      [
+        "--taupe-dark",
+        "--page",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--page",
+        3
+      ],
+      [
+        "--c-8c7a63",
+        "--ivory",
+        4.6
+      ],
+      [
+        "--c-6e5c47",
+        "--ivory",
+        4.6
+      ]
+    ]
+  }
+}

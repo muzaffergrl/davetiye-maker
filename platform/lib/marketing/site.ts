@@ -4,7 +4,7 @@
 import { MARKETING, type MarketingConfig } from './config.ts';
 import { liveDesigns, openingObject } from './designs.ts';
 import { enT, LANG_TAGS, msg, type Lang, type T } from './i18n.ts';
-import { hasPlaceholder } from './placeholders.ts';
+import { hasPlaceholder, real } from './placeholders.ts';
 
 /** Origin for absolute URLs. A placeholder siteUrl ("https://[DOMAIN]") falls back to localhost (dev/preview builds). */
 export function siteOrigin(cfg: MarketingConfig = MARKETING): string {
@@ -16,6 +16,26 @@ export function siteOrigin(cfg: MarketingConfig = MARKETING): string {
     }
   }
   return 'http://localhost:3000';
+}
+
+/**
+ * The host couple websites are addressed on, for address examples in copy ("<host>/clara-and-julian"), G154: the brand
+ * domain once decided, else the host of the site's real origin (MARKETING_SITE_URL / PLATFORM_PUBLIC_URL, read at
+ * build time), else Vercel's production host. Never an invented domain: with none of them known the example shows "…"
+ * ("…/clara-and-julian", like the START HERE guide).
+ */
+export function siteHost(cfg: MarketingConfig = MARKETING, env: Record<string, string | undefined> = process.env): string {
+  const brand = real(cfg.domain);
+  if (brand) return brand;
+  for (const url of [hasPlaceholder(cfg.siteUrl) ? null : cfg.siteUrl, env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}` : null]) {
+    if (!url) continue;
+    try {
+      return new URL(url).host;
+    } catch {
+      /* next */
+    }
+  }
+  return '…';
 }
 
 /** Absolute URL of a site path: "/" -> "https://x/", "/faq" -> "https://x/faq". Lowercase path, no query. */
@@ -85,7 +105,7 @@ export function corePages(cfg: MarketingConfig = MARKETING, t: T = enT): PageEnt
       title: withBrand(t('Wedding Website Features: RSVP, Calendar, QR'), cfg),
       h1: t('Everything your wedding website does'),
       description:
-        t('RSVP with your own questions, replies and CSV in your panel, add to calendar, schedule, questions and answers, photo cropping and QR code sharing.'),
+        t('RSVP with your own questions and an Excel download, add to calendar, a venue map, music, five languages, photo cropping, QR codes and a printable invitation.'),
       kind: 'WebPage',
       updated: u,
     },

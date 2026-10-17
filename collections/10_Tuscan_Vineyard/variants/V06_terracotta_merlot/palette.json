@@ -1,0 +1,26 @@
+{
+  "id": "V06_terracotta_merlot",
+  "slug": "terracotta-merlot",
+  "name": "Terracotta & Merlot",
+  "ink": "#33221C",
+  "deep": "#8C482C",
+  "primary": "#C68B66",
+  "mist_top": "#F4ECE2",
+  "mist_bottom": "#DCC7AE",
+  "gold": "#A9874F",
+  "gold_light": "#D2B98A",
+  "ivory": "#FBF6EC",
+  "leaf": "#6F7A4C",
+  "swatch": [
+    "#FBF6EC",
+    "#8C482C",
+    "#5B2C3A"
+  ],
+  "status": "coming",
+  "families": {
+    "wine": "deep",
+    "rule": "primary",
+    "grape": null,
+    "wine_ink": "deep"
+  }
+}

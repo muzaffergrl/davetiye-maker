@@ -43,10 +43,11 @@ export function PricingPage({ m }: { m: Market }) {
     {
       id: 'after',
       q: t('What happens after {months} months?', { months }),
-      a: t(
-        '{extension}. We will update this answer as soon as the policy is final, and it will be the same here, in the FAQ and in your panel.',
-        { extension: t(cfg.policies.extension) },
-      ),
+      // G154 (K48): extension on request before "Online until"; archived 12 months after it goes offline, then deleted
+      a: t('Your website closes for guests; in your panel you can still see your content and download your replies. {extension} {retention}', {
+        extension: t(cfg.policies.extension),
+        retention: t(cfg.policies.retention),
+      }),
     },
     {
       id: 'refunds',

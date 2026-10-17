@@ -1,0 +1,26 @@
+{
+  "id": "V04_olive_burgundy",
+  "slug": "olive-burgundy",
+  "name": "Olive & Burgundy",
+  "ink": "#2F2420",
+  "deep": "#4C5430",
+  "primary": "#8C9066",
+  "mist_top": "#F4ECE2",
+  "mist_bottom": "#DCC7AE",
+  "gold": "#A9874F",
+  "gold_light": "#D2B98A",
+  "ivory": "#FBF6EC",
+  "leaf": "#6F7A4C",
+  "swatch": [
+    "#FBF6EC",
+    "#4C5430",
+    "#5B2C3A"
+  ],
+  "status": "coming",
+  "families": {
+    "wine": "deep",
+    "rule": "primary",
+    "grape": null,
+    "wine_ink": "deep"
+  }
+}

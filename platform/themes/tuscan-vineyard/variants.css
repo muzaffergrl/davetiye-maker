@@ -1,0 +1,73 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 10
+   (kaynak: collections/10_Tuscan_Vineyard/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3c141c: 60 20 28;
+  --c-3c1e14: 60 30 20;
+  --c-3c2014: 60 32 20;
+  --c-5e2332: 94 35 50;
+  --c-7a3e4e: 122 62 78;
+  --c-8a5a30: 138 90 48;
+  --c-ffd6a0: 255 214 160;
+}
+
+/* V05_navy_burgundy · Navy & Burgundy */
+html[data-variant="navy-burgundy"] {
+  --c-3c141c: 23 26 48;
+  --c-3c1e14: 48 30 34;
+  --c-3c2014: 52 31 31;
+  --c-5e2332: 39 47 81;
+  --c-7a3e4e: 61 73 108;
+  --c-8a5a30: 134 89 61;
+  --wine: #29344F;
+  --wine-btn: #2F385D;
+}
+
+/* V04_olive_burgundy · Olive & Burgundy */
+html[data-variant="olive-burgundy"] {
+  --c-3c141c: 46 56 28;
+  --c-3c1e14: 54 46 33;
+  --c-3c2014: 56 44 31;
+  --c-5e2332: 69 82 38;
+  --c-7a3e4e: 97 109 64;
+  --c-8a5a30: 132 98 61;
+  --c-ffd6a0: 252 217 166;
+  --wine: #4C5430;
+  --wine-btn: #4E5C2C;
+}
+
+/* V02_plum_gold · Plum & Gold */
+html[data-variant="plum-gold"] {
+  --c-3c141c: 47 12 34;
+  --c-3c1e14: 56 25 22;
+  --c-5e2332: 77 27 62;
+  --c-7a3e4e: 103 54 90;
+  --wine: #4A2442;
+  --wine-btn: #592248;
+}
+
+/* V03_rose_blush · Rosé & Blush */
+html[data-variant="rose-blush"] {
+  --c-3c141c: 102 42 48;
+  --c-3c1e14: 78 42 28;
+  --c-3c2014: 73 41 26;
+  --c-5e2332: 143 56 70;
+  --c-7a3e4e: 173 85 101;
+  --c-8a5a30: 145 95 48;
+  --wine: #8A4452;
+  --wine-btn: #9E3E4D;
+}
+
+/* V06_terracotta_merlot · Terracotta & Merlot */
+html[data-variant="terracotta-merlot"] {
+  --c-3c141c: 101 47 12;
+  --c-3c1e14: 74 46 20;
+  --c-3c2014: 70 44 21;
+  --c-5e2332: 143 62 9;
+  --c-7a3e4e: 175 91 52;
+  --c-8a5a30: 141 98 47;
+  --wine: #8C482C;
+  --wine-btn: #9E460A;
+}

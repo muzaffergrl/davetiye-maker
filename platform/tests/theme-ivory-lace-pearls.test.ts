@@ -143,11 +143,13 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // only files the theme names (no stray build output)
-  const files = readdirSync(path.join(DIR, 'img')).filter((f) => f !== 'manifest.json');
+  const files = readdirSync(path.join(DIR, 'img')).filter((f) => f !== 'manifest.json' && f !== 'variants');
   const named = new Set([...refs].filter((r) => r.startsWith('img/')).map((r) => r.slice(4)).concat(['og-1200x630.jpg', 'favicon.png']));
   for (const f of files) assert.ok(named.has(f) || /-(\d+)\.webp$/.test(f), `unused ${f}`);
 });
@@ -634,7 +636,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   // the glints are soft bands of light (no hard stops: transparent at both ends), never a drawn line
   for (const sel of ['.glint-band', '.js [data-a="glint"]::after, .js .tile [data-a="descend"] .frame-in::after']) {
     const body = rule(sel);
-    const alphas = [...body.matchAll(/rgba\(255, 252, 240, (\.?\d+)\)/g)].map((m) => Number(m[1]));
+    const alphas = [...body.matchAll(/#fffcf0([0-9a-f]{2})\b/g)].map((m) => parseInt(m[1], 16) / 255);  // G157: palette channels inlined
     assert.ok(alphas.length >= 3 && Math.max(...alphas) <= 0.95 && alphas[0] === 0 && alphas.at(-1) === 0, `${sel}: ${alphas}`);
   }
   // masked to a GPT part (light on the pearls / the carved ivory, never a lit rectangle on the satin)
@@ -645,7 +647,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
   assert.doesNotMatch(nav, /border-top/, '.site-nav: no hard band');
   assert.match(nav, /mask: linear-gradient\(transparent, #000 \d+px\)/, 'the top edge fades');
-  const alphas = [...nav.matchAll(/rgba\(246, 240, 233, (\.\d+)\) \d+px, rgba\(246, 240, 233, (\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+  const alphas = [...nav.matchAll(/rgb\(var\(--c-f6f0e9\)\/(\.\d+)\) \d+px, rgb\(var\(--c-f6f0e9\)\/(\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
   assert.ok(alphas.length === 2 && alphas.every((a) => a >= 0.96), `label row ≥ .96 (${alphas})`);
   assert.match(nav, /backdrop-filter: blur\(\d+px\)/);
   // the divider ornaments are the GPT divider (a strand of pearls with a lace bow), never a CSS line

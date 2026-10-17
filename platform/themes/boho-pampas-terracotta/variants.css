@@ -1,0 +1,131 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 11
+   (kaynak: collections/11_Boho_Pampas/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3a2a22: 58 42 34;
+  --c-50280f: 80 40 15;
+  --c-5a2814: 90 40 20;
+  --c-5a3214: 90 50 20;
+  --c-84402a: 132 64 42;
+  --c-8a2e1c: 138 46 28;
+  --c-8c4630: 140 70 48;
+  --c-9c5136: 156 81 54;
+  --c-c29a5b: 194 154 91;
+  --c-c9785b: 201 120 91;
+  --c-eccba8: 236 203 168;
+  --c-eedac4: 238 218 196;
+  --c-f6e2cc: 246 226 204;
+  --c-f8e6d0: 248 230 208;
+  --c-ffeed6: 255 238 214;
+}
+
+/* V04_burgundy_blush · Burgundy & Blush */
+html[data-variant="burgundy-blush"] {
+  --c-3a2a22: 31 16 13;
+  --c-50280f: 40 1 2;
+  --c-5a2814: 41 0 5;
+  --c-5a3214: 57 14 5;
+  --c-84402a: 79 10 29;
+  --c-8a2e1c: 85 0 29;
+  --c-8c4630: 87 17 35;
+  --c-9c5136: 102 27 43;
+  --c-c29a5b: 189 147 87;
+  --c-c9785b: 145 64 77;
+  --c-eccba8: 222 185 156;
+  --c-eedac4: 225 203 184;
+  --c-f6e2cc: 233 211 192;
+  --c-f8e6d0: 238 218 198;
+  --c-ffeed6: 248 230 207;
+  --rust: #4F0A1D;
+  --rust-btn: #661B2B;
+  --terra: #91404D;
+}
+
+/* V05_champagne_nude · Champagne & Nude */
+html[data-variant="champagne-nude"] {
+  --c-3a2a22: 81 71 65;
+  --c-50280f: 105 87 72;
+  --c-5a2814: 116 98 83;
+  --c-5a3214: 111 90 71;
+  --c-84402a: 154 129 110;
+  --c-8a2e1c: 154 115 94;
+  --c-8c4630: 161 136 117;
+  --c-9c5136: 175 149 128;
+  --c-c29a5b: 197 161 103;
+  --c-c9785b: 219 191 168;
+  --c-eccba8: 247 221 191;
+  --c-eedac4: 249 233 214;
+  --c-f6e2cc: 255 241 222;
+  --c-f8e6d0: 255 241 222;
+  --c-ffeed6: 255 246 223;
+  --rust: #6A5342;
+  --rust-btn: #846B57;
+  --terra: #DBBFA8;
+}
+
+/* V06_dusty_blue · Dusty Blue & Terracotta */
+html[data-variant="dusty-blue"] {
+  --c-3a2a22: 55 51 51;
+  --c-50280f: 58 60 67;
+  --c-5a2814: 55 68 79;
+  --c-5a3214: 72 67 69;
+  --c-84402a: 82 99 113;
+  --c-8a2e1c: 77 93 106;
+  --c-8c4630: 88 106 120;
+  --c-9c5136: 99 118 135;
+  --c-c29a5b: 191 156 105;
+  --c-c9785b: 138 159 176;
+  --c-eccba8: 231 209 188;
+  --c-eedac4: 236 222 208;
+  --c-f6e2cc: 244 230 216;
+  --c-f8e6d0: 247 233 217;
+  --c-ffeed6: 255 240 220;
+  --rust: #495B69;
+  --rust-btn: #607384;
+  --terra: #8A9FB0;
+}
+
+/* V03_dusty_rose · Dusty Rose & Cream */
+html[data-variant="dusty-rose"] {
+  --c-3a2a22: 66 53 49;
+  --c-50280f: 87 58 50;
+  --c-5a2814: 95 64 61;
+  --c-5a3214: 96 65 52;
+  --c-84402a: 134 91 89;
+  --c-8a2e1c: 136 79 80;
+  --c-8c4630: 141 97 96;
+  --c-9c5136: 156 109 106;
+  --c-c29a5b: 195 156 98;
+  --c-c9785b: 200 149 145;
+  --c-eccba8: 240 209 180;
+  --c-eedac4: 242 223 205;
+  --c-f6e2cc: 250 231 213;
+  --c-f8e6d0: 251 234 215;
+  --rust: #774D4C;
+  --rust-btn: #936561;
+  --terra: #C89591;
+}
+
+/* V02_sage_blush · Sage & Blush */
+html[data-variant="sage-blush"] {
+  --c-3a2a22: 58 54 47;
+  --c-50280f: 63 66 51;
+  --c-5a2814: 65 73 57;
+  --c-5a3214: 75 72 55;
+  --c-84402a: 95 105 83;
+  --c-8a2e1c: 96 97 67;
+  --c-8c4630: 102 111 88;
+  --c-9c5136: 113 125 100;
+  --c-c29a5b: 190 158 102;
+  --c-c9785b: 152 165 139;
+  --c-eccba8: 231 211 184;
+  --c-eedac4: 237 224 206;
+  --c-f6e2cc: 245 232 214;
+  --c-f8e6d0: 247 235 216;
+  --c-ffeed6: 254 241 219;
+  --rust: #515B45;
+  --rust-btn: #68745C;
+  --terra: #98A58B;
+}
