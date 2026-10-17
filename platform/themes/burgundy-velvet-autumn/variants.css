@@ -37,7 +37,7 @@ html[data-variant="dusty-rose-velvet"] {
   --c-ffd6d6: 255 224 225;
   --hair: rgba(139, 79, 67, 0.42);
   --wine: #632334;
-  --wine-ink: #652233;
+  --wine-ink: #531025;
 }
 
 /* V02_emerald_velvet · Emerald Velvet & Burgundy */
@@ -58,7 +58,7 @@ html[data-variant="emerald-velvet"] {
   --c-ffd6d6: 246 218 216;
   --hair: rgba(65, 71, 61, 0.42);
   --wine: #03422E;
-  --wine-ink: #004330;
+  --wine-ink: #00311F;
 }
 
 /* V04_navy_velvet · Navy Velvet & Burgundy */
@@ -78,7 +78,7 @@ html[data-variant="navy-velvet"] {
   --c-ffd6d6: 243 212 215;
   --hair: rgba(70, 48, 63, 0.42);
   --wine: #1C2B4C;
-  --wine-ink: #202E51;
+  --wine-ink: #1B294B;
 }
 
 /* V03_plum_velvet · Plum Velvet */
@@ -97,7 +97,7 @@ html[data-variant="plum-velvet"] {
   --c-ffd6d6: 249 211 214;
   --hair: rgba(95, 39, 47, 0.42);
   --wine: #4E1A44;
-  --wine-ink: #541C47;
+  --wine-ink: #4B143F;
 }
 
 /* V05_rust_velvet · Rust & Copper Velvet */
@@ -114,5 +114,5 @@ html[data-variant="rust-velvet"] {
   --c-9b3448: 168 68 38;
   --hair: rgba(113, 60, 18, 0.42);
   --wine: #6A1F03;
-  --wine-ink: #6D1F00;
+  --wine-ink: #5A0A00;
 }
