@@ -61,7 +61,17 @@ başlık 117 karakter, 13 etiket, "envelope" yok; font alt kümeleri denetleneme
   manifest, oturum anahtarları + oval VT, ayna bileşeni, yapraklar, K21, teşekkür modu, ses, RSVP, G167 drop-in, klavye).
 - `python3 tools/gpt_kuru_deneme.py --tema music-box-ballerina --sekil …/kuru_sekil.json` **GEÇTİ** 15/17 (okunmayan
   yalnız PAKET 6, öbür tasarımlar gibi).
-- Toplu koşu, build ve theme-check sonuçları: aşağıda "Son doğrulama".
+- Birleşme öncesi: `npx tsc --noEmit` ✓, `I18N_STRICT=1 npm test` 1596/1598 (0 hata, 2 eski atlanan), `npm run build` ✓,
+  `theme-check --theme music-box-ballerina --stress --compare none --no-video`: **111 geçti, 0 hata**, 1 uyarı (PAKET 2 yok
+  → 03 fotoğrafları).
+- 390 px'te index, home, story, details, rsvp ve açılış kareleri (0,25–4 s) gözle incelendi (dev sunucu): Story aynasında
+  marjin çökmesi düzeltildi (`display:flow-root`), balerin kutusu küçültüldü (aynadaki portrenin alt %26'sını örtüyor).
+
+### Taban birleştirme (2026-10-17)
+`origin/claude/zealous-fermi-hy1o40` (30 Azulejo Mosaic, G169) birleştirildi; çakışmalar ekleyerek çözüldü (config/coming
+listeleri 30 → 32 sırasıyla, g138 `THEMES.length` 30, designs/i18n/layouts/katalog iki taraf da; yinelenen sözlük anahtarı
+yok). Birleşme sonrası: `tsc` ✓, `I18N_STRICT=1 npm test` **1607/1609** (0 hata, 2 atlanan), `npm run build` ✓ (31 tema),
+`katalog.py kontrol` ✓ (8 ek kayıt).
 
 **Denenmedi:** gerçek iPhone/Android, Vercel yayını, gerçek GPT kutusu/balerini ve fotoğrafları, yavaş ağ, seslerin
 kulakla dinlenmesi.
