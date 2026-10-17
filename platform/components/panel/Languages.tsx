@@ -18,6 +18,10 @@ import { usePanelContext } from './fields.tsx';
 import { Badge, Button, Disclosure, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
 
+/** Language names inside the panel's sentences, in the panel's language (the pickers show each in its own name). */
+const LANG_IN_SENTENCE: Record<Lang, string> = { en: msg('English'), tr: msg('Turkish'), es: msg('Spanish'), de: msg('German'), fr: msg('French') };
+const langWord = (l: Lang) => t(LANG_IN_SENTENCE[l]);
+
 /** Longest translation kept (docs/03: translations.*.*.text maxLength). */
 const MAX_TEXT = 4000;
 
@@ -291,15 +295,15 @@ function LanguageTexts(props: {
                   maxLength={MAX_TEXT}
                   readOnly={locked}
                   value={cur?.text ?? ''}
-                  placeholder={t('Translation in {language}', { language: LANG_NAMES[lang] })}
+                  placeholder={t('Translation in {language}', { language: langWord(lang) })}
                   onChange={(e) => {
                     const v = e.target.value;
                     // typed by the couple = their own approved words
                     edit((c) => setTranslation(c, lang, f.path, v.trim() ? { text: v, src: srcHash(f.text), ok: true } : null));
                   }}
                 />
-                {state === 'missing' ? <p className={styles.hint}>{t('Guests see this text in {language} until you translate it.', { language: LANG_NAMES[primary] })}</p> : null}
-                {state === 'stale' ? <p className={styles.hint}>{t('You changed the {language} text after this translation. Guests see the {language} text until you check it.', { language: LANG_NAMES[primary] })}</p> : null}
+                {state === 'missing' ? <p className={styles.hint}>{t('Guests see this text in {language} until you translate it.', { language: langWord(primary) })}</p> : null}
+                {state === 'stale' ? <p className={styles.hint}>{t('You changed the {language} text after this translation. Guests see the {language} text until you check it.', { language: langWord(primary) })}</p> : null}
                 {state === 'draft' || state === 'stale' ? (
                   <Button
                     small

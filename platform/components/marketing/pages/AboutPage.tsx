@@ -11,6 +11,13 @@ import s from '../marketing.module.css';
 import { designScreen } from '../media.ts';
 import { CheckList, Container, Eyebrow, JsonLd, LastUpdated, Screen, Section, TextLink } from '../ui.tsx';
 
+/** The claim inside a sentence: English as before (all lower case); German keeps its capitalised nouns; others lower the first letter. */
+function inSentence(claim: string, lang: Market['lang']): string {
+  if (lang === 'en') return claim.toLowerCase();
+  if (lang === 'de') return claim;
+  return claim.charAt(0).toLocaleLowerCase(lang) + claim.slice(1);
+}
+
 export function aboutMetadata(m: Market) {
   return pageMetadata(corePage('/about', MARKETING, m.t), { lang: m.lang, t: m.t });
 }
@@ -79,7 +86,7 @@ export function AboutPage({ m }: { m: Market }) {
           <p>
             {t(
               'Before a design goes live we run automated checks of the opening, every page, long names, missing photos, the RSVP form and the editing panel in a browser at several screen sizes. The editing panel is {claim};',
-              { claim: phoneClaim(MARKETING, t).toLowerCase() },
+              { claim: inSentence(phoneClaim(MARKETING, t), m.lang) },
             )}
             {MARKETING.verified.realDevices
               ? ` ${t('it has been tested on real iPhone and Android phones.')}`

@@ -1194,6 +1194,11 @@ const dict: Dict = {
   '— now or later; adding a surname is always free.': '— maintenant ou plus tard ; ajouter un nom de famille est toujours gratuit.',
   'Reply-by date': 'Date limite de réponse',
   'Story intro': 'Introduction de l’histoire',
+  'English': 'anglais',
+  'Turkish': 'turc',
+  'Spanish': 'espagnol',
+  'German': 'allemand',
+  'French': 'français',
 };
 
 export default dict;

@@ -375,7 +375,7 @@ const dict: Dict = {
   'Guests see it on the Details page.': 'Davetliler bunu Ayrıntılar sayfasında görür.',
   'Guests see it on the Details page. Empty parts are not shown.': 'Davetliler bunu Ayrıntılar sayfasında görür. Boş kısımlar gösterilmez.',
   'Guests see these on the Details page.': 'Davetliler bunları Ayrıntılar sayfasında görür.',
-  'Guests see this text in {language} until you translate it.': 'Siz çevirene kadar davetliler bu metni {language} dilinde görür.',
+  'Guests see this text in {language} until you translate it.': 'Siz çevirene kadar davetliler bu metni {language} olarak görür.',
   'Guests see your thank-you page now. Replies are closed.': 'Davetliler artık teşekkür sayfanızı görüyor. Yanıtlar kapandı.',
   'Guests tap Yes or No.': 'Davetliler Evet veya Hayır\'a dokunur.',
   'Guests tap “Show map” to load Google Maps. Nothing loads before.': 'Davetliler Google Haritalar\'ı yüklemek için “Haritayı göster”e dokunur. Öncesinde hiçbir şey yüklenmez.',
@@ -1194,6 +1194,11 @@ const dict: Dict = {
   '— now or later; adding a surname is always free.': '— şimdi ya da sonra; soyadı eklemek her zaman ücretsizdir.',
   'Reply-by date': 'Yanıt son tarihi',
   'Story intro': 'Hikâye girişi',
+  'English': 'İngilizce',
+  'Turkish': 'Türkçe',
+  'Spanish': 'İspanyolca',
+  'German': 'Almanca',
+  'French': 'Fransızca',
 };
 
 export default dict;
