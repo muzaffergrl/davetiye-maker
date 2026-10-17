@@ -157,7 +157,8 @@
     34.253,
     100.0,
     27.866
-   ]
+   ],
+   "drop_pct": 64.58
   },
   "base": {
    "box_pct": [
@@ -190,7 +191,15 @@
     58.743,
     31.205
    ],
-   "rise_pct": -199.07
+   "rise_pct": -199.07,
+   "window_pct": [
+    7.0,
+    14.0,
+    28.8,
+    72.0
+   ],
+   "window": "interim",
+   "forward_pct": -206.07
   },
   "closure": {
    "box_pct": [
@@ -343,5 +352,5 @@
    "light_above": 120
   }
  },
- "bytes_total": 535954
+ "bytes_total": 545904
 }

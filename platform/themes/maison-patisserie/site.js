@@ -166,7 +166,12 @@ function initBox() {
       in the middle stands forward (.is-current). Reduced motion: CSS turns it into a list and this does nothing. */
 function initShelf() {
   const track = $('[data-shelf]');
-  if (!track || reduce) return;
+  if (!track) return;
+  // a tab stop only while there is something to slide (not the reduced-motion list, not the wide three-across case)
+  const stop = () => { track.tabIndex = !reduce && track.scrollWidth > track.clientWidth + 1 ? 0 : -1; };
+  stop();
+  addEventListener('resize', stop, { passive: true });
+  if (reduce) return;
   const cards = [...track.querySelectorAll('.shelf-card')];
   const count = $('[data-shelf-count]');
   track.classList.add('is-on');

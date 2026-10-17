@@ -249,6 +249,17 @@ def test_sahne(t: Path):
             assert kod == 1 and "düz/tek parça dörtgen değil" in out and "3 yeşil ekran bekleniyordu, 2 bulundu" in out, out
 
 
+def test_cok_dosya(t: Path):
+    """G167: tek Kaydet satırında birden çok dosya (`tile_1.png`, `tile_2.png`) — hepsi ayrı ayrı aranır."""
+    k = t / "cok"
+    (k / "assets/gpt/parts").mkdir(parents=True)
+    (k / "assets/gpt/GPT_PROMPTS.md").write_text(
+        f"## PAKET 5\n**Kaydet:** `{k}/assets/gpt/parts/tile_1.png`, `tile_2.png` · her biri 512×512 · opak\n")
+    Image.new("RGB", (512, 512), (90, 120, 130)).save(k / "assets/gpt/parts/tile_1.png")
+    kod, out = calistir(k, "--paket", "5")
+    assert kod == 1 and "tile_2.png  — dosya yok" in out and out.strip().endswith("1/2 geçti"), out
+
+
 def main():
     with tempfile.TemporaryDirectory() as t:
         t = Path(t)
@@ -263,6 +274,7 @@ def main():
         test_paket5(t)
         test_hiza(t)
         test_sahne(t)
+        test_cok_dosya(t)
     print("test_kit_check: tamam (paket 1/3/5, pencere denetimi, zarf hizası, ilan sahneleri)")
 
 

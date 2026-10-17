@@ -279,10 +279,11 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 ::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
 ::view-transition-new(site-nav):only-child{animation:none}
 ::view-transition-old(site-nav):only-child{animation:none;opacity:0}
-.js [data-step]{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.js [data-step].in{opacity:1;transform:none}
-.js .ink[data-step]{opacity:1;transform:none;transition:-webkit-mask-size 1.8s cubic-bezier(.22,.6,.3,1),mask-size 1.8s cubic-bezier(.22,.6,.3,1)}
-.from-envelope .hero-card [data-step]{opacity:1;transform:none;transition:none}
+/* text soaks in like ink into paper: from a soft blur to sharp, barely rising (this design's step; not the shared rise) */
+.js [data-step]{opacity:0;filter:blur(5px);transform:translateY(4px);transition:opacity 1s cubic-bezier(.3,.6,.3,1),filter 1.25s cubic-bezier(.3,.6,.3,1),transform 1.25s cubic-bezier(.3,.6,.3,1)}
+.js [data-step].in{opacity:1;filter:none;transform:none}
+.js .ink[data-step]{opacity:1;filter:none;transform:none;transition:-webkit-mask-size 1.8s cubic-bezier(.22,.6,.3,1),mask-size 1.8s cubic-bezier(.22,.6,.3,1)}
+.from-envelope .hero-card [data-step]{opacity:1;transform:none;transition:none;filter:none}
 .from-envelope .hero-card .ink{-webkit-mask:none;mask:none}
 .arrive-fade body{animation:fade-in .5s ease-out both}
 @keyframes fade-in{from{opacity:0}}
@@ -324,7 +325,7 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
 *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
-.js [data-step]{opacity:1!important;transform:none!important}
+.js [data-step]{opacity:1!important;transform:none!important;filter:none!important}
 .js .ink{-webkit-mask:none!important;mask:none!important}
 .js .sheen,.js .tap-hint{animation:none!important}
 ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}

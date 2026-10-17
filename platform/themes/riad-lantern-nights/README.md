@@ -13,7 +13,7 @@ and price wait for the real parts and approval.
 | `index.html` … `rsvp.html` | doors · home · story (windows) · details · RSVP |
 | `site.css` / `thank-you.css` | tokens, layout, the opening keyframes, lantern flicker, light presets / thank-you mode (G075) |
 | `site.js` | `MOTION` (door steps, scenes, stagger), long names, scenes, countdown (`data-target-utc` from the platform), doors, gallery viewer |
-| `build_images.py` | GPT pixels → `img/` (interim cuts, placeholders, og, favicon, `manifest.json`) |
+| `build_images.py` | GPT pixels → `img/` (each PAKET 5 part as soon as it exists, else its interim cut; placeholders, og, favicon, `manifest.json`) and the generated `@gpt-layers` block at the end of `site.css` (G167) |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Marrakech medina),
 G138 blocks (`data-blocks`, `data-travel`, `data-menu`), music + opening sounds (`lib/audio/catalog.ts`: Evening Strings;
@@ -33,10 +33,24 @@ Leaves, courtyard, light, glow and card are separate layers. Unlike the 06/14 ga
 faces take over at 90°) the leaves never pass 90°: they recede into the courtyard and stay visible in perspective, so no
 inner faces are needed.
 
+**GPT branch (G167):** `build_images.py` uses every PAKET 5 part that is in `collections/27_Riad_Lantern_Nights/assets/gpt/parts/`
+(part by part; a missing one keeps its interim cut) and gives the pages the same file names: leaves cut at the seam of
+`doors_closed` and scaled to 477×1254, the courtyard behind the opening scaled to 953×1254, the card to 878×1254 with its
+#00FF00 arch window keyed out (the portrait sits behind the card, so the arch is GPT's own outline), tiles at 76 + 152 px.
+Measured numbers (card window, text padding, `free_zone`, arch / landscape frame windows, file names of the GPT-only
+layers) go to `img/manifest.json` and to the generated block at the end of `site.css` — never edit that block by hand;
+`tests/theme-riad-lantern-nights.test.ts` checks block = manifest. GPT-only layers sit in the pages but stay hidden until the
+block switches them on: the doorway arch in front of the leaves (cut from `doorway` with fixed margins around the opening,
+`DOORWAY_EXT` = CSS `.riad>.doorway`; the doors shrink so the arch fits), the hanging lantern (index in the arch, home
+hero, RSVP; a slow 7 s sway), bougainvillea corners (home hero, RSVP), the divider (home invitation, details), the phone
+ground of the doors page (`bg_page`) and the RSVP bracts (`accent_1`). Dry run without the real parts:
+`python3 tools/gpt_kuru_deneme.py --tema riad-lantern-nights --sekil collections/27_Riad_Lantern_Nights/assets/gpt/kuru_sekil.json`.
+
 **Interim pieces (K21: cut, turned, toned, placed — nothing drawn):** no GPT part of this design exists yet. `build_images.py`
 cuts two leaves side by side from 10 Tuscan Vineyard's `oak_tile.png` (planks turned upright, duotone deep cedar), tones 05
 Lemon Mediterranean's seamless `bg_tile.png` lime plaster three ways (saffron court, ivory card, night-teal wall) and cuts three
-single tiles from the painted border of 05's `frame_portrait.png` (cobalt turned teal, white warmed to ivory). The real parts
+single tiles from the painted border of 05's `frame_portrait.png` (cobalt turned teal, white warmed to ivory; the fourth is
+the mirrored leaf spray; their 152 px files are the 76 px tiles scaled up). The real parts
 (`doors_closed`, `doorway`, `courtyard`, `card_small`, `lantern`, `bg_page`, `bg_tile`, `tile_1..4`, `frame_arch`,
 `frame_landscape`, `bougainvillea_tl/br`, `divider`, `accent_1`, `web_hero`), PAKET 2 photos and PAKET 6 print grounds are
 ordered in `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md`; when they arrive `build_images.py` switches to them
@@ -46,7 +60,9 @@ ordered in `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md`; when 
 
 - **Doors:** the 3D inward swing above.
 - **Lantern flicker:** `.lantern-glow` — a borderless radial light (docs/11 §5.7) with an uneven 5.2 s opacity/brightness
-  flicker on index, home and RSVP; flares on the tap. Off with reduced motion.
+  flicker on index, home and RSVP; flares on the tap, and once more when an RSVP reply is sent (with GPT's `accent_1` three
+  bougainvillea bracts then drift down the screen, `.accent-layer`). The GPT lantern itself sways slowly. Off with reduced
+  motion.
 - **Zellige row:** `.zellige[data-scene]` on home, story and details — each tile is its own `[data-step="tile"]` with preset
   `tile` (drops in turning square, a small overshoot), one every 160 ms (`MOTION.stagger`), left to right.
 - **Light through the windows:** preset `light` — a window's photo waits darkened; when its scene plays a soft beam crosses it
@@ -69,7 +85,11 @@ ordered in `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md`; when 
 ## Deviations / limits
 
 - No W1 comps (designed in code from docs/24, not from PAKET 5) → no comp map; `theme-check --compare none`.
-- Photo windows are rectangles until `frame_arch.png` arrives (an arch shape from CSS would be a drawn shape, docs/11 §5.6).
+- Photo windows are rectangles until `frame_arch.png` arrives (an arch shape from CSS would be a drawn shape, docs/11 §5.6);
+  then the photo sits behind the carved frame in its measured window.
+- Long names on a short phone: `site.js` `fitStage` shrinks the doors until "Tap to open" is on screen (G167; 360×640 stress).
+- Printable invitation: composed (plaster + 152 px tiles) until PAKET 6 `print_front` / `print_back` (one 1819×2551 ground per
+  side for both sizes) arrive — that switch is a hand edit of `lib/print/layouts.ts` + the G149 measurement (GPT_PROMPTS.md).
 - The doorway arch and the carving are missing until `doors_closed` / `doorway` arrive; the interim leaves are plain cedar.
 - Tiles are only 76 px (the source border's own size; nothing is upscaled) — shown at 34–50 px.
 - `DEV_CONTENT` / `devRender` are not in `site.js` (as in 21 and 22): the theme is previewed through the platform demo route.

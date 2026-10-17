@@ -167,6 +167,31 @@ test('the build: interim pieces listed, theme folder within budget, og + favicon
   assert.deepEqual(manifest.stage.box, [192, 288, 640, 960]);
 });
 
+test('G167: the build writes the measured geometry into site.css (stage block = manifest), the pieces read it', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const block = css.match(/\/\* stage:begin[\s\S]*?stage:end \*\//)?.[0] ?? '';
+  const v = (name: string) => Number(block.match(new RegExp(`--${name}:(-?[\\d.]+)`))?.[1]);
+  const [sx, sy, sw, sh] = m.stage.strap.box_pct;
+  assert.deepEqual([v('strap-x'), v('strap-y'), v('strap-w'), v('strap-h'), v('buckle')], [sx, sy, sw, sh, m.stage.strap.buckle_cut]);
+  assert.deepEqual([v('tk-x'), v('tk-y'), v('tk-w'), v('tk-h')], m.stage.ticket.box_pct);
+  assert.deepEqual([v('tw-x'), v('tw-y'), v('tw-w'), v('tw-h')], m.stage.ticket.window_pct);
+  assert.deepEqual([v('glass-x'), v('glass-y'), v('glass-w'), v('glass-h'), v('win-aspect')], [...m.window.glass_pct, m.window.aspect]);
+  for (const [sel, prop] of [['.strap-l', '--strap-x'], ['.strap-r', '--buckle'], ['.wallet>.ticket', '--tk-h'], ['.ticket-photo', '--tw-w'],
+    ['.glass', '--glass-w'], ['.carriage-window', '--win-aspect']]) {
+    const rule = css.replace(block, '').match(new RegExp(`(^|\\n)${sel.replace(/[.>]/g, (c) => '\\' + c)}\\{[^}]*\\}`))?.[0] ?? '';
+    assert.match(rule, new RegExp(`var\\(${prop}\\)`), `${sel} reads ${prop}`);
+  }
+});
+
+test('G167: long names never leave the closed screen or the ticket; the details route follows the stations', () => {
+  assert.match(js, /function fitStage\(\)/);
+  assert.match(js, /function fitTicket\(\)/);
+  assert.match(css, /\.ticket-names\{font:400 max\(8px,calc\(10\.5cqw \* var\(--fit,1\)\)\)/);
+  assert.match(css, /\.scroll-tl \.itinerary \.stations\{view-timeline:--stops block\}/);
+  assert.match(css, /animation-timeline:--stops;animation-range:cover 20vh cover calc\(100% - 55vh\)/);
+  assert.match(js, /stops: \[0\.8, 0\.55\]/);
+});
+
 test('demo route renders every page with preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);

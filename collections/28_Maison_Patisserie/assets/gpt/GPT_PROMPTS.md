@@ -1,7 +1,8 @@
 # GPT görsel istekleri — Tasarım 28 · Maison Pâtisserie
 
 > **Instructions for GPT:** Generate the parts below in order and in ONE chat: PAKET 5 (website layers) first, then
-> PAKET 2 (sample photos of the fictional couple), then PAKET 6 (printable invitation backgrounds). Use each English
+> PAKET 2 (sample photos of the fictional couple), then PAKET 6 (printable invitation backgrounds). Skip W2.14–W2.15
+> (marked "BU TURDA ÜRETME"). Use each English
 > prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under
 > "Kaydet". **No text, letters, numbers, logos, monograms, price tags or watermarks in any image.** Give W2.1
 > `box_base.png` as the style and position reference of every later stage part, and W2.10 `bg_page.png` as the palette
@@ -146,21 +147,11 @@ A single glossy sugar pearl (a round pâtisserie dragée) in pearly white with a
 ```
 Kontrol: tek inci; parlak; gölge yok; gerçek alfa (RSVP gönderiminde ~18 inci düşer — `MOTION.accents.closing`).
 
-#### W2.14 Dekor — makaronlu altın kenar tabak
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/decor_macarons.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A small round white porcelain dessert plate with a fine gold rim, seen from slightly above, holding five French macarons in pistachio green, rose pink and vanilla cream, with a soft puff of ivory tulle tucked at one side and three sugar pearls scattered on the plate. Photorealistic pastry, pastel colours, delicate. The plate fills about 60% of the image width, centred. Only this group. Soft light from the top-left. No cast shadow below the plate. No text, no logo on the macarons. True transparent background PNG (real alpha channel).
-```
-Kontrol: tek grup; logo/yazı yok; gölge yok; gerçek alfa (home davet bölümü ve details menü başlığı yanında süs).
-
-#### W2.15 Dekor — tül fiyonk ve inci dizisi (köşe)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/decor_tulle.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A soft, airy gathered puff of ivory tulle with a short trail of tiny sugar pearls and two pistachio macarons resting at its end, arranged as a gentle horizontal corner accent that runs from the left side to about 70% of the image width. Photorealistic, pastel, light and delicate. Only this group. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: yatay köşe süsü; hafif; gölge yok; gerçek alfa (geniş ekran kenarları, RSVP kartı üstü).
+#### W2.14 · W2.15 Dekor (makaronlu tabak, tül köşe süsü) — BU TURDA ÜRETME
+G167 kararı: sayfalarda bu iki süsün yeri henüz yok (geçici katmanlarla gösterilemiyor; K21 gereği çizilemiyor) ve
+`build_images.py` onları okumuyor — üretilirse kullanılmayan dosya olur. Yerleşim bir tema görevinde tasarlanınca
+prompt'lar (makaronlu altın kenar tabak 1536×1024 şeffaf; tül + şeker inci + iki makaron yatay köşe süsü 1536×1024
+şeffaf) buraya **Kaydet** satırlarıyla geri yazılır ve `build_images.py` aynı anda bağlanır. **GPT: bu ikisini atla.**
 
 #### W2.16 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
@@ -172,7 +163,11 @@ Kontrol: kutu + fiyonk altta tam görünür; üst %20 boş; yazı yok.
 
 Gelince: `python3 platform/themes/maison-patisserie/build_images.py` (her parçayı kendisi bulur; `img/manifest.json`
 → `sources` hangi katmanın GPT'den geldiğini yazar), sonra `site.css`'te `.tissue-l/.tissue-r/.bow` `transform-origin`
-değerleri `manifest.stage.layers` ile karşılaştırılır. W2.14/W2.15 için yerleşim tema görevinde (Claude) yapılır.
+değerleri `manifest.stage.layers` ile karşılaştırılır. Betik her parçayı sayfaların istediği tuvale/genişliğe ölçekler
+(sahne katmanları 1024×1024; `shelf-1200`, `bow-480`, `accent_1-200`, `bg_page-1024`); daha küçük gelen parça büyütülür ve
+uyarı yazar — o parçayı GPT'den büyük iste. `card_small` kartı 560:740'tan %4'ten fazla saparsa da uyarı yazar.
+Prova: `python3 tools/gpt_kuru_deneme.py --tema maison-patisserie --sekil collections/28_Maison_Patisserie/assets/gpt/kuru_sekil.json`
+(G167; deneme görselleriyle GEÇTİ — `kuru_sekil.json` parçaların bu dosyadaki yerleri).
 
 ---
 
@@ -224,46 +219,42 @@ Gelince: `content.demo.json` (koleksiyon + tema kopyası) `media` alanlarına te
 
 ## PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 
-Bugün basılı davetiye geçici düzende (`platform/lib/print/layouts.ts` `composed`: sitenin krem kâğıdı + saten fiyonk).
-Bu dört zemin gelince `layouts.ts`'te `composed` kalkar, kaynaklar bunlara çevrilir ve
-`node scripts/build-print-assets.ts --theme maison-patisserie` çalıştırılır (platform/ içinde). Ölçüler **taşma payı dahil**
-(5×7 in + 1/8 in her yanda = 5.25 × 7.25 in; A5 + 3 mm her yanda = 154 × 216 mm) ve **300 ppi**. Önemli öğeler kesim
-çizgisinden en az 0.25 in (6 mm) içeride; metin alanı boş kalır (Claude yazıyı katman olarak dizer).
+Bugün basılı davetiye geçici düzende (`platform/lib/print/layouts.ts` `'maison-patisserie'` → `composed`: sitenin krem
+kâğıdı `bg_page` + saten fiyonk `bow`). Yazı kutuları (kesim çizgisinin yüzdesi; üst, sağ, alt, sol): **ön `[27, 13, 16, 13]`,
+arka `[21, 12, 10, 12]`**. Aşağıdaki iki zemin bu kutuları boş bırakacak biçimde istenir (G167). Baskı düzeni 5×7 ve A5
+için **aynı** zemini `cover` ile kullanır (tek zemin çifti; A5'te ~%1,5 kenar kırpılır), bu yüzden ayrı A5 zemini istenmez.
 
-#### P6.1 Ön yüz — 5×7
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front_5x7.png` · **1575 × 2175 px** (5.25 × 7.25 in @ 300 ppi) · opak
+Ölçü **taşma payı dahil** 5.25 × 7.25 in @ 300 ppi = **1575 × 2175 px** (kesim çizgisi her kenardan 38 px içeride).
+Üretici bu ölçüyü veremezse aynı yönde en büyük dikey ölçüyü versin (ör. 1024 × 1536) ve çıktısında yazsın; Claude
+büyütme yapmaz, gerçek ppi'yi `layouts.ts` notuna yazar. 2:3 gelirse `cover` sol ve sağdan ~%4 kırpar: bu yüzden **hiçbir
+öğe sol/sağ kenara görüntü genişliğinin %10'undan, üst/alt kenara yüksekliğin %5'inden yakın olmasın.**
 
-```
-A full-bleed printable wedding invitation background, front side, portrait, in pastel watercolour: warm cream cotton paper (#FBF5EC) with fine grain; at the top centre a photorealistic rose-pink satin bow (the same bow as the website's box) resting on a short length of satin ribbon; at the bottom a soft pastel watercolour garland of pistachio macarons, sugar pearls and a wisp of ivory tulle, staying in the lowest 15% of the card; a very thin gold foil hairline frame inset about 0.35 in from the edge. The whole centre (about 76% of the width, from 24% to 84% of the height) is EMPTY cream paper for dark text. Keep every important element at least 0.25 in (75 px) inside the trim line, which is 0.125 in (38 px) in from every edge. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
-```
-Kontrol: tam taşma; orta boş (metin alanı ~%76 × %60); öğeler kesimden ≥ 75 px içeride; yazı yok.
-
-#### P6.2 Arka yüz — 5×7
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back_5x7.png` · **1575 × 2175 px** · opak
+#### P6.1 Ön yüz
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` · **1575 × 2175 px** (5.25 × 7.25 in @ 300 ppi) · opak
 
 ```
-The back side of the same printable invitation: full-bleed cream cotton paper (#FBF5EC) with the same fine grain and the same thin gold foil hairline frame, only a small rose-pink satin bow at the top centre and three tiny sugar pearls beneath it. Everything below the bow (from 18% of the height down) is EMPTY paper for the schedule and a QR code. Keep every element at least 75 px inside the trim (38 px from each edge). No text, letters, numbers, logos or watermarks. Print quality, 1575 × 2175 px.
+A full-bleed printable wedding invitation background, front side, portrait, in pastel watercolour: warm cream cotton paper (#FBF5EC) with fine grain everywhere. At the top centre a photorealistic rose-pink satin bow (#E8B4B8) resting on a short horizontal length of satin ribbon; the bow and ribbon stay between 6% and 24% of the image height and within the middle 50% of the width. At the bottom a slim, soft pastel watercolour garland of pistachio macarons, tiny sugar pearls and a wisp of ivory tulle, lying horizontally between 87% and 95% of the image height and within the middle 80% of the width. A very thin gold foil hairline frame inset 7% from every edge. The whole area from 12% to 88% of the width and from 25% to 86% of the height is completely EMPTY, calm cream paper (no flowers, crumbs, pearls, shading or frame lines in it) because dark text is printed there. Nothing closer than 10% of the width to the left or right edge and 5% of the height to the top or bottom edge except the plain paper. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 x 2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; yalnız üstte küçük fiyonk; geri kalanı boş; yazı yok.
+Kontrol: tam taşma; x %12–88 × y %25–86 tamamen boş; fiyonk y %6–24; çelenk y %87–95; kenarlarda yalnız kâğıt; yazı yok.
 
-#### P6.3 Ön yüz — A5
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front_a5.png` · **1819 × 2551 px** (154 × 216 mm @ 300 ppi) · opak
-
-```
-The same front design as invitation_front_5x7.png (give it as the reference), recomposed for an A5 card with 3 mm bleed: full-bleed cream cotton paper, the rose satin bow at the top centre, the pastel macaron, sugar pearl and tulle garland in the lowest 15%, the thin gold hairline frame inset about 9 mm from the edge, and the whole centre (about 76% of the width, from 24% to 84% of the height) EMPTY for text. Every important element at least 6 mm (71 px) inside the trim line, which is 3 mm (35 px) in from every edge. No text, letters, numbers, logos or watermarks. Print quality, 1819 × 2551 px.
-```
-Kontrol: 5×7 ile aynı tasarım, A5 oranına yeniden dizilmiş (germe yok); orta boş; yazı yok.
-
-#### P6.4 Arka yüz — A5
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back_a5.png` · **1819 × 2551 px** · opak
+#### P6.2 Arka yüz
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` · **1575 × 2175 px** · opak
 
 ```
-The back side for the A5 card, the same as invitation_back_5x7.png recomposed for A5 with 3 mm bleed: cream cotton paper, the thin gold hairline frame, a small rose satin bow and three sugar pearls at the top centre, everything below 18% of the height EMPTY. Every element at least 71 px inside the trim (35 px from each edge). No text, letters, numbers, logos or watermarks. Print quality, 1819 × 2551 px.
+The back side of the same printable invitation (give invitation_front.png as the reference): full-bleed cream cotton paper (#FBF5EC) with the same fine grain and the same thin gold foil hairline frame inset 7% from every edge; only a small rose-pink satin bow at the top centre with three tiny sugar pearls beneath it, all between 6% and 19% of the image height and within the middle 30% of the width. Everything from 21% of the height down to the frame, between 12% and 88% of the width, is completely EMPTY paper for the schedule and a QR code. No text, letters, numbers, logos or watermarks. Print quality, 1575 x 2175 px.
 ```
-Kontrol: A5 oranı; yalnız üstte fiyonk; geri kalanı boş; yazı yok.
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; fiyonk + inciler y %6–19; geri kalanı boş; yazı yok.
 
-Not: Üretici bu tam piksel ölçüsünü veremezse aynı oranda en büyük dikey ölçüyü ver ve çıktında ölçüyü yaz; Claude
-büyütme (upscale) yapmaz, gerçek ppi'yi `layouts.ts` notuna yazar (G139 kuralı).
+**Gelince (Claude, `platform/lib/print/layouts.ts` — yalnız `'maison-patisserie'` bloğu):**
+1. `sources` → `{ front: 'print/invitation_front.png', back: 'print/invitation_back.png' }` (koleksiyon `assets/gpt/` göreli).
+2. `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }` (fiyonk artık zeminde;
+   `bow` görseli kalkar). `composed` adı kalır: sayfanın tamamı zemindir, kart parçası yoktur (tasarım 25 ile aynı yol).
+3. `front`/`back` kutularını yeni zemin üzerinde ölç (G149: her süsten ~%2 açıklık; zemin yüzdesini kesim yüzdesine çevir:
+   `kesim% = (görüntü_px − 38) / 1499` yatay, `/ 2099` dikey). Prompt'a uyduysa kutular aynı kalır
+   (ön `[27, 13, 16, 13]`, arka `[21, 12, 10, 12]`); süs içeri taşıyorsa `bands` ekle ya da kutuyu daralt.
+4. `cd platform && node scripts/build-print-assets.ts --theme maison-patisserie` (çıktı `public/print/maison-patisserie/front.webp`,
+   `back.webp`; eski `paper.webp`/`bow.webp` dosyalarını sil), `node --test tests/g149-print-layout.test.ts tests/theme-maison-patisserie.test.ts`,
+   5×7 ve A5 örnek PDF'ine göz at; gerçek ppi'yi blok yorumuna yaz.
 
 ---
 
@@ -274,6 +265,6 @@ büyütme (upscale) yapmaz, gerçek ppi'yi `layouts.ts` notuna yazar (G139 kural
 python3 platform/themes/maison-patisserie/build_images.py          # PAKET 5 → img/ (geçici katmanların yerine GPT)
 python3 tools/kit_check.py collections/28_Maison_Patisserie --paket 2   # PAKET 2 fotoğrafları
 # platform/ içinde
-node scripts/build-print-assets.ts --theme maison-patisserie        # PAKET 6 → public/print/maison-patisserie/
+node scripts/build-print-assets.ts --theme maison-patisserie        # PAKET 6 → public/print/maison-patisserie/ (önce layouts.ts, PAKET 6 "Gelince")
 NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme maison-patisserie --stress --compare none
 ```

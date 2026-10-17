@@ -74,13 +74,15 @@ function fitNames() {
 }
 
 /* -- the curtain page: long names make the heading taller — the stage gives up that height (its width shrinks by the
-   overflow × the stage box aspect 880/1344), so the curtain and "Tap to raise the curtain" stay on the first screen */
+   overflow × the stage box proportion, --stage-ar from the build), so the curtain and "Tap to raise the curtain" stay on
+   the first screen */
 function fitStage() {
-  const stage = $('.stage'), actions = $('.opening-actions');
-  if (!stage || !actions) return;
+  const stage = $('.stage'), actions = $('.opening-actions'), theatre = $('.theatre');
+  if (!stage || !actions || !theatre) return;
   stage.style.removeProperty('--obj');
   const over = actions.getBoundingClientRect().bottom + scrollY - innerHeight + 6;
-  if (over > 0) stage.style.setProperty('--obj', Math.max(140, stage.getBoundingClientRect().width - over * 880 / 1344) + 'px');
+  const ar = theatre.offsetWidth / Math.max(1, theatre.offsetHeight);
+  if (over > 0) stage.style.setProperty('--obj', Math.max(140, stage.getBoundingClientRect().width - over * ar) + 'px');
 }
 
 /* -- scenes: [data-scene] plays its [data-step]s in the MOTION order when it enters the view */

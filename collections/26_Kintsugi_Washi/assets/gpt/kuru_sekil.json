@@ -1,0 +1,11 @@
+{
+ "_not": "G167 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "card_small.png": {"kutu": [1, 1, 99, 99], "pencere": [18, 9, 82, 65]},
+ "kintsugi_veins.png": {"kutu": [0, 30, 100, 33]},
+ "obi_band.png": {"kutu": [1, 18, 99, 82]},
+ "ink_bleed.png": {"kutu": [15, 15, 85, 85]},
+ "sumi_stroke.png": {"kutu": [12, 38, 88, 62]},
+ "gold_flake_1.png": {"kutu": [22, 22, 78, 78]},
+ "gold_flake_2.png": {"kutu": [40, 15, 60, 85]},
+ "gold_flake_3.png": {"kutu": [32, 30, 68, 70]}
+}

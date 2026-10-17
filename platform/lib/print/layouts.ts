@@ -250,6 +250,10 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   // 23: interim until the PAKET 6 grounds arrive (GPT_PROMPTS.md): both sides on the website's aubergine velvet ground
   // (img/bg_velvet, toned from a GPT texture by the theme build) with the satin bow (img/closure) — at the top of the
   // front above the text, and at the bottom of the back under the schedule and QR. Text in champagne, away from the bow.
+  // PAKET 6 arrived (print/invitation_front.png + invitation_back.png, one pair for 5×7 and A5): sources → { front:
+  // 'print/invitation_front.png', back: 'print/invitation_back.png' }, composed.front/back → { bg: cover('front'|'back'),
+  // images: [] }, run build-print-assets, then re-measure front/back (+ bands) on the art with tests/g149-print-layout.test.ts.
+  // The prompts keep the boxes below empty (front 25–90 % × 11–89 %, back 10–80 % × 11–89 %).
   'velvet-jewel-box': {
     collection: '23_Velvet_Jewel_Box',
     sources: { velvet: 'platform/themes/velvet-jewel-box/img/bg_velvet-1024.webp', bow: 'platform/themes/velvet-jewel-box/img/closure-236.webp' },
@@ -264,6 +268,10 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   // 24 (G162, interim until the PAKET 6 grounds in GPT_PROMPTS.md arrive): the ivory programme paper with a band of the
   // peacock velvet across the top (and the foot of the front), both cut by the theme build from GPT textures; the text
   // sits on the plain paper between the bands.
+  // When print/invitation_{front,back}_5x7.png arrive (G167; GPT_PROMPTS.md PAKET 6 keeps its ornament outside these
+  // boxes): sources → { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }, composed →
+  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } } (full-bleed grounds), then
+  // build-print-assets, re-measure front/back on the art (G149, tests/g149-print-layout.test.ts) and drop paper/velvet.webp.
   'grand-theatre-premiere': {
     collection: '24_Grand_Theatre_Premiere',
     sources: { paper: 'platform/themes/grand-theatre-premiere/img/paper-1024.webp', velvet: 'platform/themes/grand-theatre-premiere/img/velvet-640.webp' },
@@ -281,14 +289,20 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [{ src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:13%;object-fit:cover' }] },
     },
   },
-  // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/
-  // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the website's ivory paper (the
-  // interim poster tones were not empty enough for the G149 free-area check); back = the same ivory with the boarding stamp.
-  // When GPT's print grounds exist, `node scripts/build-print-assets.ts --theme orient-express-voyage` picks them up and the
-  // boxes are measured again (tests/g149-print-layout.test.ts).
+  // 25 (G163): composed until the PAKET 6 print grounds arrive. Interim: both sides on the website's ivory (the interim
+  // poster tones were not empty enough for the G149 free-area check); the back carries the boarding stamp the theme build
+  // cut. Nothing switches by itself (G167): build-print-assets.ts only copies the `sources` below, and the text boxes
+  // are measured on real art (G149). When collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png
+  // and invitation_back_5x7.png exist (GPT_PROMPTS.md P6.1–P6.2; they keep the free areas these boxes need):
+  //   sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+  //   front: [44, 12, 8, 12], back: [20, 12, 10, 12],
+  //   composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  // then `node scripts/build-print-assets.ts --theme orient-express-voyage` (platform/), delete the stale stamp.webp from
+  // public/print/orient-express-voyage/, and re-measure box + bands on the rendered art (tests/g149-print-layout.test.ts).
+  // One ground per side serves both sizes: on A5 `cover` trims ~1 % off the sides.
   'orient-express-voyage': {
     collection: '25_Orient_Express_Voyage',
-    sources: { scene: 'platform/themes/orient-express-voyage/img/poster-1024.webp', stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
+    sources: { stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
     fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
     script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
     ink: '#1E3A2C', accent: '#7A5C24', front: [12, 12, 12, 12], back: [20, 12, 8, 12],
@@ -297,8 +311,12 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: '#F3EBD9', images: [{ ...sealAt('top'), src: 'stamp' }] },
     },
   },
-  // 26 (G164, interim until PAKET 6 print_front / print_back): rice paper with the indigo washi of the opened folds at
-  // its top and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn).
+  // 26 (G164, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one
+  // sheet per side for 5×7 and A5 — GPT_PROMPTS.md): rice paper with the indigo washi of the opened folds at its top
+  // and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn). The
+  // prompts keep the front / back boxes below empty on the art; on arrival (G167): sources → { front, back } of those
+  // two files, composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  // re-measure the boxes on the art (G149), then build-print-assets.
   'kintsugi-washi': {
     collection: '26_Kintsugi_Washi',
     sources: { rice: 'platform/themes/kintsugi-washi/img/rice-1024.webp', washi: 'platform/themes/kintsugi-washi/img/washi_indigo-1024.webp' },
@@ -319,14 +337,17 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   // 27 (G165, before its GPT parts): both sides on ivory lime plaster (the same GPT plaster the theme's card is toned
   // from: 05's seamless bg_tile at full size, reached from this collection's assets/gpt/ by ../../../) with a row of the
   // zellige tiles the theme build cut (img/tile_N) — front: a row along the top and one along the bottom, back: a row on
-  // top. Text in cedar on the plaster. Replaced by PAKET 6 print_front / print_back (GPT_PROMPTS.md) when they arrive.
+  // top. Text in cedar on the plaster. Tiles at 152 px (the theme build's 2× files). When PAKET 6 arrives (GPT_PROMPTS.md:
+  // print/print_front.png + print/print_back.png, 1819×2551, one ground per side for 5×7 and A5): sources → { front:
+  // 'print/print_front.png', back: 'print/print_back.png' }, composed → { front: { bg: cover('front'), images: [] }, back:
+  // { bg: cover('back'), images: [] } }, then build-print-assets + tests/g149-print-layout.test.ts (re-measure the boxes).
   'riad-lantern-nights': {
     collection: '27_Riad_Lantern_Nights',
     sources: {
       paper: '../../../05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png',
-      tile1: 'platform/themes/riad-lantern-nights/img/tile_1-76.webp',
-      tile2: 'platform/themes/riad-lantern-nights/img/tile_2-76.webp',
-      tile3: 'platform/themes/riad-lantern-nights/img/tile_3-76.webp',
+      tile1: 'platform/themes/riad-lantern-nights/img/tile_1-152.webp',
+      tile2: 'platform/themes/riad-lantern-nights/img/tile_2-152.webp',
+      tile3: 'platform/themes/riad-lantern-nights/img/tile_3-152.webp',
     },
     fonts: gf('family=Cinzel:wght@400;500&family=Marcellus&family=Marcellus+SC'),
     script: "'Cinzel', Georgia, serif", serif: "'Marcellus', Georgia, serif", caps: "'Marcellus SC', Georgia, serif",
@@ -337,15 +358,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: tileRow('top') },
     },
   },
-  // 28 (G166): composed until its card parts arrive (GPT_PROMPTS.md PAKET 6) — front = the website's cream paper with the
+  // 28 (G166): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — front = the website's cream paper with the
   // rose satin bow at the top; back = the same paper with the bow small at the top. Both images come from the theme
   // build (interim crops of repository GPT pictures, see themes/maison-patisserie/build_images.py).
+  // G167: the PAKET 6 prompts keep these text boxes empty (front bottom 16 % leaves the macaron garland its strip); on
+  // arrival: sources -> print/invitation_front.png + print/invitation_back.png, composed -> cover('front') / cover('back')
+  // with no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6 "Gelince".
   'maison-patisserie': {
     collection: '28_Maison_Patisserie',
     sources: { paper: 'platform/themes/maison-patisserie/img/bg_page-1024.webp', bow: 'platform/themes/maison-patisserie/img/bow-480.webp' },
     fonts: gf('family=Italiana&family=Parisienne'),
     script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
-    ink: '#3E3A32', accent: '#9B4F5A', front: [27, 13, 12, 13], back: [21, 12, 10, 12],
+    ink: '#3E3A32', accent: '#9B4F5A', front: [27, 13, 16, 13], back: [21, 12, 10, 12],
     composed: {
       front: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:5%;left:50%;width:42%;transform:translateX(-50%)' }] },
       back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },

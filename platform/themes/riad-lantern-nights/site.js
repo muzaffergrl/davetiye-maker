@@ -41,7 +41,8 @@ const MOTION = {
   },
   stagger: 160,             // the zellige tiles: one every 160 ms, left to right; windows one after another
   batchGap: 360,
-  arriveDelay: 200
+  arriveDelay: 200,
+  petals: 5600              // the reply's bracts (4.2 s each, the last starts at 900 ms) — then their layer goes
 };
 
 (() => {
@@ -121,6 +122,40 @@ function initCountdown() {
   });
 }
 
+/* -- GPT card (build_images.py: card_small with its arch window; the generated CSS block stretches nothing — the card keeps
+   GPT's proportions, the portrait sits in the window and the text on the plain paper under it): when the text is taller
+   than that paper (40-character names, a short phone), the text block is zoomed down instead of letting it run onto the
+   window or past the card. The interim card (plain paper, object-fit cover) is left alone. */
+function fitCards() {
+  $$('.hero-copy, .riad .card-copy').forEach((copy) => {
+    const card = copy.parentElement, img = card.querySelector('.card-img');
+    if (!img || getComputedStyle(img).objectFit !== 'fill') return;
+    const kids = [...copy.children].filter((n) => !n.matches('.hero-photo, .card-photo') && n.getClientRects().length);
+    if (!kids.length) return;
+    const ar = getComputedStyle(card).aspectRatio.split('/').map(Number);
+    const H = ar.length === 2 && ar[1] ? card.clientWidth * ar[1] / ar[0] : card.clientHeight;
+    const cs = getComputedStyle(copy);
+    const room = H - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const tall = () => kids[kids.length - 1].getBoundingClientRect().bottom - kids[0].getBoundingClientRect().top;
+    let k = 1;
+    copy.style.setProperty('--k', '1');
+    for (let i = 0; i < 12 && tall() > room && k > 0.42; i++) { k = Math.max(0.42, k * Math.min(0.95, room / tall())); copy.style.setProperty('--k', k.toFixed(3)); }
+  });
+}
+
+/* -- the doors fit the screen: long names (40 characters, 4–5 lines) on a short phone would push the doors and "Tap to
+   open" below it; the doors (and with GPT's doorway its arch, sized from --obj) shrink until the hint is on screen */
+function fitStage() {
+  const stage = $('.stage'), hint = $('.opening-actions');
+  if (!stage || !hint || root.classList.contains('is-opened')) return;
+  stage.style.removeProperty('--obj');
+  let w = stage.getBoundingClientRect().width;
+  for (let i = 0; i < 12 && w > 150 && hint.getBoundingClientRect().bottom > innerHeight; i++) {
+    w = Math.max(150, w * 0.92);
+    stage.style.setProperty('--obj', w.toFixed(1) + 'px');
+  }
+}
+
 /* -- the doors (index) */
 function initEnvelope() {
   const stage = $('.stage');
@@ -148,6 +183,7 @@ function initEnvelope() {
     root.classList.remove('is-opening', 'is-opened');
     card.style.viewTransitionName = '';
     state = 'closed';
+    fitStage();
   }
   stage.addEventListener('click', () => { if (state === 'closed') play(); else if (state === 'opened') go(true); });
   stage.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stage.click(); } });
@@ -187,11 +223,31 @@ function initGallery() {
   box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
 }
 
+/* -- a reply sent: the lantern flares (CSS, html[data-rsvp-replied]); with GPT's accent_1 (--petal, set by the generated
+   block of site.css) three bougainvillea bracts drift down once. A layer of its own, removed when they have landed. */
+function petals() {
+  if (reduce || !getComputedStyle(root).getPropertyValue('--petal').trim() || $('.accent-layer')) return;
+  const layer = Object.assign(document.createElement('div'), { className: 'accent-layer' });
+  layer.setAttribute('aria-hidden', 'true');
+  [[22, 0, 40, 300], [58, 450, -30, -260], [80, 900, 24, 220]].forEach(([x, d, dx, rot]) => {
+    const p = Object.assign(document.createElement('span'), { className: 'petal' });
+    p.style.cssText = `left:${x}%;animation-delay:${d}ms;--dx:${dx}px;--rot:${rot}deg`;
+    layer.append(p);
+  });
+  document.body.append(layer);
+  setTimeout(() => layer.remove(), MOTION.petals);
+}
+
 function boot() {
-  document.addEventListener('rsvp:state', (e) => { const st = e.detail && e.detail.state; if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success'); });
-  fitNames();
-  document.fonts?.ready.then(fitNames);
-  addEventListener('resize', fitNames, { passive: true });
+  document.addEventListener('rsvp:state', (e) => {
+    const st = e.detail && e.detail.state;
+    if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success');
+    if (st === 'success') petals();
+  });
+  const fit = () => { fitNames(); fitCards(); fitStage(); };
+  fit();
+  document.fonts?.ready.then(fit);
+  addEventListener('resize', fit, { passive: true });
   initEnvelope();
   initScenes();
   initCountdown();

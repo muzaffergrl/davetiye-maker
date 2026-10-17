@@ -10,6 +10,11 @@ lists which pieces still wait for GPT. Run again whenever a part arrives:
 
   python3 platform/themes/orient-express-voyage/build_images.py
 
+The geometry it measures on the GPT parts (strap box + buckle cut on the closed wallet's own box, the ticket's box and
+portrait window, the carriage glass and frame proportion) is written into site.css between `/* stage:begin` and
+`stage:end */` (G167), so the pieces line up on the first build without copying percentages by hand. Dry run without
+GPT: `python3 tools/gpt_kuru_deneme.py --tema orient-express-voyage --sekil collections/25_Orient_Express_Voyage/assets/gpt/kuru_sekil.json`.
+
 Sources (collections/25_Orient_Express_Voyage/assets/gpt/parts/, all PNG):
   bg_station.png          1024×1536 opaque   the station at night, behind the closed wallet (index)
   wallet_closed.png       1024×1536 alpha    the leather ticket wallet, closed, WITHOUT its strap
@@ -31,6 +36,7 @@ Sources (collections/25_Orient_Express_Voyage/assets/gpt/parts/, all PNG):
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -121,13 +127,47 @@ def green_window(im: Image.Image):
 
 
 def buckle_cut(strap: Image.Image) -> float:
-    """The strap is cut just left of its brass buckle (warm, bright pixels); fallback BUCKLE_X."""
+    """The strap is cut just left of its brass buckle: the leftmost column, right of 40 % of the strap (W2.2: the buckle
+    sits at 62–75 % of the wallet), where warm bright pixels fill a third of the strap's height — a buckle frame, not a
+    stitch line along the edges. Fallback BUCKLE_X."""
     a = np.asarray(strap).astype(int)
     brass = (a[..., 0] > 150) & (a[..., 0] - a[..., 2] > 50) & (a[..., 3] > 128)
-    cols = np.flatnonzero(brass.sum(0) > 3)
+    h, w = brass.shape
+    cols = np.flatnonzero(brass.sum(0) > h / 3)
+    cols = cols[cols > w * .4]
     if len(cols) < 6:
+        print("WARNING wallet_strap.png: no buckle found — strap cut at the interim BUCKLE_X", file=sys.stderr)
         return BUCKLE_X
-    return max(.3, min(.85, (cols.min() - 4) / a.shape[1]))
+    return max(.4, min(.85, (cols.min() - 4) / w))
+
+
+CSS_BLOCK = re.compile(r"/\* stage:begin.*?stage:end \*/", re.S)
+
+
+def sync_css(manifest: dict) -> None:
+    """Writes the measured geometry into site.css between `/* stage:begin` and `stage:end */` (CSS custom properties),
+    so a GPT part placed a little differently from the prompt (strap, ticket, its window, the carriage glass) lines up
+    on the first build — nobody has to copy percentages by hand. Interim values reproduce the interim layout exactly."""
+    st, win = manifest["stage"], manifest["window"]
+    n = lambda v: f"{v:g}"                          # noqa: E731
+    sx, sy, sw, sh = st["strap"]["box_pct"]
+    tx, ty, tw, th = st["ticket"]["box_pct"]
+    wx, wy, ww, wh = st["ticket"]["window_pct"]
+    gx, gy, gw, gh = win["glass_pct"]
+    block = ("/* stage:begin — written by build_images.py from img/manifest.json (stage, window); do not edit by hand */\n"
+             f".wallet{{--strap-x:{n(sx)}%;--strap-y:{n(sy)}%;--strap-w:{n(sw)}%;--strap-h:{n(sh)}%;"
+             f"--buckle:{n(st['strap']['buckle_cut'])};--tk-x:{n(tx)}%;--tk-y:{n(ty)}%;--tk-w:{n(tw)}%;--tk-h:{n(th)}%;"
+             f"--tw-x:{n(wx)}%;--tw-y:{n(wy)}%;--tw-w:{n(ww)}%;--tw-h:{n(wh)}%}}\n"
+             f".carriage-window{{--glass-x:{n(gx)}%;--glass-y:{n(gy)}%;--glass-w:{n(gw)}%;--glass-h:{n(gh)}%;"
+             f"--win-aspect:{n(win['aspect'])}}}\n/* stage:end */")
+    css = THEME / "site.css"
+    s = css.read_text(encoding="utf-8")
+    if not CSS_BLOCK.search(s):
+        raise SystemExit("site.css: the /* stage:begin … stage:end */ block is missing")
+    new = CSS_BLOCK.sub(lambda _m: block, s)
+    if new != s:
+        css.write_text(new, encoding="utf-8")
+        print("site.css: stage block updated from the manifest")
 
 
 # ---------------------------------------------------------------------------------------------------- build
@@ -152,8 +192,10 @@ def main() -> int:
     # -------------------------------------------------------------- the ticket wallet (docs/11 §7, own type "cuzdan")
     W, H = WALLET[2] - WALLET[0], WALLET[3] - WALLET[1]
     closed = use("wallet_closed.png")
+    wbox = WALLET                              # the closed wallet's box on the common canvas (the strap is placed in it)
     if closed:
         k = tb.alfa_kutusu(np.asarray(closed)[..., 3])
+        wbox = k
         cover = closed.crop(k).resize((W, H), Image.LANCZOS)
     else:
         cover = block(W, H, (40, 76, 57), GREEN, glow=(.35, .25), strength=.12)
@@ -183,9 +225,12 @@ def main() -> int:
 
     strap = use("wallet_strap.png")
     if strap:
+        # same canvas as wallet_closed: the strap's box in % of the CLOSED WALLET's own box (GPT never draws the wallet
+        # exactly where the prompt says; measuring against the fixed interim box would shift the strap off the leather)
         k = tb.alfa_kutusu(np.asarray(strap)[..., 3])
-        strap_box = [round((k[0] - WALLET[0]) / W * 100, 3), round((k[1] - WALLET[1]) / H * 100, 3),
-                     round((k[2] - k[0]) / W * 100, 3), round((k[3] - k[1]) / H * 100, 3)]
+        bw, bh = wbox[2] - wbox[0], wbox[3] - wbox[1]
+        strap_box = [round((k[0] - wbox[0]) / bw * 100, 3), round((k[1] - wbox[1]) / bh * 100, 3),
+                     round((k[2] - k[0]) / bw * 100, 3), round((k[3] - k[1]) / bh * 100, 3)]
         strap = strap.crop(k)
         cut = buckle_cut(strap)
     else:
@@ -199,9 +244,12 @@ def main() -> int:
     save(strap.crop((xcut, 0, sw, shh)), "strap_r", [160, 320], 80, manifest)
 
     ticket = use("ticket.png")
+    tsize = TICKET
     if ticket:
-        ticket = ticket.crop(tb.alfa_kutusu(np.asarray(ticket)[..., 3])).resize(TICKET, Image.LANCZOS)
-        ticket, window = green_window(ticket)
+        # the card keeps its own proportion (asked ~500:760): width = TICKET width, height follows (no stretching)
+        ticket = ticket.crop(tb.alfa_kutusu(np.asarray(ticket)[..., 3]))
+        tsize = (TICKET[0], round(TICKET[0] * ticket.size[1] / ticket.size[0]))
+        ticket, window = green_window(ticket.resize(tsize, Image.LANCZOS))
         window = window or list(TICKET_WINDOW)
     else:
         tw, th = TICKET
@@ -218,7 +266,7 @@ def main() -> int:
         "canvas": [1024, 1536], "box": [WALLET[0], WALLET[1], W, H], "objAspect": round(W / H, 4),
         "strap": {"box_pct": strap_box, "buckle_cut": round(cut, 4)},
         "pocket": {"top_pct": pct(pocket_top)},
-        "ticket": {"box_pct": [pct(TICKET_AT[0]), pct(TICKET_AT[1]), pct(TICKET[0] / W), pct(TICKET[1] / H)],
+        "ticket": {"box_pct": [pct(TICKET_AT[0]), pct(TICKET_AT[1]), pct(tsize[0] / W), pct(tsize[1] / H)],
                    "window_pct": [pct(window[0]), pct(window[1]), pct(window[2] - window[0]), pct(window[3] - window[1])]},
         "open": "the cover turns on its left hinge to -180° (rotateY; its inside is wallet_cover_in, backface hidden); "
                 "the spread is two wallets wide: site.js scales the stage to 94% of the screen (--open-scale)",
@@ -226,6 +274,7 @@ def main() -> int:
 
     # -------------------------------------------------------------- pages
     poster = use("poster_hero.png")
+    gpt_poster = poster is not None
     poster = poster.convert("RGB") if poster else tone(1024, 1536, (233, 214, 170), (34, 66, 50), glow=(.5, .18), strength=.14)
     save(poster, "poster", [640, 1024], 76, manifest)
 
@@ -282,8 +331,9 @@ def main() -> int:
         stamp = block(520, 520, INK_STAMP, (98, 30, 38), glow=(.5, .5), strength=.05)
     save(stamp, "stamp", [240, 480], 82, manifest)
 
-    # photo placeholders: the poster's sky, softened and toned to the page (no person, no text)
-    sky = (0, 0, 1024, 900)
+    # photo placeholders: the poster's sky, softened and toned to the page (no person, no text). The GPT poster keeps its
+    # top 45 % as calm sky (W2.8) — the viaduct and the train below it stay out of the placeholders.
+    sky = (0, 0, poster.size[0], int(poster.size[1] * .44)) if gpt_poster else (0, 0, 1024, 900)
     slots = {}
     for key, shape, ratio in (("hero_portrait", "portrait", 4 / 5), ("story", "window", 3 / 4), ("venue", "wide", 3 / 2)):
         ph = tb.yer_tutucu(poster, sky, ratio, w=640, ton=IVORY, karisim=.35, bulanik=10)
@@ -296,6 +346,8 @@ def main() -> int:
     icon, icon_info = tb.ikon(stamp)
     icon.save(OUT / "favicon.png", optimize=True)
     manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
+
+    sync_css(manifest)
 
     # -------------------------------------------------------------- checks + manifest
     manifest["interim"] = interim

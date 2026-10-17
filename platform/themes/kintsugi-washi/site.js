@@ -11,12 +11,13 @@ const MOTION = {
     closure: [0, 650],      // the rice-paper band slides down off the packet and fades
     hint: [0, 300],         // "Tap to open" fades
     head: [0, 450],         // kicker, names and date rise away
-    sheen: [120, 900],      // a soft gold light passes over the folded paper (light only; the kintsugi veins when W2.4 arrives)
+    sheen: [120, 900],      // a soft gold light passes over the folded paper (with W2.4: along the gold veins, 120–550)
     spread: [500, 900],     // the packet steps back (scale) so the opened folds stay on the screen
     top: [550, 750],        // the top fold turns up on its crease (0 → 180°; its inside from 90°)
     bottom: [1100, 750],    // the bottom fold turns down
     left: [1650, 750],      // the left panel turns out to the left
     right: [2100, 750],     // the right panel turns out to the right
+    flakes: 2500,           // gold-leaf flakes drift down from the opened packet (MOTION.accents.open)
     rise: [2900, 600],      // the rice-paper card lifts off the opened paper
     forward: [3500, 350],   // and comes forward
     go: 3950,               // to home (view transition)
@@ -42,10 +43,15 @@ const MOTION = {
   stagger: 170,
   batchGap: 340,
   arriveDelay: 150,
-  // drifting gold-leaf flakes (GPT sprites W2.7 gold_flake_1..3 → img/flake_N-200.webp). Empty until the sprites
-  // exist (no drawn stand-in, K21); then e.g. open: [{ file: 'img/flake_1-200.webp', count: 3, path: 'fall',
-  // origin: 'card', dur: [2600, 3400], size: [10, 18] }]. Off with reduced motion.
-  accents: { open: [], arrive: [], closing: [] }
+  // drifting gold-leaf flakes: the GPT sprites W2.7 gold_flake_1..3, cut by build_images.py, named in parts.css
+  // (--kw-flakes; none = no flakes, never a drawn stand-in, K21). open: from the opened packet as the last panel
+  // turns out; arrive: over the home card after the view transition; reply: from the reply card when an RSVP is sent.
+  // Off with reduced motion.
+  accents: {
+    open: [{ count: 3, path: 'fall', dur: [1900, 2500], size: [10, 18] }],
+    arrive: [{ count: 2, path: 'fall', dur: [2800, 3600], size: [9, 15] }],
+    reply: [{ count: 5, path: 'fall', dur: [2400, 3200], size: [10, 17] }]
+  }
 };
 
 (() => {
@@ -61,6 +67,8 @@ const OPENED = MOTION.storage.opened + KEY, ARRIVE = MOTION.storage.arrive + KEY
 const store = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } };
 const crossDocVT = 'onpageswap' in window && Boolean(document.startViewTransition);
 const SCRIPT_URL = document.currentScript ? document.currentScript.src : location.href;
+let FLAKES = [];
+try { FLAKES = getComputedStyle(root).getPropertyValue('--kw-flakes').replace(/["']/g, ' ').trim().split(/\s+/).filter(Boolean); } catch (e) { FLAKES = []; }
 
 /* -- long names: on one line while they fit, then smaller (never below the floor), then they wrap (never cut) */
 function fitNames() {
@@ -116,10 +124,10 @@ function initScenes() {
   scenes.forEach((s) => io.observe(s));
 }
 
-/* -- gold-leaf flakes (MOTION.accents): one 200 px sprite per group, a few pieces, removed when they land */
+/* -- gold-leaf flakes (MOTION.accents): the 200 px GPT sprites in turn, a few pieces, removed when they land */
 function particles(moment, anchor) {
   const groups = MOTION.accents[moment] || [];
-  if (reduce || !groups.length || !Element.prototype.animate) return;
+  if (reduce || !FLAKES.length || !groups.length || !Element.prototype.animate) return;
   const layer = document.createElement('div');
   layer.className = 'accent-layer';
   layer.setAttribute('aria-hidden', 'true');
@@ -128,16 +136,19 @@ function particles(moment, anchor) {
   let left = 0;
   groups.forEach((g) => {
     for (let i = 0; i < g.count; i++) {
-      const img = Object.assign(document.createElement('img'), { src: new URL(g.file, SCRIPT_URL).href, alt: '' });
+      const img = Object.assign(document.createElement('img'), { src: new URL(FLAKES[left % FLAKES.length], SCRIPT_URL).href, alt: '' });
       const size = g.size[0] + Math.random() * (g.size[1] - g.size[0]);
       const x = box.left + box.width * (0.15 + 0.7 * Math.random()), y = box.top + box.height * 0.2;
       img.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:${size}px`;
       layer.append(img);
       const dur = g.dur[0] + Math.random() * (g.dur[1] - g.dur[0]);
       const dx = (Math.random() - 0.5) * 120, dy = g.path === 'rise' ? -innerHeight * 0.4 : innerHeight * 0.45;
+      const sway = (Math.random() < 0.5 ? -1 : 1) * (18 + Math.random() * 22), rot = (Math.random() - 0.5) * 540;
       left++;
+      // leaf, not confetti: it rocks to one side and back as it sinks (the light catches it at the turn)
       img.animate([{ opacity: 0, transform: 'translate(0,0) rotate(0)' }, { opacity: 0.9, offset: 0.15 },
-        { opacity: 0, transform: `translate(${dx}px,${dy}px) rotate(${(Math.random() - 0.5) * 540}deg)` }],
+        { opacity: 1, offset: 0.5, transform: `translate(${dx * 0.4 + sway}px,${dy * 0.45}px) rotate(${rot * 0.35}deg)` },
+        { opacity: 0, transform: `translate(${dx}px,${dy}px) rotate(${rot}deg)` }],
       { duration: dur, delay: i * 180, easing: 'cubic-bezier(.3,.1,.4,1)', fill: 'both' }).finished.then(() => { img.remove(); if (--left === 0) layer.remove(); });
     }
   });
@@ -186,7 +197,7 @@ function initEnvelope() {
     state = 'playing';
     if (reduce) { go(false); return; }
     root.classList.add('is-opening');
-    timers.push(setTimeout(() => particles('open', card), E.rise[0]));
+    timers.push(setTimeout(() => particles('open', $('.fold')), E.flakes));
     timers.push(setTimeout(() => { state = 'done'; go(true); }, E.go));
   }
   function reset() {
@@ -206,7 +217,12 @@ function initEnvelope() {
 }
 
 function boot() {
-  document.addEventListener('rsvp:state', (e) => { const st = e.detail && e.detail.state; if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success'); });
+  document.addEventListener('rsvp:state', (e) => {
+    const st = e.detail && e.detail.state;
+    if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success');
+    // the reply is in: a few gold-leaf flakes drift down over the thank-you panel (after it is shown)
+    if (st === 'success') requestAnimationFrame(() => particles('reply', $('.reply-panel[data-rsvp-state=success]') || $('.reply-card')));
+  });
   const fit = () => { fitNames(); fitCard(); };
   fit();
   document.fonts?.ready.then(fit);
@@ -214,7 +230,6 @@ function boot() {
   initEnvelope();
   initScenes();
   initCountdown();
-  if ($('.rsvp-page') && root.classList.contains('js')) particles('closing', $('.signature'));
   root.dataset.js = 'ready';
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

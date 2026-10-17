@@ -7,9 +7,9 @@ onay gerekir. Tasarım özeti: `DESIGN_BRIEF.md`. Çalışma adı marka değildi
 | Parça | Durum |
 |---|---|
 | Website teması | `platform/themes/maison-patisserie/` — tamam (G166); bütün görseller geçici (depodaki GPT kâğıt/saten/fiyonk görsellerinden kırpma + tonlama) |
-| GPT PAKET 5 (kutu, kapak, kurdele, fiyonk ×3, ipek kâğıt ×2, kart, zemin, karo, raf, şeker inci, makaron, tül, web_hero) | bekliyor — `assets/gpt/GPT_PROMPTS.md` |
+| GPT PAKET 5 (kutu, kapak, kurdele, fiyonk ×3, ipek kâğıt ×2, kart, zemin, karo, raf, şeker inci, web_hero; makaron/tül ertelendi — G167) | bekliyor — `assets/gpt/GPT_PROMPTS.md`; bırak-çalıştır provası GEÇTİ (G167, `kuru_sekil.json`) |
 | GPT PAKET 2 (kurgu çift fotoğrafları) | bekliyor — demo bugün nötr yer tutucularla |
-| GPT PAKET 6 (basılı davetiye ön/arka, 5×7 + A5, 300 ppi) | bekliyor — basılı davetiye bugün `composed` geçici düzen (krem kâğıt + fiyonk) |
+| GPT PAKET 6 (basılı davetiye ön/arka zemini, tek çift, 1575×2175, 300 ppi; 5×7 ve A5 aynı zemini kullanır — G167) | bekliyor — basılı davetiye bugün `composed` geçici düzen (krem kâğıt + fiyonk); geçiş adımları GPT_PROMPTS.md PAKET 6 "Gelince" |
 | Demo | `/start/demo/maison-patisserie` (yeni kodun çalıştığı ortamda); demo harita pini yok (`lib/claim/demo-map.ts` görev alanı dışı) |
 | Etsy ilan metni | taslak — `package/listing/listing_v3.md` (yayımlanmadı, K41) |
 | Etsy görselleri / alıcı rehberi | başlanmadı |

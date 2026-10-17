@@ -5,7 +5,7 @@
 --rose:#e8b4b8;--rose-deep:#9b4f5a;--rose-pale:#f8e3e3;--vanilla:#f2e4bd;--gold:#b8995a;--gold-ink:#7a5f2c;--line:#7a5f2c38;
 --display:'Italiana',Georgia,serif;--script:'Parisienne','Snell Roundhand',cursive;--nav-h:62px;color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding:16px 0 calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px)}  /* G167: a focused link never hides behind the bottom nav (WCAG 2.4.11) */
 body{margin:0;background:var(--cream) url(img/bg_tile-640.webp) 0 0/640px repeat;color:var(--ink);font:400 18px/1.6 var(--display);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
 button,input,textarea,select{font:inherit;color:inherit}
 button,a,input,select,textarea,summary,label{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -279,6 +279,12 @@ to{z-index:8;transform:translateY(-5%) scale(1.14);filter:drop-shadow(0 18px 20p
 .choice label:nth-child(4n+4){background:#ecf2e6}
 .choice label:has(input:checked){border-color:var(--pistachio-deep);transform:translateY(-1px)}
 .choice label:nth-child(4n+2):has(input:checked){border-color:var(--rose-deep)}
+/* G167: the chip is the target, so the keyboard ring goes round the whole chip (not the 18 px radio); a chosen chip
+   reads at a glance (a doubled edge, no layout shift) */
+.choice label:has(input:focus-visible){outline:2px solid var(--rose-deep);outline-offset:3px}
+.choice label input:focus-visible{outline:none}
+.choice label:has(input:checked){box-shadow:inset 0 0 0 1px var(--pistachio-deep)}
+.choice label:nth-child(4n+2):has(input:checked){box-shadow:inset 0 0 0 1px var(--rose-deep)}
 input[type=radio]{accent-color:var(--pistachio-deep);width:18px;height:18px;flex:none;margin:0}
 .questions{margin-bottom:12px}
 .field-error{color:#a3333f;font-size:14px;margin-top:6px;overflow-wrap:anywhere}

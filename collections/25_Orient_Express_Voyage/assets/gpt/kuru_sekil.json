@@ -1,0 +1,14 @@
+{
+  "_not": "tools/gpt_kuru_deneme.py --sekil: GPT_PROMPTS.md'deki yerler (tuval %). Cüzdan W2.1–W2.5 aynı tuvalde: genişlik %62, yükseklik %62 (2:3), üst %19.",
+  "wallet_closed.png":       {"kutu": [19, 19, 81, 81]},
+  "wallet_inside_cover.png": {"kutu": [19, 19, 81, 81]},
+  "wallet_inside.png":       {"kutu": [19, 19, 81, 81]},
+  "wallet_pocket.png":       {"kutu": [19, 47.5, 81, 81]},
+  "wallet_strap.png":        {"kutu": [18.5, 51.9, 81.5, 58.1]},
+  "ticket.png":              {"kutu": [25, 24.7, 75, 75.3], "pencere": [38.5, 28.2, 61.5, 47.4]},
+  "luggage_tag.png":         {"kutu": [32, 10, 68, 90]},
+  "station_clock.png":       {"kutu": [10, 10, 90, 90]},
+  "carriage_window.png":     {"kutu": [10, 14.5, 90, 85.5], "pencere": [15.6, 18.2, 84.4, 81.8]},
+  "boarding_pass.png":       {"kutu": [2.5, 3, 97.5, 97]},
+  "stamp.png":               {"kutu": [10, 10, 90, 90]}
+}

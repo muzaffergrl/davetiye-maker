@@ -10,7 +10,9 @@ Bu dosya 24 Grand Theatre Premiere'in **bütün görsel parçalarının** tek ka
 Tasarım `tools/katalog.py`'de `EK_TEMALAR` satırıyla kayıtlı (D'ye girmedi), bu yüzden dosya elle yazıldı. Tema
 (`platform/themes/grand-theatre-premiere/`) şu an **geçici** parçalarla çalışıyor: 06'nın kadife dokusu tavus mavisine
 tonlanmış perde kanatları, 21'in fildişi kâğıdı program kartı (tema README "Interim pieces"). Aşağıdakiler gelince
-`build_images.py` bunlara geçer.
+`build_images.py` bunlara **kendiliğinden** geçer (dosya adına bakar; parça parça — sahne takımı birlikte, bkz. "Claude'un
+kesimi"); ölçüler (sahne kutusu, perde menteşeleri, toplanma oranı, kart kutusu ve penceresi) parçalardan ölçülüp
+`img/manifest.json` → `stage` ve `site.css` `/* stage:begin … stage:end */` bloğuna yazılır, elle yüzde kopyalanmaz.
 
 ## Nereye?
 - Repo `muzaffergrl/davetiye-maker`; klasör `collections/24_Grand_Theatre_Premiere/assets/gpt/` altındaki `parts/`
@@ -31,14 +33,15 @@ tonlanmış perde kanatları, 21'in fildişi kâğıdı program kartı (tema REA
 
 ## PAKET 5 — website katmanları (YAZI YOK)
 
-Sahne katmanları (W2.1–W2.7) **aynı tuvalde, aynı konumda**: 1024×1536, şeffaf zemin; üst üste konunca kemer
-açıklığı, perde kanatları ve kart birbirine oturur. Tek görselde tek nesne, nesnenin dışına düşen gölge yok, nesnenin
+Sahne katmanları (W2.1–W2.6) **aynı tuvalde, aynı konumda**: 1024×1536; üst üste konunca kemer açıklığı, perde kanatları
+ve sahnenin içi birbirine oturur. Program kartları (W2.7, W2.7b) tek başına çizilir; Claude kartı sahne tabanına koyar
+(aşağıdaki kart yeri, tuval yüzdesi). Tek görselde tek nesne, nesnenin dışına düşen gölge yok, nesnenin
 dışına taşan ışıma/hâle yok (site ışığı kendisi ekler), gerçek alfa (beyaz ya da dama değil).
 
 Ortak sahne ölçüleri (tuval yüzdesi): kemer çerçevesi x %4–96, y %3–97; **açıklık** (sahne penceresi) x %12–88,
 y %14–92 (üst kenarı drapeli saçak/valans, alt kenarı sahne tabanı); kapalı perde kanatları açıklığın içinde ve
 kemerin altına %1 taşarak: sol x %11–51, sağ x %49–89, y %12–93 (orta dikişte %2 bindirme); toplanmış (açık) kanatlar
-sol x %11–27, sağ x %73–89; program kartı sahnenin ortasında x %31–69, y %47–90.
+sol x %11–27, sağ x %73–89; program kartı (Claude yerleştirir) sahnenin ortasında x %31–69, ayağı y %90'da.
 
 #### W2.1 Proscenium kemeri + saçak (tüm parçaların stil referansı)
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/proscenium.png` · 1024×1536 · **Şeffaf zemin**
@@ -92,9 +95,20 @@ Kontrol: orta boş ve sakin; zemin tahtaları alt %20'de; opak; yazı yok.
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
 
 ```
-A vintage theatre programme card (playbill) standing upright, alone: thick ivory cotton card (#F3EBD8) with a fine antique-gold printed ornamental border inset from its edge and a small gold flourish at the top centre, portrait 2:3, drawn large so it fills about 76% of the image height, centred. In its upper half a portrait photo window with an arched top, about 4:5, filled with flat pure green #00FF00 (no texture, no shading). The lower half of the card is plain ivory paper for text (no lines, no text). Front view, straight, not cropped, generous empty margin. Oil-painted style with subtle paper grain, warm light from below. No cast shadow, no glow outside the card. No text, letters or numbers. True transparent background PNG (real alpha channel).
+A vintage theatre programme card (playbill) standing upright, alone: thick ivory cotton card (#F3EBD8) with a fine antique-gold printed ornamental border inset about 5% from its edge and a small gold flourish at the top centre, portrait 2:3, drawn large so it fills about 76% of the image height, centred. In its upper part a portrait photo window with an arched top, about 4:5, horizontally centred, from about 23% to 77% of the card's width and from about 9% to 52% of the card's height, with a thin gold moulding around it, filled with flat pure green #00FF00 (no texture, no shading, crisp edges). The lower part of the card, from about 56% to 92% of its height, is plain ivory paper for text (no lines, no ornament, no text). Front view, straight, not cropped, generous empty margin. Oil-painted style with subtle paper grain, warm light from below. No cast shadow, no glow outside the card. No text, letters or numbers. True transparent background PNG (real alpha channel).
 ```
-Kontrol: pencere düz #00FF00 (kemerli üst); alt yarı düz kâğıt; kenar süsü ince; alfa. (Index kartı = home kahraman kartı.)
+Kontrol: pencere düz #00FF00 (kemerli üst), kartın üst kısmında (yükseklik ~%9–52) ortada; alt kısım (~%56–92) düz kâğıt;
+kenar süsü ince; alfa. (Perde sayfasında sahnede duran kart; fotoğraf penceresinin altına konur, isim ve tarih alt kısma
+yazılır.)
+
+#### W2.7b Ana sayfanın program kartı (pencere yok)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/card_plain.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The same vintage theatre programme card as card_small.png (give it as the reference: the same thick ivory cotton card, the same fine antique-gold ornamental border inset about 5% from the edge, the same small gold flourish at the top centre, the same 2:3 proportion and size, about 76% of the image height, centred) but WITHOUT any photo window: inside the border the whole face is plain ivory paper for text, calm and even, no lines, no frame, no ornament in the middle. Front view, straight, not cropped. Oil-painted style with subtle paper grain, warm light from below. No cast shadow, no glow outside the card. No text, letters or numbers. True transparent background PNG (real alpha channel).
+```
+Kontrol: card_small ile aynı kart (kenar süsü, üst süs, oran); yüzü baştan sona düz kâğıt; pencere yok; alfa. (Ana sayfanın
+ilk ekranındaki kart: isimler, tarih, şehir; açılıştaki kart buraya uçar.)
 
 #### W2.8 Kadife zemin karosu (dikişsiz)
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/velvet_tile.png` · 1024×1024 · **Opak**
@@ -118,7 +132,8 @@ Kontrol: dikişsiz; açık ve sakin (koyu mürekkep metin okunur); opak.
 ```
 The stub of an antique theatre ticket, alone, landscape about 3:1, drawn large so it fills about 86% of the image width, centred: thick ivory card (#F3EBD8) with a fine antique-gold printed ornamental border, and along its TOP edge a clearly visible perforation — a straight row of small round punched holes, as where it was torn from the ticket. The whole centre is plain ivory card for text (no text, no numbers, no seat print). Front view, straight, not cropped. Oil-painted style, warm light. No cast shadow, no glow outside its outline. True transparent background PNG (real alpha channel).
 ```
-Kontrol: üst kenarda delikli çizgi; orta boş; ~3:1; alfa. (Yanıt gönderilince bu koçan yırtılıp düşer.)
+Kontrol: üst kenarda delikli çizgi; orta boş; ~3:1; alfa. (Yanıt gönderilince bu koçan yırtılıp düşer; sitede kendi
+oranında, kırpılmadan durur — "Admit one", isimler ve tarih ortadaki boş kâğıda yazılır.)
 
 #### W2.11 Salon arka planı (perde sayfası ve home, telefon)
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/bg_page.png` · 1024×1536 · **Opak**
@@ -150,33 +165,35 @@ Kontrol: sahne + iki toplanmış perde tam görünür; üst %20 yalnız kemer/sa
 
 Fotogerçekçi, sinematik, sıcak sahne ışığı; tavus mavisi, antik altın ve fildişi palet; hafif film greni. Yüzler
 gerçek ünlülere ya da tanınmış kişilere benzemez; marka, tabela, yazı yok. Hepsi 4:5 dikey (mekân 3:2 yatay).
+**Tek kurgu çift, her fotoğrafta aynı:** her prompt aynı tarifi taşır (kadın: omuz hizasında dalgalı kestane-kızıl saç,
+açık ten, hafif çil; erkek: kısa koyu kahve saç, kısa düzgün sakal, zeytinî ten). 2.1'i sonraki fotoğraflara referans ver.
 
 #### 2.1 Ana portre
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1280, 4:5)
 
 ```
-Photorealistic fine-art wedding portrait, vertical 4:5, a fictional couple in their early thirties standing on the empty stage of an ornate gilded theatre in front of drawn-back peacock-teal velvet curtains: the groom in a classic black tuxedo, the bride in an ivory satin gown with a long veil, close together and smiling, three-quarter length, faces in the upper third, lit by a warm spotlight from above-left. Warm footlights, soft haze in the air. Peacock, antique gold and ivory palette, subtle film grain. They must not resemble any real or famous person. No text, no frame.
+Photorealistic fine-art wedding portrait, vertical 4:5, a fictional couple in their early thirties (she: shoulder-length wavy auburn hair, fair skin with light freckles; he: short dark-brown hair, a short neat beard, olive skin), standing on the empty stage of an ornate gilded theatre in front of drawn-back peacock-teal velvet curtains: the groom in a classic black tuxedo, the bride in an ivory satin gown with a long veil, close together and smiling, three-quarter length, faces in the upper third, lit by a warm spotlight from above-left. Warm footlights, soft haze in the air. Peacock, antique gold and ivory palette, subtle film grain. They must not resemble any real or famous person. No text, no frame.
 ```
 
 #### 2.2 Story 1 — "Opening night"
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_1.jpg` · Dikey (1024×1280, 4:5)
 
 ```
-The same fictional couple, vertical 4:5, a candid moment in red-and-gold theatre seats in the stalls, side by side and laughing during an evening performance, the stage light falling on their faces, the dark auditorium behind softly out of focus. Photorealistic, same palette and grain. Not resembling any real person. No text.
+The same fictional couple as hero_portrait.jpg (she: shoulder-length wavy auburn hair, fair skin with light freckles; he: short dark-brown hair, a short neat beard, olive skin), in smart evening clothes, vertical 4:5, a candid moment in peacock-teal velvet theatre seats with gilded armrests in the stalls, side by side and laughing during an evening performance, the stage light falling on their faces, the dark auditorium behind softly out of focus. Photorealistic, same palette and grain. Not resembling any real person. No text.
 ```
 
 #### 2.3 Story 2 — "The proposal at intermission"
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_2.jpg` · Dikey (1024×1280, 4:5)
 
 ```
-Vertical 4:5: the same fictional couple in a mirrored, candlelit theatre foyer at intermission, he on one knee holding up a ring box, she with her hands to her face in happy surprise, champagne glasses on a marble ledge, gilded mirrors and warm sconces softly blurred. Photorealistic, same palette and grain. Not resembling any real person. No text, no signs.
+Vertical 4:5: the same fictional couple as hero_portrait.jpg (she: shoulder-length wavy auburn hair, fair skin with light freckles; he: short dark-brown hair, a short neat beard, olive skin), in evening clothes, in a mirrored, candlelit theatre foyer at intermission, he on one knee holding up a ring box, she with her hands to her face in happy surprise, champagne glasses on a marble ledge, gilded mirrors and warm sconces softly blurred. Photorealistic, same palette and grain. Not resembling any real person. No text, no signs.
 ```
 
 #### 2.4 Story 3 — "Our curtain call"
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_3.jpg` · Dikey (1024×1280, 4:5)
 
 ```
-Vertical 4:5: the same fictional couple taking a playful bow together at the front of the stage, hand in hand, ivory rose petals in the air, the peacock velvet curtain gathered behind them and warm footlights glowing. Photorealistic, same palette and grain. Not resembling any real person. No text.
+Vertical 4:5: the same fictional couple as hero_portrait.jpg (she: shoulder-length wavy auburn hair, fair skin with light freckles; he: short dark-brown hair, a short neat beard, olive skin), in their wedding clothes (black tuxedo, ivory satin gown), taking a playful bow together at the front of the stage, hand in hand, ivory rose petals in the air, the peacock velvet curtain gathered behind them and warm footlights glowing. Photorealistic, same palette and grain. Not resembling any real person. No text.
 ```
 
 #### 2.5 Mekân
@@ -191,10 +208,19 @@ Landscape 3:2: the interior of an imaginary grand theatre seen from the back of 
 ## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK)
 
 Şu an `platform/lib/print/layouts.ts` → `grand-theatre-premiere` **composed** düzenle çalışıyor (fildişi kâğıt + üstte ve
-ön yüzde altta kadife bandı; ikisi de temanın GPT dokularından). Zeminler gelince düzen `card`/`back` kaynaklarına çevrilir
-(metin kutuları `front: [19, 12, 15, 12]`, `back: [17, 12, 8, 12]` — üst/alt süs bantlarının dışında; zemin bu boş alanları
-korumalı) ve `node scripts/build-print-assets.ts --theme grand-theatre-premiere` koşulur. İki ölçünün ikisi de istenir;
-platform bugün tek kaynak kullanıyor (5×7 zemini, A5'te `cover` ile %1 kırpılır), A5 zemini baskı için ayrıca saklanır.
+ön yüzde altta kadife bandı; ikisi de temanın GPT dokularından). Metin kutuları (kesim çizgisinin yüzdesi, üst · sağ · alt ·
+sol): ön `front: [19, 12, 15, 12]`, arka `back: [17, 12, 8, 12]`. Aşağıdaki prompt'lar bu kutuların **dışına** süs koyar
+(yüzdeler taşmalı görselin yüzdesi; 5×7'de taşma payı yatayda %2,4, dikeyde %1,7 → ön boş alan kesimde ≈ %18–86 yükseklik,
+%10–90 genişlik; kutular onun içinde kalır). Zeminler gelince **otomatik geçmez** (G149: kutular gerçek resmin üzerinde
+ölçülür); Claude şunu yapar:
+1. `python3 tools/kit_check.py collections/24_Grand_Theatre_Premiere --paket 6` (ölçü 1575×2175 / 1819×2551, yazı yok).
+2. `layouts.ts` bloğunda `sources` → `{ front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }`;
+   `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }` (zemin taşma paylı
+   tam sayfa; A5 aynı kaynağı `cover` ile ~%1,5 kırparak kullanır — A5 zeminleri baskıcıya ayrıca verilir).
+3. `cd platform && node scripts/build-print-assets.ts --theme grand-theatre-premiere`; `front`/`back` kutularını gerçek
+   resmin süs sınırlarından ~%2 açıklıkla yeniden ölç (gerekirse `bands`), `node --test tests/g149-print-layout.test.ts`
+   ve `tests/theme-grand-theatre-premiere.test.ts` (baskı kaynakları var mı) yeşil; 5×7 ve A5 PDF'ine göz at.
+4. Eski `public/print/grand-theatre-premiere/{paper,velvet}.webp` dosyalarını sil (artık kaynak değil).
 
 #### P1 — Ön yüz 5×7 (taşma paylı)
 **Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_5x7.png` · **1575×2175 px** (5.25×7.25 in @ 300 ppi) · Opak
@@ -228,12 +254,26 @@ The same back as invitation_back_5x7.png, recomposed for the A5 proportion: velv
 
 ---
 
-## Claude'un kesimi (parçalar gelince)
-- `tools/parts_prep.py` (geçici klasör): `proscenium.png` ve `card_small.png` #00FF00 pencereleri → şeffaf + `windows.json`.
-- Sahne kutusu = kemerin alfa kutusu; bütün sahne katmanları bu kutudan kırpılır (`th_arch`, `curtain_l/r`, `curtain_gl/gr`,
-  `th_back` — `th_back` kemer penceresinin maskesiyle). Perde kanatlarının dış kenarı = `transform-origin`; toplanmış genişlik /
-  kapalı genişlik = `gather` (manifest). Kart kutusu = `card_small` alfa kutusu; pencere = `mask_card.png` + `photo_slots`.
-- `playbill_tile` → `paper`, `velvet_tile` → `velvet` (2×2 aynalama gerekmez), `bg_page` → `room` + yer tutucular,
-  `ticket_stub` → `stub_paper` (delik sırası üst kenarda kalır; CSS kesik çizgi kalkar), `tassel` → `favicon.png`,
-  `web_hero` → `og-1200x630.jpg` (`tema_build.og_kirp(hiza="alt")`).
+## Claude'un kesimi (parçalar gelince — `build_images.py` kendisi yapar)
+- Komut: `python3 platform/themes/grand-theatre-premiere/build_images.py` (sonra `cd platform && node scripts/theme-assets.cjs`
+  ve `PORT=… node scripts/theme-check.cjs --theme grand-theatre-premiere --stress --compare none`). Çıktıdaki
+  "waiting for GPT" listesi hâlâ geçici olan parçaları sayar; `img/manifest.json` → `sources` her parçanın kaynağını yazar.
+- **Sahne takımı** (`proscenium` + `curtain_left` + `curtain_right` üçü birden varsa): `tools/parts_prep.py` (geçici klasör)
+  `proscenium.png` açıklığını ve `card_small.png` penceresini (#00FF00) şeffaf yapar. Sahne kutusu = kemer, iki kapalı kanat
+  ve iki toplanmış kanadın alfa kutularının birleşimi; bütün sahne katmanları bu kutudan kırpılır (`th_arch`, `curtain_l/r`,
+  `curtain_gl/gr`, `th_back` — `th_back` = `stage_back.png` kemer açıklığının maskesiyle, +6 px kemerin altına). Kapalı
+  kanadın dış kenarı = `transform-origin` (`--cl-o/--cr-o`); toplanmış genişlik / kapalı genişlik = `gather` (`--gather`,
+  açılma keyframe'leri bundan hesaplanır); toplanmış kanadın tepe ortası = salınım ekseni. Takımın içinde eksik
+  `curtain_*_open` → kapalı GPT kanadı %40 genişliğe ölçeklenir; eksik `stage_back` → geçici kadife.
+- Kart: `card_small` alfa kutusuna kırpılır, sahnede genişliği tuvalin %38'i, ayağı tuvalin %90'ında, açıklığın ortasında;
+  pencere kutusu (+2 px) `stage.card.window_pct` → `--win-*`: fotoğraf kartın altında, pencereden görünür. Pencere
+  bulunamazsa fotoğraf geçici yerinde kartın üstünde durur (manifest `warnings`).
+- `card_plain` → `card_plain` (ana sayfa kartı; kendi oranı `--hero-ar`, kırpılmaz), `playbill_tile` → `paper`,
+  `velvet_tile` → `velvet` (aynalama yok), `bg_page` → `room` + yer tutucular (`ph_portrait`, `ph_land`), `ticket_stub` →
+  `stub_paper` (kendi oranı `--stub-ar`, CSS kesik çizgisi kalkar), `tassel` → `favicon.png`, `web_hero` → `og-1200x630.jpg`
+  (`tema_build.og_kirp(hiza="alt")`: üst ~%21 kırpılır).
+- Bütün ölçüler `img/manifest.json` → `stage` (+ `stage.css`) ve `site.css` `/* stage:begin … stage:end */` bloğuna yazılır;
+  `tests/theme-grand-theatre-premiere.test.ts` ikisinin aynı olduğunu denetler. Kalıntı #00FF00 → build hata verir.
+- Prova (gerçek parça gelmeden): `python3 tools/gpt_kuru_deneme.py --tema grand-theatre-premiere --sekil
+  collections/24_Grand_Theatre_Premiere/assets/gpt/kuru_sekil.json [--theme-check --stress --port …]`.
 - PAKET 2 `photos/*.jpg` → `npm run seed -- --photos` ve theme-check fotoğraflı ölçüm; demo kaydına bağlanması ayrı karar.

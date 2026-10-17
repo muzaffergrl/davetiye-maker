@@ -26,6 +26,8 @@
 <body class="page-rsvp" data-if="!rsvp.method" data-pending="This link will be added soon.">
 <main class="rsvp-page">
   <span class="lantern-glow" aria-hidden="true"></span>
+  <span class="lantern" aria-hidden="true"></span>
+  <span class="bloom bloom-tl" aria-hidden="true"></span>
   <header class="page-heading" data-scene="rsvp-card">
     <p class="eyebrow" data-field="name_display" data-step="names"></p>
     <h1 data-if="!thank_you_on" data-copy="rsvp_title" data-step="title">Kindly respond</h1>
@@ -108,7 +110,7 @@
     <p><a href="home.html" class="btn"><span data-copy="home_link">Home</span></a></p>
   </section>
   <footer class="signature" data-scene="rsvp-closing">
-    <img class="foot-tile" src="img/tile_3-76.webp" alt="" loading="lazy" data-step="seal">
+    <img class="foot-tile" src="img/tile_3-76.webp" srcset="img/tile_3-76.webp 76w, img/tile_3-152.webp 152w" sizes="44px" alt="" loading="lazy" data-step="seal">
     <p class="sig-names" data-field="name_display" data-step="names"></p>
     <p class="eyebrow" data-field="date" data-step="names" data-i="1"></p>
     <p data-step="links"><a class="textlink" href="index.html?replay=1"><span data-copy="rsvp_replay">Replay the opening</span></a></p>

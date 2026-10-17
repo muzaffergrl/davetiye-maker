@@ -46,7 +46,7 @@ button:disabled{opacity:.5;cursor:default}
 
 /* champagne foil: the letters' own champagne colour under a moving mask — a brighter band of light travels across them
    once when the heading appears (the text stays real text: hiding its colour hides the effect too) */
-.foil,.foil-ink{-webkit-mask-image:linear-gradient(105deg,#000 0 38%,#000d 44%,#000 50%,#000b 56%,#000b 100%);mask-image:linear-gradient(105deg,#000 0 38%,#000d 44%,#000 50%,#000b 56%,#000b 100%);-webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-position:100% 0;mask-position:100% 0}
+.foil,.foil-ink,.is-sent [data-rsvp-state=success] .panel-title{-webkit-mask-image:linear-gradient(105deg,#000 0 38%,#000d 44%,#000 50%,#000b 56%,#000b 100%);mask-image:linear-gradient(105deg,#000 0 38%,#000d 44%,#000 50%,#000b 56%,#000b 100%);-webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-position:100% 0;mask-position:100% 0}
 .foil{color:#f6e3c2;filter:drop-shadow(0 2px 10px #0009)}
 .foil-ink{color:var(--plum)}
 .foil .amp{color:var(--rose)}
@@ -83,30 +83,26 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening-heading>.eyebrow:first-child{margin-bottom:10px}
 .opening .names{font-size:clamp(46px,13.5vw,74px)}
 .opening-date{font-size:9.5px;margin-top:10px}
-/* stage = manifest stage.box (732×689 on the 1024×1536 canvas): the closed box (lid + base) is its full width and
-   its lower 65.7 %; the upper 32.24 % of the width (manifest above_closed_frac_of_width) is the room the lid's inside
-   and the risen card take — it slides up under the heading (which has left by then). */
-.stage{--w:min(84vw,calc(43svh * 1.616),440px);position:relative;width:var(--w);aspect-ratio:732/689;margin:calc(14px - var(--w) * .3224) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent}
+.stage{position:relative;width:var(--w);cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent}
 .box{position:absolute;inset:0;perspective:1000px;transform-origin:50% 80%}
 .box>img,.box>.card,.box>span{position:absolute}
-.box-inner,.box-sheen{left:3.552%;top:0%;width:92.896%;height:52.25%}                   /* manifest stage.inner */
 .box-inner{z-index:1;transform-origin:50% 100%;opacity:0;backface-visibility:hidden}
 .box-sheen{z-index:2;pointer-events:none;opacity:0;background:linear-gradient(112deg,#fff7ea00 30%,#fffaf0e6 47%,#fff7ea00 64%) 100% 0/300% 100% no-repeat;mix-blend-mode:soft-light;-webkit-mask:url(img/box_inner-440.webp) 0 0/100% 100% no-repeat;mask:url(img/box_inner-440.webp) 0 0/100% 100% no-repeat}
-.box-well{left:1.913%;top:52.25%;width:96.175%;height:9.869%;z-index:3}                  /* manifest stage.well */
-.box-base{left:1.093%;top:62.119%;width:97.814%;height:37.881%;z-index:5;filter:drop-shadow(0 18px 20px #0009)} /* manifest stage.base */
-.box-lid,.lid-sheen{left:0%;top:34.253%;width:100%;height:27.866%}                       /* manifest stage.lid */
+.box-well{z-index:3}
+.box-base{z-index:5;filter:drop-shadow(0 18px 20px #0009)}
 .box-lid{z-index:6;transform-origin:50% 0;backface-visibility:hidden;filter:drop-shadow(0 4px 6px #0007)}
 .lid-sheen{z-index:7;pointer-events:none;background:linear-gradient(112deg,#fff4ea00 36%,#ffeedd59 50%,#fff4ea00 64%) 100% 0/320% 100% no-repeat;mix-blend-mode:screen;-webkit-mask:url(img/box_lid-440.webp) 0 0/100% 100% no-repeat;mask:url(img/box_lid-440.webp) 0 0/100% 100% no-repeat}
-.box-closure{left:33.88%;top:37.3%;width:32.24%;height:21.771%;z-index:8;filter:drop-shadow(0 3px 4px #0008)} /* manifest stage.closure */
-/* the card: GPT card_small (interim: the ivory paper of 01, cropped) between the cushion and the front of the base */
-.box>.card{left:20.628%;top:65.602%;width:58.743%;height:31.205%;z-index:4;view-transition-name:none} /* manifest stage.card */
+.box-closure{z-index:8;filter:drop-shadow(0 3px 4px #0008)}
+/* the card: GPT card_small (interim: the ivory paper of 01, cropped) between the cushion and the front of the base; the
+   photo sits on the card's keyed-out #00FF00 window (manifest stage.card.window_pct), the text to its right */
+.box>.card{z-index:4;view-transition-name:none}
 .card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.card-copy{position:relative;height:100%;display:flex;align-items:center;gap:7%;padding:7% 7%;color:var(--ink);text-align:left}
-.card-photo{flex:none;height:100%;aspect-ratio:4/5}
+.card-copy{position:relative;height:100%;color:var(--ink);text-align:left}
+.card-photo{position:absolute}
 .card-photo .ph-mark{font-size:7px}
 .card-photo .ty-decor{display:grid;place-items:center;height:100%}
 .card-photo .ty-decor img{width:80%}
-.card-text{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.card-text{position:absolute;top:0;bottom:0;right:7%;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
 .card-text .eyebrow{font-size:6.5px;letter-spacing:.18em;color:var(--rose-ink)}
 .card-names{font:400 clamp(15px,4.6vw,24px)/1.1 var(--script);color:var(--ink);overflow-wrap:anywhere}
 .opening-actions{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:24px;min-height:60px;position:relative;z-index:9}
@@ -131,18 +127,33 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .is-opening .box>.card{animation:card-rise 1200ms 1900ms cubic-bezier(.42,0,.18,1) forwards,card-forward 350ms 3100ms cubic-bezier(.45,0,.2,1) forwards}
 .is-opened .opening-heading,.is-opened .box-closure,.is-opened .box-lid,.is-opened .lid-sheen{opacity:0}
 .is-opened .box-inner{opacity:1;transform:none}
-.is-opened .box>.card{z-index:9;transform:translateY(-206%) scale(1.1);view-transition-name:invite-card;filter:drop-shadow(0 18px 22px #000b)}
+.is-opened .box>.card{z-index:9;view-transition-name:invite-card;filter:drop-shadow(0 18px 22px #000b)}
 @keyframes away{to{opacity:0;transform:translateY(-24px)}}
 @keyframes bow-off{0%{transform:none}30%{transform:translate(4%,-6%) rotate(-4deg);opacity:1}100%{transform:translate(70%,150%) rotate(22deg);opacity:0}}
 @keyframes tug{50%{transform:scale(.985) translateY(.8%)}}
-@keyframes lid-up{0%{transform:perspective(900px) rotateX(0);filter:brightness(1)}
-99%{opacity:1}
-100%{transform:translateY(64.58%) perspective(900px) rotateX(-90deg);filter:brightness(.7);opacity:0}} /* hinge row (stage.inner bottom) */
 @keyframes inner-down{0%{opacity:1;transform:perspective(1000px) rotateX(90deg)}100%{opacity:1;transform:perspective(1000px) rotateX(0)}}
 @keyframes sweep-in{0%{opacity:1;background-position:100% 0}100%{opacity:1;background-position:0 0}}
-@keyframes card-rise{from{transform:none}to{transform:translateY(-199.07%)}}              /* manifest stage.card.rise_pct */
+/* the lid's travel to the hinge row (manifest stage.lid.drop_pct), the card's rise and its place in front: the block below */
+/* stage:begin — written by build_images.py from img/manifest.json "stage" (source: interim); do not edit by
+   hand. Stage = 732×689 px of the 1024×1536 canvas; the closed box is its lower 65.7 %, the room
+   above it (0.3224 × the width) is for the lid's inside and the risen card (it slides up under the heading). */
+.stage{--w:min(84vw,calc(43svh * 1.616),440px);aspect-ratio:732/689;margin:calc(14px - var(--w) * 0.3224) auto 0}
+.box-inner,.box-sheen{left:3.552%;top:0%;width:92.896%;height:52.25%}
+.box-well{left:1.913%;top:52.25%;width:96.175%;height:9.869%}
+.box-base{left:1.093%;top:62.119%;width:97.814%;height:37.881%}
+.box-lid,.lid-sheen{left:0%;top:34.253%;width:100%;height:27.866%}
+.box-closure{left:33.88%;top:37.3%;width:32.24%;height:21.771%}
+.box>.card{left:20.628%;top:65.602%;width:58.743%;height:31.205%}
+.card-photo{left:7%;top:14%;width:28.8%;height:72%}
+.card-text{left:41.8%}
+.is-opened .box>.card{transform:translateY(-206.07%) scale(1.1)}
+@keyframes lid-up{0%{transform:perspective(900px) rotateX(0);filter:brightness(1)}
+99%{opacity:1}
+100%{transform:translateY(64.58%) perspective(900px) rotateX(-90deg);filter:brightness(.7);opacity:0}}
+@keyframes card-rise{from{transform:none}to{transform:translateY(-199.07%)}}
 @keyframes card-forward{from{z-index:9;transform:translateY(-199.07%);filter:drop-shadow(0 6px 8px #0008)}
-to{z-index:9;transform:translateY(-206%) scale(1.1);filter:drop-shadow(0 18px 22px #000b)}}
+to{z-index:9;transform:translateY(-206.07%) scale(1.1);filter:drop-shadow(0 18px 22px #000b)}}
+/* stage:end */
 
 /* ---------------------------------------------------------------- home */
 .velvet-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:64px 24px calc(var(--nav-h) + 22px);isolation:isolate;overflow:clip}
@@ -213,6 +224,7 @@ to{z-index:9;transform:translateY(-206%) scale(1.1);filter:drop-shadow(0 18px 22
 .showcase.is-3d .gem:not(.is-front) figcaption{opacity:0;visibility:hidden}
 .carousel-controls{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:6px}
 .carousel-controls button{background:transparent;border:1px solid var(--line);color:var(--champagne);width:48px;height:48px;border-radius:50%;font-size:20px}
+.carousel-controls button[aria-disabled=true]{opacity:.4;cursor:default}
 .carousel-count{font:500 11px/1 var(--display);letter-spacing:.2em;color:var(--gold-ink);min-width:44px;text-align:center}
 
 /* ---------------------------------------------------------------- details */
@@ -271,6 +283,10 @@ input[type=radio]{accent-color:#e3c49c;width:18px;height:18px;flex:none}
 .send .btn{width:100%}
 .reply-panel{padding:18px 0;font:400 15px/1.8 var(--display)}
 .panel-title{font:400 40px/1.2 var(--script);margin-bottom:6px}
+/* reply sent (site.js adds .is-sent): the satin light crosses the card once more and "Thank you!" gets the foil shimmer */
+.reply-card.is-sent .satin-sweep{animation:sweep-sent 2.2s cubic-bezier(.45,.05,.2,1) both}
+.is-sent [data-rsvp-state=success] .panel-title{animation:foil 2.6s cubic-bezier(.3,.1,.2,1) .15s both}
+@keyframes sweep-sent{0%{opacity:1;background-position:100% 0}80%{opacity:1}100%{opacity:0;background-position:0 0}}
 .reply-panel[data-rsvp-state=error]{color:#f5b8b0}
 .reply-panel[data-rsvp-state=preview]{color:var(--gold-ink);border-top:1px solid var(--line);margin-top:18px}
 .note{color:var(--muted)}

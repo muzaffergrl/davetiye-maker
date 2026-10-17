@@ -10,7 +10,7 @@
 //
 //   node scripts/build-print-assets.ts [--theme <id>]
 
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 import { PRINT_LAYOUTS } from '../lib/print/layouts.ts';
@@ -66,4 +66,10 @@ for (const [id, layout] of Object.entries(PRINT_LAYOUTS)) {
     const info = await img.webp({ quality: 90, alphaQuality: 95, effort: 5 }).toFile(out);
     console.log(`${id}/print/${name}.webp ${info.width}×${info.height} ${(info.size / 1024).toFixed(0)} KB`);
   }
+  // G167: PAKET 6 print grounds that arrived but the layout does not use yet (a composed interim layout): say so, the
+  // switch is a layouts.ts edit + a G149 measurement of the text boxes on the new art (GPT_PROMPTS.md, PAKET 6)
+  const printDir = path.join(ROOT, 'collections', layout.collection, 'assets', 'gpt', 'print');
+  const used = Object.values(layout.sources).map((s) => path.basename(typeof s === 'string' ? s : s.path));
+  const waiting = existsSync(printDir) ? readdirSync(printDir).filter((f) => /\.(png|jpe?g|webp)$/i.test(f) && !used.includes(f)) : [];
+  if (waiting.length) console.warn(`${id}: PAKET 6 grounds not used by lib/print/layouts.ts yet: ${waiting.join(', ')}`);
 }
