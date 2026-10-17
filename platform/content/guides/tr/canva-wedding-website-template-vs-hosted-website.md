@@ -1,6 +1,6 @@
 ---
-title: Canva Düğün Websitesi Şablonu mu, Barındırılan Düğün Websitesi mi?
-description: Canva düğün websitesi şablonları ile barındırılan düğün websitelerinin adil bir karşılaştırması: düzenleme, hesaplar, LCV, linkiniz, tasarım özgürlüğü ve sorunları kimin çözdüğü.
+title: Canva Düğün Websitesi Şablonu mu, Barındırılan Site mi?
+description: Canva düğün websitesi şablonu ile barındırılan sitenin adil karşılaştırması: düzenleme, hesaplar, LCV, linkiniz, tasarım özgürlüğü ve sorunları kimin çözdüğü.
 published: 2026-10-14
 updated: 2026-10-14
 reviewed: 2026-10-14

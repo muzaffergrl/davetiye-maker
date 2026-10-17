@@ -1,6 +1,6 @@
 ---
-title: Düğün Websitesi Ne Zaman Paylaşılır, LCV Son Tarihi Nasıl Belirlenir?
-description: "Tarihi ayırın" kartları, website, davetiyeler, hatırlatmalar ve LCV son tarihi için düğün tarihinizden geriye doğru bir zaman çizelgesi; doğru tarihi seçme yolu.
+title: Düğün Websitesi Ne Zaman Paylaşılır, LCV Tarihi Ne Olmalı?
+description: "Tarihi ayırın" kartları, website, davetiyeler, hatırlatmalar ve LCV son tarihi için düğün gününüzden geriye doğru zaman çizelgesi; doğru tarihi seçme yolu.
 published: 2026-10-14
 updated: 2026-10-14
 reviewed: 2026-10-14

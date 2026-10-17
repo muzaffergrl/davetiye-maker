@@ -1,6 +1,6 @@
 ---
 title: "Düğün Websitesine Neler Konmalı: Kontrol Listesi ve Örnekler"
-description: Olmazsa olmazlar, işe yarayan ekstralar ve dışarıda bırakılacaklar olarak ayrılmış eksiksiz bir düğün websitesi kontrol listesi; gizlilik ipuçları ve sayfa sayfa yapı.
+description: Olmazsa olmazlar, işe yarayan ekstralar ve atlanacaklar olarak ayrılmış eksiksiz bir düğün websitesi kontrol listesi; gizlilik ipuçları ve sayfa sayfa yapı.
 published: 2026-10-14
 updated: 2026-10-14
 reviewed: 2026-10-14
