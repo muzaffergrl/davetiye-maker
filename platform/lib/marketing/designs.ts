@@ -892,6 +892,7 @@ export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'nocturne-lake-estate': ['classic', 'destination'],
   'velvet-jewel-box': ['classic'],
   'orient-express-voyage': ['classic', 'destination'],
+  'riad-lantern-nights': ['classic', 'destination'],
   'maison-patisserie': ['classic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
