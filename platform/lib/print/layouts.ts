@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22, 25, 26) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 24, 25, 26) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -259,6 +259,26 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('velvet'), images: [{ src: 'bow', style: 'top:7%;left:50%;width:24%;transform:translateX(-50%)' }] },
       back: { bg: cover('velvet'), images: [{ src: 'bow', style: 'bottom:5%;left:50%;width:18%;transform:translateX(-50%)' }] },
+    },
+  },
+  // 24 (G162, interim until the PAKET 6 grounds in GPT_PROMPTS.md arrive): the ivory programme paper with a band of the
+  // peacock velvet across the top (and the foot of the front), both cut by the theme build from GPT textures; the text
+  // sits on the plain paper between the bands.
+  'grand-theatre-premiere': {
+    collection: '24_Grand_Theatre_Premiere',
+    sources: { paper: 'platform/themes/grand-theatre-premiere/img/paper-1024.webp', velvet: 'platform/themes/grand-theatre-premiere/img/velvet-640.webp' },
+    fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
+    script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
+    ink: '#1E2626', accent: '#6E5119', front: [19, 12, 15, 12], back: [17, 12, 8, 12],
+    composed: {
+      front: {
+        bg: cover('paper'),
+        images: [
+          { src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:15%;object-fit:cover' },
+          { src: 'velvet', style: 'bottom:-4%;left:-4%;width:108%;height:12%;object-fit:cover;transform:scaleY(-1)' },
+        ],
+      },
+      back: { bg: cover('paper'), images: [{ src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:13%;object-fit:cover' }] },
     },
   },
   // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/

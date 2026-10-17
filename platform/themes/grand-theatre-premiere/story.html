@@ -1,0 +1,72 @@
+<!doctype html>
+<!-- Grand Theatre Premiere · page 3 — story (/<slug>/story). Intermission: three photo cards stand on a dark velvet
+     stage at staggered marks (left, right, left). A spotlight — soft light, no drawn shape — rests on the first card;
+     tap or click a card (or move a pointer over the stage) and the light glides there and lifts it; keyboard focus does
+     the same. Each card is "Scene I, II, III" with its caption. Personal text: none — the intro, captions and photos are
+     filled on the server. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#061416">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our Story">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="site.css">
+<script>/* page turn between the programme's pages (site.css "turn-next" / "turn-prev"): the view transition types come from the
+   order home → story → details → rsvp; without cross-document view transitions the new page settles in (turn-fallback) */
+(function(r){r.classList.replace('no-js','js');var o=['home','story','details','rsvp'],p=function(u){try{return o.indexOf(new URL(u,location.href).pathname.split('/').pop())}catch(e){return -1}};if('onpagereveal' in window)addEventListener('pagereveal',function(e){var t=e.viewTransition,a=window.navigation&&navigation.activation,f,n;if(!t||!a||!a.from)return;f=p(a.from.url);n=p(a.entry.url);if(f>=0&&n>=0&&f!==n)t.types.add(n>f?'turn-next':'turn-prev')});else if(document.referrer&&p(document.referrer)>=0&&!matchMedia('(prefers-reduced-motion: reduce)').matches)r.classList.add('turn-fallback');})(document.documentElement);
+</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-story" data-optional="our_story" data-pending="This link will be added soon.">
+<main class="story-page">
+  <header class="page-heading" data-scene="story-head">
+    <p class="eyebrow" data-copy="story_kicker" data-step="kicker">Intermission</p>
+    <h1 data-copy="story_title" data-step="title">Our Story</h1>
+    <p class="body-text intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+  <section class="spot-stage" aria-label="Photographs" data-scene="story-frame">
+    <figure class="scene scene-1" data-step="scene" data-i="0">
+      <button class="photo-slot" data-slot="story_1" type="button" data-spot aria-pressed="true">
+        <img data-photo="story_1" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="(min-width: 760px) 300px, 58vw" fetchpriority="high">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </button>
+      <figcaption><span class="scene-no"><span data-copy="scene_label">Scene</span> <span class="roman"></span></span> <span class="caption" data-field="story.items.0.caption"></span></figcaption>
+    </figure>
+    <figure class="scene scene-2" data-step="scene" data-i="1">
+      <button class="photo-slot" data-slot="story_2" type="button" data-spot aria-pressed="false">
+        <img data-photo="story_2" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="(min-width: 760px) 300px, 58vw" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </button>
+      <figcaption><span class="scene-no"><span data-copy="scene_label">Scene</span> <span class="roman"></span></span> <span class="caption" data-field="story.items.1.caption"></span></figcaption>
+    </figure>
+    <figure class="scene scene-3" data-step="scene" data-i="2">
+      <button class="photo-slot" data-slot="story_3" type="button" data-spot aria-pressed="false">
+        <img data-photo="story_3" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="(min-width: 760px) 300px, 58vw" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </button>
+      <figcaption><span class="scene-no"><span data-copy="scene_label">Scene</span> <span class="roman"></span></span> <span class="caption" data-field="story.items.2.caption"></span></figcaption>
+    </figure>
+  </section>
+  <footer class="signature" data-scene="story-next">
+    <p class="sig-names" data-field="name_display" data-step="names"></p>
+    <p data-step="links" data-if="!thank_you_hides_details"><a class="btn btn-ghost" href="details.html"><span data-copy="day_title">The Programme</span> <span aria-hidden="true">→</span></a></p>
+    <p data-step="links" data-if="thank_you_hides_details"><a class="btn btn-ghost" href="home.html"><span data-copy="home_link">Home</span></a></p>
+  </footer>
+</main>
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

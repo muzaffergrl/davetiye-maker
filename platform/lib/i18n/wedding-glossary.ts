@@ -76,6 +76,9 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ['Ceremony in the courtyard', 'Avluda tören', 'Ceremonia en el patio', 'Trauung im Innenhof', 'Cérémonie dans la cour'],
   ['Mint tea at sunset', 'Gün batımında nane çayı', 'Té de menta al atardecer', 'Minztee bei Sonnenuntergang', 'Thé à la menthe au coucher du soleil'],
   ['Lantern-lit dinner & dancing', 'Fener ışığında akşam yemeği ve dans', 'Cena a la luz de los faroles y baile', 'Abendessen im Laternenlicht & Tanz', 'Dîner à la lueur des lanternes et soirée dansante'],
+  ['Champagne in the grand foyer', 'Büyük fuayede şampanya', 'Champán en el gran vestíbulo', 'Champagner im großen Foyer', 'Champagne dans le grand foyer'],
+  ['Dinner in the stalls', 'Salonda akşam yemeği', 'Cena en el patio de butacas', 'Abendessen im Parkett', "Dîner à l'orchestre"],
+  ['First dance & encore', 'İlk dans ve bis', 'Primer baile y bis', 'Erster Tanz & Zugabe', 'Première danse et rappel'],
 
   // ---- dress code
   ['Dress code', 'Kıyafet kuralı', 'Código de vestimenta', 'Dresscode', 'Code vestimentaire'],
@@ -191,6 +194,10 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ['Can you accommodate dietary requirements?', 'Özel beslenme ihtiyaçlarını karşılayabiliyor musunuz?', '¿Pueden adaptarse a restricciones alimentarias?', 'Können Sie auf Ernährungswünsche eingehen?', 'Pouvez-vous tenir compte des régimes alimentaires ?'],
   ['Please tell us about your requirements in your reply.', 'Lütfen ihtiyaçlarınızı yanıtınızda belirtin.', 'Por favor, indíquenos sus necesidades en su respuesta.', 'Bitte teilen Sie uns Ihre Wünsche in Ihrer Rückmeldung mit.', 'Merci de nous indiquer vos besoins dans votre réponse.'],
   ['Is there parking at the venue?', 'Mekânda otopark var mı?', '¿Hay aparcamiento en el lugar?', 'Gibt es Parkplätze an der Location?', 'Y a-t-il un parking sur place ?'],
+  ['Is there parking at the theatre?', 'Tiyatroda otopark var mı?', '¿Hay aparcamiento en el teatro?', 'Gibt es Parkplätze am Theater?', 'Y a-t-il un parking au théâtre ?'],
+  ['Yes, valet parking is available at the main entrance.', 'Evet, ana girişte vale hizmeti var.', 'Sí, hay servicio de aparcacoches en la entrada principal.', 'Ja, am Haupteingang gibt es einen Parkservice.', "Oui, un voiturier vous attend à l'entrée principale."],
+  ['The doors open at 4:30 PM. Please be seated by 4:50 PM: the curtain rises at five.', 'Kapılar 16.30\'da açılıyor. Lütfen 16.50\'ye kadar yerinizi alın: perde saat beşte açılıyor.', 'Las puertas se abren a las 16:30. Por favor, tomen asiento antes de las 16:50: el telón se alza a las cinco.', 'Einlass ist um 16:30 Uhr. Bitte nehmen Sie bis 16:50 Uhr Platz: Der Vorhang hebt sich um fünf.', "Ouverture des portes à 16 h 30. Merci d'être assis avant 16 h 50 : le rideau se lève à 17 h."],
+  ['Your dinner choice', 'Akşam yemeği tercihiniz', 'Su elección para la cena', 'Ihre Wahl zum Abendessen', 'Votre choix pour le dîner'],
 
   // ---- thanks
   ['Thank you', 'Teşekkürler', 'Gracias', 'Danke', 'Merci'],

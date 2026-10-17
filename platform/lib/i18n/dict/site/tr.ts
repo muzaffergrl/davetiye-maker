@@ -264,6 +264,28 @@ const dict: Dict = {
   'Your seat is reserved. We look forward to the journey together.': 'Yeriniz ayrıldı. Bu yolculuğu birlikte yapmayı dört gözle bekliyoruz.',
   'departing at': 'kalkış',
   'invite you aboard to celebrate their wedding': 'sizi düğünlerini kutlamak için yolculuğa davet ediyor',
+  // G162: Grand Theatre Premiere (24) — the curtain, the programme, the ticket
+  'A love story in two acts': 'İki perdelik bir aşk hikâyesi',
+  'Act': 'Perde',
+  'Admit one': 'Tek kişilik giriş',
+  'At the theatre': 'Tiyatroda',
+  'Curtain up at': 'Perde saati',
+  'Curtain up in': 'Perdenin açılmasına',
+  'Intermission': 'Perde arası',
+  'Meet the players': 'Oyuncularla tanışın',
+  'Raise the curtain again': 'Perdeyi yeniden aç',
+  'Replay the curtain': 'Perdeyi yeniden izle',
+  'Reserve your seat': 'Yerinizi ayırtın',
+  'Scene': 'Sahne',
+  'Tap to raise the curtain': 'Dokunun, perde açılsın',
+  'The Programme': 'Program',
+  'The curtain rises on the ceremony at': 'Tören perdesi şu saatte açılıyor:',
+  'The curtain rose on the ceremony at': 'Tören perdesi şu saatte açıldı:',
+  'The full programme': 'Programın tamamı',
+  'Tonight\'s Programme': 'Bu akşamın programı',
+  'Tonight\'s programme': 'Bu akşamın programı',
+  'You are invited to a premiere': 'Bir galaya davetlisiniz',
+  'Your seat is saved. We look forward to the evening together.': 'Yeriniz ayrıldı. O akşamı birlikte geçirmeyi dört gözle bekliyoruz.',
 };
 
 export default dict;

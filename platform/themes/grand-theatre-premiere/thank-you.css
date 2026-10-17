@@ -1,0 +1,8 @@
+/* Grand Theatre Premiere — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
+   The same curtain and pages; the programme card and the invitation carry the couple's thank-you. No new artwork. */
+.ty-title{font:400 9.5cqi/1.12 var(--display)}
+.card-photo .ty-decor{background:var(--velvet)}
+.thank-you-copy .body-text{white-space:pre-line;margin:0 auto 18px;max-width:420px}
+.thank-you-copy .love{font:italic 400 22px/1.4 var(--serif);margin-top:10px;color:var(--gold-ink)}
+.ticket.thank-you-copy .btn{margin-top:6px}
+.hero-card .card-kicker[data-field]{font:400 20px/1.2 var(--display);letter-spacing:0;text-transform:none;color:var(--ink)}

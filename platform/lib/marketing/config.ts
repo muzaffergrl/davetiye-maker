@@ -166,6 +166,15 @@ export const MARKETING: MarketingConfig = {
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
+    },    // New design wave 23–28 (G162, docs/24): theme built before its GPT parts; interim pieces, sale waits for the parts.
+    {
+      id: 'grand-theatre-premiere',
+      name: 'Grand Theatre Premiere',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
     },
     // G163 (docs/24): 25 Orient Express Voyage, built before its GPT parts; sale approval and price remain pending.
     {
