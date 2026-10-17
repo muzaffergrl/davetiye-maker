@@ -86,6 +86,9 @@ Görünüm şu an sade; satış öncesi GPT parçaları + göz kontrolü şart.
 `designs.ts` / `katalog.py` / sözlükler iki tarafı da tutar (yinelenen anahtar yok; denetlendi). Sonra: `tsc` ✓,
 `I18N_STRICT=1 npm test` **1601/1603, 0 hata** (2 eski atlanan), `npm run build` ✓ (trace-check 31 tema),
 `katalog.py kontrol` ✓ (8 ek kayıt), `i18n-missing` 0 eksik.
+İkinci birleşme (G171 Music Box Ballerina): market sözlükleri iki tarafı tutar, coming listeleri 29 → 30 → 32, g138 tema
+sayısı 31; yinelenen anahtar yok. Sonra `tsc` ✓, `I18N_STRICT=1 npm test` **1619/1621, 0 hata** (2 eski atlanan),
+`npm run build` ✓ (trace-check 32 tema), `katalog.py kontrol` ✓ (9 ek kayıt).
 
 **Denenmedi:** gerçek iPhone/Safari (özellikle `@property` desteği; yoksa süpürme atlanır, foto doğrudan görünür) ve
 Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ, GPT parçalarıyla görünüm, sesin duyulması,
