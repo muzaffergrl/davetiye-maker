@@ -1,0 +1,262 @@
+{
+ "_note": "G165 interim build: layers cut and toned from GPT pixels of 10 (oak) and 05 (plaster, tile border) — see build_images.py; the design's own PAKET 5 parts are ordered in GPT_PROMPTS.md.",
+ "door_l": {
+  "src_size": [
+   477,
+   1254
+  ],
+  "ratio": 0.38038,
+  "files": [
+   {
+    "file": "door_l-240.webp",
+    "w": 240,
+    "h": 631,
+    "bytes": 12770
+   },
+   {
+    "file": "door_l-477.webp",
+    "w": 477,
+    "h": 1254,
+    "bytes": 52422
+   }
+  ]
+ },
+ "door_r": {
+  "src_size": [
+   477,
+   1254
+  ],
+  "ratio": 0.38038,
+  "files": [
+   {
+    "file": "door_r-240.webp",
+    "w": 240,
+    "h": 631,
+    "bytes": 14154
+   },
+   {
+    "file": "door_r-477.webp",
+    "w": 477,
+    "h": 1254,
+    "bytes": 55990
+   }
+  ]
+ },
+ "court": {
+  "src_size": [
+   953,
+   1254
+  ],
+  "ratio": 0.75997,
+  "files": [
+   {
+    "file": "court-440.webp",
+    "w": 440,
+    "h": 579,
+    "bytes": 14684
+   },
+   {
+    "file": "court-880.webp",
+    "w": 880,
+    "h": 1158,
+    "bytes": 94202
+   }
+  ]
+ },
+ "court_band": {
+  "src_size": [
+   1254,
+   705
+  ],
+  "ratio": 1.77872,
+  "files": [
+   {
+    "file": "court_band-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 14726
+   },
+   {
+    "file": "court_band-1024.webp",
+    "w": 1024,
+    "h": 576,
+    "bytes": 51956
+   }
+  ]
+ },
+ "card_paper": {
+  "src_size": [
+   878,
+   1254
+  ],
+  "ratio": 0.70016,
+  "files": [
+   {
+    "file": "card_paper-480.webp",
+    "w": 480,
+    "h": 686,
+    "bytes": 5922
+   },
+   {
+    "file": "card_paper-878.webp",
+    "w": 878,
+    "h": 1254,
+    "bytes": 33900
+   }
+  ]
+ },
+ "bg_wall": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bg_wall-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1960
+   }
+  ]
+ },
+ "tile_1": {
+  "src_size": [
+   76,
+   76
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_1-76.webp",
+    "w": 76,
+    "h": 76,
+    "bytes": 1810
+   }
+  ]
+ },
+ "tile_2": {
+  "src_size": [
+   76,
+   76
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_2-76.webp",
+    "w": 76,
+    "h": 76,
+    "bytes": 1778
+   }
+  ]
+ },
+ "tile_3": {
+  "src_size": [
+   76,
+   76
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_3-76.webp",
+    "w": 76,
+    "h": 76,
+    "bytes": 2168
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1836
+   }
+  ]
+ },
+ "ph_window": {
+  "src_size": [
+   480,
+   720
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "ph_window-480.webp",
+    "w": 480,
+    "h": 720,
+    "bytes": 1322
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 890
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_window-480.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "og": {
+  "composed": "bg_wall + court sliver + door_l/door_r, centred",
+  "file": "og-1200x630.jpg",
+  "bytes": 65163
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   978,
+   1254
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.1,
+  "file": "favicon.png",
+  "bytes": 24405
+ },
+ "stage": {
+  "leaf_aspect": 0.38,
+  "pair_aspect": 0.76,
+  "hinges": "outer edges",
+  "swing": "inwards, away from the guest (rotateY ±78deg)",
+  "method": "interim"
+ },
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 30
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 110
+  }
+ },
+ "bytes_total": 465024
+}

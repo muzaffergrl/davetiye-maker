@@ -4,7 +4,7 @@
 // no decor: only the text layer, its place (box = the free area of the part, in % of the part image: top, right,
 // bottom, left) and the colours / fonts of the design's own website (themes/<id>/site.css). The part files are
 // copied at full size by scripts/build-print-assets.ts into public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 27) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -39,7 +39,7 @@ export interface PrintLayout {
   back: Box;
   /** Paper under the card part: "tile" repeats the texture (tile size in inches); "cover": one image fills the sheet. */
   paper?: { mode: 'tile' | 'cover'; tile?: number };
-  /** No card parts yet (21, 22): each side is a background with GPT images on it (see GPT_PROMPTS.md, G139). */
+  /** No card parts yet (21, 22, 27): each side is a background with GPT images on it (see GPT_PROMPTS.md, G139). */
   composed?: { front: ComposedSide; back: ComposedSide };
   /** Names in capitals of the caps font instead of the script font (art deco). */
   namesInCaps?: boolean;
@@ -54,6 +54,9 @@ const PARTS = { card: 'parts/invitation_card.png', back: 'parts/info_card.png', 
 const gf = (q: string) => `https://fonts.googleapis.com/css2?${q}&display=swap`;
 const cover = (name: string, at = 'center') => `url(${name}.webp) ${at} / cover no-repeat`;
 const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;left:50%;width:17%;transform:translateX(-50%)` });
+/** 27: five zellige tiles in a row (tile1 · tile2 · tile3 · tile2 · tile1), each 10 % of the trim wide, centred. */
+const tileRow = (edge: 'top' | 'bottom') =>
+  ['tile1', 'tile2', 'tile3', 'tile2', 'tile1'].map((src, i) => ({ src, style: `${edge}:5%;left:${25 + i * 10.5}%;width:9%` }));
 
 export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   'olive-ivory': {
@@ -207,6 +210,27 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('scene', '50% 0%'), images: [] },
       back: { bg: '#11120F', images: [sealAt('top')] },
+    },
+  },
+  // 27 (G165, before its GPT parts): both sides on ivory lime plaster (the same GPT plaster the theme's card is toned
+  // from: 05's seamless bg_tile at full size, reached from this collection's assets/gpt/ by ../../../) with a row of the
+  // zellige tiles the theme build cut (img/tile_N) — front: a row along the top and one along the bottom, back: a row on
+  // top. Text in cedar on the plaster. Replaced by PAKET 6 print_front / print_back (GPT_PROMPTS.md) when they arrive.
+  'riad-lantern-nights': {
+    collection: '27_Riad_Lantern_Nights',
+    sources: {
+      paper: '../../../05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png',
+      tile1: 'platform/themes/riad-lantern-nights/img/tile_1-76.webp',
+      tile2: 'platform/themes/riad-lantern-nights/img/tile_2-76.webp',
+      tile3: 'platform/themes/riad-lantern-nights/img/tile_3-76.webp',
+    },
+    fonts: gf('family=Cinzel:wght@400;500&family=Marcellus&family=Marcellus+SC'),
+    script: "'Cinzel', Georgia, serif", serif: "'Marcellus', Georgia, serif", caps: "'Marcellus SC', Georgia, serif",
+    namesInCaps: true,
+    ink: '#3A2114', accent: '#8F5418', front: [17, 12, 17, 12], back: [16, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: [...tileRow('top'), ...tileRow('bottom')] },
+      back: { bg: cover('paper'), images: tileRow('top') },
     },
   },
 };

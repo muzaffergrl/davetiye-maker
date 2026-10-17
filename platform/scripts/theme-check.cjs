@@ -938,7 +938,8 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       await revealAll(page);
       let before = reqs.length;
       const dead = await page.evaluate(() => ({ missing: document.querySelectorAll('a[data-url-missing]').length,
-        buttons: [...document.querySelectorAll('.btn')].map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
+        // the G127 map block's own buttons ("Show map", directions) work from the place name without urls.map: not dead
+        buttons: [...document.querySelectorAll('.btn')].filter((b) => !b.closest('[data-map]')).map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
       if (dead.missing || dead.buttons.length) err(`details without links: dead buttons ${JSON.stringify(dead)}`);
       else ok('details without map / hotel / registry links: no dead buttons for guests');
       if (!rsvpOn) {

@@ -1,0 +1,351 @@
+/* Riad Lantern Nights (27) — a night courtyard in teal, saffron lantern light, brass and cedar. Visuals are GPT parts only
+   (img/, build_images.py — interim cuts until the PAKET 5 parts arrive); CSS adds light and interface (docs/11 §5.7):
+   the lantern's glow and its flicker, the light that pours through the doors and crosses the windows, text halos,
+   hairline rules, form fields, buttons, the bottom nav. Nothing here draws a shape, a frame or an ornament. */
+:root{--night:#0f2f31;--deep:#0a2324;--teal:#174a4b;--ivory:#f6ead2;--saffron:#e3a54a;--brass:#c9a35b;--brass-ink:#e2c48c;
+--muted:#c9d5cd;--line:#c9a35b4d;--cedar:#3a2114;--cedar-soft:#6a4a32;--glow:#f6bb62;
+--display:'Cinzel',Georgia,serif;--caps:'Marcellus SC',Georgia,serif;--serif:'Marcellus',Georgia,serif;color-scheme:dark;--nav-h:62px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--night) url(img/bg_wall-640.webp) 0 0/320px repeat;color:var(--ivory);font:400 18px/1.7 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.15}
+h1{font:400 clamp(34px,8.6vw,60px)/1.12 var(--display);letter-spacing:.05em}
+h2{font:400 clamp(25px,6.2vw,38px)/1.18 var(--display);letter-spacing:.04em}
+h3{font:400 21px/1.3 var(--caps);letter-spacing:.03em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--saffron);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:400 12px/1.8 var(--caps);letter-spacing:.18em;color:var(--brass-ink)}
+.body-text{font-size:18px;line-height:1.75;color:var(--muted)}
+.small{font:400 14px/1.7 var(--serif);color:var(--muted)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 28px;border:1px solid #e6b968;background:var(--saffron);color:#2a1609;font:400 14px/1.4 var(--caps);letter-spacing:.14em;border-radius:100px;text-align:center}
+.btn:hover{background:#efb860}
+.btn-ghost{background:#0a2324a6;color:var(--ivory);border-color:#c9a35b80}
+.btn-ghost:hover{background:#c9a35b26}
+.btn-sm{min-height:44px;padding:9px 18px;font-size:13px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 14px/1.5 var(--caps);border:0;background:transparent;color:var(--brass-ink);letter-spacing:.08em;padding:8px 2px;text-decoration:underline;text-decoration-color:#c9a35b80;text-underline-offset:6px}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(38px,10.5vw,66px)/1.1 var(--display);letter-spacing:.07em;overflow-wrap:anywhere;text-wrap:balance}
+.names>span{display:block}
+.names .amp{display:block;font:400 .5em/1.6 var(--serif);letter-spacing:0;color:var(--saffron)}
+.names.long-names>span{white-space:normal;overflow-wrap:anywhere}
+
+/* photo slots: placeholders are the teal wall, blurred; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:#173e3f}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 12px/1.4 var(--caps);color:#f6ead2;text-align:center;letter-spacing:.06em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+
+/* the lantern's glow: borderless light (docs/11 §5.7), a slow uneven flicker like a flame behind pierced brass */
+.lantern-glow{position:absolute;left:50%;top:0;width:min(150vw,980px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:0;
+mix-blend-mode:screen;background:radial-gradient(circle,#ff9a3c80 0%,#f78f384d 16%,#e9853224 34%,#e985320d 50%,transparent 64%);animation:flicker 5.2s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:.86;filter:brightness(1)}
+18%{opacity:1;filter:brightness(1.08)}
+31%{opacity:.8}
+47%{opacity:.95;filter:brightness(1.04)}
+62%{opacity:.84}
+80%{opacity:1;filter:brightness(1.1)}}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#0a2324f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:400 13px/1 var(--caps);letter-spacing:.1em;color:var(--muted)}
+.site-nav a[aria-current]{color:var(--saffron);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#e3a54a99}
+
+/* ---------------------------------------------------------------- the doors (index) */
+.page-opening{padding-bottom:0}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#0a2324b3;border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:50px 20px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening-heading{position:relative;z-index:3;max-width:100%}
+.opening-heading>.eyebrow:first-child{margin-bottom:16px}
+.opening .names{font-size:clamp(34px,9.5vw,56px);text-shadow:0 2px 18px #0009}
+.opening-date{margin-top:12px}
+/* stage = the doorway: two leaves of LEAF 0.38 side by side (manifest stage.pair_aspect .76) */
+.stage{--obj:min(66vw,calc(48svh * .76),330px);position:relative;width:var(--obj);margin:30px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent}
+.stage .lantern-glow{top:-6%;width:260%;z-index:0}
+.riad{position:relative;width:100%;aspect-ratio:.76;perspective:1100px;perspective-origin:50% 45%;z-index:1}
+.riad>img,.riad>.card,.riad>.pour{position:absolute}
+.court{inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:brightness(.42) saturate(.8)}
+/* the light that pours out through the open doors (borderless gradient, screen blend) */
+.pour{left:-55%;right:-55%;top:-25%;bottom:-35%;z-index:5;pointer-events:none;opacity:0;mix-blend-mode:screen;
+background:radial-gradient(ellipse 34% 46% at 50% 52%,#ffd690c4 0%,#f6bb6270 38%,#e3a54a24 64%,transparent 82%)}
+.riad>.card{left:15%;top:10%;width:70%;height:80%;z-index:2;transform:scale(.84);filter:brightness(.5);transform-origin:50% 60%;view-transition-name:none}
+.card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card-copy{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8% 9%;color:var(--cedar);text-align:center}
+.card-photo{width:58%;aspect-ratio:4/5;flex:none;margin-bottom:6px}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor{display:grid;place-items:center;height:100%;background:#e9dcc0}
+.card-photo .ty-decor img{width:56%}
+.card-copy .eyebrow{font-size:8px;letter-spacing:.14em;color:var(--cedar-soft)}
+.card-names{font:400 clamp(12px,3.6vw,18px)/1.15 var(--display);letter-spacing:.04em;color:var(--cedar);overflow-wrap:anywhere}
+.door{top:0;height:100%;width:50%;z-index:3;backface-visibility:hidden;filter:drop-shadow(0 10px 16px #0008)}
+.door-l{left:0;transform-origin:0 50%}
+.door-r{right:0;transform-origin:100% 50%}
+.opening-actions{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:24px;min-height:60px;position:relative;z-index:7}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+/* the opening — the same numbers as MOTION.envelope in site.js */
+.is-opening .opening-heading{animation:away 450ms ease-in forwards}
+.is-opening .riad{animation:tug 250ms ease-out}
+.is-opening .stage .lantern-glow{animation:flare 900ms ease-out forwards}
+.is-opening .door-l{animation:swing-l 900ms 300ms cubic-bezier(.45,.05,.3,1) forwards}
+.is-opening .door-r{animation:swing-r 900ms 420ms cubic-bezier(.45,.05,.3,1) forwards}
+.is-opening .court{animation:court-lit 1000ms 900ms ease-out forwards}
+.is-opening .pour{animation:pour 1000ms 900ms ease-out forwards}
+.is-opening .riad>.card{animation:card-rise 1200ms 1900ms cubic-bezier(.35,0,.2,1) forwards,card-forward 350ms 3100ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opened .opening-heading{display:none}
+.is-opened .door-l{transform:rotateY(76deg);filter:brightness(.5) drop-shadow(0 10px 16px #0008)}
+.is-opened .door-r{transform:rotateY(-76deg);filter:brightness(.5) drop-shadow(0 10px 16px #0008)}
+.is-opened .court{filter:brightness(1.04) saturate(1)}
+.is-opened .pour{opacity:.72}
+.is-opened .riad>.card{z-index:6;transform:translateY(-5%) scale(1.1);filter:drop-shadow(0 18px 24px #000a);view-transition-name:invite-card}
+@keyframes away{to{opacity:0;transform:translateY(-24px)}}
+@keyframes tug{40%{transform:scale(.985)}}
+@keyframes flare{40%{opacity:1;filter:brightness(1.35)}
+100%{opacity:1;filter:brightness(1.15)}}
+@keyframes swing-l{from{transform:rotateY(0);filter:brightness(1) drop-shadow(0 10px 16px #0008)}
+to{transform:rotateY(76deg);filter:brightness(.5) drop-shadow(0 10px 16px #0008)}}
+@keyframes swing-r{from{transform:rotateY(0);filter:brightness(1) drop-shadow(0 10px 16px #0008)}
+to{transform:rotateY(-76deg);filter:brightness(.5) drop-shadow(0 10px 16px #0008)}}
+@keyframes court-lit{to{filter:brightness(1.04) saturate(1)}}
+@keyframes pour{0%{opacity:0}
+55%{opacity:1}
+100%{opacity:.72}}
+@keyframes card-rise{from{transform:scale(.84);filter:brightness(.5)}
+to{transform:translateY(-2%) scale(1);filter:brightness(1)}}
+@keyframes card-forward{from{z-index:6;transform:translateY(-2%) scale(1);filter:drop-shadow(0 6px 8px #0008)}
+to{z-index:6;transform:translateY(-5%) scale(1.1);filter:drop-shadow(0 18px 24px #000a)}}
+
+/* ---------------------------------------------------------------- home */
+.lantern-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:58px 20px calc(var(--nav-h) + 18px);isolation:isolate;overflow:clip}
+.lantern-hero .lantern-glow{top:12%}
+.hero-card{position:relative;z-index:1;width:min(84vw,400px);view-transition-name:invite-card;filter:drop-shadow(0 16px 26px #0009)}
+.hero-copy{position:relative;padding:9% 9% 10%;color:var(--cedar)}
+.hero-photo{width:62%;aspect-ratio:4/5;margin:0 auto 16px}
+.hero-photo>img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.hero-copy .eyebrow{color:var(--cedar-soft);font-size:11px}
+/* on the card the names run on one line ("Leila & Adrian") and wrap when long — never squeezed below 30 px */
+.hero-card .names{font-size:clamp(30px,8.4vw,44px);margin:8px 0 6px;color:var(--cedar)}
+.hero-card .names>span,.hero-card .names .amp{display:inline-block;max-width:100%;vertical-align:baseline}
+.hero-card .names .amp{font-size:.62em;color:#9a5a1c;margin:0 .3em}
+.hero-date{display:flex;flex-direction:column;gap:4px;font:400 17px/1.4 var(--serif)}
+.hero-date small{font:400 12px/1.6 var(--caps);letter-spacing:.12em;color:var(--cedar-soft);overflow-wrap:anywhere}
+.hero-more{position:relative;z-index:1;margin-top:22px}
+/* the zellige row (preset "tile": each tile drops into its place, turning square) */
+.zellige{display:flex;justify-content:center;gap:5px;padding:30px 16px;overflow:clip}
+.zellige>img{width:38px;height:38px;flex:none;filter:drop-shadow(0 2px 3px #0007)}
+.invitation{max-width:640px;margin:0 auto;padding:30px 26px 70px;text-align:center}
+.invitation .host{max-width:300px;margin:0 auto 18px}
+.invitation h2{margin-bottom:24px;text-shadow:0 2px 14px #0008}
+.formal-names{font:400 27px/1.35 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{color:var(--saffron);font-size:22px}
+.invitation .body-text{max-width:360px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:28px auto 6px;color:var(--brass-ink)}
+.date-block>span{font:400 12px/1.8 var(--caps);letter-spacing:.2em}
+.date-block b{font:400 32px/1.2 var(--display);letter-spacing:.05em;color:var(--saffron)}
+.venue-name{font:400 23px/1.35 var(--caps);margin-top:16px;overflow-wrap:anywhere}
+.invitation .btn{margin:24px 0 12px}
+.countdown{max-width:350px;margin:32px auto}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 30px/1.4 var(--display);color:var(--saffron);font-variant-numeric:tabular-nums}
+.cd-row small{font:400 10px/1.7 var(--caps);letter-spacing:.1em}
+.countdown.is-done .cd-row{display:none}
+.calendar{margin:24px auto 0;text-align:center}
+.calendar>.eyebrow{margin-bottom:10px}
+.windows-teaser{padding:56px 22px 60px;text-align:center;background:linear-gradient(#0a232400,#0a2324b3 30%,#0a2324b3 70%,#0a232400)}
+.teaser-text h2{margin:8px 0 26px}
+.teaser-windows{display:flex;justify-content:center;gap:12px;margin:0 auto 18px}
+.teaser-windows .window{width:min(26vw,150px);aspect-ratio:2/3}
+.teaser-windows .window:nth-child(2){margin-top:-18px}
+.court-band{position:relative;isolation:isolate;text-align:center;padding:88px 24px;overflow:clip}
+.band-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.court-band::after{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 0%,#e3a54a33,transparent 60%),linear-gradient(#2a1405c7,#1d0e05b8)}
+.court-band h2{font-size:clamp(32px,9.6vw,52px);margin:12px 0 22px;overflow-wrap:anywhere;text-shadow:0 2px 16px #000}
+.day-peek{list-style:none;padding:0;margin:0 auto 30px;max-width:420px;display:grid;gap:6px;font-size:18px}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:400 13px/1 var(--caps);letter-spacing:.12em;color:var(--saffron);margin-left:6px}
+.signature{text-align:center;padding:58px 20px 28px;color:var(--brass-ink)}
+.foot-tile{width:44px;height:44px;margin:0 auto 16px;filter:drop-shadow(0 3px 5px #0009)}
+.sig-names{font:400 23px/1.3 var(--display);letter-spacing:.05em;margin:8px 0 10px;color:var(--ivory);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- light through the windows (preset "light") */
+/* a window waits in the dark; when its scene plays a soft beam crosses it once and the photo stays lit */
+.js [data-a=light] img,.js [data-a=light].photo-slot>img{filter:brightness(.3) saturate(.55);transition:filter 1.4s cubic-bezier(.3,.6,.3,1) .25s}
+.js .in[data-a=light] img,.js .in [data-a=light] img{filter:none}
+.window::after,.venue-photo::after{content:'';position:absolute;inset:-10% -60%;pointer-events:none;opacity:0;mix-blend-mode:screen;
+background:linear-gradient(112deg,transparent 38%,#ffd89a8c 50%,transparent 62%);transform:translateX(-70%)}
+.js .in .window::after,.js .in.venue-photo::after,.js .in .venue-photo::after,.js .in>.window::after{animation:beam 1.7s .2s cubic-bezier(.4,0,.2,1) both}
+@keyframes beam{0%{opacity:0;transform:translateX(-70%)}
+25%{opacity:1}
+100%{opacity:0;transform:translateX(70%)}}
+/* and as the page scrolls the lantern light keeps moving across the windows (scroll-driven where supported) */
+@supports (animation-timeline:view()){
+.window::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:soft-light;
+background:linear-gradient(170deg,#ffd89a55,transparent 55%);animation:shaft linear both;animation-timeline:view()}
+@keyframes shaft{from{opacity:.2;transform:translateY(-30%)}
+50%{opacity:.75}
+to{opacity:.15;transform:translateY(30%)}}
+}
+
+/* ---------------------------------------------------------------- story */
+.page-heading{text-align:center;padding:84px 25px 10px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:14px}
+.page-heading h1{margin-bottom:16px;overflow-wrap:anywhere;text-shadow:0 2px 16px #0008}
+.page-heading .intro{max-width:460px;margin:auto}
+.gallery-page{max-width:1100px;margin:auto;position:relative}
+.gallery-grid{padding:0 22px;display:grid;grid-template-columns:1fr 1fr;gap:30px 16px;align-items:start}
+.gallery-item button{width:100%;padding:0;border:0;cursor:zoom-in;aspect-ratio:2/3}
+.item-1{grid-column:1/-1;width:min(76vw,340px);margin:0 auto}
+.item-3{margin-top:34px}
+.gallery-item figcaption{padding-top:12px;font-size:17px;line-height:1.45;text-align:center;overflow-wrap:anywhere}
+.gallery-item figcaption .num{display:block;font:400 11px/1.6 var(--caps);letter-spacing:.2em;color:var(--saffron);margin-bottom:4px}
+.gallery-item figcaption [data-empty]{display:none}
+.lightbox{border:0;padding:52px 18px 18px;background:#0a2324;color:var(--ivory);width:min(900px,94vw);max-height:94svh;overflow:auto}
+.lightbox::backdrop{background:#04100fe8}
+.lightbox>img{width:100%;max-height:64svh;object-fit:contain}
+.lightbox-caption{text-align:center;font-size:18px;margin-top:12px}
+.lightbox-close{position:absolute;top:4px;right:8px;background:none;color:var(--saffron);border:0;width:44px;height:44px;font-size:30px}
+.lightbox-actions{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:12px}
+.lightbox-actions button{background:transparent;border:1px solid var(--line);color:var(--saffron);width:44px;height:44px;font-size:22px;border-radius:100px}
+.lightbox-actions span{font:400 13px var(--caps)}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto;padding:0 26px}
+.details-page .page-heading{padding-inline:0}
+.venue-name+.eyebrow{margin-top:6px}
+.details-split{display:grid;gap:44px}
+.programme h2{font-size:26px}
+.schedule{list-style:none;margin:26px 0 0;padding:0}
+.schedule li{display:grid;grid-template-columns:74px 1fr;gap:14px;padding:0 0 26px}
+.schedule time{font:400 14px/1.8 var(--caps);color:var(--saffron);padding-top:3px;letter-spacing:.06em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:16px;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.ceremony{font-size:17px;color:var(--muted);margin-top:6px}
+.programme .calendar{text-align:left;margin-top:26px}
+.programme .button-row{justify-content:flex-start}
+.venue-photo{aspect-ratio:16/9;margin-bottom:18px}
+.venue-line{font-size:18px;overflow-wrap:anywhere}
+.map-section{margin-top:20px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin-top:44px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:25px;margin-bottom:14px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin-top:44px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:20px;padding:7px 28px 7px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--saffron);font:400 20px/1 var(--caps)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:12px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{position:relative;max-width:680px;margin:auto;padding:0 22px;overflow-x:clip}
+.rsvp-page>.lantern-glow{top:40px}
+.rsvp-page .page-heading{position:relative;padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:14px}
+.reply-cta{margin-top:22px}
+.reply-card{position:relative;padding:30px 22px;background:#0a2324d9;border-radius:14px}
+.form-title{font-size:26px;text-align:center;margin-bottom:20px}
+.reply-form{font:400 16px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:400 14px/1.6 var(--caps);letter-spacing:.05em;color:var(--brass-ink);overflow-wrap:anywhere}
+.opt{color:var(--muted);font-size:12px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #c9a35b80;background:#06191a99;color:var(--ivory);min-height:48px;padding:12px;border-radius:8px;font:400 16px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ivory);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--saffron);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#ffc2a8;font:400 14px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#ffc2a8!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 16px/1.8 var(--serif)}
+.panel-title{font:400 26px/1.3 var(--display);margin-bottom:8px}
+.reply-panel[data-rsvp-state=error]{color:#ffc2a8}
+.reply-panel[data-rsvp-state=preview]{color:var(--brass-ink);border-top:1px solid var(--line);margin-top:18px}
+.note{color:var(--muted)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:22px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+.js [data-step]{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.js [data-step].in{opacity:1;transform:none}
+.js [data-step][data-a=tile]{transform:translateY(-12px) rotate(-12deg) scale(.55);transition:opacity .5s ease-out,transform .7s cubic-bezier(.3,1.4,.5,1)}
+.js [data-step][data-a=tile].in{transform:none}
+.from-envelope .hero-card [data-step]{opacity:1;transform:none;transition:none}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+
+@media(min-width:760px){
+.zellige>img{width:50px;height:50px}
+.invitation{padding-bottom:96px}
+.teaser-windows .window{width:150px}
+.gallery-grid{grid-template-columns:repeat(3,1fr);gap:40px 34px;padding:0 60px}
+.item-1{grid-column:auto;width:auto;margin:0}
+.item-2{margin-top:-28px}
+.item-3{margin-top:0}
+.gallery-item figcaption{font-size:19px}
+.details-split{grid-template-columns:1fr 1fr;gap:64px}
+.detail-notes{grid-template-columns:repeat(3,1fr)}
+.page-heading{padding-top:116px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:359px){
+.lantern-hero{padding-inline:14px}
+.rsvp-page{padding-inline:14px}
+.reply-card{padding:24px 14px}
+.gallery-grid{padding-inline:14px;gap:24px 12px}
+.details-page{padding-inline:18px}
+.schedule li{grid-template-columns:62px 1fr;gap:10px}
+.cd-row{gap:8px}
+.zellige{gap:3px}
+.zellige>img{width:34px;height:34px}
+.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.05em}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:40px}
+.opening .names{font-size:clamp(30px,8.6vw,46px)}
+.stage{margin-top:20px}
+.lantern-hero{padding-top:40px}
+.hero-photo{width:40%}
+.hero-more{display:none}
+}
+/* very short phones (375×553 with Safari's bars): the card stays above the nav even with a 60-character venue */
+@media(max-height:600px) and (max-width:759px){
+.lantern-hero{padding-top:26px}
+.hero-photo{width:32%;margin-bottom:10px}
+.hero-copy{padding:7% 8% 8%}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.lantern-glow{animation:none!important}
+.window::before{display:none}
+.js [data-step]{opacity:1!important;transform:none!important}
+.js [data-a=light] img{filter:none!important}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}

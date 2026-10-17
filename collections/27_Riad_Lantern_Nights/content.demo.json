@@ -1,0 +1,117 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Leila",
+      "full_name": "Leila Amira Haddad"
+    },
+    {
+      "display_name": "Adrian",
+      "full_name": "Adrian James Whitfield"
+    }
+  ],
+  "name_display": "Leila & Adrian",
+  "initials": "L&A",
+  "host_line": "Together with their families",
+  "date": "2027-10-09",
+  "ceremony_time": "18:00",
+  "timezone": "Africa/Casablanca",
+  "venue": {
+    "name": "The Saffron Courtyard Riad",
+    "city": "Marrakech",
+    "region": "Marrakech-Safi",
+    "country": "Morocco",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony in the courtyard",
+      "time": "18:00",
+      "location": "The orange-tree courtyard"
+    },
+    {
+      "label": "Mint tea at sunset",
+      "time": "19:00",
+      "location": "The rooftop terrace"
+    },
+    {
+      "label": "Lantern-lit dinner & dancing",
+      "time": "20:30",
+      "location": "The great salon"
+    }
+  ],
+  "dress_code": "Evening attire",
+  "rsvp": {
+    "deadline": "2027-08-15",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Lamb"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Lantern-lit evenings, long walks through old streets and one starry night led us to",
+    "items": [
+      {
+        "caption": "Our first evening"
+      },
+      {
+        "caption": "Among the lanterns"
+      },
+      {
+        "caption": "Yes, under the stars"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

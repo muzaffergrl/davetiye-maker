@@ -73,6 +73,9 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ['Champagne at golden hour', 'Gün batımında şampanya', 'Champán a la hora dorada', 'Champagner zur goldenen Stunde', "Champagne à l'heure dorée"],
   ['Candlelit dinner & dancing', 'Mum ışığında akşam yemeği ve dans', 'Cena a la luz de las velas y baile', 'Abendessen bei Kerzenschein & Tanz', 'Dîner aux chandelles et soirée dansante'],
   ['Ceremony on the lake terrace', 'Göl terasında tören', 'Ceremonia en la terraza del lago', 'Trauung auf der Seeterrasse', 'Cérémonie sur la terrasse du lac'],
+  ['Ceremony in the courtyard', 'Avluda tören', 'Ceremonia en el patio', 'Trauung im Innenhof', 'Cérémonie dans la cour'],
+  ['Mint tea at sunset', 'Gün batımında nane çayı', 'Té de menta al atardecer', 'Minztee bei Sonnenuntergang', 'Thé à la menthe au coucher du soleil'],
+  ['Lantern-lit dinner & dancing', 'Fener ışığında akşam yemeği ve dans', 'Cena a la luz de los faroles y baile', 'Abendessen im Laternenlicht & Tanz', 'Dîner à la lueur des lanternes et soirée dansante'],
 
   // ---- dress code
   ['Dress code', 'Kıyafet kuralı', 'Código de vestimenta', 'Dresscode', 'Code vestimentaire'],
@@ -85,6 +88,7 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ['Formal attire', 'Resmi kıyafet', 'Vestimenta formal', 'Festliche Kleidung', 'Tenue habillée'],
   ['Semi-formal', 'Yarı resmi', 'Semiformal', 'Elegant', 'Tenue de ville chic'],
   ['Cocktail attire', 'Kokteyl kıyafeti', 'Vestimenta de cóctel', 'Cocktailkleidung', 'Tenue de cocktail'],
+  ['Evening attire', 'Gece kıyafeti', 'Vestimenta de noche', 'Abendgarderobe', 'Tenue de soirée'],
   ['Smart casual', 'Şık günlük', 'Elegante informal', 'Smart Casual', 'Chic décontracté'],
   ['Casual', 'Günlük', 'Informal', 'Leger', 'Décontracté'],
   ['Garden formal', 'Bahçe şıklığı', 'Elegante de jardín', 'Festlich im Gartenstil', 'Chic champêtre'],

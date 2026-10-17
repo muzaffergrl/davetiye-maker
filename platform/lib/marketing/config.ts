@@ -157,6 +157,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 27 (G165): theme built before its GPT parts (interim pieces); never shown until approved and live.
+    {
+      id: 'riad-lantern-nights',
+      name: 'Riad Lantern Nights',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

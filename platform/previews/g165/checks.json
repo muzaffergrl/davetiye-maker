@@ -1,0 +1,885 @@
+{
+ "base": "next start (production build)",
+ "theme": "riad-lantern-nights",
+ "errors": [],
+ "warnings": [
+  "setup: no PAKET 2 photos in collections/27_Riad_Lantern_Nights/assets/gpt/photos: using the 03 sample photos"
+ ],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 86 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 3 families (Cinzel, Marcellus, Marcellus SC), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback)))",
+  "index@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@360: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@360: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@430: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@430: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@768: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@768: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@1280: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@1280: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots placeholder",
+  "story@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 20 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots preview-placeholder",
+  "envelope closed @360×640: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 4 texts (eyebrow, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (12 pieces, no CTA in the hero, names 30.2 px) ends at 466, above the nav (top 579)",
+  "home@360×640: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @375×553: home-hero (12 pieces, no CTA in the hero, names 31.5 px) ends at 399, above the nav (top 492)",
+  "home@375×553: no overflow, 25 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @360×640 (design range): names 30 px (≥ 30); nothing partly under the nav (top 579): the first screen ends at 553",
+  "home@360×640 (design range): no overflow, 31 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @375×553 (design range): names 30 px (≥ 30); nothing partly under the nav (top 492): the first screen ends at 474",
+  "home@375×553 (design range): no overflow, 31 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @360×640 (stress record): names 30 px (≥ 30); the first screen scrolls (allowed for the §12 record)",
+  "home@360×640 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "home @375×553 (stress record): names 30 px (≥ 30); the first screen scrolls (allowed for the §12 record)",
+  "home@375×553 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 56×44, home \"Replay the envelope\" 166×44, rsvp \"Replay the envelope\" 144×44",
+  "envelope → /leila-and-adrian/home in 3696 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (1 steps)",
+  "countdown target from the platform: 2027-10-09 18:00 Africa/Casablanca = 2027-10-09 17:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-10-09T18:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-10-14T17:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (113 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390 (changed content): no overflow, 27 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots user",
+  "story@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots placeholder",
+  "story@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 41 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 39 fields = content record, 27 design texts, title ok, images loaded, no painted card, 4 photo slots placeholder",
+  "story@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 41 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 33 fields = content record, 12 design texts, title ok, images loaded, no painted card, 3 photo slots thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 36 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 33 fields = content record, 12 design texts, title ok, images loaded, no painted card, 3 photo slots thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 86 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 374 KB",
+  "home first view (390×844, DPR 3, placeholders): 211 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 464 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 749 KB",
+  "recording: previews/g165/opening_390x844.mp4 (2283 KB, lead-in 0.45 s cut, first frame mean 55,69,61) — tap → opening → home → story → details"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections/27_Riad_Lantern_Nights",
+   "demo_record": "platform/themes/riad-lantern-nights/content.demo.json",
+   "photos": "collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback))",
+   "w1_comps": [],
+   "compare": "none",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (no free_zone in img/manifest.json)",
+   "fonts": [
+    "Cinzel 400/500",
+    "Marcellus",
+    "Marcellus SC"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 86,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (193 KB, 1024×1280, variants 640)",
+   "story_1 → media.memory_photos.0 (246 KB, 1024×1536, variants 640)",
+   "story_2 → media.memory_photos.1 (258 KB, 1024×1536, variants 640)",
+   "story_3 → media.memory_photos.2 (220 KB, 1024×1536, variants 640)",
+   "venue → media.venue_image (375 KB, 1536×864, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.19,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.19,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.16,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.16,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.14,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.19,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.19,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.15,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.15,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.17,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.19,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.17,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.12,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.12,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.14,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.16,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.14,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.16,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.21,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.22,
+      "dark": 0.022
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 466,
+    "above": 466,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30.2
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 399,
+    "above": 399,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 31.5
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 14,
+    "lowest": 672,
+    "above": 0,
+    "below": 392,
+    "cta": {
+     "text": "A celebration to rem",
+     "bottom": 672
+    },
+    "bad": [
+     "div.hero-card bottom 602",
+     "div.hero-photo.photo-slot bottom 348",
+     "p.eyebrow \"Our wedding\" bottom 384",
+     "span \"Leila\" bottom 440",
+     "span.amp \"&\" bottom 442",
+     "span \"Adrian\" bottom 490",
+     "span \"Saturday, October 9, 202\" bottom 520",
+     "span \"Saturday\" bottom 518",
+     "span.nowrap \"October 9, 2027\" bottom 518",
+     "small \"The Saffron Courtyard Ri\" bottom 562",
+     "span \"The Saffron Courtyard Ri\" bottom 541",
+     "span \"Marrakech, Marrakech-Saf\" bottom 560",
+     "a.btn.btn-ghost bottom 672",
+     "span \"A celebration to remembe\" bottom 658"
+    ],
+    "partly": [
+     "div.hero-card 58–602",
+     "div.hero-photo.photo-slot 94–348",
+     "p.eyebrow \"Our wedding\" 364–384"
+    ],
+    "names": 44
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 428,
+    "above": 276,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 428",
+     "span \"Adrian\" bottom 324",
+     "span \"Saturday, October 9, 202\" bottom 354",
+     "span \"Saturday\" bottom 352",
+     "span.nowrap \"October 9, 2027\" bottom 352",
+     "small \"The Saffron Courtyard Ri\" bottom 396",
+     "span \"The Saffron Courtyard Ri\" bottom 375",
+     "span \"Marrakech, Marrakech-Saf\" bottom 394"
+    ],
+    "partly": [
+     "div.hero-card 26–428",
+     "span \"Adrian\" 276–324",
+     "span \"Saturday, October 9, 202\" 330–354",
+     "span \"Saturday\" 330–352",
+     "span.nowrap \"October 9, 2027\" 330–352",
+     "small \"The Saffron Courtyard Ri\" 358–396",
+     "span \"The Saffron Courtyard Ri\" 360–375",
+     "span \"Marrakech, Marrakech-Saf\" 360–394"
+    ],
+    "names": 44
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 553,
+    "above": 553,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 474,
+    "above": 474,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 14,
+    "lowest": 693,
+    "above": 0,
+    "below": 392,
+    "cta": {
+     "text": "A celebration to rem",
+     "bottom": 693
+    },
+    "bad": [
+     "div.hero-card bottom 623",
+     "div.hero-photo.photo-slot bottom 348",
+     "p.eyebrow \"Our wedding\" bottom 384",
+     "span \"Alexandrina Rose\" bottom 425",
+     "span.amp \"&\" bottom 459",
+     "span \"Maximilian James\" bottom 492",
+     "span \"Wednesday, 29 September \" bottom 522",
+     "span \"Wednesday\" bottom 520",
+     "span.nowrap \"29 September 2027\" bottom 520",
+     "small \"The Orangery and Walled \" bottom 583",
+     "span \"The Orangery and Walled \" bottom 562",
+     "span \"Marrakech, Marrakech-Saf\" bottom 581",
+     "a.btn.btn-ghost bottom 693",
+     "span \"A celebration to remembe\" bottom 679"
+    ],
+    "partly": [
+     "div.hero-card 58–623",
+     "div.hero-photo.photo-slot 94–348",
+     "p.eyebrow \"Our wedding\" 364–384"
+    ],
+    "names": 30
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 416,
+    "above": 293,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 416",
+     "span \"Wednesday, 29 September \" bottom 323",
+     "span \"Wednesday\" bottom 321",
+     "span.nowrap \"29 September 2027\" bottom 321",
+     "small \"The Orangery and Walled \" bottom 384",
+     "span \"The Orangery and Walled \" bottom 363",
+     "span \"Marrakech, Marrakech-Saf\" bottom 382"
+    ],
+    "partly": [
+     "div.hero-card 26–416",
+     "span \"Wednesday, 29 September \" 299–323",
+     "span \"Wednesday\" 299–321",
+     "span.nowrap \"29 September 2027\" 299–321",
+     "small \"The Orangery and Walled \" 327–384",
+     "span \"The Orangery and Walled \" 329–363",
+     "span \"Marrakech, Marrakech-Saf\" 348–382"
+    ],
+    "names": 30
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 707,
+    "above": 566,
+    "below": 640,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 707",
+     "span \"Saturday, October 9, 202\" bottom 596",
+     "span \"Saturday\" bottom 594",
+     "span.nowrap \"October 9, 2027\" bottom 594",
+     "small \"The Grand Rosewater Cons\" bottom 676",
+     "span \"The Grand Rosewater Cons\" bottom 655",
+     "span \"Marrakech, Marrakech-Saf\" bottom 674"
+    ],
+    "partly": [
+     "div.hero-card 40–707",
+     "span \"Saturday, October 9, 202\" 572–596",
+     "span \"Saturday\" 572–594",
+     "span.nowrap \"October 9, 2027\" 572–594",
+     "small \"The Grand Rosewater Cons\" 600–676",
+     "span \"The Grand Rosewater Cons\" 602–655"
+    ],
+    "names": 30
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 658,
+    "above": 390,
+    "below": 556,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 658",
+     "span \"Maximilian Alexander Fit\" bottom 522",
+     "span \"Saturday, October 9, 202\" bottom 552",
+     "span \"Saturday\" bottom 550",
+     "span.nowrap \"October 9, 2027\" bottom 550",
+     "small \"The Grand Rosewater Cons\" bottom 633",
+     "span \"The Grand Rosewater Cons\" bottom 612",
+     "span \"Marrakech, Marrakech-Saf\" bottom 631"
+    ],
+    "partly": [
+     "div.hero-card 26–658",
+     "span \"Maximilian Alexander Fit\" 390–522",
+     "span \"Saturday, October 9, 202\" 528–552",
+     "span \"Saturday\" 528–550",
+     "span.nowrap \"October 9, 2027\" 528–550"
+    ],
+    "names": 30
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 14,
+    "lowest": 891,
+    "above": 0,
+    "below": 392,
+    "cta": {
+     "text": "A celebration to rem",
+     "bottom": 891
+    },
+    "bad": [
+     "div.hero-card bottom 821",
+     "div.hero-photo.photo-slot bottom 348",
+     "p.eyebrow \"Our wedding\" bottom 384",
+     "span \"Charlotte-Elizabeth Anne\" bottom 524",
+     "span.amp \"&\" bottom 558",
+     "span \"Maximilian Alexander Fit\" bottom 690",
+     "span \"Saturday, October 9, 202\" bottom 720",
+     "span \"Saturday\" bottom 718",
+     "span.nowrap \"October 9, 2027\" bottom 718",
+     "small \"The Grand Rosewater Cons\" bottom 781",
+     "span \"The Grand Rosewater Cons\" bottom 760",
+     "span \"Marrakech, Marrakech-Saf\" bottom 779",
+     "a.btn.btn-ghost bottom 891",
+     "span \"A celebration to remembe\" bottom 877"
+    ],
+    "partly": [
+     "div.hero-card 58–821",
+     "div.hero-photo.photo-slot 94–348",
+     "p.eyebrow \"Our wedding\" 364–384"
+    ],
+    "names": 30
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 12,
+    "lowest": 614,
+    "above": 218,
+    "below": 497,
+    "cta": null,
+    "bad": [
+     "div.hero-card bottom 614",
+     "span \"Charlotte-Elizabeth Anne\" bottom 325",
+     "span.amp \"&\" bottom 359",
+     "span \"Maximilian Alexander Fit\" bottom 491",
+     "span \"Saturday, October 9, 202\" bottom 521",
+     "span \"Saturday\" bottom 519",
+     "span.nowrap \"October 9, 2027\" bottom 519",
+     "small \"The Grand Rosewater Cons\" bottom 582",
+     "span \"The Grand Rosewater Cons\" bottom 561",
+     "span \"Marrakech, Marrakech-Saf\" bottom 580"
+    ],
+    "partly": [
+     "div.hero-card 26–614",
+     "span \"Charlotte-Elizabeth Anne\" 226–325",
+     "span.amp \"&\" 329–359",
+     "span \"Maximilian Alexander Fit\" 359–491"
+    ],
+    "names": 30
+   }
+  ],
+  "envelope_to_home_ms": 3696,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 86,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 374,
+  "first_view_index_files": [
+   [
+    "/themes/riad-lantern-nights/img/court-880.webp",
+    94202
+   ],
+   [
+    "/themes/riad-lantern-nights/img/door_r-477.webp",
+    55990
+   ],
+   [
+    "/themes/riad-lantern-nights/img/door_l-477.webp",
+    52422
+   ],
+   [
+    "/themes/riad-lantern-nights/img/card_paper-878.webp",
+    33900
+   ],
+   [
+    "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+    25904
+   ],
+   [
+    "/themes/riad-lantern-nights/site.css",
+    24482
+   ],
+   [
+    "https://fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+    14552
+   ],
+   [
+    "https://fonts.gstatic.com/s/marcellussc/v14/ke8iOgUHP1dg-Rmi6RWjbLE_htac.woff2",
+    14508
+   ]
+  ],
+  "first_view_home_kb_placeholders": 211,
+  "first_view_home_files": [
+   [
+    "/themes/riad-lantern-nights/img/court_band-1024.webp",
+    51956
+   ],
+   [
+    "/themes/riad-lantern-nights/img/card_paper-878.webp",
+    33900
+   ],
+   [
+    "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+    25904
+   ],
+   [
+    "/themes/riad-lantern-nights/site.css",
+    24482
+   ],
+   [
+    "https://fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+    14552
+   ],
+   [
+    "https://fonts.gstatic.com/s/marcellussc/v14/ke8iOgUHP1dg-Rmi6RWjbLE_htac.woff2",
+    14508
+   ],
+   [
+    "/no-photos/home",
+    13990
+   ],
+   [
+    "/themes/riad-lantern-nights/site.js",
+    11376
+   ]
+  ],
+  "first_view_index_kb_photos": 464,
+  "first_view_index_files_photos": [
+   [
+    "/themes/riad-lantern-nights/img/court-880.webp",
+    94202
+   ],
+   [
+    "/media/02392e45-5636-4550-a18d-24599469f48e/ca9c978cc08c8c4685dd484184d5a8fa-640w.jpg",
+    93978
+   ],
+   [
+    "/themes/riad-lantern-nights/img/door_r-477.webp",
+    55990
+   ],
+   [
+    "/themes/riad-lantern-nights/img/door_l-477.webp",
+    52422
+   ],
+   [
+    "/themes/riad-lantern-nights/img/card_paper-878.webp",
+    33900
+   ],
+   [
+    "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+    25904
+   ],
+   [
+    "/themes/riad-lantern-nights/site.css",
+    24482
+   ],
+   [
+    "https://fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF81VvoK.woff2",
+    14552
+   ]
+  ],
+  "first_view_home_kb_photos": 749,
+  "first_view_home_files_photos": [
+   [
+    "/media/02392e45-5636-4550-a18d-24599469f48e/ca9c978cc08c8c4685dd484184d5a8fa-1024w.jpg",
+    198076
+   ],
+   [
+    "/media/02392e45-5636-4550-a18d-24599469f48e/e1cf92f6416f73b09d97b27e623d7e12-640w.jpg",
+    128510
+   ],
+   [
+    "/media/02392e45-5636-4550-a18d-24599469f48e/7186c122735521fc088cc953b346c112-640w.jpg",
+    121713
+   ],
+   [
+    "/media/02392e45-5636-4550-a18d-24599469f48e/28a1d9de25abd7a47b8d0d2c3b32b2f1-640w.jpg",
+    103468
+   ],
+   [
+    "/themes/riad-lantern-nights/img/court_band-1024.webp",
+    51956
+   ],
+   [
+    "/themes/riad-lantern-nights/img/card_paper-878.webp",
+    33900
+   ],
+   [
+    "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+    25904
+   ],
+   [
+    "/themes/riad-lantern-nights/site.css",
+    24482
+   ]
+  ],
+  "video_kb": 2283,
+  "video_first_frame": {
+   "lead_in_s": 0.45,
+   "mean_rgb": [
+    55,
+    69,
+    61
+   ],
+   "stdev": 29
+  },
+  "compare": {
+   "source": "none",
+   "pages": []
+  }
+ }
+}
