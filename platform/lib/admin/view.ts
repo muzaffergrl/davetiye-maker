@@ -42,6 +42,8 @@ export interface AdminSiteSummary {
   place: string | null;
   /** Made by the shop in the admin ("Yeni sipariş"), not by the buyer on /start. */
   madeByShop: boolean;
+  /** G145: until when the shop's own edit link works (null: none open). */
+  shopEditUntil: string | null;
 }
 
 export interface AdminCounts {
@@ -140,7 +142,7 @@ export function isSale(s: AdminSiteSummary): boolean {
 }
 
 export interface AdminTodo {
-  kind: 'confirm' | 'not_published' | 'closing' | 'unpublished_changes';
+  kind: 'confirm' | 'shop_edit' | 'not_published' | 'closing' | 'unpublished_changes';
   site: AdminSiteSummary;
   /** Turkish one-liner for the shop. */
   text: string;
@@ -191,6 +193,10 @@ export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = ne
   const todos: AdminTodo[] = [];
   for (const s of list) {
     if (s.needsAction) todos.push({ kind: 'confirm', site: s, text: `Sipariş #${s.orderRef ?? '—'} onay bekliyor` });
+  }
+  // G145: a shop edit link left open (setup service): close it when the work is done.
+  for (const s of list) {
+    if (s.shopEditUntil) todos.push({ kind: 'shop_edit', site: s, text: 'Dükkân düzenleme linki açık — iş bittiyse kapatıp "Kurulum bitti" mesajını gönderin' });
   }
   for (const s of list) {
     if (s.state === 'draft' && !s.firstPublishedAt && !s.needsAction && isSale(s) && t - Date.parse(s.createdAt) > NOT_PUBLISHED_AFTER_DAYS * DAY_MS) {

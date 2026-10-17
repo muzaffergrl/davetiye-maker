@@ -576,6 +576,7 @@ const dict: Dict = {
   'On the {place}, the page titles and when the link is shared.': '{place} üzerinde, sayfa başlıklarında ve bağlantı paylaşıldığında.',
   'On their own': 'Tek başına',
   'On this device': 'Bu cihazda',
+  'On this page': 'Bu sayfada',
   'On your website: {time}': 'Websitenizde: {time}',
   'On {date} at midnight ({city} time) guests start seeing your thank-you page, and replies close.': '{date} gece yarısı ({city} saati) davetliler teşekkür sayfanızı görmeye başlar ve yanıtlar kapanır.',
   'One order starts one website. Questions? Message us on Etsy with your order number.': 'Bir sipariş bir website başlatır. Sorularınız mı var? Sipariş numaranızla bize Etsy\'den mesaj gönderin.',

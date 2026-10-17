@@ -576,6 +576,7 @@ const dict: Dict = {
   'On the {place}, the page titles and when the link is shared.': 'Auf dem Eröffnungsmotiv ({place}), in den Seitentiteln und beim Teilen des Links.',
   'On their own': 'Allein',
   'On this device': 'Auf diesem Gerät',
+  'On this page': 'Auf dieser Seite',
   'On your website: {time}': 'Auf Ihrer Website: {time}',
   'On {date} at midnight ({city} time) guests start seeing your thank-you page, and replies close.': 'Am {date} um Mitternacht (Ortszeit {city}) sehen Gäste Ihre Dankesseite, und die Antworten schließen.',
   'One order starts one website. Questions? Message us on Etsy with your order number.': 'Eine Bestellung startet eine Website. Fragen? Schreiben Sie uns auf Etsy mit Ihrer Bestellnummer.',

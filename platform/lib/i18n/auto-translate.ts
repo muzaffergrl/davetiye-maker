@@ -47,10 +47,33 @@ export async function browserCanTranslate(source: Lang, target: Lang): Promise<b
   const api = translatorApi();
   if (!api) return false;
   try {
-    return (await api.availability({ sourceLanguage: source, targetLanguage: target })) !== 'unavailable';
+    return (await withTimeout(api.availability({ sourceLanguage: source, targetLanguage: target }), BROWSER_PREPARE_MS)) !== 'unavailable';
   } catch {
     return false;
   }
+}
+
+/**
+ * G145: how long the device's translator may take to answer / get ready. A browser that lists the API but cannot
+ * prepare its model (no download, a headless or managed browser) never answered: "Translating…" stayed for ever.
+ * After this the free service is used, as when the device has no translator.
+ */
+export const BROWSER_PREPARE_MS = 15_000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('timeout')), ms);
+    promise.then(
+      (v) => {
+        clearTimeout(timer);
+        resolve(v);
+      },
+      (e) => {
+        clearTimeout(timer);
+        reject(e);
+      },
+    );
+  });
 }
 
 /** Splits a text into pieces of at most `max` UTF-8 bytes, at sentence ends, then at spaces. */
@@ -135,7 +158,7 @@ export async function openTranslator(source: Lang, target: Lang, opts: { allowSe
   const api = translatorApi();
   if (api && (await browserCanTranslate(source, target))) {
     try {
-      const tr = await api.create({ sourceLanguage: source, targetLanguage: target });
+      const tr = await withTimeout(api.create({ sourceLanguage: source, targetLanguage: target }), BROWSER_PREPARE_MS);
       return { engine: 'browser', translate: (text) => tr.translate(text), close: () => tr.destroy?.() };
     } catch {
       /* the device could not prepare it: try the service */

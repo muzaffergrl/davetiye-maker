@@ -9,6 +9,7 @@ import { CONTENT_LIMITS } from '../content/limits.ts';
 import type { ValidationIssue } from '../content/validate.ts';
 import type { RightsView } from './rights.ts';
 import type { PanelCopyEntry } from '../theme/copy.ts';
+import { travelData } from '../theme/extras-block.ts';
 
 export type SiteStatus = 'draft' | 'published';
 
@@ -699,7 +700,12 @@ export function prePublishNotes(
     // Story photos only matter while the Our Story page is on.
     .filter((s) => storyOn || !s.source.startsWith('media.memory_photos.'))
     .map((s) => ({ path: s.source, message: `${s.label}: no photo yet. Guests see a soft placeholder image.` }));
-  const links = LINK_BLOCKS.filter((l) => theme.optionalBlocks.includes(l.block) && blocks[l.block] === true && !content.urls?.[l.url]).map((l) => ({
+  // G145: Travel & stay also shows with only "Getting here" notes or places to stay (G138) — no link needed then.
+  const travel = travelData(content);
+  const travelFilled = travel.transport.length > 0 || travel.stays.length > 0;
+  const links = LINK_BLOCKS.filter(
+    (l) => theme.optionalBlocks.includes(l.block) && blocks[l.block] === true && !content.urls?.[l.url] && !(l.block === 'travel_stay' && travelFilled),
+  ).map((l) => ({
     path: `urls.${l.url}`,
     message: `${l.label} is on but has no link yet, so guests do not see it.`,
   }));

@@ -10,6 +10,7 @@ import { getDataAdapter } from '../../../lib/data/index.ts';
 import { publicOrigin } from '../../../lib/panel/http.ts';
 import { panelState } from '../../../lib/panel/state.ts';
 import { authorizeEditor } from '../../../lib/rsvp/couple.ts';
+import { isShopEditKey } from '../../../lib/sites.ts';
 import { uiLocale } from '../../../lib/i18n/server.ts';
 
 export const dynamic = 'force-dynamic';
@@ -35,5 +36,7 @@ export default async function EditPage({ params, searchParams }: Props) {
   const state = await panelState(site, publicOrigin(await headers()));
   // K29: the published copy too, so the panel can say which parts of the draft guests do not see yet (Review).
   const { lang, dict } = await uiLocale();
-  return <Panel initial={state} editKey={key} published={site.publishedContent ?? null} lang={lang} dict={dict} />;
+  // G145: opened with the shop's own time-limited link (admin "Dükkân olarak düzenle"), not the buyer's.
+  const shopUntil = isShopEditKey(site, key) ? (site.shopEdit?.expiresAt ?? null) : null;
+  return <Panel initial={state} editKey={key} published={site.publishedContent ?? null} lang={lang} dict={dict} shopUntil={shopUntil} />;
 }

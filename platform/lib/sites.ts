@@ -4,8 +4,8 @@
 
 import type { ContentRecord } from './content/types.ts';
 import { validateContent, type ValidationIssue } from './content/validate.ts';
-import { StaleSiteError, type DataAdapter, type PublishOptions, type SitePatch, type SiteRecord } from './data/types.ts';
-import { newSiteKeys, verifyKey, verifyPanelPreviewToken } from './keys.ts';
+import { NotFoundError, StaleSiteError, type DataAdapter, type PublishOptions, type SitePatch, type SiteRecord } from './data/types.ts';
+import { generateKey, hashKey, newSiteKeys, verifyKey, verifyPanelPreviewToken } from './keys.ts';
 import {
   appendLog,
   archivingDateIssue,
@@ -132,8 +132,46 @@ export async function reissueKeys(adapter: DataAdapter, siteId: string): Promise
   return { site, editKey: keys.editKey, previewKey: keys.previewKey };
 }
 
-export function canEdit(site: SiteRecord, editKey: unknown): boolean {
-  return verifyKey(editKey, site.editKeyHash);
+export function canEdit(site: SiteRecord, editKey: unknown, now: number = Date.now()): boolean {
+  return verifyKey(editKey, site.editKeyHash) || isShopEditKey(site, editKey, now);
+}
+
+/** G145: the shop's time-limited edit key (lib/admin, "Dükkân olarak düzenle"); the buyer's own key is untouched. */
+export function isShopEditKey(site: SiteRecord, editKey: unknown, now: number = Date.now()): boolean {
+  const s = site.shopEdit;
+  if (!s || !(Date.parse(s.expiresAt) > now)) return false;
+  return verifyKey(editKey, s.keyHash);
+}
+
+/** How long a shop edit link works (the setup service is delivered within 3 days, docs/23). */
+export const SHOP_EDIT_TTL_MS = 72 * 60 * 60_000;
+const SHOP_EDIT_LOG_MAX = 30;
+
+/**
+ * A new shop edit link for the site (an earlier one stops working). Returns the key once; only its hash is stored.
+ * The buyer's edit link, preview key and everything else stay as they are.
+ */
+export async function issueShopEditKey(adapter: DataAdapter, siteId: string, now: Date = new Date()): Promise<{ site: SiteRecord; editKey: string }> {
+  const site = await adapter.getSiteById(siteId);
+  if (!site) throw new NotFoundError(siteId);
+  const key = generateKey();
+  const at = now.toISOString();
+  const updated = await adapter.patchSite(siteId, {
+    shopEdit: { keyHash: hashKey(key), issuedAt: at, expiresAt: new Date(now.getTime() + SHOP_EDIT_TTL_MS).toISOString() },
+    shopEditLog: [...(site.shopEditLog ?? []), { kind: 'issued' as const, at }].slice(-SHOP_EDIT_LOG_MAX),
+  });
+  return { site: updated, editKey: key };
+}
+
+/** Ends the shop edit link now (no-op when there is none). */
+export async function endShopEditKey(adapter: DataAdapter, siteId: string, now: Date = new Date()): Promise<SiteRecord> {
+  const site = await adapter.getSiteById(siteId);
+  if (!site) throw new NotFoundError(siteId);
+  if (!site.shopEdit) return site;
+  return adapter.patchSite(siteId, {
+    shopEdit: null,
+    shopEditLog: [...(site.shopEditLog ?? []), { kind: 'ended' as const, at: now.toISOString() }].slice(-SHOP_EDIT_LOG_MAX),
+  });
 }
 
 /** True for the site's long-lived (shareable) preview key. Public routes use previewAccess(). */

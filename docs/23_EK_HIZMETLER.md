@@ -63,16 +63,19 @@ Metin **yazılmaz**, gönderilen girilir; tasarımın renk/font/düzeni değişm
    - **Alıcı henüz başlamadıysa** (Siparişler'de tasarım sipariş numarasıyla site yok): **Yeni sipariş** → tasarım, **tasarımın**
      Etsy sipariş numarası, alıcının e-postası ve ilk isimleri, adres (slug). Çıkan düzenleme linki **yalnız o an** gösterilir:
      kopyala, panelde kullan.
-   - **Alıcı başladıysa** (Siparişler'de arama: sipariş no / isim / adres): sitenin sayfası → **Yeni düzenleme linki**. Alıcının
-     eski linki **çalışmaz olur**; mesajda bu söylenir (`setup_service_done` söylüyor).
-   - Bugün admin'de "linki değiştirmeden siteyi düzenle" yolu **yok**. Bu boşluk: alıcı panelini açık tutuyorsa eski linki ölür.
-     İleride "dükkân olarak düzenle" (alıcı linkini korumadan) bir admin işi olabilir — ayrı görev önerisi.
+   - **Alıcı başladıysa** (Özet'teki arama kutusu ya da Siparişler: sipariş no / isim / adres): sitenin sayfası → **Düzenle**
+     (üst satır) ya da Destek işlemleri → **Linki değiştirmeden düzenle** (G145). Dükkânın kendi **72 saatlik** linkiyle editör
+     yeni sekmede açılır; üstte Türkçe "Dükkân olarak düzenliyorsunuz" şeridi; Share'de "Your private edit link" görünmez (yanlışlıkla
+     alıcıya gönderilmesin). **Alıcının linki aynen çalışır**, alıcı aynı anda panelde olsa bile kayıtları sürer. Yeniden açmak eski
+     dükkân linkini kapatır; Özet'in Yapılacaklar'ı açık kalan dükkân linkini "Kapat" diye listeler.
+   - Yalnız alıcı linkini kaybettiyse **Yeni düzenleme linki** (eski link çalışmaz olur; `setup_service_done` bunu söyler).
 4. **Panelde gir:** düzenleme linkiyle editörü aç; alıcının bilgilerini Us · Day & place · Photos · Story · Details · RSVP
    bölümlerine gir; fotoğrafları paylaşım linkinden indirip yükle ve kırp. **Yayınlama** (alıcı kontrol edip yayınlar). Site zaten
    yayındaysa isim/tarih değişikliği alıcının 3 hakkından düşer; ilan bunu söylüyor.
 5. **Not:** sitenin "Not" alanına `Kurulum hizmeti: <tarih>, Etsy #<kurulum sipariş no>, 1 tur` yaz (tur sayımı buradan).
-6. **Mesaj:** sitenin sayfasında "Yeni düzenleme linki"/"Yeni sipariş"ten hemen sonra **`setup_service_done`** (yeni link ve site
-   adresiyle dolar) → Kopyala → Etsy konuşmasına yapıştır. Kopyalama Geçmiş'e yazılır.
+6. **Mesaj:** dükkân linkiyle girdiyseniz **Dükkân linkini kapat** → şablon kendiliğinden **`setup_service_done_same_link`**
+   (link içermez: "aynı linkinizle açın") → Kopyala → Etsy. "Yeni düzenleme linki"/"Yeni sipariş"ten sonra ise **`setup_service_done`**
+   (yeni link ve site adresiyle dolar). Kopyalama Geçmiş'e yazılır.
 7. **Sipariş onayı** (K34, `CLAIM_ORDER_VERIFICATION=manual` ise): tasarım siparişini kontrol edip onayla; yoksa alıcı yayınlayamaz.
 8. **Ek tur isteği:** alıcı "şunu da değiştirin" derse, kendisi değiştirebileceğini söyle; bizim yapmamızı istiyorsa kurulum ilanını
    yeniden satın alır (K42). Bizim girişimizdeki hata (gönderilenle eşleşmeyen) ücretsiz düzeltilir.
@@ -111,6 +114,7 @@ alınmaz. İsim/foto/metni alıcı girer (ya da kurulum hizmeti alır).
 |---|---|---|
 | `setup_service_details` | Kurulum siparişinden hemen sonra | `{order}`, `{design}` |
 | `setup_service_done` | Bilgiler girildikten sonra, taze linkle | `{names}`, `{design}`, `{edit_url}`, `{site_url}` |
+| `setup_service_done_same_link` | Dükkân linkiyle girildikten sonra (alıcının linki değişmedi; G145) | `{names}`, `{design}`, `{site_url}` |
 | `custom_design_brief` | Özel tasarım siparişinden hemen sonra | `{order}` |
 | `custom_design_ready` | Özel tema /start'ta açılınca | `{start_url}`, `{order}` |
 | `custom_design_extra_round` | 3. (ve sonraki) revizyon isteği / ek revizyon ilanı satın alınınca | — |
@@ -130,6 +134,7 @@ Etsy'nin teslim ettiği dosya: `package/customer/SETUP_SERVICE.pdf`, `CUSTOM_DES
 Karara bağlananlar (2026-10-16): fiyatlar (1.460 / 500 / 2.960 TL), teslim 3 gün, 2 revizyon + tur başı 500 TL, münhasırlık,
 adet 999.
 
-1. Özel temayı tek alıcıya açma yolu (§4.4) ve "linki değiştirmeden düzenle" admin işi (§3.3) — iki geliştirme görevi önerisi.
+1. Özel temayı tek alıcıya açma yolu (§4.4) — geliştirme görevi önerisi; tasarım önerisi `gorevler/G145-panel-denetim.md`
+   ("Karar bekleyenler"). "Linki değiştirmeden düzenle" G145'te yapıldı (§3.3).
 2. Otomatik yenileme (bütün ilanlar gibi).
 3. Etsy'nin hizmet ilanı politikası okunacak (`[VERIFY]`).

@@ -928,3 +928,14 @@
     align-items: start;
   }
 }
+
+/* G145: the overview's search box (goes to Siparişler with ?q=). */
+.quickSearch {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+.quickSearch .input {
+  flex: 1;
+  min-width: 0;
+}

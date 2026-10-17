@@ -60,6 +60,25 @@ export interface SiteRecord {
   adminNote?: AdminNoteRecord | null;
   /** Etsy messages the shop copied from the admin (G121): template id + time only, never the text. Newest last. */
   messageLog?: AdminMessageLogEntry[] | null;
+  /**
+   * The shop's own, time-limited edit link (G145, docs/23 §3 "We set it up for you"): the shop edits the website
+   * without touching the buyer's link. Only the hash is stored; ends at expiresAt or when the shop ends it.
+   */
+  shopEdit?: ShopEditRecord | null;
+  /** Shop edit sessions that were opened, newest last (admin history; no keys). */
+  shopEditLog?: ShopEditLogEntry[] | null;
+}
+
+export interface ShopEditRecord {
+  keyHash: string;
+  issuedAt: string;
+  expiresAt: string;
+}
+
+export interface ShopEditLogEntry {
+  kind: 'issued' | 'ended';
+  at: string;
+  note?: string;
 }
 
 /** One copied Etsy message (lib/admin/messages.ts template id). */
@@ -154,9 +173,11 @@ export interface SitePatch {
   /** Shop admin correction of the buyer's email (the order index is keyed by orderRef, not by email). */
   ownerEmail?: string | null;
   messageLog?: AdminMessageLogEntry[] | null;
+  shopEdit?: ShopEditRecord | null;
+  shopEditLog?: ShopEditLogEntry[] | null;
 }
 
-export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail', 'messageLog'] as const satisfies ReadonlyArray<keyof SitePatch>;
+export const SITE_PATCH_KEYS = ['content', 'firstPublishedAt', 'identity', 'archiveOverrideAt', 'orderCheck', 'guestAccess', 'adminNote', 'ownerEmail', 'messageLog', 'shopEdit', 'shopEditLog'] as const satisfies ReadonlyArray<keyof SitePatch>;
 
 /** Copies the given patch fields onto a (freshly read) stored record. Shared by the adapters. */
 export function applySitePatch(site: SiteRecord, patch: SitePatch): void {

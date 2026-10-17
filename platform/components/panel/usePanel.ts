@@ -8,7 +8,10 @@
 //  - our own save was stored but its answer was lost (flaky phone network): on 409 the panel reads
 //    the stored draft; if it is exactly what we sent, it takes the new updatedAt and carries on;
 //  - publish / unpublish / identity change updatedAt too: they run in the same one-at-a-time queue as
-//    the saves, so a save typed during a slow publish is sent after it with the new updatedAt.
+//    the saves, so a save typed during a slow publish is sent after it with the new updatedAt;
+//  - G145: the shop wrote something that is not the draft (a note, a copied message, a confirmed order, an added
+//    change): on 409 the stored draft is still the one this panel last stored, so it takes the new updatedAt and
+//    sends the save again.
 //
 // Offline copy: while a change is not stored yet, the draft is also kept in localStorage
 // ("draft:<slug>" = {baseUpdatedAt, content, at}). It is removed once everything is saved. When the panel
@@ -147,6 +150,8 @@ export function usePanel(initial: PanelState, editKey: string) {
   const [identityKeptAt, setIdentityKeptAt] = useState(0);
 
   const contentRef = useRef(content);
+  /** The draft as the server last stored it (as far as this panel knows); G145 conflict check. */
+  const serverContentRef = useRef<ContentRecord>(initial.content);
   const metaRef = useRef(meta);
   const version = useRef(0);
   const savedVersion = useRef(0);
@@ -205,6 +210,7 @@ export function usePanel(initial: PanelState, editKey: string) {
         replaceContent(withIdentity(contentRef.current, body.identity as Identity));
         setIdentityKeptAt(Date.now());
       }
+      serverContentRef.current = body.identityKept === true && body.identity && typeof body.identity === 'object' ? withIdentity(sent, body.identity as Identity) : sent;
       setPreviewVersion((n) => n + 1);
       setSaveMessage(null);
       setSaveState(version.current === savedVersion.current ? 'saved' : 'pending');
@@ -217,6 +223,12 @@ export function usePanel(initial: PanelState, editKey: string) {
       const check = await api.state();
       const state = (check.body as { state?: { content?: unknown } & Record<string, unknown> }).state;
       if (check.ok && state && sameContent(state.content, sent)) return stored(state);
+      // G145: only the shop's bookkeeping changed (the draft is still ours): carry on from the new version.
+      if (check.ok && state && typeof state.updatedAt === 'string' && sameContent(state.content, serverContentRef.current)) {
+        applyMeta(state);
+        const again = await api.saveDraft(sent, metaRef.current.updatedAt);
+        if (again.ok) return stored(again.body);
+      }
       if (check.status === 0) {
         scheduleRetry(typeof navigator !== 'undefined' && navigator.onLine === false);
         return false;
@@ -330,6 +342,7 @@ export function usePanel(initial: PanelState, editKey: string) {
       const body = res.body as Record<string, unknown> & { code?: string; message?: string };
       if (res.ok) {
         if (body.identity && typeof body.identity === 'object') replaceContent(withIdentity(contentRef.current, body.identity as Identity));
+        serverContentRef.current = contentRef.current;
         setPreviewVersion((n) => n + 1);
         keepBackup();
         const rights = body.rights as RightsView | undefined;
@@ -496,6 +509,30 @@ export function usePanel(initial: PanelState, editKey: string) {
       document.removeEventListener('visibilitychange', renew);
     };
   }, [api]);
+
+  // G145: while the shop confirms the Etsy order, Publish opens by itself (no reload): asked again every minute while
+  // the panel is shown and when it is shown again. Only the order flag is taken over (the draft is never touched here).
+  const orderPending = meta.orderPending;
+  useEffect(() => {
+    if (!orderPending) return;
+    const check = () => {
+      if (document.visibilityState === 'hidden') return;
+      void api.state().then((res) => {
+        const state = (res.body as { state?: Record<string, unknown> }).state;
+        if (res.ok && state && state.orderPending === false && metaRef.current.orderPending) {
+          const next = { ...metaRef.current, orderPending: false };
+          metaRef.current = next;
+          setMeta(next);
+        }
+      });
+    };
+    const timer = window.setInterval(check, 60_000);
+    document.addEventListener('visibilitychange', check);
+    return () => {
+      window.clearInterval(timer);
+      document.removeEventListener('visibilitychange', check);
+    };
+  }, [api, orderPending]);
 
   // G068: the design's texts within what the design carries (theme.json copy max), next to the content checks
   const copyLimits = useMemo(() => Object.fromEntries(initial.theme.copy.map((e) => [e.key, { max: e.max }])), [initial.theme.copy]);
