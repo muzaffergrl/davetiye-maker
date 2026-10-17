@@ -11,13 +11,13 @@
 
 import { msg } from '../i18n/translate.ts';
 
-export type DesignStatus = 'live' | 'coming';
+export type DesignStatus = 'live' | 'preview' | 'coming';
 
 export interface DesignCommerce {
   /** Theme id (platform/themes/<id>) = URL /designs/<id> = /start?theme=<id>. */
   id: string;
   name: string;
-  /** Only 'live' designs are listed anywhere; 'coming' ones are never shown or promised. */
+  /** Live designs can be purchased. Preview designs appear in the catalogue without checkout; coming designs stay hidden. */
   status: DesignStatus;
   /**
    * G099: shown in the home page's design showcase (the rest are one tap away on /designs). Pick a spread of styles and
@@ -165,7 +165,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'nocturne-lake-estate',
       name: 'Nocturne Lake Estate',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -175,7 +175,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'velvet-jewel-box',
       name: 'Velvet Jewel Box',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -184,7 +184,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'grand-theatre-premiere',
       name: 'Grand Theatre Premiere',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -194,7 +194,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'orient-express-voyage',
       name: 'Orient Express Voyage',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -204,7 +204,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'kintsugi-washi',
       name: 'Kintsugi & Washi',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -214,7 +214,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'riad-lantern-nights',
       name: 'Riad Lantern Nights',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -224,7 +224,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'maison-patisserie',
       name: 'Maison Pâtisserie',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -234,7 +234,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'celestial-observatory',
       name: 'Celestial Observatory',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -244,7 +244,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'azulejo-mosaic',
       name: 'Azulejo Mosaic',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -254,7 +254,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'sky-lantern-festival',
       name: 'Sky Lantern Festival',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
@@ -264,7 +264,7 @@ export const MARKETING: MarketingConfig = {
     {
       id: 'music-box-ballerina',
       name: 'Music Box Ballerina',
-      status: 'coming',
+      status: 'preview',
       price: '[PRICE]',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
