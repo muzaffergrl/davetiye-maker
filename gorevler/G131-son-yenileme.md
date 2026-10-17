@@ -2,7 +2,7 @@
 id: G131
 baslik: Yayın öncesi son yenileme — START HERE rehberleri (G126–G130 panel bölümleri) + ilan görselleri (G129 S logosu)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G131
 oncelik: 1
 bagimli: [G122, G124, G126, G127, G128, G129, G130]
@@ -69,3 +69,4 @@ görselleri + PDF'leri (strict 1). (5) İlan görsellerindeki misafir ekranları
 
 ## Günlük
 - 2026-10-16 claude-G131: rehber + görseller + iki test; incelemeye
+- 2026-10-17 entegratör onayladı

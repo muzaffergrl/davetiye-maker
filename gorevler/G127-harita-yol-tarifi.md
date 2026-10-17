@@ -2,7 +2,7 @@
 id: G127
 baslik: Harita ve yol tarifi — misafir sitesinde mekân haritası + "Get directions", panelde Day & place ayarları
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G127
 oncelik: 1
 bagimli: []
@@ -68,3 +68,6 @@ lavender-provence demo details — taşma/hata yok (`previews/g127/demo_details_
 yüzünden "Waze" ikinci satırda). Testler 1234/1234, build temiz.
 
 **Açık:** Gizlilik politikasına "harita dokununca Google'dan yüklenir" cümlesi eklenmeli (docs/20 §7.2).
+
+## Günlük
+- 2026-10-17 entegratör onayladı

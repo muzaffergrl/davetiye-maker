@@ -2,7 +2,7 @@
 id: G134
 baslik: Entegrasyon — G126 kaydı, G127 demo pini, G096 düzeltmeleri (G135), 21 Crimson Rose Atelier; Nocturne / React Bits / ilan 9–10 incelemesi
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G134
 oncelik: 1
 bagimli: [G126, G127, G133, G135]
@@ -79,3 +79,4 @@ manifest'ten önce 32 sorunla düşüyordu); `npm test` **1261/1261 geçti**, 0 
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G134 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

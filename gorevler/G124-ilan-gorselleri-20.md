@@ -2,7 +2,7 @@
 id: G124
 baslik: 20 tasarımın Etsy ilan görselleri (editoryal set, 8 × 2000 px) ve ilan videoları
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G124
 oncelik: 1
 bagimli: [G121, G123, G098]
@@ -67,3 +67,4 @@ görsel (T4 "her cihaz") önerisi kullanıcı kararı; Etsy video kuralları lis
 ## Günlük
 - 2026-10-16 alındı (claude-G124, alt-ajan, worktree `g124-ilan-gorselleri`); üretim ara kayıt olarak `3872b7d`'de commit'lendi (konteyner yeniden başladı).
 - 2026-10-16 denetim, listing_v3 / etsy_upload.json / docs/21 tamamlandı; incelemeye gönderildi.
+- 2026-10-17 entegratör onayladı

@@ -2,7 +2,7 @@
 id: G129
 baslik: BKE Studio logosunda K sembolü yerine S — SVG izleme, site/panel/favicon/uygulama ikonları, Etsy ikonu, rozet, desen
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G129
 oncelik: 1
 bagimli: [GM08]
@@ -93,3 +93,4 @@ ucunda ve düzeltilen çizgilerde; p99 ≤ 2,2 px.
 ## Günlük
 - 2026-10-16 açıldı ve alındı: claude-G129 (alt-ajan, worktree; taban `claude/zealous-fermi-hy1o40` e9895dd)
 - 2026-10-16 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

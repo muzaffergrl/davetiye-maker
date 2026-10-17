@@ -2,7 +2,7 @@
 id: G123
 baslik: 06–20 Etsy ilan metinleri (listing_v3.md) ve yükleme verisi (etsy_upload.json)
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-G123
 oncelik: 1
 bagimli: [G091]
@@ -73,3 +73,4 @@ yeniden üretilen JSON'u bayt bayt aynı (denendi). Test: `tools/tests/test_etsy
 
 ## Günlük
 - 2026-10-16 alındı ve incelemeye gönderildi: claude-G123 (alt-ajan, worktree). Taban `claude/zealous-fermi-hy1o40` ile birleştirildi.
+- 2026-10-17 entegratör onayladı

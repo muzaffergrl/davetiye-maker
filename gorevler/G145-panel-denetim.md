@@ -2,7 +2,7 @@
 id: G145
 baslik: Admin + müşteri paneli denetimi — kullanıcı dostu, işlevsel, uçtan uca doğrulanmış (K45 madde 1)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G145
 oncelik: 1
 bagimli: [G121, G126, G127, G128, G135, G138, G139, G140]
@@ -151,3 +151,6 @@ tarayıcıda koşulmadı, önceki görevin tarayıcı testi kapsıyor ve `npm te
   `22 !== 21` — G142 iki tema ekledi, G139 testi 21 bekliyor. Tabanda (ab6bde0) da aynı şekilde kırık (değişiklikler geri alınarak
   doğrulandı); bu görevin yazar alanında değil → koordinatöre: sayı 22 olmalı ve crimson/nocturne baskı parçaları kontrol edilmeli.
 - `npm run build`: temiz (trace-check 23 tema). `npm run typecheck` temiz.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

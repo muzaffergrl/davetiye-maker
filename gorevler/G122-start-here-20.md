@@ -2,7 +2,7 @@
 id: G122
 baslik: START HERE rehberi 20 tasarım (docs/19 Ek A, G100 paneli) + 01–05 ilan durum düzeltmeleri + docs/20 kapsayıcı metin
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-G122
 oncelik: 1
 bagimli: [G091, G100]
@@ -95,3 +95,4 @@ yeşil. 01–05 §0/§11 "G100 + G121" ve PDF boyutu güncellendi.
   incelemeye gönderildi.
 - 2026-10-16 koordinatör: G121 birleşti → dal `claude/zealous-fermi-hy1o40` (`d875863`) birleştirildi, Ek A G121'e uyarlandı, 20 rehber
   ve 20 `etsy_upload.json` yeniden üretildi.
+- 2026-10-17 entegratör onayladı

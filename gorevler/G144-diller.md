@@ -2,7 +2,7 @@
 id: G144
 baslik: Satış sitesi ve alıcı sitelerine EN/TR/ES/DE/FR dil desteği (ücretli/anahtarlı çeviri API'si yok)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G144
 oncelik: 1
 bagimli: [G138, G140, G141]
@@ -92,3 +92,6 @@ Languages → Diller · Main language → Ana dil · Also show my website in →
 Translate automatically → Otomatik çevir · Approve all → Tümünü onayla · Approve → Onayla · It is still right → Hâlâ doğru ·
 Not translated → Çevrilmedi · Check and approve → Kontrol et ve onayla · Out of date → Güncel değil · Approved → Onaylandı ·
 Language of this editor → Bu düzenleyicinin dili.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

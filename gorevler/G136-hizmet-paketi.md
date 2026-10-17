@@ -2,7 +2,7 @@
 id: G136
 baslik: Ek hizmet ilanları — görseller (3 × 4) ve Etsy teslim PDF'leri (SETUP_SERVICE, CUSTOM_DESIGN, EXTRA_REVISION)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G136
 oncelik: 1
 bagimli: [G130, G131]
@@ -59,3 +59,6 @@ güncel.
 
 **Açık kalan.** Özel tasarım PDF'i ve ilanı "start link" adımını anlatıyor; özel temayı tek alıcıya açma yolu hâlâ yok (docs/23 §4.4,
 G130'dan beri açık). Etsy hizmet politikası `[VERIFY]` ve otomatik yenileme kararı değişmedi.
+
+## Günlük
+- 2026-10-17 entegratör onayladı
