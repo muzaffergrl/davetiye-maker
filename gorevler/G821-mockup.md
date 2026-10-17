@@ -2,8 +2,8 @@
 id: G821
 baslik: Tasarım 21 Crimson Rose Atelier — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00)
 rol: gpt-gorsel
-durum: hazir
-alan:
+durum: alindi
+alan: codex-gorsel-g821
 oncelik: 2
 bagimli: []
 yazar: [collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/]
@@ -34,3 +34,4 @@ Pilot: 01/03 (G801/G803).
 
 ## Günlük
 - 2026-10-17 açıldı (G137, claude-kod): 21'in ilan görsellerinden 1, 2, 4 ve 8 bu sahneleri bekliyor; prompt'lar `tools/paket3_sahne.py`'nin metniyle, zemin ve süsler elle (07 Burgundy Velvet'in dalyası/böğürtleni/kadifesinden ayrı)
+- 2026-10-17 alindi: codex-gorsel-g821
