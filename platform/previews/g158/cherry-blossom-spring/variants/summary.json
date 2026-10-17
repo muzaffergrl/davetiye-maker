@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 114,
+  "low": 0,
+  "as_original": 4
+ },
+ "ivory-blossom": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "sage-blush": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "dusty-blue-blush": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "deep-rose": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "peach-blossom": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 1
+ }
+}

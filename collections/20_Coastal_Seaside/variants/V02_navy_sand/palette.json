@@ -1,0 +1,26 @@
+{
+  "id": "V02_navy_sand",
+  "slug": "navy-sand",
+  "name": "Nautical Navy & Sand",
+  "ink": "#172A40",
+  "deep": "#1F3A5F",
+  "primary": "#4A6B94",
+  "mist_top": "#F2F4F7",
+  "mist_bottom": "#D9E0EA",
+  "gold": "#C2A26B",
+  "gold_light": "#E2CDA0",
+  "ivory": "#FFFDF8",
+  "leaf": "#8A9AAE",
+  "swatch": [
+    "#F2F4F7",
+    "#4A6B94",
+    "#F4DECB"
+  ],
+  "status": "coming",
+  "families": {
+    "sea": "#4A6B94",
+    "ground": "#E2E8F0",
+    "shell": null,
+    "deep_ink": "deep"
+  }
+}

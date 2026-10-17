@@ -1,5 +1,6 @@
 {
   "id": "V06_lavender_silver",
+  "slug": "lavender-silver",
   "name": "Lavender & Silver",
   "ink": "#2F2A3D",
   "deep": "#6F6390",
@@ -9,5 +10,16 @@
   "gold": "#A9A9B3",
   "gold_light": "#CFCFD6",
   "ivory": "#FBF9F6",
-  "leaf": "#9AA89F"
+  "leaf": "#9AA89F",
+  "swatch": [
+    "#FBF9F6",
+    "#A89BC4",
+    "#A9A9B3"
+  ],
+  "status": "coming",
+  "families": {
+    "seal": "deep",
+    "sky": "mist_top",
+    "gold": "#ADADB0"
+  }
 }

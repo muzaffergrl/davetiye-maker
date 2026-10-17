@@ -143,11 +143,13 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // only files the theme names (no stray build output)
-  const files = readdirSync(path.join(DIR, 'img')).filter((f) => f !== 'manifest.json');
+  const files = readdirSync(path.join(DIR, 'img')).filter((f) => f !== 'manifest.json' && f !== 'variants'); // G153: palette images
   const named = new Set([...refs].filter((r) => r.startsWith('img/')).map((r) => r.slice(4)).concat(['og-1200x630.jpg', 'favicon.png']));
   for (const f of files) assert.ok(named.has(f) || /-(\d+)\.webp$/.test(f), `unused ${f}`);
 });
@@ -634,7 +636,8 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   // the light bands are soft (no hard stops) and faint
   for (const sel of ['.sweep i', '.js [data-a="sweep"]::after']) {
     const body = rule(sel);
-    const alphas = [...body.matchAll(/rgba\(255, 2\d\d, 1\d\d, (\.?\d+)\)/g)].map((m) => Number(m[1]));
+    // G156: or the palette channel token of that warm light, rgb(var(--c-ffXXXX)/a)
+    const alphas = [...body.matchAll(/rgba\(255, 2\d\d, 1\d\d, (\.?\d+)\)|rgb\(var\(--c-ff[0-9a-f]{4}\)\/(\.?\d+)\)/g)].map((m) => Number(m[1] ?? m[2]));
     assert.ok(alphas.length >= 3 && Math.max(...alphas) <= 0.4 && alphas[0] === 0 && alphas.at(-1) === 0, `${sel}: ${alphas}`);
   }
   // the corner clusters are whole GPT parts: no mask / clip on them
@@ -643,7 +646,10 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
   assert.doesNotMatch(nav, /border-top/, '.site-nav: no hard band');
   assert.match(nav, /mask: linear-gradient\(transparent, #000 \d+px\)/, 'the top edge fades');
-  const alphas = [...nav.matchAll(/rgba\(10, 23, 41, (\.\d+)\) \d+px, rgba\(10, 23, 41, (\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+  // G156: the colour may be rgba(), #rrggbbaa or the palette channel token rgb(var(--c-…)/a) (tools/recolor_parts.py)
+  const col = String.raw`(?:rgba\(10, 23, 41, (\.\d+)\)|#0a1729([0-9a-f]{2})|rgb\(var\(--c-0a1729\)\/(\.\d+)\))`;
+  const alpha = (m: RegExpMatchArray, i: number) => (m[i] ? Number(m[i]) : m[i + 1] ? parseInt(m[i + 1], 16) / 255 : Number(m[i + 2]));
+  const alphas = [...nav.matchAll(new RegExp(`${col} \\d+px, ${col}`, 'g'))].flatMap((m) => [alpha(m, 1), alpha(m, 4)]);
   assert.ok(alphas.length === 2 && alphas.every((a) => a >= 0.96), `label row ≥ .96 (${alphas})`);
   assert.match(nav, /backdrop-filter: blur\(\d+px\)/);
   // the divider ornaments are the GPT divider (nav, under the names, the hint, captions, sections), never a CSS line

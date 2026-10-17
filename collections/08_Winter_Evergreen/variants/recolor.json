@@ -1,0 +1,212 @@
+{
+  "theme": "winter-evergreen",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). Only the felt envelope changes (and the site's green ink follows the palette's deep tone); pine, cones, holly berries, the red velvet ribbon and the snow stay natural.",
+  "families": {
+    "envelope": {
+      "anchor": "#314537",
+      "sigma": 14,
+      "cmin": 0.012,
+      "cfull": 0.028
+    }
+  },
+  "groups": {
+    "envelope": [
+      "envelope"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "decor_br": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "decor_tl": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "divider": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "keep",
+      "why": "ivory liner with pine and berry print: natural colours"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "frost_overlay": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "info_card": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "invitation_card": {
+      "recolor": "keep",
+      "why": "pine, pine cone, holly berries, red ribbon, snowflake: natural winter colours in every palette"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: snowy wash"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: snowy wash"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: snowy wash"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: snowy wash"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: snowy wash"
+    },
+    "snow": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "snow_foot": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    },
+    "snow_wide": {
+      "recolor": "keep",
+      "why": "snow, frost, whitewashed wood: neutral"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "keep",
+      "why": "pine and holly: natural colours"
+    },
+    "back": {
+      "recolor": "keep",
+      "why": "ivory card"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "snow paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#1F2E26",
+    "accent": "#2B4A3A",
+    "paper": "#FAFAF6"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "envelope"
+    ],
+    "roles": {
+      "envelope": "deep"
+    },
+    "keep": [
+      "--page",
+      "--mist",
+      "--ivory",
+      "--berry",
+      "--c-8a2328",
+      "--ink",
+      "--ink-soft"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--script-ink",
+        "--page",
+        6
+      ],
+      [
+        "--green",
+        "--page",
+        7
+      ],
+      [
+        "--green-ink",
+        "--page",
+        6
+      ],
+      [
+        "--green-ink",
+        "--ivory",
+        6
+      ],
+      [
+        "--ivory",
+        "--green",
+        4.8
+      ]
+    ]
+  }
+}

@@ -61,6 +61,33 @@ def test_texture_and_cmin():
     assert np.abs(kept - paper).max() < 1
 
 
+def test_cmax_keeps_vivid_pixels_of_the_same_hue():
+    # G158: a pale grey-pink paper and a vivid pink blossom share a hue; cmax moves only the paper
+    paper, blossom = rp.hex_rgb("#CDC0C0"), rp.hex_rgb("#F4A0B0")
+    out = rp.transfer(np.array([paper, blossom]), [fam("#CDC0C0", "#B8C2B0", sigma=25, cmin=0.004, cfull=0.009, cmax=0.03)])
+    assert np.abs(out[0] - rp.hex_rgb("#B8C2B0")).max() < 4
+    assert np.abs(out[1] - blossom).max() < 1
+
+
+def test_part_status_palette_override():
+    # G158: a palette may send a part to GPT (or keep it) while the manifest default stays auto
+    part = {"recolor": "auto", "group": "floral"}
+    assert rp.part_status({}, "closure", part) == "auto"
+    assert rp.part_status({"recolor": {"closure": "gpt"}}, "closure", part) == "gpt"
+    with pytest.raises(rp.RecolorError):
+        rp.part_status({"id": "V02_x", "recolor": {"closure": "paint"}}, "closure", part)
+    with pytest.raises(rp.RecolorError):
+        rp.part_status({"id": "V02_x", "recolor": {"bg": "auto"}}, "bg", {"recolor": "keep", "why": "paper"})
+
+
+def test_lightness_gate():
+    dark, pale = rp.hex_rgb("#5E7591"), rp.hex_rgb("#CBDCEB")
+    fams = [fam("#5E7591", "#A86F72", sigma=20, lmax=0.72), fam("#CBDCEB", "#F3E4E1", sigma=20, cmin=0.005, cfull=0.015, lmin=0.78)]
+    out = rp.transfer(np.array([dark, pale]), fams)
+    assert np.abs(out[0] - rp.hex_rgb("#A86F72")).max() < 3   # dark seal → only the seal family
+    assert np.abs(out[1] - rp.hex_rgb("#F3E4E1")).max() < 3   # pale paper → only the paper family
+
+
 def test_recolor_image_keeps_alpha(tmp_path):
     from PIL import Image
     arr = np.zeros((8, 8, 4), np.uint8)
@@ -131,7 +158,7 @@ def test_pilot_designs_are_complete(no, theme):
     css = (ROOT / "platform/themes" / theme / "variants.css").read_text()
     # every contrast pair holds in every palette's tokens
     base = {}
-    for f in spec["css"]["files"]:
+    for f in [*spec["css"]["files"], "variants.css"]:  # variants.css :root = the channel tokens (G157)
         p = ROOT / "platform/themes" / theme / f
         if p.exists():
             for k, v in rp.root_tokens(p.read_text()).items():
@@ -158,3 +185,29 @@ def test_build_dry_run_does_not_write(tmp_path, monkeypatch):
     assert rep["V03_plum_gold"]["slug"] == "plum-gold"
     assert rep["V03_plum_gold"]["images"] >= 3
     assert (theme / "variants.css").read_text() == before
+
+
+G157 = {"09": "lavender-provence", "10": "tuscan-vineyard", "11": "boho-pampas-terracotta",
+        "12": "tropical-destination", "13": "enchanted-forest-storybook", "14": "ivory-lace-pearls"}
+
+
+@pytest.mark.parametrize("no,theme", sorted(G157.items()))
+def test_g157_designs_are_complete(no, theme):
+    test_pilot_designs_are_complete(no, theme)
+
+
+def test_unchanged_parts_are_not_copied():
+    """G157: a palette that keeps every family of a part writes no copy of it (the asset route serves the original)."""
+    from PIL import Image
+    a = Image.new("RGBA", (8, 8), (120, 80, 160, 255))
+    b = Image.new("RGBA", (8, 8), (121, 80, 159, 255))
+    c = Image.new("RGBA", (8, 8), (90, 120, 160, 255))
+    assert rp.unchanged(a, b) and not rp.unchanged(a, c)
+    design = rp.design_dir("14")
+    spec = rp.load_spec(design)
+    pal = next(p for p in rp.load_palettes(design) if p["slug"] == "dusty-blue")
+    out = ROOT / "platform/themes/ivory-lace-pearls/img/variants/dusty-blue"
+    for name, part in spec["parts"].items():
+        fams = pal["families"]
+        if part["recolor"] == "auto" and all(fams.get(f) is None for f in spec["groups"][part["group"]]):
+            assert not list(out.glob(f"{name}-*")), name

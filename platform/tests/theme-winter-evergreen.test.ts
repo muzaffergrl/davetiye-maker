@@ -140,7 +140,9 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // docs/11 §6: a first-view WebP ≤ 200 KB, a lazy / wide-screen one ≤ 250 KB

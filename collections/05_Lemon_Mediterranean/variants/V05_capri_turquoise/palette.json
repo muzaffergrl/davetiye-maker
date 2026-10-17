@@ -1,0 +1,24 @@
+{
+  "id": "V05_capri_turquoise",
+  "slug": "capri-turquoise",
+  "name": "Capri Turquoise & Lemon",
+  "ink": "#163D42",
+  "deep": "#1D7A82",
+  "primary": "#F2C94C",
+  "mist_top": "#F7F4EC",
+  "mist_bottom": "#D2EBEB",
+  "gold": "#C9A04A",
+  "gold_light": "#E8D18F",
+  "ivory": "#FFFDF7",
+  "leaf": "#5E8C4A",
+  "swatch": [
+    "#FFFDF7",
+    "#F2C94C",
+    "#1D7A82"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "deep",
+    "wash": "mist_bottom"
+  }
+}

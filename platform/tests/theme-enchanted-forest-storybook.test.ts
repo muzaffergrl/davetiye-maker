@@ -144,7 +144,9 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // docs/11 §6: a first-view WebP ≤ 200 KB (the heaviest, the storybook cover, < 150 KB: no justification needed)
@@ -624,7 +626,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   const nav = rules.find(([, sel]) => /^\s*\.site-nav\s*$/.test(sel))![2];
   assert.doesNotMatch(nav, /border-top/, '.site-nav: no hard band');
   assert.match(nav, /mask: linear-gradient\(transparent, #000 \d+px\)/, 'the top edge fades');
-  const alphas = [...nav.matchAll(/rgba\(240, 236, 216, (\.\d+)\) \d+px, rgba\(240, 236, 216, (\.\d+)\)/g)].flatMap((m) => [Number(m[1]), Number(m[2])]);
+  const alphas = [...nav.matchAll(/#f0ecd8([0-9a-f]{2}) \d+px, #f0ecd8([0-9a-f]{2})/g)].flatMap((m) => [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255]);
   assert.ok(alphas.length === 2 && alphas.every((a) => a >= 0.96), `label row ≥ .96 (${alphas})`);
   // the only lines are 1 px interface dividers: the W1 hairlines beside the GPT ivy sprig (.orn), the nav's hairline, the
   // two beside the invitation card's day numeral

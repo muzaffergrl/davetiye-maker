@@ -1,0 +1,245 @@
+{
+  "theme": "sunflower-rustic-barn",
+  "note": "G158 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). The gingham ribbon and the sunflowers share one hue band (62–97°) and cannot be split by colour: lemon and rust palettes recolour both together (natural sunflower colours); navy / burgundy / dusty-blue palettes keep the sunflowers and send every part where gingham and sunflower meet to GPT (palette.json recolor). Pure gingham parts (envelope liner, small card border) recolour on their own; kraft (chroma below the cmin) stays.",
+  "families": {
+    "sun": {
+      "anchor": "#F2B23A",
+      "sigma": 30,
+      "cmin": 0.09,
+      "cfull": 0.12
+    },
+    "gingham": {
+      "anchor": "#DD9940",
+      "sigma": 30,
+      "cmin": 0.09,
+      "cfull": 0.12
+    },
+    "brown": {
+      "anchor": "#7A5A2E",
+      "sigma": 18,
+      "cmin": 0.025,
+      "cfull": 0.045
+    }
+  },
+  "groups": {
+    "floral": [
+      "sun"
+    ],
+    "gingham": [
+      "gingham"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "accent_3": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "barnwall": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "barnwood": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "card_ribbon": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "gingham"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "gingham"
+    },
+    "env_cflap": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "env_closed": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "gingham"
+    },
+    "env_pocket": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "field": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "field_wide": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "twine_line": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    },
+    "wood_foot": {
+      "recolor": "keep",
+      "why": "barn wood, cream paper, twine or kraft: neutral"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "cream paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#3A2E1F",
+    "accent": "#6A4520",
+    "paper": "#FBF1DE"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "sun",
+      "brown"
+    ],
+    "keep": [
+      "--ivory",
+      "--cream",
+      "--page",
+      "--leaf",
+      "--c-8a2328"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--script-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--deep",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--deep",
+        4.5
+      ],
+      [
+        "--c-f0c04e",
+        "--ink",
+        4.9
+      ],
+      [
+        "--c-de9f2a",
+        "--ink",
+        4.9
+      ],
+      [
+        "--deep",
+        "--page",
+        5.4
+      ]
+    ]
+  }
+}

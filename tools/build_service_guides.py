@@ -146,8 +146,9 @@ def content() -> dict[str, dict]:
                         "Your design is yours alone: we never sell it, or a recolored version of it, to anyone else.",
                         "Your names, photos and texts are never part of the artwork: you can change them in your "
                         "editor at any time.",
-                        "Not included: entering your details for you (our setup service does that), music, printed "
-                        "invitations and a custom domain (yournames.com)."]),
+                        # G154 (G090 P1-03): music (G126) is part of every website now; we still print nothing
+                        "Not included: entering your details for you (our setup service does that), printing or "
+                        "shipping anything, and a custom domain (yournames.com)."]),
                 ("h2", "Returns"),
                 ("p", "No returns, exchanges or cancellations once we have started your design. If something on your "
                       "website does not work as described, message us on Etsy and we will fix it."),

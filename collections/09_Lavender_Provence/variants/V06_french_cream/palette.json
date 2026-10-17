@@ -1,0 +1,25 @@
+{
+  "id": "V06_french_cream",
+  "slug": "french-cream",
+  "name": "French Cream & Lavender",
+  "ink": "#2E2A3F",
+  "deep": "#5D5287",
+  "primary": "#9C8FC4",
+  "mist_top": "#F8F3EA",
+  "mist_bottom": "#EBE1CD",
+  "gold": "#B5A27A",
+  "gold_light": "#D8CBA8",
+  "ivory": "#FAF8F3",
+  "leaf": "#8A9A78",
+  "swatch": [
+    "#EBE1CD",
+    "#9C8FC4",
+    "#B5A27A"
+  ],
+  "status": "coming",
+  "families": {
+    "lavender": null,
+    "paper": "mist_bottom",
+    "lav_ink": null
+  }
+}

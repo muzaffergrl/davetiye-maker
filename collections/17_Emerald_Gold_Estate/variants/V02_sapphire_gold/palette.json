@@ -1,0 +1,25 @@
+{
+  "id": "V02_sapphire_gold",
+  "slug": "sapphire-gold",
+  "name": "Sapphire & Gold",
+  "ink": "#F3EDDF",
+  "deep": "#C8A45A",
+  "primary": "#132A50",
+  "mist_top": "#16386A",
+  "mist_bottom": "#10213F",
+  "gold": "#C8A45A",
+  "gold_light": "#E5CC8E",
+  "ivory": "#F3EDDF",
+  "leaf": "#C8A45A",
+  "swatch": [
+    "#132A50",
+    "#C8A45A",
+    "#F3EDDF"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "#10213F",
+    "leaf": "#5E7391",
+    "gold": null
+  }
+}

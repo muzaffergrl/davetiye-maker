@@ -1,0 +1,262 @@
+{
+  "theme": "cherry-blossom-spring",
+  "note": "G158 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). The pale grey-pink envelope paper and the blush ground share the blossom hue, so they are separated by chroma (cmax). Brown branches, golden stamens and the gold rings never change.",
+  "families": {
+    "blossom": {
+      "anchor": "#F4C2C6",
+      "sigma": 24,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "envelope": {
+      "anchor": "#CDC0C0",
+      "sigma": 28,
+      "cmin": 0.004,
+      "cfull": 0.009,
+      "cmax": 0.03
+    },
+    "ground": {
+      "anchor": "#EEE3E7",
+      "sigma": 28,
+      "cmin": 0.004,
+      "cfull": 0.008,
+      "cmax": 0.03
+    },
+    "branch": {
+      "anchor": "#62391C",
+      "sigma": 12,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "stamen": {
+      "anchor": "#E2A060",
+      "sigma": 12,
+      "cmin": 0.06,
+      "cfull": 0.09
+    },
+    "rose_ink": {
+      "anchor": "#7C5563",
+      "sigma": 14,
+      "cmin": 0.03,
+      "cfull": 0.045
+    }
+  },
+  "groups": {
+    "petal": [
+      "blossom",
+      "stamen"
+    ],
+    "floral": [
+      "blossom",
+      "branch",
+      "stamen"
+    ],
+    "envelope": [
+      "envelope",
+      "ground",
+      "blossom",
+      "branch",
+      "stamen"
+    ],
+    "scene": [
+      "ground",
+      "blossom"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "mist": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "mist_foot": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "mist_wide": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "scene"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "scene"
+    }
+  },
+  "print_colors": {
+    "ink": "#3A3438",
+    "accent": "#6F4A58",
+    "paper": "#F8F1EF"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "ground",
+      "envelope",
+      "rose_ink"
+    ],
+    "keep": [
+      "--ivory",
+      "--c-8a2338"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--script-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--rose",
+        "--page",
+        4.5
+      ],
+      [
+        "--rose-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--mist",
+        4.5
+      ],
+      [
+        "--c-9a6675",
+        "--ivory",
+        4.8
+      ],
+      [
+        "--c-845463",
+        "--ivory",
+        4.8
+      ],
+      [
+        "--rose-ink",
+        "--page",
+        6.4
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        7.2
+      ]
+    ]
+  }
+}

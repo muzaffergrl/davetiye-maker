@@ -1,0 +1,24 @@
+{
+  "id": "V03_ivory_noir",
+  "slug": "ivory-noir",
+  "name": "Ivory Rose & Black",
+  "ink": "#EFE6DA",
+  "deep": "#C9A46A",
+  "primary": "#141217",
+  "mist_top": "#1C1A21",
+  "mist_bottom": "#0B0A0D",
+  "gold": "#C9A46A",
+  "gold_light": "#E3C99A",
+  "ivory": "#EFE6DA",
+  "leaf": "#5B6B4E",
+  "swatch": [
+    "#141217",
+    "#E6DACB",
+    "#C9A46A"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "#D8CBBE",
+    "petal": "#D8CBBE"
+  }
+}

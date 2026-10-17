@@ -2,7 +2,7 @@
 id: GP120
 baslik: Aşama 2 · Tasarım 20 — 5 ek palet + prompt dosyaları
 rol: claude-canva
-durum: blokaj
+durum: inceleme
 alan:
 oncelik: 6
 bagimli: [G090]
@@ -24,7 +24,8 @@ Tasarım 20 için orijinale ek 5 renk paleti seçmek ve her biri için prompt do
 - [ ] 5 varyant klasörü hazır
 
 ## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+G158 ile karşılandı (platform paleti akışı, docs/25): 5 palet `coming`, sonuç ve kontrast tablosu `gorevler/G158-palet-c.md`.
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 claude-G158: G158 (Aşama 2 parti C) ile yapıldı → inceleme. (`tools/gorev.py` G090-qa-raporu.md başlıksız olduğu için çalışmadı; elle işaretlendi.)

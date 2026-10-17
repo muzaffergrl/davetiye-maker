@@ -1,0 +1,27 @@
+{
+  "id": "V02_blush_pearl",
+  "slug": "blush-pearl",
+  "name": "Blush & Pearl",
+  "ink": "#3A3530",
+  "deep": "#8A5E5A",
+  "primary": "#E8C8C0",
+  "mist_top": "#F3E0DB",
+  "mist_bottom": "#E8C8C0",
+  "gold": "#BFA67A",
+  "gold_light": "#DED0B0",
+  "ivory": "#FFFDF8",
+  "leaf": "#A3A58F",
+  "swatch": [
+    "#FFFDF8",
+    "#E3BDB4",
+    "#8A5E5A"
+  ],
+  "status": "coming",
+  "families": {
+    "lace": "#E3BDB4",
+    "leaf": null,
+    "satin": "mist_top",
+    "scene_satin": "mist_top",
+    "taupe": "deep"
+  }
+}

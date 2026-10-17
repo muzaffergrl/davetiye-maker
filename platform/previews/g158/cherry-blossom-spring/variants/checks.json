@@ -1,0 +1,47 @@
+{
+ "theme": "cherry-blossom-spring",
+ "summary": {
+  "original": {
+   "measured": 114,
+   "low": 0,
+   "as_original": 4
+  },
+  "ivory-blossom": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  },
+  "sage-blush": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  },
+  "dusty-blue-blush": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  },
+  "deep-rose": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  },
+  "peach-blossom": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 1
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 4 text(s) below the contrast minimum on the painted ground: home \"Days\" 4.27:1 < 4.5:1; home \"RSVP\" 1.52:1 < 4.5:1; details \"RSVP\" 1.25:1 < 4.5:1; rsvp \"RSVP\" 1.15:1 < 4.5:1",
+  "palette peach-blossom: 1 text(s) below the minimum as in the original design: home \"Days\" 4.38:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette ivory-blossom (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette sage-blush (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-blue-blush (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette deep-rose (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette peach-blossom (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 114,
+  "low": 0,
+  "as_original": 3
+ },
+ "blush-meadow": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 1
+ },
+ "golden-poppy": {
+  "measured": 114,
+  "low": 0,
+  "as_original": 3
+ },
+ "lilac-meadow": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 1
+ },
+ "peach-sage": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 1
+ },
+ "wine-navy": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 1
+ }
+}

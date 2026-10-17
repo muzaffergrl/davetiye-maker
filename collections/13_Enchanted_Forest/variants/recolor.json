@@ -1,0 +1,206 @@
+{
+  "theme": "enchanted-forest-storybook",
+  "note": "G157 recolour manifest (tools/recolor_parts.py, docs/25). Only the storybook's cloth cover (and the cover edge behind the open page) changes colour; ferns, ivy, toadstools, the fog, the aged paper and the brass hinge stay natural. CSS: the moss accents follow the palette's deep role.",
+  "families": {
+    "cover": {
+      "anchor": "#34361C",
+      "sigma": 14,
+      "cmin": 0.015,
+      "cfull": 0.03
+    },
+    "paper": {
+      "anchor": "#F2DEBE",
+      "sigma": 12
+    },
+    "moss_css": {
+      "anchor": "#4A5A3A",
+      "sigma": 16,
+      "cmin": 0.035,
+      "cfull": 0.05
+    }
+  },
+  "groups": {
+    "cover": [
+      "cover",
+      "paper"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "firefly: natural amber in every palette"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "red toadstool: natural in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "fern fiddlehead: natural green"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "aged forest-mist paper (painted ground stays)"
+    },
+    "book_cover": {
+      "recolor": "auto",
+      "group": "cover"
+    },
+    "book_cover_in": {
+      "recolor": "auto",
+      "group": "cover"
+    },
+    "book_leaf": {
+      "recolor": "keep",
+      "why": "aged page paper"
+    },
+    "book_page": {
+      "recolor": "auto",
+      "group": "cover"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "aged photo card"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "antique brass hinge (metal)"
+    },
+    "decor_br": {
+      "recolor": "keep",
+      "why": "ferns, ivy and toadstools: natural colours"
+    },
+    "decor_tl": {
+      "recolor": "keep",
+      "why": "ferns, ivy and toadstools: natural colours"
+    },
+    "divider": {
+      "recolor": "keep",
+      "why": "ivy garland: natural colours"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "antique brass hinge (metal)"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "aged photo card with black corners"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "aged photo card with black corners"
+    },
+    "info_band": {
+      "recolor": "keep",
+      "why": "aged paper"
+    },
+    "info_card": {
+      "recolor": "keep",
+      "why": "aged paper with toadstool sprig"
+    },
+    "invitation_band": {
+      "recolor": "keep",
+      "why": "aged paper"
+    },
+    "invitation_card": {
+      "recolor": "keep",
+      "why": "aged paper with fern and toadstool border: natural colours"
+    },
+    "mist": {
+      "recolor": "keep",
+      "why": "forest fog scene: stays green in every palette"
+    },
+    "mist_wide": {
+      "recolor": "keep",
+      "why": "forest fog scene: stays green in every palette"
+    },
+    "og-1200x630": {
+      "recolor": "keep",
+      "why": "forest scene: the green book is small, foliage must stay green (recolouring would turn the moss)"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: misty paper"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: misty paper"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: misty paper"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: misty paper"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: misty paper"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "keep",
+      "why": "fern and toadstool border: natural colours"
+    },
+    "back": {
+      "recolor": "keep",
+      "why": "aged paper with toadstool sprig"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "misty paper texture"
+    }
+  },
+  "print_colors": {
+    "ink": "#2B2A1F",
+    "accent": "#5E4517",
+    "paper": "#EAEDDC"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "moss_css"
+    ],
+    "roles": {
+      "moss_css": "deep"
+    },
+    "keep": [
+      "--page",
+      "--mist",
+      "--ivory",
+      "--gold",
+      "--hair",
+      "--ink",
+      "--ink-soft",
+      "--script-ink",
+      "--c-ffd678"
+    ],
+    "contrast": [
+      [
+        "--moss",
+        "--page",
+        4.5
+      ],
+      [
+        "--moss-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--moss-ink",
+        "--mist",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--c-5d6e47",
+        4.5
+      ]
+    ]
+  }
+}

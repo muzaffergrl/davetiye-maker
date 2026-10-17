@@ -1,0 +1,99 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 06
+   (kaynak: collections/06_Art_Deco_Noir/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-0a1729: 10 23 41;
+  --c-0e1626: 14 22 38;
+  --c-0f1a30: 15 26 48;
+  --c-1a2740: 26 39 64;
+  --c-1d2d50: 29 45 80;
+  --c-405684: 64 86 132;
+  --c-c9a55c: 201 165 92;
+  --c-e6cf8f: 230 207 143;
+  --c-ffe29e: 255 226 158;
+  --c-ffe4a0: 255 228 160;
+}
+
+/* V05_amethyst_gold · Amethyst & Gold */
+html[data-variant="amethyst-gold"] {
+  --bronze: #785820;
+  --c-0a1729: 29 12 42;
+  --c-0e1626: 29 13 36;
+  --c-0f1a30: 36 14 46;
+  --c-1a2740: 50 26 63;
+  --c-1d2d50: 61 27 78;
+  --c-405684: 108 64 129;
+  --card-ink: #2E123B;
+  --navy: #2E123B;
+  --navy-deep: #1D0D24;
+  --page: #1D0C2A;
+}
+
+/* V04_burgundy_gold · Burgundy & Gold */
+html[data-variant="burgundy-gold"] {
+  --bronze: #785820;
+  --c-0a1729: 49 7 16;
+  --c-0e1626: 44 12 15;
+  --c-0f1a30: 55 10 16;
+  --c-1a2740: 73 21 27;
+  --c-1d2d50: 89 18 28;
+  --c-405684: 146 55 63;
+  --card-ink: #450C14;
+  --navy: #450C14;
+  --navy-deep: #2C0C0F;
+  --page: #310710;
+}
+
+/* V03_emerald_gold · Emerald & Gold */
+html[data-variant="emerald-gold"] {
+  --bronze: #785820;
+  --c-0a1729: 5 40 32;
+  --c-0e1626: 9 38 34;
+  --c-0f1a30: 1 44 39;
+  --c-1a2740: 11 58 52;
+  --c-1d2d50: 0 68 62;
+  --c-405684: 27 114 105;
+  --card-ink: #003530;
+  --navy: #003530;
+  --navy-deep: #092622;
+  --page: #052820;
+}
+
+/* V06_navy_silver · Navy & Silver */
+html[data-variant="navy-silver"] {
+  --bronze: #5F5F61;
+  --c-0a1729: 10 17 38;
+  --c-0e1626: 13 16 35;
+  --c-0f1a30: 15 20 45;
+  --c-1a2740: 26 32 61;
+  --c-1d2d50: 31 37 78;
+  --c-405684: 67 77 131;
+  --c-c9a55c: 200 198 198;
+  --c-e6cf8f: 238 234 227;
+  --c-ffe29e: 255 255 252;
+  --c-ffe4a0: 255 255 252;
+  --card-ink: #151A3B;
+  --gold: #C8C6C6;
+  --gold-light: #EEEAE3;
+  --hair: rgba(200, 198, 198, 0.5);
+  --navy: #151A3B;
+  --navy-deep: #0D1023;
+  --page: #0A1126;
+}
+
+/* V02_onyx_gold · Onyx Black & Gold */
+html[data-variant="onyx-gold"] {
+  --bronze: #785820;
+  --c-0a1729: 7 8 8;
+  --c-0e1626: 7 8 9;
+  --c-0f1a30: 11 12 13;
+  --c-1a2740: 23 23 25;
+  --c-1d2d50: 29 30 33;
+  --c-405684: 67 69 72;
+  --card-ink: #121315;
+  --navy: #121315;
+  --navy-deep: #070809;
+  --page: #070808;
+}

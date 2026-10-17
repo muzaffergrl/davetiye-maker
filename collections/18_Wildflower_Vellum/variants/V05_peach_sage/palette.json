@@ -1,0 +1,25 @@
+{
+  "id": "V05_peach_sage",
+  "slug": "peach-sage",
+  "name": "Peach & Sage Meadow",
+  "ink": "#2E3140",
+  "deep": "#4F6478",
+  "primary": "#F2A47E",
+  "mist_top": "#FBFAF4",
+  "mist_bottom": "#E8EBDC",
+  "gold": "#C2A15E",
+  "gold_light": "#E1CB98",
+  "ivory": "#FFFEF8",
+  "leaf": "#6A8A4E",
+  "swatch": [
+    "#FBFAF4",
+    "#F2A47E",
+    "#8BA3BC"
+  ],
+  "status": "coming",
+  "families": {
+    "poppy": "#F2A47E",
+    "cornflower": "#8BA3BC",
+    "lupine": "#A898BC"
+  }
+}

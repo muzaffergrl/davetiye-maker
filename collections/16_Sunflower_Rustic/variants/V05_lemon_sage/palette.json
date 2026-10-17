@@ -1,0 +1,25 @@
+{
+  "id": "V05_lemon_sage",
+  "slug": "lemon-sage",
+  "name": "Lemon & Sage",
+  "ink": "#3A2E1F",
+  "deep": "#56664A",
+  "primary": "#EDD55A",
+  "mist_top": "#FBF5E8",
+  "mist_bottom": "#E9D6B2",
+  "gold": "#B88B3E",
+  "gold_light": "#DDBB7E",
+  "ivory": "#FFFBF0",
+  "leaf": "#6E7D3A",
+  "swatch": [
+    "#FBF5E8",
+    "#EDD55A",
+    "#8FA383"
+  ],
+  "status": "coming",
+  "families": {
+    "sun": "#EDD36E",
+    "gingham": "#E6CB62",
+    "brown": "#56664A"
+  }
+}

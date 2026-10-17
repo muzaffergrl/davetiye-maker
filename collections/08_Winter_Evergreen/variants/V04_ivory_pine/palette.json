@@ -1,0 +1,23 @@
+{
+  "id": "V04_ivory_pine",
+  "slug": "ivory-pine",
+  "name": "Ivory & Pine",
+  "ink": "#1F2E26",
+  "deep": "#2F5240",
+  "primary": "#E9E2D2",
+  "mist_top": "#EEF2F1",
+  "mist_bottom": "#C9D6D2",
+  "gold": "#B79B5E",
+  "gold_light": "#DCC895",
+  "ivory": "#FAFAF6",
+  "leaf": "#3E6B53",
+  "swatch": [
+    "#FAFAF6",
+    "#E9E2D2",
+    "#8C1D26"
+  ],
+  "status": "coming",
+  "families": {
+    "envelope": "primary"
+  }
+}

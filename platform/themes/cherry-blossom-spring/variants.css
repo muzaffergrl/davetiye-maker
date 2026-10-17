@@ -1,0 +1,145 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 15
+   (kaynak: collections/15_Cherry_Blossom/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3a3438: 58 52 56;
+  --c-3c1423: 60 20 35;
+  --c-5a2837: 90 40 55;
+  --c-5a3241: 90 50 65;
+  --c-6e3c4b: 110 60 75;
+  --c-783c50: 120 60 80;
+  --c-7c5563: 124 85 99;
+  --c-845463: 132 84 99;
+  --c-9a6675: 154 102 117;
+  --c-f1e7e9: 241 231 233;
+  --c-f2c4ce: 242 196 206;
+  --c-f3e8ea: 243 232 234;
+  --c-faf3f4: 250 243 244;
+}
+
+/* V05_deep_rose · Deep Rose & Mauve */
+html[data-variant="deep-rose"] {
+  --c-3a3438: 55 46 53;
+  --c-3c1423: 57 0 24;
+  --c-5a2837: 90 9 43;
+  --c-5a3241: 88 26 54;
+  --c-6e3c4b: 110 34 63;
+  --c-783c50: 122 26 68;
+  --c-7c5563: 122 63 87;
+  --c-845463: 132 60 86;
+  --c-9a6675: 155 78 104;
+  --c-f1e7e9: 235 219 226;
+  --c-f2c4ce: 242 176 192;
+  --c-f3e8ea: 238 220 227;
+  --c-faf3f4: 244 232 236;
+  --hair: rgba(122, 63, 87, 0.38);
+  --ink: #372E35;
+  --ink-soft: #523B49;
+  --mist: #EEDCE3;
+  --page: #E9D8E0;
+  --rose: #7A3F57;
+  --rose-ink: #6C354D;
+  --script-ink: #473440;
+}
+
+/* V04_dusty_blue_blush · Dusty Blue & Blush */
+html[data-variant="dusty-blue-blush"] {
+  --c-3a3438: 52 56 58;
+  --c-3c1423: 18 35 55;
+  --c-5a2837: 45 56 80;
+  --c-5a3241: 44 64 84;
+  --c-6e3c4b: 61 76 101;
+  --c-783c50: 59 81 111;
+  --c-7c5563: 79 98 117;
+  --c-845463: 81 100 123;
+  --c-9a6675: 95 112 138;
+  --c-f1e7e9: 230 234 238;
+  --c-f2c4ce: 199 207 229;
+  --c-f3e8ea: 230 235 240;
+  --c-faf3f4: 242 245 248;
+  --hair: rgba(79, 98, 117, 0.38);
+  --ink: #34383A;
+  --ink-soft: #40494F;
+  --mist: #E6EBF0;
+  --page: #E2E7EB;
+  --rose: #4F6275;
+  --rose-ink: #3F5163;
+  --script-ink: #3B4348;
+}
+
+/* V02_ivory_blossom · Ivory Blossom & Gold */
+html[data-variant="ivory-blossom"] {
+  --c-3a3438: 65 58 56;
+  --c-3c1423: 58 38 12;
+  --c-5a2837: 84 60 32;
+  --c-5a3241: 88 67 44;
+  --c-6e3c4b: 104 80 52;
+  --c-783c50: 112 83 48;
+  --c-7c5563: 122 102 80;
+  --c-845463: 127 103 76;
+  --c-9a6675: 132 108 80;
+  --c-f1e7e9: 248 240 235;
+  --c-f2c4ce: 236 213 192;
+  --c-f3e8ea: 250 241 235;
+  --c-faf3f4: 255 252 248;
+  --hair: rgba(122, 102, 80, 0.38);
+  --ink: #413A38;
+  --ink-soft: #584A43;
+  --mist: #FAF1EB;
+  --page: #F5ECE7;
+  --rose: #7A6650;
+  --rose-ink: #624F3B;
+  --script-ink: #50453F;
+}
+
+/* V06_peach_blossom · Peach Blossom & Cream */
+html[data-variant="peach-blossom"] {
+  --c-3a3438: 67 57 54;
+  --c-3c1423: 72 23 0;
+  --c-5a2837: 101 45 10;
+  --c-5a3241: 104 54 31;
+  --c-6e3c4b: 122 65 35;
+  --c-783c50: 135 64 24;
+  --c-7c5563: 138 90 69;
+  --c-845463: 146 89 61;
+  --c-9a6675: 155 96 67;
+  --c-f1e7e9: 250 238 231;
+  --c-f2c4ce: 253 203 179;
+  --c-f3e8ea: 252 240 231;
+  --c-faf3f4: 255 251 245;
+  --hair: rgba(138, 90, 69, 0.38);
+  --ink: #433936;
+  --ink-soft: #5C483D;
+  --mist: #FCF0E7;
+  --page: #F8EAE2;
+  --rose: #8A5A45;
+  --rose-ink: #774936;
+  --script-ink: #53433A;
+}
+
+/* V03_sage_blush · Sage & Blush */
+html[data-variant="sage-blush"] {
+  --c-3a3438: 57 56 50;
+  --c-3c1423: 31 44 22;
+  --c-5a2837: 55 67 44;
+  --c-5a3241: 59 73 50;
+  --c-6e3c4b: 72 87 63;
+  --c-783c50: 74 93 62;
+  --c-7c5563: 94 107 85;
+  --c-845463: 94 110 85;
+  --c-9a6675: 102 117 93;
+  --c-f1e7e9: 234 236 227;
+  --c-f2c4ce: 209 218 200;
+  --c-f3e8ea: 235 237 228;
+  --c-faf3f4: 245 247 241;
+  --hair: rgba(94, 107, 85, 0.38);
+  --ink: #393832;
+  --ink-soft: #494A3B;
+  --mist: #EBEDE4;
+  --page: #E7E9DF;
+  --rose: #5E6B55;
+  --rose-ink: #48543F;
+  --script-ink: #434338;
+}

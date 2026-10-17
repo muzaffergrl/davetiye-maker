@@ -1,0 +1,55 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 13
+   (kaynak: collections/13_Enchanted_Forest/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3e4c2f: 62 76 47;
+  --c-4a5a3a: 74 90 58;
+  --c-5d6e47: 93 110 71;
+}
+
+/* V05_autumn_russet · Autumn Russet */
+html[data-variant="autumn-russet"] {
+  --c-3e4c2f: 104 56 31;
+  --c-4a5a3a: 122 68 40;
+  --c-5d6e47: 149 84 53;
+  --moss: #7A4428;
+  --moss-ink: #5D3D24;
+}
+
+/* V02_burgundy_storybook · Burgundy Storybook */
+html[data-variant="burgundy-storybook"] {
+  --c-3e4c2f: 89 36 47;
+  --c-4a5a3a: 106 46 58;
+  --c-5d6e47: 132 61 77;
+  --moss: #6A2E3A;
+  --moss-ink: #522D2E;
+}
+
+/* V06_deep_teal · Deep Teal & Brass */
+html[data-variant="deep-teal"] {
+  --c-3e4c2f: 36 74 72;
+  --c-4a5a3a: 46 88 86;
+  --c-5d6e47: 59 109 105;
+  --moss: #2E5856;
+  --moss-ink: #2B4941;
+}
+
+/* V03_midnight_navy · Midnight Navy & Brass */
+html[data-variant="midnight-navy"] {
+  --c-3e4c2f: 36 56 85;
+  --c-4a5a3a: 47 68 102;
+  --c-5d6e47: 60 88 127;
+  --moss: #2F4466;
+  --moss-ink: #293B4B;
+}
+
+/* V04_plum_twilight · Plum Twilight */
+html[data-variant="plum-twilight"] {
+  --c-3e4c2f: 75 45 73;
+  --c-4a5a3a: 90 56 88;
+  --c-5d6e47: 111 73 112;
+  --moss: #5A3858;
+  --moss-ink: #463342;
+}

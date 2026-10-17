@@ -1,0 +1,106 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 02
+   (kaynak: collections/02_Dusty_Blue/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-1c2a3e: 28 42 62;
+  --c-2b3a4e: 43 58 78;
+  --c-44597a: 68 89 122;
+  --c-47607b: 71 96 123;
+  --c-4e6782: 78 103 130;
+  --c-6e88a3: 110 136 163;
+  --c-b8996a: 184 153 106;
+  --c-c8d8e9: 200 216 233;
+  --c-e3e9ef: 227 233 239;
+}
+
+/* V02_blush_champagne · Blush & Champagne */
+html[data-variant="blush-champagne"] {
+  --blue: #986066;
+  --blue-ink: #8F5150;
+  --c-1c2a3e: 79 40 41;
+  --c-2b3a4e: 96 57 58;
+  --c-44597a: 143 81 80;
+  --c-47607b: 145 89 95;
+  --c-4e6782: 152 96 102;
+  --c-6e88a3: 186 129 136;
+  --c-c8d8e9: 239 224 220;
+  --c-e3e9ef: 237 238 241;
+  --ink: #60393A;
+  --ink-soft: #744849;
+  --page: #F3E4E1;
+}
+
+/* V05_burgundy_blush · Burgundy & Blush */
+html[data-variant="burgundy-blush"] {
+  --blue: #6B1F30;
+  --blue-ink: #630719;
+  --c-1c2a3e: 34 0 1;
+  --c-2b3a4e: 51 0 9;
+  --c-44597a: 99 7 25;
+  --c-47607b: 99 23 42;
+  --c-4e6782: 107 31 48;
+  --c-6e88a3: 140 65 80;
+  --c-c8d8e9: 237 221 219;
+  --c-e3e9ef: 236 237 240;
+  --ink: #330009;
+  --ink-soft: #460C16;
+  --page: #F1E1E0;
+}
+
+/* V06_lavender_silver · Lavender & Silver */
+html[data-variant="lavender-silver"] {
+  --blue: #5F5582;
+  --blue-ink: #594677;
+  --c-1c2a3e: 39 28 59;
+  --c-2b3a4e: 54 44 75;
+  --c-44597a: 89 70 119;
+  --c-47607b: 88 78 123;
+  --c-4e6782: 95 85 130;
+  --c-6e88a3: 126 118 164;
+  --c-b8996a: 160 158 156;
+  --c-c8d8e9: 233 228 239;
+  --c-e3e9ef: 237 240 245;
+  --gold: #A09E9C;
+  --gold-card: #6B6A6C;
+  --gold-ink: #5D5D5E;
+  --gold-light: #D5C5A8;
+  --ink: #362C4B;
+  --ink-soft: #463B5D;
+  --page: #EDE8F3;
+}
+
+/* V04_navy_gold · Navy & Gold */
+html[data-variant="navy-gold"] {
+  --blue: #1F3558;
+  --blue-ink: #1A2851;
+  --c-1c2a3e: 0 2 23;
+  --c-2b3a4e: 4 14 38;
+  --c-44597a: 26 40 81;
+  --c-47607b: 24 47 82;
+  --c-4e6782: 31 53 88;
+  --c-6e88a3: 60 84 120;
+  --c-c8d8e9: 223 227 235;
+  --c-e3e9ef: 234 238 243;
+  --ink: #040E26;
+  --ink-soft: #101C37;
+  --page: #E3E7EE;
+}
+
+/* V03_terracotta_cream · Terracotta & Cream */
+html[data-variant="terracotta-cream"] {
+  --blue: #7F3B2B;
+  --blue-ink: #752D08;
+  --c-1c2a3e: 53 7 0;
+  --c-2b3a4e: 70 24 7;
+  --c-44597a: 117 45 8;
+  --c-47607b: 120 52 36;
+  --c-4e6782: 127 59 43;
+  --c-6e88a3: 161 92 77;
+  --c-c8d8e9: 234 224 210;
+  --c-e3e9ef: 236 237 239;
+  --ink: #461807;
+  --ink-soft: #592714;
+  --page: #EEE4D6;
+}

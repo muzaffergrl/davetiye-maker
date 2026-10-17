@@ -1,0 +1,24 @@
+{
+  "id": "V05_amber_noir",
+  "slug": "amber-noir",
+  "name": "Amber & Black",
+  "ink": "#EFE6DA",
+  "deep": "#C9A46A",
+  "primary": "#141217",
+  "mist_top": "#1C1A21",
+  "mist_bottom": "#0B0A0D",
+  "gold": "#C9A46A",
+  "gold_light": "#E3C99A",
+  "ivory": "#EFE6DA",
+  "leaf": "#5B6B4E",
+  "swatch": [
+    "#141217",
+    "#A24A1E",
+    "#C9A46A"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "#6E2E18",
+    "petal": "#6E2E18"
+  }
+}

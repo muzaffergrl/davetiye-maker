@@ -1,0 +1,51 @@
+{
+ "theme": "midnight-garden",
+ "summary": {
+  "original": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  },
+  "blush-noir": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  },
+  "ivory-noir": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  },
+  "plum-noir": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  },
+  "amber-noir": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  },
+  "champagne-noir": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 1 text(s) below the contrast minimum on the painted ground: rsvp \"C&D\" 4.13:1 < 4.5:1",
+  "palette blush-noir: 1 text(s) below the minimum as in the original design: rsvp \"C&D\" 4.13:1 < 4.5:1",
+  "palette ivory-noir: 1 text(s) below the minimum as in the original design: rsvp \"C&D\" 4.13:1 < 4.5:1",
+  "palette plum-noir: 1 text(s) below the minimum as in the original design: rsvp \"C&D\" 4.13:1 < 4.5:1",
+  "palette amber-noir: 1 text(s) below the minimum as in the original design: rsvp \"C&D\" 4.13:1 < 4.5:1",
+  "palette champagne-noir: 1 text(s) below the minimum as in the original design: rsvp \"C&D\" 4.13:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette blush-noir (coming): 111 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette ivory-noir (coming): 111 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette plum-noir (coming): 111 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette amber-noir (coming): 111 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette champagne-noir (coming): 111 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

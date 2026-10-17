@@ -1,0 +1,229 @@
+{
+  "theme": "tuscan-vineyard",
+  "note": "G157 recolour manifest (tools/recolor_parts.py, docs/25). wine = the deep burgundy envelope liner; rule = the lighter rose-brown rules, frames and the printed vine band on the kraft flap (narrow sigma: kraft sits 18-25° away); grape = the grape clusters (own family so a palette can keep burgundy grapes). Kraft, parchment, sunset scenery, oak, leaves and cork stay. wine_ink = CSS-only family anchored on the --wine token (plum-wine, off the liner's hue).",
+  "families": {
+    "wine": {
+      "anchor": "#601F22",
+      "sigma": 14,
+      "cmin": 0.05,
+      "cfull": 0.07
+    },
+    "rule": {
+      "anchor": "#B07461",
+      "sigma": 10,
+      "cmin": 0.05,
+      "cfull": 0.065
+    },
+    "grape": {
+      "anchor": "#7B3C49",
+      "sigma": 22,
+      "cmin": 0.04,
+      "cfull": 0.06
+    },
+    "wine_ink": {
+      "anchor": "#5B2C3A",
+      "sigma": 30,
+      "cmin": 0.03,
+      "cfull": 0.05
+    }
+  },
+  "groups": {
+    "grape": [
+      "grape"
+    ],
+    "card": [
+      "grape",
+      "rule"
+    ],
+    "envelope": [
+      "wine",
+      "rule"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "grape"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "green vine leaf with gold tendril, natural"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "olive leaf, natural"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "warm parchment paper texture"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "cork button, twine and olive leaves"
+    },
+    "decor_br": {
+      "recolor": "auto",
+      "group": "grape"
+    },
+    "decor_tl": {
+      "recolor": "auto",
+      "group": "grape"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "grape"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_pocket": {
+      "recolor": "keep",
+      "why": "plain kraft pocket"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "cork button, twine and olive leaves"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "mist": {
+      "recolor": "keep",
+      "why": "Tuscan sunset landscape painting"
+    },
+    "oak_tile": {
+      "recolor": "keep",
+      "why": "oak table photo texture"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: sunset-tinted paper"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: sunset-tinted paper"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: sunset-tinted paper"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: sunset-tinted paper"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: sunset-tinted paper"
+    },
+    "sky": {
+      "recolor": "keep",
+      "why": "Tuscan sunset landscape painting"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "card"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "warm parchment paper texture"
+    }
+  },
+  "print_colors": {
+    "ink": "#2F2420",
+    "accent": "#6E5228",
+    "paper": "#FAE6CF"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "wine_ink"
+    ],
+    "roles": {
+      "wine_ink": "deep"
+    },
+    "keep": [
+      "--gold",
+      "--gold-light",
+      "--gold-ink",
+      "--ivory",
+      "--page",
+      "--sky",
+      "--c-8a2a2a"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--sky",
+        4.5
+      ],
+      [
+        "--wine",
+        "--page",
+        4.5
+      ],
+      [
+        "--wine",
+        "--sky",
+        4.5
+      ],
+      [
+        "--wine-btn",
+        "--ivory",
+        4.5
+      ]
+    ]
+  }
+}

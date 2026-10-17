@@ -7,7 +7,7 @@ import { liveDesigns } from '../lib/marketing/designs.ts';
 import { faqItems, plainAnswer } from '../lib/marketing/faq.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { article, breadcrumbs, faqEntities, graph, itemList, jsonLdString, organization, product, videoObject, webPage, website } from '../lib/marketing/schema.ts';
-import { isPlaceholder } from '../lib/marketing/placeholders.ts';
+import { hasPlaceholder, isPlaceholder } from '../lib/marketing/placeholders.ts';
 import { corePages } from '../lib/marketing/site.ts';
 import { readyConfig, validateJsonLd } from './marketing-helpers.ts';
 
@@ -35,8 +35,10 @@ test('today: the brand name is decided (K27), the undecided fields (email, price
     ...corePages().map((p) => webPage(p, MARKETING, p.kind === 'FAQPage' ? { mainEntity: faqEntities(faqItems()) } : {})),
     ...liveDesigns().map((d) => product(d)),
   );
+  // answers with placeholders are left out of FAQPage until decided (G154/K48: none is left today)
   const faqCount = faqEntities(faqItems()).length;
-  assert.ok(faqCount > 10 && faqCount < faqItems().length, 'answers with placeholders are left out of FAQPage until decided');
+  assert.ok(faqCount > 10);
+  assert.equal(faqCount, faqItems().filter((it) => !hasPlaceholder(it.q) && !hasPlaceholder(it.a)).length);
   assert.deepEqual(validateJsonLd(all), []);
 });
 

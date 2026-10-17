@@ -84,10 +84,13 @@ Hepsi `coming`. Sonuçlar ve açık işler: `gorevler/G153-palet-varyant.md`.
 
 Varyant klasörü yalnız değişen parçaları taşır. Pilot ölçüm (q82 webp): 01 ≈ 1,5 MB / palet, 03 ≈ 2,8 MB / palet (neredeyse
 her parça pembe), 21 ≈ 0,25 MB / palet; baskı parçaları 0,15–0,55 MB / palet. Tema klasörü sınırı (docs/11 §15, ≤ 3 MB;
-`tools/tema_build.py klasor_boyutu`) **varyant klasörleri hariç** asıl tasarıma uygulanır. Varyant görselleri yalnız varlık
-rotasının paketinde (`next.config.ts` THEME_ASSETS; pilotla 42 → 64 MB). 18 tasarım daha × 5 palet ≈ +150–250 MB: Vercel
-işlev sınırına (250 MB) yaklaşır — GP1NN'lerin yarısından önce `img/variants`'ın CDN'e (public/ ya da Blob) taşınması
-ayrı karar (öneri: `public/themes/<id>/variants/<vid>/`, varlık rotası 302 ile yönlendirir).
+`tools/tema_build.py klasor_boyutu`) **varyant klasörleri hariç** asıl tasarıma uygulanır. **G159 (2026-10-17):** tema
+görselleri/CSS/JS (varyantlar dahil) artık **hiçbir işlevin paketinde değil** — `npm run build` önce
+`scripts/theme-assets.cjs` ile `public/themes/`'e kopyalar, Vercel CDN'den aynı adreste verir; varyantın kendi görseli
+`public/themes/<id>/~<vid>/img/<dosya>`'ya, olmayan dosya `next.config.ts` rewrite'ıyla (yönlendirme değil) asla düşer.
+Yeni palet dosyası (`img/variants/<vid>/…`, `variants.css`) bir sonraki build'de kendiliğinden yayına girer; elle adım yok.
+Boyut sınırı artık işlev değil, statik dosya: `trace-check` her işlevde tema dosyası ≤ 40 MB, toplam ≤ 200 MB arar
+(ayrıntı `docs/10_SITE_PLATFORMU.md`, `gorevler/G159-statik-tema.md`).
 
 **CSS bütçesi:** `site.css` ≤ 45 KB (docs/11 §6). Hiçbir paletin değiştirmediği kanal token'ları build sonunda yeniden
 sabit renk olur (`#rrggbb` / `#rrggbbaa`), kalan kanalların asıl değerleri `variants.css :root`'unda durur; bu yüzden motor

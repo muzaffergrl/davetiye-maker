@@ -1,0 +1,28 @@
+{
+  "id": "V03_sage_blush",
+  "slug": "sage-blush",
+  "name": "Sage & Blush",
+  "ink": "#3A3438",
+  "deep": "#5E6B55",
+  "primary": "#F2C4CE",
+  "mist_top": "#F6F7F2",
+  "mist_bottom": "#E3E8DC",
+  "gold": "#B9A07A",
+  "gold_light": "#DCCAA9",
+  "ivory": "#FFFCFB",
+  "leaf": "#6E5E55",
+  "swatch": [
+    "#F6F7F2",
+    "#F2C4CE",
+    "#BCC2B4"
+  ],
+  "status": "coming",
+  "families": {
+    "blossom": null,
+    "envelope": "#BCC2B4",
+    "ground": "#EBEDE6",
+    "branch": null,
+    "stamen": null,
+    "rose_ink": "deep"
+  }
+}

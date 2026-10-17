@@ -1,0 +1,25 @@
+{
+  "id": "V03_dusty_blue",
+  "slug": "dusty-blue",
+  "name": "Dusty Blue & Lavender",
+  "ink": "#262C3E",
+  "deep": "#4D5A82",
+  "primary": "#8E9CC2",
+  "mist_top": "#EEF2F6",
+  "mist_bottom": "#CDD7E4",
+  "gold": "#B5A27A",
+  "gold_light": "#D8CBA8",
+  "ivory": "#FAF8F3",
+  "leaf": "#8A9A78",
+  "swatch": [
+    "#CDD7E4",
+    "#8E9CC2",
+    "#4D5A82"
+  ],
+  "status": "coming",
+  "families": {
+    "lavender": "#575E80",
+    "paper": "mist_bottom",
+    "lav_ink": "deep"
+  }
+}

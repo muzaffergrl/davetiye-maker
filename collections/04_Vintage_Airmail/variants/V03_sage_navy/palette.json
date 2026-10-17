@@ -1,0 +1,23 @@
+{
+  "id": "V03_sage_navy",
+  "slug": "sage-navy",
+  "name": "Sage & Navy",
+  "ink": "#2A2A35",
+  "deep": "#5F7151",
+  "primary": "#879A76",
+  "mist_top": "#F2EADB",
+  "mist_bottom": "#DCCDB2",
+  "gold": "#A88A5A",
+  "gold_light": "#D2BE95",
+  "ivory": "#FAF4E8",
+  "leaf": "#8A9474",
+  "swatch": [
+    "#FAF4E8",
+    "#879A76",
+    "#3D4F7A"
+  ],
+  "status": "coming",
+  "families": {
+    "red": "primary"
+  }
+}

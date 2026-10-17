@@ -1,0 +1,236 @@
+{
+  "theme": "dusty-blue-champagne",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). seal = dusty-blue wax and envelope liner (dark), sky = pale blue paper/page (light, lightness-gated so they take different roles); gold changes only in the silver palette; eucalyptus stays sage.",
+  "families": {
+    "seal": {
+      "anchor": "#5E7591",
+      "sigma": 34,
+      "cmin": 0.006,
+      "cfull": 0.02,
+      "lmax": 0.76
+    },
+    "sky": {
+      "anchor": "#CBDCEB",
+      "sigma": 24,
+      "cmin": 0.006,
+      "cfull": 0.016,
+      "lmin": 0.76
+    },
+    "gold": {
+      "anchor": "#D6A354",
+      "sigma": 14,
+      "cmin": 0.05,
+      "cfull": 0.075
+    }
+  },
+  "groups": {
+    "seal": [
+      "seal",
+      "gold"
+    ],
+    "envelope": [
+      "seal",
+      "gold"
+    ],
+    "sky": [
+      "sky"
+    ],
+    "scene": [
+      "sky",
+      "seal",
+      "gold"
+    ],
+    "gilded": [
+      "gold"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "eucalyptus leaf: sage in every palette"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "accent_3": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "seal"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "seal"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "paper_wide": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "sky"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "sky"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "gilded"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "sky"
+    }
+  },
+  "print_colors": {
+    "ink": "#2B3A4E",
+    "accent": "#765627",
+    "paper": "#FBF7EF"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "seal",
+      "sky",
+      "gold"
+    ],
+    "keep": [
+      "--ivory",
+      "--seal-ink",
+      "--c-8a3a2a",
+      "--c-1e2d46",
+      "--c-f0f5fa"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--blue-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--blue-ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--gold-card",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--blue",
+        4.5
+      ],
+      [
+        "--ink",
+        "--ivory",
+        4.5
+      ]
+    ]
+  }
+}

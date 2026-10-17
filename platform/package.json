@@ -7,9 +7,12 @@
     "node": ">=22.18.0"
   },
   "scripts": {
+    "predev": "node scripts/theme-assets.cjs --clean",
     "dev": "next dev",
+    "prebuild": "node scripts/theme-assets.cjs",
     "build": "next build",
     "postbuild": "node scripts/trace-check.cjs",
+    "prestart": "node scripts/theme-assets.cjs",
     "start": "next start",
     "test": "node --test --test-reporter=spec \"tests/*.test.ts\"",
     "typecheck": "tsc --noEmit",

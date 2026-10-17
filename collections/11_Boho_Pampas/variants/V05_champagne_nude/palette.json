@@ -1,0 +1,25 @@
+{
+  "id": "V05_champagne_nude",
+  "slug": "champagne-nude",
+  "name": "Champagne & Nude",
+  "ink": "#3A2E26",
+  "deep": "#8C6F58",
+  "primary": "#D2B49C",
+  "mist_top": "#F6EDE3",
+  "mist_bottom": "#E5CDB5",
+  "gold": "#C29A5B",
+  "gold_light": "#E2C79A",
+  "ivory": "#FBF5EC",
+  "leaf": "#D3A595",
+  "swatch": [
+    "#F3DEC6",
+    "#D2B49C",
+    "#D3A595"
+  ],
+  "status": "coming",
+  "families": {
+    "terra": "primary",
+    "rose": "leaf",
+    "terra_css": "primary"
+  }
+}

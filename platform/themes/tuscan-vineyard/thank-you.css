@@ -5,7 +5,7 @@
 .photo-slot > img.ty-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
 .photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
                           background: var(--ivory) url("img/bg_tile-640.webp") 50% 50% / 240% auto; }
-.ty-decor > img { width: 30%; height: auto; display: block; rotate: 6deg; filter: drop-shadow(0 6px 6px rgba(60, 32, 20, .24)); }
+.ty-decor > img { width: 30%; height: auto; display: block; rotate: 6deg; filter: drop-shadow(0 6px 6px rgb(var(--c-3c2014)/.24)); }
 /* card copy: the thank-you title (≤ 60 characters) wraps in the script, the date under it */
 .card-copy .ty-title { font-family: var(--script); color: var(--wine); font-size: 13cqw; line-height: .95; text-wrap: balance;
                        overflow-wrap: break-word; max-width: 100%; }

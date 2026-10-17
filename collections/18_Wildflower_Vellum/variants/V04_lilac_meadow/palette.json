@@ -1,0 +1,25 @@
+{
+  "id": "V04_lilac_meadow",
+  "slug": "lilac-meadow",
+  "name": "Lilac & Mauve Meadow",
+  "ink": "#2E3140",
+  "deep": "#5E4A8E",
+  "primary": "#C47C9C",
+  "mist_top": "#FBFAF4",
+  "mist_bottom": "#E8EBDC",
+  "gold": "#C2A15E",
+  "gold_light": "#E1CB98",
+  "ivory": "#FFFEF8",
+  "leaf": "#6A8A4E",
+  "swatch": [
+    "#FBFAF4",
+    "#C47C9C",
+    "#8670C8"
+  ],
+  "status": "coming",
+  "families": {
+    "poppy": "#C77C9E",
+    "cornflower": "#8670C8",
+    "lupine": null
+  }
+}

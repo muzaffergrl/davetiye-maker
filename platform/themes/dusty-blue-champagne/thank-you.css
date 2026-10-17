@@ -7,7 +7,7 @@
 .photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
                           background: var(--page) url("img/paper-400.webp") 50% 45% / cover; }
 .ty-seal { position: relative; width: 70%; aspect-ratio: 785 / 950; container-type: inline-size; translate: -4% 2%; rotate: -5deg;
-           filter: drop-shadow(0 6px 7px #1e2d464c) drop-shadow(0 1px 1px #1e2d4647); }
+           filter: drop-shadow(0 6px 7px rgb(var(--c-1e2d46)/.298)) drop-shadow(0 1px 1px rgb(var(--c-1e2d46)/.278)); }
 .ty-seal > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 /* card copy: the thank-you title (≤ 60 characters) wraps in the calligraphy, the date under it */

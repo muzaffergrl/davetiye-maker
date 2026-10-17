@@ -1,0 +1,25 @@
+{
+  "id": "V03_midnight_navy",
+  "slug": "midnight-navy",
+  "name": "Midnight Navy & Brass",
+  "ink": "#2B2A1F",
+  "deep": "#2F4466",
+  "primary": "#4A6088",
+  "mist_top": "#EDEFE3",
+  "mist_bottom": "#BFC7A8",
+  "gold": "#B7975A",
+  "gold_light": "#DCC58F",
+  "ivory": "#F8F4E6",
+  "leaf": "#55703F",
+  "swatch": [
+    "#F8F4E6",
+    "#1E2A40",
+    "#B7975A"
+  ],
+  "status": "coming",
+  "families": {
+    "cover": "#1E2A40",
+    "moss_css": "deep",
+    "paper": null
+  }
+}

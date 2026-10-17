@@ -1,0 +1,25 @@
+{
+  "id": "V06_blush_paradise",
+  "slug": "blush-paradise",
+  "name": "Blush Paradise",
+  "ink": "#3A2629",
+  "deep": "#9A5466",
+  "primary": "#F4B3BE",
+  "mist_top": "#FFF7F7",
+  "mist_bottom": "#FBE6E8",
+  "gold": "#D4A44C",
+  "gold_light": "#EBCB8B",
+  "ivory": "#FFFCF5",
+  "leaf": "#2E7D4F",
+  "swatch": [
+    "#FBE6E8",
+    "#F4B3BE",
+    "#2E7D4F"
+  ],
+  "status": "coming",
+  "families": {
+    "hibiscus": "primary",
+    "lagoon": "mist_bottom",
+    "teal_css": "deep"
+  }
+}

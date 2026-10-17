@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 3
+ },
+ "navy-sunflower": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "burgundy-sunflower": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "dusty-blue-sunflower": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "lemon-sage": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ },
+ "rust-bronze": {
+  "measured": 116,
+  "low": 0,
+  "as_original": 0
+ }
+}

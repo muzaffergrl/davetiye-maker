@@ -1,0 +1,24 @@
+{
+  "id": "V06_dusty_blue_lemon",
+  "slug": "dusty-blue-lemon",
+  "name": "Dusty Blue & Lemon",
+  "ink": "#26364A",
+  "deep": "#56789E",
+  "primary": "#F2C94C",
+  "mist_top": "#F7F4EC",
+  "mist_bottom": "#DDE5EF",
+  "gold": "#C9A04A",
+  "gold_light": "#E8D18F",
+  "ivory": "#FFFDF7",
+  "leaf": "#5E8C4A",
+  "swatch": [
+    "#FFFDF7",
+    "#F2C94C",
+    "#56789E"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "deep",
+    "wash": "mist_bottom"
+  }
+}

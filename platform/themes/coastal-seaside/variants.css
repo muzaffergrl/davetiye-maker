@@ -1,0 +1,140 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 20
+   (kaynak: collections/20_Coastal_Seaside/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-081828: 8 24 40;
+  --c-10283c: 16 40 60;
+  --c-14283c: 20 40 60;
+  --c-143c5a: 20 60 90;
+  --c-1d3445: 29 52 69;
+  --c-1e3246: 30 50 70;
+  --c-1f4d6e: 31 77 110;
+  --c-2e5e7e: 46 94 126;
+  --c-336f95: 51 111 149;
+  --c-d6e9f2: 214 233 242;
+  --c-e2eff3: 226 239 243;
+  --c-e7f5f7: 231 245 247;
+  --c-eaf4f7: 234 244 247;
+  --c-ecf6fa: 236 246 250;
+}
+
+/* V05_dusty_blue_blush · Dusty Blue & Blush */
+html[data-variant="dusty-blue-blush"] {
+  --c-081828: 22 29 40;
+  --c-10283c: 34 47 63;
+  --c-14283c: 37 47 62;
+  --c-143c5a: 46 68 92;
+  --c-1d3445: 46 57 70;
+  --c-1e3246: 46 56 71;
+  --c-1f4d6e: 59 85 112;
+  --c-2e5e7e: 74 102 128;
+  --c-336f95: 84 119 150;
+  --c-d6e9f2: 226 231 236;
+  --c-e2eff3: 233 236 239;
+  --c-e7f5f7: 236 243 245;
+  --c-ecf6fa: 241 244 246;
+  --deep: #4A6680;
+  --deep-ink: #3F5870;
+  --hair: rgba(74, 102, 128, 0.38);
+  --ink: #2E3946;
+  --ink-soft: #405264;
+  --page: #E5ECF1;
+  --script-ink: #2E3946;
+}
+
+/* V02_navy_sand · Nautical Navy & Sand */
+html[data-variant="navy-sand"] {
+  --c-081828: 3 5 18;
+  --c-10283c: 4 12 33;
+  --c-14283c: 7 14 33;
+  --c-143c5a: 9 28 61;
+  --c-1d3445: 17 28 45;
+  --c-1e3246: 16 24 43;
+  --c-1f4d6e: 19 42 79;
+  --c-2e5e7e: 31 58 95;
+  --c-336f95: 39 73 118;
+  --c-d6e9f2: 217 223 231;
+  --deep: #1F3A5F;
+  --deep-ink: #152D4F;
+  --hair: rgba(31, 58, 95, 0.38);
+  --ink: #111C2D;
+  --ink-soft: #182942;
+  --page: #DBE3EB;
+  --script-ink: #111C2D;
+}
+
+/* V03_seafoam_sage · Seafoam & Sage */
+html[data-variant="seafoam-sage"] {
+  --c-081828: 10 29 26;
+  --c-10283c: 22 46 41;
+  --c-14283c: 23 47 42;
+  --c-143c5a: 31 68 60;
+  --c-1d3445: 37 57 51;
+  --c-1e3246: 34 56 52;
+  --c-1f4d6e: 45 86 74;
+  --c-2e5e7e: 63 102 88;
+  --c-336f95: 73 120 102;
+  --c-d6e9f2: 221 234 228;
+  --c-e2eff3: 232 239 235;
+  --c-e7f5f7: 237 244 241;
+  --c-eaf4f7: 238 244 241;
+  --c-ecf6fa: 240 246 243;
+  --deep: #3F6658;
+  --deep-ink: #33584B;
+  --hair: rgba(63, 102, 88, 0.38);
+  --ink: #253933;
+  --ink-soft: #375148;
+  --mist: #EEF4F1;
+  --page: #E2EEE7;
+  --script-ink: #253933;
+}
+
+/* V06_slate_pearl · Slate & Pearl */
+html[data-variant="slate-pearl"] {
+  --c-081828: 15 20 24;
+  --c-10283c: 25 33 39;
+  --c-14283c: 28 34 40;
+  --c-143c5a: 39 52 62;
+  --c-1d3445: 39 46 50;
+  --c-1e3246: 37 44 50;
+  --c-1f4d6e: 53 68 79;
+  --c-2e5e7e: 68 84 94;
+  --c-336f95: 81 100 112;
+  --c-d6e9f2: 227 230 232;
+  --c-e2eff3: 236 238 239;
+  --c-e7f5f7: 239 244 245;
+  --c-eaf4f7: 241 244 245;
+  --c-ecf6fa: 244 246 247;
+  --deep: #44545E;
+  --deep-ink: #384750;
+  --hair: rgba(68, 84, 94, 0.38);
+  --ink: #272E32;
+  --ink-soft: #374148;
+  --mist: #F1F4F5;
+  --page: #E7EAEC;
+  --script-ink: #272E32;
+}
+
+/* V04_teal_coral · Deep Teal & Coral */
+html[data-variant="teal-coral"] {
+  --c-081828: 0 27 32;
+  --c-10283c: 3 44 48;
+  --c-14283c: 7 44 49;
+  --c-143c5a: 0 66 71;
+  --c-1d3445: 23 55 57;
+  --c-1e3246: 19 54 59;
+  --c-1f4d6e: 3 83 88;
+  --c-2e5e7e: 31 100 102;
+  --c-336f95: 32 118 120;
+  --c-d6e9f2: 215 235 233;
+  --c-e2eff3: 228 240 238;
+  --deep: #1F6466;
+  --deep-ink: #135658;
+  --hair: rgba(31, 100, 102, 0.38);
+  --ink: #173739;
+  --ink-soft: #244E50;
+  --page: #DAF0EC;
+  --script-ink: #173739;
+}

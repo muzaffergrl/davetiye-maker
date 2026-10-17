@@ -1,0 +1,27 @@
+{
+  "id": "V04_mauve_lavender",
+  "slug": "mauve-lavender",
+  "name": "Mauve Lavender & Blush",
+  "ink": "#3A2833",
+  "deep": "#8C5878",
+  "primary": "#C79AB3",
+  "mist_top": "#F7EEF0",
+  "mist_bottom": "#EBD7DB",
+  "gold": "#B5A27A",
+  "gold_light": "#D8CBA8",
+  "ivory": "#FAF8F3",
+  "leaf": "#8A9A78",
+  "swatch": [
+    "#EBD7DB",
+    "#C79AB3",
+    "#8A9A78"
+  ],
+  "status": "coming",
+  "families": {
+    "lavender": {
+      "role": "#86607A"
+    },
+    "paper": "mist_bottom",
+    "lav_ink": "deep"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "V06_peach_blossom",
+  "slug": "peach-blossom",
+  "name": "Peach Blossom & Cream",
+  "ink": "#3A3438",
+  "deep": "#8A5A45",
+  "primary": "#F5C3A8",
+  "mist_top": "#FCF5EF",
+  "mist_bottom": "#F1E0D3",
+  "gold": "#B9A07A",
+  "gold_light": "#DCCAA9",
+  "ivory": "#FFFCFB",
+  "leaf": "#6E5E55",
+  "swatch": [
+    "#FCF5EF",
+    "#F5C3A8",
+    "#D8C6B8"
+  ],
+  "status": "coming",
+  "families": {
+    "blossom": "#F5C3B4",
+    "envelope": "#D8C6B8",
+    "ground": "#F5ECE4",
+    "branch": null,
+    "stamen": null,
+    "rose_ink": "deep"
+  }
+}

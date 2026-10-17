@@ -1,0 +1,26 @@
+{
+  "id": "V03_seafoam_sage",
+  "slug": "seafoam-sage",
+  "name": "Seafoam & Sage",
+  "ink": "#1F3530",
+  "deep": "#3F6658",
+  "primary": "#8DB8A6",
+  "mist_top": "#F3F7F4",
+  "mist_bottom": "#DAE8E1",
+  "gold": "#C2A26B",
+  "gold_light": "#E2CDA0",
+  "ivory": "#FFFDF8",
+  "leaf": "#9DB59F",
+  "swatch": [
+    "#F3F7F4",
+    "#8DB8A6",
+    "#F4DECB"
+  ],
+  "status": "coming",
+  "families": {
+    "sea": "#7FB3A0",
+    "ground": "#E1EEE8",
+    "shell": null,
+    "deep_ink": "deep"
+  }
+}

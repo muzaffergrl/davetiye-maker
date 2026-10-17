@@ -1,0 +1,47 @@
+{
+ "theme": "lavender-provence",
+ "summary": {
+  "original": {
+   "measured": 115,
+   "low": 0,
+   "as_original": 3
+  },
+  "sage-lavender": {
+   "measured": 115,
+   "low": 0,
+   "as_original": 3
+  },
+  "dusty-blue": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "mauve-lavender": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "hidcote-plum": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "french-cream": {
+   "measured": 112,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 3 text(s) below the contrast minimum on the painted ground: home \"RSVP\" 1.40:1 < 4.5:1; home \"RSVP\" 1.39:1 < 4.5:1; details \"RSVP\" 1.37:1 < 4.5:1",
+  "palette sage-lavender: 3 text(s) below the minimum as in the original design: home \"RSVP\" 1.27:1 < 4.5:1; home \"RSVP\" 1.26:1 < 4.5:1; details \"RSVP\" 1.23:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette sage-lavender (coming): 115 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-blue (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette mauve-lavender (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette hidcote-plum (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette french-cream (coming): 112 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

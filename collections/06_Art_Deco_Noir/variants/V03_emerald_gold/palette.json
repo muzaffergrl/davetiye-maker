@@ -1,0 +1,24 @@
+{
+  "id": "V03_emerald_gold",
+  "slug": "emerald-gold",
+  "name": "Emerald & Gold",
+  "ink": "#F5EEDC",
+  "deep": "#C9A55C",
+  "primary": "#0F3B2E",
+  "mist_top": "#14473A",
+  "mist_bottom": "#0A251D",
+  "gold": "#C9A55C",
+  "gold_light": "#E6CF8F",
+  "ivory": "#F5EEDC",
+  "leaf": "#C9A55C",
+  "swatch": [
+    "#0F3B2E",
+    "#C9A55C",
+    "#F5EEDC"
+  ],
+  "status": "coming",
+  "families": {
+    "ground": "primary",
+    "gold": null
+  }
+}

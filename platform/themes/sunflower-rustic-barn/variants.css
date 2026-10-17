@@ -1,0 +1,142 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 16
+   (kaynak: collections/16_Sunflower_Rustic/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-281606: 40 22 6;
+  --c-28190a: 40 25 10;
+  --c-462d0f: 70 45 15;
+  --c-50320f: 80 50 15;
+  --c-5a370a: 90 55 10;
+  --c-6e460a: 110 70 10;
+  --c-784808: 120 72 8;
+  --c-7a5a2e: 122 90 46;
+  --c-de9f2a: 222 159 42;
+  --c-f0c04e: 240 192 78;
+  --c-f4e6cc: 244 230 204;
+  --c-f6dea0: 246 222 160;
+  --c-fff6dc: 255 246 220;
+  --c-fffae1: 255 250 225;
+}
+
+/* V03_burgundy_sunflower · Burgundy & Sunflower */
+html[data-variant="burgundy-sunflower"] {
+  --c-281606: 26 3 5;
+  --c-28190a: 30 10 7;
+  --c-462d0f: 49 1 17;
+  --c-50320f: 60 2 23;
+  --c-5a370a: 71 0 27;
+  --c-6e460a: 94 0 36;
+  --c-784808: 105 15 43;
+  --c-7a5a2e: 107 33 50;
+  --c-de9f2a: 229 117 77;
+  --c-f0c04e: 253 153 91;
+  --c-f4e6cc: 234 202 189;
+  --c-f6dea0: 251 176 149;
+  --c-fff6dc: 250 229 210;
+  --c-fffae1: 252 242 219;
+  --deep: #6B2132;
+  --gold: #B9604C;
+  --hair: rgba(107, 33, 50, 0.42);
+  --ink: #34241A;
+  --ink-soft: #461722;
+  --mustard: #EC7D4E;
+  --script-ink: #57182B;
+}
+
+/* V04_dusty_blue_sunflower · Dusty Blue & Sunflower */
+html[data-variant="dusty-blue-sunflower"] {
+  --c-281606: 27 28 27;
+  --c-28190a: 32 29 25;
+  --c-462d0f: 35 55 70;
+  --c-50320f: 40 62 78;
+  --c-5a370a: 42 69 88;
+  --c-6e460a: 51 86 113;
+  --c-784808: 64 90 107;
+  --c-7a5a2e: 74 102 128;
+  --c-de9f2a: 178 173 158;
+  --c-f0c04e: 207 201 177;
+  --c-f4e6cc: 233 233 231;
+  --c-f6dea0: 219 227 235;
+  --c-fff6dc: 250 247 235;
+  --c-fffae1: 253 250 232;
+  --deep: #425D77;
+  --gold: #909698;
+  --hair: rgba(74, 102, 128, 0.42);
+  --ink: #363028;
+  --ink-soft: #3A4D5D;
+  --mustard: #B9B4A3;
+  --script-ink: #3D5361;
+}
+
+/* V05_lemon_sage · Lemon & Sage */
+html[data-variant="lemon-sage"] {
+  --c-281606: 32 26 11;
+  --c-28190a: 34 27 14;
+  --c-462d0f: 47 54 33;
+  --c-50320f: 54 60 35;
+  --c-5a370a: 59 67 38;
+  --c-6e460a: 70 85 51;
+  --c-784808: 85 92 50;
+  --c-7a5a2e: 86 102 74;
+  --c-de9f2a: 184 189 112;
+  --c-f0c04e: 204 220 145;
+  --c-f4e6cc: 232 233 213;
+  --c-f6dea0: 216 230 190;
+  --c-fff6dc: 249 247 226;
+  --deep: #506045;
+  --gold: #97A26D;
+  --hair: rgba(86, 102, 74, 0.42);
+  --ink-soft: #424C39;
+  --mustard: #BCC577;
+  --script-ink: #4E5032;
+}
+
+/* V02_navy_sunflower · Navy & Sunflower */
+html[data-variant="navy-sunflower"] {
+  --c-281606: 10 10 11;
+  --c-28190a: 19 15 13;
+  --c-462d0f: 9 22 39;
+  --c-50320f: 13 29 48;
+  --c-5a370a: 16 34 57;
+  --c-6e460a: 24 47 79;
+  --c-784808: 40 57 80;
+  --c-7a5a2e: 44 62 92;
+  --c-de9f2a: 162 150 142;
+  --c-f0c04e: 193 179 161;
+  --c-f4e6cc: 210 208 208;
+  --c-f6dea0: 195 194 207;
+  --c-fff6dc: 237 232 221;
+  --c-fffae1: 247 243 225;
+  --deep: #2C3E5C;
+  --gold: #7D7B82;
+  --hair: rgba(44, 62, 92, 0.42);
+  --ink: #2D261F;
+  --ink-soft: #1C283B;
+  --mustard: #AA9D92;
+  --script-ink: #233345;
+}
+
+/* V06_rust_bronze · Autumn Rust & Bronze */
+html[data-variant="rust-bronze"] {
+  --c-281606: 35 12 3;
+  --c-28190a: 37 18 6;
+  --c-462d0f: 65 23 7;
+  --c-50320f: 76 27 9;
+  --c-5a370a: 88 29 5;
+  --c-6e460a: 110 40 2;
+  --c-784808: 114 38 9;
+  --c-7a5a2e: 122 63 34;
+  --c-de9f2a: 236 130 58;
+  --c-f0c04e: 235 144 56;
+  --c-f4e6cc: 241 217 193;
+  --c-f6dea0: 253 201 143;
+  --c-fff6dc: 254 238 213;
+  --deep: #7A3F22;
+  --gold: #B1632E;
+  --hair: rgba(122, 63, 34, 0.42);
+  --ink-soft: #552E1E;
+  --mustard: #DD7723;
+  --script-ink: #672F1C;
+}

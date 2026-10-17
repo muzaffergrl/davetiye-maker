@@ -1,0 +1,25 @@
+{
+  "id": "V02_coral_sunset",
+  "slug": "coral-sunset",
+  "name": "Coral Sunset",
+  "ink": "#3A2622",
+  "deep": "#A0503F",
+  "primary": "#F47C6A",
+  "mist_top": "#FFF6F0",
+  "mist_bottom": "#FBE0D2",
+  "gold": "#D4A44C",
+  "gold_light": "#EBCB8B",
+  "ivory": "#FFFCF5",
+  "leaf": "#2E7D4F",
+  "swatch": [
+    "#FBE0D2",
+    "#F47C6A",
+    "#2E7D4F"
+  ],
+  "status": "coming",
+  "families": {
+    "hibiscus": "primary",
+    "lagoon": "mist_bottom",
+    "teal_css": "deep"
+  }
+}

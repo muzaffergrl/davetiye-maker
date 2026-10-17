@@ -1,0 +1,48 @@
+{
+ "theme": "ivory-lace-pearls",
+ "summary": {
+  "original": {
+   "measured": 111,
+   "low": 0,
+   "as_original": 1
+  },
+  "blush-pearl": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  },
+  "champagne-gold": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 1
+  },
+  "dusty-blue": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  },
+  "sage-pearl": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 1
+  },
+  "dusty-mauve": {
+   "measured": 116,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 1 text(s) below the contrast minimum on the painted ground: home \"We're getting married\" 4.27:1 < 4.5:1",
+  "palette champagne-gold: 1 text(s) below the minimum as in the original design: home \"We're getting married\" 4.34:1 < 4.5:1",
+  "palette sage-pearl: 1 text(s) below the minimum as in the original design: home \"We're getting married\" 4.40:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette blush-pearl (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette champagne-gold (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-blue (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette sage-pearl (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-mauve (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

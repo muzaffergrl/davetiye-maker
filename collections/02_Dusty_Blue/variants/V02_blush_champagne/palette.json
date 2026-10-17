@@ -1,5 +1,6 @@
 {
   "id": "V02_blush_champagne",
+  "slug": "blush-champagne",
   "name": "Blush & Champagne",
   "ink": "#3E2C2E",
   "deep": "#A86F72",
@@ -9,5 +10,16 @@
   "gold": "#C9A96E",
   "gold_light": "#E3CFA6",
   "ivory": "#FBF7F2",
-  "leaf": "#A7B5A0"
+  "leaf": "#A7B5A0",
+  "swatch": [
+    "#FBF7F2",
+    "#D8A7A7",
+    "#C9A96E"
+  ],
+  "status": "coming",
+  "families": {
+    "seal": "deep",
+    "sky": "mist_top",
+    "gold": null
+  }
 }

@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 115,
+  "low": 0,
+  "as_original": 3
+ },
+ "sage-lavender": {
+  "measured": 115,
+  "low": 0,
+  "as_original": 3
+ },
+ "dusty-blue": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "mauve-lavender": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "hidcote-plum": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "french-cream": {
+  "measured": 112,
+  "low": 0,
+  "as_original": 0
+ }
+}

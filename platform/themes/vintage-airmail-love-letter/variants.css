@@ -1,0 +1,60 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 04
+   (kaynak: collections/04_Vintage_Airmail/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-3c140f: 60 20 15;
+  --c-8c2f27: 140 47 39;
+  --c-d67868: 214 120 104;
+}
+
+/* V05_dusty_blue · Dusty Blue Airmail */
+html[data-variant="dusty-blue"] {
+  --c-3c140f: 62 29 26;
+  --c-8c2f27: 103 128 155;
+  --c-d67868: 177 196 224;
+  --red: #82A0C0;
+  --red-ink: #435A74;
+  --seal-ink: #495B6F;
+}
+
+/* V02_dusty_rose · Dusty Rose & Navy */
+html[data-variant="dusty-rose"] {
+  --c-3c140f: 65 26 22;
+  --c-8c2f27: 164 105 113;
+  --c-d67868: 237 175 179;
+  --red: #CA858F;
+  --red-ink: #7E474F;
+  --seal-ink: #754A51;
+}
+
+/* V06_lavender · Lavender & Navy */
+html[data-variant="lavender"] {
+  --c-3c140f: 63 28 26;
+  --c-8c2f27: 136 117 154;
+  --c-d67868: 210 186 221;
+  --red: #A993BE;
+  --red-ink: #625073;
+  --seal-ink: #61546F;
+}
+
+/* V03_sage_navy · Sage & Navy */
+html[data-variant="sage-navy"] {
+  --c-3c140f: 64 30 23;
+  --c-8c2f27: 124 141 110;
+  --c-d67868: 196 211 180;
+  --red: #9AAE89;
+  --red-ink: #4C5B3E;
+  --seal-ink: #5B6750;
+}
+
+/* V04_terracotta · Terracotta & Navy */
+html[data-variant="terracotta"] {
+  --c-3c140f: 64 25 18;
+  --c-8c2f27: 165 93 59;
+  --c-d67868: 238 164 128;
+  --red: #CE7851;
+  --red-ink: #894320;
+  --seal-ink: #744028;
+}

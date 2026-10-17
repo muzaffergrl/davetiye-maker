@@ -1,0 +1,23 @@
+{
+  "id": "V06_lavender",
+  "slug": "lavender",
+  "name": "Lavender & Navy",
+  "ink": "#2A2A35",
+  "deep": "#6E5A86",
+  "primary": "#9580AA",
+  "mist_top": "#F2EADB",
+  "mist_bottom": "#DCCDB2",
+  "gold": "#A88A5A",
+  "gold_light": "#D2BE95",
+  "ivory": "#FAF4E8",
+  "leaf": "#8A9474",
+  "swatch": [
+    "#FAF4E8",
+    "#9580AA",
+    "#3D4F7A"
+  ],
+  "status": "coming",
+  "families": {
+    "red": "primary"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "V04_dusty_blue_sunflower",
+  "slug": "dusty-blue-sunflower",
+  "name": "Dusty Blue & Sunflower",
+  "ink": "#3A2E1F",
+  "deep": "#4A6680",
+  "primary": "#E3A72F",
+  "mist_top": "#FBF5E8",
+  "mist_bottom": "#E9D6B2",
+  "gold": "#B88B3E",
+  "gold_light": "#DDBB7E",
+  "ivory": "#FFFBF0",
+  "leaf": "#6E7D3A",
+  "swatch": [
+    "#FBF5E8",
+    "#E3A72F",
+    "#7E98B2"
+  ],
+  "status": "coming",
+  "families": {
+    "sun": null,
+    "gingham": "#7E98B2",
+    "brown": "#4A6680"
+  },
+  "recolor": {
+    "accent_1": "keep",
+    "accent_2": "keep",
+    "accent_3": "keep",
+    "card_ribbon": "gpt",
+    "closure": "gpt",
+    "divider": "keep",
+    "favicon": "gpt",
+    "florals_br": "keep",
+    "florals_tl": "keep",
+    "info_card": "gpt",
+    "invitation_card": "gpt",
+    "og-1200x630": "gpt",
+    "print:back": "gpt",
+    "print:card": "gpt"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "V05_hidcote_plum",
+  "slug": "hidcote-plum",
+  "name": "Hidcote Violet & Plum",
+  "ink": "#2A1F36",
+  "deep": "#4A2F6A",
+  "primary": "#7E62A3",
+  "mist_top": "#F4EEF3",
+  "mist_bottom": "#DCCADA",
+  "gold": "#B5A27A",
+  "gold_light": "#D8CBA8",
+  "ivory": "#FAF8F3",
+  "leaf": "#8A9A78",
+  "swatch": [
+    "#DCCADA",
+    "#7E62A3",
+    "#4A2F6A"
+  ],
+  "status": "coming",
+  "families": {
+    "lavender": "deep",
+    "paper": "mist_bottom",
+    "lav_ink": "deep"
+  }
+}
