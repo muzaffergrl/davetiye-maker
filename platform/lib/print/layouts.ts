@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 25, 26) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -245,19 +245,38 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     },
   },
   // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/
-  // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the theme's poster image (its
-  // pale sky carries the text, like the website's first screen); back = the website's ivory with the boarding stamp. Both
-  // are the theme build's interim tones until GPT's poster / stamp exist — then `node scripts/build-print-assets.ts
-  // --theme orient-express-voyage` picks the real ones up through the theme's img/.
+  // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the website's ivory paper (the
+  // interim poster tones were not empty enough for the G149 free-area check); back = the same ivory with the boarding stamp.
+  // When GPT's print grounds exist, `node scripts/build-print-assets.ts --theme orient-express-voyage` picks them up and the
+  // boxes are measured again (tests/g149-print-layout.test.ts).
   'orient-express-voyage': {
     collection: '25_Orient_Express_Voyage',
     sources: { scene: 'platform/themes/orient-express-voyage/img/poster-1024.webp', stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
     fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
     script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#1E3A2C', accent: '#7A5C24', front: [6, 14, 52, 14], back: [20, 12, 8, 12],
+    ink: '#1E3A2C', accent: '#7A5C24', front: [12, 12, 12, 12], back: [20, 12, 8, 12],
     composed: {
-      front: { bg: cover('scene', '50% 0%'), images: [] },
+      front: { bg: '#F3EBD9', images: [] },
       back: { bg: '#F3EBD9', images: [{ ...sealAt('top'), src: 'stamp' }] },
+    },
+  },
+  // 26 (G164, interim until PAKET 6 print_front / print_back): rice paper with the indigo washi of the opened folds at
+  // its top and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn).
+  'kintsugi-washi': {
+    collection: '26_Kintsugi_Washi',
+    sources: { rice: 'platform/themes/kintsugi-washi/img/rice-1024.webp', washi: 'platform/themes/kintsugi-washi/img/washi_indigo-1024.webp' },
+    fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
+    script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
+    ink: '#1D2340', accent: '#7A5C22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(rice.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'washi', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'washi', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(rice.webp) 0 0 / 2.4in repeat', images: [{ src: 'washi', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
     },
   },
 };

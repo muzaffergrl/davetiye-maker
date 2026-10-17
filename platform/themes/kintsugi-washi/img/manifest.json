@@ -1,0 +1,231 @@
+{
+ "_note": "G164 interim build: papers toned from other designs' plain GPT textures until the design's own PAKET 5 parts arrive (GPT_PROMPTS.md). Nothing drawn.",
+ "sources": {
+  "washi_indigo": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png",
+  "rice_paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
+  "washi_inner": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png (toned lighter)",
+  "interim": true
+ },
+ "washi_indigo": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "washi_indigo-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 16306
+   },
+   {
+    "file": "washi_indigo-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 128966
+   }
+  ]
+ },
+ "washi_inner": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "washi_inner-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 9996
+   }
+  ]
+ },
+ "washi_night": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "washi_night-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1630
+   }
+  ]
+ },
+ "rice": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "rice-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 15470
+   },
+   {
+    "file": "rice-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 59448
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1582
+   }
+  ]
+ },
+ "ph_land": {
+  "src_size": [
+   640,
+   512
+  ],
+  "ratio": 1.25,
+  "files": [
+   {
+    "file": "ph_land-640.webp",
+    "w": 640,
+    "h": 512,
+    "bytes": 1020
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 758
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_land-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "4/5"
+  },
+  "story_1": {
+   "aspect": "4/5"
+  },
+  "story_2": {
+   "aspect": "5/4"
+  },
+  "story_3": {
+   "aspect": "4/5"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "packet_aspect": 0.7,
+  "folds_pct": {
+   "right": [
+    50,
+    0,
+    50,
+    100
+   ],
+   "left": [
+    0,
+    0,
+    50,
+    100
+   ],
+   "bottom": [
+    0,
+    62,
+    100,
+    38
+   ],
+   "top": [
+    0,
+    0,
+    100,
+    40
+   ]
+  },
+  "fold_brightness": {
+   "right": 0.9,
+   "left": 1.0,
+   "bottom": 0.94,
+   "top": 1.07
+  },
+  "band_pct": [
+   0,
+   45,
+   100,
+   11
+  ],
+  "open_spread": {
+   "width": 2.0,
+   "height": 1.78,
+   "_note": "side folds lie out left/right, top/bottom folds above/below"
+  }
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed packet (washi_indigo + rice) on night washi",
+  "bytes": 75433
+ },
+ "favicon": {
+  "src_box": [
+   30,
+   33,
+   304,
+   424
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 27638
+ },
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 350389
+}

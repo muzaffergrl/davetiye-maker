@@ -37,6 +37,7 @@ const dict: Dict = {
   'Email': 'E-posta',
   'Enter': 'İçeri girin',
   'Every chapter led to you': 'Her bölüm bizi birbirimize getirdi',
+  'Folded with care, opened with joy': 'Özenle katlandı, sevinçle açıldı',
   'Get directions': 'Yol tarifi al',
   'Getting here': 'Ulaşım',
   'Google': 'Google',

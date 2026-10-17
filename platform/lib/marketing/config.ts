@@ -167,6 +167,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 26 (G164): theme built before its GPT parts (interim paper); sale approval and price remain pending.
+    {
+      id: 'kintsugi-washi',
+      name: 'Kintsugi & Washi',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

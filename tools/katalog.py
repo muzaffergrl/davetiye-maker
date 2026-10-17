@@ -410,6 +410,12 @@ EK_TEMALAR = [
          dekor="Pirinç vagon detayları, bagaj etiketi, eski harita, istasyon saati", teknik="vintage seyahat afişi (litografi)",
          font=("Limelight", "Cormorant Garamond"), palet_adi="bottle-green-brass",
          hareket="Haritada rota çizgisi kaydırmayla çizilir, istasyonlar sırayla gelir, bagaj etiketi sallanır, biniş kartına damga basılır."),
+    dict(no=26, klasor="26_Kintsugi_Washi", ad="Kintsugi & Washi",
+         zarf="Çivit washi kâğıdı origami gibi katlanmış, pirinç kâğıdı kuşakla sarılı; katlar sırayla açılır (üst, alt, sol, sağ), pirinç kâğıdı kart kalkar.",
+         foto="Mürekkep yayılması maskesiyle beliren fotoğraflar; sayfa boyunca sol–sağ–sol tek tek.",
+         dekor="Altın kintsugi damarları, washi dokuları, mürekkep fırçası darbeleri", teknik="sumi mürekkep + altın varak",
+         font=("Allura", "Shippori Mincho"), palet_adi="indigo-gold-rice",
+         hareket="Kat kat 3B açılma (dört kat ayrı menteşede), altın damar parıltısı, mürekkep yayılımıyla foto, süzülen altın varak pulları"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
