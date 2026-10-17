@@ -2,7 +2,7 @@
 id: G176
 baslik: "GPT görselleri geldi" için tek komut — güvenli yerleştirme + tasarım başına build/denetim zinciri
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G176
 oncelik: 1
 bagimli: [G167]
@@ -63,3 +63,6 @@ güvenli, tekrarlanabilir adım yapmak. Koordinatör: session_01HP9ZrJ8mhZnigbvs
 - `etsy_upload.py` ve `listing_kit` 22–32'yi henüz bilmiyor; bu tasarımlarda etsy/ilan adımı ATLANDI (araçlar
   genişleyince kendiliğinden koşar).
 - Göz kontrolü için makinece bir kayıt yok; araç bunu her zaman açık engel olarak yazar.
+
+## Günlük
+- 2026-10-17 entegratör onayladı
