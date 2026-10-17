@@ -395,6 +395,15 @@ D = [
                 extras=[])),
 ]
 
+# Aşama 1 dışı ürünler (G142): platform teması olan ama bu katalogun üreteçlerine (yaz, paket5, gorev5, ozet, kontrol)
+# girmeyen tasarımlar. Yalnız tema ↔ koleksiyon eşlemesi için (platform/scripts/lib/theme-env.ts: theme-check, g051,
+# final-smoke koleksiyonu buradan bulur). Ayırt edicilik / WEB / STORY denetimi bunlara uygulanmaz — tam katalog kaydı
+# açılırsa D'ye taşınır ve buradan silinir.
+EK_TEMALAR = [
+    dict(no=21, klasor="21_Crimson_Rose_Atelier", ad="Crimson Rose Atelier"),
+    dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
+]
+
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
 # no → (intro, (başlık 1, başlık 2, başlık 3)). Intro bir cümle parçasıdır, sayfada tarihle biter ("… led us to" +
 # " May 15, 2027."). Başlıklar PAKET 2 story_1..3 sahneleri: ilk buluşma, evlilik teklifi, eller + yüzük; kısa tutulur

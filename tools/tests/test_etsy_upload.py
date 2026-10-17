@@ -35,8 +35,8 @@ def test_design_table():
     live = set(re.findall(r"id: '([a-z0-9-]+)',\s*\n\s*name: '[^']+',\s*\n\s*status: 'live'", config))
     every = {t for _, _, t in eu.DESIGNS}
     assert live == every - COMING, sorted(live ^ (every - COMING))
-    for theme in COMING:  # 21's entry has quoted keys ("id": "…")
-        assert re.search(rf'"id": "{re.escape(theme)}",\s*\n\s*"name": "[^"]+",\s*\n\s*"status": "coming"', config), theme
+    for theme in COMING:  # same TS style as the other entries since G142
+        assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: 'coming'", config), theme
     for no, folder, theme in eu.DESIGNS:
         assert folder.startswith(no + "_") and (REPO / "collections" / folder).is_dir(), folder
         assert (REPO / "platform" / "themes" / theme / "theme.json").exists(), theme

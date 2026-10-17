@@ -373,3 +373,4 @@ legend{margin:0 0 6px;padding:0;width:100%;overflow-wrap:anywhere}
 .faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:10px;color:#9f8054;font:400 20px/1 var(--sans)}
 .faq details[open] summary::after{content:"\00d7";content:"\00d7" / ""}
 .faq details p{white-space:pre-line}
+#reply{scroll-margin-top:64px}
