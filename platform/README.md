@@ -52,6 +52,11 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/g055-browser.ts   # build sonr
                        # varsayılan geçici klasör; boş port kendisi seçer, $PORT ile sabitlenir)
 ```
 
+G139 PDF indirmeleri (panel Share → Downloads; `lib/print/`, `POST /api/edit/<slug>/download`): site PDF'i ve 5×7 / A5 basılı davetiye
+sunucuda başsız Chromium ile (Vercel'de `@sparticuz/chromium`, yerelde Playwright Chromium; `PRINT_CHROMIUM_PATH` ile başka bir tarayıcı).
+Davetiye parçaları `public/print/<tema>/` (`node scripts/build-print-assets.ts`), örnek PDF `node scripts/print-sample.ts --theme <id> --site
+--invite 5x7 --bleed`; ayrıntı `gorevler/G139-pdf-davetiye.md`.
+
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
 `--no-photos` yer tutucu hâli, `--photos <klasör>` başka örnek fotoğraflar (dosya adı = tema foto anahtarı).
 Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).

@@ -18,6 +18,8 @@ export const RESERVED_SLUGS: ReadonlySet<string> = new Set([
   'refund', 'refunds', 'cookies', 'accessibility', 'marketing', 'not-found',
   // brand kit served from public/brand/ (GM02: favicons, app icons)
   'brand',
+  // printable-invitation parts served from public/print/ (G139)
+  'print',
 ]);
 
 /** 3-48 chars, lowercase letters, digits and single hyphens; no leading/trailing hyphen. */
