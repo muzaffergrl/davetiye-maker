@@ -3,7 +3,8 @@
 //
 //   sites/<id>.json                          SiteRecord + "version" (bumped on every write)
 //   slugs/<slug>.json                        {"id"}  created with allowOverwrite:false -> unique slugs
-//   orders/<ref>.json                        {"id"}  same rule -> one site per order reference
+//   orders/<ref>.json                        {"id"}  same rule -> one site per order reference …
+//   orders/<ref>~<n>.json                    {"id"}  … per design unit n >= 2 of a multi-item Etsy order (G152, NewSite.orderSlot)
 //   rsvps/<siteId>/<ms>-<seq>-<rsvpId>.json  one file per RSVP (no read-modify-write, no contention)
 //   media/<siteId>/<random>.<ext>            photos; the app serves them at /media/<siteId>/<file> (readPhoto)
 //   docs/<siteId>/<name>.json                site documents outside the record (G128: Google Sheets connection), ETag-checked
@@ -228,9 +229,13 @@ export class BlobAdapter implements DataAdapter {
     return `slugs/${slug}.json`;
   }
   /** Order numbers are digits; anything unusual is hashed so it is always a safe pathname. */
-  private orderPath(orderRef: string) {
-    const key = SIMPLE_REF_RE.test(orderRef) ? orderRef : `h-${createHash('sha256').update(orderRef).digest('hex')}`;
-    return `orders/${key}.json`;
+  private orderKey(orderRef: string) {
+    return SIMPLE_REF_RE.test(orderRef) ? orderRef : `h-${createHash('sha256').update(orderRef).digest('hex')}`;
+  }
+  /** Slot 1 keeps the original name; G152: the other design units of one order are orders/<ref>~<slot>.json. */
+  private orderPath(orderRef: string, slot: number = 1) {
+    const key = this.orderKey(orderRef);
+    return slot > 1 ? `orders/${key}~${slot}.json` : `orders/${key}.json`;
   }
   private rsvpPrefix(siteId: string) {
     return `rsvps/${siteId}/`;
@@ -387,16 +392,28 @@ export class BlobAdapter implements DataAdapter {
   }
 
   async findSitesByOrderRef(orderRef: string): Promise<SiteRecord[]> {
-    const index = await this.readJson<Partial<IndexEntry>>(this.orderPath(orderRef));
-    if (!index || typeof index.data.id !== 'string') return [];
-    const site = await this.getSiteById(index.data.id);
-    return site && site.orderRef === orderRef ? [site] : [];
+    // Slot 1 is read directly (strongly consistent); the other slots of a multi-item order (G152) are listed.
+    const extra = `orders/${this.orderKey(orderRef)}~`;
+    const slotRe = /^orders\/[^/]+~(\d{1,3})\.json$/;
+    const paths = [this.orderPath(orderRef), ...(await this.listAll(extra)).filter((p) => slotRe.test(p))];
+    const ids = new Set<string>();
+    for (const p of paths) {
+      const index = await this.readJson<Partial<IndexEntry>>(p);
+      if (index && typeof index.data.id === 'string') ids.add(index.data.id);
+    }
+    const out: SiteRecord[] = [];
+    for (const id of ids) {
+      const site = await this.getSiteById(id);
+      if (site && site.orderRef === orderRef) out.push(site);
+    }
+    return out.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
   }
 
   async createSite(input: NewSite): Promise<SiteRecord> {
     if (!SLUG_RE.test(input.slug)) throw new Error(`invalid slug "${input.slug}"`);
     const id = randomUUID();
     const orderRef = input.orderRef ?? null;
+    const orderSlot = orderRef !== null && Number.isInteger(input.orderSlot) && (input.orderSlot as number) > 1 ? (input.orderSlot as number) : 1;
 
     const slugPath = this.slugPath(input.slug);
     const slugIndex = await this.claimIndex(slugPath, id);
@@ -405,7 +422,7 @@ export class BlobAdapter implements DataAdapter {
     let orderIndex: { etag: string } | null = null;
     try {
       if (orderRef !== null) {
-        orderIndex = await this.claimIndex(this.orderPath(orderRef), id);
+        orderIndex = await this.claimIndex(this.orderPath(orderRef, orderSlot), id);
         if (!orderIndex) throw new OrderRefTakenError(orderRef);
       }
       const now = new Date(this.#now()).toISOString();
@@ -426,12 +443,13 @@ export class BlobAdapter implements DataAdapter {
         publishedAt: null,
         ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
         ...(input.orderCheck ? { orderCheck: structuredClone(input.orderCheck) } : {}),
+        ...(orderSlot > 1 ? { orderSlot } : {}),
         version: 1,
       };
       await this.putJson(this.sitePath(id), doc, { allowOverwrite: false });
       return toRecord(doc);
     } catch (e) {
-      if (orderIndex && orderRef !== null) await this.releaseIndex(this.orderPath(orderRef), orderIndex.etag);
+      if (orderIndex && orderRef !== null) await this.releaseIndex(this.orderPath(orderRef, orderSlot), orderIndex.etag);
       await this.releaseIndex(slugPath, slugIndex.etag);
       throw e;
     }
@@ -516,7 +534,7 @@ export class BlobAdapter implements DataAdapter {
       await this.deletePrefix(`docs/${id}/`);
       await this.deletePrefix(this.partsPrefix(id));
       await this.releaseIndexIfOwned(this.slugPath(site.slug), id);
-      if (site.orderRef !== null) await this.releaseIndexIfOwned(this.orderPath(site.orderRef), id);
+      if (site.orderRef !== null) await this.releaseIndexIfOwned(this.orderPath(site.orderRef, site.orderSlot ?? 1), id);
       // Last, so a deletion interrupted half-way can simply be run again.
       await this.del(this.sitePath(id));
     });

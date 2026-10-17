@@ -6,8 +6,10 @@
 import { after } from 'next/server.js'; // .js: node:test loads route files directly (no exports map in next)
 import { getDataAdapter } from '../../../../lib/data/index.ts';
 import { scheduleSheetSync } from '../../../../lib/google/sync.ts';
+import { requestOrigin } from '../../../../lib/panel/http.ts';
+import { scheduleReplyNotice } from '../../../../lib/rsvp/notify.ts';
 import { BODY_MAX_BYTES } from '../../../../lib/rsvp/config.ts';
-import { errorResult, getRsvpStatus, submitRsvp } from '../../../../lib/rsvp/guest.ts';
+import { errorResult, getRsvpStatus, submitRsvp, type GuestContext } from '../../../../lib/rsvp/guest.ts';
 import { BodyTooLargeError, clientIp, isJsonRequest, jsonResponse, readLimitedText } from '../../../../lib/rsvp/http.ts';
 
 export const dynamic = 'force-dynamic';
@@ -39,8 +41,13 @@ export async function POST(req: Request, ctx: Ctx): Promise<Response> {
   }
   try {
     const adapter = getDataAdapter();
-    // G128: a counted reply goes on to the couple's Google Sheet after the answer (after(): the guest never waits).
-    const onStored = (site: { id: string }) => scheduleSheetSync(adapter, site.id, after);
+    // G128: a counted reply goes on to the couple's Google Sheet after the answer (after(): the guest never waits);
+    // G152: the couple's reply email too, when they turned it on (it never throws or holds the guest up).
+    const origin = requestOrigin(req);
+    const onStored: GuestContext['onStored'] = (site, reply) => {
+      scheduleSheetSync(adapter, site.id, after);
+      scheduleReplyNotice(adapter, site, reply, origin, after);
+    };
     return jsonResponse(await submitRsvp({ adapter, ip: clientIp(req), cookie: req.headers.get('cookie'), onStored }, slug, body));
   } catch (e) {
     console.error(`[rsvp] submit ${slug}:`, e);

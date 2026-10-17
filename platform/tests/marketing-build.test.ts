@@ -31,8 +31,8 @@ function newestSource(): number {
     }
   };
   for (const d of ['app/(marketing)', 'components/marketing', 'lib/marketing', 'content', 'components/i18n']) walk(path.join(PLATFORM_ROOT, d));
-  // G150: the root layout and the module behind <html lang>
-  for (const f of ['app/layout.tsx', 'lib/i18n/document-lang.ts']) newest = Math.max(newest, statSync(path.join(PLATFORM_ROOT, f)).mtimeMs);
+  // G150: the module behind <html lang> (G152: the sales site's root layout is app/(marketing)/layout.tsx, walked above)
+  for (const f of ['lib/i18n/document-lang.ts']) newest = Math.max(newest, statSync(path.join(PLATFORM_ROOT, f)).mtimeMs);
   return newest;
 }
 

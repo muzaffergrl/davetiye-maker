@@ -6,9 +6,10 @@
 //                   so the static HTML already carries <html lang="de">, and a language switch updates it.
 //   admin           the shop's own Turkish screens → tr.
 //   buyer screens   panel, /start, /my, /signin: the server picks the language per request (cookie bke_lang, else
-//                   Accept-Language: lib/i18n/server.ts). The root layout cannot read it without making every page
-//                   dynamic, so those pages render <DocumentLang lang={lang} />, which hands it over here once the page
-//                   runs in the browser (the server's HTML says en until then; these pages are noindex).
+//                   Accept-Language: lib/i18n/server.ts). G152: each of them has its own ROOT layout
+//                   (components/i18n/RootDocument.tsx BuyerRootLayout), which reads that language on the server, so the
+//                   server's HTML already says <html lang="tr">; the sales site's root layout stays prerendered. The pages
+//                   still render <DocumentLang lang={lang} />, which keeps <html lang> right after a switch in the browser.
 //
 // Couple websites (/<slug>) are not App Router pages: the theme engine writes their <html lang> itself (?lang=).
 

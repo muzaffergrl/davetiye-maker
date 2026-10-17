@@ -155,7 +155,13 @@ düzenler. Bu belge platformun tek kaynağıdır.
     reddedilir; henüz ödenmemiş ("payment processing") → site açılır, bekler, ödeme gelince kendiliğinden onaylanır; Etsy alıcı
     e-postasını veriyorsa (çoğu zaman vermez, Etsy'nin ayrıca onayı gerekir) ve farklıysa → reddedilir; ilan → tasarım eşlemesi
     `platform/lib/etsy/listings.json` (ilanlar yayınlanınca `listing_id → tema id` doldurulur; eşlenmemiş ilan tasarım yüzünden
-    reddedilmez); Etsy cevap vermez / yoğun (429) → alıcıya "birkaç dakika sonra tekrar deneyin". Bir sipariş = bir site kuralı aynen.
+    reddedilmez); Etsy cevap vermez / yoğun (429) → alıcıya "birkaç dakika sonra tekrar deneyin".
+  - **Çok ürünlü sipariş (G152):** `etsy` modunda bir sipariş **N site** açabilir; N = makbuzdaki tasarım birimleri (tasarım
+    satırlarının adetleri toplamı; eşlenmemiş satır da tasarım sayılır; `listings.json` → `services` altındaki kurulum / özel tasarım /
+    ek revizyon ilanları **hiç sayılmaz**; en az 1, en çok 10). `/start`'ta boş birim varsa yeni site açılır; hepsi doluysa eski davranış
+    (aynı e-posta → giriş, o tasarımın sitesi; başka e-posta → `order_used`). `off`/`manual`'de ve Etsy bağlı değilken bir sipariş = bir
+    site. Blob'da birim başına ayrı sipariş dizini (`orders/<no>.json`, `orders/<no>~2.json` …; iki örnek aynı birimi alamaz, yarışı
+    kaybeden bir sonraki birimi alır). Satışa çıkmadan ilanlar yayınlanınca `services` doldurulmalı.
   - **Güvenli geri düşüş:** `etsy` modunda ayarlar eksik, mağaza bağlı değil ya da Etsy bağlantıyı reddediyorsa `/start` hata vermez,
     `manual` gibi davranır (site bekler) ve admin → Özet → **Bağlantılar** kartı uyarı gösterir. Bağlantı kurulunca bekleyen siteler
     "Bekleyen siparişleri Etsy'de kontrol et" ile, ayrıca alıcı paneli açıkken ve alıcı Publish'e basınca kendiliğinden onaylanır.
@@ -175,7 +181,10 @@ düzenler. Bu belge platformun tek kaynağıdır.
   `/start` sonrası alıcıya özel düzenleme linki + "başka cihazda `<site>/my` adresinden sipariş no + e-postayla devam" e-postası;
   `/my`'den istenen giriş linki (G146, "Email me a sign-in link"); site **onay bekleyerek** açıldığında dükkâna "New website started — order needs a
   check" bildirimi (yalnız sipariş no, tasarım, admin linki; alıcının linki yok). Gönderim hatası siteyi açmayı bozmaz, link ekranda
-  kalır; e-posta içeriği, link ve adresler log'a yazılmaz. RSVP bildirimi henüz yok.
+  kalır; e-posta içeriği, link ve adresler log'a yazılmaz. **RSVP bildirimi (G152):** panel → Guests → "Email me when a guest
+  replies" (varsayılan kapalı, yalnız SMTP açıkken görünür) → her sayılan misafir yanıtında kayıtlı sahip adresine kısa e-posta (misafir
+  adı, katılım, kişi sayısı, en çok 5 cevap, not; panele **anahtarsız** `<site>/my` linki). Site başına günde en çok 20; fazlası sayılır,
+  bir sonraki e-posta "N more replies" der. Ayar `docs/<site>/rsvp-notify.json`; gönderim hatası yanıtı etkilemez.
   - **Sahibin kurulumu (Gmail, bir kez):**
     1. Google hesabında **2 Adımlı Doğrulama** açık olmalı (Google Hesabı → Güvenlik).
     2. Google Hesabı → Güvenlik → **Uygulama şifreleri** → bir ad yazın (ör. "Vercel site") → Oluştur → 16 harfli şifreyi kopyalayın
@@ -223,6 +232,15 @@ e-posta = her cihazdan erişim.** Hesap yok, şifre yok, dükkânın işi yok. �
   sipariş numarası loglanmaz.
 - Bilinen sınır: Etsy doğrulaması kapalıyken (biçim kontrolü) sipariş no + e-postayı bilen herkes girer — K46 kararının bilinçli
   bedeli; G147'nin Etsy doğrulayıcısı açıldığında `/start` önce siparişi doğrular. Gerçek e-posta gönderimi G147'de.
+- **G152 ekleri:** çok ürünlü siparişte aynı e-postanın birden çok sitesi varsa `/my` rastgele birini açmaz, küçük bir seçici
+  ("Which website do you want to open?" — isimler + adres; anahtar yalnız seçilen site için) gösterir; "Email me a sign-in link" her
+  site için ayrı e-posta yollar. Admin site sayfası → Destek işlemleri → **Giriş yapılan cihazlar** (sayı, etiket, tarih; salt okunur) +
+  **Tüm cihazlarda oturumu kapat** (cihaz anahtarları silinir; alıcının özel linki ve dükkân linki kalır). Alıcı ekranlarının (`/start`,
+  `/my`, `/signin`, `/edit/...`, bunların not-found sayfaları) **sunucu HTML'i** artık doğru `<html lang>`'i taşır: `app/layout.tsx`
+  kaldırıldı; satış sitesi (`app/(marketing)/layout.tsx`, statik kaldı), admin (`app/admin/layout.tsx`, `tr`) ve her alıcı ekranı
+  (`app/{edit,my,signin,start}/layout.tsx` → `components/i18n/RootDocument.tsx BuyerRootLayout`, `bke_lang` çerezi / Accept-Language)
+  ayrı kök layout; eşleşmeyen adresler `app/global-not-found.tsx` (`experimental.globalNotFound`). Kök layout'lar arası geçiş tam
+  sayfa yüklemesidir.
 - **Destek notu:** siparişi başkası kendi e-postasıyla kapmışsa (doğrulama kapalıyken) dükkân **önce admin'de e-postayı gerçek
   alıcınınkiyle düzeltir, sonra "Yeni link" (reissue)** yapar: reissue cihaz anahtarlarını düşürür, düzeltilmiş e-posta da yeni
   girişi gerçek alıcıya bağlar. (E-posta düzeltmesi tek başına cihazları kapatmaz.)

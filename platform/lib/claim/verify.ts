@@ -26,9 +26,10 @@ export type OrderCheckReason = 'not_found' | 'email_mismatch' | 'theme_mismatch'
 export type OrderCheck =
   /** Verification is off: only the format and the one-site-per-order rule apply. */
   | { result: 'not_checked' }
-  | { result: 'verified' }
+  /** `units` (G152, Etsy only): how many websites the order pays for (designs × quantity); absent = 1. */
+  | { result: 'verified'; units?: number }
   /** Accepted for now; the shop confirms the order by hand before the site can be published (manual mode). */
-  | { result: 'pending' }
+  | { result: 'pending'; units?: number }
   | { result: 'rejected'; reason: OrderCheckReason }
   /** The outside service could not answer; nothing is created, the buyer may retry. */
   | { result: 'unavailable' };
@@ -45,6 +46,18 @@ export interface OrderCheckInput {
 export interface OrderVerifier {
   readonly kind: string;
   check(input: OrderCheckInput): Promise<OrderCheck>;
+}
+
+/** G152: most websites one order can hold, however large the receipt. */
+export const MAX_ORDER_SITES = 10;
+
+/**
+ * How many websites this order may have: the receipt's design units when the verifier read the receipt (Etsy mode),
+ * otherwise 1 (off / manual / Etsy not connected yet: one site per order, as before).
+ */
+export function orderUnits(check: OrderCheck): number {
+  const n = check.result === 'verified' || check.result === 'pending' ? check.units : undefined;
+  return typeof n === 'number' && Number.isInteger(n) && n > 1 ? Math.min(n, MAX_ORDER_SITES) : 1;
 }
 
 /** Default: no outside verification. */

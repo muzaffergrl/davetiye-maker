@@ -10,6 +10,7 @@ import { panelPreviewToken } from '../keys.ts';
 import { normalizeEmail } from '../claim/fields.ts';
 import { rsvpCsvForSite, rsvpSummary, type RsvpCounts, type RsvpEntry } from '../rsvp/couple.ts';
 import { confirmOrder, endShopEditKey, grantIdentityChanges, issueShopEditKey, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
+import { listDevices, signOutOtherDevices } from '../device-keys.ts';
 import { adminCreateSite } from './create.ts';
 import { messageTemplate, withMessageLog } from './messages.ts';
 import {
@@ -137,6 +138,14 @@ export interface AdminSiteDetail {
   rsvp: AdminRsvpView;
   /** "/<slug>?preview=<short-lived token>": the draft as the buyer's panel shows it (12 h, never stored). */
   previewPath: string;
+  /** G152: devices signed in with the order number + email (G146 device keys; labels and dates only, newest first). */
+  devices: AdminDeviceView[];
+}
+
+export interface AdminDeviceView {
+  label: string;
+  createdAt: string;
+  via: 'continue' | 'start' | 'email';
 }
 
 function contentView(site: SiteRecord): AdminContentView {
@@ -181,6 +190,7 @@ async function detailOf(site: SiteRecord, adapter: DataAdapter, now: Date = new 
     content: contentView(site),
     rsvp: { counts: rsvp.counts, responses: rsvp.responses },
     previewPath: `/${site.slug}?preview=${encodeURIComponent(panelPreviewToken(site.id, site.previewKeyHash, now.getTime()))}`,
+    devices: (await listDevices(adapter, site)).map(({ label, createdAt, via }) => ({ label, createdAt, via })),
   };
 }
 
@@ -233,7 +243,7 @@ export async function listRoute(req: Request): Promise<Response> {
 
 // --- actions --------------------------------------------------------------------------------------------------
 
-export const ADMIN_ACTIONS = ['confirm', 'reissue', 'shop-edit', 'shop-edit-end', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
+export const ADMIN_ACTIONS = ['confirm', 'reissue', 'shop-edit', 'shop-edit-end', 'devices-signout', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
 export type AdminAction = (typeof ADMIN_ACTIONS)[number];
 
 /** Turkish words for the errors lib/sites.ts throws (the admin speaks Turkish). */
@@ -292,6 +302,12 @@ export async function siteAction(req: Request, id: string, action: string): Prom
       }
       case 'shop-edit-end': {
         updated = await endShopEditKey(adapter, site.id);
+        break;
+      }
+      case 'devices-signout': {
+        // G152: every device signed in with the order number + email is signed out; the buyer's private edit link and the
+        // shop's own link stay. The buyer can sign in again on /my.
+        extra = { removed: await signOutOtherDevices(adapter, site, null) };
         break;
       }
       case 'grant': {

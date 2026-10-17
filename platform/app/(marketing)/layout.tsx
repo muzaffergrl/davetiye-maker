@@ -1,12 +1,15 @@
 // Marketing site shell (G061, docs/14 §9; G066 BKE Studio): fonts (self-hosted by next/font at build time — no font
-// file in the repo), robots (noindex until launch), analytics and motion. The root layout (app/layout.tsx) stays the
-// platform's and carries the brand icons and the web manifest; this shell paints its own background.
+// file in the repo), robots (noindex until launch), analytics and motion. G152: this is the sales site's ROOT layout
+// (<html> + <body>, the brand icons and the web manifest from components/i18n/RootDocument.tsx); the shell paints its
+// own background.
 // G144: the parts with words (skip link, header with the language switcher, footer, the site-wide JSON-LD and the live
 // demo dialog) are components/marketing/MarketShell.tsx, rendered per language by (en)/layout.tsx and
 // i18n/[lang]/layout.tsx.
 import type { Metadata, Viewport } from 'next';
 import { Archivo, DM_Sans, Montserrat } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { DocumentHtml } from '../../components/i18n/DocumentLang.tsx';
+import { RootBody, ROOT_METADATA, ROOT_VIEWPORT } from '../../components/i18n/RootDocument.tsx';
 import { MotionRoot } from '../../components/fx/MotionRoot.tsx';
 import '../../components/fx/fx.css';
 import s from '../../components/marketing/marketing.module.css';
@@ -33,22 +36,28 @@ const wide = Montserrat({ subsets: ['latin'], weight: ['300'], display: 'swap', 
 const body = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
 
 export const metadata: Metadata = {
+  ...ROOT_METADATA,
   metadataBase: new URL(siteOrigin()),
   robots: robotsFor(),
   formatDetection: { telephone: false, email: false, address: false },
-  // Tab icons and the web manifest come from the root layout (app/layout.tsx, lib/marketing/brand.ts).
+  // Tab icons and the web manifest: ROOT_METADATA (components/i18n/RootDocument.tsx, lib/marketing/brand.ts).
 };
 
 // Browser UI color on phones = the page background (paper light).
-export const viewport: Viewport = { themeColor: BRAND_COLORS.paperLight };
+export const viewport: Viewport = { ...ROOT_VIEWPORT, themeColor: BRAND_COLORS.paperLight };
 
+// G152: a root layout (components/i18n/RootDocument.tsx); <html lang> follows the route (/tr, /de/designs …).
 export default function MarketingLayout({ children }: { children: ReactNode }) {
   return (
-    <div className={`${s.shell} ${display.variable} ${wide.variable} ${body.variable}`} data-analytics={MARKETING.analytics.provider}>
-      {children}
-      <Tracker />
-      {/* G089 (K31): reveal on scroll and pointer depth; styles in components/fx/fx.css */}
-      <MotionRoot />
-    </div>
+    <DocumentHtml scope="(marketing)">
+      <RootBody>
+        <div className={`${s.shell} ${display.variable} ${wide.variable} ${body.variable}`} data-analytics={MARKETING.analytics.provider}>
+          {children}
+          <Tracker />
+          {/* G089 (K31): reveal on scroll and pointer depth; styles in components/fx/fx.css */}
+          <MotionRoot />
+        </div>
+      </RootBody>
+    </DocumentHtml>
   );
 }

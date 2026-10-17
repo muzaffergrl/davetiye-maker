@@ -14,6 +14,9 @@
 //       "etsy": the receipt is read from Etsy — G147; not connected yet -> "pending" like manual)
 //      (before the "used" check: with verification on, a stranger gets the same 403 for used and unused numbers)
 //   6. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
+//      G152: "used" means every design unit of the order has its website. The verifier says how many websites the order
+//      pays for (Etsy mode: the receipt's design lines × quantity, lib/etsy/verify.ts designUnits; off / manual: 1); while a
+//      unit is free, /start makes a new site for it (step 7 on). The blob adapter keeps one order index file per unit.
 //      … unless it is a RETRY of the same claim: same claim token (the form sends one random token
 //      and repeats it on every retry), same email, still an unpublished draft, created < 24 h ago.
 //      The first answer was lost on the way (phone changed network), so the buyer never saw the
@@ -27,10 +30,11 @@
 //   9. create the draft (createSiteWithKeys), emails        -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
 //      (G147: the edit link to the buyer when SMTP is set; a NEW pending site is also announced to the shop)
 //
-// One website per order number is enforced here with findSitesByOrderRef + an in-process lock.
+// One website per order unit is enforced here with findSitesByOrderRef + an in-process lock.
 // Several server instances (Vercel) need a storage guarantee as well: the blob adapter (G048) keeps
-// an orders/<number>.json index created only if absent and throws OrderRefTakenError, mapped to
-// "order_used" below; G043 (Supabase) should do the same with a unique index on sites(order_ref).
+// an orders/<number>.json index (orders/<number>~<unit>.json for units 2, 3 …, G152) created only if absent and throws
+// OrderRefTakenError: the claim then reads the order again and takes the next free unit, or answers as for a used order
+// below; G043 (Supabase) should do the same with a unique index on sites(order_ref, order_slot).
 
 import { randomInt } from 'node:crypto';
 import { isValidTimeZone } from '../content/format.ts';
@@ -61,7 +65,7 @@ import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
 import { THEME_IN_REVIEW, themeOpenForClaims, type ApprovalEnv } from '../themes/approval.ts';
-import { getOrderVerifier, type OrderVerifier } from './verify.ts';
+import { getOrderVerifier, orderUnits, type OrderVerifier } from './verify.ts';
 
 export interface ClaimContext {
   adapter: DataAdapter;
@@ -334,19 +338,22 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     return { status: 201, body: body as unknown as Record<string, unknown> };
   };
 
-  /**
-   * "Order used"; the recovered link when this request repeats a claim whose answer was lost; or (G146) the buyer's own
-   * website, opened on this device with a device key, when the email is the one it was started with.
-   */
-  const usedOrRetry = async (sites: SiteRecord[]): Promise<ClaimResult> => {
+  /** The recovered link when this request repeats a claim whose answer was lost (same claim token), else null. */
+  const retryOf = async (sites: SiteRecord[]): Promise<ClaimResult | null> => {
     const mine = sites.find((s) => isClaimRetry(s, claimToken, email, now()));
-    if (mine) {
-      const reissued = await reissueKeys(adapter, mine.id);
-      return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
-    }
+    if (!mine) return null;
+    const reissued = await reissueKeys(adapter, mine.id);
+    return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
+  };
+
+  /**
+   * Every unit of the order has its website: "order used", or (G146) the buyer's own website — of this design when they
+   * have several (G152) — opened on this device with a device key, when the email is the one it was started with.
+   */
+  const usedOrSignIn = async (sites: SiteRecord[]): Promise<ClaimResult> => {
     const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
     if (!perOrder.allowed) return claimError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
-    const owned = ownedSite(sites, email);
+    const owned = ownedSite(sites, email, theme.id);
     if (!owned) return claimError(409, 'order_used');
     const { key } = await mintDeviceKey(adapter, owned, { label: deviceLabel(ctx.userAgent), via: 'start', now: new Date(now()) });
     const origin = ctx.origin.replace(/\/+$/, '');
@@ -362,14 +369,28 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     return { status: 200, body: body as unknown as Record<string, unknown> };
   };
 
+  /** G152: the first design unit (1 … units) no site of the order uses yet, or null when all are used. */
+  const freeSlot = (sites: SiteRecord[], units: number, taken: ReadonlySet<number> = new Set()): number | null => {
+    if (sites.length >= units) return null;
+    const used = new Set([...taken, ...sites.map((s) => s.orderSlot ?? 1)]);
+    for (let n = 1; n <= units; n++) if (!used.has(n)) return n;
+    return null;
+  };
+
   return withOrderLock(orderNumber, async () => {
     const verifier = ctx.verifier ?? getOrderVerifier();
     const check = await verifier.check({ orderNumber, email, theme: theme.id });
     if (check.result === 'rejected') return claimError(403, 'order_not_verified');
     if (check.result === 'unavailable') return claimError(503, 'verification_unavailable', {}, { 'Retry-After': '60' });
+    const units = orderUnits(check);
 
-    const existing = await adapter.findSitesByOrderRef(orderNumber);
-    if (existing.length) return usedOrRetry(existing);
+    let existing = await adapter.findSitesByOrderRef(orderNumber);
+    if (existing.length) {
+      const retry = await retryOf(existing);
+      if (retry) return retry;
+    }
+    let slot = freeSlot(existing, units);
+    if (slot === null) return usedOrSignIn(existing);
 
     const taken = async (from: string) =>
       claimError(409, 'slug_taken', { fields: { slug: FIELD_MESSAGES.slugTaken }, suggestion: await findFreeSlug(adapter, from) });
@@ -400,6 +421,8 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
           ? { status: 'verified' as const, at, by: 'etsy' as const }
           : null;
     let created: Awaited<ReturnType<typeof createSiteWithKeys>> | null = null;
+    /** Units another instance took while this claim ran (the order index refused them; a listing may not show them yet). */
+    const lostSlots = new Set<number>();
     for (let tries = 0; !created; tries++) {
       try {
         created = await createSiteWithKeys(adapter, {
@@ -410,10 +433,21 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
           ownerEmail: email,
           claimTokenHash: claimToken ? hashKey(claimToken) : null,
           orderCheck,
+          orderSlot: slot,
         });
       } catch (e) {
-        // Another server instance won the race (possibly our own earlier attempt of this claim).
-        if (e instanceof OrderRefTakenError) return usedOrRetry(await adapter.findSitesByOrderRef(orderNumber));
+        // Another server instance won the race for this unit (possibly our own earlier attempt of this claim): read the
+        // order again — the recovered link, the next free unit (G152), or "used" / sign-in.
+        if (e instanceof OrderRefTakenError) {
+          existing = await adapter.findSitesByOrderRef(orderNumber);
+          const retry = await retryOf(existing);
+          if (retry) return retry;
+          lostSlots.add(slot);
+          const next = freeSlot(existing, units, lostSlots);
+          if (next === null) return usedOrSignIn(existing);
+          slot = next;
+          continue;
+        }
         if (!(e instanceof SlugTakenError)) throw e;
         // Someone took the address between the check and the write.
         if (requestedSlug || tries >= 2) return taken(slug);
