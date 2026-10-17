@@ -60,8 +60,9 @@ export function HowItWorksPage({ m }: { m: Market }) {
           </p>
           <aside className={s.callout}>
             <p>
-              <KeyRound aria-hidden size={18} strokeWidth={1.75} /> <strong>{t('Save your private edit link.')}</strong>{' '}
-              {t('It opens your editor, and anyone who has it can edit your website. Copy it into your notes or email it to yourself right away.')}
+              {/* G154 (G146/K46): the order number + email are the way back on any device; the edit link is a shortcut */}
+              <KeyRound aria-hidden size={18} strokeWidth={1.75} /> <strong>{t('Your order number is your key.')}</strong>{' '}
+              {t('With it and your email, your editor opens on any phone or computer: no account, no password. Your private edit link is a shortcut to the same editor. Anyone who has it can edit your website, so keep it private.')}
             </p>
           </aside>
         </>
@@ -111,13 +112,13 @@ export function HowItWorksPage({ m }: { m: Market }) {
       body: (
         <p>
           {t(
-            'Guests reply on your RSVP page. You see each reply and the totals in your panel and can download them as a CSV file. The form closes on its own after your reply-by date.',
+            'Guests reply on your RSVP page. You see each reply and the totals in your panel and can download them as an Excel file. The form closes on its own after your reply-by date.',
           )}{' '}
           <a href={m.href('/features#rsvp')}>{t('More about RSVP')}</a>.
         </p>
       ),
       screen: panelScreen('replies'),
-      alt: t('Replies in the panel with totals and a CSV download button'),
+      alt: t('Replies in the panel with totals and an Excel download button'),
     },
   ];
 
@@ -182,7 +183,7 @@ export function HowItWorksPage({ m }: { m: Market }) {
               <h2 className={s.h2}>{t('After the wedding')}</h2>
               <p>
                 {t(
-                  'Your website stays online until {months} months after your wedding date, so guests can come back to it. After that your website closes for guests; you can still see your content and download your replies. Longer hosting: {extension}.',
+                  'Your website stays online until {months} months after your wedding date, so guests can come back to it. After that your website closes for guests; you can still see your content and download your replies. {extension}',
                   { months: MARKETING.hosting.monthsAfterWedding, extension: t(MARKETING.policies.extension) },
                 )}
               </p>

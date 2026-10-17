@@ -570,7 +570,8 @@ Adımlar: numaralı liste. Her adımda ne olur, ne kadar sürer ve hangi gerçek
 
 Ek bölümler:
 - **"What you need":** a phone or computer, your Etsy order number, photos (optional).
-- **"After the wedding":** site düğünden 12 ay sonrasına kadar yayında kalır [VERIFY: G060]; sonrası `[EXTENSION POLICY]`.
+- **"After the wedding":** site düğünden 12 ay sonrasına kadar yayında kalır [VERIFY: G060]; sonrası ~~`[EXTENSION POLICY]`~~
+  K48/G154: `policies.extension` ("Need it online longer? Message us on Etsy before your “Online until” date and we can extend it.").
 - **Şema:** WebPage, BreadcrumbList. `HowTo` isteğe bağlı (Google'da zengin sonuç yok).
 
 ### 6.5 Özellikler `/features`
@@ -590,7 +591,11 @@ Gruplar (her biri H2 ve GERÇEK ekran):
 - **Privacy:** yalnız siz yanıtları görürsünüz; misafir verisi satılmaz ve paylaşılmaz; site arama motorlarına kapalıdır
   [§5.5 kararına bağlı].
 - **Not included** (açık liste): custom domain, music, changing colors or fonts, password protection, sending invitations
-  by email, guest list import, multiple languages, printed invitations.
+  by email, guest list import, multiple languages, printed invitations. **G154 (G090 P1-03, 2026-10-17):** müzik (G126), 5 dil
+  (G144) ve basılabilir davetiye + site PDF'i (G139) artık "Included"; şifre G076'dan beri özellik. Güncel liste
+  `lib/marketing/facts.ts` `NOT_INCLUDED`: özel alan adı; renk/font/yerleşim değişikliği; davetiyeyi misafirlere e-postayla
+  gönderme; davetli listesi içe aktarma; 5 dil dışındaki dillerde sabit metinler; baskı ve kargo (basılabilir davetiyeyi alıcı
+  basar); eşleşen save the date (henüz yok). E-posta bildirimleri (G147/G152) yalnız dükkân açınca çalıştığı için vaat edilmez.
 - **Comparison tablosu: "Canva template vs [BRAND]".** Yalnız doğru satırlar, rakip adı yok:
 
   | | Canva template (typical Etsy listing) | [BRAND] |
@@ -598,7 +603,7 @@ Gruplar (her biri H2 ve GERÇEK ekran):
   | Where you edit | Canva editor | A simple panel designed for phone screens |
   | Account needed | Canva account | None (private edit link) |
   | RSVP | Separate form (Canva Forms or Google Forms) | Built in; replies and CSV in your panel |
-  | Your link | Canva's free site address | `[DOMAIN]/<your-names>` |
+  | Your link | Canva's free site address | `<host>/<your-names>` (G154: `siteHost()`, sitenin gerçek host'u — marka alan adı kararına kadar `MARKETING_SITE_URL` / `PLATFORM_PUBLIC_URL`'in host'u; hiçbiri yoksa "…") |
 
 - **Şema:** WebPage, BreadcrumbList.
 
@@ -618,7 +623,9 @@ Bölümler:
 - **"Not included":** §6.5 listesi.
 - **Paket / indirim:** `[BUNDLE OFFER: G062]`. Karar gelene kadar bölüm görünmez.
 - **Fiyat SSS:** Why Etsy? (Etsy handles payment and gives you your download) · Is it a subscription? (No) · What happens
-  after 12 months? (`[EXTENSION POLICY]`) · Refunds? (no returns or refunds for the digital product; we fix what does not work as described, 2026-10-15) · Can I buy directly on this site? (Not yet: §7.4)
+  after 12 months? (K48/G154: site misafirlere kapanır, panelde içerik + yanıt indirme kalır; `policies.extension` +
+  `policies.retention`: "After your “Online until” date, we keep your website archived for 12 months, then we delete it with its
+  photos and replies.") · Refunds? (no returns or refunds for the digital product; we fix what does not work as described, 2026-10-15) · Can I buy directly on this site? (Not yet: §7.4)
 - **Şema:** WebPage, BreadcrumbList. Offer **yalnız tasarım sayfasında**; aynı ürün birden çok sayfada işaretlenmez.
 
 ### 6.7 SSS `/faq`
@@ -634,15 +641,20 @@ Gruplar ve sorular (her yanıt ilk cümlede cevap verir, 40–80 kelime, ilgili 
   or date after publishing? ("Yes, 3 times. Fixing a small typo (up to 2 letters or digits) is free, and everything else
   can change as often as you like." docs/16 §11.7 ile aynı; `[VERIFY: G060 shipped]`) · What if our wedding date moves?
   (contact support; docs/15 §1: ertelenen düğün için tarih değişikliği ücretsiz önerisi) · What if I lose my edit link?
-  `[LOST LINK POLICY]` · Can two people edit? (Anyone with the edit link can; keep it private)
+  ~~`[LOST LINK POLICY]`~~ K48/G154: G146 akışı — `/my` ("Create your website") + sipariş no + e-posta, her cihaz · Can two
+  people edit? (G154: sipariş no + e-posta ya da düzenleme linki; yalnız eşle paylaşılır) · **G154:** Can our website be in
+  another language? (5 dil, sabit metinler çevrilmiş, kendi metin otomatik taslak + onay)
 - **Guests and RSVP:** How do guests reply? · Do guests need an account or app? (No) · Can I ask a meal choice? (Up to 3
   questions) · Where do I see replies? · When should the RSVP deadline be? → guide 3
 - **Sharing:** How do I share it? (Link, QR) · What do guests see when I send the link? (Your names and date in the
   preview) · Can I print the QR on paper invitations? (Yes, scan it before printing)
 - **Hosting and privacy:** How long is my website online? · Who can see guest replies? · Will my website show up on
-  Google? [§5.5] · Can I take it offline? (Unpublish) · How do I delete my data? `[DELETION PROCESS]`
+  Google? [§5.5] · Can I take it offline? (Unpublish) · How do I delete my data? ~~`[DELETION PROCESS]`~~ K48/G154:
+  `policies.deletion` ("Message us on Etsy with your order number and we delete your website, its photos and your guests’ replies
+  within 30 days.") + e-postayla da yazılabilir
 - **Designs:** Is the artwork AI-generated? (Yes: created with AI image tools, then assembled, tested and hosted by us) ·
-  Is there a matching save the date? (Not yet) · Do you sell printed invitations? (No)
+  Is there a matching save the date? (Not yet) · Do you sell printed invitations? (No; G154: panelin basılabilir davetiyesi —
+  Share → Downloads, 5 × 7 in / A5, arka yüz, taşma payı, kesim işaretleri; G139)
 - **Support:** How do I contact you? (bkestudio@gmail.com, K33) · How fast do you reply? (24 hours, 2026-10-15)
 
 Şema: FAQPage, görünen metinle birebir aynı (isteğe bağlı; Google'da sonuç yok, diğer motorlar okuyabilir).
@@ -687,7 +699,10 @@ Kurallar:
 ### 6.10 Gizlilik `/privacy`
 
 - **H1:** `Privacy notice`. Dükkân adı ve destek e-postasıyla yazılır (K25).
-- Taslak metni hukuki tavsiye değildir; `[PRIVACY REVIEW]` notu taşır.
+- Taslak metni hukuki tavsiye değildir; `[PRIVACY REVIEW]` notu taşır. **K48 (G154):** bu not artık **yalnız belgelerde**:
+  sayfa `[PRIVACY REVIEW]` ya da "draft" kutusu göstermez. Metin hukuki tavsiye değildir; yayından önce bir uzmana okutulması
+  önerilir (AB/UK alıcıları için GDPR; aşağıdaki risk notu). `verified.privacyText` bu okuma yapılana kadar false kalır ve
+  `launched: true`'yu durdurur. G154 metni koddan yeniden yazdı (aşağıdaki bölümler).
 
 Bölümler:
 - Toplananlar:
@@ -699,10 +714,20 @@ Bölümler:
   - Erişim: misafir verisini yalnız çift görür (düzenleme linkiyle); biz destek ve işletme için erişebiliriz.
 - Ne kadar süre:
   - Site düğünden 12 ay sonrasına kadar yayında.
-  - Sonrası silme ya da arşiv `[RETENTION AFTER ARCHIVE]`.
+  - Sonrası silme ya da arşiv ~~`[RETENTION AFTER ARCHIVE]`~~ K48/G154: Online until'dan sonra 12 ay arşiv, sonra site +
+    fotoğraflar + yanıtlar silinir (`policies.retention`). İstek üzerine silme: Etsy'den sipariş no ile, 30 gün içinde
+    (`policies.deletion`).
   - Yayından kaldırılan sitenin fotoğrafları herkese kapanır (mevcut davranış).
 - Misafirin hakları: çifte ya da bize yazarak düzeltme ve silme isteği.
 - Çerezler: pazarlama sitesinde yok (Vercel Web Analytics çerezsiz [VERIFY]); panel ve site çerez kullanmıyor [VERIFY].
+  **G154 (koddan okundu, 2026-10-17):** düğün sitesinin tek çerezi misafir şifresi açıkken doğru şifreyi 90 gün hatırlayan
+  HttpOnly çerez (`lib/site/access.ts`); panel: seçilen panel dili çerezi `bke_lang` (`lib/i18n/client.ts`), Google Sheets
+  bağlanırken kısa ömürlü durum çerezi (`lib/google/api.ts`), tarayıcı deposunda açılan editörler (`bke:editors`) ve çevrimdışı
+  taslak. Sayfada ayrıca: müzik dosyası, cihaz anahtarlarının SHA-256 özeti + etiket (`lib/device-keys.ts`), şifreli Google
+  token (`lib/google/crypto.ts`), e-posta yalnız SMTP açıkken (düzenleme linki, giriş linki, isteğe bağlı yanıt bildirimi;
+  `lib/mail`), "Translate automatically" tarayıcıda çeviremezse metni MyMemory'ye (translated.net) yollar
+  (`lib/i18n/auto-translate.ts`), harita yalnız "Show map" dokunuşunda Google'dan yüklenir, RSVP/başlatma hız sınırı IP'nin
+  yalnız SHA-256 özetini sayaçla tutar (`lib/data/blob` `hitCounter`). Analitik sağlayıcı yok (`analytics.provider: 'none'`).
 - Değişiklikler ve tarih.
 
 Risk notu (kullanıcıya bir satır):
@@ -1529,7 +1554,10 @@ G061 kod aşaması için şunlar gerekiyor (bugün listede değil):
    asistanlarca bilinmesi amaca uygun; arama botları her durumda açık. Çift siteleri eğitim botlarına her iki seçenekte
    de kapalı (§9.5).
 7. **Analitik:** öneri Vercel Web Analytics ve Speed Insights (Pro'da var, çerezsiz [VERIFY]).
-8. İade, kayıp link, 12 ay sonrası uzatma, silme süreci metinleri (G062).
+8. İade, kayıp link, 12 ay sonrası uzatma, silme süreci metinleri (G062). **K48 (2026-10-17, G154'te config'e işlendi):** iade
+   (2026-10-15), kayıp link = `/my`, uzatma Online until'dan önce Etsy'den istenir (ücret sözü yok), silme Etsy'den sipariş no ile
+   30 gün içinde, arşiv 12 ay sonra silme, Etsy dükkân linki `https://www.etsy.com/shop/STUDIOBKE`. Açık: alan adı ve barındırma
+   planı (madde 1).
 
 ---
 

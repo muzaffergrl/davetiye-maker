@@ -107,7 +107,7 @@ def test_pdf(tmp: Path):
     pdf = b.build_pdf(md, tmp / "START_HERE.pdf", png, v["START_URL"], v["DESIGN_NAME"])
     uris = b.pdf_uris(pdf)
     assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"], v["MY_URL"]}, uris
-    assert 5 <= b.pdf_page_count(pdf) <= 9, b.pdf_page_count(pdf)
+    assert 5 <= b.pdf_page_count(pdf) <= 10, b.pdf_page_count(pdf)  # G154: + Languages and Downloads (10 pages)
     text = b.eu.lk.pdf_text(pdf) or ""
     # since G121 even the preview tab names the wallet: no "envelope" in any case
     assert "Tropical Destination" in text and "tap the wallet" in text and "envelope" not in text.lower(), text[:200]
@@ -115,6 +115,11 @@ def test_pdf(tmp: Path):
     # G148: the box is in the PDF, with its title and the /my address
     flat = " ".join(text.split())
     assert "Continue on another device" in flat and "davetiye-platform-five.vercel.app/my" in flat, flat[:300]
+    # G154 (G090 P0-01, P1-05, P2-04): K48 texts instead of placeholders, Downloads, and the start address as plain text
+    assert "[" not in flat.replace("[{", ""), "a [PLACEHOLDER] is left in the guide"
+    assert "usually within 24 hours" in flat and "we can extend it" in flat and "within 30 days" in flat
+    assert "Download website as PDF" in flat and "Printable invitation" in flat
+    assert f"Type this address into your browser: {v['START_URL']}" in flat, "start address not printed as text"
 
 
 def test_committed():
