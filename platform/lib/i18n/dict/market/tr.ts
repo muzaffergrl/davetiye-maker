@@ -923,6 +923,17 @@ const dict: Dict = {
   'Your guests tap the wall. The blue-and-white tiles turn over one by one in a wave that starts where they touched, each showing its terracotta back as it lifts away. The card that was behind them comes forward to become your home page.': 'Misafirleriniz duvara dokunur. Mavi-beyaz çiniler, dokunulan yerden başlayan bir dalgayla tek tek döner; her biri kalkarken terrakota sırtını gösterir. Arkalarındaki kart öne gelir ve ana sayfanız olur.',
   'Your portrait and names on a card on the cobalt wall, a frieze of tiles, then the invitation, a countdown and calendar links.': 'Kobalt duvarda bir kartta portreniz ve isimleriniz, bir çini frizi; ardından davet, geri sayım ve takvim bağlantıları.',
   'wall': 'duvar',
+  // G168 Celestial Observatory
+  "A brass observatory under a midnight sky, a constellation of your initials, round star-map photo frames and gold": "Gece mavisi bir gök altında pirinç bir gözlemevi, baş harflerinizden bir takımyıldız, yuvarlak yıldız haritası foto çerçeveleri ve altın",
+  "A brass observatory opens onto the night sky and into your wedding website, with your initials traced as a constellation. Personalize it in your online editor.": "Pirinç bir gözlemevi gece göğüne ve düğün sitenize açılır; baş harfleriniz bir takımyıldız gibi çizilir. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "Midnight blue, silver-ivory chart paper, antique brass and gold leaf, like the pages of an old star atlas. Your invitation waits inside a small observatory, and every photo sits in a round star-map frame.": "Gece mavisi, gümüş-fildişi harita kâğıdı, antika pirinç ve altın varak; eski bir yıldız atlasının sayfaları gibi. Davetiyeniz küçük bir gözlemevinin içinde bekler, her fotoğraf yuvarlak bir yıldız haritası çerçevesinde durur.",
+  "Your guests tap the dome. The two halves of its slit shutter slide apart onto the night sky, a soft light rises from it, and a fine constellation line traces your initials above it. The card with your portrait rises out of the dome and comes forward to become your home page.": "Misafirleriniz kubbeye dokunur. Yarık kapağının iki yarısı gece göğüne doğru ayrılır, içinden yumuşak bir ışık yükselir ve ince bir takımyıldız çizgisi üstünde baş harflerinizi çizer. Portrenizin olduğu kart kubbeden yükselir ve öne gelerek ana sayfanız olur.",
+  "Your round portrait and names on a chart-paper card under the night sky, then the invitation, a countdown, calendar links and your initials traced again as a constellation.": "Gece göğü altında harita kâğıdından bir kartta yuvarlak portreniz ve isimleriniz; ardından davet, geri sayım, takvim bağlantıları ve yeniden bir takımyıldız olarak çizilen baş harfleriniz.",
+  "Three round photos, each uncovered by a sweep that turns once round it like a star dial as guests scroll to it.": "Üç yuvarlak fotoğraf; misafirler her birine kaydırdıkça bir yıldız kadranı gibi etrafında bir tur dönen bir süpürmeyle açılır.",
+  "The order of the day on chart paper, a venue photo swept in like the beam of a telescope, an optional map, dress code, travel and questions and answers.": "Harita kâğıdında günün akışı, bir teleskop ışını gibi süpürülerek gelen mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ile sorular ve cevaplar.",
+  "A chart-paper reply card under the midnight sky with your names and reply-by date, then the reply form.": "Gece mavisi gök altında isimleriniz ve son yanıt tarihiyle harita kâğıdından bir yanıt kartı, ardından yanıt formu.",
+  "Silver": "Gümüş",
+  "dome": "kubbe",
 };
 
 export default dict;

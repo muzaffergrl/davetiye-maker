@@ -235,6 +235,32 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a pistachio pâtisserie box tied with a rose satin bow; photos on display-case shelves and a menu like a pastry counter.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G168 (coming): written against the theme as built (README); the stars, star chart and brass rims arrive with the GPT parts.
+  'celestial-observatory': {
+    id: 'celestial-observatory',
+    collection: '29_Celestial_Observatory',
+    demoCouple: 'Celeste & Rowan',
+    style: msg('A brass observatory under a midnight sky, a constellation of your initials, round star-map photo frames and gold'),
+    metaDescription: msg('A brass observatory opens onto the night sky and into your wedding website, with your initials traced as a constellation. Personalize it in your online editor.'),
+    intro: msg('Midnight blue, silver-ivory chart paper, antique brass and gold leaf, like the pages of an old star atlas. Your invitation waits inside a small observatory, and every photo sits in a round star-map frame.'),
+    opening: msg('Your guests tap the dome. The two halves of its slit shutter slide apart onto the night sky, a soft light rises from it, and a fine constellation line traces your initials above it. The card with your portrait rises out of the dome and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your round portrait and names on a chart-paper card under the night sky, then the invitation, a countdown, calendar links and your initials traced again as a constellation.'),
+      story: msg('Three round photos, each uncovered by a sweep that turns once round it like a star dial as guests scroll to it.'),
+      details: msg('The order of the day on chart paper, a venue photo swept in like the beam of a telescope, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A chart-paper reply card under the midnight sky with your names and reply-by date, then the reply form.'),
+    },
+    palette: [
+      { name: msg('Midnight'), hex: '#11193A' },
+      { name: msg('Silver'), hex: '#C9CFDC' },
+      { name: msg('Brass'), hex: '#9B7A3C' },
+      { name: msg('Gold'), hex: '#C8A24E' },
+      { name: msg('Ivory'), hex: '#EEEBE3' },
+    ],
+    fonts: ['Imperial Script', 'Forum'],
+    llmsLine: "a brass observatory dome whose slit opens onto the night sky while a constellation line traces the couple's initials; round star-map photo frames; midnight, silver and gold.",
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   // G169 (coming): written against the theme as built; the tiles are interim pieces until the GPT parts arrive.
   'azulejo-mosaic': {
     id: 'azulejo-mosaic',

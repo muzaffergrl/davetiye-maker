@@ -4,8 +4,9 @@ Internal listing kit for the seller (G168, 2026-10-17). **Draft — not publishe
 yet** (`platform/lib/marketing/config.ts`: `coming`). Theme `celestial-observatory`. Written from the common skeleton in
 `docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32), with the same structure as the 01–20 listings: every sentence answers
 a buyer question from docs/19 §3 and promises only what the platform does today. Product language: English (US spelling).
-Design facts come from `platform/themes/celestial-observatory/` (README, theme.json, index.html). This design has no sales-site copy
-in `platform/lib/marketing/designs.ts` yet (only live designs need it); write it when the design goes live.
+Design facts come from `platform/themes/celestial-observatory/` (README, theme.json, index.html). The sales-site copy in
+`platform/lib/marketing/designs.ts` (G168, with translations) is written against the theme as built; re-read it when the GPT
+parts are in.
 
 ## 0. Status before publishing
 
@@ -223,7 +224,7 @@ Messages for each situation: `docs/19_ALICI_YOLCULUGU.md` §4.5 (the same for ev
 ## 11. Before you publish this listing
 
 - [ ] GPT parts (PAKET 5, PAKET 2, PAKET 6) in the theme, the theme looked at again, `config.ts` status `live` (integrator)
-- [ ] Sales-site copy for this design in `platform/lib/marketing/designs.ts` (+ translations)
+- [ ] Sales-site copy in `platform/lib/marketing/designs.ts` re-read against the theme with its GPT parts (+ translations)
 - [ ] Start link and demo answer on the live site and on a real phone
 - [ ] START HERE guide written for this design (`package/customer/`)
 - [ ] Price decided and filled in

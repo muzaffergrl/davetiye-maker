@@ -6,7 +6,7 @@ durum: inceleme
 alan: claude-G168
 oncelik: 1
 bagimli: [G138, G139, G144, G149, G159, G167]
-yazar: [platform/themes/celestial-observatory/, collections/29_Celestial_Observatory/, platform/tests/theme-celestial-observatory.test.ts, platform/previews/g168/, platform/lib/marketing/config.ts, platform/lib/marketing/designs.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/lib/print/layouts.ts, platform/public/print/celestial-observatory/, platform/lib/i18n/dict/site/, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, tools/katalog.py, gorevler/G168-celestial-observatory.md]
+yazar: [platform/themes/celestial-observatory/, collections/29_Celestial_Observatory/, platform/tests/theme-celestial-observatory.test.ts, platform/previews/g168/, platform/lib/marketing/config.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/i18n.ts, platform/lib/i18n/dict/market/, platform/lib/i18n/dict/panel/, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/lib/print/layouts.ts, platform/public/print/celestial-observatory/, platform/lib/i18n/dict/site/, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, tools/katalog.py, gorevler/G168-celestial-observatory.md]
 ---
 
 ## Amaç
@@ -52,9 +52,10 @@ Garden ve 22 Nocturne gibi hissettirmemeli. Koordinatör: session_01HP9ZrJ8mhZni
   karakter, 13 etiket ≤ 20).
 - **Basılı davetiye (G139):** `lib/print/layouts.ts` `composed` — harita kâğıdı + üstte/altta gece göğü şeridi (temanın
   tonladığı dokular; `public/print/celestial-observatory/` 1024 px ≈ 195 ppi, geçici). `tests/g149-print-layout.test.ts` ✓.
-- **Kayıtlar:** `config.ts` `coming` (`[PRICE]`), `designs.ts` `DESIGN_STYLES` (`classic`; satış metni yok — yalnız `live`
-  tasarım ister), `lib/audio/catalog.ts`, `lib/claim/demo-map.ts`, `tools/katalog.py` `EK_TEMALAR` satırı (6 eksen +
-  `hareket`; `kontrol` ✓), tema sayan testler (g085/093/094/097 coming listesi 29 sonda, g138 tema sayısı 29).
+- **Kayıtlar:** `config.ts` `coming` (`[PRICE]`), `designs.ts` `DESIGN_COPY` (satış metni, G169 ile aynı
+  düzen; açılış nesnesi "dome" → `OPENING_THINGS`, panel etiketleri "…the dome…"; market + panel çevirileri 4 dilde) ve
+  `DESIGN_STYLES` (`classic`), `lib/audio/catalog.ts`, `lib/claim/demo-map.ts`, `tools/katalog.py` `EK_TEMALAR` satırı (6 eksen +
+  `hareket`; `kontrol` ✓), tema sayan testler (g085/093/094/097 coming listesi 29 → 30 sırasıyla, g138 tema sayısı 30 — G169 birleşmesiyle).
 
 ### Geçici görsel (K21) — GPT bekleyen
 Tasarımın kendi parçası yok. Kintsugi yaklaşımı: gök = 06'nın düz lacivert kâğıdı gece mavisine tonlandı; harita kâğıdı =

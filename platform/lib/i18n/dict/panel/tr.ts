@@ -1343,6 +1343,16 @@ const dict: Dict = {
   'Under the wall, on phones': 'Duvarın altında, telefonlarda',
   'Wall': 'Duvar',
   'wall': 'duvar',
+  // G168 Celestial Observatory
+  "Above your names on the dome": "Kubbede isimlerinizin üstünde",
+  "Button after the dome opens": "Kubbe açıldıktan sonraki düğme",
+  "Open the dome again (RSVP page)": "Kubbeyi yeniden aç (Katılım sayfası)",
+  "Open the dome again (dome page)": "Kubbeyi yeniden aç (kubbe sayfası)",
+  "Open the dome again (home page)": "Kubbeyi yeniden aç (ana sayfa)",
+  "Under the dome, on computers": "Kubbenin altında, bilgisayarlarda",
+  "Under the dome, on phones": "Kubbenin altında, telefonlarda",
+  "Dome": "Kubbe",
+  "dome": "kubbe",
 };
 
 export default dict;

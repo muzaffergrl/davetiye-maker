@@ -56,6 +56,7 @@ export const OPENING_THINGS: Readonly<Record<string, string>> = {
   sleeve: msg('sleeve'),
   box: msg('box'),
   door: msg('door'),
+  dome: msg('dome'),
   wall: msg('wall'),
 };
 

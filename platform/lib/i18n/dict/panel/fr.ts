@@ -1343,6 +1343,16 @@ const dict: Dict = {
   'Under the wall, on phones': 'Sous le mur, sur téléphone',
   'Wall': 'Mur',
   'wall': 'le mur',
+  // G168 Celestial Observatory
+  "Above your names on the dome": "Au-dessus de vos noms sur la coupole",
+  "Button after the dome opens": "Bouton après l'ouverture de la coupole",
+  "Open the dome again (RSVP page)": "Rouvrir la coupole (page de réponse)",
+  "Open the dome again (dome page)": "Rouvrir la coupole (page de la coupole)",
+  "Open the dome again (home page)": "Rouvrir la coupole (page d'accueil)",
+  "Under the dome, on computers": "Sous la coupole, sur ordinateur",
+  "Under the dome, on phones": "Sous la coupole, sur téléphone",
+  "Dome": "Coupole",
+  "dome": "coupole",
 };
 
 export default dict;
