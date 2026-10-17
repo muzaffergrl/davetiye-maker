@@ -570,7 +570,7 @@ function PanelApp({
   const startPublish = async () => {
     if (!online) return setDialog({ kind: 'message', title: t('You’re offline'), text: t('Connect to the internet to publish. Your changes are kept on this phone.') });
     if (upToDate) return go({ view: 'share' });
-    if (meta.orderPending) return setDialog({ kind: 'message', title: t('Not yet'), text: t(ORDER_PENDING_MSG, { shop: PANEL_BRAND.shopName }) });
+    if (meta.orderPending && !(await panel.recheckOrder())) return setDialog({ kind: 'message', title: t('Not yet'), text: t(ORDER_PENDING_MSG, { shop: PANEL_BRAND.shopName }) });
     if (validation.errors.length) {
       setShowAllErrors(true);
       return setDialog({ kind: 'issues', issues: validation.errors });

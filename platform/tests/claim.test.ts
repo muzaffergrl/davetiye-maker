@@ -472,13 +472,14 @@ test('claim: rate limits — attempts per address, sites per address, sites over
 // ---------------------------------------------------------------------------------------------
 // Interface points: order verification and email
 
-test('order verifier: off by default; "etsy" is not implemented and fails loudly', () => {
+test('order verifier: off by default; "etsy" selects the Etsy verifier (G147); an unknown value fails loudly', () => {
   assert.ok(getOrderVerifier() instanceof FormatOnlyVerifier);
   process.env.CLAIM_ORDER_VERIFICATION = 'off';
   assert.equal(getOrderVerifier().kind, 'format-only');
   process.env.CLAIM_ORDER_VERIFICATION = 'etsy';
-  assert.throws(() => getOrderVerifier(), VerifierConfigError);
+  assert.equal(getOrderVerifier().kind, 'etsy');
   process.env.CLAIM_ORDER_VERIFICATION = 'maybe';
+  assert.throws(() => getOrderVerifier(), VerifierConfigError);
   assert.throws(() => getOrderVerifier(), /Unknown CLAIM_ORDER_VERIFICATION/);
   delete process.env.CLAIM_ORDER_VERIFICATION;
 });
@@ -511,21 +512,16 @@ test('order verifier: rejected / unavailable stop the claim; verified passes wit
   assert.equal(used.status, 403, 'a used order number is not revealed to a stranger');
   assert.equal(used.body.code, 'order_not_verified');
 
-  // the env switch to the unbuilt Etsy verifier -> 500, nothing created
+  // G147: "etsy" without the Etsy app settings / a connected shop never answers 500: the site waits like manual mode.
   setOrderVerifier(null);
   process.env.CLAIM_ORDER_VERIFICATION = 'etsy';
-  const errors: string[] = [];
-  const orig = console.error;
-  console.error = (...a: unknown[]) => void errors.push(a.map(String).join(' '));
   try {
-    const r = await postClaim(form());
-    assert.equal(r.status, 500);
-    assert.equal(r.body.code, 'server');
+    const r = await postClaim(form({ names: ['Etta', 'Sy'] }));
+    assert.equal(r.status, 201);
+    assert.equal(r.body.orderPending, true);
   } finally {
-    console.error = orig;
     delete process.env.CLAIM_ORDER_VERIFICATION;
   }
-  assert.ok(errors.some((e) => e.includes('not implemented')));
 });
 
 test('mailer: disabled by default; a configured mailer gets the link; a failing one does not fail the claim', async () => {

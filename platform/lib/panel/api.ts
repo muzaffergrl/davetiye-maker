@@ -28,7 +28,8 @@ import { getClaimRateLimiter, UPLOAD_LIMITS } from '../claim/limits.ts';
 import { claimableTheme } from '../claim/themes.ts';
 import { authorizeEditor } from '../rsvp/couple.ts';
 import { ORDER_PENDING_TEXT, PANEL_BRAND } from './brand.ts';
-import { ContentInvalidError, IdentityMismatchError, OrderPendingError, publishSite, SiteArchivedError, unpublishSite } from '../sites.ts';
+import { ContentInvalidError, IdentityMismatchError, OrderPendingError, orderPending, publishSite, SiteArchivedError, unpublishSite } from '../sites.ts';
+import { autoRecheck, RECHECK_POLL_MS, RECHECK_PUBLISH_MS } from '../etsy/recheck.ts';
 import { MAX_UPLOAD_BYTES, UploadRejectedError } from '../uploads.ts';
 import { DraftShapeError, keepStoredIdentity, MAX_DRAFT_BYTES, prepareDraft } from './draft.ts';
 import { BodyTooLargeError, bearerKey, fail, json, mediaType, readLimitedBytes, requestOrigin, unauthorized } from './http.ts';
@@ -101,7 +102,11 @@ export async function getPanel(req: Request, slug: string): Promise<Response> {
   try {
     const auth = await authorize(req, slug);
     if (!auth) return unauthorized();
-    return json(200, { ok: true, state: await panelState(auth.site, requestOrigin(req)) });
+    // G147: a pending order is re-checked with Etsy while the panel polls (etsy mode, at most every 2 minutes per site),
+    // or when the buyer presses Publish (?orderCheck=now: at most every 15 seconds).
+    const now = new URL(req.url).searchParams.get('orderCheck') === 'now';
+    const site = await autoRecheck(getDataAdapter(), auth.site, now ? RECHECK_PUBLISH_MS : RECHECK_POLL_MS);
+    return json(200, { ok: true, state: await panelState(site, requestOrigin(req)) });
   } catch (e) {
     return serverError(`get ${slug}`, e);
   }
@@ -250,6 +255,15 @@ export async function publish(req: Request, slug: string): Promise<Response> {
     }
     if (typeof base === 'string' && base !== auth.site.updatedAt) {
       return fail(409, 'conflict', CONFLICT_MESSAGE, { updatedAt: auth.site.updatedAt });
+    }
+    // G147: Publish on a pending order asks Etsy once more (etsy mode); a confirmed order publishes right away. The site
+    // version the buyer saw stays the one checked (a verified orderCheck moves updatedAt; only that field changed).
+    if (orderPending(auth.site)) {
+      const rechecked = await autoRecheck(getDataAdapter(), auth.site, RECHECK_PUBLISH_MS);
+      if (!orderPending(rechecked) && JSON.stringify(rechecked.content) === JSON.stringify(auth.site.content)) {
+        if (typeof base === 'string') base = rechecked.updatedAt;
+        auth.site = rechecked;
+      }
     }
     try {
       // The version checked here is the one published (a save landing in between -> 409, not an unchecked publish).

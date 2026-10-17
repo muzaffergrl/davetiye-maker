@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { ChevronRight, Plus } from 'lucide-react';
 import { adminList } from '../../lib/admin/api.ts';
 import { adminDashboard, type AdminTodo } from '../../lib/admin/view.ts';
+import { connectionsView } from '../../lib/admin/connections.ts';
+import AdminConnections from '../../components/admin/AdminConnections.tsx';
 import { AdminPage } from '../../components/admin/Guard.tsx';
 import { StateBadges } from '../../components/admin/badges.tsx';
 import { day, shortDay, stamp } from '../../components/admin/format.ts';
@@ -31,7 +33,7 @@ export default function AdminHome() {
   return (
     <AdminPage active="dashboard">
       {async () => {
-        const { sites } = await adminList();
+        const [{ sites }, conn] = await Promise.all([adminList(), connectionsView()]);
         const d = adminDashboard(sites);
         const maxWeek = Math.max(1, ...d.weeks.map((w) => w.count));
         const maxDesign = Math.max(1, ...d.byDesign.map((b) => b.count));
@@ -239,6 +241,9 @@ export default function AdminHome() {
               </div>
             </div>
 
+            {/* G147: email sending + Etsy shop connection (status, test email, connect, re-check pending orders). */}
+            <AdminConnections {...conn} />
+
             <details className={`${styles.card} ${styles.help}`} open={d.sales.total === 0 || undefined}>
               <summary>Satış sonrası nasıl işliyor?</summary>
               <ol>
@@ -246,7 +251,8 @@ export default function AdminHome() {
                 <li>Sipariş numarası ve e-postasıyla sitesini başlatır; taslak hemen açılır, düzenleme linkini kaydeder. Sipariş burada görünür.</li>
                 <li>
                   Sipariş onayı açıksa site <strong>Yapılacaklar</strong>&apos;a düşer: Etsy&apos;de siparişi kontrol edip <strong>Siparişi onayla</strong>, hazır
-                  &quot;Sipariş onaylandı&quot; mesajını Etsy&apos;den gönderin.
+                  &quot;Sipariş onaylandı&quot; mesajını Etsy&apos;den gönderin. Etsy mağazası bağlıysa (<strong>Bağlantılar</strong>) ödenmiş siparişler
+                  kendiliğinden onaylanır.
                 </li>
                 <li>
                   Alıcı başlatamıyorsa ya da sizden isterse: <strong>Yeni sipariş</strong> ile siteyi siz açın, çıkan düzenleme linkini hazır mesajla gönderin.

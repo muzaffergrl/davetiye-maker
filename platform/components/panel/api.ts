@@ -42,7 +42,7 @@ export function panelApi(slug: string, editKey: string) {
 
   return {
     /** The stored panel state (GET /api/edit/<slug>): {state: {content, updatedAt, …}}. */
-    state: () => call<Record<string, unknown>>(base, { headers: auth }),
+    state: (opts: { orderCheck?: boolean } = {}) => call<Record<string, unknown>>(opts.orderCheck ? `${base}?orderCheck=now` : base, { headers: auth }),
     saveDraft: (content: ContentRecord, baseUpdatedAt: string) => call<Record<string, unknown>>(base, jsonInit('PUT', { content, baseUpdatedAt })),
     /** Fire-and-forget save while the page is closing (keepalive survives the unload). */
     saveOnUnload(content: ContentRecord, baseUpdatedAt: string): void {
