@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 2 · alindi 0 · inceleme 13 · blokaj 88 · bitti 131 · iptal 190 · toplam 424
+Özet: hazir 1 · alindi 0 · inceleme 14 · blokaj 88 · bitti 131 · iptal 190 · toplam 424
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -145,9 +145,10 @@ Bağımlılık bekleyen: 0 · Biten: 0 · İptal: 20
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (26)**
+**Üzerinde çalışılan / incelemede / blokaj (27)**
 
 - `GM08` inceleme · codex-gpt-gorsel — BKE Studio sembolünde K yerine S — 5 GPT logo dosyası (sembol, favicon, yatay, dikey, dükkân ikonu)
+- `GM09` inceleme · codex-gpt-gorsel — Etsy banner sahnesi — mum mühürlerde S sembolü (1 GPT görseli)
 - `GM07` blokaj · gpt-gorsel-GM07 — Tasarım 15–20 rötuş parçaları — tema ajanlarının önerdiği 6 GPT parçası (yuvarlak çerçeveler, fiyonk, geri sayım kutusu, hap dalı, yatay çerçeve)
 - `G070` blokaj · - — V02_blush_champagne — Paket 1 + Paket 3 görselleri
 - `G071` blokaj · - — V03_terracotta_cream — Paket 1 + Paket 3 görselleri
@@ -174,4 +175,4 @@ Bağımlılık bekleyen: 0 · Biten: 0 · İptal: 20
 - `GP219` blokaj · - — Aşama 2 · Tasarım 19 — 5 palet görselleri
 - `GP220` blokaj · - — Aşama 2 · Tasarım 20 — 5 palet görselleri
 
-Bağımlılık bekleyen: 1 · Biten: 47 · İptal: 5
+Bağımlılık bekleyen: 0 · Biten: 47 · İptal: 5

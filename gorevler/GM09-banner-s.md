@@ -19,6 +19,7 @@ G129 sonrası Etsy banner'ı hâlâ K'li mum mühür gösteriyor. Prompt: `brand
 Sonra (Claude): banner'ları bu sahneden kırp, yazı logosu ekle; Etsy'ye yükleme ayrı adım.
 
 ## Sonuç
+GPT sahnesi geldi (S mühür, sağ %45 boş). Koordinatör banner'ları yeniden kırptı: `brand/etsy/etsy_banner_big_3360x840.jpg`, `etsy_banner_mini_1600x213.jpg`. Etsy'ye yükleme ayrı adım (yerel Claude).
 
 B3.6 prompt'u aynen, `brand/assets/gpt/final/brand_scene_wide_v2.png` (sahne) ve
 `brand/assets/gpt/final_s/monogram_s.png` (S sembolü) referanslarıyla imagegen'de çalıştırıldı.
@@ -41,3 +42,4 @@ bu görevde üretilmedi, Etsy'ye yükleme yapılmadı. Entegratör incelemesine 
 - 2026-10-17 açıldı (koordinatör)
 - 2026-10-17 alindi: codex-gpt-gorsel
 - 2026-10-17 bitti, incelemeye gönderildi: codex-gpt-gorsel
+- 2026-10-17 bitti (koordinatör: banner'lar üretildi)
