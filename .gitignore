@@ -31,3 +31,6 @@ renders/
 platform/node_modules/
 platform/.next/
 platform/.data/
+
+# theme-check çıktısı (scripts/theme-check.cjs önizleme klasörü; üretilir, commit edilmez)
+platform/previews/g425/
