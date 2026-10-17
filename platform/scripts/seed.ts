@@ -24,6 +24,7 @@ import { getDataAdapter, localDataDir, type DataAdapter } from '../lib/data/inde
 import type { ContentRecord } from '../lib/content/types.ts';
 import { parseAspect } from '../lib/panel/model.ts';
 import { PHOTO_MAX_EDGE, preparePhoto } from '../lib/panel/photos.ts';
+import { withDemoMap } from '../lib/claim/demo-map.ts';
 import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { loadTheme } from '../lib/theme/theme.ts';
 
@@ -120,10 +121,12 @@ export async function seedSite(adapter: DataAdapter, opts: SeedOptions): Promise
   const existing = await adapter.getSiteBySlug(opts.slug);
   if (existing) await adapter.deleteSite(existing.id);
 
+  // The demo city's map pin, as on /start/demo/<theme> (G127); a record that sets its own maps keeps them.
+  const content = withDemoMap(opts.theme, opts.content);
   const { site, editKey, previewKey } = await createSiteWithKeys(adapter, {
     slug: opts.slug,
     theme: opts.theme,
-    content: opts.content,
+    content,
     // One order reference per site: the blob adapter keeps order references unique.
     orderRef: `DEMO-SEED-${opts.slug}`,
   });
@@ -132,7 +135,7 @@ export async function seedSite(adapter: DataAdapter, opts: SeedOptions): Promise
   if (opts.photosDir) {
     const dir = path.resolve(opts.photosDir);
     const maxSide = opts.photoMax ?? PHOTO_MAX_EDGE;
-    const withPhotos = structuredClone(opts.content) as unknown as Record<string, unknown>;
+    const withPhotos = structuredClone(content) as unknown as Record<string, unknown>;
     for (const [key, slot] of Object.entries(theme.manifest.photos)) {
       const file = ['jpg', 'jpeg', 'png', 'webp'].map((ext) => path.join(dir, `${key}.${ext}`)).find((f) => existsSync(f));
       if (!file) continue;

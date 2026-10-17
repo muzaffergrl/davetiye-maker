@@ -84,6 +84,7 @@ import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider,
 import { usePanel } from './usePanel.ts';
 import { EditListView, GuestPrintView, GuestsView, HelpSheet, HomeView, nextSteps, ShareView, UrlText, useReplies } from './views.tsx';
 import styles from './panel.module.css';
+import { setPanelTitle } from './title.ts';
 
 type Route =
   | { view: 'setup'; step: number }
@@ -261,7 +262,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     if (!ready || route.view === 'setup') return;
     const rootLabel = ROOT_VIEWS.find((v) => v.view === route.view)?.label;
     const label = route.view === 'section' ? t(PAGE_TITLES[route.page]) : route.view === 'print' ? t('Guest list') : route.view === 'results' ? t('Results') : rootLabel ? t(rootLabel) : rootLabel;
-    document.title = `${label} · ${names}`;
+    setPanelTitle(`${label} · ${names}`);
     if (firstFocus.current) firstFocus.current = false;
     else {
       headingRef.current?.focus({ preventScroll: true });
