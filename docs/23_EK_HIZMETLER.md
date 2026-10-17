@@ -117,11 +117,13 @@ alınmaz. İsim/foto/metni alıcı girer (ya da kurulum hizmeti alır).
 
 Admin'de Türkçe başlık + "ne zaman" metni `platform/lib/admin/messages.ts` `TITLES_TR`.
 
-## 6. İlan görselleri (sonra; GPT + ilan aracı)
+## 6. İlan görselleri ve teslim PDF'leri (G136, 2026-10-17)
 
-Her ilanda 4 görsel önerisi ve alt metni `listing_v3.md` §5'te. Kapak sahneleri GPT (K21), metin ve gerçek editör ekranları ilan
-aracıyla; QR ya da web adresi yok. Dijital dosya önerisi: tek sayfalık `SETUP_SERVICE.pdf` / `CUSTOM_DESIGN.pdf` (henüz yok;
-`etsy_upload.json` blocker).
+Üç ilanın 4'er görseli `collections/_services/<id>/package/listing/images_editorial/` içinde (`tools/listing_services.py`; alt
+metinler `listing_v3.md` §5): GM06 güven sahneleri (`brand/trust/` t1, t3, t6), yerel production build'den gerçek editör/site
+ekranları ve hazır tasarımların açılışları ("from our ready designs" diye belirtilerek), S logo; fiyat, QR ve web adresi yok.
+Etsy'nin teslim ettiği dosya: `package/customer/SETUP_SERVICE.pdf`, `CUSTOM_DESIGN.pdf`, `EXTRA_REVISION.pdf`
+(`tools/build_service_guides.py`; "ne göndereceğiniz" listesi §5'teki ilk mesajlardan kelimesi kelimesine okunur, `--check` denetler).
 
 ## 7. Kullanıcı kararı bekleyenler
 

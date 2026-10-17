@@ -37,7 +37,7 @@
   "digital_files": [
     {
       "file": "collections/_services/extra-revision/package/customer/EXTRA_REVISION.pdf",
-      "bytes": null
+      "bytes": 32763
     }
   ],
   "images": [
@@ -45,15 +45,29 @@
       "n": 1,
       "file": "collections/_services/extra-revision/package/listing/images_editorial/01_cover.png",
       "alt": "Extra design revision: one more round of changes to your custom wedding website design, ready within 3 days",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 2,
       "file": "collections/_services/extra-revision/package/listing/images_editorial/02_how.png",
       "alt": "How it works: buy this listing, send all your changes in one Etsy message, get your updated design within 3 days",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
+    },
+    {
+      "n": 3,
+      "file": "collections/_services/extra-revision/package/listing/images_editorial/03_one_round.png",
+      "alt": "What a round covers: the opening, the artwork, the colors and fonts; your names, dates, photos and texts you change yourself in your editor, free",
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
+    },
+    {
+      "n": 4,
+      "file": "collections/_services/extra-revision/package/listing/images_editorial/04_good_to_know.png",
+      "alt": "Good to know: one purchase is one round, only for custom design orders, your design stays yours alone, and if a change does not match what you asked for we fix it",
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     }
   ],
   "open_checks": [
@@ -69,8 +83,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/_services/extra-revision/package/listing/images_editorial/01_cover.png, collections/_services/extra-revision/package/listing/images_editorial/02_how.png",
-    "digital file missing: collections/_services/extra-revision/package/customer/EXTRA_REVISION.pdf",
     "renewal not decided"
   ],
   "ready_to_publish": false,

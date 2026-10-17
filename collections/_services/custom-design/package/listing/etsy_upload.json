@@ -37,37 +37,37 @@
   "digital_files": [
     {
       "file": "collections/_services/custom-design/package/customer/CUSTOM_DESIGN.pdf",
-      "bytes": null
+      "bytes": 34396
     }
   ],
   "images": [
     {
       "n": 1,
       "file": "collections/_services/custom-design/package/listing/images_editorial/01_cover.png",
-      "alt": "Custom wedding website design: several phones showing different openings and color palettes, with the words \"Designed just for you\"",
-      "exists": false,
-      "status": "missing"
+      "alt": "Custom wedding website design: three phones showing different openings and color palettes from our ready designs, with the words \"Designed just for you\"",
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 2,
       "file": "collections/_services/custom-design/package/listing/images_editorial/02_steps.png",
       "alt": "Four steps: tell us your idea, see the first version, ask for changes, then fill in your website and publish",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 3,
       "file": "collections/_services/custom-design/package/listing/images_editorial/03_included.png",
       "alt": "What is included: your own design, the editor, every page, online RSVP, QR code, online until 12 months after your wedding",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 4,
       "file": "collections/_services/custom-design/package/listing/images_editorial/04_examples.png",
       "alt": "Examples of openings we have made: an envelope, a gatefold, a book and a travel wallet (from our ready designs)",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     }
   ],
   "open_checks": [
@@ -93,8 +93,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/_services/custom-design/package/listing/images_editorial/01_cover.png, collections/_services/custom-design/package/listing/images_editorial/02_steps.png, collections/_services/custom-design/package/listing/images_editorial/03_included.png, collections/_services/custom-design/package/listing/images_editorial/04_examples.png",
-    "digital file missing: collections/_services/custom-design/package/customer/CUSTOM_DESIGN.pdf",
     "renewal not decided"
   ],
   "ready_to_publish": false,
