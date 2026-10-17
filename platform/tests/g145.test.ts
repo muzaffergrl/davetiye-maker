@@ -132,3 +132,25 @@ test('Travel & stay: "no link yet" only while the section has nothing to show (G
   const withNote = { ...base, travel: { parking: { text: 'Free parking next to the venue.' } } } as typeof base;
   assert.equal(prePublishNotes(withNote, theme as never).links.some((n) => n.path === 'urls.accommodation'), false, 'a getting-here note shows: no note');
 });
+
+test('automatic translation: a device translator that never gets ready falls back to the free service (no endless "Translating…")', async (t) => {
+  const { openTranslator, BROWSER_PREPARE_MS } = await import('../lib/i18n/auto-translate.ts');
+  const g = globalThis as unknown as { Translator?: unknown };
+  const never = () => new Promise<never>(() => {});
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  try {
+    g.Translator = { availability: never, create: never };
+    const opened = openTranslator('en', 'tr', { allowService: true, fetcher: (async () => new Response('{}')) as typeof fetch });
+    await Promise.resolve();
+    t.mock.timers.tick(BROWSER_PREPARE_MS + 1);
+    assert.equal((await opened).engine, 'service', 'availability never answered → service');
+
+    g.Translator = { availability: async () => 'downloadable', create: never };
+    const opened2 = openTranslator('en', 'tr', { allowService: true, fetcher: (async () => new Response('{}')) as typeof fetch });
+    for (let i = 0; i < 5; i++) await Promise.resolve();
+    t.mock.timers.tick(BROWSER_PREPARE_MS + 1);
+    assert.equal((await opened2).engine, 'service', 'model never ready → service');
+  } finally {
+    delete g.Translator;
+  }
+});

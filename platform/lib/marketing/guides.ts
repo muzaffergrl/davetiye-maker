@@ -6,11 +6,14 @@
 // reviewed (YYYY-MM-DD), quickAnswer (40–60 words), keyword (main search phrase), order (number), cover (optional
 // public path of the cover image, GPT MK12–MK17 once composed), coverAlt.
 // Tokens replaced from config: {{brand}}, {{months}}, {{rsvpQuestions}}, {{scheduleRows}}, {{faqItems}}, {{photoSpots}}.
+// G144: a translation is content/guides/<lang>/<slug>.md (same slug, same frontmatter keys); the English file decides
+// which guides exist and their order. Without a translation the language page shows the English article (loadGuidesIn).
 
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { MARKETING, type MarketingConfig } from './config.ts';
 import { LIMITS } from './facts.ts';
+import { DEFAULT_LANG, type Lang } from './i18n.ts';
 import { blocksText, parseBlocks, parseFrontmatter, type Block } from './markdown.ts';
 
 export interface GuideFaq {
@@ -119,4 +122,35 @@ export function loadGuides(cfg: MarketingConfig = MARKETING): Guide[] {
 
 export function loadGuide(slug: string, cfg: MarketingConfig = MARKETING): Guide | null {
   return loadGuides(cfg).find((g) => g.slug === slug) ?? null;
+}
+
+export interface LocalGuide extends Guide {
+  /** The text is in the requested language (false: the English article is shown). */
+  translated: boolean;
+}
+
+const localCache = new Map<Lang, LocalGuide[]>();
+
+/**
+ * G144: the guides for a page in `lang`: content/guides/<lang>/<slug>.md where it exists, else the English article.
+ * Same slugs, paths and order as English (the paths are English; pages prefix them with href()).
+ */
+export function loadGuidesIn(lang: Lang, cfg: MarketingConfig = MARKETING): LocalGuide[] {
+  const en = loadGuides(cfg);
+  if (lang === DEFAULT_LANG) return en.map((g) => ({ ...g, translated: true }));
+  const hit = cfg === MARKETING ? localCache.get(lang) : undefined;
+  if (hit) return hit;
+  const dir = path.join(contentDir(), 'guides', lang);
+  const out = en.map((g): LocalGuide => {
+    const file = path.join(dir, `${g.slug}.md`);
+    if (!existsSync(file)) return { ...g, translated: false };
+    const local = parseGuide(g.slug, readFileSync(file, 'utf8'), cfg);
+    return { ...local, order: g.order, translated: true };
+  });
+  if (cfg === MARKETING) localCache.set(lang, out);
+  return out;
+}
+
+export function loadGuideIn(slug: string, lang: Lang, cfg: MarketingConfig = MARKETING): LocalGuide | null {
+  return loadGuidesIn(lang, cfg).find((g) => g.slug === slug) ?? null;
 }

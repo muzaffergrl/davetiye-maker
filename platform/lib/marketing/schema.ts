@@ -3,6 +3,7 @@
 // snippet: the purchase happens on Etsy), VideoObject, Article, BreadcrumbList.
 // Rules: a field whose value is a placeholder is LEFT OUT (never "[BRAND]" in JSON-LD); Offer only with a real price
 // and a real Etsy link; no aggregateRating/review (Etsy reviews must not be marked up here); no SearchAction.
+// G144: page-level builders take the page's `m` (lib/marketing/i18n.ts): URLs in its language, inLanguage, texts.
 
 import assets from './assets.json' with { type: 'json' };
 import { MARKETING, type MarketingConfig } from './config.ts';
@@ -10,6 +11,7 @@ import { openingObject, type Design } from './designs.ts';
 import type { FaqItem } from './faq.ts';
 import { plainAnswer } from './faq.ts';
 import type { Guide } from './guides.ts';
+import { DEFAULT_LANG, enMarket, thingIn, type Market } from './i18n.ts';
 import { hasPlaceholder, real, realEtsyUrl, realPrice } from './placeholders.ts';
 import { absUrl, siteOrigin, type PageEntry } from './site.ts';
 
@@ -65,14 +67,15 @@ export function website(cfg: MarketingConfig = MARKETING): JsonLdNode {
   });
 }
 
-export function webPage(page: PageEntry, cfg: MarketingConfig = MARKETING, extra: JsonLdNode = {}): JsonLdNode {
+export function webPage(page: PageEntry, cfg: MarketingConfig = MARKETING, extra: JsonLdNode = {}, m: Market = enMarket): JsonLdNode {
+  const url = absUrl(m.href(page.path), cfg);
   return clean({
     '@type': page.kind,
-    '@id': `${absUrl(page.path, cfg)}#webpage`,
-    url: absUrl(page.path, cfg),
+    '@id': `${url}#webpage`,
+    url,
     name: real(page.title) ?? stripPlaceholderSuffix(page.title),
     description: real(page.description),
-    inLanguage: 'en',
+    inLanguage: m.lang,
     isPartOf: { '@id': siteId(cfg) },
     about: page.path === '/' || page.kind === 'AboutPage' ? { '@id': orgId(cfg) } : null,
     dateModified: page.updated,
@@ -86,33 +89,34 @@ function stripPlaceholderSuffix(title: string): string | null {
   return real(t);
 }
 
-export function breadcrumbs(items: Array<{ name: string; path: string }>, cfg: MarketingConfig = MARKETING): JsonLdNode {
+export function breadcrumbs(items: Array<{ name: string; path: string }>, cfg: MarketingConfig = MARKETING, m: Market = enMarket): JsonLdNode {
   return {
     '@type': 'BreadcrumbList',
     itemListElement: items.map((it, i) => ({
       '@type': 'ListItem',
       position: i + 1,
       name: real(it.name) ?? it.name.replace(/\[[^\]]+\]/g, '').trim() ?? 'Home',
-      item: absUrl(it.path, cfg),
+      item: absUrl(m.href(it.path), cfg),
     })),
   };
 }
 
-export function itemList(urls: Array<{ path: string; name: string }>, cfg: MarketingConfig = MARKETING): JsonLdNode {
+export function itemList(urls: Array<{ path: string; name: string }>, cfg: MarketingConfig = MARKETING, m: Market = enMarket): JsonLdNode {
   return {
     '@type': 'ItemList',
-    itemListElement: urls.map((u, i) => ({ '@type': 'ListItem', position: i + 1, url: absUrl(u.path, cfg), name: u.name })),
+    itemListElement: urls.map((u, i) => ({ '@type': 'ListItem', position: i + 1, url: absUrl(m.href(u.path), cfg), name: u.name })),
   };
 }
 
-export function videoObject(design: Design, cfg: MarketingConfig = MARKETING): JsonLdNode | null {
+export function videoObject(design: Design, cfg: MarketingConfig = MARKETING, m: Market = enMarket): JsonLdNode | null {
   const v = (assets.designs as Record<string, { opening: { file: string; poster: string; seconds: number } | null }>)[design.id]?.opening;
   if (!v) return null;
+  const { t } = m;
   return {
     '@type': 'VideoObject',
-    '@id': `${absUrl(`/designs/${design.id}`, cfg)}#video`,
-    name: `${design.name} wedding website: ${openingObject(design.copy)} opening`,
-    description: design.copy.opening,
+    '@id': `${absUrl(m.href(`/designs/${design.id}`), cfg)}#video`,
+    name: t('{name} wedding website: {thing} opening', { name: design.name, thing: thingIn(t, openingObject(design.copy)) }),
+    description: t(design.copy.opening),
     thumbnailUrl: [absUrl(v.poster, cfg)],
     contentUrl: absUrl(v.file, cfg),
     uploadDate: design.updated,
@@ -121,7 +125,7 @@ export function videoObject(design: Design, cfg: MarketingConfig = MARKETING): J
 }
 
 /** Product snippet (docs/14 §8.3). Offer only when price AND Etsy listing link are real. */
-export function product(design: Design, cfg: MarketingConfig = MARKETING): JsonLdNode {
+export function product(design: Design, cfg: MarketingConfig = MARKETING, m: Market = enMarket): JsonLdNode {
   const screens = (assets.designs as Record<string, { screens: Record<string, { files: Record<string, string> }> }>)[design.id]?.screens ?? {};
   const images = ['envelope', 'home', 'story', 'rsvp']
     .map((k) => screens[k]?.files['640'])
@@ -129,15 +133,16 @@ export function product(design: Design, cfg: MarketingConfig = MARKETING): JsonL
     .map((f) => absUrl(f, cfg));
   const price = realPrice(design.price);
   const url = realEtsyUrl(design.etsyListingUrl);
-  const video = videoObject(design, cfg);
+  const video = videoObject(design, cfg, m);
+  const { t } = m;
   return clean({
     '@type': 'Product',
-    '@id': `${absUrl(`/designs/${design.id}`, cfg)}#product`,
-    name: `${design.name} Wedding Website`,
-    description: design.copy.intro,
+    '@id': `${absUrl(m.href(`/designs/${design.id}`), cfg)}#product`,
+    name: t('{name} Wedding Website', { name: design.name }),
+    description: t(design.copy.intro),
     sku: design.id,
     brand: real(cfg.brand.name) ? { '@id': orgId(cfg) } : null,
-    category: 'Wedding website',
+    category: t('Wedding website'),
     image: images,
     subjectOf: video ? { '@id': video['@id'] } : null,
     offers:
@@ -147,11 +152,12 @@ export function product(design: Design, cfg: MarketingConfig = MARKETING): JsonL
   });
 }
 
-export function article(guide: Guide, cfg: MarketingConfig = MARKETING, image?: string): JsonLdNode {
+export function article(guide: Guide, cfg: MarketingConfig = MARKETING, image?: string, m: Market = enMarket, inLanguage: string = DEFAULT_LANG): JsonLdNode {
   const brand = real(cfg.brand.name);
+  const url = absUrl(m.href(guide.path), cfg);
   return clean({
     '@type': 'Article',
-    '@id': `${absUrl(guide.path, cfg)}#article`,
+    '@id': `${url}#article`,
     headline: guide.title,
     description: guide.description,
     image: image ? [absUrl(image, cfg)] : null,
@@ -161,8 +167,8 @@ export function article(guide: Guide, cfg: MarketingConfig = MARKETING, image?: 
       ? { '@type': 'Organization', '@id': `${absUrl('/about', cfg)}#editorial`, name: `${brand} Editorial`, url: absUrl('/about', cfg) }
       : { '@id': orgId(cfg) },
     publisher: { '@id': orgId(cfg) },
-    mainEntityOfPage: absUrl(guide.path, cfg),
-    inLanguage: 'en',
+    mainEntityOfPage: url,
+    inLanguage,
     wordCount: guide.words,
   });
 }

@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { PAGE_LABELS, previewPath } from '../../lib/panel/model.ts';
 import { cx } from './ui.tsx';
 import styles from './panel.module.css';
+import { t } from '../../lib/i18n/client.ts';
 
 const HISTORY_MARK = 'panel-preview';
 const SLOW_MS = 10_000;
@@ -24,8 +25,8 @@ export function useSettledVersion(version: number, ms: number = PREVIEW_SETTLE_M
   const [settled, setSettled] = useState(version);
   useEffect(() => {
     if (version === settled) return;
-    const t = setTimeout(() => setSettled(version), ms);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setSettled(version), ms);
+    return () => clearTimeout(timer);
   }, [version, settled, ms]);
   return settled;
 }
@@ -95,8 +96,8 @@ export function PreviewPane({
   // Skeleton until the first load; after 10 s a "Try again".
   useEffect(() => {
     if (!mounted || loaded) return;
-    const t = setTimeout(() => setSlow(true), SLOW_MS);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setSlow(true), SLOW_MS);
+    return () => clearTimeout(timer);
   }, [mounted, loaded, page, reloadKey]);
 
   // Reload after each save; keeps the page the buyer navigated to inside the preview.
@@ -161,30 +162,30 @@ export function PreviewPane({
 
   const className = [styles.previewDock, open && !wide ? styles.previewDockOpen : ''].filter(Boolean).join(' ');
   return (
-    <div className={className} role={wide ? 'region' : 'dialog'} aria-modal={!wide && open ? true : undefined} aria-label="Preview of your website" data-preview>
+    <div className={className} role={wide ? 'region' : 'dialog'} aria-modal={!wide && open ? true : undefined} aria-label={t('Preview of your website')} data-preview>
       <div className={styles.previewHeader}>
         <div>
-          <p className={styles.previewTitle}>Preview</p>
+          <p className={styles.previewTitle}>{t('Preview')}</p>
           {thanks ? (
             <p className={cx(styles.previewSub, styles.previewThanks)} data-preview-thanks>
-              <span>Thank-you page — what guests see after the wedding.</span>
+              <span>{t('Thank-you page — what guests see after the wedding.')}</span>
               {onThanksOff ? (
                 <button type="button" className={styles.inlineLink} onClick={onThanksOff}>
-                  Show the invitation
+                  {t('Show the invitation')}
                 </button>
               ) : null}
             </p>
           ) : (
-            <p className={styles.previewSub}>Draft — guests see changes after you publish.</p>
+            <p className={styles.previewSub}>{t('Draft — guests see changes after you publish.')}</p>
           )}
         </div>
         {!wide ? (
-          <button ref={closeRef} type="button" className={styles.sheetClose} onClick={onClose} data-close-preview aria-label="Close preview" title="Close preview">
+          <button ref={closeRef} type="button" className={styles.sheetClose} onClick={onClose} data-close-preview aria-label={t('Close preview')} title={t('Close preview')}>
             <X size={22} strokeWidth={1.75} aria-hidden="true" />
           </button>
         ) : null}
       </div>
-      <div className={styles.previewTabs} role="tablist" aria-label="Page">
+      <div className={styles.previewTabs} role="tablist" aria-label={t('Page')}>
         {pages.map((p) => (
           <button
             key={p}
@@ -198,7 +199,7 @@ export function PreviewPane({
               setChosen(p);
             }}
           >
-            {p === 'index' && indexLabel ? indexLabel : (PAGE_LABELS[p] ?? p)}
+            {p === 'index' && indexLabel ? t(indexLabel) : PAGE_LABELS[p] ? t(PAGE_LABELS[p]) : p}
           </button>
         ))}
       </div>
@@ -211,7 +212,7 @@ export function PreviewPane({
               // so the phone's back button still closes the preview
               key={`${page}-${reloadKey}-${thanks ? 'thanks' : 'invitation'}`}
               src={src}
-              title="Preview of your website"
+              title={t('Preview of your website')}
               className={styles.previewFrame}
               referrerPolicy="no-referrer"
               onLoad={() => {
@@ -224,7 +225,7 @@ export function PreviewPane({
             <div className={styles.previewSkeleton} aria-hidden={!slow} data-fx-skeleton={slow ? undefined : ''}>
               {slow ? (
                 <>
-                  <p>The preview is taking longer than usual.</p>
+                  <p>{t('The preview is taking longer than usual.')}</p>
                   <button
                     type="button"
                     className={`${styles.btn} ${styles.btn_secondary} ${styles.btnSmall}`}
@@ -234,11 +235,11 @@ export function PreviewPane({
                     }}
                   >
                     <RotateCcw size={16} aria-hidden="true" />
-                    <span>Try again</span>
+                    <span>{t('Try again')}</span>
                   </button>
                 </>
               ) : (
-                <p className={styles.skeletonText}>Loading preview…</p>
+                <p className={styles.skeletonText}>{t('Loading preview…')}</p>
               )}
             </div>
           ) : null}

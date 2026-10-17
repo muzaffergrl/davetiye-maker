@@ -18,6 +18,7 @@ import { readThemePage, SUB_PAGES, type LoadedTheme, type PageName } from '../th
 import { qrSvg } from '../qr.ts';
 import { dedupeImages, jpegImages } from './compact.ts';
 import { printLabel } from './labels.ts';
+import { printLocale } from './lang.ts';
 import { renderPdfs, type PrintDocument } from './render.ts';
 
 /** A4 at 96 px per inch: the theme lays out at this width (nothing is scaled); the page is at least this tall. */
@@ -43,12 +44,12 @@ function escapeHtml(s: string): string {
 }
 
 /** The closing block of the last page: title, QR of the site link (itself a link) and the address. */
-export function qrBlock(siteUrl: string): string {
+export function qrBlock(siteUrl: string, dict?: Readonly<Record<string, string>> | null): string {
   const label = siteUrl.replace(/^https?:\/\//, '');
   return (
-    `<section data-g139-qr><h2>${escapeHtml(printLabel('website_title'))}</h2>` +
+    `<section data-g139-qr><h2>${escapeHtml(printLabel('website_title', {}, dict))}</h2>` +
     `<a class="g139-qr" href="${escapeHtml(siteUrl)}">${qrSvg(siteUrl, { pixels: 168, border: 2 })}</a>` +
-    `<p>${escapeHtml(printLabel('scan_to_visit'))}</p><p><a href="${escapeHtml(siteUrl)}">${escapeHtml(label)}</a></p></section>`
+    `<p>${escapeHtml(printLabel('scan_to_visit', {}, dict))}</p><p><a href="${escapeHtml(siteUrl)}">${escapeHtml(label)}</a></p></section>`
   );
 }
 
@@ -113,6 +114,8 @@ export interface SitePdfInput {
 /** The print HTML of every page the content shows, in site order (home, story, details, rsvp). */
 export async function sitePrintDocuments(input: SitePdfInput): Promise<PrintDocument[]> {
   const docs: PrintDocument[] = [];
+  // G144: the website's main language (its fixed texts from the site dictionary)
+  const { lang, dict } = printLocale(input.content);
   for (const page of SUB_PAGES as readonly PageName[]) {
     const template = await readThemePage(input.theme, page);
     if (template === null) continue;
@@ -126,12 +129,14 @@ export async function sitePrintDocuments(input: SitePdfInput): Promise<PrintDocu
       origin: input.publicOrigin,
       share: input.theme.share,
       now: input.now ?? new Date(),
+      lang,
+      dict: dict ?? undefined,
     });
     if (disabled) continue;
     docs.push({ html, path: `/${input.slug}/${page}` });
   }
   if (!docs.length) throw new Error('site has no page to print');
-  return docs.map((d, i) => ({ path: d.path, html: toPrintHtml(d.html, i === docs.length - 1 ? qrBlock(input.siteUrl) : '') }));
+  return docs.map((d, i) => ({ path: d.path, html: toPrintHtml(d.html, i === docs.length - 1 ? qrBlock(input.siteUrl, dict) : '') }));
 }
 
 /** The whole website as one PDF (a page per website page). */
@@ -148,7 +153,7 @@ export async function sitePdf(input: SitePdfInput): Promise<Uint8Array> {
     singlePage: true,
   });
   const merged = await PDFDocument.create();
-  merged.setTitle(`${input.slug} — ${printLabel('website_title')}`);
+  merged.setTitle(`${input.slug} — ${printLabel('website_title', {}, printLocale(input.content).dict)}`);
   merged.setCreator('Wedding website platform');
   for (const bytes of parts) {
     const src = await PDFDocument.load(bytes);

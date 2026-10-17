@@ -4699,3 +4699,61 @@
   padding-bottom: 8px;
   font-size: 15px;
 }
+
+/* G144: Languages (Us) — one block per extra language, one row per text */
+.langBlock {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--c-border);
+}
+.langTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+.langActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.langList {
+  display: grid;
+  gap: var(--s-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.langRow {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+}
+.langRow > textarea {
+  justify-self: stretch;
+}
+.langRowHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  width: 100%;
+}
+.langSource {
+  margin: 0;
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.langSourceTag {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--c-surface-2, rgba(0, 0, 0, 0.06));
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}

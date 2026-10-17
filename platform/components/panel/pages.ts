@@ -10,17 +10,18 @@ import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { sameContent, SECTION_IDS, sectionForPath, type PanelTheme, type PublishNote, type SectionId } from '../../lib/panel/model.ts';
 import { copyText, type PanelCopyEntry } from '../../lib/theme/copy.ts';
+import { msg } from '../../lib/i18n/client.ts';
 
 export const PAGE_IDS = ['us', 'day', 'photos', 'story', 'details', 'rsvp'] as const;
 export type PageId = (typeof PAGE_IDS)[number];
 
 export const PAGE_TITLES: Record<PageId, string> = {
-  us: 'Us',
-  day: 'Day & place',
-  photos: 'Photos',
-  story: 'Our Story',
-  details: 'Details',
-  rsvp: 'RSVP',
+  us: msg('Us'),
+  day: msg('Day & place'),
+  photos: msg('Photos'),
+  story: msg('Our Story'),
+  details: msg('Details'),
+  rsvp: msg('RSVP'),
 };
 
 /** The sections each page shows, top to bottom. */
@@ -35,17 +36,17 @@ export const PAGE_SECTIONS: Record<PageId, SectionId[]> = {
 };
 
 /** The design's texts at the end of every page (G068); Review names them as a part of the page ("Us · Headings & labels"). */
-export const COPY_TITLE = 'Headings & labels';
+export const COPY_TITLE = msg('Headings & labels');
 
 /** Sub-headings inside a page (only where a page holds more than one topic). */
 export const BLOCK_TITLES: Partial<Record<SectionId, string>> = {
-  date: 'Date & time',
-  venue: 'Venue',
-  schedule: 'Schedule',
-  blocks: 'Good to know',
-  travel: 'Travel & stay',
-  menu: 'Meal & menu',
-  faq: 'Questions & answers',
+  date: msg('Date & time'),
+  venue: msg('Venue'),
+  schedule: msg('Schedule'),
+  blocks: msg('Good to know'),
+  travel: msg('Travel & stay'),
+  menu: msg('Meal & menu'),
+  faq: msg('Questions & answers'),
 };
 
 export function pageOf(section: SectionId): PageId {

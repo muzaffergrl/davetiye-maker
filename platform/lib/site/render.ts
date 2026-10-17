@@ -10,7 +10,10 @@ import { publicOrigin } from '../panel/http.ts';
 import { isArchived } from '../panel/rights.ts';
 import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
-import { renderTemplate, THANK_YOU_PREVIEW_PARAM } from '../theme/engine.ts';
+import { LANG_PARAM, renderTemplate, THANK_YOU_PREVIEW_PARAM } from '../theme/engine.ts';
+import { siteLangs } from '../i18n/content.ts';
+import { isLang } from '../i18n/langs.ts';
+import { siteDict } from '../i18n/site.ts';
 import { loadTheme, readThemePage, SUB_PAGES, type PageName } from '../theme/theme.ts';
 
 /**
@@ -169,7 +172,13 @@ export async function handleSiteRequest(req: Request, slugParam: string, page: s
     const template = await readThemePage(theme, page);
     if (template === null) return notFound();
 
+    // G144: ?lang= picks one of the site's languages (anything else: the primary language)
+    const asked = url.searchParams.get(LANG_PARAM);
+    const langs = siteLangs(content);
+    const lang = isLang(asked) && langs.all.includes(asked) ? asked : langs.primary;
     const { html, warnings, disabled, scriptHashes, frameSources } = renderTemplate({
+      lang,
+      dict: await siteDict(lang),
       html: template,
       content,
       theme: theme.manifest,

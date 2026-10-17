@@ -8,6 +8,7 @@ import { useMemo, type ReactNode } from 'react';
 import { QR_BORDER, qrMatrix, qrPathData, qrSvg } from '../../lib/qr.ts';
 import { QR_BLACK, QR_LIGHT, SHARE_LABELS as L } from '../../lib/panel/share.ts';
 import { Button } from './ui.tsx';
+import { t } from '../../lib/i18n/client.ts';
 import styles from './panel.module.css';
 
 const DARK = QR_BLACK;
@@ -47,7 +48,7 @@ export function QrCode({
       return null;
     }
   }, [url]);
-  if (!qr) return <p className={styles.note}>A QR code can only be made for a full web address.</p>;
+  if (!qr) return <p className={styles.note}>{t('A QR code can only be made for a full web address.')}</p>;
   const side = qr.size + QR_BORDER * 2;
 
   const suffix = ink === DARK ? '' : '-colour';
@@ -72,7 +73,7 @@ export function QrCode({
         viewBox={`0 0 ${side} ${side}`}
         shapeRendering="crispEdges"
         role="img"
-        aria-label={`QR code that opens ${url}`}
+        aria-label={t('QR code that opens {url}', { url })}
         data-qr-text={qr.text}
       >
         <rect width={side} height={side} fill={LIGHT} />
@@ -81,10 +82,10 @@ export function QrCode({
       {children}
       <div className={styles.buttonRow}>
         <Button small icon={Download} onClick={downloadPng} data-qr-png>
-          {L.downloadPng}
+          {t(L.downloadPng)}
         </Button>
         <Button small icon={Download} onClick={downloadSvg} data-qr-svg>
-          {L.downloadSvg}
+          {t(L.downloadSvg)}
         </Button>
       </div>
     </div>

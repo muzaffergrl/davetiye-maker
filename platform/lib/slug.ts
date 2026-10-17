@@ -18,6 +18,9 @@ export const RESERVED_SLUGS: ReadonlySet<string> = new Set([
   'refund', 'refunds', 'cookies', 'accessibility', 'marketing', 'not-found',
   // brand kit served from public/brand/ (GM02: favicons, app icons)
   'brand',
+  // G144: the sales site's language prefixes (/tr …, rewritten by next.config.ts to app/(marketing)/i18n/[lang]) and
+  // that folder. Two letters are below the slug minimum anyway; listed so the reservation is explicit.
+  'i18n', 'en', 'tr', 'es', 'de', 'fr',
   // printable-invitation parts served from public/print/ (G139)
   'print',
 ]);

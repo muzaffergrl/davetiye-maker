@@ -12,6 +12,7 @@ import { MUSIC_ACCEPT, musicFileProblem } from './music-upload.ts';
 import { Button, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
 import own from './music.module.css';
+import { t } from '../../lib/i18n/client.ts';
 
 type Choice = string; // track id | 'custom' | 'off'
 
@@ -48,7 +49,7 @@ export function MusicFields() {
     player.current = a;
     a.play().then(
       () => setPlaying(listenUrl),
-      () => setMessage('This file could not be played here. Please try another MP3 or M4A file.'),
+      () => setMessage(t('This file could not be played here. Please try another MP3 or M4A file.')),
     );
   };
 
@@ -68,33 +69,37 @@ export function MusicFields() {
     setBusy(0);
     const res = await uploadMusic(f, (share) => setBusy(share));
     setBusy(null);
-    if (!res.ok) setMessage(res.message ?? 'The music could not be uploaded.');
+    if (!res.ok) setMessage(res.message ? t(res.message) : t('The music could not be uploaded.'));
   };
 
   const options = [
-    ...MUSIC_TRACKS.map((t) => ({ value: t.id, label: t.id === fallback ? `${t.label} (suggested for this design)` : t.label, hint: t.mood })),
-    { value: 'custom', label: 'Your own music', hint: 'Upload an MP3 or M4A file, up to 10 MB.' },
-    { value: 'off', label: 'No music', hint: 'The Our Story page stays quiet.' },
+    ...MUSIC_TRACKS.map((tr) => ({
+      value: tr.id,
+      label: tr.id === fallback ? t('{track} (suggested for this design)', { track: t(tr.label) }) : t(tr.label),
+      hint: t(tr.mood),
+    })),
+    { value: 'custom', label: t('Your own music'), hint: t('Upload an MP3 or M4A file, up to 10 MB.') },
+    { value: 'off', label: t('No music'), hint: t('The Our Story page stays quiet.') },
   ];
 
   return (
-    <Group title="Music & sound" data-music-fields="">
+    <Group title={t('Music & sound')} data-music-fields="">
       <p className={styles.hint}>
-        Music plays softly on your Our Story page. Guests can pause it at any time; some phones wait for a tap before it starts.
+        {t('Music plays softly on your Our Story page. Guests can pause it at any time; some phones wait for a tap before it starts.')}
       </p>
-      {!storyOn ? <p className={styles.note}>The Our Story page is off, so guests will not hear the music.</p> : null}
-      <Segmented label="Story music" value={choice} options={options} onChange={choose} disabled={locked} stacked />
+      {!storyOn ? <p className={styles.note}>{t('The Our Story page is off, so guests will not hear the music.')}</p> : null}
+      <Segmented label={t('Story music')} value={choice} options={options} onChange={choose} disabled={locked} stacked />
 
       {choice === 'custom' ? (
         <div className={own.file}>
           <Music size={18} aria-hidden="true" />
-          <span className={own.fileName}>{file ? (audio.music_name || 'Your music file') : 'No file yet'}</span>
+          <span className={own.fileName}>{file ? (audio.music_name || t('Your music file')) : t('No file yet')}</span>
           <input
             ref={input}
             type="file"
             accept={MUSIC_ACCEPT}
             className={styles.fileInput}
-            aria-label="Choose a music file"
+            aria-label={t('Choose a music file')}
             onChange={(e) => {
               void onFile(e.target.files?.[0]);
               e.target.value = '';
@@ -105,18 +110,18 @@ export function MusicFields() {
             icon={Upload}
             disabled={locked || !online || !uploadMusic}
             busy={busy !== null}
-            busyLabel={busy !== null ? `Uploading… ${Math.round(busy * 100)}%` : undefined}
+            busyLabel={busy !== null ? t('Uploading… {percent}%', { percent: Math.round(busy * 100) }) : undefined}
             onClick={() => input.current?.click()}
           >
-            {file ? 'Replace file' : 'Choose a file'}
+            {file ? t('Replace file') : t('Choose a file')}
           </Button>
         </div>
       ) : null}
-      {choice === 'custom' ? <p className={styles.hint}>Only upload music you have the right to use (your own recording or a licence that allows it).</p> : null}
+      {choice === 'custom' ? <p className={styles.hint}>{t('Only upload music you have the right to use (your own recording or a licence that allows it).')}</p> : null}
 
       {listenUrl ? (
         <Button small icon={playing === listenUrl ? Pause : Play} onClick={listen} aria-pressed={playing === listenUrl}>
-          {playing === listenUrl ? 'Stop' : 'Listen'}
+          {playing === listenUrl ? t('Stop') : t('Listen')}
         </Button>
       ) : null}
       {message ? (
@@ -127,8 +132,8 @@ export function MusicFields() {
 
       <Switch
         id="audio-effects"
-        label="Sound effects"
-        hint={`Soft sounds when guests open the ${opening ?? 'invitation'}, move between pages and send their reply.`}
+        label={t('Sound effects')}
+        hint={t('Soft sounds when guests open the {thing}, move between pages and send their reply.', { thing: opening ? t(opening) : t('invitation') })}
         checked={effects}
         onChange={(on) => edit((c) => void (c.audio = { ...(c.audio ?? {}), effects: on }))}
       />

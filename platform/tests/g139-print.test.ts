@@ -4,7 +4,7 @@
 import { after, before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import jsQR from 'jsqr';
@@ -21,7 +21,7 @@ import { printLabel } from '../lib/print/labels.ts';
 import { MemoryRateLimiter } from '../lib/rsvp/rate-limit.ts';
 import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { listThemes } from '../lib/theme/theme.ts';
-import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
+import { demoContent, PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
 
 const BASE = 'https://wedding.example';
 const PT = 72;
@@ -89,10 +89,14 @@ test('request parsing, file names and sheet geometry', () => {
 
 test('every platform design has a printable invitation whose parts are on disk', async () => {
   const designs = (await listThemes()).map((t) => t.id).filter((id) => id !== '_sample');
-  assert.equal(designs.length, 21);
+  // the design catalog: one numbered collection per design (collections/NN_Name); a new design needs a print layout
+  const catalog = readdirSync(path.join(REPO_ROOT, 'collections')).filter((d) => /^\d{2}_/.test(d));
+  assert.equal(designs.length, catalog.length, `themes ${designs.length} ≠ collections ${catalog.length}`);
+  assert.deepEqual(Object.keys(PRINT_LAYOUTS).sort(), [...designs].sort());
   for (const id of designs) {
     const layout = PRINT_LAYOUTS[id];
     assert.ok(layout, `${id}: no print layout`);
+    assert.ok(catalog.includes(layout.collection), `${id}: collection ${layout.collection}`);
     for (const name of Object.keys(layout.sources)) {
       assert.ok(readFileSync(path.join(PLATFORM_ROOT, 'public', 'print', id, `${name}.webp`)).length > 1000, `${id}/print/${name}.webp`);
     }

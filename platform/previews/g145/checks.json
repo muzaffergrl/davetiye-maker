@@ -1,6 +1,6 @@
 {
-  "when": "2026-10-17T11:48:20.109Z",
-  "passed": 29,
+  "when": "2026-10-17T12:05:05.481Z",
+  "passed": 39,
   "failed": 0,
   "checks": [
     {
@@ -19,7 +19,7 @@
     {
       "name": "shop session: Turkish banner says until when and that the buyer link is unchanged",
       "ok": true,
-      "detail": "Dükkân olarak düzenliyorsunuz · bu link 20 Eki 14:48 tarihine kadar çalışır · alıcının linki değişmedi. Bitince yayınlamayı alıcıya bırakın."
+      "detail": "Dükkân olarak düzenliyorsunuz · bu link 20 Eki 15:04 tarihine kadar çalışır · alıcının linki değişmedi. Bitince yayınlamayı alıcıya bırakın."
     },
     {
       "name": "shop session: no \"Your private edit link\" to copy",
@@ -122,6 +122,50 @@
     },
     {
       "name": "admin site page: no horizontal scroll at 390",
+      "ok": true
+    },
+    {
+      "name": "panel TR: the jumps are named in Turkish",
+      "ok": true,
+      "detail": "Ulaşım ve konaklama"
+    },
+    {
+      "name": "Translate automatically: texts filled as drafts to check",
+      "ok": true,
+      "detail": "12 drafts, 12 service calls"
+    },
+    {
+      "name": "Approve all: no drafts left",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): panel TR Us → Languages (390) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "guest ?lang=tr: <html lang=\"tr\">",
+      "ok": true
+    },
+    {
+      "name": "guest ?lang=tr: the couple’s approved translation shows",
+      "ok": true,
+      "detail": "KALBİMİZDE YER EDEN ANLAR\n\nHikâyemiz\n\n[tr] We met at a tiny café in Savannah and never stopped talking. 15 Mayıs 2027.\n\n[tr] First hello\n[tr] The proposal\n[tr] "
+    },
+    {
+      "name": "guest: language switcher with EN and TR",
+      "ok": true
+    },
+    {
+      "name": "guest RSVP in Turkish: errors in Turkish",
+      "ok": true,
+      "detail": "ADINIZ\n\nLütfen adınızı girin.\n\nE-POSTA (isteğe bağlı)\nKATILACAK MISINIZ?\nMemnuniyetle katılıyorum\nMaalesef katılamıyorum\n\nLütfen katılıp katılamayacağınızı bize"
+    },
+    {
+      "name": "guest TR: no horizontal scroll at 390",
+      "ok": true
+    },
+    {
+      "name": "shop banner in Turkish in an English editor",
       "ok": true
     }
   ]

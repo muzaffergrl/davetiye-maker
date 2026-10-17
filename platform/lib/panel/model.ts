@@ -1,6 +1,7 @@
 // Panel model (G039): types and pure helpers shared by the server routes and the browser panel.
 // No Node imports here; this file is bundled into the client.
 
+import { msg } from '../i18n/translate.ts';
 import type { GuestAccessView } from './guest-access.ts';
 import type { ContentRecord, Partner } from '../content/types.ts';
 import { buildView, type ViewOptions } from '../content/derive.ts';
@@ -27,7 +28,7 @@ export type OptionalBlockKey = (typeof OPTIONAL_BLOCK_KEYS)[number];
 export const OPTIONAL_BLOCK_LABELS: Record<OptionalBlockKey, { label: string; hint: string }> = {
   our_story: { label: 'Our Story', hint: 'A page with your story photos and captions.' },
   countdown: { label: 'Countdown', hint: 'Days left until the wedding.' },
-  dress_code: { label: 'Dress code', hint: 'Shows the dress code from Details.' },
+  dress_code: { label: msg('Dress code'), hint: 'Shows the dress code from Details.' },
   registry: { label: 'Registry', hint: 'A button to your registry link from Details.' },
   travel_stay: { label: 'Travel & stay', hint: 'A button to your accommodation link from Details.' },
   faq: { label: 'Questions & answers', hint: 'Your questions and answers for guests (write them under Questions & answers).' },
@@ -332,6 +333,8 @@ export function sectionForPath(path: string): SectionId | null {
     case 'partners':
     case 'name_display':
     case 'initials':
+    case 'languages': // G144: the website's languages and translations live on Us
+    case 'translations':
       return 'names';
     case 'host_line':
       return 'details';
@@ -486,17 +489,17 @@ export interface PublishNote {
 
 /** Paths (in order) whose value, while still equal to the theme's demo record, is sample text. */
 const SAMPLE_FIELDS: Array<{ path: string; label: string; block?: OptionalBlockKey; message?: string }> = [
-  { path: 'date', label: 'Wedding date' },
-  { path: 'ceremony_time', label: 'Ceremony time' },
+  { path: 'date', label: msg('Wedding date') },
+  { path: 'ceremony_time', label: msg('Ceremony time') },
   // The RSVP close time, the countdown and the guests' calendar entry all use it (G060-fix).
-  { path: 'timezone', label: 'Time zone', message: 'Time zone: still the design’s sample.' },
-  { path: 'venue.name', label: 'Venue name' },
-  { path: 'venue.address', label: 'Street address' },
-  { path: 'venue.city', label: 'City' },
-  { path: 'host_line', label: 'Host line' },
+  { path: 'timezone', label: msg('Time zone'), message: 'Time zone: still the design’s sample.' },
+  { path: 'venue.name', label: msg('Venue name') },
+  { path: 'venue.address', label: msg('Street address') },
+  { path: 'venue.city', label: msg('City') },
+  { path: 'host_line', label: msg('Host line') },
   { path: 'dress_code', label: 'Dress code', block: 'dress_code' },
-  { path: 'story.intro', label: 'Story intro', block: 'our_story' },
-  { path: 'rsvp.deadline', label: 'Reply-by date' },
+  { path: 'story.intro', label: msg('Story intro'), block: 'our_story' },
+  { path: 'rsvp.deadline', label: msg('Reply-by date') },
 ];
 
 export interface SampleOptions {
@@ -607,7 +610,13 @@ const LIST_LABELS: Array<[RegExp, string, string]> = [
 ];
 
 /** "Wedding date: still the sample text." -> "wedding date"; list notes -> "3 captions", "1 event place". */
-function sampleParts(list: PublishNote[]): string[] {
+/** G144: the panel's translator (English when absent). */
+export interface SampleTranslator {
+  t: (en: string, vars?: Record<string, string | number>) => string;
+  tn: (n: number, one: string, other: string) => string;
+}
+
+function sampleParts(list: PublishNote[], tr?: SampleTranslator): string[] {
   const parts: string[] = [];
   const counts = new Map<number, number>();
   for (const n of list) {
@@ -618,13 +627,24 @@ function sampleParts(list: PublishNote[]): string[] {
       continue;
     }
     const label = n.message.split(':')[0].trim();
-    const text = label.charAt(0).toLowerCase() + label.slice(1);
+    const known = SAMPLE_FIELDS.find((f) => f.path === n.path)?.label;
+    const text = tr && known ? tr.t(known) : label.charAt(0).toLowerCase() + label.slice(1);
     if (!parts.includes(text)) parts.push(text);
   }
   return parts.map((p) => {
     if (!p.startsWith('#')) return p;
     const k = Number(p.slice(1));
     const count = counts.get(k) ?? 0;
+    if (tr) {
+      // literal pairs for the translators (lib/i18n/scan.ts)
+      const pairs = [
+        () => tr.tn(count, '1 event place', '{n} event places'),
+        () => tr.tn(count, '1 caption', '{n} captions'),
+        () => tr.tn(count, '1 question', '{n} questions'),
+        () => tr.tn(count, '1 form question', '{n} form questions'),
+      ];
+      return pairs[k]();
+    }
     return `${count} ${count === 1 ? LIST_LABELS[k][1] : LIST_LABELS[k][2]}`;
   });
 }
@@ -633,7 +653,7 @@ function sampleParts(list: PublishNote[]): string[] {
  * The sample-text notes as one short line per section (G060-fix: the raw messages joined together read as
  * "Story, moment 1: the caption is sample text., Story, moment 2: …"): "Our Story" + "story intro and 3 captions".
  */
-export function sampleSummaries(notes: PublishNote[]): Array<{ section: SectionId; path: string; what: string }> {
+export function sampleSummaries(notes: PublishNote[], tr?: SampleTranslator): Array<{ section: SectionId; path: string; what: string }> {
   const bySection = new Map<SectionId, PublishNote[]>();
   for (const n of notes) {
     const s = sectionForPath(n.path) ?? 'names';
@@ -641,8 +661,9 @@ export function sampleSummaries(notes: PublishNote[]): Array<{ section: SectionI
     bySection.get(s)!.push(n);
   }
   return [...bySection].map(([section, list]) => {
-    const parts = sampleParts(list);
-    const what = parts.length <= 2 ? parts.join(' and ') : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+    const parts = sampleParts(list, tr);
+    const and = (a: string, b: string) => (tr ? tr.t('{a} and {b}', { a, b }) : `${a} and ${b}`);
+    const what = parts.length <= 1 ? (parts[0] ?? '') : and(parts.slice(0, -1).join(', '), parts[parts.length - 1]);
     return { section, path: list[0].path, what };
   });
 }

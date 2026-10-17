@@ -7,13 +7,23 @@
   'use strict';
 
   var EMBED = /^https:\/\/www\.google\.com\/maps\?/;
+  // G144: the page's language (#site-data "i18n"; keys = the English text)
+  var I18N = null;
+  try {
+    I18N = JSON.parse(document.getElementById('site-data').textContent).i18n || null;
+  } catch (e) {
+    I18N = null;
+  }
+  function T(text) {
+    return (I18N && I18N[text]) || text;
+  }
 
   function show(card, link) {
     var src = card.getAttribute('data-map-embed') || '';
     if (!EMBED.test(src)) return false;
     var frame = document.createElement('iframe');
     frame.src = src;
-    frame.title = card.getAttribute('data-map-title') || 'Map';
+    frame.title = card.getAttribute('data-map-title') || T('Map');
     frame.setAttribute('referrerpolicy', 'no-referrer');
     frame.setAttribute('allowfullscreen', '');
     frame.setAttribute('loading', 'eager');
@@ -25,7 +35,7 @@
     open.href = link.href;
     open.target = '_blank';
     open.rel = 'noopener noreferrer';
-    open.textContent = 'Open in Google Maps';
+    open.textContent = T('Open in Google Maps');
     card.classList.add('is-open');
     card.textContent = '';
     card.appendChild(box);

@@ -6,6 +6,7 @@
 import { Play } from 'lucide-react';
 import type { Design } from '../../lib/marketing/designs.ts';
 import { demoPath } from '../../lib/marketing/designs.ts';
+import { enMarket, type Market } from '../../lib/marketing/i18n.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
 import { SHOWCASE_COPY } from '../../lib/marketing/showcase.ts';
 import { displayPrice } from '../../lib/marketing/site.ts';
@@ -20,6 +21,7 @@ export function DesignCard({
   headingLevel = 3,
   styles,
   compare = false,
+  m = enMarket,
 }: {
   design: Design;
   placement: string;
@@ -28,7 +30,11 @@ export function DesignCard({
   styles?: readonly string[];
   /** G141: show the "Compare" tick (inside a DesignGallery, which hosts the comparison). */
   compare?: boolean;
+  /** G144: the page language. */
+  m?: Market;
 }) {
+  const { t } = m;
+  const page = m.href(`/designs/${design.id}`);
   const env = designScreen(design.id, 'envelope');
   const home = designScreen(design.id, 'home');
   const v = openingVideo(design.id);
@@ -38,27 +44,27 @@ export function DesignCard({
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
     <article className={s.designCard} data-fx-spot data-styles={styles?.length ? styles.join(' ') : undefined}>
-      <CardOpening href={`/designs/${design.id}`} name={design.name} video={video}>
+      <CardOpening href={page} name={design.name} video={video} copy={{ play: t(SHOWCASE_COPY.play), stop: t(SHOWCASE_COPY.stop) }}>
         {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
         {home && !video ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
       </CardOpening>
       <H className={s.designCardTitle}>
-        <a href={`/designs/${design.id}`}>{design.name}</a>
+        <a href={page}>{design.name}</a>
       </H>
       {/* The style line shows on wider cards only (container query); phones get the comp's name-and-demo card. */}
-      <p className={s.designCardStyle}>{design.copy.style}.</p>
-      {price ? <p className={s.designCardPrice}>{displayPrice(price)} on Etsy</p> : null}
+      <p className={s.designCardStyle}>{t(design.copy.style)}.</p>
+      {price ? <p className={s.designCardPrice}>{t('{price} on Etsy', { price: displayPrice(price) })}</p> : null}
       <div className={s.cardFoot}>
         <a className={`${s.btn} ${s.btnSmall} ${s.cardDemo}`} href={demoPath(design.id)} data-demo={design.id} data-demo-placement={placement}>
           <Play aria-hidden size={14} strokeWidth={2} />
-          <span className={s.cardDemoLong}>{SHOWCASE_COPY.liveDemo}</span>
-          <span className={s.cardDemoShort}>{SHOWCASE_COPY.liveDemoShort}</span>
+          <span className={s.cardDemoLong}>{t(SHOWCASE_COPY.liveDemo)}</span>
+          <span className={s.cardDemoShort}>{t(SHOWCASE_COPY.liveDemoShort)}</span>
           <span className={s.visuallyHidden}>: {design.name}</span>
         </a>
         {compare ? (
           <label className={s.cardCompare}>
             <input type="checkbox" data-compare={design.id} />
-            {SHOWCASE_COPY.compare}
+            {t(SHOWCASE_COPY.compare)}
             <span className={s.visuallyHidden}> {design.name}</span>
           </label>
         ) : null}

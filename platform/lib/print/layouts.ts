@@ -4,14 +4,28 @@
 // no decor: only the text layer, its place (box = the free area of the part, in % of the part image: top, right,
 // bottom, left) and the colours / fonts of the design's own website (themes/<id>/site.css). The part files are
 // copied at full size by scripts/build-print-assets.ts into public/print/<id>/ (card.webp, back.webp, paper.webp).
+// Designs without card parts yet (21, 22) are "composed": the trimmed sheet is the card, set from the design's existing
+// GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
+
+/** One side of a composed sheet. */
+export interface ComposedSide {
+  /** CSS background of the whole sheet, bleed included (url(<source name>.webp) = public/print/<id>/<name>.webp). */
+  bg: string;
+  /** GPT images on the trim: source name and CSS position / size in % of the trim. */
+  images: ReadonlyArray<{ src: string; style: string }>;
+}
 
 export interface PrintLayout {
   /** collections/<folder> holding the GPT parts. */
   collection: string;
-  /** public/print/<id>/<name>.webp <- collections/<folder>/assets/gpt/<path> (scripts/build-print-assets.ts). */
-  sources: Record<string, string>;
+  /**
+   * public/print/<id>/<name>.webp <- collections/<folder>/assets/gpt/<path> (scripts/build-print-assets.ts); a path
+   * starting with platform/ is from the repo root (a piece the theme's own build already cut from a GPT image);
+   * goldOnly keeps only the gold wax of a seal cut with its envelope surround.
+   */
+  sources: Record<string, string | { path: string; goldOnly: true }>;
   /** Google Fonts stylesheet of the design's website (same families as themes/<id>/home.html). */
   fonts: string;
   script: string;
@@ -23,12 +37,14 @@ export interface PrintLayout {
   /** Text area on the front part / on the back part. */
   front: Box;
   back: Box;
-  /** "tile": the paper texture repeats (tile size in inches); "cover": one image fills the sheet. */
-  paper: { mode: 'tile' | 'cover'; tile?: number };
-  /** Design 21 has no card parts yet: its sheet is the paper with the rose branch and the wax seal (see GPT_PROMPTS). */
-  composed?: boolean;
+  /** Paper under the card part: "tile" repeats the texture (tile size in inches); "cover": one image fills the sheet. */
+  paper?: { mode: 'tile' | 'cover'; tile?: number };
+  /** No card parts yet (21, 22): each side is a background with GPT images on it (see GPT_PROMPTS.md, G139). */
+  composed?: { front: ComposedSide; back: ComposedSide };
   /** Names in capitals of the caps font instead of the script font (art deco). */
   namesInCaps?: boolean;
+  /** CSS text-shadow of the front text (text set over a photograph, as on the design's website). */
+  frontShadow?: string;
 }
 
 /** Pixel size of the current GPT card parts (01–20): 1024 × 1536. A 5×7 card prints them at about 230 ppi. */
@@ -36,6 +52,8 @@ export const PRINT_SOURCE_PX = { width: 1024, height: 1536 } as const;
 
 const PARTS = { card: 'parts/invitation_card.png', back: 'parts/info_card.png', paper: 'parts/bg_tile.png' };
 const gf = (q: string) => `https://fonts.googleapis.com/css2?${q}&display=swap`;
+const cover = (name: string, at = 'center') => `url(${name}.webp) ${at} / cover no-repeat`;
+const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;left:50%;width:17%;transform:translateX(-50%)` });
 
 export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   'olive-ivory': {
@@ -164,7 +182,32 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     sources: { paper: 'textures/paper-background.png', branch: 'decor/rose-branch.png', seal: 'decor/seal.png' },
     fonts: gf('family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600'),
     script: "'Cormorant Garamond', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Manrope', Arial, sans-serif",
-    ink: '#411C23', accent: '#4B0C17', front: [24, 12, 20, 12], back: [20, 12, 12, 12], paper: { mode: 'cover' }, composed: true,
+    ink: '#411C23', accent: '#4B0C17', front: [24, 12, 20, 12], back: [20, 12, 12, 12],
+    composed: {
+      front: {
+        bg: cover('paper'),
+        images: [
+          { src: 'branch', style: 'top:-2%;left:-6%;width:62%' },
+          { src: 'branch', style: 'bottom:-2%;right:-6%;width:62%;transform:rotate(180deg)' },
+          sealAt('bottom'),
+        ],
+      },
+      back: { bg: cover('paper'), images: [sealAt('top')] },
+    },
+  },
+  // 22: front = the website's first screen (the Lake Como dusk, text on its sky); back = the website's night black
+  // (--black) with the gold wax seal cut from the envelope by the theme build (img/env_seal).
+  'nocturne-lake-estate': {
+    collection: '22_Nocturne_Lake_Estate',
+    sources: { scene: 'hero.png', seal: { path: 'platform/themes/nocturne-lake-estate/img/env_seal-269.webp', goldOnly: true } },
+    fonts: gf('family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500'),
+    script: "'Cinzel', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Jost', Arial, sans-serif",
+    namesInCaps: true, frontShadow: '0 0.02in 0.12in #000c',
+    ink: '#F1E4CC', accent: '#D8BF93', front: [5, 18, 58, 18], back: [20, 12, 8, 12],
+    composed: {
+      front: { bg: cover('scene', '50% 0%'), images: [] },
+      back: { bg: '#11120F', images: [sealAt('top')] },
+    },
   },
 };
 

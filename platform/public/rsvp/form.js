@@ -40,6 +40,14 @@
   var HONEYPOT = 'website';
   var NUMBER_RE = /^\d{1,4}$/;
   var LONG_MAX = 1000; // lib/rsvp/config.ts LONG_ANSWER_MAX
+  // G144: the page's language — #site-data "i18n" holds these texts translated (keys = the English text; missing =
+  // English). Server messages are looked up the same way.
+  var I18N = null;
+  function T(text, vars) {
+    var out = (I18N && I18N[text]) || text;
+    if (vars) out = out.replace(/\{(\w+)\}/g, function (m, k) { return Object.prototype.hasOwnProperty.call(vars, k) ? String(vars[k]) : m; });
+    return out;
+  }
   var TEXT = {
     success: 'Thank you! Your reply has been sent.',
     closed: 'Replies are closed. If you still need to reply, please contact the couple directly.',
@@ -240,7 +248,7 @@
     var mark = model ? model.cloneNode(true) : document.createElement('span');
     if (!model) {
       mark.className = 'opt';
-      mark.textContent = '(optional)';
+      mark.textContent = T('(optional)');
     }
     mark.hidden = false;
     mark.removeAttribute('id');
@@ -337,12 +345,12 @@
         if (!p.hasAttribute('role')) p.setAttribute('role', state === 'error' ? 'alert' : 'status');
         if (message) {
           each(p.querySelectorAll('[data-rsvp-message]'), function (m) {
-            m.textContent = message;
+            m.textContent = T(message);
           });
         }
       });
       if (active) removeFallback();
-      else if (state !== 'ready') active = fallback(state, message || TEXT[state]);
+      else if (state !== 'ready') active = fallback(state, T(message || TEXT[state]));
       each(scope.querySelectorAll('[data-rsvp-reply]'), function (el) {
         el.hidden = el.getAttribute('data-rsvp-reply') !== (opts.reply || '');
       });
@@ -429,7 +437,7 @@
           var nv = String(c0.value || '').trim();
           if (nv && !NUMBER_RE.test(nv)) {
             out = out || {};
-            out[name] = 'Please enter a whole number from 0 to 9999.';
+            out[name] = T('Please enter a whole number from 0 to 9999.');
             return;
           }
         }
@@ -439,16 +447,16 @@
         if (!bad) return;
         var v = bad.validity;
         var msg;
-        if (name === 'name') msg = v.tooLong ? 'Please keep your name to ' + bad.maxLength + ' characters or fewer.' : 'Please enter your name.';
-        else if (name === 'email') msg = v.valueMissing ? 'Please enter your email address.' : 'Please check your email address.';
-        else if (name === 'attending') msg = 'Please let us know if you can attend.';
-        else if (name === 'guests') msg = 'Please enter a number of guests from ' + (bad.min || 1) + (bad.max ? ' to ' + bad.max : '') + '.';
+        if (name === 'name') msg = v.tooLong ? T('Please keep your name to {n} characters or fewer.', { n: bad.maxLength }) : T('Please enter your name.');
+        else if (name === 'email') msg = v.valueMissing ? T('Please enter your email address.') : T('Please check your email address.');
+        else if (name === 'attending') msg = T('Please let us know if you can attend.');
+        else if (name === 'guests') msg = bad.max ? T('Please enter a number of guests from {min} to {max}.', { min: bad.min || 1, max: bad.max }) : T('Please enter a number of guests from {min}.', { min: bad.min || 1 });
         else if (name.indexOf(ANSWER_PREFIX) === 0) {
-          if (v.valueMissing) msg = q && (q.type === 'choice' || q.type === 'yesno') ? 'Please choose an answer.' : 'Please answer this question.';
-          else msg = v.tooLong ? 'Please keep your answer to ' + bad.maxLength + ' characters or fewer.' : 'Please check your answer.';
-        } else if (name.indexOf(PARTY_PREFIX) === 0) msg = 'Please keep each name to ' + (bad.maxLength > 0 ? bad.maxLength : 120) + ' characters or fewer.';
-        else if (v.valueMissing) msg = 'Please write a note for the couple.';
-        else msg = 'Please keep your message to ' + (bad.maxLength > 0 ? bad.maxLength : 500) + ' characters or fewer.';
+          if (v.valueMissing) msg = q && (q.type === 'choice' || q.type === 'yesno') ? T('Please choose an answer.') : T('Please answer this question.');
+          else msg = v.tooLong ? T('Please keep your answer to {n} characters or fewer.', { n: bad.maxLength }) : T('Please check your answer.');
+        } else if (name.indexOf(PARTY_PREFIX) === 0) msg = T('Please keep each name to {n} characters or fewer.', { n: bad.maxLength > 0 ? bad.maxLength : 120 });
+        else if (v.valueMissing) msg = T('Please write a note for the couple.');
+        else msg = T('Please keep your message to {n} characters or fewer.', { n: bad.maxLength > 0 ? bad.maxLength : 500 });
         out = out || {};
         out[name] = msg;
       });
@@ -465,7 +473,7 @@
         var f = form.elements.namedItem(name);
         var slots = scope.querySelectorAll('[data-rsvp-error-for="' + name + '"]');
         each(slots, function (el) {
-          el.textContent = msg;
+          el.textContent = T(msg);
         });
         if (!f) return;
         each(isRadioList(f) ? f : [f], function (c) {
@@ -635,6 +643,7 @@
     if (!forms.length) return;
     var data = siteData();
     if (!data || !data.slug) return;
+    I18N = data.i18n || null;
     var previewKey = null;
     try {
       previewKey = new URLSearchParams(window.location.search).get('preview');

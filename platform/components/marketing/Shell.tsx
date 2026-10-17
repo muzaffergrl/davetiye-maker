@@ -1,76 +1,92 @@
 // Header and footer of the marketing site (docs/14 §5.2; G066: BKE Studio comps brand/ui/site/). Server components;
 // the mobile menu is a <details> element (works without JavaScript). Logos are the brand SVGs from public/brand/
 // (header: anchor on paper, footer: reverse on aubergine) — never the name typeset in a font.
+// G144: both take the page language `m` (links keep its prefix; /start, /my, /admin stay unprefixed). The header carries
+// the language switcher (LangSwitch.tsx).
 import { ArrowRight, Menu, UserRound, X } from 'lucide-react';
 import { BRAND_FILES, logoWidth } from '../../lib/marketing/brand.ts';
 import { MARKETING } from '../../lib/marketing/config.ts';
 import { liveDesigns, startPath } from '../../lib/marketing/designs.ts';
 import type { Guide } from '../../lib/marketing/guides.ts';
+import { enMarket, LANG_NAMES, LANGS, type Market } from '../../lib/marketing/i18n.ts';
 import { real } from '../../lib/marketing/placeholders.ts';
 import { NAV } from '../../lib/marketing/site.ts';
+import { LangSwitch } from './LangSwitch.tsx';
 import s from './marketing.module.css';
 
 const HEADER_LOGO_H = 36;
 
-export function Header() {
+export function Header({ m = enMarket }: { m?: Market }) {
+  const { t } = m;
   return (
     <header className={s.header} data-fx-header>
       <div className={s.headerInner}>
-        <a href="/" className={s.logoLink}>
+        <a href={m.href('/')} className={s.logoLink}>
           <img
             className={s.logo}
             src={BRAND_FILES.logo}
             width={logoWidth(HEADER_LOGO_H)}
             height={HEADER_LOGO_H}
-            alt={`${MARKETING.brand.name} home`}
+            alt={t('{brand} home', { brand: MARKETING.brand.name })}
             decoding="async"
           />
         </a>
-        <nav aria-label="Main" className={s.nav}>
+        <nav aria-label={t('Main')} className={s.nav}>
           <ul>
             {NAV.map((n) => (
               <li key={n.href}>
-                <a href={n.href}>{n.label}</a>
+                <a href={m.href(n.href)}>{t(n.label)}</a>
               </li>
             ))}
           </ul>
         </nav>
         <a href="/my" className={s.myBtn} data-track="nav_my_website" data-my-website="">
           <UserRound aria-hidden size={18} strokeWidth={1.75} />
-          My website
+          {t('My website')}
         </a>
-        <a href="/designs" className={`${s.btn} ${s.btnSmall} ${s.headerCta}`} data-track="nav_designs">
-          See designs
+        <a href={m.href('/designs')} className={`${s.btn} ${s.btnSmall} ${s.headerCta}`} data-track="nav_designs">
+          {t('See designs')}
         </a>
+        <LangSwitch
+          current={m.lang}
+          langs={LANGS.map((l) => ({ lang: l, name: LANG_NAMES[l] }))}
+          label={t('Language')}
+        />
         <details className={s.mobileMenu}>
           <summary className={s.menuButton}>
             <Menu aria-hidden size={28} strokeWidth={1.75} className={s.menuOpenIcon} />
             <X aria-hidden size={28} strokeWidth={1.75} className={s.menuCloseIcon} />
-            <span className={s.visuallyHidden}>Menu</span>
+            <span className={s.visuallyHidden}>{t('Menu')}</span>
           </summary>
-          <nav aria-label="Main (mobile)" className={s.mobileNav}>
+          <nav aria-label={t('Main (mobile)')} className={s.mobileNav}>
             <ul>
               {NAV.map((n) => (
                 <li key={n.href}>
-                  <a href={n.href}>
-                    {n.label}
+                  <a href={m.href(n.href)}>
+                    {t(n.label)}
                     <ArrowRight aria-hidden size={20} strokeWidth={1.75} />
                   </a>
                 </li>
               ))}
               <li>
                 <a href={startPath()} data-track="start_click">
-                  Already bought a design? Start your website
+                  {t('Already bought a design? Start your website')}
                   <ArrowRight aria-hidden size={20} strokeWidth={1.75} />
                 </a>
               </li>
               <li>
                 <a href="/my" data-track="nav_my_website">
-                  My website — open your editor
+                  {t('My website — open your editor')}
                   <ArrowRight aria-hidden size={20} strokeWidth={1.75} />
                 </a>
               </li>
             </ul>
+            <LangSwitch
+              variant="inline"
+              current={m.lang}
+              langs={LANGS.map((l) => ({ lang: l, name: LANG_NAMES[l] }))}
+              label={t('Language')}
+            />
           </nav>
         </details>
       </div>
@@ -78,7 +94,8 @@ export function Header() {
   );
 }
 
-export function Footer({ guides }: { guides: Guide[] }) {
+export function Footer({ guides, m = enMarket }: { guides: Guide[]; m?: Market }) {
+  const { t } = m;
   const cfg = MARKETING;
   const year = Number(cfg.copyUpdated.slice(0, 4));
   const shop = real(cfg.etsy.shopUrl);
@@ -96,86 +113,86 @@ export function Footer({ guides }: { guides: Guide[] }) {
             loading="lazy"
             decoding="async"
           />
-          <p className={s.footerNote}>{cfg.brand.shortDescription}</p>
+          <p className={s.footerNote}>{t(cfg.brand.shortDescription)}</p>
         </div>
-        <nav aria-label="Footer" className={s.footerCols}>
+        <nav aria-label={t('Footer')} className={s.footerCols}>
           <div>
-            <h2 className={s.footerTitle}>Designs</h2>
+            <h2 className={s.footerTitle}>{t('Designs')}</h2>
             <ul>
               {liveDesigns(cfg).map((d) => (
                 <li key={d.id}>
-                  <a href={`/designs/${d.id}`}>{d.name}</a>
+                  <a href={m.href(`/designs/${d.id}`)}>{d.name}</a>
                 </li>
               ))}
               <li>
-                <a href="/designs">All designs</a>
+                <a href={m.href('/designs')}>{t('All designs')}</a>
               </li>
             </ul>
           </div>
           <div>
-            <h2 className={s.footerTitle}>Help</h2>
+            <h2 className={s.footerTitle}>{t('Help')}</h2>
             <ul>
               <li>
-                <a href="/how-it-works">How it works</a>
+                <a href={m.href('/how-it-works')}>{t('How it works')}</a>
               </li>
               <li>
-                <a href="/features">Features</a>
+                <a href={m.href('/features')}>{t('Features')}</a>
               </li>
               <li>
-                <a href="/pricing">Pricing</a>
+                <a href={m.href('/pricing')}>{t('Pricing')}</a>
               </li>
               <li>
-                <a href="/faq">FAQ</a>
+                <a href={m.href('/faq')}>{t('FAQ')}</a>
               </li>
               <li>
                 <a href="/my" data-track="nav_my_website">
-                  My website
+                  {t('My website')}
                 </a>
               </li>
               <li>
                 <a href={startPath()} data-track="start_click">
-                  Already bought a design? Start your website
+                  {t('Already bought a design? Start your website')}
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h2 className={s.footerTitle}>Guides</h2>
+            <h2 className={s.footerTitle}>{t('Guides')}</h2>
             <ul>
               {guides.slice(0, 4).map((g) => (
                 <li key={g.slug}>
-                  <a href={g.path}>{g.title.replace(/\s*\(.*\)$/, '').replace(/:.*$/, '')}</a>
+                  <a href={m.href(g.path)}>{g.title.replace(/\s*\(.*\)$/, '').replace(/:.*$/, '')}</a>
                 </li>
               ))}
               <li>
-                <a href="/guides">All guides</a>
+                <a href={m.href('/guides')}>{t('All guides')}</a>
               </li>
             </ul>
           </div>
           <div>
-            <h2 className={s.footerTitle}>Company</h2>
+            <h2 className={s.footerTitle}>{t('Company')}</h2>
             <ul>
               <li>
-                <a href="/about">About</a>
+                <a href={m.href('/about')}>{t('About')}</a>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <a href={m.href('/contact')}>{t('Contact')}</a>
               </li>
               <li>
-                <a href="/privacy">Privacy</a>
+                <a href={m.href('/privacy')}>{t('Privacy')}</a>
               </li>
               <li>
                 <a href="/admin" rel="nofollow" data-shop-login="">
-                  Shop login
+                  {t('Shop login')}
                 </a>
               </li>
               {shop ? (
                 <li>
-                  <a href={shop}>Etsy shop</a>
+                  <a href={shop}>{t('Etsy shop')}</a>
                 </li>
               ) : (
                 <li>
-                  <span className={s.footerMuted}>Etsy shop: {cfg.etsy.shopUrl}</span>
+                  <span className={s.footerMuted}>{t('Etsy shop: {url}', { url: cfg.etsy.shopUrl })}</span>
                 </li>
               )}
               {social.map(([k, v]) => (
@@ -189,7 +206,7 @@ export function Footer({ guides }: { guides: Guide[] }) {
       </div>
       <div className={s.footerBottom}>
         <p>
-          © {year} {cfg.brand.name}. Wedding websites sold on Etsy.
+          © {year} {cfg.brand.name}. {t('Wedding websites sold on Etsy.')}
         </p>
       </div>
     </footer>

@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { PanelPhotoSlot } from '../../lib/panel/model.ts';
 import { Sheet } from './Sheet.tsx';
 import styles from './panel.module.css';
+import { t } from '../../lib/i18n/client.ts';
 
 /** Longest side of the cropped JPEG sent to the server. */
 export const CROP_OUTPUT_MAX_EDGE = 2000;
@@ -68,7 +69,7 @@ export function PhotoCropper({
         if (!image.naturalWidth || !image.naturalHeight) throw new Error('empty');
         setImg(image);
       })
-      .catch(() => alive && setError('This file could not be opened as a photo. Please choose a JPG or PNG photo.'));
+      .catch(() => alive && setError(t('This file could not be opened as a photo. Please choose a JPG or PNG photo.')));
     return () => {
       alive = false;
       URL.revokeObjectURL(url);
@@ -167,7 +168,7 @@ export function PhotoCropper({
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       setBusy(false);
-      setError('This browser cannot prepare the photo. Please try another browser.');
+      setError(t('This browser cannot prepare the photo. Please try another browser.'));
       return;
     }
     ctx.fillStyle = '#ffffff';
@@ -181,7 +182,7 @@ export function PhotoCropper({
           if (blob && blob.size > CROP_OUTPUT_MAX_BYTES && quality > 0.6) return encode(quality - 0.1);
           setBusy(false);
           if (blob) onConfirm(blob);
-          else setError('The photo could not be prepared. Please try another one.');
+          else setError(t('The photo could not be prepared. Please try another one.'));
         },
         'image/jpeg',
         quality,
@@ -190,14 +191,14 @@ export function PhotoCropper({
   };
 
   return (
-    <Sheet title={`Crop: ${slot.label}`} onClose={onCancel} closeLabel="Cancel" testId="cropper">
+    <Sheet title={t('Crop: {photo}', { photo: t(slot.label) })} onClose={onCancel} closeLabel={t('Cancel')} testId="cropper">
       {error ? (
         <p className={styles.issueError} role="alert">
           {error}
         </p>
       ) : (
         <>
-          <p className={styles.hint}>Drag to move the photo. Pinch or use the slider to zoom.</p>
+          <p className={styles.hint}>{t('Drag to move the photo. Pinch or use the slider to zoom.')}</p>
           <div className={styles.cropStage}>
             <div
               ref={frameRef}
@@ -207,7 +208,7 @@ export function PhotoCropper({
               style={{ aspectRatio: String(ratio), width: `min(100%, calc(max(150px, min(56dvh, 100dvh - 420px)) * ${ratio}))` }}
               tabIndex={0}
               role="group"
-              aria-label="Photo framing. Use the arrow keys to move and plus or minus to zoom."
+              aria-label={t('Photo framing. Use the arrow keys to move and plus or minus to zoom.')}
               onPointerDown={onPointerDown}
               onPointerMove={onPointerMove}
               onPointerUp={onPointerEnd}
@@ -227,12 +228,12 @@ export function PhotoCropper({
                   }}
                 />
               ) : (
-                <span className={styles.photoEmpty}>Opening photo…</span>
+                <span className={styles.photoEmpty}>{t('Opening photo…')}</span>
               )}
             </div>
           </div>
           <label className={styles.label} htmlFor="crop-zoom">
-            Zoom
+            {t('Zoom')}
           </label>
           <input
             id="crop-zoom"
@@ -250,10 +251,10 @@ export function PhotoCropper({
       {/* Sticky: on a short screen "Use this photo" stays in reach (the frame swallows swipes). */}
       <div className={`${styles.buttonRow} ${styles.stickyActions}`}>
         <button type="button" className={`${styles.btn} ${styles.btn_primary}`} disabled={!current || busy || Boolean(error)} onClick={confirm} data-crop-confirm>
-          {busy ? 'Preparing…' : 'Use this photo'}
+          {busy ? t('Preparing…') : t('Use this photo')}
         </button>
         <button type="button" className={`${styles.btn} ${styles.btn_secondary}`} onClick={onCancel}>
-          Cancel
+          {t('Cancel')}
         </button>
       </div>
     </Sheet>

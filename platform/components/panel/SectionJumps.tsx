@@ -2,10 +2,11 @@
 // G145 (K45 item 1): long editor pages (Day & place, Details) get a row of jumps to their parts right under the title,
 // so "Travel & stay" or "Meal & menu" is one tap away instead of a long scroll. Only parts with a sub-heading are listed
 // (BLOCK_TITLES); shown when a page has three or more. A jump scrolls to the part and moves the focus to its heading.
+import { t } from '../../lib/i18n/client.ts';
 import type { SectionId } from '../../lib/panel/model.ts';
 import styles from './section-jumps.module.css';
 
-export function SectionJumps({ sections, titles, label = 'On this page' }: { sections: SectionId[]; titles: Partial<Record<SectionId, string>>; label?: string }) {
+export function SectionJumps({ sections, titles }: { sections: SectionId[]; titles: Partial<Record<SectionId, string>> }) {
   const parts = sections.filter((id) => titles[id]);
   if (parts.length < 3) return null;
   const jump = (id: SectionId) => {
@@ -20,10 +21,10 @@ export function SectionJumps({ sections, titles, label = 'On this page' }: { sec
     }
   };
   return (
-    <nav className={styles.jumps} aria-label={label} data-section-jumps="">
+    <nav className={styles.jumps} aria-label={t('On this page')} data-section-jumps="">
       {parts.map((id) => (
         <button key={id} type="button" className={styles.jump} onClick={() => jump(id)} data-jump={id}>
-          {titles[id]}
+          {t(titles[id]!)}
         </button>
       ))}
     </nav>

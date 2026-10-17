@@ -126,6 +126,23 @@ tarayıcıda koşulmadı, önceki görevin tarayıcı testi kapsıyor ve `npm te
 3. Dükkân oturumunda Publish açık (docs/23: "Yayınlama alıcıdadır"; şerit bunu hatırlatıyor). Dükkân oturumunda yayınlamayı tamamen
    kapatmak istenirse küçük bir değişiklik.
 
+### 2. tur — G144 birleşmesi (2026-10-17, taban d37d6a1 → cb3d909)
+- `git merge origin/claude/zealous-fermi-hy1o40`: 3 çakışma (edit sayfası, Panel.tsx, views.tsx) çözüldü — dil (`lang`, `dict`,
+  `t()`) ve G145 (`shopUntil`, gizli edit-link kartı, ertelenen hatalar) birlikte.
+- Yeni alıcı metni sözlükte: `On this page` → TR "Bu sayfada", ES, DE, FR; atlama düğmeleri `t()` ile (bölüm başlıklarıyla aynı
+  anahtarlar). Dükkân şeridi bilinçli olarak Türkçe kalır (yalnız dükkân görür). `I18N_STRICT=1 node --test tests/i18n.test.ts` yeşil.
+- **Hata (G144 kodu, `lib/i18n/auto-translate.ts`): "Translate automatically" sonsuza dek "Translating…"da kalıyordu.** Tarayıcı
+  Translator API'sini listeleyip modelini hazırlayamayınca (`availability`/`create` hiç dönmüyor; bu Chromium'da böyle, gerçek
+  Chrome'da yavaş/engelli model indirmede de olur) ücretsiz servise hiç düşülmüyordu. Şimdi hazırlık 15 sn ile sınırlı
+  (`BROWSER_PREPARE_MS`), sonra MyMemory (panelin yazdığı sıra: önce cihaz, yoksa servis). Birim testi: `tests/g145.test.ts`.
+- Dil yolculuğu `tests/g145-browser.ts`'e eklendi: panel TR (`bke_lang=tr`) — atlamalar Türkçe; Us → Languages: site EN + TR,
+  Translate automatically (MyMemory test içinde sahte), Approve all, yayın; misafir `?lang=tr`: `<html lang="tr">`, onaylı çeviri,
+  dil seçici, RSVP hataları Türkçe, 390 px yatay kaydırma yok; İngilizce editörde dükkân şeridi Türkçe. Dükkân sekmesi admin
+  tarayıcısının diliyle (Türkçe) açılıyor — doğru.
+- Sonuç: `tests/g145-browser.ts` **39/39**, `npm test` **1334/1335**. Tek kırmızı `marketing-crawl` "built marketing pages":
+  `/tr`, `/tr/designs`, `/tr/how-it-works` … meta açıklaması 160 karakteri, bir başlık 60'ı aşıyor — G144 satış sözlüğü; bu dalda
+  satış dosyalarına dokunulmadı (tabandan gelir) → koordinatöre. Önceki `g139` 22≠21 kırmızısı tabanda düzelmiş. Build temiz.
+
 ### Test
 - `tests/g145.test.ts` (npm test): dükkân anahtarı (alıcı anahtarı/önizleme değişmez, 72 saat, yenisi eskisini kapatır, kapatma,
   anahtar saklanmaz, geçmiş), admin eylemleri + panel API'si, Yapılacaklar, yeni şablon, Travel & stay uyarısı.

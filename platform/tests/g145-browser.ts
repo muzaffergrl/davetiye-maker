@@ -10,6 +10,9 @@
 // 3. Long editor pages: jumps to their parts (Details, Day & place); a jump focuses the part's heading.
 // 4. A question added in this visit opens without red "please write …" lines; they show after leaving its field.
 // 5. Admin: one search box on the overview (→ Siparişler, every filter), design prices in the shop currency.
+// 6. Languages (G144 merged): the panel in Turkish (bke_lang=tr) — the new jumps translated; Us → Languages: website in
+//    EN + TR, "Translate automatically" (MyMemory faked by the browser test), approve all, publish; guests: ?lang=tr page in
+//    Turkish with the language switcher, the RSVP form's errors in Turkish; the shop banner stays Turkish.
 // axe-core (serious/critical = 0), touch targets ≥ 44 px (panel) / ≥ 36 px (admin), no horizontal scroll at 390.
 // Screenshots + checks.json → previews/g145/ (or $G145_SHOTS_DIR). Exit 1 on a failed check.
 
@@ -20,7 +23,7 @@ import path from 'node:path';
 import type { ContentRecord } from '../lib/content/types.ts';
 import { draftFromDemo } from '../lib/claim/claim.ts';
 import { LocalAdapter } from '../lib/data/local/index.ts';
-import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
+import { createSiteWithKeys, issueShopEditKey, publishSite } from '../lib/sites.ts';
 import { loadChromium, startNext, waitForServer } from '../scripts/lib/browser.ts';
 import { REPO, ROOT } from '../scripts/lib/theme-env.ts';
 
@@ -158,7 +161,7 @@ try {
     check('shop session: no "Your private edit link" to copy', (await tab.locator('[data-copy-edit-link]').count()) === 0);
     await tab.goto(`${shopUrl}#edit/day`);
     await tab.waitForSelector('[data-page="day"]');
-    const venue = tab.getByLabel('Venue name', { exact: false }).first();
+    const venue = tab.locator('#f-venue-name'); // the tab follows the admin browser's language (Turkish)
     await venue.fill('Magnolia Hall');
     await tab.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
     const stored = await adapter.getSiteById(live.site.id);
@@ -247,6 +250,70 @@ try {
     check('admin site page: no horizontal scroll at 390', (await overflow(page)) <= 0);
     await shot(page, '06_admin_site_390', true);
     await ctx.close();
+  });
+  // =========================================================================== 6. languages (panel TR, site EN + TR)
+  await block('languages', async () => {
+    const ctx = await browser.newContext(PHONE);
+    await ctx.addCookies([{ name: 'bke_lang', value: 'tr', url: BASE }]);
+    // the keyless MyMemory service, faked: "[tr] <text>"
+    let calls = 0;
+    await ctx.route('https://api.mymemory.translated.net/**', (route: any) => {
+      calls++;
+      const q = new URL(route.request().url()).searchParams.get('q') ?? '';
+      route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify({ responseStatus: 200, responseData: { translatedText: `[tr] ${q}` } }) });
+    });
+    const page = await ctx.newPage();
+    await page.goto(`${BUYER}#edit/details`);
+    await page.waitForSelector('[data-page="details"]');
+    await page.waitForTimeout(600);
+    check('panel TR: the jumps are named in Turkish', (await page.locator('[data-section-jumps]').getAttribute('aria-label')) === 'Bu sayfada' && !(await page.locator('[data-jump="travel"]').innerText()).includes('Travel'), await page.locator('[data-jump="travel"]').innerText());
+    await shot(page, '07_panel_tr_details_jumps_390');
+
+    await page.goto(`${BUYER}#edit/us`);
+    await page.waitForSelector('[data-disclosure="languages"]');
+    await page.locator('[data-disclosure="languages"] button').first().click();
+    await page.locator('[data-languages-extra="tr"]').check();
+    await page.waitForSelector('[data-auto-translate="tr"]');
+    await page.click('[data-auto-translate="tr"]');
+    await page.waitForFunction(() => document.querySelectorAll('[data-language="tr"] [data-state="draft"]').length > 0, null, { timeout: 30_000 });
+    const drafts = await page.locator('[data-language="tr"] [data-state="draft"]').count();
+    check('Translate automatically: texts filled as drafts to check', drafts > 0 && calls > 0, `${drafts} drafts, ${calls} service calls`);
+    await page.click('[data-approve-all="tr"]');
+    await page.waitForTimeout(400);
+    check('Approve all: no drafts left', (await page.locator('[data-language="tr"] [data-state="draft"]').count()) === 0);
+    await page.waitForFunction(() => document.querySelector('[data-save-state]')?.getAttribute('data-save-state') === 'saved', null, { timeout: 15_000 });
+    await shot(page, '08_panel_tr_languages_390');
+    await axe(page, 'panel TR Us → Languages (390)');
+    // block 4 left an empty test question in the draft (publishing refuses it, rightly): take it out first
+    const draft = (await adapter.getSiteById(live.site.id))!;
+    const content = structuredClone(draft.content) as any;
+    if (content.rsvp) content.rsvp.questions = [];
+    await adapter.patchSite(live.site.id, { content });
+    await publishSite(adapter, live.site.id);
+
+    const guest = await browser.newContext({ ...PHONE, locale: 'en-US' });
+    const gp = await guest.newPage();
+    await gp.goto(`${BASE}/mia-and-theo/story?lang=tr`);
+    check('guest ?lang=tr: <html lang="tr">', (await gp.getAttribute('html', 'lang')) === 'tr');
+    const story = await gp.locator('body').innerText();
+    check('guest ?lang=tr: the couple’s approved translation shows', story.includes('[tr] '), story.slice(0, 160));
+    check('guest: language switcher with EN and TR', (await gp.locator('[data-pl-lang] a[data-lang]').count()) >= 2);
+    await gp.goto(`${BASE}/mia-and-theo/rsvp?lang=tr`);
+    await gp.locator('form button[type=submit]').first().click();
+    await gp.waitForTimeout(500);
+    const form = await gp.locator('form').first().innerText();
+    check('guest RSVP in Turkish: errors in Turkish', !/Please enter your name/.test(form) && form.trim().length > 0, form.slice(0, 160));
+    check('guest TR: no horizontal scroll at 390', (await overflow(gp)) <= 0);
+    await shot(gp, '09_guest_tr_rsvp_390');
+
+    // the shop's own session keeps its Turkish banner whatever the editor language
+    const shop = await issueShopEditKey(adapter, live.site.id);
+    const en = await browser.newContext(PHONE);
+    const sp = await en.newPage();
+    await sp.goto(`${BASE}/edit/mia-and-theo?k=${encodeURIComponent(shop.editKey)}#home`);
+    await sp.waitForSelector('[data-shop-session]');
+    check('shop banner in Turkish in an English editor', /Dükkân olarak düzenliyorsunuz/.test(await sp.locator('[data-shop-session]').innerText()));
+    await Promise.all([ctx.close(), guest.close(), en.close()]);
   });
 } finally {
   await browser?.close();
