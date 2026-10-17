@@ -182,5 +182,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Cherry Blossom Spring)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=cherry-blossom-spring"
+      },
+      {
+        "name": "Ivory Blossom & Gold",
+        "variant": "ivory-blossom",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=cherry-blossom-spring&variant=ivory-blossom"
+      },
+      {
+        "name": "Sage & Blush",
+        "variant": "sage-blush",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=cherry-blossom-spring&variant=sage-blush"
+      },
+      {
+        "name": "Dusty Blue & Blush",
+        "variant": "dusty-blue-blush",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=cherry-blossom-spring&variant=dusty-blue-blush"
+      },
+      {
+        "name": "Deep Rose & Mauve",
+        "variant": "deep-rose",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=cherry-blossom-spring&variant=deep-rose"
+      },
+      {
+        "name": "Peach Blossom & Cream",
+        "variant": "peach-blossom",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=cherry-blossom-spring&variant=peach-blossom"
+      }
+    ],
+    "offered": [
+      "Original (Cherry Blossom Spring)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

@@ -1,0 +1,24 @@
+{
+  "id": "V04_plum_noir",
+  "slug": "plum-noir",
+  "name": "Plum & Black",
+  "ink": "#EFE6DA",
+  "deep": "#C9A46A",
+  "primary": "#141217",
+  "mist_top": "#1C1A21",
+  "mist_bottom": "#0B0A0D",
+  "gold": "#C9A46A",
+  "gold_light": "#E3C99A",
+  "ivory": "#EFE6DA",
+  "leaf": "#5B6B4E",
+  "swatch": [
+    "#141217",
+    "#5A1E4A",
+    "#C9A46A"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "#3E1838",
+    "petal": "#3E1838"
+  }
+}

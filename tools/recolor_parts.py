@@ -111,8 +111,9 @@ def contrast(a, b):
 
 
 def transfer(rgb, families, cmin=0.012, cfull=0.035):
-    """rgb (..., 3) → yeni rgb. families: [{anchor: lab, target: lab | None, sigma: derece, lk: float, cmin?, cfull?}]
-    (cmin/cfull: ailenin kroma eşiği — bu kromanın altındaki pikseller o aileye girmez; kağıt gibi soluk tonları korur)."""
+    """rgb (..., 3) → yeni rgb. families: [{anchor: lab, target: lab | None, sigma: derece, lk: float, cmin?, cfull?, cmax?,
+    cfade?}] (cmin/cfull: ailenin kroma eşiği — bu kromanın altındaki pikseller o aileye girmez; kağıt gibi soluk tonları korur;
+    cmax/cfade: üst eşik — cmax + cfade üstündeki pikseller girmez; aynı tondaki canlı çiçekten soluk kağıdı ayırır)."""
     lab = rgb_to_oklab(rgb)
     L, C, h = _lch(lab)
     sat = np.clip((C - cmin) / (cfull - cmin), 0, 1)
@@ -120,6 +121,8 @@ def transfer(rgb, families, cmin=0.012, cfull=0.035):
     for f in families:
         La, Ca, ha = _lch(f["anchor"])
         s = sat if "cmin" not in f else np.clip((C - f["cmin"]) / (f.get("cfull", f["cmin"] + 0.02) - f["cmin"]), 0, 1)
+        if "cmax" in f:  # G158: the family stops above this chroma (a pale paper sharing the hue of a vivid flower)
+            s = s * np.clip((f["cmax"] + f.get("cfade", 0.015) - C) / f.get("cfade", 0.015), 0, 1)
         w = np.exp(-0.5 * (_wrap(h - ha) / np.radians(f.get("sigma", 20))) ** 2) * s
         weights.append(w)
         if f["target"] is None:
@@ -243,7 +246,7 @@ def family_map(spec, pal, members, roles=None):
         else:
             target = rgb_to_oklab(hex_rgb(pal[t] if t in ROLES else t))
         fam = {"anchor": rgb_to_oklab(hex_rgb(f["anchor"])), "target": target, "sigma": f.get("sigma", 20), "lk": lk}
-        for k in ("cmin", "cfull"):
+        for k in ("cmin", "cfull", "cmax", "cfade"):
             if k in f:
                 fam[k] = f[k]
         out.append(fam)
@@ -545,7 +548,7 @@ def build(design, only=None, sheet=True, write=True, images=True):
         for path in (theme_images(theme) if images else []):
             key = part_key(path.name)
             p = spec["parts"][key]
-            status = p["recolor"]
+            status = part_status(pal, key, p)
             src = Image.open(path)
             if status == "auto":
                 fams = family_map(spec, pal, spec["groups"][p["group"]])
@@ -559,7 +562,9 @@ def build(design, only=None, sheet=True, write=True, images=True):
                 rows.append((key, status, src, im))
         art = [] if images else list(existing_print(theme, slug).get("art", []))
         for name, p in (spec.get("print", {}) if images else {}).items():
-            if p["recolor"] != "auto":
+            if part_status(pal, f"print:{name}", p) != "auto":
+                if sheet and part_status(pal, f"print:{name}", p) == "gpt":
+                    rows.append((f"print:{name}", "gpt", Image.open(PRINT / theme / f"{name}.webp"), None))
                 continue
             src = PRINT / theme / f"{name}.webp"
             im, mode = recolor_image(src, family_map(spec, pal, spec["groups"][p["group"]]))
@@ -589,7 +594,9 @@ def build(design, only=None, sheet=True, write=True, images=True):
             contact_sheet(rows, toks, f"{design.name} · {pal['id']} · {pal['name']} ({pal.get('status', 'coming')})",
                           pal["_dir"] / "review/contact_sheet.jpg")
         report[pal["id"]] = {"slug": slug, "images": len(written), "print": art, "tokens": len(values), "contrast_fixes": fixes,
-                             "gpt": sorted(k for k, p in spec["parts"].items() if p["recolor"] == "gpt")}
+                             "gpt": sorted([k for k, p in spec["parts"].items() if part_status(pal, k, p) == "gpt"]
+                                           + [f"print:{k}" for k, p in spec.get("print", {}).items()
+                                              if part_status(pal, f"print:{k}", p) == "gpt"])}
     if write and not only:
         write_variants_css(spec, design, blocks)
         write_theme_json(spec, design, pals)
@@ -605,6 +612,17 @@ def build(design, only=None, sheet=True, write=True, images=True):
         write_variants_css(spec, design, blocks)
         write_theme_json(spec, design, allp)
     return report
+
+
+def part_status(pal, key, part):
+    """G158: palette.json "recolor": {parça | "print:<ad>": auto | gpt | keep} manifestteki durumu o palet için ezer (ör. bir
+    palette ayçiçeğiyle aynı tondaki kurdele algoritmayla ayrılamaz → gpt; aynı parça başka palette auto)."""
+    status = (pal.get("recolor") or {}).get(key, part["recolor"])
+    if status not in ("auto", "gpt", "keep"):
+        raise RecolorError(f"{pal.get('id')}: recolor.{key} auto | gpt | keep olmalı")
+    if status == "auto" and part.get("group") is None:
+        raise RecolorError(f"{pal.get('id')}: recolor.{key} auto ama manifestte grubu yok")
+    return status
 
 
 def existing_print(theme, slug):
@@ -699,6 +717,11 @@ def check(design):
     pals = load_palettes(design)
     if len(pals) != 5:
         problems.append(f"{len(pals)} palet (5 olmalı)")
+    for pal in pals:
+        known = set(spec.get("parts", {})) | {f"print:{k}" for k in spec.get("print", {})}
+        for key in (pal.get("recolor") or {}):
+            if key not in known:
+                problems.append(f"{pal['id']}: recolor.{key} manifestte yok")
     slugs = [p["slug"] for p in pals]
     if len(set(slugs)) != len(slugs):
         problems.append("slug'lar tekrar ediyor")

@@ -1,0 +1,25 @@
+{
+  "id": "V06_wine_navy",
+  "slug": "wine-navy",
+  "name": "Wine & Navy Meadow",
+  "ink": "#2E3140",
+  "deep": "#2E4A86",
+  "primary": "#8E2A3E",
+  "mist_top": "#FBFAF4",
+  "mist_bottom": "#E8EBDC",
+  "gold": "#C2A15E",
+  "gold_light": "#E1CB98",
+  "ivory": "#FFFEF8",
+  "leaf": "#6A8A4E",
+  "swatch": [
+    "#FBFAF4",
+    "#8E2A3E",
+    "#2F4C8C"
+  ],
+  "status": "coming",
+  "families": {
+    "poppy": "#962C40",
+    "cornflower": "#2F4C8C",
+    "lupine": "#5A3A78"
+  }
+}

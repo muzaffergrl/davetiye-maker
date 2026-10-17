@@ -1,0 +1,25 @@
+{
+  "id": "V03_golden_poppy",
+  "slug": "golden-poppy",
+  "name": "Golden Poppy & Blue",
+  "ink": "#2E3140",
+  "deep": "#3F5E9E",
+  "primary": "#F09A2E",
+  "mist_top": "#FBFAF4",
+  "mist_bottom": "#E8EBDC",
+  "gold": "#C2A15E",
+  "gold_light": "#E1CB98",
+  "ivory": "#FFFEF8",
+  "leaf": "#6A8A4E",
+  "swatch": [
+    "#FBFAF4",
+    "#F09A2E",
+    "#4A6FA5"
+  ],
+  "status": "coming",
+  "families": {
+    "poppy": "#F2972E",
+    "cornflower": null,
+    "lupine": null
+  }
+}

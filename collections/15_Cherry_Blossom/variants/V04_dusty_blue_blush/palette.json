@@ -1,0 +1,28 @@
+{
+  "id": "V04_dusty_blue_blush",
+  "slug": "dusty-blue-blush",
+  "name": "Dusty Blue & Blush",
+  "ink": "#3A3438",
+  "deep": "#4F6275",
+  "primary": "#F2C4CE",
+  "mist_top": "#F4F6F8",
+  "mist_bottom": "#DFE5EB",
+  "gold": "#B9A07A",
+  "gold_light": "#DCCAA9",
+  "ivory": "#FFFCFB",
+  "leaf": "#6E5E55",
+  "swatch": [
+    "#F4F6F8",
+    "#F2C4CE",
+    "#B8BFC7"
+  ],
+  "status": "coming",
+  "families": {
+    "blossom": null,
+    "envelope": "#B8BFC7",
+    "ground": "#E8EBEF",
+    "branch": null,
+    "stamen": null,
+    "rose_ink": "deep"
+  }
+}

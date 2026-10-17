@@ -1,0 +1,221 @@
+{
+  "theme": "emerald-gold-estate",
+  "note": "G158 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). Gold metal and the ivory marble cards never change; only the emerald velvet (and the green leaves on the gold liner) take the palette.",
+  "families": {
+    "velvet": {
+      "anchor": "#012819",
+      "sigma": 24,
+      "cmin": 0.012,
+      "cfull": 0.03
+    },
+    "leaf": {
+      "anchor": "#70743F",
+      "sigma": 12,
+      "cmin": 0.04,
+      "cfull": 0.06
+    },
+    "gold": {
+      "anchor": "#C8A45A",
+      "sigma": 10
+    }
+  },
+  "groups": {
+    "velvet": [
+      "velvet"
+    ],
+    "envelope": [
+      "velvet",
+      "leaf",
+      "gold"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "accent_1_lg": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "accent_2_lg": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "accent_3_lg": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "ivory marble card with gold rule"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "countdown_box": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "decor_br": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "decor_tl": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "divider": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "info_card": {
+      "recolor": "keep",
+      "why": "ivory marble card with gold rule"
+    },
+    "invitation_card": {
+      "recolor": "keep",
+      "why": "ivory marble card with gold rule"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "pill_sprig": {
+      "recolor": "keep",
+      "why": "gold metal: same in every palette"
+    },
+    "velvet": {
+      "recolor": "auto",
+      "group": "velvet"
+    },
+    "velvet_wide": {
+      "recolor": "auto",
+      "group": "velvet"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "keep",
+      "why": "ivory marble card with gold art"
+    },
+    "back": {
+      "recolor": "keep",
+      "why": "ivory marble card with gold art"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "velvet"
+    }
+  },
+  "print_colors": {
+    "ink": "#2A2216",
+    "accent": "#74561F",
+    "paper": "#F3EFE7"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "velvet"
+    ],
+    "keep": [
+      "--gold",
+      "--gold-lt",
+      "--ivory",
+      "--ivory-soft",
+      "--ink",
+      "--ink-soft",
+      "--bronze"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--page",
+        4.5
+      ],
+      [
+        "--ivory-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--gold",
+        "--page",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--emerald",
+        4.5
+      ]
+    ]
+  }
+}

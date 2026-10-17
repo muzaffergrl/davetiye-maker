@@ -1,0 +1,25 @@
+{
+  "id": "V03_burgundy_gold",
+  "slug": "burgundy-gold",
+  "name": "Burgundy & Gold",
+  "ink": "#F3EDDF",
+  "deep": "#C8A45A",
+  "primary": "#4A0F1E",
+  "mist_top": "#5C1626",
+  "mist_bottom": "#3D0A14",
+  "gold": "#C8A45A",
+  "gold_light": "#E5CC8E",
+  "ivory": "#F3EDDF",
+  "leaf": "#C8A45A",
+  "swatch": [
+    "#4A0F1E",
+    "#C8A45A",
+    "#F3EDDF"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "#3D0A14",
+    "leaf": "#7A4A3A",
+    "gold": null
+  }
+}

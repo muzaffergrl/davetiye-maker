@@ -1,0 +1,26 @@
+{
+  "id": "V06_slate_pearl",
+  "slug": "slate-pearl",
+  "name": "Slate & Pearl",
+  "ink": "#252C31",
+  "deep": "#44545E",
+  "primary": "#8696A0",
+  "mist_top": "#F4F5F5",
+  "mist_bottom": "#E0E4E6",
+  "gold": "#C2A26B",
+  "gold_light": "#E2CDA0",
+  "ivory": "#FFFDF8",
+  "leaf": "#A7B1B5",
+  "swatch": [
+    "#F4F5F5",
+    "#8696A0",
+    "#F4DECB"
+  ],
+  "status": "coming",
+  "families": {
+    "sea": "#8193A0",
+    "ground": "#E9ECEE",
+    "shell": null,
+    "deep_ink": "deep"
+  }
+}

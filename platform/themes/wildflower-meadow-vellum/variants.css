@@ -1,0 +1,61 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 18
+   (kaynak: collections/18_Wildflower_Vellum/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-142246: 20 34 70;
+  --c-283c6e: 40 60 110;
+  --c-4062a0: 64 98 160;
+  --c-4466a6: 68 102 166;
+  --c-5579bc: 85 121 188;
+}
+
+/* V02_blush_meadow · Blush Meadow */
+html[data-variant="blush-meadow"] {
+  --blue: #5A6D8C;
+  --c-142246: 37 50 81;
+  --c-283c6e: 101 113 137;
+  --c-4062a0: 128 148 181;
+  --c-4466a6: 133 154 186;
+  --c-5579bc: 152 174 208;
+  --poppy: #B07B7A;
+}
+
+/* V03_golden_poppy · Golden Poppy & Blue */
+html[data-variant="golden-poppy"] {
+  --poppy: #B67B39;
+}
+
+/* V04_lilac_meadow · Lilac & Mauve Meadow */
+html[data-variant="lilac-meadow"] {
+  --blue: #696799;
+  --c-142246: 32 39 72;
+  --c-283c6e: 81 75 112;
+  --c-4062a0: 111 111 160;
+  --c-4466a6: 116 115 166;
+  --c-5579bc: 135 134 187;
+  --poppy: #A36C7F;
+}
+
+/* V05_peach_sage · Peach & Sage Meadow */
+html[data-variant="peach-sage"] {
+  --blue: #5D6D7E;
+  --c-142246: 37 50 77;
+  --c-283c6e: 99 110 122;
+  --c-4062a0: 128 146 164;
+  --c-4466a6: 134 151 169;
+  --c-5579bc: 153 171 190;
+  --poppy: #B07C60;
+}
+
+/* V06_wine_navy · Wine & Navy Meadow */
+html[data-variant="wine-navy"] {
+  --blue: #364D71;
+  --c-142246: 14 26 56;
+  --c-283c6e: 22 36 62;
+  --c-4062a0: 50 73 109;
+  --c-4466a6: 54 77 113;
+  --c-5579bc: 70 95 133;
+  --poppy: #70292F;
+}

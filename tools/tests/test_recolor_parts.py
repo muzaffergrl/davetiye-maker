@@ -61,6 +61,25 @@ def test_texture_and_cmin():
     assert np.abs(kept - paper).max() < 1
 
 
+def test_cmax_keeps_vivid_pixels_of_the_same_hue():
+    # G158: a pale grey-pink paper and a vivid pink blossom share a hue; cmax moves only the paper
+    paper, blossom = rp.hex_rgb("#CDC0C0"), rp.hex_rgb("#F4A0B0")
+    out = rp.transfer(np.array([paper, blossom]), [fam("#CDC0C0", "#B8C2B0", sigma=25, cmin=0.004, cfull=0.009, cmax=0.03)])
+    assert np.abs(out[0] - rp.hex_rgb("#B8C2B0")).max() < 4
+    assert np.abs(out[1] - blossom).max() < 1
+
+
+def test_part_status_palette_override():
+    # G158: a palette may send a part to GPT (or keep it) while the manifest default stays auto
+    part = {"recolor": "auto", "group": "floral"}
+    assert rp.part_status({}, "closure", part) == "auto"
+    assert rp.part_status({"recolor": {"closure": "gpt"}}, "closure", part) == "gpt"
+    with pytest.raises(rp.RecolorError):
+        rp.part_status({"id": "V02_x", "recolor": {"closure": "paint"}}, "closure", part)
+    with pytest.raises(rp.RecolorError):
+        rp.part_status({"id": "V02_x", "recolor": {"bg": "auto"}}, "bg", {"recolor": "keep", "why": "paper"})
+
+
 def test_recolor_image_keeps_alpha(tmp_path):
     from PIL import Image
     arr = np.zeros((8, 8, 4), np.uint8)

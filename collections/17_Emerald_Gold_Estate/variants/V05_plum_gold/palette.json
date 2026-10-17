@@ -1,0 +1,25 @@
+{
+  "id": "V05_plum_gold",
+  "slug": "plum-gold",
+  "name": "Plum & Gold",
+  "ink": "#F3EDDF",
+  "deep": "#C8A45A",
+  "primary": "#3A1A36",
+  "mist_top": "#43204B",
+  "mist_bottom": "#2B1328",
+  "gold": "#C8A45A",
+  "gold_light": "#E5CC8E",
+  "ivory": "#F3EDDF",
+  "leaf": "#C8A45A",
+  "swatch": [
+    "#3A1A36",
+    "#C8A45A",
+    "#F3EDDF"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "#2B1328",
+    "leaf": "#6E5A6A",
+    "gold": null
+  }
+}

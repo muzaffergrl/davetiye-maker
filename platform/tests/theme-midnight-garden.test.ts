@@ -93,6 +93,11 @@ function assertFieldsMatch($: cheerio.CheerioAPI, content: ContentRecord, page: 
 
 // ---------------------------------------------------------------- 1–2, 16: manifest, files, demo record, /start
 
+// G158: the palette build (tools/recolor_parts.py) writes a fixed colour as rgb(var(--c-rrggbb)/a) or #rrggbbaa; read both as rgba()
+const asRgba = (css: string): string => css
+  .replace(/rgb\(var\(--c-([0-9a-f]{6})\)\s*\/\s*(\d*\.?\d+)\)/gi, (_, h: string, a: string) => `rgba(${[0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')}, ${a})`)
+  .replace(/#([0-9a-f]{6})([0-9a-f]{2})\b/gi, (_, h: string, a: string) => `rgba(${[0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)).join(', ')}, ${parseInt(a, 16) === 0 ? '0' : `.${String(Math.round((parseInt(a, 16) / 255) * 100)).padStart(2, '0')}`})`);
+
 test('1 theme.json: public theme, five pages, the five standard photo slots with the window boxes of the build', async () => {
   assert.ok(theme, 'theme loads');
   assert.equal(theme.manifest.name, 'Midnight Garden');
@@ -140,7 +145,9 @@ test('2 every theme file referenced by the pages, site.css and site.js exists; s
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G158: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // docs/11 §6: a first-view WebP ≤ 200 KB, a lazy / wide-screen one ≤ 250 KB
@@ -611,7 +618,7 @@ test('22 K21: no code-drawn frames — countdown and content blocks without bord
   for (const [, sel, body] of rules) {
     if (!/gradient\(/.test(body)) continue;
     assert.match(sel, /body::before|\.hero-bg picture|\.night-end::before|^\s*\.site-nav\s*$|^\s*\.btn\s*$|^\s*\.env-glow\s*$|^\s*\.env-spill\s*$|\.fr-box::before, \.frame > \.glow|^\s*\.env-hint::before\s*$/, sel.trim());
-    if (/env-|glow|fr-box/.test(sel)) assert.match(body, /radial-gradient\([^)]*rgba\([^)]*\), [^;]*rgba\([^)]*, 0\)/, `${sel.trim()}: soft light that fades to nothing (no edge)`);
+    if (/env-|glow|fr-box/.test(sel)) assert.match(asRgba(body), /radial-gradient\([^)]*rgba\([^)]*\), [^;]*rgba\([^)]*, 0\)/, `${sel.trim()}: soft light that fades to nothing (no edge)`);
   }
   // the corner clusters are whole GPT parts: no mask / clip on them
   for (const [, sel, body] of rules) if (/corner|page-corner/.test(sel)) assert.doesNotMatch(body, /mask|clip-path/, sel.trim());

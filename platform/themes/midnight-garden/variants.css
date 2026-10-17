@@ -1,0 +1,34 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 19
+   (kaynak: collections/19_Midnight_Garden/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-4a2335: 74 35 53;
+}
+
+/* V05_amber_noir · Amber & Black */
+html[data-variant="amber-noir"] {
+}
+
+/* V02_blush_noir · Blush & Black */
+html[data-variant="blush-noir"] {
+  --c-4a2335: 86 47 66;
+  --plum: #562F42;
+}
+
+/* V06_champagne_noir · Champagne & Black */
+html[data-variant="champagne-noir"] {
+  --c-4a2335: 87 47 63;
+  --plum: #572F3F;
+}
+
+/* V03_ivory_noir · Ivory Rose & Black */
+html[data-variant="ivory-noir"] {
+  --c-4a2335: 90 53 68;
+  --plum: #5A3544;
+}
+
+/* V04_plum_noir · Plum & Black */
+html[data-variant="plum-noir"] {
+}

@@ -1,0 +1,244 @@
+{
+  "theme": "coastal-seaside",
+  "note": "G158 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). The watercolour sea and the pale sky-blue ground share a hue and are split by chroma (ground cmax / sea cmin); sand paper, natural shells, starfish, rope and the bronze portholes never change except the scallop shells in palettes that name a shell colour.",
+  "families": {
+    "sea": {
+      "anchor": "#68B0C3",
+      "sigma": 26,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "ground": {
+      "anchor": "#D9EEF7",
+      "sigma": 26,
+      "cmin": 0.006,
+      "cfull": 0.012,
+      "cmax": 0.03,
+      "cfade": 0.02
+    },
+    "shell": {
+      "anchor": "#E8AC8C",
+      "sigma": 10,
+      "cmin": 0.06,
+      "cfull": 0.08
+    },
+    "deep_ink": {
+      "anchor": "#2E5E7E",
+      "sigma": 18,
+      "cmin": 0.02,
+      "cfull": 0.04
+    }
+  },
+  "groups": {
+    "sea": [
+      "sea",
+      "ground",
+      "shell"
+    ],
+    "scene": [
+      "ground",
+      "sea",
+      "shell"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "keep",
+      "why": "pearl nautilus shell, neutral"
+    },
+    "accent_2": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "natural starfish"
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "scallop shell and rope"
+    },
+    "decor_br": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "decor_tl": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "env_body": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "env_cflap": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "env_closed": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "env_pocket": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "scallop shell and rope"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "bronze porthole"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "bronze porthole"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "info_card_band": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "invitation_card_band": {
+      "recolor": "keep",
+      "why": "sand paper, neutral"
+    },
+    "mist": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "sea": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "sea_wide": {
+      "recolor": "auto",
+      "group": "scene"
+    },
+    "shore": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "wave": {
+      "recolor": "auto",
+      "group": "sea"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "sea"
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "scene"
+    }
+  },
+  "print_colors": {
+    "ink": "#1D3445",
+    "accent": "#24506E",
+    "paper": "#FBF6EE"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "ground",
+      "deep_ink"
+    ],
+    "keep": [
+      "--ivory",
+      "--sand"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink",
+        "--mist",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--mist",
+        4.5
+      ],
+      [
+        "--deep",
+        "--page",
+        4.5
+      ],
+      [
+        "--deep-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--deep",
+        4.5
+      ]
+    ]
+  }
+}

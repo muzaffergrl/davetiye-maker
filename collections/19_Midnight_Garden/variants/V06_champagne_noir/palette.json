@@ -1,0 +1,24 @@
+{
+  "id": "V06_champagne_noir",
+  "slug": "champagne-noir",
+  "name": "Champagne & Black",
+  "ink": "#EFE6DA",
+  "deep": "#C9A46A",
+  "primary": "#141217",
+  "mist_top": "#1C1A21",
+  "mist_bottom": "#0B0A0D",
+  "gold": "#C9A46A",
+  "gold_light": "#E3C99A",
+  "ivory": "#EFE6DA",
+  "leaf": "#5B6B4E",
+  "swatch": [
+    "#141217",
+    "#C9A27E",
+    "#C9A46A"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "#B8906E",
+    "petal": "#B8906E"
+  }
+}

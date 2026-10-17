@@ -7,7 +7,7 @@
 .photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
                           background: var(--mist) url("img/mist-640.webp") 50% 30% / cover; }
 .photo-slot > .ty-decor > img { width: 66%; height: auto; display: block; translate: 0 2%; rotate: -8deg;
-                                filter: drop-shadow(0 6px 7px rgba(90, 40, 55, .22)) drop-shadow(0 1px 1px rgba(90, 40, 55, .16)); }
+                                filter: drop-shadow(0 6px 7px rgb(var(--c-5a2837)/.22)) drop-shadow(0 1px 1px rgb(var(--c-5a2837)/.16)); }
 
 /* card copy: the thank-you title (≤ 60 characters) wraps in the script, the date under it */
 .card-copy .ty-title { font-family: var(--script); color: var(--script-ink); font-size: max(11px, 7.2cqw); line-height: 1.24;

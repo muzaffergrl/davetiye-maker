@@ -184,5 +184,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Emerald & Gold Estate)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=emerald-gold-estate"
+      },
+      {
+        "name": "Sapphire & Gold",
+        "variant": "sapphire-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=emerald-gold-estate&variant=sapphire-gold"
+      },
+      {
+        "name": "Burgundy & Gold",
+        "variant": "burgundy-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=emerald-gold-estate&variant=burgundy-gold"
+      },
+      {
+        "name": "Onyx & Gold",
+        "variant": "onyx-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=emerald-gold-estate&variant=onyx-gold"
+      },
+      {
+        "name": "Plum & Gold",
+        "variant": "plum-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=emerald-gold-estate&variant=plum-gold"
+      },
+      {
+        "name": "Deep Teal & Gold",
+        "variant": "teal-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=emerald-gold-estate&variant=teal-gold"
+      }
+    ],
+    "offered": [
+      "Original (Emerald & Gold Estate)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

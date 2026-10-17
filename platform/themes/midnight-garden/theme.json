@@ -652,5 +652,102 @@
         "rsvp"
       ]
     }
-  }
+  },
+  "swatch": [
+    "#EFE6DA",
+    "#141217",
+    "#C9A46A"
+  ],
+  "variants": [
+    {
+      "id": "blush-noir",
+      "name": "Blush & Black",
+      "swatch": [
+        "#141217",
+        "#C48690",
+        "#C9A46A"
+      ],
+      "status": "coming",
+      "print": {
+        "art": [
+          "card",
+          "back"
+        ],
+        "ink": "#EFE6DA",
+        "accent": "#D9B97F"
+      }
+    },
+    {
+      "id": "ivory-noir",
+      "name": "Ivory Rose & Black",
+      "swatch": [
+        "#141217",
+        "#E6DACB",
+        "#C9A46A"
+      ],
+      "status": "coming",
+      "print": {
+        "art": [
+          "card",
+          "back"
+        ],
+        "ink": "#EFE6DA",
+        "accent": "#D9B97F"
+      }
+    },
+    {
+      "id": "plum-noir",
+      "name": "Plum & Black",
+      "swatch": [
+        "#141217",
+        "#5A1E4A",
+        "#C9A46A"
+      ],
+      "status": "coming",
+      "print": {
+        "art": [
+          "card",
+          "back"
+        ],
+        "ink": "#EFE6DA",
+        "accent": "#D9B97F"
+      }
+    },
+    {
+      "id": "amber-noir",
+      "name": "Amber & Black",
+      "swatch": [
+        "#141217",
+        "#A24A1E",
+        "#C9A46A"
+      ],
+      "status": "coming",
+      "print": {
+        "art": [
+          "card",
+          "back"
+        ],
+        "ink": "#EFE6DA",
+        "accent": "#D9B97F"
+      }
+    },
+    {
+      "id": "champagne-noir",
+      "name": "Champagne & Black",
+      "swatch": [
+        "#141217",
+        "#C9A27E",
+        "#C9A46A"
+      ],
+      "status": "coming",
+      "print": {
+        "art": [
+          "card",
+          "back"
+        ],
+        "ink": "#EFE6DA",
+        "accent": "#D9B97F"
+      }
+    }
+  ]
 }

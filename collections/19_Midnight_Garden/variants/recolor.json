@@ -1,0 +1,210 @@
+{
+  "theme": "midnight-garden",
+  "note": "G158 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles or a colour (null = keep). The black ground, envelope and cards stay black (dark design: light text keeps its contrast); only the deep red roses / berries / petals and the butterfly take the palette, always a real rose colour. Gold frames, silver seal, plum fruit, blue delphinium, olive leaves and the candle-lit backgrounds never change.",
+  "families": {
+    "rose": {
+      "anchor": "#43070C",
+      "sigma": 15,
+      "cmin": 0.04,
+      "cfull": 0.07
+    },
+    "petal": {
+      "anchor": "#43070C",
+      "sigma": 24,
+      "cmin": 0.012,
+      "cfull": 0.03
+    }
+  },
+  "groups": {
+    "rose": [
+      "rose"
+    ],
+    "petal": [
+      "petal"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "petal"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "plum fruit, natural"
+    },
+    "accent_3": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "black paper"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "black card with gold frame"
+    },
+    "closure": {
+      "recolor": "keep",
+      "why": "silver wax seal"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "env_cflap": {
+      "recolor": "keep",
+      "why": "black envelope paper"
+    },
+    "env_closed": {
+      "recolor": "keep",
+      "why": "black envelope paper"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "env_pocket": {
+      "recolor": "keep",
+      "why": "black envelope paper"
+    },
+    "favicon": {
+      "recolor": "keep",
+      "why": "silver wax seal"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "frame_landscape": {
+      "recolor": "keep",
+      "why": "gold baroque frame"
+    },
+    "frame_portrait": {
+      "recolor": "keep",
+      "why": "gold baroque frame"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "invitation_card_band": {
+      "recolor": "keep",
+      "why": "black band with gold rule"
+    },
+    "night": {
+      "recolor": "keep",
+      "why": "candle-lit night background"
+    },
+    "night_foot": {
+      "recolor": "keep",
+      "why": "candle-lit night background"
+    },
+    "night_wide": {
+      "recolor": "keep",
+      "why": "candle-lit night background"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: candle-lit bokeh"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: candle-lit bokeh"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: candle-lit bokeh"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: candle-lit bokeh"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: candle-lit bokeh"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "black paper"
+    }
+  },
+  "print_colors": {
+    "ink": "#EFE6DA",
+    "accent": "#D9B97F",
+    "paper": "#141217"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "rose"
+    ],
+    "keep": [
+      "--ivory",
+      "--ink",
+      "--ink-soft",
+      "--gold",
+      "--gold-light",
+      "--gold-ink",
+      "--seal-ink",
+      "--page",
+      "--night",
+      "--c-c86e28",
+      "--c-c87832",
+      "--c-e89640",
+      "--c-f0a046",
+      "--c-f0a3a3"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink",
+        "--plum",
+        4.5
+      ]
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "V02_ivory_blossom",
+  "slug": "ivory-blossom",
+  "name": "Ivory Blossom & Gold",
+  "ink": "#3A3438",
+  "deep": "#7A6650",
+  "primary": "#F2E8DF",
+  "mist_top": "#FBF8F3",
+  "mist_bottom": "#ECE5DA",
+  "gold": "#B9A07A",
+  "gold_light": "#DCCAA9",
+  "ivory": "#FFFCFB",
+  "leaf": "#6E5E55",
+  "swatch": [
+    "#FBF8F3",
+    "#F2E8DF",
+    "#D6CAC1"
+  ],
+  "status": "coming",
+  "families": {
+    "blossom": "#F4E2DE",
+    "envelope": "#D6CAC1",
+    "ground": "#F2ECE6",
+    "branch": null,
+    "stamen": null,
+    "rose_ink": "deep"
+  }
+}

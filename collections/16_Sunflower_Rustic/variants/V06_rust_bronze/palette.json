@@ -1,0 +1,25 @@
+{
+  "id": "V06_rust_bronze",
+  "slug": "rust-bronze",
+  "name": "Autumn Rust & Bronze",
+  "ink": "#3A2E1F",
+  "deep": "#7A3F22",
+  "primary": "#C8662F",
+  "mist_top": "#FBF5E8",
+  "mist_bottom": "#E9D6B2",
+  "gold": "#B88B3E",
+  "gold_light": "#DDBB7E",
+  "ivory": "#FFFBF0",
+  "leaf": "#6E7D3A",
+  "swatch": [
+    "#FBF5E8",
+    "#C8662F",
+    "#7A3F22"
+  ],
+  "status": "coming",
+  "families": {
+    "sun": "#D47E3A",
+    "gingham": "#C86B32",
+    "brown": "#7A3F22"
+  }
+}

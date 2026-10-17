@@ -1,0 +1,26 @@
+{
+  "id": "V04_teal_coral",
+  "slug": "teal-coral",
+  "name": "Deep Teal & Coral",
+  "ink": "#163538",
+  "deep": "#1F6466",
+  "primary": "#1E8285",
+  "mist_top": "#F1F8F7",
+  "mist_bottom": "#D2EAE8",
+  "gold": "#C2A26B",
+  "gold_light": "#E2CDA0",
+  "ivory": "#FFFDF8",
+  "leaf": "#86B8B0",
+  "swatch": [
+    "#F1F8F7",
+    "#1E8285",
+    "#F4DECB"
+  ],
+  "status": "coming",
+  "families": {
+    "sea": "#1E8285",
+    "ground": "#DAF0EE",
+    "shell": "#F0957C",
+    "deep_ink": "deep"
+  }
+}
