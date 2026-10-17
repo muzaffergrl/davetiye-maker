@@ -2,9 +2,9 @@
  "theme": "mediterranean-lemon",
  "summary": {
   "original": {
-   "measured": 112,
+   "measured": 116,
    "low": 0,
-   "as_original": 1
+   "as_original": 0
   },
   "terracotta-lemon": {
    "measured": 116,
@@ -33,9 +33,7 @@
   }
  },
  "errors": [],
- "warnings": [
-  "original palette: 1 text(s) below the contrast minimum on the painted ground: details \"RSVP\" 1.16:1 < 4.5:1"
- ],
+ "warnings": [],
  "passed": [
   "palette terracotta-lemon (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
   "palette sage-lemon (coming): 116 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",

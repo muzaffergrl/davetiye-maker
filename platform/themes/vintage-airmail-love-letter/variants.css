@@ -16,7 +16,7 @@ html[data-variant="dusty-blue"] {
   --c-d67868: 177 196 224;
   --red: #82A0C0;
   --red-ink: #435A74;
-  --seal-ink: #495B6F;
+  --seal-ink: #394B5E;
 }
 
 /* V02_dusty_rose · Dusty Rose & Navy */
@@ -26,7 +26,7 @@ html[data-variant="dusty-rose"] {
   --c-d67868: 237 175 179;
   --red: #CA858F;
   --red-ink: #7E474F;
-  --seal-ink: #754A51;
+  --seal-ink: #61383E;
 }
 
 /* V06_lavender · Lavender & Navy */
@@ -36,7 +36,7 @@ html[data-variant="lavender"] {
   --c-d67868: 210 186 221;
   --red: #A993BE;
   --red-ink: #625073;
-  --seal-ink: #61546F;
+  --seal-ink: #4E415B;
 }
 
 /* V03_sage_navy · Sage & Navy */
@@ -46,7 +46,7 @@ html[data-variant="sage-navy"] {
   --c-d67868: 196 211 180;
   --red: #9AAE89;
   --red-ink: #4C5B3E;
-  --seal-ink: #5B6750;
+  --seal-ink: #48533D;
 }
 
 /* V04_terracotta · Terracotta & Navy */
@@ -56,5 +56,5 @@ html[data-variant="terracotta"] {
   --c-d67868: 238 164 128;
   --red: #CE7851;
   --red-ink: #894320;
-  --seal-ink: #744028;
+  --seal-ink: #622F18;
 }
