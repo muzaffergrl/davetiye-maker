@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload-ready Etsy listing data for designs 01–20 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130).
+"""Upload-ready Etsy listing data for designs 01–21 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130).
 
   python3 tools/etsy_upload.py                      # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
   python3 tools/etsy_upload.py --designs 06-20      # only these designs ("06-20", "07,12", "all")
@@ -60,6 +60,7 @@ DESIGNS = [
     ("18", "18_Wildflower_Vellum", "wildflower-meadow-vellum"),
     ("19", "19_Midnight_Garden", "midnight-garden"),
     ("20", "20_Coastal_Seaside", "coastal-seaside"),
+    ("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier"),  # G137; sale status "coming" (config.ts)
 ]
 PRICE_TRY = 1460
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
@@ -144,7 +145,9 @@ def opening_object(theme: str, copy: str | None = None) -> str:
     """What guests tap first ("envelope", "gatefold", "pouch", "wallet", "book", "sleeve"): the opening sentence of the
     design in platform/lib/marketing/designs.ts ("Your guests tap the <thing>.", the sales site's openingObject)."""
     copy = DESIGN_COPY.read_text(encoding="utf-8") if copy is None else copy
-    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?\bopening:\s*'Your guests tap the ([a-z]+)\.", copy, re.S | re.M)
+    # G137: 21's entry is written with quoted keys ("opening": "…"), the others with bare keys (opening: '…')
+    m = re.search(rf"^  '{re.escape(theme)}': \{{.*?(?:\bopening|\"opening\"):\s*['\"]Your guests tap the ([a-z]+)\.", copy,
+                  re.S | re.M)
     if not m:
         raise SystemExit(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme}'")
     return m.group(1)
