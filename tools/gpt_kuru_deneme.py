@@ -82,7 +82,9 @@ def deneme_gorseli(b: dict, sekil: dict, tohum: int) -> Image.Image:
     s = sekil.get(ad, {})
     rng = np.random.default_rng(s.get("tohum", tohum))  # aynı "tohum" = aynı pikseller (üst üste aynı tuval parçaları)
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    taban = np.array(s["ton"], float) if "ton" in s else rng.uniform(70, 190, 3)  # "ton": koyu temalarda zemin rengi
+    taban = np.array(s["ton"], float) if "ton" in s else rng.uniform(70, 190, 3)
+    if "ton" not in s:  # yeşil baskın deneme rengi tema_build.yesil_denetle'yi yanlış tetiklemesin
+        taban[1] = min(taban[1], max(taban[0], taban[2]) - 10)  # "ton": koyu temalarda zemin rengi
     egim = (xx / w * 50 + yy / h * 40)[..., None] - 45
     rgb = np.clip(taban + egim * s.get("gren", 1) + rng.normal(0, 9 * s.get("gren", 1), (h, w, 1)), 0, 255)  # "gren": 0 = düz
     if b["pencere"]:
